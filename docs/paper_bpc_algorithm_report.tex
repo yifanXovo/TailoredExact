@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage[margin=1in]{geometry}
+
+\title{Exact EBRP: Gini-Frontier BPC and Tailored Exact Portfolio}
+\date{2026-06-14}
+\begin{document}
+\maketitle
+
+\section{Scope}
+
+The recommended exact algorithm is a tailored exact portfolio for the original EBRP objective
+\[
+\min\; G+\lambda P.
+\]
+The portfolio contains pure full Gini-frontier route-load BPC as the main decomposition method and strengthened compact branch-and-cut as an auxiliary exact fallback. Plain CPLEX is the benchmark. Positive-gap results are never reported as optimal.
+
+\section{Method}
+
+The BPC frontier covers at least $G\in[0,UB]$. For each interval $[\gamma_L,\gamma_U]$, it uses
+\[
+G\le \gamma_U \Longleftrightarrow H\le V\gamma_U S,
+\]
+plus $G\ge\gamma_L$. Columns are complete route-load columns. A restricted-pool result is not a certificate; an interval must be closed by exact pricing or bound-fathomed by a valid lower bound.
+
+The implementation includes exact pricing, Ryan-Foster/co-route branching, subset-row cuts, operation-time conservation, final-inventory/Gini relaxations, complete route-mask duration/load relaxations for $V\le 12$, BPC-owned incumbents, and station-operation cuts
+\[
+p_i+d_i\le U_i v_i,\qquad p_i+d_i\ge v_i.
+\]
+
+\section{Certificate Protocol}
+
+BPC certifies the original problem only when \texttt{status=optimal}, \texttt{gap=0}, $LB=UB=\text{objective}$, the verifier passes, and the full frontier ledger has zero unresolved intervals, zero invalid bound intervals, and zero top-level open nodes. Compact fallback certificates are exact original-problem certificates when their compact MIP gap closes, but they are not BPC certificates.
+
+\section{Target Results}
+
+\begin{longtable}{llrrrrr}
+\toprule
+Instance & Method & Status & UB/obj & LB & Gap & Time\\
+\midrule
+V10 M2 avg & pure BPC & optimal & 0.463263 & 0.463263 & 0 & 589.00\\
+V10 M2 avg & strengthened compact & not cert. & 0.463263 & 0.456116 & 0.015428 & 300.17\\
+V10 M2 avg & plain CPLEX & not cert. & 0.463263 & 0.451895 & 0.024540 & 1200.15\\
+V10 M1 avg & pure BPC & optimal & 0.492625 & 0.492625 & 0 & 641.08\\
+V10 M1 avg & strengthened compact & optimal & 0.492625 & 0.492625 & 0 & 166.34\\
+V10 M1 avg & plain CPLEX & optimal & 0.492625 & 0.492625 & 0 & 63.32\\
+V10 M2 low & pure BPC & not closed & 0.831495 & 0.820406 & 0.013336 & 1200.61\\
+V10 M2 low & strengthened compact & optimal & 0.824301 & 0.824301 & 0 & 938.19\\
+V10 M2 low & plain CPLEX & not cert. & 0.824301 & 0.793051 & 0.037912 & 300.09\\
+V12 M1 avg & pure BPC & optimal & 0.690939 & 0.690939 & 0 & 5280.70\\
+V12 M1 avg & strengthened compact & optimal & 0.690939 & 0.690939 & 0 & 123.32\\
+V12 M1 avg & plain CPLEX & optimal & 0.690939 & 0.690939 & 0 & 9.23\\
+V12 M2 avg & pure BPC & not closed & 0.404619 & 0.350524 & 0.133694 & 1200.59\\
+V12 M2 avg & strengthened compact & not cert. & 0.366169 & 0.258189 & 0.294890 & 300.21\\
+V12 M2 avg & plain CPLEX & not cert. & 0.365627 & 0.304969 & 0.165900 & 300.22\\
+\bottomrule
+\end{longtable}
+
+\section{Portfolio Results}
+
+\begin{longtable}{llrrrr}
+\toprule
+Instance & Certificate & Status & Objective & LB & Time\\
+\midrule
+V10 M2 avg & pure BPC & optimal & 0.463263 & 0.463263 & 589.00\\
+V10 M1 avg & pure BPC & optimal & 0.492625 & 0.492625 & 641.08\\
+V10 M2 low & compact fallback & optimal & 0.824301 & 0.824301 & 2138.81\\
+V12 M1 avg & pure BPC & optimal & 0.690939 & 0.690939 & 5280.70\\
+V12 M2 avg & none & not certified & 0.366169 & 0.350524 & 1500.80\\
+\bottomrule
+\end{longtable}
+
+The portfolio certifies four of five target instances. V12 M2 average remains open with a valid portfolio gap of approximately 0.0427266.
+
+\section{Interpretation}
+
+Pure BPC certifies V10 M2 average, V10 M1 average, and V12 M1 average. The strengthened compact fallback certifies V10 M2 low and is also faster on M1-style samples, but it is not BPC. Plain CPLEX remains the benchmark and is faster on V10 M1 and V12 M1.
+
+For V10 M2 average, the correct statement is: BPC certified in 589.00 seconds; plain CPLEX did not certify within 1200.15 seconds, final gap 0.0245397. For V10 M2 low, the portfolio certified by compact fallback in 2138.81 seconds; plain CPLEX did not certify within 300.09 seconds, final gap 0.0379116.
+
+\section{Artifacts}
+
+Primary artifacts are \texttt{docs/portfolio\_benchmark\_table.csv}, \texttt{docs/experiment\_table.csv}, \texttt{docs/bpc\_interval\_diagnostics.csv}, \texttt{docs/v10\_m1\_bpc\_certificate\_audit.md}, \texttt{docs/v12\_m1\_bpc\_certificate\_audit.md}, and \texttt{docs/portfolio\_certificate\_audit.md}.
+
+\end{document}

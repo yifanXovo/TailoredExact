@@ -1,0 +1,40 @@
+# Build products
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+*.exe
+*.obj
+*.o
+*.lib
+*.dll
+*.pdb
+
+# Logs and transient run output
+logs/
+*.log
+clone*.log
+cplex.log
+
+# Large/generated solver work directories.
+# Keep top-level results/*.json and results/*.csv as reproducibility summaries.
+results/*_work/
+results/bound_work/
+results/cplex_work/
+results/gcap_work/
+results/pricing_work/
+results/tmp/
+
+# Solver scratch files
+*.lp
+*.mps
+*.mst
+*.sol
+
+# Local editor and OS files
+.vscode/
+.idea/
+*.swp
+*.tmp
+Thumbs.db
+Desktop.ini

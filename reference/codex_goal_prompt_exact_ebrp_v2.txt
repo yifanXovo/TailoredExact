@@ -1,0 +1,259 @@
+/goal
+You are working inside my local repository. There are two sibling directories:
+
+- ExactEBRP/ : create and maintain the new C++ exact-solver project here.
+- Hybrid GA/ : the old project. It contains the previous C++ implementation, including Solver_Exact_CPLEX.cpp, parser/generator/evaluator logic, and test data under Hybrid GA/testdata/Smallnetwork2/. Use it as a reference only. Do not break or rewrite the old project except when copying/adapting code into ExactEBRP/ with clear attribution/comments.
+
+Important reference folder:
+All supplementary documents and previous prototype files are located in:
+
+  ExactEBRP/reference/
+
+Read these files before coding:
+
+  ExactEBRP/reference/Paper Draft 2.docx
+  ExactEBRP/reference/ebrp_problem_model_spec.md
+  ExactEBRP/reference/codex_upload_manifest.md
+  ExactEBRP/reference/gf_rl_bpc_cuts_report.tex
+  ExactEBRP/reference/equity_brp_tailored_exact_interim_report.tex
+  ExactEBRP/reference/bpc_gini_cuts.py
+  ExactEBRP/reference/bpc_gini_frontier.py
+  ExactEBRP/reference/milp_strong.py
+  ExactEBRP/reference/gcap_exact.py
+
+The Python files are not production code. Treat them as design references documenting prior attempts, useful formulations, failed approaches, and test-result conventions. The target implementation must be C++.
+
+Main goal:
+Build and optimize a C++ exact solver project for the Equity-aware Bike Repositioning Problem (EBRP). The new project must solve exactly the same problem as the old CPLEX MILP, but must implement a tailored exact method, preferably a branch-price-and-cut / branch-cut-price / exact column-enumeration portfolio, and compare it against a multi-threaded CPLEX exact solver on the same data.
+
+The current performance target is not a fixed seconds threshold. The goal is to demonstrate a clear speed improvement over the compact CPLEX/Gurobi-style exact MILP baseline on the same instances, while still proving global optimality. A run that closes within 1000 seconds can be acceptable if it is significantly faster than the baseline.
+
+Do not stop until:
+1. The tailored exact method obtains certified global optimality on at least one V=8 sample and is clearly faster than the multi-thread CPLEX baseline on that same sample.
+2. Preferably, it obtains certified global optimality on at least three V=8 samples and reports median speedup.
+3. Then run one V=10 sample and report objective, lower bound, upper bound, gap/certificate, runtime, and bottlenecks.
+4. If V=10 does not close, report the exact incumbent, valid lower bound, gap, and detailed bottleneck analysis. Do not falsely call it optimal.
+
+Strict restrictions:
+- Do not simplify the test data ranges. Do not reduce truck capacity Q, station capacities C_i, initial inventories, target values, weights, distance matrix, number of vehicles, or time window to make the algorithm artificially easier.
+- Do not use sample-specific patches. You may exploit mathematical structure discovered from samples, but the resulting cuts/bounds/branching rules must be generally valid for the EBRP model.
+- Do not report “optimal” unless there is a certificate: either a closed MIP gap, a closed branch-price tree with exact pricing at every relevant node, or a mathematically equivalent exhaustive feasible route-load column enumeration followed by an exact master MIP.
+- A root LP column-generation certificate alone is not enough for global optimality unless the master integer problem is also solved exactly over the full relevant column set.
+- Use multiple threads where appropriate. Set CPLEX Threads=N for the baseline. For the tailored method, parallelize over branch nodes, Gini-frontier subproblems, pricing problems, full-column enumeration partitions, or exact portfolio methods when safe.
+
+Problem definition:
+There are V stations indexed 1..V and one depot indexed 0. Station i has capacity C_i, initial inventory Y_i^Initial, target inventory Y_i^Target, and weight w_i. There are M identical or near-identical vehicles, each with bicycle capacity Q_k. Every vehicle starts empty from depot 0, visits a sequence of distinct stations, and returns to depot. Across all vehicles, station visits are disjoint: each station is visited by at most one vehicle. At a visited station, a vehicle may pick up or drop off an integer number of bikes. Vehicle load must remain in [0,Q_k]. Station inventory must remain in [0,C_i]. A vehicle may return to the depot with bikes; those bikes are unloaded at the depot and the depot has infinite capacity. The vehicle route duration is travel time plus station pickup/drop-off operation time plus final depot unloading time, and must be <= T for every vehicle. All vehicles start empty.
+
+For final inventory Y_i^Final, define r_i = Y_i^Final / Y_i^Target. The Gini term is
+
+  G = sum_{i=1}^V sum_{j=1}^V |r_i-r_j| / (2 V sum_i r_i)
+    = H / (V S),
+
+where H = sum_{i<j}|r_i-r_j| and S = sum_i r_i. The satisfaction penalty is
+
+  P = sum_i w_i |r_i - 1|.
+
+The objective is
+
+  minimize G + lambda * P.
+
+Default parameters for initial tests:
+  lambda = 0.15
+  T = 3600
+  unit_pick_time = 60
+  unit_drop_time = 60
+
+If the old project uses a different default convention, detect it and clearly report the convention used.
+
+Required executables / CLI:
+
+1. Run tailored exact method on one file or one instance folder:
+
+   ./ExactEBRP --method tailored --input <path> --lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> --log <logfile> --out <json>
+
+2. Run multi-thread CPLEX baseline on one file or one instance folder:
+
+   ./ExactEBRP --method cplex --input <path> --lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> --log <logfile> --out <json>
+
+3. Run comparison:
+
+   ./ExactEBRPCompare --input <path> --lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> --out <csv_or_json>
+
+Each output JSON must include at least:
+
+  status, objective, G, P, lower_bound, upper_bound, gap, runtime_seconds,
+  nodes, columns, pricing_calls, cuts_added, route list, station operations,
+  final inventories, and an independent feasibility/objective verification block.
+
+The verification block must independently recompute route travel time, pickup/drop/depot-unload operation time, load feasibility, station feasibility, final inventories, G, P, and objective from the reported solution.
+
+Recommended project structure:
+
+ExactEBRP/
+  CMakeLists.txt
+  include/
+    Instance.hpp
+    Parser.hpp
+    Evaluator.hpp
+    Result.hpp
+    CplexBaseline.hpp
+    TailoredExact.hpp
+    Column.hpp
+    Master.hpp
+    Pricing.hpp
+    Cuts.hpp
+    Branching.hpp
+    Gini.hpp
+    Logger.hpp
+  src/
+    main.cpp
+    compare_main.cpp
+    Parser.cpp
+    Evaluator.cpp
+    CplexBaseline.cpp
+    TailoredExact.cpp
+    Master.cpp
+    Pricing.cpp
+    Cuts.cpp
+    Branching.cpp
+    Gini.cpp
+  scripts/
+    run_compare.py
+    summarize_results.py
+  docs/
+    algorithm_report.md
+    attempt_log.md
+  results/
+  logs/
+  reference/
+
+Implementation phases:
+
+Phase 0: Data layer, parser, and verifier.
+- Read existing Hybrid GA/testdata/Smallnetwork2 samples using the same format as the old project.
+- Reuse or adapt the old parser/generator logic. Preserve all values exactly.
+- Also support the reference regen_candidate_V12_*.txt format if those files are present in ExactEBRP/reference/.
+- Implement Evaluator that independently recomputes route feasibility, load feasibility, station feasibility, route duration, final inventory, G, P, and objective.
+- Add small consistency tests: empty-route solution, single-route solution, known reference result from res_avg.json if available.
+
+Phase 1: Multi-thread CPLEX baseline.
+- Implement the original CPLEX MILP as faithfully as possible, using Hybrid GA/Solver_Exact_CPLEX.cpp, Paper Draft 2.docx, and ebrp_problem_model_spec.md as references.
+- Enable CPLEX multi-threading through IloCplex::Param::Threads or equivalent.
+- Log incumbent, best bound, MIP gap, nodes, runtime, and final certificate.
+- Keep a plain-baseline switch and a strengthened switch. The plain mode should match the old formulation as closely as possible. The strengthened mode may add globally valid constraints.
+
+Phase 2: Tailored exact portfolio.
+Implement a portfolio, not a single fragile method. At minimum include these exact components:
+
+A. Small-instance full route-load column enumeration mode.
+- For V<=8 first, and optionally V<=10 if manageable, enumerate all feasible elementary route-load columns for one vehicle under T and Q.
+- A column is a complete feasible route plus integer station operations. It must satisfy vehicle load, station inventory, station-disjointness within the route, and route duration.
+- Then solve the exact set-packing/inventory/equity master as a MIP.
+- This is exact because the full feasible column set is enumerated.
+- This is a size-adaptive exact mode, not a sample-specific patch.
+- Use multithreading to partition route prefixes/subsets/first station choices.
+
+B. Gini-frontier route-load branch-price-and-cut mode.
+- Use route-load columns. The master selects feasible columns; it must not contain arc-flow or MTZ route variables.
+- Master constraints: vehicle count, station disjointness, final inventory aggregation, station capacity, r_i, P linearization, and Gini handling.
+- For fixed Gini cap gamma, use H <= V*gamma*S to avoid Gini fractional/bilinear expansion.
+- Use this as a frontier/bounding engine. Combine it with exact weighted-objective certification via interval/box search over G or a direct exact master objective. Make the certificate explicit in logs.
+- Pricing must be exact. Implement at least one of:
+  1) C++ label-setting resource-constrained elementary shortest path with load and pickup-budget resources;
+  2) compact single-route CPLEX pricing MIP;
+  3) both, using label-setting first and MIP pricing as proof fallback.
+- A restricted master LP node is certified only when exact pricing proves min reduced cost >= -tolerance.
+
+C. Strengthened compact fallback.
+- Keep a strengthened compact CPLEX MILP fallback using globally valid cuts.
+- Add operation-time conservation, route-duration lower bounds, symmetry breaking among identical vehicles, and globally valid station/inventory cuts.
+- Use it to verify results, obtain incumbents, or close small instances when BPC struggles.
+
+Mandatory valid mathematical components to implement or evaluate:
+
+1. Operation-time conservation.
+Since vehicles start empty and unload remaining bikes at the depot,
+
+  operation_time_k = tau_pick * total_pick_k
+                   + tau_drop * total_station_drop_k
+                   + tau_drop * (total_pick_k - total_station_drop_k)
+                   = (tau_pick + tau_drop) * total_pick_k.
+
+For tau_pick=tau_drop=60,
+
+  operation_time_k = 120 * total_pick_k.
+
+This is an equality under the stated assumptions, not a relaxation.
+
+2. Gini cap linearization.
+
+  G <= gamma  iff  H <= V * gamma * S,
+
+where H=sum_{i<j}|r_i-r_j| and S=sum_i r_i. This removes the Gini product/binary expansion in fixed-cap subproblems.
+
+3. Route-load column equivalence.
+The set-packing master over all feasible route-load columns is equivalent to the original route/load feasible region when station visits are disjoint and each selected column is internally feasible.
+
+4. Exact pricing certificate.
+In Dantzig-Wolfe decomposition, if the exact pricing oracle proves no column has negative reduced cost at a node, the restricted master LP solution is the full master LP solution for that node.
+
+5. 3-subset-row cuts.
+For any station triple S,
+
+  sum_c floor(|A_c intersect S|/2) z_c <= 1.
+
+Separate violated cuts dynamically when useful.
+
+6. Co-route / Ryan-Foster pair branching.
+For pair (i,j), branch on
+
+  sum_{c containing both i,j} z_c = 0
+
+or
+
+  sum_{c containing both i,j} z_c = 1.
+
+Update master rows and pricing restrictions accordingly.
+
+7. Lorenz/Gini cuts for larger V.
+For sorted r_(1)<=...<=r_(V),
+
+  H = sum_l (2l - V - 1) r_(l).
+
+Use dynamic separation if pairwise h_ij becomes too large for V around 50-100.
+
+8. Resource-route bounds.
+Use lower bounds on route travel plus operation time to prune infeasible partial routes or columns. For small support sets, exact Held-Karp or DP lower bounds are allowed; for larger V, use MST/1-tree/nearest-return lower bounds.
+
+Branching and search requirements:
+- Prefer co-route pair branching over arc branching in column mode.
+- Also allow branching on station served/unserved, final inventory intervals, and operation quantity when useful.
+- Maintain a global incumbent and valid global lower bound.
+- Implement deterministic logging of open nodes, best lower bound, incumbent, and gap.
+- Run branch nodes in parallel if possible, but ensure correctness of shared incumbent and bounds.
+
+Performance plan:
+- Use Hybrid GA/testdata/Smallnetwork2 as the main benchmark source.
+- If no V=8 samples exist, generate V=8 samples using the existing generator and the same parameter distributions, without simplifying capacities/Q/targets/weights/time window.
+- First run the multi-thread CPLEX baseline and tailored exact method on V=8 samples.
+- Do not stop until tailored exact returns certified global optimality and is clearly faster than CPLEX on at least one V=8 sample. Preferably test at least 3 V=8 samples and report median speedup.
+- After V=8 success, run one V=10 sample with both methods and report objective, gap/certificate, runtime, and logs.
+- If V=10 does not close, provide the best incumbent, lower bound, gap, and detailed bottleneck analysis.
+
+Do not hide failures:
+- If an attempted cut/pricing/branching method does not help, record it in ExactEBRP/docs/attempt_log.md with sample, runtime, gap, and reason for abandonment.
+- Do not report heuristic results as exact results.
+- Do not stop at root LP bounds unless the integer master/branch-price tree is also closed or full column enumeration plus exact master MIP has closed.
+
+Final required report:
+Create ExactEBRP/docs/algorithm_report.md with:
+- Problem statement and data assumptions.
+- Exact mathematical formulation(s).
+- Tailored exact algorithm flow.
+- Implemented cuts/bounds/branching, with proof sketches.
+- Build and run instructions.
+- Test table comparing tailored exact vs CPLEX on V=8 and one V=10 sample.
+- Logs/results file locations.
+- Remaining bottlenecks and next optimization plan.
+
+Start now by inspecting the old project structure, the reference folder, and the old CPLEX solver. Then create the new CMake project under ExactEBRP/ and implement Phase 0 before moving to solver optimization.

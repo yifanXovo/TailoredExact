@@ -1,0 +1,23 @@
+{
+  "instance_name": "test_data_V8_M2_average.txt",
+  "input_path": "E:\\codes\\Hybrid GA\\testdata\\Smallnetwork2\\test_data_V8_M2_average.txt",
+  "method": "pricing-branch",
+  "status": "restricted_pricing_complete",
+  "certificate": "exact pricing completed under both Ryan-Foster child restrictions; require branch produced a column containing both stations and forbid branch produced a column not containing both",
+  "objective": 0.846472286869,
+  "G": 0.535860729101,
+  "P": 2.07074371845,
+  "lower_bound": 400.005618817,
+  "upper_bound": 627.195774064,
+  "gap": 0,
+  "runtime_seconds": 0.0001682,
+  "nodes": 769,
+  "columns": 24,
+  "pricing_calls": 2,
+  "cuts_added": 0,
+  "final_inventories": [50000, 9, 9, 0, 39, 8, 5, 48, 23],
+  "routes": [{"vehicle": 0, "nodes": [0, 1, 2, 0], "operations": [{"station": 1, "pickup": 1, "drop": 0}, {"station": 2, "pickup": 0, "drop": 1}]}, {"vehicle": 1, "nodes": [0, 0], "operations": []}],
+  "station_operations": [{"vehicle": 0, "station": 1, "pickup": 1, "drop": 0}, {"vehicle": 0, "station": 2, "pickup": 0, "drop": 1}],
+  "verification": {"feasible": true, "routes_start_end_depot": true, "station_disjoint": true, "load_feasible": true, "station_feasible": true, "duration_feasible": true, "objective_matches": true, "route_travel_time": [507.195774064, 0], "route_operation_time": [120, 0], "route_duration": [627.195774064, 0], "final_inventories": [50000, 9, 9, 0, 39, 8, 5, 48, 23], "G": 0.535860729101, "P": 2.07074371845, "objective": 0.846472286869, "errors": []},
+  "notes": ["parsed Hybrid GA text format; legacy weights with max 10 scaled by 0.1 to match Hybrid GA parser; distances rebuilt from points at speed factor 1.5", "Restricted pricing diagnostic enforces Ryan-Foster together=0 and together=1 child-node rules.", "branch pair=(1,2)", "require_together complete=true, has_column=true, contains_both=true, best_reduced_cost=627.196, generated_columns=18", "forbid_together complete=true, has_column=true, contains_both=false, contains_exactly_one=true, best_reduced_cost=400.006, generated_columns=6"]
+}

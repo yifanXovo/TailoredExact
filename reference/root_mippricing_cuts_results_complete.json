@@ -1,0 +1,307 @@
+[
+  {
+    "file": "regen_candidate_V12_M1_average.txt",
+    "M": 1,
+    "cap": 0.4936960538625491,
+    "time": 7.430534362792969,
+    "status": "ok",
+    "lp_certified": true,
+    "ncols": 1049,
+    "n_sr": 0,
+    "nlogs": 7,
+    "last_log": {
+      "iter": 7,
+      "event": "pricing_mip",
+      "lp_obj": 0.5849573972412538,
+      "cap_slack": 0.0,
+      "ncols": 1049,
+      "n_sr": 0,
+      "rc": -5.551115123125783e-17,
+      "added": 0,
+      "pricing": {
+        "status": 0,
+        "success": true,
+        "fun": -0.43809215277777785,
+        "time": 1.650432825088501,
+        "gap": 0.0,
+        "nodes": 81,
+        "rc": -5.551115123125783e-17,
+        "path": [
+          10,
+          12
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          25,
+          0,
+          -25
+        ],
+        "time_route": 3509.4777
+      }
+    },
+    "lp_obj": 0.5849573972412538,
+    "cap_slack": 0.0
+  },
+  {
+    "file": "regen_candidate_V12_M1_high.txt",
+    "M": 1,
+    "cap": 0.6721998237272875,
+    "time": 2.043194055557251,
+    "status": "ok",
+    "lp_certified": true,
+    "ncols": 1019,
+    "n_sr": 0,
+    "nlogs": 3,
+    "last_log": {
+      "iter": 3,
+      "event": "pricing_mip",
+      "lp_obj": 2.0527370376145204,
+      "cap_slack": 0.0,
+      "ncols": 1019,
+      "n_sr": 0,
+      "rc": 1.4988010832439613e-15,
+      "added": 0,
+      "pricing": {
+        "status": 0,
+        "success": true,
+        "fun": -0.20563278853046446,
+        "time": 0.8793232440948486,
+        "gap": 0.0,
+        "nodes": 23,
+        "rc": 1.4988010832439613e-15,
+        "path": [
+          7,
+          2
+        ],
+        "q": [
+          0,
+          -26,
+          0,
+          0,
+          0,
+          0,
+          26,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "time_route": 3566.9984
+      }
+    },
+    "lp_obj": 2.0527370376145204,
+    "cap_slack": 0.0
+  },
+  {
+    "file": "regen_candidate_V12_M1_low.txt",
+    "M": 1,
+    "cap": 1.0,
+    "time": 3.367567300796509,
+    "status": "ok",
+    "lp_certified": true,
+    "ncols": 959,
+    "n_sr": 0,
+    "nlogs": 5,
+    "last_log": {
+      "iter": 5,
+      "event": "pricing_mip",
+      "lp_obj": 4.810122537575649,
+      "cap_slack": 0.0,
+      "ncols": 959,
+      "n_sr": 0,
+      "rc": 0.0,
+      "added": 0,
+      "pricing": {
+        "status": 0,
+        "success": true,
+        "fun": -1.2614058488612836,
+        "time": 0.8497920036315918,
+        "gap": 0.0,
+        "nodes": 15,
+        "rc": 0.0,
+        "path": [
+          2,
+          3
+        ],
+        "q": [
+          0,
+          23,
+          -23,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "time_route": 3502.0355
+      }
+    },
+    "lp_obj": 4.810122537575649,
+    "cap_slack": 0.0
+  },
+  {
+    "file": "regen_candidate_V12_M2_average.txt",
+    "M": 2,
+    "cap": 1.0,
+    "time": 7.2639594078063965,
+    "status": "ok",
+    "lp_certified": true,
+    "ncols": 1075,
+    "n_sr": 0,
+    "nlogs": 8,
+    "last_log": {
+      "iter": 8,
+      "event": "pricing_mip",
+      "lp_obj": 1.4033571897087171,
+      "cap_slack": 0.0,
+      "ncols": 1075,
+      "n_sr": 0,
+      "rc": -5.551115123125783e-17,
+      "added": 0,
+      "pricing": {
+        "status": 0,
+        "success": true,
+        "fun": -0.3327166730769231,
+        "time": 1.0029072761535645,
+        "gap": 0.0,
+        "nodes": 26,
+        "rc": -5.551115123125783e-17,
+        "path": [
+          11,
+          9
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -24,
+          0,
+          24,
+          0
+        ],
+        "time_route": 3590.9496
+      }
+    },
+    "lp_obj": 1.4033571897087171,
+    "cap_slack": 0.0
+  },
+  {
+    "file": "regen_candidate_V12_M2_high.txt",
+    "M": 2,
+    "cap": 0.6366640429740245,
+    "time": 7.013165473937988,
+    "status": "ok",
+    "lp_certified": true,
+    "ncols": 1073,
+    "n_sr": 2,
+    "nlogs": 11,
+    "last_log": {
+      "iter": 11,
+      "event": "pricing_mip",
+      "lp_obj": 1.8887627992881084,
+      "cap_slack": 0.0,
+      "ncols": 1073,
+      "n_sr": 2,
+      "rc": -2.7755575615628914e-17,
+      "added": 0,
+      "pricing": {
+        "status": 0,
+        "success": true,
+        "fun": -0.10053550105559467,
+        "time": 1.6761972904205322,
+        "gap": 0.0,
+        "nodes": 23,
+        "rc": -2.7755575615628914e-17,
+        "path": [
+          9,
+          5
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          0,
+          -25,
+          0,
+          0,
+          0,
+          25,
+          0,
+          0,
+          0
+        ],
+        "time_route": 3557.1715
+      }
+    },
+    "lp_obj": 1.8887627992881084,
+    "cap_slack": 0.0
+  },
+  {
+    "file": "regen_candidate_V12_M2_low.txt",
+    "M": 2,
+    "cap": 1.0,
+    "time": 6.779057741165161,
+    "status": "ok",
+    "lp_certified": true,
+    "ncols": 987,
+    "n_sr": 0,
+    "nlogs": 10,
+    "last_log": {
+      "iter": 10,
+      "event": "pricing_mip",
+      "lp_obj": 2.2823996108309808,
+      "cap_slack": 0.0,
+      "ncols": 987,
+      "n_sr": 0,
+      "rc": -2.220446049250313e-16,
+      "added": 0,
+      "pricing": {
+        "status": 0,
+        "success": true,
+        "fun": -0.5614355454545457,
+        "time": 1.1211373805999756,
+        "gap": 0.0,
+        "nodes": 71,
+        "rc": -2.220446049250313e-16,
+        "path": [
+          10
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          27,
+          0,
+          0
+        ],
+        "time_route": 3543.9552
+      }
+    },
+    "lp_obj": 2.2823996108309808,
+    "cap_slack": 0.0
+  }
+]

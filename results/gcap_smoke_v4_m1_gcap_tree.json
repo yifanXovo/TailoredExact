@@ -1,0 +1,23 @@
+{
+  "instance_name": "gcap_smoke_V4_M1.txt",
+  "input_path": "E:\\codes\\ExactEBRP\\testdata\\examples\\gcap_smoke_V4_M1.txt",
+  "method": "gcap-tree",
+  "status": "gcap_tree_complete",
+  "certificate": "fixed-Gini-cap branch-price tree exhausted all open diagnostic nodes with exact pricing and reconstructed route-integer incumbents. This certifies the fixed-cap surrogate tree only, not the full EBRP objective over all gamma values.",
+  "objective": 0,
+  "G": 0,
+  "P": 0,
+  "lower_bound": 0.250000001,
+  "upper_bound": 0.250000001,
+  "gap": 0,
+  "runtime_seconds": 2.0121208,
+  "nodes": 9,
+  "columns": 42,
+  "pricing_calls": 26,
+  "cuts_added": 0,
+  "final_inventories": [50000, 5, 5, 5, 5],
+  "routes": [{"vehicle": 0, "nodes": [0, 1, 4, 3, 2, 0], "operations": [{"station": 1, "pickup": 1, "drop": 0}, {"station": 4, "pickup": 0, "drop": 1}, {"station": 3, "pickup": 3, "drop": 0}, {"station": 2, "pickup": 0, "drop": 3}]}],
+  "station_operations": [{"vehicle": 0, "station": 1, "pickup": 1, "drop": 0}, {"vehicle": 0, "station": 4, "pickup": 0, "drop": 1}, {"vehicle": 0, "station": 3, "pickup": 3, "drop": 0}, {"vehicle": 0, "station": 2, "pickup": 0, "drop": 3}],
+  "verification": {"feasible": true, "routes_start_end_depot": true, "station_disjoint": true, "load_feasible": true, "station_feasible": true, "duration_feasible": true, "objective_matches": true, "route_travel_time": [83], "route_operation_time": [480], "route_duration": [563], "final_inventories": [50000, 5, 5, 5, 5], "G": 0, "P": 0, "objective": 0, "errors": []},
+  "notes": ["parsed Hybrid GA text format; distances read from serialized matrix", "Fixed-Gini-cap branch-price tree diagnostic runs an open-node Ryan-Foster tree with exact pricing at each solved node. Reported lower bound is for the fixed-cap surrogate gamma+lambda*P.", "no --gini-cap supplied; using empty-solution gamma=0.25 from initial G=0.25", "Fixed-Gini-cap branch-price tree diagnostic solves closed LP/pricing nodes and branches on Ryan-Foster co-route pairs. Bounds are for the fixed-cap surrogate gamma+lambda*P.", "initial fixed-cap incumbent from empty routes: surrogate=0.490000001", "node 1 depth=0 branch=root complete=true bound=0.25 columns=2", "branching on pair=(1,2) at depth=0, together_value=0.75", "node 2 depth=1 branch=forbid(1,2) complete=true bound=0.25 columns=6", "branching on pair=(1,4) at depth=1, together_value=0.25", "node 3 depth=1 branch=require(1,2) complete=true bound=0.25 columns=5", "branching on pair=(1,4) at depth=1, together_value=0.833333", "node 4 depth=2 branch=forbid(1,2);forbid(1,4) complete=true bound=0.28 columns=8", "branching on pair=(2,3) at depth=2, together_value=0.583333", "node 5 depth=2 branch=forbid(1,2);require(1,4) complete=true bound=inf columns=4", "infeasible branch-price node fathomed at depth=2", "node 6 depth=2 branch=forbid(1,4);require(1,2) complete=true bound=inf columns=2", "infeasible branch-price node fathomed at depth=2", "node 7 depth=2 branch=require(1,2);require(1,4) complete=true bound=0.25 columns=5", "reconstructed route-integer leaf at depth=2, states=4, selected_columns=1, surrogate=0.25, objective=0", "node 8 depth=3 branch=forbid(1,2);forbid(1,4);forbid(2,3) complete=true bound=0.34 columns=6", "node fathomed by incumbent bound at depth=3, node_bound=0.340000001, incumbent=0.250000001", "node 9 depth=3 branch=forbid(1,2);forbid(1,4);require(2,3) complete=true bound=0.31 columns=4", "node fathomed by incumbent bound at depth=3, node_bound=0.310000001, incumbent=0.250000001", "fixed-Gini-cap branch-price tree exhausted all open nodes; incumbent_source=reconstructed route-integer leaf at depth 2", "tree_complete=true, nodes_solved=9, branched_nodes=4, pruned_by_bound=2, integer_leaves=1, projected_leaves=0, open_nodes=0, max_depth=3, has_integer_incumbent=true, global_lower_bound=0.25, best_integer_surrogate=0.25, best_integer_columns=1, incumbent_source=reconstructed route-integer leaf at depth 2", "pricing_route_states=1091, pricing_operation_states=9498; nodes field reports branch-price tree nodes for this diagnostic", "objective/G/P are independently verified for the reconstructed routes; lower_bound/upper_bound/gap are fixed-Gini-cap surrogate values, not full EBRP objective bounds."]
+}

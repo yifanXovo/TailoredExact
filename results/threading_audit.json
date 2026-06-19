@@ -1,0 +1,77 @@
+{
+  "date": "2026-06-12",
+  "cpu": {
+    "name": "12th Gen Intel(R) Core(TM) i7-12700KF",
+    "physical_cores": 12,
+    "logical_processors": 20,
+    "environment_processor_count": 20
+  },
+  "plain_cplex": {
+    "sets_threads_explicitly": true,
+    "thread_command": "set threads max(1, options.threads)",
+    "current_default_if_cli_threads_omitted": 1,
+    "changed_in_this_pass": false,
+    "log_added": true
+  },
+  "observed_run_settings": {
+    "plain_cplex_cli_threads": 1,
+    "actual_plain_cplex_thread_command": "set threads 1",
+    "bpc_sequential": {
+      "threads": 1,
+      "bpc_workers": 1,
+      "pricing_threads": 1,
+      "parallel_frontier": false,
+      "parallel_nodes": false
+    },
+    "bpc_parallel_tests": [
+      {"threads": 1, "bpc_workers": 4, "pricing_threads": 1, "parallel_frontier": true, "parallel_nodes": false},
+      {"threads": 1, "bpc_workers": 8, "pricing_threads": 1, "parallel_frontier": true, "parallel_nodes": false},
+      {"threads": 1, "bpc_workers": 12, "pricing_threads": 1, "parallel_frontier": true, "parallel_nodes": false},
+      {"threads": 1, "bpc_workers": 16, "pricing_threads": 1, "parallel_frontier": true, "parallel_nodes": false}
+    ]
+  },
+  "strengthened_compact_fallback": {
+    "sets_threads_explicitly": true,
+    "thread_command": "set threads max(1, options.threads)",
+    "inherits_from": "solveCplexBaseline",
+    "scope": "original_compact"
+  },
+  "bpc_before_this_pass": {
+    "frontier_workers": 1,
+    "branch_node_parallelism": false,
+    "restricted_master_cplex_threads": 1,
+    "inventory_bound_cplex_threads": 1,
+    "pricing_uses_cplex": false,
+    "pricing_threads": 1
+  },
+  "bpc_after_this_pass": {
+    "new_options": [
+      "--bpc-workers N",
+      "--pricing-threads M",
+      "--parallel-frontier true|false",
+      "--parallel-nodes true|false"
+    ],
+    "parallel_frontier": "optional initial interval pass only",
+    "parallel_nodes": "accepted and logged, disabled",
+    "pricing_threads": "accepted and logged, native pricing remains single-threaded",
+    "restricted_master_cplex_threads": 1,
+    "inventory_bound_cplex_threads": 1,
+    "deterministic_scheduling": "dynamic_incumbent_gini_proximity_queue; aggregation in interval order",
+    "shared_state_policy": "fixed incumbent copied before worker launch; result ledger and incumbent updated after join"
+  },
+  "smoke_test": {
+    "result_file": "results/frontier_parallel_smoke_v4.json",
+    "status": "optimal",
+    "certified_original_problem": true,
+    "bpc_workers": 2,
+    "pricing_threads": 1,
+    "parallel_frontier": true,
+    "parallel_nodes": false,
+    "parallel_tasks": 4
+  },
+  "oversubscription_risk": {
+    "nested_parallelism_exists": true,
+    "reason": "parallel BPC workers may each launch single-threaded command-line CPLEX restricted master or bound solves",
+    "mitigation": "internal CPLEX calls remain set threads 1; warning logged when bpc_workers * pricing_threads exceeds hardware_concurrency"
+  }
+}

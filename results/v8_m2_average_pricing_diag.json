@@ -1,0 +1,23 @@
+{
+  "instance_name": "test_data_V8_M2_average.txt",
+  "input_path": "E:\\codes\\Hybrid GA\\testdata\\Smallnetwork2\\test_data_V8_M2_average.txt",
+  "method": "pricing",
+  "status": "pricing_complete",
+  "certificate": "exact one-vehicle route-load pricing diagnostic completed for all vehicles; objective fields report verified EBRP value for the selected diagnostic route, lower/upper bound report pricing reduced cost",
+  "objective": 0.85581130258,
+  "G": 0.543662555255,
+  "P": 2.08099164883,
+  "lower_bound": 196.179910901,
+  "upper_bound": 196.179910901,
+  "gap": 0,
+  "runtime_seconds": 9.91e-05,
+  "nodes": 172,
+  "columns": 6,
+  "pricing_calls": 2,
+  "cuts_added": 0,
+  "final_inventories": [50000, 10, 8, 0, 39, 7, 5, 48, 23],
+  "routes": [{"vehicle": 0, "nodes": [0, 5, 0], "operations": [{"station": 5, "pickup": 1, "drop": 0}]}, {"vehicle": 1, "nodes": [0, 0], "operations": []}],
+  "station_operations": [{"vehicle": 0, "station": 5, "pickup": 1, "drop": 0}],
+  "verification": {"feasible": true, "routes_start_end_depot": true, "station_disjoint": true, "load_feasible": true, "station_feasible": true, "duration_feasible": true, "objective_matches": true, "route_travel_time": [76.1799109011, 0], "route_operation_time": [120, 0], "route_duration": [196.179910901, 0], "final_inventories": [50000, 10, 8, 0, 39, 7, 5, 48, 23], "G": 0.543662555255, "P": 2.08099164883, "objective": 0.85581130258, "errors": []},
+  "notes": ["parsed Hybrid GA text format; legacy weights with max 10 scaled by 0.1 to match Hybrid GA parser; distances rebuilt from points at speed factor 1.5", "Pricing diagnostic minimizes route duration over one exact route-load column with nonnegative reduced-cost pruning.", "vehicle 0 pricing_complete=true, columns=3, route_states=83, operation_states=3, best_reduced_cost=196.18", "vehicle 1 pricing_complete=true, columns=3, route_states=83, operation_states=3, best_reduced_cost=196.18"]
+}

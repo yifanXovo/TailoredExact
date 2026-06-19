@@ -1,0 +1,23 @@
+{
+  "instance_name": "test_data_V10_M2_average.txt",
+  "input_path": "E:\\codes\\Hybrid GA\\testdata\\Smallnetwork2\\test_data_V10_M2_average.txt",
+  "method": "cg",
+  "status": "cg_root_complete",
+  "certificate": "coverage LP column-generation diagnostic closed: CPLEX solved each restricted LP and exact pricing found no negative reduced-cost route-load column for the diagnostic coverage model. This is not an EBRP optimality certificate.",
+  "objective": 735.174209169,
+  "G": 0.5811504205,
+  "P": 1.28962498233,
+  "lower_bound": 735.174209169,
+  "upper_bound": 735.174209169,
+  "gap": 0,
+  "runtime_seconds": 0.1441944,
+  "nodes": 2884,
+  "columns": 6,
+  "pricing_calls": 4,
+  "cuts_added": 0,
+  "final_inventories": [50000, 8, 67, 18, 23, 56, 71, 50, 20, 1, 22],
+  "routes": [{"vehicle": 0, "nodes": [0, 0], "operations": []}, {"vehicle": 1, "nodes": [0, 0], "operations": []}],
+  "station_operations": [],
+  "verification": {"feasible": true, "routes_start_end_depot": true, "station_disjoint": true, "load_feasible": true, "station_feasible": true, "duration_feasible": true, "objective_matches": true, "route_travel_time": [0, 0], "route_operation_time": [0, 0], "route_duration": [0, 0], "final_inventories": [50000, 8, 67, 18, 23, 56, 71, 50, 20, 1, 22], "G": 0.5811504205, "P": 1.28962498233, "objective": 0.77459416785, "errors": []},
+  "notes": ["parsed Hybrid GA text format; legacy weights with max 10 scaled by 0.1 to match Hybrid GA parser; distances rebuilt from points at speed factor 1.5", "Column-generation diagnostic solves a simple required-pair coverage LP, extracts CPLEX duals, and calls exact route-load pricing.", "iteration 0 LP status=optimal, objective=1214.80299246, columns=4", "iteration 0 added vehicle 0 column with reduced_cost=-479.628783296", "iteration 0 added vehicle 1 column with reduced_cost=-479.628783296", "iteration 1 LP status=optimal, objective=735.174209169, columns=6", "required_pair=(1,2), iterations=2, best_pricing_reduced_cost=-1.52113e-10"]
+}

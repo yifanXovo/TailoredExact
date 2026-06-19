@@ -1,0 +1,159 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,booktabs,geometry,algorithm,algpseudocode,longtable,hyperref}
+\geometry{margin=1in}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\title{Gini-Frontier Route-Load Branch-Price-and-Cut for the Equity-Aware Bike Repositioning Problem\\Implementation Round with Cut Strengthening}
+\author{Research prototype report}
+\date{June 10, 2026}
+\begin{document}
+\maketitle
+
+\section{Problem and notation}
+We consider a station-based bike-sharing network with stations $N=\{1,\ldots,V\}$ and depot 0. Station $i$ has capacity $C_i$, initial inventory $Y_i^0$, target inventory $Y_i^T>0$, and weight $w_i$. There are $M$ identical or nearly identical trucks, each initially empty at the depot, with bike capacity $Q_k$. A truck route starts at 0, visits a sequence of distinct stations, and returns to 0. At a visited station $i$, the truck performs either pickup $p_{ki}\ge 0$ or drop-off $d_{ki}\ge 0$, but not both. The onboard load must remain in $[0,Q_k]$. The route duration includes travel, station pickup/drop-off time, and final depot unloading time. Each station is visited by at most one truck.
+
+Let the final inventory be
+\[
+Y_i=Y_i^0-\sum_k p_{ki}+\sum_k d_{ki},\qquad r_i=\frac{Y_i}{Y_i^T}.
+\]
+Define
+\[
+S(r)=\sum_i r_i,\qquad H(r)=\sum_{i<j}|r_i-r_j|,
+\qquad G(r)=\frac{H(r)}{V S(r)},
+\]
+and
+\[
+P(r)=\sum_i w_i |r_i-1|.
+\]
+The original objective is $\min G(r)+\lambda P(r)$.
+
+\section{Route-load column model}
+A route-load column $c$ is a complete feasible route and operation plan for one truck. It contains the visited set $A_c\subseteq N$, an ordered route $R_c$, an operation vector $q_c\in\mathbb{Z}^{V}$, and an inventory change vector $\Delta_c=-q_c$, where $q_{ic}>0$ means pickup and $q_{ic}<0$ means drop-off. Feasibility of a column means the route starts and ends at the depot, the station sequence is elementary, load is always in $[0,Q]$, all operated station inventories are feasible, and route duration is at most $T$.
+
+For a fixed Gini cap $\gamma$, the master problem is
+\begin{align}
+\min \quad & \sum_i w_i e_i \\
+\text{s.t.}\quad
+& \sum_{c\in\mathcal{C}} z_c \le M, \\
+& \sum_{c\in\mathcal{C}:i\in A_c} z_c \le 1, &&\forall i, \\
+& Y_i=Y_i^0+\sum_c \Delta_{ic} z_c, &&\forall i, \\
+& r_i=Y_i/Y_i^T, &&\forall i, \\
+& e_i\ge r_i-1,\quad e_i\ge 1-r_i, &&\forall i, \\
+& H\ge \sum_{i<j} h_{ij},\quad h_{ij}\ge r_i-r_j,\quad h_{ij}\ge r_j-r_i, &&\forall i<j, \\
+& H\le V\gamma S,\quad S=\sum_i r_i,\\
+& z_c\in\{0,1\},\quad Y_i\in\mathbb{Z}_+.
+\end{align}
+In the LP relaxation, the set of columns is generated dynamically by exact pricing.
+
+\section{Key mathematical structure}
+
+\begin{lemma}[Operation-time conservation]
+Suppose each truck starts empty and all remaining bikes on a returning truck are unloaded at the depot. If pickup time is $\tau_p$ and drop/unload time is $\tau_d$, then for truck $k$ with total station pickup $P_k=\sum_i p_{ki}$ and station drop-off $D_k=\sum_i d_{ki}$, its operation time is
+\[
+\tau_p P_k+\tau_d D_k+\tau_d(P_k-D_k)=(\tau_p+\tau_d)P_k.
+\]
+\end{lemma}
+\begin{proof}
+The truck starts empty. Therefore final depot unloading equals total pickups minus total station drop-offs, $P_k-D_k\ge 0$. Adding station pickup time, station drop time, and depot unloading time gives the expression. The $D_k$ terms cancel. Thus route duration can be written as travel plus $(\tau_p+\tau_d)P_k$.
+\end{proof}
+
+\begin{lemma}[Gini-cap linearization]
+For any fixed scalar $\gamma\ge 0$ and any final inventory with $S(r)>0$,
+\[
+G(r)\le \gamma \quad\Longleftrightarrow\quad H(r)\le V\gamma S(r).
+\]
+\end{lemma}
+\begin{proof}
+By definition $G=H/(VS)$. Since $S>0$, multiplying both sides of $H/(VS)\le \gamma$ by $VS$ gives the result. This avoids the bilinear product between the Gini coefficient and the denominator that appears in direct MILP linearizations.
+\end{proof}
+
+\begin{proposition}[Exactness of route-load column reformulation]
+Let $\mathcal{C}$ be the set of all feasible route-load columns for one truck. The set-packing master over $\mathcal{C}$ is equivalent to the original route-load feasible region.
+\end{proposition}
+\begin{proof}
+Any feasible original solution decomposes into at most $M$ truck routes, and each truck route with its operations is a column in $\mathcal{C}$. Station-disjointness is enforced by $\sum_{c:i\in A_c}z_c\le 1$, and inventory equations reproduce the original final inventories. Conversely, any integer master solution selects at most $M$ feasible route-load columns; because each column is route/load/time feasible and the master enforces station-disjointness and inventory aggregation, the selected columns define a feasible original solution.
+\end{proof}
+
+\begin{theorem}[Pricing certificate]
+Consider the LP relaxation of the restricted master. Let $\mu$ be the dual value of the vehicle-count row, $\pi_i$ the dual of the station-packing row, and $\sigma_i$ the dual of the inventory equation. The reduced cost of a route-load column $c$ is
+\[
+\bar c_c=-\mu-\sum_{i\in A_c}\pi_i+\sum_i \sigma_i\Delta_{ic},
+\]
+plus any dual contributions from additional valid cuts. If exact pricing proves $\min_{c\in\mathcal{C}}\bar c_c\ge 0$, then the current restricted-master LP value is the full master LP value.
+\end{theorem}
+\begin{proof}
+This is the standard Dantzig--Wolfe column-generation optimality condition. A missing column can improve the LP only if it has negative reduced cost. If the pricing oracle solves the reduced-cost minimization problem globally and finds no negative column, all nonbasic missing columns satisfy LP optimality conditions.
+\end{proof}
+
+\begin{proposition}[Subset-row cut]
+For any triple $S=\{i,j,k\}\subseteq N$, the inequality
+\[
+\sum_{c\in\mathcal{C}} \left\lfloor\frac{|A_c\cap S|}{2}\right\rfloor z_c\le 1
+\]
+is valid for every integer station-disjoint solution.
+\end{proposition}
+\begin{proof}
+In any integer solution each station in $S$ can be covered at most once, so the total number of covered stations from $S$ is at most three. Every selected column contributing one to the left-hand side must cover at least two stations from $S$. Two such selected columns would cover at least four station-occurrences from a set of only three stations, contradicting station-disjointness. Therefore at most one selected column can contribute one.
+\end{proof}
+
+\begin{proposition}[Co-route pair branching]
+For any pair $(i,j)$, define $b_{ij}=\sum_{c:\{i,j\}\subseteq A_c}z_c$. Since stations are visited at most once, every integer solution satisfies $b_{ij}\in\{0,1\}$. The disjunction $b_{ij}=0$ or $b_{ij}=1$ is valid and exhaustive.
+\end{proposition}
+\begin{proof}
+If no selected route contains both stations, then $b_{ij}=0$. If a selected route contains both, station-disjointness prevents any other selected route from containing either station, hence $b_{ij}=1$. These two cases cover all integer solutions.
+\end{proof}
+
+\section{Algorithm}
+
+\begin{algorithm}[H]
+\caption{GF-RL-BPC for a fixed Gini cap $\gamma$}
+\begin{algorithmic}[1]
+\State Generate a compact initial pool of one-stop and two-stop feasible route-load columns.
+\State Initialize a branch tree with one root node and an empty global subset-row cut pool.
+\While{the branch tree is nonempty and time/node limits are not reached}
+  \State Select a node.
+  \Repeat
+    \State Solve the restricted master LP with inherited branching constraints and subset-row cuts.
+    \State Separate violated 3-subset-row cuts from the current LP solution.
+    \State Solve the exact route-load pricing problem including duals from station rows, inventory equations, pair-branch rows, and subset-row cuts.
+    \If{pricing returns a negative reduced-cost column}
+       \State Add the column to the master.
+    \EndIf
+  \Until{no violated cut is found and pricing proves no negative reduced-cost column}
+  \If{LP infeasible, Gini cap infeasible, or LP bound exceeds incumbent} prune the node.
+  \ElsIf{LP solution is integer} update incumbent and prune.
+  \Else branch on a fractional co-route pair $b_{ij}$; if none exists, branch on final inventory or station-service variable.
+  \EndIf
+\EndWhile
+\State If the tree is exhausted with exact pricing at every processed node, return certified optimum $P^*(\gamma)$; otherwise return incumbent and valid processed-node bounds.
+\end{algorithmic}
+\end{algorithm}
+
+\section{Implementation notes}
+The implementation uses SciPy/HiGHS for LP/MIP subproblems in the current Python environment. Two exact pricing variants were implemented: an elementary label-setting pricing oracle and a compact single-route MIP pricing oracle. For the six uploaded $V=12$ tests, the compact MIP pricing oracle was faster and more stable at proving absence of negative reduced-cost columns, so it was used for the reported root certificates. The mathematical bottleneck is not Python overhead in root pricing; it is the growth of the branch-price tree and the difficulty of pricing under branching duals at deeper nodes. A C++ label-setting oracle is the natural next engineering step for deeper branch nodes, but the present tests show that simply rewriting root pricing in C++ is unlikely to close the main gap.
+
+\section{Computational results}
+All tests used $\lambda=0.15$, $T=3600$, $\tau_p=\tau_d=60$, and the six uploaded $V=12$ instances. The Gini cap in this round was initialized as $\gamma=\min\{1,G(Y^0)+\lambda P(Y^0)\}$ for each instance. The table reports exact root LP certificates for the fixed-cap subproblem, not full integer branch-price closure.
+
+\begin{center}
+\begin{tabular}{lrrrrrr}
+\toprule
+Instance & $M$ & $\gamma$ & Time(s) & Columns & SR cuts & Certified LP bound on $P$\\
+\midrule
+V12-M1-average & 1 & 0.493696 & 7.43 & 1049 & 0 & 0.584957\\
+V12-M1-high & 1 & 0.672200 & 2.04 & 1019 & 0 & 2.052737\\
+V12-M1-low & 1 & 1.000000 & 3.37 & 959 & 0 & 4.810123\\
+V12-M2-average & 2 & 1.000000 & 7.26 & 1075 & 0 & 1.403357\\
+V12-M2-high & 2 & 0.636664 & 7.01 & 1073 & 2 & 1.888763\\
+V12-M2-low & 2 & 1.000000 & 6.78 & 987 & 0 & 2.282400\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The root LP results are exact in the column-generation sense: the pricing oracle was solved to global optimality and returned no negative reduced-cost route-load column. However, these are LP relaxation certificates. Full integer proof requires exhausting the branch-price tree. A previous shallow branch-price probe on V12-M1-average processed 3 nodes in 16.27s and left 4 active nodes, confirming that the remaining bottleneck is branch closure rather than root pricing. A strengthened arc MILP remains the only implementation in this project that has certified the original weighted objective for V12-M1-average; it took approximately 416s and returned objective $0.3572005832$.
+
+\section{Conclusion}
+The strongest confirmed improvement in this round is the exact root column-generation component: all six fixed-cap LP relaxations were certified in under 8 seconds. Subset-row cuts were implemented and became active in one M2 instance, but they did not yet materially close the integer gap. Co-route pair branching was implemented as a valid branch-price disjunction, but deeper nodes became harder than expected when pricing inherited pair-branch duals. Therefore the current GF-RL-BPC is mathematically exact as a framework, and its root certificates are complete, but the implementation has not yet certified the full original objective on multiple samples. The next high-value optimization is a compiled elementary pricing oracle with reduced-cost fixing and stronger branching selection, not more root-level cuts.
+
+\end{document}

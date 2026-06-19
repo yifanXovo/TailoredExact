@@ -1,0 +1,23 @@
+{
+  "instance_name": "test_data_V8_M2_low.txt",
+  "input_path": "E:\\codes\\Hybrid GA\\testdata\\Smallnetwork2\\test_data_V8_M2_low.txt",
+  "method": "tailored",
+  "status": "optimal",
+  "certificate": "Tailored portfolio certificate via strengthened compact exact fallback: CPLEX reported optimality and the independent verifier recomputed the same feasible objective.",
+  "objective": 2.18621359223,
+  "G": 0.626213592233,
+  "P": 10.4,
+  "lower_bound": 2.18621359223,
+  "upper_bound": 2.18621359223,
+  "gap": 0,
+  "runtime_seconds": 10.6256469,
+  "nodes": 44255578,
+  "columns": 0,
+  "pricing_calls": 0,
+  "cuts_added": 0,
+  "final_inventories": [50000, 12, 4, 16, 32, 5, 21, 11, 58],
+  "routes": [{"vehicle": 0, "nodes": [0, 6, 5, 0], "operations": [{"station": 6, "pickup": 27, "drop": 0}, {"station": 5, "pickup": 0, "drop": 3}]}, {"vehicle": 1, "nodes": [0, 7, 2, 0], "operations": [{"station": 7, "pickup": 24, "drop": 0}, {"station": 2, "pickup": 0, "drop": 2}]}],
+  "station_operations": [{"vehicle": 0, "station": 6, "pickup": 27, "drop": 0}, {"vehicle": 0, "station": 5, "pickup": 0, "drop": 3}, {"vehicle": 1, "station": 7, "pickup": 24, "drop": 0}, {"vehicle": 1, "station": 2, "pickup": 0, "drop": 2}],
+  "verification": {"feasible": true, "routes_start_end_depot": true, "station_disjoint": true, "load_feasible": true, "station_feasible": true, "duration_feasible": true, "objective_matches": true, "route_travel_time": [274.619104264, 683.8576087], "route_operation_time": [3240, 2880], "route_duration": [3514.61910426, 3563.8576087], "final_inventories": [50000, 12, 4, 16, 32, 5, 21, 11, 58], "G": 0.626213592233, "P": 10.4, "objective": 2.18621359223, "errors": []},
+  "notes": ["Inventory-route proof did not exhaust; portfolio returned strengthened compact exact fallback certificate when available.", "Inventory branch-search proof after incumbent complete=false, nodes=44253184, route_checks=0, domain_values=323, max_domain_size=50, runtime=10.0008, incumbent_source=optimal", "parsed Hybrid GA text format; legacy weights with max 10 scaled by 0.1 to match Hybrid GA parser; distances rebuilt from points at speed factor 1.5", "CPLEX compact MILP with operation-time conservation, mode constraints, subset duration cuts, and symmetry cuts.", "CPLEX solution status: integer optimal solution", "CPLEX process return code: 0", "LP file: results\\cplex_work\\test_data_V8_M2_low_strengthened_10723452328\\model.lp", "CPLEX log: logs/v8_m2_low_inventory_proof10.log.cplex.log"]
+}

@@ -1,0 +1,23 @@
+{
+  "instance_name": "test_data_V8_M2_average.txt",
+  "input_path": "E:\\codes\\Hybrid GA\\testdata\\Smallnetwork2\\test_data_V8_M2_average.txt",
+  "method": "tailored",
+  "status": "optimal",
+  "certificate": "Tailored portfolio certificate via strengthened compact exact fallback: CPLEX reported optimality and the independent verifier recomputed the same feasible objective.",
+  "objective": 0.31908731186,
+  "G": 0.129169959908,
+  "P": 1.26611567968,
+  "lower_bound": 0.31908731186,
+  "upper_bound": 0.31908731186,
+  "gap": 0,
+  "runtime_seconds": 6.3474726,
+  "nodes": 7222615,
+  "columns": 0,
+  "pricing_calls": 0,
+  "cuts_added": 0,
+  "final_inventories": [50000, 10, 14, 12, 16, 13, 29, 24, 23],
+  "routes": [{"vehicle": 0, "nodes": [0, 4, 2, 3, 5, 0], "operations": [{"station": 4, "pickup": 23, "drop": 0}, {"station": 2, "pickup": 0, "drop": 6}, {"station": 3, "pickup": 0, "drop": 12}, {"station": 5, "pickup": 0, "drop": 5}]}, {"vehicle": 1, "nodes": [0, 7, 6, 0], "operations": [{"station": 7, "pickup": 24, "drop": 0}, {"station": 6, "pickup": 0, "drop": 24}]}],
+  "station_operations": [{"vehicle": 0, "station": 4, "pickup": 23, "drop": 0}, {"vehicle": 0, "station": 2, "pickup": 0, "drop": 6}, {"vehicle": 0, "station": 3, "pickup": 0, "drop": 12}, {"vehicle": 0, "station": 5, "pickup": 0, "drop": 5}, {"vehicle": 1, "station": 7, "pickup": 24, "drop": 0}, {"vehicle": 1, "station": 6, "pickup": 0, "drop": 24}],
+  "verification": {"feasible": true, "routes_start_end_depot": true, "station_disjoint": true, "load_feasible": true, "station_feasible": true, "duration_feasible": true, "objective_matches": true, "route_travel_time": [732.395727591, 625.617335086], "route_operation_time": [2760, 2880], "route_duration": [3492.39572759, 3505.61733509], "final_inventories": [50000, 10, 14, 12, 16, 13, 29, 24, 23], "G": 0.129169959908, "P": 1.26611567968, "objective": 0.31908731186, "errors": []},
+  "notes": ["Inventory-route proof did not exhaust; portfolio returned strengthened compact exact fallback certificate when available.", "Inventory branch-search proof after incumbent complete=false, nodes=7208960, route_checks=0, domain_values=314, max_domain_size=54, runtime=2.0039, incumbent_source=optimal", "parsed Hybrid GA text format; legacy weights with max 10 scaled by 0.1 to match Hybrid GA parser; distances rebuilt from points at speed factor 1.5", "CPLEX compact MILP with operation-time conservation, mode constraints, subset duration cuts, and symmetry cuts.", "CPLEX solution status: integer optimal solution", "CPLEX process return code: 0", "LP file: results\\cplex_work\\test_data_V8_M2_average_strengthened_10723070709\\model.lp", "CPLEX log: logs/v8_m2_average_incumbent_proof2_orderbound.log.cplex.log"]
+}

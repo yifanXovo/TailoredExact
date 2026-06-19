@@ -1,0 +1,195 @@
+# Certification Protocol
+
+This project distinguishes the original EBRP objective from fixed-cap and restricted-pool subproblems. A result is certified for the original problem only when all of the following hold:
+
+- `status=optimal`.
+- `gap=0`, with `lower_bound=upper_bound=objective` to numerical tolerance.
+- `verifier_passed=true`; the independent verifier recomputes route feasibility, load feasibility, station feasibility, route duration, final inventories, `G`, `P`, and `G + lambda P`.
+- `solves_original_objective=true`.
+- The method-specific certificate closes the original objective, not just a diagnostic subproblem.
+
+## Method Scopes
+
+`gcap-frontier` is the main paper algorithm and is reported as `method_scope=original_bpc`, `is_bpc=true`. It solves the original objective only when the full Gini frontier is certified.
+
+`tailored` is an auxiliary exact portfolio and is reported as `method_scope=original_compact`, `is_bpc=false`. It may use complete route-load enumeration on small cases or a strengthened compact fallback. Its success is not BPC success.
+
+`cplex` with the plain baseline is reported as `method_scope=plain_cplex`, `is_bpc=false`. It is the benchmark compact exact MILP.
+
+`gcap-cg`, `gcap-tree`, `gcap-branch`, `master`, `pricing`, `cuts`, `branching`, and restricted path/column pools are `subproblem` or `diagnostic` methods. They do not certify the original problem unless wrapped inside a complete full-frontier certificate.
+
+## Full Frontier BPC Certificate
+
+For `gcap-frontier`, `status=optimal` is valid only when:
+
+- A feasible incumbent exists and passes the verifier.
+- The covered Gini range includes the full relevant range, currently at least `G in [0, incumbent_objective]` unless a tighter valid range is proven.
+- Every interval is complete, empty, or certified by a valid lower bound at least as large as the incumbent.
+- `unresolved_intervals=0`.
+- `invalid_bound_intervals=0`.
+- Every branch-price node used for a branch-price lower bound has exact pricing closure.
+- The aggregated frontier lower bound reaches the incumbent objective.
+
+The current JSON fields that demonstrate these conditions are:
+
+- `method_scope`, `solves_original_objective`, `is_bpc`, `certificate_type`.
+- `status`, `objective`, `lower_bound`, `upper_bound`, `gap`.
+- `result_file`, `log_file`, and `stop_reason`.
+- `verifier_passed`, `certified_original_problem`.
+- `unresolved_intervals`, `invalid_bound_intervals`, `pricing_closed_nodes`, `open_nodes`.
+- `bpc_workers`, `pricing_threads`, `parallel_frontier`, `parallel_nodes`, and `parallel_tasks` for threaded BPC runs.
+- `wall_time_seconds` for elapsed wall time and `aggregate_worker_time_seconds` for summed worker activity; aggregate timing may exceed wall time under parallel BPC.
+- `notes`, which include interval coverage, per-interval completion, valid lower bounds, and frontier summary.
+
+For certified full-frontier runs, the top-level JSON fields are normalized to `lower_bound=upper_bound=objective` and `gap=0` after the full certificate closes within the frontier tolerance. The result may also report `raw_frontier_lower_bound_before_tolerance_normalization` and `certificate_tolerance` for auditability, while interval notes retain the per-interval lower-bound details.
+
+Feasible incumbents may come from heuristics, compact auxiliary solves, or `--incumbent-json`. Imported or seeded routes must pass the independent verifier and may be used only as a warm start or incumbent cutoff. They do not contribute any lower-bound certificate, and they must not be reported as BPC success unless the full frontier conditions above also hold.
+
+Verified incumbent route columns may be inserted into a fixed-interval restricted master even when the incumbent's true Gini value lies outside that interval. This is certificate-neutral because each inserted object is only a feasible route-load column. The incumbent itself is accepted only as an interval incumbent if its verified `G` lies in the interval.
+
+Generic singleton and two-station pickup/drop warm-start columns are also certificate-neutral. They enlarge the restricted column pool but do not replace the exact pricing proof. A restricted-master result is still not a node certificate until exact pricing proves no missing negative-reduced-cost route-load column exists under the active branch and cut rows. The CLI option `--gcap-warmstart seed|sparse|full` controls this pool: `seed` uses only verified seed-route columns plus priced columns, `sparse` adds target-oriented singleton and pickup/drop pair quantities, and `full` enumerates all feasible one- and two-station operation quantities for the warm-start pool.
+
+Adaptive interval splitting via `--frontier-refine-splits` is certificate-neutral: a parent interval may be replaced only by children that exactly cover the parent range. Children inherit the parent's valid lower bound and may receive stronger relaxation bounds. The final global lower-bound ledger must ignore replaced parents and account for every child interval.
+
+Focused splitting via `--frontier-split-batch` is also certificate-neutral. It changes only which unresolved intervals are refined first, normally by lowest current lower bound. It does not remove intervals from the final ledger and cannot by itself certify the original problem.
+
+Retry reserve via `--frontier-retry-reserve` is certificate-neutral. It stops adaptive splitting early to preserve wall time for branch-price retry. The final ledger must still account for every active interval, and no interval is certified merely because splitting stopped.
+
+Best-bound branch node scheduling and best-bound frontier retry scheduling are also certificate-neutral. They spend finite runtime on the open branch node or unresolved interval with the smallest valid inherited lower bound. A retry tree may stop early when its valid open-node lower bound reaches the next unresolved interval's lower bound; that stopped interval remains unresolved and open nodes remain counted. A node or interval is counted as certified only when exact pricing closes the relevant branch-price tree, the interval is empty, or a valid lower bound reaches the incumbent objective.
+
+Optional multi-column pricing via `--gcap-pricing-columns N` is certificate-neutral. It may add several negative route-load columns discovered during an exact pricing enumeration. Early negative stopping in this mode may be used only to add a column and continue column generation; it cannot certify a node. A branch-price node is closed only after exact pricing proves that no negative route-load column remains.
+
+Optional initial frontier parallelism via `--parallel-frontier true --bpc-workers N` is certificate-neutral in the current build. It solves independent initial Gini intervals with a fixed incumbent copied before worker launch and merges interval records only after workers join, in deterministic interval order. The current queue is deterministic and ordered by proximity to the incumbent Gini value. Internal command-line CPLEX calls in restricted masters and inventory relaxations remain single-threaded. `--parallel-nodes` is accepted and logged but disabled; no branch-node parallel certificate is claimed.
+
+Branch-closure pruning in pricing is certificate-neutral and exact. Required-together branches define station components that must be entirely present or absent in a final column. The pricing oracle may prune a partial route-load label when the required closure of its visited set would include a forbidden or disallowed station, violate a forbid-together branch, or cannot still visit required missing stations and return to the depot within the route time limit. The closure test removes only partial labels that cannot extend to any branch-feasible route-load column.
+
+## Fixed Gini-Cap Subproblems
+
+For a fixed cap or interval, the valid linearization is:
+
+```text
+G <= gamma iff H <= V * gamma * S
+```
+
+A fixed-cap tree can certify only its fixed-cap or fixed-interval subproblem. It is not a global certificate for `G + lambda P` unless all relevant Gini intervals are covered and aggregated by `gcap-frontier`.
+
+The pricing oracle may use label-setting dynamic programming over elementary visited sets, last station, vehicle load, and total pickup, with Pareto dominance on reduced cost and travel time. This remains an exact pricing oracle because future feasibility and reduced-cost extensions depend only on these resources and the visited set; dominated labels cannot produce a better feasible completion.
+
+Subset-row cuts use the valid set-packing inequality for odd station subsets `S`:
+
+```text
+sum_c floor(|A_c intersect S| / 2) z_c <= floor(|S| / 2).
+```
+
+The implementation separates triples and size-five subsets in the active restricted master and prices them with the same column coefficient. These cuts strengthen fixed-interval lower bounds but do not by themselves certify the original problem outside a complete frontier certificate.
+
+Each interval also has the valid floor bound:
+
+```text
+objective = G + lambda P >= G >= interval_floor
+```
+
+This bound is now included in frontier lower-bound reporting. It does not close the low-G interval that starts at zero.
+
+The frontier also uses a final-inventory pickup/route/Gini relaxation when it solves. This LP enforces station capacity bounds, no bike creation, exact station flow conservation
+
+```text
+pickup_i - drop_i + final_inventory_i = initial_inventory_i,
+```
+
+the depot-return capacity lower bound
+
+```text
+sum_i final_inventory_i >= sum_i initial_inventory_i - sum_k Q_k,
+```
+
+single-station operation capacity bounds
+
+```text
+pickup_i <= max_k Q_k * visit_i
+drop_i <= max_k Q_k * visit_i,
+```
+
+and the operation-time pickup budget implied by
+
+```text
+operation_time_k = (tau_pick + tau_drop) * total_pickup_k,
+```
+
+and the interval Gini cap/floor. It also adds necessary route-reachability inequalities using singleton station cuts and subset station-visit cuts with shortest-path metric closures, so the cuts remain lower bounds on route travel. For `V<=12`, all station subsets are cut and final inventories, pickup/drop quantities, and visit indicators are integer. For larger instances the implementation caps subset size and keeps this relaxation continuous to control size.
+
+The current interval relaxation also includes station-operation mode/projection rows:
+
+```text
+pickup_i + drop_i <= U_i * visit_i
+pickup_i + drop_i >= visit_i
+U_i = max(min(initial_i, Qmax), min(capacity_i - initial_i, Qmax)).
+```
+
+The upper row is valid because every original visited station has one operation mode: it either picks up bikes from the initial inventory or drops bikes into residual station capacity, and a single vehicle cannot operate more than `Qmax` bikes at that station. The lower row is a projection-strengthening convention for the inventory relaxation: a zero-operation station visit can be deleted without changing any final inventory, ratio, Gini term, or satisfaction penalty, and deletion can only make the route side easier. Therefore every projection-relevant original solution has an equivalent representation satisfying `pickup_i + drop_i >= visit_i`. These rows strengthen lower-bound relaxations but do not supply an incumbent or a complete BPC certificate by themselves.
+
+For `V<=12` with a small vehicle count, the same relaxation also adds a complete route-mask duration/load assignment relaxation. For each vehicle, one binary mask is selected from the full set of travel-feasible station masks, station visits are assigned to selected masks, station pickup/drop quantities are assigned to vehicles, and each selected mask satisfies:
+
+```text
+shortest_depot_cycle(mask) + (tau_pick + tau_drop) * assigned_pickup <= T
+assigned_drop <= assigned_pickup
+assigned_pickup - assigned_drop <= Q_k.
+```
+
+This is a necessary-condition relaxation over all visit masks, not a restricted route-load solution pool. It can strengthen interval lower bounds or prove incumbent-cutoff infeasibility, but it does not replace the route-load branch-price certificate when an interval is not bound-fathomed.
+
+The implementation must not use an incomplete route-mask list as if it were complete. Current certificate-producing runs enable complete route-mask enumeration only through the configured `--route-mask-max-v` threshold, defaulting to `12`; for larger `V`, route-mask rows are disabled unless a complete enumeration or a proved catch-all relaxation is implemented.
+
+The relaxation minimizes a linear lower estimator of `G + lambda P`, so its optimum is a valid lower bound for every route-feasible solution in that interval. If the small integer relaxation hits a time limit, CPLEX's MIP best bound is still a valid lower bound for the integer relaxation, and therefore also a valid lower bound for the original interval.
+
+With incumbent cutoff `UB` and interval floor `gamma_L`, the relaxation may add:
+
+```text
+P <= (UB - gamma_L) / lambda.
+```
+
+This is valid for proving the original interval because any excluded solution has objective `G + lambda P >= gamma_L + lambda P > UB`. The reported lower bound is then capped as `min(relaxation_bound, UB)`, which is a valid unconditional interval lower bound. If this cutoff relaxation is infeasible, the interval is bound-fathomed at `UB`; it is not claimed to be empty. If the unconditional relaxation is infeasible without a cutoff budget, the original interval is empty under necessary inventory/resource conditions and may be bound-fathomed.
+
+When the relaxation uses the linear estimator `H/(V*S_upper)` for the Gini term, `S_upper` must be a valid upper bound on `sum_i r_i` for the same incumbent-improving relaxation domain. The implementation computes this bound with station capacities, the incumbent penalty budget when active, and the depot-return station-sum floor `sum_i final_inventory_i >= sum_i initial_inventory_i - sum_k Q_k`.
+
+## Comparison Rule
+
+Do not report a certified-optimal speedup unless both methods have `certified_original_problem=true`. If CPLEX times out with a positive gap, report:
+
+```text
+BPC certified in X seconds; CPLEX did not certify within Y seconds, final CPLEX gap = Z.
+```
+
+For the existing `results/compare_v10_m2_average.csv`, the correct wording is:
+
+```text
+tailored certified within 55.77s; CPLEX did not certify within 120.16s, final CPLEX gap = 0.0532958.
+```
+
+The CSV `speedup=2.1547` is not a certified-optimal speedup because CPLEX did not close.
+
+## BPC-Owned Incumbents And Diagnostic Incumbents
+
+A BPC-owned incumbent generator may be used in pure BPC runs only as an upper-bound source. The generated routes must pass the independent verifier before they can set `upper_bound` or an incumbent cutoff. They do not provide lower bounds and do not relax any certificate requirement.
+
+The implemented pure-BPC incumbent modes include greedy route-load construction, fixed-seed randomized greedy starts, and exact load-decoded local search over station assignment and signed operation quantities. The local-search decoder fixes a vehicle's signed station operations and solves an exact dynamic program over visited mask, last station, and vehicle load before accepting a route. Current local-search neighborhoods include station relocate/resize and pairwise swap-style reassignment moves. The optional route-column pool master is a restricted incumbent master over already verified route columns; it is not a restricted-pool lower-bound certificate. A run using this pool is still globally optimal only if the full frontier certificate closes.
+
+A run that imports a verified plain-CPLEX incumbent is a diagnostic incumbent-cutoff run. It may be useful to test whether the frontier lower-bound machinery can close around a strong incumbent, but it must not be reported as pure BPC performance and must not be compared as a BPC-vs-CPLEX speedup.
+
+The final interval closure phase is certificate-preserving only when each focused interval is closed by exact pricing or bound-fathomed by a valid lower bound. If a focused pass leaves `open_nodes>0` or `unresolved_intervals>0`, the global BPC status remains not certified, regardless of incumbent quality.
+
+Strengthened compact branch-and-cut runs are `method_scope=original_compact`, not BPC. They can certify the original problem when their compact MIP gap closes and the verifier passes, but their success must be reported as an auxiliary exact fallback result rather than a full-frontier route-load BPC certificate.
+
+## Current Certified Target Instances
+
+As of 2026-06-14, pure BPC has full original-problem certificates for:
+
+- `test_data_V10_M2_average.txt`: `results/dyn4_v10_m2_average_frontier_routemask_relax20_refine18_1200s.json`.
+- `test_data_V10_M1_average.txt`: `results/closure3600_v10_m1_average_strong_bpcseed.json`.
+- `test_data_V12_M1_average.txt`: `results/closure7200_v12_m1_average_strong_bpcseed.json`.
+
+All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `unresolved_intervals=0`, `invalid_bound_intervals=0`, top-level `open_nodes=0`, and `verifier_passed=true`.
+
+`test_data_V10_M2_low.txt` is not certified by pure BPC, but it is certified by the auxiliary strengthened compact fallback in `results/alt_strengthened_v10_m2_low_1200s.json`. This is an `original_compact` certificate, not a BPC certificate.
+
+`test_data_V12_M2_average.txt` remains open. The current portfolio incumbent is `0.366168793171`, the current valid portfolio lower bound is `0.350523627890`, and the portfolio gap is about `0.0427266`.

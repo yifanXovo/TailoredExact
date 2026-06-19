@@ -1,0 +1,34 @@
+{
+  "instance": "regen_candidate_V12_M1_average.txt",
+  "settings": {"lambda": 0.15, "T_seconds": 3600, "unit_pick_time": 60, "unit_drop_time": 60},
+  "baseline_strengthened_exact_MILP_previous": {
+    "status": "certified_optimal",
+    "objective": 0.35720058320841447,
+    "G": 0.21762853996949363,
+    "P": 0.9304802882594791,
+    "time_seconds": 416.0,
+    "route": [7,10,11,6,4],
+    "final_inventory": [47,56,36,17,50,7,15,35,42,21,14,20]
+  },
+  "attempt_1_spatial_McCormick_S_branching": {
+    "status": "not_certified_time_limited",
+    "time_seconds": 20.80,
+    "incumbent_objective": 0.3639685220291748,
+    "incumbent_G": 0.2452094886116815,
+    "incumbent_P": 0.7917268894499553,
+    "global_LB": 0.288825590271496,
+    "comment": "Removed binary expansion but bound remained too weak; not enough for certification."
+  },
+  "attempt_2_Gini_cap_frontier_full_arc_no_subset_cuts": [
+    {"gini_cap": 0.49369605, "status": "Pstar_certified_for_cap", "time_seconds": 2.82, "Pstar": 0.6383230275451934, "G_of_returned_solution": 0.30200037952962994, "objective": 0.39774883366140895},
+    {"gini_cap": 0.30200037, "status": "Pstar_certified_for_cap", "time_seconds": 7.78, "Pstar": 0.6394721525451934, "G_of_returned_solution": 0.2983406185689927, "objective": 0.3942614414507717},
+    {"gini_cap": 0.28610360, "status": "Pstar_certified_for_cap", "time_seconds": 8.32, "Pstar": 0.6538361025451934, "G_of_returned_solution": 0.28498148128218875, "objective": 0.38305689666396775},
+    {"gini_cap": 0.24981729, "status": "Pstar_certified_for_cap", "time_seconds": 14.71, "Pstar": 0.7813850846880506, "G_of_returned_solution": 0.24945570180196291, "objective": 0.3666634645051705},
+    {"gini_cap": 0.22000000, "status": "not_certified_timeout_or_killed", "time_seconds": ">120", "comment": "This is the region containing the known optimum G≈0.2176; certification remained hard."}
+  ],
+  "attempt_3_Gini_cap_route_oracle_master": {
+    "status": "not_certified",
+    "comment": "The master is much smaller, but naive no-good lazy cuts are too weak because many solutions share the same inventory target but violate load-feasible route duration. It needs lifted resource-route cuts before it is competitive."
+  },
+  "main_conclusion": "The Gini-cap frontier reformulation is the best modeling improvement found: it removes the G*Y binary expansion and solves several Pareto frontier points in seconds. However, on the uploaded V12_M1_average instance it still did not certify the global optimum faster than the strengthened MILP because the low-Gini region remained difficult."
+}

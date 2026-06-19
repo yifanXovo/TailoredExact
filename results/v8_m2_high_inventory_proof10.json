@@ -1,0 +1,23 @@
+{
+  "instance_name": "test_data_V8_M2_high.txt",
+  "input_path": "E:\\codes\\Hybrid GA\\testdata\\Smallnetwork2\\test_data_V8_M2_high.txt",
+  "method": "tailored",
+  "status": "optimal",
+  "certificate": "Tailored portfolio certificate via strengthened compact exact fallback: CPLEX reported optimality and the independent verifier recomputed the same feasible objective.",
+  "objective": 0.359576511323,
+  "G": 0.0135697521803,
+  "P": 2.30671172762,
+  "lower_bound": 0.359576511323,
+  "upper_bound": 0.359576511323,
+  "gap": 0,
+  "runtime_seconds": 11.7891527,
+  "nodes": 49601569,
+  "columns": 0,
+  "pricing_calls": 0,
+  "cuts_added": 0,
+  "final_inventories": [50000, 33, 21, 19, 23, 16, 27, 28, 30],
+  "routes": [{"vehicle": 0, "nodes": [0, 3, 5, 7, 8, 0], "operations": [{"station": 3, "pickup": 4, "drop": 0}, {"station": 5, "pickup": 7, "drop": 0}, {"station": 7, "pickup": 0, "drop": 1}, {"station": 8, "pickup": 0, "drop": 10}]}, {"vehicle": 1, "nodes": [0, 6, 4, 2, 0], "operations": [{"station": 6, "pickup": 22, "drop": 0}, {"station": 4, "pickup": 0, "drop": 7}, {"station": 2, "pickup": 0, "drop": 15}]}],
+  "station_operations": [{"vehicle": 0, "station": 3, "pickup": 4, "drop": 0}, {"vehicle": 0, "station": 5, "pickup": 7, "drop": 0}, {"vehicle": 0, "station": 7, "pickup": 0, "drop": 1}, {"vehicle": 0, "station": 8, "pickup": 0, "drop": 10}, {"vehicle": 1, "station": 6, "pickup": 22, "drop": 0}, {"vehicle": 1, "station": 4, "pickup": 0, "drop": 7}, {"vehicle": 1, "station": 2, "pickup": 0, "drop": 15}],
+  "verification": {"feasible": true, "routes_start_end_depot": true, "station_disjoint": true, "load_feasible": true, "station_feasible": true, "duration_feasible": true, "objective_matches": true, "route_travel_time": [995.584778015, 764.37195052], "route_operation_time": [1320, 2640], "route_duration": [2315.58477801, 3404.37195052], "final_inventories": [50000, 33, 21, 19, 23, 16, 27, 28, 30], "G": 0.0135697521803, "P": 2.30671172762, "objective": 0.359576511323, "errors": []},
+  "notes": ["Inventory-route proof did not exhaust; portfolio returned strengthened compact exact fallback certificate when available.", "Inventory branch-search proof after incumbent complete=false, nodes=49594368, route_checks=0, domain_values=366, max_domain_size=61, runtime=10.0021, incumbent_source=optimal", "parsed Hybrid GA text format; legacy weights with max 10 scaled by 0.1 to match Hybrid GA parser; distances rebuilt from points at speed factor 1.5", "CPLEX compact MILP with operation-time conservation, mode constraints, subset duration cuts, and symmetry cuts.", "CPLEX solution status: integer optimal solution", "CPLEX process return code: 0", "LP file: results\\cplex_work\\test_data_V8_M2_high_strengthened_10723452337\\model.lp", "CPLEX log: logs/v8_m2_high_inventory_proof10.log.cplex.log"]
+}

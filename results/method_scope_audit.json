@@ -1,0 +1,419 @@
+{
+  "audit_date": "2026-06-11",
+  "sources": [
+    "results/*.json",
+    "results/*.csv",
+    "logs/*.log",
+    "docs/algorithm_report.md",
+    "docs/attempt_log.md"
+  ],
+  "methods_found_in_json_results": [
+    "branching",
+    "cg",
+    "cplex",
+    "cuts",
+    "gcap-branch",
+    "gcap-cg",
+    "gcap-frontier",
+    "gcap-tree",
+    "master",
+    "pricing",
+    "pricing-branch",
+    "tailored"
+  ],
+  "general_warnings": [
+    "Top-level objective/G/P and verification fields prove feasibility and objective recomputation for the reported route, not necessarily optimality for the original problem.",
+    "The meaning of lower_bound/upper_bound/gap is method-specific. For diagnostics these fields may refer to a fixed-cap surrogate, pricing cost, LP relaxation, or restricted pool.",
+    "status=optimal is a global original-problem certificate only for methods whose certificate conditions close the original objective."
+  ],
+  "method_scopes": [
+    {
+      "reported_method": "gcap-frontier",
+      "aliases": ["bpc", "route-load BPC", "full route-load BPC"],
+      "solves_original_objective": "yes, only when the full frontier is certified and status is optimal",
+      "solves_only_fixed_gini_cap_min_p": "no; fixed-cap/interval subproblems are internal",
+      "uses_restricted_column_or_path_pool": "uses restricted masters internally, but exact pricing closure removes pool restriction for certified intervals",
+      "status_optimal_scope": "global original EBRP certificate only when full frontier conditions hold",
+      "certificate_conditions": [
+        "feasible incumbent exists",
+        "frontier covers G in [0, incumbent objective]",
+        "each interval is closed or bound-fathomed by a valid lower bound",
+        "aggregated lower bound reaches incumbent objective",
+        "exact pricing closes every relevant branch-price node",
+        "independent verifier confirms incumbent feasibility and objective"
+      ],
+      "fields_proving_conditions": [
+        "method",
+        "status",
+        "certificate",
+        "objective",
+        "lower_bound",
+        "upper_bound",
+        "gap",
+        "verification.feasible",
+        "verification.objective_matches",
+        "notes: frontier cover range",
+        "notes: full_objective_range=true",
+        "notes: interval complete/certified_by_bound entries",
+        "notes: frontier certification summary with unresolved_intervals=0 and invalid_bound_intervals=0"
+      ],
+      "global_when_statuses": ["optimal"],
+      "not_global_when_statuses": [
+        "gcap_frontier_bound_complete",
+        "gcap_frontier_not_closed"
+      ],
+      "example_global_certificate_file": "results/v8_m2_average_gcap_frontier8_adaptive_cutoff.json"
+    },
+    {
+      "reported_method": "tailored",
+      "aliases": ["tailored compact portfolio"],
+      "solves_original_objective": "yes when status is optimal",
+      "solves_only_fixed_gini_cap_min_p": "no",
+      "uses_restricted_column_or_path_pool": "not for current compact-fallback optimal reports; full route-load enumeration exists separately and must complete to be global",
+      "status_optimal_scope": "global original EBRP certificate when certificate indicates complete exact search or strengthened compact CPLEX optimality",
+      "certificate_conditions": [
+        "complete route-load enumeration plus exact master, or complete inventory-route proof, or strengthened compact CPLEX reports optimality",
+        "lower_bound equals upper_bound equals objective",
+        "gap is zero",
+        "independent verifier passes"
+      ],
+      "fields_proving_conditions": [
+        "method",
+        "status",
+        "certificate",
+        "lower_bound",
+        "upper_bound",
+        "gap",
+        "verification.feasible",
+        "verification.objective_matches",
+        "notes: CPLEX solution status: integer optimal solution"
+      ],
+      "global_when_statuses": ["optimal"],
+      "not_global_when_statuses": ["time_limit"],
+      "example_global_certificate_file": "results/v10_m2_average_tailored.json",
+      "example_non_certificate_file": "results/v8_m1_low_route_enum10.json"
+    },
+    {
+      "reported_method": "compact strengthened",
+      "aliases": ["strengthened compact CPLEX", "strengthened fallback"],
+      "solves_original_objective": "yes",
+      "solves_only_fixed_gini_cap_min_p": "no",
+      "uses_restricted_column_or_path_pool": "no",
+      "status_optimal_scope": "global original EBRP certificate when CPLEX optimality and verifier both hold",
+      "certificate_conditions": [
+        "compact strengthened MILP is solved to CPLEX optimality",
+        "strengthening cuts are globally valid",
+        "lower_bound equals upper_bound equals objective",
+        "gap is zero",
+        "independent verifier passes"
+      ],
+      "fields_proving_conditions": [
+        "status",
+        "certificate",
+        "lower_bound",
+        "upper_bound",
+        "gap",
+        "verification.feasible",
+        "verification.objective_matches",
+        "notes: CPLEX compact MILP with operation-time conservation, mode constraints, subset duration cuts, and symmetry cuts",
+        "notes: CPLEX solution status: integer optimal solution"
+      ],
+      "global_when_statuses": ["optimal"],
+      "example_global_certificate_file": "results/v10_m2_average_tailored.json"
+    },
+    {
+      "reported_method": "cplex",
+      "aliases": ["plain CPLEX when notes say original-style Gini product linearization"],
+      "solves_original_objective": "yes",
+      "solves_only_fixed_gini_cap_min_p": "no",
+      "uses_restricted_column_or_path_pool": "no",
+      "status_optimal_scope": "global original EBRP certificate only when status is optimal",
+      "certificate_conditions": [
+        "CPLEX reports optimality or closed MIP gap",
+        "lower_bound equals upper_bound equals objective",
+        "gap is zero",
+        "independent verifier passes"
+      ],
+      "fields_proving_conditions": [
+        "method",
+        "status",
+        "certificate",
+        "lower_bound",
+        "upper_bound",
+        "gap",
+        "verification.feasible",
+        "verification.objective_matches",
+        "notes: CPLEX solution status",
+        "CSV cplex_status/cplex_lb/cplex_ub/cplex_gap"
+      ],
+      "global_when_statuses": ["optimal"],
+      "not_global_when_statuses": ["not_certified", "verification_failed"],
+      "example_not_certified_file": "results/v10_m2_average_cplex_plain.json"
+    },
+    {
+      "reported_method": "gcap-cg",
+      "aliases": ["gcap root", "fixed-cap root"],
+      "solves_original_objective": "no",
+      "solves_only_fixed_gini_cap_min_p": "continuous LP relaxation of fixed-cap min P, not integer min P",
+      "uses_restricted_column_or_path_pool": "starts restricted, but root LP is full-column only if exact pricing closes",
+      "status_optimal_scope": "subproblem LP relaxation certificate only",
+      "certificate_conditions": [
+        "restricted LP solved",
+        "exact pricing completes",
+        "no negative reduced-cost route-load column remains"
+      ],
+      "fields_proving_conditions": [
+        "method",
+        "status=gcap_cg_root_complete",
+        "certificate",
+        "columns",
+        "pricing_calls",
+        "notes: best_pricing_reduced_cost",
+        "notes: pricing_complete=true"
+      ],
+      "global_when_statuses": [],
+      "example_file": "results/v8_m2_average_gcap_cg_diag.json"
+    },
+    {
+      "reported_method": "gcap-tree",
+      "aliases": ["fixed-cap branch-price tree"],
+      "solves_original_objective": "no, unless wrapped by a complete gcap-frontier",
+      "solves_only_fixed_gini_cap_min_p": "yes for fixed-cap or fixed-interval surrogate tree",
+      "uses_restricted_column_or_path_pool": "uses restricted masters at nodes; exact pricing closure is required at each solved node",
+      "status_optimal_scope": "fixed-cap or fixed-interval subproblem only",
+      "certificate_conditions": [
+        "all open nodes exhausted, fathomed, infeasible, or reconstructed",
+        "exact pricing closed every relevant node",
+        "open_nodes is zero",
+        "lower_bound_valid is true",
+        "route incumbent, if used, verifies and lies in requested true Gini interval"
+      ],
+      "fields_proving_conditions": [
+        "method",
+        "status",
+        "certificate",
+        "notes: tree_complete=true",
+        "notes: open_nodes=0",
+        "notes: lower_bound_valid=true",
+        "notes: has_integer_incumbent",
+        "verification.feasible",
+        "verification.objective_matches"
+      ],
+      "global_when_statuses": [],
+      "subproblem_complete_statuses": [
+        "gcap_tree_complete",
+        "gcap_interval_bound_complete"
+      ],
+      "example_file": "results/v8_m2_average_gcap_tree15.json"
+    },
+    {
+      "reported_method": "gcap-branch",
+      "aliases": ["one-level fixed-cap Ryan-Foster branch probe"],
+      "solves_original_objective": "no",
+      "solves_only_fixed_gini_cap_min_p": "no; one LP branch level only",
+      "uses_restricted_column_or_path_pool": "restricted LPs with exact pricing closure for root and two children",
+      "status_optimal_scope": "branching diagnostic only",
+      "certificate_conditions": [
+        "root LP closed",
+        "forbid child LP closed",
+        "require child LP closed",
+        "pricing enforces Ryan-Foster restrictions"
+      ],
+      "fields_proving_conditions": [
+        "method",
+        "status=gcap_branch_probe_complete",
+        "certificate",
+        "notes: root_complete=true",
+        "notes: forbid_child_complete=true",
+        "notes: require_child_complete=true"
+      ],
+      "global_when_statuses": [],
+      "example_file": "results/v8_m2_average_gcap_branch.json"
+    },
+    {
+      "reported_method": "master",
+      "aliases": ["restricted path pool", "restricted route-load pool"],
+      "solves_original_objective": "only over supplied pool",
+      "solves_only_fixed_gini_cap_min_p": "no",
+      "uses_restricted_column_or_path_pool": "yes; current pool is one-stop pickup columns",
+      "status_optimal_scope": "pool-optimal subproblem only",
+      "certificate_conditions": [
+        "exact integer master over supplied pool exhausts",
+        "selected route verifies",
+        "global only if supplied pool is proven to be all feasible route-load columns"
+      ],
+      "fields_proving_conditions": [
+        "method",
+        "status=restricted_master_complete",
+        "certificate",
+        "columns",
+        "notes: one_stop_pickup_columns",
+        "verification.feasible",
+        "verification.objective_matches"
+      ],
+      "global_when_statuses": [],
+      "example_file": "results/v8_m2_average_master_diag.json"
+    },
+    {
+      "reported_method": "cg",
+      "aliases": ["restricted diagnostic column generation"],
+      "solves_original_objective": "no",
+      "solves_only_fixed_gini_cap_min_p": "no",
+      "uses_restricted_column_or_path_pool": "restricted diagnostic LP, closed by exact pricing for that diagnostic model",
+      "status_optimal_scope": "coverage LP diagnostic only",
+      "certificate_conditions": [
+        "required-pair coverage LP solved",
+        "exact pricing proves no negative reduced-cost diagnostic column"
+      ],
+      "fields_proving_conditions": [
+        "method",
+        "status=cg_root_complete",
+        "certificate",
+        "notes: required_pair",
+        "notes: best_pricing_reduced_cost"
+      ],
+      "global_when_statuses": [],
+      "example_file": "results/v8_m2_average_cg_diag.json"
+    },
+    {
+      "reported_method": "pricing",
+      "aliases": ["one-vehicle route-load pricing diagnostic"],
+      "solves_original_objective": "no",
+      "solves_only_fixed_gini_cap_min_p": "no",
+      "uses_restricted_column_or_path_pool": "single-column oracle",
+      "status_optimal_scope": "pricing subproblem only",
+      "certificate_conditions": [
+        "pricing enumeration/DP completes for each vehicle"
+      ],
+      "fields_proving_conditions": [
+        "method",
+        "status=pricing_complete",
+        "certificate",
+        "notes: pricing_complete=true",
+        "notes: best_reduced_cost"
+      ],
+      "global_when_statuses": [],
+      "example_file": "results/v8_m2_average_pricing_diag.json"
+    },
+    {
+      "reported_method": "pricing-branch",
+      "aliases": ["restricted Ryan-Foster pricing diagnostic"],
+      "solves_original_objective": "no",
+      "solves_only_fixed_gini_cap_min_p": "no",
+      "uses_restricted_column_or_path_pool": "single-column oracle under branch restrictions",
+      "status_optimal_scope": "pricing restriction diagnostic only",
+      "certificate_conditions": [
+        "require-together pricing completes",
+        "forbid-together pricing completes",
+        "returned columns satisfy child restrictions"
+      ],
+      "fields_proving_conditions": [
+        "method",
+        "status=restricted_pricing_complete",
+        "notes: require_together complete=true",
+        "notes: forbid_together complete=true",
+        "notes: contains_both",
+        "notes: contains_exactly_one"
+      ],
+      "global_when_statuses": [],
+      "example_file": "results/v8_m2_average_pricing_branch_diag.json"
+    },
+    {
+      "reported_method": "cuts",
+      "aliases": ["3-subset-row cut separator diagnostic"],
+      "solves_original_objective": "no",
+      "solves_only_fixed_gini_cap_min_p": "no",
+      "uses_restricted_column_or_path_pool": "diagnostic fractional column pool",
+      "status_optimal_scope": "separator test only",
+      "certificate_conditions": [
+        "violated cut found in diagnostic pool"
+      ],
+      "fields_proving_conditions": [
+        "method",
+        "status=cuts_diagnostic_complete",
+        "certificate",
+        "cuts_added",
+        "notes: lhs",
+        "notes: rhs",
+        "notes: violation"
+      ],
+      "global_when_statuses": [],
+      "example_file": "results/v8_m2_average_cuts_diag.json"
+    },
+    {
+      "reported_method": "branching",
+      "aliases": ["Ryan-Foster branching diagnostic"],
+      "solves_original_objective": "no",
+      "solves_only_fixed_gini_cap_min_p": "no",
+      "uses_restricted_column_or_path_pool": "diagnostic fractional pair-column pool",
+      "status_optimal_scope": "branching scanner diagnostic only",
+      "certificate_conditions": [
+        "fractional co-route pair found"
+      ],
+      "fields_proving_conditions": [
+        "method",
+        "status=branching_diagnostic_complete",
+        "certificate",
+        "notes: candidate pair",
+        "notes: together_value"
+      ],
+      "global_when_statuses": [],
+      "example_file": "results/v8_m2_average_branching_diag.json"
+    },
+    {
+      "reported_method": "tailored route-load enumeration",
+      "aliases": ["full materialized route-load enumeration"],
+      "solves_original_objective": "yes if enumeration and exact master complete",
+      "solves_only_fixed_gini_cap_min_p": "no",
+      "uses_restricted_column_or_path_pool": "no if all feasible columns are enumerated; current route-enum artifacts did not complete",
+      "status_optimal_scope": "global only after complete enumeration plus exact master",
+      "certificate_conditions": [
+        "all feasible route-load columns generated",
+        "exact station-disjoint master exhausted",
+        "verification passes"
+      ],
+      "fields_proving_conditions": [
+        "method=tailored",
+        "status=optimal",
+        "certificate: all feasible route-load columns were enumerated",
+        "lower_bound",
+        "upper_bound",
+        "gap",
+        "verification"
+      ],
+      "global_when_statuses": [],
+      "current_non_certificate_example": {
+        "file": "results/v8_m1_low_route_enum10.json",
+        "status": "time_limit",
+        "certificate": "not certified; route-load enumeration did not complete"
+      }
+    }
+  ],
+  "compare_v10_m2_average_csv_audit": {
+    "file": "results/compare_v10_m2_average.csv",
+    "row_instance": "test_data_V10_M2_average.txt",
+    "tailored_status": "optimal",
+    "tailored_obj": 0.463263009179,
+    "tailored_lb": 0.463263009179,
+    "tailored_ub": 0.463263009179,
+    "tailored_gap": 0,
+    "tailored_time": 55.7656322,
+    "cplex_status": "not_certified",
+    "cplex_obj": 0.463263009179,
+    "cplex_lb": 0.43857303364,
+    "cplex_ub": 0.463263009179,
+    "cplex_gap": 0.0532958061622,
+    "cplex_time": 120.1606405,
+    "speedup_column": 2.15474362541,
+    "speedup_interpretation": "Do not call this a certified-optimal speedup because the CPLEX baseline did not close.",
+    "required_wording": "tailored certified within 55.77s, CPLEX did not certify within 120.16s",
+    "reason": "The plain CPLEX run has cplex_status=not_certified, cplex_lb < cplex_ub, and cplex_gap > 0 even though it found the same incumbent objective."
+  },
+  "reporting_rules": [
+    "verification.feasible and verification.objective_matches prove route feasibility and objective recomputation, not global optimality by themselves.",
+    "Global original-problem optimality also requires method-scope closure.",
+    "gap=0 in diagnostic methods is subproblem gap unless the certificate text explicitly closes the original problem.",
+    "A restricted-pool master is global only if the pool is proven to contain all feasible route-load columns.",
+    "A CPLEX incumbent equal to the tailored incumbent is not a certificate unless CPLEX also closes its lower bound."
+  ]
+}

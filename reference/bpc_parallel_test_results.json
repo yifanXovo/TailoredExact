@@ -1,0 +1,84 @@
+{
+  "wall_time": 9.834806442260742,
+  "processes": 6,
+  "results": [
+    {
+      "instance": "regen_candidate_V12_M1_average.txt",
+      "time": 9.58382773399353,
+      "lp_certified": true,
+      "lp_bound": 0.5849573972412538,
+      "ncols": 1049,
+      "milp_fun": 0.7885669914340822,
+      "sol_G": 0.3511939553588851,
+      "sol_P": 0.7885669914340823,
+      "sol_obj": 0.46947900407399745,
+      "iters": 7,
+      "last_rc": -5.551115123125783e-17
+    },
+    {
+      "instance": "regen_candidate_V12_M1_high.txt",
+      "time": 3.9200263023376465,
+      "lp_certified": true,
+      "lp_bound": 2.0527370376145204,
+      "ncols": 1019,
+      "milp_fun": 2.112653830616283,
+      "sol_G": 0.29217099624045456,
+      "sol_P": 2.112653830616283,
+      "sol_obj": 0.609069070832897,
+      "iters": 3,
+      "last_rc": 1.4988010832439613e-15
+    },
+    {
+      "instance": "regen_candidate_V12_M1_low.txt",
+      "time": 5.786781311035156,
+      "lp_certified": true,
+      "lp_bound": 4.810122537575649,
+      "ncols": 959,
+      "milp_fun": 5.496918143197081,
+      "sol_G": 0.4842689012882033,
+      "sol_P": 5.49691814319708,
+      "sol_obj": 1.3088066227677653,
+      "iters": 5,
+      "last_rc": 0.0
+    },
+    {
+      "instance": "regen_candidate_V12_M2_average.txt",
+      "time": 5.545311212539673,
+      "lp_certified": false,
+      "lp_bound": 1.4819962666778008,
+      "ncols": 1071,
+      "milp_fun": 1.4819962666778008,
+      "sol_G": 0.6696860120007815,
+      "sol_P": 1.4819962666778008,
+      "sol_obj": 0.8919854520024516,
+      "iters": 4,
+      "last_rc": -0.23094538886295557
+    },
+    {
+      "instance": "regen_candidate_V12_M2_high.txt",
+      "time": 3.2961652278900146,
+      "lp_certified": false,
+      "lp_bound": 1.955086483749755,
+      "ncols": 1065,
+      "milp_fun": 1.9634149376174155,
+      "sol_G": 0.2909883505721453,
+      "sol_P": 1.9634149376174157,
+      "sol_obj": 0.5855005912147576,
+      "iters": 2,
+      "last_rc": -0.12656137461678288
+    },
+    {
+      "instance": "regen_candidate_V12_M2_low.txt",
+      "time": 1.1035897731781006,
+      "lp_certified": false,
+      "lp_bound": 2.70510352328722,
+      "ncols": 979,
+      "milp_fun": 2.81474402328722,
+      "sol_G": 0.4085310529235575,
+      "sol_P": 2.81474402328722,
+      "sol_obj": 0.8307426564166405,
+      "iters": 2,
+      "last_rc": -0.7826086956521737
+    }
+  ]
+}

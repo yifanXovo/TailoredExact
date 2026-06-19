@@ -1,0 +1,123 @@
+{
+  "settings": {
+    "lambda": 0.15,
+    "T_seconds": 3600,
+    "unit_pick_time": 60,
+    "unit_drop_time": 60,
+    "solver_available_in_container": "scipy.optimize.milp / HiGHS 1.8.0",
+    "date": "2026-06-05"
+  },
+  "global_certified_result": {
+    "instance": "regen_candidate_V12_M1_average.txt",
+    "method": "strengthened arc MILP with operation-time simplification, TSP subset cuts, McCormick strengthening, and binary-expansion Gini product",
+    "status": "certified optimal",
+    "objective": 0.35720058320841447,
+    "G": 0.21762853996949363,
+    "P": 0.9304802882594791,
+    "time_seconds": 416.044490814209,
+    "route": [7, 10, 11, 6, 4],
+    "final_inventory": [47, 56, 36, 17, 50, 7, 15, 35, 42, 21, 14, 20]
+  },
+  "gini_cap_subproblem_tests": [
+    {
+      "instance": "regen_candidate_V12_M1_average.txt",
+      "cap": 0.3276230447307701,
+      "cap_type": "no-op Gini cap",
+      "status": "certified optimum of min P subject to G <= cap",
+      "time_seconds": 9.983072519302368,
+      "Pstar": 0.6383230275451934,
+      "G_returned": 0.30200037952962994,
+      "objective_of_returned_solution": 0.39774883366140895,
+      "nodes": 219
+    },
+    {
+      "instance": "regen_candidate_V12_M1_high.txt",
+      "cap": 0.31907488891979136,
+      "cap_type": "no-op Gini cap",
+      "status": "certified optimum of min P subject to G <= cap",
+      "time_seconds": 1.7531650066375732,
+      "Pstar": 2.0723374873573914,
+      "G_returned": 0.26783309022764185,
+      "objective_of_returned_solution": 0.5786837133312506,
+      "nodes": 3
+    },
+    {
+      "instance": "regen_candidate_V12_M1_low.txt",
+      "cap": 0.46871724143166366,
+      "cap_type": "no-op Gini cap",
+      "status": "certified optimum of min P subject to G <= cap",
+      "time_seconds": 1.2362701892852783,
+      "Pstar": 4.904325436126375,
+      "G_returned": 0.4419983742152185,
+      "objective_of_returned_solution": 1.1776471896341745,
+      "nodes": 1
+    },
+    {
+      "instance": "regen_candidate_V12_M2_average.txt",
+      "cap": 0.6705956211661819,
+      "cap_type": "no-op Gini cap",
+      "status": "certified optimum of min P subject to G <= cap",
+      "time_seconds": 12.424116611480713,
+      "Pstar": 1.4216705900123179,
+      "G_returned": 0.6383838763095426,
+      "objective_of_returned_solution": 0.8516344648113968,
+      "nodes": 31
+    },
+    {
+      "instance": "regen_candidate_V12_M2_high.txt",
+      "cap": 0.3083103613538152,
+      "cap_type": "no-op Gini cap; subset cuts disabled for this run because the subset-cut variant stalled in this environment",
+      "status": "certified optimum of min P subject to G <= cap",
+      "time_seconds": 6.996433973312378,
+      "Pstar": 1.9011007889687672,
+      "G_returned": 0.3063945528664621,
+      "objective_of_returned_solution": 0.5915596712117772,
+      "nodes": 273
+    },
+    {
+      "instance": "regen_candidate_V12_M2_low.txt",
+      "cap": 0.4025580557218825,
+      "cap_type": "no-op Gini cap; subset cuts disabled for this run",
+      "status": "certified optimum of min P subject to G <= cap",
+      "time_seconds": 6.855034351348877,
+      "Pstar": 2.4007558414690386,
+      "G_returned": 0.3939270020874869,
+      "objective_of_returned_solution": 0.7540403783078427,
+      "nodes": 611
+    }
+  ],
+  "frontier_tests_on_V12_M1_average": [
+    {"cap": 0.49369605, "time_seconds": 2.82, "Pstar": 0.6383230275451934, "G_returned": 0.30200037952962994, "objective": 0.39774883366140895, "status": "certified cap subproblem"},
+    {"cap": 0.30200037, "time_seconds": 7.78, "Pstar": 0.6394721525451934, "G_returned": 0.2983406185689927, "objective": 0.3942614414507717, "status": "certified cap subproblem"},
+    {"cap": 0.28610360, "time_seconds": 8.32, "Pstar": 0.6538361025451934, "G_returned": 0.28498148128218875, "objective": 0.38305689666396775, "status": "certified cap subproblem"},
+    {"cap": 0.24981729, "time_seconds": 14.71, "Pstar": 0.7813850846880506, "G_returned": 0.24945570180196291, "objective": 0.3666634645051705, "status": "certified cap subproblem"},
+    {"cap": 0.22, "time_seconds": ">120", "status": "not certified in time; region contains known optimum"}
+  ],
+  "new_attempts_after_literature_review": [
+    {
+      "name": "CCBI exact objective reformulation",
+      "description": "Charnes-Cooper-style scaling with t=1/S and binary-continuous products t*y_i, making the Gini term linear in scaled ratios while keeping P unscaled.",
+      "exactness": "exact if solved to zero MIP gap",
+      "observed_result": "On V12_M1_average, HiGHS did not certify within the run; after about 26.9 s the incumbent was 0.3745467773 and the lower bound was about 0.2802841398; the run later exceeded the interactive timeout without certificate. This was worse than the strengthened MILP."
+    },
+    {
+      "name": "Two-dimensional G-P box branch-and-cut",
+      "description": "Partition the (G,P) plane. For fixed boxes, G lower/upper bounds become linear inequalities V*g_lo*S <= H <= V*g_hi*S and P bounds are linear. Prune boxes by g_lo + lambda*p_lo.",
+      "exactness": "exact up to tolerance if all boxes are fathomed and each feasibility MILP is solved to certificate",
+      "observed_result": "On V12_M1_average with the known incumbent 0.3572005832, a 20.9 s run improved the valid lower bound to 0.3116565011 but did not close the certificate. Some sub-box infeasibility proofs became hard."
+    },
+    {
+      "name": "Route-relaxed master with route-load oracle",
+      "description": "Drop arc/load variables from the master and check incumbents by an exact DP route-load oracle.",
+      "exactness": "exact only if all invalid incumbent patterns are separated by valid cuts",
+      "observed_result": "The small master is attractive, but simple no-good cuts were too weak. Strong lifted resource-route cuts or a true branch-price-and-cut implementation are still needed."
+    }
+  ],
+  "requirements_status": {
+    "exact_global_solution": "partially met: one uploaded instance certified; all new reformulations are exact in principle but not all completed",
+    "small_network_under_100_seconds_multiple_samples": "not met for full original objective; met only for Gini-cap subproblems",
+    "no_sample_specific_patch": "met in model design; all tests use the same formulations and parameters except disabling subset cuts in two cap-subproblem runs due solver stalling",
+    "comparable_to_tailored_BRP_exact_literature": "directionally aligned, but current implementation is not yet strong enough",
+    "complexity_statement": "finite but exponential; DP route oracle is O(2^s s^2 Q) for s served stations in the elementary exact version"
+  }
+}

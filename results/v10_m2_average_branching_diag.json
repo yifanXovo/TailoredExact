@@ -1,0 +1,23 @@
+{
+  "instance_name": "test_data_V10_M2_average.txt",
+  "input_path": "E:\\codes\\Hybrid GA\\testdata\\Smallnetwork2\\test_data_V10_M2_average.txt",
+  "method": "branching",
+  "status": "branching_diagnostic_complete",
+  "certificate": "Ryan-Foster scanner found a fractional co-route pair; child branches are sum_together=0 and sum_together=1. This is a branching diagnostic, not an EBRP optimality certificate.",
+  "objective": 0.77459416785,
+  "G": 0.5811504205,
+  "P": 1.28962498233,
+  "lower_bound": 0.77459416785,
+  "upper_bound": 0.77459416785,
+  "gap": 0,
+  "runtime_seconds": 4.02e-05,
+  "nodes": 45,
+  "columns": 2,
+  "pricing_calls": 0,
+  "cuts_added": 0,
+  "final_inventories": [50000, 8, 67, 18, 23, 56, 71, 50, 20, 1, 22],
+  "routes": [{"vehicle": 0, "nodes": [0, 0], "operations": []}, {"vehicle": 1, "nodes": [0, 0], "operations": []}],
+  "station_operations": [],
+  "verification": {"feasible": true, "routes_start_end_depot": true, "station_disjoint": true, "load_feasible": true, "station_feasible": true, "duration_feasible": true, "objective_matches": true, "route_travel_time": [0, 0], "route_operation_time": [0, 0], "route_duration": [0, 0], "final_inventories": [50000, 8, 67, 18, 23, 56, 71, 50, 20, 1, 22], "G": 0.5811504205, "P": 1.28962498233, "objective": 0.77459416785, "errors": []},
+  "notes": ["parsed Hybrid GA text format; legacy weights with max 10 scaled by 0.1 to match Hybrid GA parser; distances rebuilt from points at speed factor 1.5", "Ryan-Foster diagnostic builds feasible pair columns and selects a fractional co-route station pair.", "diagnostic triple=(1,2,3), z=0.5 on columns {1,2} and {1,3}", "candidate pair=(1,2), together_value=0.5, fractional_score=0.5, together_columns=1, branches: together=0 / together=1"]
+}

@@ -1,0 +1,99 @@
+{
+  "status": "unresolved",
+  "gcap": 0.32762304,
+  "time": 16.265932083129883,
+  "processed_nodes": 3,
+  "active_nodes": 4,
+  "pruned": 0,
+  "unresolved": 0,
+  "ncols": 1053,
+  "bestP": 0.7925888164340823,
+  "best_solution": {
+    "selected_indices": [
+      1043
+    ],
+    "routes": [
+      [
+        9,
+        12
+      ]
+    ],
+    "q_vectors": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        25,
+        0,
+        0,
+        -25
+      ]
+    ],
+    "y": [
+      47,
+      56,
+      36,
+      5,
+      50,
+      5,
+      29,
+      35,
+      17,
+      28,
+      7,
+      45
+    ],
+    "G": 0.3252747167468644,
+    "P": 0.7925888164340823,
+    "obj": 0.44416303921197675,
+    "S": 15.162490996033917,
+    "H": 59.183699566941776,
+    "z_fractional": [],
+    "cap_slack": 0.0
+  },
+  "node_logs": [
+    {
+      "node": 0,
+      "depth": 0,
+      "status": "ok",
+      "time": 7.005029678344727,
+      "ncols": 1049,
+      "children": 2,
+      "lp_obj": 0.5849573972412538,
+      "cap_slack": 0.0,
+      "lp_certified": true,
+      "rmp_milp_P": 0.7925888164340823,
+      "rmp_milp_status": 0,
+      "branch": "y_10 <= 24 / >= 25"
+    },
+    {
+      "node": 2,
+      "depth": 1,
+      "status": "ok",
+      "time": 3.03525710105896,
+      "ncols": 1050,
+      "children": 2,
+      "lp_obj": 0.5850026750654412,
+      "cap_slack": 0.0,
+      "lp_certified": true,
+      "branch": "y_5 <= 49 / >= 50"
+    },
+    {
+      "node": 4,
+      "depth": 2,
+      "status": "ok",
+      "time": 6.134843826293945,
+      "ncols": 1053,
+      "children": 2,
+      "lp_obj": 0.5854389868380734,
+      "cap_slack": 0.0,
+      "lp_certified": true,
+      "branch": "y_1 <= 46 / >= 47"
+    }
+  ]
+}

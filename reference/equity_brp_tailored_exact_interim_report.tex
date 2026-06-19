@@ -1,0 +1,318 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,longtable,array}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{xcolor}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Remark}
+
+\title{Interim Algorithm Report: Tailored Exact Methods for the Equity-Aware Bike Repositioning Problem}
+\author{Prepared for algorithm-development discussion}
+\date{June 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This report documents the current exact-method design attempts for the Equity-aware Bike Repositioning Problem in station-based bike-sharing systems.  The goal was to obtain certified global optima for small and medium instances, ideally within approximately one hundred seconds on the uploaded test instances.  Several exact reformulations were developed and tested: a strengthened arc-flow MILP, a Gini-cap frontier reformulation, a Charnes--Cooper binary-inventory scaling formulation, a two-dimensional $(G,P)$ box branch-and-cut scheme, and a route-load oracle master.  The strongest certified global result so far is one uploaded instance, \texttt{V12\_M1\_average}, solved to zero MIP gap in 416.04 seconds.  The Gini-cap formulation solves several exact subproblems across all six uploaded instances within 1.24--12.42 seconds, but these are not certificates for the original weighted objective.  The new reformulations are exact in principle, but the present implementation does \emph{not} yet satisfy the target requirement of solving multiple full weighted-objective instances within one hundred seconds.  The most promising next step is a true Gini-frontier route-load branch-price-and-cut method with exact pricing and resource-route cuts.
+\end{abstract}
+
+\section{Problem setting}
+
+Let $N=\{1,\ldots,V\}$ be the set of stations and let node $0$ be the depot.  Station $i$ has capacity $C_i$, initial inventory $Y_i^0$, target inventory $Y_i^T>0$, and penalty weight $w_i$.  A fleet $K=\{1,\ldots,M\}$ of identical or nearly identical trucks is available.  Truck $k$ has capacity $Q_k$, starts empty at the depot, visits a simple sequence of stations, and returns to the depot.  A station is visited by at most one truck.  At a visited station, a truck either picks up $p_{ki}\in\mathbb{Z}_+$ bicycles or drops off $d_{ki}\in\mathbb{Z}_+$ bicycles, but not both.  Truck load must remain in $[0,Q_k]$ after every station service.  The final station inventory is
+\begin{equation}
+    Y_i = Y_i^0 - \sum_{k\in K}p_{ki} + \sum_{k\in K}d_{ki},
+    \qquad 0\le Y_i\le C_i.
+\end{equation}
+Let
+\begin{equation}
+    r_i = \frac{Y_i}{Y_i^T}, \qquad
+    S(r)=\sum_{i\in N} r_i, \qquad
+    H(r)=\sum_{1\le i<j\le V}|r_i-r_j|.
+\end{equation}
+The Gini coefficient is
+\begin{equation}
+    G(r)=\frac{H(r)}{V S(r)},
+\end{equation}
+where the pairwise numerator uses $i<j$; equivalently, it equals the usual double-sum definition divided by $2VS(r)$.  The weighted satisfaction penalty is
+\begin{equation}
+    P(r)=\sum_{i\in N}w_i |r_i-1|.
+\end{equation}
+The original objective is
+\begin{equation}
+    \min \quad F(r)=G(r)+\lambda P(r).
+\end{equation}
+Each truck route must satisfy
+\begin{equation}
+    \text{travel time} + \text{station pickup time} + \text{station drop-off time} + \text{depot unloading time} \le T.
+\end{equation}
+
+\section{Important structural lemmas}
+
+\begin{lemma}[Operation-time simplification]
+Suppose each truck starts empty and any bicycles remaining on the truck after the last station are unloaded at the depot.  Let $P_k=\sum_i p_{ki}$ and $D_k=\sum_i d_{ki}$.  Feasibility implies $P_k\ge D_k$.  If the depot unloading time per bicycle is the same as the station drop-off time $\tau_d$, then the total handling time of truck $k$ is
+\begin{equation}
+    \tau_p P_k + \tau_dD_k + \tau_d(P_k-D_k)
+    = (\tau_p+\tau_d)P_k.
+\end{equation}
+In the uploaded experiments, $\tau_p=\tau_d=60$ seconds, hence handling time is $120P_k$ seconds.
+\end{lemma}
+
+\begin{proof}
+The truck starts empty, so every bicycle dropped either at a station or at the depot must first have been picked up at some station.  The number unloaded at the depot is the final load $P_k-D_k$.  Substituting this quantity into the total handling-time expression gives the stated equality.
+\end{proof}
+
+\begin{lemma}[Linear Gini cap]
+For any fixed scalar $\gamma\ge0$, the inequality $G(r)\le \gamma$ is equivalent to
+\begin{equation}
+    H(r) \le V\gamma S(r),
+\end{equation}
+provided $S(r)>0$.
+\end{lemma}
+
+\begin{proof}
+By definition $G(r)=H(r)/(VS(r))$.  Since $S(r)>0$, multiplying both sides by $VS(r)$ preserves the inequality.
+\end{proof}
+
+\begin{lemma}[Linear Gini interval]
+For fixed constants $0\le \gamma^-\le\gamma^+$, the interval constraint $\gamma^-\le G(r)\le\gamma^+$ is represented by two linear inequalities,
+\begin{equation}
+    V\gamma^- S(r) \le H(r) \le V\gamma^+ S(r).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Apply the previous lemma to the upper bound and apply the same multiplication to $G(r)\ge\gamma^-$.
+\end{proof}
+
+\begin{lemma}[Scaled-ratio Gini identity]
+Let $t=1/S(r)$ and $u_i=t r_i$.  Then $\sum_i u_i=1$ and
+\begin{equation}
+    G(r)=\frac{1}{V}\sum_{1\le i<j\le V}|u_i-u_j|.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Because $t=1/S(r)$, $\sum_i u_i=t\sum_i r_i=1$.  Moreover, $|u_i-u_j|=t|r_i-r_j|$.  Therefore
+\begin{equation}
+    \frac{1}{V}\sum_{i<j}|u_i-u_j| = \frac{tH(r)}{V}=\frac{H(r)}{VS(r)}=G(r).
+\end{equation}
+\end{proof}
+
+\section{Strengthened exact arc-flow model}
+
+The first exact implementation kept the original arc-flow structure but added the operation-time simplification and subset route-duration cuts.  Let $z_{ki}$ indicate whether truck $k$ visits station $i$.  For a station subset $A\subseteq N$, let $L(A)$ be the shortest depot-closed TSP travel time that visits all stations in $A$.  For $V\le 16$, all $L(A)$ values can be precomputed by Held--Karp dynamic programming.  The following valid inequality was added for each truck $k$ and each subset $A$:
+\begin{equation}
+    (\tau_p+\tau_d)\sum_{i\in A}p_{ki} + L(A)
+    \le T + M_A\left(|A|-\sum_{i\in A}z_{ki}\right).
+\end{equation}
+If all stations in $A$ are assigned to truck $k$, the inequality enforces that the operation time on those stations plus a travel lower bound cannot exceed $T$.
+
+The strengthened model still uses the original binary expansion of the final inventories to linearize the product between the Gini variable and final-inventory variables.  It is exact, but the root relaxation remains weak in the low-Gini region.
+
+\section{Gini-cap frontier reformulation}
+
+The strongest modeling improvement found so far is to replace the original weighted objective temporarily by a family of exact Gini-cap subproblems.  For a fixed cap $\gamma$, solve
+\begin{align}
+    P^*(\gamma)=\min \quad & P(r) \\
+    \text{s.t.}\quad & \text{all route, load, inventory, and station-disjointness constraints},\\
+    & H(r)\le V\gamma S(r).
+\end{align}
+Each fixed-cap subproblem is a MILP with a linear objective and a linear Gini cap.  It avoids the binary expansion of $G\cdot Y_i$ used in the original formulation.
+
+\paragraph{Certificate use.}
+If $P^*(\gamma)$ is certified, then every feasible solution with $G\le \gamma$ has $P\ge P^*(\gamma)$.  Hence the lower bound over the interval $G\in[\underline{g},\gamma]$ is
+\begin{equation}
+    \underline{g}+\lambda P^*(\gamma).
+\end{equation}
+This is useful inside a frontier or box branch-and-cut procedure, but by itself it is not sufficient to optimize $G+\lambda P$ globally unless the entire Gini range is covered or fathomed.
+
+\section{Two-dimensional $(G,P)$ box branch-and-cut}
+
+A second exact direction partitions the objective space.  A box $B=[g^-,g^+]\times[p^-,p^+]$ is represented by the linear constraints
+\begin{equation}
+    Vg^-S(r)\le H(r)\le Vg^+S(r),
+    \qquad
+    p^-\le P(r)\le p^+.
+\end{equation}
+The box lower bound is
+\begin{equation}
+    \mathrm{LB}(B)=g^-+\lambda p^-.
+\end{equation}
+If $\mathrm{LB}(B)$ is no smaller than the incumbent objective, the box is fathomed.  If the box MILP is infeasible, the box is fathomed.  Otherwise, a feasible solution is extracted and the box is split.
+
+\paragraph{Theoretical exactness.}
+This method is exact up to a chosen tolerance if all boxes with lower bound below the incumbent are either proven infeasible or split until their maximum possible objective improvement is below tolerance.  The weakness is practical: proving infeasibility of some low-Gini/low-penalty boxes can be as difficult as the original problem.
+
+\section{Charnes--Cooper binary-inventory scaling formulation}
+
+The scaled-ratio identity suggests another exact reformulation.  Introduce $t=1/S(r)$ and $u_i=t r_i$.  Since $r_i=Y_i/Y_i^T$, we need $u_i=tY_i/Y_i^T$.  Because $Y_i$ is integer, write
+\begin{equation}
+    Y_i=\sum_{b\in B_i}2^b \beta_{ib}, \qquad \beta_{ib}\in\{0,1\}.
+\end{equation}
+Introduce $v_{ib}=t\beta_{ib}$ and impose the exact binary-continuous McCormick constraints using valid bounds $\underline{t}\le t\le\overline{t}$.  Then
+\begin{equation}
+    u_i=\frac{1}{Y_i^T}\sum_{b\in B_i}2^b v_{ib},
+    \qquad \sum_i u_i=1.
+\end{equation}
+The objective becomes linear:
+\begin{equation}
+    \min \quad \frac{1}{V}\sum_{i<j}|u_i-u_j| + \lambda\sum_i w_i|r_i-1|.
+\end{equation}
+This formulation is exact if solved to zero MIP gap.  In the current HiGHS implementation, however, its branch-and-bound performance was worse than the strengthened arc-flow model on the hardest uploaded instance.
+
+\section{Route-load oracle and branch-price direction}
+
+For a fixed operation vector $q_i=p_i-d_i$ on a route, route-load feasibility can be checked exactly by dynamic programming.  Let $D[S,j,\ell]$ be the minimum travel time of a path that starts at the depot, visits station subset $S$, ends at station $j\in S$, and has load $\ell$ immediately after serving $j$.  The transition to an unvisited station $i$ is allowed only if
+\begin{equation}
+    0\le \ell+q_i\le Q.
+\end{equation}
+The route is feasible iff
+\begin{equation}
+    \min_{j\in S,\ell}D[S,j,\ell]+c_{j0}+ (\tau_p+\tau_d)\sum_i \max\{q_i,0\}\le T.
+\end{equation}
+The elementary DP complexity is $O(2^s s^2Q)$ for $s$ served stations.  This is acceptable for small route supports but not for unrestricted large networks.
+
+The route-oracle master tested so far was too weak when only simple no-good cuts were added.  The more promising exact design is a true branch-price-and-cut method in which each column is a complete feasible route-load plan.  Pricing would be an elementary resource-constrained shortest-path problem with onboard load and pickup-time resources.  This design is aligned with the exact BRP literature, but it has not yet been implemented to certificate in the present Python/HiGHS environment.
+
+\section{Computational tests}
+
+All tests below used $\lambda=0.15$, $T=3600$ seconds, $\tau_p=\tau_d=60$ seconds, and the uploaded six $V=12$ instances.  The solver available in the execution environment was \texttt{scipy.optimize.milp} with HiGHS 1.8.0.  The purpose of these tests was to determine whether the new exact formulations could meet the target of certified full-objective optimality within about one hundred seconds on multiple samples.
+
+\subsection{Certified global result obtained so far}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lrrrrr}
+\toprule
+Instance & Method & Status & Time (s) & $G$ & $P$ \\
+\midrule
+V12\_M1\_average & strengthened arc MILP & certified optimal & 416.04 & 0.21762854 & 0.93048029 \\
+\bottomrule
+\end{tabular}
+\caption{Only full weighted-objective global certificate obtained so far in the uploaded test set.  Objective value is $G+0.15P=0.3572005832$.}
+\end{table}
+
+The certified route is
+\begin{equation}
+    0\to 7(+14)\to 10(+7)\to 11(-7)\to 6(-2)\to 4(-12)\to 0.
+\end{equation}
+The final station inventory vector is
+\begin{equation}
+(47,56,36,17,50,7,15,35,42,21,14,20).
+\end{equation}
+The travel time is 993.073 seconds and the handling time is $120\times 21=2520$ seconds, so the route duration is 3513.073 seconds.
+
+\subsection{Gini-cap subproblem tests on all six uploaded instances}
+
+The following table reports exact solutions of the subproblem $\min P(r)$ subject to $G(r)\le\gamma$, where $\gamma$ was set to the no-operation Gini value of the same instance.  These are certified MILP subproblem optima, but they are not global certificates for the original weighted objective.
+
+\begin{longtable}{lrrrrr}
+\toprule
+Instance & $\gamma$ & Time (s) & $P^*(\gamma)$ & Returned $G$ & Returned $G+0.15P$ \\
+\midrule
+V12\_M1\_average & 0.32762304 & 9.98 & 0.63832303 & 0.30200038 & 0.39774883 \\
+V12\_M1\_high    & 0.31907489 & 1.75 & 2.07233749 & 0.26783309 & 0.57868371 \\
+V12\_M1\_low     & 0.46871724 & 1.24 & 4.90432544 & 0.44199837 & 1.17764719 \\
+V12\_M2\_average & 0.67059562 & 12.42 & 1.42167059 & 0.63838388 & 0.85163446 \\
+V12\_M2\_high    & 0.30831036 & 7.00 & 1.90110079 & 0.30639455 & 0.59155967 \\
+V12\_M2\_low     & 0.40255806 & 6.86 & 2.40075584 & 0.39392700 & 0.75404038 \\
+\bottomrule
+\caption{Certified Gini-cap subproblem results.  They show that the Gini-cap reformulation can solve meaningful exact subproblems quickly, but not that the original weighted objective has been optimized globally.}
+\end{longtable}
+
+\subsection{Frontier test on V12\_M1\_average}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rrrrr}
+\toprule
+Gini cap $\gamma$ & Time (s) & $P^*(\gamma)$ & Returned $G$ & Returned objective \\
+\midrule
+0.49369605 & 2.82 & 0.63832303 & 0.30200038 & 0.39774883 \\
+0.30200037 & 7.78 & 0.63947215 & 0.29834062 & 0.39426144 \\
+0.28610360 & 8.32 & 0.65383610 & 0.28498148 & 0.38305690 \\
+0.24981729 & 14.71 & 0.78138508 & 0.24945570 & 0.36666346 \\
+0.22000000 & $>120$ & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\caption{Gini-cap frontier on the hardest tested instance.  The low-Gini region containing the known optimum was not certified quickly.}
+\end{table}
+
+\subsection{Negative results from the newest reformulations}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{CCBI exact objective reformulation.} On \texttt{V12\_M1\_average}, after approximately 26.9 seconds the incumbent was 0.3745467773 and the lower bound was about 0.2802841398.  The run later exceeded the interactive timeout without certificate.  This was not competitive with the strengthened MILP.
+    \item \textbf{$(G,P)$ box branch-and-cut.} On \texttt{V12\_M1\_average}, with the known incumbent 0.3572005832, a 20.9-second run produced a valid lower bound of 0.3116565011 but did not close the gap.  Some infeasibility subproblems in low-Gini/low-penalty boxes became hard.
+    \item \textbf{Route-relaxed master with oracle.} The master without arc variables is much smaller, but naive no-good cuts do not strengthen the relaxation enough.  This direction needs lifted resource-route cuts or full branch-price-and-cut.
+\end{itemize}
+
+\section{Requirement check}
+
+\begin{longtable}{p{0.32\textwidth}p{0.58\textwidth}}
+\toprule
+Requirement & Current status \\
+\midrule
+Exact global method & The formulations are exact in principle, and one uploaded instance has been certified.  Multiple-instance full-objective certification has not yet been achieved. \\
+Small-network runtime $\le$ about 100 seconds on multiple samples & Not met for the original weighted objective.  Met only for Gini-cap subproblems, which are auxiliary exact subproblems. \\
+No sample-specific patching & Mostly met.  The same formulations and parameters were used.  Two cap-subproblem tests disabled subset cuts because the subset-cut variant stalled in the available solver; this is a solver-performance switch, not an instance-specific mathematical patch. \\
+Comparable to tailored exact BRP literature & Directionally aligned: decomposition, resource-route cuts, route-load oracle, and branch-price structure are consistent with tailored BRP exact methods.  Current Python/HiGHS implementation is not yet competitive enough. \\
+Complexity statement & All methods are finite but exponential in the worst case.  The exact route-load DP oracle is $O(2^s s^2 Q)$ for a route support of size $s$.  The box branch-and-cut has finite convergence under tolerance but may require exponentially many boxes and MILP certificates. \\
+\bottomrule
+\end{longtable}
+
+\section{Recommended next algorithmic step}
+
+The next implementation should not continue to patch the arc-flow model.  The recommended exact framework is a Gini-frontier route-load branch-price-and-cut method:
+\begin{enumerate}[leftmargin=*]
+    \item Use the Gini-cap or $(G,P)$-box representation so that every master subproblem contains only linear Gini inequalities.
+    \item Use a set-packing master over feasible route-load columns.  A column contains a complete route, pickup/drop-off quantities, final inventory changes, travel time, handling time, and station incidence.
+    \item Generate initial columns from the existing HGA-TGBC decoder, because it already provides high-quality feasible route-load plans.
+    \item Use heuristic pricing first, then exact elementary label-setting pricing to prove the absence of negative reduced-cost columns.
+    \item Add subset-row cuts, strong minimum-vehicle/resource cuts, and Lorenz/Gini cuts dynamically.
+    \item Branch on station service, same-route/different-route station pairs, or final inventory intervals, rather than on raw arcs.
+\end{enumerate}
+
+This would be a real tailored exact method rather than a stronger generic MILP.  It is also the most plausible route to $V\le50$ certificates, although worst-case exponential behavior remains unavoidable.
+
+\appendix
+
+\section{Appendix: Exact route-load oracle}
+
+Given a signed operation vector $q_i$ over a station set $R$, define $q_i>0$ as pickup and $q_i<0$ as drop-off.  Let $P(q)=\sum_i\max\{q_i,0\}$.  The oracle computes
+\begin{equation}
+    \mathrm{Travel}^*(q)=\min \left\{c_{0,i_1}+\sum_{a=1}^{s-1}c_{i_a,i_{a+1}}+c_{i_s,0}: (i_1,\ldots,i_s) \text{ is a permutation of } R,\; 0\le\sum_{a=1}^b q_{i_a}\le Q\;\forall b\right\}.
+\end{equation}
+The operation vector is route-load feasible iff
+\begin{equation}
+    \mathrm{Travel}^*(q)+(\tau_p+\tau_d)P(q)\le T.
+\end{equation}
+The DP recurrence is
+\begin{equation}
+    D[\{i\},i,q_i]=c_{0i}\quad \text{if }0\le q_i\le Q,
+\end{equation}
+\begin{equation}
+    D[S\cup\{j\},j,\ell+q_j]
+    =\min\left\{D[S,i,\ell]+c_{ij}: i\in S,\; j\notin S,
+    \;0\le \ell+q_j\le Q\right\}.
+\end{equation}
+The closing cost is $\min_{j,\ell}D[R,j,\ell]+c_{j0}$.
+
+\section{Appendix: Exactness of the CCBI formulation}
+
+The CCBI formulation is exact because $Y_i$ is represented exactly by binary digits, each product $t\beta_{ib}$ is represented exactly by McCormick inequalities for one binary and one bounded continuous variable, and $u_i=tY_i/Y_i^T$ is then linear.  The normalization $\sum_i u_i=1$ enforces $tS(r)=1$.  By the scaled-ratio Gini identity, the Gini term is exactly linear in the absolute differences of $u_i$.  The penalty term remains linear through standard absolute-value inequalities in $r_i$.
+
+\section{Appendix: Exactness of the $(G,P)$ box branch-and-cut}
+
+For any fixed box $B=[g^-,g^+]\times[p^-,p^+]$, all feasible solutions of the original problem whose $(G,P)$ values lie in $B$ satisfy the linear box constraints.  Conversely, any integer solution of the box MILP satisfying route, load, inventory, and box constraints is feasible for the original problem and has $(G,P)\in B$.  Since $F=G+\lambda P$ is increasing in both $G$ and $P$, every solution in $B$ has objective at least $g^-+\lambda p^-$.  Therefore a box can be safely fathomed when this lower bound is no smaller than the incumbent.  Exhaustive partitioning of the initial objective domain gives a finite $\varepsilon$-exact algorithm because the final inventories are integer and the feasible set is finite.
+
+\section{Appendix: Why simple no-good route-oracle cuts were insufficient}
+
+The route-relaxed master can produce inventory patterns that are attractive for the equity objective but infeasible for any load-feasible route within the time limit.  Excluding only the exact incumbent operation vector removes one infeasible point but does not improve the LP relaxation over neighboring operation vectors or the same station set.  A competitive method needs lifted resource-route cuts, such as lower bounds on the minimum load-feasible travel time for classes of signed operation patterns, or must move route-load feasibility into the column-generation pricing problem.
+
+\end{document}

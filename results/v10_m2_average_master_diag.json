@@ -1,0 +1,23 @@
+{
+  "instance_name": "test_data_V10_M2_average.txt",
+  "input_path": "E:\\codes\\Hybrid GA\\testdata\\Smallnetwork2\\test_data_V10_M2_average.txt",
+  "method": "master",
+  "status": "restricted_master_complete",
+  "certificate": "exact integer restricted master solved over the supplied one-stop pickup column pool; this is a pool-optimal certificate, not a full-column global EBRP certificate",
+  "objective": 0.638754695152,
+  "G": 0.479649371016,
+  "P": 1.0607021609,
+  "lower_bound": 0.638754695152,
+  "upper_bound": 0.638754695152,
+  "gap": 0,
+  "runtime_seconds": 0.0122281,
+  "nodes": 34984,
+  "columns": 396,
+  "pricing_calls": 0,
+  "cuts_added": 0,
+  "final_inventories": [50000, 8, 67, 18, 23, 30, 44, 50, 20, 1, 22],
+  "routes": [{"vehicle": 0, "nodes": [0, 6, 0], "operations": [{"station": 6, "pickup": 27, "drop": 0}]}, {"vehicle": 1, "nodes": [0, 5, 0], "operations": [{"station": 5, "pickup": 26, "drop": 0}]}],
+  "station_operations": [{"vehicle": 0, "station": 6, "pickup": 27, "drop": 0}, {"vehicle": 1, "station": 5, "pickup": 26, "drop": 0}],
+  "verification": {"feasible": true, "routes_start_end_depot": true, "station_disjoint": true, "load_feasible": true, "station_feasible": true, "duration_feasible": true, "objective_matches": true, "route_travel_time": [318.381512568, 397.316259591], "route_operation_time": [3240, 3120], "route_duration": [3558.38151257, 3517.31625959], "final_inventories": [50000, 8, 67, 18, 23, 30, 44, 50, 20, 1, 22], "G": 0.479649371016, "P": 1.0607021609, "objective": 0.638754695152, "errors": []},
+  "notes": ["parsed Hybrid GA text format; legacy weights with max 10 scaled by 0.1 to match Hybrid GA parser; distances rebuilt from points at speed factor 1.5", "Restricted master diagnostic solves the exact integer set-packing master over all feasible one-stop pickup columns.", "vehicle 0 one_stop_pickup_columns=198", "vehicle 1 one_stop_pickup_columns=198", "selected_columns_by_vehicle=126,99"]
+}

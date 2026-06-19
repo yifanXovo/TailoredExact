@@ -1,0 +1,23 @@
+{
+  "instance_name": "gcap_smoke_V4_M1.txt",
+  "input_path": "E:\\codes\\ExactEBRP\\testdata\\examples\\gcap_smoke_V4_M1.txt",
+  "method": "gcap-tree",
+  "status": "invalid_gini_interval",
+  "certificate": "--gini-floor must be <= --gini-cap",
+  "objective": 0,
+  "G": 0,
+  "P": 0,
+  "lower_bound": 0,
+  "upper_bound": 0,
+  "gap": 0,
+  "runtime_seconds": 2.64e-05,
+  "nodes": 0,
+  "columns": 0,
+  "pricing_calls": 0,
+  "cuts_added": 0,
+  "final_inventories": [],
+  "routes": [],
+  "station_operations": [],
+  "verification": {"feasible": false, "routes_start_end_depot": false, "station_disjoint": false, "load_feasible": false, "station_feasible": false, "duration_feasible": false, "objective_matches": false, "route_travel_time": [], "route_operation_time": [], "route_duration": [], "final_inventories": [], "G": 0, "P": 0, "objective": 0, "errors": []},
+  "notes": ["parsed Hybrid GA text format; distances read from serialized matrix", "Fixed-Gini-interval branch-price tree diagnostic runs an open-node Ryan-Foster tree with exact pricing at each solved node. Reported lower bound is the valid interval metric gamma_floor+lambda*P.", "using supplied gamma=0.1; empty-solution initial G=0.25", "using supplied gini floor=0.2; interval lower-bound metric is floor+lambda*P"]
+}

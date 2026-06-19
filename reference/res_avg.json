@@ -1,0 +1,81 @@
+{
+  "path": "/mnt/data/regen_candidate_V12_M1_average.txt",
+  "status": 0,
+  "success": true,
+  "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "fun": 0.35720058320841447,
+  "gap": 0.0,
+  "nodes": 23166,
+  "time": 416.044490814209,
+  "theta": [
+    47,
+    56,
+    36,
+    17,
+    50,
+    7,
+    15,
+    35,
+    42,
+    21,
+    14,
+    20
+  ],
+  "routes": [
+    {
+      "ops": [
+        [
+          4,
+          0,
+          12
+        ],
+        [
+          6,
+          0,
+          2
+        ],
+        [
+          7,
+          14,
+          0
+        ],
+        [
+          10,
+          7,
+          0
+        ],
+        [
+          11,
+          0,
+          7
+        ]
+      ],
+      "arcs": [
+        [
+          0,
+          7
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          6
+        ]
+      ]
+    }
+  ]
+}

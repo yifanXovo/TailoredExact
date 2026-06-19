@@ -1,0 +1,23 @@
+{
+  "instance_name": "test_data_V8_M2_average.txt",
+  "input_path": "E:\\codes\\Hybrid GA\\testdata\\Smallnetwork2\\test_data_V8_M2_average.txt",
+  "method": "gcap-frontier",
+  "status": "gcap_frontier_bound_complete",
+  "certificate": "gamma-frontier diagnostic certified every requested interval, but the aggregated lower bound does not prove the incumbent globally optimal",
+  "objective": 0.31908731186,
+  "G": 0.129169959908,
+  "P": 1.26611567968,
+  "lower_bound": 0.283158881228,
+  "upper_bound": 0.31908731186,
+  "gap": 0.112597490707,
+  "runtime_seconds": 130.6828182,
+  "nodes": 172,
+  "columns": 3337,
+  "pricing_calls": 675,
+  "cuts_added": 0,
+  "final_inventories": [50000, 10, 14, 12, 16, 13, 29, 24, 23],
+  "routes": [{"vehicle": 0, "nodes": [0, 4, 2, 3, 5, 0], "operations": [{"station": 4, "pickup": 23, "drop": 0}, {"station": 2, "pickup": 0, "drop": 6}, {"station": 3, "pickup": 0, "drop": 12}, {"station": 5, "pickup": 0, "drop": 5}]}, {"vehicle": 1, "nodes": [0, 7, 6, 0], "operations": [{"station": 7, "pickup": 24, "drop": 0}, {"station": 6, "pickup": 0, "drop": 24}]}],
+  "station_operations": [{"vehicle": 0, "station": 4, "pickup": 23, "drop": 0}, {"vehicle": 0, "station": 2, "pickup": 0, "drop": 6}, {"vehicle": 0, "station": 3, "pickup": 0, "drop": 12}, {"vehicle": 0, "station": 5, "pickup": 0, "drop": 5}, {"vehicle": 1, "station": 7, "pickup": 24, "drop": 0}, {"vehicle": 1, "station": 6, "pickup": 0, "drop": 24}],
+  "verification": {"feasible": true, "routes_start_end_depot": true, "station_disjoint": true, "load_feasible": true, "station_feasible": true, "duration_feasible": true, "objective_matches": true, "route_travel_time": [732.395727591, 625.617335086], "route_operation_time": [2760, 2880], "route_duration": [3492.39572759, 3505.61733509], "final_inventories": [50000, 10, 14, 12, 16, 13, 29, 24, 23], "G": 0.129169959908, "P": 1.26611567968, "objective": 0.31908731186, "errors": []},
+  "notes": ["parsed Hybrid GA text format; legacy weights with max 10 scaled by 0.1 to match Hybrid GA parser; distances rebuilt from points at speed factor 1.5", "Gamma-frontier diagnostic covers Gini intervals with fixed-Gini interval branch-price trees. It reports optimal only if every relevant interval is closed or bound-fathomed and the aggregated lower bound reaches the incumbent.", "frontier CPLEX seed status=optimal, objective=0.319087, G=0.12917, P=1.26612, runtime=4.27309, seed_time_limit=30", "frontier cover range=[0,0.319087], intervals=2, incumbent_objective=0.319087, incumbent_G=0.12917, full_objective_range=true", "interval 0 [0,0.159544] complete=true, lower_bound_valid=true, certified_by_bound=false, has_incumbent=true, lb=0.283159, incumbent_metric=0.283159, incumbent_cutoff=0.319087, nodes=45, columns=753, pricing_calls=152, open_nodes=0", "interval 1 [0.159544,0.319087] complete=false, lower_bound_valid=true, certified_by_bound=true, has_incumbent=true, lb=0.341031, incumbent_metric=0.34599, incumbent_cutoff=0.319087, nodes=127, columns=2584, pricing_calls=523, open_nodes=52", "frontier certification summary: closed_intervals=1, bound_certified_intervals=1, skipped_intervals=0, unresolved_intervals=0, invalid_bound_intervals=0, final_full_objective_range=true"]
+}

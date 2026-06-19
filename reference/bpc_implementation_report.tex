@@ -1,0 +1,160 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,booktabs,algorithm,algpseudocode,geometry}
+\geometry{margin=1in}
+\title{Prototype Branch-Price-and-Cut for the Equity-aware Bike Repositioning Problem}
+\author{Algorithm implementation note}
+\date{\today}
+\begin{document}
+\maketitle
+
+\section{Scope and status}
+This report documents a prototype branch-price-and-cut (BPC) implementation for the fixed-Gini-cap subproblem induced by the equity-aware bike repositioning problem.  The implementation is designed as a route-load column-generation framework.  It replaces arc-flow route variables in the master by feasible route-load columns and solves the pricing problem as an exact compact mixed-integer program.  The current implementation certifies the LP relaxation of fixed-Gini-cap route-load master problems on all six uploaded $V=12$ test instances within seconds.  However, the full branch-price tree for the original weighted objective $G+\lambda P$ is not yet closed.  Therefore, the current prototype is an exact LP-bound and valid-incumbent engine, not yet a complete certified global optimizer for the original objective.
+
+\section{Problem components}
+Let $N=\{1,\ldots,V\}$ be the station set and let node $0$ denote the depot.  Station $i$ has capacity $C_i$, initial inventory $Y_i^0$, target $Y_i^T>0$, and weight $w_i$.  At the end of repositioning, station $i$ has final inventory $Y_i$ and ratio
+\[
+ r_i=\frac{Y_i}{Y_i^T}.
+\]
+The Gini numerator is
+\[
+ H(r)=\sum_{1\le i<j\le V}|r_i-r_j|,
+\]
+and the ratio sum is $S(r)=\sum_i r_i$.  The Gini coefficient is
+\[
+ G(r)=\frac{H(r)}{V S(r)},
+\]
+while the weighted satisfaction penalty is
+\[
+ P(r)=\sum_{i=1}^V w_i |r_i-1|.
+\]
+The original objective is $G(r)+\lambda P(r)$.
+
+\section{Gini-cap reformulation}
+For a fixed cap $\gamma$, the nonlinear Gini constraint becomes linear:
+\[
+ G(r)\le \gamma
+ \quad\Longleftrightarrow\quad
+ H(r)\le V\gamma S(r).
+\]
+The fixed-cap subproblem is
+\[
+ P^*(\gamma)=\min P(r)
+\]
+subject to route-load feasibility and $H(r)\le V\gamma S(r)$.  This removes the product terms that appear when the original fractional Gini objective is linearized directly.
+
+\section{Route-load columns}
+A route-load column $c$ represents one complete feasible vehicle route and all pickup/drop-off quantities on that route.  It contains
+\[
+ c=(R_c,q_c,\Delta_c,a_c),
+\]
+where $R_c$ is the ordered station route, $q_{ic}$ is the signed station operation with $q_{ic}>0$ for pickup and $q_{ic}<0$ for drop-off, $\Delta_{ic}=-q_{ic}$ is the final inventory change, and $a_{ic}=1$ if station $i$ is visited.
+
+A column is feasible if the onboard load $\ell$ satisfies
+\[
+ 0\le \ell\le Q
+\]
+throughout the route, every operated station remains within its capacity, and
+\[
+ \operatorname{travel}(R_c)+(\tau_p+\tau_d)\sum_{i:q_{ic}>0}q_{ic}\le T.
+\]
+The last expression uses the identity
+\[
+ \tau_p P_c+\tau_d D_c+\tau_d(P_c-D_c)=(\tau_p+\tau_d)P_c,
+\]
+where $P_c$ is total pickup and $D_c$ is total drop-off.  This identity holds because vehicles start empty and unload any remaining bicycles at the depot.
+
+\section{Restricted master problem}
+For a column pool $\mathcal C$, the fixed-cap master is
+\begin{align}
+\min\quad & \sum_i w_i e_i \\
+\text{s.t.}\quad
+& \sum_{c\in\mathcal C} z_c \le M,\\
+& \sum_{c\in\mathcal C} a_{ic}z_c\le 1, && i\in N,\\
+& Y_i=Y_i^0+\sum_{c\in\mathcal C}\Delta_{ic}z_c, && i\in N,\\
+& r_i=Y_i/Y_i^T, && i\in N,\\
+& e_i\ge r_i-1,
+\quad e_i\ge 1-r_i, && i\in N,\\
+& h_{ij}\ge r_i-r_j,
+\quad h_{ij}\ge r_j-r_i, && i<j,\\
+& H=\sum_{i<j}h_{ij},
+\quad S=\sum_i r_i,\\
+& H\le V\gamma S,\\
+& z_c\in\{0,1\}. 
+\end{align}
+The LP relaxation is solved during column generation; the restricted integer master provides valid incumbents.
+
+\section{Pricing problem}
+Let $\mu$ be the dual multiplier of the vehicle-count constraint, $\pi_i$ the effective dual multiplier of station-packing constraints, and $\sigma_i$ the dual multiplier of the inventory equation.  The reduced cost of a route-load column is
+\[
+ \bar c_c=-\mu-\sum_i\pi_i a_{ic}+\sum_i\sigma_i\Delta_{ic}.
+\]
+The pricing problem minimizes $\bar c_c$ over all feasible single-vehicle route-load plans.  The prototype solves this pricing problem as a compact exact MILP with route-flow, MTZ subtour-elimination, station operation-mode, load-propagation, and duration constraints.  Pricing is considered certified when the pricing MILP returns an optimal solution with $\bar c_c\ge -\epsilon$.
+
+\begin{algorithm}[h]
+\caption{Fixed-cap route-load column generation}
+\begin{algorithmic}[1]
+\State Generate a small generic seed column pool $\mathcal C$.
+\Repeat
+    \State Solve the LP relaxation of the restricted master over $\mathcal C$.
+    \State Extract duals $(\mu,\pi,\sigma)$.
+    \State Solve the exact route-load pricing MILP.
+    \If{the best reduced cost is negative}
+        \State Add the priced column to $\mathcal C$.
+    \EndIf
+\Until{pricing is certified with no negative reduced-cost column}
+\State Solve the restricted integer master to obtain a valid incumbent.
+\end{algorithmic}
+\end{algorithm}
+
+\section{Branching prototype}
+The prototype branch-price tree branches first on fractional final inventory variables:
+\[
+ Y_i\le \lfloor Y_i^{LP}\rfloor
+ \quad\text{or}\quad
+ Y_i\ge \lceil Y_i^{LP}\rceil.
+\]
+If all final inventories are integral but the route-column variables remain fractional, the prototype branches on station service:
+\[
+ \sum_c a_{ic}z_c=0
+ \quad\text{or}\quad
+ \sum_c a_{ic}z_c=1.
+\]
+This branching is compatible with pricing because forbidden stations can be removed from the pricing MILP, and service lower bounds enter through master duals.  A full production BPC should further add Ryan--Foster same-route/different-route branching and subset-row cuts.
+
+\section{Computational results}
+All tests used $\lambda=0.15$, $T=3600$, and $\tau_p=\tau_d=60$.  The six uploaded instances have $V=12$ and either $M=1$ or $M=2$.  The cap in this preliminary experiment was set to $\min\{1,G(Y^0)+\lambda P(Y^0)\}$ for each instance.
+
+\begin{center}
+\begin{tabular}{lrrrrrr}
+\toprule
+Instance & $M$ & Time(s) & Columns & CG iters & LP bound & RMP $P$ \\
+\midrule
+V12-M1-average & 1 & 8.43 & 1049 & 7 & 0.58496 & 0.78857 \\
+V12-M1-high & 1 & 1.71 & 1019 & 3 & 2.05274 & 2.11265 \\
+V12-M1-low & 1 & 3.04 & 959 & 5 & 4.81012 & 5.49692 \\
+V12-M2-average & 2 & 6.56 & 1075 & 8 & 1.40336 & 1.42998 \\
+V12-M2-high & 2 & 7.28 & 1073 & 10 & 1.88876 & 1.89887 \\
+V12-M2-low & 2 & 6.23 & 987 & 10 & 2.28240 & 2.49527 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+For all six fixed-cap runs, the root LP pricing loop was certified: the final pricing reduced cost was numerically zero.  The restricted integer master solutions are feasible incumbents for the generated column pool, but they are not global integer certificates unless the branch-price tree is closed.
+
+A branch-price probe on V12-M1-average at $\gamma=0.32762304$ processed three nodes in 16.27 seconds.  Each processed node had certified pricing; the tree was not closed, leaving four active nodes.  This confirms that the branch layer is functional but not yet sufficiently strong.
+
+\section{Current bottleneck}
+The root column-generation layer is fast and gives certified LP bounds.  The remaining bottleneck is the integer branch-price tree.  Missing columns with nonnegative root reduced cost can still be needed for the optimal integer solution.  This is the standard branch-price phenomenon and explains why solving only the root-generated restricted integer master is insufficient.
+
+\section{Recommended next upgrades}
+The next implementation should add:
+\begin{enumerate}
+\item Ryan--Foster branching on pairs of stations being on the same route or different routes.
+\item Subset-row cuts in the route-column master.
+\item Strong minimum-vehicle/resource cuts for station subsets.
+\item Lorenz separation to avoid $O(V^2)$ pairwise Gini variables for $V$ closer to 50.
+\item Parallel processing of branch nodes and parallel solution of multiple pricing subproblems.
+\end{enumerate}
+These upgrades target the branch tree rather than the root pricing loop, because the experiments show that root pricing is already fast.
+
+\end{document}

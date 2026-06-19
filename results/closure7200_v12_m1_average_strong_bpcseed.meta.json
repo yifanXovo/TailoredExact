@@ -1,0 +1,11 @@
+{
+    "pid":  73464,
+    "started":  "2026-06-14T22:16:25.7286876+08:00",
+    "exe":  "E:\\codes\\ExactEBRP\\build\\ExactEBRP.exe",
+    "input":  "E:\\codes\\Hybrid GA\\testdata\\Smallnetwork2\\test_data_V12_M1_average.txt",
+    "result":  "results\\closure7200_v12_m1_average_strong_bpcseed.json",
+    "log":  "logs\\closure7200_v12_m1_average_strong_bpcseed.log",
+    "stdout":  "logs\\closure7200_v12_m1_average_strong_bpcseed.stdout.txt",
+    "stderr":  "logs\\closure7200_v12_m1_average_strong_bpcseed.stderr.txt",
+    "argLine":  "--method gcap-frontier --input \"E:\\codes\\Hybrid GA\\testdata\\Smallnetwork2\\test_data_V12_M1_average.txt\" --lambda 0.15 --T 3600 --threads 1 --time-limit 7200 --bpc-workers 4 --pricing-threads 1 --parallel-frontier true --parallel-nodes false --frontier-intervals 24 --frontier-refine-splits 24 --frontier-split-batch 2 --frontier-retry-passes 4 --frontier-retry-nodes 8191 --frontier-retry-reserve 2400 --frontier-final-closure true --frontier-final-nodes 131071 --frontier-relax-seconds 45 --route-mask-max-v 12 --bpc-incumbent strong --bpc-incumbent-seconds 180 --bpc-incumbent-rounds 40 --incumbent-json results\\closure3600_v12_m1_average_strong_bpcseed.json --gcap-warmstart sparse --gcap-pricing-columns 4 --out \"results\\closure7200_v12_m1_average_strong_bpcseed.json\" --log \"logs\\closure7200_v12_m1_average_strong_bpcseed.log\""
+}

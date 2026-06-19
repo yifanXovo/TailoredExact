@@ -1,0 +1,23 @@
+{
+  "instance_name": "gcap_smoke_V4_M1.txt",
+  "input_path": "E:\\codes\\ExactEBRP\\testdata\\examples\\gcap_smoke_V4_M1.txt",
+  "method": "gcap-frontier",
+  "status": "optimal",
+  "certificate": "gamma-frontier certificate: every relevant Gini interval was either closed with exact pricing or fathomed by a valid interval lower bound above the verified incumbent objective",
+  "objective": 0,
+  "G": 0,
+  "P": 0,
+  "lower_bound": 0,
+  "upper_bound": 0,
+  "gap": 0,
+  "runtime_seconds": 1.6963416,
+  "nodes": 13,
+  "columns": 62,
+  "pricing_calls": 43,
+  "cuts_added": 0,
+  "final_inventories": [50000, 5, 5, 5, 5],
+  "routes": [{"vehicle": 0, "nodes": [0, 1, 4, 3, 2, 0], "operations": [{"station": 1, "pickup": 1, "drop": 0}, {"station": 4, "pickup": 0, "drop": 1}, {"station": 3, "pickup": 3, "drop": 0}, {"station": 2, "pickup": 0, "drop": 3}]}],
+  "station_operations": [{"vehicle": 0, "station": 1, "pickup": 1, "drop": 0}, {"vehicle": 0, "station": 4, "pickup": 0, "drop": 1}, {"vehicle": 0, "station": 3, "pickup": 3, "drop": 0}, {"vehicle": 0, "station": 2, "pickup": 0, "drop": 3}],
+  "verification": {"feasible": true, "routes_start_end_depot": true, "station_disjoint": true, "load_feasible": true, "station_feasible": true, "duration_feasible": true, "objective_matches": true, "route_travel_time": [83], "route_operation_time": [480], "route_duration": [563], "final_inventories": [50000, 5, 5, 5, 5], "G": 0, "P": 0, "objective": 0, "errors": []},
+  "notes": ["parsed Hybrid GA text format; distances read from serialized matrix", "Gamma-frontier diagnostic covers Gini intervals with fixed-Gini interval branch-price trees. It reports optimal only if every relevant interval is closed or bound-fathomed and the aggregated lower bound reaches the incumbent.", "frontier cover range=[0,0.49], intervals=1, incumbent_objective=0.49, incumbent_G=0.25, full_objective_range=true", "frontier found improved incumbent in interval 0, objective=0.000000", "interval 0 [0,0.49] complete=true, lower_bound_valid=true, certified_by_bound=true, empty_interval=false, has_incumbent=true, lb=0, incumbent_metric=0, incumbent_cutoff=0, nodes=13, columns=62, pricing_calls=43, cuts_added=0, open_nodes=0", "frontier certification summary: closed_intervals=1, bound_certified_intervals=0, skipped_intervals=0, unresolved_intervals=0, invalid_bound_intervals=0, final_full_objective_range=true"]
+}
