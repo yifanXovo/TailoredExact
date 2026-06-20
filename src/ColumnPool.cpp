@@ -93,13 +93,17 @@ void applyColumnDominance(std::vector<RouteLoadColumn>& columns,
                           ColumnDominanceOptions options,
                           ColumnDominanceStats& stats) {
     const auto start = Clock::now();
-    stats.columns_generated_raw += static_cast<long long>(columns.size());
+    const long long input_count = static_cast<long long>(columns.size());
+    stats.columns_generated_raw += input_count;
+    stats.dominance_input_columns += input_count;
     options = normalizeColumnDominanceOptions(options);
     stats.dominance_mode = columnDominanceModeName(options.mode);
     stats.dominance_exact_safe = options.exact_safe;
 
     if (!options.enabled || columns.size() <= 1) {
-        stats.columns_after_dominance += static_cast<long long>(columns.size());
+        const long long kept_count = static_cast<long long>(columns.size());
+        stats.columns_after_dominance += kept_count;
+        stats.dominance_kept_columns += kept_count;
         stats.dominance_time_seconds +=
             std::chrono::duration<double>(Clock::now() - start).count();
         return;
@@ -122,6 +126,7 @@ void applyColumnDominance(std::vector<RouteLoadColumn>& columns,
                 incumbent = std::move(column);
             }
             ++stats.columns_dominated;
+            ++stats.dominance_removed_candidate_projection;
         }
         columns = std::move(kept);
     } else {
@@ -149,6 +154,7 @@ void applyColumnDominance(std::vector<RouteLoadColumn>& columns,
             for (std::size_t i = 0; i < bucket.size(); ++i) {
                 if (dominated[i]) {
                     ++stats.columns_dominated;
+                    ++stats.dominance_removed_candidate_projection;
                 } else {
                     kept.push_back(std::move(bucket[i]));
                 }
@@ -157,7 +163,10 @@ void applyColumnDominance(std::vector<RouteLoadColumn>& columns,
         columns = std::move(kept);
     }
 
-    stats.columns_after_dominance += static_cast<long long>(columns.size());
+    const long long kept_count = static_cast<long long>(columns.size());
+    stats.columns_after_dominance += kept_count;
+    stats.dominance_kept_columns += kept_count;
+    stats.dominance_removed_columns += std::max(0LL, input_count - kept_count);
     stats.dominance_time_seconds +=
         std::chrono::duration<double>(Clock::now() - start).count();
 }
@@ -171,46 +180,61 @@ std::vector<RouteLoadColumn> filterNewColumnsByDominance(
     options = normalizeColumnDominanceOptions(options);
     stats.dominance_mode = columnDominanceModeName(options.mode);
     stats.dominance_exact_safe = options.exact_safe;
-    stats.columns_generated_raw += static_cast<long long>(candidates.size());
+    const long long input_count = static_cast<long long>(candidates.size());
+    stats.columns_generated_raw += input_count;
+    stats.dominance_input_columns += input_count;
 
     if (!options.enabled || candidates.empty()) {
-        stats.columns_after_dominance += static_cast<long long>(candidates.size());
+        const long long kept_count = static_cast<long long>(candidates.size());
+        stats.columns_after_dominance += kept_count;
+        stats.dominance_kept_columns += kept_count;
         stats.dominance_time_seconds +=
             std::chrono::duration<double>(Clock::now() - start).count();
         return candidates;
     }
 
-    std::vector<RouteLoadColumn> combined;
-    combined.reserve(existing.size() + candidates.size());
-    combined.insert(combined.end(), existing.begin(), existing.end());
-    const std::size_t first_candidate = combined.size();
-    for (RouteLoadColumn& column : candidates) combined.push_back(std::move(column));
+    std::vector<RouteLoadColumn> candidate_frontier = std::move(candidates);
+    ColumnDominanceStats candidate_stats;
+    applyColumnDominance(candidate_frontier, options, candidate_stats);
+    stats.columns_dominated += candidate_stats.columns_dominated;
+    stats.dominance_removed_candidate_projection +=
+        candidate_stats.dominance_removed_candidate_projection;
 
-    ColumnDominanceStats local;
-    local.dominance_mode = stats.dominance_mode;
-    local.dominance_exact_safe = stats.dominance_exact_safe;
-    applyColumnDominance(combined, options, local);
-    stats.columns_dominated += local.columns_dominated;
-    stats.dominance_time_seconds +=
-        std::chrono::duration<double>(Clock::now() - start).count();
+    std::unordered_map<std::string, std::vector<const RouteLoadColumn*>> existing_by_key;
+    existing_by_key.reserve(existing.size());
+    for (const RouteLoadColumn& column : existing) {
+        existing_by_key[projectionKey(column)].push_back(&column);
+    }
 
     std::vector<RouteLoadColumn> filtered;
-    filtered.reserve(candidates.size());
-    for (RouteLoadColumn& column : combined) {
+    filtered.reserve(candidate_frontier.size());
+    for (RouteLoadColumn& column : candidate_frontier) {
         bool from_existing_projection = false;
         const std::string key = projectionKey(column);
-        for (std::size_t i = 0; i < first_candidate; ++i) {
-            if (projectionKey(existing[i]) != key) continue;
-            if (options.mode == ColumnDominanceMode::Exact ||
-                paretoDominates(existing[i], column) ||
-                samePathDependentValues(existing[i], column)) {
-                from_existing_projection = true;
-                break;
+        auto it = existing_by_key.find(key);
+        if (it != existing_by_key.end()) {
+            for (const RouteLoadColumn* existing_column : it->second) {
+                if (options.mode == ColumnDominanceMode::Exact ||
+                    paretoDominates(*existing_column, column) ||
+                    samePathDependentValues(*existing_column, column)) {
+                    from_existing_projection = true;
+                    break;
+                }
             }
         }
-        if (!from_existing_projection) filtered.push_back(std::move(column));
+        if (from_existing_projection) {
+            ++stats.columns_dominated;
+            ++stats.dominance_removed_existing_projection;
+            continue;
+        }
+        filtered.push_back(std::move(column));
     }
-    stats.columns_after_dominance += static_cast<long long>(filtered.size());
+    const long long kept_count = static_cast<long long>(filtered.size());
+    stats.columns_after_dominance += kept_count;
+    stats.dominance_kept_columns += kept_count;
+    stats.dominance_removed_columns += std::max(0LL, input_count - kept_count);
+    stats.dominance_time_seconds +=
+        std::chrono::duration<double>(Clock::now() - start).count();
     return filtered;
 }
 
@@ -219,6 +243,13 @@ void mergeColumnDominanceStats(ColumnDominanceStats& total,
     total.columns_generated_raw += add.columns_generated_raw;
     total.columns_after_dominance += add.columns_after_dominance;
     total.columns_dominated += add.columns_dominated;
+    total.dominance_input_columns += add.dominance_input_columns;
+    total.dominance_kept_columns += add.dominance_kept_columns;
+    total.dominance_removed_columns += add.dominance_removed_columns;
+    total.dominance_removed_existing_projection +=
+        add.dominance_removed_existing_projection;
+    total.dominance_removed_candidate_projection +=
+        add.dominance_removed_candidate_projection;
     total.dominance_time_seconds += add.dominance_time_seconds;
     total.dominance_mode = add.dominance_mode;
     total.dominance_exact_safe = total.dominance_exact_safe && add.dominance_exact_safe;

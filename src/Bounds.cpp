@@ -607,6 +607,70 @@ PenaltyDomainTighteningResult tightenInventoryIntervalsByPenaltyBudget(
     return out;
 }
 
+MovementReachabilityTighteningResult tightenInventoryIntervalsByMovementReachability(
+    const Instance& instance,
+    std::vector<int>& lower_inventory,
+    std::vector<int>& upper_inventory) {
+    const auto start = std::chrono::steady_clock::now();
+    MovementReachabilityTighteningResult out;
+    if (instance.V <= 0) return out;
+    if (static_cast<int>(lower_inventory.size()) <= instance.V ||
+        static_cast<int>(upper_inventory.size()) <= instance.V) {
+        out.warnings.push_back("movement reachability tightening skipped because inventory interval vectors are too short");
+        return out;
+    }
+    const double unit_operation_time = instance.pickup_time + instance.drop_time;
+    if (unit_operation_time <= 1e-12) {
+        out.warnings.push_back("movement reachability tightening skipped because operation time is invalid");
+        return out;
+    }
+
+    const std::vector<std::vector<double>> metric_dist = metricClosure(instance);
+    for (int i = 1; i <= instance.V; ++i) {
+        out.total_domain_width_before +=
+            std::max(0, upper_inventory[i] - lower_inventory[i]);
+        int pickup_reach = 0;
+        int drop_reach = 0;
+        const double rt_lb = metric_dist[0][i] + metric_dist[i][0];
+        for (int k = 0; k < instance.M; ++k) {
+            int move_budget = 0;
+            if (instance.total_time_limit + 1e-9 >= rt_lb) {
+                move_budget = static_cast<int>(
+                    std::floor((instance.total_time_limit - rt_lb) /
+                               unit_operation_time + 1e-9));
+            }
+            const int q = k < static_cast<int>(instance.Q.size()) ? instance.Q[k] : 0;
+            pickup_reach = std::max(
+                pickup_reach,
+                std::min({std::max(0, instance.initial[i]), std::max(0, q),
+                          std::max(0, move_budget)}));
+            drop_reach = std::max(
+                drop_reach,
+                std::min({std::max(0, instance.capacity[i] - instance.initial[i]),
+                          std::max(0, q), std::max(0, move_budget)}));
+        }
+        if (pickup_reach == 0 && drop_reach == 0) {
+            ++out.unreachable_station_count;
+        }
+        const int old_lo = lower_inventory[i];
+        const int old_hi = upper_inventory[i];
+        lower_inventory[i] = std::max(lower_inventory[i],
+                                      std::max(0, instance.initial[i] - pickup_reach));
+        upper_inventory[i] = std::min(upper_inventory[i],
+                                      std::min(instance.capacity[i],
+                                               instance.initial[i] + drop_reach));
+        if (lower_inventory[i] != old_lo || upper_inventory[i] != old_hi) {
+            ++out.domains_tightened_count;
+        }
+        out.total_domain_width_after +=
+            std::max(0, upper_inventory[i] - lower_inventory[i]);
+    }
+    out.valid = true;
+    out.time_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    return out;
+}
+
 GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound(
     const Instance& instance,
     double lambda,
@@ -616,7 +680,8 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     double objective_cutoff,
     int route_mask_max_v,
     bool projection_bound_enabled,
-    bool penalty_domain_tightening_enabled) {
+    bool penalty_domain_tightening_enabled,
+    bool movement_domain_tightening_enabled) {
     GiniIntervalInventoryRelaxationBound bound;
     if (instance.V <= 0 || gamma_cap < -1e-12) {
         bound.note = "inventory-Gini relaxation skipped because interval parameters are invalid";
@@ -683,6 +748,21 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
         inventory_upper[i] = instance.capacity[i];
     }
 
+    if (movement_domain_tightening_enabled) {
+        MovementReachabilityTighteningResult move_tighten =
+            tightenInventoryIntervalsByMovementReachability(
+                instance, inventory_lower, inventory_upper);
+        bound.movement_tightening_time_seconds = move_tighten.time_seconds;
+        bound.movement_domains_tightened_count =
+            move_tighten.domains_tightened_count;
+        bound.movement_domain_width_before =
+            move_tighten.total_domain_width_before;
+        bound.movement_domain_width_after =
+            move_tighten.total_domain_width_after;
+        bound.movement_unreachable_station_count =
+            move_tighten.unreachable_station_count;
+    }
+
     if (penalty_domain_tightening_enabled) {
         const auto tighten_start = std::chrono::steady_clock::now();
         PenaltyDomainTighteningResult tighten =
@@ -694,8 +774,13 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
                 std::chrono::steady_clock::now() - tighten_start).count();
         bound.penalty_budget = tighten.penalty_budget;
         bound.domains_tightened_count = tighten.domains_tightened_count;
-        bound.total_domain_width_before = tighten.total_domain_width_before;
-        bound.total_domain_width_after = tighten.total_domain_width_after;
+        if (bound.total_domain_width_before == 0 &&
+            bound.total_domain_width_after == 0) {
+            bound.total_domain_width_before = tighten.total_domain_width_before;
+            bound.total_domain_width_after = tighten.total_domain_width_after;
+        } else {
+            bound.total_domain_width_after = tighten.total_domain_width_after;
+        }
         bound.penalty_budget_fathomed = tighten.fathomed_by_budget;
         if (tighten.fathomed_by_budget) {
             bound.computed = true;
@@ -707,9 +792,13 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
             return bound;
         }
     } else {
-        for (int i = 1; i <= instance.V; ++i) {
-            bound.total_domain_width_before += instance.capacity[i];
-            bound.total_domain_width_after += instance.capacity[i];
+        if (bound.total_domain_width_before == 0 &&
+            bound.total_domain_width_after == 0) {
+            for (int i = 1; i <= instance.V; ++i) {
+                bound.total_domain_width_before += instance.capacity[i];
+                bound.total_domain_width_after +=
+                    std::max(0, inventory_upper[i] - inventory_lower[i]);
+            }
         }
     }
 

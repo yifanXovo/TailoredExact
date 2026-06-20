@@ -27,6 +27,8 @@ void usage() {
         << "[--frontier-final-closure true|false] [--frontier-final-nodes <N>] "
         << "[--column-dominance true|false] [--column-dominance-mode exact|pareto|off] "
         << "[--projection-bound true|false] [--penalty-domain-tightening true|false] "
+        << "[--movement-domain-tightening true|false] "
+        << "[--frontier-best-bound-scheduling true|false] [--frontier-relaxation-cache true|false] "
         << "[--frontier-column-cache true|false] "
         << "[--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>]\n";
 }
@@ -70,6 +72,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--column-dominance-mode") opt.column_dominance_mode = requireValue(i, argc, argv);
         else if (arg == "--projection-bound") opt.projection_bound = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--penalty-domain-tightening") opt.penalty_domain_tightening = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--movement-domain-tightening") opt.movement_domain_tightening = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-best-bound-scheduling") opt.frontier_best_bound_scheduling = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-relaxation-cache") opt.frontier_relaxation_cache = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-column-cache") opt.frontier_column_cache = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--inventory-probe-max-v") opt.inventory_probe_max_v = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--inventory-probe-seconds") opt.inventory_probe_seconds = std::stod(requireValue(i, argc, argv));
@@ -165,6 +170,14 @@ void writeMethodRow(std::ostringstream& out,
         << result.columns_generated_raw << ","
         << result.columns_after_dominance << ","
         << result.columns_dominated << ","
+        << result.pricing_columns_enumerated << ","
+        << result.dominance_input_columns << ","
+        << result.dominance_kept_columns << ","
+        << result.dominance_removed_columns << ","
+        << result.dominance_removed_existing_projection << ","
+        << result.dominance_removed_candidate_projection << ","
+        << result.rmp_columns_inserted << ","
+        << result.rmp_columns_active << ","
         << result.dominance_time_seconds << ","
         << csvEscape(result.dominance_mode) << ","
         << (result.dominance_exact_safe ? "true" : "false") << ","
@@ -181,6 +194,23 @@ void writeMethodRow(std::ostringstream& out,
         << result.pricing_negative_columns_inserted << ","
         << result.pricing_negative_columns_dominated << ","
         << (result.pricing_completed_exactly ? "true" : "false") << ","
+        << result.pricing_best_reduced_cost_any << ","
+        << result.pricing_best_new_reduced_cost << ","
+        << result.pricing_duplicate_negative_projections << ","
+        << result.pricing_new_negative_projections << ","
+        << (result.pricing_blocked_by_duplicate_projection ? "true" : "false") << ","
+        << (result.pricing_closure_certified_exact ? "true" : "false") << ","
+        << result.movement_domains_tightened_count << ","
+        << result.movement_domain_width_before << ","
+        << result.movement_domain_width_after << ","
+        << result.movement_tightening_time_seconds << ","
+        << result.movement_unreachable_station_count << ","
+        << result.frontier_min_interval_lower_bound << ","
+        << csvEscape(result.frontier_lower_bound_source) << ","
+        << result.frontier_bound_fathomed_interval_count << ","
+        << result.frontier_unprocessed_interval_count << ","
+        << result.frontier_relax_cache_hits << ","
+        << result.frontier_relax_cache_misses << ","
         << (ebrp::inferCertifiedOriginalProblem(result) ? "true" : "false") << ","
         << csvEscape(result.result_file) << ","
         << csvEscape(result.log_file) << ","
@@ -202,11 +232,20 @@ std::string comparisonCsv(const std::vector<std::pair<ebrp::SolveResult, ebrp::S
         << "open_nodes,columns,nodes,pricing_calls,cuts_added,bpc_workers,pricing_threads,"
         << "parallel_frontier,parallel_nodes,parallel_tasks,pricing_time_seconds,master_time_seconds,"
         << "bound_time_seconds,route_mask_time_seconds,columns_generated_raw,columns_after_dominance,"
-        << "columns_dominated,dominance_time_seconds,dominance_mode,dominance_exact_safe,"
+        << "columns_dominated,pricing_columns_enumerated,dominance_input_columns,dominance_kept_columns,"
+        << "dominance_removed_columns,dominance_removed_existing_projection,dominance_removed_candidate_projection,"
+        << "rmp_columns_inserted,rmp_columns_active,dominance_time_seconds,dominance_mode,dominance_exact_safe,"
         << "projection_bound_prunes,projection_bound_time_seconds,projection_bound_best_value,"
         << "projection_bound_scope,penalty_budget,domains_tightened_count,total_domain_width_before,"
         << "total_domain_width_after,penalty_tightening_time_seconds,pricing_negative_columns_found,"
         << "pricing_negative_columns_inserted,pricing_negative_columns_dominated,pricing_completed_exactly,"
+        << "pricing_best_reduced_cost_any,pricing_best_new_reduced_cost,pricing_duplicate_negative_projections,"
+        << "pricing_new_negative_projections,pricing_blocked_by_duplicate_projection,pricing_closure_certified_exact,"
+        << "movement_domains_tightened_count,movement_domain_width_before,movement_domain_width_after,"
+        << "movement_tightening_time_seconds,movement_unreachable_station_count,"
+        << "frontier_min_interval_lower_bound,frontier_lower_bound_source,"
+        << "frontier_bound_fathomed_interval_count,frontier_unprocessed_interval_count,"
+        << "frontier_relax_cache_hits,frontier_relax_cache_misses,"
         << "certified_original_problem,result_file,log_file,"
         << "paired_method,paired_status,paired_gap,paired_runtime_seconds,"
         << "certified_optimal_speedup,notes\n";

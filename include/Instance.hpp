@@ -66,6 +66,9 @@ struct SolveOptions {
     std::string column_dominance_mode = "exact";
     bool projection_bound = true;
     bool penalty_domain_tightening = true;
+    bool movement_domain_tightening = true;
+    bool frontier_best_bound_scheduling = true;
+    bool frontier_relaxation_cache = true;
     bool frontier_column_cache = false;
     int inventory_probe_max_v = 7;
     double inventory_probe_seconds = -1.0;

@@ -1061,3 +1061,28 @@ Outcome:
 - The new optimizations preserve the existing V4 certificate in smoke ablations.
 - The short V12 stress run shows the new stats and lower-bound hooks working, but it is not a certificate.
 - Frontier column cache, route-support infeasibility cuts, and HGA/TGBC incumbent import remain TODOs.
+
+## 2026-06-20: Frontier Ledger, Safe Duplicate Pricing, And Movement Domains
+
+Change:
+
+- Fixed incomplete `gcap-frontier` reporting so top-level lower bounds come from the minimum valid interval lower bound instead of defaulting to zero.
+- Added duplicate-negative pricing safeguards: duplicate or dominance-filtered negative projections leave a node unresolved unless exact pricing proves closure.
+- Clarified dominance statistics with separate enumeration, dominance input/kept/removed, existing-projection removal, and RMP insertion counters.
+- Added globally valid movement-reachable final-inventory domain tightening.
+- Added deterministic best-bound initial frontier scheduling and exact-key interval relaxation caching.
+- Added `dominance-test` diagnostic for artificial duplicate/different projection pools.
+
+Validation:
+
+- CMake was unavailable; rebuilt both executables with the fallback `g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic` commands.
+- Smoke diagnostics passed on `testdata/examples/gcap_smoke_V4_M1.txt` for `pricing`, `pricing-branch`, `cuts`, `branching`, `master`, `cg`, `gcap-cg`, `gcap-tree`, `gcap-frontier`, and `dominance-test`.
+- V4 ablation variants all preserved the BPC certificate with objective/LB/UB `0`.
+- V12 M1/M2 average 60s stress ablations remained noncertified. V12 M1 improved-full reported a valid top-level lower bound `0.24680708541` instead of zero; V12 M2 remains a lower-bound hard case.
+
+Outcome:
+
+- No new original-problem certificate was obtained in this short round-two pass.
+- The existing V4 smoke certificate is preserved.
+- V8 and V10 source input files were not present locally; only V12 reference candidates were available for stress ablations.
+- Plain CPLEX benchmark runs were skipped in this pass; CPLEX was used only by the inventory/route/Gini relaxation when available.
