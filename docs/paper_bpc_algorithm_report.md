@@ -270,3 +270,53 @@ and summaries are in `results/optimization_update_round5/`. All round-five
 commands exited with code `0`, and the captured logs did not contain
 address/access-violation, segmentation, `bad_alloc`, or out-of-memory
 signatures.
+
+## Sixth Optimization Pass: Auto Incumbent Portfolio, Full Route-Pool Column Harvesting, Focused Relaxation Intensification, Transfer-Cap Flow, And Long-Run Convergence Tests
+
+This pass adds `--bpc-incumbent auto` / `best-of-all`, exports BPC tree columns
+into the global route-pool incumbent master, reserves time for focused
+relaxation intensification on the current minimum-LB interval, adds
+quantity-aware pickup-drop transfer caps, and writes progress-log checkpoints.
+All mechanisms preserve the certificate protocol: auto incumbents and route-pool
+masters are upper-bound mechanisms only, transfer caps and intensified
+relaxations are lower-bound strengthenings only, and no positive-gap row is
+reported as optimal.
+
+Local runnable inputs were still limited to the V4 smoke file and regenerated
+V12 average files. V8/V10 source `.txt` inputs were not present in this checkout.
+Plain CPLEX benchmarks were skipped for this pass; compact/CPLEX-style seeds are
+recorded only as incumbent candidates when they return verifier-accepted routes.
+
+| Instance | Variant | Status | UB | LB | Gap | Time (s) | Best incumbent source | Route-pool raw cols | Focused intensification passes | Capacity-limited pairs | Certified? |
+|---|---|---|---:|---:|---:|---:|---|---:|---:|---:|---|
+| V12 M1 average | round5_baseline | not closed | 0.368581603155 | 0.278083249730 | 0.245531390200 | 66.50 | BPC-owned portfolio | 1169 | 0 | 0 | no |
+| V12 M1 average | improved_full | not closed | 0.368581603155 | 0.281762943209 | 0.235548001319 | 68.30 | BPC-owned portfolio | 8 | 1 | 90 | no |
+| V12 M1 average | improved_full_300s | not closed | 0.367765009974 | 0.281531929781 | 0.234478750980 | 304.42 | compact tailored seed | 3345 | 2 | 135 | no |
+| V12 M2 average | round5_baseline | not closed | 0.735318539854 | 0.583020101640 | 0.207118996679 | 69.03 | BPC-owned portfolio | 4024 | 0 | 0 | no |
+| V12 M2 average | improved_full | not closed | 0.745474506024 | 0.583173497560 | 0.217715035394 | 60.28 | BPC-owned portfolio | 17 | 0 | 70 | no |
+| V12 M2 average | improved_full_300s | not closed | 0.719065249476 | 0.585987841514 | 0.185070003118 | 292.15 | BPC-owned portfolio | 5743 | 2 | 140 | no |
+
+Auto incumbent selection behaved as intended on the local V12 audit: V12 M1
+auto selected a BPC-owned portfolio incumbent in the 45s audit row, and the
+300s production run selected a verifier-accepted compact tailored seed when it
+was better than the BPC-owned candidates. V12 M2 auto selected the BPC-owned
+portfolio/strong incumbent rather than the weaker compact-CPLEX candidate.
+
+Route-pool harvesting is now effective once interval trees have time to run.
+The 300s V12 rows exported thousands of BPC columns into the pool
+(`3345` raw for V12 M1, `5743` raw for V12 M2). Some 60s improved rows exported
+few columns because the short cap was spent in incumbent generation and
+relaxation before substantial tree column production.
+
+Focused intensification executed and consumed time in the improved V12 rows.
+The valid lower bounds were kept by taking the maximum of old and intensified
+relaxation bounds; no intensified pass closed a frontier. Transfer-cap flow
+found many capacity-limited compatible pairs on V12, but it did not close the
+remaining gaps by itself.
+
+No new original-problem certificate was obtained in round six. The V4 smoke
+frontier remains certified with objective `0`; V12 M1 and V12 M2 remain
+noncertified with positive gaps. Raw JSON, logs, progress traces, and summaries
+are stored in `results/optimization_update_round6/`. All round-six commands
+exited with code `0`, and captured logs contained no address/access-violation,
+segmentation, `bad_alloc`, or out-of-memory signatures.

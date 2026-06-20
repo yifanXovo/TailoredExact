@@ -1147,3 +1147,49 @@ Remaining TODOs:
 - Improve BPC-owned route-pool harvesting so the restricted pool can beat local/strong incumbents on V12.
 - Implement exact support-feasibility cuts only after an exact no-timeout oracle is available; the switch remains disabled for certificate runs.
 - Restore or regenerate compatible V8/V10 text inputs for current-parser ablation coverage.
+## 2026-06-21 Round 6: Auto Incumbents, Route-Pool Harvesting, Focused Intensification, Transfer Caps
+
+Implemented:
+
+- `--bpc-incumbent auto` / `best-of-all` verified incumbent portfolio selection.
+- Export of warm-start, priced, and integer-leaf BPC columns into the global route-column pool.
+- Per-vehicle route-pool caps and dominance-preserving pool insertion statistics.
+- Focused relaxation intensification for the current global-min-LB unresolved frontier interval.
+- Quantity-aware pickup/drop transfer caps in the compatibility-flow relaxation.
+- `--progress-log` / `--progress-interval-seconds` reporting; current trace is a final checkpoint, not a full periodic stream.
+- `pickup-drop-transfer-cap-test` diagnostic.
+
+Tests:
+
+- Built with direct `g++` fallback because CMake is not installed.
+- Ran V4 diagnostics for pricing, pricing-branch, cuts, branching, master, cg, gcap-cg, gcap-tree, gcap-frontier, dominance-test, support-pruning-test, route-mask-support-test, incumbent-import-test, route-pool-incumbent-test, pickup-drop-compat-flow-test, and pickup-drop-transfer-cap-test. All exited `0`; V4 gcap-frontier remains certified with objective `0`.
+- Ran V12 M1/M2 incumbent audit for greedy, local, pool, pricing, portfolio, strong, compact, compact-cplex, auto, and route-pool rows. All exited `0`.
+- Ran V12 M1/M2 ablations for round5_baseline, auto_incumbent_only, route_pool_fixed_only, transfer_cap_flow_only, focused_intensification_only, improved_full, and improved_full_300s. All exited `0`.
+- Scanned captured logs for address/access-violation, segmentation, `bad_alloc`, out-of-memory, and sanitizer signatures; none were found.
+
+Best local V12 rows:
+
+| Instance | Variant | UB | LB | Gap | Time (s) | Certified? |
+|---|---|---:|---:|---:|---:|---|
+| V12 M1 average | improved_full_300s | 0.367765009974 | 0.281531929781 | 0.234478750980 | 304.42 | no |
+| V12 M2 average | improved_full_300s | 0.719065249476 | 0.585987841514 | 0.185070003118 | 292.15 | no |
+
+Observations:
+
+- Auto incumbent selection used verified candidates only. V12 M2 selected the BPC-owned portfolio/strong incumbent over weaker compact-CPLEX output. V12 M1 selected a compact tailored seed in the 300s production row because it verified and was slightly better than the BPC-owned candidates.
+- Route-pool harvesting is working when interval trees execute: 300s V12 rows collected thousands of raw columns. Some 60s rows collected few columns because the short cap ended before substantial tree production.
+- Focused intensification executed but did not close V12 intervals.
+- Transfer-cap flow produced many capacity-limited compatible pairs, but did not by itself close either V12 average instance.
+- No new original-problem certificate was obtained. V12 M1 and V12 M2 remain noncertified with positive gaps.
+
+Skipped/limited:
+
+- V8/V10 source `.txt` files were not present in this checkout, so those reruns were skipped.
+- Plain CPLEX benchmark was skipped in this pass.
+- 1200s V12 runs were not run locally because the required smoke, incumbent audit, and 60/300s ablation matrix already consumed substantial wall time; exact reproduction commands are saved in `results/optimization_update_round6/commands.md`.
+
+Next TODOs:
+
+- Implement true periodic progress checkpoints instead of the current final-checkpoint progress log.
+- Investigate why focused intensification often improves little despite additional relaxation time.
+- Add a stronger lower-bound source for the V12 minimum-LB intervals; transfer caps and route-pool incumbents are not enough.

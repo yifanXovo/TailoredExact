@@ -140,7 +140,8 @@ std::string inferMethodScope(const SolveResult& result) {
         method == "route-mask-support-test" ||
         method == "incumbent-import-test" ||
         method == "route-pool-incumbent-test" ||
-        method == "pickup-drop-compat-flow-test") {
+        method == "pickup-drop-compat-flow-test" ||
+        method == "pickup-drop-transfer-cap-test") {
         return "diagnostic";
     }
     if (containsText(text, "restricted path pool") || containsText(text, "restricted column")) {
@@ -203,6 +204,7 @@ std::string inferCertificateType(const SolveResult& result) {
     if (method == "incumbent-import-test") return "incumbent_import_verification_diagnostic";
     if (method == "route-pool-incumbent-test") return "route_pool_incumbent_diagnostic";
     if (method == "pickup-drop-compat-flow-test") return "pickup_drop_compat_flow_diagnostic";
+    if (method == "pickup-drop-transfer-cap-test") return "pickup_drop_transfer_cap_diagnostic";
     if (method == "pricing-branch") return "route_load_pricing_branch_probe";
     if (method == "cuts") return "cut_separation_diagnostic";
     if (method == "branching") return "branching_candidate_diagnostic";
@@ -462,6 +464,22 @@ std::string resultToJson(const SolveResult& result) {
         << result.incumbent_generation_time_seconds << ",\n";
     out << "  \"incumbent_generation_method\": \""
         << jsonEscape(result.incumbent_generation_method) << "\",\n";
+    out << "  \"incumbent_candidates_tested\": "
+        << result.incumbent_candidates_tested << ",\n";
+    out << "  \"incumbent_candidates_verified\": "
+        << result.incumbent_candidates_verified << ",\n";
+    out << "  \"incumbent_candidates_rejected\": "
+        << result.incumbent_candidates_rejected << ",\n";
+    out << "  \"incumbent_best_source\": \""
+        << jsonEscape(result.incumbent_best_source) << "\",\n";
+    out << "  \"incumbent_best_objective\": "
+        << result.incumbent_best_objective << ",\n";
+    out << "  \"incumbent_best_G\": " << result.incumbent_best_G << ",\n";
+    out << "  \"incumbent_best_P\": " << result.incumbent_best_P << ",\n";
+    out << "  \"incumbent_best_runtime\": "
+        << result.incumbent_best_runtime << ",\n";
+    out << "  \"incumbent_selection_reason\": \""
+        << jsonEscape(result.incumbent_selection_reason) << "\",\n";
     out << "  \"incumbent_import_errors\": [";
     for (std::size_t i = 0; i < result.incumbent_import_errors.size(); ++i) {
         if (i) out << ", ";
@@ -492,6 +510,16 @@ std::string resultToJson(const SolveResult& result) {
         << result.route_pool_columns_after_dominance << ",\n";
     out << "  \"route_pool_columns_removed_by_dominance\": "
         << result.route_pool_columns_removed_by_dominance << ",\n";
+    out << "  \"route_pool_columns_exported_from_tree\": "
+        << result.route_pool_columns_exported_from_tree << ",\n";
+    out << "  \"route_pool_columns_exported_from_pricing\": "
+        << result.route_pool_columns_exported_from_pricing << ",\n";
+    out << "  \"route_pool_columns_exported_from_warmstart\": "
+        << result.route_pool_columns_exported_from_warmstart << ",\n";
+    out << "  \"route_pool_columns_exported_from_integer_leaves\": "
+        << result.route_pool_columns_exported_from_integer_leaves << ",\n";
+    out << "  \"route_pool_columns_dropped_by_cap\": "
+        << result.route_pool_columns_dropped_by_cap << ",\n";
     out << "  \"route_pool_incumbent_master_calls\": "
         << result.route_pool_incumbent_master_calls << ",\n";
     out << "  \"route_pool_incumbent_master_states\": "
@@ -520,18 +548,54 @@ std::string resultToJson(const SolveResult& result) {
         << result.best_interval_candidate_objective << ",\n";
     out << "  \"best_interval_candidate_rejection_reason\": \""
         << jsonEscape(result.best_interval_candidate_rejection_reason) << "\",\n";
+    out << "  \"focused_intensification_enabled\": "
+        << (result.focused_intensification_enabled ? "true" : "false") << ",\n";
+    out << "  \"focused_intensification_passes\": "
+        << result.focused_intensification_passes << ",\n";
+    out << "  \"focused_intensification_intervals\": "
+        << result.focused_intensification_intervals << ",\n";
+    out << "  \"focused_intensification_relax_calls\": "
+        << result.focused_intensification_relax_calls << ",\n";
+    out << "  \"focused_intensification_tree_calls\": "
+        << result.focused_intensification_tree_calls << ",\n";
+    out << "  \"focused_intensification_lb_before\": \""
+        << jsonEscape(result.focused_intensification_lb_before) << "\",\n";
+    out << "  \"focused_intensification_lb_after\": \""
+        << jsonEscape(result.focused_intensification_lb_after) << "\",\n";
+    out << "  \"focused_intensification_lb_improvements\": "
+        << result.focused_intensification_lb_improvements << ",\n";
+    out << "  \"focused_intensification_time_seconds\": "
+        << result.focused_intensification_time_seconds << ",\n";
+    out << "  \"focused_intensification_stop_reason\": \""
+        << jsonEscape(result.focused_intensification_stop_reason) << "\",\n";
     out << "  \"pickup_drop_pairs_total\": "
         << result.pickup_drop_pairs_total << ",\n";
     out << "  \"pickup_drop_pairs_compatible\": "
         << result.pickup_drop_pairs_compatible << ",\n";
     out << "  \"pickup_drop_pairs_incompatible\": "
         << result.pickup_drop_pairs_incompatible << ",\n";
+    out << "  \"pickup_drop_pairs_capacity_limited\": "
+        << result.pickup_drop_pairs_capacity_limited << ",\n";
+    out << "  \"pickup_drop_transfer_cap_min\": "
+        << result.pickup_drop_transfer_cap_min << ",\n";
+    out << "  \"pickup_drop_transfer_cap_avg\": "
+        << result.pickup_drop_transfer_cap_avg << ",\n";
+    out << "  \"pickup_drop_transfer_cap_max\": "
+        << result.pickup_drop_transfer_cap_max << ",\n";
+    out << "  \"pickup_drop_transfer_cap_variables\": "
+        << result.pickup_drop_transfer_cap_variables << ",\n";
+    out << "  \"pickup_drop_transfer_cap_constraints\": "
+        << result.pickup_drop_transfer_cap_constraints << ",\n";
+    out << "  \"pickup_drop_transfer_cap_time_seconds\": "
+        << result.pickup_drop_transfer_cap_time_seconds << ",\n";
     out << "  \"pickup_drop_compat_flow_variables\": "
         << result.pickup_drop_compat_flow_variables << ",\n";
     out << "  \"pickup_drop_compat_flow_constraints\": "
         << result.pickup_drop_compat_flow_constraints << ",\n";
     out << "  \"pickup_drop_compat_flow_time_seconds\": "
         << result.pickup_drop_compat_flow_time_seconds << ",\n";
+    out << "  \"progress_log\": \""
+        << jsonEscape(result.progress_log_path) << "\",\n";
     out << "  \"final_inventories\": "; writeVector(out, result.final_inventory); out << ",\n";
     out << "  \"routes\": [";
     for (std::size_t r = 0; r < result.routes.size(); ++r) {

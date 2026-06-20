@@ -265,3 +265,26 @@ All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `
   may add audit statistics without improving the lower bound.
 - The support-feasibility oracle remains optional and disabled in certificate
   runs for this pass. No heuristic or timed-out support failure may add a cut.
+
+## 2026-06-21 Round-6 Certificate Warnings
+
+- `--bpc-incumbent auto` and `--bpc-incumbent best-of-all` select the best
+  independently verified route plan among bounded primal generators. The selected
+  route set is an upper bound only. It may tighten cutoffs and domains but never
+  supplies lower-bound evidence.
+- The frontier route-column pool now harvests warm-start, priced, and integer
+  leaf columns from BPC trees. The restricted route-pool incumbent master remains
+  a primal heuristic over a subset of feasible columns. It cannot certify a lower
+  bound, and failure to improve the incumbent proves nothing.
+- Focused relaxation intensification is certificate-neutral. It reruns a valid
+  relaxation on the current minimum-LB unresolved interval and keeps the maximum
+  valid lower bound. If the frontier remains positive-gap, the result is still
+  noncertified.
+- Pickup-drop transfer-cap flow is a relaxation strengthening only. Pair caps
+  must be derived from metric/travel lower bounds, handling time, truck capacity,
+  pickup availability, and drop residual capacity. Heuristic route failures must
+  not set a cap to zero.
+- Time-to-gap progress logs are reporting aids. In round six the implementation
+  writes a final frontier checkpoint rather than a full periodic trace. Longer
+  runtime, a better incumbent, or a higher lower bound does not imply an
+  original-problem certificate without full frontier closure and gap zero.

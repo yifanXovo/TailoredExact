@@ -699,7 +699,8 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     bool penalty_domain_tightening_enabled,
     bool movement_domain_tightening_enabled,
     bool route_mask_support_duration_pruning_enabled,
-    bool pickup_drop_compat_flow_enabled) {
+    bool pickup_drop_compat_flow_enabled,
+    bool pickup_drop_transfer_cap_flow_enabled) {
     GiniIntervalInventoryRelaxationBound bound;
     if (instance.V <= 0 || gamma_cap < -1e-12) {
         bound.note = "inventory-Gini relaxation skipped because interval parameters are invalid";
@@ -941,26 +942,81 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     bound.pickup_drop_compat_flow_enabled = compat_flow;
     std::vector<std::vector<char>> pickup_drop_compatible(
         instance.V + 1, std::vector<char>(instance.V + 1, 0));
+    std::vector<std::vector<int>> pickup_drop_transfer_cap(
+        instance.V + 1, std::vector<int>(instance.V + 1, 0));
     if (compat_flow) {
         const auto compat_start = std::chrono::steady_clock::now();
+        const int qmax = max_vehicle_capacity;
+        long long transfer_cap_sum = 0;
+        std::vector<std::string> restrictive_examples;
         for (int i = 1; i <= instance.V; ++i) {
             for (int j = 1; j <= instance.V; ++j) {
                 if (i == j) continue;
                 ++bound.pickup_drop_pairs_total;
-                bool compatible = false;
+                const int pickup_cap =
+                    std::max(0, std::min(instance.initial[i],
+                                         inventory_upper[i]));
+                const int drop_cap =
+                    std::max(0, std::min(instance.capacity[j] - instance.initial[j],
+                                         instance.capacity[j] - inventory_lower[j]));
+                const int loose_cap = std::max(0, std::min(qmax,
+                    std::min(pickup_cap, drop_cap)));
+                int best_cap = pickup_drop_transfer_cap_flow_enabled
+                    ? 0 : loose_cap;
+                double best_path_lb = std::numeric_limits<double>::infinity();
                 for (int k = 0; k < instance.M; ++k) {
-                    const double directed_lb =
+                    const double path_lb =
                         metric_dist[0][i] + metric_dist[i][j] +
-                        metric_dist[j][0] + unit_operation_time;
-                    if (directed_lb <= instance.total_time_limit + 1e-9) {
-                        compatible = true;
-                        (void)k;
-                        break;
+                        metric_dist[j][0];
+                    best_path_lb = std::min(best_path_lb, path_lb);
+                    if (pickup_drop_transfer_cap_flow_enabled) {
+                        const double budget =
+                            instance.total_time_limit - path_lb;
+                        const int move_budget = budget >= -1e-9
+                            ? static_cast<int>(std::floor(
+                                  std::max(0.0, budget) /
+                                  unit_operation_time + 1e-9))
+                            : 0;
+                        const int vehicle_cap = std::max(0, std::min(instance.Q[k],
+                            std::min(pickup_cap, drop_cap)));
+                        best_cap = std::max(best_cap,
+                            std::min(vehicle_cap, move_budget));
+                    } else if (path_lb + unit_operation_time <=
+                               instance.total_time_limit + 1e-9) {
+                        best_cap = loose_cap;
                     }
                 }
-                if (compatible) {
+                if (best_cap > 0) {
                     pickup_drop_compatible[i][j] = 1;
+                    pickup_drop_transfer_cap[i][j] = best_cap;
                     ++bound.pickup_drop_pairs_compatible;
+                    ++bound.pickup_drop_transfer_cap_variables;
+                    transfer_cap_sum += best_cap;
+                    if (bound.pickup_drop_transfer_cap_min <= 0.0) {
+                        bound.pickup_drop_transfer_cap_min = best_cap;
+                    } else {
+                        bound.pickup_drop_transfer_cap_min =
+                            std::min(bound.pickup_drop_transfer_cap_min,
+                                     static_cast<double>(best_cap));
+                    }
+                    bound.pickup_drop_transfer_cap_max =
+                        std::max(bound.pickup_drop_transfer_cap_max,
+                                 static_cast<double>(best_cap));
+                    if (pickup_drop_transfer_cap_flow_enabled &&
+                        best_cap < loose_cap) {
+                        ++bound.pickup_drop_pairs_capacity_limited;
+                        if (restrictive_examples.size() < 8) {
+                            std::ostringstream example;
+                            example << "pickup=" << i
+                                    << ", drop=" << j
+                                    << ", cap=" << best_cap
+                                    << ", loose_cap=" << loose_cap
+                                    << ", path_lb=" << best_path_lb
+                                    << ", route_limit="
+                                    << instance.total_time_limit;
+                            restrictive_examples.push_back(example.str());
+                        }
+                    }
                 } else {
                     ++bound.pickup_drop_pairs_incompatible;
                     if (bound.pickup_drop_incompatible_examples.size() < 8) {
@@ -980,9 +1036,22 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
         bound.pickup_drop_compat_flow_variables =
             bound.pickup_drop_pairs_compatible + instance.V;
         bound.pickup_drop_compat_flow_constraints = 2LL * instance.V;
+        bound.pickup_drop_transfer_cap_constraints =
+            bound.pickup_drop_transfer_cap_variables;
+        if (bound.pickup_drop_pairs_compatible > 0) {
+            bound.pickup_drop_transfer_cap_avg =
+                static_cast<double>(transfer_cap_sum) /
+                static_cast<double>(bound.pickup_drop_pairs_compatible);
+        }
         bound.pickup_drop_compat_flow_time_seconds =
             std::chrono::duration<double>(
                 std::chrono::steady_clock::now() - compat_start).count();
+        bound.pickup_drop_transfer_cap_time_seconds =
+            bound.pickup_drop_compat_flow_time_seconds;
+        for (const std::string& example : restrictive_examples) {
+            bound.pickup_drop_incompatible_examples.push_back(
+                "capacity_limited_pair={" + example + "}");
+        }
     }
     auto routeMaskSupportNote = [&]() {
         std::ostringstream ss;
@@ -1011,6 +1080,18 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
            << bound.pickup_drop_pairs_compatible
            << ", pickup_drop_pairs_incompatible="
            << bound.pickup_drop_pairs_incompatible
+           << ", pickup_drop_pairs_capacity_limited="
+           << bound.pickup_drop_pairs_capacity_limited
+           << ", pickup_drop_transfer_cap_min="
+           << bound.pickup_drop_transfer_cap_min
+           << ", pickup_drop_transfer_cap_avg="
+           << bound.pickup_drop_transfer_cap_avg
+           << ", pickup_drop_transfer_cap_max="
+           << bound.pickup_drop_transfer_cap_max
+           << ", pickup_drop_transfer_cap_variables="
+           << bound.pickup_drop_transfer_cap_variables
+           << ", pickup_drop_transfer_cap_constraints="
+           << bound.pickup_drop_transfer_cap_constraints
            << ", pickup_drop_compat_flow_variables="
            << bound.pickup_drop_compat_flow_variables
            << ", pickup_drop_compat_flow_constraints="
@@ -1359,11 +1440,9 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
                << std::max(0, pickup_cap) << "\n";
             for (int j = 1; j <= instance.V; ++j) {
                 if (!pickup_drop_compatible[i][j]) continue;
-                const int drop_cap = std::min(
-                    std::max(0, instance.capacity[j] - instance.initial[j]),
-                    max_vehicle_capacity);
-                const int transfer_cap =
-                    std::max(0, std::min(pickup_cap, drop_cap));
+                const int transfer_cap = pickup_drop_transfer_cap[i][j] > 0
+                    ? pickup_drop_transfer_cap[i][j]
+                    : pickup_cap;
                 lp << " 0 <= " << transferName(i, j) << " <= "
                    << transfer_cap << "\n";
             }
