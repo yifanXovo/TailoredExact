@@ -36,7 +36,12 @@ build\ExactEBRP.exe --method gcap-frontier --input testdata\examples\gcap_smoke_
 - `--frontier-relaxation-cache true|false`: reuse exact-key interval relaxation bounds across retry passes.
 - `--support-duration-pruning true|false`: prune exact pricing labels whose station support contains a subset proven route-duration infeasible.
 - `--support-duration-max-subset-size N`: maximum station subset size used for support-duration pruning precomputation.
+- `--route-mask-support-duration-pruning true|false`: apply the same exact-safe support-duration infeasibility test to complete route-mask relaxation masks.
+- `--frontier-focused-min-lb-retry true|false`: spend retry time on the unresolved frontier interval with the smallest valid lower bound.
+- `--support-feasibility-oracle true|false`: reserved switch for exact small-support infeasibility checking; default is false and heuristic support cuts are not generated.
 - `--incumbent-json <path> --incumbent-format exact_result --incumbent-source-name <name>`: import a verified incumbent route solution as an upper-bound/cutoff source only.
+- `--incumbent-format auto|exact_result|route_json|csv`: parse incumbent files as ExactEBRP result JSON, route JSON, or CSV with vehicle/order/station/pickup/drop columns.
+- `--hga-incumbent <path> --hga-incumbent-format auto|route_json|csv|legacy`: import HGA/TGBC-style route outputs when a compatible route-bearing file is available. Legacy objective-only files are rejected rather than fabricated into routes.
 - `--gcap-pricing-columns N`: allow pricing to return multiple negative columns; filtered insertion is certificate-neutral.
 - `--frontier-column-cache true|false`: currently logged as requested but not enabled for certificates.
 
@@ -44,6 +49,12 @@ Round-three example with range audit, movement audit, and support pruning:
 
 ```powershell
 build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M1_average.txt --lambda 0.15 --T 3600 --time-limit 60 --frontier-intervals 3 --bpc-incumbent local --column-dominance true --projection-bound true --penalty-domain-tightening true --movement-domain-tightening true --movement-bound-audit true --frontier-best-bound-scheduling true --frontier-relaxation-cache true --support-duration-pruning true --support-duration-max-subset-size 5 --out results\optimization_update_round3\raw\movement_audit_v12_m1_average.json
+```
+
+Round-four example with route-mask support pruning, focused retry, and verified incumbent controls:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 120 --frontier-intervals 2 --bpc-incumbent portfolio --bpc-incumbent-seconds 12 --column-dominance true --projection-bound true --penalty-domain-tightening true --movement-domain-tightening true --frontier-best-bound-scheduling true --frontier-relaxation-cache true --frontier-focused-min-lb-retry true --support-duration-pruning true --route-mask-support-duration-pruning true --support-feasibility-oracle false --gcap-pricing-columns 4 --out results\optimization_update_round4\raw\ablation_v12_m2_average_improved_full_long.json
 ```
 
 Proofs and certificate cautions are in `docs/optimization_proofs.md` and `docs/certification_protocol.md`.

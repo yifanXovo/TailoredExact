@@ -73,8 +73,13 @@ struct SolveOptions {
     bool frontier_best_bound_scheduling = true;
     bool frontier_relaxation_cache = true;
     bool frontier_column_cache = false;
+    bool frontier_focused_min_lb_retry = true;
     bool support_duration_pruning = true;
+    bool route_mask_support_duration_pruning = true;
+    bool support_feasibility_oracle = false;
     int support_duration_max_subset_size = 5;
+    std::string hga_incumbent_path;
+    std::string hga_incumbent_format = "auto";
     int inventory_probe_max_v = 7;
     double inventory_probe_seconds = -1.0;
 };

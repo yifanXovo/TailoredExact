@@ -198,3 +198,80 @@ BPC-owned incumbent generation uses priced columns only to propose feasible uppe
 
 The frontier relaxation cache key omits time budget and includes the instance, lambda, interval floor/cap, incumbent cutoff, route-mask setting, projection/penalty/movement/audit flags, and active restrictions. If a later request has a larger budget, the hit is marked partial and recomputed; the ledger keeps the stronger valid bound. Cache reuse changes runtime only, not the feasible region or certificate meaning.
 
+## Fourth Optimization Pass: Strengthened Support Duration And Incumbents
+
+### Ceil-Half Support-Duration Pruning
+
+Let `S` be a station support subset for a single route-load column and let
+`cycle_lb(S)` be a non-overestimating depot-cycle lower bound over metric-closure
+distances. Under the certificate-producing model, every visited station in a
+route-load column has a nonzero pickup or drop operation. One picked bicycle can
+account for at most one pickup station and one drop station. Therefore a route
+serving `|S|` nonzero-operation stations must pick up at least:
+
+```text
+ceil(|S| / 2)
+```
+
+bicycles. Since every picked bicycle is eventually either dropped at a station or
+unloaded at the depot, its handling time contributes at least
+`pickup_time + drop_time`. Thus every feasible column containing `S` has duration
+at least:
+
+```text
+cycle_lb(S) + (pickup_time + drop_time) * ceil(|S| / 2).
+```
+
+If this lower bound exceeds the vehicle route-duration limit, no feasible
+route-load column can contain `S`. Pricing may prune labels or candidate columns
+whose support contains such a subset. The rule is exact only when `cycle_lb` is a
+valid travel lower bound and zero-operation station visits have been removed or
+forbidden by the station-operation cuts. Node closure still requires exact
+pricing completion with no missing negative reduced-cost feasible column.
+
+### Route-Mask Support-Duration Relaxation Pruning
+
+The same ceil-half support-duration lower bound can be applied before building a
+complete route-mask relaxation. For vehicle `k`, a route-mask variable for mask
+`M` is removed if:
+
+```text
+cycle_lb(M) + (pickup_time + drop_time) * ceil(|M| / 2) > T_k.
+```
+
+Any original route-load column with exactly mask `M` would violate the same
+necessary duration lower bound, so removing that mask from the relaxation removes
+no feasible original route-load plan. When vehicle capacities or time limits
+differ, the filter is vehicle-specific. The filter strengthens only the
+inventory/route/Gini lower-bound relaxation; it does not replace the full
+branch-price interval certificate.
+
+### Verified Incumbent Seeding
+
+Imported route JSON/CSV solutions, compact-generated seeds, and compact-CPLEX
+seeds are used only after the independent verifier recomputes route duration,
+load feasibility, station capacity, final inventories, `G`, `P`, and objective.
+A verified seed supplies an upper bound and may tighten incumbent cutoffs and
+domain bounds. It never contributes lower-bound evidence. A run seeded by compact
+or CPLEX output must be labeled as seeded or hybrid; it is not pure BPC
+performance even though the lower-bound machinery remains BPC.
+
+### Focused Min-LB Frontier Retry
+
+Focused retry changes only runtime allocation. After an initial frontier pass, it
+selects unresolved relevant intervals by increasing valid interval lower bound,
+then retries the current global-minimum interval until it closes, is
+bound-fathomed, improves above the next unresolved bound, makes no valid
+lower-bound progress, or hits the time limit. The final frontier ledger still
+contains every relevant interval. Therefore focused retry is certificate-neutral:
+it can improve the global lower-bound ledger faster, but cannot certify unless
+the usual full-frontier closure conditions hold.
+
+### Exact Support-Feasibility Oracle Status
+
+The `--support-feasibility-oracle` switch is currently present for controlled
+experiments, but no heuristic support infeasibility cut is enabled by default.
+Future support cuts may be added only when an exact one-vehicle route-load oracle
+proves that no route order and integer operation vector can realize the support.
+Timeouts or sampled failures are not infeasibility proofs.
+

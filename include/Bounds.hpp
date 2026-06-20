@@ -44,6 +44,13 @@ struct GiniIntervalInventoryRelaxationBound {
     long long movement_domain_width_after = 0;
     double movement_tightening_time_seconds = 0.0;
     int movement_unreachable_station_count = 0;
+    long long route_mask_count_before_support_duration = 0;
+    long long route_mask_count_after_support_duration = 0;
+    long long route_masks_removed_by_support_duration = 0;
+    double route_mask_support_duration_precompute_time_seconds = 0.0;
+    int route_mask_support_duration_max_removed_subset_size = 0;
+    bool route_mask_support_duration_pruning = false;
+    std::vector<std::string> route_mask_support_duration_removed_examples;
     std::string status;
     std::string note;
 };
@@ -92,7 +99,8 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     int route_mask_max_v = 12,
     bool projection_bound_enabled = true,
     bool penalty_domain_tightening_enabled = true,
-    bool movement_domain_tightening_enabled = true);
+    bool movement_domain_tightening_enabled = true,
+    bool route_mask_support_duration_pruning_enabled = true);
 
 InventoryRatioProjectionBound computeInventoryRatioProjectionBound(
     const Instance& instance,

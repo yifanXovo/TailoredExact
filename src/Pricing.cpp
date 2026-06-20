@@ -345,18 +345,25 @@ private:
         precomputeMetricClosure();
         if (static_cast<int>(metric_dist_.size()) < instance_.V + 1) return;
         const double cunit = instance_.pickup_time + instance_.drop_time;
-        const double min_operation = std::max(0.0, cunit);
+        const double operation_unit = std::max(0.0, cunit);
         const int full = (1 << instance_.V) - 1;
         for (int mask = 1; mask <= full; ++mask) {
-            if (popcount(mask) > max_subset) continue;
+            const int support_size = popcount(mask);
+            if (support_size > max_subset) continue;
             if (containsKnownForbiddenSupport(mask)) continue;
             const double cycle_lb = supportCycleLowerBound(mask);
-            if (cycle_lb + min_operation > instance_.total_time_limit + 1e-9) {
+            const int min_pickups = (support_size + 1) / 2;
+            const double support_duration_lb = cycle_lb +
+                operation_unit * static_cast<double>(min_pickups);
+            if (support_duration_lb > instance_.total_time_limit + 1e-9) {
                 forbidden_support_masks_.push_back(mask);
             }
         }
         result_.support_duration_cuts_generated =
             static_cast<long long>(forbidden_support_masks_.size());
+        result_.support_duration_min_pickup_rule = "ceil_half_support";
+        result_.support_duration_strong_cuts_generated =
+            result_.support_duration_cuts_generated;
         result_.support_duration_precompute_time_seconds =
             std::chrono::duration<double>(Clock::now() - cut_start).count();
     }
@@ -521,6 +528,7 @@ private:
         if (label.mask == 0 || label.last <= 0) return false;
         if (violatesSupportDurationPruning(label.mask)) {
             ++result_.support_duration_pruned_columns;
+            ++result_.support_duration_strong_pruned_columns;
             return false;
         }
         if (!satisfiesRequiredTogether(label.mask)) return false;
@@ -629,6 +637,7 @@ private:
                     if (branchClosureImpossible(label.mask)) continue;
                     if (violatesSupportDurationPruning(label.mask)) {
                         ++result_.support_duration_pruned_labels;
+                        ++result_.support_duration_strong_pruned_labels;
                         continue;
                     }
                     ++result_.route_states;
@@ -666,6 +675,7 @@ private:
                         if (branchClosureImpossible(next_mask)) continue;
                         if (violatesSupportDurationPruning(next_mask)) {
                             ++result_.support_duration_pruned_labels;
+                            ++result_.support_duration_strong_pruned_labels;
                             continue;
                         }
                         const double next_travel = label.travel +
@@ -754,6 +764,7 @@ private:
         if (branchClosureImpossible(mask)) return;
         if (violatesSupportDurationPruning(mask)) {
             ++result_.support_duration_pruned_labels;
+            ++result_.support_duration_strong_pruned_labels;
             return;
         }
         const double closure_travel_lb =
@@ -779,6 +790,7 @@ private:
             if (branchClosureImpossible(next_mask)) continue;
             if (violatesSupportDurationPruning(next_mask)) {
                 ++result_.support_duration_pruned_labels;
+                ++result_.support_duration_strong_pruned_labels;
                 continue;
             }
             const double next_travel = travel_without_return + instance_.dist[last][station];
@@ -795,6 +807,7 @@ private:
     void enumerateOperations(int mask, double route_travel) {
         if (violatesSupportDurationPruning(mask)) {
             ++result_.support_duration_pruned_columns;
+            ++result_.support_duration_strong_pruned_columns;
             return;
         }
         const double cunit = instance_.pickup_time + instance_.drop_time;

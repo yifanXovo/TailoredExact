@@ -173,3 +173,47 @@ Round-three outputs are in `results/optimization_update_round3/`.
 The local checkout contains runnable V4 and V12 text instances only. V8/V10 source text files were not present, so round-three ablations could not rerun those cases. No new original-problem certificate was obtained in this short pass beyond the V4 smoke certificate. The V12 average rows remain lower-bound progress only.
 
 The captured address error is documented in `results/optimization_update_round3/notes_incumbent_failures.txt`; gdb traces are stored under `results/optimization_update_round3/logs/`. Post-fix repros are `raw/repro_v12_m1_pricing_after_fix.json` and `raw/repro_v12_m1_portfolio_after_fix.json`.
+
+## Fourth Optimization Pass: Stronger Support-Duration Cuts, Route-Mask Pruning, Strong Incumbents, And Focused Frontier Retry
+
+This pass tightened the exact-safe support-duration rule from one operation to
+`ceil(|S|/2)` pickups for a station support `S`, applied the same rule to the
+complete route-mask relaxation, added verified route JSON/CSV and compact-seed
+incumbent paths, and exposed focused retry on the current minimum-LB frontier
+interval. The support-feasibility oracle switch is present but remains disabled
+by default; no heuristic support cuts are generated.
+
+Local runnable source files for this pass were `testdata/examples/gcap_smoke_V4_M1.txt`,
+`reference/regen_candidate_V12_M1_average.txt`, and
+`reference/regen_candidate_V12_M2_average.txt`. V8/V10 source `.txt` files were
+not present in the checkout; only historical logs/results were found, so those
+cases were not rerun in round four.
+
+| Instance | Variant | Status | UB | LB | Gap | Time (s) | Certified? | Incumbent source |
+|---|---|---|---:|---:|---:|---:|---|---|
+| V4 smoke | baseline_round3 | optimal | 0 | 0 | 0 | 1.51 | yes | empty route |
+| V4 smoke | improved_full | optimal | 0 | 0 | 0 | 0.00 | yes | BPC-owned strong |
+| V12 M1 average | baseline_round3 | not closed | 0.493696053863 | 0.239988434930 | 0.513894362630 | 56.16 | no | empty route |
+| V12 M1 average | improved_full | not closed | 0.366157179488 | 0.276689024590 | 0.244343576775 | 49.97 | no | compact CPLEX seed |
+| V12 M1 average | improved_full_long | not closed | 0.368331870826 | 0.277477740570 | 0.246663776480 | 90.70 | no | compact CPLEX seed |
+| V12 M2 average | baseline_round3 | not closed | 1.008223209850 | 0.354202757800 | 0.648686169552 | 49.94 | no | empty route |
+| V12 M2 average | improved_full | not closed | 0.759438494406 | 0.589597623560 | 0.223640060515 | 50.46 | no | BPC-owned portfolio |
+| V12 M2 average | improved_full_long | not closed | 0.759438494406 | 0.589597623560 | 0.223640060515 | 78.28 | no | BPC-owned portfolio |
+
+Best verified seeds on the local regenerated V12 inputs:
+
+- V12 M1 average: compact-CPLEX seed, UB `0.366157179488`. This is a verified
+  upper bound only and makes the run seeded/hybrid, not pure BPC performance.
+- V12 M2 average: BPC-owned portfolio/strong seed, UB `0.759438494406`.
+
+The real V4/V12 instances in this local pass generated zero support-duration
+cuts and removed zero route masks. The required synthetic diagnostics are stored
+in `smoke_support-pruning-test.json` and `smoke_route-mask-support-test.json`;
+they show cases where the old one-operation rule cuts nothing but the
+`ceil(|S|/2)` rule cuts infeasible supports. Therefore the mechanism is covered,
+but it did not explain the V12 bottleneck on these regenerated cases.
+
+All round-four smoke, incumbent, and ablation commands exited with code `0`; no
+captured stdout/stderr log contained address/access-violation, segmentation,
+`bad_alloc`, or out-of-memory signatures. Raw outputs and summaries are in
+`results/optimization_update_round4/`.

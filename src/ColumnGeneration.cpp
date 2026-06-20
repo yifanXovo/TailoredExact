@@ -1546,6 +1546,12 @@ void addStats(GiniCapTreeResult& total, const GiniCapColumnGenerationResult& nod
     total.support_duration_cuts_generated += node.support_duration_cuts_generated;
     total.support_duration_pruned_labels += node.support_duration_pruned_labels;
     total.support_duration_pruned_columns += node.support_duration_pruned_columns;
+    total.support_duration_strong_cuts_generated +=
+        node.support_duration_strong_cuts_generated;
+    total.support_duration_strong_pruned_labels +=
+        node.support_duration_strong_pruned_labels;
+    total.support_duration_strong_pruned_columns +=
+        node.support_duration_strong_pruned_columns;
     total.support_duration_max_subset_size =
         std::max(total.support_duration_max_subset_size,
                  node.support_duration_max_subset_size);
@@ -1629,6 +1635,12 @@ ColumnGenerationResult runCoverageColumnGenerationDiagnostic(
                 priced.support_duration_pruned_labels;
             result.support_duration_pruned_columns +=
                 priced.support_duration_pruned_columns;
+            result.support_duration_strong_cuts_generated +=
+                priced.support_duration_strong_cuts_generated;
+            result.support_duration_strong_pruned_labels +=
+                priced.support_duration_strong_pruned_labels;
+            result.support_duration_strong_pruned_columns +=
+                priced.support_duration_strong_pruned_columns;
             result.support_duration_max_subset_size =
                 std::max(result.support_duration_max_subset_size,
                          priced.support_duration_max_subset_size);
@@ -1950,6 +1962,12 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                     priced.support_duration_pruned_labels;
                 result.support_duration_pruned_columns +=
                     priced.support_duration_pruned_columns;
+                result.support_duration_strong_cuts_generated +=
+                    priced.support_duration_strong_cuts_generated;
+                result.support_duration_strong_pruned_labels +=
+                    priced.support_duration_strong_pruned_labels;
+                result.support_duration_strong_pruned_columns +=
+                    priced.support_duration_strong_pruned_columns;
                 result.support_duration_max_subset_size =
                     std::max(result.support_duration_max_subset_size,
                              priced.support_duration_max_subset_size);
@@ -2023,6 +2041,12 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                     exact.support_duration_pruned_labels;
                 result.support_duration_pruned_columns +=
                     exact.support_duration_pruned_columns;
+                result.support_duration_strong_cuts_generated +=
+                    exact.support_duration_strong_cuts_generated;
+                result.support_duration_strong_pruned_labels +=
+                    exact.support_duration_strong_pruned_labels;
+                result.support_duration_strong_pruned_columns +=
+                    exact.support_duration_strong_pruned_columns;
                 result.support_duration_max_subset_size =
                     std::max(result.support_duration_max_subset_size,
                              exact.support_duration_max_subset_size);
@@ -2286,6 +2310,12 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     result.support_duration_cuts_generated += root.support_duration_cuts_generated;
     result.support_duration_pruned_labels += root.support_duration_pruned_labels;
     result.support_duration_pruned_columns += root.support_duration_pruned_columns;
+    result.support_duration_strong_cuts_generated +=
+        root.support_duration_strong_cuts_generated;
+    result.support_duration_strong_pruned_labels +=
+        root.support_duration_strong_pruned_labels;
+    result.support_duration_strong_pruned_columns +=
+        root.support_duration_strong_pruned_columns;
     result.support_duration_max_subset_size =
         std::max(result.support_duration_max_subset_size,
                  root.support_duration_max_subset_size);
@@ -2347,6 +2377,12 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     result.support_duration_cuts_generated += forbid_child.support_duration_cuts_generated;
     result.support_duration_pruned_labels += forbid_child.support_duration_pruned_labels;
     result.support_duration_pruned_columns += forbid_child.support_duration_pruned_columns;
+    result.support_duration_strong_cuts_generated +=
+        forbid_child.support_duration_strong_cuts_generated;
+    result.support_duration_strong_pruned_labels +=
+        forbid_child.support_duration_strong_pruned_labels;
+    result.support_duration_strong_pruned_columns +=
+        forbid_child.support_duration_strong_pruned_columns;
     result.support_duration_max_subset_size =
         std::max(result.support_duration_max_subset_size,
                  forbid_child.support_duration_max_subset_size);
@@ -2388,6 +2424,12 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     result.support_duration_cuts_generated += require_child.support_duration_cuts_generated;
     result.support_duration_pruned_labels += require_child.support_duration_pruned_labels;
     result.support_duration_pruned_columns += require_child.support_duration_pruned_columns;
+    result.support_duration_strong_cuts_generated +=
+        require_child.support_duration_strong_cuts_generated;
+    result.support_duration_strong_pruned_labels +=
+        require_child.support_duration_strong_pruned_labels;
+    result.support_duration_strong_pruned_columns +=
+        require_child.support_duration_strong_pruned_columns;
     result.support_duration_max_subset_size =
         std::max(result.support_duration_max_subset_size,
                  require_child.support_duration_max_subset_size);
