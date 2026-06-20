@@ -211,6 +211,13 @@ std::string routePickupName(int vehicle, int station) {
 std::string routeDropName(int vehicle, int station) {
     return "dkb_" + std::to_string(vehicle) + "_" + std::to_string(station);
 }
+std::string transferName(int pickup_station, int drop_station) {
+    return "f_" + std::to_string(pickup_station) + "_" +
+           std::to_string(drop_station);
+}
+std::string unloadName(int pickup_station) {
+    return "hu_" + std::to_string(pickup_station);
+}
 std::string hName(int i, int j) {
     return "hb_" + std::to_string(i) + "_" + std::to_string(j);
 }
@@ -691,7 +698,8 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     bool projection_bound_enabled,
     bool penalty_domain_tightening_enabled,
     bool movement_domain_tightening_enabled,
-    bool route_mask_support_duration_pruning_enabled) {
+    bool route_mask_support_duration_pruning_enabled,
+    bool pickup_drop_compat_flow_enabled) {
     GiniIntervalInventoryRelaxationBound bound;
     if (instance.V <= 0 || gamma_cap < -1e-12) {
         bound.note = "inventory-Gini relaxation skipped because interval parameters are invalid";
@@ -928,6 +936,54 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
             std::chrono::duration<double>(
                 std::chrono::steady_clock::now() - support_start).count();
     }
+    const bool compat_flow =
+        pickup_drop_compat_flow_enabled && instance.V <= 30;
+    bound.pickup_drop_compat_flow_enabled = compat_flow;
+    std::vector<std::vector<char>> pickup_drop_compatible(
+        instance.V + 1, std::vector<char>(instance.V + 1, 0));
+    if (compat_flow) {
+        const auto compat_start = std::chrono::steady_clock::now();
+        for (int i = 1; i <= instance.V; ++i) {
+            for (int j = 1; j <= instance.V; ++j) {
+                if (i == j) continue;
+                ++bound.pickup_drop_pairs_total;
+                bool compatible = false;
+                for (int k = 0; k < instance.M; ++k) {
+                    const double directed_lb =
+                        metric_dist[0][i] + metric_dist[i][j] +
+                        metric_dist[j][0] + unit_operation_time;
+                    if (directed_lb <= instance.total_time_limit + 1e-9) {
+                        compatible = true;
+                        (void)k;
+                        break;
+                    }
+                }
+                if (compatible) {
+                    pickup_drop_compatible[i][j] = 1;
+                    ++bound.pickup_drop_pairs_compatible;
+                } else {
+                    ++bound.pickup_drop_pairs_incompatible;
+                    if (bound.pickup_drop_incompatible_examples.size() < 8) {
+                        std::ostringstream example;
+                        example << "pickup=" << i
+                                << ", drop=" << j
+                                << ", directed_lb="
+                                << (metric_dist[0][i] + metric_dist[i][j] +
+                                    metric_dist[j][0] + unit_operation_time)
+                                << ", route_limit=" << instance.total_time_limit;
+                        bound.pickup_drop_incompatible_examples.push_back(
+                            example.str());
+                    }
+                }
+            }
+        }
+        bound.pickup_drop_compat_flow_variables =
+            bound.pickup_drop_pairs_compatible + instance.V;
+        bound.pickup_drop_compat_flow_constraints = 2LL * instance.V;
+        bound.pickup_drop_compat_flow_time_seconds =
+            std::chrono::duration<double>(
+                std::chrono::steady_clock::now() - compat_start).count();
+    }
     auto routeMaskSupportNote = [&]() {
         std::ostringstream ss;
         ss << ", route_mask_support_duration_pruning="
@@ -943,6 +999,25 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
         for (const std::string& example :
              bound.route_mask_support_duration_removed_examples) {
             ss << ", removed_mask_example={" << example << "}";
+        }
+        return ss.str();
+    };
+    auto pickupDropCompatNote = [&]() {
+        std::ostringstream ss;
+        ss << ", pickup_drop_compat_flow="
+           << (compat_flow ? "true" : "false")
+           << ", pickup_drop_pairs_total=" << bound.pickup_drop_pairs_total
+           << ", pickup_drop_pairs_compatible="
+           << bound.pickup_drop_pairs_compatible
+           << ", pickup_drop_pairs_incompatible="
+           << bound.pickup_drop_pairs_incompatible
+           << ", pickup_drop_compat_flow_variables="
+           << bound.pickup_drop_compat_flow_variables
+           << ", pickup_drop_compat_flow_constraints="
+           << bound.pickup_drop_compat_flow_constraints;
+        for (const std::string& example :
+             bound.pickup_drop_incompatible_examples) {
+            ss << ", incompatible_pair_example={" << example << "}";
         }
         return ss.str();
     };
@@ -1027,6 +1102,31 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     }
     pickup << " <= " << bound.total_pickup_limit;
     row(pickup.str());
+
+    if (compat_flow) {
+        for (int i = 1; i <= instance.V; ++i) {
+            std::ostringstream pickup_balance;
+            pickup_balance << pName(i);
+            for (int j = 1; j <= instance.V; ++j) {
+                if (pickup_drop_compatible[i][j]) {
+                    pickup_balance << " - " << transferName(i, j);
+                }
+            }
+            pickup_balance << " - " << unloadName(i) << " = 0";
+            row(pickup_balance.str());
+        }
+        for (int j = 1; j <= instance.V; ++j) {
+            std::ostringstream drop_balance;
+            drop_balance << dName(j);
+            for (int i = 1; i <= instance.V; ++i) {
+                if (pickup_drop_compatible[i][j]) {
+                    drop_balance << " - " << transferName(i, j);
+                }
+            }
+            drop_balance << " = 0";
+            row(drop_balance.str());
+        }
+    }
 
     if (route_mask_relaxation) {
         for (int k = 0; k < instance.M; ++k) {
@@ -1251,6 +1351,24 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
             lp << " 0 <= " << hName(i, j) << "\n";
         }
     }
+    if (compat_flow) {
+        for (int i = 1; i <= instance.V; ++i) {
+            const int pickup_cap =
+                std::min(instance.initial[i], max_vehicle_capacity);
+            lp << " 0 <= " << unloadName(i) << " <= "
+               << std::max(0, pickup_cap) << "\n";
+            for (int j = 1; j <= instance.V; ++j) {
+                if (!pickup_drop_compatible[i][j]) continue;
+                const int drop_cap = std::min(
+                    std::max(0, instance.capacity[j] - instance.initial[j]),
+                    max_vehicle_capacity);
+                const int transfer_cap =
+                    std::max(0, std::min(pickup_cap, drop_cap));
+                lp << " 0 <= " << transferName(i, j) << " <= "
+                   << transfer_cap << "\n";
+            }
+        }
+    }
     if (route_mask_relaxation) {
         for (int k = 0; k < instance.M; ++k) {
             for (int i = 1; i <= instance.V; ++i) {
@@ -1329,6 +1447,7 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
                  << (route_mask_relaxation ? "true" : "false")
                  << ", route_mask_max_v=" << route_mask_max_v
                  << routeMaskSupportNote()
+                 << pickupDropCompatNote()
                  << ", incumbent_cutoff_bound=true"
                  << ", penalty_budget=" << num(penalty_budget)
                  << ", min_station_bikes=" << min_station_bikes_after_return
@@ -1370,6 +1489,7 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
                  << (route_mask_relaxation ? "true" : "false")
                  << ", route_mask_max_v=" << route_mask_max_v
                  << routeMaskSupportNote()
+                 << pickupDropCompatNote()
                  << ", incumbent_cutoff_bound=true"
                  << ", penalty_budget=" << num(penalty_budget)
                  << ", min_station_bikes=" << min_station_bikes_after_return
@@ -1409,6 +1529,7 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
                  << (route_mask_relaxation ? "true" : "false")
                  << ", route_mask_max_v=" << route_mask_max_v
                  << routeMaskSupportNote()
+                 << pickupDropCompatNote()
                  << ", incumbent_cutoff_bound=" << (cutoff_bound_active ? "true" : "false")
                  << ", penalty_budget=" << (cutoff_bound_active ? num(penalty_budget) : "inf")
                  << ", penalty_domain_tightening=" << (penalty_domain_tightening_enabled ? "true" : "false")
@@ -1452,7 +1573,8 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
          << ", route_mask_duration_load_relaxation="
          << (route_mask_relaxation ? "true" : "false")
          << ", route_mask_max_v=" << route_mask_max_v
-         << routeMaskSupportNote()
+        << routeMaskSupportNote()
+        << pickupDropCompatNote()
          << ", incumbent_cutoff_bound=" << (cutoff_bound_active ? "true" : "false")
          << ", penalty_budget=" << (cutoff_bound_active ? num(penalty_budget) : "inf")
          << ", penalty_domain_tightening=" << (penalty_domain_tightening_enabled ? "true" : "false")

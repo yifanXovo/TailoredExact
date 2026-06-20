@@ -74,6 +74,8 @@ struct SolveOptions {
     bool frontier_relaxation_cache = true;
     bool frontier_column_cache = false;
     bool frontier_focused_min_lb_retry = true;
+    bool route_pool_incumbent = true;
+    bool pickup_drop_compat_flow = true;
     bool support_duration_pruning = true;
     bool route_mask_support_duration_pruning = true;
     bool support_feasibility_oracle = false;

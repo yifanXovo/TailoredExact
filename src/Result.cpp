@@ -138,7 +138,9 @@ std::string inferMethodScope(const SolveResult& result) {
         method == "branching" || method == "cg" || method == "gcap-branch" ||
         method == "support-pruning-test" ||
         method == "route-mask-support-test" ||
-        method == "incumbent-import-test") {
+        method == "incumbent-import-test" ||
+        method == "route-pool-incumbent-test" ||
+        method == "pickup-drop-compat-flow-test") {
         return "diagnostic";
     }
     if (containsText(text, "restricted path pool") || containsText(text, "restricted column")) {
@@ -199,6 +201,8 @@ std::string inferCertificateType(const SolveResult& result) {
     if (method == "support-pruning-test") return "support_duration_pruning_diagnostic";
     if (method == "route-mask-support-test") return "route_mask_support_duration_diagnostic";
     if (method == "incumbent-import-test") return "incumbent_import_verification_diagnostic";
+    if (method == "route-pool-incumbent-test") return "route_pool_incumbent_diagnostic";
+    if (method == "pickup-drop-compat-flow-test") return "pickup_drop_compat_flow_diagnostic";
     if (method == "pricing-branch") return "route_load_pricing_branch_probe";
     if (method == "cuts") return "cut_separation_diagnostic";
     if (method == "branching") return "branching_candidate_diagnostic";
@@ -468,11 +472,66 @@ std::string resultToJson(const SolveResult& result) {
         << (result.focused_retry_enabled ? "true" : "false") << ",\n";
     out << "  \"focused_retry_attempts\": " << result.focused_retry_attempts << ",\n";
     out << "  \"focused_retry_intervals\": " << result.focused_retry_intervals << ",\n";
+    out << "  \"focused_retry_selected_interval_ids\": \""
+        << jsonEscape(result.focused_retry_selected_interval_ids) << "\",\n";
+    out << "  \"focused_retry_lb_before\": \""
+        << jsonEscape(result.focused_retry_lb_before) << "\",\n";
+    out << "  \"focused_retry_lb_after\": \""
+        << jsonEscape(result.focused_retry_lb_after) << "\",\n";
     out << "  \"focused_retry_lb_improvements\": "
         << result.focused_retry_lb_improvements << ",\n";
+    out << "  \"focused_retry_open_nodes_before\": \""
+        << jsonEscape(result.focused_retry_open_nodes_before) << "\",\n";
+    out << "  \"focused_retry_open_nodes_after\": \""
+        << jsonEscape(result.focused_retry_open_nodes_after) << "\",\n";
     out << "  \"focused_retry_seconds\": " << result.focused_retry_seconds << ",\n";
     out << "  \"focused_retry_stopped_reason\": \""
         << jsonEscape(result.focused_retry_stopped_reason) << "\",\n";
+    out << "  \"route_pool_columns_raw\": " << result.route_pool_columns_raw << ",\n";
+    out << "  \"route_pool_columns_after_dominance\": "
+        << result.route_pool_columns_after_dominance << ",\n";
+    out << "  \"route_pool_columns_removed_by_dominance\": "
+        << result.route_pool_columns_removed_by_dominance << ",\n";
+    out << "  \"route_pool_incumbent_master_calls\": "
+        << result.route_pool_incumbent_master_calls << ",\n";
+    out << "  \"route_pool_incumbent_master_states\": "
+        << result.route_pool_incumbent_master_states << ",\n";
+    out << "  \"route_pool_incumbent_master_time_seconds\": "
+        << result.route_pool_incumbent_master_time_seconds << ",\n";
+    out << "  \"route_pool_incumbent_found\": "
+        << (result.route_pool_incumbent_found ? "true" : "false") << ",\n";
+    out << "  \"route_pool_incumbent_objective\": "
+        << result.route_pool_incumbent_objective << ",\n";
+    out << "  \"route_pool_incumbent_G\": " << result.route_pool_incumbent_G << ",\n";
+    out << "  \"route_pool_incumbent_P\": " << result.route_pool_incumbent_P << ",\n";
+    out << "  \"route_pool_incumbent_verified\": "
+        << (result.route_pool_incumbent_verified ? "true" : "false") << ",\n";
+    out << "  \"route_pool_incumbent_source\": \""
+        << jsonEscape(result.route_pool_incumbent_source) << "\",\n";
+    out << "  \"interval_candidates_found\": "
+        << result.interval_candidates_found << ",\n";
+    out << "  \"interval_candidates_verified\": "
+        << result.interval_candidates_verified << ",\n";
+    out << "  \"interval_candidates_accepted\": "
+        << result.interval_candidates_accepted << ",\n";
+    out << "  \"interval_candidates_rejected\": "
+        << result.interval_candidates_rejected << ",\n";
+    out << "  \"best_interval_candidate_objective\": "
+        << result.best_interval_candidate_objective << ",\n";
+    out << "  \"best_interval_candidate_rejection_reason\": \""
+        << jsonEscape(result.best_interval_candidate_rejection_reason) << "\",\n";
+    out << "  \"pickup_drop_pairs_total\": "
+        << result.pickup_drop_pairs_total << ",\n";
+    out << "  \"pickup_drop_pairs_compatible\": "
+        << result.pickup_drop_pairs_compatible << ",\n";
+    out << "  \"pickup_drop_pairs_incompatible\": "
+        << result.pickup_drop_pairs_incompatible << ",\n";
+    out << "  \"pickup_drop_compat_flow_variables\": "
+        << result.pickup_drop_compat_flow_variables << ",\n";
+    out << "  \"pickup_drop_compat_flow_constraints\": "
+        << result.pickup_drop_compat_flow_constraints << ",\n";
+    out << "  \"pickup_drop_compat_flow_time_seconds\": "
+        << result.pickup_drop_compat_flow_time_seconds << ",\n";
     out << "  \"final_inventories\": "; writeVector(out, result.final_inventory); out << ",\n";
     out << "  \"routes\": [";
     for (std::size_t r = 0; r < result.routes.size(); ++r) {

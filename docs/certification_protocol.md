@@ -247,3 +247,21 @@ All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `
 - The exact support-feasibility oracle remains disabled by default. No support
   cut may be generated from a timeout, sampled infeasibility, or heuristic route
   failure.
+
+## 2026-06-21 Round-5 Certificate Warnings
+
+- Focused min-LB retry changes only which unresolved frontier interval receives
+  remaining branch-price time. It does not remove intervals from the ledger, and
+  a positive-gap focused-retry result remains noncertified.
+- The route-column pool incumbent master is a restricted primal heuristic. A
+  verified route-pool solution may update `upper_bound`, but the restricted
+  pool cannot provide a global lower-bound certificate.
+- Interval tree surrogate metrics must not be confused with the original
+  objective. Every integer candidate from an interval is verifier-checked and
+  evaluated under `G + lambda P`; rejected candidates must carry a reason.
+- Pickup-drop compatibility flow is a valid inventory-relaxation strengthening
+  only when pairs are removed by a route-duration lower-bound proof. It is not
+  an optimality certificate by itself, and if no pair is proven incompatible it
+  may add audit statistics without improving the lower bound.
+- The support-feasibility oracle remains optional and disabled in certificate
+  runs for this pass. No heuristic or timed-out support failure may add a cut.

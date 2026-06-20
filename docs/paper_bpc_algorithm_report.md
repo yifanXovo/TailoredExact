@@ -217,3 +217,56 @@ All round-four smoke, incumbent, and ablation commands exited with code `0`; no
 captured stdout/stderr log contained address/access-violation, segmentation,
 `bad_alloc`, or out-of-memory signatures. Raw outputs and summaries are in
 `results/optimization_update_round4/`.
+
+## Fifth Optimization Pass: Focused Retry Execution, Route-Column Pool Incumbents, And Pickup-Drop Compatibility Relaxation
+
+This pass fixes the focused-retry execution path so `--frontier-focused-min-lb-retry true`
+spends remaining time on the unresolved interval that determines the current
+global lower bound. It also adds a frontier route-column pool and a
+true-objective restricted incumbent master. The pool master is verifier-gated
+and supplies only upper bounds. Finally, the inventory/route/Gini relaxation can
+include pickup-drop compatibility flow constraints; station pairs are removed
+only when directed route-duration lower bounds prove that a pickup at `i` cannot
+feed a drop at `j`.
+
+Local runnable inputs remained `testdata/examples/gcap_smoke_V4_M1.txt`,
+`reference/regen_candidate_V12_M1_average.txt`, and
+`reference/regen_candidate_V12_M2_average.txt`. V8/V10 source `.txt` files were
+not present in this checkout. CPLEX plain benchmarks were skipped in this pass;
+compact/CPLEX-style seeds are used only as labeled upper-bound sources where
+requested.
+
+| Instance | Variant | Status | UB | LB | Gap | Focused attempts | Route-pool UB? | Incompatible pairs | Time (s) | Certified? |
+|---|---|---|---:|---:|---:|---:|---|---:|---:|---|
+| V4 smoke | gcap-frontier | optimal | 0 | 0 | 0 | 1 | yes | 0 | 2.95 | yes |
+| V12 M1 average | round4_improved_baseline | not closed | 0.382683045935 | 0.258804234390 | 0.323711261476 | 0 | no | 0 | 57.09 | no |
+| V12 M1 average | focused_retry_only | not closed | 0.382683045935 | 0.258804234390 | 0.323711261476 | 1 | no | 0 | 71.09 | no |
+| V12 M1 average | improved_full | not closed | 0.382683045935 | 0.258804234390 | 0.323711261476 | 0 | yes | 0 | 72.62 | no |
+| V12 M1 average | improved_full_long | not closed | 0.382683045935 | 0.258804234390 | 0.323711261476 | 1 | yes | 0 | 124.80 | no |
+| V12 M2 average | round4_improved_baseline | not closed | 0.759438494406 | 0.587614408090 | 0.226251483934 | 0 | no | 0 | 51.22 | no |
+| V12 M2 average | focused_retry_only | not closed | 0.759438494406 | 0.587614408090 | 0.226251483934 | 1 | no | 0 | 60.57 | no |
+| V12 M2 average | improved_full | not closed | 0.759438494406 | 0.587614408090 | 0.226251483934 | 1 | yes | 0 | 66.83 | no |
+| V12 M2 average | improved_full_long | not closed | 0.759438494406 | 0.581677222300 | 0.234069346518 | 1 | yes | 0 | 111.08 | no |
+
+The compatibility test was conservative on both V12 regenerated instances:
+every pickup/drop pair remained compatible, so the new flow constraints added
+auditable structure but did not improve the lower bounds. Focused retry now
+executes in unresolved V12 rows, but the retry passes did not make valid
+lower-bound progress before the time caps. The route-pool incumbent master found
+verified restricted-pool incumbents in route-pool-enabled rows, but those
+incumbents matched or trailed the existing seeds and are reported only as upper
+bounds.
+
+Best V12 incumbent audit rows in this pass:
+
+- V12 M1 average: BPC-owned `local`, `pool`, `portfolio`, and `strong` modes all
+  reached UB `0.369698924539`.
+- V12 M2 average: BPC-owned `strong` and `portfolio` modes reached UB
+  `0.759438494406`.
+
+No new original-problem certificate was obtained in round five. V4 smoke remains
+certified; V12 M1 and V12 M2 remain noncertified with positive gaps. Raw outputs
+and summaries are in `results/optimization_update_round5/`. All round-five
+commands exited with code `0`, and the captured logs did not contain
+address/access-violation, segmentation, `bad_alloc`, or out-of-memory
+signatures.

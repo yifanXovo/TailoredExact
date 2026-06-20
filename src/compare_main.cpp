@@ -32,6 +32,7 @@ void usage() {
         << "[--frontier-column-cache true|false] [--frontier-focused-min-lb-retry true|false] "
         << "[--support-duration-pruning true|false] [--support-duration-max-subset-size <N>] "
         << "[--route-mask-support-duration-pruning true|false] [--support-feasibility-oracle true|false] "
+        << "[--route-pool-incumbent true|false] [--pickup-drop-compat-flow true|false] "
         << "[--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>]\n";
 }
 
@@ -84,6 +85,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--support-duration-max-subset-size") opt.support_duration_max_subset_size = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--route-mask-support-duration-pruning") opt.route_mask_support_duration_pruning = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--support-feasibility-oracle") opt.support_feasibility_oracle = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--route-pool-incumbent") opt.route_pool_incumbent = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--pickup-drop-compat-flow") opt.pickup_drop_compat_flow = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--inventory-probe-max-v") opt.inventory_probe_max_v = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--inventory-probe-seconds") opt.inventory_probe_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--out") opt.out_path = requireValue(i, argc, argv);
@@ -265,9 +268,34 @@ void writeMethodRow(std::ostringstream& out,
         << (result.focused_retry_enabled ? "true" : "false") << ","
         << result.focused_retry_attempts << ","
         << result.focused_retry_intervals << ","
+        << csvEscape(result.focused_retry_selected_interval_ids) << ","
+        << csvEscape(result.focused_retry_lb_before) << ","
+        << csvEscape(result.focused_retry_lb_after) << ","
         << result.focused_retry_lb_improvements << ","
+        << csvEscape(result.focused_retry_open_nodes_before) << ","
+        << csvEscape(result.focused_retry_open_nodes_after) << ","
         << result.focused_retry_seconds << ","
         << csvEscape(result.focused_retry_stopped_reason) << ","
+        << result.route_pool_columns_raw << ","
+        << result.route_pool_columns_after_dominance << ","
+        << result.route_pool_columns_removed_by_dominance << ","
+        << result.route_pool_incumbent_master_calls << ","
+        << result.route_pool_incumbent_master_states << ","
+        << result.route_pool_incumbent_master_time_seconds << ","
+        << (result.route_pool_incumbent_found ? "true" : "false") << ","
+        << result.route_pool_incumbent_objective << ","
+        << (result.route_pool_incumbent_verified ? "true" : "false") << ","
+        << csvEscape(result.route_pool_incumbent_source) << ","
+        << result.interval_candidates_found << ","
+        << result.interval_candidates_verified << ","
+        << result.interval_candidates_accepted << ","
+        << result.best_interval_candidate_objective << ","
+        << csvEscape(result.best_interval_candidate_rejection_reason) << ","
+        << result.pickup_drop_pairs_total << ","
+        << result.pickup_drop_pairs_compatible << ","
+        << result.pickup_drop_pairs_incompatible << ","
+        << result.pickup_drop_compat_flow_variables << ","
+        << result.pickup_drop_compat_flow_constraints << ","
         << (ebrp::inferCertifiedOriginalProblem(result) ? "true" : "false") << ","
         << csvEscape(result.result_file) << ","
         << csvEscape(result.log_file) << ","
@@ -324,7 +352,17 @@ std::string comparisonCsv(const std::vector<std::pair<ebrp::SolveResult, ebrp::S
         << "incumbent_source,incumbent_source_detail,incumbent_import_attempted,incumbent_import_verified,"
         << "incumbent_import_objective,incumbent_generation_time_seconds,incumbent_generation_method,"
         << "focused_retry_enabled,focused_retry_attempts,focused_retry_intervals,"
-        << "focused_retry_lb_improvements,focused_retry_seconds,focused_retry_stopped_reason,"
+        << "focused_retry_selected_interval_ids,focused_retry_lb_before,focused_retry_lb_after,"
+        << "focused_retry_lb_improvements,focused_retry_open_nodes_before,focused_retry_open_nodes_after,"
+        << "focused_retry_seconds,focused_retry_stopped_reason,"
+        << "route_pool_columns_raw,route_pool_columns_after_dominance,route_pool_columns_removed_by_dominance,"
+        << "route_pool_incumbent_master_calls,route_pool_incumbent_master_states,"
+        << "route_pool_incumbent_master_time_seconds,route_pool_incumbent_found,"
+        << "route_pool_incumbent_objective,route_pool_incumbent_verified,route_pool_incumbent_source,"
+        << "interval_candidates_found,interval_candidates_verified,interval_candidates_accepted,"
+        << "best_interval_candidate_objective,best_interval_candidate_rejection_reason,"
+        << "pickup_drop_pairs_total,pickup_drop_pairs_compatible,pickup_drop_pairs_incompatible,"
+        << "pickup_drop_compat_flow_variables,pickup_drop_compat_flow_constraints,"
         << "certified_original_problem,result_file,log_file,"
         << "paired_method,paired_status,paired_gap,paired_runtime_seconds,"
         << "certified_optimal_speedup,notes\n";
