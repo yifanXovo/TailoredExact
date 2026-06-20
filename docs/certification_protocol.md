@@ -226,3 +226,24 @@ All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `
 - Support-duration pruning can remove pricing labels only when metric-closure route-duration plus minimum operation time proves the support impossible. It does not replace exact pricing closure.
 - The relaxation cache omits time budget from the key. Larger-budget requests after a cache hit are recomputed and logged as partial hits; the stronger valid bound is retained.
 - BPC-owned incumbent pools skip malformed route-load candidates with missing operation vectors. These candidates are heuristic upper-bound candidates only, so skipping them cannot weaken a lower-bound certificate.
+
+## 2026-06-21 Round-4 Certificate Warnings
+
+- The strengthened support-duration rule uses
+  `cycle_lb(S) + (pickup_time + drop_time) * ceil(|S|/2)`. It is valid only when
+  `cycle_lb` is a non-overestimating route travel lower bound and station visits
+  in certificate-producing columns imply nonzero operation. It is a pruning rule,
+  not a closure certificate.
+- Route-mask support-duration pruning may remove only masks whose entire support
+  is impossible for the current vehicle by the same duration lower bound. The
+  complete route-mask ledger must still cover every remaining relevant mask.
+- Imported HGA-style incumbents, route JSON/CSV incumbents, compact seeds, and
+  compact-CPLEX seeds are upper bounds only after the independent verifier
+  accepts them. They may shrink the improving Gini range and cutoff domains, but
+  they never provide lower-bound evidence.
+- Focused min-LB retry changes only which unresolved interval receives more
+  branch-price time. It does not remove intervals from the final ledger and does
+  not certify a positive-gap run.
+- The exact support-feasibility oracle remains disabled by default. No support
+  cut may be generated from a timeout, sampled infeasibility, or heuristic route
+  failure.

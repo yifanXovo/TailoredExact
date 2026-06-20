@@ -1096,3 +1096,28 @@ Outcome:
 - Runnable local source instances found for this pass: V4 smoke and V12 regenerated candidates. V8/V10 source text files were not present in this checkout, so round-three ablation reruns for V8/V10 were skipped rather than fabricated.
 - V4 smoke remains certified. V12 M1/M2 average remain noncertified in short ablations; improved_full gives modest lower-bound progress only.
 - Raw outputs and summaries are in `results/optimization_update_round3/`.
+
+# 2026-06-21 Round-4 Support-Duration And Incumbent Pass
+
+- Started from merged `main` at `db20932d1690cb842bb5cabdc95f13e7bb7b81ad` and preserved pre-existing untracked round-three artifacts.
+- Strengthened support-duration pricing pruning from one operation to the exact-safe `ceil(|S|/2)` pickup lower bound.
+- Applied the same support-duration infeasibility test to complete route-mask relaxation mask filtering with vehicle-specific allowed masks and route-mask removal statistics.
+- Added route JSON/CSV and HGA-style incumbent import plumbing, compact/compact-CPLEX seeding modes, and import diagnostics. Imported incumbents are verifier-gated upper bounds only.
+- Added focused retry metadata for unresolved minimum-LB frontier intervals. The pass is certificate-neutral and does not remove intervals from the ledger.
+- `--support-feasibility-oracle` is exposed but remains disabled by default; no heuristic support infeasibility cuts were added.
+- CMake was unavailable; both executables were rebuilt with the documented `g++` fallback.
+- Smoke diagnostics passed on `testdata/examples/gcap_smoke_V4_M1.txt`: `pricing`, `pricing-branch`, `cuts`, `branching`, `master`, `cg`, `gcap-cg`, `gcap-tree`, `gcap-frontier`, `dominance-test`, `support-pruning-test`, `route-mask-support-test`, and `incumbent-import-test`.
+- V4 smoke remains certified with objective/LB/UB `0`.
+- V12 M1 average best local seed in this pass was compact-CPLEX, UB `0.366157179488`; this is a verified seeded/hybrid upper bound, not pure BPC performance.
+- V12 M2 average best local seed was BPC-owned portfolio/strong, UB `0.759438494406`.
+- Short V12 ablations remained noncertified: improved_full V12 M1 gap `0.244343576775`; improved_full V12 M2 gap `0.223640060515`.
+- Real V4/V12 support-duration and route-mask support counts were zero. Synthetic diagnostics demonstrate the strengthened rule on constructed cases where the old one-operation rule cuts nothing.
+- All smoke, incumbent-audit, and ablation commands exited `0`; no captured log contained memory/address error signatures.
+- Runnable local source inputs for V8/V10 were not found in this checkout; only historical logs/results were present.
+- Raw outputs and summaries are in `results/optimization_update_round4/`.
+
+Remaining TODOs:
+
+- Find or regenerate compatible V8/V10 input files for the current parser so round-four ablations can cover the historical target cases.
+- Add an exact support-feasibility oracle only if it can prove small-support infeasibility without timeouts or heuristics.
+- Investigate stronger V12 lower bounds; support-duration pruning did not remove real V12 masks in this pass.

@@ -249,6 +249,15 @@ double routeCycleLength(const std::vector<std::vector<double>>& d, int station_m
     return std::isfinite(best) ? best : 0.0;
 }
 
+int popcountMask(int mask) {
+    int count = 0;
+    while (mask != 0) {
+        mask &= (mask - 1);
+        ++count;
+    }
+    return count;
+}
+
 double partitionTravelLowerBound(const std::vector<std::vector<double>>& d,
                                  int station_mask,
                                  int V,
@@ -681,7 +690,8 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     int route_mask_max_v,
     bool projection_bound_enabled,
     bool penalty_domain_tightening_enabled,
-    bool movement_domain_tightening_enabled) {
+    bool movement_domain_tightening_enabled,
+    bool route_mask_support_duration_pruning_enabled) {
     GiniIntervalInventoryRelaxationBound bound;
     if (instance.V <= 0 || gamma_cap < -1e-12) {
         bound.note = "inventory-Gini relaxation skipped because interval parameters are invalid";
@@ -872,16 +882,70 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     const bool route_mask_relaxation =
         integer_inventory_relaxation && instance.V <= route_mask_max_v &&
         instance.M <= 4;
-    std::vector<int> allowed_route_masks;
+    std::vector<std::vector<int>> allowed_route_masks_by_vehicle(instance.M);
     if (route_mask_relaxation) {
+        const auto support_start = std::chrono::steady_clock::now();
         const int max_mask = 1 << instance.V;
-        for (int mask = 1; mask < max_mask; ++mask) {
-            if (mask < static_cast<int>(route_cycle_lb.size()) &&
-                route_cycle_lb[mask] <= instance.total_time_limit + 1e-9) {
-                allowed_route_masks.push_back(mask);
+        const double cunit = std::max(0.0, unit_operation_time);
+        bound.route_mask_support_duration_pruning =
+            route_mask_support_duration_pruning_enabled;
+        for (int k = 0; k < instance.M; ++k) {
+            for (int mask = 1; mask < max_mask; ++mask) {
+                if (mask >= static_cast<int>(route_cycle_lb.size())) continue;
+                if (route_cycle_lb[mask] > instance.total_time_limit + 1e-9) {
+                    continue;
+                }
+                const int support_size = popcountMask(mask);
+                const int min_pickups = (support_size + 1) / 2;
+                const double support_duration_lb =
+                    route_cycle_lb[mask] + cunit * static_cast<double>(min_pickups);
+                ++bound.route_mask_count_before_support_duration;
+                if (route_mask_support_duration_pruning_enabled &&
+                    support_duration_lb > instance.total_time_limit + 1e-9) {
+                    ++bound.route_masks_removed_by_support_duration;
+                    bound.route_mask_support_duration_max_removed_subset_size =
+                        std::max(bound.route_mask_support_duration_max_removed_subset_size,
+                                 support_size);
+                    if (bound.route_mask_support_duration_removed_examples.size() < 8) {
+                        std::ostringstream example;
+                        example << "vehicle=" << k
+                                << ", mask=" << mask
+                                << ", popcount=" << support_size
+                                << ", cycle_lb=" << route_cycle_lb[mask]
+                                << ", min_pickups=" << min_pickups
+                                << ", support_duration_lb=" << support_duration_lb
+                                << ", route_limit=" << instance.total_time_limit;
+                        bound.route_mask_support_duration_removed_examples.push_back(
+                            example.str());
+                    }
+                    continue;
+                }
+                allowed_route_masks_by_vehicle[k].push_back(mask);
+                ++bound.route_mask_count_after_support_duration;
             }
         }
+        bound.route_mask_support_duration_precompute_time_seconds =
+            std::chrono::duration<double>(
+                std::chrono::steady_clock::now() - support_start).count();
     }
+    auto routeMaskSupportNote = [&]() {
+        std::ostringstream ss;
+        ss << ", route_mask_support_duration_pruning="
+           << (route_mask_support_duration_pruning_enabled ? "true" : "false")
+           << ", route_mask_count_before_support_duration="
+           << bound.route_mask_count_before_support_duration
+           << ", route_mask_count_after_support_duration="
+           << bound.route_mask_count_after_support_duration
+           << ", route_masks_removed_by_support_duration="
+           << bound.route_masks_removed_by_support_duration
+           << ", route_mask_support_duration_max_removed_subset_size="
+           << bound.route_mask_support_duration_max_removed_subset_size;
+        for (const std::string& example :
+             bound.route_mask_support_duration_removed_examples) {
+            ss << ", removed_mask_example={" << example << "}";
+        }
+        return ss.str();
+    };
 
     std::ofstream lp(lp_path);
     if (!lp) {
@@ -968,7 +1032,7 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
         for (int k = 0; k < instance.M; ++k) {
             std::ostringstream route_use;
             bool first_use = true;
-            for (int mask : allowed_route_masks) {
+            for (int mask : allowed_route_masks_by_vehicle[k]) {
                 addPositiveTerm(route_use, first_use, 1.0, routeMaskName(k, mask));
             }
             if (first_use) route_use << "0";
@@ -981,7 +1045,7 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
             bool first_cover = true;
             const int bit = 1 << (i - 1);
             for (int k = 0; k < instance.M; ++k) {
-                for (int mask : allowed_route_masks) {
+                for (int mask : allowed_route_masks_by_vehicle[k]) {
                     if (mask & bit) {
                         addPositiveTerm(cover, first_cover, 1.0, routeMaskName(k, mask));
                     }
@@ -1022,7 +1086,7 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
 
                 std::ostringstream pickup_link;
                 pickup_link << routePickupName(k, i);
-                for (int mask : allowed_route_masks) {
+                for (int mask : allowed_route_masks_by_vehicle[k]) {
                     if (mask & bit) {
                         pickup_link << " - " << num(pickup_cap) << " "
                                     << routeMaskName(k, mask);
@@ -1033,7 +1097,7 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
 
                 std::ostringstream drop_link;
                 drop_link << routeDropName(k, i);
-                for (int mask : allowed_route_masks) {
+                for (int mask : allowed_route_masks_by_vehicle[k]) {
                     if (mask & bit) {
                         drop_link << " - " << num(drop_cap) << " "
                                   << routeMaskName(k, mask);
@@ -1051,7 +1115,7 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
                 addPositiveTerm(duration, first_duration, unit_operation_time,
                                 routePickupName(k, i));
             }
-            for (int mask : allowed_route_masks) {
+            for (int mask : allowed_route_masks_by_vehicle[k]) {
                 addPositiveTerm(duration, first_duration, route_cycle_lb[mask],
                                 routeMaskName(k, mask));
             }
@@ -1209,7 +1273,7 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
         }
         if (route_mask_relaxation) {
             for (int k = 0; k < instance.M; ++k) {
-                for (int mask : allowed_route_masks) {
+                for (int mask : allowed_route_masks_by_vehicle[k]) {
                     lp << " " << routeMaskName(k, mask) << "\n";
                 }
             }
@@ -1264,6 +1328,7 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
                  << ", route_mask_duration_load_relaxation="
                  << (route_mask_relaxation ? "true" : "false")
                  << ", route_mask_max_v=" << route_mask_max_v
+                 << routeMaskSupportNote()
                  << ", incumbent_cutoff_bound=true"
                  << ", penalty_budget=" << num(penalty_budget)
                  << ", min_station_bikes=" << min_station_bikes_after_return
@@ -1304,6 +1369,7 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
                  << ", route_mask_duration_load_relaxation="
                  << (route_mask_relaxation ? "true" : "false")
                  << ", route_mask_max_v=" << route_mask_max_v
+                 << routeMaskSupportNote()
                  << ", incumbent_cutoff_bound=true"
                  << ", penalty_budget=" << num(penalty_budget)
                  << ", min_station_bikes=" << min_station_bikes_after_return
@@ -1342,6 +1408,7 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
                  << ", route_mask_duration_load_relaxation="
                  << (route_mask_relaxation ? "true" : "false")
                  << ", route_mask_max_v=" << route_mask_max_v
+                 << routeMaskSupportNote()
                  << ", incumbent_cutoff_bound=" << (cutoff_bound_active ? "true" : "false")
                  << ", penalty_budget=" << (cutoff_bound_active ? num(penalty_budget) : "inf")
                  << ", penalty_domain_tightening=" << (penalty_domain_tightening_enabled ? "true" : "false")
@@ -1385,6 +1452,7 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
          << ", route_mask_duration_load_relaxation="
          << (route_mask_relaxation ? "true" : "false")
          << ", route_mask_max_v=" << route_mask_max_v
+         << routeMaskSupportNote()
          << ", incumbent_cutoff_bound=" << (cutoff_bound_active ? "true" : "false")
          << ", penalty_budget=" << (cutoff_bound_active ? num(penalty_budget) : "inf")
          << ", penalty_domain_tightening=" << (penalty_domain_tightening_enabled ? "true" : "false")

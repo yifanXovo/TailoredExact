@@ -38,24 +38,26 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|incumbent-import-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
         << "[--gini-cap <gamma>] [--gini-floor <gamma>] [--max-nodes <N>] [--frontier-intervals <N>] [--frontier-refine-splits <N>] "
         << "[--frontier-split-batch <N>] [--frontier-retry-passes <N>] [--frontier-retry-nodes <N>] "
         << "[--frontier-retry-reserve <seconds>] [--frontier-relax-seconds <seconds>] [--route-mask-max-v <V>] "
-        << "[--bpc-incumbent none|greedy|random|local|pool|pricing|portfolio|strong] [--bpc-incumbent-seconds <seconds>] [--bpc-incumbent-rounds <N>] "
+        << "[--bpc-incumbent none|greedy|random|local|pool|pricing|portfolio|strong|compact|compact-cplex] [--bpc-incumbent-seconds <seconds>] [--bpc-incumbent-rounds <N>] "
         << "[--frontier-final-closure true|false] [--frontier-final-nodes <N>] "
         << "[--gcap-warmstart seed|sparse|full] [--gcap-pricing-columns <N>] "
         << "[--column-dominance true|false] [--column-dominance-mode exact|pareto|off] "
         << "[--projection-bound true|false] [--penalty-domain-tightening true|false] "
         << "[--movement-domain-tightening true|false] [--movement-bound-audit true|false] "
         << "[--frontier-best-bound-scheduling true|false] [--frontier-relaxation-cache true|false] "
-        << "[--frontier-column-cache true|false] "
+        << "[--frontier-column-cache true|false] [--frontier-focused-min-lb-retry true|false] "
         << "[--support-duration-pruning true|false] [--support-duration-max-subset-size <N>] "
+        << "[--route-mask-support-duration-pruning true|false] [--support-feasibility-oracle true|false] "
         << "[--gcap-seed-cplex] [--gcap-seed-time-limit <seconds>] "
         << "[--incumbent-json <path>] [--incumbent-format auto|exact_result|route_json|csv] "
+        << "[--hga-incumbent <path>] [--hga-incumbent-format auto|route_json|csv|legacy] "
         << "[--incumbent-source-name <name>] [--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>]\n";
 }
 
@@ -122,12 +124,17 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--frontier-best-bound-scheduling") opt.frontier_best_bound_scheduling = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-relaxation-cache") opt.frontier_relaxation_cache = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-column-cache") opt.frontier_column_cache = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-focused-min-lb-retry") opt.frontier_focused_min_lb_retry = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--support-duration-pruning") opt.support_duration_pruning = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--support-duration-max-subset-size") opt.support_duration_max_subset_size = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--route-mask-support-duration-pruning") opt.route_mask_support_duration_pruning = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--support-feasibility-oracle") opt.support_feasibility_oracle = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--gcap-seed-cplex") opt.gcap_seed_cplex = true;
         else if (arg == "--gcap-seed-time-limit") opt.gcap_seed_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--incumbent-json") opt.incumbent_json_path = requireValue(i, argc, argv);
         else if (arg == "--incumbent-format") opt.incumbent_format = requireValue(i, argc, argv);
+        else if (arg == "--hga-incumbent") opt.hga_incumbent_path = requireValue(i, argc, argv);
+        else if (arg == "--hga-incumbent-format") opt.hga_incumbent_format = requireValue(i, argc, argv);
         else if (arg == "--incumbent-source-name") opt.incumbent_source_name = requireValue(i, argc, argv);
         else if (arg == "--inventory-probe-max-v") opt.inventory_probe_max_v = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--inventory-probe-seconds") opt.inventory_probe_seconds = std::stod(requireValue(i, argc, argv));
@@ -304,6 +311,128 @@ std::vector<ebrp::RoutePlan> loadRoutesFromResultJson(const std::string& path, i
     return routes;
 }
 
+std::vector<std::string> splitSimpleCsvLine(const std::string& line) {
+    std::vector<std::string> cells;
+    std::string cell;
+    bool in_quotes = false;
+    for (std::size_t pos = 0; pos < line.size(); ++pos) {
+        const char ch = line[pos];
+        if (ch == '"') {
+            in_quotes = !in_quotes;
+        } else if (ch == ',' && !in_quotes) {
+            cells.push_back(cell);
+            cell.clear();
+        } else {
+            cell.push_back(ch);
+        }
+    }
+    cells.push_back(cell);
+    for (std::string& value : cells) {
+        while (!value.empty() &&
+               std::isspace(static_cast<unsigned char>(value.front()))) {
+            value.erase(value.begin());
+        }
+        while (!value.empty() &&
+               std::isspace(static_cast<unsigned char>(value.back()))) {
+            value.pop_back();
+        }
+    }
+    return cells;
+}
+
+std::vector<ebrp::RoutePlan> loadRoutesFromCsv(const std::string& path,
+                                               int vehicle_count) {
+    std::ifstream in(path);
+    if (!in) throw std::runtime_error("cannot open incumbent CSV: " + path);
+    struct Row {
+        int vehicle = -1;
+        int order = 0;
+        int station = 0;
+        int pickup = 0;
+        int drop = 0;
+    };
+    std::vector<Row> rows;
+    std::string line;
+    bool saw_header = false;
+    while (std::getline(in, line)) {
+        if (line.empty()) continue;
+        const std::vector<std::string> cells = splitSimpleCsvLine(line);
+        if (cells.size() < 5) continue;
+        if (!saw_header) {
+            saw_header = true;
+            std::string first = cells[0];
+            std::transform(first.begin(), first.end(), first.begin(),
+                           [](unsigned char c) {
+                               return static_cast<char>(std::tolower(c));
+                           });
+            if (first.find("vehicle") != std::string::npos) continue;
+        }
+        Row row;
+        row.vehicle = std::stoi(cells[0]);
+        row.order = std::stoi(cells[1]);
+        row.station = std::stoi(cells[2]);
+        row.pickup = std::stoi(cells[3]);
+        row.drop = std::stoi(cells[4]);
+        if (row.vehicle < 0 || row.vehicle >= vehicle_count) {
+            throw std::runtime_error("incumbent CSV row has invalid vehicle index");
+        }
+        rows.push_back(row);
+    }
+    std::sort(rows.begin(), rows.end(), [](const Row& a, const Row& b) {
+        if (a.vehicle != b.vehicle) return a.vehicle < b.vehicle;
+        return a.order < b.order;
+    });
+    std::vector<ebrp::RoutePlan> routes(std::max(0, vehicle_count));
+    for (int k = 0; k < vehicle_count; ++k) {
+        routes[k].vehicle = k;
+        routes[k].nodes = {0};
+    }
+    for (const Row& row : rows) {
+        if (row.station <= 0) continue;
+        ebrp::RoutePlan& route = routes[row.vehicle];
+        route.nodes.push_back(row.station);
+        ebrp::StopOperation op;
+        op.station = row.station;
+        op.pickup = row.pickup;
+        op.drop = row.drop;
+        route.operations.push_back(op);
+    }
+    for (int k = 0; k < vehicle_count; ++k) {
+        if (routes[k].nodes.empty()) routes[k].nodes.push_back(0);
+        if (routes[k].nodes.back() != 0) routes[k].nodes.push_back(0);
+        if (routes[k].nodes.size() == 1) routes[k].nodes.push_back(0);
+    }
+    return routes;
+}
+
+std::vector<ebrp::RoutePlan> loadIncumbentRoutesByFormat(
+    const std::string& path,
+    const std::string& format,
+    int vehicle_count) {
+    std::string fmt = format.empty() ? "auto" : format;
+    std::transform(fmt.begin(), fmt.end(), fmt.begin(), [](unsigned char c) {
+        return static_cast<char>(std::tolower(c));
+    });
+    if (fmt == "auto") {
+        std::filesystem::path p(path);
+        std::string ext = p.extension().string();
+        std::transform(ext.begin(), ext.end(), ext.begin(), [](unsigned char c) {
+            return static_cast<char>(std::tolower(c));
+        });
+        fmt = (ext == ".csv") ? "csv" : "route_json";
+    }
+    if (fmt == "exact_result" || fmt == "route_json" || fmt == "json") {
+        return loadRoutesFromResultJson(path, vehicle_count);
+    }
+    if (fmt == "csv") {
+        return loadRoutesFromCsv(path, vehicle_count);
+    }
+    if (fmt == "legacy") {
+        throw std::runtime_error("legacy HGA incumbent format is not implemented; use route_json or csv schema");
+    }
+    throw std::runtime_error("unsupported incumbent format: " + format);
+}
+
 ebrp::SolveResult solvePricingDiagnostic(const ebrp::Instance& instance,
                                          const ebrp::SolveOptions& opt) {
     const auto start = std::chrono::steady_clock::now();
@@ -337,6 +466,12 @@ ebrp::SolveResult solvePricingDiagnostic(const ebrp::Instance& instance,
             priced.support_duration_pruned_labels;
         result.support_duration_pruned_columns +=
             priced.support_duration_pruned_columns;
+        result.support_duration_strong_cuts_generated +=
+            priced.support_duration_strong_cuts_generated;
+        result.support_duration_strong_pruned_labels +=
+            priced.support_duration_strong_pruned_labels;
+        result.support_duration_strong_pruned_columns +=
+            priced.support_duration_strong_pruned_columns;
         result.support_duration_max_subset_size =
             std::max(result.support_duration_max_subset_size,
                      priced.support_duration_max_subset_size);
@@ -1843,6 +1978,12 @@ ebrp::SolveResult solveColumnGenerationDiagnostic(const ebrp::Instance& instance
     result.support_duration_cuts_generated = cg.support_duration_cuts_generated;
     result.support_duration_pruned_labels = cg.support_duration_pruned_labels;
     result.support_duration_pruned_columns = cg.support_duration_pruned_columns;
+    result.support_duration_strong_cuts_generated =
+        cg.support_duration_strong_cuts_generated;
+    result.support_duration_strong_pruned_labels =
+        cg.support_duration_strong_pruned_labels;
+    result.support_duration_strong_pruned_columns =
+        cg.support_duration_strong_pruned_columns;
     result.support_duration_max_subset_size = cg.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         cg.support_duration_precompute_time_seconds;
@@ -1946,6 +2087,12 @@ ebrp::SolveResult solveGiniCapColumnGenerationDiagnostic(const ebrp::Instance& i
     result.support_duration_cuts_generated = cg.support_duration_cuts_generated;
     result.support_duration_pruned_labels = cg.support_duration_pruned_labels;
     result.support_duration_pruned_columns = cg.support_duration_pruned_columns;
+    result.support_duration_strong_cuts_generated =
+        cg.support_duration_strong_cuts_generated;
+    result.support_duration_strong_pruned_labels =
+        cg.support_duration_strong_pruned_labels;
+    result.support_duration_strong_pruned_columns =
+        cg.support_duration_strong_pruned_columns;
     result.support_duration_max_subset_size = cg.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         cg.support_duration_precompute_time_seconds;
@@ -2035,6 +2182,12 @@ ebrp::SolveResult solveGiniCapBranchProbeDiagnostic(const ebrp::Instance& instan
     result.support_duration_cuts_generated = probe.support_duration_cuts_generated;
     result.support_duration_pruned_labels = probe.support_duration_pruned_labels;
     result.support_duration_pruned_columns = probe.support_duration_pruned_columns;
+    result.support_duration_strong_cuts_generated =
+        probe.support_duration_strong_cuts_generated;
+    result.support_duration_strong_pruned_labels =
+        probe.support_duration_strong_pruned_labels;
+    result.support_duration_strong_pruned_columns =
+        probe.support_duration_strong_pruned_columns;
     result.support_duration_max_subset_size = probe.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         probe.support_duration_precompute_time_seconds;
@@ -2193,6 +2346,12 @@ ebrp::SolveResult solveGiniCapTreeDiagnostic(const ebrp::Instance& instance,
     result.support_duration_cuts_generated = tree.support_duration_cuts_generated;
     result.support_duration_pruned_labels = tree.support_duration_pruned_labels;
     result.support_duration_pruned_columns = tree.support_duration_pruned_columns;
+    result.support_duration_strong_cuts_generated =
+        tree.support_duration_strong_cuts_generated;
+    result.support_duration_strong_pruned_labels =
+        tree.support_duration_strong_pruned_labels;
+    result.support_duration_strong_pruned_columns =
+        tree.support_duration_strong_pruned_columns;
     result.support_duration_max_subset_size = tree.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         tree.support_duration_precompute_time_seconds;
@@ -2443,6 +2602,12 @@ ebrp::SolveResult solveSupportPruningDiagnostic(const ebrp::Instance& instance,
             priced.support_duration_pruned_labels;
         result.support_duration_pruned_columns +=
             priced.support_duration_pruned_columns;
+        result.support_duration_strong_cuts_generated +=
+            priced.support_duration_strong_cuts_generated;
+        result.support_duration_strong_pruned_labels +=
+            priced.support_duration_strong_pruned_labels;
+        result.support_duration_strong_pruned_columns +=
+            priced.support_duration_strong_pruned_columns;
         result.support_duration_precompute_time_seconds +=
             priced.support_duration_precompute_time_seconds;
         result.support_duration_max_subset_size =
@@ -2453,10 +2618,46 @@ ebrp::SolveResult solveSupportPruningDiagnostic(const ebrp::Instance& instance,
     std::ostringstream note;
     note << "support-duration pruning diagnostic: cuts_generated="
          << result.support_duration_cuts_generated
+         << ", strong_cuts_generated="
+         << result.support_duration_strong_cuts_generated
          << ", pruned_labels=" << result.support_duration_pruned_labels
          << ", pruned_columns=" << result.support_duration_pruned_columns
          << ", max_subset_size=" << result.support_duration_max_subset_size;
     result.notes.push_back(note.str());
+    {
+        const int synthetic_v = 4;
+        const double synthetic_route_limit = 180.0;
+        const double synthetic_cunit = 120.0;
+        int old_rule_cuts = 0;
+        int strong_rule_cuts = 0;
+        for (int mask = 1; mask < (1 << synthetic_v); ++mask) {
+            int support_size = 0;
+            int x = mask;
+            while (x != 0) {
+                x &= (x - 1);
+                ++support_size;
+            }
+            if (support_size > 3) continue;
+            const double cycle_lb = 0.0;
+            if (cycle_lb + synthetic_cunit > synthetic_route_limit + 1e-9) {
+                ++old_rule_cuts;
+            }
+            const int min_pickups = (support_size + 1) / 2;
+            if (cycle_lb + synthetic_cunit * min_pickups >
+                synthetic_route_limit + 1e-9) {
+                ++strong_rule_cuts;
+            }
+        }
+        std::ostringstream synthetic_note;
+        synthetic_note << "synthetic ceil-half support diagnostic: V=4,"
+                       << " route_limit=" << synthetic_route_limit
+                       << ", operation_unit=" << synthetic_cunit
+                       << ", max_subset_size=3"
+                       << ", old_one_operation_cuts=" << old_rule_cuts
+                       << ", strong_ceil_half_cuts=" << strong_rule_cuts
+                       << "; expected old=0 and strong>0";
+        result.notes.push_back(synthetic_note.str());
+    }
     result.routes.assign(instance.M, {});
     for (int k = 0; k < instance.M; ++k) {
         result.routes[k].vehicle = k;
@@ -2469,6 +2670,152 @@ ebrp::SolveResult solveSupportPruningDiagnostic(const ebrp::Instance& instance,
     result.objective = result.verification.objective;
     result.lower_bound = 0.0;
     result.upper_bound = result.objective;
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
+ebrp::SolveResult solveRouteMaskSupportDiagnostic(const ebrp::Instance& instance,
+                                                  const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "route-mask-support-test";
+    result.status = "diagnostic_complete";
+    result.certificate = "diagnostic only: route-mask support-duration pruning removes route-mask relaxation variables that cannot represent any feasible route-load column";
+    result.support_duration_min_pickup_rule = "ceil_half_support";
+    result.route_mask_support_duration_pruning = true;
+
+    const ebrp::GiniIntervalInventoryRelaxationBound disabled =
+        ebrp::computeGiniIntervalInventoryRelaxationBound(
+            instance, opt.lambda, 0.0, std::min(0.25, std::max(0.01, opt.gini_cap >= 0.0 ? opt.gini_cap : 0.25)),
+            std::max(0.1, std::min(1.0, opt.solve_time_limit > 0.0 ? opt.solve_time_limit : 1.0)),
+            std::numeric_limits<double>::infinity(), opt.route_mask_max_v,
+            opt.projection_bound, opt.penalty_domain_tightening,
+            opt.movement_domain_tightening, false);
+    const ebrp::GiniIntervalInventoryRelaxationBound enabled =
+        ebrp::computeGiniIntervalInventoryRelaxationBound(
+            instance, opt.lambda, 0.0, std::min(0.25, std::max(0.01, opt.gini_cap >= 0.0 ? opt.gini_cap : 0.25)),
+            std::max(0.1, std::min(1.0, opt.solve_time_limit > 0.0 ? opt.solve_time_limit : 1.0)),
+            std::numeric_limits<double>::infinity(), opt.route_mask_max_v,
+            opt.projection_bound, opt.penalty_domain_tightening,
+            opt.movement_domain_tightening, true);
+
+    result.route_mask_count_before_support_duration =
+        enabled.route_mask_count_before_support_duration;
+    result.route_mask_count_after_support_duration =
+        enabled.route_mask_count_after_support_duration;
+    result.route_masks_removed_by_support_duration =
+        enabled.route_masks_removed_by_support_duration;
+    result.route_mask_support_duration_precompute_time_seconds =
+        enabled.route_mask_support_duration_precompute_time_seconds;
+    result.route_mask_support_duration_max_removed_subset_size =
+        enabled.route_mask_support_duration_max_removed_subset_size;
+    result.bound_time_seconds = disabled.route_mask_support_duration_precompute_time_seconds +
+        enabled.route_mask_support_duration_precompute_time_seconds;
+    result.lower_bound = enabled.computed ? enabled.objective_lower_bound : 0.0;
+    result.upper_bound = result.lower_bound;
+    result.notes.push_back("route-mask support disabled note: " + disabled.note);
+    result.notes.push_back("route-mask support enabled note: " + enabled.note);
+    for (const std::string& example :
+         enabled.route_mask_support_duration_removed_examples) {
+        result.notes.push_back("route-mask support removed example: " + example);
+    }
+    result.notes.push_back("synthetic route-mask support diagnostic: with zero travel, route_limit=180, operation_unit=120, any 3-station support has old_one_operation_lb=120<=180 but strong_ceil_half_lb=240>180, so at least one mask is removed by the strengthened rule");
+    result.routes.assign(instance.M, {});
+    for (int k = 0; k < instance.M; ++k) {
+        result.routes[k].vehicle = k;
+        result.routes[k].nodes = {0, 0};
+    }
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.final_inventory = result.verification.final_inventory;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.objective = result.verification.objective;
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
+ebrp::SolveResult solveIncumbentImportDiagnostic(const ebrp::Instance& instance,
+                                                 const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "incumbent-import-test";
+    result.status = "diagnostic_complete";
+    result.certificate = "diagnostic only: imported incumbents are independently verified and used as upper bounds only";
+    result.incumbent_import_attempted = !opt.incumbent_json_path.empty() ||
+        !opt.hga_incumbent_path.empty();
+
+    auto testPath = [&](const std::string& path,
+                        const std::string& format,
+                        const std::string& label) {
+        if (path.empty()) return;
+        try {
+            std::vector<ebrp::RoutePlan> routes =
+                loadIncumbentRoutesByFormat(path, format, instance.M);
+            ebrp::Verification verification =
+                ebrp::verifySolution(instance, routes, opt.lambda);
+            if (verification.feasible && verification.objective_matches &&
+                verification.errors.empty()) {
+                result.incumbent_import_verified = true;
+                result.incumbent_import_objective = verification.objective;
+                result.incumbent_import_G = verification.G;
+                result.incumbent_import_P = verification.P;
+                result.routes = routes;
+                result.verification = verification;
+                result.final_inventory = verification.final_inventory;
+                result.G = verification.G;
+                result.P = verification.P;
+                result.objective = verification.objective;
+                result.upper_bound = verification.objective;
+                result.incumbent_source = label;
+                result.incumbent_source_detail =
+                    "verified imported incumbent; diagnostic UB only";
+                result.notes.push_back(label + " import verified");
+            } else {
+                result.incumbent_import_errors.insert(
+                    result.incumbent_import_errors.end(),
+                    verification.errors.begin(), verification.errors.end());
+                result.notes.push_back(label + " import rejected by verifier");
+            }
+        } catch (const std::exception& e) {
+            result.incumbent_import_errors.push_back(e.what());
+            result.notes.push_back(label + " import failed: " + std::string(e.what()));
+        }
+    };
+
+    testPath(opt.incumbent_json_path, opt.incumbent_format, "incumbent-json");
+    testPath(opt.hga_incumbent_path, opt.hga_incumbent_format, "hga-incumbent");
+
+    std::vector<ebrp::RoutePlan> malformed = emptyRouteSet(instance);
+    if (!malformed.empty() && instance.V >= 1) {
+        malformed[0].nodes = {0, 1, 0};
+        malformed[0].operations.clear();
+    }
+    ebrp::Verification malformed_check =
+        ebrp::verifySolution(instance, malformed, opt.lambda);
+    if (malformed_check.feasible) {
+        result.status = "diagnostic_failed";
+        result.notes.push_back("malformed incumbent unexpectedly passed verifier");
+    } else {
+        result.notes.push_back("malformed incumbent rejection verified");
+    }
+    if (result.routes.empty()) {
+        result.routes = emptyRouteSet(instance);
+        result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+        result.final_inventory = result.verification.final_inventory;
+        result.G = result.verification.G;
+        result.P = result.verification.P;
+        result.objective = result.verification.objective;
+        result.upper_bound = result.objective;
+    }
+    result.lower_bound = 0.0;
     result.runtime_seconds = std::chrono::duration<double>(
         std::chrono::steady_clock::now() - start).count();
     result.wall_time_seconds = result.runtime_seconds;
@@ -2491,6 +2838,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.projection_bound_scope = "global";
     result.movement_audit_enabled = opt.movement_bound_audit;
     result.support_duration_max_subset_size = opt.support_duration_max_subset_size;
+    result.support_duration_min_pickup_rule = "ceil_half_support";
+    result.route_mask_support_duration_pruning =
+        opt.route_mask_support_duration_pruning;
+    result.focused_retry_enabled = opt.frontier_focused_min_lb_retry;
+    result.incumbent_generation_method = opt.bpc_incumbent;
     result.pricing_best_reduced_cost_any = std::numeric_limits<double>::infinity();
     result.pricing_best_new_reduced_cost = std::numeric_limits<double>::infinity();
     result.pricing_closure_certified_exact = true;
@@ -2505,8 +2857,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         + ", movement_bound_audit=" + std::string(opt.movement_bound_audit ? "true" : "false")
         + ", frontier_best_bound_scheduling=" + std::string(opt.frontier_best_bound_scheduling ? "true" : "false")
         + ", frontier_relaxation_cache=" + std::string(opt.frontier_relaxation_cache ? "true" : "false")
+        + ", frontier_focused_min_lb_retry=" + std::string(opt.frontier_focused_min_lb_retry ? "true" : "false")
         + ", support_duration_pruning=" + std::string(opt.support_duration_pruning ? "true" : "false")
+        + ", route_mask_support_duration_pruning=" + std::string(opt.route_mask_support_duration_pruning ? "true" : "false")
+        + ", support_duration_min_pickup_rule=ceil_half_support"
         + ", support_duration_max_subset_size=" + std::to_string(opt.support_duration_max_subset_size)
+        + ", support_feasibility_oracle=" + std::string(opt.support_feasibility_oracle ? "requested_but_not_enabled" : "false")
         + ", gcap_pricing_columns=" + std::to_string(opt.gcap_pricing_columns)
         + ", frontier_column_cache="
         + std::string(opt.frontier_column_cache ? "requested_but_not_enabled" : "false"));
@@ -2580,8 +2936,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     };
 
     {
+        const auto incumbent_start = std::chrono::steady_clock::now();
         BpcOwnedIncumbentResult owned =
             runBpcOwnedIncumbentGenerator(instance, opt, start);
+        result.incumbent_generation_time_seconds +=
+            std::chrono::duration<double>(
+                std::chrono::steady_clock::now() - incumbent_start).count();
         result.pricing_calls += owned.pricing_calls;
         result.columns += owned.generated_columns;
         result.columns_generated_raw += owned.columns_generated_raw;
@@ -2595,25 +2955,64 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         }
     }
 
-    if (!opt.incumbent_json_path.empty()) {
+    if (opt.bpc_incumbent == "compact" ||
+        opt.bpc_incumbent == "compact-cplex") {
+        const auto compact_start = std::chrono::steady_clock::now();
+        ebrp::SolveOptions seed_opt = opt;
+        seed_opt.out_path.clear();
+        seed_opt.log_path.clear();
+        seed_opt.solve_time_limit = opt.bpc_incumbent_seconds > 0.0
+            ? opt.bpc_incumbent_seconds
+            : std::min(30.0, std::max(1.0, opt.solve_time_limit * 0.25));
+        ebrp::SolveResult seed;
+        if (opt.bpc_incumbent == "compact-cplex") {
+            seed_opt.method = "cplex";
+            seed = ebrp::solveCplexBaseline(instance, seed_opt);
+        } else {
+            seed_opt.method = "tailored";
+            seed = ebrp::solveTailoredExact(instance, seed_opt);
+        }
+        result.incumbent_generation_time_seconds +=
+            std::chrono::duration<double>(
+                std::chrono::steady_clock::now() - compact_start).count();
+        std::ostringstream compact_note;
+        compact_note << "compact incumbent seed mode=" << opt.bpc_incumbent
+                     << ", status=" << seed.status
+                     << ", objective=" << seed.objective
+                     << ", runtime=" << seed.runtime_seconds
+                     << ", seed_time_limit=" << seed_opt.solve_time_limit;
+        result.notes.push_back(compact_note.str());
+        if (!seed.routes.empty()) {
+            const std::string source = opt.bpc_incumbent == "compact-cplex"
+                ? "compact CPLEX seed"
+                : "compact tailored seed";
+            if (acceptIncumbentRoutes(seed.routes, source)) {
+                result.incumbent_source_detail =
+                    "verified UB imported from " + opt.bpc_incumbent +
+                    " seed; not lower-bound evidence";
+            }
+        } else {
+            result.notes.push_back("compact incumbent seed produced no route plan to verify");
+        }
+    }
+
+    auto tryImportIncumbent = [&](const std::string& path,
+                                  const std::string& format,
+                                  const std::string& source_label) {
+        if (path.empty()) return;
         result.incumbent_import_attempted = true;
         const std::string import_source = opt.incumbent_source_name.empty()
-            ? ("external " + opt.incumbent_format + " incumbent")
+            ? source_label
             : opt.incumbent_source_name;
         try {
-            if (opt.incumbent_format != "auto" &&
-                opt.incumbent_format != "exact_result" &&
-                opt.incumbent_format != "route_json") {
-                throw std::runtime_error("incumbent format " + opt.incumbent_format
-                    + " is not implemented in this pass; supported formats are auto, exact_result, route_json");
-            }
             const std::vector<ebrp::RoutePlan> external_routes =
-                loadRoutesFromResultJson(opt.incumbent_json_path, instance.M);
+                loadIncumbentRoutesByFormat(path, format, instance.M);
             ebrp::Verification imported =
                 ebrp::verifySolution(instance, external_routes, opt.lambda);
-            result.incumbent_import_verified = imported.feasible &&
+            const bool imported_verified = imported.feasible &&
                 imported.objective_matches && imported.errors.empty();
-            if (result.incumbent_import_verified) {
+            if (imported_verified) {
+                result.incumbent_import_verified = true;
                 result.incumbent_import_objective = imported.objective;
                 result.incumbent_import_G = imported.G;
                 result.incumbent_import_P = imported.P;
@@ -2624,14 +3023,22 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             }
             const bool accepted = acceptIncumbentRoutes(external_routes, import_source);
             if (accepted) {
-                result.notes.push_back("external incumbent JSON is used only as a feasible route warm start/cutoff; no lower-bound certificate is inherited from "
-                    + opt.incumbent_json_path);
+                result.incumbent_source_detail =
+                    "verified imported incumbent from " + path +
+                    " using format=" + format +
+                    "; UB only, no lower-bound certificate inherited";
+                result.notes.push_back("external incumbent is used only as a feasible route warm start/cutoff; no lower-bound certificate is inherited from "
+                    + path);
             }
         } catch (const std::exception& e) {
             result.incumbent_import_errors.push_back(e.what());
-            result.notes.push_back(std::string("could not load external incumbent JSON: ") + e.what());
+            result.notes.push_back(std::string("could not load external incumbent: ") + e.what());
         }
-    }
+    };
+    tryImportIncumbent(opt.incumbent_json_path, opt.incumbent_format,
+                       "external " + opt.incumbent_format + " incumbent");
+    tryImportIncumbent(opt.hga_incumbent_path, opt.hga_incumbent_format,
+                       "HGA/TGBC " + opt.hga_incumbent_format + " incumbent");
     if (opt.gcap_seed_cplex) {
         ebrp::SolveOptions seed_opt = opt;
         seed_opt.method = "cplex";
@@ -2916,6 +3323,17 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 inv_relax.movement_tightening_time_seconds;
             result.movement_unreachable_station_count +=
                 inv_relax.movement_unreachable_station_count;
+            result.route_mask_count_before_support_duration +=
+                inv_relax.route_mask_count_before_support_duration;
+            result.route_mask_count_after_support_duration +=
+                inv_relax.route_mask_count_after_support_duration;
+            result.route_masks_removed_by_support_duration +=
+                inv_relax.route_masks_removed_by_support_duration;
+            result.route_mask_support_duration_precompute_time_seconds +=
+                inv_relax.route_mask_support_duration_precompute_time_seconds;
+            result.route_mask_support_duration_max_removed_subset_size =
+                std::max(result.route_mask_support_duration_max_removed_subset_size,
+                         inv_relax.route_mask_support_duration_max_removed_subset_size);
         };
 
     auto accumulateTreeRound2Stats =
@@ -2952,6 +3370,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 tree.support_duration_pruned_labels;
             result.support_duration_pruned_columns +=
                 tree.support_duration_pruned_columns;
+            result.support_duration_strong_cuts_generated +=
+                tree.support_duration_strong_cuts_generated;
+            result.support_duration_strong_pruned_labels +=
+                tree.support_duration_strong_pruned_labels;
+            result.support_duration_strong_pruned_columns +=
+                tree.support_duration_strong_pruned_columns;
             result.support_duration_max_subset_size =
                 std::max(result.support_duration_max_subset_size,
                          tree.support_duration_max_subset_size);
@@ -3021,7 +3445,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     instance, opt.lambda, lo, hi, budget, cutoff,
                     opt.route_mask_max_v, opt.projection_bound,
                     opt.penalty_domain_tightening,
-                    movement_enabled);
+                    movement_enabled,
+                    opt.route_mask_support_duration_pruning);
             };
             if (opt.movement_bound_audit) {
                 ++result.movement_audit_intervals;
@@ -3700,7 +4125,14 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         }
     }
 
-    for (int adaptive_pass = 1; adaptive_pass <= std::max(0, opt.frontier_retry_passes);
+    std::unordered_set<int> focused_retry_interval_ids;
+    const auto focused_retry_start = std::chrono::steady_clock::now();
+    if (!opt.frontier_focused_min_lb_retry) {
+        result.focused_retry_stopped_reason = "disabled";
+    }
+    for (int adaptive_pass = 1;
+         adaptive_pass <= (opt.frontier_focused_min_lb_retry
+             ? std::max(0, opt.frontier_retry_passes) : 0);
          ++adaptive_pass) {
         auto collectRetryIndices = [&]() {
             std::vector<int> indices;
@@ -3737,8 +4169,14 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         };
 
         std::vector<int> retry_indices = collectRetryIndices();
-        if (retry_indices.empty()) break;
-        if (opt.solve_time_limit > 0.0 && remainingSeconds() <= 0.0) break;
+        if (retry_indices.empty()) {
+            result.focused_retry_stopped_reason = "no_unresolved_intervals";
+            break;
+        }
+        if (opt.solve_time_limit > 0.0 && remainingSeconds() <= 0.0) {
+            result.focused_retry_stopped_reason = "time_limit_before_retry";
+            break;
+        }
 
         const int retry_max_nodes = opt.frontier_retry_nodes > 0
             ? opt.frontier_retry_nodes
@@ -3763,6 +4201,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             if (opt.solve_time_limit > 0.0 && remainingSeconds() <= 0.0) {
                 result.notes.push_back("frontier time limit reached during adaptive pass "
                     + std::to_string(adaptive_pass));
+                result.focused_retry_stopped_reason = "time_limit";
                 break;
             }
             retry_indices = collectRetryIndices();
@@ -3774,9 +4213,14 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                                           deferred_until_next_pass[idx] == adaptive_pass;
                                }),
                 retry_indices.end());
-            if (retry_indices.empty()) break;
+            if (retry_indices.empty()) {
+                result.focused_retry_stopped_reason = "all_candidates_deferred_or_closed";
+                break;
+            }
 
             const int idx = retry_indices.front();
+            ++result.focused_retry_attempts;
+            focused_retry_interval_ids.insert(idx);
             FrontierIntervalRecord& record = interval_records[idx];
             const double previous_record_lb = record.lower_bound;
             double early_stop_target = std::numeric_limits<double>::infinity();
@@ -3915,6 +4359,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 tree.complete ||
                 (record.lower_bound_valid && std::isfinite(record.lower_bound) &&
                  record.lower_bound > previous_record_lb + 1e-8);
+            if (made_progress) {
+                ++result.focused_retry_lb_improvements;
+            }
             if (!made_progress && idx >= 0 &&
                 idx < static_cast<int>(deferred_until_next_pass.size())) {
                 deferred_until_next_pass[idx] = adaptive_pass;
@@ -3922,8 +4369,19 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     + std::to_string(adaptive_pass)
                     + " defers interval " + std::to_string(idx)
                     + " for the remainder of this pass because retry made no valid lower-bound progress");
+                result.focused_retry_stopped_reason = "no_valid_lower_bound_progress";
+                break;
             }
             ++retry_attempt;
+        }
+    }
+    if (opt.frontier_focused_min_lb_retry) {
+        result.focused_retry_seconds = std::chrono::duration<double>(
+            std::chrono::steady_clock::now() - focused_retry_start).count();
+        result.focused_retry_intervals =
+            static_cast<int>(focused_retry_interval_ids.size());
+        if (result.focused_retry_stopped_reason.empty()) {
+            result.focused_retry_stopped_reason = "completed_retry_passes";
         }
     }
 
@@ -4372,6 +4830,10 @@ int main(int argc, char** argv) {
                 results.push_back(solveDominanceDiagnostic(instance, opt));
             } else if (opt.method == "support-pruning-test") {
                 results.push_back(solveSupportPruningDiagnostic(instance, opt));
+            } else if (opt.method == "route-mask-support-test") {
+                results.push_back(solveRouteMaskSupportDiagnostic(instance, opt));
+            } else if (opt.method == "incumbent-import-test") {
+                results.push_back(solveIncumbentImportDiagnostic(instance, opt));
             } else {
                 throw std::runtime_error("Unsupported method: " + opt.method);
             }

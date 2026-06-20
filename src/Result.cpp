@@ -136,7 +136,9 @@ std::string inferMethodScope(const SolveResult& result) {
     }
     if (method == "pricing" || method == "pricing-branch" || method == "cuts" ||
         method == "branching" || method == "cg" || method == "gcap-branch" ||
-        method == "support-pruning-test") {
+        method == "support-pruning-test" ||
+        method == "route-mask-support-test" ||
+        method == "incumbent-import-test") {
         return "diagnostic";
     }
     if (containsText(text, "restricted path pool") || containsText(text, "restricted column")) {
@@ -195,6 +197,8 @@ std::string inferCertificateType(const SolveResult& result) {
     if (method == "master") return "restricted_column_pool_master";
     if (method == "pricing") return "route_load_pricing_oracle";
     if (method == "support-pruning-test") return "support_duration_pruning_diagnostic";
+    if (method == "route-mask-support-test") return "route_mask_support_duration_diagnostic";
+    if (method == "incumbent-import-test") return "incumbent_import_verification_diagnostic";
     if (method == "pricing-branch") return "route_load_pricing_branch_probe";
     if (method == "cuts") return "cut_separation_diagnostic";
     if (method == "branching") return "branching_candidate_diagnostic";
@@ -357,10 +361,30 @@ std::string resultToJson(const SolveResult& result) {
         << result.support_duration_pruned_labels << ",\n";
     out << "  \"support_duration_pruned_columns\": "
         << result.support_duration_pruned_columns << ",\n";
+    out << "  \"support_duration_min_pickup_rule\": \""
+        << jsonEscape(result.support_duration_min_pickup_rule) << "\",\n";
+    out << "  \"support_duration_strong_cuts_generated\": "
+        << result.support_duration_strong_cuts_generated << ",\n";
+    out << "  \"support_duration_strong_pruned_labels\": "
+        << result.support_duration_strong_pruned_labels << ",\n";
+    out << "  \"support_duration_strong_pruned_columns\": "
+        << result.support_duration_strong_pruned_columns << ",\n";
     out << "  \"support_duration_max_subset_size\": "
         << result.support_duration_max_subset_size << ",\n";
     out << "  \"support_duration_precompute_time_seconds\": "
         << result.support_duration_precompute_time_seconds << ",\n";
+    out << "  \"route_mask_count_before_support_duration\": "
+        << result.route_mask_count_before_support_duration << ",\n";
+    out << "  \"route_mask_count_after_support_duration\": "
+        << result.route_mask_count_after_support_duration << ",\n";
+    out << "  \"route_masks_removed_by_support_duration\": "
+        << result.route_masks_removed_by_support_duration << ",\n";
+    out << "  \"route_mask_support_duration_precompute_time_seconds\": "
+        << result.route_mask_support_duration_precompute_time_seconds << ",\n";
+    out << "  \"route_mask_support_duration_max_removed_subset_size\": "
+        << result.route_mask_support_duration_max_removed_subset_size << ",\n";
+    out << "  \"route_mask_support_duration_pruning\": "
+        << (result.route_mask_support_duration_pruning ? "true" : "false") << ",\n";
     out << "  \"movement_domains_tightened_count\": "
         << result.movement_domains_tightened_count << ",\n";
     out << "  \"movement_domain_width_before\": "
@@ -421,6 +445,8 @@ std::string resultToJson(const SolveResult& result) {
     out << "  \"frontier_cache_columns_inserted\": " << result.frontier_cache_columns_inserted << ",\n";
     out << "  \"frontier_cache_time_seconds\": " << result.frontier_cache_time_seconds << ",\n";
     out << "  \"incumbent_source\": \"" << jsonEscape(result.incumbent_source) << "\",\n";
+    out << "  \"incumbent_source_detail\": \""
+        << jsonEscape(result.incumbent_source_detail) << "\",\n";
     out << "  \"incumbent_import_attempted\": "
         << (result.incumbent_import_attempted ? "true" : "false") << ",\n";
     out << "  \"incumbent_import_verified\": "
@@ -428,12 +454,25 @@ std::string resultToJson(const SolveResult& result) {
     out << "  \"incumbent_import_objective\": " << result.incumbent_import_objective << ",\n";
     out << "  \"incumbent_import_G\": " << result.incumbent_import_G << ",\n";
     out << "  \"incumbent_import_P\": " << result.incumbent_import_P << ",\n";
+    out << "  \"incumbent_generation_time_seconds\": "
+        << result.incumbent_generation_time_seconds << ",\n";
+    out << "  \"incumbent_generation_method\": \""
+        << jsonEscape(result.incumbent_generation_method) << "\",\n";
     out << "  \"incumbent_import_errors\": [";
     for (std::size_t i = 0; i < result.incumbent_import_errors.size(); ++i) {
         if (i) out << ", ";
         out << "\"" << jsonEscape(result.incumbent_import_errors[i]) << "\"";
     }
     out << "],\n";
+    out << "  \"focused_retry_enabled\": "
+        << (result.focused_retry_enabled ? "true" : "false") << ",\n";
+    out << "  \"focused_retry_attempts\": " << result.focused_retry_attempts << ",\n";
+    out << "  \"focused_retry_intervals\": " << result.focused_retry_intervals << ",\n";
+    out << "  \"focused_retry_lb_improvements\": "
+        << result.focused_retry_lb_improvements << ",\n";
+    out << "  \"focused_retry_seconds\": " << result.focused_retry_seconds << ",\n";
+    out << "  \"focused_retry_stopped_reason\": \""
+        << jsonEscape(result.focused_retry_stopped_reason) << "\",\n";
     out << "  \"final_inventories\": "; writeVector(out, result.final_inventory); out << ",\n";
     out << "  \"routes\": [";
     for (std::size_t r = 0; r < result.routes.size(); ++r) {
