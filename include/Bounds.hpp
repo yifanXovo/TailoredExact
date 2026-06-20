@@ -39,6 +39,11 @@ struct GiniIntervalInventoryRelaxationBound {
     long long total_domain_width_after = 0;
     bool penalty_budget_fathomed = false;
     double penalty_tightening_time_seconds = 0.0;
+    int movement_domains_tightened_count = 0;
+    long long movement_domain_width_before = 0;
+    long long movement_domain_width_after = 0;
+    double movement_tightening_time_seconds = 0.0;
+    int movement_unreachable_station_count = 0;
     std::string status;
     std::string note;
 };
@@ -64,6 +69,16 @@ struct PenaltyDomainTighteningResult {
     std::vector<std::string> warnings;
 };
 
+struct MovementReachabilityTighteningResult {
+    bool valid = false;
+    int domains_tightened_count = 0;
+    long long total_domain_width_before = 0;
+    long long total_domain_width_after = 0;
+    int unreachable_station_count = 0;
+    double time_seconds = 0.0;
+    std::vector<std::string> warnings;
+};
+
 ResourceRelaxationBound computeResourceRelaxationBound(const Instance& instance,
                                                        double lambda);
 
@@ -76,7 +91,8 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     double objective_cutoff = std::numeric_limits<double>::infinity(),
     int route_mask_max_v = 12,
     bool projection_bound_enabled = true,
-    bool penalty_domain_tightening_enabled = true);
+    bool penalty_domain_tightening_enabled = true,
+    bool movement_domain_tightening_enabled = true);
 
 InventoryRatioProjectionBound computeInventoryRatioProjectionBound(
     const Instance& instance,
@@ -91,6 +107,11 @@ PenaltyDomainTighteningResult tightenInventoryIntervalsByPenaltyBudget(
     double lambda,
     double gamma_floor,
     double objective_cutoff,
+    std::vector<int>& lower_inventory,
+    std::vector<int>& upper_inventory);
+
+MovementReachabilityTighteningResult tightenInventoryIntervalsByMovementReachability(
+    const Instance& instance,
     std::vector<int>& lower_inventory,
     std::vector<int>& upper_inventory);
 

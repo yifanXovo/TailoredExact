@@ -23,6 +23,11 @@ struct ColumnDominanceStats {
     long long columns_generated_raw = 0;
     long long columns_after_dominance = 0;
     long long columns_dominated = 0;
+    long long dominance_input_columns = 0;
+    long long dominance_kept_columns = 0;
+    long long dominance_removed_columns = 0;
+    long long dominance_removed_existing_projection = 0;
+    long long dominance_removed_candidate_projection = 0;
     double dominance_time_seconds = 0.0;
     std::string dominance_mode = "exact";
     bool dominance_exact_safe = true;

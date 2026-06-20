@@ -30,6 +30,9 @@ build\ExactEBRP.exe --method gcap-frontier --input testdata\examples\gcap_smoke_
 - `--column-dominance-mode exact|pareto|off`: use exact projection equivalence when path-independent, or Pareto filtering when path-dependent coefficients matter.
 - `--projection-bound true|false`: enable the inventory-ratio interval projection lower bound.
 - `--penalty-domain-tightening true|false`: tighten final-inventory domains using incumbent objective and interval floor.
+- `--movement-domain-tightening true|false`: tighten final-inventory domains using station reachability from route-duration, handling-time, station, and truck-capacity necessary conditions.
+- `--frontier-best-bound-scheduling true|false`: process frontier intervals by deterministic valid lower-bound priority instead of raw interval order.
+- `--frontier-relaxation-cache true|false`: reuse exact-key interval relaxation bounds across retry passes.
 - `--gcap-pricing-columns N`: allow pricing to return multiple negative columns; filtered insertion is certificate-neutral.
 - `--frontier-column-cache true|false`: currently logged as requested but not enabled for certificates.
 

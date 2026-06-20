@@ -46,6 +46,10 @@ void writeStringVector(std::ostringstream& out, const std::vector<std::string>& 
     out << "]";
 }
 
+double finiteOrZero(double value) {
+    return std::isfinite(value) ? value : 0.0;
+}
+
 void writeVerification(std::ostringstream& out, const Verification& v) {
     out << "{";
     out << "\"feasible\": " << (v.feasible ? "true" : "false") << ", ";
@@ -228,7 +232,12 @@ bool inferCertifiedOriginalProblem(const SolveResult& result) {
     if (!nearlyEqual(result.objective, result.upper_bound)) return false;
     if (inferIsBpc(result)) {
         if (result.unresolved_intervals != 0 || result.invalid_bound_intervals != 0) return false;
-        if (result.pricing_closed_nodes <= 0 && result.objective > 1e-12) return false;
+        if (result.open_nodes != 0) return false;
+        if (result.objective > 1e-12) {
+            if (!result.pricing_completed_exactly || !result.pricing_closure_certified_exact) return false;
+            if (result.pricing_blocked_by_duplicate_projection) return false;
+            if (result.pricing_closed_nodes <= 0) return false;
+        }
     }
     return true;
 }
@@ -288,6 +297,16 @@ std::string resultToJson(const SolveResult& result) {
     out << "  \"columns_generated_raw\": " << result.columns_generated_raw << ",\n";
     out << "  \"columns_after_dominance\": " << result.columns_after_dominance << ",\n";
     out << "  \"columns_dominated\": " << result.columns_dominated << ",\n";
+    out << "  \"pricing_columns_enumerated\": " << result.pricing_columns_enumerated << ",\n";
+    out << "  \"dominance_input_columns\": " << result.dominance_input_columns << ",\n";
+    out << "  \"dominance_kept_columns\": " << result.dominance_kept_columns << ",\n";
+    out << "  \"dominance_removed_columns\": " << result.dominance_removed_columns << ",\n";
+    out << "  \"dominance_removed_existing_projection\": "
+        << result.dominance_removed_existing_projection << ",\n";
+    out << "  \"dominance_removed_candidate_projection\": "
+        << result.dominance_removed_candidate_projection << ",\n";
+    out << "  \"rmp_columns_inserted\": " << result.rmp_columns_inserted << ",\n";
+    out << "  \"rmp_columns_active\": " << result.rmp_columns_active << ",\n";
     out << "  \"dominance_time_seconds\": " << result.dominance_time_seconds << ",\n";
     out << "  \"dominance_mode\": \"" << jsonEscape(result.dominance_mode) << "\",\n";
     out << "  \"dominance_exact_safe\": "
@@ -306,6 +325,47 @@ std::string resultToJson(const SolveResult& result) {
     out << "  \"pricing_negative_columns_dominated\": " << result.pricing_negative_columns_dominated << ",\n";
     out << "  \"pricing_completed_exactly\": "
         << (result.pricing_completed_exactly ? "true" : "false") << ",\n";
+    out << "  \"pricing_best_reduced_cost_any\": "
+        << finiteOrZero(result.pricing_best_reduced_cost_any) << ",\n";
+    out << "  \"pricing_best_new_reduced_cost\": "
+        << finiteOrZero(result.pricing_best_new_reduced_cost) << ",\n";
+    out << "  \"pricing_duplicate_negative_projections\": "
+        << result.pricing_duplicate_negative_projections << ",\n";
+    out << "  \"pricing_new_negative_projections\": "
+        << result.pricing_new_negative_projections << ",\n";
+    out << "  \"pricing_blocked_by_duplicate_projection\": "
+        << (result.pricing_blocked_by_duplicate_projection ? "true" : "false") << ",\n";
+    out << "  \"pricing_closure_certified_exact\": "
+        << (result.pricing_closure_certified_exact ? "true" : "false") << ",\n";
+    out << "  \"movement_domains_tightened_count\": "
+        << result.movement_domains_tightened_count << ",\n";
+    out << "  \"movement_domain_width_before\": "
+        << result.movement_domain_width_before << ",\n";
+    out << "  \"movement_domain_width_after\": "
+        << result.movement_domain_width_after << ",\n";
+    out << "  \"movement_tightening_time_seconds\": "
+        << result.movement_tightening_time_seconds << ",\n";
+    out << "  \"movement_unreachable_station_count\": "
+        << result.movement_unreachable_station_count << ",\n";
+    out << "  \"frontier_relevant_intervals\": " << result.frontier_relevant_intervals << ",\n";
+    out << "  \"frontier_min_interval_lower_bound\": "
+        << result.frontier_min_interval_lower_bound << ",\n";
+    out << "  \"frontier_lower_bound_source\": \""
+        << jsonEscape(result.frontier_lower_bound_source) << "\",\n";
+    out << "  \"frontier_unprocessed_interval_count\": "
+        << result.frontier_unprocessed_interval_count << ",\n";
+    out << "  \"frontier_bound_fathomed_interval_count\": "
+        << result.frontier_bound_fathomed_interval_count << ",\n";
+    out << "  \"frontier_tree_closed_interval_count\": "
+        << result.frontier_tree_closed_interval_count << ",\n";
+    out << "  \"frontier_scheduling_mode\": \""
+        << jsonEscape(result.frontier_scheduling_mode) << "\",\n";
+    out << "  \"frontier_relax_cache_hits\": " << result.frontier_relax_cache_hits << ",\n";
+    out << "  \"frontier_relax_cache_misses\": " << result.frontier_relax_cache_misses << ",\n";
+    out << "  \"frontier_relax_cache_time_saved_estimate\": "
+        << result.frontier_relax_cache_time_saved_estimate << ",\n";
+    out << "  \"interval_processing_order\": \""
+        << jsonEscape(result.interval_processing_order) << "\",\n";
     out << "  \"frontier_cache_hits\": " << result.frontier_cache_hits << ",\n";
     out << "  \"frontier_cache_columns_loaded\": " << result.frontier_cache_columns_loaded << ",\n";
     out << "  \"frontier_cache_columns_inserted\": " << result.frontier_cache_columns_inserted << ",\n";

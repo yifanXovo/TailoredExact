@@ -136,3 +136,15 @@ The paper should present a tailored exact portfolio, not pure BPC alone:
 4. Report portfolio optimality only when one module proves `gap=0` and the verifier passes.
 
 Pure BPC is still valuable: it certifies V10 M2 average, V10 M1 average, and V12 M1 average. The compact fallback is necessary for robustness because it certifies V10 M2 low while pure BPC does not.
+
+## Second Optimization Pass: Safe Pricing Closure, Movement-Domain Tightening, And Frontier Lower-Bound Scheduling
+
+This pass adds certificate-preserving improvements to the BPC/frontier implementation:
+
+- Incomplete frontier runs now report a valid top-level lower bound from the interval ledger rather than defaulting to zero.
+- Duplicate or dominance-filtered negative pricing projections no longer close a node; they leave the node unresolved unless exact pricing proves no missing negative projection exists.
+- Dominance statistics now separate pricing enumeration, dominance input/kept/removed counts, existing-projection removals, and RMP insertions.
+- Movement-reachable inventory domains intersect station final-inventory bounds before projection and interval relaxations.
+- Initial frontier intervals can be scheduled by deterministic best-bound priority, and interval relaxations can be reused through exact-key caching.
+
+Round-two smoke and ablation outputs are in `results/optimization_update_round2/`. On the local inputs available for this pass, V4 smoke remains certified by BPC. V12 M1/M2 60s stress rows remain noncertified, but their top-level lower bounds now reflect valid interval-ledger progress instead of zero where a valid interval bound exists.

@@ -201,3 +201,10 @@ All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `
 `test_data_V10_M2_low.txt` is not certified by pure BPC, but it is certified by the auxiliary strengthened compact fallback in `results/alt_strengthened_v10_m2_low_1200s.json`. This is an `original_compact` certificate, not a BPC certificate.
 
 `test_data_V12_M2_average.txt` remains open. The current portfolio incumbent is `0.366168793171`, the current valid portfolio lower bound is `0.350523627890`, and the portfolio gap is about `0.0427266`.
+
+## 2026-06-20 Round-2 Certificate Warnings
+
+- Incomplete frontier `lower_bound` is now a valid progress metric from the interval ledger. It is not a certificate unless every relevant interval is closed, empty, or bound-fathomed and the minimum interval lower bound reaches the incumbent objective.
+- Duplicate negative pricing projections cannot close a node. If pricing returns only negative columns that are already represented or dominance-filtered, the node remains unresolved unless exact pricing proves no missing negative projection exists.
+- Movement-domain tightening is global only because it is based on route-duration/travel lower bounds, handling time, station inventory/space, and truck capacity. It must not be replaced by restricted-pool reachability data for certificate-producing bounds.
+- Relaxation-cache reuse is valid only under an exact key match. Cached interval relaxations do not replace exact branch-price pricing closure.

@@ -20,6 +20,14 @@ struct ColumnGenerationResult {
     long long columns_generated_raw = 0;
     long long columns_after_dominance = 0;
     long long columns_dominated = 0;
+    long long pricing_columns_enumerated = 0;
+    long long dominance_input_columns = 0;
+    long long dominance_kept_columns = 0;
+    long long dominance_removed_columns = 0;
+    long long dominance_removed_existing_projection = 0;
+    long long dominance_removed_candidate_projection = 0;
+    long long rmp_columns_inserted = 0;
+    long long rmp_columns_active = 0;
     double dominance_time_seconds = 0.0;
     std::string dominance_mode = "exact";
     bool dominance_exact_safe = true;
@@ -27,6 +35,12 @@ struct ColumnGenerationResult {
     long long pricing_negative_columns_inserted = 0;
     long long pricing_negative_columns_dominated = 0;
     bool pricing_completed_exactly = true;
+    double pricing_best_reduced_cost_any = 0.0;
+    double pricing_best_new_reduced_cost = 0.0;
+    long long pricing_duplicate_negative_projections = 0;
+    long long pricing_new_negative_projections = 0;
+    bool pricing_blocked_by_duplicate_projection = false;
+    bool pricing_closure_certified_exact = true;
     long long route_states = 0;
     long long operation_states = 0;
     double lp_objective = 0.0;
@@ -44,6 +58,14 @@ struct GiniCapColumnGenerationResult {
     long long columns_generated_raw = 0;
     long long columns_after_dominance = 0;
     long long columns_dominated = 0;
+    long long pricing_columns_enumerated = 0;
+    long long dominance_input_columns = 0;
+    long long dominance_kept_columns = 0;
+    long long dominance_removed_columns = 0;
+    long long dominance_removed_existing_projection = 0;
+    long long dominance_removed_candidate_projection = 0;
+    long long rmp_columns_inserted = 0;
+    long long rmp_columns_active = 0;
     double dominance_time_seconds = 0.0;
     std::string dominance_mode = "exact";
     bool dominance_exact_safe = true;
@@ -51,6 +73,12 @@ struct GiniCapColumnGenerationResult {
     long long pricing_negative_columns_inserted = 0;
     long long pricing_negative_columns_dominated = 0;
     bool pricing_completed_exactly = true;
+    double pricing_best_reduced_cost_any = 0.0;
+    double pricing_best_new_reduced_cost = 0.0;
+    long long pricing_duplicate_negative_projections = 0;
+    long long pricing_new_negative_projections = 0;
+    bool pricing_blocked_by_duplicate_projection = false;
+    bool pricing_closure_certified_exact = true;
     long long route_states = 0;
     long long operation_states = 0;
     long long cuts_added = 0;
@@ -65,6 +93,11 @@ struct GiniCapColumnGenerationResult {
     long long total_domain_width_before = 0;
     long long total_domain_width_after = 0;
     double penalty_tightening_time_seconds = 0.0;
+    long long movement_domains_tightened_count = 0;
+    long long movement_domain_width_before = 0;
+    long long movement_domain_width_after = 0;
+    double movement_tightening_time_seconds = 0.0;
+    long long movement_unreachable_station_count = 0;
     double gamma = 0.0;
     double gamma_floor = -1.0;
     double lp_lambda_penalty = 0.0;
@@ -93,6 +126,14 @@ struct GiniCapBranchProbeResult {
     long long columns_generated_raw = 0;
     long long columns_after_dominance = 0;
     long long columns_dominated = 0;
+    long long pricing_columns_enumerated = 0;
+    long long dominance_input_columns = 0;
+    long long dominance_kept_columns = 0;
+    long long dominance_removed_columns = 0;
+    long long dominance_removed_existing_projection = 0;
+    long long dominance_removed_candidate_projection = 0;
+    long long rmp_columns_inserted = 0;
+    long long rmp_columns_active = 0;
     double dominance_time_seconds = 0.0;
     std::string dominance_mode = "exact";
     bool dominance_exact_safe = true;
@@ -100,6 +141,12 @@ struct GiniCapBranchProbeResult {
     long long pricing_negative_columns_inserted = 0;
     long long pricing_negative_columns_dominated = 0;
     bool pricing_completed_exactly = true;
+    double pricing_best_reduced_cost_any = 0.0;
+    double pricing_best_new_reduced_cost = 0.0;
+    long long pricing_duplicate_negative_projections = 0;
+    long long pricing_new_negative_projections = 0;
+    bool pricing_blocked_by_duplicate_projection = false;
+    bool pricing_closure_certified_exact = true;
     long long route_states = 0;
     long long operation_states = 0;
     std::vector<std::string> notes;
@@ -121,6 +168,14 @@ struct GiniCapTreeResult {
     long long columns_generated_raw = 0;
     long long columns_after_dominance = 0;
     long long columns_dominated = 0;
+    long long pricing_columns_enumerated = 0;
+    long long dominance_input_columns = 0;
+    long long dominance_kept_columns = 0;
+    long long dominance_removed_columns = 0;
+    long long dominance_removed_existing_projection = 0;
+    long long dominance_removed_candidate_projection = 0;
+    long long rmp_columns_inserted = 0;
+    long long rmp_columns_active = 0;
     double dominance_time_seconds = 0.0;
     std::string dominance_mode = "exact";
     bool dominance_exact_safe = true;
@@ -128,6 +183,12 @@ struct GiniCapTreeResult {
     long long pricing_negative_columns_inserted = 0;
     long long pricing_negative_columns_dominated = 0;
     bool pricing_completed_exactly = true;
+    double pricing_best_reduced_cost_any = 0.0;
+    double pricing_best_new_reduced_cost = 0.0;
+    long long pricing_duplicate_negative_projections = 0;
+    long long pricing_new_negative_projections = 0;
+    bool pricing_blocked_by_duplicate_projection = false;
+    bool pricing_closure_certified_exact = true;
     long long route_states = 0;
     long long operation_states = 0;
     long long cuts_added = 0;
@@ -142,6 +203,11 @@ struct GiniCapTreeResult {
     long long total_domain_width_before = 0;
     long long total_domain_width_after = 0;
     double penalty_tightening_time_seconds = 0.0;
+    long long movement_domains_tightened_count = 0;
+    long long movement_domain_width_before = 0;
+    long long movement_domain_width_after = 0;
+    double movement_tightening_time_seconds = 0.0;
+    long long movement_unreachable_station_count = 0;
     double gamma = 0.0;
     double gamma_floor = -1.0;
     double resource_penalty_lower_bound = 0.0;
@@ -194,6 +260,7 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
     bool column_dominance_enabled = true,
     const std::string& column_dominance_mode = "exact",
     bool projection_bound_enabled = true,
-    bool penalty_domain_tightening_enabled = true);
+    bool penalty_domain_tightening_enabled = true,
+    bool movement_domain_tightening_enabled = true);
 
 } // namespace ebrp

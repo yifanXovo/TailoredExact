@@ -1508,6 +1508,16 @@ void addStats(GiniCapTreeResult& total, const GiniCapColumnGenerationResult& nod
     total.columns_generated_raw += node.columns_generated_raw;
     total.columns_after_dominance += node.columns_after_dominance;
     total.columns_dominated += node.columns_dominated;
+    total.pricing_columns_enumerated += node.pricing_columns_enumerated;
+    total.dominance_input_columns += node.dominance_input_columns;
+    total.dominance_kept_columns += node.dominance_kept_columns;
+    total.dominance_removed_columns += node.dominance_removed_columns;
+    total.dominance_removed_existing_projection +=
+        node.dominance_removed_existing_projection;
+    total.dominance_removed_candidate_projection +=
+        node.dominance_removed_candidate_projection;
+    total.rmp_columns_inserted += node.rmp_columns_inserted;
+    total.rmp_columns_active += node.rmp_columns_active;
     total.dominance_time_seconds += node.dominance_time_seconds;
     total.dominance_mode = node.dominance_mode;
     total.dominance_exact_safe =
@@ -1517,6 +1527,22 @@ void addStats(GiniCapTreeResult& total, const GiniCapColumnGenerationResult& nod
     total.pricing_negative_columns_dominated += node.pricing_negative_columns_dominated;
     total.pricing_completed_exactly =
         total.pricing_completed_exactly && node.pricing_completed_exactly;
+    total.pricing_best_reduced_cost_any =
+        std::min(total.pricing_best_reduced_cost_any,
+                 node.pricing_best_reduced_cost_any);
+    total.pricing_best_new_reduced_cost =
+        std::min(total.pricing_best_new_reduced_cost,
+                 node.pricing_best_new_reduced_cost);
+    total.pricing_duplicate_negative_projections +=
+        node.pricing_duplicate_negative_projections;
+    total.pricing_new_negative_projections +=
+        node.pricing_new_negative_projections;
+    total.pricing_blocked_by_duplicate_projection =
+        total.pricing_blocked_by_duplicate_projection ||
+        node.pricing_blocked_by_duplicate_projection;
+    total.pricing_closure_certified_exact =
+        total.pricing_closure_certified_exact &&
+        node.pricing_closure_certified_exact;
     total.route_states += node.route_states;
     total.operation_states += node.operation_states;
     total.cuts_added += node.cuts_added;
@@ -1628,6 +1654,10 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
     const std::string& column_dominance_mode = "exact") {
     const auto start = Clock::now();
     GiniCapColumnGenerationResult result;
+    result.pricing_best_reduced_cost_any =
+        std::numeric_limits<double>::infinity();
+    result.pricing_best_new_reduced_cost =
+        std::numeric_limits<double>::infinity();
     result.gamma = gamma;
     result.gamma_floor = gamma_floor;
     result.columns_by_vehicle = initial_columns
@@ -1646,6 +1676,13 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
             result.columns_generated_raw += stats.columns_generated_raw;
             result.columns_after_dominance += stats.columns_after_dominance;
             result.columns_dominated += stats.columns_dominated;
+            result.dominance_input_columns += stats.dominance_input_columns;
+            result.dominance_kept_columns += stats.dominance_kept_columns;
+            result.dominance_removed_columns += stats.dominance_removed_columns;
+            result.dominance_removed_existing_projection +=
+                stats.dominance_removed_existing_projection;
+            result.dominance_removed_candidate_projection +=
+                stats.dominance_removed_candidate_projection;
             result.dominance_time_seconds += stats.dominance_time_seconds;
         }
     }
@@ -1881,6 +1918,7 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 result.route_states += priced.route_states;
                 result.operation_states += priced.operation_states;
                 result.columns_generated_raw += priced.generated_columns;
+                result.pricing_columns_enumerated += priced.generated_columns;
             }
             if (priced.has_column) {
                 priced.best_column.vehicle = k;
@@ -1938,6 +1976,7 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 result.route_states += exact.route_states;
                 result.operation_states += exact.operation_states;
                 result.columns_generated_raw += exact.generated_columns;
+                result.pricing_columns_enumerated += exact.generated_columns;
                 return exact;
             };
 
@@ -1975,6 +2014,9 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
             }
 
             best_rc = std::min(best_rc, priced.best_reduced_cost);
+            result.pricing_best_reduced_cost_any =
+                std::min(result.pricing_best_reduced_cost_any,
+                         priced.best_reduced_cost);
             std::ostringstream note;
             note << "iteration " << iter
                  << " vehicle " << k
@@ -2019,6 +2061,19 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 }
                 result.pricing_negative_columns_found +=
                     static_cast<long long>(negative_candidates.size());
+                std::unordered_set<std::string> existing_projection_keys;
+                existing_projection_keys.reserve(result.columns_by_vehicle[k].size());
+                for (const RouteLoadColumn& existing_column :
+                     result.columns_by_vehicle[k]) {
+                    existing_projection_keys.insert(projectionKey(existing_column));
+                }
+                long long duplicate_projection_candidates = 0;
+                for (const RouteLoadColumn& column : negative_candidates) {
+                    if (existing_projection_keys.find(projectionKey(column)) !=
+                        existing_projection_keys.end()) {
+                        ++duplicate_projection_candidates;
+                    }
+                }
                 ColumnDominanceStats stats;
                 std::vector<RouteLoadColumn> filtered =
                     filterNewColumnsByDominance(
@@ -2026,23 +2081,39 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                         dominance_options, stats);
                 result.columns_after_dominance += stats.columns_after_dominance;
                 result.columns_dominated += stats.columns_dominated;
+                result.dominance_input_columns += stats.dominance_input_columns;
+                result.dominance_kept_columns += stats.dominance_kept_columns;
+                result.dominance_removed_columns += stats.dominance_removed_columns;
+                result.dominance_removed_existing_projection +=
+                    stats.dominance_removed_existing_projection;
+                result.dominance_removed_candidate_projection +=
+                    stats.dominance_removed_candidate_projection;
                 result.dominance_time_seconds += stats.dominance_time_seconds;
+                result.pricing_duplicate_negative_projections +=
+                    std::max(duplicate_projection_candidates,
+                             stats.dominance_removed_existing_projection);
                 const int inserted_before =
                     static_cast<int>(result.columns_by_vehicle[k].size());
                 int inserted = 0;
                 for (RouteLoadColumn& column : filtered) {
                     if (hasColumn(result.columns_by_vehicle[k], column)) continue;
+                    result.pricing_best_new_reduced_cost =
+                        std::min(result.pricing_best_new_reduced_cost,
+                                 column.reduced_cost);
                     result.columns_by_vehicle[k].push_back(std::move(column));
                     ++inserted;
                 }
                 if (inserted > 0) {
                     added = true;
                     result.pricing_negative_columns_inserted += inserted;
+                    result.pricing_new_negative_projections += inserted;
+                    result.rmp_columns_inserted += inserted;
                 } else {
                     duplicate_negative = true;
+                    result.pricing_blocked_by_duplicate_projection = true;
                     result.notes.push_back("iteration " + std::to_string(iter)
                         + " vehicle " + std::to_string(k)
-                        + " all negative pricing columns were already present or dominated; stopping conservatively without claiming closure unless exact pricing has closed");
+                        + " all negative pricing columns were already present or dominated; stopping conservatively without claiming closure");
                 }
                 result.pricing_negative_columns_dominated +=
                     std::max(0, static_cast<int>(stats.columns_dominated));
@@ -2071,29 +2142,41 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                     refreshPoolColumnCount();
                     return result;
                 } else if (duplicate_negative) {
-                    result.complete = true;
-                    result.infeasible = true;
-                    result.lp_lambda_penalty = std::numeric_limits<double>::infinity();
-                    result.fixed_cap_surrogate = std::numeric_limits<double>::infinity();
-                    result.notes.push_back("phase-I duplicate negative column prevented further progress; conservatively treating this diagnostic node as infeasible");
+                    result.complete = false;
+                    result.pricing_completed_exactly = false;
+                    result.pricing_closure_certified_exact = false;
+                    result.notes.push_back("phase-I duplicate negative projection prevented progress; node is left unresolved because duplicate columns do not prove closure");
                     refreshPoolColumnCount();
                     return result;
                 }
             } else if (!duplicate_negative && best_rc >= -1e-7) {
                 result.complete = true;
             } else if (duplicate_negative) {
-                result.complete = true;
-                result.notes.push_back("pricing best negative column was already present; treating node as closed for this bounded-variable diagnostic because no new column was available to add");
+                result.complete = false;
+                result.pricing_completed_exactly = false;
+                result.pricing_closure_certified_exact = false;
+                result.notes.push_back("duplicate or dominated negative pricing projection prevents node closure; exact pricing did not certify absence of missing negative projections");
+                refreshPoolColumnCount();
+                return result;
             }
             break;
         }
     }
 
     refreshPoolColumnCount();
+    result.rmp_columns_active = result.generated_columns;
     if (!result.complete && result.iterations >= max_iterations) {
         result.notes.push_back("maximum column-generation iterations reached before exact pricing closure");
     }
     result.pricing_completed_exactly = result.complete;
+    result.pricing_closure_certified_exact =
+        result.complete && result.best_pricing_reduced_cost >= -1e-7;
+    if (!std::isfinite(result.pricing_best_new_reduced_cost)) {
+        result.pricing_best_new_reduced_cost = 0.0;
+    }
+    if (!std::isfinite(result.pricing_best_reduced_cost_any)) {
+        result.pricing_best_reduced_cost_any = 0.0;
+    }
     if (phase_one_iterations > 0) {
         result.notes.push_back("phase-I iterations used=" + std::to_string(phase_one_iterations));
     }
@@ -2252,7 +2335,8 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
     bool column_dominance_enabled,
     const std::string& column_dominance_mode,
     bool projection_bound_enabled,
-    bool penalty_domain_tightening_enabled) {
+    bool penalty_domain_tightening_enabled,
+    bool movement_domain_tightening_enabled) {
     const auto start = Clock::now();
     struct TreeNode {
         GiniCapBranchRestriction branch;
@@ -2262,6 +2346,10 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
     };
 
     GiniCapTreeResult result;
+    result.pricing_best_reduced_cost_any =
+        std::numeric_limits<double>::infinity();
+    result.pricing_best_new_reduced_cost =
+        std::numeric_limits<double>::infinity();
     result.gamma = gamma;
     result.gamma_floor = gamma_floor;
     result.global_lower_bound = std::numeric_limits<double>::infinity();
@@ -2369,6 +2457,13 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
             result.columns_generated_raw += stats.columns_generated_raw;
             result.columns_after_dominance += stats.columns_after_dominance;
             result.columns_dominated += stats.columns_dominated;
+            result.dominance_input_columns += stats.dominance_input_columns;
+            result.dominance_kept_columns += stats.dominance_kept_columns;
+            result.dominance_removed_columns += stats.dominance_removed_columns;
+            result.dominance_removed_existing_projection +=
+                stats.dominance_removed_existing_projection;
+            result.dominance_removed_candidate_projection +=
+                stats.dominance_removed_candidate_projection;
             result.dominance_time_seconds += stats.dominance_time_seconds;
         }
     }
@@ -2525,6 +2620,20 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
                         std::min(inventory_upper[station],
                                  node.branch.inventory_upper[station]);
                 }
+            }
+            if (movement_domain_tightening_enabled) {
+                MovementReachabilityTighteningResult move_tighten =
+                    tightenInventoryIntervalsByMovementReachability(
+                        instance, inventory_lower, inventory_upper);
+                result.movement_tightening_time_seconds += move_tighten.time_seconds;
+                result.movement_domains_tightened_count +=
+                    move_tighten.domains_tightened_count;
+                result.movement_domain_width_before +=
+                    move_tighten.total_domain_width_before;
+                result.movement_domain_width_after +=
+                    move_tighten.total_domain_width_after;
+                result.movement_unreachable_station_count +=
+                    move_tighten.unreachable_station_count;
             }
             const auto tighten_start = Clock::now();
             PenaltyDomainTighteningResult tighten;
@@ -2864,6 +2973,15 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
         ? "fixed-Gini-interval branch-price tree exhausted all open nodes; incumbent_source="
         : "fixed-Gini-cap branch-price tree exhausted all open nodes; incumbent_source=")
         + result.incumbent_source);
+    result.pricing_closure_certified_exact =
+        result.complete && result.pricing_completed_exactly &&
+        !result.pricing_blocked_by_duplicate_projection;
+    if (!std::isfinite(result.pricing_best_reduced_cost_any)) {
+        result.pricing_best_reduced_cost_any = 0.0;
+    }
+    if (!std::isfinite(result.pricing_best_new_reduced_cost)) {
+        result.pricing_best_new_reduced_cost = 0.0;
+    }
     return result;
 }
 
