@@ -2,6 +2,7 @@
 
 #include "Branching.hpp"
 #include "Bounds.hpp"
+#include "ColumnPool.hpp"
 #include "Cuts.hpp"
 #include "Evaluator.hpp"
 #include "Pricing.hpp"
@@ -1504,6 +1505,18 @@ LeafReconstructionResult reconstructProjectedLeaf(
 void addStats(GiniCapTreeResult& total, const GiniCapColumnGenerationResult& node) {
     total.pricing_calls += node.pricing_calls;
     total.generated_columns += node.generated_columns;
+    total.columns_generated_raw += node.columns_generated_raw;
+    total.columns_after_dominance += node.columns_after_dominance;
+    total.columns_dominated += node.columns_dominated;
+    total.dominance_time_seconds += node.dominance_time_seconds;
+    total.dominance_mode = node.dominance_mode;
+    total.dominance_exact_safe =
+        total.dominance_exact_safe && node.dominance_exact_safe;
+    total.pricing_negative_columns_found += node.pricing_negative_columns_found;
+    total.pricing_negative_columns_inserted += node.pricing_negative_columns_inserted;
+    total.pricing_negative_columns_dominated += node.pricing_negative_columns_dominated;
+    total.pricing_completed_exactly =
+        total.pricing_completed_exactly && node.pricing_completed_exactly;
     total.route_states += node.route_states;
     total.operation_states += node.operation_states;
     total.cuts_added += node.cuts_added;
@@ -1610,13 +1623,32 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
     const std::vector<std::vector<RouteLoadColumn>>* initial_columns = nullptr,
     bool use_combined_gini_lower_bound = false,
     double objective_cutoff = std::numeric_limits<double>::infinity(),
-    int pricing_return_columns = 1) {
+    int pricing_return_columns = 1,
+    bool column_dominance_enabled = true,
+    const std::string& column_dominance_mode = "exact") {
     const auto start = Clock::now();
     GiniCapColumnGenerationResult result;
     result.gamma = gamma;
     result.gamma_floor = gamma_floor;
     result.columns_by_vehicle = initial_columns
         ? *initial_columns : std::vector<std::vector<RouteLoadColumn>>(instance.M);
+    ColumnDominanceOptions dominance_options;
+    dominance_options.enabled = column_dominance_enabled;
+    dominance_options.mode = parseColumnDominanceMode(column_dominance_mode);
+    dominance_options.exact_safe = true;
+    dominance_options = normalizeColumnDominanceOptions(dominance_options);
+    result.dominance_mode = columnDominanceModeName(dominance_options.mode);
+    result.dominance_exact_safe = dominance_options.exact_safe;
+    if (dominance_options.enabled) {
+        for (auto& cols : result.columns_by_vehicle) {
+            ColumnDominanceStats stats;
+            applyColumnDominance(cols, dominance_options, stats);
+            result.columns_generated_raw += stats.columns_generated_raw;
+            result.columns_after_dominance += stats.columns_after_dominance;
+            result.columns_dominated += stats.columns_dominated;
+            result.dominance_time_seconds += stats.dominance_time_seconds;
+        }
+    }
     const double bound_gamma = (gamma_floor >= 0.0) ? gamma_floor : gamma;
     if (use_combined_gini_lower_bound) {
         result.notes.push_back(gamma_floor >= 0.0
@@ -1727,6 +1759,7 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 return result;
             }
             refreshPoolColumnCount();
+            result.pricing_completed_exactly = false;
             return result;
         }
 
@@ -1847,6 +1880,7 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 ++result.pricing_calls;
                 result.route_states += priced.route_states;
                 result.operation_states += priced.operation_states;
+                result.columns_generated_raw += priced.generated_columns;
             }
             if (priced.has_column) {
                 priced.best_column.vehicle = k;
@@ -1873,6 +1907,7 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                     result.best_pricing_reduced_cost =
                         std::isfinite(best_rc) ? best_rc : priced.best_reduced_cost;
                     refreshPoolColumnCount();
+                    result.pricing_completed_exactly = false;
                     return result;
                 }
             }
@@ -1902,6 +1937,7 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 ++result.pricing_calls;
                 result.route_states += exact.route_states;
                 result.operation_states += exact.operation_states;
+                result.columns_generated_raw += exact.generated_columns;
                 return exact;
             };
 
@@ -1933,6 +1969,7 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                     result.best_pricing_reduced_cost =
                         std::isfinite(best_rc) ? best_rc : priced.best_reduced_cost;
                     refreshPoolColumnCount();
+                    result.pricing_completed_exactly = false;
                     return result;
                 }
             }
@@ -1952,28 +1989,10 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                  << ", best_reduced_cost=" << priced.best_reduced_cost;
             result.notes.push_back(note.str());
 
+            std::vector<RouteLoadColumn> negative_candidates;
             if (priced.has_column && priced.best_reduced_cost < -1e-7) {
-                if (!columnAllowedByBranch(priced.best_column, branch)) {
-                    result.notes.push_back("iteration " + std::to_string(iter)
-                        + " vehicle " + std::to_string(k)
-                        + " pricing returned a branch-infeasible column; stopping without claiming closure");
-                    refreshPoolColumnCount();
-                    return result;
-                }
-                if (hasColumn(result.columns_by_vehicle[k], priced.best_column)) {
-                    duplicate_negative = true;
-                    result.notes.push_back("iteration " + std::to_string(iter)
-                        + " vehicle " + std::to_string(k)
-                        + " best negative column is already present; stopping conservatively without claiming closure");
-                } else {
-                    result.columns_by_vehicle[k].push_back(std::move(priced.best_column));
-                    added = true;
-                    result.notes.push_back("iteration " + std::to_string(iter)
-                        + " added vehicle " + std::to_string(k)
-                        + " column with reduced_cost=" + num(best_rc));
-                }
+                negative_candidates.push_back(priced.best_column);
             }
-            int extra_added = 0;
             for (RouteLoadColumn column : priced.negative_columns) {
                 if (column.reduced_cost >= -1e-7) continue;
                 if (!columnAllowedByBranch(column, branch)) {
@@ -1981,18 +2000,63 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                         + " vehicle " + std::to_string(k)
                         + " returned an extra branch-infeasible pricing column; stopping without claiming closure");
                     refreshPoolColumnCount();
+                    result.pricing_completed_exactly = false;
                     return result;
                 }
-                if (hasColumn(result.columns_by_vehicle[k], column)) continue;
-                result.columns_by_vehicle[k].push_back(std::move(column));
-                added = true;
-                ++extra_added;
+                negative_candidates.push_back(std::move(column));
             }
-            if (extra_added > 0) {
+
+            if (!negative_candidates.empty()) {
+                for (const RouteLoadColumn& column : negative_candidates) {
+                    if (!columnAllowedByBranch(column, branch)) {
+                        result.notes.push_back("iteration " + std::to_string(iter)
+                            + " vehicle " + std::to_string(k)
+                            + " pricing returned a branch-infeasible column; stopping without claiming closure");
+                        refreshPoolColumnCount();
+                        result.pricing_completed_exactly = false;
+                        return result;
+                    }
+                }
+                result.pricing_negative_columns_found +=
+                    static_cast<long long>(negative_candidates.size());
+                ColumnDominanceStats stats;
+                std::vector<RouteLoadColumn> filtered =
+                    filterNewColumnsByDominance(
+                        result.columns_by_vehicle[k], std::move(negative_candidates),
+                        dominance_options, stats);
+                result.columns_after_dominance += stats.columns_after_dominance;
+                result.columns_dominated += stats.columns_dominated;
+                result.dominance_time_seconds += stats.dominance_time_seconds;
+                const int inserted_before =
+                    static_cast<int>(result.columns_by_vehicle[k].size());
+                int inserted = 0;
+                for (RouteLoadColumn& column : filtered) {
+                    if (hasColumn(result.columns_by_vehicle[k], column)) continue;
+                    result.columns_by_vehicle[k].push_back(std::move(column));
+                    ++inserted;
+                }
+                if (inserted > 0) {
+                    added = true;
+                    result.pricing_negative_columns_inserted += inserted;
+                } else {
+                    duplicate_negative = true;
+                    result.notes.push_back("iteration " + std::to_string(iter)
+                        + " vehicle " + std::to_string(k)
+                        + " all negative pricing columns were already present or dominated; stopping conservatively without claiming closure unless exact pricing has closed");
+                }
+                result.pricing_negative_columns_dominated +=
+                    std::max(0, static_cast<int>(stats.columns_dominated));
                 result.notes.push_back("iteration " + std::to_string(iter)
-                    + " added " + std::to_string(extra_added)
-                    + " extra negative pricing column(s) for vehicle "
-                    + std::to_string(k));
+                    + " vehicle " + std::to_string(k)
+                    + " dominance-filtered negative pricing columns: found="
+                    + std::to_string(result.pricing_negative_columns_found)
+                    + ", inserted_this_vehicle=" + std::to_string(inserted)
+                    + ", pool_before=" + std::to_string(inserted_before)
+                    + ", pool_after="
+                    + std::to_string(result.columns_by_vehicle[k].size())
+                    + ", dominated_total="
+                    + std::to_string(result.pricing_negative_columns_dominated)
+                    + ", mode=" + result.dominance_mode);
             }
         }
         result.best_pricing_reduced_cost = best_rc;
@@ -2029,6 +2093,7 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
     if (!result.complete && result.iterations >= max_iterations) {
         result.notes.push_back("maximum column-generation iterations reached before exact pricing closure");
     }
+    result.pricing_completed_exactly = result.complete;
     if (phase_one_iterations > 0) {
         result.notes.push_back("phase-I iterations used=" + std::to_string(phase_one_iterations));
     }
@@ -2064,6 +2129,18 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     result.root_bound = root.fixed_cap_surrogate;
     result.pricing_calls += root.pricing_calls;
     result.generated_columns += root.generated_columns;
+    result.columns_generated_raw += root.columns_generated_raw;
+    result.columns_after_dominance += root.columns_after_dominance;
+    result.columns_dominated += root.columns_dominated;
+    result.dominance_time_seconds += root.dominance_time_seconds;
+    result.dominance_mode = root.dominance_mode;
+    result.dominance_exact_safe =
+        result.dominance_exact_safe && root.dominance_exact_safe;
+    result.pricing_negative_columns_found += root.pricing_negative_columns_found;
+    result.pricing_negative_columns_inserted += root.pricing_negative_columns_inserted;
+    result.pricing_negative_columns_dominated += root.pricing_negative_columns_dominated;
+    result.pricing_completed_exactly =
+        result.pricing_completed_exactly && root.pricing_completed_exactly;
     result.route_states += root.route_states;
     result.operation_states += root.operation_states;
     result.notes.push_back("root complete=" + std::string(root.complete ? "true" : "false")
@@ -2103,6 +2180,18 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     result.forbid_child_bound = forbid_child.fixed_cap_surrogate;
     result.pricing_calls += forbid_child.pricing_calls;
     result.generated_columns += forbid_child.generated_columns;
+    result.columns_generated_raw += forbid_child.columns_generated_raw;
+    result.columns_after_dominance += forbid_child.columns_after_dominance;
+    result.columns_dominated += forbid_child.columns_dominated;
+    result.dominance_time_seconds += forbid_child.dominance_time_seconds;
+    result.dominance_mode = forbid_child.dominance_mode;
+    result.dominance_exact_safe =
+        result.dominance_exact_safe && forbid_child.dominance_exact_safe;
+    result.pricing_negative_columns_found += forbid_child.pricing_negative_columns_found;
+    result.pricing_negative_columns_inserted += forbid_child.pricing_negative_columns_inserted;
+    result.pricing_negative_columns_dominated += forbid_child.pricing_negative_columns_dominated;
+    result.pricing_completed_exactly =
+        result.pricing_completed_exactly && forbid_child.pricing_completed_exactly;
     result.route_states += forbid_child.route_states;
     result.operation_states += forbid_child.operation_states;
     result.notes.push_back("forbid child complete="
@@ -2122,6 +2211,18 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     result.require_child_bound = require_child.fixed_cap_surrogate;
     result.pricing_calls += require_child.pricing_calls;
     result.generated_columns += require_child.generated_columns;
+    result.columns_generated_raw += require_child.columns_generated_raw;
+    result.columns_after_dominance += require_child.columns_after_dominance;
+    result.columns_dominated += require_child.columns_dominated;
+    result.dominance_time_seconds += require_child.dominance_time_seconds;
+    result.dominance_mode = require_child.dominance_mode;
+    result.dominance_exact_safe =
+        result.dominance_exact_safe && require_child.dominance_exact_safe;
+    result.pricing_negative_columns_found += require_child.pricing_negative_columns_found;
+    result.pricing_negative_columns_inserted += require_child.pricing_negative_columns_inserted;
+    result.pricing_negative_columns_dominated += require_child.pricing_negative_columns_dominated;
+    result.pricing_completed_exactly =
+        result.pricing_completed_exactly && require_child.pricing_completed_exactly;
     result.route_states += require_child.route_states;
     result.operation_states += require_child.operation_states;
     result.notes.push_back("require child complete="
@@ -2147,7 +2248,11 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
     double objective_cutoff,
     int warmstart_level,
     double early_stop_lower_bound,
-    int pricing_return_columns) {
+    int pricing_return_columns,
+    bool column_dominance_enabled,
+    const std::string& column_dominance_mode,
+    bool projection_bound_enabled,
+    bool penalty_domain_tightening_enabled) {
     const auto start = Clock::now();
     struct TreeNode {
         GiniCapBranchRestriction branch;
@@ -2160,6 +2265,13 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
     result.gamma = gamma;
     result.gamma_floor = gamma_floor;
     result.global_lower_bound = std::numeric_limits<double>::infinity();
+    ColumnDominanceOptions dominance_options;
+    dominance_options.enabled = column_dominance_enabled;
+    dominance_options.mode = parseColumnDominanceMode(column_dominance_mode);
+    dominance_options.exact_safe = true;
+    dominance_options = normalizeColumnDominanceOptions(dominance_options);
+    result.dominance_mode = columnDominanceModeName(dominance_options.mode);
+    result.dominance_exact_safe = dominance_options.exact_safe;
     const double bound_gamma = (gamma_floor >= 0.0) ? gamma_floor : gamma;
     const bool cutoff_mode = use_combined_gini_lower_bound &&
         std::isfinite(objective_cutoff);
@@ -2250,6 +2362,16 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
         return count;
     }();
     appendWarmStartColumns(instance, root_columns, warmstart_level);
+    if (dominance_options.enabled) {
+        for (auto& cols : root_columns) {
+            ColumnDominanceStats stats;
+            applyColumnDominance(cols, dominance_options, stats);
+            result.columns_generated_raw += stats.columns_generated_raw;
+            result.columns_after_dominance += stats.columns_after_dominance;
+            result.columns_dominated += stats.columns_dominated;
+            result.dominance_time_seconds += stats.dominance_time_seconds;
+        }
+    }
     const long long columns_after_warm_start = [&]() {
         long long count = 0;
         for (const auto& cols : root_columns) count += static_cast<long long>(cols.size());
@@ -2264,6 +2386,11 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
     } else if (warmstart_level <= 0) {
         result.notes.push_back("generic singleton and pickup-drop warm-start route-load columns disabled; using seed/priced columns only");
     }
+    result.notes.push_back("closed-column dominance: enabled="
+        + std::string(dominance_options.enabled ? "true" : "false")
+        + ", mode=" + result.dominance_mode
+        + ", exact_safe=" + std::string(result.dominance_exact_safe ? "true" : "false")
+        + ", root_columns_dominated=" + std::to_string(result.columns_dominated));
     result.notes.push_back(gamma_floor >= 0.0
         ? "Fixed-Gini-interval branch-price tree diagnostic solves closed LP/pricing nodes and branches on Ryan-Foster co-route pairs. Bounds are for the valid interval lower-bound metric gamma_floor+lambda*P."
         : "Fixed-Gini-cap branch-price tree diagnostic solves closed LP/pricing nodes and branches on Ryan-Foster co-route pairs. Bounds are for the fixed-cap surrogate gamma+lambda*P.");
@@ -2383,12 +2510,103 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
         TreeNode node = std::move(*next_node);
         open.erase(next_node);
         result.max_depth = std::max(result.max_depth, node.depth);
+        if (use_combined_gini_lower_bound) {
+            std::vector<int> inventory_lower(instance.V + 1, 0);
+            std::vector<int> inventory_upper(instance.V + 1, 0);
+            for (int station = 1; station <= instance.V; ++station) {
+                inventory_upper[station] = instance.capacity[station];
+                if (station < static_cast<int>(node.branch.inventory_lower.size())) {
+                    inventory_lower[station] =
+                        std::max(inventory_lower[station],
+                                 node.branch.inventory_lower[station]);
+                }
+                if (station < static_cast<int>(node.branch.inventory_upper.size())) {
+                    inventory_upper[station] =
+                        std::min(inventory_upper[station],
+                                 node.branch.inventory_upper[station]);
+                }
+            }
+            const auto tighten_start = Clock::now();
+            PenaltyDomainTighteningResult tighten;
+            if (cutoff_mode && penalty_domain_tightening_enabled) {
+                tighten = tightenInventoryIntervalsByPenaltyBudget(
+                    instance, lambda, gamma_floor, objective_cutoff,
+                    inventory_lower, inventory_upper);
+            } else {
+                tighten.total_domain_width_before = 0;
+                tighten.total_domain_width_after = 0;
+                for (int station = 1; station <= instance.V; ++station) {
+                    const int width = std::max(0, inventory_upper[station] -
+                                                   inventory_lower[station]);
+                    tighten.total_domain_width_before += width;
+                    tighten.total_domain_width_after += width;
+                }
+            }
+            result.penalty_tightening_time_seconds +=
+                std::chrono::duration<double>(Clock::now() - tighten_start).count();
+            result.penalty_budget = tighten.penalty_budget;
+            result.domains_tightened_count += tighten.domains_tightened_count;
+            result.total_domain_width_before += tighten.total_domain_width_before;
+            result.total_domain_width_after += tighten.total_domain_width_after;
+            if (tighten.fathomed_by_budget) {
+                ++result.pruned_by_bound;
+                addTerminalLowerBound(objective_cutoff);
+                result.notes.push_back("node fathomed by penalty-budget domain tightening before LP at depth="
+                    + std::to_string(node.depth));
+                continue;
+            }
+            bool empty_domain = false;
+            for (int station = 1; station <= instance.V; ++station) {
+                if (inventory_lower[station] > inventory_upper[station]) {
+                    empty_domain = true;
+                    break;
+                }
+            }
+            if (empty_domain) {
+                ++result.pruned_by_bound;
+                addTerminalLowerBound(cutoff_mode ? objective_cutoff
+                                                  : node.inherited_lower_bound);
+                result.notes.push_back("node fathomed by empty branched final-inventory interval before LP at depth="
+                    + std::to_string(node.depth));
+                continue;
+            }
+            if (projection_bound_enabled) {
+                const auto projection_start = Clock::now();
+                InventoryRatioProjectionBound projection =
+                    computeInventoryRatioProjectionBound(
+                        instance, lambda, inventory_lower, inventory_upper,
+                        gamma_floor, "global");
+                result.projection_bound_time_seconds +=
+                    std::chrono::duration<double>(Clock::now() - projection_start).count();
+                if (projection.valid) {
+                    result.projection_bound_best_value =
+                        std::max(result.projection_bound_best_value,
+                                 projection.objective_lower_bound);
+                    result.projection_bound_scope = projection.bound_scope;
+                    if (cutoff_mode &&
+                        projection.objective_lower_bound >= objective_cutoff - 1e-9) {
+                        ++result.pruned_by_bound;
+                        ++result.projection_bound_prunes;
+                        addTerminalLowerBound(objective_cutoff);
+                        result.notes.push_back("node fathomed by inventory-ratio projection lower bound before LP at depth="
+                            + std::to_string(node.depth)
+                            + ", projection_lb=" + num(projection.objective_lower_bound)
+                            + ", cutoff=" + num(objective_cutoff));
+                        continue;
+                    }
+                    node.inherited_lower_bound =
+                        std::max(node.inherited_lower_bound,
+                                 projection.objective_lower_bound);
+                }
+            }
+        }
         const double node_budget = (time_limit_seconds > 0.0)
             ? std::max(0.1, remainingTime()) : 0.0;
         GiniCapColumnGenerationResult lp_node = runGiniCapColumnGenerationInternal(
             instance, lambda, gamma, gamma_floor, node_budget, max_iterations,
             node.branch, &node.columns_by_vehicle, use_combined_gini_lower_bound,
-            objective_cutoff, pricing_return_columns);
+            objective_cutoff, pricing_return_columns,
+            column_dominance_enabled, column_dominance_mode);
         ++result.nodes_solved;
         addStats(result, lp_node);
 

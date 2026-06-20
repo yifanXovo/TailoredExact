@@ -1036,3 +1036,28 @@ Outcome:
 - The tailored exact portfolio certifies four target instances: the three pure-BPC certificates plus V10 M2 low through compact fallback.
 - V12 M2 average remains open. Current portfolio UB is `0.366168793171`, LB is `0.350523627890`, gap about `0.0427266`.
 - No compact fallback result is reported as BPC, and no positive-gap result is reported as optimal.
+
+## 2026-06-20: Route-Load BPC Dominance And Projection Bounds
+
+Change:
+
+- Added `ColumnPool` for exact-safe closed route-load column dominance.
+- Added CLI controls `--column-dominance`, `--column-dominance-mode`, `--projection-bound`, `--penalty-domain-tightening`, and `--frontier-column-cache`.
+- Added inventory-ratio interval projection lower bound and incumbent penalty-budget domain tightening.
+- Filtered multi-column pricing output before RMP insertion while preserving exact-pricing closure requirements.
+- Added dominance compression for BPC-owned route-column incumbent pools.
+- Added proof documentation in `docs/optimization_proofs.md`.
+- Added optimization update results under `results/optimization_update/`.
+
+Validation:
+
+- CMake was unavailable, so both executables were rebuilt with the fallback `g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic` commands.
+- V4 smoke diagnostics ran for pricing, pricing-branch, cuts, branching, master, cg, gcap-cg, gcap-tree, and gcap-frontier.
+- `results/optimization_update/raw/ablation_v4_full.json`: full BPC smoke certified the original V4 instance with objective/LB/UB `0`, gap `0`, verifier passed, `unresolved_intervals=0`, `invalid_bound_intervals=0`.
+- `results/optimization_update/raw/stress_v12_m1_average_full_60s.json`: V12 stress smoke did not certify in 60s; UB `0.393080018005`, LB `0`, gap `1`, verifier passed. This is a noncertified diagnostic stress row only.
+
+Outcome:
+
+- The new optimizations preserve the existing V4 certificate in smoke ablations.
+- The short V12 stress run shows the new stats and lower-bound hooks working, but it is not a certificate.
+- Frontier column cache, route-support infeasibility cuts, and HGA/TGBC incumbent import remain TODOs.

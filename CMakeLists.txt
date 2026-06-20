@@ -18,6 +18,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Evaluator.cpp
   src/Result.cpp
   src/Bounds.cpp
+  src/ColumnPool.cpp
   src/TailoredExact.cpp
   src/Pricing.cpp
   src/Cuts.cpp

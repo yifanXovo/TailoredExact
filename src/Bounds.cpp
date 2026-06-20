@@ -471,6 +471,142 @@ ResourceRelaxationBound computeResourceRelaxationBound(const Instance& instance,
     return bound;
 }
 
+InventoryRatioProjectionBound computeInventoryRatioProjectionBound(
+    const Instance& instance,
+    double lambda,
+    const std::vector<int>& lower_inventory,
+    const std::vector<int>& upper_inventory,
+    double gamma_floor,
+    const std::string& bound_scope) {
+    InventoryRatioProjectionBound bound;
+    bound.bound_scope = bound_scope;
+    if (instance.V <= 0) {
+        bound.warnings.push_back("projection bound skipped because instance has no stations");
+        return bound;
+    }
+    if (static_cast<int>(lower_inventory.size()) <= instance.V ||
+        static_cast<int>(upper_inventory.size()) <= instance.V) {
+        bound.warnings.push_back("projection bound skipped because inventory interval vectors are too short");
+        return bound;
+    }
+
+    std::vector<double> ell(instance.V + 1, 0.0);
+    std::vector<double> u(instance.V + 1, 0.0);
+    for (int i = 1; i <= instance.V; ++i) {
+        if (instance.target[i] <= 0) {
+            bound.warnings.push_back("projection bound skipped because station target is nonpositive");
+            return bound;
+        }
+        if (lower_inventory[i] > upper_inventory[i]) {
+            bound.warnings.push_back("projection bound saw an empty station inventory interval");
+            return bound;
+        }
+        ell[i] = static_cast<double>(lower_inventory[i]) /
+                 static_cast<double>(instance.target[i]);
+        u[i] = static_cast<double>(upper_inventory[i]) /
+               static_cast<double>(instance.target[i]);
+        bound.S_upper_bound += u[i];
+        double deviation_lb = 0.0;
+        if (ell[i] > 1.0) {
+            deviation_lb = ell[i] - 1.0;
+        } else if (u[i] < 1.0) {
+            deviation_lb = 1.0 - u[i];
+        }
+        bound.P_lower_bound += instance.weights[i] * deviation_lb;
+    }
+    if (bound.S_upper_bound <= 1e-12) {
+        bound.warnings.push_back("projection bound skipped because S upper bound is nonpositive");
+        return bound;
+    }
+
+    for (int i = 1; i <= instance.V; ++i) {
+        for (int j = i + 1; j <= instance.V; ++j) {
+            double delta = 0.0;
+            if (ell[i] > u[j]) {
+                delta = ell[i] - u[j];
+            } else if (ell[j] > u[i]) {
+                delta = ell[j] - u[i];
+            }
+            bound.H_lower_bound += delta;
+        }
+    }
+
+    bound.G_lower_bound =
+        bound.H_lower_bound / (static_cast<double>(instance.V) * bound.S_upper_bound);
+    bound.objective_lower_bound =
+        bound.G_lower_bound + lambda * bound.P_lower_bound;
+    if (std::isfinite(gamma_floor) && gamma_floor >= 0.0) {
+        const double floor_bound = std::max(0.0, gamma_floor);
+        bound.objective_lower_bound = std::max({
+            bound.objective_lower_bound,
+            floor_bound,
+            floor_bound + lambda * bound.P_lower_bound
+        });
+        bound.G_lower_bound = std::max(bound.G_lower_bound, floor_bound);
+    }
+    bound.valid = true;
+    return bound;
+}
+
+PenaltyDomainTighteningResult tightenInventoryIntervalsByPenaltyBudget(
+    const Instance& instance,
+    double lambda,
+    double gamma_floor,
+    double objective_cutoff,
+    std::vector<int>& lower_inventory,
+    std::vector<int>& upper_inventory) {
+    PenaltyDomainTighteningResult out;
+    if (instance.V <= 0) return out;
+    if (static_cast<int>(lower_inventory.size()) <= instance.V ||
+        static_cast<int>(upper_inventory.size()) <= instance.V) {
+        out.warnings.push_back("penalty tightening skipped because inventory interval vectors are too short");
+        return out;
+    }
+    for (int i = 1; i <= instance.V; ++i) {
+        out.total_domain_width_before +=
+            std::max(0, upper_inventory[i] - lower_inventory[i]);
+    }
+    if (!std::isfinite(objective_cutoff) || objective_cutoff <= 0.0 ||
+        lambda <= 1e-12) {
+        out.total_domain_width_after = out.total_domain_width_before;
+        return out;
+    }
+
+    const double floor_bound = std::max(0.0, gamma_floor);
+    out.penalty_budget = (objective_cutoff - floor_bound) / lambda;
+    out.valid = true;
+    if (out.penalty_budget < -1e-9) {
+        out.fathomed_by_budget = true;
+        out.total_domain_width_after = out.total_domain_width_before;
+        return out;
+    }
+
+    for (int i = 1; i <= instance.V; ++i) {
+        if (instance.target[i] <= 0 || instance.weights[i] <= 1e-12) continue;
+        const int old_lo = lower_inventory[i];
+        const int old_hi = upper_inventory[i];
+        const double ratio_radius = out.penalty_budget / instance.weights[i];
+        const double lo_ratio = std::max(0.0, 1.0 - ratio_radius);
+        const double hi_ratio = 1.0 + ratio_radius;
+        const int tight_lo = static_cast<int>(
+            std::ceil(static_cast<double>(instance.target[i]) * lo_ratio - 1e-9));
+        const int tight_hi = static_cast<int>(
+            std::floor(static_cast<double>(instance.target[i]) * hi_ratio + 1e-9));
+        lower_inventory[i] = std::max(lower_inventory[i], tight_lo);
+        upper_inventory[i] = std::min(upper_inventory[i], tight_hi);
+        lower_inventory[i] = std::max(0, lower_inventory[i]);
+        upper_inventory[i] = std::min(instance.capacity[i], upper_inventory[i]);
+        if (lower_inventory[i] != old_lo || upper_inventory[i] != old_hi) {
+            ++out.domains_tightened_count;
+        }
+    }
+    for (int i = 1; i <= instance.V; ++i) {
+        out.total_domain_width_after +=
+            std::max(0, upper_inventory[i] - lower_inventory[i]);
+    }
+    return out;
+}
+
 GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound(
     const Instance& instance,
     double lambda,
@@ -478,7 +614,9 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     double gamma_cap,
     double time_limit_seconds,
     double objective_cutoff,
-    int route_mask_max_v) {
+    int route_mask_max_v,
+    bool projection_bound_enabled,
+    bool penalty_domain_tightening_enabled) {
     GiniIntervalInventoryRelaxationBound bound;
     if (instance.V <= 0 || gamma_cap < -1e-12) {
         bound.note = "inventory-Gini relaxation skipped because interval parameters are invalid";
@@ -514,6 +652,7 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     const double penalty_budget = cutoff_bound_active
         ? (objective_cutoff - floor_bound) / lambda
         : std::numeric_limits<double>::infinity();
+    bound.penalty_budget = std::isfinite(penalty_budget) ? penalty_budget : 0.0;
     auto cutoffCappedLowerBound = [&](double value) {
         if (!std::isfinite(value)) {
             return cutoff_bound_active ? objective_cutoff : value;
@@ -535,6 +674,92 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
              << ", objective_lb=" << bound.objective_lower_bound;
         bound.note = note.str();
         return bound;
+    }
+
+    std::vector<int> inventory_lower(instance.V + 1, 0);
+    std::vector<int> inventory_upper(instance.V + 1, 0);
+    for (int i = 1; i <= instance.V; ++i) {
+        inventory_lower[i] = 0;
+        inventory_upper[i] = instance.capacity[i];
+    }
+
+    if (penalty_domain_tightening_enabled) {
+        const auto tighten_start = std::chrono::steady_clock::now();
+        PenaltyDomainTighteningResult tighten =
+            tightenInventoryIntervalsByPenaltyBudget(
+                instance, lambda, gamma_floor, objective_cutoff,
+                inventory_lower, inventory_upper);
+        bound.penalty_tightening_time_seconds =
+            std::chrono::duration<double>(
+                std::chrono::steady_clock::now() - tighten_start).count();
+        bound.penalty_budget = tighten.penalty_budget;
+        bound.domains_tightened_count = tighten.domains_tightened_count;
+        bound.total_domain_width_before = tighten.total_domain_width_before;
+        bound.total_domain_width_after = tighten.total_domain_width_after;
+        bound.penalty_budget_fathomed = tighten.fathomed_by_budget;
+        if (tighten.fathomed_by_budget) {
+            bound.computed = true;
+            bound.objective_lower_bound = objective_cutoff;
+            bound.gini_lower_bound = floor_bound;
+            bound.lambda_penalty_lower_bound =
+                std::max(0.0, bound.objective_lower_bound - bound.gini_lower_bound);
+            bound.note = "inventory-route-Gini relaxation cutoff-fathomed by penalty budget before LP";
+            return bound;
+        }
+    } else {
+        for (int i = 1; i <= instance.V; ++i) {
+            bound.total_domain_width_before += instance.capacity[i];
+            bound.total_domain_width_after += instance.capacity[i];
+        }
+    }
+
+    if (projection_bound_enabled) {
+        const auto projection_start = std::chrono::steady_clock::now();
+        InventoryRatioProjectionBound projection =
+            computeInventoryRatioProjectionBound(
+                instance, lambda, inventory_lower, inventory_upper,
+                gamma_floor, "global");
+        bound.projection_bound_time_seconds =
+            std::chrono::duration<double>(
+                std::chrono::steady_clock::now() - projection_start).count();
+        if (projection.valid) {
+            bound.projection_bound_valid = true;
+            bound.projection_penalty_lower_bound = projection.P_lower_bound;
+            bound.projection_h_lower_bound = projection.H_lower_bound;
+            bound.projection_s_upper_bound = projection.S_upper_bound;
+            bound.projection_gini_lower_bound = projection.G_lower_bound;
+            bound.projection_objective_lower_bound =
+                cutoffCappedLowerBound(projection.objective_lower_bound);
+            bound.projection_bound_scope = projection.bound_scope;
+            if (bound.projection_objective_lower_bound >= objective_cutoff - 1e-9 &&
+                cutoff_bound_active) {
+                bound.computed = true;
+                bound.projection_bound_fathomed = true;
+                bound.objective_lower_bound = objective_cutoff;
+                bound.gini_lower_bound = std::max(floor_bound,
+                                                  bound.projection_gini_lower_bound);
+                bound.lambda_penalty_lower_bound =
+                    std::max(0.0, bound.objective_lower_bound -
+                                  bound.gini_lower_bound);
+                bound.note = "inventory-ratio projection lower bound cutoff-fathomed this interval before LP";
+                return bound;
+            }
+        }
+    }
+    for (int i = 1; i <= instance.V; ++i) {
+        if (inventory_lower[i] > inventory_upper[i]) {
+            bound.computed = true;
+            bound.infeasible = true;
+            bound.objective_lower_bound = cutoff_bound_active
+                ? objective_cutoff
+                : std::numeric_limits<double>::infinity();
+            bound.gini_lower_bound = floor_bound;
+            bound.lambda_penalty_lower_bound =
+                std::max(0.0, bound.objective_lower_bound - bound.gini_lower_bound);
+            bound.status = "infeasible";
+            bound.note = "inventory interval tightening produced an empty final-inventory domain; interval is infeasible under necessary conditions";
+            return bound;
+        }
     }
 
     int total_initial = 0;
@@ -862,7 +1087,8 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
 
     lp << "Bounds\n";
     for (int i = 1; i <= instance.V; ++i) {
-        lp << " 0 <= " << yName(i) << " <= " << instance.capacity[i] << "\n";
+        lp << " " << inventory_lower[i] << " <= " << yName(i)
+           << " <= " << inventory_upper[i] << "\n";
         lp << " 0 <= " << pName(i) << "\n";
         lp << " 0 <= " << dName(i) << "\n";
         lp << " 0 <= " << vName(i) << " <= 1\n";
@@ -1007,7 +1233,9 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
             : std::numeric_limits<double>::quiet_NaN();
         if (std::isfinite(mip_best_bound)) {
             bound.computed = true;
-            bound.objective_lower_bound = cutoffCappedLowerBound(mip_best_bound);
+            bound.objective_lower_bound = std::max(
+                cutoffCappedLowerBound(mip_best_bound),
+                bound.projection_bound_valid ? bound.projection_objective_lower_bound : 0.0);
             bound.gini_lower_bound = floor_bound;
             bound.lambda_penalty_lower_bound =
                 std::max(0.0, bound.objective_lower_bound - bound.gini_lower_bound);
@@ -1027,6 +1255,14 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
                  << ", route_mask_max_v=" << route_mask_max_v
                  << ", incumbent_cutoff_bound=" << (cutoff_bound_active ? "true" : "false")
                  << ", penalty_budget=" << (cutoff_bound_active ? num(penalty_budget) : "inf")
+                 << ", penalty_domain_tightening=" << (penalty_domain_tightening_enabled ? "true" : "false")
+                 << ", domains_tightened=" << bound.domains_tightened_count
+                 << ", domain_width_before=" << bound.total_domain_width_before
+                 << ", domain_width_after=" << bound.total_domain_width_after
+                 << ", projection_bound_enabled=" << (projection_bound_enabled ? "true" : "false")
+                 << ", projection_bound_valid=" << (bound.projection_bound_valid ? "true" : "false")
+                 << ", projection_bound_lb=" << bound.projection_objective_lower_bound
+                 << ", projection_bound_scope=" << bound.projection_bound_scope
                  << ", min_station_bikes=" << min_station_bikes_after_return
                  << ", s_upper=" << s_upper
                  << ", objective_lb=" << bound.objective_lower_bound
@@ -1039,7 +1275,9 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
         return bound;
     }
     bound.computed = true;
-    bound.objective_lower_bound = cutoffCappedLowerBound(obj);
+    bound.objective_lower_bound = std::max(
+        cutoffCappedLowerBound(obj),
+        bound.projection_bound_valid ? bound.projection_objective_lower_bound : 0.0);
     bound.gini_lower_bound = floor_bound;
     bound.lambda_penalty_lower_bound =
         std::max(0.0, bound.objective_lower_bound - bound.gini_lower_bound);
@@ -1060,6 +1298,14 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
          << ", route_mask_max_v=" << route_mask_max_v
          << ", incumbent_cutoff_bound=" << (cutoff_bound_active ? "true" : "false")
          << ", penalty_budget=" << (cutoff_bound_active ? num(penalty_budget) : "inf")
+         << ", penalty_domain_tightening=" << (penalty_domain_tightening_enabled ? "true" : "false")
+         << ", domains_tightened=" << bound.domains_tightened_count
+         << ", domain_width_before=" << bound.total_domain_width_before
+         << ", domain_width_after=" << bound.total_domain_width_after
+         << ", projection_bound_enabled=" << (projection_bound_enabled ? "true" : "false")
+         << ", projection_bound_valid=" << (bound.projection_bound_valid ? "true" : "false")
+         << ", projection_bound_lb=" << bound.projection_objective_lower_bound
+         << ", projection_bound_scope=" << bound.projection_bound_scope
          << ", min_station_bikes=" << min_station_bikes_after_return
          << ", s_upper=" << s_upper
          << ", objective_lb=" << bound.objective_lower_bound
