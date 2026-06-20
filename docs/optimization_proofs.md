@@ -275,3 +275,70 @@ Future support cuts may be added only when an exact one-vehicle route-load oracl
 proves that no route order and integer operation vector can realize the support.
 Timeouts or sampled failures are not infeasibility proofs.
 
+## Fifth Optimization Pass: Focused Retry, Route-Pool Incumbents, And Compatibility Flow
+
+### Executed Focused Min-LB Retry
+
+Focused retry is certificate-neutral because it only reallocates remaining time
+among already represented frontier intervals. The retry queue is ordered by
+valid interval lower bound, then by incumbent gap, open-node count, and interval
+id. Retrying an interval can update its branch-price lower bound, open-node
+count, incumbent routes, or fathoming status, but it does not remove any other
+relevant interval from the final ledger. The global lower bound is still the
+minimum valid interval bound over the relevant frontier. A positive-gap run
+remains noncertified even if focused retry executes.
+
+### Route-Column Pool Incumbent Master
+
+The frontier route-column pool stores only independently feasible route-load
+columns and applies projection dominance by vehicle, station mask, and signed
+operation vector before insertion. The true-objective restricted master selects
+at most one stored column per vehicle, enforces station-disjointness, recomputes
+final inventories, and evaluates `G + lambda P`. For `V <= 16`, the implemented
+fallback is an exact DFS over vehicles and station masks for the restricted
+pool. Any selected route set is passed through the independent verifier before
+it can update the incumbent.
+
+This master is a primal heuristic only. Optimizing over a subset of feasible
+columns can produce a valid upper bound, but failure to improve cannot prove a
+lower bound. Therefore route-pool results may tighten incumbent cutoffs but do
+not close a BPC node or a frontier interval.
+
+### Interval Candidate True-Objective Audit
+
+A branch-price interval may report a surrogate integer metric, such as a
+fixed-cap value or an interval lower-bound objective. That metric is not
+necessarily the original objective. Every reconstructed route candidate is
+therefore independently verified and evaluated under the original
+`G + lambda P` objective before acceptance. A feasible candidate that improves
+the current verified upper bound is accepted even if its surrogate came from a
+different interval metric. Rejections are logged as verifier failure,
+non-improving true objective, feasible but outside the interval, duplicate
+incumbent, or unknown reason.
+
+### Pickup-Drop Compatibility Flow Relaxation
+
+Let `p_i` be pickup at station `i`, `d_j` be drop at station `j`, `f_ij >= 0`
+be continuous transfer from pickup `i` to downstream drop `j`, and `h_i >= 0`
+be bikes picked at `i` and unloaded at the depot. Any feasible route-load
+solution induces:
+
+```text
+p_i = sum_j f_ij + h_i
+d_j = sum_i f_ij
+```
+
+If station `j` receives a bike picked at `i`, some vehicle route must be able
+to visit `i` before `j` within the route-duration limit. The implementation
+declares a pair incompatible only when the directed metric-closure lower bound
+
+```text
+d(0,i) + d(i,j) + d(j,0) + pickup_time + drop_time > T_k
+```
+
+for every vehicle `k`. Pairs that cannot be proven impossible remain compatible.
+For compatible pairs, `f_ij` is bounded by station pickup/drop capacity. These
+constraints are necessary for every feasible route-load solution and can only
+strengthen the inventory/route/Gini relaxation. They are not a certificate by
+themselves; full frontier closure and exact pricing are still required.
+

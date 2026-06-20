@@ -1121,3 +1121,29 @@ Remaining TODOs:
 - Find or regenerate compatible V8/V10 input files for the current parser so round-four ablations can cover the historical target cases.
 - Add an exact support-feasibility oracle only if it can prove small-support infeasibility without timeouts or heuristics.
 - Investigate stronger V12 lower bounds; support-duration pruning did not remove real V12 masks in this pass.
+
+# 2026-06-21 Round-5 Focused Retry, Route-Pool Incumbents, And Compatibility Flow
+
+- Started from merged `main` at `68fe5fb3ac0f8b2bbcffa65b962902db60f58e8a` and preserved the pre-existing untracked round-three raw JSON artifacts.
+- Fixed focused min-LB retry execution so `--frontier-focused-min-lb-retry true` can spend remaining time on the unresolved relevant interval with the current minimum valid lower bound even when final closure is disabled.
+- Added a frontier route-column pool and true-objective restricted route-column incumbent master. The master is verifier-gated and updates only the upper bound; it never contributes lower-bound evidence.
+- Added interval integer-candidate auditing under the true `G + lambda P` objective with accepted/rejected candidate counts and rejection reasons.
+- Added pickup-drop compatibility flow variables to the inventory/route/Gini relaxation. Pairs are removed only when directed metric-closure duration bounds prove pickup-before-drop infeasibility. On the two regenerated V12 instances, all pairs remained compatible.
+- CMake was unavailable; both executables were rebuilt with the documented `g++` fallback commands.
+- Smoke diagnostics passed on `testdata/examples/gcap_smoke_V4_M1.txt`: `pricing`, `pricing-branch`, `cuts`, `branching`, `master`, `cg`, `gcap-cg`, `gcap-tree`, `gcap-frontier`, `dominance-test`, `support-pruning-test`, `route-mask-support-test`, `incumbent-import-test`, `route-pool-incumbent-test`, and `pickup-drop-compat-flow-test`.
+- V4 `gcap-frontier` remains certified with objective/LB/UB `0`, `unresolved_intervals=0`, `open_nodes=0`, and verifier passed.
+- V12 M1 average best incumbent audit row was BPC-owned `local/pool/portfolio/strong`, UB `0.369698924539`. The short ablation rows with compact-style seed remained at UB `0.382683045935`, LB `0.258804234390`, gap `0.323711261476`.
+- V12 M2 average best incumbent audit row was BPC-owned `strong/portfolio`, UB `0.759438494406`. The best short ablation lower bound was `0.587614408090`, gap `0.226251483934`.
+- Focused retry executed in unresolved V12 rows, including V12 M1 `focused_retry_only` and `improved_full_long`, and V12 M2 focused variants. It did not make valid lower-bound progress before the short time caps.
+- Route-pool incumbent diagnostics were verified, but the pool did not beat the best V12 BPC-owned seeds in this pass.
+- All round-five smoke, incumbent-audit, and V12 ablation commands exited `0`; captured logs were scanned for address/access-violation, segmentation, `bad_alloc`, out-of-memory, and Windows access-violation signatures, with no hits.
+- Plain CPLEX benchmark runs were skipped in this pass. CPLEX-style compact seeds appear only as labeled upper-bound sources where requested.
+- Runnable local source inputs for V8/V10 were not found in this checkout; only historical logs/results were present.
+- Raw outputs and summaries are in `results/optimization_update_round5/`.
+
+Remaining TODOs:
+
+- Strengthen V12 lower bounds beyond compatibility flow; the conservative compatibility test found zero incompatible pairs on the regenerated V12 inputs.
+- Improve BPC-owned route-pool harvesting so the restricted pool can beat local/strong incumbents on V12.
+- Implement exact support-feasibility cuts only after an exact no-timeout oracle is available; the switch remains disabled for certificate runs.
+- Restore or regenerate compatible V8/V10 text inputs for current-parser ablation coverage.

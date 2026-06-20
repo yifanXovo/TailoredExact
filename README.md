@@ -38,6 +38,8 @@ build\ExactEBRP.exe --method gcap-frontier --input testdata\examples\gcap_smoke_
 - `--support-duration-max-subset-size N`: maximum station subset size used for support-duration pruning precomputation.
 - `--route-mask-support-duration-pruning true|false`: apply the same exact-safe support-duration infeasibility test to complete route-mask relaxation masks.
 - `--frontier-focused-min-lb-retry true|false`: spend retry time on the unresolved frontier interval with the smallest valid lower bound.
+- `--route-pool-incumbent true|false`: collect verified BPC-generated route-load columns and solve a true-objective restricted route-column incumbent master for upper bounds only.
+- `--pickup-drop-compat-flow true|false`: strengthen the inventory/route/Gini relaxation with pickup-to-drop compatibility flow variables when pairs can be safely screened by route-duration lower bounds.
 - `--support-feasibility-oracle true|false`: reserved switch for exact small-support infeasibility checking; default is false and heuristic support cuts are not generated.
 - `--incumbent-json <path> --incumbent-format exact_result --incumbent-source-name <name>`: import a verified incumbent route solution as an upper-bound/cutoff source only.
 - `--incumbent-format auto|exact_result|route_json|csv`: parse incumbent files as ExactEBRP result JSON, route JSON, or CSV with vehicle/order/station/pickup/drop columns.
@@ -55,6 +57,19 @@ Round-four example with route-mask support pruning, focused retry, and verified 
 
 ```powershell
 build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 120 --frontier-intervals 2 --bpc-incumbent portfolio --bpc-incumbent-seconds 12 --column-dominance true --projection-bound true --penalty-domain-tightening true --movement-domain-tightening true --frontier-best-bound-scheduling true --frontier-relaxation-cache true --frontier-focused-min-lb-retry true --support-duration-pruning true --route-mask-support-duration-pruning true --support-feasibility-oracle false --gcap-pricing-columns 4 --out results\optimization_update_round4\raw\ablation_v12_m2_average_improved_full_long.json
+```
+
+Round-five example with executed focused retry, route-pool incumbent master, and pickup-drop compatibility flow:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 120 --frontier-intervals 2 --frontier-retry-passes 0 --max-nodes 3 --bpc-incumbent portfolio --bpc-incumbent-seconds 8 --frontier-relax-seconds 0.5 --route-mask-max-v 12 --column-dominance true --projection-bound true --penalty-domain-tightening true --movement-domain-tightening true --frontier-best-bound-scheduling true --frontier-relaxation-cache true --frontier-focused-min-lb-retry true --route-pool-incumbent true --pickup-drop-compat-flow true --support-duration-pruning true --route-mask-support-duration-pruning true --support-feasibility-oracle false --gcap-pricing-columns 2 --out results\optimization_update_round5\raw\ablation_v12_m2_average_improved_full_long.json
+```
+
+Route-pool incumbent and compatibility-flow diagnostics:
+
+```powershell
+build\ExactEBRP.exe --method route-pool-incumbent-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --route-pool-incumbent true --out results\optimization_update_round5\raw\smoke_route-pool-incumbent-test.json
+build\ExactEBRP.exe --method pickup-drop-compat-flow-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --pickup-drop-compat-flow true --out results\optimization_update_round5\raw\smoke_pickup-drop-compat-flow-test.json
 ```
 
 Proofs and certificate cautions are in `docs/optimization_proofs.md` and `docs/certification_protocol.md`.

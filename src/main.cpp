@@ -38,7 +38,7 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|incumbent-import-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
@@ -55,6 +55,7 @@ void usage() {
         << "[--frontier-column-cache true|false] [--frontier-focused-min-lb-retry true|false] "
         << "[--support-duration-pruning true|false] [--support-duration-max-subset-size <N>] "
         << "[--route-mask-support-duration-pruning true|false] [--support-feasibility-oracle true|false] "
+        << "[--route-pool-incumbent true|false] [--pickup-drop-compat-flow true|false] "
         << "[--gcap-seed-cplex] [--gcap-seed-time-limit <seconds>] "
         << "[--incumbent-json <path>] [--incumbent-format auto|exact_result|route_json|csv] "
         << "[--hga-incumbent <path>] [--hga-incumbent-format auto|route_json|csv|legacy] "
@@ -129,6 +130,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--support-duration-max-subset-size") opt.support_duration_max_subset_size = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--route-mask-support-duration-pruning") opt.route_mask_support_duration_pruning = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--support-feasibility-oracle") opt.support_feasibility_oracle = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--route-pool-incumbent") opt.route_pool_incumbent = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--pickup-drop-compat-flow") opt.pickup_drop_compat_flow = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--gcap-seed-cplex") opt.gcap_seed_cplex = true;
         else if (arg == "--gcap-seed-time-limit") opt.gcap_seed_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--incumbent-json") opt.incumbent_json_path = requireValue(i, argc, argv);
@@ -642,6 +645,156 @@ struct BpcOwnedIncumbentResult {
     long long master_states = 0;
     std::vector<std::string> notes;
 };
+
+struct FrontierRouteColumnPool {
+    std::vector<std::vector<ebrp::RouteLoadColumn>> columns_by_vehicle;
+    std::vector<std::unordered_map<std::string, std::size_t>> projection_index;
+    long long raw = 0;
+    long long removed_by_dominance = 0;
+
+    explicit FrontierRouteColumnPool(int vehicles = 0)
+        : columns_by_vehicle(std::max(0, vehicles)),
+          projection_index(std::max(0, vehicles)) {}
+
+    static bool representativeBetter(const ebrp::RouteLoadColumn& candidate,
+                                     const ebrp::RouteLoadColumn& incumbent) {
+        if (candidate.duration < incumbent.duration - 1e-9) return true;
+        if (candidate.duration > incumbent.duration + 1e-9) return false;
+        if (candidate.travel < incumbent.travel - 1e-9) return true;
+        if (candidate.travel > incumbent.travel + 1e-9) return false;
+        return candidate.path < incumbent.path;
+    }
+
+    bool addColumn(const ebrp::RouteLoadColumn& column) {
+        ++raw;
+        if (column.vehicle < 0 ||
+            column.vehicle >= static_cast<int>(columns_by_vehicle.size()) ||
+            column.mask == 0 ||
+            column.q.empty()) {
+            ++removed_by_dominance;
+            return false;
+        }
+        const std::string key = ebrp::projectionKey(column);
+        auto& index = projection_index[column.vehicle];
+        auto it = index.find(key);
+        if (it == index.end()) {
+            index[key] = columns_by_vehicle[column.vehicle].size();
+            columns_by_vehicle[column.vehicle].push_back(column);
+            return true;
+        }
+        ebrp::RouteLoadColumn& incumbent =
+            columns_by_vehicle[column.vehicle][it->second];
+        if (representativeBetter(column, incumbent)) incumbent = column;
+        ++removed_by_dominance;
+        return false;
+    }
+
+    void addRoutes(const ebrp::Instance& instance,
+                   const std::vector<ebrp::RoutePlan>& routes) {
+        for (const ebrp::RoutePlan& route : routes) {
+            ebrp::RouteLoadColumn column;
+            if (columnFromRoute(instance, route, column)) {
+                addColumn(column);
+            }
+        }
+    }
+
+    long long kept() const {
+        long long out = 0;
+        for (const auto& cols : columns_by_vehicle) {
+            out += static_cast<long long>(cols.size());
+        }
+        return out;
+    }
+};
+
+struct RoutePoolIncumbentMasterResult {
+    bool found = false;
+    bool verified = false;
+    ebrp::Verification verification;
+    std::vector<ebrp::RoutePlan> routes;
+    long long states = 0;
+    double time_seconds = 0.0;
+    std::string source;
+};
+
+RoutePoolIncumbentMasterResult solveTrueObjectiveRouteColumnIncumbentMaster(
+    const ebrp::Instance& instance,
+    const FrontierRouteColumnPool& pool,
+    double lambda,
+    const std::string& source) {
+    const auto start = std::chrono::steady_clock::now();
+    RoutePoolIncumbentMasterResult out;
+    out.source = source;
+    std::vector<int> selected(instance.M, -1);
+    std::vector<int> inventory = instance.initial;
+    std::vector<ebrp::RoutePlan> best_routes;
+    ebrp::Verification best_verification;
+    best_verification.feasible = false;
+    const int full_mask = (instance.V < 31) ? ((1 << instance.V) - 1) : 0;
+
+    std::function<void(int, int)> dfs = [&](int vehicle, int used_mask) {
+        ++out.states;
+        if (vehicle == instance.M) {
+            std::vector<ebrp::RoutePlan> routes(instance.M);
+            for (int k = 0; k < instance.M; ++k) {
+                routes[k].vehicle = k;
+                routes[k].nodes = {0, 0};
+                if (selected[k] >= 0) {
+                    routes[k] = routeFromColumn(
+                        pool.columns_by_vehicle[k][selected[k]]);
+                }
+            }
+            ebrp::Verification v = ebrp::verifySolution(instance, routes, lambda);
+            if (v.feasible &&
+                (!best_verification.feasible ||
+                 v.objective < best_verification.objective - 1e-10)) {
+                best_verification = v;
+                best_routes = std::move(routes);
+            }
+            return;
+        }
+
+        selected[vehicle] = -1;
+        dfs(vehicle + 1, used_mask);
+        if (vehicle >= static_cast<int>(pool.columns_by_vehicle.size())) return;
+        for (int c = 0;
+             c < static_cast<int>(pool.columns_by_vehicle[vehicle].size());
+             ++c) {
+            const ebrp::RouteLoadColumn& column =
+                pool.columns_by_vehicle[vehicle][c];
+            if ((column.mask & used_mask) != 0) continue;
+            if (full_mask != 0 && (column.mask & ~full_mask) != 0) continue;
+            if (static_cast<int>(column.q.size()) <= instance.V) continue;
+            bool ok = true;
+            for (int i = 1; i <= instance.V; ++i) {
+                inventory[i] -= column.q[i];
+                if (inventory[i] < 0 || inventory[i] > instance.capacity[i]) {
+                    ok = false;
+                }
+            }
+            if (ok) {
+                selected[vehicle] = c;
+                dfs(vehicle + 1, used_mask | column.mask);
+            }
+            for (int i = 1; i <= instance.V; ++i) {
+                inventory[i] += column.q[i];
+            }
+            selected[vehicle] = -1;
+        }
+    };
+
+    dfs(0, 0);
+    out.time_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    if (best_verification.feasible) {
+        out.found = true;
+        out.verified = true;
+        out.verification = best_verification;
+        out.routes = best_routes;
+    }
+    return out;
+}
 
 double objectiveForInventory(const ebrp::Instance& instance,
                              const std::vector<int>& y,
@@ -2694,14 +2847,16 @@ ebrp::SolveResult solveRouteMaskSupportDiagnostic(const ebrp::Instance& instance
             std::max(0.1, std::min(1.0, opt.solve_time_limit > 0.0 ? opt.solve_time_limit : 1.0)),
             std::numeric_limits<double>::infinity(), opt.route_mask_max_v,
             opt.projection_bound, opt.penalty_domain_tightening,
-            opt.movement_domain_tightening, false);
+            opt.movement_domain_tightening, false,
+            opt.pickup_drop_compat_flow);
     const ebrp::GiniIntervalInventoryRelaxationBound enabled =
         ebrp::computeGiniIntervalInventoryRelaxationBound(
             instance, opt.lambda, 0.0, std::min(0.25, std::max(0.01, opt.gini_cap >= 0.0 ? opt.gini_cap : 0.25)),
             std::max(0.1, std::min(1.0, opt.solve_time_limit > 0.0 ? opt.solve_time_limit : 1.0)),
             std::numeric_limits<double>::infinity(), opt.route_mask_max_v,
             opt.projection_bound, opt.penalty_domain_tightening,
-            opt.movement_domain_tightening, true);
+            opt.movement_domain_tightening, true,
+            opt.pickup_drop_compat_flow);
 
     result.route_mask_count_before_support_duration =
         enabled.route_mask_count_before_support_duration;
@@ -2713,6 +2868,15 @@ ebrp::SolveResult solveRouteMaskSupportDiagnostic(const ebrp::Instance& instance
         enabled.route_mask_support_duration_precompute_time_seconds;
     result.route_mask_support_duration_max_removed_subset_size =
         enabled.route_mask_support_duration_max_removed_subset_size;
+    result.pickup_drop_pairs_total = enabled.pickup_drop_pairs_total;
+    result.pickup_drop_pairs_compatible = enabled.pickup_drop_pairs_compatible;
+    result.pickup_drop_pairs_incompatible = enabled.pickup_drop_pairs_incompatible;
+    result.pickup_drop_compat_flow_variables =
+        enabled.pickup_drop_compat_flow_variables;
+    result.pickup_drop_compat_flow_constraints =
+        enabled.pickup_drop_compat_flow_constraints;
+    result.pickup_drop_compat_flow_time_seconds =
+        enabled.pickup_drop_compat_flow_time_seconds;
     result.bound_time_seconds = disabled.route_mask_support_duration_precompute_time_seconds +
         enabled.route_mask_support_duration_precompute_time_seconds;
     result.lower_bound = enabled.computed ? enabled.objective_lower_bound : 0.0;
@@ -2822,6 +2986,156 @@ ebrp::SolveResult solveIncumbentImportDiagnostic(const ebrp::Instance& instance,
     return result;
 }
 
+ebrp::SolveResult solveRoutePoolIncumbentDiagnostic(const ebrp::Instance& instance,
+                                                    const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "route-pool-incumbent-test";
+    result.status = "diagnostic_complete";
+    result.certificate =
+        "diagnostic only: restricted route-column incumbent master supplies feasible UB only";
+
+    FrontierRouteColumnPool pool(instance.M);
+    std::vector<ebrp::RoutePlan> empty = emptyRouteSet(instance);
+    ebrp::Verification empty_v =
+        ebrp::verifySolution(instance, empty, opt.lambda);
+    std::vector<ebrp::RoutePlan> synthetic_initial = empty;
+    ebrp::Verification synthetic_initial_v = empty_v;
+    if (!synthetic_initial.empty()) {
+        for (int station = 1; station <= instance.V; ++station) {
+            if (station >= static_cast<int>(instance.initial.size()) ||
+                instance.initial[station] <= 0) {
+                continue;
+            }
+            ebrp::RoutePlan trial = synthetic_initial[0];
+            trial.nodes = {0, station, 0};
+            trial.operations.clear();
+            trial.operations.push_back({station, 1});
+            std::vector<ebrp::RoutePlan> trial_routes = empty;
+            trial_routes[0] = trial;
+            ebrp::Verification trial_v =
+                ebrp::verifySolution(instance, trial_routes, opt.lambda);
+            if (trial_v.feasible &&
+                trial_v.objective > synthetic_initial_v.objective + 1e-9) {
+                synthetic_initial = trial_routes;
+                synthetic_initial_v = trial_v;
+                break;
+            }
+        }
+    }
+    for (int mode = 0; mode < 3; ++mode) {
+        std::vector<ebrp::RoutePlan> routes =
+            buildGreedyIncumbentRoutes(instance, opt.lambda, mode);
+        pool.addRoutes(instance, routes);
+    }
+    RoutePoolIncumbentMasterResult master =
+        solveTrueObjectiveRouteColumnIncumbentMaster(
+            instance, pool, opt.lambda, "synthetic_route_pool_diagnostic");
+    result.route_pool_columns_raw = pool.raw;
+    result.route_pool_columns_after_dominance = pool.kept();
+    result.route_pool_columns_removed_by_dominance = pool.removed_by_dominance;
+    result.route_pool_incumbent_master_calls = 1;
+    result.route_pool_incumbent_master_states = master.states;
+    result.route_pool_incumbent_master_time_seconds = master.time_seconds;
+    result.route_pool_incumbent_found = master.found;
+    result.route_pool_incumbent_verified = master.verified;
+    result.route_pool_incumbent_source = master.source;
+    if (master.found) {
+        result.route_pool_incumbent_objective = master.verification.objective;
+        result.route_pool_incumbent_G = master.verification.G;
+        result.route_pool_incumbent_P = master.verification.P;
+        result.routes = master.routes;
+        result.verification = master.verification;
+    } else {
+        result.routes = empty;
+        result.verification = empty_v;
+    }
+    result.objective = result.verification.objective;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.upper_bound = result.objective;
+    result.lower_bound = 0.0;
+    result.gap = 0.0;
+    result.final_inventory = result.verification.final_inventory;
+    result.notes.push_back("route-pool diagnostic initial_empty_objective="
+        + std::to_string(empty_v.objective)
+        + ", synthetic_initial_objective="
+        + std::to_string(synthetic_initial_v.objective)
+        + ", synthetic_initial_verified="
+        + std::string(synthetic_initial_v.feasible ? "true" : "false")
+        + ", route_pool_objective="
+        + std::to_string(master.found ? master.verification.objective : 0.0)
+        + ", improved_over_empty="
+        + std::string(master.found &&
+                      master.verification.objective < empty_v.objective - 1e-9
+                          ? "true" : "false")
+        + ", improved_over_synthetic_initial="
+        + std::string(master.found && synthetic_initial_v.feasible &&
+                      master.verification.objective <
+                          synthetic_initial_v.objective - 1e-9
+                          ? "true" : "false")
+        + "; restricted pool is UB only");
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
+ebrp::SolveResult solvePickupDropCompatFlowDiagnostic(const ebrp::Instance& instance,
+                                                      const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "pickup-drop-compat-flow-test";
+    result.status = "diagnostic_complete";
+    result.certificate =
+        "diagnostic only: compares inventory relaxation with pickup-drop compatibility flow";
+    ebrp::GiniIntervalInventoryRelaxationBound disabled =
+        ebrp::computeGiniIntervalInventoryRelaxationBound(
+            instance, opt.lambda, 0.0, std::min(0.25, 1.0),
+            std::max(0.1, std::min(5.0, opt.solve_time_limit)),
+            std::numeric_limits<double>::infinity(), opt.route_mask_max_v,
+            opt.projection_bound, opt.penalty_domain_tightening,
+            opt.movement_domain_tightening,
+            opt.route_mask_support_duration_pruning, false);
+    ebrp::GiniIntervalInventoryRelaxationBound enabled =
+        ebrp::computeGiniIntervalInventoryRelaxationBound(
+            instance, opt.lambda, 0.0, std::min(0.25, 1.0),
+            std::max(0.1, std::min(5.0, opt.solve_time_limit)),
+            std::numeric_limits<double>::infinity(), opt.route_mask_max_v,
+            opt.projection_bound, opt.penalty_domain_tightening,
+            opt.movement_domain_tightening,
+            opt.route_mask_support_duration_pruning, true);
+    result.lower_bound = std::max(disabled.objective_lower_bound,
+                                  enabled.objective_lower_bound);
+    result.upper_bound = 0.0;
+    result.objective = result.lower_bound;
+    result.pickup_drop_pairs_total = enabled.pickup_drop_pairs_total;
+    result.pickup_drop_pairs_compatible = enabled.pickup_drop_pairs_compatible;
+    result.pickup_drop_pairs_incompatible = enabled.pickup_drop_pairs_incompatible;
+    result.pickup_drop_compat_flow_variables =
+        enabled.pickup_drop_compat_flow_variables;
+    result.pickup_drop_compat_flow_constraints =
+        enabled.pickup_drop_compat_flow_constraints;
+    result.pickup_drop_compat_flow_time_seconds =
+        enabled.pickup_drop_compat_flow_time_seconds;
+    result.bound_time_seconds =
+        disabled.pickup_drop_compat_flow_time_seconds +
+        enabled.pickup_drop_compat_flow_time_seconds;
+    result.routes = emptyRouteSet(instance);
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.notes.push_back("compat-flow disabled relaxation: " + disabled.note);
+    result.notes.push_back("compat-flow enabled relaxation: " + enabled.note);
+    result.notes.push_back("pickup-drop compatibility flow is a lower-bound relaxation strengthening only; diagnostic status is not a certificate");
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
 ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                                               const ebrp::SolveOptions& opt) {
     const auto start = std::chrono::steady_clock::now();
@@ -2858,6 +3172,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         + ", frontier_best_bound_scheduling=" + std::string(opt.frontier_best_bound_scheduling ? "true" : "false")
         + ", frontier_relaxation_cache=" + std::string(opt.frontier_relaxation_cache ? "true" : "false")
         + ", frontier_focused_min_lb_retry=" + std::string(opt.frontier_focused_min_lb_retry ? "true" : "false")
+        + ", route_pool_incumbent=" + std::string(opt.route_pool_incumbent ? "true" : "false")
+        + ", pickup_drop_compat_flow=" + std::string(opt.pickup_drop_compat_flow ? "true" : "false")
         + ", support_duration_pruning=" + std::string(opt.support_duration_pruning ? "true" : "false")
         + ", route_mask_support_duration_pruning=" + std::string(opt.route_mask_support_duration_pruning ? "true" : "false")
         + ", support_duration_min_pickup_rule=ceil_half_support"
@@ -2926,6 +3242,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         }
         incumbent_routes = candidate_routes;
         incumbent_verification = candidate;
+        result.routes = incumbent_routes;
+        result.verification = incumbent_verification;
+        result.final_inventory = incumbent_verification.final_inventory;
+        result.G = incumbent_verification.G;
+        result.P = incumbent_verification.P;
+        result.objective = incumbent_verification.objective;
+        result.upper_bound = incumbent_verification.objective;
         result.incumbent_source = source;
         result.notes.push_back("accepted " + source
             + " incumbent for frontier cutoff only: objective="
@@ -2934,6 +3257,129 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             + ", P=" + std::to_string(candidate.P));
         return true;
     };
+    FrontierRouteColumnPool frontier_route_pool(instance.M);
+    auto syncRoutePoolStats = [&]() {
+        result.route_pool_columns_raw = frontier_route_pool.raw;
+        result.route_pool_columns_after_dominance = frontier_route_pool.kept();
+        result.route_pool_columns_removed_by_dominance =
+            frontier_route_pool.removed_by_dominance;
+    };
+    auto addRoutesToFrontierPool = [&](const std::vector<ebrp::RoutePlan>& routes,
+                                       const std::string& source) {
+        const long long before = frontier_route_pool.kept();
+        frontier_route_pool.addRoutes(instance, routes);
+        syncRoutePoolStats();
+        const long long after = frontier_route_pool.kept();
+        result.notes.push_back("route-pool collected routes from " + source
+            + ": kept_before=" + std::to_string(before)
+            + ", kept_after=" + std::to_string(after)
+            + ", raw=" + std::to_string(frontier_route_pool.raw)
+            + ", removed_by_projection_dominance="
+            + std::to_string(frontier_route_pool.removed_by_dominance));
+    };
+    auto runRoutePoolIncumbentMaster = [&](const std::string& source) {
+        syncRoutePoolStats();
+        if (!opt.route_pool_incumbent) return false;
+        if (frontier_route_pool.kept() == 0) return false;
+        ++result.route_pool_incumbent_master_calls;
+        RoutePoolIncumbentMasterResult pool_result =
+            solveTrueObjectiveRouteColumnIncumbentMaster(
+                instance, frontier_route_pool, opt.lambda, source);
+        result.route_pool_incumbent_master_states += pool_result.states;
+        result.route_pool_incumbent_master_time_seconds +=
+            pool_result.time_seconds;
+        result.route_pool_incumbent_found =
+            result.route_pool_incumbent_found || pool_result.found;
+        result.route_pool_incumbent_verified =
+            result.route_pool_incumbent_verified || pool_result.verified;
+        if (pool_result.found && pool_result.verified) {
+            result.route_pool_incumbent_objective =
+                pool_result.verification.objective;
+            result.route_pool_incumbent_G = pool_result.verification.G;
+            result.route_pool_incumbent_P = pool_result.verification.P;
+            result.route_pool_incumbent_source = source;
+            result.notes.push_back("route-pool incumbent master " + source
+                + " found verified incumbent objective="
+                + std::to_string(pool_result.verification.objective)
+                + ", states=" + std::to_string(pool_result.states)
+                + ", time=" + std::to_string(pool_result.time_seconds)
+                + "; UB only, no lower-bound certificate");
+            if (pool_result.verification.objective < result.upper_bound - 1e-9) {
+                const bool accepted =
+                    acceptIncumbentRoutes(pool_result.routes,
+                                          "route-pool incumbent master");
+                if (accepted) {
+                    incumbent_routes = pool_result.routes;
+                    addRoutesToFrontierPool(pool_result.routes,
+                                            "route-pool incumbent master");
+                }
+                return accepted;
+            }
+        } else {
+            result.notes.push_back("route-pool incumbent master " + source
+                + " found no verified incumbent; states="
+                + std::to_string(pool_result.states)
+                + ", time=" + std::to_string(pool_result.time_seconds));
+        }
+        return false;
+    };
+    auto auditIntervalCandidate = [&](const std::vector<ebrp::RoutePlan>& routes,
+                                      double surrogate_metric,
+                                      double lo,
+                                      double hi,
+                                      const std::string& source) {
+        ++result.interval_candidates_found;
+        ebrp::Verification candidate =
+            ebrp::verifySolution(instance, routes, opt.lambda);
+        const bool in_interval = candidate.feasible &&
+            candidate.G >= lo - 1e-9 && candidate.G <= hi + 1e-9;
+        std::string reason;
+        bool accepted = false;
+        if (candidate.feasible) {
+            ++result.interval_candidates_verified;
+            if (result.best_interval_candidate_objective <= 0.0 ||
+                candidate.objective < result.best_interval_candidate_objective) {
+                result.best_interval_candidate_objective = candidate.objective;
+            }
+            if (candidate.objective < result.upper_bound - 1e-9) {
+                accepted = acceptIncumbentRoutes(routes, source);
+                if (accepted) {
+                    ++result.interval_candidates_accepted;
+                    incumbent_routes = routes;
+                    addRoutesToFrontierPool(routes, source);
+                    reason = "accepted_true_objective_improves";
+                } else {
+                    reason = "rejected_duplicate_current_incumbent";
+                }
+            } else if (!in_interval) {
+                reason = "rejected_gini_outside_interval_but_feasible_global";
+            } else {
+                reason = "rejected_true_objective_not_improving";
+            }
+        } else {
+            reason = "rejected_not_verified";
+        }
+        if (!accepted) {
+            ++result.interval_candidates_rejected;
+            if (result.best_interval_candidate_rejection_reason.empty()) {
+                result.best_interval_candidate_rejection_reason = reason;
+            }
+        }
+        std::ostringstream note;
+        note << "interval candidate audit source=" << source
+             << ", candidate_true_G=" << candidate.G
+             << ", candidate_true_P=" << candidate.P
+             << ", candidate_true_objective=" << candidate.objective
+             << ", candidate_surrogate_metric=" << surrogate_metric
+             << ", candidate_interval_membership="
+             << (in_interval ? "true" : "false")
+             << ", candidate_verifier_passed="
+             << (candidate.feasible ? "true" : "false")
+             << ", candidate_rejection_reason=" << reason;
+        result.notes.push_back(note.str());
+        return accepted;
+    };
+    addRoutesToFrontierPool(incumbent_routes, "initial empty incumbent");
 
     {
         const auto incumbent_start = std::chrono::steady_clock::now();
@@ -3068,6 +3514,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         acceptIncumbentRoutes(seed.routes, "CPLEX seed");
     }
 
+    addRoutesToFrontierPool(incumbent_routes, "verified incumbent after seed stage");
+
     result.routes = incumbent_routes;
     result.verification = incumbent_verification;
     result.final_inventory = result.verification.final_inventory;
@@ -3076,6 +3524,14 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.objective = result.verification.objective;
     result.upper_bound = result.objective;
     if (result.incumbent_source.empty()) result.incumbent_source = "empty-route incumbent";
+    runRoutePoolIncumbentMaster("after_seed_stage");
+    result.routes = incumbent_routes;
+    result.verification = incumbent_verification;
+    result.final_inventory = result.verification.final_inventory;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.objective = result.verification.objective;
+    result.upper_bound = result.objective;
 
     const double gini_max_possible = (instance.V > 0)
         ? static_cast<double>(instance.V - 1) / static_cast<double>(instance.V) : 1.0;
@@ -3334,6 +3790,17 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.route_mask_support_duration_max_removed_subset_size =
                 std::max(result.route_mask_support_duration_max_removed_subset_size,
                          inv_relax.route_mask_support_duration_max_removed_subset_size);
+            result.pickup_drop_pairs_total += inv_relax.pickup_drop_pairs_total;
+            result.pickup_drop_pairs_compatible +=
+                inv_relax.pickup_drop_pairs_compatible;
+            result.pickup_drop_pairs_incompatible +=
+                inv_relax.pickup_drop_pairs_incompatible;
+            result.pickup_drop_compat_flow_variables +=
+                inv_relax.pickup_drop_compat_flow_variables;
+            result.pickup_drop_compat_flow_constraints +=
+                inv_relax.pickup_drop_compat_flow_constraints;
+            result.pickup_drop_compat_flow_time_seconds +=
+                inv_relax.pickup_drop_compat_flow_time_seconds;
         };
 
     auto accumulateTreeRound2Stats =
@@ -3440,20 +3907,21 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             }
             const auto bound_start = std::chrono::steady_clock::now();
             CachedRelaxation out;
-            auto compute_once = [&](bool movement_enabled) {
+            auto compute_once = [&](bool movement_enabled, bool compat_enabled) {
                 return ebrp::computeGiniIntervalInventoryRelaxationBound(
                     instance, opt.lambda, lo, hi, budget, cutoff,
                     opt.route_mask_max_v, opt.projection_bound,
                     opt.penalty_domain_tightening,
                     movement_enabled,
-                    opt.route_mask_support_duration_pruning);
+                    opt.route_mask_support_duration_pruning,
+                    compat_enabled);
             };
             if (opt.movement_bound_audit) {
                 ++result.movement_audit_intervals;
                 ebrp::GiniIntervalInventoryRelaxationBound no_movement =
-                    compute_once(false);
+                    compute_once(false, opt.pickup_drop_compat_flow);
                 ebrp::GiniIntervalInventoryRelaxationBound with_movement =
-                    compute_once(true);
+                    compute_once(true, opt.pickup_drop_compat_flow);
                 const double no_lb = no_movement.infeasible
                     ? cutoff : no_movement.objective_lower_bound;
                 const double with_lb = with_movement.infeasible
@@ -3481,7 +3949,26 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     std::max(result.relaxation_lb_used,
                              std::max(no_lb, with_lb));
             } else {
-                out.bound = compute_once(opt.movement_domain_tightening);
+                out.bound = compute_once(opt.movement_domain_tightening,
+                                         opt.pickup_drop_compat_flow);
+                if (opt.pickup_drop_compat_flow) {
+                    ebrp::GiniIntervalInventoryRelaxationBound no_compat =
+                        compute_once(opt.movement_domain_tightening, false);
+                    const double compat_lb = out.bound.infeasible
+                        ? cutoff : out.bound.objective_lower_bound;
+                    const double no_compat_lb = no_compat.infeasible
+                        ? cutoff : no_compat.objective_lower_bound;
+                    if (no_compat_lb > compat_lb + 1e-9) {
+                        no_compat.note += ", pickup_drop_compat_flow_audit_selected=no_compat"
+                            ", compat_lb=" + std::to_string(compat_lb)
+                            + ", no_compat_lb=" + std::to_string(no_compat_lb);
+                        out.bound = no_compat;
+                    } else {
+                        out.bound.note += ", pickup_drop_compat_flow_audit_selected=compat"
+                            ", compat_lb=" + std::to_string(compat_lb)
+                            + ", no_compat_lb=" + std::to_string(no_compat_lb);
+                    }
+                }
                 const double used_lb = out.bound.infeasible
                     ? cutoff : out.bound.objective_lower_bound;
                 result.relaxation_lb_used =
@@ -3630,11 +4117,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         if (work.tree.has_integer_incumbent && !work.tree.best_routes.empty()) {
             ebrp::Verification candidate =
                 ebrp::verifySolution(instance, work.tree.best_routes, opt.lambda);
-            if (candidate.feasible && candidate.objective < fixed_upper_bound - 1e-9) {
-                work.has_candidate = true;
-                work.candidate_routes = work.tree.best_routes;
-                work.candidate_verification = candidate;
-            }
+            work.has_candidate = true;
+            work.candidate_routes = work.tree.best_routes;
+            work.candidate_verification = candidate;
         }
 
         const bool certified_by_bound = work.record.lower_bound_valid &&
@@ -3719,20 +4204,15 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 result.penalty_budget = work.tree.penalty_budget;
             }
         }
-        if (work.has_candidate &&
-            work.candidate_verification.feasible &&
-            work.candidate_verification.objective < result.upper_bound - 1e-9) {
-            result.routes = work.candidate_routes;
-            result.verification = work.candidate_verification;
-            result.final_inventory = work.candidate_verification.final_inventory;
-            result.G = work.candidate_verification.G;
-            result.P = work.candidate_verification.P;
-            result.objective = work.candidate_verification.objective;
-            result.upper_bound = work.candidate_verification.objective;
-            incumbent_routes = work.candidate_routes;
-            result.notes.push_back("frontier found improved incumbent in interval "
-                + std::to_string(work.idx)
-                + ", objective=" + std::to_string(work.candidate_verification.objective));
+        if (work.has_candidate) {
+            auditIntervalCandidate(
+                work.candidate_routes,
+                work.tree.best_integer_surrogate,
+                work.record.lo,
+                work.record.hi,
+                "initial interval " + std::to_string(work.idx));
+            runRoutePoolIncumbentMaster("after_initial_interval_" +
+                                        std::to_string(work.idx));
         }
     };
 
@@ -3917,21 +4397,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         interval_records[idx].pricing_closed = tree.pricing_closure_certified_exact;
 
         if (tree.has_integer_incumbent && !tree.best_routes.empty()) {
-            ebrp::Verification candidate =
-                ebrp::verifySolution(instance, tree.best_routes, opt.lambda);
-            if (candidate.feasible &&
-                candidate.objective < result.upper_bound - 1e-9) {
-                result.routes = tree.best_routes;
-                result.verification = candidate;
-                result.final_inventory = candidate.final_inventory;
-                result.G = candidate.G;
-                result.P = candidate.P;
-                result.objective = candidate.objective;
-                result.upper_bound = candidate.objective;
-                result.notes.push_back("frontier found improved incumbent in interval "
-                    + std::to_string(idx)
-                    + ", objective=" + std::to_string(candidate.objective));
-            }
+            auditIntervalCandidate(tree.best_routes, tree.best_integer_surrogate,
+                                   lo, hi,
+                                   "initial interval " + std::to_string(idx));
+            runRoutePoolIncumbentMaster("after_initial_interval_" +
+                                        std::to_string(idx));
         }
 
         const bool certified_by_bound = interval_records[idx].lower_bound_valid &&
@@ -4127,12 +4597,16 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
 
     std::unordered_set<int> focused_retry_interval_ids;
     const auto focused_retry_start = std::chrono::steady_clock::now();
+    auto appendFocusedField = [](std::string& target, const std::string& value) {
+        if (!target.empty()) target += ";";
+        target += value;
+    };
     if (!opt.frontier_focused_min_lb_retry) {
         result.focused_retry_stopped_reason = "disabled";
     }
     for (int adaptive_pass = 1;
          adaptive_pass <= (opt.frontier_focused_min_lb_retry
-             ? std::max(0, opt.frontier_retry_passes) : 0);
+             ? std::max(1, opt.frontier_retry_passes) : 0);
          ++adaptive_pass) {
         auto collectRetryIndices = [&]() {
             std::vector<int> indices;
@@ -4160,9 +4634,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                               std::fabs(a.lower_bound - b.lower_bound) > 1e-10) {
                               return a.lower_bound < b.lower_bound;
                           }
-                          const double aw = a.hi - a.lo;
-                          const double bw = b.hi - b.lo;
-                          if (std::fabs(aw - bw) > 1e-12) return aw > bw;
+                          const double agap = result.upper_bound - a.lower_bound;
+                          const double bgap = result.upper_bound - b.lower_bound;
+                          if (std::fabs(agap - bgap) > 1e-10) return agap > bgap;
+                          if (a.open_nodes != b.open_nodes) {
+                              return a.open_nodes > b.open_nodes;
+                          }
                           return lhs < rhs;
                       });
             return indices;
@@ -4223,6 +4700,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             focused_retry_interval_ids.insert(idx);
             FrontierIntervalRecord& record = interval_records[idx];
             const double previous_record_lb = record.lower_bound;
+            const int previous_open_nodes = record.open_nodes;
+            appendFocusedField(result.focused_retry_selected_interval_ids,
+                               std::to_string(idx));
+            appendFocusedField(result.focused_retry_lb_before,
+                               std::to_string(previous_record_lb));
+            appendFocusedField(result.focused_retry_open_nodes_before,
+                               std::to_string(previous_open_nodes));
             double early_stop_target = std::numeric_limits<double>::infinity();
             for (int later_pos = 1;
                  later_pos < static_cast<int>(retry_indices.size()); ++later_pos) {
@@ -4307,36 +4791,44 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             record.pricing_closed = tree.pricing_closure_certified_exact;
 
             if (tree.has_integer_incumbent && !tree.best_routes.empty()) {
-                ebrp::Verification candidate =
-                    ebrp::verifySolution(instance, tree.best_routes, opt.lambda);
-                if (candidate.feasible &&
-                    candidate.objective < result.upper_bound - 1e-9) {
-                    result.routes = tree.best_routes;
-                    result.verification = candidate;
-                    result.final_inventory = candidate.final_inventory;
-                    result.G = candidate.G;
-                    result.P = candidate.P;
-                    result.objective = candidate.objective;
-                    result.upper_bound = candidate.objective;
-                    incumbent_routes = tree.best_routes;
-                    result.notes.push_back("adaptive frontier pass "
-                        + std::to_string(adaptive_pass)
-                        + " found improved incumbent in interval "
-                        + std::to_string(idx)
-                        + ", objective=" + std::to_string(candidate.objective));
-                }
+                auditIntervalCandidate(tree.best_routes, tree.best_integer_surrogate,
+                                       record.lo, record.hi,
+                                       "focused_retry interval " +
+                                           std::to_string(idx));
+                runRoutePoolIncumbentMaster("after_focused_retry_interval_" +
+                                            std::to_string(idx));
             }
 
             const bool certified_by_bound = record.lower_bound_valid &&
                 record.lower_bound >= result.upper_bound - 1e-7;
+            double next_min_lb = std::numeric_limits<double>::infinity();
+            retry_indices = collectRetryIndices();
+            for (int candidate_idx : retry_indices) {
+                if (candidate_idx == idx) continue;
+                const FrontierIntervalRecord& other = interval_records[candidate_idx];
+                if (other.lower_bound_valid) {
+                    next_min_lb = std::min(next_min_lb, other.lower_bound);
+                }
+            }
+            appendFocusedField(result.focused_retry_lb_after,
+                               std::to_string(record.lower_bound));
+            appendFocusedField(result.focused_retry_open_nodes_after,
+                               std::to_string(record.open_nodes));
             std::ostringstream retry_note;
-            retry_note << "adaptive pass " << adaptive_pass
-                       << " retry " << (retry_attempt + 1)
-                       << " interval " << idx
+            retry_note << "focused_retry interval=" << idx
+                       << ", adaptive_pass=" << adaptive_pass
+                       << ", retry=" << (retry_attempt + 1)
                        << " [" << record.lo << "," << record.hi << "]"
+                       << ", previous_lb=" << previous_record_lb
+                       << ", new_lb=" << record.lower_bound
+                       << ", next_min_lb=" << next_min_lb
+                       << ", open_nodes_before=" << previous_open_nodes
+                       << ", open_nodes_after=" << record.open_nodes
                        << " complete=" << (tree.complete ? "true" : "false")
                        << ", lower_bound_valid=" << (tree.lower_bound_valid ? "true" : "false")
                        << ", certified_by_bound=" << (certified_by_bound ? "true" : "false")
+                       << ", tree_closed=" << (tree.complete ? "true" : "false")
+                       << ", bound_fathomed=" << (certified_by_bound ? "true" : "false")
                        << ", empty_interval=" << (record.empty_complete ? "true" : "false")
                        << ", has_incumbent=" << (tree.has_integer_incumbent ? "true" : "false")
                        << ", tree_lb=" << tree.global_lower_bound
@@ -4564,22 +5056,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             record.tree_closed = tree.complete;
             record.pricing_closed = tree.pricing_closure_certified_exact;
             if (tree.has_integer_incumbent && !tree.best_routes.empty()) {
-                ebrp::Verification candidate =
-                    ebrp::verifySolution(instance, tree.best_routes, opt.lambda);
-                if (candidate.feasible &&
-                    candidate.objective < result.upper_bound - 1e-9) {
-                    result.routes = tree.best_routes;
-                    result.verification = candidate;
-                    result.final_inventory = candidate.final_inventory;
-                    result.G = candidate.G;
-                    result.P = candidate.P;
-                    result.objective = candidate.objective;
-                    result.upper_bound = candidate.objective;
-                    incumbent_routes = tree.best_routes;
-                    result.notes.push_back("final closure found improved BPC incumbent in interval "
-                        + std::to_string(idx)
-                        + ", objective=" + std::to_string(candidate.objective));
-                }
+                auditIntervalCandidate(tree.best_routes, tree.best_integer_surrogate,
+                                       record.lo, record.hi,
+                                       "final_closure interval " +
+                                           std::to_string(idx));
+                runRoutePoolIncumbentMaster("after_final_closure_interval_" +
+                                            std::to_string(idx));
             }
             const bool certified_by_bound = record.lower_bound_valid &&
                 record.lower_bound >= result.upper_bound - 1e-7;
@@ -4623,6 +5105,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             ++final_attempt;
         }
     }
+
+    runRoutePoolIncumbentMaster("before_final_frontier_summary");
 
     bool all_certified = true;
     bool full_objective_range = result.frontier_covers_all_improving_gini_values;
@@ -4834,6 +5318,10 @@ int main(int argc, char** argv) {
                 results.push_back(solveRouteMaskSupportDiagnostic(instance, opt));
             } else if (opt.method == "incumbent-import-test") {
                 results.push_back(solveIncumbentImportDiagnostic(instance, opt));
+            } else if (opt.method == "route-pool-incumbent-test") {
+                results.push_back(solveRoutePoolIncumbentDiagnostic(instance, opt));
+            } else if (opt.method == "pickup-drop-compat-flow-test") {
+                results.push_back(solvePickupDropCompatFlowDiagnostic(instance, opt));
             } else {
                 throw std::runtime_error("Unsupported method: " + opt.method);
             }
