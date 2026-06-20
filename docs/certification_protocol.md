@@ -23,7 +23,8 @@ This project distinguishes the original EBRP objective from fixed-cap and restri
 For `gcap-frontier`, `status=optimal` is valid only when:
 
 - A feasible incumbent exists and passes the verifier.
-- The covered Gini range includes the full relevant range, currently at least `G in [0, incumbent_objective]` unless a tighter valid range is proven.
+- The covered Gini range includes the full improving range, currently `G in [0, min(incumbent_objective, (V-1)/V)]` unless a tighter valid range is proven.
+- `frontier_covers_all_improving_gini_values=true` and `frontier_range_certificate_scope=original_full_improving_range`.
 - Every interval is complete, empty, or certified by a valid lower bound at least as large as the incumbent.
 - `unresolved_intervals=0`.
 - `invalid_bound_intervals=0`.
@@ -40,10 +41,19 @@ The current JSON fields that demonstrate these conditions are:
 - `bpc_workers`, `pricing_threads`, `parallel_frontier`, `parallel_nodes`, and `parallel_tasks` for threaded BPC runs.
 - `wall_time_seconds` for elapsed wall time and `aggregate_worker_time_seconds` for summed worker activity; aggregate timing may exceed wall time under parallel BPC.
 - `notes`, which include interval coverage, per-interval completion, valid lower bounds, and frontier summary.
+- `gini_max_possible`, `relevant_gini_upper_for_improvement`, and `covered_gini_upper_bound` for Gini range audit.
 
 For certified full-frontier runs, the top-level JSON fields are normalized to `lower_bound=upper_bound=objective` and `gap=0` after the full certificate closes within the frontier tolerance. The result may also report `raw_frontier_lower_bound_before_tolerance_normalization` and `certificate_tolerance` for auditability, while interval notes retain the per-interval lower-bound details.
 
 Feasible incumbents may come from heuristics, compact auxiliary solves, or `--incumbent-json`. Imported or seeded routes must pass the independent verifier and may be used only as a warm start or incumbent cutoff. They do not contribute any lower-bound certificate, and they must not be reported as BPC success unless the full frontier conditions above also hold.
+
+If `--gini-cap` truncates the frontier below `min(incumbent_objective,(V-1)/V)` without a separate bound-fathoming proof for the omitted range, the run is a capped diagnostic. It may close every requested interval and still have `certified_original_problem=false`.
+
+`--movement-bound-audit true` computes relaxation bounds with and without movement-domain tightening and uses the larger valid value. This is a lower-bound audit and strengthening device, not a separate certificate. The relevant fields are `relaxation_lb_no_movement`, `relaxation_lb_with_movement`, `relaxation_lb_used`, `movement_audit_intervals`, `movement_audit_bound_improved_count`, and `movement_audit_bound_worse_count`.
+
+Support-duration pricing pruning is exact only as a pricing pruning rule. A forbidden support subset may be used only when a metric-closure route-duration lower bound plus minimum handling time proves that no feasible route-load column can contain that subset. The fields `support_duration_cuts_generated`, `support_duration_pruned_labels`, and `support_duration_pruned_columns` are diagnostic/pricing efficiency fields; they never replace exact pricing closure.
+
+BPC-owned incumbent route pools are heuristic upper-bound devices. Candidate columns with missing operation vectors are skipped before pool insertion or route-pool DFS use. This prevents address errors in incumbent generation and removes no lower-bound columns from the RMP or pricing certificate.
 
 Verified incumbent route columns may be inserted into a fixed-interval restricted master even when the incumbent's true Gini value lies outside that interval. This is certificate-neutral because each inserted object is only a feasible route-load column. The incumbent itself is accepted only as an interval incumbent if its verified `G` lies in the interval.
 
@@ -208,3 +218,11 @@ All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `
 - Duplicate negative pricing projections cannot close a node. If pricing returns only negative columns that are already represented or dominance-filtered, the node remains unresolved unless exact pricing proves no missing negative projection exists.
 - Movement-domain tightening is global only because it is based on route-duration/travel lower bounds, handling time, station inventory/space, and truck capacity. It must not be replaced by restricted-pool reachability data for certificate-producing bounds.
 - Relaxation-cache reuse is valid only under an exact key match. Cached interval relaxations do not replace exact branch-price pricing closure.
+
+## 2026-06-20 Round-3 Certificate Warnings
+
+- Full BPC coverage is checked against `min(incumbent_objective,(V-1)/V)`, not against the incumbent objective alone. A capped `--gini-cap` run below this range is diagnostic unless omitted intervals are separately fathomed.
+- Movement-bound audit may use the maximum of the no-movement and with-movement valid relaxation bounds. It is still only a lower-bound progress mechanism until the full frontier closes.
+- Support-duration pruning can remove pricing labels only when metric-closure route-duration plus minimum operation time proves the support impossible. It does not replace exact pricing closure.
+- The relaxation cache omits time budget from the key. Larger-budget requests after a cache hit are recomputed and logged as partial hits; the stronger valid bound is retained.
+- BPC-owned incumbent pools skip malformed route-load candidates with missing operation vectors. These candidates are heuristic upper-bound candidates only, so skipping them cannot weaken a lower-bound certificate.

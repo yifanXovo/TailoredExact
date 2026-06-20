@@ -1543,6 +1543,14 @@ void addStats(GiniCapTreeResult& total, const GiniCapColumnGenerationResult& nod
     total.pricing_closure_certified_exact =
         total.pricing_closure_certified_exact &&
         node.pricing_closure_certified_exact;
+    total.support_duration_cuts_generated += node.support_duration_cuts_generated;
+    total.support_duration_pruned_labels += node.support_duration_pruned_labels;
+    total.support_duration_pruned_columns += node.support_duration_pruned_columns;
+    total.support_duration_max_subset_size =
+        std::max(total.support_duration_max_subset_size,
+                 node.support_duration_max_subset_size);
+    total.support_duration_precompute_time_seconds +=
+        node.support_duration_precompute_time_seconds;
     total.route_states += node.route_states;
     total.operation_states += node.operation_states;
     total.cuts_added += node.cuts_added;
@@ -1615,6 +1623,17 @@ ColumnGenerationResult runCoverageColumnGenerationDiagnostic(
             ++result.pricing_calls;
             result.route_states += priced.route_states;
             result.operation_states += priced.operation_states;
+            result.support_duration_cuts_generated +=
+                priced.support_duration_cuts_generated;
+            result.support_duration_pruned_labels +=
+                priced.support_duration_pruned_labels;
+            result.support_duration_pruned_columns +=
+                priced.support_duration_pruned_columns;
+            result.support_duration_max_subset_size =
+                std::max(result.support_duration_max_subset_size,
+                         priced.support_duration_max_subset_size);
+            result.support_duration_precompute_time_seconds +=
+                priced.support_duration_precompute_time_seconds;
             if (!priced.complete) return result;
             best_rc = std::min(best_rc, priced.best_reduced_cost);
             if (priced.has_column && priced.best_reduced_cost < -1e-7 &&
@@ -1651,7 +1670,9 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
     double objective_cutoff = std::numeric_limits<double>::infinity(),
     int pricing_return_columns = 1,
     bool column_dominance_enabled = true,
-    const std::string& column_dominance_mode = "exact") {
+    const std::string& column_dominance_mode = "exact",
+    bool support_duration_pruning_enabled = true,
+    int support_duration_max_subset_size = 5) {
     const auto start = Clock::now();
     GiniCapColumnGenerationResult result;
     result.pricing_best_reduced_cost_any =
@@ -1903,6 +1924,10 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 pricing_options.forbidden_station_mask = forbidden_station_mask;
                 pricing_options.forbid_together_pairs = branch.forbid_together_pairs;
                 pricing_options.require_together_pairs = branch.require_together_pairs;
+                pricing_options.support_duration_pruning =
+                    support_duration_pruning_enabled;
+                pricing_options.support_duration_max_subset_size =
+                    support_duration_max_subset_size;
                 pricing_options.stop_reduced_cost =
                     stop_threshold_by_capacity.at(instance.Q[k]);
                 pricing_options.max_returned_columns =
@@ -1919,6 +1944,17 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 result.operation_states += priced.operation_states;
                 result.columns_generated_raw += priced.generated_columns;
                 result.pricing_columns_enumerated += priced.generated_columns;
+                result.support_duration_cuts_generated +=
+                    priced.support_duration_cuts_generated;
+                result.support_duration_pruned_labels +=
+                    priced.support_duration_pruned_labels;
+                result.support_duration_pruned_columns +=
+                    priced.support_duration_pruned_columns;
+                result.support_duration_max_subset_size =
+                    std::max(result.support_duration_max_subset_size,
+                             priced.support_duration_max_subset_size);
+                result.support_duration_precompute_time_seconds +=
+                    priced.support_duration_precompute_time_seconds;
             }
             if (priced.has_column) {
                 priced.best_column.vehicle = k;
@@ -1962,6 +1998,10 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 pricing_options.forbidden_station_mask = forbidden_station_mask;
                 pricing_options.forbid_together_pairs = branch.forbid_together_pairs;
                 pricing_options.require_together_pairs = branch.require_together_pairs;
+                pricing_options.support_duration_pruning =
+                    support_duration_pruning_enabled;
+                pricing_options.support_duration_max_subset_size =
+                    support_duration_max_subset_size;
                 pricing_options.max_returned_columns =
                     (instance.V >= 10 && !phase_one_active)
                         ? std::max(1, pricing_return_columns)
@@ -1977,6 +2017,17 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 result.operation_states += exact.operation_states;
                 result.columns_generated_raw += exact.generated_columns;
                 result.pricing_columns_enumerated += exact.generated_columns;
+                result.support_duration_cuts_generated +=
+                    exact.support_duration_cuts_generated;
+                result.support_duration_pruned_labels +=
+                    exact.support_duration_pruned_labels;
+                result.support_duration_pruned_columns +=
+                    exact.support_duration_pruned_columns;
+                result.support_duration_max_subset_size =
+                    std::max(result.support_duration_max_subset_size,
+                             exact.support_duration_max_subset_size);
+                result.support_duration_precompute_time_seconds +=
+                    exact.support_duration_precompute_time_seconds;
                 return exact;
             };
 
@@ -2188,10 +2239,14 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationDiagnostic(
     double lambda,
     double gamma,
     double time_limit_seconds,
-    int max_iterations) {
+    int max_iterations,
+    bool support_duration_pruning_enabled,
+    int support_duration_max_subset_size) {
     return runGiniCapColumnGenerationInternal(
         instance, lambda, gamma, -1.0, time_limit_seconds, max_iterations,
-        GiniCapBranchRestriction{}, nullptr);
+        GiniCapBranchRestriction{}, nullptr, false,
+        std::numeric_limits<double>::infinity(), 1, true, "exact",
+        support_duration_pruning_enabled, support_duration_max_subset_size);
 }
 
 GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
@@ -2199,7 +2254,9 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     double lambda,
     double gamma,
     double time_limit_seconds,
-    int max_iterations) {
+    int max_iterations,
+    bool support_duration_pruning_enabled,
+    int support_duration_max_subset_size) {
     const auto start = Clock::now();
     GiniCapBranchProbeResult result;
     result.notes.push_back("Fixed-Gini-cap Ryan-Foster branch probe closes the root LP, selects one fractional co-route pair, then closes both child root LPs if time allows. This is one branch level, not a full integer tree.");
@@ -2207,7 +2264,9 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     const double root_budget = (time_limit_seconds > 0.0) ? time_limit_seconds * 0.45 : 0.0;
     GiniCapColumnGenerationResult root = runGiniCapColumnGenerationInternal(
         instance, lambda, gamma, -1.0, root_budget, max_iterations,
-        GiniCapBranchRestriction{}, nullptr);
+        GiniCapBranchRestriction{}, nullptr, false,
+        std::numeric_limits<double>::infinity(), 1, true, "exact",
+        support_duration_pruning_enabled, support_duration_max_subset_size);
     result.root_complete = root.complete;
     result.root_bound = root.fixed_cap_surrogate;
     result.pricing_calls += root.pricing_calls;
@@ -2224,6 +2283,14 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     result.pricing_negative_columns_dominated += root.pricing_negative_columns_dominated;
     result.pricing_completed_exactly =
         result.pricing_completed_exactly && root.pricing_completed_exactly;
+    result.support_duration_cuts_generated += root.support_duration_cuts_generated;
+    result.support_duration_pruned_labels += root.support_duration_pruned_labels;
+    result.support_duration_pruned_columns += root.support_duration_pruned_columns;
+    result.support_duration_max_subset_size =
+        std::max(result.support_duration_max_subset_size,
+                 root.support_duration_max_subset_size);
+    result.support_duration_precompute_time_seconds +=
+        root.support_duration_precompute_time_seconds;
     result.route_states += root.route_states;
     result.operation_states += root.operation_states;
     result.notes.push_back("root complete=" + std::string(root.complete ? "true" : "false")
@@ -2258,7 +2325,9 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     forbid.forbid_together_pairs.push_back({candidate.station_i, candidate.station_j});
     GiniCapColumnGenerationResult forbid_child = runGiniCapColumnGenerationInternal(
         instance, lambda, gamma, -1.0, child_budget, max_iterations,
-        forbid, &root.columns_by_vehicle);
+        forbid, &root.columns_by_vehicle, false,
+        std::numeric_limits<double>::infinity(), 1, true, "exact",
+        support_duration_pruning_enabled, support_duration_max_subset_size);
     result.forbid_child_complete = forbid_child.complete;
     result.forbid_child_bound = forbid_child.fixed_cap_surrogate;
     result.pricing_calls += forbid_child.pricing_calls;
@@ -2275,6 +2344,14 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     result.pricing_negative_columns_dominated += forbid_child.pricing_negative_columns_dominated;
     result.pricing_completed_exactly =
         result.pricing_completed_exactly && forbid_child.pricing_completed_exactly;
+    result.support_duration_cuts_generated += forbid_child.support_duration_cuts_generated;
+    result.support_duration_pruned_labels += forbid_child.support_duration_pruned_labels;
+    result.support_duration_pruned_columns += forbid_child.support_duration_pruned_columns;
+    result.support_duration_max_subset_size =
+        std::max(result.support_duration_max_subset_size,
+                 forbid_child.support_duration_max_subset_size);
+    result.support_duration_precompute_time_seconds +=
+        forbid_child.support_duration_precompute_time_seconds;
     result.route_states += forbid_child.route_states;
     result.operation_states += forbid_child.operation_states;
     result.notes.push_back("forbid child complete="
@@ -2289,7 +2366,9 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     require.require_together_pairs.push_back({candidate.station_i, candidate.station_j});
     GiniCapColumnGenerationResult require_child = runGiniCapColumnGenerationInternal(
         instance, lambda, gamma, -1.0, require_budget, max_iterations,
-        require, &root.columns_by_vehicle);
+        require, &root.columns_by_vehicle, false,
+        std::numeric_limits<double>::infinity(), 1, true, "exact",
+        support_duration_pruning_enabled, support_duration_max_subset_size);
     result.require_child_complete = require_child.complete;
     result.require_child_bound = require_child.fixed_cap_surrogate;
     result.pricing_calls += require_child.pricing_calls;
@@ -2306,6 +2385,14 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     result.pricing_negative_columns_dominated += require_child.pricing_negative_columns_dominated;
     result.pricing_completed_exactly =
         result.pricing_completed_exactly && require_child.pricing_completed_exactly;
+    result.support_duration_cuts_generated += require_child.support_duration_cuts_generated;
+    result.support_duration_pruned_labels += require_child.support_duration_pruned_labels;
+    result.support_duration_pruned_columns += require_child.support_duration_pruned_columns;
+    result.support_duration_max_subset_size =
+        std::max(result.support_duration_max_subset_size,
+                 require_child.support_duration_max_subset_size);
+    result.support_duration_precompute_time_seconds +=
+        require_child.support_duration_precompute_time_seconds;
     result.route_states += require_child.route_states;
     result.operation_states += require_child.operation_states;
     result.notes.push_back("require child complete="
@@ -2336,7 +2423,9 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
     const std::string& column_dominance_mode,
     bool projection_bound_enabled,
     bool penalty_domain_tightening_enabled,
-    bool movement_domain_tightening_enabled) {
+    bool movement_domain_tightening_enabled,
+    bool support_duration_pruning_enabled,
+    int support_duration_max_subset_size) {
     const auto start = Clock::now();
     struct TreeNode {
         GiniCapBranchRestriction branch;
@@ -2715,7 +2804,8 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
             instance, lambda, gamma, gamma_floor, node_budget, max_iterations,
             node.branch, &node.columns_by_vehicle, use_combined_gini_lower_bound,
             objective_cutoff, pricing_return_columns,
-            column_dominance_enabled, column_dominance_mode);
+            column_dominance_enabled, column_dominance_mode,
+            support_duration_pruning_enabled, support_duration_max_subset_size);
         ++result.nodes_solved;
         addStats(result, lp_node);
 

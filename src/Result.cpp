@@ -135,7 +135,8 @@ std::string inferMethodScope(const SolveResult& result) {
         return "subproblem";
     }
     if (method == "pricing" || method == "pricing-branch" || method == "cuts" ||
-        method == "branching" || method == "cg" || method == "gcap-branch") {
+        method == "branching" || method == "cg" || method == "gcap-branch" ||
+        method == "support-pruning-test") {
         return "diagnostic";
     }
     if (containsText(text, "restricted path pool") || containsText(text, "restricted column")) {
@@ -193,6 +194,7 @@ std::string inferCertificateType(const SolveResult& result) {
     if (method == "gcap-branch") return "fixed_gini_cap_one_level_ryan_foster_probe";
     if (method == "master") return "restricted_column_pool_master";
     if (method == "pricing") return "route_load_pricing_oracle";
+    if (method == "support-pruning-test") return "support_duration_pruning_diagnostic";
     if (method == "pricing-branch") return "route_load_pricing_branch_probe";
     if (method == "cuts") return "cut_separation_diagnostic";
     if (method == "branching") return "branching_candidate_diagnostic";
@@ -233,6 +235,10 @@ bool inferCertifiedOriginalProblem(const SolveResult& result) {
     if (inferIsBpc(result)) {
         if (result.unresolved_intervals != 0 || result.invalid_bound_intervals != 0) return false;
         if (result.open_nodes != 0) return false;
+        if (!result.frontier_covers_all_improving_gini_values) return false;
+        if (result.frontier_range_certificate_scope != "original_full_improving_range") {
+            return false;
+        }
         if (result.objective > 1e-12) {
             if (!result.pricing_completed_exactly || !result.pricing_closure_certified_exact) return false;
             if (result.pricing_blocked_by_duplicate_projection) return false;
@@ -294,6 +300,14 @@ std::string resultToJson(const SolveResult& result) {
     out << "  \"master_time_seconds\": " << result.master_time_seconds << ",\n";
     out << "  \"bound_time_seconds\": " << result.bound_time_seconds << ",\n";
     out << "  \"route_mask_time_seconds\": " << result.route_mask_time_seconds << ",\n";
+    out << "  \"gini_max_possible\": " << result.gini_max_possible << ",\n";
+    out << "  \"relevant_gini_upper_for_improvement\": "
+        << result.relevant_gini_upper_for_improvement << ",\n";
+    out << "  \"covered_gini_upper_bound\": " << result.covered_gini_upper_bound << ",\n";
+    out << "  \"frontier_covers_all_improving_gini_values\": "
+        << (result.frontier_covers_all_improving_gini_values ? "true" : "false") << ",\n";
+    out << "  \"frontier_range_certificate_scope\": \""
+        << jsonEscape(result.frontier_range_certificate_scope) << "\",\n";
     out << "  \"columns_generated_raw\": " << result.columns_generated_raw << ",\n";
     out << "  \"columns_after_dominance\": " << result.columns_after_dominance << ",\n";
     out << "  \"columns_dominated\": " << result.columns_dominated << ",\n";
@@ -337,6 +351,16 @@ std::string resultToJson(const SolveResult& result) {
         << (result.pricing_blocked_by_duplicate_projection ? "true" : "false") << ",\n";
     out << "  \"pricing_closure_certified_exact\": "
         << (result.pricing_closure_certified_exact ? "true" : "false") << ",\n";
+    out << "  \"support_duration_cuts_generated\": "
+        << result.support_duration_cuts_generated << ",\n";
+    out << "  \"support_duration_pruned_labels\": "
+        << result.support_duration_pruned_labels << ",\n";
+    out << "  \"support_duration_pruned_columns\": "
+        << result.support_duration_pruned_columns << ",\n";
+    out << "  \"support_duration_max_subset_size\": "
+        << result.support_duration_max_subset_size << ",\n";
+    out << "  \"support_duration_precompute_time_seconds\": "
+        << result.support_duration_precompute_time_seconds << ",\n";
     out << "  \"movement_domains_tightened_count\": "
         << result.movement_domains_tightened_count << ",\n";
     out << "  \"movement_domain_width_before\": "
@@ -347,6 +371,16 @@ std::string resultToJson(const SolveResult& result) {
         << result.movement_tightening_time_seconds << ",\n";
     out << "  \"movement_unreachable_station_count\": "
         << result.movement_unreachable_station_count << ",\n";
+    out << "  \"relaxation_lb_no_movement\": " << result.relaxation_lb_no_movement << ",\n";
+    out << "  \"relaxation_lb_with_movement\": " << result.relaxation_lb_with_movement << ",\n";
+    out << "  \"relaxation_lb_used\": " << result.relaxation_lb_used << ",\n";
+    out << "  \"movement_audit_enabled\": "
+        << (result.movement_audit_enabled ? "true" : "false") << ",\n";
+    out << "  \"movement_audit_intervals\": " << result.movement_audit_intervals << ",\n";
+    out << "  \"movement_audit_bound_improved_count\": "
+        << result.movement_audit_bound_improved_count << ",\n";
+    out << "  \"movement_audit_bound_worse_count\": "
+        << result.movement_audit_bound_worse_count << ",\n";
     out << "  \"frontier_relevant_intervals\": " << result.frontier_relevant_intervals << ",\n";
     out << "  \"frontier_min_interval_lower_bound\": "
         << result.frontier_min_interval_lower_bound << ",\n";
@@ -362,14 +396,44 @@ std::string resultToJson(const SolveResult& result) {
         << jsonEscape(result.frontier_scheduling_mode) << "\",\n";
     out << "  \"frontier_relax_cache_hits\": " << result.frontier_relax_cache_hits << ",\n";
     out << "  \"frontier_relax_cache_misses\": " << result.frontier_relax_cache_misses << ",\n";
+    out << "  \"frontier_relax_cache_partial_hits\": "
+        << result.frontier_relax_cache_partial_hits << ",\n";
+    out << "  \"frontier_relax_cache_recomputed\": "
+        << result.frontier_relax_cache_recomputed << ",\n";
+    out << "  \"frontier_relax_cache_best_bound_reused\": "
+        << result.frontier_relax_cache_best_bound_reused << ",\n";
     out << "  \"frontier_relax_cache_time_saved_estimate\": "
         << result.frontier_relax_cache_time_saved_estimate << ",\n";
     out << "  \"interval_processing_order\": \""
         << jsonEscape(result.interval_processing_order) << "\",\n";
+    out << "  \"cheap_prepass_enabled\": "
+        << (result.cheap_prepass_enabled ? "true" : "false") << ",\n";
+    out << "  \"interval_processing_order_initial\": \""
+        << jsonEscape(result.interval_processing_order_initial) << "\",\n";
+    out << "  \"interval_processing_order_actual\": \""
+        << jsonEscape(result.interval_processing_order_actual) << "\",\n";
+    out << "  \"interval_priority_rebuild_count\": "
+        << result.interval_priority_rebuild_count << ",\n";
+    out << "  \"intervals_skipped_by_cheap_bound\": "
+        << result.intervals_skipped_by_cheap_bound << ",\n";
     out << "  \"frontier_cache_hits\": " << result.frontier_cache_hits << ",\n";
     out << "  \"frontier_cache_columns_loaded\": " << result.frontier_cache_columns_loaded << ",\n";
     out << "  \"frontier_cache_columns_inserted\": " << result.frontier_cache_columns_inserted << ",\n";
     out << "  \"frontier_cache_time_seconds\": " << result.frontier_cache_time_seconds << ",\n";
+    out << "  \"incumbent_source\": \"" << jsonEscape(result.incumbent_source) << "\",\n";
+    out << "  \"incumbent_import_attempted\": "
+        << (result.incumbent_import_attempted ? "true" : "false") << ",\n";
+    out << "  \"incumbent_import_verified\": "
+        << (result.incumbent_import_verified ? "true" : "false") << ",\n";
+    out << "  \"incumbent_import_objective\": " << result.incumbent_import_objective << ",\n";
+    out << "  \"incumbent_import_G\": " << result.incumbent_import_G << ",\n";
+    out << "  \"incumbent_import_P\": " << result.incumbent_import_P << ",\n";
+    out << "  \"incumbent_import_errors\": [";
+    for (std::size_t i = 0; i < result.incumbent_import_errors.size(); ++i) {
+        if (i) out << ", ";
+        out << "\"" << jsonEscape(result.incumbent_import_errors[i]) << "\"";
+    }
+    out << "],\n";
     out << "  \"final_inventories\": "; writeVector(out, result.final_inventory); out << ",\n";
     out << "  \"routes\": [";
     for (std::size_t r = 0; r < result.routes.size(); ++r) {

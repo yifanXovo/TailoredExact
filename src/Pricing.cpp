@@ -5,6 +5,7 @@
 #include <functional>
 #include <limits>
 #include <unordered_map>
+#include <vector>
 
 namespace ebrp {
 namespace {
@@ -26,6 +27,7 @@ public:
           q_(instance.V + 1, 0) {
         result_.best_reduced_cost = std::numeric_limits<double>::infinity();
         buildRequiredComponents();
+        precomputeSupportDurationCuts();
         nonnegative_costs_ = duals_.constant >= -1e-12 &&
             duals_.travel_cost >= -1e-12 && duals_.pickup_cost >= -1e-12;
         for (int i = 1; i <= instance_.V && nonnegative_costs_; ++i) {
@@ -101,6 +103,8 @@ private:
     std::vector<int> required_closure_mask_;
     std::unordered_map<long long, double> completion_travel_cache_;
     std::vector<std::pair<double, int>> negative_label_candidates_;
+    std::vector<std::vector<double>> metric_dist_;
+    std::vector<int> forbidden_support_masks_;
 
     void buildRequiredComponents() {
         std::vector<int> parent(instance_.V + 1);
@@ -267,6 +271,101 @@ private:
         return count;
     }
 
+    void precomputeMetricClosure() {
+        metric_dist_ = instance_.dist;
+        const int n = instance_.V + 1;
+        if (static_cast<int>(metric_dist_.size()) < n) return;
+        for (int k = 0; k < n; ++k) {
+            for (int i = 0; i < n; ++i) {
+                if (static_cast<int>(metric_dist_[i].size()) < n) continue;
+                for (int j = 0; j < n; ++j) {
+                    if (metric_dist_[i][k] + metric_dist_[k][j] <
+                        metric_dist_[i][j] - 1e-12) {
+                        metric_dist_[i][j] =
+                            metric_dist_[i][k] + metric_dist_[k][j];
+                    }
+                }
+            }
+        }
+    }
+
+    double supportCycleLowerBound(int mask) const {
+        if (mask == 0) return 0.0;
+        std::vector<int> stations;
+        for (int station = 1; station <= instance_.V; ++station) {
+            if (mask & (1 << (station - 1))) stations.push_back(station);
+        }
+        const int m = static_cast<int>(stations.size());
+        if (m == 0) return 0.0;
+        const int state_count = 1 << m;
+        std::vector<std::vector<double>> dp(
+            state_count, std::vector<double>(m, std::numeric_limits<double>::infinity()));
+        for (int i = 0; i < m; ++i) {
+            dp[1 << i][i] = metric_dist_[0][stations[i]];
+        }
+        for (int state = 1; state < state_count; ++state) {
+            for (int last = 0; last < m; ++last) {
+                const double cur = dp[state][last];
+                if (!std::isfinite(cur)) continue;
+                for (int next = 0; next < m; ++next) {
+                    if (state & (1 << next)) continue;
+                    const int next_state = state | (1 << next);
+                    dp[next_state][next] = std::min(
+                        dp[next_state][next],
+                        cur + metric_dist_[stations[last]][stations[next]]);
+                }
+            }
+        }
+        const int full = state_count - 1;
+        double best = std::numeric_limits<double>::infinity();
+        for (int last = 0; last < m; ++last) {
+            best = std::min(best, dp[full][last] + metric_dist_[stations[last]][0]);
+        }
+        return best;
+    }
+
+    bool containsKnownForbiddenSupport(int mask) const {
+        for (int forbidden : forbidden_support_masks_) {
+            if ((mask & forbidden) == forbidden) return true;
+        }
+        return false;
+    }
+
+    void precomputeSupportDurationCuts() {
+        const auto cut_start = Clock::now();
+        const int max_subset = std::max(0, std::min(options_.support_duration_max_subset_size,
+                                                    instance_.V));
+        result_.support_duration_max_subset_size = max_subset;
+        if (!options_.support_duration_pruning || instance_.V <= 0 ||
+            instance_.V > 16 || max_subset <= 0) {
+            result_.support_duration_precompute_time_seconds =
+                std::chrono::duration<double>(Clock::now() - cut_start).count();
+            return;
+        }
+        precomputeMetricClosure();
+        if (static_cast<int>(metric_dist_.size()) < instance_.V + 1) return;
+        const double cunit = instance_.pickup_time + instance_.drop_time;
+        const double min_operation = std::max(0.0, cunit);
+        const int full = (1 << instance_.V) - 1;
+        for (int mask = 1; mask <= full; ++mask) {
+            if (popcount(mask) > max_subset) continue;
+            if (containsKnownForbiddenSupport(mask)) continue;
+            const double cycle_lb = supportCycleLowerBound(mask);
+            if (cycle_lb + min_operation > instance_.total_time_limit + 1e-9) {
+                forbidden_support_masks_.push_back(mask);
+            }
+        }
+        result_.support_duration_cuts_generated =
+            static_cast<long long>(forbidden_support_masks_.size());
+        result_.support_duration_precompute_time_seconds =
+            std::chrono::duration<double>(Clock::now() - cut_start).count();
+    }
+
+    bool violatesSupportDurationPruning(int mask) const {
+        if (forbidden_support_masks_.empty()) return false;
+        return containsKnownForbiddenSupport(mask);
+    }
+
     double completionReducedCostLowerBound(const RouteLabel& label) {
         double lb = duals_.constant + label.cost;
         const int closure = requiredClosureMask(label.mask) & fullStationMask();
@@ -420,6 +519,10 @@ private:
 
     bool considerClosedLabel(const RouteLabel& label, int label_idx) {
         if (label.mask == 0 || label.last <= 0) return false;
+        if (violatesSupportDurationPruning(label.mask)) {
+            ++result_.support_duration_pruned_columns;
+            return false;
+        }
         if (!satisfiesRequiredTogether(label.mask)) return false;
         const double route_travel = label.travel + instance_.dist[label.last][0];
         const double cunit = instance_.pickup_time + instance_.drop_time;
@@ -524,6 +627,10 @@ private:
                     const RouteLabel label = labels[label_idx];
                     if (!label.active || label.mask != mask) continue;
                     if (branchClosureImpossible(label.mask)) continue;
+                    if (violatesSupportDurationPruning(label.mask)) {
+                        ++result_.support_duration_pruned_labels;
+                        continue;
+                    }
                     ++result_.route_states;
                     if (options_.use_completion_lb_pruning &&
                         result_.has_column &&
@@ -557,6 +664,10 @@ private:
                         const int next_mask = label.mask | bit;
                         if (violatesForbiddenTogether(next_mask)) continue;
                         if (branchClosureImpossible(next_mask)) continue;
+                        if (violatesSupportDurationPruning(next_mask)) {
+                            ++result_.support_duration_pruned_labels;
+                            continue;
+                        }
                         const double next_travel = label.travel +
                             instance_.dist[label.last][station];
                         if (next_travel + instance_.dist[station][0] >
@@ -641,6 +752,10 @@ private:
         if ((result_.route_states & 0x3fff) == 0 && shouldStop()) return;
         if (violatesForbiddenTogether(mask)) return;
         if (branchClosureImpossible(mask)) return;
+        if (violatesSupportDurationPruning(mask)) {
+            ++result_.support_duration_pruned_labels;
+            return;
+        }
         const double closure_travel_lb =
             requiredClosureTravelLowerBound(mask, last, travel_without_return);
         if (closure_travel_lb > instance_.total_time_limit + 1e-9) return;
@@ -662,6 +777,10 @@ private:
             if (mask & bit) continue;
             const int next_mask = mask | bit;
             if (branchClosureImpossible(next_mask)) continue;
+            if (violatesSupportDurationPruning(next_mask)) {
+                ++result_.support_duration_pruned_labels;
+                continue;
+            }
             const double next_travel = travel_without_return + instance_.dist[last][station];
             if (next_travel + instance_.dist[station][0] > instance_.total_time_limit + 1e-9) {
                 continue;
@@ -674,6 +793,10 @@ private:
     }
 
     void enumerateOperations(int mask, double route_travel) {
+        if (violatesSupportDurationPruning(mask)) {
+            ++result_.support_duration_pruned_columns;
+            return;
+        }
         const double cunit = instance_.pickup_time + instance_.drop_time;
         const int pickup_budget = static_cast<int>(
             std::floor((instance_.total_time_limit - route_travel) / cunit + 1e-9));

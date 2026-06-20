@@ -164,3 +164,37 @@ The reporting fields now separate enumeration, filtering, and insertion:
 
 The backward-compatible `columns_generated_raw`, `columns_after_dominance`, and `columns_dominated` fields remain, but the more specific counters should be used for paper ablations.
 
+## Third Optimization Pass: Range Coverage, Movement Audit, And Support Pruning
+
+### Original Frontier Gini Range Coverage
+
+For any feasible EBRP solution, `0 <= G <= (V-1)/V`. Given a verified incumbent with objective `UB`, no improving solution can have `G > UB`, because `lambda P >= 0` and the objective is `G + lambda P`. Therefore a full-frontier original certificate must cover at least:
+
+```text
+G in [0, min(UB, (V-1)/V)].
+```
+
+An explicit `--gini-cap gamma` with `gamma < min(UB, (V-1)/V)` covers only a capped diagnostic range unless the omitted Gini range is separately fathomed by a valid lower bound. The implementation records `gini_max_possible`, `relevant_gini_upper_for_improvement`, `covered_gini_upper_bound`, `frontier_covers_all_improving_gini_values`, and `frontier_range_certificate_scope`. BPC certification requires `frontier_range_certificate_scope=original_full_improving_range`.
+
+### Movement-Bound Audit Selection
+
+When `--movement-bound-audit true`, each audited interval computes one relaxation bound with movement-domain tightening disabled and one with it enabled. Both are valid lower bounds when they are derived from global station/truck/time necessary conditions. Their maximum is therefore also a valid lower bound. The ledger records `relaxation_lb_no_movement`, `relaxation_lb_with_movement`, `relaxation_lb_used`, and improvement/worsening counters.
+
+### Support-Duration Pricing Pruning
+
+For a station subset `S`, let `cycle_lb(S)` be the exact Held-Karp lower bound over metric-closure distances for a depot route visiting every station in `S`. Any feasible route-load column containing `S` has travel time at least `cycle_lb(S)`. A nonempty route-load column also has positive station operation quantity, so its duration is at least:
+
+```text
+cycle_lb(S) + pickup_time + drop_time.
+```
+
+If this exceeds `T`, no feasible route-load column can contain all stations in `S`. Pricing may therefore prune labels or route masks whose support contains such a subset. This is only an exact-pricing pruning rule; node closure still requires exact pricing completion with no remaining negative reduced-cost feasible column.
+
+### Incumbent Pool Safety
+
+BPC-owned incumbent generation uses priced columns only to propose feasible upper bounds. A candidate route-load column must have a populated operation vector before entering the incumbent route pool. The implementation now skips empty or undersized operation vectors before pool insertion/use. This removes malformed heuristic candidates only; it does not remove any lower-bound column from the RMP or pricing certificate.
+
+### Relaxation Cache Budget Handling
+
+The frontier relaxation cache key omits time budget and includes the instance, lambda, interval floor/cap, incumbent cutoff, route-mask setting, projection/penalty/movement/audit flags, and active restrictions. If a later request has a larger budget, the hit is marked partial and recomputed; the ledger keeps the stronger valid bound. Cache reuse changes runtime only, not the feasible region or certificate meaning.
+

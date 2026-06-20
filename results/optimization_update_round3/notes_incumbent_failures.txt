@@ -1,0 +1,8 @@
+Initial pre-fix run captured a Windows access violation in V12 M1 BPC-owned incumbent mode:
+- command family: --method gcap-frontier --bpc-incumbent pricing/portfolio on reference\regen_candidate_V12_M1_average.txt
+- observed exit code: -1073741819 (0xC0000005 access violation)
+- gdb optimized backtrace: results\optimization_update_round3\logs\gdb_repro_v12_m1_pricing.stdout.txt
+- gdb debug backtrace: results\optimization_update_round3\logs\gdb_debug_repro_v12_m1_pricing.stdout.txt
+- root cause: incumbent pool DFS read col.q[i] from a route-load candidate whose q vector was empty/unpopulated.
+- fix: addIncumbentColumn skips empty-q candidates and the incumbent-pool DFS skips columns whose q vector is shorter than V+1.
+- post-fix repro artifacts: results\optimization_update_round3\raw\repro_v12_m1_pricing_after_fix.json and results\optimization_update_round3\raw\repro_v12_m1_portfolio_after_fix.json both exit 0.

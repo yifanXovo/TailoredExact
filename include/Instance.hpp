@@ -46,6 +46,8 @@ struct SolveOptions {
     double bpc_incumbent_seconds = 20.0;
     int bpc_incumbent_rounds = 12;
     std::string incumbent_json_path;
+    std::string incumbent_format = "auto";
+    std::string incumbent_source_name;
     double gcap_seed_time_limit = -1.0;
     double gini_cap = -1.0;
     double gini_floor = -1.0;
@@ -67,9 +69,12 @@ struct SolveOptions {
     bool projection_bound = true;
     bool penalty_domain_tightening = true;
     bool movement_domain_tightening = true;
+    bool movement_bound_audit = false;
     bool frontier_best_bound_scheduling = true;
     bool frontier_relaxation_cache = true;
     bool frontier_column_cache = false;
+    bool support_duration_pruning = true;
+    int support_duration_max_subset_size = 5;
     int inventory_probe_max_v = 7;
     double inventory_probe_seconds = -1.0;
 };

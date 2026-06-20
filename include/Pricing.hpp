@@ -31,6 +31,8 @@ struct PricingOptions {
     double stop_reduced_cost = -std::numeric_limits<double>::infinity();
     int max_returned_columns = 1;
     bool use_completion_lb_pruning = false;
+    bool support_duration_pruning = true;
+    int support_duration_max_subset_size = 5;
 };
 
 struct PricingResult {
@@ -41,6 +43,11 @@ struct PricingResult {
     long long route_states = 0;
     long long operation_states = 0;
     long long generated_columns = 0;
+    long long support_duration_cuts_generated = 0;
+    long long support_duration_pruned_labels = 0;
+    long long support_duration_pruned_columns = 0;
+    int support_duration_max_subset_size = 0;
+    double support_duration_precompute_time_seconds = 0.0;
     double best_reduced_cost = 0.0;
     RouteLoadColumn best_column;
     std::vector<RouteLoadColumn> negative_columns;

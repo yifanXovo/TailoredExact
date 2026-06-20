@@ -41,6 +41,11 @@ struct ColumnGenerationResult {
     long long pricing_new_negative_projections = 0;
     bool pricing_blocked_by_duplicate_projection = false;
     bool pricing_closure_certified_exact = true;
+    long long support_duration_cuts_generated = 0;
+    long long support_duration_pruned_labels = 0;
+    long long support_duration_pruned_columns = 0;
+    int support_duration_max_subset_size = 0;
+    double support_duration_precompute_time_seconds = 0.0;
     long long route_states = 0;
     long long operation_states = 0;
     double lp_objective = 0.0;
@@ -79,6 +84,11 @@ struct GiniCapColumnGenerationResult {
     long long pricing_new_negative_projections = 0;
     bool pricing_blocked_by_duplicate_projection = false;
     bool pricing_closure_certified_exact = true;
+    long long support_duration_cuts_generated = 0;
+    long long support_duration_pruned_labels = 0;
+    long long support_duration_pruned_columns = 0;
+    int support_duration_max_subset_size = 0;
+    double support_duration_precompute_time_seconds = 0.0;
     long long route_states = 0;
     long long operation_states = 0;
     long long cuts_added = 0;
@@ -147,6 +157,11 @@ struct GiniCapBranchProbeResult {
     long long pricing_new_negative_projections = 0;
     bool pricing_blocked_by_duplicate_projection = false;
     bool pricing_closure_certified_exact = true;
+    long long support_duration_cuts_generated = 0;
+    long long support_duration_pruned_labels = 0;
+    long long support_duration_pruned_columns = 0;
+    int support_duration_max_subset_size = 0;
+    double support_duration_precompute_time_seconds = 0.0;
     long long route_states = 0;
     long long operation_states = 0;
     std::vector<std::string> notes;
@@ -189,6 +204,11 @@ struct GiniCapTreeResult {
     long long pricing_new_negative_projections = 0;
     bool pricing_blocked_by_duplicate_projection = false;
     bool pricing_closure_certified_exact = true;
+    long long support_duration_cuts_generated = 0;
+    long long support_duration_pruned_labels = 0;
+    long long support_duration_pruned_columns = 0;
+    int support_duration_max_subset_size = 0;
+    double support_duration_precompute_time_seconds = 0.0;
     long long route_states = 0;
     long long operation_states = 0;
     long long cuts_added = 0;
@@ -234,14 +254,18 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationDiagnostic(
     double lambda,
     double gamma,
     double time_limit_seconds,
-    int max_iterations = 12);
+    int max_iterations = 12,
+    bool support_duration_pruning_enabled = true,
+    int support_duration_max_subset_size = 5);
 
 GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     const Instance& instance,
     double lambda,
     double gamma,
     double time_limit_seconds,
-    int max_iterations = 12);
+    int max_iterations = 12,
+    bool support_duration_pruning_enabled = true,
+    int support_duration_max_subset_size = 5);
 
 GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
     const Instance& instance,
@@ -261,6 +285,8 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
     const std::string& column_dominance_mode = "exact",
     bool projection_bound_enabled = true,
     bool penalty_domain_tightening_enabled = true,
-    bool movement_domain_tightening_enabled = true);
+    bool movement_domain_tightening_enabled = true,
+    bool support_duration_pruning_enabled = true,
+    int support_duration_max_subset_size = 5);
 
 } // namespace ebrp

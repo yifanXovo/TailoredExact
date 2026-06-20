@@ -38,7 +38,7 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
@@ -50,10 +50,13 @@ void usage() {
         << "[--gcap-warmstart seed|sparse|full] [--gcap-pricing-columns <N>] "
         << "[--column-dominance true|false] [--column-dominance-mode exact|pareto|off] "
         << "[--projection-bound true|false] [--penalty-domain-tightening true|false] "
-        << "[--movement-domain-tightening true|false] "
+        << "[--movement-domain-tightening true|false] [--movement-bound-audit true|false] "
         << "[--frontier-best-bound-scheduling true|false] [--frontier-relaxation-cache true|false] "
         << "[--frontier-column-cache true|false] "
-        << "[--gcap-seed-cplex] [--gcap-seed-time-limit <seconds>] [--incumbent-json <path>] [--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>]\n";
+        << "[--support-duration-pruning true|false] [--support-duration-max-subset-size <N>] "
+        << "[--gcap-seed-cplex] [--gcap-seed-time-limit <seconds>] "
+        << "[--incumbent-json <path>] [--incumbent-format auto|exact_result|route_json|csv] "
+        << "[--incumbent-source-name <name>] [--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>]\n";
 }
 
 std::string requireValue(int& i, int argc, char** argv) {
@@ -115,12 +118,17 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--projection-bound") opt.projection_bound = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--penalty-domain-tightening") opt.penalty_domain_tightening = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--movement-domain-tightening") opt.movement_domain_tightening = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--movement-bound-audit") opt.movement_bound_audit = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-best-bound-scheduling") opt.frontier_best_bound_scheduling = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-relaxation-cache") opt.frontier_relaxation_cache = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-column-cache") opt.frontier_column_cache = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--support-duration-pruning") opt.support_duration_pruning = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--support-duration-max-subset-size") opt.support_duration_max_subset_size = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--gcap-seed-cplex") opt.gcap_seed_cplex = true;
         else if (arg == "--gcap-seed-time-limit") opt.gcap_seed_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--incumbent-json") opt.incumbent_json_path = requireValue(i, argc, argv);
+        else if (arg == "--incumbent-format") opt.incumbent_format = requireValue(i, argc, argv);
+        else if (arg == "--incumbent-source-name") opt.incumbent_source_name = requireValue(i, argc, argv);
         else if (arg == "--inventory-probe-max-v") opt.inventory_probe_max_v = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--inventory-probe-seconds") opt.inventory_probe_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--log") opt.log_path = requireValue(i, argc, argv);
@@ -154,6 +162,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.frontier_retry_reserve_seconds < 0.0) opt.frontier_retry_reserve_seconds = 0.0;
     if (opt.frontier_relax_seconds == 0.0) opt.frontier_relax_seconds = -1.0;
     if (opt.route_mask_max_v < 0) opt.route_mask_max_v = 0;
+    if (opt.support_duration_max_subset_size < 0) opt.support_duration_max_subset_size = 0;
     if (opt.bpc_incumbent_seconds < 0.0) opt.bpc_incumbent_seconds = 0.0;
     if (opt.bpc_incumbent_rounds < 1) opt.bpc_incumbent_rounds = 1;
     if (opt.frontier_final_nodes < 1) opt.frontier_final_nodes = 1;
@@ -303,6 +312,9 @@ ebrp::SolveResult solvePricingDiagnostic(const ebrp::Instance& instance,
     duals.pickup_cost = instance.pickup_time + instance.drop_time;
     ebrp::PricingOptions pricing_opt;
     pricing_opt.time_limit_seconds = opt.solve_time_limit;
+    pricing_opt.support_duration_pruning = opt.support_duration_pruning;
+    pricing_opt.support_duration_max_subset_size =
+        opt.support_duration_max_subset_size;
 
     ebrp::SolveResult result;
     result.instance_name = instance.name;
@@ -319,12 +331,26 @@ ebrp::SolveResult solvePricingDiagnostic(const ebrp::Instance& instance,
         result.nodes += priced.route_states + priced.operation_states;
         result.columns += priced.generated_columns;
         result.pricing_calls += 1;
+        result.support_duration_cuts_generated +=
+            priced.support_duration_cuts_generated;
+        result.support_duration_pruned_labels +=
+            priced.support_duration_pruned_labels;
+        result.support_duration_pruned_columns +=
+            priced.support_duration_pruned_columns;
+        result.support_duration_max_subset_size =
+            std::max(result.support_duration_max_subset_size,
+                     priced.support_duration_max_subset_size);
+        result.support_duration_precompute_time_seconds +=
+            priced.support_duration_precompute_time_seconds;
         std::ostringstream note;
         note << "vehicle " << k
              << " pricing_complete=" << (priced.complete ? "true" : "false")
              << ", columns=" << priced.generated_columns
              << ", route_states=" << priced.route_states
              << ", operation_states=" << priced.operation_states
+             << ", support_duration_cuts=" << priced.support_duration_cuts_generated
+             << ", support_duration_pruned_labels="
+             << priced.support_duration_pruned_labels
              << ", best_reduced_cost=" << priced.best_reduced_cost;
         result.notes.push_back(note.str());
         if (!priced.complete) result.status = "time_limit";
@@ -1115,6 +1141,8 @@ void addIncumbentColumn(std::vector<std::vector<ebrp::RouteLoadColumn>>& pool,
                         std::vector<std::unordered_set<std::string>>& seen,
                         const ebrp::RouteLoadColumn& column) {
     if (column.vehicle < 0 || column.vehicle >= static_cast<int>(pool.size())) return;
+    if (column.mask == 0) return;
+    if (column.q.empty()) return;
     const std::string key = incumbentColumnKey(column);
     if (seen[column.vehicle].insert(key).second) {
         pool[column.vehicle].push_back(column);
@@ -1278,6 +1306,10 @@ BpcOwnedIncumbentResult runBpcOwnedIncumbentGenerator(
                             ? 8 : 1;
                         pricing_opt.use_completion_lb_pruning = true;
                         pricing_opt.allowed_station_mask = allowed_mask;
+                        pricing_opt.support_duration_pruning =
+                            opt.support_duration_pruning;
+                        pricing_opt.support_duration_max_subset_size =
+                            opt.support_duration_max_subset_size;
                         ebrp::PricingResult priced = ebrp::priceRouteLoadColumnExact(
                             instance, k, duals, pricing_opt, gen_start);
                         ++out.pricing_calls;
@@ -1356,6 +1388,7 @@ BpcOwnedIncumbentResult runBpcOwnedIncumbentGenerator(
         dfs(vehicle + 1, used_mask);
         for (int c = 0; c < static_cast<int>(pool[vehicle].size()); ++c) {
             const ebrp::RouteLoadColumn& col = pool[vehicle][c];
+            if (static_cast<int>(col.q.size()) <= instance.V) continue;
             if ((col.mask & used_mask) != 0) continue;
             if (full_mask != 0 && (col.mask & ~full_mask) != 0) continue;
             bool ok = true;
@@ -1807,6 +1840,12 @@ ebrp::SolveResult solveColumnGenerationDiagnostic(const ebrp::Instance& instance
     result.columns = cg.generated_columns;
     result.pricing_calls = cg.pricing_calls;
     result.nodes = cg.route_states + cg.operation_states;
+    result.support_duration_cuts_generated = cg.support_duration_cuts_generated;
+    result.support_duration_pruned_labels = cg.support_duration_pruned_labels;
+    result.support_duration_pruned_columns = cg.support_duration_pruned_columns;
+    result.support_duration_max_subset_size = cg.support_duration_max_subset_size;
+    result.support_duration_precompute_time_seconds =
+        cg.support_duration_precompute_time_seconds;
     result.objective = cg.lp_objective;
     result.lower_bound = cg.lp_objective;
     result.upper_bound = cg.lp_objective;
@@ -1868,7 +1907,8 @@ ebrp::SolveResult solveGiniCapColumnGenerationDiagnostic(const ebrp::Instance& i
 
     ebrp::GiniCapColumnGenerationResult cg =
         ebrp::runGiniCapColumnGenerationDiagnostic(
-            instance, opt.lambda, gamma, opt.solve_time_limit, 12);
+            instance, opt.lambda, gamma, opt.solve_time_limit, 12,
+            opt.support_duration_pruning, opt.support_duration_max_subset_size);
 
     result.runtime_seconds = std::chrono::duration<double>(
         std::chrono::steady_clock::now() - start).count();
@@ -1903,6 +1943,12 @@ ebrp::SolveResult solveGiniCapColumnGenerationDiagnostic(const ebrp::Instance& i
     result.pricing_blocked_by_duplicate_projection =
         cg.pricing_blocked_by_duplicate_projection;
     result.pricing_closure_certified_exact = cg.pricing_closure_certified_exact;
+    result.support_duration_cuts_generated = cg.support_duration_cuts_generated;
+    result.support_duration_pruned_labels = cg.support_duration_pruned_labels;
+    result.support_duration_pruned_columns = cg.support_duration_pruned_columns;
+    result.support_duration_max_subset_size = cg.support_duration_max_subset_size;
+    result.support_duration_precompute_time_seconds =
+        cg.support_duration_precompute_time_seconds;
     result.lower_bound = cg.complete ? cg.fixed_cap_surrogate : std::max(0.0, gamma);
     result.upper_bound = cg.fixed_cap_surrogate;
     result.gap = 0.0;
@@ -1969,7 +2015,8 @@ ebrp::SolveResult solveGiniCapBranchProbeDiagnostic(const ebrp::Instance& instan
 
     ebrp::GiniCapBranchProbeResult probe =
         ebrp::runGiniCapRyanFosterBranchProbe(
-            instance, opt.lambda, gamma, opt.solve_time_limit, 12);
+            instance, opt.lambda, gamma, opt.solve_time_limit, 12,
+            opt.support_duration_pruning, opt.support_duration_max_subset_size);
     result.runtime_seconds = std::chrono::duration<double>(
         std::chrono::steady_clock::now() - start).count();
     result.columns = probe.generated_columns;
@@ -1985,6 +2032,12 @@ ebrp::SolveResult solveGiniCapBranchProbeDiagnostic(const ebrp::Instance& instan
     result.pricing_negative_columns_inserted = probe.pricing_negative_columns_inserted;
     result.pricing_negative_columns_dominated = probe.pricing_negative_columns_dominated;
     result.pricing_completed_exactly = probe.pricing_completed_exactly;
+    result.support_duration_cuts_generated = probe.support_duration_cuts_generated;
+    result.support_duration_pruned_labels = probe.support_duration_pruned_labels;
+    result.support_duration_pruned_columns = probe.support_duration_pruned_columns;
+    result.support_duration_max_subset_size = probe.support_duration_max_subset_size;
+    result.support_duration_precompute_time_seconds =
+        probe.support_duration_precompute_time_seconds;
     result.lower_bound = probe.root_bound;
     if (probe.forbid_child_complete && probe.require_child_complete) {
         result.lower_bound = std::min(probe.forbid_child_bound, probe.require_child_bound);
@@ -2100,7 +2153,8 @@ ebrp::SolveResult solveGiniCapTreeDiagnostic(const ebrp::Instance& instance,
         std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns,
         opt.column_dominance, opt.column_dominance_mode,
         opt.projection_bound, opt.penalty_domain_tightening,
-        opt.movement_domain_tightening);
+        opt.movement_domain_tightening, opt.support_duration_pruning,
+        opt.support_duration_max_subset_size);
     result.runtime_seconds = std::chrono::duration<double>(
         std::chrono::steady_clock::now() - start).count();
     result.columns = tree.generated_columns;
@@ -2136,6 +2190,12 @@ ebrp::SolveResult solveGiniCapTreeDiagnostic(const ebrp::Instance& instance,
     result.pricing_blocked_by_duplicate_projection =
         tree.pricing_blocked_by_duplicate_projection;
     result.pricing_closure_certified_exact = tree.pricing_closure_certified_exact;
+    result.support_duration_cuts_generated = tree.support_duration_cuts_generated;
+    result.support_duration_pruned_labels = tree.support_duration_pruned_labels;
+    result.support_duration_pruned_columns = tree.support_duration_pruned_columns;
+    result.support_duration_max_subset_size = tree.support_duration_max_subset_size;
+    result.support_duration_precompute_time_seconds =
+        tree.support_duration_precompute_time_seconds;
     result.projection_bound_prunes = tree.projection_bound_prunes;
     result.projection_bound_time_seconds = tree.projection_bound_time_seconds;
     result.projection_bound_best_value = tree.projection_bound_best_value;
@@ -2351,6 +2411,70 @@ ebrp::SolveResult solveDominanceDiagnostic(const ebrp::Instance& instance,
     return result;
 }
 
+ebrp::SolveResult solveSupportPruningDiagnostic(const ebrp::Instance& instance,
+                                                const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::PricingDuals duals;
+    duals.travel_cost = 1.0;
+    duals.pickup_cost = instance.pickup_time + instance.drop_time;
+    ebrp::PricingOptions pricing_opt;
+    pricing_opt.time_limit_seconds = opt.solve_time_limit;
+    pricing_opt.support_duration_pruning = true;
+    pricing_opt.support_duration_max_subset_size =
+        opt.support_duration_max_subset_size;
+
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "support-pruning-test";
+    result.status = "diagnostic_complete";
+    result.certificate = "diagnostic only: support-duration pruning precomputes exact-safe impossible station supports for pricing";
+    result.support_duration_max_subset_size =
+        opt.support_duration_max_subset_size;
+    for (int k = 0; k < instance.M; ++k) {
+        ebrp::PricingResult priced = ebrp::priceRouteLoadColumnExact(
+            instance, k, duals, pricing_opt, start);
+        ++result.pricing_calls;
+        result.nodes += priced.route_states + priced.operation_states;
+        result.columns += priced.generated_columns;
+        result.support_duration_cuts_generated +=
+            priced.support_duration_cuts_generated;
+        result.support_duration_pruned_labels +=
+            priced.support_duration_pruned_labels;
+        result.support_duration_pruned_columns +=
+            priced.support_duration_pruned_columns;
+        result.support_duration_precompute_time_seconds +=
+            priced.support_duration_precompute_time_seconds;
+        result.support_duration_max_subset_size =
+            std::max(result.support_duration_max_subset_size,
+                     priced.support_duration_max_subset_size);
+        if (!priced.complete) result.status = "time_limit";
+    }
+    std::ostringstream note;
+    note << "support-duration pruning diagnostic: cuts_generated="
+         << result.support_duration_cuts_generated
+         << ", pruned_labels=" << result.support_duration_pruned_labels
+         << ", pruned_columns=" << result.support_duration_pruned_columns
+         << ", max_subset_size=" << result.support_duration_max_subset_size;
+    result.notes.push_back(note.str());
+    result.routes.assign(instance.M, {});
+    for (int k = 0; k < instance.M; ++k) {
+        result.routes[k].vehicle = k;
+        result.routes[k].nodes = {0, 0};
+    }
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.final_inventory = result.verification.final_inventory;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.objective = result.verification.objective;
+    result.lower_bound = 0.0;
+    result.upper_bound = result.objective;
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
 ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                                               const ebrp::SolveOptions& opt) {
     const auto start = std::chrono::steady_clock::now();
@@ -2365,6 +2489,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.dominance_mode = opt.column_dominance ? opt.column_dominance_mode : "off";
     result.dominance_exact_safe = opt.column_dominance_mode != "pareto";
     result.projection_bound_scope = "global";
+    result.movement_audit_enabled = opt.movement_bound_audit;
+    result.support_duration_max_subset_size = opt.support_duration_max_subset_size;
     result.pricing_best_reduced_cost_any = std::numeric_limits<double>::infinity();
     result.pricing_best_new_reduced_cost = std::numeric_limits<double>::infinity();
     result.pricing_closure_certified_exact = true;
@@ -2376,8 +2502,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         + ", projection_bound=" + std::string(opt.projection_bound ? "true" : "false")
         + ", penalty_domain_tightening=" + std::string(opt.penalty_domain_tightening ? "true" : "false")
         + ", movement_domain_tightening=" + std::string(opt.movement_domain_tightening ? "true" : "false")
+        + ", movement_bound_audit=" + std::string(opt.movement_bound_audit ? "true" : "false")
         + ", frontier_best_bound_scheduling=" + std::string(opt.frontier_best_bound_scheduling ? "true" : "false")
         + ", frontier_relaxation_cache=" + std::string(opt.frontier_relaxation_cache ? "true" : "false")
+        + ", support_duration_pruning=" + std::string(opt.support_duration_pruning ? "true" : "false")
+        + ", support_duration_max_subset_size=" + std::to_string(opt.support_duration_max_subset_size)
         + ", gcap_pricing_columns=" + std::to_string(opt.gcap_pricing_columns)
         + ", frontier_column_cache="
         + std::string(opt.frontier_column_cache ? "requested_but_not_enabled" : "false"));
@@ -2441,6 +2570,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         }
         incumbent_routes = candidate_routes;
         incumbent_verification = candidate;
+        result.incumbent_source = source;
         result.notes.push_back("accepted " + source
             + " incumbent for frontier cutoff only: objective="
             + std::to_string(candidate.objective)
@@ -2466,15 +2596,39 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     }
 
     if (!opt.incumbent_json_path.empty()) {
+        result.incumbent_import_attempted = true;
+        const std::string import_source = opt.incumbent_source_name.empty()
+            ? ("external " + opt.incumbent_format + " incumbent")
+            : opt.incumbent_source_name;
         try {
+            if (opt.incumbent_format != "auto" &&
+                opt.incumbent_format != "exact_result" &&
+                opt.incumbent_format != "route_json") {
+                throw std::runtime_error("incumbent format " + opt.incumbent_format
+                    + " is not implemented in this pass; supported formats are auto, exact_result, route_json");
+            }
             const std::vector<ebrp::RoutePlan> external_routes =
                 loadRoutesFromResultJson(opt.incumbent_json_path, instance.M);
-            const bool accepted = acceptIncumbentRoutes(external_routes, "external JSON");
+            ebrp::Verification imported =
+                ebrp::verifySolution(instance, external_routes, opt.lambda);
+            result.incumbent_import_verified = imported.feasible &&
+                imported.objective_matches && imported.errors.empty();
+            if (result.incumbent_import_verified) {
+                result.incumbent_import_objective = imported.objective;
+                result.incumbent_import_G = imported.G;
+                result.incumbent_import_P = imported.P;
+            } else {
+                result.incumbent_import_errors.insert(
+                    result.incumbent_import_errors.end(),
+                    imported.errors.begin(), imported.errors.end());
+            }
+            const bool accepted = acceptIncumbentRoutes(external_routes, import_source);
             if (accepted) {
                 result.notes.push_back("external incumbent JSON is used only as a feasible route warm start/cutoff; no lower-bound certificate is inherited from "
                     + opt.incumbent_json_path);
             }
         } catch (const std::exception& e) {
+            result.incumbent_import_errors.push_back(e.what());
             result.notes.push_back(std::string("could not load external incumbent JSON: ") + e.what());
         }
     }
@@ -2514,6 +2668,32 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.P = result.verification.P;
     result.objective = result.verification.objective;
     result.upper_bound = result.objective;
+    if (result.incumbent_source.empty()) result.incumbent_source = "empty-route incumbent";
+
+    const double gini_max_possible = (instance.V > 0)
+        ? static_cast<double>(instance.V - 1) / static_cast<double>(instance.V) : 1.0;
+    const double relevant_gini_upper_for_improvement =
+        std::min(result.upper_bound, gini_max_possible);
+    const double cover_lo = std::max(0.0, opt.gini_floor);
+    const bool user_gini_cap_truncates =
+        opt.gini_cap >= 0.0 &&
+        opt.gini_cap < relevant_gini_upper_for_improvement - 1e-12;
+    const double cover_hi = std::min({
+        relevant_gini_upper_for_improvement,
+        opt.gini_cap >= 0.0 ? opt.gini_cap : gini_max_possible
+    });
+    result.gini_max_possible = gini_max_possible;
+    result.relevant_gini_upper_for_improvement =
+        relevant_gini_upper_for_improvement;
+    result.covered_gini_upper_bound = cover_hi;
+    result.frontier_covers_all_improving_gini_values =
+        cover_lo <= 1e-12 &&
+        cover_hi >= relevant_gini_upper_for_improvement - 1e-12 &&
+        !user_gini_cap_truncates;
+    result.frontier_range_certificate_scope =
+        result.frontier_covers_all_improving_gini_values
+            ? "original_full_improving_range"
+            : (user_gini_cap_truncates ? "capped_diagnostic" : "partial_range");
 
     if (!result.verification.feasible) {
         result.status = "gcap_frontier_no_incumbent";
@@ -2539,14 +2719,6 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         return result;
     }
 
-    const double gini_max_possible = (instance.V > 0)
-        ? static_cast<double>(instance.V - 1) / static_cast<double>(instance.V) : 1.0;
-    const double cover_lo = std::max(0.0, opt.gini_floor);
-    const double cover_hi = std::min({
-        result.objective,
-        gini_max_possible,
-        opt.gini_cap >= 0.0 ? opt.gini_cap : gini_max_possible
-    });
     if (cover_lo > cover_hi + 1e-12) {
         result.status = "gcap_frontier_invalid_range";
         result.certificate = "frontier lower Gini bound exceeds the covered upper bound";
@@ -2575,16 +2747,23 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         bool bound_fathomed = false;
         bool tree_closed = false;
         bool pricing_closed = false;
+        double cheap_prepass_lower_bound = 0.0;
+        std::string cheap_prepass_sources = "gamma_floor";
     };
     std::vector<FrontierIntervalRecord> interval_records(intervals);
     const bool initial_full_objective_range =
-        cover_lo <= 1e-12 && cover_hi >= result.upper_bound - 1e-12;
+        result.frontier_covers_all_improving_gini_values;
     std::ostringstream cover_note;
     cover_note << "frontier cover range=[" << cover_lo << "," << cover_hi
                << "], intervals=" << intervals
                << ", incumbent_objective=" << result.objective
                << ", incumbent_G=" << result.G
-               << ", full_objective_range=" << (initial_full_objective_range ? "true" : "false");
+               << ", gini_max_possible=" << gini_max_possible
+               << ", relevant_gini_upper_for_improvement="
+               << relevant_gini_upper_for_improvement
+               << ", frontier_covers_all_improving_gini_values="
+               << (initial_full_objective_range ? "true" : "false")
+               << ", range_scope=" << result.frontier_range_certificate_scope;
     result.notes.push_back(cover_note.str());
     for (int idx = 0; idx < intervals; ++idx) {
         const double frac0 = static_cast<double>(idx) / intervals;
@@ -2594,6 +2773,71 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             ? cover_hi : cover_lo + (cover_hi - cover_lo) * frac1;
         interval_records[idx].lower_bound = std::max(0.0, interval_records[idx].lo);
         interval_records[idx].lower_bound_valid = true;
+    }
+    result.cheap_prepass_enabled = opt.frontier_best_bound_scheduling ||
+        opt.projection_bound || opt.movement_domain_tightening ||
+        opt.penalty_domain_tightening;
+    if (result.cheap_prepass_enabled) {
+        for (int idx = 0; idx < intervals; ++idx) {
+            FrontierIntervalRecord& record = interval_records[idx];
+            std::vector<int> inv_lb(instance.V + 1, 0);
+            std::vector<int> inv_ub(instance.V + 1, 0);
+            for (int station = 1; station <= instance.V; ++station) {
+                inv_ub[station] = instance.capacity[station];
+            }
+            if (opt.movement_domain_tightening) {
+                ebrp::MovementReachabilityTighteningResult move =
+                    ebrp::tightenInventoryIntervalsByMovementReachability(
+                        instance, inv_lb, inv_ub);
+                record.cheap_prepass_sources += "|movement_domain";
+                result.movement_tightening_time_seconds += move.time_seconds;
+                result.movement_domains_tightened_count += move.domains_tightened_count;
+                result.movement_domain_width_before += move.total_domain_width_before;
+                result.movement_domain_width_after += move.total_domain_width_after;
+                result.movement_unreachable_station_count += move.unreachable_station_count;
+            }
+            if (opt.penalty_domain_tightening) {
+                ebrp::PenaltyDomainTighteningResult tighten =
+                    ebrp::tightenInventoryIntervalsByPenaltyBudget(
+                        instance, opt.lambda, record.lo, result.upper_bound,
+                        inv_lb, inv_ub);
+                record.cheap_prepass_sources += "|penalty_domain";
+                result.penalty_budget = tighten.penalty_budget;
+                result.domains_tightened_count += tighten.domains_tightened_count;
+                result.total_domain_width_before += tighten.total_domain_width_before;
+                result.total_domain_width_after += tighten.total_domain_width_after;
+                if (tighten.fathomed_by_budget) {
+                    record.lower_bound = result.upper_bound;
+                    record.lower_bound_source = "cheap_penalty_budget";
+                    record.lb_sources += "|cheap_penalty_budget";
+                }
+            }
+            if (opt.projection_bound) {
+                const auto projection_start = std::chrono::steady_clock::now();
+                ebrp::InventoryRatioProjectionBound projection =
+                    ebrp::computeInventoryRatioProjectionBound(
+                        instance, opt.lambda, inv_lb, inv_ub, record.lo,
+                        "global");
+                result.projection_bound_time_seconds +=
+                    std::chrono::duration<double>(
+                        std::chrono::steady_clock::now() - projection_start).count();
+                record.cheap_prepass_sources += "|projection_bound";
+                if (projection.valid &&
+                    projection.objective_lower_bound > record.lower_bound + 1e-12) {
+                    record.lower_bound = projection.objective_lower_bound;
+                    record.lower_bound_source = "cheap_projection_bound";
+                    record.lb_sources += "|cheap_projection_bound";
+                    result.projection_bound_best_value =
+                        std::max(result.projection_bound_best_value,
+                                 projection.objective_lower_bound);
+                    result.projection_bound_scope = projection.bound_scope;
+                }
+            }
+            record.cheap_prepass_lower_bound = record.lower_bound;
+            if (record.lower_bound >= result.upper_bound - 1e-7) {
+                ++result.intervals_skipped_by_cheap_bound;
+            }
+        }
     }
     std::vector<int> initial_schedule(intervals);
     for (int idx = 0; idx < intervals; ++idx) initial_schedule[idx] = idx;
@@ -2623,6 +2867,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             order << initial_schedule[pos];
         }
         result.interval_processing_order = order.str();
+        result.interval_processing_order_initial = order.str();
+        result.interval_processing_order_actual = order.str();
     }
 
     struct InitialIntervalWork {
@@ -2700,6 +2946,17 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.pricing_closure_certified_exact =
                 result.pricing_closure_certified_exact &&
                 tree.pricing_closure_certified_exact;
+            result.support_duration_cuts_generated +=
+                tree.support_duration_cuts_generated;
+            result.support_duration_pruned_labels +=
+                tree.support_duration_pruned_labels;
+            result.support_duration_pruned_columns +=
+                tree.support_duration_pruned_columns;
+            result.support_duration_max_subset_size =
+                std::max(result.support_duration_max_subset_size,
+                         tree.support_duration_max_subset_size);
+            result.support_duration_precompute_time_seconds +=
+                tree.support_duration_precompute_time_seconds;
             result.movement_domains_tightened_count +=
                 tree.movement_domains_tightened_count;
             result.movement_domain_width_before +=
@@ -2715,20 +2972,20 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     struct CachedRelaxation {
         ebrp::GiniIntervalInventoryRelaxationBound bound;
         double elapsed = 0.0;
+        double budget = 0.0;
     };
     std::unordered_map<std::string, CachedRelaxation> relaxation_cache;
-    auto relaxationCacheKey = [&](double lo, double hi, double cutoff,
-                                  double budget) {
+    auto relaxationCacheKey = [&](double lo, double hi, double cutoff) {
         std::ostringstream key;
         key << instance.name << "|lambda=" << opt.lambda
             << "|lo=" << std::setprecision(17) << lo
             << "|hi=" << std::setprecision(17) << hi
             << "|cutoff=" << std::setprecision(17) << cutoff
-            << "|budget=" << budget
             << "|route_mask_max_v=" << opt.route_mask_max_v
             << "|projection=" << (opt.projection_bound ? 1 : 0)
             << "|penalty=" << (opt.penalty_domain_tightening ? 1 : 0)
-            << "|movement=" << (opt.movement_domain_tightening ? 1 : 0);
+            << "|movement=" << (opt.movement_domain_tightening ? 1 : 0)
+            << "|movement_audit=" << (opt.movement_bound_audit ? 1 : 0);
         return key.str();
     };
     auto computeInventoryRelaxation =
@@ -2738,28 +2995,100 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 opt.frontier_relaxation_cache && allow_cache &&
                 !result.parallel_frontier;
             const std::string key = cache_enabled
-                ? relaxationCacheKey(lo, hi, cutoff, budget) : std::string{};
+                ? relaxationCacheKey(lo, hi, cutoff) : std::string{};
             if (cache_enabled) {
                 auto it = relaxation_cache.find(key);
                 if (it != relaxation_cache.end()) {
-                    ++result.frontier_relax_cache_hits;
-                    result.frontier_relax_cache_time_saved_estimate += it->second.elapsed;
-                    result.notes.push_back("frontier relaxation cache hit for interval ["
-                        + std::to_string(lo) + "," + std::to_string(hi) + "]");
-                    return it->second;
+                    if (budget <= it->second.budget + 1e-9) {
+                        ++result.frontier_relax_cache_hits;
+                        result.frontier_relax_cache_time_saved_estimate += it->second.elapsed;
+                        result.notes.push_back("frontier relaxation cache hit for interval ["
+                            + std::to_string(lo) + "," + std::to_string(hi) + "]");
+                        return it->second;
+                    }
+                    ++result.frontier_relax_cache_partial_hits;
+                    result.notes.push_back("frontier relaxation cache partial hit for interval ["
+                        + std::to_string(lo) + "," + std::to_string(hi)
+                        + "]; recomputing with larger budget");
+                } else {
+                    ++result.frontier_relax_cache_misses;
                 }
-                ++result.frontier_relax_cache_misses;
             }
             const auto bound_start = std::chrono::steady_clock::now();
             CachedRelaxation out;
-            out.bound = ebrp::computeGiniIntervalInventoryRelaxationBound(
-                instance, opt.lambda, lo, hi, budget, cutoff,
-                opt.route_mask_max_v, opt.projection_bound,
-                opt.penalty_domain_tightening,
-                opt.movement_domain_tightening);
+            auto compute_once = [&](bool movement_enabled) {
+                return ebrp::computeGiniIntervalInventoryRelaxationBound(
+                    instance, opt.lambda, lo, hi, budget, cutoff,
+                    opt.route_mask_max_v, opt.projection_bound,
+                    opt.penalty_domain_tightening,
+                    movement_enabled);
+            };
+            if (opt.movement_bound_audit) {
+                ++result.movement_audit_intervals;
+                ebrp::GiniIntervalInventoryRelaxationBound no_movement =
+                    compute_once(false);
+                ebrp::GiniIntervalInventoryRelaxationBound with_movement =
+                    compute_once(true);
+                const double no_lb = no_movement.infeasible
+                    ? cutoff : no_movement.objective_lower_bound;
+                const double with_lb = with_movement.infeasible
+                    ? cutoff : with_movement.objective_lower_bound;
+                result.relaxation_lb_no_movement =
+                    std::max(result.relaxation_lb_no_movement, no_lb);
+                result.relaxation_lb_with_movement =
+                    std::max(result.relaxation_lb_with_movement, with_lb);
+                if (with_lb > no_lb + 1e-9) {
+                    ++result.movement_audit_bound_improved_count;
+                    out.bound = with_movement;
+                    out.bound.note += ", movement_audit_selected=with_movement"
+                        ", relaxation_lb_no_movement=" + std::to_string(no_lb)
+                        + ", relaxation_lb_with_movement=" + std::to_string(with_lb);
+                } else {
+                    if (with_lb < no_lb - 1e-9) {
+                        ++result.movement_audit_bound_worse_count;
+                    }
+                    out.bound = no_movement;
+                    out.bound.note += ", movement_audit_selected=no_movement"
+                        ", relaxation_lb_no_movement=" + std::to_string(no_lb)
+                        + ", relaxation_lb_with_movement=" + std::to_string(with_lb);
+                }
+                result.relaxation_lb_used =
+                    std::max(result.relaxation_lb_used,
+                             std::max(no_lb, with_lb));
+            } else {
+                out.bound = compute_once(opt.movement_domain_tightening);
+                const double used_lb = out.bound.infeasible
+                    ? cutoff : out.bound.objective_lower_bound;
+                result.relaxation_lb_used =
+                    std::max(result.relaxation_lb_used, used_lb);
+                if (opt.movement_domain_tightening) {
+                    result.relaxation_lb_with_movement =
+                        std::max(result.relaxation_lb_with_movement, used_lb);
+                } else {
+                    result.relaxation_lb_no_movement =
+                        std::max(result.relaxation_lb_no_movement, used_lb);
+                }
+            }
             out.elapsed = std::chrono::duration<double>(
                 std::chrono::steady_clock::now() - bound_start).count();
-            if (cache_enabled) relaxation_cache.emplace(key, out);
+            out.budget = budget;
+            if (cache_enabled) {
+                auto it = relaxation_cache.find(key);
+                if (it != relaxation_cache.end()) {
+                    ++result.frontier_relax_cache_recomputed;
+                    const double old_lb = it->second.bound.infeasible
+                        ? cutoff : it->second.bound.objective_lower_bound;
+                    const double new_lb = out.bound.infeasible
+                        ? cutoff : out.bound.objective_lower_bound;
+                    if (old_lb > new_lb + 1e-9) {
+                        out.bound = it->second.bound;
+                        ++result.frontier_relax_cache_best_bound_reused;
+                    }
+                    it->second = out;
+                } else {
+                    relaxation_cache.emplace(key, out);
+                }
+            }
             return out;
         };
 
@@ -2773,9 +3102,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         const double lo = cover_lo + (cover_hi - cover_lo) * frac0;
         const double hi = (idx + 1 == intervals)
             ? cover_hi : cover_lo + (cover_hi - cover_lo) * frac1;
+        work.record = interval_records[idx];
         work.record.lo = lo;
         work.record.hi = hi;
-        work.record.lower_bound = std::max(0.0, lo);
+        work.record.lower_bound =
+            std::max(work.record.lower_bound, std::max(0.0, lo));
         work.record.lower_bound_valid = true;
         if (lo >= fixed_upper_bound - 1e-12) {
             work.record.processed = true;
@@ -2851,7 +3182,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns,
             opt.column_dominance, opt.column_dominance_mode,
             opt.projection_bound, opt.penalty_domain_tightening,
-            opt.movement_domain_tightening);
+            opt.movement_domain_tightening, opt.support_duration_pruning,
+            opt.support_duration_max_subset_size);
         work.ran_tree = true;
         work.record.processed = true;
         work.record.complete = work.tree.complete;
@@ -3107,7 +3439,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns,
             opt.column_dominance, opt.column_dominance_mode,
             opt.projection_bound, opt.penalty_domain_tightening,
-            opt.movement_domain_tightening);
+            opt.movement_domain_tightening, opt.support_duration_pruning,
+            opt.support_duration_max_subset_size);
         result.nodes += tree.nodes_solved;
         result.columns += tree.generated_columns;
         result.pricing_calls += tree.pricing_calls;
@@ -3472,7 +3805,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 opt.gcap_warmstart_level, early_stop_target, opt.gcap_pricing_columns,
                 opt.column_dominance, opt.column_dominance_mode,
                 opt.projection_bound, opt.penalty_domain_tightening,
-                opt.movement_domain_tightening);
+                opt.movement_domain_tightening, opt.support_duration_pruning,
+                opt.support_duration_max_subset_size);
             result.nodes += tree.nodes_solved;
             result.columns += tree.generated_columns;
             result.pricing_calls += tree.pricing_calls;
@@ -3717,7 +4051,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns,
                 opt.column_dominance, opt.column_dominance_mode,
                 opt.projection_bound, opt.penalty_domain_tightening,
-                opt.movement_domain_tightening);
+                opt.movement_domain_tightening, opt.support_duration_pruning,
+                opt.support_duration_max_subset_size);
             result.nodes += tree.nodes_solved;
             result.columns += tree.generated_columns;
             result.pricing_calls += tree.pricing_calls;
@@ -3832,7 +4167,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     }
 
     bool all_certified = true;
-    bool full_objective_range = cover_lo <= 1e-12 && cover_hi >= result.upper_bound - 1e-12;
+    bool full_objective_range = result.frontier_covers_all_improving_gini_values;
     int closed_intervals = 0;
     int bound_certified_intervals = 0;
     int skipped_intervals = 0;
@@ -3865,6 +4200,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                    << ", range=[" << record.lo << "," << record.hi << "]"
                    << ", status=skipped_floor_ge_incumbent"
                    << ", interval_lb=" << record.lower_bound
+                   << ", cheap_prepass_lb=" << record.cheap_prepass_lower_bound
+                   << ", cheap_sources=" << record.cheap_prepass_sources
                    << ", lb_sources=" << record.lb_sources
                    << ", complete_or_fathomed=true"
                    << ", open_nodes=" << record.open_nodes
@@ -3884,6 +4221,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                    << ", range=[" << record.lo << "," << record.hi << "]"
                    << ", status=empty_closed"
                    << ", interval_lb=" << record.lower_bound
+                   << ", cheap_prepass_lb=" << record.cheap_prepass_lower_bound
+                   << ", cheap_sources=" << record.cheap_prepass_sources
                    << ", lb_sources=" << record.lb_sources
                    << ", complete_or_fathomed=true"
                    << ", open_nodes=" << record.open_nodes
@@ -3919,6 +4258,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                << ", range=[" << record.lo << "," << record.hi << "]"
                << ", status=" << status
                << ", interval_lb=" << record.lower_bound
+               << ", cheap_prepass_lb=" << record.cheap_prepass_lower_bound
+               << ", cheap_sources=" << record.cheap_prepass_sources
                << ", lb_source=" << record.lower_bound_source
                << ", lb_sources=" << record.lb_sources
                << ", complete_or_fathomed="
@@ -3961,7 +4302,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                        << ", unresolved_intervals=" << unresolved_intervals
                        << ", invalid_bound_intervals=" << invalid_bound_intervals
                        << ", final_full_objective_range="
-                       << (full_objective_range ? "true" : "false");
+                       << (full_objective_range ? "true" : "false")
+                       << ", frontier_range_certificate_scope="
+                       << result.frontier_range_certificate_scope
+                       << ", relevant_gini_upper_for_improvement="
+                       << result.relevant_gini_upper_for_improvement
+                       << ", covered_gini_upper_bound="
+                       << result.covered_gini_upper_bound;
     result.notes.push_back(certification_note.str());
 
     if (all_certified && full_objective_range &&
@@ -3977,7 +4324,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.gap = 0.0;
     } else if (all_certified) {
         result.status = "gcap_frontier_bound_complete";
-        result.certificate = "gamma-frontier diagnostic certified every requested interval, but the aggregated lower bound does not prove the incumbent globally optimal";
+        result.certificate = full_objective_range
+            ? "gamma-frontier diagnostic certified every requested interval, but the aggregated lower bound does not prove the incumbent globally optimal"
+            : "gamma-frontier diagnostic certified only a capped or partial Gini range; this is not an original-problem optimality certificate";
     } else {
         result.status = "gcap_frontier_not_closed";
         result.certificate = "gamma-frontier diagnostic still has relevant intervals that are neither closed nor fathomed by a valid lower bound; do not treat as an optimality certificate";
@@ -4021,6 +4370,8 @@ int main(int argc, char** argv) {
                 results.push_back(solveGiniFrontierDiagnostic(instance, opt));
             } else if (opt.method == "dominance-test") {
                 results.push_back(solveDominanceDiagnostic(instance, opt));
+            } else if (opt.method == "support-pruning-test") {
+                results.push_back(solveSupportPruningDiagnostic(instance, opt));
             } else {
                 throw std::runtime_error("Unsupported method: " + opt.method);
             }
