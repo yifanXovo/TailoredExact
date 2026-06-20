@@ -45,6 +45,31 @@ A BPC result is certified only if `status=optimal`, `gap=0`, `lower_bound=upper_
 
 `wall_time_seconds` is elapsed wall time. Aggregate worker timings may exceed wall time under parallel BPC.
 
+## Optimization Update: 2026-06-20
+
+Implemented exactness-preserving BPC optimizations:
+
+- Closed route-load column projection dominance in `ColumnPool`. Exact mode compresses columns with the same vehicle, station mask, and signed operation vector when the active master has no path-dependent objective term. Pareto mode is available for path-dependent objectives.
+- Filtered multi-column pricing insertion. When `--gcap-pricing-columns N` returns multiple negative columns, candidates are dominance-filtered before entering the RMP. Early negative pricing stops still only add columns; they cannot close a node.
+- Inventory-ratio interval projection lower bound. Valid final-inventory intervals imply lower bounds on `P`, `H`, `G`, and `G+lambda P`; interval floors are included.
+- Incumbent penalty-budget domain tightening. In an interval with floor `gamma_L`, only inventory domains that can satisfy `gamma_L + lambda P <= UB` are retained for incumbent-improvement proofs.
+- BPC-owned route-column incumbent pools are also dominance-compressed before the restricted incumbent search.
+
+CLI controls:
+
+```text
+--column-dominance true|false
+--column-dominance-mode exact|pareto|off
+--projection-bound true|false
+--penalty-domain-tightening true|false
+--gcap-pricing-columns <N>
+--frontier-column-cache true|false
+```
+
+The frontier column cache flag is currently logged but not enabled; cache reuse remains a documented TODO until a separate stability pass verifies no certificate issues.
+
+Proofs are in `docs/optimization_proofs.md`. Short smoke and ablation outputs are in `results/optimization_update/`.
+
 ## Target Benchmark Table
 
 Detailed machine-readable rows are in `docs/portfolio_benchmark_table.csv`.

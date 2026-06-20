@@ -285,6 +285,31 @@ std::string resultToJson(const SolveResult& result) {
     out << "  \"master_time_seconds\": " << result.master_time_seconds << ",\n";
     out << "  \"bound_time_seconds\": " << result.bound_time_seconds << ",\n";
     out << "  \"route_mask_time_seconds\": " << result.route_mask_time_seconds << ",\n";
+    out << "  \"columns_generated_raw\": " << result.columns_generated_raw << ",\n";
+    out << "  \"columns_after_dominance\": " << result.columns_after_dominance << ",\n";
+    out << "  \"columns_dominated\": " << result.columns_dominated << ",\n";
+    out << "  \"dominance_time_seconds\": " << result.dominance_time_seconds << ",\n";
+    out << "  \"dominance_mode\": \"" << jsonEscape(result.dominance_mode) << "\",\n";
+    out << "  \"dominance_exact_safe\": "
+        << (result.dominance_exact_safe ? "true" : "false") << ",\n";
+    out << "  \"projection_bound_prunes\": " << result.projection_bound_prunes << ",\n";
+    out << "  \"projection_bound_time_seconds\": " << result.projection_bound_time_seconds << ",\n";
+    out << "  \"projection_bound_best_value\": " << result.projection_bound_best_value << ",\n";
+    out << "  \"projection_bound_scope\": \"" << jsonEscape(result.projection_bound_scope) << "\",\n";
+    out << "  \"penalty_budget\": " << result.penalty_budget << ",\n";
+    out << "  \"domains_tightened_count\": " << result.domains_tightened_count << ",\n";
+    out << "  \"total_domain_width_before\": " << result.total_domain_width_before << ",\n";
+    out << "  \"total_domain_width_after\": " << result.total_domain_width_after << ",\n";
+    out << "  \"penalty_tightening_time_seconds\": " << result.penalty_tightening_time_seconds << ",\n";
+    out << "  \"pricing_negative_columns_found\": " << result.pricing_negative_columns_found << ",\n";
+    out << "  \"pricing_negative_columns_inserted\": " << result.pricing_negative_columns_inserted << ",\n";
+    out << "  \"pricing_negative_columns_dominated\": " << result.pricing_negative_columns_dominated << ",\n";
+    out << "  \"pricing_completed_exactly\": "
+        << (result.pricing_completed_exactly ? "true" : "false") << ",\n";
+    out << "  \"frontier_cache_hits\": " << result.frontier_cache_hits << ",\n";
+    out << "  \"frontier_cache_columns_loaded\": " << result.frontier_cache_columns_loaded << ",\n";
+    out << "  \"frontier_cache_columns_inserted\": " << result.frontier_cache_columns_inserted << ",\n";
+    out << "  \"frontier_cache_time_seconds\": " << result.frontier_cache_time_seconds << ",\n";
     out << "  \"final_inventories\": "; writeVector(out, result.final_inventory); out << ",\n";
     out << "  \"routes\": [";
     for (std::size_t r = 0; r < result.routes.size(); ++r) {

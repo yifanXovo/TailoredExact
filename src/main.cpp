@@ -1,5 +1,6 @@
 #include "Branching.hpp"
 #include "Bounds.hpp"
+#include "ColumnPool.hpp"
 #include "ColumnGeneration.hpp"
 #include "CplexBaseline.hpp"
 #include "Cuts.hpp"
@@ -45,6 +46,9 @@ void usage() {
         << "[--bpc-incumbent none|greedy|random|local|pool|pricing|portfolio|strong] [--bpc-incumbent-seconds <seconds>] [--bpc-incumbent-rounds <N>] "
         << "[--frontier-final-closure true|false] [--frontier-final-nodes <N>] "
         << "[--gcap-warmstart seed|sparse|full] [--gcap-pricing-columns <N>] "
+        << "[--column-dominance true|false] [--column-dominance-mode exact|pareto|off] "
+        << "[--projection-bound true|false] [--penalty-domain-tightening true|false] "
+        << "[--frontier-column-cache true|false] "
         << "[--gcap-seed-cplex] [--gcap-seed-time-limit <seconds>] [--incumbent-json <path>] [--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>]\n";
 }
 
@@ -102,6 +106,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--frontier-final-nodes") opt.frontier_final_nodes = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--gcap-warmstart") opt.gcap_warmstart_level = parseWarmstartLevel(requireValue(i, argc, argv));
         else if (arg == "--gcap-pricing-columns") opt.gcap_pricing_columns = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--column-dominance") opt.column_dominance = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--column-dominance-mode") opt.column_dominance_mode = requireValue(i, argc, argv);
+        else if (arg == "--projection-bound") opt.projection_bound = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--penalty-domain-tightening") opt.penalty_domain_tightening = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-column-cache") opt.frontier_column_cache = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--gcap-seed-cplex") opt.gcap_seed_cplex = true;
         else if (arg == "--gcap-seed-time-limit") opt.gcap_seed_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--incumbent-json") opt.incumbent_json_path = requireValue(i, argc, argv);
@@ -124,6 +133,17 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.gcap_warmstart_level < 0) opt.gcap_warmstart_level = 0;
     if (opt.gcap_warmstart_level > 2) opt.gcap_warmstart_level = 2;
     if (opt.gcap_pricing_columns < 1) opt.gcap_pricing_columns = 1;
+    std::string dominance_mode = opt.column_dominance_mode;
+    std::transform(dominance_mode.begin(), dominance_mode.end(), dominance_mode.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    if (dominance_mode == "off" || dominance_mode == "none" || dominance_mode == "false") {
+        opt.column_dominance = false;
+        opt.column_dominance_mode = "off";
+    } else if (dominance_mode == "pareto") {
+        opt.column_dominance_mode = "pareto";
+    } else {
+        opt.column_dominance_mode = "exact";
+    }
     if (opt.frontier_retry_reserve_seconds < 0.0) opt.frontier_retry_reserve_seconds = 0.0;
     if (opt.frontier_relax_seconds == 0.0) opt.frontier_relax_seconds = -1.0;
     if (opt.route_mask_max_v < 0) opt.route_mask_max_v = 0;
@@ -445,6 +465,10 @@ struct BpcOwnedIncumbentResult {
     std::vector<ebrp::RoutePlan> routes;
     long long pricing_calls = 0;
     long long generated_columns = 0;
+    long long columns_generated_raw = 0;
+    long long columns_after_dominance = 0;
+    long long columns_dominated = 0;
+    double dominance_time_seconds = 0.0;
     long long route_states = 0;
     long long operation_states = 0;
     long long master_states = 0;
@@ -1279,6 +1303,25 @@ BpcOwnedIncumbentResult runBpcOwnedIncumbentGenerator(
         }
     }
 
+    if (opt.column_dominance) {
+        ebrp::ColumnDominanceOptions dominance_options;
+        dominance_options.enabled = true;
+        dominance_options.mode = ebrp::parseColumnDominanceMode(opt.column_dominance_mode);
+        dominance_options.exact_safe = true;
+        dominance_options = ebrp::normalizeColumnDominanceOptions(dominance_options);
+        for (auto& cols : pool) {
+            ebrp::ColumnDominanceStats stats;
+            ebrp::applyColumnDominance(cols, dominance_options, stats);
+            out.columns_generated_raw += stats.columns_generated_raw;
+            out.columns_after_dominance += stats.columns_after_dominance;
+            out.columns_dominated += stats.columns_dominated;
+            out.dominance_time_seconds += stats.dominance_time_seconds;
+        }
+        out.notes.push_back("BPC-owned route-column incumbent pool dominance applied: mode="
+            + opt.column_dominance_mode
+            + ", columns_dominated=" + std::to_string(out.columns_dominated));
+    }
+
     std::vector<int> selected(instance.M, -1);
     std::vector<int> y = instance.initial;
     std::vector<ebrp::RoutePlan> best_routes = out.found ? out.routes : emptyRouteSet(instance);
@@ -1825,6 +1868,16 @@ ebrp::SolveResult solveGiniCapColumnGenerationDiagnostic(const ebrp::Instance& i
     result.columns = cg.generated_columns;
     result.pricing_calls = cg.pricing_calls;
     result.nodes = cg.route_states + cg.operation_states;
+    result.columns_generated_raw = cg.columns_generated_raw;
+    result.columns_after_dominance = cg.columns_after_dominance;
+    result.columns_dominated = cg.columns_dominated;
+    result.dominance_time_seconds = cg.dominance_time_seconds;
+    result.dominance_mode = cg.dominance_mode;
+    result.dominance_exact_safe = cg.dominance_exact_safe;
+    result.pricing_negative_columns_found = cg.pricing_negative_columns_found;
+    result.pricing_negative_columns_inserted = cg.pricing_negative_columns_inserted;
+    result.pricing_negative_columns_dominated = cg.pricing_negative_columns_dominated;
+    result.pricing_completed_exactly = cg.pricing_completed_exactly;
     result.lower_bound = cg.complete ? cg.fixed_cap_surrogate : std::max(0.0, gamma);
     result.upper_bound = cg.fixed_cap_surrogate;
     result.gap = 0.0;
@@ -1897,6 +1950,16 @@ ebrp::SolveResult solveGiniCapBranchProbeDiagnostic(const ebrp::Instance& instan
     result.columns = probe.generated_columns;
     result.pricing_calls = probe.pricing_calls;
     result.nodes = probe.route_states + probe.operation_states;
+    result.columns_generated_raw = probe.columns_generated_raw;
+    result.columns_after_dominance = probe.columns_after_dominance;
+    result.columns_dominated = probe.columns_dominated;
+    result.dominance_time_seconds = probe.dominance_time_seconds;
+    result.dominance_mode = probe.dominance_mode;
+    result.dominance_exact_safe = probe.dominance_exact_safe;
+    result.pricing_negative_columns_found = probe.pricing_negative_columns_found;
+    result.pricing_negative_columns_inserted = probe.pricing_negative_columns_inserted;
+    result.pricing_negative_columns_dominated = probe.pricing_negative_columns_dominated;
+    result.pricing_completed_exactly = probe.pricing_completed_exactly;
     result.lower_bound = probe.root_bound;
     if (probe.forbid_child_complete && probe.require_child_complete) {
         result.lower_bound = std::min(probe.forbid_child_bound, probe.require_child_bound);
@@ -2009,7 +2072,9 @@ ebrp::SolveResult solveGiniCapTreeDiagnostic(const ebrp::Instance& instance,
         instance, opt.lambda, gamma, opt.gini_floor, opt.solve_time_limit, 24, opt.max_branch_nodes,
         seed_routes.empty() ? nullptr : &seed_routes, false,
         std::numeric_limits<double>::infinity(), opt.gcap_warmstart_level,
-        std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns);
+        std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns,
+        opt.column_dominance, opt.column_dominance_mode,
+        opt.projection_bound, opt.penalty_domain_tightening);
     result.runtime_seconds = std::chrono::duration<double>(
         std::chrono::steady_clock::now() - start).count();
     result.columns = tree.generated_columns;
@@ -2017,6 +2082,25 @@ ebrp::SolveResult solveGiniCapTreeDiagnostic(const ebrp::Instance& instance,
     result.nodes = tree.nodes_solved;
     result.pricing_time_seconds = tree.pricing_time_seconds;
     result.master_time_seconds = tree.master_time_seconds;
+    result.columns_generated_raw = tree.columns_generated_raw;
+    result.columns_after_dominance = tree.columns_after_dominance;
+    result.columns_dominated = tree.columns_dominated;
+    result.dominance_time_seconds = tree.dominance_time_seconds;
+    result.dominance_mode = tree.dominance_mode;
+    result.dominance_exact_safe = tree.dominance_exact_safe;
+    result.pricing_negative_columns_found = tree.pricing_negative_columns_found;
+    result.pricing_negative_columns_inserted = tree.pricing_negative_columns_inserted;
+    result.pricing_negative_columns_dominated = tree.pricing_negative_columns_dominated;
+    result.pricing_completed_exactly = tree.pricing_completed_exactly;
+    result.projection_bound_prunes = tree.projection_bound_prunes;
+    result.projection_bound_time_seconds = tree.projection_bound_time_seconds;
+    result.projection_bound_best_value = tree.projection_bound_best_value;
+    result.projection_bound_scope = tree.projection_bound_scope;
+    result.penalty_budget = tree.penalty_budget;
+    result.domains_tightened_count = tree.domains_tightened_count;
+    result.total_domain_width_before = tree.total_domain_width_before;
+    result.total_domain_width_after = tree.total_domain_width_after;
+    result.penalty_tightening_time_seconds = tree.penalty_tightening_time_seconds;
     result.pricing_closed_nodes = tree.nodes_solved -
         (tree.complete ? 0 : std::min(1, tree.nodes_solved));
     result.open_nodes = tree.open_nodes;
@@ -2110,8 +2194,19 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.pricing_threads = std::max(1, opt.pricing_threads);
     result.parallel_frontier = opt.parallel_frontier && result.bpc_workers > 1;
     result.parallel_nodes = false;
+    result.dominance_mode = opt.column_dominance ? opt.column_dominance_mode : "off";
+    result.dominance_exact_safe = opt.column_dominance_mode != "pareto";
+    result.projection_bound_scope = "global";
     result.notes.push_back(instance.distance_convention);
     result.notes.push_back("Gamma-frontier diagnostic covers Gini intervals with fixed-Gini interval branch-price trees. It reports optimal only if every relevant interval is closed or bound-fathomed and the aggregated lower bound reaches the incumbent. Each interval also uses the valid trivial bound objective>=G>=interval_floor and a final-inventory pickup/route/Gini relaxation bound when it solves.");
+    result.notes.push_back("Optimization flags: column_dominance="
+        + std::string(opt.column_dominance ? "true" : "false")
+        + ", column_dominance_mode=" + result.dominance_mode
+        + ", projection_bound=" + std::string(opt.projection_bound ? "true" : "false")
+        + ", penalty_domain_tightening=" + std::string(opt.penalty_domain_tightening ? "true" : "false")
+        + ", gcap_pricing_columns=" + std::to_string(opt.gcap_pricing_columns)
+        + ", frontier_column_cache="
+        + std::string(opt.frontier_column_cache ? "requested_but_not_enabled" : "false"));
     {
         const unsigned hw = std::thread::hardware_concurrency();
         std::ostringstream thread_note;
@@ -2185,7 +2280,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             runBpcOwnedIncumbentGenerator(instance, opt, start);
         result.pricing_calls += owned.pricing_calls;
         result.columns += owned.generated_columns;
+        result.columns_generated_raw += owned.columns_generated_raw;
         result.nodes += owned.route_states + owned.operation_states + owned.master_states;
+        result.columns_after_dominance += owned.columns_after_dominance;
+        result.columns_dominated += owned.columns_dominated;
+        result.dominance_time_seconds += owned.dominance_time_seconds;
         for (const std::string& note : owned.notes) result.notes.push_back(note);
         if (owned.found) {
             acceptIncumbentRoutes(owned.routes, "BPC-owned " + opt.bpc_incumbent);
@@ -2313,13 +2412,38 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         int idx = 0;
         FrontierIntervalRecord record;
         ebrp::GiniCapTreeResult tree;
+        ebrp::GiniIntervalInventoryRelaxationBound relaxation_stats;
         bool ran_tree = false;
+        bool has_relaxation_stats = false;
         bool has_candidate = false;
         ebrp::Verification candidate_verification;
         std::vector<ebrp::RoutePlan> candidate_routes;
         std::vector<std::string> notes;
         double bound_time_seconds = 0.0;
     };
+
+    auto accumulateInventoryRelaxationStats =
+        [&](const ebrp::GiniIntervalInventoryRelaxationBound& inv_relax) {
+            if (inv_relax.projection_bound_valid) {
+                result.projection_bound_best_value =
+                    std::max(result.projection_bound_best_value,
+                             inv_relax.projection_objective_lower_bound);
+                result.projection_bound_scope = inv_relax.projection_bound_scope;
+            }
+            result.projection_bound_time_seconds +=
+                inv_relax.projection_bound_time_seconds;
+            if (inv_relax.projection_bound_fathomed) {
+                ++result.projection_bound_prunes;
+            }
+            if (std::isfinite(inv_relax.penalty_budget)) {
+                result.penalty_budget = inv_relax.penalty_budget;
+            }
+            result.domains_tightened_count += inv_relax.domains_tightened_count;
+            result.total_domain_width_before += inv_relax.total_domain_width_before;
+            result.total_domain_width_after += inv_relax.total_domain_width_after;
+            result.penalty_tightening_time_seconds +=
+                inv_relax.penalty_tightening_time_seconds;
+        };
 
     auto processInitialInterval = [&](int idx,
                                       double fixed_upper_bound,
@@ -2358,7 +2482,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         const ebrp::GiniIntervalInventoryRelaxationBound inv_relax =
             ebrp::computeGiniIntervalInventoryRelaxationBound(
                 instance, opt.lambda, lo, hi, relaxation_budget, fixed_upper_bound,
-                opt.route_mask_max_v);
+                opt.route_mask_max_v, opt.projection_bound,
+                opt.penalty_domain_tightening);
+        work.relaxation_stats = inv_relax;
+        work.has_relaxation_stats = true;
         const double bound_elapsed = std::chrono::duration<double>(
             std::chrono::steady_clock::now() - bound_start).count();
         work.bound_time_seconds += bound_elapsed;
@@ -2398,7 +2525,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         work.tree = ebrp::runGiniCapBranchPriceTreeDiagnostic(
             instance, opt.lambda, hi, lo, interval_budget, 24, opt.max_branch_nodes,
             &fixed_incumbent_routes, true, fixed_upper_bound, opt.gcap_warmstart_level,
-            std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns);
+            std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns,
+            opt.column_dominance, opt.column_dominance_mode,
+            opt.projection_bound, opt.penalty_domain_tightening);
         work.ran_tree = true;
         work.record.processed = true;
         work.record.complete = work.tree.complete;
@@ -2452,6 +2581,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     auto applyInitialIntervalWork = [&](const InitialIntervalWork& work) {
         interval_records[work.idx] = work.record;
         result.bound_time_seconds += work.bound_time_seconds;
+        if (work.has_relaxation_stats) {
+            accumulateInventoryRelaxationStats(work.relaxation_stats);
+        }
         for (const std::string& note : work.notes) {
             if (note.find("route_mask_duration_load_relaxation=true") !=
                 std::string::npos) {
@@ -2469,6 +2601,35 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.cuts_added += work.tree.cuts_added;
             result.pricing_time_seconds += work.tree.pricing_time_seconds;
             result.master_time_seconds += work.tree.master_time_seconds;
+            result.columns_generated_raw += work.tree.columns_generated_raw;
+            result.columns_after_dominance += work.tree.columns_after_dominance;
+            result.columns_dominated += work.tree.columns_dominated;
+            result.dominance_time_seconds += work.tree.dominance_time_seconds;
+            result.dominance_mode = work.tree.dominance_mode;
+            result.dominance_exact_safe =
+                result.dominance_exact_safe && work.tree.dominance_exact_safe;
+            result.pricing_negative_columns_found +=
+                work.tree.pricing_negative_columns_found;
+            result.pricing_negative_columns_inserted +=
+                work.tree.pricing_negative_columns_inserted;
+            result.pricing_negative_columns_dominated +=
+                work.tree.pricing_negative_columns_dominated;
+            result.pricing_completed_exactly =
+                result.pricing_completed_exactly && work.tree.pricing_completed_exactly;
+            result.projection_bound_prunes += work.tree.projection_bound_prunes;
+            result.projection_bound_time_seconds += work.tree.projection_bound_time_seconds;
+            result.projection_bound_best_value =
+                std::max(result.projection_bound_best_value,
+                         work.tree.projection_bound_best_value);
+            result.projection_bound_scope = work.tree.projection_bound_scope;
+            result.domains_tightened_count += work.tree.domains_tightened_count;
+            result.total_domain_width_before += work.tree.total_domain_width_before;
+            result.total_domain_width_after += work.tree.total_domain_width_after;
+            result.penalty_tightening_time_seconds +=
+                work.tree.penalty_tightening_time_seconds;
+            if (std::isfinite(work.tree.penalty_budget)) {
+                result.penalty_budget = work.tree.penalty_budget;
+            }
         }
         if (work.has_candidate &&
             work.candidate_verification.feasible &&
@@ -2576,10 +2737,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         const ebrp::GiniIntervalInventoryRelaxationBound inv_relax =
             ebrp::computeGiniIntervalInventoryRelaxationBound(
                 instance, opt.lambda, lo, hi, relaxation_budget, result.upper_bound,
-                opt.route_mask_max_v);
+                opt.route_mask_max_v, opt.projection_bound,
+                opt.penalty_domain_tightening);
         const double bound_elapsed = std::chrono::duration<double>(
             std::chrono::steady_clock::now() - bound_start).count();
         result.bound_time_seconds += bound_elapsed;
+        accumulateInventoryRelaxationStats(inv_relax);
         if (inv_relax.note.find("route_mask_duration_load_relaxation=true") !=
             std::string::npos) {
             result.route_mask_time_seconds += bound_elapsed;
@@ -2616,7 +2779,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         ebrp::GiniCapTreeResult tree = ebrp::runGiniCapBranchPriceTreeDiagnostic(
             instance, opt.lambda, hi, lo, interval_budget, 24, opt.max_branch_nodes,
             &incumbent_routes, true, result.upper_bound, opt.gcap_warmstart_level,
-            std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns);
+            std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns,
+            opt.column_dominance, opt.column_dominance_mode,
+            opt.projection_bound, opt.penalty_domain_tightening);
         result.nodes += tree.nodes_solved;
         result.columns += tree.generated_columns;
         result.pricing_calls += tree.pricing_calls;
@@ -2625,6 +2790,30 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.cuts_added += tree.cuts_added;
         result.pricing_time_seconds += tree.pricing_time_seconds;
         result.master_time_seconds += tree.master_time_seconds;
+        result.columns_generated_raw += tree.columns_generated_raw;
+        result.columns_after_dominance += tree.columns_after_dominance;
+        result.columns_dominated += tree.columns_dominated;
+        result.dominance_time_seconds += tree.dominance_time_seconds;
+        result.dominance_mode = tree.dominance_mode;
+        result.dominance_exact_safe =
+            result.dominance_exact_safe && tree.dominance_exact_safe;
+        result.pricing_negative_columns_found += tree.pricing_negative_columns_found;
+        result.pricing_negative_columns_inserted += tree.pricing_negative_columns_inserted;
+        result.pricing_negative_columns_dominated += tree.pricing_negative_columns_dominated;
+        result.pricing_completed_exactly =
+            result.pricing_completed_exactly && tree.pricing_completed_exactly;
+        result.projection_bound_prunes += tree.projection_bound_prunes;
+        result.projection_bound_time_seconds += tree.projection_bound_time_seconds;
+        result.projection_bound_best_value =
+            std::max(result.projection_bound_best_value,
+                     tree.projection_bound_best_value);
+        result.projection_bound_scope = tree.projection_bound_scope;
+        result.domains_tightened_count += tree.domains_tightened_count;
+        result.total_domain_width_before += tree.total_domain_width_before;
+        result.total_domain_width_after += tree.total_domain_width_after;
+        result.penalty_tightening_time_seconds +=
+            tree.penalty_tightening_time_seconds;
+        if (std::isfinite(tree.penalty_budget)) result.penalty_budget = tree.penalty_budget;
         interval_records[idx].processed = true;
         interval_records[idx].complete = tree.complete;
         interval_records[idx].lower_bound_valid = true;
@@ -2801,10 +2990,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     const ebrp::GiniIntervalInventoryRelaxationBound inv_relax =
                         ebrp::computeGiniIntervalInventoryRelaxationBound(
                             instance, opt.lambda, child.lo, child.hi, relaxation_budget,
-                            result.upper_bound, opt.route_mask_max_v);
+                            result.upper_bound, opt.route_mask_max_v,
+                            opt.projection_bound, opt.penalty_domain_tightening);
                     const double bound_elapsed = std::chrono::duration<double>(
                         std::chrono::steady_clock::now() - bound_start).count();
                     result.bound_time_seconds += bound_elapsed;
+                    accumulateInventoryRelaxationStats(inv_relax);
                     if (inv_relax.note.find("route_mask_duration_load_relaxation=true") !=
                         std::string::npos) {
                         result.route_mask_time_seconds += bound_elapsed;
@@ -2940,7 +3131,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             ebrp::GiniCapTreeResult tree = ebrp::runGiniCapBranchPriceTreeDiagnostic(
                 instance, opt.lambda, record.hi, record.lo, interval_budget, 24,
                 retry_max_nodes, &incumbent_routes, true, result.upper_bound,
-                opt.gcap_warmstart_level, early_stop_target, opt.gcap_pricing_columns);
+                opt.gcap_warmstart_level, early_stop_target, opt.gcap_pricing_columns,
+                opt.column_dominance, opt.column_dominance_mode,
+                opt.projection_bound, opt.penalty_domain_tightening);
             result.nodes += tree.nodes_solved;
             result.columns += tree.generated_columns;
             result.pricing_calls += tree.pricing_calls;
@@ -2949,6 +3142,30 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.cuts_added += tree.cuts_added;
             result.pricing_time_seconds += tree.pricing_time_seconds;
             result.master_time_seconds += tree.master_time_seconds;
+            result.columns_generated_raw += tree.columns_generated_raw;
+            result.columns_after_dominance += tree.columns_after_dominance;
+            result.columns_dominated += tree.columns_dominated;
+            result.dominance_time_seconds += tree.dominance_time_seconds;
+            result.dominance_mode = tree.dominance_mode;
+            result.dominance_exact_safe =
+                result.dominance_exact_safe && tree.dominance_exact_safe;
+            result.pricing_negative_columns_found += tree.pricing_negative_columns_found;
+            result.pricing_negative_columns_inserted += tree.pricing_negative_columns_inserted;
+            result.pricing_negative_columns_dominated += tree.pricing_negative_columns_dominated;
+            result.pricing_completed_exactly =
+                result.pricing_completed_exactly && tree.pricing_completed_exactly;
+            result.projection_bound_prunes += tree.projection_bound_prunes;
+            result.projection_bound_time_seconds += tree.projection_bound_time_seconds;
+            result.projection_bound_best_value =
+                std::max(result.projection_bound_best_value,
+                         tree.projection_bound_best_value);
+            result.projection_bound_scope = tree.projection_bound_scope;
+            result.domains_tightened_count += tree.domains_tightened_count;
+            result.total_domain_width_before += tree.total_domain_width_before;
+            result.total_domain_width_after += tree.total_domain_width_after;
+            result.penalty_tightening_time_seconds +=
+                tree.penalty_tightening_time_seconds;
+            if (std::isfinite(tree.penalty_budget)) result.penalty_budget = tree.penalty_budget;
             record.processed = true;
             record.open_nodes = tree.open_nodes;
             if (tree.complete) {
@@ -3101,10 +3318,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 const ebrp::GiniIntervalInventoryRelaxationBound inv_relax =
                     ebrp::computeGiniIntervalInventoryRelaxationBound(
                         instance, opt.lambda, record.lo, record.hi, relaxation_budget,
-                        result.upper_bound, opt.route_mask_max_v);
+                        result.upper_bound, opt.route_mask_max_v,
+                        opt.projection_bound, opt.penalty_domain_tightening);
                 const double bound_elapsed = std::chrono::duration<double>(
                     std::chrono::steady_clock::now() - bound_start).count();
                 result.bound_time_seconds += bound_elapsed;
+                accumulateInventoryRelaxationStats(inv_relax);
                 if (inv_relax.note.find("route_mask_duration_load_relaxation=true") !=
                     std::string::npos) {
                     result.route_mask_time_seconds += bound_elapsed;
@@ -3144,7 +3363,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 instance, opt.lambda, record.hi, record.lo, interval_budget, 32,
                 std::max(1, opt.frontier_final_nodes), &incumbent_routes, true,
                 result.upper_bound, opt.gcap_warmstart_level,
-                std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns);
+                std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns,
+                opt.column_dominance, opt.column_dominance_mode,
+                opt.projection_bound, opt.penalty_domain_tightening);
             result.nodes += tree.nodes_solved;
             result.columns += tree.generated_columns;
             result.pricing_calls += tree.pricing_calls;
@@ -3153,6 +3374,30 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.cuts_added += tree.cuts_added;
             result.pricing_time_seconds += tree.pricing_time_seconds;
             result.master_time_seconds += tree.master_time_seconds;
+            result.columns_generated_raw += tree.columns_generated_raw;
+            result.columns_after_dominance += tree.columns_after_dominance;
+            result.columns_dominated += tree.columns_dominated;
+            result.dominance_time_seconds += tree.dominance_time_seconds;
+            result.dominance_mode = tree.dominance_mode;
+            result.dominance_exact_safe =
+                result.dominance_exact_safe && tree.dominance_exact_safe;
+            result.pricing_negative_columns_found += tree.pricing_negative_columns_found;
+            result.pricing_negative_columns_inserted += tree.pricing_negative_columns_inserted;
+            result.pricing_negative_columns_dominated += tree.pricing_negative_columns_dominated;
+            result.pricing_completed_exactly =
+                result.pricing_completed_exactly && tree.pricing_completed_exactly;
+            result.projection_bound_prunes += tree.projection_bound_prunes;
+            result.projection_bound_time_seconds += tree.projection_bound_time_seconds;
+            result.projection_bound_best_value =
+                std::max(result.projection_bound_best_value,
+                         tree.projection_bound_best_value);
+            result.projection_bound_scope = tree.projection_bound_scope;
+            result.domains_tightened_count += tree.domains_tightened_count;
+            result.total_domain_width_before += tree.total_domain_width_before;
+            result.total_domain_width_after += tree.total_domain_width_after;
+            result.penalty_tightening_time_seconds +=
+                tree.penalty_tightening_time_seconds;
+            if (std::isfinite(tree.penalty_budget)) result.penalty_budget = tree.penalty_budget;
             record.processed = true;
             record.open_nodes = tree.open_nodes;
             if (tree.complete) {

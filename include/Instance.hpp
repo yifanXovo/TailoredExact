@@ -62,6 +62,11 @@ struct SolveOptions {
     int route_mask_max_v = 12;
     int gcap_warmstart_level = 1; // 0=seed routes only, 1=sparse generic columns, 2=full generic columns
     int gcap_pricing_columns = 1;
+    bool column_dominance = true;
+    std::string column_dominance_mode = "exact";
+    bool projection_bound = true;
+    bool penalty_domain_tightening = true;
+    bool frontier_column_cache = false;
     int inventory_probe_max_v = 7;
     double inventory_probe_seconds = -1.0;
 };
