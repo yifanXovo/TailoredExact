@@ -27,9 +27,10 @@ void usage() {
         << "[--frontier-final-closure true|false] [--frontier-final-nodes <N>] "
         << "[--column-dominance true|false] [--column-dominance-mode exact|pareto|off] "
         << "[--projection-bound true|false] [--penalty-domain-tightening true|false] "
-        << "[--movement-domain-tightening true|false] "
+        << "[--movement-domain-tightening true|false] [--movement-bound-audit true|false] "
         << "[--frontier-best-bound-scheduling true|false] [--frontier-relaxation-cache true|false] "
         << "[--frontier-column-cache true|false] "
+        << "[--support-duration-pruning true|false] [--support-duration-max-subset-size <N>] "
         << "[--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>]\n";
 }
 
@@ -73,9 +74,12 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--projection-bound") opt.projection_bound = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--penalty-domain-tightening") opt.penalty_domain_tightening = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--movement-domain-tightening") opt.movement_domain_tightening = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--movement-bound-audit") opt.movement_bound_audit = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-best-bound-scheduling") opt.frontier_best_bound_scheduling = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-relaxation-cache") opt.frontier_relaxation_cache = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-column-cache") opt.frontier_column_cache = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--support-duration-pruning") opt.support_duration_pruning = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--support-duration-max-subset-size") opt.support_duration_max_subset_size = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--inventory-probe-max-v") opt.inventory_probe_max_v = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--inventory-probe-seconds") opt.inventory_probe_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--out") opt.out_path = requireValue(i, argc, argv);
@@ -91,6 +95,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.bpc_workers <= 0) opt.bpc_workers = std::max(1, opt.threads);
     if (opt.pricing_threads <= 0) opt.pricing_threads = 1;
     if (opt.route_mask_max_v < 0) opt.route_mask_max_v = 0;
+    if (opt.support_duration_max_subset_size < 0) opt.support_duration_max_subset_size = 0;
     if (opt.bpc_incumbent_seconds < 0.0) opt.bpc_incumbent_seconds = 0.0;
     if (opt.bpc_incumbent_rounds < 1) opt.bpc_incumbent_rounds = 1;
     if (opt.frontier_final_nodes < 1) opt.frontier_final_nodes = 1;
@@ -167,6 +172,11 @@ void writeMethodRow(std::ostringstream& out,
         << result.master_time_seconds << ","
         << result.bound_time_seconds << ","
         << result.route_mask_time_seconds << ","
+        << result.gini_max_possible << ","
+        << result.relevant_gini_upper_for_improvement << ","
+        << result.covered_gini_upper_bound << ","
+        << (result.frontier_covers_all_improving_gini_values ? "true" : "false") << ","
+        << csvEscape(result.frontier_range_certificate_scope) << ","
         << result.columns_generated_raw << ","
         << result.columns_after_dominance << ","
         << result.columns_dominated << ","
@@ -200,17 +210,41 @@ void writeMethodRow(std::ostringstream& out,
         << result.pricing_new_negative_projections << ","
         << (result.pricing_blocked_by_duplicate_projection ? "true" : "false") << ","
         << (result.pricing_closure_certified_exact ? "true" : "false") << ","
+        << result.support_duration_cuts_generated << ","
+        << result.support_duration_pruned_labels << ","
+        << result.support_duration_pruned_columns << ","
+        << result.support_duration_max_subset_size << ","
+        << result.support_duration_precompute_time_seconds << ","
         << result.movement_domains_tightened_count << ","
         << result.movement_domain_width_before << ","
         << result.movement_domain_width_after << ","
         << result.movement_tightening_time_seconds << ","
         << result.movement_unreachable_station_count << ","
+        << result.relaxation_lb_no_movement << ","
+        << result.relaxation_lb_with_movement << ","
+        << result.relaxation_lb_used << ","
+        << (result.movement_audit_enabled ? "true" : "false") << ","
+        << result.movement_audit_intervals << ","
+        << result.movement_audit_bound_improved_count << ","
+        << result.movement_audit_bound_worse_count << ","
         << result.frontier_min_interval_lower_bound << ","
         << csvEscape(result.frontier_lower_bound_source) << ","
         << result.frontier_bound_fathomed_interval_count << ","
         << result.frontier_unprocessed_interval_count << ","
         << result.frontier_relax_cache_hits << ","
         << result.frontier_relax_cache_misses << ","
+        << result.frontier_relax_cache_partial_hits << ","
+        << result.frontier_relax_cache_recomputed << ","
+        << result.frontier_relax_cache_best_bound_reused << ","
+        << (result.cheap_prepass_enabled ? "true" : "false") << ","
+        << csvEscape(result.interval_processing_order_initial) << ","
+        << csvEscape(result.interval_processing_order_actual) << ","
+        << result.interval_priority_rebuild_count << ","
+        << result.intervals_skipped_by_cheap_bound << ","
+        << csvEscape(result.incumbent_source) << ","
+        << (result.incumbent_import_attempted ? "true" : "false") << ","
+        << (result.incumbent_import_verified ? "true" : "false") << ","
+        << result.incumbent_import_objective << ","
         << (ebrp::inferCertifiedOriginalProblem(result) ? "true" : "false") << ","
         << csvEscape(result.result_file) << ","
         << csvEscape(result.log_file) << ","
@@ -231,7 +265,10 @@ std::string comparisonCsv(const std::vector<std::pair<ebrp::SolveResult, ebrp::S
         << "verifier_passed,unresolved_intervals,invalid_bound_intervals,pricing_closed_nodes,"
         << "open_nodes,columns,nodes,pricing_calls,cuts_added,bpc_workers,pricing_threads,"
         << "parallel_frontier,parallel_nodes,parallel_tasks,pricing_time_seconds,master_time_seconds,"
-        << "bound_time_seconds,route_mask_time_seconds,columns_generated_raw,columns_after_dominance,"
+        << "bound_time_seconds,route_mask_time_seconds,gini_max_possible,"
+        << "relevant_gini_upper_for_improvement,covered_gini_upper_bound,"
+        << "frontier_covers_all_improving_gini_values,frontier_range_certificate_scope,"
+        << "columns_generated_raw,columns_after_dominance,"
         << "columns_dominated,pricing_columns_enumerated,dominance_input_columns,dominance_kept_columns,"
         << "dominance_removed_columns,dominance_removed_existing_projection,dominance_removed_candidate_projection,"
         << "rmp_columns_inserted,rmp_columns_active,dominance_time_seconds,dominance_mode,dominance_exact_safe,"
@@ -241,11 +278,23 @@ std::string comparisonCsv(const std::vector<std::pair<ebrp::SolveResult, ebrp::S
         << "pricing_negative_columns_inserted,pricing_negative_columns_dominated,pricing_completed_exactly,"
         << "pricing_best_reduced_cost_any,pricing_best_new_reduced_cost,pricing_duplicate_negative_projections,"
         << "pricing_new_negative_projections,pricing_blocked_by_duplicate_projection,pricing_closure_certified_exact,"
+        << "support_duration_cuts_generated,support_duration_pruned_labels,"
+        << "support_duration_pruned_columns,support_duration_max_subset_size,"
+        << "support_duration_precompute_time_seconds,"
         << "movement_domains_tightened_count,movement_domain_width_before,movement_domain_width_after,"
         << "movement_tightening_time_seconds,movement_unreachable_station_count,"
+        << "relaxation_lb_no_movement,relaxation_lb_with_movement,relaxation_lb_used,"
+        << "movement_audit_enabled,movement_audit_intervals,"
+        << "movement_audit_bound_improved_count,movement_audit_bound_worse_count,"
         << "frontier_min_interval_lower_bound,frontier_lower_bound_source,"
         << "frontier_bound_fathomed_interval_count,frontier_unprocessed_interval_count,"
         << "frontier_relax_cache_hits,frontier_relax_cache_misses,"
+        << "frontier_relax_cache_partial_hits,frontier_relax_cache_recomputed,"
+        << "frontier_relax_cache_best_bound_reused,cheap_prepass_enabled,"
+        << "interval_processing_order_initial,interval_processing_order_actual,"
+        << "interval_priority_rebuild_count,intervals_skipped_by_cheap_bound,"
+        << "incumbent_source,incumbent_import_attempted,incumbent_import_verified,"
+        << "incumbent_import_objective,"
         << "certified_original_problem,result_file,log_file,"
         << "paired_method,paired_status,paired_gap,paired_runtime_seconds,"
         << "certified_optimal_speedup,notes\n";

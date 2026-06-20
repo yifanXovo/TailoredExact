@@ -1086,3 +1086,13 @@ Outcome:
 - The existing V4 smoke certificate is preserved.
 - V8 and V10 source input files were not present locally; only V12 reference candidates were available for stress ablations.
 - Plain CPLEX benchmark runs were skipped in this pass; CPLEX was used only by the inventory/route/Gini relaxation when available.
+# 2026-06-20 Round-3 Frontier/Incumbent Safety Pass
+
+- Implemented Gini frontier range audit fields and certificate gating against `min(incumbent objective,(V-1)/V)`.
+- Added movement-bound audit mode, support-duration pricing pruning, relaxation-cache partial-hit/recompute counters, incumbent import metadata, and expanded JSON/CSV reporting.
+- Captured a Windows access violation (`-1073741819`) in V12 M1 BPC-owned `pricing/portfolio` incumbent modes. Debug gdb trace identified `src/main.cpp:1393` reading `col.q[i]` from a malformed incumbent-pool candidate. Fixed by rejecting empty/undersized operation vectors before incumbent pool insertion/use. Post-fix repros exit cleanly.
+- CMake was unavailable; built with the documented `g++` fallback.
+- Smoke diagnostics passed on `testdata/examples/gcap_smoke_V4_M1.txt`, including `pricing`, `pricing-branch`, `cuts`, `branching`, `master`, `cg`, `gcap-cg`, `gcap-tree`, `gcap-frontier`, `dominance-test`, and `support-pruning-test`.
+- Runnable local source instances found for this pass: V4 smoke and V12 regenerated candidates. V8/V10 source text files were not present in this checkout, so round-three ablation reruns for V8/V10 were skipped rather than fabricated.
+- V4 smoke remains certified. V12 M1/M2 average remain noncertified in short ablations; improved_full gives modest lower-bound progress only.
+- Raw outputs and summaries are in `results/optimization_update_round3/`.

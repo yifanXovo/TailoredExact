@@ -148,3 +148,28 @@ This pass adds certificate-preserving improvements to the BPC/frontier implement
 - Initial frontier intervals can be scheduled by deterministic best-bound priority, and interval relaxations can be reused through exact-key caching.
 
 Round-two smoke and ablation outputs are in `results/optimization_update_round2/`. On the local inputs available for this pass, V4 smoke remains certified by BPC. V12 M1/M2 60s stress rows remain noncertified, but their top-level lower bounds now reflect valid interval-ledger progress instead of zero where a valid interval bound exists.
+
+## Third Optimization Pass: Range Coverage, Movement Audit, Support Pruning
+
+This pass adds additional certificate-safety and exactness-preserving runtime tools:
+
+- Frontier coverage is checked against `min(incumbent_objective,(V-1)/V)`. A run with an explicit Gini cap below that range is labeled capped/partial diagnostic rather than original optimal.
+- Movement-bound audit can compute interval relaxations with and without movement-domain tightening and use the stronger valid lower bound.
+- Support-duration pricing pruning removes labels whose station support contains a subset proven impossible by metric-closure route-duration plus minimum handling time.
+- The relaxation cache no longer keys on time budget; larger-budget hits are recomputed and logged as partial hits.
+- BPC-owned incumbent pools now reject malformed route-load candidates with missing operation vectors. This fixed a captured Windows access violation in V12 M1 `--bpc-incumbent pricing/portfolio` repro runs.
+
+Round-three outputs are in `results/optimization_update_round3/`.
+
+| Instance | Variant | Status | UB | LB | Gap | Time (s) | Certified? |
+|---|---|---|---:|---:|---:|---:|---|
+| V4 smoke | off | optimal | 0 | 0 | 0 | 0.0004 | yes |
+| V4 smoke | improved_full | optimal | 0 | 0 | 0 | 0.0005 | yes |
+| V12 M1 average | off | not closed | 0.379830913219 | 0.253220608813 | 0.333333333333 | 28.53 | no |
+| V12 M1 average | improved_full | not closed | 0.379830913219 | 0.253246606270 | 0.333264888517 | 28.59 | no |
+| V12 M2 average | off | not closed | 0.779342269192 | 0.471977495770 | 0.394389969045 | 23.44 | no |
+| V12 M2 average | improved_full | not closed | 0.779342269192 | 0.473381644940 | 0.392588258519 | 23.68 | no |
+
+The local checkout contains runnable V4 and V12 text instances only. V8/V10 source text files were not present, so round-three ablations could not rerun those cases. No new original-problem certificate was obtained in this short pass beyond the V4 smoke certificate. The V12 average rows remain lower-bound progress only.
+
+The captured address error is documented in `results/optimization_update_round3/notes_incumbent_failures.txt`; gdb traces are stored under `results/optimization_update_round3/logs/`. Post-fix repros are `raw/repro_v12_m1_pricing_after_fix.json` and `raw/repro_v12_m1_portfolio_after_fix.json`.
