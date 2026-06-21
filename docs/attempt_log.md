@@ -1383,6 +1383,9 @@ Tests:
   accepted one imported interval bound, and ended with UB `0.719065249476`,
   LB `0.712948394993`, gap `0.008506675142`, one unresolved interval, and no
   certificate.
+- A corrected `--frontier-focus-from-result` diagnostic parsed the full-import
+  ledger and selected the unresolved leaf `[0.489218,0.512514]`; it kept LB
+  `0.712948394993` and remained diagnostic/noncertified.
 - A full V12 M1 300s run ended with UB `0.369698924539`, LB
   `0.282149235152`, gap `0.236813481393`, two unresolved intervals, and no
   certificate.

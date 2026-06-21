@@ -438,7 +438,10 @@ from `0.496993274667` to `0.689652394993`, but the interval did not close and
 retained open nodes. Importing that compatible focus result into a full frontier
 run split the active ledger and raised the full run lower bound to
 `0.712948394993`, leaving one unresolved interval and a noncertified
-`0.008506675142` gap. The V12 M1 focus run also strengthened its selected
+`0.008506675142` gap. A corrected `--frontier-focus-from-result` diagnostic
+then selected the unresolved imported-ledger leaf `[0.489218,0.512514]` and
+confirmed the same interval lower bound within a short diagnostic budget. The
+V12 M1 focus run also strengthened its selected
 interval but did not close the full frontier; the full 300s row remained weaker
 than the isolated focus diagnostic.
 

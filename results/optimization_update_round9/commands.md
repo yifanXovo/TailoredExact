@@ -106,3 +106,13 @@ Select-String -Path results\optimization_update_round9\logs\*.log -Pattern 'erro
 ```
 
 No matches were returned.
+
+## Focus-From-Result Diagnostic
+
+After fixing the ledger-note parser to isolate each `frontier_interval_ledger:` note and validate parsed ranges, this command selected the unresolved leaf from `v12_m2_full_import_300s.json`:
+
+```powershell
+.\build\ExactEBRP.exe --method gcap-frontier --input reference/regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --threads 1 --time-limit 30 --frontier-focus-only true --frontier-focus-from-result results/optimization_update_round9/raw/v12_m2_full_import_300s.json --frontier-focus-leaf-id min-lb --frontier-focus-time-limit 30 --frontier-focus-relax-seconds 5 --frontier-focus-tree-nodes 127 --frontier-intervals 2 --frontier-relax-seconds 2 --max-nodes 63 --bpc-incumbent auto --bpc-incumbent-seconds 2 --bpc-incumbent-rounds 2 --route-pool-incumbent true --gcap-pricing-columns 2 --branch-inventory true --branch-operation-mode true --branch-selection auto --progress-log results/optimization_update_round9/raw/progress_v12_m2_focus_from_result_30s.csv --progress-interval-seconds 10 --out results/optimization_update_round9/raw/v12_m2_focus_from_result_30s.json
+```
+
+Result: selected `[0.489218,0.512514]`, kept LB `0.712948394993`, remained diagnostic and noncertified.

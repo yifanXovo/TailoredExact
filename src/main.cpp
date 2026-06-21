@@ -484,24 +484,33 @@ std::vector<ParsedFrontierInterval> parseFrontierIntervalsFromResultText(
         intervals.push_back(focus);
     }
 
-    std::istringstream lines(text);
-    std::string line;
-    while (std::getline(lines, line)) {
-        const std::size_t marker = line.find("frontier_interval_ledger:");
-        if (marker == std::string::npos) continue;
+    std::size_t search_pos = 0;
+    while (true) {
+        const std::size_t marker =
+            text.find("frontier_interval_ledger:", search_pos);
+        if (marker == std::string::npos) break;
+        std::size_t end = text.find('"', marker);
+        if (end == std::string::npos) end = text.find('\n', marker);
+        const std::string line =
+            text.substr(marker,
+                        end == std::string::npos ? std::string::npos
+                                                  : end - marker);
+        search_pos = (end == std::string::npos) ? marker + 1 : end + 1;
         ParsedFrontierInterval parsed;
-        parsed.valid = true;
         parsed.source = "frontier_interval_ledger_note";
         parseIntAfterToken(line, "interval_id=", parsed.id);
-        const std::size_t range_pos = line.find("range=[", marker);
+        bool range_valid = false;
+        const std::size_t range_pos = line.find("range=[");
         if (range_pos != std::string::npos) {
             const std::size_t range_end = line.find(']', range_pos);
             if (range_end != std::string::npos) {
-                parseGiniRangeString(line.substr(range_pos + 7,
-                                                 range_end - range_pos - 7),
-                                     parsed.lo, parsed.hi);
+                range_valid =
+                    parseGiniRangeString(line.substr(range_pos + 7,
+                                                     range_end - range_pos - 7),
+                                         parsed.lo, parsed.hi);
             }
         }
+        parsed.valid = range_valid;
         parseDoubleAfterToken(line, "interval_lb=", parsed.lower_bound);
         parseIntAfterToken(line, "open_nodes=", parsed.open_nodes);
         const std::size_t status_pos = line.find("status=");

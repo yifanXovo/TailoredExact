@@ -35,3 +35,7 @@ Plain CPLEX benchmarks were skipped in this pass. No CPLEX speedup claims are ma
 - Add stricter compatibility hashing for imported interval-bound reuse across independent runs.
 - Investigate the post-import V12 M2 leaf `[0.489218,0.512514]`, which controls the remaining full-frontier gap.
 - Operation-mode pruning counters currently report zero label/column pruning; the restrictions are enforced, but detailed pruning attribution remains a TODO.
+
+## Focus-From-Result Parser Fix
+
+A short `--frontier-focus-from-result` diagnostic initially exposed that the parser could select the wrong leaf when all JSON notes were on one physical line. The parser now isolates each `frontier_interval_ledger:` note, validates the interval range, and then selects unresolved active leaves. The corrected 30s diagnostic selected `[0.489218,0.512514]` from `v12_m2_full_import_300s.json`, kept LB `0.712948394993`, and remained diagnostic/noncertified.
