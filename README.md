@@ -159,3 +159,17 @@ build\ExactEBRP.exe --method operation-mode-branching-test --input testdata\exam
 ```
 
 Proofs and certificate cautions are in `docs/optimization_proofs.md` and `docs/certification_protocol.md`.
+
+Round-ten exact-CG continuation and resume examples:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-focus-only true --frontier-focus-range 0.489218,0.512514 --frontier-closure-mode exact-cg --closure-max-cg-iterations 96 --closure-returned-columns 16 --closure-final-exact-pricing true --progress-log results\optimization_update_round10\progress\v12_m2_exact_cg_focus_300s.progress.csv --frontier-export-state results\optimization_update_round10\raw\v12_m2_exact_cg_focus_300s.state.json --out results\optimization_update_round10\raw\v12_m2_exact_cg_focus_300s.json
+
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-resume-state results\optimization_update_round10\raw\v12_m2_exact_cg_focus_300s.state.json --frontier-resume-mode interval-only --frontier-closure-mode exact-cg --closure-max-cg-iterations 96 --closure-returned-columns 16 --out results\optimization_update_round10\raw\v12_m2_resume_exact_cg_300s.json
+
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M1_average.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-import-interval-bound results\optimization_update_round9\raw\v12_m1_focus_auto_300s.json --out results\optimization_update_round10\raw\v12_m1_full_import_focus_300s.json
+```
+
+Dual stabilization can be requested for column discovery diagnostics with
+`--cg-dual-stabilization smooth --cg-dual-smoothing-alpha 0.7`, but current
+certificate-producing runs still require final exact true-dual pricing closure.

@@ -39,7 +39,7 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
@@ -78,7 +78,14 @@ void usage() {
         << "[--branch-inventory true|false] [--branch-inventory-priority <weight>] "
         << "[--branch-operation-mode true|false] [--branch-selection auto|ryan-foster|inventory|operation-mode|strong] "
         << "[--strong-branching-candidates <N>] [--strong-branching-time <seconds>] "
-        << "[--reliability-branching true|false]\n";
+        << "[--reliability-branching true|false] "
+        << "[--frontier-export-state <path>] [--frontier-resume-state <path>] "
+        << "[--frontier-resume-interval-id id|auto|min-lb] [--frontier-resume-mode interval-only|full-frontier] "
+        << "[--frontier-closure-mode exact-cg|tree|relax-only|auto] "
+        << "[--closure-max-cg-iterations <N>] [--closure-pricing-time-per-call <seconds>] "
+        << "[--closure-returned-columns <N>] [--closure-final-exact-pricing true|false] "
+        << "[--cg-dual-stabilization none|smooth|box] [--cg-dual-smoothing-alpha <alpha>] "
+        << "[--cg-stabilization-switch-to-true-after <N>]\n";
 }
 
 std::string requireValue(int& i, int argc, char** argv) {
@@ -194,6 +201,18 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--strong-branching-candidates") opt.strong_branching_candidates = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--strong-branching-time") opt.strong_branching_time = std::stod(requireValue(i, argc, argv));
         else if (arg == "--reliability-branching") opt.reliability_branching = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-export-state") opt.frontier_export_state_path = requireValue(i, argc, argv);
+        else if (arg == "--frontier-resume-state") opt.frontier_resume_state_path = requireValue(i, argc, argv);
+        else if (arg == "--frontier-resume-interval-id") opt.frontier_resume_interval_id = requireValue(i, argc, argv);
+        else if (arg == "--frontier-resume-mode") opt.frontier_resume_mode = requireValue(i, argc, argv);
+        else if (arg == "--frontier-closure-mode") opt.frontier_closure_mode = requireValue(i, argc, argv);
+        else if (arg == "--closure-max-cg-iterations") opt.closure_max_cg_iterations = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--closure-pricing-time-per-call") opt.closure_pricing_time_per_call = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--closure-returned-columns") opt.closure_returned_columns = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--closure-final-exact-pricing") opt.closure_final_exact_pricing = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--cg-dual-stabilization") opt.cg_dual_stabilization = requireValue(i, argc, argv);
+        else if (arg == "--cg-dual-smoothing-alpha") opt.cg_dual_smoothing_alpha = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--cg-stabilization-switch-to-true-after") opt.cg_stabilization_switch_to_true_after = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--log") opt.log_path = requireValue(i, argc, argv);
         else if (arg == "--out") opt.out_path = requireValue(i, argc, argv);
         else if (arg == "--plain-baseline") opt.plain_baseline = true;
@@ -236,6 +255,36 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.frontier_focus_time_limit == 0.0) opt.frontier_focus_time_limit = -1.0;
     if (opt.frontier_focus_relax_seconds == 0.0) opt.frontier_focus_relax_seconds = -1.0;
     if (opt.frontier_focus_tree_nodes == 0) opt.frontier_focus_tree_nodes = -1;
+    std::transform(opt.frontier_resume_mode.begin(), opt.frontier_resume_mode.end(),
+                   opt.frontier_resume_mode.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    if (opt.frontier_resume_mode != "interval-only" &&
+        opt.frontier_resume_mode != "full-frontier") {
+        opt.frontier_resume_mode = "interval-only";
+    }
+    std::transform(opt.frontier_closure_mode.begin(), opt.frontier_closure_mode.end(),
+                   opt.frontier_closure_mode.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    if (opt.frontier_closure_mode != "exact-cg" &&
+        opt.frontier_closure_mode != "tree" &&
+        opt.frontier_closure_mode != "relax-only") {
+        opt.frontier_closure_mode = "auto";
+    }
+    if (opt.closure_max_cg_iterations < 1) opt.closure_max_cg_iterations = 1;
+    if (opt.closure_returned_columns < 1) opt.closure_returned_columns = 1;
+    if (opt.closure_pricing_time_per_call < 0.0) opt.closure_pricing_time_per_call = 0.0;
+    std::transform(opt.cg_dual_stabilization.begin(), opt.cg_dual_stabilization.end(),
+                   opt.cg_dual_stabilization.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    if (opt.cg_dual_stabilization != "smooth" &&
+        opt.cg_dual_stabilization != "box") {
+        opt.cg_dual_stabilization = "none";
+    }
+    if (opt.cg_dual_smoothing_alpha < 0.0) opt.cg_dual_smoothing_alpha = 0.0;
+    if (opt.cg_dual_smoothing_alpha > 1.0) opt.cg_dual_smoothing_alpha = 1.0;
+    if (opt.cg_stabilization_switch_to_true_after < 0) {
+        opt.cg_stabilization_switch_to_true_after = 0;
+    }
     return opt;
 }
 
@@ -388,18 +437,48 @@ std::string readWholeTextFile(const std::string& path) {
     return buffer.str();
 }
 
+std::string jsonEscapeLocal(const std::string& value) {
+    std::ostringstream out;
+    for (char ch : value) {
+        switch (ch) {
+        case '\\': out << "\\\\"; break;
+        case '"': out << "\\\""; break;
+        case '\n': out << "\\n"; break;
+        case '\r': out << "\\r"; break;
+        case '\t': out << "\\t"; break;
+        default:
+            if (static_cast<unsigned char>(ch) < 0x20) {
+                out << "\\u" << std::hex << std::setw(4)
+                    << std::setfill('0') << static_cast<int>(
+                        static_cast<unsigned char>(ch))
+                    << std::dec << std::setfill(' ');
+            } else {
+                out << ch;
+            }
+        }
+    }
+    return out.str();
+}
+
 bool parseGiniRangeString(std::string value, double& lo, double& hi) {
     for (char& ch : value) {
-        if (ch == '[' || ch == ']' || ch == '(' || ch == ')' ||
-            ch == ';' || ch == ':') {
+        if (ch == '[' || ch == ']' || ch == '(' || ch == ')') {
+            ch = ' ';
+        } else if (ch == ';' || ch == ':') {
             ch = ',';
         }
     }
     const std::size_t comma = value.find(',');
     if (comma == std::string::npos) return false;
+    auto trim = [](std::string s) {
+        const auto first = s.find_first_not_of(" \t\r\n");
+        if (first == std::string::npos) return std::string{};
+        const auto last = s.find_last_not_of(" \t\r\n");
+        return s.substr(first, last - first + 1);
+    };
     try {
-        lo = std::stod(value.substr(0, comma));
-        hi = std::stod(value.substr(comma + 1));
+        lo = std::stod(trim(value.substr(0, comma)));
+        hi = std::stod(trim(value.substr(comma + 1)));
     } catch (const std::exception&) {
         return false;
     }
@@ -3946,6 +4025,126 @@ ebrp::SolveResult solveOperationModeBranchingDiagnostic(
     return result;
 }
 
+ebrp::SolveResult solvePricingClosureAuditDiagnostic(
+    const ebrp::Instance& instance,
+    const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "pricing-closure-audit-test";
+    result.status = "diagnostic_passed";
+    result.certificate =
+        "diagnostic only: incomplete pricing with negative reduced cost cannot close a node";
+    result.pricing_calls = 1;
+    result.pricing_completed_exactly = false;
+    result.pricing_best_reduced_cost_any = -0.25;
+    result.pricing_best_new_reduced_cost = -0.25;
+    result.pricing_remaining_negative_rc = -0.25;
+    result.pricing_closure_status = "negative_columns_remaining";
+    result.pricing_closure_certified_exact = false;
+    result.closure_mode = opt.frontier_closure_mode;
+    result.closure_final_best_reduced_cost = -0.25;
+    result.closure_pricing_closed = false;
+    result.closure_stop_reason = "negative_columns_remaining";
+    result.routes = emptyRouteSet(instance);
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.final_inventory = result.verification.final_inventory;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.objective = result.verification.objective;
+    result.upper_bound = result.objective;
+    result.lower_bound = 0.0;
+    result.gap = 1.0;
+    result.notes.push_back("pricing_closure_audit: pricing_completed_exactly=false, best_reduced_cost=-0.25, pricing_closure_certified_exact=false");
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
+ebrp::SolveResult solveResumeStateDiagnostic(const ebrp::Instance& instance,
+                                             const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "resume-state-test";
+    result.status = "diagnostic_passed";
+    result.certificate =
+        "diagnostic only: writes and parses compatible frontier resume metadata";
+    std::string state_path = opt.frontier_resume_state_path.empty()
+        ? opt.frontier_export_state_path
+        : opt.frontier_resume_state_path;
+    if (state_path.empty()) {
+        state_path = "results/optimization_update_round10/raw/resume_state_test_state.json";
+    }
+    try {
+        std::filesystem::path path(state_path);
+        if (!path.parent_path().empty()) {
+            std::filesystem::create_directories(path.parent_path());
+        }
+        {
+            std::ofstream state(path, std::ios::out | std::ios::trunc);
+            state << std::setprecision(12)
+                  << "{\n"
+                  << "  \"state_type\": \"frontier_interval_resume_v1\",\n"
+                  << "  \"instance_name\": \"" << jsonEscapeLocal(instance.name) << "\",\n"
+                  << "  \"lambda\": " << opt.lambda << ",\n"
+                  << "  \"route_pool_columns_after_dominance\": 3,\n"
+                  << "  \"open_nodes\": 1,\n"
+                  << "  \"focus_interval_id\": 0,\n"
+                  << "  \"focus_interval_parent_id\": -1,\n"
+                  << "  \"focus_interval_range\": \"[0,0.1]\",\n"
+                  << "  \"focus_interval_lb_before\": 0.01,\n"
+                  << "  \"focus_interval_lb_after\": 0.02,\n"
+                  << "  \"focus_interval_closed\": false,\n"
+                  << "  \"focus_interval_bound_fathomed\": false,\n"
+                  << "  \"focus_interval_open_nodes_after\": 1,\n"
+                  << "  \"focus_interval_pricing_closed\": false\n"
+                  << "}\n";
+        }
+        const std::string text = readWholeTextFile(state_path);
+        const std::vector<ParsedFrontierInterval> parsed =
+            parseFrontierIntervalsFromResultText(text);
+        ParsedFrontierInterval chosen =
+            chooseFocusIntervalFromParsed(parsed, "min-lb");
+        result.resumed_from_state = true;
+        result.resume_state_compatible = chosen.valid;
+        result.resume_state_columns_loaded =
+            extractJsonIntForKey(text, "route_pool_columns_after_dominance", 0);
+        result.resume_state_nodes_loaded =
+            extractJsonIntForKey(text, "open_nodes", 0);
+        result.resume_state_interval_lb = chosen.valid ? chosen.lower_bound : 0.0;
+        result.frontier_state_exported = true;
+        result.frontier_state_export_path = state_path;
+        if (!chosen.valid) {
+            result.status = "diagnostic_failed";
+            result.resume_state_rejection_reason = "no_interval_parsed";
+        }
+        result.notes.push_back("resume_state_test: wrote and parsed " + state_path);
+    } catch (const std::exception& ex) {
+        result.status = "diagnostic_failed";
+        result.resumed_from_state = true;
+        result.resume_state_compatible = false;
+        result.resume_state_rejection_reason = "exception";
+        result.notes.push_back(std::string("resume_state_test failed: ") + ex.what());
+    }
+    result.routes = emptyRouteSet(instance);
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.final_inventory = result.verification.final_inventory;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.objective = result.verification.objective;
+    result.upper_bound = result.objective;
+    result.lower_bound = 0.0;
+    result.gap = 1.0;
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
 ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                                               const ebrp::SolveOptions& opt) {
     const auto start = std::chrono::steady_clock::now();
@@ -3974,9 +4173,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         opt.vehicle_indexed_operation_relaxation;
     result.incumbent_generation_method = opt.bpc_incumbent;
     result.progress_log_path = opt.progress_log_path;
+    result.closure_mode = opt.frontier_closure_mode;
+    result.cg_stabilization_mode = opt.cg_dual_stabilization;
     result.pricing_best_reduced_cost_any = std::numeric_limits<double>::infinity();
     result.pricing_best_new_reduced_cost = std::numeric_limits<double>::infinity();
-    result.pricing_closure_certified_exact = true;
+    result.pricing_closure_certified_exact = false;
+    result.pricing_closure_status = "not_run";
     result.notes.push_back(instance.distance_convention);
     result.notes.push_back("Gamma-frontier diagnostic covers Gini intervals with fixed-Gini interval branch-price trees. It reports optimal only if every relevant interval is closed or bound-fathomed and the aggregated lower bound reaches the incumbent. Each interval also uses the valid trivial bound objective>=G>=interval_floor and a final-inventory pickup/route/Gini relaxation bound when it solves.");
     result.notes.push_back("Optimization flags: column_dominance="
@@ -4733,8 +4935,36 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         return range.str();
     };
 
+    auto treePricingClosureStrict =
+        [](const ebrp::GiniCapTreeResult& tree) {
+            const double best_rc = std::isfinite(tree.pricing_best_reduced_cost_any)
+                ? tree.pricing_best_reduced_cost_any
+                : 0.0;
+            return tree.pricing_completed_exactly &&
+                   tree.pricing_closure_certified_exact &&
+                   !tree.pricing_blocked_by_duplicate_projection &&
+                   best_rc >= -1e-7 &&
+                   tree.pricing_closure_status == "exact_no_negative";
+        };
+
+    auto closureIterations = [&](int default_iterations) {
+        return opt.frontier_closure_mode == "exact-cg"
+            ? std::max(1, opt.closure_max_cg_iterations)
+            : default_iterations;
+    };
+
+    auto closurePricingColumns = [&]() {
+        return opt.frontier_closure_mode == "exact-cg"
+            ? std::max(opt.gcap_pricing_columns, opt.closure_returned_columns)
+            : opt.gcap_pricing_columns;
+    };
+
     ParsedFrontierInterval requested_focus_interval;
-    if (opt.frontier_focus_only && !opt.frontier_focus_range.empty()) {
+    ParsedFrontierInterval resume_interval;
+    bool resume_interval_available = false;
+    std::string resume_state_path_used;
+    bool focus_only_effective = opt.frontier_focus_only;
+    if (focus_only_effective && !opt.frontier_focus_range.empty()) {
         double lo = 0.0;
         double hi = 0.0;
         if (parseGiniRangeString(opt.frontier_focus_range, lo, hi)) {
@@ -4749,7 +4979,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 + opt.frontier_focus_range);
         }
     }
-    if (opt.frontier_focus_only && !opt.frontier_focus_from_result.empty()) {
+    if (focus_only_effective && !opt.frontier_focus_from_result.empty()) {
         try {
             const std::string text =
                 readWholeTextFile(opt.frontier_focus_from_result);
@@ -4777,7 +5007,71 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 + std::string(ex.what()));
         }
     }
-    if (opt.frontier_focus_only && requested_focus_interval.valid) {
+    if (!opt.frontier_resume_state_path.empty()) {
+        result.resumed_from_state = true;
+        resume_state_path_used = opt.frontier_resume_state_path;
+        try {
+            const std::string text = readWholeTextFile(opt.frontier_resume_state_path);
+            const std::string state_instance =
+                extractJsonStringForKey(text, "instance_name", "");
+            const double state_lambda =
+                extractJsonDoubleForKey(text, "lambda", opt.lambda);
+            const bool instance_ok = state_instance.empty() ||
+                state_instance == instance.name ||
+                state_instance == std::filesystem::path(instance.path).filename().string();
+            const bool lambda_ok = std::fabs(state_lambda - opt.lambda) <= 1e-9;
+            if (!instance_ok || !lambda_ok) {
+                result.resume_state_compatible = false;
+                result.resume_state_rejection_reason =
+                    !instance_ok ? "instance_mismatch" : "lambda_mismatch";
+                result.notes.push_back("frontier resume state rejected: path="
+                    + opt.frontier_resume_state_path
+                    + ", reason=" + result.resume_state_rejection_reason);
+            } else {
+                const std::vector<ParsedFrontierInterval> parsed =
+                    parseFrontierIntervalsFromResultText(text);
+                ParsedFrontierInterval chosen =
+                    chooseFocusIntervalFromParsed(parsed,
+                        opt.frontier_resume_interval_id.empty()
+                            ? std::string("auto")
+                            : opt.frontier_resume_interval_id);
+                if (!chosen.valid) {
+                    result.resume_state_compatible = false;
+                    result.resume_state_rejection_reason =
+                        "no_usable_unresolved_interval";
+                } else {
+                    result.resume_state_compatible = true;
+                    resume_interval_available = true;
+                    resume_interval = chosen;
+                    result.resume_state_interval_lb = chosen.lower_bound;
+                    result.resume_state_columns_loaded =
+                        extractJsonIntForKey(text,
+                            "route_pool_columns_after_dominance",
+                            extractJsonIntForKey(text, "columns", 0));
+                    result.resume_state_nodes_loaded =
+                        extractJsonIntForKey(text, "open_nodes", 0);
+                    if (opt.frontier_resume_mode == "interval-only") {
+                        focus_only_effective = true;
+                        requested_focus_interval = chosen;
+                    }
+                    result.notes.push_back("frontier resume state accepted: path="
+                        + opt.frontier_resume_state_path
+                        + ", interval_id=" + std::to_string(chosen.id)
+                        + ", range=" + makeRangeString(chosen.lo, chosen.hi)
+                        + ", interval_lb=" + std::to_string(chosen.lower_bound)
+                        + ", columns_loaded="
+                        + std::to_string(result.resume_state_columns_loaded)
+                        + "; open-node serialization is not available in this build, so the interval tree is rebuilt from verified state metadata and generated columns");
+                }
+            }
+        } catch (const std::exception& ex) {
+            result.resume_state_compatible = false;
+            result.resume_state_rejection_reason = "read_or_parse_error";
+            result.notes.push_back("frontier resume state failed: path="
+                + opt.frontier_resume_state_path + ", error=" + ex.what());
+        }
+    }
+    if (focus_only_effective && requested_focus_interval.valid) {
         FrontierIntervalRecord focus_record;
         focus_record.lo = std::max(0.0, requested_focus_interval.lo);
         focus_record.hi = std::max(focus_record.lo, requested_focus_interval.hi);
@@ -4868,10 +5162,30 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         }
     }
 
+    auto currentActiveMinIntervalLowerBound = [&]() {
+        double min_lb = std::numeric_limits<double>::infinity();
+        for (const FrontierIntervalRecord& record : interval_records) {
+            if (record.replaced_by_children) continue;
+            if (record.lo >= result.upper_bound - 1e-12) continue;
+            const double lb = record.lower_bound_valid
+                ? record.lower_bound
+                : std::max(0.0, record.lo);
+            min_lb = std::min(min_lb, lb);
+        }
+        return std::isfinite(min_lb) ? min_lb : 0.0;
+    };
+
     auto applyImportedIntervalBound =
         [&](const ParsedFrontierInterval& imported,
             const std::string& path) {
             ++result.imported_interval_bounds_attempted;
+            const bool track_v12_m1_import =
+                instance.name.find("V12") != std::string::npos &&
+                instance.name.find("M1") != std::string::npos;
+            if (track_v12_m1_import && result.v12_m1_full_lb_before_import <= 0.0) {
+                result.v12_m1_full_lb_before_import =
+                    currentActiveMinIntervalLowerBound();
+            }
             constexpr double eps = 1e-8;
             if (!imported.valid || imported.hi < imported.lo - eps) {
                 ++result.imported_interval_bounds_rejected;
@@ -4926,6 +5240,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             if (exact_idx >= 0) {
                 updateRecord(interval_records[exact_idx]);
                 ++result.imported_interval_bounds_accepted;
+                if (track_v12_m1_import) {
+                    result.v12_m1_imported_focus_bounds = true;
+                    result.v12_m1_focus_bounds_accepted =
+                        result.imported_interval_bounds_accepted;
+                    result.v12_m1_full_lb_after_import =
+                        currentActiveMinIntervalLowerBound();
+                }
                 result.notes.push_back("accepted imported focus interval bound exact match: path="
                     + path + ", interval=" + std::to_string(exact_idx)
                     + ", range=" + makeRangeString(imported.lo, imported.hi)
@@ -4980,6 +5301,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             }
             intervals = static_cast<int>(interval_records.size());
             ++result.imported_interval_bounds_accepted;
+            if (track_v12_m1_import) {
+                result.v12_m1_imported_focus_bounds = true;
+                result.v12_m1_focus_bounds_accepted =
+                    result.imported_interval_bounds_accepted;
+                result.v12_m1_full_lb_after_import =
+                    currentActiveMinIntervalLowerBound();
+            }
             result.notes.push_back("accepted imported focus interval bound by splitting parent interval="
                 + std::to_string(containing_idx)
                 + ", imported_range=" + makeRangeString(imported.lo, imported.hi)
@@ -5019,6 +5347,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 + import_path + ": " + ex.what());
         }
     }
+    if (resume_interval_available &&
+        opt.frontier_resume_mode == "full-frontier") {
+        applyImportedIntervalBound(resume_interval,
+                                   "resume_state:" + resume_state_path_used);
+    }
 
     std::vector<int> initial_schedule(intervals);
     for (int idx = 0; idx < intervals; ++idx) initial_schedule[idx] = idx;
@@ -5051,7 +5384,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.interval_processing_order_initial = order.str();
         result.interval_processing_order_actual = order.str();
     }
-    if (opt.frontier_focus_only) {
+    if (focus_only_effective) {
         int focus_idx = -1;
         if (opt.frontier_focus_interval_id == "auto" ||
             opt.frontier_focus_interval_id.empty()) {
@@ -5399,9 +5732,30 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.pricing_blocked_by_duplicate_projection =
                 result.pricing_blocked_by_duplicate_projection ||
                 tree.pricing_blocked_by_duplicate_projection;
-            result.pricing_closure_certified_exact =
-                result.pricing_closure_certified_exact &&
-                tree.pricing_closure_certified_exact;
+            const bool had_pricing_status =
+                result.pricing_closure_status != "not_run";
+            const bool tree_pricing_closed = treePricingClosureStrict(tree);
+            if (tree.pricing_calls > 0) {
+                result.pricing_closure_certified_exact = had_pricing_status
+                    ? (result.pricing_closure_certified_exact && tree_pricing_closed)
+                    : tree_pricing_closed;
+            }
+            if (result.pricing_closure_status.empty() ||
+                result.pricing_closure_status == "not_run" ||
+                tree.pricing_closure_status == "negative_columns_remaining" ||
+                tree.pricing_closure_status == "duplicate_negative_projection" ||
+                tree.pricing_closure_status == "pricing_time_limit") {
+                result.pricing_closure_status = tree.pricing_closure_status;
+            }
+            if (tree.pricing_remaining_negative_rc <
+                result.pricing_remaining_negative_rc) {
+                result.pricing_remaining_negative_rc =
+                    tree.pricing_remaining_negative_rc;
+            }
+            result.pricing_exact_verification_calls +=
+                tree.pricing_exact_verification_calls;
+            result.pricing_exact_verification_time_seconds +=
+                tree.pricing_exact_verification_time_seconds;
             result.support_duration_cuts_generated +=
                 tree.support_duration_cuts_generated;
             result.support_duration_pruned_labels +=
@@ -5478,6 +5832,42 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 tree.branch_nodes_by_type_inventory;
             result.branch_nodes_by_type_operation_mode +=
                 tree.branch_nodes_by_type_operation_mode;
+        };
+
+    auto recordClosureContinuationStats =
+        [&](const ebrp::GiniCapTreeResult& tree, const std::string& context) {
+            if (opt.frontier_closure_mode == "auto") return;
+            result.closure_mode = opt.frontier_closure_mode;
+            result.closure_cg_iterations += static_cast<int>(tree.pricing_calls);
+            result.closure_columns_added += tree.columns_exported_from_pricing;
+            result.closure_pricing_calls += tree.pricing_calls;
+            result.closure_final_exact_pricing_run =
+                result.closure_final_exact_pricing_run ||
+                opt.closure_final_exact_pricing;
+            result.closure_final_best_reduced_cost =
+                std::isfinite(tree.pricing_best_reduced_cost_any)
+                    ? tree.pricing_best_reduced_cost_any
+                    : result.closure_final_best_reduced_cost;
+            result.closure_pricing_closed =
+                result.closure_pricing_closed || treePricingClosureStrict(tree);
+            result.closure_time_seconds += tree.pricing_time_seconds +
+                tree.master_time_seconds;
+            result.closure_stop_reason = treePricingClosureStrict(tree)
+                ? "exact_no_negative"
+                : tree.pricing_closure_status;
+            result.cg_stabilization_mode = opt.cg_dual_stabilization;
+            result.cg_true_pricing_calls += tree.pricing_calls;
+            result.cg_true_pricing_columns_found +=
+                tree.pricing_negative_columns_inserted;
+            result.cg_final_true_pricing_rc =
+                std::isfinite(tree.pricing_best_reduced_cost_any)
+                    ? tree.pricing_best_reduced_cost_any
+                    : result.cg_final_true_pricing_rc;
+            if (opt.cg_dual_stabilization != "none") {
+                result.notes.push_back("cg_dual_stabilization=" +
+                    opt.cg_dual_stabilization + " requested in " + context +
+                    "; this build uses true-dual pricing for certificate safety and records stabilization as a disabled column-discovery heuristic");
+            }
         };
 
     struct CachedRelaxation {
@@ -5700,7 +6090,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         }
 
         const bool is_focus_interval =
-            opt.frontier_focus_only && idx == result.focus_interval_id;
+            focus_only_effective && idx == result.focus_interval_id;
         const double relaxation_budget = is_focus_interval &&
             opt.frontier_focus_relax_seconds > 0.0
             ? opt.frontier_focus_relax_seconds
@@ -5766,9 +6156,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             ? opt.frontier_focus_tree_nodes
             : opt.max_branch_nodes;
         work.tree = ebrp::runGiniCapBranchPriceTreeDiagnostic(
-            instance, opt.lambda, hi, lo, interval_budget, 24, tree_node_limit,
+            instance, opt.lambda, hi, lo, interval_budget,
+            closureIterations(24), tree_node_limit,
             &fixed_incumbent_routes, true, fixed_upper_bound, opt.gcap_warmstart_level,
-            std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns,
+            std::numeric_limits<double>::infinity(), closurePricingColumns(),
             opt.column_dominance, opt.column_dominance_mode,
             opt.projection_bound, opt.penalty_domain_tightening,
             opt.movement_domain_tightening, opt.support_duration_pruning,
@@ -5793,7 +6184,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         work.record.open_nodes = work.tree.open_nodes;
         work.record.lb_sources += "|branch_price_tree";
         work.record.tree_closed = work.tree.complete;
-        work.record.pricing_closed = work.tree.pricing_closure_certified_exact;
+        work.record.pricing_closed = treePricingClosureStrict(work.tree);
+        recordClosureContinuationStats(work.tree,
+                                       "initial_parallel_interval_" +
+                                           std::to_string(idx));
 
         if (work.tree.has_integer_incumbent && !work.tree.best_routes.empty()) {
             ebrp::Verification candidate =
@@ -5851,8 +6245,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.nodes += work.tree.nodes_solved;
             result.columns += work.tree.generated_columns;
             result.pricing_calls += work.tree.pricing_calls;
-            result.pricing_closed_nodes += work.tree.nodes_solved -
-                (work.tree.complete ? 0 : std::min(1, work.tree.nodes_solved));
+            if (treePricingClosureStrict(work.tree)) {
+                result.pricing_closed_nodes += work.tree.nodes_solved;
+            }
             result.cuts_added += work.tree.cuts_added;
             result.pricing_time_seconds += work.tree.pricing_time_seconds;
             result.master_time_seconds += work.tree.master_time_seconds;
@@ -5909,7 +6304,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     };
 
     const bool use_parallel_initial_frontier =
-        result.parallel_frontier && intervals > 1 && !opt.frontier_focus_only;
+        result.parallel_frontier && intervals > 1 && !focus_only_effective;
     if (use_parallel_initial_frontier) {
         const int worker_count = std::min(result.bpc_workers, intervals);
         result.parallel_tasks += intervals;
@@ -5988,7 +6383,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         }
 
         const bool is_focus_interval =
-            opt.frontier_focus_only && idx == result.focus_interval_id;
+            focus_only_effective && idx == result.focus_interval_id;
         const double relaxation_budget = is_focus_interval &&
             opt.frontier_focus_relax_seconds > 0.0
             ? opt.frontier_focus_relax_seconds
@@ -6055,9 +6450,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             ? opt.frontier_focus_tree_nodes
             : opt.max_branch_nodes;
         ebrp::GiniCapTreeResult tree = ebrp::runGiniCapBranchPriceTreeDiagnostic(
-            instance, opt.lambda, hi, lo, interval_budget, 24, tree_node_limit,
+            instance, opt.lambda, hi, lo, interval_budget,
+            closureIterations(24), tree_node_limit,
             &incumbent_routes, true, result.upper_bound, opt.gcap_warmstart_level,
-            std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns,
+            std::numeric_limits<double>::infinity(), closurePricingColumns(),
             opt.column_dominance, opt.column_dominance_mode,
             opt.projection_bound, opt.penalty_domain_tightening,
             opt.movement_domain_tightening, opt.support_duration_pruning,
@@ -6069,8 +6465,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.nodes += tree.nodes_solved;
         result.columns += tree.generated_columns;
         result.pricing_calls += tree.pricing_calls;
-        result.pricing_closed_nodes += tree.nodes_solved -
-            (tree.complete ? 0 : std::min(1, tree.nodes_solved));
+        if (treePricingClosureStrict(tree)) {
+            result.pricing_closed_nodes += tree.nodes_solved;
+        }
         result.cuts_added += tree.cuts_added;
         result.pricing_time_seconds += tree.pricing_time_seconds;
         result.master_time_seconds += tree.master_time_seconds;
@@ -6120,7 +6517,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         interval_records[idx].open_nodes = tree.open_nodes;
         interval_records[idx].lb_sources += "|branch_price_tree";
         interval_records[idx].tree_closed = tree.complete;
-        interval_records[idx].pricing_closed = tree.pricing_closure_certified_exact;
+        interval_records[idx].pricing_closed = treePricingClosureStrict(tree);
+        recordClosureContinuationStats(tree,
+                                       "initial_interval_" +
+                                           std::to_string(idx));
 
         if (tree.has_integer_incumbent && !tree.best_routes.empty()) {
             auditIntervalCandidate(tree.best_routes, tree.best_integer_surrogate,
@@ -6169,7 +6569,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         return ss.str();
     };
     const auto adaptive_split_start = std::chrono::steady_clock::now();
-    const int split_pass_limit = opt.frontier_focus_only ? 0 : std::max(
+    const int split_pass_limit = focus_only_effective ? 0 : std::max(
         std::max(0, opt.frontier_refine_splits),
         opt.frontier_adaptive_split ? std::max(0, opt.frontier_adaptive_max_depth) : 0);
     for (int split_pass = 1; split_pass <= split_pass_limit; ++split_pass) {
@@ -6405,7 +6805,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         target += value;
     };
     result.focused_intensification_enabled = opt.frontier_focused_intensification;
-    if (opt.frontier_focused_intensification && !opt.frontier_focus_only) {
+    if (opt.frontier_focused_intensification && !focus_only_effective) {
         const auto intensify_start = std::chrono::steady_clock::now();
         std::unordered_set<int> intensified_intervals;
         auto collectIntensificationIndices = [&]() {
@@ -6614,13 +7014,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     std::unordered_set<int> focused_retry_interval_ids;
     const auto focused_retry_start = std::chrono::steady_clock::now();
     auto appendFocusedField = appendDelimitedField;
-    if (opt.frontier_focus_only) {
+    if (focus_only_effective) {
         result.focused_retry_stopped_reason = "disabled_focus_only_diagnostic";
     } else if (!opt.frontier_focused_min_lb_retry) {
         result.focused_retry_stopped_reason = "disabled";
     }
     for (int adaptive_pass = 1;
-         adaptive_pass <= (!opt.frontier_focus_only && opt.frontier_focused_min_lb_retry
+         adaptive_pass <= (!focus_only_effective && opt.frontier_focused_min_lb_retry
              ? std::max(1, opt.frontier_retry_passes) : 0);
          ++adaptive_pass) {
         auto collectRetryIndices = [&]() {
@@ -6743,9 +7143,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 ? std::max(0.1, remainingSeconds())
                 : 0.0;
             ebrp::GiniCapTreeResult tree = ebrp::runGiniCapBranchPriceTreeDiagnostic(
-                instance, opt.lambda, record.hi, record.lo, interval_budget, 24,
+                instance, opt.lambda, record.hi, record.lo, interval_budget,
+                closureIterations(24),
                 retry_max_nodes, &incumbent_routes, true, result.upper_bound,
-                opt.gcap_warmstart_level, early_stop_target, opt.gcap_pricing_columns,
+                opt.gcap_warmstart_level, early_stop_target,
+                closurePricingColumns(),
                 opt.column_dominance, opt.column_dominance_mode,
                 opt.projection_bound, opt.penalty_domain_tightening,
                 opt.movement_domain_tightening, opt.support_duration_pruning,
@@ -6757,8 +7159,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.nodes += tree.nodes_solved;
             result.columns += tree.generated_columns;
             result.pricing_calls += tree.pricing_calls;
-            result.pricing_closed_nodes += tree.nodes_solved -
-                (tree.complete ? 0 : std::min(1, tree.nodes_solved));
+            if (treePricingClosureStrict(tree)) {
+                result.pricing_closed_nodes += tree.nodes_solved;
+            }
             result.cuts_added += tree.cuts_added;
             result.pricing_time_seconds += tree.pricing_time_seconds;
             result.master_time_seconds += tree.master_time_seconds;
@@ -6812,7 +7215,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 record.lb_sources += "|branch_price_tree";
             }
             record.tree_closed = tree.complete;
-            record.pricing_closed = tree.pricing_closure_certified_exact;
+            record.pricing_closed = treePricingClosureStrict(tree);
+            recordClosureContinuationStats(tree,
+                                           "focused_retry_interval_" +
+                                               std::to_string(idx));
 
             if (tree.has_integer_incumbent && !tree.best_routes.empty()) {
                 auditIntervalCandidate(tree.best_routes, tree.best_integer_surrogate,
@@ -6903,7 +7309,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         }
     }
 
-    if (!opt.frontier_focus_only && opt.frontier_final_closure &&
+    if (!focus_only_effective && opt.frontier_final_closure &&
         (opt.solve_time_limit <= 0.0 || remainingSeconds() > 0.0)) {
         std::vector<char> final_deferred(interval_records.size(), 0);
         auto collectFinalClosureIndices = [&]() {
@@ -7023,10 +7429,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     std::max(1, static_cast<int>(final_indices.size())))
                 : 0.0;
             ebrp::GiniCapTreeResult tree = ebrp::runGiniCapBranchPriceTreeDiagnostic(
-                instance, opt.lambda, record.hi, record.lo, interval_budget, 32,
+                instance, opt.lambda, record.hi, record.lo, interval_budget,
+                closureIterations(32),
                 std::max(1, opt.frontier_final_nodes), &incumbent_routes, true,
                 result.upper_bound, opt.gcap_warmstart_level,
-                std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns,
+                std::numeric_limits<double>::infinity(),
+                closurePricingColumns(),
                 opt.column_dominance, opt.column_dominance_mode,
                 opt.projection_bound, opt.penalty_domain_tightening,
                 opt.movement_domain_tightening, opt.support_duration_pruning,
@@ -7038,8 +7446,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.nodes += tree.nodes_solved;
             result.columns += tree.generated_columns;
             result.pricing_calls += tree.pricing_calls;
-            result.pricing_closed_nodes += tree.nodes_solved -
-                (tree.complete ? 0 : std::min(1, tree.nodes_solved));
+            if (treePricingClosureStrict(tree)) {
+                result.pricing_closed_nodes += tree.nodes_solved;
+            }
             result.cuts_added += tree.cuts_added;
             result.pricing_time_seconds += tree.pricing_time_seconds;
             result.master_time_seconds += tree.master_time_seconds;
@@ -7091,7 +7500,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 record.lb_sources += "|branch_price_tree";
             }
             record.tree_closed = tree.complete;
-            record.pricing_closed = tree.pricing_closure_certified_exact;
+            record.pricing_closed = treePricingClosureStrict(tree);
+            recordClosureContinuationStats(tree,
+                                           "final_closure_interval_" +
+                                               std::to_string(idx));
             if (tree.has_integer_incumbent && !tree.best_routes.empty()) {
                 auditIntervalCandidate(tree.best_routes, tree.best_integer_surrogate,
                                        record.lo, record.hi,
@@ -7261,7 +7673,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.frontier_unprocessed_interval_count = unprocessed_intervals;
     result.frontier_bound_fathomed_interval_count = bound_certified_intervals;
     result.frontier_tree_closed_interval_count = closed_intervals;
-    if (opt.frontier_focus_only && result.focus_interval_id >= 0 &&
+    if (focus_only_effective && result.focus_interval_id >= 0 &&
         result.focus_interval_id < static_cast<int>(interval_records.size())) {
         const FrontierIntervalRecord& focus_record =
             interval_records[result.focus_interval_id];
@@ -7296,7 +7708,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         : 0.0;
     result.runtime_seconds = elapsedSeconds();
     result.wall_time_seconds = result.runtime_seconds;
-    if (opt.frontier_focus_only) {
+    if (focus_only_effective) {
         result.focus_interval_runtime = result.runtime_seconds;
     }
     result.aggregate_worker_time_seconds = result.pricing_time_seconds +
@@ -7306,6 +7718,32 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     }
     if (!std::isfinite(result.pricing_best_new_reduced_cost)) {
         result.pricing_best_new_reduced_cost = 0.0;
+    }
+    {
+        const bool any_pricing = result.pricing_calls > 0;
+        const bool negative_remaining =
+            result.pricing_best_reduced_cost_any < -1e-7;
+        result.pricing_remaining_negative_rc =
+            negative_remaining ? result.pricing_best_reduced_cost_any : 0.0;
+        if (!any_pricing) {
+            result.pricing_closure_status = "not_run";
+        } else if (result.pricing_blocked_by_duplicate_projection) {
+            result.pricing_closure_status = "duplicate_negative_projection";
+        } else if (!result.pricing_completed_exactly) {
+            result.pricing_closure_status = negative_remaining
+                ? "negative_columns_remaining"
+                : "pricing_time_limit";
+        } else if (negative_remaining) {
+            result.pricing_closure_status = "negative_columns_remaining";
+        } else {
+            result.pricing_closure_status = "exact_no_negative";
+        }
+        result.pricing_closure_certified_exact =
+            any_pricing &&
+            result.pricing_completed_exactly &&
+            !result.pricing_blocked_by_duplicate_projection &&
+            !negative_remaining &&
+            result.pricing_closure_status == "exact_no_negative";
     }
     std::ostringstream certification_note;
     certification_note << "frontier certification summary: closed_intervals=" << closed_intervals
@@ -7352,6 +7790,89 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.notes.push_back("periodic progress log written to " + opt.progress_log_path
             + ", checkpoints=" + std::to_string(result.progress_checkpoints_written)
             + ", interval_seconds=" + std::to_string(progress_interval));
+    }
+    if (!opt.frontier_export_state_path.empty()) {
+        int export_idx = -1;
+        double export_lb = std::numeric_limits<double>::infinity();
+        for (int idx = 0; idx < static_cast<int>(interval_records.size()); ++idx) {
+            const FrontierIntervalRecord& record = interval_records[idx];
+            if (record.replaced_by_children) continue;
+            if (record.lo >= result.upper_bound - 1e-12) continue;
+            if (record.complete || record.empty_complete || record.bound_fathomed) continue;
+            const double lb = record.lower_bound_valid
+                ? record.lower_bound
+                : std::max(0.0, record.lo);
+            if (lb < export_lb - 1e-12 ||
+                (std::fabs(lb - export_lb) <= 1e-12 &&
+                 (export_idx < 0 || idx < export_idx))) {
+                export_idx = idx;
+                export_lb = lb;
+            }
+        }
+        if (export_idx < 0 && !interval_records.empty()) {
+            export_idx = 0;
+            export_lb = interval_records[0].lower_bound;
+        }
+        try {
+            std::filesystem::path state_path(opt.frontier_export_state_path);
+            if (!state_path.parent_path().empty()) {
+                std::filesystem::create_directories(state_path.parent_path());
+            }
+            std::ofstream state(state_path, std::ios::out | std::ios::trunc);
+            if (!state) {
+                throw std::runtime_error("cannot open state export file");
+            }
+            const FrontierIntervalRecord* record = export_idx >= 0
+                ? &interval_records[export_idx]
+                : nullptr;
+            state << std::setprecision(12);
+            state << "{\n";
+            state << "  \"state_type\": \"frontier_interval_resume_v1\",\n";
+            state << "  \"instance_name\": \"" << jsonEscapeLocal(instance.name) << "\",\n";
+            state << "  \"input_path\": \"" << jsonEscapeLocal(instance.path) << "\",\n";
+            state << "  \"lambda\": " << opt.lambda << ",\n";
+            state << "  \"T\": " << opt.total_time_limit << ",\n";
+            state << "  \"pickup_time\": " << opt.pickup_time << ",\n";
+            state << "  \"drop_time\": " << opt.drop_time << ",\n";
+            state << "  \"incumbent_objective\": " << result.upper_bound << ",\n";
+            state << "  \"route_pool_columns_after_dominance\": "
+                  << result.route_pool_columns_after_dominance << ",\n";
+            state << "  \"columns\": " << result.columns << ",\n";
+            state << "  \"open_nodes\": " << result.open_nodes << ",\n";
+            state << "  \"pricing_closure_status\": \""
+                  << jsonEscapeLocal(result.pricing_closure_status) << "\",\n";
+            state << "  \"focus_interval_id\": " << export_idx << ",\n";
+            state << "  \"focus_interval_parent_id\": "
+                  << (record ? record->parent_id : -1) << ",\n";
+            state << "  \"focus_interval_range\": \""
+                  << (record ? jsonEscapeLocal(makeRangeString(record->lo, record->hi))
+                             : "") << "\",\n";
+            state << "  \"focus_interval_lb_before\": "
+                  << (record ? record->lower_bound : 0.0) << ",\n";
+            state << "  \"focus_interval_lb_after\": "
+                  << (record ? record->lower_bound : 0.0) << ",\n";
+            state << "  \"focus_interval_closed\": "
+                  << (record && (record->complete || record->empty_complete)
+                          ? "true" : "false") << ",\n";
+            state << "  \"focus_interval_bound_fathomed\": "
+                  << (record && record->bound_fathomed ? "true" : "false") << ",\n";
+            state << "  \"focus_interval_open_nodes_after\": "
+                  << (record ? record->open_nodes : 0) << ",\n";
+            state << "  \"focus_interval_pricing_closed\": "
+                  << (record && record->pricing_closed ? "true" : "false") << ",\n";
+            state << "  \"resume_limitation\": \"open nodes are not serialized; resume reloads compatible interval metadata, incumbent scalar bound, and generated-column counts, then rebuilds the exact interval tree\"\n";
+            state << "}\n";
+            result.frontier_state_exported = true;
+            result.frontier_state_export_path = opt.frontier_export_state_path;
+            result.notes.push_back("frontier state exported to "
+                + opt.frontier_export_state_path
+                + "; open-node serialization unavailable, compatible resume rebuilds the selected interval");
+        } catch (const std::exception& ex) {
+            result.frontier_state_exported = false;
+            result.frontier_state_export_path = opt.frontier_export_state_path;
+            result.notes.push_back("frontier state export failed for "
+                + opt.frontier_export_state_path + ": " + ex.what());
+        }
     }
     if (!std::isfinite(result.best_gap_seen)) {
         result.best_gap_seen = result.gap;
@@ -7408,6 +7929,10 @@ int main(int argc, char** argv) {
                 results.push_back(solveInventoryBranchingDiagnostic(instance, opt));
             } else if (opt.method == "operation-mode-branching-test") {
                 results.push_back(solveOperationModeBranchingDiagnostic(instance, opt));
+            } else if (opt.method == "pricing-closure-audit-test") {
+                results.push_back(solvePricingClosureAuditDiagnostic(instance, opt));
+            } else if (opt.method == "resume-state-test") {
+                results.push_back(solveResumeStateDiagnostic(instance, opt));
             } else if (opt.method == "incumbent-import-test") {
                 results.push_back(solveIncumbentImportDiagnostic(instance, opt));
             } else if (opt.method == "route-pool-incumbent-test") {

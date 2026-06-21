@@ -140,6 +140,8 @@ std::string inferMethodScope(const SolveResult& result) {
         method == "route-mask-support-test" ||
         method == "route-mask-operation-budget-test" ||
         method == "adaptive-frontier-split-test" ||
+        method == "pricing-closure-audit-test" ||
+        method == "resume-state-test" ||
         method == "incumbent-import-test" ||
         method == "route-pool-incumbent-test" ||
         method == "pickup-drop-compat-flow-test" ||
@@ -205,6 +207,8 @@ std::string inferCertificateType(const SolveResult& result) {
     if (method == "route-mask-support-test") return "route_mask_support_duration_diagnostic";
     if (method == "route-mask-operation-budget-test") return "route_mask_operation_budget_diagnostic";
     if (method == "adaptive-frontier-split-test") return "adaptive_frontier_split_diagnostic";
+    if (method == "pricing-closure-audit-test") return "pricing_closure_audit_diagnostic";
+    if (method == "resume-state-test") return "frontier_resume_state_diagnostic";
     if (method == "incumbent-import-test") return "incumbent_import_verification_diagnostic";
     if (method == "route-pool-incumbent-test") return "route_pool_incumbent_diagnostic";
     if (method == "pickup-drop-compat-flow-test") return "pickup_drop_compat_flow_diagnostic";
@@ -369,6 +373,14 @@ std::string resultToJson(const SolveResult& result) {
         << (result.pricing_blocked_by_duplicate_projection ? "true" : "false") << ",\n";
     out << "  \"pricing_closure_certified_exact\": "
         << (result.pricing_closure_certified_exact ? "true" : "false") << ",\n";
+    out << "  \"pricing_closure_status\": \""
+        << jsonEscape(result.pricing_closure_status) << "\",\n";
+    out << "  \"pricing_remaining_negative_rc\": "
+        << finiteOrZero(result.pricing_remaining_negative_rc) << ",\n";
+    out << "  \"pricing_exact_verification_calls\": "
+        << result.pricing_exact_verification_calls << ",\n";
+    out << "  \"pricing_exact_verification_time_seconds\": "
+        << result.pricing_exact_verification_time_seconds << ",\n";
     out << "  \"support_duration_cuts_generated\": "
         << result.support_duration_cuts_generated << ",\n";
     out << "  \"support_duration_pruned_labels\": "
@@ -722,6 +734,61 @@ std::string resultToJson(const SolveResult& result) {
         << result.imported_interval_bounds_closed_intervals << ",\n";
     out << "  \"imported_interval_bounds_rejection_reasons\": \""
         << jsonEscape(result.imported_interval_bounds_rejection_reasons) << "\",\n";
+    out << "  \"resumed_from_state\": "
+        << (result.resumed_from_state ? "true" : "false") << ",\n";
+    out << "  \"resume_state_compatible\": "
+        << (result.resume_state_compatible ? "true" : "false") << ",\n";
+    out << "  \"resume_state_columns_loaded\": "
+        << result.resume_state_columns_loaded << ",\n";
+    out << "  \"resume_state_nodes_loaded\": "
+        << result.resume_state_nodes_loaded << ",\n";
+    out << "  \"resume_state_interval_lb\": "
+        << result.resume_state_interval_lb << ",\n";
+    out << "  \"resume_state_rejection_reason\": \""
+        << jsonEscape(result.resume_state_rejection_reason) << "\",\n";
+    out << "  \"frontier_state_exported\": "
+        << (result.frontier_state_exported ? "true" : "false") << ",\n";
+    out << "  \"frontier_state_export_path\": \""
+        << jsonEscape(result.frontier_state_export_path) << "\",\n";
+    out << "  \"closure_mode\": \"" << jsonEscape(result.closure_mode) << "\",\n";
+    out << "  \"closure_cg_iterations\": "
+        << result.closure_cg_iterations << ",\n";
+    out << "  \"closure_columns_added\": "
+        << result.closure_columns_added << ",\n";
+    out << "  \"closure_pricing_calls\": "
+        << result.closure_pricing_calls << ",\n";
+    out << "  \"closure_final_exact_pricing_run\": "
+        << (result.closure_final_exact_pricing_run ? "true" : "false") << ",\n";
+    out << "  \"closure_final_best_reduced_cost\": "
+        << finiteOrZero(result.closure_final_best_reduced_cost) << ",\n";
+    out << "  \"closure_pricing_closed\": "
+        << (result.closure_pricing_closed ? "true" : "false") << ",\n";
+    out << "  \"closure_time_seconds\": "
+        << result.closure_time_seconds << ",\n";
+    out << "  \"closure_stop_reason\": \""
+        << jsonEscape(result.closure_stop_reason) << "\",\n";
+    out << "  \"cg_stabilization_mode\": \""
+        << jsonEscape(result.cg_stabilization_mode) << "\",\n";
+    out << "  \"cg_stabilized_pricing_calls\": "
+        << result.cg_stabilized_pricing_calls << ",\n";
+    out << "  \"cg_true_pricing_calls\": "
+        << result.cg_true_pricing_calls << ",\n";
+    out << "  \"cg_stabilization_columns_found\": "
+        << result.cg_stabilization_columns_found << ",\n";
+    out << "  \"cg_true_pricing_columns_found\": "
+        << result.cg_true_pricing_columns_found << ",\n";
+    out << "  \"cg_stabilization_time_seconds\": "
+        << result.cg_stabilization_time_seconds << ",\n";
+    out << "  \"cg_final_true_pricing_rc\": "
+        << finiteOrZero(result.cg_final_true_pricing_rc) << ",\n";
+    out << "  \"v12_m1_imported_focus_bounds\": "
+        << (result.v12_m1_imported_focus_bounds ? "true" : "false") << ",\n";
+    out << "  \"v12_m1_focus_bounds_accepted\": "
+        << result.v12_m1_focus_bounds_accepted << ",\n";
+    out << "  \"v12_m1_full_lb_before_import\": "
+        << result.v12_m1_full_lb_before_import << ",\n";
+    out << "  \"v12_m1_full_lb_after_import\": "
+        << result.v12_m1_full_lb_after_import << ",\n";
     out << "  \"inventory_branch_candidates\": "
         << result.inventory_branch_candidates << ",\n";
     out << "  \"inventory_branch_nodes_created\": "

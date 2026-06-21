@@ -465,3 +465,38 @@ intervals without relabeling interval diagnostics as full BPC certificates. Raw
 JSON, logs, progress traces, and CSV summaries are stored in
 `results/optimization_update_round9/`. Plain CPLEX benchmarks were skipped, so
 no CPLEX speedup claims are made.
+
+## Tenth Optimization Pass: Exact CG Continuation, Pricing Closure Audit, And V12 Focus-Bound Imports
+
+This pass fixes pricing-closure reporting and adds interval state export/resume
+metadata plus an exact-CG continuation mode for unresolved focus intervals.
+Pricing closure is now reported false whenever exact pricing is incomplete,
+negative reduced cost remains, or duplicate-negative projection blockage is
+unresolved. Focus/resume/import runs remain diagnostic unless the complete
+frontier ledger closes.
+
+| Instance | Variant | Status | UB | LB | Gap | Pricing status | Notes |
+|---|---|---|---:|---:|---:|---|---|
+| V4 smoke | gcap-frontier | optimal | 0 | 0 | 0 | duplicate_negative_projection | certified by zero nonnegative objective, not by pricing closure |
+| V12 M2 average | exact_cg_focus_300s | not closed | 0.719065249476 | 0.712948394993 | 0.008506675142 | pricing_time_limit | focus interval `[0.489218,0.512514]`; state exported |
+| V12 M2 average | resume_exact_cg_300s | not closed | 0.719065249476 | 0.712948394993 | 0.008506675142 | pricing_time_limit | compatible state loaded; open nodes rebuilt, not serialized |
+| V12 M2 average | exact_cg_focus_smooth_60s | not closed | 0.719065249476 | 0.712948394993 | 0.008506675142 | pricing_time_limit | smoothing requested but true-dual pricing used for safety |
+| V12 M2 average | full_import_focus_300s | not closed | 0.719065249476 | 0.657495783410 | 0.085624310327 | negative_columns_remaining | imported focus bound accepted; other active leaves still open |
+| V12 M1 average | full_import_focus_300s | not closed | 0.375405784113 | 0.330637000000 | 0.119254380214 | pricing_time_limit | round-nine focus bound accepted; other intervals control closure |
+
+The V12 M2 focus interval reproduced the previous near-closed bound but did not
+achieve exact pricing closure. The final reduced cost reported by the focus run
+was numerically zero, but pricing timed out before exact completion, so the run
+remains noncertified. The full V12 M2 import run accepted the focus evidence but
+still found remaining negative reduced cost in another interval. This validates
+the new reporting rule: lower-bound progress is preserved without converting an
+incomplete pricing run into a certificate.
+
+State export currently records compatible interval metadata, incumbent scalar
+data, lower bounds, and generated-column counts. It does not serialize live open
+branch-price nodes, so resumed runs rebuild the exact tree. This is safe but
+does not yet deliver the desired warm continuation speedup.
+
+Raw JSON, logs, progress traces, and CSV summaries are stored in
+`results/optimization_update_round10/`. Plain CPLEX benchmarks were skipped in
+this pass, so no CPLEX speedup claims are made.
