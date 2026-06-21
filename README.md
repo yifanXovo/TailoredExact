@@ -38,8 +38,14 @@ build\ExactEBRP.exe --method gcap-frontier --input testdata\examples\gcap_smoke_
 - `--support-duration-max-subset-size N`: maximum station subset size used for support-duration pruning precomputation.
 - `--route-mask-support-duration-pruning true|false`: apply the same exact-safe support-duration infeasibility test to complete route-mask relaxation masks.
 - `--frontier-focused-min-lb-retry true|false`: spend retry time on the unresolved frontier interval with the smallest valid lower bound.
+- `--frontier-focused-intensification true|false`: reserve time to rerun stronger relaxations on the current minimum-LB unresolved interval.
+- `--frontier-focused-reserve-fraction x`: fraction of the time limit reserved for focused intensification.
 - `--route-pool-incumbent true|false`: collect verified BPC-generated route-load columns and solve a true-objective restricted route-column incumbent master for upper bounds only.
+- `--route-pool-max-columns-per-vehicle N`: cap stored route-pool columns per vehicle after projection dominance.
 - `--pickup-drop-compat-flow true|false`: strengthen the inventory/route/Gini relaxation with pickup-to-drop compatibility flow variables when pairs can be safely screened by route-duration lower bounds.
+- `--pickup-drop-transfer-cap-flow true|false`: add safe quantity upper bounds to pickup-drop transfer variables from travel/handling lower bounds and capacities.
+- `--bpc-incumbent auto|best-of-all`: run a bounded verified incumbent portfolio and select the best true-objective route plan as an upper bound.
+- `--progress-log <path> --progress-interval-seconds <seconds>`: write frontier progress checkpoints for convergence reporting.
 - `--support-feasibility-oracle true|false`: reserved switch for exact small-support infeasibility checking; default is false and heuristic support cuts are not generated.
 - `--incumbent-json <path> --incumbent-format exact_result --incumbent-source-name <name>`: import a verified incumbent route solution as an upper-bound/cutoff source only.
 - `--incumbent-format auto|exact_result|route_json|csv`: parse incumbent files as ExactEBRP result JSON, route JSON, or CSV with vehicle/order/station/pickup/drop columns.
@@ -70,6 +76,19 @@ Route-pool incumbent and compatibility-flow diagnostics:
 ```powershell
 build\ExactEBRP.exe --method route-pool-incumbent-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --route-pool-incumbent true --out results\optimization_update_round5\raw\smoke_route-pool-incumbent-test.json
 build\ExactEBRP.exe --method pickup-drop-compat-flow-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --pickup-drop-compat-flow true --out results\optimization_update_round5\raw\smoke_pickup-drop-compat-flow-test.json
+```
+
+Round-six example with auto incumbent selection, route-pool harvesting, focused
+relaxation intensification, transfer-cap flow, and progress logging:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --threads 4 --bpc-workers 4 --pricing-threads 1 --time-limit 300 --frontier-intervals 2 --frontier-retry-passes 0 --max-nodes 3 --bpc-incumbent auto --bpc-incumbent-seconds 30 --route-pool-incumbent true --route-pool-max-columns-per-vehicle 5000 --frontier-focused-min-lb-retry true --frontier-focused-intensification true --frontier-focused-reserve-fraction 0.25 --frontier-focused-relax-seconds 4 --frontier-focused-max-passes 2 --pickup-drop-compat-flow true --pickup-drop-transfer-cap-flow true --progress-log results\optimization_update_round6\raw\progress_v12_m2_average_improved_full_300s.csv --out results\optimization_update_round6\raw\ablation_v12_m2_average_improved_full_300s.json
+```
+
+Transfer-cap diagnostic:
+
+```powershell
+build\ExactEBRP.exe --method pickup-drop-transfer-cap-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --pickup-drop-compat-flow true --pickup-drop-transfer-cap-flow true --out results\optimization_update_round6\raw\smoke_pickup-drop-transfer-cap-test.json
 ```
 
 Proofs and certificate cautions are in `docs/optimization_proofs.md` and `docs/certification_protocol.md`.

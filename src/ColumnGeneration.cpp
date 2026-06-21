@@ -2477,6 +2477,7 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
     };
 
     GiniCapTreeResult result;
+    result.columns_by_vehicle.assign(instance.M, {});
     result.pricing_best_reduced_cost_any =
         std::numeric_limits<double>::infinity();
     result.pricing_best_new_reduced_cost =
@@ -2644,6 +2645,27 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
             + num(result.best_integer_surrogate));
     } else {
         result.notes.push_back("empty-route solution violates supplied fixed Gini cap; starting without a fixed-cap integer incumbent");
+    }
+
+    auto exportColumn = [&](const RouteLoadColumn& column,
+                            const std::string& source) {
+        if (column.vehicle < 0 || column.vehicle >= instance.M) return;
+        result.columns_by_vehicle[column.vehicle].push_back(column);
+        result.flat_columns.push_back(column);
+        ++result.columns_exported_from_tree;
+        if (source == "warmstart") {
+            result.warm_start_columns.push_back(column);
+            ++result.columns_exported_from_warmstart;
+        } else if (source == "pricing") {
+            result.priced_columns_added.push_back(column);
+            ++result.columns_exported_from_pricing;
+        } else if (source == "integer_leaf") {
+            result.integer_leaf_columns.push_back(column);
+            ++result.columns_exported_from_integer_leaves;
+        }
+    };
+    for (const auto& cols : root_columns) {
+        for (const RouteLoadColumn& col : cols) exportColumn(col, "warmstart");
     }
 
     std::deque<TreeNode> open;
@@ -2850,6 +2872,9 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
             support_duration_pruning_enabled, support_duration_max_subset_size);
         ++result.nodes_solved;
         addStats(result, lp_node);
+        for (const RouteLoadColumn& col : lp_node.flat_columns) {
+            exportColumn(col, "pricing");
+        }
 
         std::ostringstream solved_note;
         solved_note << "node " << result.nodes_solved
@@ -2921,6 +2946,7 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
                 for (int c = 0; c < static_cast<int>(lp_node.flat_columns.size()); ++c) {
                     if (lp_node.z_values[c] <= 1.0 - 1e-7) continue;
                     const RouteLoadColumn& col = lp_node.flat_columns[c];
+                    exportColumn(col, "integer_leaf");
                     if (col.vehicle >= 0 && col.vehicle < instance.M) {
                         selected_by_vehicle[col.vehicle] =
                             findColumnIndex(lp_node.columns_by_vehicle[col.vehicle], col);

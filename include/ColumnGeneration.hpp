@@ -253,6 +253,15 @@ struct GiniCapTreeResult {
     ObjectiveParts best_integer_parts;
     std::vector<int> best_final_inventory;
     std::vector<RoutePlan> best_routes;
+    std::vector<std::vector<RouteLoadColumn>> columns_by_vehicle;
+    std::vector<RouteLoadColumn> flat_columns;
+    std::vector<RouteLoadColumn> priced_columns_added;
+    std::vector<RouteLoadColumn> warm_start_columns;
+    std::vector<RouteLoadColumn> integer_leaf_columns;
+    long long columns_exported_from_tree = 0;
+    long long columns_exported_from_pricing = 0;
+    long long columns_exported_from_warmstart = 0;
+    long long columns_exported_from_integer_leaves = 0;
     std::vector<std::string> notes;
 };
 

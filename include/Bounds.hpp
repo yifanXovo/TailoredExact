@@ -54,6 +54,13 @@ struct GiniIntervalInventoryRelaxationBound {
     long long pickup_drop_pairs_total = 0;
     long long pickup_drop_pairs_compatible = 0;
     long long pickup_drop_pairs_incompatible = 0;
+    long long pickup_drop_pairs_capacity_limited = 0;
+    double pickup_drop_transfer_cap_min = 0.0;
+    double pickup_drop_transfer_cap_avg = 0.0;
+    double pickup_drop_transfer_cap_max = 0.0;
+    long long pickup_drop_transfer_cap_variables = 0;
+    long long pickup_drop_transfer_cap_constraints = 0;
+    double pickup_drop_transfer_cap_time_seconds = 0.0;
     long long pickup_drop_compat_flow_variables = 0;
     long long pickup_drop_compat_flow_constraints = 0;
     double pickup_drop_compat_flow_time_seconds = 0.0;
@@ -109,7 +116,8 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     bool penalty_domain_tightening_enabled = true,
     bool movement_domain_tightening_enabled = true,
     bool route_mask_support_duration_pruning_enabled = true,
-    bool pickup_drop_compat_flow_enabled = true);
+    bool pickup_drop_compat_flow_enabled = true,
+    bool pickup_drop_transfer_cap_flow_enabled = true);
 
 InventoryRatioProjectionBound computeInventoryRatioProjectionBound(
     const Instance& instance,

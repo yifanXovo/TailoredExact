@@ -275,6 +275,74 @@ Future support cuts may be added only when an exact one-vehicle route-load oracl
 proves that no route order and integer operation vector can realize the support.
 Timeouts or sampled failures are not infeasibility proofs.
 
+## Sixth Optimization Pass: Auto Incumbents, Full Route-Pool Harvesting, Focused Intensification, And Transfer Caps
+
+### Best-Of-All Verified Incumbent Selector
+
+The `--bpc-incumbent auto` and `--bpc-incumbent best-of-all` modes run a bounded
+portfolio of incumbent generators and accept only candidates that pass the
+independent verifier. The selected candidate is the verified route plan with the
+smallest true objective `G + lambda P`. This is a primal heuristic: it supplies a
+valid upper bound, can shrink the improving Gini range, and can tighten
+penalty-budget domains. It never supplies lower-bound evidence and cannot close
+an interval or branch-price node.
+
+### Full Route-Column Pool Harvesting
+
+Gini-cap tree and column-generation results now export warm-start, priced, and
+integer-leaf route-load columns to the frontier route pool. Every exported
+column is still individually feasible before pool insertion, and the pool applies
+projection dominance by vehicle, station mask, and signed operation vector. A
+per-vehicle cap may drop retained columns by a deterministic quality ordering;
+this affects only the restricted incumbent search. The route-pool master remains
+a primal upper-bound heuristic because it optimizes over a subset of feasible
+columns. No absence of improvement is interpreted as a lower bound.
+
+### Focused Relaxation Intensification
+
+Focused intensification reserves part of the frontier wall-clock budget and
+reruns the inventory/route/Gini relaxation on the unresolved interval currently
+defining the global lower-bound ledger. The new interval lower bound is accepted
+only as `max(old_valid_lb,new_valid_lb)`. If the intensified relaxation does not
+improve the valid bound, the interval remains unresolved and the global status
+stays positive-gap. This changes only runtime allocation and lower-bound effort;
+all frontier intervals remain in the ledger.
+
+### Quantity-Aware Pickup-Drop Transfer-Cap Flow
+
+For pickup station `i`, drop station `j`, and vehicle `k`, any bike transferred
+from `i` to `j` must travel on a route that visits `i` before `j` and returns to
+the depot. Therefore its travel time is at least:
+
+```text
+metric_dist(0,i) + metric_dist(i,j) + metric_dist(j,0).
+```
+
+If `cunit = pickup_time + drop_time`, the transfer quantity is also bounded by:
+
+```text
+floor((T_k - path_lb_ijk) / cunit),
+Q_k,
+pickup availability at i,
+drop residual capacity at j.
+```
+
+The relaxation uses the maximum of these valid vehicle-specific caps over
+vehicles. A pair with zero safe cap is omitted; otherwise `0 <= f_ij <= cap_ij`
+is added. The rule never uses heuristic route failure. If a cap cannot be safely
+computed, a loose cap is retained. These inequalities are necessary for every
+feasible route-load solution and can only strengthen the relaxation lower bound.
+They are not a standalone optimality certificate.
+
+### Time-To-Gap Reporting
+
+The `--progress-log` option records frontier lower-bound and incumbent progress
+for long runs. In the current implementation the round-six trace is a lightweight
+final checkpoint rather than a periodic event stream. It records the same
+certificate fields used by the JSON result and is a reporting aid only. Longer
+runtime or a decreasing gap does not imply certification unless the full
+frontier ledger closes with gap zero.
+
 ## Fifth Optimization Pass: Focused Retry, Route-Pool Incumbents, And Compatibility Flow
 
 ### Executed Focused Min-LB Retry
