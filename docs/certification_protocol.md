@@ -327,3 +327,32 @@ All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `
   zero open nodes, a verifier pass, and gap zero.
 - Time-limited 1200s convergence rows remain noncertified when the frontier
   ledger has positive gap or unresolved intervals, regardless of gap decrease.
+
+## 2026-06-21 Round-9 Certificate Warnings
+
+- Focus-only interval runs can target an explicit Gini range or a leaf parsed
+  from a previous frontier result. They report
+  `focus_interval_certificate_scope=diagnostic_interval_only` and cannot certify
+  the original problem unless their bounds are merged into a compatible full
+  frontier ledger whose every relevant leaf is closed, empty, or validly
+  fathomed.
+- Imported focus-interval bounds are accepted only as lower-bound evidence for
+  the covered interval. They are certificate-safe only when the instance,
+  lambda/objective convention, Gini range, incumbent-cutoff meaning, and active
+  route/load restrictions are compatible. If the import covers a subrange, the
+  parent frontier leaf must be split without gaps or overlaps before using the
+  imported bound.
+- Final-inventory branching is exact because station final inventories are
+  integer in every original feasible route-load solution; the two branches
+  `Y_i <= floor(Y_i*)` and `Y_i >= ceil(Y_i*)` partition all integer
+  completions of a fractional LP point.
+- Operation-mode branching is exact because pricing and node column screening
+  enforce the selected signed-operation restrictions. Forbid-pickup and
+  forbid-drop children are search branches, not primal heuristics.
+- Strong/reliability branch selection changes only which valid branch is explored
+  first. It does not change the lower-bound certificate requirements. The
+  current `strong` mode is a bounded scoring implementation, not a full
+  child-LP strong-branching certificate.
+- Positive-gap focus-only, imported-bound, or full-frontier runs remain
+  noncertified even when they substantially improve the active lower-bound
+  ledger.

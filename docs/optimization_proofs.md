@@ -555,3 +555,72 @@ are suitable for regression and scalability testing, but they must not be
 reported as historical paper targets unless their source data match the
 historical inputs exactly.
 
+## Ninth Optimization Pass: Inventory Branching, Operation-Mode Branching, And Focus-Interval Bounds
+
+### Final-Inventory Branching
+
+For station `i`, every original feasible solution has integer final inventory
+
+```text
+Y_i = I_i + sum_c q_{c,i} z_c
+```
+
+because `I_i` and all route-load pickup/drop quantities are integer. If a
+branch-price LP solution has fractional value `Y_i*`, the two children
+
+```text
+Y_i <= floor(Y_i*)
+Y_i >= ceil(Y_i*)
+```
+
+partition all integer feasible completions and exclude the fractional parent
+point. In column form these are rows on `sum_c q_{c,i} z_c`; their duals enter
+pricing through each column's signed inventory-change coefficient `q_{c,i}`.
+Nodes with inconsistent inventory lower and upper bounds are infeasible. This
+branching is exact because it removes no integer feasible solution from the
+union of the two children.
+
+### Operation-Mode Branching
+
+Each served station has a signed operation mode in a route-load column:
+positive `q_i` means net drop, negative `q_i` means net pickup, and `q_i = 0`
+means no net station operation. If the LP relaxation mixes pickup and drop
+implications for a station, the branch
+
+```text
+child A: forbid pickup at station i
+child B: forbid drop at station i
+```
+
+partitions signed integer route-load columns by operation mode. Pricing enforces
+the restrictions by rejecting pickup labels when pickup is forbidden and drop
+labels when drop is forbidden; warm-start and route-pool columns are screened by
+the same restriction logic before node use. The branch is exact because every
+integer route-load solution belongs to at least one child under the selected
+mixed-mode condition.
+
+### Branch Selection And Strong-Branching Caution
+
+Ryan-Foster, final-inventory, operation-mode, and served/unserved branches are
+all exact branching disjunctions. The implemented `auto` and `strong` selection
+modes choose among valid branch candidates and therefore affect only search
+order, not the feasible set or certificate logic. In this pass, `strong` mode is
+a bounded cheap scoring/reliability selector rather than a full child-LP
+strong-branching solve; it is reported as a search heuristic and not as a
+separate lower-bound certificate.
+
+### Imported Focus-Interval Bounds
+
+A focus-only interval run may produce a valid lower bound for its selected Gini
+range. Such evidence can be merged into a full frontier ledger only when the
+covered range, instance, objective convention, incumbent cutoff meaning, route
+and loading restrictions, and certificate scope are compatible with the target
+frontier run. If the imported range exactly matches an active leaf, its valid
+bound may replace the leaf lower bound by `max(old_lb, imported_lb)`. If it
+covers a strict subrange, the active leaf must be split into children that
+exactly cover the parent before assigning the imported bound to the matching
+child. The global lower bound remains the minimum over all active leaf
+intervals. Imported focus evidence is not an original-problem certificate by
+itself; it becomes part of a certificate only if the entire compatible frontier
+ledger closes or is validly bound-fathomed.
+

@@ -141,4 +141,21 @@ The generated files are written to `reference\generated\` with
 `reference\generated\manifest.csv`. They are regression and engineering
 benchmarks unless proven identical to historical paper inputs.
 
+Round-nine focus-range and branching examples:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-focus-only true --frontier-focus-range 0.465922,0.512514 --frontier-focus-time-limit 300 --frontier-focus-relax-seconds 30 --max-nodes 255 --branch-inventory true --branch-operation-mode true --branch-selection auto --progress-log results\optimization_update_round9\raw\progress_v12_m2_focus_auto_300s.csv --out results\optimization_update_round9\raw\v12_m2_focus_auto_300s.json
+
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-import-interval-bound results\optimization_update_round9\raw\v12_m2_focus_auto_300s.json --branch-inventory true --branch-operation-mode true --branch-selection auto --out results\optimization_update_round9\raw\v12_m2_full_import_300s.json
+
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 60 --frontier-focus-only true --frontier-focus-range 0.465922,0.512514 --branch-selection strong --strong-branching-candidates 3 --branch-inventory true --branch-operation-mode true --out results\optimization_update_round9\raw\v12_m2_focus_strong_60s.json
+```
+
+Branching diagnostics:
+
+```powershell
+build\ExactEBRP.exe --method inventory-branching-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --branch-inventory true --out results\optimization_update_round9\raw\smoke_inventory-branching-test.json
+build\ExactEBRP.exe --method operation-mode-branching-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --branch-operation-mode true --out results\optimization_update_round9\raw\smoke_operation-mode-branching-test.json
+```
+
 Proofs and certificate cautions are in `docs/optimization_proofs.md` and `docs/certification_protocol.md`.

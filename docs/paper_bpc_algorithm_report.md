@@ -414,3 +414,54 @@ improved-full runs, but they are not claimed to be historical paper targets.
 Generated V8 M2 average and generated V10 M1 average remained positive-gap
 diagnostics. Raw JSON, logs, progress traces, summaries, and the generator
 manifest are stored in `results/optimization_update_round8/`.
+
+## Ninth Optimization Pass: Inventory Branching, Operation-Mode Branching, And Focus-Interval Closure
+
+This pass adds final-inventory branching, operation-mode branching, focus-range
+selection for active frontier leaves, and import of compatible focus-interval
+lower bounds into a full frontier ledger. These changes target the unresolved
+adaptive leaves observed after round eight, especially V12 M2
+`[0.465922,0.512514]` and V12 M1 `[0.230364,0.276436]`. Focus-only runs remain
+diagnostic interval runs; imported interval bounds improve the full frontier
+ledger only when the covered range is compatible and the full ledger is still
+reported honestly.
+
+| Instance | Variant | Status | UB | LB | Gap | Time (s) | Focus range | Inventory branch nodes | Imported bounds | Certified? |
+|---|---|---|---:|---:|---:|---:|---|---:|---:|---|
+| V12 M2 average | focus_auto_300s | not closed | 0.719065249476 | 0.689652394993 | 0.040904291376 | 296.50 | [0.465922,0.512514] | 8 | 0 | no |
+| V12 M1 average | focus_auto_300s | not closed | 0.369698924539 | 0.330637007941 | 0.105658723910 | 295.34 | [0.230364,0.276436] | 14 | 0 | no |
+| V12 M2 average | full_import_300s | not closed | 0.719065249476 | 0.712948394993 | 0.008506675142 | 315.11 | imported focus bound | 0 | 1 | no |
+| V12 M1 average | full_improved_300s | not closed | 0.369698924539 | 0.282149235152 | 0.236813481393 | 315.87 | full frontier | 10 | 0 | no |
+
+The V12 M2 focus run substantially tightened the critical interval lower bound
+from `0.496993274667` to `0.689652394993`, but the interval did not close and
+retained open nodes. Importing that compatible focus result into a full frontier
+run split the active ledger and raised the full run lower bound to
+`0.712948394993`, leaving one unresolved interval and a noncertified
+`0.008506675142` gap. A corrected `--frontier-focus-from-result` diagnostic
+then selected the unresolved imported-ledger leaf `[0.489218,0.512514]` and
+confirmed the same interval lower bound within a short diagnostic budget. The
+V12 M1 focus run also strengthened its selected
+interval but did not close the full frontier; the full 300s row remained weaker
+than the isolated focus diagnostic.
+
+Branching diagnostics on the V12 M2 critical interval were run for Ryan-Foster,
+inventory-only, and bounded `strong` selection modes at 60s. All returned the
+same interval lower bound and remained noncertified. Inventory branching created
+nodes in the longer focus runs, while operation-mode branching was available but
+did not become the selected branch type in these V12 focus rows. The current
+`strong` mode is a bounded scoring selector rather than full child-LP strong
+branching, so it is treated as a search heuristic.
+
+The V4 smoke `gcap-frontier` row remains certified with objective `0`. The
+generated V8/V10 engineering benchmarks were rerun for 60s with the new
+branching-enabled configuration; all four runs completed without process errors
+but remained positive-gap diagnostics in this budget. They are not historical
+paper targets.
+
+No new original-problem certificate was obtained in this pass. The main
+improvement is a safer path to target, tighten, and import difficult leaf
+intervals without relabeling interval diagnostics as full BPC certificates. Raw
+JSON, logs, progress traces, and CSV summaries are stored in
+`results/optimization_update_round9/`. Plain CPLEX benchmarks were skipped, so
+no CPLEX speedup claims are made.

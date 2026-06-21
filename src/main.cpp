@@ -27,6 +27,7 @@
 #include <limits>
 #include <map>
 #include <random>
+#include <regex>
 #include <sstream>
 #include <string>
 #include <thread>
@@ -38,7 +39,7 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
@@ -70,8 +71,14 @@ void usage() {
         << "[--incumbent-source-name <name>] [--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>] "
         << "[--progress-log <path>] [--progress-interval-seconds <seconds>] "
         << "[--frontier-focus-only true|false] [--frontier-focus-interval-id auto|N] "
+        << "[--frontier-focus-range <lo,hi>] [--frontier-focus-from-result <json>] "
+        << "[--frontier-focus-leaf-id id|auto|min-lb] [--frontier-focus-use-existing-incumbent true|false] "
         << "[--frontier-focus-time-limit <seconds>] [--frontier-focus-relax-seconds <seconds>] "
-        << "[--frontier-focus-tree-nodes <N>]\n";
+        << "[--frontier-focus-tree-nodes <N>] [--frontier-import-interval-bound <json>] "
+        << "[--branch-inventory true|false] [--branch-inventory-priority <weight>] "
+        << "[--branch-operation-mode true|false] [--branch-selection auto|ryan-foster|inventory|operation-mode|strong] "
+        << "[--strong-branching-candidates <N>] [--strong-branching-time <seconds>] "
+        << "[--reliability-branching true|false]\n";
 }
 
 std::string requireValue(int& i, int argc, char** argv) {
@@ -171,10 +178,22 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--progress-log") opt.progress_log_path = requireValue(i, argc, argv);
         else if (arg == "--progress-interval-seconds") opt.progress_interval_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--frontier-focus-interval-id") opt.frontier_focus_interval_id = requireValue(i, argc, argv);
+        else if (arg == "--frontier-focus-range") opt.frontier_focus_range = requireValue(i, argc, argv);
+        else if (arg == "--frontier-focus-from-result") opt.frontier_focus_from_result = requireValue(i, argc, argv);
+        else if (arg == "--frontier-focus-leaf-id") opt.frontier_focus_leaf_id = requireValue(i, argc, argv);
         else if (arg == "--frontier-focus-only") opt.frontier_focus_only = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-focus-use-existing-incumbent") opt.frontier_focus_use_existing_incumbent = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-focus-time-limit") opt.frontier_focus_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--frontier-focus-relax-seconds") opt.frontier_focus_relax_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--frontier-focus-tree-nodes") opt.frontier_focus_tree_nodes = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--frontier-import-interval-bound") opt.frontier_import_interval_bound_paths.push_back(requireValue(i, argc, argv));
+        else if (arg == "--branch-inventory") opt.branch_inventory = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--branch-inventory-priority") opt.branch_inventory_priority = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--branch-operation-mode") opt.branch_operation_mode = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--branch-selection") opt.branch_selection = requireValue(i, argc, argv);
+        else if (arg == "--strong-branching-candidates") opt.strong_branching_candidates = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--strong-branching-time") opt.strong_branching_time = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--reliability-branching") opt.reliability_branching = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--log") opt.log_path = requireValue(i, argc, argv);
         else if (arg == "--out") opt.out_path = requireValue(i, argc, argv);
         else if (arg == "--plain-baseline") opt.plain_baseline = true;
@@ -285,6 +304,271 @@ int extractJsonIntForKey(const std::string& text, const std::string& key, int de
         ++value_pos;
     }
     return std::stoi(text.substr(value_pos));
+}
+
+double extractJsonDoubleForKey(const std::string& text,
+                               const std::string& key,
+                               double default_value = 0.0) {
+    const std::string quoted_key = "\"" + key + "\"";
+    const std::size_t key_pos = text.find(quoted_key);
+    if (key_pos == std::string::npos) return default_value;
+    const std::size_t colon_pos = text.find(':', key_pos + quoted_key.size());
+    if (colon_pos == std::string::npos) return default_value;
+    std::size_t value_pos = colon_pos + 1;
+    while (value_pos < text.size() &&
+           std::isspace(static_cast<unsigned char>(text[value_pos]))) {
+        ++value_pos;
+    }
+    try {
+        return std::stod(text.substr(value_pos));
+    } catch (const std::exception&) {
+        return default_value;
+    }
+}
+
+bool extractJsonBoolForKey(const std::string& text,
+                           const std::string& key,
+                           bool default_value = false) {
+    const std::string quoted_key = "\"" + key + "\"";
+    const std::size_t key_pos = text.find(quoted_key);
+    if (key_pos == std::string::npos) return default_value;
+    const std::size_t colon_pos = text.find(':', key_pos + quoted_key.size());
+    if (colon_pos == std::string::npos) return default_value;
+    std::size_t value_pos = colon_pos + 1;
+    while (value_pos < text.size() &&
+           std::isspace(static_cast<unsigned char>(text[value_pos]))) {
+        ++value_pos;
+    }
+    if (text.compare(value_pos, 4, "true") == 0) return true;
+    if (text.compare(value_pos, 5, "false") == 0) return false;
+    return default_value;
+}
+
+std::string extractJsonStringForKey(const std::string& text,
+                                    const std::string& key,
+                                    const std::string& default_value = "") {
+    const std::string quoted_key = "\"" + key + "\"";
+    const std::size_t key_pos = text.find(quoted_key);
+    if (key_pos == std::string::npos) return default_value;
+    const std::size_t colon_pos = text.find(':', key_pos + quoted_key.size());
+    if (colon_pos == std::string::npos) return default_value;
+    std::size_t value_pos = colon_pos + 1;
+    while (value_pos < text.size() &&
+           std::isspace(static_cast<unsigned char>(text[value_pos]))) {
+        ++value_pos;
+    }
+    if (value_pos >= text.size() || text[value_pos] != '"') return default_value;
+    ++value_pos;
+    std::string out;
+    bool escaped = false;
+    for (; value_pos < text.size(); ++value_pos) {
+        const char ch = text[value_pos];
+        if (escaped) {
+            if (ch == 'n') out.push_back('\n');
+            else if (ch == 'r') out.push_back('\r');
+            else if (ch == 't') out.push_back('\t');
+            else out.push_back(ch);
+            escaped = false;
+        } else if (ch == '\\') {
+            escaped = true;
+        } else if (ch == '"') {
+            return out;
+        } else {
+            out.push_back(ch);
+        }
+    }
+    return default_value;
+}
+
+std::string readWholeTextFile(const std::string& path) {
+    std::ifstream in(path);
+    if (!in) throw std::runtime_error("cannot open file: " + path);
+    std::ostringstream buffer;
+    buffer << in.rdbuf();
+    return buffer.str();
+}
+
+bool parseGiniRangeString(std::string value, double& lo, double& hi) {
+    for (char& ch : value) {
+        if (ch == '[' || ch == ']' || ch == '(' || ch == ')' ||
+            ch == ';' || ch == ':') {
+            ch = ',';
+        }
+    }
+    const std::size_t comma = value.find(',');
+    if (comma == std::string::npos) return false;
+    try {
+        lo = std::stod(value.substr(0, comma));
+        hi = std::stod(value.substr(comma + 1));
+    } catch (const std::exception&) {
+        return false;
+    }
+    return std::isfinite(lo) && std::isfinite(hi) && lo <= hi + 1e-12;
+}
+
+struct ParsedFrontierInterval {
+    bool valid = false;
+    int id = -1;
+    int parent_id = -1;
+    double lo = 0.0;
+    double hi = 0.0;
+    double lower_bound = 0.0;
+    bool closed = false;
+    bool bound_fathomed = false;
+    int open_nodes = 0;
+    bool pricing_closed = false;
+    std::string status;
+    std::string source;
+};
+
+bool parseDoubleAfterToken(const std::string& text,
+                           const std::string& token,
+                           double& value) {
+    const std::size_t pos = text.find(token);
+    if (pos == std::string::npos) return false;
+    try {
+        value = std::stod(text.substr(pos + token.size()));
+    } catch (const std::exception&) {
+        return false;
+    }
+    return true;
+}
+
+bool parseIntAfterToken(const std::string& text,
+                        const std::string& token,
+                        int& value) {
+    const std::size_t pos = text.find(token);
+    if (pos == std::string::npos) return false;
+    try {
+        value = std::stoi(text.substr(pos + token.size()));
+    } catch (const std::exception&) {
+        return false;
+    }
+    return true;
+}
+
+std::vector<ParsedFrontierInterval> parseFrontierIntervalsFromResultText(
+    const std::string& text) {
+    std::vector<ParsedFrontierInterval> intervals;
+
+    const std::string focus_range =
+        extractJsonStringForKey(text, "focus_interval_range", "");
+    double focus_lo = 0.0;
+    double focus_hi = 0.0;
+    if (!focus_range.empty() &&
+        parseGiniRangeString(focus_range, focus_lo, focus_hi)) {
+        ParsedFrontierInterval focus;
+        focus.valid = true;
+        focus.id = extractJsonIntForKey(text, "focus_interval_id", -1);
+        focus.parent_id =
+            extractJsonIntForKey(text, "focus_interval_parent_id", -1);
+        focus.lo = focus_lo;
+        focus.hi = focus_hi;
+        focus.lower_bound =
+            extractJsonDoubleForKey(text, "focus_interval_lb_after",
+                                    extractJsonDoubleForKey(text,
+                                                            "focus_interval_lb_before",
+                                                            focus_lo));
+        focus.closed = extractJsonBoolForKey(text, "focus_interval_closed", false);
+        focus.bound_fathomed =
+            extractJsonBoolForKey(text, "focus_interval_bound_fathomed", false);
+        focus.open_nodes =
+            extractJsonIntForKey(text, "focus_interval_open_nodes_after",
+                                 extractJsonIntForKey(text,
+                                                      "focus_interval_open_nodes",
+                                                      0));
+        focus.pricing_closed =
+            extractJsonBoolForKey(text, "focus_interval_pricing_closed", false);
+        focus.status = focus.closed ? "focus_closed_or_fathomed" : "focus_unresolved";
+        focus.source = "focus_interval_json_fields";
+        intervals.push_back(focus);
+    }
+
+    std::size_t search_pos = 0;
+    while (true) {
+        const std::size_t marker =
+            text.find("frontier_interval_ledger:", search_pos);
+        if (marker == std::string::npos) break;
+        std::size_t end = text.find('"', marker);
+        if (end == std::string::npos) end = text.find('\n', marker);
+        const std::string line =
+            text.substr(marker,
+                        end == std::string::npos ? std::string::npos
+                                                  : end - marker);
+        search_pos = (end == std::string::npos) ? marker + 1 : end + 1;
+        ParsedFrontierInterval parsed;
+        parsed.source = "frontier_interval_ledger_note";
+        parseIntAfterToken(line, "interval_id=", parsed.id);
+        bool range_valid = false;
+        const std::size_t range_pos = line.find("range=[");
+        if (range_pos != std::string::npos) {
+            const std::size_t range_end = line.find(']', range_pos);
+            if (range_end != std::string::npos) {
+                range_valid =
+                    parseGiniRangeString(line.substr(range_pos + 7,
+                                                     range_end - range_pos - 7),
+                                         parsed.lo, parsed.hi);
+            }
+        }
+        parsed.valid = range_valid;
+        parseDoubleAfterToken(line, "interval_lb=", parsed.lower_bound);
+        parseIntAfterToken(line, "open_nodes=", parsed.open_nodes);
+        const std::size_t status_pos = line.find("status=");
+        if (status_pos != std::string::npos) {
+            const std::size_t status_end = line.find(',', status_pos);
+            parsed.status = line.substr(status_pos + 7,
+                status_end == std::string::npos
+                    ? std::string::npos
+                    : status_end - status_pos - 7);
+        }
+        parsed.closed = parsed.status.find("closed") != std::string::npos;
+        parsed.bound_fathomed =
+            parsed.status.find("bound_fathomed") != std::string::npos ||
+            line.find("complete_or_fathomed=true") != std::string::npos;
+        parsed.pricing_closed =
+            line.find("pricing_closed=true") != std::string::npos;
+        if (parsed.valid && parsed.hi >= parsed.lo) intervals.push_back(parsed);
+    }
+    return intervals;
+}
+
+ParsedFrontierInterval chooseFocusIntervalFromParsed(
+    const std::vector<ParsedFrontierInterval>& intervals,
+    const std::string& leaf_selector) {
+    ParsedFrontierInterval best;
+    std::string selector = leaf_selector.empty() ? "auto" : leaf_selector;
+    std::transform(selector.begin(), selector.end(), selector.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    if (selector != "auto" && selector != "min-lb" && selector != "min_lb") {
+        try {
+            const int requested = std::stoi(selector);
+            for (const ParsedFrontierInterval& interval : intervals) {
+                if (interval.valid && interval.id == requested) return interval;
+            }
+        } catch (const std::exception&) {
+        }
+    }
+    for (const ParsedFrontierInterval& interval : intervals) {
+        if (!interval.valid) continue;
+        if (interval.closed || interval.bound_fathomed) continue;
+        if (!best.valid ||
+            interval.lower_bound < best.lower_bound - 1e-12 ||
+            (std::fabs(interval.lower_bound - best.lower_bound) <= 1e-12 &&
+             interval.id < best.id)) {
+            best = interval;
+        }
+    }
+    if (best.valid) return best;
+    for (const ParsedFrontierInterval& interval : intervals) {
+        if (!interval.valid) continue;
+        if (!best.valid ||
+            interval.lower_bound < best.lower_bound - 1e-12 ||
+            (std::fabs(interval.lower_bound - best.lower_bound) <= 1e-12 &&
+             interval.id < best.id)) {
+            best = interval;
+        }
+    }
+    return best;
 }
 
 std::vector<int> parseJsonIntList(std::string array_body) {
@@ -2549,7 +2833,11 @@ ebrp::SolveResult solveGiniCapTreeDiagnostic(const ebrp::Instance& instance,
         opt.column_dominance, opt.column_dominance_mode,
         opt.projection_bound, opt.penalty_domain_tightening,
         opt.movement_domain_tightening, opt.support_duration_pruning,
-        opt.support_duration_max_subset_size);
+        opt.support_duration_max_subset_size,
+        opt.branch_inventory, opt.branch_inventory_priority,
+        opt.branch_operation_mode, opt.branch_selection,
+        opt.strong_branching_candidates, opt.strong_branching_time,
+        opt.reliability_branching);
     result.runtime_seconds = std::chrono::duration<double>(
         std::chrono::steady_clock::now() - start).count();
     result.columns = tree.generated_columns;
@@ -2611,6 +2899,36 @@ ebrp::SolveResult solveGiniCapTreeDiagnostic(const ebrp::Instance& instance,
     result.movement_domain_width_after = tree.movement_domain_width_after;
     result.movement_tightening_time_seconds = tree.movement_tightening_time_seconds;
     result.movement_unreachable_station_count = tree.movement_unreachable_station_count;
+    result.inventory_branch_candidates = tree.inventory_branch_candidates;
+    result.inventory_branch_nodes_created = tree.inventory_branch_nodes_created;
+    result.inventory_branch_station = tree.inventory_branch_station;
+    result.inventory_branch_value = tree.inventory_branch_value;
+    result.inventory_branch_left_bound = tree.inventory_branch_left_bound;
+    result.inventory_branch_right_bound = tree.inventory_branch_right_bound;
+    result.inventory_branch_pruned_nodes = tree.inventory_branch_pruned_nodes;
+    result.inventory_branch_max_depth = tree.inventory_branch_max_depth;
+    result.operation_mode_branch_candidates = tree.operation_mode_branch_candidates;
+    result.operation_mode_branch_nodes_created = tree.operation_mode_branch_nodes_created;
+    result.operation_mode_branch_station = tree.operation_mode_branch_station;
+    result.operation_mode_branch_type = tree.operation_mode_branch_type;
+    result.operation_mode_branch_pruned_columns =
+        tree.operation_mode_branch_pruned_columns;
+    result.operation_mode_branch_pruned_labels =
+        tree.operation_mode_branch_pruned_labels;
+    result.branch_selection_mode = tree.branch_selection_mode;
+    result.strong_branching_calls = tree.strong_branching_calls;
+    result.strong_branching_candidates_tested =
+        tree.strong_branching_candidates_tested;
+    result.strong_branching_time_seconds = tree.strong_branching_time_seconds;
+    result.selected_branch_type = tree.selected_branch_type;
+    result.selected_branch_score = tree.selected_branch_score;
+    result.selected_branch_child_lb_left = tree.selected_branch_child_lb_left;
+    result.selected_branch_child_lb_right = tree.selected_branch_child_lb_right;
+    result.branch_nodes_by_type_ryan_foster =
+        tree.branch_nodes_by_type_ryan_foster;
+    result.branch_nodes_by_type_inventory = tree.branch_nodes_by_type_inventory;
+    result.branch_nodes_by_type_operation_mode =
+        tree.branch_nodes_by_type_operation_mode;
     result.pricing_closed_nodes = tree.nodes_solved -
         (tree.complete ? 0 : std::min(1, tree.nodes_solved));
     result.open_nodes = tree.open_nodes;
@@ -3520,6 +3838,114 @@ ebrp::SolveResult solveAdaptiveFrontierSplitDiagnostic(
     return result;
 }
 
+ebrp::SolveResult solveInventoryBranchingDiagnostic(
+    const ebrp::Instance& instance,
+    const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "inventory-branching-test";
+    result.status = "diagnostic_complete";
+    result.certificate =
+        "diagnostic only: verifies final-inventory branch children partition integer inventories and exclude a fractional parent point";
+    const int station = instance.V >= 1 ? 1 : 0;
+    const double fractional_value =
+        station > 0 ? instance.initial[station] + 0.5 : 0.5;
+    const int left_bound = static_cast<int>(std::floor(fractional_value));
+    const int right_bound = static_cast<int>(std::ceil(fractional_value));
+    bool partitions_integer_domain = station > 0;
+    if (station > 0) {
+        for (int y = 0; y <= instance.capacity[station]; ++y) {
+            const bool in_left = y <= left_bound;
+            const bool in_right = y >= right_bound;
+            if (in_left == in_right) partitions_integer_domain = false;
+        }
+    }
+    result.inventory_branch_candidates = station > 0 ? 1 : 0;
+    result.inventory_branch_nodes_created = station > 0 ? 2 : 0;
+    result.inventory_branch_station = station;
+    result.inventory_branch_value = fractional_value;
+    result.inventory_branch_left_bound = left_bound;
+    result.inventory_branch_right_bound = right_bound;
+    result.inventory_branch_max_depth = 1;
+    result.branch_selection_mode = "inventory";
+    result.selected_branch_type = "inventory";
+    result.selected_branch_score = 0.5;
+    result.branch_nodes_by_type_inventory = result.inventory_branch_nodes_created;
+    result.routes = emptyRouteSet(instance);
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.final_inventory = result.verification.final_inventory;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.objective = result.verification.objective;
+    result.upper_bound = result.objective;
+    result.lower_bound = 0.0;
+    result.gap = 1.0;
+    result.notes.push_back("inventory_branching_synthetic: Y_"
+        + std::to_string(station) + "*="
+        + std::to_string(fractional_value)
+        + ", left_child=Y_i<=" + std::to_string(left_bound)
+        + ", right_child=Y_i>=" + std::to_string(right_bound)
+        + ", integer_domain_partition="
+        + std::string(partitions_integer_domain ? "true" : "false")
+        + "; every integer final inventory satisfies exactly one child and the fractional parent value is excluded");
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
+ebrp::SolveResult solveOperationModeBranchingDiagnostic(
+    const ebrp::Instance& instance,
+    const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "operation-mode-branching-test";
+    result.status = "diagnostic_complete";
+    result.certificate =
+        "diagnostic only: verifies pickup/drop operation-mode branch children partition signed station operations";
+    const int station = instance.V >= 1 ? 1 : 0;
+    result.operation_mode_branch_candidates = station > 0 ? 1 : 0;
+    result.operation_mode_branch_nodes_created = station > 0 ? 2 : 0;
+    result.operation_mode_branch_station = station;
+    result.operation_mode_branch_type = "forbid_pickup_vs_forbid_drop";
+    result.branch_selection_mode = "operation-mode";
+    result.selected_branch_type = "operation_mode";
+    result.selected_branch_score = 0.5;
+    result.branch_nodes_by_type_operation_mode =
+        result.operation_mode_branch_nodes_created;
+    bool signed_operations_partitioned = true;
+    for (int q = -5; q <= 5; ++q) {
+        if (q == 0) continue;
+        const bool child_no_pickup_allows = q <= 0;
+        const bool child_no_drop_allows = q >= 0;
+        if (child_no_pickup_allows == child_no_drop_allows) {
+            signed_operations_partitioned = false;
+        }
+    }
+    result.routes = emptyRouteSet(instance);
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.final_inventory = result.verification.final_inventory;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.objective = result.verification.objective;
+    result.upper_bound = result.objective;
+    result.lower_bound = 0.0;
+    result.gap = 1.0;
+    result.notes.push_back("operation_mode_branching_synthetic: station="
+        + std::to_string(station)
+        + ", child_A=forbid_pickup(q_i<=0), child_B=forbid_drop(q_i>=0), signed_nonzero_operations_partitioned="
+        + std::string(signed_operations_partitioned ? "true" : "false")
+        + "; zero operation/unserved values may satisfy both children but do not remove any signed pickup/drop feasible solution");
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
 ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                                               const ebrp::SolveOptions& opt) {
     const auto start = std::chrono::steady_clock::now();
@@ -4251,7 +4677,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         return result;
     }
 
-    const int intervals = std::max(1, opt.frontier_intervals);
+    int intervals = std::max(1, opt.frontier_intervals);
     struct FrontierIntervalRecord {
         bool processed = false;
         bool skipped = false;
@@ -4300,6 +4726,82 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         interval_records[idx].lower_bound = std::max(0.0, interval_records[idx].lo);
         interval_records[idx].lower_bound_valid = true;
     }
+
+    auto makeRangeString = [](double lo, double hi) {
+        std::ostringstream range;
+        range << "[" << lo << "," << hi << "]";
+        return range.str();
+    };
+
+    ParsedFrontierInterval requested_focus_interval;
+    if (opt.frontier_focus_only && !opt.frontier_focus_range.empty()) {
+        double lo = 0.0;
+        double hi = 0.0;
+        if (parseGiniRangeString(opt.frontier_focus_range, lo, hi)) {
+            requested_focus_interval.valid = true;
+            requested_focus_interval.id = 0;
+            requested_focus_interval.lo = lo;
+            requested_focus_interval.hi = hi;
+            requested_focus_interval.lower_bound = std::max(0.0, lo);
+            requested_focus_interval.source = "cli_frontier_focus_range";
+        } else {
+            result.notes.push_back("frontier focus range rejected because it could not be parsed: "
+                + opt.frontier_focus_range);
+        }
+    }
+    if (opt.frontier_focus_only && !opt.frontier_focus_from_result.empty()) {
+        try {
+            const std::string text =
+                readWholeTextFile(opt.frontier_focus_from_result);
+            const std::vector<ParsedFrontierInterval> parsed =
+                parseFrontierIntervalsFromResultText(text);
+            ParsedFrontierInterval chosen =
+                chooseFocusIntervalFromParsed(parsed, opt.frontier_focus_leaf_id);
+            if (chosen.valid) {
+                requested_focus_interval = chosen;
+                result.notes.push_back("frontier focus interval selected from result="
+                    + opt.frontier_focus_from_result
+                    + ", source=" + chosen.source
+                    + ", id=" + std::to_string(chosen.id)
+                    + ", range=" + makeRangeString(chosen.lo, chosen.hi)
+                    + ", lb=" + std::to_string(chosen.lower_bound));
+            } else {
+                result.notes.push_back("frontier focus-from-result parsed no usable interval: "
+                    + opt.frontier_focus_from_result);
+            }
+            if (opt.frontier_focus_use_existing_incumbent) {
+                result.notes.push_back("frontier_focus_use_existing_incumbent=true: this pass uses the normal verified incumbent pipeline; pass the same result through --incumbent-json when reconstructable route reuse is required");
+            }
+        } catch (const std::exception& ex) {
+            result.notes.push_back("frontier focus-from-result failed: "
+                + std::string(ex.what()));
+        }
+    }
+    if (opt.frontier_focus_only && requested_focus_interval.valid) {
+        FrontierIntervalRecord focus_record;
+        focus_record.lo = std::max(0.0, requested_focus_interval.lo);
+        focus_record.hi = std::max(focus_record.lo, requested_focus_interval.hi);
+        focus_record.lower_bound =
+            std::max(focus_record.lo, requested_focus_interval.lower_bound);
+        focus_record.relaxation_lower_bound = focus_record.lower_bound;
+        focus_record.lower_bound_valid = true;
+        focus_record.lower_bound_source = requested_focus_interval.source.empty()
+            ? "requested_focus_interval"
+            : requested_focus_interval.source;
+        focus_record.lb_sources += "|" + focus_record.lower_bound_source;
+        focus_record.open_nodes = std::max(0, requested_focus_interval.open_nodes);
+        focus_record.parent_id = requested_focus_interval.id;
+        focus_record.pricing_closed = requested_focus_interval.pricing_closed;
+        interval_records.assign(1, focus_record);
+        intervals = 1;
+        result.focus_interval_parent_id = requested_focus_interval.id;
+        result.notes.push_back("frontier focus-only exact requested interval replaces the uniform frontier for this diagnostic run: range="
+            + makeRangeString(focus_record.lo, focus_record.hi)
+            + ", source=" + focus_record.lower_bound_source
+            + ", parent_leaf_id=" + std::to_string(requested_focus_interval.id)
+            + "; certificate_scope=diagnostic_interval_only");
+    }
+
     result.cheap_prepass_enabled = opt.frontier_best_bound_scheduling ||
         opt.projection_bound || opt.movement_domain_tightening ||
         opt.penalty_domain_tightening;
@@ -4365,6 +4867,159 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             }
         }
     }
+
+    auto applyImportedIntervalBound =
+        [&](const ParsedFrontierInterval& imported,
+            const std::string& path) {
+            ++result.imported_interval_bounds_attempted;
+            constexpr double eps = 1e-8;
+            if (!imported.valid || imported.hi < imported.lo - eps) {
+                ++result.imported_interval_bounds_rejected;
+                if (!result.imported_interval_bounds_rejection_reasons.empty()) {
+                    result.imported_interval_bounds_rejection_reasons += ";";
+                }
+                result.imported_interval_bounds_rejection_reasons +=
+                    "invalid_import:" + path;
+                return;
+            }
+            int exact_idx = -1;
+            int containing_idx = -1;
+            for (int idx = 0; idx < static_cast<int>(interval_records.size()); ++idx) {
+                const FrontierIntervalRecord& record = interval_records[idx];
+                if (record.replaced_by_children) continue;
+                if (std::fabs(record.lo - imported.lo) <= eps &&
+                    std::fabs(record.hi - imported.hi) <= eps) {
+                    exact_idx = idx;
+                    break;
+                }
+                if (record.lo <= imported.lo + eps &&
+                    imported.hi <= record.hi + eps) {
+                    containing_idx = idx;
+                }
+            }
+            auto updateRecord = [&](FrontierIntervalRecord& record) {
+                const double old_lb = record.lower_bound;
+                record.lower_bound =
+                    std::max(record.lower_bound,
+                             std::max(record.lo, imported.lower_bound));
+                record.relaxation_lower_bound =
+                    std::max(record.relaxation_lower_bound,
+                             record.lower_bound);
+                record.lower_bound_valid = true;
+                if (record.lower_bound > old_lb + eps) {
+                    record.lower_bound_source = "imported_focus_interval_bound";
+                }
+                record.lb_sources += "|imported_focus_interval_bound";
+                if (imported.closed || imported.bound_fathomed) {
+                    record.complete = imported.closed;
+                    record.bound_fathomed = imported.bound_fathomed ||
+                        (record.lower_bound >= result.upper_bound - 1e-7);
+                    record.open_nodes = 0;
+                    ++result.imported_interval_bounds_closed_intervals;
+                } else {
+                    record.open_nodes =
+                        std::max(record.open_nodes, imported.open_nodes);
+                }
+                record.pricing_closed =
+                    record.pricing_closed || imported.pricing_closed;
+            };
+            if (exact_idx >= 0) {
+                updateRecord(interval_records[exact_idx]);
+                ++result.imported_interval_bounds_accepted;
+                result.notes.push_back("accepted imported focus interval bound exact match: path="
+                    + path + ", interval=" + std::to_string(exact_idx)
+                    + ", range=" + makeRangeString(imported.lo, imported.hi)
+                    + ", lb=" + std::to_string(imported.lower_bound)
+                    + ", closed=" + std::string(imported.closed ? "true" : "false")
+                    + ", bound_fathomed="
+                    + std::string(imported.bound_fathomed ? "true" : "false"));
+                return;
+            }
+            if (containing_idx < 0) {
+                ++result.imported_interval_bounds_rejected;
+                if (!result.imported_interval_bounds_rejection_reasons.empty()) {
+                    result.imported_interval_bounds_rejection_reasons += ";";
+                }
+                result.imported_interval_bounds_rejection_reasons +=
+                    "range_not_covered:" + path;
+                return;
+            }
+            FrontierIntervalRecord parent = interval_records[containing_idx];
+            interval_records[containing_idx].replaced_by_children = true;
+            std::vector<FrontierIntervalRecord> children;
+            auto addChild = [&](double lo, double hi,
+                                const std::string& source,
+                                bool imported_child) {
+                if (hi <= lo + eps) return;
+                FrontierIntervalRecord child = parent;
+                child.replaced_by_children = false;
+                child.lo = lo;
+                child.hi = hi;
+                child.parent_id = containing_idx;
+                child.split_depth = parent.split_depth + 1;
+                child.child_index = static_cast<int>(children.size());
+                child.inherited_parent_lb = parent.lower_bound;
+                child.complete = false;
+                child.empty_complete = false;
+                child.bound_fathomed = false;
+                child.tree_closed = false;
+                child.pricing_closed = false;
+                child.open_nodes = parent.open_nodes;
+                child.lower_bound_valid = parent.lower_bound_valid;
+                child.lower_bound = std::max(parent.lower_bound, lo);
+                child.lower_bound_source = source;
+                child.lb_sources += "|" + source;
+                if (imported_child) updateRecord(child);
+                children.push_back(child);
+            };
+            addChild(parent.lo, imported.lo, "import_split_inherited_parent_lb", false);
+            addChild(imported.lo, imported.hi, "imported_focus_interval_bound", true);
+            addChild(imported.hi, parent.hi, "import_split_inherited_parent_lb", false);
+            for (const FrontierIntervalRecord& child : children) {
+                interval_records.push_back(child);
+            }
+            intervals = static_cast<int>(interval_records.size());
+            ++result.imported_interval_bounds_accepted;
+            result.notes.push_back("accepted imported focus interval bound by splitting parent interval="
+                + std::to_string(containing_idx)
+                + ", imported_range=" + makeRangeString(imported.lo, imported.hi)
+                + ", lb=" + std::to_string(imported.lower_bound)
+                + ", path=" + path
+                + "; child intervals exactly cover the original parent range");
+        };
+
+    for (const std::string& import_path :
+         opt.frontier_import_interval_bound_paths) {
+        try {
+            const std::string text = readWholeTextFile(import_path);
+            const std::vector<ParsedFrontierInterval> parsed =
+                parseFrontierIntervalsFromResultText(text);
+            ParsedFrontierInterval chosen =
+                chooseFocusIntervalFromParsed(parsed, "min-lb");
+            if (chosen.valid) {
+                applyImportedIntervalBound(chosen, import_path);
+            } else {
+                ++result.imported_interval_bounds_attempted;
+                ++result.imported_interval_bounds_rejected;
+                if (!result.imported_interval_bounds_rejection_reasons.empty()) {
+                    result.imported_interval_bounds_rejection_reasons += ";";
+                }
+                result.imported_interval_bounds_rejection_reasons +=
+                    "no_usable_interval:" + import_path;
+            }
+        } catch (const std::exception& ex) {
+            ++result.imported_interval_bounds_attempted;
+            ++result.imported_interval_bounds_rejected;
+            if (!result.imported_interval_bounds_rejection_reasons.empty()) {
+                result.imported_interval_bounds_rejection_reasons += ";";
+            }
+            result.imported_interval_bounds_rejection_reasons +=
+                "read_error:" + import_path;
+            result.notes.push_back("frontier import interval bound failed for "
+                + import_path + ": " + ex.what());
+        }
+    }
+
     std::vector<int> initial_schedule(intervals);
     for (int idx = 0; idx < intervals; ++idx) initial_schedule[idx] = idx;
     if (opt.frontier_best_bound_scheduling) {
@@ -4429,6 +5084,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.focus_interval_id = focus_idx;
         result.focus_interval_range = focus_range.str();
         result.focus_interval_lb_before = focus_record.lower_bound;
+        result.focus_interval_bound_fathomed = focus_record.bound_fathomed;
+        result.focus_interval_open_nodes_before = focus_record.open_nodes;
+        if (result.focus_interval_parent_id < 0) {
+            result.focus_interval_parent_id = focus_record.parent_id;
+        }
         result.focus_interval_certificate_scope = "diagnostic_interval_only";
         initial_schedule.assign(1, focus_idx);
         result.interval_processing_order_actual = std::to_string(focus_idx);
@@ -4769,6 +5429,55 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 tree.movement_tightening_time_seconds;
             result.movement_unreachable_station_count +=
                 tree.movement_unreachable_station_count;
+            result.inventory_branch_candidates +=
+                tree.inventory_branch_candidates;
+            result.inventory_branch_nodes_created +=
+                tree.inventory_branch_nodes_created;
+            if (tree.inventory_branch_station > 0) {
+                result.inventory_branch_station = tree.inventory_branch_station;
+                result.inventory_branch_value = tree.inventory_branch_value;
+                result.inventory_branch_left_bound = tree.inventory_branch_left_bound;
+                result.inventory_branch_right_bound = tree.inventory_branch_right_bound;
+            }
+            result.inventory_branch_pruned_nodes +=
+                tree.inventory_branch_pruned_nodes;
+            result.inventory_branch_max_depth =
+                std::max(result.inventory_branch_max_depth,
+                         tree.inventory_branch_max_depth);
+            result.operation_mode_branch_candidates +=
+                tree.operation_mode_branch_candidates;
+            result.operation_mode_branch_nodes_created +=
+                tree.operation_mode_branch_nodes_created;
+            if (tree.operation_mode_branch_station > 0) {
+                result.operation_mode_branch_station =
+                    tree.operation_mode_branch_station;
+                result.operation_mode_branch_type =
+                    tree.operation_mode_branch_type;
+            }
+            result.operation_mode_branch_pruned_columns +=
+                tree.operation_mode_branch_pruned_columns;
+            result.operation_mode_branch_pruned_labels +=
+                tree.operation_mode_branch_pruned_labels;
+            result.branch_selection_mode = tree.branch_selection_mode;
+            result.strong_branching_calls += tree.strong_branching_calls;
+            result.strong_branching_candidates_tested +=
+                tree.strong_branching_candidates_tested;
+            result.strong_branching_time_seconds +=
+                tree.strong_branching_time_seconds;
+            if (!tree.selected_branch_type.empty()) {
+                result.selected_branch_type = tree.selected_branch_type;
+                result.selected_branch_score = tree.selected_branch_score;
+                result.selected_branch_child_lb_left =
+                    tree.selected_branch_child_lb_left;
+                result.selected_branch_child_lb_right =
+                    tree.selected_branch_child_lb_right;
+            }
+            result.branch_nodes_by_type_ryan_foster +=
+                tree.branch_nodes_by_type_ryan_foster;
+            result.branch_nodes_by_type_inventory +=
+                tree.branch_nodes_by_type_inventory;
+            result.branch_nodes_by_type_operation_mode +=
+                tree.branch_nodes_by_type_operation_mode;
         };
 
     struct CachedRelaxation {
@@ -4968,14 +5677,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                                       const std::vector<ebrp::RoutePlan>& fixed_incumbent_routes) {
         InitialIntervalWork work;
         work.idx = idx;
-        const double frac0 = static_cast<double>(idx) / intervals;
-        const double frac1 = static_cast<double>(idx + 1) / intervals;
-        const double lo = cover_lo + (cover_hi - cover_lo) * frac0;
-        const double hi = (idx + 1 == intervals)
-            ? cover_hi : cover_lo + (cover_hi - cover_lo) * frac1;
         work.record = interval_records[idx];
-        work.record.lo = lo;
-        work.record.hi = hi;
+        const double lo = work.record.lo;
+        const double hi = work.record.hi;
         work.record.lower_bound =
             std::max(work.record.lower_bound, std::max(0.0, lo));
         work.record.lower_bound_valid = true;
@@ -5068,7 +5772,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             opt.column_dominance, opt.column_dominance_mode,
             opt.projection_bound, opt.penalty_domain_tightening,
             opt.movement_domain_tightening, opt.support_duration_pruning,
-            opt.support_duration_max_subset_size);
+            opt.support_duration_max_subset_size,
+            opt.branch_inventory, opt.branch_inventory_priority,
+            opt.branch_operation_mode, opt.branch_selection,
+            opt.strong_branching_candidates, opt.strong_branching_time,
+            opt.reliability_branching);
         work.ran_tree = true;
         work.record.processed = true;
         work.record.complete = work.tree.complete;
@@ -5248,13 +5956,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
          schedule_pos < static_cast<int>(initial_schedule.size());
          ++schedule_pos) {
         const int idx = initial_schedule[schedule_pos];
-        const double frac0 = static_cast<double>(idx) / intervals;
-        const double frac1 = static_cast<double>(idx + 1) / intervals;
-        const double lo = cover_lo + (cover_hi - cover_lo) * frac0;
-        const double hi = (idx + 1 == intervals)
-            ? cover_hi : cover_lo + (cover_hi - cover_lo) * frac1;
-        interval_records[idx].lo = lo;
-        interval_records[idx].hi = hi;
+        const double lo = interval_records[idx].lo;
+        const double hi = interval_records[idx].hi;
         if (lo >= result.upper_bound - 1e-12) {
             interval_records[idx].processed = true;
             interval_records[idx].skipped = true;
@@ -5358,7 +6061,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             opt.column_dominance, opt.column_dominance_mode,
             opt.projection_bound, opt.penalty_domain_tightening,
             opt.movement_domain_tightening, opt.support_duration_pruning,
-            opt.support_duration_max_subset_size);
+            opt.support_duration_max_subset_size,
+            opt.branch_inventory, opt.branch_inventory_priority,
+            opt.branch_operation_mode, opt.branch_selection,
+            opt.strong_branching_candidates, opt.strong_branching_time,
+            opt.reliability_branching);
         result.nodes += tree.nodes_solved;
         result.columns += tree.generated_columns;
         result.pricing_calls += tree.pricing_calls;
@@ -6042,7 +6749,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 opt.column_dominance, opt.column_dominance_mode,
                 opt.projection_bound, opt.penalty_domain_tightening,
                 opt.movement_domain_tightening, opt.support_duration_pruning,
-                opt.support_duration_max_subset_size);
+                opt.support_duration_max_subset_size,
+                opt.branch_inventory, opt.branch_inventory_priority,
+                opt.branch_operation_mode, opt.branch_selection,
+                opt.strong_branching_candidates, opt.strong_branching_time,
+                opt.reliability_branching);
             result.nodes += tree.nodes_solved;
             result.columns += tree.generated_columns;
             result.pricing_calls += tree.pricing_calls;
@@ -6319,7 +7030,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 opt.column_dominance, opt.column_dominance_mode,
                 opt.projection_bound, opt.penalty_domain_tightening,
                 opt.movement_domain_tightening, opt.support_duration_pruning,
-                opt.support_duration_max_subset_size);
+                opt.support_duration_max_subset_size,
+                opt.branch_inventory, opt.branch_inventory_priority,
+                opt.branch_operation_mode, opt.branch_selection,
+                opt.strong_branching_candidates, opt.strong_branching_time,
+                opt.reliability_branching);
             result.nodes += tree.nodes_solved;
             result.columns += tree.generated_columns;
             result.pricing_calls += tree.pricing_calls;
@@ -6556,7 +7271,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             focus_record.bound_fathomed ||
             (focus_record.lower_bound_valid &&
              focus_record.lower_bound >= result.upper_bound - 1e-7);
+        result.focus_interval_bound_fathomed =
+            focus_record.bound_fathomed ||
+            (focus_record.lower_bound_valid &&
+             focus_record.lower_bound >= result.upper_bound - 1e-7);
         result.focus_interval_open_nodes = focus_record.open_nodes;
+        result.focus_interval_open_nodes_after = focus_record.open_nodes;
         result.focus_interval_pricing_closed = focus_record.pricing_closed;
         result.focus_interval_certificate_scope = "diagnostic_interval_only";
         full_objective_range = false;
@@ -6684,6 +7404,10 @@ int main(int argc, char** argv) {
                 results.push_back(solveRouteMaskOperationBudgetDiagnostic(instance, opt));
             } else if (opt.method == "adaptive-frontier-split-test") {
                 results.push_back(solveAdaptiveFrontierSplitDiagnostic(instance, opt));
+            } else if (opt.method == "inventory-branching-test") {
+                results.push_back(solveInventoryBranchingDiagnostic(instance, opt));
+            } else if (opt.method == "operation-mode-branching-test") {
+                results.push_back(solveOperationModeBranchingDiagnostic(instance, opt));
             } else if (opt.method == "incumbent-import-test") {
                 results.push_back(solveIncumbentImportDiagnostic(instance, opt));
             } else if (opt.method == "route-pool-incumbent-test") {

@@ -1340,3 +1340,78 @@ Remaining TODOs:
   the original `.txt` sources are recovered.
 - Consider exact small-support feasibility cuts only with a proof-producing
   oracle; heuristic support failures remain unusable as cuts.
+
+## 2026-06-21 Round 9: Inventory Branching And Focus-Interval Closure
+
+Implemented:
+
+- Explicit focus targeting through `--frontier-focus-range`,
+  `--frontier-focus-from-result`, and `--frontier-focus-leaf-id`, so diagnostic
+  runs can target active unresolved adaptive leaves from a previous ledger.
+- Compatible focus-bound import through `--frontier-import-interval-bound`,
+  including active-leaf splitting when the imported range covers a strict
+  subrange.
+- Final-inventory branching rows in the branch-price tree, with pricing dual
+  contributions through each column's signed inventory-change vector.
+- Operation-mode branching restrictions for forbid-pickup and forbid-drop
+  child nodes, enforced in pricing and node column screening.
+- Branch-selection reporting for Ryan-Foster, inventory, operation-mode, and a
+  bounded `strong` scoring mode. The current `strong` implementation is a search
+  heuristic, not full child-LP strong branching.
+
+Tests:
+
+- CMake was unavailable; both executables built with the documented `g++`
+  fallback.
+- V4 smoke diagnostics were run for pricing, pricing-branch, cuts, branching,
+  master, cg, gcap-cg, gcap-tree, gcap-frontier, dominance-test,
+  support-pruning-test, route-mask-support-test, route-mask-operation-budget-test,
+  incumbent-import-test, route-pool-incumbent-test,
+  pickup-drop-compat-flow-test, pickup-drop-transfer-cap-test,
+  vehicle-indexed-relaxation-test, vehicle-indexed-transfer-flow-test,
+  adaptive-frontier-split-test, inventory-branching-test, and
+  operation-mode-branching-test.
+- V4 `gcap-frontier` remained certified with objective `0`, gap `0`, and
+  `certified_original_problem=true`.
+- V12 M2 focus-only `[0.465922,0.512514]` ran for 300s and improved that
+  interval lower bound from `0.496993274667` to `0.689652394993`, but did not
+  close the interval.
+- V12 M1 focus-only `[0.230364,0.276436]` ran for 300s and improved that
+  interval lower bound from `0.234802392857` to `0.330637007941`, but did not
+  close the interval.
+- A full V12 M2 frontier run imported the compatible V12 M2 focus bound,
+  accepted one imported interval bound, and ended with UB `0.719065249476`,
+  LB `0.712948394993`, gap `0.008506675142`, one unresolved interval, and no
+  certificate.
+- A corrected `--frontier-focus-from-result` diagnostic parsed the full-import
+  ledger and selected the unresolved leaf `[0.489218,0.512514]`; it kept LB
+  `0.712948394993` and remained diagnostic/noncertified.
+- A full V12 M1 300s run ended with UB `0.369698924539`, LB
+  `0.282149235152`, gap `0.236813481393`, two unresolved intervals, and no
+  certificate.
+- Generated V8/V10 engineering benchmark 60s runs completed for V8_M2_average,
+  V10_M1_average, V10_M2_average, and V10_M2_low. All remained positive-gap
+  diagnostics under the short budget and are not historical paper targets.
+
+Safety:
+
+- All executed commands exited with code `0`.
+- Captured logs were scanned for address/access-violation, segmentation,
+  `bad_alloc`, out-of-memory, `fatal`, and related memory/error signatures; none
+  were found.
+- Plain CPLEX was skipped, so no CPLEX comparisons or speedup claims are made.
+- The V12 M2 1200s focus/import commands were not run in this pass because the
+  smoke, generated V8/V10, V12 focus, branch-selection, and V12 full 300s suite
+  consumed the available local run budget. Commands are recorded in
+  `results/optimization_update_round9/commands.md` for unattended reproduction.
+
+Remaining TODOs:
+
+- Run V12 M2 focus-only and full imported-bound 1200s rows during a longer
+  unattended slot.
+- Upgrade the bounded `strong` selector to true child-LP/CG strong branching if
+  the runtime budget can support it.
+- Add deeper compatibility hashing for imported interval-bound reuse across
+  independent command invocations.
+- Investigate the remaining V12 M2 leaf `[0.489218,0.512514]`, which controls
+  the full-import 300s gap after the focus-bound split.

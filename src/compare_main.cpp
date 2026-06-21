@@ -44,8 +44,12 @@ void usage() {
         << "[--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>] "
         << "[--progress-log <path>] [--progress-interval-seconds <seconds>] "
         << "[--frontier-focus-only true|false] [--frontier-focus-interval-id auto|N] "
+        << "[--frontier-focus-range <lo,hi>] [--frontier-focus-from-result <json>] "
+        << "[--frontier-focus-leaf-id id|auto|min-lb] [--frontier-import-interval-bound <json>] "
         << "[--frontier-focus-time-limit <seconds>] [--frontier-focus-relax-seconds <seconds>] "
-        << "[--frontier-focus-tree-nodes <N>]\n";
+        << "[--frontier-focus-tree-nodes <N>] "
+        << "[--branch-inventory true|false] [--branch-operation-mode true|false] "
+        << "[--branch-selection auto|ryan-foster|inventory|operation-mode|strong]\n";
 }
 
 std::string requireValue(int& i, int argc, char** argv) {
@@ -119,10 +123,22 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--progress-log") opt.progress_log_path = requireValue(i, argc, argv);
         else if (arg == "--progress-interval-seconds") opt.progress_interval_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--frontier-focus-interval-id") opt.frontier_focus_interval_id = requireValue(i, argc, argv);
+        else if (arg == "--frontier-focus-range") opt.frontier_focus_range = requireValue(i, argc, argv);
+        else if (arg == "--frontier-focus-from-result") opt.frontier_focus_from_result = requireValue(i, argc, argv);
+        else if (arg == "--frontier-focus-leaf-id") opt.frontier_focus_leaf_id = requireValue(i, argc, argv);
         else if (arg == "--frontier-focus-only") opt.frontier_focus_only = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-focus-use-existing-incumbent") opt.frontier_focus_use_existing_incumbent = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-focus-time-limit") opt.frontier_focus_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--frontier-focus-relax-seconds") opt.frontier_focus_relax_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--frontier-focus-tree-nodes") opt.frontier_focus_tree_nodes = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--frontier-import-interval-bound") opt.frontier_import_interval_bound_paths.push_back(requireValue(i, argc, argv));
+        else if (arg == "--branch-inventory") opt.branch_inventory = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--branch-inventory-priority") opt.branch_inventory_priority = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--branch-operation-mode") opt.branch_operation_mode = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--branch-selection") opt.branch_selection = requireValue(i, argc, argv);
+        else if (arg == "--strong-branching-candidates") opt.strong_branching_candidates = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--strong-branching-time") opt.strong_branching_time = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--reliability-branching") opt.reliability_branching = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--out") opt.out_path = requireValue(i, argc, argv);
         else if (arg == "--help" || arg == "-h") {
             usage();
@@ -410,10 +426,44 @@ void writeMethodRow(std::ostringstream& out,
         << result.focus_interval_lb_before << ","
         << result.focus_interval_lb_after << ","
         << (result.focus_interval_closed ? "true" : "false") << ","
+        << (result.focus_interval_bound_fathomed ? "true" : "false") << ","
+        << result.focus_interval_parent_id << ","
+        << result.focus_interval_open_nodes_before << ","
+        << result.focus_interval_open_nodes_after << ","
         << result.focus_interval_open_nodes << ","
         << (result.focus_interval_pricing_closed ? "true" : "false") << ","
         << result.focus_interval_runtime << ","
         << csvEscape(result.focus_interval_certificate_scope) << ","
+        << result.imported_interval_bounds_attempted << ","
+        << result.imported_interval_bounds_accepted << ","
+        << result.imported_interval_bounds_rejected << ","
+        << result.imported_interval_bounds_closed_intervals << ","
+        << csvEscape(result.imported_interval_bounds_rejection_reasons) << ","
+        << result.inventory_branch_candidates << ","
+        << result.inventory_branch_nodes_created << ","
+        << result.inventory_branch_station << ","
+        << result.inventory_branch_value << ","
+        << result.inventory_branch_left_bound << ","
+        << result.inventory_branch_right_bound << ","
+        << result.inventory_branch_pruned_nodes << ","
+        << result.inventory_branch_max_depth << ","
+        << result.operation_mode_branch_candidates << ","
+        << result.operation_mode_branch_nodes_created << ","
+        << result.operation_mode_branch_station << ","
+        << csvEscape(result.operation_mode_branch_type) << ","
+        << result.operation_mode_branch_pruned_columns << ","
+        << result.operation_mode_branch_pruned_labels << ","
+        << csvEscape(result.branch_selection_mode) << ","
+        << result.strong_branching_calls << ","
+        << result.strong_branching_candidates_tested << ","
+        << result.strong_branching_time_seconds << ","
+        << csvEscape(result.selected_branch_type) << ","
+        << result.selected_branch_score << ","
+        << result.selected_branch_child_lb_left << ","
+        << result.selected_branch_child_lb_right << ","
+        << result.branch_nodes_by_type_ryan_foster << ","
+        << result.branch_nodes_by_type_inventory << ","
+        << result.branch_nodes_by_type_operation_mode << ","
         << result.progress_checkpoints_written << ","
         << result.last_lb_improvement_time_seconds << ","
         << result.last_ub_improvement_time_seconds << ","
@@ -523,8 +573,24 @@ std::string comparisonCsv(const std::vector<std::pair<ebrp::SolveResult, ebrp::S
         << "vehicle_transfer_pairs_capacity_limited,vehicle_transfer_cap_min,"
         << "vehicle_transfer_cap_avg,vehicle_transfer_cap_max,vehicle_transfer_flow_time_seconds,"
         << "focus_interval_id,focus_interval_range,focus_interval_lb_before,"
-        << "focus_interval_lb_after,focus_interval_closed,focus_interval_open_nodes,"
-        << "focus_interval_pricing_closed,focus_interval_runtime,focus_interval_certificate_scope,"
+        << "focus_interval_lb_after,focus_interval_closed,focus_interval_bound_fathomed,"
+        << "focus_interval_parent_id,focus_interval_open_nodes_before,focus_interval_open_nodes_after,"
+        << "focus_interval_open_nodes,focus_interval_pricing_closed,focus_interval_runtime,"
+        << "focus_interval_certificate_scope,"
+        << "imported_interval_bounds_attempted,imported_interval_bounds_accepted,"
+        << "imported_interval_bounds_rejected,imported_interval_bounds_closed_intervals,"
+        << "imported_interval_bounds_rejection_reasons,"
+        << "inventory_branch_candidates,inventory_branch_nodes_created,inventory_branch_station,"
+        << "inventory_branch_value,inventory_branch_left_bound,inventory_branch_right_bound,"
+        << "inventory_branch_pruned_nodes,inventory_branch_max_depth,"
+        << "operation_mode_branch_candidates,operation_mode_branch_nodes_created,"
+        << "operation_mode_branch_station,operation_mode_branch_type,"
+        << "operation_mode_branch_pruned_columns,operation_mode_branch_pruned_labels,"
+        << "branch_selection_mode,strong_branching_calls,strong_branching_candidates_tested,"
+        << "strong_branching_time_seconds,selected_branch_type,selected_branch_score,"
+        << "selected_branch_child_lb_left,selected_branch_child_lb_right,"
+        << "branch_nodes_by_type_ryan_foster,branch_nodes_by_type_inventory,"
+        << "branch_nodes_by_type_operation_mode,"
         << "progress_checkpoints_written,last_lb_improvement_time_seconds,"
         << "last_ub_improvement_time_seconds,best_gap_seen,best_gap_time_seconds,"
         << "certified_original_problem,result_file,log_file,progress_log,"
