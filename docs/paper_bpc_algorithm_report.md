@@ -320,3 +320,48 @@ noncertified with positive gaps. Raw JSON, logs, progress traces, and summaries
 are stored in `results/optimization_update_round6/`. All round-six commands
 exited with code `0`, and captured logs contained no address/access-violation,
 segmentation, `bad_alloc`, or out-of-memory signatures.
+
+## Seventh Optimization Pass: Adaptive Frontier Splitting, Route-Mask Operation-Budget Cuts, And Long-Run Convergence
+
+This pass adds three certificate-preserving mechanisms to the frontier code:
+periodic progress logging, adaptive splitting of the current global-min-LB
+frontier interval, and mask-specific operation-budget rows in the route-mask
+relaxation. Adaptive splitting replaces a parent Gini interval by exactly
+covering child intervals and keeps the global lower bound as the minimum over
+active leaves. Operation-budget cuts use a non-overestimating depot-cycle lower
+bound and the operation identity
+`operation_time = (pickup_time + drop_time) * total_pickup` to limit pickup
+quantity on each route mask. Neither feature is a standalone certificate; all
+frontier closure requirements still apply.
+
+Local runnable inputs were again limited to the V4 smoke file and regenerated
+V12 average files. V8/V10 source `.txt` inputs were not present in this
+checkout. Plain CPLEX benchmarks were skipped; no speedup claims are made.
+
+| Instance | Variant | Status | UB | LB | Gap | Time (s) | Incumbent source | Adaptive children | Op-budget cuts | Focused passes | Certified? |
+|---|---|---|---:|---:|---:|---:|---|---:|---:|---:|---|
+| V12 M1 average | round6_baseline 60s | not closed | 0.368581603155 | 0.278083249730 | 0.245531390200 | 65.12 | BPC-owned portfolio | 0 | 0 | 0 | no |
+| V12 M1 average | improved_full 60s | not closed | 0.368581603155 | 0.278078671850 | 0.245543810462 | 65.22 | BPC-owned portfolio | 0 | 2 | 0 | no |
+| V12 M1 average | improved_full 300s | not closed | 0.366563817616 | 0.279082208580 | 0.238653148053 | 300.99 | compact tailored seed | 2 | 4 | 0 | no |
+| V12 M2 average | round6_baseline 60s | not closed | 0.719065249476 | 0.583173497560 | 0.188983895433 | 65.65 | BPC-owned portfolio | 0 | 0 | 0 | no |
+| V12 M2 average | improved_full 60s | not closed | 0.719065249476 | 0.583686779230 | 0.188270077500 | 65.87 | BPC-owned portfolio | 0 | 2 | 0 | no |
+| V12 M2 average | improved_full 300s | not closed | 0.719065249476 | 0.595725069580 | 0.171528494787 | 310.74 | BPC-owned portfolio | 4 | 6 | 0 | no |
+
+The V4 smoke `gcap-frontier` row remains certified with objective `0`, gap `0`,
+and `certified_original_problem=true`. The V12 rows remain noncertified because
+they have positive gaps and unresolved intervals. The operation-budget cuts
+improved the V12 M2 lower bound in both 60s and 300s rows. On V12 M1, the short
+operation-budget rows did not improve the solved time-limited relaxation bound;
+the 300s row improved mainly through a better incumbent and adaptive child
+processing. The progress traces now contain initial, after-seed, interval,
+adaptive-split, route-pool, and final checkpoints; see
+`results/optimization_update_round7/progress_trace_v12_m1_300s.csv` and
+`results/optimization_update_round7/progress_trace_v12_m2_300s.csv`.
+
+The prepared 1200s reproduction commands are recorded in
+`results/optimization_update_round7/commands.md`, but were not run locally in
+this pass because the required smoke and V12 60s/300s suite consumed about 31
+minutes of wall time. Raw JSON, logs, summaries, and progress traces are stored
+in `results/optimization_update_round7/`. All executed commands exited with
+code `0`; captured logs contained no address/access-violation, segmentation,
+`bad_alloc`, out-of-memory, or STATUS_ACCESS_VIOLATION signatures.

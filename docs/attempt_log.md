@@ -1156,7 +1156,7 @@ Implemented:
 - Per-vehicle route-pool caps and dominance-preserving pool insertion statistics.
 - Focused relaxation intensification for the current global-min-LB unresolved frontier interval.
 - Quantity-aware pickup/drop transfer caps in the compatibility-flow relaxation.
-- `--progress-log` / `--progress-interval-seconds` reporting; current trace is a final checkpoint, not a full periodic stream.
+- `--progress-log` / `--progress-interval-seconds` reporting; round-six traces were final-checkpoint oriented and were superseded by the periodic round-seven implementation.
 - `pickup-drop-transfer-cap-test` diagnostic.
 
 Tests:
@@ -1190,6 +1190,69 @@ Skipped/limited:
 
 Next TODOs:
 
-- Implement true periodic progress checkpoints instead of the current final-checkpoint progress log.
+- Periodic progress checkpoints were implemented in round seven; continue using them for long-run convergence diagnosis.
 - Investigate why focused intensification often improves little despite additional relaxation time.
 - Add a stronger lower-bound source for the V12 minimum-LB intervals; transfer caps and route-pool incumbents are not enough.
+
+## 2026-06-21 Round 7: Adaptive Splitting, Operation Budgets, And Periodic Progress Traces
+
+Implemented:
+
+- Periodic `--progress-log` checkpoints with an initial empty-incumbent row,
+  after-seed row, interval relaxation/tree rows, adaptive split rows, route-pool
+  rows, and final summary.
+- Adaptive splitting of unresolved global-min-LB Gini frontier intervals, with
+  exact child coverage and inherited valid parent lower-bound floors.
+- Route-mask operation-budget cuts in the route-mask relaxation using
+  non-overestimating depot-cycle lower bounds and the operation-time
+  conservation identity.
+- Focused intensification metadata for split-triggered child processing and
+  operation-budget use.
+
+Tests:
+
+- CMake was unavailable; both executables built with the documented `g++`
+  fallback.
+- V4 smoke diagnostics were run for pricing, pricing-branch, cuts, branching,
+  master, cg, gcap-cg, gcap-tree, gcap-frontier, dominance-test,
+  support-pruning-test, route-mask-support-test, incumbent-import-test,
+  route-pool-incumbent-test, pickup-drop-compat-flow-test,
+  pickup-drop-transfer-cap-test, route-mask-operation-budget-test, and
+  adaptive-frontier-split-test.
+- V4 `gcap-frontier` remained certified with objective `0`, gap `0`, and
+  `certified_original_problem=true`.
+- V12 M1/M2 ablations were run for 60s rows plus final 300s improved rows.
+
+Best local V12 rows:
+
+- V12 M1 improved_full_300s: UB `0.366563817616`, LB `0.279082208580`, gap
+  `0.238653148053`; noncertified.
+- V12 M2 improved_full_300s: UB `0.719065249476`, LB `0.595725069580`, gap
+  `0.171528494787`; noncertified.
+
+Convergence behavior:
+
+- V12 M1 300s improved through incumbent quality and adaptive child processing,
+  but left one unresolved interval.
+- V12 M2 300s improved the lower bound from `0.583173497560` in the 60s
+  baseline to `0.595725069580`; operation-budget cuts and adaptive splitting
+  both contributed to the active lower-bound ledger.
+- 1200s commands were prepared but not run locally because the smoke plus V12
+  60s/300s suite consumed about 31 minutes of wall time.
+
+Safety:
+
+- All executed commands exited with code `0`.
+- Captured logs were scanned for AddressSanitizer, access violation,
+  segmentation, `bad_alloc`, out-of-memory, `-1073741819`, `3221225477`, and
+  STATUS_ACCESS_VIOLATION signatures; none were found.
+- Plain CPLEX was skipped, so no CPLEX comparisons or speedup claims are made.
+
+Remaining TODOs:
+
+- Run the prepared V12 1200s commands during a longer unattended slot.
+- Investigate V12 M1 lower-bound sensitivity where operation-budget cuts did
+  not improve short-run relaxation bounds.
+- Evaluate route-mask operation budgets with vehicle-indexed pickup linking and
+  exact small-support feasibility cuts, still requiring exact infeasibility
+  proofs.

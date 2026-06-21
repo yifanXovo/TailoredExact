@@ -700,7 +700,8 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     bool movement_domain_tightening_enabled,
     bool route_mask_support_duration_pruning_enabled,
     bool pickup_drop_compat_flow_enabled,
-    bool pickup_drop_transfer_cap_flow_enabled) {
+    bool pickup_drop_transfer_cap_flow_enabled,
+    bool route_mask_operation_budget_cuts_enabled) {
     GiniIntervalInventoryRelaxationBound bound;
     if (instance.V <= 0 || gamma_cap < -1e-12) {
         bound.note = "inventory-Gini relaxation skipped because interval parameters are invalid";
@@ -892,12 +893,14 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
         integer_inventory_relaxation && instance.V <= route_mask_max_v &&
         instance.M <= 4;
     std::vector<std::vector<int>> allowed_route_masks_by_vehicle(instance.M);
+    std::vector<std::vector<int>> route_mask_pickup_budget_by_vehicle(instance.M);
     if (route_mask_relaxation) {
         const auto support_start = std::chrono::steady_clock::now();
         const int max_mask = 1 << instance.V;
         const double cunit = std::max(0.0, unit_operation_time);
         bound.route_mask_support_duration_pruning =
             route_mask_support_duration_pruning_enabled;
+        long long operation_budget_sum = 0;
         for (int k = 0; k < instance.M; ++k) {
             for (int mask = 1; mask < max_mask; ++mask) {
                 if (mask >= static_cast<int>(route_cycle_lb.size())) continue;
@@ -931,11 +934,70 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
                 }
                 allowed_route_masks_by_vehicle[k].push_back(mask);
                 ++bound.route_mask_count_after_support_duration;
+                int pickup_budget = max_vehicle_capacity;
+                if (route_mask_operation_budget_cuts_enabled && cunit > 1e-12) {
+                    const double residual =
+                        instance.total_time_limit - route_cycle_lb[mask];
+                    pickup_budget = residual >= -1e-9
+                        ? static_cast<int>(std::floor(
+                              std::max(0.0, residual) / cunit + 1e-9))
+                        : 0;
+                    const int q = k < static_cast<int>(instance.Q.size())
+                        ? instance.Q[k] : max_vehicle_capacity;
+                    pickup_budget = std::max(0, std::min(pickup_budget, q));
+                    if (pickup_budget == 0) ++bound.route_mask_operation_budget_zero_masks;
+                    if (pickup_budget < q) {
+                        ++bound.route_mask_operation_budget_tightened_masks;
+                    }
+                    if (bound.route_mask_operation_budget_min <= 0.0) {
+                        bound.route_mask_operation_budget_min = pickup_budget;
+                    } else {
+                        bound.route_mask_operation_budget_min =
+                            std::min(bound.route_mask_operation_budget_min,
+                                     static_cast<double>(pickup_budget));
+                    }
+                    bound.route_mask_operation_budget_max =
+                        std::max(bound.route_mask_operation_budget_max,
+                                 static_cast<double>(pickup_budget));
+                    operation_budget_sum += pickup_budget;
+                    if (bound.route_mask_operation_budget_examples.size() < 8) {
+                        std::ostringstream example;
+                        example << "vehicle=" << k
+                                << ", mask=" << mask
+                                << ", popcount=" << support_size
+                                << ", cycle_lb=" << route_cycle_lb[mask]
+                                << ", pickup_budget=" << pickup_budget
+                                << ", route_limit=" << instance.total_time_limit;
+                        bound.route_mask_operation_budget_examples.push_back(
+                            example.str());
+                    }
+                } else {
+                    const int q = k < static_cast<int>(instance.Q.size())
+                        ? instance.Q[k] : max_vehicle_capacity;
+                    pickup_budget = std::max(0, q);
+                }
+                route_mask_pickup_budget_by_vehicle[k].push_back(pickup_budget);
+            }
+        }
+        if (route_mask_operation_budget_cuts_enabled && cunit <= 1e-12) {
+            bound.route_mask_operation_budget_examples.push_back(
+                "operation_budget_disabled: pickup_time+drop_time <= 0");
+        }
+        if (route_mask_operation_budget_cuts_enabled) {
+            bound.route_mask_operation_budget_cuts_added =
+                static_cast<long long>(instance.M);
+            const long long allowed_count = bound.route_mask_count_after_support_duration;
+            if (allowed_count > 0) {
+                bound.route_mask_operation_budget_avg =
+                    static_cast<double>(operation_budget_sum) /
+                    static_cast<double>(allowed_count);
             }
         }
         bound.route_mask_support_duration_precompute_time_seconds =
             std::chrono::duration<double>(
                 std::chrono::steady_clock::now() - support_start).count();
+        bound.route_mask_operation_budget_precompute_time_seconds =
+            bound.route_mask_support_duration_precompute_time_seconds;
     }
     const bool compat_flow =
         pickup_drop_compat_flow_enabled && instance.V <= 30;
@@ -1065,9 +1127,27 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
            << bound.route_masks_removed_by_support_duration
            << ", route_mask_support_duration_max_removed_subset_size="
            << bound.route_mask_support_duration_max_removed_subset_size;
+        ss << ", route_mask_operation_budget_cuts="
+           << (route_mask_operation_budget_cuts_enabled ? "true" : "false")
+           << ", route_mask_operation_budget_cuts_added="
+           << bound.route_mask_operation_budget_cuts_added
+           << ", route_mask_operation_budget_min="
+           << bound.route_mask_operation_budget_min
+           << ", route_mask_operation_budget_avg="
+           << bound.route_mask_operation_budget_avg
+           << ", route_mask_operation_budget_max="
+           << bound.route_mask_operation_budget_max
+           << ", route_mask_operation_budget_tightened_masks="
+           << bound.route_mask_operation_budget_tightened_masks
+           << ", route_mask_operation_budget_zero_masks="
+           << bound.route_mask_operation_budget_zero_masks;
         for (const std::string& example :
              bound.route_mask_support_duration_removed_examples) {
             ss << ", removed_mask_example={" << example << "}";
+        }
+        for (const std::string& example :
+             bound.route_mask_operation_budget_examples) {
+            ss << ", operation_budget_example={" << example << "}";
         }
         return ss.str();
     };
@@ -1303,6 +1383,30 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
             if (first_duration) duration << "0";
             duration << " <= " << num(instance.total_time_limit);
             row(duration.str());
+
+            if (route_mask_operation_budget_cuts_enabled &&
+                k < static_cast<int>(route_mask_pickup_budget_by_vehicle.size()) &&
+                route_mask_pickup_budget_by_vehicle[k].size() ==
+                    allowed_route_masks_by_vehicle[k].size()) {
+                std::ostringstream op_budget;
+                bool first_budget = true;
+                for (int i = 1; i <= instance.V; ++i) {
+                    addPositiveTerm(op_budget, first_budget, 1.0,
+                                    routePickupName(k, i));
+                }
+                for (std::size_t pos = 0;
+                     pos < allowed_route_masks_by_vehicle[k].size(); ++pos) {
+                    const int mask = allowed_route_masks_by_vehicle[k][pos];
+                    const int budget = route_mask_pickup_budget_by_vehicle[k][pos];
+                    if (budget > 0) {
+                        op_budget << " - " << num(budget) << " "
+                                  << routeMaskName(k, mask);
+                    }
+                }
+                if (first_budget) op_budget << "0";
+                op_budget << " <= 0";
+                row(op_budget.str());
+            }
 
             std::ostringstream route_drop_balance;
             bool first_drop_balance = true;

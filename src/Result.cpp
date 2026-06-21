@@ -138,6 +138,8 @@ std::string inferMethodScope(const SolveResult& result) {
         method == "branching" || method == "cg" || method == "gcap-branch" ||
         method == "support-pruning-test" ||
         method == "route-mask-support-test" ||
+        method == "route-mask-operation-budget-test" ||
+        method == "adaptive-frontier-split-test" ||
         method == "incumbent-import-test" ||
         method == "route-pool-incumbent-test" ||
         method == "pickup-drop-compat-flow-test" ||
@@ -201,6 +203,8 @@ std::string inferCertificateType(const SolveResult& result) {
     if (method == "pricing") return "route_load_pricing_oracle";
     if (method == "support-pruning-test") return "support_duration_pruning_diagnostic";
     if (method == "route-mask-support-test") return "route_mask_support_duration_diagnostic";
+    if (method == "route-mask-operation-budget-test") return "route_mask_operation_budget_diagnostic";
+    if (method == "adaptive-frontier-split-test") return "adaptive_frontier_split_diagnostic";
     if (method == "incumbent-import-test") return "incumbent_import_verification_diagnostic";
     if (method == "route-pool-incumbent-test") return "route_pool_incumbent_diagnostic";
     if (method == "pickup-drop-compat-flow-test") return "pickup_drop_compat_flow_diagnostic";
@@ -391,6 +395,20 @@ std::string resultToJson(const SolveResult& result) {
         << result.route_mask_support_duration_max_removed_subset_size << ",\n";
     out << "  \"route_mask_support_duration_pruning\": "
         << (result.route_mask_support_duration_pruning ? "true" : "false") << ",\n";
+    out << "  \"route_mask_operation_budget_cuts_added\": "
+        << result.route_mask_operation_budget_cuts_added << ",\n";
+    out << "  \"route_mask_operation_budget_min\": "
+        << result.route_mask_operation_budget_min << ",\n";
+    out << "  \"route_mask_operation_budget_avg\": "
+        << result.route_mask_operation_budget_avg << ",\n";
+    out << "  \"route_mask_operation_budget_max\": "
+        << result.route_mask_operation_budget_max << ",\n";
+    out << "  \"route_mask_operation_budget_tightened_masks\": "
+        << result.route_mask_operation_budget_tightened_masks << ",\n";
+    out << "  \"route_mask_operation_budget_zero_masks\": "
+        << result.route_mask_operation_budget_zero_masks << ",\n";
+    out << "  \"route_mask_operation_budget_precompute_time_seconds\": "
+        << result.route_mask_operation_budget_precompute_time_seconds << ",\n";
     out << "  \"movement_domains_tightened_count\": "
         << result.movement_domains_tightened_count << ",\n";
     out << "  \"movement_domain_width_before\": "
@@ -568,6 +586,28 @@ std::string resultToJson(const SolveResult& result) {
         << result.focused_intensification_time_seconds << ",\n";
     out << "  \"focused_intensification_stop_reason\": \""
         << jsonEscape(result.focused_intensification_stop_reason) << "\",\n";
+    out << "  \"focused_intensification_split_triggered\": "
+        << (result.focused_intensification_split_triggered ? "true" : "false") << ",\n";
+    out << "  \"focused_intensification_operation_budget_enabled\": "
+        << (result.focused_intensification_operation_budget_enabled ? "true" : "false") << ",\n";
+    out << "  \"focused_intensification_child_intervals_processed\": "
+        << result.focused_intensification_child_intervals_processed << ",\n";
+    out << "  \"focused_intensification_best_child_lb\": "
+        << result.focused_intensification_best_child_lb << ",\n";
+    out << "  \"adaptive_split_enabled\": "
+        << (result.adaptive_split_enabled ? "true" : "false") << ",\n";
+    out << "  \"adaptive_split_intervals_created\": "
+        << result.adaptive_split_intervals_created << ",\n";
+    out << "  \"adaptive_split_max_depth_reached\": "
+        << (result.adaptive_split_max_depth_reached ? "true" : "false") << ",\n";
+    out << "  \"adaptive_split_global_min_interval_before\": \""
+        << jsonEscape(result.adaptive_split_global_min_interval_before) << "\",\n";
+    out << "  \"adaptive_split_global_min_interval_after\": \""
+        << jsonEscape(result.adaptive_split_global_min_interval_after) << "\",\n";
+    out << "  \"adaptive_split_lb_improvements\": "
+        << result.adaptive_split_lb_improvements << ",\n";
+    out << "  \"adaptive_split_time_seconds\": "
+        << result.adaptive_split_time_seconds << ",\n";
     out << "  \"pickup_drop_pairs_total\": "
         << result.pickup_drop_pairs_total << ",\n";
     out << "  \"pickup_drop_pairs_compatible\": "
@@ -596,6 +636,15 @@ std::string resultToJson(const SolveResult& result) {
         << result.pickup_drop_compat_flow_time_seconds << ",\n";
     out << "  \"progress_log\": \""
         << jsonEscape(result.progress_log_path) << "\",\n";
+    out << "  \"progress_checkpoints_written\": "
+        << result.progress_checkpoints_written << ",\n";
+    out << "  \"last_lb_improvement_time_seconds\": "
+        << result.last_lb_improvement_time_seconds << ",\n";
+    out << "  \"last_ub_improvement_time_seconds\": "
+        << result.last_ub_improvement_time_seconds << ",\n";
+    out << "  \"best_gap_seen\": " << result.best_gap_seen << ",\n";
+    out << "  \"best_gap_time_seconds\": "
+        << result.best_gap_time_seconds << ",\n";
     out << "  \"final_inventories\": "; writeVector(out, result.final_inventory); out << ",\n";
     out << "  \"routes\": [";
     for (std::size_t r = 0; r < result.routes.size(); ++r) {

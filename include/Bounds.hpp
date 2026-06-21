@@ -51,6 +51,14 @@ struct GiniIntervalInventoryRelaxationBound {
     int route_mask_support_duration_max_removed_subset_size = 0;
     bool route_mask_support_duration_pruning = false;
     std::vector<std::string> route_mask_support_duration_removed_examples;
+    long long route_mask_operation_budget_cuts_added = 0;
+    double route_mask_operation_budget_min = 0.0;
+    double route_mask_operation_budget_avg = 0.0;
+    double route_mask_operation_budget_max = 0.0;
+    long long route_mask_operation_budget_tightened_masks = 0;
+    long long route_mask_operation_budget_zero_masks = 0;
+    double route_mask_operation_budget_precompute_time_seconds = 0.0;
+    std::vector<std::string> route_mask_operation_budget_examples;
     long long pickup_drop_pairs_total = 0;
     long long pickup_drop_pairs_compatible = 0;
     long long pickup_drop_pairs_incompatible = 0;
@@ -117,7 +125,8 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     bool movement_domain_tightening_enabled = true,
     bool route_mask_support_duration_pruning_enabled = true,
     bool pickup_drop_compat_flow_enabled = true,
-    bool pickup_drop_transfer_cap_flow_enabled = true);
+    bool pickup_drop_transfer_cap_flow_enabled = true,
+    bool route_mask_operation_budget_cuts_enabled = true);
 
 InventoryRatioProjectionBound computeInventoryRatioProjectionBound(
     const Instance& instance,

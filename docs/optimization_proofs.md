@@ -334,14 +334,82 @@ computed, a loose cap is retained. These inequalities are necessary for every
 feasible route-load solution and can only strengthen the relaxation lower bound.
 They are not a standalone optimality certificate.
 
+## Seventh Optimization Pass: Adaptive Splitting And Route-Mask Operation Budgets
+
+### Adaptive Gini-Frontier Splitting
+
+For a disjoint Gini-frontier partition, every feasible solution belongs to
+exactly one active leaf interval. If an unresolved parent interval
+`[gamma_L,gamma_U]` is replaced by child intervals whose union is exactly the
+parent and whose interiors are disjoint, the covered feasible region is
+unchanged. The global lower bound is then the minimum valid lower bound over
+the active leaf intervals.
+
+A child interval may inherit the parent's valid lower bound as a floor because
+the child feasible region is a subset of the parent feasible region. It may also
+receive stronger child-specific bounds from its tighter Gini floor/cap,
+incumbent penalty budget, and inventory/route/Gini relaxation. Splitting is
+therefore certificate-neutral: it changes the partition and search order, but
+it never removes feasible solutions and it cannot certify a positive-gap run
+unless all relevant leaf intervals are closed, empty, or bound-fathomed.
+
+### Route-Mask Operation-Budget Cuts
+
+For vehicle `k` and route mask `M`, let `cycle_lb_k(M)` be a non-overestimating
+lower bound on the depot cycle visiting all stations in `M`. The implementation
+uses exact Held-Karp dynamic programming over the metric closure when the
+complete route-mask relaxation is active for the tested `V <= route_mask_max_v`
+instances; any larger fallback must remain a lower bound, not an overestimate.
+
+Because a route starts empty and returns to the depot with any remaining load
+unloaded, total station drop plus depot unload equals total pickup. Thus route
+operation time is:
+
+```text
+(pickup_time + drop_time) * total_pickup_on_route.
+```
+
+If `cunit = pickup_time + drop_time` and route duration must satisfy
+`travel + operation <= T_k`, every feasible route-load column using mask `M`
+satisfies:
+
+```text
+total_pickup_on_route <= floor((T_k - cycle_lb_k(M)) / cunit)
+```
+
+when `T_k >= cycle_lb_k(M)`, and the mask is infeasible otherwise. Adding the
+corresponding route-mask relaxation row removes no feasible original route-load
+solution. If `cunit <= 0` or a safe cycle lower bound cannot be computed, the
+cut is disabled or made loose rather than cutting.
+
+### Focused Split/Intensification Neutrality
+
+Focused intensification may rerun the relaxation on the current global-minimum
+lower-bound interval. If one pass gives no valid lower-bound progress, adaptive
+splitting may replace that interval with exactly covering child intervals and
+process the child with the minimum valid bound. The final frontier ledger still
+contains every relevant active leaf interval. Therefore focused splitting is a
+runtime-allocation and partition-refinement strategy only; it is not an
+independent certificate.
+
+### Progress And Long-Run Convergence Protocol
+
+Progress traces record elapsed time, incumbent upper bound, valid frontier
+lower bound, gap, unresolved interval count, current minimum-LB interval, open
+nodes, route-pool columns, timing split, and node/column counts. They are used
+to diagnose whether a run is still improving and which component dominates
+runtime. A long run remains noncertified if `gap > 0`, `unresolved_intervals >
+0`, `open_nodes > 0`, or any certificate condition fails.
+
 ### Time-To-Gap Reporting
 
 The `--progress-log` option records frontier lower-bound and incumbent progress
-for long runs. In the current implementation the round-six trace is a lightweight
-final checkpoint rather than a periodic event stream. It records the same
-certificate fields used by the JSON result and is a reporting aid only. Longer
-runtime or a decreasing gap does not imply certification unless the full
-frontier ledger closes with gap zero.
+for convergence reporting. The round-seven implementation writes an initial
+empty-incumbent checkpoint, an after-seed checkpoint, checkpoints after interval
+relaxations, interval trees, adaptive splits, focused-intensification passes,
+route-pool incumbent calls, and a final summary. These rows are reporting aids
+only. Longer runtime, a decreasing gap, or a stronger incumbent does not imply
+certification unless the full frontier ledger closes with gap zero.
 
 ## Fifth Optimization Pass: Focused Retry, Route-Pool Incumbents, And Compatibility Flow
 

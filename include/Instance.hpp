@@ -78,6 +78,10 @@ struct SolveOptions {
     double frontier_focused_reserve_fraction = 0.25;
     double frontier_focused_relax_seconds = 5.0;
     int frontier_focused_max_passes = 2;
+    bool frontier_adaptive_split = true;
+    int frontier_adaptive_max_depth = 3;
+    double frontier_adaptive_min_width = 1e-4;
+    int frontier_adaptive_split_factor = 2;
     bool route_pool_incumbent = true;
     int route_pool_max_columns_per_vehicle = 5000;
     bool route_pool_keep_best_per_projection = true;
@@ -85,12 +89,13 @@ struct SolveOptions {
     bool pickup_drop_transfer_cap_flow = true;
     bool support_duration_pruning = true;
     bool route_mask_support_duration_pruning = true;
+    bool route_mask_operation_budget_cuts = true;
     bool support_feasibility_oracle = false;
     int support_duration_max_subset_size = 5;
     std::string hga_incumbent_path;
     std::string hga_incumbent_format = "auto";
     std::string progress_log_path;
-    double progress_interval_seconds = 30.0;
+    double progress_interval_seconds = 0.0;
     int inventory_probe_max_v = 7;
     double inventory_probe_seconds = -1.0;
 };

@@ -284,7 +284,26 @@ All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `
   must be derived from metric/travel lower bounds, handling time, truck capacity,
   pickup availability, and drop residual capacity. Heuristic route failures must
   not set a cap to zero.
-- Time-to-gap progress logs are reporting aids. In round six the implementation
-  writes a final frontier checkpoint rather than a full periodic trace. Longer
-  runtime, a better incumbent, or a higher lower bound does not imply an
-  original-problem certificate without full frontier closure and gap zero.
+- Time-to-gap progress logs are reporting aids. Longer runtime, a better
+  incumbent, or a higher lower bound does not imply an original-problem
+  certificate without full frontier closure and gap zero.
+
+## 2026-06-21 Round-7 Certificate Warnings
+
+- Periodic progress logs now include initial, interval, adaptive-split,
+  focused-intensification, route-pool, and final checkpoints. They are
+  convergence traces only. A decreasing trace does not certify the original
+  problem.
+- Adaptive interval splitting preserves certificates only when child intervals
+  exactly cover the parent interval without gaps or overlaps. The active
+  frontier lower bound is the minimum over leaf intervals.
+- Route-mask operation-budget cuts require a non-overestimating depot-cycle
+  travel lower bound and positive handling unit `pickup_time + drop_time`.
+  If those conditions are not met, the cut must be disabled or relaxed.
+- Focused intensification with splitting changes time allocation and interval
+  partitioning only. It does not remove unresolved intervals from the final
+  ledger.
+- Time-limited relaxation or branch-price bounds may be reported as valid
+  progress only when their solver status and lower-bound meaning are valid.
+  They are not certificates unless the full frontier ledger closes and all
+  exact-pricing requirements are satisfied.
