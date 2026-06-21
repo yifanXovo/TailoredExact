@@ -39,8 +39,13 @@ void usage() {
         << "[--route-pool-incumbent true|false] [--route-pool-max-columns-per-vehicle <N>] "
         << "[--route-pool-keep-best-per-projection true|false] "
         << "[--pickup-drop-compat-flow true|false] [--pickup-drop-transfer-cap-flow true|false] "
+        << "[--vehicle-indexed-operation-relaxation true|false] [--vehicle-indexed-relaxation-audit true|false] "
+        << "[--vehicle-indexed-transfer-flow true|false] "
         << "[--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>] "
-        << "[--progress-log <path>] [--progress-interval-seconds <seconds>]\n";
+        << "[--progress-log <path>] [--progress-interval-seconds <seconds>] "
+        << "[--frontier-focus-only true|false] [--frontier-focus-interval-id auto|N] "
+        << "[--frontier-focus-time-limit <seconds>] [--frontier-focus-relax-seconds <seconds>] "
+        << "[--frontier-focus-tree-nodes <N>]\n";
 }
 
 std::string requireValue(int& i, int argc, char** argv) {
@@ -106,10 +111,18 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--route-pool-keep-best-per-projection") opt.route_pool_keep_best_per_projection = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--pickup-drop-compat-flow") opt.pickup_drop_compat_flow = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--pickup-drop-transfer-cap-flow") opt.pickup_drop_transfer_cap_flow = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--vehicle-indexed-operation-relaxation") opt.vehicle_indexed_operation_relaxation = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--vehicle-indexed-relaxation-audit") opt.vehicle_indexed_relaxation_audit = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--vehicle-indexed-transfer-flow") opt.vehicle_indexed_transfer_flow = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--inventory-probe-max-v") opt.inventory_probe_max_v = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--inventory-probe-seconds") opt.inventory_probe_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--progress-log") opt.progress_log_path = requireValue(i, argc, argv);
         else if (arg == "--progress-interval-seconds") opt.progress_interval_seconds = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--frontier-focus-interval-id") opt.frontier_focus_interval_id = requireValue(i, argc, argv);
+        else if (arg == "--frontier-focus-only") opt.frontier_focus_only = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-focus-time-limit") opt.frontier_focus_time_limit = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--frontier-focus-relax-seconds") opt.frontier_focus_relax_seconds = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--frontier-focus-tree-nodes") opt.frontier_focus_tree_nodes = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--out") opt.out_path = requireValue(i, argc, argv);
         else if (arg == "--help" || arg == "-h") {
             usage();
@@ -131,6 +144,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.frontier_adaptive_min_width <= 0.0) opt.frontier_adaptive_min_width = 1e-4;
     if (opt.frontier_adaptive_split_factor < 2) opt.frontier_adaptive_split_factor = 2;
     if (opt.progress_interval_seconds < 0.0) opt.progress_interval_seconds = 0.0;
+    if (opt.frontier_focus_time_limit == 0.0) opt.frontier_focus_time_limit = -1.0;
+    if (opt.frontier_focus_relax_seconds == 0.0) opt.frontier_focus_relax_seconds = -1.0;
+    if (opt.frontier_focus_tree_nodes == 0) opt.frontier_focus_tree_nodes = -1;
     std::string dominance_mode = opt.column_dominance_mode;
     std::transform(dominance_mode.begin(), dominance_mode.end(), dominance_mode.begin(),
                    [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
@@ -370,6 +386,34 @@ void writeMethodRow(std::ostringstream& out,
         << result.pickup_drop_transfer_cap_variables << ","
         << result.pickup_drop_transfer_cap_constraints << ","
         << result.pickup_drop_transfer_cap_time_seconds << ","
+        << (result.vehicle_indexed_operation_relaxation_enabled ? "true" : "false") << ","
+        << result.vehicle_indexed_y_variables << ","
+        << result.vehicle_indexed_pickup_variables << ","
+        << result.vehicle_indexed_drop_variables << ","
+        << result.vehicle_indexed_linking_constraints << ","
+        << result.vehicle_indexed_balance_constraints << ","
+        << result.vehicle_indexed_operation_budget_constraints << ","
+        << result.vehicle_indexed_relaxation_time_seconds << ","
+        << result.vehicle_transfer_flow_variables << ","
+        << result.vehicle_transfer_depot_unload_variables << ","
+        << result.vehicle_transfer_flow_balance_constraints << ","
+        << result.vehicle_transfer_mask_linking_constraints << ","
+        << result.vehicle_transfer_pairs_total << ","
+        << result.vehicle_transfer_pairs_zero_cap << ","
+        << result.vehicle_transfer_pairs_capacity_limited << ","
+        << result.vehicle_transfer_cap_min << ","
+        << result.vehicle_transfer_cap_avg << ","
+        << result.vehicle_transfer_cap_max << ","
+        << result.vehicle_transfer_flow_time_seconds << ","
+        << result.focus_interval_id << ","
+        << csvEscape(result.focus_interval_range) << ","
+        << result.focus_interval_lb_before << ","
+        << result.focus_interval_lb_after << ","
+        << (result.focus_interval_closed ? "true" : "false") << ","
+        << result.focus_interval_open_nodes << ","
+        << (result.focus_interval_pricing_closed ? "true" : "false") << ","
+        << result.focus_interval_runtime << ","
+        << csvEscape(result.focus_interval_certificate_scope) << ","
         << result.progress_checkpoints_written << ","
         << result.last_lb_improvement_time_seconds << ","
         << result.last_ub_improvement_time_seconds << ","
@@ -469,6 +513,18 @@ std::string comparisonCsv(const std::vector<std::pair<ebrp::SolveResult, ebrp::S
         << "pickup_drop_transfer_cap_avg,pickup_drop_transfer_cap_max,"
         << "pickup_drop_transfer_cap_variables,pickup_drop_transfer_cap_constraints,"
         << "pickup_drop_transfer_cap_time_seconds,"
+        << "vehicle_indexed_operation_relaxation_enabled,vehicle_indexed_y_variables,"
+        << "vehicle_indexed_pickup_variables,vehicle_indexed_drop_variables,"
+        << "vehicle_indexed_linking_constraints,vehicle_indexed_balance_constraints,"
+        << "vehicle_indexed_operation_budget_constraints,vehicle_indexed_relaxation_time_seconds,"
+        << "vehicle_transfer_flow_variables,vehicle_transfer_depot_unload_variables,"
+        << "vehicle_transfer_flow_balance_constraints,vehicle_transfer_mask_linking_constraints,"
+        << "vehicle_transfer_pairs_total,vehicle_transfer_pairs_zero_cap,"
+        << "vehicle_transfer_pairs_capacity_limited,vehicle_transfer_cap_min,"
+        << "vehicle_transfer_cap_avg,vehicle_transfer_cap_max,vehicle_transfer_flow_time_seconds,"
+        << "focus_interval_id,focus_interval_range,focus_interval_lb_before,"
+        << "focus_interval_lb_after,focus_interval_closed,focus_interval_open_nodes,"
+        << "focus_interval_pricing_closed,focus_interval_runtime,focus_interval_certificate_scope,"
         << "progress_checkpoints_written,last_lb_improvement_time_seconds,"
         << "last_ub_improvement_time_seconds,best_gap_seen,best_gap_time_seconds,"
         << "certified_original_problem,result_file,log_file,progress_log,"

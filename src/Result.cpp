@@ -209,6 +209,8 @@ std::string inferCertificateType(const SolveResult& result) {
     if (method == "route-pool-incumbent-test") return "route_pool_incumbent_diagnostic";
     if (method == "pickup-drop-compat-flow-test") return "pickup_drop_compat_flow_diagnostic";
     if (method == "pickup-drop-transfer-cap-test") return "pickup_drop_transfer_cap_diagnostic";
+    if (method == "vehicle-indexed-relaxation-test") return "vehicle_indexed_relaxation_diagnostic";
+    if (method == "vehicle-indexed-transfer-flow-test") return "vehicle_indexed_transfer_flow_diagnostic";
     if (method == "pricing-branch") return "route_load_pricing_branch_probe";
     if (method == "cuts") return "cut_separation_diagnostic";
     if (method == "branching") return "branching_candidate_diagnostic";
@@ -253,7 +255,9 @@ bool inferCertifiedOriginalProblem(const SolveResult& result) {
         if (result.frontier_range_certificate_scope != "original_full_improving_range") {
             return false;
         }
-        if (result.objective > 1e-12) {
+        const bool branch_price_tree_used_for_certificate =
+            result.frontier_tree_closed_interval_count > 0;
+        if (result.objective > 1e-12 && branch_price_tree_used_for_certificate) {
             if (!result.pricing_completed_exactly || !result.pricing_closure_certified_exact) return false;
             if (result.pricing_blocked_by_duplicate_projection) return false;
             if (result.pricing_closed_nodes <= 0) return false;
@@ -634,6 +638,44 @@ std::string resultToJson(const SolveResult& result) {
         << result.pickup_drop_compat_flow_constraints << ",\n";
     out << "  \"pickup_drop_compat_flow_time_seconds\": "
         << result.pickup_drop_compat_flow_time_seconds << ",\n";
+    out << "  \"vehicle_indexed_operation_relaxation_enabled\": "
+        << (result.vehicle_indexed_operation_relaxation_enabled ? "true" : "false") << ",\n";
+    out << "  \"vehicle_indexed_y_variables\": "
+        << result.vehicle_indexed_y_variables << ",\n";
+    out << "  \"vehicle_indexed_pickup_variables\": "
+        << result.vehicle_indexed_pickup_variables << ",\n";
+    out << "  \"vehicle_indexed_drop_variables\": "
+        << result.vehicle_indexed_drop_variables << ",\n";
+    out << "  \"vehicle_indexed_linking_constraints\": "
+        << result.vehicle_indexed_linking_constraints << ",\n";
+    out << "  \"vehicle_indexed_balance_constraints\": "
+        << result.vehicle_indexed_balance_constraints << ",\n";
+    out << "  \"vehicle_indexed_operation_budget_constraints\": "
+        << result.vehicle_indexed_operation_budget_constraints << ",\n";
+    out << "  \"vehicle_indexed_relaxation_time_seconds\": "
+        << result.vehicle_indexed_relaxation_time_seconds << ",\n";
+    out << "  \"vehicle_transfer_flow_variables\": "
+        << result.vehicle_transfer_flow_variables << ",\n";
+    out << "  \"vehicle_transfer_depot_unload_variables\": "
+        << result.vehicle_transfer_depot_unload_variables << ",\n";
+    out << "  \"vehicle_transfer_flow_balance_constraints\": "
+        << result.vehicle_transfer_flow_balance_constraints << ",\n";
+    out << "  \"vehicle_transfer_mask_linking_constraints\": "
+        << result.vehicle_transfer_mask_linking_constraints << ",\n";
+    out << "  \"vehicle_transfer_pairs_total\": "
+        << result.vehicle_transfer_pairs_total << ",\n";
+    out << "  \"vehicle_transfer_pairs_zero_cap\": "
+        << result.vehicle_transfer_pairs_zero_cap << ",\n";
+    out << "  \"vehicle_transfer_pairs_capacity_limited\": "
+        << result.vehicle_transfer_pairs_capacity_limited << ",\n";
+    out << "  \"vehicle_transfer_cap_min\": "
+        << result.vehicle_transfer_cap_min << ",\n";
+    out << "  \"vehicle_transfer_cap_avg\": "
+        << result.vehicle_transfer_cap_avg << ",\n";
+    out << "  \"vehicle_transfer_cap_max\": "
+        << result.vehicle_transfer_cap_max << ",\n";
+    out << "  \"vehicle_transfer_flow_time_seconds\": "
+        << result.vehicle_transfer_flow_time_seconds << ",\n";
     out << "  \"progress_log\": \""
         << jsonEscape(result.progress_log_path) << "\",\n";
     out << "  \"progress_checkpoints_written\": "
@@ -645,6 +687,23 @@ std::string resultToJson(const SolveResult& result) {
     out << "  \"best_gap_seen\": " << result.best_gap_seen << ",\n";
     out << "  \"best_gap_time_seconds\": "
         << result.best_gap_time_seconds << ",\n";
+    out << "  \"focus_interval_id\": " << result.focus_interval_id << ",\n";
+    out << "  \"focus_interval_range\": \""
+        << jsonEscape(result.focus_interval_range) << "\",\n";
+    out << "  \"focus_interval_lb_before\": "
+        << result.focus_interval_lb_before << ",\n";
+    out << "  \"focus_interval_lb_after\": "
+        << result.focus_interval_lb_after << ",\n";
+    out << "  \"focus_interval_closed\": "
+        << (result.focus_interval_closed ? "true" : "false") << ",\n";
+    out << "  \"focus_interval_open_nodes\": "
+        << result.focus_interval_open_nodes << ",\n";
+    out << "  \"focus_interval_pricing_closed\": "
+        << (result.focus_interval_pricing_closed ? "true" : "false") << ",\n";
+    out << "  \"focus_interval_runtime\": "
+        << result.focus_interval_runtime << ",\n";
+    out << "  \"focus_interval_certificate_scope\": \""
+        << jsonEscape(result.focus_interval_certificate_scope) << "\",\n";
     out << "  \"final_inventories\": "; writeVector(out, result.final_inventory); out << ",\n";
     out << "  \"routes\": [";
     for (std::size_t r = 0; r < result.routes.size(); ++r) {

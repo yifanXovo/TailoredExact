@@ -1256,3 +1256,87 @@ Remaining TODOs:
 - Evaluate route-mask operation budgets with vehicle-indexed pickup linking and
   exact small-support feasibility cuts, still requiring exact infeasibility
   proofs.
+
+## 2026-06-21 Round 8: Vehicle-Indexed Relaxation And Focus Runs
+
+Implemented:
+
+- Vehicle-indexed route-mask operation relaxation with `y_{k,i}`, `p_{k,i}`,
+  and `d_{k,i}` linked to route-mask variables, station disjointness, aggregate
+  final inventories, vehicle pickup/drop balance, depot-return capacity, and
+  mask operation-budget cuts.
+- Vehicle-indexed pickup-drop transfer flow with `f_{k,i,j}` and depot-unload
+  variables linked to vehicle route masks and safe duration/capacity transfer
+  caps.
+- Focus-only interval diagnostics through `--frontier-focus-only` and
+  `--frontier-focus-interval-id auto`; results are explicitly diagnostic
+  interval bounds, not original-problem certificates.
+- Deterministic V8/V10 parser-compatible engineering benchmark generator under
+  `scripts/generate_reference_instances.py` with generated inputs and manifest
+  in `reference/generated/`.
+- Reporting fix for bound-fathomed frontier certificates: exact pricing closure
+  is required only when branch-price tree intervals contribute to the lower
+  bound. Bound-fathomed-only certificates still require zero gap, full frontier
+  coverage, zero unresolved/invalid intervals, zero open nodes, and verifier
+  pass.
+
+Tests:
+
+- CMake was unavailable; both executables built with the documented `g++`
+  fallback.
+- V4 smoke diagnostics were run for pricing, pricing-branch, cuts, branching,
+  master, cg, gcap-cg, gcap-tree, gcap-frontier, dominance-test,
+  support-pruning-test, route-mask-support-test, route-mask-operation-budget-test,
+  incumbent-import-test, route-pool-incumbent-test,
+  pickup-drop-compat-flow-test, pickup-drop-transfer-cap-test,
+  vehicle-indexed-relaxation-test, vehicle-indexed-transfer-flow-test, and
+  adaptive-frontier-split-test.
+- V4 `gcap-frontier` remained certified with objective `0`, gap `0`, and
+  `certified_original_problem=true`.
+- V12 M1/M2 round-eight ablations were run for round7 baseline, vehicle-indexed
+  ops only, vehicle transfer flow only, focus interval only, improved_full,
+  and improved_full_300s. V12 M2 improved_full_1200s was also run.
+
+Best local V12 rows:
+
+- V12 M1 improved_full_300s: UB `0.368581603155`, LB `0.284563809518`, gap
+  `0.227948961416`; noncertified.
+- V12 M2 improved_full_1200s: UB `0.719065249476`, LB `0.689651961258`, gap
+  `0.0409048945689`; noncertified. The same UB/LB/gap appeared by the 300s
+  row, so the 1200s run did not add valid lower-bound progress.
+
+Focus-only interval outcome:
+
+- V12 M1 selected interval `0`, range `[0,0.184291]`, and closed that interval
+  diagnostically with interval LB `0.368581603155`.
+- V12 M2 selected interval `0`, range `[0,0.372737]`, and closed that interval
+  diagnostically with interval LB `0.745474506024`.
+- These are interval-only diagnostics and do not certify the original problem.
+
+V8/V10 restoration/generation:
+
+- Historical runnable V8/V10 `.txt` inputs were not found in this checkout.
+  Deterministic generated engineering benchmarks were created for V8_M2_average,
+  V10_M1_average, V10_M2_average, and V10_M2_low.
+- Generated V10_M2_average certified in `23.21s` with objective
+  `0.0601270957314`; generated V10_M2_low certified in `23.54s` with objective
+  `0.163171713361`.
+- Generated V8_M2_average and V10_M1_average remained positive-gap 60s
+  diagnostics. These generated cases are not historical paper targets.
+
+Safety:
+
+- Captured logs were scanned for AddressSanitizer, access violation,
+  segmentation, `bad_alloc`, out-of-memory, `-1073741819`, `3221225477`, and
+  STATUS_ACCESS_VIOLATION signatures; none were found.
+- Plain CPLEX was skipped, so no CPLEX comparisons or speedup claims are made.
+
+Remaining TODOs:
+
+- Run V12 M1 improved_full_1200s when local time is available.
+- Investigate why V12 M2 reaches the same lower bound by 300s and 1200s under
+  vehicle-indexed transfer flow.
+- Compare the generated V8/V10 engineering benchmarks with historical data if
+  the original `.txt` sources are recovered.
+- Consider exact small-support feasibility cuts only with a proof-producing
+  oracle; heuristic support failures remain unusable as cuts.
