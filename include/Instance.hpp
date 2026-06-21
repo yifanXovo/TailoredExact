@@ -116,6 +116,18 @@ struct SolveOptions {
     int strong_branching_candidates = 3;
     double strong_branching_time = 0.0;
     bool reliability_branching = false;
+    std::string frontier_export_state_path;
+    std::string frontier_resume_state_path;
+    std::string frontier_resume_interval_id = "auto";
+    std::string frontier_resume_mode = "interval-only";
+    std::string frontier_closure_mode = "auto";
+    int closure_max_cg_iterations = 24;
+    double closure_pricing_time_per_call = 0.0;
+    int closure_returned_columns = 4;
+    bool closure_final_exact_pricing = true;
+    std::string cg_dual_stabilization = "none";
+    double cg_dual_smoothing_alpha = 0.7;
+    int cg_stabilization_switch_to_true_after = 8;
     int inventory_probe_max_v = 7;
     double inventory_probe_seconds = -1.0;
 };

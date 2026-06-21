@@ -1415,3 +1415,57 @@ Remaining TODOs:
   independent command invocations.
 - Investigate the remaining V12 M2 leaf `[0.489218,0.512514]`, which controls
   the full-import 300s gap after the focus-bound split.
+
+## 2026-06-22 Round 10: Exact-CG Continuation And Pricing-Closure Audit
+
+Implementation:
+
+- Added strict pricing-closure status fields. Incomplete pricing, duplicate
+  negative projection blockage, or remaining negative reduced cost now forces
+  `pricing_closure_certified_exact=false`.
+- Added frontier state export/resume metadata. Open nodes are not serialized in
+  this build; resumed interval runs rebuild the exact tree from compatible
+  interval metadata, incumbent scalar data, and generated-column counts.
+- Added exact-CG continuation controls and reporting fields. The implementation
+  uses the existing tree/CG machinery with larger iteration and multi-column
+  pricing budgets.
+- Added dual-stabilization CLI/reporting. Smoothing is recorded but true-dual
+  pricing is used for certificate safety; actual stabilized discovery remains a
+  TODO.
+- Added `pricing-closure-audit-test` and `resume-state-test` smoke diagnostics.
+
+Results:
+
+- V4 `gcap-frontier` remains certified with objective `0`.
+- V12 M2 exact-CG focus `[0.489218,0.512514]`, 300s: UB
+  `0.719065249476`, LB `0.712948394993`, gap `0.008506675142`,
+  `pricing_closure_status=pricing_time_limit`, not certified.
+- V12 M2 resume from exported state, 300s: compatible state loaded with 1107
+  columns and interval LB `0.712948394993`; the resumed run reproduced the same
+  LB/UB/gap and remained noncertified.
+- V12 M2 full frontier importing the focus result, 300s: imported bound
+  accepted, UB `0.719065249476`, LB `0.657495783410`, gap
+  `0.085624310327`, `pricing_closure_status=negative_columns_remaining`, not
+  certified.
+- V12 M1 full frontier importing the round-nine focus result, 300s: imported
+  bound accepted, UB `0.375405784113`, LB `0.330637`, gap `0.119254380214`,
+  not certified. Other intervals still control full closure.
+
+Safety:
+
+- CMake was unavailable; fallback g++ builds succeeded for `ExactEBRP.exe` and
+  `ExactEBRPCompare.exe`.
+- All smoke and V12 commands exited with code `0`.
+- Logs in `results/optimization_update_round10/logs` were scanned for memory,
+  address, access-violation, segmentation, `bad_alloc`, fatal, and Windows
+  access-violation code signatures. No matches were found.
+- Plain CPLEX was skipped. No CPLEX speedup or certificate comparison is made.
+
+Remaining TODOs:
+
+- Serialize live BPC open nodes for stronger resume, or document exact limits
+  for every resume-mode result.
+- Implement actual dual-stabilized column discovery, followed by exact true-dual
+  final pricing verification.
+- Run V12 M2 exact-CG focus and full imported/resumed frontier at 1200s or
+  3600s in an unattended slot.

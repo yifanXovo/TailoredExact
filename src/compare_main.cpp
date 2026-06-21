@@ -49,7 +49,11 @@ void usage() {
         << "[--frontier-focus-time-limit <seconds>] [--frontier-focus-relax-seconds <seconds>] "
         << "[--frontier-focus-tree-nodes <N>] "
         << "[--branch-inventory true|false] [--branch-operation-mode true|false] "
-        << "[--branch-selection auto|ryan-foster|inventory|operation-mode|strong]\n";
+        << "[--branch-selection auto|ryan-foster|inventory|operation-mode|strong] "
+        << "[--frontier-export-state <path>] [--frontier-resume-state <path>] "
+        << "[--frontier-closure-mode exact-cg|tree|relax-only|auto] "
+        << "[--closure-max-cg-iterations <N>] [--closure-returned-columns <N>] "
+        << "[--closure-final-exact-pricing true|false] [--cg-dual-stabilization none|smooth|box]\n";
 }
 
 std::string requireValue(int& i, int argc, char** argv) {
@@ -139,6 +143,18 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--strong-branching-candidates") opt.strong_branching_candidates = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--strong-branching-time") opt.strong_branching_time = std::stod(requireValue(i, argc, argv));
         else if (arg == "--reliability-branching") opt.reliability_branching = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-export-state") opt.frontier_export_state_path = requireValue(i, argc, argv);
+        else if (arg == "--frontier-resume-state") opt.frontier_resume_state_path = requireValue(i, argc, argv);
+        else if (arg == "--frontier-resume-interval-id") opt.frontier_resume_interval_id = requireValue(i, argc, argv);
+        else if (arg == "--frontier-resume-mode") opt.frontier_resume_mode = requireValue(i, argc, argv);
+        else if (arg == "--frontier-closure-mode") opt.frontier_closure_mode = requireValue(i, argc, argv);
+        else if (arg == "--closure-max-cg-iterations") opt.closure_max_cg_iterations = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--closure-pricing-time-per-call") opt.closure_pricing_time_per_call = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--closure-returned-columns") opt.closure_returned_columns = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--closure-final-exact-pricing") opt.closure_final_exact_pricing = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--cg-dual-stabilization") opt.cg_dual_stabilization = requireValue(i, argc, argv);
+        else if (arg == "--cg-dual-smoothing-alpha") opt.cg_dual_smoothing_alpha = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--cg-stabilization-switch-to-true-after") opt.cg_stabilization_switch_to_true_after = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--out") opt.out_path = requireValue(i, argc, argv);
         else if (arg == "--help" || arg == "-h") {
             usage();
@@ -163,6 +179,31 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.frontier_focus_time_limit == 0.0) opt.frontier_focus_time_limit = -1.0;
     if (opt.frontier_focus_relax_seconds == 0.0) opt.frontier_focus_relax_seconds = -1.0;
     if (opt.frontier_focus_tree_nodes == 0) opt.frontier_focus_tree_nodes = -1;
+    std::transform(opt.frontier_resume_mode.begin(), opt.frontier_resume_mode.end(),
+                   opt.frontier_resume_mode.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    if (opt.frontier_resume_mode != "interval-only" &&
+        opt.frontier_resume_mode != "full-frontier") {
+        opt.frontier_resume_mode = "interval-only";
+    }
+    std::transform(opt.frontier_closure_mode.begin(), opt.frontier_closure_mode.end(),
+                   opt.frontier_closure_mode.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    if (opt.frontier_closure_mode != "exact-cg" &&
+        opt.frontier_closure_mode != "tree" &&
+        opt.frontier_closure_mode != "relax-only") {
+        opt.frontier_closure_mode = "auto";
+    }
+    if (opt.closure_max_cg_iterations < 1) opt.closure_max_cg_iterations = 1;
+    if (opt.closure_returned_columns < 1) opt.closure_returned_columns = 1;
+    if (opt.closure_pricing_time_per_call < 0.0) opt.closure_pricing_time_per_call = 0.0;
+    std::transform(opt.cg_dual_stabilization.begin(), opt.cg_dual_stabilization.end(),
+                   opt.cg_dual_stabilization.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    if (opt.cg_dual_stabilization != "smooth" &&
+        opt.cg_dual_stabilization != "box") {
+        opt.cg_dual_stabilization = "none";
+    }
     std::string dominance_mode = opt.column_dominance_mode;
     std::transform(dominance_mode.begin(), dominance_mode.end(), dominance_mode.begin(),
                    [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
@@ -274,6 +315,10 @@ void writeMethodRow(std::ostringstream& out,
         << result.pricing_new_negative_projections << ","
         << (result.pricing_blocked_by_duplicate_projection ? "true" : "false") << ","
         << (result.pricing_closure_certified_exact ? "true" : "false") << ","
+        << csvEscape(result.pricing_closure_status) << ","
+        << result.pricing_remaining_negative_rc << ","
+        << result.pricing_exact_verification_calls << ","
+        << result.pricing_exact_verification_time_seconds << ","
         << result.support_duration_cuts_generated << ","
         << result.support_duration_pruned_labels << ","
         << result.support_duration_pruned_columns << ","
@@ -439,6 +484,34 @@ void writeMethodRow(std::ostringstream& out,
         << result.imported_interval_bounds_rejected << ","
         << result.imported_interval_bounds_closed_intervals << ","
         << csvEscape(result.imported_interval_bounds_rejection_reasons) << ","
+        << (result.resumed_from_state ? "true" : "false") << ","
+        << (result.resume_state_compatible ? "true" : "false") << ","
+        << result.resume_state_columns_loaded << ","
+        << result.resume_state_nodes_loaded << ","
+        << result.resume_state_interval_lb << ","
+        << csvEscape(result.resume_state_rejection_reason) << ","
+        << (result.frontier_state_exported ? "true" : "false") << ","
+        << csvEscape(result.frontier_state_export_path) << ","
+        << csvEscape(result.closure_mode) << ","
+        << result.closure_cg_iterations << ","
+        << result.closure_columns_added << ","
+        << result.closure_pricing_calls << ","
+        << (result.closure_final_exact_pricing_run ? "true" : "false") << ","
+        << result.closure_final_best_reduced_cost << ","
+        << (result.closure_pricing_closed ? "true" : "false") << ","
+        << result.closure_time_seconds << ","
+        << csvEscape(result.closure_stop_reason) << ","
+        << csvEscape(result.cg_stabilization_mode) << ","
+        << result.cg_stabilized_pricing_calls << ","
+        << result.cg_true_pricing_calls << ","
+        << result.cg_stabilization_columns_found << ","
+        << result.cg_true_pricing_columns_found << ","
+        << result.cg_stabilization_time_seconds << ","
+        << result.cg_final_true_pricing_rc << ","
+        << (result.v12_m1_imported_focus_bounds ? "true" : "false") << ","
+        << result.v12_m1_focus_bounds_accepted << ","
+        << result.v12_m1_full_lb_before_import << ","
+        << result.v12_m1_full_lb_after_import << ","
         << result.inventory_branch_candidates << ","
         << result.inventory_branch_nodes_created << ","
         << result.inventory_branch_station << ","
@@ -503,6 +576,8 @@ std::string comparisonCsv(const std::vector<std::pair<ebrp::SolveResult, ebrp::S
         << "pricing_negative_columns_inserted,pricing_negative_columns_dominated,pricing_completed_exactly,"
         << "pricing_best_reduced_cost_any,pricing_best_new_reduced_cost,pricing_duplicate_negative_projections,"
         << "pricing_new_negative_projections,pricing_blocked_by_duplicate_projection,pricing_closure_certified_exact,"
+        << "pricing_closure_status,pricing_remaining_negative_rc,pricing_exact_verification_calls,"
+        << "pricing_exact_verification_time_seconds,"
         << "support_duration_cuts_generated,support_duration_pruned_labels,"
         << "support_duration_pruned_columns,support_duration_min_pickup_rule,"
         << "support_duration_strong_cuts_generated,support_duration_strong_pruned_labels,"
@@ -580,6 +655,16 @@ std::string comparisonCsv(const std::vector<std::pair<ebrp::SolveResult, ebrp::S
         << "imported_interval_bounds_attempted,imported_interval_bounds_accepted,"
         << "imported_interval_bounds_rejected,imported_interval_bounds_closed_intervals,"
         << "imported_interval_bounds_rejection_reasons,"
+        << "resumed_from_state,resume_state_compatible,resume_state_columns_loaded,"
+        << "resume_state_nodes_loaded,resume_state_interval_lb,resume_state_rejection_reason,"
+        << "frontier_state_exported,frontier_state_export_path,closure_mode,closure_cg_iterations,"
+        << "closure_columns_added,closure_pricing_calls,closure_final_exact_pricing_run,"
+        << "closure_final_best_reduced_cost,closure_pricing_closed,closure_time_seconds,"
+        << "closure_stop_reason,cg_stabilization_mode,cg_stabilized_pricing_calls,"
+        << "cg_true_pricing_calls,cg_stabilization_columns_found,cg_true_pricing_columns_found,"
+        << "cg_stabilization_time_seconds,cg_final_true_pricing_rc,"
+        << "v12_m1_imported_focus_bounds,v12_m1_focus_bounds_accepted,"
+        << "v12_m1_full_lb_before_import,v12_m1_full_lb_after_import,"
         << "inventory_branch_candidates,inventory_branch_nodes_created,inventory_branch_station,"
         << "inventory_branch_value,inventory_branch_left_bound,inventory_branch_right_bound,"
         << "inventory_branch_pruned_nodes,inventory_branch_max_depth,"

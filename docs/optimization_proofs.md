@@ -624,3 +624,64 @@ intervals. Imported focus evidence is not an original-problem certificate by
 itself; it becomes part of a certificate only if the entire compatible frontier
 ledger closes or is validly bound-fathomed.
 
+## Round 10: Pricing Closure, Resume, And Exact-CG Continuation
+
+### Pricing Closure Semantics
+
+A branch-price node is pricing-closed only when exact pricing is completed under
+the current true RMP duals and proves that no missing route-load projection has
+negative reduced cost. Therefore the reported node closure condition is:
+
+```text
+pricing_completed_exactly = true
+best true reduced cost >= -tolerance
+no missing negative projection remains
+no unresolved duplicate-negative blockage remains
+```
+
+If pricing times out, stops after finding a negative column, or returns only a
+duplicate/dominated negative projection without proving the absence of another
+missing negative projection, the node is not pricing-closed. A valid
+inventory/route/Gini relaxation lower bound may still be used as interval lower
+bound evidence, but it is not a branch-price pricing-closure certificate.
+
+### Frontier State Export And Resume
+
+State export/resume is certificate-neutral. Reusing a compatible incumbent,
+interval range, valid lower bound, branch restrictions, cuts, and generated
+feasible columns does not change the feasible region or the mathematical
+meaning of the lower bound. Compatibility must check the instance identity,
+lambda, handling times, route duration, vehicle capacities, interval range, and
+restriction set. If an implementation cannot serialize live open nodes, the
+safe fallback is to export verified columns and interval metadata, then rebuild
+the exact tree on resume. Such a run may continue search faster, but it creates
+no certificate unless the resumed run closes or validly fathoms the relevant
+frontier ledger.
+
+### Exact-CG Continuation
+
+Exact-CG continuation allocates extra iterations and pricing effort to one
+unresolved interval. Multi-column pricing and projection-key diversification can
+accelerate column discovery, but the final certificate still requires exact
+pricing under the final true RMP duals. If the continuation stops with
+`pricing_time_limit`, `negative_columns_remaining`, or
+`duplicate_negative_projection`, the interval remains open unless a separate
+valid relaxation bound fathoms it.
+
+### Dual Stabilization Safety
+
+Dual stabilization is a column-discovery heuristic. Stabilized duals may be used
+to look for useful columns, but final node closure must be certified by exact
+pricing using the unstabilized true RMP duals. If stabilized pricing fails to
+find a column, true pricing must be run before making any closure claim. The
+round-ten implementation records stabilization requests but uses true-dual
+pricing for certificate safety; actual stabilized discovery remains a TODO.
+
+### V12 M1 Focus-Bound Import Protocol
+
+A V12 M1 focus result over `[0.230364,0.276436]` can be imported into a full
+frontier only as interval lower-bound evidence. If other active leaves have
+lower valid bounds, the global full-frontier lower bound remains controlled by
+those leaves. Thus an accepted V12 M1 focus-bound import may improve one ledger
+row without changing the top-level minimum lower bound or certification status.
+

@@ -356,3 +356,27 @@ All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `
 - Positive-gap focus-only, imported-bound, or full-frontier runs remain
   noncertified even when they substantially improve the active lower-bound
   ledger.
+
+## 2026-06-22 Round-10 Certificate Warnings
+
+- Pricing closure requires exact pricing with no negative reduced-cost column
+  under the current true RMP duals. If `pricing_completed_exactly=false`, if
+  `pricing_remaining_negative_rc<0`, or if duplicate-negative projection
+  blockage remains unresolved, then `pricing_closure_certified_exact` must be
+  false.
+- A valid inventory/route/Gini relaxation lower bound can still be reported for
+  an interval whose pricing is not closed. That interval is not a
+  pricing-closed BPC certificate unless exact pricing closure is separately
+  proven.
+- Frontier resume states are valid only after compatibility checks on instance,
+  lambda, route duration, vehicle capacities, handling times, Gini interval, and
+  active restrictions. A resume run that rebuilds from exported columns and
+  bounds is certificate-neutral but does not certify anything by itself.
+- Exact-CG continuation is exact only when the final RMP is verified by exact
+  true-dual pricing. Extra pricing columns, multi-column output, and
+  diversification are acceleration mechanisms, not closure evidence.
+- Stabilized dual pricing is a column-discovery heuristic. It cannot be used as
+  a node-closure certificate; final closure must use the true current RMP duals.
+- Longer V12 runs and progress traces remain convergence diagnostics unless
+  the full frontier ledger closes, all relevant exact-pricing requirements are
+  satisfied, the verifier passes, and the final gap is zero.
