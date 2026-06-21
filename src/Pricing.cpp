@@ -690,11 +690,12 @@ private:
                                 instance_.dist[label.last][station]
                             + stationVisitCost(station);
 
-                        const int max_pick = std::min({
-                            instance_.initial[station],
-                            q_capacity - label.load,
-                            pickup_budget - label.pickup
-                        });
+                    const int max_pick = std::min({
+                        instance_.initial[station],
+                        q_capacity - label.load,
+                        pickup_budget - label.pickup
+                    });
+                    if ((options_.forbid_pickup_station_mask & bit) == 0) {
                         for (int p = 1; p <= max_pick; ++p) {
                             const int next_pickup = label.pickup + p;
                             const double duration_lb = closure_travel_lb +
@@ -720,10 +721,12 @@ private:
                             insertLabel(labels, buckets, keys_by_mask, next);
                             ++result_.operation_states;
                         }
+                    }
 
-                        const int max_drop = std::min(
-                            instance_.capacity[station] - instance_.initial[station],
-                            label.load);
+                    const int max_drop = std::min(
+                        instance_.capacity[station] - instance_.initial[station],
+                        label.load);
+                    if ((options_.forbid_drop_station_mask & bit) == 0) {
                         for (int d = 1; d <= max_drop; ++d) {
                             const double duration_lb = closure_travel_lb +
                                 (instance_.pickup_time + instance_.drop_time) * label.pickup;
@@ -751,6 +754,7 @@ private:
                     }
                 }
             }
+        }
         }
 
         if (best_label_idx >= 0) reconstructBestLabelColumn(labels, best_label_idx);
@@ -875,16 +879,21 @@ private:
                         q_capacity - load,
                         budget - pickup
                     });
-                    for (int p = 1; p <= max_pick; ++p) {
-                        relax(pos, load, pickup, load + p, pickup + p, p,
-                              label.cost + duals_.pickup_cost * p + op_cost * p);
+                    const int bit = 1 << (station - 1);
+                    if ((options_.forbid_pickup_station_mask & bit) == 0) {
+                        for (int p = 1; p <= max_pick; ++p) {
+                            relax(pos, load, pickup, load + p, pickup + p, p,
+                                  label.cost + duals_.pickup_cost * p + op_cost * p);
+                        }
                     }
 
                     const int max_drop = std::min(
                         instance_.capacity[station] - instance_.initial[station], load);
-                    for (int d = 1; d <= max_drop; ++d) {
-                        relax(pos, load, pickup, load - d, pickup, -d,
-                              label.cost - op_cost * d);
+                    if ((options_.forbid_drop_station_mask & bit) == 0) {
+                        for (int d = 1; d <= max_drop; ++d) {
+                            relax(pos, load, pickup, load - d, pickup, -d,
+                                  label.cost - op_cost * d);
+                        }
                     }
                 }
             }

@@ -27,6 +27,8 @@ struct PricingOptions {
     double negative_tolerance = 1e-9;
     int allowed_station_mask = 0;        // 0 means all stations allowed; otherwise station bitmask
     int forbidden_station_mask = 0;
+    int forbid_pickup_station_mask = 0;
+    int forbid_drop_station_mask = 0;
     std::vector<std::pair<int, int>> forbid_together_pairs;  // child branch sum containing both = 0
     std::vector<std::pair<int, int>> require_together_pairs; // columns may contain both or neither, not exactly one
     double stop_reduced_cost = -std::numeric_limits<double>::infinity();

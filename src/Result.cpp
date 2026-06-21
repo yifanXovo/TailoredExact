@@ -696,6 +696,14 @@ std::string resultToJson(const SolveResult& result) {
         << result.focus_interval_lb_after << ",\n";
     out << "  \"focus_interval_closed\": "
         << (result.focus_interval_closed ? "true" : "false") << ",\n";
+    out << "  \"focus_interval_bound_fathomed\": "
+        << (result.focus_interval_bound_fathomed ? "true" : "false") << ",\n";
+    out << "  \"focus_interval_parent_id\": "
+        << result.focus_interval_parent_id << ",\n";
+    out << "  \"focus_interval_open_nodes_before\": "
+        << result.focus_interval_open_nodes_before << ",\n";
+    out << "  \"focus_interval_open_nodes_after\": "
+        << result.focus_interval_open_nodes_after << ",\n";
     out << "  \"focus_interval_open_nodes\": "
         << result.focus_interval_open_nodes << ",\n";
     out << "  \"focus_interval_pricing_closed\": "
@@ -704,6 +712,66 @@ std::string resultToJson(const SolveResult& result) {
         << result.focus_interval_runtime << ",\n";
     out << "  \"focus_interval_certificate_scope\": \""
         << jsonEscape(result.focus_interval_certificate_scope) << "\",\n";
+    out << "  \"imported_interval_bounds_attempted\": "
+        << result.imported_interval_bounds_attempted << ",\n";
+    out << "  \"imported_interval_bounds_accepted\": "
+        << result.imported_interval_bounds_accepted << ",\n";
+    out << "  \"imported_interval_bounds_rejected\": "
+        << result.imported_interval_bounds_rejected << ",\n";
+    out << "  \"imported_interval_bounds_closed_intervals\": "
+        << result.imported_interval_bounds_closed_intervals << ",\n";
+    out << "  \"imported_interval_bounds_rejection_reasons\": \""
+        << jsonEscape(result.imported_interval_bounds_rejection_reasons) << "\",\n";
+    out << "  \"inventory_branch_candidates\": "
+        << result.inventory_branch_candidates << ",\n";
+    out << "  \"inventory_branch_nodes_created\": "
+        << result.inventory_branch_nodes_created << ",\n";
+    out << "  \"inventory_branch_station\": "
+        << result.inventory_branch_station << ",\n";
+    out << "  \"inventory_branch_value\": "
+        << result.inventory_branch_value << ",\n";
+    out << "  \"inventory_branch_left_bound\": "
+        << result.inventory_branch_left_bound << ",\n";
+    out << "  \"inventory_branch_right_bound\": "
+        << result.inventory_branch_right_bound << ",\n";
+    out << "  \"inventory_branch_pruned_nodes\": "
+        << result.inventory_branch_pruned_nodes << ",\n";
+    out << "  \"inventory_branch_max_depth\": "
+        << result.inventory_branch_max_depth << ",\n";
+    out << "  \"operation_mode_branch_candidates\": "
+        << result.operation_mode_branch_candidates << ",\n";
+    out << "  \"operation_mode_branch_nodes_created\": "
+        << result.operation_mode_branch_nodes_created << ",\n";
+    out << "  \"operation_mode_branch_station\": "
+        << result.operation_mode_branch_station << ",\n";
+    out << "  \"operation_mode_branch_type\": \""
+        << jsonEscape(result.operation_mode_branch_type) << "\",\n";
+    out << "  \"operation_mode_branch_pruned_columns\": "
+        << result.operation_mode_branch_pruned_columns << ",\n";
+    out << "  \"operation_mode_branch_pruned_labels\": "
+        << result.operation_mode_branch_pruned_labels << ",\n";
+    out << "  \"branch_selection_mode\": \""
+        << jsonEscape(result.branch_selection_mode) << "\",\n";
+    out << "  \"strong_branching_calls\": "
+        << result.strong_branching_calls << ",\n";
+    out << "  \"strong_branching_candidates_tested\": "
+        << result.strong_branching_candidates_tested << ",\n";
+    out << "  \"strong_branching_time_seconds\": "
+        << result.strong_branching_time_seconds << ",\n";
+    out << "  \"selected_branch_type\": \""
+        << jsonEscape(result.selected_branch_type) << "\",\n";
+    out << "  \"selected_branch_score\": "
+        << result.selected_branch_score << ",\n";
+    out << "  \"selected_branch_child_lb_left\": "
+        << result.selected_branch_child_lb_left << ",\n";
+    out << "  \"selected_branch_child_lb_right\": "
+        << result.selected_branch_child_lb_right << ",\n";
+    out << "  \"branch_nodes_by_type_ryan_foster\": "
+        << result.branch_nodes_by_type_ryan_foster << ",\n";
+    out << "  \"branch_nodes_by_type_inventory\": "
+        << result.branch_nodes_by_type_inventory << ",\n";
+    out << "  \"branch_nodes_by_type_operation_mode\": "
+        << result.branch_nodes_by_type_operation_mode << ",\n";
     out << "  \"final_inventories\": "; writeVector(out, result.final_inventory); out << ",\n";
     out << "  \"routes\": [";
     for (std::size_t r = 0; r < result.routes.size(); ++r) {

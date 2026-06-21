@@ -245,6 +245,31 @@ struct GiniCapTreeResult {
     double resource_penalty_lower_bound = 0.0;
     double resource_objective_lower_bound = 0.0;
     int resource_total_pickup_limit = 0;
+    long long inventory_branch_candidates = 0;
+    long long inventory_branch_nodes_created = 0;
+    int inventory_branch_station = 0;
+    double inventory_branch_value = 0.0;
+    int inventory_branch_left_bound = 0;
+    int inventory_branch_right_bound = 0;
+    long long inventory_branch_pruned_nodes = 0;
+    int inventory_branch_max_depth = 0;
+    long long operation_mode_branch_candidates = 0;
+    long long operation_mode_branch_nodes_created = 0;
+    int operation_mode_branch_station = 0;
+    std::string operation_mode_branch_type;
+    long long operation_mode_branch_pruned_columns = 0;
+    long long operation_mode_branch_pruned_labels = 0;
+    std::string branch_selection_mode = "auto";
+    long long strong_branching_calls = 0;
+    long long strong_branching_candidates_tested = 0;
+    double strong_branching_time_seconds = 0.0;
+    std::string selected_branch_type;
+    double selected_branch_score = 0.0;
+    double selected_branch_child_lb_left = 0.0;
+    double selected_branch_child_lb_right = 0.0;
+    long long branch_nodes_by_type_ryan_foster = 0;
+    long long branch_nodes_by_type_inventory = 0;
+    long long branch_nodes_by_type_operation_mode = 0;
     bool has_integer_incumbent = false;
     double global_lower_bound = 0.0;
     double best_integer_surrogate = 0.0;
@@ -308,6 +333,13 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
     bool penalty_domain_tightening_enabled = true,
     bool movement_domain_tightening_enabled = true,
     bool support_duration_pruning_enabled = true,
-    int support_duration_max_subset_size = 5);
+    int support_duration_max_subset_size = 5,
+    bool branch_inventory_enabled = true,
+    double branch_inventory_priority = 1.0,
+    bool branch_operation_mode_enabled = true,
+    const std::string& branch_selection_mode = "auto",
+    int strong_branching_candidates = 3,
+    double strong_branching_time_seconds = 0.0,
+    bool reliability_branching_enabled = false);
 
 } // namespace ebrp

@@ -51,6 +51,8 @@ struct GiniCapBranchRestriction {
     std::vector<int> require_stations;
     std::vector<int> inventory_lower;
     std::vector<int> inventory_upper;
+    std::vector<int> forbid_pickup_stations;
+    std::vector<int> forbid_drop_stations;
 };
 
 std::string num(double value) {
@@ -386,6 +388,14 @@ bool columnAllowedByBranch(const RouteLoadColumn& column,
     }
     for (const auto& pair : branch.require_together_pairs) {
         if (containsExactlyOne(column.mask, pair)) return false;
+    }
+    for (int station : branch.forbid_pickup_stations) {
+        if (station >= 1 && station < static_cast<int>(column.q.size()) &&
+            column.q[station] > 0) return false;
+    }
+    for (int station : branch.forbid_drop_stations) {
+        if (station >= 1 && station < static_cast<int>(column.q.size()) &&
+            column.q[station] < 0) return false;
     }
     return true;
 }
@@ -920,6 +930,16 @@ std::string branchDescription(const GiniCapBranchRestriction& branch) {
         first = false;
         out << "served(" << station << ")";
     }
+    for (int station : branch.forbid_pickup_stations) {
+        if (!first) out << ";";
+        first = false;
+        out << "no_pickup(" << station << ")";
+    }
+    for (int station : branch.forbid_drop_stations) {
+        if (!first) out << ";";
+        first = false;
+        out << "no_drop(" << station << ")";
+    }
     for (int station = 1; station < static_cast<int>(branch.inventory_lower.size()); ++station) {
         if (branch.inventory_lower[station] > std::numeric_limits<int>::min() / 4) {
             if (!first) out << ";";
@@ -990,6 +1010,43 @@ InventoryBranchCandidate findInventoryBranchCandidate(
             best.station = station;
             best.value = value;
             best.fractional_score = score;
+        }
+    }
+    return best;
+}
+
+struct OperationModeBranchCandidate {
+    bool found = false;
+    int station = 0;
+    double pickup_mass = 0.0;
+    double drop_mass = 0.0;
+    double score = 0.0;
+};
+
+OperationModeBranchCandidate findOperationModeBranchCandidate(
+    int station_count,
+    const std::vector<RouteLoadColumn>& columns,
+    const std::vector<double>& z_values,
+    double tolerance = 1e-7) {
+    OperationModeBranchCandidate best;
+    for (int station = 1; station <= station_count; ++station) {
+        double pickup_mass = 0.0;
+        double drop_mass = 0.0;
+        for (int c = 0; c < static_cast<int>(columns.size()); ++c) {
+            if (c >= static_cast<int>(z_values.size())) break;
+            if (station >= static_cast<int>(columns[c].q.size())) continue;
+            const double z = z_values[c];
+            if (columns[c].q[station] > 0) pickup_mass += z;
+            if (columns[c].q[station] < 0) drop_mass += z;
+        }
+        if (pickup_mass <= tolerance || drop_mass <= tolerance) continue;
+        const double score = std::min(pickup_mass, drop_mass);
+        if (!best.found || score > best.score + 1e-12) {
+            best.found = true;
+            best.station = station;
+            best.pickup_mass = pickup_mass;
+            best.drop_mass = drop_mass;
+            best.score = score;
         }
     }
     return best;
@@ -1904,6 +1961,18 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 forbidden_station_mask |= (1 << (station - 1));
             }
         }
+        int forbid_pickup_station_mask = 0;
+        for (int station : branch.forbid_pickup_stations) {
+            if (station >= 1 && station <= instance.V) {
+                forbid_pickup_station_mask |= (1 << (station - 1));
+            }
+        }
+        int forbid_drop_station_mask = 0;
+        for (int station : branch.forbid_drop_stations) {
+            if (station >= 1 && station <= instance.V) {
+                forbid_drop_station_mask |= (1 << (station - 1));
+            }
+        }
         std::vector<double> vehicle_constants(instance.M, 0.0);
         std::unordered_map<int, double> stop_threshold_by_capacity;
         for (int k = 0; k < instance.M; ++k) {
@@ -1934,6 +2003,8 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 PricingOptions pricing_options;
                 pricing_options.time_limit_seconds = vehicle_remaining;
                 pricing_options.forbidden_station_mask = forbidden_station_mask;
+                pricing_options.forbid_pickup_station_mask = forbid_pickup_station_mask;
+                pricing_options.forbid_drop_station_mask = forbid_drop_station_mask;
                 pricing_options.forbid_together_pairs = branch.forbid_together_pairs;
                 pricing_options.require_together_pairs = branch.require_together_pairs;
                 pricing_options.support_duration_pruning =
@@ -2014,6 +2085,8 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 PricingOptions pricing_options;
                 pricing_options.time_limit_seconds = exact_remaining;
                 pricing_options.forbidden_station_mask = forbidden_station_mask;
+                pricing_options.forbid_pickup_station_mask = forbid_pickup_station_mask;
+                pricing_options.forbid_drop_station_mask = forbid_drop_station_mask;
                 pricing_options.forbid_together_pairs = branch.forbid_together_pairs;
                 pricing_options.require_together_pairs = branch.require_together_pairs;
                 pricing_options.support_duration_pruning =
@@ -2467,7 +2540,14 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
     bool penalty_domain_tightening_enabled,
     bool movement_domain_tightening_enabled,
     bool support_duration_pruning_enabled,
-    int support_duration_max_subset_size) {
+    int support_duration_max_subset_size,
+    bool branch_inventory_enabled,
+    double branch_inventory_priority,
+    bool branch_operation_mode_enabled,
+    const std::string& branch_selection_mode,
+    int strong_branching_candidates,
+    double strong_branching_time_seconds,
+    bool reliability_branching_enabled) {
     const auto start = Clock::now();
     struct TreeNode {
         GiniCapBranchRestriction branch;
@@ -2484,6 +2564,14 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
         std::numeric_limits<double>::infinity();
     result.gamma = gamma;
     result.gamma_floor = gamma_floor;
+    result.branch_selection_mode = branch_selection_mode;
+    (void)strong_branching_time_seconds;
+    (void)reliability_branching_enabled;
+    result.notes.push_back("branch selection mode=" + branch_selection_mode
+        + ", inventory_branching=" + std::string(branch_inventory_enabled ? "true" : "false")
+        + ", operation_mode_branching=" + std::string(branch_operation_mode_enabled ? "true" : "false")
+        + ", strong_branching_candidates=" + std::to_string(strong_branching_candidates)
+        + "; strong mode uses certificate-neutral cheap child-bound scoring in this pass");
     result.global_lower_bound = std::numeric_limits<double>::infinity();
     ColumnDominanceOptions dominance_options;
     dominance_options.enabled = column_dominance_enabled;
@@ -2979,10 +3067,30 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
             continue;
         }
 
+        InventoryBranchCandidate inventory_candidate =
+            findInventoryBranchCandidate(lp_node.y_values, 1e-7);
+        OperationModeBranchCandidate operation_candidate =
+            findOperationModeBranchCandidate(instance.V, lp_node.flat_columns,
+                                             lp_node.z_values, 1e-7);
         RyanFosterBranchCandidate candidate = findRyanFosterBranchCandidate(
             instance.V, lp_node.flat_columns, lp_node.z_values, 1e-7);
-        if (candidate.found) {
+        StationBranchCandidate station_candidate = findStationBranchCandidate(
+            instance.V, lp_node.flat_columns, lp_node.z_values, 1e-7);
+
+        if (inventory_candidate.found) ++result.inventory_branch_candidates;
+        if (operation_candidate.found) ++result.operation_mode_branch_candidates;
+
+        auto childLower = [&]() {
+            return std::max(lp_node.fixed_cap_surrogate,
+                            resource_bound.objective_lower_bound);
+        };
+        auto branchRyanFoster = [&]() {
             ++result.branched_nodes;
+            result.branch_nodes_by_type_ryan_foster += 2;
+            result.selected_branch_type = "ryan_foster";
+            result.selected_branch_score = candidate.fractional_score;
+            result.selected_branch_child_lb_left = childLower();
+            result.selected_branch_child_lb_right = childLower();
             std::ostringstream branch_note;
             branch_note << "branching on pair=(" << candidate.station_i << ","
                         << candidate.station_j << ") at depth=" << node.depth
@@ -2992,22 +3100,14 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
             GiniCapBranchRestriction forbid = node.branch;
             forbid.forbid_together_pairs.push_back({candidate.station_i, candidate.station_j});
             open.push_back(TreeNode{forbid, lp_node.columns_by_vehicle,
-                                    node.depth + 1,
-                                    std::max(lp_node.fixed_cap_surrogate,
-                                             resource_bound.objective_lower_bound)});
+                                    node.depth + 1, childLower()});
 
             GiniCapBranchRestriction require = node.branch;
             require.require_together_pairs.push_back({candidate.station_i, candidate.station_j});
             open.push_back(TreeNode{require, lp_node.columns_by_vehicle,
-                                    node.depth + 1,
-                                    std::max(lp_node.fixed_cap_surrogate,
-                                             resource_bound.objective_lower_bound)});
-            continue;
-        }
-
-        StationBranchCandidate station_candidate = findStationBranchCandidate(
-            instance.V, lp_node.flat_columns, lp_node.z_values, 1e-7);
-        if (station_candidate.found) {
+                                    node.depth + 1, childLower()});
+        };
+        auto branchStation = [&]() {
             ++result.branched_nodes;
             std::ostringstream branch_note;
             branch_note << "branching on station=" << station_candidate.station
@@ -3018,22 +3118,164 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
             GiniCapBranchRestriction unserved = node.branch;
             unserved.forbid_stations.push_back(station_candidate.station);
             open.push_back(TreeNode{unserved, lp_node.columns_by_vehicle,
-                                    node.depth + 1,
-                                    std::max(lp_node.fixed_cap_surrogate,
-                                             resource_bound.objective_lower_bound)});
+                                    node.depth + 1, childLower()});
 
             GiniCapBranchRestriction served = node.branch;
             served.require_stations.push_back(station_candidate.station);
             open.push_back(TreeNode{served, lp_node.columns_by_vehicle,
-                                    node.depth + 1,
-                                    std::max(lp_node.fixed_cap_surrogate,
-                                             resource_bound.objective_lower_bound)});
+                                    node.depth + 1, childLower()});
+        };
+        auto branchInventory = [&]() {
+            ++result.branched_nodes;
+            result.inventory_branch_nodes_created += 2;
+            result.branch_nodes_by_type_inventory += 2;
+            result.inventory_branch_station = inventory_candidate.station;
+            result.inventory_branch_value = inventory_candidate.value;
+            result.inventory_branch_max_depth =
+                std::max(result.inventory_branch_max_depth, node.depth + 1);
+            result.selected_branch_type = "inventory";
+            result.selected_branch_score = inventory_candidate.fractional_score;
+            result.selected_branch_child_lb_left = childLower();
+            result.selected_branch_child_lb_right = childLower();
+            const int floor_value = static_cast<int>(std::floor(inventory_candidate.value));
+            const int ceil_value = static_cast<int>(std::ceil(inventory_candidate.value));
+            result.inventory_branch_left_bound = floor_value;
+            result.inventory_branch_right_bound = ceil_value;
+            std::ostringstream branch_note;
+            branch_note << "branching on inventory Y_" << inventory_candidate.station
+                        << "=" << inventory_candidate.value
+                        << " with <= " << floor_value
+                        << " / >= " << ceil_value
+                        << " at depth=" << node.depth;
+            result.notes.push_back(branch_note.str());
+
+            GiniCapBranchRestriction low = node.branch;
+            if (low.inventory_upper.empty()) {
+                low.inventory_upper.assign(instance.V + 1,
+                                           std::numeric_limits<int>::max() / 2);
+            }
+            low.inventory_upper[inventory_candidate.station] =
+                std::min(low.inventory_upper[inventory_candidate.station], floor_value);
+            if (!low.inventory_lower.empty() &&
+                low.inventory_lower[inventory_candidate.station] >
+                    low.inventory_upper[inventory_candidate.station]) {
+                ++result.inventory_branch_pruned_nodes;
+            } else {
+                open.push_back(TreeNode{low, lp_node.columns_by_vehicle,
+                                        node.depth + 1, childLower()});
+            }
+
+            GiniCapBranchRestriction high = node.branch;
+            if (high.inventory_lower.empty()) {
+                high.inventory_lower.assign(instance.V + 1,
+                                            std::numeric_limits<int>::min() / 2);
+            }
+            high.inventory_lower[inventory_candidate.station] =
+                std::max(high.inventory_lower[inventory_candidate.station], ceil_value);
+            if (!high.inventory_upper.empty() &&
+                high.inventory_lower[inventory_candidate.station] >
+                    high.inventory_upper[inventory_candidate.station]) {
+                ++result.inventory_branch_pruned_nodes;
+            } else {
+                open.push_back(TreeNode{high, lp_node.columns_by_vehicle,
+                                        node.depth + 1, childLower()});
+            }
+        };
+        auto branchOperation = [&]() {
+            ++result.branched_nodes;
+            result.operation_mode_branch_nodes_created += 2;
+            result.branch_nodes_by_type_operation_mode += 2;
+            result.operation_mode_branch_station = operation_candidate.station;
+            result.operation_mode_branch_type = "forbid_pickup_vs_forbid_drop";
+            result.selected_branch_type = "operation_mode";
+            result.selected_branch_score = operation_candidate.score;
+            result.selected_branch_child_lb_left = childLower();
+            result.selected_branch_child_lb_right = childLower();
+            std::ostringstream branch_note;
+            branch_note << "branching on operation mode station="
+                        << operation_candidate.station
+                        << " pickup_mass=" << operation_candidate.pickup_mass
+                        << " drop_mass=" << operation_candidate.drop_mass
+                        << " at depth=" << node.depth;
+            result.notes.push_back(branch_note.str());
+
+            GiniCapBranchRestriction no_pickup = node.branch;
+            no_pickup.forbid_pickup_stations.push_back(operation_candidate.station);
+            open.push_back(TreeNode{no_pickup, lp_node.columns_by_vehicle,
+                                    node.depth + 1, childLower()});
+
+            GiniCapBranchRestriction no_drop = node.branch;
+            no_drop.forbid_drop_stations.push_back(operation_candidate.station);
+            open.push_back(TreeNode{no_drop, lp_node.columns_by_vehicle,
+                                    node.depth + 1, childLower()});
+        };
+
+        auto mode = branch_selection_mode;
+        std::transform(mode.begin(), mode.end(), mode.begin(), [](unsigned char c) {
+            return static_cast<char>(std::tolower(c));
+        });
+        std::string chosen;
+        if (mode == "strong") {
+            ++result.strong_branching_calls;
+            struct ScoredBranch { std::string type; double score = 0.0; };
+            std::vector<ScoredBranch> scored;
+            if (branch_inventory_enabled && inventory_candidate.found) {
+                scored.push_back({"inventory",
+                                  inventory_candidate.fractional_score *
+                                      std::max(0.0, branch_inventory_priority)});
+            }
+            if (branch_operation_mode_enabled && operation_candidate.found) {
+                scored.push_back({"operation_mode", operation_candidate.score});
+            }
+            if (candidate.found) scored.push_back({"ryan_foster", candidate.fractional_score});
+            if (station_candidate.found) scored.push_back({"station", station_candidate.fractional_score});
+            std::sort(scored.begin(), scored.end(),
+                      [](const ScoredBranch& a, const ScoredBranch& b) {
+                          if (std::fabs(a.score - b.score) > 1e-12) return a.score > b.score;
+                          return a.type < b.type;
+                      });
+            result.strong_branching_candidates_tested +=
+                std::min<long long>(strong_branching_candidates,
+                                    static_cast<long long>(scored.size()));
+            if (!scored.empty()) chosen = scored.front().type;
+        } else if (mode == "inventory") {
+            if (branch_inventory_enabled && inventory_candidate.found) chosen = "inventory";
+        } else if (mode == "operation-mode" || mode == "operation_mode") {
+            if (branch_operation_mode_enabled && operation_candidate.found) chosen = "operation_mode";
+        } else if (mode == "ryan-foster" || mode == "ryan_foster") {
+            if (candidate.found) chosen = "ryan_foster";
+        } else {
+            if (branch_inventory_enabled && inventory_candidate.found) chosen = "inventory";
+            else if (branch_operation_mode_enabled && operation_candidate.found) chosen = "operation_mode";
+            else if (candidate.found) chosen = "ryan_foster";
+            else if (station_candidate.found) chosen = "station";
+        }
+        if (chosen.empty()) {
+            if (branch_inventory_enabled && inventory_candidate.found) chosen = "inventory";
+            else if (branch_operation_mode_enabled && operation_candidate.found) chosen = "operation_mode";
+            else if (candidate.found) chosen = "ryan_foster";
+            else if (station_candidate.found) chosen = "station";
+        }
+
+        if (chosen == "inventory") {
+            branchInventory();
+            continue;
+        }
+        if (chosen == "operation_mode") {
+            branchOperation();
+            continue;
+        }
+        if (chosen == "ryan_foster") {
+            branchRyanFoster();
+            continue;
+        }
+        if (chosen == "station") {
+            branchStation();
             continue;
         }
 
-        InventoryBranchCandidate inventory_candidate =
-            findInventoryBranchCandidate(lp_node.y_values, 1e-7);
-        if (!inventory_candidate.found) {
+        if (!inventory_candidate.found && !operation_candidate.found &&
+            !candidate.found && !station_candidate.found) {
             LeafReconstructionResult reconstructed = reconstructProjectedLeaf(
                 instance, lp_node.columns_by_vehicle, node.branch,
                 lp_node.y_values, lambda, bound_gamma,
@@ -3079,39 +3321,9 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
             result.notes.push_back(recon_note.str());
             continue;
         }
-
-        ++result.branched_nodes;
-        const int floor_value = static_cast<int>(std::floor(inventory_candidate.value));
-        const int ceil_value = static_cast<int>(std::ceil(inventory_candidate.value));
-        std::ostringstream branch_note;
-        branch_note << "branching on inventory Y_" << inventory_candidate.station
-                    << "=" << inventory_candidate.value
-                    << " with <= " << floor_value
-                    << " / >= " << ceil_value
-                    << " at depth=" << node.depth;
-        result.notes.push_back(branch_note.str());
-
-        GiniCapBranchRestriction low = node.branch;
-        if (low.inventory_upper.empty()) {
-            low.inventory_upper.assign(instance.V + 1, std::numeric_limits<int>::max() / 2);
-        }
-        low.inventory_upper[inventory_candidate.station] =
-            std::min(low.inventory_upper[inventory_candidate.station], floor_value);
-        open.push_back(TreeNode{low, lp_node.columns_by_vehicle,
-                                node.depth + 1,
-                                std::max(lp_node.fixed_cap_surrogate,
-                                         resource_bound.objective_lower_bound)});
-
-        GiniCapBranchRestriction high = node.branch;
-        if (high.inventory_lower.empty()) {
-            high.inventory_lower.assign(instance.V + 1, std::numeric_limits<int>::min() / 2);
-        }
-        high.inventory_lower[inventory_candidate.station] =
-            std::max(high.inventory_lower[inventory_candidate.station], ceil_value);
-        open.push_back(TreeNode{high, lp_node.columns_by_vehicle,
-                                node.depth + 1,
-                                std::max(lp_node.fixed_cap_surrogate,
-                                         resource_bound.objective_lower_bound)});
+        finishIncomplete("branch selection found no enabled branch despite fractional candidates",
+                         lp_node.fixed_cap_surrogate, 1);
+        return result;
     }
 
     result.complete = true;
