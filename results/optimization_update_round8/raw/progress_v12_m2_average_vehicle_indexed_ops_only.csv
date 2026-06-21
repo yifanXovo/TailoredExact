@@ -1,0 +1,7 @@
+elapsed_seconds,event,incumbent_UB,global_LB,gap,unresolved_intervals,global_min_lb_interval_id,global_min_lb_interval_range,global_min_lb_source,open_nodes,route_pool_columns_after_dominance,route_pool_best_incumbent,focused_intensification_passes,last_LB_improvement_time,last_UB_improvement_time,bound_time_seconds,master_time_seconds,pricing_time_seconds,columns,nodes
+0.0001815,initial_empty_incumbent,1.00822320985,0,1,0,-1,"","seed_initial",0,0,0,0,0.0001815,0.0001815,0,0,0,0,0
+20.1969621,initial_after_seed,0.745474506024,0.0655870045173,0.912019788756,2,0,"[0,0.372737]",cheap_projection_bound,0,9,0.745474506024,0,20.1969621,20.1969621,0,0,0,1907623,62790859
+40.7405163,interval_relaxation_0,0.745474506024,0.403808527679,0.458320137824,1,1,"[0.372737,0.745475]",cheap_projection_bound,0,9,0.745474506024,0,40.7405163,20.1969621,20.5433549,0,0,1907623,62790859
+61.7085899,interval_relaxation_1,0.745474506024,0.585987841514,0.213939797031,1,1,"[0.372737,0.745475]",inventory_route_gini_relaxation,0,9,0.745474506024,0,61.7085899,20.1969621,41.5113909,0,0,1907623,62790859
+61.708651,route_pool_before_final_summary,0.745474506024,0.585987841514,0.213939797031,1,1,"[0.372737,0.745475]",inventory_route_gini_relaxation,0,9,0.745474506024,0,61.7085899,20.1969621,41.5113909,0,0,1907623,62790859
+61.7086745,final_summary,0.745474506024,0.585987841514,0.213939797031,1,1,"[0.372737,0.745475]",inventory_route_gini_relaxation,0,9,0.745474506024,0,61.7085899,20.1969621,41.5113909,0,0,1907623,62790859

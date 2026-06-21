@@ -38,7 +38,7 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
@@ -62,11 +62,16 @@ void usage() {
         << "[--route-pool-incumbent true|false] [--route-pool-max-columns-per-vehicle <N>] "
         << "[--route-pool-keep-best-per-projection true|false] "
         << "[--pickup-drop-compat-flow true|false] [--pickup-drop-transfer-cap-flow true|false] "
+        << "[--vehicle-indexed-operation-relaxation true|false] [--vehicle-indexed-relaxation-audit true|false] "
+        << "[--vehicle-indexed-transfer-flow true|false] "
         << "[--gcap-seed-cplex] [--gcap-seed-time-limit <seconds>] "
         << "[--incumbent-json <path>] [--incumbent-format auto|exact_result|route_json|csv] "
         << "[--hga-incumbent <path>] [--hga-incumbent-format auto|route_json|csv|legacy] "
         << "[--incumbent-source-name <name>] [--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>] "
-        << "[--progress-log <path>] [--progress-interval-seconds <seconds>]\n";
+        << "[--progress-log <path>] [--progress-interval-seconds <seconds>] "
+        << "[--frontier-focus-only true|false] [--frontier-focus-interval-id auto|N] "
+        << "[--frontier-focus-time-limit <seconds>] [--frontier-focus-relax-seconds <seconds>] "
+        << "[--frontier-focus-tree-nodes <N>]\n";
 }
 
 std::string requireValue(int& i, int argc, char** argv) {
@@ -151,6 +156,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--route-pool-keep-best-per-projection") opt.route_pool_keep_best_per_projection = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--pickup-drop-compat-flow") opt.pickup_drop_compat_flow = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--pickup-drop-transfer-cap-flow") opt.pickup_drop_transfer_cap_flow = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--vehicle-indexed-operation-relaxation") opt.vehicle_indexed_operation_relaxation = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--vehicle-indexed-relaxation-audit") opt.vehicle_indexed_relaxation_audit = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--vehicle-indexed-transfer-flow") opt.vehicle_indexed_transfer_flow = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--gcap-seed-cplex") opt.gcap_seed_cplex = true;
         else if (arg == "--gcap-seed-time-limit") opt.gcap_seed_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--incumbent-json") opt.incumbent_json_path = requireValue(i, argc, argv);
@@ -162,6 +170,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--inventory-probe-seconds") opt.inventory_probe_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--progress-log") opt.progress_log_path = requireValue(i, argc, argv);
         else if (arg == "--progress-interval-seconds") opt.progress_interval_seconds = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--frontier-focus-interval-id") opt.frontier_focus_interval_id = requireValue(i, argc, argv);
+        else if (arg == "--frontier-focus-only") opt.frontier_focus_only = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-focus-time-limit") opt.frontier_focus_time_limit = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--frontier-focus-relax-seconds") opt.frontier_focus_relax_seconds = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--frontier-focus-tree-nodes") opt.frontier_focus_tree_nodes = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--log") opt.log_path = requireValue(i, argc, argv);
         else if (arg == "--out") opt.out_path = requireValue(i, argc, argv);
         else if (arg == "--plain-baseline") opt.plain_baseline = true;
@@ -201,6 +214,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.frontier_adaptive_min_width <= 0.0) opt.frontier_adaptive_min_width = 1e-4;
     if (opt.frontier_adaptive_split_factor < 2) opt.frontier_adaptive_split_factor = 2;
     if (opt.progress_interval_seconds < 0.0) opt.progress_interval_seconds = 0.0;
+    if (opt.frontier_focus_time_limit == 0.0) opt.frontier_focus_time_limit = -1.0;
+    if (opt.frontier_focus_relax_seconds == 0.0) opt.frontier_focus_relax_seconds = -1.0;
+    if (opt.frontier_focus_tree_nodes == 0) opt.frontier_focus_tree_nodes = -1;
     return opt;
 }
 
@@ -2923,6 +2939,8 @@ ebrp::SolveResult solveRouteMaskSupportDiagnostic(const ebrp::Instance& instance
             opt.movement_domain_tightening, false,
             opt.pickup_drop_compat_flow,
             opt.pickup_drop_transfer_cap_flow,
+            false,
+            false,
             false);
     const ebrp::GiniIntervalInventoryRelaxationBound enabled =
         ebrp::computeGiniIntervalInventoryRelaxationBound(
@@ -2933,7 +2951,9 @@ ebrp::SolveResult solveRouteMaskSupportDiagnostic(const ebrp::Instance& instance
             opt.movement_domain_tightening, true,
             opt.pickup_drop_compat_flow,
             opt.pickup_drop_transfer_cap_flow,
-            opt.route_mask_operation_budget_cuts);
+            opt.route_mask_operation_budget_cuts,
+            opt.vehicle_indexed_operation_relaxation,
+            opt.vehicle_indexed_transfer_flow);
 
     result.route_mask_count_before_support_duration =
         enabled.route_mask_count_before_support_duration;
@@ -3207,7 +3227,9 @@ ebrp::SolveResult solvePickupDropCompatFlowDiagnostic(const ebrp::Instance& inst
             opt.movement_domain_tightening,
             opt.route_mask_support_duration_pruning, false,
             opt.pickup_drop_transfer_cap_flow,
-            opt.route_mask_operation_budget_cuts);
+            opt.route_mask_operation_budget_cuts,
+            false,
+            false);
     ebrp::GiniIntervalInventoryRelaxationBound enabled =
         ebrp::computeGiniIntervalInventoryRelaxationBound(
             instance, opt.lambda, 0.0, std::min(0.25, 1.0),
@@ -3217,7 +3239,9 @@ ebrp::SolveResult solvePickupDropCompatFlowDiagnostic(const ebrp::Instance& inst
             opt.movement_domain_tightening,
             opt.route_mask_support_duration_pruning, true,
             opt.pickup_drop_transfer_cap_flow,
-            opt.route_mask_operation_budget_cuts);
+            opt.route_mask_operation_budget_cuts,
+            opt.vehicle_indexed_operation_relaxation,
+            opt.vehicle_indexed_transfer_flow);
     result.lower_bound = std::max(disabled.objective_lower_bound,
                                   enabled.objective_lower_bound);
     result.upper_bound = 0.0;
@@ -3285,6 +3309,146 @@ ebrp::SolveResult solvePickupDropTransferCapDiagnostic(
             + std::string(synthetic_cap < synthetic_Q ? "true" : "false")
             + "; this validates cap_ij<Q without using heuristic failure");
     }
+    return result;
+}
+
+void copyVehicleIndexedRelaxationStats(
+    const ebrp::GiniIntervalInventoryRelaxationBound& src,
+    ebrp::SolveResult& dst) {
+    dst.vehicle_indexed_operation_relaxation_enabled =
+        src.vehicle_indexed_operation_relaxation_enabled;
+    dst.vehicle_indexed_y_variables = src.vehicle_indexed_y_variables;
+    dst.vehicle_indexed_pickup_variables = src.vehicle_indexed_pickup_variables;
+    dst.vehicle_indexed_drop_variables = src.vehicle_indexed_drop_variables;
+    dst.vehicle_indexed_linking_constraints =
+        src.vehicle_indexed_linking_constraints;
+    dst.vehicle_indexed_balance_constraints =
+        src.vehicle_indexed_balance_constraints;
+    dst.vehicle_indexed_operation_budget_constraints =
+        src.vehicle_indexed_operation_budget_constraints;
+    dst.vehicle_indexed_relaxation_time_seconds =
+        src.vehicle_indexed_relaxation_time_seconds;
+    dst.vehicle_transfer_flow_variables = src.vehicle_transfer_flow_variables;
+    dst.vehicle_transfer_depot_unload_variables =
+        src.vehicle_transfer_depot_unload_variables;
+    dst.vehicle_transfer_flow_balance_constraints =
+        src.vehicle_transfer_flow_balance_constraints;
+    dst.vehicle_transfer_mask_linking_constraints =
+        src.vehicle_transfer_mask_linking_constraints;
+    dst.vehicle_transfer_pairs_total = src.vehicle_transfer_pairs_total;
+    dst.vehicle_transfer_pairs_zero_cap = src.vehicle_transfer_pairs_zero_cap;
+    dst.vehicle_transfer_pairs_capacity_limited =
+        src.vehicle_transfer_pairs_capacity_limited;
+    dst.vehicle_transfer_cap_min = src.vehicle_transfer_cap_min;
+    dst.vehicle_transfer_cap_avg = src.vehicle_transfer_cap_avg;
+    dst.vehicle_transfer_cap_max = src.vehicle_transfer_cap_max;
+    dst.vehicle_transfer_flow_time_seconds =
+        src.vehicle_transfer_flow_time_seconds;
+}
+
+ebrp::SolveResult solveVehicleIndexedRelaxationDiagnostic(
+    const ebrp::Instance& instance,
+    const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "vehicle-indexed-relaxation-test";
+    result.status = "diagnostic_complete";
+    result.certificate =
+        "diagnostic only: compares aggregate route-mask operation relaxation against vehicle-indexed service/operation rows";
+    const double budget =
+        std::max(0.1, std::min(5.0, opt.solve_time_limit > 0.0
+            ? opt.solve_time_limit : 5.0));
+    ebrp::GiniIntervalInventoryRelaxationBound aggregate =
+        ebrp::computeGiniIntervalInventoryRelaxationBound(
+            instance, opt.lambda, 0.0, std::min(0.25, 1.0), budget,
+            std::numeric_limits<double>::infinity(), opt.route_mask_max_v,
+            opt.projection_bound, opt.penalty_domain_tightening,
+            opt.movement_domain_tightening,
+            opt.route_mask_support_duration_pruning,
+            opt.pickup_drop_compat_flow,
+            opt.pickup_drop_transfer_cap_flow,
+            opt.route_mask_operation_budget_cuts,
+            false,
+            false);
+    ebrp::GiniIntervalInventoryRelaxationBound vehicle =
+        ebrp::computeGiniIntervalInventoryRelaxationBound(
+            instance, opt.lambda, 0.0, std::min(0.25, 1.0), budget,
+            std::numeric_limits<double>::infinity(), opt.route_mask_max_v,
+            opt.projection_bound, opt.penalty_domain_tightening,
+            opt.movement_domain_tightening,
+            opt.route_mask_support_duration_pruning,
+            opt.pickup_drop_compat_flow,
+            opt.pickup_drop_transfer_cap_flow,
+            opt.route_mask_operation_budget_cuts,
+            true,
+            false);
+    copyVehicleIndexedRelaxationStats(vehicle, result);
+    result.lower_bound = std::max(aggregate.objective_lower_bound,
+                                  vehicle.objective_lower_bound);
+    result.objective = result.lower_bound;
+    result.routes = emptyRouteSet(instance);
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.notes.push_back("aggregate relaxation: " + aggregate.note);
+    result.notes.push_back("vehicle-indexed operation relaxation: " + vehicle.note);
+    result.notes.push_back("synthetic_vehicle_indexed_relaxation_test: two-vehicle aggregate service can split pickup/drop, while y_k_i, p_k_i, d_k_i rows force same-vehicle support; diagnostic checks row generation and bound monotonicity");
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
+ebrp::SolveResult solveVehicleIndexedTransferFlowDiagnostic(
+    const ebrp::Instance& instance,
+    const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "vehicle-indexed-transfer-flow-test";
+    result.status = "diagnostic_complete";
+    result.certificate =
+        "diagnostic only: verifies vehicle-indexed pickup-drop transfer flow linked to route masks";
+    const double budget =
+        std::max(0.1, std::min(5.0, opt.solve_time_limit > 0.0
+            ? opt.solve_time_limit : 5.0));
+    ebrp::GiniIntervalInventoryRelaxationBound aggregate =
+        ebrp::computeGiniIntervalInventoryRelaxationBound(
+            instance, opt.lambda, 0.0, std::min(0.25, 1.0), budget,
+            std::numeric_limits<double>::infinity(), opt.route_mask_max_v,
+            opt.projection_bound, opt.penalty_domain_tightening,
+            opt.movement_domain_tightening,
+            opt.route_mask_support_duration_pruning,
+            opt.pickup_drop_compat_flow,
+            opt.pickup_drop_transfer_cap_flow,
+            opt.route_mask_operation_budget_cuts,
+            false,
+            false);
+    ebrp::GiniIntervalInventoryRelaxationBound vehicle =
+        ebrp::computeGiniIntervalInventoryRelaxationBound(
+            instance, opt.lambda, 0.0, std::min(0.25, 1.0), budget,
+            std::numeric_limits<double>::infinity(), opt.route_mask_max_v,
+            opt.projection_bound, opt.penalty_domain_tightening,
+            opt.movement_domain_tightening,
+            opt.route_mask_support_duration_pruning,
+            true,
+            true,
+            opt.route_mask_operation_budget_cuts,
+            true,
+            true);
+    copyVehicleIndexedRelaxationStats(vehicle, result);
+    result.lower_bound = std::max(aggregate.objective_lower_bound,
+                                  vehicle.objective_lower_bound);
+    result.objective = result.lower_bound;
+    result.routes = emptyRouteSet(instance);
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.notes.push_back("aggregate transfer-cap relaxation: " + aggregate.note);
+    result.notes.push_back("vehicle-indexed transfer-flow relaxation: " + vehicle.note);
+    result.notes.push_back("synthetic_vehicle_transfer_flow_test: f_k_i_j is bounded by vehicle-specific depot-i-j-depot duration, route mask co-membership, capacity, pickup availability, and drop space; no heuristic failure is used");
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
     return result;
 }
 
@@ -3380,6 +3544,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.focused_intensification_operation_budget_enabled =
         opt.route_mask_operation_budget_cuts;
     result.adaptive_split_enabled = opt.frontier_adaptive_split;
+    result.vehicle_indexed_operation_relaxation_enabled =
+        opt.vehicle_indexed_operation_relaxation;
     result.incumbent_generation_method = opt.bpc_incumbent;
     result.progress_log_path = opt.progress_log_path;
     result.pricing_best_reduced_cost_any = std::numeric_limits<double>::infinity();
@@ -3409,6 +3575,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         + ", route_pool_max_columns_per_vehicle=" + std::to_string(opt.route_pool_max_columns_per_vehicle)
         + ", pickup_drop_compat_flow=" + std::string(opt.pickup_drop_compat_flow ? "true" : "false")
         + ", pickup_drop_transfer_cap_flow=" + std::string(opt.pickup_drop_transfer_cap_flow ? "true" : "false")
+        + ", vehicle_indexed_operation_relaxation=" + std::string(opt.vehicle_indexed_operation_relaxation ? "true" : "false")
+        + ", vehicle_indexed_relaxation_audit=" + std::string(opt.vehicle_indexed_relaxation_audit ? "true" : "false")
+        + ", vehicle_indexed_transfer_flow=" + std::string(opt.vehicle_indexed_transfer_flow ? "true" : "false")
         + ", support_duration_pruning=" + std::string(opt.support_duration_pruning ? "true" : "false")
         + ", route_mask_support_duration_pruning=" + std::string(opt.route_mask_support_duration_pruning ? "true" : "false")
         + ", route_mask_operation_budget_cuts=" + std::string(opt.route_mask_operation_budget_cuts ? "true" : "false")
@@ -4227,6 +4396,51 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.interval_processing_order_initial = order.str();
         result.interval_processing_order_actual = order.str();
     }
+    if (opt.frontier_focus_only) {
+        int focus_idx = -1;
+        if (opt.frontier_focus_interval_id == "auto" ||
+            opt.frontier_focus_interval_id.empty()) {
+            for (int idx : initial_schedule) {
+                const FrontierIntervalRecord& record = interval_records[idx];
+                if (record.lo >= result.upper_bound - 1e-12) continue;
+                if (focus_idx < 0 ||
+                    record.lower_bound < interval_records[focus_idx].lower_bound - 1e-12 ||
+                    (std::fabs(record.lower_bound -
+                               interval_records[focus_idx].lower_bound) <= 1e-12 &&
+                     idx < focus_idx)) {
+                    focus_idx = idx;
+                }
+            }
+        } else {
+            try {
+                focus_idx = std::stoi(opt.frontier_focus_interval_id);
+            } catch (const std::exception&) {
+                focus_idx = -1;
+            }
+        }
+        if (focus_idx < 0 || focus_idx >= static_cast<int>(interval_records.size())) {
+            focus_idx = initial_schedule.empty() ? 0 : initial_schedule.front();
+        }
+        focus_idx = std::max(0, std::min(focus_idx,
+            static_cast<int>(interval_records.size()) - 1));
+        FrontierIntervalRecord& focus_record = interval_records[focus_idx];
+        std::ostringstream focus_range;
+        focus_range << "[" << focus_record.lo << "," << focus_record.hi << "]";
+        result.focus_interval_id = focus_idx;
+        result.focus_interval_range = focus_range.str();
+        result.focus_interval_lb_before = focus_record.lower_bound;
+        result.focus_interval_certificate_scope = "diagnostic_interval_only";
+        initial_schedule.assign(1, focus_idx);
+        result.interval_processing_order_actual = std::to_string(focus_idx);
+        result.interval_processing_order = result.interval_processing_order_actual;
+        result.frontier_range_certificate_scope = "diagnostic_interval_only";
+        result.frontier_covers_all_improving_gini_values = false;
+        result.notes.push_back("frontier focus-only diagnostic enabled: selected interval="
+            + std::to_string(focus_idx)
+            + ", range=" + result.focus_interval_range
+            + ", initial_lb=" + std::to_string(result.focus_interval_lb_before)
+            + "; this run cannot certify the original problem by itself");
+    }
 
     struct ProgressSnapshot {
         double lb = 0.0;
@@ -4453,6 +4667,51 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 inv_relax.pickup_drop_compat_flow_constraints;
             result.pickup_drop_compat_flow_time_seconds +=
                 inv_relax.pickup_drop_compat_flow_time_seconds;
+            result.vehicle_indexed_operation_relaxation_enabled =
+                result.vehicle_indexed_operation_relaxation_enabled ||
+                inv_relax.vehicle_indexed_operation_relaxation_enabled;
+            result.vehicle_indexed_y_variables +=
+                inv_relax.vehicle_indexed_y_variables;
+            result.vehicle_indexed_pickup_variables +=
+                inv_relax.vehicle_indexed_pickup_variables;
+            result.vehicle_indexed_drop_variables +=
+                inv_relax.vehicle_indexed_drop_variables;
+            result.vehicle_indexed_linking_constraints +=
+                inv_relax.vehicle_indexed_linking_constraints;
+            result.vehicle_indexed_balance_constraints +=
+                inv_relax.vehicle_indexed_balance_constraints;
+            result.vehicle_indexed_operation_budget_constraints +=
+                inv_relax.vehicle_indexed_operation_budget_constraints;
+            result.vehicle_indexed_relaxation_time_seconds +=
+                inv_relax.vehicle_indexed_relaxation_time_seconds;
+            result.vehicle_transfer_flow_variables +=
+                inv_relax.vehicle_transfer_flow_variables;
+            result.vehicle_transfer_depot_unload_variables +=
+                inv_relax.vehicle_transfer_depot_unload_variables;
+            result.vehicle_transfer_flow_balance_constraints +=
+                inv_relax.vehicle_transfer_flow_balance_constraints;
+            result.vehicle_transfer_mask_linking_constraints +=
+                inv_relax.vehicle_transfer_mask_linking_constraints;
+            result.vehicle_transfer_pairs_total +=
+                inv_relax.vehicle_transfer_pairs_total;
+            result.vehicle_transfer_pairs_zero_cap +=
+                inv_relax.vehicle_transfer_pairs_zero_cap;
+            result.vehicle_transfer_pairs_capacity_limited +=
+                inv_relax.vehicle_transfer_pairs_capacity_limited;
+            if (inv_relax.vehicle_transfer_cap_min > 0.0) {
+                result.vehicle_transfer_cap_min =
+                    result.vehicle_transfer_cap_min <= 0.0
+                        ? inv_relax.vehicle_transfer_cap_min
+                        : std::min(result.vehicle_transfer_cap_min,
+                                   inv_relax.vehicle_transfer_cap_min);
+            }
+            result.vehicle_transfer_cap_max =
+                std::max(result.vehicle_transfer_cap_max,
+                         inv_relax.vehicle_transfer_cap_max);
+            result.vehicle_transfer_cap_avg =
+                inv_relax.vehicle_transfer_cap_avg;
+            result.vehicle_transfer_flow_time_seconds +=
+                inv_relax.vehicle_transfer_flow_time_seconds;
         };
 
     auto accumulateTreeRound2Stats =
@@ -4533,7 +4792,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             << "|pickup_drop_transfer_cap="
             << (opt.pickup_drop_transfer_cap_flow ? 1 : 0)
             << "|route_mask_operation_budget="
-            << (opt.route_mask_operation_budget_cuts ? 1 : 0);
+            << (opt.route_mask_operation_budget_cuts ? 1 : 0)
+            << "|vehicle_indexed_ops="
+            << (opt.vehicle_indexed_operation_relaxation ? 1 : 0)
+            << "|vehicle_indexed_audit="
+            << (opt.vehicle_indexed_relaxation_audit ? 1 : 0)
+            << "|vehicle_transfer_flow="
+            << (opt.vehicle_indexed_transfer_flow ? 1 : 0);
         return key.str();
     };
     auto computeInventoryRelaxation =
@@ -4564,7 +4829,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             }
             const auto bound_start = std::chrono::steady_clock::now();
             CachedRelaxation out;
-            auto compute_once = [&](bool movement_enabled, bool compat_enabled) {
+            auto compute_once = [&](bool movement_enabled,
+                                    bool compat_enabled,
+                                    bool vehicle_indexed_enabled,
+                                    bool vehicle_transfer_enabled) {
                 return ebrp::computeGiniIntervalInventoryRelaxationBound(
                     instance, opt.lambda, lo, hi, budget, cutoff,
                     opt.route_mask_max_v, opt.projection_bound,
@@ -4573,14 +4841,20 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     opt.route_mask_support_duration_pruning,
                     compat_enabled,
                     opt.pickup_drop_transfer_cap_flow,
-                    opt.route_mask_operation_budget_cuts);
+                    opt.route_mask_operation_budget_cuts,
+                    vehicle_indexed_enabled,
+                    vehicle_transfer_enabled);
             };
             if (opt.movement_bound_audit) {
                 ++result.movement_audit_intervals;
                 ebrp::GiniIntervalInventoryRelaxationBound no_movement =
-                    compute_once(false, opt.pickup_drop_compat_flow);
+                    compute_once(false, opt.pickup_drop_compat_flow,
+                                 opt.vehicle_indexed_operation_relaxation,
+                                 opt.vehicle_indexed_transfer_flow);
                 ebrp::GiniIntervalInventoryRelaxationBound with_movement =
-                    compute_once(true, opt.pickup_drop_compat_flow);
+                    compute_once(true, opt.pickup_drop_compat_flow,
+                                 opt.vehicle_indexed_operation_relaxation,
+                                 opt.vehicle_indexed_transfer_flow);
                 const double no_lb = no_movement.infeasible
                     ? cutoff : no_movement.objective_lower_bound;
                 const double with_lb = with_movement.infeasible
@@ -4609,10 +4883,14 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                              std::max(no_lb, with_lb));
             } else {
                 out.bound = compute_once(opt.movement_domain_tightening,
-                                         opt.pickup_drop_compat_flow);
+                                         opt.pickup_drop_compat_flow,
+                                         opt.vehicle_indexed_operation_relaxation,
+                                         opt.vehicle_indexed_transfer_flow);
                 if (opt.pickup_drop_compat_flow) {
                     ebrp::GiniIntervalInventoryRelaxationBound no_compat =
-                        compute_once(opt.movement_domain_tightening, false);
+                        compute_once(opt.movement_domain_tightening, false,
+                                     opt.vehicle_indexed_operation_relaxation,
+                                     false);
                     const double compat_lb = out.bound.infeasible
                         ? cutoff : out.bound.objective_lower_bound;
                     const double no_compat_lb = no_compat.infeasible
@@ -4626,6 +4904,28 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                         out.bound.note += ", pickup_drop_compat_flow_audit_selected=compat"
                             ", compat_lb=" + std::to_string(compat_lb)
                             + ", no_compat_lb=" + std::to_string(no_compat_lb);
+                    }
+                }
+                if (opt.vehicle_indexed_relaxation_audit &&
+                    opt.vehicle_indexed_operation_relaxation) {
+                    ebrp::GiniIntervalInventoryRelaxationBound aggregate =
+                        compute_once(opt.movement_domain_tightening,
+                                     opt.pickup_drop_compat_flow,
+                                     false,
+                                     false);
+                    const double chosen_lb = out.bound.infeasible
+                        ? cutoff : out.bound.objective_lower_bound;
+                    const double aggregate_lb = aggregate.infeasible
+                        ? cutoff : aggregate.objective_lower_bound;
+                    if (aggregate_lb > chosen_lb + 1e-9) {
+                        aggregate.note += ", vehicle_indexed_relaxation_audit_selected=aggregate"
+                            ", aggregate_lb=" + std::to_string(aggregate_lb)
+                            + ", vehicle_indexed_lb=" + std::to_string(chosen_lb);
+                        out.bound = aggregate;
+                    } else {
+                        out.bound.note += ", vehicle_indexed_relaxation_audit_selected=vehicle_indexed"
+                            ", aggregate_lb=" + std::to_string(aggregate_lb)
+                            + ", vehicle_indexed_lb=" + std::to_string(chosen_lb);
                     }
                 }
                 const double used_lb = out.bound.infeasible
@@ -4695,7 +4995,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             return work;
         }
 
-        const double relaxation_budget = (opt.frontier_relax_seconds > 0.0)
+        const bool is_focus_interval =
+            opt.frontier_focus_only && idx == result.focus_interval_id;
+        const double relaxation_budget = is_focus_interval &&
+            opt.frontier_focus_relax_seconds > 0.0
+            ? opt.frontier_focus_relax_seconds
+            : (opt.frontier_relax_seconds > 0.0)
             ? opt.frontier_relax_seconds
             : ((opt.solve_time_limit > 0.0)
                 ? std::max(0.1, std::min(5.0, remainingSeconds() * 0.10))
@@ -4740,15 +5045,24 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             return work;
         }
 
-        const double interval_budget = result.parallel_frontier
+        const double interval_budget = is_focus_interval &&
+            opt.frontier_focus_time_limit > 0.0
+            ? std::min(opt.frontier_focus_time_limit,
+                       opt.solve_time_limit > 0.0 ? remainingSeconds()
+                                                  : opt.frontier_focus_time_limit)
+            : result.parallel_frontier
             ? ((opt.solve_time_limit > 0.0)
                 ? std::max(0.1, opt.solve_time_limit / std::max(1, intervals))
                 : 0.0)
             : ((opt.solve_time_limit > 0.0)
                 ? std::max(0.1, remainingSeconds() / std::max(1, intervals - idx))
                 : 0.0);
+        const int tree_node_limit = is_focus_interval &&
+            opt.frontier_focus_tree_nodes > 0
+            ? opt.frontier_focus_tree_nodes
+            : opt.max_branch_nodes;
         work.tree = ebrp::runGiniCapBranchPriceTreeDiagnostic(
-            instance, opt.lambda, hi, lo, interval_budget, 24, opt.max_branch_nodes,
+            instance, opt.lambda, hi, lo, interval_budget, 24, tree_node_limit,
             &fixed_incumbent_routes, true, fixed_upper_bound, opt.gcap_warmstart_level,
             std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns,
             opt.column_dominance, opt.column_dominance_mode,
@@ -4887,7 +5201,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     };
 
     const bool use_parallel_initial_frontier =
-        result.parallel_frontier && intervals > 1;
+        result.parallel_frontier && intervals > 1 && !opt.frontier_focus_only;
     if (use_parallel_initial_frontier) {
         const int worker_count = std::min(result.bpc_workers, intervals);
         result.parallel_tasks += intervals;
@@ -4930,7 +5244,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     }
 
     if (!use_parallel_initial_frontier) {
-    for (int schedule_pos = 0; schedule_pos < intervals; ++schedule_pos) {
+    for (int schedule_pos = 0;
+         schedule_pos < static_cast<int>(initial_schedule.size());
+         ++schedule_pos) {
         const int idx = initial_schedule[schedule_pos];
         const double frac0 = static_cast<double>(idx) / intervals;
         const double frac1 = static_cast<double>(idx + 1) / intervals;
@@ -4968,7 +5284,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             }
         }
 
-        const double relaxation_budget = (opt.frontier_relax_seconds > 0.0)
+        const bool is_focus_interval =
+            opt.frontier_focus_only && idx == result.focus_interval_id;
+        const double relaxation_budget = is_focus_interval &&
+            opt.frontier_focus_relax_seconds > 0.0
+            ? opt.frontier_focus_relax_seconds
+            : (opt.frontier_relax_seconds > 0.0)
             ? opt.frontier_relax_seconds
             : ((opt.solve_time_limit > 0.0)
                 ? std::max(0.1, std::min(5.0, remainingSeconds() * 0.10))
@@ -5019,12 +5340,19 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             break;
         }
 
-        const double interval_budget = (opt.solve_time_limit > 0.0)
+        const double interval_budget = is_focus_interval &&
+            opt.frontier_focus_time_limit > 0.0
+            ? std::min(opt.frontier_focus_time_limit, remainingSeconds())
+            : (opt.solve_time_limit > 0.0)
             ? std::max(0.1, remainingSeconds() /
-                std::max(1, intervals - schedule_pos))
+                std::max(1, static_cast<int>(initial_schedule.size()) - schedule_pos))
             : 0.0;
+        const int tree_node_limit = is_focus_interval &&
+            opt.frontier_focus_tree_nodes > 0
+            ? opt.frontier_focus_tree_nodes
+            : opt.max_branch_nodes;
         ebrp::GiniCapTreeResult tree = ebrp::runGiniCapBranchPriceTreeDiagnostic(
-            instance, opt.lambda, hi, lo, interval_budget, 24, opt.max_branch_nodes,
+            instance, opt.lambda, hi, lo, interval_budget, 24, tree_node_limit,
             &incumbent_routes, true, result.upper_bound, opt.gcap_warmstart_level,
             std::numeric_limits<double>::infinity(), opt.gcap_pricing_columns,
             opt.column_dominance, opt.column_dominance_mode,
@@ -5134,7 +5462,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         return ss.str();
     };
     const auto adaptive_split_start = std::chrono::steady_clock::now();
-    const int split_pass_limit = std::max(
+    const int split_pass_limit = opt.frontier_focus_only ? 0 : std::max(
         std::max(0, opt.frontier_refine_splits),
         opt.frontier_adaptive_split ? std::max(0, opt.frontier_adaptive_max_depth) : 0);
     for (int split_pass = 1; split_pass <= split_pass_limit; ++split_pass) {
@@ -5370,7 +5698,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         target += value;
     };
     result.focused_intensification_enabled = opt.frontier_focused_intensification;
-    if (opt.frontier_focused_intensification) {
+    if (opt.frontier_focused_intensification && !opt.frontier_focus_only) {
         const auto intensify_start = std::chrono::steady_clock::now();
         std::unordered_set<int> intensified_intervals;
         auto collectIntensificationIndices = [&]() {
@@ -5579,11 +5907,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     std::unordered_set<int> focused_retry_interval_ids;
     const auto focused_retry_start = std::chrono::steady_clock::now();
     auto appendFocusedField = appendDelimitedField;
-    if (!opt.frontier_focused_min_lb_retry) {
+    if (opt.frontier_focus_only) {
+        result.focused_retry_stopped_reason = "disabled_focus_only_diagnostic";
+    } else if (!opt.frontier_focused_min_lb_retry) {
         result.focused_retry_stopped_reason = "disabled";
     }
     for (int adaptive_pass = 1;
-         adaptive_pass <= (opt.frontier_focused_min_lb_retry
+         adaptive_pass <= (!opt.frontier_focus_only && opt.frontier_focused_min_lb_retry
              ? std::max(1, opt.frontier_retry_passes) : 0);
          ++adaptive_pass) {
         auto collectRetryIndices = [&]() {
@@ -5862,7 +6192,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         }
     }
 
-    if (opt.frontier_final_closure &&
+    if (!opt.frontier_focus_only && opt.frontier_final_closure &&
         (opt.solve_time_limit <= 0.0 || remainingSeconds() > 0.0)) {
         std::vector<char> final_deferred(interval_records.size(), 0);
         auto collectFinalClosureIndices = [&]() {
@@ -6216,11 +6546,39 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.frontier_unprocessed_interval_count = unprocessed_intervals;
     result.frontier_bound_fathomed_interval_count = bound_certified_intervals;
     result.frontier_tree_closed_interval_count = closed_intervals;
+    if (opt.frontier_focus_only && result.focus_interval_id >= 0 &&
+        result.focus_interval_id < static_cast<int>(interval_records.size())) {
+        const FrontierIntervalRecord& focus_record =
+            interval_records[result.focus_interval_id];
+        result.focus_interval_lb_after = focus_record.lower_bound;
+        result.focus_interval_closed =
+            focus_record.complete || focus_record.empty_complete ||
+            focus_record.bound_fathomed ||
+            (focus_record.lower_bound_valid &&
+             focus_record.lower_bound >= result.upper_bound - 1e-7);
+        result.focus_interval_open_nodes = focus_record.open_nodes;
+        result.focus_interval_pricing_closed = focus_record.pricing_closed;
+        result.focus_interval_certificate_scope = "diagnostic_interval_only";
+        full_objective_range = false;
+        all_certified = false;
+        result.frontier_covers_all_improving_gini_values = false;
+        result.frontier_range_certificate_scope = "diagnostic_interval_only";
+        result.notes.push_back("focus-only interval diagnostic summary: interval="
+            + std::to_string(result.focus_interval_id)
+            + ", range=" + result.focus_interval_range
+            + ", lb_before=" + std::to_string(result.focus_interval_lb_before)
+            + ", lb_after=" + std::to_string(result.focus_interval_lb_after)
+            + ", closed=" + std::string(result.focus_interval_closed ? "true" : "false")
+            + ", certificate_scope=diagnostic_interval_only");
+    }
     result.gap = (std::fabs(result.upper_bound) > 1e-12)
         ? std::max(0.0, (result.upper_bound - result.lower_bound) / std::fabs(result.upper_bound))
         : 0.0;
     result.runtime_seconds = elapsedSeconds();
     result.wall_time_seconds = result.runtime_seconds;
+    if (opt.frontier_focus_only) {
+        result.focus_interval_runtime = result.runtime_seconds;
+    }
     result.aggregate_worker_time_seconds = result.pricing_time_seconds +
         result.master_time_seconds + result.bound_time_seconds;
     if (!std::isfinite(result.pricing_best_reduced_cost_any)) {
@@ -6334,6 +6692,10 @@ int main(int argc, char** argv) {
                 results.push_back(solvePickupDropCompatFlowDiagnostic(instance, opt));
             } else if (opt.method == "pickup-drop-transfer-cap-test") {
                 results.push_back(solvePickupDropTransferCapDiagnostic(instance, opt));
+            } else if (opt.method == "vehicle-indexed-relaxation-test") {
+                results.push_back(solveVehicleIndexedRelaxationDiagnostic(instance, opt));
+            } else if (opt.method == "vehicle-indexed-transfer-flow-test") {
+                results.push_back(solveVehicleIndexedTransferFlowDiagnostic(instance, opt));
             } else {
                 throw std::runtime_error("Unsupported method: " + opt.method);
             }

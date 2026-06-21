@@ -365,3 +365,52 @@ minutes of wall time. Raw JSON, logs, summaries, and progress traces are stored
 in `results/optimization_update_round7/`. All executed commands exited with
 code `0`; captured logs contained no address/access-violation, segmentation,
 `bad_alloc`, out-of-memory, or STATUS_ACCESS_VIOLATION signatures.
+
+## Eighth Optimization Pass: Vehicle-Indexed Route-Mask Relaxation, Focus-Only Interval Diagnostics, And Benchmark Restoration
+
+This pass adds vehicle-indexed station service and operation variables to the
+inventory/route-mask/Gini relaxation, plus vehicle-indexed pickup-drop transfer
+flows linked to route masks. It also adds focus-only interval diagnostics and a
+deterministic generator for missing V8/V10 engineering benchmark inputs. These
+features strengthen valid lower bounds or improve diagnostics only; they do not
+change the certificate protocol.
+
+The vehicle-indexed operation relaxation links `y_{k,i}`, `p_{k,i}`, and
+`d_{k,i}` to each vehicle's route-mask variables, station disjointness,
+vehicle pickup/drop balance, depot-return capacity, and mask-specific operation
+budgets. The vehicle-indexed transfer flow decomposes pickups and drops by
+vehicle and station pair, with safe duration/capacity upper bounds. Focus-only
+interval runs report `diagnostic_interval_only` and are not original-problem
+certificates.
+
+| Instance | Variant | Status | UB | LB | Gap | Time (s) | Best incumbent source | Transfer cap-limited pairs | Certified? |
+|---|---|---|---:|---:|---:|---:|---|---:|---|
+| V12 M1 average | round7_baseline 60s | not closed | 0.368581603155 | 0.276436202366 | 0.250000000000 | 70.30 | BPC-owned portfolio | 0 | no |
+| V12 M1 average | improved_full 60s | not closed | 0.368581603155 | 0.276436202366 | 0.250000000000 | 70.21 | BPC-owned portfolio | 90 | no |
+| V12 M1 average | improved_full 300s | not closed | 0.368581603155 | 0.284563809518 | 0.227948961416 | 305.53 | BPC-owned portfolio | 180 | no |
+| V12 M2 average | round7_baseline 60s | not closed | 0.745474506024 | 0.585987841514 | 0.213939797031 | 62.63 | BPC-owned portfolio | 0 | no |
+| V12 M2 average | improved_full 60s | not closed | 0.745474506024 | 0.585074010670 | 0.215165634851 | 63.42 | BPC-owned portfolio | 70 | no |
+| V12 M2 average | improved_full 300s | not closed | 0.719065249476 | 0.689651961258 | 0.040904894569 | 295.71 | BPC-owned portfolio | 490 | no |
+| V12 M2 average | improved_full 1200s | not closed | 0.719065249476 | 0.689651961258 | 0.040904894569 | 1119.94 | BPC-owned portfolio | 560 | no |
+
+The V12 M2 1200s production row was run and remained noncertified. It matched
+the 300s lower bound and incumbent, indicating that the remaining gap was not
+closed by additional branch-price time under this configuration. The V12 M1
+1200s row was not run locally; the V12 M2 serious row was prioritized because
+its 300s gap was still decreasing relative to the round-seven 60s baseline.
+
+Focus-only diagnostics closed the selected minimum-LB interval for both V12
+instances but only within diagnostic scope. V12 M1 focus-only selected interval
+`0` over `[0,0.184291]` and ended with interval LB `0.368581603155`; V12 M2
+focus-only selected interval `0` over `[0,0.372737]` and ended with interval LB
+`0.745474506024`. These runs clarify that individual intervals can be closed
+when isolated, but they do not close the complete frontier.
+
+Historical V8/V10 `.txt` inputs were not found in this checkout, so deterministic
+parser-compatible engineering benchmarks were generated under
+`reference/generated/` with manifest `reference/generated/manifest.csv`.
+Generated V10 M2 average and generated V10 M2 low both certified within the 60s
+improved-full runs, but they are not claimed to be historical paper targets.
+Generated V8 M2 average and generated V10 M1 average remained positive-gap
+diagnostics. Raw JSON, logs, progress traces, summaries, and the generator
+manifest are stored in `results/optimization_update_round8/`.

@@ -108,4 +108,37 @@ build\ExactEBRP.exe --method route-mask-operation-budget-test --input testdata\e
 build\ExactEBRP.exe --method adaptive-frontier-split-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --frontier-adaptive-split true --out results\optimization_update_round7\raw\smoke_adaptive-frontier-split-test.json
 ```
 
+Round-eight example with vehicle-indexed operation relaxation, vehicle-indexed
+transfer flow, focus-capable frontier diagnostics, and progress logging:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --threads 4 --bpc-workers 4 --pricing-threads 1 --time-limit 300 --frontier-intervals 2 --frontier-retry-passes 0 --max-nodes 3 --bpc-incumbent auto --route-pool-incumbent true --vehicle-indexed-operation-relaxation true --vehicle-indexed-transfer-flow true --frontier-adaptive-split true --frontier-focused-intensification true --route-mask-operation-budget-cuts true --pickup-drop-transfer-cap-flow true --progress-log results\optimization_update_round8\raw\progress_v12_m2_average_improved_full_300s.csv --progress-interval-seconds 30 --out results\optimization_update_round8\raw\ablation_v12_m2_average_improved_full_300s.json
+```
+
+Focus-only interval diagnostic, which tightens or closes one selected frontier
+interval and reports `diagnostic_interval_only` rather than an original-problem
+certificate:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 300 --bpc-incumbent auto --frontier-focus-only true --frontier-focus-interval-id auto --frontier-focus-time-limit 300 --frontier-focus-relax-seconds 30 --vehicle-indexed-operation-relaxation true --vehicle-indexed-transfer-flow true --out results\optimization_update_round8\raw\ablation_v12_m2_average_focus_interval_only.json
+```
+
+Vehicle-indexed diagnostics:
+
+```powershell
+build\ExactEBRP.exe --method vehicle-indexed-relaxation-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --vehicle-indexed-operation-relaxation true --out results\optimization_update_round8\raw\smoke_vehicle-indexed-relaxation-test.json
+build\ExactEBRP.exe --method vehicle-indexed-transfer-flow-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --vehicle-indexed-operation-relaxation true --vehicle-indexed-transfer-flow true --out results\optimization_update_round8\raw\smoke_vehicle-indexed-transfer-flow-test.json
+```
+
+If historical V8/V10 text inputs are unavailable, deterministic engineering
+benchmarks can be regenerated with:
+
+```powershell
+D:\msys64\ucrt64\bin\python.exe scripts\generate_reference_instances.py
+```
+
+The generated files are written to `reference\generated\` with
+`reference\generated\manifest.csv`. They are regression and engineering
+benchmarks unless proven identical to historical paper inputs.
+
 Proofs and certificate cautions are in `docs/optimization_proofs.md` and `docs/certification_protocol.md`.

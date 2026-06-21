@@ -307,3 +307,23 @@ All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `
   progress only when their solver status and lower-bound meaning are valid.
   They are not certificates unless the full frontier ledger closes and all
   exact-pricing requirements are satisfied.
+
+## 2026-06-21 Round-8 Certificate Warnings
+
+- Vehicle-indexed operation and transfer-flow rows strengthen the
+  inventory/route-mask relaxation. They are valid lower-bound aids, not
+  standalone certificates.
+- Focus-only interval runs have certificate scope
+  `diagnostic_interval_only`. They may close or tighten the selected interval
+  but cannot certify the original problem unless the rest of the frontier ledger
+  is also closed or validly fathomed.
+- Regenerated V8/V10 instances are deterministic engineering benchmarks unless
+  they are proven identical to historical source inputs. Do not compare them as
+  historical paper targets.
+- Bound-fathomed frontier certificates may have no branch-price tree closure
+  rows. Exact pricing closure is required only for intervals whose certificate
+  uses branch-price lower bounds; all bound-fathomed intervals must still have
+  valid relaxation bounds, zero unresolved intervals, zero invalid intervals,
+  zero open nodes, a verifier pass, and gap zero.
+- Time-limited 1200s convergence rows remain noncertified when the frontier
+  ledger has positive gap or unresolved intervals, regardless of gap decrease.

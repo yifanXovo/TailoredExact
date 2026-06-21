@@ -478,3 +478,80 @@ constraints are necessary for every feasible route-load solution and can only
 strengthen the inventory/route/Gini relaxation. They are not a certificate by
 themselves; full frontier closure and exact pricing are still required.
 
+## Eighth Optimization Pass: Vehicle-Indexed Relaxations And Focus Diagnostics
+
+### Vehicle-Indexed Route-Mask Operation Relaxation
+
+For each vehicle `k` and station `i`, the strengthened relaxation introduces
+continuous service and operation variables `y_{k,i}`, `p_{k,i}`, and `d_{k,i}`.
+The variables are linked to route-mask variables by
+
+```text
+y_{k,i} = sum_{M: i in M} z_{k,M}
+sum_k y_{k,i} <= 1
+p_i = sum_k p_{k,i}
+d_i = sum_k d_{k,i}
+Y_i = I_i - p_i + d_i
+```
+
+and the operation variables satisfy
+
+```text
+0 <= p_{k,i} <= pickup_ub_i y_{k,i}
+0 <= d_{k,i} <= drop_ub_i y_{k,i}
+sum_i p_{k,i} >= sum_i d_{k,i}
+sum_i p_{k,i} - sum_i d_{k,i} <= Q_k
+sum_i p_{k,i} <= sum_M pickup_budget_{k,M} z_{k,M}
+```
+
+Every feasible route-load solution induces these values: a vehicle can operate
+only at stations in its selected mask, station visits are disjoint in the
+original model, aggregate pickups and drops define final inventory, and every
+vehicle starts empty. The vehicle balance rows follow because station drops
+must be supplied by previous pickups on the same route, and final depot unload
+equals total pickup minus total station drop and cannot exceed truck capacity.
+The mask operation-budget row is valid by the depot-cycle travel lower bound
+and operation-time identity. Therefore these rows remove no feasible original
+solution and only strengthen the relaxation lower bound.
+
+### Vehicle-Indexed Pickup-Drop Transfer Flow
+
+The vehicle-indexed transfer relaxation introduces `f_{k,i,j} >= 0` for bikes
+picked by vehicle `k` at `i` and dropped by the same vehicle at `j`, plus
+`h_{k,i} >= 0` for bikes picked at `i` and finally unloaded at the depot:
+
+```text
+p_{k,i} = sum_j f_{k,i,j} + h_{k,i}
+d_{k,j} = sum_i f_{k,i,j}
+f_{k,i,j} <= cap_{k,i,j} sum_{M: i,j in M} z_{k,M}
+h_{k,i} <= pickup_ub_i y_{k,i}
+```
+
+If a route transfers a bike from `i` to `j`, the same vehicle must visit both
+stations with pickup before drop. The travel time is at least the metric-closure
+path lower bound `d(0,i)+d(i,j)+d(j,0)`, and the transferred amount is bounded
+by truck capacity, pickup availability, drop residual capacity, and the
+route-duration-implied handling budget. Pairs with zero safe capacity are not
+created; pairs whose impossibility cannot be proven are kept with a loose
+capacity. Thus the vehicle-indexed transfer rows are necessary for all feasible
+route-load solutions and are safe lower-bound strengthening rows.
+
+### Focus-Only Interval Diagnostics
+
+`--frontier-focus-only` builds the incumbent and frontier metadata normally,
+then spends the requested budget on one selected frontier leaf interval. The
+run can close or tighten that interval and may produce a valid lower bound for
+that interval only. It cannot certify the original problem unless every other
+relevant frontier interval is also represented, closed or fathomed, and the full
+frontier ledger reaches the incumbent. Focus-only results therefore report
+`focus_interval_certificate_scope=diagnostic_interval_only`.
+
+### Regenerated Benchmark Caveat
+
+When historical V8/V10 source `.txt` files are unavailable, the deterministic
+generator in `scripts/generate_reference_instances.py` creates parser-compatible
+engineering benchmarks with recorded seeds and instance statistics. These files
+are suitable for regression and scalability testing, but they must not be
+reported as historical paper targets unless their source data match the
+historical inputs exactly.
+

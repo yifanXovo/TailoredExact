@@ -73,6 +73,25 @@ struct GiniIntervalInventoryRelaxationBound {
     long long pickup_drop_compat_flow_constraints = 0;
     double pickup_drop_compat_flow_time_seconds = 0.0;
     bool pickup_drop_compat_flow_enabled = false;
+    bool vehicle_indexed_operation_relaxation_enabled = false;
+    long long vehicle_indexed_y_variables = 0;
+    long long vehicle_indexed_pickup_variables = 0;
+    long long vehicle_indexed_drop_variables = 0;
+    long long vehicle_indexed_linking_constraints = 0;
+    long long vehicle_indexed_balance_constraints = 0;
+    long long vehicle_indexed_operation_budget_constraints = 0;
+    double vehicle_indexed_relaxation_time_seconds = 0.0;
+    long long vehicle_transfer_flow_variables = 0;
+    long long vehicle_transfer_depot_unload_variables = 0;
+    long long vehicle_transfer_flow_balance_constraints = 0;
+    long long vehicle_transfer_mask_linking_constraints = 0;
+    long long vehicle_transfer_pairs_total = 0;
+    long long vehicle_transfer_pairs_zero_cap = 0;
+    long long vehicle_transfer_pairs_capacity_limited = 0;
+    double vehicle_transfer_cap_min = 0.0;
+    double vehicle_transfer_cap_avg = 0.0;
+    double vehicle_transfer_cap_max = 0.0;
+    double vehicle_transfer_flow_time_seconds = 0.0;
     std::vector<std::string> pickup_drop_incompatible_examples;
     std::string status;
     std::string note;
@@ -126,7 +145,9 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     bool route_mask_support_duration_pruning_enabled = true,
     bool pickup_drop_compat_flow_enabled = true,
     bool pickup_drop_transfer_cap_flow_enabled = true,
-    bool route_mask_operation_budget_cuts_enabled = true);
+    bool route_mask_operation_budget_cuts_enabled = true,
+    bool vehicle_indexed_operation_relaxation_enabled = true,
+    bool vehicle_indexed_transfer_flow_enabled = true);
 
 InventoryRatioProjectionBound computeInventoryRatioProjectionBound(
     const Instance& instance,
