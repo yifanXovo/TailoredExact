@@ -40,6 +40,9 @@ build\ExactEBRP.exe --method gcap-frontier --input testdata\examples\gcap_smoke_
 - `--frontier-focused-min-lb-retry true|false`: spend retry time on the unresolved frontier interval with the smallest valid lower bound.
 - `--frontier-focused-intensification true|false`: reserve time to rerun stronger relaxations on the current minimum-LB unresolved interval.
 - `--frontier-focused-reserve-fraction x`: fraction of the time limit reserved for focused intensification.
+- `--frontier-adaptive-split true|false`: split the current minimum-LB unresolved Gini interval into exactly covering child intervals.
+- `--frontier-adaptive-max-depth N`: maximum adaptive split depth for a frontier leaf interval.
+- `--route-mask-operation-budget-cuts true|false`: add mask-specific pickup-operation budget rows to the route-mask relaxation using depot-cycle lower bounds.
 - `--route-pool-incumbent true|false`: collect verified BPC-generated route-load columns and solve a true-objective restricted route-column incumbent master for upper bounds only.
 - `--route-pool-max-columns-per-vehicle N`: cap stored route-pool columns per vehicle after projection dominance.
 - `--pickup-drop-compat-flow true|false`: strengthen the inventory/route/Gini relaxation with pickup-to-drop compatibility flow variables when pairs can be safely screened by route-duration lower bounds.
@@ -89,6 +92,20 @@ Transfer-cap diagnostic:
 
 ```powershell
 build\ExactEBRP.exe --method pickup-drop-transfer-cap-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --pickup-drop-compat-flow true --pickup-drop-transfer-cap-flow true --out results\optimization_update_round6\raw\smoke_pickup-drop-transfer-cap-test.json
+```
+
+Round-seven example with adaptive splitting, route-mask operation budgets, and
+periodic convergence trace:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --threads 4 --bpc-workers 4 --pricing-threads 1 --time-limit 300 --frontier-intervals 2 --frontier-retry-passes 0 --max-nodes 3 --bpc-incumbent auto --bpc-incumbent-seconds 30 --route-pool-incumbent true --frontier-focused-min-lb-retry true --frontier-focused-intensification true --frontier-adaptive-split true --frontier-adaptive-max-depth 3 --route-mask-operation-budget-cuts true --pickup-drop-compat-flow true --pickup-drop-transfer-cap-flow true --progress-log results\optimization_update_round7\raw\progress_v12_m2_average_improved_full_300s.csv --progress-interval-seconds 30 --out results\optimization_update_round7\raw\ablation_v12_m2_average_improved_full_300s.json
+```
+
+Round-seven diagnostics:
+
+```powershell
+build\ExactEBRP.exe --method route-mask-operation-budget-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --route-mask-operation-budget-cuts true --out results\optimization_update_round7\raw\smoke_route-mask-operation-budget-test.json
+build\ExactEBRP.exe --method adaptive-frontier-split-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --frontier-adaptive-split true --out results\optimization_update_round7\raw\smoke_adaptive-frontier-split-test.json
 ```
 
 Proofs and certificate cautions are in `docs/optimization_proofs.md` and `docs/certification_protocol.md`.
