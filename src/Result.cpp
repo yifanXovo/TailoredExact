@@ -142,6 +142,9 @@ std::string inferMethodScope(const SolveResult& result) {
         method == "adaptive-frontier-split-test" ||
         method == "pricing-closure-audit-test" ||
         method == "resume-state-test" ||
+        method == "pricing-verifier-test" ||
+        method == "iterative-closure-test" ||
+        method == "certificate-basis-test" ||
         method == "incumbent-import-test" ||
         method == "route-pool-incumbent-test" ||
         method == "pickup-drop-compat-flow-test" ||
@@ -209,6 +212,9 @@ std::string inferCertificateType(const SolveResult& result) {
     if (method == "adaptive-frontier-split-test") return "adaptive_frontier_split_diagnostic";
     if (method == "pricing-closure-audit-test") return "pricing_closure_audit_diagnostic";
     if (method == "resume-state-test") return "frontier_resume_state_diagnostic";
+    if (method == "pricing-verifier-test") return "pricing_verifier_diagnostic";
+    if (method == "iterative-closure-test") return "iterative_frontier_closure_diagnostic";
+    if (method == "certificate-basis-test") return "certificate_basis_audit_diagnostic";
     if (method == "incumbent-import-test") return "incumbent_import_verification_diagnostic";
     if (method == "route-pool-incumbent-test") return "route_pool_incumbent_diagnostic";
     if (method == "pickup-drop-compat-flow-test") return "pickup_drop_compat_flow_diagnostic";
@@ -259,6 +265,14 @@ bool inferCertifiedOriginalProblem(const SolveResult& result) {
         if (result.frontier_range_certificate_scope != "original_full_improving_range") {
             return false;
         }
+        if (!result.full_certificate_basis.empty() &&
+            result.full_certificate_basis == "not_certified") return false;
+        if (!result.full_certificate_rejection_reason.empty() &&
+            result.full_certificate_rejection_reason != "none") return false;
+        if (result.full_certificate_requires_pricing_closure &&
+            !result.full_certificate_pricing_closure_satisfied) return false;
+        if (!result.full_certificate_basis.empty() &&
+            !result.full_certificate_all_intervals_accounted) return false;
         const bool branch_price_tree_used_for_certificate =
             result.frontier_tree_closed_interval_count > 0;
         if (result.objective > 1e-12 && branch_price_tree_used_for_certificate) {
@@ -789,6 +803,96 @@ std::string resultToJson(const SolveResult& result) {
         << result.v12_m1_full_lb_before_import << ",\n";
     out << "  \"v12_m1_full_lb_after_import\": "
         << result.v12_m1_full_lb_after_import << ",\n";
+    out << "  \"interval_certificate_basis\": \""
+        << jsonEscape(result.interval_certificate_basis) << "\",\n";
+    out << "  \"interval_requires_pricing_closure\": \""
+        << jsonEscape(result.interval_requires_pricing_closure) << "\",\n";
+    out << "  \"interval_pricing_closure_available\": \""
+        << jsonEscape(result.interval_pricing_closure_available) << "\",\n";
+    out << "  \"interval_bound_valid\": \""
+        << jsonEscape(result.interval_bound_valid) << "\",\n";
+    out << "  \"interval_bound_source_list\": \""
+        << jsonEscape(result.interval_bound_source_list) << "\",\n";
+    out << "  \"full_certificate_basis\": \""
+        << jsonEscape(result.full_certificate_basis) << "\",\n";
+    out << "  \"full_certificate_requires_pricing_closure\": "
+        << (result.full_certificate_requires_pricing_closure ? "true" : "false") << ",\n";
+    out << "  \"full_certificate_pricing_closure_satisfied\": "
+        << (result.full_certificate_pricing_closure_satisfied ? "true" : "false") << ",\n";
+    out << "  \"full_certificate_all_intervals_accounted\": "
+        << (result.full_certificate_all_intervals_accounted ? "true" : "false") << ",\n";
+    out << "  \"full_certificate_rejection_reason\": \""
+        << jsonEscape(result.full_certificate_rejection_reason) << "\",\n";
+    out << "  \"iterative_closure_enabled\": "
+        << (result.iterative_closure_enabled ? "true" : "false") << ",\n";
+    out << "  \"iterative_closure_rounds\": "
+        << result.iterative_closure_rounds << ",\n";
+    out << "  \"iterative_closure_target_intervals\": \""
+        << jsonEscape(result.iterative_closure_target_intervals) << "\",\n";
+    out << "  \"iterative_closure_lb_before_each_round\": \""
+        << jsonEscape(result.iterative_closure_lb_before_each_round) << "\",\n";
+    out << "  \"iterative_closure_lb_after_each_round\": \""
+        << jsonEscape(result.iterative_closure_lb_after_each_round) << "\",\n";
+    out << "  \"iterative_closure_gap_before_each_round\": \""
+        << jsonEscape(result.iterative_closure_gap_before_each_round) << "\",\n";
+    out << "  \"iterative_closure_gap_after_each_round\": \""
+        << jsonEscape(result.iterative_closure_gap_after_each_round) << "\",\n";
+    out << "  \"iterative_closure_imports_accepted\": "
+        << result.iterative_closure_imports_accepted << ",\n";
+    out << "  \"iterative_closure_intervals_closed\": "
+        << result.iterative_closure_intervals_closed << ",\n";
+    out << "  \"iterative_closure_stop_reason\": \""
+        << jsonEscape(result.iterative_closure_stop_reason) << "\",\n";
+    out << "  \"iterative_exact_cg_rounds\": "
+        << result.iterative_exact_cg_rounds << ",\n";
+    out << "  \"iterative_pricing_verifier_calls\": "
+        << result.iterative_pricing_verifier_calls << ",\n";
+    out << "  \"iterative_pricing_verifier_completed\": "
+        << result.iterative_pricing_verifier_completed << ",\n";
+    out << "  \"iterative_nodes_closed_by_verifier\": "
+        << result.iterative_nodes_closed_by_verifier << ",\n";
+    out << "  \"iterative_intervals_fathomed_by_imported_bounds\": "
+        << result.iterative_intervals_fathomed_by_imported_bounds << ",\n";
+    out << "  \"open_node_state_exported\": "
+        << (result.open_node_state_exported ? "true" : "false") << ",\n";
+    out << "  \"open_node_state_nodes_saved\": "
+        << result.open_node_state_nodes_saved << ",\n";
+    out << "  \"open_node_state_columns_saved\": "
+        << result.open_node_state_columns_saved << ",\n";
+    out << "  \"open_node_state_imported\": "
+        << (result.open_node_state_imported ? "true" : "false") << ",\n";
+    out << "  \"open_node_state_nodes_loaded\": "
+        << result.open_node_state_nodes_loaded << ",\n";
+    out << "  \"open_node_state_resume_exact\": "
+        << (result.open_node_state_resume_exact ? "true" : "false") << ",\n";
+    out << "  \"open_node_state_resume_fallback_reason\": \""
+        << jsonEscape(result.open_node_state_resume_fallback_reason) << "\",\n";
+    out << "  \"pricing_verifier_enabled\": "
+        << (result.pricing_verifier_enabled ? "true" : "false") << ",\n";
+    out << "  \"pricing_verifier_complete\": "
+        << (result.pricing_verifier_complete ? "true" : "false") << ",\n";
+    out << "  \"pricing_verifier_best_reduced_cost\": "
+        << finiteOrZero(result.pricing_verifier_best_reduced_cost) << ",\n";
+    out << "  \"pricing_verifier_labels_processed\": "
+        << result.pricing_verifier_labels_processed << ",\n";
+    out << "  \"pricing_verifier_labels_pruned\": "
+        << result.pricing_verifier_labels_pruned << ",\n";
+    out << "  \"pricing_verifier_checkpoint_written\": "
+        << (result.pricing_verifier_checkpoint_written ? "true" : "false") << ",\n";
+    out << "  \"pricing_verifier_resumed\": "
+        << (result.pricing_verifier_resumed ? "true" : "false") << ",\n";
+    out << "  \"pricing_verifier_time_seconds\": "
+        << result.pricing_verifier_time_seconds << ",\n";
+    out << "  \"v12_m1_focus_intervals_attempted\": "
+        << result.v12_m1_focus_intervals_attempted << ",\n";
+    out << "  \"v12_m1_focus_intervals_closed\": "
+        << result.v12_m1_focus_intervals_closed << ",\n";
+    out << "  \"v12_m1_focus_bounds_imported\": "
+        << result.v12_m1_focus_bounds_imported << ",\n";
+    out << "  \"v12_m1_full_lb_after_all_imports\": "
+        << result.v12_m1_full_lb_after_all_imports << ",\n";
+    out << "  \"v12_m1_remaining_controlling_interval\": \""
+        << jsonEscape(result.v12_m1_remaining_controlling_interval) << "\",\n";
     out << "  \"inventory_branch_candidates\": "
         << result.inventory_branch_candidates << ",\n";
     out << "  \"inventory_branch_nodes_created\": "

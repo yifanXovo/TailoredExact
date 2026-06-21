@@ -685,3 +685,52 @@ lower valid bounds, the global full-frontier lower bound remains controlled by
 those leaves. Thus an accepted V12 M1 focus-bound import may improve one ledger
 row without changing the top-level minimum lower bound or certification status.
 
+## Round 11: Iterative Closure And Pricing Verification
+
+### Certificate-Basis Classification
+
+Each active Gini-frontier leaf interval is assigned one audit basis:
+`pricing_closed_bpc_tree`, `inventory_route_gini_relaxation_fathomed`,
+`incumbent_cutoff`, `gamma_floor_skip`, `imported_interval_bound`,
+`focus_diagnostic_only`, `unresolved`, or `invalid`. This classification only
+records the mathematical evidence already used by the ledger. Intervals skipped
+by a Gini floor, fathomed by incumbent cutoff, or fathomed by a valid
+inventory/route/Gini relaxation do not require pricing closure. Intervals whose
+certificate basis is a branch-price tree require exact pricing closure for every
+lower-bound-relevant node. The full certificate is valid only if all active
+leaves are accounted for and all required pricing closures are satisfied.
+
+### Iterative Frontier Closure
+
+The iterative closure loop repeatedly selects the unresolved active leaf with
+the smallest valid lower bound, spends a bounded budget on relaxation and
+exact-CG/tree continuation, then updates the same full-frontier ledger. This is
+certificate-neutral because it changes only runtime allocation and processing
+order. It cannot certify the original problem unless the final full ledger has
+no unresolved or invalid interval and the global lower bound reaches the
+verified incumbent.
+
+### Open-Node Resume
+
+Exact open-node resume would require serializing node restrictions, active cuts,
+node-local columns, node lower bounds, pricing closure status, and queue state.
+The round-eleven implementation exports compatible interval metadata, scalar
+open-node counts, column counts, and lower-bound state. This is a warm restart,
+not exact tree continuation, and is therefore reported with
+`open_node_state_resume_exact=false`.
+
+### Final Pricing Verifier
+
+Only a true-dual final pricing verifier can prove that no negative reduced-cost
+route-load column remains. If the verifier is interrupted, its checkpoint is
+progress evidence only; pricing closure remains false. A checkpoint can be
+resumed later, but no certificate is created until the verifier completes.
+
+### V12 M1 Multi-Focus Import
+
+Multiple V12 M1 focus bounds may be imported into a full frontier run only when
+the instance, lambda, interval range, cutoff assumptions, and restrictions match.
+Each imported focus result strengthens only its compatible interval. The global
+lower bound remains the minimum over all active leaves, so remaining lower
+unresolved leaves still block certification.
+
