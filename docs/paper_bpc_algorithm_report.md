@@ -500,3 +500,44 @@ does not yet deliver the desired warm continuation speedup.
 Raw JSON, logs, progress traces, and CSV summaries are stored in
 `results/optimization_update_round10/`. Plain CPLEX benchmarks were skipped in
 this pass, so no CPLEX speedup claims are made.
+
+## Eleventh Optimization Pass: Iterative Closure, Open-Node Resume, And Final Pricing Verification
+
+Round eleven adds explicit interval certificate-basis auditing and a full-result
+certificate-basis summary. Frontier intervals now report whether they are
+closed by a pricing-closed BPC tree, fathomed by a valid
+inventory/route/Gini relaxation, skipped by gamma floor or incumbent cutoff,
+imported from a compatible focus interval, diagnostic-only, unresolved, or
+invalid. This resolves the ambiguity where V4 smoke could be certified even
+though pricing closure fields were non-closed: every V4 interval is skipped by a
+non-pricing gamma-floor/nonnegative objective basis, so pricing closure is not
+required for that certificate.
+
+The new iterative closure loop selects the current minimum-LB unresolved leaf,
+refreshes its relaxation, runs a focused exact-CG/tree continuation pass,
+checkpoints the pricing verifier, and updates the full ledger. The loop is
+certificate-neutral and still reports positive-gap rows as noncertified.
+
+| Instance | Variant | Status | UB | LB | Gap | Iterative rounds | Target intervals | Certified? |
+|---|---|---|---:|---:|---:|---:|---|---|
+| V4 smoke | gcap-frontier | optimal | 0 | 0 | 0 | 0 | gamma-floor skips | yes |
+| V12 M2 average | iterative_reserved_300s | not closed | 0.719065249476 | 0.689651961258 | 0.040904894569 | 2 | `[0.465922,0.489218]`; `[0.489218,0.512514]` | no |
+| V12 M1 average | multifocus_300s | not closed | 0.368581603155 | 0.344666733450 | 0.064883514261 | 0 | imported historical focus bound | no |
+| V12 M1 average | iterative_lite_300s | not closed | 0.369698924539 | 0.330637007941 | 0.105658723910 | 2 | `[0.230364,0.276436]`; `[0.276436,0.369699]` | no |
+| V12 M2 average | resume_60s | not closed | 0.719065249476 | 0.697218726816 | 0.030378174501 | n/a | loaded partial state metadata | no |
+
+The V12 M2 iterative run executed two rounds but did not improve the controlling
+interval lower bounds. The pricing verifier wrote checkpoints but did not
+complete exact true-dual pricing, so pricing closure remains false. The V12 M1
+multi-focus import accepted one compatible focus bound and improved the active
+full lower bound, but unresolved leaves still control the certificate.
+
+Open-node resume is currently partial. It loads compatible interval metadata,
+column counts, and open-node counts, and reports
+`open_node_state_resume_exact=false` because live node-local RMP queues are not
+yet serialized. This is a warm restart, not exact tree continuation.
+
+No new original-problem certificate was obtained in this pass. Raw JSON, logs,
+progress traces, and CSV summaries are stored in
+`results/optimization_update_round11/`. Plain CPLEX benchmarks were skipped, so
+no CPLEX speedup claims are made.

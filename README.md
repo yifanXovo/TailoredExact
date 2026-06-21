@@ -173,3 +173,21 @@ build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12
 Dual stabilization can be requested for column discovery diagnostics with
 `--cg-dual-stabilization smooth --cg-dual-smoothing-alpha 0.7`, but current
 certificate-producing runs still require final exact true-dual pricing closure.
+
+Round-eleven iterative closure, partial open-node state, and pricing verifier
+examples:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 300 --bpc-incumbent auto --frontier-iterative-closure true --frontier-iterative-max-rounds 2 --frontier-iterative-round-time 90 --frontier-iterative-target-gap 0.005 --frontier-iterative-export-dir results\optimization_update_round11\raw\iterative_states --frontier-closure-mode exact-cg --closure-max-cg-iterations 32 --closure-returned-columns 8 --pricing-final-verifier true --pricing-verifier-checkpoint results\optimization_update_round11\raw\pricing_verifier_checkpoint.json --frontier-export-state results\optimization_update_round11\raw\frontier_state.json --frontier-export-open-nodes true --progress-log results\optimization_update_round11\progress\progress.csv --out results\optimization_update_round11\raw\iterative_frontier.json
+
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 120 --frontier-resume-state results\optimization_update_round11\raw\frontier_state.json --frontier-resume-open-nodes true --pricing-final-verifier true --pricing-verifier-resume results\optimization_update_round11\raw\pricing_verifier_checkpoint.json --out results\optimization_update_round11\raw\resume_frontier.json
+
+build\ExactEBRP.exe --method certificate-basis-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --out results\optimization_update_round11\raw\smoke_certificate-basis-test.json
+
+build\ExactEBRP.exe --method pricing-verifier-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --pricing-verifier-checkpoint results\optimization_update_round11\raw\smoke_pricing_verifier_checkpoint.json --out results\optimization_update_round11\raw\smoke_pricing-verifier-test.json
+```
+
+Current open-node state export is a warm restart unless the result explicitly
+reports `open_node_state_resume_exact=true`. Pricing-verifier checkpoints are
+progress artifacts and do not certify closure unless true-dual exact pricing
+completes with no negative reduced-cost route-load column.

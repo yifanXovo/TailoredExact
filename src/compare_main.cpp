@@ -53,7 +53,8 @@ void usage() {
         << "[--frontier-export-state <path>] [--frontier-resume-state <path>] "
         << "[--frontier-closure-mode exact-cg|tree|relax-only|auto] "
         << "[--closure-max-cg-iterations <N>] [--closure-returned-columns <N>] "
-        << "[--closure-final-exact-pricing true|false] [--cg-dual-stabilization none|smooth|box]\n";
+        << "[--closure-final-exact-pricing true|false] [--cg-dual-stabilization none|smooth|box] "
+        << "[--frontier-iterative-closure true|false] [--pricing-final-verifier true|false]\n";
 }
 
 std::string requireValue(int& i, int argc, char** argv) {
@@ -155,6 +156,19 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--cg-dual-stabilization") opt.cg_dual_stabilization = requireValue(i, argc, argv);
         else if (arg == "--cg-dual-smoothing-alpha") opt.cg_dual_smoothing_alpha = std::stod(requireValue(i, argc, argv));
         else if (arg == "--cg-stabilization-switch-to-true-after") opt.cg_stabilization_switch_to_true_after = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--frontier-iterative-closure") opt.frontier_iterative_closure = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-iterative-max-rounds") opt.frontier_iterative_max_rounds = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--frontier-iterative-round-time") opt.frontier_iterative_round_time = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--frontier-iterative-target-gap") opt.frontier_iterative_target_gap = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--frontier-iterative-use-resume") opt.frontier_iterative_use_resume = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-iterative-export-dir") opt.frontier_iterative_export_dir = requireValue(i, argc, argv);
+        else if (arg == "--frontier-export-open-nodes") opt.frontier_export_open_nodes = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-resume-open-nodes") opt.frontier_resume_open_nodes = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--pricing-final-verifier") opt.pricing_final_verifier = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--pricing-verifier-time") opt.pricing_verifier_time = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--pricing-verifier-checkpoint") opt.pricing_verifier_checkpoint = requireValue(i, argc, argv);
+        else if (arg == "--pricing-verifier-resume") opt.pricing_verifier_resume = requireValue(i, argc, argv);
+        else if (arg == "--pricing-verifier-mode") opt.pricing_verifier_mode = requireValue(i, argc, argv);
         else if (arg == "--out") opt.out_path = requireValue(i, argc, argv);
         else if (arg == "--help" || arg == "-h") {
             usage();
@@ -512,6 +526,51 @@ void writeMethodRow(std::ostringstream& out,
         << result.v12_m1_focus_bounds_accepted << ","
         << result.v12_m1_full_lb_before_import << ","
         << result.v12_m1_full_lb_after_import << ","
+        << csvEscape(result.interval_certificate_basis) << ","
+        << csvEscape(result.interval_requires_pricing_closure) << ","
+        << csvEscape(result.interval_pricing_closure_available) << ","
+        << csvEscape(result.interval_bound_valid) << ","
+        << csvEscape(result.interval_bound_source_list) << ","
+        << csvEscape(result.full_certificate_basis) << ","
+        << (result.full_certificate_requires_pricing_closure ? "true" : "false") << ","
+        << (result.full_certificate_pricing_closure_satisfied ? "true" : "false") << ","
+        << (result.full_certificate_all_intervals_accounted ? "true" : "false") << ","
+        << csvEscape(result.full_certificate_rejection_reason) << ","
+        << (result.iterative_closure_enabled ? "true" : "false") << ","
+        << result.iterative_closure_rounds << ","
+        << csvEscape(result.iterative_closure_target_intervals) << ","
+        << csvEscape(result.iterative_closure_lb_before_each_round) << ","
+        << csvEscape(result.iterative_closure_lb_after_each_round) << ","
+        << csvEscape(result.iterative_closure_gap_before_each_round) << ","
+        << csvEscape(result.iterative_closure_gap_after_each_round) << ","
+        << result.iterative_closure_imports_accepted << ","
+        << result.iterative_closure_intervals_closed << ","
+        << csvEscape(result.iterative_closure_stop_reason) << ","
+        << result.iterative_exact_cg_rounds << ","
+        << result.iterative_pricing_verifier_calls << ","
+        << result.iterative_pricing_verifier_completed << ","
+        << result.iterative_nodes_closed_by_verifier << ","
+        << result.iterative_intervals_fathomed_by_imported_bounds << ","
+        << (result.open_node_state_exported ? "true" : "false") << ","
+        << result.open_node_state_nodes_saved << ","
+        << result.open_node_state_columns_saved << ","
+        << (result.open_node_state_imported ? "true" : "false") << ","
+        << result.open_node_state_nodes_loaded << ","
+        << (result.open_node_state_resume_exact ? "true" : "false") << ","
+        << csvEscape(result.open_node_state_resume_fallback_reason) << ","
+        << (result.pricing_verifier_enabled ? "true" : "false") << ","
+        << (result.pricing_verifier_complete ? "true" : "false") << ","
+        << result.pricing_verifier_best_reduced_cost << ","
+        << result.pricing_verifier_labels_processed << ","
+        << result.pricing_verifier_labels_pruned << ","
+        << (result.pricing_verifier_checkpoint_written ? "true" : "false") << ","
+        << (result.pricing_verifier_resumed ? "true" : "false") << ","
+        << result.pricing_verifier_time_seconds << ","
+        << result.v12_m1_focus_intervals_attempted << ","
+        << result.v12_m1_focus_intervals_closed << ","
+        << result.v12_m1_focus_bounds_imported << ","
+        << result.v12_m1_full_lb_after_all_imports << ","
+        << csvEscape(result.v12_m1_remaining_controlling_interval) << ","
         << result.inventory_branch_candidates << ","
         << result.inventory_branch_nodes_created << ","
         << result.inventory_branch_station << ","
@@ -665,6 +724,36 @@ std::string comparisonCsv(const std::vector<std::pair<ebrp::SolveResult, ebrp::S
         << "cg_stabilization_time_seconds,cg_final_true_pricing_rc,"
         << "v12_m1_imported_focus_bounds,v12_m1_focus_bounds_accepted,"
         << "v12_m1_full_lb_before_import,v12_m1_full_lb_after_import,"
+        << "interval_certificate_basis,interval_requires_pricing_closure,"
+        << "interval_pricing_closure_available,interval_bound_valid,"
+        << "interval_bound_source_list,full_certificate_basis,"
+        << "full_certificate_requires_pricing_closure,"
+        << "full_certificate_pricing_closure_satisfied,"
+        << "full_certificate_all_intervals_accounted,"
+        << "full_certificate_rejection_reason,iterative_closure_enabled,"
+        << "iterative_closure_rounds,iterative_closure_target_intervals,"
+        << "iterative_closure_lb_before_each_round,"
+        << "iterative_closure_lb_after_each_round,"
+        << "iterative_closure_gap_before_each_round,"
+        << "iterative_closure_gap_after_each_round,"
+        << "iterative_closure_imports_accepted,"
+        << "iterative_closure_intervals_closed,"
+        << "iterative_closure_stop_reason,iterative_exact_cg_rounds,"
+        << "iterative_pricing_verifier_calls,"
+        << "iterative_pricing_verifier_completed,"
+        << "iterative_nodes_closed_by_verifier,"
+        << "iterative_intervals_fathomed_by_imported_bounds,"
+        << "open_node_state_exported,open_node_state_nodes_saved,"
+        << "open_node_state_columns_saved,open_node_state_imported,"
+        << "open_node_state_nodes_loaded,open_node_state_resume_exact,"
+        << "open_node_state_resume_fallback_reason,"
+        << "pricing_verifier_enabled,pricing_verifier_complete,"
+        << "pricing_verifier_best_reduced_cost,pricing_verifier_labels_processed,"
+        << "pricing_verifier_labels_pruned,pricing_verifier_checkpoint_written,"
+        << "pricing_verifier_resumed,pricing_verifier_time_seconds,"
+        << "v12_m1_focus_intervals_attempted,v12_m1_focus_intervals_closed,"
+        << "v12_m1_focus_bounds_imported,v12_m1_full_lb_after_all_imports,"
+        << "v12_m1_remaining_controlling_interval,"
         << "inventory_branch_candidates,inventory_branch_nodes_created,inventory_branch_station,"
         << "inventory_branch_value,inventory_branch_left_bound,inventory_branch_right_bound,"
         << "inventory_branch_pruned_nodes,inventory_branch_max_depth,"

@@ -380,3 +380,25 @@ All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `
 - Longer V12 runs and progress traces remain convergence diagnostics unless
   the full frontier ledger closes, all relevant exact-pricing requirements are
   satisfied, the verifier passes, and the final gap is zero.
+
+## 2026-06-22 Round-11 Certificate Warnings
+
+- Every frontier interval must report a certificate basis. Exact pricing
+  closure is required only when the basis is `pricing_closed_bpc_tree`. It is
+  not required for `gamma_floor_skip`, `incumbent_cutoff`, or
+  `inventory_route_gini_relaxation_fathomed`, provided the non-pricing bound is
+  valid and the interval is truly skipped or fathomed.
+- The full result must report whether all active intervals are accounted for,
+  whether any interval requires pricing closure, whether those closures are
+  available, and the rejection reason when the run is not certified.
+- Iterative frontier closure automates selecting the current minimum-LB
+  unresolved leaf, focusing closure effort there, and updating the same ledger.
+  It is a runtime allocation strategy, not a separate certificate.
+- Open-node resume must distinguish exact tree continuation from warm restart.
+  The current partial export stores interval metadata, lower bounds, column
+  counts, and open-node counts, so it is reported as
+  `open_node_state_resume_exact=false`.
+- Final pricing verifier checkpoints are progress artifacts only. A checkpoint
+  or time-limited verifier run cannot set `pricing_closure_certified_exact=true`
+  unless true-dual exact pricing has completed with no negative reduced-cost
+  column remaining.

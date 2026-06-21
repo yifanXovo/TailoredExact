@@ -1469,3 +1469,54 @@ Remaining TODOs:
   final pricing verification.
 - Run V12 M2 exact-CG focus and full imported/resumed frontier at 1200s or
   3600s in an unattended slot.
+
+## 2026-06-22 Round 11: Iterative Closure And Pricing Verifier
+
+Implementation:
+
+- Added interval-level `interval_certificate_basis`,
+  `interval_requires_pricing_closure`, `interval_pricing_closure_available`,
+  `interval_bound_valid`, and `interval_bound_source_list` reporting.
+- Added full-result certificate-basis fields and rejection reasons. BPC
+  optimality now also requires any pricing-closure obligations reported by the
+  interval bases to be satisfied.
+- Added iterative frontier closure over the current minimum-LB unresolved leaf.
+  It refreshes relaxation bounds, runs focused exact-CG/tree continuation,
+  checkpoints pricing verifier state, and updates the same full ledger.
+- Added partial open-node state export/resume metadata. This is explicitly
+  reported as warm restart (`open_node_state_resume_exact=false`) until live
+  node-local queues are serialized.
+- Added final pricing-verifier checkpoint/resume plumbing and smoke diagnostics
+  for pricing verifier, iterative closure, and certificate-basis audit.
+
+Results:
+
+- V4 `gcap-frontier` remains certified with objective `0`; every interval is
+  reported as `gamma_floor_skip`, so pricing closure is not required.
+- V12 M2 iterative reserved 300s targeted `[0.465922,0.489218]` and
+  `[0.489218,0.512514]`. Bounds did not improve; UB `0.719065249476`, LB
+  `0.689651961258`, gap `0.040904894569`, not certified.
+- V12 M1 multi-focus import 300s accepted one compatible focus bound and reached
+  UB `0.368581603155`, LB `0.34466673345`, gap `0.064883514261`, not
+  certified.
+- V12 M1 iterative lite 300s executed two iterative rounds and remained open
+  with UB `0.369698924539`, LB `0.330637007941`, gap `0.105658723910`.
+- V12 M2 resume 60s loaded compatible state metadata and one saved open-node
+  count; it is reported as partial warm restart, not exact open-node resume.
+
+Safety:
+
+- CMake was unavailable; fallback g++ builds succeeded for both executables.
+- All V4 smoke and V12 round-eleven commands exited with code `0`.
+- Round-eleven logs were scanned for memory/address/access-violation,
+  segmentation, `bad_alloc`, fatal, and Windows access-violation code
+  signatures. No matches were found.
+- Plain CPLEX was skipped. No CPLEX speedup or certificate comparison is made.
+
+Remaining TODOs:
+
+- Serialize true live BPC open-node queues, including node-local RMP columns and
+  active cuts.
+- Complete a resumable true-dual route-load pricing verifier; current
+  checkpointing is conservative and does not certify incomplete pricing.
+- Run V12 M2 and V12 M1 iterative closure at 1200s/3600s in an unattended slot.
