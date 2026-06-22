@@ -402,3 +402,22 @@ All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `
   or time-limited verifier run cannot set `pricing_closure_certified_exact=true`
   unless true-dual exact pricing has completed with no negative reduced-cost
   column remaining.
+
+## 2026-06-22 Round-12 Certificate Warnings
+
+- `StationSet` is a representation change only. It is certificate-neutral when
+  the same visited-station set is preserved, but any remaining integer-mask or
+  all-subset feature must be guarded for large V.
+- Relaxed ng-route/DSSR pricing cannot close a node unless DSSR has completed
+  an exact proof or a separate true-dual exact final pricing verification has
+  completed. If `dssr_incomplete` or a pricing time limit is reported, the run
+  is not pricing-closed.
+- Stabilized duals are column-discovery duals only. They may guide candidate
+  generation, but closure and reduced-cost certificates must use the true RMP
+  duals.
+- External or HGA/TGBC incumbents are upper bounds only after independent
+  route verification. They may improve pruning but never certify a lower bound.
+- V50/V100 scalability rows are diagnostics unless the full original
+  certificate protocol closes. Disabled all-subset route-mask relaxations must
+  be listed in `unsupported_large_instance_features`, and no positive-gap or
+  relaxed-pricing row may be labeled optimal.

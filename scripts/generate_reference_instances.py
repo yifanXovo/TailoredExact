@@ -23,6 +23,13 @@ CASES = [
     ("V10_M1_average", 10, 1, [30], "average", 10031),
     ("V10_M2_average", 10, 2, [20, 20], "average", 10032),
     ("V10_M2_low", 10, 2, [20, 20], "low", 10033),
+    ("V20_M2_average", 20, 2, [30, 30], "average", 20032),
+    ("V20_M3_low", 20, 3, [20, 20, 20], "low", 20033),
+    ("V50_M3_average", 50, 3, [30, 30, 30], "average", 50033),
+    ("V50_M5_low", 50, 5, [20, 20, 20, 20, 20], "low", 50035),
+    ("V70_M5_average", 70, 5, [30, 30, 30, 30, 30], "average", 70035),
+    ("V100_M5_average", 100, 5, [30, 30, 30, 30, 30], "average", 100055),
+    ("V100_M8_low", 100, 8, [20, 20, 20, 20, 20, 20, 20, 20], "low", 100088),
 ]
 
 
@@ -109,6 +116,7 @@ def build_case(name: str, v: int, m: int, q: list[int], scenario: str, seed: int
         "scenario": scenario,
         "total_bikes": sum(initial[1:]),
         "total_target": sum(target[1:]),
+        "generated_for": "engineering_scalability",
     }
 
 

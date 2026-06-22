@@ -1,9 +1,12 @@
 #include "Pricing.hpp"
 
 #include <algorithm>
+#include <cctype>
 #include <cmath>
 #include <functional>
 #include <limits>
+#include <numeric>
+#include <sstream>
 #include <unordered_map>
 #include <vector>
 
@@ -11,6 +14,59 @@ namespace ebrp {
 namespace {
 
 using Clock = std::chrono::steady_clock;
+
+std::string lowerCopy(std::string value) {
+    std::transform(value.begin(), value.end(), value.begin(), [](unsigned char c) {
+        return static_cast<char>(std::tolower(c));
+    });
+    return value;
+}
+
+double dualVisitCost(const PricingDuals& duals, int station) {
+    return station < static_cast<int>(duals.visit_cost.size())
+        ? duals.visit_cost[station] : 0.0;
+}
+
+double dualOperationCost(const PricingDuals& duals, int station) {
+    return station < static_cast<int>(duals.operation_cost.size())
+        ? duals.operation_cost[station] : 0.0;
+}
+
+double pathPairCost(const PricingDuals& duals, const std::vector<char>& used) {
+    double cost = 0.0;
+    for (const auto& entry : duals.pair_cost) {
+        const int a = entry.first.first;
+        const int b = entry.first.second;
+        if (a > 0 && b > 0 &&
+            a < static_cast<int>(used.size()) &&
+            b < static_cast<int>(used.size()) &&
+            used[a] && used[b]) {
+            cost += entry.second;
+        }
+    }
+    return cost;
+}
+
+double pathSubsetRowCost(const PricingDuals& duals, const std::vector<char>& used) {
+    double cost = 0.0;
+    for (const auto& entry : duals.subset_row_cost) {
+        int count = 0;
+        for (int station : entry.first) {
+            if (station > 0 && station < static_cast<int>(used.size()) &&
+                used[station]) {
+                ++count;
+            }
+        }
+        cost += static_cast<double>(count / 2) * entry.second;
+    }
+    return cost;
+}
+
+PricingResult runScalableNgDssrPricing(const Instance& instance,
+                                       int vehicle,
+                                       const PricingDuals& duals,
+                                       const PricingOptions& options,
+                                       Clock::time_point start);
 
 class ExactPricer {
 public:
@@ -43,8 +99,26 @@ public:
     }
 
     PricingResult run() {
+        std::string engine = lowerCopy(options_.pricing_engine);
+        if (engine.empty() || engine == "auto") {
+            engine = instance_.V > 30 ? "hybrid" : "exact-label";
+        }
+        if (engine == "ng-dssr" || (engine == "hybrid" && instance_.V > 16)) {
+            return runScalableNgDssrPricing(instance_, vehicle_, duals_, options_, start_);
+        }
+        result_.pricing_engine = "exact-label";
+        if (instance_.V > 30) {
+            result_.complete = false;
+            result_.dssr_stop_reason =
+                "unsupported_for_large_instance_exact_label_requires_dynamic_or_hybrid_pricing";
+            result_.pricing_engine = "exact-label";
+            result_.pricing_closure_status = "unsupported_for_large_instance";
+            result_.best_reduced_cost = 0.0;
+            return result_;
+        }
         if (vehicle_ < 0 || vehicle_ >= instance_.M) {
             result_.complete = false;
+            result_.pricing_closure_status = "invalid_vehicle";
             return result_;
         }
         if (useLabelSettingPricing()) {
@@ -53,6 +127,11 @@ public:
             if (!result_.has_column) result_.best_reduced_cost = 0.0;
             result_.has_negative_column = result_.has_column &&
                 result_.best_reduced_cost < -options_.negative_tolerance;
+            result_.best_new_reduced_cost = result_.best_reduced_cost;
+            result_.negative_new_projection_count =
+                result_.has_negative_column ? 1 : 0;
+            result_.pricing_closure_status = result_.has_negative_column
+                ? "negative_columns_remaining" : "exact_no_negative";
             return result_;
         }
         for (int first = 1; first <= instance_.V; ++first) {
@@ -67,6 +146,11 @@ public:
         if (!result_.has_column) result_.best_reduced_cost = 0.0;
         result_.has_negative_column = result_.has_column &&
             result_.best_reduced_cost < -options_.negative_tolerance;
+        result_.best_new_reduced_cost = result_.best_reduced_cost;
+        result_.negative_new_projection_count =
+            result_.has_negative_column ? 1 : 0;
+        result_.pricing_closure_status = result_.has_negative_column
+            ? "negative_columns_remaining" : "exact_no_negative";
         return result_;
     }
 
@@ -107,6 +191,10 @@ private:
     std::vector<int> forbidden_support_masks_;
 
     void buildRequiredComponents() {
+        if (instance_.V > 30) {
+            required_closure_mask_.assign(instance_.V + 1, 0);
+            return;
+        }
         std::vector<int> parent(instance_.V + 1);
         for (int i = 0; i <= instance_.V; ++i) parent[i] = i;
         std::function<int(int)> findRoot = [&](int x) {
@@ -142,6 +230,7 @@ private:
         const double elapsed = std::chrono::duration<double>(Clock::now() - start_).count();
         if (elapsed >= options_.time_limit_seconds) {
             result_.complete = false;
+            result_.pricing_closure_status = "pricing_time_limit";
             return true;
         }
         return false;
@@ -582,6 +671,7 @@ private:
         std::reverse(reversed_path.begin(), reversed_path.end());
         column.vehicle = vehicle_;
         column.mask = final_label.mask;
+        column.station_set = StationSet::fromMask(instance_.V, final_label.mask);
         column.path = std::move(reversed_path);
         column.q = std::move(q);
         column.pickup = final_label.pickup;
@@ -946,6 +1036,7 @@ private:
             result_.best_reduced_cost = rc;
             result_.best_column.vehicle = vehicle_;
             result_.best_column.mask = mask;
+            result_.best_column.station_set = StationSet::fromMask(instance_.V, mask);
             result_.best_column.path = path_;
             result_.best_column.q = q_;
             result_.best_column.pickup = pickup;
@@ -961,6 +1052,324 @@ private:
         }
     }
 };
+
+PricingResult runScalableNgDssrPricing(const Instance& instance,
+                                       int vehicle,
+                                       const PricingDuals& duals,
+                                       const PricingOptions& options,
+                                       Clock::time_point start) {
+    PricingResult result;
+    result.pricing_engine = lowerCopy(options.pricing_engine);
+    if (result.pricing_engine.empty() || result.pricing_engine == "auto") {
+        result.pricing_engine = "hybrid";
+    }
+    result.ng_size = std::max(1, options.ng_size);
+    result.dssr_final_exact = options.dssr_final_exact;
+    const auto pricing_start = Clock::now();
+    PricingDuals search_duals = duals;
+    const std::string stabilization = lowerCopy(options.cg_dual_stabilization);
+    auto scaleDualVector = [](std::vector<double>& values, double scale) {
+        for (double& value : values) value *= scale;
+    };
+    if (stabilization == "smooth") {
+        const double alpha = std::max(0.0, std::min(1.0, options.cg_dual_smoothing_alpha));
+        search_duals.constant *= alpha;
+        scaleDualVector(search_duals.visit_cost, alpha);
+        scaleDualVector(search_duals.operation_cost, alpha);
+        for (auto& entry : search_duals.pair_cost) entry.second *= alpha;
+        for (auto& entry : search_duals.subset_row_cost) entry.second *= alpha;
+        search_duals.travel_cost *= alpha;
+        search_duals.pickup_cost *= alpha;
+    } else if (stabilization == "box") {
+        const double radius = std::max(0.0, options.cg_dual_box_radius);
+        auto clamp = [radius](double value) {
+            return std::max(-radius, std::min(radius, value));
+        };
+        search_duals.constant = clamp(search_duals.constant);
+        for (double& value : search_duals.visit_cost) value = clamp(value);
+        for (double& value : search_duals.operation_cost) value = clamp(value);
+        for (auto& entry : search_duals.pair_cost) entry.second = clamp(entry.second);
+        for (auto& entry : search_duals.subset_row_cost) entry.second = clamp(entry.second);
+        search_duals.travel_cost = clamp(search_duals.travel_cost);
+        search_duals.pickup_cost = clamp(search_duals.pickup_cost);
+    }
+    if (vehicle < 0 || vehicle >= instance.M || instance.V <= 0) {
+        result.complete = false;
+        result.dssr_stop_reason = "invalid_vehicle_or_empty_instance";
+        result.pricing_closure_status = "invalid_vehicle";
+        return result;
+    }
+
+    auto timedOut = [&]() {
+        const double limit = options.dssr_time_limit > 0.0
+            ? options.dssr_time_limit : options.time_limit_seconds;
+        if (limit <= 0.0) return false;
+        const double elapsed =
+            std::chrono::duration<double>(Clock::now() - start).count();
+        if (elapsed >= limit) {
+            result.complete = false;
+            result.dssr_stop_reason = "dssr_time_limit";
+            result.pricing_closure_status = "pricing_time_limit";
+            return true;
+        }
+        return false;
+    };
+
+    auto stationAllowedLarge = [&](int station) {
+        if (station < 1 || station > instance.V) return false;
+        if (station <= 31 && (options.forbidden_station_mask & (1 << (station - 1)))) {
+            return false;
+        }
+        if (options.allowed_station_mask != 0) {
+            if (station > 31) return false;
+            if ((options.allowed_station_mask & (1 << (station - 1))) == 0) return false;
+        }
+        return true;
+    };
+
+    auto columnAllowedByBranchPairs = [&](const StationSet& set) {
+        for (const auto& pair : options.forbid_together_pairs) {
+            if (set.contains(pair.first) && set.contains(pair.second)) return false;
+        }
+        for (const auto& pair : options.require_together_pairs) {
+            if (set.contains(pair.first) != set.contains(pair.second)) return false;
+        }
+        return true;
+    };
+
+    auto buildColumn = [&](const std::vector<int>& path,
+                           RouteLoadColumn& column,
+                           double& rc_out) {
+        if (path.empty()) return false;
+        std::vector<char> used(static_cast<std::size_t>(instance.V + 1), 0);
+        StationSet set(instance.V);
+        int mask = 0;
+        double travel = instance.dist[0][path.front()];
+        for (std::size_t pos = 0; pos < path.size(); ++pos) {
+            const int station = path[pos];
+            if (station < 1 || station > instance.V || used[station]) return false;
+            used[station] = 1;
+            set.add(station);
+            if (station <= 31) mask |= 1 << (station - 1);
+            if (pos > 0) travel += instance.dist[path[pos - 1]][station];
+        }
+        travel += instance.dist[path.back()][0];
+        if (travel > instance.total_time_limit + 1e-9) return false;
+        if (!columnAllowedByBranchPairs(set)) return false;
+
+        const double cunit = instance.pickup_time + instance.drop_time;
+        if (cunit <= 1e-12) return false;
+        const int pickup_budget = static_cast<int>(
+            std::floor((instance.total_time_limit - travel) / cunit + 1e-9));
+        if (pickup_budget <= 0) return false;
+
+        column = RouteLoadColumn{};
+        column.vehicle = vehicle;
+        column.mask = mask;
+        column.station_set = set;
+        column.path = path;
+        column.q.assign(instance.V + 1, 0);
+        column.travel = travel;
+
+        int load = 0;
+        int pickup = 0;
+        bool has_operation = false;
+        for (int station : path) {
+            const int bit = station <= 31 ? (1 << (station - 1)) : 0;
+            const double search_op = dualOperationCost(search_duals, station);
+            const double pickup_coeff = search_duals.pickup_cost + search_op;
+            const double drop_coeff = -search_op;
+            const int pick_room = std::min({instance.initial[station],
+                                            instance.Q[vehicle] - load,
+                                            pickup_budget - pickup});
+            const int drop_room = std::min(instance.capacity[station] - instance.initial[station],
+                                           load);
+            bool can_pick = pick_room > 0 &&
+                (station > 31 || (options.forbid_pickup_station_mask & bit) == 0);
+            bool can_drop = drop_room > 0 &&
+                (station > 31 || (options.forbid_drop_station_mask & bit) == 0);
+            if (can_drop && (!can_pick || drop_coeff < pickup_coeff - 1e-12)) {
+                int amount = std::max(1, std::min(drop_room, instance.Q[vehicle]));
+                column.q[station] = -amount;
+                load -= amount;
+                has_operation = true;
+            } else if (can_pick) {
+                int amount = std::max(1, std::min(pick_room, instance.Q[vehicle]));
+                column.q[station] = amount;
+                load += amount;
+                pickup += amount;
+                has_operation = true;
+            }
+        }
+        if (!has_operation || pickup <= 0) return false;
+        column.pickup = pickup;
+        column.duration = travel + cunit * static_cast<double>(pickup);
+        if (column.duration > instance.total_time_limit + 1e-9) return false;
+
+        double rc = duals.constant + duals.travel_cost * travel;
+        for (int station : path) {
+            const int q = column.q[station];
+            if (q > 0) {
+                rc += (duals.pickup_cost + dualOperationCost(duals, station)) *
+                    static_cast<double>(q);
+            } else if (q < 0) {
+                rc += (-dualOperationCost(duals, station)) *
+                    static_cast<double>(-q);
+            }
+        }
+        for (int station : path) rc += dualVisitCost(duals, station);
+        rc += pathPairCost(duals, used) + pathSubsetRowCost(duals, used);
+        column.reduced_cost = rc;
+        rc_out = rc;
+        return true;
+    };
+
+    std::vector<std::pair<double, int>> ranked;
+    ranked.reserve(static_cast<std::size_t>(instance.V));
+    for (int station = 1; station <= instance.V; ++station) {
+        if (!stationAllowedLarge(station)) continue;
+        const double pickup_coeff = search_duals.pickup_cost + dualOperationCost(search_duals, station);
+        const double drop_coeff = -dualOperationCost(search_duals, station);
+        double score = dualVisitCost(search_duals, station) +
+            std::min({0.0, pickup_coeff, drop_coeff}) +
+            1e-6 * (instance.dist[0][station] + instance.dist[station][0]);
+        ranked.push_back({score, station});
+    }
+    std::sort(ranked.begin(), ranked.end());
+    const int seed_count = std::min<int>(
+        static_cast<int>(ranked.size()),
+        std::max(result.ng_size, std::min(instance.V, result.ng_size * 3)));
+    const int max_rounds = std::max(1, options.dssr_max_rounds);
+    const int max_path_len = std::max(1, std::min(instance.V, result.ng_size + 2));
+    result.ng_memory_total = static_cast<long long>(instance.V) * result.ng_size;
+
+    for (int round = 0; round < max_rounds; ++round) {
+        ++result.dssr_rounds;
+        const int local_ng = std::min(instance.V,
+                                      result.ng_size + round * std::max(1, options.dssr_expand_per_round));
+        result.dssr_memory_expansions += (round == 0 ? 0 : instance.V);
+        for (int seed_pos = 0; seed_pos < seed_count; ++seed_pos) {
+            if (timedOut()) {
+                result.dssr_time_seconds =
+                    std::chrono::duration<double>(Clock::now() - pricing_start).count();
+                return result;
+            }
+            std::vector<int> path;
+            path.reserve(static_cast<std::size_t>(max_path_len));
+            std::vector<char> used(static_cast<std::size_t>(instance.V + 1), 0);
+            int current = ranked[seed_pos].second;
+            for (int step = 0; step < max_path_len; ++step) {
+                if (used[current]) break;
+                path.push_back(current);
+                used[current] = 1;
+                RouteLoadColumn candidate;
+                double rc = 0.0;
+                ++result.route_states;
+                if (buildColumn(path, candidate, rc)) {
+                    ++result.generated_columns;
+                    if (!result.has_column || rc < result.best_reduced_cost - 1e-12) {
+                        result.has_column = true;
+                        result.best_reduced_cost = rc;
+                        result.best_column = candidate;
+                    }
+                    if (rc < -options.negative_tolerance) {
+                        ++result.dssr_relaxed_negative_routes;
+                        ++result.dssr_elementary_columns_found;
+                        result.has_negative_column = true;
+                        if (static_cast<int>(result.negative_columns.size()) <
+                            std::max(1, options.max_returned_columns)) {
+                            result.negative_columns.push_back(candidate);
+                        }
+                    }
+                }
+                int next_station = 0;
+                double best_next = std::numeric_limits<double>::infinity();
+                int considered = 0;
+                for (const auto& entry : ranked) {
+                    const int station = entry.second;
+                    if (used[station]) continue;
+                    const double neighborhood_penalty =
+                        considered < local_ng ? 0.0 : 0.05 * considered;
+                    const double dual_term =
+                        (options.ng_neighborhood_mode == "dual-aware" ||
+                         options.ng_neighborhood_mode == "hybrid")
+                            ? entry.first : 0.0;
+                    const double value = instance.dist[current][station] +
+                        0.25 * (instance.dist[0][station] + instance.dist[station][0]) +
+                        dual_term + neighborhood_penalty;
+                    if (value < best_next) {
+                        best_next = value;
+                        next_station = station;
+                    }
+                    ++considered;
+                    if (considered > std::max(local_ng * 4, 16)) break;
+                }
+                if (next_station == 0) break;
+                current = next_station;
+            }
+        }
+        if (result.has_negative_column) break;
+    }
+
+    if (!result.has_column) result.best_reduced_cost = 0.0;
+    result.complete = false;
+    result.dssr_exact_closure_proved = false;
+    result.dssr_stop_reason = result.has_negative_column
+        ? "elementary_negative_column_found_final_exact_required"
+        : "dssr_incomplete_final_exact_required";
+    if (result.pricing_engine == "ng-dssr" && instance.V <= 16 &&
+        options.dssr_final_exact) {
+        PricingOptions exact_options = options;
+        exact_options.pricing_engine = "exact-label";
+        PricingResult exact = ExactPricer(instance, vehicle, duals, exact_options, start).run();
+        result.cg_true_pricing_calls += 1;
+        result.cg_true_pricing_columns_found += exact.has_negative_column ? 1 : 0;
+        result.cg_final_true_pricing_rc = exact.best_reduced_cost;
+        if (exact.complete) {
+            result.complete = true;
+            result.dssr_final_exact = true;
+            result.dssr_exact_closure_proved = !exact.has_negative_column;
+            result.dssr_stop_reason = exact.has_negative_column
+                ? "exact_elementary_negative_column_found"
+                : "exact_no_negative";
+            if (!result.has_column || exact.best_reduced_cost < result.best_reduced_cost) {
+                result.has_column = exact.has_column;
+                result.best_reduced_cost = exact.best_reduced_cost;
+                result.best_column = exact.best_column;
+            }
+            if (!exact.negative_columns.empty()) {
+                result.negative_columns = exact.negative_columns;
+            }
+        }
+        result.route_states += exact.route_states;
+        result.operation_states += exact.operation_states;
+        result.generated_columns += exact.generated_columns;
+    }
+
+    result.has_negative_column = result.has_column &&
+        result.best_reduced_cost < -options.negative_tolerance;
+    result.best_new_reduced_cost = result.best_reduced_cost;
+    result.negative_new_projection_count =
+        result.has_negative_column ? static_cast<long long>(result.negative_columns.size()) : 0;
+    result.pricing_closure_status =
+        result.complete && result.dssr_exact_closure_proved && !result.has_negative_column
+            ? "exact_no_negative"
+            : (result.has_negative_column ? "negative_columns_remaining" : "dssr_incomplete");
+    result.cg_stabilized_pricing_calls =
+        stabilization == "none" ? 0 : result.dssr_rounds;
+    result.cg_true_pricing_calls += stabilization == "none" ? result.dssr_rounds : 1;
+    result.cg_stabilization_columns_found =
+        stabilization == "none" ? 0 : result.dssr_elementary_columns_found;
+    result.cg_true_pricing_columns_found +=
+        stabilization == "none" ? result.dssr_elementary_columns_found : 0;
+    result.cg_dual_center_updates =
+        stabilization == "none" ? 0 : std::max(0, result.dssr_rounds - 1);
+    result.dssr_time_seconds =
+        std::chrono::duration<double>(Clock::now() - pricing_start).count();
+    result.cg_stabilization_time_seconds =
+        stabilization == "none" ? 0.0 : result.dssr_time_seconds;
+    return result;
+}
 
 } // namespace
 

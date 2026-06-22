@@ -53,6 +53,25 @@ build\ExactEBRP.exe --method gcap-frontier --input testdata\examples\gcap_smoke_
 - `--incumbent-json <path> --incumbent-format exact_result --incumbent-source-name <name>`: import a verified incumbent route solution as an upper-bound/cutoff source only.
 - `--incumbent-format auto|exact_result|route_json|csv`: parse incumbent files as ExactEBRP result JSON, route JSON, or CSV with vehicle/order/station/pickup/drop columns.
 - `--hga-incumbent <path> --hga-incumbent-format auto|route_json|csv|legacy`: import HGA/TGBC-style route outputs when a compatible route-bearing file is available. Legacy objective-only files are rejected rather than fabricated into routes.
+- `--external-incumbent <path> --external-incumbent-format auto|route_json|csv|legacy_text`: import any external heuristic route plan through the same independent verifier. Verified imports are upper bounds only.
+- `--export-incumbent <path>`: export the current best route plan in the route JSON schema used by `--external-incumbent`.
+- `--large-instance-mode auto|off|force`: enable large-instance guards. In `auto`, all-subset route-mask enumeration is disabled for large V unless a certifying replacement is available.
+- `--pricing-engine exact-label|ng-dssr|hybrid --ng-size <N> --dssr-max-rounds <N> --dssr-time-limit <seconds>`: choose exact label pricing or the hybrid ng-route/DSSR pricing diagnostic. Relaxed pricing does not certify closure unless exact DSSR/final verification completes.
+- `--cg-dual-stabilization none|smooth|box --cg-dual-smoothing-alpha <a> --cg-dual-box-radius <r>`: use stabilized duals for column discovery only; final closure still requires true-dual pricing.
+
+Example large-instance diagnostic:
+
+```powershell
+build\ExactEBRP.exe --method pricing --input reference\generated\regen_V100_M5_average.txt --lambda 0.15 --T 3600 --time-limit 60 --large-instance-mode auto --pricing-engine hybrid --ng-size 12 --dssr-time-limit 60 --cg-dual-stabilization smooth --out results\optimization_update_round12\raw\V100_pricing_hybrid_60s.json
+```
+
+Generate deterministic engineering benchmarks when historical V8/V10/V20/V50/V100 source files are unavailable:
+
+```powershell
+python scripts\generate_reference_instances.py
+```
+
+If Python is unavailable, the checked-in `reference\generated\manifest.csv` identifies the generated engineering benchmark files already used by the round-twelve diagnostics.
 - `--gcap-pricing-columns N`: allow pricing to return multiple negative columns; filtered insertion is certificate-neutral.
 - `--frontier-column-cache true|false`: currently logged as requested but not enabled for certificates.
 
