@@ -145,6 +145,7 @@ std::string inferMethodScope(const SolveResult& result) {
         method == "pricing-verifier-test" ||
         method == "iterative-closure-test" ||
         method == "certificate-basis-test" ||
+        method == "option-consistency-test" ||
         method == "station-set-test" ||
         method == "ng-dssr-pricing-test" ||
         method == "dssr-exactness-test" ||
@@ -221,6 +222,7 @@ std::string inferCertificateType(const SolveResult& result) {
     if (method == "pricing-verifier-test") return "pricing_verifier_diagnostic";
     if (method == "iterative-closure-test") return "iterative_frontier_closure_diagnostic";
     if (method == "certificate-basis-test") return "certificate_basis_audit_diagnostic";
+    if (method == "option-consistency-test") return "option_consistency_audit_diagnostic";
     if (method == "station-set-test") return "station_set_representation_diagnostic";
     if (method == "ng-dssr-pricing-test") return "ng_dssr_pricing_diagnostic";
     if (method == "dssr-exactness-test") return "dssr_exactness_diagnostic";
@@ -265,6 +267,7 @@ bool inferVerifierPassed(const SolveResult& result) {
 
 bool inferCertifiedOriginalProblem(const SolveResult& result) {
     if (result.status != "optimal") return false;
+    if (!result.option_audit_consistent) return false;
     if (!inferSolvesOriginalObjective(result)) return false;
     if (!inferVerifierPassed(result)) return false;
     if (result.gap > 1e-7) return false;
@@ -317,6 +320,61 @@ std::string resultToJson(const SolveResult& result) {
     out << "  \"is_bpc\": " << (inferIsBpc(result) ? "true" : "false") << ",\n";
     out << "  \"certificate_type\": \"" << jsonEscape(inferCertificateType(result)) << "\",\n";
     out << "  \"certificate_scope\": \"" << jsonEscape(result.certificate_scope) << "\",\n";
+    out << "  \"instance_scope\": \"" << jsonEscape(result.instance_scope) << "\",\n";
+    out << "  \"instance_hash\": \"" << jsonEscape(result.instance_hash) << "\",\n";
+    out << "  \"instance_source_path\": \"" << jsonEscape(result.instance_source_path) << "\",\n";
+    out << "  \"algorithm_preset\": \"" << jsonEscape(result.algorithm_preset) << "\",\n";
+    out << "  \"preset_certificate_scope\": \"" << jsonEscape(result.preset_certificate_scope) << "\",\n";
+    out << "  \"preset_experimental_features_enabled\": \""
+        << jsonEscape(result.preset_experimental_features_enabled) << "\",\n";
+    out << "  \"preset_disabled_features\": \""
+        << jsonEscape(result.preset_disabled_features) << "\",\n";
+    out << "  \"preset_reason\": \"" << jsonEscape(result.preset_reason) << "\",\n";
+    out << "  \"option_audit_consistent\": "
+        << (result.option_audit_consistent ? "true" : "false") << ",\n";
+    out << "  \"option_audit_mismatches\": \""
+        << jsonEscape(result.option_audit_mismatches) << "\",\n";
+    out << "  \"incumbent_archive_attempted\": "
+        << (result.incumbent_archive_attempted ? "true" : "false") << ",\n";
+    out << "  \"incumbent_archive_files_scanned\": "
+        << result.incumbent_archive_files_scanned << ",\n";
+    out << "  \"incumbent_archive_candidates_verified\": "
+        << result.incumbent_archive_candidates_verified << ",\n";
+    out << "  \"incumbent_archive_best_objective\": "
+        << result.incumbent_archive_best_objective << ",\n";
+    out << "  \"incumbent_archive_best_source\": \""
+        << jsonEscape(result.incumbent_archive_best_source) << "\",\n";
+    out << "  \"incumbent_archive_selected\": "
+        << (result.incumbent_archive_selected ? "true" : "false") << ",\n";
+    out << "  \"bpc_status\": \"" << jsonEscape(result.bpc_status) << "\",\n";
+    out << "  \"bpc_LB\": " << result.bpc_LB << ",\n";
+    out << "  \"bpc_UB\": " << result.bpc_UB << ",\n";
+    out << "  \"bpc_gap\": " << result.bpc_gap << ",\n";
+    out << "  \"compact_status\": \"" << jsonEscape(result.compact_status) << "\",\n";
+    out << "  \"compact_LB\": " << result.compact_LB << ",\n";
+    out << "  \"compact_UB\": " << result.compact_UB << ",\n";
+    out << "  \"compact_gap\": " << result.compact_gap << ",\n";
+    out << "  \"portfolio_status\": \"" << jsonEscape(result.portfolio_status) << "\",\n";
+    out << "  \"portfolio_objective\": " << result.portfolio_objective << ",\n";
+    out << "  \"portfolio_LB\": " << result.portfolio_LB << ",\n";
+    out << "  \"portfolio_gap\": " << result.portfolio_gap << ",\n";
+    out << "  \"certificate_module\": \"" << jsonEscape(result.certificate_module) << "\",\n";
+    out << "  \"column_dominance_enabled\": "
+        << (result.column_dominance_enabled ? "true" : "false") << ",\n";
+    out << "  \"movement_domain_enabled\": "
+        << (result.movement_domain_enabled ? "true" : "false") << ",\n";
+    out << "  \"projection_bound_enabled\": "
+        << (result.projection_bound_enabled ? "true" : "false") << ",\n";
+    out << "  \"penalty_domain_enabled\": "
+        << (result.penalty_domain_enabled ? "true" : "false") << ",\n";
+    out << "  \"vehicle_indexed_relaxation_enabled\": "
+        << (result.vehicle_indexed_relaxation_enabled_snapshot ? "true" : "false") << ",\n";
+    out << "  \"operation_budget_cuts_enabled\": "
+        << (result.operation_budget_cuts_enabled ? "true" : "false") << ",\n";
+    out << "  \"branching_enabled\": "
+        << (result.branching_enabled ? "true" : "false") << ",\n";
+    out << "  \"two_track_enabled\": "
+        << (result.two_track_enabled ? "true" : "false") << ",\n";
     out << "  \"status\": \"" << jsonEscape(result.status) << "\",\n";
     out << "  \"certificate\": \"" << jsonEscape(result.certificate) << "\",\n";
     out << "  \"objective\": " << result.objective << ",\n";
@@ -444,8 +502,20 @@ std::string resultToJson(const SolveResult& result) {
         << result.labels_processed << ",\n";
     out << "  \"pricing_engine\": \""
         << jsonEscape(result.pricing_engine) << "\",\n";
+    out << "  \"final_pricing_engine\": \""
+        << jsonEscape(result.final_pricing_engine) << "\",\n";
     out << "  \"column_tracks\": \""
         << jsonEscape(result.column_tracks) << "\",\n";
+    out << "  \"relaxed_columns_in_rmp\": "
+        << (result.relaxed_columns_in_rmp ? "true" : "false") << ",\n";
+    out << "  \"incumbent_archive_auto\": "
+        << (result.incumbent_archive_auto ? "true" : "false") << ",\n";
+    out << "  \"compact_fallback_enabled\": "
+        << (result.compact_fallback_enabled ? "true" : "false") << ",\n";
+    out << "  \"cplex_plain_baseline\": "
+        << (result.cplex_plain_baseline ? "true" : "false") << ",\n";
+    out << "  \"cplex_seed_enabled\": "
+        << (result.cplex_seed_enabled ? "true" : "false") << ",\n";
     out << "  \"elementary_columns_generated\": "
         << result.elementary_columns_generated << ",\n";
     out << "  \"elementary_columns_inserted\": "

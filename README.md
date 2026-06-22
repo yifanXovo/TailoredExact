@@ -284,3 +284,37 @@ build/ExactEBRP.exe --method large-relaxed-rmp-cg-test \
 Relaxed columns are lower-bound-only.  They are blocked from incumbent
 reconstruction, route-pool incumbent masters, and exported route plans unless
 they are explicitly elementary feasible columns.
+
+### Paper Algorithm Presets
+
+Round 16 defines reproducible presets for paper-facing runs:
+
+```bash
+build/ExactEBRP.exe --method gcap-frontier --input reference/regen_candidate_V12_M2_average.txt \
+  --lambda 0.15 --T 3600 --time-limit 300 \
+  --algorithm-preset paper-bpc-core --incumbent-archive-auto true \
+  --progress-log results/optimization_update_round16/progress/v12_m2_core.csv \
+  --out results/optimization_update_round16/raw/v12_m2_core.json
+
+build/ExactEBRP.exe --method gcap-frontier --input reference/regen_candidate_V12_M2_average.txt \
+  --lambda 0.15 --T 3600 --time-limit 300 \
+  --algorithm-preset paper-exact-portfolio --incumbent-archive-auto true \
+  --out results/optimization_update_round16/raw/v12_m2_portfolio_bpc.json
+
+build/ExactEBRP.exe --method gcap-frontier --input reference/regen_candidate_V12_M2_average.txt \
+  --lambda 0.15 --T 3600 --time-limit 300 \
+  --algorithm-preset paper-bpc-experimental \
+  --out results/optimization_update_round16/raw/v12_m2_experimental.json
+
+build/ExactEBRP.exe --method large-relaxed-rmp-cg-test \
+  --input reference/generated/regen_V100_M5_average.txt --lambda 0.15 --T 3600 \
+  --algorithm-preset diagnostic-large --out results/optimization_update_round16/raw/v100_diag.json
+```
+
+`--production-preset` is accepted as an alias for `--algorithm-preset`.
+`paper-bpc-core` is the main exact BPC configuration. `paper-exact-portfolio`
+adds compact fallback evidence as a companion exact module. `paper-bpc-experimental`
+enables hybrid/ng-DSSR and two-track relaxed-RMP features and remains
+experimental unless relaxed pricing closes. `diagnostic-large` is for large
+generated instances and is noncertifying unless the full certificate protocol
+closes.

@@ -181,8 +181,46 @@ struct SolveOptions {
     std::string pricing_verifier_checkpoint;
     std::string pricing_verifier_resume;
     std::string pricing_verifier_mode = "auto";
+    std::string algorithm_preset = "custom";
+    bool incumbent_archive_auto = false;
+    std::string incumbent_archive_dir = "results";
+    bool compact_fallback_enabled = false;
     int inventory_probe_max_v = 7;
     double inventory_probe_seconds = -1.0;
+};
+
+struct RunConfigSnapshot {
+    std::string algorithm_preset = "custom";
+    std::string preset_certificate_scope = "custom";
+    std::string preset_experimental_features_enabled;
+    std::string preset_disabled_features;
+    std::string preset_reason;
+    std::string column_tracks = "elementary-only";
+    std::string rmp_column_space = "elementary";
+    bool relaxed_columns_in_rmp = false;
+    std::string pricing_engine = "exact-label";
+    std::string final_pricing_engine = "exact-label";
+    std::string large_instance_mode = "off";
+    std::string station_set_backend = "uint64";
+    bool route_mask_all_subset_enumeration_enabled = true;
+    bool route_mask_all_subset_enumeration_certifying = true;
+    bool incumbent_archive_auto = false;
+    bool compact_fallback_enabled = false;
+    bool relaxed_rmp_enabled = false;
+    bool plain_baseline = false;
+    bool cplex_seed = false;
+    bool column_dominance_enabled = true;
+    bool movement_domain_enabled = true;
+    bool projection_bound_enabled = true;
+    bool penalty_domain_enabled = true;
+    bool vehicle_indexed_relaxation_enabled = true;
+    bool vehicle_indexed_transfer_flow_enabled = true;
+    bool operation_budget_cuts_enabled = true;
+    bool branching_enabled = true;
+    bool two_track_enabled = false;
+    std::string instance_scope = "unknown";
+    std::string instance_hash;
+    std::string instance_source_path;
 };
 
 } // namespace ebrp

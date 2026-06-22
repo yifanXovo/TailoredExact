@@ -942,3 +942,50 @@ Any column with `can_be_used_for_incumbent=false` or
 route-pool insertion, route-pool incumbent master selection, and route export.
 Therefore relaxed columns can strengthen lower-bound diagnostics without
 creating infeasible upper bounds.
+
+## Sixteenth Optimization Pass: Paper Algorithm Consolidation
+
+### Production Component Scope
+
+The production BPC preset `paper-bpc-core` now has an explicit scope: it uses
+elementary route-load columns, exact-label pricing, projection dominance,
+filtered multi-column pricing, movement/projection/penalty-domain tightening,
+vehicle-indexed operation and transfer relaxations, route-mask operation-budget
+cuts where their non-overestimating cycle lower bounds are available, elementary
+route-pool incumbents, final-inventory branching, and operation-mode branching.
+Each of these components either preserves the exact elementary column master or
+adds a valid relaxation/cut previously proved in this document. None of them
+uses a heuristic incumbent, restricted route pool, compact seed, or relaxed
+column as lower-bound certificate evidence.
+
+The `paper-exact-portfolio` preset runs the same BPC core and records a
+companion compact fallback when requested. The portfolio certificate module is
+`bpc`, `compact`, or `none`; the portfolio is exact only when one module closes
+with zero gap and an independently verified incumbent.
+
+### RunConfigSnapshot Consistency
+
+The active options are frozen after command-line parsing and preset expansion in
+a `RunConfigSnapshot`. JSON, CSV summaries, progress logs, notes, and
+certificate audit fields are written from this snapshot. If any output-facing
+field disagrees with the snapshot, the run is marked
+`diagnostic_config_mismatch` and cannot be certified. This is not a mathematical
+cut, but it is part of the proof audit: a certificate can only be interpreted
+when the algorithmic configuration used to produce it is unambiguous.
+
+### Incumbent Archive Safety
+
+The incumbent archive scanner accepts only reconstructable route plans that pass
+the independent verifier on the current instance. Objective-only JSON rows are
+ignored. A verified archive incumbent can improve the upper bound and shrink
+frontier ranges, but it remains primal evidence only and never contributes to a
+lower-bound certificate.
+
+### Experimental Two-Track Placement
+
+The two-track relaxed-RMP machinery is retained under
+`paper-bpc-experimental`. Its proof remains valid only when relaxed pricing
+closes for the chosen relaxation. Round-sixteen evidence did not show a
+certificate-valid relaxed-RMP improvement on a nontrivial benchmark, so the
+component is not part of `paper-bpc-core`; it is documented as an appendix or
+diagnostic path until closed relaxed pricing produces usable bounds.

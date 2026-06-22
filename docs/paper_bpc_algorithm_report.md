@@ -697,3 +697,36 @@ The new relaxed path is active on V4, V12, and V20, but ng-relaxed pricing does
 not close on the larger rows within the tested limits.  Those relaxed-RMP values
 are therefore reported as diagnostics unless another valid bound supports the
 ledger.  No CPLEX comparison was run in this pass.
+
+## Round 16: Paper Algorithm Consolidation and Verified Ablation
+
+Round sixteen consolidates the algorithm into named presets and makes active
+configuration reporting a single-source artifact. The paper-facing presets are:
+`paper-bpc-core`, `paper-exact-portfolio`, `paper-bpc-experimental`, and
+`diagnostic-large`. Production results now include instance scope/hash,
+incumbent archive accounting, BPC/compact/portfolio module fields, option audit
+status, and result-integrity audit status.
+
+| Instance | Preset | Status | UB | LB | Gap | Certified |
+|---|---|---|---:|---:|---:|---|
+| V12 M1 average | paper-bpc-core | not closed | 0.368581603155 | 0.336357248340 | 0.087428006550 | no |
+| V12 M2 average | paper-bpc-core | not closed | 0.719065249476 | 0.698710208326 | 0.028307641296 | no |
+| V12 M1 average | paper-bpc-experimental | not closed | 0.368581603155 | 0.344296397770 | 0.065888273252 | no |
+| V12 M2 average | paper-bpc-experimental | not closed | 0.719065249476 | 0.698710208326 | 0.028307641296 | no |
+| V8 M2 generated | paper-bpc-core | not closed | 0.160763515679 | 0.160089160387 | 0.004194703562 | no |
+| V10 M2 generated | paper-bpc-core | not closed | 0.253798619218 | 0.199276278129 | 0.214825207705 | no |
+| V20 M2 generated | paper-bpc-core | not closed | 0.693289533282 | 0.376378229256 | 0.457112488813 | no |
+| V50 generated | diagnostic-large | diagnostic | 3.259475840430 | 0 | 1.0 | no |
+| V100 generated | diagnostic-large | diagnostic | 6.628998640460 | 0 | 1.0 | no |
+
+The controlled V12 M2 ablation used a shorter 60 second companion suite because
+the complete requested 300 second by six-instance matrix was not affordable in
+this local run. The archive/auto incumbent and vehicle-indexed relaxation stage
+were the clearest practical improvements in that companion suite. Two-track
+experimental rows did not produce a certificate-valid relaxed-RMP lower-bound
+improvement, so two-track remains an appendix/experimental module by default.
+
+The result-integrity audit over the new raw JSON files reported no failures.
+No new original-problem certificate was obtained beyond the existing V4 smoke
+certificate. Compact fallback companion rows were run for V12 M1/M2 but remained
+time-limited and noncertified; plain CPLEX benchmark comparisons were skipped.
