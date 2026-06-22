@@ -671,3 +671,29 @@ violation, segmentation fault, `bad_alloc`, out-of-memory, ASan, or fatal
 exception signature was found in the round-fourteen logs. No new
 original-problem certificate was obtained beyond V4 smoke. Plain CPLEX was
 skipped. Raw artifacts are stored in `results/optimization_update_round14/`.
+## Fifteenth Optimization Pass: Projection-Safe Non-Elementary Relaxed Columns and Relaxed-RMP CG
+
+This pass moves the two-track implementation beyond metadata by validating
+non-elementary ng-relaxed route-load projections and allowing safe relaxed
+columns into the lower-bound RMP.  The elementary incumbent path remains
+separate: relaxed columns are lower-bound-only and are blocked from route
+exports, route-pool incumbents, and candidate reconstruction.
+
+| instance/run | method | status | LB | UB | gap | non-elementary relaxed inserted | certificate note |
+|---|---|---|---:|---:|---:|---:|---|
+| V4 smoke | exact frontier | optimal | 0 | 0 | 0 | 38 | certified |
+| V4 smoke | two-track relaxed-RMP CG | optimal | 0 | 0 | 0 | 38 | certified |
+| V12 M2 focus | exact-label | not closed | 0.712948 | 0.780793 | 0.086892 | 0 | noncertified |
+| V12 M2 focus | two-track relaxed-RMP CG | not closed | 0.712948 | 0.780793 | 0.086892 | 2 | noncertified |
+| V12 M2 full | exact-label | not closed | 0.702420 | 0.780793 | 0.100377 | 0 | noncertified |
+| V12 M2 full | two-track relaxed-RMP CG | not closed | 0.681925 | 0.780793 | 0.126625 | 2 | noncertified |
+| V12 M1 full | exact-label | not closed | 0.325981 | 0.386764 | 0.157159 | 0 | noncertified |
+| V12 M1 full | two-track relaxed-RMP CG | not closed | 0.325981 | 0.386764 | 0.157159 | 8 | noncertified |
+| V20 generated | two-track relaxed-RMP CG | not closed | 0.359196 | 1.136231 | 0.683871 | 16 | noncertified |
+| V50 generated | large relaxed-RMP CG | diagnostic | 0 | 3.259476 | 1.0 | 0 | diagnostic |
+| V100 generated | large relaxed-RMP CG | diagnostic | 0 | 6.628999 | 1.0 | 0 | diagnostic |
+
+The new relaxed path is active on V4, V12, and V20, but ng-relaxed pricing does
+not close on the larger rows within the tested limits.  Those relaxed-RMP values
+are therefore reported as diagnostics unless another valid bound supports the
+ledger.  No CPLEX comparison was run in this pass.

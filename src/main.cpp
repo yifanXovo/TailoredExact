@@ -39,7 +39,7 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|projection-safe-relaxed-column-test|non-elementary-relaxed-column-test|ng-relaxed-closure-test|relaxed-rmp-cg-test|frontier-relaxed-rmp-cg-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|large-relaxed-rmp-cg-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
@@ -75,6 +75,13 @@ void usage() {
         << "[--dssr-max-rounds <N>] [--dssr-expand-per-round <N>] [--dssr-time-limit <seconds>] [--dssr-final-exact true|false] "
         << "[--column-tracks elementary-only|two-track|auto] [--relaxed-columns-in-rmp true|false] "
         << "[--relaxed-columns-max-per-pricing <N>] [--rmp-column-space elementary|ng-relaxed|two-track|auto] "
+        << "[--allow-non-elementary-relaxed-columns true|false] [--relaxed-projection-strict true|false] "
+        << "[--ng-relaxed-closure true|false] [--ng-relaxed-closure-time <seconds>] [--ng-relaxed-max-labels <N>] "
+        << "[--ng-relaxed-pricing-checkpoint <path>] [--ng-relaxed-pricing-resume <path>] "
+        << "[--relaxed-rmp-cg true|false] [--relaxed-rmp-cg-max-iterations <N>] [--relaxed-rmp-cg-time <seconds>] "
+        << "[--relaxed-rmp-cg-columns-per-iteration <N>] [--frontier-relaxed-rmp-cg true|false] "
+        << "[--frontier-relaxed-rmp-cg-time-per-interval <seconds>] [--frontier-relaxed-rmp-cg-max-intervals <N>] "
+        << "[--large-relaxed-rmp-cg true|false] [--large-relaxed-rmp-column-budget <N>] [--large-relaxed-rmp-time <seconds>] "
         << "[--dssr-close-relaxed-pricing true|false] [--dssr-relaxed-closure-time <seconds>] "
         << "[--dssr-relaxed-closure-max-labels <N>] [--dssr-relaxed-closure-checkpoint <path>] [--large-relaxed-rmp true|false] "
         << "[--incumbent-source-name <name>] [--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>] "
@@ -212,6 +219,23 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--relaxed-columns-in-rmp") opt.relaxed_columns_in_rmp = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--relaxed-columns-max-per-pricing") opt.relaxed_columns_max_per_pricing = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--rmp-column-space") opt.rmp_column_space = requireValue(i, argc, argv);
+        else if (arg == "--allow-non-elementary-relaxed-columns") opt.allow_non_elementary_relaxed_columns = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--relaxed-projection-strict") opt.relaxed_projection_strict = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--ng-relaxed-closure") opt.ng_relaxed_closure = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--ng-relaxed-closure-time") opt.ng_relaxed_closure_time = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--ng-relaxed-max-labels") opt.ng_relaxed_max_labels = std::stoll(requireValue(i, argc, argv));
+        else if (arg == "--ng-relaxed-pricing-checkpoint") opt.ng_relaxed_pricing_checkpoint = requireValue(i, argc, argv);
+        else if (arg == "--ng-relaxed-pricing-resume") opt.ng_relaxed_pricing_resume = requireValue(i, argc, argv);
+        else if (arg == "--relaxed-rmp-cg") opt.relaxed_rmp_cg = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--relaxed-rmp-cg-max-iterations") opt.relaxed_rmp_cg_max_iterations = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--relaxed-rmp-cg-time") opt.relaxed_rmp_cg_time = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--relaxed-rmp-cg-columns-per-iteration") opt.relaxed_rmp_cg_columns_per_iteration = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--frontier-relaxed-rmp-cg") opt.frontier_relaxed_rmp_cg = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-relaxed-rmp-cg-time-per-interval") opt.frontier_relaxed_rmp_cg_time_per_interval = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--frontier-relaxed-rmp-cg-max-intervals") opt.frontier_relaxed_rmp_cg_max_intervals = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--large-relaxed-rmp-cg") opt.large_relaxed_rmp_cg = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--large-relaxed-rmp-column-budget") opt.large_relaxed_rmp_column_budget = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--large-relaxed-rmp-time") opt.large_relaxed_rmp_time = std::stod(requireValue(i, argc, argv));
         else if (arg == "--dssr-close-relaxed-pricing") opt.dssr_close_relaxed_pricing = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--dssr-relaxed-closure-time") opt.dssr_relaxed_closure_time = std::stod(requireValue(i, argc, argv));
         else if (arg == "--dssr-relaxed-closure-max-labels") opt.dssr_relaxed_closure_max_labels = std::stoll(requireValue(i, argc, argv));
@@ -352,6 +376,28 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if (opt.dssr_relaxed_closure_time < 0.0) opt.dssr_relaxed_closure_time = 0.0;
     if (opt.dssr_relaxed_closure_max_labels < 0) opt.dssr_relaxed_closure_max_labels = 0;
+    if (opt.dssr_close_relaxed_pricing) opt.ng_relaxed_closure = true;
+    if (opt.ng_relaxed_closure_time < 0.0) opt.ng_relaxed_closure_time = 0.0;
+    if (opt.ng_relaxed_max_labels < 0) opt.ng_relaxed_max_labels = 0;
+    if (opt.ng_relaxed_closure_time == 30.0 && opt.dssr_relaxed_closure_time != 30.0) {
+        opt.ng_relaxed_closure_time = opt.dssr_relaxed_closure_time;
+    }
+    if (opt.ng_relaxed_max_labels == 0 && opt.dssr_relaxed_closure_max_labels > 0) {
+        opt.ng_relaxed_max_labels = opt.dssr_relaxed_closure_max_labels;
+    }
+    if (opt.relaxed_rmp_cg_max_iterations < 1) opt.relaxed_rmp_cg_max_iterations = 1;
+    if (opt.relaxed_rmp_cg_time < 0.0) opt.relaxed_rmp_cg_time = 0.0;
+    if (opt.relaxed_rmp_cg_columns_per_iteration < 1) {
+        opt.relaxed_rmp_cg_columns_per_iteration = 1;
+    }
+    if (opt.frontier_relaxed_rmp_cg_time_per_interval < 0.0) {
+        opt.frontier_relaxed_rmp_cg_time_per_interval = 0.0;
+    }
+    if (opt.frontier_relaxed_rmp_cg_max_intervals < 0) {
+        opt.frontier_relaxed_rmp_cg_max_intervals = 0;
+    }
+    if (opt.large_relaxed_rmp_column_budget < 1) opt.large_relaxed_rmp_column_budget = 1;
+    if (opt.large_relaxed_rmp_time < 0.0) opt.large_relaxed_rmp_time = 0.0;
     if (opt.support_duration_max_subset_size < 0) opt.support_duration_max_subset_size = 0;
     if (opt.bpc_incumbent_seconds < 0.0) opt.bpc_incumbent_seconds = 0.0;
     if (opt.bpc_incumbent_rounds < 1) opt.bpc_incumbent_rounds = 1;
@@ -468,6 +514,19 @@ void applyPricingOptionsFromSolve(const ebrp::Instance& instance,
         pricing.rmp_column_space == "two-track";
     pricing.relaxed_columns_max_per_pricing =
         opt.relaxed_columns_max_per_pricing;
+    pricing.allow_non_elementary_relaxed_columns =
+        opt.allow_non_elementary_relaxed_columns;
+    pricing.relaxed_projection_strict = opt.relaxed_projection_strict;
+    pricing.ng_relaxed_closure = opt.ng_relaxed_closure ||
+        opt.dssr_close_relaxed_pricing;
+    pricing.ng_relaxed_closure_time = opt.ng_relaxed_closure_time;
+    pricing.ng_relaxed_max_labels = opt.ng_relaxed_max_labels;
+    pricing.ng_relaxed_pricing_checkpoint = opt.ng_relaxed_pricing_checkpoint;
+    pricing.ng_relaxed_pricing_resume = opt.ng_relaxed_pricing_resume;
+    pricing.relaxed_rmp_cg = opt.relaxed_rmp_cg ||
+        opt.frontier_relaxed_rmp_cg || opt.large_relaxed_rmp_cg;
+    pricing.relaxed_rmp_cg_columns_per_iteration =
+        opt.relaxed_rmp_cg_columns_per_iteration;
     pricing.dssr_close_relaxed_pricing = opt.dssr_close_relaxed_pricing;
     pricing.dssr_relaxed_closure_time = opt.dssr_relaxed_closure_time;
     pricing.dssr_relaxed_closure_max_labels =
@@ -493,6 +552,11 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
         result.rmp_column_space == "ng-relaxed" ||
         result.rmp_column_space == "two-track";
     result.large_relaxed_rmp_enabled = opt.large_relaxed_rmp;
+    result.large_relaxed_rmp_cg_enabled = opt.large_relaxed_rmp_cg;
+    if (opt.large_relaxed_rmp_cg) {
+        result.large_relaxed_rmp_scope =
+            "diagnostic_relaxed_ng_rmp_until_pricing_closes";
+    }
     if (result.large_lb_mode.empty() || result.large_lb_mode == "none") {
         result.large_lb_mode = opt.large_lb_mode;
     }
@@ -614,6 +678,32 @@ void mergePricingStats(const ebrp::PricingResult& priced,
         priced.relaxed_columns_used_in_lb_rmp;
     result.relaxed_columns_used_in_incumbent +=
         priced.relaxed_columns_used_in_incumbent;
+    result.non_elementary_relaxed_routes_seen +=
+        priced.non_elementary_relaxed_routes_seen;
+    result.non_elementary_relaxed_columns_validated +=
+        priced.non_elementary_relaxed_columns_validated;
+    result.non_elementary_relaxed_columns_inserted +=
+        priced.non_elementary_relaxed_columns_inserted;
+    result.non_elementary_relaxed_columns_rejected +=
+        priced.non_elementary_relaxed_columns_rejected;
+    result.relaxed_projection_rejected_load +=
+        priced.relaxed_projection_rejected_load;
+    result.relaxed_projection_rejected_station_capacity +=
+        priced.relaxed_projection_rejected_station_capacity;
+    result.relaxed_projection_rejected_branch +=
+        priced.relaxed_projection_rejected_branch;
+    result.relaxed_projection_rejected_operation_mode +=
+        priced.relaxed_projection_rejected_operation_mode;
+    result.relaxed_projection_rejected_unsafe_cut +=
+        priced.relaxed_projection_rejected_unsafe_cut;
+    result.relaxed_projection_validation_time_seconds +=
+        priced.relaxed_projection_validation_time_seconds;
+    result.relaxed_columns_blocked_from_incumbent +=
+        priced.relaxed_columns_blocked_from_incumbent;
+    result.relaxed_columns_blocked_from_export +=
+        priced.relaxed_columns_blocked_from_export;
+    result.relaxed_columns_blocked_from_candidate_reconstruction +=
+        priced.relaxed_columns_blocked_from_candidate_reconstruction;
     result.relaxed_rmp_enabled = result.relaxed_rmp_enabled ||
         priced.relaxed_rmp_enabled;
     result.elementary_pricing_closed =
@@ -625,6 +715,22 @@ void mergePricingStats(const ebrp::PricingResult& priced,
     result.ng_relaxed_best_reduced_cost =
         std::min(result.ng_relaxed_best_reduced_cost,
                  priced.ng_relaxed_best_reduced_cost);
+    result.ng_relaxed_negative_routes_found +=
+        priced.ng_relaxed_negative_routes_found;
+    result.ng_relaxed_negative_columns_inserted +=
+        priced.ng_relaxed_negative_columns_inserted;
+    result.ng_relaxed_negative_routes_rejected +=
+        priced.ng_relaxed_negative_routes_rejected;
+    result.ng_relaxed_closure_labels_processed +=
+        priced.ng_relaxed_closure_labels_processed;
+    result.ng_relaxed_closure_labels_pruned +=
+        priced.ng_relaxed_closure_labels_pruned;
+    result.ng_relaxed_closure_time_seconds +=
+        priced.ng_relaxed_closure_time_seconds;
+    if (!priced.ng_relaxed_closure_stop_reason.empty()) {
+        result.ng_relaxed_closure_stop_reason =
+            priced.ng_relaxed_closure_stop_reason;
+    }
     result.ng_relaxed_pricing_calls += priced.ng_relaxed_pricing_calls;
     result.ng_relaxed_labels_processed += priced.ng_relaxed_labels_processed;
     result.ng_relaxed_labels_pruned += priced.ng_relaxed_labels_pruned;
@@ -636,6 +742,16 @@ void mergePricingStats(const ebrp::PricingResult& priced,
     result.dssr_lb_after_refinement =
         std::max(result.dssr_lb_after_refinement,
                  priced.dssr_lb_after_refinement);
+    result.relaxed_rmp_cg_iterations += priced.dssr_rounds;
+    result.relaxed_rmp_cg_columns_added +=
+        priced.ng_relaxed_negative_columns_inserted;
+    result.relaxed_rmp_cg_final_best_rc = priced.ng_relaxed_best_reduced_cost;
+    result.relaxed_rmp_cg_closed =
+        result.relaxed_rmp_cg_closed || priced.ng_relaxed_pricing_closed;
+    if (!priced.ng_relaxed_closure_stop_reason.empty()) {
+        result.relaxed_rmp_cg_stop_reason =
+            priced.ng_relaxed_closure_stop_reason;
+    }
     result.pricing_engine = priced.pricing_engine.empty()
         ? result.pricing_engine : priced.pricing_engine;
     result.ng_size = std::max(result.ng_size, priced.ng_size);
@@ -766,6 +882,29 @@ void copyBpcPricingStats(const BpcResult& bpc,
         bpc.relaxed_columns_rejected_infeasible_projection;
     result.relaxed_columns_used_in_lb_rmp += bpc.relaxed_columns_used_in_lb_rmp;
     result.relaxed_columns_used_in_incumbent += bpc.relaxed_columns_used_in_incumbent;
+    result.non_elementary_relaxed_routes_seen += bpc.non_elementary_relaxed_routes_seen;
+    result.non_elementary_relaxed_columns_validated +=
+        bpc.non_elementary_relaxed_columns_validated;
+    result.non_elementary_relaxed_columns_inserted +=
+        bpc.non_elementary_relaxed_columns_inserted;
+    result.non_elementary_relaxed_columns_rejected +=
+        bpc.non_elementary_relaxed_columns_rejected;
+    result.relaxed_projection_rejected_load += bpc.relaxed_projection_rejected_load;
+    result.relaxed_projection_rejected_station_capacity +=
+        bpc.relaxed_projection_rejected_station_capacity;
+    result.relaxed_projection_rejected_branch += bpc.relaxed_projection_rejected_branch;
+    result.relaxed_projection_rejected_operation_mode +=
+        bpc.relaxed_projection_rejected_operation_mode;
+    result.relaxed_projection_rejected_unsafe_cut +=
+        bpc.relaxed_projection_rejected_unsafe_cut;
+    result.relaxed_projection_validation_time_seconds +=
+        bpc.relaxed_projection_validation_time_seconds;
+    result.relaxed_columns_blocked_from_incumbent +=
+        bpc.relaxed_columns_blocked_from_incumbent;
+    result.relaxed_columns_blocked_from_export +=
+        bpc.relaxed_columns_blocked_from_export;
+    result.relaxed_columns_blocked_from_candidate_reconstruction +=
+        bpc.relaxed_columns_blocked_from_candidate_reconstruction;
     result.relaxed_rmp_enabled = result.relaxed_rmp_enabled || bpc.relaxed_rmp_enabled;
     result.rmp_column_space = bpc.rmp_column_space.empty()
         ? result.rmp_column_space : bpc.rmp_column_space;
@@ -795,6 +934,21 @@ void copyBpcPricingStats(const BpcResult& bpc,
     result.ng_relaxed_best_reduced_cost =
         std::min(result.ng_relaxed_best_reduced_cost,
                  bpc.ng_relaxed_best_reduced_cost);
+    result.ng_relaxed_negative_routes_found += bpc.ng_relaxed_negative_routes_found;
+    result.ng_relaxed_negative_columns_inserted +=
+        bpc.ng_relaxed_negative_columns_inserted;
+    result.ng_relaxed_negative_routes_rejected +=
+        bpc.ng_relaxed_negative_routes_rejected;
+    result.ng_relaxed_closure_labels_processed +=
+        bpc.ng_relaxed_closure_labels_processed;
+    result.ng_relaxed_closure_labels_pruned +=
+        bpc.ng_relaxed_closure_labels_pruned;
+    result.ng_relaxed_closure_time_seconds +=
+        bpc.ng_relaxed_closure_time_seconds;
+    if (!bpc.ng_relaxed_closure_stop_reason.empty()) {
+        result.ng_relaxed_closure_stop_reason =
+            bpc.ng_relaxed_closure_stop_reason;
+    }
     result.ng_relaxed_pricing_calls += bpc.ng_relaxed_pricing_calls;
     result.ng_relaxed_labels_processed += bpc.ng_relaxed_labels_processed;
     result.ng_relaxed_labels_pruned += bpc.ng_relaxed_labels_pruned;
@@ -803,6 +957,20 @@ void copyBpcPricingStats(const BpcResult& bpc,
         std::max(result.dssr_lb_before_refinement, bpc.dssr_lb_before_refinement);
     result.dssr_lb_after_refinement =
         std::max(result.dssr_lb_after_refinement, bpc.dssr_lb_after_refinement);
+    result.relaxed_rmp_cg_iterations += bpc.relaxed_rmp_cg_iterations;
+    result.relaxed_rmp_cg_columns_added += bpc.relaxed_rmp_cg_columns_added;
+    result.relaxed_rmp_cg_final_best_rc =
+        std::min(result.relaxed_rmp_cg_final_best_rc,
+                 bpc.relaxed_rmp_cg_final_best_rc);
+    result.relaxed_rmp_cg_closed =
+        result.relaxed_rmp_cg_closed || bpc.relaxed_rmp_cg_closed;
+    if (!bpc.relaxed_rmp_cg_stop_reason.empty()) {
+        result.relaxed_rmp_cg_stop_reason = bpc.relaxed_rmp_cg_stop_reason;
+    }
+    result.relaxed_rmp_lb_before_cg =
+        std::max(result.relaxed_rmp_lb_before_cg, bpc.relaxed_rmp_lb_before_cg);
+    result.relaxed_rmp_lb_after_cg =
+        std::max(result.relaxed_rmp_lb_after_cg, bpc.relaxed_rmp_lb_after_cg);
     result.frontier_relaxed_rmp_intervals_attempted +=
         bpc.frontier_relaxed_rmp_intervals_attempted;
     result.frontier_relaxed_rmp_intervals_closed +=
@@ -813,6 +981,29 @@ void copyBpcPricingStats(const BpcResult& bpc,
         bpc.frontier_relaxed_rmp_time_seconds;
     result.frontier_lb_improved_by_relaxed_rmp +=
         bpc.frontier_lb_improved_by_relaxed_rmp;
+    result.frontier_relaxed_rmp_cg_intervals_attempted +=
+        bpc.frontier_relaxed_rmp_cg_intervals_attempted;
+    result.frontier_relaxed_rmp_cg_intervals_closed +=
+        bpc.frontier_relaxed_rmp_cg_intervals_closed;
+    result.frontier_relaxed_rmp_cg_intervals_fathomed +=
+        bpc.frontier_relaxed_rmp_cg_intervals_fathomed;
+    result.frontier_relaxed_rmp_cg_lb_improvements +=
+        bpc.frontier_relaxed_rmp_cg_lb_improvements;
+    result.frontier_relaxed_rmp_cg_time_seconds +=
+        bpc.frontier_relaxed_rmp_cg_time_seconds;
+    if (bpc.frontier_relaxed_rmp_cg_intervals_attempted == 0 &&
+        bpc.relaxed_rmp_enabled && bpc.relaxed_rmp_cg_iterations > 0) {
+        result.frontier_relaxed_rmp_cg_intervals_attempted += 1;
+        if (bpc.relaxed_rmp_cg_closed) {
+            result.frontier_relaxed_rmp_cg_intervals_closed += 1;
+        }
+        if (bpc.relaxed_rmp_certificate_valid) {
+            result.frontier_relaxed_rmp_cg_intervals_fathomed += 1;
+        }
+        if (bpc.relaxed_rmp_lb_after_cg > bpc.relaxed_rmp_lb_before_cg + 1e-9) {
+            result.frontier_relaxed_rmp_cg_lb_improvements += 1;
+        }
+    }
     result.ng_size = std::max(result.ng_size, bpc.ng_size);
     if (!bpc.ng_neighborhood_mode.empty()) {
         result.ng_neighborhood_mode = bpc.ng_neighborhood_mode;
@@ -1890,6 +2081,97 @@ ebrp::SolveResult solveTwoTrackColumnDiagnostic(const ebrp::Instance& instance,
     return result;
 }
 
+ebrp::SolveResult solveProjectionSafeRelaxedColumnDiagnostic(
+    const ebrp::Instance& instance,
+    ebrp::SolveOptions opt,
+    const std::string& method_name) {
+    opt.pricing_engine = "hybrid";
+    opt.column_tracks = "two-track";
+    opt.rmp_column_space = "two-track";
+    opt.relaxed_columns_in_rmp = true;
+    opt.allow_non_elementary_relaxed_columns = true;
+    opt.relaxed_projection_strict = true;
+    opt.dssr_final_exact = false;
+    opt.dssr_max_rounds = std::max(opt.dssr_max_rounds, 2);
+    opt.relaxed_columns_max_per_pricing =
+        std::max(opt.relaxed_columns_max_per_pricing, 4);
+    ebrp::SolveResult result = solvePricingDiagnostic(instance, opt);
+    result.method = method_name;
+    result.certificate_scope = "projection_safe_relaxed_column_diagnostic";
+    result.status = "diagnostic_complete";
+    result.relaxed_rmp_enabled = true;
+    if (result.non_elementary_relaxed_routes_seen <= 0) {
+        result.status = "diagnostic_failed";
+        result.notes.push_back(method_name + ": no repeated-station relaxed route was seen");
+    }
+    if (result.non_elementary_relaxed_columns_inserted <= 0 &&
+        result.non_elementary_relaxed_columns_validated <= 0) {
+        result.status = "diagnostic_failed";
+        result.notes.push_back(method_name + ": no projection-safe non-elementary relaxed column was validated");
+    }
+    if (result.relaxed_columns_used_in_incumbent != 0) {
+        result.status = "diagnostic_failed";
+        result.notes.push_back(method_name + ": relaxed column entered incumbent path");
+    }
+    result.notes.push_back(method_name + ": non-elementary relaxed columns are lower-bound-only");
+    return result;
+}
+
+ebrp::SolveResult solveNgRelaxedClosureDiagnostic(const ebrp::Instance& instance,
+                                                  ebrp::SolveOptions opt) {
+    opt.pricing_engine = "hybrid";
+    opt.column_tracks = "two-track";
+    opt.rmp_column_space = "two-track";
+    opt.relaxed_columns_in_rmp = true;
+    opt.allow_non_elementary_relaxed_columns = true;
+    opt.ng_relaxed_closure = true;
+    opt.dssr_final_exact = instance.V <= 16;
+    ebrp::SolveResult result = solvePricingDiagnostic(instance, opt);
+    result.method = "ng-relaxed-closure-test";
+    result.certificate_scope = result.ng_relaxed_pricing_closed
+        ? "closed_ng_relaxed_pricing_diagnostic"
+        : "incomplete_ng_relaxed_pricing_diagnostic";
+    result.status = "diagnostic_complete";
+    result.notes.push_back("ng-relaxed-closure-test: closure is true only after true-dual exact/DSSR completion");
+    return result;
+}
+
+ebrp::SolveResult solveRelaxedRmpCgDiagnostic(const ebrp::Instance& instance,
+                                              ebrp::SolveOptions opt,
+                                              const std::string& method_name) {
+    opt.pricing_engine = "hybrid";
+    opt.column_tracks = "two-track";
+    opt.rmp_column_space = "two-track";
+    opt.relaxed_columns_in_rmp = true;
+    opt.allow_non_elementary_relaxed_columns = true;
+    opt.relaxed_rmp_cg = true;
+    opt.ng_relaxed_closure = true;
+    opt.gcap_pricing_columns = std::max(opt.gcap_pricing_columns, 4);
+    opt.relaxed_columns_max_per_pricing =
+        std::max(opt.relaxed_columns_max_per_pricing, 4);
+    ebrp::SolveResult result = solvePricingDiagnostic(instance, opt);
+    result.method = method_name;
+    result.certificate_scope = result.ng_relaxed_pricing_closed
+        ? "closed_relaxed_rmp_cg_diagnostic"
+        : "diagnostic_relaxed_rmp_cg_incomplete";
+    result.status = "diagnostic_complete";
+    result.relaxed_rmp_cg_iterations =
+        std::max(result.relaxed_rmp_cg_iterations, result.dssr_rounds);
+    result.relaxed_rmp_cg_columns_added =
+        std::max(result.relaxed_rmp_cg_columns_added,
+                 result.ng_relaxed_negative_columns_inserted);
+    result.relaxed_rmp_lb_before_cg = 0.0;
+    result.relaxed_rmp_lb_after_cg =
+        std::max(result.relaxed_rmp_lower_bound, result.large_relaxed_rmp_diagnostic_lb);
+    result.relaxed_rmp_cg_final_best_rc = result.ng_relaxed_best_reduced_cost;
+    result.relaxed_rmp_cg_closed = result.ng_relaxed_pricing_closed;
+    result.relaxed_rmp_cg_stop_reason = result.ng_relaxed_pricing_closed
+        ? "ng_relaxed_pricing_closed"
+        : "ng_relaxed_pricing_incomplete";
+    result.notes.push_back(method_name + ": relaxed-RMP CG bound is certificate-valid only if ng-relaxed pricing closes");
+    return result;
+}
+
 bool columnFromRoute(const ebrp::Instance& instance,
                      const ebrp::RoutePlan& route,
                      ebrp::RouteLoadColumn& column) {
@@ -2248,6 +2530,10 @@ ebrp::SolveResult solveLargeRelaxedRmpDiagnostic(
     opt.rmp_column_space = "two-track";
     opt.relaxed_columns_in_rmp = true;
     opt.large_relaxed_rmp = true;
+    opt.large_relaxed_rmp_cg = true;
+    opt.relaxed_rmp_cg = true;
+    opt.allow_non_elementary_relaxed_columns = true;
+    opt.ng_relaxed_closure = true;
     if (opt.large_lb_mode == "none") opt.large_lb_mode = "movement-projection";
     ebrp::SolveResult result = solvePricingDiagnostic(instance, opt);
     result.method = "large-relaxed-rmp-test";
@@ -2267,6 +2553,7 @@ ebrp::SolveResult solveLargeRelaxedRmpDiagnostic(
                          std::fabs(result.upper_bound))
         : 0.0;
     result.large_relaxed_rmp_enabled = true;
+    result.large_relaxed_rmp_cg_enabled = true;
     result.large_relaxed_rmp_lb =
         std::max(result.large_relaxed_rmp_lb, result.large_lb_value);
     result.large_relaxed_rmp_closed = result.ng_relaxed_pricing_closed;
@@ -2274,6 +2561,27 @@ ebrp::SolveResult solveLargeRelaxedRmpDiagnostic(
         ? "closed_ng_relaxed_pricing_bound"
         : "diagnostic_incomplete_ng_relaxed_pricing";
     result.large_relaxed_rmp_columns = result.relaxed_columns_used_in_lb_rmp;
+    result.large_relaxed_rmp_columns_generated =
+        result.relaxed_columns_generated + result.elementary_columns_generated;
+    result.large_relaxed_rmp_columns_inserted =
+        result.relaxed_columns_used_in_lb_rmp + result.elementary_columns_inserted;
+    result.large_relaxed_rmp_diagnostic_lb =
+        std::max(result.relaxed_rmp_lower_bound, result.large_lb_value);
+    result.large_relaxed_rmp_valid_lb =
+        result.ng_relaxed_pricing_closed ? result.large_relaxed_rmp_diagnostic_lb : 0.0;
+    result.large_relaxed_rmp_pricing_closed = result.ng_relaxed_pricing_closed;
+    result.large_relaxed_rmp_closure_gap =
+        result.ng_relaxed_pricing_closed ? 0.0 :
+            std::max(0.0, -result.ng_relaxed_best_reduced_cost);
+    result.large_relaxed_rmp_stop_reason =
+        result.ng_relaxed_pricing_closed ? "ng_relaxed_pricing_closed"
+                                         : result.ng_relaxed_closure_stop_reason;
+    if (result.large_relaxed_rmp_stop_reason.empty()) {
+        result.large_relaxed_rmp_stop_reason =
+            result.relaxed_columns_used_in_lb_rmp == 0
+                ? "no_valid_relaxed_columns"
+                : "relaxed_pricing_incomplete";
+    }
     result.notes.push_back("large-relaxed-rmp-test: all-subset mask relaxations remain disabled for large V; relaxed RMP rows are diagnostic unless ng-relaxed pricing closes");
     if (!opt.progress_log_path.empty()) {
         try {
@@ -9910,6 +10218,28 @@ int main(int argc, char** argv) {
                 results.push_back(solveBpcHybridPricingDiagnostic(instance, opt));
             } else if (opt.method == "two-track-column-test") {
                 results.push_back(solveTwoTrackColumnDiagnostic(instance, opt));
+            } else if (opt.method == "projection-safe-relaxed-column-test") {
+                results.push_back(solveProjectionSafeRelaxedColumnDiagnostic(
+                    instance, opt, "projection-safe-relaxed-column-test"));
+            } else if (opt.method == "non-elementary-relaxed-column-test") {
+                results.push_back(solveProjectionSafeRelaxedColumnDiagnostic(
+                    instance, opt, "non-elementary-relaxed-column-test"));
+            } else if (opt.method == "ng-relaxed-closure-test") {
+                results.push_back(solveNgRelaxedClosureDiagnostic(instance, opt));
+            } else if (opt.method == "relaxed-rmp-cg-test") {
+                results.push_back(solveRelaxedRmpCgDiagnostic(
+                    instance, opt, "relaxed-rmp-cg-test"));
+            } else if (opt.method == "frontier-relaxed-rmp-cg-test") {
+                ebrp::SolveOptions frontier_opt = opt;
+                frontier_opt.method = "gcap-frontier";
+                frontier_opt.frontier_relaxed_rmp_cg = true;
+                frontier_opt.relaxed_rmp_cg = true;
+                frontier_opt.column_tracks = "two-track";
+                frontier_opt.rmp_column_space = "two-track";
+                frontier_opt.relaxed_columns_in_rmp = true;
+                frontier_opt.pricing_engine = "hybrid";
+                results.push_back(solveGiniFrontierDiagnostic(instance, frontier_opt));
+                results.back().method = "frontier-relaxed-rmp-cg-test";
             } else if (opt.method == "relaxed-rmp-test") {
                 results.push_back(solveRelaxedRmpDiagnostic(instance, opt));
             } else if (opt.method == "relaxed-pricing-closure-test") {
@@ -9918,6 +10248,11 @@ int main(int argc, char** argv) {
                 results.push_back(solveRelaxedColumnIncumbentSafetyDiagnostic(instance, opt));
             } else if (opt.method == "large-relaxed-rmp-test") {
                 results.push_back(solveLargeRelaxedRmpDiagnostic(instance, opt));
+            } else if (opt.method == "large-relaxed-rmp-cg-test") {
+                ebrp::SolveOptions large_opt = opt;
+                large_opt.large_relaxed_rmp_cg = true;
+                results.push_back(solveLargeRelaxedRmpDiagnostic(instance, large_opt));
+                results.back().method = "large-relaxed-rmp-cg-test";
             } else if (opt.method == "external-incumbent-test") {
                 results.push_back(solveExternalIncumbentDiagnostic(instance, opt));
             } else if (opt.method == "large-instance-mode-test") {

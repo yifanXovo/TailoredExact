@@ -1716,3 +1716,29 @@ Remaining TODOs:
 - Integrate a stronger scalable large-instance global LB that does not exceed
   verified incumbents and does not require all-subset route masks.
 - Add OS-level peak-memory measurement.
+## 2026-06-22 - Round 15: Projection-Safe Relaxed-RMP CG
+
+- Implemented projection-safe non-elementary ng-relaxed route-load columns for
+  the lower-bound RMP.  The validator checks net inventory projection, load
+  trajectory, station final capacity, depot unload, route duration, branch
+  projection, and operation-mode projection before relaxed columns are inserted.
+- Added relaxed-RMP CG controls and reporting:
+  `--allow-non-elementary-relaxed-columns`, `--relaxed-projection-strict`,
+  `--ng-relaxed-closure`, `--relaxed-rmp-cg`,
+  `--frontier-relaxed-rmp-cg`, and `--large-relaxed-rmp-cg`.
+- V4 exact and two-track frontier rows remain certified at objective 0.
+- V12 M2 exact full 300s ended at LB 0.702420, UB 0.780793, gap 0.100377.
+  V12 M2 two-track relaxed-RMP CG inserted relaxed columns but remained
+  noncertified at LB 0.681925, UB 0.780793, gap 0.126625.
+- V12 M1 exact and two-track rows both remained noncertified at LB 0.325981,
+  UB 0.386764, gap 0.157159; the two-track row inserted 8 non-elementary
+  relaxed columns.
+- Generated V20 remained noncertified with LB 0.359196, UB 1.136231, gap
+  0.683871.  Generated V50/V100 relaxed-RMP CG rows were diagnostic with
+  incomplete ng-relaxed pricing closure and zero valid global relaxed LB.
+- No original-problem certificate was obtained beyond the V4 smoke instance.
+  CPLEX was skipped.
+- TODO: implement a stronger complete ng-relaxed label enumeration/checkpoint
+  routine for V20+; improve large-instance relaxed column generation so V50/V100
+  produce nonzero diagnostic relaxed-RMP trajectories; investigate why V12 M2
+  two-track relaxed columns did not improve the full frontier lower bound.

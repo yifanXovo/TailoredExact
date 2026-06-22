@@ -466,3 +466,25 @@ All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `
   and all other full certificate requirements hold. If any computed large lower
   bound exceeds a verified incumbent upper bound, it is rejected as invalid
   evidence and must not update the top-level lower bound.
+## Round 15 Relaxed-RMP CG Certification Rules
+
+Relaxed ng-route columns are lower-bound-only columns unless
+`column_kind=elementary_feasible`, `elementary=true`, and
+`can_be_used_for_incumbent=true`.  Non-elementary relaxed columns must never be
+exported as route plans, accepted as incumbents, or selected by the route-pool
+incumbent master.
+
+A non-elementary relaxed projection is safe only when the validator can prove a
+well-defined station membership set, integer net `q` vector, load-feasible
+relaxed visit sequence, station final-capacity feasibility, nonnegative depot
+unload within truck capacity, route-duration feasibility, and branch/operation
+mode compatibility.  If any branch or cut coefficient cannot be evaluated on
+the projection, the relaxed column is rejected.
+
+A relaxed-RMP CG bound can fathom a frontier interval only when ng-relaxed
+pricing closes under true current RMP duals for the same chosen relaxation.  If
+ng-relaxed pricing is incomplete, time-limited, or blocked by an unsafe relaxed
+projection, the relaxed-RMP value is diagnostic and must not be used as an
+original-problem certificate.  Elementary exact pricing is not required for an
+interval already fathomed by a closed relaxed-ng lower-bound master, but the
+final frontier ledger must still account for every relevant interval.

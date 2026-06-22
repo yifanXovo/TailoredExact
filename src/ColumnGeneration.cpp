@@ -143,6 +143,30 @@ void accumulateBpcPricingStats(ResultLike& result,
         priced.relaxed_columns_rejected_infeasible_projection;
     result.relaxed_columns_used_in_lb_rmp += priced.relaxed_columns_used_in_lb_rmp;
     result.relaxed_columns_used_in_incumbent += priced.relaxed_columns_used_in_incumbent;
+    result.non_elementary_relaxed_routes_seen +=
+        priced.non_elementary_relaxed_routes_seen;
+    result.non_elementary_relaxed_columns_validated +=
+        priced.non_elementary_relaxed_columns_validated;
+    result.non_elementary_relaxed_columns_inserted +=
+        priced.non_elementary_relaxed_columns_inserted;
+    result.non_elementary_relaxed_columns_rejected +=
+        priced.non_elementary_relaxed_columns_rejected;
+    result.relaxed_projection_rejected_load += priced.relaxed_projection_rejected_load;
+    result.relaxed_projection_rejected_station_capacity +=
+        priced.relaxed_projection_rejected_station_capacity;
+    result.relaxed_projection_rejected_branch += priced.relaxed_projection_rejected_branch;
+    result.relaxed_projection_rejected_operation_mode +=
+        priced.relaxed_projection_rejected_operation_mode;
+    result.relaxed_projection_rejected_unsafe_cut +=
+        priced.relaxed_projection_rejected_unsafe_cut;
+    result.relaxed_projection_validation_time_seconds +=
+        priced.relaxed_projection_validation_time_seconds;
+    result.relaxed_columns_blocked_from_incumbent +=
+        priced.relaxed_columns_blocked_from_incumbent;
+    result.relaxed_columns_blocked_from_export +=
+        priced.relaxed_columns_blocked_from_export;
+    result.relaxed_columns_blocked_from_candidate_reconstruction +=
+        priced.relaxed_columns_blocked_from_candidate_reconstruction;
     result.relaxed_rmp_enabled = result.relaxed_rmp_enabled || priced.relaxed_rmp_enabled;
     result.elementary_pricing_closed =
         result.elementary_pricing_closed || priced.elementary_pricing_closed;
@@ -153,6 +177,22 @@ void accumulateBpcPricingStats(ResultLike& result,
     result.ng_relaxed_best_reduced_cost =
         std::min(result.ng_relaxed_best_reduced_cost,
                  priced.ng_relaxed_best_reduced_cost);
+    result.ng_relaxed_negative_routes_found +=
+        priced.ng_relaxed_negative_routes_found;
+    result.ng_relaxed_negative_columns_inserted +=
+        priced.ng_relaxed_negative_columns_inserted;
+    result.ng_relaxed_negative_routes_rejected +=
+        priced.ng_relaxed_negative_routes_rejected;
+    result.ng_relaxed_closure_labels_processed +=
+        priced.ng_relaxed_closure_labels_processed;
+    result.ng_relaxed_closure_labels_pruned +=
+        priced.ng_relaxed_closure_labels_pruned;
+    result.ng_relaxed_closure_time_seconds +=
+        priced.ng_relaxed_closure_time_seconds;
+    if (!priced.ng_relaxed_closure_stop_reason.empty()) {
+        result.ng_relaxed_closure_stop_reason =
+            priced.ng_relaxed_closure_stop_reason;
+    }
     result.ng_relaxed_pricing_calls += priced.ng_relaxed_pricing_calls;
     result.ng_relaxed_labels_processed += priced.ng_relaxed_labels_processed;
     result.ng_relaxed_labels_pruned += priced.ng_relaxed_labels_pruned;
@@ -1782,6 +1822,30 @@ void addStats(GiniCapTreeResult& total, const GiniCapColumnGenerationResult& nod
         node.relaxed_columns_rejected_infeasible_projection;
     total.relaxed_columns_used_in_lb_rmp += node.relaxed_columns_used_in_lb_rmp;
     total.relaxed_columns_used_in_incumbent += node.relaxed_columns_used_in_incumbent;
+    total.non_elementary_relaxed_routes_seen +=
+        node.non_elementary_relaxed_routes_seen;
+    total.non_elementary_relaxed_columns_validated +=
+        node.non_elementary_relaxed_columns_validated;
+    total.non_elementary_relaxed_columns_inserted +=
+        node.non_elementary_relaxed_columns_inserted;
+    total.non_elementary_relaxed_columns_rejected +=
+        node.non_elementary_relaxed_columns_rejected;
+    total.relaxed_projection_rejected_load += node.relaxed_projection_rejected_load;
+    total.relaxed_projection_rejected_station_capacity +=
+        node.relaxed_projection_rejected_station_capacity;
+    total.relaxed_projection_rejected_branch += node.relaxed_projection_rejected_branch;
+    total.relaxed_projection_rejected_operation_mode +=
+        node.relaxed_projection_rejected_operation_mode;
+    total.relaxed_projection_rejected_unsafe_cut +=
+        node.relaxed_projection_rejected_unsafe_cut;
+    total.relaxed_projection_validation_time_seconds +=
+        node.relaxed_projection_validation_time_seconds;
+    total.relaxed_columns_blocked_from_incumbent +=
+        node.relaxed_columns_blocked_from_incumbent;
+    total.relaxed_columns_blocked_from_export +=
+        node.relaxed_columns_blocked_from_export;
+    total.relaxed_columns_blocked_from_candidate_reconstruction +=
+        node.relaxed_columns_blocked_from_candidate_reconstruction;
     total.relaxed_rmp_enabled = total.relaxed_rmp_enabled || node.relaxed_rmp_enabled;
     total.relaxed_rmp_objective = std::max(total.relaxed_rmp_objective,
                                            node.relaxed_rmp_objective);
@@ -1809,6 +1873,21 @@ void addStats(GiniCapTreeResult& total, const GiniCapColumnGenerationResult& nod
     total.ng_relaxed_best_reduced_cost =
         std::min(total.ng_relaxed_best_reduced_cost,
                  node.ng_relaxed_best_reduced_cost);
+    total.ng_relaxed_negative_routes_found += node.ng_relaxed_negative_routes_found;
+    total.ng_relaxed_negative_columns_inserted +=
+        node.ng_relaxed_negative_columns_inserted;
+    total.ng_relaxed_negative_routes_rejected +=
+        node.ng_relaxed_negative_routes_rejected;
+    total.ng_relaxed_closure_labels_processed +=
+        node.ng_relaxed_closure_labels_processed;
+    total.ng_relaxed_closure_labels_pruned +=
+        node.ng_relaxed_closure_labels_pruned;
+    total.ng_relaxed_closure_time_seconds +=
+        node.ng_relaxed_closure_time_seconds;
+    if (!node.ng_relaxed_closure_stop_reason.empty()) {
+        total.ng_relaxed_closure_stop_reason =
+            node.ng_relaxed_closure_stop_reason;
+    }
     total.ng_relaxed_pricing_calls += node.ng_relaxed_pricing_calls;
     total.ng_relaxed_labels_processed += node.ng_relaxed_labels_processed;
     total.ng_relaxed_labels_pruned += node.ng_relaxed_labels_pruned;
@@ -1817,6 +1896,20 @@ void addStats(GiniCapTreeResult& total, const GiniCapColumnGenerationResult& nod
         std::max(total.dssr_lb_before_refinement, node.dssr_lb_before_refinement);
     total.dssr_lb_after_refinement =
         std::max(total.dssr_lb_after_refinement, node.dssr_lb_after_refinement);
+    total.relaxed_rmp_cg_iterations += node.relaxed_rmp_cg_iterations;
+    total.relaxed_rmp_cg_columns_added += node.relaxed_rmp_cg_columns_added;
+    total.relaxed_rmp_cg_final_best_rc =
+        std::min(total.relaxed_rmp_cg_final_best_rc,
+                 node.relaxed_rmp_cg_final_best_rc);
+    total.relaxed_rmp_cg_closed =
+        total.relaxed_rmp_cg_closed || node.relaxed_rmp_cg_closed;
+    if (!node.relaxed_rmp_cg_stop_reason.empty()) {
+        total.relaxed_rmp_cg_stop_reason = node.relaxed_rmp_cg_stop_reason;
+    }
+    total.relaxed_rmp_lb_before_cg =
+        std::max(total.relaxed_rmp_lb_before_cg, node.relaxed_rmp_lb_before_cg);
+    total.relaxed_rmp_lb_after_cg =
+        std::max(total.relaxed_rmp_lb_after_cg, node.relaxed_rmp_lb_after_cg);
     total.ng_size = std::max(total.ng_size, node.ng_size);
     if (!node.ng_neighborhood_mode.empty()) {
         total.ng_neighborhood_mode = node.ng_neighborhood_mode;
@@ -2662,6 +2755,13 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 result.relaxed_rmp_certificate_valid
                     ? "none"
                     : "ng_relaxed_pricing_incomplete_or_negative_reduced_cost";
+            result.relaxed_rmp_cg_iterations = iter + 1;
+            result.relaxed_rmp_cg_final_best_rc = best_rc;
+            result.relaxed_rmp_cg_closed = result.relaxed_rmp_pricing_closed;
+            result.relaxed_rmp_cg_stop_reason =
+                result.relaxed_rmp_cg_closed
+                    ? "ng_relaxed_pricing_closed"
+                    : result.relaxed_rmp_certificate_rejection_reason;
         }
         if (!added) {
             if (phase_one_active) {
@@ -2679,10 +2779,17 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                     result.pricing_completed_exactly = false;
                     result.pricing_closure_certified_exact = false;
                     result.notes.push_back("phase-I duplicate negative projection prevented progress; node is left unresolved because duplicate columns do not prove closure");
-                    refreshPoolColumnCount();
-                    finalizePricingClosureFields(result);
-                    return result;
-                }
+    refreshPoolColumnCount();
+    finalizePricingClosureFields(result);
+    if (result.relaxed_rmp_enabled) {
+        result.relaxed_rmp_lb_after_cg = result.fixed_cap_surrogate;
+        if (result.relaxed_rmp_lb_before_cg == 0.0) {
+            result.relaxed_rmp_lb_before_cg = result.fixed_cap_surrogate;
+        }
+        result.relaxed_rmp_cg_columns_added = result.relaxed_columns_inserted;
+    }
+    return result;
+}
             } else if (!duplicate_negative && best_rc >= -1e-7) {
                 result.complete = true;
             } else if (duplicate_negative) {
