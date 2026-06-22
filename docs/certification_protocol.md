@@ -488,3 +488,25 @@ projection, the relaxed-RMP value is diagnostic and must not be used as an
 original-problem certificate.  Elementary exact pricing is not required for an
 interval already fathomed by a closed relaxed-ng lower-bound master, but the
 final frontier ledger must still account for every relevant interval.
+
+## Round 16 Production Preset Certificate Rules
+
+- `paper-bpc-core` is the main paper BPC preset. It uses elementary columns and
+  exact-label pricing for closure. It may use valid non-pricing bounds to fathom
+  intervals, but any BPC tree closure still requires exact pricing semantics.
+- `paper-exact-portfolio` is the recommended robust exact preset. It combines
+  `paper-bpc-core` with a compact fallback row. The final certificate module
+  must be reported as `bpc`, `compact`, or `none`.
+- `paper-bpc-experimental` enables hybrid/ng-DSSR and two-track relaxed-RMP
+  features. These rows are experimental unless relaxed pricing closes and the
+  full frontier ledger satisfies all certificate requirements.
+- `diagnostic-large` is for generated V50/V100-style scalability diagnostics.
+  Disabled all-subset route-mask features and incomplete relaxed pricing must
+  leave the row noncertified.
+
+Every run now carries a `RunConfigSnapshot`. If `option_audit_consistent=false`,
+the result is diagnostic and cannot be certified. The integrity audit also
+rejects positive-gap certificates, regenerated instances mislabeled as
+historical targets, compact certificates without zero compact gap, relaxed-RMP
+certificates without closed relaxed pricing, and accepted incumbents without a
+verifier pass.

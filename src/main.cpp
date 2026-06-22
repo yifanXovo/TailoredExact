@@ -15,6 +15,7 @@
 #include <array>
 #include <atomic>
 #include <chrono>
+#include <cstdint>
 #include <cctype>
 #include <cmath>
 #include <exception>
@@ -39,7 +40,7 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|projection-safe-relaxed-column-test|non-elementary-relaxed-column-test|ng-relaxed-closure-test|relaxed-rmp-cg-test|frontier-relaxed-rmp-cg-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|large-relaxed-rmp-cg-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|option-consistency-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|projection-safe-relaxed-column-test|non-elementary-relaxed-column-test|ng-relaxed-closure-test|relaxed-rmp-cg-test|frontier-relaxed-rmp-cg-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|large-relaxed-rmp-cg-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
@@ -109,7 +110,10 @@ void usage() {
         << "[--frontier-export-open-nodes true|false] [--frontier-resume-open-nodes true|false] "
         << "[--pricing-final-verifier true|false] [--pricing-verifier-time <seconds>] "
         << "[--pricing-verifier-checkpoint <path>] [--pricing-verifier-resume <path>] "
-        << "[--pricing-verifier-mode label-dp|route-mask-dp|auto]\n";
+        << "[--pricing-verifier-mode label-dp|route-mask-dp|auto] "
+        << "[--algorithm-preset paper-bpc-core|paper-exact-portfolio|paper-bpc-experimental|diagnostic-large] "
+        << "[--production-preset <preset-alias>] [--incumbent-archive-auto true|false] "
+        << "[--incumbent-archive-dir <dir>]\n";
 }
 
 std::string requireValue(int& i, int argc, char** argv) {
@@ -132,6 +136,106 @@ bool parseBoolValue(const std::string& s) {
     if (v == "true" || v == "1" || v == "yes" || v == "on") return true;
     if (v == "false" || v == "0" || v == "no" || v == "off") return false;
     throw std::runtime_error("Expected boolean value, got: " + s);
+}
+
+std::string lowerAscii(std::string value) {
+    std::transform(value.begin(), value.end(), value.begin(), [](unsigned char c) {
+        return static_cast<char>(std::tolower(c));
+    });
+    return value;
+}
+
+void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
+    opt.algorithm_preset = lowerAscii(opt.algorithm_preset);
+    if (opt.algorithm_preset.empty() || opt.algorithm_preset == "none") {
+        opt.algorithm_preset = "custom";
+    }
+    if (opt.algorithm_preset == "custom") return;
+
+    if (opt.algorithm_preset == "paper-bpc-core" ||
+        opt.algorithm_preset == "paper-exact-portfolio") {
+        opt.pricing_engine = "exact-label";
+        opt.column_tracks = "elementary-only";
+        opt.rmp_column_space = "elementary";
+        opt.relaxed_columns_in_rmp = false;
+        opt.relaxed_rmp_cg = false;
+        opt.frontier_relaxed_rmp_cg = false;
+        opt.large_relaxed_rmp = false;
+        opt.large_relaxed_rmp_cg = false;
+        opt.ng_relaxed_closure = false;
+        opt.dssr_close_relaxed_pricing = false;
+        opt.cg_dual_stabilization = "none";
+        opt.dssr_final_exact = true;
+        opt.column_dominance = true;
+        opt.column_dominance_mode = "exact";
+        opt.gcap_pricing_columns = std::max(opt.gcap_pricing_columns, 4);
+        opt.movement_domain_tightening = true;
+        opt.projection_bound = true;
+        opt.penalty_domain_tightening = true;
+        opt.vehicle_indexed_operation_relaxation = true;
+        opt.vehicle_indexed_transfer_flow = true;
+        opt.route_mask_operation_budget_cuts = true;
+        opt.route_pool_incumbent = true;
+        opt.branch_inventory = true;
+        opt.branch_operation_mode = true;
+        opt.frontier_best_bound_scheduling = true;
+        opt.frontier_relaxation_cache = true;
+        opt.bpc_incumbent = (opt.bpc_incumbent == "none" || opt.bpc_incumbent.empty())
+            ? "auto" : opt.bpc_incumbent;
+        opt.compact_fallback_enabled =
+            opt.algorithm_preset == "paper-exact-portfolio";
+        opt.incumbent_archive_auto = true;
+        return;
+    }
+
+    if (opt.algorithm_preset == "paper-bpc-experimental") {
+        opt.pricing_engine = "hybrid";
+        opt.column_tracks = "two-track";
+        opt.rmp_column_space = "two-track";
+        opt.relaxed_columns_in_rmp = true;
+        opt.relaxed_rmp_cg = true;
+        opt.frontier_relaxed_rmp_cg = true;
+        opt.ng_relaxed_closure = true;
+        opt.dssr_close_relaxed_pricing = true;
+        opt.allow_non_elementary_relaxed_columns = true;
+        opt.relaxed_projection_strict = true;
+        opt.column_dominance = true;
+        opt.column_dominance_mode = "exact";
+        opt.gcap_pricing_columns = std::max(opt.gcap_pricing_columns, 4);
+        opt.movement_domain_tightening = true;
+        opt.projection_bound = true;
+        opt.penalty_domain_tightening = true;
+        opt.vehicle_indexed_operation_relaxation = true;
+        opt.vehicle_indexed_transfer_flow = true;
+        opt.route_mask_operation_budget_cuts = true;
+        opt.route_pool_incumbent = true;
+        opt.branch_inventory = true;
+        opt.branch_operation_mode = true;
+        opt.bpc_incumbent = (opt.bpc_incumbent == "none" || opt.bpc_incumbent.empty())
+            ? "auto" : opt.bpc_incumbent;
+        opt.incumbent_archive_auto = true;
+        opt.compact_fallback_enabled = false;
+        return;
+    }
+
+    if (opt.algorithm_preset == "diagnostic-large") {
+        opt.large_instance_mode = "force";
+        opt.pricing_engine = "hybrid";
+        opt.ng_neighborhood_mode = "hybrid";
+        opt.column_tracks = "two-track";
+        opt.rmp_column_space = "two-track";
+        opt.relaxed_columns_in_rmp = true;
+        opt.large_lb_mode = "movement-projection";
+        opt.large_relaxed_rmp = true;
+        opt.large_relaxed_rmp_cg = true;
+        opt.relaxed_rmp_cg = true;
+        opt.frontier_relaxed_rmp_cg = false;
+        opt.route_mask_max_v = 0;
+        opt.route_mask_operation_budget_cuts = false;
+        opt.frontier_final_closure = false;
+        opt.compact_fallback_enabled = false;
+        return;
+    }
 }
 
 ebrp::SolveOptions parseArgs(int argc, char** argv) {
@@ -290,6 +394,10 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--pricing-verifier-checkpoint") opt.pricing_verifier_checkpoint = requireValue(i, argc, argv);
         else if (arg == "--pricing-verifier-resume") opt.pricing_verifier_resume = requireValue(i, argc, argv);
         else if (arg == "--pricing-verifier-mode") opt.pricing_verifier_mode = requireValue(i, argc, argv);
+        else if (arg == "--algorithm-preset") opt.algorithm_preset = requireValue(i, argc, argv);
+        else if (arg == "--production-preset") opt.algorithm_preset = requireValue(i, argc, argv);
+        else if (arg == "--incumbent-archive-auto") opt.incumbent_archive_auto = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--incumbent-archive-dir") opt.incumbent_archive_dir = requireValue(i, argc, argv);
         else if (arg == "--log") opt.log_path = requireValue(i, argc, argv);
         else if (arg == "--out") opt.out_path = requireValue(i, argc, argv);
         else if (arg == "--plain-baseline") opt.plain_baseline = true;
@@ -452,6 +560,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.cg_stabilization_switch_to_true_after < 0) {
         opt.cg_stabilization_switch_to_true_after = 0;
     }
+    applyAlgorithmPreset(opt);
     return opt;
 }
 
@@ -580,6 +689,248 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
     const double dist_bytes = static_cast<double>(instance.V + 1) *
         static_cast<double>(instance.V + 1) * sizeof(double);
     result.memory_peak_estimate_mb = (q_bytes + dist_bytes) / (1024.0 * 1024.0);
+}
+
+std::string boolText(bool value) {
+    return value ? "true" : "false";
+}
+
+std::string hashFileFnv1a(const std::string& path) {
+    std::ifstream in(path, std::ios::binary);
+    if (!in) return "";
+    std::uint64_t hash = 1469598103934665603ull;
+    char ch = 0;
+    while (in.get(ch)) {
+        hash ^= static_cast<unsigned char>(ch);
+        hash *= 1099511628211ull;
+    }
+    std::ostringstream out;
+    out << std::hex << hash;
+    return out.str();
+}
+
+std::string inferInstanceScope(const ebrp::Instance& instance,
+                               const ebrp::SolveOptions& opt) {
+    std::string path = lowerAscii(instance.path);
+    std::string name = lowerAscii(instance.name);
+    if (path.find("gcap_smoke") != std::string::npos ||
+        name.find("smoke") != std::string::npos) {
+        return "smoke";
+    }
+    if (opt.algorithm_preset == "diagnostic-large" || instance.V >= 50) {
+        return "diagnostic_large";
+    }
+    if (path.find("reference/generated") != std::string::npos ||
+        name.find("regen_") != std::string::npos ||
+        name.find("regen_candidate") != std::string::npos) {
+        return "regenerated_engineering";
+    }
+    return "historical_target";
+}
+
+ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
+                                               const ebrp::SolveOptions& opt) {
+    ebrp::RunConfigSnapshot snapshot;
+    snapshot.algorithm_preset = opt.algorithm_preset.empty() ? "custom" : opt.algorithm_preset;
+    snapshot.column_tracks = resolvedColumnTracks(instance, opt);
+    snapshot.rmp_column_space = resolvedRmpColumnSpace(instance, opt);
+    snapshot.relaxed_columns_in_rmp = opt.relaxed_columns_in_rmp ||
+        snapshot.column_tracks == "two-track" ||
+        snapshot.rmp_column_space == "ng-relaxed" ||
+        snapshot.rmp_column_space == "two-track";
+    snapshot.pricing_engine = resolvedPricingEngine(instance, opt);
+    snapshot.final_pricing_engine =
+        (snapshot.pricing_engine == "hybrid" || snapshot.pricing_engine == "ng-dssr")
+            ? (opt.dssr_final_exact ? "exact-label-final-verifier" : snapshot.pricing_engine)
+            : snapshot.pricing_engine;
+    const bool large_mode = largeInstanceModeActive(instance, opt);
+    snapshot.large_instance_mode = large_mode ? opt.large_instance_mode : "off";
+    if (large_mode && snapshot.large_instance_mode == "auto") {
+        snapshot.large_instance_mode = "auto";
+    }
+    snapshot.station_set_backend = ebrp::stationSetBackendName(instance.V);
+    snapshot.route_mask_all_subset_enumeration_enabled =
+        instance.V <= opt.route_mask_max_v && instance.V <= 30;
+    snapshot.route_mask_all_subset_enumeration_certifying =
+        snapshot.route_mask_all_subset_enumeration_enabled;
+    if (large_mode && instance.V > 32) {
+        snapshot.route_mask_all_subset_enumeration_enabled = false;
+        snapshot.route_mask_all_subset_enumeration_certifying = false;
+    }
+    snapshot.incumbent_archive_auto = opt.incumbent_archive_auto;
+    snapshot.compact_fallback_enabled = opt.compact_fallback_enabled;
+    snapshot.relaxed_rmp_enabled = snapshot.relaxed_columns_in_rmp ||
+        opt.relaxed_rmp_cg || opt.frontier_relaxed_rmp_cg ||
+        opt.large_relaxed_rmp || opt.large_relaxed_rmp_cg;
+    snapshot.plain_baseline = opt.plain_baseline;
+    snapshot.cplex_seed = opt.gcap_seed_cplex;
+    snapshot.column_dominance_enabled = opt.column_dominance;
+    snapshot.movement_domain_enabled = opt.movement_domain_tightening;
+    snapshot.projection_bound_enabled = opt.projection_bound;
+    snapshot.penalty_domain_enabled = opt.penalty_domain_tightening;
+    snapshot.vehicle_indexed_relaxation_enabled =
+        opt.vehicle_indexed_operation_relaxation;
+    snapshot.vehicle_indexed_transfer_flow_enabled = opt.vehicle_indexed_transfer_flow;
+    snapshot.operation_budget_cuts_enabled = opt.route_mask_operation_budget_cuts;
+    snapshot.branching_enabled = opt.branch_inventory || opt.branch_operation_mode;
+    snapshot.two_track_enabled = snapshot.column_tracks == "two-track" ||
+        snapshot.rmp_column_space == "two-track" ||
+        snapshot.rmp_column_space == "ng-relaxed";
+    snapshot.instance_scope = inferInstanceScope(instance, opt);
+    snapshot.instance_hash = hashFileFnv1a(instance.path);
+    snapshot.instance_source_path = instance.path;
+
+    if (snapshot.algorithm_preset == "paper-bpc-core") {
+        snapshot.preset_certificate_scope = "core_bpc_certificate_when_frontier_closes";
+        snapshot.preset_experimental_features_enabled = "none";
+        snapshot.preset_disabled_features =
+            "compact_fallback,hybrid_ng_dssr,two_track_relaxed_rmp,large_diagnostic";
+        snapshot.preset_reason = "paper core exact BPC with elementary columns only";
+    } else if (snapshot.algorithm_preset == "paper-exact-portfolio") {
+        snapshot.preset_certificate_scope =
+            "bpc_or_compact_module_certificate_when_gap_closes";
+        snapshot.preset_experimental_features_enabled = "none";
+        snapshot.preset_disabled_features =
+            "hybrid_ng_dssr,two_track_relaxed_rmp,large_diagnostic";
+        snapshot.preset_reason = "recommended robust exact portfolio";
+    } else if (snapshot.algorithm_preset == "paper-bpc-experimental") {
+        snapshot.preset_certificate_scope =
+            "experimental_relaxed_rmp_requires_relaxed_pricing_closure";
+        snapshot.preset_experimental_features_enabled =
+            "hybrid_ng_dssr,two_track_relaxed_rmp,projection_safe_relaxed_columns";
+        snapshot.preset_disabled_features = "compact_fallback";
+        snapshot.preset_reason =
+            "appendix experimental BPC extensions, disabled in core preset";
+    } else if (snapshot.algorithm_preset == "diagnostic-large") {
+        snapshot.preset_certificate_scope =
+            "diagnostic_large_unless_full_certificate_closes";
+        snapshot.preset_experimental_features_enabled =
+            "hybrid_ng_dssr,large_relaxed_rmp_diagnostic";
+        snapshot.preset_disabled_features =
+            "all_subset_route_mask_enumeration,compact_fallback";
+        snapshot.preset_reason =
+            "large-instance scalability diagnostic, not a certificate preset";
+    } else {
+        snapshot.preset_certificate_scope = "custom";
+        snapshot.preset_reason = "custom command-line configuration";
+    }
+    return snapshot;
+}
+
+void applyRunConfigSnapshot(const ebrp::RunConfigSnapshot& snapshot,
+                            ebrp::SolveResult& result) {
+    result.instance_scope = snapshot.instance_scope;
+    result.instance_hash = snapshot.instance_hash;
+    result.instance_source_path = snapshot.instance_source_path;
+    result.algorithm_preset = snapshot.algorithm_preset;
+    result.preset_certificate_scope = snapshot.preset_certificate_scope;
+    result.preset_experimental_features_enabled =
+        snapshot.preset_experimental_features_enabled;
+    result.preset_disabled_features = snapshot.preset_disabled_features;
+    result.preset_reason = snapshot.preset_reason;
+    result.pricing_engine = snapshot.pricing_engine;
+    result.final_pricing_engine = snapshot.final_pricing_engine;
+    result.bpc_pricing_engine_requested = snapshot.pricing_engine;
+    if (result.bpc_pricing_engine_used.empty()) {
+        result.bpc_pricing_engine_used = snapshot.pricing_engine;
+    }
+    result.column_tracks = snapshot.column_tracks;
+    result.rmp_column_space = snapshot.rmp_column_space;
+    result.relaxed_columns_in_rmp = snapshot.relaxed_columns_in_rmp;
+    result.relaxed_rmp_enabled = snapshot.relaxed_rmp_enabled;
+    result.incumbent_archive_auto = snapshot.incumbent_archive_auto;
+    result.compact_fallback_enabled = snapshot.compact_fallback_enabled;
+    result.cplex_plain_baseline = snapshot.plain_baseline;
+    result.cplex_seed_enabled = snapshot.cplex_seed;
+    result.large_instance_mode = snapshot.large_instance_mode;
+    result.station_set_backend = snapshot.station_set_backend;
+    result.route_mask_all_subset_enumeration_enabled =
+        snapshot.route_mask_all_subset_enumeration_enabled;
+    result.route_mask_all_subset_enumeration_certifying =
+        snapshot.route_mask_all_subset_enumeration_certifying;
+    result.column_dominance_enabled = snapshot.column_dominance_enabled;
+    result.movement_domain_enabled = snapshot.movement_domain_enabled;
+    result.projection_bound_enabled = snapshot.projection_bound_enabled;
+    result.penalty_domain_enabled = snapshot.penalty_domain_enabled;
+    result.vehicle_indexed_relaxation_enabled_snapshot =
+        snapshot.vehicle_indexed_relaxation_enabled;
+    result.operation_budget_cuts_enabled = snapshot.operation_budget_cuts_enabled;
+    result.branching_enabled = snapshot.branching_enabled;
+    result.two_track_enabled = snapshot.two_track_enabled;
+    if (result.certificate_scope.empty()) {
+        result.certificate_scope = snapshot.preset_certificate_scope;
+    }
+    const std::string snapshot_note =
+        "RunConfigSnapshot: algorithm_preset=" + snapshot.algorithm_preset +
+        ", preset_certificate_scope=" + snapshot.preset_certificate_scope +
+        ", pricing_engine=" + snapshot.pricing_engine +
+        ", final_pricing_engine=" + snapshot.final_pricing_engine +
+        ", column_tracks=" + snapshot.column_tracks +
+        ", rmp_column_space=" + snapshot.rmp_column_space +
+        ", relaxed_columns_in_rmp=" + boolText(snapshot.relaxed_columns_in_rmp) +
+        ", large_instance_mode=" + snapshot.large_instance_mode +
+        ", station_set_backend=" + snapshot.station_set_backend +
+        ", route_mask_all_subset_enumeration_enabled=" +
+        boolText(snapshot.route_mask_all_subset_enumeration_enabled) +
+        ", incumbent_archive_auto=" + boolText(snapshot.incumbent_archive_auto) +
+        ", compact_fallback_enabled=" + boolText(snapshot.compact_fallback_enabled);
+    bool has_note = false;
+    for (const std::string& note : result.notes) {
+        if (note.find("RunConfigSnapshot:") == 0) {
+            has_note = true;
+            break;
+        }
+    }
+    if (!has_note) result.notes.push_back(snapshot_note);
+    result.option_audit_consistent = result.option_audit_mismatches.empty();
+}
+
+void finalizePaperModuleFields(ebrp::SolveResult& result) {
+    const double ub = result.upper_bound > 0.0 ? result.upper_bound : result.objective;
+    const double gap = ub > 1e-12
+        ? std::max(0.0, (ub - result.lower_bound) / std::fabs(ub))
+        : std::max(0.0, ub - result.lower_bound);
+    if (result.method == "gcap-frontier" ||
+        result.method == "frontier-relaxed-rmp-cg-test") {
+        result.bpc_status = result.status;
+        result.bpc_LB = result.lower_bound;
+        result.bpc_UB = ub;
+        result.bpc_gap = result.gap > 0.0 ? result.gap : gap;
+    } else if (result.method == "tailored" || result.method == "cplex") {
+        result.compact_status = result.status;
+        result.compact_LB = result.lower_bound;
+        result.compact_UB = ub;
+        result.compact_gap = result.gap > 0.0 ? result.gap : gap;
+    }
+    if (result.algorithm_preset == "paper-exact-portfolio") {
+        result.portfolio_objective = ub;
+        result.portfolio_LB = std::max(result.bpc_LB, result.compact_LB);
+        if (result.portfolio_LB <= 0.0) result.portfolio_LB = result.lower_bound;
+        result.portfolio_gap = ub > 1e-12
+            ? std::max(0.0, (ub - result.portfolio_LB) / std::fabs(ub))
+            : std::max(0.0, ub - result.portfolio_LB);
+        if (result.status == "optimal" && result.gap <= 1e-7 &&
+            result.verification.feasible && result.verification.objective_matches &&
+            result.option_audit_consistent) {
+            result.portfolio_status = "optimal";
+            result.certificate_module =
+                (result.method == "gcap-frontier") ? "bpc" : "compact";
+        } else {
+            result.portfolio_status = "not_certified";
+            result.certificate_module = "none";
+            if (result.compact_status.empty() &&
+                result.method == "gcap-frontier") {
+                result.compact_status = "not_run_in_this_bpc_entry";
+                result.notes.push_back(
+                    "paper-exact-portfolio preset active: this invocation ran the BPC module; compact fallback must be run as a companion tailored/cplex row for portfolio evidence");
+            }
+        }
+    } else if (result.portfolio_status.empty()) {
+        result.portfolio_status = result.status;
+        result.portfolio_objective = ub;
+        result.portfolio_LB = result.lower_bound;
+        result.portfolio_gap = result.gap > 0.0 ? result.gap : gap;
+    }
 }
 
 void applyLargeInstanceLowerBound(const ebrp::Instance& instance,
@@ -1595,6 +1946,78 @@ std::vector<ebrp::RoutePlan> loadIncumbentRoutesByFormat(
         throw std::runtime_error("legacy HGA incumbent format is not implemented; use route_json or csv schema");
     }
     throw std::runtime_error("unsupported incumbent format: " + format);
+}
+
+struct IncumbentArchiveScanResult {
+    bool found = false;
+    long long files_scanned = 0;
+    long long candidates_verified = 0;
+    double best_objective = 0.0;
+    std::string best_source;
+    std::vector<ebrp::RoutePlan> best_routes;
+};
+
+IncumbentArchiveScanResult scanIncumbentArchive(
+    const ebrp::Instance& instance,
+    const ebrp::SolveOptions& opt) {
+    IncumbentArchiveScanResult out;
+    if (!opt.incumbent_archive_auto || opt.incumbent_archive_dir.empty()) {
+        return out;
+    }
+    std::filesystem::path root(opt.incumbent_archive_dir);
+    if (!std::filesystem::exists(root)) return out;
+    const std::string current_out =
+        opt.out_path.empty() ? std::string{} :
+        std::filesystem::absolute(opt.out_path).string();
+    std::error_code ec;
+    for (const auto& entry :
+         std::filesystem::recursive_directory_iterator(
+             root, std::filesystem::directory_options::skip_permission_denied, ec)) {
+        if (!entry.is_regular_file()) continue;
+        const std::filesystem::path path = entry.path();
+        std::string ext = lowerAscii(path.extension().string());
+        if (ext != ".json" && ext != ".csv") continue;
+        std::error_code size_ec;
+        const auto file_size = std::filesystem::file_size(path, size_ec);
+        if (!size_ec && file_size > 4ull * 1024ull * 1024ull) continue;
+        const std::string candidate_path = path.string();
+        if (!current_out.empty() &&
+            std::filesystem::absolute(path).string() == current_out) {
+            continue;
+        }
+        ++out.files_scanned;
+        try {
+            if (ext == ".json") {
+                const std::string text = readWholeTextFile(candidate_path);
+                if (text.find("\"routes\"") == std::string::npos) continue;
+                const std::string json_instance =
+                    extractJsonStringForKey(text, "instance_name", "");
+                if (!json_instance.empty() && json_instance != instance.name) {
+                    continue;
+                }
+            }
+            std::vector<ebrp::RoutePlan> routes =
+                loadIncumbentRoutesByFormat(candidate_path,
+                    ext == ".csv" ? "csv" : "route_json", instance.M);
+            ebrp::Verification verification =
+                ebrp::verifySolution(instance, routes, opt.lambda);
+            if (!verification.feasible || !verification.objective_matches ||
+                !verification.errors.empty()) {
+                continue;
+            }
+            ++out.candidates_verified;
+            if (!out.found ||
+                verification.objective < out.best_objective - 1e-10) {
+                out.found = true;
+                out.best_objective = verification.objective;
+                out.best_source = candidate_path;
+                out.best_routes = routes;
+            }
+        } catch (const std::exception&) {
+            continue;
+        }
+    }
+    return out;
 }
 
 void writeRouteJson(const std::string& path,
@@ -5710,6 +6133,88 @@ ebrp::SolveResult solveCertificateBasisDiagnostic(const ebrp::Instance& instance
     return result;
 }
 
+ebrp::SolveResult solveOptionConsistencyDiagnostic(const ebrp::Instance& instance,
+                                                   const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "option-consistency-test";
+    initializeScalabilityFields(instance, opt, result);
+    const ebrp::RunConfigSnapshot snapshot = buildRunConfigSnapshot(instance, opt);
+    applyRunConfigSnapshot(snapshot, result);
+    result.status = "diagnostic_complete";
+    result.certificate =
+        "diagnostic only: verifies resolved options are emitted from one RunConfigSnapshot";
+    result.routes = emptyRouteSet(instance);
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.final_inventory = result.verification.final_inventory;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.objective = result.verification.objective;
+    result.upper_bound = result.objective;
+    result.lower_bound = 0.0;
+    result.gap = result.upper_bound > 1e-12 ? 1.0 : 0.0;
+    std::vector<std::string> mismatches;
+    if (result.column_tracks != snapshot.column_tracks) {
+        mismatches.push_back("column_tracks");
+    }
+    if (result.rmp_column_space != snapshot.rmp_column_space) {
+        mismatches.push_back("rmp_column_space");
+    }
+    if (result.pricing_engine != snapshot.pricing_engine) {
+        mismatches.push_back("pricing_engine");
+    }
+    if (result.final_pricing_engine != snapshot.final_pricing_engine) {
+        mismatches.push_back("final_pricing_engine");
+    }
+    if (result.relaxed_columns_in_rmp != snapshot.relaxed_columns_in_rmp) {
+        mismatches.push_back("relaxed_columns_in_rmp");
+    }
+    if (result.large_instance_mode != snapshot.large_instance_mode) {
+        mismatches.push_back("large_instance_mode");
+    }
+    if (result.station_set_backend != snapshot.station_set_backend) {
+        mismatches.push_back("station_set_backend");
+    }
+    if (result.relaxed_rmp_enabled != snapshot.relaxed_rmp_enabled) {
+        mismatches.push_back("relaxed_RMP_enabled");
+    }
+    if (result.route_mask_all_subset_enumeration_enabled !=
+        snapshot.route_mask_all_subset_enumeration_enabled) {
+        mismatches.push_back("route_mask_all_subset_enumeration_enabled");
+    }
+    if (result.incumbent_archive_auto != snapshot.incumbent_archive_auto) {
+        mismatches.push_back("incumbent_archive_auto");
+    }
+    if (result.compact_fallback_enabled != snapshot.compact_fallback_enabled) {
+        mismatches.push_back("compact_fallback_enabled");
+    }
+    if (result.cplex_plain_baseline != snapshot.plain_baseline) {
+        mismatches.push_back("Cplex_plain_baseline");
+    }
+    if (result.cplex_seed_enabled != snapshot.cplex_seed) {
+        mismatches.push_back("Cplex_seed");
+    }
+    if (!mismatches.empty()) {
+        result.option_audit_consistent = false;
+        std::ostringstream joined;
+        for (std::size_t i = 0; i < mismatches.size(); ++i) {
+            if (i) joined << ";";
+            joined << mismatches[i];
+        }
+        result.option_audit_mismatches = joined.str();
+        result.status = "diagnostic_config_mismatch";
+        result.certificate_scope = "diagnostic_config_mismatch";
+    }
+    result.notes.push_back(
+        "option consistency audit compared JSON-facing fields against RunConfigSnapshot");
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
 ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                                               const ebrp::SolveOptions& opt) {
     const auto start = std::chrono::steady_clock::now();
@@ -5717,6 +6222,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.instance_name = instance.name;
     result.input_path = instance.path;
     result.method = "gcap-frontier";
+    initializeScalabilityFields(instance, opt, result);
+    applyRunConfigSnapshot(buildRunConfigSnapshot(instance, opt), result);
     ebrp::PricingOptions bpc_pricing_options;
     applyPricingOptionsFromSolve(instance, opt, bpc_pricing_options);
     result.bpc_pricing_engine_requested = bpc_pricing_options.pricing_engine;
@@ -5860,7 +6367,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             std::filesystem::create_directories(progress_path.parent_path());
         }
         std::ofstream seed_progress(progress_path, std::ios::out | std::ios::trunc);
-        seed_progress << "elapsed_seconds,event,incumbent_UB,global_LB,gap,"
+        seed_progress << "elapsed_seconds,event,algorithm_preset,column_tracks,"
+                      << "rmp_column_space,relaxed_columns_in_rmp,pricing_engine,"
+                      << "large_instance_mode,station_set_backend,"
+                      << "incumbent_UB,global_LB,gap,"
                       << "unresolved_intervals,global_min_lb_interval_id,"
                       << "global_min_lb_interval_range,global_min_lb_source,"
                       << "open_nodes,route_pool_columns_after_dominance,"
@@ -5879,6 +6389,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.best_gap_time_seconds = now;
         seed_progress << std::setprecision(12)
                       << now << ",initial_empty_incumbent,"
+                      << result.algorithm_preset << ","
+                      << result.column_tracks << ","
+                      << result.rmp_column_space << ","
+                      << boolText(result.relaxed_rmp_enabled) << ","
+                      << result.pricing_engine << ","
+                      << result.large_instance_mode << ","
+                      << result.station_set_backend << ","
                       << result.upper_bound << "," << seed_lb << ","
                       << seed_gap << ",0,-1,\"\",\"seed_initial\",0,"
                       << result.route_pool_columns_after_dominance << ",0,0,"
@@ -5954,6 +6471,31 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             + ", dropped_by_cap="
             + std::to_string(frontier_route_pool.dropped_by_cap));
     };
+    if (opt.incumbent_archive_auto) {
+        result.incumbent_archive_attempted = true;
+        IncumbentArchiveScanResult archive =
+            scanIncumbentArchive(instance, opt);
+        result.incumbent_archive_files_scanned = archive.files_scanned;
+        result.incumbent_archive_candidates_verified =
+            archive.candidates_verified;
+        if (archive.found) {
+            result.incumbent_archive_best_objective = archive.best_objective;
+            result.incumbent_archive_best_source = archive.best_source;
+            const bool accepted = acceptIncumbentRoutes(
+                archive.best_routes, "incumbent-archive");
+            result.incumbent_archive_selected = accepted;
+            if (accepted) {
+                addRoutesToFrontierPool(archive.best_routes,
+                                        "incumbent archive");
+            }
+        }
+        result.notes.push_back("incumbent archive scan: attempted=true, files_scanned="
+            + std::to_string(result.incumbent_archive_files_scanned)
+            + ", verified_candidates="
+            + std::to_string(result.incumbent_archive_candidates_verified)
+            + ", selected=" + boolText(result.incumbent_archive_selected)
+            + ", best_source=" + result.incumbent_archive_best_source);
+    }
     auto addTreeColumnsToFrontierPool =
         [&](const ebrp::GiniCapTreeResult& tree,
             const std::string& source) {
@@ -7139,7 +7681,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 std::filesystem::file_size(progress_path) == 0;
             progress_stream.open(progress_path, std::ios::out | std::ios::app);
             if (write_header) {
-                progress_stream << "elapsed_seconds,event,incumbent_UB,global_LB,gap,"
+                progress_stream << "elapsed_seconds,event,algorithm_preset,column_tracks,"
+                                << "rmp_column_space,relaxed_columns_in_rmp,pricing_engine,"
+                                << "large_instance_mode,station_set_backend,"
+                                << "incumbent_UB,global_LB,gap,"
                                 << "unresolved_intervals,global_min_lb_interval_id,"
                                 << "global_min_lb_interval_range,global_min_lb_source,"
                                 << "open_nodes,route_pool_columns_after_dominance,"
@@ -7170,6 +7715,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             : 0.0;
         progress_stream << std::setprecision(12)
                         << now << "," << event << ","
+                        << result.algorithm_preset << ","
+                        << result.column_tracks << ","
+                        << result.rmp_column_space << ","
+                        << boolText(result.relaxed_rmp_enabled) << ","
+                        << result.pricing_engine << ","
+                        << result.large_instance_mode << ","
+                        << result.station_set_backend << ","
                         << result.upper_bound << ","
                         << snapshot.lb << ","
                         << gap << ","
@@ -10155,6 +10707,7 @@ int main(int argc, char** argv) {
         for (const auto& file : files) {
             ebrp::Instance instance = ebrp::parseInstanceFile(
                 file, opt.total_time_limit, opt.pickup_time, opt.drop_time);
+            ebrp::SolveOptions effective_opt = opt;
             if (opt.method == "tailored") {
                 results.push_back(ebrp::solveTailoredExact(instance, opt));
             } else if (opt.method == "cplex") {
@@ -10203,6 +10756,8 @@ int main(int argc, char** argv) {
                 results.push_back(solveIterativeClosureDiagnostic(instance, opt));
             } else if (opt.method == "certificate-basis-test") {
                 results.push_back(solveCertificateBasisDiagnostic(instance, opt));
+            } else if (opt.method == "option-consistency-test") {
+                results.push_back(solveOptionConsistencyDiagnostic(instance, opt));
             } else if (opt.method == "station-set-test") {
                 results.push_back(solveStationSetDiagnostic(instance, opt));
             } else if (opt.method == "ng-dssr-pricing-test") {
@@ -10238,6 +10793,7 @@ int main(int argc, char** argv) {
                 frontier_opt.rmp_column_space = "two-track";
                 frontier_opt.relaxed_columns_in_rmp = true;
                 frontier_opt.pricing_engine = "hybrid";
+                effective_opt = frontier_opt;
                 results.push_back(solveGiniFrontierDiagnostic(instance, frontier_opt));
                 results.back().method = "frontier-relaxed-rmp-cg-test";
             } else if (opt.method == "relaxed-rmp-test") {
@@ -10251,6 +10807,7 @@ int main(int argc, char** argv) {
             } else if (opt.method == "large-relaxed-rmp-cg-test") {
                 ebrp::SolveOptions large_opt = opt;
                 large_opt.large_relaxed_rmp_cg = true;
+                effective_opt = large_opt;
                 results.push_back(solveLargeRelaxedRmpDiagnostic(instance, large_opt));
                 results.back().method = "large-relaxed-rmp-cg-test";
             } else if (opt.method == "external-incumbent-test") {
@@ -10275,7 +10832,9 @@ int main(int argc, char** argv) {
                 throw std::runtime_error("Unsupported method: " + opt.method);
             }
             auto& r = results.back();
-            initializeScalabilityFields(instance, opt, r);
+            initializeScalabilityFields(instance, effective_opt, r);
+            applyRunConfigSnapshot(buildRunConfigSnapshot(instance, effective_opt), r);
+            finalizePaperModuleFields(r);
             if (r.result_file.empty()) r.result_file = opt.out_path;
             if (r.log_file.empty()) r.log_file = opt.log_path;
             if (!opt.export_incumbent_path.empty() && !r.routes.empty()) {

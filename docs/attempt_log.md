@@ -1742,3 +1742,36 @@ Remaining TODOs:
   routine for V20+; improve large-instance relaxed column generation so V50/V100
   produce nonzero diagnostic relaxed-RMP trajectories; investigate why V12 M2
   two-track relaxed columns did not improve the full frontier lower bound.
+
+## 2026-06-23 - Round 16: Paper Algorithm Consolidation
+
+- Added production presets: `paper-bpc-core`, `paper-exact-portfolio`,
+  `paper-bpc-experimental`, and `diagnostic-large`.
+- Added `RunConfigSnapshot` and option-consistency audit fields so JSON, CSV,
+  progress traces, notes, and certificate audits use the same resolved options.
+  Results with mismatched active options are diagnostic and cannot certify.
+- Added verified incumbent archive scanning. Only reconstructable route plans
+  that pass the independent verifier can update the incumbent; objective-only
+  rows are ignored.
+- Added instance scope/hash/source fields to separate smoke, regenerated
+  engineering, historical target, and large diagnostic rows.
+- Ran V4 smoke diagnostics successfully. V4 frontier remains certified at
+  objective 0 under production presets.
+- V12 M1 `paper-bpc-core` 300s: UB 0.368581603155, LB 0.336357248340, gap
+  0.087428006550, noncertified.
+- V12 M2 `paper-bpc-core` 300s: UB 0.719065249476, LB 0.698710208326, gap
+  0.028307641296, noncertified.
+- V12 M1 `paper-exact-portfolio`: BPC row remained noncertified at UB
+  0.368581603155/LB 0.337408507830; compact companion row remained
+  noncertified at UB 0.357200583208/LB 0.321514225010.
+- V12 M2 `paper-exact-portfolio`: BPC row remained noncertified at UB
+  0.719065249476/LB 0.698710208326; compact companion row remained
+  noncertified at UB 0.752394062701/LB 0.572735131170.
+- Generated V8/V10/V20 paper-core rows and V50/V100 diagnostic-large rows ran
+  and are labeled regenerated/diagnostic, not historical targets.
+- Result-integrity audit reported zero failures. No new certificate was
+  obtained beyond V4.
+- TODO: recover or locate historical V8/V10/V20 sources for paper-comparable
+  runs; run the full 300s ablation matrix on a longer compute budget; decide
+  whether compact fallback should be automated in a single executable portfolio
+  command rather than represented by companion rows.
