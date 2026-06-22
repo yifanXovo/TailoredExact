@@ -1656,3 +1656,63 @@ Remaining TODOs:
   route-mask enumeration.
 - Add OS-level peak-memory measurement in addition to deterministic memory
   estimates.
+
+## 2026-06-22 Round 14: Two-Track Relaxed Route-Load BPC
+
+Implementation:
+
+- Added route-load column classification fields for elementary feasible columns
+  and ng-relaxed lower-bound columns.
+- Included column kind in dominance projection keys so lower-bound-only
+  relaxed representatives cannot replace elementary feasible representatives.
+- Threaded `--column-tracks`, `--relaxed-columns-in-rmp`,
+  `--relaxed-columns-max-per-pricing`, `--rmp-column-space`,
+  `--dssr-close-relaxed-pricing`, and `--large-relaxed-rmp` through pricing
+  options and result output.
+- Added conservative two-track hybrid pricing: relaxed RMP columns are created
+  only from verified elementary projections; non-elementary relaxed routes
+  remain rejected until projection feasibility is proven.
+- Added relaxed-RMP certificate fields and ng-relaxed pricing closure fields.
+  Relaxed-RMP objectives are certificate-valid only when ng-relaxed pricing
+  closes.
+- Filtered relaxed columns from route-pool incumbent insertion, route-pool DFS
+  selection, route export, and BPC leaf route reconstruction.
+- Added smoke diagnostics:
+  `two-track-column-test`, `relaxed-rmp-test`,
+  `relaxed-pricing-closure-test`,
+  `relaxed-column-incumbent-safety-test`, and
+  `large-relaxed-rmp-test`.
+- Added a UB sanity guard for large-instance lower-bound diagnostics: a
+  computed lower bound above a verified incumbent UB is rejected as invalid
+  evidence.
+
+Results:
+
+- CMake was unavailable; fallback `g++` build succeeded for
+  `ExactEBRP.exe` and `ExactEBRPCompare.exe`.
+- V4 smoke diagnostics exited `0`. V4 `gcap-frontier` remained certified with
+  objective `0` under exact-label and under two-track hybrid.
+- V12 M2 focus exact-label 300s and two-track 300s both remained nonclosed:
+  UB `0.780792889928`, LB `0.712948394993`, gap about `0.08689`.
+- V12 M2 full frontier 300s improved from exact-label LB
+  `0.684003547210` to two-track LB `0.710571053706`, still noncertified.
+- V12 M1 full frontier 300s changed from exact-label LB `0.337454471060` to
+  two-track LB `0.337666891430`, still noncertified.
+- V20 generated two-track frontier 300s ran and remained nonclosed:
+  UB `1.13623075045`, LB `0.372692167178`.
+- V50/V100 generated relaxed-RMP diagnostics ran without crashes. Their
+  movement-projection fallback exceeded the verified empty-route UB and was
+  therefore rejected; rows remain diagnostic with LB `0`.
+- No access violation, segmentation fault, `bad_alloc`, out-of-memory, ASan,
+  or fatal `ExactEBRP error` signature was found in round-fourteen logs.
+- Plain CPLEX was skipped.
+
+Remaining TODOs:
+
+- Implement projection-safe non-elementary relaxed route columns so relaxed
+  RMPs can materially strengthen lower bounds beyond elementary projections.
+- Complete ng-relaxed pricing closure over the selected relaxed state space
+  without relying on elementary exact closure.
+- Integrate a stronger scalable large-instance global LB that does not exceed
+  verified incumbents and does not require all-subset route masks.
+- Add OS-level peak-memory measurement.

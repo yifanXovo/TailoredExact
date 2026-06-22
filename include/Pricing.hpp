@@ -46,6 +46,14 @@ struct PricingOptions {
     std::string cg_dual_stabilization = "none";
     double cg_dual_smoothing_alpha = 0.7;
     double cg_dual_box_radius = 1.0;
+    std::string column_tracks = "elementary-only";
+    bool relaxed_columns_in_rmp = false;
+    int relaxed_columns_max_per_pricing = 8;
+    std::string rmp_column_space = "elementary";
+    bool dssr_close_relaxed_pricing = false;
+    double dssr_relaxed_closure_time = 30.0;
+    long long dssr_relaxed_closure_max_labels = 0;
+    std::string dssr_relaxed_closure_checkpoint;
 };
 
 struct PricingResult {
@@ -73,6 +81,28 @@ struct PricingResult {
     std::string pricing_closure_status = "not_run";
     RouteLoadColumn best_column;
     std::vector<RouteLoadColumn> negative_columns;
+    std::vector<RouteLoadColumn> relaxed_negative_columns;
+    std::string column_tracks = "elementary-only";
+    std::string rmp_column_space = "elementary";
+    long long elementary_columns_generated = 0;
+    long long elementary_columns_inserted = 0;
+    long long relaxed_columns_generated = 0;
+    long long relaxed_columns_inserted = 0;
+    long long relaxed_columns_rejected_projection = 0;
+    long long relaxed_columns_rejected_infeasible_projection = 0;
+    long long relaxed_columns_used_in_lb_rmp = 0;
+    long long relaxed_columns_used_in_incumbent = 0;
+    bool relaxed_rmp_enabled = false;
+    bool elementary_pricing_closed = false;
+    bool ng_relaxed_pricing_closed = false;
+    bool dssr_exact_elementary_closed = false;
+    long long ng_relaxed_pricing_calls = 0;
+    double ng_relaxed_best_reduced_cost = 0.0;
+    long long ng_relaxed_labels_processed = 0;
+    long long ng_relaxed_labels_pruned = 0;
+    int dssr_refinement_rounds_for_lb = 0;
+    double dssr_lb_before_refinement = 0.0;
+    double dssr_lb_after_refinement = 0.0;
     std::string pricing_engine = "exact-label";
     int ng_size = 0;
     std::string ng_neighborhood_mode = "nearest";

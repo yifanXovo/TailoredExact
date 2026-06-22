@@ -631,3 +631,43 @@ route JSON was rejected with no incumbent update.
 No new original-problem certificate was obtained beyond the existing V4 smoke
 certificate in this pass. Raw JSON, logs, progress traces, and CSV summaries
 are stored in `results/optimization_update_round13/`. Plain CPLEX was skipped.
+
+## Fourteenth Optimization Pass: Two-Track Relaxed Route-Load BPC
+
+Round fourteen introduces a two-track route-load column architecture. The
+elementary track remains the only source for feasible incumbents, route-pool
+masters, and exported route plans. The relaxed-ng track is lower-bound-only
+and may enter relaxed RMP diagnostics. Dominance keys separate the two tracks,
+and the route-pool incumbent master rejects relaxed columns at insertion and
+selection.
+
+The current implementation is intentionally conservative: relaxed lower-bound
+columns are created only from verified elementary projections. Non-elementary
+relaxed routes are still rejected until projection feasibility and station
+capacity semantics are fully certified. Therefore the new path is certificate
+safe, but the relaxed-RMP bound is mostly diagnostic unless ng-relaxed pricing
+closure is proven.
+
+| Instance | Variant | Status | UB | LB | Gap | Relaxed columns in LB RMP | Relaxed certificate? | Certified? |
+|---|---|---:|---:|---:|---:|---:|---|---|
+| V4 smoke | exact-label frontier | optimal | 0 | 0 | 0 | 0 | n/a | yes |
+| V4 smoke | two-track hybrid frontier | optimal | 0 | 0 | 0 | 0 | false | yes |
+| V12 M2 average | focus exact-label 300s | not closed | 0.780792889928 | 0.712948394993 | 0.086891793983 | 0 | false | no |
+| V12 M2 average | focus two-track 300s | not closed | 0.780792889928 | 0.712948394993 | 0.086891793983 | 0 | false | no |
+| V12 M2 average | full exact-label 300s | not closed | 0.780792889928 | 0.684003547210 | 0.123963889477 | 0 | false | no |
+| V12 M2 average | full two-track 300s | not closed | 0.780792889928 | 0.710571053706 | 0.089939723334 | 0 | false | no |
+| V12 M1 average | full exact-label 300s | not closed | 0.386764365884 | 0.337454471060 | 0.127492337626 | 0 | false | no |
+| V12 M1 average | full two-track 300s | not closed | 0.386764365884 | 0.337666891430 | 0.126943152007 | 0 | false | no |
+
+| Scale | Variant | Status | UB | LB | Scope | Notes |
+|---|---|---:|---:|---:|---|---|
+| V20 generated | two-track frontier 300s | not closed | 1.13623075045 | 0.372692167178 | incomplete BPC | no certificate |
+| V50 generated | relaxed-RMP diagnostic 300s | diagnostic complete | 3.25947584043 | 0 | diagnostic | movement-projection LB rejected when it exceeded verified UB |
+| V100 generated | relaxed-RMP diagnostic 300s | diagnostic complete | 6.62899864046 | 0 | diagnostic | movement-projection LB rejected when it exceeded verified UB |
+
+The smoke diagnostics confirmed that a synthetic relaxed column is excluded
+from route-pool incumbent construction and from route export. No access
+violation, segmentation fault, `bad_alloc`, out-of-memory, ASan, or fatal
+exception signature was found in the round-fourteen logs. No new
+original-problem certificate was obtained beyond V4 smoke. Plain CPLEX was
+skipped. Raw artifacts are stored in `results/optimization_update_round14/`.

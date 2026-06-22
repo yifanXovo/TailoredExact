@@ -843,3 +843,53 @@ incumbent only after the independent verifier checks route feasibility, station
 capacity, load trajectories, duration, final inventories, Gini, penalty, and
 objective. Rejected external files do not affect bounds.
 
+## Round 14: Two-Track Relaxed Route-Load BPC
+
+### Two-Track Column Architecture
+
+Each route-load column now records whether it is an `elementary_feasible`
+original column or an `ng_relaxed_lower_bound` column. Elementary columns may
+be used for route reconstruction, route-pool incumbents, exported route plans,
+and upper bounds. Relaxed columns have `can_be_used_for_incumbent=false` and
+are lower-bound-only. Dominance keys include the column kind, so a relaxed
+projection cannot replace an elementary representative with the same vehicle,
+station set, and net operation vector.
+
+The elementary column space is contained in the ng-relaxed route-load column
+space. For minimization, a master problem over a superset of original columns
+is a relaxation and its optimum is a lower bound, provided the pricing problem
+for that relaxed space is closed. The current implementation uses a
+conservative safe partial form: relaxed RMP columns are created only from
+verified elementary projections, while non-elementary relaxed routes are
+rejected until their net projection and station-capacity semantics are
+certified.
+
+### Relaxed-ng RMP Lower Bound
+
+In `--rmp-column-space ng-relaxed` or `two-track`, the lower-bound RMP may
+include elementary columns and relaxed lower-bound columns. Feasible incumbent
+construction still filters to elementary columns only. A relaxed-RMP interval
+bound can fathom an interval only when the relaxed RMP is solved and
+ng-relaxed pricing proves that no negative reduced-cost relaxed column remains
+for the chosen relaxation. If relaxed pricing is incomplete, the relaxed RMP
+objective is diagnostic only and cannot be used as a certificate basis.
+
+### ng-Relaxed Pricing Closure
+
+The implementation distinguishes `elementary_pricing_closed`,
+`ng_relaxed_pricing_closed`, and `dssr_exact_elementary_closed`. Elementary
+exact pricing is not required when a closed relaxed RMP lower bound already
+fathoms an interval, because the relaxed RMP is a valid lower-bound
+relaxation. However, closure of the chosen relaxed pricing problem is required.
+Time limits, negative relaxed reduced cost, incomplete DSSR, or missing closure
+status leave the interval unresolved unless a separate valid non-pricing bound
+fathoms it.
+
+### Incumbent Safety
+
+Relaxed columns are not feasible route plans. The route-pool master excludes
+them at insertion and selection, route export refuses to expand them into
+operations, and interval candidates using relaxed columns cannot be accepted
+as incumbents. Therefore relaxed columns may improve only lower-bound RMP
+diagnostics; they never provide an upper bound.
+

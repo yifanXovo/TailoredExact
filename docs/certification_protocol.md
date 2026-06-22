@@ -444,3 +444,25 @@ All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `
 - External/HGA incumbents and converted incumbent files are upper bounds only
   after independent route verification. Malformed or unverifiable files must be
   rejected without changing the incumbent.
+
+## 2026-06-22 Round-14 Certificate Warnings
+
+- Two-track relaxed columns are lower-bound-only unless
+  `column_kind=elementary_feasible` and `can_be_used_for_incumbent=true`.
+  Relaxed columns must not appear in exported route plans, incumbent masters,
+  or interval integer candidates.
+- A relaxed-ng RMP lower bound can fathom an interval only when
+  `relaxed_rmp_certificate_valid=true`, which requires the relaxed RMP solve
+  and closed ng-relaxed pricing for the chosen relaxation. Incomplete DSSR or
+  negative relaxed reduced cost makes the relaxed RMP diagnostic only.
+- Elementary exact pricing closure is not required for an interval already
+  fathomed by a valid closed relaxed-ng lower bound, but the result must state
+  `interval_certificate_basis=relaxed_ng_route_rmp_bound` or an equivalent
+  basis and must not label the interval as elementary-pricing closed.
+- Conservative relaxed columns derived from verified elementary projections are
+  safe for lower-bound diagnostics, but non-elementary relaxed routes remain
+  rejected until projection feasibility is proven. They cannot be incumbents.
+- Large-instance relaxed-RMP rows are diagnostics unless relaxed pricing closes
+  and all other full certificate requirements hold. If any computed large lower
+  bound exceeds a verified incumbent upper bound, it is rejected as invalid
+  evidence and must not update the top-level lower bound.

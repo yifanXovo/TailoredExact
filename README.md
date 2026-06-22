@@ -240,3 +240,19 @@ build\ExactEBRP.exe --method incumbent-import-test --input reference\generated\r
 Hybrid/ng-DSSR and stabilized duals are column-discovery tools unless DSSR
 exactness or true-dual final pricing verification completes. V50/V100 rows are
 diagnostics unless the full certificate protocol closes.
+
+Round-fourteen two-track relaxed route-load examples:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 300 --pricing-engine hybrid --column-tracks two-track --relaxed-columns-in-rmp true --relaxed-columns-max-per-pricing 8 --rmp-column-space two-track --dssr-close-relaxed-pricing true --dssr-final-exact true --progress-log results\optimization_update_round14\raw\progress_v12_m2_full_twotrack_300s.csv --out results\optimization_update_round14\raw\v12_m2_full_twotrack_300s.json
+
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-focus-only true --frontier-focus-range 0.489218,0.512514 --pricing-engine hybrid --column-tracks two-track --relaxed-columns-in-rmp true --rmp-column-space two-track --dssr-close-relaxed-pricing true --out results\optimization_update_round14\raw\v12_m2_focus_twotrack_300s.json
+
+build\ExactEBRP.exe --method large-relaxed-rmp-test --input reference\generated\regen_V100_M5_average.txt --lambda 0.15 --T 3600 --large-instance-mode force --large-relaxed-rmp true --large-lb-mode movement-projection --pricing-engine hybrid --column-tracks two-track --relaxed-columns-in-rmp true --rmp-column-space two-track --out results\optimization_update_round14\raw\v100_relaxed_rmp_300s.json
+
+build\ExactEBRP.exe --method relaxed-column-incumbent-safety-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --column-tracks two-track --relaxed-columns-in-rmp true --out results\optimization_update_round14\raw\v4_relaxed-column-incumbent-safety-test.json
+```
+
+Relaxed columns are lower-bound-only. They are excluded from route-pool
+incumbents and exported route plans, and a relaxed RMP can support a
+certificate only after ng-relaxed pricing closes for the chosen relaxation.

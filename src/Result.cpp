@@ -444,6 +444,92 @@ std::string resultToJson(const SolveResult& result) {
         << result.labels_processed << ",\n";
     out << "  \"pricing_engine\": \""
         << jsonEscape(result.pricing_engine) << "\",\n";
+    out << "  \"column_tracks\": \""
+        << jsonEscape(result.column_tracks) << "\",\n";
+    out << "  \"elementary_columns_generated\": "
+        << result.elementary_columns_generated << ",\n";
+    out << "  \"elementary_columns_inserted\": "
+        << result.elementary_columns_inserted << ",\n";
+    out << "  \"relaxed_columns_generated\": "
+        << result.relaxed_columns_generated << ",\n";
+    out << "  \"relaxed_columns_inserted\": "
+        << result.relaxed_columns_inserted << ",\n";
+    out << "  \"relaxed_columns_rejected_projection\": "
+        << result.relaxed_columns_rejected_projection << ",\n";
+    out << "  \"relaxed_columns_rejected_infeasible_projection\": "
+        << result.relaxed_columns_rejected_infeasible_projection << ",\n";
+    out << "  \"relaxed_columns_used_in_lb_rmp\": "
+        << result.relaxed_columns_used_in_lb_rmp << ",\n";
+    out << "  \"relaxed_columns_used_in_incumbent\": "
+        << result.relaxed_columns_used_in_incumbent << ",\n";
+    out << "  \"rmp_column_space\": \""
+        << jsonEscape(result.rmp_column_space) << "\",\n";
+    out << "  \"relaxed_rmp_enabled\": "
+        << (result.relaxed_rmp_enabled ? "true" : "false") << ",\n";
+    out << "  \"relaxed_rmp_objective\": "
+        << result.relaxed_rmp_objective << ",\n";
+    out << "  \"relaxed_rmp_lower_bound\": "
+        << result.relaxed_rmp_lower_bound << ",\n";
+    out << "  \"relaxed_rmp_columns\": "
+        << result.relaxed_rmp_columns << ",\n";
+    out << "  \"relaxed_rmp_iterations\": "
+        << result.relaxed_rmp_iterations << ",\n";
+    out << "  \"relaxed_rmp_pricing_closed\": "
+        << (result.relaxed_rmp_pricing_closed ? "true" : "false") << ",\n";
+    out << "  \"relaxed_rmp_best_reduced_cost\": "
+        << finiteOrZero(result.relaxed_rmp_best_reduced_cost) << ",\n";
+    out << "  \"relaxed_rmp_certificate_valid\": "
+        << (result.relaxed_rmp_certificate_valid ? "true" : "false") << ",\n";
+    out << "  \"relaxed_rmp_certificate_rejection_reason\": \""
+        << jsonEscape(result.relaxed_rmp_certificate_rejection_reason) << "\",\n";
+    out << "  \"elementary_pricing_closed\": "
+        << (result.elementary_pricing_closed ? "true" : "false") << ",\n";
+    out << "  \"ng_relaxed_pricing_closed\": "
+        << (result.ng_relaxed_pricing_closed ? "true" : "false") << ",\n";
+    out << "  \"dssr_exact_elementary_closed\": "
+        << (result.dssr_exact_elementary_closed ? "true" : "false") << ",\n";
+    out << "  \"ng_relaxed_best_reduced_cost\": "
+        << finiteOrZero(result.ng_relaxed_best_reduced_cost) << ",\n";
+    out << "  \"ng_relaxed_pricing_calls\": "
+        << result.ng_relaxed_pricing_calls << ",\n";
+    out << "  \"ng_relaxed_labels_processed\": "
+        << result.ng_relaxed_labels_processed << ",\n";
+    out << "  \"ng_relaxed_labels_pruned\": "
+        << result.ng_relaxed_labels_pruned << ",\n";
+    out << "  \"dssr_refinement_rounds_for_lb\": "
+        << result.dssr_refinement_rounds_for_lb << ",\n";
+    out << "  \"dssr_lb_before_refinement\": "
+        << result.dssr_lb_before_refinement << ",\n";
+    out << "  \"dssr_lb_after_refinement\": "
+        << result.dssr_lb_after_refinement << ",\n";
+    out << "  \"frontier_relaxed_rmp_intervals_attempted\": "
+        << result.frontier_relaxed_rmp_intervals_attempted << ",\n";
+    out << "  \"frontier_relaxed_rmp_intervals_closed\": "
+        << result.frontier_relaxed_rmp_intervals_closed << ",\n";
+    out << "  \"frontier_relaxed_rmp_intervals_fathomed\": "
+        << result.frontier_relaxed_rmp_intervals_fathomed << ",\n";
+    out << "  \"frontier_relaxed_rmp_time_seconds\": "
+        << result.frontier_relaxed_rmp_time_seconds << ",\n";
+    out << "  \"frontier_lb_improved_by_relaxed_rmp\": "
+        << result.frontier_lb_improved_by_relaxed_rmp << ",\n";
+    out << "  \"incumbent_relaxed_columns_rejected\": "
+        << result.incumbent_relaxed_columns_rejected << ",\n";
+    out << "  \"route_pool_relaxed_columns_excluded\": "
+        << result.route_pool_relaxed_columns_excluded << ",\n";
+    out << "  \"exported_relaxed_columns_excluded\": "
+        << result.exported_relaxed_columns_excluded << ",\n";
+    out << "  \"large_relaxed_rmp_enabled\": "
+        << (result.large_relaxed_rmp_enabled ? "true" : "false") << ",\n";
+    out << "  \"large_relaxed_rmp_lb\": "
+        << result.large_relaxed_rmp_lb << ",\n";
+    out << "  \"large_relaxed_rmp_closed\": "
+        << (result.large_relaxed_rmp_closed ? "true" : "false") << ",\n";
+    out << "  \"large_relaxed_rmp_scope\": \""
+        << jsonEscape(result.large_relaxed_rmp_scope) << "\",\n";
+    out << "  \"large_relaxed_rmp_columns\": "
+        << result.large_relaxed_rmp_columns << ",\n";
+    out << "  \"large_relaxed_rmp_time_seconds\": "
+        << result.large_relaxed_rmp_time_seconds << ",\n";
     out << "  \"bpc_pricing_engine_requested\": \""
         << jsonEscape(result.bpc_pricing_engine_requested) << "\",\n";
     out << "  \"bpc_pricing_engine_used\": \""
@@ -911,8 +997,14 @@ std::string resultToJson(const SolveResult& result) {
         << finiteOrZero(result.cg_final_true_pricing_rc) << ",\n";
     out << "  \"external_incumbent_used_in_large_run\": "
         << (result.external_incumbent_used_in_large_run ? "true" : "false") << ",\n";
+    out << "  \"external_incumbent_used\": "
+        << (result.external_incumbent_used ? "true" : "false") << ",\n";
     out << "  \"external_incumbent_effect_on_UB\": "
         << result.external_incumbent_effect_on_UB << ",\n";
+    out << "  \"external_incumbent_improved_UB\": "
+        << (result.external_incumbent_improved_UB ? "true" : "false") << ",\n";
+    out << "  \"external_incumbent_effect_on_frontier_range\": "
+        << result.external_incumbent_effect_on_frontier_range << ",\n";
     out << "  \"v12_m1_imported_focus_bounds\": "
         << (result.v12_m1_imported_focus_bounds ? "true" : "false") << ",\n";
     out << "  \"v12_m1_focus_bounds_accepted\": "

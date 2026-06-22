@@ -107,6 +107,17 @@ public:
             return runScalableNgDssrPricing(instance_, vehicle_, duals_, options_, start_);
         }
         result_.pricing_engine = "exact-label";
+        result_.column_tracks = lowerCopy(options_.column_tracks);
+        if (result_.column_tracks.empty() || result_.column_tracks == "auto") {
+            result_.column_tracks = "elementary-only";
+        }
+        result_.rmp_column_space = lowerCopy(options_.rmp_column_space);
+        if (result_.rmp_column_space.empty() || result_.rmp_column_space == "auto") {
+            result_.rmp_column_space = "elementary";
+        }
+        result_.relaxed_rmp_enabled = options_.relaxed_columns_in_rmp ||
+            result_.rmp_column_space == "ng-relaxed" ||
+            result_.rmp_column_space == "two-track";
         if (instance_.V > 30) {
             result_.complete = false;
             result_.dssr_stop_reason =
@@ -132,6 +143,12 @@ public:
                 result_.has_negative_column ? 1 : 0;
             result_.pricing_closure_status = result_.has_negative_column
                 ? "negative_columns_remaining" : "exact_no_negative";
+            result_.elementary_columns_generated = result_.generated_columns;
+            result_.elementary_columns_inserted =
+                static_cast<long long>(result_.negative_columns.size());
+            result_.elementary_pricing_closed =
+                result_.complete && !result_.has_negative_column;
+            result_.dssr_exact_elementary_closed = result_.elementary_pricing_closed;
             return result_;
         }
         for (int first = 1; first <= instance_.V; ++first) {
@@ -151,6 +168,12 @@ public:
             result_.has_negative_column ? 1 : 0;
         result_.pricing_closure_status = result_.has_negative_column
             ? "negative_columns_remaining" : "exact_no_negative";
+        result_.elementary_columns_generated = result_.generated_columns;
+        result_.elementary_columns_inserted =
+            static_cast<long long>(result_.negative_columns.size());
+        result_.elementary_pricing_closed =
+            result_.complete && !result_.has_negative_column;
+        result_.dssr_exact_elementary_closed = result_.elementary_pricing_closed;
         return result_;
     }
 
@@ -1063,6 +1086,19 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
     if (result.pricing_engine.empty() || result.pricing_engine == "auto") {
         result.pricing_engine = "hybrid";
     }
+    result.column_tracks = lowerCopy(options.column_tracks);
+    if (result.column_tracks.empty() || result.column_tracks == "auto") {
+        result.column_tracks = "two-track";
+    }
+    result.rmp_column_space = lowerCopy(options.rmp_column_space);
+    if (result.rmp_column_space.empty() || result.rmp_column_space == "auto") {
+        result.rmp_column_space =
+            result.column_tracks == "two-track" ? "two-track" : "elementary";
+    }
+    result.relaxed_rmp_enabled = options.relaxed_columns_in_rmp ||
+        result.column_tracks == "two-track" ||
+        result.rmp_column_space == "ng-relaxed" ||
+        result.rmp_column_space == "two-track";
     result.ng_size = std::max(1, options.ng_size);
     result.ng_neighborhood_mode = lowerCopy(options.ng_neighborhood_mode);
     if (result.ng_neighborhood_mode.empty()) result.ng_neighborhood_mode = "nearest";
@@ -1167,6 +1203,11 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
 
         column = RouteLoadColumn{};
         column.vehicle = vehicle;
+        column.column_kind = "elementary_feasible";
+        column.elementary = true;
+        column.relaxation_scope = "original_elementary";
+        column.can_be_used_for_incumbent = true;
+        column.can_be_used_for_lower_bound = true;
         column.mask = mask;
         column.station_set = set;
         column.path = path;
@@ -1224,6 +1265,18 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
         column.reduced_cost = rc;
         rc_out = rc;
         return true;
+    };
+
+    auto relaxedLowerBoundCopy = [&](const RouteLoadColumn& elementary) {
+        RouteLoadColumn relaxed = elementary;
+        relaxed.column_kind = "ng_relaxed_lower_bound";
+        relaxed.elementary = false;
+        relaxed.relaxation_scope = "ng_route_relaxation";
+        relaxed.can_be_used_for_incumbent = false;
+        relaxed.can_be_used_for_lower_bound = true;
+        relaxed.has_repeated_stations = false;
+        relaxed.repeated_station_count = 0;
+        return relaxed;
     };
 
     std::vector<std::pair<double, int>> ranked;
@@ -1284,6 +1337,7 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
                 ++result.route_states;
                 if (buildColumn(path, candidate, rc)) {
                     ++result.generated_columns;
+                    ++result.elementary_columns_generated;
                     if (!result.has_column || rc < result.best_reduced_cost - 1e-12) {
                         result.has_column = true;
                         result.best_reduced_cost = rc;
@@ -1295,7 +1349,20 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
                         result.has_negative_column = true;
                         if (static_cast<int>(result.negative_columns.size()) <
                             std::max(1, options.max_returned_columns)) {
-                            result.negative_columns.push_back(candidate);
+                            if (result.relaxed_rmp_enabled &&
+                                static_cast<int>(result.relaxed_negative_columns.size()) <
+                                    std::max(0, options.relaxed_columns_max_per_pricing)) {
+                                RouteLoadColumn relaxed =
+                                    relaxedLowerBoundCopy(candidate);
+                                result.relaxed_negative_columns.push_back(relaxed);
+                                result.negative_columns.push_back(relaxed);
+                                ++result.relaxed_columns_generated;
+                                ++result.relaxed_columns_inserted;
+                                ++result.relaxed_columns_used_in_lb_rmp;
+                            } else {
+                                result.negative_columns.push_back(candidate);
+                                ++result.elementary_columns_inserted;
+                            }
                         }
                     }
                 }
@@ -1370,11 +1437,14 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
             }
             if (!exact.negative_columns.empty()) {
                 result.negative_columns = exact.negative_columns;
+                result.relaxed_negative_columns.clear();
             }
         }
         result.route_states += exact.route_states;
         result.operation_states += exact.operation_states;
         result.generated_columns += exact.generated_columns;
+        result.elementary_columns_generated += exact.elementary_columns_generated;
+        result.elementary_columns_inserted += exact.elementary_columns_inserted;
     }
 
     result.has_negative_column = result.has_column &&
@@ -1382,6 +1452,24 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
     result.best_new_reduced_cost = result.best_reduced_cost;
     result.negative_new_projection_count =
         result.has_negative_column ? static_cast<long long>(result.negative_columns.size()) : 0;
+    result.elementary_pricing_closed =
+        result.complete && result.dssr_exact_closure_proved && !result.has_negative_column;
+    result.dssr_exact_elementary_closed = result.elementary_pricing_closed;
+    result.ng_relaxed_pricing_calls = result.dssr_rounds;
+    result.ng_relaxed_best_reduced_cost = result.best_reduced_cost;
+    result.ng_relaxed_labels_processed = result.route_states;
+    result.ng_relaxed_labels_pruned =
+        result.support_duration_pruned_labels +
+        result.support_duration_strong_pruned_labels;
+    result.dssr_refinement_rounds_for_lb = std::max(0, result.dssr_rounds - 1);
+    result.dssr_lb_before_refinement = 0.0;
+    result.dssr_lb_after_refinement = 0.0;
+    result.ng_relaxed_pricing_closed =
+        result.relaxed_rmp_enabled && result.complete &&
+        result.dssr_exact_closure_proved && !result.has_negative_column;
+    if (!result.relaxed_rmp_enabled) {
+        result.ng_relaxed_pricing_closed = false;
+    }
     result.pricing_closure_status =
         result.complete && result.dssr_exact_closure_proved && !result.has_negative_column
             ? "exact_no_negative"
