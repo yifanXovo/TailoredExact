@@ -39,7 +39,7 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
@@ -73,6 +73,10 @@ void usage() {
         << "[--pricing-engine exact-label|ng-dssr|hybrid] "
         << "[--ng-size <N>] [--ng-neighborhood-mode nearest|dual-aware|hybrid] "
         << "[--dssr-max-rounds <N>] [--dssr-expand-per-round <N>] [--dssr-time-limit <seconds>] [--dssr-final-exact true|false] "
+        << "[--column-tracks elementary-only|two-track|auto] [--relaxed-columns-in-rmp true|false] "
+        << "[--relaxed-columns-max-per-pricing <N>] [--rmp-column-space elementary|ng-relaxed|two-track|auto] "
+        << "[--dssr-close-relaxed-pricing true|false] [--dssr-relaxed-closure-time <seconds>] "
+        << "[--dssr-relaxed-closure-max-labels <N>] [--dssr-relaxed-closure-checkpoint <path>] [--large-relaxed-rmp true|false] "
         << "[--incumbent-source-name <name>] [--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>] "
         << "[--progress-log <path>] [--progress-interval-seconds <seconds>] "
         << "[--frontier-focus-only true|false] [--frontier-focus-interval-id auto|N] "
@@ -204,6 +208,15 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--dssr-expand-per-round") opt.dssr_expand_per_round = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--dssr-time-limit") opt.dssr_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--dssr-final-exact") opt.dssr_final_exact = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--column-tracks") opt.column_tracks = requireValue(i, argc, argv);
+        else if (arg == "--relaxed-columns-in-rmp") opt.relaxed_columns_in_rmp = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--relaxed-columns-max-per-pricing") opt.relaxed_columns_max_per_pricing = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--rmp-column-space") opt.rmp_column_space = requireValue(i, argc, argv);
+        else if (arg == "--dssr-close-relaxed-pricing") opt.dssr_close_relaxed_pricing = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--dssr-relaxed-closure-time") opt.dssr_relaxed_closure_time = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--dssr-relaxed-closure-max-labels") opt.dssr_relaxed_closure_max_labels = std::stoll(requireValue(i, argc, argv));
+        else if (arg == "--dssr-relaxed-closure-checkpoint") opt.dssr_relaxed_closure_checkpoint = requireValue(i, argc, argv);
+        else if (arg == "--large-relaxed-rmp") opt.large_relaxed_rmp = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--incumbent-source-name") opt.incumbent_source_name = requireValue(i, argc, argv);
         else if (arg == "--inventory-probe-max-v") opt.inventory_probe_max_v = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--inventory-probe-seconds") opt.inventory_probe_seconds = std::stod(requireValue(i, argc, argv));
@@ -319,6 +332,26 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.dssr_max_rounds < 1) opt.dssr_max_rounds = 1;
     if (opt.dssr_expand_per_round < 1) opt.dssr_expand_per_round = 1;
     if (opt.dssr_time_limit < 0.0) opt.dssr_time_limit = 0.0;
+    std::transform(opt.column_tracks.begin(), opt.column_tracks.end(),
+                   opt.column_tracks.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    if (opt.column_tracks != "elementary-only" &&
+        opt.column_tracks != "two-track") {
+        opt.column_tracks = "auto";
+    }
+    if (opt.relaxed_columns_max_per_pricing < 0) {
+        opt.relaxed_columns_max_per_pricing = 0;
+    }
+    std::transform(opt.rmp_column_space.begin(), opt.rmp_column_space.end(),
+                   opt.rmp_column_space.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    if (opt.rmp_column_space != "elementary" &&
+        opt.rmp_column_space != "ng-relaxed" &&
+        opt.rmp_column_space != "two-track") {
+        opt.rmp_column_space = "auto";
+    }
+    if (opt.dssr_relaxed_closure_time < 0.0) opt.dssr_relaxed_closure_time = 0.0;
+    if (opt.dssr_relaxed_closure_max_labels < 0) opt.dssr_relaxed_closure_max_labels = 0;
     if (opt.support_duration_max_subset_size < 0) opt.support_duration_max_subset_size = 0;
     if (opt.bpc_incumbent_seconds < 0.0) opt.bpc_incumbent_seconds = 0.0;
     if (opt.bpc_incumbent_rounds < 1) opt.bpc_incumbent_rounds = 1;
@@ -384,6 +417,28 @@ std::string resolvedPricingEngine(const ebrp::Instance& instance,
     return opt.pricing_engine;
 }
 
+std::string resolvedColumnTracks(const ebrp::Instance& instance,
+                                 const ebrp::SolveOptions& opt) {
+    if (opt.column_tracks == "two-track" ||
+        opt.column_tracks == "elementary-only") {
+        return opt.column_tracks;
+    }
+    const std::string engine = resolvedPricingEngine(instance, opt);
+    return (engine == "hybrid" || engine == "ng-dssr")
+        ? "two-track" : "elementary-only";
+}
+
+std::string resolvedRmpColumnSpace(const ebrp::Instance& instance,
+                                   const ebrp::SolveOptions& opt) {
+    if (opt.rmp_column_space == "elementary" ||
+        opt.rmp_column_space == "ng-relaxed" ||
+        opt.rmp_column_space == "two-track") {
+        return opt.rmp_column_space;
+    }
+    return resolvedColumnTracks(instance, opt) == "two-track"
+        ? "two-track" : "elementary";
+}
+
 bool largeInstanceModeActive(const ebrp::Instance& instance,
                              const ebrp::SolveOptions& opt) {
     if (opt.large_instance_mode == "force") return true;
@@ -405,6 +460,20 @@ void applyPricingOptionsFromSolve(const ebrp::Instance& instance,
     pricing.cg_dual_stabilization = opt.cg_dual_stabilization;
     pricing.cg_dual_smoothing_alpha = opt.cg_dual_smoothing_alpha;
     pricing.cg_dual_box_radius = opt.cg_dual_box_radius;
+    pricing.column_tracks = resolvedColumnTracks(instance, opt);
+    pricing.rmp_column_space = resolvedRmpColumnSpace(instance, opt);
+    pricing.relaxed_columns_in_rmp = opt.relaxed_columns_in_rmp ||
+        pricing.column_tracks == "two-track" ||
+        pricing.rmp_column_space == "ng-relaxed" ||
+        pricing.rmp_column_space == "two-track";
+    pricing.relaxed_columns_max_per_pricing =
+        opt.relaxed_columns_max_per_pricing;
+    pricing.dssr_close_relaxed_pricing = opt.dssr_close_relaxed_pricing;
+    pricing.dssr_relaxed_closure_time = opt.dssr_relaxed_closure_time;
+    pricing.dssr_relaxed_closure_max_labels =
+        opt.dssr_relaxed_closure_max_labels;
+    pricing.dssr_relaxed_closure_checkpoint =
+        opt.dssr_relaxed_closure_checkpoint;
 }
 
 void initializeScalabilityFields(const ebrp::Instance& instance,
@@ -417,6 +486,13 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
     }
     result.station_set_backend = ebrp::stationSetBackendName(instance.V);
     result.pricing_engine = resolvedPricingEngine(instance, opt);
+    result.column_tracks = resolvedColumnTracks(instance, opt);
+    result.rmp_column_space = resolvedRmpColumnSpace(instance, opt);
+    result.relaxed_rmp_enabled = opt.relaxed_columns_in_rmp ||
+        result.column_tracks == "two-track" ||
+        result.rmp_column_space == "ng-relaxed" ||
+        result.rmp_column_space == "two-track";
+    result.large_relaxed_rmp_enabled = opt.large_relaxed_rmp;
     if (result.large_lb_mode.empty() || result.large_lb_mode == "none") {
         result.large_lb_mode = opt.large_lb_mode;
     }
@@ -445,6 +521,14 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
 void applyLargeInstanceLowerBound(const ebrp::Instance& instance,
                                   const ebrp::SolveOptions& opt,
                                   ebrp::SolveResult& result) {
+    if (opt.large_relaxed_rmp) {
+        result.large_relaxed_rmp_enabled = true;
+        result.large_relaxed_rmp_scope = "diagnostic_relaxed_ng_rmp_until_pricing_closes";
+        result.large_relaxed_rmp_closed = false;
+        result.large_relaxed_rmp_lb = std::max(result.large_relaxed_rmp_lb,
+                                               result.relaxed_rmp_lower_bound);
+        result.large_relaxed_rmp_columns = result.relaxed_rmp_columns;
+    }
     std::string mode = opt.large_lb_mode;
     if (mode == "auto") {
         mode = instance.V > 32 ? "movement-projection" : "inventory-only";
@@ -478,7 +562,18 @@ void applyLargeInstanceLowerBound(const ebrp::Instance& instance,
             "global");
     result.large_lb_time_seconds = std::chrono::duration<double>(
         std::chrono::steady_clock::now() - lb_start).count();
-    if (projection.valid) {
+    if (projection.valid &&
+        result.upper_bound > 0.0 &&
+        projection.objective_lower_bound > result.upper_bound + 1e-7) {
+        result.large_lb_value = projection.objective_lower_bound;
+        result.large_lb_valid_global = false;
+        result.large_lb_scope = "invalid";
+        result.large_lb_rejection_reason =
+            "projection_bound_exceeds_verified_incumbent_ub";
+        result.notes.push_back("large-instance lower-bound fallback rejected: computed bound "
+            + std::to_string(projection.objective_lower_bound)
+            + " exceeds verified incumbent UB " + std::to_string(result.upper_bound));
+    } else if (projection.valid) {
         result.large_lb_value = projection.objective_lower_bound;
         result.large_lb_valid_global = true;
         result.large_lb_scope = "global";
@@ -505,6 +600,42 @@ void mergePricingStats(const ebrp::PricingResult& priced,
     result.pricing_calls += 1;
     result.route_pool_columns_exported_from_pricing +=
         priced.generated_columns;
+    if (!priced.column_tracks.empty()) result.column_tracks = priced.column_tracks;
+    if (!priced.rmp_column_space.empty()) result.rmp_column_space = priced.rmp_column_space;
+    result.elementary_columns_generated += priced.elementary_columns_generated;
+    result.elementary_columns_inserted += priced.elementary_columns_inserted;
+    result.relaxed_columns_generated += priced.relaxed_columns_generated;
+    result.relaxed_columns_inserted += priced.relaxed_columns_inserted;
+    result.relaxed_columns_rejected_projection +=
+        priced.relaxed_columns_rejected_projection;
+    result.relaxed_columns_rejected_infeasible_projection +=
+        priced.relaxed_columns_rejected_infeasible_projection;
+    result.relaxed_columns_used_in_lb_rmp +=
+        priced.relaxed_columns_used_in_lb_rmp;
+    result.relaxed_columns_used_in_incumbent +=
+        priced.relaxed_columns_used_in_incumbent;
+    result.relaxed_rmp_enabled = result.relaxed_rmp_enabled ||
+        priced.relaxed_rmp_enabled;
+    result.elementary_pricing_closed =
+        result.elementary_pricing_closed || priced.elementary_pricing_closed;
+    result.ng_relaxed_pricing_closed =
+        result.ng_relaxed_pricing_closed || priced.ng_relaxed_pricing_closed;
+    result.dssr_exact_elementary_closed =
+        result.dssr_exact_elementary_closed || priced.dssr_exact_elementary_closed;
+    result.ng_relaxed_best_reduced_cost =
+        std::min(result.ng_relaxed_best_reduced_cost,
+                 priced.ng_relaxed_best_reduced_cost);
+    result.ng_relaxed_pricing_calls += priced.ng_relaxed_pricing_calls;
+    result.ng_relaxed_labels_processed += priced.ng_relaxed_labels_processed;
+    result.ng_relaxed_labels_pruned += priced.ng_relaxed_labels_pruned;
+    result.dssr_refinement_rounds_for_lb +=
+        priced.dssr_refinement_rounds_for_lb;
+    result.dssr_lb_before_refinement =
+        std::max(result.dssr_lb_before_refinement,
+                 priced.dssr_lb_before_refinement);
+    result.dssr_lb_after_refinement =
+        std::max(result.dssr_lb_after_refinement,
+                 priced.dssr_lb_after_refinement);
     result.pricing_engine = priced.pricing_engine.empty()
         ? result.pricing_engine : priced.pricing_engine;
     result.ng_size = std::max(result.ng_size, priced.ng_size);
@@ -624,6 +755,64 @@ void copyBpcPricingStats(const BpcResult& bpc,
     result.bpc_nodes_final_verifier_called += bpc.bpc_nodes_final_verifier_called;
     result.bpc_nodes_final_verifier_completed +=
         bpc.bpc_nodes_final_verifier_completed;
+    if (!bpc.column_tracks.empty()) result.column_tracks = bpc.column_tracks;
+    if (!bpc.rmp_column_space.empty()) result.rmp_column_space = bpc.rmp_column_space;
+    result.elementary_columns_generated += bpc.elementary_columns_generated;
+    result.elementary_columns_inserted += bpc.elementary_columns_inserted;
+    result.relaxed_columns_generated += bpc.relaxed_columns_generated;
+    result.relaxed_columns_inserted += bpc.relaxed_columns_inserted;
+    result.relaxed_columns_rejected_projection += bpc.relaxed_columns_rejected_projection;
+    result.relaxed_columns_rejected_infeasible_projection +=
+        bpc.relaxed_columns_rejected_infeasible_projection;
+    result.relaxed_columns_used_in_lb_rmp += bpc.relaxed_columns_used_in_lb_rmp;
+    result.relaxed_columns_used_in_incumbent += bpc.relaxed_columns_used_in_incumbent;
+    result.relaxed_rmp_enabled = result.relaxed_rmp_enabled || bpc.relaxed_rmp_enabled;
+    result.rmp_column_space = bpc.rmp_column_space.empty()
+        ? result.rmp_column_space : bpc.rmp_column_space;
+    result.relaxed_rmp_objective = std::max(result.relaxed_rmp_objective,
+                                            bpc.relaxed_rmp_objective);
+    result.relaxed_rmp_lower_bound = std::max(result.relaxed_rmp_lower_bound,
+                                              bpc.relaxed_rmp_lower_bound);
+    result.relaxed_rmp_columns += bpc.relaxed_rmp_columns;
+    result.relaxed_rmp_iterations += bpc.relaxed_rmp_iterations;
+    result.relaxed_rmp_pricing_closed =
+        result.relaxed_rmp_pricing_closed || bpc.relaxed_rmp_pricing_closed;
+    result.relaxed_rmp_best_reduced_cost =
+        std::min(result.relaxed_rmp_best_reduced_cost,
+                 bpc.relaxed_rmp_best_reduced_cost);
+    result.relaxed_rmp_certificate_valid =
+        result.relaxed_rmp_certificate_valid || bpc.relaxed_rmp_certificate_valid;
+    if (!bpc.relaxed_rmp_certificate_rejection_reason.empty()) {
+        result.relaxed_rmp_certificate_rejection_reason =
+            bpc.relaxed_rmp_certificate_rejection_reason;
+    }
+    result.elementary_pricing_closed =
+        result.elementary_pricing_closed || bpc.elementary_pricing_closed;
+    result.ng_relaxed_pricing_closed =
+        result.ng_relaxed_pricing_closed || bpc.ng_relaxed_pricing_closed;
+    result.dssr_exact_elementary_closed =
+        result.dssr_exact_elementary_closed || bpc.dssr_exact_elementary_closed;
+    result.ng_relaxed_best_reduced_cost =
+        std::min(result.ng_relaxed_best_reduced_cost,
+                 bpc.ng_relaxed_best_reduced_cost);
+    result.ng_relaxed_pricing_calls += bpc.ng_relaxed_pricing_calls;
+    result.ng_relaxed_labels_processed += bpc.ng_relaxed_labels_processed;
+    result.ng_relaxed_labels_pruned += bpc.ng_relaxed_labels_pruned;
+    result.dssr_refinement_rounds_for_lb += bpc.dssr_refinement_rounds_for_lb;
+    result.dssr_lb_before_refinement =
+        std::max(result.dssr_lb_before_refinement, bpc.dssr_lb_before_refinement);
+    result.dssr_lb_after_refinement =
+        std::max(result.dssr_lb_after_refinement, bpc.dssr_lb_after_refinement);
+    result.frontier_relaxed_rmp_intervals_attempted +=
+        bpc.frontier_relaxed_rmp_intervals_attempted;
+    result.frontier_relaxed_rmp_intervals_closed +=
+        bpc.frontier_relaxed_rmp_intervals_closed;
+    result.frontier_relaxed_rmp_intervals_fathomed +=
+        bpc.frontier_relaxed_rmp_intervals_fathomed;
+    result.frontier_relaxed_rmp_time_seconds +=
+        bpc.frontier_relaxed_rmp_time_seconds;
+    result.frontier_lb_improved_by_relaxed_rmp +=
+        bpc.frontier_lb_improved_by_relaxed_rmp;
     result.ng_size = std::max(result.ng_size, bpc.ng_size);
     if (!bpc.ng_neighborhood_mode.empty()) {
         result.ng_neighborhood_mode = bpc.ng_neighborhood_mode;
@@ -1612,6 +1801,12 @@ ebrp::RoutePlan routeFromColumn(const ebrp::RouteLoadColumn& column) {
     ebrp::RoutePlan route;
     route.vehicle = column.vehicle;
     route.nodes.push_back(0);
+    if (!column.can_be_used_for_incumbent ||
+        column.column_kind == "ng_relaxed_lower_bound" ||
+        !column.elementary) {
+        route.nodes.push_back(0);
+        return route;
+    }
     for (int station : column.path) {
         route.nodes.push_back(station);
         ebrp::StopOperation op;
@@ -1631,6 +1826,68 @@ std::vector<ebrp::RoutePlan> emptyRouteSet(const ebrp::Instance& instance) {
         routes[k].nodes = {0, 0};
     }
     return routes;
+}
+
+ebrp::RouteLoadColumn makeDiagnosticRelaxedColumn(const ebrp::Instance& instance) {
+    ebrp::RouteLoadColumn col;
+    col.vehicle = 0;
+    col.column_kind = "ng_relaxed_lower_bound";
+    col.elementary = false;
+    col.relaxation_scope = "ng_route_relaxation";
+    col.can_be_used_for_incumbent = false;
+    col.can_be_used_for_lower_bound = true;
+    col.station_set.reset(instance.V);
+    col.q.assign(instance.V + 1, 0);
+    if (instance.V >= 1) {
+        col.path.push_back(1);
+        col.station_set.add(1);
+        col.mask = 1;
+        col.q[1] = std::min(1, std::max(0, instance.initial[1]));
+        if (col.q[1] == 0) col.q[1] = 1;
+    }
+    col.pickup = 1;
+    col.travel = instance.V >= 1 ? instance.dist[0][1] + instance.dist[1][0] : 0.0;
+    col.duration = col.travel + instance.pickup_time + instance.drop_time;
+    col.reduced_cost = -1.0;
+    return col;
+}
+
+ebrp::SolveResult solveTwoTrackColumnDiagnostic(const ebrp::Instance& instance,
+                                                const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "two-track-column-test";
+    result.status = "diagnostic_complete";
+    result.certificate = "diagnostic only: verifies elementary/relaxed column metadata split";
+    result.certificate_scope = "two_track_column_diagnostic";
+    initializeScalabilityFields(instance, opt, result);
+    ebrp::RouteLoadColumn relaxed = makeDiagnosticRelaxedColumn(instance);
+    result.column_tracks = "two-track";
+    result.rmp_column_space = "two-track";
+    result.relaxed_columns_generated = 1;
+    result.relaxed_columns_used_in_lb_rmp = relaxed.can_be_used_for_lower_bound ? 1 : 0;
+    ebrp::RoutePlan exported = routeFromColumn(relaxed);
+    const bool export_empty = exported.nodes.size() == 2 && exported.operations.empty();
+    result.exported_relaxed_columns_excluded = export_empty ? 1 : 0;
+    result.relaxed_columns_used_in_incumbent = export_empty ? 0 : 1;
+    if (!relaxed.can_be_used_for_lower_bound || relaxed.can_be_used_for_incumbent ||
+        !export_empty) {
+        result.status = "diagnostic_failed";
+        result.notes.push_back("relaxed column metadata/export safety check failed");
+    }
+    result.routes = emptyRouteSet(instance);
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.final_inventory = result.verification.final_inventory;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.objective = result.verification.objective;
+    result.upper_bound = result.objective;
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
 }
 
 bool columnFromRoute(const ebrp::Instance& instance,
@@ -1709,6 +1966,7 @@ struct FrontierRouteColumnPool {
     long long raw = 0;
     long long removed_by_dominance = 0;
     long long dropped_by_cap = 0;
+    long long relaxed_excluded = 0;
     int max_columns_per_vehicle = 5000;
     bool keep_best_per_projection = true;
 
@@ -1760,6 +2018,12 @@ struct FrontierRouteColumnPool {
 
     bool addColumn(const ebrp::RouteLoadColumn& column) {
         ++raw;
+        if (!column.can_be_used_for_incumbent ||
+            column.column_kind == "ng_relaxed_lower_bound" ||
+            !column.elementary) {
+            ++relaxed_excluded;
+            return false;
+        }
         if (column.vehicle < 0 ||
             column.vehicle >= static_cast<int>(columns_by_vehicle.size()) ||
             (column.mask == 0 && column.station_set.empty()) ||
@@ -1868,6 +2132,11 @@ RoutePoolIncumbentMasterResult solveTrueObjectiveRouteColumnIncumbentMaster(
              ++c) {
             const ebrp::RouteLoadColumn& column =
                 pool.columns_by_vehicle[vehicle][c];
+            if (!column.can_be_used_for_incumbent ||
+                column.column_kind == "ng_relaxed_lower_bound" ||
+                !column.elementary) {
+                continue;
+            }
             if ((column.mask & used_mask) != 0) continue;
             if (full_mask != 0 && (column.mask & ~full_mask) != 0) continue;
             if (static_cast<int>(column.q.size()) <= instance.V) continue;
@@ -1899,6 +2168,134 @@ RoutePoolIncumbentMasterResult solveTrueObjectiveRouteColumnIncumbentMaster(
         out.routes = best_routes;
     }
     return out;
+}
+
+ebrp::SolveResult solveRelaxedColumnIncumbentSafetyDiagnostic(
+    const ebrp::Instance& instance,
+    const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "relaxed-column-incumbent-safety-test";
+    result.status = "diagnostic_complete";
+    result.certificate = "diagnostic only: relaxed lower-bound columns must not enter incumbent/export paths";
+    result.certificate_scope = "incumbent_safety_diagnostic";
+    initializeScalabilityFields(instance, opt, result);
+    FrontierRouteColumnPool pool(instance.M);
+    ebrp::RouteLoadColumn relaxed = makeDiagnosticRelaxedColumn(instance);
+    pool.addColumn(relaxed);
+    RoutePoolIncumbentMasterResult master =
+        solveTrueObjectiveRouteColumnIncumbentMaster(
+            instance, pool, opt.lambda, "relaxed_column_safety");
+    result.relaxed_columns_generated = 1;
+    result.route_pool_relaxed_columns_excluded = pool.relaxed_excluded;
+    result.incumbent_relaxed_columns_rejected = 1;
+    result.relaxed_columns_used_in_incumbent = 0;
+    if (pool.kept() != 0 || pool.relaxed_excluded != 1) {
+        result.status = "diagnostic_failed";
+        result.notes.push_back("relaxed column was not fully excluded from incumbent route pool");
+    } else if (master.found) {
+        result.notes.push_back("route-pool master found only the empty feasible incumbent after excluding the relaxed column");
+    }
+    result.routes = emptyRouteSet(instance);
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.final_inventory = result.verification.final_inventory;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.objective = result.verification.objective;
+    result.upper_bound = result.objective;
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
+ebrp::SolveResult solveRelaxedRmpDiagnostic(const ebrp::Instance& instance,
+                                            ebrp::SolveOptions opt) {
+    opt.pricing_engine = opt.pricing_engine == "auto" ? "hybrid" : opt.pricing_engine;
+    opt.column_tracks = "two-track";
+    opt.rmp_column_space = "two-track";
+    opt.relaxed_columns_in_rmp = true;
+    opt.dssr_close_relaxed_pricing = true;
+    ebrp::SolveResult result = solveGiniCapColumnGenerationDiagnostic(instance, opt);
+    result.method = "relaxed-rmp-test";
+    result.certificate_scope = "relaxed_rmp_diagnostic";
+    result.notes.push_back("relaxed-rmp-test: ng-relaxed columns are admitted only to the lower-bound RMP; certificate_valid requires ng-relaxed pricing closure");
+    return result;
+}
+
+ebrp::SolveResult solveRelaxedPricingClosureDiagnostic(
+    const ebrp::Instance& instance,
+    ebrp::SolveOptions opt) {
+    opt.pricing_engine = "hybrid";
+    opt.column_tracks = "two-track";
+    opt.rmp_column_space = "two-track";
+    opt.relaxed_columns_in_rmp = true;
+    opt.dssr_final_exact = instance.V <= 16;
+    ebrp::SolveResult result = solvePricingDiagnostic(instance, opt);
+    result.method = "relaxed-pricing-closure-test";
+    result.certificate_scope = "pricing_closure_diagnostic";
+    result.notes.push_back("relaxed-pricing-closure-test: relaxed pricing closure is true only when ng/DSSR or exact final verification completes under true duals");
+    return result;
+}
+
+ebrp::SolveResult solveLargeRelaxedRmpDiagnostic(
+    const ebrp::Instance& instance,
+    ebrp::SolveOptions opt) {
+    opt.pricing_engine = opt.pricing_engine == "auto" ? "hybrid" : opt.pricing_engine;
+    opt.column_tracks = "two-track";
+    opt.rmp_column_space = "two-track";
+    opt.relaxed_columns_in_rmp = true;
+    opt.large_relaxed_rmp = true;
+    if (opt.large_lb_mode == "none") opt.large_lb_mode = "movement-projection";
+    ebrp::SolveResult result = solvePricingDiagnostic(instance, opt);
+    result.method = "large-relaxed-rmp-test";
+    result.status = "diagnostic_complete";
+    result.certificate_scope = "large_relaxed_rmp_diagnostic";
+    result.routes = emptyRouteSet(instance);
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.final_inventory = result.verification.final_inventory;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.objective = result.verification.objective;
+    result.upper_bound = result.objective;
+    applyLargeInstanceLowerBound(instance, opt, result);
+    result.lower_bound = result.large_lb_valid_global ? result.large_lb_value : 0.0;
+    result.gap = result.upper_bound > 1e-12
+        ? std::max(0.0, (result.upper_bound - result.lower_bound) /
+                         std::fabs(result.upper_bound))
+        : 0.0;
+    result.large_relaxed_rmp_enabled = true;
+    result.large_relaxed_rmp_lb =
+        std::max(result.large_relaxed_rmp_lb, result.large_lb_value);
+    result.large_relaxed_rmp_closed = result.ng_relaxed_pricing_closed;
+    result.large_relaxed_rmp_scope = result.large_relaxed_rmp_closed
+        ? "closed_ng_relaxed_pricing_bound"
+        : "diagnostic_incomplete_ng_relaxed_pricing";
+    result.large_relaxed_rmp_columns = result.relaxed_columns_used_in_lb_rmp;
+    result.notes.push_back("large-relaxed-rmp-test: all-subset mask relaxations remain disabled for large V; relaxed RMP rows are diagnostic unless ng-relaxed pricing closes");
+    if (!opt.progress_log_path.empty()) {
+        try {
+            std::filesystem::path progress_path(opt.progress_log_path);
+            if (!progress_path.parent_path().empty()) {
+                std::filesystem::create_directories(progress_path.parent_path());
+            }
+            std::ofstream progress(progress_path, std::ios::out | std::ios::trunc);
+            progress << "elapsed_seconds,incumbent_UB,global_LB,gap,"
+                     << "unresolved_intervals,columns,pricing_engine,"
+                     << "large_relaxed_rmp_scope\n";
+            progress << "0," << result.upper_bound << "," << result.lower_bound
+                     << "," << result.gap << ",0," << result.columns << ","
+                     << result.pricing_engine << "," << result.large_relaxed_rmp_scope
+                     << "\n";
+            result.progress_log_path = opt.progress_log_path;
+            result.progress_checkpoints_written = 1;
+        } catch (const std::exception& ex) {
+            result.notes.push_back(std::string("failed to write large relaxed-RMP progress log: ") + ex.what());
+        }
+    }
+    return result;
 }
 
 double objectiveForInventory(const ebrp::Instance& instance,
@@ -5096,7 +5493,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         + ", frontier_iterative_max_rounds=" + std::to_string(opt.frontier_iterative_max_rounds)
         + ", frontier_iterative_round_time=" + std::to_string(opt.frontier_iterative_round_time)
         + ", pricing_final_verifier=" + std::string(opt.pricing_final_verifier ? "true" : "false")
-        + ", pricing_verifier_mode=" + opt.pricing_verifier_mode);
+        + ", pricing_verifier_mode=" + opt.pricing_verifier_mode
+        + ", column_tracks=" + result.column_tracks
+        + ", rmp_column_space=" + result.rmp_column_space
+        + ", relaxed_columns_in_rmp=" + std::string(result.relaxed_rmp_enabled ? "true" : "false")
+        + ", large_relaxed_rmp=" + std::string(opt.large_relaxed_rmp ? "true" : "false"));
     {
         const unsigned hw = std::thread::hardware_concurrency();
         std::ostringstream thread_note;
@@ -5225,6 +5626,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             frontier_route_pool.removed_by_dominance;
         result.route_pool_columns_dropped_by_cap =
             frontier_route_pool.dropped_by_cap;
+        result.route_pool_relaxed_columns_excluded =
+            frontier_route_pool.relaxed_excluded;
+        result.exported_relaxed_columns_excluded =
+            frontier_route_pool.relaxed_excluded;
     };
     auto addRoutesToFrontierPool = [&](const std::vector<ebrp::RoutePlan>& routes,
                                        const std::string& source) {
@@ -9503,6 +9908,16 @@ int main(int argc, char** argv) {
                     opt.cg_dual_stabilization == "none" ? "smooth" : opt.cg_dual_stabilization));
             } else if (opt.method == "bpc-hybrid-pricing-test") {
                 results.push_back(solveBpcHybridPricingDiagnostic(instance, opt));
+            } else if (opt.method == "two-track-column-test") {
+                results.push_back(solveTwoTrackColumnDiagnostic(instance, opt));
+            } else if (opt.method == "relaxed-rmp-test") {
+                results.push_back(solveRelaxedRmpDiagnostic(instance, opt));
+            } else if (opt.method == "relaxed-pricing-closure-test") {
+                results.push_back(solveRelaxedPricingClosureDiagnostic(instance, opt));
+            } else if (opt.method == "relaxed-column-incumbent-safety-test") {
+                results.push_back(solveRelaxedColumnIncumbentSafetyDiagnostic(instance, opt));
+            } else if (opt.method == "large-relaxed-rmp-test") {
+                results.push_back(solveLargeRelaxedRmpDiagnostic(instance, opt));
             } else if (opt.method == "external-incumbent-test") {
                 results.push_back(solveExternalIncumbentDiagnostic(instance, opt));
             } else if (opt.method == "large-instance-mode-test") {

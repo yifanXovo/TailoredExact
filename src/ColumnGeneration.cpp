@@ -54,6 +54,19 @@ void initializeBpcPricingFields(ResultLike& result,
     result.ng_neighborhood_mode = options.ng_neighborhood_mode;
     result.cg_stabilization_mode = lowerPricingString(options.cg_dual_stabilization);
     if (result.cg_stabilization_mode.empty()) result.cg_stabilization_mode = "none";
+    result.column_tracks = lowerPricingString(options.column_tracks);
+    if (result.column_tracks.empty() || result.column_tracks == "auto") {
+        result.column_tracks = "elementary-only";
+    }
+    result.rmp_column_space = lowerPricingString(options.rmp_column_space);
+    if (result.rmp_column_space.empty() || result.rmp_column_space == "auto") {
+        result.rmp_column_space =
+            result.column_tracks == "two-track" ? "two-track" : "elementary";
+    }
+    result.relaxed_rmp_enabled = options.relaxed_columns_in_rmp ||
+        result.column_tracks == "two-track" ||
+        result.rmp_column_space == "ng-relaxed" ||
+        result.rmp_column_space == "two-track";
 }
 
 template <typename ResultLike>
@@ -120,6 +133,36 @@ void accumulateBpcPricingStats(ResultLike& result,
         priced.cg_stabilization_false_negatives;
     result.cg_stabilization_time_seconds += priced.cg_stabilization_time_seconds;
     result.cg_final_true_pricing_rc = priced.cg_final_true_pricing_rc;
+    if (!priced.column_tracks.empty()) result.column_tracks = priced.column_tracks;
+    if (!priced.rmp_column_space.empty()) result.rmp_column_space = priced.rmp_column_space;
+    result.elementary_columns_generated += priced.elementary_columns_generated;
+    result.relaxed_columns_generated += priced.relaxed_columns_generated;
+    result.relaxed_columns_rejected_projection +=
+        priced.relaxed_columns_rejected_projection;
+    result.relaxed_columns_rejected_infeasible_projection +=
+        priced.relaxed_columns_rejected_infeasible_projection;
+    result.relaxed_columns_used_in_lb_rmp += priced.relaxed_columns_used_in_lb_rmp;
+    result.relaxed_columns_used_in_incumbent += priced.relaxed_columns_used_in_incumbent;
+    result.relaxed_rmp_enabled = result.relaxed_rmp_enabled || priced.relaxed_rmp_enabled;
+    result.elementary_pricing_closed =
+        result.elementary_pricing_closed || priced.elementary_pricing_closed;
+    result.ng_relaxed_pricing_closed =
+        result.ng_relaxed_pricing_closed || priced.ng_relaxed_pricing_closed;
+    result.dssr_exact_elementary_closed =
+        result.dssr_exact_elementary_closed || priced.dssr_exact_elementary_closed;
+    result.ng_relaxed_best_reduced_cost =
+        std::min(result.ng_relaxed_best_reduced_cost,
+                 priced.ng_relaxed_best_reduced_cost);
+    result.ng_relaxed_pricing_calls += priced.ng_relaxed_pricing_calls;
+    result.ng_relaxed_labels_processed += priced.ng_relaxed_labels_processed;
+    result.ng_relaxed_labels_pruned += priced.ng_relaxed_labels_pruned;
+    result.dssr_refinement_rounds_for_lb += priced.dssr_refinement_rounds_for_lb;
+    result.dssr_lb_before_refinement =
+        std::max(result.dssr_lb_before_refinement,
+                 priced.dssr_lb_before_refinement);
+    result.dssr_lb_after_refinement =
+        std::max(result.dssr_lb_after_refinement,
+                 priced.dssr_lb_after_refinement);
 }
 
 struct LpSolve {
@@ -1166,13 +1209,17 @@ std::vector<RoutePlan> routesFromSelection(
             ? selected_by_vehicle[k] : -1;
         if (col_idx >= 0 && col_idx < static_cast<int>(columns_by_vehicle[k].size())) {
             const RouteLoadColumn& col = columns_by_vehicle[k][col_idx];
-            for (int station : col.path) {
-                route.nodes.push_back(station);
-                StopOperation op;
-                op.station = station;
-                if (col.q[station] > 0) op.pickup = col.q[station];
-                if (col.q[station] < 0) op.drop = -col.q[station];
-                if (op.pickup > 0 || op.drop > 0) route.operations.push_back(op);
+            if (col.can_be_used_for_incumbent &&
+                col.elementary &&
+                col.column_kind != "ng_relaxed_lower_bound") {
+                for (int station : col.path) {
+                    route.nodes.push_back(station);
+                    StopOperation op;
+                    op.station = station;
+                    if (col.q[station] > 0) op.pickup = col.q[station];
+                    if (col.q[station] < 0) op.drop = -col.q[station];
+                    if (op.pickup > 0 || op.drop > 0) route.operations.push_back(op);
+                }
             }
         }
         route.nodes.push_back(0);
@@ -1441,7 +1488,11 @@ LeafReconstructionResult reconstructProjectedLeaf(
     for (int k = 0; k < instance.M; ++k) {
         candidate_indices[k].push_back(-1);
         for (int c = 0; c < static_cast<int>(columns_by_vehicle[k].size()); ++c) {
-            if (columnAllowedByBranch(columns_by_vehicle[k][c], branch)) {
+            const RouteLoadColumn& col = columns_by_vehicle[k][c];
+            if (col.can_be_used_for_incumbent &&
+                col.elementary &&
+                col.column_kind != "ng_relaxed_lower_bound" &&
+                columnAllowedByBranch(col, branch)) {
                 candidate_indices[k].push_back(c);
             }
         }
@@ -1719,6 +1770,53 @@ void addStats(GiniCapTreeResult& total, const GiniCapColumnGenerationResult& nod
         node.bpc_nodes_final_verifier_called;
     total.bpc_nodes_final_verifier_completed +=
         node.bpc_nodes_final_verifier_completed;
+    if (!node.column_tracks.empty()) total.column_tracks = node.column_tracks;
+    if (!node.rmp_column_space.empty()) total.rmp_column_space = node.rmp_column_space;
+    total.elementary_columns_generated += node.elementary_columns_generated;
+    total.elementary_columns_inserted += node.elementary_columns_inserted;
+    total.relaxed_columns_generated += node.relaxed_columns_generated;
+    total.relaxed_columns_inserted += node.relaxed_columns_inserted;
+    total.relaxed_columns_rejected_projection +=
+        node.relaxed_columns_rejected_projection;
+    total.relaxed_columns_rejected_infeasible_projection +=
+        node.relaxed_columns_rejected_infeasible_projection;
+    total.relaxed_columns_used_in_lb_rmp += node.relaxed_columns_used_in_lb_rmp;
+    total.relaxed_columns_used_in_incumbent += node.relaxed_columns_used_in_incumbent;
+    total.relaxed_rmp_enabled = total.relaxed_rmp_enabled || node.relaxed_rmp_enabled;
+    total.relaxed_rmp_objective = std::max(total.relaxed_rmp_objective,
+                                           node.relaxed_rmp_objective);
+    total.relaxed_rmp_lower_bound = std::max(total.relaxed_rmp_lower_bound,
+                                             node.relaxed_rmp_lower_bound);
+    total.relaxed_rmp_columns += node.relaxed_rmp_columns;
+    total.relaxed_rmp_iterations += node.relaxed_rmp_iterations;
+    total.relaxed_rmp_pricing_closed =
+        total.relaxed_rmp_pricing_closed || node.relaxed_rmp_pricing_closed;
+    total.relaxed_rmp_best_reduced_cost =
+        std::min(total.relaxed_rmp_best_reduced_cost,
+                 node.relaxed_rmp_best_reduced_cost);
+    total.relaxed_rmp_certificate_valid =
+        total.relaxed_rmp_certificate_valid || node.relaxed_rmp_certificate_valid;
+    if (!node.relaxed_rmp_certificate_rejection_reason.empty()) {
+        total.relaxed_rmp_certificate_rejection_reason =
+            node.relaxed_rmp_certificate_rejection_reason;
+    }
+    total.elementary_pricing_closed =
+        total.elementary_pricing_closed || node.elementary_pricing_closed;
+    total.ng_relaxed_pricing_closed =
+        total.ng_relaxed_pricing_closed || node.ng_relaxed_pricing_closed;
+    total.dssr_exact_elementary_closed =
+        total.dssr_exact_elementary_closed || node.dssr_exact_elementary_closed;
+    total.ng_relaxed_best_reduced_cost =
+        std::min(total.ng_relaxed_best_reduced_cost,
+                 node.ng_relaxed_best_reduced_cost);
+    total.ng_relaxed_pricing_calls += node.ng_relaxed_pricing_calls;
+    total.ng_relaxed_labels_processed += node.ng_relaxed_labels_processed;
+    total.ng_relaxed_labels_pruned += node.ng_relaxed_labels_pruned;
+    total.dssr_refinement_rounds_for_lb += node.dssr_refinement_rounds_for_lb;
+    total.dssr_lb_before_refinement =
+        std::max(total.dssr_lb_before_refinement, node.dssr_lb_before_refinement);
+    total.dssr_lb_after_refinement =
+        std::max(total.dssr_lb_after_refinement, node.dssr_lb_after_refinement);
     total.ng_size = std::max(total.ng_size, node.ng_size);
     if (!node.ng_neighborhood_mode.empty()) {
         total.ng_neighborhood_mode = node.ng_neighborhood_mode;
@@ -2028,6 +2126,27 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
             result.lp_lambda_penalty = lambda_penalty;
             result.fixed_cap_surrogate = use_combined_gini_lower_bound
                 ? lp.objective : bound_gamma + lp.objective;
+            long long relaxed_columns_in_pool = 0;
+            for (const auto& cols : result.columns_by_vehicle) {
+                for (const RouteLoadColumn& col : cols) {
+                    if ((!col.elementary ||
+                         col.column_kind == "ng_relaxed_lower_bound" ||
+                         !col.can_be_used_for_incumbent) &&
+                        columnAllowedByBranch(col, branch)) {
+                        ++relaxed_columns_in_pool;
+                    }
+                }
+            }
+            if (result.relaxed_rmp_enabled || relaxed_columns_in_pool > 0) {
+                result.relaxed_rmp_enabled = true;
+                result.relaxed_rmp_columns = relaxed_columns_in_pool;
+                result.relaxed_rmp_objective = result.fixed_cap_surrogate;
+                result.relaxed_rmp_lower_bound = result.fixed_cap_surrogate;
+                result.relaxed_rmp_iterations = result.iterations;
+                result.relaxed_rmp_certificate_valid = false;
+                result.relaxed_rmp_certificate_rejection_reason =
+                    "ng_relaxed_pricing_not_yet_closed";
+            }
         }
         captureColumnValues(instance, result.columns_by_vehicle, branch, lp,
                             result.flat_columns, result.z_values);
@@ -2417,6 +2536,14 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 }
                 negative_candidates.push_back(std::move(column));
             }
+            long long relaxed_candidates_seen = 0;
+            for (const RouteLoadColumn& column : negative_candidates) {
+                if (!column.elementary ||
+                    column.column_kind == "ng_relaxed_lower_bound" ||
+                    !column.can_be_used_for_incumbent) {
+                    ++relaxed_candidates_seen;
+                }
+            }
 
             if (!negative_candidates.empty()) {
                 for (const RouteLoadColumn& column : negative_candidates) {
@@ -2465,19 +2592,37 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 const int inserted_before =
                     static_cast<int>(result.columns_by_vehicle[k].size());
                 int inserted = 0;
+                int relaxed_inserted = 0;
+                int elementary_inserted = 0;
                 for (RouteLoadColumn& column : filtered) {
+                    if (!column.can_be_used_for_lower_bound) {
+                        ++result.relaxed_columns_rejected_projection;
+                        continue;
+                    }
                     if (hasColumn(result.columns_by_vehicle[k], column)) continue;
                     result.pricing_best_new_reduced_cost =
                         std::min(result.pricing_best_new_reduced_cost,
                                  column.reduced_cost);
+                    const bool relaxed_column =
+                        !column.elementary ||
+                        column.column_kind == "ng_relaxed_lower_bound" ||
+                        !column.can_be_used_for_incumbent;
                     result.columns_by_vehicle[k].push_back(std::move(column));
                     ++inserted;
+                    if (relaxed_column) ++relaxed_inserted;
+                    else ++elementary_inserted;
                 }
                 if (inserted > 0) {
                     added = true;
                     result.pricing_negative_columns_inserted += inserted;
                     result.pricing_new_negative_projections += inserted;
                     result.rmp_columns_inserted += inserted;
+                    result.elementary_columns_inserted += elementary_inserted;
+                    result.relaxed_columns_inserted += relaxed_inserted;
+                    result.relaxed_columns_used_in_lb_rmp += relaxed_inserted;
+                    result.relaxed_rmp_columns += relaxed_inserted;
+                    result.relaxed_rmp_enabled =
+                        result.relaxed_rmp_enabled || relaxed_inserted > 0;
                 } else {
                     duplicate_negative = true;
                     result.pricing_blocked_by_duplicate_projection = true;
@@ -2495,6 +2640,10 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                     + ", pool_before=" + std::to_string(inserted_before)
                     + ", pool_after="
                     + std::to_string(result.columns_by_vehicle[k].size())
+                    + ", relaxed_candidates_seen="
+                    + std::to_string(relaxed_candidates_seen)
+                    + ", relaxed_inserted_this_vehicle="
+                    + std::to_string(relaxed_inserted)
                     + ", dominated_total="
                     + std::to_string(result.pricing_negative_columns_dominated)
                     + ", mode=" + result.dominance_mode);
@@ -2502,6 +2651,18 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
         }
         result.best_pricing_reduced_cost = best_rc;
         result.pricing_best_reduced_cost_any = best_rc;
+        if (result.relaxed_rmp_enabled) {
+            result.relaxed_rmp_best_reduced_cost = best_rc;
+            result.relaxed_rmp_pricing_closed =
+                result.pricing_completed_exactly &&
+                result.ng_relaxed_pricing_closed && best_rc >= -1e-7;
+            result.relaxed_rmp_certificate_valid =
+                result.relaxed_rmp_pricing_closed;
+            result.relaxed_rmp_certificate_rejection_reason =
+                result.relaxed_rmp_certificate_valid
+                    ? "none"
+                    : "ng_relaxed_pricing_incomplete_or_negative_reduced_cost";
+        }
         if (!added) {
             if (phase_one_active) {
                 if (!duplicate_negative && best_rc >= -1e-7) {

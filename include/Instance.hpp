@@ -103,6 +103,15 @@ struct SolveOptions {
     std::string large_instance_mode = "auto";
     std::string pricing_engine = "auto";
     std::string large_lb_mode = "auto";
+    std::string column_tracks = "auto";
+    bool relaxed_columns_in_rmp = false;
+    int relaxed_columns_max_per_pricing = 8;
+    std::string rmp_column_space = "auto";
+    bool dssr_close_relaxed_pricing = false;
+    double dssr_relaxed_closure_time = 30.0;
+    long long dssr_relaxed_closure_max_labels = 0;
+    std::string dssr_relaxed_closure_checkpoint;
+    bool large_relaxed_rmp = false;
     int ng_size = 12;
     std::string ng_neighborhood_mode = "nearest";
     int dssr_max_rounds = 4;

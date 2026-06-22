@@ -72,7 +72,7 @@ std::string columnDominanceModeName(ColumnDominanceMode mode) {
 
 std::string projectionKey(const RouteLoadColumn& column) {
     std::ostringstream key;
-    key << column.vehicle << "|";
+    key << column.vehicle << "|" << column.column_kind << "|";
     if (!column.station_set.empty()) {
         key << "S:" << column.station_set.toKey();
     } else {
