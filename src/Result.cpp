@@ -462,6 +462,32 @@ std::string resultToJson(const SolveResult& result) {
         << result.relaxed_columns_used_in_lb_rmp << ",\n";
     out << "  \"relaxed_columns_used_in_incumbent\": "
         << result.relaxed_columns_used_in_incumbent << ",\n";
+    out << "  \"non_elementary_relaxed_routes_seen\": "
+        << result.non_elementary_relaxed_routes_seen << ",\n";
+    out << "  \"non_elementary_relaxed_columns_validated\": "
+        << result.non_elementary_relaxed_columns_validated << ",\n";
+    out << "  \"non_elementary_relaxed_columns_inserted\": "
+        << result.non_elementary_relaxed_columns_inserted << ",\n";
+    out << "  \"non_elementary_relaxed_columns_rejected\": "
+        << result.non_elementary_relaxed_columns_rejected << ",\n";
+    out << "  \"relaxed_projection_rejected_load\": "
+        << result.relaxed_projection_rejected_load << ",\n";
+    out << "  \"relaxed_projection_rejected_station_capacity\": "
+        << result.relaxed_projection_rejected_station_capacity << ",\n";
+    out << "  \"relaxed_projection_rejected_branch\": "
+        << result.relaxed_projection_rejected_branch << ",\n";
+    out << "  \"relaxed_projection_rejected_operation_mode\": "
+        << result.relaxed_projection_rejected_operation_mode << ",\n";
+    out << "  \"relaxed_projection_rejected_unsafe_cut\": "
+        << result.relaxed_projection_rejected_unsafe_cut << ",\n";
+    out << "  \"relaxed_projection_validation_time_seconds\": "
+        << result.relaxed_projection_validation_time_seconds << ",\n";
+    out << "  \"relaxed_columns_blocked_from_incumbent\": "
+        << result.relaxed_columns_blocked_from_incumbent << ",\n";
+    out << "  \"relaxed_columns_blocked_from_export\": "
+        << result.relaxed_columns_blocked_from_export << ",\n";
+    out << "  \"relaxed_columns_blocked_from_candidate_reconstruction\": "
+        << result.relaxed_columns_blocked_from_candidate_reconstruction << ",\n";
     out << "  \"rmp_column_space\": \""
         << jsonEscape(result.rmp_column_space) << "\",\n";
     out << "  \"relaxed_rmp_enabled\": "
@@ -490,6 +516,20 @@ std::string resultToJson(const SolveResult& result) {
         << (result.dssr_exact_elementary_closed ? "true" : "false") << ",\n";
     out << "  \"ng_relaxed_best_reduced_cost\": "
         << finiteOrZero(result.ng_relaxed_best_reduced_cost) << ",\n";
+    out << "  \"ng_relaxed_negative_routes_found\": "
+        << result.ng_relaxed_negative_routes_found << ",\n";
+    out << "  \"ng_relaxed_negative_columns_inserted\": "
+        << result.ng_relaxed_negative_columns_inserted << ",\n";
+    out << "  \"ng_relaxed_negative_routes_rejected\": "
+        << result.ng_relaxed_negative_routes_rejected << ",\n";
+    out << "  \"ng_relaxed_closure_labels_processed\": "
+        << result.ng_relaxed_closure_labels_processed << ",\n";
+    out << "  \"ng_relaxed_closure_labels_pruned\": "
+        << result.ng_relaxed_closure_labels_pruned << ",\n";
+    out << "  \"ng_relaxed_closure_time_seconds\": "
+        << result.ng_relaxed_closure_time_seconds << ",\n";
+    out << "  \"ng_relaxed_closure_stop_reason\": \""
+        << jsonEscape(result.ng_relaxed_closure_stop_reason) << "\",\n";
     out << "  \"ng_relaxed_pricing_calls\": "
         << result.ng_relaxed_pricing_calls << ",\n";
     out << "  \"ng_relaxed_labels_processed\": "
@@ -502,6 +542,20 @@ std::string resultToJson(const SolveResult& result) {
         << result.dssr_lb_before_refinement << ",\n";
     out << "  \"dssr_lb_after_refinement\": "
         << result.dssr_lb_after_refinement << ",\n";
+    out << "  \"relaxed_rmp_cg_iterations\": "
+        << result.relaxed_rmp_cg_iterations << ",\n";
+    out << "  \"relaxed_rmp_cg_columns_added\": "
+        << result.relaxed_rmp_cg_columns_added << ",\n";
+    out << "  \"relaxed_rmp_cg_final_best_rc\": "
+        << finiteOrZero(result.relaxed_rmp_cg_final_best_rc) << ",\n";
+    out << "  \"relaxed_rmp_cg_closed\": "
+        << (result.relaxed_rmp_cg_closed ? "true" : "false") << ",\n";
+    out << "  \"relaxed_rmp_cg_stop_reason\": \""
+        << jsonEscape(result.relaxed_rmp_cg_stop_reason) << "\",\n";
+    out << "  \"relaxed_rmp_lb_before_cg\": "
+        << result.relaxed_rmp_lb_before_cg << ",\n";
+    out << "  \"relaxed_rmp_lb_after_cg\": "
+        << result.relaxed_rmp_lb_after_cg << ",\n";
     out << "  \"frontier_relaxed_rmp_intervals_attempted\": "
         << result.frontier_relaxed_rmp_intervals_attempted << ",\n";
     out << "  \"frontier_relaxed_rmp_intervals_closed\": "
@@ -512,6 +566,16 @@ std::string resultToJson(const SolveResult& result) {
         << result.frontier_relaxed_rmp_time_seconds << ",\n";
     out << "  \"frontier_lb_improved_by_relaxed_rmp\": "
         << result.frontier_lb_improved_by_relaxed_rmp << ",\n";
+    out << "  \"frontier_relaxed_rmp_cg_intervals_attempted\": "
+        << result.frontier_relaxed_rmp_cg_intervals_attempted << ",\n";
+    out << "  \"frontier_relaxed_rmp_cg_intervals_closed\": "
+        << result.frontier_relaxed_rmp_cg_intervals_closed << ",\n";
+    out << "  \"frontier_relaxed_rmp_cg_intervals_fathomed\": "
+        << result.frontier_relaxed_rmp_cg_intervals_fathomed << ",\n";
+    out << "  \"frontier_relaxed_rmp_cg_lb_improvements\": "
+        << result.frontier_relaxed_rmp_cg_lb_improvements << ",\n";
+    out << "  \"frontier_relaxed_rmp_cg_time_seconds\": "
+        << result.frontier_relaxed_rmp_cg_time_seconds << ",\n";
     out << "  \"incumbent_relaxed_columns_rejected\": "
         << result.incumbent_relaxed_columns_rejected << ",\n";
     out << "  \"route_pool_relaxed_columns_excluded\": "
@@ -530,6 +594,22 @@ std::string resultToJson(const SolveResult& result) {
         << result.large_relaxed_rmp_columns << ",\n";
     out << "  \"large_relaxed_rmp_time_seconds\": "
         << result.large_relaxed_rmp_time_seconds << ",\n";
+    out << "  \"large_relaxed_rmp_cg_enabled\": "
+        << (result.large_relaxed_rmp_cg_enabled ? "true" : "false") << ",\n";
+    out << "  \"large_relaxed_rmp_columns_generated\": "
+        << result.large_relaxed_rmp_columns_generated << ",\n";
+    out << "  \"large_relaxed_rmp_columns_inserted\": "
+        << result.large_relaxed_rmp_columns_inserted << ",\n";
+    out << "  \"large_relaxed_rmp_diagnostic_lb\": "
+        << result.large_relaxed_rmp_diagnostic_lb << ",\n";
+    out << "  \"large_relaxed_rmp_valid_lb\": "
+        << result.large_relaxed_rmp_valid_lb << ",\n";
+    out << "  \"large_relaxed_rmp_pricing_closed\": "
+        << (result.large_relaxed_rmp_pricing_closed ? "true" : "false") << ",\n";
+    out << "  \"large_relaxed_rmp_closure_gap\": "
+        << result.large_relaxed_rmp_closure_gap << ",\n";
+    out << "  \"large_relaxed_rmp_stop_reason\": \""
+        << jsonEscape(result.large_relaxed_rmp_stop_reason) << "\",\n";
     out << "  \"bpc_pricing_engine_requested\": \""
         << jsonEscape(result.bpc_pricing_engine_requested) << "\",\n";
     out << "  \"bpc_pricing_engine_used\": \""

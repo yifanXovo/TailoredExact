@@ -1175,6 +1175,193 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
         return true;
     };
 
+    struct RelaxedProjectionValidation {
+        bool valid = false;
+        std::string rejection_reason;
+        RouteLoadColumn column;
+        int pickup_total = 0;
+        int drop_total = 0;
+        int depot_unload = 0;
+        bool load_feasible = false;
+        bool station_final_capacity_feasible = false;
+        bool branch_projection_feasible = false;
+        bool operation_mode_projection_feasible = false;
+    };
+
+    auto validateRelaxedRouteLoadProjection =
+        [&](const std::vector<int>& relaxed_path) -> RelaxedProjectionValidation {
+        const auto validation_start = Clock::now();
+        RelaxedProjectionValidation validation;
+        if (relaxed_path.empty()) {
+            validation.rejection_reason = "empty_path";
+            return validation;
+        }
+        RouteLoadColumn column;
+        column.vehicle = vehicle;
+        column.column_kind = "ng_relaxed_lower_bound";
+        column.elementary = false;
+        column.relaxation_scope = "ng_route_relaxation";
+        column.can_be_used_for_incumbent = false;
+        column.can_be_used_for_lower_bound = true;
+        column.path = relaxed_path;
+        column.q.assign(instance.V + 1, 0);
+        column.station_set = StationSet(instance.V);
+        std::vector<int> visits(instance.V + 1, 0);
+        std::vector<int> picked_by_station(instance.V + 1, 0);
+        std::vector<int> dropped_by_station(instance.V + 1, 0);
+        std::vector<char> used(static_cast<std::size_t>(instance.V + 1), 0);
+        int mask = 0;
+        int repeated = 0;
+        double travel = instance.dist[0][relaxed_path.front()];
+        for (std::size_t pos = 0; pos < relaxed_path.size(); ++pos) {
+            const int station = relaxed_path[pos];
+            if (station < 1 || station > instance.V) {
+                validation.rejection_reason = "station_out_of_range";
+                return validation;
+            }
+            if (!stationAllowedLarge(station)) {
+                validation.rejection_reason = "branch_station_forbidden";
+                ++result.relaxed_projection_rejected_branch;
+                return validation;
+            }
+            if (visits[station] > 0) ++repeated;
+            ++visits[station];
+            used[station] = 1;
+            column.station_set.add(station);
+            if (station <= 31) mask |= 1 << (station - 1);
+            if (pos > 0) travel += instance.dist[relaxed_path[pos - 1]][station];
+        }
+        travel += instance.dist[relaxed_path.back()][0];
+        column.mask = mask;
+        column.travel = travel;
+        column.has_repeated_stations = repeated > 0;
+        column.repeated_station_count = repeated;
+        if (!columnAllowedByBranchPairs(column.station_set)) {
+            validation.rejection_reason = "branch_pair_projection";
+            ++result.relaxed_projection_rejected_branch;
+            return validation;
+        }
+        const double cunit = instance.pickup_time + instance.drop_time;
+        if (cunit <= 1e-12) {
+            validation.rejection_reason = "nonpositive_operation_time";
+            ++result.relaxed_projection_rejected_load;
+            return validation;
+        }
+        int load = 0;
+        int pickup_total = 0;
+        int drop_total = 0;
+        for (int station : relaxed_path) {
+            const int bit = station <= 31 ? (1 << (station - 1)) : 0;
+            const double search_op = dualOperationCost(search_duals, station);
+            const double pickup_coeff = search_duals.pickup_cost + search_op;
+            const double drop_coeff = -search_op;
+            const int pick_room = std::min({instance.initial[station] - picked_by_station[station],
+                                            instance.Q[vehicle] - load,
+                                            std::max(0, static_cast<int>(
+                                                std::floor((instance.total_time_limit - travel) / cunit + 1e-9)) - pickup_total)});
+            const int station_drop_room = instance.capacity[station] - instance.initial[station] -
+                column.q[station];
+            const int drop_room = std::min(std::max(0, station_drop_room), load);
+            const bool pickup_forbidden =
+                station <= 31 && (options.forbid_pickup_station_mask & bit) != 0;
+            const bool drop_forbidden =
+                station <= 31 && (options.forbid_drop_station_mask & bit) != 0;
+            bool can_pick = !pickup_forbidden && pick_room > 0;
+            bool can_drop = !drop_forbidden && drop_room > 0;
+            if (options.relaxed_projection_strict) {
+                if (dropped_by_station[station] > 0) can_pick = false;
+                if (picked_by_station[station] > 0) can_drop = false;
+            }
+            if (can_drop && (!can_pick || drop_coeff < pickup_coeff - 1e-12)) {
+                const int amount = std::max(1, std::min(drop_room, instance.Q[vehicle]));
+                column.q[station] -= amount;
+                dropped_by_station[station] += amount;
+                load -= amount;
+                drop_total += amount;
+            } else if (can_pick) {
+                const int amount = std::max(1, std::min(pick_room, instance.Q[vehicle]));
+                column.q[station] += amount;
+                picked_by_station[station] += amount;
+                load += amount;
+                pickup_total += amount;
+            }
+            if (load < 0 || load > instance.Q[vehicle]) {
+                validation.rejection_reason = "load_trajectory";
+                ++result.relaxed_projection_rejected_load;
+                return validation;
+            }
+        }
+        const int depot_unload = pickup_total - drop_total;
+        if (pickup_total <= 0 || depot_unload < 0 || depot_unload > instance.Q[vehicle]) {
+            validation.rejection_reason = "depot_unload_or_pickup_balance";
+            ++result.relaxed_projection_rejected_load;
+            return validation;
+        }
+        if (load != depot_unload) {
+            validation.rejection_reason = "load_depot_unload_mismatch";
+            ++result.relaxed_projection_rejected_load;
+            return validation;
+        }
+        for (int station = 1; station <= instance.V; ++station) {
+            if (picked_by_station[station] > 0 && dropped_by_station[station] > 0) {
+                validation.rejection_reason = "mixed_operation_mode_projection";
+                ++result.relaxed_projection_rejected_operation_mode;
+                return validation;
+            }
+            const int final_inventory = instance.initial[station] + column.q[station];
+            if (final_inventory < 0 || final_inventory > instance.capacity[station]) {
+                validation.rejection_reason = "station_final_capacity";
+                ++result.relaxed_projection_rejected_station_capacity;
+                return validation;
+            }
+            if (station <= 31) {
+                const int bit = 1 << (station - 1);
+                if ((options.forbid_pickup_station_mask & bit) != 0 && column.q[station] > 0) {
+                    validation.rejection_reason = "pickup_mode_forbidden";
+                    ++result.relaxed_projection_rejected_operation_mode;
+                    return validation;
+                }
+                if ((options.forbid_drop_station_mask & bit) != 0 && column.q[station] < 0) {
+                    validation.rejection_reason = "drop_mode_forbidden";
+                    ++result.relaxed_projection_rejected_operation_mode;
+                    return validation;
+                }
+            }
+        }
+        column.pickup = pickup_total;
+        column.duration = travel + instance.pickup_time * static_cast<double>(pickup_total) +
+            instance.drop_time * static_cast<double>(drop_total + depot_unload);
+        if (column.duration > instance.total_time_limit + 1e-9) {
+            validation.rejection_reason = "duration";
+            ++result.relaxed_projection_rejected_load;
+            return validation;
+        }
+        double rc = duals.constant + duals.travel_cost * column.travel +
+            duals.pickup_cost * static_cast<double>(pickup_total);
+        for (int station = 1; station <= instance.V; ++station) {
+            if (visits[station] > 0) rc += dualVisitCost(duals, station);
+            if (station < static_cast<int>(duals.operation_cost.size())) {
+                rc += duals.operation_cost[station] *
+                    static_cast<double>(column.q[station]);
+            }
+        }
+        rc += pathPairCost(duals, used) + pathSubsetRowCost(duals, used);
+        column.reduced_cost = rc;
+        validation.valid = true;
+        validation.rejection_reason = "none";
+        validation.column = std::move(column);
+        validation.pickup_total = pickup_total;
+        validation.drop_total = drop_total;
+        validation.depot_unload = depot_unload;
+        validation.load_feasible = true;
+        validation.station_final_capacity_feasible = true;
+        validation.branch_projection_feasible = true;
+        validation.operation_mode_projection_feasible = true;
+        result.relaxed_projection_validation_time_seconds +=
+            std::chrono::duration<double>(Clock::now() - validation_start).count();
+        return validation;
+    };
+
     auto buildColumn = [&](const std::vector<int>& path,
                            RouteLoadColumn& column,
                            double& rc_out) {
@@ -1364,6 +1551,42 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
                                 ++result.elementary_columns_inserted;
                             }
                         }
+                    }
+                }
+                if (result.relaxed_rmp_enabled &&
+                    options.allow_non_elementary_relaxed_columns &&
+                    path.size() >= 2 &&
+                    static_cast<int>(result.relaxed_negative_columns.size()) <
+                        std::max(0, options.relaxed_columns_max_per_pricing)) {
+                    std::vector<int> relaxed_path = path;
+                    relaxed_path.push_back(path.front());
+                    ++result.non_elementary_relaxed_routes_seen;
+                    RelaxedProjectionValidation relaxed =
+                        validateRelaxedRouteLoadProjection(relaxed_path);
+                    if (relaxed.valid) {
+                        ++result.non_elementary_relaxed_columns_validated;
+                        ++result.relaxed_columns_generated;
+                        ++result.generated_columns;
+                        ++result.ng_relaxed_negative_routes_found;
+                        if (relaxed.column.reduced_cost < -options.negative_tolerance) {
+                            result.has_negative_column = true;
+                            if (!result.has_column ||
+                                relaxed.column.reduced_cost < result.best_reduced_cost - 1e-12) {
+                                result.has_column = true;
+                                result.best_reduced_cost = relaxed.column.reduced_cost;
+                                result.best_column = relaxed.column;
+                            }
+                            result.relaxed_negative_columns.push_back(relaxed.column);
+                            result.negative_columns.push_back(relaxed.column);
+                            ++result.non_elementary_relaxed_columns_inserted;
+                            ++result.ng_relaxed_negative_columns_inserted;
+                            ++result.relaxed_columns_inserted;
+                            ++result.relaxed_columns_used_in_lb_rmp;
+                        }
+                    } else {
+                        ++result.non_elementary_relaxed_columns_rejected;
+                        ++result.relaxed_columns_rejected_projection;
+                        ++result.ng_relaxed_negative_routes_rejected;
                     }
                 }
                 int next_station = 0;

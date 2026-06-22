@@ -256,3 +256,31 @@ build\ExactEBRP.exe --method relaxed-column-incumbent-safety-test --input testda
 Relaxed columns are lower-bound-only. They are excluded from route-pool
 incumbents and exported route plans, and a relaxed RMP can support a
 certificate only after ng-relaxed pricing closes for the chosen relaxation.
+### Projection-Safe Relaxed-RMP CG
+
+Round 15 adds a lower-bound-only relaxed column path for hybrid/ng-DSSR BPC.
+Projection-safe non-elementary relaxed columns can be enabled with:
+
+```bash
+build/ExactEBRP.exe --method gcap-frontier --input reference/regen_candidate_V12_M2_average.txt \
+  --lambda 0.15 --T 3600 --pricing-engine hybrid \
+  --column-tracks two-track --rmp-column-space two-track \
+  --relaxed-columns-in-rmp true --allow-non-elementary-relaxed-columns true \
+  --relaxed-projection-strict true --relaxed-rmp-cg true \
+  --frontier-relaxed-rmp-cg true --ng-relaxed-closure true
+```
+
+Large generated diagnostics can use the relaxed-RMP CG path without all-subset
+route-mask enumeration:
+
+```bash
+build/ExactEBRP.exe --method large-relaxed-rmp-cg-test \
+  --input reference/generated/regen_V50_M3_average.txt --lambda 0.15 --T 3600 \
+  --pricing-engine hybrid --large-instance-mode force \
+  --large-relaxed-rmp-cg true --large-relaxed-rmp-time 300 \
+  --large-relaxed-rmp-column-budget 256 --ng-relaxed-closure true
+```
+
+Relaxed columns are lower-bound-only.  They are blocked from incumbent
+reconstruction, route-pool incumbent masters, and exported route plans unless
+they are explicitly elementary feasible columns.

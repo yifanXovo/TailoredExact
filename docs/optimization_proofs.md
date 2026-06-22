@@ -893,3 +893,52 @@ operations, and interval candidates using relaxed columns cannot be accepted
 as incumbents. Therefore relaxed columns may improve only lower-bound RMP
 diagnostics; they never provide an upper bound.
 
+## Fifteenth Optimization Pass: Projection-Safe Relaxed RMP CG
+
+### Projection-Safe Non-Elementary Relaxed Columns
+
+An ng-relaxed pricing path may revisit a station and therefore is not an elementary
+route-load column.  Such a path is admissible only in the lower-bound column
+space after projection validation.  The validator builds the station-membership
+projection, integer net inventory vector `q`, total pickup, total station drop,
+depot unload, load trajectory, duration, and branch/mode compatibility.  It
+rejects the relaxed route if station final inventory leaves `[0,C_i]`, if load
+or depot-unload balance is invalid, if duration exceeds the route limit, or if
+the projected operation mode or branch rows cannot be evaluated safely.
+
+Every elementary feasible route-load column is also a feasible member of the
+ng-relaxed route-load space.  Adding projection-safe non-elementary columns
+therefore enlarges only the lower-bound master column space.  For a minimization
+problem, optimizing over this superset gives a value no larger than the
+elementary master optimum, hence a valid lower bound once the relaxed pricing
+problem for that chosen relaxation is closed.  These columns are not feasible
+routes and are excluded from incumbents, route exports, and route-pool masters.
+
+### Ng-Relaxed Pricing Closure
+
+A relaxed-RMP lower bound is certifying only when pricing is closed over the
+same ng-relaxed state space and true current RMP duals.  Closure requires all
+vehicles and all labels/states admitted by the chosen ng memory and branch
+restrictions to be exhausted or validly dominated, with no remaining negative
+reduced-cost projection-safe relaxed column.  If a negative non-elementary
+route is found, it must either enter the relaxed RMP after projection validation
+or be rejected for a proof-valid reason.  A timeout, heuristic stopping rule, or
+unsafe projection rejection leaves the relaxed-RMP value diagnostic.
+
+### Relaxed-RMP CG Lower Bound
+
+Relaxed-RMP column generation alternates between solving the lower-bound RMP
+over elementary plus projection-safe relaxed columns and true-dual ng-relaxed
+pricing.  If this loop closes and the relaxed lower bound reaches the incumbent
+cutoff for a frontier interval, the interval may be fathomed with certificate
+basis `relaxed_ng_route_rmp_bound`; elementary pricing closure is not required
+for that interval.  If the loop does not close, the generated relaxed-RMP value
+is reported as diagnostic progress only.
+
+### Incumbent Safety
+
+Any column with `can_be_used_for_incumbent=false` or
+`column_kind=ng_relaxed_lower_bound` is blocked from incumbent reconstruction,
+route-pool insertion, route-pool incumbent master selection, and route export.
+Therefore relaxed columns can strengthen lower-bound diagnostics without
+creating infeasible upper bounds.
