@@ -541,3 +541,45 @@ No new original-problem certificate was obtained in this pass. Raw JSON, logs,
 progress traces, and CSV summaries are stored in
 `results/optimization_update_round11/`. Plain CPLEX benchmarks were skipped, so
 no CPLEX speedup claims are made.
+
+## Twelfth Optimization Pass: Scalable Pricing, Large-Instance Safety, And Heuristic Incumbent Bridge
+
+Round twelve adds the first large-instance-safe route-column data path. Route
+columns and dominance keys now carry a `StationSet`, using a compact backend
+for small V and a dynamic vector backend beyond 63 stations. Large-instance
+mode disables all-subset route-mask enumeration when it would be unsafe or
+infeasible and reports the disabled feature instead of producing a certificate.
+
+The pricing diagnostic now supports `exact-label`, `ng-dssr`, and `hybrid`
+engines. The ng-DSSR implementation is used as a scalable column-discovery
+engine and inserts only verified elementary route-load columns. It is exact
+only when final exact verification completes. Smooth/box dual stabilization is
+used only for candidate discovery; reduced costs and closure checks remain
+true-dual.
+
+External/HGA-style incumbents can be imported from route JSON or CSV and must
+pass the independent verifier before they update an upper bound. The
+round-twelve smoke test verified a synthetic route JSON import and rejected a
+malformed route.
+
+| Instance | Variant | Status | UB | LB | Gap | Pricing engine | Certified? |
+|---|---|---:|---:|---:|---:|---|---|
+| V12 M2 average | frontier hybrid 300s | not closed | 0.719065249476 | 0.689651961258 | 0.040904894569 | hybrid flag; frontier exact-label internals | no |
+| V12 M1 average | frontier hybrid 300s | not closed | 0.368581603155 | 0.330636509913 | 0.102948961415 | hybrid flag; frontier exact-label internals | no |
+| V12 M2 average | pricing exact-label 60s | pricing diagnostic | n/a | n/a | n/a | exact-label | no |
+| V12 M2 average | pricing ng-DSSR 60s | pricing diagnostic | n/a | n/a | n/a | ng-DSSR with exact final check | no |
+| V12 M1 average | pricing hybrid smooth 60s | pricing diagnostic | n/a | n/a | n/a | hybrid/smooth | no |
+
+| Scale | Variant | Status | Station-set backend | Disabled exact features | Certificate scope |
+|---|---|---|---|---|---|
+| V20 | hybrid pricing 60s | time_limit / DSSR incomplete | uint64 | none | diagnostic |
+| V50 | hybrid pricing 60s | time_limit / DSSR incomplete | uint64 | all-subset route-mask relaxation | diagnostic |
+| V70 | large-instance guard | diagnostic complete | dynamic | all-subset route-mask relaxation | diagnostic |
+| V100 | hybrid pricing 60s | time_limit / DSSR incomplete | dynamic | all-subset route-mask relaxation | diagnostic |
+
+No new original-problem certificate was obtained in round twelve. The useful
+algorithmic change is scalability safety: V70/V100 parse, route-column set
+handling, verification, and ng-DSSR pricing diagnostics run without mask
+overflow or memory/address failures, while remaining clearly noncertified.
+Raw JSON, logs, progress traces, and CSV summaries are stored in
+`results/optimization_update_round12/`. Plain CPLEX was skipped.

@@ -145,6 +145,12 @@ std::string inferMethodScope(const SolveResult& result) {
         method == "pricing-verifier-test" ||
         method == "iterative-closure-test" ||
         method == "certificate-basis-test" ||
+        method == "station-set-test" ||
+        method == "ng-dssr-pricing-test" ||
+        method == "dssr-exactness-test" ||
+        method == "dual-stabilization-test" ||
+        method == "external-incumbent-test" ||
+        method == "large-instance-mode-test" ||
         method == "incumbent-import-test" ||
         method == "route-pool-incumbent-test" ||
         method == "pickup-drop-compat-flow-test" ||
@@ -215,6 +221,12 @@ std::string inferCertificateType(const SolveResult& result) {
     if (method == "pricing-verifier-test") return "pricing_verifier_diagnostic";
     if (method == "iterative-closure-test") return "iterative_frontier_closure_diagnostic";
     if (method == "certificate-basis-test") return "certificate_basis_audit_diagnostic";
+    if (method == "station-set-test") return "station_set_representation_diagnostic";
+    if (method == "ng-dssr-pricing-test") return "ng_dssr_pricing_diagnostic";
+    if (method == "dssr-exactness-test") return "dssr_exactness_diagnostic";
+    if (method == "dual-stabilization-test") return "dual_stabilization_diagnostic";
+    if (method == "external-incumbent-test") return "external_incumbent_diagnostic";
+    if (method == "large-instance-mode-test") return "large_instance_mode_diagnostic";
     if (method == "incumbent-import-test") return "incumbent_import_verification_diagnostic";
     if (method == "route-pool-incumbent-test") return "route_pool_incumbent_diagnostic";
     if (method == "pickup-drop-compat-flow-test") return "pickup_drop_compat_flow_diagnostic";
@@ -304,6 +316,7 @@ std::string resultToJson(const SolveResult& result) {
         << (inferSolvesOriginalObjective(result) ? "true" : "false") << ",\n";
     out << "  \"is_bpc\": " << (inferIsBpc(result) ? "true" : "false") << ",\n";
     out << "  \"certificate_type\": \"" << jsonEscape(inferCertificateType(result)) << "\",\n";
+    out << "  \"certificate_scope\": \"" << jsonEscape(result.certificate_scope) << "\",\n";
     out << "  \"status\": \"" << jsonEscape(result.status) << "\",\n";
     out << "  \"certificate\": \"" << jsonEscape(result.certificate) << "\",\n";
     out << "  \"objective\": " << result.objective << ",\n";
@@ -413,6 +426,43 @@ std::string resultToJson(const SolveResult& result) {
         << result.support_duration_max_subset_size << ",\n";
     out << "  \"support_duration_precompute_time_seconds\": "
         << result.support_duration_precompute_time_seconds << ",\n";
+    out << "  \"large_instance_mode\": \""
+        << jsonEscape(result.large_instance_mode) << "\",\n";
+    out << "  \"station_set_backend\": \""
+        << jsonEscape(result.station_set_backend) << "\",\n";
+    out << "  \"unsupported_large_instance_features\": \""
+        << jsonEscape(result.unsupported_large_instance_features) << "\",\n";
+    out << "  \"route_mask_all_subset_enumeration_enabled\": "
+        << (result.route_mask_all_subset_enumeration_enabled ? "true" : "false") << ",\n";
+    out << "  \"route_mask_all_subset_enumeration_certifying\": "
+        << (result.route_mask_all_subset_enumeration_certifying ? "true" : "false") << ",\n";
+    out << "  \"benchmark_scale\": \""
+        << jsonEscape(result.benchmark_scale) << "\",\n";
+    out << "  \"memory_peak_estimate_mb\": "
+        << result.memory_peak_estimate_mb << ",\n";
+    out << "  \"labels_processed\": "
+        << result.labels_processed << ",\n";
+    out << "  \"pricing_engine\": \""
+        << jsonEscape(result.pricing_engine) << "\",\n";
+    out << "  \"ng_size\": " << result.ng_size << ",\n";
+    out << "  \"ng_memory_total\": " << result.ng_memory_total << ",\n";
+    out << "  \"dssr_rounds\": " << result.dssr_rounds << ",\n";
+    out << "  \"dssr_memory_expansions\": "
+        << result.dssr_memory_expansions << ",\n";
+    out << "  \"dssr_relaxed_negative_routes\": "
+        << result.dssr_relaxed_negative_routes << ",\n";
+    out << "  \"dssr_non_elementary_routes\": "
+        << result.dssr_non_elementary_routes << ",\n";
+    out << "  \"dssr_elementary_columns_found\": "
+        << result.dssr_elementary_columns_found << ",\n";
+    out << "  \"dssr_final_exact\": "
+        << (result.dssr_final_exact ? "true" : "false") << ",\n";
+    out << "  \"dssr_exact_closure_proved\": "
+        << (result.dssr_exact_closure_proved ? "true" : "false") << ",\n";
+    out << "  \"dssr_time_seconds\": "
+        << result.dssr_time_seconds << ",\n";
+    out << "  \"dssr_stop_reason\": \""
+        << jsonEscape(result.dssr_stop_reason) << "\",\n";
     out << "  \"route_mask_count_before_support_duration\": "
         << result.route_mask_count_before_support_duration << ",\n";
     out << "  \"route_mask_count_after_support_duration\": "
@@ -508,6 +558,18 @@ std::string resultToJson(const SolveResult& result) {
     out << "  \"incumbent_import_objective\": " << result.incumbent_import_objective << ",\n";
     out << "  \"incumbent_import_G\": " << result.incumbent_import_G << ",\n";
     out << "  \"incumbent_import_P\": " << result.incumbent_import_P << ",\n";
+    out << "  \"external_incumbent_attempted\": "
+        << (result.external_incumbent_attempted ? "true" : "false") << ",\n";
+    out << "  \"external_incumbent_verified\": "
+        << (result.external_incumbent_verified ? "true" : "false") << ",\n";
+    out << "  \"external_incumbent_objective\": "
+        << result.external_incumbent_objective << ",\n";
+    out << "  \"external_incumbent_G\": "
+        << result.external_incumbent_G << ",\n";
+    out << "  \"external_incumbent_P\": "
+        << result.external_incumbent_P << ",\n";
+    out << "  \"external_incumbent_rejection_reason\": \""
+        << jsonEscape(result.external_incumbent_rejection_reason) << "\",\n";
     out << "  \"incumbent_generation_time_seconds\": "
         << result.incumbent_generation_time_seconds << ",\n";
     out << "  \"incumbent_generation_method\": \""

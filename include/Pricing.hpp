@@ -36,6 +36,16 @@ struct PricingOptions {
     bool use_completion_lb_pruning = false;
     bool support_duration_pruning = true;
     int support_duration_max_subset_size = 5;
+    std::string pricing_engine = "exact-label";
+    int ng_size = 12;
+    std::string ng_neighborhood_mode = "nearest";
+    int dssr_max_rounds = 4;
+    int dssr_expand_per_round = 4;
+    double dssr_time_limit = 30.0;
+    bool dssr_final_exact = true;
+    std::string cg_dual_stabilization = "none";
+    double cg_dual_smoothing_alpha = 0.7;
+    double cg_dual_box_radius = 1.0;
 };
 
 struct PricingResult {
@@ -56,8 +66,32 @@ struct PricingResult {
     int support_duration_max_subset_size = 0;
     double support_duration_precompute_time_seconds = 0.0;
     double best_reduced_cost = 0.0;
+    double best_new_reduced_cost = std::numeric_limits<double>::infinity();
+    long long negative_existing_projection_count = 0;
+    long long negative_new_projection_count = 0;
+    bool blocked_by_duplicate_projection = false;
+    std::string pricing_closure_status = "not_run";
     RouteLoadColumn best_column;
     std::vector<RouteLoadColumn> negative_columns;
+    std::string pricing_engine = "exact-label";
+    int ng_size = 0;
+    long long ng_memory_total = 0;
+    int dssr_rounds = 0;
+    long long dssr_memory_expansions = 0;
+    long long dssr_relaxed_negative_routes = 0;
+    long long dssr_non_elementary_routes = 0;
+    long long dssr_elementary_columns_found = 0;
+    bool dssr_final_exact = false;
+    bool dssr_exact_closure_proved = false;
+    double dssr_time_seconds = 0.0;
+    std::string dssr_stop_reason;
+    long long cg_stabilized_pricing_calls = 0;
+    long long cg_true_pricing_calls = 0;
+    long long cg_stabilization_columns_found = 0;
+    long long cg_true_pricing_columns_found = 0;
+    long long cg_dual_center_updates = 0;
+    double cg_final_true_pricing_rc = 0.0;
+    double cg_stabilization_time_seconds = 0.0;
 };
 
 PricingResult priceRouteLoadColumnExact(

@@ -734,3 +734,61 @@ Each imported focus result strengthens only its compatible interval. The global
 lower bound remains the minimum over all active leaves, so remaining lower
 unresolved leaves still block certification.
 
+## Round 12: Scalable Pricing And Large-Instance Safety
+
+### StationSet Abstraction
+
+`StationSet` changes only how a visited-station set is represented. For
+`V <= 63` it can be serialized through a compact word-equivalent key; for
+larger instances it uses a dynamic vector of 64-bit words. The operations
+`contains`, insertion/removal, intersection, subset/superset, popcount,
+iteration, equality, serialization, and hashing preserve the mathematical set
+of station indices. Therefore replacing an integer mask by `StationSet` in
+pricing, columns, dominance keys, route pools, and verification does not change
+the feasible route-load columns. Any code path that still needs all-subset
+enumeration or a small integer mask must be disabled or reported diagnostic for
+large instances; it cannot produce a certificate unless its validity is
+separately preserved.
+
+### ng-Route Relaxation And DSSR Exactness
+
+The ng-route pricing engine relaxes elementary-route memory by keeping
+neighborhood sets around stations. A relaxed negative route is useful only as a
+signal for column discovery. It is not inserted into the RMP unless the
+reconstructed path is verified elementary and route-load feasible. DSSR
+refinement expands memory around repeated stations and can become exact only
+when every remaining relaxed negative route is elementary or no negative route
+exists in an exact state space. Thus DSSR can certify node closure only when it
+sets the exact closure flag after true-dual verification. Otherwise the pricing
+status is `dssr_incomplete`, and the run remains noncertified unless another
+valid non-pricing bound fathoms the interval.
+
+### Dual Stabilization For Discovery
+
+Smooth and box stabilization modify the duals used to rank stations and choose
+candidate operations during column discovery. The returned column is evaluated
+under the true current duals before insertion or reporting. Stabilized pricing
+therefore cannot create lower-bound evidence by itself. Correctness is
+preserved because final closure still requires true-dual exact pricing or a
+completed DSSR proof.
+
+### External Incumbent Verification
+
+An imported HGA/TGBC or external route file supplies only a primal candidate.
+It can update the incumbent upper bound only after the independent verifier
+checks depot start/end, station disjointness, load feasibility, station
+capacity feasibility, route-duration feasibility, final inventories, Gini,
+penalty, and objective. A rejected or malformed file is discarded. Verified
+external incumbents may tighten cutoffs and domains but never provide
+lower-bound certificate evidence.
+
+### Large-Instance Mode
+
+For V50/V100 diagnostics, all-subset route-mask enumeration is disabled unless
+a certifying large-instance replacement is available. The solver reports
+`unsupported_large_instance_features` and `certificate_scope=diagnostic` for
+large runs that rely on relaxed pricing or disabled exact relaxations. These
+runs are scalability evidence only; they cannot be reported as original-problem
+optimal unless the complete frontier, pricing, and verifier requirements all
+close with zero gap.
+

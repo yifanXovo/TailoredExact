@@ -1520,3 +1520,73 @@ Remaining TODOs:
 - Complete a resumable true-dual route-load pricing verifier; current
   checkpointing is conservative and does not certify incomplete pricing.
 - Run V12 M2 and V12 M1 iterative closure at 1200s/3600s in an unattended slot.
+
+## 2026-06-22 Round 12: Scalable Pricing And Large-Instance Support
+
+Implementation:
+
+- Added a `StationSet` abstraction with compact and dynamic backends, stable
+  serialization, equality, subset/intersection operations, popcount, iteration,
+  and hashing. Route-load columns and dominance keys now preserve dynamic
+  station sets, avoiding projection-key collapse when V exceeds integer-mask
+  capacity.
+- Added large-instance reporting fields and guards. For V>32, all-subset
+  route-mask enumeration is disabled in large-instance mode unless a certifying
+  replacement is available; affected rows are diagnostic only.
+- Added hybrid/ng-DSSR pricing options and a scalable pricing diagnostic path.
+  DSSR currently inserts only verified elementary route-load columns and
+  reports `dssr_incomplete` unless final exact verification completes.
+- Implemented smooth/box dual-stabilized column discovery for ng-DSSR ranking
+  and operation choice. Returned columns are still evaluated with true duals,
+  and closure remains true-dual only.
+- Added `--external-incumbent`, `--external-incumbent-format`, and
+  `--export-incumbent`. A synthetic route JSON import passed the independent
+  verifier; a malformed route was rejected.
+- Extended `scripts/generate_reference_instances.py` with deterministic
+  V20/V50/V100 engineering scalability cases. Python was unavailable locally,
+  so equivalent parser-compatible files were generated with a PowerShell
+  fallback and recorded in `reference/generated/manifest.csv`.
+
+Results:
+
+- CMake was unavailable; fallback g++ builds succeeded for `ExactEBRP.exe` and
+  `ExactEBRPCompare.exe`.
+- V4 smoke diagnostics all exited `0`, including `station-set-test`,
+  `ng-dssr-pricing-test`, `dssr-exactness-test`,
+  `dual-stabilization-test`, `external-incumbent-test`, and
+  `large-instance-mode-test`. V4 `gcap-frontier` remains certified with
+  objective `0`.
+- V12 M2 `gcap-frontier` hybrid-flag 300s remained noncertified:
+  UB `0.719065249476`, LB `0.689651961258`, gap `0.0409048945689`,
+  `unresolved_intervals=3`.
+- V12 M1 `gcap-frontier` hybrid-flag 300s remained noncertified:
+  UB `0.368581603155`, LB `0.330636509913`, gap `0.102948961415`,
+  `unresolved_intervals=2`.
+- V12 M2 pricing exact-label and ng-DSSR diagnostics both completed with exact
+  no-negative status on the diagnostic pricing oracle. These are not original
+  problem certificates.
+- V70 and V100 generated inputs parsed and ran large-instance diagnostics with
+  dynamic `StationSet`; no mask overflow, access violation, `bad_alloc`, or
+  memory/address error was observed in the captured logs.
+- V20/V50/V100 hybrid pricing rows are scalability diagnostics only and report
+  incomplete DSSR closure.
+
+Safety:
+
+- No positive-gap row is reported as optimal.
+- Plain CPLEX was skipped. No CPLEX speedup or certificate comparison is made.
+- Full frontier internals still use the established exact-label BPC pricing
+  path; the new ng-DSSR engine is currently exercised through pricing
+  diagnostics and is not yet a certifying replacement inside every BPC tree.
+
+Remaining TODOs:
+
+- Thread pricing-engine options through all BPC/tree column-generation entry
+  points so hybrid ng-DSSR can accelerate frontier closure, followed by exact
+  true-dual verification.
+- Complete DSSR exactness refinement for larger V instead of reporting
+  `dssr_incomplete`.
+- Add a memory profiler or OS-level peak memory measurement; current
+  `memory_peak_estimate_mb` is a deterministic data-structure estimate.
+- Run V12 M2 and V12 M1 closure with hybrid pricing after it is fully wired
+  into BPC tree pricing.

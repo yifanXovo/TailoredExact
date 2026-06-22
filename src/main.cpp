@@ -39,7 +39,7 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|external-incumbent-test|large-instance-mode-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
@@ -68,6 +68,10 @@ void usage() {
         << "[--gcap-seed-cplex] [--gcap-seed-time-limit <seconds>] "
         << "[--incumbent-json <path>] [--incumbent-format auto|exact_result|route_json|csv] "
         << "[--hga-incumbent <path>] [--hga-incumbent-format auto|route_json|csv|legacy] "
+        << "[--external-incumbent <path>] [--external-incumbent-format auto|route_json|csv|legacy_text] [--export-incumbent <path>] "
+        << "[--large-instance-mode auto|off|force] [--pricing-engine exact-label|ng-dssr|hybrid] "
+        << "[--ng-size <N>] [--ng-neighborhood-mode nearest|dual-aware|hybrid] "
+        << "[--dssr-max-rounds <N>] [--dssr-expand-per-round <N>] [--dssr-time-limit <seconds>] [--dssr-final-exact true|false] "
         << "[--incumbent-source-name <name>] [--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>] "
         << "[--progress-log <path>] [--progress-interval-seconds <seconds>] "
         << "[--frontier-focus-only true|false] [--frontier-focus-interval-id auto|N] "
@@ -85,6 +89,7 @@ void usage() {
         << "[--closure-max-cg-iterations <N>] [--closure-pricing-time-per-call <seconds>] "
         << "[--closure-returned-columns <N>] [--closure-final-exact-pricing true|false] "
         << "[--cg-dual-stabilization none|smooth|box] [--cg-dual-smoothing-alpha <alpha>] "
+        << "[--cg-dual-box-radius <radius>] [--cg-stabilization-max-nonimprove <N>] "
         << "[--cg-stabilization-switch-to-true-after <N>] "
         << "[--frontier-iterative-closure true|false] [--frontier-iterative-max-rounds <N>] "
         << "[--frontier-iterative-round-time <seconds>] [--frontier-iterative-target-gap <gap>] "
@@ -186,6 +191,17 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--incumbent-format") opt.incumbent_format = requireValue(i, argc, argv);
         else if (arg == "--hga-incumbent") opt.hga_incumbent_path = requireValue(i, argc, argv);
         else if (arg == "--hga-incumbent-format") opt.hga_incumbent_format = requireValue(i, argc, argv);
+        else if (arg == "--external-incumbent") opt.external_incumbent_path = requireValue(i, argc, argv);
+        else if (arg == "--external-incumbent-format") opt.external_incumbent_format = requireValue(i, argc, argv);
+        else if (arg == "--export-incumbent") opt.export_incumbent_path = requireValue(i, argc, argv);
+        else if (arg == "--large-instance-mode") opt.large_instance_mode = requireValue(i, argc, argv);
+        else if (arg == "--pricing-engine") opt.pricing_engine = requireValue(i, argc, argv);
+        else if (arg == "--ng-size") opt.ng_size = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--ng-neighborhood-mode") opt.ng_neighborhood_mode = requireValue(i, argc, argv);
+        else if (arg == "--dssr-max-rounds") opt.dssr_max_rounds = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--dssr-expand-per-round") opt.dssr_expand_per_round = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--dssr-time-limit") opt.dssr_time_limit = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--dssr-final-exact") opt.dssr_final_exact = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--incumbent-source-name") opt.incumbent_source_name = requireValue(i, argc, argv);
         else if (arg == "--inventory-probe-max-v") opt.inventory_probe_max_v = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--inventory-probe-seconds") opt.inventory_probe_seconds = std::stod(requireValue(i, argc, argv));
@@ -219,6 +235,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--closure-final-exact-pricing") opt.closure_final_exact_pricing = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--cg-dual-stabilization") opt.cg_dual_stabilization = requireValue(i, argc, argv);
         else if (arg == "--cg-dual-smoothing-alpha") opt.cg_dual_smoothing_alpha = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--cg-dual-box-radius") opt.cg_dual_box_radius = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--cg-stabilization-max-nonimprove") opt.cg_stabilization_max_nonimprove = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--cg-stabilization-switch-to-true-after") opt.cg_stabilization_switch_to_true_after = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--frontier-iterative-closure") opt.frontier_iterative_closure = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-iterative-max-rounds") opt.frontier_iterative_max_rounds = std::stoi(requireValue(i, argc, argv));
@@ -264,6 +282,31 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.frontier_retry_reserve_seconds < 0.0) opt.frontier_retry_reserve_seconds = 0.0;
     if (opt.frontier_relax_seconds == 0.0) opt.frontier_relax_seconds = -1.0;
     if (opt.route_mask_max_v < 0) opt.route_mask_max_v = 0;
+    std::transform(opt.large_instance_mode.begin(), opt.large_instance_mode.end(),
+                   opt.large_instance_mode.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    if (opt.large_instance_mode != "off" && opt.large_instance_mode != "force") {
+        opt.large_instance_mode = "auto";
+    }
+    std::transform(opt.pricing_engine.begin(), opt.pricing_engine.end(),
+                   opt.pricing_engine.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    if (opt.pricing_engine != "exact-label" &&
+        opt.pricing_engine != "ng-dssr" &&
+        opt.pricing_engine != "hybrid") {
+        opt.pricing_engine = "auto";
+    }
+    std::transform(opt.ng_neighborhood_mode.begin(), opt.ng_neighborhood_mode.end(),
+                   opt.ng_neighborhood_mode.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    if (opt.ng_neighborhood_mode != "dual-aware" &&
+        opt.ng_neighborhood_mode != "hybrid") {
+        opt.ng_neighborhood_mode = "nearest";
+    }
+    if (opt.ng_size < 1) opt.ng_size = 1;
+    if (opt.dssr_max_rounds < 1) opt.dssr_max_rounds = 1;
+    if (opt.dssr_expand_per_round < 1) opt.dssr_expand_per_round = 1;
+    if (opt.dssr_time_limit < 0.0) opt.dssr_time_limit = 0.0;
     if (opt.support_duration_max_subset_size < 0) opt.support_duration_max_subset_size = 0;
     if (opt.bpc_incumbent_seconds < 0.0) opt.bpc_incumbent_seconds = 0.0;
     if (opt.bpc_incumbent_rounds < 1) opt.bpc_incumbent_rounds = 1;
@@ -313,10 +356,170 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if (opt.cg_dual_smoothing_alpha < 0.0) opt.cg_dual_smoothing_alpha = 0.0;
     if (opt.cg_dual_smoothing_alpha > 1.0) opt.cg_dual_smoothing_alpha = 1.0;
+    if (opt.cg_dual_box_radius < 0.0) opt.cg_dual_box_radius = 0.0;
+    if (opt.cg_stabilization_max_nonimprove < 0) opt.cg_stabilization_max_nonimprove = 0;
     if (opt.cg_stabilization_switch_to_true_after < 0) {
         opt.cg_stabilization_switch_to_true_after = 0;
     }
     return opt;
+}
+
+std::string resolvedPricingEngine(const ebrp::Instance& instance,
+                                  const ebrp::SolveOptions& opt) {
+    if (opt.pricing_engine == "auto") {
+        return instance.V > 30 ? "hybrid" : "exact-label";
+    }
+    return opt.pricing_engine;
+}
+
+bool largeInstanceModeActive(const ebrp::Instance& instance,
+                             const ebrp::SolveOptions& opt) {
+    if (opt.large_instance_mode == "force") return true;
+    if (opt.large_instance_mode == "off") return false;
+    return instance.V > 32;
+}
+
+void applyPricingOptionsFromSolve(const ebrp::Instance& instance,
+                                  const ebrp::SolveOptions& opt,
+                                  ebrp::PricingOptions& pricing) {
+    pricing.pricing_engine = resolvedPricingEngine(instance, opt);
+    pricing.ng_size = opt.ng_size;
+    pricing.ng_neighborhood_mode = opt.ng_neighborhood_mode;
+    pricing.dssr_max_rounds = opt.dssr_max_rounds;
+    pricing.dssr_expand_per_round = opt.dssr_expand_per_round;
+    pricing.dssr_time_limit = opt.dssr_time_limit > 0.0
+        ? opt.dssr_time_limit : pricing.time_limit_seconds;
+    pricing.dssr_final_exact = opt.dssr_final_exact;
+    pricing.cg_dual_stabilization = opt.cg_dual_stabilization;
+    pricing.cg_dual_smoothing_alpha = opt.cg_dual_smoothing_alpha;
+    pricing.cg_dual_box_radius = opt.cg_dual_box_radius;
+}
+
+void initializeScalabilityFields(const ebrp::Instance& instance,
+                                 const ebrp::SolveOptions& opt,
+                                 ebrp::SolveResult& result) {
+    const bool large_mode = largeInstanceModeActive(instance, opt);
+    result.large_instance_mode = large_mode ? opt.large_instance_mode : "off";
+    if (large_mode && opt.large_instance_mode == "auto") {
+        result.large_instance_mode = "auto";
+    }
+    result.station_set_backend = ebrp::stationSetBackendName(instance.V);
+    result.pricing_engine = resolvedPricingEngine(instance, opt);
+    result.ng_size = opt.ng_size;
+    result.dssr_final_exact = opt.dssr_final_exact;
+    result.cg_stabilization_mode = opt.cg_dual_stabilization;
+    result.benchmark_scale = instance.V >= 100 ? "V100" :
+        (instance.V >= 50 ? "V50" : (instance.V >= 20 ? "V20" : "small"));
+    result.route_mask_all_subset_enumeration_enabled =
+        instance.V <= opt.route_mask_max_v && instance.V <= 30;
+    result.route_mask_all_subset_enumeration_certifying =
+        result.route_mask_all_subset_enumeration_enabled;
+    if (large_mode && instance.V > 32) {
+        result.route_mask_all_subset_enumeration_enabled = false;
+        result.route_mask_all_subset_enumeration_certifying = false;
+        result.unsupported_large_instance_features =
+            "all_subset_route_mask_relaxation_disabled";
+    }
+    const double q_bytes = static_cast<double>(instance.V + 1) *
+        static_cast<double>(std::max(1, instance.M)) * sizeof(int);
+    const double dist_bytes = static_cast<double>(instance.V + 1) *
+        static_cast<double>(instance.V + 1) * sizeof(double);
+    result.memory_peak_estimate_mb = (q_bytes + dist_bytes) / (1024.0 * 1024.0);
+}
+
+void mergePricingStats(const ebrp::PricingResult& priced,
+                       ebrp::SolveResult& result) {
+    result.nodes += priced.route_states + priced.operation_states;
+    result.labels_processed += priced.route_states;
+    result.columns += priced.generated_columns;
+    result.columns_generated_raw += priced.generated_columns;
+    result.columns_after_dominance += priced.generated_columns;
+    result.pricing_calls += 1;
+    result.route_pool_columns_exported_from_pricing +=
+        priced.generated_columns;
+    result.pricing_engine = priced.pricing_engine.empty()
+        ? result.pricing_engine : priced.pricing_engine;
+    result.ng_size = std::max(result.ng_size, priced.ng_size);
+    result.ng_memory_total += priced.ng_memory_total;
+    result.dssr_rounds += priced.dssr_rounds;
+    result.dssr_memory_expansions += priced.dssr_memory_expansions;
+    result.dssr_relaxed_negative_routes +=
+        priced.dssr_relaxed_negative_routes;
+    result.dssr_non_elementary_routes +=
+        priced.dssr_non_elementary_routes;
+    result.dssr_elementary_columns_found +=
+        priced.dssr_elementary_columns_found;
+    result.dssr_final_exact = result.dssr_final_exact ||
+        priced.dssr_final_exact;
+    result.dssr_exact_closure_proved =
+        result.dssr_exact_closure_proved || priced.dssr_exact_closure_proved;
+    result.dssr_time_seconds += priced.dssr_time_seconds;
+    if (!priced.dssr_stop_reason.empty()) {
+        if (!result.dssr_stop_reason.empty()) result.dssr_stop_reason += "; ";
+        result.dssr_stop_reason += priced.dssr_stop_reason;
+    }
+    result.cg_stabilized_pricing_calls +=
+        priced.cg_stabilized_pricing_calls;
+    result.cg_true_pricing_calls += priced.cg_true_pricing_calls;
+    result.cg_stabilization_columns_found +=
+        priced.cg_stabilization_columns_found;
+    result.cg_true_pricing_columns_found +=
+        priced.cg_true_pricing_columns_found;
+    result.cg_stabilization_time_seconds +=
+        priced.cg_stabilization_time_seconds;
+    result.cg_final_true_pricing_rc =
+        priced.cg_final_true_pricing_rc;
+    result.pricing_best_reduced_cost_any =
+        std::min(result.pricing_best_reduced_cost_any,
+                 priced.best_reduced_cost);
+    result.pricing_best_new_reduced_cost =
+        std::min(result.pricing_best_new_reduced_cost,
+                 priced.best_new_reduced_cost);
+    if (priced.has_column) {
+        result.pricing_negative_columns_found += 1;
+        result.pricing_new_negative_projections +=
+            priced.negative_new_projection_count;
+    }
+    result.pricing_duplicate_negative_projections +=
+        priced.negative_existing_projection_count;
+    result.pricing_blocked_by_duplicate_projection =
+        result.pricing_blocked_by_duplicate_projection ||
+        priced.blocked_by_duplicate_projection;
+    if (!priced.complete) {
+        result.pricing_completed_exactly = false;
+        result.pricing_closure_certified_exact = false;
+    }
+    if (!priced.pricing_closure_status.empty() &&
+        priced.pricing_closure_status != "not_run") {
+        if (result.pricing_closure_status.empty() ||
+            result.pricing_closure_status == "not_run" ||
+            result.pricing_closure_status == "exact_no_negative") {
+            result.pricing_closure_status = priced.pricing_closure_status;
+        }
+    }
+    if (std::isfinite(priced.best_reduced_cost) &&
+        priced.best_reduced_cost < -1e-9) {
+        result.pricing_remaining_negative_rc =
+            std::min(result.pricing_remaining_negative_rc,
+                     priced.best_reduced_cost);
+    }
+    result.support_duration_cuts_generated +=
+        priced.support_duration_cuts_generated;
+    result.support_duration_pruned_labels +=
+        priced.support_duration_pruned_labels;
+    result.support_duration_pruned_columns +=
+        priced.support_duration_pruned_columns;
+    result.support_duration_strong_cuts_generated +=
+        priced.support_duration_strong_cuts_generated;
+    result.support_duration_strong_pruned_labels +=
+        priced.support_duration_strong_pruned_labels;
+    result.support_duration_strong_pruned_columns +=
+        priced.support_duration_strong_pruned_columns;
+    result.support_duration_max_subset_size =
+        std::max(result.support_duration_max_subset_size,
+                 priced.support_duration_max_subset_size);
+    result.support_duration_precompute_time_seconds +=
+        priced.support_duration_precompute_time_seconds;
 }
 
 std::size_t findMatchingJsonDelimiter(const std::string& text,
@@ -865,10 +1068,234 @@ std::vector<ebrp::RoutePlan> loadIncumbentRoutesByFormat(
     if (fmt == "csv") {
         return loadRoutesFromCsv(path, vehicle_count);
     }
-    if (fmt == "legacy") {
+    if (fmt == "legacy" || fmt == "legacy_text") {
         throw std::runtime_error("legacy HGA incumbent format is not implemented; use route_json or csv schema");
     }
     throw std::runtime_error("unsupported incumbent format: " + format);
+}
+
+void writeRouteJson(const std::string& path,
+                    const std::vector<ebrp::RoutePlan>& routes) {
+    if (path.empty()) return;
+    std::filesystem::path output(path);
+    if (output.has_parent_path()) {
+        std::filesystem::create_directories(output.parent_path());
+    }
+    std::ofstream out(path);
+    if (!out) throw std::runtime_error("cannot write incumbent JSON: " + path);
+    out << "{\n  \"routes\": [\n";
+    for (std::size_t r = 0; r < routes.size(); ++r) {
+        if (r) out << ",\n";
+        const ebrp::RoutePlan& route = routes[r];
+        out << "    {\n";
+        out << "      \"vehicle\": " << route.vehicle << ",\n";
+        out << "      \"nodes\": [";
+        for (std::size_t i = 0; i < route.nodes.size(); ++i) {
+            if (i) out << ", ";
+            out << route.nodes[i];
+        }
+        out << "],\n";
+        out << "      \"operations\": [";
+        for (std::size_t i = 0; i < route.operations.size(); ++i) {
+            if (i) out << ", ";
+            const ebrp::StopOperation& op = route.operations[i];
+            out << "{\"station\": " << op.station
+                << ", \"pickup\": " << op.pickup
+                << ", \"drop\": " << op.drop << "}";
+        }
+        out << "]\n    }";
+    }
+    out << "\n  ]\n}\n";
+}
+
+std::vector<ebrp::RoutePlan> emptyRouteSet(const ebrp::Instance& instance);
+
+ebrp::SolveResult solvePricingDiagnostic(const ebrp::Instance& instance,
+                                         const ebrp::SolveOptions& opt);
+
+ebrp::SolveResult solveIncumbentImportDiagnostic(const ebrp::Instance& instance,
+                                                 const ebrp::SolveOptions& opt);
+
+ebrp::SolveResult solveStationSetDiagnostic(const ebrp::Instance& instance,
+                                            const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "station-set-test";
+    initializeScalabilityFields(instance, opt, result);
+    ebrp::StationSet small(10);
+    small.add(1);
+    small.add(7);
+    small.add(10);
+    ebrp::StationSet small_subset(10);
+    small_subset.add(7);
+    ebrp::StationSet dynamic_set(100);
+    dynamic_set.add(1);
+    dynamic_set.add(64);
+    dynamic_set.add(100);
+    ebrp::StationSet dynamic_other(100);
+    dynamic_other.add(64);
+    const bool ok =
+        small.contains(1) &&
+        small.contains(10) &&
+        !small.contains(2) &&
+        small_subset.isSubsetOf(small) &&
+        small.intersects(small_subset) &&
+        dynamic_set.contains(64) &&
+        dynamic_set.contains(100) &&
+        dynamic_set.intersects(dynamic_other) &&
+        dynamic_other.isSubsetOf(dynamic_set) &&
+        dynamic_set.popcount() == 3 &&
+        !dynamic_set.toKey().empty() &&
+        dynamic_set.hash() == dynamic_set.hash();
+    result.status = ok ? "diagnostic_complete" : "diagnostic_failed";
+    result.certificate = "diagnostic only: StationSet representation is a data-structure audit, not an optimization certificate";
+    result.notes.push_back("uint64 backend expected for <=63 stations; dynamic vector<uint64_t> backend expected beyond 63 stations");
+    result.notes.push_back("dynamic StationSet key=" + dynamic_set.toKey());
+    result.routes = emptyRouteSet(instance);
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.final_inventory = result.verification.final_inventory;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.objective = result.verification.objective;
+    result.upper_bound = result.objective;
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
+ebrp::SolveResult solveNgDssrPricingDiagnostic(const ebrp::Instance& instance,
+                                               ebrp::SolveOptions opt,
+                                               const std::string& method_name,
+                                               const std::string& engine,
+                                               const std::string& stabilization) {
+    opt.pricing_engine = engine;
+    opt.cg_dual_stabilization = stabilization;
+    ebrp::SolveResult result = solvePricingDiagnostic(instance, opt);
+    result.method = method_name;
+    result.certificate_scope = "diagnostic_pricing_only";
+    result.notes.push_back(method_name + ": relaxed pricing is used only for column discovery; certificate requires exact final pricing/DSSR completion");
+    return result;
+}
+
+ebrp::SolveResult solveDssrExactnessDiagnostic(const ebrp::Instance& instance,
+                                               const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "dssr-exactness-test";
+    initializeScalabilityFields(instance, opt, result);
+    result.certificate = "diagnostic only: compares exact-label and ng-DSSR pricing on small instances";
+    if (instance.V > 16) {
+        result.status = "diagnostic_skipped";
+        result.notes.push_back("exact-label comparison skipped because V>16; DSSR exactness is not claimed");
+        result.routes = emptyRouteSet(instance);
+        result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+        result.runtime_seconds = std::chrono::duration<double>(
+            std::chrono::steady_clock::now() - start).count();
+        result.wall_time_seconds = result.runtime_seconds;
+        return result;
+    }
+    ebrp::PricingDuals duals;
+    duals.travel_cost = 1.0;
+    duals.pickup_cost = instance.pickup_time + instance.drop_time;
+    bool agree = true;
+    double max_diff = 0.0;
+    for (int k = 0; k < instance.M; ++k) {
+        ebrp::PricingOptions exact_options;
+        exact_options.time_limit_seconds = opt.solve_time_limit;
+        exact_options.pricing_engine = "exact-label";
+        ebrp::PricingOptions dssr_options = exact_options;
+        dssr_options.pricing_engine = "ng-dssr";
+        dssr_options.ng_size = std::max(2, opt.ng_size);
+        dssr_options.dssr_final_exact = true;
+        ebrp::PricingResult exact = ebrp::priceRouteLoadColumnExact(
+            instance, k, duals, exact_options, start);
+        ebrp::PricingResult dssr = ebrp::priceRouteLoadColumnExact(
+            instance, k, duals, dssr_options, start);
+        mergePricingStats(exact, result);
+        mergePricingStats(dssr, result);
+        const double diff = std::fabs(exact.best_reduced_cost - dssr.best_reduced_cost);
+        max_diff = std::max(max_diff, diff);
+        if (exact.has_column != dssr.has_column || diff > 1e-7 ||
+            !dssr.dssr_exact_closure_proved) {
+            agree = false;
+        }
+    }
+    result.status = agree ? "diagnostic_complete" : "diagnostic_failed";
+    result.notes.push_back("max exact-label/ng-DSSR reduced-cost difference=" + std::to_string(max_diff));
+    result.routes = emptyRouteSet(instance);
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.final_inventory = result.verification.final_inventory;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.objective = result.verification.objective;
+    result.upper_bound = result.objective;
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
+ebrp::SolveResult solveLargeInstanceModeDiagnostic(const ebrp::Instance& instance,
+                                                   const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "large-instance-mode-test";
+    initializeScalabilityFields(instance, opt, result);
+    const bool needs_dynamic = instance.V > 63;
+    const bool dynamic_ok = !needs_dynamic || result.station_set_backend == "dynamic";
+    const bool mask_guard_ok = instance.V <= 32 ||
+        (!result.route_mask_all_subset_enumeration_enabled &&
+         !result.route_mask_all_subset_enumeration_certifying);
+    result.status = (dynamic_ok && mask_guard_ok) ? "diagnostic_complete" : "diagnostic_failed";
+    result.certificate = "diagnostic only: large-instance mode reports disabled exact subset features instead of producing invalid certificates";
+    result.certificate_scope = "large_instance_diagnostic";
+    result.notes.push_back("large-instance backend=" + result.station_set_backend);
+    if (!result.unsupported_large_instance_features.empty()) {
+        result.notes.push_back("unsupported large-instance features: " + result.unsupported_large_instance_features);
+    }
+    result.routes = emptyRouteSet(instance);
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.final_inventory = result.verification.final_inventory;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.objective = result.verification.objective;
+    result.upper_bound = result.objective;
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
+ebrp::SolveResult solveExternalIncumbentDiagnostic(const ebrp::Instance& instance,
+                                                   ebrp::SolveOptions opt) {
+    const auto start = std::chrono::steady_clock::now();
+    std::string generated_path;
+    if (opt.external_incumbent_path.empty()) {
+        std::filesystem::path base = opt.out_path.empty()
+            ? std::filesystem::path("results/optimization_update_round12/raw/external_incumbent_synthetic.json")
+            : std::filesystem::path(opt.out_path).parent_path() / "external_incumbent_synthetic.json";
+        generated_path = base.string();
+        writeRouteJson(generated_path, emptyRouteSet(instance));
+        opt.external_incumbent_path = generated_path;
+        opt.external_incumbent_format = "route_json";
+    }
+    ebrp::SolveResult result = solveIncumbentImportDiagnostic(instance, opt);
+    result.method = "external-incumbent-test";
+    result.external_incumbent_attempted = true;
+    if (!generated_path.empty()) {
+        result.notes.push_back("synthetic external incumbent written to " + generated_path);
+    }
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
 }
 
 ebrp::SolveResult solvePricingDiagnostic(const ebrp::Instance& instance,
@@ -882,42 +1309,31 @@ ebrp::SolveResult solvePricingDiagnostic(const ebrp::Instance& instance,
     pricing_opt.support_duration_pruning = opt.support_duration_pruning;
     pricing_opt.support_duration_max_subset_size =
         opt.support_duration_max_subset_size;
+    applyPricingOptionsFromSolve(instance, opt, pricing_opt);
 
     ebrp::SolveResult result;
     result.instance_name = instance.name;
     result.input_path = instance.path;
     result.method = "pricing";
+    result.certificate_scope = "diagnostic_pricing_only";
+    result.pricing_completed_exactly = true;
+    result.pricing_closure_certified_exact = true;
+    result.pricing_closure_status = "exact_no_negative";
+    initializeScalabilityFields(instance, opt, result);
     result.notes.push_back(instance.distance_convention);
-    result.notes.push_back("Pricing diagnostic minimizes route duration over one exact route-load column with nonnegative reduced-cost pruning.");
+    result.notes.push_back("Pricing diagnostic minimizes route duration over one route-load column with nonnegative reduced-cost pruning; relaxed ng-DSSR pricing is diagnostic unless exact final verification completes.");
 
     ebrp::PricingResult best;
     best.best_reduced_cost = std::numeric_limits<double>::infinity();
     for (int k = 0; k < instance.M; ++k) {
         ebrp::PricingResult priced = ebrp::priceRouteLoadColumnExact(
             instance, k, duals, pricing_opt, start);
-        result.nodes += priced.route_states + priced.operation_states;
-        result.columns += priced.generated_columns;
-        result.pricing_calls += 1;
-        result.support_duration_cuts_generated +=
-            priced.support_duration_cuts_generated;
-        result.support_duration_pruned_labels +=
-            priced.support_duration_pruned_labels;
-        result.support_duration_pruned_columns +=
-            priced.support_duration_pruned_columns;
-        result.support_duration_strong_cuts_generated +=
-            priced.support_duration_strong_cuts_generated;
-        result.support_duration_strong_pruned_labels +=
-            priced.support_duration_strong_pruned_labels;
-        result.support_duration_strong_pruned_columns +=
-            priced.support_duration_strong_pruned_columns;
-        result.support_duration_max_subset_size =
-            std::max(result.support_duration_max_subset_size,
-                     priced.support_duration_max_subset_size);
-        result.support_duration_precompute_time_seconds +=
-            priced.support_duration_precompute_time_seconds;
+        mergePricingStats(priced, result);
         std::ostringstream note;
         note << "vehicle " << k
              << " pricing_complete=" << (priced.complete ? "true" : "false")
+             << ", engine=" << priced.pricing_engine
+             << ", dssr_rounds=" << priced.dssr_rounds
              << ", columns=" << priced.generated_columns
              << ", route_states=" << priced.route_states
              << ", operation_states=" << priced.operation_states
@@ -935,13 +1351,11 @@ ebrp::SolveResult solvePricingDiagnostic(const ebrp::Instance& instance,
 
     result.runtime_seconds = std::chrono::duration<double>(
         std::chrono::steady_clock::now() - start).count();
-    if (!result.status.empty() && result.status == "time_limit") {
-        result.certificate = "not certified; pricing diagnostic did not complete for every vehicle";
-        return result;
-    }
     if (!best.has_column) {
-        result.status = "infeasible";
-        result.certificate = "pricing completed but found no nonempty feasible route-load column";
+        result.status = result.status == "time_limit" ? "time_limit" : "infeasible";
+        result.certificate = result.status == "time_limit"
+            ? "not certified; pricing diagnostic did not complete and no verified route-load column was returned"
+            : "pricing completed but found no nonempty feasible route-load column";
         return result;
     }
 
@@ -973,18 +1387,29 @@ ebrp::SolveResult solvePricingDiagnostic(const ebrp::Instance& instance,
     result.lower_bound = best.best_column.reduced_cost;
     result.upper_bound = best.best_column.reduced_cost;
     result.gap = 0.0;
-    result.status = result.verification.feasible ? "pricing_complete" : "verification_failed";
-    result.certificate = result.verification.feasible
-        ? "exact one-vehicle route-load pricing diagnostic completed for all vehicles; objective fields report verified EBRP value for the selected diagnostic route, lower/upper bound report pricing reduced cost"
-        : "pricing diagnostic route failed independent verifier";
+    if (!result.verification.feasible) {
+        result.status = "verification_failed";
+        result.certificate = "pricing diagnostic route failed independent verifier";
+    } else if (result.status == "time_limit") {
+        result.certificate = "not certified; pricing produced a verified diagnostic route but did not complete exact closure for every vehicle";
+    } else {
+        result.status = "pricing_complete";
+        result.certificate = "exact one-vehicle route-load pricing diagnostic completed for all vehicles; objective fields report verified EBRP value for the selected diagnostic route, lower/upper bound report pricing reduced cost";
+    }
     return result;
 }
 
 bool columnContainsBoth(const ebrp::RouteLoadColumn& column, int first, int second) {
+    if (!column.station_set.empty()) {
+        return column.station_set.contains(first) && column.station_set.contains(second);
+    }
     return (column.mask & (1 << (first - 1))) && (column.mask & (1 << (second - 1)));
 }
 
 bool columnContainsExactlyOne(const ebrp::RouteLoadColumn& column, int first, int second) {
+    if (!column.station_set.empty()) {
+        return column.station_set.contains(first) != column.station_set.contains(second);
+    }
     const bool has_first = (column.mask & (1 << (first - 1))) != 0;
     const bool has_second = (column.mask & (1 << (second - 1))) != 0;
     return has_first != has_second;
@@ -1025,13 +1450,15 @@ bool columnFromRoute(const ebrp::Instance& instance,
     column = ebrp::RouteLoadColumn{};
     column.vehicle = route.vehicle;
     column.q.assign(instance.V + 1, 0);
+    column.station_set.reset(instance.V);
     std::unordered_set<int> seen;
     for (std::size_t pos = 1; pos + 1 < route.nodes.size(); ++pos) {
         const int station = route.nodes[pos];
         if (station <= 0 || station > instance.V) return false;
         if (!seen.insert(station).second) return false;
         column.path.push_back(station);
-        column.mask |= 1 << (station - 1);
+        column.station_set.add(station);
+        if (station <= 31) column.mask |= 1 << (station - 1);
     }
     for (const ebrp::StopOperation& op : route.operations) {
         if (op.station <= 0 || op.station > instance.V) return false;
@@ -1050,13 +1477,15 @@ bool columnFromRoute(const ebrp::Instance& instance,
     column.duration = column.travel +
         (instance.pickup_time + instance.drop_time) * column.pickup;
     column.reduced_cost = column.duration;
-    return column.mask != 0 && column.pickup > 0 &&
+    return (!column.station_set.empty() || column.mask != 0) && column.pickup > 0 &&
            column.duration <= instance.total_time_limit + 1e-7;
 }
 
 std::string incumbentColumnKey(const ebrp::RouteLoadColumn& column) {
     std::ostringstream out;
-    out << column.vehicle << "|" << column.mask << "|";
+    out << column.vehicle << "|";
+    out << (!column.station_set.empty() ? column.station_set.toKey()
+                                        : std::to_string(column.mask)) << "|";
     for (int station : column.path) out << station << ".";
     out << "|";
     for (int i = 1; i < static_cast<int>(column.q.size()); ++i) {
@@ -1140,7 +1569,7 @@ struct FrontierRouteColumnPool {
         ++raw;
         if (column.vehicle < 0 ||
             column.vehicle >= static_cast<int>(columns_by_vehicle.size()) ||
-            column.mask == 0 ||
+            (column.mask == 0 && column.station_set.empty()) ||
             column.q.empty()) {
             ++removed_by_dominance;
             return false;
@@ -3467,7 +3896,8 @@ ebrp::SolveResult solveIncumbentImportDiagnostic(const ebrp::Instance& instance,
     result.status = "diagnostic_complete";
     result.certificate = "diagnostic only: imported incumbents are independently verified and used as upper bounds only";
     result.incumbent_import_attempted = !opt.incumbent_json_path.empty() ||
-        !opt.hga_incumbent_path.empty();
+        !opt.hga_incumbent_path.empty() || !opt.external_incumbent_path.empty();
+    result.external_incumbent_attempted = !opt.external_incumbent_path.empty();
 
     auto testPath = [&](const std::string& path,
                         const std::string& format,
@@ -3495,20 +3925,35 @@ ebrp::SolveResult solveIncumbentImportDiagnostic(const ebrp::Instance& instance,
                 result.incumbent_source_detail =
                     "verified imported incumbent; diagnostic UB only";
                 result.notes.push_back(label + " import verified");
+                if (label.find("external") != std::string::npos) {
+                    result.external_incumbent_verified = true;
+                    result.external_incumbent_objective = verification.objective;
+                    result.external_incumbent_G = verification.G;
+                    result.external_incumbent_P = verification.P;
+                    result.external_incumbent_rejection_reason = "none";
+                }
             } else {
                 result.incumbent_import_errors.insert(
                     result.incumbent_import_errors.end(),
                     verification.errors.begin(), verification.errors.end());
                 result.notes.push_back(label + " import rejected by verifier");
+                if (label.find("external") != std::string::npos) {
+                    result.external_incumbent_rejection_reason =
+                        "independent_verifier_rejected";
+                }
             }
         } catch (const std::exception& e) {
             result.incumbent_import_errors.push_back(e.what());
             result.notes.push_back(label + " import failed: " + std::string(e.what()));
+            if (label.find("external") != std::string::npos) {
+                result.external_incumbent_rejection_reason = e.what();
+            }
         }
     };
 
     testPath(opt.incumbent_json_path, opt.incumbent_format, "incumbent-json");
     testPath(opt.hga_incumbent_path, opt.hga_incumbent_format, "hga-incumbent");
+    testPath(opt.external_incumbent_path, opt.external_incumbent_format, "external-incumbent");
 
     std::vector<ebrp::RoutePlan> malformed = emptyRouteSet(instance);
     if (!malformed.empty() && instance.V >= 1) {
@@ -8807,6 +9252,21 @@ int main(int argc, char** argv) {
                 results.push_back(solveIterativeClosureDiagnostic(instance, opt));
             } else if (opt.method == "certificate-basis-test") {
                 results.push_back(solveCertificateBasisDiagnostic(instance, opt));
+            } else if (opt.method == "station-set-test") {
+                results.push_back(solveStationSetDiagnostic(instance, opt));
+            } else if (opt.method == "ng-dssr-pricing-test") {
+                results.push_back(solveNgDssrPricingDiagnostic(
+                    instance, opt, "ng-dssr-pricing-test", "ng-dssr", opt.cg_dual_stabilization));
+            } else if (opt.method == "dssr-exactness-test") {
+                results.push_back(solveDssrExactnessDiagnostic(instance, opt));
+            } else if (opt.method == "dual-stabilization-test") {
+                results.push_back(solveNgDssrPricingDiagnostic(
+                    instance, opt, "dual-stabilization-test", "hybrid",
+                    opt.cg_dual_stabilization == "none" ? "smooth" : opt.cg_dual_stabilization));
+            } else if (opt.method == "external-incumbent-test") {
+                results.push_back(solveExternalIncumbentDiagnostic(instance, opt));
+            } else if (opt.method == "large-instance-mode-test") {
+                results.push_back(solveLargeInstanceModeDiagnostic(instance, opt));
             } else if (opt.method == "incumbent-import-test") {
                 results.push_back(solveIncumbentImportDiagnostic(instance, opt));
             } else if (opt.method == "route-pool-incumbent-test") {
@@ -8823,8 +9283,19 @@ int main(int argc, char** argv) {
                 throw std::runtime_error("Unsupported method: " + opt.method);
             }
             auto& r = results.back();
+            initializeScalabilityFields(instance, opt, r);
             if (r.result_file.empty()) r.result_file = opt.out_path;
             if (r.log_file.empty()) r.log_file = opt.log_path;
+            if (!opt.export_incumbent_path.empty() && !r.routes.empty()) {
+                try {
+                    writeRouteJson(opt.export_incumbent_path, r.routes);
+                    r.notes.push_back("exported incumbent route plan to "
+                        + opt.export_incumbent_path);
+                } catch (const std::exception& ex) {
+                    r.notes.push_back("failed to export incumbent route plan to "
+                        + opt.export_incumbent_path + ": " + ex.what());
+                }
+            }
             std::cout << r.instance_name << " " << r.method << " " << r.status
                       << " obj=" << r.objective << " runtime=" << r.runtime_seconds
                       << " columns=" << r.columns << "\n";
