@@ -444,25 +444,69 @@ std::string resultToJson(const SolveResult& result) {
         << result.labels_processed << ",\n";
     out << "  \"pricing_engine\": \""
         << jsonEscape(result.pricing_engine) << "\",\n";
+    out << "  \"bpc_pricing_engine_requested\": \""
+        << jsonEscape(result.bpc_pricing_engine_requested) << "\",\n";
+    out << "  \"bpc_pricing_engine_used\": \""
+        << jsonEscape(result.bpc_pricing_engine_used) << "\",\n";
+    out << "  \"bpc_pricing_engine_fallbacks\": "
+        << result.bpc_pricing_engine_fallbacks << ",\n";
+    out << "  \"bpc_nodes_using_ng_dssr\": "
+        << result.bpc_nodes_using_ng_dssr << ",\n";
+    out << "  \"bpc_nodes_using_exact_label\": "
+        << result.bpc_nodes_using_exact_label << ",\n";
+    out << "  \"bpc_nodes_using_hybrid\": "
+        << result.bpc_nodes_using_hybrid << ",\n";
+    out << "  \"bpc_nodes_exactly_priced\": "
+        << result.bpc_nodes_exactly_priced << ",\n";
+    out << "  \"bpc_nodes_dssr_incomplete\": "
+        << result.bpc_nodes_dssr_incomplete << ",\n";
+    out << "  \"bpc_nodes_final_verifier_called\": "
+        << result.bpc_nodes_final_verifier_called << ",\n";
+    out << "  \"bpc_nodes_final_verifier_completed\": "
+        << result.bpc_nodes_final_verifier_completed << ",\n";
     out << "  \"ng_size\": " << result.ng_size << ",\n";
+    out << "  \"ng_neighborhood_mode\": \""
+        << jsonEscape(result.ng_neighborhood_mode) << "\",\n";
     out << "  \"ng_memory_total\": " << result.ng_memory_total << ",\n";
+    out << "  \"dssr_memory_total_initial\": "
+        << result.dssr_memory_total_initial << ",\n";
+    out << "  \"dssr_memory_total_final\": "
+        << result.dssr_memory_total_final << ",\n";
     out << "  \"dssr_rounds\": " << result.dssr_rounds << ",\n";
     out << "  \"dssr_memory_expansions\": "
         << result.dssr_memory_expansions << ",\n";
+    out << "  \"dssr_repeated_station_events\": "
+        << result.dssr_repeated_station_events << ",\n";
     out << "  \"dssr_relaxed_negative_routes\": "
         << result.dssr_relaxed_negative_routes << ",\n";
     out << "  \"dssr_non_elementary_routes\": "
         << result.dssr_non_elementary_routes << ",\n";
     out << "  \"dssr_elementary_columns_found\": "
         << result.dssr_elementary_columns_found << ",\n";
+    out << "  \"dssr_no_negative_relaxed_route\": "
+        << (result.dssr_no_negative_relaxed_route ? "true" : "false") << ",\n";
     out << "  \"dssr_final_exact\": "
         << (result.dssr_final_exact ? "true" : "false") << ",\n";
     out << "  \"dssr_exact_closure_proved\": "
         << (result.dssr_exact_closure_proved ? "true" : "false") << ",\n";
+    out << "  \"dssr_final_exact_verification_time\": "
+        << result.dssr_final_exact_verification_time << ",\n";
     out << "  \"dssr_time_seconds\": "
         << result.dssr_time_seconds << ",\n";
     out << "  \"dssr_stop_reason\": \""
         << jsonEscape(result.dssr_stop_reason) << "\",\n";
+    out << "  \"large_lb_mode\": \""
+        << jsonEscape(result.large_lb_mode) << "\",\n";
+    out << "  \"large_lb_value\": "
+        << result.large_lb_value << ",\n";
+    out << "  \"large_lb_valid_global\": "
+        << (result.large_lb_valid_global ? "true" : "false") << ",\n";
+    out << "  \"large_lb_scope\": \""
+        << jsonEscape(result.large_lb_scope) << "\",\n";
+    out << "  \"large_lb_time_seconds\": "
+        << result.large_lb_time_seconds << ",\n";
+    out << "  \"large_lb_rejection_reason\": \""
+        << jsonEscape(result.large_lb_rejection_reason) << "\",\n";
     out << "  \"route_mask_count_before_support_duration\": "
         << result.route_mask_count_before_support_duration << ",\n";
     out << "  \"route_mask_count_after_support_duration\": "
@@ -853,10 +897,22 @@ std::string resultToJson(const SolveResult& result) {
         << result.cg_stabilization_columns_found << ",\n";
     out << "  \"cg_true_pricing_columns_found\": "
         << result.cg_true_pricing_columns_found << ",\n";
+    out << "  \"cg_dual_center_updates\": "
+        << result.cg_dual_center_updates << ",\n";
+    out << "  \"cg_dual_oscillation_metric\": "
+        << result.cg_dual_oscillation_metric << ",\n";
+    out << "  \"cg_true_negative_columns_inserted\": "
+        << result.cg_true_negative_columns_inserted << ",\n";
+    out << "  \"cg_stabilization_false_negatives\": "
+        << result.cg_stabilization_false_negatives << ",\n";
     out << "  \"cg_stabilization_time_seconds\": "
         << result.cg_stabilization_time_seconds << ",\n";
     out << "  \"cg_final_true_pricing_rc\": "
         << finiteOrZero(result.cg_final_true_pricing_rc) << ",\n";
+    out << "  \"external_incumbent_used_in_large_run\": "
+        << (result.external_incumbent_used_in_large_run ? "true" : "false") << ",\n";
+    out << "  \"external_incumbent_effect_on_UB\": "
+        << result.external_incumbent_effect_on_UB << ",\n";
     out << "  \"v12_m1_imported_focus_bounds\": "
         << (result.v12_m1_imported_focus_bounds ? "true" : "false") << ",\n";
     out << "  \"v12_m1_focus_bounds_accepted\": "

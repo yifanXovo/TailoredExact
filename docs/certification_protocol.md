@@ -421,3 +421,26 @@ All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `
   certificate protocol closes. Disabled all-subset route-mask relaxations must
   be listed in `unsupported_large_instance_features`, and no positive-gap or
   relaxed-pricing row may be labeled optimal.
+
+## 2026-06-22 Round-13 Certificate Warnings
+
+- A requested `hybrid` or `ng-dssr` BPC pricing row is certificate-valid only
+  when every closure-relevant node either has completed DSSR exactness or a
+  completed true-dual exact pricing verification with no negative reduced-cost
+  column remaining.
+- Fallbacks must be reported through `bpc_pricing_engine_fallbacks` and notes
+  such as `pricing_engine_fallback_reason`. A silent fallback cannot support a
+  paper certificate claim.
+- Stabilized dual pricing is a BPC column-discovery accelerator only. Returned
+  columns must be evaluated under true RMP duals before insertion, and
+  stabilized pricing cannot close a node.
+- Large-instance rows with disabled all-subset route-mask relaxations,
+  incomplete DSSR, or diagnostic pricing scope must remain noncertified even
+  if they produce useful incumbents or route columns.
+- `large_lb_mode=inventory-only` and `movement-projection` may report valid
+  global lower-bound progress. `column-pool-relaxation` over a subset of
+  generated columns is restricted-pool diagnostic evidence unless exact pricing
+  closure proves no missing columns.
+- External/HGA incumbents and converted incumbent files are upper bounds only
+  after independent route verification. Malformed or unverifiable files must be
+  rejected without changing the incumbent.

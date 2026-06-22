@@ -210,3 +210,33 @@ Current open-node state export is a warm restart unless the result explicitly
 reports `open_node_state_resume_exact=true`. Pricing-verifier checkpoints are
 progress artifacts and do not certify closure unless true-dual exact pricing
 completes with no negative reduced-cost route-load column.
+
+Round-thirteen production hybrid-pricing examples:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 300 --pricing-engine hybrid --ng-size 8 --ng-neighborhood-mode dual-aware --dssr-max-rounds 5 --dssr-expand-per-round 3 --dssr-time-limit 20 --dssr-final-exact true --cg-dual-stabilization smooth --frontier-intervals 8 --frontier-adaptive-split true --frontier-focused-intensification true --progress-log results\optimization_update_round13\raw\progress_v12_m2_full_hybrid_300s.csv --out results\optimization_update_round13\raw\v12_m2_full_hybrid_300s.json
+
+build\ExactEBRP.exe --method gcap-frontier --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-focus-only true --frontier-focus-range 0.489218,0.512514 --frontier-closure-mode exact-cg --pricing-engine hybrid --ng-size 8 --ng-neighborhood-mode nearest --dssr-final-exact true --out results\optimization_update_round13\raw\v12_m2_focus_hybrid_300s.json
+```
+
+Large-instance diagnostic examples:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --input reference\generated\regen_V20_M2_average.txt --lambda 0.15 --T 3600 --time-limit 300 --large-instance-mode auto --large-lb-mode movement-projection --pricing-engine hybrid --ng-size 12 --ng-neighborhood-mode hybrid --dssr-max-rounds 5 --cg-dual-stabilization smooth --out results\optimization_update_round13\raw\v20_hybrid_300s.json
+
+build\ExactEBRP.exe --method pricing --input reference\generated\regen_V100_M5_average.txt --lambda 0.15 --T 3600 --time-limit 300 --large-instance-mode auto --pricing-engine hybrid --ng-size 12 --ng-neighborhood-mode hybrid --dssr-final-exact false --out results\optimization_update_round13\raw\v100_hybrid_pricing_300s.json
+
+build\ExactEBRP.exe --method large-lb-test --input reference\generated\regen_V100_M5_average.txt --lambda 0.15 --T 3600 --large-lb-mode movement-projection --out results\optimization_update_round13\raw\v100_large_lb_test.json
+```
+
+External/HGA incumbent conversion and verification:
+
+```powershell
+python scripts\convert_hga_incumbent.py --input hga_routes.csv --format csv --output results\converted_hga_incumbent.json
+
+build\ExactEBRP.exe --method incumbent-import-test --input reference\generated\regen_V50_M3_average.txt --lambda 0.15 --T 3600 --external-incumbent results\converted_hga_incumbent.json --external-incumbent-format route_json --out results\optimization_update_round13\raw\v50_external_incumbent.json
+```
+
+Hybrid/ng-DSSR and stabilized duals are column-discovery tools unless DSSR
+exactness or true-dual final pricing verification completes. V50/V100 rows are
+diagnostics unless the full certificate protocol closes.

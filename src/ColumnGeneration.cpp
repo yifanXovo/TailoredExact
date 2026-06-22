@@ -33,6 +33,95 @@ namespace {
 
 using Clock = std::chrono::steady_clock;
 
+std::string lowerPricingString(std::string value) {
+    std::transform(value.begin(), value.end(), value.begin(),
+                   [](unsigned char c) {
+                       return static_cast<char>(std::tolower(c));
+                   });
+    return value;
+}
+
+template <typename ResultLike>
+void initializeBpcPricingFields(ResultLike& result,
+                                const PricingOptions& options) {
+    result.bpc_pricing_engine_requested = lowerPricingString(options.pricing_engine);
+    if (result.bpc_pricing_engine_requested.empty() ||
+        result.bpc_pricing_engine_requested == "auto") {
+        result.bpc_pricing_engine_requested = "exact-label";
+    }
+    result.bpc_pricing_engine_used = result.bpc_pricing_engine_requested;
+    result.ng_size = options.ng_size;
+    result.ng_neighborhood_mode = options.ng_neighborhood_mode;
+    result.cg_stabilization_mode = lowerPricingString(options.cg_dual_stabilization);
+    if (result.cg_stabilization_mode.empty()) result.cg_stabilization_mode = "none";
+}
+
+template <typename ResultLike>
+void accumulateBpcPricingStats(ResultLike& result,
+                               const PricingResult& priced,
+                               bool closure_relevant_call = true) {
+    std::string used = lowerPricingString(priced.pricing_engine);
+    if (used.empty()) used = "exact-label";
+    result.bpc_pricing_engine_used = used;
+    if (!result.bpc_pricing_engine_requested.empty() &&
+        result.bpc_pricing_engine_requested != "auto" &&
+        result.bpc_pricing_engine_requested != used) {
+        ++result.bpc_pricing_engine_fallbacks;
+    }
+    if (used == "ng-dssr") ++result.bpc_nodes_using_ng_dssr;
+    else if (used == "hybrid") ++result.bpc_nodes_using_hybrid;
+    else ++result.bpc_nodes_using_exact_label;
+    if (priced.complete && closure_relevant_call) ++result.bpc_nodes_exactly_priced;
+    if ((used == "ng-dssr" || used == "hybrid") &&
+        !priced.dssr_exact_closure_proved && !priced.complete) {
+        ++result.bpc_nodes_dssr_incomplete;
+    }
+    if (priced.dssr_final_exact) {
+        ++result.bpc_nodes_final_verifier_called;
+        if (priced.dssr_exact_closure_proved || priced.complete) {
+            ++result.bpc_nodes_final_verifier_completed;
+        }
+    }
+    result.ng_size = std::max(result.ng_size, priced.ng_size);
+    if (!priced.ng_neighborhood_mode.empty()) {
+        result.ng_neighborhood_mode = priced.ng_neighborhood_mode;
+    }
+    result.ng_memory_total += priced.ng_memory_total;
+    result.dssr_memory_total_initial += priced.dssr_memory_total_initial;
+    result.dssr_memory_total_final += priced.dssr_memory_total_final;
+    result.dssr_rounds += priced.dssr_rounds;
+    result.dssr_memory_expansions += priced.dssr_memory_expansions;
+    result.dssr_repeated_station_events += priced.dssr_repeated_station_events;
+    result.dssr_relaxed_negative_routes += priced.dssr_relaxed_negative_routes;
+    result.dssr_non_elementary_routes += priced.dssr_non_elementary_routes;
+    result.dssr_elementary_columns_found += priced.dssr_elementary_columns_found;
+    result.dssr_no_negative_relaxed_route =
+        result.dssr_no_negative_relaxed_route || priced.dssr_no_negative_relaxed_route;
+    result.dssr_exact_closure_proved =
+        result.dssr_exact_closure_proved || priced.dssr_exact_closure_proved;
+    result.dssr_final_exact_verification_time +=
+        priced.dssr_final_exact_verification_time;
+    result.dssr_time_seconds += priced.dssr_time_seconds;
+    if (!priced.dssr_stop_reason.empty()) {
+        if (!result.dssr_stop_reason.empty()) result.dssr_stop_reason += "; ";
+        result.dssr_stop_reason += priced.dssr_stop_reason;
+    }
+    result.cg_stabilized_pricing_calls += priced.cg_stabilized_pricing_calls;
+    result.cg_true_pricing_calls += priced.cg_true_pricing_calls;
+    result.cg_stabilization_columns_found += priced.cg_stabilization_columns_found;
+    result.cg_true_pricing_columns_found += priced.cg_true_pricing_columns_found;
+    result.cg_dual_center_updates += priced.cg_dual_center_updates;
+    result.cg_dual_oscillation_metric =
+        std::max(result.cg_dual_oscillation_metric,
+                 priced.cg_dual_oscillation_metric);
+    result.cg_true_negative_columns_inserted +=
+        priced.cg_true_negative_columns_inserted;
+    result.cg_stabilization_false_negatives +=
+        priced.cg_stabilization_false_negatives;
+    result.cg_stabilization_time_seconds += priced.cg_stabilization_time_seconds;
+    result.cg_final_true_pricing_rc = priced.cg_final_true_pricing_rc;
+}
+
 struct LpSolve {
     bool ok = false;
     std::string status;
@@ -1614,6 +1703,60 @@ void addStats(GiniCapTreeResult& total, const GiniCapColumnGenerationResult& nod
         node.pricing_exact_verification_calls;
     total.pricing_exact_verification_time_seconds +=
         node.pricing_exact_verification_time_seconds;
+    total.bpc_pricing_engine_fallbacks += node.bpc_pricing_engine_fallbacks;
+    if (!node.bpc_pricing_engine_requested.empty()) {
+        total.bpc_pricing_engine_requested = node.bpc_pricing_engine_requested;
+    }
+    if (!node.bpc_pricing_engine_used.empty()) {
+        total.bpc_pricing_engine_used = node.bpc_pricing_engine_used;
+    }
+    total.bpc_nodes_using_ng_dssr += node.bpc_nodes_using_ng_dssr;
+    total.bpc_nodes_using_exact_label += node.bpc_nodes_using_exact_label;
+    total.bpc_nodes_using_hybrid += node.bpc_nodes_using_hybrid;
+    total.bpc_nodes_exactly_priced += node.bpc_nodes_exactly_priced;
+    total.bpc_nodes_dssr_incomplete += node.bpc_nodes_dssr_incomplete;
+    total.bpc_nodes_final_verifier_called +=
+        node.bpc_nodes_final_verifier_called;
+    total.bpc_nodes_final_verifier_completed +=
+        node.bpc_nodes_final_verifier_completed;
+    total.ng_size = std::max(total.ng_size, node.ng_size);
+    if (!node.ng_neighborhood_mode.empty()) {
+        total.ng_neighborhood_mode = node.ng_neighborhood_mode;
+    }
+    total.ng_memory_total += node.ng_memory_total;
+    total.dssr_memory_total_initial += node.dssr_memory_total_initial;
+    total.dssr_memory_total_final += node.dssr_memory_total_final;
+    total.dssr_rounds += node.dssr_rounds;
+    total.dssr_memory_expansions += node.dssr_memory_expansions;
+    total.dssr_repeated_station_events += node.dssr_repeated_station_events;
+    total.dssr_relaxed_negative_routes += node.dssr_relaxed_negative_routes;
+    total.dssr_non_elementary_routes += node.dssr_non_elementary_routes;
+    total.dssr_elementary_columns_found += node.dssr_elementary_columns_found;
+    total.dssr_no_negative_relaxed_route =
+        total.dssr_no_negative_relaxed_route || node.dssr_no_negative_relaxed_route;
+    total.dssr_exact_closure_proved =
+        total.dssr_exact_closure_proved || node.dssr_exact_closure_proved;
+    total.dssr_final_exact_verification_time +=
+        node.dssr_final_exact_verification_time;
+    total.dssr_time_seconds += node.dssr_time_seconds;
+    if (!node.dssr_stop_reason.empty()) {
+        if (!total.dssr_stop_reason.empty()) total.dssr_stop_reason += "; ";
+        total.dssr_stop_reason += node.dssr_stop_reason;
+    }
+    total.cg_stabilization_mode = node.cg_stabilization_mode;
+    total.cg_stabilized_pricing_calls += node.cg_stabilized_pricing_calls;
+    total.cg_true_pricing_calls += node.cg_true_pricing_calls;
+    total.cg_stabilization_columns_found += node.cg_stabilization_columns_found;
+    total.cg_true_pricing_columns_found += node.cg_true_pricing_columns_found;
+    total.cg_dual_center_updates += node.cg_dual_center_updates;
+    total.cg_dual_oscillation_metric =
+        std::max(total.cg_dual_oscillation_metric,
+                 node.cg_dual_oscillation_metric);
+    total.cg_true_negative_columns_inserted +=
+        node.cg_true_negative_columns_inserted;
+    total.cg_stabilization_false_negatives +=
+        node.cg_stabilization_false_negatives;
+    total.cg_final_true_pricing_rc = node.cg_final_true_pricing_rc;
     total.support_duration_cuts_generated += node.support_duration_cuts_generated;
     total.support_duration_pruned_labels += node.support_duration_pruned_labels;
     total.support_duration_pruned_columns += node.support_duration_pruned_columns;
@@ -1672,9 +1815,11 @@ void finalizePricingClosureFields(ResultLike& result,
 ColumnGenerationResult runCoverageColumnGenerationDiagnostic(
     const Instance& instance,
     double time_limit_seconds,
-    int max_iterations) {
+    int max_iterations,
+    const PricingOptions& base_pricing_options) {
     const auto start = Clock::now();
     ColumnGenerationResult result;
+    initializeBpcPricingFields(result, base_pricing_options);
     const auto required = chooseRequiredPair(instance);
     result.required_i = required.first;
     result.required_j = required.second;
@@ -1724,11 +1869,12 @@ ColumnGenerationResult runCoverageColumnGenerationDiagnostic(
             duals.visit_cost[required.first] -= dualValue(lp, coverName(required.first));
             duals.visit_cost[required.second] -= dualValue(lp, coverName(required.second));
 
-            PricingOptions pricing_options;
+            PricingOptions pricing_options = base_pricing_options;
             pricing_options.time_limit_seconds = remaining;
             pricing_options.allowed_station_mask =
                 (1 << (required.first - 1)) | (1 << (required.second - 1));
             PricingResult priced = priceRouteLoadColumnExact(instance, k, duals, pricing_options, start);
+            accumulateBpcPricingStats(result, priced);
             ++result.pricing_calls;
             result.route_states += priced.route_states;
             result.operation_states += priced.operation_states;
@@ -1787,9 +1933,11 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
     bool column_dominance_enabled = true,
     const std::string& column_dominance_mode = "exact",
     bool support_duration_pruning_enabled = true,
-    int support_duration_max_subset_size = 5) {
+    int support_duration_max_subset_size = 5,
+    const PricingOptions& base_pricing_options = PricingOptions{}) {
     const auto start = Clock::now();
     GiniCapColumnGenerationResult result;
+    initializeBpcPricingFields(result, base_pricing_options);
     result.pricing_best_reduced_cost_any =
         std::numeric_limits<double>::infinity();
     result.pricing_best_new_reduced_cost =
@@ -2046,7 +2194,7 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
             } else {
                 PricingDuals duals = shared_duals;
                 duals.constant = 0.0;
-                PricingOptions pricing_options;
+                PricingOptions pricing_options = base_pricing_options;
                 pricing_options.time_limit_seconds = vehicle_remaining;
                 pricing_options.forbidden_station_mask = forbidden_station_mask;
                 pricing_options.forbid_pickup_station_mask = forbid_pickup_station_mask;
@@ -2065,6 +2213,7 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                         : 1;
                 const auto pricing_start = Clock::now();
                 priced = priceRouteLoadColumnExact(instance, k, duals, pricing_options, start);
+                accumulateBpcPricingStats(result, priced);
                 result.pricing_time_seconds +=
                     std::chrono::duration<double>(Clock::now() - pricing_start).count();
                 pricing_by_capacity.emplace(instance.Q[k], priced);
@@ -2131,7 +2280,7 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                     ? std::max(0.1, time_limit_seconds - exact_elapsed) : 0.0;
                 PricingDuals duals = shared_duals;
                 duals.constant = 0.0;
-                PricingOptions pricing_options;
+                PricingOptions pricing_options = base_pricing_options;
                 pricing_options.time_limit_seconds = exact_remaining;
                 pricing_options.forbidden_station_mask = forbidden_station_mask;
                 pricing_options.forbid_pickup_station_mask = forbid_pickup_station_mask;
@@ -2149,6 +2298,7 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 const auto pricing_start = Clock::now();
                 PricingResult exact =
                     priceRouteLoadColumnExact(instance, k, duals, pricing_options, start);
+                accumulateBpcPricingStats(result, exact);
                 result.pricing_time_seconds +=
                     std::chrono::duration<double>(Clock::now() - pricing_start).count();
                 pricing_by_capacity[instance.Q[k]] = exact;
@@ -2220,7 +2370,10 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
             std::ostringstream note;
             note << "iteration " << iter
                  << " vehicle " << k
-                 << " pricing_complete=" << (priced.complete ? "true" : "false")
+                 << " pricing_engine_requested=" << result.bpc_pricing_engine_requested
+                 << ", pricing_engine_used=" << priced.pricing_engine
+                 << ", dssr_stop_reason=" << priced.dssr_stop_reason
+                 << ", pricing_complete=" << (priced.complete ? "true" : "false")
                  << ", early_negative_stop="
                  << (priced.stopped_early_with_column ? "true" : "false")
                  << ", reused_capacity_price=" << (reused_pricing ? "true" : "false")
@@ -2230,6 +2383,23 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                  << ", operation_states=" << (reused_pricing ? 0 : priced.operation_states)
                  << ", best_reduced_cost=" << priced.best_reduced_cost;
             result.notes.push_back(note.str());
+            if (!result.bpc_pricing_engine_requested.empty() &&
+                result.bpc_pricing_engine_requested != "auto" &&
+                result.bpc_pricing_engine_requested != priced.pricing_engine) {
+                std::string reason = "other";
+                if (result.bpc_pricing_engine_requested == "hybrid" &&
+                    priced.pricing_engine == "exact-label" && instance.V <= 16) {
+                    reason = "small_instance_exact_label_verification";
+                } else if (priced.pricing_closure_status.find("unsupported") !=
+                           std::string::npos) {
+                    reason = "large_instance_guard";
+                }
+                result.notes.push_back("iteration " + std::to_string(iter)
+                    + " vehicle " + std::to_string(k)
+                    + " pricing_engine_fallback_reason=" + reason
+                    + ", requested=" + result.bpc_pricing_engine_requested
+                    + ", used=" + priced.pricing_engine);
+            }
 
             std::vector<RouteLoadColumn> negative_candidates;
             if (priced.has_column && priced.best_reduced_cost < -1e-7) {
@@ -2393,12 +2563,14 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationDiagnostic(
     double time_limit_seconds,
     int max_iterations,
     bool support_duration_pruning_enabled,
-    int support_duration_max_subset_size) {
+    int support_duration_max_subset_size,
+    const PricingOptions& pricing_options) {
     return runGiniCapColumnGenerationInternal(
         instance, lambda, gamma, -1.0, time_limit_seconds, max_iterations,
         GiniCapBranchRestriction{}, nullptr, false,
         std::numeric_limits<double>::infinity(), 1, true, "exact",
-        support_duration_pruning_enabled, support_duration_max_subset_size);
+        support_duration_pruning_enabled, support_duration_max_subset_size,
+        pricing_options);
 }
 
 GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
@@ -2408,9 +2580,11 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     double time_limit_seconds,
     int max_iterations,
     bool support_duration_pruning_enabled,
-    int support_duration_max_subset_size) {
+    int support_duration_max_subset_size,
+    const PricingOptions& pricing_options) {
     const auto start = Clock::now();
     GiniCapBranchProbeResult result;
+    initializeBpcPricingFields(result, pricing_options);
     result.notes.push_back("Fixed-Gini-cap Ryan-Foster branch probe closes the root LP, selects one fractional co-route pair, then closes both child root LPs if time allows. This is one branch level, not a full integer tree.");
 
     const double root_budget = (time_limit_seconds > 0.0) ? time_limit_seconds * 0.45 : 0.0;
@@ -2418,8 +2592,17 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
         instance, lambda, gamma, -1.0, root_budget, max_iterations,
         GiniCapBranchRestriction{}, nullptr, false,
         std::numeric_limits<double>::infinity(), 1, true, "exact",
-        support_duration_pruning_enabled, support_duration_max_subset_size);
+        support_duration_pruning_enabled, support_duration_max_subset_size,
+        pricing_options);
     result.root_complete = root.complete;
+    result.bpc_pricing_engine_fallbacks += root.bpc_pricing_engine_fallbacks;
+    result.bpc_nodes_using_ng_dssr += root.bpc_nodes_using_ng_dssr;
+    result.bpc_nodes_using_exact_label += root.bpc_nodes_using_exact_label;
+    result.bpc_nodes_using_hybrid += root.bpc_nodes_using_hybrid;
+    result.bpc_nodes_exactly_priced += root.bpc_nodes_exactly_priced;
+    result.bpc_nodes_dssr_incomplete += root.bpc_nodes_dssr_incomplete;
+    result.bpc_nodes_final_verifier_called += root.bpc_nodes_final_verifier_called;
+    result.bpc_nodes_final_verifier_completed += root.bpc_nodes_final_verifier_completed;
     result.root_bound = root.fixed_cap_surrogate;
     result.pricing_calls += root.pricing_calls;
     result.generated_columns += root.generated_columns;
@@ -2485,8 +2668,17 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
         instance, lambda, gamma, -1.0, child_budget, max_iterations,
         forbid, &root.columns_by_vehicle, false,
         std::numeric_limits<double>::infinity(), 1, true, "exact",
-        support_duration_pruning_enabled, support_duration_max_subset_size);
+        support_duration_pruning_enabled, support_duration_max_subset_size,
+        pricing_options);
     result.forbid_child_complete = forbid_child.complete;
+    result.bpc_pricing_engine_fallbacks += forbid_child.bpc_pricing_engine_fallbacks;
+    result.bpc_nodes_using_ng_dssr += forbid_child.bpc_nodes_using_ng_dssr;
+    result.bpc_nodes_using_exact_label += forbid_child.bpc_nodes_using_exact_label;
+    result.bpc_nodes_using_hybrid += forbid_child.bpc_nodes_using_hybrid;
+    result.bpc_nodes_exactly_priced += forbid_child.bpc_nodes_exactly_priced;
+    result.bpc_nodes_dssr_incomplete += forbid_child.bpc_nodes_dssr_incomplete;
+    result.bpc_nodes_final_verifier_called += forbid_child.bpc_nodes_final_verifier_called;
+    result.bpc_nodes_final_verifier_completed += forbid_child.bpc_nodes_final_verifier_completed;
     result.forbid_child_bound = forbid_child.fixed_cap_surrogate;
     result.pricing_calls += forbid_child.pricing_calls;
     result.generated_columns += forbid_child.generated_columns;
@@ -2532,8 +2724,17 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
         instance, lambda, gamma, -1.0, require_budget, max_iterations,
         require, &root.columns_by_vehicle, false,
         std::numeric_limits<double>::infinity(), 1, true, "exact",
-        support_duration_pruning_enabled, support_duration_max_subset_size);
+        support_duration_pruning_enabled, support_duration_max_subset_size,
+        pricing_options);
     result.require_child_complete = require_child.complete;
+    result.bpc_pricing_engine_fallbacks += require_child.bpc_pricing_engine_fallbacks;
+    result.bpc_nodes_using_ng_dssr += require_child.bpc_nodes_using_ng_dssr;
+    result.bpc_nodes_using_exact_label += require_child.bpc_nodes_using_exact_label;
+    result.bpc_nodes_using_hybrid += require_child.bpc_nodes_using_hybrid;
+    result.bpc_nodes_exactly_priced += require_child.bpc_nodes_exactly_priced;
+    result.bpc_nodes_dssr_incomplete += require_child.bpc_nodes_dssr_incomplete;
+    result.bpc_nodes_final_verifier_called += require_child.bpc_nodes_final_verifier_called;
+    result.bpc_nodes_final_verifier_completed += require_child.bpc_nodes_final_verifier_completed;
     result.require_child_bound = require_child.fixed_cap_surrogate;
     result.pricing_calls += require_child.pricing_calls;
     result.generated_columns += require_child.generated_columns;
@@ -2602,7 +2803,8 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
     const std::string& branch_selection_mode,
     int strong_branching_candidates,
     double strong_branching_time_seconds,
-    bool reliability_branching_enabled) {
+    bool reliability_branching_enabled,
+    const PricingOptions& pricing_options) {
     const auto start = Clock::now();
     struct TreeNode {
         GiniCapBranchRestriction branch;
@@ -2613,6 +2815,7 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
 
     GiniCapTreeResult result;
     result.columns_by_vehicle.assign(instance.M, {});
+    initializeBpcPricingFields(result, pricing_options);
     result.pricing_best_reduced_cost_any =
         std::numeric_limits<double>::infinity();
     result.pricing_best_new_reduced_cost =
@@ -3012,7 +3215,8 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
             node.branch, &node.columns_by_vehicle, use_combined_gini_lower_bound,
             objective_cutoff, pricing_return_columns,
             column_dominance_enabled, column_dominance_mode,
-            support_duration_pruning_enabled, support_duration_max_subset_size);
+            support_duration_pruning_enabled, support_duration_max_subset_size,
+            pricing_options);
         ++result.nodes_solved;
         addStats(result, lp_node);
         for (const RouteLoadColumn& col : lp_node.flat_columns) {

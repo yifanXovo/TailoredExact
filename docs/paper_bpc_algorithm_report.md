@@ -583,3 +583,51 @@ handling, verification, and ng-DSSR pricing diagnostics run without mask
 overflow or memory/address failures, while remaining clearly noncertified.
 Raw JSON, logs, progress traces, and CSV summaries are stored in
 `results/optimization_update_round12/`. Plain CPLEX was skipped.
+
+## Thirteenth Optimization Pass: Production Hybrid Pricing And Scalable BPC Integration
+
+Round thirteen wires the hybrid/ng-DSSR pricing options through the BPC
+column-generation, tree, frontier, focused-closure, and iterative-closure
+entry points. Explicit `--pricing-engine hybrid` requests now use the hybrid
+engine even on V12; small-instance rows still require exact final verification
+before node closure. Returned hybrid columns are evaluated under true duals
+before insertion, and incomplete DSSR rows remain noncertified.
+
+| Instance | Variant | Status | UB | LB | Gap | Engine used | DSSR exact? | Certified? |
+|---|---|---:|---:|---:|---:|---|---|---|
+| V4 smoke | frontier exact-label | optimal | 0 | 0 | 0 | exact-label | n/a | yes |
+| V4 smoke | frontier hybrid | optimal | 0 | 0 | 0 | hybrid | yes | yes |
+| V12 M2 average | focus exact-label 300s | not closed | 0.780792889928 | 0.712948394993 | 0.086891793983 | exact-label | n/a | no |
+| V12 M2 average | focus hybrid 300s | not closed | 0.780792889928 | 0.712948394993 | 0.086891793983 | hybrid | no | no |
+| V12 M2 average | focus hybrid smooth 300s | not closed | 0.780792889928 | 0.712948394993 | 0.086891793983 | hybrid/smooth | no | no |
+| V12 M2 average | full exact-label 300s | not closed | 0.780792889928 | 0.684222130220 | 0.123682939425 | exact-label | n/a | no |
+| V12 M2 average | full hybrid 300s | not closed | 0.780792889928 | 0.684222130220 | 0.123682939425 | hybrid/smooth | no | no |
+| V12 M1 average | full exact-label 300s | not closed | 0.386764365884 | 0.338980588720 | 0.123547517245 | exact-label | n/a | no |
+| V12 M1 average | full hybrid 300s | not closed | 0.386764365884 | 0.334782317080 | 0.134402373613 | hybrid/smooth | no | no |
+
+Hybrid pricing now reaches the BPC path: the V12 M2 focus rows used hybrid
+pricing with no fallback and returned elementary negative columns quickly, but
+DSSR did not prove closure, so the exact certificate remains open. Smooth
+stabilization affected column discovery counters but did not change the final
+lower bound in the 300s focus test.
+
+| Scale | Variant | Status | UB | LB | Gap | Pricing engine | Scope |
+|---|---|---:|---:|---:|---:|---|---|
+| V20 | gcap-frontier hybrid 300s | not closed | 1.13623075045 | 0.368133269885 | 0.676004834634 | hybrid/smooth | original BPC incomplete |
+| V50 | pricing hybrid 300s | time_limit | diagnostic | diagnostic | n/a | hybrid/smooth | pricing diagnostic |
+| V100 | pricing hybrid 300s | time_limit | diagnostic | diagnostic | n/a | hybrid/smooth | pricing diagnostic |
+| V100 | large-lb movement projection | diagnostic complete | 6.62899864046 | 0 | 1 | n/a | global lower-bound diagnostic |
+
+The V50/V100 generated rows use dynamic/guarded large-instance mode where
+needed and avoid all-subset route-mask certification. They parse and run
+without mask overflow, `bad_alloc`, access violation, or segmentation-fault
+signatures in the captured logs, but remain scalability diagnostics because
+DSSR is incomplete.
+
+External incumbent workflow was exercised by exporting a verified V4 route
+plan and re-importing it through the independent verifier. A malformed V50
+route JSON was rejected with no incumbent update.
+
+No new original-problem certificate was obtained beyond the existing V4 smoke
+certificate in this pass. Raw JSON, logs, progress traces, and CSV summaries
+are stored in `results/optimization_update_round13/`. Plain CPLEX was skipped.

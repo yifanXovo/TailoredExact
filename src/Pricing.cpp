@@ -103,7 +103,7 @@ public:
         if (engine.empty() || engine == "auto") {
             engine = instance_.V > 30 ? "hybrid" : "exact-label";
         }
-        if (engine == "ng-dssr" || (engine == "hybrid" && instance_.V > 16)) {
+        if (engine == "ng-dssr" || engine == "hybrid") {
             return runScalableNgDssrPricing(instance_, vehicle_, duals_, options_, start_);
         }
         result_.pricing_engine = "exact-label";
@@ -1064,6 +1064,8 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
         result.pricing_engine = "hybrid";
     }
     result.ng_size = std::max(1, options.ng_size);
+    result.ng_neighborhood_mode = lowerCopy(options.ng_neighborhood_mode);
+    if (result.ng_neighborhood_mode.empty()) result.ng_neighborhood_mode = "nearest";
     result.dssr_final_exact = options.dssr_final_exact;
     const auto pricing_start = Clock::now();
     PricingDuals search_duals = duals;
@@ -1230,9 +1232,16 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
         if (!stationAllowedLarge(station)) continue;
         const double pickup_coeff = search_duals.pickup_cost + dualOperationCost(search_duals, station);
         const double drop_coeff = -dualOperationCost(search_duals, station);
-        double score = dualVisitCost(search_duals, station) +
-            std::min({0.0, pickup_coeff, drop_coeff}) +
-            1e-6 * (instance.dist[0][station] + instance.dist[station][0]);
+        const double travel_score =
+            instance.dist[0][station] + instance.dist[station][0];
+        const double dual_score = dualVisitCost(search_duals, station) +
+            std::min({0.0, pickup_coeff, drop_coeff});
+        double score = travel_score;
+        if (result.ng_neighborhood_mode == "dual-aware") {
+            score = dual_score + 1e-6 * travel_score;
+        } else if (result.ng_neighborhood_mode == "hybrid") {
+            score = 0.5 * travel_score + dual_score;
+        }
         ranked.push_back({score, station});
     }
     std::sort(ranked.begin(), ranked.end());
@@ -1241,13 +1250,21 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
         std::max(result.ng_size, std::min(instance.V, result.ng_size * 3)));
     const int max_rounds = std::max(1, options.dssr_max_rounds);
     const int max_path_len = std::max(1, std::min(instance.V, result.ng_size + 2));
-    result.ng_memory_total = static_cast<long long>(instance.V) * result.ng_size;
+    result.dssr_memory_total_initial =
+        static_cast<long long>(instance.V) * result.ng_size;
+    result.ng_memory_total = result.dssr_memory_total_initial;
 
     for (int round = 0; round < max_rounds; ++round) {
         ++result.dssr_rounds;
         const int local_ng = std::min(instance.V,
                                       result.ng_size + round * std::max(1, options.dssr_expand_per_round));
-        result.dssr_memory_expansions += (round == 0 ? 0 : instance.V);
+        if (round > 0) {
+            result.dssr_memory_expansions += instance.V;
+            result.dssr_repeated_station_events +=
+                std::max<long long>(1, result.dssr_non_elementary_routes);
+        }
+        result.dssr_memory_total_final =
+            static_cast<long long>(instance.V) * local_ng;
         for (int seed_pos = 0; seed_pos < seed_count; ++seed_pos) {
             if (timedOut()) {
                 result.dssr_time_seconds =
@@ -1285,9 +1302,13 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
                 int next_station = 0;
                 double best_next = std::numeric_limits<double>::infinity();
                 int considered = 0;
+                int repeated_candidate = 0;
                 for (const auto& entry : ranked) {
                     const int station = entry.second;
-                    if (used[station]) continue;
+                    if (used[station]) {
+                        if (repeated_candidate == 0) repeated_candidate = station;
+                        continue;
+                    }
                     const double neighborhood_penalty =
                         considered < local_ng ? 0.0 : 0.05 * considered;
                     const double dual_term =
@@ -1304,6 +1325,10 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
                     ++considered;
                     if (considered > std::max(local_ng * 4, 16)) break;
                 }
+                if (repeated_candidate != 0 && step >= local_ng) {
+                    ++result.dssr_non_elementary_routes;
+                    ++result.dssr_repeated_station_events;
+                }
                 if (next_station == 0) break;
                 current = next_station;
             }
@@ -1312,16 +1337,22 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
     }
 
     if (!result.has_column) result.best_reduced_cost = 0.0;
+    result.dssr_no_negative_relaxed_route = !result.has_negative_column;
     result.complete = false;
     result.dssr_exact_closure_proved = false;
     result.dssr_stop_reason = result.has_negative_column
         ? "elementary_negative_column_found_final_exact_required"
         : "dssr_incomplete_final_exact_required";
-    if (result.pricing_engine == "ng-dssr" && instance.V <= 16 &&
+    if ((result.pricing_engine == "ng-dssr" ||
+         result.pricing_engine == "hybrid") &&
+        instance.V <= 16 &&
         options.dssr_final_exact) {
         PricingOptions exact_options = options;
         exact_options.pricing_engine = "exact-label";
+        const auto exact_start = Clock::now();
         PricingResult exact = ExactPricer(instance, vehicle, duals, exact_options, start).run();
+        result.dssr_final_exact_verification_time +=
+            std::chrono::duration<double>(Clock::now() - exact_start).count();
         result.cg_true_pricing_calls += 1;
         result.cg_true_pricing_columns_found += exact.has_negative_column ? 1 : 0;
         result.cg_final_true_pricing_rc = exact.best_reduced_cost;
@@ -1364,6 +1395,10 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
         stabilization == "none" ? result.dssr_elementary_columns_found : 0;
     result.cg_dual_center_updates =
         stabilization == "none" ? 0 : std::max(0, result.dssr_rounds - 1);
+    result.cg_dual_oscillation_metric =
+        std::fabs(duals.constant - search_duals.constant);
+    result.cg_true_negative_columns_inserted =
+        result.negative_new_projection_count;
     result.dssr_time_seconds =
         std::chrono::duration<double>(Clock::now() - pricing_start).count();
     result.cg_stabilization_time_seconds =

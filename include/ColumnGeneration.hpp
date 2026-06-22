@@ -2,6 +2,7 @@
 
 #include "Column.hpp"
 #include "Instance.hpp"
+#include "Pricing.hpp"
 #include "Result.hpp"
 
 #include <limits>
@@ -45,6 +46,43 @@ struct ColumnGenerationResult {
     double pricing_remaining_negative_rc = 0.0;
     long long pricing_exact_verification_calls = 0;
     double pricing_exact_verification_time_seconds = 0.0;
+    std::string bpc_pricing_engine_requested = "exact-label";
+    std::string bpc_pricing_engine_used = "exact-label";
+    long long bpc_pricing_engine_fallbacks = 0;
+    long long bpc_nodes_using_ng_dssr = 0;
+    long long bpc_nodes_using_exact_label = 0;
+    long long bpc_nodes_using_hybrid = 0;
+    long long bpc_nodes_exactly_priced = 0;
+    long long bpc_nodes_dssr_incomplete = 0;
+    long long bpc_nodes_final_verifier_called = 0;
+    long long bpc_nodes_final_verifier_completed = 0;
+    int ng_size = 0;
+    std::string ng_neighborhood_mode = "nearest";
+    long long ng_memory_total = 0;
+    long long dssr_memory_total_initial = 0;
+    long long dssr_memory_total_final = 0;
+    int dssr_rounds = 0;
+    long long dssr_memory_expansions = 0;
+    long long dssr_repeated_station_events = 0;
+    long long dssr_relaxed_negative_routes = 0;
+    long long dssr_non_elementary_routes = 0;
+    long long dssr_elementary_columns_found = 0;
+    bool dssr_no_negative_relaxed_route = false;
+    bool dssr_exact_closure_proved = false;
+    double dssr_final_exact_verification_time = 0.0;
+    double dssr_time_seconds = 0.0;
+    std::string dssr_stop_reason;
+    std::string cg_stabilization_mode = "none";
+    long long cg_dual_center_updates = 0;
+    double cg_dual_oscillation_metric = 0.0;
+    long long cg_stabilized_pricing_calls = 0;
+    long long cg_true_pricing_calls = 0;
+    long long cg_stabilization_columns_found = 0;
+    long long cg_true_pricing_columns_found = 0;
+    long long cg_true_negative_columns_inserted = 0;
+    long long cg_stabilization_false_negatives = 0;
+    double cg_stabilization_time_seconds = 0.0;
+    double cg_final_true_pricing_rc = 0.0;
     long long support_duration_cuts_generated = 0;
     long long support_duration_pruned_labels = 0;
     long long support_duration_pruned_columns = 0;
@@ -95,6 +133,43 @@ struct GiniCapColumnGenerationResult {
     double pricing_remaining_negative_rc = 0.0;
     long long pricing_exact_verification_calls = 0;
     double pricing_exact_verification_time_seconds = 0.0;
+    std::string bpc_pricing_engine_requested = "exact-label";
+    std::string bpc_pricing_engine_used = "exact-label";
+    long long bpc_pricing_engine_fallbacks = 0;
+    long long bpc_nodes_using_ng_dssr = 0;
+    long long bpc_nodes_using_exact_label = 0;
+    long long bpc_nodes_using_hybrid = 0;
+    long long bpc_nodes_exactly_priced = 0;
+    long long bpc_nodes_dssr_incomplete = 0;
+    long long bpc_nodes_final_verifier_called = 0;
+    long long bpc_nodes_final_verifier_completed = 0;
+    int ng_size = 0;
+    std::string ng_neighborhood_mode = "nearest";
+    long long ng_memory_total = 0;
+    long long dssr_memory_total_initial = 0;
+    long long dssr_memory_total_final = 0;
+    int dssr_rounds = 0;
+    long long dssr_memory_expansions = 0;
+    long long dssr_repeated_station_events = 0;
+    long long dssr_relaxed_negative_routes = 0;
+    long long dssr_non_elementary_routes = 0;
+    long long dssr_elementary_columns_found = 0;
+    bool dssr_no_negative_relaxed_route = false;
+    bool dssr_exact_closure_proved = false;
+    double dssr_final_exact_verification_time = 0.0;
+    double dssr_time_seconds = 0.0;
+    std::string dssr_stop_reason;
+    std::string cg_stabilization_mode = "none";
+    long long cg_dual_center_updates = 0;
+    double cg_dual_oscillation_metric = 0.0;
+    long long cg_stabilized_pricing_calls = 0;
+    long long cg_true_pricing_calls = 0;
+    long long cg_stabilization_columns_found = 0;
+    long long cg_true_pricing_columns_found = 0;
+    long long cg_true_negative_columns_inserted = 0;
+    long long cg_stabilization_false_negatives = 0;
+    double cg_stabilization_time_seconds = 0.0;
+    double cg_final_true_pricing_rc = 0.0;
     long long support_duration_cuts_generated = 0;
     long long support_duration_pruned_labels = 0;
     long long support_duration_pruned_columns = 0;
@@ -175,6 +250,43 @@ struct GiniCapBranchProbeResult {
     double pricing_remaining_negative_rc = 0.0;
     long long pricing_exact_verification_calls = 0;
     double pricing_exact_verification_time_seconds = 0.0;
+    std::string bpc_pricing_engine_requested = "exact-label";
+    std::string bpc_pricing_engine_used = "exact-label";
+    long long bpc_pricing_engine_fallbacks = 0;
+    long long bpc_nodes_using_ng_dssr = 0;
+    long long bpc_nodes_using_exact_label = 0;
+    long long bpc_nodes_using_hybrid = 0;
+    long long bpc_nodes_exactly_priced = 0;
+    long long bpc_nodes_dssr_incomplete = 0;
+    long long bpc_nodes_final_verifier_called = 0;
+    long long bpc_nodes_final_verifier_completed = 0;
+    int ng_size = 0;
+    std::string ng_neighborhood_mode = "nearest";
+    long long ng_memory_total = 0;
+    long long dssr_memory_total_initial = 0;
+    long long dssr_memory_total_final = 0;
+    int dssr_rounds = 0;
+    long long dssr_memory_expansions = 0;
+    long long dssr_repeated_station_events = 0;
+    long long dssr_relaxed_negative_routes = 0;
+    long long dssr_non_elementary_routes = 0;
+    long long dssr_elementary_columns_found = 0;
+    bool dssr_no_negative_relaxed_route = false;
+    bool dssr_exact_closure_proved = false;
+    double dssr_final_exact_verification_time = 0.0;
+    double dssr_time_seconds = 0.0;
+    std::string dssr_stop_reason;
+    std::string cg_stabilization_mode = "none";
+    long long cg_dual_center_updates = 0;
+    double cg_dual_oscillation_metric = 0.0;
+    long long cg_stabilized_pricing_calls = 0;
+    long long cg_true_pricing_calls = 0;
+    long long cg_stabilization_columns_found = 0;
+    long long cg_true_pricing_columns_found = 0;
+    long long cg_true_negative_columns_inserted = 0;
+    long long cg_stabilization_false_negatives = 0;
+    double cg_stabilization_time_seconds = 0.0;
+    double cg_final_true_pricing_rc = 0.0;
     long long support_duration_cuts_generated = 0;
     long long support_duration_pruned_labels = 0;
     long long support_duration_pruned_columns = 0;
@@ -229,6 +341,32 @@ struct GiniCapTreeResult {
     double pricing_remaining_negative_rc = 0.0;
     long long pricing_exact_verification_calls = 0;
     double pricing_exact_verification_time_seconds = 0.0;
+    std::string bpc_pricing_engine_requested = "exact-label";
+    std::string bpc_pricing_engine_used = "exact-label";
+    long long bpc_pricing_engine_fallbacks = 0;
+    long long bpc_nodes_using_ng_dssr = 0;
+    long long bpc_nodes_using_exact_label = 0;
+    long long bpc_nodes_using_hybrid = 0;
+    long long bpc_nodes_exactly_priced = 0;
+    long long bpc_nodes_dssr_incomplete = 0;
+    long long bpc_nodes_final_verifier_called = 0;
+    long long bpc_nodes_final_verifier_completed = 0;
+    int ng_size = 0;
+    std::string ng_neighborhood_mode = "nearest";
+    long long ng_memory_total = 0;
+    long long dssr_memory_total_initial = 0;
+    long long dssr_memory_total_final = 0;
+    int dssr_rounds = 0;
+    long long dssr_memory_expansions = 0;
+    long long dssr_repeated_station_events = 0;
+    long long dssr_relaxed_negative_routes = 0;
+    long long dssr_non_elementary_routes = 0;
+    long long dssr_elementary_columns_found = 0;
+    bool dssr_no_negative_relaxed_route = false;
+    bool dssr_exact_closure_proved = false;
+    double dssr_final_exact_verification_time = 0.0;
+    double dssr_time_seconds = 0.0;
+    std::string dssr_stop_reason;
     long long support_duration_cuts_generated = 0;
     long long support_duration_pruned_labels = 0;
     long long support_duration_pruned_columns = 0;
@@ -300,6 +438,10 @@ struct GiniCapTreeResult {
     long long cg_true_pricing_calls = 0;
     long long cg_stabilization_columns_found = 0;
     long long cg_true_pricing_columns_found = 0;
+    long long cg_dual_center_updates = 0;
+    double cg_dual_oscillation_metric = 0.0;
+    long long cg_true_negative_columns_inserted = 0;
+    long long cg_stabilization_false_negatives = 0;
     double cg_stabilization_time_seconds = 0.0;
     double cg_final_true_pricing_rc = 0.0;
     bool has_integer_incumbent = false;
@@ -325,7 +467,8 @@ struct GiniCapTreeResult {
 ColumnGenerationResult runCoverageColumnGenerationDiagnostic(
     const Instance& instance,
     double time_limit_seconds,
-    int max_iterations = 8);
+    int max_iterations = 8,
+    const PricingOptions& pricing_options = PricingOptions{});
 
 GiniCapColumnGenerationResult runGiniCapColumnGenerationDiagnostic(
     const Instance& instance,
@@ -334,7 +477,8 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationDiagnostic(
     double time_limit_seconds,
     int max_iterations = 12,
     bool support_duration_pruning_enabled = true,
-    int support_duration_max_subset_size = 5);
+    int support_duration_max_subset_size = 5,
+    const PricingOptions& pricing_options = PricingOptions{});
 
 GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     const Instance& instance,
@@ -343,7 +487,8 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     double time_limit_seconds,
     int max_iterations = 12,
     bool support_duration_pruning_enabled = true,
-    int support_duration_max_subset_size = 5);
+    int support_duration_max_subset_size = 5,
+    const PricingOptions& pricing_options = PricingOptions{});
 
 GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
     const Instance& instance,
@@ -372,6 +517,7 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
     const std::string& branch_selection_mode = "auto",
     int strong_branching_candidates = 3,
     double strong_branching_time_seconds = 0.0,
-    bool reliability_branching_enabled = false);
+    bool reliability_branching_enabled = false,
+    const PricingOptions& pricing_options = PricingOptions{});
 
 } // namespace ebrp

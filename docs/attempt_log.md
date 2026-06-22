@@ -1590,3 +1590,69 @@ Remaining TODOs:
   `memory_peak_estimate_mb` is a deterministic data-structure estimate.
 - Run V12 M2 and V12 M1 closure with hybrid pricing after it is fully wired
   into BPC tree pricing.
+
+## 2026-06-22 Round 13: Production Hybrid Pricing In BPC
+
+Implementation:
+
+- Threaded `PricingOptions` through gcap-CG, gcap-tree, gcap-frontier,
+  focused closure, and iterative closure so explicit `--pricing-engine hybrid`
+  requests reach BPC pricing calls.
+- Changed explicit hybrid/ng-DSSR requests to use the scalable pricing engine
+  on V12 as well as larger instances. Small V rows still require exact final
+  verification before any pricing-closure claim.
+- Added BPC pricing-engine counters for requested/used engine, fallback count,
+  nodes using hybrid/ng-DSSR/exact-label, DSSR incomplete nodes, and final
+  verifier calls.
+- Strengthened DSSR reporting with neighborhood mode, initial/final memory,
+  repeated-station events, no-negative-relaxed-route status, and true-dual
+  final-verification time.
+- Threaded smooth/box stabilization into BPC pricing as column-discovery duals;
+  all inserted columns remain true-dual checked.
+- Added `--large-lb-mode` with global `inventory-only` and
+  `movement-projection` lower-bound diagnostics, while keeping restricted
+  column-pool evidence diagnostic.
+- Added `scripts/convert_hga_incumbent.py` for route JSON, CSV, and simple
+  legacy-text incumbent conversion. The solver still verifies every imported
+  route plan independently.
+
+Results:
+
+- CMake was unavailable; fallback `g++` build succeeded.
+- V4 smoke diagnostics exited `0`. V4 `gcap-frontier` remains certified with
+  objective `0` under exact-label and under explicit hybrid with exact final
+  verification.
+- V12 M2 focus exact-label 300s: UB `0.780792889928`, LB `0.712948394993`,
+  gap `0.086891793983`, noncertified.
+- V12 M2 focus hybrid 300s and hybrid smooth 300s matched the same LB/UB, used
+  hybrid with no fallback, found elementary negative columns, and remained
+  noncertified because DSSR closure was incomplete.
+- V12 M2 full frontier 300s: exact-label and hybrid both remained nonclosed
+  with LB about `0.684222130220`, UB `0.780792889928`, gap about `0.12368`.
+- V12 M1 full frontier 300s: exact-label LB `0.338980588720`; hybrid smooth
+  LB `0.334782317080`; both remained noncertified.
+- V20 generated hybrid frontier 300s ran through the BPC hybrid path and
+  remained nonclosed: UB `1.13623075045`, LB `0.368133269885`, gap `0.6760`.
+- V50/V100 generated hybrid pricing diagnostics ran without memory/address
+  error signatures and correctly reported incomplete DSSR/time-limit status.
+- V4 export/re-import incumbent matched verifier expectations. A malformed V50
+  external incumbent was rejected with no incumbent update.
+
+Safety:
+
+- No positive-gap row is reported as optimal.
+- Relaxed DSSR rows with incomplete exactness are noncertified.
+- No access violation, segmentation fault, `bad_alloc`, out-of-memory, ASan, or
+  fatal exception signature was found in the captured round-thirteen logs.
+- Plain CPLEX was skipped. No CPLEX speedup or certificate comparison is made.
+
+Remaining TODOs:
+
+- Make DSSR refinement prove exactness on more BPC nodes instead of stopping
+  after finding elementary negative columns that require final exact closure.
+- Add a production final exact pricing verifier that can complete on the V12
+  hard intervals under hybrid-discovered columns.
+- Strengthen nonzero global lower bounds for V50/V100 without all-subset
+  route-mask enumeration.
+- Add OS-level peak-memory measurement in addition to deterministic memory
+  estimates.

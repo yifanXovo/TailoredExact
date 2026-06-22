@@ -39,7 +39,7 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|external-incumbent-test|large-instance-mode-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
@@ -69,7 +69,8 @@ void usage() {
         << "[--incumbent-json <path>] [--incumbent-format auto|exact_result|route_json|csv] "
         << "[--hga-incumbent <path>] [--hga-incumbent-format auto|route_json|csv|legacy] "
         << "[--external-incumbent <path>] [--external-incumbent-format auto|route_json|csv|legacy_text] [--export-incumbent <path>] "
-        << "[--large-instance-mode auto|off|force] [--pricing-engine exact-label|ng-dssr|hybrid] "
+        << "[--large-instance-mode auto|off|force] [--large-lb-mode none|inventory-only|movement-projection|column-pool-relaxation|auto] "
+        << "[--pricing-engine exact-label|ng-dssr|hybrid] "
         << "[--ng-size <N>] [--ng-neighborhood-mode nearest|dual-aware|hybrid] "
         << "[--dssr-max-rounds <N>] [--dssr-expand-per-round <N>] [--dssr-time-limit <seconds>] [--dssr-final-exact true|false] "
         << "[--incumbent-source-name <name>] [--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>] "
@@ -195,6 +196,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--external-incumbent-format") opt.external_incumbent_format = requireValue(i, argc, argv);
         else if (arg == "--export-incumbent") opt.export_incumbent_path = requireValue(i, argc, argv);
         else if (arg == "--large-instance-mode") opt.large_instance_mode = requireValue(i, argc, argv);
+        else if (arg == "--large-lb-mode") opt.large_lb_mode = requireValue(i, argc, argv);
         else if (arg == "--pricing-engine") opt.pricing_engine = requireValue(i, argc, argv);
         else if (arg == "--ng-size") opt.ng_size = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--ng-neighborhood-mode") opt.ng_neighborhood_mode = requireValue(i, argc, argv);
@@ -287,6 +289,16 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
                    [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
     if (opt.large_instance_mode != "off" && opt.large_instance_mode != "force") {
         opt.large_instance_mode = "auto";
+    }
+    std::transform(opt.large_lb_mode.begin(), opt.large_lb_mode.end(),
+                   opt.large_lb_mode.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    if (opt.large_lb_mode != "none" &&
+        opt.large_lb_mode != "inventory-only" &&
+        opt.large_lb_mode != "movement-projection" &&
+        opt.large_lb_mode != "column-pool-relaxation" &&
+        opt.large_lb_mode != "auto") {
+        opt.large_lb_mode = "auto";
     }
     std::transform(opt.pricing_engine.begin(), opt.pricing_engine.end(),
                    opt.pricing_engine.begin(),
@@ -405,6 +417,9 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
     }
     result.station_set_backend = ebrp::stationSetBackendName(instance.V);
     result.pricing_engine = resolvedPricingEngine(instance, opt);
+    if (result.large_lb_mode.empty() || result.large_lb_mode == "none") {
+        result.large_lb_mode = opt.large_lb_mode;
+    }
     result.ng_size = opt.ng_size;
     result.dssr_final_exact = opt.dssr_final_exact;
     result.cg_stabilization_mode = opt.cg_dual_stabilization;
@@ -427,6 +442,59 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
     result.memory_peak_estimate_mb = (q_bytes + dist_bytes) / (1024.0 * 1024.0);
 }
 
+void applyLargeInstanceLowerBound(const ebrp::Instance& instance,
+                                  const ebrp::SolveOptions& opt,
+                                  ebrp::SolveResult& result) {
+    std::string mode = opt.large_lb_mode;
+    if (mode == "auto") {
+        mode = instance.V > 32 ? "movement-projection" : "inventory-only";
+    }
+    result.large_lb_mode = mode;
+    if (mode == "none" || mode == "column-pool-relaxation") {
+        result.large_lb_valid_global = false;
+        result.large_lb_scope =
+            mode == "column-pool-relaxation" ? "restricted_pool_diagnostic" : "none";
+        result.large_lb_rejection_reason =
+            mode == "column-pool-relaxation"
+                ? "verified-column subset is not a global lower-bound superset without pricing closure"
+                : "disabled";
+        return;
+    }
+    const auto lb_start = std::chrono::steady_clock::now();
+    std::vector<int> lower(instance.V + 1, 0);
+    std::vector<int> upper(instance.V + 1, 0);
+    for (int i = 1; i <= instance.V; ++i) {
+        lower[i] = 0;
+        upper[i] = instance.capacity[i];
+    }
+    if (mode == "movement-projection") {
+        ebrp::tightenInventoryIntervalsByMovementReachability(
+            instance, lower, upper);
+    }
+    ebrp::InventoryRatioProjectionBound projection =
+        ebrp::computeInventoryRatioProjectionBound(
+            instance, opt.lambda, lower, upper,
+            opt.gini_floor >= 0.0 ? opt.gini_floor : 0.0,
+            "global");
+    result.large_lb_time_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - lb_start).count();
+    if (projection.valid) {
+        result.large_lb_value = projection.objective_lower_bound;
+        result.large_lb_valid_global = true;
+        result.large_lb_scope = "global";
+        result.lower_bound = std::max(result.lower_bound, result.large_lb_value);
+        if (result.upper_bound > 1e-12) {
+            result.gap = std::max(0.0,
+                (result.upper_bound - result.lower_bound) /
+                std::fabs(result.upper_bound));
+        }
+    } else {
+        result.large_lb_valid_global = false;
+        result.large_lb_scope = "invalid";
+        result.large_lb_rejection_reason = "projection_bound_invalid";
+    }
+}
+
 void mergePricingStats(const ebrp::PricingResult& priced,
                        ebrp::SolveResult& result) {
     result.nodes += priced.route_states + priced.operation_states;
@@ -440,20 +508,32 @@ void mergePricingStats(const ebrp::PricingResult& priced,
     result.pricing_engine = priced.pricing_engine.empty()
         ? result.pricing_engine : priced.pricing_engine;
     result.ng_size = std::max(result.ng_size, priced.ng_size);
+    if (!priced.ng_neighborhood_mode.empty()) {
+        result.ng_neighborhood_mode = priced.ng_neighborhood_mode;
+    }
     result.ng_memory_total += priced.ng_memory_total;
+    result.dssr_memory_total_initial += priced.dssr_memory_total_initial;
+    result.dssr_memory_total_final += priced.dssr_memory_total_final;
     result.dssr_rounds += priced.dssr_rounds;
     result.dssr_memory_expansions += priced.dssr_memory_expansions;
+    result.dssr_repeated_station_events +=
+        priced.dssr_repeated_station_events;
     result.dssr_relaxed_negative_routes +=
         priced.dssr_relaxed_negative_routes;
     result.dssr_non_elementary_routes +=
         priced.dssr_non_elementary_routes;
     result.dssr_elementary_columns_found +=
         priced.dssr_elementary_columns_found;
+    result.dssr_no_negative_relaxed_route =
+        result.dssr_no_negative_relaxed_route ||
+        priced.dssr_no_negative_relaxed_route;
     result.dssr_final_exact = result.dssr_final_exact ||
         priced.dssr_final_exact;
     result.dssr_exact_closure_proved =
         result.dssr_exact_closure_proved || priced.dssr_exact_closure_proved;
     result.dssr_time_seconds += priced.dssr_time_seconds;
+    result.dssr_final_exact_verification_time +=
+        priced.dssr_final_exact_verification_time;
     if (!priced.dssr_stop_reason.empty()) {
         if (!result.dssr_stop_reason.empty()) result.dssr_stop_reason += "; ";
         result.dssr_stop_reason += priced.dssr_stop_reason;
@@ -465,6 +545,14 @@ void mergePricingStats(const ebrp::PricingResult& priced,
         priced.cg_stabilization_columns_found;
     result.cg_true_pricing_columns_found +=
         priced.cg_true_pricing_columns_found;
+    result.cg_dual_center_updates += priced.cg_dual_center_updates;
+    result.cg_dual_oscillation_metric =
+        std::max(result.cg_dual_oscillation_metric,
+                 priced.cg_dual_oscillation_metric);
+    result.cg_true_negative_columns_inserted +=
+        priced.cg_true_negative_columns_inserted;
+    result.cg_stabilization_false_negatives +=
+        priced.cg_stabilization_false_negatives;
     result.cg_stabilization_time_seconds +=
         priced.cg_stabilization_time_seconds;
     result.cg_final_true_pricing_rc =
@@ -520,6 +608,61 @@ void mergePricingStats(const ebrp::PricingResult& priced,
                  priced.support_duration_max_subset_size);
     result.support_duration_precompute_time_seconds +=
         priced.support_duration_precompute_time_seconds;
+}
+
+template <typename BpcResult>
+void copyBpcPricingStats(const BpcResult& bpc,
+                         ebrp::SolveResult& result) {
+    result.bpc_pricing_engine_requested = bpc.bpc_pricing_engine_requested;
+    result.bpc_pricing_engine_used = bpc.bpc_pricing_engine_used;
+    result.bpc_pricing_engine_fallbacks += bpc.bpc_pricing_engine_fallbacks;
+    result.bpc_nodes_using_ng_dssr += bpc.bpc_nodes_using_ng_dssr;
+    result.bpc_nodes_using_exact_label += bpc.bpc_nodes_using_exact_label;
+    result.bpc_nodes_using_hybrid += bpc.bpc_nodes_using_hybrid;
+    result.bpc_nodes_exactly_priced += bpc.bpc_nodes_exactly_priced;
+    result.bpc_nodes_dssr_incomplete += bpc.bpc_nodes_dssr_incomplete;
+    result.bpc_nodes_final_verifier_called += bpc.bpc_nodes_final_verifier_called;
+    result.bpc_nodes_final_verifier_completed +=
+        bpc.bpc_nodes_final_verifier_completed;
+    result.ng_size = std::max(result.ng_size, bpc.ng_size);
+    if (!bpc.ng_neighborhood_mode.empty()) {
+        result.ng_neighborhood_mode = bpc.ng_neighborhood_mode;
+    }
+    result.ng_memory_total += bpc.ng_memory_total;
+    result.dssr_memory_total_initial += bpc.dssr_memory_total_initial;
+    result.dssr_memory_total_final += bpc.dssr_memory_total_final;
+    result.dssr_rounds += bpc.dssr_rounds;
+    result.dssr_memory_expansions += bpc.dssr_memory_expansions;
+    result.dssr_repeated_station_events += bpc.dssr_repeated_station_events;
+    result.dssr_relaxed_negative_routes += bpc.dssr_relaxed_negative_routes;
+    result.dssr_non_elementary_routes += bpc.dssr_non_elementary_routes;
+    result.dssr_elementary_columns_found += bpc.dssr_elementary_columns_found;
+    result.dssr_no_negative_relaxed_route =
+        result.dssr_no_negative_relaxed_route || bpc.dssr_no_negative_relaxed_route;
+    result.dssr_exact_closure_proved =
+        result.dssr_exact_closure_proved || bpc.dssr_exact_closure_proved;
+    result.dssr_final_exact_verification_time +=
+        bpc.dssr_final_exact_verification_time;
+    result.dssr_time_seconds += bpc.dssr_time_seconds;
+    if (!bpc.dssr_stop_reason.empty()) {
+        if (!result.dssr_stop_reason.empty()) result.dssr_stop_reason += "; ";
+        result.dssr_stop_reason += bpc.dssr_stop_reason;
+    }
+    result.cg_stabilization_mode = bpc.cg_stabilization_mode;
+    result.cg_dual_center_updates += bpc.cg_dual_center_updates;
+    result.cg_dual_oscillation_metric =
+        std::max(result.cg_dual_oscillation_metric,
+                 bpc.cg_dual_oscillation_metric);
+    result.cg_stabilized_pricing_calls += bpc.cg_stabilized_pricing_calls;
+    result.cg_true_pricing_calls += bpc.cg_true_pricing_calls;
+    result.cg_stabilization_columns_found +=
+        bpc.cg_stabilization_columns_found;
+    result.cg_true_pricing_columns_found += bpc.cg_true_pricing_columns_found;
+    result.cg_true_negative_columns_inserted +=
+        bpc.cg_true_negative_columns_inserted;
+    result.cg_stabilization_false_negatives +=
+        bpc.cg_stabilization_false_negatives;
+    result.cg_final_true_pricing_rc = bpc.cg_final_true_pricing_rc;
 }
 
 std::size_t findMatchingJsonDelimiter(const std::string& text,
@@ -1116,6 +1259,9 @@ ebrp::SolveResult solvePricingDiagnostic(const ebrp::Instance& instance,
 ebrp::SolveResult solveIncumbentImportDiagnostic(const ebrp::Instance& instance,
                                                  const ebrp::SolveOptions& opt);
 
+ebrp::SolveResult solveGiniCapColumnGenerationDiagnostic(const ebrp::Instance& instance,
+                                                         const ebrp::SolveOptions& opt);
+
 ebrp::SolveResult solveStationSetDiagnostic(const ebrp::Instance& instance,
                                             const ebrp::SolveOptions& opt) {
     const auto start = std::chrono::steady_clock::now();
@@ -1160,6 +1306,7 @@ ebrp::SolveResult solveStationSetDiagnostic(const ebrp::Instance& instance,
     result.P = result.verification.P;
     result.objective = result.verification.objective;
     result.upper_bound = result.objective;
+    applyLargeInstanceLowerBound(instance, opt, result);
     result.runtime_seconds = std::chrono::duration<double>(
         std::chrono::steady_clock::now() - start).count();
     result.wall_time_seconds = result.runtime_seconds;
@@ -1267,9 +1414,55 @@ ebrp::SolveResult solveLargeInstanceModeDiagnostic(const ebrp::Instance& instanc
     result.P = result.verification.P;
     result.objective = result.verification.objective;
     result.upper_bound = result.objective;
+    applyLargeInstanceLowerBound(instance, opt, result);
     result.runtime_seconds = std::chrono::duration<double>(
         std::chrono::steady_clock::now() - start).count();
     result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
+ebrp::SolveResult solveLargeLowerBoundDiagnostic(const ebrp::Instance& instance,
+                                                 ebrp::SolveOptions opt) {
+    const auto start = std::chrono::steady_clock::now();
+    if (opt.large_lb_mode == "auto" || opt.large_lb_mode.empty()) {
+        opt.large_lb_mode = "movement-projection";
+    }
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "large-lb-test";
+    result.status = "diagnostic_complete";
+    result.certificate = "diagnostic only: reports scalable global lower-bound fallback; not an optimality certificate";
+    result.certificate_scope = "large_instance_lower_bound_diagnostic";
+    initializeScalabilityFields(instance, opt, result);
+    result.routes = emptyRouteSet(instance);
+    result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+    result.final_inventory = result.verification.final_inventory;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.objective = result.verification.objective;
+    result.upper_bound = result.objective;
+    applyLargeInstanceLowerBound(instance, opt, result);
+    if (!result.large_lb_valid_global) {
+        result.status = "diagnostic_failed";
+        result.notes.push_back("large lower-bound fallback did not produce a valid global bound");
+    }
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
+ebrp::SolveResult solveBpcHybridPricingDiagnostic(const ebrp::Instance& instance,
+                                                  ebrp::SolveOptions opt) {
+    opt.pricing_engine = "hybrid";
+    if (opt.ng_neighborhood_mode.empty() || opt.ng_neighborhood_mode == "nearest") {
+        opt.ng_neighborhood_mode = "hybrid";
+    }
+    ebrp::SolveResult result = solveGiniCapColumnGenerationDiagnostic(instance, opt);
+    result.method = "bpc-hybrid-pricing-test";
+    result.certificate_scope = "diagnostic_bpc_pricing_engine";
+    result.notes.push_back("bpc-hybrid-pricing-test: hybrid/ng-DSSR was requested through the BPC column-generation path; closure remains subject to exact pricing/DSSR completion");
     return result;
 }
 
@@ -3030,11 +3223,14 @@ ebrp::SolveResult solveColumnGenerationDiagnostic(const ebrp::Instance& instance
     result.instance_name = instance.name;
     result.input_path = instance.path;
     result.method = "cg";
+    initializeScalabilityFields(instance, opt, result);
     result.notes.push_back(instance.distance_convention);
-    result.notes.push_back("Column-generation diagnostic solves a simple required-pair coverage LP, extracts CPLEX duals, and calls exact route-load pricing.");
+    result.notes.push_back("Column-generation diagnostic solves a simple required-pair coverage LP, extracts CPLEX duals, and calls route-load pricing with the requested pricing engine.");
+    ebrp::PricingOptions pricing_opt;
+    applyPricingOptionsFromSolve(instance, opt, pricing_opt);
 
     ebrp::ColumnGenerationResult cg = ebrp::runCoverageColumnGenerationDiagnostic(
-        instance, opt.solve_time_limit, 8);
+        instance, opt.solve_time_limit, 8, pricing_opt);
     result.runtime_seconds = std::chrono::duration<double>(
         std::chrono::steady_clock::now() - start).count();
     result.columns = cg.generated_columns;
@@ -3052,6 +3248,7 @@ ebrp::SolveResult solveColumnGenerationDiagnostic(const ebrp::Instance& instance
     result.support_duration_max_subset_size = cg.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         cg.support_duration_precompute_time_seconds;
+    copyBpcPricingStats(cg, result);
     result.objective = cg.lp_objective;
     result.lower_bound = cg.lp_objective;
     result.upper_bound = cg.lp_objective;
@@ -3091,6 +3288,7 @@ ebrp::SolveResult solveGiniCapColumnGenerationDiagnostic(const ebrp::Instance& i
     result.instance_name = instance.name;
     result.input_path = instance.path;
     result.method = "gcap-cg";
+    initializeScalabilityFields(instance, opt, result);
     result.notes.push_back(instance.distance_convention);
     result.notes.push_back("Fixed-Gini-cap EBRP column-generation diagnostic solves the continuous root master with inventory, ratios, satisfaction penalty, pairwise Gini numerator rows, and H <= V*gamma*S.");
 
@@ -3111,10 +3309,13 @@ ebrp::SolveResult solveGiniCapColumnGenerationDiagnostic(const ebrp::Instance& i
         result.notes.push_back(note.str());
     }
 
+    ebrp::PricingOptions pricing_opt;
+    applyPricingOptionsFromSolve(instance, opt, pricing_opt);
     ebrp::GiniCapColumnGenerationResult cg =
         ebrp::runGiniCapColumnGenerationDiagnostic(
             instance, opt.lambda, gamma, opt.solve_time_limit, 12,
-            opt.support_duration_pruning, opt.support_duration_max_subset_size);
+            opt.support_duration_pruning, opt.support_duration_max_subset_size,
+            pricing_opt);
 
     result.runtime_seconds = std::chrono::duration<double>(
         std::chrono::steady_clock::now() - start).count();
@@ -3161,6 +3362,7 @@ ebrp::SolveResult solveGiniCapColumnGenerationDiagnostic(const ebrp::Instance& i
     result.support_duration_max_subset_size = cg.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         cg.support_duration_precompute_time_seconds;
+    copyBpcPricingStats(cg, result);
     result.lower_bound = cg.complete ? cg.fixed_cap_surrogate : std::max(0.0, gamma);
     result.upper_bound = cg.fixed_cap_surrogate;
     result.gap = 0.0;
@@ -3206,6 +3408,7 @@ ebrp::SolveResult solveGiniCapBranchProbeDiagnostic(const ebrp::Instance& instan
     result.instance_name = instance.name;
     result.input_path = instance.path;
     result.method = "gcap-branch";
+    initializeScalabilityFields(instance, opt, result);
     result.notes.push_back(instance.distance_convention);
     result.notes.push_back("Fixed-Gini-cap Ryan-Foster branch probe closes the root LP, selects one fractional co-route pair, and attempts to close both child root LPs.");
 
@@ -3225,10 +3428,13 @@ ebrp::SolveResult solveGiniCapBranchProbeDiagnostic(const ebrp::Instance& instan
         result.notes.push_back(note.str());
     }
 
+    ebrp::PricingOptions pricing_opt;
+    applyPricingOptionsFromSolve(instance, opt, pricing_opt);
     ebrp::GiniCapBranchProbeResult probe =
         ebrp::runGiniCapRyanFosterBranchProbe(
             instance, opt.lambda, gamma, opt.solve_time_limit, 12,
-            opt.support_duration_pruning, opt.support_duration_max_subset_size);
+            opt.support_duration_pruning, opt.support_duration_max_subset_size,
+            pricing_opt);
     result.runtime_seconds = std::chrono::duration<double>(
         std::chrono::steady_clock::now() - start).count();
     result.columns = probe.generated_columns;
@@ -3256,6 +3462,7 @@ ebrp::SolveResult solveGiniCapBranchProbeDiagnostic(const ebrp::Instance& instan
     result.support_duration_max_subset_size = probe.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         probe.support_duration_precompute_time_seconds;
+    copyBpcPricingStats(probe, result);
     result.lower_bound = probe.root_bound;
     if (probe.forbid_child_complete && probe.require_child_complete) {
         result.lower_bound = std::min(probe.forbid_child_bound, probe.require_child_bound);
@@ -3305,6 +3512,7 @@ ebrp::SolveResult solveGiniCapTreeDiagnostic(const ebrp::Instance& instance,
     result.instance_name = instance.name;
     result.input_path = instance.path;
     result.method = "gcap-tree";
+    initializeScalabilityFields(instance, opt, result);
     result.notes.push_back(instance.distance_convention);
     result.notes.push_back(opt.gini_floor >= 0.0
         ? "Fixed-Gini-interval branch-price tree diagnostic runs an open-node Ryan-Foster tree with exact pricing at each solved node. Reported lower bound is the valid interval metric gamma_floor+lambda*P."
@@ -3364,6 +3572,8 @@ ebrp::SolveResult solveGiniCapTreeDiagnostic(const ebrp::Instance& instance,
         }
     }
 
+    ebrp::PricingOptions pricing_opt;
+    applyPricingOptionsFromSolve(instance, opt, pricing_opt);
     ebrp::GiniCapTreeResult tree = ebrp::runGiniCapBranchPriceTreeDiagnostic(
         instance, opt.lambda, gamma, opt.gini_floor, opt.solve_time_limit, 24, opt.max_branch_nodes,
         seed_routes.empty() ? nullptr : &seed_routes, false,
@@ -3376,7 +3586,7 @@ ebrp::SolveResult solveGiniCapTreeDiagnostic(const ebrp::Instance& instance,
         opt.branch_inventory, opt.branch_inventory_priority,
         opt.branch_operation_mode, opt.branch_selection,
         opt.strong_branching_candidates, opt.strong_branching_time,
-        opt.reliability_branching);
+        opt.reliability_branching, pricing_opt);
     result.runtime_seconds = std::chrono::duration<double>(
         std::chrono::steady_clock::now() - start).count();
     result.columns = tree.generated_columns;
@@ -3424,6 +3634,7 @@ ebrp::SolveResult solveGiniCapTreeDiagnostic(const ebrp::Instance& instance,
     result.support_duration_max_subset_size = tree.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         tree.support_duration_precompute_time_seconds;
+    copyBpcPricingStats(tree, result);
     result.projection_bound_prunes = tree.projection_bound_prunes;
     result.projection_bound_time_seconds = tree.projection_bound_time_seconds;
     result.projection_bound_best_value = tree.projection_bound_best_value;
@@ -3893,6 +4104,7 @@ ebrp::SolveResult solveIncumbentImportDiagnostic(const ebrp::Instance& instance,
     result.instance_name = instance.name;
     result.input_path = instance.path;
     result.method = "incumbent-import-test";
+    initializeScalabilityFields(instance, opt, result);
     result.status = "diagnostic_complete";
     result.certificate = "diagnostic only: imported incumbents are independently verified and used as upper bounds only";
     result.incumbent_import_attempted = !opt.incumbent_json_path.empty() ||
@@ -3931,6 +4143,9 @@ ebrp::SolveResult solveIncumbentImportDiagnostic(const ebrp::Instance& instance,
                     result.external_incumbent_G = verification.G;
                     result.external_incumbent_P = verification.P;
                     result.external_incumbent_rejection_reason = "none";
+                    result.external_incumbent_used_in_large_run = instance.V >= 20;
+                    result.external_incumbent_effect_on_UB =
+                        std::max(0.0, result.upper_bound - verification.objective);
                 }
             } else {
                 result.incumbent_import_errors.insert(
@@ -4797,6 +5012,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.instance_name = instance.name;
     result.input_path = instance.path;
     result.method = "gcap-frontier";
+    ebrp::PricingOptions bpc_pricing_options;
+    applyPricingOptionsFromSolve(instance, opt, bpc_pricing_options);
+    result.bpc_pricing_engine_requested = bpc_pricing_options.pricing_engine;
+    result.bpc_pricing_engine_used = bpc_pricing_options.pricing_engine;
+    result.ng_size = bpc_pricing_options.ng_size;
+    result.ng_neighborhood_mode = bpc_pricing_options.ng_neighborhood_mode;
     result.bpc_workers = std::max(1, opt.bpc_workers);
     result.pricing_threads = std::max(1, opt.pricing_threads);
     result.parallel_frontier = opt.parallel_frontier && result.bpc_workers > 1;
@@ -5409,6 +5630,14 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 result.incumbent_import_objective = imported.objective;
                 result.incumbent_import_G = imported.G;
                 result.incumbent_import_P = imported.P;
+                if (source_label.find("external") != std::string::npos) {
+                    result.external_incumbent_verified = true;
+                    result.external_incumbent_objective = imported.objective;
+                    result.external_incumbent_G = imported.G;
+                    result.external_incumbent_P = imported.P;
+                    result.external_incumbent_used_in_large_run = instance.V >= 20;
+                    result.external_incumbent_rejection_reason = "none";
+                }
                 recordIncumbentCandidate(external_routes, import_source, 0.0);
             } else {
                 result.incumbent_import_errors.insert(
@@ -5421,6 +5650,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     "verified imported incumbent from " + path +
                     " using format=" + format +
                     "; UB only, no lower-bound certificate inherited";
+                if (source_label.find("external") != std::string::npos) {
+                    result.external_incumbent_effect_on_UB =
+                        std::max(0.0, result.upper_bound - imported.objective);
+                }
                 result.notes.push_back("external incumbent is used only as a feasible route warm start/cutoff; no lower-bound certificate is inherited from "
                     + path);
             }
@@ -6963,7 +7196,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             opt.branch_inventory, opt.branch_inventory_priority,
             opt.branch_operation_mode, opt.branch_selection,
             opt.strong_branching_candidates, opt.strong_branching_time,
-            opt.reliability_branching);
+            opt.reliability_branching, bpc_pricing_options);
         work.ran_tree = true;
         work.record.processed = true;
         work.record.complete = work.tree.complete;
@@ -7047,6 +7280,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.cuts_added += work.tree.cuts_added;
             result.pricing_time_seconds += work.tree.pricing_time_seconds;
             result.master_time_seconds += work.tree.master_time_seconds;
+            copyBpcPricingStats(work.tree, result);
             result.columns_generated_raw += work.tree.columns_generated_raw;
             result.columns_after_dominance += work.tree.columns_after_dominance;
             result.columns_dominated += work.tree.columns_dominated;
@@ -7257,7 +7491,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             opt.branch_inventory, opt.branch_inventory_priority,
             opt.branch_operation_mode, opt.branch_selection,
             opt.strong_branching_candidates, opt.strong_branching_time,
-            opt.reliability_branching);
+            opt.reliability_branching, bpc_pricing_options);
         result.nodes += tree.nodes_solved;
         result.columns += tree.generated_columns;
         result.pricing_calls += tree.pricing_calls;
@@ -7267,6 +7501,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.cuts_added += tree.cuts_added;
         result.pricing_time_seconds += tree.pricing_time_seconds;
         result.master_time_seconds += tree.master_time_seconds;
+        copyBpcPricingStats(tree, result);
         result.columns_generated_raw += tree.columns_generated_raw;
         result.columns_after_dominance += tree.columns_after_dominance;
         result.columns_dominated += tree.columns_dominated;
@@ -7951,7 +8186,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 opt.branch_inventory, opt.branch_inventory_priority,
                 opt.branch_operation_mode, opt.branch_selection,
                 opt.strong_branching_candidates, opt.strong_branching_time,
-                opt.reliability_branching);
+                opt.reliability_branching, bpc_pricing_options);
             result.nodes += tree.nodes_solved;
             result.columns += tree.generated_columns;
             result.pricing_calls += tree.pricing_calls;
@@ -7961,6 +8196,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.cuts_added += tree.cuts_added;
             result.pricing_time_seconds += tree.pricing_time_seconds;
             result.master_time_seconds += tree.master_time_seconds;
+            copyBpcPricingStats(tree, result);
             result.columns_generated_raw += tree.columns_generated_raw;
             result.columns_after_dominance += tree.columns_after_dominance;
             result.columns_dominated += tree.columns_dominated;
@@ -8238,7 +8474,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 opt.branch_inventory, opt.branch_inventory_priority,
                 opt.branch_operation_mode, opt.branch_selection,
                 opt.strong_branching_candidates, opt.strong_branching_time,
-                opt.reliability_branching);
+                opt.reliability_branching, bpc_pricing_options);
             result.nodes += tree.nodes_solved;
             result.columns += tree.generated_columns;
             result.pricing_calls += tree.pricing_calls;
@@ -8248,6 +8484,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.cuts_added += tree.cuts_added;
             result.pricing_time_seconds += tree.pricing_time_seconds;
             result.master_time_seconds += tree.master_time_seconds;
+            copyBpcPricingStats(tree, result);
             result.columns_generated_raw += tree.columns_generated_raw;
             result.columns_after_dominance += tree.columns_after_dominance;
             result.columns_dominated += tree.columns_dominated;
@@ -8509,7 +8746,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     opt.branch_inventory, opt.branch_inventory_priority,
                     opt.branch_operation_mode, opt.branch_selection,
                     opt.strong_branching_candidates, opt.strong_branching_time,
-                    opt.reliability_branching);
+                    opt.reliability_branching, bpc_pricing_options);
                 result.nodes += tree.nodes_solved;
                 result.columns += tree.generated_columns;
                 result.pricing_calls += tree.pricing_calls;
@@ -8521,6 +8758,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 result.cuts_added += tree.cuts_added;
                 result.pricing_time_seconds += tree.pricing_time_seconds;
                 result.master_time_seconds += tree.master_time_seconds;
+                copyBpcPricingStats(tree, result);
                 result.columns_generated_raw += tree.columns_generated_raw;
                 result.columns_after_dominance += tree.columns_after_dominance;
                 result.columns_dominated += tree.columns_dominated;
@@ -9263,10 +9501,14 @@ int main(int argc, char** argv) {
                 results.push_back(solveNgDssrPricingDiagnostic(
                     instance, opt, "dual-stabilization-test", "hybrid",
                     opt.cg_dual_stabilization == "none" ? "smooth" : opt.cg_dual_stabilization));
+            } else if (opt.method == "bpc-hybrid-pricing-test") {
+                results.push_back(solveBpcHybridPricingDiagnostic(instance, opt));
             } else if (opt.method == "external-incumbent-test") {
                 results.push_back(solveExternalIncumbentDiagnostic(instance, opt));
             } else if (opt.method == "large-instance-mode-test") {
                 results.push_back(solveLargeInstanceModeDiagnostic(instance, opt));
+            } else if (opt.method == "large-lb-test") {
+                results.push_back(solveLargeLowerBoundDiagnostic(instance, opt));
             } else if (opt.method == "incumbent-import-test") {
                 results.push_back(solveIncumbentImportDiagnostic(instance, opt));
             } else if (opt.method == "route-pool-incumbent-test") {
