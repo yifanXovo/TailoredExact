@@ -102,6 +102,7 @@ struct SolveOptions {
     std::string export_incumbent_path;
     std::string large_instance_mode = "auto";
     std::string pricing_engine = "auto";
+    std::string large_lb_mode = "auto";
     int ng_size = 12;
     std::string ng_neighborhood_mode = "nearest";
     int dssr_max_rounds = 4;

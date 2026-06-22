@@ -792,3 +792,54 @@ runs are scalability evidence only; they cannot be reported as original-problem
 optimal unless the complete frontier, pricing, and verifier requirements all
 close with zero gap.
 
+## Round 13: Production Hybrid Pricing Integration
+
+### Hybrid/ng-DSSR Inside BPC
+
+The BPC column-generation, tree, frontier, focused-closure, and iterative
+closure entry points now pass the requested pricing engine into route-load
+pricing. Hybrid pricing is certificate-safe because every returned route-load
+column is independently checked as an elementary feasible column and its
+reduced cost is recomputed under the true current RMP duals before insertion.
+The relaxed ng-route state space is used only to discover candidate columns.
+If DSSR has not proved exactness and the true-dual exact verifier has not
+completed, the node is reported with incomplete DSSR/pricing status and cannot
+close a BPC lower-bound node.
+
+### DSSR Memory Refinement
+
+DSSR begins with ng-neighborhood memory sets built from nearest-neighbor,
+dual-aware, or hybrid station rankings. When the relaxed search exposes
+repeated-station evidence, the implementation expands memory budgets around
+the affected search and records the memory growth and repeated-station events.
+Non-elementary relaxed routes remain inadmissible columns. Exact closure is
+claimed only when final true-dual verification completes or when DSSR reports a
+completed exact state-space proof; otherwise the relaxation is an acceleration
+diagnostic.
+
+### Stabilized-Dual Column Discovery In BPC
+
+Smooth and box stabilization are threaded into BPC pricing calls. Stabilized
+duals may change which candidate columns are searched first, but the column is
+accepted only after true-dual reduced-cost evaluation. If stabilized pricing
+does not find an insertable column, true-dual pricing remains the fallback for
+closure. Therefore stabilization can affect runtime and column discovery, but
+not the certificate basis.
+
+### Large-Instance Lower-Bound Scope
+
+`inventory-only` and `movement-projection` large-LB modes use only global
+necessary inventory domains, movement reachability, penalty-budget logic, and
+inventory-ratio projection bounds. These are valid global lower bounds, though
+they may be weak or zero. A column-pool relaxation over a subset of verified
+columns is not a global lower bound without pricing closure and is therefore
+reported as restricted-pool diagnostic evidence.
+
+### External Incumbent Bridge
+
+Route JSON, CSV, or converted legacy incumbents are upper-bound candidates.
+The converter is not trusted as a proof step. The exact solver may update the
+incumbent only after the independent verifier checks route feasibility, station
+capacity, load trajectories, duration, final inventories, Gini, penalty, and
+objective. Rejected external files do not affect bounds.
+
