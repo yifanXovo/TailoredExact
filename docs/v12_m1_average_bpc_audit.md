@@ -36,6 +36,15 @@ optimal.
 Certificate audit: passed as **noncertified**. The result is not reported as
 optimal.
 
+## 1200s Paper-Core Result
+
+| status | objective / UB | LB | gap | wall time | unresolved | invalid | open nodes |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `gcap_frontier_not_closed` | 0.357200583208 | 0.332675660948 | 0.0686586848205 | 1201.532s | 2 | 0 | 2 |
+
+Certificate audit: passed as **noncertified**. The result is not reported as
+optimal.
+
 ## Plateau Evidence
 
 - `frontier_min_interval_lower_bound=0.178600291604`.
@@ -71,6 +80,12 @@ Trace artifacts:
   `results/paper_bpc_core/raw/v12_m1_average_core_300s.trace.json`.
 - 300s interval trace CSV:
   `results/paper_bpc_core/raw/v12_m1_average_core_300s.intervals.csv`.
+- 1200s progress CSV:
+  `results/paper_bpc_core/progress/v12_m1_average_core_1200s.csv`.
+- 1200s trace JSON:
+  `results/paper_bpc_core/raw/v12_m1_average_core_1200s.trace.json`.
+- 1200s interval trace CSV:
+  `results/paper_bpc_core/raw/v12_m1_average_core_1200s.intervals.csv`.
 
 The new trace schema currently exposes the active interval ledger, per-interval
 aggregate tree counters when a tree starts, and aggregate global pricing
@@ -113,12 +128,24 @@ no-compatibility relaxation, but the controlling child
 `[0.178600291604,0.238133722139]` still does not receive a stronger bound
 before the time limit.
 
+The 1200s split-before-tree paper-core row improves the valid lower bound to
+`0.332675660948`, but it still does not certify the instance. The active
+unresolved intervals are `[0.223250364505,0.238133722139]`, which remains a
+queued leaf with `tree_not_started_before_time_limit_or_reserve`, and
+`[0.238133722139,0.297667152674]`, which has open BPC nodes. Runtime is now
+dominated by exact-label pricing: `pricing_time_seconds=896.6435636`, compared
+with `master_time_seconds=79.5333302` and `bound_time_seconds=211.0970326`.
+The trace records 27 branch-price node summaries and 40 pricing-call summaries.
+The largest observed pricing calls enumerate about 7.07M route states and
+299.9M operation states per exact call, with negative columns still returned in
+unclosed nodes. This confirms that the remaining V12 M1 bottleneck is exact
+pricing/branch closure, not early frontier relaxation.
+
 ## Required Next Work
 
-- Run 1200s paper-core rows with the new certificate audit when local budget
-  allows.
-- Use the per-node and per-pricing-call trace records to identify whether
-  exact-label pricing can be tightened with certificate-safe pruning.
+- Use the 1200s per-node and per-pricing-call trace records to identify
+  certificate-safe pricing reductions. Candidate work should target exact
+  operation-state pruning or stronger branch closure, not lower-bound shortcuts.
 - Compare against plain compact CPLEX on the same instance file/hash only as a
   benchmark, not as BPC proof.
 - If compact and BPC objectives differ, fix parser/objective conventions before

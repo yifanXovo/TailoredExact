@@ -176,6 +176,26 @@ Validation rows:
 The full audit over `results/paper_bpc_core/raw` now covers twenty solver JSON
 rows with zero failures.
 
+## V12 M1 1200s Paper-Core Row
+
+The required V12 M1 1200s paper-core row was run after enabling
+split-before-tree scheduling. It remains noncertified:
+
+- UB `0.357200583208`, LB `0.332675660948`, gap `0.0686586848205`.
+- `unresolved_intervals=2`, `open_nodes=2`, `invalid_bound_intervals=0`.
+- The lower-bound source is `focused_child_inventory_route_gini_relaxation`.
+- Runtime is dominated by exact-label pricing:
+  `pricing_time_seconds=896.6435636`, `master_time_seconds=79.5333302`,
+  `bound_time_seconds=211.0970326`.
+
+The audit accepts the row only as a noncertified result. This row supplies the
+current strongest V12 M1 paper-core lower bound and confirms that the remaining
+plateau is pricing/tree closure in the high-Gini children, not a false optimal
+certificate.
+
+The full audit over `results/paper_bpc_core/raw` now covers twenty-one solver
+JSON rows with zero failures.
+
 The audit script self-test includes intentionally invalid cases for incomplete
 pricing, duplicate negative-column blockage, partial frontier coverage,
 route-mask certifying with enumeration disabled, and original optimality without

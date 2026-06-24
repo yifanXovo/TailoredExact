@@ -1982,3 +1982,26 @@ Remaining TODOs:
   solver JSON rows and zero failures.
 - TODO: run a 1200s split-before-tree row and continue diagnosing the remaining
   high-Gini unresolved leaves. V12 M2 remains noncertified.
+
+## 2026-06-25 - V12 M1 Paper-Core 1200s Plateau Trace
+
+- Ran V12 M1 Average with `paper-bpc-core` for 1200s under the current
+  split-before-tree scheduling.
+- Result remains noncertified: `UB=0.357200583208`,
+  `LB=0.332675660948`, gap `0.0686586848205`,
+  `unresolved_intervals=2`, `open_nodes=2`,
+  `invalid_bound_intervals=0`.
+- The run improves over the earlier 300s paper-core LB
+  `0.268414876140`, but still does not close the original problem.
+- Runtime decomposition shows the remaining bottleneck clearly:
+  pricing `896.6435636s`, master `79.5333302s`, bound/relaxation
+  `211.0970326s`.
+- Active unresolved leaves are `[0.223250364505,0.238133722139]`, still queued
+  without a BPC tree, and `[0.238133722139,0.297667152674]`, which has open
+  BPC nodes.
+- Trace evidence includes 27 branch-price node summaries and 40 pricing-call
+  summaries. The largest exact-label pricing calls enumerate roughly 7.07M
+  route states and 299.9M operation states, so the next algorithmic target is
+  certificate-safe pricing/branch closure rather than another side algorithm.
+- Full certificate audit now covers twenty-one paper-core solver JSON rows and
+  reports zero failures.
