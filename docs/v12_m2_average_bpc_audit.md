@@ -113,10 +113,25 @@ bound-fathomed; the remaining unresolved leaves are
 `[0.479376832984,0.599221041230]` and
 `[0.599221041230,0.719065249476]`, both at LB `0.692627421486`.
 
+The first 1200s follow-up exposed a scheduling regression rather than a
+certificate improvement. The solver spent about 873s in pricing and 233s in
+master solves on a broad parent interval before adaptive splitting, then ended
+with a child interval carrying only the inherited parent lower bound. That row
+remained audit-safe and noncertified, with `LB=0.469117173935`, gap
+`0.347601383495`, two unresolved intervals, and twelve open nodes.
+
+The subsequent `--frontier-split-before-tree true` scheduling change defers
+initial branch-price trees for splittable broad intervals and lets adaptive
+child relaxations run first. On V12 M2 300s it remains noncertified but improves
+the valid lower bound to `LB=0.696966843140`, `UB=0.719065249476`, gap
+`0.0307321294594`, with two unresolved high-Gini leaves and two open nodes.
+This is not a certificate shortcut: replaced parent intervals are ignored and
+the active child ledger still has unresolved intervals.
+
 ## Required Next Work
 
-- Run 1200s paper-core rows after the certificate guard when local budget
-  allows.
+- Run a 1200s split-before-tree paper-core row when local budget allows; the
+  existing 1200s row is useful only as a scheduling-regression diagnostic.
 - Use the node/pricing trace to profile exact-label pricing state explosion and
   support-duration pruning behavior.
 - Identify whether the controlling interval can be bound-fathomed by stronger

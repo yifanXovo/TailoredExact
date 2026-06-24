@@ -56,6 +56,10 @@ does not prove `certified_original_problem=true`.
 - `--movement-bound-audit true|false`: compute interval relaxation bounds with and without movement-domain tightening and record/use the stronger valid bound.
 - `--frontier-best-bound-scheduling true|false`: process frontier intervals by deterministic valid lower-bound priority instead of raw interval order.
 - `--frontier-relaxation-cache true|false`: reuse exact-key interval relaxation bounds across retry passes.
+- `--frontier-split-before-tree true|false`: for adaptive frontier runs, defer
+  initial branch-price trees on broad splittable intervals until after the
+  interval is split and child relaxations are attempted. This is a scheduling
+  option only; it does not change certificate requirements.
 - `--support-duration-pruning true|false`: prune exact pricing labels whose station support contains a subset proven route-duration infeasible.
 - `--support-duration-max-subset-size N`: maximum station subset size used for support-duration pruning precomputation.
 - `--pricing-completion-lb-pruning true|false`: prune an exact-label pricing label only when a valid reduced-cost lower bound proves no completion can improve the current best priced column. This is certificate-safe but remains an explicit tuning option rather than the default paper-core setting.

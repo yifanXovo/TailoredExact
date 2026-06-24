@@ -79,6 +79,15 @@ Generic singleton and two-station pickup/drop warm-start columns are also certif
 
 Adaptive interval splitting via `--frontier-refine-splits` is certificate-neutral: a parent interval may be replaced only by children that exactly cover the parent range. Children inherit the parent's valid lower bound and may receive stronger relaxation bounds. The final global lower-bound ledger must ignore replaced parents and account for every child interval.
 
+Split-before-tree scheduling via `--frontier-split-before-tree true` is also
+certificate-neutral. It can defer an initial branch-price tree for a splittable
+interval so adaptive child intervals are generated and relaxed first. This
+does not certify the parent, remove any Gini range, or use inherited lower
+bounds as closure. The final frontier ledger still has to account for every
+active child interval, and an interval is certified only if it is empty,
+validly bound-fathomed, or closed by a branch-price tree with exact pricing
+closure.
+
 Focused splitting via `--frontier-split-batch` is also certificate-neutral. It changes only which unresolved intervals are refined first, normally by lowest current lower bound. It does not remove intervals from the final ledger and cannot by itself certify the original problem.
 
 Retry reserve via `--frontier-retry-reserve` is certificate-neutral. It stops adaptive splitting early to preserve wall time for branch-price retry. The final ledger must still account for every active interval, and no interval is certified merely because splitting stopped.

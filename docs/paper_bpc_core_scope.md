@@ -16,6 +16,11 @@ The paper-facing exact algorithm is GF-RL-BPC, implemented by
   cutoff skipping: either model supplies only valid lower-bound evidence, and
   the compatibility model is skipped only after the easier relaxation already
   bound-fathoms the interval.
+- Split-before-tree initial frontier scheduling. When adaptive splitting is
+  enabled, a broad unresolved interval with a valid lower bound may be deferred
+  to the split ledger before running an expensive initial branch-price tree.
+  This only changes work order: replaced parent intervals are ignored in the
+  final certificate ledger and exactly covered by child intervals.
 - Complete route-mask operation-budget cuts only when route-mask enumeration is
   complete for the active instance threshold.
 - Route-pool incumbent master using verified elementary columns only.

@@ -149,8 +149,32 @@ Validation rows:
   split child `[0.359532624738,0.479376832984]` is now bound-fathomed by
   the no-compatibility relaxation before the solver runs out of time.
 
-The full audit over `results/paper_bpc_core/raw` now covers seventeen solver
-JSON rows with zero failures.
+## Split-Before-Tree Frontier Scheduling
+
+The V12 M2 1200s row exposed a scheduling failure: the solver spent most of the
+budget running a branch-price tree on a broad high-Gini parent interval before
+adaptive splitting. When the split finally occurred, one active child retained
+only the inherited parent lower bound, so the final global lower bound regressed
+to `0.469117173935` despite a better 300s relaxation-bound row already being
+available. The row remains audit-safe and noncertified, but it is a poor use of
+paper-core time.
+
+`--frontier-split-before-tree true` now defers the initial branch-price tree for
+eligible broad intervals and lets adaptive child intervals receive relaxation
+bounds first. This is certificate-neutral because the parent interval is not
+counted after replacement and the children exactly cover the same range.
+
+Validation rows:
+
+- V4 paper-core smoke with split-before-tree remains certified at objective 0.
+- V12 M2 split-before-tree 300s remains noncertified but improves the valid
+  lower bound to `LB=0.696966843140`, gap `0.0307321294594`, with two
+  unresolved high-Gini leaves.
+- The non-split 1200s diagnostic remains noncertified with `LB=0.469117173935`
+  and documents the scheduling regression.
+
+The full audit over `results/paper_bpc_core/raw` now covers twenty solver JSON
+rows with zero failures.
 
 The audit script self-test includes intentionally invalid cases for incomplete
 pricing, duplicate negative-column blockage, partial frontier coverage,

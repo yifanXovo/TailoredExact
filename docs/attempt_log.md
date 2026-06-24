@@ -1957,3 +1957,28 @@ Remaining TODOs:
   seventeen solver JSON rows and zero failures.
 - TODO: focus the next paper-core optimization on the new high-Gini plateau
   around `[0.479376832984,0.719065249476]`; V12 M2 remains noncertified.
+
+## 2026-06-25 - Split-Before-Tree Frontier Scheduling
+
+- Added `--frontier-split-before-tree` and enabled it in the
+  `paper-bpc-core` preset. The option defers initial branch-price trees on
+  broad adaptive-splittable intervals so child intervals can receive valid
+  relaxation bounds before the solver spends most of its time in exact-label
+  BPC pricing.
+- The change is certificate-neutral: a deferred parent is not certified or
+  counted in the final ledger after replacement; children exactly cover the
+  parent interval and remain unresolved unless they are empty, validly
+  bound-fathomed, or closed by exact branch-price pricing.
+- Validation:
+  - V4 paper-core split-before-tree smoke remains certified at objective 0.
+  - V12 M2 non-split 1200s is noncertified and demonstrates the scheduling
+    regression: `LB=0.469117173935`, `UB=0.719065249476`, gap
+    `0.347601383495`, two unresolved intervals, twelve open nodes, and pricing
+    time about 873s.
+  - V12 M2 split-before-tree 300s is noncertified but improves the best valid
+    paper-core lower bound to `LB=0.696966843140`, `UB=0.719065249476`, gap
+    `0.0307321294594`, with two unresolved intervals and two open nodes.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers twenty
+  solver JSON rows and zero failures.
+- TODO: run a 1200s split-before-tree row and continue diagnosing the remaining
+  high-Gini unresolved leaves. V12 M2 remains noncertified.
