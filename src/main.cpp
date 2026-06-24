@@ -54,6 +54,7 @@ void usage() {
         << "[--projection-bound true|false] [--penalty-domain-tightening true|false] "
         << "[--movement-domain-tightening true|false] [--movement-bound-audit true|false] "
         << "[--frontier-best-bound-scheduling true|false] [--frontier-relaxation-cache true|false] "
+        << "[--frontier-split-before-tree true|false] "
         << "[--frontier-column-cache true|false] [--frontier-focused-min-lb-retry true|false] "
         << "[--frontier-focused-intensification true|false] [--frontier-focused-reserve-fraction <fraction>] "
         << "[--frontier-focused-relax-seconds <seconds>] [--frontier-focused-max-passes <N>] "
@@ -195,6 +196,7 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.branch_operation_mode = true;
         opt.frontier_best_bound_scheduling = true;
         opt.frontier_relaxation_cache = true;
+        opt.frontier_split_before_tree = true;
         opt.bpc_incumbent = (opt.bpc_incumbent == "none" || opt.bpc_incumbent.empty())
             ? "auto" : opt.bpc_incumbent;
         opt.compact_fallback_enabled =
@@ -293,6 +295,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--movement-bound-audit") opt.movement_bound_audit = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-best-bound-scheduling") opt.frontier_best_bound_scheduling = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-relaxation-cache") opt.frontier_relaxation_cache = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-split-before-tree") opt.frontier_split_before_tree = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-column-cache") opt.frontier_column_cache = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-focused-min-lb-retry") opt.frontier_focused_min_lb_retry = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-focused-intensification") opt.frontier_focused_intensification = parseBoolValue(requireValue(i, argc, argv));
@@ -6377,6 +6380,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         + ", movement_bound_audit=" + std::string(opt.movement_bound_audit ? "true" : "false")
         + ", frontier_best_bound_scheduling=" + std::string(opt.frontier_best_bound_scheduling ? "true" : "false")
         + ", frontier_relaxation_cache=" + std::string(opt.frontier_relaxation_cache ? "true" : "false")
+        + ", frontier_split_before_tree=" + std::string(opt.frontier_split_before_tree ? "true" : "false")
         + ", frontier_focused_min_lb_retry=" + std::string(opt.frontier_focused_min_lb_retry ? "true" : "false")
         + ", frontier_focused_intensification=" + std::string(opt.frontier_focused_intensification ? "true" : "false")
         + ", frontier_focused_reserve_fraction=" + std::to_string(opt.frontier_focused_reserve_fraction)
@@ -8503,6 +8507,28 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             return out;
         };
 
+    auto shouldDeferInitialTreeForAdaptiveSplit =
+        [&](const FrontierIntervalRecord& record) {
+            if (!opt.frontier_split_before_tree ||
+                !opt.frontier_adaptive_split ||
+                focus_only_effective) {
+                return false;
+            }
+            if (record.complete || record.empty_complete ||
+                record.replaced_by_children) {
+                return false;
+            }
+            if (record.split_depth >= opt.frontier_adaptive_max_depth) {
+                return false;
+            }
+            if (record.hi - record.lo <=
+                opt.frontier_adaptive_min_width + 1e-12) {
+                return false;
+            }
+            return record.lower_bound_valid &&
+                   record.lower_bound < result.upper_bound - 1e-7;
+        };
+
     auto processInitialInterval = [&](int idx,
                                       double fixed_upper_bound,
                                       const std::vector<ebrp::RoutePlan>& fixed_incumbent_routes) {
@@ -8578,6 +8604,16 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         if (opt.solve_time_limit > 0.0 && remainingSeconds() <= 0.0) {
             work.notes.push_back("frontier time limit reached after interval relaxation "
                 + std::to_string(idx));
+            return work;
+        }
+
+        if (shouldDeferInitialTreeForAdaptiveSplit(work.record)) {
+            work.record.processed = true;
+            work.record.open_nodes = std::max(1, work.record.open_nodes);
+            work.notes.push_back("interval " + std::to_string(idx)
+                + " deferred initial branch-price tree because "
+                "frontier_split_before_tree=true and the interval is eligible "
+                "for adaptive splitting");
             return work;
         }
 
@@ -8881,6 +8917,17 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.notes.push_back("frontier time limit reached after interval relaxation "
                 + std::to_string(idx));
             break;
+        }
+
+        if (shouldDeferInitialTreeForAdaptiveSplit(interval_records[idx])) {
+            interval_records[idx].processed = true;
+            interval_records[idx].open_nodes =
+                std::max(1, interval_records[idx].open_nodes);
+            result.notes.push_back("interval " + std::to_string(idx)
+                + " deferred initial branch-price tree because "
+                "frontier_split_before_tree=true and the interval is eligible "
+                "for adaptive splitting");
+            continue;
         }
 
         const double interval_budget = is_focus_interval &&

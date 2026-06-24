@@ -72,6 +72,7 @@ struct SolveOptions {
     bool movement_bound_audit = false;
     bool frontier_best_bound_scheduling = true;
     bool frontier_relaxation_cache = true;
+    bool frontier_split_before_tree = false;
     bool frontier_column_cache = false;
     bool frontier_focused_min_lb_retry = true;
     bool frontier_focused_intensification = true;
