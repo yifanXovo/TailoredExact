@@ -8407,29 +8407,44 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     std::max(result.relaxation_lb_used,
                              std::max(no_lb, with_lb));
             } else {
-                out.bound = compute_once(opt.movement_domain_tightening,
-                                         opt.pickup_drop_compat_flow,
-                                         opt.vehicle_indexed_operation_relaxation,
-                                         opt.vehicle_indexed_transfer_flow);
                 if (opt.pickup_drop_compat_flow) {
                     ebrp::GiniIntervalInventoryRelaxationBound no_compat =
                         compute_once(opt.movement_domain_tightening, false,
                                      opt.vehicle_indexed_operation_relaxation,
                                      false);
-                    const double compat_lb = out.bound.infeasible
-                        ? cutoff : out.bound.objective_lower_bound;
                     const double no_compat_lb = no_compat.infeasible
                         ? cutoff : no_compat.objective_lower_bound;
-                    if (no_compat_lb > compat_lb + 1e-9) {
-                        no_compat.note += ", pickup_drop_compat_flow_audit_selected=no_compat"
-                            ", compat_lb=" + std::to_string(compat_lb)
-                            + ", no_compat_lb=" + std::to_string(no_compat_lb);
+                    if (std::isfinite(cutoff) &&
+                        no_compat.computed &&
+                        no_compat_lb >= cutoff - 1e-9) {
+                        no_compat.note +=
+                            ", pickup_drop_compat_flow_audit_selected=no_compat"
+                            ", compat_skipped=no_compat_cutoff_fathomed"
+                            ", no_compat_lb=" + std::to_string(no_compat_lb);
                         out.bound = no_compat;
                     } else {
-                        out.bound.note += ", pickup_drop_compat_flow_audit_selected=compat"
-                            ", compat_lb=" + std::to_string(compat_lb)
-                            + ", no_compat_lb=" + std::to_string(no_compat_lb);
+                        out.bound = compute_once(opt.movement_domain_tightening,
+                                                 true,
+                                                 opt.vehicle_indexed_operation_relaxation,
+                                                 opt.vehicle_indexed_transfer_flow);
+                        const double compat_lb = out.bound.infeasible
+                            ? cutoff : out.bound.objective_lower_bound;
+                        if (no_compat_lb > compat_lb + 1e-9) {
+                            no_compat.note += ", pickup_drop_compat_flow_audit_selected=no_compat"
+                                ", compat_lb=" + std::to_string(compat_lb)
+                                + ", no_compat_lb=" + std::to_string(no_compat_lb);
+                            out.bound = no_compat;
+                        } else {
+                            out.bound.note += ", pickup_drop_compat_flow_audit_selected=compat"
+                                ", compat_lb=" + std::to_string(compat_lb)
+                                + ", no_compat_lb=" + std::to_string(no_compat_lb);
+                        }
                     }
+                } else {
+                    out.bound = compute_once(opt.movement_domain_tightening,
+                                             false,
+                                             opt.vehicle_indexed_operation_relaxation,
+                                             false);
                 }
                 if (opt.vehicle_indexed_relaxation_audit &&
                     opt.vehicle_indexed_operation_relaxation) {

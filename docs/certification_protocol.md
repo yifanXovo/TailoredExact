@@ -290,6 +290,13 @@ All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `
   only when pairs are removed by a route-duration lower-bound proof. It is not
   an optimality certificate by itself, and if no pair is proven incompatible it
   may add audit statistics without improving the lower bound.
+- The solver may evaluate the no-compatibility relaxation before the
+  compatibility-flow relaxation. If the no-compatibility relaxation already
+  reaches the incumbent cutoff, the interval is validly bound-fathomed and the
+  compatibility-flow solve may be skipped. Otherwise the solver may still solve
+  both relaxations and keep the larger valid lower bound. This ordering changes
+  only computation time; it does not create pricing closure or incumbent
+  evidence.
 - The support-feasibility oracle remains optional and disabled in certificate
   runs for this pass. No heuristic or timed-out support failure may add a cut.
 

@@ -101,6 +101,18 @@ inventory/route/Gini relaxation bound in time. This mixed result is why
 completion-LB pruning remains an explicit diagnostic option rather than the
 default `paper-bpc-core` configuration.
 
+The next certificate-safe optimization changed the inventory/route/Gini
+relaxation ordering: the no-compatibility pickup/drop relaxation now runs
+before the compatibility-flow model and skips the latter if the easier model
+already cutoff-fathoms the interval. This keeps the same certificate basis
+while avoiding expensive redundant CPLEX calls on low-Gini split children.
+With this ordering, the 300s paper-core run improves to
+`LB=0.692627421486`, `UB=0.719065249476`, gap `0.036766938758`. The prior
+controlling split child `[0.359532624738,0.479376832984]` is now
+bound-fathomed; the remaining unresolved leaves are
+`[0.479376832984,0.599221041230]` and
+`[0.599221041230,0.719065249476]`, both at LB `0.692627421486`.
+
 ## Required Next Work
 
 - Run 1200s paper-core rows after the certificate guard when local budget

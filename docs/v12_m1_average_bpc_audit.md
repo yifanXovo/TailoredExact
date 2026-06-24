@@ -105,6 +105,14 @@ instance it reached the same LB/gap as the baseline 300s row, with
 from about 1.48B to 1.11B. The row still has unresolved intervals and pricing
 timeouts, so it does not change the certificate status.
 
+The compatibility-flow relaxation ordering optimization was also checked for
+300s. It is neutral on this instance: the paper-core row remains
+`LB=0.268414876140`, `UB=0.357200583208`, gap `0.248559804329`, with two
+unresolved leaves. The low-Gini child is cutoff-fathomed faster by the
+no-compatibility relaxation, but the controlling child
+`[0.178600291604,0.238133722139]` still does not receive a stronger bound
+before the time limit.
+
 ## Required Next Work
 
 - Run 1200s paper-core rows with the new certificate audit when local budget

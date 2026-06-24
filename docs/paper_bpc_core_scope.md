@@ -12,6 +12,10 @@ The paper-facing exact algorithm is GF-RL-BPC, implemented by
 - Projection dominance in exact-safe mode.
 - Movement-domain tightening, projection bounds, and penalty-domain tightening.
 - Vehicle-indexed operation and transfer-flow relaxations.
+- Pickup/drop compatibility-flow relaxation audit with no-compatibility-first
+  cutoff skipping: either model supplies only valid lower-bound evidence, and
+  the compatibility model is skipped only after the easier relaxation already
+  bound-fathoms the interval.
 - Complete route-mask operation-budget cuts only when route-mask enumeration is
   complete for the active instance threshold.
 - Route-pool incumbent master using verified elementary columns only.

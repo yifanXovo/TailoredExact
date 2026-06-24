@@ -123,8 +123,34 @@ Validation rows with the pruning enabled explicitly:
   in the baseline. Therefore the pruning remains disabled by default in
   `paper-bpc-core` until more robust evidence is available.
 
-The full audit over `results/paper_bpc_core/raw` now covers fourteen solver JSON
-rows with zero failures.
+The audit over `results/paper_bpc_core/raw` at that stage covered fourteen
+solver JSON rows with zero failures.
+
+## Compatibility-Flow Relaxation Ordering
+
+The inventory/route/Gini relaxation can evaluate both a pickup/drop
+compatibility-flow model and a no-compatibility model, then keep the larger
+valid lower bound. This is certificate-safe because either relaxation produces
+a valid lower bound; the compatibility-flow rows are strengthening rows, not a
+certificate shortcut.
+
+The ordering now solves the no-compatibility model first. If that easier model
+already cutoff-fathoms the interval, the compatibility model is skipped. This
+does not weaken certification: a bound-fathomed interval still has a valid
+non-pricing lower bound at the incumbent cutoff, and no BPC pricing closure is
+claimed.
+
+Validation rows:
+
+- V4 paper-core smoke remains certified at objective 0.
+- V12 M1 300s remains noncertified with unchanged LB/gap.
+- V12 M2 300s improves from `LB=0.577560696100`, gap `0.196789586869`
+  to `LB=0.692627421486`, gap `0.036766938758`. The formerly controlling
+  split child `[0.359532624738,0.479376832984]` is now bound-fathomed by
+  the no-compatibility relaxation before the solver runs out of time.
+
+The full audit over `results/paper_bpc_core/raw` now covers seventeen solver
+JSON rows with zero failures.
 
 The audit script self-test includes intentionally invalid cases for incomplete
 pricing, duplicate negative-column blockage, partial frontier coverage,

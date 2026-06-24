@@ -1925,3 +1925,35 @@ Remaining TODOs:
 - TODO: investigate why the M2 controlling split leaf does not recover the
   stronger inventory/route/Gini relaxation lower bound before spending BPC
   time elsewhere.
+
+## 2026-06-25 - Compatibility-Flow Relaxation Ordering
+
+- Found a certificate-safe scheduling bottleneck in the inventory/route/Gini
+  relaxation audit path. With pickup/drop compatibility enabled, the solver
+  previously solved the compatibility-flow model before the no-compatibility
+  model, then kept the larger valid lower bound. Some low-Gini V12 child
+  intervals are already cutoff-fathomed by the easier no-compatibility model,
+  so solving the compatibility model first could consume the remaining
+  frontier budget and leave sibling split intervals with only an inherited
+  parent lower bound.
+- Changed the relaxation ordering to solve the no-compatibility model first.
+  If that valid relaxation already cutoff-fathoms the interval, the
+  compatibility-flow model is skipped. Otherwise both models are still solved
+  and the maximum valid lower bound is used, preserving certificate semantics.
+- Validation:
+  - V4 paper-core smoke remains certified at objective 0.
+  - V12 M1 300s remains noncertified with the same LB/gap as before
+    (`LB=0.268414876140`, `UB=0.357200583208`, gap `0.248559804329`).
+  - V12 M2 300s improves materially:
+    `LB=0.692627421486`, `UB=0.719065249476`, gap `0.036766938758`.
+    The previous 300s paper-core row had `LB=0.577560696100`, gap
+    `0.196789586869`.
+  - The new V12 M2 plateau is no longer the split child
+    `[0.359532624738,0.479376832984]`; both low/mid children are now
+    bound-fathomed by valid no-compatibility relaxation bounds. The remaining
+    unresolved leaves are `[0.479376832984,0.599221041230]` and
+    `[0.599221041230,0.719065249476]`, both at LB `0.692627421486`.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  seventeen solver JSON rows and zero failures.
+- TODO: focus the next paper-core optimization on the new high-Gini plateau
+  around `[0.479376832984,0.719065249476]`; V12 M2 remains noncertified.
