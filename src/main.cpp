@@ -197,6 +197,10 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.frontier_best_bound_scheduling = true;
         opt.frontier_relaxation_cache = true;
         opt.frontier_split_before_tree = true;
+        if (!opt.frontier_adaptive_max_depth_explicit) {
+            opt.frontier_adaptive_max_depth =
+                std::max(opt.frontier_adaptive_max_depth, 5);
+        }
         opt.bpc_incumbent = (opt.bpc_incumbent == "none" || opt.bpc_incumbent.empty())
             ? "auto" : opt.bpc_incumbent;
         opt.compact_fallback_enabled =
@@ -303,7 +307,10 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--frontier-focused-relax-seconds") opt.frontier_focused_relax_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--frontier-focused-max-passes") opt.frontier_focused_max_passes = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--frontier-adaptive-split") opt.frontier_adaptive_split = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--frontier-adaptive-max-depth") opt.frontier_adaptive_max_depth = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--frontier-adaptive-max-depth") {
+            opt.frontier_adaptive_max_depth = std::stoi(requireValue(i, argc, argv));
+            opt.frontier_adaptive_max_depth_explicit = true;
+        }
         else if (arg == "--frontier-adaptive-min-width") opt.frontier_adaptive_min_width = std::stod(requireValue(i, argc, argv));
         else if (arg == "--frontier-adaptive-split-factor") opt.frontier_adaptive_split_factor = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--support-duration-pruning") opt.support_duration_pruning = parseBoolValue(requireValue(i, argc, argv));

@@ -68,7 +68,7 @@ does not prove `certified_original_problem=true`.
 - `--frontier-focused-intensification true|false`: reserve time to rerun stronger relaxations on the current minimum-LB unresolved interval.
 - `--frontier-focused-reserve-fraction x`: fraction of the time limit reserved for focused intensification.
 - `--frontier-adaptive-split true|false`: split the current minimum-LB unresolved Gini interval into exactly covering child intervals.
-- `--frontier-adaptive-max-depth N`: maximum adaptive split depth for a frontier leaf interval.
+- `--frontier-adaptive-max-depth N`: maximum adaptive split depth for a frontier leaf interval. The `paper-bpc-core` and `paper-exact-portfolio` presets default this to 5 unless explicitly overridden, because deeper certificate-neutral child relaxations improved both V12 M1 and V12 M2 before expensive BPC tree pricing.
 - `--route-mask-operation-budget-cuts true|false`: add mask-specific pickup-operation budget rows to the route-mask relaxation using depot-cycle lower bounds.
 - `--route-pool-incumbent true|false`: collect verified BPC-generated route-load columns and solve a true-objective restricted route-column incumbent master for upper bounds only.
 - `--route-pool-max-columns-per-vehicle N`: cap stored route-pool columns per vehicle after projection dominance.

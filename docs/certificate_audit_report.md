@@ -213,6 +213,18 @@ not closed.
 The full audit over `results/paper_bpc_core/raw` now covers twenty-five solver
 JSON rows with zero failures.
 
+The adaptive split-depth paper-core change was then validated. The paper
+presets now default `frontier_adaptive_max_depth` to 5 unless the command line
+sets another value. This is certificate-neutral: split children exactly cover
+their parent and still require normal interval completion or valid
+bound-fathoming. V4 remains certified at objective 0. V12 M1 300s improves to
+`LB=0.340282088370`, gap `0.0473641299419`; V12 M2 300s improves to
+`LB=0.706200471341`, gap `0.0178909746296`. Both V12 rows remain
+noncertified because active child intervals are unresolved.
+
+The full audit over `results/paper_bpc_core/raw` now covers thirty-one solver
+JSON rows with zero failures.
+
 The audit script self-test includes intentionally invalid cases for incomplete
 pricing, duplicate negative-column blockage, partial frontier coverage,
 route-mask certifying with enumeration disabled, and original optimality without

@@ -2054,3 +2054,29 @@ Remaining TODOs:
   241M-247M operation states, while support-duration pruning remains zero.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   twenty-five paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Paper-Core Adaptive Split Depth 5
+
+- Diagnosed the remaining V12 M2 plateau after the 1200s run. The controlling
+  interval had reached the default adaptive split depth 3, so the solver spent
+  most of the remaining time in exact-label BPC pricing instead of extracting
+  additional child relaxation bounds.
+- Tested deeper adaptive split depths without changing certificate semantics.
+  V12 M2 300s improved monotonically:
+  - depth 3: `LB=0.696966843140`, gap `0.0307321294594`;
+  - depth 4: `LB=0.703291904615`, gap `0.0219359020237`;
+  - depth 5: `LB=0.706200471341`, gap `0.0178909746296`.
+- V12 M1 also improved with depth 5:
+  - depth 3 300s: `LB=0.331296710948`, gap `0.0725191208467`;
+  - depth 3 1200s: `LB=0.332675660948`, gap `0.0686586848205`;
+  - depth 5 300s: `LB=0.340282088370`, gap `0.0473641299419`.
+- Changed paper presets to default `frontier_adaptive_max_depth` to 5 unless
+  the user explicitly provides `--frontier-adaptive-max-depth`. This is
+  certificate-neutral: child intervals exactly cover parent intervals and all
+  active children still need valid bound-fathoming or exact BPC closure.
+- Validation:
+  - V4 paper-core depth-5 smoke remains certified at objective 0.
+  - V12 M1 and V12 M2 depth-5 300s rows remain noncertified but improve valid
+    lower bounds substantially.
+  - Full certificate audit over `results/paper_bpc_core/raw` now covers
+    thirty-one paper-core solver JSON rows and reports zero failures.

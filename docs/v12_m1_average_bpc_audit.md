@@ -157,9 +157,27 @@ The largest observed pricing calls enumerate about 7.07M route states and
 unclosed nodes. This confirms that the remaining V12 M1 bottleneck is exact
 pricing/branch closure, not early frontier relaxation.
 
+The next scheduling diagnostic increased the paper-core adaptive split depth
+from 3 to 5 before starting expensive BPC trees. This is certificate-neutral:
+parent intervals are replaced by exactly covering child intervals and no child
+is certified unless its own bound/closure is valid. On V12 M1, the default
+depth-5 300s row improves over both the old depth-3 300s row and the depth-3
+1200s row:
+
+- Depth-3 300s: `LB=0.331296710948`, gap `0.0725191208467`.
+- Depth-3 1200s: `LB=0.332675660948`, gap `0.0686586848205`.
+- Depth-5 300s: `LB=0.340282088370`, gap `0.0473641299419`.
+
+The depth-5 row remains noncertified with three unresolved active leaves:
+`[0.238133722139,0.267900437406]`,
+`[0.223250364505,0.230692043322]`, and
+`[0.230692043322,0.238133722139]`. The improvement shows that V12 M1 was
+spending too much time in branch-price closure before extracting available
+child relaxation bounds.
+
 ## Required Next Work
 
-- Use the 1200s per-node and per-pricing-call trace records to identify
+- Use the depth-5 interval ledger and the 1200s per-node/pricing traces to identify
   certificate-safe pricing reductions. Candidate work should target exact
   operation-state pruning or stronger branch closure, not lower-bound shortcuts.
 - Compare against plain compact CPLEX on the same instance file/hash only as a

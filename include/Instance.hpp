@@ -81,6 +81,7 @@ struct SolveOptions {
     int frontier_focused_max_passes = 2;
     bool frontier_adaptive_split = true;
     int frontier_adaptive_max_depth = 3;
+    bool frontier_adaptive_max_depth_explicit = false;
     double frontier_adaptive_min_width = 1e-4;
     int frontier_adaptive_split_factor = 2;
     bool route_pool_incumbent = true;

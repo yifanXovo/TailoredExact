@@ -21,6 +21,11 @@ The paper-facing exact algorithm is GF-RL-BPC, implemented by
   to the split ledger before running an expensive initial branch-price tree.
   This only changes work order: replaced parent intervals are ignored in the
   final certificate ledger and exactly covered by child intervals.
+- Adaptive split depth 5 by default for paper presets unless explicitly
+  overridden. This is still a ledger scheduling rule, not a certificate
+  shortcut: every child interval must be empty, validly bound-fathomed, or
+  closed by exact BPC pricing before original-problem optimality can be
+  claimed.
 - Complete route-mask operation-budget cuts only when route-mask enumeration is
   complete for the active instance threshold.
 - Route-pool incumbent master using verified elementary columns only.

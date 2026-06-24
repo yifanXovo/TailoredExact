@@ -168,6 +168,20 @@ This row is the current best paper-core V12 M2 lower bound, but it remains a
 noncertificate because one active interval has an open BPC node and exact
 pricing/tree closure is incomplete.
 
+The adaptive split-depth diagnostic shows that deeper child relaxation is more
+effective than spending the same budget in the broad depth-3 tree. With
+certificate-neutral depth 5, the 300s paper-core row improves to
+`LB=0.706200471341`, `UB=0.719065249476`, gap `0.0178909746296`. This is
+better than the previous depth-3 1200s split-before-tree row. The remaining
+active leaves are `[0.494357359015,0.509337885046]`, which is queued, and
+`[0.486867096000,0.494357359015]`, which has an open BPC node. The sibling
+`[0.479376832984,0.486867096000]` is now bound-fathomed by the focused child
+inventory/route/Gini relaxation.
+
+This motivated changing the paper presets to default `frontier_adaptive_max_depth`
+to 5 unless explicitly overridden. The change only changes work order and
+ledger granularity; it does not change the certificate requirements.
+
 ## Required Next Work
 
 - Use the node/pricing trace to profile exact-label pricing state explosion and

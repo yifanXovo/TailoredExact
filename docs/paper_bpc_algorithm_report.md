@@ -730,3 +730,27 @@ The result-integrity audit over the new raw JSON files reported no failures.
 No new original-problem certificate was obtained beyond the existing V4 smoke
 certificate. Compact fallback companion rows were run for V12 M1/M2 but remained
 time-limited and noncertified; plain CPLEX benchmark comparisons were skipped.
+
+## Paper-Core Follow-Up: Deeper Certificate-Neutral Frontier Splitting
+
+After narrowing the paper-facing algorithm to GF-RL-BPC
+(`gcap-frontier`/`paper-bpc-core`), the main plateau was traced to broad
+frontier intervals reaching branch-price trees before child relaxation bounds
+were fully exploited. The paper presets now default adaptive split depth to 5
+unless the command line overrides it. This is a scheduling/ledger granularity
+change only: replaced parent intervals are ignored, child intervals exactly
+cover the same Gini range, and original-problem certification still requires
+all active children to be empty, validly bound-fathomed, or closed by exact BPC
+pricing.
+
+| Instance | Row | Status | UB | LB | Gap | Certified |
+|---|---|---|---:|---:|---:|---|
+| V4 smoke | paper-core depth 5 | optimal | 0 | 0 | 0 | yes |
+| V12 M1 average | depth 3 300s | not closed | 0.357200583208 | 0.331296710948 | 0.072519120847 | no |
+| V12 M1 average | depth 5 300s | not closed | 0.357200583208 | 0.340282088370 | 0.047364129942 | no |
+| V12 M2 average | depth 3 300s | not closed | 0.719065249476 | 0.696966843140 | 0.030732129459 | no |
+| V12 M2 average | depth 5 300s | not closed | 0.719065249476 | 0.706200471341 | 0.017890974630 | no |
+
+The V12 rows remain noncertified, but the lower-bound improvements are valid
+inventory/route/Gini relaxation evidence in the full frontier ledger. The
+certificate audit over `results/paper_bpc_core/raw` reported zero failures.
