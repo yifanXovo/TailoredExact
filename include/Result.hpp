@@ -456,6 +456,8 @@ struct SolveResult {
     double vehicle_transfer_flow_time_seconds = 0.0;
     std::string progress_log_path;
     long long progress_checkpoints_written = 0;
+    std::string bpc_trace_json_path;
+    std::string bpc_interval_trace_csv_path;
     double last_lb_improvement_time_seconds = 0.0;
     double last_ub_improvement_time_seconds = 0.0;
     double best_gap_seen = 0.0;

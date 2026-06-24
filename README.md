@@ -24,6 +24,28 @@ g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluat
 build\ExactEBRP.exe --method gcap-frontier --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --time-limit 30 --frontier-intervals 3 --frontier-retry-passes 1 --frontier-final-closure true --frontier-final-nodes 31 --gcap-pricing-columns 4 --column-dominance true --column-dominance-mode exact --projection-bound true --penalty-domain-tightening true --out results\optimization_update\raw\smoke_gcap_frontier_full.json
 ```
 
+## Paper Core Scope
+
+The paper-facing exact algorithm is GF-RL-BPC: `--method gcap-frontier`
+with `--algorithm-preset paper-bpc-core`. This preset uses elementary
+route-load columns and exact-label pricing only. It explicitly disables
+compact fallback certificates, hybrid/ng-DSSR pricing, two-track relaxed RMP,
+large-instance diagnostics, focus-only runs, imported focus bounds, frontier
+resume, and iterative-closure shortcuts.
+
+Compact/CPLEX, imported incumbents, route-pool incumbents, and HGA outputs may
+be used only as benchmark rows or verified upper-bound sources. They must not
+contribute a BPC lower bound or BPC certificate. Use the audit script before
+reporting any BPC result:
+
+```powershell
+python scripts\audit_bpc_certificate.py results\paper_bpc_core\raw --csv-out results\paper_bpc_core\certificate_audit.csv --fail-on-error
+```
+
+The solver also guards JSON output: an original-problem run with
+`status=optimal` is downgraded before writing if the full certificate audit
+does not prove `certified_original_problem=true`.
+
 ## New Optimization Options
 
 - `--column-dominance true|false`: enable exact-safe route-load projection dominance.

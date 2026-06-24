@@ -299,7 +299,37 @@ bool inferCertifiedOriginalProblem(const SolveResult& result) {
     return true;
 }
 
-std::string resultToJson(const SolveResult& result) {
+SolveResult guardOriginalOptimalityForOutput(const SolveResult& input) {
+    SolveResult guarded = input;
+    if (guarded.status == "optimal" &&
+        inferSolvesOriginalObjective(guarded) &&
+        !inferCertifiedOriginalProblem(guarded)) {
+        guarded.status = "not_certified_incomplete_certificate";
+        guarded.certificate =
+            "guarded: original-problem optimality was not emitted because the "
+            "full certificate audit failed";
+        if (guarded.bpc_status == "optimal") {
+            guarded.bpc_status = guarded.status;
+        }
+        if (guarded.portfolio_status == "optimal") {
+            guarded.portfolio_status = "not_certified";
+            guarded.certificate_module = "none";
+        }
+        if (guarded.full_certificate_rejection_reason.empty() ||
+            guarded.full_certificate_rejection_reason == "none") {
+            guarded.full_certificate_rejection_reason =
+                "output_guard_rejected_incomplete_original_certificate";
+        }
+        guarded.notes.push_back(
+            "certificate output guard changed status from optimal because "
+            "certified_original_problem=false under the full audit");
+    }
+    return guarded;
+}
+
+std::string resultToJson(const SolveResult& input) {
+    const SolveResult guarded_result = guardOriginalOptimalityForOutput(input);
+    const SolveResult& result = guarded_result;
     std::ostringstream out;
     out << std::setprecision(12);
     const double wall_time = result.wall_time_seconds > 0.0
@@ -1048,6 +1078,10 @@ std::string resultToJson(const SolveResult& result) {
         << jsonEscape(result.progress_log_path) << "\",\n";
     out << "  \"progress_checkpoints_written\": "
         << result.progress_checkpoints_written << ",\n";
+    out << "  \"bpc_trace_json\": \""
+        << jsonEscape(result.bpc_trace_json_path) << "\",\n";
+    out << "  \"bpc_interval_trace_csv\": \""
+        << jsonEscape(result.bpc_interval_trace_csv_path) << "\",\n";
     out << "  \"last_lb_improvement_time_seconds\": "
         << result.last_lb_improvement_time_seconds << ",\n";
     out << "  \"last_ub_improvement_time_seconds\": "

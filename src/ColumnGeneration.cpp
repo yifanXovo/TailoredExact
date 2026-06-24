@@ -233,6 +233,34 @@ std::string num(double value) {
     return out.str();
 }
 
+std::string jsonEscapeCg(const std::string& value) {
+    std::ostringstream out;
+    for (unsigned char ch : value) {
+        switch (ch) {
+        case '"': out << "\\\""; break;
+        case '\\': out << "\\\\"; break;
+        case '\b': out << "\\b"; break;
+        case '\f': out << "\\f"; break;
+        case '\n': out << "\\n"; break;
+        case '\r': out << "\\r"; break;
+        case '\t': out << "\\t"; break;
+        default:
+            if (ch < 0x20) {
+                out << "\\u" << std::hex << std::setw(4) << std::setfill('0')
+                    << static_cast<int>(ch) << std::dec << std::setfill(' ');
+            } else {
+                out << static_cast<char>(ch);
+            }
+        }
+    }
+    return out.str();
+}
+
+std::string jsonNumberCg(double value) {
+    if (!std::isfinite(value)) return "null";
+    return num(value);
+}
+
 std::string quote(const std::filesystem::path& p) {
     return "\"" + p.string() + "\"";
 }
@@ -2401,6 +2429,7 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
             PricingResult priced;
             auto cached = pricing_by_capacity.find(instance.Q[k]);
             bool reused_pricing = cached != pricing_by_capacity.end();
+            double pricing_call_seconds = 0.0;
             if (reused_pricing) {
                 priced = cached->second;
             } else {
@@ -2425,9 +2454,10 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                         : 1;
                 const auto pricing_start = Clock::now();
                 priced = priceRouteLoadColumnExact(instance, k, duals, pricing_options, start);
-                accumulateBpcPricingStats(result, priced);
-                result.pricing_time_seconds +=
+                pricing_call_seconds =
                     std::chrono::duration<double>(Clock::now() - pricing_start).count();
+                accumulateBpcPricingStats(result, priced);
+                result.pricing_time_seconds += pricing_call_seconds;
                 pricing_by_capacity.emplace(instance.Q[k], priced);
                 ++result.pricing_calls;
                 result.route_states += priced.route_states;
@@ -2485,6 +2515,7 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 }
             }
 
+            double exact_rerun_pricing_seconds = 0.0;
             auto rerun_exact_pricing_for_capacity = [&]() {
                 const double exact_elapsed = std::chrono::duration<double>(
                     Clock::now() - start).count();
@@ -2510,9 +2541,10 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 const auto pricing_start = Clock::now();
                 PricingResult exact =
                     priceRouteLoadColumnExact(instance, k, duals, pricing_options, start);
-                accumulateBpcPricingStats(result, exact);
-                result.pricing_time_seconds +=
+                exact_rerun_pricing_seconds =
                     std::chrono::duration<double>(Clock::now() - pricing_start).count();
+                accumulateBpcPricingStats(result, exact);
+                result.pricing_time_seconds += exact_rerun_pricing_seconds;
                 pricing_by_capacity[instance.Q[k]] = exact;
                 ++result.pricing_calls;
                 result.route_states += exact.route_states;
@@ -2546,6 +2578,7 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                     + " early negative column is already present; rerunning exact pricing before any closure claim");
                 PricingResult exact = rerun_exact_pricing_for_capacity();
                 priced = exact;
+                pricing_call_seconds = exact_rerun_pricing_seconds;
                 reused_pricing = false;
                 if (priced.has_column) {
                     priced.best_column.vehicle = k;
@@ -2595,6 +2628,53 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                  << ", operation_states=" << (reused_pricing ? 0 : priced.operation_states)
                  << ", best_reduced_cost=" << priced.best_reduced_cost;
             result.notes.push_back(note.str());
+            {
+                std::ostringstream trace;
+                trace << std::setprecision(12)
+                      << "{"
+                      << "\"iteration\": " << iter
+                      << ", \"vehicle\": " << k
+                      << ", \"dual_summary\": \""
+                      << jsonEscapeCg("visit_l1=" + num([&]() {
+                             double sum = 0.0;
+                             for (double v : shared_duals.visit_cost) sum += std::fabs(v);
+                             return sum;
+                         }()) + ";operation_l1=" + num([&]() {
+                             double sum = 0.0;
+                             for (double v : shared_duals.operation_cost) sum += std::fabs(v);
+                             return sum;
+                         }()) + ";vehicle_constant=" + num(vehicle_constant))
+                      << "\""
+                      << ", \"pricing_engine_requested\": \""
+                      << jsonEscapeCg(result.bpc_pricing_engine_requested) << "\""
+                      << ", \"pricing_engine_used\": \""
+                      << jsonEscapeCg(priced.pricing_engine) << "\""
+                      << ", \"reused_capacity_price\": "
+                      << (reused_pricing ? "true" : "false")
+                      << ", \"generated_columns\": " << priced.generated_columns
+                      << ", \"returned_negative_columns\": "
+                      << priced.negative_columns.size()
+                      << ", \"route_states\": "
+                      << (reused_pricing ? 0 : priced.route_states)
+                      << ", \"operation_states\": "
+                      << (reused_pricing ? 0 : priced.operation_states)
+                      << ", \"labels_pruned_support_duration\": "
+                      << (priced.support_duration_pruned_labels +
+                          priced.support_duration_strong_pruned_labels)
+                      << ", \"best_reduced_cost\": "
+                      << jsonNumberCg(priced.best_reduced_cost)
+                      << ", \"exact_completed\": "
+                      << (priced.complete ? "true" : "false")
+                      << ", \"early_negative_stop\": "
+                      << (priced.stopped_early_with_column ? "true" : "false")
+                      << ", \"time_seconds\": "
+                      << jsonNumberCg(pricing_call_seconds)
+                      << ", \"timeout_unfinished_state_count\": "
+                      << (priced.complete ? 0 :
+                          priced.route_states + priced.operation_states)
+                      << "}";
+                result.pricing_trace_json_objects.push_back(trace.str());
+            }
             if (!result.bpc_pricing_engine_requested.empty() &&
                 result.bpc_pricing_engine_requested != "auto" &&
                 result.bpc_pricing_engine_requested != priced.pricing_engine) {
@@ -3079,6 +3159,8 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
         std::vector<std::vector<RouteLoadColumn>> columns_by_vehicle;
         int depth = 0;
         double inherited_lower_bound = 0.0;
+        int node_id = 0;
+        int parent_id = -1;
     };
 
     GiniCapTreeResult result;
@@ -3286,7 +3368,10 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
     open.push_back(TreeNode{GiniCapBranchRestriction{},
                             root_columns,
                             0,
-                            std::max(0.0, resource_bound.objective_lower_bound)});
+                            std::max(0.0, resource_bound.objective_lower_bound),
+                            0,
+                            -1});
+    int next_node_id = 1;
     result.notes.push_back("branch-price tree nodes are scheduled by best inherited lower bound; this changes search order only, not certificate conditions");
 
     auto remainingTime = [&]() {
@@ -3490,6 +3575,50 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
         for (const RouteLoadColumn& col : lp_node.flat_columns) {
             exportColumn(col, "pricing");
         }
+        int node_pricing_call = 0;
+        for (const std::string& pricing_trace : lp_node.pricing_trace_json_objects) {
+            std::ostringstream wrapped;
+            wrapped << "{"
+                    << "\"node_id\": " << node.node_id
+                    << ", \"parent_id\": " << node.parent_id
+                    << ", \"tree_node_sequence\": " << result.nodes_solved
+                    << ", \"depth\": " << node.depth
+                    << ", \"node_pricing_call\": " << node_pricing_call++
+                    << ", \"pricing_call\": " << pricing_trace
+                    << "}";
+            result.pricing_trace_json_objects.push_back(wrapped.str());
+        }
+        auto appendNodeTrace = [&](const std::string& outcome,
+                                   const std::string& branch_decision,
+                                   const std::string& not_closed_reason) {
+            std::ostringstream node_trace;
+            node_trace << std::setprecision(12)
+                       << "{"
+                       << "\"node_id\": " << node.node_id
+                       << ", \"parent_id\": " << node.parent_id
+                       << ", \"tree_node_sequence\": " << result.nodes_solved
+                       << ", \"depth\": " << node.depth
+                       << ", \"branch_restrictions\": \""
+                       << jsonEscapeCg(branchDescription(node.branch)) << "\""
+                       << ", \"lp_rmp_objective\": "
+                       << jsonNumberCg(lp_node.fixed_cap_surrogate)
+                       << ", \"inherited_lower_bound\": "
+                       << jsonNumberCg(node.inherited_lower_bound)
+                       << ", \"best_node_lower_bound\": "
+                       << jsonNumberCg(lp_node.fixed_cap_surrogate)
+                       << ", \"cg_iterations\": " << lp_node.iterations
+                       << ", \"active_columns\": " << lp_node.generated_columns
+                       << ", \"cuts\": " << lp_node.cuts_added
+                       << ", \"branching_decision\": \""
+                       << jsonEscapeCg(branch_decision) << "\""
+                       << ", \"pricing_closed\": "
+                       << (lp_node.complete ? "true" : "false")
+                       << ", \"not_closed_reason\": \""
+                       << jsonEscapeCg(not_closed_reason) << "\""
+                       << ", \"outcome\": \"" << jsonEscapeCg(outcome) << "\""
+                       << "}";
+            result.node_trace_json_objects.push_back(node_trace.str());
+        };
 
         std::ostringstream solved_note;
         solved_note << "node " << result.nodes_solved
@@ -3510,6 +3639,7 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
 
         if (!lp_node.complete) {
             result.notes.insert(result.notes.end(), lp_node.notes.begin(), lp_node.notes.end());
+            appendNodeTrace("unresolved", "none", "pricing_did_not_close");
             finishIncomplete("node pricing did not close; tree remains open",
                              node.inherited_lower_bound, 1);
             result.notes.push_back("unfinished node contributes only its inherited lower bound; the unclosed restricted-master objective is not used for certification");
@@ -3519,6 +3649,7 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
         if (lp_node.infeasible) {
             result.notes.push_back("infeasible branch-price node fathomed at depth="
                 + std::to_string(node.depth));
+            appendNodeTrace("infeasible_fathomed", "none", "");
             continue;
         }
 
@@ -3530,6 +3661,7 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
                 + std::to_string(node.depth)
                 + ", node_bound=" + num(lp_node.fixed_cap_surrogate)
                 + ", cutoff=" + num(objective_cutoff));
+            appendNodeTrace("bound_fathomed", "none", "");
             continue;
         }
 
@@ -3541,6 +3673,7 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
                 + std::to_string(node.depth)
                 + ", node_bound=" + num(lp_node.fixed_cap_surrogate)
                 + ", incumbent=" + num(result.best_integer_surrogate));
+            appendNodeTrace("bound_fathomed", "none", "");
             continue;
         }
 
@@ -3591,6 +3724,7 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
                       << ", surrogate=" << lp_node.fixed_cap_surrogate
                       << ", selected_columns=" << selected;
             result.notes.push_back(leaf_note.str());
+            appendNodeTrace("integer_leaf", "none", "");
             continue;
         }
 
@@ -3627,12 +3761,15 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
             GiniCapBranchRestriction forbid = node.branch;
             forbid.forbid_together_pairs.push_back({candidate.station_i, candidate.station_j});
             open.push_back(TreeNode{forbid, lp_node.columns_by_vehicle,
-                                    node.depth + 1, childLower()});
+                                    node.depth + 1, childLower(),
+                                    next_node_id++, node.node_id});
 
             GiniCapBranchRestriction require = node.branch;
             require.require_together_pairs.push_back({candidate.station_i, candidate.station_j});
             open.push_back(TreeNode{require, lp_node.columns_by_vehicle,
-                                    node.depth + 1, childLower()});
+                                    node.depth + 1, childLower(),
+                                    next_node_id++, node.node_id});
+            appendNodeTrace("branched", "ryan_foster", "");
         };
         auto branchStation = [&]() {
             ++result.branched_nodes;
@@ -3645,12 +3782,15 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
             GiniCapBranchRestriction unserved = node.branch;
             unserved.forbid_stations.push_back(station_candidate.station);
             open.push_back(TreeNode{unserved, lp_node.columns_by_vehicle,
-                                    node.depth + 1, childLower()});
+                                    node.depth + 1, childLower(),
+                                    next_node_id++, node.node_id});
 
             GiniCapBranchRestriction served = node.branch;
             served.require_stations.push_back(station_candidate.station);
             open.push_back(TreeNode{served, lp_node.columns_by_vehicle,
-                                    node.depth + 1, childLower()});
+                                    node.depth + 1, childLower(),
+                                    next_node_id++, node.node_id});
+            appendNodeTrace("branched", "station_served_unserved", "");
         };
         auto branchInventory = [&]() {
             ++result.branched_nodes;
@@ -3689,7 +3829,8 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
                 ++result.inventory_branch_pruned_nodes;
             } else {
                 open.push_back(TreeNode{low, lp_node.columns_by_vehicle,
-                                        node.depth + 1, childLower()});
+                                        node.depth + 1, childLower(),
+                                        next_node_id++, node.node_id});
             }
 
             GiniCapBranchRestriction high = node.branch;
@@ -3705,8 +3846,10 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
                 ++result.inventory_branch_pruned_nodes;
             } else {
                 open.push_back(TreeNode{high, lp_node.columns_by_vehicle,
-                                        node.depth + 1, childLower()});
+                                        node.depth + 1, childLower(),
+                                        next_node_id++, node.node_id});
             }
+            appendNodeTrace("branched", "final_inventory", "");
         };
         auto branchOperation = [&]() {
             ++result.branched_nodes;
@@ -3729,12 +3872,15 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
             GiniCapBranchRestriction no_pickup = node.branch;
             no_pickup.forbid_pickup_stations.push_back(operation_candidate.station);
             open.push_back(TreeNode{no_pickup, lp_node.columns_by_vehicle,
-                                    node.depth + 1, childLower()});
+                                    node.depth + 1, childLower(),
+                                    next_node_id++, node.node_id});
 
             GiniCapBranchRestriction no_drop = node.branch;
             no_drop.forbid_drop_stations.push_back(operation_candidate.station);
             open.push_back(TreeNode{no_drop, lp_node.columns_by_vehicle,
-                                    node.depth + 1, childLower()});
+                                    node.depth + 1, childLower(),
+                                    next_node_id++, node.node_id});
+            appendNodeTrace("branched", "operation_mode", "");
         };
 
         auto mode = branch_selection_mode;
@@ -3810,6 +3956,8 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
                 ratioSumUpperBound(instance, node.branch));
             if (!reconstructed.found) {
                 ++result.projected_leaves;
+                appendNodeTrace("unresolved", "none",
+                                "projected_leaf_reconstruction_failed");
                 finishIncomplete("projected leaf reconstruction failed; column-variable branching or a stronger integer master is needed",
                                  lp_node.fixed_cap_surrogate, 1);
                 return result;
@@ -3846,8 +3994,11 @@ GiniCapTreeResult runGiniCapBranchPriceTreeDiagnostic(
                        << ", surrogate=" << reconstructed.surrogate
                        << ", objective=" << reconstructed.parts.objective;
             result.notes.push_back(recon_note.str());
+            appendNodeTrace("reconstructed_integer_leaf", "none", "");
             continue;
         }
+        appendNodeTrace("unresolved", "none",
+                        "no_enabled_branch_despite_fractional_candidates");
         finishIncomplete("branch selection found no enabled branch despite fractional candidates",
                          lp_node.fixed_cap_surrogate, 1);
         return result;

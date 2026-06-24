@@ -8,6 +8,24 @@ This project distinguishes the original EBRP objective from fixed-cap and restri
 - `solves_original_objective=true`.
 - The method-specific certificate closes the original objective, not just a diagnostic subproblem.
 
+The paper-facing exact algorithm is GF-RL-BPC, implemented by
+`--method gcap-frontier --algorithm-preset paper-bpc-core`. This preset is the
+only BPC configuration that should be reported as the main paper algorithm. It
+uses elementary route-load columns and exact-label pricing, and disables
+compact fallback certificates, hybrid/ng-DSSR pricing, two-track relaxed RMP,
+large-instance diagnostic modes, focus-only shortcuts, imported focus-bound
+shortcuts, frontier resume shortcuts, and iterative closure automation. Those
+modules may remain in the repository as benchmark, diagnostic, or appendix
+tools, but they are not substitutes for a GF-RL-BPC certificate.
+
+Before a JSON result is written, the output guard rejects any original-problem
+`status=optimal` claim that does not also satisfy
+`certified_original_problem=true` under the full audit. The emitted status is
+changed to `not_certified_incomplete_certificate` and the rejection reason is
+recorded. This guard is intentionally redundant with the external
+`scripts/audit_bpc_certificate.py` checker; both must agree before a run is
+used as paper evidence.
+
 ## Method Scopes
 
 `gcap-frontier` is the main paper algorithm and is reported as `method_scope=original_bpc`, `is_bpc=true`. It solves the original objective only when the full Gini frontier is certified.

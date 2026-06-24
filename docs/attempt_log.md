@@ -1775,3 +1775,122 @@ Remaining TODOs:
   runs; run the full 300s ablation matrix on a longer compute budget; decide
   whether compact fallback should be automated in a single executable portfolio
   command rather than represented by companion rows.
+
+## 2026-06-25 - Paper-Core Certificate Safety Pass
+
+- Narrowed the paper-facing algorithm scope to GF-RL-BPC:
+  `--method gcap-frontier --algorithm-preset paper-bpc-core`.
+- Tightened `paper-bpc-core` so it uses exact-label elementary-column BPC and
+  disables compact fallback certificates, hybrid/ng-DSSR, two-track relaxed
+  RMP, large diagnostic modes, focus-only shortcuts, imported focus bounds,
+  frontier resume, and iterative closure automation.
+- Added `scripts/audit_bpc_certificate.py` with self-tests for incomplete
+  pricing, duplicate negative-column blockage, partial frontier coverage,
+  disabled route-mask enumeration used as certifying, and original optimality
+  without `certified_original_problem=true`.
+- Added a JSON output guard so original-problem `status=optimal` is not emitted
+  unless the full certificate audit proves `certified_original_problem=true`.
+- V4 paper-core smoke remains certified at objective 0 and passes the external
+  certificate audit.
+- V12 M1 Average 60s paper-core baseline:
+  UB 0.357200583208, LB 0.178600291604, gap 0.5, unresolved intervals 2,
+  controlling interval `4:[0.1786,0.238134]`, noncertified.
+- V12 M2 Average 60s paper-core baseline:
+  UB 0.719065249476, LB 0.359532624738, gap 0.5, unresolved intervals 2,
+  controlling interval `4:[0.359533,0.479377]`, noncertified.
+- Current plateau diagnosis is preliminary: both 60s rows are still controlled
+  by gamma-floor child intervals after relaxation time, not by a fully traced
+  branch-price pricing-closure plateau.
+- TODO: add per-node and per-pricing-call trace output; run 300s/1200s V12 M1
+  and V12 M2 paper-core rows; run plain compact CPLEX only as same-instance
+  benchmark evidence.
+
+## 2026-06-25 - Paper-Core Plateau Trace Artifact
+
+- Added `bpc_trace_json` and `bpc_interval_trace_csv` result fields.
+- `paper-bpc-core` runs with an output path now emit
+  `*.trace.json` and `*.intervals.csv` next to the result JSON.
+- The trace schema `paper_bpc_core_plateau_trace_v1` records the active
+  frontier interval ledger, controlling interval, runtime bucket summary, and
+  aggregate tree/pricing counters.
+- Early zero-objective certificates now emit a minimal trace artifact so V4
+  smoke certificates have the same audit trail.
+- `scripts/audit_bpc_certificate.py` skips trace JSON artifacts by detecting
+  top-level `trace_schema`; it audits only solver result JSON.
+- V4 paper-core smoke still certifies objective 0 and passes the certificate
+  audit. V12 M1 20s trace validation remains noncertified, as expected.
+- Current limitation: branch-price node and pricing-call trace are still
+  aggregate-only (`branch_price_node_trace_available=false`,
+  `pricing_call_trace_available=false`). The next implementation step is
+  instrumentation inside `ColumnGeneration.cpp`/`Pricing.cpp`.
+
+## 2026-06-25 - Paper-Core Interval Trace Refinement
+
+- Extended the interval trace ledger with real per-interval aggregate counters
+  from branch-price tree runs: `bpc_nodes`, `generated_columns`, `cuts`,
+  `pricing_calls`, `pricing_time_seconds`, `rmp_solve_time_seconds`, and
+  `relaxation_time_seconds`.
+- Added a distinct plateau reason,
+  `tree_not_started_before_time_limit_or_reserve`, so queued unresolved leaves
+  are not confused with branch-price trees that started and remain open.
+- Rebuilt with the documented fallback g++ command and reran:
+  - V4 paper-core smoke: certified objective 0, audit passed.
+  - V12 M1 60s: UB 0.357200583208, LB 0.178600291604, gap 0.5,
+    controlling interval `4:[0.1786,0.238134]`,
+    reason `tree_not_started_before_time_limit_or_reserve`, noncertified.
+  - V12 M2 60s: UB 0.719065249476, LB 0.359532624738, gap 0.5,
+    controlling interval `4:[0.359533,0.479377]`,
+    reason `tree_not_started_before_time_limit_or_reserve`, noncertified.
+- Full certificate audit over `results/paper_bpc_core/raw` reports
+  five solver JSON rows and zero failures.
+- Current diagnosis: the 60s V12 rows are controlled by gamma-floor child
+  intervals not yet expanded by BPC; the immediate bottleneck is relaxation
+  time and frontier scheduling before the controlling leaf, not a pricing
+  closure contradiction inside an explored tree.
+
+## 2026-06-25 - Paper-Core Node/Pricing Trace Instrumentation
+
+- Added structured branch-price node trace fragments in
+  `runGiniCapBranchPriceTreeDiagnostic`.
+- Added structured pricing-call trace fragments in the fixed-Gini column
+  generation loop. Each pricing call records vehicle id, dual summary,
+  requested/used pricing engine, reuse flag, generated columns, returned
+  negative columns, route/operation state counts, support-pruning totals, best
+  reduced cost, exact-completion flag, early-negative-stop flag, elapsed time,
+  and unfinished-state count on timeout.
+- `paper_bpc_core_plateau_trace_v1` now embeds `branch_price_nodes` and
+  `pricing_calls` arrays when a branch-price tree starts for an interval.
+- V8 generated tree-trace probe (`regen_V8_M2_average`, 60s diagnostic config)
+  validates the trace path with 53 node trace objects and 100 pricing-call
+  trace objects; the result remains noncertified and audit-safe.
+- V12 M1/M2 60s rows were rerun with the current trace schema. Their
+  node/pricing arrays are empty because the controlling leaves still do not
+  reach a branch-price tree before the time/reserve stop.
+- Full certificate audit over `results/paper_bpc_core/raw` reports six solver
+  JSON rows and zero failures.
+
+## 2026-06-25 - Paper-Core 300s Plateau Audit
+
+- Reran V12 M1 and V12 M2 regenerated Average candidates with
+  `--method gcap-frontier --algorithm-preset paper-bpc-core`, 300s time limit,
+  exact-label elementary-column BPC, progress logs, interval CSV traces, and
+  branch-node/pricing-call JSON traces.
+- V12 M1 300s: UB 0.357200583208, LB 0.268414876140, gap 0.248559804329,
+  unresolved intervals 2, open nodes 5, noncertified. The controlling interval
+  `4:[0.1786,0.238134]` is a queued adaptive-split leaf; explored BPC nodes
+  remain unresolved because pricing did not close.
+- V12 M2 300s: UB 0.719065249476, LB 0.577560696100, gap 0.196789586869,
+  unresolved intervals 2, open nodes 4, noncertified. The controlling interval
+  `4:[0.359533,0.479377]` is queued with an inventory/route/Gini relaxation
+  lower bound; explored BPC nodes also stop with `pricing_did_not_close`.
+- The trace now gives actionable bottleneck evidence: started V12 branch-price
+  nodes are dominated by exact-label pricing state explosion. Representative
+  calls enumerate millions of route states and hundreds of millions of
+  operation states, return negative columns, and therefore cannot certify
+  pricing closure.
+- Full certificate audit over `results/paper_bpc_core/raw` reports eight solver
+  JSON rows and zero failures. Only the V4 smoke row is certified; V8/V12 rows
+  are correctly labeled noncertified.
+- TODO: run 1200s paper-core rows when local budget allows and investigate
+  certificate-safe pricing pruning before making any paper-level V12 closure
+  claim.

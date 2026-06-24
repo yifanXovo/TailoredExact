@@ -338,6 +338,7 @@ struct GiniCapColumnGenerationResult {
     std::vector<RouteLoadColumn> flat_columns;
     std::vector<double> z_values;
     std::vector<double> y_values;
+    std::vector<std::string> pricing_trace_json_objects;
     std::vector<std::string> notes;
 };
 
@@ -495,6 +496,7 @@ struct GiniCapBranchProbeResult {
     double support_duration_precompute_time_seconds = 0.0;
     long long route_states = 0;
     long long operation_states = 0;
+    std::vector<std::string> pricing_trace_json_objects;
     std::vector<std::string> notes;
 };
 
@@ -725,6 +727,8 @@ struct GiniCapTreeResult {
     long long columns_exported_from_pricing = 0;
     long long columns_exported_from_warmstart = 0;
     long long columns_exported_from_integer_leaves = 0;
+    std::vector<std::string> node_trace_json_objects;
+    std::vector<std::string> pricing_trace_json_objects;
     std::vector<std::string> notes;
 };
 
