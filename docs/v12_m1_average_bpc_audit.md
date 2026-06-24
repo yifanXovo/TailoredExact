@@ -120,6 +120,22 @@ instance it reached the same LB/gap as the baseline 300s row, with
 from about 1.48B to 1.11B. The row still has unresolved intervals and pricing
 timeouts, so it does not change the certificate status.
 
+After the split-before-tree scheduling fix, the same completion-LB pruning
+diagnostic was rerun against the current paper-core work order. The comparison
+is now apples-to-apples:
+
+- Baseline split-before-tree 300s:
+  `LB=0.331296710948`, gap `0.0725191208467`,
+  `unresolved_intervals=3`, `open_nodes=3`, pricing time `66.750391s`.
+- Split-before-tree plus completion-LB pruning 300s:
+  `LB=0.331296710948`, gap `0.0725191208467`,
+  `unresolved_intervals=3`, `open_nodes=3`, pricing time `58.9066437s`,
+  `completion_lb_pruned_labels=23867430`.
+
+The pruning is safe and does reduce some pricing work, but it does not improve
+the valid global lower bound or certificate status on V12 M1 at this budget.
+It remains a diagnostic option rather than a paper-core default.
+
 The compatibility-flow relaxation ordering optimization was also checked for
 300s. It is neutral on this instance: the paper-core row remains
 `LB=0.268414876140`, `UB=0.357200583208`, gap `0.248559804329`, with two

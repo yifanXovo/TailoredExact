@@ -193,7 +193,13 @@ current strongest V12 M1 paper-core lower bound and confirms that the remaining
 plateau is pricing/tree closure in the high-Gini children, not a false optimal
 certificate.
 
-The full audit over `results/paper_bpc_core/raw` now covers twenty-one solver
+The completion-LB pruning diagnostics were rerun after split-before-tree
+scheduling on V12 M1 and V12 M2. Both rows remain noncertified and audit-safe;
+neither changes the certificate-relevant lower bound versus the matching
+split-before-tree baseline. This supports keeping completion-LB pruning as an
+explicit diagnostic/tuning option rather than a paper-core default.
+
+The full audit over `results/paper_bpc_core/raw` now covers twenty-four solver
 JSON rows with zero failures.
 
 The audit script self-test includes intentionally invalid cases for incomplete

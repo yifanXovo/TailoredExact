@@ -2005,3 +2005,30 @@ Remaining TODOs:
   certificate-safe pricing/branch closure rather than another side algorithm.
 - Full certificate audit now covers twenty-one paper-core solver JSON rows and
   reports zero failures.
+
+## 2026-06-25 - Completion-LB Pruning Retest After Split-Before-Tree
+
+- Reran completion lower-bound pricing pruning under the current
+  split-before-tree paper-core work order for V12 M1 and V12 M2 at 300s.
+- V12 M1 baseline split-before-tree 300s:
+  `LB=0.331296710948`, `UB=0.357200583208`, gap `0.0725191208467`,
+  `unresolved_intervals=3`, `open_nodes=3`.
+- V12 M1 with completion-LB pruning 300s:
+  same `LB=0.331296710948` and same gap, with
+  `completion_lb_pruned_labels=23867430` and slightly lower pricing time
+  (`58.9066437s` vs `66.750391s`).
+- V12 M2 baseline split-before-tree 300s:
+  `LB=0.696966843140`, `UB=0.719065249476`, gap `0.0307321294594`,
+  `unresolved_intervals=2`, `open_nodes=2`.
+- V12 M2 with completion-LB pruning 300s:
+  same `LB=0.696966843140` and same gap, with
+  `completion_lb_pruned_labels=20756309` but higher pricing time
+  (`90.9342476s` vs `70.2706739s`).
+- Conclusion: completion-LB pruning remains certificate-safe but is not
+  evidence-supported as a paper-core default. It should remain an explicit
+  diagnostic/tuning option until it produces a certificate-relevant lower-bound
+  improvement.
+- Added `results/paper_bpc_core/pricing_pruning_diagnostic.csv` and refreshed
+  `results/paper_bpc_core/summary.csv`.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  twenty-four paper-core solver JSON rows and reports zero failures.

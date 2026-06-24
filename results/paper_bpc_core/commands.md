@@ -16,6 +16,18 @@ D:\msys64\ucrt64\bin\python.exe scripts\audit_bpc_certificate.py --self-test
 D:\msys64\ucrt64\bin\python.exe scripts\audit_bpc_certificate.py results\paper_bpc_core\raw --csv-out results\paper_bpc_core\audit\certificate_audit.csv --fail-on-error
 ```
 
+Completion-LB pruning retest after split-before-tree scheduling:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --input reference\regen_candidate_V12_M1_average.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-intervals 3 --pricing-completion-lb-pruning true --progress-log results\paper_bpc_core\progress\v12_m1_average_core_300s_split_completion_lb.csv --progress-interval-seconds 60 --out results\paper_bpc_core\raw\v12_m1_average_core_300s_split_completion_lb.json *> results\paper_bpc_core\logs\v12_m1_average_core_300s_split_completion_lb.log
+
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --input reference\regen_candidate_V12_M1_average.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-intervals 3 --progress-log results\paper_bpc_core\progress\v12_m1_average_core_300s_split_before_tree.csv --progress-interval-seconds 60 --out results\paper_bpc_core\raw\v12_m1_average_core_300s_split_before_tree.json *> results\paper_bpc_core\logs\v12_m1_average_core_300s_split_before_tree.log
+
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-intervals 3 --pricing-completion-lb-pruning true --progress-log results\paper_bpc_core\progress\v12_m2_average_core_300s_split_completion_lb.csv --progress-interval-seconds 60 --out results\paper_bpc_core\raw\v12_m2_average_core_300s_split_completion_lb.json *> results\paper_bpc_core\logs\v12_m2_average_core_300s_split_completion_lb.log
+
+D:\msys64\ucrt64\bin\python.exe scripts\audit_bpc_certificate.py results\paper_bpc_core\raw --csv-out results\paper_bpc_core\audit\certificate_audit.csv --fail-on-error
+```
+
 Split-before-tree scheduling validation:
 
 ```powershell

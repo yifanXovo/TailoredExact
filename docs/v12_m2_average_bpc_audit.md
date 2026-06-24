@@ -128,6 +128,23 @@ the valid lower bound to `LB=0.696966843140`, `UB=0.719065249476`, gap
 This is not a certificate shortcut: replaced parent intervals are ignored and
 the active child ledger still has unresolved intervals.
 
+Completion lower-bound pricing pruning was then retested under the current
+split-before-tree scheduling. The baseline and pruning rows have the same
+valid lower bound and gap:
+
+- Baseline split-before-tree 300s:
+  `LB=0.696966843140`, gap `0.0307321294594`,
+  `unresolved_intervals=2`, `open_nodes=2`, pricing time `70.2706739s`.
+- Split-before-tree plus completion-LB pruning 300s:
+  `LB=0.696966843140`, gap `0.0307321294594`,
+  `unresolved_intervals=2`, `open_nodes=2`, pricing time `90.9342476s`,
+  `completion_lb_pruned_labels=20756309`.
+
+This confirms that completion-LB pruning should remain an explicit diagnostic
+option for now. It is not a reliable paper-core default because it did not
+improve the certificate-relevant lower bound and was slower on this V12 M2
+row.
+
 ## Required Next Work
 
 - Run a 1200s split-before-tree paper-core row when local budget allows; the
