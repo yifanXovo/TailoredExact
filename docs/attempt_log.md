@@ -2032,3 +2032,25 @@ Remaining TODOs:
   `results/paper_bpc_core/summary.csv`.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   twenty-four paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - V12 M2 Split-Before-Tree 1200s Paper-Core Row
+
+- Ran V12 M2 Average with the current `paper-bpc-core` split-before-tree
+  scheduling for 1200s.
+- Result remains noncertified but improves the valid lower bound:
+  `UB=0.719065249476`, `LB=0.703291904615`, gap `0.0219359020237`,
+  `unresolved_intervals=1`, `open_nodes=1`, `invalid_bound_intervals=0`.
+- This supersedes the older non-split 1200s row as the relevant long-run
+  paper-core evidence. The older row remains useful only as a scheduling
+  regression diagnostic.
+- The remaining controlling active interval is
+  `[0.479376832984,0.509337885046]`, with lower-bound source
+  `focused_child_inventory_route_gini_relaxation`. The adjacent interval
+  `[0.509337885046,0.539298937107]` is empty/closed by the branch-price tree.
+- Runtime decomposition: pricing `821.1792326s`, master `191.4461219s`,
+  bound/relaxation `160.8085539s`.
+- The trace records exact-label pricing state explosion in the remaining
+  plateau: the largest calls enumerate about 6.3M-6.5M route states and
+  241M-247M operation states, while support-duration pruning remains zero.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  twenty-five paper-core solver JSON rows and reports zero failures.

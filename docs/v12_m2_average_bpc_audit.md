@@ -145,10 +145,31 @@ option for now. It is not a reliable paper-core default because it did not
 improve the certificate-relevant lower bound and was slower on this V12 M2
 row.
 
+The required split-before-tree 1200s paper-core row was then run. It improves
+the valid lower bound further but still does not certify the original problem:
+
+- `UB=0.719065249476`, `LB=0.703291904615`, gap `0.0219359020237`.
+- `unresolved_intervals=1`, `open_nodes=1`, `invalid_bound_intervals=0`.
+- The remaining unresolved active interval is
+  `[0.479376832984,0.509337885046]`, with lower-bound source
+  `focused_child_inventory_route_gini_relaxation`.
+- The adjacent child `[0.509337885046,0.539298937107]` is empty/closed by the
+  branch-price tree; the low- and high-Gini siblings are bound-fathomed by
+  valid inventory/route/Gini relaxation bounds.
+- Runtime is dominated by exact-label pricing:
+  `pricing_time_seconds=821.1792326`, `master_time_seconds=191.4461219`,
+  `bound_time_seconds=160.8085539`.
+- The trace captures 25 BPC nodes on the controlling interval, 40 pricing calls
+  for that interval, and one remaining open node. The largest exact pricing
+  calls enumerate roughly 6.3M-6.5M route states and 241M-247M operation states,
+  with support-duration pruning still at zero.
+
+This row is the current best paper-core V12 M2 lower bound, but it remains a
+noncertificate because one active interval has an open BPC node and exact
+pricing/tree closure is incomplete.
+
 ## Required Next Work
 
-- Run a 1200s split-before-tree paper-core row when local budget allows; the
-  existing 1200s row is useful only as a scheduling-regression diagnostic.
 - Use the node/pricing trace to profile exact-label pricing state explosion and
   support-duration pruning behavior.
 - Identify whether the controlling interval can be bound-fathomed by stronger

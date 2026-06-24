@@ -202,6 +202,17 @@ explicit diagnostic/tuning option rather than a paper-core default.
 The full audit over `results/paper_bpc_core/raw` now covers twenty-four solver
 JSON rows with zero failures.
 
+The V12 M2 split-before-tree 1200s row was added after that diagnostic. It is
+also audit-safe and noncertified: `LB=0.703291904615`,
+`UB=0.719065249476`, gap `0.0219359020237`,
+`unresolved_intervals=1`, `open_nodes=1`, and
+`certified_original_problem=false`. The audit accepts the valid lower bound but
+does not allow original-problem optimality because the final active interval is
+not closed.
+
+The full audit over `results/paper_bpc_core/raw` now covers twenty-five solver
+JSON rows with zero failures.
+
 The audit script self-test includes intentionally invalid cases for incomplete
 pricing, duplicate negative-column blockage, partial frontier coverage,
 route-mask certifying with enumeration disabled, and original optimality without
