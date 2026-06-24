@@ -58,6 +58,7 @@ does not prove `certified_original_problem=true`.
 - `--frontier-relaxation-cache true|false`: reuse exact-key interval relaxation bounds across retry passes.
 - `--support-duration-pruning true|false`: prune exact pricing labels whose station support contains a subset proven route-duration infeasible.
 - `--support-duration-max-subset-size N`: maximum station subset size used for support-duration pruning precomputation.
+- `--pricing-completion-lb-pruning true|false`: prune an exact-label pricing label only when a valid reduced-cost lower bound proves no completion can improve the current best priced column. This is certificate-safe but remains an explicit tuning option rather than the default paper-core setting.
 - `--route-mask-support-duration-pruning true|false`: apply the same exact-safe support-duration infeasibility test to complete route-mask relaxation masks.
 - `--frontier-focused-min-lb-retry true|false`: spend retry time on the unresolved frontier interval with the smallest valid lower bound.
 - `--frontier-focused-intensification true|false`: reserve time to rerun stronger relaxations on the current minimum-LB unresolved interval.

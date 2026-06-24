@@ -91,6 +91,7 @@ struct SolveOptions {
     bool vehicle_indexed_relaxation_audit = false;
     bool vehicle_indexed_transfer_flow = true;
     bool support_duration_pruning = true;
+    bool pricing_completion_lb_pruning = false;
     bool route_mask_support_duration_pruning = true;
     bool route_mask_operation_budget_cuts = true;
     bool support_feasibility_oracle = false;

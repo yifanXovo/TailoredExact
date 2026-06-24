@@ -96,6 +96,36 @@ pass actually starts: `bpc_nodes`, `generated_columns`, `cuts`,
 `tree_not_started_before_time_limit_or_reserve`; this distinguishes a queued
 frontier leaf from a branch-price tree that has started and remains open.
 
+## Completion Lower-Bound Pricing Pruning Diagnostic
+
+Exact-label completion lower-bound pruning is implemented as an explicit tuning
+option. It is a certificate-safe enumeration reduction: a label is skipped only
+when a true-dual reduced-cost lower bound proves that no feasible completion
+can improve the best priced column already found. The pruning does not certify
+node closure; exact pricing still has to complete with no negative reduced-cost
+column.
+
+Validation rows with the pruning enabled explicitly:
+
+- V4 paper-core smoke remains certified at objective 0.
+- V12 M2 60s remains noncertified. It still does not start the controlling
+  BPC tree before the time/reserve stop, so completion-LB pruning has no
+  opportunity to affect the plateau in that short run.
+- V8 generated tree-trace probe remains noncertified and audit-safe, but now
+  records `completion_lb_pruned_labels=9559313` at aggregate result level and
+  per-pricing-call completion-prune counters in the trace. This confirms the
+  pruning is active on real branch-price pricing calls without changing
+  certificate semantics.
+- V12 M1 300s with pruning reaches the same LB/gap as the baseline while
+  reducing captured operation states. V12 M2 300s with pruning is worse in the
+  current controlled row because the controlling split leaf keeps only the
+  inherited parent lower bound rather than the stronger relaxation bound seen
+  in the baseline. Therefore the pruning remains disabled by default in
+  `paper-bpc-core` until more robust evidence is available.
+
+The full audit over `results/paper_bpc_core/raw` now covers fourteen solver JSON
+rows with zero failures.
+
 The audit script self-test includes intentionally invalid cases for incomplete
 pricing, duplicate negative-column blockage, partial frontier coverage,
 route-mask certifying with enumeration disabled, and original optimality without

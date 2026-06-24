@@ -1894,3 +1894,34 @@ Remaining TODOs:
 - TODO: run 1200s paper-core rows when local budget allows and investigate
   certificate-safe pricing pruning before making any paper-level V12 closure
   claim.
+
+## 2026-06-25 - Completion-LB Pricing Pruning Diagnostic
+
+- Implemented exact-label completion lower-bound pruning and exposed it as
+  `--pricing-completion-lb-pruning`.
+- The pruning is certificate-safe: it only skips a pricing label when a
+  true-dual reduced-cost lower bound proves no feasible completion can improve
+  the current best priced column. It is not used as a node-closure shortcut.
+- Added `completion_lb_pruned_labels` to pricing results, BPC/tree aggregates,
+  solver JSON, and per-pricing-call trace records.
+- Rebuilt with the documented fallback g++ command.
+- Validation:
+  - V4 paper-core smoke remains certified at objective 0.
+  - V12 M2 60s paper-core remains noncertified and controlled by a queued leaf;
+    completion pruning does not trigger because that short run still does not
+    reach the controlling BPC pricing plateau.
+  - V8 generated tree-trace probe records
+    `completion_lb_pruned_labels=9559313` at result level and remains
+    noncertified/audit-safe.
+- V12 M1 300s with pruning reaches the same LB/gap as the baseline and reduces
+  captured operation states from about 1.48B to 1.11B in the branch-price
+  pricing-call trace.
+- V12 M2 300s with pruning remains noncertified and produces a weaker LB than
+  the baseline in this row because the controlling split leaf keeps an inherited
+  parent lower bound. The pruning is therefore not enabled by default in
+  `paper-bpc-core`.
+- Full certificate audit over `results/paper_bpc_core/raw` reports fourteen
+  solver JSON rows and zero failures.
+- TODO: investigate why the M2 controlling split leaf does not recover the
+  stronger inventory/route/Gini relaxation lower bound before spending BPC
+  time elsewhere.

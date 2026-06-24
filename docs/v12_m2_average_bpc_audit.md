@@ -92,6 +92,15 @@ calls include early-negative incomplete calls and exact-label calls with about
 Those calls return negative columns and therefore cannot certify pricing
 closure.
 
+An explicit completion lower-bound pruning diagnostic was run for 300s. It
+recorded `completion_lb_pruned_labels=40634262` and reduced captured operation
+states modestly, but the valid lower bound was weaker
+(`0.464836734210` versus the baseline `0.577560696100`). The controlling split
+leaf kept an inherited parent lower bound instead of recovering the stronger
+inventory/route/Gini relaxation bound in time. This mixed result is why
+completion-LB pruning remains an explicit diagnostic option rather than the
+default `paper-bpc-core` configuration.
+
 ## Required Next Work
 
 - Run 1200s paper-core rows after the certificate guard when local budget

@@ -758,6 +758,7 @@ private:
                         result_.has_column &&
                         completionReducedCostLowerBound(label) >=
                             result_.best_reduced_cost - 1e-12) {
+                        ++result_.completion_lb_pruned_labels;
                         continue;
                     }
                     if (label.last > 0) {
@@ -829,6 +830,7 @@ private:
                                 result_.has_column &&
                                 completionReducedCostLowerBound(next) >=
                                     result_.best_reduced_cost - 1e-12) {
+                                ++result_.completion_lb_pruned_labels;
                                 continue;
                             }
                             insertLabel(labels, buckets, keys_by_mask, next);
@@ -859,6 +861,7 @@ private:
                                 result_.has_column &&
                                 completionReducedCostLowerBound(next) >=
                                     result_.best_reduced_cost - 1e-12) {
+                                ++result_.completion_lb_pruned_labels;
                                 continue;
                             }
                             insertLabel(labels, buckets, keys_by_mask, next);

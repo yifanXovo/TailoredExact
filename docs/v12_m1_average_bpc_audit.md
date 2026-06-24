@@ -98,6 +98,13 @@ call enumerates about 7.07M route states and 299.9M operation states in about
 25.9s, returning negative columns. Pricing, not RMP solving, dominates the
 started BPC work.
 
+An explicit completion lower-bound pruning diagnostic was also run for 300s.
+It is certificate-safe but not part of the default paper-core preset. On this
+instance it reached the same LB/gap as the baseline 300s row, with
+`completion_lb_pruned_labels=51756831` and captured operation states reduced
+from about 1.48B to 1.11B. The row still has unresolved intervals and pricing
+timeouts, so it does not change the certificate status.
+
 ## Required Next Work
 
 - Run 1200s paper-core rows with the new certificate audit when local budget

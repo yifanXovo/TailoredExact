@@ -33,6 +33,9 @@ The following modules are not paper-core evidence and are disabled by the
 - Imported focus interval bounds.
 - Frontier resume shortcuts.
 - Iterative closure automation.
+- Completion lower-bound pricing pruning by default. It is certificate-safe
+  when enabled explicitly, but current V12 evidence is mixed, so it remains a
+  tuning/diagnostic option rather than a paper-core default.
 
 These modules may be reported as diagnostics, baselines, appendix experiments,
 or upper-bound sources when clearly labeled. They must not contribute to a

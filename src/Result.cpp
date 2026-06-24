@@ -510,6 +510,8 @@ std::string resultToJson(const SolveResult& input) {
         << result.support_duration_strong_pruned_labels << ",\n";
     out << "  \"support_duration_strong_pruned_columns\": "
         << result.support_duration_strong_pruned_columns << ",\n";
+    out << "  \"completion_lb_pruned_labels\": "
+        << result.completion_lb_pruned_labels << ",\n";
     out << "  \"support_duration_max_subset_size\": "
         << result.support_duration_max_subset_size << ",\n";
     out << "  \"support_duration_precompute_time_seconds\": "

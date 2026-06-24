@@ -38,3 +38,23 @@ build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --i
 
 build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-intervals 3 --progress-log results\paper_bpc_core\progress\v12_m2_average_core_300s.csv --progress-interval-seconds 60 --out results\paper_bpc_core\raw\v12_m2_average_core_300s.json *> results\paper_bpc_core\logs\v12_m2_average_core_300s.log
 ```
+
+Completion-LB pricing pruning validation:
+
+```powershell
+D:\msys64\ucrt64\bin\g++.exe -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src\Parser.cpp src\Evaluator.cpp src\Result.cpp src\Bounds.cpp src\ColumnPool.cpp src\TailoredExact.cpp src\Pricing.cpp src\Cuts.cpp src\Branching.cpp src\Master.cpp src\ColumnGeneration.cpp src\CplexBaseline.cpp src\Logger.cpp src\main.cpp -o build\ExactEBRP.exe
+
+build\ExactEBRP.exe --method option-consistency-test --algorithm-preset paper-bpc-core --pricing-completion-lb-pruning true --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --out results\paper_bpc_core\raw\option_consistency_paper_core_completion_lb.json *> results\paper_bpc_core\logs\option_consistency_paper_core_completion_lb.log
+
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --pricing-completion-lb-pruning true --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --time-limit 30 --frontier-intervals 3 --frontier-retry-passes 1 --frontier-final-closure true --frontier-final-nodes 31 --progress-log results\paper_bpc_core\progress\v4_paper_core_completion_lb_smoke.csv --progress-interval-seconds 5 --out results\paper_bpc_core\raw\v4_paper_core_completion_lb_smoke.json *> results\paper_bpc_core\logs\v4_paper_core_completion_lb_smoke.log
+
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --pricing-completion-lb-pruning true --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 60 --frontier-intervals 3 --progress-log results\paper_bpc_core\progress\v12_m2_average_core_60s_completion_lb.csv --progress-interval-seconds 10 --out results\paper_bpc_core\raw\v12_m2_average_core_60s_completion_lb.json *> results\paper_bpc_core\logs\v12_m2_average_core_60s_completion_lb.log
+
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --pricing-completion-lb-pruning true --input reference\regen_candidate_V12_M1_average.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-intervals 3 --progress-log results\paper_bpc_core\progress\v12_m1_average_core_300s_completion_lb.csv --progress-interval-seconds 60 --out results\paper_bpc_core\raw\v12_m1_average_core_300s_completion_lb.json *> results\paper_bpc_core\logs\v12_m1_average_core_300s_completion_lb.log
+
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --pricing-completion-lb-pruning true --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-intervals 3 --progress-log results\paper_bpc_core\progress\v12_m2_average_core_300s_completion_lb.csv --progress-interval-seconds 60 --out results\paper_bpc_core\raw\v12_m2_average_core_300s_completion_lb.json *> results\paper_bpc_core\logs\v12_m2_average_core_300s_completion_lb.log
+
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --pricing-completion-lb-pruning true --input reference\generated\regen_V8_M2_average.txt --lambda 0.15 --T 3600 --time-limit 60 --frontier-intervals 3 --frontier-relax-seconds 0.5 --frontier-focused-reserve-fraction 0 --frontier-focused-intensification false --progress-log results\paper_bpc_core\progress\v8_trace_tree_probe_completion_lb_60s.csv --progress-interval-seconds 10 --out results\paper_bpc_core\raw\v8_trace_tree_probe_completion_lb_60s.json *> results\paper_bpc_core\logs\v8_trace_tree_probe_completion_lb_60s.log
+
+D:\msys64\ucrt64\bin\python.exe scripts\audit_bpc_certificate.py results\paper_bpc_core\raw --csv-out results\paper_bpc_core\audit\certificate_audit.csv --fail-on-error
+```

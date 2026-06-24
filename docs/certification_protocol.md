@@ -111,6 +111,15 @@ A fixed-cap tree can certify only its fixed-cap or fixed-interval subproblem. It
 
 The pricing oracle may use label-setting dynamic programming over elementary visited sets, last station, vehicle load, and total pickup, with Pareto dominance on reduced cost and travel time. This remains an exact pricing oracle because future feasibility and reduced-cost extensions depend only on these resources and the visited set; dominated labels cannot produce a better feasible completion.
 
+Completion lower-bound pruning is allowed in exact-label pricing only when the
+computed value is a valid lower bound on every feasible completion of the
+current label under the true RMP duals. If that lower bound is no better than
+the best priced column already found, pruning the label cannot remove the
+minimum reduced-cost column. This pruning may reduce enumeration work, but it
+does not by itself prove node closure: closure still requires complete
+true-dual pricing with no remaining negative reduced-cost column and no
+duplicate-negative blockage.
+
 Subset-row cuts use the valid set-packing inequality for odd station subsets `S`:
 
 ```text

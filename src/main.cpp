@@ -60,6 +60,7 @@ void usage() {
         << "[--frontier-adaptive-split true|false] [--frontier-adaptive-max-depth <N>] "
         << "[--frontier-adaptive-min-width <width>] [--frontier-adaptive-split-factor <N>] "
         << "[--support-duration-pruning true|false] [--support-duration-max-subset-size <N>] "
+        << "[--pricing-completion-lb-pruning true|false] "
         << "[--route-mask-support-duration-pruning true|false] [--route-mask-operation-budget-cuts true|false] [--support-feasibility-oracle true|false] "
         << "[--route-pool-incumbent true|false] [--route-pool-max-columns-per-vehicle <N>] "
         << "[--route-pool-keep-best-per-projection true|false] "
@@ -304,6 +305,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--frontier-adaptive-split-factor") opt.frontier_adaptive_split_factor = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--support-duration-pruning") opt.support_duration_pruning = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--support-duration-max-subset-size") opt.support_duration_max_subset_size = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--pricing-completion-lb-pruning") opt.pricing_completion_lb_pruning = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--route-mask-support-duration-pruning") opt.route_mask_support_duration_pruning = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--route-mask-operation-budget-cuts") opt.route_mask_operation_budget_cuts = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--support-feasibility-oracle") opt.support_feasibility_oracle = parseBoolValue(requireValue(i, argc, argv));
@@ -656,6 +658,7 @@ void applyPricingOptionsFromSolve(const ebrp::Instance& instance,
         opt.dssr_relaxed_closure_max_labels;
     pricing.dssr_relaxed_closure_checkpoint =
         opt.dssr_relaxed_closure_checkpoint;
+    pricing.use_completion_lb_pruning = opt.pricing_completion_lb_pruning;
 }
 
 void initializeScalabilityFields(const ebrp::Instance& instance,
@@ -1218,6 +1221,7 @@ void mergePricingStats(const ebrp::PricingResult& priced,
         priced.support_duration_strong_pruned_labels;
     result.support_duration_strong_pruned_columns +=
         priced.support_duration_strong_pruned_columns;
+    result.completion_lb_pruned_labels += priced.completion_lb_pruned_labels;
     result.support_duration_max_subset_size =
         std::max(result.support_duration_max_subset_size,
                  priced.support_duration_max_subset_size);
@@ -4462,6 +4466,7 @@ ebrp::SolveResult solveColumnGenerationDiagnostic(const ebrp::Instance& instance
         cg.support_duration_strong_pruned_labels;
     result.support_duration_strong_pruned_columns =
         cg.support_duration_strong_pruned_columns;
+    result.completion_lb_pruned_labels = cg.completion_lb_pruned_labels;
     result.support_duration_max_subset_size = cg.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         cg.support_duration_precompute_time_seconds;
@@ -4576,6 +4581,7 @@ ebrp::SolveResult solveGiniCapColumnGenerationDiagnostic(const ebrp::Instance& i
         cg.support_duration_strong_pruned_labels;
     result.support_duration_strong_pruned_columns =
         cg.support_duration_strong_pruned_columns;
+    result.completion_lb_pruned_labels = cg.completion_lb_pruned_labels;
     result.support_duration_max_subset_size = cg.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         cg.support_duration_precompute_time_seconds;
@@ -4676,6 +4682,7 @@ ebrp::SolveResult solveGiniCapBranchProbeDiagnostic(const ebrp::Instance& instan
         probe.support_duration_strong_pruned_labels;
     result.support_duration_strong_pruned_columns =
         probe.support_duration_strong_pruned_columns;
+    result.completion_lb_pruned_labels = probe.completion_lb_pruned_labels;
     result.support_duration_max_subset_size = probe.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         probe.support_duration_precompute_time_seconds;
@@ -4848,6 +4855,7 @@ ebrp::SolveResult solveGiniCapTreeDiagnostic(const ebrp::Instance& instance,
         tree.support_duration_strong_pruned_labels;
     result.support_duration_strong_pruned_columns =
         tree.support_duration_strong_pruned_columns;
+    result.completion_lb_pruned_labels = tree.completion_lb_pruned_labels;
     result.support_duration_max_subset_size = tree.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         tree.support_duration_precompute_time_seconds;
@@ -5135,6 +5143,7 @@ ebrp::SolveResult solveSupportPruningDiagnostic(const ebrp::Instance& instance,
             priced.support_duration_strong_pruned_labels;
         result.support_duration_strong_pruned_columns +=
             priced.support_duration_strong_pruned_columns;
+        result.completion_lb_pruned_labels += priced.completion_lb_pruned_labels;
         result.support_duration_precompute_time_seconds +=
             priced.support_duration_precompute_time_seconds;
         result.support_duration_max_subset_size =
@@ -6385,6 +6394,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         + ", vehicle_indexed_relaxation_audit=" + std::string(opt.vehicle_indexed_relaxation_audit ? "true" : "false")
         + ", vehicle_indexed_transfer_flow=" + std::string(opt.vehicle_indexed_transfer_flow ? "true" : "false")
         + ", support_duration_pruning=" + std::string(opt.support_duration_pruning ? "true" : "false")
+        + ", pricing_completion_lb_pruning=" + std::string(opt.pricing_completion_lb_pruning ? "true" : "false")
         + ", route_mask_support_duration_pruning=" + std::string(opt.route_mask_support_duration_pruning ? "true" : "false")
         + ", route_mask_operation_budget_cuts=" + std::string(opt.route_mask_operation_budget_cuts ? "true" : "false")
         + ", support_duration_min_pickup_rule=ceil_half_support"
@@ -8183,6 +8193,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 tree.support_duration_strong_pruned_labels;
             result.support_duration_strong_pruned_columns +=
                 tree.support_duration_strong_pruned_columns;
+            result.completion_lb_pruned_labels += tree.completion_lb_pruned_labels;
             result.support_duration_max_subset_size =
                 std::max(result.support_duration_max_subset_size,
                          tree.support_duration_max_subset_size);
@@ -10907,6 +10918,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                   << result.pricing_duplicate_negative_projections
                   << ", \"blocked_by_duplicate_projection\": "
                   << (result.pricing_blocked_by_duplicate_projection ? "true" : "false")
+                  << ", \"completion_lb_pruned_labels\": "
+                  << result.completion_lb_pruned_labels
                   << "},\n";
             trace << "  \"interval_trace_csv\": \""
                   << jsonEscapeLocal(result.bpc_interval_trace_csv_path) << "\",\n";

@@ -155,6 +155,7 @@ struct ColumnGenerationResult {
     long long support_duration_strong_cuts_generated = 0;
     long long support_duration_strong_pruned_labels = 0;
     long long support_duration_strong_pruned_columns = 0;
+    long long completion_lb_pruned_labels = 0;
     int support_duration_max_subset_size = 0;
     double support_duration_precompute_time_seconds = 0.0;
     long long route_states = 0;
@@ -308,6 +309,7 @@ struct GiniCapColumnGenerationResult {
     long long support_duration_strong_cuts_generated = 0;
     long long support_duration_strong_pruned_labels = 0;
     long long support_duration_strong_pruned_columns = 0;
+    long long completion_lb_pruned_labels = 0;
     int support_duration_max_subset_size = 0;
     double support_duration_precompute_time_seconds = 0.0;
     long long route_states = 0;
@@ -492,6 +494,7 @@ struct GiniCapBranchProbeResult {
     long long support_duration_strong_cuts_generated = 0;
     long long support_duration_strong_pruned_labels = 0;
     long long support_duration_strong_pruned_columns = 0;
+    long long completion_lb_pruned_labels = 0;
     int support_duration_max_subset_size = 0;
     double support_duration_precompute_time_seconds = 0.0;
     long long route_states = 0;
@@ -639,6 +642,7 @@ struct GiniCapTreeResult {
     long long support_duration_strong_cuts_generated = 0;
     long long support_duration_strong_pruned_labels = 0;
     long long support_duration_strong_pruned_columns = 0;
+    long long completion_lb_pruned_labels = 0;
     int support_duration_max_subset_size = 0;
     double support_duration_precompute_time_seconds = 0.0;
     long long route_states = 0;
