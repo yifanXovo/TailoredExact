@@ -244,6 +244,16 @@ worse than the depth-8 default because the extra split work does not reach the
 same focused child bound within 300s. The current paper-core default therefore
 stays at depth 8.
 
+A later bound-time optimization added a continuous LP cutoff precheck before
+the integer route-mask MIP used by the inventory/route/Gini relaxation. On the
+60s V12 M2 row, the precheck proves the first low-Gini interval
+`[0,0.239688]` cutoff-infeasible before running the integer MIP. The row
+remains correctly noncertified: `UB=0.719065249476`, `LB=0.461969904320`, gap
+`0.357541051168`, `unresolved_intervals=2`, and
+`invalid_bound_intervals=0`. The precheck is useful for cheap low-Gini
+fathoming but it does not yet improve the depth-8 300s plateau controlled by
+narrow high-Gini active children.
+
 ## Required Next Work
 
 - Use the node/pricing trace to profile exact-label pricing state explosion and

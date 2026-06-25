@@ -289,6 +289,16 @@ prior timer-fix row, but the node is still correctly unresolved. This rejects
 plateau still needs stronger exact pricing or a stronger valid relaxation on
 the active depth-8 children.
 
+A follow-up interval-relaxation optimization added a continuous LP cutoff
+precheck before the integer route-mask MIP. On the 60s V12 M1 row, the precheck
+proves the first low-Gini interval `[0,0.119067]` cutoff-infeasible in about
+`0.122s`, so the integer MIP is skipped for that interval. The row remains
+honestly noncertified: `UB=0.357200583208`, `LB=0.242572114996`, gap
+`0.320907841703`, `unresolved_intervals=1`, and `invalid_bound_intervals=0`.
+The useful effect is reduced bound setup time on easy cutoff-fathomed children;
+it does not address the later active children or the exact-label pricing
+state explosion recorded above.
+
 ## Required Next Work
 
 - Use the depth-8 interval ledger and the depth-6 1200s per-node/pricing traces to

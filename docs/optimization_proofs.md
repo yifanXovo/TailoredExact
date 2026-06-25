@@ -981,6 +981,22 @@ ignored. A verified archive incumbent can improve the upper bound and shrink
 frontier ranges, but it remains primal evidence only and never contributes to a
 lower-bound certificate.
 
+### Continuous LP Cutoff Precheck
+
+For V<=12 route-mask interval relaxations, `paper-bpc-core` may solve the
+continuous relaxation of the same inventory/route/Gini cutoff model before the
+integer relaxation. The feasible region of the continuous LP contains the
+integer relaxation feasible region. Therefore, if the continuous LP with the
+incumbent cutoff rows is infeasible, the integer relaxation is infeasible too
+and the interval can be cutoff-fathomed by the same non-pricing lower-bound
+basis. If the continuous LP optimum is at least the incumbent cutoff, the
+integer optimum is also at least that cutoff, so no incumbent-improving
+solution exists in the interval. In all other cases the solver ignores the LP
+precheck value for certification and falls back to the existing integer
+route-mask relaxation. This precheck does not close BPC nodes and does not
+replace true-dual exact pricing closure when an interval relies on the
+branch-price tree.
+
 ### Experimental Two-Track Placement
 
 The two-track relaxed-RMP machinery is retained under

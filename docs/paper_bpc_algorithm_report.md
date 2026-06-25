@@ -801,3 +801,16 @@ certificate path, but it makes the pricing plateau easier to explain. V12 M1
 label prunes while preserving the same noncertified LB/gap. A naive
 cross-pickup dominance experiment was rejected because the extra comparisons
 made pricing slower; it is not part of the paper-core preset.
+
+The next bound-time cleanup added a continuous LP cutoff precheck before the
+integer V<=12 route-mask MIP used in the inventory/route/Gini relaxation. The
+precheck is certificate-safe because it only exits early when the continuous
+relaxation of the same cutoff model proves infeasibility or reaches the
+incumbent cutoff; otherwise the existing integer MIP still runs. V4 remains
+certified at objective 0. In 60s V12 diagnostics, the precheck fathoms the
+first low-Gini interval for both M1 (`[0,0.119067]`) and M2
+(`[0,0.239688]`) before the integer route-mask MIP. These rows are still
+noncertified (`M1 LB=0.242572114996`, `M2 LB=0.461969904320`) and are recorded
+only as evidence that easy cutoff-fathomed intervals can be skipped more
+cheaply. The depth-8 300s V12 plateau remains controlled by later active
+children and still needs stronger valid relaxation or exact pricing closure.

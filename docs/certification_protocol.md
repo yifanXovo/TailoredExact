@@ -537,6 +537,11 @@ final frontier ledger must still account for every relevant interval.
 - `paper-bpc-core` is the main paper BPC preset. It uses elementary columns and
   exact-label pricing for closure. It may use valid non-pricing bounds to fathom
   intervals, but any BPC tree closure still requires exact pricing semantics.
+- The continuous LP cutoff precheck used before the V<=12 integer
+  inventory/route/Gini relaxation is a valid non-pricing fathoming shortcut
+  only when the LP cutoff model is infeasible or its objective reaches the
+  incumbent cutoff. Otherwise it is ignored for certification and the integer
+  relaxation or BPC tree must provide the interval evidence.
 - `paper-exact-portfolio` is the recommended robust exact preset. It combines
   `paper-bpc-core` with a compact fallback row. The final certificate module
   must be reported as `bpc`, `compact`, or `none`.

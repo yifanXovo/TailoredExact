@@ -2242,3 +2242,29 @@ Remaining TODOs:
   the tree remains unresolved with negative reduced cost remaining.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   fifty-three paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Continuous Relaxation Cutoff Precheck
+
+- Added a certificate-safe continuous LP precheck inside the
+  inventory/route/Gini interval relaxation. For V<=12 integer route-mask
+  relaxations, the solver now first solves the continuous relaxation for a very
+  short budget. It returns early only if that LP proves the cutoff model
+  infeasible or has an objective at the incumbent cutoff; otherwise it falls
+  through to the existing integer CPLEX route-mask MIP.
+- This is not a BPC node-closure shortcut. It is a non-pricing lower-bound
+  fathoming shortcut for an interval relaxation, and the JSON result still
+  remains noncertified unless the full frontier certificate conditions hold.
+- V4 paper-core smoke remains certified with objective `0`, `gap=0`,
+  `verifier_passed=true`, and `certified_original_problem=true`.
+- V12 M1 Average 60s with the precheck remains correctly noncertified:
+  `UB=0.357200583208`, `LB=0.242572114996`, gap `0.320907841703`,
+  `unresolved_intervals=1`, and `invalid_bound_intervals=0`. The first low-Gini
+  interval `[0,0.119067]` is cutoff-fathomed by continuous LP infeasibility in
+  about `0.122s`, avoiding the integer route-mask MIP for that interval.
+- V12 M2 Average 60s with the precheck remains correctly noncertified:
+  `UB=0.719065249476`, `LB=0.461969904320`, gap `0.357541051168`,
+  `unresolved_intervals=2`, and `invalid_bound_intervals=0`. The first low-Gini
+  interval `[0,0.239688]` is similarly cutoff-fathomed by the continuous LP
+  precheck.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  fifty-six paper-core solver JSON rows and reports zero failures.

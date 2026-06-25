@@ -307,6 +307,15 @@ pricing, duplicate negative-column blockage, partial frontier coverage,
 route-mask certifying with enumeration disabled, and original optimality without
 `certified_original_problem=true`.
 
+The continuous LP cutoff-precheck rows added another V4 smoke row and V12
+M1/M2 60s diagnostics. The V4 row remains certified at objective 0. The V12
+rows remain correctly noncertified with positive gaps and unresolved intervals.
+The precheck can mark an interval as cutoff-fathomed only when the continuous
+relaxation of the same inventory/route/Gini cutoff model is infeasible or has a
+lower bound at the incumbent cutoff; otherwise it falls back to the existing
+integer route-mask MIP. The full audit over `results/paper_bpc_core/raw` now
+covers fifty-six solver JSON rows with zero failures.
+
 ## Remaining Audit Work
 
 - Add C++ unit-style fixtures that create unsafe `SolveResult` objects and
