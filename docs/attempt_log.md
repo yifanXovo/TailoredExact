@@ -2160,3 +2160,22 @@ Remaining TODOs:
   narrow focused leaf.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   thirty-nine paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Paper-Core Adaptive Split Depth 7
+
+- Increased the paper-core default adaptive split depth from 6 to 7 after the
+  V12 M1 depth-6 1200s trace showed that early branch-price tree work on
+  `[0.223250364505,0.230692043322]` consumed most of the extra budget without
+  closing the frontier.
+- V4 smoke remains certified with objective `0`, `gap=0`,
+  `verifier_passed=true`, and `certified_original_problem=true`.
+- V12 M1 Average default 300s improves from the depth-6 300s lower bound
+  `0.341121462223` to `0.344613240900`, with gap `0.035238862701`.
+  The row remains noncertified with `unresolved_intervals=3` and
+  `invalid_bound_intervals=0`.
+- V12 M2 Average default 300s improves from the depth-6 300s lower bound
+  `0.713690734357` to `0.715075764785`, with gap `0.00554815393275`.
+  The row remains noncertified with `unresolved_intervals=3` and
+  `invalid_bound_intervals=0`.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  forty-two paper-core solver JSON rows and reports zero failures.

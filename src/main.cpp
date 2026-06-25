@@ -199,7 +199,7 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.frontier_split_before_tree = true;
         if (!opt.frontier_adaptive_max_depth_explicit) {
             opt.frontier_adaptive_max_depth =
-                std::max(opt.frontier_adaptive_max_depth, 6);
+                std::max(opt.frontier_adaptive_max_depth, 7);
         }
         opt.bpc_incumbent = (opt.bpc_incumbent == "none" || opt.bpc_incumbent.empty())
             ? "auto" : opt.bpc_incumbent;

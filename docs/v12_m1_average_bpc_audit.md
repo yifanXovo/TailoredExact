@@ -237,9 +237,20 @@ the first 300s are still dominated by interval relaxation and splitting, but
 the extra 900s are dominated by exact-label pricing/tree closure on a narrow
 leaf. No original certificate is claimed.
 
+Because the depth-6 1200s tree work did not improve the controlling leaf enough
+to close it, the paper-core default split depth was increased again to 7. The
+default depth-7 300s row reaches `LB=0.344613240900`,
+`UB=0.357200583208`, gap `0.035238862701`, with
+`unresolved_intervals=3`, `open_nodes=3`, and `invalid_bound_intervals=0`.
+This nearly matches the depth-6 1200s lower bound in about one quarter of the
+time and does so without entering expensive pricing. The result is still not an
+original-problem certificate, but it confirms that one more certificate-neutral
+split level is currently more productive than early branch-price tree work on
+V12 M1.
+
 ## Required Next Work
 
-- Use the depth-6 interval ledger and the 1200s per-node/pricing traces to
+- Use the depth-7 interval ledger and the depth-6 1200s per-node/pricing traces to
   reduce the long focused-retry pricing calls on
   `[0.223250364505,0.230692043322]`. Candidate work should target exact
   operation-state pruning, stronger branch closure, or more frequent

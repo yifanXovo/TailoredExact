@@ -214,6 +214,15 @@ the inventory/route/Gini relaxation. The current controlling child is
 queued. The 300s gap is now below one percent, but no original certificate is
 claimed because the active frontier still has unresolved leaves.
 
+The same scheduling logic was then validated at default adaptive split depth 7.
+The V12 M2 300s row reaches `LB=0.715075764785`,
+`UB=0.719065249476`, gap `0.00554815393275`, with
+`unresolved_intervals=3`, `open_nodes=3`, and `invalid_bound_intervals=0`.
+The row spends almost all time in inventory/route/Gini child bounds and only
+`0.0024676s` in pricing, so the improvement is again certificate-safe frontier
+ledger refinement rather than incomplete pricing closure. The instance remains
+noncertified because the active frontier still has unresolved leaves.
+
 ## Required Next Work
 
 - Use the node/pricing trace to profile exact-label pricing state explosion and

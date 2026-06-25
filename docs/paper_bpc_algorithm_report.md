@@ -736,8 +736,8 @@ time-limited and noncertified; plain CPLEX benchmark comparisons were skipped.
 After narrowing the paper-facing algorithm to GF-RL-BPC
 (`gcap-frontier`/`paper-bpc-core`), the main plateau was traced to broad
 frontier intervals reaching branch-price trees before child relaxation bounds
-were fully exploited. The paper presets now default adaptive split depth to 5
-first and then to 6 unless the command line overrides it. This is a
+were fully exploited. The paper presets now default adaptive split depth to 7
+unless the command line overrides it. This is a
 scheduling/ledger granularity change only: replaced parent intervals are
 ignored, child intervals exactly cover the same Gini range, and original-problem
 certification still requires all active children to be empty, validly
@@ -751,10 +751,12 @@ bound-fathomed, or closed by exact BPC pricing.
 | V12 M1 average | depth 5 1200s | not closed | 0.357200583208 | 0.340282088370 | 0.047364129942 | no |
 | V12 M1 average | depth 6 300s | not closed | 0.357200583208 | 0.341121462223 | 0.045014262969 | no |
 | V12 M1 average | depth 6 1200s | not closed | 0.357200583208 | 0.344881668930 | 0.034487385681 | no |
+| V12 M1 average | depth 7 300s | not closed | 0.357200583208 | 0.344613240900 | 0.035238862701 | no |
 | V12 M2 average | depth 3 300s | not closed | 0.719065249476 | 0.696966843140 | 0.030732129459 | no |
 | V12 M2 average | depth 5 300s | not closed | 0.719065249476 | 0.706200471341 | 0.017890974630 | no |
 | V12 M2 average | depth 5 1200s | not closed | 0.719065249476 | 0.710439004053 | 0.011996471 | no |
 | V12 M2 average | depth 6 300s | not closed | 0.719065249476 | 0.713690734357 | 0.007474307962 | no |
+| V12 M2 average | depth 7 300s | not closed | 0.719065249476 | 0.715075764785 | 0.005548153933 | no |
 
 The V12 rows remain noncertified, but the lower-bound improvements are valid
 inventory/route/Gini relaxation evidence in the full frontier ledger. The
@@ -764,6 +766,8 @@ depth-6 row, but it still does not certify the original problem. The first 300s
 are dominated by child relaxation and focused splitting; the remaining budget is
 dominated by exact-label pricing/tree closure on
 `[0.223250364505,0.230692043322]`, which leaves one BPC node open at timeout.
+Depth 7 recovers nearly the same V12 M1 lower bound in 300s without entering
+expensive pricing, and it further improves V12 M2 to a 0.55% valid gap in 300s.
 
 The follow-up label-dominance trace audit did not change the algorithmic
 certificate path, but it makes the pricing plateau easier to explain. V12 M1
