@@ -301,6 +301,18 @@ audit-safe but was worse: `LB=0.715075764785`,
 focused relaxation budget therefore remains unchanged; the plateau needs a
 stronger valid relaxation or exact closure, not shorter focused relaxations.
 
+The archive-incumbent scheduling path was then run for a 1200s V12 M2
+paper-core row. It remains audit-safe and noncertified:
+`UB=0.719065249476`, `LB=0.717435865864`, gap `0.00226597462971`,
+`unresolved_intervals=4`, `invalid_bound_intervals=0`, and `open_nodes=30`.
+The run spends `339.5201322s` in bound work, `130.9071279s` in master solves,
+and `743.3654876s` in pricing, with `28,131` columns generated. Focused
+intensification improves one child but leaves the controlling interval
+`[0.492484793261,0.494357359015]` at inherited lower bound
+`0.717435865864`. This confirms that the current V12 M2 long-run plateau is
+exact BPC closure in a narrow high-Gini leaf, not a certificate-accounting
+issue. No original-problem optimality is claimed.
+
 ## Required Next Work
 
 - Use the node/pricing trace to profile exact-label pricing state explosion and

@@ -344,6 +344,13 @@ adaptive-focus-reserve probe (`--frontier-retry-reserve 75`) regresses to
 keeps positive-gap scheduling experiments non-optimal, and they are rejected as
 default paper-core configuration changes.
 
+The V12 M2 archive-incumbent 1200s long-run row extends the audit to
+seventy-nine solver JSON rows with zero failures. It is correctly
+noncertified: `LB=0.717435865864`, `UB=0.719065249476`, gap
+`0.00226597462971`, `unresolved_intervals=4`, `invalid_bound_intervals=0`,
+and `open_nodes=30`. The row keeps the verified archive incumbent as an
+upper-bound cutoff only and reports no original-problem certificate.
+
 ## Remaining Audit Work
 
 - Add C++ unit-style fixtures that create unsafe `SolveResult` objects and

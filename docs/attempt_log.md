@@ -2368,3 +2368,18 @@ Remaining TODOs:
   not reproducible from the final source tree.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   seventy-eight paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - V12 M2 Archive-Skip 1200s Long Run
+
+- Ran the current `paper-bpc-core` archive-incumbent scheduling path on V12 M2
+  Average for a 1200s budget. The row remains correctly noncertified:
+  `UB=0.719065249476`, `LB=0.717435865864`, gap `0.00226597462971`,
+  `unresolved_intervals=4`, `invalid_bound_intervals=0`, and `open_nodes=30`.
+- The run confirms that extending the archive-skip configuration from 300s to
+  1200s does not close the current plateau. Runtime is dominated by exact BPC
+  work inside a narrow high-Gini leaf: `pricing_time_seconds=743.3654876`,
+  `master_time_seconds=130.9071279`, and `bound_time_seconds=339.5201322`.
+  The controlling active interval is `[0.492484793261,0.494357359015]`, with
+  lower-bound source `focused_split_inherited_parent_lb`.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  seventy-nine paper-core solver JSON rows and reports zero failures.

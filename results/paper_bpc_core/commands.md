@@ -36,6 +36,15 @@ D:\msys64\ucrt64\bin\python.exe scripts\audit_bpc_certificate.py results\paper_b
 D:\msys64\ucrt64\bin\python.exe scripts\summarize_paper_bpc_core.py --raw-dir results\paper_bpc_core\raw --logs-dir results\paper_bpc_core\logs --summary-out results\paper_bpc_core\summary.csv --adaptive-out results\paper_bpc_core\adaptive_split_summary.csv
 ```
 
+V12 M2 archive-incumbent 1200s long-run validation:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 --time-limit 1200 --frontier-intervals 3 --progress-log results\paper_bpc_core\progress\v12_m2_average_core_1200s_archive_skip.csv --progress-interval-seconds 60 --out results\paper_bpc_core\raw\v12_m2_average_core_1200s_archive_skip.json *> results\paper_bpc_core\logs\v12_m2_average_core_1200s_archive_skip.log
+
+D:\msys64\ucrt64\bin\python.exe scripts\audit_bpc_certificate.py results\paper_bpc_core\raw --csv-out results\paper_bpc_core\audit\certificate_audit.csv --fail-on-error
+D:\msys64\ucrt64\bin\python.exe scripts\summarize_paper_bpc_core.py --raw-dir results\paper_bpc_core\raw --logs-dir results\paper_bpc_core\logs --summary-out results\paper_bpc_core\summary.csv --adaptive-out results\paper_bpc_core\adaptive_split_summary.csv
+```
+
 Label-dominance trace audit:
 
 ```powershell
