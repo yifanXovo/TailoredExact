@@ -750,6 +750,7 @@ pricing.
 | V12 M1 average | depth 5 300s | not closed | 0.357200583208 | 0.340282088370 | 0.047364129942 | no |
 | V12 M2 average | depth 3 300s | not closed | 0.719065249476 | 0.696966843140 | 0.030732129459 | no |
 | V12 M2 average | depth 5 300s | not closed | 0.719065249476 | 0.706200471341 | 0.017890974630 | no |
+| V12 M2 average | depth 5 1200s | not closed | 0.719065249476 | 0.710439004053 | 0.011996471 | no |
 
 The V12 rows remain noncertified, but the lower-bound improvements are valid
 inventory/route/Gini relaxation evidence in the full frontier ledger. The

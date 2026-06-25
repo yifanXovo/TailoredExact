@@ -2080,3 +2080,25 @@ Remaining TODOs:
     lower bounds substantially.
   - Full certificate audit over `results/paper_bpc_core/raw` now covers
     thirty-one paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - V12 M2 Depth-5 1200s Paper-Core Row
+
+- Ran V12 M2 Average for 1200s using the new paper-core depth-5 default.
+- Result remains noncertified but gives the current best valid V12 M2 lower
+  bound: `UB=0.719065249476`, `LB=0.710439004053`, gap
+  `0.0119964710145`, `unresolved_intervals=2`, `open_nodes=2`,
+  `invalid_bound_intervals=0`.
+- The remaining active leaves are:
+  - `[0.494357359015,0.509337885046]`, queued with
+    inventory/route/Gini LB `0.718272430646`;
+  - `[0.486867096000,0.494357359015]`, with open BPC nodes and tree LB
+    `0.710439004053`.
+- Runtime decomposition remains pricing dominated:
+  pricing `795.3111719s`, master `173.6668023s`, bound/relaxation
+  `216.7553962s`.
+- Trace evidence shows the remaining plateau is exact-label pricing state
+  explosion on a narrow depth-5 child, not broad frontier coverage. The largest
+  pricing calls still enumerate roughly 6.3M-6.5M route states and
+  240M-247M operation states, with support-duration pruning at zero.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  thirty-two paper-core solver JSON rows and reports zero failures.

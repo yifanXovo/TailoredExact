@@ -182,6 +182,25 @@ This motivated changing the paper presets to default `frontier_adaptive_max_dept
 to 5 unless explicitly overridden. The change only changes work order and
 ledger granularity; it does not change the certificate requirements.
 
+The depth-5 1200s paper-core row improves again but still does not close:
+
+- `UB=0.719065249476`, `LB=0.710439004053`, gap `0.0119964710145`.
+- `unresolved_intervals=2`, `open_nodes=2`, `invalid_bound_intervals=0`.
+- The active unresolved leaves are `[0.494357359015,0.509337885046]`, queued
+  with an inventory/route/Gini relaxation lower bound `0.718272430646`, and
+  `[0.486867096000,0.494357359015]`, with open BPC nodes and tree LB
+  `0.710439004053`.
+- Runtime remains pricing dominated:
+  `pricing_time_seconds=795.3111719`, `master_time_seconds=173.6668023`,
+  `bound_time_seconds=216.7553962`.
+- The largest exact-label calls still enumerate roughly 6.3M-6.5M route states
+  and 240M-247M operation states, with support-duration pruning at zero.
+
+This is the current best V12 M2 paper-core lower bound. The remaining plateau
+is no longer broad frontier coverage; it is exact BPC closure on the narrow
+depth-5 child `[0.486867096000,0.494357359015]`, plus a queued sibling that is
+already very close to the incumbent cutoff but not fathomed.
+
 ## Required Next Work
 
 - Use the node/pricing trace to profile exact-label pricing state explosion and

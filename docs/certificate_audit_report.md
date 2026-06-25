@@ -225,6 +225,14 @@ noncertified because active child intervals are unresolved.
 The full audit over `results/paper_bpc_core/raw` now covers thirty-one solver
 JSON rows with zero failures.
 
+The V12 M2 depth-5 1200s row was added next. It remains noncertified but raises
+the valid lower bound to `0.710439004053` with gap `0.0119964710145`.
+`unresolved_intervals=2`, `open_nodes=2`, and `certified_original_problem=false`
+are correctly preserved, so no original-problem certificate is claimed.
+
+The full audit over `results/paper_bpc_core/raw` now covers thirty-two solver
+JSON rows with zero failures.
+
 The audit script self-test includes intentionally invalid cases for incomplete
 pricing, duplicate negative-column blockage, partial frontier coverage,
 route-mask certifying with enumeration disabled, and original optimality without
