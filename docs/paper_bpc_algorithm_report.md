@@ -760,3 +760,10 @@ The V12 M1 1200s depth-5 row confirms that the remaining M1 plateau is not
 resolved by giving the controlling child more tree time: the lower bound stays
 at the 300s depth-5 value while the BPC tree accumulates open nodes and exact
 pricing dominates runtime.
+
+The follow-up label-dominance trace audit did not change the algorithmic
+certificate path, but it makes the pricing plateau easier to explain. V12 M1
+300s records `330135991` label-dominance comparisons and `186012791` exact
+label prunes while preserving the same noncertified LB/gap. A naive
+cross-pickup dominance experiment was rejected because the extra comparisons
+made pricing slower; it is not part of the paper-core preset.

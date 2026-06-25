@@ -305,6 +305,10 @@ private:
     }
 
     long long labelKey(int mask, int last, int load, int pickup) const {
+        return labelKeyForPickup(mask, last, load, pickup);
+    }
+
+    long long labelKeyForPickup(int mask, int last, int load, int pickup) const {
         const long long v = static_cast<long long>(instance_.V + 1);
         const long long q = static_cast<long long>(instance_.Q[vehicle_] + 1);
         const int pickup_budget = maxPickupBudget();
@@ -596,7 +600,9 @@ private:
     }
 
     bool labelDominates(const RouteLabel& a, const RouteLabel& b) const {
-        return a.cost <= b.cost + 1e-12 && a.travel <= b.travel + 1e-9;
+        return a.pickup <= b.pickup &&
+            a.cost <= b.cost + 1e-12 &&
+            a.travel <= b.travel + 1e-9;
     }
 
     bool insertLabel(std::vector<RouteLabel>& labels,
@@ -608,11 +614,19 @@ private:
         std::vector<int>& bucket = it->second;
         for (int idx : bucket) {
             if (!labels[idx].active) continue;
-            if (labelDominates(labels[idx], label)) return false;
+            ++result_.label_dominance_comparisons;
+            if (labelDominates(labels[idx], label)) {
+                ++result_.label_dominance_pruned_labels;
+                return false;
+            }
         }
         for (int idx : bucket) {
             if (!labels[idx].active) continue;
-            if (labelDominates(label, labels[idx])) labels[idx].active = false;
+            ++result_.label_dominance_comparisons;
+            if (labelDominates(label, labels[idx])) {
+                labels[idx].active = false;
+                ++result_.label_dominance_pruned_labels;
+            }
         }
         const int label_idx = static_cast<int>(labels.size());
         labels.push_back(label);

@@ -2122,3 +2122,22 @@ Remaining TODOs:
   and completion-LB pruning both record zero pruned labels.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   thirty-three paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Exact-Label Label Dominance Trace Audit
+
+- Added aggregate and per-pricing-call counters for exact-label label
+  dominance: comparisons, labels pruned, and cross-pickup dominance prunes.
+- The retained paper-core implementation only counts the existing exact-bucket
+  dominance; cross-pickup dominance is not active in the paper-core path.
+- V4 paper-core smoke remains certified at objective 0.
+- V12 M1 300s label-dominance trace row remains noncertified with the same
+  valid lower bound as the depth-5 default row: `LB=0.340282088370`, gap
+  `0.0473641299419`.
+- The row records `330135991` dominance comparisons and `186012791` labels
+  pruned by exact-bucket dominance. This confirms that label dominance is
+  already a large part of the exact-label pricing workload.
+- A naive cross-pickup dominance implementation was tested locally and rejected
+  because its comparison overhead made V12 M1 pricing slower. It was not kept
+  as a default or reported as a paper-core improvement.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  thirty-five paper-core solver JSON rows and reports zero failures.

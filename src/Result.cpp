@@ -512,6 +512,12 @@ std::string resultToJson(const SolveResult& input) {
         << result.support_duration_strong_pruned_columns << ",\n";
     out << "  \"completion_lb_pruned_labels\": "
         << result.completion_lb_pruned_labels << ",\n";
+    out << "  \"label_dominance_comparisons\": "
+        << result.label_dominance_comparisons << ",\n";
+    out << "  \"label_dominance_pruned_labels\": "
+        << result.label_dominance_pruned_labels << ",\n";
+    out << "  \"label_dominance_cross_pickup_pruned_labels\": "
+        << result.label_dominance_cross_pickup_pruned_labels << ",\n";
     out << "  \"support_duration_max_subset_size\": "
         << result.support_duration_max_subset_size << ",\n";
     out << "  \"support_duration_precompute_time_seconds\": "

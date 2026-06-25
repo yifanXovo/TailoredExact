@@ -195,6 +195,24 @@ tree still has 29 open nodes at timeout. This confirms that V12 M1 now needs
 certificate-safe pricing-state reduction or stronger exact branch closure on
 the narrow controlling child, rather than additional broad frontier splitting.
 
+The next code audit instrumented exact-label label dominance inside pricing.
+The production-safe trace fields now include `label_dominance_comparisons`,
+`label_dominance_pruned_labels`, and
+`label_dominance_cross_pickup_pruned_labels` in both raw JSON and the plateau
+trace aggregate. A V12 M1 300s validation row remains noncertified with the
+same certificate-relevant bound (`LB=0.340282088370`, gap
+`0.0473641299419`) and records `330135991` dominance comparisons and
+`186012791` exact-bucket dominance prunes. The cross-pickup count is zero in
+paper-core.
+
+An attempted cross-pickup dominance rule was tested and rejected before being
+kept as a default. The rule is mathematically plausible only as a sufficient
+dominance check, but a naive implementation required billions of comparisons
+on V12 M1 and made exact pricing calls slower rather than faster. It was
+removed from the paper-core path. The retained change is diagnostic
+instrumentation for the existing exact-bucket dominance, not a certificate
+shortcut.
+
 ## Required Next Work
 
 - Use the depth-5 interval ledger and the 1200s per-node/pricing traces to identify

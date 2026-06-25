@@ -1232,6 +1232,10 @@ void mergePricingStats(const ebrp::PricingResult& priced,
     result.support_duration_strong_pruned_columns +=
         priced.support_duration_strong_pruned_columns;
     result.completion_lb_pruned_labels += priced.completion_lb_pruned_labels;
+    result.label_dominance_comparisons += priced.label_dominance_comparisons;
+    result.label_dominance_pruned_labels += priced.label_dominance_pruned_labels;
+    result.label_dominance_cross_pickup_pruned_labels +=
+        priced.label_dominance_cross_pickup_pruned_labels;
     result.support_duration_max_subset_size =
         std::max(result.support_duration_max_subset_size,
                  priced.support_duration_max_subset_size);
@@ -1425,6 +1429,10 @@ void copyBpcPricingStats(const BpcResult& bpc,
     result.cg_stabilization_false_negatives +=
         bpc.cg_stabilization_false_negatives;
     result.cg_final_true_pricing_rc = bpc.cg_final_true_pricing_rc;
+    result.label_dominance_comparisons += bpc.label_dominance_comparisons;
+    result.label_dominance_pruned_labels += bpc.label_dominance_pruned_labels;
+    result.label_dominance_cross_pickup_pruned_labels +=
+        bpc.label_dominance_cross_pickup_pruned_labels;
 }
 
 std::size_t findMatchingJsonDelimiter(const std::string& text,
@@ -10989,6 +10997,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                   << (result.pricing_blocked_by_duplicate_projection ? "true" : "false")
                   << ", \"completion_lb_pruned_labels\": "
                   << result.completion_lb_pruned_labels
+                  << ", \"label_dominance_comparisons\": "
+                  << result.label_dominance_comparisons
+                  << ", \"label_dominance_pruned_labels\": "
+                  << result.label_dominance_pruned_labels
+                  << ", \"label_dominance_cross_pickup_pruned_labels\": "
+                  << result.label_dominance_cross_pickup_pruned_labels
                   << "},\n";
             trace << "  \"interval_trace_csv\": \""
                   << jsonEscapeLocal(result.bpc_interval_trace_csv_path) << "\",\n";

@@ -242,6 +242,13 @@ lower-bound progress evidence, not as an original-problem certificate.
 The full audit over `results/paper_bpc_core/raw` now covers thirty-three
 solver JSON rows with zero failures.
 
+The label-dominance trace audit added two more paper-core rows: V4 smoke and
+V12 M1 300s. V4 remains certified at objective 0. V12 M1 remains correctly
+noncertified with positive gap and unresolved intervals. The new dominance
+counters are diagnostic trace fields only; they do not affect certificate
+classification. The full audit over `results/paper_bpc_core/raw` now covers
+thirty-five solver JSON rows with zero failures.
+
 The audit script self-test includes intentionally invalid cases for incomplete
 pricing, duplicate negative-column blockage, partial frontier coverage,
 route-mask certifying with enumeration disabled, and original optimality without
