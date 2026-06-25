@@ -35,6 +35,12 @@ The paper-facing exact algorithm is GF-RL-BPC, implemented by
   incumbent search time; it never contributes to a lower bound or certificate.
 - Complete route-mask operation-budget cuts only when route-mask enumeration is
   complete for the active instance threshold.
+- Operation-budget relaxation portfolio. Operation-budget route-mask rows are
+  valid strengthening rows, but their MIP can be harder to solve within an
+  interval budget. Paper-core now keeps them enabled and, when they do not
+  fathom an interval, also solves the same interval with operation-budget rows
+  disabled. The solver keeps the stronger valid lower bound; both models are
+  relaxations of the original problem.
 - Route-pool incumbent master using verified elementary columns only.
 - Final-inventory and operation-mode branching.
 - Full certificate ledger aggregation across all active frontier intervals.
@@ -89,3 +95,22 @@ The command-line result should be audited with:
 ```powershell
 python scripts\audit_bpc_certificate.py <json-or-directory> --csv-out <audit.csv> --fail-on-error
 ```
+
+The C++ diagnostic command also checks the output guard directly:
+
+```powershell
+build\ExactEBRP.exe --method certificate-basis-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --out results\paper_core_round_next\raw\certificate_guard_fixtures.json
+```
+
+## Round-Next Status
+
+The operation-budget relaxation portfolio certifies the regenerated engineering
+V12 benchmarks without BPC-tree pricing:
+
+| instance | row | status | objective/LB/UB | runtime | certificate basis |
+|---|---|---|---:|---:|---|
+| V12 M1 average | paper-core 300s | optimal | 0.357200583208 | 265.220702s | all intervals bound-fathomed by inventory/route/Gini relaxation |
+| V12 M2 average | paper-core 300s | optimal | 0.719065249476 | 217.7839095s | all intervals bound-fathomed by inventory/route/Gini relaxation |
+
+These are regenerated engineering instances, not confirmed historical paper
+targets. See `docs/benchmark_instance_policy.md`.

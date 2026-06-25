@@ -2425,3 +2425,29 @@ Remaining TODOs:
   closure on the active V12 M1 leaves.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   eighty-three solver JSON rows and reports zero failures.
+
+## Round Next - Vehicle-Relaxation Certificate Integration
+
+- Reproduced the custom `v12_m2_ablation_plus_vehicle_relaxation_1200s`
+  relaxation-only frontier certificate in
+  `results/paper_core_round_next/raw/v12_m2_vehicle_relaxation_repro_1200s.json`.
+  The reproduced row is certified with objective/LB/UB `0.719065249476`, gap
+  `0`, `unresolved_intervals=0`, `open_nodes=0`, and all final intervals
+  bound-fathomed by inventory/route/Gini relaxation.
+- Identified the paper-core regression: route-mask operation-budget rows are
+  valid but made the critical relaxation MIP harder, causing time-limited weaker
+  bounds and later expensive exact-label BPC pricing. The custom ablation used a
+  weaker no-operation-budget relaxation that proved cutoff infeasibility within
+  budget.
+- Integrated a certificate-safe relaxation portfolio into paper-core: keep
+  operation-budget rows enabled, but if they do not fathom an interval, solve
+  the same interval with operation-budget rows disabled and keep the stronger
+  valid lower bound.
+- After integration, regenerated V12 M2 `paper-bpc-core` certifies in
+  `217.7839095s` for the 300s row and `215.7528562s` for the 1200s row.
+- Regenerated V12 M1 `paper-bpc-core` now certifies in `265.220702s` for the
+  300s row and `257.5489498s` for the 1200s row.
+- Added C++ certificate guard fixtures to `certificate-basis-test`, including
+  unsafe optimal claims and a valid relaxation-only frontier certificate.
+- The audit over `results/paper_core_round_next/raw` reports nine solver JSON
+  rows with zero failures.

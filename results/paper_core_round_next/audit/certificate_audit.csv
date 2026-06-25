@@ -1,0 +1,12 @@
+source,instance_name,method,status,method_scope,solves_original_objective,is_bpc,certified_original_problem,verifier_passed,gap,unresolved_intervals,invalid_bound_intervals,open_nodes,audit_passed,failure_count,failures,warnings
+results\paper_core_round_next\raw\certificate_guard_fixtures.json,gcap_smoke_V4_M1.txt,certificate-basis-test,diagnostic_passed,diagnostic,False,False,False,True,1.0,0,0,0,True,0,,
+results\paper_core_round_next\raw\option_consistency_paper_core.json,gcap_smoke_V4_M1.txt,option-consistency-test,diagnostic_complete,diagnostic,False,False,False,True,1.0,0,0,0,True,0,,
+results\paper_core_round_next\raw\v12_m1_paper_core_1200s_relax_portfolio.json,regen_candidate_V12_M1_average.txt,gcap-frontier,optimal,original_bpc,True,True,True,True,0.0,0,0,0,True,0,,
+results\paper_core_round_next\raw\v12_m1_paper_core_300s_relax_portfolio.json,regen_candidate_V12_M1_average.txt,gcap-frontier,optimal,original_bpc,True,True,True,True,0.0,0,0,0,True,0,,
+results\paper_core_round_next\raw\v12_m1_plain_cplex_300s.json,regen_candidate_V12_M1_average.txt,cplex,optimal,plain_cplex,True,False,True,True,0.0,0,0,0,True,0,,
+results\paper_core_round_next\raw\v12_m2_paper_core_1200s_relax_portfolio.json,regen_candidate_V12_M2_average.txt,gcap-frontier,optimal,original_bpc,True,True,True,True,0.0,0,0,0,True,0,,
+results\paper_core_round_next\raw\v12_m2_paper_core_300s_relax_portfolio.json,regen_candidate_V12_M2_average.txt,gcap-frontier,optimal,original_bpc,True,True,True,True,0.0,0,0,0,True,0,,
+results\paper_core_round_next\raw\v12_m2_plain_cplex_300s.json,regen_candidate_V12_M2_average.txt,cplex,not_certified,plain_cplex,True,False,False,True,0.139477178527,0,0,0,True,0,,
+results\paper_core_round_next\raw\v12_m2_vehicle_relaxation_repro_1200s.json,regen_candidate_V12_M2_average.txt,gcap-frontier,optimal,original_bpc,True,True,True,True,0.0,0,0,0,True,0,,
+results\paper_core_round_next\raw\v4_paper_core_smoke_30s.json,gcap_smoke_V4_M1.txt,gcap-frontier,optimal,original_bpc,True,True,True,True,0.0,0,0,0,True,0,,
+results\paper_core_round_next\raw\v4_paper_core_smoke_current_30s.json,gcap_smoke_V4_M1.txt,gcap-frontier,optimal,original_bpc,True,True,True,True,0.0,0,0,0,True,0,,
