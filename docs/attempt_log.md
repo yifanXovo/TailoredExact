@@ -2196,3 +2196,19 @@ Remaining TODOs:
   `invalid_bound_intervals=0`.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   forty-five paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Depth-9 Split Diagnostic Rejected
+
+- Ran explicit depth-9 300s diagnostics for V12 M1 and V12 M2 using
+  `paper-bpc-core`; the default preset remains depth 8.
+- V12 M1 depth 9 matches depth 8: `LB=0.344613240900`,
+  `UB=0.357200583208`, gap `0.035238862701`,
+  `unresolved_intervals=3`, and `invalid_bound_intervals=0`.
+- V12 M2 depth 9 is worse than depth 8 within the same budget:
+  `LB=0.715075764785`, `UB=0.719065249476`, gap `0.00554815393275`,
+  `unresolved_intervals=3`, and `invalid_bound_intervals=0`.
+- Added `scripts/summarize_paper_bpc_core.py` so the paper-core summary and
+  adaptive-depth diagnostic tables are regenerated from raw JSON and interval
+  ledgers, including a derived controlling interval.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  forty-seven paper-core solver JSON rows and reports zero failures.

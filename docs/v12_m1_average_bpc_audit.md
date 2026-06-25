@@ -260,6 +260,12 @@ current M1 bottleneck remains the same three unresolved leaves, especially the
 children that need stronger relaxation or exact tree closure beyond the
 inventory/route/Gini bound.
 
+An explicit depth-9 300s diagnostic was run next and did not improve V12 M1:
+`LB=0.344613240900`, `UB=0.357200583208`, gap `0.035238862701`,
+`unresolved_intervals=3`, and `invalid_bound_intervals=0`. Because it matches
+depth 8 while taking the same order of relaxation time, there is no current M1
+evidence for raising the paper-core default beyond depth 8.
+
 ## Required Next Work
 
 - Use the depth-8 interval ledger and the depth-6 1200s per-node/pricing traces to

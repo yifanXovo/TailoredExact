@@ -276,6 +276,12 @@ but remains correctly noncertified because the frontier still has three
 unresolved active leaves. The full audit over `results/paper_bpc_core/raw` now
 covers forty-five solver JSON rows with zero failures.
 
+The explicit depth-9 diagnostics were then added as rejected scheduling
+evidence. Both rows remain correctly noncertified: V12 M1 is unchanged from
+depth 8, and V12 M2 is weaker than the depth-8 default within the same 300s
+budget. The full audit over `results/paper_bpc_core/raw` now covers forty-seven
+solver JSON rows with zero failures.
+
 The audit script self-test includes intentionally invalid cases for incomplete
 pricing, duplicate negative-column blockage, partial frontier coverage,
 route-mask certifying with enumeration disabled, and original optimality without

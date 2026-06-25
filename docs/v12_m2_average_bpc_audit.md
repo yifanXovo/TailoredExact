@@ -236,6 +236,14 @@ original-problem certificate, but it is the best current paper-core V12 M2
 continues to tighten the controlling region before expensive exact tree
 closure.
 
+An explicit depth-9 300s diagnostic was also tested and rejected as a default
+candidate. It returned to `LB=0.715075764785`, with gap
+`0.00554815393275`, `unresolved_intervals=3`, and
+`invalid_bound_intervals=0`. The row is audit-safe and noncertified, but it is
+worse than the depth-8 default because the extra split work does not reach the
+same focused child bound within 300s. The current paper-core default therefore
+stays at depth 8.
+
 ## Required Next Work
 
 - Use the node/pricing trace to profile exact-label pricing state explosion and

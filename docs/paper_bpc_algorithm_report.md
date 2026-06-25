@@ -753,12 +753,14 @@ bound-fathomed, or closed by exact BPC pricing.
 | V12 M1 average | depth 6 1200s | not closed | 0.357200583208 | 0.344881668930 | 0.034487385681 | no |
 | V12 M1 average | depth 7 300s | not closed | 0.357200583208 | 0.344613240900 | 0.035238862701 | no |
 | V12 M1 average | depth 8 300s | not closed | 0.357200583208 | 0.344613240900 | 0.035238862701 | no |
+| V12 M1 average | depth 9 300s | not closed | 0.357200583208 | 0.344613240900 | 0.035238862701 | no |
 | V12 M2 average | depth 3 300s | not closed | 0.719065249476 | 0.696966843140 | 0.030732129459 | no |
 | V12 M2 average | depth 5 300s | not closed | 0.719065249476 | 0.706200471341 | 0.017890974630 | no |
 | V12 M2 average | depth 5 1200s | not closed | 0.719065249476 | 0.710439004053 | 0.011996471 | no |
 | V12 M2 average | depth 6 300s | not closed | 0.719065249476 | 0.713690734357 | 0.007474307962 | no |
 | V12 M2 average | depth 7 300s | not closed | 0.719065249476 | 0.715075764785 | 0.005548153933 | no |
 | V12 M2 average | depth 8 300s | not closed | 0.719065249476 | 0.716948330538 | 0.002943987267 | no |
+| V12 M2 average | depth 9 300s | not closed | 0.719065249476 | 0.715075764785 | 0.005548153933 | no |
 
 The V12 rows remain noncertified, but the lower-bound improvements are valid
 inventory/route/Gini relaxation evidence in the full frontier ledger. The
@@ -773,6 +775,8 @@ expensive pricing, and it further improves V12 M2 to a 0.55% valid gap in 300s.
 Depth 8 is neutral on V12 M1 but improves V12 M2 again to a 0.29% valid gap in
 300s, still with three unresolved active intervals and no original-problem
 certificate.
+Depth 9 was tested explicitly but rejected as a default: it does not improve
+V12 M1 and is worse than depth 8 on V12 M2 within 300s.
 
 The follow-up label-dominance trace audit did not change the algorithmic
 certificate path, but it makes the pricing plateau easier to explain. V12 M1
