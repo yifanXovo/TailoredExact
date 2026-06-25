@@ -233,6 +233,15 @@ are correctly preserved, so no original-problem certificate is claimed.
 The full audit over `results/paper_bpc_core/raw` now covers thirty-two solver
 JSON rows with zero failures.
 
+The V12 M1 depth-5 1200s row was added after that. It remains audit-safe and
+noncertified: `LB=0.340282088370`, `UB=0.357200583208`, gap
+`0.0473641299419`, `unresolved_intervals=3`, `open_nodes=29`, and
+`certified_original_problem=false`. The audit accepts the row only as valid
+lower-bound progress evidence, not as an original-problem certificate.
+
+The full audit over `results/paper_bpc_core/raw` now covers thirty-three
+solver JSON rows with zero failures.
+
 The audit script self-test includes intentionally invalid cases for incomplete
 pricing, duplicate negative-column blockage, partial frontier coverage,
 route-mask certifying with enumeration disabled, and original optimality without

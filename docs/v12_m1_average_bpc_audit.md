@@ -175,6 +175,26 @@ The depth-5 row remains noncertified with three unresolved active leaves:
 spending too much time in branch-price closure before extracting available
 child relaxation bounds.
 
+The depth-5 1200s row was then run with the preset default and the same
+instance/hash. It did not improve the valid lower bound beyond the 300s
+depth-5 row: `LB=0.340282088370`, `UB=0.357200583208`, gap
+`0.0473641299419`, with `unresolved_intervals=3`, `open_nodes=29`, and
+`invalid_bound_intervals=0`. The controlling active leaf is
+`[0.230692043322,0.238133722139]`, whose lower-bound source remains
+`focused_split_inherited_parent_lb`. That interval opened a BPC tree but did
+not close before the time limit.
+
+The 1200s trace is useful because it removes the earlier ambiguity about
+whether the deeper split only needed more tree time. It records
+`pricing_time_seconds=804.5765858`, `master_time_seconds=120.9521829`, and
+`bound_time_seconds=269.381414`. The largest exact-label pricing calls still
+enumerate roughly 6.8M to 6.9M route states and 291M to 297M operation states
+per call, with support-duration and completion-LB pruning both at zero in the
+default paper-core row. Several node relaxations close locally, but the branch
+tree still has 29 open nodes at timeout. This confirms that V12 M1 now needs
+certificate-safe pricing-state reduction or stronger exact branch closure on
+the narrow controlling child, rather than additional broad frontier splitting.
+
 ## Required Next Work
 
 - Use the depth-5 interval ledger and the 1200s per-node/pricing traces to identify

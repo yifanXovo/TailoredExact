@@ -2102,3 +2102,23 @@ Remaining TODOs:
   240M-247M operation states, with support-duration pruning at zero.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   thirty-two paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - V12 M1 Depth-5 1200s Paper-Core Row
+
+- Ran V12 M1 Average for 1200s using the same paper-core depth-5 default.
+- Result remains noncertified and does not improve beyond the 300s depth-5
+  lower bound: `UB=0.357200583208`, `LB=0.340282088370`, gap
+  `0.0473641299419`, `unresolved_intervals=3`, `open_nodes=29`,
+  `invalid_bound_intervals=0`.
+- The controlling active leaf is `[0.230692043322,0.238133722139]`; its lower
+  bound remains inherited from the focused split ledger, and the interval has
+  open BPC nodes at timeout.
+- Runtime remains dominated by exact-label pricing: pricing
+  `804.5765858s`, master `120.9521829s`, and bound/relaxation
+  `269.381414s`.
+- Trace evidence shows per-call exact pricing state explosion on the narrow
+  controlling child: the largest calls enumerate about 6.8M to 6.9M route
+  states and 291M to 297M operation states, while default paper-core support
+  and completion-LB pruning both record zero pruned labels.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  thirty-three paper-core solver JSON rows and reports zero failures.
