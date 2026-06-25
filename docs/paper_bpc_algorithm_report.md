@@ -783,10 +783,13 @@ start tree work earlier. Disabling focused intensification at depth 8 leaves
 the 300s bound unchanged, and forcing a shallower depth-6 ledger with no
 focused intensification starts tree pricing but lowers the 300s LB to
 `0.341121462223`. The latter row now records per-pricing-call trace objects
-before time-limit returns, showing exact pricing did not close and negative
-reduced cost remains. This supports keeping depth 8 as the default and moving
-the next optimization effort to pricing-state reduction or stronger valid
-relaxation on the depth-8 active children.
+before time-limit returns. A pricing timer bug was fixed in this path so the
+pricer receives the actual pricing-call start timestamp when its budget is a
+remaining per-call budget. After the fix, the controlling time-limited pricing
+call enumerates about `3.25M` route states and `161.6M` operation states before
+returning with negative reduced cost remaining. This supports keeping depth 8
+as the default and moving the next optimization effort to pricing-state
+reduction or stronger valid relaxation on the depth-8 active children.
 
 The follow-up label-dominance trace audit did not change the algorithmic
 certificate path, but it makes the pricing plateau easier to explain. V12 M1

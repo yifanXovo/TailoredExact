@@ -287,11 +287,15 @@ diagnostic exposed that aggregate BPC pricing calls could be present while the
 paper-core trace lacked per-call JSON objects. The CG path now writes pricing
 trace objects before time-limit returns, including event, vehicle, exact
 completion, best reduced cost, state counts, dominance counters, and unfinished
-state count. A one-interval V12 M1 trace validation row confirms the
-`pricing_calls` array is populated for a started BPC tree, and the depth-6
-no-focused diagnostic now records two time-limited pricing-call entries. The
-full audit over `results/paper_bpc_core/raw` now covers fifty-one solver JSON
-rows with zero failures.
+state count. The same audit found and fixed a pricing timer bug: per-call
+remaining budgets were being paired with the older CG/node start timestamp,
+which could cause immediate timeouts before state enumeration. A one-interval
+V12 M1 trace validation row confirms the `pricing_calls` array is populated for
+a started BPC tree and that time-limited pricing now reports nonzero route and
+operation states. The depth-6 no-focused diagnostic records a real time-limited
+pricing call with negative reduced cost remaining, so the node remains
+unresolved. The full audit over `results/paper_bpc_core/raw` now covers
+fifty-one solver JSON rows with zero failures.
 
 The audit script self-test includes intentionally invalid cases for incomplete
 pricing, duplicate negative-column blockage, partial frontier coverage,

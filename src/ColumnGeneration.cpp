@@ -2117,7 +2117,8 @@ ColumnGenerationResult runCoverageColumnGenerationDiagnostic(
             pricing_options.time_limit_seconds = remaining;
             pricing_options.allowed_station_mask =
                 (1 << (required.first - 1)) | (1 << (required.second - 1));
-            PricingResult priced = priceRouteLoadColumnExact(instance, k, duals, pricing_options, start);
+            PricingResult priced = priceRouteLoadColumnExact(
+                instance, k, duals, pricing_options, Clock::now());
             accumulateBpcPricingStats(result, priced);
             ++result.pricing_calls;
             result.route_states += priced.route_states;
@@ -2479,7 +2480,8 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                         ? std::max(1, pricing_return_columns)
                         : 1;
                 const auto pricing_start = Clock::now();
-                priced = priceRouteLoadColumnExact(instance, k, duals, pricing_options, start);
+                priced = priceRouteLoadColumnExact(
+                    instance, k, duals, pricing_options, pricing_start);
                 pricing_call_seconds =
                     std::chrono::duration<double>(Clock::now() - pricing_start).count();
                 accumulateBpcPricingStats(result, priced);
@@ -2637,7 +2639,8 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                         : 1;
                 const auto pricing_start = Clock::now();
                 PricingResult exact =
-                    priceRouteLoadColumnExact(instance, k, duals, pricing_options, start);
+                    priceRouteLoadColumnExact(
+                        instance, k, duals, pricing_options, pricing_start);
                 exact_rerun_pricing_seconds =
                     std::chrono::duration<double>(Clock::now() - pricing_start).count();
                 accumulateBpcPricingStats(result, exact);

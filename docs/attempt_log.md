@@ -2213,21 +2213,28 @@ Remaining TODOs:
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   forty-seven paper-core solver JSON rows and reports zero failures.
 
-## 2026-06-25 - Pricing Trace Completeness and M1 Scheduling Diagnostics
+## 2026-06-25 - Pricing Timer Fix, Trace Completeness, and M1 Scheduling Diagnostics
 
 - Fixed the CG trace path so pricing-call JSON objects are written before a
   pricing time-limit return. The paper-core plateau trace now records
   time-limited pricing events instead of reporting only aggregate pricing
   counters.
+- Fixed a pricing timer bug in the CG layer. The code now passes the actual
+  pricing-call start timestamp to `priceRouteLoadColumnExact` when the time
+  limit is a per-call remaining budget; previously, LP/RMP time could make
+  exact pricing time out immediately with zero states.
 - Ran a one-interval V12 M1 trace validation row; it remains noncertified and
   diagnostic, but its trace contains a pricing call object with
-  `event=pricing_time_limit` and `exact_completed=false`.
+  `event=pricing_time_limit`, nonzero route/operation state counts, and
+  `exact_completed=false`.
 - Tested V12 M1 300s with focused intensification disabled at the depth-8
   default. The result is unchanged: `LB=0.344613240900`, gap
   `0.035238862701`, with no tree retry before timeout.
 - Tested V12 M1 300s with depth 6 and focused intensification disabled to
   force earlier retry/tree work. It starts tree pricing but is worse:
-  `LB=0.341121462223`, gap `0.0450142629691`, and the tree remains unresolved
-  with negative reduced cost remaining.
+  `LB=0.341121462223`, gap `0.0450142629691`. The controlling pricing call
+  enumerates about `3.25M` route states and `161.6M` operation states before
+  timing out with best reduced cost `-0.00938540151401`, so the tree remains
+  unresolved with negative reduced cost remaining.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   fifty-one paper-core solver JSON rows and reports zero failures.

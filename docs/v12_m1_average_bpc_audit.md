@@ -273,12 +273,16 @@ depth-8 default does not change the 300s result: `LB=0.344613240900`, gap
 Forcing a shallower depth-6 ledger and disabling focused intensification does
 start focused retry/tree work, but it is worse in 300s:
 `LB=0.341121462223`, gap `0.0450142629691`, `pricing_time_seconds` about
-`7.94`, and `master_time_seconds` about `11.49`. The tree pricing trace now
-records time-limited pricing calls with negative reduced cost remaining, so
-those nodes are correctly unresolved. This rejects "start tree earlier by
-reducing split depth" as the next default change; the plateau still needs
-stronger exact pricing or a stronger valid relaxation on the active depth-8
-children.
+`14.54`, and `master_time_seconds` about `5.70`. This run was rerun after a
+pricing timer bug fix: the CG layer had been passing a remaining per-call
+budget together with the older node-start timestamp, which could make a pricing
+call time out before enumerating states. The fixed trace records a real
+time-limited pricing call on the controlling interval with about `3.25M` route
+states, `161.6M` operation states, best reduced cost `-0.00938540151401`, and
+`exact_completed=false`. The node is therefore correctly unresolved. This
+rejects "start tree earlier by reducing split depth" as the next default
+change; the plateau still needs stronger exact pricing or a stronger valid
+relaxation on the active depth-8 children.
 
 ## Required Next Work
 
