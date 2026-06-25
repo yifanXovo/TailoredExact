@@ -562,3 +562,19 @@ rejects positive-gap certificates, regenerated instances mislabeled as
 historical targets, compact certificates without zero compact gap, relaxed-RMP
 certificates without closed relaxed pricing, and accepted incumbents without a
 verifier pass.
+
+## Round Heuristic UB Source Rules
+
+- `paper-bpc-core` must not rely on arbitrary result-directory scanning as its
+  default upper-bound source. The default paper UB source is a deterministic
+  verifier-gated primal heuristic.
+- `--incumbent-archive-auto true` is an explicit diagnostic option. Archive
+  rows can provide verified upper bounds only and must be labeled
+  `diagnostic_archive` or equivalent non-paper-reproducible provenance.
+- Heuristic, archive, CPLEX, imported, and route-pool incumbents are UB-only.
+  They must record `incumbent_source_contributes_lower_bound=false`.
+- Any row that marks an incumbent source as lower-bound evidence is rejected by
+  both the C++ output guard and `scripts/audit_bpc_certificate.py`.
+- Explicit incumbent JSON files are paper-reproducible only when they are
+  checked into the benchmark artifact set or otherwise specified as a formal
+  input; they still contribute no lower-bound evidence.

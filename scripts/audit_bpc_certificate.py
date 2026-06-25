@@ -99,6 +99,13 @@ def audit_one(source: str, result: Dict[str, Any]) -> Dict[str, Any]:
     unresolved = as_int(result.get("unresolved_intervals", 0))
     invalid = as_int(result.get("invalid_bound_intervals", 0))
     open_nodes = as_int(result.get("open_nodes", 0))
+    incumbent_source_category = str(result.get("incumbent_source_category", ""))
+    incumbent_source_reproducible = as_bool(
+        result.get("incumbent_source_is_paper_reproducible", False)
+    )
+    incumbent_source_lb = as_bool(
+        result.get("incumbent_source_contributes_lower_bound", False)
+    )
 
     original_scope = solves_original or method_scope in {
         "original_bpc",
@@ -115,6 +122,12 @@ def audit_one(source: str, result: Dict[str, Any]) -> Dict[str, Any]:
 
     if method == "gcap-frontier" and status == "optimal" and not certified:
         failures.append("gcap_frontier_optimal_without_full_bpc_certificate")
+
+    if incumbent_source_lb:
+        failures.append("incumbent_source_marked_as_lower_bound_evidence")
+
+    if incumbent_source_category == "diagnostic_archive" and incumbent_source_reproducible:
+        failures.append("diagnostic_archive_marked_paper_reproducible")
 
     if certified:
         if status != "optimal":
@@ -279,6 +292,15 @@ def run_self_test() -> int:
             "route_mask_all_subset_enumeration_enabled": False,
             "route_mask_all_subset_enumeration_certifying": True,
         },
+        "incumbent_as_lb.json": {
+            **valid,
+            "incumbent_source_contributes_lower_bound": True,
+        },
+        "archive_marked_reproducible.json": {
+            **valid,
+            "incumbent_source_category": "diagnostic_archive",
+            "incumbent_source_is_paper_reproducible": True,
+        },
         "optimal_without_cert.json": {
             **valid,
             "certified_original_problem": False,
@@ -299,6 +321,8 @@ def run_self_test() -> int:
             "duplicate_negative.json": False,
             "partial_frontier.json": False,
             "route_mask_disabled_certifying.json": False,
+            "incumbent_as_lb.json": False,
+            "archive_marked_reproducible.json": False,
             "optimal_without_cert.json": False,
         }
         if passed != expected:

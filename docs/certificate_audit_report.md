@@ -393,3 +393,29 @@ uses a BPC tree certificate.
 
 - Extend pricing internals further with unfinished-state frontier counts for
   future instances where the relaxation portfolio does not fathom the frontier.
+
+## Heuristic UB And Archive Guard Update
+
+The output guard and `scripts/audit_bpc_certificate.py` now reject any
+certificate row that marks an incumbent source as lower-bound evidence through
+`incumbent_source_contributes_lower_bound=true`. They also reject rows that
+label `diagnostic_archive` as paper-reproducible UB evidence.
+
+The C++ `certificate-basis-test` fixtures were extended with:
+
+- `incumbent_source_cannot_lower_bound`;
+- `archive_source_not_paper_reproducible`.
+
+The current diagnostic commands:
+
+```powershell
+D:\msys64\ucrt64\bin\python.exe scripts\audit_bpc_certificate.py --self-test
+build\ExactEBRP.exe --method certificate-basis-test --algorithm-preset paper-bpc-core --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --out results\heuristic_relaxation_dataset_round\raw\certificate_basis_after_patch.json
+D:\msys64\ucrt64\bin\python.exe scripts\audit_bpc_certificate.py results\heuristic_relaxation_dataset_round\raw --csv-out results\heuristic_relaxation_dataset_round\certificate_audit.csv --fail-on-error
+D:\msys64\ucrt64\bin\python.exe scripts\audit_bpc_certificate.py results\generated_variant_round\raw --csv-out results\generated_variant_round\certificate_audit.csv --fail-on-error
+```
+
+audit the new heuristic/variant result directories with zero failures. The V4
+paper-core row remains certified at objective `0`; V12 regenerated rows using
+the new paper heuristic UB are correctly noncertified when their frontier
+ledgers remain open.

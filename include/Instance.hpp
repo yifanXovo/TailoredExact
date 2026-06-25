@@ -103,6 +103,11 @@ struct SolveOptions {
     std::string external_incumbent_path;
     std::string external_incumbent_format = "auto";
     std::string export_incumbent_path;
+    std::string primal_heuristic = "none";
+    bool primal_heuristic_explicit = false;
+    double primal_heuristic_seconds = 10.0;
+    unsigned primal_heuristic_seed = 20260626u;
+    int primal_heuristic_runs = 12;
     std::string large_instance_mode = "auto";
     std::string pricing_engine = "auto";
     std::string large_lb_mode = "auto";
@@ -186,6 +191,7 @@ struct SolveOptions {
     std::string pricing_verifier_mode = "auto";
     std::string algorithm_preset = "custom";
     bool incumbent_archive_auto = false;
+    bool incumbent_archive_auto_explicit = false;
     std::string incumbent_archive_dir = "results";
     bool compact_fallback_enabled = false;
     int inventory_probe_max_v = 7;
@@ -208,6 +214,7 @@ struct RunConfigSnapshot {
     bool route_mask_all_subset_enumeration_enabled = true;
     bool route_mask_all_subset_enumeration_certifying = true;
     bool incumbent_archive_auto = false;
+    std::string primal_heuristic = "none";
     bool compact_fallback_enabled = false;
     bool relaxed_rmp_enabled = false;
     bool plain_baseline = false;

@@ -14,6 +14,21 @@ Generated V8/V10/V20/V50/V100 files under `reference/generated/` are
 deterministic engineering benchmarks unless their source is later matched to
 historical data.
 
+## Capacity/Inventory Variants
+
+Round heuristic-relaxation-dataset adds deterministic variants under:
+
+```text
+reference/generated_variants/
+reference/generated_variants/manifest.csv
+```
+
+The generator preserves the base network, distances, vehicle count, route
+duration convention, lambda convention, weights, and station ordering. It
+regenerates capacities and initial/target inventories using recorded seeds and
+stores SHA256 hashes for every output file. These variants are explicitly
+`regenerated_engineering` benchmarks.
+
 ## Reporting Rule
 
 - Historical paper target: use only if the original source file is recovered and
@@ -27,3 +42,6 @@ historical data.
 No regenerated instance result should be described as reproducing a historical
 paper benchmark.
 
+Archive-incumbent rows are also not paper-core default evidence. They may be
+used as diagnostic UB comparisons only, with route plans independently verified
+and with no lower-bound contribution.

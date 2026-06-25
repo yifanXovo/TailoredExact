@@ -8,7 +8,9 @@ The paper-facing exact algorithm is GF-RL-BPC, implemented by
 - Full Gini-frontier decomposition over the original improving Gini range.
 - Elementary route-load columns only.
 - Exact-label route-load pricing under true current RMP duals.
-- Verified route-load incumbents as upper bounds only.
+- Deterministic, verifier-gated paper primal heuristic incumbents as upper
+  bounds only. The default is `--primal-heuristic hga-tgbc` with an explicit
+  seed and bounded number of runs.
 - Projection dominance in exact-safe mode.
 - Movement-domain tightening, projection bounds, and penalty-domain tightening.
 - Vehicle-indexed operation and transfer-flow relaxations.
@@ -28,11 +30,6 @@ The paper-facing exact algorithm is GF-RL-BPC, implemented by
   shortcut: every child interval must be empty, validly bound-fathomed, or
   closed by exact BPC pricing before original-problem optimality can be
   claimed.
-- Verified incumbent archive routes as upper-bound cutoffs only. When
-  `paper-bpc-core` accepts a verified archive incumbent and the incumbent mode
-  is the preset default `auto`, the later BPC-owned auto incumbent portfolio is
-  skipped to avoid duplicate UB-only work. This changes only scheduling and
-  incumbent search time; it never contributes to a lower bound or certificate.
 - Complete route-mask operation-budget cuts only when route-mask enumeration is
   complete for the active instance threshold.
 - Operation-budget relaxation portfolio. Operation-budget route-mask rows are
@@ -52,6 +49,10 @@ The following modules are not paper-core evidence and are disabled by the
 
 - Compact fallback or tailored compact portfolio certificates.
 - Plain CPLEX certificates, except as benchmark rows.
+- Arbitrary incumbent archive scanning. Archive scanning can be enabled
+  explicitly for diagnostics with `--incumbent-archive-auto true`, but it is
+  labeled `diagnostic_archive`, is not paper-reproducible by default, and never
+  contributes lower-bound evidence.
 - Hybrid/ng-DSSR pricing.
 - Two-track relaxed-RMP columns.
 - Relaxed-RMP certificates.
@@ -87,6 +88,8 @@ when:
 - every active interval is complete, empty, or validly bound-fathomed;
 - every BPC tree node used for a certificate has true-dual exact pricing
   closure;
+- heuristic, archive, CPLEX, route-pool, and imported incumbent sources are
+  upper bounds only and have `incumbent_source_contributes_lower_bound=false`;
 - duplicate negative columns, dominance-filtered negative columns, pricing
   time limits, or unfinished pricing enumeration are not treated as closure.
 
@@ -102,15 +105,18 @@ The C++ diagnostic command also checks the output guard directly:
 build\ExactEBRP.exe --method certificate-basis-test --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --out results\paper_core_round_next\raw\certificate_guard_fixtures.json
 ```
 
-## Round-Next Status
+## Current Status With Paper Heuristic UB
 
-The operation-budget relaxation portfolio certifies the regenerated engineering
-V12 benchmarks without BPC-tree pricing:
+After replacing archive scanning with the reproducible paper primal heuristic,
+the regenerated V12 rows are no longer automatically closed by the stronger
+archived incumbent cutoff:
 
-| instance | row | status | objective/LB/UB | runtime | certificate basis |
-|---|---|---|---:|---:|---|
-| V12 M1 average | paper-core 300s | optimal | 0.357200583208 | 265.220702s | all intervals bound-fathomed by inventory/route/Gini relaxation |
-| V12 M2 average | paper-core 300s | optimal | 0.719065249476 | 217.7839095s | all intervals bound-fathomed by inventory/route/Gini relaxation |
+| instance | row | status | UB | LB | gap | certificate basis |
+|---|---|---|---:|---:|---:|---|
+| V12 M1 average | paper-core heuristic 300s | not closed | 0.364375057616 | 0.354350322125 | 0.027512134218 | partial inventory/route/Gini relaxation ledger |
+| V12 M2 average | paper-core heuristic 300s | not closed | 0.756165366387 | 0.688739371450 | 0.089168319437 | partial inventory/route/Gini relaxation ledger |
 
-These are regenerated engineering instances, not confirmed historical paper
-targets. See `docs/benchmark_instance_policy.md`.
+The previous archive-dependent V12 M2 UB `0.719065249476` remains useful as a
+diagnostic target for improving the primal heuristic, but it is not a
+paper-core default input. These are regenerated engineering instances, not
+confirmed historical paper targets. See `docs/benchmark_instance_policy.md`.
