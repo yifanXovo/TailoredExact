@@ -360,6 +360,15 @@ correctly noncertified with the same valid lower bound
 the focused split with valid inventory/route/Gini relaxations before entering
 the branch-price retry.
 
+The same-instance V12 M1 CPLEX benchmark and latest V12 M1 300s paper-core
+validation extend the audit to eighty-three solver JSON rows with zero
+failures. The compact CPLEX row is certified as a `plain_cplex` benchmark on
+`reference\regen_candidate_V12_M1_average.txt` with objective
+`0.357200583208`; it is not used as BPC lower-bound evidence. The corresponding
+paper-core row remains correctly noncertified with `LB=0.344881668930`, gap
+`0.0344873856805`, `unresolved_intervals=4`, and
+`invalid_bound_intervals=0`.
+
 ## Remaining Audit Work
 
 - Add C++ unit-style fixtures that create unsafe `SolveResult` objects and

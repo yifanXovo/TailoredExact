@@ -346,6 +346,26 @@ adaptive split early-stopping via a large retry/focus reserve as the next
 default change: the saved time did not compensate for the weaker depth-8
 relaxation ledger.
 
+After the focused child-relaxation scheduling fix, a fresh V12 M1 300s
+paper-core row was run to check whether the change affects the active depth-8
+children. It does not trigger focused intensification before the time limit and
+therefore matches the archive-skip row: `LB=0.344881668930`,
+`UB=0.357200583208`, gap `0.0344873856805`,
+`unresolved_intervals=4`, and `invalid_bound_intervals=0`. The controlling
+children remain `[0.223250364505,0.226971203914]` and
+`[0.226971203914,0.230692043322]`, both with inherited inventory/route/Gini
+lower bound `0.344881668930`.
+
+A same-instance compact CPLEX benchmark was then run on
+`reference\regen_candidate_V12_M1_average.txt` with the same lambda and route
+duration. The instance hash matches the BPC rows (`a154aff570ee4405`), and
+plain CPLEX certifies `objective=LB=UB=0.357200583208` in `187.3336447s`.
+This confirms that the current BPC incumbent/objective convention agrees with
+the compact benchmark on the regenerated V12 M1 instance. The remaining issue
+is not objective/model mismatch; it is the GF-RL-BPC frontier lower-bound
+closure gap. The BPC 300s row is still noncertified at
+`LB=0.344881668930`, about `3.45%` below the verified incumbent.
+
 ## Required Next Work
 
 - Use the depth-8 interval ledger and the depth-6 1200s per-node/pricing traces to

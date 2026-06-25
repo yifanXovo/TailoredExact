@@ -2405,3 +2405,23 @@ Remaining TODOs:
   `[0.490612227507,0.494357359015]`.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   eighty-one paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Same-Instance V12 M1 CPLEX Benchmark Check
+
+- Ran plain compact CPLEX on the same regenerated instance used by the current
+  paper-core BPC rows:
+  `reference\regen_candidate_V12_M1_average.txt`, hash
+  `a154aff570ee4405`, `lambda=0.15`, and `T=3600`. CPLEX certified
+  `objective=LB=UB=0.357200583208` in `187.3336447s`.
+- Reran V12 M1 paper-core 300s after the focused child-relaxation scheduling
+  change. The row matches the archive-skip plateau:
+  `LB=0.344881668930`, `UB=0.357200583208`, gap `0.0344873856805`,
+  `unresolved_intervals=4`, and `invalid_bound_intervals=0`. Focused
+  intensification does not start before the time limit on this row, so the new
+  child-relaxation scheduling does not affect the V12 M1 300s ledger.
+- The CPLEX row is benchmark evidence only. It confirms that the regenerated
+  V12 M1 BPC objective convention matches the compact model; it does not supply
+  BPC lower-bound proof. The remaining paper-core issue is frontier lower-bound
+  closure on the active V12 M1 leaves.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  eighty-three solver JSON rows and reports zero failures.

@@ -58,6 +58,18 @@ D:\msys64\ucrt64\bin\python.exe scripts\audit_bpc_certificate.py results\paper_b
 D:\msys64\ucrt64\bin\python.exe scripts\summarize_paper_bpc_core.py --raw-dir results\paper_bpc_core\raw --logs-dir results\paper_bpc_core\logs --summary-out results\paper_bpc_core\summary.csv --adaptive-out results\paper_bpc_core\adaptive_split_summary.csv
 ```
 
+Same-instance V12 M1 compact CPLEX benchmark and latest 300s paper-core
+validation:
+
+```powershell
+build\ExactEBRP.exe --method cplex --plain-baseline --input reference\regen_candidate_V12_M1_average.txt --lambda 0.15 --T 3600 --time-limit 300 --out results\paper_bpc_core\raw\v12_m1_regen_plain_cplex_300s.json *> results\paper_bpc_core\logs\v12_m1_regen_plain_cplex_300s.log
+
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --input reference\regen_candidate_V12_M1_average.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-intervals 3 --progress-log results\paper_bpc_core\progress\v12_m1_average_core_300s_focused_child_relax.csv --progress-interval-seconds 60 --out results\paper_bpc_core\raw\v12_m1_average_core_300s_focused_child_relax.json *> results\paper_bpc_core\logs\v12_m1_average_core_300s_focused_child_relax.log
+
+D:\msys64\ucrt64\bin\python.exe scripts\audit_bpc_certificate.py results\paper_bpc_core\raw --csv-out results\paper_bpc_core\audit\certificate_audit.csv --fail-on-error
+D:\msys64\ucrt64\bin\python.exe scripts\summarize_paper_bpc_core.py --raw-dir results\paper_bpc_core\raw --logs-dir results\paper_bpc_core\logs --summary-out results\paper_bpc_core\summary.csv --adaptive-out results\paper_bpc_core\adaptive_split_summary.csv
+```
+
 Label-dominance trace audit:
 
 ```powershell
