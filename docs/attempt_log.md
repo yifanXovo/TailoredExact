@@ -1775,3 +1775,653 @@ Remaining TODOs:
   runs; run the full 300s ablation matrix on a longer compute budget; decide
   whether compact fallback should be automated in a single executable portfolio
   command rather than represented by companion rows.
+
+## 2026-06-25 - Paper-Core Certificate Safety Pass
+
+- Narrowed the paper-facing algorithm scope to GF-RL-BPC:
+  `--method gcap-frontier --algorithm-preset paper-bpc-core`.
+- Tightened `paper-bpc-core` so it uses exact-label elementary-column BPC and
+  disables compact fallback certificates, hybrid/ng-DSSR, two-track relaxed
+  RMP, large diagnostic modes, focus-only shortcuts, imported focus bounds,
+  frontier resume, and iterative closure automation.
+- Added `scripts/audit_bpc_certificate.py` with self-tests for incomplete
+  pricing, duplicate negative-column blockage, partial frontier coverage,
+  disabled route-mask enumeration used as certifying, and original optimality
+  without `certified_original_problem=true`.
+- Added a JSON output guard so original-problem `status=optimal` is not emitted
+  unless the full certificate audit proves `certified_original_problem=true`.
+- V4 paper-core smoke remains certified at objective 0 and passes the external
+  certificate audit.
+- V12 M1 Average 60s paper-core baseline:
+  UB 0.357200583208, LB 0.178600291604, gap 0.5, unresolved intervals 2,
+  controlling interval `4:[0.1786,0.238134]`, noncertified.
+- V12 M2 Average 60s paper-core baseline:
+  UB 0.719065249476, LB 0.359532624738, gap 0.5, unresolved intervals 2,
+  controlling interval `4:[0.359533,0.479377]`, noncertified.
+- Current plateau diagnosis is preliminary: both 60s rows are still controlled
+  by gamma-floor child intervals after relaxation time, not by a fully traced
+  branch-price pricing-closure plateau.
+- TODO: add per-node and per-pricing-call trace output; run 300s/1200s V12 M1
+  and V12 M2 paper-core rows; run plain compact CPLEX only as same-instance
+  benchmark evidence.
+
+## 2026-06-25 - Paper-Core Plateau Trace Artifact
+
+- Added `bpc_trace_json` and `bpc_interval_trace_csv` result fields.
+- `paper-bpc-core` runs with an output path now emit
+  `*.trace.json` and `*.intervals.csv` next to the result JSON.
+- The trace schema `paper_bpc_core_plateau_trace_v1` records the active
+  frontier interval ledger, controlling interval, runtime bucket summary, and
+  aggregate tree/pricing counters.
+- Early zero-objective certificates now emit a minimal trace artifact so V4
+  smoke certificates have the same audit trail.
+- `scripts/audit_bpc_certificate.py` skips trace JSON artifacts by detecting
+  top-level `trace_schema`; it audits only solver result JSON.
+- V4 paper-core smoke still certifies objective 0 and passes the certificate
+  audit. V12 M1 20s trace validation remains noncertified, as expected.
+- Current limitation: branch-price node and pricing-call trace are still
+  aggregate-only (`branch_price_node_trace_available=false`,
+  `pricing_call_trace_available=false`). The next implementation step is
+  instrumentation inside `ColumnGeneration.cpp`/`Pricing.cpp`.
+
+## 2026-06-25 - Paper-Core Interval Trace Refinement
+
+- Extended the interval trace ledger with real per-interval aggregate counters
+  from branch-price tree runs: `bpc_nodes`, `generated_columns`, `cuts`,
+  `pricing_calls`, `pricing_time_seconds`, `rmp_solve_time_seconds`, and
+  `relaxation_time_seconds`.
+- Added a distinct plateau reason,
+  `tree_not_started_before_time_limit_or_reserve`, so queued unresolved leaves
+  are not confused with branch-price trees that started and remain open.
+- Rebuilt with the documented fallback g++ command and reran:
+  - V4 paper-core smoke: certified objective 0, audit passed.
+  - V12 M1 60s: UB 0.357200583208, LB 0.178600291604, gap 0.5,
+    controlling interval `4:[0.1786,0.238134]`,
+    reason `tree_not_started_before_time_limit_or_reserve`, noncertified.
+  - V12 M2 60s: UB 0.719065249476, LB 0.359532624738, gap 0.5,
+    controlling interval `4:[0.359533,0.479377]`,
+    reason `tree_not_started_before_time_limit_or_reserve`, noncertified.
+- Full certificate audit over `results/paper_bpc_core/raw` reports
+  five solver JSON rows and zero failures.
+- Current diagnosis: the 60s V12 rows are controlled by gamma-floor child
+  intervals not yet expanded by BPC; the immediate bottleneck is relaxation
+  time and frontier scheduling before the controlling leaf, not a pricing
+  closure contradiction inside an explored tree.
+
+## 2026-06-25 - Paper-Core Node/Pricing Trace Instrumentation
+
+- Added structured branch-price node trace fragments in
+  `runGiniCapBranchPriceTreeDiagnostic`.
+- Added structured pricing-call trace fragments in the fixed-Gini column
+  generation loop. Each pricing call records vehicle id, dual summary,
+  requested/used pricing engine, reuse flag, generated columns, returned
+  negative columns, route/operation state counts, support-pruning totals, best
+  reduced cost, exact-completion flag, early-negative-stop flag, elapsed time,
+  and unfinished-state count on timeout.
+- `paper_bpc_core_plateau_trace_v1` now embeds `branch_price_nodes` and
+  `pricing_calls` arrays when a branch-price tree starts for an interval.
+- V8 generated tree-trace probe (`regen_V8_M2_average`, 60s diagnostic config)
+  validates the trace path with 53 node trace objects and 100 pricing-call
+  trace objects; the result remains noncertified and audit-safe.
+- V12 M1/M2 60s rows were rerun with the current trace schema. Their
+  node/pricing arrays are empty because the controlling leaves still do not
+  reach a branch-price tree before the time/reserve stop.
+- Full certificate audit over `results/paper_bpc_core/raw` reports six solver
+  JSON rows and zero failures.
+
+## 2026-06-25 - Paper-Core 300s Plateau Audit
+
+- Reran V12 M1 and V12 M2 regenerated Average candidates with
+  `--method gcap-frontier --algorithm-preset paper-bpc-core`, 300s time limit,
+  exact-label elementary-column BPC, progress logs, interval CSV traces, and
+  branch-node/pricing-call JSON traces.
+- V12 M1 300s: UB 0.357200583208, LB 0.268414876140, gap 0.248559804329,
+  unresolved intervals 2, open nodes 5, noncertified. The controlling interval
+  `4:[0.1786,0.238134]` is a queued adaptive-split leaf; explored BPC nodes
+  remain unresolved because pricing did not close.
+- V12 M2 300s: UB 0.719065249476, LB 0.577560696100, gap 0.196789586869,
+  unresolved intervals 2, open nodes 4, noncertified. The controlling interval
+  `4:[0.359533,0.479377]` is queued with an inventory/route/Gini relaxation
+  lower bound; explored BPC nodes also stop with `pricing_did_not_close`.
+- The trace now gives actionable bottleneck evidence: started V12 branch-price
+  nodes are dominated by exact-label pricing state explosion. Representative
+  calls enumerate millions of route states and hundreds of millions of
+  operation states, return negative columns, and therefore cannot certify
+  pricing closure.
+- Full certificate audit over `results/paper_bpc_core/raw` reports eight solver
+  JSON rows and zero failures. Only the V4 smoke row is certified; V8/V12 rows
+  are correctly labeled noncertified.
+- TODO: run 1200s paper-core rows when local budget allows and investigate
+  certificate-safe pricing pruning before making any paper-level V12 closure
+  claim.
+
+## 2026-06-25 - Completion-LB Pricing Pruning Diagnostic
+
+- Implemented exact-label completion lower-bound pruning and exposed it as
+  `--pricing-completion-lb-pruning`.
+- The pruning is certificate-safe: it only skips a pricing label when a
+  true-dual reduced-cost lower bound proves no feasible completion can improve
+  the current best priced column. It is not used as a node-closure shortcut.
+- Added `completion_lb_pruned_labels` to pricing results, BPC/tree aggregates,
+  solver JSON, and per-pricing-call trace records.
+- Rebuilt with the documented fallback g++ command.
+- Validation:
+  - V4 paper-core smoke remains certified at objective 0.
+  - V12 M2 60s paper-core remains noncertified and controlled by a queued leaf;
+    completion pruning does not trigger because that short run still does not
+    reach the controlling BPC pricing plateau.
+  - V8 generated tree-trace probe records
+    `completion_lb_pruned_labels=9559313` at result level and remains
+    noncertified/audit-safe.
+- V12 M1 300s with pruning reaches the same LB/gap as the baseline and reduces
+  captured operation states from about 1.48B to 1.11B in the branch-price
+  pricing-call trace.
+- V12 M2 300s with pruning remains noncertified and produces a weaker LB than
+  the baseline in this row because the controlling split leaf keeps an inherited
+  parent lower bound. The pruning is therefore not enabled by default in
+  `paper-bpc-core`.
+- Full certificate audit over `results/paper_bpc_core/raw` reports fourteen
+  solver JSON rows and zero failures.
+- TODO: investigate why the M2 controlling split leaf does not recover the
+  stronger inventory/route/Gini relaxation lower bound before spending BPC
+  time elsewhere.
+
+## 2026-06-25 - Compatibility-Flow Relaxation Ordering
+
+- Found a certificate-safe scheduling bottleneck in the inventory/route/Gini
+  relaxation audit path. With pickup/drop compatibility enabled, the solver
+  previously solved the compatibility-flow model before the no-compatibility
+  model, then kept the larger valid lower bound. Some low-Gini V12 child
+  intervals are already cutoff-fathomed by the easier no-compatibility model,
+  so solving the compatibility model first could consume the remaining
+  frontier budget and leave sibling split intervals with only an inherited
+  parent lower bound.
+- Changed the relaxation ordering to solve the no-compatibility model first.
+  If that valid relaxation already cutoff-fathoms the interval, the
+  compatibility-flow model is skipped. Otherwise both models are still solved
+  and the maximum valid lower bound is used, preserving certificate semantics.
+- Validation:
+  - V4 paper-core smoke remains certified at objective 0.
+  - V12 M1 300s remains noncertified with the same LB/gap as before
+    (`LB=0.268414876140`, `UB=0.357200583208`, gap `0.248559804329`).
+  - V12 M2 300s improves materially:
+    `LB=0.692627421486`, `UB=0.719065249476`, gap `0.036766938758`.
+    The previous 300s paper-core row had `LB=0.577560696100`, gap
+    `0.196789586869`.
+  - The new V12 M2 plateau is no longer the split child
+    `[0.359532624738,0.479376832984]`; both low/mid children are now
+    bound-fathomed by valid no-compatibility relaxation bounds. The remaining
+    unresolved leaves are `[0.479376832984,0.599221041230]` and
+    `[0.599221041230,0.719065249476]`, both at LB `0.692627421486`.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  seventeen solver JSON rows and zero failures.
+- TODO: focus the next paper-core optimization on the new high-Gini plateau
+  around `[0.479376832984,0.719065249476]`; V12 M2 remains noncertified.
+
+## 2026-06-25 - Split-Before-Tree Frontier Scheduling
+
+- Added `--frontier-split-before-tree` and enabled it in the
+  `paper-bpc-core` preset. The option defers initial branch-price trees on
+  broad adaptive-splittable intervals so child intervals can receive valid
+  relaxation bounds before the solver spends most of its time in exact-label
+  BPC pricing.
+- The change is certificate-neutral: a deferred parent is not certified or
+  counted in the final ledger after replacement; children exactly cover the
+  parent interval and remain unresolved unless they are empty, validly
+  bound-fathomed, or closed by exact branch-price pricing.
+- Validation:
+  - V4 paper-core split-before-tree smoke remains certified at objective 0.
+  - V12 M2 non-split 1200s is noncertified and demonstrates the scheduling
+    regression: `LB=0.469117173935`, `UB=0.719065249476`, gap
+    `0.347601383495`, two unresolved intervals, twelve open nodes, and pricing
+    time about 873s.
+  - V12 M2 split-before-tree 300s is noncertified but improves the best valid
+    paper-core lower bound to `LB=0.696966843140`, `UB=0.719065249476`, gap
+    `0.0307321294594`, with two unresolved intervals and two open nodes.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers twenty
+  solver JSON rows and zero failures.
+- TODO: run a 1200s split-before-tree row and continue diagnosing the remaining
+  high-Gini unresolved leaves. V12 M2 remains noncertified.
+
+## 2026-06-25 - V12 M1 Paper-Core 1200s Plateau Trace
+
+- Ran V12 M1 Average with `paper-bpc-core` for 1200s under the current
+  split-before-tree scheduling.
+- Result remains noncertified: `UB=0.357200583208`,
+  `LB=0.332675660948`, gap `0.0686586848205`,
+  `unresolved_intervals=2`, `open_nodes=2`,
+  `invalid_bound_intervals=0`.
+- The run improves over the earlier 300s paper-core LB
+  `0.268414876140`, but still does not close the original problem.
+- Runtime decomposition shows the remaining bottleneck clearly:
+  pricing `896.6435636s`, master `79.5333302s`, bound/relaxation
+  `211.0970326s`.
+- Active unresolved leaves are `[0.223250364505,0.238133722139]`, still queued
+  without a BPC tree, and `[0.238133722139,0.297667152674]`, which has open
+  BPC nodes.
+- Trace evidence includes 27 branch-price node summaries and 40 pricing-call
+  summaries. The largest exact-label pricing calls enumerate roughly 7.07M
+  route states and 299.9M operation states, so the next algorithmic target is
+  certificate-safe pricing/branch closure rather than another side algorithm.
+- Full certificate audit now covers twenty-one paper-core solver JSON rows and
+  reports zero failures.
+
+## 2026-06-25 - Completion-LB Pruning Retest After Split-Before-Tree
+
+- Reran completion lower-bound pricing pruning under the current
+  split-before-tree paper-core work order for V12 M1 and V12 M2 at 300s.
+- V12 M1 baseline split-before-tree 300s:
+  `LB=0.331296710948`, `UB=0.357200583208`, gap `0.0725191208467`,
+  `unresolved_intervals=3`, `open_nodes=3`.
+- V12 M1 with completion-LB pruning 300s:
+  same `LB=0.331296710948` and same gap, with
+  `completion_lb_pruned_labels=23867430` and slightly lower pricing time
+  (`58.9066437s` vs `66.750391s`).
+- V12 M2 baseline split-before-tree 300s:
+  `LB=0.696966843140`, `UB=0.719065249476`, gap `0.0307321294594`,
+  `unresolved_intervals=2`, `open_nodes=2`.
+- V12 M2 with completion-LB pruning 300s:
+  same `LB=0.696966843140` and same gap, with
+  `completion_lb_pruned_labels=20756309` but higher pricing time
+  (`90.9342476s` vs `70.2706739s`).
+- Conclusion: completion-LB pruning remains certificate-safe but is not
+  evidence-supported as a paper-core default. It should remain an explicit
+  diagnostic/tuning option until it produces a certificate-relevant lower-bound
+  improvement.
+- Added `results/paper_bpc_core/pricing_pruning_diagnostic.csv` and refreshed
+  `results/paper_bpc_core/summary.csv`.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  twenty-four paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - V12 M2 Split-Before-Tree 1200s Paper-Core Row
+
+- Ran V12 M2 Average with the current `paper-bpc-core` split-before-tree
+  scheduling for 1200s.
+- Result remains noncertified but improves the valid lower bound:
+  `UB=0.719065249476`, `LB=0.703291904615`, gap `0.0219359020237`,
+  `unresolved_intervals=1`, `open_nodes=1`, `invalid_bound_intervals=0`.
+- This supersedes the older non-split 1200s row as the relevant long-run
+  paper-core evidence. The older row remains useful only as a scheduling
+  regression diagnostic.
+- The remaining controlling active interval is
+  `[0.479376832984,0.509337885046]`, with lower-bound source
+  `focused_child_inventory_route_gini_relaxation`. The adjacent interval
+  `[0.509337885046,0.539298937107]` is empty/closed by the branch-price tree.
+- Runtime decomposition: pricing `821.1792326s`, master `191.4461219s`,
+  bound/relaxation `160.8085539s`.
+- The trace records exact-label pricing state explosion in the remaining
+  plateau: the largest calls enumerate about 6.3M-6.5M route states and
+  241M-247M operation states, while support-duration pruning remains zero.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  twenty-five paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Paper-Core Adaptive Split Depth 5
+
+- Diagnosed the remaining V12 M2 plateau after the 1200s run. The controlling
+  interval had reached the default adaptive split depth 3, so the solver spent
+  most of the remaining time in exact-label BPC pricing instead of extracting
+  additional child relaxation bounds.
+- Tested deeper adaptive split depths without changing certificate semantics.
+  V12 M2 300s improved monotonically:
+  - depth 3: `LB=0.696966843140`, gap `0.0307321294594`;
+  - depth 4: `LB=0.703291904615`, gap `0.0219359020237`;
+  - depth 5: `LB=0.706200471341`, gap `0.0178909746296`.
+- V12 M1 also improved with depth 5:
+  - depth 3 300s: `LB=0.331296710948`, gap `0.0725191208467`;
+  - depth 3 1200s: `LB=0.332675660948`, gap `0.0686586848205`;
+  - depth 5 300s: `LB=0.340282088370`, gap `0.0473641299419`.
+- Changed paper presets to default `frontier_adaptive_max_depth` to 5 unless
+  the user explicitly provides `--frontier-adaptive-max-depth`. This is
+  certificate-neutral: child intervals exactly cover parent intervals and all
+  active children still need valid bound-fathoming or exact BPC closure.
+- Validation:
+  - V4 paper-core depth-5 smoke remains certified at objective 0.
+  - V12 M1 and V12 M2 depth-5 300s rows remain noncertified but improve valid
+    lower bounds substantially.
+  - Full certificate audit over `results/paper_bpc_core/raw` now covers
+    thirty-one paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - V12 M2 Depth-5 1200s Paper-Core Row
+
+- Ran V12 M2 Average for 1200s using the new paper-core depth-5 default.
+- Result remains noncertified but gives the current best valid V12 M2 lower
+  bound: `UB=0.719065249476`, `LB=0.710439004053`, gap
+  `0.0119964710145`, `unresolved_intervals=2`, `open_nodes=2`,
+  `invalid_bound_intervals=0`.
+- The remaining active leaves are:
+  - `[0.494357359015,0.509337885046]`, queued with
+    inventory/route/Gini LB `0.718272430646`;
+  - `[0.486867096000,0.494357359015]`, with open BPC nodes and tree LB
+    `0.710439004053`.
+- Runtime decomposition remains pricing dominated:
+  pricing `795.3111719s`, master `173.6668023s`, bound/relaxation
+  `216.7553962s`.
+- Trace evidence shows the remaining plateau is exact-label pricing state
+  explosion on a narrow depth-5 child, not broad frontier coverage. The largest
+  pricing calls still enumerate roughly 6.3M-6.5M route states and
+  240M-247M operation states, with support-duration pruning at zero.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  thirty-two paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - V12 M1 Depth-5 1200s Paper-Core Row
+
+- Ran V12 M1 Average for 1200s using the same paper-core depth-5 default.
+- Result remains noncertified and does not improve beyond the 300s depth-5
+  lower bound: `UB=0.357200583208`, `LB=0.340282088370`, gap
+  `0.0473641299419`, `unresolved_intervals=3`, `open_nodes=29`,
+  `invalid_bound_intervals=0`.
+- The controlling active leaf is `[0.230692043322,0.238133722139]`; its lower
+  bound remains inherited from the focused split ledger, and the interval has
+  open BPC nodes at timeout.
+- Runtime remains dominated by exact-label pricing: pricing
+  `804.5765858s`, master `120.9521829s`, and bound/relaxation
+  `269.381414s`.
+- Trace evidence shows per-call exact pricing state explosion on the narrow
+  controlling child: the largest calls enumerate about 6.8M to 6.9M route
+  states and 291M to 297M operation states, while default paper-core support
+  and completion-LB pruning both record zero pruned labels.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  thirty-three paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Exact-Label Label Dominance Trace Audit
+
+- Added aggregate and per-pricing-call counters for exact-label label
+  dominance: comparisons, labels pruned, and cross-pickup dominance prunes.
+- The retained paper-core implementation only counts the existing exact-bucket
+  dominance; cross-pickup dominance is not active in the paper-core path.
+- V4 paper-core smoke remains certified at objective 0.
+- V12 M1 300s label-dominance trace row remains noncertified with the same
+  valid lower bound as the depth-5 default row: `LB=0.340282088370`, gap
+  `0.0473641299419`.
+- The row records `330135991` dominance comparisons and `186012791` labels
+  pruned by exact-bucket dominance. This confirms that label dominance is
+  already a large part of the exact-label pricing workload.
+- A naive cross-pickup dominance implementation was tested locally and rejected
+  because its comparison overhead made V12 M1 pricing slower. It was not kept
+  as a default or reported as a paper-core improvement.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  thirty-five paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - V12 M1 Depth-6 1200s Paper-Core Row
+
+- Ran V12 M1 Average for 1200s using the current paper-core default adaptive
+  split depth 6.
+- Result remains noncertified but improves the valid lower bound:
+  `UB=0.357200583208`, `LB=0.344881668930`, gap `0.0344873856805`,
+  `unresolved_intervals=3`, `open_nodes=4`, and
+  `invalid_bound_intervals=0`.
+- The controlling active leaf is `[0.223250364505,0.230692043322]`. It has a
+  valid inventory/route/Gini lower bound, opens a BPC tree with 27 nodes, and
+  leaves one open node at timeout.
+- Runtime composition shifts after the 300s depth-6 row: pricing
+  `778.7256487s`, master `119.4459118s`, and bound/relaxation
+  `293.5659804s`. The first part of the run is still relaxation/split
+  dominated, but the remaining budget is dominated by exact-label closure on a
+  narrow focused leaf.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  thirty-nine paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Paper-Core Adaptive Split Depth 7
+
+- Increased the paper-core default adaptive split depth from 6 to 7 after the
+  V12 M1 depth-6 1200s trace showed that early branch-price tree work on
+  `[0.223250364505,0.230692043322]` consumed most of the extra budget without
+  closing the frontier.
+- V4 smoke remains certified with objective `0`, `gap=0`,
+  `verifier_passed=true`, and `certified_original_problem=true`.
+- V12 M1 Average default 300s improves from the depth-6 300s lower bound
+  `0.341121462223` to `0.344613240900`, with gap `0.035238862701`.
+  The row remains noncertified with `unresolved_intervals=3` and
+  `invalid_bound_intervals=0`.
+- V12 M2 Average default 300s improves from the depth-6 300s lower bound
+  `0.713690734357` to `0.715075764785`, with gap `0.00554815393275`.
+  The row remains noncertified with `unresolved_intervals=3` and
+  `invalid_bound_intervals=0`.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  forty-two paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Paper-Core Adaptive Split Depth 8
+
+- Increased the paper-core default adaptive split depth from 7 to 8 after the
+  V12 M2 depth-7 ledger remained controlled by a narrow unresolved active
+  child and child relaxation was still cheaper than exact tree closure.
+- V4 smoke remains certified with objective `0`, `gap=0`,
+  `verifier_passed=true`, and `certified_original_problem=true`.
+- V12 M1 Average default 300s is unchanged from depth 7:
+  `UB=0.357200583208`, `LB=0.344613240900`, gap `0.035238862701`,
+  `unresolved_intervals=3`, and `invalid_bound_intervals=0`.
+- V12 M2 Average default 300s improves from the depth-7 lower bound
+  `0.715075764785` to `0.716948330538`, with gap `0.00294398726726`.
+  The row remains noncertified with `unresolved_intervals=3` and
+  `invalid_bound_intervals=0`.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  forty-five paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Depth-9 Split Diagnostic Rejected
+
+- Ran explicit depth-9 300s diagnostics for V12 M1 and V12 M2 using
+  `paper-bpc-core`; the default preset remains depth 8.
+- V12 M1 depth 9 matches depth 8: `LB=0.344613240900`,
+  `UB=0.357200583208`, gap `0.035238862701`,
+  `unresolved_intervals=3`, and `invalid_bound_intervals=0`.
+- V12 M2 depth 9 is worse than depth 8 within the same budget:
+  `LB=0.715075764785`, `UB=0.719065249476`, gap `0.00554815393275`,
+  `unresolved_intervals=3`, and `invalid_bound_intervals=0`.
+- Added `scripts/summarize_paper_bpc_core.py` so the paper-core summary and
+  adaptive-depth diagnostic tables are regenerated from raw JSON and interval
+  ledgers, including a derived controlling interval.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  forty-seven paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Pricing Timer Fix, Trace Completeness, and M1 Scheduling Diagnostics
+
+- Fixed the CG trace path so pricing-call JSON objects are written before a
+  pricing time-limit return. The paper-core plateau trace now records
+  time-limited pricing events instead of reporting only aggregate pricing
+  counters.
+- Fixed a pricing timer bug in the CG layer. The code now passes the actual
+  pricing-call start timestamp to `priceRouteLoadColumnExact` when the time
+  limit is a per-call remaining budget; previously, LP/RMP time could make
+  exact pricing time out immediately with zero states.
+- Ran a one-interval V12 M1 trace validation row; it remains noncertified and
+  diagnostic, but its trace contains a pricing call object with
+  `event=pricing_time_limit`, nonzero route/operation state counts, and
+  `exact_completed=false`.
+- Tested V12 M1 300s with focused intensification disabled at the depth-8
+  default. The result is unchanged: `LB=0.344613240900`, gap
+  `0.035238862701`, with no tree retry before timeout.
+- Added certificate-neutral compaction for exact label-dominance buckets. The
+  compaction removes only indices for labels already marked inactive by the
+  unchanged dominance rule, reducing repeated scans of stale bucket entries.
+- Tested V12 M1 300s with depth 6 and focused intensification disabled to
+  force earlier retry/tree work. It starts tree pricing but is worse:
+  `LB=0.341121462223`, gap `0.0450142629691`. The controlling pricing call
+  now enumerates about `3.51M` route states and `171.5M` operation states before
+  timing out with best reduced cost `-0.00938540151401`. It records
+  `1,239,056` bucket compactions and `17,581,023` compacted stale entries, but
+  the tree remains unresolved with negative reduced cost remaining.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  fifty-three paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Continuous Relaxation Cutoff Precheck
+
+- Added a certificate-safe continuous LP precheck inside the
+  inventory/route/Gini interval relaxation. For V<=12 integer route-mask
+  relaxations, the solver now first solves the continuous relaxation for a very
+  short budget. It returns early only if that LP proves the cutoff model
+  infeasible or has an objective at the incumbent cutoff; otherwise it falls
+  through to the existing integer CPLEX route-mask MIP.
+- This is not a BPC node-closure shortcut. It is a non-pricing lower-bound
+  fathoming shortcut for an interval relaxation, and the JSON result still
+  remains noncertified unless the full frontier certificate conditions hold.
+- V4 paper-core smoke remains certified with objective `0`, `gap=0`,
+  `verifier_passed=true`, and `certified_original_problem=true`.
+- V12 M1 Average 60s with the precheck remains correctly noncertified:
+  `UB=0.357200583208`, `LB=0.242572114996`, gap `0.320907841703`,
+  `unresolved_intervals=1`, and `invalid_bound_intervals=0`. The first low-Gini
+  interval `[0,0.119067]` is cutoff-fathomed by continuous LP infeasibility in
+  about `0.122s`, avoiding the integer route-mask MIP for that interval.
+- V12 M2 Average 60s with the precheck remains correctly noncertified:
+  `UB=0.719065249476`, `LB=0.461969904320`, gap `0.357541051168`,
+  `unresolved_intervals=2`, and `invalid_bound_intervals=0`. The first low-Gini
+  interval `[0,0.239688]` is similarly cutoff-fathomed by the continuous LP
+  precheck.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  fifty-six paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Gated Precheck and Required-Closure Pricing Bound
+
+- Added a gate around the continuous LP cutoff precheck. An ungated 300s V12 M2
+  diagnostic was audit-safe but worse than the current depth-8 row
+  (`LB=0.715075764785` instead of `0.716948330538`) because extra LP prechecks
+  consumed scheduling budget in middle intervals. The precheck now runs only on
+  low/high Gini intervals where it is more likely to cutoff-fathom.
+- With the gate, V12 M2 Average 300s recovers the current best paper-core
+  lower bound: `UB=0.719065249476`, `LB=0.716948330538`, gap
+  `0.00294398726726`, `unresolved_intervals=3`, and
+  `invalid_bound_intervals=0`. It remains noncertified.
+- V12 M1 Average 300s with the gated precheck remains at the current best
+  paper-core lower bound: `UB=0.357200583208`, `LB=0.344613240900`, gap
+  `0.035238862701`, `unresolved_intervals=3`, and
+  `invalid_bound_intervals=0`.
+- Added a required-closure pickup lower bound inside exact-label pricing for
+  Ryan-Foster require-together branches. A partial label that still must include
+  `r` closure stations with current load `L` needs at least
+  `ceil(max(0,r-L)/2)` additional pickup quantity, so labels exceeding the
+  remaining pickup/time budget can be pruned safely. V4 smoke remains certified.
+- The V12 M1 depth-6/no-focused 300s diagnostic still does not close:
+  `LB=0.341121462223`, gap `0.0450142629691`. The controlling pricing call
+  remains time-limited with negative reduced cost `-0.00938540151401`; this
+  confirms that the new branch-feasibility pruning is not yet sufficient to
+  solve the active pricing plateau.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  sixty-three paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Short-Budget Compatibility-Flow Skip
+
+- Added a certificate-neutral scheduling rule inside the paper-core frontier
+  inventory/route/Gini relaxation: when the interval relaxation budget is
+  `<=2.5s`, the solver keeps the valid no-compatibility relaxation bound and
+  skips the pickup/drop compatibility-flow variant. Each affected interval note
+  records `compat_skipped=short_relaxation_budget`. This can only use a weaker
+  valid relaxation, so it cannot create an invalid lower bound or certificate.
+- V4 paper-core smoke remains certified with objective `0`, `gap=0`,
+  `verifier_passed=true`, and `certified_original_problem=true`.
+- V12 M1 Average 300s preserves the current best paper-core lower bound:
+  `UB=0.357200583208`, `LB=0.344613240900`, gap `0.035238862701`,
+  `invalid_bound_intervals=0`. Runtime improves from about `306.36s` to
+  `301.13s`, and bound/route-mask time drops from about `278.89s` to
+  `272.69s`. The row remains noncertified with unresolved leaves.
+- V12 M2 Average 300s also preserves the current best lower bound:
+  `UB=0.719065249476`, `LB=0.716948330538`, gap `0.00294398726726`,
+  `invalid_bound_intervals=0`. Runtime improves from about `318.18s` to
+  `311.75s`, and total bound time drops from about `290.63s` to `284.21s`.
+  The row remains noncertified with three unresolved intervals.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  seventy-one paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Archive Incumbent Duplicate-Search Skip
+
+- Added a paper-core scheduling guard for verified incumbent archives. When
+  `paper-bpc-core` accepts a route-bearing archive incumbent and the incumbent
+  mode is the preset default `auto`, the solver skips the later BPC-owned
+  `auto` incumbent portfolio. The archive incumbent remains an upper-bound
+  cutoff only; no lower-bound proof or certificate evidence is inherited.
+- V4 paper-core smoke remains certified at objective `0`, with
+  `gap=0`, `verifier_passed=true`, and `certified_original_problem=true`.
+- V12 M2 Average 60s improves from `LB=0.359532624738` to
+  `LB=0.692095277420` because the seed stage drops from about `27s` to about
+  `7s`. V12 M2 Average 300s improves from `LB=0.716948330538` to
+  `LB=0.717435865864`, with `UB=0.719065249476`, gap
+  `0.00226597462971`, `unresolved_intervals=3`, and
+  `invalid_bound_intervals=0`.
+- V12 M1 Average 60s improves from `LB=0.178600291604` to
+  `LB=0.268006384720`. V12 M1 Average 300s improves from
+  `LB=0.344613240900` to `LB=0.344881668930`, with
+  `UB=0.357200583208`, gap `0.0344873856805`,
+  `unresolved_intervals=4`, and `invalid_bound_intervals=0`.
+- Both V12 instances remain noncertified. The current bottleneck is still
+  unresolved active frontier leaves controlled by inventory/route/Gini
+  relaxation strength and, for shallower schedules, exact BPC tree closure.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  seventy-six paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Rejected Focus/Compat Scheduling Probes
+
+- Tested a V12 M1 Average 300s adaptive scheduling probe with
+  `--frontier-retry-reserve 75` to preserve time for focused intensification.
+  The row did run one focused split, but it regressed to
+  `LB=0.340282088370`, gap `0.0473641299419`, and
+  `unresolved_intervals=3`, worse than the archive-skip 300s row
+  (`LB=0.344881668930`). This rejects large adaptive early-stop reserves as a
+  default paper-core change.
+- Tested a V12 M2 Average 300s probe with
+  `--frontier-focused-relax-seconds 2.5` to make focused passes cheaper. It
+  regressed to `LB=0.715075764785`, gap `0.00554815393275`, and
+  `unresolved_intervals=3`, worse than the archive-skip 300s row
+  (`LB=0.717435865864`). This rejects shorter focused relaxation budgets as a
+  default.
+- Temporary source probes that raised the short-budget compat-flow skip
+  threshold or skipped compat-flow when no-compat was already above the current
+  frontier minimum were also tested locally and reverted because they degraded
+  V12 M2 60s lower bounds. Their raw outputs were not retained because they are
+  not reproducible from the final source tree.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  seventy-eight paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - V12 M2 Archive-Skip 1200s Long Run
+
+- Ran the current `paper-bpc-core` archive-incumbent scheduling path on V12 M2
+  Average for a 1200s budget. The row remains correctly noncertified:
+  `UB=0.719065249476`, `LB=0.717435865864`, gap `0.00226597462971`,
+  `unresolved_intervals=4`, `invalid_bound_intervals=0`, and `open_nodes=30`.
+- The run confirms that extending the archive-skip configuration from 300s to
+  1200s does not close the current plateau. Runtime is dominated by exact BPC
+  work inside a narrow high-Gini leaf: `pricing_time_seconds=743.3654876`,
+  `master_time_seconds=130.9071279`, and `bound_time_seconds=339.5201322`.
+  The controlling active interval is `[0.492484793261,0.494357359015]`, with
+  lower-bound source `focused_split_inherited_parent_lb`.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  seventy-nine paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Focused Split Child-Relaxation Scheduling
+
+- The V12 M2 1200s trace showed that focused intensification split a
+  controlling interval but only solved the first child relaxation before
+  starting an expensive branch-price retry on the other inherited child. That
+  retry spent about `743s` in pricing without improving the valid interval
+  lower bound.
+- Updated focused split scheduling so every child is attempted in best-bound
+  order with the focused inventory/route/Gini relaxation budget before the
+  branch-price retry pass begins. The child relaxation time and relaxation
+  lower bound are now also recorded on the child interval.
+- V4 paper-core smoke remains certified with objective `0`, `gap=0`,
+  `verifier_passed=true`, and `certified_original_problem=true`.
+- V12 M2 Average 1200s remains noncertified, but the ledger improves:
+  `LB=0.717435865864`, `UB=0.719065249476`, gap `0.00226597462971`,
+  `unresolved_intervals=3`, `invalid_bound_intervals=0`, and `open_nodes=29`.
+  The additional child relaxation raises `[0.489675944630,0.490612227507]` to
+  `LB=0.717884613415`; the remaining controlling interval is
+  `[0.490612227507,0.494357359015]`.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  eighty-one paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Same-Instance V12 M1 CPLEX Benchmark Check
+
+- Ran plain compact CPLEX on the same regenerated instance used by the current
+  paper-core BPC rows:
+  `reference\regen_candidate_V12_M1_average.txt`, hash
+  `a154aff570ee4405`, `lambda=0.15`, and `T=3600`. CPLEX certified
+  `objective=LB=UB=0.357200583208` in `187.3336447s`.
+- Reran V12 M1 paper-core 300s after the focused child-relaxation scheduling
+  change. The row matches the archive-skip plateau:
+  `LB=0.344881668930`, `UB=0.357200583208`, gap `0.0344873856805`,
+  `unresolved_intervals=4`, and `invalid_bound_intervals=0`. Focused
+  intensification does not start before the time limit on this row, so the new
+  child-relaxation scheduling does not affect the V12 M1 300s ledger.
+- The CPLEX row is benchmark evidence only. It confirms that the regenerated
+  V12 M1 BPC objective convention matches the compact model; it does not supply
+  BPC lower-bound proof. The remaining paper-core issue is frontier lower-bound
+  closure on the active V12 M1 leaves.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  eighty-three solver JSON rows and reports zero failures.

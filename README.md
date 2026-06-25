@@ -24,6 +24,28 @@ g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluat
 build\ExactEBRP.exe --method gcap-frontier --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --time-limit 30 --frontier-intervals 3 --frontier-retry-passes 1 --frontier-final-closure true --frontier-final-nodes 31 --gcap-pricing-columns 4 --column-dominance true --column-dominance-mode exact --projection-bound true --penalty-domain-tightening true --out results\optimization_update\raw\smoke_gcap_frontier_full.json
 ```
 
+## Paper Core Scope
+
+The paper-facing exact algorithm is GF-RL-BPC: `--method gcap-frontier`
+with `--algorithm-preset paper-bpc-core`. This preset uses elementary
+route-load columns and exact-label pricing only. It explicitly disables
+compact fallback certificates, hybrid/ng-DSSR pricing, two-track relaxed RMP,
+large-instance diagnostics, focus-only runs, imported focus bounds, frontier
+resume, and iterative-closure shortcuts.
+
+Compact/CPLEX, imported incumbents, route-pool incumbents, and HGA outputs may
+be used only as benchmark rows or verified upper-bound sources. They must not
+contribute a BPC lower bound or BPC certificate. Use the audit script before
+reporting any BPC result:
+
+```powershell
+python scripts\audit_bpc_certificate.py results\paper_bpc_core\raw --csv-out results\paper_bpc_core\certificate_audit.csv --fail-on-error
+```
+
+The solver also guards JSON output: an original-problem run with
+`status=optimal` is downgraded before writing if the full certificate audit
+does not prove `certified_original_problem=true`.
+
 ## New Optimization Options
 
 - `--column-dominance true|false`: enable exact-safe route-load projection dominance.
@@ -34,20 +56,26 @@ build\ExactEBRP.exe --method gcap-frontier --input testdata\examples\gcap_smoke_
 - `--movement-bound-audit true|false`: compute interval relaxation bounds with and without movement-domain tightening and record/use the stronger valid bound.
 - `--frontier-best-bound-scheduling true|false`: process frontier intervals by deterministic valid lower-bound priority instead of raw interval order.
 - `--frontier-relaxation-cache true|false`: reuse exact-key interval relaxation bounds across retry passes.
+- `--frontier-split-before-tree true|false`: for adaptive frontier runs, defer
+  initial branch-price trees on broad splittable intervals until after the
+  interval is split and child relaxations are attempted. This is a scheduling
+  option only; it does not change certificate requirements.
 - `--support-duration-pruning true|false`: prune exact pricing labels whose station support contains a subset proven route-duration infeasible.
 - `--support-duration-max-subset-size N`: maximum station subset size used for support-duration pruning precomputation.
+- `--pricing-completion-lb-pruning true|false`: prune an exact-label pricing label only when a valid reduced-cost lower bound proves no completion can improve the current best priced column. This is certificate-safe but remains an explicit tuning option rather than the default paper-core setting.
 - `--route-mask-support-duration-pruning true|false`: apply the same exact-safe support-duration infeasibility test to complete route-mask relaxation masks.
 - `--frontier-focused-min-lb-retry true|false`: spend retry time on the unresolved frontier interval with the smallest valid lower bound.
 - `--frontier-focused-intensification true|false`: reserve time to rerun stronger relaxations on the current minimum-LB unresolved interval.
 - `--frontier-focused-reserve-fraction x`: fraction of the time limit reserved for focused intensification.
 - `--frontier-adaptive-split true|false`: split the current minimum-LB unresolved Gini interval into exactly covering child intervals.
-- `--frontier-adaptive-max-depth N`: maximum adaptive split depth for a frontier leaf interval.
+- `--frontier-adaptive-max-depth N`: maximum adaptive split depth for a frontier leaf interval. The `paper-bpc-core` and `paper-exact-portfolio` presets default this to 8 unless explicitly overridden, because depth-8 certificate-neutral child relaxations gave the best current V12 M1/M2 lower-bound progress before expensive BPC tree pricing.
 - `--route-mask-operation-budget-cuts true|false`: add mask-specific pickup-operation budget rows to the route-mask relaxation using depot-cycle lower bounds.
 - `--route-pool-incumbent true|false`: collect verified BPC-generated route-load columns and solve a true-objective restricted route-column incumbent master for upper bounds only.
 - `--route-pool-max-columns-per-vehicle N`: cap stored route-pool columns per vehicle after projection dominance.
 - `--pickup-drop-compat-flow true|false`: strengthen the inventory/route/Gini relaxation with pickup-to-drop compatibility flow variables when pairs can be safely screened by route-duration lower bounds.
 - `--pickup-drop-transfer-cap-flow true|false`: add safe quantity upper bounds to pickup-drop transfer variables from travel/handling lower bounds and capacities.
 - `--bpc-incumbent auto|best-of-all`: run a bounded verified incumbent portfolio and select the best true-objective route plan as an upper bound.
+- `--incumbent-archive-auto true|false --incumbent-archive-dir <dir>`: scan prior route-bearing results for verified upper-bound route plans. In `paper-bpc-core`, if this archive supplies a verified incumbent, the default BPC-owned `auto` incumbent portfolio is skipped to avoid duplicate UB-only work; no lower-bound certificate is inherited from the archive.
 - `--progress-log <path> --progress-interval-seconds <seconds>`: write frontier progress checkpoints for convergence reporting.
 - `--support-feasibility-oracle true|false`: reserved switch for exact small-support infeasibility checking; default is false and heuristic support cuts are not generated.
 - `--incumbent-json <path> --incumbent-format exact_result --incumbent-source-name <name>`: import a verified incumbent route solution as an upper-bound/cutoff source only.

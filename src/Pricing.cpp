@@ -305,6 +305,10 @@ private:
     }
 
     long long labelKey(int mask, int last, int load, int pickup) const {
+        return labelKeyForPickup(mask, last, load, pickup);
+    }
+
+    long long labelKeyForPickup(int mask, int last, int load, int pickup) const {
         const long long v = static_cast<long long>(instance_.V + 1);
         const long long q = static_cast<long long>(instance_.Q[vehicle_] + 1);
         const int pickup_budget = maxPickupBudget();
@@ -359,6 +363,15 @@ private:
             return true;
         }
         return violatesForbiddenTogether(closure);
+    }
+
+    int minAdditionalPickupForRequiredClosure(int mask, int load) const {
+        if (mask == 0) return 0;
+        const int missing = (requiredClosureMask(mask) & fullStationMask()) & ~mask;
+        const int missing_count = popcount(missing);
+        if (missing_count <= 0) return 0;
+        const int uncovered_by_current_load = std::max(0, missing_count - load);
+        return (uncovered_by_current_load + 1) / 2;
     }
 
     int fullStationMask() const {
@@ -596,7 +609,36 @@ private:
     }
 
     bool labelDominates(const RouteLabel& a, const RouteLabel& b) const {
-        return a.cost <= b.cost + 1e-12 && a.travel <= b.travel + 1e-9;
+        return a.pickup <= b.pickup &&
+            a.cost <= b.cost + 1e-12 &&
+            a.travel <= b.travel + 1e-9;
+    }
+
+    bool shouldCompactLabelBucket(const std::vector<int>& bucket,
+                                  int inactive_count) const {
+        if (inactive_count <= 0) return false;
+        const int bucket_size = static_cast<int>(bucket.size());
+        if (bucket_size < 16) return false;
+        return inactive_count >= 64 || inactive_count * 2 >= bucket_size;
+    }
+
+    void compactLabelBucket(std::vector<int>& bucket,
+                            const std::vector<RouteLabel>& labels,
+                            int inactive_hint) {
+        if (!shouldCompactLabelBucket(bucket, inactive_hint)) return;
+        const std::size_t old_size = bucket.size();
+        bucket.erase(
+            std::remove_if(bucket.begin(), bucket.end(), [&](int idx) {
+                return idx < 0 || idx >= static_cast<int>(labels.size()) ||
+                    !labels[idx].active;
+            }),
+            bucket.end());
+        const long long compacted =
+            static_cast<long long>(old_size - bucket.size());
+        if (compacted > 0) {
+            ++result_.label_dominance_bucket_compactions;
+            result_.label_dominance_compacted_entries += compacted;
+        }
     }
 
     bool insertLabel(std::vector<RouteLabel>& labels,
@@ -606,14 +648,32 @@ private:
         const long long key = labelKey(label.mask, label.last, label.load, label.pickup);
         auto [it, inserted] = buckets.emplace(key, std::vector<int>{});
         std::vector<int>& bucket = it->second;
+        int inactive_seen = 0;
+        for (int idx : bucket) {
+            if (!labels[idx].active) {
+                ++inactive_seen;
+                continue;
+            }
+            ++result_.label_dominance_comparisons;
+            if (labelDominates(labels[idx], label)) {
+                ++result_.label_dominance_pruned_labels;
+                result_.label_dominance_inactive_entries_skipped += inactive_seen;
+                compactLabelBucket(bucket, labels, inactive_seen);
+                return false;
+            }
+        }
+        int deactivated = 0;
         for (int idx : bucket) {
             if (!labels[idx].active) continue;
-            if (labelDominates(labels[idx], label)) return false;
+            ++result_.label_dominance_comparisons;
+            if (labelDominates(label, labels[idx])) {
+                labels[idx].active = false;
+                ++result_.label_dominance_pruned_labels;
+                ++deactivated;
+            }
         }
-        for (int idx : bucket) {
-            if (!labels[idx].active) continue;
-            if (labelDominates(label, labels[idx])) labels[idx].active = false;
-        }
+        result_.label_dominance_inactive_entries_skipped += inactive_seen;
+        compactLabelBucket(bucket, labels, inactive_seen + deactivated);
         const int label_idx = static_cast<int>(labels.size());
         labels.push_back(label);
         bucket.push_back(label_idx);
@@ -741,8 +801,10 @@ private:
             for (long long key : keys_by_mask[mask]) {
                 auto it = buckets.find(key);
                 if (it == buckets.end()) continue;
-                const std::vector<int> bucket = it->second;
-                for (int label_idx : bucket) {
+                const std::vector<int>& bucket = it->second;
+                for (std::size_t bucket_pos = 0; bucket_pos < bucket.size();
+                     ++bucket_pos) {
+                    const int label_idx = bucket[bucket_pos];
                     if (shouldStop()) return;
                     if (label_idx < 0 || label_idx >= static_cast<int>(labels.size())) continue;
                     const RouteLabel label = labels[label_idx];
@@ -758,14 +820,23 @@ private:
                         result_.has_column &&
                         completionReducedCostLowerBound(label) >=
                             result_.best_reduced_cost - 1e-12) {
+                        ++result_.completion_lb_pruned_labels;
                         continue;
                     }
                     if (label.last > 0) {
                         const double closure_travel_lb =
                             requiredClosureTravelLowerBound(label.mask, label.last, label.travel);
+                        const int min_required_pickup =
+                            minAdditionalPickupForRequiredClosure(label.mask, label.load);
+                        if (label.pickup + min_required_pickup > pickup_budget) {
+                            ++result_.required_closure_pruned_labels;
+                            continue;
+                        }
                         if (closure_travel_lb +
-                                (instance_.pickup_time + instance_.drop_time) * label.pickup >
+                                (instance_.pickup_time + instance_.drop_time) *
+                                    (label.pickup + min_required_pickup) >
                                 instance_.total_time_limit + 1e-9) {
+                            ++result_.required_closure_pruned_labels;
                             continue;
                         }
                         if (considerClosedLabel(label, label_idx)) {
@@ -825,10 +896,24 @@ private:
                             next.travel = next_travel;
                             next.cost = label.cost + station_cost
                                 + (duals_.pickup_cost + stationOperationCost(station)) * p;
+                            const int min_required_pickup =
+                                minAdditionalPickupForRequiredClosure(next_mask, next.load);
+                            if (next.pickup + min_required_pickup > pickup_budget) {
+                                ++result_.required_closure_pruned_labels;
+                                continue;
+                            }
+                            if (closure_travel_lb +
+                                    (instance_.pickup_time + instance_.drop_time) *
+                                        (next.pickup + min_required_pickup) >
+                                    instance_.total_time_limit + 1e-9) {
+                                ++result_.required_closure_pruned_labels;
+                                continue;
+                            }
                             if (options_.use_completion_lb_pruning &&
                                 result_.has_column &&
                                 completionReducedCostLowerBound(next) >=
                                     result_.best_reduced_cost - 1e-12) {
+                                ++result_.completion_lb_pruned_labels;
                                 continue;
                             }
                             insertLabel(labels, buckets, keys_by_mask, next);
@@ -855,10 +940,24 @@ private:
                             next.travel = next_travel;
                             next.cost = label.cost + station_cost
                                 - stationOperationCost(station) * d;
+                            const int min_required_pickup =
+                                minAdditionalPickupForRequiredClosure(next_mask, next.load);
+                            if (next.pickup + min_required_pickup > pickup_budget) {
+                                ++result_.required_closure_pruned_labels;
+                                continue;
+                            }
+                            if (closure_travel_lb +
+                                    (instance_.pickup_time + instance_.drop_time) *
+                                        (next.pickup + min_required_pickup) >
+                                    instance_.total_time_limit + 1e-9) {
+                                ++result_.required_closure_pruned_labels;
+                                continue;
+                            }
                             if (options_.use_completion_lb_pruning &&
                                 result_.has_column &&
                                 completionReducedCostLowerBound(next) >=
                                     result_.best_reduced_cost - 1e-12) {
+                                ++result_.completion_lb_pruned_labels;
                                 continue;
                             }
                             insertLabel(labels, buckets, keys_by_mask, next);
@@ -972,12 +1071,19 @@ private:
             const int station = path_[pos];
             const double op_cost = stationOperationCost(station);
             for (int load = 0; load <= q_capacity; ++load) {
+                double best_lower_pickup_cost = std::numeric_limits<double>::infinity();
                 for (int pickup = 0; pickup <= budget; ++pickup) {
                     const OpLabel& label = dp[static_cast<std::size_t>(
                         idx(pos, load, pickup))];
                     if (!std::isfinite(label.cost)) continue;
+                    if (best_lower_pickup_cost <= label.cost + 1e-12) {
+                        ++result_.operation_dp_dominance_pruned_states;
+                        continue;
+                    }
                     ++result_.operation_states;
                     if ((result_.operation_states & 0x3fff) == 0 && shouldStop()) return;
+                    best_lower_pickup_cost =
+                        std::min(best_lower_pickup_cost, label.cost);
                     if (nonnegative_costs_ && result_.has_column) {
                         const int min_extra_pickup = (pickup == 0) ? 1 : 0;
                         const double lb = duals_.constant

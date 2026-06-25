@@ -730,3 +730,97 @@ The result-integrity audit over the new raw JSON files reported no failures.
 No new original-problem certificate was obtained beyond the existing V4 smoke
 certificate. Compact fallback companion rows were run for V12 M1/M2 but remained
 time-limited and noncertified; plain CPLEX benchmark comparisons were skipped.
+
+## Paper-Core Follow-Up: Deeper Certificate-Neutral Frontier Splitting
+
+After narrowing the paper-facing algorithm to GF-RL-BPC
+(`gcap-frontier`/`paper-bpc-core`), the main plateau was traced to broad
+frontier intervals reaching branch-price trees before child relaxation bounds
+were fully exploited. The paper presets now default adaptive split depth to 8
+unless the command line overrides it. This is a
+scheduling/ledger granularity change only: replaced parent intervals are
+ignored, child intervals exactly cover the same Gini range, and original-problem
+certification still requires all active children to be empty, validly
+bound-fathomed, or closed by exact BPC pricing.
+
+| Instance | Row | Status | UB | LB | Gap | Certified |
+|---|---|---|---:|---:|---:|---|
+| V4 smoke | paper-core depth 5 | optimal | 0 | 0 | 0 | yes |
+| V12 M1 average | depth 3 300s | not closed | 0.357200583208 | 0.331296710948 | 0.072519120847 | no |
+| V12 M1 average | depth 5 300s | not closed | 0.357200583208 | 0.340282088370 | 0.047364129942 | no |
+| V12 M1 average | depth 5 1200s | not closed | 0.357200583208 | 0.340282088370 | 0.047364129942 | no |
+| V12 M1 average | depth 6 300s | not closed | 0.357200583208 | 0.341121462223 | 0.045014262969 | no |
+| V12 M1 average | depth 6 1200s | not closed | 0.357200583208 | 0.344881668930 | 0.034487385681 | no |
+| V12 M1 average | depth 7 300s | not closed | 0.357200583208 | 0.344613240900 | 0.035238862701 | no |
+| V12 M1 average | depth 8 300s | not closed | 0.357200583208 | 0.344613240900 | 0.035238862701 | no |
+| V12 M1 average | depth 9 300s | not closed | 0.357200583208 | 0.344613240900 | 0.035238862701 | no |
+| V12 M2 average | depth 3 300s | not closed | 0.719065249476 | 0.696966843140 | 0.030732129459 | no |
+| V12 M2 average | depth 5 300s | not closed | 0.719065249476 | 0.706200471341 | 0.017890974630 | no |
+| V12 M2 average | depth 5 1200s | not closed | 0.719065249476 | 0.710439004053 | 0.011996471 | no |
+| V12 M2 average | depth 6 300s | not closed | 0.719065249476 | 0.713690734357 | 0.007474307962 | no |
+| V12 M2 average | depth 7 300s | not closed | 0.719065249476 | 0.715075764785 | 0.005548153933 | no |
+| V12 M2 average | depth 8 300s | not closed | 0.719065249476 | 0.716948330538 | 0.002943987267 | no |
+| V12 M2 average | depth 9 300s | not closed | 0.719065249476 | 0.715075764785 | 0.005548153933 | no |
+
+The V12 rows remain noncertified, but the lower-bound improvements are valid
+inventory/route/Gini relaxation evidence in the full frontier ledger. The
+certificate audit over `results/paper_bpc_core/raw` reported zero failures.
+The V12 M1 1200s depth-6 row improves the valid lower bound beyond the 300s
+depth-6 row, but it still does not certify the original problem. The first 300s
+are dominated by child relaxation and focused splitting; the remaining budget is
+dominated by exact-label pricing/tree closure on
+`[0.223250364505,0.230692043322]`, which leaves one BPC node open at timeout.
+Depth 7 recovers nearly the same V12 M1 lower bound in 300s without entering
+expensive pricing, and it further improves V12 M2 to a 0.55% valid gap in 300s.
+Depth 8 is neutral on V12 M1 but improves V12 M2 again to a 0.29% valid gap in
+300s, still with three unresolved active intervals and no original-problem
+certificate.
+Depth 9 was tested explicitly but rejected as a default: it does not improve
+V12 M1 and is worse than depth 8 on V12 M2 within 300s.
+
+The follow-up V12 M1 scheduling diagnostic tested whether the default should
+start tree work earlier. Disabling focused intensification at depth 8 leaves
+the 300s bound unchanged, and forcing a shallower depth-6 ledger with no
+focused intensification starts tree pricing but lowers the 300s LB to
+`0.341121462223`. The latter row now records per-pricing-call trace objects
+before time-limit returns. A pricing timer bug was fixed in this path so the
+pricer receives the actual pricing-call start timestamp when its budget is a
+remaining per-call budget. After the fix, the controlling time-limited pricing
+call enumerates real states instead of immediately timing out. A subsequent
+exact label-dominance bucket compaction removes stale inactive label indices
+without changing the dominance rule. The refreshed depth-6 diagnostic enumerates
+about `3.51M` route states and `171.5M` operation states, records `1,239,056`
+bucket compactions and `17,581,023` compacted entries, and still returns with
+negative reduced cost remaining. This supports keeping depth 8 as the default
+and moving the next optimization effort to pricing-state reduction or stronger
+valid relaxation on the depth-8 active children.
+
+The follow-up label-dominance trace audit did not change the algorithmic
+certificate path, but it makes the pricing plateau easier to explain. V12 M1
+300s records `330135991` label-dominance comparisons and `186012791` exact
+label prunes while preserving the same noncertified LB/gap. A naive
+cross-pickup dominance experiment was rejected because the extra comparisons
+made pricing slower; it is not part of the paper-core preset.
+
+The next bound-time cleanup added a continuous LP cutoff precheck before the
+integer V<=12 route-mask MIP used in the inventory/route/Gini relaxation. The
+precheck is certificate-safe because it only exits early when the continuous
+relaxation of the same cutoff model proves infeasibility or reaches the
+incumbent cutoff; otherwise the existing integer MIP still runs. V4 remains
+certified at objective 0. In 60s V12 diagnostics, the precheck fathoms the
+first low-Gini interval for both M1 (`[0,0.119067]`) and M2
+(`[0,0.239688]`) before the integer route-mask MIP. These rows are still
+noncertified (`M1 LB=0.242572114996`, `M2 LB=0.461969904320`) and are recorded
+only as evidence that easy cutoff-fathomed intervals can be skipped more
+cheaply. The depth-8 300s V12 plateau remains controlled by later active
+children and still needs stronger valid relaxation or exact pricing closure.
+
+The precheck is now gated to low/high Gini ranges. An ungated V12 M2 300s
+diagnostic was rejected because it only reached `LB=0.715075764785`, below the
+current depth-8 best. The gated row restores the best V12 M2 300s valid lower
+bound `0.716948330538`, while V12 M1 300s remains at
+`0.344613240900`. A required-closure pickup lower bound was also added to the
+exact-label pricer for Ryan-Foster require-together branches. It is a safe
+partial-label feasibility bound, but current V12 diagnostics still show
+time-limited pricing with negative reduced cost remaining; it is not sufficient
+by itself to close the plateau.

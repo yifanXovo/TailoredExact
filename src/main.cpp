@@ -54,12 +54,14 @@ void usage() {
         << "[--projection-bound true|false] [--penalty-domain-tightening true|false] "
         << "[--movement-domain-tightening true|false] [--movement-bound-audit true|false] "
         << "[--frontier-best-bound-scheduling true|false] [--frontier-relaxation-cache true|false] "
+        << "[--frontier-split-before-tree true|false] "
         << "[--frontier-column-cache true|false] [--frontier-focused-min-lb-retry true|false] "
         << "[--frontier-focused-intensification true|false] [--frontier-focused-reserve-fraction <fraction>] "
         << "[--frontier-focused-relax-seconds <seconds>] [--frontier-focused-max-passes <N>] "
         << "[--frontier-adaptive-split true|false] [--frontier-adaptive-max-depth <N>] "
         << "[--frontier-adaptive-min-width <width>] [--frontier-adaptive-split-factor <N>] "
         << "[--support-duration-pruning true|false] [--support-duration-max-subset-size <N>] "
+        << "[--pricing-completion-lb-pruning true|false] "
         << "[--route-mask-support-duration-pruning true|false] [--route-mask-operation-budget-cuts true|false] [--support-feasibility-oracle true|false] "
         << "[--route-pool-incumbent true|false] [--route-pool-max-columns-per-vehicle <N>] "
         << "[--route-pool-keep-best-per-projection true|false] "
@@ -166,6 +168,20 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.dssr_close_relaxed_pricing = false;
         opt.cg_dual_stabilization = "none";
         opt.dssr_final_exact = true;
+        opt.large_instance_mode = "off";
+        opt.large_lb_mode = "none";
+        opt.frontier_focus_only = false;
+        opt.frontier_focus_interval_id = "auto";
+        opt.frontier_focus_range.clear();
+        opt.frontier_focus_from_result.clear();
+        opt.frontier_focus_leaf_id = "auto";
+        opt.frontier_import_interval_bound_paths.clear();
+        opt.frontier_resume_state_path.clear();
+        opt.frontier_resume_interval_id = "auto";
+        opt.frontier_iterative_closure = false;
+        opt.frontier_closure_mode = "auto";
+        opt.pricing_final_verifier = false;
+        opt.frontier_column_cache = false;
         opt.column_dominance = true;
         opt.column_dominance_mode = "exact";
         opt.gcap_pricing_columns = std::max(opt.gcap_pricing_columns, 4);
@@ -180,6 +196,11 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.branch_operation_mode = true;
         opt.frontier_best_bound_scheduling = true;
         opt.frontier_relaxation_cache = true;
+        opt.frontier_split_before_tree = true;
+        if (!opt.frontier_adaptive_max_depth_explicit) {
+            opt.frontier_adaptive_max_depth =
+                std::max(opt.frontier_adaptive_max_depth, 8);
+        }
         opt.bpc_incumbent = (opt.bpc_incumbent == "none" || opt.bpc_incumbent.empty())
             ? "auto" : opt.bpc_incumbent;
         opt.compact_fallback_enabled =
@@ -278,6 +299,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--movement-bound-audit") opt.movement_bound_audit = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-best-bound-scheduling") opt.frontier_best_bound_scheduling = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-relaxation-cache") opt.frontier_relaxation_cache = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-split-before-tree") opt.frontier_split_before_tree = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-column-cache") opt.frontier_column_cache = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-focused-min-lb-retry") opt.frontier_focused_min_lb_retry = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-focused-intensification") opt.frontier_focused_intensification = parseBoolValue(requireValue(i, argc, argv));
@@ -285,11 +307,15 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--frontier-focused-relax-seconds") opt.frontier_focused_relax_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--frontier-focused-max-passes") opt.frontier_focused_max_passes = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--frontier-adaptive-split") opt.frontier_adaptive_split = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--frontier-adaptive-max-depth") opt.frontier_adaptive_max_depth = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--frontier-adaptive-max-depth") {
+            opt.frontier_adaptive_max_depth = std::stoi(requireValue(i, argc, argv));
+            opt.frontier_adaptive_max_depth_explicit = true;
+        }
         else if (arg == "--frontier-adaptive-min-width") opt.frontier_adaptive_min_width = std::stod(requireValue(i, argc, argv));
         else if (arg == "--frontier-adaptive-split-factor") opt.frontier_adaptive_split_factor = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--support-duration-pruning") opt.support_duration_pruning = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--support-duration-max-subset-size") opt.support_duration_max_subset_size = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--pricing-completion-lb-pruning") opt.pricing_completion_lb_pruning = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--route-mask-support-duration-pruning") opt.route_mask_support_duration_pruning = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--route-mask-operation-budget-cuts") opt.route_mask_operation_budget_cuts = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--support-feasibility-oracle") opt.support_feasibility_oracle = parseBoolValue(requireValue(i, argc, argv));
@@ -642,6 +668,7 @@ void applyPricingOptionsFromSolve(const ebrp::Instance& instance,
         opt.dssr_relaxed_closure_max_labels;
     pricing.dssr_relaxed_closure_checkpoint =
         opt.dssr_relaxed_closure_checkpoint;
+    pricing.use_completion_lb_pruning = opt.pricing_completion_lb_pruning;
 }
 
 void initializeScalabilityFields(const ebrp::Instance& instance,
@@ -784,14 +811,17 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         snapshot.preset_certificate_scope = "core_bpc_certificate_when_frontier_closes";
         snapshot.preset_experimental_features_enabled = "none";
         snapshot.preset_disabled_features =
-            "compact_fallback,hybrid_ng_dssr,two_track_relaxed_rmp,large_diagnostic";
+            "compact_fallback,hybrid_ng_dssr,two_track_relaxed_rmp,"
+            "large_diagnostic,focus_only,imported_focus_bounds,"
+            "frontier_resume,iterative_closure";
         snapshot.preset_reason = "paper core exact BPC with elementary columns only";
     } else if (snapshot.algorithm_preset == "paper-exact-portfolio") {
         snapshot.preset_certificate_scope =
             "bpc_or_compact_module_certificate_when_gap_closes";
         snapshot.preset_experimental_features_enabled = "none";
         snapshot.preset_disabled_features =
-            "hybrid_ng_dssr,two_track_relaxed_rmp,large_diagnostic";
+            "hybrid_ng_dssr,two_track_relaxed_rmp,large_diagnostic,"
+            "focus_only,imported_focus_bounds,frontier_resume,iterative_closure";
         snapshot.preset_reason = "recommended robust exact portfolio";
     } else if (snapshot.algorithm_preset == "paper-bpc-experimental") {
         snapshot.preset_certificate_scope =
@@ -1201,6 +1231,21 @@ void mergePricingStats(const ebrp::PricingResult& priced,
         priced.support_duration_strong_pruned_labels;
     result.support_duration_strong_pruned_columns +=
         priced.support_duration_strong_pruned_columns;
+    result.completion_lb_pruned_labels += priced.completion_lb_pruned_labels;
+    result.required_closure_pruned_labels +=
+        priced.required_closure_pruned_labels;
+    result.label_dominance_comparisons += priced.label_dominance_comparisons;
+    result.label_dominance_pruned_labels += priced.label_dominance_pruned_labels;
+    result.label_dominance_cross_pickup_pruned_labels +=
+        priced.label_dominance_cross_pickup_pruned_labels;
+    result.label_dominance_inactive_entries_skipped +=
+        priced.label_dominance_inactive_entries_skipped;
+    result.label_dominance_bucket_compactions +=
+        priced.label_dominance_bucket_compactions;
+    result.label_dominance_compacted_entries +=
+        priced.label_dominance_compacted_entries;
+    result.operation_dp_dominance_pruned_states +=
+        priced.operation_dp_dominance_pruned_states;
     result.support_duration_max_subset_size =
         std::max(result.support_duration_max_subset_size,
                  priced.support_duration_max_subset_size);
@@ -1394,6 +1439,18 @@ void copyBpcPricingStats(const BpcResult& bpc,
     result.cg_stabilization_false_negatives +=
         bpc.cg_stabilization_false_negatives;
     result.cg_final_true_pricing_rc = bpc.cg_final_true_pricing_rc;
+    result.label_dominance_comparisons += bpc.label_dominance_comparisons;
+    result.label_dominance_pruned_labels += bpc.label_dominance_pruned_labels;
+    result.label_dominance_cross_pickup_pruned_labels +=
+        bpc.label_dominance_cross_pickup_pruned_labels;
+    result.label_dominance_inactive_entries_skipped +=
+        bpc.label_dominance_inactive_entries_skipped;
+    result.label_dominance_bucket_compactions +=
+        bpc.label_dominance_bucket_compactions;
+    result.label_dominance_compacted_entries +=
+        bpc.label_dominance_compacted_entries;
+    result.operation_dp_dominance_pruned_states +=
+        bpc.operation_dp_dominance_pruned_states;
 }
 
 std::size_t findMatchingJsonDelimiter(const std::string& text,
@@ -1566,6 +1623,78 @@ std::string jsonEscapeLocal(const std::string& value) {
         }
     }
     return out.str();
+}
+
+void writeMinimalPaperCoreTrace(const ebrp::Instance& instance,
+                                const ebrp::SolveOptions& opt,
+                                ebrp::SolveResult& result,
+                                const std::string& reason) {
+    if (result.algorithm_preset != "paper-bpc-core" || opt.out_path.empty()) {
+        return;
+    }
+    try {
+        std::filesystem::path out_path(opt.out_path);
+        std::filesystem::path trace_path = out_path;
+        trace_path.replace_extension(".trace.json");
+        std::filesystem::path interval_csv_path = out_path;
+        interval_csv_path.replace_extension(".intervals.csv");
+        if (!trace_path.parent_path().empty()) {
+            std::filesystem::create_directories(trace_path.parent_path());
+        }
+        result.bpc_trace_json_path = trace_path.string();
+        result.bpc_interval_trace_csv_path = interval_csv_path.string();
+        std::ofstream interval_csv(interval_csv_path, std::ios::out | std::ios::trunc);
+        interval_csv
+            << "interval_id,gamma_L,gamma_U,interval_lower_bound,"
+            << "incumbent_upper_bound,interval_status,reason,"
+            << "certificate_basis,requires_pricing_closure,"
+            << "pricing_closure_available,interval_bound_valid,"
+            << "bpc_nodes,open_nodes,generated_columns,cuts,"
+            << "pricing_calls,pricing_time_seconds,rmp_solve_time_seconds,"
+            << "relaxation_time_seconds,lower_bound_source,lower_bound_sources\n";
+        interval_csv
+            << "-1,0,0," << result.lower_bound << ","
+            << result.upper_bound << ",global,\""
+            << jsonEscapeLocal(reason) << "\","
+            << "zero_objective_global,false,false,true,0,"
+            << result.open_nodes << "," << result.columns << ","
+            << result.cuts_added << "," << result.pricing_calls << ","
+            << result.pricing_time_seconds << "," << result.master_time_seconds
+            << "," << result.bound_time_seconds
+            << ",nonnegative_objective,nonnegative_objective\n";
+        interval_csv.close();
+
+        std::ofstream trace(trace_path, std::ios::out | std::ios::trunc);
+        trace << std::setprecision(12);
+        trace << "{\n";
+        trace << "  \"trace_schema\": \"paper_bpc_core_plateau_trace_v1\",\n";
+        trace << "  \"trace_scope\": \"minimal_early_exit_trace\",\n";
+        trace << "  \"early_exit_reason\": \"" << jsonEscapeLocal(reason) << "\",\n";
+        trace << "  \"instance_name\": \"" << jsonEscapeLocal(instance.name) << "\",\n";
+        trace << "  \"input_path\": \"" << jsonEscapeLocal(instance.path) << "\",\n";
+        trace << "  \"algorithm_preset\": \"" << jsonEscapeLocal(result.algorithm_preset) << "\",\n";
+        trace << "  \"method\": \"" << jsonEscapeLocal(result.method) << "\",\n";
+        trace << "  \"status\": \"" << jsonEscapeLocal(result.status) << "\",\n";
+        trace << "  \"objective\": " << result.objective << ",\n";
+        trace << "  \"lower_bound\": " << result.lower_bound << ",\n";
+        trace << "  \"upper_bound\": " << result.upper_bound << ",\n";
+        trace << "  \"gap\": " << result.gap << ",\n";
+        trace << "  \"certified_original_problem\": "
+              << (ebrp::inferCertifiedOriginalProblem(result) ? "true" : "false") << ",\n";
+        trace << "  \"branch_price_node_trace_available\": false,\n";
+        trace << "  \"pricing_call_trace_available\": false,\n";
+        trace << "  \"interval_trace_csv\": \""
+              << jsonEscapeLocal(result.bpc_interval_trace_csv_path) << "\",\n";
+        trace << "  \"intervals\": []\n";
+        trace << "}\n";
+        trace.close();
+        result.notes.push_back("paper-core BPC minimal trace written to "
+            + result.bpc_trace_json_path + " and "
+            + result.bpc_interval_trace_csv_path);
+    } catch (const std::exception& ex) {
+        result.notes.push_back(std::string("failed to write minimal paper-core trace: ")
+            + ex.what());
+    }
 }
 
 bool parseGiniRangeString(std::string value, double& lo, double& hi) {
@@ -4373,6 +4502,9 @@ ebrp::SolveResult solveColumnGenerationDiagnostic(const ebrp::Instance& instance
         cg.support_duration_strong_pruned_labels;
     result.support_duration_strong_pruned_columns =
         cg.support_duration_strong_pruned_columns;
+    result.completion_lb_pruned_labels = cg.completion_lb_pruned_labels;
+    result.required_closure_pruned_labels =
+        cg.required_closure_pruned_labels;
     result.support_duration_max_subset_size = cg.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         cg.support_duration_precompute_time_seconds;
@@ -4487,6 +4619,9 @@ ebrp::SolveResult solveGiniCapColumnGenerationDiagnostic(const ebrp::Instance& i
         cg.support_duration_strong_pruned_labels;
     result.support_duration_strong_pruned_columns =
         cg.support_duration_strong_pruned_columns;
+    result.completion_lb_pruned_labels = cg.completion_lb_pruned_labels;
+    result.required_closure_pruned_labels =
+        cg.required_closure_pruned_labels;
     result.support_duration_max_subset_size = cg.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         cg.support_duration_precompute_time_seconds;
@@ -4587,6 +4722,9 @@ ebrp::SolveResult solveGiniCapBranchProbeDiagnostic(const ebrp::Instance& instan
         probe.support_duration_strong_pruned_labels;
     result.support_duration_strong_pruned_columns =
         probe.support_duration_strong_pruned_columns;
+    result.completion_lb_pruned_labels = probe.completion_lb_pruned_labels;
+    result.required_closure_pruned_labels =
+        probe.required_closure_pruned_labels;
     result.support_duration_max_subset_size = probe.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         probe.support_duration_precompute_time_seconds;
@@ -4759,6 +4897,9 @@ ebrp::SolveResult solveGiniCapTreeDiagnostic(const ebrp::Instance& instance,
         tree.support_duration_strong_pruned_labels;
     result.support_duration_strong_pruned_columns =
         tree.support_duration_strong_pruned_columns;
+    result.completion_lb_pruned_labels = tree.completion_lb_pruned_labels;
+    result.required_closure_pruned_labels =
+        tree.required_closure_pruned_labels;
     result.support_duration_max_subset_size = tree.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         tree.support_duration_precompute_time_seconds;
@@ -5046,6 +5187,9 @@ ebrp::SolveResult solveSupportPruningDiagnostic(const ebrp::Instance& instance,
             priced.support_duration_strong_pruned_labels;
         result.support_duration_strong_pruned_columns +=
             priced.support_duration_strong_pruned_columns;
+        result.completion_lb_pruned_labels += priced.completion_lb_pruned_labels;
+        result.required_closure_pruned_labels +=
+            priced.required_closure_pruned_labels;
         result.support_duration_precompute_time_seconds +=
             priced.support_duration_precompute_time_seconds;
         result.support_duration_max_subset_size =
@@ -6279,6 +6423,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         + ", movement_bound_audit=" + std::string(opt.movement_bound_audit ? "true" : "false")
         + ", frontier_best_bound_scheduling=" + std::string(opt.frontier_best_bound_scheduling ? "true" : "false")
         + ", frontier_relaxation_cache=" + std::string(opt.frontier_relaxation_cache ? "true" : "false")
+        + ", frontier_split_before_tree=" + std::string(opt.frontier_split_before_tree ? "true" : "false")
         + ", frontier_focused_min_lb_retry=" + std::string(opt.frontier_focused_min_lb_retry ? "true" : "false")
         + ", frontier_focused_intensification=" + std::string(opt.frontier_focused_intensification ? "true" : "false")
         + ", frontier_focused_reserve_fraction=" + std::to_string(opt.frontier_focused_reserve_fraction)
@@ -6296,6 +6441,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         + ", vehicle_indexed_relaxation_audit=" + std::string(opt.vehicle_indexed_relaxation_audit ? "true" : "false")
         + ", vehicle_indexed_transfer_flow=" + std::string(opt.vehicle_indexed_transfer_flow ? "true" : "false")
         + ", support_duration_pruning=" + std::string(opt.support_duration_pruning ? "true" : "false")
+        + ", pricing_completion_lb_pruning=" + std::string(opt.pricing_completion_lb_pruning ? "true" : "false")
         + ", route_mask_support_duration_pruning=" + std::string(opt.route_mask_support_duration_pruning ? "true" : "false")
         + ", route_mask_operation_budget_cuts=" + std::string(opt.route_mask_operation_budget_cuts ? "true" : "false")
         + ", support_duration_min_pickup_rule=ceil_half_support"
@@ -6471,6 +6617,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             + ", dropped_by_cap="
             + std::to_string(frontier_route_pool.dropped_by_cap));
     };
+    bool verified_archive_incumbent_selected = false;
     if (opt.incumbent_archive_auto) {
         result.incumbent_archive_attempted = true;
         IncumbentArchiveScanResult archive =
@@ -6485,6 +6632,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 archive.best_routes, "incumbent-archive");
             result.incumbent_archive_selected = accepted;
             if (accepted) {
+                verified_archive_incumbent_selected = true;
                 addRoutesToFrontierPool(archive.best_routes,
                                         "incumbent archive");
             }
@@ -6746,7 +6894,17 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
 
     const bool auto_incumbent =
         opt.bpc_incumbent == "auto" || opt.bpc_incumbent == "best-of-all";
-    if (auto_incumbent) {
+    const bool skip_default_auto_incumbent =
+        auto_incumbent &&
+        verified_archive_incumbent_selected &&
+        opt.algorithm_preset == "paper-bpc-core" &&
+        opt.bpc_incumbent == "auto";
+    if (skip_default_auto_incumbent) {
+        result.incumbent_selection_reason =
+            "verified incumbent archive route plan already selected; skipped default BPC-owned auto incumbent search";
+        result.notes.push_back(
+            "paper-bpc-core skipped default BPC-owned auto incumbent portfolio because a verified archive incumbent was already accepted as UB-only cutoff; no lower-bound certificate is inherited from the archive");
+    } else if (auto_incumbent) {
         const auto incumbent_start = std::chrono::steady_clock::now();
         std::vector<CandidateRecord> candidates;
         const std::vector<std::string> modes{
@@ -7001,6 +7159,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.wall_time_seconds = result.runtime_seconds;
         result.aggregate_worker_time_seconds = result.pricing_time_seconds +
             result.master_time_seconds + result.bound_time_seconds;
+        writeMinimalPaperCoreTrace(instance, opt, result, "no_feasible_incumbent");
         return result;
     }
 
@@ -7025,6 +7184,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.aggregate_worker_time_seconds = result.pricing_time_seconds +
             result.master_time_seconds + result.bound_time_seconds;
         result.notes.push_back("zero incumbent closes the global objective without interval solves");
+        writeMinimalPaperCoreTrace(instance, opt, result, "zero_objective_nonnegative_global_bound");
         return result;
     }
 
@@ -7035,6 +7195,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.wall_time_seconds = result.runtime_seconds;
         result.aggregate_worker_time_seconds = result.pricing_time_seconds +
             result.master_time_seconds + result.bound_time_seconds;
+        writeMinimalPaperCoreTrace(instance, opt, result, "invalid_frontier_range");
         return result;
     }
 
@@ -7051,6 +7212,15 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         double lower_bound = 0.0;
         double relaxation_lower_bound = 0.0;
         int open_nodes = 0;
+        long long bpc_nodes = 0;
+        long long generated_columns = 0;
+        long long cuts_added = 0;
+        long long pricing_calls = 0;
+        double pricing_time_seconds = 0.0;
+        double master_time_seconds = 0.0;
+        double relaxation_time_seconds = 0.0;
+        std::vector<std::string> node_trace_json_objects;
+        std::vector<std::string> pricing_trace_json_objects;
         std::string lower_bound_source = "gamma_floor";
         std::string lb_sources = "gamma_floor";
         bool bound_fathomed = false;
@@ -7108,6 +7278,26 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                    !tree.pricing_blocked_by_duplicate_projection &&
                    best_rc >= -1e-7 &&
                    tree.pricing_closure_status == "exact_no_negative";
+        };
+
+    auto recordTreeAggregate =
+        [&](FrontierIntervalRecord& record,
+            const ebrp::GiniCapTreeResult& tree) {
+            record.bpc_nodes += tree.nodes_solved;
+            record.generated_columns += tree.generated_columns;
+            record.cuts_added += tree.cuts_added;
+            record.pricing_calls += tree.pricing_calls;
+            record.pricing_time_seconds += tree.pricing_time_seconds;
+            record.master_time_seconds += tree.master_time_seconds;
+            record.open_nodes = tree.open_nodes;
+            record.node_trace_json_objects.insert(
+                record.node_trace_json_objects.end(),
+                tree.node_trace_json_objects.begin(),
+                tree.node_trace_json_objects.end());
+            record.pricing_trace_json_objects.insert(
+                record.pricing_trace_json_objects.end(),
+                tree.pricing_trace_json_objects.begin(),
+                tree.pricing_trace_json_objects.end());
         };
 
     auto closureIterations = [&](int default_iterations) {
@@ -8062,6 +8252,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 tree.support_duration_strong_pruned_labels;
             result.support_duration_strong_pruned_columns +=
                 tree.support_duration_strong_pruned_columns;
+            result.completion_lb_pruned_labels += tree.completion_lb_pruned_labels;
+            result.required_closure_pruned_labels +=
+                tree.required_closure_pruned_labels;
             result.support_duration_max_subset_size =
                 std::max(result.support_duration_max_subset_size,
                          tree.support_duration_max_subset_size);
@@ -8275,29 +8468,51 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     std::max(result.relaxation_lb_used,
                              std::max(no_lb, with_lb));
             } else {
-                out.bound = compute_once(opt.movement_domain_tightening,
-                                         opt.pickup_drop_compat_flow,
-                                         opt.vehicle_indexed_operation_relaxation,
-                                         opt.vehicle_indexed_transfer_flow);
                 if (opt.pickup_drop_compat_flow) {
                     ebrp::GiniIntervalInventoryRelaxationBound no_compat =
                         compute_once(opt.movement_domain_tightening, false,
                                      opt.vehicle_indexed_operation_relaxation,
                                      false);
-                    const double compat_lb = out.bound.infeasible
-                        ? cutoff : out.bound.objective_lower_bound;
                     const double no_compat_lb = no_compat.infeasible
                         ? cutoff : no_compat.objective_lower_bound;
-                    if (no_compat_lb > compat_lb + 1e-9) {
-                        no_compat.note += ", pickup_drop_compat_flow_audit_selected=no_compat"
-                            ", compat_lb=" + std::to_string(compat_lb)
-                            + ", no_compat_lb=" + std::to_string(no_compat_lb);
+                    if (std::isfinite(cutoff) &&
+                        no_compat.computed &&
+                        no_compat_lb >= cutoff - 1e-9) {
+                        no_compat.note +=
+                            ", pickup_drop_compat_flow_audit_selected=no_compat"
+                            ", compat_skipped=no_compat_cutoff_fathomed"
+                            ", no_compat_lb=" + std::to_string(no_compat_lb);
+                        out.bound = no_compat;
+                    } else if (budget <= 2.5) {
+                        no_compat.note +=
+                            ", pickup_drop_compat_flow_audit_selected=no_compat"
+                            ", compat_skipped=short_relaxation_budget"
+                            ", no_compat_lb=" + std::to_string(no_compat_lb)
+                            + ", relaxation_budget=" + std::to_string(budget);
                         out.bound = no_compat;
                     } else {
-                        out.bound.note += ", pickup_drop_compat_flow_audit_selected=compat"
-                            ", compat_lb=" + std::to_string(compat_lb)
-                            + ", no_compat_lb=" + std::to_string(no_compat_lb);
+                        out.bound = compute_once(opt.movement_domain_tightening,
+                                                 true,
+                                                 opt.vehicle_indexed_operation_relaxation,
+                                                 opt.vehicle_indexed_transfer_flow);
+                        const double compat_lb = out.bound.infeasible
+                            ? cutoff : out.bound.objective_lower_bound;
+                        if (no_compat_lb > compat_lb + 1e-9) {
+                            no_compat.note += ", pickup_drop_compat_flow_audit_selected=no_compat"
+                                ", compat_lb=" + std::to_string(compat_lb)
+                                + ", no_compat_lb=" + std::to_string(no_compat_lb);
+                            out.bound = no_compat;
+                        } else {
+                            out.bound.note += ", pickup_drop_compat_flow_audit_selected=compat"
+                                ", compat_lb=" + std::to_string(compat_lb)
+                                + ", no_compat_lb=" + std::to_string(no_compat_lb);
+                        }
                     }
+                } else {
+                    out.bound = compute_once(opt.movement_domain_tightening,
+                                             false,
+                                             opt.vehicle_indexed_operation_relaxation,
+                                             false);
                 }
                 if (opt.vehicle_indexed_relaxation_audit &&
                     opt.vehicle_indexed_operation_relaxation) {
@@ -8356,6 +8571,28 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             return out;
         };
 
+    auto shouldDeferInitialTreeForAdaptiveSplit =
+        [&](const FrontierIntervalRecord& record) {
+            if (!opt.frontier_split_before_tree ||
+                !opt.frontier_adaptive_split ||
+                focus_only_effective) {
+                return false;
+            }
+            if (record.complete || record.empty_complete ||
+                record.replaced_by_children) {
+                return false;
+            }
+            if (record.split_depth >= opt.frontier_adaptive_max_depth) {
+                return false;
+            }
+            if (record.hi - record.lo <=
+                opt.frontier_adaptive_min_width + 1e-12) {
+                return false;
+            }
+            return record.lower_bound_valid &&
+                   record.lower_bound < result.upper_bound - 1e-7;
+        };
+
     auto processInitialInterval = [&](int idx,
                                       double fixed_upper_bound,
                                       const std::vector<ebrp::RoutePlan>& fixed_incumbent_routes) {
@@ -8402,6 +8639,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         work.has_relaxation_stats = true;
         const double bound_elapsed = cached_relax.elapsed;
         work.bound_time_seconds += bound_elapsed;
+        work.record.relaxation_time_seconds += bound_elapsed;
         if (inv_relax.computed) {
             work.record.processed = true;
             work.record.relaxation_lower_bound = inv_relax.infeasible
@@ -8430,6 +8668,16 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         if (opt.solve_time_limit > 0.0 && remainingSeconds() <= 0.0) {
             work.notes.push_back("frontier time limit reached after interval relaxation "
                 + std::to_string(idx));
+            return work;
+        }
+
+        if (shouldDeferInitialTreeForAdaptiveSplit(work.record)) {
+            work.record.processed = true;
+            work.record.open_nodes = std::max(1, work.record.open_nodes);
+            work.notes.push_back("interval " + std::to_string(idx)
+                + " deferred initial branch-price tree because "
+                "frontier_split_before_tree=true and the interval is eligible "
+                "for adaptive splitting");
             return work;
         }
 
@@ -8463,6 +8711,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             opt.strong_branching_candidates, opt.strong_branching_time,
             opt.reliability_branching, bpc_pricing_options);
         work.ran_tree = true;
+        recordTreeAggregate(work.record, work.tree);
         work.record.processed = true;
         work.record.complete = work.tree.complete;
         work.record.lower_bound_valid = true;
@@ -8694,6 +8943,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             cached_relax.bound;
         const double bound_elapsed = cached_relax.elapsed;
         result.bound_time_seconds += bound_elapsed;
+        interval_records[idx].relaxation_time_seconds += bound_elapsed;
         accumulateInventoryRelaxationStats(inv_relax);
         if (inv_relax.note.find("route_mask_duration_load_relaxation=true") !=
             std::string::npos) {
@@ -8731,6 +8981,17 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.notes.push_back("frontier time limit reached after interval relaxation "
                 + std::to_string(idx));
             break;
+        }
+
+        if (shouldDeferInitialTreeForAdaptiveSplit(interval_records[idx])) {
+            interval_records[idx].processed = true;
+            interval_records[idx].open_nodes =
+                std::max(1, interval_records[idx].open_nodes);
+            result.notes.push_back("interval " + std::to_string(idx)
+                + " deferred initial branch-price tree because "
+                "frontier_split_before_tree=true and the interval is eligible "
+                "for adaptive splitting");
+            continue;
         }
 
         const double interval_budget = is_focus_interval &&
@@ -8798,6 +9059,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         runRoutePoolIncumbentMaster("after_initial_interval_" +
                                     std::to_string(idx));
         writeProgressCheckpoint("interval_tree_" + std::to_string(idx), true);
+        recordTreeAggregate(interval_records[idx], tree);
         interval_records[idx].processed = true;
         interval_records[idx].complete = tree.complete;
         interval_records[idx].lower_bound_valid = true;
@@ -8993,6 +9255,15 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 child.lower_bound_valid = true;
                 child.lower_bound = std::max(child.lo,
                     parent_lower_bound_valid ? parent_lower_bound : child.lo);
+                if (parent_lower_bound_valid &&
+                    parent_lower_bound > child.lo + 1e-12) {
+                    child.lower_bound_source =
+                        parent.lower_bound_source.empty()
+                            ? "adaptive_split_inherited_parent_lb"
+                            : "adaptive_split_inherited_" +
+                                  parent.lower_bound_source;
+                    child.lb_sources += "|adaptive_split_inherited_parent_lb";
+                }
                 child.relaxation_lower_bound = parent_relaxation_lower_bound;
 
                 const int child_idx = static_cast<int>(interval_records.size());
@@ -9022,6 +9293,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                         cached_relax.bound;
                     const double bound_elapsed = cached_relax.elapsed;
                     result.bound_time_seconds += bound_elapsed;
+                    child.relaxation_time_seconds += bound_elapsed;
                     accumulateInventoryRelaxationStats(inv_relax);
                     if (inv_relax.note.find("route_mask_duration_load_relaxation=true") !=
                         std::string::npos) {
@@ -9158,6 +9430,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             const ebrp::GiniIntervalInventoryRelaxationBound inv_relax =
                 cached_relax.bound;
             result.bound_time_seconds += cached_relax.elapsed;
+            record.relaxation_time_seconds += cached_relax.elapsed;
             accumulateInventoryRelaxationStats(inv_relax);
             const double candidate_lb = inv_relax.infeasible
                 ? result.upper_bound
@@ -9239,21 +9512,37 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                         }
                         return lhs < rhs;
                     });
-                    if (!child_ids.empty()) {
-                        const int child_idx = child_ids.front();
+                    bool any_child_improved = false;
+                    bool child_relax_attempted = false;
+                    for (int child_idx : child_ids) {
+                        if (opt.solve_time_limit > 0.0 && remainingSeconds() <= 0.0) {
+                            result.focused_intensification_stop_reason =
+                                child_relax_attempted
+                                    ? "split_performed_child_relax_time_limit"
+                                    : "split_performed_child_relax_skipped_time_limit";
+                            break;
+                        }
                         FrontierIntervalRecord& child = interval_records[child_idx];
+                        const double child_budget = opt.solve_time_limit > 0.0
+                            ? std::max(0.1, std::min(relax_budget, remainingSeconds()))
+                            : relax_budget;
                         const CachedRelaxation child_relax =
                             computeInventoryRelaxation(child.lo, child.hi,
-                                                       relax_budget,
+                                                       child_budget,
                                                        result.upper_bound, true);
+                        child_relax_attempted = true;
                         ++result.focused_intensification_relax_calls;
                         ++result.focused_intensification_child_intervals_processed;
                         result.bound_time_seconds += child_relax.elapsed;
+                        child.relaxation_time_seconds += child_relax.elapsed;
                         accumulateInventoryRelaxationStats(child_relax.bound);
                         const double child_candidate_lb = child_relax.bound.infeasible
                             ? result.upper_bound
                             : std::max(child.lo,
                                 child_relax.bound.objective_lower_bound);
+                        if (child_relax.bound.computed && std::isfinite(child_candidate_lb)) {
+                            child.relaxation_lower_bound = child_candidate_lb;
+                        }
                         if (child_relax.bound.computed &&
                             child_candidate_lb > child.lower_bound + 1e-8) {
                             child.lower_bound = child_candidate_lb;
@@ -9262,11 +9551,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                             child.lb_sources += "|focused_child_inventory_route_gini_relaxation";
                             ++result.focused_intensification_lb_improvements;
                             ++result.adaptive_split_lb_improvements;
-                            result.focused_intensification_stop_reason =
-                                "child_interval_improved";
-                        } else {
-                            result.focused_intensification_stop_reason =
-                                "split_performed";
+                            any_child_improved = true;
                         }
                         result.focused_intensification_best_child_lb =
                             std::max(result.focused_intensification_best_child_lb,
@@ -9276,11 +9561,18 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                             + ", child=" + std::to_string(child_idx)
                             + ", child_lb=" + std::to_string(child.lower_bound)
                             + ", child_status=" + child_relax.bound.status
+                            + ", child_budget=" + std::to_string(child_budget)
                             + ", operation_budget_enabled="
                             + std::string(opt.route_mask_operation_budget_cuts
                                           ? "true" : "false"));
                         writeProgressCheckpoint("focused_split_child_" +
                                                 std::to_string(child_idx), true);
+                    }
+                    if (result.focused_intensification_stop_reason.empty() ||
+                        result.focused_intensification_stop_reason == "split_performed") {
+                        result.focused_intensification_stop_reason =
+                            any_child_improved ? "child_interval_improved"
+                                               : "split_performed";
                     }
                 }
                 if (!split_performed && result.focused_intensification_stop_reason.empty()) {
@@ -9492,6 +9784,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             if (std::isfinite(tree.penalty_budget)) result.penalty_budget = tree.penalty_budget;
             runRoutePoolIncumbentMaster("after_focused_retry_interval_" +
                                         std::to_string(idx));
+            recordTreeAggregate(record, tree);
             record.processed = true;
             record.open_nodes = tree.open_nodes;
             if (tree.complete) {
@@ -9681,6 +9974,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     cached_relax.bound;
                 const double bound_elapsed = cached_relax.elapsed;
                 result.bound_time_seconds += bound_elapsed;
+                record.relaxation_time_seconds += bound_elapsed;
                 accumulateInventoryRelaxationStats(inv_relax);
                 if (inv_relax.note.find("route_mask_duration_load_relaxation=true") !=
                     std::string::npos) {
@@ -9780,6 +10074,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             if (std::isfinite(tree.penalty_budget)) result.penalty_budget = tree.penalty_budget;
             runRoutePoolIncumbentMaster("after_final_closure_interval_" +
                                         std::to_string(idx));
+            recordTreeAggregate(record, tree);
             record.processed = true;
             record.open_nodes = tree.open_nodes;
             if (tree.complete) {
@@ -9964,6 +10259,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             const ebrp::GiniIntervalInventoryRelaxationBound inv_relax =
                 cached_relax.bound;
             result.bound_time_seconds += cached_relax.elapsed;
+            record.relaxation_time_seconds += cached_relax.elapsed;
             accumulateInventoryRelaxationStats(inv_relax);
             if (inv_relax.note.find("route_mask_duration_load_relaxation=true") !=
                 std::string::npos) {
@@ -10043,6 +10339,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 accumulateTreeRound2Stats(tree);
                 addTreeColumnsToFrontierPool(tree,
                     "iterative_closure interval " + std::to_string(idx));
+                recordTreeAggregate(record, tree);
                 record.processed = true;
                 record.open_nodes = tree.open_nodes;
                 if (tree.complete) {
@@ -10587,6 +10884,277 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.notes.push_back("periodic progress log written to " + opt.progress_log_path
             + ", checkpoints=" + std::to_string(result.progress_checkpoints_written)
             + ", interval_seconds=" + std::to_string(progress_interval));
+    }
+    if (result.algorithm_preset == "paper-bpc-core" && !opt.out_path.empty()) {
+        auto csvEscapeLocal = [](const std::string& value) {
+            bool needs_quotes = false;
+            for (char ch : value) {
+                if (ch == ',' || ch == '"' || ch == '\n' || ch == '\r') {
+                    needs_quotes = true;
+                    break;
+                }
+            }
+            if (!needs_quotes) return value;
+            std::string escaped = "\"";
+            for (char ch : value) {
+                if (ch == '"') escaped += "\"\"";
+                else escaped.push_back(ch);
+            }
+            escaped.push_back('"');
+            return escaped;
+        };
+        try {
+            std::filesystem::path out_path(opt.out_path);
+            std::filesystem::path trace_path = out_path;
+            trace_path.replace_extension(".trace.json");
+            std::filesystem::path interval_csv_path = out_path;
+            interval_csv_path.replace_extension(".intervals.csv");
+            if (!trace_path.parent_path().empty()) {
+                std::filesystem::create_directories(trace_path.parent_path());
+            }
+            result.bpc_trace_json_path = trace_path.string();
+            result.bpc_interval_trace_csv_path = interval_csv_path.string();
+
+            std::ofstream interval_csv(interval_csv_path, std::ios::out | std::ios::trunc);
+            interval_csv
+                << "interval_id,gamma_L,gamma_U,interval_lower_bound,"
+                << "incumbent_upper_bound,interval_status,reason,"
+                << "certificate_basis,requires_pricing_closure,"
+                << "pricing_closure_available,interval_bound_valid,"
+                << "bpc_nodes,open_nodes,generated_columns,cuts,"
+                << "pricing_calls,pricing_time_seconds,rmp_solve_time_seconds,"
+                << "relaxation_time_seconds,lower_bound_source,lower_bound_sources\n";
+
+            auto intervalStatus = [&](const FrontierIntervalRecord& record) {
+                if (record.replaced_by_children) return std::string("replaced_by_children");
+                if (record.lo >= result.upper_bound - 1e-12) return std::string("gamma_floor_skip");
+                if (!record.interval_bound_valid) return std::string("invalid");
+                if (record.empty_complete) return std::string("empty");
+                if (record.complete || record.tree_closed) return std::string("closed");
+                if (record.bound_fathomed ||
+                    (record.lower_bound_valid &&
+                     record.lower_bound >= result.upper_bound - 1e-7)) {
+                    return std::string("bound_fathomed");
+                }
+                if (!record.processed) return std::string("unprocessed_relevant");
+                return std::string("unresolved");
+            };
+            auto intervalReason = [&](const FrontierIntervalRecord& record) {
+                if (record.replaced_by_children) return std::string("split_parent_replaced");
+                if (record.lo >= result.upper_bound - 1e-12) return std::string("gamma_floor_at_or_above_incumbent");
+                if (!record.interval_bound_valid) return std::string("invalid_interval_bound");
+                if (record.empty_complete) return std::string("empty_interval");
+                if (record.complete || record.tree_closed) return std::string("branch_price_tree_closed");
+                if (record.bound_fathomed ||
+                    (record.lower_bound_valid &&
+                     record.lower_bound >= result.upper_bound - 1e-7)) {
+                    return record.lower_bound_source.empty()
+                        ? std::string("valid_lower_bound_reaches_incumbent")
+                        : record.lower_bound_source;
+                }
+                if (!record.processed) return std::string("not_processed_before_time_limit_or_reserve");
+                if (record.open_nodes > 0 && record.bpc_nodes == 0) {
+                    return std::string("tree_not_started_before_time_limit_or_reserve");
+                }
+                if (record.open_nodes > 0) return std::string("open_bpc_nodes");
+                return std::string("lower_bound_below_incumbent");
+            };
+
+            for (int idx = 0; idx < static_cast<int>(interval_records.size()); ++idx) {
+                const FrontierIntervalRecord& record = interval_records[idx];
+                interval_csv
+                    << idx << ","
+                    << std::setprecision(12) << record.lo << ","
+                    << record.hi << ","
+                    << record.lower_bound << ","
+                    << result.upper_bound << ","
+                    << csvEscapeLocal(intervalStatus(record)) << ","
+                    << csvEscapeLocal(intervalReason(record)) << ","
+                    << csvEscapeLocal(record.certificate_basis) << ","
+                    << (record.requires_pricing_closure ? "true" : "false") << ","
+                    << (record.pricing_closure_available ? "true" : "false") << ","
+                    << (record.interval_bound_valid ? "true" : "false") << ","
+                    << record.bpc_nodes << ","
+                    << record.open_nodes << ","
+                    << record.generated_columns << ","
+                    << record.cuts_added << ","
+                    << record.pricing_calls << ","
+                    << record.pricing_time_seconds << ","
+                    << record.master_time_seconds << ","
+                    << record.relaxation_time_seconds << ","
+                    << csvEscapeLocal(record.lower_bound_source) << ","
+                    << csvEscapeLocal(record.lb_sources) << "\n";
+            }
+            interval_csv.close();
+
+            std::ofstream trace(trace_path, std::ios::out | std::ios::trunc);
+            trace << std::setprecision(12);
+            trace << "{\n";
+            trace << "  \"trace_schema\": \"paper_bpc_core_plateau_trace_v1\",\n";
+            trace << "  \"trace_scope\": \"frontier_interval_ledger_with_available_aggregate_tree_and_pricing_stats\",\n";
+            trace << "  \"instance_name\": \"" << jsonEscapeLocal(instance.name) << "\",\n";
+            trace << "  \"input_path\": \"" << jsonEscapeLocal(instance.path) << "\",\n";
+            trace << "  \"algorithm_preset\": \"" << jsonEscapeLocal(result.algorithm_preset) << "\",\n";
+            trace << "  \"method\": \"" << jsonEscapeLocal(result.method) << "\",\n";
+            trace << "  \"status\": \"" << jsonEscapeLocal(result.status) << "\",\n";
+            trace << "  \"objective\": " << result.objective << ",\n";
+            trace << "  \"lower_bound\": " << result.lower_bound << ",\n";
+            trace << "  \"upper_bound\": " << result.upper_bound << ",\n";
+            trace << "  \"gap\": " << result.gap << ",\n";
+            trace << "  \"certified_original_problem\": "
+                  << (ebrp::inferCertifiedOriginalProblem(result) ? "true" : "false") << ",\n";
+            trace << "  \"full_certificate_rejection_reason\": \""
+                  << jsonEscapeLocal(result.full_certificate_rejection_reason) << "\",\n";
+            trace << "  \"runtime_breakdown\": {"
+                  << "\"bound_time_seconds\": " << result.bound_time_seconds
+                  << ", \"route_mask_time_seconds\": " << result.route_mask_time_seconds
+                  << ", \"master_time_seconds\": " << result.master_time_seconds
+                  << ", \"pricing_time_seconds\": " << result.pricing_time_seconds
+                  << "},\n";
+            const ProgressSnapshot controlling_snapshot = snapshotFrontier();
+            trace << "  \"controlling_interval\": {"
+                  << "\"id\": " << controlling_snapshot.interval_id
+                  << ", \"range\": \"" << jsonEscapeLocal(controlling_snapshot.interval_range)
+                  << "\", \"lower_bound\": " << controlling_snapshot.lb
+                  << ", \"source\": \"" << jsonEscapeLocal(controlling_snapshot.source)
+                  << "\"},\n";
+            bool node_trace_available = false;
+            bool pricing_trace_available = false;
+            for (const FrontierIntervalRecord& record : interval_records) {
+                node_trace_available = node_trace_available ||
+                    !record.node_trace_json_objects.empty();
+                pricing_trace_available = pricing_trace_available ||
+                    !record.pricing_trace_json_objects.empty();
+            }
+            trace << "  \"branch_price_node_trace_available\": "
+                  << (node_trace_available ? "true" : "false") << ",\n";
+            trace << "  \"branch_price_node_trace_limitation\": \""
+                  << (node_trace_available
+                      ? "node trace is available for branch-price trees that actually started in this run"
+                      : "no branch-price tree started for any active interval before the time/reserve stop")
+                  << "\",\n";
+            trace << "  \"aggregate_tree\": {"
+                  << "\"nodes\": " << result.nodes
+                  << ", \"open_nodes\": " << result.open_nodes
+                  << ", \"pricing_closed_nodes\": " << result.pricing_closed_nodes
+                  << ", \"columns\": " << result.columns
+                  << ", \"cuts_added\": " << result.cuts_added
+                  << "},\n";
+            trace << "  \"pricing_call_trace_available\": "
+                  << (pricing_trace_available ? "true" : "false") << ",\n";
+            trace << "  \"pricing_call_trace_limitation\": \""
+                  << (pricing_trace_available
+                      ? "pricing call trace is available for branch-price nodes that actually started in this run"
+                      : "no branch-price pricing call occurred for any active interval before the time/reserve stop")
+                  << "\",\n";
+            trace << "  \"aggregate_pricing\": {"
+                  << "\"pricing_calls\": " << result.pricing_calls
+                  << ", \"pricing_completed_exactly\": "
+                  << (result.pricing_completed_exactly ? "true" : "false")
+                  << ", \"pricing_closure_certified_exact\": "
+                  << (result.pricing_closure_certified_exact ? "true" : "false")
+                  << ", \"pricing_closure_status\": \""
+                  << jsonEscapeLocal(result.pricing_closure_status)
+                  << "\", \"pricing_best_reduced_cost_any\": "
+                  << result.pricing_best_reduced_cost_any
+                  << ", \"pricing_remaining_negative_rc\": "
+                  << result.pricing_remaining_negative_rc
+                  << ", \"duplicate_negative_projections\": "
+                  << result.pricing_duplicate_negative_projections
+                  << ", \"blocked_by_duplicate_projection\": "
+                  << (result.pricing_blocked_by_duplicate_projection ? "true" : "false")
+                  << ", \"completion_lb_pruned_labels\": "
+                  << result.completion_lb_pruned_labels
+                  << ", \"required_closure_pruned_labels\": "
+                  << result.required_closure_pruned_labels
+                  << ", \"label_dominance_comparisons\": "
+                  << result.label_dominance_comparisons
+                  << ", \"label_dominance_pruned_labels\": "
+                  << result.label_dominance_pruned_labels
+                  << ", \"label_dominance_cross_pickup_pruned_labels\": "
+                  << result.label_dominance_cross_pickup_pruned_labels
+                  << ", \"label_dominance_inactive_entries_skipped\": "
+                  << result.label_dominance_inactive_entries_skipped
+                  << ", \"label_dominance_bucket_compactions\": "
+                  << result.label_dominance_bucket_compactions
+                  << ", \"label_dominance_compacted_entries\": "
+                  << result.label_dominance_compacted_entries
+                  << ", \"operation_dp_dominance_pruned_states\": "
+                  << result.operation_dp_dominance_pruned_states
+                  << "},\n";
+            trace << "  \"interval_trace_csv\": \""
+                  << jsonEscapeLocal(result.bpc_interval_trace_csv_path) << "\",\n";
+            trace << "  \"intervals\": [\n";
+            bool first_interval = true;
+            for (int idx = 0; idx < static_cast<int>(interval_records.size()); ++idx) {
+                const FrontierIntervalRecord& record = interval_records[idx];
+                if (!first_interval) trace << ",\n";
+                first_interval = false;
+                trace << "    {"
+                      << "\"interval_id\": " << idx
+                      << ", \"gamma_L\": " << record.lo
+                      << ", \"gamma_U\": " << record.hi
+                      << ", \"current_interval_lower_bound\": " << record.lower_bound
+                      << ", \"incumbent_upper_bound\": " << result.upper_bound
+                      << ", \"status\": \"" << jsonEscapeLocal(intervalStatus(record)) << "\""
+                      << ", \"reason\": \"" << jsonEscapeLocal(intervalReason(record)) << "\""
+                      << ", \"certificate_basis\": \""
+                      << jsonEscapeLocal(record.certificate_basis) << "\""
+                      << ", \"requires_pricing_closure\": "
+                      << (record.requires_pricing_closure ? "true" : "false")
+                      << ", \"pricing_closure_available\": "
+                      << (record.pricing_closure_available ? "true" : "false")
+                      << ", \"interval_bound_valid\": "
+                      << (record.interval_bound_valid ? "true" : "false")
+                      << ", \"bpc_nodes\": " << record.bpc_nodes
+                      << ", \"open_nodes\": " << record.open_nodes
+                      << ", \"generated_columns\": " << record.generated_columns
+                      << ", \"cuts\": " << record.cuts_added
+                      << ", \"pricing_calls\": " << record.pricing_calls
+                      << ", \"pricing_time_seconds\": "
+                      << record.pricing_time_seconds
+                      << ", \"rmp_solve_time_seconds\": "
+                      << record.master_time_seconds
+                      << ", \"relaxation_time_seconds\": "
+                      << record.relaxation_time_seconds
+                      << ", \"lower_bound_source\": \""
+                      << jsonEscapeLocal(record.lower_bound_source) << "\""
+                      << ", \"lower_bound_sources\": \""
+                      << jsonEscapeLocal(record.lb_sources) << "\""
+                      << "}";
+            }
+            trace << "\n  ],\n";
+            trace << "  \"branch_price_nodes\": [\n";
+            bool first_node_trace = true;
+            for (const FrontierIntervalRecord& record : interval_records) {
+                for (const std::string& node_trace :
+                     record.node_trace_json_objects) {
+                    if (!first_node_trace) trace << ",\n";
+                    first_node_trace = false;
+                    trace << "    " << node_trace;
+                }
+            }
+            trace << "\n  ],\n";
+            trace << "  \"pricing_calls\": [\n";
+            bool first_pricing_trace = true;
+            for (const FrontierIntervalRecord& record : interval_records) {
+                for (const std::string& pricing_trace :
+                     record.pricing_trace_json_objects) {
+                    if (!first_pricing_trace) trace << ",\n";
+                    first_pricing_trace = false;
+                    trace << "    " << pricing_trace;
+                }
+            }
+            trace << "\n  ]\n";
+            trace << "}\n";
+            trace.close();
+            result.notes.push_back("paper-core BPC trace written to "
+                + result.bpc_trace_json_path + " and "
+                + result.bpc_interval_trace_csv_path);
+        } catch (const std::exception& ex) {
+            result.notes.push_back(std::string("failed to write paper-core BPC trace: ")
+                + ex.what());
+        }
     }
     if (!opt.frontier_export_state_path.empty()) {
         int export_idx = -1;

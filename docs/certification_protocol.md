@@ -8,6 +8,24 @@ This project distinguishes the original EBRP objective from fixed-cap and restri
 - `solves_original_objective=true`.
 - The method-specific certificate closes the original objective, not just a diagnostic subproblem.
 
+The paper-facing exact algorithm is GF-RL-BPC, implemented by
+`--method gcap-frontier --algorithm-preset paper-bpc-core`. This preset is the
+only BPC configuration that should be reported as the main paper algorithm. It
+uses elementary route-load columns and exact-label pricing, and disables
+compact fallback certificates, hybrid/ng-DSSR pricing, two-track relaxed RMP,
+large-instance diagnostic modes, focus-only shortcuts, imported focus-bound
+shortcuts, frontier resume shortcuts, and iterative closure automation. Those
+modules may remain in the repository as benchmark, diagnostic, or appendix
+tools, but they are not substitutes for a GF-RL-BPC certificate.
+
+Before a JSON result is written, the output guard rejects any original-problem
+`status=optimal` claim that does not also satisfy
+`certified_original_problem=true` under the full audit. The emitted status is
+changed to `not_certified_incomplete_certificate` and the rejection reason is
+recorded. This guard is intentionally redundant with the external
+`scripts/audit_bpc_certificate.py` checker; both must agree before a run is
+used as paper evidence.
+
 ## Method Scopes
 
 `gcap-frontier` is the main paper algorithm and is reported as `method_scope=original_bpc`, `is_bpc=true`. It solves the original objective only when the full Gini frontier is certified.
@@ -61,6 +79,15 @@ Generic singleton and two-station pickup/drop warm-start columns are also certif
 
 Adaptive interval splitting via `--frontier-refine-splits` is certificate-neutral: a parent interval may be replaced only by children that exactly cover the parent range. Children inherit the parent's valid lower bound and may receive stronger relaxation bounds. The final global lower-bound ledger must ignore replaced parents and account for every child interval.
 
+Split-before-tree scheduling via `--frontier-split-before-tree true` is also
+certificate-neutral. It can defer an initial branch-price tree for a splittable
+interval so adaptive child intervals are generated and relaxed first. This
+does not certify the parent, remove any Gini range, or use inherited lower
+bounds as closure. The final frontier ledger still has to account for every
+active child interval, and an interval is certified only if it is empty,
+validly bound-fathomed, or closed by a branch-price tree with exact pricing
+closure.
+
 Focused splitting via `--frontier-split-batch` is also certificate-neutral. It changes only which unresolved intervals are refined first, normally by lowest current lower bound. It does not remove intervals from the final ledger and cannot by itself certify the original problem.
 
 Retry reserve via `--frontier-retry-reserve` is certificate-neutral. It stops adaptive splitting early to preserve wall time for branch-price retry. The final ledger must still account for every active interval, and no interval is certified merely because splitting stopped.
@@ -92,6 +119,15 @@ G <= gamma iff H <= V * gamma * S
 A fixed-cap tree can certify only its fixed-cap or fixed-interval subproblem. It is not a global certificate for `G + lambda P` unless all relevant Gini intervals are covered and aggregated by `gcap-frontier`.
 
 The pricing oracle may use label-setting dynamic programming over elementary visited sets, last station, vehicle load, and total pickup, with Pareto dominance on reduced cost and travel time. This remains an exact pricing oracle because future feasibility and reduced-cost extensions depend only on these resources and the visited set; dominated labels cannot produce a better feasible completion.
+
+Completion lower-bound pruning is allowed in exact-label pricing only when the
+computed value is a valid lower bound on every feasible completion of the
+current label under the true RMP duals. If that lower bound is no better than
+the best priced column already found, pruning the label cannot remove the
+minimum reduced-cost column. This pruning may reduce enumeration work, but it
+does not by itself prove node closure: closure still requires complete
+true-dual pricing with no remaining negative reduced-cost column and no
+duplicate-negative blockage.
 
 Subset-row cuts use the valid set-packing inequality for odd station subsets `S`:
 
@@ -263,6 +299,13 @@ All three have `status=optimal`, `gap=0`, `lower_bound=upper_bound=objective`, `
   only when pairs are removed by a route-duration lower-bound proof. It is not
   an optimality certificate by itself, and if no pair is proven incompatible it
   may add audit statistics without improving the lower bound.
+- The solver may evaluate the no-compatibility relaxation before the
+  compatibility-flow relaxation. If the no-compatibility relaxation already
+  reaches the incumbent cutoff, the interval is validly bound-fathomed and the
+  compatibility-flow solve may be skipped. Otherwise the solver may still solve
+  both relaxations and keep the larger valid lower bound. This ordering changes
+  only computation time; it does not create pricing closure or incumbent
+  evidence.
 - The support-feasibility oracle remains optional and disabled in certificate
   runs for this pass. No heuristic or timed-out support failure may add a cut.
 
@@ -494,6 +537,15 @@ final frontier ledger must still account for every relevant interval.
 - `paper-bpc-core` is the main paper BPC preset. It uses elementary columns and
   exact-label pricing for closure. It may use valid non-pricing bounds to fathom
   intervals, but any BPC tree closure still requires exact pricing semantics.
+- The continuous LP cutoff precheck used before the V<=12 integer
+  inventory/route/Gini relaxation is a valid non-pricing fathoming shortcut
+  only when the LP cutoff model is infeasible or its objective reaches the
+  incumbent cutoff. Otherwise it is ignored for certification and the integer
+  relaxation or BPC tree must provide the interval evidence.
+- Required-closure pickup lower bounds inside exact pricing may prune partial
+  labels only when the current load and Ryan-Foster closure imply a minimum
+  future pickup quantity. This is a feasibility pruning rule inside the exact
+  pricing enumeration; it is not pricing closure by itself.
 - `paper-exact-portfolio` is the recommended robust exact preset. It combines
   `paper-bpc-core` with a compact fallback row. The final certificate module
   must be reported as `bpc`, `compact`, or `none`.

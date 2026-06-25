@@ -1877,6 +1877,145 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
                   std::chrono::steady_clock::now() - vehicle_relax_start).count()
             : 0.0;
 
+    const bool continuous_precheck_promising =
+        cutoff_bound_active &&
+        (gamma_cap <= objective_cutoff * 0.5 ||
+         gamma_floor >= objective_cutoff * 0.75);
+    if (integer_inventory_relaxation && continuous_precheck_promising) {
+        const auto precheck_start = std::chrono::steady_clock::now();
+        bound.continuous_relaxation_precheck_run = true;
+        const std::filesystem::path cont_sol_path =
+            work_dir / "inventory_gini_bound_continuous.sol";
+        const std::filesystem::path cont_log_path =
+            work_dir / "inventory_gini_bound_continuous.log";
+        const std::filesystem::path cont_cmd_path =
+            work_dir / "run_continuous.cplex";
+        const double cont_time_limit =
+            std::max(0.1, std::min(0.5, time_limit_seconds * 0.05));
+        std::ofstream cont_cmd(cont_cmd_path);
+        cont_cmd << "set threads 1\n";
+        cont_cmd << "set timelimit " << cont_time_limit << "\n";
+        cont_cmd << "read " << lp_path.string() << "\n";
+        cont_cmd << "change problem lp\n";
+        cont_cmd << "optimize\n";
+        cont_cmd << "write " << cont_sol_path.string() << "\n";
+        cont_cmd << "quit\n";
+        cont_cmd.close();
+
+        const std::string cont_command = "cmd /C \"" +
+            quote(defaultCplexPath()) + " -f " + quote(cont_cmd_path) +
+            " > " + quote(cont_log_path) + " 2>&1\"";
+        const int cont_rc = std::system(cont_command.c_str());
+        bound.continuous_relaxation_precheck_time_seconds =
+            std::chrono::duration<double>(
+                std::chrono::steady_clock::now() - precheck_start).count();
+        if (cont_rc == 0) {
+            std::string cont_status = "unknown";
+            const double cont_obj = parseObjective(cont_sol_path, cont_status);
+            bound.continuous_relaxation_precheck_status = cont_status;
+            if (std::isfinite(cont_obj)) {
+                bound.continuous_relaxation_precheck_objective =
+                    cutoffCappedLowerBound(cont_obj);
+            }
+            const bool cont_infeasible =
+                statusIsInfeasible(cont_status) ||
+                (!std::filesystem::exists(cont_sol_path) &&
+                 logSaysInfeasible(cont_log_path));
+            if (cont_infeasible) {
+                bound.computed = true;
+                bound.infeasible = false;
+                bound.continuous_relaxation_precheck_infeasible = true;
+                bound.continuous_relaxation_precheck_fathomed = true;
+                bound.objective_lower_bound = objective_cutoff;
+                bound.gini_lower_bound = floor_bound;
+                bound.lambda_penalty_lower_bound =
+                    std::max(0.0, bound.objective_lower_bound -
+                                  bound.gini_lower_bound);
+                bound.status = "continuous relaxation infeasible";
+                std::ostringstream note;
+                note << "inventory-route-Gini cutoff relaxation infeasible in continuous LP precheck; no incumbent-improving solution exists in this interval: interval=["
+                     << gamma_floor << "," << gamma_cap << "]"
+                     << ", pickup_limit=" << bound.total_pickup_limit
+                     << ", route_visit_cuts=singletons+subsets_up_to_"
+                     << max_route_cut_size
+                     << ", integer_inventory_relaxation=true"
+                     << ", continuous_relaxation_precheck=true"
+                     << ", continuous_relaxation_precheck_infeasible=true"
+                     << ", continuous_relaxation_precheck_time_seconds="
+                     << bound.continuous_relaxation_precheck_time_seconds
+                     << ", station_flow_conservation=true"
+                     << ", depot_return_capacity=true"
+                     << ", station_operation_capacity=true"
+                     << ", station_operation_mode_cuts=true"
+                     << ", nonzero_visit_operation_cuts=true"
+                     << ", route_mask_duration_load_relaxation="
+                     << (route_mask_relaxation ? "true" : "false")
+                     << ", route_mask_max_v=" << route_mask_max_v
+                     << routeMaskSupportNote()
+                     << pickupDropCompatNote()
+                     << ", incumbent_cutoff_bound=true"
+                     << ", penalty_budget=" << num(penalty_budget)
+                     << ", min_station_bikes=" << min_station_bikes_after_return
+                     << ", objective_lb=" << bound.objective_lower_bound
+                     << ", status=" << bound.status
+                     << ", lp=" << lp_path.string();
+                bound.note = note.str();
+                return bound;
+            }
+            if (statusIsOptimal(cont_status) && std::isfinite(cont_obj)) {
+                const double cont_lb = std::max(
+                    cutoffCappedLowerBound(cont_obj),
+                    bound.projection_bound_valid
+                        ? bound.projection_objective_lower_bound : 0.0);
+                bound.continuous_relaxation_precheck_objective = cont_lb;
+                if (cont_lb >= objective_cutoff - 1e-9) {
+                    bound.computed = true;
+                    bound.continuous_relaxation_precheck_fathomed = true;
+                    bound.objective_lower_bound = objective_cutoff;
+                    bound.gini_lower_bound = floor_bound;
+                    bound.lambda_penalty_lower_bound =
+                        std::max(0.0, bound.objective_lower_bound -
+                                      bound.gini_lower_bound);
+                    bound.status = cont_status;
+                    std::ostringstream note;
+                    note << "inventory-route-Gini continuous relaxation cutoff-fathomed this interval before integer route-mask MIP: interval=["
+                         << gamma_floor << "," << gamma_cap << "]"
+                         << ", pickup_limit=" << bound.total_pickup_limit
+                         << ", route_visit_cuts=singletons+subsets_up_to_"
+                         << max_route_cut_size
+                         << ", integer_inventory_relaxation=true"
+                         << ", continuous_relaxation_precheck=true"
+                         << ", continuous_relaxation_precheck_objective="
+                         << cont_lb
+                         << ", continuous_relaxation_precheck_time_seconds="
+                         << bound.continuous_relaxation_precheck_time_seconds
+                         << ", station_flow_conservation=true"
+                         << ", depot_return_capacity=true"
+                         << ", station_operation_capacity=true"
+                         << ", station_operation_mode_cuts=true"
+                         << ", nonzero_visit_operation_cuts=true"
+                         << ", route_mask_duration_load_relaxation="
+                         << (route_mask_relaxation ? "true" : "false")
+                         << ", route_mask_max_v=" << route_mask_max_v
+                         << routeMaskSupportNote()
+                         << pickupDropCompatNote()
+                         << ", incumbent_cutoff_bound=true"
+                         << ", penalty_budget=" << num(penalty_budget)
+                         << ", min_station_bikes="
+                         << min_station_bikes_after_return
+                         << ", objective_lb=" << bound.objective_lower_bound
+                         << ", status=" << cont_status
+                         << ", lp=" << lp_path.string();
+                    bound.note = note.str();
+                    return bound;
+                }
+            }
+        } else {
+            bound.continuous_relaxation_precheck_status =
+                "command_failed_" + std::to_string(cont_rc);
+        }
+    }
+
     std::ofstream cmd(cmd_path);
     cmd << "set threads 1\n";
     cmd << "set timelimit " << std::max(0.1, time_limit_seconds) << "\n";

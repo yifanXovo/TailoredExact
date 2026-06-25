@@ -72,6 +72,7 @@ struct SolveOptions {
     bool movement_bound_audit = false;
     bool frontier_best_bound_scheduling = true;
     bool frontier_relaxation_cache = true;
+    bool frontier_split_before_tree = false;
     bool frontier_column_cache = false;
     bool frontier_focused_min_lb_retry = true;
     bool frontier_focused_intensification = true;
@@ -80,6 +81,7 @@ struct SolveOptions {
     int frontier_focused_max_passes = 2;
     bool frontier_adaptive_split = true;
     int frontier_adaptive_max_depth = 3;
+    bool frontier_adaptive_max_depth_explicit = false;
     double frontier_adaptive_min_width = 1e-4;
     int frontier_adaptive_split_factor = 2;
     bool route_pool_incumbent = true;
@@ -91,6 +93,7 @@ struct SolveOptions {
     bool vehicle_indexed_relaxation_audit = false;
     bool vehicle_indexed_transfer_flow = true;
     bool support_duration_pruning = true;
+    bool pricing_completion_lb_pruning = false;
     bool route_mask_support_duration_pruning = true;
     bool route_mask_operation_budget_cuts = true;
     bool support_feasibility_oracle = false;

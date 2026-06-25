@@ -92,6 +92,12 @@ struct GiniIntervalInventoryRelaxationBound {
     double vehicle_transfer_cap_avg = 0.0;
     double vehicle_transfer_cap_max = 0.0;
     double vehicle_transfer_flow_time_seconds = 0.0;
+    bool continuous_relaxation_precheck_run = false;
+    bool continuous_relaxation_precheck_fathomed = false;
+    bool continuous_relaxation_precheck_infeasible = false;
+    double continuous_relaxation_precheck_objective = 0.0;
+    double continuous_relaxation_precheck_time_seconds = 0.0;
+    std::string continuous_relaxation_precheck_status;
     std::vector<std::string> pickup_drop_incompatible_examples;
     std::string status;
     std::string note;

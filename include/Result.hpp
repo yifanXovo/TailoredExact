@@ -120,6 +120,15 @@ struct SolveResult {
     long long support_duration_strong_cuts_generated = 0;
     long long support_duration_strong_pruned_labels = 0;
     long long support_duration_strong_pruned_columns = 0;
+    long long completion_lb_pruned_labels = 0;
+    long long required_closure_pruned_labels = 0;
+    long long label_dominance_comparisons = 0;
+    long long label_dominance_pruned_labels = 0;
+    long long label_dominance_cross_pickup_pruned_labels = 0;
+    long long label_dominance_inactive_entries_skipped = 0;
+    long long label_dominance_bucket_compactions = 0;
+    long long label_dominance_compacted_entries = 0;
+    long long operation_dp_dominance_pruned_states = 0;
     int support_duration_max_subset_size = 0;
     double support_duration_precompute_time_seconds = 0.0;
     std::string certificate_scope;
@@ -456,6 +465,8 @@ struct SolveResult {
     double vehicle_transfer_flow_time_seconds = 0.0;
     std::string progress_log_path;
     long long progress_checkpoints_written = 0;
+    std::string bpc_trace_json_path;
+    std::string bpc_interval_trace_csv_path;
     double last_lb_improvement_time_seconds = 0.0;
     double last_ub_improvement_time_seconds = 0.0;
     double best_gap_seen = 0.0;

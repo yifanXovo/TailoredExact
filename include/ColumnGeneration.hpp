@@ -155,6 +155,15 @@ struct ColumnGenerationResult {
     long long support_duration_strong_cuts_generated = 0;
     long long support_duration_strong_pruned_labels = 0;
     long long support_duration_strong_pruned_columns = 0;
+    long long completion_lb_pruned_labels = 0;
+    long long required_closure_pruned_labels = 0;
+    long long label_dominance_comparisons = 0;
+    long long label_dominance_pruned_labels = 0;
+    long long label_dominance_cross_pickup_pruned_labels = 0;
+    long long label_dominance_inactive_entries_skipped = 0;
+    long long label_dominance_bucket_compactions = 0;
+    long long label_dominance_compacted_entries = 0;
+    long long operation_dp_dominance_pruned_states = 0;
     int support_duration_max_subset_size = 0;
     double support_duration_precompute_time_seconds = 0.0;
     long long route_states = 0;
@@ -308,6 +317,15 @@ struct GiniCapColumnGenerationResult {
     long long support_duration_strong_cuts_generated = 0;
     long long support_duration_strong_pruned_labels = 0;
     long long support_duration_strong_pruned_columns = 0;
+    long long completion_lb_pruned_labels = 0;
+    long long required_closure_pruned_labels = 0;
+    long long label_dominance_comparisons = 0;
+    long long label_dominance_pruned_labels = 0;
+    long long label_dominance_cross_pickup_pruned_labels = 0;
+    long long label_dominance_inactive_entries_skipped = 0;
+    long long label_dominance_bucket_compactions = 0;
+    long long label_dominance_compacted_entries = 0;
+    long long operation_dp_dominance_pruned_states = 0;
     int support_duration_max_subset_size = 0;
     double support_duration_precompute_time_seconds = 0.0;
     long long route_states = 0;
@@ -338,6 +356,7 @@ struct GiniCapColumnGenerationResult {
     std::vector<RouteLoadColumn> flat_columns;
     std::vector<double> z_values;
     std::vector<double> y_values;
+    std::vector<std::string> pricing_trace_json_objects;
     std::vector<std::string> notes;
 };
 
@@ -491,10 +510,20 @@ struct GiniCapBranchProbeResult {
     long long support_duration_strong_cuts_generated = 0;
     long long support_duration_strong_pruned_labels = 0;
     long long support_duration_strong_pruned_columns = 0;
+    long long completion_lb_pruned_labels = 0;
+    long long required_closure_pruned_labels = 0;
+    long long label_dominance_comparisons = 0;
+    long long label_dominance_pruned_labels = 0;
+    long long label_dominance_cross_pickup_pruned_labels = 0;
+    long long label_dominance_inactive_entries_skipped = 0;
+    long long label_dominance_bucket_compactions = 0;
+    long long label_dominance_compacted_entries = 0;
+    long long operation_dp_dominance_pruned_states = 0;
     int support_duration_max_subset_size = 0;
     double support_duration_precompute_time_seconds = 0.0;
     long long route_states = 0;
     long long operation_states = 0;
+    std::vector<std::string> pricing_trace_json_objects;
     std::vector<std::string> notes;
 };
 
@@ -637,6 +666,15 @@ struct GiniCapTreeResult {
     long long support_duration_strong_cuts_generated = 0;
     long long support_duration_strong_pruned_labels = 0;
     long long support_duration_strong_pruned_columns = 0;
+    long long completion_lb_pruned_labels = 0;
+    long long required_closure_pruned_labels = 0;
+    long long label_dominance_comparisons = 0;
+    long long label_dominance_pruned_labels = 0;
+    long long label_dominance_cross_pickup_pruned_labels = 0;
+    long long label_dominance_inactive_entries_skipped = 0;
+    long long label_dominance_bucket_compactions = 0;
+    long long label_dominance_compacted_entries = 0;
+    long long operation_dp_dominance_pruned_states = 0;
     int support_duration_max_subset_size = 0;
     double support_duration_precompute_time_seconds = 0.0;
     long long route_states = 0;
@@ -725,6 +763,8 @@ struct GiniCapTreeResult {
     long long columns_exported_from_pricing = 0;
     long long columns_exported_from_warmstart = 0;
     long long columns_exported_from_integer_leaves = 0;
+    std::vector<std::string> node_trace_json_objects;
+    std::vector<std::string> pricing_trace_json_objects;
     std::vector<std::string> notes;
 };
 
