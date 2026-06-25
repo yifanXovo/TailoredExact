@@ -369,12 +369,27 @@ paper-core row remains correctly noncertified with `LB=0.344881668930`, gap
 `0.0344873856805`, `unresolved_intervals=4`, and
 `invalid_bound_intervals=0`.
 
+## Round-Next Guard And Certificate Audit
+
+`certificate-basis-test` now constructs unsafe `SolveResult` objects in C++ and
+calls `resultToJson` to verify the output guard directly. The fixtures include:
+unresolved intervals, open nodes, frontier coverage false, invalid intervals,
+verifier failure, positive gap, BPC-tree certificate without exact pricing,
+duplicate negative projection blockage, route-mask certificate with complete
+enumeration disabled, and a valid relaxation-only frontier certificate.
+
+The round-next audit command:
+
+```powershell
+D:\msys64\ucrt64\bin\python.exe scripts\audit_bpc_certificate.py results\paper_core_round_next\raw --csv-out results\paper_core_round_next\audit\certificate_audit.csv --fail-on-error
+```
+
+currently audits nine solver JSON rows with zero failures. The regenerated V12
+M1 and V12 M2 paper-core rows are both certified by relaxation-only full
+frontier ledgers; no BPC pricing closure is required because no final interval
+uses a BPC tree certificate.
+
 ## Remaining Audit Work
 
-- Add C++ unit-style fixtures that create unsafe `SolveResult` objects and
-  verify the JSON guard directly.
-- Extend pricing internals further with unfinished-state frontier counts.
-  Current pricing-call traces include vehicle, engine, dual summary, generated
-  columns, route/operation states, support pruning totals, dominance-bucket
-  compaction totals, best reduced cost, completion status, and elapsed time.
-- Run the required 300s/1200s V12 paper-core matrix after the first safety pass.
+- Extend pricing internals further with unfinished-state frontier counts for
+  future instances where the relaxation portfolio does not fathom the frontier.

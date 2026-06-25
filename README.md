@@ -70,6 +70,12 @@ does not prove `certified_original_problem=true`.
 - `--frontier-adaptive-split true|false`: split the current minimum-LB unresolved Gini interval into exactly covering child intervals.
 - `--frontier-adaptive-max-depth N`: maximum adaptive split depth for a frontier leaf interval. The `paper-bpc-core` and `paper-exact-portfolio` presets default this to 8 unless explicitly overridden, because depth-8 certificate-neutral child relaxations gave the best current V12 M1/M2 lower-bound progress before expensive BPC tree pricing.
 - `--route-mask-operation-budget-cuts true|false`: add mask-specific pickup-operation budget rows to the route-mask relaxation using depot-cycle lower bounds.
+- In `paper-bpc-core`, operation-budget route-mask rows are still enabled, but
+  the frontier relaxation now uses a certificate-safe relaxation portfolio: if
+  the operation-budget MIP does not fathom an interval within budget, the solver
+  also tries the same vehicle-indexed inventory/route/Gini relaxation with
+  operation-budget rows disabled and keeps the stronger valid lower bound. This
+  prevents a harder strengthening MIP from regressing the final frontier ledger.
 - `--route-pool-incumbent true|false`: collect verified BPC-generated route-load columns and solve a true-objective restricted route-column incumbent master for upper bounds only.
 - `--route-pool-max-columns-per-vehicle N`: cap stored route-pool columns per vehicle after projection dominance.
 - `--pickup-drop-compat-flow true|false`: strengthen the inventory/route/Gini relaxation with pickup-to-drop compatibility flow variables when pairs can be safely screened by route-duration lower bounds.
@@ -77,6 +83,10 @@ does not prove `certified_original_problem=true`.
 - `--bpc-incumbent auto|best-of-all`: run a bounded verified incumbent portfolio and select the best true-objective route plan as an upper bound.
 - `--incumbent-archive-auto true|false --incumbent-archive-dir <dir>`: scan prior route-bearing results for verified upper-bound route plans. In `paper-bpc-core`, if this archive supplies a verified incumbent, the default BPC-owned `auto` incumbent portfolio is skipped to avoid duplicate UB-only work; no lower-bound certificate is inherited from the archive.
 - `--progress-log <path> --progress-interval-seconds <seconds>`: write frontier progress checkpoints for convergence reporting.
+- `--method certificate-basis-test`: runs C++ guard fixtures that construct
+  unsafe original-BPC `SolveResult` objects and verify that JSON output is
+  downgraded unless the full certificate conditions hold. It also includes a
+  valid relaxation-only frontier certificate fixture.
 - `--support-feasibility-oracle true|false`: reserved switch for exact small-support infeasibility checking; default is false and heuristic support cuts are not generated.
 - `--incumbent-json <path> --incumbent-format exact_result --incumbent-source-name <name>`: import a verified incumbent route solution as an upper-bound/cutoff source only.
 - `--incumbent-format auto|exact_result|route_json|csv`: parse incumbent files as ExactEBRP result JSON, route JSON, or CSV with vehicle/order/station/pickup/drop columns.

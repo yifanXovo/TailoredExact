@@ -288,6 +288,14 @@ bool inferCertifiedOriginalProblem(const SolveResult& result) {
             !result.full_certificate_pricing_closure_satisfied) return false;
         if (!result.full_certificate_basis.empty() &&
             !result.full_certificate_all_intervals_accounted) return false;
+        const bool route_mask_based_certificate =
+            containsText(result.frontier_lower_bound_source, "route_mask") ||
+            containsText(result.interval_certificate_basis, "route_mask") ||
+            containsText(result.interval_bound_source_list, "route_mask");
+        if (route_mask_based_certificate &&
+            !result.route_mask_all_subset_enumeration_certifying) {
+            return false;
+        }
         const bool branch_price_tree_used_for_certificate =
             result.frontier_tree_closed_interval_count > 0;
         if (result.objective > 1e-12 && branch_price_tree_used_for_certificate) {
@@ -542,6 +550,10 @@ std::string resultToJson(const SolveResult& input) {
         << (result.route_mask_all_subset_enumeration_enabled ? "true" : "false") << ",\n";
     out << "  \"route_mask_all_subset_enumeration_certifying\": "
         << (result.route_mask_all_subset_enumeration_certifying ? "true" : "false") << ",\n";
+    out << "  \"vehicle_indexed_relaxation_enabled_snapshot\": "
+        << (result.vehicle_indexed_relaxation_enabled_snapshot ? "true" : "false") << ",\n";
+    out << "  \"vehicle_indexed_transfer_flow_enabled_snapshot\": "
+        << (result.vehicle_indexed_transfer_flow_enabled_snapshot ? "true" : "false") << ",\n";
     out << "  \"benchmark_scale\": \""
         << jsonEscape(result.benchmark_scale) << "\",\n";
     out << "  \"memory_peak_estimate_mb\": "

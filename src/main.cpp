@@ -884,6 +884,8 @@ void applyRunConfigSnapshot(const ebrp::RunConfigSnapshot& snapshot,
     result.penalty_domain_enabled = snapshot.penalty_domain_enabled;
     result.vehicle_indexed_relaxation_enabled_snapshot =
         snapshot.vehicle_indexed_relaxation_enabled;
+    result.vehicle_indexed_transfer_flow_enabled_snapshot =
+        snapshot.vehicle_indexed_transfer_flow_enabled;
     result.operation_budget_cuts_enabled = snapshot.operation_budget_cuts_enabled;
     result.branching_enabled = snapshot.branching_enabled;
     result.two_track_enabled = snapshot.two_track_enabled;
@@ -6261,6 +6263,173 @@ ebrp::SolveResult solveCertificateBasisDiagnostic(const ebrp::Instance& instance
     result.full_certificate_pricing_closure_satisfied = true;
     result.full_certificate_all_intervals_accounted = false;
     result.full_certificate_rejection_reason = "unresolved_intervals";
+
+    auto make_claim = [&](const std::string& label) {
+        ebrp::SolveResult claim;
+        claim.instance_name = instance.name;
+        claim.input_path = instance.path;
+        claim.method = "gcap-frontier";
+        claim.status = "optimal";
+        claim.algorithm_preset = "paper-bpc-core";
+        claim.option_audit_consistent = true;
+        claim.frontier_covers_all_improving_gini_values = true;
+        claim.frontier_range_certificate_scope =
+            "original_full_improving_range";
+        claim.full_certificate_basis = "relaxation_only_frontier";
+        claim.full_certificate_all_intervals_accounted = true;
+        claim.full_certificate_rejection_reason = "none";
+        claim.routes = emptyRouteSet(instance);
+        claim.verification = ebrp::verifySolution(instance, claim.routes,
+                                                  opt.lambda);
+        claim.final_inventory = claim.verification.final_inventory;
+        claim.G = claim.verification.G;
+        claim.P = claim.verification.P;
+        claim.objective = claim.verification.objective;
+        claim.upper_bound = claim.objective;
+        claim.lower_bound = claim.objective;
+        claim.gap = 0.0;
+        claim.unresolved_intervals = 0;
+        claim.invalid_bound_intervals = 0;
+        claim.open_nodes = 0;
+        claim.frontier_bound_fathomed_interval_count = 1;
+        claim.frontier_tree_closed_interval_count = 0;
+        claim.frontier_lower_bound_source =
+            "inventory_route_gini_relaxation";
+        claim.interval_certificate_basis =
+            "0:inventory_route_gini_relaxation_fathomed";
+        claim.interval_requires_pricing_closure = "0:false";
+        claim.interval_pricing_closure_available = "0:false";
+        claim.interval_bound_valid = "0:true";
+        claim.interval_bound_source_list =
+            "0:inventory_route_gini_relaxation";
+        claim.certificate =
+            "synthetic guard fixture " + label;
+        return claim;
+    };
+    auto json_bool_is = [](const std::string& json,
+                           const std::string& key,
+                           bool expected) {
+        const std::string needle = "\"" + key + "\": " +
+            std::string(expected ? "true" : "false");
+        return json.find(needle) != std::string::npos;
+    };
+    auto json_status_is = [](const std::string& json,
+                             const std::string& status) {
+        return json.find("\"status\": \"" + status + "\"") !=
+            std::string::npos;
+    };
+
+    struct GuardCase {
+        std::string label;
+        ebrp::SolveResult claim;
+        bool expect_certified = false;
+    };
+    std::vector<GuardCase> guard_cases;
+    guard_cases.push_back({"valid_relaxation_only_frontier",
+        make_claim("valid_relaxation_only_frontier"), true});
+
+    auto add_rejected = [&](const std::string& label,
+                            ebrp::SolveResult claim) {
+        guard_cases.push_back({label, std::move(claim), false});
+    };
+    {
+        auto claim = make_claim("unresolved_intervals");
+        claim.unresolved_intervals = 1;
+        add_rejected("unresolved_intervals", claim);
+    }
+    {
+        auto claim = make_claim("open_nodes");
+        claim.open_nodes = 1;
+        add_rejected("open_nodes", claim);
+    }
+    {
+        auto claim = make_claim("frontier_coverage_false");
+        claim.frontier_covers_all_improving_gini_values = false;
+        add_rejected("frontier_coverage_false", claim);
+    }
+    {
+        auto claim = make_claim("invalid_bound_intervals");
+        claim.invalid_bound_intervals = 1;
+        add_rejected("invalid_bound_intervals", claim);
+    }
+    {
+        auto claim = make_claim("verifier_failed");
+        claim.verification.objective_matches = false;
+        claim.verification.errors.push_back("synthetic verifier failure");
+        add_rejected("verifier_failed", claim);
+    }
+    {
+        auto claim = make_claim("positive_gap");
+        claim.lower_bound = std::max(0.0, claim.objective - 0.01);
+        claim.gap = claim.objective > 1e-12
+            ? (claim.upper_bound - claim.lower_bound) / claim.upper_bound
+            : 1.0;
+        add_rejected("positive_gap", claim);
+    }
+    {
+        auto claim = make_claim("tree_without_exact_pricing");
+        claim.frontier_tree_closed_interval_count = 1;
+        claim.frontier_bound_fathomed_interval_count = 0;
+        claim.frontier_lower_bound_source = "branch_price_tree";
+        claim.interval_certificate_basis = "0:pricing_closed_bpc_tree";
+        claim.interval_bound_source_list = "0:branch_price_tree";
+        claim.interval_requires_pricing_closure = "0:true";
+        claim.pricing_completed_exactly = false;
+        claim.pricing_closure_certified_exact = false;
+        claim.pricing_closed_nodes = 1;
+        add_rejected("tree_without_exact_pricing", claim);
+    }
+    {
+        auto claim = make_claim("duplicate_negative_projection");
+        claim.frontier_tree_closed_interval_count = 1;
+        claim.frontier_bound_fathomed_interval_count = 0;
+        claim.frontier_lower_bound_source = "branch_price_tree";
+        claim.interval_certificate_basis = "0:pricing_closed_bpc_tree";
+        claim.interval_bound_source_list = "0:branch_price_tree";
+        claim.interval_requires_pricing_closure = "0:true";
+        claim.pricing_completed_exactly = true;
+        claim.pricing_closure_certified_exact = true;
+        claim.pricing_closed_nodes = 1;
+        claim.pricing_blocked_by_duplicate_projection = true;
+        add_rejected("duplicate_negative_projection", claim);
+    }
+    {
+        auto claim = make_claim("route_mask_not_certifying");
+        claim.frontier_lower_bound_source = "route_mask_relaxation";
+        claim.interval_certificate_basis = "0:route_mask_relaxation";
+        claim.interval_bound_source_list = "0:route_mask_relaxation";
+        claim.route_mask_all_subset_enumeration_enabled = false;
+        claim.route_mask_all_subset_enumeration_certifying = false;
+        add_rejected("route_mask_not_certifying", claim);
+    }
+
+    int guard_passed = 0;
+    for (const GuardCase& guard_case : guard_cases) {
+        const std::string json = ebrp::resultToJson(guard_case.claim);
+        const bool certified_ok = json_bool_is(
+            json, "certified_original_problem",
+            guard_case.expect_certified);
+        const bool status_ok = guard_case.expect_certified
+            ? json_status_is(json, "optimal")
+            : json_status_is(json, "not_certified_incomplete_certificate");
+        if (certified_ok && status_ok) {
+            ++guard_passed;
+            result.notes.push_back("certificate_guard_fixture_passed: "
+                + guard_case.label);
+        } else {
+            result.status = "diagnostic_failed";
+            result.notes.push_back("certificate_guard_fixture_failed: "
+                + guard_case.label);
+        }
+    }
+    if (guard_passed != static_cast<int>(guard_cases.size())) {
+        result.full_certificate_rejection_reason =
+            "certificate_guard_fixture_failure";
+    }
+    result.notes.push_back("certificate_guard_fixtures_checked="
+        + std::to_string(guard_cases.size())
+        + ", passed=" + std::to_string(guard_passed));
+
     result.routes = emptyRouteSet(instance);
     result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
     result.final_inventory = result.verification.final_inventory;
@@ -6323,6 +6492,14 @@ ebrp::SolveResult solveOptionConsistencyDiagnostic(const ebrp::Instance& instanc
     }
     if (result.relaxed_rmp_enabled != snapshot.relaxed_rmp_enabled) {
         mismatches.push_back("relaxed_RMP_enabled");
+    }
+    if (result.vehicle_indexed_relaxation_enabled_snapshot !=
+        snapshot.vehicle_indexed_relaxation_enabled) {
+        mismatches.push_back("vehicle_indexed_relaxation_enabled");
+    }
+    if (result.vehicle_indexed_transfer_flow_enabled_snapshot !=
+        snapshot.vehicle_indexed_transfer_flow_enabled) {
+        mismatches.push_back("vehicle_indexed_transfer_flow_enabled");
     }
     if (result.route_mask_all_subset_enumeration_enabled !=
         snapshot.route_mask_all_subset_enumeration_enabled) {
@@ -8418,7 +8595,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             auto compute_once = [&](bool movement_enabled,
                                     bool compat_enabled,
                                     bool vehicle_indexed_enabled,
-                                    bool vehicle_transfer_enabled) {
+                                    bool vehicle_transfer_enabled,
+                                    bool operation_budget_enabled) {
                 return ebrp::computeGiniIntervalInventoryRelaxationBound(
                     instance, opt.lambda, lo, hi, budget, cutoff,
                     opt.route_mask_max_v, opt.projection_bound,
@@ -8427,24 +8605,79 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     opt.route_mask_support_duration_pruning,
                     compat_enabled,
                     opt.pickup_drop_transfer_cap_flow,
-                    opt.route_mask_operation_budget_cuts,
+                    operation_budget_enabled,
                     vehicle_indexed_enabled,
                     vehicle_transfer_enabled);
             };
+            auto relaxationLb =
+                [&](const ebrp::GiniIntervalInventoryRelaxationBound& bound) {
+                    return bound.infeasible ? cutoff : bound.objective_lower_bound;
+                };
+            auto compute_with_compat_policy =
+                [&](bool operation_budget_enabled) {
+                    if (opt.pickup_drop_compat_flow) {
+                        ebrp::GiniIntervalInventoryRelaxationBound no_compat =
+                            compute_once(opt.movement_domain_tightening, false,
+                                         opt.vehicle_indexed_operation_relaxation,
+                                         false, operation_budget_enabled);
+                        const double no_compat_lb = relaxationLb(no_compat);
+                        if (std::isfinite(cutoff) &&
+                            no_compat.computed &&
+                            no_compat_lb >= cutoff - 1e-9) {
+                            no_compat.note +=
+                                ", pickup_drop_compat_flow_audit_selected=no_compat"
+                                ", compat_skipped=no_compat_cutoff_fathomed"
+                                ", no_compat_lb=" + std::to_string(no_compat_lb);
+                            return no_compat;
+                        }
+                        if (budget <= 2.5) {
+                            no_compat.note +=
+                                ", pickup_drop_compat_flow_audit_selected=no_compat"
+                                ", compat_skipped=short_relaxation_budget"
+                                ", no_compat_lb=" + std::to_string(no_compat_lb)
+                                + ", relaxation_budget=" + std::to_string(budget);
+                            return no_compat;
+                        }
+                        ebrp::GiniIntervalInventoryRelaxationBound compat =
+                            compute_once(opt.movement_domain_tightening,
+                                         true,
+                                         opt.vehicle_indexed_operation_relaxation,
+                                         opt.vehicle_indexed_transfer_flow,
+                                         operation_budget_enabled);
+                        const double compat_lb = relaxationLb(compat);
+                        if (no_compat_lb > compat_lb + 1e-9) {
+                            no_compat.note +=
+                                ", pickup_drop_compat_flow_audit_selected=no_compat"
+                                ", compat_lb=" + std::to_string(compat_lb)
+                                + ", no_compat_lb=" + std::to_string(no_compat_lb);
+                            return no_compat;
+                        }
+                        compat.note +=
+                            ", pickup_drop_compat_flow_audit_selected=compat"
+                            ", compat_lb=" + std::to_string(compat_lb)
+                            + ", no_compat_lb=" + std::to_string(no_compat_lb);
+                        return compat;
+                    }
+                    return compute_once(opt.movement_domain_tightening,
+                                        false,
+                                        opt.vehicle_indexed_operation_relaxation,
+                                        false,
+                                        operation_budget_enabled);
+                };
             if (opt.movement_bound_audit) {
                 ++result.movement_audit_intervals;
                 ebrp::GiniIntervalInventoryRelaxationBound no_movement =
                     compute_once(false, opt.pickup_drop_compat_flow,
                                  opt.vehicle_indexed_operation_relaxation,
-                                 opt.vehicle_indexed_transfer_flow);
+                                 opt.vehicle_indexed_transfer_flow,
+                                 opt.route_mask_operation_budget_cuts);
                 ebrp::GiniIntervalInventoryRelaxationBound with_movement =
                     compute_once(true, opt.pickup_drop_compat_flow,
                                  opt.vehicle_indexed_operation_relaxation,
-                                 opt.vehicle_indexed_transfer_flow);
-                const double no_lb = no_movement.infeasible
-                    ? cutoff : no_movement.objective_lower_bound;
-                const double with_lb = with_movement.infeasible
-                    ? cutoff : with_movement.objective_lower_bound;
+                                 opt.vehicle_indexed_transfer_flow,
+                                 opt.route_mask_operation_budget_cuts);
+                const double no_lb = relaxationLb(no_movement);
+                const double with_lb = relaxationLb(with_movement);
                 result.relaxation_lb_no_movement =
                     std::max(result.relaxation_lb_no_movement, no_lb);
                 result.relaxation_lb_with_movement =
@@ -8468,63 +8701,18 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     std::max(result.relaxation_lb_used,
                              std::max(no_lb, with_lb));
             } else {
-                if (opt.pickup_drop_compat_flow) {
-                    ebrp::GiniIntervalInventoryRelaxationBound no_compat =
-                        compute_once(opt.movement_domain_tightening, false,
-                                     opt.vehicle_indexed_operation_relaxation,
-                                     false);
-                    const double no_compat_lb = no_compat.infeasible
-                        ? cutoff : no_compat.objective_lower_bound;
-                    if (std::isfinite(cutoff) &&
-                        no_compat.computed &&
-                        no_compat_lb >= cutoff - 1e-9) {
-                        no_compat.note +=
-                            ", pickup_drop_compat_flow_audit_selected=no_compat"
-                            ", compat_skipped=no_compat_cutoff_fathomed"
-                            ", no_compat_lb=" + std::to_string(no_compat_lb);
-                        out.bound = no_compat;
-                    } else if (budget <= 2.5) {
-                        no_compat.note +=
-                            ", pickup_drop_compat_flow_audit_selected=no_compat"
-                            ", compat_skipped=short_relaxation_budget"
-                            ", no_compat_lb=" + std::to_string(no_compat_lb)
-                            + ", relaxation_budget=" + std::to_string(budget);
-                        out.bound = no_compat;
-                    } else {
-                        out.bound = compute_once(opt.movement_domain_tightening,
-                                                 true,
-                                                 opt.vehicle_indexed_operation_relaxation,
-                                                 opt.vehicle_indexed_transfer_flow);
-                        const double compat_lb = out.bound.infeasible
-                            ? cutoff : out.bound.objective_lower_bound;
-                        if (no_compat_lb > compat_lb + 1e-9) {
-                            no_compat.note += ", pickup_drop_compat_flow_audit_selected=no_compat"
-                                ", compat_lb=" + std::to_string(compat_lb)
-                                + ", no_compat_lb=" + std::to_string(no_compat_lb);
-                            out.bound = no_compat;
-                        } else {
-                            out.bound.note += ", pickup_drop_compat_flow_audit_selected=compat"
-                                ", compat_lb=" + std::to_string(compat_lb)
-                                + ", no_compat_lb=" + std::to_string(no_compat_lb);
-                        }
-                    }
-                } else {
-                    out.bound = compute_once(opt.movement_domain_tightening,
-                                             false,
-                                             opt.vehicle_indexed_operation_relaxation,
-                                             false);
-                }
+                out.bound =
+                    compute_with_compat_policy(opt.route_mask_operation_budget_cuts);
                 if (opt.vehicle_indexed_relaxation_audit &&
                     opt.vehicle_indexed_operation_relaxation) {
                     ebrp::GiniIntervalInventoryRelaxationBound aggregate =
                         compute_once(opt.movement_domain_tightening,
                                      opt.pickup_drop_compat_flow,
                                      false,
-                                     false);
-                    const double chosen_lb = out.bound.infeasible
-                        ? cutoff : out.bound.objective_lower_bound;
-                    const double aggregate_lb = aggregate.infeasible
-                        ? cutoff : aggregate.objective_lower_bound;
+                                     false,
+                                     opt.route_mask_operation_budget_cuts);
+                    const double chosen_lb = relaxationLb(out.bound);
+                    const double aggregate_lb = relaxationLb(aggregate);
                     if (aggregate_lb > chosen_lb + 1e-9) {
                         aggregate.note += ", vehicle_indexed_relaxation_audit_selected=aggregate"
                             ", aggregate_lb=" + std::to_string(aggregate_lb)
@@ -8536,8 +8724,27 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                             + ", vehicle_indexed_lb=" + std::to_string(chosen_lb);
                     }
                 }
-                const double used_lb = out.bound.infeasible
-                    ? cutoff : out.bound.objective_lower_bound;
+                if (opt.route_mask_operation_budget_cuts &&
+                    std::isfinite(cutoff) &&
+                    relaxationLb(out.bound) < cutoff - 1e-9) {
+                    ebrp::GiniIntervalInventoryRelaxationBound no_budget =
+                        compute_with_compat_policy(false);
+                    const double operation_budget_lb = relaxationLb(out.bound);
+                    const double no_budget_lb = relaxationLb(no_budget);
+                    if (no_budget_lb > operation_budget_lb + 1e-9) {
+                        no_budget.note +=
+                            ", route_mask_operation_budget_portfolio_selected=no_operation_budget"
+                            ", operation_budget_lb=" + std::to_string(operation_budget_lb)
+                            + ", no_operation_budget_lb=" + std::to_string(no_budget_lb);
+                        out.bound = no_budget;
+                    } else {
+                        out.bound.note +=
+                            ", route_mask_operation_budget_portfolio_selected=operation_budget"
+                            ", operation_budget_lb=" + std::to_string(operation_budget_lb)
+                            + ", no_operation_budget_lb=" + std::to_string(no_budget_lb);
+                    }
+                }
+                const double used_lb = relaxationLb(out.bound);
                 result.relaxation_lb_used =
                     std::max(result.relaxation_lb_used, used_lb);
                 if (opt.movement_domain_tightening) {

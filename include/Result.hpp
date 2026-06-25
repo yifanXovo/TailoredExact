@@ -166,6 +166,7 @@ struct SolveResult {
     bool projection_bound_enabled = true;
     bool penalty_domain_enabled = true;
     bool vehicle_indexed_relaxation_enabled_snapshot = true;
+    bool vehicle_indexed_transfer_flow_enabled_snapshot = true;
     bool operation_budget_cuts_enabled = true;
     bool branching_enabled = true;
     bool two_track_enabled = false;

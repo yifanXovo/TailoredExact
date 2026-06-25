@@ -824,3 +824,27 @@ exact-label pricer for Ryan-Foster require-together branches. It is a safe
 partial-label feasibility bound, but current V12 diagnostics still show
 time-limited pricing with negative reduced cost remaining; it is not sufficient
 by itself to close the plateau.
+## Round Next: Vehicle-Indexed Relaxation Certificate Path
+
+The custom `v12_m2_ablation_plus_vehicle_relaxation_1200s` certificate was
+reproduced under `results/paper_core_round_next/` and audited as a valid
+relaxation-only frontier certificate. The key finding is that route-mask
+operation-budget cuts are valid but can make the interval relaxation MIP harder
+within the time budget. The paper-core solver now keeps those rows enabled but
+adds a certificate-safe no-operation-budget fallback relaxation on the same
+interval when the configured operation-budget relaxation does not fathom it.
+
+Round-next regenerated engineering results:
+
+| instance | preset | time limit | status | objective | LB | UB | runtime | certified |
+|---|---|---:|---|---:|---:|---:|---:|---|
+| V4 smoke | paper-bpc-core | 30s | optimal | 0 | 0 | 0 | 11.3841401 | yes |
+| V12 M1 average | paper-bpc-core | 300s | optimal | 0.357200583208 | 0.357200583208 | 0.357200583208 | 265.220702 | yes |
+| V12 M1 average | paper-bpc-core | 1200s | optimal | 0.357200583208 | 0.357200583208 | 0.357200583208 | 257.5489498 | yes |
+| V12 M2 average | paper-bpc-core | 300s | optimal | 0.719065249476 | 0.719065249476 | 0.719065249476 | 217.7839095 | yes |
+| V12 M2 average | paper-bpc-core | 1200s | optimal | 0.719065249476 | 0.719065249476 | 0.719065249476 | 215.7528562 | yes |
+
+The V12 certificates are full improving-Gini-range frontier certificates where
+all final intervals are bound-fathomed by valid inventory/route/Gini relaxation
+lower bounds. Compact CPLEX rows in the same result directory are benchmark
+only.
