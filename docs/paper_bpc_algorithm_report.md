@@ -848,3 +848,28 @@ The V12 certificates are full improving-Gini-range frontier certificates where
 all final intervals are bound-fathomed by valid inventory/route/Gini relaxation
 lower bounds. Compact CPLEX rows in the same result directory are benchmark
 only.
+
+## Heuristic UB And Generated Variant Round
+
+The paper-core default UB source was changed from arbitrary archive scanning to
+a reproducible verifier-gated primal heuristic. Archive scanning remains
+available only as an explicit diagnostic UB source.
+
+Key current regenerated V12 rows with the new paper heuristic default:
+
+| instance | row | status | UB | LB | gap | certified |
+|---|---|---|---:|---:|---:|---|
+| V12 M1 average | paper-core heuristic 300s | not closed | 0.364375057616 | 0.354350322125 | 0.027512134218 | no |
+| V12 M2 average | paper-core heuristic 300s | not closed | 0.756165366387 | 0.688739371450 | 0.089168319437 | no |
+
+This is the expected consequence of removing the stronger archive incumbent
+from the paper-core default. The exact lower-bound certificate mechanism is
+unchanged; the frontier simply has a weaker incumbent cutoff.
+
+The generated variant round created twelve deterministic capacity/inventory
+variants under `reference/generated_variants/` and ran ten 60s paper-core rows.
+Five of the ten tested variants certified within 60s, including all three V10
+M2 variants, one V8 M2 variant, and one V12 M2 variant. All optimal claims in
+`results/heuristic_relaxation_dataset_round/` and
+`results/generated_variant_round/` pass `audit_bpc_certificate.py
+--fail-on-error`.

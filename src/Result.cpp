@@ -270,6 +270,9 @@ bool inferCertifiedOriginalProblem(const SolveResult& result) {
     if (!result.option_audit_consistent) return false;
     if (!inferSolvesOriginalObjective(result)) return false;
     if (!inferVerifierPassed(result)) return false;
+    if (result.incumbent_source_contributes_lower_bound) return false;
+    if (result.incumbent_source_category == "diagnostic_archive" &&
+        result.incumbent_source_is_paper_reproducible) return false;
     if (result.gap > 1e-7) return false;
     if (!nearlyEqual(result.lower_bound, result.upper_bound)) return false;
     if (!nearlyEqual(result.objective, result.upper_bound)) return false;
@@ -891,6 +894,14 @@ std::string resultToJson(const SolveResult& input) {
     out << "  \"incumbent_source\": \"" << jsonEscape(result.incumbent_source) << "\",\n";
     out << "  \"incumbent_source_detail\": \""
         << jsonEscape(result.incumbent_source_detail) << "\",\n";
+    out << "  \"incumbent_source_category\": \""
+        << jsonEscape(result.incumbent_source_category) << "\",\n";
+    out << "  \"incumbent_source_is_paper_reproducible\": "
+        << (result.incumbent_source_is_paper_reproducible ? "true" : "false") << ",\n";
+    out << "  \"incumbent_source_contributes_lower_bound\": "
+        << (result.incumbent_source_contributes_lower_bound ? "true" : "false") << ",\n";
+    out << "  \"primal_heuristic\": \""
+        << jsonEscape(result.primal_heuristic) << "\",\n";
     out << "  \"incumbent_import_attempted\": "
         << (result.incumbent_import_attempted ? "true" : "false") << ",\n";
     out << "  \"incumbent_import_verified\": "

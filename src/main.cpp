@@ -40,7 +40,7 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|option-consistency-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|projection-safe-relaxed-column-test|non-elementary-relaxed-column-test|ng-relaxed-closure-test|relaxed-rmp-cg-test|frontier-relaxed-rmp-cg-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|large-relaxed-rmp-cg-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|primal-heuristic|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|option-consistency-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|projection-safe-relaxed-column-test|non-elementary-relaxed-column-test|ng-relaxed-closure-test|relaxed-rmp-cg-test|frontier-relaxed-rmp-cg-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|large-relaxed-rmp-cg-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
@@ -72,6 +72,8 @@ void usage() {
         << "[--incumbent-json <path>] [--incumbent-format auto|exact_result|route_json|csv] "
         << "[--hga-incumbent <path>] [--hga-incumbent-format auto|route_json|csv|legacy] "
         << "[--external-incumbent <path>] [--external-incumbent-format auto|route_json|csv|legacy_text] [--export-incumbent <path>] "
+        << "[--primal-heuristic none|greedy|hga-tgbc|best-of-all] [--primal-heuristic-seconds <seconds>] "
+        << "[--primal-heuristic-seed <seed>] [--primal-heuristic-runs <N>] "
         << "[--large-instance-mode auto|off|force] [--large-lb-mode none|inventory-only|movement-projection|column-pool-relaxation|auto] "
         << "[--pricing-engine exact-label|ng-dssr|hybrid] "
         << "[--ng-size <N>] [--ng-neighborhood-mode nearest|dual-aware|hybrid] "
@@ -201,11 +203,16 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
             opt.frontier_adaptive_max_depth =
                 std::max(opt.frontier_adaptive_max_depth, 8);
         }
-        opt.bpc_incumbent = (opt.bpc_incumbent == "none" || opt.bpc_incumbent.empty())
-            ? "auto" : opt.bpc_incumbent;
+        if (!opt.primal_heuristic_explicit) {
+            opt.primal_heuristic = "hga-tgbc";
+        }
+        opt.bpc_incumbent = (opt.bpc_incumbent.empty())
+            ? "none" : opt.bpc_incumbent;
         opt.compact_fallback_enabled =
             opt.algorithm_preset == "paper-exact-portfolio";
-        opt.incumbent_archive_auto = true;
+        if (!opt.incumbent_archive_auto_explicit) {
+            opt.incumbent_archive_auto = false;
+        }
         return;
     }
 
@@ -234,7 +241,12 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.branch_operation_mode = true;
         opt.bpc_incumbent = (opt.bpc_incumbent == "none" || opt.bpc_incumbent.empty())
             ? "auto" : opt.bpc_incumbent;
-        opt.incumbent_archive_auto = true;
+        if (!opt.primal_heuristic_explicit) {
+            opt.primal_heuristic = "hga-tgbc";
+        }
+        if (!opt.incumbent_archive_auto_explicit) {
+            opt.incumbent_archive_auto = false;
+        }
         opt.compact_fallback_enabled = false;
         return;
     }
@@ -336,6 +348,13 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--external-incumbent") opt.external_incumbent_path = requireValue(i, argc, argv);
         else if (arg == "--external-incumbent-format") opt.external_incumbent_format = requireValue(i, argc, argv);
         else if (arg == "--export-incumbent") opt.export_incumbent_path = requireValue(i, argc, argv);
+        else if (arg == "--primal-heuristic") {
+            opt.primal_heuristic = requireValue(i, argc, argv);
+            opt.primal_heuristic_explicit = true;
+        }
+        else if (arg == "--primal-heuristic-seconds") opt.primal_heuristic_seconds = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--primal-heuristic-seed") opt.primal_heuristic_seed = static_cast<unsigned>(std::stoul(requireValue(i, argc, argv)));
+        else if (arg == "--primal-heuristic-runs") opt.primal_heuristic_runs = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--large-instance-mode") opt.large_instance_mode = requireValue(i, argc, argv);
         else if (arg == "--large-lb-mode") opt.large_lb_mode = requireValue(i, argc, argv);
         else if (arg == "--pricing-engine") opt.pricing_engine = requireValue(i, argc, argv);
@@ -422,7 +441,10 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--pricing-verifier-mode") opt.pricing_verifier_mode = requireValue(i, argc, argv);
         else if (arg == "--algorithm-preset") opt.algorithm_preset = requireValue(i, argc, argv);
         else if (arg == "--production-preset") opt.algorithm_preset = requireValue(i, argc, argv);
-        else if (arg == "--incumbent-archive-auto") opt.incumbent_archive_auto = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--incumbent-archive-auto") {
+            opt.incumbent_archive_auto = parseBoolValue(requireValue(i, argc, argv));
+            opt.incumbent_archive_auto_explicit = true;
+        }
         else if (arg == "--incumbent-archive-dir") opt.incumbent_archive_dir = requireValue(i, argc, argv);
         else if (arg == "--log") opt.log_path = requireValue(i, argc, argv);
         else if (arg == "--out") opt.out_path = requireValue(i, argc, argv);
@@ -532,6 +554,14 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if (opt.large_relaxed_rmp_column_budget < 1) opt.large_relaxed_rmp_column_budget = 1;
     if (opt.large_relaxed_rmp_time < 0.0) opt.large_relaxed_rmp_time = 0.0;
+    opt.primal_heuristic = lowerAscii(opt.primal_heuristic);
+    if (opt.primal_heuristic != "greedy" &&
+        opt.primal_heuristic != "hga-tgbc" &&
+        opt.primal_heuristic != "best-of-all") {
+        opt.primal_heuristic = "none";
+    }
+    if (opt.primal_heuristic_seconds < 0.0) opt.primal_heuristic_seconds = 0.0;
+    if (opt.primal_heuristic_runs < 1) opt.primal_heuristic_runs = 1;
     if (opt.support_duration_max_subset_size < 0) opt.support_duration_max_subset_size = 0;
     if (opt.bpc_incumbent_seconds < 0.0) opt.bpc_incumbent_seconds = 0.0;
     if (opt.bpc_incumbent_rounds < 1) opt.bpc_incumbent_rounds = 1;
@@ -722,6 +752,26 @@ std::string boolText(bool value) {
     return value ? "true" : "false";
 }
 
+std::string classifyIncumbentSource(const std::string& source) {
+    const std::string s = lowerAscii(source);
+    if (s.find("archive") != std::string::npos) return "diagnostic_archive";
+    if (s.find("cplex") != std::string::npos) return "cplex_benchmark";
+    if (s.find("explicit") != std::string::npos ||
+        s.find("external") != std::string::npos ||
+        s.find("json") != std::string::npos ||
+        s.find("hga/tgbc") != std::string::npos) {
+        return "explicit_incumbent_json";
+    }
+    if (s.find("empty") != std::string::npos) return "empty";
+    return "primal_heuristic";
+}
+
+bool incumbentSourcePaperReproducible(const std::string& category) {
+    return category == "primal_heuristic" ||
+           category == "explicit_incumbent_json" ||
+           category == "empty";
+}
+
 std::string hashFileFnv1a(const std::string& path) {
     std::ifstream in(path, std::ios::binary);
     if (!in) return "";
@@ -785,6 +835,7 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         snapshot.route_mask_all_subset_enumeration_certifying = false;
     }
     snapshot.incumbent_archive_auto = opt.incumbent_archive_auto;
+    snapshot.primal_heuristic = opt.primal_heuristic;
     snapshot.compact_fallback_enabled = opt.compact_fallback_enabled;
     snapshot.relaxed_rmp_enabled = snapshot.relaxed_columns_in_rmp ||
         opt.relaxed_rmp_cg || opt.frontier_relaxed_rmp_cg ||
@@ -869,6 +920,7 @@ void applyRunConfigSnapshot(const ebrp::RunConfigSnapshot& snapshot,
     result.relaxed_columns_in_rmp = snapshot.relaxed_columns_in_rmp;
     result.relaxed_rmp_enabled = snapshot.relaxed_rmp_enabled;
     result.incumbent_archive_auto = snapshot.incumbent_archive_auto;
+    result.primal_heuristic = snapshot.primal_heuristic;
     result.compact_fallback_enabled = snapshot.compact_fallback_enabled;
     result.cplex_plain_baseline = snapshot.plain_baseline;
     result.cplex_seed_enabled = snapshot.cplex_seed;
@@ -4084,6 +4136,188 @@ BpcOwnedIncumbentResult runBpcOwnedIncumbentGenerator(
     return out;
 }
 
+struct PaperPrimalHeuristicResult {
+    bool found = false;
+    ebrp::Verification verification;
+    std::vector<ebrp::RoutePlan> routes;
+    double runtime_seconds = 0.0;
+    long long candidates_tested = 0;
+    long long candidates_verified = 0;
+    long long candidates_rejected = 0;
+    long long local_moves_tested = 0;
+    std::vector<std::string> notes;
+};
+
+PaperPrimalHeuristicResult runPaperPrimalHeuristic(
+    const ebrp::Instance& instance,
+    const ebrp::SolveOptions& opt) {
+    PaperPrimalHeuristicResult out;
+    const auto start = std::chrono::steady_clock::now();
+    const std::string mode = opt.primal_heuristic;
+    if (mode == "none" || mode == "off" || mode.empty()) {
+        out.notes.push_back("paper primal heuristic disabled");
+        out.runtime_seconds = 0.0;
+        return out;
+    }
+    const double budget = opt.primal_heuristic_seconds;
+    auto timedOut = [&]() {
+        if (budget <= 0.0) return false;
+        return std::chrono::duration<double>(
+            std::chrono::steady_clock::now() - start).count() >= budget;
+    };
+
+    auto consider = [&](const std::vector<ebrp::RoutePlan>& routes,
+                        const std::string& label) {
+        ++out.candidates_tested;
+        ebrp::Verification v = ebrp::verifySolution(instance, routes, opt.lambda);
+        std::ostringstream note;
+        note << "paper primal heuristic candidate=" << label
+             << ", feasible=" << (v.feasible ? "true" : "false")
+             << ", objective=" << v.objective
+             << ", G=" << v.G
+             << ", P=" << v.P;
+        out.notes.push_back(note.str());
+        if (!v.feasible) {
+            ++out.candidates_rejected;
+            return;
+        }
+        ++out.candidates_verified;
+        if (!out.found || v.objective < out.verification.objective - 1e-10) {
+            out.found = true;
+            out.verification = v;
+            out.routes = routes;
+        }
+    };
+
+    const bool use_random = mode == "hga-tgbc" || mode == "best-of-all";
+    const bool use_local = mode == "hga-tgbc" || mode == "best-of-all";
+    for (int greedy_mode = 0; greedy_mode < 3 && !timedOut(); ++greedy_mode) {
+        std::vector<ebrp::RoutePlan> routes =
+            buildGreedyIncumbentRoutes(instance, opt.lambda, greedy_mode);
+        consider(routes, "deterministic_tgbc_greedy_mode_" + std::to_string(greedy_mode));
+        if (use_local && !timedOut()) {
+            long long moves = 0;
+            std::vector<std::string> local_notes;
+            std::vector<ebrp::RoutePlan> improved =
+                improveIncumbentByLocalSearch(
+                    instance, opt.lambda, routes,
+                    std::max(2, std::min(8, opt.primal_heuristic_runs)),
+                    timedOut, moves, local_notes,
+                    "paper_primal_greedy_" + std::to_string(greedy_mode));
+            out.local_moves_tested += moves;
+            out.notes.insert(out.notes.end(), local_notes.begin(), local_notes.end());
+            consider(improved, "deterministic_tgbc_local_mode_" + std::to_string(greedy_mode));
+        }
+    }
+
+    if (use_random) {
+        const int rounds = std::max(1, opt.primal_heuristic_runs);
+        for (int r = 0; r < rounds && !timedOut(); ++r) {
+            const unsigned seed = opt.primal_heuristic_seed +
+                static_cast<unsigned>(1009u * static_cast<unsigned>(r + 1));
+            std::vector<ebrp::RoutePlan> routes =
+                buildRandomizedGreedyIncumbentRoutes(instance, opt.lambda, seed);
+            consider(routes, "seeded_tgbc_random_seed_" + std::to_string(seed));
+            if (!use_local || timedOut()) continue;
+            long long moves = 0;
+            std::vector<std::string> local_notes;
+            std::vector<ebrp::RoutePlan> improved =
+                improveIncumbentByLocalSearch(
+                    instance, opt.lambda, routes,
+                    std::max(2, std::min(8, opt.primal_heuristic_runs)),
+                    timedOut, moves, local_notes,
+                    "paper_primal_random_" + std::to_string(seed));
+            out.local_moves_tested += moves;
+            out.notes.insert(out.notes.end(), local_notes.begin(), local_notes.end());
+            consider(improved, "seeded_tgbc_local_seed_" + std::to_string(seed));
+        }
+    }
+
+    out.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    std::ostringstream summary;
+    summary << "paper primal heuristic summary: mode=" << mode
+            << ", seed=" << opt.primal_heuristic_seed
+            << ", runs=" << opt.primal_heuristic_runs
+            << ", found=" << (out.found ? "true" : "false")
+            << ", best_objective=" << (out.found ? out.verification.objective : 0.0)
+            << ", candidates_tested=" << out.candidates_tested
+            << ", candidates_verified=" << out.candidates_verified
+            << ", candidates_rejected=" << out.candidates_rejected
+            << ", local_moves_tested=" << out.local_moves_tested
+            << ", runtime=" << out.runtime_seconds;
+    out.notes.push_back(summary.str());
+    return out;
+}
+
+ebrp::SolveResult solvePrimalHeuristicDiagnostic(const ebrp::Instance& instance,
+                                                 const ebrp::SolveOptions& opt) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "primal-heuristic";
+    initializeScalabilityFields(instance, opt, result);
+    applyRunConfigSnapshot(buildRunConfigSnapshot(instance, opt), result);
+    result.status = "no_incumbent";
+    result.certificate_scope = "primal_heuristic_ub_only";
+    result.incumbent_source = "empty";
+    result.incumbent_source_category = "empty";
+    result.incumbent_source_detail = "empty fallback";
+    result.incumbent_source_is_paper_reproducible = true;
+    result.incumbent_source_contributes_lower_bound = false;
+    result.primal_heuristic = opt.primal_heuristic;
+
+    PaperPrimalHeuristicResult heuristic = runPaperPrimalHeuristic(instance, opt);
+    result.incumbent_generation_time_seconds = heuristic.runtime_seconds;
+    result.incumbent_generation_method = "paper_primal_" + opt.primal_heuristic;
+    result.incumbent_candidates_tested = heuristic.candidates_tested;
+    result.incumbent_candidates_verified = heuristic.candidates_verified;
+    result.incumbent_candidates_rejected = heuristic.candidates_rejected;
+    for (const std::string& note : heuristic.notes) result.notes.push_back(note);
+    if (heuristic.found) {
+        result.routes = heuristic.routes;
+        result.verification = heuristic.verification;
+        result.final_inventory = heuristic.verification.final_inventory;
+        result.G = heuristic.verification.G;
+        result.P = heuristic.verification.P;
+        result.objective = heuristic.verification.objective;
+        result.upper_bound = heuristic.verification.objective;
+        result.lower_bound = 0.0;
+        result.gap = 1.0;
+        result.status = "heuristic_incumbent_verified";
+        result.incumbent_source = "primal_heuristic";
+        result.incumbent_source_category = "primal_heuristic";
+        result.incumbent_source_detail =
+            "paper primal heuristic " + opt.primal_heuristic;
+        result.incumbent_source_is_paper_reproducible = true;
+        result.incumbent_source_contributes_lower_bound = false;
+        result.incumbent_best_source = result.incumbent_source_detail;
+        result.incumbent_best_objective = heuristic.verification.objective;
+        result.incumbent_best_G = heuristic.verification.G;
+        result.incumbent_best_P = heuristic.verification.P;
+        result.incumbent_best_runtime = heuristic.runtime_seconds;
+        result.incumbent_selection_reason =
+            "standalone verifier-passed paper primal heuristic UB";
+        result.certificate =
+            "verified feasible route plan upper bound only; no lower-bound evidence";
+    } else {
+        result.routes = emptyRouteSet(instance);
+        result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
+        result.final_inventory = result.verification.final_inventory;
+        result.G = result.verification.G;
+        result.P = result.verification.P;
+        result.objective = result.verification.objective;
+        result.upper_bound = result.objective;
+        result.certificate =
+            "no improving paper primal heuristic route plan found; empty route UB only";
+    }
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
 bool makeTwoPickupColumn(const ebrp::Instance& instance,
                          int vehicle,
                          int first,
@@ -6402,6 +6636,22 @@ ebrp::SolveResult solveCertificateBasisDiagnostic(const ebrp::Instance& instance
         claim.route_mask_all_subset_enumeration_certifying = false;
         add_rejected("route_mask_not_certifying", claim);
     }
+    {
+        auto claim = make_claim("incumbent_source_cannot_lower_bound");
+        claim.incumbent_source = "primal_heuristic";
+        claim.incumbent_source_category = "primal_heuristic";
+        claim.incumbent_source_is_paper_reproducible = true;
+        claim.incumbent_source_contributes_lower_bound = true;
+        add_rejected("incumbent_source_cannot_lower_bound", claim);
+    }
+    {
+        auto claim = make_claim("archive_source_not_paper_reproducible");
+        claim.incumbent_source = "incumbent-archive";
+        claim.incumbent_source_category = "diagnostic_archive";
+        claim.incumbent_source_is_paper_reproducible = true;
+        claim.incumbent_source_contributes_lower_bound = false;
+        add_rejected("archive_source_not_paper_reproducible", claim);
+    }
 
     int guard_passed = 0;
     for (const GuardCase& guard_case : guard_cases) {
@@ -6507,6 +6757,9 @@ ebrp::SolveResult solveOptionConsistencyDiagnostic(const ebrp::Instance& instanc
     }
     if (result.incumbent_archive_auto != snapshot.incumbent_archive_auto) {
         mismatches.push_back("incumbent_archive_auto");
+    }
+    if (result.primal_heuristic != snapshot.primal_heuristic) {
+        mismatches.push_back("primal_heuristic");
     }
     if (result.compact_fallback_enabled != snapshot.compact_fallback_enabled) {
         mismatches.push_back("compact_fallback_enabled");
@@ -6684,6 +6937,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.P = incumbent_verification.P;
     result.objective = incumbent_verification.objective;
     result.upper_bound = incumbent_verification.objective;
+    result.incumbent_source = "empty";
+    result.incumbent_source_category = "empty";
+    result.incumbent_source_detail =
+        "empty routes before verifier-gated primal heuristic";
+    result.incumbent_source_is_paper_reproducible = true;
+    result.incumbent_source_contributes_lower_bound = false;
     if (!opt.progress_log_path.empty()) {
         std::filesystem::path progress_path(opt.progress_log_path);
         if (!progress_path.parent_path().empty()) {
@@ -6756,7 +7015,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.P = incumbent_verification.P;
         result.objective = incumbent_verification.objective;
         result.upper_bound = incumbent_verification.objective;
-        result.incumbent_source = source;
+        const std::string category = classifyIncumbentSource(source);
+        result.incumbent_source = category;
+        result.incumbent_source_category = category;
+        result.incumbent_source_detail = source;
+        result.incumbent_source_is_paper_reproducible =
+            incumbentSourcePaperReproducible(category);
+        result.incumbent_source_contributes_lower_bound = false;
         result.notes.push_back("accepted " + source
             + " incumbent for frontier cutoff only: objective="
             + std::to_string(candidate.objective)
@@ -6795,6 +7060,39 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             + std::to_string(frontier_route_pool.dropped_by_cap));
     };
     bool verified_archive_incumbent_selected = false;
+    if (opt.primal_heuristic != "none") {
+        const auto heuristic_start = std::chrono::steady_clock::now();
+        PaperPrimalHeuristicResult heuristic =
+            runPaperPrimalHeuristic(instance, opt);
+        result.incumbent_generation_time_seconds += heuristic.runtime_seconds;
+        result.incumbent_generation_method = "paper_primal_" + opt.primal_heuristic;
+        result.incumbent_candidates_tested += heuristic.candidates_tested;
+        result.incumbent_candidates_verified += heuristic.candidates_verified;
+        result.incumbent_candidates_rejected += heuristic.candidates_rejected;
+        for (const std::string& note : heuristic.notes) {
+            result.notes.push_back(note);
+        }
+        if (heuristic.found) {
+            result.incumbent_best_source = "paper primal heuristic " + opt.primal_heuristic;
+            result.incumbent_best_objective = heuristic.verification.objective;
+            result.incumbent_best_G = heuristic.verification.G;
+            result.incumbent_best_P = heuristic.verification.P;
+            result.incumbent_best_runtime = heuristic.runtime_seconds;
+            result.incumbent_selection_reason =
+                "minimum verifier-passed route plan from seeded paper primal heuristic";
+            if (acceptIncumbentRoutes(heuristic.routes,
+                                      "paper primal heuristic " + opt.primal_heuristic)) {
+                addRoutesToFrontierPool(heuristic.routes,
+                                        "paper primal heuristic");
+            }
+        } else {
+            result.notes.push_back("paper primal heuristic produced no verifier-passed improving incumbent");
+        }
+        result.incumbent_generation_time_seconds +=
+            std::chrono::duration<double>(
+                std::chrono::steady_clock::now() - heuristic_start).count()
+            - heuristic.runtime_seconds;
+    }
     if (opt.incumbent_archive_auto) {
         result.incumbent_archive_attempted = true;
         IncumbentArchiveScanResult archive =
@@ -8701,8 +8999,41 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     std::max(result.relaxation_lb_used,
                              std::max(no_lb, with_lb));
             } else {
-                out.bound =
-                    compute_with_compat_policy(opt.route_mask_operation_budget_cuts);
+                if (opt.route_mask_operation_budget_cuts &&
+                    std::isfinite(cutoff)) {
+                    ebrp::GiniIntervalInventoryRelaxationBound no_budget =
+                        compute_with_compat_policy(false);
+                    const double no_budget_lb = relaxationLb(no_budget);
+                    if (no_budget_lb >= cutoff - 1e-9) {
+                        no_budget.note +=
+                            ", route_mask_operation_budget_portfolio_selected=no_operation_budget"
+                            ", operation_budget_skipped=no_operation_budget_cutoff_fathomed"
+                            ", no_operation_budget_lb=" + std::to_string(no_budget_lb)
+                            + ", cutoff=" + std::to_string(cutoff);
+                        out.bound = no_budget;
+                    } else {
+                        ebrp::GiniIntervalInventoryRelaxationBound operation_budget =
+                            compute_with_compat_policy(true);
+                        const double operation_budget_lb =
+                            relaxationLb(operation_budget);
+                        if (operation_budget_lb > no_budget_lb + 1e-9) {
+                            operation_budget.note +=
+                                ", route_mask_operation_budget_portfolio_selected=operation_budget"
+                                ", operation_budget_lb=" + std::to_string(operation_budget_lb)
+                                + ", no_operation_budget_lb=" + std::to_string(no_budget_lb);
+                            out.bound = operation_budget;
+                        } else {
+                            no_budget.note +=
+                                ", route_mask_operation_budget_portfolio_selected=no_operation_budget"
+                                ", operation_budget_lb=" + std::to_string(operation_budget_lb)
+                                + ", no_operation_budget_lb=" + std::to_string(no_budget_lb);
+                            out.bound = no_budget;
+                        }
+                    }
+                } else {
+                    out.bound =
+                        compute_with_compat_policy(opt.route_mask_operation_budget_cuts);
+                }
                 if (opt.vehicle_indexed_relaxation_audit &&
                     opt.vehicle_indexed_operation_relaxation) {
                     ebrp::GiniIntervalInventoryRelaxationBound aggregate =
@@ -8722,26 +9053,6 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                         out.bound.note += ", vehicle_indexed_relaxation_audit_selected=vehicle_indexed"
                             ", aggregate_lb=" + std::to_string(aggregate_lb)
                             + ", vehicle_indexed_lb=" + std::to_string(chosen_lb);
-                    }
-                }
-                if (opt.route_mask_operation_budget_cuts &&
-                    std::isfinite(cutoff) &&
-                    relaxationLb(out.bound) < cutoff - 1e-9) {
-                    ebrp::GiniIntervalInventoryRelaxationBound no_budget =
-                        compute_with_compat_policy(false);
-                    const double operation_budget_lb = relaxationLb(out.bound);
-                    const double no_budget_lb = relaxationLb(no_budget);
-                    if (no_budget_lb > operation_budget_lb + 1e-9) {
-                        no_budget.note +=
-                            ", route_mask_operation_budget_portfolio_selected=no_operation_budget"
-                            ", operation_budget_lb=" + std::to_string(operation_budget_lb)
-                            + ", no_operation_budget_lb=" + std::to_string(no_budget_lb);
-                        out.bound = no_budget;
-                    } else {
-                        out.bound.note +=
-                            ", route_mask_operation_budget_portfolio_selected=operation_budget"
-                            ", operation_budget_lb=" + std::to_string(operation_budget_lb)
-                            + ", no_operation_budget_lb=" + std::to_string(no_budget_lb);
                     }
                 }
                 const double used_lb = relaxationLb(out.bound);
@@ -11487,6 +11798,8 @@ int main(int argc, char** argv) {
                 results.push_back(ebrp::solveTailoredExact(instance, opt));
             } else if (opt.method == "cplex") {
                 results.push_back(ebrp::solveCplexBaseline(instance, opt));
+            } else if (opt.method == "primal-heuristic") {
+                results.push_back(solvePrimalHeuristicDiagnostic(instance, opt));
             } else if (opt.method == "pricing") {
                 results.push_back(solvePricingDiagnostic(instance, opt));
             } else if (opt.method == "pricing-branch") {

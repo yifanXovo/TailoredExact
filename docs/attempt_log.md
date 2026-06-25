@@ -2451,3 +2451,35 @@ Remaining TODOs:
   unsafe optimal claims and a valid relaxation-only frontier certificate.
 - The audit over `results/paper_core_round_next/raw` reports nine solver JSON
   rows with zero failures.
+
+## 2026-06-26 - Paper Heuristic UB And Generated Variants
+
+- Replaced arbitrary result-directory archive scanning as the `paper-bpc-core`
+  default UB source. The preset now defaults to a deterministic verifier-gated
+  paper primal heuristic (`--primal-heuristic hga-tgbc`) and leaves
+  `--incumbent-archive-auto=false` unless explicitly requested.
+- Added UB provenance fields:
+  `incumbent_source_category`,
+  `incumbent_source_is_paper_reproducible`, and
+  `incumbent_source_contributes_lower_bound`. The C++ output guard and Python
+  audit now reject any certificate row that treats incumbent evidence as a
+  lower bound.
+- Added `--method primal-heuristic` and route-plan export for reproducible
+  heuristic incumbent generation. V12 M2 heuristic UB is
+  `0.756165366387`; V12 M1 heuristic/frontier UB is `0.364375057616`.
+- With the archive default removed, regenerated V12 M2 paper-core 300s is
+  correctly noncertified (`LB=0.688739371450`, `UB=0.756165366387`, gap
+  `0.0891683194372`). Regenerated V12 M1 paper-core 300s is correctly
+  noncertified (`LB=0.354350322125`, `UB=0.364375057616`, gap
+  `0.0275121342176`). The exact certificate mechanism is unchanged; the cutoff
+  is weaker without the diagnostic archive incumbent.
+- Added certificate-safe no-operation-budget-first relaxation ordering: if the
+  no-budget vehicle-indexed relaxation already cutoff-fathoms an interval, the
+  harder operation-budget MIP variant is skipped; otherwise both valid bounds
+  can be compared.
+- Generated twelve deterministic capacity/inventory variants under
+  `reference/generated_variants/` and tested ten 60s paper-core rows. Five
+  certified in 60s. All optimal claims in
+  `results/heuristic_relaxation_dataset_round/` and
+  `results/generated_variant_round/` pass `audit_bpc_certificate.py
+  --fail-on-error`.

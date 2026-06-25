@@ -354,6 +354,10 @@ struct SolveResult {
     double frontier_cache_time_seconds = 0.0;
     std::string incumbent_source;
     std::string incumbent_source_detail;
+    std::string incumbent_source_category = "empty";
+    bool incumbent_source_is_paper_reproducible = false;
+    bool incumbent_source_contributes_lower_bound = false;
+    std::string primal_heuristic = "none";
     bool incumbent_import_attempted = false;
     bool incumbent_import_verified = false;
     double incumbent_import_objective = 0.0;

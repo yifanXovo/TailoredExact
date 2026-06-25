@@ -1,0 +1,14 @@
+{
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [0, 3, 5, 8, 0],
+      "operations": [{"station": 3, "pickup": 11, "drop": 0}, {"station": 5, "pickup": 9, "drop": 0}, {"station": 8, "pickup": 0, "drop": 20}]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [0, 4, 2, 7, 1, 0],
+      "operations": [{"station": 4, "pickup": 7, "drop": 0}, {"station": 2, "pickup": 4, "drop": 0}, {"station": 7, "pickup": 0, "drop": 1}, {"station": 1, "pickup": 0, "drop": 10}]
+    }
+  ]
+}

@@ -973,13 +973,21 @@ field disagrees with the snapshot, the run is marked
 cut, but it is part of the proof audit: a certificate can only be interpreted
 when the algorithmic configuration used to produce it is unambiguous.
 
-### Incumbent Archive Safety
+### Primal Incumbent Source Safety
 
-The incumbent archive scanner accepts only reconstructable route plans that pass
-the independent verifier on the current instance. Objective-only JSON rows are
-ignored. A verified archive incumbent can improve the upper bound and shrink
-frontier ranges, but it remains primal evidence only and never contributes to a
-lower-bound certificate.
+The paper primal heuristic, explicit incumbent JSON imports, route-pool
+incumbents, CPLEX incumbents, and diagnostic archive incumbents are all primal
+objects. Each accepted route plan must pass the independent verifier on the
+current instance. Objective-only rows are ignored. A verified incumbent can
+improve the upper bound and shrink frontier ranges, but it remains primal
+evidence only and never contributes to a lower-bound certificate.
+
+Archive scanning is not part of the default paper-core algorithm because it
+depends on local result history. When explicitly enabled, it is diagnostic UB
+evidence only. The result fields
+`incumbent_source_is_paper_reproducible` and
+`incumbent_source_contributes_lower_bound` make this separation machine
+auditable.
 
 ### Continuous LP Cutoff Precheck
 
