@@ -512,6 +512,8 @@ std::string resultToJson(const SolveResult& input) {
         << result.support_duration_strong_pruned_columns << ",\n";
     out << "  \"completion_lb_pruned_labels\": "
         << result.completion_lb_pruned_labels << ",\n";
+    out << "  \"required_closure_pruned_labels\": "
+        << result.required_closure_pruned_labels << ",\n";
     out << "  \"label_dominance_comparisons\": "
         << result.label_dominance_comparisons << ",\n";
     out << "  \"label_dominance_pruned_labels\": "

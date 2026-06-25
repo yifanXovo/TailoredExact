@@ -36,6 +36,7 @@ SUMMARY_COLUMNS = [
     "columns_generated",
     "cuts_generated",
     "completion_lb_pruned_labels",
+    "required_closure_pruned_labels",
     "label_dominance_comparisons",
     "label_dominance_pruned_labels",
     "label_dominance_cross_pickup_pruned_labels",

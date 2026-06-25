@@ -1232,6 +1232,8 @@ void mergePricingStats(const ebrp::PricingResult& priced,
     result.support_duration_strong_pruned_columns +=
         priced.support_duration_strong_pruned_columns;
     result.completion_lb_pruned_labels += priced.completion_lb_pruned_labels;
+    result.required_closure_pruned_labels +=
+        priced.required_closure_pruned_labels;
     result.label_dominance_comparisons += priced.label_dominance_comparisons;
     result.label_dominance_pruned_labels += priced.label_dominance_pruned_labels;
     result.label_dominance_cross_pickup_pruned_labels +=
@@ -4501,6 +4503,8 @@ ebrp::SolveResult solveColumnGenerationDiagnostic(const ebrp::Instance& instance
     result.support_duration_strong_pruned_columns =
         cg.support_duration_strong_pruned_columns;
     result.completion_lb_pruned_labels = cg.completion_lb_pruned_labels;
+    result.required_closure_pruned_labels =
+        cg.required_closure_pruned_labels;
     result.support_duration_max_subset_size = cg.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         cg.support_duration_precompute_time_seconds;
@@ -4616,6 +4620,8 @@ ebrp::SolveResult solveGiniCapColumnGenerationDiagnostic(const ebrp::Instance& i
     result.support_duration_strong_pruned_columns =
         cg.support_duration_strong_pruned_columns;
     result.completion_lb_pruned_labels = cg.completion_lb_pruned_labels;
+    result.required_closure_pruned_labels =
+        cg.required_closure_pruned_labels;
     result.support_duration_max_subset_size = cg.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         cg.support_duration_precompute_time_seconds;
@@ -4717,6 +4723,8 @@ ebrp::SolveResult solveGiniCapBranchProbeDiagnostic(const ebrp::Instance& instan
     result.support_duration_strong_pruned_columns =
         probe.support_duration_strong_pruned_columns;
     result.completion_lb_pruned_labels = probe.completion_lb_pruned_labels;
+    result.required_closure_pruned_labels =
+        probe.required_closure_pruned_labels;
     result.support_duration_max_subset_size = probe.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         probe.support_duration_precompute_time_seconds;
@@ -4890,6 +4898,8 @@ ebrp::SolveResult solveGiniCapTreeDiagnostic(const ebrp::Instance& instance,
     result.support_duration_strong_pruned_columns =
         tree.support_duration_strong_pruned_columns;
     result.completion_lb_pruned_labels = tree.completion_lb_pruned_labels;
+    result.required_closure_pruned_labels =
+        tree.required_closure_pruned_labels;
     result.support_duration_max_subset_size = tree.support_duration_max_subset_size;
     result.support_duration_precompute_time_seconds =
         tree.support_duration_precompute_time_seconds;
@@ -5178,6 +5188,8 @@ ebrp::SolveResult solveSupportPruningDiagnostic(const ebrp::Instance& instance,
         result.support_duration_strong_pruned_columns +=
             priced.support_duration_strong_pruned_columns;
         result.completion_lb_pruned_labels += priced.completion_lb_pruned_labels;
+        result.required_closure_pruned_labels +=
+            priced.required_closure_pruned_labels;
         result.support_duration_precompute_time_seconds +=
             priced.support_duration_precompute_time_seconds;
         result.support_duration_max_subset_size =
@@ -8229,6 +8241,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.support_duration_strong_pruned_columns +=
                 tree.support_duration_strong_pruned_columns;
             result.completion_lb_pruned_labels += tree.completion_lb_pruned_labels;
+            result.required_closure_pruned_labels +=
+                tree.required_closure_pruned_labels;
             result.support_duration_max_subset_size =
                 std::max(result.support_duration_max_subset_size,
                          tree.support_duration_max_subset_size);
@@ -11013,6 +11027,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                   << (result.pricing_blocked_by_duplicate_projection ? "true" : "false")
                   << ", \"completion_lb_pruned_labels\": "
                   << result.completion_lb_pruned_labels
+                  << ", \"required_closure_pruned_labels\": "
+                  << result.required_closure_pruned_labels
                   << ", \"label_dominance_comparisons\": "
                   << result.label_dominance_comparisons
                   << ", \"label_dominance_pruned_labels\": "

@@ -801,8 +801,10 @@ private:
             for (long long key : keys_by_mask[mask]) {
                 auto it = buckets.find(key);
                 if (it == buckets.end()) continue;
-                const std::vector<int> bucket = it->second;
-                for (int label_idx : bucket) {
+                const std::vector<int>& bucket = it->second;
+                for (std::size_t bucket_pos = 0; bucket_pos < bucket.size();
+                     ++bucket_pos) {
+                    const int label_idx = bucket[bucket_pos];
                     if (shouldStop()) return;
                     if (label_idx < 0 || label_idx >= static_cast<int>(labels.size())) continue;
                     const RouteLabel label = labels[label_idx];
@@ -827,12 +829,14 @@ private:
                         const int min_required_pickup =
                             minAdditionalPickupForRequiredClosure(label.mask, label.load);
                         if (label.pickup + min_required_pickup > pickup_budget) {
+                            ++result_.required_closure_pruned_labels;
                             continue;
                         }
                         if (closure_travel_lb +
                                 (instance_.pickup_time + instance_.drop_time) *
                                     (label.pickup + min_required_pickup) >
                                 instance_.total_time_limit + 1e-9) {
+                            ++result_.required_closure_pruned_labels;
                             continue;
                         }
                         if (considerClosedLabel(label, label_idx)) {
@@ -895,12 +899,14 @@ private:
                             const int min_required_pickup =
                                 minAdditionalPickupForRequiredClosure(next_mask, next.load);
                             if (next.pickup + min_required_pickup > pickup_budget) {
+                                ++result_.required_closure_pruned_labels;
                                 continue;
                             }
                             if (closure_travel_lb +
                                     (instance_.pickup_time + instance_.drop_time) *
                                         (next.pickup + min_required_pickup) >
                                     instance_.total_time_limit + 1e-9) {
+                                ++result_.required_closure_pruned_labels;
                                 continue;
                             }
                             if (options_.use_completion_lb_pruning &&
@@ -937,12 +943,14 @@ private:
                             const int min_required_pickup =
                                 minAdditionalPickupForRequiredClosure(next_mask, next.load);
                             if (next.pickup + min_required_pickup > pickup_budget) {
+                                ++result_.required_closure_pruned_labels;
                                 continue;
                             }
                             if (closure_travel_lb +
                                     (instance_.pickup_time + instance_.drop_time) *
                                         (next.pickup + min_required_pickup) >
                                     instance_.total_time_limit + 1e-9) {
+                                ++result_.required_closure_pruned_labels;
                                 continue;
                             }
                             if (options_.use_completion_lb_pruning &&

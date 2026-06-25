@@ -1998,6 +1998,8 @@ void addStats(GiniCapTreeResult& total, const GiniCapColumnGenerationResult& nod
     total.support_duration_strong_pruned_columns +=
         node.support_duration_strong_pruned_columns;
     total.completion_lb_pruned_labels += node.completion_lb_pruned_labels;
+    total.required_closure_pruned_labels +=
+        node.required_closure_pruned_labels;
     total.label_dominance_comparisons += node.label_dominance_comparisons;
     total.label_dominance_pruned_labels += node.label_dominance_pruned_labels;
     total.label_dominance_cross_pickup_pruned_labels +=
@@ -2136,6 +2138,8 @@ ColumnGenerationResult runCoverageColumnGenerationDiagnostic(
             result.support_duration_strong_pruned_columns +=
                 priced.support_duration_strong_pruned_columns;
             result.completion_lb_pruned_labels += priced.completion_lb_pruned_labels;
+            result.required_closure_pruned_labels +=
+                priced.required_closure_pruned_labels;
             result.support_duration_max_subset_size =
                 std::max(result.support_duration_max_subset_size,
                          priced.support_duration_max_subset_size);
@@ -2506,6 +2510,8 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                     priced.support_duration_strong_pruned_columns;
                 result.completion_lb_pruned_labels +=
                     priced.completion_lb_pruned_labels;
+                result.required_closure_pruned_labels +=
+                    priced.required_closure_pruned_labels;
                 result.support_duration_max_subset_size =
                     std::max(result.support_duration_max_subset_size,
                              priced.support_duration_max_subset_size);
@@ -2562,6 +2568,8 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                           trace_priced.support_duration_strong_pruned_labels)
                       << ", \"labels_pruned_completion_lb\": "
                       << trace_priced.completion_lb_pruned_labels
+                      << ", \"labels_pruned_required_closure\": "
+                      << trace_priced.required_closure_pruned_labels
                       << ", \"label_dominance_comparisons\": "
                       << trace_priced.label_dominance_comparisons
                       << ", \"labels_pruned_label_dominance\": "
@@ -2665,6 +2673,8 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                     exact.support_duration_strong_pruned_columns;
                 result.completion_lb_pruned_labels +=
                     exact.completion_lb_pruned_labels;
+                result.required_closure_pruned_labels +=
+                    exact.required_closure_pruned_labels;
                 result.support_duration_max_subset_size =
                     std::max(result.support_duration_max_subset_size,
                              exact.support_duration_max_subset_size);
@@ -3035,6 +3045,8 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     result.support_duration_strong_pruned_columns +=
         root.support_duration_strong_pruned_columns;
     result.completion_lb_pruned_labels += root.completion_lb_pruned_labels;
+    result.required_closure_pruned_labels +=
+        root.required_closure_pruned_labels;
     result.label_dominance_comparisons += root.label_dominance_comparisons;
     result.label_dominance_pruned_labels += root.label_dominance_pruned_labels;
     result.label_dominance_cross_pickup_pruned_labels +=
@@ -3124,6 +3136,8 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     result.support_duration_strong_pruned_columns +=
         forbid_child.support_duration_strong_pruned_columns;
     result.completion_lb_pruned_labels += forbid_child.completion_lb_pruned_labels;
+    result.required_closure_pruned_labels +=
+        forbid_child.required_closure_pruned_labels;
     result.label_dominance_comparisons +=
         forbid_child.label_dominance_comparisons;
     result.label_dominance_pruned_labels +=
@@ -3195,6 +3209,8 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     result.support_duration_strong_pruned_columns +=
         require_child.support_duration_strong_pruned_columns;
     result.completion_lb_pruned_labels += require_child.completion_lb_pruned_labels;
+    result.required_closure_pruned_labels +=
+        require_child.required_closure_pruned_labels;
     result.label_dominance_comparisons +=
         require_child.label_dominance_comparisons;
     result.label_dominance_pruned_labels +=

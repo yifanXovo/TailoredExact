@@ -81,6 +81,7 @@ struct PricingResult {
     long long support_duration_strong_pruned_labels = 0;
     long long support_duration_strong_pruned_columns = 0;
     long long completion_lb_pruned_labels = 0;
+    long long required_closure_pruned_labels = 0;
     long long label_dominance_comparisons = 0;
     long long label_dominance_pruned_labels = 0;
     long long label_dominance_cross_pickup_pruned_labels = 0;
