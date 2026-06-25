@@ -213,9 +213,21 @@ removed from the paper-core path. The retained change is diagnostic
 instrumentation for the existing exact-bucket dominance, not a certificate
 shortcut.
 
+The next certificate-neutral scheduling change increased the paper-core default
+adaptive split depth from 5 to 6. On V12 M1, the default 300s row now reaches
+`LB=0.341121462223`, `UB=0.357200583208`, gap `0.0450142629691`, with
+`unresolved_intervals=3` and `invalid_bound_intervals=0`. The previous
+controlling child `[0.230692043322,0.238133722139]` is now bound-fathomed by
+the inventory/route/Gini relaxation. The remaining controlling active leaves
+are `[0.238133722139,0.253017079773]`,
+`[0.253017079773,0.267900437406]`, and
+`[0.223250364505,0.230692043322]`. No original certificate is claimed because
+these leaves are still unresolved, but the valid lower bound improves again
+without relying on incomplete BPC pricing closure.
+
 ## Required Next Work
 
-- Use the depth-5 interval ledger and the 1200s per-node/pricing traces to identify
+- Use the depth-6 interval ledger and the 1200s per-node/pricing traces to identify
   certificate-safe pricing reductions. Candidate work should target exact
   operation-state pruning or stronger branch closure, not lower-bound shortcuts.
 - Compare against plain compact CPLEX on the same instance file/hash only as a

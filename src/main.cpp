@@ -199,7 +199,7 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.frontier_split_before_tree = true;
         if (!opt.frontier_adaptive_max_depth_explicit) {
             opt.frontier_adaptive_max_depth =
-                std::max(opt.frontier_adaptive_max_depth, 5);
+                std::max(opt.frontier_adaptive_max_depth, 6);
         }
         opt.bpc_incumbent = (opt.bpc_incumbent == "none" || opt.bpc_incumbent.empty())
             ? "auto" : opt.bpc_incumbent;
@@ -1236,6 +1236,14 @@ void mergePricingStats(const ebrp::PricingResult& priced,
     result.label_dominance_pruned_labels += priced.label_dominance_pruned_labels;
     result.label_dominance_cross_pickup_pruned_labels +=
         priced.label_dominance_cross_pickup_pruned_labels;
+    result.label_dominance_inactive_entries_skipped +=
+        priced.label_dominance_inactive_entries_skipped;
+    result.label_dominance_bucket_compactions +=
+        priced.label_dominance_bucket_compactions;
+    result.label_dominance_compacted_entries +=
+        priced.label_dominance_compacted_entries;
+    result.operation_dp_dominance_pruned_states +=
+        priced.operation_dp_dominance_pruned_states;
     result.support_duration_max_subset_size =
         std::max(result.support_duration_max_subset_size,
                  priced.support_duration_max_subset_size);
@@ -1433,6 +1441,14 @@ void copyBpcPricingStats(const BpcResult& bpc,
     result.label_dominance_pruned_labels += bpc.label_dominance_pruned_labels;
     result.label_dominance_cross_pickup_pruned_labels +=
         bpc.label_dominance_cross_pickup_pruned_labels;
+    result.label_dominance_inactive_entries_skipped +=
+        bpc.label_dominance_inactive_entries_skipped;
+    result.label_dominance_bucket_compactions +=
+        bpc.label_dominance_bucket_compactions;
+    result.label_dominance_compacted_entries +=
+        bpc.label_dominance_compacted_entries;
+    result.operation_dp_dominance_pruned_states +=
+        bpc.operation_dp_dominance_pruned_states;
 }
 
 std::size_t findMatchingJsonDelimiter(const std::string& text,
@@ -11003,6 +11019,14 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                   << result.label_dominance_pruned_labels
                   << ", \"label_dominance_cross_pickup_pruned_labels\": "
                   << result.label_dominance_cross_pickup_pruned_labels
+                  << ", \"label_dominance_inactive_entries_skipped\": "
+                  << result.label_dominance_inactive_entries_skipped
+                  << ", \"label_dominance_bucket_compactions\": "
+                  << result.label_dominance_bucket_compactions
+                  << ", \"label_dominance_compacted_entries\": "
+                  << result.label_dominance_compacted_entries
+                  << ", \"operation_dp_dominance_pruned_states\": "
+                  << result.operation_dp_dominance_pruned_states
                   << "},\n";
             trace << "  \"interval_trace_csv\": \""
                   << jsonEscapeLocal(result.bpc_interval_trace_csv_path) << "\",\n";

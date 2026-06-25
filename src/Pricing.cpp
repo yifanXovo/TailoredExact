@@ -612,11 +612,16 @@ private:
         const long long key = labelKey(label.mask, label.last, label.load, label.pickup);
         auto [it, inserted] = buckets.emplace(key, std::vector<int>{});
         std::vector<int>& bucket = it->second;
+        int inactive_seen = 0;
         for (int idx : bucket) {
-            if (!labels[idx].active) continue;
+            if (!labels[idx].active) {
+                ++inactive_seen;
+                continue;
+            }
             ++result_.label_dominance_comparisons;
             if (labelDominates(labels[idx], label)) {
                 ++result_.label_dominance_pruned_labels;
+                result_.label_dominance_inactive_entries_skipped += inactive_seen;
                 return false;
             }
         }
@@ -628,6 +633,7 @@ private:
                 ++result_.label_dominance_pruned_labels;
             }
         }
+        result_.label_dominance_inactive_entries_skipped += inactive_seen;
         const int label_idx = static_cast<int>(labels.size());
         labels.push_back(label);
         bucket.push_back(label_idx);
@@ -989,12 +995,19 @@ private:
             const int station = path_[pos];
             const double op_cost = stationOperationCost(station);
             for (int load = 0; load <= q_capacity; ++load) {
+                double best_lower_pickup_cost = std::numeric_limits<double>::infinity();
                 for (int pickup = 0; pickup <= budget; ++pickup) {
                     const OpLabel& label = dp[static_cast<std::size_t>(
                         idx(pos, load, pickup))];
                     if (!std::isfinite(label.cost)) continue;
+                    if (best_lower_pickup_cost <= label.cost + 1e-12) {
+                        ++result_.operation_dp_dominance_pruned_states;
+                        continue;
+                    }
                     ++result_.operation_states;
                     if ((result_.operation_states & 0x3fff) == 0 && shouldStop()) return;
+                    best_lower_pickup_cost =
+                        std::min(best_lower_pickup_cost, label.cost);
                     if (nonnegative_costs_ && result_.has_column) {
                         const int min_extra_pickup = (pickup == 0) ? 1 : 0;
                         const double lb = duals_.constant

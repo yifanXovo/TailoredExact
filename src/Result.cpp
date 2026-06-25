@@ -518,6 +518,14 @@ std::string resultToJson(const SolveResult& input) {
         << result.label_dominance_pruned_labels << ",\n";
     out << "  \"label_dominance_cross_pickup_pruned_labels\": "
         << result.label_dominance_cross_pickup_pruned_labels << ",\n";
+    out << "  \"label_dominance_inactive_entries_skipped\": "
+        << result.label_dominance_inactive_entries_skipped << ",\n";
+    out << "  \"label_dominance_bucket_compactions\": "
+        << result.label_dominance_bucket_compactions << ",\n";
+    out << "  \"label_dominance_compacted_entries\": "
+        << result.label_dominance_compacted_entries << ",\n";
+    out << "  \"operation_dp_dominance_pruned_states\": "
+        << result.operation_dp_dominance_pruned_states << ",\n";
     out << "  \"support_duration_max_subset_size\": "
         << result.support_duration_max_subset_size << ",\n";
     out << "  \"support_duration_precompute_time_seconds\": "

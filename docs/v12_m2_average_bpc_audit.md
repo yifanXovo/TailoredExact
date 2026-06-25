@@ -201,6 +201,19 @@ is no longer broad frontier coverage; it is exact BPC closure on the narrow
 depth-5 child `[0.486867096000,0.494357359015]`, plus a queued sibling that is
 already very close to the incumbent cutoff but not fathomed.
 
+The depth-6 default validation improves the 300s paper-core row further:
+`LB=0.713690734357`, `UB=0.719065249476`, gap `0.00747430796209`, with
+`unresolved_intervals=3`, `open_nodes=3`, and `invalid_bound_intervals=0`.
+The improvement is certificate-safe because it comes from replacing active
+parents with exactly covering child intervals and taking valid child lower
+bounds. The interval `[0.479376832984,0.486867096000]` is now bound-fathomed by
+the inventory/route/Gini relaxation. The current controlling child is
+`[0.490612227507,0.494357359015]`, with source
+`focused_split_inherited_parent_lb`; neighboring child
+`[0.486867096000,0.490612227507]` has a stronger relaxation LB but remains
+queued. The 300s gap is now below one percent, but no original certificate is
+claimed because the active frontier still has unresolved leaves.
+
 ## Required Next Work
 
 - Use the node/pricing trace to profile exact-label pricing state explosion and

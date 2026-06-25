@@ -207,6 +207,14 @@ void accumulateBpcPricingStats(ResultLike& result,
     result.label_dominance_pruned_labels += priced.label_dominance_pruned_labels;
     result.label_dominance_cross_pickup_pruned_labels +=
         priced.label_dominance_cross_pickup_pruned_labels;
+    result.label_dominance_inactive_entries_skipped +=
+        priced.label_dominance_inactive_entries_skipped;
+    result.label_dominance_bucket_compactions +=
+        priced.label_dominance_bucket_compactions;
+    result.label_dominance_compacted_entries +=
+        priced.label_dominance_compacted_entries;
+    result.operation_dp_dominance_pruned_states +=
+        priced.operation_dp_dominance_pruned_states;
 }
 
 struct LpSolve {
@@ -1994,6 +2002,14 @@ void addStats(GiniCapTreeResult& total, const GiniCapColumnGenerationResult& nod
     total.label_dominance_pruned_labels += node.label_dominance_pruned_labels;
     total.label_dominance_cross_pickup_pruned_labels +=
         node.label_dominance_cross_pickup_pruned_labels;
+    total.label_dominance_inactive_entries_skipped +=
+        node.label_dominance_inactive_entries_skipped;
+    total.label_dominance_bucket_compactions +=
+        node.label_dominance_bucket_compactions;
+    total.label_dominance_compacted_entries +=
+        node.label_dominance_compacted_entries;
+    total.operation_dp_dominance_pruned_states +=
+        node.operation_dp_dominance_pruned_states;
     total.support_duration_max_subset_size =
         std::max(total.support_duration_max_subset_size,
                  node.support_duration_max_subset_size);
@@ -2683,6 +2699,14 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                       << priced.label_dominance_pruned_labels
                       << ", \"labels_pruned_cross_pickup_dominance\": "
                       << priced.label_dominance_cross_pickup_pruned_labels
+                      << ", \"label_dominance_inactive_entries_skipped\": "
+                      << priced.label_dominance_inactive_entries_skipped
+                      << ", \"label_dominance_bucket_compactions\": "
+                      << priced.label_dominance_bucket_compactions
+                      << ", \"label_dominance_compacted_entries\": "
+                      << priced.label_dominance_compacted_entries
+                      << ", \"operation_dp_dominance_pruned_states\": "
+                      << priced.operation_dp_dominance_pruned_states
                       << ", \"best_reduced_cost\": "
                       << jsonNumberCg(priced.best_reduced_cost)
                       << ", \"exact_completed\": "
@@ -3002,6 +3026,14 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
     result.label_dominance_pruned_labels += root.label_dominance_pruned_labels;
     result.label_dominance_cross_pickup_pruned_labels +=
         root.label_dominance_cross_pickup_pruned_labels;
+    result.label_dominance_inactive_entries_skipped +=
+        root.label_dominance_inactive_entries_skipped;
+    result.label_dominance_bucket_compactions +=
+        root.label_dominance_bucket_compactions;
+    result.label_dominance_compacted_entries +=
+        root.label_dominance_compacted_entries;
+    result.operation_dp_dominance_pruned_states +=
+        root.operation_dp_dominance_pruned_states;
     result.support_duration_max_subset_size =
         std::max(result.support_duration_max_subset_size,
                  root.support_duration_max_subset_size);
@@ -3085,6 +3117,14 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
         forbid_child.label_dominance_pruned_labels;
     result.label_dominance_cross_pickup_pruned_labels +=
         forbid_child.label_dominance_cross_pickup_pruned_labels;
+    result.label_dominance_inactive_entries_skipped +=
+        forbid_child.label_dominance_inactive_entries_skipped;
+    result.label_dominance_bucket_compactions +=
+        forbid_child.label_dominance_bucket_compactions;
+    result.label_dominance_compacted_entries +=
+        forbid_child.label_dominance_compacted_entries;
+    result.operation_dp_dominance_pruned_states +=
+        forbid_child.operation_dp_dominance_pruned_states;
     result.support_duration_max_subset_size =
         std::max(result.support_duration_max_subset_size,
                  forbid_child.support_duration_max_subset_size);
@@ -3148,6 +3188,14 @@ GiniCapBranchProbeResult runGiniCapRyanFosterBranchProbe(
         require_child.label_dominance_pruned_labels;
     result.label_dominance_cross_pickup_pruned_labels +=
         require_child.label_dominance_cross_pickup_pruned_labels;
+    result.label_dominance_inactive_entries_skipped +=
+        require_child.label_dominance_inactive_entries_skipped;
+    result.label_dominance_bucket_compactions +=
+        require_child.label_dominance_bucket_compactions;
+    result.label_dominance_compacted_entries +=
+        require_child.label_dominance_compacted_entries;
+    result.operation_dp_dominance_pruned_states +=
+        require_child.operation_dp_dominance_pruned_states;
     result.support_duration_max_subset_size =
         std::max(result.support_duration_max_subset_size,
                  require_child.support_duration_max_subset_size);

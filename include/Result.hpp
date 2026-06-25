@@ -124,6 +124,10 @@ struct SolveResult {
     long long label_dominance_comparisons = 0;
     long long label_dominance_pruned_labels = 0;
     long long label_dominance_cross_pickup_pruned_labels = 0;
+    long long label_dominance_inactive_entries_skipped = 0;
+    long long label_dominance_bucket_compactions = 0;
+    long long label_dominance_compacted_entries = 0;
+    long long operation_dp_dominance_pruned_states = 0;
     int support_duration_max_subset_size = 0;
     double support_duration_precompute_time_seconds = 0.0;
     std::string certificate_scope;
