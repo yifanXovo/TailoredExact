@@ -248,9 +248,21 @@ original-problem certificate, but it confirms that one more certificate-neutral
 split level is currently more productive than early branch-price tree work on
 V12 M1.
 
+The paper-core default split depth was then increased to 8 after the V12 M2
+ledger benefited from one more child-relaxation level. On V12 M1 the default
+depth-8 300s row is neutral rather than beneficial: it again reaches
+`LB=0.344613240900`, `UB=0.357200583208`, gap `0.035238862701`, with
+`unresolved_intervals=3`, `open_nodes=3`, and `invalid_bound_intervals=0`.
+No pricing time is spent in that row; all remaining work is child relaxation and
+frontier ledger refinement. The change therefore does not fix the V12 M1
+plateau, but it also does not weaken the valid bound or certificate audit. The
+current M1 bottleneck remains the same three unresolved leaves, especially the
+children that need stronger relaxation or exact tree closure beyond the
+inventory/route/Gini bound.
+
 ## Required Next Work
 
-- Use the depth-7 interval ledger and the depth-6 1200s per-node/pricing traces to
+- Use the depth-8 interval ledger and the depth-6 1200s per-node/pricing traces to
   reduce the long focused-retry pricing calls on
   `[0.223250364505,0.230692043322]`. Candidate work should target exact
   operation-state pruning, stronger branch closure, or more frequent

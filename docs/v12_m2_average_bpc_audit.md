@@ -223,6 +223,19 @@ The row spends almost all time in inventory/route/Gini child bounds and only
 ledger refinement rather than incomplete pricing closure. The instance remains
 noncertified because the active frontier still has unresolved leaves.
 
+The default adaptive split depth was increased once more to 8 because the
+depth-7 ledger was still controlled by a narrow active child. The V12 M2
+default depth-8 300s row improves the valid lower bound to
+`LB=0.716948330538`, with `UB=0.719065249476` and gap
+`0.00294398726726`. The row has `unresolved_intervals=3`,
+`open_nodes=3`, and `invalid_bound_intervals=0`; it spends no time in BPC
+pricing and takes its frontier lower bound from
+`focused_inventory_route_gini_relaxation`. This is still not an
+original-problem certificate, but it is the best current paper-core V12 M2
+300s lower bound and shows that one additional certificate-neutral split level
+continues to tighten the controlling region before expensive exact tree
+closure.
+
 ## Required Next Work
 
 - Use the node/pricing trace to profile exact-label pricing state explosion and

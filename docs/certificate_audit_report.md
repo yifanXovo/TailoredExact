@@ -267,6 +267,15 @@ Both V12 rows remain correctly noncertified because they have positive gaps and
 `unresolved_intervals=3`. The full audit over `results/paper_bpc_core/raw` now
 covers forty-two solver JSON rows with zero failures.
 
+The depth-8 default validation rows were then added. V4 smoke remains certified
+at objective 0. V12 M1 300s remains audit-safe and noncertified with
+`LB=0.344613240900`, `UB=0.357200583208`, gap `0.035238862701`,
+and `unresolved_intervals=3`. V12 M2 300s improves to
+`LB=0.716948330538`, `UB=0.719065249476`, gap `0.00294398726726`,
+but remains correctly noncertified because the frontier still has three
+unresolved active leaves. The full audit over `results/paper_bpc_core/raw` now
+covers forty-five solver JSON rows with zero failures.
+
 The audit script self-test includes intentionally invalid cases for incomplete
 pricing, duplicate negative-column blockage, partial frontier coverage,
 route-mask certifying with enumeration disabled, and original optimality without

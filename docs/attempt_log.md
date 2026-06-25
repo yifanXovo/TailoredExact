@@ -2179,3 +2179,20 @@ Remaining TODOs:
   `invalid_bound_intervals=0`.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   forty-two paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Paper-Core Adaptive Split Depth 8
+
+- Increased the paper-core default adaptive split depth from 7 to 8 after the
+  V12 M2 depth-7 ledger remained controlled by a narrow unresolved active
+  child and child relaxation was still cheaper than exact tree closure.
+- V4 smoke remains certified with objective `0`, `gap=0`,
+  `verifier_passed=true`, and `certified_original_problem=true`.
+- V12 M1 Average default 300s is unchanged from depth 7:
+  `UB=0.357200583208`, `LB=0.344613240900`, gap `0.035238862701`,
+  `unresolved_intervals=3`, and `invalid_bound_intervals=0`.
+- V12 M2 Average default 300s improves from the depth-7 lower bound
+  `0.715075764785` to `0.716948330538`, with gap `0.00294398726726`.
+  The row remains noncertified with `unresolved_intervals=3` and
+  `invalid_bound_intervals=0`.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  forty-five paper-core solver JSON rows and reports zero failures.
