@@ -605,6 +605,33 @@ private:
             a.travel <= b.travel + 1e-9;
     }
 
+    bool shouldCompactLabelBucket(const std::vector<int>& bucket,
+                                  int inactive_count) const {
+        if (inactive_count <= 0) return false;
+        const int bucket_size = static_cast<int>(bucket.size());
+        if (bucket_size < 16) return false;
+        return inactive_count >= 64 || inactive_count * 2 >= bucket_size;
+    }
+
+    void compactLabelBucket(std::vector<int>& bucket,
+                            const std::vector<RouteLabel>& labels,
+                            int inactive_hint) {
+        if (!shouldCompactLabelBucket(bucket, inactive_hint)) return;
+        const std::size_t old_size = bucket.size();
+        bucket.erase(
+            std::remove_if(bucket.begin(), bucket.end(), [&](int idx) {
+                return idx < 0 || idx >= static_cast<int>(labels.size()) ||
+                    !labels[idx].active;
+            }),
+            bucket.end());
+        const long long compacted =
+            static_cast<long long>(old_size - bucket.size());
+        if (compacted > 0) {
+            ++result_.label_dominance_bucket_compactions;
+            result_.label_dominance_compacted_entries += compacted;
+        }
+    }
+
     bool insertLabel(std::vector<RouteLabel>& labels,
                      std::unordered_map<long long, std::vector<int>>& buckets,
                      std::vector<std::vector<long long>>& keys_by_mask,
@@ -622,18 +649,22 @@ private:
             if (labelDominates(labels[idx], label)) {
                 ++result_.label_dominance_pruned_labels;
                 result_.label_dominance_inactive_entries_skipped += inactive_seen;
+                compactLabelBucket(bucket, labels, inactive_seen);
                 return false;
             }
         }
+        int deactivated = 0;
         for (int idx : bucket) {
             if (!labels[idx].active) continue;
             ++result_.label_dominance_comparisons;
             if (labelDominates(label, labels[idx])) {
                 labels[idx].active = false;
                 ++result_.label_dominance_pruned_labels;
+                ++deactivated;
             }
         }
         result_.label_dominance_inactive_entries_skipped += inactive_seen;
+        compactLabelBucket(bucket, labels, inactive_seen + deactivated);
         const int label_idx = static_cast<int>(labels.size());
         labels.push_back(label);
         bucket.push_back(label_idx);

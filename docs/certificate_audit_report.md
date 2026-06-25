@@ -294,8 +294,13 @@ V12 M1 trace validation row confirms the `pricing_calls` array is populated for
 a started BPC tree and that time-limited pricing now reports nonzero route and
 operation states. The depth-6 no-focused diagnostic records a real time-limited
 pricing call with negative reduced cost remaining, so the node remains
-unresolved. The full audit over `results/paper_bpc_core/raw` now covers
-fifty-one solver JSON rows with zero failures.
+unresolved. A follow-up exact-pricing optimization compacts inactive label
+indices inside dominance buckets. This is certificate-neutral because it
+removes only references to labels already marked inactive by the unchanged exact
+dominance rule. The refreshed V12 M1 depth-6 diagnostic records `1,239,056`
+bucket compactions, `17,581,023` compacted entries, and the same noncertified
+lower bound/gap. The full audit over `results/paper_bpc_core/raw` now covers
+fifty-three solver JSON rows with zero failures.
 
 The audit script self-test includes intentionally invalid cases for incomplete
 pricing, duplicate negative-column blockage, partial frontier coverage,
@@ -306,8 +311,8 @@ route-mask certifying with enumeration disabled, and original optimality without
 
 - Add C++ unit-style fixtures that create unsafe `SolveResult` objects and
   verify the JSON guard directly.
-- Extend pricing internals further with detailed dominance-bucket and
-  unfinished-state frontier counts. Current pricing-call traces include vehicle,
-  engine, dual summary, generated columns, route/operation states, support
-  pruning totals, best reduced cost, completion status, and elapsed time.
+- Extend pricing internals further with unfinished-state frontier counts.
+  Current pricing-call traces include vehicle, engine, dual summary, generated
+  columns, route/operation states, support pruning totals, dominance-bucket
+  compaction totals, best reduced cost, completion status, and elapsed time.
 - Run the required 300s/1200s V12 paper-core matrix after the first safety pass.

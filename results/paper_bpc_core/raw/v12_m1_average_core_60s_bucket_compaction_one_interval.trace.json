@@ -1,0 +1,33 @@
+{
+  "trace_schema": "paper_bpc_core_plateau_trace_v1",
+  "trace_scope": "frontier_interval_ledger_with_available_aggregate_tree_and_pricing_stats",
+  "instance_name": "regen_candidate_V12_M1_average.txt",
+  "input_path": "E:\\codes\\ExactEBRP\\reference\\regen_candidate_V12_M1_average.txt",
+  "algorithm_preset": "paper-bpc-core",
+  "method": "gcap-frontier",
+  "status": "gcap_frontier_not_closed",
+  "objective": 0.357200583208,
+  "lower_bound": 0.24860881653,
+  "upper_bound": 0.357200583208,
+  "gap": 0.30400780901,
+  "certified_original_problem": false,
+  "full_certificate_rejection_reason": "unresolved_intervals",
+  "runtime_breakdown": {"bound_time_seconds": 29.4965042, "route_mask_time_seconds": 29.4965042, "master_time_seconds": 13.6913467, "pricing_time_seconds": 0.1034395},
+  "controlling_interval": {"id": 0, "range": "[0,0.357201]", "lower_bound": 0.24860881653, "source": "inventory_route_gini_relaxation"},
+  "branch_price_node_trace_available": true,
+  "branch_price_node_trace_limitation": "node trace is available for branch-price trees that actually started in this run",
+  "aggregate_tree": {"nodes": 61048479, "open_nodes": 1, "pricing_closed_nodes": 0, "columns": 1169739, "cuts_added": 0},
+  "pricing_call_trace_available": true,
+  "pricing_call_trace_limitation": "pricing call trace is available for branch-price nodes that actually started in this run",
+  "aggregate_pricing": {"pricing_calls": 7, "pricing_completed_exactly": false, "pricing_closure_certified_exact": false, "pricing_closure_status": "pricing_time_limit", "pricing_best_reduced_cost_any": 0, "pricing_remaining_negative_rc": 0, "duplicate_negative_projections": 0, "blocked_by_duplicate_projection": false, "completion_lb_pruned_labels": 0, "label_dominance_comparisons": 2056806, "label_dominance_pruned_labels": 1240194, "label_dominance_cross_pickup_pruned_labels": 0, "label_dominance_inactive_entries_skipped": 4346479, "label_dominance_bucket_compactions": 8038, "label_dominance_compacted_entries": 118883, "operation_dp_dominance_pruned_states": 0},
+  "interval_trace_csv": "results\\paper_bpc_core\\raw\\v12_m1_average_core_60s_bucket_compaction_one_interval.intervals.csv",
+  "intervals": [
+    {"interval_id": 0, "gamma_L": 0, "gamma_U": 0.357200583208, "current_interval_lower_bound": 0.24860881653, "incumbent_upper_bound": 0.357200583208, "status": "unresolved", "reason": "open_bpc_nodes", "certificate_basis": "unresolved", "requires_pricing_closure": false, "pricing_closure_available": false, "interval_bound_valid": true, "bpc_nodes": 1, "open_nodes": 1, "generated_columns": 584, "cuts": 0, "pricing_calls": 1, "pricing_time_seconds": 0.1034395, "rmp_solve_time_seconds": 13.6913467, "relaxation_time_seconds": 29.4965042, "lower_bound_source": "inventory_route_gini_relaxation", "lower_bound_sources": "gamma_floor|cheap_projection_bound|inventory_route_gini_relaxation|branch_price_tree"}
+  ],
+  "branch_price_nodes": [
+    {"node_id": 0, "parent_id": -1, "tree_node_sequence": 1, "depth": 0, "branch_restrictions": "root", "lp_rmp_objective": 0.245768572133, "inherited_lower_bound": 0.0727377986905, "best_node_lower_bound": 0.245768572133, "cg_iterations": 1, "active_columns": 584, "cuts": 0, "branching_decision": "none", "pricing_closed": false, "not_closed_reason": "pricing_did_not_close", "outcome": "unresolved"}
+  ],
+  "pricing_calls": [
+    {"node_id": 0, "parent_id": -1, "tree_node_sequence": 1, "depth": 0, "node_pricing_call": 0, "pricing_call": {"iteration": 0, "vehicle": 0, "event": "pricing_time_limit", "dual_summary": "visit_l1=0;operation_l1=0.0264508861137;vehicle_constant=0.117635643678", "pricing_engine_requested": "exact-label", "pricing_engine_used": "exact-label", "reused_capacity_price": false, "generated_columns": 12950, "returned_negative_columns": 0, "route_states": 12951, "operation_states": 1311107, "labels_pruned_support_duration": 0, "labels_pruned_completion_lb": 0, "label_dominance_comparisons": 2056806, "labels_pruned_label_dominance": 1240194, "labels_pruned_cross_pickup_dominance": 0, "label_dominance_inactive_entries_skipped": 4346479, "label_dominance_bucket_compactions": 8038, "label_dominance_compacted_entries": 118883, "operation_dp_dominance_pruned_states": 0, "best_reduced_cost": 0, "exact_completed": false, "early_negative_stop": false, "time_seconds": 0.1034395, "timeout_unfinished_state_count": 1324058}}
+  ]
+}

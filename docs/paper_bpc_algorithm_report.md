@@ -786,10 +786,14 @@ focused intensification starts tree pricing but lowers the 300s LB to
 before time-limit returns. A pricing timer bug was fixed in this path so the
 pricer receives the actual pricing-call start timestamp when its budget is a
 remaining per-call budget. After the fix, the controlling time-limited pricing
-call enumerates about `3.25M` route states and `161.6M` operation states before
-returning with negative reduced cost remaining. This supports keeping depth 8
-as the default and moving the next optimization effort to pricing-state
-reduction or stronger valid relaxation on the depth-8 active children.
+call enumerates real states instead of immediately timing out. A subsequent
+exact label-dominance bucket compaction removes stale inactive label indices
+without changing the dominance rule. The refreshed depth-6 diagnostic enumerates
+about `3.51M` route states and `171.5M` operation states, records `1,239,056`
+bucket compactions and `17,581,023` compacted entries, and still returns with
+negative reduced cost remaining. This supports keeping depth 8 as the default
+and moving the next optimization effort to pricing-state reduction or stronger
+valid relaxation on the depth-8 active children.
 
 The follow-up label-dominance trace audit did not change the algorithmic
 certificate path, but it makes the pricing plateau easier to explain. V12 M1

@@ -2230,11 +2230,15 @@ Remaining TODOs:
 - Tested V12 M1 300s with focused intensification disabled at the depth-8
   default. The result is unchanged: `LB=0.344613240900`, gap
   `0.035238862701`, with no tree retry before timeout.
+- Added certificate-neutral compaction for exact label-dominance buckets. The
+  compaction removes only indices for labels already marked inactive by the
+  unchanged dominance rule, reducing repeated scans of stale bucket entries.
 - Tested V12 M1 300s with depth 6 and focused intensification disabled to
   force earlier retry/tree work. It starts tree pricing but is worse:
   `LB=0.341121462223`, gap `0.0450142629691`. The controlling pricing call
-  enumerates about `3.25M` route states and `161.6M` operation states before
-  timing out with best reduced cost `-0.00938540151401`, so the tree remains
-  unresolved with negative reduced cost remaining.
+  now enumerates about `3.51M` route states and `171.5M` operation states before
+  timing out with best reduced cost `-0.00938540151401`. It records
+  `1,239,056` bucket compactions and `17,581,023` compacted stale entries, but
+  the tree remains unresolved with negative reduced cost remaining.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
-  fifty-one paper-core solver JSON rows and reports zero failures.
+  fifty-three paper-core solver JSON rows and reports zero failures.
