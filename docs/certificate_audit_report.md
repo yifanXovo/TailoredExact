@@ -351,6 +351,15 @@ noncertified: `LB=0.717435865864`, `UB=0.719065249476`, gap
 and `open_nodes=30`. The row keeps the verified archive incumbent as an
 upper-bound cutoff only and reports no original-problem certificate.
 
+The focused child-relaxation scheduling validation extends the audit to
+eighty-one solver JSON rows with zero failures. The V4 smoke validation remains
+certified at objective `0`. The V12 M2 1200s focused-child-relax row remains
+correctly noncertified with the same valid lower bound
+`0.717435865864`, but has `unresolved_intervals=3`,
+`invalid_bound_intervals=0`, and `open_nodes=29` after solving both children of
+the focused split with valid inventory/route/Gini relaxations before entering
+the branch-price retry.
+
 ## Remaining Audit Work
 
 - Add C++ unit-style fixtures that create unsafe `SolveResult` objects and

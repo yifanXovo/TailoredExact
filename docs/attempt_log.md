@@ -2383,3 +2383,25 @@ Remaining TODOs:
   lower-bound source `focused_split_inherited_parent_lb`.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   seventy-nine paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Focused Split Child-Relaxation Scheduling
+
+- The V12 M2 1200s trace showed that focused intensification split a
+  controlling interval but only solved the first child relaxation before
+  starting an expensive branch-price retry on the other inherited child. That
+  retry spent about `743s` in pricing without improving the valid interval
+  lower bound.
+- Updated focused split scheduling so every child is attempted in best-bound
+  order with the focused inventory/route/Gini relaxation budget before the
+  branch-price retry pass begins. The child relaxation time and relaxation
+  lower bound are now also recorded on the child interval.
+- V4 paper-core smoke remains certified with objective `0`, `gap=0`,
+  `verifier_passed=true`, and `certified_original_problem=true`.
+- V12 M2 Average 1200s remains noncertified, but the ledger improves:
+  `LB=0.717435865864`, `UB=0.719065249476`, gap `0.00226597462971`,
+  `unresolved_intervals=3`, `invalid_bound_intervals=0`, and `open_nodes=29`.
+  The additional child relaxation raises `[0.489675944630,0.490612227507]` to
+  `LB=0.717884613415`; the remaining controlling interval is
+  `[0.490612227507,0.494357359015]`.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  eighty-one paper-core solver JSON rows and reports zero failures.

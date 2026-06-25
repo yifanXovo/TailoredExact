@@ -313,6 +313,21 @@ intensification improves one child but leaves the controlling interval
 exact BPC closure in a narrow high-Gini leaf, not a certificate-accounting
 issue. No original-problem optimality is claimed.
 
+The focused split step was then adjusted so that, when an unresolved interval
+is split during focused intensification, every child is attempted in
+best-bound order with the focused inventory/route/Gini relaxation budget before
+the branch-price retry pass starts. This is certificate-safe because it only
+adds valid child relaxation lower bounds and cannot close a node without the
+existing certificate checks. On the V4 smoke row the objective remains
+certified at `0`. On V12 M2 Average 1200s, the valid global lower bound is
+unchanged at `0.717435865864`, but the ledger is cleaner:
+`unresolved_intervals` drops from `4` to `3`, `open_nodes` drops from `30` to
+`29`, and the formerly inherited child `[0.489675944630,0.490612227507]` now
+has a focused child relaxation lower bound of `0.717884613415`. The remaining
+controlling interval is `[0.490612227507,0.494357359015]`, still at
+`LB=0.717435865864`, and it remains noncertified with exact BPC tree work
+dominating the runtime.
+
 ## Required Next Work
 
 - Use the node/pricing trace to profile exact-label pricing state explosion and

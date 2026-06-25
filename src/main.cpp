@@ -9512,21 +9512,37 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                         }
                         return lhs < rhs;
                     });
-                    if (!child_ids.empty()) {
-                        const int child_idx = child_ids.front();
+                    bool any_child_improved = false;
+                    bool child_relax_attempted = false;
+                    for (int child_idx : child_ids) {
+                        if (opt.solve_time_limit > 0.0 && remainingSeconds() <= 0.0) {
+                            result.focused_intensification_stop_reason =
+                                child_relax_attempted
+                                    ? "split_performed_child_relax_time_limit"
+                                    : "split_performed_child_relax_skipped_time_limit";
+                            break;
+                        }
                         FrontierIntervalRecord& child = interval_records[child_idx];
+                        const double child_budget = opt.solve_time_limit > 0.0
+                            ? std::max(0.1, std::min(relax_budget, remainingSeconds()))
+                            : relax_budget;
                         const CachedRelaxation child_relax =
                             computeInventoryRelaxation(child.lo, child.hi,
-                                                       relax_budget,
+                                                       child_budget,
                                                        result.upper_bound, true);
+                        child_relax_attempted = true;
                         ++result.focused_intensification_relax_calls;
                         ++result.focused_intensification_child_intervals_processed;
                         result.bound_time_seconds += child_relax.elapsed;
+                        child.relaxation_time_seconds += child_relax.elapsed;
                         accumulateInventoryRelaxationStats(child_relax.bound);
                         const double child_candidate_lb = child_relax.bound.infeasible
                             ? result.upper_bound
                             : std::max(child.lo,
                                 child_relax.bound.objective_lower_bound);
+                        if (child_relax.bound.computed && std::isfinite(child_candidate_lb)) {
+                            child.relaxation_lower_bound = child_candidate_lb;
+                        }
                         if (child_relax.bound.computed &&
                             child_candidate_lb > child.lower_bound + 1e-8) {
                             child.lower_bound = child_candidate_lb;
@@ -9535,11 +9551,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                             child.lb_sources += "|focused_child_inventory_route_gini_relaxation";
                             ++result.focused_intensification_lb_improvements;
                             ++result.adaptive_split_lb_improvements;
-                            result.focused_intensification_stop_reason =
-                                "child_interval_improved";
-                        } else {
-                            result.focused_intensification_stop_reason =
-                                "split_performed";
+                            any_child_improved = true;
                         }
                         result.focused_intensification_best_child_lb =
                             std::max(result.focused_intensification_best_child_lb,
@@ -9549,11 +9561,18 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                             + ", child=" + std::to_string(child_idx)
                             + ", child_lb=" + std::to_string(child.lower_bound)
                             + ", child_status=" + child_relax.bound.status
+                            + ", child_budget=" + std::to_string(child_budget)
                             + ", operation_budget_enabled="
                             + std::string(opt.route_mask_operation_budget_cuts
                                           ? "true" : "false"));
                         writeProgressCheckpoint("focused_split_child_" +
                                                 std::to_string(child_idx), true);
+                    }
+                    if (result.focused_intensification_stop_reason.empty() ||
+                        result.focused_intensification_stop_reason == "split_performed") {
+                        result.focused_intensification_stop_reason =
+                            any_child_improved ? "child_interval_improved"
+                                               : "split_performed";
                     }
                 }
                 if (!split_performed && result.focused_intensification_stop_reason.empty()) {
