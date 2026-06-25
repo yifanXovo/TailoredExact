@@ -282,6 +282,17 @@ depth 8, and V12 M2 is weaker than the depth-8 default within the same 300s
 budget. The full audit over `results/paper_bpc_core/raw` now covers forty-seven
 solver JSON rows with zero failures.
 
+The trace completeness audit was extended after a V12 M1 depth-6/no-focused
+diagnostic exposed that aggregate BPC pricing calls could be present while the
+paper-core trace lacked per-call JSON objects. The CG path now writes pricing
+trace objects before time-limit returns, including event, vehicle, exact
+completion, best reduced cost, state counts, dominance counters, and unfinished
+state count. A one-interval V12 M1 trace validation row confirms the
+`pricing_calls` array is populated for a started BPC tree, and the depth-6
+no-focused diagnostic now records two time-limited pricing-call entries. The
+full audit over `results/paper_bpc_core/raw` now covers fifty-one solver JSON
+rows with zero failures.
+
 The audit script self-test includes intentionally invalid cases for incomplete
 pricing, duplicate negative-column blockage, partial frontier coverage,
 route-mask certifying with enumeration disabled, and original optimality without

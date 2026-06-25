@@ -2212,3 +2212,22 @@ Remaining TODOs:
   ledgers, including a derived controlling interval.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   forty-seven paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Pricing Trace Completeness and M1 Scheduling Diagnostics
+
+- Fixed the CG trace path so pricing-call JSON objects are written before a
+  pricing time-limit return. The paper-core plateau trace now records
+  time-limited pricing events instead of reporting only aggregate pricing
+  counters.
+- Ran a one-interval V12 M1 trace validation row; it remains noncertified and
+  diagnostic, but its trace contains a pricing call object with
+  `event=pricing_time_limit` and `exact_completed=false`.
+- Tested V12 M1 300s with focused intensification disabled at the depth-8
+  default. The result is unchanged: `LB=0.344613240900`, gap
+  `0.035238862701`, with no tree retry before timeout.
+- Tested V12 M1 300s with depth 6 and focused intensification disabled to
+  force earlier retry/tree work. It starts tree pricing but is worse:
+  `LB=0.341121462223`, gap `0.0450142629691`, and the tree remains unresolved
+  with negative reduced cost remaining.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  fifty-one paper-core solver JSON rows and reports zero failures.

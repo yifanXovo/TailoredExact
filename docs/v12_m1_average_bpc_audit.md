@@ -266,6 +266,20 @@ An explicit depth-9 300s diagnostic was run next and did not improve V12 M1:
 depth 8 while taking the same order of relaxation time, there is no current M1
 evidence for raising the paper-core default beyond depth 8.
 
+Two focused scheduling diagnostics were then run to test whether V12 M1 should
+start branch-price tree work earlier. Disabling focused intensification at the
+depth-8 default does not change the 300s result: `LB=0.344613240900`, gap
+`0.035238862701`, and `focused_retry_stopped_reason=time_limit_before_retry`.
+Forcing a shallower depth-6 ledger and disabling focused intensification does
+start focused retry/tree work, but it is worse in 300s:
+`LB=0.341121462223`, gap `0.0450142629691`, `pricing_time_seconds` about
+`7.94`, and `master_time_seconds` about `11.49`. The tree pricing trace now
+records time-limited pricing calls with negative reduced cost remaining, so
+those nodes are correctly unresolved. This rejects "start tree earlier by
+reducing split depth" as the next default change; the plateau still needs
+stronger exact pricing or a stronger valid relaxation on the active depth-8
+children.
+
 ## Required Next Work
 
 - Use the depth-8 interval ledger and the depth-6 1200s per-node/pricing traces to

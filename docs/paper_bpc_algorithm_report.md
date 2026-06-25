@@ -778,6 +778,16 @@ certificate.
 Depth 9 was tested explicitly but rejected as a default: it does not improve
 V12 M1 and is worse than depth 8 on V12 M2 within 300s.
 
+The follow-up V12 M1 scheduling diagnostic tested whether the default should
+start tree work earlier. Disabling focused intensification at depth 8 leaves
+the 300s bound unchanged, and forcing a shallower depth-6 ledger with no
+focused intensification starts tree pricing but lowers the 300s LB to
+`0.341121462223`. The latter row now records per-pricing-call trace objects
+before time-limit returns, showing exact pricing did not close and negative
+reduced cost remains. This supports keeping depth 8 as the default and moving
+the next optimization effort to pricing-state reduction or stronger valid
+relaxation on the depth-8 active children.
+
 The follow-up label-dominance trace audit did not change the algorithmic
 certificate path, but it makes the pricing plateau easier to explain. V12 M1
 300s records `330135991` label-dominance comparisons and `186012791` exact

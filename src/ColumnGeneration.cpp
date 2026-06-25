@@ -2521,12 +2521,81 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
             priced.best_reduced_cost += vehicle_constant;
             priced.has_negative_column = priced.has_column &&
                 priced.best_reduced_cost < -1e-9;
+            auto appendPricingTrace = [&](const PricingResult& trace_priced,
+                                          double trace_seconds,
+                                          bool trace_reused_pricing,
+                                          const std::string& event) {
+                std::ostringstream trace;
+                trace << std::setprecision(12)
+                      << "{"
+                      << "\"iteration\": " << iter
+                      << ", \"vehicle\": " << k
+                      << ", \"event\": \"" << jsonEscapeCg(event) << "\""
+                      << ", \"dual_summary\": \""
+                      << jsonEscapeCg("visit_l1=" + num([&]() {
+                             double sum = 0.0;
+                             for (double v : shared_duals.visit_cost) sum += std::fabs(v);
+                             return sum;
+                         }()) + ";operation_l1=" + num([&]() {
+                             double sum = 0.0;
+                             for (double v : shared_duals.operation_cost) sum += std::fabs(v);
+                             return sum;
+                         }()) + ";vehicle_constant=" + num(vehicle_constant))
+                      << "\""
+                      << ", \"pricing_engine_requested\": \""
+                      << jsonEscapeCg(result.bpc_pricing_engine_requested) << "\""
+                      << ", \"pricing_engine_used\": \""
+                      << jsonEscapeCg(trace_priced.pricing_engine) << "\""
+                      << ", \"reused_capacity_price\": "
+                      << (trace_reused_pricing ? "true" : "false")
+                      << ", \"generated_columns\": " << trace_priced.generated_columns
+                      << ", \"returned_negative_columns\": "
+                      << trace_priced.negative_columns.size()
+                      << ", \"route_states\": "
+                      << (trace_reused_pricing ? 0 : trace_priced.route_states)
+                      << ", \"operation_states\": "
+                      << (trace_reused_pricing ? 0 : trace_priced.operation_states)
+                      << ", \"labels_pruned_support_duration\": "
+                      << (trace_priced.support_duration_pruned_labels +
+                          trace_priced.support_duration_strong_pruned_labels)
+                      << ", \"labels_pruned_completion_lb\": "
+                      << trace_priced.completion_lb_pruned_labels
+                      << ", \"label_dominance_comparisons\": "
+                      << trace_priced.label_dominance_comparisons
+                      << ", \"labels_pruned_label_dominance\": "
+                      << trace_priced.label_dominance_pruned_labels
+                      << ", \"labels_pruned_cross_pickup_dominance\": "
+                      << trace_priced.label_dominance_cross_pickup_pruned_labels
+                      << ", \"label_dominance_inactive_entries_skipped\": "
+                      << trace_priced.label_dominance_inactive_entries_skipped
+                      << ", \"label_dominance_bucket_compactions\": "
+                      << trace_priced.label_dominance_bucket_compactions
+                      << ", \"label_dominance_compacted_entries\": "
+                      << trace_priced.label_dominance_compacted_entries
+                      << ", \"operation_dp_dominance_pruned_states\": "
+                      << trace_priced.operation_dp_dominance_pruned_states
+                      << ", \"best_reduced_cost\": "
+                      << jsonNumberCg(trace_priced.best_reduced_cost)
+                      << ", \"exact_completed\": "
+                      << (trace_priced.complete ? "true" : "false")
+                      << ", \"early_negative_stop\": "
+                      << (trace_priced.stopped_early_with_column ? "true" : "false")
+                      << ", \"time_seconds\": "
+                      << jsonNumberCg(trace_seconds)
+                      << ", \"timeout_unfinished_state_count\": "
+                      << (trace_priced.complete ? 0 :
+                          trace_priced.route_states + trace_priced.operation_states)
+                      << "}";
+                result.pricing_trace_json_objects.push_back(trace.str());
+            };
             if (!priced.complete) {
                 if (priced.stopped_early_with_column && priced.has_negative_column) {
                     result.notes.push_back("iteration " + std::to_string(iter)
                         + " vehicle " + std::to_string(k)
                         + " pricing stopped after finding a valid negative column; exact closure is deferred");
                 } else {
+                    appendPricingTrace(priced, pricing_call_seconds,
+                                       reused_pricing, "pricing_time_limit");
                     result.notes.push_back("iteration " + std::to_string(iter)
                         + " vehicle " + std::to_string(k)
                         + " pricing hit the time limit after route_states="
@@ -2622,6 +2691,8 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                 priced.has_negative_column = priced.has_column &&
                     priced.best_reduced_cost < -1e-9;
                 if (!priced.complete) {
+                    appendPricingTrace(priced, pricing_call_seconds,
+                                       reused_pricing, "exact_rerun_time_limit");
                     result.notes.push_back("iteration " + std::to_string(iter)
                         + " vehicle " + std::to_string(k)
                         + " exact pricing rerun hit the time limit after route_states="
@@ -2658,69 +2729,8 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                  << ", operation_states=" << (reused_pricing ? 0 : priced.operation_states)
                  << ", best_reduced_cost=" << priced.best_reduced_cost;
             result.notes.push_back(note.str());
-            {
-                std::ostringstream trace;
-                trace << std::setprecision(12)
-                      << "{"
-                      << "\"iteration\": " << iter
-                      << ", \"vehicle\": " << k
-                      << ", \"dual_summary\": \""
-                      << jsonEscapeCg("visit_l1=" + num([&]() {
-                             double sum = 0.0;
-                             for (double v : shared_duals.visit_cost) sum += std::fabs(v);
-                             return sum;
-                         }()) + ";operation_l1=" + num([&]() {
-                             double sum = 0.0;
-                             for (double v : shared_duals.operation_cost) sum += std::fabs(v);
-                             return sum;
-                         }()) + ";vehicle_constant=" + num(vehicle_constant))
-                      << "\""
-                      << ", \"pricing_engine_requested\": \""
-                      << jsonEscapeCg(result.bpc_pricing_engine_requested) << "\""
-                      << ", \"pricing_engine_used\": \""
-                      << jsonEscapeCg(priced.pricing_engine) << "\""
-                      << ", \"reused_capacity_price\": "
-                      << (reused_pricing ? "true" : "false")
-                      << ", \"generated_columns\": " << priced.generated_columns
-                      << ", \"returned_negative_columns\": "
-                      << priced.negative_columns.size()
-                      << ", \"route_states\": "
-                      << (reused_pricing ? 0 : priced.route_states)
-                      << ", \"operation_states\": "
-                      << (reused_pricing ? 0 : priced.operation_states)
-                      << ", \"labels_pruned_support_duration\": "
-                      << (priced.support_duration_pruned_labels +
-                          priced.support_duration_strong_pruned_labels)
-                      << ", \"labels_pruned_completion_lb\": "
-                      << priced.completion_lb_pruned_labels
-                      << ", \"label_dominance_comparisons\": "
-                      << priced.label_dominance_comparisons
-                      << ", \"labels_pruned_label_dominance\": "
-                      << priced.label_dominance_pruned_labels
-                      << ", \"labels_pruned_cross_pickup_dominance\": "
-                      << priced.label_dominance_cross_pickup_pruned_labels
-                      << ", \"label_dominance_inactive_entries_skipped\": "
-                      << priced.label_dominance_inactive_entries_skipped
-                      << ", \"label_dominance_bucket_compactions\": "
-                      << priced.label_dominance_bucket_compactions
-                      << ", \"label_dominance_compacted_entries\": "
-                      << priced.label_dominance_compacted_entries
-                      << ", \"operation_dp_dominance_pruned_states\": "
-                      << priced.operation_dp_dominance_pruned_states
-                      << ", \"best_reduced_cost\": "
-                      << jsonNumberCg(priced.best_reduced_cost)
-                      << ", \"exact_completed\": "
-                      << (priced.complete ? "true" : "false")
-                      << ", \"early_negative_stop\": "
-                      << (priced.stopped_early_with_column ? "true" : "false")
-                      << ", \"time_seconds\": "
-                      << jsonNumberCg(pricing_call_seconds)
-                      << ", \"timeout_unfinished_state_count\": "
-                      << (priced.complete ? 0 :
-                          priced.route_states + priced.operation_states)
-                      << "}";
-                result.pricing_trace_json_objects.push_back(trace.str());
-            }
+            appendPricingTrace(priced, pricing_call_seconds,
+                               reused_pricing, "pricing_complete");
             if (!result.bpc_pricing_engine_requested.empty() &&
                 result.bpc_pricing_engine_requested != "auto" &&
                 result.bpc_pricing_engine_requested != priced.pricing_engine) {
