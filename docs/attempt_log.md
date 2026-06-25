@@ -2319,3 +2319,29 @@ Remaining TODOs:
   The row remains noncertified with three unresolved intervals.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   seventy-one paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Archive Incumbent Duplicate-Search Skip
+
+- Added a paper-core scheduling guard for verified incumbent archives. When
+  `paper-bpc-core` accepts a route-bearing archive incumbent and the incumbent
+  mode is the preset default `auto`, the solver skips the later BPC-owned
+  `auto` incumbent portfolio. The archive incumbent remains an upper-bound
+  cutoff only; no lower-bound proof or certificate evidence is inherited.
+- V4 paper-core smoke remains certified at objective `0`, with
+  `gap=0`, `verifier_passed=true`, and `certified_original_problem=true`.
+- V12 M2 Average 60s improves from `LB=0.359532624738` to
+  `LB=0.692095277420` because the seed stage drops from about `27s` to about
+  `7s`. V12 M2 Average 300s improves from `LB=0.716948330538` to
+  `LB=0.717435865864`, with `UB=0.719065249476`, gap
+  `0.00226597462971`, `unresolved_intervals=3`, and
+  `invalid_bound_intervals=0`.
+- V12 M1 Average 60s improves from `LB=0.178600291604` to
+  `LB=0.268006384720`. V12 M1 Average 300s improves from
+  `LB=0.344613240900` to `LB=0.344881668930`, with
+  `UB=0.357200583208`, gap `0.0344873856805`,
+  `unresolved_intervals=4`, and `invalid_bound_intervals=0`.
+- Both V12 instances remain noncertified. The current bottleneck is still
+  unresolved active frontier leaves controlled by inventory/route/Gini
+  relaxation strength and, for shallower schedules, exact BPC tree closure.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  seventy-six paper-core solver JSON rows and reports zero failures.

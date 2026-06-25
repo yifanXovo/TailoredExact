@@ -323,6 +323,20 @@ the same valid bound, `LB=0.344613240900`, `UB=0.357200583208`, gap
 `open_nodes=4`; the change is a scheduling/runtime improvement, not a closure
 breakthrough.
 
+The latest accepted scheduling fix avoids rerunning the default BPC-owned
+`auto` incumbent portfolio when the incumbent archive has already supplied a
+verified route plan. For V12 M1 the archive provides the current
+`UB=0.357200583208`, so the archive route is retained as an upper-bound cutoff
+and no lower-bound evidence is inherited. This reduces the initial seed stage
+from tens of seconds to about `7s`. On the 60s row, the valid lower bound
+improves from `LB=0.178600291604` to `LB=0.268006384720`. On the 300s row, the
+valid lower bound improves slightly from `LB=0.344613240900` to
+`LB=0.344881668930`, with `UB=0.357200583208`, gap `0.0344873856805`,
+`unresolved_intervals=4`, and `invalid_bound_intervals=0`. V12 M1 therefore
+remains noncertified, but the short-budget frontier now spends less time on
+duplicate UB-only incumbent generation and more time on valid relaxation
+refinement.
+
 ## Required Next Work
 
 - Use the depth-8 interval ledger and the depth-6 1200s per-node/pricing traces to

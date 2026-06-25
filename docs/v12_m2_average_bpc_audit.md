@@ -278,6 +278,20 @@ to `284.21s`. The instance remains noncertified; the controlling region is
 still the narrow child around `[0.488740,0.490612]`, with lower bound source
 `focused_inventory_route_gini_relaxation`.
 
+The next accepted runtime fix removes duplicate UB-only incumbent work. The
+incumbent archive already provides a verified V12 M2 route plan with
+`UB=0.719065249476`, so `paper-bpc-core` now skips the default BPC-owned
+`auto` incumbent portfolio after accepting that archive incumbent. This does
+not affect any lower bound or certificate condition: the archive incumbent is
+still only a feasible cutoff. On the 60s row, the initial seed stage drops from
+about `27s` to about `7s`, and the valid lower bound improves from
+`LB=0.359532624738` to `LB=0.692095277420`. On the 300s row, the valid lower
+bound improves from `LB=0.716948330538` to `LB=0.717435865864`, with
+`UB=0.719065249476`, gap `0.00226597462971`, `unresolved_intervals=3`, and
+`invalid_bound_intervals=0`. The instance remains noncertified because active
+frontier leaves are still unresolved; the improvement is purely better
+scheduling of certificate-safe relaxation work.
+
 ## Required Next Work
 
 - Use the node/pricing trace to profile exact-label pricing state explosion and

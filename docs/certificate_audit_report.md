@@ -322,6 +322,17 @@ certified at objective 0. The V12 M1/M2 rows remain correctly noncertified with
 positive gaps and unresolved intervals, including the rejected ungated V12 M2
 300s diagnostic and the accepted gated V12 M2 300s row.
 
+The short-budget compatibility-flow skip and archive-incumbent scheduling rows
+extend the audit to seventy-six solver JSON rows with zero failures. V4
+paper-core remains certified at objective 0. The new V12 rows are correctly
+noncertified: V12 M1 archive-skip 300s has
+`LB=0.344881668930`, `UB=0.357200583208`, gap `0.0344873856805`, and
+`unresolved_intervals=4`; V12 M2 archive-skip 300s has
+`LB=0.717435865864`, `UB=0.719065249476`, gap `0.00226597462971`, and
+`unresolved_intervals=3`. In both cases the archive incumbent is used only as a
+verified upper-bound cutoff and does not contribute to lower-bound evidence or
+certificate closure.
+
 ## Remaining Audit Work
 
 - Add C++ unit-style fixtures that create unsafe `SolveResult` objects and

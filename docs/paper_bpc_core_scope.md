@@ -13,19 +13,26 @@ The paper-facing exact algorithm is GF-RL-BPC, implemented by
 - Movement-domain tightening, projection bounds, and penalty-domain tightening.
 - Vehicle-indexed operation and transfer-flow relaxations.
 - Pickup/drop compatibility-flow relaxation audit with no-compatibility-first
-  cutoff skipping: either model supplies only valid lower-bound evidence, and
-  the compatibility model is skipped only after the easier relaxation already
-  bound-fathoms the interval.
+  cutoff skipping: either model supplies only valid lower-bound evidence. For
+  very short interval relaxation budgets (`<=2.5s`), paper-core may keep the
+  valid weaker no-compatibility relaxation and skip the compatibility-flow
+  audit solve with `compat_skipped=short_relaxation_budget`; this can weaken a
+  lower bound but cannot overstate one.
 - Split-before-tree initial frontier scheduling. When adaptive splitting is
   enabled, a broad unresolved interval with a valid lower bound may be deferred
   to the split ledger before running an expensive initial branch-price tree.
   This only changes work order: replaced parent intervals are ignored in the
   final certificate ledger and exactly covered by child intervals.
-- Adaptive split depth 5 by default for paper presets unless explicitly
+- Adaptive split depth 8 by default for paper presets unless explicitly
   overridden. This is still a ledger scheduling rule, not a certificate
   shortcut: every child interval must be empty, validly bound-fathomed, or
   closed by exact BPC pricing before original-problem optimality can be
   claimed.
+- Verified incumbent archive routes as upper-bound cutoffs only. When
+  `paper-bpc-core` accepts a verified archive incumbent and the incumbent mode
+  is the preset default `auto`, the later BPC-owned auto incumbent portfolio is
+  skipped to avoid duplicate UB-only work. This changes only scheduling and
+  incumbent search time; it never contributes to a lower bound or certificate.
 - Complete route-mask operation-budget cuts only when route-mask enumeration is
   complete for the active instance threshold.
 - Route-pool incumbent master using verified elementary columns only.

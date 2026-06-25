@@ -6617,6 +6617,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             + ", dropped_by_cap="
             + std::to_string(frontier_route_pool.dropped_by_cap));
     };
+    bool verified_archive_incumbent_selected = false;
     if (opt.incumbent_archive_auto) {
         result.incumbent_archive_attempted = true;
         IncumbentArchiveScanResult archive =
@@ -6631,6 +6632,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 archive.best_routes, "incumbent-archive");
             result.incumbent_archive_selected = accepted;
             if (accepted) {
+                verified_archive_incumbent_selected = true;
                 addRoutesToFrontierPool(archive.best_routes,
                                         "incumbent archive");
             }
@@ -6892,7 +6894,17 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
 
     const bool auto_incumbent =
         opt.bpc_incumbent == "auto" || opt.bpc_incumbent == "best-of-all";
-    if (auto_incumbent) {
+    const bool skip_default_auto_incumbent =
+        auto_incumbent &&
+        verified_archive_incumbent_selected &&
+        opt.algorithm_preset == "paper-bpc-core" &&
+        opt.bpc_incumbent == "auto";
+    if (skip_default_auto_incumbent) {
+        result.incumbent_selection_reason =
+            "verified incumbent archive route plan already selected; skipped default BPC-owned auto incumbent search";
+        result.notes.push_back(
+            "paper-bpc-core skipped default BPC-owned auto incumbent portfolio because a verified archive incumbent was already accepted as UB-only cutoff; no lower-bound certificate is inherited from the archive");
+    } else if (auto_incumbent) {
         const auto incumbent_start = std::chrono::steady_clock::now();
         std::vector<CandidateRecord> candidates;
         const std::vector<std::string> modes{
