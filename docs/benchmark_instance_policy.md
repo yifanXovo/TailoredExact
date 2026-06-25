@@ -45,3 +45,13 @@ paper benchmark.
 Archive-incumbent rows are also not paper-core default evidence. They may be
 used as diagnostic UB comparisons only, with route plans independently verified
 and with no lower-bound contribution.
+## Current Round Note
+
+The V12 M1/M2 rows in `results/primal_ub_improvement_round/` use regenerated
+engineering instances:
+
+- `reference/regen_candidate_V12_M1_average.txt`;
+- `reference/regen_candidate_V12_M2_average.txt`.
+
+The generated variant rerun uses files in `reference/generated_variants/` and
+remains engineering-only evidence.

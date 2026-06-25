@@ -40,3 +40,12 @@ within the short 60-second budget.
 
 A V4 CPLEX/compact availability probe succeeded. Full CPLEX rows for every
 generated variant were not run in this pass to keep the matrix bounded.
+## Round 2 Rerun Status
+
+The primal-UB improvement round attempted to rerun ten existing generated
+variants with the improved heuristic. The batch was stopped after the first
+variant exceeded the expected wall-clock limit without producing a raw JSON or
+log output. No generated-variant performance improvement is claimed for this
+round. The stopped run is recorded in
+`results/generated_variant_round2/run_status.csv` and
+`results/generated_variant_round2/summary.csv`.

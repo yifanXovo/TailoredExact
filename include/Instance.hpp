@@ -108,6 +108,7 @@ struct SolveOptions {
     double primal_heuristic_seconds = 10.0;
     unsigned primal_heuristic_seed = 20260626u;
     int primal_heuristic_runs = 12;
+    std::string heuristic_candidates_csv;
     std::string large_instance_mode = "auto";
     std::string pricing_engine = "auto";
     std::string large_lb_mode = "auto";

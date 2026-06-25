@@ -76,3 +76,19 @@ build\ExactEBRP.exe --method primal-heuristic \
 The exported incumbent can be reused explicitly with `--incumbent-json`; this
 is paper-reproducible because the file is an input artifact rather than a scan
 of an arbitrary local result archive.
+
+## Primal UB Improvement Round
+
+This round added `--heuristic-candidates-csv`, which records every
+verifier-checked candidate with objective components, route counts, operation
+totals, route durations, runtime, and whether it became the best incumbent.
+The seeded `hga-tgbc` path now includes a clean operation-portfolio bridge that
+reuses verifier-gated operation resize/swap route-load local search as a
+reproducible UB candidate source.
+
+On regenerated V12 M2, the improved heuristic reached UB `0.745475`, improving
+the previous paper heuristic UB of approximately `0.756165`, but still missing
+the diagnostic archive UB `0.719065249476`. On regenerated V12 M1, the
+improved UB is `0.366800`, above the known good UB `0.357200583208`. The next
+heuristic step is a fuller migration of HybridGA's compact TGBC decoder and
+decoded-operation guided education.

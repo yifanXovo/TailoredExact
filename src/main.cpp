@@ -27,6 +27,7 @@
 #include <iostream>
 #include <limits>
 #include <map>
+#include <numeric>
 #include <random>
 #include <regex>
 #include <sstream>
@@ -74,6 +75,7 @@ void usage() {
         << "[--external-incumbent <path>] [--external-incumbent-format auto|route_json|csv|legacy_text] [--export-incumbent <path>] "
         << "[--primal-heuristic none|greedy|hga-tgbc|best-of-all] [--primal-heuristic-seconds <seconds>] "
         << "[--primal-heuristic-seed <seed>] [--primal-heuristic-runs <N>] "
+        << "[--heuristic-candidates-csv <path>] "
         << "[--large-instance-mode auto|off|force] [--large-lb-mode none|inventory-only|movement-projection|column-pool-relaxation|auto] "
         << "[--pricing-engine exact-label|ng-dssr|hybrid] "
         << "[--ng-size <N>] [--ng-neighborhood-mode nearest|dual-aware|hybrid] "
@@ -355,6 +357,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--primal-heuristic-seconds") opt.primal_heuristic_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-seed") opt.primal_heuristic_seed = static_cast<unsigned>(std::stoul(requireValue(i, argc, argv)));
         else if (arg == "--primal-heuristic-runs") opt.primal_heuristic_runs = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--heuristic-candidates-csv") opt.heuristic_candidates_csv = requireValue(i, argc, argv);
         else if (arg == "--large-instance-mode") opt.large_instance_mode = requireValue(i, argc, argv);
         else if (arg == "--large-lb-mode") opt.large_lb_mode = requireValue(i, argc, argv);
         else if (arg == "--pricing-engine") opt.pricing_engine = requireValue(i, argc, argv);
@@ -4146,7 +4149,503 @@ struct PaperPrimalHeuristicResult {
     long long candidates_rejected = 0;
     long long local_moves_tested = 0;
     std::vector<std::string> notes;
+    struct CandidateRecord {
+        std::string instance;
+        unsigned seed = 0;
+        int run_id = 0;
+        std::string mode;
+        std::string label;
+        double objective = 0.0;
+        double G = 0.0;
+        double P = 0.0;
+        int route_count = 0;
+        int served_station_count = 0;
+        int total_pickup = 0;
+        int total_drop = 0;
+        int depot_unload = 0;
+        std::string route_durations;
+        bool verifier_passed = false;
+        double runtime = 0.0;
+        bool accepted_as_best = false;
+        std::string exported_incumbent_path;
+    };
+    std::vector<CandidateRecord> candidate_records;
 };
+
+double heuristicRouteDuration(const ebrp::Instance& instance,
+                              const ebrp::RoutePlan& route) {
+    if (route.nodes.size() < 2) return 0.0;
+    double travel = 0.0;
+    for (std::size_t p = 0; p + 1 < route.nodes.size(); ++p) {
+        const int a = route.nodes[p];
+        const int b = route.nodes[p + 1];
+        if (a < 0 || a > instance.V || b < 0 || b > instance.V) return 1e100;
+        travel += instance.dist[a][b];
+    }
+    int pickup = 0;
+    int drop = 0;
+    for (const ebrp::StopOperation& op : route.operations) {
+        pickup += op.pickup;
+        drop += op.drop;
+    }
+    const int depot_unload = std::max(0, pickup - drop);
+    return travel + instance.pickup_time * pickup +
+        instance.drop_time * (drop + depot_unload);
+}
+
+std::vector<std::vector<int>> routeSequencesFromPlans(
+    const ebrp::Instance& instance,
+    const std::vector<ebrp::RoutePlan>& routes) {
+    std::vector<std::vector<int>> seqs(instance.M);
+    for (const ebrp::RoutePlan& route : routes) {
+        if (route.vehicle < 0 || route.vehicle >= instance.M) continue;
+        std::vector<char> used(instance.V + 1, 0);
+        for (int node : route.nodes) {
+            if (node <= 0 || node > instance.V || used[node]) continue;
+            used[node] = 1;
+            seqs[route.vehicle].push_back(node);
+        }
+    }
+    return seqs;
+}
+
+void repairRouteSequences(const ebrp::Instance& instance,
+                          std::vector<std::vector<int>>& seqs) {
+    seqs.resize(instance.M);
+    std::vector<char> used(instance.V + 1, 0);
+    for (auto& route : seqs) {
+        std::vector<int> clean;
+        clean.reserve(route.size());
+        for (int node : route) {
+            if (node <= 0 || node > instance.V || used[node]) continue;
+            used[node] = 1;
+            clean.push_back(node);
+        }
+        route.swap(clean);
+    }
+}
+
+void truncateTargetGreedySequences(const ebrp::Instance& instance,
+                                   std::vector<std::vector<int>>& seqs) {
+    for (std::vector<int>& route : seqs) {
+        double travel = 0.0;
+        int prev = 0;
+        int keep = 0;
+        for (int node : route) {
+            const double closed = travel + instance.dist[prev][node] +
+                instance.dist[node][0];
+            if (closed > instance.total_time_limit + 1e-9) break;
+            travel += instance.dist[prev][node];
+            prev = node;
+            ++keep;
+        }
+        if (keep < static_cast<int>(route.size())) route.resize(keep);
+    }
+}
+
+std::vector<int> routeChromosomeFromSequences(
+    const std::vector<std::vector<int>>& seqs,
+    int M) {
+    std::vector<int> chrom;
+    for (int k = 0; k < M; ++k) {
+        if (k < static_cast<int>(seqs.size())) {
+            chrom.insert(chrom.end(), seqs[k].begin(), seqs[k].end());
+        }
+        if (k + 1 < M) chrom.push_back(0);
+    }
+    return chrom;
+}
+
+std::vector<std::vector<int>> sequencesFromRouteChromosome(
+    const std::vector<int>& chrom,
+    int M) {
+    std::vector<std::vector<int>> seqs;
+    seqs.reserve(M);
+    std::vector<int> cur;
+    for (int gene : chrom) {
+        if (gene == 0) {
+            seqs.push_back(cur);
+            cur.clear();
+        } else {
+            cur.push_back(gene);
+        }
+    }
+    seqs.push_back(cur);
+    while (static_cast<int>(seqs.size()) < M) seqs.emplace_back();
+    if (static_cast<int>(seqs.size()) > M) seqs.resize(M);
+    return seqs;
+}
+
+std::vector<int> orderedSeparatorCrossover(const std::vector<int>& p1,
+                                           const std::vector<int>& p2,
+                                           int V,
+                                           int M,
+                                           std::mt19937& rng) {
+    auto encode = [&](const std::vector<int>& p) {
+        std::vector<int> out;
+        out.reserve(p.size());
+        int sep = 0;
+        for (int gene : p) out.push_back(gene == 0 ? V + (++sep) : gene);
+        return out;
+    };
+    std::vector<int> a = encode(p1);
+    std::vector<int> b = encode(p2);
+    const int L = std::min(a.size(), b.size());
+    if (L <= 1) return p1;
+    a.resize(L);
+    b.resize(L);
+    std::uniform_int_distribution<int> pick(0, L - 1);
+    int lo = pick(rng);
+    int hi = pick(rng);
+    if (lo > hi) std::swap(lo, hi);
+    std::vector<int> child(L, -1);
+    std::vector<char> used(V + M + 4, 0);
+    for (int i = lo; i <= hi; ++i) {
+        child[i] = a[i];
+        if (a[i] >= 0 && a[i] < static_cast<int>(used.size())) used[a[i]] = 1;
+    }
+    int idx = (hi + 1) % L;
+    for (int gene : b) {
+        if (gene >= 0 && gene < static_cast<int>(used.size()) && used[gene]) {
+            continue;
+        }
+        int scanned = 0;
+        while (child[idx] != -1 && scanned < L) {
+            idx = (idx + 1) % L;
+            ++scanned;
+        }
+        if (scanned >= L) break;
+        child[idx] = gene;
+        if (gene >= 0 && gene < static_cast<int>(used.size())) used[gene] = 1;
+    }
+    std::vector<int> decoded;
+    decoded.reserve(child.size());
+    for (int gene : child) {
+        if (gene < 0) decoded.push_back(0);
+        else decoded.push_back(gene > V ? 0 : gene);
+    }
+    return decoded;
+}
+
+std::vector<std::vector<int>> routeInheritanceCrossover(
+    const ebrp::Instance& instance,
+    const std::vector<std::vector<int>>& p1,
+    const std::vector<std::vector<int>>& p2,
+    std::mt19937& rng) {
+    std::vector<std::vector<int>> child(instance.M);
+    std::vector<char> used(instance.V + 1, 0);
+    std::bernoulli_distribution inherit(0.5);
+    for (int k = 0; k < instance.M; ++k) {
+        const auto& src = inherit(rng) ? p1 : p2;
+        if (k >= static_cast<int>(src.size())) continue;
+        for (int node : src[k]) {
+            if (node > 0 && node <= instance.V && !used[node]) {
+                used[node] = 1;
+                child[k].push_back(node);
+            }
+        }
+    }
+    const auto filler_order = routeChromosomeFromSequences(p2, instance.M);
+    int k = 0;
+    for (int node : filler_order) {
+        if (node <= 0 || node > instance.V || used[node]) continue;
+        child[k % instance.M].push_back(node);
+        used[node] = 1;
+        ++k;
+    }
+    return child;
+}
+
+std::vector<std::vector<int>> randomRouteSequences(
+    const ebrp::Instance& instance,
+    std::mt19937& rng,
+    int mode) {
+    std::vector<int> nodes(instance.V);
+    std::iota(nodes.begin(), nodes.end(), 1);
+    auto imbalanceScore = [&](int node) {
+        return std::abs(instance.initial[node] - instance.target[node]);
+    };
+    if (mode == 1) {
+        std::sort(nodes.begin(), nodes.end(), [&](int a, int b) {
+            if (imbalanceScore(a) != imbalanceScore(b)) {
+                return imbalanceScore(a) > imbalanceScore(b);
+            }
+            return instance.dist[0][a] < instance.dist[0][b];
+        });
+    } else if (mode == 2) {
+        std::sort(nodes.begin(), nodes.end(), [&](int a, int b) {
+            const double da = instance.dist[0][a] /
+                std::max(1, imbalanceScore(a));
+            const double db = instance.dist[0][b] /
+                std::max(1, imbalanceScore(b));
+            return da < db;
+        });
+        const int rcl = std::min<int>(4, nodes.size());
+        for (int i = 0; i < static_cast<int>(nodes.size()); ++i) {
+            const int hi = std::min<int>(nodes.size() - 1, i + rcl - 1);
+            std::uniform_int_distribution<int> pick(i, hi);
+            std::swap(nodes[i], nodes[pick(rng)]);
+        }
+    } else {
+        std::shuffle(nodes.begin(), nodes.end(), rng);
+    }
+    std::vector<std::vector<int>> seqs(instance.M);
+    for (int idx = 0; idx < static_cast<int>(nodes.size()); ++idx) {
+        seqs[idx % instance.M].push_back(nodes[idx]);
+    }
+    for (auto& route : seqs) {
+        if (mode == 0) std::shuffle(route.begin(), route.end(), rng);
+    }
+    return seqs;
+}
+
+void mutateRouteSequences(const ebrp::Instance& instance,
+                          std::vector<std::vector<int>>& seqs,
+                          std::mt19937& rng) {
+    if (instance.M <= 0 || instance.V <= 1) return;
+    std::uniform_int_distribution<int> move_pick(0, 3);
+    const int move = move_pick(rng);
+    std::uniform_int_distribution<int> vehicle_pick(0, instance.M - 1);
+    if (move == 0) {
+        std::vector<std::pair<int, int>> pos;
+        for (int k = 0; k < instance.M; ++k) {
+            for (int p = 0; p < static_cast<int>(seqs[k].size()); ++p) {
+                pos.push_back({k, p});
+            }
+        }
+        if (pos.size() >= 2) {
+            std::uniform_int_distribution<int> pick(0, static_cast<int>(pos.size()) - 1);
+            auto a = pos[pick(rng)];
+            auto b = pos[pick(rng)];
+            if (a != b) std::swap(seqs[a.first][a.second], seqs[b.first][b.second]);
+        }
+    } else if (move == 1) {
+        int from = vehicle_pick(rng);
+        if (!seqs[from].empty()) {
+            std::uniform_int_distribution<int> pos_pick(0, static_cast<int>(seqs[from].size()) - 1);
+            int pos = pos_pick(rng);
+            int node = seqs[from][pos];
+            seqs[from].erase(seqs[from].begin() + pos);
+            int to = vehicle_pick(rng);
+            std::uniform_int_distribution<int> ins_pick(0, static_cast<int>(seqs[to].size()));
+            seqs[to].insert(seqs[to].begin() + ins_pick(rng), node);
+        }
+    } else if (move == 2) {
+        int k = vehicle_pick(rng);
+        if (seqs[k].size() >= 2) {
+            std::uniform_int_distribution<int> pick(0, static_cast<int>(seqs[k].size()) - 1);
+            int a = pick(rng);
+            int b = pick(rng);
+            if (a > b) std::swap(a, b);
+            std::reverse(seqs[k].begin() + a, seqs[k].begin() + b + 1);
+        }
+    } else {
+        int k = vehicle_pick(rng);
+        std::shuffle(seqs[k].begin(), seqs[k].end(), rng);
+    }
+    repairRouteSequences(instance, seqs);
+}
+
+std::vector<ebrp::RoutePlan> decodeRouteSequencesTargetGreedy(
+    const ebrp::Instance& instance,
+    const std::vector<std::vector<int>>& raw_seqs,
+    double lambda,
+    int variant) {
+    std::vector<std::vector<int>> seqs = raw_seqs;
+    repairRouteSequences(instance, seqs);
+    truncateTargetGreedySequences(instance, seqs);
+    std::vector<ebrp::RoutePlan> routes = emptyRouteSet(instance);
+    std::vector<int> y = instance.initial;
+    const double cunit = instance.pickup_time + instance.drop_time;
+    for (int k = 0; k < instance.M; ++k) {
+        ebrp::RoutePlan route;
+        route.vehicle = k;
+        route.nodes.push_back(0);
+        int load = 0;
+        int pickup_total = 0;
+        int last = 0;
+        double travel_without_return = 0.0;
+        for (int station : seqs[k]) {
+            const double next_travel =
+                travel_without_return + instance.dist[last][station];
+            const double closed_without_new_pick =
+                next_travel + instance.dist[station][0] + cunit * pickup_total;
+            if (closed_without_new_pick > instance.total_time_limit + 1e-7) {
+                break;
+            }
+            const double current_obj = objectiveForInventory(instance, y, lambda);
+            struct OpCand {
+                int quantity = 0;
+                bool pickup = false;
+                double objective = 0.0;
+                double score = -1e100;
+            } best;
+            auto consider = [&](int quantity, bool pickup) {
+                if (quantity <= 0) return;
+                std::vector<int> y2 = y;
+                int next_pickup_total = pickup_total;
+                if (pickup) {
+                    if (quantity > y[station] || quantity > instance.Q[k] - load) return;
+                    y2[station] -= quantity;
+                    next_pickup_total += quantity;
+                } else {
+                    if (quantity > load ||
+                        quantity > instance.capacity[station] - y[station]) return;
+                    y2[station] += quantity;
+                }
+                if (y2[station] < 0 || y2[station] > instance.capacity[station]) return;
+                const double duration =
+                    next_travel + instance.dist[station][0] +
+                    cunit * next_pickup_total;
+                if (duration > instance.total_time_limit + 1e-7) return;
+                const double obj = objectiveForInventory(instance, y2, lambda);
+                const double benefit = current_obj - obj;
+                if (benefit <= 1e-10 && variant != 2) return;
+                double score = benefit;
+                if (variant == 1) score = benefit / std::max(1.0, duration);
+                if (variant == 2) score = -obj;
+                if (score > best.score + 1e-12) {
+                    best = {quantity, pickup, obj, score};
+                }
+            };
+            const int target_pick = std::max(0, y[station] - instance.target[station]);
+            const int max_pick = std::min(y[station], instance.Q[k] - load);
+            for (int q : {1, target_pick, max_pick, std::max(1, target_pick / 2)}) {
+                consider(q, true);
+            }
+            const int target_drop = std::max(0, instance.target[station] - y[station]);
+            const int max_drop =
+                std::min(instance.capacity[station] - y[station], load);
+            for (int q : {1, target_drop, max_drop, std::max(1, target_drop / 2)}) {
+                consider(q, false);
+            }
+            route.nodes.push_back(station);
+            if (best.quantity > 0) {
+                ebrp::StopOperation op;
+                op.station = station;
+                if (best.pickup) {
+                    op.pickup = best.quantity;
+                    y[station] -= best.quantity;
+                    load += best.quantity;
+                    pickup_total += best.quantity;
+                } else {
+                    op.drop = best.quantity;
+                    y[station] += best.quantity;
+                    load -= best.quantity;
+                }
+                route.operations.push_back(op);
+            }
+            travel_without_return = next_travel;
+            last = station;
+        }
+        route.nodes.push_back(0);
+        routes[k] = std::move(route);
+    }
+    return routes;
+}
+
+std::vector<ebrp::RoutePlan> compactZeroOperationRoutes(
+    const ebrp::Instance& instance,
+    const std::vector<ebrp::RoutePlan>& routes) {
+    std::vector<ebrp::RoutePlan> compact = emptyRouteSet(instance);
+    for (const ebrp::RoutePlan& route : routes) {
+        if (route.vehicle < 0 || route.vehicle >= instance.M) continue;
+        std::unordered_set<int> operated;
+        for (const ebrp::StopOperation& op : route.operations) {
+            if (op.pickup > 0 || op.drop > 0) operated.insert(op.station);
+        }
+        ebrp::RoutePlan out;
+        out.vehicle = route.vehicle;
+        out.nodes.push_back(0);
+        for (int node : route.nodes) {
+            if (node > 0 && operated.count(node)) out.nodes.push_back(node);
+        }
+        out.nodes.push_back(0);
+        out.operations = route.operations;
+        compact[route.vehicle] = std::move(out);
+    }
+    return compact;
+}
+
+std::vector<ebrp::RoutePlan> educateRoutePlan(
+    const ebrp::Instance& instance,
+    double lambda,
+    const std::vector<ebrp::RoutePlan>& routes,
+    std::mt19937& rng,
+    int trials) {
+    std::vector<std::vector<int>> best_seq =
+        routeSequencesFromPlans(instance, routes);
+    std::vector<ebrp::RoutePlan> best_routes =
+        compactZeroOperationRoutes(instance, routes);
+    ebrp::Verification best = ebrp::verifySolution(instance, best_routes, lambda);
+    if (!best.feasible) {
+        best_routes = routes;
+        best = ebrp::verifySolution(instance, best_routes, lambda);
+    }
+    for (int t = 0; t < trials; ++t) {
+        std::vector<std::vector<int>> trial_seq = best_seq;
+        mutateRouteSequences(instance, trial_seq, rng);
+        std::vector<ebrp::RoutePlan> decoded =
+            decodeRouteSequencesTargetGreedy(instance, trial_seq, lambda, t % 3);
+        decoded = compactZeroOperationRoutes(instance, decoded);
+        ebrp::Verification v = ebrp::verifySolution(instance, decoded, lambda);
+        if (v.feasible && (!best.feasible || v.objective < best.objective - 1e-10)) {
+            best = v;
+            best_routes = std::move(decoded);
+            best_seq = routeSequencesFromPlans(instance, best_routes);
+        }
+    }
+    return best_routes;
+}
+
+std::string heuristicRouteDurationsCsv(const ebrp::Instance& instance,
+                                       const std::vector<ebrp::RoutePlan>& routes) {
+    std::ostringstream out;
+    for (std::size_t k = 0; k < routes.size(); ++k) {
+        if (k) out << "|";
+        out << heuristicRouteDuration(instance, routes[k]);
+    }
+    return out.str();
+}
+
+void writeHeuristicCandidatesCsv(
+    const std::string& path,
+    const std::vector<PaperPrimalHeuristicResult::CandidateRecord>& records) {
+    if (path.empty()) return;
+    std::filesystem::path out_path(path);
+    if (out_path.has_parent_path()) {
+        std::filesystem::create_directories(out_path.parent_path());
+    }
+    const bool append = std::filesystem::exists(out_path) &&
+        std::filesystem::file_size(out_path) > 0;
+    std::ofstream out(path, std::ios::app);
+    if (!append) {
+        out << "instance,seed,run_id,mode,label,objective,G,P,route_count,"
+            << "served_station_count,total_pickup,total_drop,depot_unload,"
+            << "route_durations,verifier_passed,runtime,accepted_as_best,"
+            << "exported_incumbent_path\n";
+    }
+    for (const auto& r : records) {
+        out << r.instance << ','
+            << r.seed << ','
+            << r.run_id << ','
+            << r.mode << ','
+            << r.label << ','
+            << r.objective << ','
+            << r.G << ','
+            << r.P << ','
+            << r.route_count << ','
+            << r.served_station_count << ','
+            << r.total_pickup << ','
+            << r.total_drop << ','
+            << r.depot_unload << ','
+            << '"' << r.route_durations << '"' << ','
+            << (r.verifier_passed ? "true" : "false") << ','
+            << r.runtime << ','
+            << (r.accepted_as_best ? "true" : "false") << ','
+            << r.exported_incumbent_path << '\n';
+    }
+}
 
 PaperPrimalHeuristicResult runPaperPrimalHeuristic(
     const ebrp::Instance& instance,
@@ -4170,6 +4669,32 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
                         const std::string& label) {
         ++out.candidates_tested;
         ebrp::Verification v = ebrp::verifySolution(instance, routes, opt.lambda);
+        PaperPrimalHeuristicResult::CandidateRecord rec;
+        rec.instance = instance.name;
+        rec.seed = opt.primal_heuristic_seed;
+        rec.run_id = static_cast<int>(out.candidates_tested);
+        rec.mode = mode;
+        rec.label = label;
+        rec.objective = v.objective;
+        rec.G = v.G;
+        rec.P = v.P;
+        rec.route_count = static_cast<int>(routes.size());
+        std::unordered_set<int> served;
+        for (const ebrp::RoutePlan& route : routes) {
+            for (const ebrp::StopOperation& op : route.operations) {
+                if (op.pickup > 0 || op.drop > 0) served.insert(op.station);
+                rec.total_pickup += op.pickup;
+                rec.total_drop += op.drop;
+            }
+        }
+        rec.served_station_count = static_cast<int>(served.size());
+        rec.depot_unload = std::max(0, rec.total_pickup - rec.total_drop);
+        rec.route_durations = heuristicRouteDurationsCsv(instance, routes);
+        rec.verifier_passed = v.feasible && v.objective_matches &&
+            v.errors.empty();
+        rec.runtime = std::chrono::duration<double>(
+            std::chrono::steady_clock::now() - start).count();
+        rec.exported_incumbent_path = opt.export_incumbent_path;
         std::ostringstream note;
         note << "paper primal heuristic candidate=" << label
              << ", feasible=" << (v.feasible ? "true" : "false")
@@ -4179,6 +4704,7 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         out.notes.push_back(note.str());
         if (!v.feasible) {
             ++out.candidates_rejected;
+            out.candidate_records.push_back(std::move(rec));
             return;
         }
         ++out.candidates_verified;
@@ -4186,27 +4712,39 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
             out.found = true;
             out.verification = v;
             out.routes = routes;
+            rec.accepted_as_best = true;
         }
+        out.candidate_records.push_back(std::move(rec));
     };
 
     const bool use_random = mode == "hga-tgbc" || mode == "best-of-all";
     const bool use_local = mode == "hga-tgbc" || mode == "best-of-all";
+    const int quick_local_passes = std::max(
+        1, std::min(3, opt.primal_heuristic_runs / 8 + 1));
     for (int greedy_mode = 0; greedy_mode < 3 && !timedOut(); ++greedy_mode) {
         std::vector<ebrp::RoutePlan> routes =
             buildGreedyIncumbentRoutes(instance, opt.lambda, greedy_mode);
         consider(routes, "deterministic_tgbc_greedy_mode_" + std::to_string(greedy_mode));
         if (use_local && !timedOut()) {
-            long long moves = 0;
-            std::vector<std::string> local_notes;
+            std::mt19937 local_rng(opt.primal_heuristic_seed +
+                static_cast<unsigned>(17u * (greedy_mode + 1)));
             std::vector<ebrp::RoutePlan> improved =
-                improveIncumbentByLocalSearch(
-                    instance, opt.lambda, routes,
-                    std::max(2, std::min(8, opt.primal_heuristic_runs)),
-                    timedOut, moves, local_notes,
-                    "paper_primal_greedy_" + std::to_string(greedy_mode));
-            out.local_moves_tested += moves;
-            out.notes.insert(out.notes.end(), local_notes.begin(), local_notes.end());
+                educateRoutePlan(instance, opt.lambda, routes, local_rng,
+                                  quick_local_passes * 3);
+            out.local_moves_tested += quick_local_passes * 3;
             consider(improved, "deterministic_tgbc_local_mode_" + std::to_string(greedy_mode));
+            if (!timedOut() && instance.V <= 14) {
+                long long q_moves = 0;
+                std::vector<std::string> q_notes;
+                std::vector<ebrp::RoutePlan> q_improved =
+                    improveIncumbentByLocalSearch(
+                        instance, opt.lambda, routes, quick_local_passes,
+                        timedOut, q_moves, q_notes,
+                        "paper_primal_greedy_q_" + std::to_string(greedy_mode));
+                out.local_moves_tested += q_moves;
+                out.notes.insert(out.notes.end(), q_notes.begin(), q_notes.end());
+                consider(q_improved, "deterministic_tgbc_q_polish_mode_" + std::to_string(greedy_mode));
+            }
         }
     }
 
@@ -4219,18 +4757,159 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
                 buildRandomizedGreedyIncumbentRoutes(instance, opt.lambda, seed);
             consider(routes, "seeded_tgbc_random_seed_" + std::to_string(seed));
             if (!use_local || timedOut()) continue;
-            long long moves = 0;
-            std::vector<std::string> local_notes;
+            std::mt19937 local_rng(seed ^ 0xA5A5A5A5u);
             std::vector<ebrp::RoutePlan> improved =
-                improveIncumbentByLocalSearch(
-                    instance, opt.lambda, routes,
-                    std::max(2, std::min(8, opt.primal_heuristic_runs)),
-                    timedOut, moves, local_notes,
-                    "paper_primal_random_" + std::to_string(seed));
-            out.local_moves_tested += moves;
-            out.notes.insert(out.notes.end(), local_notes.begin(), local_notes.end());
+                educateRoutePlan(instance, opt.lambda, routes, local_rng,
+                                  quick_local_passes * 3);
+            out.local_moves_tested += quick_local_passes * 3;
             consider(improved, "seeded_tgbc_local_seed_" + std::to_string(seed));
+            if (!timedOut() && instance.V <= 14) {
+                long long q_moves = 0;
+                std::vector<std::string> q_notes;
+                std::vector<ebrp::RoutePlan> q_improved =
+                    improveIncumbentByLocalSearch(
+                        instance, opt.lambda, routes, quick_local_passes,
+                        timedOut, q_moves, q_notes,
+                        "paper_primal_random_q_" + std::to_string(seed));
+                out.local_moves_tested += q_moves;
+                out.notes.insert(out.notes.end(), q_notes.begin(), q_notes.end());
+                consider(q_improved, "seeded_tgbc_q_polish_seed_" + std::to_string(seed));
+            }
         }
+    }
+
+    if ((mode == "hga-tgbc" || mode == "best-of-all") && !timedOut()) {
+        ebrp::SolveOptions bridge_opt = opt;
+        bridge_opt.bpc_incumbent = "strong";
+        bridge_opt.bpc_incumbent_seconds = std::max(
+            0.1, opt.primal_heuristic_seconds -
+                     std::chrono::duration<double>(
+                         std::chrono::steady_clock::now() - start).count());
+        bridge_opt.bpc_incumbent_rounds =
+            std::max(8, opt.primal_heuristic_runs);
+        BpcOwnedIncumbentResult bridge = runBpcOwnedIncumbentGenerator(
+            instance, bridge_opt, start);
+        out.notes.insert(out.notes.end(), bridge.notes.begin(), bridge.notes.end());
+        out.local_moves_tested += bridge.route_states;
+        if (bridge.found) {
+            consider(bridge.routes, "hga_verified_operation_portfolio_bridge");
+        }
+    }
+
+    if ((mode == "hga-tgbc" || mode == "best-of-all") && !timedOut()) {
+        struct GaIndividual {
+            std::vector<std::vector<int>> seqs;
+            std::vector<ebrp::RoutePlan> routes;
+            double objective = std::numeric_limits<double>::infinity();
+            bool feasible = false;
+        };
+        std::mt19937 rng(opt.primal_heuristic_seed ^ 0x9E3779B9u);
+        std::uniform_real_distribution<double> unit(0.0, 1.0);
+        const int pop_size = std::max(8, std::min(16, opt.primal_heuristic_runs));
+        const int max_generations = std::max(6, std::min(18, opt.primal_heuristic_runs));
+        auto evaluateSeqs = [&](std::vector<std::vector<int>> seqs,
+                                const std::string& label,
+                                int variant) {
+            repairRouteSequences(instance, seqs);
+            truncateTargetGreedySequences(instance, seqs);
+            GaIndividual ind;
+            ind.seqs = seqs;
+            ind.routes = decodeRouteSequencesTargetGreedy(
+                instance, ind.seqs, opt.lambda, variant);
+            ind.routes = compactZeroOperationRoutes(instance, ind.routes);
+            ebrp::Verification v = ebrp::verifySolution(
+                instance, ind.routes, opt.lambda);
+            ind.feasible = v.feasible && v.objective_matches && v.errors.empty();
+            ind.objective = ind.feasible
+                ? v.objective : std::numeric_limits<double>::infinity();
+            consider(ind.routes, label);
+            return ind;
+        };
+        std::vector<GaIndividual> pop;
+        pop.reserve(pop_size);
+        for (int i = 0; i < pop_size && !timedOut(); ++i) {
+            std::vector<std::vector<int>> seqs;
+            if (i == 0 && out.found) {
+                seqs = routeSequencesFromPlans(instance, out.routes);
+            } else if (i < 4) {
+                seqs = routeSequencesFromPlans(instance,
+                    buildGreedyIncumbentRoutes(instance, opt.lambda, i % 3));
+            } else {
+                seqs = randomRouteSequences(instance, rng, i % 3);
+            }
+            pop.push_back(evaluateSeqs(
+                seqs, "hga_route_population_seed_" + std::to_string(i), i % 3));
+        }
+        auto better = [](const GaIndividual& a, const GaIndividual& b) {
+            if (a.feasible != b.feasible) return a.feasible > b.feasible;
+            return a.objective < b.objective;
+        };
+        for (int gen = 0; gen < max_generations && !timedOut() && !pop.empty(); ++gen) {
+            std::sort(pop.begin(), pop.end(), better);
+            std::vector<GaIndividual> next;
+            next.push_back(pop.front());
+            if (pop.size() > 1) next.push_back(pop[1]);
+            while (static_cast<int>(next.size()) < pop_size && !timedOut()) {
+                std::uniform_int_distribution<int> pick(
+                    0, std::max(0, static_cast<int>(std::min<std::size_t>(pop.size(), 8)) - 1));
+                const GaIndividual& p1 = pop[pick(rng)];
+                const GaIndividual& p2 = pop[pick(rng)];
+                std::vector<std::vector<int>> child;
+                if (unit(rng) < 0.55) {
+                    child = routeInheritanceCrossover(
+                        instance, p1.seqs, p2.seqs, rng);
+                } else {
+                    const std::vector<int> c = orderedSeparatorCrossover(
+                        routeChromosomeFromSequences(p1.seqs, instance.M),
+                        routeChromosomeFromSequences(p2.seqs, instance.M),
+                        instance.V, instance.M, rng);
+                    child = sequencesFromRouteChromosome(c, instance.M);
+                }
+                if (unit(rng) < 0.75) mutateRouteSequences(instance, child, rng);
+                GaIndividual decoded = evaluateSeqs(
+                    child, "hga_route_child_gen_" + std::to_string(gen),
+                    gen % 3);
+                if (unit(rng) < 0.35 && decoded.feasible && !timedOut()) {
+                    decoded.routes = educateRoutePlan(
+                        instance, opt.lambda, decoded.routes, rng,
+                        std::max(2, std::min(4, opt.primal_heuristic_runs / 4 + 1)));
+                    ebrp::Verification educated = ebrp::verifySolution(
+                        instance, decoded.routes, opt.lambda);
+                    decoded.feasible = educated.feasible &&
+                        educated.objective_matches && educated.errors.empty();
+                    decoded.objective = decoded.feasible
+                        ? educated.objective : std::numeric_limits<double>::infinity();
+                    decoded.seqs = routeSequencesFromPlans(instance, decoded.routes);
+                    consider(decoded.routes,
+                             "hga_guided_education_gen_" + std::to_string(gen));
+                }
+                next.push_back(std::move(decoded));
+            }
+            pop.swap(next);
+        }
+        if (!pop.empty()) {
+            std::sort(pop.begin(), pop.end(), better);
+            std::mt19937 local_rng(opt.primal_heuristic_seed ^ 0xC0FFEEu);
+            std::vector<ebrp::RoutePlan> improved =
+                educateRoutePlan(instance, opt.lambda, pop.front().routes,
+                                  local_rng,
+                                  std::max(4, std::min(12, opt.primal_heuristic_runs)));
+            out.local_moves_tested += std::max(4, std::min(12, opt.primal_heuristic_runs));
+            consider(improved, "hga_ga_best_local_polish");
+        }
+    }
+
+    if (use_local && out.found && !timedOut() && instance.V <= 14) {
+        long long moves = 0;
+        std::vector<std::string> local_notes;
+        std::vector<ebrp::RoutePlan> improved =
+            improveIncumbentByLocalSearch(
+                instance, opt.lambda, out.routes,
+                quick_local_passes,
+                timedOut, moves, local_notes, "paper_primal_final_q_polish");
+        out.local_moves_tested += moves;
+        out.notes.insert(out.notes.end(), local_notes.begin(), local_notes.end());
+        consider(improved, "hga_final_operation_resize_polish");
     }
 
     out.runtime_seconds = std::chrono::duration<double>(
@@ -4247,6 +4926,8 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
             << ", local_moves_tested=" << out.local_moves_tested
             << ", runtime=" << out.runtime_seconds;
     out.notes.push_back(summary.str());
+    writeHeuristicCandidatesCsv(opt.heuristic_candidates_csv,
+                                out.candidate_records);
     return out;
 }
 

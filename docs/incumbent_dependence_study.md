@@ -43,3 +43,16 @@ useful diagnostic evidence, but it is not an acceptable default for the paper
 algorithm. The immediate next primal target is to strengthen the seeded
 HGA-style heuristic toward the archived V12 M2 UB while keeping route-plan
 exports verifier-gated and reproducible.
+
+## Primal UB Improvement Round
+
+The improved paper heuristic was rerun on regenerated V12 M1/M2 and compared
+against explicit exported incumbent JSON and a diagnostic archive incumbent.
+The explicit JSON rows reproduce the same UB values as the in-run heuristic,
+confirming deterministic route-plan export/import. V12 M2 closes under the
+diagnostic archive UB but remains noncertified under the paper-reproducible
+heuristic UB, so the current certificate gap is primarily UB quality rather
+than a lower-bound audit failure.
+
+Detailed rows are stored in
+`results/primal_ub_improvement_round/incumbent_dependence_summary.csv`.
