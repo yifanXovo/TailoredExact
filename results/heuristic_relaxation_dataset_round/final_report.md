@@ -1,6 +1,8 @@
 # Heuristic / Relaxation / Dataset Round Final Report
 
-Final commit SHA: 9277b23c2e3e486d9041ffe925551f77a8cc58f0
+Implementation commit SHA before report finalization: 2b3729bb1d1badf89e85748e136254a488f8b1aa
+
+Final pushed branch-tip SHA: see final response or run `git rev-parse HEAD` after pull; a committed file cannot stably contain its own content hash.
 
 ## Code Changes
 
