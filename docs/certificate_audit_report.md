@@ -249,6 +249,16 @@ counters are diagnostic trace fields only; they do not affect certificate
 classification. The full audit over `results/paper_bpc_core/raw` now covers
 thirty-five solver JSON rows with zero failures.
 
+The depth-6 default validation rows were then added. V4 smoke remains
+certified at objective 0. V12 M1 300s and V12 M2 300s remain correctly
+noncertified with positive gaps and unresolved intervals. The V12 M1 depth-6
+1200s row is also correctly classified as noncertified:
+`LB=0.344881668930`, `UB=0.357200583208`, gap `0.0344873856805`,
+`unresolved_intervals=3`, `open_nodes=4`, and
+`certified_original_problem=false`. The full audit over
+`results/paper_bpc_core/raw` now covers thirty-nine solver JSON rows with zero
+failures.
+
 The audit script self-test includes intentionally invalid cases for incomplete
 pricing, duplicate negative-column blockage, partial frontier coverage,
 route-mask certifying with enumeration disabled, and original optimality without

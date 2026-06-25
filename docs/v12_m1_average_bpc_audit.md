@@ -225,11 +225,26 @@ are `[0.238133722139,0.253017079773]`,
 these leaves are still unresolved, but the valid lower bound improves again
 without relying on incomplete BPC pricing closure.
 
+The corresponding depth-6 default 1200s row improves the valid lower bound to
+`LB=0.344881668930`, `UB=0.357200583208`, gap `0.0344873856805`, with
+`unresolved_intervals=3`, `open_nodes=4`, and `invalid_bound_intervals=0`.
+The controlling active leaf is now `[0.223250364505,0.230692043322]`. That
+leaf has a valid inventory/route/Gini lower bound, opens a BPC tree with 27
+nodes, and leaves one node open at timeout. The run spends
+`pricing_time_seconds=778.7256487`, `master_time_seconds=119.4459118`, and
+`bound_time_seconds=293.5659804`. This changes the immediate plateau diagnosis:
+the first 300s are still dominated by interval relaxation and splitting, but
+the extra 900s are dominated by exact-label pricing/tree closure on a narrow
+leaf. No original certificate is claimed.
+
 ## Required Next Work
 
-- Use the depth-6 interval ledger and the 1200s per-node/pricing traces to identify
-  certificate-safe pricing reductions. Candidate work should target exact
-  operation-state pruning or stronger branch closure, not lower-bound shortcuts.
+- Use the depth-6 interval ledger and the 1200s per-node/pricing traces to
+  reduce the long focused-retry pricing calls on
+  `[0.223250364505,0.230692043322]`. Candidate work should target exact
+  operation-state pruning, stronger branch closure, or more frequent
+  time-limit/checkpoint handling inside exact pricing, not lower-bound
+  shortcuts.
 - Compare against plain compact CPLEX on the same instance file/hash only as a
   benchmark, not as BPC proof.
 - If compact and BPC objectives differ, fix parser/objective conventions before

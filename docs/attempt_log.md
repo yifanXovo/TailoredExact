@@ -2141,3 +2141,22 @@ Remaining TODOs:
   as a default or reported as a paper-core improvement.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   thirty-five paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - V12 M1 Depth-6 1200s Paper-Core Row
+
+- Ran V12 M1 Average for 1200s using the current paper-core default adaptive
+  split depth 6.
+- Result remains noncertified but improves the valid lower bound:
+  `UB=0.357200583208`, `LB=0.344881668930`, gap `0.0344873856805`,
+  `unresolved_intervals=3`, `open_nodes=4`, and
+  `invalid_bound_intervals=0`.
+- The controlling active leaf is `[0.223250364505,0.230692043322]`. It has a
+  valid inventory/route/Gini lower bound, opens a BPC tree with 27 nodes, and
+  leaves one open node at timeout.
+- Runtime composition shifts after the 300s depth-6 row: pricing
+  `778.7256487s`, master `119.4459118s`, and bound/relaxation
+  `293.5659804s`. The first part of the run is still relaxation/split
+  dominated, but the remaining budget is dominated by exact-label closure on a
+  narrow focused leaf.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  thirty-nine paper-core solver JSON rows and reports zero failures.
