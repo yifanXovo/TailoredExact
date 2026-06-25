@@ -542,6 +542,10 @@ final frontier ledger must still account for every relevant interval.
   only when the LP cutoff model is infeasible or its objective reaches the
   incumbent cutoff. Otherwise it is ignored for certification and the integer
   relaxation or BPC tree must provide the interval evidence.
+- Required-closure pickup lower bounds inside exact pricing may prune partial
+  labels only when the current load and Ryan-Foster closure imply a minimum
+  future pickup quantity. This is a feasibility pruning rule inside the exact
+  pricing enumeration; it is not pricing closure by itself.
 - `paper-exact-portfolio` is the recommended robust exact preset. It combines
   `paper-bpc-core` with a compact fallback row. The final certificate module
   must be reported as `bpc`, `compact`, or `none`.

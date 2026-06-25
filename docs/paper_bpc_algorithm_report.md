@@ -814,3 +814,13 @@ noncertified (`M1 LB=0.242572114996`, `M2 LB=0.461969904320`) and are recorded
 only as evidence that easy cutoff-fathomed intervals can be skipped more
 cheaply. The depth-8 300s V12 plateau remains controlled by later active
 children and still needs stronger valid relaxation or exact pricing closure.
+
+The precheck is now gated to low/high Gini ranges. An ungated V12 M2 300s
+diagnostic was rejected because it only reached `LB=0.715075764785`, below the
+current depth-8 best. The gated row restores the best V12 M2 300s valid lower
+bound `0.716948330538`, while V12 M1 300s remains at
+`0.344613240900`. A required-closure pickup lower bound was also added to the
+exact-label pricer for Ryan-Foster require-together branches. It is a safe
+partial-label feasibility bound, but current V12 diagnostics still show
+time-limited pricing with negative reduced cost remaining; it is not sufficient
+by itself to close the plateau.

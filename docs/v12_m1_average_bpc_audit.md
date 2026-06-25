@@ -299,6 +299,17 @@ The useful effect is reduced bound setup time on easy cutoff-fathomed children;
 it does not address the later active children or the exact-label pricing
 state explosion recorded above.
 
+The precheck is now gated to low/high Gini ranges after an ungated V12 M2
+diagnostic showed budget loss in middle intervals. With the gated precheck, the
+default V12 M1 300s row stays at the current best paper-core value:
+`UB=0.357200583208`, `LB=0.344613240900`, gap `0.035238862701`,
+`unresolved_intervals=3`, and `invalid_bound_intervals=0`. A required-closure
+pickup lower bound was also added to exact-label pricing for Ryan-Foster
+require-together branches. The depth-6/no-focused 300s stress row remains
+noncertified with `LB=0.341121462223`, gap `0.0450142629691`, and a
+time-limited pricing call with negative reduced cost remaining. The branch
+closure bound is safe but has not yet resolved the V12 M1 plateau.
+
 ## Required Next Work
 
 - Use the depth-8 interval ledger and the depth-6 1200s per-node/pricing traces to

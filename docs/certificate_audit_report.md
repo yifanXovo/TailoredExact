@@ -316,6 +316,12 @@ lower bound at the incumbent cutoff; otherwise it falls back to the existing
 integer route-mask MIP. The full audit over `results/paper_bpc_core/raw` now
 covers fifty-six solver JSON rows with zero failures.
 
+The gated-precheck and required-closure-pricing rows extend the audit to
+sixty-three solver JSON rows with zero failures. The additional V4 rows remain
+certified at objective 0. The V12 M1/M2 rows remain correctly noncertified with
+positive gaps and unresolved intervals, including the rejected ungated V12 M2
+300s diagnostic and the accepted gated V12 M2 300s row.
+
 ## Remaining Audit Work
 
 - Add C++ unit-style fixtures that create unsafe `SolveResult` objects and

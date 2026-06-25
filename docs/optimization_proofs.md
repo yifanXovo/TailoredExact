@@ -997,6 +997,25 @@ route-mask relaxation. This precheck does not close BPC nodes and does not
 replace true-dual exact pricing closure when an interval relies on the
 branch-price tree.
 
+The implementation gates this precheck to interval ranges that are near the
+low or high end of the incumbent-improving Gini range. This gate is a scheduling
+choice only: skipping the precheck cannot invalidate any bound, and running it
+still returns early only under the LP proof conditions above.
+
+### Required-Closure Pickup Lower Bound
+
+In a Ryan-Foster require-together branch, a partial pricing label with station
+set `S` may imply a closure set `C(S)` of stations that must also appear before
+the column can satisfy the branch. If `r = |C(S) \ S|` required stations remain
+and the truck currently carries load `L`, at most `L` of those stations can be
+served as positive drops without any additional pickups. Every additional
+pickup quantity unit can serve one pickup station and can also provide at most
+one unit for a future drop station. Therefore any completion requires at least
+`ceil(max(0, r-L)/2)` additional pickup quantity. Adding this quantity to the
+route-duration and pickup-budget lower bound can only remove partial labels
+that cannot be completed into a branch-feasible route-load column. It does not
+remove any feasible column and does not replace exact pricing closure.
+
 ### Experimental Two-Track Placement
 
 The two-track relaxed-RMP machinery is retained under

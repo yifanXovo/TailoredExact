@@ -365,6 +365,15 @@ private:
         return violatesForbiddenTogether(closure);
     }
 
+    int minAdditionalPickupForRequiredClosure(int mask, int load) const {
+        if (mask == 0) return 0;
+        const int missing = (requiredClosureMask(mask) & fullStationMask()) & ~mask;
+        const int missing_count = popcount(missing);
+        if (missing_count <= 0) return 0;
+        const int uncovered_by_current_load = std::max(0, missing_count - load);
+        return (uncovered_by_current_load + 1) / 2;
+    }
+
     int fullStationMask() const {
         return (1 << instance_.V) - 1;
     }
@@ -815,8 +824,14 @@ private:
                     if (label.last > 0) {
                         const double closure_travel_lb =
                             requiredClosureTravelLowerBound(label.mask, label.last, label.travel);
+                        const int min_required_pickup =
+                            minAdditionalPickupForRequiredClosure(label.mask, label.load);
+                        if (label.pickup + min_required_pickup > pickup_budget) {
+                            continue;
+                        }
                         if (closure_travel_lb +
-                                (instance_.pickup_time + instance_.drop_time) * label.pickup >
+                                (instance_.pickup_time + instance_.drop_time) *
+                                    (label.pickup + min_required_pickup) >
                                 instance_.total_time_limit + 1e-9) {
                             continue;
                         }
@@ -877,6 +892,17 @@ private:
                             next.travel = next_travel;
                             next.cost = label.cost + station_cost
                                 + (duals_.pickup_cost + stationOperationCost(station)) * p;
+                            const int min_required_pickup =
+                                minAdditionalPickupForRequiredClosure(next_mask, next.load);
+                            if (next.pickup + min_required_pickup > pickup_budget) {
+                                continue;
+                            }
+                            if (closure_travel_lb +
+                                    (instance_.pickup_time + instance_.drop_time) *
+                                        (next.pickup + min_required_pickup) >
+                                    instance_.total_time_limit + 1e-9) {
+                                continue;
+                            }
                             if (options_.use_completion_lb_pruning &&
                                 result_.has_column &&
                                 completionReducedCostLowerBound(next) >=
@@ -908,6 +934,17 @@ private:
                             next.travel = next_travel;
                             next.cost = label.cost + station_cost
                                 - stationOperationCost(station) * d;
+                            const int min_required_pickup =
+                                minAdditionalPickupForRequiredClosure(next_mask, next.load);
+                            if (next.pickup + min_required_pickup > pickup_budget) {
+                                continue;
+                            }
+                            if (closure_travel_lb +
+                                    (instance_.pickup_time + instance_.drop_time) *
+                                        (next.pickup + min_required_pickup) >
+                                    instance_.total_time_limit + 1e-9) {
+                                continue;
+                            }
                             if (options_.use_completion_lb_pruning &&
                                 result_.has_column &&
                                 completionReducedCostLowerBound(next) >=

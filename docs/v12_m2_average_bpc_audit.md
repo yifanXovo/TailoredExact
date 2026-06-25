@@ -254,6 +254,16 @@ remains correctly noncertified: `UB=0.719065249476`, `LB=0.461969904320`, gap
 fathoming but it does not yet improve the depth-8 300s plateau controlled by
 narrow high-Gini active children.
 
+An ungated precheck variant was tested for 300s and rejected as the default
+because it spent extra CPLEX process time in middle intervals and only reached
+`LB=0.715075764785`. The implemented gate restricts the precheck to low/high
+Gini ranges. With that gate, the V12 M2 300s paper-core row recovers the
+current best valid lower bound: `UB=0.719065249476`,
+`LB=0.716948330538`, gap `0.00294398726726`, with
+`unresolved_intervals=3` and `invalid_bound_intervals=0`. This is still not an
+original-problem certificate; it preserves the best depth-8 lower-bound
+evidence while keeping cheap cutoff-fathoming for easier outer intervals.
+
 ## Required Next Work
 
 - Use the node/pricing trace to profile exact-label pricing state explosion and

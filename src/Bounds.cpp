@@ -1877,7 +1877,11 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
                   std::chrono::steady_clock::now() - vehicle_relax_start).count()
             : 0.0;
 
-    if (integer_inventory_relaxation && cutoff_bound_active) {
+    const bool continuous_precheck_promising =
+        cutoff_bound_active &&
+        (gamma_cap <= objective_cutoff * 0.5 ||
+         gamma_floor >= objective_cutoff * 0.75);
+    if (integer_inventory_relaxation && continuous_precheck_promising) {
         const auto precheck_start = std::chrono::steady_clock::now();
         bound.continuous_relaxation_precheck_run = true;
         const std::filesystem::path cont_sol_path =

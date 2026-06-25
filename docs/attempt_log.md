@@ -2268,3 +2268,31 @@ Remaining TODOs:
   precheck.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   fifty-six paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Gated Precheck and Required-Closure Pricing Bound
+
+- Added a gate around the continuous LP cutoff precheck. An ungated 300s V12 M2
+  diagnostic was audit-safe but worse than the current depth-8 row
+  (`LB=0.715075764785` instead of `0.716948330538`) because extra LP prechecks
+  consumed scheduling budget in middle intervals. The precheck now runs only on
+  low/high Gini intervals where it is more likely to cutoff-fathom.
+- With the gate, V12 M2 Average 300s recovers the current best paper-core
+  lower bound: `UB=0.719065249476`, `LB=0.716948330538`, gap
+  `0.00294398726726`, `unresolved_intervals=3`, and
+  `invalid_bound_intervals=0`. It remains noncertified.
+- V12 M1 Average 300s with the gated precheck remains at the current best
+  paper-core lower bound: `UB=0.357200583208`, `LB=0.344613240900`, gap
+  `0.035238862701`, `unresolved_intervals=3`, and
+  `invalid_bound_intervals=0`.
+- Added a required-closure pickup lower bound inside exact-label pricing for
+  Ryan-Foster require-together branches. A partial label that still must include
+  `r` closure stations with current load `L` needs at least
+  `ceil(max(0,r-L)/2)` additional pickup quantity, so labels exceeding the
+  remaining pickup/time budget can be pruned safely. V4 smoke remains certified.
+- The V12 M1 depth-6/no-focused 300s diagnostic still does not close:
+  `LB=0.341121462223`, gap `0.0450142629691`. The controlling pricing call
+  remains time-limited with negative reduced cost `-0.00938540151401`; this
+  confirms that the new branch-feasibility pruning is not yet sufficient to
+  solve the active pricing plateau.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  sixty-three paper-core solver JSON rows and reports zero failures.
