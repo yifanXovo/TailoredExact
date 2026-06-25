@@ -310,6 +310,19 @@ noncertified with `LB=0.341121462223`, gap `0.0450142629691`, and a
 time-limited pricing call with negative reduced cost remaining. The branch
 closure bound is safe but has not yet resolved the V12 M1 plateau.
 
+A subsequent route-mask scheduling change skips the pickup/drop compatibility
+flow audit solve when an interval relaxation has only a short CPLEX budget
+(`<=2.5s`) and the no-compatibility relaxation has not already fathomed the
+interval. This does not add a new lower-bound assumption: the selected
+no-compatibility model is a valid weaker relaxation, and the note records
+`compat_skipped=short_relaxation_budget`. On V12 M1 Average 300s, this preserves
+the same valid bound, `LB=0.344613240900`, `UB=0.357200583208`, gap
+`0.035238862701`, with `invalid_bound_intervals=0`. Runtime improves from about
+`306.36s` to `301.13s`, and bound/route-mask time drops from about `278.89s` to
+`272.69s`. The row is still not certified, with `unresolved_intervals=4` and
+`open_nodes=4`; the change is a scheduling/runtime improvement, not a closure
+breakthrough.
+
 ## Required Next Work
 
 - Use the depth-8 interval ledger and the depth-6 1200s per-node/pricing traces to

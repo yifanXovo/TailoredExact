@@ -2296,3 +2296,26 @@ Remaining TODOs:
   solve the active pricing plateau.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   sixty-three paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Short-Budget Compatibility-Flow Skip
+
+- Added a certificate-neutral scheduling rule inside the paper-core frontier
+  inventory/route/Gini relaxation: when the interval relaxation budget is
+  `<=2.5s`, the solver keeps the valid no-compatibility relaxation bound and
+  skips the pickup/drop compatibility-flow variant. Each affected interval note
+  records `compat_skipped=short_relaxation_budget`. This can only use a weaker
+  valid relaxation, so it cannot create an invalid lower bound or certificate.
+- V4 paper-core smoke remains certified with objective `0`, `gap=0`,
+  `verifier_passed=true`, and `certified_original_problem=true`.
+- V12 M1 Average 300s preserves the current best paper-core lower bound:
+  `UB=0.357200583208`, `LB=0.344613240900`, gap `0.035238862701`,
+  `invalid_bound_intervals=0`. Runtime improves from about `306.36s` to
+  `301.13s`, and bound/route-mask time drops from about `278.89s` to
+  `272.69s`. The row remains noncertified with unresolved leaves.
+- V12 M2 Average 300s also preserves the current best lower bound:
+  `UB=0.719065249476`, `LB=0.716948330538`, gap `0.00294398726726`,
+  `invalid_bound_intervals=0`. Runtime improves from about `318.18s` to
+  `311.75s`, and total bound time drops from about `290.63s` to `284.21s`.
+  The row remains noncertified with three unresolved intervals.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  seventy-one paper-core solver JSON rows and reports zero failures.

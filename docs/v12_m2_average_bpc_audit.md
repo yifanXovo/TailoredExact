@@ -264,6 +264,20 @@ current best valid lower bound: `UB=0.719065249476`,
 original-problem certificate; it preserves the best depth-8 lower-bound
 evidence while keeping cheap cutoff-fathoming for easier outer intervals.
 
+The next route-mask scheduling adjustment avoids solving the compatibility-flow
+variant when an adaptive/focused interval relaxation has only a short CPLEX
+budget (`<=2.5s`). The fallback no-compatibility model is still a valid
+relaxation lower bound, and each skipped interval records
+`compat_skipped=short_relaxation_budget`. This is certificate-neutral because it
+may weaken a relaxation but cannot overstate a lower bound. On V12 M2 Average
+300s, the row preserves the current best paper-core lower bound,
+`LB=0.716948330538`, `UB=0.719065249476`, gap `0.00294398726726`, with
+`unresolved_intervals=3` and `invalid_bound_intervals=0`. Runtime improves from
+about `318.18s` to `311.75s`, and total bound time drops from about `290.63s`
+to `284.21s`. The instance remains noncertified; the controlling region is
+still the narrow child around `[0.488740,0.490612]`, with lower bound source
+`focused_inventory_route_gini_relaxation`.
+
 ## Required Next Work
 
 - Use the node/pricing trace to profile exact-label pricing state explosion and

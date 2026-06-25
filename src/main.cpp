@@ -8471,6 +8471,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                             ", compat_skipped=no_compat_cutoff_fathomed"
                             ", no_compat_lb=" + std::to_string(no_compat_lb);
                         out.bound = no_compat;
+                    } else if (budget <= 2.5) {
+                        no_compat.note +=
+                            ", pickup_drop_compat_flow_audit_selected=no_compat"
+                            ", compat_skipped=short_relaxation_budget"
+                            ", no_compat_lb=" + std::to_string(no_compat_lb)
+                            + ", relaxation_budget=" + std::to_string(budget);
+                        out.bound = no_compat;
                     } else {
                         out.bound = compute_once(opt.movement_domain_tightening,
                                                  true,
