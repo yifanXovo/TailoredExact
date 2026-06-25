@@ -337,6 +337,15 @@ remains noncertified, but the short-budget frontier now spends less time on
 duplicate UB-only incumbent generation and more time on valid relaxation
 refinement.
 
+A follow-up scheduling probe tested whether reserving `75s` for focused
+intensification would improve the active leaf ledger. It did trigger one
+focused split, but the 300s row regressed to
+`LB=0.340282088370`, `UB=0.357200583208`, gap `0.0473641299419`,
+with `unresolved_intervals=3` and `invalid_bound_intervals=0`. This rejects
+adaptive split early-stopping via a large retry/focus reserve as the next
+default change: the saved time did not compensate for the weaker depth-8
+relaxation ledger.
+
 ## Required Next Work
 
 - Use the depth-8 interval ledger and the depth-6 1200s per-node/pricing traces to

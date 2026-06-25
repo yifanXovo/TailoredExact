@@ -292,6 +292,15 @@ bound improves from `LB=0.716948330538` to `LB=0.717435865864`, with
 frontier leaves are still unresolved; the improvement is purely better
 scheduling of certificate-safe relaxation work.
 
+A later focused-relaxation budget probe set
+`--frontier-focused-relax-seconds 2.5` to see whether a shorter focused pass
+could reach more controlling leaves before the 300s limit. It remained
+audit-safe but was worse: `LB=0.715075764785`,
+`UB=0.719065249476`, gap `0.00554815393275`,
+`unresolved_intervals=3`, and `invalid_bound_intervals=0`. The default
+focused relaxation budget therefore remains unchanged; the plateau needs a
+stronger valid relaxation or exact closure, not shorter focused relaxations.
+
 ## Required Next Work
 
 - Use the node/pricing trace to profile exact-label pricing state explosion and

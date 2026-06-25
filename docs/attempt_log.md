@@ -2345,3 +2345,26 @@ Remaining TODOs:
   relaxation strength and, for shallower schedules, exact BPC tree closure.
 - Full certificate audit over `results/paper_bpc_core/raw` now covers
   seventy-six paper-core solver JSON rows and reports zero failures.
+
+## 2026-06-25 - Rejected Focus/Compat Scheduling Probes
+
+- Tested a V12 M1 Average 300s adaptive scheduling probe with
+  `--frontier-retry-reserve 75` to preserve time for focused intensification.
+  The row did run one focused split, but it regressed to
+  `LB=0.340282088370`, gap `0.0473641299419`, and
+  `unresolved_intervals=3`, worse than the archive-skip 300s row
+  (`LB=0.344881668930`). This rejects large adaptive early-stop reserves as a
+  default paper-core change.
+- Tested a V12 M2 Average 300s probe with
+  `--frontier-focused-relax-seconds 2.5` to make focused passes cheaper. It
+  regressed to `LB=0.715075764785`, gap `0.00554815393275`, and
+  `unresolved_intervals=3`, worse than the archive-skip 300s row
+  (`LB=0.717435865864`). This rejects shorter focused relaxation budgets as a
+  default.
+- Temporary source probes that raised the short-budget compat-flow skip
+  threshold or skipped compat-flow when no-compat was already above the current
+  frontier minimum were also tested locally and reverted because they degraded
+  V12 M2 60s lower bounds. Their raw outputs were not retained because they are
+  not reproducible from the final source tree.
+- Full certificate audit over `results/paper_bpc_core/raw` now covers
+  seventy-eight paper-core solver JSON rows and reports zero failures.

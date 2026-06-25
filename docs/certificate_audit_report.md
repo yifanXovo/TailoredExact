@@ -333,6 +333,17 @@ noncertified: V12 M1 archive-skip 300s has
 verified upper-bound cutoff and does not contribute to lower-bound evidence or
 certificate closure.
 
+Two later scheduling probes extend the audit to seventy-eight solver JSON rows
+with zero failures. Both are deliberately noncertified. The V12 M1 300s
+adaptive-focus-reserve probe (`--frontier-retry-reserve 75`) regresses to
+`LB=0.340282088370`, gap `0.0473641299419`, and
+`unresolved_intervals=3`; the V12 M2 300s focused-relaxation probe
+(`--frontier-focused-relax-seconds 2.5`) regresses to
+`LB=0.715075764785`, gap `0.00554815393275`, and
+`unresolved_intervals=3`. These rows confirm that the certificate guard still
+keeps positive-gap scheduling experiments non-optimal, and they are rejected as
+default paper-core configuration changes.
+
 ## Remaining Audit Work
 
 - Add C++ unit-style fixtures that create unsafe `SolveResult` objects and
