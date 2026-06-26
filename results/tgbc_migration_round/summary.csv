@@ -1,0 +1,4 @@
+instance,run,heuristic_seconds,heuristic_runs,objective,G,P,verifier_passed,certified_original_problem,runtime_seconds,candidates_tested,best_candidate_label,previous_paper_heuristic_ub,known_diagnostic_archive_ub,notes
+gcap_smoke_V4_M1,v6,3,12,0,0,0,true,false,0.0104849,245,hga-tgbc verified route plan,0,,smoke UB remains exact zero and verifier-passed
+regen_candidate_V12_M1_average,v6,60,240,0.362059778868,0.224944029736,0.914104994212,true,false,35.1019581,3378,tgbc_quantity_beam_seed_mode_0,0.366799836582,0.357200583208,improved over prior paper heuristic but remains above known diagnostic/archive UB
+regen_candidate_V12_M2_average,v6,60,240,0.721861135274,0.49143640691,1.53616485576,true,false,16.9619315,3390,hga_final_operation_resize_polish after quantity beam start,0.745474506024,0.719065249476,meets strong UB target <=0.724500 and remains UB-only

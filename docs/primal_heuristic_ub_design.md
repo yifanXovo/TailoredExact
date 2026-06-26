@@ -92,3 +92,36 @@ the diagnostic archive UB `0.719065249476`. On regenerated V12 M1, the
 improved UB is `0.366800`, above the known good UB `0.357200583208`. The next
 heuristic step is a fuller migration of HybridGA's compact TGBC decoder and
 decoded-operation guided education.
+
+## TGBC Migration Round
+
+The follow-up TGBC migration round completed the production-relevant decoder
+and education migration without importing HybridGA debug outputs, obsolete
+benchmark drivers, or tuning scaffolding. The `hga-tgbc` path now includes:
+
+- compact TGBC re-decode with inherited operation quantities from the first
+  decoded route plan;
+- decoded-operation guided education using route windows, supply/demand role
+  classification, same-route relocate, zero-operation tail compaction, and
+  cross-route relocation candidates;
+- larger deterministic HGA-style population budgets controlled by
+  `--primal-heuristic-runs` and `--primal-heuristic-seconds`;
+- deterministic supply-demand pair route-set construction;
+- deterministic supply-demand quantity-beam construction over complete
+  pickup/drop transfer fragments, followed by existing route reconstruction
+  and independent verifier checks.
+
+The quantity-beam component is still an upper-bound heuristic only. It creates
+candidate route-load plans, rebuilds feasible routes, and accepts a plan only
+after the independent verifier confirms route flow, station capacity, truck
+capacity, route duration, final inventory, and objective consistency.
+
+Final smoke tests under seed `20260626` produced:
+
+- V4 smoke UB `0`;
+- regenerated V12 M1 UB `0.362059778868`, improved from `0.366799836582`;
+- regenerated V12 M2 UB `0.721861135274`, improved from `0.745474506024`
+  and meeting the strong UB target `<= 0.724500`.
+
+All rows remain `certificate_scope=primal_heuristic_ub_only`; the incumbent
+source contributes no lower-bound evidence.

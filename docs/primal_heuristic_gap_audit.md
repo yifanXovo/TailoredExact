@@ -87,3 +87,33 @@ V12 M2, but it is not yet a faithful HGA-TGBC migration. The next targeted work
 should migrate the compact incremental TGBC decoder and decoded-operation
 guided education from `Hybrid GA/Hybrid GA/HybridGA.h` without importing the
 old debug and benchmark scaffolding.
+
+## TGBC Migration Follow-Up
+
+The next migration pass implemented the missing production pieces directly in
+ExactEBRP:
+
+- compact TGBC re-decode now carries inherited operation quantities from the
+  first decoded solution;
+- guided education now uses decoded route windows and operation roles to build
+  same-route, zero-tail, and cross-route relocation candidates;
+- the HGA-style population loop now uses a larger deterministic search budget
+  instead of the previous small 16-individual/18-generation cap;
+- a supply-demand quantity beam constructs complete transfer fragments, rebuilds
+  route plans through the existing feasible-route decoder, and accepts only
+  verifier-passed incumbents.
+
+The objective monotonicity audit remained clean: every accepted candidate is
+strictly better than the incumbent under the verifier-computed objective. The
+old bridge remains available as a candidate, but on regenerated V12 M2 it is no
+longer the best paper-reproducible UB.
+
+Final 60-second seeded tests:
+
+- V12 M1 improved from `0.366799836582` to `0.362059778868`.
+- V12 M2 improved from `0.745474506024` to `0.721861135274`.
+
+The V12 M2 target `<= 0.724500` is now met without diagnostic archive scanning.
+V12 M1 is improved but still above the known diagnostic/archive value
+`0.357200583208`; the next optimization target is deeper multi-transfer
+education for M1 rather than certificate-guard work.
