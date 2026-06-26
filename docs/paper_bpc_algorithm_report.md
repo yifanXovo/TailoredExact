@@ -873,3 +873,15 @@ M2 variants, one V8 M2 variant, and one V12 M2 variant. All optimal claims in
 `results/heuristic_relaxation_dataset_round/` and
 `results/generated_variant_round/` pass `audit_bpc_certificate.py
 --fail-on-error`.
+## Round 18: Primal UB Improvement And Focused Certificate Check
+
+This round strengthened the paper-reproducible primal heuristic with
+candidate-level auditing, HGA-style route sequence operators, and a
+verifier-gated operation-portfolio bridge. The improved heuristic is stronger
+on regenerated V12 M2 than the previous paper heuristic but remains weaker than
+diagnostic archive incumbents. Focused paper-core 300s rows for regenerated
+V12 M1/M2 remain noncertified under the reproducible heuristic UB; V12 M2 still
+certifies under a diagnostic archive UB, confirming that archive evidence is
+not part of paper-core but remains a useful UB-quality threshold diagnostic.
+
+Raw results and audit output are in `results/primal_ub_improvement_round/`.

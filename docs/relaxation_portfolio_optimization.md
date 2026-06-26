@@ -34,3 +34,12 @@ The optimization is certificate-neutral and reduces repeated equivalent MIPs on
 intervals that can already be fathomed by the no-budget relaxation. It does not
 recover the stronger archive-dependent V12 UB; that is a primal heuristic
 quality issue, not a lower-bound certificate issue.
+
+## Current Follow-Up
+
+The primal-UB improvement round kept relaxation optimization secondary. The
+V12 M2 diagnostic archive row still certifies through the same relaxation
+portfolio, while the paper-reproducible heuristic row remains noncertified.
+This indicates that relaxation scheduling is not currently the limiting factor
+under a strong UB; the next high-impact step is improving the reproducible
+HGA/TGBC incumbent.
