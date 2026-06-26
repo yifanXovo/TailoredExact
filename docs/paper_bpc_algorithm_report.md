@@ -885,3 +885,22 @@ certifies under a diagnostic archive UB, confirming that archive evidence is
 not part of paper-core but remains a useful UB-quality threshold diagnostic.
 
 Raw results and audit output are in `results/primal_ub_improvement_round/`.
+
+## Exact Primal Stress Round
+
+This round tested whether paper-core can make progress when the initial native
+HGA-TGBC UB is not already enough to make relaxation-fathoming easy.
+
+Key findings:
+
+- Regenerated V12 M2 certifies with native HGA-TGBC UB `0.718504070755`; raw
+  result: `results/exact_primal_stress_round/raw/v12_m2_core_300s.json`.
+- A weak greedy-start V12 M2 row begins at UB `0.789342396801`; local re-decode
+  repair improves UB to `0.718504070755`, after which the full frontier closes.
+- Regenerated V12 M1 remains noncertified at 300s with UB `0.357200583208`,
+  LB `0.332675660948`, gap `0.0686586848205`.
+- Six hard V20/M3 stress rows remain noncertified at 300s. UB did not improve
+  after the native HGA-TGBC incumbent; relaxation lower-bound time dominates.
+
+The next targeted work should strengthen certificate-safe interval relaxations
+for V12 M1 and V20/M3 rather than broaden primal search.

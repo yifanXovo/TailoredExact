@@ -67,6 +67,7 @@ void usage() {
         << "[--route-mask-support-duration-pruning true|false] [--route-mask-operation-budget-cuts true|false] [--support-feasibility-oracle true|false] "
         << "[--route-pool-incumbent true|false] [--route-pool-max-columns-per-vehicle <N>] "
         << "[--route-pool-keep-best-per-projection true|false] "
+        << "[--exact-phase-local-redecode-repair true|false] [--exact-phase-local-redecode-seconds <seconds>] "
         << "[--pickup-drop-compat-flow true|false] [--pickup-drop-transfer-cap-flow true|false] "
         << "[--vehicle-indexed-operation-relaxation true|false] [--vehicle-indexed-relaxation-audit true|false] "
         << "[--vehicle-indexed-transfer-flow true|false] "
@@ -93,7 +94,7 @@ void usage() {
         << "[--dssr-close-relaxed-pricing true|false] [--dssr-relaxed-closure-time <seconds>] "
         << "[--dssr-relaxed-closure-max-labels <N>] [--dssr-relaxed-closure-checkpoint <path>] [--large-relaxed-rmp true|false] "
         << "[--incumbent-source-name <name>] [--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>] "
-        << "[--progress-log <path>] [--progress-interval-seconds <seconds>] "
+        << "[--progress-log <path>] [--ub-event-log <path>] [--progress-interval-seconds <seconds>] "
         << "[--frontier-focus-only true|false] [--frontier-focus-interval-id auto|N] "
         << "[--frontier-focus-range <lo,hi>] [--frontier-focus-from-result <json>] "
         << "[--frontier-focus-leaf-id id|auto|min-lb] [--frontier-focus-use-existing-incumbent true|false] "
@@ -197,6 +198,7 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.vehicle_indexed_transfer_flow = true;
         opt.route_mask_operation_budget_cuts = true;
         opt.route_pool_incumbent = true;
+        opt.exact_phase_local_redecode_repair = true;
         opt.branch_inventory = true;
         opt.branch_operation_mode = true;
         opt.frontier_best_bound_scheduling = true;
@@ -240,6 +242,7 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.vehicle_indexed_transfer_flow = true;
         opt.route_mask_operation_budget_cuts = true;
         opt.route_pool_incumbent = true;
+        opt.exact_phase_local_redecode_repair = true;
         opt.branch_inventory = true;
         opt.branch_operation_mode = true;
         opt.bpc_incumbent = (opt.bpc_incumbent == "none" || opt.bpc_incumbent.empty())
@@ -337,6 +340,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--route-pool-incumbent") opt.route_pool_incumbent = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--route-pool-max-columns-per-vehicle") opt.route_pool_max_columns_per_vehicle = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--route-pool-keep-best-per-projection") opt.route_pool_keep_best_per_projection = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--exact-phase-local-redecode-repair") opt.exact_phase_local_redecode_repair = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--exact-phase-local-redecode-seconds") opt.exact_phase_local_redecode_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--pickup-drop-compat-flow") opt.pickup_drop_compat_flow = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--pickup-drop-transfer-cap-flow") opt.pickup_drop_transfer_cap_flow = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--vehicle-indexed-operation-relaxation") opt.vehicle_indexed_operation_relaxation = parseBoolValue(requireValue(i, argc, argv));
@@ -398,6 +403,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--inventory-probe-max-v") opt.inventory_probe_max_v = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--inventory-probe-seconds") opt.inventory_probe_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--progress-log") opt.progress_log_path = requireValue(i, argc, argv);
+        else if (arg == "--ub-event-log") opt.ub_event_log_path = requireValue(i, argc, argv);
         else if (arg == "--progress-interval-seconds") opt.progress_interval_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--frontier-focus-interval-id") opt.frontier_focus_interval_id = requireValue(i, argc, argv);
         else if (arg == "--frontier-focus-range") opt.frontier_focus_range = requireValue(i, argc, argv);
@@ -566,6 +572,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if (opt.primal_heuristic_seconds < 0.0) opt.primal_heuristic_seconds = 0.0;
     if (opt.primal_heuristic_runs < 1) opt.primal_heuristic_runs = 1;
+    if (opt.exact_phase_local_redecode_seconds < 0.0) {
+        opt.exact_phase_local_redecode_seconds = 0.0;
+    }
     if (opt.support_duration_max_subset_size < 0) opt.support_duration_max_subset_size = 0;
     if (opt.bpc_incumbent_seconds < 0.0) opt.bpc_incumbent_seconds = 0.0;
     if (opt.bpc_incumbent_rounds < 1) opt.bpc_incumbent_rounds = 1;
@@ -4987,6 +4996,7 @@ ebrp::SolveResult solvePrimalHeuristicDiagnostic(const ebrp::Instance& instance,
     result.incumbent_source_is_paper_reproducible = true;
     result.incumbent_source_contributes_lower_bound = false;
     result.primal_heuristic = opt.primal_heuristic;
+    result.ub_event_log_path = opt.ub_event_log_path;
 
     PaperPrimalHeuristicResult heuristic = runPaperPrimalHeuristic(instance, opt);
     result.incumbent_generation_time_seconds = heuristic.runtime_seconds;
@@ -5003,6 +5013,8 @@ ebrp::SolveResult solvePrimalHeuristicDiagnostic(const ebrp::Instance& instance,
         result.P = heuristic.verification.P;
         result.objective = heuristic.verification.objective;
         result.upper_bound = heuristic.verification.objective;
+        result.initial_heuristic_UB = heuristic.verification.objective;
+        result.final_UB = heuristic.verification.objective;
         result.lower_bound = 0.0;
         result.gap = 1.0;
         result.status = "heuristic_incumbent_verified";
@@ -5021,6 +5033,61 @@ ebrp::SolveResult solvePrimalHeuristicDiagnostic(const ebrp::Instance& instance,
             "standalone verifier-passed paper primal heuristic UB";
         result.certificate =
             "verified feasible route plan upper bound only; no lower-bound evidence";
+        if (!opt.ub_event_log_path.empty()) {
+            try {
+                std::filesystem::path event_path(opt.ub_event_log_path);
+                if (!event_path.parent_path().empty()) {
+                    std::filesystem::create_directories(event_path.parent_path());
+                }
+                std::ofstream out(event_path, std::ios::out | std::ios::trunc);
+                int route_count = 0;
+                int served_count = 0;
+                int total_pickup = 0;
+                int total_drop = 0;
+                int depot_unload = 0;
+                std::unordered_set<int> served;
+                for (const auto& route : result.routes) {
+                    bool active = false;
+                    int route_pickup = 0;
+                    int route_drop = 0;
+                    for (const auto& op : route.operations) {
+                        route_pickup += op.pickup;
+                        route_drop += op.drop;
+                        if (op.pickup > 0 || op.drop > 0) {
+                            active = true;
+                            served.insert(op.station);
+                        }
+                    }
+                    if (active) ++route_count;
+                    total_pickup += route_pickup;
+                    total_drop += route_drop;
+                    depot_unload += std::max(0, route_pickup - route_drop);
+                }
+                served_count = static_cast<int>(served.size());
+                out << "time_seconds,source,objective,G,P,"
+                    << "improvement_over_previous,verifier_passed,"
+                    << "route_count,served_station_count,total_pickup,total_drop,"
+                    << "depot_unload,incumbent_hash,exported_incumbent_path,"
+                    << "paper_reproducible,contributes_lower_bound,accepted\n";
+                out << std::setprecision(12)
+                    << result.incumbent_generation_time_seconds
+                    << ",native_hga_tgbc_initial,"
+                    << result.objective << ","
+                    << result.G << ","
+                    << result.P << ",0,"
+                    << boolText(result.verification.feasible) << ","
+                    << route_count << ","
+                    << served_count << ","
+                    << total_pickup << ","
+                    << total_drop << ","
+                    << depot_unload << ",standalone_primal_heuristic,"
+                    << opt.export_incumbent_path
+                    << ",true,false,true\n";
+            } catch (const std::exception& ex) {
+                result.notes.push_back(std::string("failed to write primal heuristic UB event log: ")
+                    + ex.what());
+            }
+        }
     } else {
         result.routes = emptyRouteSet(instance);
         result.verification = ebrp::verifySolution(instance, result.routes, opt.lambda);
@@ -5029,6 +5096,7 @@ ebrp::SolveResult solvePrimalHeuristicDiagnostic(const ebrp::Instance& instance,
         result.P = result.verification.P;
         result.objective = result.verification.objective;
         result.upper_bound = result.objective;
+        result.final_UB = result.upper_bound;
         result.certificate =
             "no improving paper primal heuristic route plan found; empty route UB only";
     }
@@ -7545,6 +7613,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         opt.vehicle_indexed_operation_relaxation;
     result.incumbent_generation_method = opt.bpc_incumbent;
     result.progress_log_path = opt.progress_log_path;
+    result.ub_event_log_path = opt.ub_event_log_path;
     result.closure_mode = opt.frontier_closure_mode;
     result.cg_stabilization_mode = opt.cg_dual_stabilization;
     result.iterative_closure_enabled = opt.frontier_iterative_closure;
@@ -7663,6 +7732,201 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         "empty routes before verifier-gated primal heuristic";
     result.incumbent_source_is_paper_reproducible = true;
     result.incumbent_source_contributes_lower_bound = false;
+    result.final_UB = result.upper_bound;
+
+    auto csvEscapeUbEvent = [](const std::string& value) {
+        bool needs_quotes = false;
+        for (char ch : value) {
+            if (ch == ',' || ch == '"' || ch == '\n' || ch == '\r') {
+                needs_quotes = true;
+                break;
+            }
+        }
+        if (!needs_quotes) return value;
+        std::string escaped = "\"";
+        for (char ch : value) {
+            if (ch == '"') escaped += "\"\"";
+            else escaped.push_back(ch);
+        }
+        escaped.push_back('"');
+        return escaped;
+    };
+    auto routePlanHashForUbEvent =
+        [](const std::vector<ebrp::RoutePlan>& routes) {
+            std::uint64_t h = 1469598103934665603ull;
+            auto mix = [&](std::uint64_t value) {
+                h ^= value + 0x9e3779b97f4a7c15ull + (h << 6) + (h >> 2);
+                h *= 1099511628211ull;
+            };
+            for (const auto& route : routes) {
+                mix(static_cast<std::uint64_t>(route.vehicle + 1));
+                for (int node : route.nodes) {
+                    mix(static_cast<std::uint64_t>(node + 1));
+                }
+                for (const auto& op : route.operations) {
+                    mix(static_cast<std::uint64_t>(op.station + 1));
+                    mix(static_cast<std::uint64_t>(op.pickup + 101));
+                    mix(static_cast<std::uint64_t>(op.drop + 1009));
+                }
+            }
+            std::ostringstream oss;
+            oss << std::hex << std::setw(16) << std::setfill('0') << h;
+            return oss.str();
+        };
+    struct UbEventRouteStats {
+        int route_count = 0;
+        int served_station_count = 0;
+        int total_pickup = 0;
+        int total_drop = 0;
+        int depot_unload = 0;
+    };
+    auto ubEventRouteStats =
+        [](const std::vector<ebrp::RoutePlan>& routes) {
+            UbEventRouteStats stats;
+            std::unordered_set<int> served;
+            for (const auto& route : routes) {
+                bool active_route = false;
+                int pickup_sum = 0;
+                int drop_sum = 0;
+                for (const auto& op : route.operations) {
+                    pickup_sum += op.pickup;
+                    drop_sum += op.drop;
+                    if (op.pickup > 0 || op.drop > 0) {
+                        active_route = true;
+                        served.insert(op.station);
+                    }
+                }
+                if (active_route) ++stats.route_count;
+                stats.total_pickup += pickup_sum;
+                stats.total_drop += drop_sum;
+                stats.depot_unload += std::max(0, pickup_sum - drop_sum);
+            }
+            stats.served_station_count = static_cast<int>(served.size());
+            return stats;
+        };
+    auto normalizeUbEventSource = [](const std::string& source) {
+        const std::string s = lowerAscii(source);
+        if ((s.find("paper primal heuristic") != std::string::npos &&
+             (s.find("hga-tgbc") != std::string::npos ||
+              s.find("best-of-all") != std::string::npos)) ||
+            s.find("native hga") != std::string::npos ||
+            s.find("hga-tgbc initial") != std::string::npos) {
+            return std::string("native_hga_tgbc_initial");
+        }
+        if (s.find("explicit") != std::string::npos ||
+            s.find("incumbent-json") != std::string::npos ||
+            s.find("incumbent json") != std::string::npos ||
+            s.find("hga/tgbc") != std::string::npos) {
+            return std::string("explicit_incumbent_json");
+        }
+        if (s.find("route-pool incumbent master") != std::string::npos) {
+            return std::string("route_pool_master");
+        }
+        if (s.find("interval") != std::string::npos ||
+            s.find("integer leaf") != std::string::npos ||
+            s.find("tree") != std::string::npos) {
+            return std::string("bpc_integer_leaf");
+        }
+        if (s.find("bpc-owned") != std::string::npos ||
+            s.find("pricing") != std::string::npos ||
+            s.find("column") != std::string::npos) {
+            return std::string("bpc_column_pool_recombine");
+        }
+        if (s.find("relaxation") != std::string::npos &&
+            (s.find("round") != std::string::npos ||
+             s.find("decode") != std::string::npos)) {
+            return std::string("relaxation_guided_rounding");
+        }
+        if (s.find("local re-decode") != std::string::npos ||
+            s.find("local redecode") != std::string::npos) {
+            return std::string("local_redecode_repair");
+        }
+        if (s.find("compact cplex") != std::string::npos ||
+            s.find("cplex seed") != std::string::npos) {
+            return std::string("compact_cplex_benchmark");
+        }
+        return std::string("other");
+    };
+    auto markExactPhaseModule = [&](const std::string& module) {
+        if (module.empty()) return;
+        if (result.exact_phase_primal_modules_called.empty()) {
+            result.exact_phase_primal_modules_called = module;
+            return;
+        }
+        const std::string padded = ";" + result.exact_phase_primal_modules_called + ";";
+        if (padded.find(";" + module + ";") == std::string::npos) {
+            result.exact_phase_primal_modules_called += ";" + module;
+        }
+    };
+    auto writeUbEvent =
+        [&](const std::string& source,
+            const ebrp::Verification& verification,
+            const std::vector<ebrp::RoutePlan>& routes,
+            double previous_ub,
+            bool accepted) {
+            if (opt.ub_event_log_path.empty()) return;
+            try {
+                std::filesystem::path event_path(opt.ub_event_log_path);
+                if (!event_path.parent_path().empty()) {
+                    std::filesystem::create_directories(event_path.parent_path());
+                }
+                const bool exists = std::filesystem::exists(event_path);
+                std::ofstream out(event_path, std::ios::out | std::ios::app);
+                if (!exists || std::filesystem::file_size(event_path) == 0) {
+                    out << "time_seconds,source,objective,G,P,"
+                        << "improvement_over_previous,verifier_passed,"
+                        << "route_count,served_station_count,total_pickup,total_drop,"
+                        << "depot_unload,incumbent_hash,exported_incumbent_path,"
+                        << "paper_reproducible,contributes_lower_bound,accepted\n";
+                }
+                const UbEventRouteStats stats = ubEventRouteStats(routes);
+                const std::string normalized_source = normalizeUbEventSource(source);
+                const bool paper_reproducible =
+                    normalized_source != "compact_cplex_benchmark" &&
+                    normalized_source != "other";
+                const double improvement =
+                    std::isfinite(previous_ub)
+                        ? std::max(0.0, previous_ub - verification.objective)
+                        : 0.0;
+                out << std::setprecision(12)
+                    << elapsedSeconds() << ","
+                    << csvEscapeUbEvent(normalized_source) << ","
+                    << verification.objective << ","
+                    << verification.G << ","
+                    << verification.P << ","
+                    << improvement << ","
+                    << boolText(verification.feasible) << ","
+                    << stats.route_count << ","
+                    << stats.served_station_count << ","
+                    << stats.total_pickup << ","
+                    << stats.total_drop << ","
+                    << stats.depot_unload << ","
+                    << csvEscapeUbEvent(routePlanHashForUbEvent(routes)) << ","
+                    << csvEscapeUbEvent(opt.export_incumbent_path) << ","
+                    << boolText(paper_reproducible) << ",false,"
+                    << boolText(accepted) << "\n";
+            } catch (const std::exception& ex) {
+                result.notes.push_back(std::string("failed to write UB event log: ")
+                    + ex.what());
+            }
+        };
+    if (!opt.ub_event_log_path.empty()) {
+        try {
+            std::filesystem::path event_path(opt.ub_event_log_path);
+            if (!event_path.parent_path().empty()) {
+                std::filesystem::create_directories(event_path.parent_path());
+            }
+            std::ofstream reset(event_path, std::ios::out | std::ios::trunc);
+            reset << "time_seconds,source,objective,G,P,"
+                  << "improvement_over_previous,verifier_passed,"
+                  << "route_count,served_station_count,total_pickup,total_drop,"
+                  << "depot_unload,incumbent_hash,exported_incumbent_path,"
+                  << "paper_reproducible,contributes_lower_bound,accepted\n";
+        } catch (const std::exception& ex) {
+            result.notes.push_back(std::string("failed to initialize UB event log: ")
+                + ex.what());
+        }
+    }
     if (!opt.progress_log_path.empty()) {
         std::filesystem::path progress_path(opt.progress_log_path);
         if (!progress_path.parent_path().empty()) {
@@ -7726,6 +7990,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 std::to_string(incumbent_verification.objective));
             return false;
         }
+        const double previous_ub = incumbent_verification.feasible
+            ? incumbent_verification.objective
+            : result.upper_bound;
         incumbent_routes = candidate_routes;
         incumbent_verification = candidate;
         result.routes = incumbent_routes;
@@ -7735,6 +8002,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.P = incumbent_verification.P;
         result.objective = incumbent_verification.objective;
         result.upper_bound = incumbent_verification.objective;
+        result.final_UB = result.upper_bound;
         const std::string category = classifyIncumbentSource(source);
         result.incumbent_source = category;
         result.incumbent_source_category = category;
@@ -7742,6 +8010,30 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.incumbent_source_is_paper_reproducible =
             incumbentSourcePaperReproducible(category);
         result.incumbent_source_contributes_lower_bound = false;
+        const std::string ub_event_source = normalizeUbEventSource(source);
+        const std::string source_lower = lowerAscii(source);
+        if (source_lower.find("paper primal heuristic") != std::string::npos &&
+            result.initial_heuristic_UB <= 0.0) {
+            result.initial_heuristic_UB = candidate.objective;
+        } else if (result.initial_heuristic_UB > 0.0 &&
+                   candidate.objective < result.initial_heuristic_UB - 1e-9 &&
+                   (ub_event_source == "route_pool_master" ||
+                    ub_event_source == "bpc_integer_leaf" ||
+                    ub_event_source == "bpc_column_pool_recombine" ||
+                    ub_event_source == "pricing_column_pool_repair" ||
+                    ub_event_source == "relaxation_guided_rounding" ||
+                    ub_event_source == "local_redecode_repair")) {
+            result.ub_improved_after_initial_heuristic = true;
+            ++result.ub_update_count_after_initial;
+            const double now = elapsedSeconds();
+            if (result.first_ub_improvement_time <= 0.0) {
+                result.first_ub_improvement_time = now;
+            }
+            result.last_ub_improvement_time = now;
+            result.best_ub_source_after_initial = ub_event_source;
+            markExactPhaseModule(ub_event_source);
+        }
+        writeUbEvent(source, candidate, candidate_routes, previous_ub, true);
         result.notes.push_back("accepted " + source
             + " incumbent for frontier cutoff only: objective="
             + std::to_string(candidate.objective)
@@ -7813,6 +8105,50 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 std::chrono::steady_clock::now() - heuristic_start).count()
             - heuristic.runtime_seconds;
     }
+    if (opt.exact_phase_local_redecode_repair &&
+        opt.primal_heuristic != "none" &&
+        opt.exact_phase_local_redecode_seconds > 0.0 &&
+        remainingSeconds() > 0.25) {
+        ++result.local_redecode_repair_calls;
+        markExactPhaseModule("local_redecode_repair");
+        ebrp::SolveOptions repair_opt = opt;
+        repair_opt.primal_heuristic = "hga-tgbc";
+        repair_opt.primal_heuristic_explicit = true;
+        repair_opt.primal_heuristic_seed =
+            opt.primal_heuristic_seed ^ 0xA5A5A5A5u;
+        repair_opt.primal_heuristic_seconds =
+            std::min(opt.exact_phase_local_redecode_seconds,
+                     std::max(0.1, remainingSeconds()));
+        repair_opt.primal_heuristic_runs =
+            std::max(opt.primal_heuristic_runs, 4);
+        repair_opt.heuristic_candidates_csv.clear();
+        const auto repair_start = std::chrono::steady_clock::now();
+        PaperPrimalHeuristicResult repair =
+            runPaperPrimalHeuristic(instance, repair_opt);
+        result.incumbent_candidates_tested += repair.candidates_tested;
+        result.incumbent_candidates_verified += repair.candidates_verified;
+        result.incumbent_candidates_rejected += repair.candidates_rejected;
+        for (const std::string& note : repair.notes) {
+            result.notes.push_back("local re-decode repair: " + note);
+        }
+        if (repair.found) {
+            const bool accepted = acceptIncumbentRoutes(
+                repair.routes, "local re-decode repair");
+            if (accepted) {
+                ++result.local_redecode_repair_successes;
+                addRoutesToFrontierPool(repair.routes,
+                                        "local re-decode repair");
+            }
+        } else {
+            result.notes.push_back("local re-decode repair produced no verifier-passed incumbent");
+        }
+        result.notes.push_back("local re-decode repair finished: runtime="
+            + std::to_string(std::chrono::duration<double>(
+                std::chrono::steady_clock::now() - repair_start).count())
+            + ", found=" + boolText(repair.found)
+            + ", accepted_successes="
+            + std::to_string(result.local_redecode_repair_successes));
+    }
     if (opt.incumbent_archive_auto) {
         result.incumbent_archive_attempted = true;
         IncumbentArchiveScanResult archive =
@@ -7877,6 +8213,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         if (!opt.route_pool_incumbent) return false;
         if (frontier_route_pool.kept() == 0) return false;
         ++result.route_pool_incumbent_master_calls;
+        ++result.route_pool_incumbent_calls;
+        markExactPhaseModule("route_pool_master");
         RoutePoolIncumbentMasterResult pool_result =
             solveTrueObjectiveRouteColumnIncumbentMaster(
                 instance, frontier_route_pool, opt.lambda, source);
@@ -7904,6 +8242,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     acceptIncumbentRoutes(pool_result.routes,
                                           "route-pool incumbent master");
                 if (accepted) {
+                    ++result.route_pool_incumbent_successes;
                     incumbent_routes = pool_result.routes;
                     addRoutesToFrontierPool(pool_result.routes,
                                             "route-pool incumbent master");
@@ -12116,6 +12455,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.status = "gcap_frontier_not_closed";
         result.certificate = "gamma-frontier diagnostic still has relevant intervals that are neither closed nor fathomed by a valid lower bound; do not treat as an optimality certificate";
     }
+    result.final_UB = result.upper_bound;
     writeProgressCheckpoint("final_summary", true);
     if (progress_stream.is_open()) progress_stream.close();
     if (!opt.progress_log_path.empty()) {

@@ -55,3 +55,14 @@ engineering instances:
 
 The generated variant rerun uses files in `reference/generated_variants/` and
 remains engineering-only evidence.
+
+## Hard V20/M3 Stress Suite
+
+`reference/hard_stress/V20_M3/` contains six regenerated engineering stress
+instances generated for exact-phase primal and lower-bound convergence tests.
+They use V=20, M=3, Q=30, deterministic seeds, capacities in `[20,50]`,
+positive targets, and a three-cluster metric coordinate pattern. Stress classes
+are `tight_T`, `high_imbalance`, and `moderate`.
+
+These files are diagnostic engineering benchmarks only. They must not be
+reported as historical paper targets.
