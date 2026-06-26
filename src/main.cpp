@@ -5,6 +5,7 @@
 #include "CplexBaseline.hpp"
 #include "Cuts.hpp"
 #include "Evaluator.hpp"
+#include "HgaTgbcRunner.hpp"
 #include "Master.hpp"
 #include "Parser.hpp"
 #include "Pricing.hpp"
@@ -4446,42 +4447,30 @@ void mutateRouteSequences(const ebrp::Instance& instance,
     repairRouteSequences(instance, seqs);
 }
 
-std::vector<ebrp::RoutePlan> compactZeroOperationRoutes(
-    const ebrp::Instance& instance,
-    const std::vector<ebrp::RoutePlan>& routes);
-
 std::vector<ebrp::RoutePlan> decodeRouteSequencesTargetGreedy(
     const ebrp::Instance& instance,
     const std::vector<std::vector<int>>& raw_seqs,
     double lambda,
-    int variant,
-    const std::vector<int>* inherited_q_hint = nullptr) {
+    int variant) {
     std::vector<std::vector<int>> seqs = raw_seqs;
     repairRouteSequences(instance, seqs);
     truncateTargetGreedySequences(instance, seqs);
     std::vector<ebrp::RoutePlan> routes = emptyRouteSet(instance);
     std::vector<int> y = instance.initial;
-    std::vector<int> inherited_q(instance.V + 1, 0);
-    if (inherited_q_hint &&
-        static_cast<int>(inherited_q_hint->size()) > instance.V) {
-        inherited_q = *inherited_q_hint;
-    }
-    const double handling_cycle = instance.pickup_time + instance.drop_time;
+    const double cunit = instance.pickup_time + instance.drop_time;
     for (int k = 0; k < instance.M; ++k) {
         ebrp::RoutePlan route;
         route.vehicle = k;
         route.nodes.push_back(0);
         int load = 0;
         int pickup_total = 0;
-        int drop_total = 0;
         int last = 0;
         double travel_without_return = 0.0;
         for (int station : seqs[k]) {
             const double next_travel =
                 travel_without_return + instance.dist[last][station];
             const double closed_without_new_pick =
-                next_travel + instance.dist[station][0] +
-                handling_cycle * pickup_total;
+                next_travel + instance.dist[station][0] + cunit * pickup_total;
             if (closed_without_new_pick > instance.total_time_limit + 1e-7) {
                 break;
             }
@@ -4496,67 +4485,40 @@ std::vector<ebrp::RoutePlan> decodeRouteSequencesTargetGreedy(
                 if (quantity <= 0) return;
                 std::vector<int> y2 = y;
                 int next_pickup_total = pickup_total;
-                int next_drop_total = drop_total;
-                int next_load = load;
                 if (pickup) {
                     if (quantity > y[station] || quantity > instance.Q[k] - load) return;
                     y2[station] -= quantity;
-                    next_load += quantity;
                     next_pickup_total += quantity;
                 } else {
                     if (quantity > load ||
                         quantity > instance.capacity[station] - y[station]) return;
                     y2[station] += quantity;
-                    next_load -= quantity;
-                    next_drop_total += quantity;
                 }
-                if (next_load < 0 || next_load > instance.Q[k]) return;
                 if (y2[station] < 0 || y2[station] > instance.capacity[station]) return;
-                const int depot_unload =
-                    std::max(0, next_pickup_total - next_drop_total);
                 const double duration =
                     next_travel + instance.dist[station][0] +
-                    instance.pickup_time * next_pickup_total +
-                    instance.drop_time * (next_drop_total + depot_unload);
+                    cunit * next_pickup_total;
                 if (duration > instance.total_time_limit + 1e-7) return;
                 const double obj = objectiveForInventory(instance, y2, lambda);
                 const double benefit = current_obj - obj;
-                if (benefit <= 1e-10) return;
-                double score = benefit / std::max(1.0, duration);
-                if (variant == 1) score = benefit;
+                if (benefit <= 1e-10 && variant != 2) return;
+                double score = benefit;
+                if (variant == 1) score = benefit / std::max(1.0, duration);
                 if (variant == 2) score = -obj;
-                if (pickup && inherited_q[station] > 0 &&
-                    quantity <= inherited_q[station]) score += 1e-7;
-                if (!pickup && inherited_q[station] < 0 &&
-                    quantity <= -inherited_q[station]) score += 1e-7;
                 if (score > best.score + 1e-12) {
                     best = {quantity, pickup, obj, score};
                 }
             };
             const int target_pick = std::max(0, y[station] - instance.target[station]);
             const int max_pick = std::min(y[station], instance.Q[k] - load);
-            if (max_pick > 0) {
-                if (inherited_q[station] > 0) consider(inherited_q[station], true);
-                if (instance.V <= 20) {
-                    for (int q = 1; q <= max_pick; ++q) consider(q, true);
-                } else {
-                    for (int q : {1, target_pick, max_pick, std::max(1, target_pick / 2)}) {
-                        consider(q, true);
-                    }
-                }
+            for (int q : {1, target_pick, max_pick, std::max(1, target_pick / 2)}) {
+                consider(q, true);
             }
             const int target_drop = std::max(0, instance.target[station] - y[station]);
             const int max_drop =
                 std::min(instance.capacity[station] - y[station], load);
-            if (max_drop > 0) {
-                if (inherited_q[station] < 0) consider(-inherited_q[station], false);
-                if (instance.V <= 20) {
-                    for (int q = 1; q <= max_drop; ++q) consider(q, false);
-                } else {
-                    for (int q : {1, target_drop, max_drop, std::max(1, target_drop / 2)}) {
-                        consider(q, false);
-                    }
-                }
+            for (int q : {1, target_drop, max_drop, std::max(1, target_drop / 2)}) {
+                consider(q, false);
             }
             route.nodes.push_back(station);
             if (best.quantity > 0) {
@@ -4571,7 +4533,6 @@ std::vector<ebrp::RoutePlan> decodeRouteSequencesTargetGreedy(
                     op.drop = best.quantity;
                     y[station] += best.quantity;
                     load -= best.quantity;
-                    drop_total += best.quantity;
                 }
                 route.operations.push_back(op);
             }
@@ -4582,49 +4543,6 @@ std::vector<ebrp::RoutePlan> decodeRouteSequencesTargetGreedy(
         routes[k] = std::move(route);
     }
     return routes;
-}
-
-std::vector<int> operationVectorFromRoutes(
-    const ebrp::Instance& instance,
-    const std::vector<ebrp::RoutePlan>& routes) {
-    std::vector<int> ops(instance.V + 1, 0);
-    for (const ebrp::RoutePlan& route : routes) {
-        for (const ebrp::StopOperation& op : route.operations) {
-            if (op.station <= 0 || op.station > instance.V) continue;
-            ops[op.station] += op.pickup;
-            ops[op.station] -= op.drop;
-        }
-    }
-    return ops;
-}
-
-std::vector<ebrp::RoutePlan> decodeRouteSequencesTgbcCompact(
-    const ebrp::Instance& instance,
-    const std::vector<std::vector<int>>& raw_seqs,
-    double lambda,
-    int variant = 0) {
-    std::vector<std::vector<int>> seqs = raw_seqs;
-    repairRouteSequences(instance, seqs);
-    truncateTargetGreedySequences(instance, seqs);
-    std::vector<ebrp::RoutePlan> first =
-        decodeRouteSequencesTargetGreedy(instance, seqs, lambda, variant);
-    ebrp::Verification first_v = ebrp::verifySolution(instance, first, lambda);
-    std::vector<ebrp::RoutePlan> compact_first =
-        compactZeroOperationRoutes(instance, first);
-    std::vector<std::vector<int>> compact_seqs =
-        routeSequencesFromPlans(instance, compact_first);
-    if (compact_seqs == seqs) return first;
-    const std::vector<int> inherited_q =
-        operationVectorFromRoutes(instance, first);
-    std::vector<ebrp::RoutePlan> second =
-        decodeRouteSequencesTargetGreedy(
-            instance, compact_seqs, lambda, variant, &inherited_q);
-    ebrp::Verification second_v = ebrp::verifySolution(instance, second, lambda);
-    if (second_v.feasible &&
-        (!first_v.feasible || second_v.objective < first_v.objective - 1e-10)) {
-        return second;
-    }
-    return first;
 }
 
 std::vector<ebrp::RoutePlan> compactZeroOperationRoutes(
@@ -4650,485 +4568,6 @@ std::vector<ebrp::RoutePlan> compactZeroOperationRoutes(
     return compact;
 }
 
-struct TgbcRouteWindow {
-    int exec_len = 0;
-    int first_drop_pos = -1;
-    int last_pick_pos = -1;
-};
-
-struct TgbcGuidedCandidate {
-    std::vector<std::vector<int>> seqs;
-    double priority = 0.0;
-};
-
-int tgbcTravelPrefixLength(const ebrp::Instance& instance,
-                           const std::vector<int>& route) {
-    double travel = 0.0;
-    int prev = 0;
-    int exec = 0;
-    for (int node : route) {
-        if (node <= 0 || node > instance.V) break;
-        const double closed = travel + instance.dist[prev][node] +
-            instance.dist[node][0];
-        if (closed > instance.total_time_limit + 1e-9) break;
-        travel += instance.dist[prev][node];
-        prev = node;
-        ++exec;
-    }
-    return exec;
-}
-
-TgbcRouteWindow buildTgbcRouteWindow(
-    const ebrp::Instance& instance,
-    const std::vector<int>& route,
-    const std::vector<int>& ops) {
-    TgbcRouteWindow out;
-    out.exec_len = tgbcTravelPrefixLength(instance, route);
-    out.exec_len = std::min(out.exec_len, static_cast<int>(route.size()));
-    for (int p = 0; p < out.exec_len; ++p) {
-        const int node = route[p];
-        if (node <= 0 || node > instance.V) continue;
-        if (ops[node] > 0) out.last_pick_pos = p;
-        if (ops[node] < 0 && out.first_drop_pos < 0) out.first_drop_pos = p;
-    }
-    return out;
-}
-
-int classifyTgbcNodeRole(const ebrp::Instance& instance,
-                         int node,
-                         const std::vector<int>& ops) {
-    if (node <= 0 || node > instance.V) return 0;
-    if (ops[node] > 0) return +1;
-    if (ops[node] < 0) return -1;
-    const int final_inv = instance.initial[node] - ops[node];
-    const int gap = instance.target[node] - final_inv;
-    if (gap > 0) return -1;
-    if (gap < 0) return +1;
-    return 0;
-}
-
-std::vector<std::vector<int>> relocateTgbcNode(
-    const std::vector<std::vector<int>>& base,
-    int from_route,
-    int from_pos,
-    int to_route,
-    int to_pos) {
-    std::vector<std::vector<int>> out = base;
-    if (from_route < 0 || from_route >= static_cast<int>(out.size())) return out;
-    if (to_route < 0 || to_route >= static_cast<int>(out.size())) return out;
-    if (from_pos < 0 || from_pos >= static_cast<int>(out[from_route].size())) {
-        return out;
-    }
-    const int node = out[from_route][from_pos];
-    out[from_route].erase(out[from_route].begin() + from_pos);
-    if (from_route == to_route && to_pos > from_pos) --to_pos;
-    to_pos = std::max(0, std::min(to_pos, static_cast<int>(out[to_route].size())));
-    out[to_route].insert(out[to_route].begin() + to_pos, node);
-    return out;
-}
-
-std::vector<TgbcGuidedCandidate> buildTgbcGuidedCandidates(
-    const ebrp::Instance& instance,
-    const std::vector<std::vector<int>>& base,
-    const std::vector<int>& ops) {
-    std::vector<TgbcGuidedCandidate> out;
-    std::vector<TgbcRouteWindow> windows(instance.M);
-    for (int r = 0; r < instance.M; ++r) {
-        if (r < static_cast<int>(base.size())) {
-            windows[r] = buildTgbcRouteWindow(instance, base[r], ops);
-        }
-    }
-    auto addCandidate = [&](std::vector<std::vector<int>> seqs,
-                            double priority) {
-        repairRouteSequences(instance, seqs);
-        truncateTargetGreedySequences(instance, seqs);
-        if (seqs == base) return;
-        out.push_back({std::move(seqs), priority});
-    };
-    for (int r = 0; r < instance.M && r < static_cast<int>(base.size()); ++r) {
-        const auto& route = base[r];
-        const TgbcRouteWindow& win = windows[r];
-        if (route.empty()) continue;
-        int last_zero_exec = -1;
-        for (int p = 0; p < win.exec_len; ++p) {
-            const int node = route[p];
-            if (node > 0 && node <= instance.V && ops[node] == 0) {
-                last_zero_exec = p;
-            }
-        }
-        if (last_zero_exec >= 0) {
-            addCandidate(relocateTgbcNode(base, r, last_zero_exec, r,
-                                          static_cast<int>(route.size())),
-                         10.0);
-        }
-        std::vector<int> key_positions;
-        for (int p = 0; p < static_cast<int>(route.size()); ++p) {
-            const int role = classifyTgbcNodeRole(instance, route[p], ops);
-            if (role != 0) key_positions.push_back(p);
-        }
-        for (int pos : key_positions) {
-            const int node = route[pos];
-            const int role = classifyTgbcNodeRole(instance, node, ops);
-            const double mag = std::abs(instance.target[node] -
-                (instance.initial[node] - ops[node]));
-            if (role > 0) {
-                const int anchor = (win.first_drop_pos >= 0) ? win.first_drop_pos : 0;
-                if (pos > anchor || pos >= win.exec_len) {
-                    addCandidate(relocateTgbcNode(base, r, pos, r, anchor),
-                                 20.0 + mag);
-                }
-            } else if (role < 0) {
-                const int anchor = (win.last_pick_pos >= 0)
-                    ? win.last_pick_pos + 1 : win.exec_len;
-                if (pos < anchor || pos >= win.exec_len) {
-                    addCandidate(relocateTgbcNode(base, r, pos, r, anchor),
-                                 20.0 + mag);
-                }
-            }
-        }
-    }
-    for (int src = 0; src < instance.M && src < static_cast<int>(base.size()); ++src) {
-        const auto& route = base[src];
-        const int exec = windows[src].exec_len;
-        int tail_supply = -1;
-        int tail_demand = -1;
-        for (int p = exec; p < static_cast<int>(route.size()); ++p) {
-            const int role = classifyTgbcNodeRole(instance, route[p], ops);
-            if (role > 0 && tail_supply < 0) tail_supply = p;
-            if (role < 0 && tail_demand < 0) tail_demand = p;
-            if (tail_supply >= 0 && tail_demand >= 0) break;
-        }
-        for (int dst = 0; dst < instance.M && dst < static_cast<int>(base.size()); ++dst) {
-            if (dst == src) continue;
-            if (tail_supply >= 0) {
-                bool dst_has_demand = false;
-                for (int node : base[dst]) {
-                    if (classifyTgbcNodeRole(instance, node, ops) < 0) {
-                        dst_has_demand = true;
-                        break;
-                    }
-                }
-                if (dst_has_demand) {
-                    const int anchor = (windows[dst].first_drop_pos >= 0)
-                        ? windows[dst].first_drop_pos : 0;
-                    addCandidate(relocateTgbcNode(base, src, tail_supply, dst, anchor),
-                                 15.0);
-                }
-            }
-            if (tail_demand >= 0 && windows[dst].last_pick_pos >= 0) {
-                addCandidate(relocateTgbcNode(base, src, tail_demand, dst,
-                                              windows[dst].last_pick_pos + 1),
-                             15.0);
-            }
-        }
-    }
-    std::sort(out.begin(), out.end(), [](const auto& a, const auto& b) {
-        return a.priority > b.priority;
-    });
-    const int cap = 48;
-    if (static_cast<int>(out.size()) > cap) out.resize(cap);
-    return out;
-}
-
-std::vector<ebrp::RoutePlan> buildTgbcPairSeedRoutes(
-    const ebrp::Instance& instance,
-    double lambda,
-    int variant) {
-    std::vector<std::vector<int>> seqs(instance.M);
-    std::vector<ebrp::RoutePlan> best_routes =
-        decodeRouteSequencesTgbcCompact(instance, seqs, lambda, variant);
-    ebrp::Verification best =
-        ebrp::verifySolution(instance, best_routes, lambda);
-    const int max_route_nodes =
-        std::max(2, std::min(instance.V, 2 + 2 * (variant + 1)));
-    auto usedStations = [&]() {
-        std::vector<bool> used(instance.V + 1, false);
-        for (const auto& route : seqs) {
-            for (int node : route) {
-                if (node > 0 && node <= instance.V) used[node] = true;
-            }
-        }
-        return used;
-    };
-    for (int k = 0; k < instance.M; ++k) {
-        while (static_cast<int>(seqs[k].size()) + 2 <= max_route_nodes) {
-            bool improved = false;
-            std::vector<std::vector<int>> best_trial_seqs = seqs;
-            std::vector<ebrp::RoutePlan> best_trial_routes = best_routes;
-            ebrp::Verification best_trial = best;
-            const std::vector<bool> used = usedStations();
-            for (int supply = 1; supply <= instance.V; ++supply) {
-                if (used[supply]) continue;
-                if (instance.initial[supply] <= instance.target[supply]) continue;
-                for (int demand = 1; demand <= instance.V; ++demand) {
-                    if (demand == supply || used[demand]) continue;
-                    if (instance.initial[demand] >= instance.target[demand]) continue;
-                    std::vector<std::vector<int>> trial = seqs;
-                    trial[k].push_back(supply);
-                    trial[k].push_back(demand);
-                    repairRouteSequences(instance, trial);
-                    truncateTargetGreedySequences(instance, trial);
-                    std::vector<ebrp::RoutePlan> routes =
-                        decodeRouteSequencesTgbcCompact(
-                            instance, trial, lambda, variant);
-                    routes = compactZeroOperationRoutes(instance, routes);
-                    ebrp::Verification v =
-                        ebrp::verifySolution(instance, routes, lambda);
-                    if (!v.feasible || !v.objective_matches || !v.errors.empty()) {
-                        continue;
-                    }
-                    if (!best_trial.feasible ||
-                        v.objective < best_trial.objective - 1e-10) {
-                        best_trial = v;
-                        best_trial_routes = std::move(routes);
-                        best_trial_seqs = routeSequencesFromPlans(
-                            instance, best_trial_routes);
-                        improved = true;
-                    }
-                }
-            }
-            if (!improved) break;
-            seqs = std::move(best_trial_seqs);
-            best_routes = std::move(best_trial_routes);
-            best = best_trial;
-        }
-    }
-    return best_routes;
-}
-
-std::vector<ebrp::RoutePlan> buildTgbcPairBeamSeedRoutes(
-    const ebrp::Instance& instance,
-    double lambda,
-    int variant) {
-    struct Pair {
-        int supply = 0;
-        int demand = 0;
-        double score = 0.0;
-    };
-    std::vector<Pair> pairs;
-    for (int supply = 1; supply <= instance.V; ++supply) {
-        const int surplus = instance.initial[supply] - instance.target[supply];
-        if (surplus <= 0) continue;
-        for (int demand = 1; demand <= instance.V; ++demand) {
-            if (demand == supply) continue;
-            const int deficit = instance.target[demand] - instance.initial[demand];
-            if (deficit <= 0) continue;
-            const int q = std::min({surplus, deficit, instance.Q.empty() ? 0 : instance.Q[0]});
-            if (q <= 0) continue;
-            std::vector<int> y = instance.initial;
-            y[supply] -= q;
-            y[demand] += q;
-            if (y[supply] < 0 || y[demand] > instance.capacity[demand]) continue;
-            const double improvement =
-                objectiveForInventory(instance, instance.initial, lambda) -
-                objectiveForInventory(instance, y, lambda);
-            if (improvement <= 1e-10) continue;
-            const double travel = instance.dist[0][supply] +
-                instance.dist[supply][demand] + instance.dist[demand][0];
-            const double duration = travel +
-                instance.pickup_time * q + instance.drop_time * q;
-            if (duration > instance.total_time_limit + 1e-7) continue;
-            pairs.push_back({supply, demand,
-                             improvement / std::max(1.0, duration)});
-        }
-    }
-    std::sort(pairs.begin(), pairs.end(), [](const Pair& a, const Pair& b) {
-        return a.score > b.score;
-    });
-    const int pair_cap = (instance.V <= 14) ? 48 : 32;
-    if (static_cast<int>(pairs.size()) > pair_cap) pairs.resize(pair_cap);
-
-    struct State {
-        std::vector<std::vector<int>> seqs;
-        std::vector<ebrp::RoutePlan> routes;
-        double objective = std::numeric_limits<double>::infinity();
-        bool feasible = false;
-    };
-    auto evaluate = [&](std::vector<std::vector<int>> seqs) {
-        repairRouteSequences(instance, seqs);
-        truncateTargetGreedySequences(instance, seqs);
-        State s;
-        s.routes = decodeRouteSequencesTgbcCompact(
-            instance, seqs, lambda, variant);
-        s.routes = compactZeroOperationRoutes(instance, s.routes);
-        s.seqs = routeSequencesFromPlans(instance, s.routes);
-        ebrp::Verification v = ebrp::verifySolution(instance, s.routes, lambda);
-        s.feasible = v.feasible && v.objective_matches && v.errors.empty();
-        s.objective = s.feasible ? v.objective
-                                 : std::numeric_limits<double>::infinity();
-        return s;
-    };
-    std::vector<State> beam;
-    beam.push_back(evaluate(std::vector<std::vector<int>>(instance.M)));
-    State best = beam.front();
-    const int max_depth = std::max(1, std::min(instance.V / 2, instance.M * 3));
-    const int max_route_nodes =
-        std::max(2, std::min(instance.V, 2 + 2 * (variant + 2)));
-    const int beam_width = (instance.V <= 14) ? 48 : 24;
-    auto stateUsed = [&](const State& s) {
-        std::vector<bool> used(instance.V + 1, false);
-        for (const auto& route : s.seqs) {
-            for (int node : route) {
-                if (node > 0 && node <= instance.V) used[node] = true;
-            }
-        }
-        return used;
-    };
-    for (int depth = 0; depth < max_depth && !beam.empty(); ++depth) {
-        std::vector<State> next = beam;
-        for (const State& state : beam) {
-            const std::vector<bool> used = stateUsed(state);
-            for (int k = 0; k < instance.M; ++k) {
-                if (static_cast<int>(state.seqs[k].size()) + 2 >
-                    max_route_nodes) {
-                    continue;
-                }
-                for (const Pair& pair : pairs) {
-                    if (used[pair.supply] || used[pair.demand]) continue;
-                    std::vector<std::vector<int>> trial = state.seqs;
-                    trial[k].push_back(pair.supply);
-                    trial[k].push_back(pair.demand);
-                    State candidate = evaluate(std::move(trial));
-                    if (!candidate.feasible) continue;
-                    if (candidate.objective < best.objective - 1e-10) {
-                        best = candidate;
-                    }
-                    next.push_back(std::move(candidate));
-                }
-            }
-        }
-        std::sort(next.begin(), next.end(), [](const State& a, const State& b) {
-            if (a.feasible != b.feasible) return a.feasible > b.feasible;
-            return a.objective < b.objective;
-        });
-        next.erase(std::unique(next.begin(), next.end(),
-            [](const State& a, const State& b) {
-                return a.seqs == b.seqs;
-            }), next.end());
-        if (static_cast<int>(next.size()) > beam_width) next.resize(beam_width);
-        beam.swap(next);
-    }
-    return best.routes;
-}
-
-std::vector<ebrp::RoutePlan> buildTgbcQuantityBeamRoutes(
-    const ebrp::Instance& instance,
-    double lambda,
-    int variant) {
-    (void)variant;
-    struct Move {
-        int supply = 0;
-        int demand = 0;
-        int quantity = 0;
-        double score = 0.0;
-    };
-    const double base_obj =
-        objectiveForInventory(instance, instance.initial, lambda);
-    std::vector<Move> moves;
-    const int max_q = instance.Q.empty()
-        ? 0
-        : *std::max_element(instance.Q.begin(), instance.Q.end());
-    for (int supply = 1; supply <= instance.V; ++supply) {
-        const int surplus = instance.initial[supply] - instance.target[supply];
-        if (surplus <= 0) continue;
-        for (int demand = 1; demand <= instance.V; ++demand) {
-            if (demand == supply) continue;
-            const int deficit = instance.target[demand] - instance.initial[demand];
-            if (deficit <= 0) continue;
-            const int q_cap = std::min({surplus, deficit, max_q,
-                                        instance.capacity[demand] -
-                                            instance.initial[demand],
-                                        instance.initial[supply]});
-            for (int q = 1; q <= q_cap; ++q) {
-                std::vector<int> y = instance.initial;
-                y[supply] -= q;
-                y[demand] += q;
-                const double improvement = base_obj -
-                    objectiveForInventory(instance, y, lambda);
-                if (improvement <= 1e-10) continue;
-                const double travel = instance.dist[0][supply] +
-                    instance.dist[supply][demand] + instance.dist[demand][0];
-                const double duration = travel +
-                    instance.pickup_time * q + instance.drop_time * q;
-                if (duration > instance.total_time_limit + 1e-7) continue;
-                moves.push_back({supply, demand, q,
-                                 improvement / std::max(1.0, duration)});
-            }
-        }
-    }
-    std::sort(moves.begin(), moves.end(), [](const Move& a, const Move& b) {
-        return a.score > b.score;
-    });
-    const int move_cap = (instance.V <= 14) ? 180 : 96;
-    if (static_cast<int>(moves.size()) > move_cap) moves.resize(move_cap);
-
-    struct State {
-        std::vector<std::vector<int>> q_by_vehicle;
-        std::vector<ebrp::RoutePlan> routes;
-        double objective = std::numeric_limits<double>::infinity();
-        bool feasible = false;
-    };
-    auto evaluate = [&](std::vector<std::vector<int>> q_by_vehicle) {
-        State state;
-        state.q_by_vehicle = std::move(q_by_vehicle);
-        state.feasible = buildRoutesFromQMatrix(
-            instance, state.q_by_vehicle, state.routes);
-        if (state.feasible) {
-            ebrp::Verification v =
-                ebrp::verifySolution(instance, state.routes, lambda);
-            state.feasible = v.feasible && v.objective_matches && v.errors.empty();
-            state.objective = state.feasible
-                ? v.objective : std::numeric_limits<double>::infinity();
-        }
-        return state;
-    };
-    std::vector<std::vector<int>> zero_q(
-        instance.M, std::vector<int>(instance.V + 1, 0));
-    std::vector<State> beam{evaluate(zero_q)};
-    State best = beam.front();
-    auto stationAssigned = [&](const State& state) {
-        std::vector<bool> assigned(instance.V + 1, false);
-        for (const auto& row : state.q_by_vehicle) {
-            for (int i = 1; i <= instance.V; ++i) {
-                if (row[i] != 0) assigned[i] = true;
-            }
-        }
-        return assigned;
-    };
-    const int max_depth = std::max(1, std::min(instance.V / 2, instance.M * 3));
-    const int beam_width = (instance.V <= 14) ? 64 : 32;
-    for (int depth = 0; depth < max_depth && !beam.empty(); ++depth) {
-        std::vector<State> next = beam;
-        for (const State& state : beam) {
-            const std::vector<bool> assigned = stationAssigned(state);
-            for (int k = 0; k < instance.M; ++k) {
-                for (const Move& move : moves) {
-                    if (assigned[move.supply] || assigned[move.demand]) continue;
-                    if (move.quantity > instance.Q[k]) continue;
-                    std::vector<std::vector<int>> q_trial = state.q_by_vehicle;
-                    q_trial[k][move.supply] = move.quantity;
-                    q_trial[k][move.demand] = -move.quantity;
-                    State cand = evaluate(std::move(q_trial));
-                    if (!cand.feasible) continue;
-                    if (cand.objective < best.objective - 1e-10) best = cand;
-                    next.push_back(std::move(cand));
-                }
-            }
-        }
-        std::sort(next.begin(), next.end(), [](const State& a, const State& b) {
-            if (a.feasible != b.feasible) return a.feasible > b.feasible;
-            return a.objective < b.objective;
-        });
-        next.erase(std::unique(next.begin(), next.end(),
-            [](const State& a, const State& b) {
-                return a.q_by_vehicle == b.q_by_vehicle;
-            }), next.end());
-        if (static_cast<int>(next.size()) > beam_width) next.resize(beam_width);
-        beam.swap(next);
-    }
-    return best.routes;
-}
-
 std::vector<ebrp::RoutePlan> educateRoutePlan(
     const ebrp::Instance& instance,
     double lambda,
@@ -5145,39 +4584,16 @@ std::vector<ebrp::RoutePlan> educateRoutePlan(
         best = ebrp::verifySolution(instance, best_routes, lambda);
     }
     for (int t = 0; t < trials; ++t) {
-        bool improved = false;
-        const std::vector<int> ops = operationVectorFromRoutes(instance, best_routes);
-        std::vector<TgbcGuidedCandidate> candidates =
-            buildTgbcGuidedCandidates(instance, best_seq, ops);
-        for (const TgbcGuidedCandidate& cand : candidates) {
-            std::vector<ebrp::RoutePlan> decoded =
-                decodeRouteSequencesTgbcCompact(
-                    instance, cand.seqs, lambda, t % 3);
-            decoded = compactZeroOperationRoutes(instance, decoded);
-            ebrp::Verification v = ebrp::verifySolution(instance, decoded, lambda);
-            if (v.feasible &&
-                (!best.feasible || v.objective < best.objective - 1e-10)) {
-                best = v;
-                best_routes = std::move(decoded);
-                best_seq = routeSequencesFromPlans(instance, best_routes);
-                improved = true;
-                break;
-            }
-        }
-        if (!improved) {
-            std::vector<std::vector<int>> trial_seq = best_seq;
-            mutateRouteSequences(instance, trial_seq, rng);
-            std::vector<ebrp::RoutePlan> decoded =
-                decodeRouteSequencesTgbcCompact(
-                    instance, trial_seq, lambda, t % 3);
-            decoded = compactZeroOperationRoutes(instance, decoded);
-            ebrp::Verification v = ebrp::verifySolution(instance, decoded, lambda);
-            if (v.feasible &&
-                (!best.feasible || v.objective < best.objective - 1e-10)) {
-                best = v;
-                best_routes = std::move(decoded);
-                best_seq = routeSequencesFromPlans(instance, best_routes);
-            }
+        std::vector<std::vector<int>> trial_seq = best_seq;
+        mutateRouteSequences(instance, trial_seq, rng);
+        std::vector<ebrp::RoutePlan> decoded =
+            decodeRouteSequencesTargetGreedy(instance, trial_seq, lambda, t % 3);
+        decoded = compactZeroOperationRoutes(instance, decoded);
+        ebrp::Verification v = ebrp::verifySolution(instance, decoded, lambda);
+        if (v.feasible && (!best.feasible || v.objective < best.objective - 1e-10)) {
+            best = v;
+            best_routes = std::move(decoded);
+            best_seq = routeSequencesFromPlans(instance, best_routes);
         }
     }
     return best_routes;
@@ -5302,6 +4718,44 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         out.candidate_records.push_back(std::move(rec));
     };
 
+    auto finalizeHeuristic = [&]() {
+        out.runtime_seconds = std::chrono::duration<double>(
+            std::chrono::steady_clock::now() - start).count();
+        std::ostringstream summary;
+        summary << "paper primal heuristic summary: mode=" << mode
+                << ", seed=" << opt.primal_heuristic_seed
+                << ", runs=" << opt.primal_heuristic_runs
+                << ", found=" << (out.found ? "true" : "false")
+                << ", best_objective=" << (out.found ? out.verification.objective : 0.0)
+                << ", candidates_tested=" << out.candidates_tested
+                << ", candidates_verified=" << out.candidates_verified
+                << ", candidates_rejected=" << out.candidates_rejected
+                << ", local_moves_tested=" << out.local_moves_tested
+                << ", runtime=" << out.runtime_seconds;
+        out.notes.push_back(summary.str());
+        writeHeuristicCandidatesCsv(opt.heuristic_candidates_csv,
+                                    out.candidate_records);
+    };
+
+    if ((mode == "hga-tgbc" || mode == "best-of-all") && !timedOut()) {
+        ebrp::HgaTgbcOptions hga_opt;
+        hga_opt.lambda = opt.lambda;
+        hga_opt.seed = opt.primal_heuristic_seed;
+        hga_opt.max_time_seconds = std::max(
+            1, static_cast<int>(std::ceil(opt.primal_heuristic_seconds)));
+        hga_opt.pop_size = std::max(24, opt.primal_heuristic_runs);
+        hga_opt.iterations = 10;
+        ebrp::HgaTgbcResult native = ebrp::runHgaTgbcNative(instance, hga_opt);
+        out.notes.insert(out.notes.end(), native.notes.begin(), native.notes.end());
+        if (native.found) {
+            consider(native.routes, "native_hga_tgbc_full_migration");
+        }
+        if (mode == "hga-tgbc") {
+            finalizeHeuristic();
+            return out;
+        }
+    }
+
     const bool use_random = mode == "hga-tgbc" || mode == "best-of-all";
     const bool use_local = mode == "hga-tgbc" || mode == "best-of-all";
     const int quick_local_passes = std::max(
@@ -5329,95 +4783,6 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
                 out.local_moves_tested += q_moves;
                 out.notes.insert(out.notes.end(), q_notes.begin(), q_notes.end());
                 consider(q_improved, "deterministic_tgbc_q_polish_mode_" + std::to_string(greedy_mode));
-            }
-        }
-    }
-
-    if ((mode == "hga-tgbc" || mode == "best-of-all") && !timedOut()) {
-        for (int seed_mode = 0; seed_mode < 3 && !timedOut(); ++seed_mode) {
-            std::vector<ebrp::RoutePlan> routes =
-                buildTgbcPairSeedRoutes(instance, opt.lambda, seed_mode);
-            consider(routes, "tgbc_pair_seed_mode_" + std::to_string(seed_mode));
-            std::vector<ebrp::RoutePlan> beam_routes =
-                buildTgbcPairBeamSeedRoutes(instance, opt.lambda, seed_mode);
-            consider(beam_routes, "tgbc_pair_beam_seed_mode_" +
-                                  std::to_string(seed_mode));
-            std::vector<ebrp::RoutePlan> quantity_routes =
-                buildTgbcQuantityBeamRoutes(instance, opt.lambda, seed_mode);
-            consider(quantity_routes, "tgbc_quantity_beam_seed_mode_" +
-                                      std::to_string(seed_mode));
-            if (use_local && !timedOut()) {
-                std::mt19937 local_rng(opt.primal_heuristic_seed ^
-                    static_cast<unsigned>(0x51A7u + 31u * seed_mode));
-                std::vector<ebrp::RoutePlan> educated =
-                    educateRoutePlan(instance, opt.lambda, routes, local_rng,
-                                      quick_local_passes * 4);
-                out.local_moves_tested += quick_local_passes * 4;
-                consider(educated, "tgbc_pair_seed_guided_mode_" +
-                                    std::to_string(seed_mode));
-                if (!timedOut() && instance.V <= 14) {
-                    long long q_moves = 0;
-                    std::vector<std::string> q_notes;
-                    std::vector<ebrp::RoutePlan> q_improved =
-                        improveIncumbentByLocalSearch(
-                            instance, opt.lambda, routes, quick_local_passes,
-                            timedOut, q_moves, q_notes,
-                            "paper_primal_pair_seed_q_" +
-                                std::to_string(seed_mode));
-                    out.local_moves_tested += q_moves;
-                    out.notes.insert(out.notes.end(), q_notes.begin(),
-                                     q_notes.end());
-                    consider(q_improved, "tgbc_pair_seed_q_polish_mode_" +
-                                        std::to_string(seed_mode));
-                }
-                if (!timedOut()) {
-                    std::vector<ebrp::RoutePlan> educated_beam =
-                        educateRoutePlan(instance, opt.lambda, beam_routes,
-                                          local_rng, quick_local_passes * 4);
-                    out.local_moves_tested += quick_local_passes * 4;
-                    consider(educated_beam, "tgbc_pair_beam_guided_mode_" +
-                                             std::to_string(seed_mode));
-                }
-                if (!timedOut()) {
-                    std::vector<ebrp::RoutePlan> educated_quantity =
-                        educateRoutePlan(instance, opt.lambda, quantity_routes,
-                                          local_rng, quick_local_passes * 4);
-                    out.local_moves_tested += quick_local_passes * 4;
-                    consider(educated_quantity,
-                             "tgbc_quantity_beam_guided_mode_" +
-                                 std::to_string(seed_mode));
-                }
-                if (!timedOut() && instance.V <= 14) {
-                    long long q_moves = 0;
-                    std::vector<std::string> q_notes;
-                    std::vector<ebrp::RoutePlan> q_improved =
-                        improveIncumbentByLocalSearch(
-                            instance, opt.lambda, beam_routes,
-                            quick_local_passes, timedOut, q_moves, q_notes,
-                            "paper_primal_pair_beam_q_" +
-                                std::to_string(seed_mode));
-                    out.local_moves_tested += q_moves;
-                    out.notes.insert(out.notes.end(), q_notes.begin(),
-                                     q_notes.end());
-                    consider(q_improved, "tgbc_pair_beam_q_polish_mode_" +
-                                        std::to_string(seed_mode));
-                }
-                if (!timedOut() && instance.V <= 14) {
-                    long long q_moves = 0;
-                    std::vector<std::string> q_notes;
-                    std::vector<ebrp::RoutePlan> q_improved =
-                        improveIncumbentByLocalSearch(
-                            instance, opt.lambda, quantity_routes,
-                            quick_local_passes, timedOut, q_moves, q_notes,
-                            "paper_primal_quantity_beam_q_" +
-                                std::to_string(seed_mode));
-                    out.local_moves_tested += q_moves;
-                    out.notes.insert(out.notes.end(), q_notes.begin(),
-                                     q_notes.end());
-                    consider(q_improved,
-                             "tgbc_quantity_beam_q_polish_mode_" +
-                                 std::to_string(seed_mode));
-                }
             }
         }
     }
@@ -5479,9 +4844,8 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         };
         std::mt19937 rng(opt.primal_heuristic_seed ^ 0x9E3779B9u);
         std::uniform_real_distribution<double> unit(0.0, 1.0);
-        const int pop_size = std::max(8, std::min(32, opt.primal_heuristic_runs));
-        const int max_generations =
-            std::max(6, std::min(64, opt.primal_heuristic_runs));
+        const int pop_size = std::max(8, std::min(16, opt.primal_heuristic_runs));
+        const int max_generations = std::max(6, std::min(18, opt.primal_heuristic_runs));
         auto evaluateSeqs = [&](std::vector<std::vector<int>> seqs,
                                 const std::string& label,
                                 int variant) {
@@ -5489,7 +4853,7 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
             truncateTargetGreedySequences(instance, seqs);
             GaIndividual ind;
             ind.seqs = seqs;
-            ind.routes = decodeRouteSequencesTgbcCompact(
+            ind.routes = decodeRouteSequencesTargetGreedy(
                 instance, ind.seqs, opt.lambda, variant);
             ind.routes = compactZeroOperationRoutes(instance, ind.routes);
             ebrp::Verification v = ebrp::verifySolution(
