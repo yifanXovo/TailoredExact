@@ -231,8 +231,50 @@ std::string vehicleUnloadName(int vehicle, int pickup_station) {
     return "hukb_" + std::to_string(vehicle) + "_" +
            std::to_string(pickup_station);
 }
+std::string compactArcName(int vehicle, int from_node, int to_node) {
+    return "xcb_" + std::to_string(vehicle) + "_" +
+           std::to_string(from_node) + "_" + std::to_string(to_node);
+}
 std::string hName(int i, int j) {
     return "hb_" + std::to_string(i) + "_" + std::to_string(j);
+}
+
+double mstLowerBoundOnStations(const std::vector<std::vector<double>>& dist,
+                               const std::vector<int>& stations) {
+    const int n = static_cast<int>(stations.size());
+    if (n <= 1) return 0.0;
+    std::vector<double> best(n, std::numeric_limits<double>::infinity());
+    std::vector<char> used(n, 0);
+    best[0] = 0.0;
+    double total = 0.0;
+    for (int iter = 0; iter < n; ++iter) {
+        int v = -1;
+        for (int i = 0; i < n; ++i) {
+            if (!used[i] && (v < 0 || best[i] < best[v])) v = i;
+        }
+        if (v < 0 || !std::isfinite(best[v])) return 0.0;
+        used[v] = 1;
+        total += best[v];
+        for (int to = 0; to < n; ++to) {
+            if (!used[to]) {
+                best[to] = std::min(best[to], dist[stations[v]][stations[to]]);
+            }
+        }
+    }
+    return total;
+}
+
+double depotAnchoredRouteTravelLowerBound(
+    const std::vector<std::vector<double>>& dist,
+    const std::vector<int>& stations) {
+    if (stations.empty()) return 0.0;
+    if (stations.size() == 1) return 2.0 * dist[0][stations.front()];
+    std::vector<double> depot_edges;
+    depot_edges.reserve(stations.size());
+    for (int station : stations) depot_edges.push_back(dist[0][station]);
+    std::sort(depot_edges.begin(), depot_edges.end());
+    return mstLowerBoundOnStations(dist, stations) +
+           depot_edges[0] + depot_edges[1];
 }
 
 std::vector<std::vector<double>> metricClosure(const Instance& instance) {
@@ -717,7 +759,15 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     bool route_mask_operation_budget_cuts_enabled,
     bool vehicle_indexed_operation_relaxation_enabled,
     bool vehicle_indexed_transfer_flow_enabled,
-    bool v20_safe_relaxation_cuts_enabled) {
+    bool v20_safe_relaxation_cuts_enabled,
+    bool v20_cover_cuts_enabled,
+    int v20_cover_max_size,
+    int v20_cover_max_cuts,
+    double v20_cover_separation_seconds,
+    bool station_residual_cover_cuts_enabled,
+    int station_residual_cover_max_cuts,
+    const std::string& large_compact_flow_relaxation,
+    double large_compact_flow_time_limit) {
     GiniIntervalInventoryRelaxationBound bound;
     if (instance.V <= 0 || gamma_cap < -1e-12) {
         bound.note = "inventory-Gini relaxation skipped because interval parameters are invalid";
@@ -729,6 +779,20 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
         bound.note = "inventory-Gini relaxation skipped because operation time is invalid";
         return bound;
     }
+    std::string compact_flow_mode = large_compact_flow_relaxation;
+    std::transform(compact_flow_mode.begin(), compact_flow_mode.end(),
+                   compact_flow_mode.begin(), [](unsigned char c) {
+                       return static_cast<char>(std::tolower(c));
+                   });
+    if (compact_flow_mode != "lp" && compact_flow_mode != "mip-light") {
+        compact_flow_mode = "off";
+    }
+    bound.large_compact_flow_relaxation = compact_flow_mode;
+    if (v20_cover_max_size < 2) v20_cover_max_size = 2;
+    if (v20_cover_max_cuts < 0) v20_cover_max_cuts = 0;
+    if (v20_cover_separation_seconds < 0.0) v20_cover_separation_seconds = 0.0;
+    if (station_residual_cover_max_cuts < 0) station_residual_cover_max_cuts = 0;
+    if (large_compact_flow_time_limit < 0.0) large_compact_flow_time_limit = 0.0;
     for (int k = 0; k < instance.M; ++k) {
         bound.total_pickup_limit += static_cast<int>(
             std::floor(instance.total_time_limit / unit_operation_time + 1e-9));
@@ -810,6 +874,18 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
                 std::chrono::steady_clock::now() - tighten_start).count();
         bound.penalty_budget = tighten.penalty_budget;
         bound.domains_tightened_count = tighten.domains_tightened_count;
+        if (station_residual_cover_cuts_enabled &&
+            instance.V > route_mask_max_v) {
+            bound.station_residual_cover_cuts_enabled = true;
+            bound.station_residual_domains_tightened_count =
+                tighten.domains_tightened_count;
+            bound.station_residual_domain_width_before =
+                tighten.total_domain_width_before;
+            bound.station_residual_domain_width_after =
+                tighten.total_domain_width_after;
+            bound.station_residual_cover_time_seconds =
+                bound.penalty_tightening_time_seconds;
+        }
         if (bound.total_domain_width_before == 0 &&
             bound.total_domain_width_after == 0) {
             bound.total_domain_width_before = tighten.total_domain_width_before;
@@ -918,6 +994,8 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
         v20_safe_relaxation_cuts_enabled &&
         vehicle_indexed_operation_relaxation_enabled &&
         instance.V <= 50;
+    const bool compact_flow_enabled =
+        continuous_vehicle_indexed_ops && compact_flow_mode != "off";
     const bool any_vehicle_indexed_ops =
         vehicle_indexed_ops || continuous_vehicle_indexed_ops;
     bound.vehicle_indexed_operation_relaxation_enabled =
@@ -929,6 +1007,12 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
             static_cast<long long>(instance.M) * instance.V;
         bound.vehicle_indexed_drop_variables =
             static_cast<long long>(instance.M) * instance.V;
+    }
+    if (compact_flow_enabled) {
+        bound.large_compact_flow_arc_variables =
+            static_cast<long long>(instance.M) *
+            static_cast<long long>(instance.V + 1) *
+            static_cast<long long>(instance.V);
     }
     std::vector<std::vector<int>> allowed_route_masks_by_vehicle(instance.M);
     std::vector<std::vector<int>> route_mask_pickup_budget_by_vehicle(instance.M);
@@ -1344,10 +1428,41 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
            << ", vehicle_transfer_cap_avg="
            << bound.vehicle_transfer_cap_avg
            << ", vehicle_transfer_cap_max="
-           << bound.vehicle_transfer_cap_max;
+           << bound.vehicle_transfer_cap_max
+           << ", v20_cover_cuts="
+           << (v20_cover_cuts_enabled ? "true" : "false")
+           << ", v20_cover_candidate_subsets_tested="
+           << bound.v20_cover_candidate_subsets_tested
+           << ", v20_cover_cuts_added=" << bound.v20_cover_cuts_added
+           << ", v20_cover_max_size_used=" << bound.v20_cover_max_size_used
+           << ", v20_cover_separation_time_seconds="
+           << bound.v20_cover_separation_time_seconds
+           << ", station_residual_cover_cuts="
+           << (station_residual_cover_cuts_enabled ? "true" : "false")
+           << ", station_residual_domains_tightened="
+           << bound.station_residual_domains_tightened_count
+           << ", station_residual_cover_cuts_added="
+           << bound.station_residual_cover_cuts_added
+           << ", station_residual_cover_time_seconds="
+           << bound.station_residual_cover_time_seconds
+           << ", large_compact_flow_relaxation="
+           << bound.large_compact_flow_relaxation
+           << ", large_compact_flow_arc_variables="
+           << bound.large_compact_flow_arc_variables
+           << ", large_compact_flow_constraints="
+           << bound.large_compact_flow_constraints
+           << ", large_compact_flow_time_seconds="
+           << bound.large_compact_flow_time_seconds;
         for (const std::string& example :
              bound.pickup_drop_incompatible_examples) {
             ss << ", incompatible_pair_example={" << example << "}";
+        }
+        for (const std::string& example : bound.v20_cover_cut_examples) {
+            ss << ", v20_cover_cut_example={" << example << "}";
+        }
+        for (const std::string& example :
+             bound.station_residual_cover_examples) {
+            ss << ", station_residual_cover_example={" << example << "}";
         }
         return ss.str();
     };
@@ -1427,6 +1542,34 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
         if (first_penalty) penalty_cut << "0";
         penalty_cut << " <= " << num(std::max(0.0, penalty_budget));
         row(penalty_cut.str());
+    }
+    const bool large_station_residual_cover =
+        station_residual_cover_cuts_enabled && instance.V > route_mask_max_v;
+    if (large_station_residual_cover &&
+        projection_bound_enabled &&
+        bound.projection_bound_valid &&
+        bound.projection_penalty_lower_bound > 1e-10 &&
+        station_residual_cover_max_cuts > 0) {
+        std::ostringstream penalty_floor;
+        bool first_floor = true;
+        for (int i = 1; i <= instance.V; ++i) {
+            const double coeff = instance.weights[i];
+            if (std::fabs(coeff) <= 1e-12) continue;
+            if (!first_floor) penalty_floor << " + ";
+            penalty_floor << num(coeff) << " " << eName(i);
+            first_floor = false;
+        }
+        if (first_floor) penalty_floor << "0";
+        penalty_floor << " >= " << num(bound.projection_penalty_lower_bound);
+        row(penalty_floor.str());
+        bound.station_residual_cover_cuts_added = 1;
+        if (bound.station_residual_cover_examples.empty()) {
+            std::ostringstream example;
+            example << "projection_penalty_floor="
+                    << bound.projection_penalty_lower_bound
+                    << ", source=inventory_ratio_projection";
+            bound.station_residual_cover_examples.push_back(example.str());
+        }
     }
 
     std::ostringstream pickup;
@@ -1592,6 +1735,161 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
                     }
                 }
             }
+
+            if (v20_cover_cuts_enabled && v20_cover_max_cuts > 0 &&
+                instance.V > route_mask_max_v) {
+                const auto cover_start = std::chrono::steady_clock::now();
+                const int max_size = std::min(instance.V,
+                    std::max(2, v20_cover_max_size));
+                bound.v20_cover_max_size_used =
+                    std::max(bound.v20_cover_max_size_used, max_size);
+                std::vector<int> subset;
+                auto cover_time_exceeded = [&]() {
+                    if (v20_cover_separation_seconds <= 0.0) return false;
+                    const double elapsed = std::chrono::duration<double>(
+                        std::chrono::steady_clock::now() - cover_start).count();
+                    return elapsed > v20_cover_separation_seconds;
+                };
+                std::function<void(int, int)> generateCover =
+                    [&](int next_station, int target_size) {
+                        if (bound.v20_cover_cuts_added >= v20_cover_max_cuts ||
+                            cover_time_exceeded()) {
+                            return;
+                        }
+                        if (static_cast<int>(subset.size()) == target_size) {
+                            ++bound.v20_cover_candidate_subsets_tested;
+                            const double travel_lb =
+                                depotAnchoredRouteTravelLowerBound(
+                                    metric_dist, subset);
+                            const double handling_lb = 0.0;
+                            if (travel_lb + handling_lb >
+                                instance.total_time_limit + 1e-9) {
+                                std::ostringstream cut;
+                                bool first_cover = true;
+                                for (int station : subset) {
+                                    addPositiveTerm(cut, first_cover, 1.0,
+                                                    routeVisitName(k, station));
+                                }
+                                if (first_cover) cut << "0";
+                                cut << " <= " << (target_size - 1);
+                                row(cut.str());
+                                ++bound.v20_cover_cuts_added;
+                                ++bound.vehicle_indexed_linking_constraints;
+                                if (bound.v20_cover_cut_examples.size() < 8) {
+                                    std::ostringstream example;
+                                    example << "vehicle=" << k
+                                            << ", size=" << target_size
+                                            << ", travel_lb=" << travel_lb
+                                            << ", handling_lb=" << handling_lb
+                                            << ", route_limit="
+                                            << instance.total_time_limit
+                                            << ", stations=";
+                                    for (std::size_t pos = 0;
+                                         pos < subset.size(); ++pos) {
+                                        if (pos) example << "-";
+                                        example << subset[pos];
+                                    }
+                                    bound.v20_cover_cut_examples.push_back(
+                                        example.str());
+                                }
+                            }
+                            return;
+                        }
+                        for (int station = next_station;
+                             station <= instance.V; ++station) {
+                            if (static_cast<int>(subset.size()) +
+                                (instance.V - station + 1) < target_size) {
+                                break;
+                            }
+                            subset.push_back(station);
+                            generateCover(station + 1, target_size);
+                            subset.pop_back();
+                            if (bound.v20_cover_cuts_added >= v20_cover_max_cuts ||
+                                cover_time_exceeded()) {
+                                break;
+                            }
+                        }
+                    };
+                for (int size = 3; size <= max_size; ++size) {
+                    generateCover(1, size);
+                    if (bound.v20_cover_cuts_added >= v20_cover_max_cuts ||
+                        cover_time_exceeded()) {
+                        break;
+                    }
+                }
+                bound.v20_cover_separation_time_seconds +=
+                    std::chrono::duration<double>(
+                        std::chrono::steady_clock::now() - cover_start).count();
+            }
+        }
+
+        if (compact_flow_enabled) {
+            const auto flow_start = std::chrono::steady_clock::now();
+            for (int k = 0; k < instance.M; ++k) {
+                std::ostringstream depot_out;
+                std::ostringstream depot_in;
+                bool first_out = true;
+                bool first_in = true;
+                for (int j = 1; j <= instance.V; ++j) {
+                    addPositiveTerm(depot_out, first_out, 1.0,
+                                    compactArcName(k, 0, j));
+                    addPositiveTerm(depot_in, first_in, 1.0,
+                                    compactArcName(k, j, 0));
+                }
+                if (first_out) depot_out << "0";
+                if (first_in) depot_in << "0";
+                depot_out << " <= 1";
+                depot_in << " <= 1";
+                row(depot_out.str());
+                row(depot_in.str());
+                bound.large_compact_flow_constraints += 2;
+
+                for (int i = 1; i <= instance.V; ++i) {
+                    std::ostringstream outflow;
+                    std::ostringstream inflow;
+                    bool first_station_out = true;
+                    bool first_station_in = true;
+                    addPositiveTerm(outflow, first_station_out, 1.0,
+                                    compactArcName(k, i, 0));
+                    addPositiveTerm(inflow, first_station_in, 1.0,
+                                    compactArcName(k, 0, i));
+                    for (int j = 1; j <= instance.V; ++j) {
+                        if (i == j) continue;
+                        addPositiveTerm(outflow, first_station_out, 1.0,
+                                        compactArcName(k, i, j));
+                        addPositiveTerm(inflow, first_station_in, 1.0,
+                                        compactArcName(k, j, i));
+                    }
+                    outflow << " - " << routeVisitName(k, i) << " = 0";
+                    inflow << " - " << routeVisitName(k, i) << " = 0";
+                    row(outflow.str());
+                    row(inflow.str());
+                    bound.large_compact_flow_constraints += 2;
+                }
+
+                std::ostringstream duration;
+                bool first_duration = true;
+                for (int i = 0; i <= instance.V; ++i) {
+                    for (int j = 0; j <= instance.V; ++j) {
+                        if (i == j || (i == 0 && j == 0)) continue;
+                        addPositiveTerm(duration, first_duration,
+                                        metric_dist[i][j],
+                                        compactArcName(k, i, j));
+                    }
+                }
+                for (int i = 1; i <= instance.V; ++i) {
+                    addPositiveTerm(duration, first_duration,
+                                    unit_operation_time,
+                                    routePickupName(k, i));
+                }
+                if (first_duration) duration << "0";
+                duration << " <= " << num(instance.total_time_limit);
+                row(duration.str());
+                ++bound.large_compact_flow_constraints;
+            }
+            bound.large_compact_flow_time_seconds =
+                std::chrono::duration<double>(
+                    std::chrono::steady_clock::now() - flow_start).count();
         }
 
         if (vehicle_transfer_flow) {
@@ -2040,6 +2338,15 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
                     }
                 }
             }
+            if (compact_flow_enabled) {
+                for (int i = 0; i <= instance.V; ++i) {
+                    for (int j = 0; j <= instance.V; ++j) {
+                        if (i == j || (i == 0 && j == 0)) continue;
+                        lp << " 0 <= " << compactArcName(k, i, j)
+                           << " <= 1\n";
+                    }
+                }
+            }
         }
     }
     lp << " 0 <= Sbound\n";
@@ -2058,6 +2365,28 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
             for (int k = 0; k < instance.M; ++k) {
                 for (int mask : allowed_route_masks_by_vehicle[k]) {
                     lp << " " << routeMaskName(k, mask) << "\n";
+                }
+            }
+        }
+        if (compact_flow_enabled && compact_flow_mode == "mip-light") {
+            for (int k = 0; k < instance.M; ++k) {
+                for (int i = 0; i <= instance.V; ++i) {
+                    for (int j = 0; j <= instance.V; ++j) {
+                        if (i == j || (i == 0 && j == 0)) continue;
+                        lp << " " << compactArcName(k, i, j) << "\n";
+                    }
+                }
+            }
+        }
+    }
+    if (!integer_inventory_relaxation &&
+        compact_flow_enabled && compact_flow_mode == "mip-light") {
+        lp << "Binary\n";
+        for (int k = 0; k < instance.M; ++k) {
+            for (int i = 0; i <= instance.V; ++i) {
+                for (int j = 0; j <= instance.V; ++j) {
+                    if (i == j || (i == 0 && j == 0)) continue;
+                    lp << " " << compactArcName(k, i, j) << "\n";
                 }
             }
         }

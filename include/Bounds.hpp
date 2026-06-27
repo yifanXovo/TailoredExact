@@ -92,6 +92,22 @@ struct GiniIntervalInventoryRelaxationBound {
     double vehicle_transfer_cap_avg = 0.0;
     double vehicle_transfer_cap_max = 0.0;
     double vehicle_transfer_flow_time_seconds = 0.0;
+    long long v20_cover_candidate_subsets_tested = 0;
+    long long v20_cover_cuts_added = 0;
+    int v20_cover_max_size_used = 0;
+    double v20_cover_separation_time_seconds = 0.0;
+    std::vector<std::string> v20_cover_cut_examples;
+    bool station_residual_cover_cuts_enabled = false;
+    int station_residual_domains_tightened_count = 0;
+    long long station_residual_domain_width_before = 0;
+    long long station_residual_domain_width_after = 0;
+    long long station_residual_cover_cuts_added = 0;
+    double station_residual_cover_time_seconds = 0.0;
+    std::vector<std::string> station_residual_cover_examples;
+    std::string large_compact_flow_relaxation = "off";
+    long long large_compact_flow_arc_variables = 0;
+    long long large_compact_flow_constraints = 0;
+    double large_compact_flow_time_seconds = 0.0;
     bool continuous_relaxation_precheck_run = false;
     bool continuous_relaxation_precheck_fathomed = false;
     bool continuous_relaxation_precheck_infeasible = false;
@@ -154,7 +170,15 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     bool route_mask_operation_budget_cuts_enabled = true,
     bool vehicle_indexed_operation_relaxation_enabled = true,
     bool vehicle_indexed_transfer_flow_enabled = true,
-    bool v20_safe_relaxation_cuts_enabled = true);
+    bool v20_safe_relaxation_cuts_enabled = true,
+    bool v20_cover_cuts_enabled = true,
+    int v20_cover_max_size = 4,
+    int v20_cover_max_cuts = 200,
+    double v20_cover_separation_seconds = 0.25,
+    bool station_residual_cover_cuts_enabled = true,
+    int station_residual_cover_max_cuts = 200,
+    const std::string& large_compact_flow_relaxation = "off",
+    double large_compact_flow_time_limit = 5.0);
 
 InventoryRatioProjectionBound computeInventoryRatioProjectionBound(
     const Instance& instance,

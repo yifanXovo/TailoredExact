@@ -293,6 +293,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--bpc-workers") opt.bpc_workers = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--pricing-threads") opt.pricing_threads = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--parallel-frontier") opt.parallel_frontier = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-relaxation-parallel") opt.parallel_frontier = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-relaxation-workers") {
+            opt.bpc_workers = std::stoi(requireValue(i, argc, argv));
+            opt.threads = std::max(opt.threads, opt.bpc_workers);
+        }
         else if (arg == "--parallel-nodes") opt.parallel_nodes = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--time-limit") opt.solve_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--gini-cap") opt.gini_cap = std::stod(requireValue(i, argc, argv));
@@ -335,6 +340,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         }
         else if (arg == "--frontier-adaptive-min-width") opt.frontier_adaptive_min_width = std::stod(requireValue(i, argc, argv));
         else if (arg == "--frontier-adaptive-split-factor") opt.frontier_adaptive_split_factor = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--frontier-pre-split-critical") opt.frontier_pre_split_critical = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-critical-max-depth") opt.frontier_critical_max_depth = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--support-duration-pruning") opt.support_duration_pruning = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--support-duration-max-subset-size") opt.support_duration_max_subset_size = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--pricing-completion-lb-pruning") opt.pricing_completion_lb_pruning = parseBoolValue(requireValue(i, argc, argv));
@@ -352,6 +359,14 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--vehicle-indexed-relaxation-audit") opt.vehicle_indexed_relaxation_audit = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--vehicle-indexed-transfer-flow") opt.vehicle_indexed_transfer_flow = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--v20-safe-relaxation-cuts") opt.v20_safe_relaxation_cuts = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--v20-cover-cuts") opt.v20_cover_cuts = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--v20-cover-max-size") opt.v20_cover_max_size = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--v20-cover-max-cuts") opt.v20_cover_max_cuts = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--v20-cover-separation-seconds") opt.v20_cover_separation_seconds = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--station-residual-cover-cuts") opt.station_residual_cover_cuts = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--station-residual-cover-max-cuts") opt.station_residual_cover_max_cuts = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--large-compact-flow-relaxation") opt.large_compact_flow_relaxation = requireValue(i, argc, argv);
+        else if (arg == "--large-compact-flow-time-limit") opt.large_compact_flow_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--frontier-bpc-fallback-reserve-fraction") opt.frontier_bpc_fallback_reserve_fraction = std::stod(requireValue(i, argc, argv));
         else if (arg == "--frontier-bpc-fallback-min-seconds") opt.frontier_bpc_fallback_min_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--frontier-bpc-fallback-max-intervals") opt.frontier_bpc_fallback_max_intervals = std::stoi(requireValue(i, argc, argv));
@@ -616,8 +631,33 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.bpc_incumbent_rounds < 1) opt.bpc_incumbent_rounds = 1;
     if (opt.frontier_final_nodes < 1) opt.frontier_final_nodes = 1;
     if (opt.frontier_adaptive_max_depth < 0) opt.frontier_adaptive_max_depth = 0;
+    if (opt.frontier_critical_max_depth < 0) opt.frontier_critical_max_depth = 0;
+    if (opt.frontier_pre_split_critical) {
+        opt.frontier_split_before_tree = true;
+        opt.frontier_adaptive_split = true;
+        if (opt.frontier_critical_max_depth > 0) {
+            opt.frontier_adaptive_max_depth =
+                std::max(opt.frontier_adaptive_max_depth,
+                         opt.frontier_critical_max_depth);
+        }
+        if (opt.frontier_split_batch <= 0) {
+            opt.frontier_split_batch = 2;
+        }
+    }
     if (opt.frontier_adaptive_min_width <= 0.0) opt.frontier_adaptive_min_width = 1e-4;
     if (opt.frontier_adaptive_split_factor < 2) opt.frontier_adaptive_split_factor = 2;
+    if (opt.v20_cover_max_size < 2) opt.v20_cover_max_size = 2;
+    if (opt.v20_cover_max_cuts < 0) opt.v20_cover_max_cuts = 0;
+    if (opt.v20_cover_separation_seconds < 0.0) opt.v20_cover_separation_seconds = 0.0;
+    if (opt.station_residual_cover_max_cuts < 0) opt.station_residual_cover_max_cuts = 0;
+    opt.large_compact_flow_relaxation = lowerAscii(opt.large_compact_flow_relaxation);
+    if (opt.large_compact_flow_relaxation != "lp" &&
+        opt.large_compact_flow_relaxation != "mip-light") {
+        opt.large_compact_flow_relaxation = "off";
+    }
+    if (opt.large_compact_flow_time_limit < 0.0) {
+        opt.large_compact_flow_time_limit = 0.0;
+    }
     if (opt.progress_interval_seconds < 0.0) opt.progress_interval_seconds = 0.0;
     if (opt.frontier_focus_time_limit == 0.0) opt.frontier_focus_time_limit = -1.0;
     if (opt.frontier_focus_relax_seconds == 0.0) opt.frontier_focus_relax_seconds = -1.0;
@@ -6769,6 +6809,31 @@ void copyVehicleIndexedRelaxationStats(
     dst.vehicle_transfer_cap_max = src.vehicle_transfer_cap_max;
     dst.vehicle_transfer_flow_time_seconds =
         src.vehicle_transfer_flow_time_seconds;
+    dst.v20_cover_candidate_subsets_tested =
+        src.v20_cover_candidate_subsets_tested;
+    dst.v20_cover_cuts_added = src.v20_cover_cuts_added;
+    dst.v20_cover_max_size_used = src.v20_cover_max_size_used;
+    dst.v20_cover_separation_time_seconds =
+        src.v20_cover_separation_time_seconds;
+    dst.station_residual_cover_cuts_enabled =
+        src.station_residual_cover_cuts_enabled;
+    dst.station_residual_domains_tightened_count =
+        src.station_residual_domains_tightened_count;
+    dst.station_residual_domain_width_before =
+        src.station_residual_domain_width_before;
+    dst.station_residual_domain_width_after =
+        src.station_residual_domain_width_after;
+    dst.station_residual_cover_cuts_added =
+        src.station_residual_cover_cuts_added;
+    dst.station_residual_cover_time_seconds =
+        src.station_residual_cover_time_seconds;
+    dst.large_compact_flow_relaxation = src.large_compact_flow_relaxation;
+    dst.large_compact_flow_arc_variables =
+        src.large_compact_flow_arc_variables;
+    dst.large_compact_flow_constraints =
+        src.large_compact_flow_constraints;
+    dst.large_compact_flow_time_seconds =
+        src.large_compact_flow_time_seconds;
 }
 
 ebrp::SolveResult solveVehicleIndexedRelaxationDiagnostic(
@@ -7698,6 +7763,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         + ", frontier_adaptive_max_depth=" + std::to_string(opt.frontier_adaptive_max_depth)
         + ", frontier_adaptive_min_width=" + std::to_string(opt.frontier_adaptive_min_width)
         + ", frontier_adaptive_split_factor=" + std::to_string(opt.frontier_adaptive_split_factor)
+        + ", frontier_pre_split_critical=" + std::string(opt.frontier_pre_split_critical ? "true" : "false")
+        + ", frontier_critical_max_depth=" + std::to_string(opt.frontier_critical_max_depth)
         + ", route_pool_incumbent=" + std::string(opt.route_pool_incumbent ? "true" : "false")
         + ", route_pool_max_columns_per_vehicle=" + std::to_string(opt.route_pool_max_columns_per_vehicle)
         + ", pickup_drop_compat_flow=" + std::string(opt.pickup_drop_compat_flow ? "true" : "false")
@@ -7705,6 +7772,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         + ", vehicle_indexed_operation_relaxation=" + std::string(opt.vehicle_indexed_operation_relaxation ? "true" : "false")
         + ", vehicle_indexed_relaxation_audit=" + std::string(opt.vehicle_indexed_relaxation_audit ? "true" : "false")
         + ", vehicle_indexed_transfer_flow=" + std::string(opt.vehicle_indexed_transfer_flow ? "true" : "false")
+        + ", v20_cover_cuts=" + std::string(opt.v20_cover_cuts ? "true" : "false")
+        + ", v20_cover_max_size=" + std::to_string(opt.v20_cover_max_size)
+        + ", v20_cover_max_cuts=" + std::to_string(opt.v20_cover_max_cuts)
+        + ", station_residual_cover_cuts=" + std::string(opt.station_residual_cover_cuts ? "true" : "false")
+        + ", large_compact_flow_relaxation=" + opt.large_compact_flow_relaxation
         + ", support_duration_pruning=" + std::string(opt.support_duration_pruning ? "true" : "false")
         + ", pricing_completion_lb_pruning=" + std::string(opt.pricing_completion_lb_pruning ? "true" : "false")
         + ", route_mask_support_duration_pruning=" + std::string(opt.route_mask_support_duration_pruning ? "true" : "false")
@@ -9769,6 +9841,38 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 inv_relax.vehicle_transfer_cap_avg;
             result.vehicle_transfer_flow_time_seconds +=
                 inv_relax.vehicle_transfer_flow_time_seconds;
+            result.v20_cover_candidate_subsets_tested +=
+                inv_relax.v20_cover_candidate_subsets_tested;
+            result.v20_cover_cuts_added += inv_relax.v20_cover_cuts_added;
+            result.v20_cover_max_size_used =
+                std::max(result.v20_cover_max_size_used,
+                         inv_relax.v20_cover_max_size_used);
+            result.v20_cover_separation_time_seconds +=
+                inv_relax.v20_cover_separation_time_seconds;
+            result.station_residual_cover_cuts_enabled =
+                result.station_residual_cover_cuts_enabled ||
+                inv_relax.station_residual_cover_cuts_enabled;
+            result.station_residual_domains_tightened_count +=
+                inv_relax.station_residual_domains_tightened_count;
+            result.station_residual_domain_width_before +=
+                inv_relax.station_residual_domain_width_before;
+            result.station_residual_domain_width_after +=
+                inv_relax.station_residual_domain_width_after;
+            result.station_residual_cover_cuts_added +=
+                inv_relax.station_residual_cover_cuts_added;
+            result.station_residual_cover_time_seconds +=
+                inv_relax.station_residual_cover_time_seconds;
+            if (result.large_compact_flow_relaxation == "off" &&
+                inv_relax.large_compact_flow_relaxation != "off") {
+                result.large_compact_flow_relaxation =
+                    inv_relax.large_compact_flow_relaxation;
+            }
+            result.large_compact_flow_arc_variables +=
+                inv_relax.large_compact_flow_arc_variables;
+            result.large_compact_flow_constraints +=
+                inv_relax.large_compact_flow_constraints;
+            result.large_compact_flow_time_seconds +=
+                inv_relax.large_compact_flow_time_seconds;
         };
 
     auto accumulateTreeRound2Stats =
@@ -9966,7 +10070,16 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             << "|vehicle_transfer_flow="
             << (opt.vehicle_indexed_transfer_flow ? 1 : 0)
             << "|v20_safe_relaxation_cuts="
-            << (opt.v20_safe_relaxation_cuts ? 1 : 0);
+            << (opt.v20_safe_relaxation_cuts ? 1 : 0)
+            << "|v20_cover_cuts=" << (opt.v20_cover_cuts ? 1 : 0)
+            << "|v20_cover_max_size=" << opt.v20_cover_max_size
+            << "|v20_cover_max_cuts=" << opt.v20_cover_max_cuts
+            << "|station_residual_cover_cuts="
+            << (opt.station_residual_cover_cuts ? 1 : 0)
+            << "|station_residual_cover_max_cuts="
+            << opt.station_residual_cover_max_cuts
+            << "|large_compact_flow_relaxation="
+            << opt.large_compact_flow_relaxation;
         return key.str();
     };
     auto computeInventoryRelaxation =
@@ -10013,7 +10126,15 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     operation_budget_enabled,
                     vehicle_indexed_enabled,
                     vehicle_transfer_enabled,
-                    opt.v20_safe_relaxation_cuts);
+                    opt.v20_safe_relaxation_cuts,
+                    opt.v20_cover_cuts,
+                    opt.v20_cover_max_size,
+                    opt.v20_cover_max_cuts,
+                    opt.v20_cover_separation_seconds,
+                    opt.station_residual_cover_cuts,
+                    opt.station_residual_cover_max_cuts,
+                    opt.large_compact_flow_relaxation,
+                    opt.large_compact_flow_time_limit);
             };
             auto relaxationLb =
                 [&](const ebrp::GiniIntervalInventoryRelaxationBound& bound) {
@@ -10799,7 +10920,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                   });
         const int candidate_splits = static_cast<int>(split_indices.size());
         if (opt.frontier_adaptive_split && split_indices.size() > 1) {
-            split_indices.resize(1);
+            const int adaptive_batch = opt.frontier_pre_split_critical
+                ? std::max(1, opt.frontier_split_batch)
+                : 1;
+            if (candidate_splits > adaptive_batch) {
+                split_indices.resize(adaptive_batch);
+            }
         } else if (opt.frontier_split_batch > 0 &&
             candidate_splits > opt.frontier_split_batch) {
             split_indices.resize(opt.frontier_split_batch);

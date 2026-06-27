@@ -84,6 +84,8 @@ struct SolveOptions {
     bool frontier_adaptive_max_depth_explicit = false;
     double frontier_adaptive_min_width = 1e-4;
     int frontier_adaptive_split_factor = 2;
+    bool frontier_pre_split_critical = false;
+    int frontier_critical_max_depth = 0;
     bool route_pool_incumbent = true;
     int route_pool_max_columns_per_vehicle = 5000;
     bool route_pool_keep_best_per_projection = true;
@@ -93,6 +95,14 @@ struct SolveOptions {
     bool vehicle_indexed_relaxation_audit = false;
     bool vehicle_indexed_transfer_flow = true;
     bool v20_safe_relaxation_cuts = true;
+    bool v20_cover_cuts = true;
+    int v20_cover_max_size = 4;
+    int v20_cover_max_cuts = 200;
+    double v20_cover_separation_seconds = 0.25;
+    bool station_residual_cover_cuts = true;
+    int station_residual_cover_max_cuts = 200;
+    std::string large_compact_flow_relaxation = "off";
+    double large_compact_flow_time_limit = 5.0;
     std::string frontier_bpc_fallback_mode = "off";
     double frontier_bpc_fallback_reserve_fraction = 0.0;
     double frontier_bpc_fallback_min_seconds = 0.0;
