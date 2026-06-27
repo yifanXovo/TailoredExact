@@ -4,7 +4,10 @@ Branch: `codex/longrun-round17-local-results`
 
 Starting commit: `0c2627821415515973eccbc0e9b4d412d6e7167d`
 
-Final commit: reported in the final response after push. Code/result commit before SHA-field update: $sha.
+Code/result commit before this report-reference correction:
+`7c5e8cd2430a6f86ae4c28345e24651fe4313c5b`.
+
+Final remote branch tip is reported in the final response after push.
 
 ## Implemented Changes
 
