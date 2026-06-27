@@ -4,7 +4,7 @@ Branch: `codex/longrun-round17-local-results`
 
 Start commit: `ef4cb62edf3081ffcfd06976d18705bf861b4edc`
 
-Final commit: `PENDING`
+Implementation/results commit: `a22c6b0eccb0fdc90a78b1174d1084b2888e0f4d`
 
 ## Build
 
