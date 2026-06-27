@@ -66,3 +66,8 @@ are `tight_T`, `high_imbalance`, and `moderate`.
 
 These files are diagnostic engineering benchmarks only. They must not be
 reported as historical paper targets.
+
+New relaxation-bound round outputs classify these rows as
+`hard_generated_v20_m3`. Any older summary that labelled them
+`historical_target` should be treated as a metadata bug, not as a benchmark
+claim.

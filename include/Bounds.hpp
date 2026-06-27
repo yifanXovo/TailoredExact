@@ -153,7 +153,8 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     bool pickup_drop_transfer_cap_flow_enabled = true,
     bool route_mask_operation_budget_cuts_enabled = true,
     bool vehicle_indexed_operation_relaxation_enabled = true,
-    bool vehicle_indexed_transfer_flow_enabled = true);
+    bool vehicle_indexed_transfer_flow_enabled = true,
+    bool v20_safe_relaxation_cuts_enabled = true);
 
 InventoryRatioProjectionBound computeInventoryRatioProjectionBound(
     const Instance& instance,

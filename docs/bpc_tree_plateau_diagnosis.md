@@ -1,16 +1,18 @@
 # BPC Tree Plateau Diagnosis
 
-The selected stress rows did not primarily plateau in BPC pricing/tree work.
-Pricing time is near zero in the summary rows, while bound time consumes almost
-all runtime. BPC tree improvements remain important for future cases where
-relaxation-only bounds cannot close but a tree is entered.
+BPC tree and pricing are not the dominant bottleneck in the current targeted
+round.
 
-Current diagnosis:
+Evidence:
 
-- V12 M2 closes by relaxation-only full-frontier certificate.
-- V12 M1 and V20/M3 do not close because interval lower bounds are too weak.
-- No run in this round provides evidence that exact-label pricing is the active
-  bottleneck.
+- V12 M1 relaxation-only 1200s certifies without entering BPC.
+- V12 M1 fallback 300s starts one node and one pricing call, but because the
+  row spends less time on relaxation, final LB is worse than the relaxation-only
+  300s row.
+- V20/M3 fallback rows did not produce closed tree evidence; their summaries
+  still show zero useful pricing time and unresolved intervals.
 
-The next BPC-specific optimization should be triggered only after a case shows
-substantial pricing or node time in `results/exact_primal_stress_round`.
+The current fallback mechanism is certificate-safe because incomplete BPC
+closure is not used as lower-bound proof. Its diagnostic value is that it
+confirms BPC is not yet the next bottleneck for these rows. The main unresolved
+issue is still interval relaxation strength and scheduling.

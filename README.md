@@ -24,6 +24,20 @@ g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluat
 build\ExactEBRP.exe --method gcap-frontier --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --time-limit 30 --frontier-intervals 3 --frontier-retry-passes 1 --frontier-final-closure true --frontier-final-nodes 31 --gcap-pricing-columns 4 --column-dominance true --column-dominance-mode exact --projection-bound true --penalty-domain-tightening true --out results\optimization_update\raw\smoke_gcap_frontier_full.json
 ```
 
+V20-safe relaxation and controlled BPC fallback examples:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --input reference\hard_stress\V20_M3\high_imbalance_seed3202.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-intervals 3 --v20-safe-relaxation-cuts true --out results\relaxation_bound_round\raw\high_imbalance_seed3202_improved_relax_300s.json
+
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --input reference\regen_candidate_V12_M1_average.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-intervals 3 --frontier-bpc-fallback-mode controlling-intervals --frontier-bpc-fallback-reserve-fraction 0.30 --frontier-bpc-fallback-min-seconds 90 --frontier-bpc-fallback-max-intervals 2 --frontier-final-nodes 63 --out results\relaxation_bound_round\raw\v12_m1_bpc_fallback_300s.json
+```
+
+`--v20-safe-relaxation-cuts` adds continuous vehicle-indexed operation,
+duration-cover, load-balance, and transfer-cap necessary conditions without
+complete route-mask enumeration. These are lower-bound-only cuts. BPC fallback
+uses the existing exact-pricing closure guards; incomplete fallback rows remain
+noncertified.
+
 ## Exact-Phase UB Tracing
 
 Paper-core runs can write a verifier-gated incumbent event log:

@@ -904,3 +904,21 @@ Key findings:
 
 The next targeted work should strengthen certificate-safe interval relaxations
 for V12 M1 and V20/M3 rather than broaden primal search.
+
+## Relaxation-Bound Targeted Round
+
+This round strengthened lower-bound relaxations and added controlled BPC
+fallback scheduling while keeping native HGA-TGBC incumbents as UB-only
+evidence.
+
+| instance | row | status | LB | UB | gap |
+|---|---|---:|---:|---:|---:|
+| V12 M2 regenerated | original paper-core 300s command | optimal | 0.718504070755 | 0.718504070755 | 0 |
+| V12 M1 regenerated | paper-core 300s | not closed | 0.332675660948 | 0.357200583208 | 0.0686586848205 |
+| V12 M1 regenerated | paper-core 1200s | optimal | 0.357200583208 | 0.357200583208 | 0 |
+| V20/M3 high_imbalance_seed3202 | 300s | not closed | 1.57423364041 | 1.74931345205 | 0.100084871258 |
+| V20/M3 high_imbalance_seed3202 | 1200s | not closed | 1.60644024991 | 1.74931345205 | 0.081673871528 |
+
+All optimal rows in `results/relaxation_bound_round/raw` pass
+`scripts/audit_bpc_certificate.py --fail-on-error`. V20/M3 rows are labelled
+`hard_generated_v20_m3` and remain noncertified.

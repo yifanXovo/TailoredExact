@@ -70,7 +70,11 @@ void usage() {
         << "[--exact-phase-local-redecode-repair true|false] [--exact-phase-local-redecode-seconds <seconds>] "
         << "[--pickup-drop-compat-flow true|false] [--pickup-drop-transfer-cap-flow true|false] "
         << "[--vehicle-indexed-operation-relaxation true|false] [--vehicle-indexed-relaxation-audit true|false] "
-        << "[--vehicle-indexed-transfer-flow true|false] "
+        << "[--vehicle-indexed-transfer-flow true|false] [--v20-safe-relaxation-cuts true|false] "
+        << "[--frontier-bpc-fallback-mode off|controlling-intervals|best-bound] "
+        << "[--frontier-bpc-fallback-reserve-fraction <fraction>] "
+        << "[--frontier-bpc-fallback-min-seconds <seconds>] "
+        << "[--frontier-bpc-fallback-max-intervals <N>] "
         << "[--gcap-seed-cplex] [--gcap-seed-time-limit <seconds>] "
         << "[--incumbent-json <path>] [--incumbent-format auto|exact_result|route_json|csv] "
         << "[--hga-incumbent <path>] [--hga-incumbent-format auto|route_json|csv|legacy] "
@@ -347,6 +351,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--vehicle-indexed-operation-relaxation") opt.vehicle_indexed_operation_relaxation = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--vehicle-indexed-relaxation-audit") opt.vehicle_indexed_relaxation_audit = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--vehicle-indexed-transfer-flow") opt.vehicle_indexed_transfer_flow = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--v20-safe-relaxation-cuts") opt.v20_safe_relaxation_cuts = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--frontier-bpc-fallback-reserve-fraction") opt.frontier_bpc_fallback_reserve_fraction = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--frontier-bpc-fallback-min-seconds") opt.frontier_bpc_fallback_min_seconds = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--frontier-bpc-fallback-max-intervals") opt.frontier_bpc_fallback_max_intervals = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--frontier-bpc-fallback-mode") opt.frontier_bpc_fallback_mode = requireValue(i, argc, argv);
         else if (arg == "--gcap-seed-cplex") opt.gcap_seed_cplex = true;
         else if (arg == "--gcap-seed-time-limit") opt.gcap_seed_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--incumbent-json") opt.incumbent_json_path = requireValue(i, argc, argv);
@@ -485,6 +494,33 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.column_dominance_mode = "exact";
     }
     if (opt.frontier_retry_reserve_seconds < 0.0) opt.frontier_retry_reserve_seconds = 0.0;
+    opt.frontier_bpc_fallback_mode = lowerAscii(opt.frontier_bpc_fallback_mode);
+    if (opt.frontier_bpc_fallback_mode != "controlling-intervals" &&
+        opt.frontier_bpc_fallback_mode != "best-bound") {
+        opt.frontier_bpc_fallback_mode = "off";
+    }
+    if (opt.frontier_bpc_fallback_reserve_fraction < 0.0) {
+        opt.frontier_bpc_fallback_reserve_fraction = 0.0;
+    }
+    if (opt.frontier_bpc_fallback_reserve_fraction > 0.9) {
+        opt.frontier_bpc_fallback_reserve_fraction = 0.9;
+    }
+    if (opt.frontier_bpc_fallback_min_seconds < 0.0) {
+        opt.frontier_bpc_fallback_min_seconds = 0.0;
+    }
+    if (opt.frontier_bpc_fallback_max_intervals < 0) {
+        opt.frontier_bpc_fallback_max_intervals = 0;
+    }
+    if (opt.frontier_bpc_fallback_mode != "off") {
+        const double fallback_reserve = std::max(
+            opt.frontier_bpc_fallback_min_seconds,
+            opt.solve_time_limit > 0.0
+                ? opt.solve_time_limit * opt.frontier_bpc_fallback_reserve_fraction
+                : 0.0);
+        opt.frontier_retry_reserve_seconds =
+            std::max(opt.frontier_retry_reserve_seconds, fallback_reserve);
+        opt.frontier_final_closure = true;
+    }
     if (opt.frontier_relax_seconds == 0.0) opt.frontier_relax_seconds = -1.0;
     if (opt.route_mask_max_v < 0) opt.route_mask_max_v = 0;
     std::transform(opt.large_instance_mode.begin(), opt.large_instance_mode.end(),
@@ -809,6 +845,11 @@ std::string inferInstanceScope(const ebrp::Instance& instance,
     }
     if (opt.algorithm_preset == "diagnostic-large" || instance.V >= 50) {
         return "diagnostic_large";
+    }
+    if (path.find("hard_stress") != std::string::npos ||
+        name.find("v20_m3") != std::string::npos ||
+        name.find("hard_generated_v20_m3") != std::string::npos) {
+        return "hard_generated_v20_m3";
     }
     if (path.find("reference/generated") != std::string::npos ||
         name.find("regen_") != std::string::npos ||
@@ -7648,6 +7689,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         + ", frontier_focused_reserve_fraction=" + std::to_string(opt.frontier_focused_reserve_fraction)
         + ", frontier_focused_relax_seconds=" + std::to_string(opt.frontier_focused_relax_seconds)
         + ", frontier_focused_max_passes=" + std::to_string(opt.frontier_focused_max_passes)
+        + ", v20_safe_relaxation_cuts=" + std::string(opt.v20_safe_relaxation_cuts ? "true" : "false")
+        + ", frontier_bpc_fallback_mode=" + opt.frontier_bpc_fallback_mode
+        + ", frontier_bpc_fallback_reserve_fraction=" + std::to_string(opt.frontier_bpc_fallback_reserve_fraction)
+        + ", frontier_bpc_fallback_min_seconds=" + std::to_string(opt.frontier_bpc_fallback_min_seconds)
+        + ", frontier_bpc_fallback_max_intervals=" + std::to_string(opt.frontier_bpc_fallback_max_intervals)
         + ", frontier_adaptive_split=" + std::string(opt.frontier_adaptive_split ? "true" : "false")
         + ", frontier_adaptive_max_depth=" + std::to_string(opt.frontier_adaptive_max_depth)
         + ", frontier_adaptive_min_width=" + std::to_string(opt.frontier_adaptive_min_width)
@@ -9918,7 +9964,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             << "|vehicle_indexed_audit="
             << (opt.vehicle_indexed_relaxation_audit ? 1 : 0)
             << "|vehicle_transfer_flow="
-            << (opt.vehicle_indexed_transfer_flow ? 1 : 0);
+            << (opt.vehicle_indexed_transfer_flow ? 1 : 0)
+            << "|v20_safe_relaxation_cuts="
+            << (opt.v20_safe_relaxation_cuts ? 1 : 0);
         return key.str();
     };
     auto computeInventoryRelaxation =
@@ -9964,7 +10012,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     opt.pickup_drop_transfer_cap_flow,
                     operation_budget_enabled,
                     vehicle_indexed_enabled,
-                    vehicle_transfer_enabled);
+                    vehicle_transfer_enabled,
+                    opt.v20_safe_relaxation_cuts);
             };
             auto relaxationLb =
                 [&](const ebrp::GiniIntervalInventoryRelaxationBound& bound) {
@@ -11478,6 +11527,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
 
     if (!focus_only_effective && opt.frontier_final_closure &&
         (opt.solve_time_limit <= 0.0 || remainingSeconds() > 0.0)) {
+        const bool bpc_fallback_controlled =
+            opt.frontier_bpc_fallback_mode != "off";
         std::vector<char> final_deferred(interval_records.size(), 0);
         auto collectFinalClosureIndices = [&]() {
             std::vector<int> indices;
@@ -11498,6 +11549,23 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                       [&](int lhs, int rhs) {
                           const FrontierIntervalRecord& a = interval_records[lhs];
                           const FrontierIntervalRecord& b = interval_records[rhs];
+                          if (bpc_fallback_controlled) {
+                              const double alb = a.lower_bound_valid
+                                  ? a.lower_bound : std::max(0.0, a.lo);
+                              const double blb = b.lower_bound_valid
+                                  ? b.lower_bound : std::max(0.0, b.lo);
+                              if (opt.frontier_bpc_fallback_mode == "best-bound" &&
+                                  std::fabs(alb - blb) > 1e-10) {
+                                  return alb < blb;
+                              }
+                              const double agap = std::max(0.0, result.upper_bound - alb);
+                              const double bgap = std::max(0.0, result.upper_bound - blb);
+                              if (std::fabs(agap - bgap) > 1e-10) return agap > bgap;
+                              const double aw = a.hi - a.lo;
+                              const double bw = b.hi - b.lo;
+                              if (std::fabs(aw - bw) > 1e-12) return aw > bw;
+                              return lhs < rhs;
+                          }
                           const double agap = a.lower_bound_valid
                               ? std::max(0.0, result.upper_bound - a.lower_bound)
                               : std::numeric_limits<double>::infinity();
@@ -11517,12 +11585,23 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.notes.push_back("final closure phase enabled: intervals="
             + std::to_string(final_indices.size())
             + ", max_nodes=" + std::to_string(std::max(1, opt.frontier_final_nodes))
-            + ", scheduling=smallest_gap_contribution_first"
+            + ", scheduling=" + (bpc_fallback_controlled
+                ? ("bpc_fallback_" + opt.frontier_bpc_fallback_mode)
+                : std::string("smallest_gap_contribution_first"))
+            + ", fallback_max_intervals="
+            + std::to_string(std::max(0, opt.frontier_bpc_fallback_max_intervals))
             + ", objective_cutoff=" + std::to_string(result.upper_bound));
 
         int final_attempt = 0;
         while (!final_indices.empty() &&
                (opt.solve_time_limit <= 0.0 || remainingSeconds() > 0.0)) {
+            if (bpc_fallback_controlled &&
+                opt.frontier_bpc_fallback_max_intervals > 0 &&
+                final_attempt >= opt.frontier_bpc_fallback_max_intervals) {
+                result.notes.push_back("BPC fallback final closure stopped after max intervals="
+                    + std::to_string(opt.frontier_bpc_fallback_max_intervals));
+                break;
+            }
             const int idx = final_indices.front();
             if (idx < 0 || idx >= static_cast<int>(interval_records.size())) break;
             FrontierIntervalRecord& record = interval_records[idx];

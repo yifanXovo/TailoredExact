@@ -92,6 +92,11 @@ struct SolveOptions {
     bool vehicle_indexed_operation_relaxation = true;
     bool vehicle_indexed_relaxation_audit = false;
     bool vehicle_indexed_transfer_flow = true;
+    bool v20_safe_relaxation_cuts = true;
+    std::string frontier_bpc_fallback_mode = "off";
+    double frontier_bpc_fallback_reserve_fraction = 0.0;
+    double frontier_bpc_fallback_min_seconds = 0.0;
+    int frontier_bpc_fallback_max_intervals = 0;
     bool support_duration_pruning = true;
     bool pricing_completion_lb_pruning = false;
     bool route_mask_support_duration_pruning = true;
