@@ -1,19 +1,36 @@
 # Relaxation Plateau Diagnosis
 
-The new V20/M3 stress rows and the V12 M1 300-second row are not primal-quality
-failures. They have verified incumbents but positive gaps because the valid
-relaxation portfolio does not yet fathom all final intervals.
+## Regenerated V12
 
-Observed pattern:
+V12 M2 remains certified with the original paper-core 300s command and native
+HGA-TGBC UB:
 
-- bound time dominates pricing/master time;
-- route-pool and local re-decode repair do not improve the already strong UB;
-- open intervals remain with lower bounds below the cutoff;
-- no diagnostic or archive incumbent is used as lower-bound evidence.
+- objective/LB/UB: `0.718504070755`
+- certificate: relaxation-only full-frontier certificate
+- unresolved intervals: `0`
+- pricing calls: `0`
 
-Next target:
+V12 M1 now certifies under a 1200s paper-core run:
 
-- stronger vehicle-indexed capacity/flow cuts;
-- better interval-specific relaxation variant ordering;
-- relaxation cache reuse across compatible child intervals;
-- station residual cover cuts for high-imbalance V20 intervals.
+- objective/LB/UB: `0.357200583208`
+- runtime: `474.6660521s`
+- bound time: `460.8823549s`
+- pricing calls: `0`
+- certificate: relaxation-only full-frontier certificate
+
+The 300s V12 M1 rows remain noncertified, so the closure is time-budget
+sensitive but no longer structurally blocked.
+
+## V20/M3
+
+All six hard-generated V20/M3 rows remain noncertified. The new continuous
+vehicle-indexed relaxation is active in these rows, but the relaxation lower
+bounds still do not reach the verified incumbent cutoffs. The best observed
+V20/M3 improvement is `high_imbalance_seed3202`, whose gap decreased from about
+`0.12395` in the previous stress summary to `0.10008` at 300s and `0.08167` at
+1200s.
+
+The next bottleneck is stronger large-instance-valid lower bounds. Since
+route-mask enumeration is not certifying for V20/M3, future work should target
+stronger vehicle-indexed flow/capacity cuts, station residual covers, and
+deterministic parallel relaxation.
