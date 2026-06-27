@@ -1093,6 +1093,34 @@ std::string resultToJson(const SolveResult& input) {
         << result.vehicle_indexed_operation_budget_constraints << ",\n";
     out << "  \"vehicle_indexed_relaxation_time_seconds\": "
         << result.vehicle_indexed_relaxation_time_seconds << ",\n";
+    out << "  \"v20_cover_candidate_subsets_tested\": "
+        << result.v20_cover_candidate_subsets_tested << ",\n";
+    out << "  \"v20_cover_cuts_added\": "
+        << result.v20_cover_cuts_added << ",\n";
+    out << "  \"v20_cover_max_size_used\": "
+        << result.v20_cover_max_size_used << ",\n";
+    out << "  \"v20_cover_separation_time_seconds\": "
+        << result.v20_cover_separation_time_seconds << ",\n";
+    out << "  \"station_residual_cover_cuts_enabled\": "
+        << (result.station_residual_cover_cuts_enabled ? "true" : "false") << ",\n";
+    out << "  \"station_residual_domains_tightened_count\": "
+        << result.station_residual_domains_tightened_count << ",\n";
+    out << "  \"station_residual_domain_width_before\": "
+        << result.station_residual_domain_width_before << ",\n";
+    out << "  \"station_residual_domain_width_after\": "
+        << result.station_residual_domain_width_after << ",\n";
+    out << "  \"station_residual_cover_cuts_added\": "
+        << result.station_residual_cover_cuts_added << ",\n";
+    out << "  \"station_residual_cover_time_seconds\": "
+        << result.station_residual_cover_time_seconds << ",\n";
+    out << "  \"large_compact_flow_relaxation\": \""
+        << jsonEscape(result.large_compact_flow_relaxation) << "\",\n";
+    out << "  \"large_compact_flow_arc_variables\": "
+        << result.large_compact_flow_arc_variables << ",\n";
+    out << "  \"large_compact_flow_constraints\": "
+        << result.large_compact_flow_constraints << ",\n";
+    out << "  \"large_compact_flow_time_seconds\": "
+        << result.large_compact_flow_time_seconds << ",\n";
     out << "  \"vehicle_transfer_flow_variables\": "
         << result.vehicle_transfer_flow_variables << ",\n";
     out << "  \"vehicle_transfer_depot_unload_variables\": "

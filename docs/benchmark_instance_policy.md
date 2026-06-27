@@ -71,3 +71,19 @@ New relaxation-bound round outputs classify these rows as
 `hard_generated_v20_m3`. Any older summary that labelled them
 `historical_target` should be treated as a metadata bug, not as a benchmark
 claim.
+
+## Relaxation Closure Round Metadata
+
+The `results/relaxation_closure_round/` V20/M3 rows keep the same policy:
+
+- `instance_scope=hard_generated_v20_m3`;
+- route-mask all-subset enumeration is not certifying;
+- no V20/M3 result is a historical paper target;
+- noncertified rows are lower-bound stress diagnostics unless all original
+  certificate fields are satisfied.
+
+The V12 rows in the same result directory use regenerated engineering candidate
+files:
+
+- `reference/regen_candidate_V12_M1_average.txt`;
+- `reference/regen_candidate_V12_M2_average.txt`.

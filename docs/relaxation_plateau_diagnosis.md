@@ -34,3 +34,34 @@ The next bottleneck is stronger large-instance-valid lower bounds. Since
 route-mask enumeration is not certifying for V20/M3, future work should target
 stronger vehicle-indexed flow/capacity cuts, station residual covers, and
 deterministic parallel relaxation.
+
+## Relaxation Closure Round Update
+
+The follow-up relaxation-closure round confirms that lower-bound closure remains
+the active bottleneck.
+
+V12 M1:
+
+- canonical 300s: LB `0.332675660948`, UB `0.357200583208`, gap
+  `0.0686586848205`;
+- critical pre-split 300s: LB `0.329549359470`, gap `0.0774109143105`, worse
+  than canonical scheduling;
+- 2-worker 300s: same LB/gap as canonical scheduling;
+- 600s: certified at objective `0.357200583208` after `481.106s`;
+- BPC fallback 300s: one node and one pricing call, but no exact closure and a
+  weaker LB `0.331296710948`.
+
+V20/M3:
+
+- multi-station route-duration cover cuts are valid but inactive under current
+  `T=3600` stress data;
+- station residual cuts add safe domain evidence but are not the main driver;
+- `mip-light` compact-flow relaxation materially improves three of six 300s
+  stress gaps: `high_imbalance_seed3201`, `high_imbalance_seed3202`, and
+  `tight_T_seed3101`;
+- `high_imbalance_seed3202_miplight_1200s` reaches gap `0.0317627113992`,
+  improving on the previous 1200s gap `0.081673871528`.
+
+The next bottleneck is per-interval relaxation variant selection. `mip-light`
+is strong on high-imbalance rows but weakens moderate rows and `tight_T_seed3102`
+in short runs.

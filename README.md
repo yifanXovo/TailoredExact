@@ -29,6 +29,8 @@ V20-safe relaxation and controlled BPC fallback examples:
 ```powershell
 build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --input reference\hard_stress\V20_M3\high_imbalance_seed3202.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-intervals 3 --v20-safe-relaxation-cuts true --out results\relaxation_bound_round\raw\high_imbalance_seed3202_improved_relax_300s.json
 
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --input reference\hard_stress\V20_M3\high_imbalance_seed3202.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-intervals 3 --v20-safe-relaxation-cuts true --v20-cover-cuts true --v20-cover-max-size 4 --station-residual-cover-cuts true --large-compact-flow-relaxation mip-light --route-mask-max-v 12 --out results\relaxation_closure_round\raw\high_imbalance_seed3202_miplight_300s.json
+
 build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core --input reference\regen_candidate_V12_M1_average.txt --lambda 0.15 --T 3600 --time-limit 300 --frontier-intervals 3 --frontier-bpc-fallback-mode controlling-intervals --frontier-bpc-fallback-reserve-fraction 0.30 --frontier-bpc-fallback-min-seconds 90 --frontier-bpc-fallback-max-intervals 2 --frontier-final-nodes 63 --out results\relaxation_bound_round\raw\v12_m1_bpc_fallback_300s.json
 ```
 
@@ -37,6 +39,18 @@ duration-cover, load-balance, and transfer-cap necessary conditions without
 complete route-mask enumeration. These are lower-bound-only cuts. BPC fallback
 uses the existing exact-pricing closure guards; incomplete fallback rows remain
 noncertified.
+
+Additional lower-bound and scheduling options:
+
+- `--v20-cover-cuts true --v20-cover-max-size 4 --v20-cover-max-cuts 200`;
+- `--station-residual-cover-cuts true`;
+- `--large-compact-flow-relaxation off|lp|mip-light`;
+- `--frontier-pre-split-critical true --frontier-critical-max-depth <N>`;
+- `--frontier-relaxation-parallel true --frontier-relaxation-workers <N>`.
+
+The `mip-light` compact-flow relaxation is V20-safe but not currently a
+universal default: it improves high-imbalance rows and one tight-T row, while
+LP remains better on moderate rows in the current stress suite.
 
 ## Exact-Phase UB Tracing
 

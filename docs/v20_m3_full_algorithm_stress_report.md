@@ -37,3 +37,23 @@ Recommended next step: another targeted relaxation round, not broad benchmark
 testing. Candidate work includes stronger station residual covers, vehicle flow
 cover cuts, deterministic parallel interval relaxation, and a sharper policy for
 when to stop splitting and run BPC.
+
+## Relaxation Closure Round Update
+
+The next round added V20-safe multi-station cover cuts, station residual domain
+cuts, and an optional compact-flow relaxation.
+
+| case | previous 300s gap | best new gap | row |
+|---|---:|---:|---|
+| `high_imbalance_seed3201` | 0.122744236967 | 0.0682096293371 | `miplight_300s` |
+| `high_imbalance_seed3202` | 0.100084871258 | 0.0544001976401 | `miplight_300s` |
+| `tight_T_seed3101` | 0.968587506517 | 0.333333333333 | `miplight_300s` |
+| `tight_T_seed3102` | 0.218955510650 | 0.168318012854 | `lp_1200s` |
+
+The `high_imbalance_seed3202_miplight_1200s` row ends with LB
+`1.69375051373`, UB `1.74931345205`, and gap `0.0317627113992`.
+
+The compact-flow `mip-light` variant is the strongest new V20 lower-bound
+component, but it is not uniformly dominant. It worsens the moderate rows in
+300s. BPC fallback remains diagnostic: it either does not trigger before the
+relaxation budget is consumed or does not close exact pricing.

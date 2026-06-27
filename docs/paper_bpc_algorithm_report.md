@@ -922,3 +922,27 @@ evidence.
 All optimal rows in `results/relaxation_bound_round/raw` pass
 `scripts/audit_bpc_certificate.py --fail-on-error`. V20/M3 rows are labelled
 `hard_generated_v20_m3` and remain noncertified.
+
+## Relaxation Closure Round
+
+This round targeted lower-bound closure after native HGA-TGBC made primal UB
+quality nonbinding on regenerated V12 M1/M2. New paper-core options add
+multi-station V20 cover-cut separation, station residual objective-cutoff domain
+cuts, optional compact-flow relaxation (`off|lp|mip-light`), frontier
+pre-split controls, and explicit relaxation worker aliases.
+
+| instance | row | status | LB | UB | gap |
+|---|---|---:|---:|---:|---:|
+| V4 smoke | 30s | optimal | 0 | 0 | 0 |
+| V12 M2 regenerated | paper-core 300s | optimal | 0.718504070755 | 0.718504070755 | 0 |
+| V12 M1 regenerated | paper-core 300s | not closed | 0.332675660948 | 0.357200583208 | 0.0686586848205 |
+| V12 M1 regenerated | paper-core 600s | optimal | 0.357200583208 | 0.357200583208 | 0 |
+| V20/M3 high_imbalance_seed3202 | `mip-light` 300s | not closed | 1.65415045452 | 1.74931345205 | 0.0544001976401 |
+| V20/M3 high_imbalance_seed3202 | `mip-light` 1200s | not closed | 1.69375051373 | 1.74931345205 | 0.0317627113992 |
+
+The `mip-light` compact-flow relaxation reduces three of six V20/M3 300s gaps
+materially. Multi-station cover cuts are valid but inactive on the current
+stress suite. BPC fallback remains diagnostic because it does not improve bounds
+after the relaxation changes and can hurt V12 M1 by displacing relaxation time.
+
+Raw results and audit output are in `results/relaxation_closure_round/`.
