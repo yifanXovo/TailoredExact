@@ -14,8 +14,8 @@ cmake --build build -j
 Fallback used on machines without CMake:
 
 ```powershell
-g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluator.cpp src/Result.cpp src/Bounds.cpp src/ColumnPool.cpp src/TailoredExact.cpp src/Pricing.cpp src/Cuts.cpp src/Branching.cpp src/Master.cpp src/ColumnGeneration.cpp src/CplexBaseline.cpp src/Logger.cpp src/main.cpp -o build/ExactEBRP.exe
-g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluator.cpp src/Result.cpp src/Bounds.cpp src/ColumnPool.cpp src/TailoredExact.cpp src/Pricing.cpp src/Cuts.cpp src/Branching.cpp src/Master.cpp src/ColumnGeneration.cpp src/CplexBaseline.cpp src/Logger.cpp src/compare_main.cpp -o build/ExactEBRPCompare.exe
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluator.cpp src/Result.cpp src/Bounds.cpp src/ColumnPool.cpp src/TailoredExact.cpp src/Pricing.cpp src/Cuts.cpp src/Branching.cpp src/Master.cpp src/ColumnGeneration.cpp src/CplexBaseline.cpp src/hga_tgbc/HgaTgbcGreedy.cpp src/HgaTgbcRunner.cpp src/Logger.cpp src/main.cpp -o build/ExactEBRP.exe
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluator.cpp src/Result.cpp src/Bounds.cpp src/ColumnPool.cpp src/TailoredExact.cpp src/Pricing.cpp src/Cuts.cpp src/Branching.cpp src/Master.cpp src/ColumnGeneration.cpp src/CplexBaseline.cpp src/hga_tgbc/HgaTgbcGreedy.cpp src/HgaTgbcRunner.cpp src/Logger.cpp src/compare_main.cpp -o build/ExactEBRPCompare.exe
 ```
 
 ## BPC Example
@@ -23,6 +23,21 @@ g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluat
 ```powershell
 build\ExactEBRP.exe --method gcap-frontier --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --time-limit 30 --frontier-intervals 3 --frontier-retry-passes 1 --frontier-final-closure true --frontier-final-nodes 31 --gcap-pricing-columns 4 --column-dominance true --column-dominance-mode exact --projection-bound true --penalty-domain-tightening true --out results\optimization_update\raw\smoke_gcap_frontier_full.json
 ```
+
+## Exact-Phase UB Tracing
+
+Paper-core runs can write a verifier-gated incumbent event log:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core `
+  --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 `
+  --time-limit 300 --ub-event-log results\exact_primal_stress_round\ub_events\v12_m2.ub_events.csv `
+  --out results\exact_primal_stress_round\raw\v12_m2.json
+```
+
+The `paper-bpc-core` preset keeps incumbents as UB-only evidence. It now traces
+route-pool incumbent recombination and a deterministic local re-decode repair
+pass. Disable the latter with `--exact-phase-local-redecode-repair false`.
 
 ## Paper Core Scope
 
@@ -82,7 +97,7 @@ does not prove `certified_original_problem=true`.
 - `--route-pool-max-columns-per-vehicle N`: cap stored route-pool columns per vehicle after projection dominance.
 - `--pickup-drop-compat-flow true|false`: strengthen the inventory/route/Gini relaxation with pickup-to-drop compatibility flow variables when pairs can be safely screened by route-duration lower bounds.
 - `--pickup-drop-transfer-cap-flow true|false`: add safe quantity upper bounds to pickup-drop transfer variables from travel/handling lower bounds and capacities.
-- `--primal-heuristic none|greedy|hga-tgbc|best-of-all`: generate a verifier-gated route-plan upper bound. `paper-bpc-core` defaults to deterministic seeded `hga-tgbc`; this replaces arbitrary result-directory archive scanning as the paper-core default UB source. The current `hga-tgbc` path includes compact TGBC re-decode, decoded-operation guided education, and a verifier-gated quantity beam over supply-demand transfer fragments.
+- `--primal-heuristic none|greedy|hga-tgbc|best-of-all`: generate a verifier-gated route-plan upper bound. `paper-bpc-core` defaults to deterministic seeded native HGA-TGBC; this replaces arbitrary result-directory archive scanning as the paper-core default UB source. The native path preserves the migrated TGBC decoder, route repair, route-inheritance crossover, ordered-separator crossover, mutation, guided education, compaction, and decode-cache components, and accepts only verifier-passed complete route plans.
 - `--primal-heuristic-seconds <seconds> --primal-heuristic-seed <int> --primal-heuristic-runs <int>`: control the reproducible primal heuristic budget and seed.
 - `--heuristic-candidates-csv <path>`: write every verifier-checked primal heuristic candidate with objective components, route counts, operation totals, route durations, runtime, and accepted-as-best status. This is useful for auditing HGA/TGBC-style incumbent quality without giving any lower-bound credit to the heuristic.
 - `--bpc-incumbent auto|best-of-all`: run a bounded verified incumbent portfolio and select the best true-objective route plan as an upper bound.

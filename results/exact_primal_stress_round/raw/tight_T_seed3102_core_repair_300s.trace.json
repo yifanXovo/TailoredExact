@@ -1,0 +1,37 @@
+{
+  "trace_schema": "paper_bpc_core_plateau_trace_v1",
+  "trace_scope": "frontier_interval_ledger_with_available_aggregate_tree_and_pricing_stats",
+  "instance_name": "tight_T_seed3102.txt",
+  "input_path": "E:\\codes\\ExactEBRP\\reference\\hard_stress\\V20_M3\\tight_T_seed3102.txt",
+  "algorithm_preset": "paper-bpc-core",
+  "method": "gcap-frontier",
+  "status": "gcap_frontier_not_closed",
+  "objective": 1.57552584458,
+  "lower_bound": 1.39118663149,
+  "upper_bound": 1.57552584458,
+  "gap": 0.117001706903,
+  "certified_original_problem": false,
+  "full_certificate_rejection_reason": "unresolved_intervals",
+  "runtime_breakdown": {"bound_time_seconds": 324.0174684, "route_mask_time_seconds": 0, "master_time_seconds": 0, "pricing_time_seconds": 0},
+  "controlling_interval": {"id": 4, "range": "[0.158333,0.316667]", "lower_bound": 1.39118663149, "source": "inventory_route_gini_relaxation"},
+  "branch_price_node_trace_available": false,
+  "branch_price_node_trace_limitation": "no branch-price tree started for any active interval before the time/reserve stop",
+  "aggregate_tree": {"nodes": 0, "open_nodes": 2, "pricing_closed_nodes": 0, "columns": 0, "cuts_added": 0},
+  "pricing_call_trace_available": false,
+  "pricing_call_trace_limitation": "no branch-price pricing call occurred for any active interval before the time/reserve stop",
+  "aggregate_pricing": {"pricing_calls": 0, "pricing_completed_exactly": true, "pricing_closure_certified_exact": false, "pricing_closure_status": "not_run", "pricing_best_reduced_cost_any": 0, "pricing_remaining_negative_rc": 0, "duplicate_negative_projections": 0, "blocked_by_duplicate_projection": false, "completion_lb_pruned_labels": 0, "required_closure_pruned_labels": 0, "label_dominance_comparisons": 0, "label_dominance_pruned_labels": 0, "label_dominance_cross_pickup_pruned_labels": 0, "label_dominance_inactive_entries_skipped": 0, "label_dominance_bucket_compactions": 0, "label_dominance_compacted_entries": 0, "operation_dp_dominance_pruned_states": 0},
+  "interval_trace_csv": "results\\exact_primal_stress_round\\raw\\tight_T_seed3102_core_repair_300s.intervals.csv",
+  "intervals": [
+    {"interval_id": 0, "gamma_L": 0, "gamma_U": 0.316666666667, "current_interval_lower_bound": 1.38494952823, "incumbent_upper_bound": 1.57552584458, "status": "replaced_by_children", "reason": "split_parent_replaced", "certificate_basis": "unresolved", "requires_pricing_closure": false, "pricing_closure_available": false, "interval_bound_valid": true, "bpc_nodes": 0, "open_nodes": 1, "generated_columns": 0, "cuts": 0, "pricing_calls": 0, "pricing_time_seconds": 0, "rmp_solve_time_seconds": 0, "relaxation_time_seconds": 104.2465846, "lower_bound_source": "inventory_route_gini_relaxation", "lower_bound_sources": "gamma_floor|cheap_projection_bound|inventory_route_gini_relaxation"},
+    {"interval_id": 1, "gamma_L": 0.316666666667, "gamma_U": 0.633333333333, "current_interval_lower_bound": 1.49436243824, "incumbent_upper_bound": 1.57552584458, "status": "unresolved", "reason": "tree_not_started_before_time_limit_or_reserve", "certificate_basis": "unresolved", "requires_pricing_closure": false, "pricing_closure_available": false, "interval_bound_valid": true, "bpc_nodes": 0, "open_nodes": 1, "generated_columns": 0, "cuts": 0, "pricing_calls": 0, "pricing_time_seconds": 0, "rmp_solve_time_seconds": 0, "relaxation_time_seconds": 93.7174423, "lower_bound_source": "inventory_route_gini_relaxation", "lower_bound_sources": "gamma_floor|cheap_projection_bound|inventory_route_gini_relaxation"},
+    {"interval_id": 2, "gamma_L": 0.633333333333, "gamma_U": 0.95, "current_interval_lower_bound": 1.57552584458, "incumbent_upper_bound": 1.57552584458, "status": "bound_fathomed", "reason": "inventory_route_gini_relaxation", "certificate_basis": "inventory_route_gini_relaxation_fathomed", "requires_pricing_closure": false, "pricing_closure_available": false, "interval_bound_valid": true, "bpc_nodes": 0, "open_nodes": 0, "generated_columns": 0, "cuts": 0, "pricing_calls": 0, "pricing_time_seconds": 0, "rmp_solve_time_seconds": 0, "relaxation_time_seconds": 0.0003724, "lower_bound_source": "inventory_route_gini_relaxation", "lower_bound_sources": "gamma_floor|inventory_route_gini_relaxation"},
+    {"interval_id": 3, "gamma_L": 0, "gamma_U": 0.158333333333, "current_interval_lower_bound": 1.57552584458, "incumbent_upper_bound": 1.57552584458, "status": "bound_fathomed", "reason": "inventory_route_gini_relaxation", "certificate_basis": "inventory_route_gini_relaxation_fathomed", "requires_pricing_closure": false, "pricing_closure_available": false, "interval_bound_valid": true, "bpc_nodes": 0, "open_nodes": 0, "generated_columns": 0, "cuts": 0, "pricing_calls": 0, "pricing_time_seconds": 0, "rmp_solve_time_seconds": 0, "relaxation_time_seconds": 27.3016403, "lower_bound_source": "inventory_route_gini_relaxation", "lower_bound_sources": "gamma_floor|adaptive_split_inherited_parent_lb|inventory_route_gini_relaxation"},
+    {"interval_id": 4, "gamma_L": 0.158333333333, "gamma_U": 0.316666666667, "current_interval_lower_bound": 1.39118663149, "incumbent_upper_bound": 1.57552584458, "status": "unresolved", "reason": "tree_not_started_before_time_limit_or_reserve", "certificate_basis": "unresolved", "requires_pricing_closure": false, "pricing_closure_available": false, "interval_bound_valid": true, "bpc_nodes": 0, "open_nodes": 1, "generated_columns": 0, "cuts": 0, "pricing_calls": 0, "pricing_time_seconds": 0, "rmp_solve_time_seconds": 0, "relaxation_time_seconds": 98.7514288, "lower_bound_source": "inventory_route_gini_relaxation", "lower_bound_sources": "gamma_floor|adaptive_split_inherited_parent_lb|inventory_route_gini_relaxation"}
+  ],
+  "branch_price_nodes": [
+
+  ],
+  "pricing_calls": [
+
+  ]
+}

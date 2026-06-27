@@ -1119,6 +1119,38 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.progress_log_path) << "\",\n";
     out << "  \"progress_checkpoints_written\": "
         << result.progress_checkpoints_written << ",\n";
+    out << "  \"ub_event_log_path\": \""
+        << jsonEscape(result.ub_event_log_path) << "\",\n";
+    out << "  \"initial_heuristic_UB\": " << result.initial_heuristic_UB << ",\n";
+    out << "  \"final_UB\": " << result.final_UB << ",\n";
+    out << "  \"ub_improved_after_initial_heuristic\": "
+        << (result.ub_improved_after_initial_heuristic ? "true" : "false") << ",\n";
+    out << "  \"ub_update_count_after_initial\": "
+        << result.ub_update_count_after_initial << ",\n";
+    out << "  \"first_ub_improvement_time\": "
+        << result.first_ub_improvement_time << ",\n";
+    out << "  \"last_ub_improvement_time\": "
+        << result.last_ub_improvement_time << ",\n";
+    out << "  \"best_ub_source_after_initial\": \""
+        << jsonEscape(result.best_ub_source_after_initial) << "\",\n";
+    out << "  \"exact_phase_primal_modules_called\": \""
+        << jsonEscape(result.exact_phase_primal_modules_called) << "\",\n";
+    out << "  \"route_pool_incumbent_calls\": "
+        << result.route_pool_incumbent_calls << ",\n";
+    out << "  \"route_pool_incumbent_successes\": "
+        << result.route_pool_incumbent_successes << ",\n";
+    out << "  \"relaxation_guided_rounding_calls\": "
+        << result.relaxation_guided_rounding_calls << ",\n";
+    out << "  \"relaxation_guided_rounding_successes\": "
+        << result.relaxation_guided_rounding_successes << ",\n";
+    out << "  \"bpc_column_pool_repair_calls\": "
+        << result.bpc_column_pool_repair_calls << ",\n";
+    out << "  \"bpc_column_pool_repair_successes\": "
+        << result.bpc_column_pool_repair_successes << ",\n";
+    out << "  \"local_redecode_repair_calls\": "
+        << result.local_redecode_repair_calls << ",\n";
+    out << "  \"local_redecode_repair_successes\": "
+        << result.local_redecode_repair_successes << ",\n";
     out << "  \"bpc_trace_json\": \""
         << jsonEscape(result.bpc_trace_json_path) << "\",\n";
     out << "  \"bpc_interval_trace_csv\": \""

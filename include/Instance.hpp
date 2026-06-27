@@ -108,6 +108,8 @@ struct SolveOptions {
     double primal_heuristic_seconds = 10.0;
     unsigned primal_heuristic_seed = 20260626u;
     int primal_heuristic_runs = 12;
+    bool exact_phase_local_redecode_repair = false;
+    double exact_phase_local_redecode_seconds = 10.0;
     std::string heuristic_candidates_csv;
     std::string large_instance_mode = "auto";
     std::string pricing_engine = "auto";
@@ -147,6 +149,7 @@ struct SolveOptions {
     double cg_dual_box_radius = 1.0;
     int cg_stabilization_max_nonimprove = 3;
     std::string progress_log_path;
+    std::string ub_event_log_path;
     double progress_interval_seconds = 0.0;
     std::string frontier_focus_interval_id = "auto";
     std::string frontier_focus_range;

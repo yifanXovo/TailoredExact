@@ -26,6 +26,8 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Master.cpp
   src/ColumnGeneration.cpp
   src/CplexBaseline.cpp
+  src/hga_tgbc/HgaTgbcGreedy.cpp
+  src/HgaTgbcRunner.cpp
   src/Logger.cpp
 )
 

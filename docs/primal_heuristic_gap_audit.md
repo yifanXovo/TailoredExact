@@ -1,119 +1,93 @@
 # Primal Heuristic Gap Audit
 
-This round audits the paper-reproducible primal heuristic used by
-`--algorithm-preset paper-bpc-core`.
+This round replaces the earlier HGA-inspired derivative with a native
+HGA-TGBC migration from the sibling `Hybrid GA` implementation.
 
 ## Current Architecture
 
-Paper-core no longer enables arbitrary result-directory archive scanning by
-default. The default UB source is the deterministic, verifier-gated
-`--primal-heuristic hga-tgbc` path. The implementation now records all
-candidate route plans through `--heuristic-candidates-csv` and exports complete
-route JSON incumbents through `--export-incumbent`.
+`paper-bpc-core` still disables arbitrary result-directory archive scanning by
+default. The default paper UB source is the deterministic, verifier-gated
+`--primal-heuristic hga-tgbc` path.
 
-The current implementation contains:
+The `hga-tgbc` mode now runs the migrated native HGA-TGBC stack through
+`runHgaTgbcNative`:
 
-- deterministic greedy route-load starts;
-- randomized greedy starts with seeded station/vehicle choices;
-- a clean route-set chromosome layer with route repair;
-- route-inheritance and ordered-separator crossover over station sequences;
-- mutation by swap, relocate, reverse, and route shuffle;
-- target-greedy route truncation;
-- zero-operation compaction and re-verification;
-- a verifier-gated operation-portfolio bridge that reuses the existing
-  operation resize/swap route-load local search as a reproducible heuristic
-  candidate source.
-
-All accepted incumbents are complete route plans and pass the independent
-ExactEBRP verifier before they can update the UB.
-
-## Differences From Original HGA-TGBC
-
-The sibling HybridGA implementation contains a richer decoder and education
-stack than the current ExactEBRP integration:
-
-- `nGreedyLU_RA_compact_incremental` / compact TGBC decoding;
+- route-set population initialization and route repair;
+- TGBC compact full and incremental route-load decoders;
 - decode cache;
-- route-window guided education based on decoded operation roles;
-- deeper route inheritance and ordered-separator GA population management;
+- route-inheritance crossover;
+- ordered-separator crossover;
+- mutation;
+- guided education using decoded route information;
 - stagnation-controlled generations;
-- production local search candidates using decoded operation information.
+- zero-operation compaction through the native compact decoder.
 
-This round intentionally did not migrate debug scripts, old benchmark loops,
-or obsolete experiment scaffolding. The integration remains a clean derivative
-that exposes the necessary deterministic seed, runtime, candidate summary, and
-verifier-gated route export controls.
+The adapter converts ExactEBRP instances into the native HGA data structures,
+runs the native algorithm with the default production rates from HybridGA, then
+converts the decoded operations back into ExactEBRP route plans. A candidate can
+update the UB only after the independent ExactEBRP verifier accepts the complete
+route plan.
 
-## Objective Monotonicity Audit
+## Migration Scope
 
-The existing operation-level local search accepts a candidate only if
-`trial.objective < best.objective - 1e-10`, and every candidate is rebuilt into
-a full route plan and verified before acceptance. No acceptance bug was found
-in this path. Apparent "improved" log confusion is caused by comparing labels
-from different starts or from route-sequence candidates that are later rejected
-or dominated by the operation-portfolio bridge.
+Migrated production-relevant files:
 
-## V12 UB Gap
+- `HybridGA.h`;
+- `newGreedy.cpp`;
+- `GreedyMethods.h`;
+- `GreedyExtensions.h`;
+- `AVLCalculator.h`;
+- `Solvers.h`;
+- `InstanceData.h`.
 
-On regenerated V12 M2, the improved reproducible heuristic reached
-`0.745475`, improving the prior paper heuristic UB of approximately
-`0.756165`, but still missing the diagnostic archive UB
-`0.719065249476` and the requested minimum target `0.735000`.
+The migration intentionally excludes standalone benchmark loops, old debug
+drivers, local IDE files, and obsolete experiment scaffolding. One native
+generation-trace print block is suppressed in the copied header; this changes
+only console output, not algorithm state transitions.
 
-On regenerated V12 M1, the improved reproducible heuristic reached `0.366800`,
-which is weaker than the known archive/previous certified UB
-`0.357200583208` and above the requested minimum target `0.360000`.
+## Objective And Legality Audit
 
-The best candidates in both V12 cases came from the verifier-gated
-operation-portfolio bridge, not from the route-sequence GA. This indicates that
-the missing strength is primarily in the TGBC decoder and guided education,
-not in the certificate or verifier path.
+The native HGA candidate is rejected unless `verifySolution` passes. The V4,
+V12 M1, and V12 M2 migrated-HGA incumbents produced in this round all pass the
+verifier and are exported as complete route plans.
 
-## Implemented Improvements
+The earlier objective-log concern is not present in the native path used by
+`hga-tgbc`: the ExactEBRP bridge records only verifier-passed complete decoded
+solutions, and the best candidate is selected by true objective after
+verification. Diagnostic intermediate native population events are not used as
+accepted ExactEBRP incumbents.
 
-- Added `--heuristic-candidates-csv` for auditable candidate-level UB output.
-- Added clean HGA-style route-sequence population, crossover, mutation, repair,
-  truncation, compaction, and local education.
-- Fixed ordered-separator crossover so it cannot hang when truncated/repaired
-  parents contain different station sets.
-- Added the operation-portfolio bridge as a reproducible, verifier-gated UB
-  candidate source for `hga-tgbc` and `best-of-all`.
-- Expanded operation quantity polish over more randomized starts.
+## UB Results
 
-## Remaining Gap
+Using seed `20260626`, `--primal-heuristic-runs 24`, and a 60-second heuristic
+budget:
 
-The current reproducible heuristic is better than the prior paper heuristic on
-V12 M2, but it is not yet a faithful HGA-TGBC migration. The next targeted work
-should migrate the compact incremental TGBC decoder and decoded-operation
-guided education from `Hybrid GA/Hybrid GA/HybridGA.h` without importing the
-old debug and benchmark scaffolding.
+| Instance | Native HGA-TGBC UB | Verifier | Notes |
+| --- | ---: | --- | --- |
+| V4 smoke | 0.000000000000 | passed | exact zero smoke incumbent |
+| regenerated V12 M1 | 0.357200583208 | passed | matches the known good UB |
+| regenerated V12 M2 | 0.718504070755 | passed | improves the prior diagnostic archive UB 0.719065249476 |
 
-## TGBC Migration Follow-Up
+## BPC Observation
 
-The next migration pass implemented the missing production pieces directly in
-ExactEBRP:
+The V12 M2 paper-core observation run used the native HGA-TGBC incumbent and a
+600-second limit. It terminated in about 60.35 seconds with:
 
-- compact TGBC re-decode now carries inherited operation quantities from the
-  first decoded solution;
-- guided education now uses decoded route windows and operation roles to build
-  same-route, zero-tail, and cross-route relocation candidates;
-- the HGA-style population loop now uses a larger deterministic search budget
-  instead of the previous small 16-individual/18-generation cap;
-- a supply-demand quantity beam constructs complete transfer fragments, rebuilds
-  route plans through the existing feasible-route decoder, and accepts only
-  verifier-passed incumbents.
+- `certified_original_problem=true`;
+- `objective=lower_bound=upper_bound=0.718504070755`;
+- `unresolved_intervals=0`;
+- `invalid_bound_intervals=0`;
+- `open_nodes=0`;
+- `pricing_time_seconds=0`.
 
-The objective monotonicity audit remained clean: every accepted candidate is
-strictly better than the incumbent under the verifier-computed objective. The
-old bridge remains available as a candidate, but on regenerated V12 M2 it is no
-longer the best paper-reproducible UB.
+The UB did not need BPC-tree improvement in this run because the migrated HGA
+candidate was already strong enough for the vehicle-indexed relaxation
+portfolio to close the full improving Gini frontier. This is a relaxation-only
+frontier certificate, not heuristic lower-bound evidence.
 
-Final 60-second seeded tests:
+## Remaining Check
 
-- V12 M1 improved from `0.366799836582` to `0.362059778868`.
-- V12 M2 improved from `0.745474506024` to `0.721861135274`.
-
-The V12 M2 target `<= 0.724500` is now met without diagnostic archive scanning.
-V12 M1 is improved but still above the known diagnostic/archive value
-`0.357200583208`; the next optimization target is deeper multi-transfer
-education for M1 rather than certificate-guard work.
+The next broad benchmark should keep the native HGA path fixed and test whether
+larger regenerated variants retain verifier-passed incumbents and certificate
+closure. If a future instance does not close, the progress logs should separate
+UB weakness from relaxation-bound weakness before changing BPC logic.
