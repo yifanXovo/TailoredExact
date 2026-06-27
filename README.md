@@ -45,12 +45,34 @@ Additional lower-bound and scheduling options:
 - `--v20-cover-cuts true --v20-cover-max-size 4 --v20-cover-max-cuts 200`;
 - `--station-residual-cover-cuts true`;
 - `--large-compact-flow-relaxation off|lp|mip-light`;
+- `--large-compact-flow-connectivity true|false`;
+- `--service-operation-min-handling-cuts true|false`;
+- `--penalty-movement-lb-cuts true|false`;
+- `--relaxation-portfolio-mode fixed|adaptive|race`;
+- `--relaxation-portfolio-probe-seconds <seconds>`;
+- `--relaxation-portfolio-max-variants <N>`;
 - `--frontier-pre-split-critical true --frontier-critical-max-depth <N>`;
+- `--frontier-scheduling-mode default|v12-fast-close|adaptive-best-bound`;
 - `--frontier-relaxation-parallel true --frontier-relaxation-workers <N>`.
 
 The `mip-light` compact-flow relaxation is V20-safe but not currently a
 universal default: it improves high-imbalance rows and one tight-T row, while
 LP remains better on moderate rows in the current stress suite.
+
+Experimental paper-candidate adaptive portfolio:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-bpc-core-adaptive `
+  --input reference\regen_candidate_V12_M2_average.txt --lambda 0.15 --T 3600 `
+  --time-limit 300 --frontier-intervals 3 `
+  --out results\paper_candidate_relaxation_round\raw\v12_m2_adaptive_300s.json
+```
+
+`paper-bpc-core-adaptive` keeps native HGA-TGBC as the paper-reproducible UB
+source and keeps archive scanning disabled. It enables the adaptive relaxation
+portfolio as an auditable candidate configuration. Current V20 evidence is
+mixed, so canonical `paper-bpc-core` remains the paper-facing default unless a
+future selector beats the best fixed LP/mip-light variants consistently.
 
 ## Exact-Phase UB Tracing
 

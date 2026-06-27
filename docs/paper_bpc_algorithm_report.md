@@ -946,3 +946,43 @@ stress suite. BPC fallback remains diagnostic because it does not improve bounds
 after the relaxation changes and can hurt V12 M1 by displacing relaxation time.
 
 Raw results and audit output are in `results/relaxation_closure_round/`.
+
+## Paper-Candidate Relaxation Portfolio Round
+
+This round added an auditable adaptive relaxation portfolio candidate:
+
+```text
+--algorithm-preset paper-bpc-core-adaptive
+--relaxation-portfolio-mode fixed|adaptive|race
+```
+
+It also added proof-safe optional strengthening flags for compact-flow
+connectivity, service-operation minimum handling, and penalty movement lower
+bounds.  Transfer-subset capacity cuts are wired as a disabled future option;
+no such cuts are active in the current results.
+
+The V12 regression results are safe:
+
+| instance | row | status | LB | UB | gap | runtime |
+|---|---|---:|---:|---:|---:|---:|
+| V4 smoke | adaptive 30s | optimal | 0 | 0 | 0 | 0.751s |
+| V12 M2 regenerated | adaptive 300s | optimal | 0.718504070755 | 0.718504070755 | 0 | 204.997s |
+| V12 M1 regenerated | current 300s | not closed | 0.332675660948 | 0.357200583208 | 0.0686586848205 | 301.673s |
+| V12 M1 regenerated | adaptive 300s | not closed | 0.332675660948 | 0.357200583208 | 0.0686586848205 | 310.083s |
+| V12 M1 regenerated | adaptive 600s | optimal | 0.357200583208 | 0.357200583208 | 0 | 473.765s |
+
+The V20/M3 selector evidence is mixed and does not justify changing the
+paper-core default.  The adaptive rows preserve metadata
+`instance_scope=hard_generated_v20_m3`, but most 300s gaps are worse than the
+best previous fixed LP/mip-light rows.  Only `moderate_seed3302` shows a very
+small improvement over the previous best gap (`0.33021736845` to
+`0.329231102492`).  Therefore the round conclusion is conservative:
+
+- `paper-bpc-core` remains the canonical paper-facing command;
+- `paper-bpc-core-adaptive` is an experimental paper-candidate preset;
+- BPC fallback remains diagnostic/off by default;
+- the next useful target is a better per-interval budget/variant selector, not
+  broad benchmark testing.
+
+Raw results, certificate audit, and summaries are in
+`results/paper_candidate_relaxation_round/`.

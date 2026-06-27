@@ -1,0 +1,9 @@
+case,instance,instance_scope,best_previous_variant,best_previous_LB,UB,best_previous_gap,runtime,relaxation_mode,certified,controlling_interval_ids
+v12_m1,regen_candidate_V12_M1_average,regenerated_engineering,v12_m1_current_300s / v12_m1_default_600s,0.332675660948,0.357200583208,0.0686586848205,300.8282635,paper-core baseline,False at 300s; True in 600s row,
+v12_m2,regen_candidate_V12_M2_average,regenerated_engineering,canonical paper-core 300s,0.718504070755,0.718504070755,0,205.628,paper-core relaxation-only,True,
+high_imbalance_seed3201,high_imbalance_seed3201,hard_generated_v20_m3,high_imbalance_seed3201_miplight_300s,2.2767395659,2.44340319194,0.0682096293371,354.6246039,mip-light,False,
+high_imbalance_seed3202,high_imbalance_seed3202,hard_generated_v20_m3,high_imbalance_seed3202_miplight_1200s,1.69375051373,1.74931345205,0.0317627113992,1257.6784118,mip-light,False,
+tight_T_seed3101,tight_T_seed3101,hard_generated_v20_m3,tight_T_seed3101_miplight_300s,0.071501822756,0.107252734134,0.333333333333,309.2686376,mip-light,False,
+tight_T_seed3102,tight_T_seed3102,hard_generated_v20_m3,tight_T_seed3102_lp_1200s,0.49959505959,0.600704436685,0.168318012854,1220.5059292,lp,False,
+moderate_seed3301,moderate_seed3301,hard_generated_v20_m3,moderate_seed3301_relax300,0.0427477151184,0.0491525526647,0.130305288314,306.0706355,lp,False,
+moderate_seed3302,moderate_seed3302,hard_generated_v20_m3,moderate_seed3302_lp_fallback_300s,0.131033733249,0.195636206549,0.33021736845,311.5579534,lp,False,

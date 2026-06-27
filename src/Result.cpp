@@ -1121,6 +1121,44 @@ std::string resultToJson(const SolveResult& input) {
         << result.large_compact_flow_constraints << ",\n";
     out << "  \"large_compact_flow_time_seconds\": "
         << result.large_compact_flow_time_seconds << ",\n";
+    out << "  \"large_compact_flow_connectivity_enabled\": "
+        << (result.large_compact_flow_connectivity_enabled ? "true" : "false") << ",\n";
+    out << "  \"large_compact_flow_connectivity_variables\": "
+        << result.large_compact_flow_connectivity_variables << ",\n";
+    out << "  \"large_compact_flow_connectivity_constraints\": "
+        << result.large_compact_flow_connectivity_constraints << ",\n";
+    out << "  \"large_compact_flow_connectivity_time_seconds\": "
+        << result.large_compact_flow_connectivity_time_seconds << ",\n";
+    out << "  \"service_operation_min_handling_cuts_enabled\": "
+        << (result.service_operation_min_handling_cuts_enabled ? "true" : "false") << ",\n";
+    out << "  \"service_operation_min_handling_cuts_added\": "
+        << result.service_operation_min_handling_cuts_added << ",\n";
+    out << "  \"penalty_movement_lb_cuts_enabled\": "
+        << (result.penalty_movement_lb_cuts_enabled ? "true" : "false") << ",\n";
+    out << "  \"penalty_movement_required_units\": "
+        << result.penalty_movement_required_units << ",\n";
+    out << "  \"penalty_movement_lb_cuts_added\": "
+        << result.penalty_movement_lb_cuts_added << ",\n";
+    out << "  \"transfer_subset_capacity_cuts_enabled\": "
+        << (result.transfer_subset_capacity_cuts_enabled ? "true" : "false") << ",\n";
+    out << "  \"transfer_subset_capacity_cuts_added\": "
+        << result.transfer_subset_capacity_cuts_added << ",\n";
+    out << "  \"relaxation_portfolio_mode\": \""
+        << jsonEscape(result.relaxation_portfolio_mode) << "\",\n";
+    out << "  \"relaxation_variants_tried\": \""
+        << jsonEscape(result.relaxation_variants_tried) << "\",\n";
+    out << "  \"selected_relaxation_variant\": \""
+        << jsonEscape(result.selected_relaxation_variant) << "\",\n";
+    out << "  \"selected_variant_reason\": \""
+        << jsonEscape(result.selected_variant_reason) << "\",\n";
+    out << "  \"probe_time_seconds\": "
+        << result.relaxation_portfolio_probe_time_seconds << ",\n";
+    out << "  \"variant_bound_improvement\": "
+        << result.relaxation_portfolio_variant_bound_improvement << ",\n";
+    out << "  \"best_variant_bound\": "
+        << result.relaxation_portfolio_best_variant_bound << ",\n";
+    out << "  \"variants_skipped_reason\": \""
+        << jsonEscape(result.relaxation_portfolio_variants_skipped_reason) << "\",\n";
     out << "  \"vehicle_transfer_flow_variables\": "
         << result.vehicle_transfer_flow_variables << ",\n";
     out << "  \"vehicle_transfer_depot_unload_variables\": "
