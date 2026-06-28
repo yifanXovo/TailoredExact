@@ -89,6 +89,41 @@ Focused interval rows are diagnostic unless their coverage is safely merged
 into the full frontier ledger. The V20 certificate round did not obtain a V20
 global certificate; see `results\v20_certificate_round\final_report.md`.
 
+Exact interval cutoff oracle:
+
+```powershell
+build\ExactEBRP.exe --method interval-cutoff-oracle `
+  --input reference\hard_stress\V20_M3\high_imbalance_seed3202.txt `
+  --lambda 0.15 --T 3600 `
+  --interval-exact-cutoff-oracle compact-mip `
+  --interval-exact-cutoff-gamma-L 0.554166666667 `
+  --interval-exact-cutoff-gamma-U 0.573958333333 `
+  --interval-exact-cutoff-UB 1.74931345205 `
+  --interval-exact-cutoff-time-limit 3600 `
+  --interval-exact-cutoff-export-lp results\v20_exact_certificate_round\cplex\interval.lp `
+  --interval-exact-cutoff-result results\v20_exact_certificate_round\cplex\interval.sol
+```
+
+Oracle rows are interval-local evidence only. A proven infeasible oracle row can
+support a certificate only after `scripts\merge_interval_oracle_results.py`
+confirms exact full-frontier leaf coverage.
+
+V20 replication candidate preset:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-exact-v20-certificate `
+  --input reference\hard_stress\V20_M3\high_imbalance_seed3202.txt `
+  --lambda 0.15 --T 3600 --time-limit 1200 --frontier-intervals 3 `
+  --out results\v20_replication_round\raw\high_imbalance_seed3202.json
+```
+
+`paper-exact-v20-certificate` keeps native HGA-TGBC as a verifier-gated UB-only
+source, disables archive scanning, uses the fixed mip-light V20 relaxation
+portfolio with compact-flow connectivity, and leaves BPC fallback off by
+default. It is an exact portfolio candidate for the V20 stress suite; focused
+oracle rows still require a full-ledger merge audit before they can support any
+certificate.
+
 ## Exact-Phase UB Tracing
 
 Paper-core runs can write a verifier-gated incumbent event log:

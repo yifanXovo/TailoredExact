@@ -1173,6 +1173,46 @@ std::string resultToJson(const SolveResult& input) {
         << result.cutoff_feasibility_time_seconds << ",\n";
     out << "  \"cutoff_feasibility_status\": \""
         << jsonEscape(result.cutoff_feasibility_status) << "\",\n";
+    out << "  \"interval_exact_cutoff_oracle\": \""
+        << jsonEscape(result.interval_exact_cutoff_oracle) << "\",\n";
+    out << "  \"interval_exact_cutoff_attempted\": "
+        << (result.interval_exact_cutoff_attempted ? "true" : "false") << ",\n";
+    out << "  \"interval_exact_cutoff_gamma_L\": "
+        << result.interval_exact_cutoff_gamma_L << ",\n";
+    out << "  \"interval_exact_cutoff_gamma_U\": "
+        << result.interval_exact_cutoff_gamma_U << ",\n";
+    out << "  \"interval_exact_cutoff_UB\": "
+        << result.interval_exact_cutoff_UB << ",\n";
+    out << "  \"interval_exact_cutoff_epsilon\": "
+        << result.interval_exact_cutoff_epsilon << ",\n";
+    out << "  \"interval_exact_cutoff_runtime_seconds\": "
+        << result.interval_exact_cutoff_runtime_seconds << ",\n";
+    out << "  \"interval_exact_cutoff_solver_status\": \""
+        << jsonEscape(result.interval_exact_cutoff_solver_status) << "\",\n";
+    out << "  \"interval_exact_cutoff_certificate_basis\": \""
+        << jsonEscape(result.interval_exact_cutoff_certificate_basis) << "\",\n";
+    out << "  \"interval_exact_cutoff_proven_infeasible\": "
+        << (result.interval_exact_cutoff_proven_infeasible ? "true" : "false") << ",\n";
+    out << "  \"interval_exact_cutoff_feasible_improving\": "
+        << (result.interval_exact_cutoff_feasible_improving ? "true" : "false") << ",\n";
+    out << "  \"interval_exact_cutoff_timeout\": "
+        << (result.interval_exact_cutoff_timeout ? "true" : "false") << ",\n";
+    out << "  \"interval_exact_cutoff_best_bound\": "
+        << result.interval_exact_cutoff_best_bound << ",\n";
+    out << "  \"interval_exact_cutoff_objective\": "
+        << result.interval_exact_cutoff_objective << ",\n";
+    out << "  \"interval_exact_cutoff_gap\": "
+        << result.interval_exact_cutoff_gap << ",\n";
+    out << "  \"interval_exact_cutoff_nodes\": "
+        << result.interval_exact_cutoff_nodes << ",\n";
+    out << "  \"interval_exact_cutoff_lp_path\": \""
+        << jsonEscape(result.interval_exact_cutoff_lp_path) << "\",\n";
+    out << "  \"interval_exact_cutoff_solution_path\": \""
+        << jsonEscape(result.interval_exact_cutoff_solution_path) << "\",\n";
+    out << "  \"interval_exact_cutoff_log_path\": \""
+        << jsonEscape(result.interval_exact_cutoff_log_path) << "\",\n";
+    out << "  \"interval_exact_cutoff_scope\": \""
+        << jsonEscape(result.interval_exact_cutoff_scope) << "\",\n";
     out << "  \"interval_closure_mode\": \""
         << jsonEscape(result.interval_closure_mode) << "\",\n";
     out << "  \"interval_closure_variant_mode\": \""

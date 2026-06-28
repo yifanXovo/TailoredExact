@@ -87,3 +87,19 @@ files:
 
 - `reference/regen_candidate_V12_M1_average.txt`;
 - `reference/regen_candidate_V12_M2_average.txt`.
+
+## V20 Replication Round Policy
+
+`results/v20_replication_round/` keeps the same benchmark classification:
+
+- V20/M3 rows are `hard_generated_v20_m3`;
+- V12 rows are `regenerated_engineering`;
+- V4 rows are `smoke`;
+- no V20 stress row is a historical paper target.
+
+The round certifies `high_imbalance_seed3202` reproducibly and adds
+`tight_T_seed3101` as a second certified V20/M3 stress row.  These are
+engineering stress certificates for the exact algorithm, not historical paper
+benchmark claims.  Noncertified rows must be reported with their unresolved
+intervals and gaps rather than omitted or converted into historical-target
+status.
