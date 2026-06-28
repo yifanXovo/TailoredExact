@@ -1041,3 +1041,31 @@ Diagnostic interval-cutoff oracle rows were run against older unresolved leaves
 and timed out; the merge audit correctly leaves that older ledger incomplete.
 This confirms that focused timeout evidence is not promoted to a full
 certificate.  Raw results are in `results/v20_exact_certificate_round/`.
+
+## V20 Replication Round
+
+The V20 replication round reran the first V20/M3 certificate
+(`high_imbalance_seed3202`) three times from clean outputs.  All three runs
+certified with identical objective/LB/UB `1.74931345205` and passed the Python
+certificate audit.  One replicate split a final bound-fathomed band more finely,
+so the ledger is certificate-equivalent rather than line-identical.
+
+The same fixed V20 mip-light relaxation configuration certified one additional
+stress instance:
+
+| instance | status | LB | UB | gap | runtime |
+|---|---|---:|---:|---:|---:|
+| high_imbalance_seed3202 | optimal in 3/3 replicates | 1.74931345205 | 1.74931345205 | 0 | 301-406s |
+| tight_T_seed3101 | optimal | 0.107252734134 | 0.107252734134 | 0 | 148.602s |
+
+Other V20/M3 rows remain noncertified.  The exact interval cutoff oracle closed
+nine `moderate_seed3301` leaves by proven infeasibility, but one low-Gini leaf
+timed out after 600s; the merge audit correctly left the full certificate
+incomplete.  BPC fallback remains diagnostic because it did not close that
+remaining leaf.
+
+The round adds `paper-exact-v20-certificate` as a paper-candidate exact
+portfolio preset.  It is not a broad benchmark claim yet; it is a reproducible
+configuration for additional V20 certification attempts.
+
+Raw results and audit output are in `results/v20_replication_round/`.

@@ -60,6 +60,7 @@ def main() -> None:
     parser.add_argument("--instance", required=True, type=Path)
     parser.add_argument("--exe", default="build/ExactEBRP.exe", type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--summary-out", type=Path)
     parser.add_argument("--target-ids", default="")
     parser.add_argument("--time-limit", type=float, default=3600.0)
     parser.add_argument("--lambda", dest="lam", type=float, default=0.15)
@@ -137,7 +138,8 @@ def main() -> None:
             "command": " ".join(cmd),
         })
 
-    write_csv(out / "high_imbalance_seed3202_interval_oracle_results.csv", summary)
+    summary_out = args.summary_out if args.summary_out else (out / "high_imbalance_seed3202_interval_oracle_results.csv")
+    write_csv(summary_out, summary)
     with (out / "interval_oracle_commands.md").open("w", encoding="utf-8") as fh:
         fh.write("# Interval Cutoff Oracle Commands\n\n")
         for command in commands:

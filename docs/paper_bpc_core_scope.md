@@ -92,6 +92,19 @@ The V20 exact certificate round certified `high_imbalance_seed3202` through the
 normal full-frontier relaxation ledger before interval-oracle merge was needed.
 The oracle remains available for future unresolved leaves.
 
+The V20 replication round reproduced `high_imbalance_seed3202` three times and
+also certified `tight_T_seed3101`.  This justifies a separate paper-candidate
+exact portfolio preset, `paper-exact-v20-certificate`, for further V20 stress
+testing.  It is intentionally distinct from canonical `paper-bpc-core`:
+
+- native HGA-TGBC remains UB-only;
+- archive scanning remains disabled;
+- fixed mip-light compact-flow relaxation with connectivity is enabled;
+- exact interval cutoff oracle evidence must be merged through a full-ledger
+  coverage audit;
+- BPC fallback remains off by default unless exact pricing closes a focused
+  interval.
+
 ## Certificate Gate
 
 A `gcap-frontier` result can be reported as an original-problem certificate only
@@ -130,16 +143,16 @@ build\ExactEBRP.exe --method certificate-basis-test --input testdata\examples\gc
 
 ## Current Status With Paper Heuristic UB
 
-After replacing archive scanning with the reproducible paper primal heuristic,
-the regenerated V12 rows are no longer automatically closed by the stronger
-archived incumbent cutoff:
+The early paper-heuristic transition rows did not close the regenerated V12
+instances.  That status has been superseded by the native HGA-TGBC migration and
+relaxation scheduling/cutoff fixes.  Current audited behavior is:
 
 | instance | row | status | UB | LB | gap | certificate basis |
 |---|---|---|---:|---:|---:|---|
-| V12 M1 average | paper-core heuristic 300s | not closed | 0.364375057616 | 0.354350322125 | 0.027512134218 | partial inventory/route/Gini relaxation ledger |
-| V12 M2 average | paper-core heuristic 300s | not closed | 0.756165366387 | 0.688739371450 | 0.089168319437 | partial inventory/route/Gini relaxation ledger |
+| V12 M1 average | paper-core 300s | not closed | 0.357200583208 | 0.332675660948 | 0.0686586848205 | one unresolved interval |
+| V12 M1 average | paper-core 600s | optimal | 0.357200583208 | 0.357200583208 | 0 | relaxation-only full frontier |
+| V12 M2 average | paper-core 300s | optimal | 0.718504070755 | 0.718504070755 | 0 | relaxation-only full frontier |
 
-The previous archive-dependent V12 M2 UB `0.719065249476` remains useful as a
-diagnostic target for improving the primal heuristic, but it is not a
-paper-core default input. These are regenerated engineering instances, not
-confirmed historical paper targets. See `docs/benchmark_instance_policy.md`.
+All rows use regenerated engineering instances, not confirmed historical paper
+targets.  Archive-dependent UBs remain diagnostic-only and are not paper-core
+default inputs. See `docs/benchmark_instance_policy.md`.
