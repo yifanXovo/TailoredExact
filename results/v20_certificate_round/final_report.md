@@ -4,7 +4,8 @@ Branch: `codex/longrun-round17-local-results`
 
 Starting remote head: `e37955f58f4b6396bec7ca441987f70adde6fa3f`
 
-Final commit SHA: see final response after push.
+Synchronized implementation commit SHA: `10d2d33d0018469251f76a614aa180502eec1e1d`.
+Final pushed branch-head SHA is reported in the final response because a committed file cannot reliably contain the hash of its own enclosing commit.
 
 ## Implemented Changes
 
