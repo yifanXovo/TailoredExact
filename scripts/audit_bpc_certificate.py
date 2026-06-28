@@ -195,6 +195,25 @@ def audit_one(source: str, result: Dict[str, Any]) -> Dict[str, Any]:
     ):
         failures.append("relaxed_rmp_certificate_without_closed_relaxed_pricing")
 
+    if method == "interval-cutoff-oracle":
+        basis = str(result.get("interval_exact_cutoff_certificate_basis", ""))
+        solver_status = str(result.get("interval_exact_cutoff_solver_status", "")).lower()
+        proven = as_bool(result.get("interval_exact_cutoff_proven_infeasible", False))
+        if status == "interval_closed":
+            if basis not in {
+                "interval_exact_cutoff_mip_infeasible",
+                "interval_exact_cutoff_mip_optimal_no_improver",
+            }:
+                failures.append("interval_oracle_closed_without_accepted_basis")
+            if not proven:
+                failures.append("interval_oracle_closed_without_proven_flag")
+            if basis == "interval_exact_cutoff_mip_infeasible" and "infeasible" not in solver_status:
+                failures.append("interval_oracle_infeasible_basis_without_solver_infeasible")
+            if not result.get("interval_exact_cutoff_scope"):
+                failures.append("interval_oracle_closed_without_scope")
+        if as_bool(result.get("certified_original_problem", False)):
+            failures.append("interval_oracle_claimed_full_original_certificate")
+
     return {
         "source": source,
         "instance_name": result.get("instance_name", ""),

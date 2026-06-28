@@ -6,5 +6,6 @@
 namespace ebrp {
 
 SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& options);
+SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const SolveOptions& options);
 
 } // namespace ebrp

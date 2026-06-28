@@ -42,7 +42,7 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|primal-heuristic|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|option-consistency-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|projection-safe-relaxed-column-test|non-elementary-relaxed-column-test|ng-relaxed-closure-test|relaxed-rmp-cg-test|frontier-relaxed-rmp-cg-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|large-relaxed-rmp-cg-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|interval-cutoff-oracle|primal-heuristic|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|option-consistency-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|projection-safe-relaxed-column-test|non-elementary-relaxed-column-test|ng-relaxed-closure-test|relaxed-rmp-cg-test|frontier-relaxed-rmp-cg-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|large-relaxed-rmp-cg-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
@@ -127,6 +127,10 @@ void usage() {
         << "[--relaxation-certificate-mode bound|cutoff-feasibility|both] [--cutoff-feasibility-epsilon <eps>] "
         << "[--cutoff-feasibility-time-limit <seconds>] [--relaxation-portfolio-mode fixed|adaptive|race|exhaustive] "
         << "[--relaxation-exhaustive-variants <list>] [--relaxation-exhaustive-stop-on-fathom true|false] "
+        << "[--interval-exact-cutoff-oracle off|compact-mip] [--interval-exact-cutoff-gamma-L <gamma>] "
+        << "[--interval-exact-cutoff-gamma-U <gamma>] [--interval-exact-cutoff-UB <value>] "
+        << "[--interval-exact-cutoff-epsilon <eps>] [--interval-exact-cutoff-time-limit <seconds>] "
+        << "[--interval-exact-cutoff-export-lp <path>] [--interval-exact-cutoff-result <path>] "
         << "[--pricing-final-verifier true|false] [--pricing-verifier-time <seconds>] "
         << "[--pricing-verifier-checkpoint <path>] [--pricing-verifier-resume <path>] "
         << "[--pricing-verifier-mode label-dp|route-mask-dp|auto] "
@@ -402,6 +406,14 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--relaxation-certificate-mode") opt.relaxation_certificate_mode = requireValue(i, argc, argv);
         else if (arg == "--cutoff-feasibility-epsilon") opt.cutoff_feasibility_epsilon = std::stod(requireValue(i, argc, argv));
         else if (arg == "--cutoff-feasibility-time-limit") opt.cutoff_feasibility_time_limit = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--interval-exact-cutoff-oracle") opt.interval_exact_cutoff_oracle = requireValue(i, argc, argv);
+        else if (arg == "--interval-exact-cutoff-gamma-L") opt.interval_exact_cutoff_gamma_L = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--interval-exact-cutoff-gamma-U") opt.interval_exact_cutoff_gamma_U = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--interval-exact-cutoff-UB") opt.interval_exact_cutoff_UB = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--interval-exact-cutoff-epsilon") opt.interval_exact_cutoff_epsilon = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--interval-exact-cutoff-time-limit") opt.interval_exact_cutoff_time_limit = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--interval-exact-cutoff-export-lp") opt.interval_exact_cutoff_export_lp = requireValue(i, argc, argv);
+        else if (arg == "--interval-exact-cutoff-result") opt.interval_exact_cutoff_result = requireValue(i, argc, argv);
         else if (arg == "--interval-closure-mode") opt.interval_closure_mode = requireValue(i, argc, argv);
         else if (arg == "--interval-closure-input") opt.interval_closure_input = requireValue(i, argc, argv);
         else if (arg == "--interval-closure-target-instance") opt.interval_closure_target_instance = requireValue(i, argc, argv);
@@ -13520,6 +13532,8 @@ int main(int argc, char** argv) {
                 results.push_back(ebrp::solveTailoredExact(instance, opt));
             } else if (opt.method == "cplex") {
                 results.push_back(ebrp::solveCplexBaseline(instance, opt));
+            } else if (opt.method == "interval-cutoff-oracle") {
+                results.push_back(ebrp::solveIntervalExactCutoffOracle(instance, opt));
             } else if (opt.method == "primal-heuristic") {
                 results.push_back(solvePrimalHeuristicDiagnostic(instance, opt));
             } else if (opt.method == "pricing") {

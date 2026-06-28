@@ -37,6 +37,14 @@ struct VarRegistry {
     }
 };
 
+struct CompactIntervalCutoffConfig {
+    bool enabled = false;
+    double gamma_L = 0.0;
+    double gamma_U = 0.0;
+    double incumbent_ub = 0.0;
+    double epsilon = 1e-8;
+};
+
 void addTerm(Expr& e, const std::string& var, double coef) {
     if (std::fabs(coef) <= 1e-12) return;
     e[var] += coef;
@@ -132,7 +140,8 @@ std::vector<double> subsetTspLowerBounds(const Instance& instance) {
 void writeCompactLp(const Instance& instance,
                     const SolveOptions& options,
                     const std::filesystem::path& lp_path,
-                    bool strengthened) {
+                    bool strengthened,
+                    const CompactIntervalCutoffConfig* cutoff = nullptr) {
     VarRegistry vars;
     const int V = instance.V;
     const int M = instance.M;
@@ -396,6 +405,18 @@ void writeCompactLp(const Instance& instance,
     }
     writeConstraint(out, cid, gini, ">=", 0);
 
+    if (cutoff != nullptr && cutoff->enabled) {
+        Expr gl; addTerm(gl, "G", 1);
+        writeConstraint(out, cid, gl, ">=", cutoff->gamma_L);
+        Expr gu; addTerm(gu, "G", 1);
+        writeConstraint(out, cid, gu, "<=", cutoff->gamma_U);
+        Expr obj_cutoff; addTerm(obj_cutoff, "G", 1);
+        for (int i = 1; i <= V; ++i) {
+            addTerm(obj_cutoff, eName(i), options.lambda * instance.weights[i]);
+        }
+        writeConstraint(out, cid, obj_cutoff, "<=", cutoff->incumbent_ub - cutoff->epsilon);
+    }
+
     out << "Bounds\n";
     for (const auto& kv : vars.bounds) {
         if (kv.second.second >= 1e90) out << " " << num(kv.second.first) << " <= " << kv.first << "\n";
@@ -486,6 +507,31 @@ double parseCplexBestBound(const std::filesystem::path& log_path) {
     return bound;
 }
 
+std::string parseCplexTerminalStatus(const std::filesystem::path& log_path) {
+    std::ifstream in(log_path);
+    if (!in) return "log missing";
+    std::ostringstream ss;
+    ss << in.rdbuf();
+    std::string text = ss.str();
+    std::string lower = text;
+    std::transform(lower.begin(), lower.end(), lower.begin(), [](unsigned char c) {
+        return static_cast<char>(std::tolower(c));
+    });
+    if (lower.find("time limit exceeded") != std::string::npos) {
+        return "time limit exceeded";
+    }
+    if (lower.find("integer infeasible") != std::string::npos ||
+        lower.find("mip - integer infeasible") != std::string::npos ||
+        lower.find("problem is integer infeasible") != std::string::npos ||
+        lower.find("infeasibility row") != std::string::npos) {
+        return "infeasible";
+    }
+    if (lower.find("optimal") != std::string::npos) {
+        return "optimal";
+    }
+    return "unknown";
+}
+
 std::vector<RoutePlan> reconstructRoutes(const Instance& instance,
                                          const std::unordered_map<std::string, double>& v) {
     std::vector<RoutePlan> routes;
@@ -530,6 +576,18 @@ bool statusIsOptimal(const std::string& status) {
     std::string s = status;
     std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
     return s.find("optimal") != std::string::npos;
+}
+
+bool statusIsInfeasible(const std::string& status) {
+    std::string s = status;
+    std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    return s.find("infeasible") != std::string::npos;
+}
+
+bool statusIsTimeLimited(const std::string& status) {
+    std::string s = status;
+    std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    return s.find("time") != std::string::npos || s.find("limit") != std::string::npos;
 }
 
 } // namespace
@@ -627,6 +685,192 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
         result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
     }
 
+    return result;
+}
+
+SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const SolveOptions& options) {
+    const auto start = Clock::now();
+    SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = "interval-cutoff-oracle";
+    result.status = "running";
+    result.certificate_scope = "interval_original_cutoff_oracle";
+    result.interval_exact_cutoff_oracle = options.interval_exact_cutoff_oracle;
+    result.interval_exact_cutoff_attempted = true;
+    result.interval_exact_cutoff_gamma_L = options.interval_exact_cutoff_gamma_L;
+    result.interval_exact_cutoff_gamma_U = options.interval_exact_cutoff_gamma_U;
+    result.interval_exact_cutoff_UB = options.interval_exact_cutoff_UB;
+    result.interval_exact_cutoff_epsilon = options.interval_exact_cutoff_epsilon;
+    result.interval_exact_cutoff_scope = "original fixed-interval cutoff feasibility compact MIP";
+    result.notes.push_back(instance.distance_convention);
+    result.notes.push_back("Interval oracle is local to one Gini interval. It never certifies the full original problem unless merged into a complete full-frontier ledger.");
+
+    const bool params_valid =
+        options.interval_exact_cutoff_oracle == "compact-mip" &&
+        std::isfinite(options.interval_exact_cutoff_gamma_L) &&
+        std::isfinite(options.interval_exact_cutoff_gamma_U) &&
+        options.interval_exact_cutoff_gamma_L >= -1e-12 &&
+        options.interval_exact_cutoff_gamma_U >= options.interval_exact_cutoff_gamma_L - 1e-12 &&
+        std::isfinite(options.interval_exact_cutoff_UB) &&
+        options.interval_exact_cutoff_UB > 0.0;
+    if (!params_valid) {
+        result.status = "error";
+        result.certificate = "interval cutoff oracle requires --interval-exact-cutoff-oracle compact-mip, valid gamma bounds, and positive --interval-exact-cutoff-UB";
+        result.interval_exact_cutoff_certificate_basis = "interval_exact_cutoff_mip_invalid_parameters";
+        result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
+        return result;
+    }
+
+    try {
+        const std::string stem = std::filesystem::path(instance.name).stem().string()
+            + "_interval_cutoff_"
+            + std::to_string(static_cast<long long>(std::llround(options.interval_exact_cutoff_gamma_L * 1000000000.0)))
+            + "_"
+            + std::to_string(static_cast<long long>(std::llround(options.interval_exact_cutoff_gamma_U * 1000000000.0)));
+        const auto run_id = std::chrono::duration_cast<std::chrono::milliseconds>(
+            Clock::now().time_since_epoch()).count();
+        const std::filesystem::path default_dir = std::filesystem::path("results") / "interval_cutoff_work"
+            / (stem + "_" + std::to_string(run_id));
+        std::filesystem::create_directories(default_dir);
+        const std::filesystem::path lp_path = options.interval_exact_cutoff_export_lp.empty()
+            ? (default_dir / "interval_cutoff.lp")
+            : std::filesystem::path(options.interval_exact_cutoff_export_lp);
+        const std::filesystem::path sol_path = options.interval_exact_cutoff_result.empty()
+            ? (default_dir / "interval_cutoff.sol")
+            : std::filesystem::path(options.interval_exact_cutoff_result);
+        const std::filesystem::path cmd_path = default_dir / "run_interval_cutoff.cplex";
+        const std::filesystem::path cplex_log = options.log_path.empty()
+            ? (default_dir / "interval_cutoff.cplex.log") : std::filesystem::path(options.log_path);
+        result.log_file = cplex_log.string();
+        result.interval_exact_cutoff_lp_path = lp_path.string();
+        result.interval_exact_cutoff_solution_path = sol_path.string();
+        result.interval_exact_cutoff_log_path = cplex_log.string();
+
+        std::filesystem::create_directories(lp_path.parent_path());
+        std::filesystem::create_directories(sol_path.parent_path());
+        std::filesystem::create_directories(cplex_log.parent_path());
+        std::error_code ignored;
+        std::filesystem::remove(sol_path, ignored);
+        std::filesystem::remove(cplex_log, ignored);
+
+        CompactIntervalCutoffConfig cutoff;
+        cutoff.enabled = true;
+        cutoff.gamma_L = options.interval_exact_cutoff_gamma_L;
+        cutoff.gamma_U = options.interval_exact_cutoff_gamma_U;
+        cutoff.incumbent_ub = options.interval_exact_cutoff_UB;
+        cutoff.epsilon = options.interval_exact_cutoff_epsilon;
+        writeCompactLp(instance, options, lp_path, true, &cutoff);
+
+        const double time_limit = options.interval_exact_cutoff_time_limit > 0.0
+            ? options.interval_exact_cutoff_time_limit
+            : std::max(1.0, options.solve_time_limit);
+        std::ofstream cmd(cmd_path);
+        cmd << "set threads " << std::max(1, options.threads) << "\n";
+        cmd << "set timelimit " << time_limit << "\n";
+        cmd << "set mip tolerances mipgap 0\n";
+        cmd << "read " << lp_path.string() << "\n";
+        cmd << "optimize\n";
+        cmd << "write " << sol_path.string() << "\n";
+        cmd << "quit\n";
+        cmd.close();
+
+        const std::string cplex = defaultCplexPath();
+        const std::string command = "cmd /C \"" + quote(cplex) + " -f "
+            + quote(cmd_path) + " > " + quote(cplex_log) + " 2>&1\"";
+        const int rc = std::system(command.c_str());
+        result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
+        result.interval_exact_cutoff_runtime_seconds = result.runtime_seconds;
+
+        std::string cplex_status = "unknown";
+        double cplex_obj = std::numeric_limits<double>::quiet_NaN();
+        double best_bound = std::numeric_limits<double>::quiet_NaN();
+        std::unordered_map<std::string, double> values;
+        if (std::filesystem::exists(sol_path)) {
+            values = parseSolValues(sol_path, cplex_status, cplex_obj, best_bound);
+        } else {
+            cplex_status = parseCplexTerminalStatus(cplex_log);
+            if (cplex_status == "unknown") {
+                cplex_status = (rc == 0) ? "no solution file" : "cplex process failed";
+            }
+        }
+        result.interval_exact_cutoff_solver_status = cplex_status;
+        result.nodes = parseCplexNodes(cplex_log);
+        result.interval_exact_cutoff_nodes = result.nodes;
+        const double log_best_bound = parseCplexBestBound(cplex_log);
+        if (!std::isfinite(best_bound) && std::isfinite(log_best_bound)) best_bound = log_best_bound;
+        result.interval_exact_cutoff_best_bound = std::isfinite(best_bound) ? best_bound : 0.0;
+        result.interval_exact_cutoff_objective = std::isfinite(cplex_obj) ? cplex_obj : 0.0;
+
+        const double cutoff_value = options.interval_exact_cutoff_UB - options.interval_exact_cutoff_epsilon;
+        if (statusIsInfeasible(cplex_status)) {
+            result.status = "interval_closed";
+            result.lower_bound = options.interval_exact_cutoff_UB;
+            result.upper_bound = options.interval_exact_cutoff_UB;
+            result.gap = 0.0;
+            result.interval_exact_cutoff_proven_infeasible = true;
+            result.interval_exact_cutoff_certificate_basis = "interval_exact_cutoff_mip_infeasible";
+            result.certificate = "CPLEX proved the original compact fixed-interval cutoff MIP infeasible; no incumbent-improving original solution exists in this interval.";
+        } else if (statusIsOptimal(cplex_status) && std::isfinite(cplex_obj) &&
+                   cplex_obj > cutoff_value + 1e-7) {
+            result.status = "interval_closed";
+            result.lower_bound = cplex_obj;
+            result.upper_bound = options.interval_exact_cutoff_UB;
+            result.gap = 0.0;
+            result.interval_exact_cutoff_proven_infeasible = true;
+            result.interval_exact_cutoff_certificate_basis = "interval_exact_cutoff_mip_optimal_no_improver";
+            result.certificate = "CPLEX optimized the fixed-interval cutoff MIP and its objective excludes all incumbent-improving solutions in this interval.";
+        } else if (statusIsOptimal(cplex_status) && !values.empty()) {
+            result.routes = reconstructRoutes(instance, values);
+            result.verification = verifySolution(instance, result.routes, options.lambda);
+            result.final_inventory = result.verification.final_inventory;
+            result.G = result.verification.G;
+            result.P = result.verification.P;
+            result.objective = result.verification.objective;
+            result.upper_bound = result.objective;
+            result.lower_bound = std::isfinite(best_bound) ? best_bound : 0.0;
+            result.gap = (std::fabs(result.upper_bound) > 1e-12)
+                ? std::max(0.0, (result.upper_bound - result.lower_bound) / std::fabs(result.upper_bound))
+                : 0.0;
+            const bool in_interval =
+                result.G >= options.interval_exact_cutoff_gamma_L - 1e-7 &&
+                result.G <= options.interval_exact_cutoff_gamma_U + 1e-7;
+            const bool improving = result.verification.feasible &&
+                in_interval &&
+                result.objective <= cutoff_value + 1e-7;
+            result.interval_exact_cutoff_feasible_improving = improving;
+            result.status = improving ? "interval_feasible_improving_ub" : "interval_unresolved_feasible_relaxation_solution";
+            result.interval_exact_cutoff_certificate_basis = improving
+                ? "interval_exact_cutoff_mip_feasible_improving"
+                : "interval_exact_cutoff_mip_feasible_not_verified_original_interval_improver";
+            result.certificate = improving
+                ? "CPLEX found an original feasible incumbent-improving route plan in this interval; it is UB-only and requires frontier restart."
+                : "CPLEX found a cutoff-MIP solution, but the independently reconstructed original route plan did not verify as an improving solution in the requested interval; interval remains unresolved.";
+        } else {
+            result.status = statusIsTimeLimited(cplex_status) ? "interval_unresolved_timeout" : "interval_unresolved";
+            result.interval_exact_cutoff_timeout = statusIsTimeLimited(cplex_status);
+            result.lower_bound = std::isfinite(best_bound) ? best_bound : 0.0;
+            result.upper_bound = options.interval_exact_cutoff_UB;
+            result.gap = (std::fabs(result.upper_bound) > 1e-12)
+                ? std::max(0.0, (result.upper_bound - result.lower_bound) / std::fabs(result.upper_bound))
+                : 0.0;
+            result.interval_exact_cutoff_gap = result.gap;
+            result.interval_exact_cutoff_certificate_basis = result.interval_exact_cutoff_timeout
+                ? "interval_exact_cutoff_mip_timeout"
+                : "interval_exact_cutoff_mip_unresolved";
+            result.certificate = "CPLEX did not prove fixed-interval cutoff infeasibility or produce a verified improving original solution; interval remains unresolved. CPLEX status: " + cplex_status;
+        }
+        result.notes.push_back("CPLEX solution status: " + cplex_status);
+        result.notes.push_back("CPLEX process return code: " + std::to_string(rc));
+        result.notes.push_back("LP file: " + lp_path.string());
+        result.notes.push_back("CPLEX log: " + cplex_log.string());
+    } catch (const std::exception& e) {
+        result.status = "error";
+        result.interval_exact_cutoff_certificate_basis = "interval_exact_cutoff_mip_error";
+        result.certificate = std::string("Interval exact cutoff oracle failed: ") + e.what();
+        result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
+        result.interval_exact_cutoff_runtime_seconds = result.runtime_seconds;
+    }
     return result;
 }
 

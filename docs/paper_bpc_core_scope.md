@@ -79,6 +79,19 @@ These modules may be reported as diagnostics, baselines, appendix experiments,
 or upper-bound sources when clearly labeled. They must not contribute to a
 paper-core BPC lower bound or original-problem certificate.
 
+## Interval Cutoff Oracle Status
+
+`--method interval-cutoff-oracle` is an exact interval-local certificate module,
+not a replacement for `paper-bpc-core`.  It asks whether a compact original
+fixed-Gini-interval MIP has any solution with objective below the incumbent
+cutoff.  Proven infeasibility can close exactly the matched frontier leaf after
+`scripts\merge_interval_oracle_results.py` verifies full-ledger coverage.
+Timeouts and unverified feasible MIP solutions remain diagnostic.
+
+The V20 exact certificate round certified `high_imbalance_seed3202` through the
+normal full-frontier relaxation ledger before interval-oracle merge was needed.
+The oracle remains available for future unresolved leaves.
+
 ## Certificate Gate
 
 A `gcap-frontier` result can be reported as an original-problem certificate only

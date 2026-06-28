@@ -1,0 +1,23 @@
+interval_id,gamma_L,gamma_U,original_status,merged_status,oracle_available,oracle_merge_applied,merge_reason,coverage_exact,gap_or_overlap
+0,0,0.316666666667,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
+1,0.316666666667,0.633333333333,replaced_by_children,replaced_by_children,false,false,no_oracle_result_for_exact_leaf,true,false
+2,0.633333333333,0.95,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
+3,0.316666666667,0.475,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
+4,0.475,0.633333333333,replaced_by_children,replaced_by_children,false,false,no_oracle_result_for_exact_leaf,true,false
+5,0.475,0.554166666667,replaced_by_children,replaced_by_children,false,false,no_oracle_result_for_exact_leaf,true,false
+6,0.554166666667,0.633333333333,replaced_by_children,replaced_by_children,false,false,no_oracle_result_for_exact_leaf,true,false
+7,0.475,0.514583333333,replaced_by_children,replaced_by_children,false,false,no_oracle_result_for_exact_leaf,true,false
+8,0.514583333333,0.554166666667,replaced_by_children,replaced_by_children,false,false,no_oracle_result_for_exact_leaf,true,false
+9,0.554166666667,0.59375,replaced_by_children,replaced_by_children,false,false,no_oracle_result_for_exact_leaf,true,false
+10,0.59375,0.633333333333,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
+11,0.475,0.494791666667,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
+12,0.494791666667,0.514583333333,replaced_by_children,replaced_by_children,false,false,no_oracle_result_for_exact_leaf,true,false
+13,0.554166666667,0.573958333333,unresolved,unresolved,true,false,oracle_not_mergeable:basis=interval_exact_cutoff_mip_timeout;status=interval_unresolved_timeout;solver=time limit exceeded,true,false
+14,0.573958333333,0.59375,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
+15,0.494791666667,0.5046875,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
+16,0.5046875,0.514583333333,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
+17,0.514583333333,0.534375,replaced_by_children,replaced_by_children,false,false,no_oracle_result_for_exact_leaf,true,false
+18,0.534375,0.554166666667,unresolved,unresolved,true,false,oracle_not_mergeable:basis=interval_exact_cutoff_mip_timeout;status=interval_unresolved_timeout;solver=time limit exceeded,true,false
+19,0.514583333333,0.524479166667,unresolved,unresolved,true,false,oracle_not_mergeable:basis=interval_exact_cutoff_mip_timeout;status=interval_unresolved_timeout;solver=time limit exceeded,true,false
+20,0.524479166667,0.534375,unresolved,unresolved,true,false,oracle_not_mergeable:basis=interval_exact_cutoff_mip_timeout;status=interval_unresolved_timeout;solver=time limit exceeded,true,false
+__summary__,,,,certificate_incomplete,,,final_open_leaf_count=4,true,false

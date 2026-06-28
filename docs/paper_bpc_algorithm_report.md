@@ -1017,3 +1017,27 @@ or a focused harness that safely carries parent ledger bounds into exact
 coverage merges.
 
 Raw results and audit output are in `results/v20_certificate_round/`.
+
+## V20 Exact Certificate Round
+
+The next round added a standalone compact fixed-interval cutoff oracle and a
+safe ledger-merge script, then reran the priority V20/M3 instance
+`high_imbalance_seed3202`.
+
+The reproduced full-frontier mip-light run certified the instance without
+needing focused interval merge:
+
+| instance | row | status | LB | UB | gap | runtime |
+|---|---|---:|---:|---:|---:|---:|
+| high_imbalance_seed3202 | full-frontier mip-light | optimal | 1.74931345205 | 1.74931345205 | 0 | 409.831s |
+
+The certificate is relaxation-only full frontier: all final leaves are
+bound-fathomed by valid inventory/route/Gini lower bounds reaching the verified
+native HGA-TGBC incumbent.  No route-mask all-subset enumeration is used as
+certifying evidence and no BPC tree pricing closure is required because no BPC
+tree interval contributes the certificate.
+
+Diagnostic interval-cutoff oracle rows were run against older unresolved leaves
+and timed out; the merge audit correctly leaves that older ledger incomplete.
+This confirms that focused timeout evidence is not promoted to a full
+certificate.  Raw results are in `results/v20_exact_certificate_round/`.

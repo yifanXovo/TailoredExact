@@ -1,0 +1,18 @@
+# Interval Cutoff Oracle Commands
+
+```powershell
+build\ExactEBRP.exe --method interval-cutoff-oracle --input reference\hard_stress\V20_M3\high_imbalance_seed3202.txt --lambda 0.15 --T 3600.0 --threads 1 --time-limit 30.0 --interval-exact-cutoff-oracle compact-mip --interval-exact-cutoff-gamma-L 0.554166666667 --interval-exact-cutoff-gamma-U 0.573958333333 --interval-exact-cutoff-UB 1.74931345205 --interval-exact-cutoff-epsilon 1e-08 --interval-exact-cutoff-time-limit 30.0 --interval-exact-cutoff-export-lp results\v20_exact_certificate_round\cplex\interval_oracle_13_0p554166666667_0p573958333333.lp --interval-exact-cutoff-result results\v20_exact_certificate_round\cplex\interval_oracle_13_0p554166666667_0p573958333333.sol --log results\v20_exact_certificate_round\logs\interval_oracle_13_0p554166666667_0p573958333333.cplex.log --out results\v20_exact_certificate_round\raw\interval_oracle_13_0p554166666667_0p573958333333.json
+```
+
+```powershell
+build\ExactEBRP.exe --method interval-cutoff-oracle --input reference\hard_stress\V20_M3\high_imbalance_seed3202.txt --lambda 0.15 --T 3600.0 --threads 1 --time-limit 30.0 --interval-exact-cutoff-oracle compact-mip --interval-exact-cutoff-gamma-L 0.534375 --interval-exact-cutoff-gamma-U 0.554166666667 --interval-exact-cutoff-UB 1.74931345205 --interval-exact-cutoff-epsilon 1e-08 --interval-exact-cutoff-time-limit 30.0 --interval-exact-cutoff-export-lp results\v20_exact_certificate_round\cplex\interval_oracle_18_0p534375_0p554166666667.lp --interval-exact-cutoff-result results\v20_exact_certificate_round\cplex\interval_oracle_18_0p534375_0p554166666667.sol --log results\v20_exact_certificate_round\logs\interval_oracle_18_0p534375_0p554166666667.cplex.log --out results\v20_exact_certificate_round\raw\interval_oracle_18_0p534375_0p554166666667.json
+```
+
+```powershell
+build\ExactEBRP.exe --method interval-cutoff-oracle --input reference\hard_stress\V20_M3\high_imbalance_seed3202.txt --lambda 0.15 --T 3600.0 --threads 1 --time-limit 30.0 --interval-exact-cutoff-oracle compact-mip --interval-exact-cutoff-gamma-L 0.514583333333 --interval-exact-cutoff-gamma-U 0.524479166667 --interval-exact-cutoff-UB 1.74931345205 --interval-exact-cutoff-epsilon 1e-08 --interval-exact-cutoff-time-limit 30.0 --interval-exact-cutoff-export-lp results\v20_exact_certificate_round\cplex\interval_oracle_19_0p514583333333_0p524479166667.lp --interval-exact-cutoff-result results\v20_exact_certificate_round\cplex\interval_oracle_19_0p514583333333_0p524479166667.sol --log results\v20_exact_certificate_round\logs\interval_oracle_19_0p514583333333_0p524479166667.cplex.log --out results\v20_exact_certificate_round\raw\interval_oracle_19_0p514583333333_0p524479166667.json
+```
+
+```powershell
+build\ExactEBRP.exe --method interval-cutoff-oracle --input reference\hard_stress\V20_M3\high_imbalance_seed3202.txt --lambda 0.15 --T 3600.0 --threads 1 --time-limit 30.0 --interval-exact-cutoff-oracle compact-mip --interval-exact-cutoff-gamma-L 0.524479166667 --interval-exact-cutoff-gamma-U 0.534375 --interval-exact-cutoff-UB 1.74931345205 --interval-exact-cutoff-epsilon 1e-08 --interval-exact-cutoff-time-limit 30.0 --interval-exact-cutoff-export-lp results\v20_exact_certificate_round\cplex\interval_oracle_20_0p524479166667_0p534375.lp --interval-exact-cutoff-result results\v20_exact_certificate_round\cplex\interval_oracle_20_0p524479166667_0p534375.sol --log results\v20_exact_certificate_round\logs\interval_oracle_20_0p524479166667_0p534375.cplex.log --out results\v20_exact_certificate_round\raw\interval_oracle_20_0p524479166667_0p534375.json
+```
+
