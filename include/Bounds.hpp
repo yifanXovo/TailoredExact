@@ -108,6 +108,25 @@ struct GiniIntervalInventoryRelaxationBound {
     long long large_compact_flow_arc_variables = 0;
     long long large_compact_flow_constraints = 0;
     double large_compact_flow_time_seconds = 0.0;
+    bool large_compact_flow_connectivity_enabled = false;
+    long long large_compact_flow_connectivity_variables = 0;
+    long long large_compact_flow_connectivity_constraints = 0;
+    double large_compact_flow_connectivity_time_seconds = 0.0;
+    bool service_operation_min_handling_cuts_enabled = false;
+    long long service_operation_min_handling_cuts_added = 0;
+    bool penalty_movement_lb_cuts_enabled = false;
+    double penalty_movement_required_units = 0.0;
+    long long penalty_movement_lb_cuts_added = 0;
+    bool transfer_subset_capacity_cuts_enabled = false;
+    long long transfer_subset_capacity_cuts_added = 0;
+    std::string relaxation_portfolio_mode = "fixed";
+    std::string relaxation_variants_tried;
+    std::string selected_relaxation_variant;
+    std::string selected_variant_reason;
+    double probe_time_seconds = 0.0;
+    double variant_bound_improvement = 0.0;
+    double best_variant_bound = 0.0;
+    std::string variants_skipped_reason;
     bool continuous_relaxation_precheck_run = false;
     bool continuous_relaxation_precheck_fathomed = false;
     bool continuous_relaxation_precheck_infeasible = false;
@@ -178,7 +197,11 @@ GiniIntervalInventoryRelaxationBound computeGiniIntervalInventoryRelaxationBound
     bool station_residual_cover_cuts_enabled = true,
     int station_residual_cover_max_cuts = 200,
     const std::string& large_compact_flow_relaxation = "off",
-    double large_compact_flow_time_limit = 5.0);
+    double large_compact_flow_time_limit = 5.0,
+    bool large_compact_flow_connectivity = false,
+    bool service_operation_min_handling_cuts = false,
+    bool penalty_movement_lb_cuts = false,
+    bool transfer_subset_capacity_cuts = false);
 
 InventoryRatioProjectionBound computeInventoryRatioProjectionBound(
     const Instance& instance,
