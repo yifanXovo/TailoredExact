@@ -74,6 +74,21 @@ portfolio as an auditable candidate configuration. Current V20 evidence is
 mixed, so canonical `paper-bpc-core` remains the paper-facing default unless a
 future selector beats the best fixed LP/mip-light variants consistently.
 
+Focused V20 interval-closure diagnostics:
+
+```powershell
+D:\msys64\ucrt64\bin\python.exe scripts\v20_interval_closure_harness.py `
+  --input results\relaxation_closure_round\raw\high_imbalance_seed3202_miplight_1200s.intervals.csv `
+  --instance reference\hard_stress\V20_M3\high_imbalance_seed3202.txt `
+  --exe build\ExactEBRP.exe --output-dir results\v20_certificate_round `
+  --target-ids 13,18 --time-limit 120 --relax-seconds 60 `
+  --portfolio-mode exhaustive --variant-mode exhaustive --compact-flow mip-light --execute
+```
+
+Focused interval rows are diagnostic unless their coverage is safely merged
+into the full frontier ledger. The V20 certificate round did not obtain a V20
+global certificate; see `results\v20_certificate_round\final_report.md`.
+
 ## Exact-Phase UB Tracing
 
 Paper-core runs can write a verifier-gated incumbent event log:

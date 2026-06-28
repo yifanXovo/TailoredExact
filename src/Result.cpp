@@ -1159,6 +1159,34 @@ std::string resultToJson(const SolveResult& input) {
         << result.relaxation_portfolio_best_variant_bound << ",\n";
     out << "  \"variants_skipped_reason\": \""
         << jsonEscape(result.relaxation_portfolio_variants_skipped_reason) << "\",\n";
+    out << "  \"relaxation_certificate_mode\": \""
+        << jsonEscape(result.relaxation_certificate_mode) << "\",\n";
+    out << "  \"cutoff_feasibility_attempted\": "
+        << (result.cutoff_feasibility_attempted ? "true" : "false") << ",\n";
+    out << "  \"cutoff_feasibility_infeasible\": "
+        << (result.cutoff_feasibility_infeasible ? "true" : "false") << ",\n";
+    out << "  \"cutoff_feasibility_timed_out\": "
+        << (result.cutoff_feasibility_timed_out ? "true" : "false") << ",\n";
+    out << "  \"cutoff_feasibility_epsilon\": "
+        << result.cutoff_feasibility_epsilon << ",\n";
+    out << "  \"cutoff_feasibility_time_seconds\": "
+        << result.cutoff_feasibility_time_seconds << ",\n";
+    out << "  \"cutoff_feasibility_status\": \""
+        << jsonEscape(result.cutoff_feasibility_status) << "\",\n";
+    out << "  \"interval_closure_mode\": \""
+        << jsonEscape(result.interval_closure_mode) << "\",\n";
+    out << "  \"interval_closure_variant_mode\": \""
+        << jsonEscape(result.interval_closure_variant_mode) << "\",\n";
+    out << "  \"interval_closure_target_ids\": \""
+        << jsonEscape(result.interval_closure_target_ids) << "\",\n";
+    out << "  \"interval_closure_range\": \""
+        << jsonEscape(result.interval_closure_range) << "\",\n";
+    out << "  \"focused_interval_result\": "
+        << (result.focused_interval_result ? "true" : "false") << ",\n";
+    out << "  \"focused_interval_safe_to_merge\": "
+        << (result.focused_interval_safe_to_merge ? "true" : "false") << ",\n";
+    out << "  \"focused_interval_merge_reason\": \""
+        << jsonEscape(result.focused_interval_merge_reason) << "\",\n";
     out << "  \"vehicle_transfer_flow_variables\": "
         << result.vehicle_transfer_flow_variables << ",\n";
     out << "  \"vehicle_transfer_depot_unload_variables\": "

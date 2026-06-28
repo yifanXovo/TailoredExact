@@ -986,3 +986,34 @@ small improvement over the previous best gap (`0.33021736845` to
 
 Raw results, certificate audit, and summaries are in
 `results/paper_candidate_relaxation_round/`.
+
+## V20 Certificate Round
+
+This round targeted a true V20/M3 certificate, prioritizing
+`high_imbalance_seed3202`.  It added:
+
+- `--relaxation-portfolio-mode exhaustive`;
+- cutoff-feasibility certificate metadata;
+- a conservative focused interval-closure harness;
+- result fields that prevent focus-only rows from being merged into the full
+  frontier ledger without an explicit coverage audit.
+
+The priority row did not certify.  The full 300s exhaustive attempt ended with
+LB `1.61719766358`, UB `1.74931345205`, gap `0.0755243654678`, worse than the
+previous mip-light 1200s gap `0.0317627113992`.  Focused attempts on intervals
+13 and 18 were also weaker than the inherited full-ledger bounds and are marked
+diagnostic-only.
+
+V12 stability remained intact:
+
+- V4 smoke certified with objective `0`;
+- regenerated V12 M2 certified with objective `0.718504070755`;
+- regenerated V12 M1 certified in the 600s adaptive row with objective
+  `0.357200583208`.
+
+Conclusion: a paper-candidate V20 preset is not justified yet.  The next target
+is either a true standalone cutoff-feasibility MIP for the controlling interval
+or a focused harness that safely carries parent ledger bounds into exact
+coverage merges.
+
+Raw results and audit output are in `results/v20_certificate_round/`.

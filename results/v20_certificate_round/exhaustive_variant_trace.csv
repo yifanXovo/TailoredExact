@@ -1,0 +1,6 @@
+interval_id,gamma_L,gamma_U,interval_status,interval_lower_bound,incumbent_upper_bound,relaxation_portfolio_mode,relaxation_variants_tried,selected_relaxation_variant,variant_bound_improvement,fathomed
+0,0,0.316666666667,bound_fathomed,1.74931345205,1.74931345205,exhaustive,fixed_baseline;compact_lp,fixed_baseline,0,True
+1,0.316666666667,0.633333333333,replaced_by_children,1.61719766358,1.74931345205,exhaustive,fixed_baseline;compact_lp;compact_lp_connectivity;compact_mip_light_connectivity,fixed_baseline,0,False
+2,0.633333333333,0.95,bound_fathomed,1.74931345205,1.74931345205,exhaustive,fixed_baseline;compact_lp;compact_lp_connectivity;compact_mip_light_connectivity,fixed_baseline,0,True
+3,0.316666666667,0.475,bound_fathomed,1.74931345205,1.74931345205,exhaustive,fixed_baseline;compact_lp;compact_lp_connectivity;compact_mip_light_connectivity,fixed_baseline,0,True
+4,0.475,0.633333333333,unresolved,1.61719766358,1.74931345205,fixed,,,0,False

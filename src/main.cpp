@@ -120,6 +120,13 @@ void usage() {
         << "[--frontier-iterative-round-time <seconds>] [--frontier-iterative-target-gap <gap>] "
         << "[--frontier-iterative-use-resume true|false] [--frontier-iterative-export-dir <path>] "
         << "[--frontier-export-open-nodes true|false] [--frontier-resume-open-nodes true|false] "
+        << "[--interval-closure-mode off|focus|merge] [--interval-closure-input <csv>] "
+        << "[--interval-closure-target-ids <list>] [--interval-closure-range <lo,hi>] "
+        << "[--interval-closure-output <path>] [--interval-closure-merge-ledger <path>] "
+        << "[--interval-closure-time-limit <seconds>] [--interval-closure-variant-mode exhaustive|best-fixed|cutoff-feasibility|bpc] "
+        << "[--relaxation-certificate-mode bound|cutoff-feasibility|both] [--cutoff-feasibility-epsilon <eps>] "
+        << "[--cutoff-feasibility-time-limit <seconds>] [--relaxation-portfolio-mode fixed|adaptive|race|exhaustive] "
+        << "[--relaxation-exhaustive-variants <list>] [--relaxation-exhaustive-stop-on-fathom true|false] "
         << "[--pricing-final-verifier true|false] [--pricing-verifier-time <seconds>] "
         << "[--pricing-verifier-checkpoint <path>] [--pricing-verifier-resume <path>] "
         << "[--pricing-verifier-mode label-dp|route-mask-dp|auto] "
@@ -381,7 +388,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--large-compact-flow-relaxation") opt.large_compact_flow_relaxation = requireValue(i, argc, argv);
         else if (arg == "--large-compact-flow-time-limit") opt.large_compact_flow_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--large-compact-flow-connectivity") opt.large_compact_flow_connectivity = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--service-operation-min-handling-cuts") opt.service_operation_min_handling_cuts = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--service-operation-min-handling-cuts" ||
+                 arg == "--service-operation-min-handling") opt.service_operation_min_handling_cuts = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--penalty-movement-lb-cuts") opt.penalty_movement_lb_cuts = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--transfer-subset-capacity-cuts") opt.transfer_subset_capacity_cuts = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--relaxation-portfolio-mode") opt.relaxation_portfolio_mode = requireValue(i, argc, argv);
@@ -389,6 +397,20 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--relaxation-portfolio-max-variants") opt.relaxation_portfolio_max_variants = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--relaxation-portfolio-min-improvement") opt.relaxation_portfolio_min_improvement = std::stod(requireValue(i, argc, argv));
         else if (arg == "--relaxation-portfolio-keep-best-bound") opt.relaxation_portfolio_keep_best_bound = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--relaxation-exhaustive-variants") opt.relaxation_exhaustive_variants = requireValue(i, argc, argv);
+        else if (arg == "--relaxation-exhaustive-stop-on-fathom") opt.relaxation_exhaustive_stop_on_fathom = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--relaxation-certificate-mode") opt.relaxation_certificate_mode = requireValue(i, argc, argv);
+        else if (arg == "--cutoff-feasibility-epsilon") opt.cutoff_feasibility_epsilon = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--cutoff-feasibility-time-limit") opt.cutoff_feasibility_time_limit = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--interval-closure-mode") opt.interval_closure_mode = requireValue(i, argc, argv);
+        else if (arg == "--interval-closure-input") opt.interval_closure_input = requireValue(i, argc, argv);
+        else if (arg == "--interval-closure-target-instance") opt.interval_closure_target_instance = requireValue(i, argc, argv);
+        else if (arg == "--interval-closure-target-ids") opt.interval_closure_target_ids = requireValue(i, argc, argv);
+        else if (arg == "--interval-closure-range") opt.interval_closure_range = requireValue(i, argc, argv);
+        else if (arg == "--interval-closure-output") opt.interval_closure_output = requireValue(i, argc, argv);
+        else if (arg == "--interval-closure-merge-ledger") opt.interval_closure_merge_ledger = requireValue(i, argc, argv);
+        else if (arg == "--interval-closure-time-limit") opt.interval_closure_time_limit = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--interval-closure-variant-mode") opt.interval_closure_variant_mode = requireValue(i, argc, argv);
         else if (arg == "--frontier-scheduling-mode") opt.frontier_scheduling_mode = requireValue(i, argc, argv);
         else if (arg == "--frontier-critical-band-auto") opt.frontier_critical_band_auto = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-critical-band-max-depth") opt.frontier_critical_band_max_depth = std::stoi(requireValue(i, argc, argv));
@@ -697,7 +719,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     opt.relaxation_portfolio_mode = lowerAscii(opt.relaxation_portfolio_mode);
     if (opt.relaxation_portfolio_mode != "adaptive" &&
-        opt.relaxation_portfolio_mode != "race") {
+        opt.relaxation_portfolio_mode != "race" &&
+        opt.relaxation_portfolio_mode != "exhaustive") {
         opt.relaxation_portfolio_mode = "fixed";
     }
     if (opt.relaxation_portfolio_probe_seconds < 0.0) {
@@ -708,6 +731,31 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if (opt.relaxation_portfolio_min_improvement < 0.0) {
         opt.relaxation_portfolio_min_improvement = 0.0;
+    }
+    opt.relaxation_certificate_mode = lowerAscii(opt.relaxation_certificate_mode);
+    if (opt.relaxation_certificate_mode != "cutoff-feasibility" &&
+        opt.relaxation_certificate_mode != "both") {
+        opt.relaxation_certificate_mode = "bound";
+    }
+    if (opt.cutoff_feasibility_epsilon < 0.0) {
+        opt.cutoff_feasibility_epsilon = 0.0;
+    }
+    if (opt.cutoff_feasibility_time_limit < 0.0) {
+        opt.cutoff_feasibility_time_limit = 0.0;
+    }
+    opt.interval_closure_mode = lowerAscii(opt.interval_closure_mode);
+    if (opt.interval_closure_mode != "focus" &&
+        opt.interval_closure_mode != "merge") {
+        opt.interval_closure_mode = "off";
+    }
+    opt.interval_closure_variant_mode = lowerAscii(opt.interval_closure_variant_mode);
+    if (opt.interval_closure_variant_mode != "exhaustive" &&
+        opt.interval_closure_variant_mode != "cutoff-feasibility" &&
+        opt.interval_closure_variant_mode != "bpc") {
+        opt.interval_closure_variant_mode = "best-fixed";
+    }
+    if (opt.interval_closure_time_limit < 0.0) {
+        opt.interval_closure_time_limit = 0.0;
     }
     opt.frontier_scheduling_mode = lowerAscii(opt.frontier_scheduling_mode);
     if (opt.frontier_scheduling_mode != "v12-fast-close" &&
@@ -7811,6 +7859,19 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         opt.route_mask_operation_budget_cuts;
     result.adaptive_split_enabled = opt.frontier_adaptive_split;
     result.relaxation_portfolio_mode = opt.relaxation_portfolio_mode;
+    result.relaxation_certificate_mode = opt.relaxation_certificate_mode;
+    result.cutoff_feasibility_epsilon = opt.cutoff_feasibility_epsilon;
+    result.interval_closure_mode = opt.interval_closure_mode;
+    result.interval_closure_variant_mode = opt.interval_closure_variant_mode;
+    result.interval_closure_target_ids = opt.interval_closure_target_ids;
+    result.interval_closure_range = opt.interval_closure_range;
+    result.focused_interval_result = opt.frontier_focus_only ||
+        opt.interval_closure_mode == "focus";
+    result.focused_interval_safe_to_merge = false;
+    result.focused_interval_merge_reason =
+        result.focused_interval_result
+            ? "focused interval evidence is diagnostic until exact coverage is merged into the full frontier ledger"
+            : "";
     result.vehicle_indexed_operation_relaxation_enabled =
         opt.vehicle_indexed_operation_relaxation;
     result.incumbent_generation_method = opt.bpc_incumbent;
@@ -7879,6 +7940,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         + ", transfer_subset_capacity_cuts=" + std::string(opt.transfer_subset_capacity_cuts ? "true" : "false")
         + ", relaxation_portfolio_mode=" + opt.relaxation_portfolio_mode
         + ", relaxation_portfolio_max_variants=" + std::to_string(opt.relaxation_portfolio_max_variants)
+        + ", relaxation_certificate_mode=" + opt.relaxation_certificate_mode
+        + ", cutoff_feasibility_epsilon=" + std::to_string(opt.cutoff_feasibility_epsilon)
+        + ", interval_closure_mode=" + opt.interval_closure_mode
+        + ", interval_closure_variant_mode=" + opt.interval_closure_variant_mode
         + ", frontier_scheduling_mode=" + opt.frontier_scheduling_mode
         + ", support_duration_pruning=" + std::string(opt.support_duration_pruning ? "true" : "false")
         + ", pricing_completion_lb_pruning=" + std::string(opt.pricing_completion_lb_pruning ? "true" : "false")
@@ -10507,9 +10572,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     std::string tried = "fixed_baseline";
                     std::string skipped;
                     double probe_time_total = 0.0;
-                    const int max_variants =
-                        std::min(static_cast<int>(variants.size()),
-                                 std::max(0, opt.relaxation_portfolio_max_variants - 1));
+                    const bool exhaustive_mode =
+                        opt.relaxation_portfolio_mode == "exhaustive";
+                    const int max_variants = exhaustive_mode
+                        ? static_cast<int>(variants.size())
+                        : std::min(static_cast<int>(variants.size()),
+                                   std::max(0, opt.relaxation_portfolio_max_variants - 1));
                     for (int pos = 0; pos < max_variants; ++pos) {
                         const PortfolioVariant& variant = variants[pos];
                         if (variant.compact_mode == opt.large_compact_flow_relaxation &&
@@ -10521,7 +10589,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                         }
                         const auto probe_start = std::chrono::steady_clock::now();
                         const double candidate_budget =
-                            opt.relaxation_portfolio_mode == "race"
+                            (opt.relaxation_portfolio_mode == "race" ||
+                             exhaustive_mode)
                                 ? budget
                                 : std::max(0.1, std::min(
                                       budget,
@@ -10555,8 +10624,16 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                                   std::to_string(candidate_lb);
                             out.bound = candidate;
                         }
+                        if (exhaustive_mode &&
+                            opt.relaxation_exhaustive_stop_on_fathom &&
+                            candidate_lb >= cutoff - opt.cutoff_feasibility_epsilon) {
+                            skipped = "stopped_after_fathoming_variant=" +
+                                variant.name;
+                            break;
+                        }
                     }
-                    if (static_cast<int>(variants.size()) > max_variants) {
+                    if (static_cast<int>(variants.size()) > max_variants &&
+                        skipped.empty()) {
                         skipped = "max_variants_limit";
                     }
                     if (!opt.relaxation_portfolio_keep_best_bound &&
@@ -10585,6 +10662,23 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     result.relaxation_portfolio_best_variant_bound =
                         std::max(result.relaxation_portfolio_best_variant_bound,
                                  best_lb);
+                    if (opt.relaxation_certificate_mode == "cutoff-feasibility" ||
+                        opt.relaxation_certificate_mode == "both") {
+                        result.cutoff_feasibility_attempted = true;
+                        result.cutoff_feasibility_time_seconds += probe_time_total;
+                        if (best_lb >= cutoff - opt.cutoff_feasibility_epsilon) {
+                            result.cutoff_feasibility_infeasible = true;
+                            result.cutoff_feasibility_status =
+                                "infeasible_by_valid_lower_bound";
+                        } else if (best_name == "fixed_baseline" &&
+                                   best_lb < cutoff - opt.cutoff_feasibility_epsilon) {
+                            result.cutoff_feasibility_status =
+                                "relaxed_solution_not_excluded_by_lower_bound";
+                        } else {
+                            result.cutoff_feasibility_status =
+                                "best_valid_bound_below_cutoff";
+                        }
+                    }
                     if (!skipped.empty()) {
                         if (!result.relaxation_portfolio_variants_skipped_reason.empty()) {
                             result.relaxation_portfolio_variants_skipped_reason += "|";
@@ -12912,6 +13006,22 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.gap = (std::fabs(result.upper_bound) > 1e-12)
         ? std::max(0.0, (result.upper_bound - result.lower_bound) / std::fabs(result.upper_bound))
         : 0.0;
+    if (result.cutoff_feasibility_attempted) {
+        const bool globally_cutoff_infeasible =
+            result.lower_bound >= result.upper_bound -
+                std::max(1e-12, result.cutoff_feasibility_epsilon);
+        result.cutoff_feasibility_infeasible = globally_cutoff_infeasible;
+        if (globally_cutoff_infeasible) {
+            result.cutoff_feasibility_status =
+                "infeasible_by_valid_global_lower_bound";
+        } else if (result.focused_interval_result) {
+            result.cutoff_feasibility_status =
+                "focused_interval_bound_below_cutoff_diagnostic_only";
+        } else {
+            result.cutoff_feasibility_status =
+                "best_valid_bound_below_cutoff";
+        }
+    }
     result.runtime_seconds = elapsedSeconds();
     result.wall_time_seconds = result.runtime_seconds;
     if (focus_only_effective) {
