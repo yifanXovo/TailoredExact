@@ -2,7 +2,7 @@
 
 Branch: `codex/longrun-round17-local-results`
 Starting remote head: `e41ba513de0acae653c44299c718c0c1bf8e2fce`
-Synchronized implementation commit SHA: pending final commit; see final response for branch head.
+Synchronized implementation commit SHA: `6c651315d9fdc01255ffab9cb3769a03ce39af8c`. Final pushed branch-head SHA is reported in the final response.
 
 ## Code Changes
 
