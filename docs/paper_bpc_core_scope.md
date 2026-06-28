@@ -3,6 +3,16 @@
 The paper-facing exact algorithm is GF-RL-BPC, implemented by
 `--method gcap-frontier --algorithm-preset paper-bpc-core`.
 
+## V20 Certificate-Round Status
+
+The V20 certificate round did not promote a new V20 paper-core preset.
+`paper-bpc-core-adaptive`, `--relaxation-portfolio-mode exhaustive`, and
+focused interval-closure runs remain candidate/diagnostic configurations.
+Focused interval rows are not original-problem certificates unless their
+coverage is safely merged into the full frontier ledger.  Canonical paper-core
+still excludes archive scanning and treats every incumbent source as
+upper-bound-only evidence.
+
 ## Included In Paper-Core
 
 - Full Gini-frontier decomposition over the original improving Gini range.
