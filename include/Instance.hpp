@@ -134,6 +134,15 @@ struct SolveOptions {
     std::string interval_closure_merge_ledger;
     double interval_closure_time_limit = 0.0;
     std::string interval_closure_variant_mode = "best-fixed";
+    bool paper_run_sealed = false;
+    std::string paper_run_sealed_rejection_reason;
+    bool auto_interval_oracle = false;
+    double auto_interval_oracle_time_limit = 0.0;
+    int auto_interval_oracle_max_leaves = 0;
+    std::string auto_interval_oracle_order = "all";
+    bool auto_interval_oracle_merge = true;
+    bool auto_interval_oracle_restart_on_improved_ub = true;
+    bool auto_interval_bpc_fallback = false;
     std::string frontier_scheduling_mode = "default";
     bool frontier_critical_band_auto = false;
     int frontier_critical_band_max_depth = 0;
