@@ -140,6 +140,11 @@ struct SolveOptions {
     double auto_interval_oracle_time_limit = 0.0;
     int auto_interval_oracle_max_leaves = 0;
     std::string auto_interval_oracle_order = "all";
+    std::string auto_interval_oracle_leaf_budget_policy = "fixed";
+    bool auto_interval_oracle_continue_after_timeout = true;
+    bool auto_interval_oracle_split_on_timeout = false;
+    int auto_interval_oracle_child_split_count = 2;
+    int auto_interval_oracle_max_depth = 0;
     bool auto_interval_oracle_merge = true;
     bool auto_interval_oracle_restart_on_improved_ub = true;
     bool auto_interval_bpc_fallback = false;

@@ -8,7 +8,8 @@ results/paper_evidence_candidate/
 
 It collects the sealed command manifest, instance hashes, raw JSONs, interval
 ledgers, UB event logs, certificate audit CSV, no-instance-special-case audit,
-and summary tables produced by `results/sealed_pipeline_completion_round/`.
+and summary tables produced by the latest sealed evidence round.  The current
+package mirrors `results/sealed_closure_round/`.
 
 Rows are classified as:
 
@@ -22,7 +23,7 @@ The evidence package is generated from sealed rows only. Archive scanning,
 external incumbents, known UB injection, focus-only certificates, and
 instance-specific algorithm settings are excluded from paper-candidate rows.
 
-## Current Sealed Round Classification
+## Current Sealed Closure Classification
 
 Certified exact rows:
 
@@ -39,11 +40,12 @@ Noncertified rows with final JSON:
 - `moderate_seed3301`;
 - `moderate_seed3302`.
 
-The noncertified rows are now represented by final raw JSONs. They are included
-in `results/sealed_pipeline_completion_round/certificate_audit.csv` and pass
-audit because they honestly report `certified_original_problem=false`, positive
-gaps, unresolved intervals, and checkpoint/oracle plateau reasons.
+The noncertified rows are represented by solver-final raw JSONs in the sealed
+closure round. They are included in
+`results/sealed_closure_round/certificate_audit.csv` and pass audit because
+they honestly report `certified_original_problem=false`, positive gaps,
+unresolved intervals, and oracle/BPC plateau reasons.
 
 The project is not yet ready for broad paper benchmark testing: V12 behavior is
 stable and two V20/M3 stress rows certify, but the requested third V20
-certificate was not obtained in this sealed completion round.
+certificate was not obtained in the sealed closure round.

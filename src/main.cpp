@@ -254,6 +254,7 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
             opt.auto_interval_oracle = true;
             opt.auto_interval_oracle_merge = true;
             opt.auto_interval_oracle_order = "all";
+            opt.auto_interval_oracle_continue_after_timeout = true;
             if (opt.auto_interval_oracle_time_limit <= 0.0) {
                 opt.auto_interval_oracle_time_limit = 1800.0;
             }
@@ -448,8 +449,16 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--paper-run-sealed") opt.paper_run_sealed = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--auto-interval-oracle") opt.auto_interval_oracle = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--auto-interval-oracle-time-limit") opt.auto_interval_oracle_time_limit = std::stod(requireValue(i, argc, argv));
-        else if (arg == "--auto-interval-oracle-max-leaves") opt.auto_interval_oracle_max_leaves = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--auto-interval-oracle-max-leaves") {
+            std::string v = lowerAscii(requireValue(i, argc, argv));
+            opt.auto_interval_oracle_max_leaves = (v == "all" || v == "0") ? 0 : std::stoi(v);
+        }
         else if (arg == "--auto-interval-oracle-order") opt.auto_interval_oracle_order = requireValue(i, argc, argv);
+        else if (arg == "--auto-interval-oracle-leaf-budget-policy") opt.auto_interval_oracle_leaf_budget_policy = requireValue(i, argc, argv);
+        else if (arg == "--auto-interval-oracle-continue-after-timeout") opt.auto_interval_oracle_continue_after_timeout = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--auto-interval-oracle-split-on-timeout") opt.auto_interval_oracle_split_on_timeout = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--auto-interval-oracle-child-split-count") opt.auto_interval_oracle_child_split_count = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--auto-interval-oracle-max-depth") opt.auto_interval_oracle_max_depth = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--auto-interval-oracle-merge") opt.auto_interval_oracle_merge = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--auto-interval-oracle-restart-on-improved-ub") opt.auto_interval_oracle_restart_on_improved_ub = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--auto-interval-bpc-fallback") opt.auto_interval_bpc_fallback = parseBoolValue(requireValue(i, argc, argv));
@@ -864,7 +873,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.auto_interval_oracle_order != "min-gap" &&
         opt.auto_interval_oracle_order != "low-gini" &&
         opt.auto_interval_oracle_order != "min-lb" &&
-        opt.auto_interval_oracle_order != "best-bound") {
+        opt.auto_interval_oracle_order != "best-bound" &&
+        opt.auto_interval_oracle_order != "all") {
         opt.auto_interval_oracle_order = "all";
     }
     if (opt.auto_interval_oracle_time_limit < 0.0) {
@@ -872,6 +882,17 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if (opt.auto_interval_oracle_max_leaves < 0) {
         opt.auto_interval_oracle_max_leaves = 0;
+    }
+    opt.auto_interval_oracle_leaf_budget_policy =
+        lowerAscii(opt.auto_interval_oracle_leaf_budget_policy);
+    if (opt.auto_interval_oracle_leaf_budget_policy != "adaptive") {
+        opt.auto_interval_oracle_leaf_budget_policy = "fixed";
+    }
+    if (opt.auto_interval_oracle_child_split_count < 2) {
+        opt.auto_interval_oracle_child_split_count = 2;
+    }
+    if (opt.auto_interval_oracle_max_depth < 0) {
+        opt.auto_interval_oracle_max_depth = 0;
     }
     if (opt.auto_interval_bpc_time_limit < 0.0) {
         opt.auto_interval_bpc_time_limit = 0.0;
@@ -13824,7 +13845,9 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         return;
     }
     if (result.status == "optimal" || result.unresolved_intervals <= 0) {
+        result.auto_interval_oracle_total_final_leaves = 0;
         result.auto_interval_oracle_remaining_open_leaves = 0;
+        result.auto_interval_oracle_coverage_complete = true;
         result.full_ledger_merge_status = "already_closed_before_auto_oracle";
         result.full_ledger_merge_audit_passed = result.status == "optimal";
         return;
@@ -13889,10 +13912,12 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         const int ib = static_cast<int>(csvDoubleField(rows[b], "interval_id", 0.0));
         return ia < ib;
     });
+    const int total_final_leaves = static_cast<int>(targets.size());
     if (opt.auto_interval_oracle_max_leaves > 0 &&
         static_cast<int>(targets.size()) > opt.auto_interval_oracle_max_leaves) {
         targets.resize(static_cast<std::size_t>(opt.auto_interval_oracle_max_leaves));
     }
+    result.auto_interval_oracle_total_final_leaves = total_final_leaves;
 
     std::filesystem::path out_path = opt.out_path.empty()
         ? std::filesystem::path("auto_interval_oracle.json")
@@ -13911,18 +13936,24 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
 
     int closed = 0;
     int attempted = 0;
+    int timed_out = 0;
+    int split = 0;
     int feasible_improving = 0;
     bool oracle_blocker_seen = false;
     std::string oracle_blocker_note;
     std::ostringstream status_by_leaf;
-    for (const std::size_t target_idx : targets) {
+    auto safeFileId = [](std::string id) {
+        for (char& ch : id) {
+            if (!std::isalnum(static_cast<unsigned char>(ch)) && ch != '_' && ch != '-') {
+                ch = '_';
+            }
+        }
+        return id;
+    };
+    auto run_one_oracle = [&](const std::string& interval_id,
+                              double lo,
+                              double hi) {
         ++attempted;
-        IntervalCsvRow& row = rows[target_idx];
-        const std::string interval_id = row.get("interval_id").empty()
-            ? std::to_string(target_idx)
-            : row.get("interval_id");
-        const double lo = csvDoubleField(row, "gamma_L", -1.0);
-        const double hi = csvDoubleField(row, "gamma_U", -1.0);
         ebrp::SolveOptions oracle_opt = opt;
         oracle_opt.method = "interval-cutoff-oracle";
         oracle_opt.interval_exact_cutoff_oracle = "compact-mip";
@@ -13935,19 +13966,30 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
             opt.auto_interval_oracle_time_limit > 0.0
                 ? opt.auto_interval_oracle_time_limit
                 : std::max(60.0, opt.solve_time_limit * 0.25);
+        const std::string file_id = safeFileId(interval_id);
         const std::filesystem::path json_path =
-            oracle_dir / ("interval_" + interval_id + ".json");
+            oracle_dir / ("interval_" + file_id + ".json");
         oracle_opt.out_path = json_path.string();
         oracle_opt.log_path.clear();
         oracle_opt.interval_exact_cutoff_export_lp =
-            (oracle_dir / ("interval_" + interval_id + ".lp")).string();
+            (oracle_dir / ("interval_" + file_id + ".lp")).string();
         oracle_opt.interval_exact_cutoff_result =
-            (oracle_dir / ("interval_" + interval_id + ".sol")).string();
+            (oracle_dir / ("interval_" + file_id + ".sol")).string();
 
         ebrp::SolveResult oracle = ebrp::solveIntervalExactCutoffOracle(
             instance, oracle_opt);
         initializeScalabilityFields(instance, oracle_opt, oracle);
         applyRunConfigSnapshot(buildRunConfigSnapshot(instance, oracle_opt), oracle);
+        oracle.finalization_source = "solver_final_json";
+        oracle.solver_finalization_reached = true;
+        oracle.wrapper_synthesized_final_json = false;
+        oracle.process_return_code = 0;
+        oracle.abnormal_exit_detected = false;
+        oracle.abnormal_exit_reason = "none";
+        oracle.last_progress_event = "interval_oracle_final";
+        oracle.plateau_reason = oracle.status == "interval_closed"
+            ? "interval_closed"
+            : "interval_oracle_unresolved";
         finalizePaperModuleFields(oracle);
         oracle.result_file = json_path.string();
         try {
@@ -13956,27 +13998,17 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
             result.notes.push_back(std::string("auto interval oracle failed to write JSON: ")
                 + ex.what());
         }
-
-        const bool oracle_closed = oracle.status == "interval_closed" &&
-            oracle.interval_exact_cutoff_proven_infeasible;
-        if (oracle_closed) {
-            ++closed;
-            row.set("interval_status", "bound_fathomed");
-            row.set("reason", oracle.interval_exact_cutoff_certificate_basis);
-            row.set("certificate_basis", oracle.interval_exact_cutoff_certificate_basis);
-            row.set("interval_lower_bound", std::to_string(result.upper_bound));
-            row.set("lower_bound_source", "interval_exact_cutoff_oracle");
-            row.set("lower_bound_sources",
-                    row.get("lower_bound_sources") + "|interval_exact_cutoff_oracle");
-        }
-        if (oracle.interval_exact_cutoff_feasible_improving) {
-            ++feasible_improving;
-        }
         if (status_by_leaf.tellp() > 0) status_by_leaf << "|";
         status_by_leaf << interval_id << ":"
                        << oracle.status << ":"
                        << oracle.interval_exact_cutoff_certificate_basis << ":"
                        << oracle.interval_exact_cutoff_solver_status;
+        if (oracle.interval_exact_cutoff_timeout) {
+            ++timed_out;
+        }
+        if (oracle.interval_exact_cutoff_feasible_improving) {
+            ++feasible_improving;
+        }
         summary << csvEscapeSimple(interval_id) << ","
                 << std::setprecision(12) << lo << "," << hi << ","
                 << csvEscapeSimple(oracle.status) << ","
@@ -13992,6 +14024,62 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
                 << csvEscapeSimple(oracle.interval_exact_cutoff_lp_path) << ","
                 << csvEscapeSimple(oracle.interval_exact_cutoff_log_path) << "\n";
         summary.flush();
+        return oracle;
+    };
+    for (const std::size_t target_idx : targets) {
+        IntervalCsvRow& row = rows[target_idx];
+        const std::string interval_id = row.get("interval_id").empty()
+            ? std::to_string(target_idx)
+            : row.get("interval_id");
+        const double lo = csvDoubleField(row, "gamma_L", -1.0);
+        const double hi = csvDoubleField(row, "gamma_U", -1.0);
+        ebrp::SolveResult oracle = run_one_oracle(interval_id, lo, hi);
+
+        bool oracle_closed = oracle.status == "interval_closed" &&
+            oracle.interval_exact_cutoff_proven_infeasible;
+        if (!oracle_closed &&
+            oracle.interval_exact_cutoff_timeout &&
+            opt.auto_interval_oracle_split_on_timeout &&
+            opt.auto_interval_oracle_max_depth > 0 &&
+            opt.auto_interval_oracle_child_split_count > 1 &&
+            hi > lo + 1e-12) {
+            ++split;
+            bool all_children_closed = true;
+            const int child_count = opt.auto_interval_oracle_child_split_count;
+            for (int c = 0; c < child_count; ++c) {
+                const double child_lo = lo + (hi - lo) * (static_cast<double>(c) / child_count);
+                const double child_hi = lo + (hi - lo) * (static_cast<double>(c + 1) / child_count);
+                const std::string child_id = interval_id + "_d1_" + std::to_string(c);
+                ebrp::SolveResult child = run_one_oracle(child_id, child_lo, child_hi);
+                const bool child_closed = child.status == "interval_closed" &&
+                    child.interval_exact_cutoff_proven_infeasible;
+                if (!child_closed) {
+                    all_children_closed = false;
+                }
+                if (child.interval_exact_cutoff_feasible_improving) {
+                    feasible_improving = std::max(feasible_improving, 1);
+                }
+            }
+            if (all_children_closed) {
+                oracle_closed = true;
+                row.set("reason", "all_child_intervals_closed_by_interval_exact_cutoff_mip");
+                row.set("certificate_basis", "interval_exact_cutoff_child_partition_infeasible");
+            }
+        }
+        if (oracle_closed) {
+            ++closed;
+            row.set("interval_status", "bound_fathomed");
+            if (row.get("reason").empty()) {
+                row.set("reason", oracle.interval_exact_cutoff_certificate_basis);
+            }
+            if (row.get("certificate_basis").empty()) {
+                row.set("certificate_basis", oracle.interval_exact_cutoff_certificate_basis);
+            }
+            row.set("interval_lower_bound", std::to_string(result.upper_bound));
+            row.set("lower_bound_source", "interval_exact_cutoff_oracle");
+            row.set("lower_bound_sources",
+                    row.get("lower_bound_sources") + "|interval_exact_cutoff_oracle");
+        }
         if (!oracle_closed && !oracle.interval_exact_cutoff_feasible_improving) {
             oracle_blocker_seen = true;
             oracle_blocker_note = "automatic interval oracle stopped at interval "
@@ -13999,19 +14087,25 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
                 + ", basis=" + oracle.interval_exact_cutoff_certificate_basis
                 + ", solver_status=" + oracle.interval_exact_cutoff_solver_status;
             result.notes.push_back(oracle_blocker_note);
-            break;
+            if (!opt.auto_interval_oracle_continue_after_timeout) {
+                break;
+            }
         }
     }
     summary.close();
 
     result.auto_interval_oracle_leaves_attempted = attempted;
     result.auto_interval_oracle_leaves_closed = closed;
+    result.auto_interval_oracle_leaves_timed_out = timed_out;
+    result.auto_interval_oracle_leaves_split = split;
     result.auto_interval_oracle_time_seconds =
         std::chrono::duration<double>(
             std::chrono::steady_clock::now() - oracle_start).count();
     result.auto_interval_oracle_remaining_open_leaves =
-        std::max(0, result.unresolved_intervals - closed);
+        std::max(0, total_final_leaves - closed);
     result.auto_interval_oracle_status_by_leaf = status_by_leaf.str();
+    result.auto_interval_oracle_coverage_complete =
+        total_final_leaves > 0 && result.auto_interval_oracle_remaining_open_leaves == 0;
     result.notes.push_back("automatic interval oracle summary written to "
         + oracle_csv.string());
     if (oracle_blocker_seen) {
@@ -14239,6 +14333,13 @@ int main(int argc, char** argv) {
             applySealedRunProvenance(effective_opt, r);
             if (r.finalization_source.empty()) {
                 r.finalization_source = "solver_final_json";
+            }
+            r.solver_finalization_reached = true;
+            r.wrapper_synthesized_final_json = false;
+            r.process_return_code = 0;
+            r.abnormal_exit_detected = false;
+            if (r.abnormal_exit_reason.empty()) {
+                r.abnormal_exit_reason = "none";
             }
             if (r.last_progress_event.empty()) {
                 r.last_progress_event =

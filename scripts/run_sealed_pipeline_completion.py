@@ -245,6 +245,14 @@ def synthesize_json(
         "wall_time_seconds": parse_float(last.get("elapsed_seconds"), 0.0),
         "stop_reason": stop_reason,
         "finalization_source": finalization_source,
+        "solver_finalization_reached": False,
+        "wrapper_synthesized_final_json": True,
+        "process_return_code": process_returncode if process_returncode is not None else 0,
+        "abnormal_exit_detected": process_returncode not in (None, 0),
+        "abnormal_exit_reason": (
+            "none" if process_returncode in (None, 0)
+            else f"process_return_code_{process_returncode}"
+        ),
         "last_progress_event": progress_event,
         "plateau_reason": "interrupted_before_solver_final_json",
         "verifier_passed": verifier,
@@ -286,11 +294,15 @@ def synthesize_json(
         "sealed_run_forbidden_source_used": False,
         "sealed_run_rejection_reason": "none",
         "auto_interval_oracle_called": False,
+        "auto_interval_oracle_total_final_leaves": unresolved,
         "auto_interval_oracle_leaves_attempted": 0,
         "auto_interval_oracle_leaves_closed": 0,
+        "auto_interval_oracle_leaves_timed_out": 0,
+        "auto_interval_oracle_leaves_split": 0,
         "auto_interval_oracle_time_seconds": 0.0,
         "auto_interval_oracle_remaining_open_leaves": unresolved,
         "auto_interval_oracle_status_by_leaf": "",
+        "auto_interval_oracle_coverage_complete": False,
         "full_ledger_merge_status": "not_reached_before_interruption",
         "full_ledger_merge_audit_passed": False,
         "bpc_fallback_auto_called": False,
@@ -410,8 +422,13 @@ def run_checkpoint_oracle_for_payload(
         "log_path": oracle_payload.get("interval_exact_cutoff_log_path", ""),
     }])
     payload["auto_interval_oracle_called"] = True
+    payload["auto_interval_oracle_total_final_leaves"] = max(
+        parse_int(payload.get("auto_interval_oracle_total_final_leaves"), 0), 1
+    )
     payload["auto_interval_oracle_leaves_attempted"] = 1
     payload["auto_interval_oracle_leaves_closed"] = 1 if proven_infeasible else 0
+    payload["auto_interval_oracle_leaves_timed_out"] = 1 if timeout else 0
+    payload["auto_interval_oracle_leaves_split"] = 0
     payload["auto_interval_oracle_time_seconds"] = parse_float(
         oracle_payload.get("interval_exact_cutoff_runtime_seconds"), 0.0
     )
@@ -421,6 +438,9 @@ def run_checkpoint_oracle_for_payload(
     )
     payload["auto_interval_oracle_status_by_leaf"] = (
         f"{leaf.get('interval_id', '0')}:{status}:{basis}:{solver_status}"
+    )
+    payload["auto_interval_oracle_coverage_complete"] = (
+        payload["auto_interval_oracle_remaining_open_leaves"] == 0
     )
     payload["full_ledger_merge_status"] = (
         "checkpoint_oracle_closed_controlling_leaf_but_full_ledger_incomplete"
@@ -448,7 +468,12 @@ def build_command(
     ub_path: Path,
     time_limit: int,
     oracle_time: int,
-    oracle_max_leaves: int,
+    oracle_max_leaves: str,
+    oracle_order: str,
+    oracle_continue_after_timeout: bool,
+    oracle_split_on_timeout: bool,
+    oracle_child_split_count: int,
+    oracle_max_depth: int,
     auto_bpc: bool,
     bpc_time: int,
     bpc_max_leaves: int,
@@ -461,7 +486,13 @@ def build_command(
         "--auto-interval-oracle", "true",
         "--auto-interval-oracle-time-limit", str(oracle_time),
         "--auto-interval-oracle-max-leaves", str(oracle_max_leaves),
-        "--auto-interval-oracle-order", "low-gini",
+        "--auto-interval-oracle-order", str(oracle_order),
+        "--auto-interval-oracle-continue-after-timeout",
+        "true" if oracle_continue_after_timeout else "false",
+        "--auto-interval-oracle-split-on-timeout",
+        "true" if oracle_split_on_timeout else "false",
+        "--auto-interval-oracle-child-split-count", str(oracle_child_split_count),
+        "--auto-interval-oracle-max-depth", str(oracle_max_depth),
         "--auto-interval-oracle-restart-on-improved-ub", "true",
         "--auto-interval-bpc-fallback", "true" if auto_bpc else "false",
         "--auto-interval-bpc-time-limit", str(bpc_time),
@@ -507,6 +538,11 @@ def run_row(args: argparse.Namespace) -> Dict[str, Any]:
         args.time_limit,
         args.oracle_time_limit,
         args.oracle_max_leaves,
+        args.oracle_order,
+        args.oracle_continue_after_timeout,
+        args.oracle_split_on_timeout,
+        args.oracle_child_split_count,
+        args.oracle_max_depth,
         args.auto_bpc_fallback,
         args.bpc_time_limit,
         args.bpc_max_leaves,
@@ -530,6 +566,14 @@ def run_row(args: argparse.Namespace) -> Dict[str, Any]:
             payload = {}
         if isinstance(payload, dict):
             payload.setdefault("finalization_source", "solver_final_json")
+            payload["solver_finalization_reached"] = True
+            payload["wrapper_synthesized_final_json"] = False
+            payload["process_return_code"] = returncode if returncode is not None else 0
+            payload["abnormal_exit_detected"] = returncode not in (None, 0)
+            payload["abnormal_exit_reason"] = (
+                "none" if returncode in (None, 0)
+                else f"process_return_code_{returncode}"
+            )
             payload.setdefault("last_progress_event", "solver_final_json")
             payload.setdefault(
                 "plateau_reason",
@@ -624,14 +668,23 @@ def summarize_round(result_dir: Path, rows: Iterable[tuple]) -> None:
             "verifier_passed": data.get("verifier_passed", ""),
             "sealed_run": data.get("sealed_run", ""),
             "finalization_source": data.get("finalization_source", ""),
+            "solver_finalization_reached": data.get("solver_finalization_reached", ""),
+            "wrapper_synthesized_final_json": data.get("wrapper_synthesized_final_json", ""),
+            "process_return_code": data.get("process_return_code", data.get("wrapper_process_returncode", "")),
+            "abnormal_exit_detected": data.get("abnormal_exit_detected", ""),
+            "abnormal_exit_reason": data.get("abnormal_exit_reason", ""),
             "last_progress_event": data.get("last_progress_event", ""),
             "plateau_reason": data.get("plateau_reason", ""),
             "unresolved_intervals": data.get("unresolved_intervals", ""),
             "open_nodes": data.get("open_nodes", ""),
             "auto_interval_oracle_called": data.get("auto_interval_oracle_called", ""),
+            "auto_interval_oracle_total_final_leaves": data.get("auto_interval_oracle_total_final_leaves", ""),
             "auto_interval_oracle_leaves_attempted": data.get("auto_interval_oracle_leaves_attempted", ""),
             "auto_interval_oracle_leaves_closed": data.get("auto_interval_oracle_leaves_closed", ""),
+            "auto_interval_oracle_leaves_timed_out": data.get("auto_interval_oracle_leaves_timed_out", ""),
+            "auto_interval_oracle_leaves_split": data.get("auto_interval_oracle_leaves_split", ""),
             "auto_interval_oracle_remaining_open_leaves": data.get("auto_interval_oracle_remaining_open_leaves", ""),
+            "auto_interval_oracle_coverage_complete": data.get("auto_interval_oracle_coverage_complete", ""),
             "full_ledger_merge_status": data.get("full_ledger_merge_status", ""),
             "bpc_fallback_auto_called": data.get("bpc_fallback_auto_called", ""),
             "progress_log": str(progress_path) if progress_path.exists() else "",
@@ -758,7 +811,12 @@ def main(argv: List[str]) -> int:
     run.add_argument("--time-limit", type=int, required=True)
     run.add_argument("--wall-timeout", type=int, required=True)
     run.add_argument("--oracle-time-limit", type=int, default=300)
-    run.add_argument("--oracle-max-leaves", type=int, default=2)
+    run.add_argument("--oracle-max-leaves", default="all")
+    run.add_argument("--oracle-order", default="all")
+    run.add_argument("--oracle-continue-after-timeout", action=argparse.BooleanOptionalAction, default=True)
+    run.add_argument("--oracle-split-on-timeout", action=argparse.BooleanOptionalAction, default=False)
+    run.add_argument("--oracle-child-split-count", type=int, default=2)
+    run.add_argument("--oracle-max-depth", type=int, default=0)
     run.add_argument("--auto-bpc-fallback", action="store_true")
     run.add_argument("--bpc-time-limit", type=int, default=120)
     run.add_argument("--bpc-max-leaves", type=int, default=1)

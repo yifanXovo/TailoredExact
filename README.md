@@ -120,6 +120,28 @@ build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-exact-v20-ce
   --out results\sealed_pipeline_completion_round\raw\high_imbalance_seed3202.json
 ```
 
+Sealed all-leaf closure command template:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-exact-v20-certificate `
+  --paper-run-sealed true `
+  --auto-interval-oracle true --auto-interval-oracle-order all `
+  --auto-interval-oracle-max-leaves all `
+  --auto-interval-oracle-split-on-timeout true `
+  --auto-interval-bpc-fallback true `
+  --input reference\hard_stress\V20_M3\moderate_seed3301.txt `
+  --lambda 0.15 --T 3600 --time-limit 1800 `
+  --out results\sealed_closure_round\raw\moderate_seed3301.json
+```
+
+The all-leaf mode attempts every final unresolved Gini-frontier leaf before
+reporting a noncertified row. Timeout leaves may be split generically; a parent
+leaf is closed only if all children close with valid certificate bases. The
+current sealed closure round keeps V12 M1/M2 and the two certified V20 rows
+stable, eliminates the previous `tight_T_seed3102` abnormal exit, and gives
+final JSON for every row. It does not add a third V20 certificate, so broad
+paper benchmark testing remains premature.
+
 `paper-exact-v20-certificate` keeps native HGA-TGBC as a verifier-gated UB-only
 source, disables archive scanning, uses the fixed mip-light V20 relaxation
 portfolio with compact-flow connectivity, and automatically attempts exact

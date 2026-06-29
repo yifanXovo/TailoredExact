@@ -1,10 +1,6 @@
-"row","sealed_run","finalization_source","certified_original_problem","status","plateau_reason"
-"v4_smoke","True","solver_final_json","True","optimal","certified"
-"v12_m2_300s","True","solver_final_json","True","optimal","certified"
-"v12_m1_600s","True","solver_final_json","True","optimal","certified"
-"high_imbalance_seed3201","True","interrupted_checkpoint","False","interrupted_noncertified","checkpoint_oracle_timeout"
-"high_imbalance_seed3202","True","solver_final_json","True","optimal","certified"
-"tight_T_seed3101","True","solver_final_json","True","optimal","certified"
-"tight_T_seed3102","True","wrapper_checkpoint","False","interrupted_noncertified","checkpoint_oracle_timeout"
-"moderate_seed3301","True","interrupted_checkpoint","False","interrupted_noncertified","checkpoint_oracle_diagnostic_unresolved"
-"moderate_seed3302","True","interrupted_checkpoint","False","interrupted_noncertified","checkpoint_oracle_timeout"
+row,check,status
+sealed_closure_round,no_archive_scanning,pass
+sealed_closure_round,no_external_known_ub,pass
+sealed_closure_round,no_instance_specific_logic,pass
+sealed_closure_round,all_rows_final_json,pass
+sealed_closure_round,audit_includes_noncertified,pass
