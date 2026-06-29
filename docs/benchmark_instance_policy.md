@@ -103,3 +103,19 @@ engineering stress certificates for the exact algorithm, not historical paper
 benchmark claims.  Noncertified rows must be reported with their unresolved
 intervals and gaps rather than omitted or converted into historical-target
 status.
+
+## Sealed Paper Pipeline Round Policy
+
+`results/sealed_paper_pipeline_round/` keeps the same benchmark
+classification:
+
+- V20/M3 rows are `hard_generated_v20_m3`;
+- V12 rows are `regenerated_engineering`;
+- V4 rows are `smoke`.
+
+The sealed round is designed as a paper-candidate reproducibility package. It
+uses one command template with `--paper-run-sealed true`; no row may use
+archive scanning, external incumbent JSON, known UB injection, manually focused
+intervals, or instance-specific solver settings. Certified V20 rows remain
+engineering stress evidence unless and until the corresponding historical paper
+target files are identified and hashed.

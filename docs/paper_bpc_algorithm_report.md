@@ -45,6 +45,27 @@ A BPC result is certified only if `status=optimal`, `gap=0`, `lower_bound=upper_
 
 `wall_time_seconds` is elapsed wall time. Aggregate worker timings may exceed wall time under parallel BPC.
 
+## Sealed Paper-Candidate V20 Portfolio
+
+The V20 paper-candidate preset is:
+
+```text
+--method gcap-frontier --algorithm-preset paper-exact-v20-certificate --paper-run-sealed true
+```
+
+It is an exact portfolio, not a pure BPC-only algorithm. It combines same-run
+native HGA-TGBC UB generation, the full Gini-frontier ledger, V20-safe
+relaxation bounds, and automatic exact interval cutoff MIP closure for final
+unresolved leaves. The interval oracle can close a leaf only by proving the
+original fixed-interval cutoff feasibility model infeasible. If the oracle
+times out or finds a feasible improving solution, the existing full ledger is
+not certified; a restart or further exact closure is required.
+
+Sealed runs reject archive scanning, external incumbents, focus-only final
+certificates, stale resume/imported interval bounds, and manual known UB
+injection. These fields are emitted in every result JSON and checked by
+`scripts/audit_bpc_certificate.py`.
+
 ## Optimization Update: 2026-06-20
 
 Implemented exactness-preserving BPC optimizations:

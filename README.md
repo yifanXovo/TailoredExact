@@ -112,17 +112,21 @@ V20 replication candidate preset:
 
 ```powershell
 build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-exact-v20-certificate `
+  --paper-run-sealed true `
   --input reference\hard_stress\V20_M3\high_imbalance_seed3202.txt `
-  --lambda 0.15 --T 3600 --time-limit 1200 --frontier-intervals 3 `
-  --out results\v20_replication_round\raw\high_imbalance_seed3202.json
+  --lambda 0.15 --T 3600 --time-limit 3600 `
+  --out results\sealed_paper_pipeline_round\raw\high_imbalance_seed3202.json
 ```
 
 `paper-exact-v20-certificate` keeps native HGA-TGBC as a verifier-gated UB-only
 source, disables archive scanning, uses the fixed mip-light V20 relaxation
-portfolio with compact-flow connectivity, and leaves BPC fallback off by
-default. It is an exact portfolio candidate for the V20 stress suite; focused
-oracle rows still require a full-ledger merge audit before they can support any
-certificate.
+portfolio with compact-flow connectivity, and automatically attempts exact
+interval cutoff MIP closure for unresolved final leaves. `--paper-run-sealed
+true` rejects archive scanning, external incumbents, focus-only certificates,
+and stale resume/import evidence for paper-candidate rows. BPC fallback remains
+off by default unless explicitly requested and exact pricing closes. The same
+sealed command template is used for V12/V20 rows; only input, output, and time
+budget change.
 
 ## Exact-Phase UB Tracing
 

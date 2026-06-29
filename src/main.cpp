@@ -251,6 +251,15 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
             opt.route_mask_max_v = std::min(opt.route_mask_max_v, 12);
             opt.frontier_scheduling_mode = "default";
             opt.frontier_bpc_fallback_mode = "off";
+            opt.auto_interval_oracle = true;
+            opt.auto_interval_oracle_merge = true;
+            opt.auto_interval_oracle_order = "all";
+            if (opt.auto_interval_oracle_time_limit <= 0.0) {
+                opt.auto_interval_oracle_time_limit = 1800.0;
+            }
+            if (opt.auto_interval_oracle_max_leaves < 0) {
+                opt.auto_interval_oracle_max_leaves = 0;
+            }
         }
         opt.bpc_incumbent = (opt.bpc_incumbent.empty())
             ? "none" : opt.bpc_incumbent;
@@ -436,6 +445,14 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--interval-closure-merge-ledger") opt.interval_closure_merge_ledger = requireValue(i, argc, argv);
         else if (arg == "--interval-closure-time-limit") opt.interval_closure_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--interval-closure-variant-mode") opt.interval_closure_variant_mode = requireValue(i, argc, argv);
+        else if (arg == "--paper-run-sealed") opt.paper_run_sealed = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--auto-interval-oracle") opt.auto_interval_oracle = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--auto-interval-oracle-time-limit") opt.auto_interval_oracle_time_limit = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--auto-interval-oracle-max-leaves") opt.auto_interval_oracle_max_leaves = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--auto-interval-oracle-order") opt.auto_interval_oracle_order = requireValue(i, argc, argv);
+        else if (arg == "--auto-interval-oracle-merge") opt.auto_interval_oracle_merge = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--auto-interval-oracle-restart-on-improved-ub") opt.auto_interval_oracle_restart_on_improved_ub = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--auto-interval-bpc-fallback") opt.auto_interval_bpc_fallback = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-scheduling-mode") opt.frontier_scheduling_mode = requireValue(i, argc, argv);
         else if (arg == "--frontier-critical-band-auto") opt.frontier_critical_band_auto = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-critical-band-max-depth") opt.frontier_critical_band_max_depth = std::stoi(requireValue(i, argc, argv));
@@ -841,6 +858,54 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.cg_stabilization_switch_to_true_after = 0;
     }
     applyAlgorithmPreset(opt);
+    opt.auto_interval_oracle_order = lowerAscii(opt.auto_interval_oracle_order);
+    if (opt.auto_interval_oracle_order != "min-gap" &&
+        opt.auto_interval_oracle_order != "low-gini" &&
+        opt.auto_interval_oracle_order != "best-bound") {
+        opt.auto_interval_oracle_order = "all";
+    }
+    if (opt.auto_interval_oracle_time_limit < 0.0) {
+        opt.auto_interval_oracle_time_limit = 0.0;
+    }
+    if (opt.auto_interval_oracle_max_leaves < 0) {
+        opt.auto_interval_oracle_max_leaves = 0;
+    }
+    if (opt.paper_run_sealed) {
+        std::vector<std::string> sealed_rejections;
+        if (opt.incumbent_archive_auto) {
+            sealed_rejections.push_back("incumbent_archive_auto_requested");
+        }
+        opt.incumbent_archive_auto = false;
+        if (!opt.incumbent_json_path.empty()) {
+            sealed_rejections.push_back("external_incumbent_json_requested");
+        }
+        if (!opt.hga_incumbent_path.empty()) {
+            sealed_rejections.push_back("external_hga_incumbent_requested");
+        }
+        if (!opt.external_incumbent_path.empty()) {
+            sealed_rejections.push_back("external_incumbent_requested");
+        }
+        if (opt.frontier_focus_only) {
+            sealed_rejections.push_back("frontier_focus_only_requested");
+        }
+        if (!opt.frontier_resume_state_path.empty()) {
+            sealed_rejections.push_back("frontier_resume_state_requested");
+        }
+        if (!opt.frontier_import_interval_bound_paths.empty()) {
+            sealed_rejections.push_back("imported_interval_bounds_requested");
+        }
+        if (opt.interval_exact_cutoff_UB > 0.0 && opt.method != "interval-cutoff-oracle") {
+            sealed_rejections.push_back("manual_interval_exact_cutoff_UB_requested");
+        }
+        if (!sealed_rejections.empty()) {
+            std::ostringstream joined;
+            for (std::size_t i = 0; i < sealed_rejections.size(); ++i) {
+                if (i) joined << ";";
+                joined << sealed_rejections[i];
+            }
+            opt.paper_run_sealed_rejection_reason = joined.str();
+        }
+    }
     return opt;
 }
 
@@ -1929,11 +1994,23 @@ std::string jsonEscapeLocal(const std::string& value) {
     return out.str();
 }
 
+bool isPaperTracePreset(const std::string& preset) {
+    return preset == "paper-bpc-core" ||
+           preset == "paper-bpc-core-adaptive" ||
+           preset == "paper-exact-v20-certificate";
+}
+
+int effectiveFrontierAdaptiveMaxDepth(const ebrp::Instance& instance,
+                                      const ebrp::SolveOptions& opt) {
+    (void)instance;
+    return std::max(0, opt.frontier_adaptive_max_depth);
+}
+
 void writeMinimalPaperCoreTrace(const ebrp::Instance& instance,
                                 const ebrp::SolveOptions& opt,
                                 ebrp::SolveResult& result,
                                 const std::string& reason) {
-    if (result.algorithm_preset != "paper-bpc-core" || opt.out_path.empty()) {
+    if (!isPaperTracePreset(result.algorithm_preset) || opt.out_path.empty()) {
         return;
     }
     try {
@@ -7953,6 +8030,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         + ", frontier_bpc_fallback_max_intervals=" + std::to_string(opt.frontier_bpc_fallback_max_intervals)
         + ", frontier_adaptive_split=" + std::string(opt.frontier_adaptive_split ? "true" : "false")
         + ", frontier_adaptive_max_depth=" + std::to_string(opt.frontier_adaptive_max_depth)
+        + ", frontier_adaptive_effective_max_depth=" +
+            std::to_string(effectiveFrontierAdaptiveMaxDepth(instance, opt))
         + ", frontier_adaptive_min_width=" + std::to_string(opt.frontier_adaptive_min_width)
         + ", frontier_adaptive_split_factor=" + std::to_string(opt.frontier_adaptive_split_factor)
         + ", frontier_pre_split_critical=" + std::string(opt.frontier_pre_split_critical ? "true" : "false")
@@ -9424,9 +9503,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         [&](const ParsedFrontierInterval& imported,
             const std::string& path) {
             ++result.imported_interval_bounds_attempted;
-            const bool track_v12_m1_import =
-                instance.name.find("V12") != std::string::npos &&
-                instance.name.find("M1") != std::string::npos;
+            const bool track_v12_m1_import = true;
             if (track_v12_m1_import && result.v12_m1_full_lb_before_import <= 0.0) {
                 result.v12_m1_full_lb_before_import =
                     currentActiveMinIntervalLowerBound();
@@ -10787,7 +10864,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 record.replaced_by_children) {
                 return false;
             }
-            if (record.split_depth >= opt.frontier_adaptive_max_depth) {
+            if (record.split_depth >= effectiveFrontierAdaptiveMaxDepth(instance, opt)) {
                 return false;
             }
             if (record.hi - record.lo <=
@@ -11336,7 +11413,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     const auto adaptive_split_start = std::chrono::steady_clock::now();
     const int split_pass_limit = focus_only_effective ? 0 : std::max(
         std::max(0, opt.frontier_refine_splits),
-        opt.frontier_adaptive_split ? std::max(0, opt.frontier_adaptive_max_depth) : 0);
+        opt.frontier_adaptive_split
+            ? std::max(0, effectiveFrontierAdaptiveMaxDepth(instance, opt))
+            : 0);
     for (int split_pass = 1; split_pass <= split_pass_limit; ++split_pass) {
         if (opt.solve_time_limit > 0.0 &&
             opt.frontier_retry_reserve_seconds > 0.0 &&
@@ -11357,7 +11436,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             if (opt.frontier_adaptive_split) {
                 const double width = record.hi - record.lo;
                 if (width <= opt.frontier_adaptive_min_width + 1e-12) continue;
-                if (record.split_depth >= opt.frontier_adaptive_max_depth) {
+                if (record.split_depth >= effectiveFrontierAdaptiveMaxDepth(instance, opt)) {
                     result.adaptive_split_max_depth_reached = true;
                     continue;
                 }
@@ -11545,7 +11624,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 } else {
                     child.open_nodes = 1;
                 }
-                if (child.split_depth >= opt.frontier_adaptive_max_depth) {
+                if (child.split_depth >= effectiveFrontierAdaptiveMaxDepth(instance, opt)) {
                     result.adaptive_split_max_depth_reached = true;
                 }
                 interval_records.push_back(child);
@@ -11681,7 +11760,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             if (!improved) {
                 bool split_performed = false;
                 if (opt.frontier_adaptive_split &&
-                    record.split_depth < opt.frontier_adaptive_max_depth &&
+                    record.split_depth < effectiveFrontierAdaptiveMaxDepth(instance, opt) &&
                     record.hi - record.lo > opt.frontier_adaptive_min_width + 1e-12 &&
                     (opt.solve_time_limit <= 0.0 || remainingSeconds() > 0.0)) {
                     const double parent_lo = record.lo;
@@ -12950,8 +13029,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.frontier_unprocessed_interval_count = unprocessed_intervals;
     result.frontier_bound_fathomed_interval_count = bound_certified_intervals;
     result.frontier_tree_closed_interval_count = closed_intervals;
-    if (instance.name.find("V12") != std::string::npos &&
-        instance.name.find("M1") != std::string::npos) {
+    {
         double best_remaining_lb = std::numeric_limits<double>::infinity();
         int best_remaining_idx = -1;
         for (int idx = 0; idx < static_cast<int>(interval_records.size()); ++idx) {
@@ -13148,7 +13226,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             + ", checkpoints=" + std::to_string(result.progress_checkpoints_written)
             + ", interval_seconds=" + std::to_string(progress_interval));
     }
-    if (result.algorithm_preset == "paper-bpc-core" && !opt.out_path.empty()) {
+    if (isPaperTracePreset(result.algorithm_preset) && !opt.out_path.empty()) {
         auto csvEscapeLocal = [](const std::string& value) {
             bool needs_quotes = false;
             for (char ch : value) {
@@ -13540,6 +13618,445 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     return result;
 }
 
+std::vector<std::string> splitCsvLineSimple(const std::string& line) {
+    std::vector<std::string> cells;
+    std::string cell;
+    bool in_quotes = false;
+    for (std::size_t i = 0; i < line.size(); ++i) {
+        const char ch = line[i];
+        if (ch == '"') {
+            if (in_quotes && i + 1 < line.size() && line[i + 1] == '"') {
+                cell.push_back('"');
+                ++i;
+            } else {
+                in_quotes = !in_quotes;
+            }
+        } else if (ch == ',' && !in_quotes) {
+            cells.push_back(cell);
+            cell.clear();
+        } else {
+            cell.push_back(ch);
+        }
+    }
+    cells.push_back(cell);
+    return cells;
+}
+
+std::string csvEscapeSimple(const std::string& value) {
+    bool needs_quotes = false;
+    for (const char ch : value) {
+        if (ch == ',' || ch == '"' || ch == '\n' || ch == '\r') {
+            needs_quotes = true;
+            break;
+        }
+    }
+    if (!needs_quotes) return value;
+    std::string out = "\"";
+    for (const char ch : value) {
+        if (ch == '"') out += "\"\"";
+        else out.push_back(ch);
+    }
+    out.push_back('"');
+    return out;
+}
+
+struct IntervalCsvRow {
+    std::vector<std::string> cells;
+    std::unordered_map<std::string, std::size_t> index;
+
+    std::string get(const std::string& key) const {
+        const auto it = index.find(key);
+        if (it == index.end() || it->second >= cells.size()) return {};
+        return cells[it->second];
+    }
+
+    void set(const std::string& key, const std::string& value) {
+        const auto it = index.find(key);
+        if (it != index.end() && it->second < cells.size()) cells[it->second] = value;
+    }
+};
+
+double csvDoubleField(const IntervalCsvRow& row,
+                      const std::string& key,
+                      double fallback = 0.0) {
+    try {
+        const std::string raw = row.get(key);
+        if (raw.empty()) return fallback;
+        const double v = std::stod(raw);
+        return std::isfinite(v) ? v : fallback;
+    } catch (const std::exception&) {
+        return fallback;
+    }
+}
+
+std::vector<IntervalCsvRow> readIntervalCsvRows(
+    const std::filesystem::path& path,
+    std::vector<std::string>& header) {
+    std::ifstream in(path);
+    if (!in) throw std::runtime_error("cannot open interval CSV: " + path.string());
+    std::string line;
+    if (!std::getline(in, line)) return {};
+    header = splitCsvLineSimple(line);
+    std::unordered_map<std::string, std::size_t> index;
+    for (std::size_t i = 0; i < header.size(); ++i) index[header[i]] = i;
+    std::vector<IntervalCsvRow> rows;
+    while (std::getline(in, line)) {
+        if (line.empty()) continue;
+        IntervalCsvRow row;
+        row.cells = splitCsvLineSimple(line);
+        row.index = index;
+        while (row.cells.size() < header.size()) row.cells.emplace_back();
+        rows.push_back(std::move(row));
+    }
+    return rows;
+}
+
+void writeIntervalCsvRows(const std::filesystem::path& path,
+                          const std::vector<std::string>& header,
+                          const std::vector<IntervalCsvRow>& rows) {
+    if (!path.parent_path().empty()) {
+        std::filesystem::create_directories(path.parent_path());
+    }
+    std::ofstream out(path, std::ios::out | std::ios::trunc);
+    for (std::size_t i = 0; i < header.size(); ++i) {
+        if (i) out << ",";
+        out << csvEscapeSimple(header[i]);
+    }
+    out << "\n";
+    for (const auto& row : rows) {
+        for (std::size_t i = 0; i < header.size(); ++i) {
+            if (i) out << ",";
+            out << csvEscapeSimple(i < row.cells.size() ? row.cells[i] : "");
+        }
+        out << "\n";
+    }
+}
+
+void applySealedRunProvenance(const ebrp::SolveOptions& opt,
+                              ebrp::SolveResult& result) {
+    result.sealed_run = opt.paper_run_sealed;
+    if (!result.sealed_run) return;
+    if (result.sealed_run_id.empty()) {
+        std::ostringstream id;
+        id << "sealed_" << std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::system_clock::now().time_since_epoch()).count();
+        if (!result.instance_name.empty()) id << "_" << result.instance_name;
+        result.sealed_run_id = id.str();
+    }
+    if (result.sealed_run_start_time.empty()) {
+        result.sealed_run_start_time = std::to_string(
+            std::chrono::duration_cast<std::chrono::seconds>(
+                std::chrono::system_clock::now().time_since_epoch()).count());
+    }
+    result.no_archive_scanning =
+        !opt.incumbent_archive_auto &&
+        result.incumbent_source_category != "diagnostic_archive";
+    result.no_external_known_ub =
+        opt.incumbent_json_path.empty() &&
+        opt.hga_incumbent_path.empty() &&
+        opt.external_incumbent_path.empty() &&
+        result.incumbent_source_category != "explicit_incumbent_json" &&
+        !result.incumbent_import_attempted &&
+        !result.external_incumbent_attempted;
+    result.no_focus_only_certificate =
+        !opt.frontier_focus_only &&
+        !result.focused_interval_result &&
+        result.frontier_range_certificate_scope != "diagnostic_interval_only";
+    result.same_run_generated_incumbent =
+        result.incumbent_source_category == "primal_heuristic" ||
+        result.incumbent_source_category == "empty";
+    if (result.incumbent_source_category == "primal_heuristic") {
+        result.incumbent_provenance =
+            "same-run native HGA-TGBC paper primal heuristic, verifier-gated UB only";
+    } else if (result.incumbent_source_category == "empty") {
+        result.incumbent_provenance = "no external incumbent; empty/trivial UB path";
+    } else {
+        result.incumbent_provenance = result.incumbent_source_detail;
+    }
+    std::vector<std::string> rejections;
+    if (!opt.paper_run_sealed_rejection_reason.empty()) {
+        rejections.push_back(opt.paper_run_sealed_rejection_reason);
+    }
+    if (!result.no_archive_scanning) rejections.push_back("archive_scanning_or_archive_ub");
+    if (!result.no_external_known_ub) rejections.push_back("external_known_ub_or_import");
+    if (!result.no_focus_only_certificate) rejections.push_back("focus_only_certificate_path");
+    if (!rejections.empty()) {
+        std::ostringstream joined;
+        for (std::size_t i = 0; i < rejections.size(); ++i) {
+            if (i) joined << ";";
+            joined << rejections[i];
+        }
+        result.sealed_run_forbidden_source_used = true;
+        result.sealed_run_rejection_reason = joined.str();
+        if (result.status == "optimal") {
+            result.status = "not_certified_sealed_provenance";
+            result.certificate =
+                "sealed paper-run provenance guard rejected the original-problem certificate";
+            if (result.full_certificate_rejection_reason.empty() ||
+                result.full_certificate_rejection_reason == "none") {
+                result.full_certificate_rejection_reason =
+                    "sealed_run_forbidden_source_used";
+            }
+        }
+        result.notes.push_back("sealed paper-run guard rejection: "
+            + result.sealed_run_rejection_reason);
+    } else {
+        result.sealed_run_forbidden_source_used = false;
+        result.sealed_run_rejection_reason = "none";
+    }
+}
+
+void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
+                                  const ebrp::SolveOptions& opt,
+                                  ebrp::SolveResult& result) {
+    if (!opt.auto_interval_oracle) {
+        result.full_ledger_merge_status = result.full_ledger_merge_status.empty()
+            ? "not_requested" : result.full_ledger_merge_status;
+        return;
+    }
+    if (result.status == "optimal" || result.unresolved_intervals <= 0) {
+        result.auto_interval_oracle_remaining_open_leaves = 0;
+        result.full_ledger_merge_status = "already_closed_before_auto_oracle";
+        result.full_ledger_merge_audit_passed = result.status == "optimal";
+        return;
+    }
+    if (result.bpc_interval_trace_csv_path.empty() ||
+        !std::filesystem::exists(result.bpc_interval_trace_csv_path)) {
+        result.full_ledger_merge_status = "no_interval_ledger_for_auto_oracle";
+        result.auto_interval_oracle_remaining_open_leaves = result.unresolved_intervals;
+        result.notes.push_back("auto interval oracle skipped: interval ledger missing");
+        return;
+    }
+
+    const auto oracle_start = std::chrono::steady_clock::now();
+    result.auto_interval_oracle_called = true;
+    std::vector<std::string> header;
+    std::vector<IntervalCsvRow> rows;
+    try {
+        rows = readIntervalCsvRows(result.bpc_interval_trace_csv_path, header);
+    } catch (const std::exception& ex) {
+        result.full_ledger_merge_status = "interval_ledger_read_failed";
+        result.auto_interval_oracle_remaining_open_leaves = result.unresolved_intervals;
+        result.notes.push_back(std::string("auto interval oracle skipped: ") + ex.what());
+        return;
+    }
+
+    std::vector<std::size_t> targets;
+    for (std::size_t i = 0; i < rows.size(); ++i) {
+        const std::string status = lowerAscii(rows[i].get("interval_status"));
+        if (status != "unresolved" && status != "unprocessed_relevant" &&
+            status != "invalid") {
+            continue;
+        }
+        const double lo = csvDoubleField(rows[i], "gamma_L", -1.0);
+        const double hi = csvDoubleField(rows[i], "gamma_U", -1.0);
+        const double lb = csvDoubleField(rows[i], "interval_lower_bound", lo);
+        if (lo < -1e-12 || hi < lo - 1e-12) continue;
+        if (lb >= result.upper_bound - 1e-7) continue;
+        targets.push_back(i);
+    }
+    const std::string order = opt.auto_interval_oracle_order;
+    std::sort(targets.begin(), targets.end(), [&](std::size_t a, std::size_t b) {
+        if (order == "low-gini") {
+            return csvDoubleField(rows[a], "gamma_L", 0.0) <
+                   csvDoubleField(rows[b], "gamma_L", 0.0);
+        }
+        if (order == "best-bound") {
+            return csvDoubleField(rows[a], "interval_lower_bound", 0.0) >
+                   csvDoubleField(rows[b], "interval_lower_bound", 0.0);
+        }
+        if (order == "min-gap") {
+            const double ga = result.upper_bound -
+                csvDoubleField(rows[a], "interval_lower_bound", 0.0);
+            const double gb = result.upper_bound -
+                csvDoubleField(rows[b], "interval_lower_bound", 0.0);
+            return ga < gb;
+        }
+        const int ia = static_cast<int>(csvDoubleField(rows[a], "interval_id", 0.0));
+        const int ib = static_cast<int>(csvDoubleField(rows[b], "interval_id", 0.0));
+        return ia < ib;
+    });
+    if (opt.auto_interval_oracle_max_leaves > 0 &&
+        static_cast<int>(targets.size()) > opt.auto_interval_oracle_max_leaves) {
+        targets.resize(static_cast<std::size_t>(opt.auto_interval_oracle_max_leaves));
+    }
+
+    std::filesystem::path out_path = opt.out_path.empty()
+        ? std::filesystem::path("auto_interval_oracle.json")
+        : std::filesystem::path(opt.out_path);
+    const std::filesystem::path base_dir = out_path.has_parent_path()
+        ? out_path.parent_path()
+        : std::filesystem::path(".");
+    const std::string stem = out_path.stem().string();
+    const std::filesystem::path oracle_dir = base_dir / (stem + "_auto_oracle");
+    std::filesystem::create_directories(oracle_dir);
+    const std::filesystem::path oracle_csv = base_dir / (stem + ".auto_oracle.csv");
+    std::ofstream summary(oracle_csv, std::ios::out | std::ios::trunc);
+    summary << "interval_id,gamma_L,gamma_U,status,certificate_basis,solver_status,"
+            << "proven_infeasible,feasible_improving,timeout,best_bound,objective,"
+            << "runtime_seconds,json_path,lp_path,log_path\n";
+
+    int closed = 0;
+    int attempted = 0;
+    int feasible_improving = 0;
+    bool oracle_blocker_seen = false;
+    std::string oracle_blocker_note;
+    for (const std::size_t target_idx : targets) {
+        ++attempted;
+        IntervalCsvRow& row = rows[target_idx];
+        const std::string interval_id = row.get("interval_id").empty()
+            ? std::to_string(target_idx)
+            : row.get("interval_id");
+        const double lo = csvDoubleField(row, "gamma_L", -1.0);
+        const double hi = csvDoubleField(row, "gamma_U", -1.0);
+        ebrp::SolveOptions oracle_opt = opt;
+        oracle_opt.method = "interval-cutoff-oracle";
+        oracle_opt.interval_exact_cutoff_oracle = "compact-mip";
+        oracle_opt.interval_exact_cutoff_gamma_L = lo;
+        oracle_opt.interval_exact_cutoff_gamma_U = hi;
+        oracle_opt.interval_exact_cutoff_UB = result.upper_bound;
+        oracle_opt.interval_exact_cutoff_epsilon =
+            std::max(1e-8, opt.cutoff_feasibility_epsilon);
+        oracle_opt.interval_exact_cutoff_time_limit =
+            opt.auto_interval_oracle_time_limit > 0.0
+                ? opt.auto_interval_oracle_time_limit
+                : std::max(60.0, opt.solve_time_limit * 0.25);
+        const std::filesystem::path json_path =
+            oracle_dir / ("interval_" + interval_id + ".json");
+        oracle_opt.out_path = json_path.string();
+        oracle_opt.log_path.clear();
+        oracle_opt.interval_exact_cutoff_export_lp =
+            (oracle_dir / ("interval_" + interval_id + ".lp")).string();
+        oracle_opt.interval_exact_cutoff_result =
+            (oracle_dir / ("interval_" + interval_id + ".sol")).string();
+
+        ebrp::SolveResult oracle = ebrp::solveIntervalExactCutoffOracle(
+            instance, oracle_opt);
+        initializeScalabilityFields(instance, oracle_opt, oracle);
+        applyRunConfigSnapshot(buildRunConfigSnapshot(instance, oracle_opt), oracle);
+        finalizePaperModuleFields(oracle);
+        oracle.result_file = json_path.string();
+        try {
+            ebrp::writeTextFile(json_path.string(), ebrp::resultToJson(oracle));
+        } catch (const std::exception& ex) {
+            result.notes.push_back(std::string("auto interval oracle failed to write JSON: ")
+                + ex.what());
+        }
+
+        const bool oracle_closed = oracle.status == "interval_closed" &&
+            oracle.interval_exact_cutoff_proven_infeasible;
+        if (oracle_closed) {
+            ++closed;
+            row.set("interval_status", "bound_fathomed");
+            row.set("reason", oracle.interval_exact_cutoff_certificate_basis);
+            row.set("certificate_basis", oracle.interval_exact_cutoff_certificate_basis);
+            row.set("interval_lower_bound", std::to_string(result.upper_bound));
+            row.set("lower_bound_source", "interval_exact_cutoff_oracle");
+            row.set("lower_bound_sources",
+                    row.get("lower_bound_sources") + "|interval_exact_cutoff_oracle");
+        }
+        if (oracle.interval_exact_cutoff_feasible_improving) {
+            ++feasible_improving;
+        }
+        summary << csvEscapeSimple(interval_id) << ","
+                << std::setprecision(12) << lo << "," << hi << ","
+                << csvEscapeSimple(oracle.status) << ","
+                << csvEscapeSimple(oracle.interval_exact_cutoff_certificate_basis) << ","
+                << csvEscapeSimple(oracle.interval_exact_cutoff_solver_status) << ","
+                << (oracle.interval_exact_cutoff_proven_infeasible ? "true" : "false") << ","
+                << (oracle.interval_exact_cutoff_feasible_improving ? "true" : "false") << ","
+                << (oracle.interval_exact_cutoff_timeout ? "true" : "false") << ","
+                << oracle.interval_exact_cutoff_best_bound << ","
+                << oracle.interval_exact_cutoff_objective << ","
+                << oracle.interval_exact_cutoff_runtime_seconds << ","
+                << csvEscapeSimple(json_path.string()) << ","
+                << csvEscapeSimple(oracle.interval_exact_cutoff_lp_path) << ","
+                << csvEscapeSimple(oracle.interval_exact_cutoff_log_path) << "\n";
+        summary.flush();
+        if (!oracle_closed && !oracle.interval_exact_cutoff_feasible_improving) {
+            oracle_blocker_seen = true;
+            oracle_blocker_note = "automatic interval oracle stopped at interval "
+                + interval_id + " with status=" + oracle.status
+                + ", basis=" + oracle.interval_exact_cutoff_certificate_basis
+                + ", solver_status=" + oracle.interval_exact_cutoff_solver_status;
+            result.notes.push_back(oracle_blocker_note);
+            break;
+        }
+    }
+    summary.close();
+
+    result.auto_interval_oracle_leaves_attempted = attempted;
+    result.auto_interval_oracle_leaves_closed = closed;
+    result.auto_interval_oracle_time_seconds =
+        std::chrono::duration<double>(
+            std::chrono::steady_clock::now() - oracle_start).count();
+    result.auto_interval_oracle_remaining_open_leaves =
+        std::max(0, result.unresolved_intervals - closed);
+    result.notes.push_back("automatic interval oracle summary written to "
+        + oracle_csv.string());
+    if (oracle_blocker_seen) {
+        result.notes.push_back("automatic interval oracle first unresolved blocker: "
+            + oracle_blocker_note);
+    }
+
+    if (feasible_improving > 0) {
+        result.full_ledger_merge_status = "ub_improved_restart_required";
+        result.full_ledger_merge_audit_passed = false;
+        result.notes.push_back("automatic interval oracle found a verified improving UB; "
+            "the current full frontier ledger was not certified because a restart is required");
+        return;
+    }
+
+    if (opt.auto_interval_oracle_merge && closed > 0) {
+        std::filesystem::path merged_path = out_path;
+        merged_path.replace_extension(".merged.intervals.csv");
+        writeIntervalCsvRows(merged_path, header, rows);
+        result.bpc_interval_trace_csv_path = merged_path.string();
+        result.notes.push_back("automatic interval oracle merged ledger written to "
+            + merged_path.string());
+    }
+
+    if (result.auto_interval_oracle_remaining_open_leaves == 0 &&
+        result.invalid_bound_intervals == 0 &&
+        result.open_nodes == 0 &&
+        result.frontier_covers_all_improving_gini_values &&
+        opt.auto_interval_oracle_merge) {
+        result.unresolved_intervals = 0;
+        result.lower_bound = result.objective;
+        result.upper_bound = result.objective;
+        result.gap = 0.0;
+        result.status = "optimal";
+        result.certificate =
+            "sealed frontier certificate completed by automatic exact interval cutoff MIP infeasibility certificates";
+        result.full_certificate_basis =
+            "frontier_all_intervals_closed_or_fathomed_with_interval_exact_cutoff_oracle";
+        result.full_certificate_all_intervals_accounted = true;
+        result.full_certificate_rejection_reason = "none";
+        result.full_ledger_merge_status = "merged_all_unresolved_leaves_closed";
+        result.full_ledger_merge_audit_passed = true;
+        result.interval_certificate_basis +=
+            "|auto_interval_oracle:interval_exact_cutoff_mip_infeasible";
+    } else {
+        result.full_ledger_merge_status =
+            result.auto_interval_oracle_remaining_open_leaves == result.unresolved_intervals
+                ? "no_leaves_closed"
+                : "partial_merge_remaining_open_leaves";
+        result.full_ledger_merge_audit_passed = false;
+    }
+
+    if (opt.auto_interval_bpc_fallback &&
+        result.auto_interval_oracle_remaining_open_leaves > 0) {
+        result.bpc_fallback_auto_called = true;
+        result.bpc_fallback_leaves_attempted =
+            result.auto_interval_oracle_remaining_open_leaves;
+        result.bpc_interval_certificate_basis =
+            "diagnostic_not_started_by_sealed_postprocessor";
+        result.notes.push_back("automatic BPC fallback requested, but no lower-bound "
+            "certificate was imported because exact interval BPC closure must prove pricing "
+            "closure before merge; row remains noncertified for remaining leaves");
+    }
+}
+
 } // namespace
 
 int main(int argc, char** argv) {
@@ -13681,6 +14198,8 @@ int main(int argc, char** argv) {
             auto& r = results.back();
             initializeScalabilityFields(instance, effective_opt, r);
             applyRunConfigSnapshot(buildRunConfigSnapshot(instance, effective_opt), r);
+            runAutoIntervalOracleClosure(instance, effective_opt, r);
+            applySealedRunProvenance(effective_opt, r);
             finalizePaperModuleFields(r);
             if (r.result_file.empty()) r.result_file = opt.out_path;
             if (r.log_file.empty()) r.log_file = opt.log_path;

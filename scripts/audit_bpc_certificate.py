@@ -106,6 +106,7 @@ def audit_one(source: str, result: Dict[str, Any]) -> Dict[str, Any]:
     incumbent_source_lb = as_bool(
         result.get("incumbent_source_contributes_lower_bound", False)
     )
+    sealed_run = as_bool(result.get("sealed_run", False))
 
     original_scope = solves_original or method_scope in {
         "original_bpc",
@@ -129,6 +130,22 @@ def audit_one(source: str, result: Dict[str, Any]) -> Dict[str, Any]:
     if incumbent_source_category == "diagnostic_archive" and incumbent_source_reproducible:
         failures.append("diagnostic_archive_marked_paper_reproducible")
 
+    if sealed_run:
+        if as_bool(result.get("sealed_run_forbidden_source_used", False)):
+            if certified or (status == "optimal" and original_scope):
+                failures.append("sealed_run_forbidden_source_used")
+        if not as_bool(result.get("no_archive_scanning", False)):
+            if certified or (status == "optimal" and original_scope):
+                failures.append("sealed_run_archive_scanning_not_disabled")
+        if not as_bool(result.get("no_external_known_ub", False)):
+            if certified or (status == "optimal" and original_scope):
+                failures.append("sealed_run_external_known_ub_used")
+        if not as_bool(result.get("no_focus_only_certificate", False)):
+            if certified or (status == "optimal" and original_scope):
+                failures.append("sealed_run_focus_only_certificate_used")
+        if incumbent_source_category == "diagnostic_archive":
+            failures.append("sealed_run_used_diagnostic_archive_incumbent")
+
     if certified:
         if status != "optimal":
             failures.append("certified_but_status_not_optimal")
@@ -147,6 +164,15 @@ def audit_one(source: str, result: Dict[str, Any]) -> Dict[str, Any]:
         if invalid != 0:
             failures.append("certified_with_invalid_bound_intervals")
         if is_bpc:
+            if sealed_run:
+                if not as_bool(result.get("no_archive_scanning", False)):
+                    failures.append("certified_sealed_bpc_with_archive_scanning")
+                if not as_bool(result.get("no_external_known_ub", False)):
+                    failures.append("certified_sealed_bpc_with_external_ub")
+                if not as_bool(result.get("no_focus_only_certificate", False)):
+                    failures.append("certified_sealed_bpc_focus_only")
+                if as_bool(result.get("sealed_run_forbidden_source_used", False)):
+                    failures.append("certified_sealed_bpc_forbidden_source")
             if open_nodes != 0:
                 failures.append("certified_bpc_with_open_nodes")
             if not as_bool(result.get("frontier_covers_all_improving_gini_values", False)):
@@ -228,6 +254,13 @@ def audit_one(source: str, result: Dict[str, Any]) -> Dict[str, Any]:
         "unresolved_intervals": unresolved,
         "invalid_bound_intervals": invalid,
         "open_nodes": open_nodes,
+        "sealed_run": sealed_run,
+        "no_archive_scanning": as_bool(result.get("no_archive_scanning", False)),
+        "no_external_known_ub": as_bool(result.get("no_external_known_ub", False)),
+        "no_focus_only_certificate": as_bool(result.get("no_focus_only_certificate", False)),
+        "sealed_run_forbidden_source_used": as_bool(
+            result.get("sealed_run_forbidden_source_used", False)
+        ),
         "audit_passed": not failures,
         "failure_count": len(failures),
         "failures": ";".join(failures),
@@ -251,6 +284,11 @@ def write_csv(rows: List[Dict[str, Any]], out_path: Path) -> None:
         "unresolved_intervals",
         "invalid_bound_intervals",
         "open_nodes",
+        "sealed_run",
+        "no_archive_scanning",
+        "no_external_known_ub",
+        "no_focus_only_certificate",
+        "sealed_run_forbidden_source_used",
         "audit_passed",
         "failure_count",
         "failures",

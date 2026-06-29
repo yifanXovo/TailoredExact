@@ -105,6 +105,13 @@ testing.  It is intentionally distinct from canonical `paper-bpc-core`:
 - BPC fallback remains off by default unless exact pricing closes a focused
   interval.
 
+The sealed paper-pipeline round adds `--paper-run-sealed true` to this preset.
+Sealed rows must be generated from one command template and cannot use external
+incumbents, arbitrary local archive scanning, focus-only certificates, imported
+focus bounds, or known UB injection. Automatic interval-oracle closure is
+allowed only for final unresolved leaves from the same full-frontier run and
+only when the compact original fixed-interval cutoff MIP proves infeasibility.
+
 ## Certificate Gate
 
 A `gcap-frontier` result can be reported as an original-problem certificate only

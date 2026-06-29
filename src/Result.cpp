@@ -273,6 +273,12 @@ bool inferCertifiedOriginalProblem(const SolveResult& result) {
     if (result.incumbent_source_contributes_lower_bound) return false;
     if (result.incumbent_source_category == "diagnostic_archive" &&
         result.incumbent_source_is_paper_reproducible) return false;
+    if (result.sealed_run) {
+        if (result.sealed_run_forbidden_source_used) return false;
+        if (!result.no_archive_scanning) return false;
+        if (!result.no_external_known_ub) return false;
+        if (!result.no_focus_only_certificate) return false;
+    }
     if (result.gap > 1e-7) return false;
     if (!nearlyEqual(result.lower_bound, result.upper_bound)) return false;
     if (!nearlyEqual(result.objective, result.upper_bound)) return false;
@@ -1227,6 +1233,51 @@ std::string resultToJson(const SolveResult& input) {
         << (result.focused_interval_safe_to_merge ? "true" : "false") << ",\n";
     out << "  \"focused_interval_merge_reason\": \""
         << jsonEscape(result.focused_interval_merge_reason) << "\",\n";
+    out << "  \"sealed_run\": " << (result.sealed_run ? "true" : "false") << ",\n";
+    out << "  \"sealed_run_id\": \"" << jsonEscape(result.sealed_run_id) << "\",\n";
+    out << "  \"sealed_run_start_time\": \""
+        << jsonEscape(result.sealed_run_start_time) << "\",\n";
+    out << "  \"incumbent_provenance\": \""
+        << jsonEscape(result.incumbent_provenance) << "\",\n";
+    out << "  \"same_run_generated_incumbent\": "
+        << (result.same_run_generated_incumbent ? "true" : "false") << ",\n";
+    out << "  \"no_archive_scanning\": "
+        << (result.no_archive_scanning ? "true" : "false") << ",\n";
+    out << "  \"no_external_known_ub\": "
+        << (result.no_external_known_ub ? "true" : "false") << ",\n";
+    out << "  \"no_focus_only_certificate\": "
+        << (result.no_focus_only_certificate ? "true" : "false") << ",\n";
+    out << "  \"sealed_run_forbidden_source_used\": "
+        << (result.sealed_run_forbidden_source_used ? "true" : "false") << ",\n";
+    out << "  \"sealed_run_rejection_reason\": \""
+        << jsonEscape(result.sealed_run_rejection_reason) << "\",\n";
+    out << "  \"auto_interval_oracle_called\": "
+        << (result.auto_interval_oracle_called ? "true" : "false") << ",\n";
+    out << "  \"auto_interval_oracle_leaves_attempted\": "
+        << result.auto_interval_oracle_leaves_attempted << ",\n";
+    out << "  \"auto_interval_oracle_leaves_closed\": "
+        << result.auto_interval_oracle_leaves_closed << ",\n";
+    out << "  \"auto_interval_oracle_time_seconds\": "
+        << result.auto_interval_oracle_time_seconds << ",\n";
+    out << "  \"auto_interval_oracle_remaining_open_leaves\": "
+        << result.auto_interval_oracle_remaining_open_leaves << ",\n";
+    out << "  \"full_ledger_merge_status\": \""
+        << jsonEscape(result.full_ledger_merge_status) << "\",\n";
+    out << "  \"full_ledger_merge_audit_passed\": "
+        << (result.full_ledger_merge_audit_passed ? "true" : "false") << ",\n";
+    out << "  \"bpc_fallback_auto_called\": "
+        << (result.bpc_fallback_auto_called ? "true" : "false") << ",\n";
+    out << "  \"bpc_fallback_leaves_attempted\": "
+        << result.bpc_fallback_leaves_attempted << ",\n";
+    out << "  \"exact_pricing_closed_leaves\": "
+        << result.exact_pricing_closed_leaves << ",\n";
+    out << "  \"bpc_fallback_pricing_time\": "
+        << result.bpc_fallback_pricing_time << ",\n";
+    out << "  \"bpc_fallback_nodes\": " << result.bpc_fallback_nodes << ",\n";
+    out << "  \"bpc_fallback_best_reduced_cost\": "
+        << result.bpc_fallback_best_reduced_cost << ",\n";
+    out << "  \"bpc_interval_certificate_basis\": \""
+        << jsonEscape(result.bpc_interval_certificate_basis) << "\",\n";
     out << "  \"vehicle_transfer_flow_variables\": "
         << result.vehicle_transfer_flow_variables << ",\n";
     out << "  \"vehicle_transfer_depot_unload_variables\": "
