@@ -440,6 +440,15 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.last_progress_event) << "\",\n";
     out << "  \"plateau_reason\": \""
         << jsonEscape(result.plateau_reason) << "\",\n";
+    out << "  \"solver_finalization_reached\": "
+        << (result.solver_finalization_reached ? "true" : "false") << ",\n";
+    out << "  \"wrapper_synthesized_final_json\": "
+        << (result.wrapper_synthesized_final_json ? "true" : "false") << ",\n";
+    out << "  \"process_return_code\": " << result.process_return_code << ",\n";
+    out << "  \"abnormal_exit_detected\": "
+        << (result.abnormal_exit_detected ? "true" : "false") << ",\n";
+    out << "  \"abnormal_exit_reason\": \""
+        << jsonEscape(result.abnormal_exit_reason) << "\",\n";
     out << "  \"verifier_passed\": " << (inferVerifierPassed(result) ? "true" : "false") << ",\n";
     out << "  \"unresolved_intervals\": " << result.unresolved_intervals << ",\n";
     out << "  \"invalid_bound_intervals\": " << result.invalid_bound_intervals << ",\n";
@@ -1259,16 +1268,24 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.sealed_run_rejection_reason) << "\",\n";
     out << "  \"auto_interval_oracle_called\": "
         << (result.auto_interval_oracle_called ? "true" : "false") << ",\n";
+    out << "  \"auto_interval_oracle_total_final_leaves\": "
+        << result.auto_interval_oracle_total_final_leaves << ",\n";
     out << "  \"auto_interval_oracle_leaves_attempted\": "
         << result.auto_interval_oracle_leaves_attempted << ",\n";
     out << "  \"auto_interval_oracle_leaves_closed\": "
         << result.auto_interval_oracle_leaves_closed << ",\n";
+    out << "  \"auto_interval_oracle_leaves_timed_out\": "
+        << result.auto_interval_oracle_leaves_timed_out << ",\n";
+    out << "  \"auto_interval_oracle_leaves_split\": "
+        << result.auto_interval_oracle_leaves_split << ",\n";
     out << "  \"auto_interval_oracle_time_seconds\": "
         << result.auto_interval_oracle_time_seconds << ",\n";
     out << "  \"auto_interval_oracle_remaining_open_leaves\": "
         << result.auto_interval_oracle_remaining_open_leaves << ",\n";
     out << "  \"auto_interval_oracle_status_by_leaf\": \""
         << jsonEscape(result.auto_interval_oracle_status_by_leaf) << "\",\n";
+    out << "  \"auto_interval_oracle_coverage_complete\": "
+        << (result.auto_interval_oracle_coverage_complete ? "true" : "false") << ",\n";
     out << "  \"full_ledger_merge_status\": \""
         << jsonEscape(result.full_ledger_merge_status) << "\",\n";
     out << "  \"full_ledger_merge_audit_passed\": "

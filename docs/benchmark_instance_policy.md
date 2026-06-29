@@ -132,3 +132,17 @@ and hard stress policy:
 The evidence package includes both certified and noncertified final JSONs. A
 noncertified row with a final checkpoint JSON is an audited algorithm outcome,
 not a skipped historical target.
+
+## Sealed Closure Round Classification
+
+`results/sealed_closure_round/` preserves the same classification:
+
+- V4 smoke is a smoke test.
+- V12 M1/M2 regenerated rows are regenerated engineering benchmarks.
+- V20/M3 rows under `reference/hard_stress/V20_M3/` are
+  `hard_generated_v20_m3` stress instances.
+
+This round is not a historical paper benchmark. It is a sealed engineering
+stress test for finalization, all-leaf oracle processing, and interval-level
+diagnosis. Certified V20 rows are exact certificates for those generated stress
+instances only.

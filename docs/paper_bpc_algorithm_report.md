@@ -1110,3 +1110,35 @@ exact cutoff oracle closed one `moderate_seed3301` leaf, but no row gained a
 full-ledger certificate from oracle or BPC fallback. The next algorithmic
 bottleneck is complete automatic oracle processing and safe merge over all
 unresolved leaves.
+
+## Sealed Closure Round
+
+The sealed closure round implements all-leaf automatic interval oracle
+processing and stronger finalization fields.  A sealed run can now request:
+
+```text
+--auto-interval-oracle-order all
+--auto-interval-oracle-max-leaves all
+--auto-interval-oracle-split-on-timeout true
+```
+
+The solver records how many final leaves were attempted, closed, timed out,
+split, and left open.  Every row in `results/sealed_closure_round/` has final
+JSON and is included in the certificate audit.
+
+Certified rows remain:
+
+- V12 M2 regenerated, objective `0.718504070755`;
+- V12 M1 regenerated, objective `0.357200583208`;
+- `high_imbalance_seed3202`, objective `1.74931345205`;
+- `tight_T_seed3101`, objective `0.107252734134`.
+
+The all-leaf oracle improved interval-level diagnosis but did not certify a
+third V20/M3 row.  `moderate_seed3301` closed four of six final leaves and
+still has two timeout leaves.  `tight_T_seed3102` no longer exits abnormally,
+but its three final leaves and child partitions timed out.  BPC fallback remains
+diagnostic because no remaining leaf closed with exact pricing.
+
+Conclusion: the project remains a paper-candidate prototype, not a broad
+benchmark-ready exact algorithm.  The next bottleneck is the exact interval
+cutoff MIP or a stronger exact BPC leaf closure mechanism.

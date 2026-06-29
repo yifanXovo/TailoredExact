@@ -175,3 +175,25 @@ The sealed completion wrapper is part of the paper-run scope because it prevents
 silent run exits. It may synthesize only noncertified checkpoint artifacts. It
 must not synthesize optimality, merge focused interval rows without exact
 coverage, or use archive/known-UB evidence.
+
+## Sealed All-Leaf Closure Extension
+
+The sealed closure round keeps the same paper-run restrictions and extends the
+automatic interval oracle from one selected leaf to every final unresolved leaf.
+The option set:
+
+```text
+--auto-interval-oracle-order all
+--auto-interval-oracle-max-leaves all
+--auto-interval-oracle-split-on-timeout true
+```
+
+is certificate-safe because it only adds interval-local exact cutoff MIP
+attempts after a full frontier ledger has been built. A leaf is merged as closed
+only with proven interval infeasibility or with a verified improving incumbent
+followed by a full frontier restart. Timeout leaves remain unresolved.
+
+This extension is allowed inside `paper-exact-v20-certificate`; it does not
+change the rule that heuristic, route-pool, CPLEX, and BPC-generated incumbents
+are upper bounds only. BPC fallback remains nondefault certificate evidence
+unless exact pricing closes the interval.

@@ -1,0 +1,10 @@
+row,status,certified_original_problem,unresolved_intervals,auto_interval_oracle_total_final_leaves,auto_interval_oracle_leaves_attempted,auto_interval_oracle_leaves_closed,auto_interval_oracle_leaves_timed_out,auto_interval_oracle_leaves_split,auto_interval_oracle_remaining_open_leaves,auto_interval_oracle_coverage_complete,full_ledger_merge_status,full_ledger_merge_audit_passed,bpc_fallback_auto_called,bpc_fallback_leaves_attempted
+v4_smoke,optimal,True,0,0,0,0,0,0,0,True,already_closed_before_auto_oracle,,False,
+v12_m2_300s,optimal,True,0,0,0,0,0,0,0,True,already_closed_before_auto_oracle,,False,
+v12_m1_600s,optimal,True,0,0,0,0,0,0,0,True,already_closed_before_auto_oracle,,False,
+high_imbalance_seed3201,gcap_frontier_not_closed,False,2,2,6,0,6,2,2,False,no_leaves_closed,,True,
+high_imbalance_seed3202,optimal,True,0,0,0,0,0,0,0,True,already_closed_before_auto_oracle,,False,
+tight_T_seed3101,optimal,True,0,0,0,0,0,0,0,True,already_closed_before_auto_oracle,,False,
+tight_T_seed3102,gcap_frontier_not_closed,False,3,3,9,0,9,3,3,False,no_leaves_closed,,True,
+moderate_seed3301,gcap_frontier_not_closed,False,6,6,10,4,4,2,2,False,partial_merge_remaining_open_leaves,,True,
+moderate_seed3302,gcap_frontier_not_closed,False,4,4,10,1,9,3,3,False,partial_merge_remaining_open_leaves,,True,
