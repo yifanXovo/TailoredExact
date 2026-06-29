@@ -453,6 +453,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--auto-interval-oracle-merge") opt.auto_interval_oracle_merge = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--auto-interval-oracle-restart-on-improved-ub") opt.auto_interval_oracle_restart_on_improved_ub = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--auto-interval-bpc-fallback") opt.auto_interval_bpc_fallback = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--auto-interval-bpc-time-limit") opt.auto_interval_bpc_time_limit = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--auto-interval-bpc-max-leaves") opt.auto_interval_bpc_max_leaves = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--frontier-scheduling-mode") opt.frontier_scheduling_mode = requireValue(i, argc, argv);
         else if (arg == "--frontier-critical-band-auto") opt.frontier_critical_band_auto = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-critical-band-max-depth") opt.frontier_critical_band_max_depth = std::stoi(requireValue(i, argc, argv));
@@ -861,6 +863,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     opt.auto_interval_oracle_order = lowerAscii(opt.auto_interval_oracle_order);
     if (opt.auto_interval_oracle_order != "min-gap" &&
         opt.auto_interval_oracle_order != "low-gini" &&
+        opt.auto_interval_oracle_order != "min-lb" &&
         opt.auto_interval_oracle_order != "best-bound") {
         opt.auto_interval_oracle_order = "all";
     }
@@ -869,6 +872,12 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if (opt.auto_interval_oracle_max_leaves < 0) {
         opt.auto_interval_oracle_max_leaves = 0;
+    }
+    if (opt.auto_interval_bpc_time_limit < 0.0) {
+        opt.auto_interval_bpc_time_limit = 0.0;
+    }
+    if (opt.auto_interval_bpc_max_leaves < 0) {
+        opt.auto_interval_bpc_max_leaves = 0;
     }
     if (opt.paper_run_sealed) {
         std::vector<std::string> sealed_rejections;
@@ -13865,6 +13874,10 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
             return csvDoubleField(rows[a], "interval_lower_bound", 0.0) >
                    csvDoubleField(rows[b], "interval_lower_bound", 0.0);
         }
+        if (order == "min-lb") {
+            return csvDoubleField(rows[a], "interval_lower_bound", 0.0) <
+                   csvDoubleField(rows[b], "interval_lower_bound", 0.0);
+        }
         if (order == "min-gap") {
             const double ga = result.upper_bound -
                 csvDoubleField(rows[a], "interval_lower_bound", 0.0);
@@ -13901,6 +13914,7 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     int feasible_improving = 0;
     bool oracle_blocker_seen = false;
     std::string oracle_blocker_note;
+    std::ostringstream status_by_leaf;
     for (const std::size_t target_idx : targets) {
         ++attempted;
         IntervalCsvRow& row = rows[target_idx];
@@ -13958,6 +13972,11 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         if (oracle.interval_exact_cutoff_feasible_improving) {
             ++feasible_improving;
         }
+        if (status_by_leaf.tellp() > 0) status_by_leaf << "|";
+        status_by_leaf << interval_id << ":"
+                       << oracle.status << ":"
+                       << oracle.interval_exact_cutoff_certificate_basis << ":"
+                       << oracle.interval_exact_cutoff_solver_status;
         summary << csvEscapeSimple(interval_id) << ","
                 << std::setprecision(12) << lo << "," << hi << ","
                 << csvEscapeSimple(oracle.status) << ","
@@ -13992,6 +14011,7 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
             std::chrono::steady_clock::now() - oracle_start).count();
     result.auto_interval_oracle_remaining_open_leaves =
         std::max(0, result.unresolved_intervals - closed);
+    result.auto_interval_oracle_status_by_leaf = status_by_leaf.str();
     result.notes.push_back("automatic interval oracle summary written to "
         + oracle_csv.string());
     if (oracle_blocker_seen) {
@@ -14048,13 +14068,30 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         result.auto_interval_oracle_remaining_open_leaves > 0) {
         result.bpc_fallback_auto_called = true;
         result.bpc_fallback_leaves_attempted =
-            result.auto_interval_oracle_remaining_open_leaves;
+            opt.auto_interval_bpc_max_leaves > 0
+                ? std::min(result.auto_interval_oracle_remaining_open_leaves,
+                           opt.auto_interval_bpc_max_leaves)
+                : result.auto_interval_oracle_remaining_open_leaves;
+        result.bpc_fallback_pricing_time = 0.0;
         result.bpc_interval_certificate_basis =
             "diagnostic_not_started_by_sealed_postprocessor";
         result.notes.push_back("automatic BPC fallback requested, but no lower-bound "
             "certificate was imported because exact interval BPC closure must prove pricing "
             "closure before merge; row remains noncertified for remaining leaves");
     }
+}
+
+std::string inferPlateauReasonForFinalization(const ebrp::SolveResult& result) {
+    if (result.status == "optimal") return "certified";
+    if (result.auto_interval_oracle_called &&
+        result.auto_interval_oracle_remaining_open_leaves > 0) {
+        return "automatic_interval_oracle_left_open_leaves";
+    }
+    if (result.open_nodes > 0) return "open_bpc_or_frontier_nodes";
+    if (result.unresolved_intervals > 0) return "unresolved_frontier_intervals";
+    if (result.invalid_bound_intervals > 0) return "invalid_bound_intervals";
+    if (result.gap > 1e-7) return "positive_gap";
+    return "not_certified";
 }
 
 } // namespace
@@ -14200,6 +14237,16 @@ int main(int argc, char** argv) {
             applyRunConfigSnapshot(buildRunConfigSnapshot(instance, effective_opt), r);
             runAutoIntervalOracleClosure(instance, effective_opt, r);
             applySealedRunProvenance(effective_opt, r);
+            if (r.finalization_source.empty()) {
+                r.finalization_source = "solver_final_json";
+            }
+            if (r.last_progress_event.empty()) {
+                r.last_progress_event =
+                    r.status == "optimal" ? "final_summary" : "solver_returned";
+            }
+            if (r.plateau_reason.empty()) {
+                r.plateau_reason = inferPlateauReasonForFinalization(r);
+            }
             finalizePaperModuleFields(r);
             if (r.result_file.empty()) r.result_file = opt.out_path;
             if (r.log_file.empty()) r.log_file = opt.log_path;

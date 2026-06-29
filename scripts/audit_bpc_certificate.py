@@ -107,6 +107,7 @@ def audit_one(source: str, result: Dict[str, Any]) -> Dict[str, Any]:
         result.get("incumbent_source_contributes_lower_bound", False)
     )
     sealed_run = as_bool(result.get("sealed_run", False))
+    finalization_source = str(result.get("finalization_source", ""))
 
     original_scope = solves_original or method_scope in {
         "original_bpc",
@@ -131,18 +132,16 @@ def audit_one(source: str, result: Dict[str, Any]) -> Dict[str, Any]:
         failures.append("diagnostic_archive_marked_paper_reproducible")
 
     if sealed_run:
+        if not finalization_source:
+            failures.append("sealed_run_missing_finalization_source")
         if as_bool(result.get("sealed_run_forbidden_source_used", False)):
-            if certified or (status == "optimal" and original_scope):
-                failures.append("sealed_run_forbidden_source_used")
+            failures.append("sealed_run_forbidden_source_used")
         if not as_bool(result.get("no_archive_scanning", False)):
-            if certified or (status == "optimal" and original_scope):
-                failures.append("sealed_run_archive_scanning_not_disabled")
+            failures.append("sealed_run_archive_scanning_not_disabled")
         if not as_bool(result.get("no_external_known_ub", False)):
-            if certified or (status == "optimal" and original_scope):
-                failures.append("sealed_run_external_known_ub_used")
+            failures.append("sealed_run_external_known_ub_used")
         if not as_bool(result.get("no_focus_only_certificate", False)):
-            if certified or (status == "optimal" and original_scope):
-                failures.append("sealed_run_focus_only_certificate_used")
+            failures.append("sealed_run_focus_only_certificate_used")
         if incumbent_source_category == "diagnostic_archive":
             failures.append("sealed_run_used_diagnostic_archive_incumbent")
 
@@ -261,6 +260,7 @@ def audit_one(source: str, result: Dict[str, Any]) -> Dict[str, Any]:
         "sealed_run_forbidden_source_used": as_bool(
             result.get("sealed_run_forbidden_source_used", False)
         ),
+        "finalization_source": finalization_source,
         "audit_passed": not failures,
         "failure_count": len(failures),
         "failures": ";".join(failures),
@@ -289,6 +289,7 @@ def write_csv(rows: List[Dict[str, Any]], out_path: Path) -> None:
         "no_external_known_ub",
         "no_focus_only_certificate",
         "sealed_run_forbidden_source_used",
+        "finalization_source",
         "audit_passed",
         "failure_count",
         "failures",
@@ -397,6 +398,12 @@ def main(argv: List[str]) -> int:
     parser.add_argument("--csv-out", default="", help="write audit CSV to this path")
     parser.add_argument("--fail-on-error", action="store_true", help="exit 1 when any row fails")
     parser.add_argument("--self-test", action="store_true", help="run built-in regression cases")
+    parser.add_argument(
+        "--require-progress-finals",
+        action="append",
+        default=[],
+        help="directory whose *.progress.csv files must have matching final JSON",
+    )
     args = parser.parse_args(argv)
 
     if args.self_test:
@@ -448,6 +455,40 @@ def main(argv: List[str]) -> int:
                 "audit_passed": False,
                 "failure_count": 1,
                 "failures": f"json_parse_or_audit_error:{exc}",
+                "warnings": "",
+            })
+
+    for raw_dir_text in args.require_progress_finals:
+        raw_dir = Path(raw_dir_text)
+        for progress_path in sorted(raw_dir.glob("*.progress.csv")):
+            json_path = progress_path.with_name(
+                progress_path.name.replace(".progress.csv", ".json")
+            )
+            if json_path.exists():
+                continue
+            rows.append({
+                "source": str(progress_path),
+                "instance_name": progress_path.name.replace(".progress.csv", ""),
+                "method": "gcap-frontier",
+                "status": "missing_final_json",
+                "method_scope": "original_bpc",
+                "solves_original_objective": True,
+                "is_bpc": True,
+                "certified_original_problem": False,
+                "verifier_passed": False,
+                "gap": "",
+                "unresolved_intervals": "",
+                "invalid_bound_intervals": "",
+                "open_nodes": "",
+                "sealed_run": True,
+                "no_archive_scanning": True,
+                "no_external_known_ub": True,
+                "no_focus_only_certificate": True,
+                "sealed_run_forbidden_source_used": False,
+                "finalization_source": "",
+                "audit_passed": False,
+                "failure_count": 1,
+                "failures": "progress_log_without_final_json",
                 "warnings": "",
             })
 

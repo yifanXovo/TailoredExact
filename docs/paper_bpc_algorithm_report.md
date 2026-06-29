@@ -1090,3 +1090,23 @@ portfolio preset.  It is not a broad benchmark claim yet; it is a reproducible
 configuration for additional V20 certification attempts.
 
 Raw results and audit output are in `results/v20_replication_round/`.
+## Sealed Pipeline Completion Update
+
+The sealed completion round adds a paper-run finalization contract. A sealed row
+is no longer acceptable unless it writes a final JSON and interval ledger, even
+when noncertified. Missing solver JSON is converted by
+`scripts/run_sealed_pipeline_completion.py` into a noncertified checkpoint
+artifact with `certified_original_problem=false`, `finalization_source`, and a
+plateau reason.
+
+The current sealed mini-suite keeps V12 stable and certifies two V20/M3 stress
+rows:
+
+- `high_imbalance_seed3202`, objective `1.74931345205`;
+- `tight_T_seed3101`, objective `0.107252734134`.
+
+The four remaining V20/M3 rows now have audited noncertified JSONs. A checkpoint
+exact cutoff oracle closed one `moderate_seed3301` leaf, but no row gained a
+full-ledger certificate from oracle or BPC fallback. The next algorithmic
+bottleneck is complete automatic oracle processing and safe merge over all
+unresolved leaves.

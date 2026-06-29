@@ -143,6 +143,8 @@ struct SolveOptions {
     bool auto_interval_oracle_merge = true;
     bool auto_interval_oracle_restart_on_improved_ub = true;
     bool auto_interval_bpc_fallback = false;
+    double auto_interval_bpc_time_limit = 0.0;
+    int auto_interval_bpc_max_leaves = 0;
     std::string frontier_scheduling_mode = "default";
     bool frontier_critical_band_auto = false;
     int frontier_critical_band_max_depth = 0;

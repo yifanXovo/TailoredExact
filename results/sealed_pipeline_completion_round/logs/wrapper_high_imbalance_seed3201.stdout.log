@@ -1,0 +1,16 @@
+{
+  "row": "high_imbalance_seed3201",
+  "input": "E:\\codes\\ExactEBRP\\reference\\hard_stress\\V20_M3\\high_imbalance_seed3201.txt",
+  "status": "interrupted_noncertified",
+  "certified_original_problem": false,
+  "gap": "0.384216229658",
+  "returncode": 1,
+  "timed_out": true,
+  "wall_seconds": 1500.0,
+  "result_json": "results\\sealed_pipeline_completion_round\\raw\\high_imbalance_seed3201.json",
+  "progress_log": "results\\sealed_pipeline_completion_round\\raw\\high_imbalance_seed3201.progress.csv",
+  "ub_event_log": "results\\sealed_pipeline_completion_round\\raw\\high_imbalance_seed3201.ub_events.csv",
+  "stdout_log": "results\\sealed_pipeline_completion_round\\logs\\high_imbalance_seed3201.stdout.log",
+  "stderr_log": "results\\sealed_pipeline_completion_round\\logs\\high_imbalance_seed3201.stderr.log",
+  "command": "E:\\codes\\ExactEBRP\\build\\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-exact-v20-certificate --paper-run-sealed true --auto-interval-oracle true --auto-interval-oracle-time-limit 300 --auto-interval-oracle-max-leaves 2 --auto-interval-oracle-order low-gini --auto-interval-oracle-restart-on-improved-ub true --auto-interval-bpc-fallback true --auto-interval-bpc-time-limit 120 --auto-interval-bpc-max-leaves 1 --input E:\\codes\\ExactEBRP\\reference\\hard_stress\\V20_M3\\high_imbalance_seed3201.txt --lambda 0.15 --T 3600 --time-limit 1200 --progress-log results\\sealed_pipeline_completion_round\\raw\\high_imbalance_seed3201.progress.csv --ub-event-log results\\sealed_pipeline_completion_round\\raw\\high_imbalance_seed3201.ub_events.csv --out results\\sealed_pipeline_completion_round\\raw\\high_imbalance_seed3201.json"
+}

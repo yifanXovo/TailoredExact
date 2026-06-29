@@ -113,9 +113,11 @@ V20 replication candidate preset:
 ```powershell
 build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-exact-v20-certificate `
   --paper-run-sealed true `
+  --auto-interval-oracle true --auto-interval-oracle-order low-gini `
+  --auto-interval-bpc-fallback true `
   --input reference\hard_stress\V20_M3\high_imbalance_seed3202.txt `
   --lambda 0.15 --T 3600 --time-limit 3600 `
-  --out results\sealed_paper_pipeline_round\raw\high_imbalance_seed3202.json
+  --out results\sealed_pipeline_completion_round\raw\high_imbalance_seed3202.json
 ```
 
 `paper-exact-v20-certificate` keeps native HGA-TGBC as a verifier-gated UB-only
@@ -126,7 +128,10 @@ true` rejects archive scanning, external incumbents, focus-only certificates,
 and stale resume/import evidence for paper-candidate rows. BPC fallback remains
 off by default unless explicitly requested and exact pricing closes. The same
 sealed command template is used for V12/V20 rows; only input, output, and time
-budget change.
+budget change. Sealed completion runs must also emit final JSON for
+noncertified rows; missing solver JSON is converted by
+`scripts\run_sealed_pipeline_completion.py` into an auditable noncertified
+checkpoint artifact.
 
 ## Exact-Phase UB Tracing
 

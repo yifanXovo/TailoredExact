@@ -8,7 +8,7 @@ results/paper_evidence_candidate/
 
 It collects the sealed command manifest, instance hashes, raw JSONs, interval
 ledgers, UB event logs, certificate audit CSV, no-instance-special-case audit,
-and summary tables produced by `results/sealed_paper_pipeline_round/`.
+and summary tables produced by `results/sealed_pipeline_completion_round/`.
 
 Rows are classified as:
 
@@ -32,19 +32,18 @@ Certified exact rows:
 - `high_imbalance_seed3202`;
 - `tight_T_seed3101`.
 
-Noncertified/run-exit rows:
+Noncertified rows with final JSON:
 
 - `high_imbalance_seed3201`;
 - `tight_T_seed3102`;
 - `moderate_seed3301`;
 - `moderate_seed3302`.
 
-The noncertified rows are not represented by final raw JSONs in this sealed
-round. Their progress and UB-event logs are retained and summarized in
-`results/sealed_paper_pipeline_round/run_exit_summary.csv`. They must not be
-counted as audited certificates.
+The noncertified rows are now represented by final raw JSONs. They are included
+in `results/sealed_pipeline_completion_round/certificate_audit.csv` and pass
+audit because they honestly report `certified_original_problem=false`, positive
+gaps, unresolved intervals, and checkpoint/oracle plateau reasons.
 
 The project is not yet ready for broad paper benchmark testing: V12 behavior is
-stable and two V20/M3 stress rows certify, but the remaining V20 rows require a
-robust finalization path that emits noncertified JSONs after long focused retry
-or tree work.
+stable and two V20/M3 stress rows certify, but the requested third V20
+certificate was not obtained in this sealed completion round.

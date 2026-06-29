@@ -1,0 +1,16 @@
+{
+  "row": "v4_smoke",
+  "input": "E:\\codes\\ExactEBRP\\testdata\\examples\\gcap_smoke_V4_M1.txt",
+  "status": "optimal",
+  "certified_original_problem": true,
+  "gap": "0",
+  "returncode": 0,
+  "timed_out": false,
+  "wall_seconds": 0.6709999999729916,
+  "result_json": "results\\sealed_pipeline_completion_round\\raw\\v4_smoke.json",
+  "progress_log": "results\\sealed_pipeline_completion_round\\raw\\v4_smoke.progress.csv",
+  "ub_event_log": "results\\sealed_pipeline_completion_round\\raw\\v4_smoke.ub_events.csv",
+  "stdout_log": "results\\sealed_pipeline_completion_round\\logs\\v4_smoke.stdout.log",
+  "stderr_log": "results\\sealed_pipeline_completion_round\\logs\\v4_smoke.stderr.log",
+  "command": "E:\\codes\\ExactEBRP\\build\\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-exact-v20-certificate --paper-run-sealed true --auto-interval-oracle true --auto-interval-oracle-time-limit 300 --auto-interval-oracle-max-leaves 2 --auto-interval-oracle-order low-gini --auto-interval-oracle-restart-on-improved-ub true --auto-interval-bpc-fallback true --auto-interval-bpc-time-limit 120 --auto-interval-bpc-max-leaves 1 --input E:\\codes\\ExactEBRP\\testdata\\examples\\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --time-limit 30 --progress-log results\\sealed_pipeline_completion_round\\raw\\v4_smoke.progress.csv --ub-event-log results\\sealed_pipeline_completion_round\\raw\\v4_smoke.ub_events.csv --out results\\sealed_pipeline_completion_round\\raw\\v4_smoke.json"
+}
