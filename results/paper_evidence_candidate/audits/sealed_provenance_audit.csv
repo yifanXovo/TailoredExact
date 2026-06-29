@@ -1,10 +1,10 @@
-row,status,certified_original_problem,sealed_run,no_archive_scanning,no_external_known_ub,no_focus_only_certificate,result_json,notes
-v4_smoke,optimal,True,True,True,True,True,results\sealed_paper_pipeline_round\raw\v4_smoke.json,final_json
-v12_m2_300s,optimal,True,True,True,True,True,results\sealed_paper_pipeline_round\raw\v12_m2_300s.json,final_json
-v12_m1_600s,optimal,True,True,True,True,True,results\sealed_paper_pipeline_round\raw\v12_m1_600s.json,final_json
-high_imbalance_seed3201,run_exit_no_final_json,False,True,True,True,True,,process exited or was stopped without final JSON; progress log preserved
-high_imbalance_seed3202,optimal,True,True,True,True,True,results\sealed_paper_pipeline_round\raw\high_imbalance_seed3202.json,final_json
-tight_T_seed3101,optimal,True,True,True,True,True,results\sealed_paper_pipeline_round\raw\tight_T_seed3101.json,final_json
-tight_T_seed3102,run_exit_no_final_json,False,True,True,True,True,,process exited or was stopped without final JSON; progress log preserved
-moderate_seed3301,run_exit_no_final_json,False,True,True,True,True,,process exited or was stopped without final JSON; progress log preserved
-moderate_seed3302,run_exit_no_final_json,False,True,True,True,True,,process exited or was stopped without final JSON; progress log preserved
+"row","sealed_run","finalization_source","certified_original_problem","status","plateau_reason"
+"v4_smoke","True","solver_final_json","True","optimal","certified"
+"v12_m2_300s","True","solver_final_json","True","optimal","certified"
+"v12_m1_600s","True","solver_final_json","True","optimal","certified"
+"high_imbalance_seed3201","True","interrupted_checkpoint","False","interrupted_noncertified","checkpoint_oracle_timeout"
+"high_imbalance_seed3202","True","solver_final_json","True","optimal","certified"
+"tight_T_seed3101","True","solver_final_json","True","optimal","certified"
+"tight_T_seed3102","True","wrapper_checkpoint","False","interrupted_noncertified","checkpoint_oracle_timeout"
+"moderate_seed3301","True","interrupted_checkpoint","False","interrupted_noncertified","checkpoint_oracle_diagnostic_unresolved"
+"moderate_seed3302","True","interrupted_checkpoint","False","interrupted_noncertified","checkpoint_oracle_timeout"

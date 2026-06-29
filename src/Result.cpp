@@ -434,6 +434,12 @@ std::string resultToJson(const SolveResult& input) {
     out << "  \"wall_time_seconds\": " << wall_time << ",\n";
     out << "  \"aggregate_worker_time_seconds\": " << aggregate_worker_time << ",\n";
     out << "  \"stop_reason\": \"" << jsonEscape(inferStopReason(result)) << "\",\n";
+    out << "  \"finalization_source\": \""
+        << jsonEscape(result.finalization_source) << "\",\n";
+    out << "  \"last_progress_event\": \""
+        << jsonEscape(result.last_progress_event) << "\",\n";
+    out << "  \"plateau_reason\": \""
+        << jsonEscape(result.plateau_reason) << "\",\n";
     out << "  \"verifier_passed\": " << (inferVerifierPassed(result) ? "true" : "false") << ",\n";
     out << "  \"unresolved_intervals\": " << result.unresolved_intervals << ",\n";
     out << "  \"invalid_bound_intervals\": " << result.invalid_bound_intervals << ",\n";
@@ -1261,6 +1267,8 @@ std::string resultToJson(const SolveResult& input) {
         << result.auto_interval_oracle_time_seconds << ",\n";
     out << "  \"auto_interval_oracle_remaining_open_leaves\": "
         << result.auto_interval_oracle_remaining_open_leaves << ",\n";
+    out << "  \"auto_interval_oracle_status_by_leaf\": \""
+        << jsonEscape(result.auto_interval_oracle_status_by_leaf) << "\",\n";
     out << "  \"full_ledger_merge_status\": \""
         << jsonEscape(result.full_ledger_merge_status) << "\",\n";
     out << "  \"full_ledger_merge_audit_passed\": "

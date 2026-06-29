@@ -545,11 +545,15 @@ struct SolveResult {
     bool no_focus_only_certificate = true;
     bool sealed_run_forbidden_source_used = false;
     std::string sealed_run_rejection_reason;
+    std::string finalization_source;
+    std::string last_progress_event;
+    std::string plateau_reason;
     bool auto_interval_oracle_called = false;
     int auto_interval_oracle_leaves_attempted = 0;
     int auto_interval_oracle_leaves_closed = 0;
     double auto_interval_oracle_time_seconds = 0.0;
     int auto_interval_oracle_remaining_open_leaves = 0;
+    std::string auto_interval_oracle_status_by_leaf;
     std::string full_ledger_merge_status;
     bool full_ledger_merge_audit_passed = false;
     bool bpc_fallback_auto_called = false;

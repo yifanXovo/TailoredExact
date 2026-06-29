@@ -163,3 +163,15 @@ relaxation scheduling/cutoff fixes.  Current audited behavior is:
 All rows use regenerated engineering instances, not confirmed historical paper
 targets.  Archive-dependent UBs remain diagnostic-only and are not paper-core
 default inputs. See `docs/benchmark_instance_policy.md`.
+## Sealed Completion Scope
+
+`paper-exact-v20-certificate` is the sealed paper-candidate portfolio preset.
+It is an exact portfolio around the same Gini-frontier ledger: native HGA-TGBC
+provides UB-only incumbent evidence, relaxation and interval certificates
+provide lower-bound evidence, and BPC fallback is certificate-safe only when
+exact pricing closes.
+
+The sealed completion wrapper is part of the paper-run scope because it prevents
+silent run exits. It may synthesize only noncertified checkpoint artifacts. It
+must not synthesize optimality, merge focused interval rows without exact
+coverage, or use archive/known-UB evidence.
