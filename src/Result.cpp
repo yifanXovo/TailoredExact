@@ -1286,6 +1286,26 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.auto_interval_oracle_status_by_leaf) << "\",\n";
     out << "  \"auto_interval_oracle_coverage_complete\": "
         << (result.auto_interval_oracle_coverage_complete ? "true" : "false") << ",\n";
+    out << "  \"auto_interval_oracle_requested_leaf_time_limit\": "
+        << result.auto_interval_oracle_requested_leaf_time_limit << ",\n";
+    out << "  \"auto_interval_oracle_actual_leaf_time_limit\": "
+        << result.auto_interval_oracle_actual_leaf_time_limit << ",\n";
+    out << "  \"auto_interval_oracle_total_budget\": "
+        << result.auto_interval_oracle_total_budget << ",\n";
+    out << "  \"auto_interval_oracle_budget_policy\": \""
+        << jsonEscape(result.auto_interval_oracle_budget_policy) << "\",\n";
+    out << "  \"auto_interval_oracle_budget_exhausted\": "
+        << (result.auto_interval_oracle_budget_exhausted ? "true" : "false") << ",\n";
+    out << "  \"per_leaf_oracle_time_limit_used\": \""
+        << jsonEscape(result.per_leaf_oracle_time_limit_used) << "\",\n";
+    out << "  \"auto_interval_oracle_recursive_depth_reached\": "
+        << result.auto_interval_oracle_recursive_depth_reached << ",\n";
+    out << "  \"auto_interval_oracle_children_attempted\": "
+        << result.auto_interval_oracle_children_attempted << ",\n";
+    out << "  \"auto_interval_oracle_max_children_total\": "
+        << result.auto_interval_oracle_max_children_total << ",\n";
+    out << "  \"auto_interval_oracle_partition_tree_csv_path\": \""
+        << jsonEscape(result.auto_interval_oracle_partition_tree_csv_path) << "\",\n";
     out << "  \"full_ledger_merge_status\": \""
         << jsonEscape(result.full_ledger_merge_status) << "\",\n";
     out << "  \"full_ledger_merge_audit_passed\": "
@@ -1294,6 +1314,8 @@ std::string resultToJson(const SolveResult& input) {
         << (result.bpc_fallback_auto_called ? "true" : "false") << ",\n";
     out << "  \"bpc_fallback_leaves_attempted\": "
         << result.bpc_fallback_leaves_attempted << ",\n";
+    out << "  \"bpc_fallback_leaves_closed\": "
+        << result.bpc_fallback_leaves_closed << ",\n";
     out << "  \"exact_pricing_closed_leaves\": "
         << result.exact_pricing_closed_leaves << ",\n";
     out << "  \"bpc_fallback_pricing_time\": "
@@ -1301,6 +1323,8 @@ std::string resultToJson(const SolveResult& input) {
     out << "  \"bpc_fallback_nodes\": " << result.bpc_fallback_nodes << ",\n";
     out << "  \"bpc_fallback_best_reduced_cost\": "
         << result.bpc_fallback_best_reduced_cost << ",\n";
+    out << "  \"bpc_fallback_final_interval_lb\": "
+        << result.bpc_fallback_final_interval_lb << ",\n";
     out << "  \"bpc_interval_certificate_basis\": \""
         << jsonEscape(result.bpc_interval_certificate_basis) << "\",\n";
     out << "  \"vehicle_transfer_flow_variables\": "

@@ -1,0 +1,21 @@
+interval_id,parent_id,depth,gamma_L,gamma_U,status,closed,split,children,time_limit_used,runtime_seconds,certificate_basis,solver_status
+1_d1_0,1,1,0.0122881381662,0.0184322072493,interval_closed,true,false,0,1800,7.4387098,interval_exact_cutoff_mip_infeasible,infeasible
+1_d1_1_d2_0_d3_0,1_d1_1_d2_0,3,0.0184322072493,0.0199682245201,interval_unresolved_timeout,false,false,0,1800,1800.104734,interval_exact_cutoff_mip_timeout,time limit exceeded
+1_d1_1_d2_0_d3_1,1_d1_1_d2_0,3,0.0199682245201,0.0215042417909,interval_unresolved_timeout,false,false,0,1800,1800.723485,interval_exact_cutoff_mip_timeout,time limit exceeded
+1_d1_1_d2_0,1_d1_1,2,0.0184322072493,0.0215042417909,interval_unresolved_timeout,false,true,2,1800,1800.1001152,interval_exact_cutoff_mip_timeout,time limit exceeded
+1_d1_1_d2_1_d3_0,1_d1_1_d2_1,3,0.0215042417909,0.0230402590616,interval_unresolved_timeout,false,false,0,1800,1800.1450422,interval_exact_cutoff_mip_timeout,time limit exceeded
+1_d1_1_d2_1_d3_1,1_d1_1_d2_1,3,0.0230402590616,0.0245762763324,interval_unresolved_timeout,false,false,0,1800,1800.0962302,interval_exact_cutoff_mip_timeout,time limit exceeded
+1_d1_1_d2_1,1_d1_1,2,0.0215042417909,0.0245762763324,interval_unresolved_timeout,false,true,2,1800,1800.3036658,interval_exact_cutoff_mip_timeout,time limit exceeded
+1_d1_1,1,1,0.0184322072493,0.0245762763324,interval_unresolved_timeout,false,true,2,1800,1800.0947155,interval_exact_cutoff_mip_timeout,time limit exceeded
+1,root,0,0.0122881381662,0.0245762763324,interval_unresolved_timeout,false,true,2,600,600.1185245,interval_exact_cutoff_mip_timeout,time limit exceeded
+2_d1_0_d2_0_d3_0,2_d1_0_d2_0,3,0.0245762763324,0.0261122936032,interval_unresolved_timeout,false,false,0,1800,1800.1882553,interval_exact_cutoff_mip_timeout,time limit exceeded
+2_d1_0_d2_0_d3_1,2_d1_0_d2_0,3,0.0261122936032,0.0276483108739,interval_closed,true,false,0,1800,13.121525,interval_exact_cutoff_mip_infeasible,infeasible
+2_d1_0_d2_0,2_d1_0,2,0.0245762763324,0.0276483108739,interval_unresolved_timeout,false,true,2,1800,1800.1200738,interval_exact_cutoff_mip_timeout,time limit exceeded
+2_d1_0_d2_1,2_d1_0,2,0.0276483108739,0.0307203454155,interval_closed,true,false,0,1800,0.4520845,interval_exact_cutoff_mip_infeasible,infeasible
+2_d1_0,2,1,0.0245762763324,0.0307203454155,interval_unresolved_timeout,false,true,2,1800,1800.4578025,interval_exact_cutoff_mip_timeout,time limit exceeded
+2_d1_1,2,1,0.0307203454155,0.0368644144986,interval_closed,true,false,0,1800,0.4236078,interval_exact_cutoff_mip_infeasible,infeasible
+2,root,0,0.0245762763324,0.0368644144986,interval_unresolved_timeout,false,true,2,600,600.3480927,interval_exact_cutoff_mip_timeout,time limit exceeded
+3,root,0,0.0368644144986,0.0491525526647,interval_closed,true,false,0,600,0.6457444,interval_exact_cutoff_mip_infeasible,infeasible
+9,root,0,0.0107521208954,0.0122881381662,interval_closed,true,false,0,600,0.8970552,interval_exact_cutoff_mip_infeasible,infeasible
+10,root,0,0.00921610362464,0.00998411226003,interval_closed,true,false,0,600,0.8211585,interval_exact_cutoff_mip_infeasible,infeasible
+11,root,0,0.00998411226003,0.0107521208954,interval_closed,true,false,0,600,0.7852038,interval_exact_cutoff_mip_infeasible,infeasible

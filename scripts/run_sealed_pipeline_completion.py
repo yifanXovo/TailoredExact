@@ -303,14 +303,26 @@ def synthesize_json(
         "auto_interval_oracle_remaining_open_leaves": unresolved,
         "auto_interval_oracle_status_by_leaf": "",
         "auto_interval_oracle_coverage_complete": False,
+        "auto_interval_oracle_requested_leaf_time_limit": 0.0,
+        "auto_interval_oracle_actual_leaf_time_limit": 0.0,
+        "auto_interval_oracle_total_budget": 0.0,
+        "auto_interval_oracle_budget_policy": "",
+        "auto_interval_oracle_budget_exhausted": False,
+        "per_leaf_oracle_time_limit_used": "",
+        "auto_interval_oracle_recursive_depth_reached": 0,
+        "auto_interval_oracle_children_attempted": 0,
+        "auto_interval_oracle_max_children_total": 0,
+        "auto_interval_oracle_partition_tree_csv_path": "",
         "full_ledger_merge_status": "not_reached_before_interruption",
         "full_ledger_merge_audit_passed": False,
         "bpc_fallback_auto_called": False,
         "bpc_fallback_leaves_attempted": 0,
+        "bpc_fallback_leaves_closed": 0,
         "exact_pricing_closed_leaves": 0,
         "bpc_fallback_pricing_time": 0.0,
         "bpc_fallback_nodes": 0,
         "bpc_fallback_best_reduced_cost": 0.0,
+        "bpc_fallback_final_interval_lb": lower,
         "bpc_interval_certificate_basis": "none",
         "progress_log": str(progress_path),
         "ub_event_log": str(ub_path),
@@ -470,13 +482,21 @@ def build_command(
     oracle_time: int,
     oracle_max_leaves: str,
     oracle_order: str,
+    oracle_budget_policy: str,
+    oracle_total_budget: float,
+    oracle_child_time_limit: float,
     oracle_continue_after_timeout: bool,
     oracle_split_on_timeout: bool,
+    oracle_recursive_split: bool,
     oracle_child_split_count: int,
     oracle_max_depth: int,
+    oracle_min_width: float,
+    oracle_max_children_total: int,
     auto_bpc: bool,
     bpc_time: int,
     bpc_max_leaves: int,
+    bpc_max_nodes: int,
+    bpc_pricing_time_per_call: float,
 ) -> List[str]:
     return [
         str(exe),
@@ -485,18 +505,27 @@ def build_command(
         "--paper-run-sealed", "true",
         "--auto-interval-oracle", "true",
         "--auto-interval-oracle-time-limit", str(oracle_time),
+        "--auto-interval-oracle-leaf-budget-policy", str(oracle_budget_policy),
+        "--auto-interval-oracle-total-budget", str(oracle_total_budget),
+        "--auto-interval-oracle-child-time-limit", str(oracle_child_time_limit),
         "--auto-interval-oracle-max-leaves", str(oracle_max_leaves),
         "--auto-interval-oracle-order", str(oracle_order),
         "--auto-interval-oracle-continue-after-timeout",
         "true" if oracle_continue_after_timeout else "false",
         "--auto-interval-oracle-split-on-timeout",
         "true" if oracle_split_on_timeout else "false",
+        "--auto-interval-oracle-recursive-split",
+        "true" if oracle_recursive_split else "false",
         "--auto-interval-oracle-child-split-count", str(oracle_child_split_count),
         "--auto-interval-oracle-max-depth", str(oracle_max_depth),
+        "--auto-interval-oracle-min-width", str(oracle_min_width),
+        "--auto-interval-oracle-max-children-total", str(oracle_max_children_total),
         "--auto-interval-oracle-restart-on-improved-ub", "true",
         "--auto-interval-bpc-fallback", "true" if auto_bpc else "false",
         "--auto-interval-bpc-time-limit", str(bpc_time),
         "--auto-interval-bpc-max-leaves", str(bpc_max_leaves),
+        "--auto-interval-bpc-max-nodes", str(bpc_max_nodes),
+        "--auto-interval-bpc-pricing-time-per-call", str(bpc_pricing_time_per_call),
         "--input", str(input_path),
         "--lambda", "0.15",
         "--T", "3600",
@@ -539,13 +568,21 @@ def run_row(args: argparse.Namespace) -> Dict[str, Any]:
         args.oracle_time_limit,
         args.oracle_max_leaves,
         args.oracle_order,
+        args.oracle_budget_policy,
+        args.oracle_total_budget,
+        args.oracle_child_time_limit,
         args.oracle_continue_after_timeout,
         args.oracle_split_on_timeout,
+        args.oracle_recursive_split,
         args.oracle_child_split_count,
         args.oracle_max_depth,
+        args.oracle_min_width,
+        args.oracle_max_children_total,
         args.auto_bpc_fallback,
         args.bpc_time_limit,
         args.bpc_max_leaves,
+        args.bpc_max_nodes,
+        args.bpc_pricing_time_per_call,
     )
     start = time.monotonic()
     returncode: Optional[int] = None
@@ -685,8 +722,18 @@ def summarize_round(result_dir: Path, rows: Iterable[tuple]) -> None:
             "auto_interval_oracle_leaves_split": data.get("auto_interval_oracle_leaves_split", ""),
             "auto_interval_oracle_remaining_open_leaves": data.get("auto_interval_oracle_remaining_open_leaves", ""),
             "auto_interval_oracle_coverage_complete": data.get("auto_interval_oracle_coverage_complete", ""),
+            "auto_interval_oracle_requested_leaf_time_limit": data.get("auto_interval_oracle_requested_leaf_time_limit", ""),
+            "auto_interval_oracle_actual_leaf_time_limit": data.get("auto_interval_oracle_actual_leaf_time_limit", ""),
+            "auto_interval_oracle_total_budget": data.get("auto_interval_oracle_total_budget", ""),
+            "auto_interval_oracle_budget_policy": data.get("auto_interval_oracle_budget_policy", ""),
+            "auto_interval_oracle_budget_exhausted": data.get("auto_interval_oracle_budget_exhausted", ""),
+            "auto_interval_oracle_recursive_depth_reached": data.get("auto_interval_oracle_recursive_depth_reached", ""),
+            "auto_interval_oracle_children_attempted": data.get("auto_interval_oracle_children_attempted", ""),
             "full_ledger_merge_status": data.get("full_ledger_merge_status", ""),
             "bpc_fallback_auto_called": data.get("bpc_fallback_auto_called", ""),
+            "bpc_fallback_leaves_attempted": data.get("bpc_fallback_leaves_attempted", ""),
+            "bpc_fallback_leaves_closed": data.get("bpc_fallback_leaves_closed", ""),
+            "exact_pricing_closed_leaves": data.get("exact_pricing_closed_leaves", ""),
             "progress_log": str(progress_path) if progress_path.exists() else "",
             "ub_event_log": str(ub_path) if ub_path.exists() else "",
             "result_json": result_json,
@@ -813,13 +860,21 @@ def main(argv: List[str]) -> int:
     run.add_argument("--oracle-time-limit", type=int, default=300)
     run.add_argument("--oracle-max-leaves", default="all")
     run.add_argument("--oracle-order", default="all")
+    run.add_argument("--oracle-budget-policy", default="per-leaf")
+    run.add_argument("--oracle-total-budget", type=float, default=0.0)
+    run.add_argument("--oracle-child-time-limit", type=float, default=0.0)
     run.add_argument("--oracle-continue-after-timeout", action=argparse.BooleanOptionalAction, default=True)
     run.add_argument("--oracle-split-on-timeout", action=argparse.BooleanOptionalAction, default=False)
+    run.add_argument("--oracle-recursive-split", action=argparse.BooleanOptionalAction, default=False)
     run.add_argument("--oracle-child-split-count", type=int, default=2)
     run.add_argument("--oracle-max-depth", type=int, default=0)
+    run.add_argument("--oracle-min-width", type=float, default=0.0)
+    run.add_argument("--oracle-max-children-total", type=int, default=0)
     run.add_argument("--auto-bpc-fallback", action="store_true")
     run.add_argument("--bpc-time-limit", type=int, default=120)
     run.add_argument("--bpc-max-leaves", type=int, default=1)
+    run.add_argument("--bpc-max-nodes", type=int, default=0)
+    run.add_argument("--bpc-pricing-time-per-call", type=float, default=0.0)
     run.add_argument("--result-dir", default="results/sealed_pipeline_completion_round")
     run.add_argument("--exe", default="build/ExactEBRP.exe")
 

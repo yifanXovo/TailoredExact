@@ -1142,3 +1142,29 @@ diagnostic because no remaining leaf closed with exact pricing.
 Conclusion: the project remains a paper-candidate prototype, not a broad
 benchmark-ready exact algorithm.  The next bottleneck is the exact interval
 cutoff MIP or a stronger exact BPC leaf closure mechanism.
+
+## Oracle Closure Round
+
+The oracle closure round fixed budget semantics for automatic interval oracle
+closure:
+
+- `--auto-interval-oracle-time-limit` is a per-root-leaf budget when
+  `--auto-interval-oracle-leaf-budget-policy per-leaf` is used;
+- `--auto-interval-oracle-child-time-limit` controls split-child solves;
+- recursive splitting records an explicit partition tree and only closes a
+  parent if every child closes.
+
+Stable certified rows remain V12 M2, V12 M1, `high_imbalance_seed3202`, and
+`tight_T_seed3101`.  No third V20/M3 certificate was obtained.
+`moderate_seed3301_oracle_deep` attempted 20 oracle solves, closed four root
+leaves, split to depth 3, and left two root leaves open after 1800s child
+timeouts.  `tight_T_seed3102_controlled` exits normally and attempts all three
+final leaves plus their children, but all nine oracle solves time out.
+`high_imbalance_seed3201_controlled` attempts six oracle solves and all time
+out.  Automatic BPC fallback attempted two leaves on each priority row and
+closed none with exact pricing.
+
+All optimal claims in `results/oracle_closure_round/` pass
+`audit_bpc_certificate.py --fail-on-error`; noncertified rows remain honestly
+noncertified.  The project is still not ready for a broad paper benchmark
+matrix because the V20/M3 stress suite remains at 2/6 certified rows.

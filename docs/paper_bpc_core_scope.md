@@ -197,3 +197,15 @@ This extension is allowed inside `paper-exact-v20-certificate`; it does not
 change the rule that heuristic, route-pool, CPLEX, and BPC-generated incumbents
 are upper bounds only. BPC fallback remains nondefault certificate evidence
 unless exact pricing closes the interval.
+
+## Oracle Closure Scope
+
+The oracle closure round keeps `paper-exact-v20-certificate` sealed and
+instance-agnostic while making oracle budgets explicit.  The new per-leaf and
+child budget fields are certificate-neutral bookkeeping; they do not alter what
+counts as proof.  A timeout child remains unresolved, and a parent interval is
+not closed unless all children form exact coverage and close by valid bases.
+
+The round did not promote a broader paper-core default.  The appropriate status
+is still a paper-candidate exact portfolio with V12 stability and two certified
+V20/M3 stress rows, not a paper benchmark-ready solver.
