@@ -2,7 +2,8 @@
 
 Branch: `codex/longrun-round17-local-results`
 
-Final commit: recorded in the assistant final response after push.
+Implementation commit before this report-only update: 5b01507bbbd14edd3611d5371bdc21f8ba241ae6.
+Final pushed HEAD is recorded in the assistant final response to avoid a self-referential commit hash.
 
 ## Code Changes
 
