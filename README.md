@@ -181,6 +181,18 @@ noncertified rows; missing solver JSON is converted by
 `scripts\run_sealed_pipeline_completion.py` into an auditable noncertified
 checkpoint artifact.
 
+Oracle-bound merge round update:
+
+- `--interval-exact-oracle-mode both` now uses an original compact
+  fixed-interval objective-bound oracle for mergeable timeout evidence.
+- `--interval-oracle-merge-timeout-bound true` may raise a frontier leaf lower
+  bound only when the oracle JSON records a valid original fixed-interval
+  solver bound.
+- `moderate_seed3301` remains noncertified, but its sealed full-frontier gap is
+  reduced to `0.0280667552335` (`LB=0.047773`, `UB=0.0491525526647`).
+- Current certified V20/M3 count remains `2/6`: `high_imbalance_seed3202` and
+  `tight_T_seed3101`. Broad benchmark testing is still premature.
+
 ## Exact-Phase UB Tracing
 
 Paper-core runs can write a verifier-gated incumbent event log:

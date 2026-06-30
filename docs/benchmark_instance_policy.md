@@ -160,3 +160,19 @@ The round contains both certified and noncertified sealed rows. Noncertified
 rows with positive gaps are not historical benchmark failures; they are
 engineering stress diagnoses for exact interval cutoff MIP and BPC leaf
 closure.
+
+## Oracle Bound Merge Round Classification
+
+`results/oracle_bound_merge_round/` follows the same regenerated engineering
+policy:
+
+- V12 M1/M2 rows are regenerated engineering benchmarks.
+- V20/M3 rows under `reference/hard_stress/V20_M3/` are
+  `hard_generated_v20_m3` stress instances.
+- The missing V4 smoke input is recorded as a skipped smoke row for this
+  checkout, not as a benchmark result.
+
+The round is an exact interval-oracle lower-bound experiment, not a historical
+paper benchmark. `moderate_seed3301` remains noncertified with audited gap
+`0.0280667552335`; this is a valid generated-stress result, not a historical
+paper target claim.

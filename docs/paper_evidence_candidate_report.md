@@ -75,3 +75,26 @@ Noncertified with audited gap:
 on the moderate/tight/high-imbalance closure attempts.  The evidence package
 therefore supports continued targeted interval-oracle work, not a broad paper
 benchmark matrix.
+
+## Oracle Bound Merge Round Update
+
+The paper evidence package now includes the oracle-bound merge evidence from
+`results/oracle_bound_merge_round/`.
+
+Certified exact rows remain:
+
+- V12 M2 regenerated;
+- V12 M1 regenerated;
+- `high_imbalance_seed3202`;
+- `tight_T_seed3101`.
+
+Noncertified rows with audited gaps:
+
+- `moderate_seed3301`: `LB=0.047773`, `UB=0.0491525526647`,
+  `gap=0.0280667552335`;
+- `tight_T_seed3102`: `gap=0.250586342169`;
+- `high_imbalance_seed3201`: `gap=0.123531471571`.
+
+The evidence package classifies `moderate_seed3301` as an improved
+noncertified exact row, not as a certificate. The project still needs at least
+one additional V20/M3 certificate before broad paper benchmark testing.

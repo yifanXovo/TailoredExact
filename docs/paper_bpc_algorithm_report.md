@@ -1168,3 +1168,28 @@ All optimal claims in `results/oracle_closure_round/` pass
 `audit_bpc_certificate.py --fail-on-error`; noncertified rows remain honestly
 noncertified.  The project is still not ready for a broad paper benchmark
 matrix because the V20/M3 stress suite remains at 2/6 certified rows.
+
+## Oracle Bound Merge Round
+
+The oracle bound merge round adds auditable timeout-bound merging for exact
+interval oracles.  The solver now records whether an oracle row is an original
+compact objective-bound model, whether it contains the requested Gini interval
+rows, and whether its CPLEX best bound is valid for the original fixed interval.
+
+This is a lower-bound improvement only; it is not an incumbent source and it
+does not certify a row unless every final frontier leaf is closed or
+bound-fathomed.
+
+Key result:
+
+- `moderate_seed3301` remains noncertified but improves from the previous
+  frontier floor `LB=0.00921610362464` to `LB=0.047773`, reducing the gap to
+  `0.0280667552335`.
+- `tight_T_seed3102` and `high_imbalance_seed3201` remain noncertified.
+- V12 M2, V12 M1, `high_imbalance_seed3202`, and `tight_T_seed3101` remain
+  certified under the sealed preset.
+- BPC leaf fallback closed zero leaves.
+
+The current paper-readiness decision remains conservative: the project is not
+ready for a broad paper benchmark matrix until at least a third V20/M3 stress
+row certifies under the sealed unified pipeline.
