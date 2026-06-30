@@ -1,0 +1,10 @@
+interval_id,parent_id,depth,gamma_L,gamma_U,status,closed,split,children,time_limit_used,runtime_seconds,certificate_basis,solver_status
+1_d1_0,1,1,0.2375,0.35625,interval_closed,true,false,0,120,0.2356521,interval_exact_cutoff_mip_infeasible,infeasible
+1_d1_1,1,1,0.35625,0.475,interval_unresolved_timeout,false,false,0,120,120.0939497,interval_exact_cutoff_mip_timeout,time limit exceeded
+1,root,0,0.2375,0.475,interval_unresolved_timeout,false,true,2,120,120.0925062,interval_exact_cutoff_mip_timeout,time limit exceeded
+2_d1_0,2,1,0.475,0.59375,interval_unresolved_timeout,false,false,0,120,120.0946705,interval_exact_cutoff_mip_timeout,time limit exceeded
+2_d1_1,2,1,0.59375,0.7125,interval_unresolved_timeout,false,false,0,120,120.1016712,interval_exact_cutoff_mip_timeout,time limit exceeded
+2,root,0,0.475,0.7125,interval_unresolved_timeout,false,true,2,120,120.112967,interval_exact_cutoff_mip_timeout,time limit exceeded
+3_d1_0,3,1,0.7125,0.83125,interval_unresolved_timeout,false,false,0,120,120.1049556,interval_exact_cutoff_mip_timeout,time limit exceeded
+3_d1_1,3,1,0.83125,0.95,interval_unresolved_timeout,true,false,0,120,120.1068604,interval_exact_cutoff_mip_timeout,time limit exceeded
+3,root,0,0.7125,0.95,interval_unresolved_timeout,false,true,2,120,120.1055936,interval_exact_cutoff_mip_timeout,time limit exceeded

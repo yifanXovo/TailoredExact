@@ -209,3 +209,17 @@ not closed unless all children form exact coverage and close by valid bases.
 The round did not promote a broader paper-core default.  The appropriate status
 is still a paper-candidate exact portfolio with V12 stability and two certified
 V20/M3 stress rows, not a paper benchmark-ready solver.
+
+## Oracle Bound Merge Scope
+
+The oracle bound merge round adds one new admissible lower-bound source:
+`interval_exact_oracle_bound` from an original compact fixed-interval oracle
+with a finite valid CPLEX best bound. The bound is mergeable only when
+`interval_oracle_bound_valid=true` and
+`interval_oracle_bound_scope=original_fixed_interval`.
+
+This is not a focus-only certificate. It updates the full frontier leaf ledger
+and then recomputes the global lower bound from final leaves. If a leaf remains
+below the incumbent cutoff, the row remains noncertified. This is the current
+status for `moderate_seed3301`: gap `0.0280667552335`, two unresolved leaves,
+no optimality claim.

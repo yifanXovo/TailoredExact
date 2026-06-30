@@ -118,11 +118,16 @@ struct SolveOptions {
     double cutoff_feasibility_epsilon = 1e-8;
     double cutoff_feasibility_time_limit = 0.0;
     std::string interval_exact_cutoff_oracle = "off";
+    std::string interval_exact_oracle_mode = "cutoff-feasibility";
     double interval_exact_cutoff_gamma_L = -1.0;
     double interval_exact_cutoff_gamma_U = -1.0;
     double interval_exact_cutoff_UB = -1.0;
     double interval_exact_cutoff_epsilon = 1e-8;
     double interval_exact_cutoff_time_limit = 0.0;
+    double interval_oracle_objective_bound_time_limit = 0.0;
+    double interval_oracle_cutoff_feasibility_time_limit = 0.0;
+    bool interval_oracle_merge_timeout_bound = false;
+    std::string interval_oracle_profile = "balanced";
     std::string interval_exact_cutoff_export_lp;
     std::string interval_exact_cutoff_result;
     std::string interval_closure_mode = "off";

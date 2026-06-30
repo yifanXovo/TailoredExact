@@ -1234,6 +1234,34 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.interval_exact_cutoff_log_path) << "\",\n";
     out << "  \"interval_exact_cutoff_scope\": \""
         << jsonEscape(result.interval_exact_cutoff_scope) << "\",\n";
+    out << "  \"interval_oracle_model_type\": \""
+        << jsonEscape(result.interval_oracle_model_type) << "\",\n";
+    out << "  \"interval_oracle_bound_valid\": "
+        << (result.interval_oracle_bound_valid ? "true" : "false") << ",\n";
+    out << "  \"interval_oracle_bound_scope\": \""
+        << jsonEscape(result.interval_oracle_bound_scope) << "\",\n";
+    out << "  \"interval_oracle_objective_sense\": \""
+        << jsonEscape(result.interval_oracle_objective_sense) << "\",\n";
+    out << "  \"interval_oracle_has_objective_cutoff_row\": "
+        << (result.interval_oracle_has_objective_cutoff_row ? "true" : "false") << ",\n";
+    out << "  \"interval_oracle_has_gamma_interval_rows\": "
+        << (result.interval_oracle_has_gamma_interval_rows ? "true" : "false") << ",\n";
+    out << "  \"interval_oracle_solver_best_bound\": "
+        << result.interval_oracle_solver_best_bound << ",\n";
+    out << "  \"interval_oracle_solver_incumbent\": "
+        << result.interval_oracle_solver_incumbent << ",\n";
+    out << "  \"interval_oracle_gap_to_cutoff\": "
+        << result.interval_oracle_gap_to_cutoff << ",\n";
+    out << "  \"interval_oracle_can_merge_bound\": "
+        << (result.interval_oracle_can_merge_bound ? "true" : "false") << ",\n";
+    out << "  \"oracle_bound_merged_leaves\": "
+        << result.oracle_bound_merged_leaves << ",\n";
+    out << "  \"oracle_bound_closed_leaves\": "
+        << result.oracle_bound_closed_leaves << ",\n";
+    out << "  \"oracle_bound_best_global_lb\": "
+        << result.oracle_bound_best_global_lb << ",\n";
+    out << "  \"oracle_bound_merge_audit_csv_path\": \""
+        << jsonEscape(result.oracle_bound_merge_audit_csv_path) << "\",\n";
     out << "  \"interval_closure_mode\": \""
         << jsonEscape(result.interval_closure_mode) << "\",\n";
     out << "  \"interval_closure_variant_mode\": \""

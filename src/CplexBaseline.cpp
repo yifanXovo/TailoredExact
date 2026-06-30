@@ -41,6 +41,7 @@ struct CompactIntervalCutoffConfig {
     bool enabled = false;
     double gamma_L = 0.0;
     double gamma_U = 0.0;
+    bool add_objective_cutoff = true;
     double incumbent_ub = 0.0;
     double epsilon = 1e-8;
 };
@@ -410,14 +411,17 @@ void writeCompactLp(const Instance& instance,
         writeConstraint(out, cid, gl, ">=", cutoff->gamma_L);
         Expr gu; addTerm(gu, "G", 1);
         writeConstraint(out, cid, gu, "<=", cutoff->gamma_U);
-        Expr obj_cutoff; addTerm(obj_cutoff, "G", 1);
-        for (int i = 1; i <= V; ++i) {
-            addTerm(obj_cutoff, eName(i), options.lambda * instance.weights[i]);
+        if (cutoff->add_objective_cutoff) {
+            Expr obj_cutoff; addTerm(obj_cutoff, "G", 1);
+            for (int i = 1; i <= V; ++i) {
+                addTerm(obj_cutoff, eName(i), options.lambda * instance.weights[i]);
+            }
+            writeConstraint(out, cid, obj_cutoff, "<=", cutoff->incumbent_ub - cutoff->epsilon);
         }
-        writeConstraint(out, cid, obj_cutoff, "<=", cutoff->incumbent_ub - cutoff->epsilon);
 
         if ((options.interval_oracle_penalty_domain_tightening ||
              options.interval_oracle_low_gini_tightening) &&
+            cutoff->add_objective_cutoff &&
             options.lambda > 1e-12) {
             const double cutoff_value = cutoff->incumbent_ub - cutoff->epsilon;
             const double penalty_budget = (cutoff_value - cutoff->gamma_L) / options.lambda;
@@ -717,7 +721,27 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
     result.interval_exact_cutoff_gamma_U = options.interval_exact_cutoff_gamma_U;
     result.interval_exact_cutoff_UB = options.interval_exact_cutoff_UB;
     result.interval_exact_cutoff_epsilon = options.interval_exact_cutoff_epsilon;
-    result.interval_exact_cutoff_scope = "original fixed-interval cutoff feasibility compact MIP";
+    std::string oracle_mode = options.interval_exact_oracle_mode;
+    std::transform(oracle_mode.begin(), oracle_mode.end(), oracle_mode.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    if (oracle_mode != "objective-bound" &&
+        oracle_mode != "cutoff-feasibility" &&
+        oracle_mode != "both") {
+        oracle_mode = "cutoff-feasibility";
+    }
+    const bool objective_bound_mode =
+        oracle_mode == "objective-bound" || oracle_mode == "both";
+    const bool add_objective_cutoff = !objective_bound_mode;
+    result.interval_oracle_model_type = objective_bound_mode
+        ? "original_compact_objective_bound"
+        : "original_compact_cutoff_feasibility";
+    result.interval_oracle_bound_scope = "original_fixed_interval";
+    result.interval_oracle_objective_sense = "minimize";
+    result.interval_oracle_has_objective_cutoff_row = add_objective_cutoff;
+    result.interval_oracle_has_gamma_interval_rows = true;
+    result.interval_exact_cutoff_scope = objective_bound_mode
+        ? "original fixed-interval objective-bound compact MIP"
+        : "original fixed-interval cutoff feasibility compact MIP";
     result.notes.push_back(instance.distance_convention);
     result.notes.push_back("Interval oracle is local to one Gini interval. It never certifies the full original problem unless merged into a complete full-frontier ledger.");
 
@@ -733,6 +757,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         result.status = "error";
         result.certificate = "interval cutoff oracle requires --interval-exact-cutoff-oracle compact-mip, valid gamma bounds, and positive --interval-exact-cutoff-UB";
         result.interval_exact_cutoff_certificate_basis = "interval_exact_cutoff_mip_invalid_parameters";
+        result.interval_oracle_model_type = "diagnostic_unknown";
+        result.interval_oracle_bound_scope = "diagnostic";
         result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
         return result;
     }
@@ -773,9 +799,13 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         cutoff.enabled = true;
         cutoff.gamma_L = options.interval_exact_cutoff_gamma_L;
         cutoff.gamma_U = options.interval_exact_cutoff_gamma_U;
+        cutoff.add_objective_cutoff = add_objective_cutoff;
         cutoff.incumbent_ub = options.interval_exact_cutoff_UB;
         cutoff.epsilon = options.interval_exact_cutoff_epsilon;
-        if (!options.interval_oracle_objective_cutoff_row) {
+        if (objective_bound_mode) {
+            result.notes.push_back(
+                "interval oracle objective-bound mode omits the objective cutoff row; finite CPLEX dual bounds are valid original fixed-interval lower bounds");
+        } else if (!options.interval_oracle_objective_cutoff_row) {
             result.notes.push_back(
                 "interval_oracle_objective_cutoff_row=false requested; exact cutoff oracle keeps the original cutoff row because it is required for a valid interval certificate");
         }
@@ -786,9 +816,14 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 "interval oracle added safe penalty-budget e_i upper bounds derived from G>=gamma_L and G+lambda*P<=UB-epsilon");
         }
 
-        const double time_limit = options.interval_exact_cutoff_time_limit > 0.0
-            ? options.interval_exact_cutoff_time_limit
-            : std::max(1.0, options.solve_time_limit);
+        double time_limit = options.interval_exact_cutoff_time_limit;
+        if (objective_bound_mode && options.interval_oracle_objective_bound_time_limit > 0.0) {
+            time_limit = options.interval_oracle_objective_bound_time_limit;
+        } else if (!objective_bound_mode &&
+                   options.interval_oracle_cutoff_feasibility_time_limit > 0.0) {
+            time_limit = options.interval_oracle_cutoff_feasibility_time_limit;
+        }
+        if (time_limit <= 0.0) time_limit = std::max(1.0, options.solve_time_limit);
         std::ofstream cmd(cmd_path);
         cmd << "set threads " << std::max(1, options.threads) << "\n";
         cmd << "set timelimit " << time_limit << "\n";
@@ -825,8 +860,23 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         if (!std::isfinite(best_bound) && std::isfinite(log_best_bound)) best_bound = log_best_bound;
         result.interval_exact_cutoff_best_bound = std::isfinite(best_bound) ? best_bound : 0.0;
         result.interval_exact_cutoff_objective = std::isfinite(cplex_obj) ? cplex_obj : 0.0;
+        result.interval_oracle_solver_best_bound = result.interval_exact_cutoff_best_bound;
+        result.interval_oracle_solver_incumbent = result.interval_exact_cutoff_objective;
 
         const double cutoff_value = options.interval_exact_cutoff_UB - options.interval_exact_cutoff_epsilon;
+        result.interval_oracle_gap_to_cutoff = std::isfinite(best_bound)
+            ? (cutoff_value - best_bound)
+            : 0.0;
+        const bool finite_bound = std::isfinite(best_bound);
+        const bool best_bound_is_valid =
+            finite_bound &&
+            (objective_bound_mode ||
+             best_bound <= cutoff_value + 1e-7 ||
+             best_bound >= cutoff_value - 1e-7);
+        result.interval_oracle_bound_valid = best_bound_is_valid;
+        result.interval_oracle_can_merge_bound =
+            best_bound_is_valid &&
+            result.interval_oracle_bound_scope == "original_fixed_interval";
         if (statusIsInfeasible(cplex_status)) {
             result.status = "interval_closed";
             result.lower_bound = options.interval_exact_cutoff_UB;
@@ -834,15 +884,21 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             result.gap = 0.0;
             result.interval_exact_cutoff_proven_infeasible = true;
             result.interval_exact_cutoff_certificate_basis = "interval_exact_cutoff_mip_infeasible";
+            result.interval_oracle_bound_valid = true;
+            result.interval_oracle_can_merge_bound = true;
             result.certificate = "CPLEX proved the original compact fixed-interval cutoff MIP infeasible; no incumbent-improving original solution exists in this interval.";
         } else if (statusIsOptimal(cplex_status) && std::isfinite(cplex_obj) &&
-                   cplex_obj > cutoff_value + 1e-7) {
+                   cplex_obj >= cutoff_value - 1e-7) {
             result.status = "interval_closed";
             result.lower_bound = cplex_obj;
             result.upper_bound = options.interval_exact_cutoff_UB;
             result.gap = 0.0;
             result.interval_exact_cutoff_proven_infeasible = true;
-            result.interval_exact_cutoff_certificate_basis = "interval_exact_cutoff_mip_optimal_no_improver";
+            result.interval_exact_cutoff_certificate_basis = objective_bound_mode
+                ? "interval_exact_objective_bound_optimal_no_improver"
+                : "interval_exact_cutoff_mip_optimal_no_improver";
+            result.interval_oracle_bound_valid = true;
+            result.interval_oracle_can_merge_bound = true;
             result.certificate = "CPLEX optimized the fixed-interval cutoff MIP and its objective excludes all incumbent-improving solutions in this interval.";
         } else if (statusIsOptimal(cplex_status) && !values.empty()) {
             result.routes = reconstructRoutes(instance, values);
@@ -866,14 +922,24 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             result.status = improving ? "interval_feasible_improving_ub" : "interval_unresolved_feasible_relaxation_solution";
             result.interval_exact_cutoff_certificate_basis = improving
                 ? "interval_exact_cutoff_mip_feasible_improving"
-                : "interval_exact_cutoff_mip_feasible_not_verified_original_interval_improver";
+                : (objective_bound_mode
+                    ? "interval_exact_objective_bound_optimal_below_cutoff"
+                    : "interval_exact_cutoff_mip_feasible_not_verified_original_interval_improver");
+            result.interval_oracle_bound_valid = finite_bound;
+            result.interval_oracle_can_merge_bound = finite_bound;
             result.certificate = improving
                 ? "CPLEX found an original feasible incumbent-improving route plan in this interval; it is UB-only and requires frontier restart."
-                : "CPLEX found a cutoff-MIP solution, but the independently reconstructed original route plan did not verify as an improving solution in the requested interval; interval remains unresolved.";
+                : "CPLEX found/optimized an interval solution below the incumbent cutoff; interval remains unresolved but its valid solver bound may be merged.";
         } else {
             result.status = statusIsTimeLimited(cplex_status) ? "interval_unresolved_timeout" : "interval_unresolved";
             result.interval_exact_cutoff_timeout = statusIsTimeLimited(cplex_status);
-            result.lower_bound = std::isfinite(best_bound) ? best_bound : 0.0;
+            double merge_bound = 0.0;
+            if (best_bound_is_valid) {
+                merge_bound = objective_bound_mode
+                    ? best_bound
+                    : std::min(best_bound, cutoff_value);
+            }
+            result.lower_bound = merge_bound;
             result.upper_bound = options.interval_exact_cutoff_UB;
             result.gap = (std::fabs(result.upper_bound) > 1e-12)
                 ? std::max(0.0, (result.upper_bound - result.lower_bound) / std::fabs(result.upper_bound))
@@ -882,7 +948,9 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             result.interval_exact_cutoff_certificate_basis = result.interval_exact_cutoff_timeout
                 ? "interval_exact_cutoff_mip_timeout"
                 : "interval_exact_cutoff_mip_unresolved";
-            result.certificate = "CPLEX did not prove fixed-interval cutoff infeasibility or produce a verified improving original solution; interval remains unresolved. CPLEX status: " + cplex_status;
+            result.certificate = best_bound_is_valid
+                ? "CPLEX did not close the interval, but returned a valid original fixed-interval objective lower bound; interval remains unresolved unless the bound reaches incumbent cutoff."
+                : "CPLEX did not prove fixed-interval cutoff infeasibility or produce a valid mergeable bound; interval remains unresolved. CPLEX status: " + cplex_status;
         }
         result.notes.push_back("CPLEX solution status: " + cplex_status);
         result.notes.push_back("CPLEX process return code: " + std::to_string(rc));

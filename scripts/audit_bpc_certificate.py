@@ -228,6 +228,7 @@ def audit_one(source: str, result: Dict[str, Any]) -> Dict[str, Any]:
             if basis not in {
                 "interval_exact_cutoff_mip_infeasible",
                 "interval_exact_cutoff_mip_optimal_no_improver",
+                "interval_exact_objective_bound_optimal_no_improver",
             }:
                 failures.append("interval_oracle_closed_without_accepted_basis")
             if not proven:
@@ -236,8 +237,29 @@ def audit_one(source: str, result: Dict[str, Any]) -> Dict[str, Any]:
                 failures.append("interval_oracle_infeasible_basis_without_solver_infeasible")
             if not result.get("interval_exact_cutoff_scope"):
                 failures.append("interval_oracle_closed_without_scope")
+        if as_bool(result.get("interval_oracle_can_merge_bound", False)):
+            if not as_bool(result.get("interval_oracle_bound_valid", False)):
+                failures.append("interval_oracle_mergeable_bound_marked_invalid")
+            if result.get("interval_oracle_bound_scope") != "original_fixed_interval":
+                failures.append("interval_oracle_mergeable_bound_wrong_scope")
+            if result.get("interval_oracle_model_type") not in {
+                "original_compact_objective_bound",
+                "original_compact_cutoff_feasibility",
+            }:
+                failures.append("interval_oracle_mergeable_bound_wrong_model_type")
+            if str(result.get("interval_oracle_objective_sense", "")) != "minimize":
+                failures.append("interval_oracle_mergeable_bound_wrong_sense")
+            if not as_bool(result.get("interval_oracle_has_gamma_interval_rows", False)):
+                failures.append("interval_oracle_mergeable_bound_without_gamma_rows")
         if as_bool(result.get("certified_original_problem", False)):
             failures.append("interval_oracle_claimed_full_original_certificate")
+
+    if method == "gcap-frontier" and as_int(result.get("oracle_bound_merged_leaves", 0)) > 0:
+        if result.get("oracle_bound_merge_audit_csv_path", "") == "":
+            failures.append("frontier_oracle_bound_merge_missing_audit_path")
+        if result.get("full_ledger_merge_status", "") == "merged_all_unresolved_leaves_closed":
+            if as_int(result.get("auto_interval_oracle_remaining_open_leaves", 0)) != 0:
+                failures.append("frontier_oracle_bound_closed_status_with_open_leaves")
 
     return {
         "source": source,
