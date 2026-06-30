@@ -263,6 +263,10 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
             opt.interval_oracle_penalty_domain_tightening = true;
             opt.interval_oracle_service_operation_tightening = true;
             opt.interval_oracle_symmetry_breaking = true;
+            opt.gini_spread_cuts = true;
+            opt.required_movement_cuts = true;
+            opt.global_handling_capacity_cuts = true;
+            opt.low_gini_ratio_band_tightening = true;
             if (opt.auto_interval_oracle_time_limit <= 0.0) {
                 opt.auto_interval_oracle_time_limit = 1800.0;
             }
@@ -427,6 +431,10 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
                  arg == "--service-operation-min-handling") opt.service_operation_min_handling_cuts = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--penalty-movement-lb-cuts") opt.penalty_movement_lb_cuts = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--transfer-subset-capacity-cuts") opt.transfer_subset_capacity_cuts = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--gini-spread-cuts") opt.gini_spread_cuts = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--required-movement-cuts") opt.required_movement_cuts = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--global-handling-capacity-cuts") opt.global_handling_capacity_cuts = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--low-gini-ratio-band-tightening") opt.low_gini_ratio_band_tightening = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--relaxation-portfolio-mode") opt.relaxation_portfolio_mode = requireValue(i, argc, argv);
         else if (arg == "--relaxation-portfolio-probe-seconds") opt.relaxation_portfolio_probe_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--relaxation-portfolio-max-variants") opt.relaxation_portfolio_max_variants = std::stoi(requireValue(i, argc, argv));
@@ -14031,7 +14039,11 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
             << "proven_infeasible,feasible_improving,timeout,best_bound,objective,"
             << "runtime_seconds,depth,parent_id,time_limit_used,budget_policy,"
             << "model_type,bound_valid,bound_scope,can_merge_bound,gap_to_cutoff,"
-            << "bound_used_for_merge,closed_by_bound,json_path,lp_path,log_path\n";
+            << "bound_used_for_merge,closed_by_bound,gini_spread_cuts_added,"
+            << "required_movement_lb,required_movement_cuts_added,"
+            << "global_handling_capacity_lb,global_handling_capacity_cuts_added,"
+            << "transfer_subset_capacity_cuts_added,low_gini_ratio_band_domains_tightened,"
+            << "oracle_strengthening_families_enabled,json_path,lp_path,log_path\n";
     std::ofstream partition(partition_csv, std::ios::out | std::ios::trunc);
     partition << "interval_id,parent_id,depth,gamma_L,gamma_U,status,closed,"
               << "split,children,time_limit_used,runtime_seconds,certificate_basis,"
@@ -14197,6 +14209,14 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
                      (oracle.interval_oracle_can_merge_bound &&
                       oracle.lower_bound >= result.upper_bound - 1e-7))
                         ? "true" : "false") << ","
+                << oracle.gini_spread_cuts_added << ","
+                << oracle.required_movement_lb << ","
+                << oracle.required_movement_cuts_added << ","
+                << oracle.global_handling_capacity_lb << ","
+                << oracle.global_handling_capacity_cuts_added << ","
+                << oracle.transfer_subset_capacity_cuts_added << ","
+                << oracle.low_gini_ratio_band_domains_tightened << ","
+                << csvEscapeSimple(oracle.oracle_strengthening_families_enabled) << ","
                 << csvEscapeSimple(json_path.string()) << ","
                 << csvEscapeSimple(oracle.interval_exact_cutoff_lp_path) << ","
                 << csvEscapeSimple(oracle.interval_exact_cutoff_log_path) << "\n";
@@ -14452,6 +14472,9 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     result.auto_interval_oracle_remaining_open_leaves =
         std::max(0, remaining_open_after_merge);
     result.unresolved_intervals = result.auto_interval_oracle_remaining_open_leaves;
+    if (result.auto_interval_oracle_remaining_open_leaves == 0) {
+        result.open_nodes = 0;
+    }
     result.auto_interval_oracle_status_by_leaf = status_by_leaf.str();
     result.auto_interval_oracle_coverage_complete =
         total_final_leaves > 0 && result.auto_interval_oracle_remaining_open_leaves == 0;

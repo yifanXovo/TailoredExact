@@ -98,3 +98,24 @@ Noncertified rows with audited gaps:
 The evidence package classifies `moderate_seed3301` as an improved
 noncertified exact row, not as a certificate. The project still needs at least
 one additional V20/M3 certificate before broad paper benchmark testing.
+
+## Strengthened Oracle Round Update
+
+The paper evidence package now mirrors `results/strengthened_oracle_round/`.
+
+Certified exact rows include:
+
+- V12 M2 regenerated;
+- V12 M1 regenerated;
+- `high_imbalance_seed3202`;
+- `tight_T_seed3101`;
+- `moderate_seed3301`.
+
+`moderate_seed3301` is now certified with
+`objective = LB = UB = 0.0491525526647` through automatic exact interval oracle
+closure of the final frontier leaves.  Plain CPLEX comparison rows are included
+only as benchmark evidence and do not contribute to paper-core lower bounds.
+
+The current readiness decision is paper-candidate ready for a controlled
+benchmark matrix: V12 remains stable, V20/M3 hard-stress certification is
+`3/6`, and all optimal claims pass audit.

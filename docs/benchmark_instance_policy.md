@@ -176,3 +176,17 @@ The round is an exact interval-oracle lower-bound experiment, not a historical
 paper benchmark. `moderate_seed3301` remains noncertified with audited gap
 `0.0280667552335`; this is a valid generated-stress result, not a historical
 paper target claim.
+
+## Strengthened Oracle Round Classification
+
+`results/strengthened_oracle_round/` follows the same regenerated engineering
+policy:
+
+- V12 M1/M2 rows are regenerated engineering benchmarks.
+- V20/M3 rows under `reference/hard_stress/V20_M3/` are
+  `hard_generated_v20_m3` stress instances.
+- Plain compact CPLEX rows are benchmark comparisons only.
+
+The round certifies `moderate_seed3301` as a generated hard-stress instance.
+This is a valid exact certificate for that generated file and hash, not a
+historical paper target claim.

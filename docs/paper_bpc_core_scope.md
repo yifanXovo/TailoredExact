@@ -223,3 +223,19 @@ and then recomputes the global lower bound from final leaves. If a leaf remains
 below the incumbent cutoff, the row remains noncertified. This is the current
 status for `moderate_seed3301`: gap `0.0280667552335`, two unresolved leaves,
 no optimality claim.
+
+## Strengthened Oracle Scope
+
+`results/strengthened_oracle_round/` extends the interval oracle with generic
+valid strengthening lemmas documented in
+`docs/v20_interval_strengthening_lemmas.md`.  The strengthened sealed pipeline
+certifies `moderate_seed3301`, raising V20/M3 hard-stress certification from
+`2/6` to `3/6`.
+
+This does not change the paper-core separation of evidence:
+
+- native HGA-TGBC remains UB-only;
+- CPLEX comparison rows remain benchmark-only;
+- BPC fallback remains diagnostic unless exact pricing closes a leaf;
+- timeout oracle bounds are mergeable only when audit-visible fields mark them
+  valid for the original fixed interval.

@@ -549,3 +549,31 @@ closes.
 
 For paper tables, do not use `--incumbent-archive-auto true`; archive scanning
 is retained only as a diagnostic UB source.
+## Strengthened V20 Interval Oracle Candidate
+
+Current sealed paper-candidate command template:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier `
+  --algorithm-preset paper-exact-v20-certificate `
+  --paper-run-sealed true `
+  --auto-interval-oracle true `
+  --auto-interval-oracle-order all `
+  --auto-interval-oracle-max-leaves all `
+  --auto-interval-oracle-recursive-split true `
+  --interval-exact-oracle-mode objective-bound `
+  --interval-oracle-merge-timeout-bound true `
+  --gini-spread-cuts true `
+  --required-movement-cuts true `
+  --global-handling-capacity-cuts true `
+  --low-gini-ratio-band-tightening true `
+  --transfer-subset-capacity-cuts true `
+  --auto-interval-bpc-fallback true `
+  --input <instance> --lambda 0.15 --T 3600 `
+  --time-limit <budget> --out <raw.json>
+```
+
+`results/strengthened_oracle_round/` certifies the third V20/M3 hard stress
+instance, `moderate_seed3301`, with objective `0.0491525526647`. V12 M1 and V12
+M2 remain certified. Plain CPLEX rows in the same result directory are
+benchmark-only and are not used as paper-core lower-bound evidence.
