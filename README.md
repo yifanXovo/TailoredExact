@@ -596,3 +596,16 @@ build\ExactEBRP.exe --method gcap-frontier `
 instance, `moderate_seed3301`, with objective `0.0491525526647`. V12 M1 and V12
 M2 remain certified. Plain CPLEX rows in the same result directory are
 benchmark-only and are not used as paper-core lower-bound evidence.
+# Paper-Core BPC Status
+
+The current unified paper-core preset is:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier `
+  --algorithm-preset paper-gf-bpc-core `
+  --paper-run-sealed true `
+  --input <instance> --lambda 0.15 --T 3600 `
+  --time-limit <seconds> --out <raw.json>
+```
+
+This preset disables archive scanning, known/external incumbents, compact interval-oracle certificates, CPLEX benchmark evidence, and route-mask all-subset enumeration as certificate evidence. BPC fallback is valid only with exact pricing closure. The latest BPC optimization round shows pricing-state explosion remains the main implementation bottleneck.

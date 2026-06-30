@@ -4,6 +4,7 @@
 #include <cctype>
 #include <cmath>
 #include <functional>
+#include <iomanip>
 #include <limits>
 #include <numeric>
 #include <sstream>
@@ -99,6 +100,24 @@ public:
     }
 
     PricingResult run() {
+        result_.pricing_dominance_mode = normalizedPricingDominanceMode();
+        result_.pricing_dominance_exact_safe =
+            result_.pricing_dominance_mode != "aggressive-diagnostic";
+        result_.pricing_completion_bound = lowerCopy(options_.pricing_completion_bound);
+        if (result_.pricing_completion_bound.empty()) {
+            result_.pricing_completion_bound =
+                options_.use_completion_lb_pruning ? "basic" : "none";
+        }
+        result_.pricing_completion_bound_audit =
+            options_.pricing_completion_bound_audit;
+        result_.pricing_load_dp_cache = options_.pricing_load_dp_cache;
+        result_.pricing_route_skeleton_mode =
+            lowerCopy(options_.pricing_route_skeleton_mode);
+        if (result_.pricing_route_skeleton_mode.empty()) {
+            result_.pricing_route_skeleton_mode = "standard";
+        }
+        result_.pricing_operation_dp_dominance =
+            options_.pricing_operation_dp_dominance;
         std::string engine = lowerCopy(options_.pricing_engine);
         if (engine.empty() || engine == "auto") {
             engine = instance_.V > 30 ? "hybrid" : "exact-label";
@@ -125,16 +144,22 @@ public:
             result_.pricing_engine = "exact-label";
             result_.pricing_closure_status = "unsupported_for_large_instance";
             result_.best_reduced_cost = 0.0;
+            finalizeProfiles(result_.pricing_closure_status);
             return result_;
         }
         if (vehicle_ < 0 || vehicle_ >= instance_.M) {
             result_.complete = false;
             result_.pricing_closure_status = "invalid_vehicle";
+            finalizeProfiles(result_.pricing_closure_status);
             return result_;
         }
         if (useLabelSettingPricing()) {
             runLabelSettingPricing();
-            if (!result_.complete) return result_;
+            if (!result_.complete) {
+                finalizeProfiles(result_.pricing_closure_status.empty()
+                    ? "pricing_incomplete" : result_.pricing_closure_status);
+                return result_;
+            }
             if (!result_.has_column) result_.best_reduced_cost = 0.0;
             result_.has_negative_column = result_.has_column &&
                 result_.best_reduced_cost < -options_.negative_tolerance;
@@ -149,6 +174,7 @@ public:
             result_.elementary_pricing_closed =
                 result_.complete && !result_.has_negative_column;
             result_.dssr_exact_elementary_closed = result_.elementary_pricing_closed;
+            finalizeProfiles(result_.pricing_closure_status);
             return result_;
         }
         for (int first = 1; first <= instance_.V; ++first) {
@@ -157,6 +183,7 @@ public:
             const double travel = instance_.dist[0][first];
             if (travel + instance_.dist[first][0] > instance_.total_time_limit + 1e-9) continue;
             path_.push_back(first);
+            recordGenerated(1);
             routeDfs(1 << (first - 1), first, travel);
             path_.pop_back();
         }
@@ -174,6 +201,7 @@ public:
         result_.elementary_pricing_closed =
             result_.complete && !result_.has_negative_column;
         result_.dssr_exact_elementary_closed = result_.elementary_pricing_closed;
+        finalizeProfiles(result_.pricing_closure_status);
         return result_;
     }
 
@@ -198,6 +226,25 @@ private:
         bool active = true;
     };
 
+    struct DepthStats {
+        int depth = 0;
+        long long labels_generated = 0;
+        long long labels_kept = 0;
+        long long labels_expanded = 0;
+        long long pruned_duration = 0;
+        long long pruned_load = 0;
+        long long pruned_station = 0;
+        long long pruned_support = 0;
+        long long pruned_reduced_cost = 0;
+        long long pruned_dominance = 0;
+        long long duplicate_states = 0;
+        long long operation_states_generated = 0;
+        long long operation_states_pruned = 0;
+        long long columns_generated = 0;
+        long long negative_columns_found = 0;
+        double best_reduced_cost = std::numeric_limits<double>::infinity();
+    };
+
     const Instance& instance_;
     int vehicle_;
     const PricingDuals& duals_;
@@ -207,6 +254,7 @@ private:
     std::vector<int> q_;
     PricingResult result_;
     bool nonnegative_costs_ = false;
+    std::vector<DepthStats> depth_stats_;
     std::vector<int> required_closure_mask_;
     std::unordered_map<long long, double> completion_travel_cache_;
     std::vector<std::pair<double, int>> negative_label_candidates_;
@@ -257,6 +305,162 @@ private:
             return true;
         }
         return false;
+    }
+
+    int maskDepth(int mask) const {
+        int depth = 0;
+        while (mask != 0) {
+            depth += (mask & 1);
+            mask >>= 1;
+        }
+        return depth;
+    }
+
+    DepthStats& statsForDepth(int depth) {
+        if (depth < 0) depth = 0;
+        if (depth_stats_.size() <= static_cast<std::size_t>(depth)) {
+            const std::size_t old_size = depth_stats_.size();
+            depth_stats_.resize(static_cast<std::size_t>(depth) + 1);
+            for (std::size_t idx = old_size; idx < depth_stats_.size(); ++idx) {
+                depth_stats_[idx].depth = static_cast<int>(idx);
+            }
+        }
+        return depth_stats_[static_cast<std::size_t>(depth)];
+    }
+
+    void recordGenerated(int depth) {
+        ++result_.pricing_labels_generated;
+        ++statsForDepth(depth).labels_generated;
+    }
+
+    void recordKept(int depth) {
+        ++result_.pricing_labels_kept;
+        ++statsForDepth(depth).labels_kept;
+    }
+
+    void recordExpanded(int depth) {
+        ++result_.pricing_labels_expanded;
+        ++statsForDepth(depth).labels_expanded;
+    }
+
+    void recordPruned(int depth, const std::string& reason) {
+        DepthStats& stats = statsForDepth(depth);
+        if (reason == "duration") {
+            ++result_.pricing_labels_pruned_duration;
+            ++stats.pruned_duration;
+        } else if (reason == "load") {
+            ++result_.pricing_labels_pruned_load;
+            ++stats.pruned_load;
+        } else if (reason == "station") {
+            ++result_.pricing_labels_pruned_station;
+            ++stats.pruned_station;
+        } else if (reason == "support") {
+            ++result_.pricing_labels_pruned_support;
+            ++stats.pruned_support;
+        } else if (reason == "reduced_cost") {
+            ++result_.pricing_labels_pruned_reduced_cost;
+            ++stats.pruned_reduced_cost;
+        } else if (reason == "dominance") {
+            ++result_.pricing_labels_pruned_dominance;
+            ++stats.pruned_dominance;
+        }
+    }
+
+    void recordOperationState(int depth) {
+        ++statsForDepth(depth).operation_states_generated;
+    }
+
+    void recordOperationPruned(int depth) {
+        ++statsForDepth(depth).operation_states_pruned;
+    }
+
+    void recordColumnAtDepth(int depth, double reduced_cost) {
+        DepthStats& stats = statsForDepth(depth);
+        ++stats.columns_generated;
+        if (reduced_cost < -options_.negative_tolerance) {
+            ++stats.negative_columns_found;
+        }
+        stats.best_reduced_cost = std::min(stats.best_reduced_cost, reduced_cost);
+    }
+
+    std::string normalizedPricingDominanceMode() const {
+        std::string mode = lowerCopy(options_.pricing_dominance_mode);
+        if (mode.empty() || mode == "true" || mode == "on") return "safe";
+        if (mode == "none" || mode == "false") return "off";
+        if (mode == "safe" || mode == "off" ||
+            mode == "aggressive-diagnostic") {
+            return mode;
+        }
+        return "safe";
+    }
+
+    bool safePricingDominanceEnabled() const {
+        return result_.pricing_dominance_mode == "safe";
+    }
+
+    void finalizeProfiles(const std::string& stop_reason) {
+        result_.pricing_state_stop_reason = !stop_reason.empty()
+            ? stop_reason : result_.pricing_closure_status;
+        std::ostringstream depth;
+        depth << std::setprecision(12) << "[";
+        bool first = true;
+        for (const DepthStats& stats : depth_stats_) {
+            const long long total = stats.labels_generated + stats.labels_kept +
+                stats.labels_expanded + stats.pruned_duration + stats.pruned_load +
+                stats.pruned_station + stats.pruned_support +
+                stats.pruned_reduced_cost + stats.pruned_dominance +
+                stats.operation_states_generated + stats.operation_states_pruned +
+                stats.columns_generated;
+            if (total == 0) continue;
+            if (!first) depth << ",";
+            first = false;
+            depth << "{\"depth\":" << stats.depth
+                  << ",\"labels_generated\":" << stats.labels_generated
+                  << ",\"labels_kept\":" << stats.labels_kept
+                  << ",\"labels_expanded\":" << stats.labels_expanded
+                  << ",\"pruned_duration\":" << stats.pruned_duration
+                  << ",\"pruned_load\":" << stats.pruned_load
+                  << ",\"pruned_station\":" << stats.pruned_station
+                  << ",\"pruned_support\":" << stats.pruned_support
+                  << ",\"pruned_reduced_cost\":" << stats.pruned_reduced_cost
+                  << ",\"pruned_dominance\":" << stats.pruned_dominance
+                  << ",\"duplicate_states\":" << stats.duplicate_states
+                  << ",\"operation_states_generated\":"
+                  << stats.operation_states_generated
+                  << ",\"operation_states_pruned\":"
+                  << stats.operation_states_pruned
+                  << ",\"columns_generated\":" << stats.columns_generated
+                  << ",\"negative_columns_found\":"
+                  << stats.negative_columns_found
+                  << ",\"best_reduced_cost\":";
+            if (std::isfinite(stats.best_reduced_cost)) {
+                depth << stats.best_reduced_cost;
+            } else {
+                depth << "null";
+            }
+            depth << "}";
+        }
+        depth << "]";
+        result_.pricing_depth_profile_json = depth.str();
+
+        std::ostringstream op;
+        op << "[";
+        first = true;
+        for (const DepthStats& stats : depth_stats_) {
+            if (stats.operation_states_generated == 0 &&
+                stats.operation_states_pruned == 0) {
+                continue;
+            }
+            if (!first) op << ",";
+            first = false;
+            op << "{\"depth\":" << stats.depth
+               << ",\"operation_states_generated\":"
+               << stats.operation_states_generated
+               << ",\"operation_states_pruned\":"
+               << stats.operation_states_pruned << "}";
+        }
+        op << "]";
+        result_.operation_dp_profile_json = op.str();
     }
 
     double stationVisitCost(int station) const {
@@ -645,9 +849,19 @@ private:
                      std::unordered_map<long long, std::vector<int>>& buckets,
                      std::vector<std::vector<long long>>& keys_by_mask,
                      RouteLabel label) {
+        const int depth = maskDepth(label.mask);
+        recordGenerated(depth);
         const long long key = labelKey(label.mask, label.last, label.load, label.pickup);
         auto [it, inserted] = buckets.emplace(key, std::vector<int>{});
         std::vector<int>& bucket = it->second;
+        if (!safePricingDominanceEnabled()) {
+            const int label_idx = static_cast<int>(labels.size());
+            labels.push_back(label);
+            bucket.push_back(label_idx);
+            if (inserted) keys_by_mask[label.mask].push_back(key);
+            recordKept(depth);
+            return true;
+        }
         int inactive_seen = 0;
         for (int idx : bucket) {
             if (!labels[idx].active) {
@@ -657,6 +871,7 @@ private:
             ++result_.label_dominance_comparisons;
             if (labelDominates(labels[idx], label)) {
                 ++result_.label_dominance_pruned_labels;
+                recordPruned(depth, "dominance");
                 result_.label_dominance_inactive_entries_skipped += inactive_seen;
                 compactLabelBucket(bucket, labels, inactive_seen);
                 return false;
@@ -669,6 +884,7 @@ private:
             if (labelDominates(label, labels[idx])) {
                 labels[idx].active = false;
                 ++result_.label_dominance_pruned_labels;
+                recordPruned(maskDepth(labels[idx].mask), "dominance");
                 ++deactivated;
             }
         }
@@ -678,6 +894,7 @@ private:
         labels.push_back(label);
         bucket.push_back(label_idx);
         if (inserted) keys_by_mask[label.mask].push_back(key);
+        recordKept(depth);
         return true;
     }
 
@@ -714,6 +931,7 @@ private:
             + pairCost(label.mask)
             + subsetRowCost(label.mask);
         ++result_.generated_columns;
+        recordColumnAtDepth(maskDepth(label.mask), rc);
         recordNegativeLabelCandidate(rc, label_idx);
         bool improved = false;
         if (!result_.has_column || rc < result_.best_reduced_cost - 1e-12) {
@@ -809,18 +1027,25 @@ private:
                     if (label_idx < 0 || label_idx >= static_cast<int>(labels.size())) continue;
                     const RouteLabel label = labels[label_idx];
                     if (!label.active || label.mask != mask) continue;
-                    if (branchClosureImpossible(label.mask)) continue;
+                    const int depth = maskDepth(label.mask);
+                    if (branchClosureImpossible(label.mask)) {
+                        recordPruned(depth, "station");
+                        continue;
+                    }
                     if (violatesSupportDurationPruning(label.mask)) {
                         ++result_.support_duration_pruned_labels;
                         ++result_.support_duration_strong_pruned_labels;
+                        recordPruned(depth, "support");
                         continue;
                     }
                     ++result_.route_states;
+                    recordExpanded(depth);
                     if (options_.use_completion_lb_pruning &&
                         result_.has_column &&
                         completionReducedCostLowerBound(label) >=
                             result_.best_reduced_cost - 1e-12) {
                         ++result_.completion_lb_pruned_labels;
+                        recordPruned(depth, "reduced_cost");
                         continue;
                     }
                     if (label.last > 0) {
@@ -830,6 +1055,7 @@ private:
                             minAdditionalPickupForRequiredClosure(label.mask, label.load);
                         if (label.pickup + min_required_pickup > pickup_budget) {
                             ++result_.required_closure_pruned_labels;
+                            recordPruned(depth, "load");
                             continue;
                         }
                         if (closure_travel_lb +
@@ -837,6 +1063,7 @@ private:
                                     (label.pickup + min_required_pickup) >
                                 instance_.total_time_limit + 1e-9) {
                             ++result_.required_closure_pruned_labels;
+                            recordPruned(depth, "duration");
                             continue;
                         }
                         if (considerClosedLabel(label, label_idx)) {
@@ -855,17 +1082,26 @@ private:
                         const int bit = 1 << (station - 1);
                         if (label.mask & bit) continue;
                         const int next_mask = label.mask | bit;
-                        if (violatesForbiddenTogether(next_mask)) continue;
-                        if (branchClosureImpossible(next_mask)) continue;
+                        const int next_depth = depth + 1;
+                        if (violatesForbiddenTogether(next_mask)) {
+                            recordPruned(next_depth, "station");
+                            continue;
+                        }
+                        if (branchClosureImpossible(next_mask)) {
+                            recordPruned(next_depth, "station");
+                            continue;
+                        }
                         if (violatesSupportDurationPruning(next_mask)) {
                             ++result_.support_duration_pruned_labels;
                             ++result_.support_duration_strong_pruned_labels;
+                            recordPruned(next_depth, "support");
                             continue;
                         }
                         const double next_travel = label.travel +
                             instance_.dist[label.last][station];
                         if (next_travel + instance_.dist[station][0] >
                                 instance_.total_time_limit + 1e-9) {
+                            recordPruned(next_depth, "duration");
                             continue;
                         }
                         const double closure_travel_lb =
@@ -900,13 +1136,15 @@ private:
                                 minAdditionalPickupForRequiredClosure(next_mask, next.load);
                             if (next.pickup + min_required_pickup > pickup_budget) {
                                 ++result_.required_closure_pruned_labels;
+                                recordPruned(next_depth, "load");
                                 continue;
                             }
                             if (closure_travel_lb +
                                     (instance_.pickup_time + instance_.drop_time) *
-                                        (next.pickup + min_required_pickup) >
+                                    (next.pickup + min_required_pickup) >
                                     instance_.total_time_limit + 1e-9) {
                                 ++result_.required_closure_pruned_labels;
+                                recordPruned(next_depth, "duration");
                                 continue;
                             }
                             if (options_.use_completion_lb_pruning &&
@@ -914,10 +1152,12 @@ private:
                                 completionReducedCostLowerBound(next) >=
                                     result_.best_reduced_cost - 1e-12) {
                                 ++result_.completion_lb_pruned_labels;
+                                recordPruned(next_depth, "reduced_cost");
                                 continue;
                             }
                             insertLabel(labels, buckets, keys_by_mask, next);
                             ++result_.operation_states;
+                            recordOperationState(next_depth);
                         }
                     }
 
@@ -944,13 +1184,15 @@ private:
                                 minAdditionalPickupForRequiredClosure(next_mask, next.load);
                             if (next.pickup + min_required_pickup > pickup_budget) {
                                 ++result_.required_closure_pruned_labels;
+                                recordPruned(next_depth, "load");
                                 continue;
                             }
                             if (closure_travel_lb +
                                     (instance_.pickup_time + instance_.drop_time) *
-                                        (next.pickup + min_required_pickup) >
+                                    (next.pickup + min_required_pickup) >
                                     instance_.total_time_limit + 1e-9) {
                                 ++result_.required_closure_pruned_labels;
+                                recordPruned(next_depth, "duration");
                                 continue;
                             }
                             if (options_.use_completion_lb_pruning &&
@@ -958,10 +1200,12 @@ private:
                                 completionReducedCostLowerBound(next) >=
                                     result_.best_reduced_cost - 1e-12) {
                                 ++result_.completion_lb_pruned_labels;
+                                recordPruned(next_depth, "reduced_cost");
                                 continue;
                             }
                             insertLabel(labels, buckets, keys_by_mask, next);
                             ++result_.operation_states;
+                            recordOperationState(next_depth);
                         }
                     }
                 }
@@ -976,21 +1220,34 @@ private:
     void routeDfs(int mask, int last, double travel_without_return) {
         ++result_.route_states;
         if ((result_.route_states & 0x3fff) == 0 && shouldStop()) return;
-        if (violatesForbiddenTogether(mask)) return;
-        if (branchClosureImpossible(mask)) return;
+        const int depth = maskDepth(mask);
+        recordExpanded(depth);
+        if (violatesForbiddenTogether(mask)) {
+            recordPruned(depth, "station");
+            return;
+        }
+        if (branchClosureImpossible(mask)) {
+            recordPruned(depth, "station");
+            return;
+        }
         if (violatesSupportDurationPruning(mask)) {
             ++result_.support_duration_pruned_labels;
             ++result_.support_duration_strong_pruned_labels;
+            recordPruned(depth, "support");
             return;
         }
         const double closure_travel_lb =
             requiredClosureTravelLowerBound(mask, last, travel_without_return);
-        if (closure_travel_lb > instance_.total_time_limit + 1e-9) return;
+        if (closure_travel_lb > instance_.total_time_limit + 1e-9) {
+            recordPruned(depth, "duration");
+            return;
+        }
 
         const double route_travel = travel_without_return + instance_.dist[last][0];
         if (nonnegative_costs_ && result_.has_column &&
             duals_.constant + duals_.travel_cost * route_travel >=
                 result_.best_reduced_cost - 1e-12) {
+            recordPruned(depth, "reduced_cost");
             return;
         }
         if (route_travel <= instance_.total_time_limit + 1e-9 &&
@@ -1003,16 +1260,23 @@ private:
             if (!stationAllowed(station)) continue;
             if (mask & bit) continue;
             const int next_mask = mask | bit;
-            if (branchClosureImpossible(next_mask)) continue;
+            const int next_depth = depth + 1;
+            if (branchClosureImpossible(next_mask)) {
+                recordPruned(next_depth, "station");
+                continue;
+            }
             if (violatesSupportDurationPruning(next_mask)) {
                 ++result_.support_duration_pruned_labels;
                 ++result_.support_duration_strong_pruned_labels;
+                recordPruned(next_depth, "support");
                 continue;
             }
             const double next_travel = travel_without_return + instance_.dist[last][station];
             if (next_travel + instance_.dist[station][0] > instance_.total_time_limit + 1e-9) {
+                recordPruned(next_depth, "duration");
                 continue;
             }
+            recordGenerated(next_depth);
             path_.push_back(station);
             routeDfs(next_mask, station, next_travel);
             path_.pop_back();
@@ -1040,6 +1304,7 @@ private:
 
     void priceOperationsByDp(int mask, double route_travel, int pickup_budget) {
         const int path_size = static_cast<int>(path_.size());
+        const int depth = maskDepth(mask);
         const int q_capacity = instance_.Q[vehicle_];
         if (path_size <= 0 || q_capacity <= 0 || pickup_budget <= 0) return;
 
@@ -1076,11 +1341,14 @@ private:
                     const OpLabel& label = dp[static_cast<std::size_t>(
                         idx(pos, load, pickup))];
                     if (!std::isfinite(label.cost)) continue;
-                    if (best_lower_pickup_cost <= label.cost + 1e-12) {
+                    if (options_.pricing_operation_dp_dominance &&
+                        best_lower_pickup_cost <= label.cost + 1e-12) {
                         ++result_.operation_dp_dominance_pruned_states;
+                        recordOperationPruned(depth);
                         continue;
                     }
                     ++result_.operation_states;
+                    recordOperationState(depth);
                     if ((result_.operation_states & 0x3fff) == 0 && shouldStop()) return;
                     best_lower_pickup_cost =
                         std::min(best_lower_pickup_cost, label.cost);
@@ -1090,7 +1358,10 @@ private:
                             + duals_.travel_cost * route_travel
                             + label.cost
                             + duals_.pickup_cost * min_extra_pickup;
-                        if (lb >= result_.best_reduced_cost - 1e-12) continue;
+                        if (lb >= result_.best_reduced_cost - 1e-12) {
+                            recordPruned(depth, "reduced_cost");
+                            continue;
+                        }
                     }
 
                     const int max_pick = std::min({
@@ -1160,6 +1431,7 @@ private:
         }
 
         ++result_.generated_columns;
+        recordColumnAtDepth(maskDepth(mask), rc);
         if (!result_.has_column || rc < result_.best_reduced_cost - 1e-12) {
             result_.has_column = true;
             result_.best_reduced_cost = rc;
@@ -1209,6 +1481,24 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
     result.ng_neighborhood_mode = lowerCopy(options.ng_neighborhood_mode);
     if (result.ng_neighborhood_mode.empty()) result.ng_neighborhood_mode = "nearest";
     result.dssr_final_exact = options.dssr_final_exact;
+    result.pricing_dominance_mode = lowerCopy(options.pricing_dominance_mode);
+    if (result.pricing_dominance_mode.empty()) result.pricing_dominance_mode = "safe";
+    result.pricing_dominance_exact_safe =
+        result.pricing_dominance_mode != "aggressive-diagnostic";
+    result.pricing_completion_bound = lowerCopy(options.pricing_completion_bound);
+    if (result.pricing_completion_bound.empty()) {
+        result.pricing_completion_bound =
+            options.use_completion_lb_pruning ? "basic" : "none";
+    }
+    result.pricing_completion_bound_audit = options.pricing_completion_bound_audit;
+    result.pricing_load_dp_cache = options.pricing_load_dp_cache;
+    result.pricing_route_skeleton_mode = lowerCopy(options.pricing_route_skeleton_mode);
+    if (result.pricing_route_skeleton_mode.empty()) {
+        result.pricing_route_skeleton_mode = "standard";
+    }
+    result.pricing_operation_dp_dominance =
+        options.pricing_operation_dp_dominance;
+    result.pricing_state_stop_reason = "ng_dssr_or_hybrid_profile";
     const auto pricing_start = Clock::now();
     PricingDuals search_duals = duals;
     const std::string stabilization = lowerCopy(options.cg_dual_stabilization);

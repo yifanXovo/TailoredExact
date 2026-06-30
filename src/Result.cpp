@@ -568,6 +568,68 @@ std::string resultToJson(const SolveResult& input) {
         << result.label_dominance_compacted_entries << ",\n";
     out << "  \"operation_dp_dominance_pruned_states\": "
         << result.operation_dp_dominance_pruned_states << ",\n";
+    out << "  \"pricing_label_dominance_mode\": \""
+        << jsonEscape(result.pricing_label_dominance_mode) << "\",\n";
+    out << "  \"pricing_label_dominance_exact_safe\": "
+        << (result.pricing_label_dominance_exact_safe ? "true" : "false") << ",\n";
+    out << "  \"pricing_completion_bound_mode\": \""
+        << jsonEscape(result.pricing_completion_bound_mode) << "\",\n";
+    out << "  \"pricing_completion_bound_audit\": "
+        << (result.pricing_completion_bound_audit ? "true" : "false") << ",\n";
+    out << "  \"pricing_load_dp_cache_enabled\": "
+        << (result.pricing_load_dp_cache_enabled ? "true" : "false") << ",\n";
+    out << "  \"pricing_route_skeleton_mode\": \""
+        << jsonEscape(result.pricing_route_skeleton_mode) << "\",\n";
+    out << "  \"pricing_operation_dp_dominance_enabled\": "
+        << (result.pricing_operation_dp_dominance_enabled ? "true" : "false") << ",\n";
+    out << "  \"pricing_labels_generated\": "
+        << result.pricing_labels_generated << ",\n";
+    out << "  \"pricing_labels_kept\": "
+        << result.pricing_labels_kept << ",\n";
+    out << "  \"pricing_labels_expanded\": "
+        << result.pricing_labels_expanded << ",\n";
+    out << "  \"pricing_labels_pruned_duration\": "
+        << result.pricing_labels_pruned_duration << ",\n";
+    out << "  \"pricing_labels_pruned_load\": "
+        << result.pricing_labels_pruned_load << ",\n";
+    out << "  \"pricing_labels_pruned_station\": "
+        << result.pricing_labels_pruned_station << ",\n";
+    out << "  \"pricing_labels_pruned_support\": "
+        << result.pricing_labels_pruned_support << ",\n";
+    out << "  \"pricing_labels_pruned_reduced_cost\": "
+        << result.pricing_labels_pruned_reduced_cost << ",\n";
+    out << "  \"pricing_labels_pruned_dominance\": "
+        << result.pricing_labels_pruned_dominance << ",\n";
+    out << "  \"pricing_labels_duplicate_states\": "
+        << result.pricing_labels_duplicate_states << ",\n";
+    out << "  \"pricing_state_stop_reason\": \""
+        << jsonEscape(result.pricing_state_stop_reason) << "\",\n";
+    out << "  \"pricing_depth_profile\": "
+        << (result.pricing_depth_profile_json.empty()
+                ? std::string("[]") : result.pricing_depth_profile_json)
+        << ",\n";
+    out << "  \"operation_dp_profile\": "
+        << (result.operation_dp_profile_json.empty()
+                ? std::string("[]") : result.operation_dp_profile_json)
+        << ",\n";
+    out << "  \"bpc_seed_columns\": \""
+        << jsonEscape(result.bpc_seed_columns) << "\",\n";
+    out << "  \"bpc_seed_column_max\": "
+        << result.bpc_seed_column_max << ",\n";
+    out << "  \"bpc_cut_family\": \""
+        << jsonEscape(result.bpc_cut_family) << "\",\n";
+    out << "  \"bpc_cut_separation_rounds\": "
+        << result.bpc_cut_separation_rounds << ",\n";
+    out << "  \"core_relaxation_budget_fraction\": "
+        << result.core_relaxation_budget_fraction << ",\n";
+    out << "  \"core_bpc_reserve_fraction\": "
+        << result.core_bpc_reserve_fraction << ",\n";
+    out << "  \"core_bpc_min_seconds\": "
+        << result.core_bpc_min_seconds << ",\n";
+    out << "  \"core_bpc_max_leaves\": "
+        << result.core_bpc_max_leaves << ",\n";
+    out << "  \"core_bpc_leaf_selection\": \""
+        << jsonEscape(result.core_bpc_leaf_selection) << "\",\n";
     out << "  \"support_duration_max_subset_size\": "
         << result.support_duration_max_subset_size << ",\n";
     out << "  \"support_duration_precompute_time_seconds\": "

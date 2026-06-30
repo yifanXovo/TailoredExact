@@ -1238,3 +1238,8 @@ currently certified core set.  In this round only `tight_T_seed3101` closed unde
 `paper-gf-bpc-core`; V12 M1/M2 and the other V20 rows remain noncertified under
 the tested core budgets.  Direct BPC leaf validation starts pricing but does not
 close leaves, so the active bottleneck is exact pricing/CG closure.
+# BPC Pricing Optimization Round Update
+
+The realigned paper-core preset remains `paper-gf-bpc-core`: native HGA-TGBC UB, Gini frontier, valid non-enumerative relaxation screening, and exact BPC fallback for unresolved intervals. Compact interval-oracle evidence and CPLEX benchmark bounds remain outside the core certificate.
+
+This round added detailed pricing-state counters and safe dominance controls. V12 BPC leaves now show large exact-safe dominance pruning, but BPC did not close a nontrivial leaf. The current empirical bottleneck is exact pricing/decomposition, not UB quality.

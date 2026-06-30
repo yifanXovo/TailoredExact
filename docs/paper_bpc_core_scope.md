@@ -260,3 +260,13 @@ Excluded from paper-core certificate evidence:
 `paper-exact-v20-certificate` and `paper-exact-portfolio` remain auxiliary
 exact-portfolio presets.  Their certificates must be labelled separately from
 `paper-gf-bpc-core`.
+# Scope Update: BPC Pricing Optimization Round
+
+`paper-gf-bpc-core` must not use interval-oracle certificates, route-mask all-subset enumeration, CPLEX benchmark bounds, archive incumbents, or known UB injection. This round preserves that scope.
+
+The BPC fallback remains certificate-safe but not yet empirically strong: no nontrivial tested leaf closed by exact pricing. Reports should separate:
+
+- relaxation-bound certificates;
+- exact BPC-tree certificates;
+- interval-oracle or exact-portfolio diagnostics;
+- CPLEX benchmark comparisons.

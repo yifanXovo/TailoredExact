@@ -238,6 +238,7 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         if (opt.algorithm_preset == "paper-gf-bpc-core") {
             opt.relaxation_portfolio_mode = "fixed";
             opt.relaxation_portfolio_keep_best_bound = true;
+            opt.frontier_split_before_tree = false;
             opt.v20_safe_relaxation_cuts = true;
             opt.v20_cover_cuts = true;
             opt.v20_cover_max_size = std::max(opt.v20_cover_max_size, 4);
@@ -257,6 +258,13 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
             opt.gcap_warmstart_level = std::max(opt.gcap_warmstart_level, 2);
             opt.gcap_pricing_columns = std::max(opt.gcap_pricing_columns, 8);
             opt.pricing_completion_lb_pruning = true;
+            opt.pricing_dominance_mode = "safe";
+            opt.pricing_completion_bound = "basic";
+            opt.pricing_operation_dp_dominance = true;
+            opt.bpc_seed_columns = "incumbent";
+            opt.bpc_seed_column_max = std::max(opt.bpc_seed_column_max, 1000);
+            opt.bpc_cut_separation_rounds =
+                std::max(opt.bpc_cut_separation_rounds, 1);
             opt.support_duration_pruning = true;
             opt.branch_selection = "strong";
             opt.strong_branching_candidates =
@@ -268,9 +276,14 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
             opt.frontier_bpc_fallback_reserve_fraction =
                 std::max(opt.frontier_bpc_fallback_reserve_fraction, 0.25);
             opt.frontier_bpc_fallback_min_seconds =
-                std::max(opt.frontier_bpc_fallback_min_seconds, 60.0);
+                std::max(opt.frontier_bpc_fallback_min_seconds, 20.0);
             opt.frontier_bpc_fallback_max_intervals =
                 std::max(opt.frontier_bpc_fallback_max_intervals, 1);
+            opt.core_bpc_reserve_fraction =
+                std::max(opt.core_bpc_reserve_fraction, 0.25);
+            opt.core_bpc_min_seconds =
+                std::max(opt.core_bpc_min_seconds, 20.0);
+            opt.core_bpc_max_leaves = std::max(opt.core_bpc_max_leaves, 1);
             opt.frontier_scheduling_mode = "default";
         } else if (opt.algorithm_preset == "paper-bpc-core-adaptive") {
             opt.relaxation_portfolio_mode = "adaptive";
@@ -448,6 +461,25 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--support-duration-pruning") opt.support_duration_pruning = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--support-duration-max-subset-size") opt.support_duration_max_subset_size = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--pricing-completion-lb-pruning") opt.pricing_completion_lb_pruning = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--pricing-dominance-mode") opt.pricing_dominance_mode = requireValue(i, argc, argv);
+        else if (arg == "--pricing-completion-bound") {
+            opt.pricing_completion_bound = requireValue(i, argc, argv);
+            const std::string mode = lowerAscii(opt.pricing_completion_bound);
+            opt.pricing_completion_lb_pruning = mode != "none" && mode != "off";
+        }
+        else if (arg == "--pricing-completion-bound-audit") opt.pricing_completion_bound_audit = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--pricing-load-dp-cache") opt.pricing_load_dp_cache = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--pricing-route-skeleton-mode") opt.pricing_route_skeleton_mode = requireValue(i, argc, argv);
+        else if (arg == "--pricing-operation-dp-dominance") opt.pricing_operation_dp_dominance = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--bpc-seed-columns") opt.bpc_seed_columns = requireValue(i, argc, argv);
+        else if (arg == "--bpc-seed-column-max") opt.bpc_seed_column_max = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--bpc-cut-family") opt.bpc_cut_family = requireValue(i, argc, argv);
+        else if (arg == "--bpc-cut-separation-rounds") opt.bpc_cut_separation_rounds = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--core-relaxation-budget-fraction") opt.core_relaxation_budget_fraction = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--core-bpc-reserve-fraction") opt.core_bpc_reserve_fraction = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--core-bpc-min-seconds") opt.core_bpc_min_seconds = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--core-bpc-max-leaves") opt.core_bpc_max_leaves = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--core-bpc-leaf-selection") opt.core_bpc_leaf_selection = requireValue(i, argc, argv);
         else if (arg == "--route-mask-support-duration-pruning") opt.route_mask_support_duration_pruning = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--route-mask-operation-budget-cuts") opt.route_mask_operation_budget_cuts = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--support-feasibility-oracle") opt.support_feasibility_oracle = parseBoolValue(requireValue(i, argc, argv));
@@ -946,6 +978,87 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.cg_stabilization_switch_to_true_after = 0;
     }
     applyAlgorithmPreset(opt);
+    opt.pricing_dominance_mode = lowerAscii(opt.pricing_dominance_mode);
+    if (opt.pricing_dominance_mode == "none" ||
+        opt.pricing_dominance_mode == "false") {
+        opt.pricing_dominance_mode = "off";
+    }
+    if (opt.pricing_dominance_mode != "off" &&
+        opt.pricing_dominance_mode != "safe" &&
+        opt.pricing_dominance_mode != "aggressive-diagnostic") {
+        opt.pricing_dominance_mode = "safe";
+    }
+    opt.pricing_completion_bound = lowerAscii(opt.pricing_completion_bound);
+    if (opt.pricing_completion_bound == "off" ||
+        opt.pricing_completion_bound == "none") {
+        opt.pricing_completion_bound = "none";
+        opt.pricing_completion_lb_pruning = false;
+    } else if (opt.pricing_completion_bound != "basic" &&
+               opt.pricing_completion_bound != "dual-knapsack" &&
+               opt.pricing_completion_bound != "resource") {
+        opt.pricing_completion_bound = opt.pricing_completion_lb_pruning
+            ? "basic" : "none";
+    }
+    if (opt.pricing_completion_bound != "none") {
+        opt.pricing_completion_lb_pruning = true;
+    }
+    opt.pricing_route_skeleton_mode = lowerAscii(opt.pricing_route_skeleton_mode);
+    if (opt.pricing_route_skeleton_mode != "standard" &&
+        opt.pricing_route_skeleton_mode != "pulse") {
+        opt.pricing_route_skeleton_mode = "standard";
+    }
+    opt.bpc_seed_columns = lowerAscii(opt.bpc_seed_columns);
+    if (opt.bpc_seed_columns != "none" &&
+        opt.bpc_seed_columns != "incumbent" &&
+        opt.bpc_seed_columns != "incumbent-plus-local" &&
+        opt.bpc_seed_columns != "pool") {
+        opt.bpc_seed_columns = "incumbent";
+    }
+    if (opt.bpc_seed_column_max < 0) opt.bpc_seed_column_max = 0;
+    if (opt.bpc_cut_separation_rounds < 0) {
+        opt.bpc_cut_separation_rounds = 0;
+    }
+    if (opt.core_relaxation_budget_fraction < 0.0) {
+        opt.core_relaxation_budget_fraction = 0.0;
+    }
+    if (opt.core_relaxation_budget_fraction > 0.95) {
+        opt.core_relaxation_budget_fraction = 0.95;
+    }
+    if (opt.core_bpc_reserve_fraction < 0.0) opt.core_bpc_reserve_fraction = 0.0;
+    if (opt.core_bpc_reserve_fraction > 0.95) opt.core_bpc_reserve_fraction = 0.95;
+    if (opt.core_bpc_min_seconds < 0.0) opt.core_bpc_min_seconds = 0.0;
+    if (opt.core_bpc_max_leaves < 0) opt.core_bpc_max_leaves = 0;
+    opt.core_bpc_leaf_selection = lowerAscii(opt.core_bpc_leaf_selection);
+    if (opt.core_bpc_leaf_selection != "min-lb" &&
+        opt.core_bpc_leaf_selection != "min-gap" &&
+        opt.core_bpc_leaf_selection != "low-gini") {
+        opt.core_bpc_leaf_selection = "min-lb";
+    }
+    if (opt.algorithm_preset == "paper-gf-bpc-core" &&
+        (opt.core_bpc_reserve_fraction > 0.0 ||
+         opt.core_bpc_min_seconds > 0.0 ||
+         opt.core_bpc_max_leaves > 0)) {
+        opt.frontier_bpc_fallback_mode =
+            opt.core_bpc_leaf_selection == "min-gap" ? "best-bound"
+                                                     : "controlling-intervals";
+        opt.frontier_bpc_fallback_reserve_fraction =
+            std::max(opt.frontier_bpc_fallback_reserve_fraction,
+                     opt.core_bpc_reserve_fraction);
+        opt.frontier_bpc_fallback_min_seconds =
+            std::max(opt.frontier_bpc_fallback_min_seconds,
+                     opt.core_bpc_min_seconds);
+        opt.frontier_bpc_fallback_max_intervals =
+            std::max(opt.frontier_bpc_fallback_max_intervals,
+                     opt.core_bpc_max_leaves);
+        const double fallback_reserve = std::max(
+            opt.frontier_bpc_fallback_min_seconds,
+            opt.solve_time_limit > 0.0
+                ? opt.solve_time_limit * opt.frontier_bpc_fallback_reserve_fraction
+                : 0.0);
+        opt.frontier_retry_reserve_seconds =
+            std::max(opt.frontier_retry_reserve_seconds, fallback_reserve);
+        opt.frontier_final_closure = true;
+    }
     opt.auto_interval_oracle_order = lowerAscii(opt.auto_interval_oracle_order);
     if (opt.auto_interval_oracle_order != "min-gap" &&
         opt.auto_interval_oracle_order != "low-gini" &&
@@ -1137,6 +1250,13 @@ void applyPricingOptionsFromSolve(const ebrp::Instance& instance,
     pricing.dssr_relaxed_closure_checkpoint =
         opt.dssr_relaxed_closure_checkpoint;
     pricing.use_completion_lb_pruning = opt.pricing_completion_lb_pruning;
+    pricing.pricing_dominance_mode = opt.pricing_dominance_mode;
+    pricing.pricing_completion_bound = opt.pricing_completion_bound;
+    pricing.pricing_completion_bound_audit = opt.pricing_completion_bound_audit;
+    pricing.pricing_load_dp_cache = opt.pricing_load_dp_cache;
+    pricing.pricing_route_skeleton_mode = opt.pricing_route_skeleton_mode;
+    pricing.pricing_operation_dp_dominance =
+        opt.pricing_operation_dp_dominance;
 }
 
 void initializeScalabilityFields(const ebrp::Instance& instance,
@@ -1149,6 +1269,25 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
     }
     result.station_set_backend = ebrp::stationSetBackendName(instance.V);
     result.pricing_engine = resolvedPricingEngine(instance, opt);
+    result.pricing_label_dominance_mode = opt.pricing_dominance_mode;
+    result.pricing_label_dominance_exact_safe =
+        lowerAscii(opt.pricing_dominance_mode) != "aggressive-diagnostic";
+    result.pricing_completion_bound_mode = opt.pricing_completion_bound;
+    result.pricing_completion_bound_audit = opt.pricing_completion_bound_audit;
+    result.pricing_load_dp_cache_enabled = opt.pricing_load_dp_cache;
+    result.pricing_route_skeleton_mode = opt.pricing_route_skeleton_mode;
+    result.pricing_operation_dp_dominance_enabled =
+        opt.pricing_operation_dp_dominance;
+    result.bpc_seed_columns = opt.bpc_seed_columns;
+    result.bpc_seed_column_max = opt.bpc_seed_column_max;
+    result.bpc_cut_family = opt.bpc_cut_family;
+    result.bpc_cut_separation_rounds = opt.bpc_cut_separation_rounds;
+    result.core_relaxation_budget_fraction =
+        opt.core_relaxation_budget_fraction;
+    result.core_bpc_reserve_fraction = opt.core_bpc_reserve_fraction;
+    result.core_bpc_min_seconds = opt.core_bpc_min_seconds;
+    result.core_bpc_max_leaves = opt.core_bpc_max_leaves;
+    result.core_bpc_leaf_selection = opt.core_bpc_leaf_selection;
     result.column_tracks = resolvedColumnTracks(instance, opt);
     result.rmp_column_space = resolvedRmpColumnSpace(instance, opt);
     result.relaxed_rmp_enabled = opt.relaxed_columns_in_rmp ||
@@ -1850,6 +1989,47 @@ void mergePricingStats(const ebrp::PricingResult& priced,
         priced.label_dominance_compacted_entries;
     result.operation_dp_dominance_pruned_states +=
         priced.operation_dp_dominance_pruned_states;
+    result.pricing_label_dominance_mode = priced.pricing_dominance_mode;
+    result.pricing_label_dominance_exact_safe =
+        result.pricing_label_dominance_exact_safe &&
+        priced.pricing_dominance_exact_safe;
+    result.pricing_completion_bound_mode = priced.pricing_completion_bound;
+    result.pricing_completion_bound_audit =
+        result.pricing_completion_bound_audit ||
+        priced.pricing_completion_bound_audit;
+    result.pricing_load_dp_cache_enabled =
+        result.pricing_load_dp_cache_enabled || priced.pricing_load_dp_cache;
+    result.pricing_route_skeleton_mode = priced.pricing_route_skeleton_mode;
+    result.pricing_operation_dp_dominance_enabled =
+        result.pricing_operation_dp_dominance_enabled &&
+        priced.pricing_operation_dp_dominance;
+    result.pricing_labels_generated += priced.pricing_labels_generated;
+    result.pricing_labels_kept += priced.pricing_labels_kept;
+    result.pricing_labels_expanded += priced.pricing_labels_expanded;
+    result.pricing_labels_pruned_duration +=
+        priced.pricing_labels_pruned_duration;
+    result.pricing_labels_pruned_load += priced.pricing_labels_pruned_load;
+    result.pricing_labels_pruned_station +=
+        priced.pricing_labels_pruned_station;
+    result.pricing_labels_pruned_support +=
+        priced.pricing_labels_pruned_support;
+    result.pricing_labels_pruned_reduced_cost +=
+        priced.pricing_labels_pruned_reduced_cost;
+    result.pricing_labels_pruned_dominance +=
+        priced.pricing_labels_pruned_dominance;
+    result.pricing_labels_duplicate_states +=
+        priced.pricing_labels_duplicate_states;
+    if (!priced.pricing_state_stop_reason.empty()) {
+        result.pricing_state_stop_reason = priced.pricing_state_stop_reason;
+    }
+    if (!priced.pricing_depth_profile_json.empty() &&
+        priced.pricing_depth_profile_json != "[]") {
+        result.pricing_depth_profile_json = priced.pricing_depth_profile_json;
+    }
+    if (!priced.operation_dp_profile_json.empty() &&
+        priced.operation_dp_profile_json != "[]") {
+        result.operation_dp_profile_json = priced.operation_dp_profile_json;
+    }
     result.support_duration_max_subset_size =
         std::max(result.support_duration_max_subset_size,
                  priced.support_duration_max_subset_size);
@@ -2055,6 +2235,44 @@ void copyBpcPricingStats(const BpcResult& bpc,
         bpc.label_dominance_compacted_entries;
     result.operation_dp_dominance_pruned_states +=
         bpc.operation_dp_dominance_pruned_states;
+    result.pricing_label_dominance_mode = bpc.pricing_label_dominance_mode;
+    result.pricing_label_dominance_exact_safe =
+        result.pricing_label_dominance_exact_safe &&
+        bpc.pricing_label_dominance_exact_safe;
+    result.pricing_completion_bound_mode = bpc.pricing_completion_bound_mode;
+    result.pricing_completion_bound_audit =
+        result.pricing_completion_bound_audit ||
+        bpc.pricing_completion_bound_audit;
+    result.pricing_load_dp_cache_enabled =
+        result.pricing_load_dp_cache_enabled || bpc.pricing_load_dp_cache_enabled;
+    result.pricing_route_skeleton_mode = bpc.pricing_route_skeleton_mode;
+    result.pricing_operation_dp_dominance_enabled =
+        result.pricing_operation_dp_dominance_enabled &&
+        bpc.pricing_operation_dp_dominance_enabled;
+    result.pricing_labels_generated += bpc.pricing_labels_generated;
+    result.pricing_labels_kept += bpc.pricing_labels_kept;
+    result.pricing_labels_expanded += bpc.pricing_labels_expanded;
+    result.pricing_labels_pruned_duration +=
+        bpc.pricing_labels_pruned_duration;
+    result.pricing_labels_pruned_load += bpc.pricing_labels_pruned_load;
+    result.pricing_labels_pruned_station += bpc.pricing_labels_pruned_station;
+    result.pricing_labels_pruned_support += bpc.pricing_labels_pruned_support;
+    result.pricing_labels_pruned_reduced_cost +=
+        bpc.pricing_labels_pruned_reduced_cost;
+    result.pricing_labels_pruned_dominance +=
+        bpc.pricing_labels_pruned_dominance;
+    result.pricing_labels_duplicate_states += bpc.pricing_labels_duplicate_states;
+    if (!bpc.pricing_state_stop_reason.empty()) {
+        result.pricing_state_stop_reason = bpc.pricing_state_stop_reason;
+    }
+    if (!bpc.pricing_depth_profile_json.empty() &&
+        bpc.pricing_depth_profile_json != "[]") {
+        result.pricing_depth_profile_json = bpc.pricing_depth_profile_json;
+    }
+    if (!bpc.operation_dp_profile_json.empty() &&
+        bpc.operation_dp_profile_json != "[]") {
+        result.operation_dp_profile_json = bpc.operation_dp_profile_json;
+    }
 }
 
 std::size_t findMatchingJsonDelimiter(const std::string& text,
