@@ -1,0 +1,15 @@
+interval_id,parent_id,depth,gamma_L,gamma_U,status,closed,split,children,time_limit_used,runtime_seconds,certificate_basis,solver_status
+1_d1_0,1,1,0.0122881381662,0.0184322072493,interval_closed,true,false,0,1200,6.2861457,interval_exact_cutoff_mip_infeasible,infeasible
+1_d1_1_d2_0,1_d1_1,2,0.0184322072493,0.0215042417909,interval_unresolved_timeout,false,false,0,1200,1200.1015486,interval_exact_cutoff_mip_timeout,time limit exceeded
+1_d1_1_d2_1,1_d1_1,2,0.0215042417909,0.0245762763324,interval_unresolved_timeout,false,false,0,1200,1200.1924204,interval_exact_cutoff_mip_timeout,time limit exceeded
+1_d1_1,1,1,0.0184322072493,0.0245762763324,interval_unresolved_timeout,false,true,2,1200,1200.095066,interval_exact_cutoff_mip_timeout,time limit exceeded
+1,root,0,0.0122881381662,0.0245762763324,interval_unresolved_timeout,false,true,2,600,600.1291294,interval_exact_cutoff_mip_timeout,time limit exceeded
+2_d1_0_d2_0,2_d1_0,2,0.0245762763324,0.0276483108739,interval_unresolved_timeout,false,false,0,1200,1200.1043925,interval_exact_cutoff_mip_timeout,time limit exceeded
+2_d1_0_d2_1,2_d1_0,2,0.0276483108739,0.0307203454155,interval_closed,true,false,0,1200,0.4501294,interval_exact_cutoff_mip_infeasible,infeasible
+2_d1_0,2,1,0.0245762763324,0.0307203454155,interval_unresolved_timeout,false,true,2,1200,1200.272716,interval_exact_cutoff_mip_timeout,time limit exceeded
+2_d1_1,2,1,0.0307203454155,0.0368644144986,interval_closed,true,false,0,1200,0.4152858,interval_exact_cutoff_mip_infeasible,infeasible
+2,root,0,0.0245762763324,0.0368644144986,interval_unresolved_timeout,false,true,2,600,600.3573104,interval_exact_cutoff_mip_timeout,time limit exceeded
+3,root,0,0.0368644144986,0.0491525526647,interval_closed,true,false,0,600,0.6576325,interval_exact_cutoff_mip_infeasible,infeasible
+9,root,0,0.0107521208954,0.0122881381662,interval_closed,true,false,0,600,0.8622134,interval_exact_cutoff_mip_infeasible,infeasible
+10,root,0,0.00921610362464,0.00998411226003,interval_closed,true,false,0,600,0.7935517,interval_exact_cutoff_mip_infeasible,infeasible
+11,root,0,0.00998411226003,0.0107521208954,interval_closed,true,false,0,600,0.7593776,interval_exact_cutoff_mip_infeasible,infeasible

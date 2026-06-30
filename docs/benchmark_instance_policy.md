@@ -146,3 +146,17 @@ This round is not a historical paper benchmark. It is a sealed engineering
 stress test for finalization, all-leaf oracle processing, and interval-level
 diagnosis. Certified V20 rows are exact certificates for those generated stress
 instances only.
+
+## Oracle Closure Round Classification
+
+`results/oracle_closure_round/` follows the same policy:
+
+- V4 smoke is a smoke test.
+- V12 M1/M2 rows are regenerated engineering benchmarks.
+- V20/M3 rows under `reference/hard_stress/V20_M3/` are
+  `hard_generated_v20_m3` stress instances.
+
+The round contains both certified and noncertified sealed rows. Noncertified
+rows with positive gaps are not historical benchmark failures; they are
+engineering stress diagnoses for exact interval cutoff MIP and BPC leaf
+closure.

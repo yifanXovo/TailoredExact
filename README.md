@@ -142,6 +142,32 @@ stable, eliminates the previous `tight_T_seed3102` abnormal exit, and gives
 final JSON for every row. It does not add a third V20 certificate, so broad
 paper benchmark testing remains premature.
 
+Oracle-closure round command template:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-exact-v20-certificate `
+  --paper-run-sealed true `
+  --auto-interval-oracle true --auto-interval-oracle-order all `
+  --auto-interval-oracle-max-leaves all `
+  --auto-interval-oracle-leaf-budget-policy per-leaf `
+  --auto-interval-oracle-recursive-split true `
+  --auto-interval-oracle-split-on-timeout true `
+  --auto-interval-bpc-fallback true `
+  --input reference\hard_stress\V20_M3\moderate_seed3301.txt `
+  --lambda 0.15 --T 3600 --time-limit 600 `
+  --out results\oracle_closure_round\raw\moderate_seed3301.json
+```
+
+`--auto-interval-oracle-time-limit` is now the per-root-leaf oracle limit under
+`per-leaf` policy. Split children use
+`--auto-interval-oracle-child-time-limit` when provided. The solver records the
+requested and actual leaf budgets in JSON. The oracle-closure round confirms
+that longer child budgets and recursive partitioning improve diagnosis but did
+not certify a third V20/M3 row: `moderate_seed3301` still has two open
+low-Gini root leaves, `tight_T_seed3102` has three timeout leaves, and
+`high_imbalance_seed3201` has two timeout leaves. BPC fallback did not close any
+remaining leaf with exact pricing.
+
 `paper-exact-v20-certificate` keeps native HGA-TGBC as a verifier-gated UB-only
 source, disables archive scanning, uses the fixed mip-light V20 relaxation
 portfolio with compact-flow connectivity, and automatically attempts exact

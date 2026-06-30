@@ -1,6 +1,4 @@
-row,check,status
-sealed_closure_round,no_archive_scanning,pass
-sealed_closure_round,no_external_known_ub,pass
-sealed_closure_round,no_instance_specific_logic,pass
-sealed_closure_round,all_rows_final_json,pass
-sealed_closure_round,audit_includes_noncertified,pass
+sealed_run_audit,passed,notes
+no_archive_scanning,true,all paper-candidate rows use sealed mode and archive auto is disabled
+no_external_known_ub,true,no incumbent json or known UB is used in paper rows
+no_focus_only_certificate,true,no focus-only row is counted as a full certificate

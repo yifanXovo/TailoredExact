@@ -49,3 +49,29 @@ unresolved intervals, and oracle/BPC plateau reasons.
 The project is not yet ready for broad paper benchmark testing: V12 behavior is
 stable and two V20/M3 stress rows certify, but the requested third V20
 certificate was not obtained in the sealed closure round.
+
+## Oracle Closure Round Update
+
+The paper evidence package now mirrors `results/oracle_closure_round/`.  It
+includes the corrected oracle budget semantics, recursive partition traces,
+BPC fallback summaries, raw JSONs, interval ledgers, progress logs, UB logs,
+certificate audit, and no-instance-special-case audit.
+
+Certified exact rows remain:
+
+- V4 smoke;
+- V12 M2 regenerated;
+- V12 M1 regenerated;
+- `high_imbalance_seed3202`;
+- `tight_T_seed3101`.
+
+Noncertified with audited gap:
+
+- `moderate_seed3301`;
+- `tight_T_seed3102`;
+- `high_imbalance_seed3201`.
+
+`moderate_seed3302` was not rerun in this round after priority time was spent
+on the moderate/tight/high-imbalance closure attempts.  The evidence package
+therefore supports continued targeted interval-oracle work, not a broad paper
+benchmark matrix.

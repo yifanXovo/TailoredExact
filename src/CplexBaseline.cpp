@@ -342,7 +342,7 @@ void writeCompactLp(const Instance& instance,
 
     const bool identical_q = std::all_of(instance.Q.begin(), instance.Q.end(),
         [&](int q) { return q == instance.Q.front(); });
-    if (strengthened && identical_q && M > 1) {
+    if (strengthened && options.interval_oracle_symmetry_breaking && identical_q && M > 1) {
         for (int k = 0; k + 1 < M; ++k) {
             Expr e;
             for (int i = 1; i <= V; ++i) {
@@ -415,6 +415,21 @@ void writeCompactLp(const Instance& instance,
             addTerm(obj_cutoff, eName(i), options.lambda * instance.weights[i]);
         }
         writeConstraint(out, cid, obj_cutoff, "<=", cutoff->incumbent_ub - cutoff->epsilon);
+
+        if ((options.interval_oracle_penalty_domain_tightening ||
+             options.interval_oracle_low_gini_tightening) &&
+            options.lambda > 1e-12) {
+            const double cutoff_value = cutoff->incumbent_ub - cutoff->epsilon;
+            const double penalty_budget = (cutoff_value - cutoff->gamma_L) / options.lambda;
+            if (std::isfinite(penalty_budget) && penalty_budget >= -1e-10) {
+                for (int i = 1; i <= V; ++i) {
+                    if (instance.weights[i] <= 1e-12) continue;
+                    const double e_ub = std::max(0.0, penalty_budget / instance.weights[i]);
+                    Expr ei; addTerm(ei, eName(i), 1);
+                    writeConstraint(out, cid, ei, "<=", e_ub);
+                }
+            }
+        }
     }
 
     out << "Bounds\n";
@@ -760,7 +775,16 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         cutoff.gamma_U = options.interval_exact_cutoff_gamma_U;
         cutoff.incumbent_ub = options.interval_exact_cutoff_UB;
         cutoff.epsilon = options.interval_exact_cutoff_epsilon;
+        if (!options.interval_oracle_objective_cutoff_row) {
+            result.notes.push_back(
+                "interval_oracle_objective_cutoff_row=false requested; exact cutoff oracle keeps the original cutoff row because it is required for a valid interval certificate");
+        }
         writeCompactLp(instance, options, lp_path, true, &cutoff);
+        if (options.interval_oracle_penalty_domain_tightening ||
+            options.interval_oracle_low_gini_tightening) {
+            result.notes.push_back(
+                "interval oracle added safe penalty-budget e_i upper bounds derived from G>=gamma_L and G+lambda*P<=UB-epsilon");
+        }
 
         const double time_limit = options.interval_exact_cutoff_time_limit > 0.0
             ? options.interval_exact_cutoff_time_limit
