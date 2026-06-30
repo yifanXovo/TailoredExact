@@ -301,9 +301,17 @@ bool inferCertifiedOriginalProblem(const SolveResult& result) {
             containsText(result.frontier_lower_bound_source, "route_mask") ||
             containsText(result.interval_certificate_basis, "route_mask") ||
             containsText(result.interval_bound_source_list, "route_mask");
+        if (result.algorithm_preset == "paper-gf-bpc-core" &&
+            route_mask_based_certificate) {
+            return false;
+        }
         if (route_mask_based_certificate &&
             !result.route_mask_all_subset_enumeration_certifying) {
             return false;
+        }
+        if (result.algorithm_preset == "paper-gf-bpc-core") {
+            if (result.certificate_uses_interval_oracle) return false;
+            if (!result.bpc_core_certificate_valid) return false;
         }
         const bool branch_price_tree_used_for_certificate =
             result.frontier_tree_closed_interval_count > 0;
@@ -884,6 +892,24 @@ std::string resultToJson(const SolveResult& input) {
         << result.frontier_bound_fathomed_interval_count << ",\n";
     out << "  \"frontier_tree_closed_interval_count\": "
         << result.frontier_tree_closed_interval_count << ",\n";
+    out << "  \"intervals_closed_by_relaxation_count\": "
+        << result.intervals_closed_by_relaxation_count << ",\n";
+    out << "  \"intervals_closed_by_bpc_count\": "
+        << result.intervals_closed_by_bpc_count << ",\n";
+    out << "  \"intervals_closed_by_oracle_count\": "
+        << result.intervals_closed_by_oracle_count << ",\n";
+    out << "  \"intervals_unresolved_count\": "
+        << result.intervals_unresolved_count << ",\n";
+    out << "  \"certificate_uses_interval_oracle\": "
+        << (result.certificate_uses_interval_oracle ? "true" : "false") << ",\n";
+    out << "  \"certificate_uses_bpc_tree\": "
+        << (result.certificate_uses_bpc_tree ? "true" : "false") << ",\n";
+    out << "  \"certificate_uses_relaxation_only\": "
+        << (result.certificate_uses_relaxation_only ? "true" : "false") << ",\n";
+    out << "  \"bpc_core_certificate_valid\": "
+        << (result.bpc_core_certificate_valid ? "true" : "false") << ",\n";
+    out << "  \"exact_portfolio_certificate_valid\": "
+        << (result.exact_portfolio_certificate_valid ? "true" : "false") << ",\n";
     out << "  \"frontier_scheduling_mode\": \""
         << jsonEscape(result.frontier_scheduling_mode) << "\",\n";
     out << "  \"frontier_relax_cache_hits\": " << result.frontier_relax_cache_hits << ",\n";

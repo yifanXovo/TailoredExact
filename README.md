@@ -20,6 +20,25 @@ g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluat
 
 ## BPC Example
 
+### Realigned Paper Core
+
+The current paper-core preset is unified across V/M and does not use complete
+route-mask enumeration or compact interval-oracle certificates:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier `
+  --algorithm-preset paper-gf-bpc-core `
+  --paper-run-sealed true `
+  --input <instance> --lambda 0.15 --T 3600 `
+  --time-limit <budget> --out <raw.json>
+```
+
+`paper-gf-bpc-core` means native HGA-TGBC UB, Gini-frontier decomposition,
+valid non-enumerative relaxation screening, and exact-pricing BPC fallback for
+unresolved intervals.  Interval-oracle and compact CPLEX evidence belong to the
+separate exact-portfolio or benchmark categories and must not be reported as
+BPC-core certificates.
+
 ```powershell
 build\ExactEBRP.exe --method gcap-frontier --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --time-limit 30 --frontier-intervals 3 --frontier-retry-passes 1 --frontier-final-closure true --frontier-final-nodes 31 --gcap-pricing-columns 4 --column-dominance true --column-dominance-mode exact --projection-bound true --penalty-domain-tightening true --out results\optimization_update\raw\smoke_gcap_frontier_full.json
 ```

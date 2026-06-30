@@ -239,3 +239,24 @@ This does not change the paper-core separation of evidence:
 - BPC fallback remains diagnostic unless exact pricing closes a leaf;
 - timeout oracle bounds are mergeable only when audit-visible fields mark them
   valid for the original fixed interval.
+## 2026-07-01 Realignment
+
+The paper-core algorithm is now `paper-gf-bpc-core`.
+
+Core certificate sources:
+
+- valid non-enumerative Gini-frontier relaxation lower bounds;
+- route-load BPC tree bounds only when exact pricing closure is proven;
+- empty intervals outside the improving Gini range.
+
+Excluded from paper-core certificate evidence:
+
+- complete all-subset route-mask enumeration, for every V/M;
+- compact interval oracle closure or oracle timeout bounds;
+- CPLEX compact benchmark bounds;
+- archive incumbents or known-UB injection;
+- focused interval diagnostics without full-ledger coverage.
+
+`paper-exact-v20-certificate` and `paper-exact-portfolio` remain auxiliary
+exact-portfolio presets.  Their certificates must be labelled separately from
+`paper-gf-bpc-core`.

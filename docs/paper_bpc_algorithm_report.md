@@ -1213,3 +1213,28 @@ evidence only; their bounds are not imported into the paper exact pipeline.
 
 The project is now ready for a controlled benchmark matrix, while maintaining a
 targeted closure track for `tight_T_seed3102` and `high_imbalance_seed3201`.
+## 2026-07-01 Paper-Core Realignment
+
+The main paper-core claim is no longer based on a small-V enumeration path or on
+the strengthened compact interval oracle portfolio.  The core preset is
+`paper-gf-bpc-core`:
+
+- native HGA-TGBC incumbent, verifier-gated and UB-only;
+- full improving-Gini frontier ledger;
+- non-enumerative valid relaxation lower bounds;
+- route-load BPC fallback with exact pricing closure required.
+
+Closure accounting is now explicit in every result JSON:
+
+- `intervals_closed_by_relaxation_count`;
+- `intervals_closed_by_bpc_count`;
+- `intervals_closed_by_oracle_count`;
+- `certificate_uses_interval_oracle`;
+- `bpc_core_certificate_valid`;
+- `exact_portfolio_certificate_valid`.
+
+Realignment reruns show that removing route-mask/oracle evidence reduces the
+currently certified core set.  In this round only `tight_T_seed3101` closed under
+`paper-gf-bpc-core`; V12 M1/M2 and the other V20 rows remain noncertified under
+the tested core budgets.  Direct BPC leaf validation starts pricing but does not
+close leaves, so the active bottleneck is exact pricing/CG closure.
