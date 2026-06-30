@@ -261,6 +261,24 @@ def audit_one(source: str, result: Dict[str, Any]) -> Dict[str, Any]:
             if as_int(result.get("auto_interval_oracle_remaining_open_leaves", 0)) != 0:
                 failures.append("frontier_oracle_bound_closed_status_with_open_leaves")
 
+    preset = str(result.get("algorithm_preset", ""))
+    if preset in {"paper-gf-bpc-core", "paper-bpc-core"}:
+        if as_bool(result.get("route_mask_all_subset_enumeration_certifying", False)):
+            failures.append("paper_gf_bpc_core_route_mask_enumeration_certifying")
+        if as_bool(result.get("certificate_uses_interval_oracle", False)):
+            failures.append("paper_gf_bpc_core_certificate_uses_interval_oracle")
+        if as_int(result.get("intervals_closed_by_oracle_count", 0)) > 0 and certified:
+            failures.append("paper_gf_bpc_core_closed_by_oracle")
+        if certified and not as_bool(result.get("bpc_core_certificate_valid", False)):
+            failures.append("paper_gf_bpc_core_certified_but_core_certificate_invalid")
+        if certified and as_int(result.get("intervals_closed_by_bpc_count", 0)) > 0:
+            if not as_bool(result.get("pricing_closure_certified_exact", False)):
+                failures.append("paper_gf_bpc_core_bpc_without_exact_pricing")
+    if preset in {"paper-exact-portfolio", "paper-exact-v20-certificate"}:
+        if certified and as_bool(result.get("certificate_uses_interval_oracle", False)):
+            if not as_bool(result.get("exact_portfolio_certificate_valid", False)):
+                failures.append("exact_portfolio_oracle_certificate_not_marked_valid")
+
     return {
         "source": source,
         "instance_name": result.get("instance_name", ""),

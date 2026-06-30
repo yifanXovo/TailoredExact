@@ -190,3 +190,19 @@ policy:
 The round certifies `moderate_seed3301` as a generated hard-stress instance.
 This is a valid exact certificate for that generated file and hash, not a
 historical paper target claim.
+## Realigned Result Categories
+
+Paper evidence must classify every row as one of:
+
+- `paper-gf-bpc-core`: unified Gini-frontier plus exact BPC fallback, no
+  interval-oracle certificate source;
+- `paper-exact-portfolio`: auxiliary exact portfolio that may use compact
+  interval oracle evidence when fully audited;
+- `BPC diagnostic`: focused or leaf-level BPC validation, not a full frontier
+  certificate unless safely merged by the solver;
+- `interval-oracle diagnostic`: fixed-interval compact oracle rows;
+- `CPLEX benchmark`: same-budget compact solver comparison, never imported as
+  paper-core lower-bound evidence.
+
+Hard-generated V20/M3 rows remain engineering stress instances, not historical
+paper targets.

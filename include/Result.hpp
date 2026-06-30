@@ -335,6 +335,15 @@ struct SolveResult {
     int frontier_unprocessed_interval_count = 0;
     int frontier_bound_fathomed_interval_count = 0;
     int frontier_tree_closed_interval_count = 0;
+    int intervals_closed_by_relaxation_count = 0;
+    int intervals_closed_by_bpc_count = 0;
+    int intervals_closed_by_oracle_count = 0;
+    int intervals_unresolved_count = 0;
+    bool certificate_uses_interval_oracle = false;
+    bool certificate_uses_bpc_tree = false;
+    bool certificate_uses_relaxation_only = false;
+    bool bpc_core_certificate_valid = false;
+    bool exact_portfolio_certificate_valid = false;
     std::string frontier_scheduling_mode;
     long long frontier_relax_cache_hits = 0;
     long long frontier_relax_cache_misses = 0;

@@ -1,0 +1,1 @@
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-gf-bpc-core --paper-run-sealed true --input reference\generated\regen_V50_M3_average.txt --lambda 0.15 --T 3600 --time-limit 300 --out results\paper_core_realignment_round\raw\v50_m3_avg_core_300s.json --log results\paper_core_realignment_round\logs\v50_m3_avg_core_300s.log

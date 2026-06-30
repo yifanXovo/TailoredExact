@@ -134,7 +134,7 @@ void usage() {
         << "[--pricing-final-verifier true|false] [--pricing-verifier-time <seconds>] "
         << "[--pricing-verifier-checkpoint <path>] [--pricing-verifier-resume <path>] "
         << "[--pricing-verifier-mode label-dp|route-mask-dp|auto] "
-        << "[--algorithm-preset paper-bpc-core|paper-bpc-core-adaptive|paper-exact-v20-certificate|paper-exact-portfolio|paper-bpc-experimental|diagnostic-large] "
+        << "[--algorithm-preset paper-gf-bpc-core|paper-bpc-core|paper-bpc-core-adaptive|paper-exact-v20-certificate|paper-exact-portfolio|paper-bpc-experimental|diagnostic-large] "
         << "[--production-preset <preset-alias>] [--incumbent-archive-auto true|false] "
         << "[--incumbent-archive-dir <dir>]\n";
 }
@@ -175,7 +175,8 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
     }
     if (opt.algorithm_preset == "custom") return;
 
-    if (opt.algorithm_preset == "paper-bpc-core" ||
+    if (opt.algorithm_preset == "paper-gf-bpc-core" ||
+        opt.algorithm_preset == "paper-bpc-core" ||
         opt.algorithm_preset == "paper-bpc-core-adaptive" ||
         opt.algorithm_preset == "paper-exact-v20-certificate" ||
         opt.algorithm_preset == "paper-exact-portfolio") {
@@ -228,7 +229,50 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         if (!opt.primal_heuristic_explicit) {
             opt.primal_heuristic = "hga-tgbc";
         }
-        if (opt.algorithm_preset == "paper-bpc-core-adaptive") {
+        if (opt.algorithm_preset == "paper-gf-bpc-core" ||
+            opt.algorithm_preset == "paper-bpc-core") {
+            opt.route_mask_max_v = 0;
+            opt.route_mask_support_duration_pruning = false;
+            opt.route_mask_operation_budget_cuts = false;
+        }
+        if (opt.algorithm_preset == "paper-gf-bpc-core") {
+            opt.relaxation_portfolio_mode = "fixed";
+            opt.relaxation_portfolio_keep_best_bound = true;
+            opt.v20_safe_relaxation_cuts = true;
+            opt.v20_cover_cuts = true;
+            opt.v20_cover_max_size = std::max(opt.v20_cover_max_size, 4);
+            opt.station_residual_cover_cuts = true;
+            opt.large_compact_flow_relaxation = "mip-light";
+            opt.large_compact_flow_connectivity = true;
+            opt.service_operation_min_handling_cuts = true;
+            opt.gini_spread_cuts = true;
+            opt.required_movement_cuts = true;
+            opt.global_handling_capacity_cuts = true;
+            opt.low_gini_ratio_band_tightening = true;
+            opt.interval_exact_cutoff_oracle = "off";
+            opt.interval_exact_oracle_mode = "cutoff-feasibility";
+            opt.interval_oracle_merge_timeout_bound = false;
+            opt.auto_interval_oracle = false;
+            opt.auto_interval_bpc_fallback = false;
+            opt.gcap_warmstart_level = std::max(opt.gcap_warmstart_level, 2);
+            opt.gcap_pricing_columns = std::max(opt.gcap_pricing_columns, 8);
+            opt.pricing_completion_lb_pruning = true;
+            opt.support_duration_pruning = true;
+            opt.branch_selection = "strong";
+            opt.strong_branching_candidates =
+                std::max(opt.strong_branching_candidates, 4);
+            opt.strong_branching_time = std::max(opt.strong_branching_time, 3.0);
+            opt.reliability_branching = true;
+            opt.closure_final_exact_pricing = true;
+            opt.frontier_bpc_fallback_mode = "controlling-intervals";
+            opt.frontier_bpc_fallback_reserve_fraction =
+                std::max(opt.frontier_bpc_fallback_reserve_fraction, 0.25);
+            opt.frontier_bpc_fallback_min_seconds =
+                std::max(opt.frontier_bpc_fallback_min_seconds, 60.0);
+            opt.frontier_bpc_fallback_max_intervals =
+                std::max(opt.frontier_bpc_fallback_max_intervals, 1);
+            opt.frontier_scheduling_mode = "default";
+        } else if (opt.algorithm_preset == "paper-bpc-core-adaptive") {
             opt.relaxation_portfolio_mode = "adaptive";
             opt.relaxation_portfolio_keep_best_bound = true;
             opt.relaxation_portfolio_max_variants =
@@ -1129,6 +1173,13 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
         instance.V <= opt.route_mask_max_v && instance.V <= 30;
     result.route_mask_all_subset_enumeration_certifying =
         result.route_mask_all_subset_enumeration_enabled;
+    if (opt.algorithm_preset == "paper-gf-bpc-core" ||
+        opt.algorithm_preset == "paper-bpc-core") {
+        result.route_mask_all_subset_enumeration_enabled = false;
+        result.route_mask_all_subset_enumeration_certifying = false;
+        result.unsupported_large_instance_features =
+            "all_subset_route_mask_relaxation_disabled_for_unified_paper_core";
+    }
     if (large_mode && instance.V > 32) {
         result.route_mask_all_subset_enumeration_enabled = false;
         result.route_mask_all_subset_enumeration_certifying = false;
@@ -1229,6 +1280,11 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         instance.V <= opt.route_mask_max_v && instance.V <= 30;
     snapshot.route_mask_all_subset_enumeration_certifying =
         snapshot.route_mask_all_subset_enumeration_enabled;
+    if (opt.algorithm_preset == "paper-gf-bpc-core" ||
+        opt.algorithm_preset == "paper-bpc-core") {
+        snapshot.route_mask_all_subset_enumeration_enabled = false;
+        snapshot.route_mask_all_subset_enumeration_certifying = false;
+    }
     if (large_mode && instance.V > 32) {
         snapshot.route_mask_all_subset_enumeration_enabled = false;
         snapshot.route_mask_all_subset_enumeration_certifying = false;
@@ -1257,7 +1313,20 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
     snapshot.instance_hash = hashFileFnv1a(instance.path);
     snapshot.instance_source_path = instance.path;
 
-    if (snapshot.algorithm_preset == "paper-bpc-core") {
+    if (snapshot.algorithm_preset == "paper-gf-bpc-core") {
+        snapshot.preset_certificate_scope =
+            "unified_gini_frontier_relaxation_then_exact_bpc_tree";
+        snapshot.preset_experimental_features_enabled =
+            "non_enumerative_relaxation_screening";
+        snapshot.preset_disabled_features =
+            "all_subset_route_mask_enumeration,interval_oracle_certificate,"
+            "compact_oracle_certificate,archive_scanning,hybrid_ng_dssr,"
+            "two_track_relaxed_rmp,focus_only,imported_focus_bounds,"
+            "frontier_resume,iterative_closure";
+        snapshot.preset_reason =
+            "unified paper GF-BPC core: native HGA-TGBC UB, Gini frontier, "
+            "valid non-enumerative relaxations, exact-pricing BPC fallback";
+    } else if (snapshot.algorithm_preset == "paper-bpc-core") {
         snapshot.preset_certificate_scope = "core_bpc_certificate_when_frontier_closes";
         snapshot.preset_experimental_features_enabled = "none";
         snapshot.preset_disabled_features =
@@ -1435,6 +1504,67 @@ void finalizePaperModuleFields(ebrp::SolveResult& result) {
         result.portfolio_LB = result.lower_bound;
         result.portfolio_gap = result.gap > 0.0 ? result.gap : gap;
     }
+
+    const std::string certificate_text = lowerAscii(
+        result.full_certificate_basis + "|" +
+        result.interval_certificate_basis + "|" +
+        result.interval_bound_source_list + "|" +
+        result.frontier_lower_bound_source);
+    const bool oracle_in_certificate_text =
+        certificate_text.find("interval_exact_oracle") != std::string::npos ||
+        certificate_text.find("auto_interval_oracle") != std::string::npos ||
+        certificate_text.find("interval_oracle") != std::string::npos;
+    const bool route_mask_in_certificate_text =
+        certificate_text.find("route_mask") != std::string::npos;
+    const bool optimal_frontier = result.method == "gcap-frontier" &&
+        result.status == "optimal";
+    result.intervals_closed_by_oracle_count =
+        static_cast<int>(std::max<long long>(
+            result.oracle_bound_closed_leaves,
+            result.auto_interval_oracle_leaves_closed));
+    result.intervals_closed_by_bpc_count =
+        std::max(0, result.frontier_tree_closed_interval_count) +
+        std::max(0, result.bpc_fallback_leaves_closed);
+    result.intervals_closed_by_relaxation_count =
+        std::max(0, result.frontier_bound_fathomed_interval_count -
+                    result.intervals_closed_by_oracle_count);
+    result.intervals_unresolved_count = result.unresolved_intervals;
+    result.certificate_uses_interval_oracle =
+        optimal_frontier &&
+        (oracle_in_certificate_text ||
+         result.intervals_closed_by_oracle_count > 0 ||
+         result.oracle_bound_merged_leaves > 0);
+    result.certificate_uses_bpc_tree =
+        optimal_frontier && result.intervals_closed_by_bpc_count > 0;
+    result.certificate_uses_relaxation_only =
+        optimal_frontier &&
+        !result.certificate_uses_interval_oracle &&
+        !result.certificate_uses_bpc_tree;
+    const bool full_frontier_accounted =
+        result.frontier_covers_all_improving_gini_values &&
+        result.frontier_range_certificate_scope == "original_full_improving_range" &&
+        result.full_certificate_all_intervals_accounted &&
+        result.full_certificate_rejection_reason == "none" &&
+        result.unresolved_intervals == 0 &&
+        result.invalid_bound_intervals == 0 &&
+        result.open_nodes == 0 &&
+        (!result.full_certificate_requires_pricing_closure ||
+         result.full_certificate_pricing_closure_satisfied);
+    result.bpc_core_certificate_valid =
+        optimal_frontier &&
+        full_frontier_accounted &&
+        !result.certificate_uses_interval_oracle &&
+        !route_mask_in_certificate_text &&
+        !result.route_mask_all_subset_enumeration_certifying &&
+        (result.intervals_closed_by_bpc_count == 0 ||
+         result.pricing_closure_certified_exact);
+    result.exact_portfolio_certificate_valid =
+        optimal_frontier &&
+        full_frontier_accounted &&
+        !route_mask_in_certificate_text &&
+        (result.algorithm_preset == "paper-exact-portfolio" ||
+         result.algorithm_preset == "paper-exact-v20-certificate" ||
+         result.certificate_uses_interval_oracle);
 }
 
 void applyLargeInstanceLowerBound(const ebrp::Instance& instance,
@@ -2100,9 +2230,11 @@ std::string jsonEscapeLocal(const std::string& value) {
 }
 
 bool isPaperTracePreset(const std::string& preset) {
-    return preset == "paper-bpc-core" ||
+    return preset == "paper-gf-bpc-core" ||
+           preset == "paper-bpc-core" ||
            preset == "paper-bpc-core-adaptive" ||
-           preset == "paper-exact-v20-certificate";
+           preset == "paper-exact-v20-certificate" ||
+           preset == "paper-exact-portfolio";
 }
 
 int effectiveFrontierAdaptiveMaxDepth(const ebrp::Instance& instance,
@@ -13367,6 +13499,15 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 << "incumbent_upper_bound,interval_status,reason,"
                 << "certificate_basis,requires_pricing_closure,"
                 << "pricing_closure_available,interval_bound_valid,"
+                << "interval_closure_source,interval_closure_source_detail,"
+                << "interval_requires_pricing_closure,"
+                << "interval_pricing_closure_satisfied,"
+                << "interval_oracle_used_for_certificate,"
+                << "interval_oracle_is_diagnostic_only,"
+                << "interval_relaxation_bound_valid,"
+                << "interval_bpc_tree_nodes,interval_bpc_pricing_calls,"
+                << "interval_bpc_exact_pricing_closed,interval_final_lb,"
+                << "interval_final_ub_cutoff,"
                 << "bpc_nodes,open_nodes,generated_columns,cuts,"
                 << "pricing_calls,pricing_time_seconds,rmp_solve_time_seconds,"
                 << "relaxation_time_seconds,lower_bound_source,lower_bound_sources,"
@@ -13409,21 +13550,66 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 if (record.open_nodes > 0) return std::string("open_bpc_nodes");
                 return std::string("lower_bound_below_incumbent");
             };
+            auto intervalClosureSource = [&](const FrontierIntervalRecord& record,
+                                             const std::string& status) {
+                const std::string src = lowerAscii(
+                    record.lower_bound_source + "|" + record.lb_sources + "|" +
+                    record.certificate_basis);
+                if (record.replaced_by_children) return std::string("unresolved");
+                if (status == "gamma_floor_skip" || status == "empty") {
+                    return std::string("empty");
+                }
+                if (src.find("interval_exact_oracle") != std::string::npos ||
+                    src.find("auto_interval_oracle") != std::string::npos ||
+                    src.find("interval_oracle") != std::string::npos) {
+                    return std::string("interval_oracle");
+                }
+                if (record.complete || record.tree_closed ||
+                    src.find("branch_price_tree") != std::string::npos) {
+                    return std::string("bpc_exact_tree");
+                }
+                if (status == "bound_fathomed" || record.bound_fathomed ||
+                    (record.lower_bound_valid &&
+                     record.lower_bound >= result.upper_bound - 1e-7)) {
+                    return std::string("relaxation_bound");
+                }
+                return std::string("unresolved");
+            };
 
             for (int idx = 0; idx < static_cast<int>(interval_records.size()); ++idx) {
                 const FrontierIntervalRecord& record = interval_records[idx];
+                const std::string row_status = intervalStatus(record);
+                const std::string row_reason = intervalReason(record);
+                const std::string closure_source =
+                    intervalClosureSource(record, row_status);
+                const bool oracle_used = closure_source == "interval_oracle";
+                const bool bpc_used = closure_source == "bpc_exact_tree";
                 interval_csv
                     << idx << ","
                     << std::setprecision(12) << record.lo << ","
                     << record.hi << ","
                     << record.lower_bound << ","
                     << result.upper_bound << ","
-                    << csvEscapeLocal(intervalStatus(record)) << ","
-                    << csvEscapeLocal(intervalReason(record)) << ","
+                    << csvEscapeLocal(row_status) << ","
+                    << csvEscapeLocal(row_reason) << ","
                     << csvEscapeLocal(record.certificate_basis) << ","
                     << (record.requires_pricing_closure ? "true" : "false") << ","
                     << (record.pricing_closure_available ? "true" : "false") << ","
                     << (record.interval_bound_valid ? "true" : "false") << ","
+                    << csvEscapeLocal(closure_source) << ","
+                    << csvEscapeLocal(row_reason) << ","
+                    << (record.requires_pricing_closure ? "true" : "false") << ","
+                    << (record.pricing_closure_available ? "true" : "false") << ","
+                    << (oracle_used ? "true" : "false") << ","
+                    << (oracle_used && !result.certificate_uses_interval_oracle
+                            ? "true" : "false") << ","
+                    << (record.interval_bound_valid ? "true" : "false") << ","
+                    << record.bpc_nodes << ","
+                    << record.pricing_calls << ","
+                    << (bpc_used && record.pricing_closure_available
+                            ? "true" : "false") << ","
+                    << record.lower_bound << ","
+                    << result.upper_bound << ","
                     << record.bpc_nodes << ","
                     << record.open_nodes << ","
                     << record.generated_columns << ","
@@ -13970,7 +14156,19 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         "lower_bound_before_oracle",
         "lower_bound_after_oracle",
         "lower_bound_improvement_by_oracle",
-        "leaf_closed_by_oracle_bound"
+        "leaf_closed_by_oracle_bound",
+        "interval_closure_source",
+        "interval_closure_source_detail",
+        "interval_requires_pricing_closure",
+        "interval_pricing_closure_satisfied",
+        "interval_oracle_used_for_certificate",
+        "interval_oracle_is_diagnostic_only",
+        "interval_relaxation_bound_valid",
+        "interval_bpc_tree_nodes",
+        "interval_bpc_pricing_calls",
+        "interval_bpc_exact_pricing_closed",
+        "interval_final_lb",
+        "interval_final_ub_cutoff"
     };
     for (const std::string& col : oracle_bound_columns) {
         ensureIntervalCsvColumn(header, rows, col);
@@ -14400,6 +14598,22 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
             row.set("lower_bound_source", "interval_exact_oracle_bound");
             row.set("lower_bound_sources",
                     row.get("lower_bound_sources") + "|interval_exact_oracle_bound");
+            row.set("interval_closure_source",
+                    closed_by_bound ? "interval_oracle" : "unresolved");
+            row.set("interval_closure_source_detail", outcome.basis);
+            row.set("interval_requires_pricing_closure", "false");
+            row.set("interval_pricing_closure_satisfied", "true");
+            row.set("interval_oracle_used_for_certificate",
+                    closed_by_bound ? "true" : "false");
+            row.set("interval_oracle_is_diagnostic_only",
+                    closed_by_bound ? "false" : "true");
+            row.set("interval_relaxation_bound_valid",
+                    outcome.bound_valid ? "true" : "false");
+            row.set("interval_bpc_tree_nodes", "0");
+            row.set("interval_bpc_pricing_calls", "0");
+            row.set("interval_bpc_exact_pricing_closed", "false");
+            row.set("interval_final_lb", std::to_string(after_lb));
+            row.set("interval_final_ub_cutoff", std::to_string(result.upper_bound));
         }
         if (closed_by_bound) {
             ++closed;
@@ -14416,6 +14630,13 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
             row.set("lower_bound_sources",
                     row.get("lower_bound_sources") + "|interval_exact_oracle_bound");
             row.set("leaf_closed_by_oracle_bound", "true");
+            row.set("interval_closure_source", "interval_oracle");
+            row.set("interval_closure_source_detail",
+                    "interval_exact_oracle_bound_or_infeasible_partition");
+            row.set("interval_oracle_used_for_certificate", "true");
+            row.set("interval_oracle_is_diagnostic_only", "false");
+            row.set("interval_final_lb", std::to_string(result.upper_bound));
+            row.set("interval_final_ub_cutoff", std::to_string(result.upper_bound));
         }
         if (!closed_by_bound) {
             oracle_blocker_seen = true;
