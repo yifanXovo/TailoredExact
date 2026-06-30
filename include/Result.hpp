@@ -538,6 +538,14 @@ struct SolveResult {
     double interval_oracle_solver_incumbent = 0.0;
     double interval_oracle_gap_to_cutoff = 0.0;
     bool interval_oracle_can_merge_bound = false;
+    long long gini_spread_cuts_added = 0;
+    double required_movement_lb = 0.0;
+    long long required_movement_cuts_added = 0;
+    double global_handling_capacity_lb = 0.0;
+    long long global_handling_capacity_cuts_added = 0;
+    long long low_gini_ratio_band_domains_tightened = 0;
+    std::string oracle_strengthening_families_enabled;
+    double oracle_strengthening_lb_improvement = 0.0;
     long long oracle_bound_merged_leaves = 0;
     long long oracle_bound_closed_leaves = 0;
     double oracle_bound_best_global_lb = 0.0;

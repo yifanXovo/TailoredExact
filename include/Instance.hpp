@@ -107,6 +107,10 @@ struct SolveOptions {
     bool service_operation_min_handling_cuts = false;
     bool penalty_movement_lb_cuts = false;
     bool transfer_subset_capacity_cuts = false;
+    bool gini_spread_cuts = false;
+    bool required_movement_cuts = false;
+    bool global_handling_capacity_cuts = false;
+    bool low_gini_ratio_band_tightening = false;
     std::string relaxation_portfolio_mode = "fixed";
     double relaxation_portfolio_probe_seconds = 1.0;
     int relaxation_portfolio_max_variants = 3;

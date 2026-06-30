@@ -1193,3 +1193,23 @@ Key result:
 The current paper-readiness decision remains conservative: the project is not
 ready for a broad paper benchmark matrix until at least a third V20/M3 stress
 row certifies under the sealed unified pipeline.
+## Strengthened Oracle Round Update
+
+The strengthened interval oracle round adds generic low-Gini strengthening to
+the sealed `paper-exact-v20-certificate` pipeline:
+
+- Gini pairwise spread cuts;
+- penalty-budget final-inventory domain tightening;
+- required net movement rows;
+- aggregate handling capacity rows;
+- singleton duration/transfer compatibility rows.
+
+The round certifies `moderate_seed3301` with
+`objective = LB = UB = 0.0491525526647`, raising V20/M3 hard-stress
+certification to `3/6`.  V12 M1 and V12 M2 remain certified.  Plain compact
+CPLEX 300s comparison rows are included in
+`results/strengthened_oracle_round/cplex_comparison_summary.csv` as benchmark
+evidence only; their bounds are not imported into the paper exact pipeline.
+
+The project is now ready for a controlled benchmark matrix, while maintaining a
+targeted closure track for `tight_T_seed3102` and `high_imbalance_seed3201`.

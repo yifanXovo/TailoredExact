@@ -46,6 +46,20 @@ struct CompactIntervalCutoffConfig {
     double epsilon = 1e-8;
 };
 
+struct CompactOracleStrengtheningStats {
+    long long gini_spread_cuts_added = 0;
+    double required_movement_lb = 0.0;
+    long long required_movement_cuts_added = 0;
+    double global_handling_capacity_lb = 0.0;
+    long long global_handling_capacity_cuts_added = 0;
+    long long transfer_subset_capacity_cuts_added = 0;
+    long long low_gini_ratio_band_domains_tightened = 0;
+    long long penalty_domains_tightened = 0;
+    long long domain_width_before = 0;
+    long long domain_width_after = 0;
+    std::vector<std::string> enabled_families;
+};
+
 void addTerm(Expr& e, const std::string& var, double coef) {
     if (std::fabs(coef) <= 1e-12) return;
     e[var] += coef;
@@ -142,11 +156,71 @@ void writeCompactLp(const Instance& instance,
                     const SolveOptions& options,
                     const std::filesystem::path& lp_path,
                     bool strengthened,
-                    const CompactIntervalCutoffConfig* cutoff = nullptr) {
+                    const CompactIntervalCutoffConfig* cutoff = nullptr,
+                    CompactOracleStrengtheningStats* stats = nullptr) {
     VarRegistry vars;
     const int V = instance.V;
     const int M = instance.M;
     const double cunit = instance.pickup_time + instance.drop_time;
+
+    std::vector<int> y_lb(V + 1, 0);
+    std::vector<int> y_ub(V + 1, 0);
+    bool domain_infeasible = false;
+    for (int i = 1; i <= V; ++i) {
+        y_ub[i] = instance.capacity[i];
+        if (stats != nullptr) {
+            stats->domain_width_before += instance.capacity[i];
+        }
+    }
+    const bool cutoff_active =
+        cutoff != nullptr && cutoff->enabled &&
+        std::isfinite(cutoff->incumbent_ub) &&
+        options.lambda > 1e-12;
+    const double cutoff_value = cutoff_active
+        ? cutoff->incumbent_ub - cutoff->epsilon
+        : std::numeric_limits<double>::infinity();
+    const double penalty_budget = cutoff_active
+        ? (cutoff_value - cutoff->gamma_L) / options.lambda
+        : std::numeric_limits<double>::infinity();
+    if (cutoff_active &&
+        std::isfinite(penalty_budget) &&
+        penalty_budget >= -1e-10 &&
+        (options.interval_oracle_penalty_domain_tightening ||
+         options.interval_oracle_low_gini_tightening ||
+         options.low_gini_ratio_band_tightening)) {
+        if (stats != nullptr) {
+            stats->enabled_families.push_back("penalty_final_inventory_domain");
+        }
+        for (int i = 1; i <= V; ++i) {
+            if (instance.weights[i] <= 1e-12) continue;
+            const double ratio_radius = std::max(0.0, penalty_budget / instance.weights[i]);
+            int lo = static_cast<int>(std::ceil(instance.target[i] * (1.0 - ratio_radius) - 1e-9));
+            int hi = static_cast<int>(std::floor(instance.target[i] * (1.0 + ratio_radius) + 1e-9));
+            lo = std::max(0, lo);
+            hi = std::min(instance.capacity[i], hi);
+            if (lo > y_lb[i]) {
+                y_lb[i] = lo;
+                if (stats != nullptr) ++stats->penalty_domains_tightened;
+            }
+            if (hi < y_ub[i]) {
+                y_ub[i] = hi;
+                if (stats != nullptr) ++stats->penalty_domains_tightened;
+            }
+        }
+    }
+    for (int i = 1; i <= V; ++i) {
+        if (y_lb[i] > y_ub[i]) {
+            domain_infeasible = true;
+            y_lb[i] = 0;
+            y_ub[i] = instance.capacity[i];
+        }
+        if (stats != nullptr) {
+            stats->domain_width_after += std::max(0, y_ub[i] - y_lb[i]);
+            if (y_lb[i] > 0 || y_ub[i] < instance.capacity[i]) {
+                ++stats->low_gini_ratio_band_domains_tightened;
+            }
+        }
+    }
 
     for (int k = 0; k < M; ++k) {
         for (int i = 0; i <= V; ++i) {
@@ -167,7 +241,7 @@ void writeCompactLp(const Instance& instance,
     }
     vars.add("G", 0, 1, "C");
     for (int i = 1; i <= V; ++i) {
-        vars.add(yName(i), 0, instance.capacity[i], "I");
+        vars.add(yName(i), y_lb[i], y_ub[i], "I");
         vars.add(rName(i), 0, static_cast<double>(instance.capacity[i]) / instance.target[i], "C");
         vars.add(eName(i), 0, std::max(1.0, static_cast<double>(instance.capacity[i]) / instance.target[i] - 1.0), "C");
         vars.add(zprodName(i), 0, instance.capacity[i], "C");
@@ -200,6 +274,10 @@ void writeCompactLp(const Instance& instance,
     out << "\nSubject To\n";
 
     int cid = 1;
+    if (domain_infeasible) {
+        Expr impossible;
+        writeConstraint(out, cid, impossible, "<=", -1);
+    }
     for (int k = 0; k < M; ++k) {
         Expr start_end;
         Expr start;
@@ -229,6 +307,21 @@ void writeCompactLp(const Instance& instance,
         Expr e;
         for (int k = 0; k < M; ++k) addTerm(e, zName(k, i), 1);
         writeConstraint(out, cid, e, "<=", 1);
+    }
+
+    if (strengthened && options.transfer_subset_capacity_cuts) {
+        if (stats != nullptr) stats->enabled_families.push_back("duration_compatibility_singleton_transfer");
+        for (int k = 0; k < M; ++k) {
+            for (int i = 1; i <= V; ++i) {
+                const double min_visit_time = instance.dist[0][i] + instance.dist[i][0] + cunit;
+                if (min_visit_time > instance.total_time_limit + 1e-9) {
+                    Expr e;
+                    addTerm(e, zName(k, i), 1);
+                    writeConstraint(out, cid, e, "<=", 0);
+                    if (stats != nullptr) ++stats->transfer_subset_capacity_cuts_added;
+                }
+            }
+        }
     }
 
     for (int k = 0; k < M; ++k) {
@@ -369,12 +462,80 @@ void writeCompactLp(const Instance& instance,
         Expr em; addTerm(em, eName(i), 1); addTerm(em, rName(i), 1);
         writeConstraint(out, cid, em, ">=", 1);
     }
+
+    double required_pick_min = 0.0;
+    double required_drop_min = 0.0;
+    if (strengthened && options.required_movement_cuts) {
+        if (stats != nullptr) stats->enabled_families.push_back("required_station_movement");
+        for (int i = 1; i <= V; ++i) {
+            if (y_lb[i] > instance.initial[i]) {
+                const int need_drop = y_lb[i] - instance.initial[i];
+                required_drop_min += need_drop;
+                Expr e;
+                for (int k = 0; k < M; ++k) {
+                    addTerm(e, dName(k, i), 1);
+                    addTerm(e, pName(k, i), -1);
+                }
+                writeConstraint(out, cid, e, ">=", need_drop);
+                if (stats != nullptr) ++stats->required_movement_cuts_added;
+            }
+            if (y_ub[i] < instance.initial[i]) {
+                const int need_pick = instance.initial[i] - y_ub[i];
+                required_pick_min += need_pick;
+                Expr e;
+                for (int k = 0; k < M; ++k) {
+                    addTerm(e, pName(k, i), 1);
+                    addTerm(e, dName(k, i), -1);
+                }
+                writeConstraint(out, cid, e, ">=", need_pick);
+                if (stats != nullptr) ++stats->required_movement_cuts_added;
+            }
+        }
+    }
+    if (stats != nullptr) {
+        stats->required_movement_lb = required_pick_min + required_drop_min;
+        stats->global_handling_capacity_lb = cunit * (required_pick_min + required_drop_min);
+    }
+    if (strengthened && options.global_handling_capacity_cuts) {
+        if (stats != nullptr) stats->enabled_families.push_back("global_handling_capacity");
+        Expr handling;
+        for (int k = 0; k < M; ++k) {
+            for (int i = 1; i <= V; ++i) {
+                addTerm(handling, pName(k, i), cunit);
+                addTerm(handling, dName(k, i), cunit);
+            }
+        }
+        const double total_duration_capacity =
+            static_cast<double>(M) * instance.total_time_limit;
+        writeConstraint(out, cid, handling, "<=", total_duration_capacity);
+        if (stats != nullptr) ++stats->global_handling_capacity_cuts_added;
+        if (stats != nullptr && stats->global_handling_capacity_lb > total_duration_capacity + 1e-9) {
+            Expr impossible;
+            writeConstraint(out, cid, impossible, "<=", -1);
+            ++stats->global_handling_capacity_cuts_added;
+        }
+    }
     for (int i = 1; i <= V; ++i) {
         for (int j = i + 1; j <= V; ++j) {
             Expr h1; addTerm(h1, hName(i, j), 1); addTerm(h1, rName(i), -1); addTerm(h1, rName(j), 1);
             writeConstraint(out, cid, h1, ">=", 0);
             Expr h2; addTerm(h2, hName(i, j), 1); addTerm(h2, rName(i), 1); addTerm(h2, rName(j), -1);
             writeConstraint(out, cid, h2, ">=", 0);
+        }
+    }
+    if (strengthened && cutoff != nullptr && cutoff->enabled &&
+        options.gini_spread_cuts && cutoff->gamma_U >= -1e-12 && V > 1) {
+        if (stats != nullptr) stats->enabled_families.push_back("gini_pairwise_spread");
+        for (int i = 1; i <= V; ++i) {
+            for (int j = i + 1; j <= V; ++j) {
+                Expr e;
+                addTerm(e, hName(i, j), static_cast<double>(V - 1));
+                for (int t = 1; t <= V; ++t) {
+                    addTerm(e, rName(t), -static_cast<double>(V) * cutoff->gamma_U);
+                }
+                writeConstraint(out, cid, e, "<=", 0);
+                if (stats != nullptr) ++stats->gini_spread_cuts_added;
+            }
         }
     }
 
@@ -731,7 +892,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
     }
     const bool objective_bound_mode =
         oracle_mode == "objective-bound" || oracle_mode == "both";
-    const bool add_objective_cutoff = !objective_bound_mode;
+    const bool add_objective_cutoff =
+        !objective_bound_mode || options.interval_oracle_objective_cutoff_row;
     result.interval_oracle_model_type = objective_bound_mode
         ? "original_compact_objective_bound"
         : "original_compact_cutoff_feasibility";
@@ -802,18 +964,49 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         cutoff.add_objective_cutoff = add_objective_cutoff;
         cutoff.incumbent_ub = options.interval_exact_cutoff_UB;
         cutoff.epsilon = options.interval_exact_cutoff_epsilon;
-        if (objective_bound_mode) {
+        if (objective_bound_mode && !add_objective_cutoff) {
             result.notes.push_back(
                 "interval oracle objective-bound mode omits the objective cutoff row; finite CPLEX dual bounds are valid original fixed-interval lower bounds");
+        } else if (objective_bound_mode && add_objective_cutoff) {
+            result.notes.push_back(
+                "interval oracle objective-bound mode includes the incumbent objective cutoff row; finite CPLEX dual bounds are merged as valid no-improver lower bounds with the cutoff disjunction");
         } else if (!options.interval_oracle_objective_cutoff_row) {
             result.notes.push_back(
                 "interval_oracle_objective_cutoff_row=false requested; exact cutoff oracle keeps the original cutoff row because it is required for a valid interval certificate");
         }
-        writeCompactLp(instance, options, lp_path, true, &cutoff);
+        CompactOracleStrengtheningStats strengthening_stats;
+        writeCompactLp(instance, options, lp_path, true, &cutoff,
+                       &strengthening_stats);
         if (options.interval_oracle_penalty_domain_tightening ||
             options.interval_oracle_low_gini_tightening) {
             result.notes.push_back(
                 "interval oracle added safe penalty-budget e_i upper bounds derived from G>=gamma_L and G+lambda*P<=UB-epsilon");
+        }
+        result.gini_spread_cuts_added = strengthening_stats.gini_spread_cuts_added;
+        result.required_movement_lb = strengthening_stats.required_movement_lb;
+        result.required_movement_cuts_added = strengthening_stats.required_movement_cuts_added;
+        result.global_handling_capacity_lb = strengthening_stats.global_handling_capacity_lb;
+        result.global_handling_capacity_cuts_added = strengthening_stats.global_handling_capacity_cuts_added;
+        result.transfer_subset_capacity_cuts_enabled = options.transfer_subset_capacity_cuts;
+        result.transfer_subset_capacity_cuts_added =
+            strengthening_stats.transfer_subset_capacity_cuts_added;
+        result.low_gini_ratio_band_domains_tightened =
+            strengthening_stats.low_gini_ratio_band_domains_tightened;
+        if (!strengthening_stats.enabled_families.empty()) {
+            std::ostringstream families;
+            for (std::size_t idx = 0; idx < strengthening_stats.enabled_families.size(); ++idx) {
+                if (idx > 0) families << "|";
+                families << strengthening_stats.enabled_families[idx];
+            }
+            result.oracle_strengthening_families_enabled = families.str();
+        } else {
+            result.oracle_strengthening_families_enabled = "none";
+        }
+        if (strengthening_stats.domain_width_before > 0) {
+            result.total_domain_width_before = strengthening_stats.domain_width_before;
+            result.total_domain_width_after = strengthening_stats.domain_width_after;
+            result.domains_tightened_count =
+                static_cast<int>(strengthening_stats.penalty_domains_tightened);
         }
 
         double time_limit = options.interval_exact_cutoff_time_limit;
@@ -828,6 +1021,13 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         cmd << "set threads " << std::max(1, options.threads) << "\n";
         cmd << "set timelimit " << time_limit << "\n";
         cmd << "set mip tolerances mipgap 0\n";
+        if (options.interval_oracle_profile == "infeasibility-focus") {
+            cmd << "set emphasis mip 1\n";
+        } else if (options.interval_oracle_profile == "bound-focus") {
+            cmd << "set emphasis mip 3\n";
+        } else if (options.interval_oracle_profile == "integrality-focus") {
+            cmd << "set emphasis mip 4\n";
+        }
         cmd << "read " << lp_path.string() << "\n";
         cmd << "optimize\n";
         cmd << "write " << sol_path.string() << "\n";
@@ -935,7 +1135,7 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             result.interval_exact_cutoff_timeout = statusIsTimeLimited(cplex_status);
             double merge_bound = 0.0;
             if (best_bound_is_valid) {
-                merge_bound = objective_bound_mode
+                merge_bound = (objective_bound_mode && !add_objective_cutoff)
                     ? best_bound
                     : std::min(best_bound, cutoff_value);
             }
@@ -952,6 +1152,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 ? "CPLEX did not close the interval, but returned a valid original fixed-interval objective lower bound; interval remains unresolved unless the bound reaches incumbent cutoff."
                 : "CPLEX did not prove fixed-interval cutoff infeasibility or produce a valid mergeable bound; interval remains unresolved. CPLEX status: " + cplex_status;
         }
+        result.oracle_strengthening_lb_improvement =
+            std::max(0.0, result.lower_bound - options.interval_exact_cutoff_gamma_L);
         result.notes.push_back("CPLEX solution status: " + cplex_status);
         result.notes.push_back("CPLEX process return code: " + std::to_string(rc));
         result.notes.push_back("LP file: " + lp_path.string());

@@ -1254,6 +1254,22 @@ std::string resultToJson(const SolveResult& input) {
         << result.interval_oracle_gap_to_cutoff << ",\n";
     out << "  \"interval_oracle_can_merge_bound\": "
         << (result.interval_oracle_can_merge_bound ? "true" : "false") << ",\n";
+    out << "  \"gini_spread_cuts_added\": "
+        << result.gini_spread_cuts_added << ",\n";
+    out << "  \"required_movement_lb\": "
+        << result.required_movement_lb << ",\n";
+    out << "  \"required_movement_cuts_added\": "
+        << result.required_movement_cuts_added << ",\n";
+    out << "  \"global_handling_capacity_lb\": "
+        << result.global_handling_capacity_lb << ",\n";
+    out << "  \"global_handling_capacity_cuts_added\": "
+        << result.global_handling_capacity_cuts_added << ",\n";
+    out << "  \"low_gini_ratio_band_domains_tightened\": "
+        << result.low_gini_ratio_band_domains_tightened << ",\n";
+    out << "  \"oracle_strengthening_families_enabled\": \""
+        << jsonEscape(result.oracle_strengthening_families_enabled) << "\",\n";
+    out << "  \"oracle_strengthening_lb_improvement\": "
+        << result.oracle_strengthening_lb_improvement << ",\n";
     out << "  \"oracle_bound_merged_leaves\": "
         << result.oracle_bound_merged_leaves << ",\n";
     out << "  \"oracle_bound_closed_leaves\": "
