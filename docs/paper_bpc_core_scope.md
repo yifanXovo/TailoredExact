@@ -1,7 +1,22 @@
 # Paper-Core GF-RL-BPC Scope
 
-The paper-facing exact algorithm is GF-RL-BPC, implemented by
-`--method gcap-frontier --algorithm-preset paper-bpc-core`.
+The route-load BPC line is retained for theory and future implementation work,
+but it is no longer the empirical paper-facing mainline.  The active
+paper-facing exact line is:
+
+`--method gcap-frontier --algorithm-preset paper-gf-compact-bc`.
+
+That preset uses the Gini-frontier ledger plus compact fixed-interval
+branch-and-cut/cutoff certificates solved by CPLEX.  It disables route-load BPC
+fallback by default and reports compact evidence through `compact_interval_bc_*`
+and `compact_bc_*` fields.
+
+The BPC preset remains:
+
+`--method gcap-frontier --algorithm-preset paper-gf-bpc-core`.
+
+It must not be mixed with compact-BC or plain CPLEX benchmark evidence in paper
+result tables.
 
 ## V20 Certificate-Round Status
 

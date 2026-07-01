@@ -1,5 +1,10 @@
 # Exact Interval Cutoff MIP Oracle
 
+In `paper-gf-compact-bc`, this code path is the compact interval
+branch-and-cut/cutoff subsolver.  Legacy `interval_oracle_*` fields remain for
+compatibility, but paper-facing summaries should use `compact_interval_bc_*`
+and `compact_bc_*` fields.
+
 The interval cutoff oracle is exposed as:
 
 ```powershell
@@ -29,4 +34,3 @@ the interval remains unresolved.
 
 The oracle is interval-local evidence. It is never a full original-problem
 certificate unless a separate ledger merge proves exact full-frontier coverage.
-

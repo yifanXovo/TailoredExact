@@ -1,10 +1,17 @@
-# Paper BPC Algorithm Report
+# Paper Exact Algorithm Report
 
-Date: 2026-06-14.
+Date: 2026-07-02.
 
 ## Scope
 
-The recommended exact algorithm is now a tailored exact portfolio for the original EBRP objective
+The recommended empirical paper-facing exact algorithm is now the
+Gini-frontier compact branch-and-cut/certification framework:
+
+```text
+--method gcap-frontier --algorithm-preset paper-gf-compact-bc
+```
+
+It targets the original EBRP objective
 
 ```text
 minimize G + lambda * P
@@ -12,24 +19,32 @@ minimize G + lambda * P
 
 where `G = H/(V*S)`, `H=sum_{i<j}|r_i-r_j|`, `S=sum_i r_i`, and `P=sum_i w_i |r_i-1|`. Current experiments use `lambda=0.15`, `T=3600`, pickup time `60`, and drop time `60`.
 
-The portfolio has two exact modules:
+The mainline uses:
 
-- `original_bpc`: pure full Gini-frontier route-load BPC (`gcap-frontier`).
-- `original_compact`: strengthened compact branch-and-cut fallback.
+- native HGA-TGBC as upper-bound-only incumbent generation;
+- the full Gini-frontier ledger;
+- valid interval relaxation screening;
+- compact fixed-Gini-interval MIP/branch-and-cut certificates solved by CPLEX;
+- full-frontier certificate aggregation.
 
-Plain CPLEX with `--plain-baseline` is the benchmark. Diagnostics such as pricing, master, fixed-cap, cuts, and restricted pools are not original-problem certificates unless wrapped by a complete exact certificate.
+Route-load BPC remains available as `paper-gf-bpc-core` for theory and future
+repair work, but it is not enabled by default in `paper-gf-compact-bc` and must
+not be mixed into compact-BC certificate tables.  Plain CPLEX with
+`--plain-baseline` or `--method cplex` is benchmark evidence only.
 
 ## Algorithm
 
-`gcap-frontier` covers at least `G in [0, incumbent_objective]`. For each interval `[gamma_L,gamma_U]`, it solves or bounds a route-load branch-price tree:
+`gcap-frontier` covers at least `G in [0, incumbent_objective]`. For each interval `[gamma_L,gamma_U]`, the compact-BC preset first applies valid relaxation bounds and then solves/bounds a compact fixed-interval model:
 
 - Gini cap: `G <= gamma_U iff H <= V * gamma_U * S`.
 - Interval floor: `G >= gamma_L`, hence objective lower bound `>= gamma_L`.
-- Columns are complete elementary vehicle routes with integer pickup/drop operations.
-- Node closure requires exact route-load pricing unless the interval is bound-fathomed by a valid lower bound.
-- Ryan-Foster/co-route branching, subset-row cuts, operation-time conservation, final-inventory pickup/route/Gini bounds, complete `V<=12` route-mask duration/load relaxations, and station-operation cuts are active where valid.
+- Interval-tight McCormick rows for `G*bit` products use `[gamma_L,gamma_U]`.
+- Compact valid inequalities tighten final inventory domains, visit/inventory
+  links, support duration, Gini spread, and no-improver objective estimates.
+- CPLEX best bounds are mergeable only when JSON fields prove the model is an
+  original fixed-interval compact model with gamma rows and valid bound scope.
 
-Pure-BPC incumbent generation includes greedy construction, randomized greedy starts, exact load-decoded local search with relocate/resize/swap moves, and a restricted verified route-column pool incumbent master. These mechanisms provide upper bounds only.
+All incumbent-generation mechanisms provide upper bounds only.
 
 The station-operation relaxation rows are documented in `docs/station_operation_cut_proof.md`:
 

@@ -1,13 +1,15 @@
-# 06 Interval Oracle Auxiliary Role
+# 06 Compact Interval BC Role
 
-The compact interval oracle belongs to the auxiliary exact portfolio, not the
-main paper GF-BPC core.
+The legacy compact interval oracle is now reframed as the compact interval
+branch-and-cut/cutoff subsolver for `paper-gf-compact-bc`.
 
-It may:
+In the compact-BC preset it may:
 
 - prove fixed-interval infeasibility;
 - provide valid original fixed-interval lower bounds;
 - help diagnose tight leaves;
-- certify exact-portfolio rows when all merge and coverage audits pass.
+- certify full rows when all merge and coverage audits pass.
 
-It must not be counted as `paper-gf-bpc-core` certificate evidence.
+It must still not be counted as `paper-gf-bpc-core` certificate evidence.
+Reports must separate `paper-gf-compact-bc`, BPC diagnostics, auxiliary
+portfolio rows, and plain CPLEX benchmark rows.
