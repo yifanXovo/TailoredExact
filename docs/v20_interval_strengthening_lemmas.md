@@ -43,10 +43,21 @@ The oracle adds the corresponding aggregate pickup/drop rows with
 
 ### Lemma D: Global Handling Capacity
 
-The required net movement from Lemma C gives a lower bound on handling time.
-The oracle records this value and adds the valid aggregate capacity row
-`sum cunit*(pickup+drop) <= M*T` with
-`--global-handling-capacity-cuts true`.
+The current verifier and compact model use the route-duration convention
+
+`travel_k + cunit * sum_i p[k,i] <= T`,
+
+where `cunit = pickup_time + drop_time`.  Drop quantities are not charged
+separately in this convention; the handling cost for moving one bike is
+accounted when the bike is picked up.  Therefore the only certificate-safe
+aggregate handling row under this convention is
+
+`cunit * sum_{k,i} p[k,i] <= M*T`.
+
+The previous row `cunit * sum_{k,i} (p[k,i] + d[k,i]) <= M*T` is not
+paper-core safe and must not be used as lower-bound evidence unless the entire
+verifier/model duration convention is changed.  The implementation records
+`global_handling_capacity_lb = cunit * required_pick_min`.
 
 ### Lemma E: Transfer Compatibility Singleton Cuts
 
@@ -60,8 +71,10 @@ every original route and is logged under transfer-subset capacity cuts.
 The compact oracle enforces `p[k,i] + d[k,i] >= z[k,i]`, matching the original
 route convention that a visited station has nonzero operation.
 
-## Not Yet Implemented
+## Not Yet Implemented Or Diagnostic
 
-Full Hall-style multi-station transfer subset cuts and stronger low-Gini
-centering bands remain future work.  They require additional proof and
-separation logic before they can be used as certificate evidence.
+Full Hall-style multi-station transfer subset cuts remain future work.  The
+old direct form `sum drops in D <= sum compatible outside pickups` is not used
+as paper-core evidence because it can be invalid when transfers occur inside
+`D`.  Only conservative singleton/pair compatibility rows with documented
+empty-start and one-mode-per-station assumptions may be enabled by default.

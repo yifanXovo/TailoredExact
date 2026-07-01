@@ -18,12 +18,40 @@ g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluat
 g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluator.cpp src/Result.cpp src/Bounds.cpp src/ColumnPool.cpp src/TailoredExact.cpp src/Pricing.cpp src/Cuts.cpp src/Branching.cpp src/Master.cpp src/ColumnGeneration.cpp src/CplexBaseline.cpp src/hga_tgbc/HgaTgbcGreedy.cpp src/HgaTgbcRunner.cpp src/Logger.cpp src/compare_main.cpp -o build/ExactEBRPCompare.exe
 ```
 
+## Main Exact Line
+
+The current paper-facing exact line is the Gini-frontier compact
+branch-and-cut/certification framework:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier `
+  --algorithm-preset paper-gf-compact-bc `
+  --paper-run-sealed true `
+  --input <instance> --lambda 0.15 --T 3600 `
+  --time-limit <budget> --threads <N> --mip-threads <N> `
+  --compact-bc-cut-profile balanced `
+  --compact-bc-root-cut-rounds 0 `
+  --out results\gf_compact_bc_round\raw\<row>.json
+```
+
+`paper-gf-compact-bc` uses native HGA-TGBC as an upper-bound-only incumbent
+source, the full Gini-frontier ledger, valid interval relaxation bounds, and
+compact fixed-Gini-interval CPLEX MIP/branch-and-cut certificates.  It disables
+archive scanning, known-UB injection, external incumbents, focus-only
+certificates, route-mask enumeration as certificate evidence, and route-load BPC
+fallback by default.
+
+Plain CPLEX rows remain benchmark-only comparisons.  The legacy
+`interval_oracle_*` fields are retained for compatibility, but the paper-facing
+subsolver is reported through `compact_interval_bc_*` and `compact_bc_*` fields.
+
 ## BPC Example
 
 ### Realigned Paper Core
 
-The current paper-core preset is unified across V/M and does not use complete
-route-mask enumeration or compact interval-oracle certificates:
+`paper-gf-bpc-core` is retained for route-load BPC research.  It is unified
+across V/M and does not use complete route-mask enumeration or compact interval
+oracle certificates:
 
 ```powershell
 build\ExactEBRP.exe --method gcap-frontier `
@@ -41,9 +69,8 @@ BPC-core certificates.
 
 Current BPC repair status: long leaf diagnostics in
 `results/bpc_core_repair_round/` did not close a nontrivial BPC leaf under exact
-pricing.  The preset remains the clean paper-core definition, but empirical
-claims should state that the present BPC implementation is bottlenecked by
-pricing state growth and inactive RMP cuts.
+pricing.  It should not be described as the empirical mainline while
+`paper-gf-compact-bc` is the active exact framework.
 
 ```powershell
 build\ExactEBRP.exe --method gcap-frontier --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --time-limit 30 --frontier-intervals 3 --frontier-retry-passes 1 --frontier-final-closure true --frontier-final-nodes 31 --gcap-pricing-columns 4 --column-dominance true --column-dominance-mode exact --projection-bound true --penalty-domain-tightening true --out results\optimization_update\raw\smoke_gcap_frontier_full.json

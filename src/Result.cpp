@@ -117,6 +117,10 @@ ObjectiveParts computeObjectiveParts(const Instance& instance,
 std::string inferMethodScope(const SolveResult& result) {
     const std::string method = lowerCopy(result.method);
     const std::string text = auditText(result);
+    if (method == "gcap-frontier" &&
+        result.algorithm_preset == "paper-gf-compact-bc") {
+        return "original_compact";
+    }
     if (method == "gcap-frontier" || containsText(method, "full route-load bpc") ||
         containsText(method, "route-load bpc")) {
         return "original_bpc";
@@ -171,6 +175,10 @@ bool inferSolvesOriginalObjective(const SolveResult& result) {
 
 bool inferIsBpc(const SolveResult& result) {
     const std::string method = lowerCopy(result.method);
+    if (method == "gcap-frontier" &&
+        result.algorithm_preset == "paper-gf-compact-bc") {
+        return false;
+    }
     return method == "gcap-frontier" || containsText(method, "full route-load bpc");
 }
 
@@ -178,6 +186,11 @@ std::string inferCertificateType(const SolveResult& result) {
     const std::string method = lowerCopy(result.method);
     const std::string text = auditText(result);
     if (method == "gcap-frontier") {
+        if (result.algorithm_preset == "paper-gf-compact-bc") {
+            return result.status == "optimal"
+                ? "full_gini_frontier_compact_interval_bc"
+                : "incomplete_gini_frontier_compact_interval_bc";
+        }
         return result.status == "optimal"
             ? "full_gini_frontier_route_load_bpc"
             : "incomplete_gini_frontier_route_load_bpc";
@@ -282,6 +295,19 @@ bool inferCertifiedOriginalProblem(const SolveResult& result) {
     if (result.gap > 1e-7) return false;
     if (!nearlyEqual(result.lower_bound, result.upper_bound)) return false;
     if (!nearlyEqual(result.objective, result.upper_bound)) return false;
+    if (result.algorithm_preset == "paper-gf-compact-bc") {
+        if (result.method != "gcap-frontier") return false;
+        if (result.unresolved_intervals != 0 || result.invalid_bound_intervals != 0) return false;
+        if (result.open_nodes != 0) return false;
+        if (!result.frontier_covers_all_improving_gini_values) return false;
+        if (result.frontier_range_certificate_scope != "original_full_improving_range") return false;
+        if (!result.full_certificate_all_intervals_accounted) return false;
+        if (!result.full_certificate_rejection_reason.empty() &&
+            result.full_certificate_rejection_reason != "none") return false;
+        if (result.certificate_uses_bpc_tree || result.intervals_closed_by_bpc_count > 0) return false;
+        if (result.route_mask_all_subset_enumeration_certifying) return false;
+        if (!result.compact_bc_certificate_valid) return false;
+    }
     if (inferIsBpc(result)) {
         if (result.unresolved_intervals != 0 || result.invalid_bound_intervals != 0) return false;
         if (result.open_nodes != 0) return false;
@@ -1348,8 +1374,92 @@ std::string resultToJson(const SolveResult& input) {
         << result.interval_oracle_gap_to_cutoff << ",\n";
     out << "  \"interval_oracle_can_merge_bound\": "
         << (result.interval_oracle_can_merge_bound ? "true" : "false") << ",\n";
+    out << "  \"compact_interval_bc_enabled\": "
+        << (result.compact_interval_bc_enabled ? "true" : "false") << ",\n";
+    out << "  \"compact_interval_bc_model_type\": \""
+        << jsonEscape(result.compact_interval_bc_model_type) << "\",\n";
+    out << "  \"compact_interval_bc_solver\": \""
+        << jsonEscape(result.compact_interval_bc_solver) << "\",\n";
+    out << "  \"compact_interval_bc_threads\": "
+        << result.compact_interval_bc_threads << ",\n";
+    out << "  \"compact_interval_bc_cut_families_enabled\": \""
+        << jsonEscape(result.compact_interval_bc_cut_families_enabled) << "\",\n";
+    out << "  \"compact_interval_bc_bound_valid\": "
+        << (result.compact_interval_bc_bound_valid ? "true" : "false") << ",\n";
+    out << "  \"compact_interval_bc_bound_scope\": \""
+        << jsonEscape(result.compact_interval_bc_bound_scope) << "\",\n";
+    out << "  \"compact_interval_bc_closed_leaves\": "
+        << result.compact_interval_bc_closed_leaves << ",\n";
+    out << "  \"compact_interval_bc_timed_out_leaves\": "
+        << result.compact_interval_bc_timed_out_leaves << ",\n";
+    out << "  \"compact_interval_bc_rejection_reason\": \""
+        << jsonEscape(result.compact_interval_bc_rejection_reason) << "\",\n";
+    out << "  \"compact_bc_cut_profile\": \""
+        << jsonEscape(result.compact_bc_cut_profile) << "\",\n";
+    out << "  \"compact_bc_enabled_cut_families\": \""
+        << jsonEscape(result.compact_bc_enabled_cut_families) << "\",\n";
+    out << "  \"compact_bc_cuts_added_by_family\": \""
+        << jsonEscape(result.compact_bc_cuts_added_by_family) << "\",\n";
+    out << "  \"compact_bc_domains_tightened_by_family\": \""
+        << jsonEscape(result.compact_bc_domains_tightened_by_family) << "\",\n";
+    out << "  \"compact_bc_root_cut_rounds\": "
+        << result.compact_bc_root_cut_rounds << ",\n";
+    out << "  \"compact_bc_solver_threads\": "
+        << result.compact_bc_solver_threads << ",\n";
+    out << "  \"compact_bc_solver_status\": \""
+        << jsonEscape(result.compact_bc_solver_status) << "\",\n";
+    out << "  \"compact_bc_best_bound\": "
+        << result.compact_bc_best_bound << ",\n";
+    out << "  \"compact_bc_incumbent\": "
+        << result.compact_bc_incumbent << ",\n";
+    out << "  \"compact_bc_nodes\": "
+        << result.compact_bc_nodes << ",\n";
+    out << "  \"compact_bc_time_seconds\": "
+        << result.compact_bc_time_seconds << ",\n";
+    out << "  \"compact_bc_bound_valid\": "
+        << (result.compact_bc_bound_valid ? "true" : "false") << ",\n";
+    out << "  \"compact_bc_bound_scope\": \""
+        << jsonEscape(result.compact_bc_bound_scope) << "\",\n";
+    out << "  \"compact_bc_closed_leaf_count\": "
+        << result.compact_bc_closed_leaf_count << ",\n";
+    out << "  \"compact_bc_unresolved_leaf_count\": "
+        << result.compact_bc_unresolved_leaf_count << ",\n";
+    out << "  \"compact_bc_rejection_reason\": \""
+        << jsonEscape(result.compact_bc_rejection_reason) << "\",\n";
+    out << "  \"certificate_uses_compact_interval_bc\": "
+        << (result.certificate_uses_compact_interval_bc ? "true" : "false") << ",\n";
+    out << "  \"compact_bc_certificate_valid\": "
+        << (result.compact_bc_certificate_valid ? "true" : "false") << ",\n";
     out << "  \"gini_spread_cuts_added\": "
         << result.gini_spread_cuts_added << ",\n";
+    out << "  \"compact_bc_direct_gini_cap_rows_added\": "
+        << result.compact_bc_direct_gini_cap_rows_added << ",\n";
+    out << "  \"compact_bc_direct_gini_floor_rows_added\": "
+        << result.compact_bc_direct_gini_floor_rows_added << ",\n";
+    out << "  \"compact_bc_tight_mccormick_rows_added\": "
+        << result.compact_bc_tight_mccormick_rows_added << ",\n";
+    out << "  \"compact_bc_inventory_conservation_rows_added\": "
+        << result.compact_bc_inventory_conservation_rows_added << ",\n";
+    out << "  \"compact_bc_movement_reachability_domains_tightened\": "
+        << result.compact_bc_movement_reachability_domains_tightened << ",\n";
+    out << "  \"compact_bc_visit_inventory_linking_rows_added\": "
+        << result.compact_bc_visit_inventory_linking_rows_added << ",\n";
+    out << "  \"compact_bc_objective_estimator_cutoff_rows_added\": "
+        << result.compact_bc_objective_estimator_cutoff_rows_added << ",\n";
+    out << "  \"compact_bc_penalty_lb\": "
+        << result.compact_bc_penalty_lb << ",\n";
+    out << "  \"compact_bc_penalty_lb_rows_added\": "
+        << result.compact_bc_penalty_lb_rows_added << ",\n";
+    out << "  \"compact_bc_low_gini_centering_rows_added\": "
+        << result.compact_bc_low_gini_centering_rows_added << ",\n";
+    out << "  \"compact_bc_support_duration_pair_cuts_added\": "
+        << result.compact_bc_support_duration_pair_cuts_added << ",\n";
+    out << "  \"compact_bc_support_duration_triple_cuts_added\": "
+        << result.compact_bc_support_duration_triple_cuts_added << ",\n";
+    out << "  \"compact_bc_pairwise_transfer_compatibility_cuts_added\": "
+        << result.compact_bc_pairwise_transfer_compatibility_cuts_added << ",\n";
+    out << "  \"compact_bc_receiver_source_cover_cuts_added\": "
+        << result.compact_bc_receiver_source_cover_cuts_added << ",\n";
     out << "  \"required_movement_lb\": "
         << result.required_movement_lb << ",\n";
     out << "  \"required_movement_cuts_added\": "

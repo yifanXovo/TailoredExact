@@ -12,8 +12,12 @@ The realigned paper theory is split into:
 
 The central distinction is:
 
+- `paper-gf-compact-bc`: active empirical paper-facing framework, using the
+  Gini-frontier ledger plus compact fixed-interval branch-and-cut/cutoff
+  certificates.
 - `paper-gf-bpc-core`: unified GF + relaxation + exact BPC closure.  No
-  route-mask enumeration or interval-oracle certificate evidence.
-- `paper-exact-portfolio`: auxiliary exact methods, including compact interval
-  oracle, with separate labelling and audit.
+  route-mask enumeration or interval-oracle certificate evidence.  Retained for
+  BPC theory and future implementation work.
+- `paper-exact-portfolio`: auxiliary exact methods with separate labelling and
+  audit.
 - `CPLEX benchmark`: comparison only.

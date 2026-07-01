@@ -274,6 +274,38 @@ def audit_one(source: str, result: Dict[str, Any]) -> Dict[str, Any]:
         if certified and as_int(result.get("intervals_closed_by_bpc_count", 0)) > 0:
             if not as_bool(result.get("pricing_closure_certified_exact", False)):
                 failures.append("paper_gf_bpc_core_bpc_without_exact_pricing")
+    if preset == "paper-gf-compact-bc":
+        if as_bool(result.get("route_mask_all_subset_enumeration_certifying", False)):
+            failures.append("paper_gf_compact_bc_route_mask_enumeration_certifying")
+        if as_bool(result.get("certificate_uses_bpc_tree", False)):
+            failures.append("paper_gf_compact_bc_certificate_uses_bpc_tree")
+        if as_int(result.get("intervals_closed_by_bpc_count", 0)) > 0:
+            failures.append("paper_gf_compact_bc_closed_by_bpc")
+        if certified:
+            if method != "gcap-frontier":
+                failures.append("paper_gf_compact_bc_certified_wrong_method")
+            if not as_bool(result.get("frontier_covers_all_improving_gini_values", False)):
+                failures.append("paper_gf_compact_bc_without_full_improving_gini_coverage")
+            if result.get("frontier_range_certificate_scope") != "original_full_improving_range":
+                failures.append("paper_gf_compact_bc_wrong_frontier_scope")
+            if result.get("full_certificate_rejection_reason", "none") not in {"", "none", None}:
+                failures.append("paper_gf_compact_bc_has_rejection_reason")
+            if not as_bool(result.get("full_certificate_all_intervals_accounted", False)):
+                failures.append("paper_gf_compact_bc_not_all_intervals_accounted")
+            if not as_bool(result.get("compact_bc_certificate_valid", False)):
+                failures.append("paper_gf_compact_bc_certificate_not_marked_valid")
+            uses_compact = as_bool(result.get("certificate_uses_compact_interval_bc", False))
+            if uses_compact:
+                if not as_bool(result.get("compact_interval_bc_enabled", False)):
+                    failures.append("paper_gf_compact_bc_used_but_not_enabled")
+                if result.get("compact_interval_bc_bound_scope") != "original_fixed_interval":
+                    failures.append("paper_gf_compact_bc_wrong_bound_scope")
+                if not as_bool(result.get("compact_interval_bc_bound_valid", False)):
+                    failures.append("paper_gf_compact_bc_invalid_compact_bound")
+                if as_int(result.get("compact_bc_closed_leaf_count", 0)) <= 0 and as_int(
+                    result.get("compact_interval_bc_closed_leaves", 0)
+                ) <= 0:
+                    failures.append("paper_gf_compact_bc_no_closed_compact_leaves")
     if preset in {"paper-exact-portfolio", "paper-exact-v20-certificate"}:
         if certified and as_bool(result.get("certificate_uses_interval_oracle", False)):
             if not as_bool(result.get("exact_portfolio_certificate_valid", False)):

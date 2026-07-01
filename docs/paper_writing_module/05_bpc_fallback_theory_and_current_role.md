@@ -3,6 +3,10 @@
 The BPC fallback is theoretically valid when every node lower bound used for
 certification has exact pricing closure.
 
+As of the compact-BC realignment, BPC is retained as a research/future-work
+module and is disabled by default in `paper-gf-compact-bc`.  It should not be
+reported as the empirical source of compact-BC certificates.
+
 Current empirical role:
 
 - BPC diagnostics start and pricing is called.
