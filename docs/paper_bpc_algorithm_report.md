@@ -78,6 +78,36 @@ Implemented exactness-preserving BPC optimizations:
 
 CLI controls:
 
+## BPC Core Repair Round: 2026-07-01
+
+The realigned core preset remains:
+
+```text
+--method gcap-frontier --algorithm-preset paper-gf-bpc-core --paper-run-sealed true
+```
+
+This preset is unified across V/M and keeps interval-oracle certificates out of
+paper-core evidence.  The BPC repair round added explicit pricing option
+plumbing, route-skeleton/loading-DP mode selection, safe-plus pricing dominance
+controls, completion-bound controls, leaf-data auditing, and long BPC leaf
+validation.
+
+Outcome: no nontrivial BPC leaf closed under the tested 300s, 1200s, and 3600s
+budgets.  The failure mode is now quantified rather than speculative:
+
+- V12 M2 3600s: 4 pricing calls, 42,252 columns, best reduced cost
+  `-0.00327041731624`, exact pricing not closed.
+- V12 M1 3600s: 1 pricing call, 26,006 columns, best reduced cost
+  `-0.0088398618421`, exact pricing not closed.
+- moderate_seed3301 3600s: 1 pricing call, 166,161 columns, positive best
+  reduced cost `0.00469307183545`, but exact pricing enumeration did not close.
+
+The route-skeleton/loading-DP and completion-bound changes reduced some 300s
+state counts modestly, but did not change the certificate outcome.  BPC cuts
+did not improve RMP bounds in the tested leaves because no cut family added
+rows before the pricing bottleneck dominated.  Therefore, current paper claims
+should keep BPC as a valid but not yet empirically effective exact fallback.
+
 ```text
 --column-dominance true|false
 --column-dominance-mode exact|pareto|off
@@ -1238,3 +1268,8 @@ currently certified core set.  In this round only `tight_T_seed3101` closed unde
 `paper-gf-bpc-core`; V12 M1/M2 and the other V20 rows remain noncertified under
 the tested core budgets.  Direct BPC leaf validation starts pricing but does not
 close leaves, so the active bottleneck is exact pricing/CG closure.
+# BPC Pricing Optimization Round Update
+
+The realigned paper-core preset remains `paper-gf-bpc-core`: native HGA-TGBC UB, Gini frontier, valid non-enumerative relaxation screening, and exact BPC fallback for unresolved intervals. Compact interval-oracle evidence and CPLEX benchmark bounds remain outside the core certificate.
+
+This round added detailed pricing-state counters and safe dominance controls. V12 BPC leaves now show large exact-safe dominance pruning, but BPC did not close a nontrivial leaf. The current empirical bottleneck is exact pricing/decomposition, not UB quality.

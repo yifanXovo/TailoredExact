@@ -39,6 +39,12 @@ unresolved intervals.  Interval-oracle and compact CPLEX evidence belong to the
 separate exact-portfolio or benchmark categories and must not be reported as
 BPC-core certificates.
 
+Current BPC repair status: long leaf diagnostics in
+`results/bpc_core_repair_round/` did not close a nontrivial BPC leaf under exact
+pricing.  The preset remains the clean paper-core definition, but empirical
+claims should state that the present BPC implementation is bottlenecked by
+pricing state growth and inactive RMP cuts.
+
 ```powershell
 build\ExactEBRP.exe --method gcap-frontier --input testdata\examples\gcap_smoke_V4_M1.txt --lambda 0.15 --T 3600 --time-limit 30 --frontier-intervals 3 --frontier-retry-passes 1 --frontier-final-closure true --frontier-final-nodes 31 --gcap-pricing-columns 4 --column-dominance true --column-dominance-mode exact --projection-bound true --penalty-domain-tightening true --out results\optimization_update\raw\smoke_gcap_frontier_full.json
 ```
@@ -596,3 +602,16 @@ build\ExactEBRP.exe --method gcap-frontier `
 instance, `moderate_seed3301`, with objective `0.0491525526647`. V12 M1 and V12
 M2 remain certified. Plain CPLEX rows in the same result directory are
 benchmark-only and are not used as paper-core lower-bound evidence.
+# Paper-Core BPC Status
+
+The current unified paper-core preset is:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier `
+  --algorithm-preset paper-gf-bpc-core `
+  --paper-run-sealed true `
+  --input <instance> --lambda 0.15 --T 3600 `
+  --time-limit <seconds> --out <raw.json>
+```
+
+This preset disables archive scanning, known/external incumbents, compact interval-oracle certificates, CPLEX benchmark evidence, and route-mask all-subset enumeration as certificate evidence. BPC fallback is valid only with exact pricing closure. The latest BPC optimization round shows pricing-state explosion remains the main implementation bottleneck.

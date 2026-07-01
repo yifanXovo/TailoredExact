@@ -1,0 +1,3 @@
+file,instance_name,benchmark_scale,status,objective,lower_bound,upper_bound,gap,runtime_seconds,certified_original_problem,unresolved_intervals,open_nodes,intervals_closed_by_relaxation_count,intervals_closed_by_bpc_count,pricing_calls,pricing_time_seconds,bound_time_seconds,plateau_reason,process_return_code,solver_finalization_reached,wrapper_synthesized_final_json
+v50_m3_average_core_30.json,regen_V50_M3_average.txt,V50,process_exit_without_solver_json,0,0,0,1,124.031,False,1,0,0,0,0,0,0,large_v_solver_finalization_timeout,124,False,True
+v100_m5_average_core_30.json,regen_V100_M5_average.txt,V100,process_exit_without_solver_json,0,0,0,1,20.5,False,1,0,0,0,0,0,0,large_v_access_violation_before_finalization,-1073741819,False,True

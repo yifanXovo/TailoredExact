@@ -215,6 +215,54 @@ void accumulateBpcPricingStats(ResultLike& result,
         priced.label_dominance_compacted_entries;
     result.operation_dp_dominance_pruned_states +=
         priced.operation_dp_dominance_pruned_states;
+    result.pricing_label_dominance_mode = priced.pricing_dominance_mode;
+    result.pricing_label_dominance_exact_safe =
+        result.pricing_label_dominance_exact_safe &&
+        priced.pricing_dominance_exact_safe;
+    result.pricing_completion_bound_mode = priced.pricing_completion_bound;
+    result.pricing_completion_bound_audit =
+        result.pricing_completion_bound_audit ||
+        priced.pricing_completion_bound_audit;
+    result.pricing_decomposition = priced.pricing_decomposition;
+    result.pricing_load_dp_cache_enabled =
+        result.pricing_load_dp_cache_enabled || priced.pricing_load_dp_cache;
+    result.pricing_route_skeleton_mode = priced.pricing_route_skeleton_mode;
+    result.pricing_route_skeleton_cache_enabled =
+        result.pricing_route_skeleton_cache_enabled ||
+        priced.pricing_route_skeleton_cache;
+    result.pricing_load_dp_dominance_enabled =
+        result.pricing_load_dp_dominance_enabled &&
+        priced.pricing_load_dp_dominance;
+    result.pricing_operation_dp_dominance_enabled =
+        result.pricing_operation_dp_dominance_enabled &&
+        priced.pricing_operation_dp_dominance;
+    result.pricing_labels_generated += priced.pricing_labels_generated;
+    result.pricing_labels_kept += priced.pricing_labels_kept;
+    result.pricing_labels_expanded += priced.pricing_labels_expanded;
+    result.pricing_labels_pruned_duration +=
+        priced.pricing_labels_pruned_duration;
+    result.pricing_labels_pruned_load += priced.pricing_labels_pruned_load;
+    result.pricing_labels_pruned_station +=
+        priced.pricing_labels_pruned_station;
+    result.pricing_labels_pruned_support +=
+        priced.pricing_labels_pruned_support;
+    result.pricing_labels_pruned_reduced_cost +=
+        priced.pricing_labels_pruned_reduced_cost;
+    result.pricing_labels_pruned_dominance +=
+        priced.pricing_labels_pruned_dominance;
+    result.pricing_labels_duplicate_states +=
+        priced.pricing_labels_duplicate_states;
+    if (!priced.pricing_state_stop_reason.empty()) {
+        result.pricing_state_stop_reason = priced.pricing_state_stop_reason;
+    }
+    if (!priced.pricing_depth_profile_json.empty() &&
+        priced.pricing_depth_profile_json != "[]") {
+        result.pricing_depth_profile_json = priced.pricing_depth_profile_json;
+    }
+    if (!priced.operation_dp_profile_json.empty() &&
+        priced.operation_dp_profile_json != "[]") {
+        result.operation_dp_profile_json = priced.operation_dp_profile_json;
+    }
 }
 
 struct LpSolve {
@@ -2012,6 +2060,70 @@ void addStats(GiniCapTreeResult& total, const GiniCapColumnGenerationResult& nod
         node.label_dominance_compacted_entries;
     total.operation_dp_dominance_pruned_states +=
         node.operation_dp_dominance_pruned_states;
+    if (!node.pricing_label_dominance_mode.empty()) {
+        total.pricing_label_dominance_mode =
+            node.pricing_label_dominance_mode;
+    }
+    total.pricing_label_dominance_exact_safe =
+        total.pricing_label_dominance_exact_safe &&
+        node.pricing_label_dominance_exact_safe;
+    if (!node.pricing_completion_bound_mode.empty()) {
+        total.pricing_completion_bound_mode =
+            node.pricing_completion_bound_mode;
+    }
+    total.pricing_completion_bound_audit =
+        total.pricing_completion_bound_audit ||
+        node.pricing_completion_bound_audit;
+    if (!node.pricing_decomposition.empty()) {
+        total.pricing_decomposition = node.pricing_decomposition;
+    }
+    total.pricing_load_dp_cache_enabled =
+        total.pricing_load_dp_cache_enabled ||
+        node.pricing_load_dp_cache_enabled;
+    if (!node.pricing_route_skeleton_mode.empty()) {
+        total.pricing_route_skeleton_mode =
+            node.pricing_route_skeleton_mode;
+    }
+    total.pricing_route_skeleton_cache_enabled =
+        total.pricing_route_skeleton_cache_enabled ||
+        node.pricing_route_skeleton_cache_enabled;
+    total.pricing_operation_dp_dominance_enabled =
+        total.pricing_operation_dp_dominance_enabled &&
+        node.pricing_operation_dp_dominance_enabled;
+    total.pricing_load_dp_dominance_enabled =
+        total.pricing_load_dp_dominance_enabled &&
+        node.pricing_load_dp_dominance_enabled;
+    total.pricing_labels_generated += node.pricing_labels_generated;
+    total.pricing_labels_kept += node.pricing_labels_kept;
+    total.pricing_labels_expanded += node.pricing_labels_expanded;
+    total.pricing_labels_pruned_duration +=
+        node.pricing_labels_pruned_duration;
+    total.pricing_labels_pruned_load += node.pricing_labels_pruned_load;
+    total.pricing_labels_pruned_station +=
+        node.pricing_labels_pruned_station;
+    total.pricing_labels_pruned_support +=
+        node.pricing_labels_pruned_support;
+    total.pricing_labels_pruned_reduced_cost +=
+        node.pricing_labels_pruned_reduced_cost;
+    total.pricing_labels_pruned_dominance +=
+        node.pricing_labels_pruned_dominance;
+    total.pricing_labels_duplicate_states +=
+        node.pricing_labels_duplicate_states;
+    if (!node.pricing_state_stop_reason.empty()) {
+        total.pricing_state_stop_reason = node.pricing_state_stop_reason;
+    }
+    if (!node.pricing_depth_profile_json.empty() &&
+        node.pricing_depth_profile_json != "[]") {
+        total.pricing_depth_profile_json = node.pricing_depth_profile_json;
+    }
+    if (!node.operation_dp_profile_json.empty() &&
+        node.operation_dp_profile_json != "[]") {
+        total.operation_dp_profile_json = node.operation_dp_profile_json;
+    }
+    total.pricing_trace_json_objects.insert(
+        total.pricing_trace_json_objects.end(),
+        node.pricing_trace_json_objects.begin(),
+        node.pricing_trace_json_objects.end());
     total.support_duration_max_subset_size =
         std::max(total.support_duration_max_subset_size,
                  node.support_duration_max_subset_size);
@@ -2584,6 +2696,57 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                       << trace_priced.label_dominance_compacted_entries
                       << ", \"operation_dp_dominance_pruned_states\": "
                       << trace_priced.operation_dp_dominance_pruned_states
+                      << ", \"pricing_label_dominance_mode\": \""
+                      << jsonEscapeCg(trace_priced.pricing_dominance_mode)
+                      << "\""
+                      << ", \"pricing_label_dominance_exact_safe\": "
+                      << (trace_priced.pricing_dominance_exact_safe ? "true" : "false")
+                      << ", \"pricing_completion_bound_mode\": \""
+                      << jsonEscapeCg(trace_priced.pricing_completion_bound)
+                      << "\""
+                      << ", \"pricing_decomposition\": \""
+                      << jsonEscapeCg(trace_priced.pricing_decomposition)
+                      << "\""
+                      << ", \"pricing_load_dp_cache_enabled\": "
+                      << (trace_priced.pricing_load_dp_cache ? "true" : "false")
+                      << ", \"pricing_route_skeleton_mode\": \""
+                      << jsonEscapeCg(trace_priced.pricing_route_skeleton_mode)
+                      << "\""
+                      << ", \"pricing_route_skeleton_cache_enabled\": "
+                      << (trace_priced.pricing_route_skeleton_cache ? "true" : "false")
+                      << ", \"pricing_operation_dp_dominance_enabled\": "
+                      << (trace_priced.pricing_operation_dp_dominance ? "true" : "false")
+                      << ", \"pricing_load_dp_dominance_enabled\": "
+                      << (trace_priced.pricing_load_dp_dominance ? "true" : "false")
+                      << ", \"pricing_labels_generated\": "
+                      << trace_priced.pricing_labels_generated
+                      << ", \"pricing_labels_kept\": "
+                      << trace_priced.pricing_labels_kept
+                      << ", \"pricing_labels_expanded\": "
+                      << trace_priced.pricing_labels_expanded
+                      << ", \"pricing_labels_pruned_duration\": "
+                      << trace_priced.pricing_labels_pruned_duration
+                      << ", \"pricing_labels_pruned_load\": "
+                      << trace_priced.pricing_labels_pruned_load
+                      << ", \"pricing_labels_pruned_station\": "
+                      << trace_priced.pricing_labels_pruned_station
+                      << ", \"pricing_labels_pruned_support\": "
+                      << trace_priced.pricing_labels_pruned_support
+                      << ", \"pricing_labels_pruned_reduced_cost\": "
+                      << trace_priced.pricing_labels_pruned_reduced_cost
+                      << ", \"pricing_labels_pruned_dominance\": "
+                      << trace_priced.pricing_labels_pruned_dominance
+                      << ", \"pricing_labels_duplicate_states\": "
+                      << trace_priced.pricing_labels_duplicate_states
+                      << ", \"pricing_state_stop_reason\": \""
+                      << jsonEscapeCg(trace_priced.pricing_state_stop_reason)
+                      << "\""
+                      << ", \"pricing_depth_profile\": "
+                      << (trace_priced.pricing_depth_profile_json.empty()
+                              ? "[]" : trace_priced.pricing_depth_profile_json)
+                      << ", \"operation_dp_profile\": "
+                      << (trace_priced.operation_dp_profile_json.empty()
+                              ? "[]" : trace_priced.operation_dp_profile_json)
                       << ", \"best_reduced_cost\": "
                       << jsonNumberCg(trace_priced.best_reduced_cost)
                       << ", \"exact_completed\": "
