@@ -110,14 +110,24 @@ public:
         }
         result_.pricing_completion_bound_audit =
             options_.pricing_completion_bound_audit;
+        result_.pricing_decomposition = lowerCopy(options_.pricing_decomposition);
+        if (result_.pricing_decomposition.empty()) {
+            result_.pricing_decomposition = "auto";
+        }
         result_.pricing_load_dp_cache = options_.pricing_load_dp_cache;
         result_.pricing_route_skeleton_mode =
             lowerCopy(options_.pricing_route_skeleton_mode);
         if (result_.pricing_route_skeleton_mode.empty()) {
             result_.pricing_route_skeleton_mode = "standard";
         }
-        result_.pricing_operation_dp_dominance =
+        result_.pricing_route_skeleton_cache =
+            options_.pricing_route_skeleton_cache;
+        result_.pricing_load_dp_dominance =
+            options_.pricing_load_dp_dominance &&
             options_.pricing_operation_dp_dominance;
+        result_.pricing_operation_dp_dominance =
+            options_.pricing_operation_dp_dominance &&
+            options_.pricing_load_dp_dominance;
         std::string engine = lowerCopy(options_.pricing_engine);
         if (engine.empty() || engine == "auto") {
             engine = instance_.V > 30 ? "hybrid" : "exact-label";
@@ -387,7 +397,7 @@ private:
         std::string mode = lowerCopy(options_.pricing_dominance_mode);
         if (mode.empty() || mode == "true" || mode == "on") return "safe";
         if (mode == "none" || mode == "false") return "off";
-        if (mode == "safe" || mode == "off" ||
+        if (mode == "safe" || mode == "safe-plus" || mode == "off" ||
             mode == "aggressive-diagnostic") {
             return mode;
         }
@@ -395,7 +405,8 @@ private:
     }
 
     bool safePricingDominanceEnabled() const {
-        return result_.pricing_dominance_mode == "safe";
+        return result_.pricing_dominance_mode == "safe" ||
+            result_.pricing_dominance_mode == "safe-plus";
     }
 
     void finalizeProfiles(const std::string& stop_reason) {
@@ -527,6 +538,18 @@ private:
     }
 
     bool useLabelSettingPricing() const {
+        const std::string decomposition = lowerCopy(options_.pricing_decomposition);
+        if (decomposition == "route-skeleton-load-dp" ||
+            decomposition == "route-skeleton" ||
+            decomposition == "skeleton-dp") {
+            return false;
+        }
+        if (decomposition == "monolithic") {
+            if (instance_.V <= 0 || instance_.V > 16) return false;
+            if (vehicle_ < 0 || vehicle_ >= instance_.M) return false;
+            if (instance_.Q[vehicle_] > 80) return false;
+            return maxPickupBudget() <= 120;
+        }
         if (instance_.V <= 0 || instance_.V > 16) return false;
         if (vehicle_ < 0 || vehicle_ >= instance_.M) return false;
         if (instance_.Q[vehicle_] > 80) return false;
@@ -785,6 +808,75 @@ private:
             }
         }
 
+        return lb;
+    }
+
+    double routeSkeletonCompletionLowerBound(int mask,
+                                             int last,
+                                             double travel_without_return) const {
+        const int allowed = allowedCompletionMask() | mask;
+        double lb = duals_.constant;
+        if (duals_.travel_cost >= 0.0) {
+            const double route_travel_lb = last > 0
+                ? travel_without_return + instance_.dist[last][0]
+                : 0.0;
+            lb += duals_.travel_cost * route_travel_lb;
+        } else {
+            lb += duals_.travel_cost * instance_.total_time_limit;
+        }
+
+        for (int station = 1; station <= instance_.V; ++station) {
+            const int bit = 1 << (station - 1);
+            if ((allowed & bit) == 0) continue;
+            const bool already_visited = (mask & bit) != 0;
+            const double visit = stationVisitCost(station);
+            lb += already_visited ? visit : std::min(0.0, visit);
+
+            const double pickup_coeff =
+                duals_.pickup_cost + stationOperationCost(station);
+            if (pickup_coeff < 0.0) {
+                const int max_pick = std::min(instance_.initial[station],
+                                              instance_.Q[vehicle_]);
+                lb += pickup_coeff * static_cast<double>(std::max(0, max_pick));
+            }
+            const double drop_coeff = -stationOperationCost(station);
+            if (drop_coeff < 0.0) {
+                const int max_drop = std::min(
+                    instance_.capacity[station] - instance_.initial[station],
+                    instance_.Q[vehicle_]);
+                lb += drop_coeff * static_cast<double>(std::max(0, max_drop));
+            }
+        }
+
+        for (const auto& entry : duals_.pair_cost) {
+            const int first_bit = 1 << (entry.first.first - 1);
+            const int second_bit = 1 << (entry.first.second - 1);
+            const bool both_visited =
+                (mask & first_bit) != 0 && (mask & second_bit) != 0;
+            if (both_visited) {
+                lb += entry.second;
+                continue;
+            }
+            const bool possible =
+                ((allowed & first_bit) != 0) && ((allowed & second_bit) != 0);
+            if (possible && entry.second < 0.0) lb += entry.second;
+        }
+
+        for (const auto& entry : duals_.subset_row_cost) {
+            int visited = 0;
+            int possible = 0;
+            for (int station : entry.first) {
+                if (station < 1 || station > instance_.V) continue;
+                const int bit = 1 << (station - 1);
+                if (mask & bit) ++visited;
+                if (allowed & bit) ++possible;
+            }
+            if (entry.second >= 0.0) {
+                lb += static_cast<double>(visited / 2) * entry.second;
+            } else {
+                lb += static_cast<double>(possible / 2) * entry.second;
+            }
+        }
         return lb;
     }
 
@@ -1242,6 +1334,13 @@ private:
             recordPruned(depth, "duration");
             return;
         }
+        if (options_.use_completion_lb_pruning && result_.has_column &&
+            routeSkeletonCompletionLowerBound(mask, last, travel_without_return) >=
+                result_.best_reduced_cost - 1e-12) {
+            ++result_.completion_lb_pruned_labels;
+            recordPruned(depth, "reduced_cost");
+            return;
+        }
 
         const double route_travel = travel_without_return + instance_.dist[last][0];
         if (nonnegative_costs_ && result_.has_column &&
@@ -1491,12 +1590,19 @@ PricingResult runScalableNgDssrPricing(const Instance& instance,
             options.use_completion_lb_pruning ? "basic" : "none";
     }
     result.pricing_completion_bound_audit = options.pricing_completion_bound_audit;
+    result.pricing_decomposition = lowerCopy(options.pricing_decomposition);
+    if (result.pricing_decomposition.empty()) result.pricing_decomposition = "auto";
     result.pricing_load_dp_cache = options.pricing_load_dp_cache;
     result.pricing_route_skeleton_mode = lowerCopy(options.pricing_route_skeleton_mode);
     if (result.pricing_route_skeleton_mode.empty()) {
         result.pricing_route_skeleton_mode = "standard";
     }
+    result.pricing_route_skeleton_cache = options.pricing_route_skeleton_cache;
     result.pricing_operation_dp_dominance =
+        options.pricing_operation_dp_dominance &&
+        options.pricing_load_dp_dominance;
+    result.pricing_load_dp_dominance =
+        options.pricing_load_dp_dominance &&
         options.pricing_operation_dp_dominance;
     result.pricing_state_stop_reason = "ng_dssr_or_hybrid_profile";
     const auto pricing_start = Clock::now();

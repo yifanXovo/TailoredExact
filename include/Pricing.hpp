@@ -39,8 +39,11 @@ struct PricingOptions {
     std::string pricing_dominance_mode = "safe";
     std::string pricing_completion_bound = "basic";
     bool pricing_completion_bound_audit = false;
+    std::string pricing_decomposition = "auto";
     bool pricing_load_dp_cache = false;
     std::string pricing_route_skeleton_mode = "standard";
+    bool pricing_route_skeleton_cache = false;
+    bool pricing_load_dp_dominance = true;
     bool pricing_operation_dp_dominance = true;
     std::string pricing_engine = "exact-label";
     int ng_size = 12;
@@ -99,8 +102,11 @@ struct PricingResult {
     bool pricing_dominance_exact_safe = true;
     std::string pricing_completion_bound = "basic";
     bool pricing_completion_bound_audit = false;
+    std::string pricing_decomposition = "auto";
     bool pricing_load_dp_cache = false;
     std::string pricing_route_skeleton_mode = "standard";
+    bool pricing_route_skeleton_cache = false;
+    bool pricing_load_dp_dominance = true;
     bool pricing_operation_dp_dominance = true;
     long long pricing_labels_generated = 0;
     long long pricing_labels_kept = 0;

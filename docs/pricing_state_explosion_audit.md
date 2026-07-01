@@ -1,19 +1,33 @@
 # Pricing State Explosion Audit
 
-Round: `results/bpc_pricing_optimization_round`.
+Initial 300s BPC leaf diagnostics show that exact pricing is dominated by route
+skeleton expansion and, for some V12 leaves, operation DP expansion.
 
-The BPC pricing audit targets V12 M1/M2, moderate V20, and high-imbalance V20 leaves from existing frontier ledgers. The key finding is that exact pricing now exposes enough counters to identify the bottleneck, but it still does not close a nontrivial leaf in the tested budgets.
+Observed 300s baselines:
 
-Observed behavior:
+| target | pricing calls | pricing time | columns | best reduced cost | exact pricing closed |
+|---|---:|---:|---:|---:|---|
+| V12 M2 interval 7 | 2 | 298.286s | 42,248 | -0.00752183449778 | false |
+| V12 M1 interval 12 | 1 | 299.397s | 26,006 | -0.00470697892369 | false |
+| moderate_seed3301 interval 2 | 1 | 273.300s | 166,161 | 0.00469307183545 | false |
+| high_imbalance_seed3202 interval 9 | 1 | 291.098s | 94,059 | 0.0700591864494 | false |
+| V12 M2 forced diagnostic | 1 | 298.719s | 43,254 | 0.0103294366883 | false |
 
-- V12 M2 leaf 7: safe dominance pruned about 193M labels in a 30s diagnostic, but exact pricing still returned a negative reduced cost and did not close.
-- V12 M1 leaf 12: safe dominance pruned about 222M labels, again without exact closure.
-- V20 moderate/high-imbalance leaves: route-label dominance is much weaker or zero; operation-DP pruning is active on some leaves, but enumeration remains the limiting factor.
-- BPC cut separation did not change the RMP enough to close a leaf in this round.
+Depth profiles show tens to hundreds of millions of route states expanded in a
+single pricing call.  Dominance pruning is ineffective in the decomposed route
+skeleton path because skeleton states are not yet stored in a Pareto bucket the
+way monolithic route-load labels are.  The current `safe-plus` mode is therefore
+certificate-safe but not yet strong enough to close these leaves.
 
-Interpretation:
+Preliminary bottleneck classification:
 
-- Pricing is dominated by exact route-label enumeration on V12 and by large V20 route/operation state spaces on V20.
-- Negative reduced-cost columns are still found late on some leaves, so the current exact pricer cannot prove closure within the tested budgets.
-- The next mathematical step is a deeper route-skeleton/loading-DP decomposition with stronger exact completion bounds, not more frontier scheduling.
+- V12 M1/M2: pricing still finds negative reduced-cost columns near the time
+  limit, so column generation has not converged.
+- moderate_seed3301 and high_imbalance_seed3202: best reduced cost is positive,
+  but the exact pricer has not exhausted all skeletons, so closure is not
+  certified.
+- BPC cuts remain inactive in the 300s rows (`cuts_added=0`), so the RMP bound
+  is not strengthened enough before expensive pricing.
 
+The 1200s and 3600s diagnostics determine whether this is a runtime issue or a
+structural pricing/RMP issue.

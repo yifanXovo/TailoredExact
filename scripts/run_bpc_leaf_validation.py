@@ -52,6 +52,22 @@ def main() -> int:
     parser.add_argument("--time-limit", default="120")
     parser.add_argument("--max-leaves", type=int, default=2)
     parser.add_argument("--max-nodes", default="63")
+    parser.add_argument("--variant-name", default="baseline")
+    parser.add_argument("--pricing-decomposition", default="")
+    parser.add_argument("--pricing-dominance-mode", default="")
+    parser.add_argument("--pricing-completion-bound", default="")
+    parser.add_argument("--pricing-completion-bound-audit", default="")
+    parser.add_argument("--pricing-load-dp-cache", default="")
+    parser.add_argument("--pricing-load-dp-dominance", default="")
+    parser.add_argument("--pricing-route-skeleton-cache", default="")
+    parser.add_argument("--pricing-route-skeleton-mode", default="")
+    parser.add_argument("--pricing-operation-dp-dominance", default="")
+    parser.add_argument("--bpc-seed-columns", default="")
+    parser.add_argument("--bpc-seed-column-max", default="")
+    parser.add_argument("--bpc-cut-family", default="")
+    parser.add_argument("--bpc-cut-separation-rounds", default="")
+    parser.add_argument("--extra-arg", action="append", default=[],
+                        help="Additional solver option, repeated as --extra-arg=--flag --extra-arg=value")
     args = parser.parse_args()
 
     exe = Path(args.exe)
@@ -65,6 +81,7 @@ def main() -> int:
     op_path = out_dir / "operation_dp_profile.csv"
 
     summary_fields = [
+        "variant_name", "time_limit_seconds",
         "interval_id", "gamma_L", "gamma_U", "return_code", "status",
         "lower_bound", "upper_bound", "gap", "nodes", "open_nodes",
         "pricing_calls", "pricing_time_seconds", "master_time_seconds",
@@ -74,6 +91,7 @@ def main() -> int:
         "exact_pricing_closed", "stop_reason", "result_file",
     ]
     pricing_fields = [
+        "variant_name", "time_limit_seconds",
         "interval_id", "pricing_calls", "pricing_time_seconds",
         "pricing_engine", "final_pricing_engine", "labels_generated",
         "labels_kept", "labels_expanded", "labels_pruned_duration",
@@ -83,15 +101,20 @@ def main() -> int:
         "best_reduced_cost", "remaining_negative_rc", "closure_status",
     ]
     state_fields = [
+        "variant_name", "time_limit_seconds",
         "interval_id", "call_index", "vehicle", "event", "pricing_engine_used",
         "time_seconds", "exact_completed", "early_negative_stop",
         "generated_columns", "returned_negative_columns", "route_states",
         "operation_states", "pricing_state_stop_reason",
         "pricing_label_dominance_mode", "pricing_label_dominance_exact_safe",
-        "pricing_completion_bound_mode", "pricing_route_skeleton_mode",
+        "pricing_completion_bound_mode", "pricing_decomposition",
+        "pricing_route_skeleton_mode", "pricing_load_dp_cache_enabled",
+        "pricing_route_skeleton_cache_enabled",
+        "pricing_load_dp_dominance_enabled",
         "pricing_operation_dp_dominance_enabled", "best_reduced_cost",
     ]
     depth_fields = [
+        "variant_name", "time_limit_seconds",
         "interval_id", "call_index", "vehicle", "depth",
         "labels_generated", "labels_kept", "labels_expanded",
         "pruned_duration", "pruned_load", "pruned_station",
@@ -101,6 +124,7 @@ def main() -> int:
         "negative_columns_found", "best_reduced_cost",
     ]
     op_fields = [
+        "variant_name", "time_limit_seconds",
         "interval_id", "call_index", "vehicle", "depth",
         "operation_states_generated", "operation_states_pruned",
     ]
@@ -134,7 +158,11 @@ def main() -> int:
             "pricing_label_dominance_mode": result.get("pricing_label_dominance_mode", ""),
             "pricing_label_dominance_exact_safe": result.get("pricing_label_dominance_exact_safe", ""),
             "pricing_completion_bound_mode": result.get("pricing_completion_bound_mode", ""),
+            "pricing_decomposition": result.get("pricing_decomposition", ""),
             "pricing_route_skeleton_mode": result.get("pricing_route_skeleton_mode", ""),
+            "pricing_load_dp_cache_enabled": result.get("pricing_load_dp_cache_enabled", ""),
+            "pricing_route_skeleton_cache_enabled": result.get("pricing_route_skeleton_cache_enabled", ""),
+            "pricing_load_dp_dominance_enabled": result.get("pricing_load_dp_dominance_enabled", ""),
             "pricing_operation_dp_dominance_enabled": result.get("pricing_operation_dp_dominance_enabled", ""),
             "best_reduced_cost": result.get("pricing_best_reduced_cost_any", ""),
             "pricing_depth_profile": result.get("pricing_depth_profile", []),
@@ -177,6 +205,27 @@ def main() -> int:
                 "--out", str(result_file),
                 "--log", str(log_file),
             ]
+            optional_args = [
+                ("--pricing-decomposition", args.pricing_decomposition),
+                ("--pricing-dominance-mode", args.pricing_dominance_mode),
+                ("--pricing-completion-bound", args.pricing_completion_bound),
+                ("--pricing-completion-bound-audit", args.pricing_completion_bound_audit),
+                ("--pricing-load-dp-cache", args.pricing_load_dp_cache),
+                ("--pricing-load-dp-dominance", args.pricing_load_dp_dominance),
+                ("--pricing-route-skeleton-cache", args.pricing_route_skeleton_cache),
+                ("--pricing-route-skeleton-mode", args.pricing_route_skeleton_mode),
+                ("--pricing-operation-dp-dominance", args.pricing_operation_dp_dominance),
+                ("--bpc-seed-columns", args.bpc_seed_columns),
+                ("--bpc-seed-column-max", args.bpc_seed_column_max),
+                ("--bpc-cut-family", args.bpc_cut_family),
+                ("--bpc-cut-separation-rounds", args.bpc_cut_separation_rounds),
+            ]
+            for opt_name, opt_value in optional_args:
+                if opt_value != "":
+                    cmd.extend([opt_name, opt_value])
+            cmd.extend(args.extra_arg)
+            cmd_path = out_dir / f"leaf_{interval_id}.cmd.txt"
+            cmd_path.write_text(" ".join(cmd), encoding="utf-8")
             completed = subprocess.run(cmd, text=True, capture_output=True)
             if completed.stdout or completed.stderr:
                 log_file.write_text(completed.stdout + completed.stderr, encoding="utf-8")
@@ -187,6 +236,8 @@ def main() -> int:
             if not trace_calls:
                 trace_calls = aggregate_result_call(result)
             summary_writer.writerow({
+                "variant_name": args.variant_name,
+                "time_limit_seconds": args.time_limit,
                 "interval_id": interval_id,
                 "gamma_L": lo,
                 "gamma_U": hi,
@@ -212,6 +263,8 @@ def main() -> int:
                 "result_file": str(result_file),
             })
             pricing_writer.writerow({
+                "variant_name": args.variant_name,
+                "time_limit_seconds": args.time_limit,
                 "interval_id": interval_id,
                 "pricing_calls": result.get("pricing_calls", ""),
                 "pricing_time_seconds": result.get("pricing_time_seconds", ""),
@@ -235,6 +288,8 @@ def main() -> int:
             })
             for call_index, call in enumerate(trace_calls):
                 state_writer.writerow({
+                    "variant_name": args.variant_name,
+                    "time_limit_seconds": args.time_limit,
                     "interval_id": interval_id,
                     "call_index": call_index,
                     "vehicle": call.get("vehicle", ""),
@@ -251,7 +306,11 @@ def main() -> int:
                     "pricing_label_dominance_mode": call.get("pricing_label_dominance_mode", ""),
                     "pricing_label_dominance_exact_safe": call.get("pricing_label_dominance_exact_safe", ""),
                     "pricing_completion_bound_mode": call.get("pricing_completion_bound_mode", ""),
+                    "pricing_decomposition": call.get("pricing_decomposition", ""),
                     "pricing_route_skeleton_mode": call.get("pricing_route_skeleton_mode", ""),
+                    "pricing_load_dp_cache_enabled": call.get("pricing_load_dp_cache_enabled", ""),
+                    "pricing_route_skeleton_cache_enabled": call.get("pricing_route_skeleton_cache_enabled", ""),
+                    "pricing_load_dp_dominance_enabled": call.get("pricing_load_dp_dominance_enabled", ""),
                     "pricing_operation_dp_dominance_enabled": call.get("pricing_operation_dp_dominance_enabled", ""),
                     "best_reduced_cost": call.get("best_reduced_cost", ""),
                 })
@@ -260,6 +319,8 @@ def main() -> int:
                         continue
                     row = {name: depth.get(name, "") for name in depth_fields}
                     row.update({
+                        "variant_name": args.variant_name,
+                        "time_limit_seconds": args.time_limit,
                         "interval_id": interval_id,
                         "call_index": call_index,
                         "vehicle": call.get("vehicle", ""),
@@ -269,6 +330,8 @@ def main() -> int:
                     if not isinstance(depth, dict):
                         continue
                     op_writer.writerow({
+                        "variant_name": args.variant_name,
+                        "time_limit_seconds": args.time_limit,
                         "interval_id": interval_id,
                         "call_index": call_index,
                         "vehicle": call.get("vehicle", ""),

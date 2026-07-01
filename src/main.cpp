@@ -258,8 +258,12 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
             opt.gcap_warmstart_level = std::max(opt.gcap_warmstart_level, 2);
             opt.gcap_pricing_columns = std::max(opt.gcap_pricing_columns, 8);
             opt.pricing_completion_lb_pruning = true;
-            opt.pricing_dominance_mode = "safe";
-            opt.pricing_completion_bound = "basic";
+            opt.pricing_decomposition = "route-skeleton-load-dp";
+            opt.pricing_dominance_mode = "safe-plus";
+            opt.pricing_completion_bound = "all";
+            opt.pricing_load_dp_cache = true;
+            opt.pricing_route_skeleton_cache = true;
+            opt.pricing_load_dp_dominance = true;
             opt.pricing_operation_dp_dominance = true;
             opt.bpc_seed_columns = "incumbent";
             opt.bpc_seed_column_max = std::max(opt.bpc_seed_column_max, 1000);
@@ -461,20 +465,57 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--support-duration-pruning") opt.support_duration_pruning = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--support-duration-max-subset-size") opt.support_duration_max_subset_size = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--pricing-completion-lb-pruning") opt.pricing_completion_lb_pruning = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--pricing-dominance-mode") opt.pricing_dominance_mode = requireValue(i, argc, argv);
+        else if (arg == "--pricing-dominance-mode") {
+            opt.pricing_dominance_mode = requireValue(i, argc, argv);
+            opt.pricing_dominance_mode_explicit = true;
+        }
         else if (arg == "--pricing-completion-bound") {
             opt.pricing_completion_bound = requireValue(i, argc, argv);
+            opt.pricing_completion_bound_explicit = true;
             const std::string mode = lowerAscii(opt.pricing_completion_bound);
             opt.pricing_completion_lb_pruning = mode != "none" && mode != "off";
         }
         else if (arg == "--pricing-completion-bound-audit") opt.pricing_completion_bound_audit = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--pricing-load-dp-cache") opt.pricing_load_dp_cache = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--pricing-route-skeleton-mode") opt.pricing_route_skeleton_mode = requireValue(i, argc, argv);
-        else if (arg == "--pricing-operation-dp-dominance") opt.pricing_operation_dp_dominance = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--bpc-seed-columns") opt.bpc_seed_columns = requireValue(i, argc, argv);
-        else if (arg == "--bpc-seed-column-max") opt.bpc_seed_column_max = std::stoi(requireValue(i, argc, argv));
-        else if (arg == "--bpc-cut-family") opt.bpc_cut_family = requireValue(i, argc, argv);
-        else if (arg == "--bpc-cut-separation-rounds") opt.bpc_cut_separation_rounds = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--pricing-decomposition") {
+            opt.pricing_decomposition = requireValue(i, argc, argv);
+            opt.pricing_decomposition_explicit = true;
+        }
+        else if (arg == "--pricing-load-dp-cache") {
+            opt.pricing_load_dp_cache = parseBoolValue(requireValue(i, argc, argv));
+            opt.pricing_load_dp_cache_explicit = true;
+        }
+        else if (arg == "--pricing-route-skeleton-mode") {
+            opt.pricing_route_skeleton_mode = requireValue(i, argc, argv);
+            opt.pricing_route_skeleton_mode_explicit = true;
+        }
+        else if (arg == "--pricing-route-skeleton-cache") {
+            opt.pricing_route_skeleton_cache = parseBoolValue(requireValue(i, argc, argv));
+            opt.pricing_route_skeleton_cache_explicit = true;
+        }
+        else if (arg == "--pricing-load-dp-dominance") {
+            opt.pricing_load_dp_dominance = parseBoolValue(requireValue(i, argc, argv));
+            opt.pricing_load_dp_dominance_explicit = true;
+        }
+        else if (arg == "--pricing-operation-dp-dominance") {
+            opt.pricing_operation_dp_dominance = parseBoolValue(requireValue(i, argc, argv));
+            opt.pricing_operation_dp_dominance_explicit = true;
+        }
+        else if (arg == "--bpc-seed-columns") {
+            opt.bpc_seed_columns = requireValue(i, argc, argv);
+            opt.bpc_seed_columns_explicit = true;
+        }
+        else if (arg == "--bpc-seed-column-max") {
+            opt.bpc_seed_column_max = std::stoi(requireValue(i, argc, argv));
+            opt.bpc_seed_column_max_explicit = true;
+        }
+        else if (arg == "--bpc-cut-family") {
+            opt.bpc_cut_family = requireValue(i, argc, argv);
+            opt.bpc_cut_family_explicit = true;
+        }
+        else if (arg == "--bpc-cut-separation-rounds") {
+            opt.bpc_cut_separation_rounds = std::stoi(requireValue(i, argc, argv));
+            opt.bpc_cut_separation_rounds_explicit = true;
+        }
         else if (arg == "--core-relaxation-budget-fraction") opt.core_relaxation_budget_fraction = std::stod(requireValue(i, argc, argv));
         else if (arg == "--core-bpc-reserve-fraction") opt.core_bpc_reserve_fraction = std::stod(requireValue(i, argc, argv));
         else if (arg == "--core-bpc-min-seconds") opt.core_bpc_min_seconds = std::stod(requireValue(i, argc, argv));
@@ -977,16 +1018,89 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.cg_stabilization_switch_to_true_after < 0) {
         opt.cg_stabilization_switch_to_true_after = 0;
     }
+    const std::string explicit_pricing_dominance_mode =
+        opt.pricing_dominance_mode;
+    const std::string explicit_pricing_completion_bound =
+        opt.pricing_completion_bound;
+    const std::string explicit_pricing_decomposition =
+        opt.pricing_decomposition;
+    const bool explicit_pricing_load_dp_cache = opt.pricing_load_dp_cache;
+    const std::string explicit_pricing_route_skeleton_mode =
+        opt.pricing_route_skeleton_mode;
+    const bool explicit_pricing_route_skeleton_cache =
+        opt.pricing_route_skeleton_cache;
+    const bool explicit_pricing_load_dp_dominance =
+        opt.pricing_load_dp_dominance;
+    const bool explicit_pricing_operation_dp_dominance =
+        opt.pricing_operation_dp_dominance;
+    const std::string explicit_bpc_seed_columns = opt.bpc_seed_columns;
+    const int explicit_bpc_seed_column_max = opt.bpc_seed_column_max;
+    const std::string explicit_bpc_cut_family = opt.bpc_cut_family;
+    const int explicit_bpc_cut_separation_rounds =
+        opt.bpc_cut_separation_rounds;
     applyAlgorithmPreset(opt);
+    if (opt.pricing_dominance_mode_explicit) {
+        opt.pricing_dominance_mode = explicit_pricing_dominance_mode;
+    }
+    if (opt.pricing_completion_bound_explicit) {
+        opt.pricing_completion_bound = explicit_pricing_completion_bound;
+        const std::string mode = lowerAscii(opt.pricing_completion_bound);
+        opt.pricing_completion_lb_pruning = mode != "none" && mode != "off";
+    }
+    if (opt.pricing_decomposition_explicit) {
+        opt.pricing_decomposition = explicit_pricing_decomposition;
+    }
+    if (opt.pricing_load_dp_cache_explicit) {
+        opt.pricing_load_dp_cache = explicit_pricing_load_dp_cache;
+    }
+    if (opt.pricing_route_skeleton_mode_explicit) {
+        opt.pricing_route_skeleton_mode = explicit_pricing_route_skeleton_mode;
+    }
+    if (opt.pricing_route_skeleton_cache_explicit) {
+        opt.pricing_route_skeleton_cache = explicit_pricing_route_skeleton_cache;
+    }
+    if (opt.pricing_load_dp_dominance_explicit) {
+        opt.pricing_load_dp_dominance = explicit_pricing_load_dp_dominance;
+    }
+    if (opt.pricing_operation_dp_dominance_explicit) {
+        opt.pricing_operation_dp_dominance =
+            explicit_pricing_operation_dp_dominance;
+    }
+    if (opt.bpc_seed_columns_explicit) {
+        opt.bpc_seed_columns = explicit_bpc_seed_columns;
+    }
+    if (opt.bpc_seed_column_max_explicit) {
+        opt.bpc_seed_column_max = explicit_bpc_seed_column_max;
+    }
+    if (opt.bpc_cut_family_explicit) {
+        opt.bpc_cut_family = explicit_bpc_cut_family;
+    }
+    if (opt.bpc_cut_separation_rounds_explicit) {
+        opt.bpc_cut_separation_rounds = explicit_bpc_cut_separation_rounds;
+    }
     opt.pricing_dominance_mode = lowerAscii(opt.pricing_dominance_mode);
     if (opt.pricing_dominance_mode == "none" ||
         opt.pricing_dominance_mode == "false") {
         opt.pricing_dominance_mode = "off";
     }
+    if (opt.pricing_dominance_mode == "diagnostic-aggressive") {
+        opt.pricing_dominance_mode = "aggressive-diagnostic";
+    }
     if (opt.pricing_dominance_mode != "off" &&
         opt.pricing_dominance_mode != "safe" &&
+        opt.pricing_dominance_mode != "safe-plus" &&
         opt.pricing_dominance_mode != "aggressive-diagnostic") {
         opt.pricing_dominance_mode = "safe";
+    }
+    opt.pricing_decomposition = lowerAscii(opt.pricing_decomposition);
+    if (opt.pricing_decomposition == "skeleton-dp" ||
+        opt.pricing_decomposition == "route-skeleton") {
+        opt.pricing_decomposition = "route-skeleton-load-dp";
+    }
+    if (opt.pricing_decomposition != "auto" &&
+        opt.pricing_decomposition != "monolithic" &&
+        opt.pricing_decomposition != "route-skeleton-load-dp") {
+        opt.pricing_decomposition = "auto";
     }
     opt.pricing_completion_bound = lowerAscii(opt.pricing_completion_bound);
     if (opt.pricing_completion_bound == "off" ||
@@ -995,7 +1109,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.pricing_completion_lb_pruning = false;
     } else if (opt.pricing_completion_bound != "basic" &&
                opt.pricing_completion_bound != "dual-knapsack" &&
-               opt.pricing_completion_bound != "resource") {
+               opt.pricing_completion_bound != "resource" &&
+               opt.pricing_completion_bound != "all") {
         opt.pricing_completion_bound = opt.pricing_completion_lb_pruning
             ? "basic" : "none";
     }
@@ -1253,10 +1368,13 @@ void applyPricingOptionsFromSolve(const ebrp::Instance& instance,
     pricing.pricing_dominance_mode = opt.pricing_dominance_mode;
     pricing.pricing_completion_bound = opt.pricing_completion_bound;
     pricing.pricing_completion_bound_audit = opt.pricing_completion_bound_audit;
+    pricing.pricing_decomposition = opt.pricing_decomposition;
     pricing.pricing_load_dp_cache = opt.pricing_load_dp_cache;
     pricing.pricing_route_skeleton_mode = opt.pricing_route_skeleton_mode;
+    pricing.pricing_route_skeleton_cache = opt.pricing_route_skeleton_cache;
+    pricing.pricing_load_dp_dominance = opt.pricing_load_dp_dominance;
     pricing.pricing_operation_dp_dominance =
-        opt.pricing_operation_dp_dominance;
+        opt.pricing_operation_dp_dominance && opt.pricing_load_dp_dominance;
 }
 
 void initializeScalabilityFields(const ebrp::Instance& instance,
@@ -1274,10 +1392,13 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
         lowerAscii(opt.pricing_dominance_mode) != "aggressive-diagnostic";
     result.pricing_completion_bound_mode = opt.pricing_completion_bound;
     result.pricing_completion_bound_audit = opt.pricing_completion_bound_audit;
+    result.pricing_decomposition = opt.pricing_decomposition;
     result.pricing_load_dp_cache_enabled = opt.pricing_load_dp_cache;
     result.pricing_route_skeleton_mode = opt.pricing_route_skeleton_mode;
+    result.pricing_route_skeleton_cache_enabled = opt.pricing_route_skeleton_cache;
+    result.pricing_load_dp_dominance_enabled = opt.pricing_load_dp_dominance;
     result.pricing_operation_dp_dominance_enabled =
-        opt.pricing_operation_dp_dominance;
+        opt.pricing_operation_dp_dominance && opt.pricing_load_dp_dominance;
     result.bpc_seed_columns = opt.bpc_seed_columns;
     result.bpc_seed_column_max = opt.bpc_seed_column_max;
     result.bpc_cut_family = opt.bpc_cut_family;
@@ -1997,9 +2118,16 @@ void mergePricingStats(const ebrp::PricingResult& priced,
     result.pricing_completion_bound_audit =
         result.pricing_completion_bound_audit ||
         priced.pricing_completion_bound_audit;
+    result.pricing_decomposition = priced.pricing_decomposition;
     result.pricing_load_dp_cache_enabled =
         result.pricing_load_dp_cache_enabled || priced.pricing_load_dp_cache;
     result.pricing_route_skeleton_mode = priced.pricing_route_skeleton_mode;
+    result.pricing_route_skeleton_cache_enabled =
+        result.pricing_route_skeleton_cache_enabled ||
+        priced.pricing_route_skeleton_cache;
+    result.pricing_load_dp_dominance_enabled =
+        result.pricing_load_dp_dominance_enabled &&
+        priced.pricing_load_dp_dominance;
     result.pricing_operation_dp_dominance_enabled =
         result.pricing_operation_dp_dominance_enabled &&
         priced.pricing_operation_dp_dominance;
@@ -2243,9 +2371,16 @@ void copyBpcPricingStats(const BpcResult& bpc,
     result.pricing_completion_bound_audit =
         result.pricing_completion_bound_audit ||
         bpc.pricing_completion_bound_audit;
+    result.pricing_decomposition = bpc.pricing_decomposition;
     result.pricing_load_dp_cache_enabled =
         result.pricing_load_dp_cache_enabled || bpc.pricing_load_dp_cache_enabled;
     result.pricing_route_skeleton_mode = bpc.pricing_route_skeleton_mode;
+    result.pricing_route_skeleton_cache_enabled =
+        result.pricing_route_skeleton_cache_enabled ||
+        bpc.pricing_route_skeleton_cache_enabled;
+    result.pricing_load_dp_dominance_enabled =
+        result.pricing_load_dp_dominance_enabled &&
+        bpc.pricing_load_dp_dominance_enabled;
     result.pricing_operation_dp_dominance_enabled =
         result.pricing_operation_dp_dominance_enabled &&
         bpc.pricing_operation_dp_dominance_enabled;

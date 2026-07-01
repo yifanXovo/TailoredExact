@@ -223,9 +223,16 @@ void accumulateBpcPricingStats(ResultLike& result,
     result.pricing_completion_bound_audit =
         result.pricing_completion_bound_audit ||
         priced.pricing_completion_bound_audit;
+    result.pricing_decomposition = priced.pricing_decomposition;
     result.pricing_load_dp_cache_enabled =
         result.pricing_load_dp_cache_enabled || priced.pricing_load_dp_cache;
     result.pricing_route_skeleton_mode = priced.pricing_route_skeleton_mode;
+    result.pricing_route_skeleton_cache_enabled =
+        result.pricing_route_skeleton_cache_enabled ||
+        priced.pricing_route_skeleton_cache;
+    result.pricing_load_dp_dominance_enabled =
+        result.pricing_load_dp_dominance_enabled &&
+        priced.pricing_load_dp_dominance;
     result.pricing_operation_dp_dominance_enabled =
         result.pricing_operation_dp_dominance_enabled &&
         priced.pricing_operation_dp_dominance;
@@ -2067,6 +2074,9 @@ void addStats(GiniCapTreeResult& total, const GiniCapColumnGenerationResult& nod
     total.pricing_completion_bound_audit =
         total.pricing_completion_bound_audit ||
         node.pricing_completion_bound_audit;
+    if (!node.pricing_decomposition.empty()) {
+        total.pricing_decomposition = node.pricing_decomposition;
+    }
     total.pricing_load_dp_cache_enabled =
         total.pricing_load_dp_cache_enabled ||
         node.pricing_load_dp_cache_enabled;
@@ -2074,9 +2084,15 @@ void addStats(GiniCapTreeResult& total, const GiniCapColumnGenerationResult& nod
         total.pricing_route_skeleton_mode =
             node.pricing_route_skeleton_mode;
     }
+    total.pricing_route_skeleton_cache_enabled =
+        total.pricing_route_skeleton_cache_enabled ||
+        node.pricing_route_skeleton_cache_enabled;
     total.pricing_operation_dp_dominance_enabled =
         total.pricing_operation_dp_dominance_enabled &&
         node.pricing_operation_dp_dominance_enabled;
+    total.pricing_load_dp_dominance_enabled =
+        total.pricing_load_dp_dominance_enabled &&
+        node.pricing_load_dp_dominance_enabled;
     total.pricing_labels_generated += node.pricing_labels_generated;
     total.pricing_labels_kept += node.pricing_labels_kept;
     total.pricing_labels_expanded += node.pricing_labels_expanded;
@@ -2688,13 +2704,20 @@ GiniCapColumnGenerationResult runGiniCapColumnGenerationInternal(
                       << ", \"pricing_completion_bound_mode\": \""
                       << jsonEscapeCg(trace_priced.pricing_completion_bound)
                       << "\""
+                      << ", \"pricing_decomposition\": \""
+                      << jsonEscapeCg(trace_priced.pricing_decomposition)
+                      << "\""
                       << ", \"pricing_load_dp_cache_enabled\": "
                       << (trace_priced.pricing_load_dp_cache ? "true" : "false")
                       << ", \"pricing_route_skeleton_mode\": \""
                       << jsonEscapeCg(trace_priced.pricing_route_skeleton_mode)
                       << "\""
+                      << ", \"pricing_route_skeleton_cache_enabled\": "
+                      << (trace_priced.pricing_route_skeleton_cache ? "true" : "false")
                       << ", \"pricing_operation_dp_dominance_enabled\": "
                       << (trace_priced.pricing_operation_dp_dominance ? "true" : "false")
+                      << ", \"pricing_load_dp_dominance_enabled\": "
+                      << (trace_priced.pricing_load_dp_dominance ? "true" : "false")
                       << ", \"pricing_labels_generated\": "
                       << trace_priced.pricing_labels_generated
                       << ", \"pricing_labels_kept\": "

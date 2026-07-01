@@ -576,10 +576,16 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.pricing_completion_bound_mode) << "\",\n";
     out << "  \"pricing_completion_bound_audit\": "
         << (result.pricing_completion_bound_audit ? "true" : "false") << ",\n";
+    out << "  \"pricing_decomposition\": \""
+        << jsonEscape(result.pricing_decomposition) << "\",\n";
     out << "  \"pricing_load_dp_cache_enabled\": "
         << (result.pricing_load_dp_cache_enabled ? "true" : "false") << ",\n";
     out << "  \"pricing_route_skeleton_mode\": \""
         << jsonEscape(result.pricing_route_skeleton_mode) << "\",\n";
+    out << "  \"pricing_route_skeleton_cache_enabled\": "
+        << (result.pricing_route_skeleton_cache_enabled ? "true" : "false") << ",\n";
+    out << "  \"pricing_load_dp_dominance_enabled\": "
+        << (result.pricing_load_dp_dominance_enabled ? "true" : "false") << ",\n";
     out << "  \"pricing_operation_dp_dominance_enabled\": "
         << (result.pricing_operation_dp_dominance_enabled ? "true" : "false") << ",\n";
     out << "  \"pricing_labels_generated\": "

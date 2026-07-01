@@ -168,8 +168,11 @@ struct ColumnGenerationResult {
     bool pricing_label_dominance_exact_safe = true;
     std::string pricing_completion_bound_mode = "basic";
     bool pricing_completion_bound_audit = false;
+    std::string pricing_decomposition = "auto";
     bool pricing_load_dp_cache_enabled = false;
     std::string pricing_route_skeleton_mode = "standard";
+    bool pricing_route_skeleton_cache_enabled = false;
+    bool pricing_load_dp_dominance_enabled = true;
     bool pricing_operation_dp_dominance_enabled = true;
     long long pricing_labels_generated = 0;
     long long pricing_labels_kept = 0;
@@ -350,8 +353,11 @@ struct GiniCapColumnGenerationResult {
     bool pricing_label_dominance_exact_safe = true;
     std::string pricing_completion_bound_mode = "basic";
     bool pricing_completion_bound_audit = false;
+    std::string pricing_decomposition = "auto";
     bool pricing_load_dp_cache_enabled = false;
     std::string pricing_route_skeleton_mode = "standard";
+    bool pricing_route_skeleton_cache_enabled = false;
+    bool pricing_load_dp_dominance_enabled = true;
     bool pricing_operation_dp_dominance_enabled = true;
     long long pricing_labels_generated = 0;
     long long pricing_labels_kept = 0;
@@ -563,8 +569,11 @@ struct GiniCapBranchProbeResult {
     bool pricing_label_dominance_exact_safe = true;
     std::string pricing_completion_bound_mode = "basic";
     bool pricing_completion_bound_audit = false;
+    std::string pricing_decomposition = "auto";
     bool pricing_load_dp_cache_enabled = false;
     std::string pricing_route_skeleton_mode = "standard";
+    bool pricing_route_skeleton_cache_enabled = false;
+    bool pricing_load_dp_dominance_enabled = true;
     bool pricing_operation_dp_dominance_enabled = true;
     long long pricing_labels_generated = 0;
     long long pricing_labels_kept = 0;
@@ -739,8 +748,11 @@ struct GiniCapTreeResult {
     bool pricing_label_dominance_exact_safe = true;
     std::string pricing_completion_bound_mode = "basic";
     bool pricing_completion_bound_audit = false;
+    std::string pricing_decomposition = "auto";
     bool pricing_load_dp_cache_enabled = false;
     std::string pricing_route_skeleton_mode = "standard";
+    bool pricing_route_skeleton_cache_enabled = false;
+    bool pricing_load_dp_dominance_enabled = true;
     bool pricing_operation_dp_dominance_enabled = true;
     long long pricing_labels_generated = 0;
     long long pricing_labels_kept = 0;

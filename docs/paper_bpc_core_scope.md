@@ -75,6 +75,24 @@ The following modules are not paper-core evidence and are disabled by the
   when enabled explicitly, but current V12 evidence is mixed, so it remains a
   tuning/diagnostic option rather than a paper-core default.
 
+## BPC Repair Evidence
+
+The `bpc_core_repair_round` tested the unified `paper-gf-bpc-core` path with
+long BPC leaf budgets and no interval-oracle certificate.  The round confirmed
+that the paper-core scope is clean, but the present BPC implementation does not
+yet close nontrivial leaves.  Exact pricing remains the blocker: route-skeleton
+enumeration reaches up to hundreds of millions of states, operation-DP states
+can exceed one billion, and no target leaf reached exact pricing closure.
+
+The result does not invalidate the BPC certificate theorem.  It does mean that
+paper-core empirical claims must separate:
+
+- relaxation/frontier certificates;
+- BPC exact-tree certificates, currently none in this round;
+- exact-portfolio or interval-oracle certificates, which are outside
+  `paper-gf-bpc-core`;
+- CPLEX benchmark rows, which are comparison evidence only.
+
 These modules may be reported as diagnostics, baselines, appendix experiments,
 or upper-bound sources when clearly labeled. They must not contribute to a
 paper-core BPC lower bound or original-problem certificate.
