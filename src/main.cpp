@@ -616,10 +616,22 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
                  arg == "--service-operation-min-handling") opt.service_operation_min_handling_cuts = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--penalty-movement-lb-cuts") opt.penalty_movement_lb_cuts = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--transfer-subset-capacity-cuts") opt.transfer_subset_capacity_cuts = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--gini-spread-cuts") opt.gini_spread_cuts = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--required-movement-cuts") opt.required_movement_cuts = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--global-handling-capacity-cuts") opt.global_handling_capacity_cuts = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--low-gini-ratio-band-tightening") opt.low_gini_ratio_band_tightening = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--gini-spread-cuts" || arg == "--compact-bc-gini-spread") {
+            opt.gini_spread_cuts = parseBoolValue(requireValue(i, argc, argv));
+            opt.gini_spread_cuts_explicit = true;
+        }
+        else if (arg == "--required-movement-cuts" || arg == "--compact-bc-required-movement") {
+            opt.required_movement_cuts = parseBoolValue(requireValue(i, argc, argv));
+            opt.required_movement_cuts_explicit = true;
+        }
+        else if (arg == "--global-handling-capacity-cuts" || arg == "--compact-bc-global-handling-capacity") {
+            opt.global_handling_capacity_cuts = parseBoolValue(requireValue(i, argc, argv));
+            opt.global_handling_capacity_cuts_explicit = true;
+        }
+        else if (arg == "--low-gini-ratio-band-tightening" || arg == "--compact-bc-low-gini-centering") {
+            opt.low_gini_ratio_band_tightening = parseBoolValue(requireValue(i, argc, argv));
+            opt.low_gini_ratio_band_tightening_explicit = true;
+        }
         else if (arg == "--relaxation-portfolio-mode") opt.relaxation_portfolio_mode = requireValue(i, argc, argv);
         else if (arg == "--relaxation-portfolio-probe-seconds") opt.relaxation_portfolio_probe_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--relaxation-portfolio-max-variants") opt.relaxation_portfolio_max_variants = std::stoi(requireValue(i, argc, argv));
@@ -638,20 +650,64 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--interval-exact-cutoff-epsilon") opt.interval_exact_cutoff_epsilon = std::stod(requireValue(i, argc, argv));
         else if (arg == "--interval-exact-cutoff-time-limit") opt.interval_exact_cutoff_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--mip-solver") opt.mip_solver = requireValue(i, argc, argv);
+        else if (arg == "--cplex-threads") opt.cplex_threads = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--mip-threads") opt.mip_threads = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--compact-bc-threads") opt.compact_bc_threads = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--compact-bc-time-limit") opt.compact_bc_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--compact-bc-root-cut-rounds") opt.compact_bc_root_cut_rounds = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--compact-bc-root-cut-time-limit") opt.compact_bc_root_cut_time_limit = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--compact-bc-dynamic-cut-families") opt.compact_bc_dynamic_cut_families = requireValue(i, argc, argv);
+        else if (arg == "--compact-bc-root-probe") opt.compact_bc_root_probe = requireValue(i, argc, argv);
         else if (arg == "--compact-bc-cut-profile") opt.compact_bc_cut_profile = requireValue(i, argc, argv);
-        else if (arg == "--compact-bc-direct-gini-rows") opt.compact_bc_direct_gini_rows = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--compact-bc-tight-mccormick") opt.compact_bc_tight_mccormick = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--compact-bc-inventory-conservation") opt.compact_bc_inventory_conservation = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--compact-bc-movement-reachability-domains") opt.compact_bc_movement_reachability_domains = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--compact-bc-visit-inventory-linking") opt.compact_bc_visit_inventory_linking = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--compact-bc-objective-estimator-cutoff") opt.compact_bc_objective_estimator_cutoff = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--compact-bc-penalty-lb-closure") opt.compact_bc_penalty_lb_closure = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--compact-bc-support-duration-cuts") opt.compact_bc_support_duration_cuts = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--compact-bc-pairwise-transfer-compatibility") opt.compact_bc_pairwise_transfer_compatibility = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--compact-bc-receiver-source-cover-cuts") opt.compact_bc_receiver_source_cover_cuts = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--compact-bc-direct-gini-rows" || arg == "--compact-bc-gini-cap-floor-cuts") {
+            opt.compact_bc_direct_gini_rows = parseBoolValue(requireValue(i, argc, argv));
+            opt.compact_bc_direct_gini_rows_explicit = true;
+        }
+        else if (arg == "--compact-bc-tight-mccormick") {
+            opt.compact_bc_tight_mccormick = parseBoolValue(requireValue(i, argc, argv));
+            opt.compact_bc_tight_mccormick_explicit = true;
+        }
+        else if (arg == "--compact-bc-inventory-conservation") {
+            opt.compact_bc_inventory_conservation = parseBoolValue(requireValue(i, argc, argv));
+            opt.compact_bc_inventory_conservation_explicit = true;
+        }
+        else if (arg == "--compact-bc-movement-reachability-domains" || arg == "--compact-bc-movement-reachability") {
+            opt.compact_bc_movement_reachability_domains = parseBoolValue(requireValue(i, argc, argv));
+            opt.compact_bc_movement_reachability_domains_explicit = true;
+        }
+        else if (arg == "--compact-bc-visit-inventory-linking") {
+            opt.compact_bc_visit_inventory_linking = parseBoolValue(requireValue(i, argc, argv));
+            opt.compact_bc_visit_inventory_linking_explicit = true;
+        }
+        else if (arg == "--compact-bc-objective-estimator-cutoff") {
+            opt.compact_bc_objective_estimator_cutoff = parseBoolValue(requireValue(i, argc, argv));
+            opt.compact_bc_objective_estimator_cutoff_explicit = true;
+        }
+        else if (arg == "--compact-bc-penalty-lb-closure") {
+            opt.compact_bc_penalty_lb_closure = parseBoolValue(requireValue(i, argc, argv));
+            opt.compact_bc_penalty_lb_closure_explicit = true;
+        }
+        else if (arg == "--compact-bc-support-duration-cuts" || arg == "--compact-bc-support-duration") {
+            opt.compact_bc_support_duration_cuts = parseBoolValue(requireValue(i, argc, argv));
+            opt.compact_bc_support_duration_cuts_explicit = true;
+        }
+        else if (arg == "--compact-bc-pairwise-transfer-compatibility" || arg == "--compact-bc-transfer-compat") {
+            opt.compact_bc_pairwise_transfer_compatibility = parseBoolValue(requireValue(i, argc, argv));
+            opt.compact_bc_pairwise_transfer_compatibility_explicit = true;
+        }
+        else if (arg == "--compact-bc-receiver-source-cover-cuts") {
+            opt.compact_bc_receiver_source_cover_cuts = parseBoolValue(requireValue(i, argc, argv));
+            opt.compact_bc_receiver_source_cover_mode =
+                opt.compact_bc_receiver_source_cover_cuts ? "singleton-paper-safe" : "off";
+            opt.compact_bc_receiver_source_cover_explicit = true;
+        }
+        else if (arg == "--compact-bc-receiver-source-cover") {
+            opt.compact_bc_receiver_source_cover_mode = lowerAscii(requireValue(i, argc, argv));
+            opt.compact_bc_receiver_source_cover_cuts =
+                opt.compact_bc_receiver_source_cover_mode == "singleton-paper-safe" ||
+                opt.compact_bc_receiver_source_cover_mode == "paper-safe";
+            opt.compact_bc_receiver_source_cover_explicit = true;
+        }
         else if (arg == "--compact-bc-support-cut-max-size") opt.compact_bc_support_cut_max_size = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--compact-bc-support-cut-max-subsets") opt.compact_bc_support_cut_max_subsets = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--interval-oracle-objective-bound-time-limit") opt.interval_oracle_objective_bound_time_limit = std::stod(requireValue(i, argc, argv));
@@ -1010,9 +1066,26 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.mip_solver != "cplex") {
         throw std::runtime_error("--mip-solver currently supports cplex only");
     }
+    if (opt.cplex_threads < 0) opt.cplex_threads = 0;
     if (opt.mip_threads < 0) opt.mip_threads = 0;
+    if (opt.compact_bc_threads < 0) opt.compact_bc_threads = 0;
     if (opt.compact_bc_time_limit < 0.0) opt.compact_bc_time_limit = 0.0;
     if (opt.compact_bc_root_cut_rounds < 0) opt.compact_bc_root_cut_rounds = 0;
+    if (opt.compact_bc_root_cut_time_limit < 0.0) {
+        opt.compact_bc_root_cut_time_limit = 0.0;
+    }
+    opt.compact_bc_receiver_source_cover_mode =
+        lowerAscii(opt.compact_bc_receiver_source_cover_mode);
+    if (opt.compact_bc_receiver_source_cover_mode != "off" &&
+        opt.compact_bc_receiver_source_cover_mode != "diagnostic" &&
+        opt.compact_bc_receiver_source_cover_mode != "singleton-paper-safe" &&
+        opt.compact_bc_receiver_source_cover_mode != "pair-diagnostic" &&
+        opt.compact_bc_receiver_source_cover_mode != "paper-safe") {
+        opt.compact_bc_receiver_source_cover_mode = "off";
+    }
+    opt.compact_bc_receiver_source_cover_cuts =
+        opt.compact_bc_receiver_source_cover_mode == "singleton-paper-safe" ||
+        opt.compact_bc_receiver_source_cover_mode == "paper-safe";
     opt.compact_bc_cut_profile = lowerAscii(opt.compact_bc_cut_profile);
     if (opt.compact_bc_cut_profile != "conservative" &&
         opt.compact_bc_cut_profile != "balanced" &&
@@ -1143,6 +1216,34 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     const std::string explicit_bpc_cut_family = opt.bpc_cut_family;
     const int explicit_bpc_cut_separation_rounds =
         opt.bpc_cut_separation_rounds;
+    const bool explicit_compact_bc_direct_gini_rows =
+        opt.compact_bc_direct_gini_rows;
+    const bool explicit_compact_bc_tight_mccormick =
+        opt.compact_bc_tight_mccormick;
+    const bool explicit_compact_bc_inventory_conservation =
+        opt.compact_bc_inventory_conservation;
+    const bool explicit_compact_bc_movement_reachability_domains =
+        opt.compact_bc_movement_reachability_domains;
+    const bool explicit_compact_bc_visit_inventory_linking =
+        opt.compact_bc_visit_inventory_linking;
+    const bool explicit_compact_bc_objective_estimator_cutoff =
+        opt.compact_bc_objective_estimator_cutoff;
+    const bool explicit_compact_bc_penalty_lb_closure =
+        opt.compact_bc_penalty_lb_closure;
+    const bool explicit_compact_bc_support_duration_cuts =
+        opt.compact_bc_support_duration_cuts;
+    const bool explicit_compact_bc_pairwise_transfer_compatibility =
+        opt.compact_bc_pairwise_transfer_compatibility;
+    const bool explicit_compact_bc_receiver_source_cover_cuts =
+        opt.compact_bc_receiver_source_cover_cuts;
+    const std::string explicit_compact_bc_receiver_source_cover_mode =
+        opt.compact_bc_receiver_source_cover_mode;
+    const bool explicit_gini_spread_cuts = opt.gini_spread_cuts;
+    const bool explicit_required_movement_cuts = opt.required_movement_cuts;
+    const bool explicit_global_handling_capacity_cuts =
+        opt.global_handling_capacity_cuts;
+    const bool explicit_low_gini_ratio_band_tightening =
+        opt.low_gini_ratio_band_tightening;
     applyAlgorithmPreset(opt);
     if (opt.pricing_dominance_mode_explicit) {
         opt.pricing_dominance_mode = explicit_pricing_dominance_mode;
@@ -1182,6 +1283,60 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if (opt.bpc_cut_separation_rounds_explicit) {
         opt.bpc_cut_separation_rounds = explicit_bpc_cut_separation_rounds;
+    }
+    if (opt.compact_bc_direct_gini_rows_explicit) {
+        opt.compact_bc_direct_gini_rows = explicit_compact_bc_direct_gini_rows;
+    }
+    if (opt.compact_bc_tight_mccormick_explicit) {
+        opt.compact_bc_tight_mccormick = explicit_compact_bc_tight_mccormick;
+    }
+    if (opt.compact_bc_inventory_conservation_explicit) {
+        opt.compact_bc_inventory_conservation =
+            explicit_compact_bc_inventory_conservation;
+    }
+    if (opt.compact_bc_movement_reachability_domains_explicit) {
+        opt.compact_bc_movement_reachability_domains =
+            explicit_compact_bc_movement_reachability_domains;
+    }
+    if (opt.compact_bc_visit_inventory_linking_explicit) {
+        opt.compact_bc_visit_inventory_linking =
+            explicit_compact_bc_visit_inventory_linking;
+    }
+    if (opt.compact_bc_objective_estimator_cutoff_explicit) {
+        opt.compact_bc_objective_estimator_cutoff =
+            explicit_compact_bc_objective_estimator_cutoff;
+    }
+    if (opt.compact_bc_penalty_lb_closure_explicit) {
+        opt.compact_bc_penalty_lb_closure =
+            explicit_compact_bc_penalty_lb_closure;
+    }
+    if (opt.compact_bc_support_duration_cuts_explicit) {
+        opt.compact_bc_support_duration_cuts =
+            explicit_compact_bc_support_duration_cuts;
+    }
+    if (opt.compact_bc_pairwise_transfer_compatibility_explicit) {
+        opt.compact_bc_pairwise_transfer_compatibility =
+            explicit_compact_bc_pairwise_transfer_compatibility;
+    }
+    if (opt.compact_bc_receiver_source_cover_explicit) {
+        opt.compact_bc_receiver_source_cover_cuts =
+            explicit_compact_bc_receiver_source_cover_cuts;
+        opt.compact_bc_receiver_source_cover_mode =
+            explicit_compact_bc_receiver_source_cover_mode;
+    }
+    if (opt.gini_spread_cuts_explicit) {
+        opt.gini_spread_cuts = explicit_gini_spread_cuts;
+    }
+    if (opt.required_movement_cuts_explicit) {
+        opt.required_movement_cuts = explicit_required_movement_cuts;
+    }
+    if (opt.global_handling_capacity_cuts_explicit) {
+        opt.global_handling_capacity_cuts =
+            explicit_global_handling_capacity_cuts;
+    }
+    if (opt.low_gini_ratio_band_tightening_explicit) {
+        opt.low_gini_ratio_band_tightening =
+            explicit_low_gini_ratio_band_tightening;
     }
     opt.pricing_dominance_mode = lowerAscii(opt.pricing_dominance_mode);
     if (opt.pricing_dominance_mode == "none" ||
@@ -1504,6 +1659,39 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
     result.pricing_load_dp_dominance_enabled = opt.pricing_load_dp_dominance;
     result.pricing_operation_dp_dominance_enabled =
         opt.pricing_operation_dp_dominance && opt.pricing_load_dp_dominance;
+    result.cplex_threads = opt.cplex_threads;
+    result.mip_threads = opt.mip_threads;
+    if (opt.algorithm_preset == "paper-gf-compact-bc") {
+        result.compact_bc_solver_threads = opt.compact_bc_threads > 0
+            ? opt.compact_bc_threads
+            : (opt.mip_threads > 0 ? opt.mip_threads : std::max(1, opt.threads));
+        result.compact_interval_bc_threads = result.compact_bc_solver_threads;
+        result.solver_thread_policy =
+            result.compact_bc_solver_threads == 1
+                ? "compact_bc_single_thread"
+                : "compact_bc_multithread";
+        result.thread_fairness_class =
+            result.compact_bc_solver_threads == 1
+                ? "one_thread_fair"
+                : "multithread_diagnostic";
+    } else if (opt.method == "cplex") {
+        const int effective_cplex_threads =
+            opt.cplex_threads > 0 ? opt.cplex_threads : std::max(1, opt.threads);
+        result.cplex_threads = effective_cplex_threads;
+        result.compact_bc_solver_threads = 0;
+        result.compact_interval_bc_threads = 0;
+        result.solver_thread_policy =
+            effective_cplex_threads == 1
+                ? "plain_cplex_single_thread"
+                : "plain_cplex_multithread";
+        result.thread_fairness_class =
+            effective_cplex_threads == 1
+                ? "one_thread_fair"
+                : "multithread_diagnostic";
+    } else {
+        result.compact_bc_solver_threads = 0;
+        result.compact_interval_bc_threads = 0;
+    }
     result.bpc_seed_columns = opt.bpc_seed_columns;
     result.bpc_seed_column_max = opt.bpc_seed_column_max;
     result.bpc_cut_family = opt.bpc_cut_family;
@@ -1646,7 +1834,8 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         instance.V <= opt.route_mask_max_v && instance.V <= 30;
     snapshot.route_mask_all_subset_enumeration_certifying =
         snapshot.route_mask_all_subset_enumeration_enabled;
-    if (opt.algorithm_preset == "paper-gf-bpc-core" ||
+    if (opt.algorithm_preset == "paper-gf-compact-bc" ||
+        opt.algorithm_preset == "paper-gf-bpc-core" ||
         opt.algorithm_preset == "paper-bpc-core") {
         snapshot.route_mask_all_subset_enumeration_enabled = false;
         snapshot.route_mask_all_subset_enumeration_certifying = false;
@@ -14733,6 +14922,7 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
             << "movement_reachability_domains,visit_inventory_linking_rows,"
             << "objective_estimator_cutoff_rows,penalty_lb,support_duration_pair_cuts,"
             << "support_duration_triple_cuts,transfer_compatibility_cuts,"
+            << "receiver_source_cover_cuts,"
             << "oracle_strengthening_families_enabled,json_path,lp_path,log_path\n";
     std::ofstream partition(partition_csv, std::ios::out | std::ios::trunc);
     partition << "interval_id,parent_id,depth,gamma_L,gamma_U,status,closed,"
@@ -14748,6 +14938,24 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     int feasible_improving = 0;
     int root_bound_merged = 0;
     int root_bound_closed = 0;
+    long long total_direct_gini_cap = 0;
+    long long total_direct_gini_floor = 0;
+    long long total_tight_mccormick = 0;
+    long long total_inventory_conservation = 0;
+    long long total_movement_domains = 0;
+    long long total_visit_inventory = 0;
+    long long total_objective_estimator = 0;
+    long long total_penalty_lb_rows = 0;
+    long long total_gini_spread = 0;
+    long long total_required_movement = 0;
+    long long total_global_handling = 0;
+    long long total_support_pair = 0;
+    long long total_support_triple = 0;
+    long long total_transfer_compat = 0;
+    long long total_receiver_source_cover = 0;
+    long long total_low_gini_domains = 0;
+    long long total_nodes = 0;
+    double total_solver_time = 0.0;
     bool budget_exhausted = false;
     bool oracle_blocker_seen = false;
     std::string oracle_blocker_note;
@@ -14916,6 +15124,7 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
                 << oracle.compact_bc_support_duration_pair_cuts_added << ","
                 << oracle.compact_bc_support_duration_triple_cuts_added << ","
                 << oracle.compact_bc_pairwise_transfer_compatibility_cuts_added << ","
+                << oracle.compact_bc_receiver_source_cover_cuts_added << ","
                 << csvEscapeSimple(oracle.oracle_strengthening_families_enabled) << ","
                 << csvEscapeSimple(json_path.string()) << ","
                 << csvEscapeSimple(oracle.interval_exact_cutoff_lp_path) << ","
@@ -15050,6 +15259,26 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         if (oracle.interval_exact_cutoff_feasible_improving) {
             ++feasible_improving;
         }
+        total_direct_gini_cap += oracle.compact_bc_direct_gini_cap_rows_added;
+        total_direct_gini_floor += oracle.compact_bc_direct_gini_floor_rows_added;
+        total_tight_mccormick += oracle.compact_bc_tight_mccormick_rows_added;
+        total_inventory_conservation += oracle.compact_bc_inventory_conservation_rows_added;
+        total_movement_domains += oracle.compact_bc_movement_reachability_domains_tightened;
+        total_visit_inventory += oracle.compact_bc_visit_inventory_linking_rows_added;
+        total_objective_estimator += oracle.compact_bc_objective_estimator_cutoff_rows_added;
+        total_penalty_lb_rows += oracle.compact_bc_penalty_lb_rows_added;
+        total_gini_spread += oracle.gini_spread_cuts_added;
+        total_required_movement += oracle.required_movement_cuts_added;
+        total_global_handling += oracle.global_handling_capacity_cuts_added;
+        total_support_pair += oracle.compact_bc_support_duration_pair_cuts_added;
+        total_support_triple += oracle.compact_bc_support_duration_triple_cuts_added;
+        total_transfer_compat += oracle.compact_bc_pairwise_transfer_compatibility_cuts_added;
+        total_receiver_source_cover += oracle.compact_bc_receiver_source_cover_cuts_added;
+        total_low_gini_domains += oracle.low_gini_ratio_band_domains_tightened;
+        total_nodes += oracle.compact_bc_nodes;
+        total_solver_time += oracle.compact_bc_time_seconds > 0.0
+            ? oracle.compact_bc_time_seconds
+            : oracle.interval_exact_cutoff_runtime_seconds;
         partition << csvEscapeSimple(interval_id) << ","
                   << csvEscapeSimple(parent_id) << ","
                   << depth << ","
@@ -15187,8 +15416,20 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
             : "original_compact_objective_bound";
     result.compact_interval_bc_solver =
         opt.mip_solver.empty() ? "cplex" : opt.mip_solver;
-    result.compact_interval_bc_threads =
-        opt.mip_threads > 0 ? opt.mip_threads : std::max(1, opt.threads);
+    const int effective_compact_threads = opt.compact_bc_threads > 0
+        ? opt.compact_bc_threads
+        : (opt.mip_threads > 0 ? opt.mip_threads : std::max(1, opt.threads));
+    result.cplex_threads = opt.cplex_threads;
+    result.mip_threads = opt.mip_threads;
+    result.compact_interval_bc_threads = effective_compact_threads;
+    result.solver_thread_policy =
+        effective_compact_threads == 1
+            ? "compact_bc_single_thread"
+            : "compact_bc_multithread";
+    result.thread_fairness_class =
+        effective_compact_threads == 1
+            ? "one_thread_fair"
+            : "multithread_diagnostic";
     {
         std::ostringstream families;
         bool first = true;
@@ -15216,13 +15457,50 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
             first ? "none" : families.str();
         result.compact_bc_enabled_cut_families =
             result.compact_interval_bc_cut_families_enabled;
+        result.compact_bc_enabled_families_requested =
+            result.compact_interval_bc_cut_families_enabled;
+        result.compact_bc_enabled_families_effective =
+            result.compact_interval_bc_cut_families_enabled;
     }
     result.compact_interval_bc_closed_leaves = root_bound_closed;
     result.compact_interval_bc_timed_out_leaves = timed_out;
     result.compact_bc_cut_profile = opt.compact_bc_cut_profile;
     result.compact_bc_root_cut_rounds = opt.compact_bc_root_cut_rounds;
+    result.compact_bc_total_root_cut_rounds =
+        opt.compact_bc_root_cut_rounds * std::max(0, attempted);
+    result.compact_bc_root_cut_time_limit = opt.compact_bc_root_cut_time_limit;
+    result.compact_bc_dynamic_cut_families = opt.compact_bc_dynamic_cut_families;
+    result.compact_bc_root_probe = opt.compact_bc_root_probe;
     result.compact_bc_solver_threads = result.compact_interval_bc_threads;
     result.compact_bc_closed_leaf_count = root_bound_closed;
+    result.compact_bc_total_solver_time = total_solver_time;
+    result.compact_bc_total_leaf_nodes = total_nodes;
+    {
+        std::ostringstream cuts;
+        cuts << "direct_gini_cap=" << total_direct_gini_cap
+             << ";direct_gini_floor=" << total_direct_gini_floor
+             << ";tight_mccormick=" << total_tight_mccormick
+             << ";inventory_conservation=" << total_inventory_conservation
+             << ";visit_inventory_linking=" << total_visit_inventory
+             << ";objective_estimator_cutoff=" << total_objective_estimator
+             << ";penalty_lb=" << total_penalty_lb_rows
+             << ";gini_spread=" << total_gini_spread
+             << ";required_movement=" << total_required_movement
+             << ";global_handling_capacity=" << total_global_handling
+             << ";support_duration_pair=" << total_support_pair
+             << ";support_duration_triple=" << total_support_triple
+             << ";transfer_compat=" << total_transfer_compat
+             << ";receiver_source_cover=" << total_receiver_source_cover;
+        result.compact_bc_total_cuts_added_by_family = cuts.str();
+        result.compact_bc_cuts_added_by_family = cuts.str();
+    }
+    {
+        std::ostringstream domains;
+        domains << "movement_reachability=" << total_movement_domains
+                << ";low_gini_ratio_band_domains=" << total_low_gini_domains;
+        result.compact_bc_total_domains_tightened_by_family = domains.str();
+        result.compact_bc_domains_tightened_by_family = domains.str();
+    }
 
     result.auto_interval_oracle_leaves_attempted = attempted;
     result.auto_interval_oracle_leaves_closed = closed;

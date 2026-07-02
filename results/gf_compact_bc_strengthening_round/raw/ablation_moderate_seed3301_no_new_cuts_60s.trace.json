@@ -1,0 +1,38 @@
+{
+  "trace_schema": "paper_bpc_core_plateau_trace_v1",
+  "trace_scope": "frontier_interval_ledger_with_available_aggregate_tree_and_pricing_stats",
+  "instance_name": "moderate_seed3301.txt",
+  "input_path": "E:\\codes\\ExactEBRP\\reference\\hard_stress\\V20_M3\\moderate_seed3301.txt",
+  "algorithm_preset": "paper-gf-compact-bc",
+  "method": "gcap-frontier",
+  "status": "gcap_frontier_not_closed",
+  "objective": 0.0491525526647,
+  "lower_bound": 0.00614406908309,
+  "upper_bound": 0.0491525526647,
+  "gap": 0.875,
+  "certified_original_problem": false,
+  "full_certificate_rejection_reason": "unresolved_intervals",
+  "runtime_breakdown": {"bound_time_seconds": 48.8126437, "route_mask_time_seconds": 0, "master_time_seconds": 0, "pricing_time_seconds": 0},
+  "controlling_interval": {"id": 5, "range": "[0.00614407,0.0122881]", "lower_bound": 0.00614406908309, "source": "gamma_floor"},
+  "branch_price_node_trace_available": false,
+  "branch_price_node_trace_limitation": "no branch-price tree started for any active interval before the time/reserve stop",
+  "aggregate_tree": {"nodes": 0, "open_nodes": 1, "pricing_closed_nodes": 0, "columns": 0, "cuts_added": 0},
+  "pricing_call_trace_available": false,
+  "pricing_call_trace_limitation": "no branch-price pricing call occurred for any active interval before the time/reserve stop",
+  "aggregate_pricing": {"pricing_calls": 0, "pricing_completed_exactly": true, "pricing_closure_certified_exact": false, "pricing_closure_status": "not_run", "pricing_best_reduced_cost_any": 0, "pricing_remaining_negative_rc": 0, "duplicate_negative_projections": 0, "blocked_by_duplicate_projection": false, "completion_lb_pruned_labels": 0, "required_closure_pruned_labels": 0, "label_dominance_comparisons": 0, "label_dominance_pruned_labels": 0, "label_dominance_cross_pickup_pruned_labels": 0, "label_dominance_inactive_entries_skipped": 0, "label_dominance_bucket_compactions": 0, "label_dominance_compacted_entries": 0, "operation_dp_dominance_pruned_states": 0},
+  "interval_trace_csv": "results\\gf_compact_bc_strengthening_round\\raw\\ablation_moderate_seed3301_no_new_cuts_60s.intervals.csv",
+  "intervals": [
+    {"interval_id": 0, "gamma_L": 0, "gamma_U": 0.0122881381662, "current_interval_lower_bound": 0, "incumbent_upper_bound": 0.0491525526647, "status": "replaced_by_children", "reason": "split_parent_replaced", "certificate_basis": "unresolved", "requires_pricing_closure": false, "pricing_closure_available": false, "interval_bound_valid": true, "bpc_nodes": 0, "open_nodes": 1, "generated_columns": 0, "cuts": 0, "pricing_calls": 0, "pricing_time_seconds": 0, "rmp_solve_time_seconds": 0, "relaxation_time_seconds": 28.2388122, "lower_bound_source": "gamma_floor", "lower_bound_sources": "gamma_floor"},
+    {"interval_id": 1, "gamma_L": 0.0122881381662, "gamma_U": 0.0245762763324, "current_interval_lower_bound": 0.0122881381662, "incumbent_upper_bound": 0.0491525526647, "status": "unprocessed_relevant", "reason": "not_processed_before_time_limit_or_reserve", "certificate_basis": "unresolved", "requires_pricing_closure": false, "pricing_closure_available": false, "interval_bound_valid": true, "bpc_nodes": 0, "open_nodes": 0, "generated_columns": 0, "cuts": 0, "pricing_calls": 0, "pricing_time_seconds": 0, "rmp_solve_time_seconds": 0, "relaxation_time_seconds": 0, "lower_bound_source": "gamma_floor", "lower_bound_sources": "gamma_floor"},
+    {"interval_id": 2, "gamma_L": 0.0245762763324, "gamma_U": 0.0368644144986, "current_interval_lower_bound": 0.0245762763324, "incumbent_upper_bound": 0.0491525526647, "status": "unprocessed_relevant", "reason": "not_processed_before_time_limit_or_reserve", "certificate_basis": "unresolved", "requires_pricing_closure": false, "pricing_closure_available": false, "interval_bound_valid": true, "bpc_nodes": 0, "open_nodes": 0, "generated_columns": 0, "cuts": 0, "pricing_calls": 0, "pricing_time_seconds": 0, "rmp_solve_time_seconds": 0, "relaxation_time_seconds": 0, "lower_bound_source": "gamma_floor", "lower_bound_sources": "gamma_floor"},
+    {"interval_id": 3, "gamma_L": 0.0368644144986, "gamma_U": 0.0491525526647, "current_interval_lower_bound": 0.0368644144986, "incumbent_upper_bound": 0.0491525526647, "status": "unprocessed_relevant", "reason": "not_processed_before_time_limit_or_reserve", "certificate_basis": "unresolved", "requires_pricing_closure": false, "pricing_closure_available": false, "interval_bound_valid": true, "bpc_nodes": 0, "open_nodes": 0, "generated_columns": 0, "cuts": 0, "pricing_calls": 0, "pricing_time_seconds": 0, "rmp_solve_time_seconds": 0, "relaxation_time_seconds": 0, "lower_bound_source": "gamma_floor", "lower_bound_sources": "gamma_floor"},
+    {"interval_id": 4, "gamma_L": 0, "gamma_U": 0.00614406908309, "current_interval_lower_bound": 0.0491525526647, "incumbent_upper_bound": 0.0491525526647, "status": "bound_fathomed", "reason": "inventory_route_gini_relaxation", "certificate_basis": "inventory_route_gini_relaxation_fathomed", "requires_pricing_closure": false, "pricing_closure_available": false, "interval_bound_valid": true, "bpc_nodes": 0, "open_nodes": 0, "generated_columns": 0, "cuts": 0, "pricing_calls": 0, "pricing_time_seconds": 0, "rmp_solve_time_seconds": 0, "relaxation_time_seconds": 10.363163, "lower_bound_source": "inventory_route_gini_relaxation", "lower_bound_sources": "gamma_floor|inventory_route_gini_relaxation"},
+    {"interval_id": 5, "gamma_L": 0.00614406908309, "gamma_U": 0.0122881381662, "current_interval_lower_bound": 0.00614406908309, "incumbent_upper_bound": 0.0491525526647, "status": "unresolved", "reason": "tree_not_started_before_time_limit_or_reserve", "certificate_basis": "unresolved", "requires_pricing_closure": false, "pricing_closure_available": false, "interval_bound_valid": true, "bpc_nodes": 0, "open_nodes": 1, "generated_columns": 0, "cuts": 0, "pricing_calls": 0, "pricing_time_seconds": 0, "rmp_solve_time_seconds": 0, "relaxation_time_seconds": 10.2106685, "lower_bound_source": "gamma_floor", "lower_bound_sources": "gamma_floor"}
+  ],
+  "branch_price_nodes": [
+
+  ],
+  "pricing_calls": [
+
+  ]
+}

@@ -32,6 +32,38 @@ repair work, but it is not enabled by default in `paper-gf-compact-bc` and must
 not be mixed into compact-BC certificate tables.  Plain CPLEX with
 `--plain-baseline` or `--method cplex` is benchmark evidence only.
 
+## GF Compact BC Strengthening Round: 2026-07-02
+
+The controlled strengthening round is
+`results/gf_compact_bc_strengthening_round/`.  It recalibrates the plain CPLEX
+benchmark to one thread and logs the compact-BC internal CPLEX thread count for
+paper rows.
+
+Current one-thread fair outcomes:
+
+| Row | Status | LB | UB | Gap |
+|---|---|---:|---:|---:|
+| V12 M1 average | optimal | 0.357200583208 | 0.357200583208 | 0 |
+| V12 M2 average | optimal | 0.718504070755 | 0.718504070755 | 0 |
+| high_imbalance_seed3202 | not closed | 1.619911 | 1.74931345205 | 0.0739732790021 |
+| tight_T_seed3101 | optimal | 0.107252734134 | 0.107252734134 | 0 |
+| tight_T_seed3102 | not closed | 0.520346 | 0.600704436685 | 0.133773669342 |
+| moderate_seed3301 | not closed | 0.046285 | 0.0491525526647 | 0.058339852343 |
+| moderate_seed3302 | not closed | 0.13884 | 0.195636206549 | 0.290315415285 |
+
+The fair single-thread CPLEX comparison is benchmark-only.  It does not feed
+any compact-BC certificate.  Under 300s, compact-BC gives stronger LB/gap than
+plain CPLEX on the compared V20 rows, and certifies V12 M2 and
+`tight_T_seed3101` where plain CPLEX remains noncertified.  The short
+one-thread compact-BC suite does not reproduce the earlier longer/multithread
+`high_imbalance_seed3202` certificate, so broad benchmark claims should wait
+for longer controlled rows.
+
+Dynamic root cut separation is currently metadata/static-family rerun support,
+not a true callback-based separator.  Receiver-set source-cover is paper-safe
+only for the singleton net-delivery lower-bound row; pair/set receiver-cover
+remains diagnostic.
+
 ## Algorithm
 
 `gcap-frontier` covers at least `G in [0, incumbent_objective]`. For each interval `[gamma_L,gamma_U]`, the compact-BC preset first applies valid relaxation bounds and then solves/bounds a compact fixed-interval model:
