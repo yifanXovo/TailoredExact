@@ -72,3 +72,23 @@ certifies in a controlled one-thread 1200s static compact-BC recovery row.
 `moderate_seed3301` remains open with two unresolved leaves in the best
 solver-final diagnostic row. Same-budget CPLEX rows are single-thread and
 benchmark-only.
+
+## Effectiveness Round Update
+
+`results/gf_compact_bc_effectiveness_round/` separates attribution from
+dominance. A certified row may be relaxation-only, relaxation plus Compact-BC,
+or empty/out-of-range; relaxation-only closure is not a failure. Compact-BC
+effectiveness is measured on leaves that relaxation/frontier does not close.
+
+The round adds:
+
+- `scripts/audit_certificate_sources.py`;
+- `scripts/audit_timeprofile_finalization.py`;
+- `scripts/audit_compact_bc_effectiveness.py`;
+- selected-row de-duplication for conflicting time-profile artifacts;
+- `best_valid_lb_seen` / `best_valid_gap_seen` checkpoint fields;
+- diagnostic-only `--compact-bc-diagnostic-force-leaf-solve`.
+
+Paper-core certificates still exclude BPC, archive scanning, known UB injection,
+external incumbents, focus-only evidence, route-mask enumeration certificates,
+and CPLEX benchmark bounds.

@@ -837,6 +837,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             opt.compact_bc_progress_interval = std::stod(requireValue(i, argc, argv));
             opt.progress_interval_seconds = opt.compact_bc_progress_interval;
         }
+        else if (arg == "--compact-bc-diagnostic-force-leaf-solve") {
+            opt.compact_bc_diagnostic_force_leaf_solve = parseBoolValue(requireValue(i, argc, argv));
+        }
         else if (arg == "--frontier-focus-interval-id") opt.frontier_focus_interval_id = requireValue(i, argc, argv);
         else if (arg == "--frontier-focus-range") opt.frontier_focus_range = requireValue(i, argc, argv);
         else if (arg == "--frontier-focus-from-result") opt.frontier_focus_from_result = requireValue(i, argc, argv);
@@ -1778,6 +1781,8 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
         opt.compact_bc_progress_interval > 0.0
             ? opt.compact_bc_progress_interval
             : opt.progress_interval_seconds;
+    result.compact_bc_diagnostic_force_leaf_solve =
+        opt.compact_bc_diagnostic_force_leaf_solve;
     result.column_tracks = resolvedColumnTracks(instance, opt);
     result.rmp_column_space = resolvedRmpColumnSpace(instance, opt);
     result.relaxed_rmp_enabled = opt.relaxed_columns_in_rmp ||
@@ -15974,6 +15979,22 @@ int main(int argc, char** argv) {
             if (r.finalization_source.empty()) {
                 r.finalization_source = "solver_final_json";
             }
+            if (r.best_valid_lb_seen <= 0.0) {
+                r.best_valid_lb_seen = r.lower_bound;
+            }
+            if (r.best_valid_gap_seen <= 0.0 || r.best_valid_gap_seen > r.gap) {
+                r.best_valid_gap_seen = r.gap;
+            }
+            if (r.best_valid_ledger_checkpoint.empty()) {
+                r.best_valid_ledger_checkpoint = r.result_file.empty()
+                    ? opt.out_path
+                    : r.result_file;
+            }
+            if (r.best_valid_ledger_time <= 0.0) {
+                r.best_valid_ledger_time = r.runtime_seconds;
+            }
+            r.final_json_uses_best_checkpoint = true;
+            r.interrupted_run_best_bound_preserved = true;
             r.solver_finalization_reached = true;
             r.wrapper_synthesized_final_json = false;
             r.process_return_code = 0;

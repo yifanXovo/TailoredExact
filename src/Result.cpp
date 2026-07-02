@@ -475,6 +475,16 @@ std::string resultToJson(const SolveResult& input) {
     out << "  \"stop_reason\": \"" << jsonEscape(inferStopReason(result)) << "\",\n";
     out << "  \"finalization_source\": \""
         << jsonEscape(result.finalization_source) << "\",\n";
+    out << "  \"best_valid_lb_seen\": " << result.best_valid_lb_seen << ",\n";
+    out << "  \"best_valid_gap_seen\": " << result.best_valid_gap_seen << ",\n";
+    out << "  \"best_valid_ledger_checkpoint\": \""
+        << jsonEscape(result.best_valid_ledger_checkpoint) << "\",\n";
+    out << "  \"best_valid_ledger_time\": "
+        << result.best_valid_ledger_time << ",\n";
+    out << "  \"final_json_uses_best_checkpoint\": "
+        << (result.final_json_uses_best_checkpoint ? "true" : "false") << ",\n";
+    out << "  \"interrupted_run_best_bound_preserved\": "
+        << (result.interrupted_run_best_bound_preserved ? "true" : "false") << ",\n";
     out << "  \"last_progress_event\": \""
         << jsonEscape(result.last_progress_event) << "\",\n";
     out << "  \"plateau_reason\": \""
@@ -1381,6 +1391,8 @@ std::string resultToJson(const SolveResult& input) {
         << (result.interval_oracle_can_merge_bound ? "true" : "false") << ",\n";
     out << "  \"compact_interval_bc_enabled\": "
         << (result.compact_interval_bc_enabled ? "true" : "false") << ",\n";
+    out << "  \"compact_bc_diagnostic_force_leaf_solve\": "
+        << (result.compact_bc_diagnostic_force_leaf_solve ? "true" : "false") << ",\n";
     out << "  \"compact_interval_bc_model_type\": \""
         << jsonEscape(result.compact_interval_bc_model_type) << "\",\n";
     out << "  \"compact_interval_bc_solver\": \""

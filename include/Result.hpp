@@ -582,6 +582,7 @@ struct SolveResult {
     double interval_oracle_gap_to_cutoff = 0.0;
     bool interval_oracle_can_merge_bound = false;
     bool compact_interval_bc_enabled = false;
+    bool compact_bc_diagnostic_force_leaf_solve = false;
     std::string compact_interval_bc_model_type = "off";
     std::string compact_interval_bc_solver = "cplex";
     int compact_interval_bc_threads = 0;
@@ -688,6 +689,12 @@ struct SolveResult {
     bool sealed_run_forbidden_source_used = false;
     std::string sealed_run_rejection_reason;
     std::string finalization_source;
+    double best_valid_lb_seen = 0.0;
+    double best_valid_gap_seen = 0.0;
+    std::string best_valid_ledger_checkpoint;
+    double best_valid_ledger_time = 0.0;
+    bool final_json_uses_best_checkpoint = false;
+    bool interrupted_run_best_bound_preserved = false;
     std::string last_progress_event;
     std::string plateau_reason;
     bool solver_finalization_reached = false;

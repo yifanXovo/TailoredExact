@@ -77,3 +77,26 @@ Paper-readiness decision: not ready for broad benchmark claims. The package is
 useful for controlled time-profile and same-budget CPLEX comparison, but
 moderate low-Gini leaves and large-V model-size behavior still need targeted
 compact-BC strengthening.
+
+## Effectiveness Attribution Evidence
+
+`results/gf_compact_bc_effectiveness_round/` is the current package for
+certificate-source attribution and repaired time-profile finalization.
+
+Classification in that package:
+
+- `relaxation_only`: valid framework certificates closed before Compact-BC was
+  needed;
+- `relaxation_plus_compact_bc`: rows or leaves where Compact-BC contributes
+  interval evidence;
+- `wrapper_checkpoint_only`: noncertified interrupted artifacts repaired from
+  the best valid progress checkpoint;
+- `benchmark_only`: plain CPLEX rows, never imported into certificate evidence;
+- `compact_bc_leaf_diagnostic`: interval-local subsolver rows used to diagnose
+  Compact-BC behavior.
+
+The correct paper claim is not that Compact-BC is always the dominant closure
+source. The claim is a Gini-frontier compact certification framework with strong
+relaxation/domain cuts and Compact-BC subproblems for unresolved intervals.
+Current evidence keeps `moderate_seed3301` noncertified and identifies its
+remaining low-Gini leaves as the next hard-leaf strengthening target.

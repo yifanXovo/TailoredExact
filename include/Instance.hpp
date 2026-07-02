@@ -316,6 +316,7 @@ struct SolveOptions {
     std::string ub_event_log_path;
     double progress_interval_seconds = 0.0;
     double compact_bc_progress_interval = 0.0;
+    bool compact_bc_diagnostic_force_leaf_solve = false;
     std::string frontier_focus_interval_id = "auto";
     std::string frontier_focus_range;
     std::string frontier_focus_from_result;
