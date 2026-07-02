@@ -64,6 +64,11 @@ def main() -> int:
         )
         cut_scope = str(data.get("compact_bc_bound_scope", ""))
         fairness = str(data.get("thread_fairness_class", ""))
+        time_budget = data.get("time_budget_seconds", "")
+        progress_log = str(data.get("progress_log") or data.get("progress_log_path") or "")
+        model_size_limit = status == "model_size_limit" or bool(
+            str(data.get("compact_bc_model_size_stop_reason", ""))
+        )
         paper_row = preset == "paper-gf-compact-bc" and method == "gcap-frontier"
         failure_reasons: List[str] = []
 
@@ -91,6 +96,10 @@ def main() -> int:
             failure_reasons.append("paper_row_missing_thread_fairness_class")
         if paper_row and str(data.get("solver_thread_policy", "")) in {"", "unknown"}:
             failure_reasons.append("paper_row_missing_thread_policy")
+        if paper_row and time_budget in {"", None}:
+            failure_reasons.append("paper_row_missing_time_budget_seconds")
+        if paper_row and not progress_log and not model_size_limit:
+            failure_reasons.append("paper_row_missing_progress_log_field")
         if paper_row and as_bool(data.get("certified_original_problem")):
             mode = str(data.get("compact_bc_receiver_source_cover_mode", ""))
             if "diagnostic" in mode:
@@ -112,6 +121,8 @@ def main() -> int:
                 "algorithm_preset": preset,
                 "status": status,
                 "thread_fairness_class": fairness,
+                "time_budget_seconds": time_budget,
+                "progress_log": progress_log,
                 "compact_bc_enabled_families_effective": enabled,
                 "audit_passed": not failure_reasons,
                 "failures": "|".join(failure_reasons),
@@ -127,6 +138,8 @@ def main() -> int:
             "algorithm_preset",
             "status",
             "thread_fairness_class",
+            "time_budget_seconds",
+            "progress_log",
             "compact_bc_enabled_families_effective",
             "audit_passed",
             "failures",

@@ -62,3 +62,13 @@ Round 2 adds one-thread fairness auditing, true root LP cut probing for compact
 interval BC, and model-size finalization for large diagnostics. The controlled
 one-thread evidence certifies V12 M1, V12 M2, `high_imbalance_seed3202`, and
 `tight_T_seed3101`; `moderate_seed3301` remains open.
+
+## Time-Profile Round Update
+
+`results/gf_compact_bc_timeprofile_round/` is the current time-profile package.
+It treats 300s as a comparison budget, not a certification requirement. In this
+round, `tight_T_seed3101` certifies at 300s and `high_imbalance_seed3202`
+certifies in a controlled one-thread 1200s static compact-BC recovery row.
+`moderate_seed3301` remains open with two unresolved leaves in the best
+solver-final diagnostic row. Same-budget CPLEX rows are single-thread and
+benchmark-only.

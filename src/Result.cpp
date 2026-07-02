@@ -466,6 +466,11 @@ std::string resultToJson(const SolveResult& input) {
     out << "  \"gap\": " << result.gap << ",\n";
     out << "  \"runtime_seconds\": " << result.runtime_seconds << ",\n";
     out << "  \"wall_time_seconds\": " << wall_time << ",\n";
+    out << "  \"time_budget_seconds\": " << result.time_budget_seconds << ",\n";
+    out << "  \"actual_runtime_seconds\": "
+        << (result.actual_runtime_seconds > 0.0
+                ? result.actual_runtime_seconds
+                : result.runtime_seconds) << ",\n";
     out << "  \"aggregate_worker_time_seconds\": " << aggregate_worker_time << ",\n";
     out << "  \"stop_reason\": \"" << jsonEscape(inferStopReason(result)) << "\",\n";
     out << "  \"finalization_source\": \""
@@ -1418,6 +1423,16 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.compact_bc_root_probe) << "\",\n";
     out << "  \"compact_bc_dynamic_cut_violation_tol\": "
         << result.compact_bc_dynamic_cut_violation_tol << ",\n";
+    out << "  \"compact_bc_domain_propagation_mode\": \""
+        << jsonEscape(result.compact_bc_domain_propagation_mode) << "\",\n";
+    out << "  \"compact_bc_domain_propagation_rounds\": "
+        << result.compact_bc_domain_propagation_rounds << ",\n";
+    out << "  \"compact_bc_domain_propagation_rounds_completed\": "
+        << result.compact_bc_domain_propagation_rounds_completed << ",\n";
+    out << "  \"compact_bc_expensive_static_families\": \""
+        << jsonEscape(result.compact_bc_expensive_static_families) << "\",\n";
+    out << "  \"compact_bc_use_dynamic_instead_of_static\": "
+        << (result.compact_bc_use_dynamic_instead_of_static ? "true" : "false") << ",\n";
     out << "  \"compact_bc_dynamic_cuts_added_by_family\": \""
         << jsonEscape(result.compact_bc_dynamic_cuts_added_by_family) << "\",\n";
     out << "  \"compact_bc_dynamic_max_violation_by_family\": \""
@@ -1659,6 +1674,10 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.progress_log_path) << "\",\n";
     out << "  \"progress_checkpoints_written\": "
         << result.progress_checkpoints_written << ",\n";
+    out << "  \"gap_trajectory_available\": "
+        << (result.gap_trajectory_available ? "true" : "false") << ",\n";
+    out << "  \"compact_bc_progress_interval_seconds\": "
+        << result.compact_bc_progress_interval_seconds << ",\n";
     out << "  \"ub_event_log_path\": \""
         << jsonEscape(result.ub_event_log_path) << "\",\n";
     out << "  \"initial_heuristic_UB\": " << result.initial_heuristic_UB << ",\n";

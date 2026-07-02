@@ -56,3 +56,24 @@ Certified exact compact-BC rows:
 Noncertified compact-BC rows include `moderate_seed3301`, the remaining V20/M3
 stress rows, and all V50/V100 diagnostics. Plain CPLEX rows in this package are
 single-thread benchmark-only comparisons.
+
+## Time-Profile Evidence Classification
+
+`results/gf_compact_bc_timeprofile_round/` is the current audited time-profile
+package.
+
+Certified exact compact-BC rows in this package:
+
+- V12 M1 average;
+- V12 M2 average;
+- `tight_T_seed3101`;
+- `high_imbalance_seed3202` in the 1200s static recovery row.
+
+Noncertified compact-BC rows include `moderate_seed3301`,
+`high_imbalance_seed3201`, `tight_T_seed3102`, `moderate_seed3302`, and all
+large-V diagnostics. Plain CPLEX rows are one-thread benchmark-only rows.
+
+Paper-readiness decision: not ready for broad benchmark claims. The package is
+useful for controlled time-profile and same-budget CPLEX comparison, but
+moderate low-Gini leaves and large-V model-size behavior still need targeted
+compact-BC strengthening.

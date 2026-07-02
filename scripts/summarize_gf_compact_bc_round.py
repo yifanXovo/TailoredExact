@@ -30,6 +30,24 @@ def pick(d: Dict[str, Any], *keys: str) -> Dict[str, Any]:
     return {k: d.get(k, "") for k in keys}
 
 
+def progress_available(raw_path: Path, d: Dict[str, Any]) -> bool:
+    candidates: List[Path] = []
+    progress = str(d.get("progress_log") or d.get("progress_log_path") or "")
+    if progress:
+        candidates.append(Path(progress))
+        if not Path(progress).is_absolute():
+            candidates.append(raw_path.parent / progress)
+    stem_progress = raw_path.with_suffix(".progress.csv")
+    candidates.append(stem_progress)
+    for candidate in candidates:
+        try:
+            if candidate.exists() and candidate.stat().st_size > 0:
+                return True
+        except OSError:
+            continue
+    return False
+
+
 def write_csv(path: Path, rows: List[Dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if not rows:
@@ -76,6 +94,13 @@ def main() -> int:
                 "upper_bound",
                 "gap",
                 "runtime_seconds",
+                "wall_time_seconds",
+                "time_budget_seconds",
+                "actual_runtime_seconds",
+                "gap_trajectory_available",
+                "progress_log",
+                "progress_checkpoints_written",
+                "compact_bc_progress_interval_seconds",
                 "unresolved_intervals",
                 "invalid_bound_intervals",
                 "open_nodes",
@@ -94,6 +119,11 @@ def main() -> int:
                 "compact_bc_dynamic_cut_families",
                 "compact_bc_root_probe",
                 "compact_bc_dynamic_cut_violation_tol",
+                "compact_bc_domain_propagation_mode",
+                "compact_bc_domain_propagation_rounds",
+                "compact_bc_domain_propagation_rounds_completed",
+                "compact_bc_expensive_static_families",
+                "compact_bc_use_dynamic_instead_of_static",
                 "compact_bc_dynamic_cuts_added_by_family",
                 "compact_bc_dynamic_max_violation_by_family",
                 "compact_bc_dynamic_cuts_added_total",
@@ -120,6 +150,13 @@ def main() -> int:
                 "no_external_known_ub",
             ),
         }
+        if row.get("time_budget_seconds") in {"", None}:
+            row["time_budget_seconds"] = d.get("solve_time_limit", "")
+        if row.get("actual_runtime_seconds") in {"", None}:
+            row["actual_runtime_seconds"] = d.get("runtime_seconds", "")
+        row["gap_trajectory_available"] = (
+            bool(d.get("gap_trajectory_available")) or progress_available(path, d)
+        )
         summary_rows.append(row)
         if method == "cplex":
             cplex_rows.append(
@@ -135,8 +172,11 @@ def main() -> int:
                         "upper_bound",
                         "gap",
                         "runtime_seconds",
+                        "time_budget_seconds",
+                        "actual_runtime_seconds",
                         "nodes",
                         "cplex_threads",
+                        "mip_threads",
                         "solver_thread_policy",
                         "thread_fairness_class",
                         "verifier_passed",
@@ -165,7 +205,12 @@ def main() -> int:
                         "compact_bc_dynamic_cuts_added_by_family",
                         "compact_bc_dynamic_max_violation_by_family",
                         "compact_bc_dynamic_cuts_added_total",
+                        "compact_bc_domain_propagation_mode",
+                        "compact_bc_domain_propagation_rounds",
+                        "compact_bc_domain_propagation_rounds_completed",
                         "compact_bc_model_size_policy",
+                        "compact_bc_expensive_static_families",
+                        "compact_bc_use_dynamic_instead_of_static",
                         "compact_bc_model_rows",
                         "compact_bc_model_cols",
                         "compact_bc_model_nonzeros",
@@ -191,7 +236,13 @@ def main() -> int:
                 }
             )
 
-    for csv_path in sorted(raw_dir.glob("*.auto_oracle.csv")):
+    interval_csvs = sorted(raw_dir.rglob("*.auto_oracle.csv"))
+    interval_csvs.extend(sorted(raw_dir.rglob("*.intervals.csv")))
+    seen_csvs = set()
+    for csv_path in interval_csvs:
+        if csv_path in seen_csvs:
+            continue
+        seen_csvs.add(csv_path)
         with csv_path.open(newline="", encoding="utf-8") as handle:
             for row in csv.DictReader(handle):
                 row = {"source_csv": str(csv_path), **row}
