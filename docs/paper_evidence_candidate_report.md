@@ -104,3 +104,7 @@ remaining low-Gini leaves as the next hard-leaf strengthening target.
 ## Effectiveness Round 2 Evidence
 
 The candidate evidence now reports whether certificates are relaxation-only, Compact-BC-assisted, mixed, or diagnostic. Compact-BC dominance is not required for a valid framework certificate.
+
+## Effectiveness Round 3 Evidence
+
+The candidate evidence distinguishes relaxation-only certificates, Compact-BC-assisted certificates, diagnostic fixed-interval probes, and benchmark-only CPLEX rows. Compact-BC dominance is not required for a valid framework certificate.

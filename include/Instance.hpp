@@ -150,6 +150,12 @@ struct SolveOptions {
     double compact_bc_dynamic_cut_violation_tol = 1e-6;
     std::string compact_bc_domain_propagation_mode = "static";
     int compact_bc_domain_propagation_rounds = 1;
+    std::string compact_bc_low_gini_strengthening = "off";
+    std::string compact_bc_denominator_bound_mode = "basic";
+    std::string compact_bc_objective_estimator_mode = "single";
+    bool compact_bc_low_gini_strengthening_explicit = false;
+    bool compact_bc_denominator_bound_mode_explicit = false;
+    bool compact_bc_objective_estimator_mode_explicit = false;
     std::string compact_bc_model_size_policy = "full";
     long long compact_bc_max_rows = 0;
     long long compact_bc_max_cols = 0;

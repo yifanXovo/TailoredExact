@@ -16,6 +16,10 @@ def main() -> int:
     root = Path(args.results)
     src = root / "natural_hard_leaf_timeprofile.csv"
     if not src.exists():
+        src = root / "natural_hard_leaf_progress.csv"
+    if not src.exists():
+        src = root / "interval_tailored_vs_plain_mip_long.csv"
+    if not src.exists():
         src = root / "compact_bc_effectiveness_summary.csv"
     rows = list(csv.DictReader(src.open(newline="", encoding="utf-8"))) if src.exists() else []
     failures = 0
@@ -23,12 +27,16 @@ def main() -> int:
     for row in rows:
         reasons = []
         called = str(row.get("compact_bc_called", "")).lower() in {"true", "1", "yes"}
+        if row.get("variant", "") in {"tailored", "plain"}:
+            called = True
         cls = row.get("closure_source_class", "")
         if cls.startswith("compact_bc") and not called:
             reasons.append("compact_bc_class_without_call")
-        if called and row.get("final_MIP_bound", "") == "":
+        final_bound = row.get("final_MIP_bound", "") or row.get("LB", "") or row.get("best_bound", "")
+        if called and final_bound == "":
             reasons.append("called_leaf_missing_final_bound")
-        if called and row.get("compact_bc_runtime", "") == "":
+        runtime = row.get("compact_bc_runtime", "") or row.get("runtime_seconds", "")
+        if called and runtime == "":
             reasons.append("called_leaf_missing_runtime")
         if str(row.get("diagnostic_only", "")).lower() == "true" and str(row.get("selected_for_summary", "")).lower() == "true":
             reasons.append("diagnostic_leaf_selected_as_paper_summary")

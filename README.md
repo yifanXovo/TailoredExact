@@ -710,3 +710,7 @@ This preset disables archive scanning, known/external incumbents, compact interv
 ## Compact-BC Effectiveness Round 2
 
 The round2 effectiveness package separates relaxation-only certificates from Compact-BC-assisted evidence, runs diagnostic fixed-interval activation probes, and keeps diagnostic rows out of paper certificate summaries.
+
+## Compact-BC Effectiveness Round 3
+
+The round3 package extends Compact-BC effectiveness evidence with clean leaf-solver semantics, longer tailored-vs-plain fixed-interval comparisons, safe low-Gini mode reporting, and generated hard diagnostics. Diagnostic rows remain outside paper certificates.

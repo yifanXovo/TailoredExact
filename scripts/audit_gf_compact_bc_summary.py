@@ -70,6 +70,7 @@ def main() -> int:
             str(data.get("compact_bc_model_size_stop_reason", ""))
         )
         force_diag = as_bool(data.get("compact_bc_diagnostic_force_leaf_solve"))
+        aggressive_low_gini = as_bool(data.get("compact_bc_low_gini_aggressive_diagnostic"))
         paper_row = (
             preset == "paper-gf-compact-bc" and
             method == "gcap-frontier" and
@@ -83,6 +84,8 @@ def main() -> int:
             failure_reasons.append("diagnostic_cut_used_by_certified_paper_row")
         if paper_row and as_bool(data.get("certificate_uses_bpc_tree")):
             failure_reasons.append("bpc_used_by_compact_bc_paper_row")
+        if paper_row and aggressive_low_gini and as_bool(data.get("certified_original_problem")):
+            failure_reasons.append("aggressive_low_gini_diagnostic_used_by_certificate")
         if paper_row and as_bool(data.get("route_mask_all_subset_enumeration_certifying")):
             failure_reasons.append("route_mask_certifying_in_compact_bc_row")
         if method == "cplex" and as_bool(data.get("certified_original_problem")):
@@ -118,6 +121,8 @@ def main() -> int:
                 failure_reasons.append("compact_bc_leaf_bad_bound_scope")
             if data.get("compact_bc_bound_valid", "") == "":
                 failure_reasons.append("compact_bc_leaf_missing_bound_valid")
+            if str(data.get("compact_bc_called_this_row", "")).lower() == "false":
+                failure_reasons.append("compact_bc_leaf_reports_not_called")
 
         if failure_reasons:
             failures += 1
@@ -132,6 +137,7 @@ def main() -> int:
                 "progress_log": progress_log,
                 "compact_bc_enabled_families_effective": enabled,
                 "compact_bc_diagnostic_force_leaf_solve": force_diag,
+                "compact_bc_low_gini_aggressive_diagnostic": aggressive_low_gini,
                 "audit_passed": not failure_reasons,
                 "failures": "|".join(failure_reasons),
             }
@@ -150,6 +156,7 @@ def main() -> int:
             "progress_log",
             "compact_bc_enabled_families_effective",
             "compact_bc_diagnostic_force_leaf_solve",
+            "compact_bc_low_gini_aggressive_diagnostic",
             "audit_passed",
             "failures",
         ]

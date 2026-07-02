@@ -1346,3 +1346,7 @@ turn wrapper checkpoints into optimality certificates.
 ## Compact-BC Effectiveness Round 2 Note
 
 The paper-facing line is the GF compact certification framework. Route-load BPC remains separate; Compact-BC is measured on unresolved interval leaves and diagnostic fixed-interval probes.
+
+## Compact-BC Effectiveness Round 3 Note
+
+The paper-facing line is the GF compact certification framework. Route-load BPC remains separate; Compact-BC is measured on unresolved interval leaves and diagnostic fixed-interval probes.

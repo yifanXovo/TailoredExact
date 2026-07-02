@@ -1451,6 +1451,14 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.compact_bc_dynamic_max_violation_by_family) << "\",\n";
     out << "  \"compact_bc_dynamic_cuts_added_total\": "
         << result.compact_bc_dynamic_cuts_added_total << ",\n";
+    out << "  \"compact_bc_low_gini_strengthening\": \""
+        << jsonEscape(result.compact_bc_low_gini_strengthening) << "\",\n";
+    out << "  \"compact_bc_denominator_bound_mode\": \""
+        << jsonEscape(result.compact_bc_denominator_bound_mode) << "\",\n";
+    out << "  \"compact_bc_objective_estimator_mode\": \""
+        << jsonEscape(result.compact_bc_objective_estimator_mode) << "\",\n";
+    out << "  \"compact_bc_low_gini_aggressive_diagnostic\": "
+        << (result.compact_bc_low_gini_aggressive_diagnostic ? "true" : "false") << ",\n";
     out << "  \"compact_bc_model_size_policy\": \""
         << jsonEscape(result.compact_bc_model_size_policy) << "\",\n";
     out << "  \"compact_bc_rows_estimated\": "
