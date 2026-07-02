@@ -1329,3 +1329,16 @@ reproduces `high_imbalance_seed3202` and keeps V12 M1/M2 and
 `tight_T_seed3101` certified. `moderate_seed3301` remains noncertified, and
 large-V rows are diagnostic model-size rows. BPC remains outside compact-BC
 paper-core certificate evidence.
+
+## GF Compact-BC Effectiveness Attribution Note
+
+`results/gf_compact_bc_effectiveness_round/` shifts the evaluation question from
+Compact-BC dominance to correct source attribution and hard-leaf effectiveness.
+Relaxation-only certificates are valid successes of the Gini-frontier framework.
+Compact-BC is evaluated on naturally unresolved intervals and diagnostic
+forced-leaf rows are explicitly separated from paper-core evidence.
+
+The round adds audits for certificate sources, repaired time-profile
+finalization, and Compact-BC hard-leaf behavior. It does not re-enable BPC in
+`paper-gf-compact-bc`, does not import CPLEX benchmark bounds, and does not
+turn wrapper checkpoints into optimality certificates.

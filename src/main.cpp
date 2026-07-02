@@ -660,11 +660,15 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--compact-bc-dynamic-cut-families") opt.compact_bc_dynamic_cut_families = requireValue(i, argc, argv);
         else if (arg == "--compact-bc-root-probe") opt.compact_bc_root_probe = requireValue(i, argc, argv);
         else if (arg == "--compact-bc-dynamic-cut-violation-tol") opt.compact_bc_dynamic_cut_violation_tol = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--compact-bc-domain-propagation-mode") opt.compact_bc_domain_propagation_mode = requireValue(i, argc, argv);
+        else if (arg == "--compact-bc-domain-propagation-rounds") opt.compact_bc_domain_propagation_rounds = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--compact-bc-model-size-policy") opt.compact_bc_model_size_policy = requireValue(i, argc, argv);
         else if (arg == "--compact-bc-max-rows") opt.compact_bc_max_rows = std::stoll(requireValue(i, argc, argv));
         else if (arg == "--compact-bc-max-cols") opt.compact_bc_max_cols = std::stoll(requireValue(i, argc, argv));
         else if (arg == "--compact-bc-max-nonzeros") opt.compact_bc_max_nonzeros = std::stoll(requireValue(i, argc, argv));
         else if (arg == "--compact-bc-max-memory-mb") opt.compact_bc_max_memory_mb = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--compact-bc-expensive-static-families") opt.compact_bc_expensive_static_families = requireValue(i, argc, argv);
+        else if (arg == "--compact-bc-use-dynamic-instead-of-static") opt.compact_bc_use_dynamic_instead_of_static = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--compact-bc-cut-profile") opt.compact_bc_cut_profile = requireValue(i, argc, argv);
         else if (arg == "--compact-bc-direct-gini-rows" || arg == "--compact-bc-gini-cap-floor-cuts") {
             opt.compact_bc_direct_gini_rows = parseBoolValue(requireValue(i, argc, argv));
@@ -829,6 +833,13 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--progress-log") opt.progress_log_path = requireValue(i, argc, argv);
         else if (arg == "--ub-event-log") opt.ub_event_log_path = requireValue(i, argc, argv);
         else if (arg == "--progress-interval-seconds") opt.progress_interval_seconds = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--compact-bc-progress-interval") {
+            opt.compact_bc_progress_interval = std::stod(requireValue(i, argc, argv));
+            opt.progress_interval_seconds = opt.compact_bc_progress_interval;
+        }
+        else if (arg == "--compact-bc-diagnostic-force-leaf-solve") {
+            opt.compact_bc_diagnostic_force_leaf_solve = parseBoolValue(requireValue(i, argc, argv));
+        }
         else if (arg == "--frontier-focus-interval-id") opt.frontier_focus_interval_id = requireValue(i, argc, argv);
         else if (arg == "--frontier-focus-range") opt.frontier_focus_range = requireValue(i, argc, argv);
         else if (arg == "--frontier-focus-from-result") opt.frontier_focus_from_result = requireValue(i, argc, argv);
@@ -1085,6 +1096,20 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.compact_bc_dynamic_cut_violation_tol <= 0.0) {
         opt.compact_bc_dynamic_cut_violation_tol = 1e-6;
     }
+    opt.compact_bc_domain_propagation_mode =
+        lowerAscii(opt.compact_bc_domain_propagation_mode);
+    if (opt.compact_bc_domain_propagation_mode != "off" &&
+        opt.compact_bc_domain_propagation_mode != "iterative") {
+        opt.compact_bc_domain_propagation_mode = "static";
+    }
+    if (opt.compact_bc_domain_propagation_rounds < 0) {
+        opt.compact_bc_domain_propagation_rounds = 0;
+    }
+    if (opt.compact_bc_domain_propagation_mode == "off") {
+        opt.compact_bc_domain_propagation_rounds = 0;
+    } else if (opt.compact_bc_domain_propagation_rounds == 0) {
+        opt.compact_bc_domain_propagation_rounds = 1;
+    }
     opt.compact_bc_model_size_policy = lowerAscii(opt.compact_bc_model_size_policy);
     if (opt.compact_bc_model_size_policy != "resource-adaptive" &&
         opt.compact_bc_model_size_policy != "diagnostic-minimal") {
@@ -1094,6 +1119,12 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.compact_bc_max_cols < 0) opt.compact_bc_max_cols = 0;
     if (opt.compact_bc_max_nonzeros < 0) opt.compact_bc_max_nonzeros = 0;
     if (opt.compact_bc_max_memory_mb < 0.0) opt.compact_bc_max_memory_mb = 0.0;
+    opt.compact_bc_expensive_static_families =
+        lowerAscii(opt.compact_bc_expensive_static_families);
+    if (opt.compact_bc_expensive_static_families != "on" &&
+        opt.compact_bc_expensive_static_families != "off") {
+        opt.compact_bc_expensive_static_families = "auto";
+    }
     opt.compact_bc_receiver_source_cover_mode =
         lowerAscii(opt.compact_bc_receiver_source_cover_mode);
     if (opt.compact_bc_receiver_source_cover_mode != "off" &&
@@ -1173,6 +1204,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.frontier_critical_band_min_width = 1e-4;
     }
     if (opt.progress_interval_seconds < 0.0) opt.progress_interval_seconds = 0.0;
+    if (opt.compact_bc_progress_interval < 0.0) opt.compact_bc_progress_interval = 0.0;
     if (opt.frontier_focus_time_limit == 0.0) opt.frontier_focus_time_limit = -1.0;
     if (opt.frontier_focus_relax_seconds == 0.0) opt.frontier_focus_relax_seconds = -1.0;
     if (opt.frontier_focus_tree_nodes == 0) opt.frontier_focus_tree_nodes = -1;
@@ -1682,6 +1714,8 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
     result.pricing_load_dp_dominance_enabled = opt.pricing_load_dp_dominance;
     result.pricing_operation_dp_dominance_enabled =
         opt.pricing_operation_dp_dominance && opt.pricing_load_dp_dominance;
+    result.time_budget_seconds = opt.solve_time_limit;
+    result.actual_runtime_seconds = result.runtime_seconds;
     result.compact_bc_root_cut_rounds = opt.compact_bc_root_cut_rounds;
     result.compact_bc_total_root_cut_rounds = opt.compact_bc_root_cut_rounds;
     result.compact_bc_root_cut_time_limit = opt.compact_bc_root_cut_time_limit;
@@ -1689,6 +1723,14 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
     result.compact_bc_root_probe = opt.compact_bc_root_probe;
     result.compact_bc_dynamic_cut_violation_tol =
         opt.compact_bc_dynamic_cut_violation_tol;
+    result.compact_bc_domain_propagation_mode =
+        opt.compact_bc_domain_propagation_mode;
+    result.compact_bc_domain_propagation_rounds =
+        opt.compact_bc_domain_propagation_rounds;
+    result.compact_bc_expensive_static_families =
+        opt.compact_bc_expensive_static_families;
+    result.compact_bc_use_dynamic_instead_of_static =
+        opt.compact_bc_use_dynamic_instead_of_static;
     result.compact_bc_model_size_policy = opt.compact_bc_model_size_policy;
     result.compact_bc_receiver_source_cover_mode =
         opt.compact_bc_receiver_source_cover_mode;
@@ -1735,6 +1777,12 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
     result.core_bpc_min_seconds = opt.core_bpc_min_seconds;
     result.core_bpc_max_leaves = opt.core_bpc_max_leaves;
     result.core_bpc_leaf_selection = opt.core_bpc_leaf_selection;
+    result.compact_bc_progress_interval_seconds =
+        opt.compact_bc_progress_interval > 0.0
+            ? opt.compact_bc_progress_interval
+            : opt.progress_interval_seconds;
+    result.compact_bc_diagnostic_force_leaf_solve =
+        opt.compact_bc_diagnostic_force_leaf_solve;
     result.column_tracks = resolvedColumnTracks(instance, opt);
     result.rmp_column_space = resolvedRmpColumnSpace(instance, opt);
     result.relaxed_rmp_enabled = opt.relaxed_columns_in_rmp ||
@@ -14184,6 +14232,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.final_UB = result.upper_bound;
     writeProgressCheckpoint("final_summary", true);
     if (progress_stream.is_open()) progress_stream.close();
+    result.gap_trajectory_available =
+        !opt.progress_log_path.empty() && result.progress_checkpoints_written > 0;
+    result.actual_runtime_seconds = result.runtime_seconds;
     if (!opt.progress_log_path.empty()) {
         result.notes.push_back("periodic progress log written to " + opt.progress_log_path
             + ", checkpoints=" + std::to_string(result.progress_checkpoints_written)
@@ -15928,6 +15979,22 @@ int main(int argc, char** argv) {
             if (r.finalization_source.empty()) {
                 r.finalization_source = "solver_final_json";
             }
+            if (r.best_valid_lb_seen <= 0.0) {
+                r.best_valid_lb_seen = r.lower_bound;
+            }
+            if (r.best_valid_gap_seen <= 0.0 || r.best_valid_gap_seen > r.gap) {
+                r.best_valid_gap_seen = r.gap;
+            }
+            if (r.best_valid_ledger_checkpoint.empty()) {
+                r.best_valid_ledger_checkpoint = r.result_file.empty()
+                    ? opt.out_path
+                    : r.result_file;
+            }
+            if (r.best_valid_ledger_time <= 0.0) {
+                r.best_valid_ledger_time = r.runtime_seconds;
+            }
+            r.final_json_uses_best_checkpoint = true;
+            r.interrupted_run_best_bound_preserved = true;
             r.solver_finalization_reached = true;
             r.wrapper_synthesized_final_json = false;
             r.process_return_code = 0;

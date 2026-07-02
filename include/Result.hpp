@@ -53,6 +53,8 @@ struct SolveResult {
     double gap = 0.0;
     double runtime_seconds = 0.0;
     double wall_time_seconds = 0.0;
+    double time_budget_seconds = 0.0;
+    double actual_runtime_seconds = 0.0;
     double aggregate_worker_time_seconds = 0.0;
     long long nodes = 0;
     long long columns = 0;
@@ -580,6 +582,7 @@ struct SolveResult {
     double interval_oracle_gap_to_cutoff = 0.0;
     bool interval_oracle_can_merge_bound = false;
     bool compact_interval_bc_enabled = false;
+    bool compact_bc_diagnostic_force_leaf_solve = false;
     std::string compact_interval_bc_model_type = "off";
     std::string compact_interval_bc_solver = "cplex";
     int compact_interval_bc_threads = 0;
@@ -601,6 +604,11 @@ struct SolveResult {
     std::string compact_bc_dynamic_cut_families;
     std::string compact_bc_root_probe = "lp";
     double compact_bc_dynamic_cut_violation_tol = 1e-6;
+    std::string compact_bc_domain_propagation_mode = "static";
+    int compact_bc_domain_propagation_rounds = 1;
+    int compact_bc_domain_propagation_rounds_completed = 0;
+    std::string compact_bc_expensive_static_families = "auto";
+    bool compact_bc_use_dynamic_instead_of_static = false;
     std::string compact_bc_dynamic_cuts_added_by_family;
     std::string compact_bc_dynamic_max_violation_by_family;
     long long compact_bc_dynamic_cuts_added_total = 0;
@@ -681,6 +689,12 @@ struct SolveResult {
     bool sealed_run_forbidden_source_used = false;
     std::string sealed_run_rejection_reason;
     std::string finalization_source;
+    double best_valid_lb_seen = 0.0;
+    double best_valid_gap_seen = 0.0;
+    std::string best_valid_ledger_checkpoint;
+    double best_valid_ledger_time = 0.0;
+    bool final_json_uses_best_checkpoint = false;
+    bool interrupted_run_best_bound_preserved = false;
     std::string last_progress_event;
     std::string plateau_reason;
     bool solver_finalization_reached = false;
@@ -721,6 +735,8 @@ struct SolveResult {
     std::string bpc_interval_certificate_basis;
     std::string progress_log_path;
     long long progress_checkpoints_written = 0;
+    bool gap_trajectory_available = false;
+    double compact_bc_progress_interval_seconds = 0.0;
     std::string ub_event_log_path;
     double initial_heuristic_UB = 0.0;
     double final_UB = 0.0;

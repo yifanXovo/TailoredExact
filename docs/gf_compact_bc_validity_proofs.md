@@ -113,3 +113,20 @@ Dynamic root separation in round 2 reuses only cut families already classified
 as valid. The dynamic loop may add a cut only after reading a root LP solution
 and verifying a positive violation; generated cuts are logged separately from
 static rows.
+
+## Effectiveness Attribution Rules
+
+The effectiveness round does not add a new mathematical certificate source. It
+adds attribution and finalization checks around the existing sources:
+
+- relaxation/frontier bounds remain valid when the ledger records
+  `interval_closure_source=relaxation_bound` and the row passes audit;
+- Compact-BC interval evidence is valid only for original fixed-interval models
+  with `compact_bc_bound_scope=original_fixed_interval` or proven infeasibility;
+- wrapper checkpoints are never converted into optimal certificates;
+- `--compact-bc-diagnostic-force-leaf-solve` is diagnostic-only unless a future
+  full-ledger merge proves exact coverage under the same instance, lambda, T,
+  incumbent UB, and Gini interval partition.
+
+These rules allow correct attribution without requiring Compact-BC to dominate
+rows already closed by relaxation.

@@ -59,6 +59,35 @@ rows are diagnostic model-size rows only. Plain CPLEX comparison rows are
 single-thread benchmark-only evidence and are not used by the compact-BC
 certificate ledger.
 
+### Time-profile compact-BC status
+
+`results/gf_compact_bc_timeprofile_round/` contains the current audited
+time-profile package. The 300s rows are comparison points, not certification
+requirements. Under one-thread fair settings, `tight_T_seed3101` certifies at
+300s and `high_imbalance_seed3202` certifies in a 1200s static compact-BC
+recovery row. V12 M1 and V12 M2 remain certified in solver-final rows.
+`moderate_seed3301` remains noncertified; its best solver-final row in this
+round has LB `0.044391`, UB `0.0491525526647`, gap `0.096872947723`, and two
+unresolved leaves. The round includes same-budget single-thread CPLEX
+comparisons and V50/V100 diagnostic final JSONs.
+
+### Effectiveness attribution status
+
+`results/gf_compact_bc_effectiveness_round/` is the current attribution and
+finalization-repair package. It does not require Compact-BC to dominate every
+certificate: relaxation-only certificates are valid successes of the framework,
+while Compact-BC is evaluated on naturally unresolved leaves. The package
+classifies certified rows as relaxation-only, Compact-BC-assisted,
+benchmark-only CPLEX, or diagnostic leaf evidence, and repairs wrapper rows so
+interrupted time-profile artifacts preserve the best valid noncertified
+checkpoint without turning checkpoint equality into a false optimality claim.
+
+Current interpretation: the correct paper claim is a Gini-frontier compact
+certification framework with strong relaxation/domain cuts and Compact-BC
+subproblems for unresolved intervals. `moderate_seed3301` still needs hard-leaf
+strengthening; its Compact-BC rows close several leaves by infeasibility but
+leave low-Gini leaves open by time limit.
+
 ```powershell
 build\ExactEBRP.exe --method gcap-frontier `
   --algorithm-preset paper-gf-compact-bc --paper-run-sealed true `

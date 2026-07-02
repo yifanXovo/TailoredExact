@@ -466,10 +466,25 @@ std::string resultToJson(const SolveResult& input) {
     out << "  \"gap\": " << result.gap << ",\n";
     out << "  \"runtime_seconds\": " << result.runtime_seconds << ",\n";
     out << "  \"wall_time_seconds\": " << wall_time << ",\n";
+    out << "  \"time_budget_seconds\": " << result.time_budget_seconds << ",\n";
+    out << "  \"actual_runtime_seconds\": "
+        << (result.actual_runtime_seconds > 0.0
+                ? result.actual_runtime_seconds
+                : result.runtime_seconds) << ",\n";
     out << "  \"aggregate_worker_time_seconds\": " << aggregate_worker_time << ",\n";
     out << "  \"stop_reason\": \"" << jsonEscape(inferStopReason(result)) << "\",\n";
     out << "  \"finalization_source\": \""
         << jsonEscape(result.finalization_source) << "\",\n";
+    out << "  \"best_valid_lb_seen\": " << result.best_valid_lb_seen << ",\n";
+    out << "  \"best_valid_gap_seen\": " << result.best_valid_gap_seen << ",\n";
+    out << "  \"best_valid_ledger_checkpoint\": \""
+        << jsonEscape(result.best_valid_ledger_checkpoint) << "\",\n";
+    out << "  \"best_valid_ledger_time\": "
+        << result.best_valid_ledger_time << ",\n";
+    out << "  \"final_json_uses_best_checkpoint\": "
+        << (result.final_json_uses_best_checkpoint ? "true" : "false") << ",\n";
+    out << "  \"interrupted_run_best_bound_preserved\": "
+        << (result.interrupted_run_best_bound_preserved ? "true" : "false") << ",\n";
     out << "  \"last_progress_event\": \""
         << jsonEscape(result.last_progress_event) << "\",\n";
     out << "  \"plateau_reason\": \""
@@ -1376,6 +1391,8 @@ std::string resultToJson(const SolveResult& input) {
         << (result.interval_oracle_can_merge_bound ? "true" : "false") << ",\n";
     out << "  \"compact_interval_bc_enabled\": "
         << (result.compact_interval_bc_enabled ? "true" : "false") << ",\n";
+    out << "  \"compact_bc_diagnostic_force_leaf_solve\": "
+        << (result.compact_bc_diagnostic_force_leaf_solve ? "true" : "false") << ",\n";
     out << "  \"compact_interval_bc_model_type\": \""
         << jsonEscape(result.compact_interval_bc_model_type) << "\",\n";
     out << "  \"compact_interval_bc_solver\": \""
@@ -1418,6 +1435,16 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.compact_bc_root_probe) << "\",\n";
     out << "  \"compact_bc_dynamic_cut_violation_tol\": "
         << result.compact_bc_dynamic_cut_violation_tol << ",\n";
+    out << "  \"compact_bc_domain_propagation_mode\": \""
+        << jsonEscape(result.compact_bc_domain_propagation_mode) << "\",\n";
+    out << "  \"compact_bc_domain_propagation_rounds\": "
+        << result.compact_bc_domain_propagation_rounds << ",\n";
+    out << "  \"compact_bc_domain_propagation_rounds_completed\": "
+        << result.compact_bc_domain_propagation_rounds_completed << ",\n";
+    out << "  \"compact_bc_expensive_static_families\": \""
+        << jsonEscape(result.compact_bc_expensive_static_families) << "\",\n";
+    out << "  \"compact_bc_use_dynamic_instead_of_static\": "
+        << (result.compact_bc_use_dynamic_instead_of_static ? "true" : "false") << ",\n";
     out << "  \"compact_bc_dynamic_cuts_added_by_family\": \""
         << jsonEscape(result.compact_bc_dynamic_cuts_added_by_family) << "\",\n";
     out << "  \"compact_bc_dynamic_max_violation_by_family\": \""
@@ -1659,6 +1686,10 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.progress_log_path) << "\",\n";
     out << "  \"progress_checkpoints_written\": "
         << result.progress_checkpoints_written << ",\n";
+    out << "  \"gap_trajectory_available\": "
+        << (result.gap_trajectory_available ? "true" : "false") << ",\n";
+    out << "  \"compact_bc_progress_interval_seconds\": "
+        << result.compact_bc_progress_interval_seconds << ",\n";
     out << "  \"ub_event_log_path\": \""
         << jsonEscape(result.ub_event_log_path) << "\",\n";
     out << "  \"initial_heuristic_UB\": " << result.initial_heuristic_UB << ",\n";

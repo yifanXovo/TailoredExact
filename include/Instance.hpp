@@ -148,11 +148,15 @@ struct SolveOptions {
     std::string compact_bc_dynamic_cut_families;
     std::string compact_bc_root_probe = "lp";
     double compact_bc_dynamic_cut_violation_tol = 1e-6;
+    std::string compact_bc_domain_propagation_mode = "static";
+    int compact_bc_domain_propagation_rounds = 1;
     std::string compact_bc_model_size_policy = "full";
     long long compact_bc_max_rows = 0;
     long long compact_bc_max_cols = 0;
     long long compact_bc_max_nonzeros = 0;
     double compact_bc_max_memory_mb = 0.0;
+    std::string compact_bc_expensive_static_families = "auto";
+    bool compact_bc_use_dynamic_instead_of_static = false;
     std::string compact_bc_cut_profile = "balanced";
     std::string relaxation_portfolio_mode = "fixed";
     double relaxation_portfolio_probe_seconds = 1.0;
@@ -311,6 +315,8 @@ struct SolveOptions {
     std::string progress_log_path;
     std::string ub_event_log_path;
     double progress_interval_seconds = 0.0;
+    double compact_bc_progress_interval = 0.0;
+    bool compact_bc_diagnostic_force_leaf_solve = false;
     std::string frontier_focus_interval_id = "auto";
     std::string frontier_focus_range;
     std::string frontier_focus_from_result;

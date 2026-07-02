@@ -89,3 +89,39 @@ build\ExactEBRP.exe --method gcap-frontier `
 Plain CPLEX benchmark rows use `--method cplex --plain-baseline
 --cplex-threads 1` and are benchmark-only. The thread fairness audit must pass
 before any row is included in controlled comparison tables.
+
+## Time-Profile Round
+
+Use `results/gf_compact_bc_timeprofile_round/` for time-profile evidence.
+Controlled rows must emit:
+
+- `time_budget_seconds`;
+- `actual_runtime_seconds`;
+- `thread_fairness_class`;
+- `progress_log` and `gap_trajectory_available` when the frontier loop starts.
+
+The current helper is:
+
+```powershell
+D:\msys64\ucrt64\bin\python.exe scripts\run_gf_compact_bc_timeprofile.py `
+  --mode priority --include-cplex --include-large
+```
+
+Rows interrupted externally are wrapper-finalized as noncertified artifacts
+using the latest safe progress checkpoint only.
+
+## Effectiveness Attribution Round
+
+Use `results/gf_compact_bc_effectiveness_round/` for attribution and repaired
+time-profile evidence:
+
+```powershell
+D:\msys64\ucrt64\bin\python.exe scripts\run_gf_compact_bc_effectiveness_round.py --copy
+D:\msys64\ucrt64\bin\python.exe scripts\audit_certificate_sources.py --results results\gf_compact_bc_effectiveness_round --out results\gf_compact_bc_effectiveness_round\certificate_source_audit.csv
+D:\msys64\ucrt64\bin\python.exe scripts\audit_timeprofile_finalization.py --results results\gf_compact_bc_effectiveness_round --out results\gf_compact_bc_effectiveness_round\timeprofile_finalization_audit.csv
+D:\msys64\ucrt64\bin\python.exe scripts\audit_compact_bc_effectiveness.py --results results\gf_compact_bc_effectiveness_round --out results\gf_compact_bc_effectiveness_round\compact_bc_effectiveness_audit.csv
+```
+
+The effectiveness package should be read as attribution evidence. It must not be
+used to imply Compact-BC dominance when relaxation/frontier certificates close
+the row first.

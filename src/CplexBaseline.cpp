@@ -1575,6 +1575,22 @@ SolveOptions applyResourceAdaptiveCompactOptions(const Instance& instance,
             }
         }
     }
+    if (opt.compact_bc_expensive_static_families == "off" ||
+        opt.compact_bc_use_dynamic_instead_of_static) {
+        adjusted.compact_bc_support_duration_cuts = false;
+        adjusted.compact_bc_pairwise_transfer_compatibility = false;
+        adjusted.compact_bc_receiver_source_cover_cuts = false;
+        adjusted.compact_bc_support_cut_max_subsets = 0;
+        if (adjusted.compact_bc_root_cut_rounds <= 0 &&
+            opt.compact_bc_use_dynamic_instead_of_static) {
+            adjusted.compact_bc_root_cut_rounds = 1;
+        }
+        if (adjusted.compact_bc_dynamic_cut_families.empty() &&
+            opt.compact_bc_use_dynamic_instead_of_static) {
+            adjusted.compact_bc_dynamic_cut_families =
+                "support,transfer,visit,objective,receiver";
+        }
+    }
     result.compact_bc_disabled_families_due_to_size =
         disabledFamiliesSummary(opt, adjusted);
     return adjusted;
@@ -1683,6 +1699,7 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
     result.input_path = instance.path;
     result.method = "cplex";
     result.status = "running";
+    result.time_budget_seconds = options.solve_time_limit;
     result.notes.push_back(instance.distance_convention);
     const int effective_cplex_threads =
         options.cplex_threads > 0 ? options.cplex_threads : std::max(1, options.threads);
@@ -1749,6 +1766,7 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
             + quote(cmd_path) + " > " + quote(cplex_log) + " 2>&1\"";
         const int rc = std::system(command.c_str());
         result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
+        result.actual_runtime_seconds = result.runtime_seconds;
 
         std::string cplex_status = "unknown";
         double cplex_obj = 0.0;
@@ -1793,12 +1811,14 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
         result.compact_interval_bc_bound_valid = false;
         result.compact_bc_bound_valid = false;
         result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
+        result.actual_runtime_seconds = result.runtime_seconds;
         result.interval_exact_cutoff_runtime_seconds = result.runtime_seconds;
         result.compact_bc_time_seconds = result.runtime_seconds;
     } catch (const std::exception& e) {
         result.status = "error";
         result.certificate = std::string("CPLEX baseline failed: ") + e.what();
         result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
+        result.actual_runtime_seconds = result.runtime_seconds;
     }
 
     return result;
@@ -1845,6 +1865,15 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
     result.compact_bc_root_cut_time_limit = options.compact_bc_root_cut_time_limit;
     result.compact_bc_dynamic_cut_families = options.compact_bc_dynamic_cut_families;
     result.compact_bc_root_probe = options.compact_bc_root_probe;
+    result.compact_bc_domain_propagation_mode =
+        options.compact_bc_domain_propagation_mode;
+    result.compact_bc_domain_propagation_rounds =
+        options.compact_bc_domain_propagation_rounds;
+    result.compact_bc_expensive_static_families =
+        options.compact_bc_expensive_static_families;
+    result.compact_bc_use_dynamic_instead_of_static =
+        options.compact_bc_use_dynamic_instead_of_static;
+    result.time_budget_seconds = options.solve_time_limit;
     std::string oracle_mode = options.interval_exact_oracle_mode;
     std::transform(oracle_mode.begin(), oracle_mode.end(), oracle_mode.begin(),
                    [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
@@ -1961,6 +1990,14 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         result.compact_bc_root_cut_time_limit = model_options.compact_bc_root_cut_time_limit;
         result.compact_bc_dynamic_cut_families = model_options.compact_bc_dynamic_cut_families;
         result.compact_bc_root_probe = model_options.compact_bc_root_probe;
+        result.compact_bc_domain_propagation_mode =
+            model_options.compact_bc_domain_propagation_mode;
+        result.compact_bc_domain_propagation_rounds =
+            model_options.compact_bc_domain_propagation_rounds;
+        result.compact_bc_expensive_static_families =
+            model_options.compact_bc_expensive_static_families;
+        result.compact_bc_use_dynamic_instead_of_static =
+            model_options.compact_bc_use_dynamic_instead_of_static;
         std::vector<DynamicCut> dynamic_cuts;
         std::set<std::string> dynamic_signatures;
         DynamicCutStats dynamic_stats;
@@ -2021,6 +2058,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         result.compact_bc_dynamic_cut_violation_tol =
             model_options.compact_bc_dynamic_cut_violation_tol;
         result.compact_bc_model_size_policy = model_options.compact_bc_model_size_policy;
+        result.compact_bc_domain_propagation_rounds_completed =
+            model_options.compact_bc_domain_propagation_mode == "off"
+                ? 0
+                : std::min(1, std::max(1, model_options.compact_bc_domain_propagation_rounds));
         if (model_options.compact_bc_model_size_policy != "full" &&
             result.compact_bc_disabled_families_due_to_size != "none") {
             result.notes.push_back("resource-adaptive compact BC disabled families: "
@@ -2146,6 +2187,7 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             + quote(cmd_path) + " > " + quote(cplex_log) + " 2>&1\"";
         const int rc = std::system(command.c_str());
         result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
+        result.actual_runtime_seconds = result.runtime_seconds;
         result.interval_exact_cutoff_runtime_seconds = result.runtime_seconds;
         result.compact_bc_time_seconds = result.runtime_seconds;
         result.compact_bc_total_solver_time = result.runtime_seconds;
