@@ -74,6 +74,29 @@ such pickup station exists, `d[k,j]=0`.
 
 ## Diagnostic Only
 
-Receiver-set source-cover cuts are not default paper-core evidence.  The old
-unqualified form is unsafe when receiver-set stations can exchange bikes
-internally.
+The old unqualified receiver-set source-cover form is unsafe when receiver-set
+stations can exchange bikes internally.
+
+## Singleton Receiver-Set Source Cover
+
+The strengthening round implements only the conservative singleton row.  If
+tightened inventory domain `L_j` proves station `j` needs net delivery
+`R_j=max(0,L_j-initial_j)`, any original feasible fixed-interval solution must
+drop at least `R_j` bikes at `j`.  The valid paper-safe row is therefore:
+
+```text
+sum_k d[k,j] >= R_j
+```
+
+This is a delivery requirement, not an outside-source-cover claim.  It does not
+forbid internal transfers among a larger receiver set and does not assume a
+sampled route.  Pair and larger receiver-cover rows remain diagnostic until a
+full compatibility proof is added.
+
+## Dynamic Root Cuts
+
+The current implementation records root-cut-round options and can rerun static
+valid families under a root-round configuration.  It does not yet implement a
+true CPLEX callback or fractional root-solution separation loop.  Therefore
+dynamic-root rows in the strengthening round are diagnostic for scheduling and
+metadata, not evidence for a new dynamically separated cut family.

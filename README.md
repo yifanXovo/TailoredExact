@@ -29,6 +29,7 @@ build\ExactEBRP.exe --method gcap-frontier `
   --paper-run-sealed true `
   --input <instance> --lambda 0.15 --T 3600 `
   --time-limit <budget> --threads <N> --mip-threads <N> `
+  --cplex-threads <N> --compact-bc-threads <N> `
   --compact-bc-cut-profile balanced `
   --compact-bc-root-cut-rounds 0 `
   --out results\gf_compact_bc_round\raw\<row>.json
@@ -44,6 +45,30 @@ fallback by default.
 Plain CPLEX rows remain benchmark-only comparisons.  The legacy
 `interval_oracle_*` fields are retained for compatibility, but the paper-facing
 subsolver is reported through `compact_interval_bc_*` and `compact_bc_*` fields.
+
+For fair controlled comparisons, use one thread for both the compact-BC
+subsolver and plain CPLEX benchmark:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier `
+  --algorithm-preset paper-gf-compact-bc --paper-run-sealed true `
+  --input <instance> --lambda 0.15 --T 3600 `
+  --time-limit 300 --threads 1 --mip-threads 1 --compact-bc-threads 1 `
+  --compact-bc-cut-profile balanced --compact-bc-root-cut-rounds 0 `
+  --out results\gf_compact_bc_strengthening_round\raw\<row>.json
+
+build\ExactEBRP.exe --method cplex --plain-baseline true `
+  --input <instance> --lambda 0.15 --T 3600 `
+  --time-limit 300 --threads 1 --cplex-threads 1 `
+  --out results\gf_compact_bc_strengthening_round\raw\cplex1_<row>.json
+```
+
+The strengthening round in `results/gf_compact_bc_strengthening_round/` is
+single-thread fair.  In that controlled 300s suite, V12 M1, V12 M2, and
+`tight_T_seed3101` certify; `moderate_seed3301` remains noncertified with
+LB `0.046285`, UB `0.0491525526647`, and gap `0.058339852343`.  V50/V100
+compact-BC diagnostics currently hit model-size memory failures and are
+reported as honest noncertified wrapper error JSONs.
 
 ## BPC Example
 

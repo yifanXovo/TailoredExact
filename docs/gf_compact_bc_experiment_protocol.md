@@ -1,6 +1,8 @@
 # GF Compact BC Experiment Protocol
 
-Use `results/gf_compact_bc_round/` for this transition round.
+Use `results/gf_compact_bc_round/` for the initial transition round and
+`results/gf_compact_bc_strengthening_round/` for the single-thread
+strengthening round.
 
 Required checks:
 
@@ -13,7 +15,30 @@ Required checks:
 
 Paper-candidate rows must use one template, varying only input, output, time,
 and thread budgets.  They must not pass known UB files, external incumbent
-files, focus ranges, imported bounds, or archive-scanning options.
+files, focus ranges, imported bounds, BPC flags, or archive-scanning options.
+
+For the controlled paper comparison, use:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier `
+  --algorithm-preset paper-gf-compact-bc `
+  --paper-run-sealed true `
+  --input <instance> --lambda 0.15 --T 3600 `
+  --time-limit <seconds> --threads 1 --mip-threads 1 `
+  --compact-bc-threads 1 `
+  --compact-bc-cut-profile balanced `
+  --compact-bc-root-cut-rounds <N> `
+  --out results\gf_compact_bc_strengthening_round\raw\<row>.json
+```
+
+Plain compact CPLEX comparisons must be benchmark-only and single-thread fair:
+
+```powershell
+build\ExactEBRP.exe --method cplex --plain-baseline true `
+  --input <instance> --lambda 0.15 --T 3600 `
+  --time-limit <seconds> --threads 1 --cplex-threads 1 `
+  --out results\gf_compact_bc_strengthening_round\raw\cplex1_<row>.json
+```
 
 Summaries are generated with:
 
@@ -31,3 +56,18 @@ D:\msys64\ucrt64\bin\python.exe scripts\audit_bpc_certificate.py `
   --csv-out results\gf_compact_bc_round\certificate_audit.csv `
   --fail-on-error --require-progress-finals results\gf_compact_bc_round\raw
 ```
+
+Strengthening-round audits additionally run:
+
+```powershell
+D:\msys64\ucrt64\bin\python.exe scripts\audit_gf_compact_bc_summary.py `
+  --results results\gf_compact_bc_strengthening_round `
+  --out results\gf_compact_bc_strengthening_round\summary_cleanup_audit.csv
+
+D:\msys64\ucrt64\bin\python.exe scripts\audit_objective_convention.py `
+  --results results\gf_compact_bc_strengthening_round `
+  --out results\gf_compact_bc_strengthening_round\objective_convention_audit.csv
+```
+
+Rows with `thread_fairness_class != one_thread_fair` are diagnostic sensitivity
+rows, not fair controlled benchmark evidence.

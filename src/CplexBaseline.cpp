@@ -460,6 +460,23 @@ void writeCompactLp(const Instance& instance,
         }
     }
 
+    if (strengthened && options.compact_bc_receiver_source_cover_cuts) {
+        if (stats != nullptr) {
+            stats->enabled_families.push_back("receiver_source_cover_singleton_safe");
+        }
+        for (int j = 1; j <= V; ++j) {
+            const int required_delivery =
+                std::max(0, y_lb[j] - instance.initial[j]);
+            if (required_delivery <= 0) continue;
+            Expr delivery;
+            for (int k = 0; k < M; ++k) {
+                addTerm(delivery, dName(k, j), 1);
+            }
+            writeConstraint(out, cid, delivery, ">=", required_delivery);
+            if (stats != nullptr) ++stats->receiver_source_cover_cuts_added;
+        }
+    }
+
     for (int k = 0; k < M; ++k) {
         for (int i = 1; i <= V; ++i) {
             Expr lb; addTerm(lb, uName(k, i), 1); addTerm(lb, zName(k, i), -1);
@@ -1105,6 +1122,19 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
     result.method = "cplex";
     result.status = "running";
     result.notes.push_back(instance.distance_convention);
+    const int effective_cplex_threads =
+        options.cplex_threads > 0 ? options.cplex_threads : std::max(1, options.threads);
+    result.cplex_threads = effective_cplex_threads;
+    result.mip_threads = options.mip_threads;
+    result.compact_bc_solver_threads = 0;
+    result.solver_thread_policy =
+        effective_cplex_threads == 1
+            ? "plain_cplex_single_thread"
+            : "plain_cplex_multithread";
+    result.thread_fairness_class =
+        effective_cplex_threads == 1
+            ? "one_thread_fair"
+            : "multithread_diagnostic";
 
     const bool strengthened = !options.plain_baseline;
     result.notes.push_back(strengthened
@@ -1126,8 +1156,8 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
             ? (work_dir / "cplex.log") : std::filesystem::path(options.log_path);
         result.log_file = cplex_log.string();
         result.notes.push_back("CPLEX command file sets threads="
-            + std::to_string(std::max(1, options.threads))
-            + "; this is the current baseline behavior and was not changed for the threading audit.");
+            + std::to_string(effective_cplex_threads)
+            + "; plain CPLEX rows are fair single-thread rows only when --cplex-threads 1 is used.");
         std::error_code ignored;
         std::filesystem::remove(sol_path, ignored);
         std::filesystem::remove(cplex_log, ignored);
@@ -1135,7 +1165,7 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
         writeCompactLp(instance, options, lp_path, strengthened);
 
         std::ofstream cmd(cmd_path);
-        cmd << "set threads " << std::max(1, options.threads) << "\n";
+        cmd << "set threads " << effective_cplex_threads << "\n";
         cmd << "set timelimit " << options.solve_time_limit << "\n";
         cmd << "set mip tolerances mipgap 1e-8\n";
         cmd << "read " << lp_path.string() << "\n";
@@ -1218,11 +1248,27 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         options.interval_exact_cutoff_oracle == "compact-mip";
     result.compact_interval_bc_solver = options.mip_solver.empty()
         ? "cplex" : options.mip_solver;
-    result.compact_interval_bc_threads =
-        options.mip_threads > 0 ? options.mip_threads : std::max(1, options.threads);
+    const int effective_compact_threads = options.compact_bc_threads > 0
+        ? options.compact_bc_threads
+        : (options.mip_threads > 0 ? options.mip_threads : std::max(1, options.threads));
+    result.cplex_threads = options.cplex_threads;
+    result.mip_threads = options.mip_threads;
+    result.compact_interval_bc_threads = effective_compact_threads;
     result.compact_bc_solver_threads = result.compact_interval_bc_threads;
+    result.solver_thread_policy =
+        effective_compact_threads == 1
+            ? "compact_bc_single_thread"
+            : "compact_bc_multithread";
+    result.thread_fairness_class =
+        effective_compact_threads == 1
+            ? "one_thread_fair"
+            : "multithread_diagnostic";
     result.compact_bc_cut_profile = options.compact_bc_cut_profile;
     result.compact_bc_root_cut_rounds = options.compact_bc_root_cut_rounds;
+    result.compact_bc_total_root_cut_rounds = options.compact_bc_root_cut_rounds;
+    result.compact_bc_root_cut_time_limit = options.compact_bc_root_cut_time_limit;
+    result.compact_bc_dynamic_cut_families = options.compact_bc_dynamic_cut_families;
+    result.compact_bc_root_probe = options.compact_bc_root_probe;
     std::string oracle_mode = options.interval_exact_oracle_mode;
     std::transform(oracle_mode.begin(), oracle_mode.end(), oracle_mode.begin(),
                    [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
@@ -1373,6 +1419,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             result.oracle_strengthening_families_enabled;
         result.compact_bc_enabled_cut_families =
             result.oracle_strengthening_families_enabled;
+        result.compact_bc_enabled_families_requested =
+            result.oracle_strengthening_families_enabled;
+        result.compact_bc_enabled_families_effective =
+            result.oracle_strengthening_families_enabled;
         {
             std::ostringstream cuts;
             cuts << "direct_gini_cap=" << result.compact_bc_direct_gini_cap_rows_added
@@ -1389,7 +1439,9 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                  << ";support_duration_triple=" << result.compact_bc_support_duration_triple_cuts_added
                  << ";transfer_compat=" << result.compact_bc_pairwise_transfer_compatibility_cuts_added
                  << ";receiver_source_cover=" << result.compact_bc_receiver_source_cover_cuts_added;
-            result.compact_bc_cuts_added_by_family = cuts.str();
+        result.compact_bc_cuts_added_by_family = cuts.str();
+        result.compact_bc_total_cuts_added_by_family =
+            result.compact_bc_cuts_added_by_family;
         }
         {
             std::ostringstream domains;
@@ -1398,7 +1450,9 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     << result.compact_bc_movement_reachability_domains_tightened
                     << ";domain_width_before=" << strengthening_stats.domain_width_before
                     << ";domain_width_after=" << strengthening_stats.domain_width_after;
-            result.compact_bc_domains_tightened_by_family = domains.str();
+        result.compact_bc_domains_tightened_by_family = domains.str();
+        result.compact_bc_total_domains_tightened_by_family =
+            result.compact_bc_domains_tightened_by_family;
         }
         if (strengthening_stats.domain_width_before > 0) {
             result.total_domain_width_before = strengthening_stats.domain_width_before;
@@ -1419,9 +1473,7 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         }
         if (time_limit <= 0.0) time_limit = std::max(1.0, options.solve_time_limit);
         std::ofstream cmd(cmd_path);
-        const int mip_threads =
-            options.mip_threads > 0 ? options.mip_threads : std::max(1, options.threads);
-        cmd << "set threads " << std::max(1, mip_threads) << "\n";
+        cmd << "set threads " << std::max(1, effective_compact_threads) << "\n";
         cmd << "set timelimit " << time_limit << "\n";
         cmd << "set mip tolerances mipgap 0\n";
         if (options.interval_oracle_profile == "infeasibility-focus") {
@@ -1443,6 +1495,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         const int rc = std::system(command.c_str());
         result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
         result.interval_exact_cutoff_runtime_seconds = result.runtime_seconds;
+        result.compact_bc_time_seconds = result.runtime_seconds;
+        result.compact_bc_total_solver_time = result.runtime_seconds;
 
         std::string cplex_status = "unknown";
         double cplex_obj = std::numeric_limits<double>::quiet_NaN();

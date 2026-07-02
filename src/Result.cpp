@@ -1398,14 +1398,32 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.compact_bc_cut_profile) << "\",\n";
     out << "  \"compact_bc_enabled_cut_families\": \""
         << jsonEscape(result.compact_bc_enabled_cut_families) << "\",\n";
+    out << "  \"compact_bc_enabled_families_requested\": \""
+        << jsonEscape(result.compact_bc_enabled_families_requested) << "\",\n";
+    out << "  \"compact_bc_enabled_families_effective\": \""
+        << jsonEscape(result.compact_bc_enabled_families_effective) << "\",\n";
     out << "  \"compact_bc_cuts_added_by_family\": \""
         << jsonEscape(result.compact_bc_cuts_added_by_family) << "\",\n";
     out << "  \"compact_bc_domains_tightened_by_family\": \""
         << jsonEscape(result.compact_bc_domains_tightened_by_family) << "\",\n";
     out << "  \"compact_bc_root_cut_rounds\": "
         << result.compact_bc_root_cut_rounds << ",\n";
+    out << "  \"compact_bc_total_root_cut_rounds\": "
+        << result.compact_bc_total_root_cut_rounds << ",\n";
+    out << "  \"compact_bc_root_cut_time_limit\": "
+        << result.compact_bc_root_cut_time_limit << ",\n";
+    out << "  \"compact_bc_dynamic_cut_families\": \""
+        << jsonEscape(result.compact_bc_dynamic_cut_families) << "\",\n";
+    out << "  \"compact_bc_root_probe\": \""
+        << jsonEscape(result.compact_bc_root_probe) << "\",\n";
     out << "  \"compact_bc_solver_threads\": "
         << result.compact_bc_solver_threads << ",\n";
+    out << "  \"cplex_threads\": " << result.cplex_threads << ",\n";
+    out << "  \"mip_threads\": " << result.mip_threads << ",\n";
+    out << "  \"solver_thread_policy\": \""
+        << jsonEscape(result.solver_thread_policy) << "\",\n";
+    out << "  \"thread_fairness_class\": \""
+        << jsonEscape(result.thread_fairness_class) << "\",\n";
     out << "  \"compact_bc_solver_status\": \""
         << jsonEscape(result.compact_bc_solver_status) << "\",\n";
     out << "  \"compact_bc_best_bound\": "
@@ -1416,6 +1434,8 @@ std::string resultToJson(const SolveResult& input) {
         << result.compact_bc_nodes << ",\n";
     out << "  \"compact_bc_time_seconds\": "
         << result.compact_bc_time_seconds << ",\n";
+    out << "  \"compact_bc_total_solver_time\": "
+        << result.compact_bc_total_solver_time << ",\n";
     out << "  \"compact_bc_bound_valid\": "
         << (result.compact_bc_bound_valid ? "true" : "false") << ",\n";
     out << "  \"compact_bc_bound_scope\": \""
@@ -1460,6 +1480,14 @@ std::string resultToJson(const SolveResult& input) {
         << result.compact_bc_pairwise_transfer_compatibility_cuts_added << ",\n";
     out << "  \"compact_bc_receiver_source_cover_cuts_added\": "
         << result.compact_bc_receiver_source_cover_cuts_added << ",\n";
+    out << "  \"compact_bc_total_cuts_added_by_family\": \""
+        << jsonEscape(result.compact_bc_total_cuts_added_by_family) << "\",\n";
+    out << "  \"compact_bc_total_domains_tightened_by_family\": \""
+        << jsonEscape(result.compact_bc_total_domains_tightened_by_family) << "\",\n";
+    out << "  \"compact_bc_total_leaf_nodes\": "
+        << result.compact_bc_total_leaf_nodes << ",\n";
+    out << "  \"ablation_variant_semantics\": \""
+        << jsonEscape(result.ablation_variant_semantics) << "\",\n";
     out << "  \"required_movement_lb\": "
         << result.required_movement_lb << ",\n";
     out << "  \"required_movement_cuts_added\": "
