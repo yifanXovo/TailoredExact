@@ -662,6 +662,18 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--compact-bc-dynamic-cut-violation-tol") opt.compact_bc_dynamic_cut_violation_tol = std::stod(requireValue(i, argc, argv));
         else if (arg == "--compact-bc-domain-propagation-mode") opt.compact_bc_domain_propagation_mode = requireValue(i, argc, argv);
         else if (arg == "--compact-bc-domain-propagation-rounds") opt.compact_bc_domain_propagation_rounds = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--compact-bc-low-gini-strengthening") {
+            opt.compact_bc_low_gini_strengthening = lowerAscii(requireValue(i, argc, argv));
+            opt.compact_bc_low_gini_strengthening_explicit = true;
+        }
+        else if (arg == "--compact-bc-denominator-bound-mode") {
+            opt.compact_bc_denominator_bound_mode = lowerAscii(requireValue(i, argc, argv));
+            opt.compact_bc_denominator_bound_mode_explicit = true;
+        }
+        else if (arg == "--compact-bc-objective-estimator-mode") {
+            opt.compact_bc_objective_estimator_mode = lowerAscii(requireValue(i, argc, argv));
+            opt.compact_bc_objective_estimator_mode_explicit = true;
+        }
         else if (arg == "--compact-bc-model-size-policy") opt.compact_bc_model_size_policy = requireValue(i, argc, argv);
         else if (arg == "--compact-bc-max-rows") opt.compact_bc_max_rows = std::stoll(requireValue(i, argc, argv));
         else if (arg == "--compact-bc-max-cols") opt.compact_bc_max_cols = std::stoll(requireValue(i, argc, argv));
@@ -1293,6 +1305,12 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.compact_bc_receiver_source_cover_cuts;
     const std::string explicit_compact_bc_receiver_source_cover_mode =
         opt.compact_bc_receiver_source_cover_mode;
+    const std::string explicit_compact_bc_low_gini_strengthening =
+        opt.compact_bc_low_gini_strengthening;
+    const std::string explicit_compact_bc_denominator_bound_mode =
+        opt.compact_bc_denominator_bound_mode;
+    const std::string explicit_compact_bc_objective_estimator_mode =
+        opt.compact_bc_objective_estimator_mode;
     const bool explicit_gini_spread_cuts = opt.gini_spread_cuts;
     const bool explicit_required_movement_cuts = opt.required_movement_cuts;
     const bool explicit_global_handling_capacity_cuts =
@@ -1379,6 +1397,18 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.compact_bc_receiver_source_cover_mode =
             explicit_compact_bc_receiver_source_cover_mode;
     }
+    if (opt.compact_bc_low_gini_strengthening_explicit) {
+        opt.compact_bc_low_gini_strengthening =
+            explicit_compact_bc_low_gini_strengthening;
+    }
+    if (opt.compact_bc_denominator_bound_mode_explicit) {
+        opt.compact_bc_denominator_bound_mode =
+            explicit_compact_bc_denominator_bound_mode;
+    }
+    if (opt.compact_bc_objective_estimator_mode_explicit) {
+        opt.compact_bc_objective_estimator_mode =
+            explicit_compact_bc_objective_estimator_mode;
+    }
     if (opt.gini_spread_cuts_explicit) {
         opt.gini_spread_cuts = explicit_gini_spread_cuts;
     }
@@ -1392,6 +1422,46 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.low_gini_ratio_band_tightening_explicit) {
         opt.low_gini_ratio_band_tightening =
             explicit_low_gini_ratio_band_tightening;
+    }
+    opt.compact_bc_low_gini_strengthening =
+        lowerAscii(opt.compact_bc_low_gini_strengthening);
+    if (opt.compact_bc_low_gini_strengthening == "none" ||
+        opt.compact_bc_low_gini_strengthening == "false") {
+        opt.compact_bc_low_gini_strengthening = "off";
+    }
+    if (opt.compact_bc_low_gini_strengthening != "off" &&
+        opt.compact_bc_low_gini_strengthening != "safe" &&
+        opt.compact_bc_low_gini_strengthening != "aggressive-diagnostic") {
+        opt.compact_bc_low_gini_strengthening = "safe";
+    }
+    opt.compact_bc_denominator_bound_mode =
+        lowerAscii(opt.compact_bc_denominator_bound_mode);
+    if (opt.compact_bc_denominator_bound_mode != "basic" &&
+        opt.compact_bc_denominator_bound_mode != "tight" &&
+        opt.compact_bc_denominator_bound_mode != "multirow") {
+        opt.compact_bc_denominator_bound_mode = "basic";
+    }
+    opt.compact_bc_objective_estimator_mode =
+        lowerAscii(opt.compact_bc_objective_estimator_mode);
+    if (opt.compact_bc_objective_estimator_mode != "single" &&
+        opt.compact_bc_objective_estimator_mode != "multirow" &&
+        opt.compact_bc_objective_estimator_mode != "adaptive") {
+        opt.compact_bc_objective_estimator_mode = "single";
+    }
+    const bool safe_low_gini_mode =
+        opt.compact_bc_low_gini_strengthening == "safe";
+    if (safe_low_gini_mode ||
+        opt.compact_bc_denominator_bound_mode != "basic" ||
+        opt.compact_bc_objective_estimator_mode != "single") {
+        opt.low_gini_ratio_band_tightening = true;
+        opt.compact_bc_objective_estimator_cutoff = true;
+        opt.compact_bc_penalty_lb_closure = true;
+        opt.compact_bc_movement_reachability_domains = true;
+        if (opt.compact_bc_domain_propagation_mode == "off") {
+            opt.compact_bc_domain_propagation_mode = "static";
+        }
+        opt.compact_bc_domain_propagation_rounds =
+            std::max(opt.compact_bc_domain_propagation_rounds, 1);
     }
     opt.pricing_dominance_mode = lowerAscii(opt.pricing_dominance_mode);
     if (opt.pricing_dominance_mode == "none" ||
@@ -15584,6 +15654,14 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     result.compact_bc_root_cut_time_limit = opt.compact_bc_root_cut_time_limit;
     result.compact_bc_dynamic_cut_families = opt.compact_bc_dynamic_cut_families;
     result.compact_bc_root_probe = opt.compact_bc_root_probe;
+    result.compact_bc_low_gini_strengthening =
+        opt.compact_bc_low_gini_strengthening;
+    result.compact_bc_denominator_bound_mode =
+        opt.compact_bc_denominator_bound_mode;
+    result.compact_bc_objective_estimator_mode =
+        opt.compact_bc_objective_estimator_mode;
+    result.compact_bc_low_gini_aggressive_diagnostic =
+        opt.compact_bc_low_gini_strengthening == "aggressive-diagnostic";
     result.compact_bc_dynamic_cuts_added_total = total_dynamic_cuts;
     result.compact_bc_dynamic_cuts_added_by_family =
         "dynamic_root_total=" + std::to_string(total_dynamic_cuts);

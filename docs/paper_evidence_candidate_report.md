@@ -100,3 +100,11 @@ source. The claim is a Gini-frontier compact certification framework with strong
 relaxation/domain cuts and Compact-BC subproblems for unresolved intervals.
 Current evidence keeps `moderate_seed3301` noncertified and identifies its
 remaining low-Gini leaves as the next hard-leaf strengthening target.
+
+## Effectiveness Round 2 Evidence
+
+The candidate evidence now reports whether certificates are relaxation-only, Compact-BC-assisted, mixed, or diagnostic. Compact-BC dominance is not required for a valid framework certificate.
+
+## Effectiveness Round 3 Evidence
+
+The candidate evidence distinguishes relaxation-only certificates, Compact-BC-assisted certificates, diagnostic fixed-interval probes, and benchmark-only CPLEX rows. Compact-BC dominance is not required for a valid framework certificate.

@@ -1342,3 +1342,11 @@ The round adds audits for certificate sources, repaired time-profile
 finalization, and Compact-BC hard-leaf behavior. It does not re-enable BPC in
 `paper-gf-compact-bc`, does not import CPLEX benchmark bounds, and does not
 turn wrapper checkpoints into optimality certificates.
+
+## Compact-BC Effectiveness Round 2 Note
+
+The paper-facing line is the GF compact certification framework. Route-load BPC remains separate; Compact-BC is measured on unresolved interval leaves and diagnostic fixed-interval probes.
+
+## Compact-BC Effectiveness Round 3 Note
+
+The paper-facing line is the GF compact certification framework. Route-load BPC remains separate; Compact-BC is measured on unresolved interval leaves and diagnostic fixed-interval probes.

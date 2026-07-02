@@ -14,15 +14,31 @@ def main() -> int:
     parser.add_argument("--out", default="")
     args = parser.parse_args()
     root = Path(args.results)
-    src = root / "certificate_source_summary.csv"
+    src = root / "certificate_source_summary_v3.csv"
+    if not src.exists():
+        src = root / "certificate_source_summary_v2.csv"
+    if not src.exists():
+        src = root / "certificate_source_summary.csv"
     rows = list(csv.DictReader(src.open(newline="", encoding="utf-8"))) if src.exists() else []
     failures = 0
     out_rows = []
     allowed = {
-        "relaxation_only", "relaxation_plus_compact_bc",
-        "relaxation_plus_compact_bc_noncertified", "unresolved",
-        "wrapper_checkpoint_only", "benchmark_only",
-        "compact_bc_leaf_diagnostic", "invalid_or_unknown",
+        "relaxation_only_certified",
+        "relaxation_only_noncertified",
+        "compact_bc_assisted_certified",
+        "compact_bc_assisted_noncertified",
+        "mixed_certified",
+        "mixed_noncertified",
+        "compact_bc_leaf_diagnostic",
+        "benchmark_only",
+        "wrapper_checkpoint_only",
+        "model_size_limit",
+        "invalid_or_unknown",
+        # Backward-compatible classes from the first effectiveness package.
+        "relaxation_only",
+        "relaxation_plus_compact_bc",
+        "relaxation_plus_compact_bc_noncertified",
+        "unresolved",
     }
     for row in rows:
         reasons = []
@@ -30,8 +46,23 @@ def main() -> int:
         certified = str(row.get("certified_original_problem", "")).lower() == "true"
         if cls not in allowed:
             reasons.append("unknown_row_source_class")
-        if certified and cls in {"unresolved", "wrapper_checkpoint_only", "invalid_or_unknown"}:
+        if certified and "noncertified" in cls:
+            reasons.append("optimal_row_has_noncertified_source_class")
+        if certified and cls in {"unresolved", "wrapper_checkpoint_only", "invalid_or_unknown", "model_size_limit"}:
             reasons.append("certified_row_has_invalid_source_class")
+        if str(row.get("inconsistent_source_label_detected", "")).lower() == "true":
+            reasons.append("inconsistent_source_label_detected")
+        if str(row.get("selected_for_summary", "")).lower() == "true" and cls in {"compact_bc_leaf_diagnostic", "benchmark_only"}:
+            reasons.append("diagnostic_or_benchmark_selected_as_paper_summary")
+        leaf_solver = str(row.get("leaf_solver_row", "")).lower() == "true"
+        if leaf_solver and str(row.get("compact_bc_called_this_row", "")).lower() != "true":
+            reasons.append("leaf_solver_row_without_compact_bc_call")
+        if cls == "compact_bc_leaf_diagnostic" and row.get("compact_bc_called_this_row", "") != "" and str(row.get("compact_bc_called_this_row", "")).lower() != "true":
+            reasons.append("diagnostic_leaf_label_without_compact_bc_call")
+        if str(row.get("paper_certificate_contamination", "")).lower() == "true":
+            reasons.append("paper_certificate_contamination")
+        if str(row.get("parent_row_compact_bc_called_any_leaf", "")).lower() == "true" and str(row.get("compact_bc_called_any_child", "")).lower() != "true":
+            reasons.append("parent_child_compact_bc_aggregation_missing")
         if reasons:
             failures += 1
         out_rows.append({**row, "audit_passed": not reasons, "failures": "|".join(reasons)})

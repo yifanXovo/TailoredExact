@@ -1869,6 +1869,14 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         options.compact_bc_domain_propagation_mode;
     result.compact_bc_domain_propagation_rounds =
         options.compact_bc_domain_propagation_rounds;
+    result.compact_bc_low_gini_strengthening =
+        options.compact_bc_low_gini_strengthening;
+    result.compact_bc_denominator_bound_mode =
+        options.compact_bc_denominator_bound_mode;
+    result.compact_bc_objective_estimator_mode =
+        options.compact_bc_objective_estimator_mode;
+    result.compact_bc_low_gini_aggressive_diagnostic =
+        options.compact_bc_low_gini_strengthening == "aggressive-diagnostic";
     result.compact_bc_expensive_static_families =
         options.compact_bc_expensive_static_families;
     result.compact_bc_use_dynamic_instead_of_static =
@@ -1994,6 +2002,14 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             model_options.compact_bc_domain_propagation_mode;
         result.compact_bc_domain_propagation_rounds =
             model_options.compact_bc_domain_propagation_rounds;
+        result.compact_bc_low_gini_strengthening =
+            model_options.compact_bc_low_gini_strengthening;
+        result.compact_bc_denominator_bound_mode =
+            model_options.compact_bc_denominator_bound_mode;
+        result.compact_bc_objective_estimator_mode =
+            model_options.compact_bc_objective_estimator_mode;
+        result.compact_bc_low_gini_aggressive_diagnostic =
+            model_options.compact_bc_low_gini_strengthening == "aggressive-diagnostic";
         result.compact_bc_expensive_static_families =
             model_options.compact_bc_expensive_static_families;
         result.compact_bc_use_dynamic_instead_of_static =

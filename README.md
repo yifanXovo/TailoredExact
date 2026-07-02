@@ -706,3 +706,11 @@ build\ExactEBRP.exe --method gcap-frontier `
 ```
 
 This preset disables archive scanning, known/external incumbents, compact interval-oracle certificates, CPLEX benchmark evidence, and route-mask all-subset enumeration as certificate evidence. BPC fallback is valid only with exact pricing closure. The latest BPC optimization round shows pricing-state explosion remains the main implementation bottleneck.
+
+## Compact-BC Effectiveness Round 2
+
+The round2 effectiveness package separates relaxation-only certificates from Compact-BC-assisted evidence, runs diagnostic fixed-interval activation probes, and keeps diagnostic rows out of paper certificate summaries.
+
+## Compact-BC Effectiveness Round 3
+
+The round3 package extends Compact-BC effectiveness evidence with clean leaf-solver semantics, longer tailored-vs-plain fixed-interval comparisons, safe low-Gini mode reporting, and generated hard diagnostics. Diagnostic rows remain outside paper certificates.

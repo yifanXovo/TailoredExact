@@ -612,6 +612,10 @@ struct SolveResult {
     std::string compact_bc_dynamic_cuts_added_by_family;
     std::string compact_bc_dynamic_max_violation_by_family;
     long long compact_bc_dynamic_cuts_added_total = 0;
+    std::string compact_bc_low_gini_strengthening = "off";
+    std::string compact_bc_denominator_bound_mode = "basic";
+    std::string compact_bc_objective_estimator_mode = "single";
+    bool compact_bc_low_gini_aggressive_diagnostic = false;
     std::string compact_bc_model_size_policy = "full";
     long long compact_bc_rows_estimated = 0;
     long long compact_bc_cols_estimated = 0;

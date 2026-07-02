@@ -130,3 +130,11 @@ adds attribution and finalization checks around the existing sources:
 
 These rules allow correct attribution without requiring Compact-BC to dominate
 rows already closed by relaxation.
+
+## Effectiveness Round 2 Evidence Separation
+
+Diagnostic forced-leaf solves and plain fixed-interval MIP comparisons are valid experiments but do not contribute lower-bound evidence to a full-frontier certificate.
+
+## Effectiveness Round 3 Evidence Separation
+
+Safe low-Gini mode reuses proved low-Gini centering, movement/domain, penalty lower-bound, and objective-estimator rows. Aggressive diagnostic modes and plain fixed-interval MIP comparisons do not contribute lower-bound evidence to full-frontier certificates.
