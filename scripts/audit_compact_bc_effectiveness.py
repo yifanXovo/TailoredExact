@@ -14,7 +14,9 @@ def main() -> int:
     parser.add_argument("--out", default="")
     args = parser.parse_args()
     root = Path(args.results)
-    src = root / "compact_bc_effectiveness_summary.csv"
+    src = root / "natural_hard_leaf_timeprofile.csv"
+    if not src.exists():
+        src = root / "compact_bc_effectiveness_summary.csv"
     rows = list(csv.DictReader(src.open(newline="", encoding="utf-8"))) if src.exists() else []
     failures = 0
     out_rows = []
@@ -26,6 +28,10 @@ def main() -> int:
             reasons.append("compact_bc_class_without_call")
         if called and row.get("final_MIP_bound", "") == "":
             reasons.append("called_leaf_missing_final_bound")
+        if called and row.get("compact_bc_runtime", "") == "":
+            reasons.append("called_leaf_missing_runtime")
+        if str(row.get("diagnostic_only", "")).lower() == "true" and str(row.get("selected_for_summary", "")).lower() == "true":
+            reasons.append("diagnostic_leaf_selected_as_paper_summary")
         failures += bool(reasons)
         out_rows.append({**row, "audit_passed": not reasons, "failures": "|".join(reasons)})
     if not rows:

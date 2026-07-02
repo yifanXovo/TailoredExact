@@ -69,7 +69,12 @@ def main() -> int:
         model_size_limit = status == "model_size_limit" or bool(
             str(data.get("compact_bc_model_size_stop_reason", ""))
         )
-        paper_row = preset == "paper-gf-compact-bc" and method == "gcap-frontier"
+        force_diag = as_bool(data.get("compact_bc_diagnostic_force_leaf_solve"))
+        paper_row = (
+            preset == "paper-gf-compact-bc" and
+            method == "gcap-frontier" and
+            not force_diag
+        )
         failure_reasons: List[str] = []
 
         if paper_row and str(data.get("compact_bc_rejection_reason", "")) and as_bool(data.get("certified_original_problem")):
@@ -106,6 +111,8 @@ def main() -> int:
                 failure_reasons.append("diagnostic_receiver_cover_used_by_certificate")
             if not str(data.get("compact_bc_total_cuts_added_by_family", "")):
                 failure_reasons.append("certified_row_missing_top_level_cut_aggregation")
+        if force_diag and as_bool(data.get("certified_original_problem")):
+            failure_reasons.append("diagnostic_force_leaf_row_marked_certified")
         if method == "interval-cutoff-oracle" and as_bool(data.get("compact_interval_bc_enabled")):
             if cut_scope not in {"original_fixed_interval", "none"}:
                 failure_reasons.append("compact_bc_leaf_bad_bound_scope")
@@ -124,6 +131,7 @@ def main() -> int:
                 "time_budget_seconds": time_budget,
                 "progress_log": progress_log,
                 "compact_bc_enabled_families_effective": enabled,
+                "compact_bc_diagnostic_force_leaf_solve": force_diag,
                 "audit_passed": not failure_reasons,
                 "failures": "|".join(failure_reasons),
             }
@@ -141,6 +149,7 @@ def main() -> int:
             "time_budget_seconds",
             "progress_log",
             "compact_bc_enabled_families_effective",
+            "compact_bc_diagnostic_force_leaf_solve",
             "audit_passed",
             "failures",
         ]

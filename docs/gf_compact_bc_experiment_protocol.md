@@ -125,3 +125,7 @@ D:\msys64\ucrt64\bin\python.exe scripts\audit_compact_bc_effectiveness.py --resu
 The effectiveness package should be read as attribution evidence. It must not be
 used to imply Compact-BC dominance when relaxation/frontier certificates close
 the row first.
+
+## Effectiveness Round 2 Protocol
+
+Use `results/gf_compact_bc_effectiveness_round2/` for v2 source attribution, forced diagnostic interval probes, matched tailored-vs-plain interval MIP comparisons, and selected-summary audits.

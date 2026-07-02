@@ -92,3 +92,7 @@ The round adds:
 Paper-core certificates still exclude BPC, archive scanning, known UB injection,
 external incumbents, focus-only evidence, route-mask enumeration certificates,
 and CPLEX benchmark bounds.
+
+## Effectiveness Round 2 Scope
+
+Compact-BC is evaluated as an unresolved-interval subsolver. Relaxation-only certificates remain valid framework successes; diagnostic activation and plain-MIP comparisons are not paper-core evidence.
