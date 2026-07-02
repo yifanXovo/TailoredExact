@@ -1416,6 +1416,34 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.compact_bc_dynamic_cut_families) << "\",\n";
     out << "  \"compact_bc_root_probe\": \""
         << jsonEscape(result.compact_bc_root_probe) << "\",\n";
+    out << "  \"compact_bc_dynamic_cut_violation_tol\": "
+        << result.compact_bc_dynamic_cut_violation_tol << ",\n";
+    out << "  \"compact_bc_dynamic_cuts_added_by_family\": \""
+        << jsonEscape(result.compact_bc_dynamic_cuts_added_by_family) << "\",\n";
+    out << "  \"compact_bc_dynamic_max_violation_by_family\": \""
+        << jsonEscape(result.compact_bc_dynamic_max_violation_by_family) << "\",\n";
+    out << "  \"compact_bc_dynamic_cuts_added_total\": "
+        << result.compact_bc_dynamic_cuts_added_total << ",\n";
+    out << "  \"compact_bc_model_size_policy\": \""
+        << jsonEscape(result.compact_bc_model_size_policy) << "\",\n";
+    out << "  \"compact_bc_rows_estimated\": "
+        << result.compact_bc_rows_estimated << ",\n";
+    out << "  \"compact_bc_cols_estimated\": "
+        << result.compact_bc_cols_estimated << ",\n";
+    out << "  \"compact_bc_nonzeros_estimated\": "
+        << result.compact_bc_nonzeros_estimated << ",\n";
+    out << "  \"compact_bc_memory_estimate_mb\": "
+        << result.compact_bc_memory_estimate_mb << ",\n";
+    out << "  \"compact_bc_model_rows\": "
+        << result.compact_bc_model_rows << ",\n";
+    out << "  \"compact_bc_model_cols\": "
+        << result.compact_bc_model_cols << ",\n";
+    out << "  \"compact_bc_model_nonzeros\": "
+        << result.compact_bc_model_nonzeros << ",\n";
+    out << "  \"compact_bc_disabled_families_due_to_size\": \""
+        << jsonEscape(result.compact_bc_disabled_families_due_to_size) << "\",\n";
+    out << "  \"compact_bc_model_size_stop_reason\": \""
+        << jsonEscape(result.compact_bc_model_size_stop_reason) << "\",\n";
     out << "  \"compact_bc_solver_threads\": "
         << result.compact_bc_solver_threads << ",\n";
     out << "  \"cplex_threads\": " << result.cplex_threads << ",\n";
@@ -1480,6 +1508,8 @@ std::string resultToJson(const SolveResult& input) {
         << result.compact_bc_pairwise_transfer_compatibility_cuts_added << ",\n";
     out << "  \"compact_bc_receiver_source_cover_cuts_added\": "
         << result.compact_bc_receiver_source_cover_cuts_added << ",\n";
+    out << "  \"compact_bc_receiver_source_cover_mode\": \""
+        << jsonEscape(result.compact_bc_receiver_source_cover_mode) << "\",\n";
     out << "  \"compact_bc_total_cuts_added_by_family\": \""
         << jsonEscape(result.compact_bc_total_cuts_added_by_family) << "\",\n";
     out << "  \"compact_bc_total_domains_tightened_by_family\": \""

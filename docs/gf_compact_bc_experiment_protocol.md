@@ -71,3 +71,21 @@ D:\msys64\ucrt64\bin\python.exe scripts\audit_objective_convention.py `
 
 Rows with `thread_fairness_class != one_thread_fair` are diagnostic sensitivity
 rows, not fair controlled benchmark evidence.
+## Round 2 Controlled Protocol
+
+Controlled compact-BC rows use:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier `
+  --algorithm-preset paper-gf-compact-bc `
+  --paper-run-sealed true `
+  --mip-threads 1 --compact-bc-threads 1 `
+  --compact-bc-cut-profile balanced `
+  --compact-bc-root-cut-rounds 1 `
+  --input <instance> --lambda 0.15 --T 3600 `
+  --time-limit <budget> --out <raw.json>
+```
+
+Plain CPLEX benchmark rows use `--method cplex --plain-baseline
+--cplex-threads 1` and are benchmark-only. The thread fairness audit must pass
+before any row is included in controlled comparison tables.

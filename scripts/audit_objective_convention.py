@@ -18,7 +18,15 @@ def iter_json(raw_dir: Path) -> Iterable[tuple[Path, Dict[str, Any]]]:
             data = json.loads(path.read_text(encoding="utf-8"))
         except Exception:
             continue
-        if isinstance(data, dict) and "trace_schema" not in data:
+        if isinstance(data, dict) and isinstance(data.get("results"), list):
+            for item in data["results"]:
+                if isinstance(item, dict):
+                    yield path, item
+        elif isinstance(data, list):
+            for item in data:
+                if isinstance(item, dict):
+                    yield path, item
+        elif isinstance(data, dict) and "trace_schema" not in data:
             yield path, data
 
 
@@ -49,10 +57,22 @@ def main() -> int:
         method = str(data.get("method", ""))
         preset = str(data.get("algorithm_preset", ""))
         failures_here: List[str] = []
+        wrapper_model_size = (
+            str(data.get("status", "")) == "model_size_limit"
+            and str(data.get("finalization_source", "")) in {
+                "error_json",
+                "interrupted_checkpoint",
+                "wrapper_checkpoint",
+            }
+        )
         if method in {"gcap-frontier", "cplex", "interval-cutoff-oracle"}:
             if not data.get("input_path"):
                 failures_here.append("missing_input_path")
-            if not has_note(data, "distance") and not has_note(data, "coordinate"):
+            if (
+                not wrapper_model_size
+                and not has_note(data, "distance")
+                and not has_note(data, "coordinate")
+            ):
                 failures_here.append("missing_distance_convention_note")
             if as_bool(data.get("certified_original_problem")):
                 if not as_bool(data.get("verifier_passed")):

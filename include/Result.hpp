@@ -600,6 +600,20 @@ struct SolveResult {
     double compact_bc_root_cut_time_limit = 0.0;
     std::string compact_bc_dynamic_cut_families;
     std::string compact_bc_root_probe = "lp";
+    double compact_bc_dynamic_cut_violation_tol = 1e-6;
+    std::string compact_bc_dynamic_cuts_added_by_family;
+    std::string compact_bc_dynamic_max_violation_by_family;
+    long long compact_bc_dynamic_cuts_added_total = 0;
+    std::string compact_bc_model_size_policy = "full";
+    long long compact_bc_rows_estimated = 0;
+    long long compact_bc_cols_estimated = 0;
+    long long compact_bc_nonzeros_estimated = 0;
+    double compact_bc_memory_estimate_mb = 0.0;
+    long long compact_bc_model_rows = 0;
+    long long compact_bc_model_cols = 0;
+    long long compact_bc_model_nonzeros = 0;
+    std::string compact_bc_disabled_families_due_to_size;
+    std::string compact_bc_model_size_stop_reason;
     int compact_bc_solver_threads = 0;
     int cplex_threads = 0;
     int mip_threads = 0;
@@ -633,6 +647,7 @@ struct SolveResult {
     long long compact_bc_support_duration_triple_cuts_added = 0;
     long long compact_bc_pairwise_transfer_compatibility_cuts_added = 0;
     long long compact_bc_receiver_source_cover_cuts_added = 0;
+    std::string compact_bc_receiver_source_cover_mode = "off";
     std::string compact_bc_total_cuts_added_by_family;
     std::string compact_bc_total_domains_tightened_by_family;
     long long compact_bc_total_leaf_nodes = 0;

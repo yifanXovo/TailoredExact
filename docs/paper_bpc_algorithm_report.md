@@ -1320,3 +1320,12 @@ close leaves, so the active bottleneck is exact pricing/CG closure.
 The realigned paper-core preset remains `paper-gf-bpc-core`: native HGA-TGBC UB, Gini frontier, valid non-enumerative relaxation screening, and exact BPC fallback for unresolved intervals. Compact interval-oracle evidence and CPLEX benchmark bounds remain outside the core certificate.
 
 This round added detailed pricing-state counters and safe dominance controls. V12 BPC leaves now show large exact-safe dominance pruning, but BPC did not close a nontrivial leaf. The current empirical bottleneck is exact pricing/decomposition, not UB quality.
+## GF Compact-BC Round 2 Note
+
+The empirical paper-facing line is the Gini-frontier compact branch-and-cut /
+certification framework, not route-load BPC. Round 2 results are in
+`results/gf_compact_bc_strengthening_round2/`. The one-thread compact-BC row
+reproduces `high_imbalance_seed3202` and keeps V12 M1/M2 and
+`tight_T_seed3101` certified. `moderate_seed3301` remains noncertified, and
+large-V rows are diagnostic model-size rows. BPC remains outside compact-BC
+paper-core certificate evidence.

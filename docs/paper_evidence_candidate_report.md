@@ -41,3 +41,18 @@ Classification:
 - `CPLEX benchmark`: preserved same-budget comparison table from the realignment round; not used as exact-pipeline lower-bound evidence.
 
 Current evidence is not sufficient for broad paper benchmarking of BPC effectiveness. The strongest current conclusion is that the unified core is certificate-safe, while BPC pricing needs a deeper exact decomposition before it can serve as an empirically useful fallback.
+## Round 2 Evidence Classification
+
+`results/gf_compact_bc_strengthening_round2/` is the current one-thread
+compact-BC evidence package.
+
+Certified exact compact-BC rows:
+
+- V12 M1 average
+- V12 M2 average
+- `high_imbalance_seed3202`
+- `tight_T_seed3101`
+
+Noncertified compact-BC rows include `moderate_seed3301`, the remaining V20/M3
+stress rows, and all V50/V100 diagnostics. Plain CPLEX rows in this package are
+single-thread benchmark-only comparisons.

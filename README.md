@@ -49,6 +49,16 @@ subsolver is reported through `compact_interval_bc_*` and `compact_bc_*` fields.
 For fair controlled comparisons, use one thread for both the compact-BC
 subsolver and plain CPLEX benchmark:
 
+### Round 2 compact-BC status
+
+`results/gf_compact_bc_strengthening_round2/` contains the current audited
+one-thread compact-BC strengthening evidence. V12 M1, V12 M2,
+`high_imbalance_seed3202`, and `tight_T_seed3101` certify under the fair
+one-thread policy. `moderate_seed3301` remains open, and V50/V100 compact-BC
+rows are diagnostic model-size rows only. Plain CPLEX comparison rows are
+single-thread benchmark-only evidence and are not used by the compact-BC
+certificate ledger.
+
 ```powershell
 build\ExactEBRP.exe --method gcap-frontier `
   --algorithm-preset paper-gf-compact-bc --paper-run-sealed true `
@@ -57,7 +67,7 @@ build\ExactEBRP.exe --method gcap-frontier `
   --compact-bc-cut-profile balanced --compact-bc-root-cut-rounds 0 `
   --out results\gf_compact_bc_strengthening_round\raw\<row>.json
 
-build\ExactEBRP.exe --method cplex --plain-baseline true `
+build\ExactEBRP.exe --method cplex --plain-baseline `
   --input <instance> --lambda 0.15 --T 3600 `
   --time-limit 300 --threads 1 --cplex-threads 1 `
   --out results\gf_compact_bc_strengthening_round\raw\cplex1_<row>.json

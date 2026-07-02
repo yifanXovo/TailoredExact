@@ -28,6 +28,7 @@
 #include <iostream>
 #include <limits>
 #include <map>
+#include <new>
 #include <numeric>
 #include <random>
 #include <regex>
@@ -658,6 +659,12 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--compact-bc-root-cut-time-limit") opt.compact_bc_root_cut_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--compact-bc-dynamic-cut-families") opt.compact_bc_dynamic_cut_families = requireValue(i, argc, argv);
         else if (arg == "--compact-bc-root-probe") opt.compact_bc_root_probe = requireValue(i, argc, argv);
+        else if (arg == "--compact-bc-dynamic-cut-violation-tol") opt.compact_bc_dynamic_cut_violation_tol = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--compact-bc-model-size-policy") opt.compact_bc_model_size_policy = requireValue(i, argc, argv);
+        else if (arg == "--compact-bc-max-rows") opt.compact_bc_max_rows = std::stoll(requireValue(i, argc, argv));
+        else if (arg == "--compact-bc-max-cols") opt.compact_bc_max_cols = std::stoll(requireValue(i, argc, argv));
+        else if (arg == "--compact-bc-max-nonzeros") opt.compact_bc_max_nonzeros = std::stoll(requireValue(i, argc, argv));
+        else if (arg == "--compact-bc-max-memory-mb") opt.compact_bc_max_memory_mb = std::stod(requireValue(i, argc, argv));
         else if (arg == "--compact-bc-cut-profile") opt.compact_bc_cut_profile = requireValue(i, argc, argv);
         else if (arg == "--compact-bc-direct-gini-rows" || arg == "--compact-bc-gini-cap-floor-cuts") {
             opt.compact_bc_direct_gini_rows = parseBoolValue(requireValue(i, argc, argv));
@@ -705,6 +712,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             opt.compact_bc_receiver_source_cover_mode = lowerAscii(requireValue(i, argc, argv));
             opt.compact_bc_receiver_source_cover_cuts =
                 opt.compact_bc_receiver_source_cover_mode == "singleton-paper-safe" ||
+                opt.compact_bc_receiver_source_cover_mode == "pair-net-paper-safe" ||
                 opt.compact_bc_receiver_source_cover_mode == "paper-safe";
             opt.compact_bc_receiver_source_cover_explicit = true;
         }
@@ -1074,17 +1082,32 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.compact_bc_root_cut_time_limit < 0.0) {
         opt.compact_bc_root_cut_time_limit = 0.0;
     }
+    if (opt.compact_bc_dynamic_cut_violation_tol <= 0.0) {
+        opt.compact_bc_dynamic_cut_violation_tol = 1e-6;
+    }
+    opt.compact_bc_model_size_policy = lowerAscii(opt.compact_bc_model_size_policy);
+    if (opt.compact_bc_model_size_policy != "resource-adaptive" &&
+        opt.compact_bc_model_size_policy != "diagnostic-minimal") {
+        opt.compact_bc_model_size_policy = "full";
+    }
+    if (opt.compact_bc_max_rows < 0) opt.compact_bc_max_rows = 0;
+    if (opt.compact_bc_max_cols < 0) opt.compact_bc_max_cols = 0;
+    if (opt.compact_bc_max_nonzeros < 0) opt.compact_bc_max_nonzeros = 0;
+    if (opt.compact_bc_max_memory_mb < 0.0) opt.compact_bc_max_memory_mb = 0.0;
     opt.compact_bc_receiver_source_cover_mode =
         lowerAscii(opt.compact_bc_receiver_source_cover_mode);
     if (opt.compact_bc_receiver_source_cover_mode != "off" &&
         opt.compact_bc_receiver_source_cover_mode != "diagnostic" &&
         opt.compact_bc_receiver_source_cover_mode != "singleton-paper-safe" &&
+        opt.compact_bc_receiver_source_cover_mode != "pair-net-paper-safe" &&
         opt.compact_bc_receiver_source_cover_mode != "pair-diagnostic" &&
+        opt.compact_bc_receiver_source_cover_mode != "set-diagnostic" &&
         opt.compact_bc_receiver_source_cover_mode != "paper-safe") {
         opt.compact_bc_receiver_source_cover_mode = "off";
     }
     opt.compact_bc_receiver_source_cover_cuts =
         opt.compact_bc_receiver_source_cover_mode == "singleton-paper-safe" ||
+        opt.compact_bc_receiver_source_cover_mode == "pair-net-paper-safe" ||
         opt.compact_bc_receiver_source_cover_mode == "paper-safe";
     opt.compact_bc_cut_profile = lowerAscii(opt.compact_bc_cut_profile);
     if (opt.compact_bc_cut_profile != "conservative" &&
@@ -1659,6 +1682,16 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
     result.pricing_load_dp_dominance_enabled = opt.pricing_load_dp_dominance;
     result.pricing_operation_dp_dominance_enabled =
         opt.pricing_operation_dp_dominance && opt.pricing_load_dp_dominance;
+    result.compact_bc_root_cut_rounds = opt.compact_bc_root_cut_rounds;
+    result.compact_bc_total_root_cut_rounds = opt.compact_bc_root_cut_rounds;
+    result.compact_bc_root_cut_time_limit = opt.compact_bc_root_cut_time_limit;
+    result.compact_bc_dynamic_cut_families = opt.compact_bc_dynamic_cut_families;
+    result.compact_bc_root_probe = opt.compact_bc_root_probe;
+    result.compact_bc_dynamic_cut_violation_tol =
+        opt.compact_bc_dynamic_cut_violation_tol;
+    result.compact_bc_model_size_policy = opt.compact_bc_model_size_policy;
+    result.compact_bc_receiver_source_cover_mode =
+        opt.compact_bc_receiver_source_cover_mode;
     result.cplex_threads = opt.cplex_threads;
     result.mip_threads = opt.mip_threads;
     if (opt.algorithm_preset == "paper-gf-compact-bc") {
@@ -1729,8 +1762,8 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
     if (opt.algorithm_preset == "paper-gf-compact-bc" ||
         opt.algorithm_preset == "paper-gf-bpc-core" ||
         opt.algorithm_preset == "paper-bpc-core") {
-        result.route_mask_all_subset_enumeration_enabled = false;
-        result.route_mask_all_subset_enumeration_certifying = false;
+    result.route_mask_all_subset_enumeration_enabled = false;
+    result.route_mask_all_subset_enumeration_certifying = false;
         result.unsupported_large_instance_features =
             "all_subset_route_mask_relaxation_disabled_for_unified_paper_core";
     }
@@ -2026,6 +2059,22 @@ void applyRunConfigSnapshot(const ebrp::RunConfigSnapshot& snapshot,
 }
 
 void finalizePaperModuleFields(ebrp::SolveResult& result) {
+    if (result.algorithm_preset == "paper-gf-compact-bc") {
+        if (result.compact_bc_total_cuts_added_by_family.empty()) {
+            result.compact_bc_total_cuts_added_by_family = "none";
+        }
+        if (result.compact_bc_cuts_added_by_family.empty()) {
+            result.compact_bc_cuts_added_by_family =
+                result.compact_bc_total_cuts_added_by_family;
+        }
+        if (result.compact_bc_total_domains_tightened_by_family.empty()) {
+            result.compact_bc_total_domains_tightened_by_family = "none";
+        }
+        if (result.compact_bc_domains_tightened_by_family.empty()) {
+            result.compact_bc_domains_tightened_by_family =
+                result.compact_bc_total_domains_tightened_by_family;
+        }
+    }
     const double ub = result.upper_bound > 0.0 ? result.upper_bound : result.objective;
     const double gap = ub > 1e-12
         ? std::max(0.0, (ub - result.lower_bound) / std::fabs(ub))
@@ -14955,6 +15004,12 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     long long total_receiver_source_cover = 0;
     long long total_low_gini_domains = 0;
     long long total_nodes = 0;
+    long long total_dynamic_cuts = 0;
+    long long total_root_cut_rounds = 0;
+    long long total_model_rows = 0;
+    long long total_model_cols = 0;
+    long long total_model_nonzeros = 0;
+    double total_memory_estimate_mb = 0.0;
     double total_solver_time = 0.0;
     bool budget_exhausted = false;
     bool oracle_blocker_seen = false;
@@ -15276,6 +15331,12 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         total_receiver_source_cover += oracle.compact_bc_receiver_source_cover_cuts_added;
         total_low_gini_domains += oracle.low_gini_ratio_band_domains_tightened;
         total_nodes += oracle.compact_bc_nodes;
+        total_dynamic_cuts += oracle.compact_bc_dynamic_cuts_added_total;
+        total_root_cut_rounds += oracle.compact_bc_total_root_cut_rounds;
+        total_model_rows += oracle.compact_bc_model_rows;
+        total_model_cols += oracle.compact_bc_model_cols;
+        total_model_nonzeros += oracle.compact_bc_model_nonzeros;
+        total_memory_estimate_mb += oracle.compact_bc_memory_estimate_mb;
         total_solver_time += oracle.compact_bc_time_seconds > 0.0
             ? oracle.compact_bc_time_seconds
             : oracle.interval_exact_cutoff_runtime_seconds;
@@ -15466,11 +15527,19 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     result.compact_interval_bc_timed_out_leaves = timed_out;
     result.compact_bc_cut_profile = opt.compact_bc_cut_profile;
     result.compact_bc_root_cut_rounds = opt.compact_bc_root_cut_rounds;
-    result.compact_bc_total_root_cut_rounds =
-        opt.compact_bc_root_cut_rounds * std::max(0, attempted);
+    result.compact_bc_total_root_cut_rounds = static_cast<int>(
+        std::min<long long>(total_root_cut_rounds,
+                            static_cast<long long>(std::numeric_limits<int>::max())));
     result.compact_bc_root_cut_time_limit = opt.compact_bc_root_cut_time_limit;
     result.compact_bc_dynamic_cut_families = opt.compact_bc_dynamic_cut_families;
     result.compact_bc_root_probe = opt.compact_bc_root_probe;
+    result.compact_bc_dynamic_cuts_added_total = total_dynamic_cuts;
+    result.compact_bc_dynamic_cuts_added_by_family =
+        "dynamic_root_total=" + std::to_string(total_dynamic_cuts);
+    result.compact_bc_model_rows = total_model_rows;
+    result.compact_bc_model_cols = total_model_cols;
+    result.compact_bc_model_nonzeros = total_model_nonzeros;
+    result.compact_bc_memory_estimate_mb = total_memory_estimate_mb;
     result.compact_bc_solver_threads = result.compact_interval_bc_threads;
     result.compact_bc_closed_leaf_count = root_bound_closed;
     result.compact_bc_total_solver_time = total_solver_time;
@@ -15619,11 +15688,105 @@ std::string inferPlateauReasonForFinalization(const ebrp::SolveResult& result) {
     return "not_certified";
 }
 
+void writeEmergencyFinalJson(const ebrp::SolveOptions& opt,
+                             const std::string& status,
+                             const std::string& reason) {
+    if (opt.out_path.empty()) return;
+    ebrp::SolveResult result;
+    result.instance_name = std::filesystem::path(opt.input_path).filename().string();
+    result.input_path = opt.input_path;
+    result.result_file = opt.out_path;
+    result.log_file = opt.log_path;
+    result.method = opt.method.empty() ? "unknown" : opt.method;
+    result.status = status;
+    result.certificate = "not_certified";
+    result.algorithm_preset = opt.algorithm_preset.empty()
+        ? "custom"
+        : opt.algorithm_preset;
+    result.objective = 0.0;
+    result.lower_bound = 0.0;
+    result.upper_bound = 0.0;
+    result.gap = 1.0;
+    result.open_nodes = 0;
+    result.unresolved_intervals = 1;
+    result.invalid_bound_intervals = 0;
+    result.frontier_covers_all_improving_gini_values = false;
+    result.frontier_range_certificate_scope = "not_certified_exception_exit";
+    result.route_mask_all_subset_enumeration_enabled = false;
+    result.route_mask_all_subset_enumeration_certifying = false;
+    result.compact_status = status;
+    result.compact_LB = 0.0;
+    result.compact_UB = 0.0;
+    result.compact_gap = 1.0;
+    result.compact_bc_model_size_policy = opt.compact_bc_model_size_policy;
+    result.compact_bc_model_size_stop_reason = reason;
+    result.compact_bc_rejection_reason = reason;
+    result.compact_interval_bc_rejection_reason = reason;
+    result.compact_bc_receiver_source_cover_mode =
+        opt.compact_bc_receiver_source_cover_mode;
+    result.finalization_source = "error_json";
+    result.solver_finalization_reached = false;
+    result.wrapper_synthesized_final_json = true;
+    result.process_return_code = 1;
+    result.abnormal_exit_detected = true;
+    result.abnormal_exit_reason = reason;
+    result.last_progress_event = "exception_finalization";
+    result.plateau_reason = status;
+    result.sealed_run = opt.paper_run_sealed;
+    result.no_archive_scanning = !opt.incumbent_archive_auto;
+    result.no_external_known_ub = opt.incumbent_json_path.empty() &&
+        opt.external_incumbent_path.empty() && opt.hga_incumbent_path.empty();
+    result.no_focus_only_certificate = !opt.frontier_focus_only;
+    result.sealed_run_forbidden_source_used = false;
+    result.sealed_run_rejection_reason = "none";
+    result.incumbent_source_category = "none";
+    result.incumbent_source_detail = "none";
+    result.incumbent_source_contributes_lower_bound = false;
+    result.incumbent_source_is_paper_reproducible = false;
+    result.cplex_threads = opt.cplex_threads;
+    result.mip_threads = opt.mip_threads;
+    if (result.algorithm_preset == "paper-gf-compact-bc") {
+        result.compact_bc_solver_threads = opt.compact_bc_threads > 0
+            ? opt.compact_bc_threads
+            : (opt.mip_threads > 0 ? opt.mip_threads : std::max(1, opt.threads));
+        result.compact_interval_bc_threads = result.compact_bc_solver_threads;
+        result.solver_thread_policy =
+            result.compact_bc_solver_threads == 1
+                ? "compact_bc_single_thread"
+                : "compact_bc_multithread";
+        result.thread_fairness_class =
+            result.compact_bc_solver_threads == 1
+                ? "one_thread_fair"
+                : "multithread_diagnostic";
+    } else if (result.method == "cplex") {
+        const int effective_cplex_threads =
+            opt.cplex_threads > 0 ? opt.cplex_threads : std::max(1, opt.threads);
+        result.cplex_threads = effective_cplex_threads;
+        result.solver_thread_policy =
+            effective_cplex_threads == 1
+                ? "plain_cplex_single_thread"
+                : "plain_cplex_multithread";
+        result.thread_fairness_class =
+            effective_cplex_threads == 1
+                ? "one_thread_fair"
+                : "multithread_diagnostic";
+    } else {
+        result.thread_fairness_class = "unknown_not_paper";
+    }
+    result.notes.push_back("Emergency noncertified final JSON written after exception: "
+        + reason);
+    finalizePaperModuleFields(result);
+    std::vector<ebrp::SolveResult> results;
+    results.push_back(result);
+    ebrp::writeTextFile(opt.out_path, ebrp::resultsToJson(results));
+}
+
 } // namespace
 
 int main(int argc, char** argv) {
+    ebrp::SolveOptions opt;
     try {
-        ebrp::SolveOptions opt = parseArgs(argc, argv);
+        opt = parseArgs(argc, argv);
         std::vector<std::filesystem::path> files = ebrp::collectInputFiles(opt.input_path);
         std::vector<ebrp::SolveResult> results;
         for (const auto& file : files) {
@@ -15800,8 +15963,24 @@ int main(int argc, char** argv) {
         if (!opt.out_path.empty()) ebrp::writeTextFile(opt.out_path, json);
         else std::cout << json;
         return 0;
+    } catch (const std::bad_alloc& e) {
+        const std::string reason = std::string("std_bad_alloc: ") + e.what();
+        std::cerr << "ExactEBRP error: " << reason << "\n";
+        try {
+            writeEmergencyFinalJson(opt, "model_size_limit", reason);
+        } catch (const std::exception& write_error) {
+            std::cerr << "ExactEBRP emergency JSON write failed: "
+                      << write_error.what() << "\n";
+        }
+        return 1;
     } catch (const std::exception& e) {
         std::cerr << "ExactEBRP error: " << e.what() << "\n";
+        try {
+            writeEmergencyFinalJson(opt, "error_noncertified", e.what());
+        } catch (const std::exception& write_error) {
+            std::cerr << "ExactEBRP emergency JSON write failed: "
+                      << write_error.what() << "\n";
+        }
         usage();
         return 1;
     }
