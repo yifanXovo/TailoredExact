@@ -48,3 +48,17 @@ reproduced by this short one-thread compact-BC run, so it is not counted as a
 new fair-suite certificate in this round.  `moderate_seed3301` remains open but
 retains a substantially better compact-BC bound than plain CPLEX under the same
 thread/time policy.
+## Round 2 Scope Update
+
+The current audited round is
+`results/gf_compact_bc_strengthening_round2/`.
+
+The paper-facing line remains `paper-gf-compact-bc`: Gini-frontier ledger plus
+compact fixed-interval CPLEX MIP/BC certificates. Route-load BPC, route-mask
+enumeration certificates, archive/known-UB imports, and plain CPLEX benchmark
+bounds remain outside the paper-core certificate evidence.
+
+Round 2 adds one-thread fairness auditing, true root LP cut probing for compact
+interval BC, and model-size finalization for large diagnostics. The controlled
+one-thread evidence certifies V12 M1, V12 M2, `high_imbalance_seed3202`, and
+`tight_T_seed3101`; `moderate_seed3301` remains open.

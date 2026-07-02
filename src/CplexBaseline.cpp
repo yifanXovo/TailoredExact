@@ -74,6 +74,37 @@ struct CompactOracleStrengtheningStats {
     std::vector<std::string> enabled_families;
 };
 
+struct DynamicCut {
+    Expr expr;
+    std::string sense;
+    double rhs = 0.0;
+    std::string family;
+    std::string signature;
+    double violation = 0.0;
+};
+
+struct DynamicCutStats {
+    long long support_duration = 0;
+    long long transfer_compat = 0;
+    long long visit_inventory_linking = 0;
+    long long objective_estimator = 0;
+    long long receiver_source_cover = 0;
+    long long total = 0;
+    double support_duration_violation = 0.0;
+    double transfer_compat_violation = 0.0;
+    double visit_inventory_linking_violation = 0.0;
+    double objective_estimator_violation = 0.0;
+    double receiver_source_cover_violation = 0.0;
+    int rounds_completed = 0;
+};
+
+struct ModelSizeStats {
+    long long rows = 0;
+    long long cols = 0;
+    long long nonzeros = 0;
+    double memory_mb = 0.0;
+};
+
 void addTerm(Expr& e, const std::string& var, double coef) {
     if (std::fabs(coef) <= 1e-12) return;
     e[var] += coef;
@@ -200,7 +231,8 @@ void writeCompactLp(const Instance& instance,
                     const std::filesystem::path& lp_path,
                     bool strengthened,
                     const CompactIntervalCutoffConfig* cutoff = nullptr,
-                    CompactOracleStrengtheningStats* stats = nullptr) {
+                    CompactOracleStrengtheningStats* stats = nullptr,
+                    const std::vector<DynamicCut>* dynamic_cuts = nullptr) {
     VarRegistry vars;
     const int V = instance.V;
     const int M = instance.M;
@@ -474,6 +506,43 @@ void writeCompactLp(const Instance& instance,
             }
             writeConstraint(out, cid, delivery, ">=", required_delivery);
             if (stats != nullptr) ++stats->receiver_source_cover_cuts_added;
+        }
+        if (options.compact_bc_receiver_source_cover_mode == "pair-net-paper-safe" ||
+            options.compact_bc_receiver_source_cover_mode == "paper-safe") {
+            if (stats != nullptr) {
+                stats->enabled_families.push_back("receiver_source_cover_pair_net_safe");
+            }
+            for (int a = 1; a <= V; ++a) {
+                for (int b = a + 1; b <= V; ++b) {
+                    const int required_net = std::max(
+                        0,
+                        y_lb[a] + y_lb[b] -
+                            instance.initial[a] - instance.initial[b]);
+                    if (required_net <= 0) continue;
+                    Expr net_pair;
+                    for (int k = 0; k < M; ++k) {
+                        addTerm(net_pair, dName(k, a), 1);
+                        addTerm(net_pair, dName(k, b), 1);
+                        addTerm(net_pair, pName(k, a), -1);
+                        addTerm(net_pair, pName(k, b), -1);
+                    }
+                    writeConstraint(out, cid, net_pair, ">=", required_net);
+                    if (stats != nullptr) ++stats->receiver_source_cover_cuts_added;
+                    for (int k = 0; k < M; ++k) {
+                        Expr source_cover;
+                        addTerm(source_cover, dName(k, a), 1);
+                        addTerm(source_cover, dName(k, b), 1);
+                        addTerm(source_cover, pName(k, a), -1);
+                        addTerm(source_cover, pName(k, b), -1);
+                        for (int i = 1; i <= V; ++i) {
+                            if (i == a || i == b) continue;
+                            addTerm(source_cover, pName(k, i), -1);
+                        }
+                        writeConstraint(out, cid, source_cover, "<=", 0);
+                        if (stats != nullptr) ++stats->receiver_source_cover_cuts_added;
+                    }
+                }
+            }
         }
     }
 
@@ -939,6 +1008,12 @@ void writeCompactLp(const Instance& instance,
         }
     }
 
+    if (dynamic_cuts != nullptr) {
+        for (const DynamicCut& cut : *dynamic_cuts) {
+            writeConstraint(out, cid, cut.expr, cut.sense, cut.rhs);
+        }
+    }
+
     out << "Bounds\n";
     for (const auto& kv : vars.bounds) {
         if (kv.second.second >= 1e90) out << " " << num(kv.second.first) << " <= " << kv.first << "\n";
@@ -1052,6 +1127,493 @@ std::string parseCplexTerminalStatus(const std::filesystem::path& log_path) {
         return "optimal";
     }
     return "unknown";
+}
+
+double solValue(const std::unordered_map<std::string, double>& values,
+                const std::string& name) {
+    auto it = values.find(name);
+    return it == values.end() ? 0.0 : it->second;
+}
+
+bool familyEnabled(const SolveOptions& options, const std::string& family) {
+    std::string list = options.compact_bc_dynamic_cut_families;
+    std::transform(list.begin(), list.end(), list.begin(), [](unsigned char c) {
+        return static_cast<char>(std::tolower(c));
+    });
+    if (list.empty() || list == "all") return true;
+    return list.find(family) != std::string::npos;
+}
+
+void addDynamicCut(std::vector<DynamicCut>& cuts,
+                   std::set<std::string>& signatures,
+                   DynamicCutStats& stats,
+                   const DynamicCut& cut) {
+    if (!signatures.insert(cut.signature).second) return;
+    cuts.push_back(cut);
+    ++stats.total;
+    if (cut.family == "support_duration") {
+        ++stats.support_duration;
+        stats.support_duration_violation =
+            std::max(stats.support_duration_violation, cut.violation);
+    } else if (cut.family == "transfer_compat") {
+        ++stats.transfer_compat;
+        stats.transfer_compat_violation =
+            std::max(stats.transfer_compat_violation, cut.violation);
+    } else if (cut.family == "visit_inventory_linking") {
+        ++stats.visit_inventory_linking;
+        stats.visit_inventory_linking_violation =
+            std::max(stats.visit_inventory_linking_violation, cut.violation);
+    } else if (cut.family == "objective_estimator") {
+        ++stats.objective_estimator;
+        stats.objective_estimator_violation =
+            std::max(stats.objective_estimator_violation, cut.violation);
+    } else if (cut.family == "receiver_source_cover") {
+        ++stats.receiver_source_cover;
+        stats.receiver_source_cover_violation =
+            std::max(stats.receiver_source_cover_violation, cut.violation);
+    }
+}
+
+std::string dynamicCutSummary(const DynamicCutStats& stats) {
+    std::ostringstream out;
+    out << "support_duration=" << stats.support_duration
+        << ";transfer_compat=" << stats.transfer_compat
+        << ";visit_inventory_linking=" << stats.visit_inventory_linking
+        << ";objective_estimator=" << stats.objective_estimator
+        << ";receiver_source_cover=" << stats.receiver_source_cover;
+    return out.str();
+}
+
+std::string dynamicViolationSummary(const DynamicCutStats& stats) {
+    std::ostringstream out;
+    out << "support_duration=" << stats.support_duration_violation
+        << ";transfer_compat=" << stats.transfer_compat_violation
+        << ";visit_inventory_linking=" << stats.visit_inventory_linking_violation
+        << ";objective_estimator=" << stats.objective_estimator_violation
+        << ";receiver_source_cover=" << stats.receiver_source_cover_violation;
+    return out.str();
+}
+
+std::vector<DynamicCut> separateDynamicCuts(
+    const Instance& instance,
+    const SolveOptions& options,
+    const CompactIntervalCutoffConfig& cutoff,
+    const std::unordered_map<std::string, double>& values,
+    std::set<std::string>& signatures,
+    DynamicCutStats& stats) {
+    std::vector<DynamicCut> added;
+    const int V = instance.V;
+    const int M = instance.M;
+    const double cunit = instance.pickup_time + instance.drop_time;
+    const double tol = std::max(1e-9, options.compact_bc_dynamic_cut_violation_tol);
+
+    auto emit = [&](const DynamicCut& cut) {
+        const std::size_t before = added.size();
+        addDynamicCut(added, signatures, stats, cut);
+        if (added.size() == before) {
+            // Duplicate in this round; global signature set already rejected it.
+        }
+    };
+
+    if (familyEnabled(options, "support") || familyEnabled(options, "duration")) {
+        const int max_support = std::max(2, std::min(4, options.compact_bc_support_cut_max_size));
+        for (int k = 0; k < M; ++k) {
+            std::vector<std::pair<double, int>> frac;
+            for (int i = 1; i <= V; ++i) {
+                const double z = solValue(values, zName(k, i));
+                if (z > tol) frac.push_back({z, i});
+            }
+            std::sort(frac.begin(), frac.end(), std::greater<>());
+            if (frac.size() > 10) frac.resize(10);
+            const int n = static_cast<int>(frac.size());
+            for (int a = 0; a < n; ++a) {
+                for (int b = a + 1; b < n; ++b) {
+                    std::vector<int> subset = {frac[a].second, frac[b].second};
+                    const double lhs =
+                        solValue(values, zName(k, subset[0])) +
+                        solValue(values, zName(k, subset[1]));
+                    const double cycle = pairCycleLowerBound(instance, subset[0], subset[1]);
+                    const double min_handling = cunit;
+                    if (cycle + min_handling <= instance.total_time_limit + 1e-9) continue;
+                    const double violation = lhs - 1.0;
+                    if (violation <= tol) continue;
+                    DynamicCut cut;
+                    cut.family = "support_duration";
+                    cut.signature = "support:k" + std::to_string(k) + ":"
+                        + std::to_string(subset[0]) + "_" + std::to_string(subset[1]);
+                    for (int i : subset) addTerm(cut.expr, zName(k, i), 1);
+                    cut.sense = "<=";
+                    cut.rhs = 1.0;
+                    cut.violation = violation;
+                    emit(cut);
+                }
+            }
+            if (max_support >= 3) {
+                for (int a = 0; a < n; ++a) {
+                    for (int b = a + 1; b < n; ++b) {
+                        for (int c = b + 1; c < n; ++c) {
+                            std::vector<int> subset = {
+                                frac[a].second, frac[b].second, frac[c].second};
+                            const double lhs =
+                                solValue(values, zName(k, subset[0])) +
+                                solValue(values, zName(k, subset[1])) +
+                                solValue(values, zName(k, subset[2]));
+                            const double cycle = tripleCycleLowerBound(
+                                instance, subset[0], subset[1], subset[2]);
+                            const double min_handling = cunit * 2.0;
+                            if (cycle + min_handling <= instance.total_time_limit + 1e-9) continue;
+                            const double violation = lhs - 2.0;
+                            if (violation <= tol) continue;
+                            DynamicCut cut;
+                            cut.family = "support_duration";
+                            cut.signature = "support:k" + std::to_string(k) + ":"
+                                + std::to_string(subset[0]) + "_"
+                                + std::to_string(subset[1]) + "_"
+                                + std::to_string(subset[2]);
+                            for (int i : subset) addTerm(cut.expr, zName(k, i), 1);
+                            cut.sense = "<=";
+                            cut.rhs = 2.0;
+                            cut.violation = violation;
+                            emit(cut);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (familyEnabled(options, "transfer")) {
+        for (int k = 0; k < M; ++k) {
+            for (int j = 1; j <= V; ++j) {
+                double lhs = solValue(values, dName(k, j));
+                Expr expr;
+                addTerm(expr, dName(k, j), 1);
+                for (int i = 1; i <= V; ++i) {
+                    if (i == j) continue;
+                    const double route_lb =
+                        instance.dist[0][i] + instance.dist[i][j] +
+                        instance.dist[j][0] + cunit;
+                    if (route_lb <= instance.total_time_limit + 1e-9) {
+                        lhs -= solValue(values, pName(k, i));
+                        addTerm(expr, pName(k, i), -1);
+                    }
+                }
+                if (lhs <= tol) continue;
+                DynamicCut cut;
+                cut.family = "transfer_compat";
+                cut.signature = "transfer:k" + std::to_string(k) + ":j" + std::to_string(j);
+                cut.expr = expr;
+                cut.sense = "<=";
+                cut.rhs = 0.0;
+                cut.violation = lhs;
+                emit(cut);
+            }
+        }
+    }
+
+    if (familyEnabled(options, "visit") || familyEnabled(options, "inventory")) {
+        for (int i = 1; i <= V; ++i) {
+            double visit_mass = 0.0;
+            Expr visit;
+            for (int k = 0; k < M; ++k) {
+                visit_mass += solValue(values, zName(k, i));
+                addTerm(visit, zName(k, i), 1);
+            }
+            const double y = solValue(values, yName(i));
+            const double up_lhs = y - instance.initial[i] -
+                static_cast<double>(instance.capacity[i] - instance.initial[i]) * visit_mass;
+            if (up_lhs > tol) {
+                DynamicCut cut;
+                cut.family = "visit_inventory_linking";
+                cut.signature = "visit_up:i" + std::to_string(i);
+                addTerm(cut.expr, yName(i), 1);
+                for (int k = 0; k < M; ++k) {
+                    addTerm(cut.expr, zName(k, i),
+                        -static_cast<double>(instance.capacity[i] - instance.initial[i]));
+                }
+                cut.sense = "<=";
+                cut.rhs = instance.initial[i];
+                cut.violation = up_lhs;
+                emit(cut);
+            }
+            const double lo_lhs = instance.initial[i] - y -
+                static_cast<double>(instance.initial[i]) * visit_mass;
+            if (lo_lhs > tol) {
+                DynamicCut cut;
+                cut.family = "visit_inventory_linking";
+                cut.signature = "visit_lo:i" + std::to_string(i);
+                addTerm(cut.expr, yName(i), -1);
+                for (int k = 0; k < M; ++k) {
+                    addTerm(cut.expr, zName(k, i), -static_cast<double>(instance.initial[i]));
+                }
+                cut.sense = "<=";
+                cut.rhs = -instance.initial[i];
+                cut.violation = lo_lhs;
+                emit(cut);
+            }
+        }
+    }
+
+    if (familyEnabled(options, "objective") && cutoff.enabled &&
+        cutoff.add_objective_cutoff && std::isfinite(cutoff.incumbent_ub)) {
+        double S_U = 0.0;
+        for (int i = 1; i <= V; ++i) {
+            S_U += static_cast<double>(instance.capacity[i]) / instance.target[i];
+        }
+        if (S_U > 1e-12) {
+            double h_val = 0.0;
+            for (int i = 1; i <= V; ++i) {
+                for (int j = i + 1; j <= V; ++j) {
+                    h_val += solValue(values, hName(i, j));
+                }
+            }
+            double p_val = 0.0;
+            for (int i = 1; i <= V; ++i) {
+                p_val += instance.weights[i] * solValue(values, eName(i));
+            }
+            const double rhs = static_cast<double>(V) * S_U *
+                (cutoff.incumbent_ub - cutoff.epsilon);
+            const double lhs = h_val + static_cast<double>(V) * S_U *
+                options.lambda * p_val;
+            const double violation = lhs - rhs;
+            if (violation > tol) {
+                DynamicCut cut;
+                cut.family = "objective_estimator";
+                cut.signature = "objective_estimator";
+                for (int i = 1; i <= V; ++i) {
+                    for (int j = i + 1; j <= V; ++j) {
+                        addTerm(cut.expr, hName(i, j), 1);
+                    }
+                    addTerm(cut.expr, eName(i),
+                        static_cast<double>(V) * S_U * options.lambda * instance.weights[i]);
+                }
+                cut.sense = "<=";
+                cut.rhs = rhs;
+                cut.violation = violation;
+                emit(cut);
+            }
+        }
+    }
+
+    if (familyEnabled(options, "receiver") &&
+        (options.compact_bc_receiver_source_cover_mode == "singleton-paper-safe" ||
+         options.compact_bc_receiver_source_cover_mode == "pair-net-paper-safe" ||
+         options.compact_bc_receiver_source_cover_mode == "paper-safe")) {
+        for (int j = 1; j <= V; ++j) {
+            const double y = solValue(values, yName(j));
+            const double required = std::max(0.0, y - instance.initial[j]);
+            if (required <= tol) continue;
+            double delivered = 0.0;
+            Expr expr;
+            for (int k = 0; k < M; ++k) {
+                delivered += solValue(values, dName(k, j));
+                addTerm(expr, dName(k, j), 1);
+            }
+            const double violation = required - delivered;
+            if (violation <= tol) continue;
+            DynamicCut cut;
+            cut.family = "receiver_source_cover";
+            cut.signature = "receiver_singleton:j" + std::to_string(j);
+            cut.expr = expr;
+            cut.sense = ">=";
+            cut.rhs = required;
+            cut.violation = violation;
+            emit(cut);
+        }
+    }
+
+    return added;
+}
+
+ModelSizeStats analyzeLpModel(const std::filesystem::path& lp_path) {
+    ModelSizeStats stats;
+    std::ifstream in(lp_path);
+    if (!in) return stats;
+    std::string line;
+    bool in_subject = false;
+    bool in_bounds = false;
+    bool in_generals = false;
+    bool in_binaries = false;
+    std::set<std::string> vars;
+    const std::regex var_re(R"(([A-Za-z_][A-Za-z0-9_]*))");
+    while (std::getline(in, line)) {
+        if (line == "Subject To") {
+            in_subject = true; in_bounds = in_generals = in_binaries = false; continue;
+        }
+        if (line == "Bounds") {
+            in_bounds = true; in_subject = in_generals = in_binaries = false; continue;
+        }
+        if (line == "Generals") {
+            in_generals = true; in_subject = in_bounds = in_binaries = false; continue;
+        }
+        if (line == "Binaries") {
+            in_binaries = true; in_subject = in_bounds = in_generals = false; continue;
+        }
+        if (line == "End") break;
+        if (in_subject && !line.empty() && line[0] == ' ') {
+            ++stats.rows;
+            for (auto it = std::sregex_iterator(line.begin(), line.end(), var_re);
+                 it != std::sregex_iterator(); ++it) {
+                const std::string token = it->str(1);
+                if (token == "c") continue;
+                if (token.size() > 0 && token[0] == 'c' &&
+                    std::all_of(token.begin() + 1, token.end(), [](unsigned char ch) {
+                        return std::isdigit(ch) != 0;
+                    })) continue;
+                if (token == "obj") continue;
+                vars.insert(token);
+                ++stats.nonzeros;
+            }
+        } else if ((in_bounds || in_generals || in_binaries) && !line.empty()) {
+            for (auto it = std::sregex_iterator(line.begin(), line.end(), var_re);
+                 it != std::sregex_iterator(); ++it) {
+                const std::string token = it->str(1);
+                if (token == "inf") continue;
+                vars.insert(token);
+            }
+        }
+    }
+    stats.cols = static_cast<long long>(vars.size());
+    stats.memory_mb = (static_cast<double>(stats.nonzeros) * 24.0 +
+                       static_cast<double>(stats.rows + stats.cols) * 128.0) /
+        (1024.0 * 1024.0);
+    return stats;
+}
+
+std::string disabledFamiliesSummary(const SolveOptions& before,
+                                    const SolveOptions& after) {
+    std::vector<std::string> names;
+    if (before.compact_bc_support_duration_cuts && !after.compact_bc_support_duration_cuts) {
+        names.push_back("support_duration_static");
+    }
+    if (before.compact_bc_pairwise_transfer_compatibility && !after.compact_bc_pairwise_transfer_compatibility) {
+        names.push_back("pairwise_transfer_static");
+    }
+    if (before.compact_bc_receiver_source_cover_cuts && !after.compact_bc_receiver_source_cover_cuts) {
+        names.push_back("receiver_source_cover_static");
+    }
+    if (before.compact_bc_tight_mccormick && !after.compact_bc_tight_mccormick) {
+        names.push_back("tight_mccormick");
+    }
+    if (before.low_gini_ratio_band_tightening && !after.low_gini_ratio_band_tightening) {
+        names.push_back("low_gini_centering");
+    }
+    if (names.empty()) return "none";
+    std::ostringstream out;
+    for (std::size_t i = 0; i < names.size(); ++i) {
+        if (i) out << "|";
+        out << names[i];
+    }
+    return out.str();
+}
+
+long long estimateSupportRows(const Instance& instance, const SolveOptions& opt) {
+    if (!opt.compact_bc_support_duration_cuts) return 0;
+    const long long V = instance.V;
+    const long long M = instance.M;
+    long long pairs = V * (V - 1) / 2;
+    long long triples = 0;
+    if (opt.compact_bc_support_cut_max_size >= 3 && V >= 3) {
+        triples = V * (V - 1) * (V - 2) / 6;
+    }
+    long long total = M * (pairs + triples);
+    if (opt.compact_bc_support_cut_max_subsets > 0) {
+        total = std::min(total, static_cast<long long>(opt.compact_bc_support_cut_max_subsets));
+    }
+    return total;
+}
+
+SolveOptions applyResourceAdaptiveCompactOptions(const Instance& instance,
+                                                 const SolveOptions& opt,
+                                                 SolveResult& result) {
+    SolveOptions adjusted = opt;
+    result.compact_bc_model_size_policy = opt.compact_bc_model_size_policy;
+    const long long V = instance.V;
+    const long long M = instance.M;
+    result.compact_bc_rows_estimated =
+        M * (V + 1) * (V + 1) * 4 +
+        V * V * 6 +
+        estimateSupportRows(instance, adjusted);
+    result.compact_bc_cols_estimated =
+        M * (V + 1) * (V + 1) +
+        M * V * 6 +
+        V * V * 2;
+    result.compact_bc_nonzeros_estimated =
+        result.compact_bc_rows_estimated * 8;
+    result.compact_bc_memory_estimate_mb =
+        (static_cast<double>(result.compact_bc_nonzeros_estimated) * 24.0 +
+         static_cast<double>(result.compact_bc_rows_estimated + result.compact_bc_cols_estimated) * 128.0) /
+        (1024.0 * 1024.0);
+    if (opt.compact_bc_model_size_policy == "diagnostic-minimal") {
+        adjusted.compact_bc_support_duration_cuts = false;
+        adjusted.compact_bc_pairwise_transfer_compatibility = false;
+        adjusted.compact_bc_receiver_source_cover_cuts = false;
+        adjusted.compact_bc_tight_mccormick = false;
+        adjusted.low_gini_ratio_band_tightening = false;
+        adjusted.compact_bc_support_cut_max_subsets = 0;
+    } else if (opt.compact_bc_model_size_policy == "resource-adaptive") {
+        const bool row_hit = opt.compact_bc_max_rows > 0 &&
+            result.compact_bc_rows_estimated > opt.compact_bc_max_rows;
+        const bool col_hit = opt.compact_bc_max_cols > 0 &&
+            result.compact_bc_cols_estimated > opt.compact_bc_max_cols;
+        const bool nz_hit = opt.compact_bc_max_nonzeros > 0 &&
+            result.compact_bc_nonzeros_estimated > opt.compact_bc_max_nonzeros;
+        const bool mem_hit = opt.compact_bc_max_memory_mb > 0.0 &&
+            result.compact_bc_memory_estimate_mb > opt.compact_bc_max_memory_mb;
+        if (row_hit || col_hit || nz_hit || mem_hit) {
+            adjusted.compact_bc_support_duration_cuts = false;
+            adjusted.compact_bc_pairwise_transfer_compatibility = false;
+            adjusted.compact_bc_receiver_source_cover_cuts = false;
+            adjusted.low_gini_ratio_band_tightening = false;
+            adjusted.compact_bc_support_cut_max_subsets = 0;
+            if (adjusted.compact_bc_root_cut_rounds <= 0) {
+                adjusted.compact_bc_root_cut_rounds = 1;
+            }
+            if (adjusted.compact_bc_dynamic_cut_families.empty()) {
+                adjusted.compact_bc_dynamic_cut_families =
+                    "support,transfer,visit,objective,receiver";
+            }
+        }
+    }
+    result.compact_bc_disabled_families_due_to_size =
+        disabledFamiliesSummary(opt, adjusted);
+    return adjusted;
+}
+
+std::unordered_map<std::string, double> solveRootRelaxation(
+    const SolveOptions& options,
+    const std::filesystem::path& lp_path,
+    const std::filesystem::path& sol_path,
+    const std::filesystem::path& log_path,
+    double time_limit,
+    int threads,
+    std::string& status,
+    double& objective,
+    double& best_bound) {
+    const std::filesystem::path cmd_path = log_path.parent_path() /
+        (log_path.stem().string() + ".cplex");
+    std::ofstream cmd(cmd_path);
+    cmd << "set threads " << std::max(1, threads) << "\n";
+    if (time_limit > 0.0) cmd << "set timelimit " << time_limit << "\n";
+    cmd << "read " << lp_path.string() << "\n";
+    cmd << "change problem lp\n";
+    cmd << "optimize\n";
+    cmd << "write " << sol_path.string() << "\n";
+    cmd << "quit\n";
+    cmd.close();
+    const std::string cplex = defaultCplexPath();
+    const std::string command = "cmd /C \"" + quote(cplex) + " -f "
+        + quote(cmd_path) + " > " + quote(log_path) + " 2>&1\"";
+    const int rc = std::system(command.c_str());
+    (void)options;
+    (void)rc;
+    if (!std::filesystem::exists(sol_path)) {
+        status = parseCplexTerminalStatus(log_path);
+        objective = std::numeric_limits<double>::quiet_NaN();
+        best_bound = std::numeric_limits<double>::quiet_NaN();
+        return {};
+    }
+    return parseSolValues(sol_path, status, objective, best_bound);
 }
 
 std::vector<RoutePlan> reconstructRoutes(const Instance& instance,
@@ -1221,6 +1783,18 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
         result.notes.push_back("CPLEX process return code: " + std::to_string(rc));
         result.notes.push_back("LP file: " + lp_path.string());
         result.notes.push_back("CPLEX log: " + cplex_log.string());
+    } catch (const std::bad_alloc& e) {
+        result.status = "model_size_limit";
+        result.interval_exact_cutoff_certificate_basis = "compact_interval_bc_model_size_limit";
+        result.certificate = std::string("Compact interval BC model generation/solve exceeded available memory: ") + e.what();
+        result.compact_interval_bc_rejection_reason = result.certificate;
+        result.compact_bc_rejection_reason = result.certificate;
+        result.compact_bc_model_size_stop_reason = "std_bad_alloc";
+        result.compact_interval_bc_bound_valid = false;
+        result.compact_bc_bound_valid = false;
+        result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
+        result.interval_exact_cutoff_runtime_seconds = result.runtime_seconds;
+        result.compact_bc_time_seconds = result.runtime_seconds;
     } catch (const std::exception& e) {
         result.status = "error";
         result.certificate = std::string("CPLEX baseline failed: ") + e.what();
@@ -1264,6 +1838,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             ? "one_thread_fair"
             : "multithread_diagnostic";
     result.compact_bc_cut_profile = options.compact_bc_cut_profile;
+    result.compact_bc_receiver_source_cover_mode =
+        options.compact_bc_receiver_source_cover_mode;
     result.compact_bc_root_cut_rounds = options.compact_bc_root_cut_rounds;
     result.compact_bc_total_root_cut_rounds = options.compact_bc_root_cut_rounds;
     result.compact_bc_root_cut_time_limit = options.compact_bc_root_cut_time_limit;
@@ -1368,9 +1944,88 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             result.notes.push_back(
                 "interval_oracle_objective_cutoff_row=false requested; exact cutoff oracle keeps the original cutoff row because it is required for a valid interval certificate");
         }
+        double time_limit = options.interval_exact_cutoff_time_limit;
+        if (objective_bound_mode && options.interval_oracle_objective_bound_time_limit > 0.0) {
+            time_limit = options.interval_oracle_objective_bound_time_limit;
+        } else if (!objective_bound_mode &&
+                   options.interval_oracle_cutoff_feasibility_time_limit > 0.0) {
+            time_limit = options.interval_oracle_cutoff_feasibility_time_limit;
+        }
+        if (options.compact_bc_time_limit > 0.0) {
+            time_limit = options.compact_bc_time_limit;
+        }
+        if (time_limit <= 0.0) time_limit = std::max(1.0, options.solve_time_limit);
+        SolveOptions model_options =
+            applyResourceAdaptiveCompactOptions(instance, options, result);
+        result.compact_bc_root_cut_rounds = model_options.compact_bc_root_cut_rounds;
+        result.compact_bc_root_cut_time_limit = model_options.compact_bc_root_cut_time_limit;
+        result.compact_bc_dynamic_cut_families = model_options.compact_bc_dynamic_cut_families;
+        result.compact_bc_root_probe = model_options.compact_bc_root_probe;
+        std::vector<DynamicCut> dynamic_cuts;
+        std::set<std::string> dynamic_signatures;
+        DynamicCutStats dynamic_stats;
+        if (model_options.compact_bc_root_cut_rounds > 0) {
+            for (int round = 0; round < model_options.compact_bc_root_cut_rounds; ++round) {
+                const std::filesystem::path root_lp =
+                    default_dir / ("root_round_" + std::to_string(round + 1) + ".lp");
+                const std::filesystem::path root_sol =
+                    default_dir / ("root_round_" + std::to_string(round + 1) + ".sol");
+                const std::filesystem::path root_log =
+                    default_dir / ("root_round_" + std::to_string(round + 1) + ".log");
+                CompactOracleStrengtheningStats probe_stats;
+                writeCompactLp(instance, model_options, root_lp, true, &cutoff,
+                               &probe_stats, &dynamic_cuts);
+                std::string root_status = "unknown";
+                double root_obj = std::numeric_limits<double>::quiet_NaN();
+                double root_bound = std::numeric_limits<double>::quiet_NaN();
+                const double root_time =
+                    model_options.compact_bc_root_cut_time_limit > 0.0
+                        ? model_options.compact_bc_root_cut_time_limit
+                        : std::min(30.0, std::max(1.0, time_limit * 0.10));
+                auto root_values = solveRootRelaxation(
+                    model_options, root_lp, root_sol, root_log, root_time,
+                    effective_compact_threads, root_status, root_obj, root_bound);
+                result.notes.push_back("compact BC root cut round "
+                    + std::to_string(round + 1)
+                    + " status=" + root_status
+                    + " objective=" + (std::isfinite(root_obj) ? num(root_obj) : "nan"));
+                if (root_values.empty()) break;
+                DynamicCutStats before = dynamic_stats;
+                std::vector<DynamicCut> added = separateDynamicCuts(
+                    instance, model_options, cutoff, root_values,
+                    dynamic_signatures, dynamic_stats);
+                ++dynamic_stats.rounds_completed;
+                result.notes.push_back("compact BC root cut round "
+                    + std::to_string(round + 1)
+                    + " added_dynamic_cuts=" + std::to_string(dynamic_stats.total - before.total));
+                if (added.empty()) break;
+            }
+        }
+
         CompactOracleStrengtheningStats strengthening_stats;
-        writeCompactLp(instance, options, lp_path, true, &cutoff,
-                       &strengthening_stats);
+        writeCompactLp(instance, model_options, lp_path, true, &cutoff,
+                       &strengthening_stats, &dynamic_cuts);
+        const ModelSizeStats model_size = analyzeLpModel(lp_path);
+        result.compact_bc_model_rows = model_size.rows;
+        result.compact_bc_model_cols = model_size.cols;
+        result.compact_bc_model_nonzeros = model_size.nonzeros;
+        if (model_size.memory_mb > 0.0) {
+            result.compact_bc_memory_estimate_mb = model_size.memory_mb;
+        }
+        result.compact_bc_dynamic_cuts_added_by_family =
+            dynamicCutSummary(dynamic_stats);
+        result.compact_bc_dynamic_max_violation_by_family =
+            dynamicViolationSummary(dynamic_stats);
+        result.compact_bc_dynamic_cuts_added_total = dynamic_stats.total;
+        result.compact_bc_total_root_cut_rounds = dynamic_stats.rounds_completed;
+        result.compact_bc_dynamic_cut_violation_tol =
+            model_options.compact_bc_dynamic_cut_violation_tol;
+        result.compact_bc_model_size_policy = model_options.compact_bc_model_size_policy;
+        if (model_options.compact_bc_model_size_policy != "full" &&
+            result.compact_bc_disabled_families_due_to_size != "none") {
+            result.notes.push_back("resource-adaptive compact BC disabled families: "
+                + result.compact_bc_disabled_families_due_to_size);
+        }
         if (options.interval_oracle_penalty_domain_tightening ||
             options.interval_oracle_low_gini_tightening) {
             result.notes.push_back(
@@ -1415,6 +2070,13 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             strengthening_stats.low_gini_ratio_band_domains_tightened;
         result.oracle_strengthening_families_enabled =
             joinFamilies(strengthening_stats.enabled_families);
+        if (dynamic_stats.total > 0) {
+            result.oracle_strengthening_families_enabled +=
+                (result.oracle_strengthening_families_enabled.empty() ||
+                 result.oracle_strengthening_families_enabled == "none")
+                    ? "dynamic_root"
+                    : "|dynamic_root";
+        }
         result.compact_interval_bc_cut_families_enabled =
             result.oracle_strengthening_families_enabled;
         result.compact_bc_enabled_cut_families =
@@ -1438,7 +2100,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                  << ";support_duration_pair=" << result.compact_bc_support_duration_pair_cuts_added
                  << ";support_duration_triple=" << result.compact_bc_support_duration_triple_cuts_added
                  << ";transfer_compat=" << result.compact_bc_pairwise_transfer_compatibility_cuts_added
-                 << ";receiver_source_cover=" << result.compact_bc_receiver_source_cover_cuts_added;
+                 << ";receiver_source_cover=" << result.compact_bc_receiver_source_cover_cuts_added
+                 << ";dynamic_root_total=" << dynamic_stats.total;
         result.compact_bc_cuts_added_by_family = cuts.str();
         result.compact_bc_total_cuts_added_by_family =
             result.compact_bc_cuts_added_by_family;
@@ -1461,17 +2124,6 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 static_cast<int>(strengthening_stats.penalty_domains_tightened);
         }
 
-        double time_limit = options.interval_exact_cutoff_time_limit;
-        if (objective_bound_mode && options.interval_oracle_objective_bound_time_limit > 0.0) {
-            time_limit = options.interval_oracle_objective_bound_time_limit;
-        } else if (!objective_bound_mode &&
-                   options.interval_oracle_cutoff_feasibility_time_limit > 0.0) {
-            time_limit = options.interval_oracle_cutoff_feasibility_time_limit;
-        }
-        if (options.compact_bc_time_limit > 0.0) {
-            time_limit = options.compact_bc_time_limit;
-        }
-        if (time_limit <= 0.0) time_limit = std::max(1.0, options.solve_time_limit);
         std::ofstream cmd(cmd_path);
         cmd << "set threads " << std::max(1, effective_compact_threads) << "\n";
         cmd << "set timelimit " << time_limit << "\n";

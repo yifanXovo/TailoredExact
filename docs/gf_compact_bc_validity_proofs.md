@@ -100,3 +100,16 @@ valid families under a root-round configuration.  It does not yet implement a
 true CPLEX callback or fractional root-solution separation loop.  Therefore
 dynamic-root rows in the strengthening round are diagnostic for scheduling and
 metadata, not evidence for a new dynamically separated cut family.
+## Round 2 Receiver Cover Status
+
+Singleton receiver-source-cover cuts remain valid under the current empty-start
+vehicle and one-service-mode station convention. Pair/set receiver-cover cuts
+are not paper-core evidence in this round. The old drop-cover form is unsafe
+when receiver-set stations can exchange bikes internally. A net-delivery pair
+form is documented in `docs/receiver_set_source_cover_pair_proof.md`, but it
+remains diagnostic pending complete proof and projection tests.
+
+Dynamic root separation in round 2 reuses only cut families already classified
+as valid. The dynamic loop may add a cut only after reading a root LP solution
+and verifying a positive violation; generated cuts are logged separately from
+static rows.

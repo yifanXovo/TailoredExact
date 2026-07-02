@@ -87,9 +87,21 @@ def main() -> int:
                     break
         if paper_row and fairness and fairness != "one_thread_fair":
             failure_reasons.append("paper_row_not_single_thread_fair")
+        if paper_row and not fairness:
+            failure_reasons.append("paper_row_missing_thread_fairness_class")
+        if paper_row and str(data.get("solver_thread_policy", "")) in {"", "unknown"}:
+            failure_reasons.append("paper_row_missing_thread_policy")
+        if paper_row and as_bool(data.get("certified_original_problem")):
+            mode = str(data.get("compact_bc_receiver_source_cover_mode", ""))
+            if "diagnostic" in mode:
+                failure_reasons.append("diagnostic_receiver_cover_used_by_certificate")
+            if not str(data.get("compact_bc_total_cuts_added_by_family", "")):
+                failure_reasons.append("certified_row_missing_top_level_cut_aggregation")
         if method == "interval-cutoff-oracle" and as_bool(data.get("compact_interval_bc_enabled")):
             if cut_scope not in {"original_fixed_interval", "none"}:
                 failure_reasons.append("compact_bc_leaf_bad_bound_scope")
+            if data.get("compact_bc_bound_valid", "") == "":
+                failure_reasons.append("compact_bc_leaf_missing_bound_valid")
 
         if failure_reasons:
             failures += 1
