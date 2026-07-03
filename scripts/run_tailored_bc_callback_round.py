@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Run the tailored-BC callback feasibility/evidence round.
 
-The current Windows/MinGW build drives CPLEX through command files.  This
-runner records that boundary explicitly instead of presenting static cuts as a
-true in-process CPLEX callback implementation.
+The current Windows/MinGW build has the historical command-file CPLEX path and
+a narrow in-process C API callback path for fixed-interval smokes.  This runner
+records callback evidence explicitly and keeps hard-leaf performance work
+separate from paper certification claims.
 """
 
 from __future__ import annotations
@@ -104,6 +105,10 @@ def result_row(name: str, path: Path, meta: Dict[str, Any]) -> Dict[str, Any]:
         "tailored_bc_candidate_callback_calls": data.get("tailored_bc_candidate_callback_calls", ""),
         "tailored_bc_branch_callback_calls": data.get("tailored_bc_branch_callback_calls", ""),
         "tailored_bc_progress_callback_calls": data.get("tailored_bc_progress_callback_calls", ""),
+        "tailored_bc_gini_subset_envelope_candidates": data.get("tailored_bc_gini_subset_envelope_candidates", ""),
+        "tailored_bc_gini_subset_envelope_violations": data.get("tailored_bc_gini_subset_envelope_violations", ""),
+        "tailored_bc_gini_subset_envelope_cuts_added": data.get("tailored_bc_gini_subset_envelope_cuts_added", ""),
+        "tailored_bc_branching_priorities_summary": data.get("tailored_bc_branching_priorities_summary", ""),
         "certified_original_problem": data.get("certified_original_problem", ""),
         "audit_returncode": meta.get("returncode", ""),
         "runtime_seconds": round(float(meta.get("runtime_seconds", 0.0)), 3),
@@ -176,6 +181,7 @@ def main() -> int:
         "--input", str(SMOKE_INSTANCE),
         "--lambda", "0.15",
         "--T", "3600",
+        "--interval-exact-cutoff-oracle", "compact-mip",
         "--interval-exact-cutoff-gamma-L", "0",
         "--interval-exact-cutoff-gamma-U", "1",
         "--interval-exact-cutoff-UB", "999",
@@ -190,6 +196,42 @@ def main() -> int:
         timeout=90,
     )
     rows.append(result_row("interval_callback_smoke", interval_out, interval_meta))
+
+    interval_diag_out = RAW / "interval_callback_separator_diagnostic.json"
+    interval_diag_cmd = [
+        str(EXE),
+        "--method", "interval-cutoff-oracle",
+        "--paper-run-sealed", "true",
+        "--tailored-bc-enabled", "true",
+        "--tailored-bc-mode", "callback",
+        "--tailored-bc-branching-priority", "adaptive",
+        "--tailored-bc-gini-branching", "auto",
+        "--tailored-bc-gini-subset-envelope", "false",
+        "--tailored-bc-low-gini-l1-centering", "false",
+        "--tailored-bc-subset-inventory-imbalance", "false",
+        "--tailored-bc-transfer-cutset", "false",
+        "--input", str(SMOKE_INSTANCE),
+        "--lambda", "0.15",
+        "--T", "3600",
+        "--interval-exact-cutoff-oracle", "compact-mip",
+        "--interval-exact-cutoff-gamma-L", "0",
+        "--interval-exact-cutoff-gamma-U", "1",
+        "--interval-exact-cutoff-UB", "999",
+        "--interval-exact-cutoff-time-limit", "10",
+        "--compact-bc-threads", "1",
+        "--mip-threads", "1",
+        "--out", str(interval_diag_out),
+    ]
+    interval_diag_meta = run_cmd(
+        interval_diag_cmd,
+        RESULTS / "logs" / "interval_callback_separator_diagnostic.log",
+        timeout=90,
+    )
+    rows.append(result_row(
+        "interval_callback_separator_diagnostic",
+        interval_diag_out,
+        interval_diag_meta,
+    ))
 
     callback_available = any(
         str(row.get("tailored_bc_callback_available", "")).lower() == "true"
@@ -211,14 +253,15 @@ def main() -> int:
             "tailored_callback_status": "unavailable" if not callback_available else "available",
             "static_root_cut_status": "implemented_diagnostic_only",
             "conclusion": "not_true_callback_bc" if not callback_available else "dynamic_c_api_callback_path_available",
+            "callback_cut_families": "gini_interval_cap,visit_inventory_linking,gini_subset_envelope",
         }
     ])
     write_csv(RESULTS / "exact_vs_cplex_callback_round.csv", [
         {
             "comparison": "not_executed",
-            "reason": "round stopped at callback architecture blocker",
+            "reason": "not part of this callback-plumbing increment",
             "plain_cplex_role": "benchmark_only",
-            "tailored_bc_role": "static_fallback_not_true_callback",
+            "tailored_bc_role": "dynamic_callback_smoke",
         }
     ])
     write_csv(RESULTS / "gini_branching_refinement.csv", [
@@ -273,11 +316,24 @@ def main() -> int:
     write_csv(RESULTS / "cplex_plain_vs_tailored_bc.csv", [
         {
             "comparison": "not_executed",
-            "reason": "round stopped at callback architecture blocker",
+            "reason": "not part of this callback-plumbing increment",
             "plain_cplex_role": "benchmark_only",
-            "tailored_bc_role": "static_fallback_not_true_callback",
+            "tailored_bc_role": "dynamic_callback_smoke",
         }
     ])
+    def sum_family(name: str) -> int:
+        total = 0
+        for row in rows:
+            families = str(row.get("tailored_bc_user_cuts_added_by_family", ""))
+            for item in families.split(";"):
+                if not item.startswith(name + "="):
+                    continue
+                try:
+                    total += int(float(item.split("=", 1)[1]))
+                except ValueError:
+                    pass
+        return total
+
     write_csv(RESULTS / "callback_event_summary.csv", [
         {
             "callback_available": callback_available,
@@ -285,6 +341,11 @@ def main() -> int:
             "lazy_events": 0,
             "incumbent_events": sum(int(row.get("tailored_bc_candidate_callback_calls") or 0) for row in rows),
             "branch_events": sum(int(row.get("tailored_bc_branch_callback_calls") or 0) for row in rows),
+            "callback_gini_interval_cap_cuts": sum_family("callback_gini_interval_cap"),
+            "callback_visit_inventory_linking_cuts": sum_family("callback_visit_inventory_linking"),
+            "callback_gini_subset_envelope_cuts": sum_family("callback_gini_subset_envelope"),
+            "callback_gini_subset_envelope_candidates": sum(int(row.get("tailored_bc_gini_subset_envelope_candidates") or 0) for row in rows),
+            "callback_gini_subset_envelope_violations": sum(int(row.get("tailored_bc_gini_subset_envelope_violations") or 0) for row in rows),
             "fail_reason": callback_fail_reason,
         }
     ])
@@ -295,6 +356,11 @@ def main() -> int:
             "lazy_events": 0,
             "incumbent_events": sum(int(row.get("tailored_bc_candidate_callback_calls") or 0) for row in rows),
             "branch_events": sum(int(row.get("tailored_bc_branch_callback_calls") or 0) for row in rows),
+            "callback_gini_interval_cap_cuts": sum_family("callback_gini_interval_cap"),
+            "callback_visit_inventory_linking_cuts": sum_family("callback_visit_inventory_linking"),
+            "callback_gini_subset_envelope_cuts": sum_family("callback_gini_subset_envelope"),
+            "callback_gini_subset_envelope_candidates": sum(int(row.get("tailored_bc_gini_subset_envelope_candidates") or 0) for row in rows),
+            "callback_gini_subset_envelope_violations": sum(int(row.get("tailored_bc_gini_subset_envelope_violations") or 0) for row in rows),
             "fail_reason": callback_fail_reason,
         }
     ])
@@ -376,7 +442,7 @@ def main() -> int:
     ]
     if callback_available:
         final_lines.append(
-            "The executable loads `cplex2211.dll` dynamically, registers a generic CPLEX callback, and solves the smoke fixed-interval LP/MIP in-process. The smoke interval row reports relaxation/candidate/progress callback events, one redundant paper-safe user cut, candidate interval-consistency checks, and CPLEX branch-order priorities applied through `CPXcopyorder`."
+            "The executable loads `cplex2211.dll` dynamically, registers a generic CPLEX callback, and solves the smoke fixed-interval LP/MIP in-process. The smoke interval row reports relaxation/candidate/progress callback events, paper-safe relaxation-point separator attempts for Gini interval, visit-inventory, and Gini subset-envelope rows, candidate interval-consistency checks, and CPLEX branch-order priorities applied through `CPXcopyorder`."
         )
     else:
         final_lines.append(
@@ -392,6 +458,7 @@ def main() -> int:
         "- `tailored_cut_ablation.csv` records paper-safe static tailored cut guards.",
         "- `tailored_bc_vs_static.csv` separates true callback BC from static fallback.",
         "- `callback_event_summary.csv` records callback events from the fixed-interval smoke solve when callbacks are available.",
+        "- `interval_callback_separator_diagnostic.json` disables overlapping static tailored cut families and confirms that relaxation-point callback separators are invoked without using diagnostic evidence as a paper certificate.",
         "- `source_classification.csv` preserves tailored source classes per JSON row.",
         "",
         "## Audit",
@@ -416,11 +483,9 @@ def main() -> int:
         r"D:\msys64\ucrt64\bin\g++.exe -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src\main.cpp src\Parser.cpp src\Evaluator.cpp src\Result.cpp src\Bounds.cpp src\ColumnPool.cpp src\TailoredExact.cpp src\Pricing.cpp src\Cuts.cpp src\Branching.cpp src\Master.cpp src\ColumnGeneration.cpp src\CplexBaseline.cpp src\TailoredBC.cpp src\TailoredBCCuts.cpp src\TailoredBCCallbacks.cpp src\TailoredBCCplexApi.cpp src\GiniBranching.cpp src\hga_tgbc\HgaTgbcGreedy.cpp src\HgaTgbcRunner.cpp src\Logger.cpp -o build\ExactEBRP.exe",
         "```",
         "",
-        "The user-specified remote head was `b65fb2e1cece2c70980eeb91aadfee07ac2591b8`, but `origin/codex/longrun-round17-local-results` resolved to `cb11b9f5f477b707511388b0196f0864c75d1fbb` at fetch time; the requested SHA was not present in the fetched branch.",
-        "",
         "## Paper Claim",
         "",
-        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, candidate interval-consistency validation, and branch-order priority injection. It is not yet the full requested tailored branch-and-cut: verifier-backed lazy incumbent rejection, custom Gini branch creation on hard leaves, hard-leaf callback ablations, and performance-positive hard-leaf evidence remain incomplete.",
+        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, and Gini subset-envelope rows, candidate interval-consistency validation, and branch-order priority injection. It is not yet the full requested tailored branch-and-cut: verifier-backed lazy incumbent rejection, custom Gini branch creation on hard leaves, hard-leaf callback ablations, and performance-positive hard-leaf evidence remain incomplete.",
         "",
         "Final commit SHA: recorded in the final assistant response after commit creation.",
     ])

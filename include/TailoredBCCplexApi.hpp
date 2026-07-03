@@ -5,6 +5,7 @@
 #include <filesystem>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 namespace ebrp {
 
@@ -32,6 +33,11 @@ struct TailoredBCCplexApiSolveResult {
     long long branch_callback_calls = 0;
     long long progress_callback_calls = 0;
     long long user_cuts_added = 0;
+    long long callback_gini_interval_cuts_added = 0;
+    long long callback_visit_inventory_cuts_added = 0;
+    long long callback_gini_subset_envelope_cuts_added = 0;
+    long long callback_gini_subset_envelope_candidates = 0;
+    long long callback_gini_subset_envelope_violations = 0;
     long long lazy_rejections = 0;
     long long incumbents_seen = 0;
     long long incumbents_verified = 0;
@@ -54,6 +60,9 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     bool enable_candidate_validation,
     bool enable_gini_branching,
     bool enable_branch_priorities,
-    double gini_branch_min_width);
+    double gini_branch_min_width,
+    const std::vector<int>& station_initial,
+    const std::vector<int>& station_capacity,
+    int vehicle_count);
 
 } // namespace ebrp

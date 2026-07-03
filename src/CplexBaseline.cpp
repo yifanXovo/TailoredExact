@@ -2608,7 +2608,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     (result.tailored_bc_gini_branch_mode == "branch_callback" ||
                      result.tailored_bc_gini_branch_mode == "outer_controller"),
                 result.tailored_bc_branch_priority_enabled,
-                options.tailored_bc_gini_branch_min_width);
+                options.tailored_bc_gini_branch_min_width,
+                instance.initial,
+                instance.capacity,
+                instance.M);
             used_callback_api = api_solve.available && api_solve.solved;
             rc = api_solve.return_code;
             if (used_callback_api) {
@@ -2648,7 +2651,17 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     std::to_string(api_solve.branch_priorities_applied);
                 result.tailored_bc_user_cuts_added_by_family +=
                     ";callback_gini_interval_cap=" +
-                    std::to_string(api_solve.user_cuts_added);
+                    std::to_string(api_solve.callback_gini_interval_cuts_added) +
+                    ";callback_visit_inventory_linking=" +
+                    std::to_string(api_solve.callback_visit_inventory_cuts_added) +
+                    ";callback_gini_subset_envelope=" +
+                    std::to_string(api_solve.callback_gini_subset_envelope_cuts_added);
+                result.tailored_bc_gini_subset_envelope_candidates +=
+                    api_solve.callback_gini_subset_envelope_candidates;
+                result.tailored_bc_gini_subset_envelope_violations +=
+                    api_solve.callback_gini_subset_envelope_violations;
+                result.tailored_bc_gini_subset_envelope_cuts_added +=
+                    api_solve.callback_gini_subset_envelope_cuts_added;
                 result.notes.push_back(
                     "CPLEX dynamic callback API backend used for tailored BC; callback events relaxation="
                     + std::to_string(api_solve.relaxation_callback_calls)

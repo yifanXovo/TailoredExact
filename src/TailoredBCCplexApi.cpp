@@ -62,6 +62,7 @@ using CPXgetcolname_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr, char**, char*, 
 using CPXcallbackaddusercuts_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int, int, const double*, const char*, const int*, const int*, const double*, const int*, const int*);
 using CPXcallbackcandidateispoint_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int*);
 using CPXcallbackgetcandidatepoint_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, double*, int, int, double*);
+using CPXcallbackgetrelaxationpoint_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, double*, int, int, double*);
 using CPXcallbackrejectcandidate_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int, int, const double*, const char*, const int*, const int*, const double*);
 using CPXcallbackmakebranch_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int, const int*, const char*, const double*, int, int, const double*, const char*, const int*, const int*, const double*, double, int*);
 using CPXcopyorder_t = int (__stdcall *)(CPXCENVptr, CPXLPptr, int, const int*, const int*, const int*);
@@ -88,6 +89,7 @@ struct Api {
     CPXcallbackaddusercuts_t callbackaddusercuts = nullptr;
     CPXcallbackcandidateispoint_t callbackcandidateispoint = nullptr;
     CPXcallbackgetcandidatepoint_t callbackgetcandidatepoint = nullptr;
+    CPXcallbackgetrelaxationpoint_t callbackgetrelaxationpoint = nullptr;
     CPXcallbackrejectcandidate_t callbackrejectcandidate = nullptr;
     CPXcallbackmakebranch_t callbackmakebranch = nullptr;
     CPXcopyorder_t copyorder = nullptr;
@@ -148,6 +150,7 @@ bool loadApi(Api& api, std::string& fail_reason) {
     LOAD_REQ(callbackaddusercuts, "CPXcallbackaddusercuts");
     LOAD_REQ(callbackcandidateispoint, "CPXcallbackcandidateispoint");
     LOAD_REQ(callbackgetcandidatepoint, "CPXcallbackgetcandidatepoint");
+    LOAD_REQ(callbackgetrelaxationpoint, "CPXcallbackgetrelaxationpoint");
     LOAD_REQ(callbackrejectcandidate, "CPXcallbackrejectcandidate");
     LOAD_REQ(callbackmakebranch, "CPXcallbackmakebranch");
     LOAD_REQ(copyorder, "CPXcopyorder");
@@ -228,10 +231,36 @@ long long applyBranchPriorities(Api& api,
     return static_cast<long long>(indices.size());
 }
 
+std::string yNameForStation(int station) {
+    return "Y_" + std::to_string(station);
+}
+
+std::string rNameForStation(int station) {
+    return "r_" + std::to_string(station);
+}
+
+std::string zNameForVehicleStation(int vehicle, int station) {
+    return "z_" + std::to_string(vehicle) + "_" + std::to_string(station);
+}
+
+std::vector<int> buildNameToIndexLookup(const std::vector<std::string>& names,
+                                        const std::string& target) {
+    std::vector<int> indices;
+    for (int i = 0; i < static_cast<int>(names.size()); ++i) {
+        if (names[static_cast<std::size_t>(i)] == target) indices.push_back(i);
+    }
+    return indices;
+}
+
 struct CallbackState {
     Api* api = nullptr;
     int ncols = 0;
     int g_col = -1;
+    std::vector<int> r_cols;
+    std::vector<int> y_cols;
+    std::vector<std::vector<int>> z_cols;
+    std::vector<int> station_initial;
+    std::vector<int> station_capacity;
     double gamma_L = 0.0;
     double gamma_U = 1.0;
     bool add_gini_cut = false;
@@ -243,6 +272,11 @@ struct CallbackState {
     std::atomic<long long> branch_calls{0};
     std::atomic<long long> progress_calls{0};
     std::atomic<long long> user_cuts_added{0};
+    std::atomic<long long> gini_interval_cuts_added{0};
+    std::atomic<long long> visit_inventory_cuts_added{0};
+    std::atomic<long long> gini_subset_envelope_cuts_added{0};
+    std::atomic<long long> gini_subset_envelope_candidates{0};
+    std::atomic<long long> gini_subset_envelope_violations{0};
     std::atomic<long long> lazy_rejections{0};
     std::atomic<long long> incumbents_seen{0};
     std::atomic<long long> incumbents_verified{0};
@@ -271,6 +305,146 @@ bool rejectCandidateWithGiniBound(CallbackState& state,
         return true;
     }
     return false;
+}
+
+bool addOneUserCut(CallbackState& state,
+                   CPXCALLBACKCONTEXTptr context,
+                   const std::vector<std::pair<int, double>>& terms,
+                   char sense,
+                   double rhs) {
+    if (terms.empty()) return false;
+    std::vector<int> beg = {0};
+    std::vector<int> ind;
+    std::vector<double> val;
+    ind.reserve(terms.size());
+    val.reserve(terms.size());
+    for (const auto& term : terms) {
+        if (term.first < 0 || std::fabs(term.second) <= 1e-12) continue;
+        ind.push_back(term.first);
+        val.push_back(term.second);
+    }
+    if (ind.empty()) return false;
+    const int purgeable[1] = {kUseCutForce};
+    const int local[1] = {0};
+    const int rc = state.api->callbackaddusercuts(
+        context, 1, static_cast<int>(ind.size()), &rhs, &sense,
+        beg.data(), ind.data(), val.data(), purgeable, local);
+    if (rc == 0) {
+        ++state.user_cuts_added;
+        return true;
+    }
+    return false;
+}
+
+void separateVisitInventoryLinking(CallbackState& state,
+                                   CPXCALLBACKCONTEXTptr context) {
+    if (state.ncols <= 0 || state.y_cols.empty() || state.z_cols.empty()) return;
+    if (state.visit_inventory_cuts_added.load() > 0) return;
+    std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
+    double obj = 0.0;
+    if (state.api->callbackgetrelaxationpoint(
+            context, x.data(), 0, state.ncols - 1, &obj) != 0) {
+        return;
+    }
+    constexpr double tol = 1e-6;
+    long long added = 0;
+    const int station_count =
+        std::min(static_cast<int>(state.y_cols.size()),
+                 static_cast<int>(state.station_initial.size()));
+    for (int i = 1; i < station_count; ++i) {
+        const int y = state.y_cols[static_cast<std::size_t>(i)];
+        if (y < 0) continue;
+        const double initial =
+            static_cast<double>(state.station_initial[static_cast<std::size_t>(i)]);
+        const double capacity =
+            static_cast<double>(state.station_capacity[static_cast<std::size_t>(i)]);
+        std::vector<std::pair<int, double>> upper_terms;
+        std::vector<std::pair<int, double>> lower_terms;
+        upper_terms.push_back({y, 1.0});
+        lower_terms.push_back({y, -1.0});
+        double visit = 0.0;
+        for (const std::vector<int>& row : state.z_cols) {
+            if (i >= static_cast<int>(row.size())) continue;
+            const int z = row[static_cast<std::size_t>(i)];
+            if (z < 0) continue;
+            visit += x[static_cast<std::size_t>(z)];
+            upper_terms.push_back({z, -(capacity - initial)});
+            lower_terms.push_back({z, -initial});
+        }
+        const double upper_lhs = x[static_cast<std::size_t>(y)] -
+            (capacity - initial) * visit;
+        if (upper_lhs > initial + tol &&
+            addOneUserCut(state, context, upper_terms, 'L', initial)) {
+            ++added;
+        }
+        const double lower_lhs = -x[static_cast<std::size_t>(y)] -
+            initial * visit;
+        if (lower_lhs > -initial + tol &&
+            addOneUserCut(state, context, lower_terms, 'L', -initial)) {
+            ++added;
+        }
+    }
+    if (added > 0) {
+        state.visit_inventory_cuts_added.fetch_add(added);
+    }
+}
+
+void separateGiniSubsetEnvelope(CallbackState& state,
+                                CPXCALLBACKCONTEXTptr context) {
+    if (state.ncols <= 0 || state.r_cols.size() <= 1 ||
+        state.gamma_U < -1e-12) {
+        return;
+    }
+    if (state.gini_subset_envelope_cuts_added.load() > 0) return;
+    std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
+    double obj = 0.0;
+    if (state.api->callbackgetrelaxationpoint(
+            context, x.data(), 0, state.ncols - 1, &obj) != 0) {
+        return;
+    }
+    const int V = static_cast<int>(state.r_cols.size()) - 1;
+    double sum_r = 0.0;
+    for (int i = 1; i <= V; ++i) {
+        const int r = state.r_cols[static_cast<std::size_t>(i)];
+        if (r >= 0) sum_r += x[static_cast<std::size_t>(r)];
+    }
+    auto addSubsetCut = [&](const std::vector<int>& subset, int sign) {
+        state.gini_subset_envelope_candidates.fetch_add(1);
+        const int a = static_cast<int>(subset.size());
+        std::vector<std::pair<int, double>> terms;
+        terms.reserve(static_cast<std::size_t>(V));
+        double lhs = 0.0;
+        for (int i = 1; i <= V; ++i) {
+            const int r = state.r_cols[static_cast<std::size_t>(i)];
+            if (r < 0) continue;
+            double coef = sign > 0
+                ? (-static_cast<double>(a) - static_cast<double>(V) * state.gamma_U)
+                : ( static_cast<double>(a) - static_cast<double>(V) * state.gamma_U);
+            if (std::find(subset.begin(), subset.end(), i) != subset.end()) {
+                coef += sign > 0 ? static_cast<double>(V) : -static_cast<double>(V);
+            }
+            lhs += coef * x[static_cast<std::size_t>(r)];
+            terms.push_back({r, coef});
+        }
+        constexpr double tol = 1e-6;
+        if (lhs > tol) {
+            state.gini_subset_envelope_violations.fetch_add(1);
+            if (addOneUserCut(state, context, terms, 'L', 0.0)) {
+                state.gini_subset_envelope_cuts_added.fetch_add(1);
+            }
+        }
+    };
+    if (sum_r <= 1e-12) return;
+    for (int i = 1; i <= V; ++i) {
+        addSubsetCut({i}, 1);
+        addSubsetCut({i}, -1);
+    }
+    for (int i = 1; i <= V; ++i) {
+        for (int j = i + 1; j <= V; ++j) {
+            addSubsetCut({i, j}, 1);
+            addSubsetCut({i, j}, -1);
+        }
+    }
 }
 
 void validateCandidatePoint(CallbackState& state,
@@ -351,8 +525,13 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
             const int local[1] = {0};
             int rc = state->api->callbackaddusercuts(
                 context, 1, 1, rhs, sense, beg, ind, val, purgeable, local);
-            if (rc == 0) ++state->user_cuts_added;
+            if (rc == 0) {
+                ++state->user_cuts_added;
+                ++state->gini_interval_cuts_added;
+            }
         }
+        separateVisitInventoryLinking(*state, context);
+        separateGiniSubsetEnvelope(*state, context);
     } else if (contextid == kContextCandidate) {
         ++state->candidate_calls;
         ++state->incumbents_seen;
@@ -401,7 +580,10 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     bool enable_candidate_validation,
     bool enable_gini_branching,
     bool enable_branch_priorities,
-    double gini_branch_min_width) {
+    double gini_branch_min_width,
+    const std::vector<int>& station_initial,
+    const std::vector<int>& station_capacity,
+    int vehicle_count) {
     TailoredBCCplexApiSolveResult out;
     out.attempted = true;
 #ifdef _WIN32
@@ -455,10 +637,39 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
             break;
         }
     }
+    const int station_count =
+        std::min(static_cast<int>(station_initial.size()),
+                 static_cast<int>(station_capacity.size()));
+    std::vector<int> y_cols(static_cast<std::size_t>(station_count), -1);
+    std::vector<int> r_cols(static_cast<std::size_t>(station_count), -1);
+    for (int i = 1; i < station_count; ++i) {
+        std::vector<int> found = buildNameToIndexLookup(names, yNameForStation(i));
+        if (!found.empty()) y_cols[static_cast<std::size_t>(i)] = found.front();
+        found = buildNameToIndexLookup(names, rNameForStation(i));
+        if (!found.empty()) r_cols[static_cast<std::size_t>(i)] = found.front();
+    }
+    std::vector<std::vector<int>> z_cols(
+        static_cast<std::size_t>(std::max(0, vehicle_count)),
+        std::vector<int>(static_cast<std::size_t>(station_count), -1));
+    for (int k = 0; k < vehicle_count; ++k) {
+        for (int i = 1; i < station_count; ++i) {
+            std::vector<int> found = buildNameToIndexLookup(
+                names, zNameForVehicleStation(k, i));
+            if (!found.empty()) {
+                z_cols[static_cast<std::size_t>(k)][static_cast<std::size_t>(i)] =
+                    found.front();
+            }
+        }
+    }
     CallbackState cb_state;
     cb_state.api = &api;
     cb_state.ncols = ncols;
     cb_state.g_col = g_col;
+    cb_state.r_cols = std::move(r_cols);
+    cb_state.y_cols = std::move(y_cols);
+    cb_state.z_cols = std::move(z_cols);
+    cb_state.station_initial = station_initial;
+    cb_state.station_capacity = station_capacity;
     cb_state.gamma_L = gamma_L;
     cb_state.gamma_U = gamma_U;
     cb_state.add_gini_cut = add_redundant_gini_user_cut && g_col >= 0;
@@ -494,6 +705,16 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     out.branch_callback_calls = cb_state.branch_calls.load();
     out.progress_callback_calls = cb_state.progress_calls.load();
     out.user_cuts_added = cb_state.user_cuts_added.load();
+    out.callback_gini_interval_cuts_added =
+        cb_state.gini_interval_cuts_added.load();
+    out.callback_visit_inventory_cuts_added =
+        cb_state.visit_inventory_cuts_added.load();
+    out.callback_gini_subset_envelope_cuts_added =
+        cb_state.gini_subset_envelope_cuts_added.load();
+    out.callback_gini_subset_envelope_candidates =
+        cb_state.gini_subset_envelope_candidates.load();
+    out.callback_gini_subset_envelope_violations =
+        cb_state.gini_subset_envelope_violations.load();
     out.lazy_rejections = cb_state.lazy_rejections.load();
     out.incumbents_seen = cb_state.incumbents_seen.load();
     out.incumbents_verified = cb_state.incumbents_verified.load();

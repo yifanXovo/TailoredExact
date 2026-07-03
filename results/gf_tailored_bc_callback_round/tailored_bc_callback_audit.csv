@@ -1,6 +1,7 @@
 file,method,algorithm_preset,status,certified_original_problem,tailored_bc_enabled,tailored_bc_mode,tailored_bc_callback_available,tailored_bc_source_class,audit_passed,failures
 results\gf_tailored_bc_callback_round\raw\certificate_basis_test.json,certificate-basis-test,custom,diagnostic_passed,False,False,off,False,off,True,
 results\gf_tailored_bc_callback_round\raw\gini-subset-envelope-test.json,gini-subset-envelope-test,paper-gf-tailored-bc,diagnostic_passed,False,True,callback,True,tailored_bc_assisted_noncertified,True,
+results\gf_tailored_bc_callback_round\raw\interval_callback_separator_diagnostic.json,interval-cutoff-oracle,custom,interval_feasible_improving_ub,False,True,callback,True,tailored_bc_assisted_noncertified,True,
 results\gf_tailored_bc_callback_round\raw\interval_callback_smoke.json,interval-cutoff-oracle,paper-gf-tailored-bc,interval_feasible_improving_ub,False,True,callback,True,tailored_bc_assisted_noncertified,True,
 results\gf_tailored_bc_callback_round\raw\low-gini-l1-centering-test.json,low-gini-l1-centering-test,paper-gf-tailored-bc,diagnostic_passed,False,True,callback,True,tailored_bc_assisted_noncertified,True,
 results\gf_tailored_bc_callback_round\raw\option_consistency_test.json,option-consistency-test,custom,diagnostic_complete,False,False,off,False,off,True,

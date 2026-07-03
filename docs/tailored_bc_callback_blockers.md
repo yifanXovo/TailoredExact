@@ -8,7 +8,9 @@ Implemented:
 - in-process `CPXreadcopyprob` / `CPXmipopt`;
 - generic callback registration;
 - relaxation/candidate/branch/progress callback event counters;
-- one redundant paper-safe user cut from the relaxation callback.
+- one redundant paper-safe Gini interval cap from the relaxation callback;
+- relaxation-point separation hooks for visit-inventory linking rows;
+- relaxation-point separation hooks for singleton/pair Gini subset-envelope rows;
 - candidate interval-consistency checks with safe lazy rejection of numerical Gini interval violations;
 - CPLEX branch-order priorities through `CPXcopyorder`;
 - a one-shot custom Gini split callback path that is wired but not yet validated on hard leaves.
@@ -19,4 +21,4 @@ Remaining blockers:
 - independent route-plan feasibility/objective verification inside the callback is not implemented;
 - custom Gini branch creation has no hard-leaf evidence yet;
 - hard-leaf callback separation is not performance-validated;
-- the callback user cut is currently a redundant interval cap used to prove callback plumbing safely.
+- the problem-specific callback cuts have only smoke/diagnostic evidence and have not yet produced hard-leaf bound improvement.
