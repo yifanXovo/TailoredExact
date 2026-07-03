@@ -9341,7 +9341,9 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
                 0.0, 1.0,
                 true, true, true, true,
                 tailored_opt.tailored_bc_gini_branch_min_width,
-                {}, {}, 0);
+                {}, {}, {}, {}, 0.0,
+                std::numeric_limits<double>::infinity(),
+                0);
         std::error_code remove_ec;
         std::filesystem::remove(lp_path, remove_ec);
 
@@ -9387,6 +9389,22 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
         result.tailored_bc_incumbents_seen = api.incumbents_seen;
         result.tailored_bc_incumbents_verified = api.incumbents_verified;
         result.tailored_bc_incumbents_rejected = api.incumbents_rejected;
+        result.tailored_bc_candidate_projection_checks =
+            api.candidate_projection_checks;
+        result.tailored_bc_candidate_projection_verified =
+            api.candidate_projection_verified;
+        result.tailored_bc_candidate_projection_rejections =
+            api.candidate_projection_rejections;
+        result.tailored_bc_candidate_projection_unsupported_mismatches =
+            api.candidate_projection_unsupported_mismatches;
+        result.tailored_bc_candidate_projection_rejection_reasons =
+            "ratio=" + std::to_string(api.candidate_projection_ratio_rejections) +
+            ";penalty=" + std::to_string(api.candidate_projection_penalty_rejections) +
+            ";objective=" + std::to_string(api.candidate_projection_objective_rejections);
+        result.tailored_bc_candidate_projection_max_gini_underestimate =
+            api.candidate_projection_max_gini_underestimate;
+        result.tailored_bc_candidate_projection_max_objective_underestimate =
+            api.candidate_projection_max_objective_underestimate;
         result.tailored_bc_gini_branches_created = api.gini_branches_created;
         result.tailored_bc_branching_priorities_summary =
             "mode=adaptive;gini_branch=branch_callback;cplex_priorities=" +

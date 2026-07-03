@@ -81,6 +81,17 @@ def main() -> int:
                 "diagnostic_branch_not_observed",
             }:
                 reasons.append("branch_callback_smoke_unexpected_status")
+        candidate_calls = int(float(data.get("tailored_bc_candidate_callback_calls", 0) or 0))
+        projection_checks = int(float(data.get("tailored_bc_candidate_projection_checks", 0) or 0))
+        projection_verified = int(float(data.get("tailored_bc_candidate_projection_verified", 0) or 0))
+        projection_rejected = int(float(data.get("tailored_bc_candidate_projection_rejections", 0) or 0))
+        projection_unsupported = int(float(data.get("tailored_bc_candidate_projection_unsupported_mismatches", 0) or 0))
+        if (method == "interval-cutoff-oracle" and callback_available and
+                candidate_calls > 0 and projection_checks <= 0):
+            reasons.append("candidate_callback_without_projection_verifier")
+        if projection_checks > 0 and (
+                projection_verified + projection_rejected + projection_unsupported != projection_checks):
+            reasons.append("candidate_projection_accounting_mismatch")
 
         if reasons:
             failures += 1
@@ -94,6 +105,10 @@ def main() -> int:
             "tailored_bc_mode": data.get("tailored_bc_mode", ""),
             "tailored_bc_callback_available": callback_available,
             "tailored_bc_source_class": data.get("tailored_bc_source_class", ""),
+            "tailored_bc_candidate_projection_checks": projection_checks,
+            "tailored_bc_candidate_projection_verified": projection_verified,
+            "tailored_bc_candidate_projection_rejections": projection_rejected,
+            "tailored_bc_candidate_projection_unsupported_mismatches": projection_unsupported,
             "audit_passed": not reasons,
             "failures": "|".join(reasons),
         })
@@ -110,6 +125,10 @@ def main() -> int:
             "tailored_bc_mode": "",
             "tailored_bc_callback_available": False,
             "tailored_bc_source_class": "",
+            "tailored_bc_candidate_projection_checks": 0,
+            "tailored_bc_candidate_projection_verified": 0,
+            "tailored_bc_candidate_projection_rejections": 0,
+            "tailored_bc_candidate_projection_unsupported_mismatches": 0,
             "audit_passed": False,
             "failures": "missing_branch_callback_smoke_row",
         })
@@ -125,6 +144,10 @@ def main() -> int:
             "tailored_bc_mode": "",
             "tailored_bc_callback_available": False,
             "tailored_bc_source_class": "",
+            "tailored_bc_candidate_projection_checks": 0,
+            "tailored_bc_candidate_projection_verified": 0,
+            "tailored_bc_candidate_projection_rejections": 0,
+            "tailored_bc_candidate_projection_unsupported_mismatches": 0,
             "audit_passed": False,
             "failures": "no_json_rows",
         })

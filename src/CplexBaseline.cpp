@@ -2611,6 +2611,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 options.tailored_bc_gini_branch_min_width,
                 instance.initial,
                 instance.capacity,
+                instance.target,
+                instance.weights,
+                options.lambda,
+                cutoff.incumbent_ub - cutoff.epsilon,
                 instance.M);
             used_callback_api = api_solve.available && api_solve.solved;
             rc = api_solve.return_code;
@@ -2647,11 +2651,36 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                          << ";candidate_gini_subset_envelope_violation="
                          << api_solve.lazy_gini_subset_envelope_rejections
                          << ";candidate_low_gini_l1_violation="
-                         << api_solve.lazy_low_gini_l1_rejections;
+                         << api_solve.lazy_low_gini_l1_rejections
+                         << ";candidate_projection_ratio_violation="
+                         << api_solve.candidate_projection_ratio_rejections
+                         << ";candidate_projection_penalty_violation="
+                         << api_solve.candidate_projection_penalty_rejections
+                         << ";candidate_projection_objective_violation="
+                         << api_solve.candidate_projection_objective_rejections;
                     result.tailored_bc_lazy_rejections_by_reason = lazy.str();
                 } else {
                     result.tailored_bc_lazy_rejections_by_reason = "none";
                 }
+                result.tailored_bc_candidate_projection_checks =
+                    api_solve.candidate_projection_checks;
+                result.tailored_bc_candidate_projection_verified =
+                    api_solve.candidate_projection_verified;
+                result.tailored_bc_candidate_projection_rejections =
+                    api_solve.candidate_projection_rejections;
+                result.tailored_bc_candidate_projection_unsupported_mismatches =
+                    api_solve.candidate_projection_unsupported_mismatches;
+                result.tailored_bc_candidate_projection_rejection_reasons =
+                    "ratio=" +
+                    std::to_string(api_solve.candidate_projection_ratio_rejections) +
+                    ";penalty=" +
+                    std::to_string(api_solve.candidate_projection_penalty_rejections) +
+                    ";objective=" +
+                    std::to_string(api_solve.candidate_projection_objective_rejections);
+                result.tailored_bc_candidate_projection_max_gini_underestimate =
+                    api_solve.candidate_projection_max_gini_underestimate;
+                result.tailored_bc_candidate_projection_max_objective_underestimate =
+                    api_solve.candidate_projection_max_objective_underestimate;
                 result.tailored_bc_gini_branches_created =
                     api_solve.gini_branches_created;
                 result.tailored_bc_branching_priorities_summary +=
@@ -2685,6 +2714,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     + ", progress=" + std::to_string(api_solve.progress_callback_calls)
                     + ", user_cuts=" + std::to_string(api_solve.user_cuts_added)
                     + ", lazy_rejections=" + std::to_string(api_solve.lazy_rejections)
+                    + ", projection_checks=" +
+                        std::to_string(api_solve.candidate_projection_checks)
+                    + ", projection_verified=" +
+                        std::to_string(api_solve.candidate_projection_verified)
                     + ", branch_priorities=" +
                         std::to_string(api_solve.branch_priorities_applied));
             } else {

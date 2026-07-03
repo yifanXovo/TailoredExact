@@ -48,6 +48,15 @@ struct TailoredBCCplexApiSolveResult {
     long long incumbents_seen = 0;
     long long incumbents_verified = 0;
     long long incumbents_rejected = 0;
+    long long candidate_projection_checks = 0;
+    long long candidate_projection_verified = 0;
+    long long candidate_projection_rejections = 0;
+    long long candidate_projection_unsupported_mismatches = 0;
+    long long candidate_projection_ratio_rejections = 0;
+    long long candidate_projection_penalty_rejections = 0;
+    long long candidate_projection_objective_rejections = 0;
+    double candidate_projection_max_gini_underestimate = 0.0;
+    double candidate_projection_max_objective_underestimate = 0.0;
     long long gini_branches_created = 0;
     long long branch_priorities_applied = 0;
     std::string branch_priority_status;
@@ -69,6 +78,10 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     double gini_branch_min_width,
     const std::vector<int>& station_initial,
     const std::vector<int>& station_capacity,
+    const std::vector<int>& station_target,
+    const std::vector<double>& station_weight,
+    double lambda,
+    double cutoff_value,
     int vehicle_count);
 
 } // namespace ebrp

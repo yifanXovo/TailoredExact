@@ -243,6 +243,10 @@ std::string rNameForStation(int station) {
     return "r_" + std::to_string(station);
 }
 
+std::string eNameForStation(int station) {
+    return "e_" + std::to_string(station);
+}
+
 std::string qL1NameForStation(int station) {
     return "q_l1_" + std::to_string(station);
 }
@@ -265,11 +269,16 @@ struct CallbackState {
     int ncols = 0;
     int g_col = -1;
     std::vector<int> r_cols;
+    std::vector<int> e_cols;
     std::vector<int> q_l1_cols;
     std::vector<int> y_cols;
     std::vector<std::vector<int>> z_cols;
     std::vector<int> station_initial;
     std::vector<int> station_capacity;
+    std::vector<int> station_target;
+    std::vector<double> station_weight;
+    double lambda = 0.0;
+    double cutoff_value = std::numeric_limits<double>::infinity();
     double gamma_L = 0.0;
     double gamma_U = 1.0;
     bool add_gini_cut = false;
@@ -296,10 +305,27 @@ struct CallbackState {
     std::atomic<long long> incumbents_seen{0};
     std::atomic<long long> incumbents_verified{0};
     std::atomic<long long> incumbents_rejected{0};
+    std::atomic<long long> candidate_projection_checks{0};
+    std::atomic<long long> candidate_projection_verified{0};
+    std::atomic<long long> candidate_projection_rejections{0};
+    std::atomic<long long> candidate_projection_unsupported_mismatches{0};
+    std::atomic<long long> candidate_projection_ratio_rejections{0};
+    std::atomic<long long> candidate_projection_penalty_rejections{0};
+    std::atomic<long long> candidate_projection_objective_rejections{0};
+    std::atomic<double> candidate_projection_max_gini_underestimate{0.0};
+    std::atomic<double> candidate_projection_max_objective_underestimate{0.0};
     std::atomic<long long> gini_branches_created{0};
     std::atomic<bool> gini_cut_added{false};
     std::atomic<bool> gini_branch_created{false};
 };
+
+void atomicMax(std::atomic<double>& target, double value) {
+    if (!std::isfinite(value) || value <= 0.0) return;
+    double current = target.load();
+    while (value > current &&
+           !target.compare_exchange_weak(current, value)) {
+    }
+}
 
 bool rejectCandidateWithLazyRow(CallbackState& state,
                                 CPXCALLBACKCONTEXTptr context,
@@ -653,6 +679,132 @@ bool validateCandidateLowGiniL1(CallbackState& state,
     return false;
 }
 
+enum class CandidateProjectionStatus {
+    Verified,
+    Rejected,
+    UnsupportedMismatch,
+};
+
+CandidateProjectionStatus validateCandidateProjection(CallbackState& state,
+                                                      CPXCALLBACKCONTEXTptr context,
+                                                      const std::vector<double>& x) {
+    const int station_count = std::min({
+        static_cast<int>(state.y_cols.size()),
+        static_cast<int>(state.r_cols.size()),
+        static_cast<int>(state.e_cols.size()),
+        static_cast<int>(state.station_target.size()),
+        static_cast<int>(state.station_weight.size()),
+    });
+    if (station_count <= 1) return CandidateProjectionStatus::Verified;
+
+    ++state.candidate_projection_checks;
+    constexpr double tol = 1e-6;
+    std::vector<double> ratio(static_cast<std::size_t>(station_count), 0.0);
+    double s = 0.0;
+    double penalty = 0.0;
+    double variable_penalty = 0.0;
+    for (int i = 1; i < station_count; ++i) {
+        const int y_col = state.y_cols[static_cast<std::size_t>(i)];
+        const int r_col = state.r_cols[static_cast<std::size_t>(i)];
+        const int e_col = state.e_cols[static_cast<std::size_t>(i)];
+        const int target = state.station_target[static_cast<std::size_t>(i)];
+        if (y_col < 0 || r_col < 0 || e_col < 0 || target <= 0) {
+            continue;
+        }
+        const double y = x[static_cast<std::size_t>(y_col)];
+        const double r_model = x[static_cast<std::size_t>(r_col)];
+        const double e_model = x[static_cast<std::size_t>(e_col)];
+        const double r_projected = y / static_cast<double>(target);
+        ratio[static_cast<std::size_t>(i)] = r_projected;
+        s += r_projected;
+        const double e_projected = std::fabs(r_projected - 1.0);
+        const double weight = state.station_weight[static_cast<std::size_t>(i)];
+        penalty += weight * e_projected;
+        variable_penalty += weight * e_model;
+
+        const double ratio_delta = r_model - r_projected;
+        if (ratio_delta > tol) {
+            if (rejectCandidateWithLazyRow(
+                    state, context, {{r_col, 1.0}, {y_col, -1.0 / target}},
+                    'L', 0.0)) {
+                ++state.candidate_projection_rejections;
+                ++state.candidate_projection_ratio_rejections;
+                return CandidateProjectionStatus::Rejected;
+            }
+        } else if (ratio_delta < -tol) {
+            if (rejectCandidateWithLazyRow(
+                    state, context, {{r_col, 1.0}, {y_col, -1.0 / target}},
+                    'G', 0.0)) {
+                ++state.candidate_projection_rejections;
+                ++state.candidate_projection_ratio_rejections;
+                return CandidateProjectionStatus::Rejected;
+            }
+        }
+
+        const double e_from_model_ratio = std::fabs(r_model - 1.0);
+        if (e_model + tol < e_from_model_ratio) {
+            const bool high = r_model >= 1.0;
+            if (rejectCandidateWithLazyRow(
+                    state, context,
+                    high
+                        ? std::vector<std::pair<int, double>>{{e_col, 1.0}, {r_col, -1.0}}
+                        : std::vector<std::pair<int, double>>{{e_col, 1.0}, {r_col, 1.0}},
+                    'G',
+                    high ? -1.0 : 1.0)) {
+                ++state.candidate_projection_rejections;
+                ++state.candidate_projection_penalty_rejections;
+                return CandidateProjectionStatus::Rejected;
+            }
+        }
+    }
+    if (s <= 1e-12) {
+        ++state.candidate_projection_unsupported_mismatches;
+        return CandidateProjectionStatus::UnsupportedMismatch;
+    }
+    double h = 0.0;
+    for (int i = 1; i < station_count; ++i) {
+        for (int j = i + 1; j < station_count; ++j) {
+            h += std::fabs(ratio[static_cast<std::size_t>(i)] -
+                           ratio[static_cast<std::size_t>(j)]);
+        }
+    }
+    const double true_g = h / (static_cast<double>(station_count - 1) * s);
+    const double g_model = state.g_col >= 0
+        ? x[static_cast<std::size_t>(state.g_col)]
+        : true_g;
+    const double true_objective = true_g + state.lambda * penalty;
+    const double model_objective = g_model + state.lambda * variable_penalty;
+    const double g_under = true_g - g_model;
+    const double obj_under = true_objective - model_objective;
+    atomicMax(state.candidate_projection_max_gini_underestimate, g_under);
+    atomicMax(state.candidate_projection_max_objective_underestimate, obj_under);
+
+    if (std::isfinite(state.cutoff_value) && model_objective > state.cutoff_value + tol) {
+        std::vector<std::pair<int, double>> terms;
+        terms.push_back({state.g_col, 1.0});
+        for (int i = 1; i < station_count; ++i) {
+            const int e_col = state.e_cols[static_cast<std::size_t>(i)];
+            if (e_col >= 0) {
+                terms.push_back({e_col, state.lambda *
+                    state.station_weight[static_cast<std::size_t>(i)]});
+            }
+        }
+        if (rejectCandidateWithLazyRow(state, context, terms, 'L', state.cutoff_value)) {
+            ++state.candidate_projection_rejections;
+            ++state.candidate_projection_objective_rejections;
+            return CandidateProjectionStatus::Rejected;
+        }
+    }
+
+    if (g_under > 1e-5 || obj_under > 1e-5) {
+        ++state.candidate_projection_unsupported_mismatches;
+        return CandidateProjectionStatus::UnsupportedMismatch;
+    }
+
+    ++state.candidate_projection_verified;
+    return CandidateProjectionStatus::Verified;
+}
+
 void validateCandidatePoint(CallbackState& state,
                             CPXCALLBACKCONTEXTptr context) {
     if (!state.validate_candidates || state.ncols <= 0 || state.g_col < 0) return;
@@ -679,6 +831,10 @@ void validateCandidatePoint(CallbackState& state,
     if (validateCandidateVisitInventory(state, context, x)) return;
     if (validateCandidateGiniSubsetEnvelope(state, context, x)) return;
     if (validateCandidateLowGiniL1(state, context, x)) return;
+    const CandidateProjectionStatus projection =
+        validateCandidateProjection(state, context, x);
+    if (projection == CandidateProjectionStatus::Rejected) return;
+    if (projection == CandidateProjectionStatus::UnsupportedMismatch) return;
     ++state.incumbents_verified;
 }
 
@@ -793,6 +949,10 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     double gini_branch_min_width,
     const std::vector<int>& station_initial,
     const std::vector<int>& station_capacity,
+    const std::vector<int>& station_target,
+    const std::vector<double>& station_weight,
+    double lambda,
+    double cutoff_value,
     int vehicle_count) {
     TailoredBCCplexApiSolveResult out;
     out.attempted = true;
@@ -857,12 +1017,15 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
                  static_cast<int>(station_capacity.size()));
     std::vector<int> y_cols(static_cast<std::size_t>(station_count), -1);
     std::vector<int> r_cols(static_cast<std::size_t>(station_count), -1);
+    std::vector<int> e_cols(static_cast<std::size_t>(station_count), -1);
     std::vector<int> q_l1_cols(static_cast<std::size_t>(station_count), -1);
     for (int i = 1; i < station_count; ++i) {
         std::vector<int> found = buildNameToIndexLookup(names, yNameForStation(i));
         if (!found.empty()) y_cols[static_cast<std::size_t>(i)] = found.front();
         found = buildNameToIndexLookup(names, rNameForStation(i));
         if (!found.empty()) r_cols[static_cast<std::size_t>(i)] = found.front();
+        found = buildNameToIndexLookup(names, eNameForStation(i));
+        if (!found.empty()) e_cols[static_cast<std::size_t>(i)] = found.front();
         found = buildNameToIndexLookup(names, qL1NameForStation(i));
         if (!found.empty()) q_l1_cols[static_cast<std::size_t>(i)] = found.front();
     }
@@ -884,11 +1047,16 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     cb_state.ncols = ncols;
     cb_state.g_col = g_col;
     cb_state.r_cols = std::move(r_cols);
+    cb_state.e_cols = std::move(e_cols);
     cb_state.q_l1_cols = std::move(q_l1_cols);
     cb_state.y_cols = std::move(y_cols);
     cb_state.z_cols = std::move(z_cols);
     cb_state.station_initial = station_initial;
     cb_state.station_capacity = station_capacity;
+    cb_state.station_target = station_target;
+    cb_state.station_weight = station_weight;
+    cb_state.lambda = lambda;
+    cb_state.cutoff_value = cutoff_value;
     cb_state.gamma_L = gamma_L;
     cb_state.gamma_U = gamma_U;
     cb_state.add_gini_cut = add_redundant_gini_user_cut && g_col >= 0;
@@ -950,6 +1118,24 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     out.incumbents_seen = cb_state.incumbents_seen.load();
     out.incumbents_verified = cb_state.incumbents_verified.load();
     out.incumbents_rejected = cb_state.incumbents_rejected.load();
+    out.candidate_projection_checks =
+        cb_state.candidate_projection_checks.load();
+    out.candidate_projection_verified =
+        cb_state.candidate_projection_verified.load();
+    out.candidate_projection_rejections =
+        cb_state.candidate_projection_rejections.load();
+    out.candidate_projection_unsupported_mismatches =
+        cb_state.candidate_projection_unsupported_mismatches.load();
+    out.candidate_projection_ratio_rejections =
+        cb_state.candidate_projection_ratio_rejections.load();
+    out.candidate_projection_penalty_rejections =
+        cb_state.candidate_projection_penalty_rejections.load();
+    out.candidate_projection_objective_rejections =
+        cb_state.candidate_projection_objective_rejections.load();
+    out.candidate_projection_max_gini_underestimate =
+        cb_state.candidate_projection_max_gini_underestimate.load();
+    out.candidate_projection_max_objective_underestimate =
+        cb_state.candidate_projection_max_objective_underestimate.load();
     out.gini_branches_created = cb_state.gini_branches_created.load();
     if (ncols > 0) {
         std::vector<double> x(static_cast<std::size_t>(ncols), 0.0);
