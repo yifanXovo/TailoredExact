@@ -39,6 +39,29 @@ EXE = ROOT / "build" / "ExactEBRP.exe"
 def run_cmd(args: List[str], log_path: Path, timeout: int = 120) -> Dict[str, Any]:
     start = time.time()
     log_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path: Path | None = None
+    if "--out" in args:
+        try:
+            out_path = Path(args[args.index("--out") + 1])
+        except (ValueError, IndexError):
+            out_path = None
+    force_run = os.environ.get("TAILORED_BC_FORCE_RUN", "").strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
+    if out_path is not None and out_path.exists() and not force_run:
+        with log_path.open("a", encoding="utf-8") as log:
+            log.write("SKIPPED existing output: " + str(out_path) + "\n")
+        data = load_json(out_path)
+        runtime = data.get("runtime_seconds", data.get("actual_runtime_seconds", 0.0))
+        return {
+            "returncode": 0,
+            "runtime_seconds": float_value(runtime, 0.0),
+            "timeout": False,
+            "skipped_existing": True,
+        }
     with log_path.open("w", encoding="utf-8") as log:
         log.write("COMMAND: " + " ".join(args) + "\n\n")
         try:
@@ -288,7 +311,10 @@ def result_row(name: str, path: Path, meta: Dict[str, Any]) -> Dict[str, Any]:
     data = load_json(path)
     runtime_value = meta.get(
         "runtime_seconds",
-        data.get("runtime_seconds", data.get("actual_runtime_seconds", 0.0)),
+        data.get(
+            "runtime_seconds",
+            data.get("actual_runtime_seconds", data.get("wrapper_runtime_seconds", 0.0)),
+        ),
     )
     return {
         "row": name,
@@ -780,6 +806,38 @@ def main() -> int:
                 label,
                 time_limit=60,
             )
+        for branch_mode, label in [
+            ("auto", "gini_auto"),
+            ("selector", "gini_selector"),
+        ]:
+            run_low_gini_branch_variant(
+                "moderate_seed3301_low_gini1_callback",
+                "0.0122881381662",
+                "0.0245762763324",
+                branch_mode,
+                label,
+                time_limit=60,
+            )
+        run_low_gini_branch_variant(
+            "moderate_seed3301_low_gini1_callback",
+            "0.0122881381662",
+            "0.0245762763324",
+            "auto",
+            "gini_auto",
+            time_limit=300,
+        )
+        for branch_mode, label in [
+            ("auto", "gini_auto"),
+            ("selector", "gini_selector"),
+        ]:
+            run_low_gini_branch_variant(
+                "moderate_seed3301_low_gini2_callback",
+                "0.0245762763324",
+                "0.0368644144986",
+                branch_mode,
+                label,
+                time_limit=300,
+            )
 
     generated_rows: List[Dict[str, Any]] = []
     generated_child_rows: List[Dict[str, Any]] = []
@@ -1087,7 +1145,10 @@ def main() -> int:
             "compact_bc_nodes": row.get("compact_bc_nodes", ""),
             "diagnostic_only": True,
             "reason": (
-                "full_preset_setup_timeout" if row.get("timeout", False)
+                "full_preset_setup_timeout" if (
+                    row.get("timeout", False) or
+                    str(row.get("status", "")) == "diagnostic_timeout"
+                )
                 else "minimal_callback_diagnostic_reached_solver_final_json"
             ),
             "json": row.get("json", ""),
@@ -1104,7 +1165,10 @@ def main() -> int:
             "gini_branches_created": row.get("tailored_bc_gini_branches_created", 0),
             "reason": (
                 "plain_fixed_interval_mip_not_run_in_this_callback_increment;"
-                + ("full_preset_setup_timeout" if row.get("timeout", False)
+                + ("full_preset_setup_timeout" if (
+                    row.get("timeout", False) or
+                    str(row.get("status", "")) == "diagnostic_timeout"
+                )
                    else "tailored_callback_hard_leaf_bound_recorded")
             ),
             "tailored_callback_status": (
@@ -1196,12 +1260,13 @@ def main() -> int:
         with lowgini_baseline.open(newline="", encoding="utf-8") as handle:
             for base in csv.DictReader(handle):
                 if (
-                    base.get("leaf") == "low_gini_2"
-                    and base.get("budget_seconds") == "60"
+                    base.get("leaf") in {"low_gini_1", "low_gini_2"}
+                    and base.get("budget_seconds") in {"60", "300"}
                     and base.get("variant") in {"plain", "current_tailored", "combined_safe"}
                 ):
+                    leaf_key = str(base.get("leaf", "")).replace("_1", "1").replace("_2", "2")
                     comparison_rows.append({
-                        "comparison_group": "moderate_seed3301_low_gini2_60s",
+                        "comparison_group": f"moderate_seed3301_{leaf_key}_{base.get('budget_seconds')}s",
                         "row_type": "baseline_from_gf_compact_bc_lowgini_round",
                         "variant": base.get("variant", ""),
                         "budget_seconds": base.get("budget_seconds", ""),
@@ -1223,15 +1288,19 @@ def main() -> int:
                         "diagnostic_only": True,
                     })
     for row in hard_leaf_rows:
-        if (
-            hard_leaf_label(row) == "moderate_seed3301_low_gini2"
-            and str(row.get("row", "")).endswith("_60s")
-        ):
+        row_name = str(row.get("row", ""))
+        if row_name.endswith("_300s"):
+            row_budget = 300
+        elif row_name.endswith("_60s"):
+            row_budget = 60
+        else:
+            row_budget = 0
+        if row_budget in {60, 300}:
             comparison_rows.append({
-                "comparison_group": "moderate_seed3301_low_gini2_60s",
+                "comparison_group": f"{hard_leaf_label(row)}_{row_budget}s",
                 "row_type": "callback_tailored_bc_current_round",
                 "variant": row.get("row", ""),
-                "budget_seconds": 60,
+                "budget_seconds": row_budget,
                 "status": row.get("status", ""),
                 "lower_bound": row.get("lower_bound", ""),
                 "upper_bound": row.get("upper_bound", ""),
@@ -1464,8 +1533,8 @@ def main() -> int:
         "- Candidate callbacks now run compact projection verifiers when route/service variables and `Y_i`, `r_i`, `e_i`, targets, weights, lambda, and cutoff data are available. The route projection verifier checks station disjointness, depot flow, station flow, service linking, duration under the pickup-only handling convention, final-inventory balance, and reconstructed route load order. The objective projection verifier recomputes ratios, penalty, Gini, and the objective from final inventories. Rejections use only already-valid model rows; unsupported route-load or Gini/objective mismatches are recorded instead of adding unsafe no-good cuts.",
         "- `moderate_seed3301_low_gini1_callback_guarded.json` is a guarded full-preset hard-leaf diagnostic. If the full preset setup and solve exceed the outer wrapper timeout, the runner writes an honest noncertificate timeout JSON instead of leaving a missing artifact.",
         "- `moderate_seed3301_low_gini1_callback_minimal_short3.json` is a diagnostic hard-leaf callback run with overlapping static diagnostic families disabled. It is included to preserve solver-final callback evidence on the moderate low-Gini leaf when the full-preset guarded row times out before producing callback counters.",
-        "- `hard_leaf_tailored_bc.csv` and `hard_leaf_comparison.csv` now include short no-branch, callback-Gini-branch, and selector fallback diagnostics for the two known moderate low-Gini leaves, plus matched 60s low-Gini-2 callback variants. These rows are diagnostic only; they test callback branch behavior and bound direction without changing paper certificate evidence.",
-        "- `exact_vs_cplex_callback_round.csv` now compares the current 60s low-Gini-2 callback rows against prior one-thread plain fixed-interval and static compact-BC baselines from `gf_compact_bc_lowgini_round`. The callback tailored rows improve the 60s low-Gini-2 lower bound over those baselines but still do not close the leaf.",
+        "- `hard_leaf_tailored_bc.csv` and `hard_leaf_comparison.csv` now include short no-branch, callback-Gini-branch, and selector fallback diagnostics for the two known moderate low-Gini leaves, plus longer 60s/300s callback variants. These rows are diagnostic only; they test callback branch behavior and bound direction without changing paper certificate evidence.",
+        "- `exact_vs_cplex_callback_round.csv` now compares the current 60s/300s moderate low-Gini callback rows against prior one-thread plain fixed-interval and static compact-BC baselines from `gf_compact_bc_lowgini_round`. The callback tailored rows improve the 60s low-Gini-2 lower bound over those baselines but still do not close the leaf.",
         "- `generated_hard_diagnostic_summary.csv`, `generated_hard_leaf_callback_summary.csv`, and `generated_hard_instance_effectiveness.csv` now record guarded one-thread callback probes for the deterministic generated hard-diagnostic instances under `reference/hard_compact_bc_diagnostics/`. Parent full-row summaries aggregate child `auto_oracle/interval_*.json` callback evidence so generated hard-instance effectiveness is not undercounted. These rows are diagnostic only; wrapper timeouts are preserved as noncertificate JSON rather than being treated as failures to emit artifacts.",
         "- `source_classification.csv` preserves tailored source classes per JSON row.",
         "",
@@ -1493,7 +1562,7 @@ def main() -> int:
         "",
         "## Paper Claim",
         "",
-        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, low-Gini L1 centering, basic transfer-cutset, and pair/triple support-duration cover rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, diagnostic branch-context evidence with one-shot Gini branches in the toy branch smoke, and diagnostic hard-leaf evidence where moderate low-Gini intervals enter branch context and create Gini branches through `CPXcallbackmakebranch`. Short branch-mode ablations now compare no-branch, callback-Gini-branch, and selector fallback behavior on the two known moderate low-Gini leaves. The generated hard-diagnostic package now aggregates callback evidence from child fixed-interval `auto_oracle` solves. The 60s low-Gini-2 callback-tailored rows improve the lower bound over prior one-thread plain fixed-interval and static compact-BC baselines, but they do not close the leaf and the improvement is not uniquely attributable to custom Gini branching because off/selector callback variants reach the same bound in this short run. It is not yet the full requested tailored branch-and-cut: full-preset hard-leaf callback ablations, longer matched hard-leaf comparisons, and hard-leaf closure evidence remain incomplete.",
+        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, low-Gini L1 centering, basic transfer-cutset, and pair/triple support-duration cover rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, diagnostic branch-context evidence with one-shot Gini branches in the toy branch smoke, and diagnostic hard-leaf evidence where moderate low-Gini intervals enter branch context and create Gini branches through `CPXcallbackmakebranch`. Branch-mode ablations now compare no-branch, callback-Gini-branch, and selector fallback behavior on the two known moderate low-Gini leaves, including longer 60s/300s diagnostic rows. The generated hard-diagnostic package now aggregates callback evidence from child fixed-interval `auto_oracle` solves. The low-Gini-2 callback-tailored rows improve the 60s lower bound over prior one-thread plain fixed-interval and static compact-BC baselines, but they do not close the leaf and the improvement is not uniquely attributable to custom Gini branching because off/selector callback variants reach the same bound in this short run. It is not yet the full requested tailored branch-and-cut: full-preset hard-leaf callback ablations, longer matched hard-leaf comparisons, and hard-leaf closure evidence remain incomplete.",
         "",
         "Final commit SHA: recorded in the final assistant response after commit creation.",
     ])
