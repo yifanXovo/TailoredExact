@@ -1693,6 +1693,12 @@ std::string resultToJson(const SolveResult& input) {
         << result.tailored_bc_support_duration_lifted_violations << ",\n";
     out << "  \"tailored_bc_support_duration_cover_mode\": \""
         << jsonEscape(result.tailored_bc_support_duration_cover_mode) << "\",\n";
+    out << "  \"tailored_bc_benders_inventory_cuts_mode\": \""
+        << jsonEscape(result.tailored_bc_benders_inventory_cuts_mode) << "\",\n";
+    out << "  \"tailored_bc_benders_inventory_cuts_added\": "
+        << result.tailored_bc_benders_inventory_cuts_added << ",\n";
+    out << "  \"tailored_bc_benders_inventory_candidates\": "
+        << result.tailored_bc_benders_inventory_candidates << ",\n";
     out << "  \"gini_spread_cuts_added\": "
         << result.gini_spread_cuts_added << ",\n";
     out << "  \"compact_bc_direct_gini_cap_rows_added\": "

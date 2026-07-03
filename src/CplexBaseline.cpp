@@ -70,6 +70,8 @@ struct CompactOracleStrengtheningStats {
     long long tailored_low_gini_l1_rows_added = 0;
     long long tailored_subset_inventory_imbalance_cuts_added = 0;
     long long tailored_transfer_cutset_cuts_added = 0;
+    long long tailored_benders_inventory_cuts_added = 0;
+    long long tailored_benders_inventory_candidates = 0;
     bool s_range_refinement_enabled = false;
     double s_range_global_L = 0.0;
     double s_range_global_U = 0.0;
@@ -1089,6 +1091,51 @@ void writeCompactLp(const Instance& instance,
         for (int a = 1; a <= V; ++a) addTransferCutset({a});
         for (int a = 1; a <= V; ++a) {
             for (int b = a + 1; b <= V; ++b) addTransferCutset({a, b});
+        }
+    }
+    if (tailored_active && options.tailored_bc_benders_inventory_cuts == "diagnostic") {
+        if (stats != nullptr) stats->enabled_families.push_back("benders_inventory_diagnostic");
+        auto addBendersInventoryCut = [&](const std::vector<int>& subset) {
+            std::set<int> in_subset(subset.begin(), subset.end());
+            int room_sum = 0;
+            int initial_outside = 0;
+            for (int i = 1; i <= V; ++i) {
+                if (in_subset.count(i)) {
+                    room_sum += std::max(0, instance.capacity[i] - instance.initial[i]);
+                } else {
+                    initial_outside += std::max(0, instance.initial[i]);
+                }
+            }
+            int vehicle_capacity = 0;
+            for (int k = 0; k < M; ++k) {
+                const int move_budget = cunit > 1e-12
+                    ? static_cast<int>(std::floor(instance.total_time_limit / cunit + 1e-9))
+                    : instance.Q[k];
+                vehicle_capacity += std::max(0, std::min(instance.Q[k], move_budget));
+            }
+            const double transfer_capacity =
+                static_cast<double>(std::min({room_sum, initial_outside, vehicle_capacity}));
+            Expr cut;
+            for (int k = 0; k < M; ++k) {
+                for (int j : subset) {
+                    addTerm(cut, dName(k, j), 1.0);
+                    addTerm(cut, pName(k, j), -1.0);
+                }
+            }
+            writeConstraint(out, cid, cut, "<=", transfer_capacity);
+            if (stats != nullptr) {
+                ++stats->tailored_benders_inventory_candidates;
+                ++stats->tailored_benders_inventory_cuts_added;
+            }
+        };
+        for (int a = 1; a <= V; ++a) addBendersInventoryCut({a});
+        for (int a = 1; a <= V; ++a) {
+            for (int b = a + 1; b <= V; ++b) addBendersInventoryCut({a, b});
+        }
+        for (int a = 1; a <= V; ++a) {
+            for (int b = a + 1; b <= V; ++b) {
+                for (int c = b + 1; c <= V; ++c) addBendersInventoryCut({a, b, c});
+            }
         }
     }
     if (strengthened && cutoff != nullptr && cutoff->enabled &&
@@ -2483,7 +2530,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             strengthening_stats.tailored_gini_subset_envelope_cuts_added +
             strengthening_stats.tailored_low_gini_l1_rows_added +
             strengthening_stats.tailored_subset_inventory_imbalance_cuts_added +
-            strengthening_stats.tailored_transfer_cutset_cuts_added;
+            strengthening_stats.tailored_transfer_cutset_cuts_added +
+            strengthening_stats.tailored_benders_inventory_cuts_added;
         result.tailored_bc_low_gini_l1_centering_vars =
             strengthening_stats.tailored_low_gini_l1_vars;
         result.tailored_bc_low_gini_l1_centering_rows_added =
@@ -2492,6 +2540,12 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             strengthening_stats.tailored_subset_inventory_imbalance_cuts_added;
         result.tailored_bc_transfer_cutset_cuts_added =
             strengthening_stats.tailored_transfer_cutset_cuts_added;
+        result.tailored_bc_benders_inventory_cuts_mode =
+            options.tailored_bc_benders_inventory_cuts;
+        result.tailored_bc_benders_inventory_cuts_added =
+            strengthening_stats.tailored_benders_inventory_cuts_added;
+        result.tailored_bc_benders_inventory_candidates =
+            strengthening_stats.tailored_benders_inventory_candidates;
         {
             std::ostringstream tbc;
             tbc << "gini_subset_envelope="
@@ -2501,7 +2555,9 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 << ";subset_inventory_imbalance="
                 << result.tailored_bc_subset_inventory_imbalance_cuts_added
                 << ";transfer_cutset="
-                << result.tailored_bc_transfer_cutset_cuts_added;
+                << result.tailored_bc_transfer_cutset_cuts_added
+                << ";benders_inventory_diagnostic="
+                << result.tailored_bc_benders_inventory_cuts_added;
             result.tailored_bc_user_cuts_added_by_family = tbc.str();
         }
         result.compact_bc_support_duration_pair_cuts_added =
@@ -2555,6 +2611,7 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                  << ";tailored_low_gini_l1_centering=" << result.tailored_bc_low_gini_l1_centering_rows_added
                  << ";tailored_subset_inventory_imbalance=" << result.tailored_bc_subset_inventory_imbalance_cuts_added
                  << ";tailored_transfer_cutset=" << result.tailored_bc_transfer_cutset_cuts_added
+                 << ";tailored_benders_inventory_diagnostic=" << result.tailored_bc_benders_inventory_cuts_added
                  << ";gini_spread=" << result.gini_spread_cuts_added
                  << ";required_movement=" << result.required_movement_cuts_added
                  << ";global_handling_capacity=" << result.global_handling_capacity_cuts_added

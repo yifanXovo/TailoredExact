@@ -68,6 +68,8 @@ void populateTailoredBCResultFields(const SolveOptions& options,
         ";reason=" + branch.reason;
     result.tailored_bc_support_duration_cover_mode =
         options.tailored_bc_support_duration_cover_mode;
+    result.tailored_bc_benders_inventory_cuts_mode =
+        options.tailored_bc_benders_inventory_cuts;
     result.tailored_bc_source_class = tailoredBCSourceClass(result);
 }
 

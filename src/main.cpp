@@ -15646,6 +15646,8 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     long long total_tailored_l1_vars = 0;
     long long total_tailored_subset_inventory = 0;
     long long total_tailored_transfer_cutset = 0;
+    long long total_tailored_benders_inventory = 0;
+    long long total_tailored_benders_inventory_candidates = 0;
     long long total_tailored_support_pair = 0;
     long long total_tailored_support_pair_candidates = 0;
     long long total_tailored_support_pair_violations = 0;
@@ -15998,6 +16000,8 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         total_tailored_l1_vars += oracle.tailored_bc_low_gini_l1_centering_vars;
         total_tailored_subset_inventory += oracle.tailored_bc_subset_inventory_imbalance_cuts_added;
         total_tailored_transfer_cutset += oracle.tailored_bc_transfer_cutset_cuts_added;
+        total_tailored_benders_inventory += oracle.tailored_bc_benders_inventory_cuts_added;
+        total_tailored_benders_inventory_candidates += oracle.tailored_bc_benders_inventory_candidates;
         total_tailored_support_pair += oracle.tailored_bc_support_duration_pair_cuts_added;
         total_tailored_support_pair_candidates += oracle.tailored_bc_support_duration_pair_candidates;
         total_tailored_support_pair_violations += oracle.tailored_bc_support_duration_pair_violations;
@@ -16275,6 +16279,12 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         total_tailored_subset_inventory;
     result.tailored_bc_transfer_cutset_cuts_added =
         total_tailored_transfer_cutset;
+    result.tailored_bc_benders_inventory_cuts_mode =
+        opt.tailored_bc_benders_inventory_cuts;
+    result.tailored_bc_benders_inventory_cuts_added =
+        total_tailored_benders_inventory;
+    result.tailored_bc_benders_inventory_candidates =
+        total_tailored_benders_inventory_candidates;
     result.tailored_bc_support_duration_pair_cuts_added =
         total_tailored_support_pair;
     result.tailored_bc_support_duration_pair_candidates =
@@ -16302,6 +16312,7 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     result.tailored_bc_user_cuts_added_total =
         total_tailored_gini_subset + total_tailored_l1 +
         total_tailored_subset_inventory + total_tailored_transfer_cutset +
+        total_tailored_benders_inventory +
         total_tailored_support_pair + total_tailored_support_triple +
         total_tailored_support_quad + total_tailored_support_lifted;
     {
@@ -16310,6 +16321,7 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
                       << ";low_gini_l1_centering=" << total_tailored_l1
                       << ";subset_inventory_imbalance=" << total_tailored_subset_inventory
                       << ";transfer_cutset=" << total_tailored_transfer_cutset
+                      << ";benders_inventory_diagnostic=" << total_tailored_benders_inventory
                       << ";support_duration_pair=" << total_tailored_support_pair
                       << ";support_duration_triple=" << total_tailored_support_triple
                       << ";support_duration_quad=" << total_tailored_support_quad
@@ -16333,6 +16345,7 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
              << ";tailored_low_gini_l1_centering=" << total_tailored_l1
              << ";tailored_subset_inventory_imbalance=" << total_tailored_subset_inventory
              << ";tailored_transfer_cutset=" << total_tailored_transfer_cutset
+             << ";tailored_benders_inventory_diagnostic=" << total_tailored_benders_inventory
              << ";tailored_support_duration_pair=" << total_tailored_support_pair
              << ";tailored_support_duration_triple=" << total_tailored_support_triple
              << ";tailored_support_duration_quad=" << total_tailored_support_quad

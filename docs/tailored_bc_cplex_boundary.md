@@ -20,6 +20,8 @@ The current callback implementation is intentionally narrow:
 - wire a one-shot Gini interval split through `CPXcallbackmakebranch` for rows that explicitly request callback Gini branching;
 - count callback events and solve the model through `CPXmipopt`.
 
+Separate from the callback-owned mechanisms, `--tailored-bc-benders-inventory-cuts diagnostic` adds aggregate receiver-set inventory capacity rows during LP model generation. That family is deliberately classified as diagnostic static strengthening, not callback evidence and not paper-core certificate evidence.
+
 The callback package includes a diagnostic branch-smoke row that uses a multidimensional binary knapsack to test branch callback reachability.  With current settings, the row applies branch priorities, receives relaxation/candidate callbacks, enters branch context, and creates two one-shot Gini branches through `CPXcallbackmakebranch`.
 
 This proves the callback boundary is now technically open for relaxation, candidate, and diagnostic branching contexts. It does not yet implement the full requested tailored branch-and-cut policy: independent route-plan incumbent verification/rejection, consistently useful custom Gini branches on ExactEBRP hard leaves, and decisive hard-leaf callback cut separation remain incomplete.

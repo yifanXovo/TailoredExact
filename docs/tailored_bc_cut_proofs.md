@@ -62,6 +62,18 @@ Equivalently, the basic unfiltered row can be written as:
 
 This latter form is weaker but paper-safe for every receiver subset `D`: a vehicle starts with zero load, so total drops into any subset cannot exceed the total number of bikes picked up by that vehicle. The callback implementation separates this basic row for singleton, pair, and triple receiver subsets at relaxation points. Compatibility-filtered variants remain diagnostic/future work unless their source sets are proved supersets of all feasible external pickup sources.
 
+## Diagnostic Benders-Like Inventory Capacity Cuts
+
+The diagnostic Benders-like inventory rows are enabled only by `--tailored-bc-benders-inventory-cuts diagnostic`. For a receiver subset `D`, the implementation adds the aggregate capacity row:
+
+`sum_k sum_{j in D} (d[k,j] - p[k,j]) <= U(D)`,
+
+where
+
+`U(D) = min(room(D), initial(outside D), sum_k min(Q_k, floor(T_k / cunit)))`.
+
+This upper bound is intentionally conservative: it ignores travel time, compatibility, sequencing, and vehicle-specific source/receiver structure, so it overestimates the number of bikes that could be moved into `D`. The row is therefore a weak aggregate diagnostic analogue of a transfer-network min-cut. It is not used as paper-core evidence because it is not yet separated from a proved full transfer network and has not passed the required random projection/min-cut audit for stronger Benders feasibility cuts. Promotion to paper-core requires a proof document for the exact transfer network capacities, random feasible-route projection tests, and no false candidate rejections.
+
 ## Support-Duration Cover Cuts
 
 For vehicle `k` and a station subset `A`, let `cycle_lb_k(A)` be the exact depot-cycle lower bound used by the static compact-BC model for visiting all stations in `A`. Under the current compact duration convention, handling time is charged as `cunit * sum_i p[k,i]`. If a route visits every station in `A`, at least `ceil(|A|/2)` pickup units are required by the support-duration cover rule used in the static model, so any such route requires at least:
