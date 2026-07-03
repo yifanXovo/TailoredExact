@@ -1655,6 +1655,10 @@ std::string resultToJson(const SolveResult& input) {
         << result.tailored_bc_low_gini_l1_centering_rows_added << ",\n";
     out << "  \"tailored_bc_low_gini_l1_centering_violations\": "
         << result.tailored_bc_low_gini_l1_centering_violations << ",\n";
+    out << "  \"tailored_bc_variable_s_centering_cuts_added\": "
+        << result.tailored_bc_variable_s_centering_cuts_added << ",\n";
+    out << "  \"tailored_bc_variable_s_centering_violations\": "
+        << result.tailored_bc_variable_s_centering_violations << ",\n";
     out << "  \"tailored_bc_subset_inventory_imbalance_cuts_added\": "
         << result.tailored_bc_subset_inventory_imbalance_cuts_added << ",\n";
     out << "  \"tailored_bc_subset_inventory_imbalance_candidates\": "

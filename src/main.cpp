@@ -15644,6 +15644,8 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     long long total_tailored_gini_subset = 0;
     long long total_tailored_l1 = 0;
     long long total_tailored_l1_vars = 0;
+    long long total_tailored_variable_s = 0;
+    long long total_tailored_variable_s_violations = 0;
     long long total_tailored_subset_inventory = 0;
     long long total_tailored_transfer_cutset = 0;
     long long total_tailored_benders_inventory = 0;
@@ -15998,6 +16000,8 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         total_tailored_gini_subset += oracle.tailored_bc_gini_subset_envelope_cuts_added;
         total_tailored_l1 += oracle.tailored_bc_low_gini_l1_centering_rows_added;
         total_tailored_l1_vars += oracle.tailored_bc_low_gini_l1_centering_vars;
+        total_tailored_variable_s += oracle.tailored_bc_variable_s_centering_cuts_added;
+        total_tailored_variable_s_violations += oracle.tailored_bc_variable_s_centering_violations;
         total_tailored_subset_inventory += oracle.tailored_bc_subset_inventory_imbalance_cuts_added;
         total_tailored_transfer_cutset += oracle.tailored_bc_transfer_cutset_cuts_added;
         total_tailored_benders_inventory += oracle.tailored_bc_benders_inventory_cuts_added;
@@ -16275,6 +16279,10 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     result.tailored_bc_gini_subset_envelope_cuts_added = total_tailored_gini_subset;
     result.tailored_bc_low_gini_l1_centering_rows_added = total_tailored_l1;
     result.tailored_bc_low_gini_l1_centering_vars = total_tailored_l1_vars;
+    result.tailored_bc_variable_s_centering_cuts_added =
+        total_tailored_variable_s;
+    result.tailored_bc_variable_s_centering_violations =
+        total_tailored_variable_s_violations;
     result.tailored_bc_subset_inventory_imbalance_cuts_added =
         total_tailored_subset_inventory;
     result.tailored_bc_transfer_cutset_cuts_added =
@@ -16311,6 +16319,7 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         total_tailored_support_lifted_violations;
     result.tailored_bc_user_cuts_added_total =
         total_tailored_gini_subset + total_tailored_l1 +
+        total_tailored_variable_s +
         total_tailored_subset_inventory + total_tailored_transfer_cutset +
         total_tailored_benders_inventory +
         total_tailored_support_pair + total_tailored_support_triple +
@@ -16319,6 +16328,7 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         std::ostringstream tailored_cuts;
         tailored_cuts << "gini_subset_envelope=" << total_tailored_gini_subset
                       << ";low_gini_l1_centering=" << total_tailored_l1
+                      << ";variable_s_centering=" << total_tailored_variable_s
                       << ";subset_inventory_imbalance=" << total_tailored_subset_inventory
                       << ";transfer_cutset=" << total_tailored_transfer_cutset
                       << ";benders_inventory_diagnostic=" << total_tailored_benders_inventory
@@ -16343,6 +16353,7 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
              << ";sp_product_estimator=" << total_sp_product_estimator
              << ";tailored_gini_subset_envelope=" << total_tailored_gini_subset
              << ";tailored_low_gini_l1_centering=" << total_tailored_l1
+             << ";tailored_variable_s_centering=" << total_tailored_variable_s
              << ";tailored_subset_inventory_imbalance=" << total_tailored_subset_inventory
              << ";tailored_transfer_cutset=" << total_tailored_transfer_cutset
              << ";tailored_benders_inventory_diagnostic=" << total_tailored_benders_inventory

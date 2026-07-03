@@ -30,6 +30,14 @@ Introduce `q_i >= |r_i - S/V|`. The Gini cap implies a valid loose centering con
 
 The relaxation callback may separate the aggregate row `sum_i q_i - 2 gamma_U sum_i r_i <= 0` when the `q_l1_i` variables are present. The callback row is identical to the static aggregate cap, so its certificate role is the same paper-safe row family.
 
+## Variable-S Low-Gini Centering
+
+For `r_min <= r_i <= r_max`, the max-spread inequality gives:
+
+`(V-1) * (r_max - r_min) <= V * gamma_U * S`,
+
+where `S = sum_i r_i`. The row is linear because `gamma_U` is fixed inside the Gini interval. The CPLEX relaxation callback separates this same row when `r_min` and `r_max` columns are present and the LP point violates it; candidate callbacks may reject a numerical violation by re-adding the identical valid row. This is paper-safe under the same fixed-interval Gini cap proof as the static variable-S centering row.
+
 ## Subset Inventory Imbalance
 
 For a station subset `A`, let `Y_A = sum_{i in A} Y_i`, `I_A = sum_{i in A} initial_i`, `room(A) = sum_{i in A} (capacity_i - initial_i)`, and `bikes(A) = sum_{i in A} initial_i`. A vehicle can increase `Y_A` only by carrying bikes into `A`, and can decrease `Y_A` only by removing bikes from `A`. For every vehicle `k`, the conservative movement bounds

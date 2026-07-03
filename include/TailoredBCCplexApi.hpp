@@ -40,6 +40,8 @@ struct TailoredBCCplexApiSolveResult {
     long long callback_gini_subset_envelope_violations = 0;
     long long callback_low_gini_l1_cuts_added = 0;
     long long callback_low_gini_l1_violations = 0;
+    long long callback_variable_s_centering_cuts_added = 0;
+    long long callback_variable_s_centering_violations = 0;
     long long callback_subset_inventory_imbalance_cuts_added = 0;
     long long callback_subset_inventory_imbalance_candidates = 0;
     long long callback_subset_inventory_imbalance_violations = 0;
@@ -63,6 +65,7 @@ struct TailoredBCCplexApiSolveResult {
     long long lazy_visit_inventory_rejections = 0;
     long long lazy_gini_subset_envelope_rejections = 0;
     long long lazy_low_gini_l1_rejections = 0;
+    long long lazy_variable_s_centering_rejections = 0;
     long long lazy_subset_inventory_imbalance_rejections = 0;
     long long incumbents_seen = 0;
     long long incumbents_verified = 0;

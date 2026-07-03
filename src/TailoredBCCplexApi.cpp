@@ -287,6 +287,8 @@ struct CallbackState {
     Api* api = nullptr;
     int ncols = 0;
     int g_col = -1;
+    int r_min_col = -1;
+    int r_max_col = -1;
     std::vector<int> r_cols;
     std::vector<int> e_cols;
     std::vector<int> q_l1_cols;
@@ -326,6 +328,8 @@ struct CallbackState {
     std::atomic<long long> gini_subset_envelope_violations{0};
     std::atomic<long long> low_gini_l1_cuts_added{0};
     std::atomic<long long> low_gini_l1_violations{0};
+    std::atomic<long long> variable_s_centering_cuts_added{0};
+    std::atomic<long long> variable_s_centering_violations{0};
     std::atomic<long long> subset_inventory_imbalance_cuts_added{0};
     std::atomic<long long> subset_inventory_imbalance_candidates{0};
     std::atomic<long long> subset_inventory_imbalance_violations{0};
@@ -349,6 +353,7 @@ struct CallbackState {
     std::atomic<long long> lazy_visit_inventory_rejections{0};
     std::atomic<long long> lazy_gini_subset_envelope_rejections{0};
     std::atomic<long long> lazy_low_gini_l1_rejections{0};
+    std::atomic<long long> lazy_variable_s_centering_rejections{0};
     std::atomic<long long> lazy_subset_inventory_imbalance_rejections{0};
     std::atomic<long long> incumbents_seen{0};
     std::atomic<long long> incumbents_verified{0};
@@ -682,6 +687,45 @@ void separateLowGiniL1Centering(CallbackState& state,
         state.low_gini_l1_violations.fetch_add(1);
         if (addOneUserCut(state, context, terms, 'L', 0.0)) {
             state.low_gini_l1_cuts_added.fetch_add(1);
+        }
+    }
+}
+
+void separateVariableSCentering(CallbackState& state,
+                                CPXCALLBACKCONTEXTptr context) {
+    if (state.ncols <= 0 || state.r_cols.size() <= 1 ||
+        state.r_min_col < 0 || state.r_max_col < 0 ||
+        state.gamma_U < -1e-12) {
+        return;
+    }
+    if (state.variable_s_centering_cuts_added.load() > 0) return;
+    std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
+    double obj = 0.0;
+    if (state.api->callbackgetrelaxationpoint(
+            context, x.data(), 0, state.ncols - 1, &obj) != 0) {
+        return;
+    }
+    const int V = static_cast<int>(state.r_cols.size()) - 1;
+    if (V <= 1) return;
+    std::vector<std::pair<int, double>> terms;
+    terms.reserve(static_cast<std::size_t>(V + 2));
+    terms.push_back({state.r_max_col, static_cast<double>(V - 1)});
+    terms.push_back({state.r_min_col, -static_cast<double>(V - 1)});
+    double lhs =
+        static_cast<double>(V - 1) * x[static_cast<std::size_t>(state.r_max_col)] -
+        static_cast<double>(V - 1) * x[static_cast<std::size_t>(state.r_min_col)];
+    for (int i = 1; i <= V; ++i) {
+        const int r = state.r_cols[static_cast<std::size_t>(i)];
+        if (r < 0) continue;
+        const double coef = -static_cast<double>(V) * state.gamma_U;
+        terms.push_back({r, coef});
+        lhs += coef * x[static_cast<std::size_t>(r)];
+    }
+    constexpr double tol = 1e-6;
+    if (lhs > tol) {
+        state.variable_s_centering_violations.fetch_add(1);
+        if (addOneUserCut(state, context, terms, 'L', 0.0)) {
+            state.variable_s_centering_cuts_added.fetch_add(1);
         }
     }
 }
@@ -1145,6 +1189,38 @@ bool validateCandidateLowGiniL1(CallbackState& state,
     if (lhs > tol &&
         rejectCandidateWithLazyRow(state, context, terms, 'L', 0.0)) {
         ++state.lazy_low_gini_l1_rejections;
+        return true;
+    }
+    return false;
+}
+
+bool validateCandidateVariableSCentering(CallbackState& state,
+                                         CPXCALLBACKCONTEXTptr context,
+                                         const std::vector<double>& x) {
+    if (state.r_cols.size() <= 1 || state.r_min_col < 0 ||
+        state.r_max_col < 0 || state.gamma_U < -1e-12) {
+        return false;
+    }
+    const int V = static_cast<int>(state.r_cols.size()) - 1;
+    if (V <= 1) return false;
+    std::vector<std::pair<int, double>> terms;
+    terms.reserve(static_cast<std::size_t>(V + 2));
+    terms.push_back({state.r_max_col, static_cast<double>(V - 1)});
+    terms.push_back({state.r_min_col, -static_cast<double>(V - 1)});
+    double lhs =
+        static_cast<double>(V - 1) * x[static_cast<std::size_t>(state.r_max_col)] -
+        static_cast<double>(V - 1) * x[static_cast<std::size_t>(state.r_min_col)];
+    for (int i = 1; i <= V; ++i) {
+        const int r = state.r_cols[static_cast<std::size_t>(i)];
+        if (r < 0) continue;
+        const double coef = -static_cast<double>(V) * state.gamma_U;
+        terms.push_back({r, coef});
+        lhs += coef * x[static_cast<std::size_t>(r)];
+    }
+    constexpr double tol = 1e-6;
+    if (lhs > tol &&
+        rejectCandidateWithLazyRow(state, context, terms, 'L', 0.0)) {
+        ++state.lazy_variable_s_centering_rejections;
         return true;
     }
     return false;
@@ -1706,6 +1782,7 @@ void validateCandidatePoint(CallbackState& state,
     if (validateCandidateVisitInventory(state, context, x)) return;
     if (validateCandidateGiniSubsetEnvelope(state, context, x)) return;
     if (validateCandidateLowGiniL1(state, context, x)) return;
+    if (validateCandidateVariableSCentering(state, context, x)) return;
     if (validateCandidateSubsetInventoryImbalance(state, context, x)) return;
     const CandidateRouteProjectionStatus route_projection =
         validateCandidateRouteProjection(state, context, x);
@@ -1778,6 +1855,7 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
         separateVisitInventoryLinking(*state, context);
         separateGiniSubsetEnvelope(*state, context);
         separateLowGiniL1Centering(*state, context);
+        separateVariableSCentering(*state, context);
         separateSubsetInventoryImbalance(*state, context);
         separateTransferCutset(*state, context);
         separateSupportDurationCover(*state, context);
@@ -1895,10 +1973,15 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         out.branch_priority_status = "disabled";
     }
     int g_col = -1;
+    int r_min_col = -1;
+    int r_max_col = -1;
     for (int i = 0; i < ncols; ++i) {
         if (names[static_cast<std::size_t>(i)] == "G") {
             g_col = i;
-            break;
+        } else if (names[static_cast<std::size_t>(i)] == "r_min") {
+            r_min_col = i;
+        } else if (names[static_cast<std::size_t>(i)] == "r_max") {
+            r_max_col = i;
         }
     }
     const int station_count =
@@ -1977,6 +2060,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     cb_state.api = &api;
     cb_state.ncols = ncols;
     cb_state.g_col = g_col;
+    cb_state.r_min_col = r_min_col;
+    cb_state.r_max_col = r_max_col;
     cb_state.r_cols = std::move(r_cols);
     cb_state.e_cols = std::move(e_cols);
     cb_state.q_l1_cols = std::move(q_l1_cols);
@@ -2047,6 +2132,10 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         cb_state.low_gini_l1_cuts_added.load();
     out.callback_low_gini_l1_violations =
         cb_state.low_gini_l1_violations.load();
+    out.callback_variable_s_centering_cuts_added =
+        cb_state.variable_s_centering_cuts_added.load();
+    out.callback_variable_s_centering_violations =
+        cb_state.variable_s_centering_violations.load();
     out.callback_subset_inventory_imbalance_cuts_added =
         cb_state.subset_inventory_imbalance_cuts_added.load();
     out.callback_subset_inventory_imbalance_candidates =
@@ -2092,6 +2181,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         cb_state.lazy_gini_subset_envelope_rejections.load();
     out.lazy_low_gini_l1_rejections =
         cb_state.lazy_low_gini_l1_rejections.load();
+    out.lazy_variable_s_centering_rejections =
+        cb_state.lazy_variable_s_centering_rejections.load();
     out.lazy_subset_inventory_imbalance_rejections =
         cb_state.lazy_subset_inventory_imbalance_rejections.load();
     out.incumbents_seen = cb_state.incumbents_seen.load();
