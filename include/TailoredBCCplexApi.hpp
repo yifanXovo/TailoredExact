@@ -57,6 +57,16 @@ struct TailoredBCCplexApiSolveResult {
     long long candidate_projection_objective_rejections = 0;
     double candidate_projection_max_gini_underestimate = 0.0;
     double candidate_projection_max_objective_underestimate = 0.0;
+    long long candidate_route_projection_checks = 0;
+    long long candidate_route_projection_verified = 0;
+    long long candidate_route_projection_rejections = 0;
+    long long candidate_route_projection_unsupported_mismatches = 0;
+    long long candidate_route_projection_flow_rejections = 0;
+    long long candidate_route_projection_station_rejections = 0;
+    long long candidate_route_projection_service_rejections = 0;
+    long long candidate_route_projection_duration_rejections = 0;
+    long long candidate_route_projection_inventory_rejections = 0;
+    long long candidate_route_projection_load_mismatches = 0;
     long long gini_branches_created = 0;
     long long branch_priorities_applied = 0;
     std::string branch_priority_status;
@@ -80,6 +90,11 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     const std::vector<int>& station_capacity,
     const std::vector<int>& station_target,
     const std::vector<double>& station_weight,
+    const std::vector<int>& vehicle_capacity,
+    const std::vector<double>& distance_matrix,
+    int node_count,
+    double total_time_limit,
+    double handling_unit,
     double lambda,
     double cutoff_value,
     int vehicle_count);

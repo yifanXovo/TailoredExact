@@ -2595,6 +2595,13 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         if (result.tailored_bc_enabled &&
             result.tailored_bc_callback_available &&
             result.tailored_bc_mode == "callback") {
+            std::vector<double> callback_dist;
+            callback_dist.reserve(static_cast<std::size_t>((instance.V + 1) * (instance.V + 1)));
+            for (int i = 0; i <= instance.V; ++i) {
+                for (int j = 0; j <= instance.V; ++j) {
+                    callback_dist.push_back(instance.dist[i][j]);
+                }
+            }
             api_solve = solveLpWithTailoredBCCplexApi(
                 lp_path,
                 time_limit,
@@ -2613,6 +2620,11 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 instance.capacity,
                 instance.target,
                 instance.weights,
+                instance.Q,
+                callback_dist,
+                instance.V + 1,
+                instance.total_time_limit,
+                instance.pickup_time + instance.drop_time,
                 options.lambda,
                 cutoff.incumbent_ub - cutoff.epsilon,
                 instance.M);
@@ -2657,7 +2669,17 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                          << ";candidate_projection_penalty_violation="
                          << api_solve.candidate_projection_penalty_rejections
                          << ";candidate_projection_objective_violation="
-                         << api_solve.candidate_projection_objective_rejections;
+                         << api_solve.candidate_projection_objective_rejections
+                         << ";candidate_route_flow_violation="
+                         << api_solve.candidate_route_projection_flow_rejections
+                         << ";candidate_route_station_violation="
+                         << api_solve.candidate_route_projection_station_rejections
+                         << ";candidate_route_service_violation="
+                         << api_solve.candidate_route_projection_service_rejections
+                         << ";candidate_route_duration_violation="
+                         << api_solve.candidate_route_projection_duration_rejections
+                         << ";candidate_route_inventory_violation="
+                         << api_solve.candidate_route_projection_inventory_rejections;
                     result.tailored_bc_lazy_rejections_by_reason = lazy.str();
                 } else {
                     result.tailored_bc_lazy_rejections_by_reason = "none";
@@ -2681,6 +2703,27 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     api_solve.candidate_projection_max_gini_underestimate;
                 result.tailored_bc_candidate_projection_max_objective_underestimate =
                     api_solve.candidate_projection_max_objective_underestimate;
+                result.tailored_bc_candidate_route_projection_checks =
+                    api_solve.candidate_route_projection_checks;
+                result.tailored_bc_candidate_route_projection_verified =
+                    api_solve.candidate_route_projection_verified;
+                result.tailored_bc_candidate_route_projection_rejections =
+                    api_solve.candidate_route_projection_rejections;
+                result.tailored_bc_candidate_route_projection_unsupported_mismatches =
+                    api_solve.candidate_route_projection_unsupported_mismatches;
+                result.tailored_bc_candidate_route_projection_rejection_reasons =
+                    "flow=" +
+                    std::to_string(api_solve.candidate_route_projection_flow_rejections) +
+                    ";station=" +
+                    std::to_string(api_solve.candidate_route_projection_station_rejections) +
+                    ";service=" +
+                    std::to_string(api_solve.candidate_route_projection_service_rejections) +
+                    ";duration=" +
+                    std::to_string(api_solve.candidate_route_projection_duration_rejections) +
+                    ";inventory=" +
+                    std::to_string(api_solve.candidate_route_projection_inventory_rejections) +
+                    ";load_unsupported=" +
+                    std::to_string(api_solve.candidate_route_projection_load_mismatches);
                 result.tailored_bc_gini_branches_created =
                     api_solve.gini_branches_created;
                 result.tailored_bc_branching_priorities_summary +=

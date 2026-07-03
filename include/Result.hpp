@@ -697,6 +697,11 @@ struct SolveResult {
     std::string tailored_bc_candidate_projection_rejection_reasons;
     double tailored_bc_candidate_projection_max_gini_underestimate = 0.0;
     double tailored_bc_candidate_projection_max_objective_underestimate = 0.0;
+    long long tailored_bc_candidate_route_projection_checks = 0;
+    long long tailored_bc_candidate_route_projection_verified = 0;
+    long long tailored_bc_candidate_route_projection_rejections = 0;
+    long long tailored_bc_candidate_route_projection_unsupported_mismatches = 0;
+    std::string tailored_bc_candidate_route_projection_rejection_reasons;
     std::string tailored_bc_branching_priorities_summary;
     long long tailored_bc_gini_branches_created = 0;
     long long tailored_bc_gini_selector_variables = 0;

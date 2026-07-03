@@ -11,6 +11,7 @@
 #include <cstring>
 #include <filesystem>
 #include <limits>
+#include <set>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -255,6 +256,23 @@ std::string zNameForVehicleStation(int vehicle, int station) {
     return "z_" + std::to_string(vehicle) + "_" + std::to_string(station);
 }
 
+std::string xNameForVehicleArc(int vehicle, int from, int to) {
+    return "x_" + std::to_string(vehicle) + "_" +
+        std::to_string(from) + "_" + std::to_string(to);
+}
+
+std::string pNameForVehicleStation(int vehicle, int station) {
+    return "p_" + std::to_string(vehicle) + "_" + std::to_string(station);
+}
+
+std::string dNameForVehicleStation(int vehicle, int station) {
+    return "d_" + std::to_string(vehicle) + "_" + std::to_string(station);
+}
+
+std::string loadNameForVehicleStation(int vehicle, int station) {
+    return "load_" + std::to_string(vehicle) + "_" + std::to_string(station);
+}
+
 std::vector<int> buildNameToIndexLookup(const std::vector<std::string>& names,
                                         const std::string& target) {
     std::vector<int> indices;
@@ -273,10 +291,19 @@ struct CallbackState {
     std::vector<int> q_l1_cols;
     std::vector<int> y_cols;
     std::vector<std::vector<int>> z_cols;
+    std::vector<std::vector<std::vector<int>>> x_cols;
+    std::vector<std::vector<int>> p_cols;
+    std::vector<std::vector<int>> d_cols;
+    std::vector<std::vector<int>> load_cols;
     std::vector<int> station_initial;
     std::vector<int> station_capacity;
     std::vector<int> station_target;
     std::vector<double> station_weight;
+    std::vector<int> vehicle_capacity;
+    std::vector<double> distance_matrix;
+    int node_count = 0;
+    double total_time_limit = 0.0;
+    double handling_unit = 0.0;
     double lambda = 0.0;
     double cutoff_value = std::numeric_limits<double>::infinity();
     double gamma_L = 0.0;
@@ -314,6 +341,16 @@ struct CallbackState {
     std::atomic<long long> candidate_projection_objective_rejections{0};
     std::atomic<double> candidate_projection_max_gini_underestimate{0.0};
     std::atomic<double> candidate_projection_max_objective_underestimate{0.0};
+    std::atomic<long long> candidate_route_projection_checks{0};
+    std::atomic<long long> candidate_route_projection_verified{0};
+    std::atomic<long long> candidate_route_projection_rejections{0};
+    std::atomic<long long> candidate_route_projection_unsupported_mismatches{0};
+    std::atomic<long long> candidate_route_projection_flow_rejections{0};
+    std::atomic<long long> candidate_route_projection_station_rejections{0};
+    std::atomic<long long> candidate_route_projection_service_rejections{0};
+    std::atomic<long long> candidate_route_projection_duration_rejections{0};
+    std::atomic<long long> candidate_route_projection_inventory_rejections{0};
+    std::atomic<long long> candidate_route_projection_load_mismatches{0};
     std::atomic<long long> gini_branches_created{0};
     std::atomic<bool> gini_cut_added{false};
     std::atomic<bool> gini_branch_created{false};
@@ -679,6 +716,318 @@ bool validateCandidateLowGiniL1(CallbackState& state,
     return false;
 }
 
+enum class CandidateRouteProjectionStatus {
+    Verified,
+    Rejected,
+    UnsupportedMismatch,
+};
+
+int safeCol(const std::vector<std::vector<int>>& cols, int k, int i) {
+    if (k < 0 || i < 0 || k >= static_cast<int>(cols.size())) return -1;
+    if (i >= static_cast<int>(cols[static_cast<std::size_t>(k)].size())) return -1;
+    return cols[static_cast<std::size_t>(k)][static_cast<std::size_t>(i)];
+}
+
+int safeXCol(const CallbackState& state, int k, int i, int j) {
+    if (k < 0 || i < 0 || j < 0 ||
+        k >= static_cast<int>(state.x_cols.size())) {
+        return -1;
+    }
+    const auto& mat = state.x_cols[static_cast<std::size_t>(k)];
+    if (i >= static_cast<int>(mat.size())) return -1;
+    if (j >= static_cast<int>(mat[static_cast<std::size_t>(i)].size())) return -1;
+    return mat[static_cast<std::size_t>(i)][static_cast<std::size_t>(j)];
+}
+
+double safeDist(const CallbackState& state, int i, int j) {
+    if (i < 0 || j < 0 || state.node_count <= 0 ||
+        i >= state.node_count || j >= state.node_count) {
+        return 0.0;
+    }
+    const std::size_t idx = static_cast<std::size_t>(i * state.node_count + j);
+    if (idx >= state.distance_matrix.size()) return 0.0;
+    return state.distance_matrix[idx];
+}
+
+bool rejectCandidateWithRouteProjectionRow(
+    CallbackState& state,
+    CPXCALLBACKCONTEXTptr context,
+    const std::vector<std::pair<int, double>>& terms,
+    char sense,
+    double rhs,
+    std::atomic<long long>& family_counter) {
+    if (rejectCandidateWithLazyRow(state, context, terms, sense, rhs)) {
+        ++state.candidate_route_projection_rejections;
+        ++family_counter;
+        return true;
+    }
+    return false;
+}
+
+CandidateRouteProjectionStatus validateCandidateRouteProjection(
+    CallbackState& state,
+    CPXCALLBACKCONTEXTptr context,
+    const std::vector<double>& x) {
+    const int V = static_cast<int>(state.station_initial.size()) - 1;
+    const int M = static_cast<int>(state.vehicle_capacity.size());
+    if (V <= 0 || M <= 0 || state.node_count != V + 1 ||
+        state.x_cols.empty() || state.z_cols.empty() ||
+        state.p_cols.empty() || state.d_cols.empty() ||
+        state.y_cols.empty()) {
+        return CandidateRouteProjectionStatus::Verified;
+    }
+
+    ++state.candidate_route_projection_checks;
+    constexpr double tol = 1e-6;
+
+    for (int i = 1; i <= V; ++i) {
+        double visit_sum = 0.0;
+        std::vector<std::pair<int, double>> terms;
+        for (int k = 0; k < M; ++k) {
+            const int z = safeCol(state.z_cols, k, i);
+            if (z >= 0) {
+                visit_sum += x[static_cast<std::size_t>(z)];
+                terms.push_back({z, 1.0});
+            }
+        }
+        if (visit_sum > 1.0 + tol &&
+            rejectCandidateWithRouteProjectionRow(
+                state, context, terms, 'L', 1.0,
+                state.candidate_route_projection_station_rejections)) {
+            return CandidateRouteProjectionStatus::Rejected;
+        }
+    }
+
+    for (int k = 0; k < M; ++k) {
+        std::vector<std::pair<int, double>> start_terms;
+        std::vector<std::pair<int, double>> start_end_terms;
+        double start = 0.0;
+        double start_end = 0.0;
+        for (int j = 1; j <= V; ++j) {
+            const int x0j = safeXCol(state, k, 0, j);
+            const int xj0 = safeXCol(state, k, j, 0);
+            if (x0j >= 0) {
+                start += x[static_cast<std::size_t>(x0j)];
+                start_end += x[static_cast<std::size_t>(x0j)];
+                start_terms.push_back({x0j, 1.0});
+                start_end_terms.push_back({x0j, 1.0});
+            }
+            if (xj0 >= 0) {
+                start_end -= x[static_cast<std::size_t>(xj0)];
+                start_end_terms.push_back({xj0, -1.0});
+            }
+        }
+        if (std::fabs(start_end) > tol &&
+            rejectCandidateWithRouteProjectionRow(
+                state, context, start_end_terms, 'E', 0.0,
+                state.candidate_route_projection_flow_rejections)) {
+            return CandidateRouteProjectionStatus::Rejected;
+        }
+        if (start > 1.0 + tol &&
+            rejectCandidateWithRouteProjectionRow(
+                state, context, start_terms, 'L', 1.0,
+                state.candidate_route_projection_flow_rejections)) {
+            return CandidateRouteProjectionStatus::Rejected;
+        }
+
+        double duration = 0.0;
+        std::vector<std::pair<int, double>> duration_terms;
+        for (int i = 0; i <= V; ++i) {
+            for (int j = 0; j <= V; ++j) {
+                if (i == j) continue;
+                const int arc = safeXCol(state, k, i, j);
+                if (arc < 0) continue;
+                const double d = safeDist(state, i, j);
+                duration += d * x[static_cast<std::size_t>(arc)];
+                duration_terms.push_back({arc, d});
+            }
+        }
+        double final_load = 0.0;
+        std::vector<std::pair<int, double>> final_load_terms;
+        for (int i = 1; i <= V; ++i) {
+            const int p = safeCol(state.p_cols, k, i);
+            const int d = safeCol(state.d_cols, k, i);
+            const int z = safeCol(state.z_cols, k, i);
+            if (p >= 0) {
+                duration += state.handling_unit * x[static_cast<std::size_t>(p)];
+                duration_terms.push_back({p, state.handling_unit});
+                final_load += x[static_cast<std::size_t>(p)];
+                final_load_terms.push_back({p, 1.0});
+            }
+            if (d >= 0) {
+                final_load -= x[static_cast<std::size_t>(d)];
+                final_load_terms.push_back({d, -1.0});
+            }
+            if (z >= 0) {
+                const int pmax = std::min(
+                    state.station_initial[static_cast<std::size_t>(i)],
+                    state.vehicle_capacity[static_cast<std::size_t>(k)]);
+                const int dmax = std::min(
+                    state.station_capacity[static_cast<std::size_t>(i)] -
+                        state.station_initial[static_cast<std::size_t>(i)],
+                    state.vehicle_capacity[static_cast<std::size_t>(k)]);
+                if (p >= 0 && x[static_cast<std::size_t>(p)] >
+                        pmax * x[static_cast<std::size_t>(z)] + tol) {
+                    if (rejectCandidateWithRouteProjectionRow(
+                            state, context, {{p, 1.0}, {z, -static_cast<double>(pmax)}},
+                            'L', 0.0,
+                            state.candidate_route_projection_service_rejections)) {
+                        return CandidateRouteProjectionStatus::Rejected;
+                    }
+                }
+                if (d >= 0 && x[static_cast<std::size_t>(d)] >
+                        dmax * x[static_cast<std::size_t>(z)] + tol) {
+                    if (rejectCandidateWithRouteProjectionRow(
+                            state, context, {{d, 1.0}, {z, -static_cast<double>(dmax)}},
+                            'L', 0.0,
+                            state.candidate_route_projection_service_rejections)) {
+                        return CandidateRouteProjectionStatus::Rejected;
+                    }
+                }
+                const double service = (p >= 0 ? x[static_cast<std::size_t>(p)] : 0.0) +
+                    (d >= 0 ? x[static_cast<std::size_t>(d)] : 0.0) -
+                    x[static_cast<std::size_t>(z)];
+                if (service < -tol) {
+                    std::vector<std::pair<int, double>> service_terms;
+                    if (p >= 0) service_terms.push_back({p, 1.0});
+                    if (d >= 0) service_terms.push_back({d, 1.0});
+                    service_terms.push_back({z, -1.0});
+                    if (rejectCandidateWithRouteProjectionRow(
+                            state, context, service_terms, 'G', 0.0,
+                            state.candidate_route_projection_service_rejections)) {
+                        return CandidateRouteProjectionStatus::Rejected;
+                    }
+                }
+            }
+
+            double in_flow = 0.0;
+            double out_flow = 0.0;
+            std::vector<std::pair<int, double>> in_terms;
+            std::vector<std::pair<int, double>> out_terms;
+            for (int j = 0; j <= V; ++j) {
+                if (j == i) continue;
+                const int xin = safeXCol(state, k, j, i);
+                const int xout = safeXCol(state, k, i, j);
+                if (xin >= 0) {
+                    in_flow += x[static_cast<std::size_t>(xin)];
+                    in_terms.push_back({xin, 1.0});
+                }
+                if (xout >= 0) {
+                    out_flow += x[static_cast<std::size_t>(xout)];
+                    out_terms.push_back({xout, 1.0});
+                }
+            }
+            if (z >= 0) {
+                in_flow -= x[static_cast<std::size_t>(z)];
+                out_flow -= x[static_cast<std::size_t>(z)];
+                in_terms.push_back({z, -1.0});
+                out_terms.push_back({z, -1.0});
+            }
+            if (std::fabs(in_flow) > tol &&
+                rejectCandidateWithRouteProjectionRow(
+                    state, context, in_terms, 'E', 0.0,
+                    state.candidate_route_projection_flow_rejections)) {
+                return CandidateRouteProjectionStatus::Rejected;
+            }
+            if (std::fabs(out_flow) > tol &&
+                rejectCandidateWithRouteProjectionRow(
+                    state, context, out_terms, 'E', 0.0,
+                    state.candidate_route_projection_flow_rejections)) {
+                return CandidateRouteProjectionStatus::Rejected;
+            }
+        }
+        if (duration > state.total_time_limit + tol &&
+            rejectCandidateWithRouteProjectionRow(
+                state, context, duration_terms, 'L', state.total_time_limit,
+                state.candidate_route_projection_duration_rejections)) {
+            return CandidateRouteProjectionStatus::Rejected;
+        }
+        if (final_load < -tol &&
+            rejectCandidateWithRouteProjectionRow(
+                state, context, final_load_terms, 'G', 0.0,
+                state.candidate_route_projection_service_rejections)) {
+            return CandidateRouteProjectionStatus::Rejected;
+        }
+    }
+
+    for (int i = 1; i <= V; ++i) {
+        const int y = i < static_cast<int>(state.y_cols.size())
+            ? state.y_cols[static_cast<std::size_t>(i)] : -1;
+        if (y < 0) continue;
+        double balance = x[static_cast<std::size_t>(y)];
+        std::vector<std::pair<int, double>> terms{{y, 1.0}};
+        for (int k = 0; k < M; ++k) {
+            const int p = safeCol(state.p_cols, k, i);
+            const int d = safeCol(state.d_cols, k, i);
+            if (p >= 0) {
+                balance += x[static_cast<std::size_t>(p)];
+                terms.push_back({p, 1.0});
+            }
+            if (d >= 0) {
+                balance -= x[static_cast<std::size_t>(d)];
+                terms.push_back({d, -1.0});
+            }
+        }
+        const double rhs =
+            static_cast<double>(state.station_initial[static_cast<std::size_t>(i)]);
+        if (std::fabs(balance - rhs) > tol &&
+            rejectCandidateWithRouteProjectionRow(
+                state, context, terms, 'E', rhs,
+                state.candidate_route_projection_inventory_rejections)) {
+            return CandidateRouteProjectionStatus::Rejected;
+        }
+    }
+
+    for (int k = 0; k < M; ++k) {
+        int current = 0;
+        double load = 0.0;
+        std::set<int> visited;
+        for (int step = 0; step <= V; ++step) {
+            int next = -1;
+            int outgoing = 0;
+            for (int j = 0; j <= V; ++j) {
+                if (j == current) continue;
+                const int arc = safeXCol(state, k, current, j);
+                if (arc >= 0 && x[static_cast<std::size_t>(arc)] > 0.5) {
+                    next = j;
+                    ++outgoing;
+                }
+            }
+            if (outgoing == 0 || next == 0) break;
+            if (outgoing > 1 || !visited.insert(next).second) {
+                ++state.candidate_route_projection_unsupported_mismatches;
+                ++state.candidate_route_projection_load_mismatches;
+                return CandidateRouteProjectionStatus::UnsupportedMismatch;
+            }
+            const int p = safeCol(state.p_cols, k, next);
+            const int d = safeCol(state.d_cols, k, next);
+            const double pickup = p >= 0 ? x[static_cast<std::size_t>(p)] : 0.0;
+            const double drop = d >= 0 ? x[static_cast<std::size_t>(d)] : 0.0;
+            load += pickup;
+            if (load > state.vehicle_capacity[static_cast<std::size_t>(k)] + tol ||
+                load + tol < drop) {
+                ++state.candidate_route_projection_unsupported_mismatches;
+                ++state.candidate_route_projection_load_mismatches;
+                return CandidateRouteProjectionStatus::UnsupportedMismatch;
+            }
+            load -= drop;
+            current = next;
+        }
+        for (int i = 1; i <= V; ++i) {
+            const int z = safeCol(state.z_cols, k, i);
+            if (z >= 0 && x[static_cast<std::size_t>(z)] > 0.5 &&
+                !visited.count(i)) {
+                ++state.candidate_route_projection_unsupported_mismatches;
+                ++state.candidate_route_projection_load_mismatches;
+                return CandidateRouteProjectionStatus::UnsupportedMismatch;
+            }
+        }
+    }
+
+    ++state.candidate_route_projection_verified;
+    return CandidateRouteProjectionStatus::Verified;
+}
+
 enum class CandidateProjectionStatus {
     Verified,
     Rejected,
@@ -831,6 +1180,10 @@ void validateCandidatePoint(CallbackState& state,
     if (validateCandidateVisitInventory(state, context, x)) return;
     if (validateCandidateGiniSubsetEnvelope(state, context, x)) return;
     if (validateCandidateLowGiniL1(state, context, x)) return;
+    const CandidateRouteProjectionStatus route_projection =
+        validateCandidateRouteProjection(state, context, x);
+    if (route_projection == CandidateRouteProjectionStatus::Rejected) return;
+    if (route_projection == CandidateRouteProjectionStatus::UnsupportedMismatch) return;
     const CandidateProjectionStatus projection =
         validateCandidateProjection(state, context, x);
     if (projection == CandidateProjectionStatus::Rejected) return;
@@ -951,6 +1304,11 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     const std::vector<int>& station_capacity,
     const std::vector<int>& station_target,
     const std::vector<double>& station_weight,
+    const std::vector<int>& vehicle_capacity,
+    const std::vector<double>& distance_matrix,
+    int route_node_count,
+    double total_time_limit,
+    double handling_unit,
     double lambda,
     double cutoff_value,
     int vehicle_count) {
@@ -1032,6 +1390,21 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     std::vector<std::vector<int>> z_cols(
         static_cast<std::size_t>(std::max(0, vehicle_count)),
         std::vector<int>(static_cast<std::size_t>(station_count), -1));
+    std::vector<std::vector<int>> p_cols(
+        static_cast<std::size_t>(std::max(0, vehicle_count)),
+        std::vector<int>(static_cast<std::size_t>(station_count), -1));
+    std::vector<std::vector<int>> d_cols(
+        static_cast<std::size_t>(std::max(0, vehicle_count)),
+        std::vector<int>(static_cast<std::size_t>(station_count), -1));
+    std::vector<std::vector<int>> load_cols(
+        static_cast<std::size_t>(std::max(0, vehicle_count)),
+        std::vector<int>(static_cast<std::size_t>(station_count), -1));
+    std::vector<std::vector<std::vector<int>>> x_cols(
+        static_cast<std::size_t>(std::max(0, vehicle_count)),
+        std::vector<std::vector<int>>(
+            static_cast<std::size_t>(std::max(0, route_node_count)),
+            std::vector<int>(
+                static_cast<std::size_t>(std::max(0, route_node_count)), -1)));
     for (int k = 0; k < vehicle_count; ++k) {
         for (int i = 1; i < station_count; ++i) {
             std::vector<int> found = buildNameToIndexLookup(
@@ -1039,6 +1412,33 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
             if (!found.empty()) {
                 z_cols[static_cast<std::size_t>(k)][static_cast<std::size_t>(i)] =
                     found.front();
+            }
+            found = buildNameToIndexLookup(names, pNameForVehicleStation(k, i));
+            if (!found.empty()) {
+                p_cols[static_cast<std::size_t>(k)][static_cast<std::size_t>(i)] =
+                    found.front();
+            }
+            found = buildNameToIndexLookup(names, dNameForVehicleStation(k, i));
+            if (!found.empty()) {
+                d_cols[static_cast<std::size_t>(k)][static_cast<std::size_t>(i)] =
+                    found.front();
+            }
+            found = buildNameToIndexLookup(names, loadNameForVehicleStation(k, i));
+            if (!found.empty()) {
+                load_cols[static_cast<std::size_t>(k)][static_cast<std::size_t>(i)] =
+                    found.front();
+            }
+        }
+        for (int i = 0; i < route_node_count; ++i) {
+            for (int j = 0; j < route_node_count; ++j) {
+                if (i == j) continue;
+                std::vector<int> found = buildNameToIndexLookup(
+                    names, xNameForVehicleArc(k, i, j));
+                if (!found.empty()) {
+                    x_cols[static_cast<std::size_t>(k)]
+                          [static_cast<std::size_t>(i)]
+                          [static_cast<std::size_t>(j)] = found.front();
+                }
             }
         }
     }
@@ -1051,10 +1451,19 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     cb_state.q_l1_cols = std::move(q_l1_cols);
     cb_state.y_cols = std::move(y_cols);
     cb_state.z_cols = std::move(z_cols);
+    cb_state.x_cols = std::move(x_cols);
+    cb_state.p_cols = std::move(p_cols);
+    cb_state.d_cols = std::move(d_cols);
+    cb_state.load_cols = std::move(load_cols);
     cb_state.station_initial = station_initial;
     cb_state.station_capacity = station_capacity;
     cb_state.station_target = station_target;
     cb_state.station_weight = station_weight;
+    cb_state.vehicle_capacity = vehicle_capacity;
+    cb_state.distance_matrix = distance_matrix;
+    cb_state.node_count = route_node_count;
+    cb_state.total_time_limit = total_time_limit;
+    cb_state.handling_unit = handling_unit;
     cb_state.lambda = lambda;
     cb_state.cutoff_value = cutoff_value;
     cb_state.gamma_L = gamma_L;
@@ -1136,6 +1545,26 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         cb_state.candidate_projection_max_gini_underestimate.load();
     out.candidate_projection_max_objective_underestimate =
         cb_state.candidate_projection_max_objective_underestimate.load();
+    out.candidate_route_projection_checks =
+        cb_state.candidate_route_projection_checks.load();
+    out.candidate_route_projection_verified =
+        cb_state.candidate_route_projection_verified.load();
+    out.candidate_route_projection_rejections =
+        cb_state.candidate_route_projection_rejections.load();
+    out.candidate_route_projection_unsupported_mismatches =
+        cb_state.candidate_route_projection_unsupported_mismatches.load();
+    out.candidate_route_projection_flow_rejections =
+        cb_state.candidate_route_projection_flow_rejections.load();
+    out.candidate_route_projection_station_rejections =
+        cb_state.candidate_route_projection_station_rejections.load();
+    out.candidate_route_projection_service_rejections =
+        cb_state.candidate_route_projection_service_rejections.load();
+    out.candidate_route_projection_duration_rejections =
+        cb_state.candidate_route_projection_duration_rejections.load();
+    out.candidate_route_projection_inventory_rejections =
+        cb_state.candidate_route_projection_inventory_rejections.load();
+    out.candidate_route_projection_load_mismatches =
+        cb_state.candidate_route_projection_load_mismatches.load();
     out.gini_branches_created = cb_state.gini_branches_created.load();
     if (ncols > 0) {
         std::vector<double> x(static_cast<std::size_t>(ncols), 0.0);

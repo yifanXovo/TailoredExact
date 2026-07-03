@@ -86,12 +86,22 @@ def main() -> int:
         projection_verified = int(float(data.get("tailored_bc_candidate_projection_verified", 0) or 0))
         projection_rejected = int(float(data.get("tailored_bc_candidate_projection_rejections", 0) or 0))
         projection_unsupported = int(float(data.get("tailored_bc_candidate_projection_unsupported_mismatches", 0) or 0))
+        route_checks = int(float(data.get("tailored_bc_candidate_route_projection_checks", 0) or 0))
+        route_verified = int(float(data.get("tailored_bc_candidate_route_projection_verified", 0) or 0))
+        route_rejected = int(float(data.get("tailored_bc_candidate_route_projection_rejections", 0) or 0))
+        route_unsupported = int(float(data.get("tailored_bc_candidate_route_projection_unsupported_mismatches", 0) or 0))
         if (method == "interval-cutoff-oracle" and callback_available and
                 candidate_calls > 0 and projection_checks <= 0):
             reasons.append("candidate_callback_without_projection_verifier")
+        if (method == "interval-cutoff-oracle" and callback_available and
+                candidate_calls > 0 and route_checks <= 0):
+            reasons.append("candidate_callback_without_route_projection_verifier")
         if projection_checks > 0 and (
                 projection_verified + projection_rejected + projection_unsupported != projection_checks):
             reasons.append("candidate_projection_accounting_mismatch")
+        if route_checks > 0 and (
+                route_verified + route_rejected + route_unsupported != route_checks):
+            reasons.append("candidate_route_projection_accounting_mismatch")
 
         if reasons:
             failures += 1
@@ -109,6 +119,10 @@ def main() -> int:
             "tailored_bc_candidate_projection_verified": projection_verified,
             "tailored_bc_candidate_projection_rejections": projection_rejected,
             "tailored_bc_candidate_projection_unsupported_mismatches": projection_unsupported,
+            "tailored_bc_candidate_route_projection_checks": route_checks,
+            "tailored_bc_candidate_route_projection_verified": route_verified,
+            "tailored_bc_candidate_route_projection_rejections": route_rejected,
+            "tailored_bc_candidate_route_projection_unsupported_mismatches": route_unsupported,
             "audit_passed": not reasons,
             "failures": "|".join(reasons),
         })
@@ -129,6 +143,10 @@ def main() -> int:
             "tailored_bc_candidate_projection_verified": 0,
             "tailored_bc_candidate_projection_rejections": 0,
             "tailored_bc_candidate_projection_unsupported_mismatches": 0,
+            "tailored_bc_candidate_route_projection_checks": 0,
+            "tailored_bc_candidate_route_projection_verified": 0,
+            "tailored_bc_candidate_route_projection_rejections": 0,
+            "tailored_bc_candidate_route_projection_unsupported_mismatches": 0,
             "audit_passed": False,
             "failures": "missing_branch_callback_smoke_row",
         })
@@ -148,6 +166,10 @@ def main() -> int:
             "tailored_bc_candidate_projection_verified": 0,
             "tailored_bc_candidate_projection_rejections": 0,
             "tailored_bc_candidate_projection_unsupported_mismatches": 0,
+            "tailored_bc_candidate_route_projection_checks": 0,
+            "tailored_bc_candidate_route_projection_verified": 0,
+            "tailored_bc_candidate_route_projection_rejections": 0,
+            "tailored_bc_candidate_route_projection_unsupported_mismatches": 0,
             "audit_passed": False,
             "failures": "no_json_rows",
         })

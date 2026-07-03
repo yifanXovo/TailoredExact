@@ -199,6 +199,11 @@ def result_row(name: str, path: Path, meta: Dict[str, Any]) -> Dict[str, Any]:
         "tailored_bc_candidate_projection_rejection_reasons": data.get("tailored_bc_candidate_projection_rejection_reasons", ""),
         "tailored_bc_candidate_projection_max_gini_underestimate": data.get("tailored_bc_candidate_projection_max_gini_underestimate", ""),
         "tailored_bc_candidate_projection_max_objective_underestimate": data.get("tailored_bc_candidate_projection_max_objective_underestimate", ""),
+        "tailored_bc_candidate_route_projection_checks": data.get("tailored_bc_candidate_route_projection_checks", ""),
+        "tailored_bc_candidate_route_projection_verified": data.get("tailored_bc_candidate_route_projection_verified", ""),
+        "tailored_bc_candidate_route_projection_rejections": data.get("tailored_bc_candidate_route_projection_rejections", ""),
+        "tailored_bc_candidate_route_projection_unsupported_mismatches": data.get("tailored_bc_candidate_route_projection_unsupported_mismatches", ""),
+        "tailored_bc_candidate_route_projection_rejection_reasons": data.get("tailored_bc_candidate_route_projection_rejection_reasons", ""),
         "tailored_bc_gini_subset_envelope_candidates": data.get("tailored_bc_gini_subset_envelope_candidates", ""),
         "tailored_bc_gini_subset_envelope_violations": data.get("tailored_bc_gini_subset_envelope_violations", ""),
         "tailored_bc_gini_subset_envelope_cuts_added": data.get("tailored_bc_gini_subset_envelope_cuts_added", ""),
@@ -624,6 +629,10 @@ def main() -> int:
             "candidate_projection_verified": sum(int(row.get("tailored_bc_candidate_projection_verified") or 0) for row in rows),
             "candidate_projection_rejections": sum(int(row.get("tailored_bc_candidate_projection_rejections") or 0) for row in rows),
             "candidate_projection_unsupported_mismatches": sum(int(row.get("tailored_bc_candidate_projection_unsupported_mismatches") or 0) for row in rows),
+            "candidate_route_projection_checks": sum(int(row.get("tailored_bc_candidate_route_projection_checks") or 0) for row in rows),
+            "candidate_route_projection_verified": sum(int(row.get("tailored_bc_candidate_route_projection_verified") or 0) for row in rows),
+            "candidate_route_projection_rejections": sum(int(row.get("tailored_bc_candidate_route_projection_rejections") or 0) for row in rows),
+            "candidate_route_projection_unsupported_mismatches": sum(int(row.get("tailored_bc_candidate_route_projection_unsupported_mismatches") or 0) for row in rows),
             "gini_branches_created": sum(int(row.get("tailored_bc_gini_branches_created") or 0) for row in rows),
             "fail_reason": callback_fail_reason,
         }
@@ -645,6 +654,10 @@ def main() -> int:
             "candidate_projection_verified": sum(int(row.get("tailored_bc_candidate_projection_verified") or 0) for row in rows),
             "candidate_projection_rejections": sum(int(row.get("tailored_bc_candidate_projection_rejections") or 0) for row in rows),
             "candidate_projection_unsupported_mismatches": sum(int(row.get("tailored_bc_candidate_projection_unsupported_mismatches") or 0) for row in rows),
+            "candidate_route_projection_checks": sum(int(row.get("tailored_bc_candidate_route_projection_checks") or 0) for row in rows),
+            "candidate_route_projection_verified": sum(int(row.get("tailored_bc_candidate_route_projection_verified") or 0) for row in rows),
+            "candidate_route_projection_rejections": sum(int(row.get("tailored_bc_candidate_route_projection_rejections") or 0) for row in rows),
+            "candidate_route_projection_unsupported_mismatches": sum(int(row.get("tailored_bc_candidate_route_projection_unsupported_mismatches") or 0) for row in rows),
             "gini_branches_created": sum(int(row.get("tailored_bc_gini_branches_created") or 0) for row in rows),
             "fail_reason": callback_fail_reason,
         }
@@ -705,12 +718,16 @@ def main() -> int:
         {
             "candidate_validation_layer": "generic_candidate_callback",
             "callback_available": callback_available,
-            "status": "blocked_without_in_process_callback_api" if not callback_available else "candidate_compact_row_consistency_checked",
+            "status": "blocked_without_in_process_callback_api" if not callback_available else "candidate_compact_route_and_objective_projection_checked",
             "candidate_callback_calls": sum(int(row.get("tailored_bc_candidate_callback_calls") or 0) for row in rows),
             "candidate_projection_checks": sum(int(row.get("tailored_bc_candidate_projection_checks") or 0) for row in rows),
             "candidate_projection_verified": sum(int(row.get("tailored_bc_candidate_projection_verified") or 0) for row in rows),
             "candidate_projection_rejections": sum(int(row.get("tailored_bc_candidate_projection_rejections") or 0) for row in rows),
             "candidate_projection_unsupported_mismatches": sum(int(row.get("tailored_bc_candidate_projection_unsupported_mismatches") or 0) for row in rows),
+            "candidate_route_projection_checks": sum(int(row.get("tailored_bc_candidate_route_projection_checks") or 0) for row in rows),
+            "candidate_route_projection_verified": sum(int(row.get("tailored_bc_candidate_route_projection_verified") or 0) for row in rows),
+            "candidate_route_projection_rejections": sum(int(row.get("tailored_bc_candidate_route_projection_rejections") or 0) for row in rows),
+            "candidate_route_projection_unsupported_mismatches": sum(int(row.get("tailored_bc_candidate_route_projection_unsupported_mismatches") or 0) for row in rows),
             "paper_certificate_contamination": False,
         }
     ])
@@ -740,7 +757,7 @@ def main() -> int:
     ]
     if callback_available:
         final_lines.append(
-            "The executable loads `cplex2211.dll` dynamically, registers a generic CPLEX callback, and solves the smoke fixed-interval LP/MIP in-process. The smoke interval row reports relaxation/candidate/progress callback events, paper-safe relaxation-point separator attempts for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate compact-row consistency checks, and CPLEX branch-order priorities applied through `CPXcopyorder`."
+            "The executable loads `cplex2211.dll` dynamically, registers a generic CPLEX callback, and solves the smoke fixed-interval LP/MIP in-process. The smoke interval row reports relaxation/candidate/progress callback events, paper-safe relaxation-point separator attempts for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate compact route/service plus objective projection checks, and CPLEX branch-order priorities applied through `CPXcopyorder`."
         )
     else:
         final_lines.append(
@@ -758,7 +775,7 @@ def main() -> int:
         "- `callback_event_summary.csv` records callback events from the fixed-interval smoke solve when callbacks are available.",
         "- `tailored_branch_callback_smoke.csv` records a diagnostic-only CPLEX toy MIP branch-smoke row. It applies branch priorities, records relaxation/candidate callbacks, enters CPLEX branch context, and creates one-shot Gini branches through `CPXcallbackmakebranch`.",
         "- `interval_callback_separator_diagnostic.json` disables overlapping static tailored cut families and confirms that relaxation-point callback separators are invoked without using diagnostic evidence as a paper certificate.",
-        "- Candidate callbacks now run a compact projection verifier when `Y_i`, `r_i`, `e_i`, targets, weights, lambda, and cutoff data are available. It recomputes ratios, penalty, Gini, and the objective from final inventories; rejects only with already-valid model rows for ratio, penalty, or objective-cutoff violations; and records unsupported Gini/objective projection mismatches instead of adding unsafe no-good cuts.",
+        "- Candidate callbacks now run compact projection verifiers when route/service variables and `Y_i`, `r_i`, `e_i`, targets, weights, lambda, and cutoff data are available. The route projection verifier checks station disjointness, depot flow, station flow, service linking, duration under the pickup-only handling convention, final-inventory balance, and reconstructed route load order. The objective projection verifier recomputes ratios, penalty, Gini, and the objective from final inventories. Rejections use only already-valid model rows; unsupported route-load or Gini/objective mismatches are recorded instead of adding unsafe no-good cuts.",
         "- `moderate_seed3301_low_gini1_callback_guarded.json` is a guarded full-preset hard-leaf diagnostic. If the full preset setup and solve exceed the outer wrapper timeout, the runner writes an honest noncertificate timeout JSON instead of leaving a missing artifact.",
         "- `moderate_seed3301_low_gini1_callback_minimal_short3.json` is a diagnostic hard-leaf callback run with overlapping static diagnostic families disabled. It is included to preserve solver-final callback evidence on the moderate low-Gini leaf when the full-preset guarded row times out before producing callback counters.",
         "- `source_classification.csv` preserves tailored source classes per JSON row.",
@@ -787,7 +804,7 @@ def main() -> int:
         "",
         "## Paper Claim",
         "",
-        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate compact-row and final-inventory objective projection validation, branch-order priority injection, and diagnostic branch-context evidence with one-shot Gini branches created through `CPXcallbackmakebranch`. A diagnostic moderate low-Gini leaf now reaches solver finalization under the callback path when overlapping static diagnostic families are disabled, recording callback events and a valid noncertifying interval bound. It is not yet the full requested tailored branch-and-cut: full route-plan reconstruction from compact incumbents, route-level lazy rejection, observed custom Gini branch creation on ExactEBRP hard leaves, full-preset hard-leaf callback ablations, and performance-positive hard-leaf closure evidence remain incomplete.",
+        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, and diagnostic branch-context evidence with one-shot Gini branches created through `CPXcallbackmakebranch`. A diagnostic moderate low-Gini leaf now reaches solver finalization under the callback path when overlapping static diagnostic families are disabled, recording callback events and a valid noncertifying interval bound. It is not yet the full requested tailored branch-and-cut: independent route-plan reconstruction from compact incumbents, observed custom Gini branch creation on ExactEBRP hard leaves, full-preset hard-leaf callback ablations, and performance-positive hard-leaf closure evidence remain incomplete.",
         "",
         "Final commit SHA: recorded in the final assistant response after commit creation.",
     ])

@@ -1613,6 +1613,16 @@ std::string resultToJson(const SolveResult& input) {
         << result.tailored_bc_candidate_projection_max_gini_underestimate << ",\n";
     out << "  \"tailored_bc_candidate_projection_max_objective_underestimate\": "
         << result.tailored_bc_candidate_projection_max_objective_underestimate << ",\n";
+    out << "  \"tailored_bc_candidate_route_projection_checks\": "
+        << result.tailored_bc_candidate_route_projection_checks << ",\n";
+    out << "  \"tailored_bc_candidate_route_projection_verified\": "
+        << result.tailored_bc_candidate_route_projection_verified << ",\n";
+    out << "  \"tailored_bc_candidate_route_projection_rejections\": "
+        << result.tailored_bc_candidate_route_projection_rejections << ",\n";
+    out << "  \"tailored_bc_candidate_route_projection_unsupported_mismatches\": "
+        << result.tailored_bc_candidate_route_projection_unsupported_mismatches << ",\n";
+    out << "  \"tailored_bc_candidate_route_projection_rejection_reasons\": \""
+        << jsonEscape(result.tailored_bc_candidate_route_projection_rejection_reasons) << "\",\n";
     out << "  \"tailored_bc_branching_priorities_summary\": \""
         << jsonEscape(result.tailored_bc_branching_priorities_summary) << "\",\n";
     out << "  \"tailored_bc_gini_branches_created\": "
