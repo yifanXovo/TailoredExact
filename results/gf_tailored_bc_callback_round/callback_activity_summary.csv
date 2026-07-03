@@ -1,2 +1,2 @@
 callback_available,user_cut_events,lazy_events,incumbent_events,branch_events,fail_reason
-False,0,0,0,0,"callback_unavailable: current ExactEBRP CPLEX integration writes LP files and invokes cplex.exe command files; the executable is built with the repository MinGW/g++ path and is not linked against the CPLEX Concert/C API. headers_found=true, c_api_headers_found=true, msvc_env_available=false. Rows using paper-gf-tailored-bc are therefore labelled static_fallback unless a future MSVC/CPLEX-linked callback target is added."
+True,1,0,2,0,none

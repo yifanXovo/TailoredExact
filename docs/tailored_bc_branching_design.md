@@ -10,6 +10,7 @@ Current implementation status:
 
 - branch-priority and Gini-branching options are parsed and reported;
 - selector/outer-controller metadata is emitted;
-- no true CPLEX branch callback is active in the current command-file CPLEX build.
+- a generic CPLEX callback is registered and branch-context events are counted when CPLEX enters that context;
+- no custom branch creation is active yet.
 
 Any row with callback branching disabled must not claim callback branch-and-cut evidence.

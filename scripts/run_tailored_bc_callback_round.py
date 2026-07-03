@@ -100,6 +100,10 @@ def result_row(name: str, path: Path, meta: Dict[str, Any]) -> Dict[str, Any]:
         "tailored_bc_source_class": data.get("tailored_bc_source_class", ""),
         "tailored_bc_user_cuts_added_total": data.get("tailored_bc_user_cuts_added_total", ""),
         "tailored_bc_user_cuts_added_by_family": data.get("tailored_bc_user_cuts_added_by_family", ""),
+        "tailored_bc_relaxation_callback_calls": data.get("tailored_bc_relaxation_callback_calls", ""),
+        "tailored_bc_candidate_callback_calls": data.get("tailored_bc_candidate_callback_calls", ""),
+        "tailored_bc_branch_callback_calls": data.get("tailored_bc_branch_callback_calls", ""),
+        "tailored_bc_progress_callback_calls": data.get("tailored_bc_progress_callback_calls", ""),
         "certified_original_problem": data.get("certified_original_problem", ""),
         "audit_returncode": meta.get("returncode", ""),
         "runtime_seconds": round(float(meta.get("runtime_seconds", 0.0)), 3),
@@ -163,6 +167,30 @@ def main() -> int:
     smoke_meta = run_cmd(smoke_cmd, RESULTS / "logs" / "smoke_paper_gf_tailored_bc_20s.log", timeout=90)
     rows.append(result_row("smoke_paper_gf_tailored_bc_20s", smoke_out, smoke_meta))
 
+    interval_out = RAW / "interval_callback_smoke.json"
+    interval_cmd = [
+        str(EXE),
+        "--method", "interval-cutoff-oracle",
+        "--algorithm-preset", "paper-gf-tailored-bc",
+        "--paper-run-sealed", "true",
+        "--input", str(SMOKE_INSTANCE),
+        "--lambda", "0.15",
+        "--T", "3600",
+        "--interval-exact-cutoff-gamma-L", "0",
+        "--interval-exact-cutoff-gamma-U", "1",
+        "--interval-exact-cutoff-UB", "999",
+        "--interval-exact-cutoff-time-limit", "10",
+        "--compact-bc-threads", "1",
+        "--mip-threads", "1",
+        "--out", str(interval_out),
+    ]
+    interval_meta = run_cmd(
+        interval_cmd,
+        RESULTS / "logs" / "interval_callback_smoke.log",
+        timeout=90,
+    )
+    rows.append(result_row("interval_callback_smoke", interval_out, interval_meta))
+
     callback_available = any(
         str(row.get("tailored_bc_callback_available", "")).lower() == "true"
         for row in rows
@@ -182,7 +210,7 @@ def main() -> int:
             "callback_available": callback_available,
             "tailored_callback_status": "unavailable" if not callback_available else "available",
             "static_root_cut_status": "implemented_diagnostic_only",
-            "conclusion": "not_true_callback_bc" if not callback_available else "callback_path_available",
+            "conclusion": "not_true_callback_bc" if not callback_available else "dynamic_c_api_callback_path_available",
         }
     ])
     write_csv(RESULTS / "exact_vs_cplex_callback_round.csv", [
@@ -197,7 +225,7 @@ def main() -> int:
         {
             "mode": "selector_or_outer_controller",
             "callback_available": callback_available,
-            "gini_branching_status": "metadata_only_without_callback_api",
+            "gini_branching_status": "callback_registered_no_custom_branch_created_yet" if callback_available else "metadata_only_without_callback_api",
             "certificate_role": "none",
         }
     ])
@@ -205,20 +233,20 @@ def main() -> int:
         {
             "policy": "callback_branching",
             "callback_available": callback_available,
-            "status": "blocked" if not callback_available else "available",
+            "status": "blocked" if not callback_available else "callback_registered",
             "reason": callback_fail_reason if not callback_available else "none",
         },
         {
             "policy": "branching_priorities",
             "callback_available": callback_available,
-            "status": "metadata_only_without_callback_api",
-            "reason": "requires in-process CPLEX API for actual priority injection",
+            "status": "metadata_only",
+            "reason": "priority injection not implemented in this increment",
         },
     ])
     write_csv(RESULTS / "gini_branching_comparison.csv", [
         {
             "mode": "callback",
-            "status": "blocked" if not callback_available else "available",
+            "status": "blocked" if not callback_available else "callback_registered_no_custom_gini_branch_yet",
             "certificate_role": "none_without_callback_api" if not callback_available else "callback_candidate",
         },
         {
@@ -229,16 +257,16 @@ def main() -> int:
     ])
     write_csv(RESULTS / "hard_leaf_tailored_bc.csv", [
         {
-            "leaf": "not_run",
-            "reason": "true_callback_api_unavailable",
-            "fallback_smoke_json": str(smoke_out.relative_to(ROOT)),
+            "leaf": "smoke_fixed_interval" if callback_available else "not_run",
+            "reason": "callback_smoke_only_no_hard_leaf_in_this_increment" if callback_available else "true_callback_api_unavailable",
+            "fallback_smoke_json": str(interval_out.relative_to(ROOT)),
         }
     ])
     write_csv(RESULTS / "hard_leaf_comparison.csv", [
         {
             "leaf": "not_run",
-            "reason": "true_callback_api_unavailable",
-            "tailored_callback_status": "blocked",
+            "reason": "callback_smoke_only_no_hard_leaf_in_this_increment" if callback_available else "true_callback_api_unavailable",
+            "tailored_callback_status": "callback_available" if callback_available else "blocked",
             "plain_fixed_interval_mip_status": "not_run_in_callback_round",
         }
     ])
@@ -253,20 +281,20 @@ def main() -> int:
     write_csv(RESULTS / "callback_event_summary.csv", [
         {
             "callback_available": callback_available,
-            "user_cut_events": 0,
+            "user_cut_events": sum(int(row.get("tailored_bc_relaxation_callback_calls") or 0) for row in rows),
             "lazy_events": 0,
-            "incumbent_events": 0,
-            "branch_events": 0,
+            "incumbent_events": sum(int(row.get("tailored_bc_candidate_callback_calls") or 0) for row in rows),
+            "branch_events": sum(int(row.get("tailored_bc_branch_callback_calls") or 0) for row in rows),
             "fail_reason": callback_fail_reason,
         }
     ])
     write_csv(RESULTS / "callback_activity_summary.csv", [
         {
             "callback_available": callback_available,
-            "user_cut_events": 0,
+            "user_cut_events": sum(int(row.get("tailored_bc_relaxation_callback_calls") or 0) for row in rows),
             "lazy_events": 0,
-            "incumbent_events": 0,
-            "branch_events": 0,
+            "incumbent_events": sum(int(row.get("tailored_bc_candidate_callback_calls") or 0) for row in rows),
+            "branch_events": sum(int(row.get("tailored_bc_branch_callback_calls") or 0) for row in rows),
             "fail_reason": callback_fail_reason,
         }
     ])
@@ -335,7 +363,7 @@ def main() -> int:
     audit_meta = run_cmd(audit_cmd, RESULTS / "logs" / "audit_tailored_bc_callback_round.log")
 
     status_label = (
-        "callback_path_available" if callback_available
+        "minimal_dynamic_callback_path_available" if callback_available
         else "callback_unavailable_static_fallback_only"
     )
     final_lines = [
@@ -347,7 +375,9 @@ def main() -> int:
         "",
     ]
     if callback_available:
-        final_lines.append("The executable reports that in-process CPLEX callbacks are available.")
+        final_lines.append(
+            "The executable loads `cplex2211.dll` dynamically, registers a generic CPLEX callback, and solves the smoke fixed-interval LP/MIP in-process. The smoke interval row reports relaxation/candidate/progress callback events and one redundant paper-safe user cut."
+        )
     else:
         final_lines.append(
             "FAILED GOAL: remained static CPLEX-backed compact MIP; not a true tailored branch-and-cut callback implementation."
@@ -361,7 +391,7 @@ def main() -> int:
         "- `callback_smoke.csv` records callback availability.",
         "- `tailored_cut_ablation.csv` records paper-safe static tailored cut guards.",
         "- `tailored_bc_vs_static.csv` separates true callback BC from static fallback.",
-        "- `callback_event_summary.csv` has zero callback events when callbacks are unavailable.",
+        "- `callback_event_summary.csv` records callback events from the fixed-interval smoke solve when callbacks are available.",
         "- `source_classification.csv` preserves tailored source classes per JSON row.",
         "",
         "## Audit",
@@ -383,16 +413,16 @@ def main() -> int:
         "Build command used:",
         "",
         "```powershell",
-        r"D:\msys64\ucrt64\bin\g++.exe -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src\main.cpp src\Parser.cpp src\Evaluator.cpp src\Result.cpp src\Bounds.cpp src\ColumnPool.cpp src\TailoredExact.cpp src\Pricing.cpp src\Cuts.cpp src\Branching.cpp src\Master.cpp src\ColumnGeneration.cpp src\CplexBaseline.cpp src\TailoredBC.cpp src\TailoredBCCuts.cpp src\TailoredBCCallbacks.cpp src\GiniBranching.cpp src\hga_tgbc\HgaTgbcGreedy.cpp src\HgaTgbcRunner.cpp src\Logger.cpp -o build\ExactEBRP.exe",
+        r"D:\msys64\ucrt64\bin\g++.exe -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src\main.cpp src\Parser.cpp src\Evaluator.cpp src\Result.cpp src\Bounds.cpp src\ColumnPool.cpp src\TailoredExact.cpp src\Pricing.cpp src\Cuts.cpp src\Branching.cpp src\Master.cpp src\ColumnGeneration.cpp src\CplexBaseline.cpp src\TailoredBC.cpp src\TailoredBCCuts.cpp src\TailoredBCCallbacks.cpp src\TailoredBCCplexApi.cpp src\GiniBranching.cpp src\hga_tgbc\HgaTgbcGreedy.cpp src\HgaTgbcRunner.cpp src\Logger.cpp -o build\ExactEBRP.exe",
         "```",
         "",
         "The user-specified remote head was `b65fb2e1cece2c70980eeb91aadfee07ac2591b8`, but `origin/codex/longrun-round17-local-results` resolved to `cb11b9f5f477b707511388b0196f0864c75d1fbb` at fetch time; the requested SHA was not present in the fetched branch.",
         "",
         "## Paper Claim",
         "",
-        "This package does not support a new paper claim of CPLEX-managed tailored branch-and-cut callbacks. The implemented static cut rows may remain diagnostic or compact-BC strengthening, but they are not callback evidence.",
+        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models. It is not yet the full requested tailored branch-and-cut: lazy incumbent rejection, custom Gini branch creation, branch priorities, hard-leaf callback ablations, and performance-positive hard-leaf evidence remain incomplete.",
         "",
-        "Final commit SHA: pending.",
+        "Final commit SHA: recorded in the final assistant response after commit creation.",
     ])
     (RESULTS / "final_report.md").write_text("\n".join(final_lines) + "\n", encoding="utf-8")
     return 0

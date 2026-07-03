@@ -681,6 +681,10 @@ struct SolveResult {
     bool tailored_bc_root_separation_enabled = false;
     long long tailored_bc_user_cuts_added_total = 0;
     std::string tailored_bc_user_cuts_added_by_family;
+    long long tailored_bc_relaxation_callback_calls = 0;
+    long long tailored_bc_candidate_callback_calls = 0;
+    long long tailored_bc_branch_callback_calls = 0;
+    long long tailored_bc_progress_callback_calls = 0;
     long long tailored_bc_lazy_rejections_total = 0;
     std::string tailored_bc_lazy_rejections_by_reason;
     long long tailored_bc_incumbents_seen = 0;

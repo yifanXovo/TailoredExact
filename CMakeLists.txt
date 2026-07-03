@@ -29,6 +29,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/TailoredBC.cpp
   src/TailoredBCCuts.cpp
   src/TailoredBCCallbacks.cpp
+  src/TailoredBCCplexApi.cpp
   src/GiniBranching.cpp
   src/hga_tgbc/HgaTgbcGreedy.cpp
   src/HgaTgbcRunner.cpp

@@ -1,5 +1,7 @@
 #include "TailoredBCCallbacks.hpp"
 
+#include "TailoredBCCplexApi.hpp"
+
 #include <cstdlib>
 #include <filesystem>
 #include <sstream>
@@ -30,16 +32,25 @@ TailoredBCCapability inspectTailoredBCCallbacks() {
         (msvc_tools != nullptr && *msvc_tools != '\0');
 
     cap.command_file_runner = true;
-    cap.callbacks_available = false;
+    TailoredBCCplexApiProbe api_probe = probeTailoredBCCplexApi();
+    cap.callbacks_available = api_probe.callbacks_available;
+    if (cap.callbacks_available) {
+        cap.fail_reason =
+            "none: cplex2211.dll loaded dynamically and generic callback symbols are available";
+        return cap;
+    }
     std::ostringstream why;
-    why << "callback_unavailable: current ExactEBRP CPLEX integration writes LP files "
-        << "and invokes cplex.exe command files; the executable is built with the "
-        << "repository MinGW/g++ path and is not linked against the CPLEX Concert/C API. "
+    why << "callback_unavailable: current ExactEBRP can still invoke command-file CPLEX, "
+        << "but the dynamic CPLEX callback API probe failed. "
         << "headers_found=" << (cap.concert_headers_found ? "true" : "false")
         << ", c_api_headers_found=" << (cap.cplex_c_api_headers_found ? "true" : "false")
         << ", msvc_env_available=" << (cap.msvc_toolchain_available ? "true" : "false")
-        << ". Rows using paper-gf-tailored-bc are therefore labelled static_fallback "
-        << "unless a future MSVC/CPLEX-linked callback target is added.";
+        << ", dll_path=" << api_probe.dll_path
+        << ", dll_found=" << (api_probe.dll_found ? "true" : "false")
+        << ", symbols_found=" << (api_probe.required_symbols_found ? "true" : "false")
+        << ", probe_reason=" << api_probe.fail_reason
+        << ". Rows using paper-gf-tailored-bc are labelled static_fallback only if "
+        << "this probe remains unavailable.";
     cap.fail_reason = why.str();
     return cap;
 }

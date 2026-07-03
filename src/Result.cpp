@@ -1581,6 +1581,14 @@ std::string resultToJson(const SolveResult& input) {
         << result.tailored_bc_user_cuts_added_total << ",\n";
     out << "  \"tailored_bc_user_cuts_added_by_family\": \""
         << jsonEscape(result.tailored_bc_user_cuts_added_by_family) << "\",\n";
+    out << "  \"tailored_bc_relaxation_callback_calls\": "
+        << result.tailored_bc_relaxation_callback_calls << ",\n";
+    out << "  \"tailored_bc_candidate_callback_calls\": "
+        << result.tailored_bc_candidate_callback_calls << ",\n";
+    out << "  \"tailored_bc_branch_callback_calls\": "
+        << result.tailored_bc_branch_callback_calls << ",\n";
+    out << "  \"tailored_bc_progress_callback_calls\": "
+        << result.tailored_bc_progress_callback_calls << ",\n";
     out << "  \"tailored_bc_lazy_rejections_total\": "
         << result.tailored_bc_lazy_rejections_total << ",\n";
     out << "  \"tailored_bc_lazy_rejections_by_reason\": \""

@@ -1,3 +1,3 @@
 policy,callback_available,status,reason
-callback_branching,False,blocked,"callback_unavailable: current ExactEBRP CPLEX integration writes LP files and invokes cplex.exe command files; the executable is built with the repository MinGW/g++ path and is not linked against the CPLEX Concert/C API. headers_found=true, c_api_headers_found=true, msvc_env_available=false. Rows using paper-gf-tailored-bc are therefore labelled static_fallback unless a future MSVC/CPLEX-linked callback target is added."
-branching_priorities,False,metadata_only_without_callback_api,requires in-process CPLEX API for actual priority injection
+callback_branching,True,callback_registered,none
+branching_priorities,True,metadata_only,priority injection not implemented in this increment

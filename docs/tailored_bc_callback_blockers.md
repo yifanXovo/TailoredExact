@@ -1,17 +1,20 @@
-# Tailored BC Callback Blockers
+# Tailored BC Callback Status and Remaining Blockers
 
-The blocker is architectural, not mathematical:
+The original architectural blocker was that the production path invoked `cplex.exe` through command files and did not link the CPLEX API. This has been partially removed by `src/TailoredBCCplexApi.cpp`, which dynamically loads `cplex2211.dll` and registers a generic CPLEX callback.
 
-1. The production path writes LP/script files and starts `cplex.exe` as a separate process.
-2. CPLEX callbacks require in-process solver API access.
-3. This workstation has CPLEX headers but only MSVC import libraries, while the repository build currently uses MinGW/g++.
+Implemented:
 
-To unblock true callbacks, one of these changes is required:
+- dynamic loading of `cplex2211.dll`;
+- in-process `CPXreadcopyprob` / `CPXmipopt`;
+- generic callback registration;
+- relaxation/candidate/branch/progress callback event counters;
+- one redundant paper-safe user cut from the relaxation callback.
 
-- add a supported MSVC build that links Concert or the CPLEX C API;
-- add a MinGW-compatible CPLEX import layer if available and supported;
-- create a separate callback-enabled helper executable with a stable JSON/LP exchange contract.
+Remaining blockers:
 
-Until then, the final callback-round status must remain:
-
-`FAILED GOAL: remained static CPLEX-backed compact MIP; not a true tailored branch-and-cut callback implementation.`
+- lazy incumbent rejection is not implemented;
+- independent incumbent verification inside the callback is not implemented;
+- custom Gini branch creation is not implemented;
+- branch priorities are metadata only;
+- hard-leaf callback separation is not performance-validated;
+- the callback user cut is currently a redundant interval cap used to prove callback plumbing safely.

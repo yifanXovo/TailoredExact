@@ -2474,20 +2474,22 @@ void finalizePaperModuleFields(ebrp::SolveResult& result) {
         result.certificate_uses_interval_oracle;
     if (result.algorithm_preset == "paper-gf-tailored-bc") {
         result.tailored_bc_enabled = true;
+        const ebrp::TailoredBCCapability cap =
+            ebrp::inspectTailoredBCCapability();
+        result.tailored_bc_callback_available = cap.callbacks_available;
         if (result.tailored_bc_mode.empty() || result.tailored_bc_mode == "off") {
-            result.tailored_bc_mode = "static_fallback";
+            result.tailored_bc_mode = cap.callbacks_available
+                ? "callback"
+                : "static_fallback";
         }
         if (result.tailored_bc_callback_fail_reason.empty()) {
-            result.tailored_bc_callback_fail_reason =
-                ebrp::inspectTailoredBCCapability().fail_reason;
+            result.tailored_bc_callback_fail_reason = cap.fail_reason;
         }
-        result.tailored_bc_callback_available = false;
-        result.tailored_bc_source_class =
-            result.status == "optimal"
-                ? (result.certificate_uses_interval_oracle
-                    ? "static_fallback"
-                    : "relaxation_only")
-                : "static_fallback";
+        if (result.status == "optimal" && !result.certificate_uses_interval_oracle) {
+            result.tailored_bc_source_class = "relaxation_only";
+        } else {
+            result.tailored_bc_source_class = ebrp::tailoredBCSourceClass(result);
+        }
     }
     result.certificate_uses_bpc_tree =
         optimal_frontier && result.intervals_closed_by_bpc_count > 0;
@@ -9340,6 +9342,7 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
         result.status = "diagnostic_failed";
         result.notes.push_back("unknown tailored BC diagnostic method: " + method);
     }
+    result.tailored_bc_source_class = "diagnostic";
 
     result.runtime_seconds = std::chrono::duration<double>(
         std::chrono::steady_clock::now() - start).count();

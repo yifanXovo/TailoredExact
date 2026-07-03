@@ -3,6 +3,7 @@
 #include "Evaluator.hpp"
 #include "Logger.hpp"
 #include "TailoredBC.hpp"
+#include "TailoredBCCplexApi.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -2584,52 +2585,109 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 static_cast<int>(strengthening_stats.penalty_domains_tightened);
         }
 
-        std::ofstream cmd(cmd_path);
-        cmd << "set threads " << std::max(1, effective_compact_threads) << "\n";
-        cmd << "set timelimit " << time_limit << "\n";
-        cmd << "set mip tolerances mipgap 0\n";
-        if (options.interval_oracle_profile == "infeasibility-focus") {
-            cmd << "set emphasis mip 1\n";
-        } else if (options.interval_oracle_profile == "bound-focus") {
-            cmd << "set emphasis mip 3\n";
-        } else if (options.interval_oracle_profile == "integrality-focus") {
-            cmd << "set emphasis mip 4\n";
+        std::string cplex_status = "unknown";
+        double cplex_obj = std::numeric_limits<double>::quiet_NaN();
+        double best_bound = std::numeric_limits<double>::quiet_NaN();
+        std::unordered_map<std::string, double> values;
+        int rc = 0;
+        bool used_callback_api = false;
+        TailoredBCCplexApiSolveResult api_solve;
+        if (result.tailored_bc_enabled &&
+            result.tailored_bc_callback_available &&
+            result.tailored_bc_mode == "callback") {
+            api_solve = solveLpWithTailoredBCCplexApi(
+                lp_path,
+                time_limit,
+                std::max(1, effective_compact_threads),
+                cutoff.gamma_U,
+                true);
+            used_callback_api = api_solve.available && api_solve.solved;
+            rc = api_solve.return_code;
+            if (used_callback_api) {
+                cplex_status = api_solve.status;
+                cplex_obj = api_solve.objective;
+                best_bound = api_solve.best_bound;
+                values = std::move(api_solve.values);
+                result.nodes = api_solve.node_count;
+                result.tailored_bc_relaxation_callback_calls =
+                    api_solve.relaxation_callback_calls;
+                result.tailored_bc_candidate_callback_calls =
+                    api_solve.candidate_callback_calls;
+                result.tailored_bc_branch_callback_calls =
+                    api_solve.branch_callback_calls;
+                result.tailored_bc_progress_callback_calls =
+                    api_solve.progress_callback_calls;
+                result.tailored_bc_user_cuts_added_total +=
+                    api_solve.user_cuts_added;
+                result.tailored_bc_lazy_rejections_total =
+                    api_solve.lazy_rejections;
+                result.tailored_bc_incumbents_seen =
+                    api_solve.incumbents_seen;
+                result.tailored_bc_incumbents_verified =
+                    api_solve.incumbents_verified;
+                result.tailored_bc_gini_branches_created =
+                    api_solve.gini_branches_created;
+                result.tailored_bc_user_cuts_added_by_family +=
+                    ";callback_gini_interval_cap=" +
+                    std::to_string(api_solve.user_cuts_added);
+                result.notes.push_back(
+                    "CPLEX dynamic callback API backend used for tailored BC; callback events relaxation="
+                    + std::to_string(api_solve.relaxation_callback_calls)
+                    + ", candidate=" + std::to_string(api_solve.candidate_callback_calls)
+                    + ", branch=" + std::to_string(api_solve.branch_callback_calls)
+                    + ", progress=" + std::to_string(api_solve.progress_callback_calls)
+                    + ", user_cuts=" + std::to_string(api_solve.user_cuts_added));
+            } else {
+                result.notes.push_back(
+                    "CPLEX dynamic callback API backend unavailable at solve time: "
+                    + api_solve.fail_reason + "; falling back to command-file CPLEX");
+            }
         }
-        cmd << "read " << lp_path.string() << "\n";
-        cmd << "optimize\n";
-        cmd << "write " << sol_path.string() << "\n";
-        cmd << "quit\n";
-        cmd.close();
+        if (!used_callback_api) {
+            std::ofstream cmd(cmd_path);
+            cmd << "set threads " << std::max(1, effective_compact_threads) << "\n";
+            cmd << "set timelimit " << time_limit << "\n";
+            cmd << "set mip tolerances mipgap 0\n";
+            if (options.interval_oracle_profile == "infeasibility-focus") {
+                cmd << "set emphasis mip 1\n";
+            } else if (options.interval_oracle_profile == "bound-focus") {
+                cmd << "set emphasis mip 3\n";
+            } else if (options.interval_oracle_profile == "integrality-focus") {
+                cmd << "set emphasis mip 4\n";
+            }
+            cmd << "read " << lp_path.string() << "\n";
+            cmd << "optimize\n";
+            cmd << "write " << sol_path.string() << "\n";
+            cmd << "quit\n";
+            cmd.close();
 
-        const std::string cplex = defaultCplexPath();
-        const std::string command = "cmd /C \"" + quote(cplex) + " -f "
-            + quote(cmd_path) + " > " + quote(cplex_log) + " 2>&1\"";
-        const int rc = std::system(command.c_str());
+            const std::string cplex = defaultCplexPath();
+            const std::string command = "cmd /C \"" + quote(cplex) + " -f "
+                + quote(cmd_path) + " > " + quote(cplex_log) + " 2>&1\"";
+            rc = std::system(command.c_str());
+            if (std::filesystem::exists(sol_path)) {
+                values = parseSolValues(sol_path, cplex_status, cplex_obj, best_bound);
+            } else {
+                cplex_status = parseCplexTerminalStatus(cplex_log);
+                if (cplex_status == "unknown") {
+                    cplex_status = (rc == 0) ? "no solution file" : "cplex process failed";
+                }
+            }
+            result.nodes = parseCplexNodes(cplex_log);
+        }
         result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
         result.actual_runtime_seconds = result.runtime_seconds;
         result.interval_exact_cutoff_runtime_seconds = result.runtime_seconds;
         result.compact_bc_time_seconds = result.runtime_seconds;
         result.compact_bc_total_solver_time = result.runtime_seconds;
-
-        std::string cplex_status = "unknown";
-        double cplex_obj = std::numeric_limits<double>::quiet_NaN();
-        double best_bound = std::numeric_limits<double>::quiet_NaN();
-        std::unordered_map<std::string, double> values;
-        if (std::filesystem::exists(sol_path)) {
-            values = parseSolValues(sol_path, cplex_status, cplex_obj, best_bound);
-        } else {
-            cplex_status = parseCplexTerminalStatus(cplex_log);
-            if (cplex_status == "unknown") {
-                cplex_status = (rc == 0) ? "no solution file" : "cplex process failed";
-            }
-        }
         result.interval_exact_cutoff_solver_status = cplex_status;
         result.compact_bc_solver_status = cplex_status;
-        result.nodes = parseCplexNodes(cplex_log);
         result.interval_exact_cutoff_nodes = result.nodes;
         result.compact_bc_nodes = result.nodes;
-        const double log_best_bound = parseCplexBestBound(cplex_log);
-        if (!std::isfinite(best_bound) && std::isfinite(log_best_bound)) best_bound = log_best_bound;
+        if (!used_callback_api) {
+            const double log_best_bound = parseCplexBestBound(cplex_log);
+            if (!std::isfinite(best_bound) && std::isfinite(log_best_bound)) best_bound = log_best_bound;
+        }
         result.interval_exact_cutoff_best_bound = std::isfinite(best_bound) ? best_bound : 0.0;
         result.interval_exact_cutoff_objective = std::isfinite(cplex_obj) ? cplex_obj : 0.0;
         result.interval_oracle_solver_best_bound = result.interval_exact_cutoff_best_bound;
