@@ -25,6 +25,12 @@ RESULTS = ROOT / "results" / "gf_tailored_bc_callback_round"
 RAW = RESULTS / "raw"
 SMOKE_INSTANCE = ROOT / "testdata" / "examples" / "gcap_smoke_V4_M1.txt"
 MODERATE_INSTANCE = ROOT / "reference" / "hard_stress" / "V20_M3" / "moderate_seed3301.txt"
+REGRESSION_TARGETS = [
+    ("regression_v12_m1_tailored_300s", ROOT / "reference" / "regen_candidate_V12_M1_average.txt", 300),
+    ("regression_v12_m2_tailored_300s", ROOT / "reference" / "regen_candidate_V12_M2_average.txt", 300),
+    ("regression_tight_T_seed3101_tailored_300s", ROOT / "reference" / "hard_stress" / "V20_M3" / "tight_T_seed3101.txt", 300),
+    ("regression_high_imbalance_seed3202_tailored_1200s", ROOT / "reference" / "hard_stress" / "V20_M3" / "high_imbalance_seed3202.txt", 1200),
+]
 HARD_DIAG_DIR = ROOT / "reference" / "hard_compact_bc_diagnostics"
 GENERATED_DIAGNOSTICS = [
     ("diag_V12_M1_low_gini_hard_seed7101", HARD_DIAG_DIR / "diag_V12_M1_low_gini_hard_seed7101.txt"),
@@ -283,6 +289,89 @@ def write_generated_timeout_json(
             "Generated hard-diagnostic full-row callback probe.",
             "The row is diagnostic-only and is excluded from paper certificate summaries.",
             "Wrapper timeout JSON preserves failure evidence instead of synthesizing an optimal claim.",
+        ],
+    }
+    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+
+def write_full_row_failure_json(
+    path: Path,
+    name: str,
+    instance_path: Path,
+    meta: Dict[str, Any],
+    *,
+    budget_seconds: int,
+    progress_path: Path | None = None,
+) -> None:
+    timed_out = bool(meta.get("timeout", False))
+    returncode = meta.get("returncode", "")
+    status = "wrapper_timeout_noncertified" if timed_out else "wrapper_process_error_noncertified"
+    data = {
+        "method": "gcap-frontier",
+        "algorithm_preset": "paper-gf-tailored-bc",
+        "input_path": str(instance_path),
+        "status": status,
+        "certificate": "wrapper did not receive solver final JSON; no optimal certificate claimed",
+        "certified_original_problem": False,
+        "verifier_passed": False,
+        "objective": 0.0,
+        "lower_bound": 0.0,
+        "upper_bound": 0.0,
+        "gap": 1.0,
+        "time_budget_seconds": budget_seconds,
+        "progress_log": str(progress_path) if progress_path is not None else "",
+        "tailored_bc_enabled": True,
+        "tailored_bc_mode": "callback",
+        "tailored_bc_callback_available": True,
+        "tailored_bc_user_cut_callback_enabled": True,
+        "tailored_bc_lazy_callback_enabled": True,
+        "tailored_bc_incumbent_callback_enabled": True,
+        "tailored_bc_branch_callback_enabled": True,
+        "tailored_bc_branch_priority_enabled": True,
+        "tailored_bc_gini_branch_mode": "auto",
+        "tailored_bc_node_separation_enabled": True,
+        "tailored_bc_root_separation_enabled": True,
+        "tailored_bc_user_cuts_added_total": 0,
+        "tailored_bc_user_cuts_added_by_family": "none",
+        "tailored_bc_relaxation_callback_calls": 0,
+        "tailored_bc_candidate_callback_calls": 0,
+        "tailored_bc_branch_callback_calls": 0,
+        "tailored_bc_progress_callback_calls": 0,
+        "tailored_bc_lazy_rejections_total": 0,
+        "tailored_bc_lazy_rejections_by_reason": "none",
+        "tailored_bc_incumbents_seen": 0,
+        "tailored_bc_incumbents_verified": 0,
+        "tailored_bc_incumbents_rejected": 0,
+        "tailored_bc_gini_branches_created": 0,
+        "tailored_bc_gini_selector_variables": 0,
+        "tailored_bc_callback_fail_reason": (
+            "wrapper_timeout_before_solver_final_json"
+            if timed_out else f"solver_process_returncode_{returncode}"
+        ),
+        "tailored_bc_source_class": "wrapper_checkpoint_only",
+        "thread_fairness_class": "one_thread_fair",
+        "solver_thread_policy": "controlled_single_thread",
+        "mip_threads": 1,
+        "compact_bc_solver_threads": 1,
+        "certificate_uses_bpc_tree": False,
+        "route_mask_all_subset_enumeration_certifying": False,
+        "plain_cplex_benchmark_used_as_certificate": False,
+        "no_archive_scanning": True,
+        "no_external_known_ub": True,
+        "diagnostic_row": False,
+        "finalization_source": "stale_checkpoint_rejected",
+        "best_valid_lb_seen": 0.0,
+        "best_valid_gap_seen": 1.0,
+        "interrupted_run_best_bound_preserved": False,
+        "final_json_uses_best_checkpoint": False,
+        "wrapper_timeout": timed_out,
+        "wrapper_returncode": returncode,
+        "wrapper_runtime_seconds": round(float(meta.get("runtime_seconds", 0.0)), 3),
+        "paper_certificate_contamination": False,
+        "notes": [
+            "parsed Hybrid GA text format; distances read from serialized matrix",
+            "This is an honest noncertified wrapper failure artifact.",
+            "Progress checkpoints, if any, are not promoted to optimal certificate evidence.",
         ],
     }
     path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
@@ -557,6 +646,41 @@ def main() -> int:
     ]
     smoke_meta = run_cmd(smoke_cmd, RESULTS / "logs" / "smoke_paper_gf_tailored_bc_20s.log", timeout=90)
     rows.append(result_row("smoke_paper_gf_tailored_bc_20s", smoke_out, smoke_meta))
+
+    for row_name, instance_path, budget_seconds in REGRESSION_TARGETS:
+        out = RAW / f"{row_name}.json"
+        progress = RESULTS / "progress_traces" / f"{row_name}.progress.csv"
+        cmd = [
+            str(EXE),
+            "--method", "gcap-frontier",
+            "--algorithm-preset", "paper-gf-tailored-bc",
+            "--paper-run-sealed", "true",
+            "--input", str(instance_path),
+            "--lambda", "0.15",
+            "--T", "3600",
+            "--time-limit", str(budget_seconds),
+            "--compact-bc-threads", "1",
+            "--mip-threads", "1",
+            "--compact-bc-root-cut-rounds", "1",
+            "--progress-log", str(progress),
+            "--progress-interval-seconds", "30",
+            "--out", str(out),
+        ]
+        meta = run_cmd(
+            cmd,
+            RESULTS / "logs" / f"{row_name}.log",
+            timeout=budget_seconds + 240,
+        )
+        if (meta.get("timeout") or int_value(meta.get("returncode")) != 0) and not out.exists():
+            write_full_row_failure_json(
+                out,
+                row_name,
+                instance_path,
+                meta,
+                budget_seconds=budget_seconds,
+                progress_path=progress,
+            )
+        rows.append(result_row(row_name, out, meta))
 
     interval_out = RAW / "interval_callback_smoke.json"
     interval_cmd = [
@@ -1421,13 +1545,16 @@ def main() -> int:
     ])
     write_csv(RESULTS / "source_classification.csv", rows + generated_child_rows)
     write_csv(RESULTS / "gf_tailored_bc_summary.csv", rows)
+    full_row_names = {"smoke_paper_gf_tailored_bc_20s"} | {
+        name for name, _, _ in REGRESSION_TARGETS
+    }
     write_csv(RESULTS / "full_row_confirmation_summary.csv", [
-        row for row in rows if row["row"] == "smoke_paper_gf_tailored_bc_20s"
+        row for row in rows if row["row"] in full_row_names
     ])
     write_csv(RESULTS / "certificate_source_summary_v3.csv", [
         {
             "row": row["row"],
-            "selected_for_summary": str(row["row"] == "smoke_paper_gf_tailored_bc_20s").lower(),
+            "selected_for_summary": str(row["row"] in full_row_names).lower(),
             "certified_original_problem": row.get("certified_original_problem", ""),
             "row_certificate_source_class": row.get("tailored_bc_source_class", ""),
             "compact_bc_called_this_row": str(row.get("tailored_bc_enabled", "")).lower(),
@@ -1444,7 +1571,9 @@ def main() -> int:
             }).lower(),
             "compact_bc_child_rows_found": 0,
             "compact_bc_child_rows_aggregated": 0,
-            "compact_bc_diagnostic_only": str(row["method"] != "gcap-frontier").lower(),
+            "compact_bc_diagnostic_only": str(
+                row["method"] != "gcap-frontier" or row.get("generated_diagnostic", False)
+            ).lower(),
             "paper_certificate_contamination": "false",
             "inconsistent_source_label_detected": "false",
         }
@@ -1545,6 +1674,7 @@ def main() -> int:
         "- `moderate_seed3301_low_gini1_callback_minimal_short3.json` is a diagnostic hard-leaf callback run with overlapping static diagnostic families disabled. It is included to preserve solver-final callback evidence on the moderate low-Gini leaf when the full-preset guarded row times out before producing callback counters.",
         "- `hard_leaf_tailored_bc.csv` and `hard_leaf_comparison.csv` now include short no-branch, callback-Gini-branch, and selector fallback diagnostics for the two known moderate low-Gini leaves, plus longer 60s/300s/1200s callback variants. These rows are diagnostic only; they test callback branch behavior and bound direction without changing paper certificate evidence.",
         "- `exact_vs_cplex_callback_round.csv` now compares the current 60s/300s/1200s moderate low-Gini callback rows against prior one-thread plain fixed-interval and static compact-BC baselines from `gf_compact_bc_lowgini_round`. The callback tailored rows improve low-Gini hard-leaf lower bounds over those baselines in several matched settings; the low-Gini-2 300s callback-Gini diagnostic closes that fixed interval by integer infeasibility.",
+        "- `full_row_confirmation_summary.csv` records one-thread `paper-gf-tailored-bc` preservation rows for V12 M1, V12 M2, `tight_T_seed3101`, and `high_imbalance_seed3202`, in addition to the smoke full-row. In this package `tight_T_seed3101` and `high_imbalance_seed3202` certify; the V12 rows are honest noncertified wrapper-failure artifacts because no solver final JSON was produced.",
         "- `generated_hard_diagnostic_summary.csv`, `generated_hard_leaf_callback_summary.csv`, and `generated_hard_instance_effectiveness.csv` now record guarded one-thread callback probes for the deterministic generated hard-diagnostic instances under `reference/hard_compact_bc_diagnostics/`. Parent full-row summaries aggregate child `auto_oracle/interval_*.json` callback evidence so generated hard-instance effectiveness is not undercounted. These rows are diagnostic only; wrapper timeouts are preserved as noncertificate JSON rather than being treated as failures to emit artifacts.",
         "- `source_classification.csv` preserves tailored source classes per JSON row.",
         "",
@@ -1572,7 +1702,7 @@ def main() -> int:
         "",
         "## Paper Claim",
         "",
-        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, low-Gini L1 centering, basic transfer-cutset, and pair/triple support-duration cover rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, diagnostic branch-context evidence with one-shot Gini branches in the toy branch smoke, and diagnostic hard-leaf evidence where moderate low-Gini intervals enter branch context and create Gini branches through `CPXcallbackmakebranch`. Branch-mode ablations now compare no-branch, callback-Gini-branch, and selector fallback behavior on the two known moderate low-Gini leaves, including longer 60s/300s/1200s diagnostic rows. The generated hard-diagnostic package now aggregates callback evidence from child fixed-interval `auto_oracle` solves. The low-Gini-2 callback-Gini row closes the fixed interval at 300s by integer infeasibility, and the low-Gini-1 callback-Gini rows now provide 60s/300s/1200s bound trajectory evidence against one-thread plain fixed-interval and static compact-BC baselines. This is hard-leaf callback evidence, but it is diagnostic-only and not a paper-core certificate. It is not yet the full requested tailored branch-and-cut: full-preset hard-leaf callback ablations, longer matched hard-leaf comparisons beyond this focused low-Gini increment, and broader hard-leaf closure evidence remain incomplete.",
+        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, low-Gini L1 centering, basic transfer-cutset, and pair/triple support-duration cover rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, diagnostic branch-context evidence with one-shot Gini branches in the toy branch smoke, and diagnostic hard-leaf evidence where moderate low-Gini intervals enter branch context and create Gini branches through `CPXcallbackmakebranch`. Branch-mode ablations now compare no-branch, callback-Gini-branch, and selector fallback behavior on the two known moderate low-Gini leaves, including longer 60s/300s/1200s diagnostic rows. The generated hard-diagnostic package now aggregates callback evidence from child fixed-interval `auto_oracle` solves. The low-Gini-2 callback-Gini row closes the fixed interval at 300s by integer infeasibility, and the low-Gini-1 callback-Gini rows now provide 60s/300s/1200s bound trajectory evidence against one-thread plain fixed-interval and static compact-BC baselines. The V20 control rows `tight_T_seed3101` and `high_imbalance_seed3202` certify under one-thread `paper-gf-tailored-bc`, but the V12 M1/M2 full-row preservation attempts did not emit solver final JSON and are reported as noncertified wrapper failures rather than synthesized certificates. This is hard-leaf callback evidence, but it is diagnostic-only and not a paper-core certificate. It is not yet the full requested tailored branch-and-cut: V12 finalization stability, full-preset hard-leaf callback ablations, longer matched hard-leaf comparisons beyond this focused low-Gini increment, and broader hard-leaf closure evidence remain incomplete.",
         "",
         "Final commit SHA: recorded in the final assistant response after commit creation.",
     ])
