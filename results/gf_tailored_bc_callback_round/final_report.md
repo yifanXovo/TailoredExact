@@ -21,6 +21,7 @@ The executable loads `cplex2211.dll` dynamically, registers a generic CPLEX call
 - `moderate_seed3301_low_gini1_callback_minimal_short3.json` is a diagnostic hard-leaf callback run with overlapping static diagnostic families disabled. It is included to preserve solver-final callback evidence on the moderate low-Gini leaf when the full-preset guarded row times out before producing callback counters.
 - `hard_leaf_tailored_bc.csv` and `hard_leaf_comparison.csv` now include short no-branch, callback-Gini-branch, and selector fallback diagnostics for the two known moderate low-Gini leaves, plus matched 60s low-Gini-2 callback variants. These rows are diagnostic only; they test callback branch behavior and bound direction without changing paper certificate evidence.
 - `exact_vs_cplex_callback_round.csv` now compares the current 60s low-Gini-2 callback rows against prior one-thread plain fixed-interval and static compact-BC baselines from `gf_compact_bc_lowgini_round`. The callback tailored rows improve the 60s low-Gini-2 lower bound over those baselines but still do not close the leaf.
+- `generated_hard_diagnostic_summary.csv` and `generated_hard_instance_effectiveness.csv` now record guarded one-thread callback probes for the deterministic generated hard-diagnostic instances under `reference/hard_compact_bc_diagnostics/`. These rows are diagnostic only; wrapper timeouts are preserved as noncertificate JSON rather than being treated as failures to emit artifacts.
 - `source_classification.csv` preserves tailored source classes per JSON row.
 
 ## Audit

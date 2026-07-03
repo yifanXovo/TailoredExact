@@ -12,6 +12,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import time
@@ -24,6 +25,14 @@ RESULTS = ROOT / "results" / "gf_tailored_bc_callback_round"
 RAW = RESULTS / "raw"
 SMOKE_INSTANCE = ROOT / "testdata" / "examples" / "gcap_smoke_V4_M1.txt"
 MODERATE_INSTANCE = ROOT / "reference" / "hard_stress" / "V20_M3" / "moderate_seed3301.txt"
+HARD_DIAG_DIR = ROOT / "reference" / "hard_compact_bc_diagnostics"
+GENERATED_DIAGNOSTICS = [
+    ("diag_V12_M1_low_gini_hard_seed7101", HARD_DIAG_DIR / "diag_V12_M1_low_gini_hard_seed7101.txt"),
+    ("diag_V12_M2_tight_cutoff_hard_seed7102", HARD_DIAG_DIR / "diag_V12_M2_tight_cutoff_hard_seed7102.txt"),
+    ("diag_V16_M2_balanced_fractional_seed7103", HARD_DIAG_DIR / "diag_V16_M2_balanced_fractional_seed7103.txt"),
+    ("diag_V20_M2_high_transfer_seed7104", HARD_DIAG_DIR / "diag_V20_M2_high_transfer_seed7104.txt"),
+    ("diag_V20_M3_dense_duration_seed7105", HARD_DIAG_DIR / "diag_V20_M3_dense_duration_seed7105.txt"),
+]
 EXE = ROOT / "build" / "ExactEBRP.exe"
 
 
@@ -33,15 +42,37 @@ def run_cmd(args: List[str], log_path: Path, timeout: int = 120) -> Dict[str, An
     with log_path.open("w", encoding="utf-8") as log:
         log.write("COMMAND: " + " ".join(args) + "\n\n")
         try:
-            proc = subprocess.run(
+            creationflags = 0
+            if os.name == "nt":
+                creationflags = getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)
+            proc = subprocess.Popen(
                 args,
                 cwd=ROOT,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 text=True,
-                timeout=timeout,
+                creationflags=creationflags,
             )
-            log.write(proc.stdout)
+            try:
+                stdout, _ = proc.communicate(timeout=timeout)
+            except subprocess.TimeoutExpired:
+                if os.name == "nt":
+                    subprocess.run(
+                        ["taskkill", "/F", "/T", "/PID", str(proc.pid)],
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                    )
+                else:
+                    proc.kill()
+                stdout, _ = proc.communicate()
+                log.write(stdout or "")
+                log.write("\nTIMEOUT\n")
+                return {
+                    "returncode": 124,
+                    "runtime_seconds": time.time() - start,
+                    "timeout": True,
+                }
+            log.write(stdout or "")
             return {
                 "returncode": proc.returncode,
                 "runtime_seconds": time.time() - start,
@@ -161,6 +192,74 @@ def write_diagnostic_timeout_json(
             "parsed Hybrid GA text format; distances read from serialized matrix",
             "Diagnostic hard-leaf callback run exceeded the wrapper timeout before solver final JSON was produced.",
             "This row is not certificate evidence and is excluded from paper summaries.",
+        ],
+    }
+    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+
+def write_generated_timeout_json(
+    path: Path,
+    name: str,
+    instance_path: Path,
+    meta: Dict[str, Any],
+) -> None:
+    data = {
+        "method": "gcap-frontier",
+        "algorithm_preset": "paper-gf-tailored-bc",
+        "input_path": str(instance_path),
+        "status": "diagnostic_timeout",
+        "certificate": "diagnostic generated hard-instance row exceeded wrapper timeout before solver final JSON",
+        "certified_original_problem": False,
+        "objective": 0.0,
+        "lower_bound": 0.0,
+        "upper_bound": 0.0,
+        "gap": 1.0,
+        "tailored_bc_enabled": True,
+        "tailored_bc_mode": "callback",
+        "tailored_bc_callback_available": True,
+        "tailored_bc_user_cut_callback_enabled": True,
+        "tailored_bc_lazy_callback_enabled": True,
+        "tailored_bc_incumbent_callback_enabled": True,
+        "tailored_bc_branch_callback_enabled": True,
+        "tailored_bc_branch_priority_enabled": True,
+        "tailored_bc_gini_branch_mode": "auto",
+        "tailored_bc_node_separation_enabled": True,
+        "tailored_bc_root_separation_enabled": True,
+        "tailored_bc_user_cuts_added_total": 0,
+        "tailored_bc_user_cuts_added_by_family": "none",
+        "tailored_bc_relaxation_callback_calls": 0,
+        "tailored_bc_candidate_callback_calls": 0,
+        "tailored_bc_branch_callback_calls": 0,
+        "tailored_bc_progress_callback_calls": 0,
+        "tailored_bc_lazy_rejections_total": 0,
+        "tailored_bc_lazy_rejections_by_reason": "none",
+        "tailored_bc_incumbents_seen": 0,
+        "tailored_bc_incumbents_verified": 0,
+        "tailored_bc_incumbents_rejected": 0,
+        "tailored_bc_branching_priorities_summary": "diagnostic_timeout_before_solver_final_json",
+        "tailored_bc_gini_branches_created": 0,
+        "tailored_bc_gini_selector_variables": 0,
+        "tailored_bc_callback_fail_reason": "diagnostic_outer_timeout",
+        "tailored_bc_source_class": "diagnostic",
+        "thread_fairness_class": "one_thread_fair",
+        "solver_thread_policy": "controlled_single_thread",
+        "mip_threads": 1,
+        "compact_bc_solver_threads": 1,
+        "no_archive_scanning": True,
+        "no_external_known_ub": True,
+        "certificate_uses_bpc_tree": False,
+        "certificate_uses_interval_oracle": False,
+        "plain_cplex_benchmark_used_as_certificate": False,
+        "diagnostic_row": True,
+        "diagnostic_name": name,
+        "finalization_source": "wrapper_error_json",
+        "wrapper_timeout": bool(meta.get("timeout", False)),
+        "wrapper_runtime_seconds": round(float(meta.get("runtime_seconds", 0.0)), 3),
+        "paper_certificate_contamination": False,
+        "notes": [
+            "Generated hard-diagnostic full-row callback probe.",
+            "The row is diagnostic-only and is excluded from paper certificate summaries.",
+            "Wrapper timeout JSON preserves failure evidence instead of synthesizing an optimal claim.",
         ],
     }
     path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
@@ -557,6 +656,65 @@ def main() -> int:
                 time_limit=60,
             )
 
+    generated_rows: List[Dict[str, Any]] = []
+    for diag_name, diag_path in GENERATED_DIAGNOSTICS:
+        if not diag_path.exists():
+            generated_rows.append({
+                "row": diag_name,
+                "instance": str(diag_path.relative_to(ROOT)),
+                "status": "missing_instance",
+                "diagnostic_only": True,
+            })
+            continue
+        out = RAW / f"generated_{diag_name}_tailored_20s.json"
+        progress = RESULTS / "progress_traces" / f"generated_{diag_name}_tailored_20s.progress.csv"
+        cmd = [
+            str(EXE),
+            "--method", "gcap-frontier",
+            "--algorithm-preset", "paper-gf-tailored-bc",
+            "--paper-run-sealed", "true",
+            "--input", str(diag_path),
+            "--lambda", "0.15",
+            "--T", "3600",
+            "--time-limit", "20",
+            "--compact-bc-threads", "1",
+            "--mip-threads", "1",
+            "--compact-bc-root-cut-rounds", "1",
+            "--auto-interval-oracle-time-limit", "2",
+            "--auto-interval-oracle-total-budget", "8",
+            "--auto-interval-oracle-child-time-limit", "2",
+            "--auto-interval-oracle-max-leaves", "1",
+            "--progress-log", str(progress),
+            "--progress-interval-seconds", "5",
+            "--out", str(out),
+        ]
+        meta = run_cmd(
+            cmd,
+            RESULTS / "logs" / f"generated_{diag_name}_tailored_20s.log",
+            timeout=75,
+        )
+        if meta.get("timeout") or not out.exists():
+            write_generated_timeout_json(
+                out,
+                f"generated_{diag_name}_tailored_20s",
+                diag_path,
+                meta,
+            )
+        else:
+            annotate_diagnostic_json(
+                out,
+                f"generated_{diag_name}_tailored_20s",
+                [
+                    "Generated hard-diagnostic full-row callback probe.",
+                    "This row is diagnostic only and is excluded from paper certificate summaries.",
+                ],
+            )
+        row = result_row(f"generated_{diag_name}_tailored_20s", out, meta)
+        row["generated_diagnostic"] = True
+        row["instance"] = str(diag_path.relative_to(ROOT))
+        rows.append(row)
+        generated_rows.append(row)
+
     callback_available = any(
         str(row.get("tailored_bc_callback_available", "")).lower() == "true"
         for row in rows
@@ -595,7 +753,7 @@ def main() -> int:
             "tailored_callback_status": "unavailable" if not callback_available else "available",
             "static_root_cut_status": "implemented_diagnostic_only",
             "conclusion": "not_true_callback_bc" if not callback_available else "dynamic_c_api_callback_path_available",
-            "callback_cut_families": "gini_interval_cap,visit_inventory_linking,gini_subset_envelope",
+            "callback_cut_families": "gini_interval_cap,visit_inventory_linking,gini_subset_envelope,low_gini_l1_centering,transfer_cutset,support_duration_pair,support_duration_triple",
         }
     ])
     branch_smoke_row = rows_by_method.get("tailored-bc-branch-callback-smoke-test", {})
@@ -828,6 +986,47 @@ def main() -> int:
         }
         for row in hard_leaf_rows
     ])
+    write_csv(RESULTS / "generated_hard_diagnostic_summary.csv", [
+        {
+            "row": row.get("row", ""),
+            "instance": row.get("instance", ""),
+            "status": row.get("status", ""),
+            "certified_original_problem": row.get("certified_original_problem", ""),
+            "lower_bound": row.get("lower_bound", ""),
+            "upper_bound": row.get("upper_bound", ""),
+            "gap": row.get("gap", ""),
+            "runtime_seconds": row.get("runtime_seconds", ""),
+            "timeout": row.get("timeout", ""),
+            "tailored_bc_callback_available": row.get("tailored_bc_callback_available", ""),
+            "tailored_bc_relaxation_callback_calls": row.get("tailored_bc_relaxation_callback_calls", ""),
+            "tailored_bc_branch_callback_calls": row.get("tailored_bc_branch_callback_calls", ""),
+            "tailored_bc_user_cuts_added_total": row.get("tailored_bc_user_cuts_added_total", ""),
+            "compact_bc_solver_status": row.get("compact_bc_solver_status", ""),
+            "compact_bc_best_bound": row.get("compact_bc_best_bound", ""),
+            "compact_bc_nodes": row.get("compact_bc_nodes", ""),
+            "diagnostic_only": True,
+            "paper_certificate_contamination": False,
+            "json": row.get("json", ""),
+        }
+        for row in generated_rows
+    ])
+    write_csv(RESULTS / "generated_hard_instance_effectiveness.csv", [
+        {
+            "row": row.get("row", ""),
+            "instance": row.get("instance", ""),
+            "effectiveness_status": (
+                "callback_evidence_recorded"
+                if int(row.get("tailored_bc_relaxation_callback_calls") or 0) > 0
+                else ("guarded_timeout_no_solver_final_json" if row.get("timeout", False)
+                      else "solver_final_without_callback_events")
+            ),
+            "bound": row.get("lower_bound", ""),
+            "gap": row.get("gap", ""),
+            "diagnostic_only": True,
+            "json": row.get("json", ""),
+        }
+        for row in generated_rows
+    ])
     comparison_rows: List[Dict[str, Any]] = []
     lowgini_baseline = ROOT / "results" / "gf_compact_bc_lowgini_round" / "interval_level_cplex_comparison.csv"
     if lowgini_baseline.exists():
@@ -1009,7 +1208,7 @@ def main() -> int:
         }
         for row in rows
     ])
-    write_csv(RESULTS / "instance_hash_manifest.csv", [
+    manifest_rows = [
         {
             "instance": str(SMOKE_INSTANCE.relative_to(ROOT)),
             "sha256": sha256(SMOKE_INSTANCE),
@@ -1021,7 +1220,13 @@ def main() -> int:
             "instance": str(MODERATE_INSTANCE.relative_to(ROOT)),
             "sha256": "missing",
         },
-    ])
+    ]
+    for _, diag_path in GENERATED_DIAGNOSTICS:
+        manifest_rows.append({
+            "instance": str(diag_path.relative_to(ROOT)),
+            "sha256": sha256(diag_path) if diag_path.exists() else "missing",
+        })
+    write_csv(RESULTS / "instance_hash_manifest.csv", manifest_rows)
     write_csv(RESULTS / "s_bucket_coverage_audit.csv", [
         {
             "s_bucket_refinement_enabled": False,
@@ -1098,6 +1303,7 @@ def main() -> int:
         "- `moderate_seed3301_low_gini1_callback_minimal_short3.json` is a diagnostic hard-leaf callback run with overlapping static diagnostic families disabled. It is included to preserve solver-final callback evidence on the moderate low-Gini leaf when the full-preset guarded row times out before producing callback counters.",
         "- `hard_leaf_tailored_bc.csv` and `hard_leaf_comparison.csv` now include short no-branch, callback-Gini-branch, and selector fallback diagnostics for the two known moderate low-Gini leaves, plus matched 60s low-Gini-2 callback variants. These rows are diagnostic only; they test callback branch behavior and bound direction without changing paper certificate evidence.",
         "- `exact_vs_cplex_callback_round.csv` now compares the current 60s low-Gini-2 callback rows against prior one-thread plain fixed-interval and static compact-BC baselines from `gf_compact_bc_lowgini_round`. The callback tailored rows improve the 60s low-Gini-2 lower bound over those baselines but still do not close the leaf.",
+        "- `generated_hard_diagnostic_summary.csv` and `generated_hard_instance_effectiveness.csv` now record guarded one-thread callback probes for the deterministic generated hard-diagnostic instances under `reference/hard_compact_bc_diagnostics/`. These rows are diagnostic only; wrapper timeouts are preserved as noncertificate JSON rather than being treated as failures to emit artifacts.",
         "- `source_classification.csv` preserves tailored source classes per JSON row.",
         "",
         "## Audit",
