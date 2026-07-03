@@ -1555,6 +1555,102 @@ std::string resultToJson(const SolveResult& input) {
         << (result.certificate_uses_compact_interval_bc ? "true" : "false") << ",\n";
     out << "  \"compact_bc_certificate_valid\": "
         << (result.compact_bc_certificate_valid ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_enabled\": "
+        << (result.tailored_bc_enabled ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_mode\": \""
+        << jsonEscape(result.tailored_bc_mode) << "\",\n";
+    out << "  \"tailored_bc_callback_available\": "
+        << (result.tailored_bc_callback_available ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_user_cut_callback_enabled\": "
+        << (result.tailored_bc_user_cut_callback_enabled ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_lazy_callback_enabled\": "
+        << (result.tailored_bc_lazy_callback_enabled ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_incumbent_callback_enabled\": "
+        << (result.tailored_bc_incumbent_callback_enabled ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_branch_callback_enabled\": "
+        << (result.tailored_bc_branch_callback_enabled ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_branch_priority_enabled\": "
+        << (result.tailored_bc_branch_priority_enabled ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_gini_branch_mode\": \""
+        << jsonEscape(result.tailored_bc_gini_branch_mode) << "\",\n";
+    out << "  \"tailored_bc_node_separation_enabled\": "
+        << (result.tailored_bc_node_separation_enabled ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_root_separation_enabled\": "
+        << (result.tailored_bc_root_separation_enabled ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_user_cuts_added_total\": "
+        << result.tailored_bc_user_cuts_added_total << ",\n";
+    out << "  \"tailored_bc_user_cuts_added_by_family\": \""
+        << jsonEscape(result.tailored_bc_user_cuts_added_by_family) << "\",\n";
+    out << "  \"tailored_bc_relaxation_callback_calls\": "
+        << result.tailored_bc_relaxation_callback_calls << ",\n";
+    out << "  \"tailored_bc_candidate_callback_calls\": "
+        << result.tailored_bc_candidate_callback_calls << ",\n";
+    out << "  \"tailored_bc_branch_callback_calls\": "
+        << result.tailored_bc_branch_callback_calls << ",\n";
+    out << "  \"tailored_bc_progress_callback_calls\": "
+        << result.tailored_bc_progress_callback_calls << ",\n";
+    out << "  \"tailored_bc_lazy_rejections_total\": "
+        << result.tailored_bc_lazy_rejections_total << ",\n";
+    out << "  \"tailored_bc_lazy_rejections_by_reason\": \""
+        << jsonEscape(result.tailored_bc_lazy_rejections_by_reason) << "\",\n";
+    out << "  \"tailored_bc_incumbents_seen\": "
+        << result.tailored_bc_incumbents_seen << ",\n";
+    out << "  \"tailored_bc_incumbents_verified\": "
+        << result.tailored_bc_incumbents_verified << ",\n";
+    out << "  \"tailored_bc_incumbents_rejected\": "
+        << result.tailored_bc_incumbents_rejected << ",\n";
+    out << "  \"tailored_bc_candidate_projection_checks\": "
+        << result.tailored_bc_candidate_projection_checks << ",\n";
+    out << "  \"tailored_bc_candidate_projection_verified\": "
+        << result.tailored_bc_candidate_projection_verified << ",\n";
+    out << "  \"tailored_bc_candidate_projection_rejections\": "
+        << result.tailored_bc_candidate_projection_rejections << ",\n";
+    out << "  \"tailored_bc_candidate_projection_unsupported_mismatches\": "
+        << result.tailored_bc_candidate_projection_unsupported_mismatches << ",\n";
+    out << "  \"tailored_bc_candidate_projection_rejection_reasons\": \""
+        << jsonEscape(result.tailored_bc_candidate_projection_rejection_reasons) << "\",\n";
+    out << "  \"tailored_bc_candidate_projection_max_gini_underestimate\": "
+        << result.tailored_bc_candidate_projection_max_gini_underestimate << ",\n";
+    out << "  \"tailored_bc_candidate_projection_max_objective_underestimate\": "
+        << result.tailored_bc_candidate_projection_max_objective_underestimate << ",\n";
+    out << "  \"tailored_bc_candidate_route_projection_checks\": "
+        << result.tailored_bc_candidate_route_projection_checks << ",\n";
+    out << "  \"tailored_bc_candidate_route_projection_verified\": "
+        << result.tailored_bc_candidate_route_projection_verified << ",\n";
+    out << "  \"tailored_bc_candidate_route_projection_rejections\": "
+        << result.tailored_bc_candidate_route_projection_rejections << ",\n";
+    out << "  \"tailored_bc_candidate_route_projection_unsupported_mismatches\": "
+        << result.tailored_bc_candidate_route_projection_unsupported_mismatches << ",\n";
+    out << "  \"tailored_bc_candidate_route_projection_rejection_reasons\": \""
+        << jsonEscape(result.tailored_bc_candidate_route_projection_rejection_reasons) << "\",\n";
+    out << "  \"tailored_bc_branching_priorities_summary\": \""
+        << jsonEscape(result.tailored_bc_branching_priorities_summary) << "\",\n";
+    out << "  \"tailored_bc_gini_branches_created\": "
+        << result.tailored_bc_gini_branches_created << ",\n";
+    out << "  \"tailored_bc_gini_selector_variables\": "
+        << result.tailored_bc_gini_selector_variables << ",\n";
+    out << "  \"tailored_bc_callback_fail_reason\": \""
+        << jsonEscape(result.tailored_bc_callback_fail_reason) << "\",\n";
+    out << "  \"tailored_bc_source_class\": \""
+        << jsonEscape(result.tailored_bc_source_class) << "\",\n";
+    out << "  \"tailored_bc_gini_subset_envelope_candidates\": "
+        << result.tailored_bc_gini_subset_envelope_candidates << ",\n";
+    out << "  \"tailored_bc_gini_subset_envelope_violations\": "
+        << result.tailored_bc_gini_subset_envelope_violations << ",\n";
+    out << "  \"tailored_bc_gini_subset_envelope_cuts_added\": "
+        << result.tailored_bc_gini_subset_envelope_cuts_added << ",\n";
+    out << "  \"tailored_bc_max_gini_subset_violation\": "
+        << result.tailored_bc_max_gini_subset_violation << ",\n";
+    out << "  \"tailored_bc_low_gini_l1_centering_vars\": "
+        << result.tailored_bc_low_gini_l1_centering_vars << ",\n";
+    out << "  \"tailored_bc_low_gini_l1_centering_rows_added\": "
+        << result.tailored_bc_low_gini_l1_centering_rows_added << ",\n";
+    out << "  \"tailored_bc_low_gini_l1_centering_violations\": "
+        << result.tailored_bc_low_gini_l1_centering_violations << ",\n";
+    out << "  \"tailored_bc_subset_inventory_imbalance_cuts_added\": "
+        << result.tailored_bc_subset_inventory_imbalance_cuts_added << ",\n";
+    out << "  \"tailored_bc_transfer_cutset_cuts_added\": "
+        << result.tailored_bc_transfer_cutset_cuts_added << ",\n";
     out << "  \"gini_spread_cuts_added\": "
         << result.gini_spread_cuts_added << ",\n";
     out << "  \"compact_bc_direct_gini_cap_rows_added\": "

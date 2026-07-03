@@ -2,6 +2,8 @@
 
 #include "Evaluator.hpp"
 #include "Logger.hpp"
+#include "TailoredBC.hpp"
+#include "TailoredBCCplexApi.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -62,6 +64,12 @@ struct CompactOracleStrengtheningStats {
     long long s_range_rows_added = 0;
     long long sp_product_mccormick_rows_added = 0;
     long long sp_product_estimator_rows_added = 0;
+    long long tailored_gini_subset_envelope_candidates = 0;
+    long long tailored_gini_subset_envelope_cuts_added = 0;
+    long long tailored_low_gini_l1_vars = 0;
+    long long tailored_low_gini_l1_rows_added = 0;
+    long long tailored_subset_inventory_imbalance_cuts_added = 0;
+    long long tailored_transfer_cutset_cuts_added = 0;
     bool s_range_refinement_enabled = false;
     double s_range_global_L = 0.0;
     double s_range_global_U = 0.0;
@@ -437,6 +445,7 @@ void writeCompactLp(const Instance& instance,
     const double g_ub = (cutoff != nullptr && cutoff->enabled)
         ? std::min(1.0, std::max(cutoff->gamma_L, cutoff->gamma_U))
         : 1.0;
+    const bool tailored_active = strengthened && options.tailored_bc_enabled;
     vars.add("G", g_lb, g_ub, "C");
     double max_ratio_cap = 0.0;
     for (int i = 1; i <= V; ++i) {
@@ -455,6 +464,13 @@ void writeCompactLp(const Instance& instance,
         vars.add(yName(i), y_lb[i], y_ub[i], "I");
         vars.add(rName(i), 0, static_cast<double>(instance.capacity[i]) / instance.target[i], "C");
         vars.add(eName(i), 0, std::max(1.0, static_cast<double>(instance.capacity[i]) / instance.target[i] - 1.0), "C");
+        if (tailored_active && options.tailored_bc_low_gini_l1_centering &&
+            cutoff != nullptr && cutoff->enabled && cutoff->gamma_U >= -1e-12) {
+            vars.add("q_l1_" + std::to_string(i), 0,
+                     static_cast<double>(instance.capacity[i]) / instance.target[i] + max_ratio_cap,
+                     "C");
+            if (stats != nullptr) ++stats->tailored_low_gini_l1_vars;
+        }
         vars.add(zprodName(i), 0, instance.capacity[i], "C");
         int bits = 1;
         while (((1LL << bits) - 1) < instance.capacity[i]) ++bits;
@@ -938,6 +954,142 @@ void writeCompactLp(const Instance& instance,
         }
         writeConstraint(out, cid, floor, ">=", 0);
         if (stats != nullptr) ++stats->direct_gini_floor_rows_added;
+    }
+    if (tailored_active && cutoff != nullptr && cutoff->enabled &&
+        options.tailored_bc_gini_subset_envelope && cutoff->gamma_U >= -1e-12) {
+        if (stats != nullptr) stats->enabled_families.push_back("gini_subset_envelope");
+        const int max_size = std::min({3, V - 1, std::max(1, options.tailored_bc_gini_subset_max_size)});
+        const long long max_cuts = std::max(0, options.tailored_bc_gini_subset_max_cuts);
+        long long cuts = 0;
+        auto addSubsetEnvelope = [&](const std::vector<int>& subset) {
+            if (max_cuts > 0 && cuts + 2 > max_cuts) return;
+            const int a = static_cast<int>(subset.size());
+            Expr plus;
+            Expr minus;
+            for (int i = 1; i <= V; ++i) {
+                addTerm(plus, rName(i), -static_cast<double>(a) -
+                        static_cast<double>(V) * cutoff->gamma_U);
+                addTerm(minus, rName(i), static_cast<double>(a) -
+                        static_cast<double>(V) * cutoff->gamma_U);
+            }
+            for (int i : subset) {
+                addTerm(plus, rName(i), static_cast<double>(V));
+                addTerm(minus, rName(i), -static_cast<double>(V));
+            }
+            writeConstraint(out, cid, plus, "<=", 0.0);
+            writeConstraint(out, cid, minus, "<=", 0.0);
+            cuts += 2;
+            if (stats != nullptr) {
+                ++stats->tailored_gini_subset_envelope_candidates;
+                stats->tailored_gini_subset_envelope_cuts_added += 2;
+            }
+        };
+        if (max_size >= 1) {
+            for (int a = 1; a <= V; ++a) addSubsetEnvelope({a});
+        }
+        if (max_size >= 2) {
+            for (int a = 1; a <= V; ++a) {
+                for (int b = a + 1; b <= V; ++b) addSubsetEnvelope({a, b});
+            }
+        }
+        if (max_size >= 3) {
+            for (int a = 1; a <= V; ++a) {
+                for (int b = a + 1; b <= V; ++b) {
+                    for (int c = b + 1; c <= V; ++c) addSubsetEnvelope({a, b, c});
+                }
+            }
+        }
+    }
+    if (tailored_active && cutoff != nullptr && cutoff->enabled &&
+        options.tailored_bc_low_gini_l1_centering && cutoff->gamma_U >= -1e-12) {
+        if (stats != nullptr) stats->enabled_families.push_back("low_gini_l1_centering");
+        Expr sum_q;
+        for (int i = 1; i <= V; ++i) {
+            const std::string q = "q_l1_" + std::to_string(i);
+            addTerm(sum_q, q, 1.0);
+            Expr pos;
+            addTerm(pos, q, static_cast<double>(V));
+            addTerm(pos, rName(i), -static_cast<double>(V));
+            for (int j = 1; j <= V; ++j) addTerm(pos, rName(j), 1.0);
+            writeConstraint(out, cid, pos, ">=", 0.0);
+            Expr neg;
+            addTerm(neg, q, static_cast<double>(V));
+            addTerm(neg, rName(i), static_cast<double>(V));
+            for (int j = 1; j <= V; ++j) addTerm(neg, rName(j), -1.0);
+            writeConstraint(out, cid, neg, ">=", 0.0);
+            if (stats != nullptr) stats->tailored_low_gini_l1_rows_added += 2;
+        }
+        for (int i = 1; i <= V; ++i) {
+            addTerm(sum_q, rName(i), -2.0 * cutoff->gamma_U);
+        }
+        writeConstraint(out, cid, sum_q, "<=", 0.0);
+        if (stats != nullptr) ++stats->tailored_low_gini_l1_rows_added;
+    }
+    if (tailored_active && options.tailored_bc_subset_inventory_imbalance) {
+        if (stats != nullptr) stats->enabled_families.push_back("subset_inventory_imbalance");
+        const int max_size = std::min({3, V, std::max(1, options.tailored_bc_subset_inventory_max_size)});
+        auto addSubsetInventory = [&](const std::vector<int>& subset) {
+            int initial_sum = 0;
+            int room_sum = 0;
+            int bikes_sum = 0;
+            Expr ysum;
+            for (int i : subset) {
+                initial_sum += instance.initial[i];
+                room_sum += instance.capacity[i] - instance.initial[i];
+                bikes_sum += instance.initial[i];
+                addTerm(ysum, yName(i), 1.0);
+            }
+            double plus = 0.0;
+            double minus = 0.0;
+            for (int k = 0; k < M; ++k) {
+                const int move_budget = cunit > 1e-12
+                    ? static_cast<int>(std::floor(instance.total_time_limit / cunit + 1e-9))
+                    : instance.Q[k];
+                plus += std::min({instance.Q[k], room_sum, move_budget});
+                minus += std::min({instance.Q[k], bikes_sum, move_budget});
+            }
+            writeConstraint(out, cid, ysum, "<=", initial_sum + plus);
+            Expr ysum_lb = ysum;
+            writeConstraint(out, cid, ysum_lb, ">=", initial_sum - minus);
+            if (stats != nullptr) stats->tailored_subset_inventory_imbalance_cuts_added += 2;
+        };
+        if (max_size >= 1) {
+            for (int a = 1; a <= V; ++a) addSubsetInventory({a});
+        }
+        if (max_size >= 2) {
+            for (int a = 1; a <= V; ++a) {
+                for (int b = a + 1; b <= V; ++b) addSubsetInventory({a, b});
+            }
+        }
+        if (max_size >= 3) {
+            for (int a = 1; a <= V; ++a) {
+                for (int b = a + 1; b <= V; ++b) {
+                    for (int c = b + 1; c <= V; ++c) addSubsetInventory({a, b, c});
+                }
+            }
+        }
+    }
+    if (tailored_active && options.tailored_bc_transfer_cutset) {
+        if (stats != nullptr) stats->enabled_families.push_back("vehicle_transfer_cutset_basic");
+        auto addTransferCutset = [&](const std::vector<int>& subset) {
+            std::set<int> in_subset(subset.begin(), subset.end());
+            for (int k = 0; k < M; ++k) {
+                Expr cut;
+                for (int j : subset) {
+                    addTerm(cut, dName(k, j), 1.0);
+                    addTerm(cut, pName(k, j), -1.0);
+                }
+                for (int i = 1; i <= V; ++i) {
+                    if (!in_subset.count(i)) addTerm(cut, pName(k, i), -1.0);
+                }
+                writeConstraint(out, cid, cut, "<=", 0.0);
+                if (stats != nullptr) ++stats->tailored_transfer_cutset_cuts_added;
+            }
+        };
+        for (int a = 1; a <= V; ++a) addTransferCutset({a});
+        for (int a = 1; a <= V; ++a) {
+            for (int b = a + 1; b <= V; ++b) addTransferCutset({a, b});
+        }
     }
     if (strengthened && cutoff != nullptr && cutoff->enabled &&
         options.gini_spread_cuts && cutoff->gamma_U >= -1e-12 && V > 1) {
@@ -2050,6 +2202,7 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         options.compact_bc_sp_product_estimator == "paper-safe";
     result.compact_bc_low_gini_precheck =
         options.compact_bc_low_gini_precheck;
+    populateTailoredBCResultFields(options, result);
     result.compact_bc_expensive_static_families =
         options.compact_bc_expensive_static_families;
     result.compact_bc_use_dynamic_instead_of_static =
@@ -2203,6 +2356,7 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             model_options.compact_bc_sp_product_estimator == "paper-safe";
         result.compact_bc_low_gini_precheck =
             model_options.compact_bc_low_gini_precheck;
+        populateTailoredBCResultFields(model_options, result);
         result.compact_bc_expensive_static_families =
             model_options.compact_bc_expensive_static_families;
         result.compact_bc_use_dynamic_instead_of_static =
@@ -2321,6 +2475,35 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             strengthening_stats.sp_product_mccormick_rows_added;
         result.compact_bc_sp_product_estimator_rows_added =
             strengthening_stats.sp_product_estimator_rows_added;
+        result.tailored_bc_gini_subset_envelope_candidates =
+            strengthening_stats.tailored_gini_subset_envelope_candidates;
+        result.tailored_bc_gini_subset_envelope_cuts_added =
+            strengthening_stats.tailored_gini_subset_envelope_cuts_added;
+        result.tailored_bc_user_cuts_added_total =
+            strengthening_stats.tailored_gini_subset_envelope_cuts_added +
+            strengthening_stats.tailored_low_gini_l1_rows_added +
+            strengthening_stats.tailored_subset_inventory_imbalance_cuts_added +
+            strengthening_stats.tailored_transfer_cutset_cuts_added;
+        result.tailored_bc_low_gini_l1_centering_vars =
+            strengthening_stats.tailored_low_gini_l1_vars;
+        result.tailored_bc_low_gini_l1_centering_rows_added =
+            strengthening_stats.tailored_low_gini_l1_rows_added;
+        result.tailored_bc_subset_inventory_imbalance_cuts_added =
+            strengthening_stats.tailored_subset_inventory_imbalance_cuts_added;
+        result.tailored_bc_transfer_cutset_cuts_added =
+            strengthening_stats.tailored_transfer_cutset_cuts_added;
+        {
+            std::ostringstream tbc;
+            tbc << "gini_subset_envelope="
+                << result.tailored_bc_gini_subset_envelope_cuts_added
+                << ";low_gini_l1_centering="
+                << result.tailored_bc_low_gini_l1_centering_rows_added
+                << ";subset_inventory_imbalance="
+                << result.tailored_bc_subset_inventory_imbalance_cuts_added
+                << ";transfer_cutset="
+                << result.tailored_bc_transfer_cutset_cuts_added;
+            result.tailored_bc_user_cuts_added_by_family = tbc.str();
+        }
         result.compact_bc_support_duration_pair_cuts_added =
             strengthening_stats.support_duration_pair_cuts_added;
         result.compact_bc_support_duration_triple_cuts_added =
@@ -2368,6 +2551,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                  << ";s_range=" << result.compact_bc_s_range_rows_added
                  << ";sp_product_mccormick=" << result.compact_bc_sp_product_mccormick_rows_added
                  << ";sp_product_estimator=" << result.compact_bc_sp_product_estimator_rows_added
+                 << ";tailored_gini_subset_envelope=" << result.tailored_bc_gini_subset_envelope_cuts_added
+                 << ";tailored_low_gini_l1_centering=" << result.tailored_bc_low_gini_l1_centering_rows_added
+                 << ";tailored_subset_inventory_imbalance=" << result.tailored_bc_subset_inventory_imbalance_cuts_added
+                 << ";tailored_transfer_cutset=" << result.tailored_bc_transfer_cutset_cuts_added
                  << ";gini_spread=" << result.gini_spread_cuts_added
                  << ";required_movement=" << result.required_movement_cuts_added
                  << ";global_handling_capacity=" << result.global_handling_capacity_cuts_added
@@ -2398,52 +2585,235 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 static_cast<int>(strengthening_stats.penalty_domains_tightened);
         }
 
-        std::ofstream cmd(cmd_path);
-        cmd << "set threads " << std::max(1, effective_compact_threads) << "\n";
-        cmd << "set timelimit " << time_limit << "\n";
-        cmd << "set mip tolerances mipgap 0\n";
-        if (options.interval_oracle_profile == "infeasibility-focus") {
-            cmd << "set emphasis mip 1\n";
-        } else if (options.interval_oracle_profile == "bound-focus") {
-            cmd << "set emphasis mip 3\n";
-        } else if (options.interval_oracle_profile == "integrality-focus") {
-            cmd << "set emphasis mip 4\n";
+        std::string cplex_status = "unknown";
+        double cplex_obj = std::numeric_limits<double>::quiet_NaN();
+        double best_bound = std::numeric_limits<double>::quiet_NaN();
+        std::unordered_map<std::string, double> values;
+        int rc = 0;
+        bool used_callback_api = false;
+        TailoredBCCplexApiSolveResult api_solve;
+        if (result.tailored_bc_enabled &&
+            result.tailored_bc_callback_available &&
+            result.tailored_bc_mode == "callback") {
+            std::vector<double> callback_dist;
+            callback_dist.reserve(static_cast<std::size_t>((instance.V + 1) * (instance.V + 1)));
+            for (int i = 0; i <= instance.V; ++i) {
+                for (int j = 0; j <= instance.V; ++j) {
+                    callback_dist.push_back(instance.dist[i][j]);
+                }
+            }
+            api_solve = solveLpWithTailoredBCCplexApi(
+                lp_path,
+                time_limit,
+                std::max(1, effective_compact_threads),
+                cutoff.gamma_L,
+                cutoff.gamma_U,
+                true,
+                result.tailored_bc_lazy_callback_enabled ||
+                    result.tailored_bc_incumbent_callback_enabled,
+                result.tailored_bc_branch_callback_enabled &&
+                    (result.tailored_bc_gini_branch_mode == "branch_callback" ||
+                     result.tailored_bc_gini_branch_mode == "outer_controller"),
+                result.tailored_bc_branch_priority_enabled,
+                options.tailored_bc_gini_branch_min_width,
+                instance.initial,
+                instance.capacity,
+                instance.target,
+                instance.weights,
+                instance.Q,
+                callback_dist,
+                instance.V + 1,
+                instance.total_time_limit,
+                instance.pickup_time + instance.drop_time,
+                options.lambda,
+                cutoff.incumbent_ub - cutoff.epsilon,
+                instance.M);
+            used_callback_api = api_solve.available && api_solve.solved;
+            rc = api_solve.return_code;
+            if (used_callback_api) {
+                cplex_status = api_solve.status;
+                cplex_obj = api_solve.objective;
+                best_bound = api_solve.best_bound;
+                values = std::move(api_solve.values);
+                result.nodes = api_solve.node_count;
+                result.tailored_bc_relaxation_callback_calls =
+                    api_solve.relaxation_callback_calls;
+                result.tailored_bc_candidate_callback_calls =
+                    api_solve.candidate_callback_calls;
+                result.tailored_bc_branch_callback_calls =
+                    api_solve.branch_callback_calls;
+                result.tailored_bc_progress_callback_calls =
+                    api_solve.progress_callback_calls;
+                result.tailored_bc_user_cuts_added_total +=
+                    api_solve.user_cuts_added;
+                result.tailored_bc_lazy_rejections_total =
+                    api_solve.lazy_rejections;
+                result.tailored_bc_incumbents_seen =
+                    api_solve.incumbents_seen;
+                result.tailored_bc_incumbents_verified =
+                    api_solve.incumbents_verified;
+                result.tailored_bc_incumbents_rejected =
+                    api_solve.incumbents_rejected;
+                if (api_solve.lazy_rejections > 0) {
+                    std::ostringstream lazy;
+                    lazy << "candidate_gini_interval_violation="
+                         << api_solve.lazy_gini_interval_rejections
+                         << ";candidate_visit_inventory_violation="
+                         << api_solve.lazy_visit_inventory_rejections
+                         << ";candidate_gini_subset_envelope_violation="
+                         << api_solve.lazy_gini_subset_envelope_rejections
+                         << ";candidate_low_gini_l1_violation="
+                         << api_solve.lazy_low_gini_l1_rejections
+                         << ";candidate_projection_ratio_violation="
+                         << api_solve.candidate_projection_ratio_rejections
+                         << ";candidate_projection_penalty_violation="
+                         << api_solve.candidate_projection_penalty_rejections
+                         << ";candidate_projection_objective_violation="
+                         << api_solve.candidate_projection_objective_rejections
+                         << ";candidate_route_flow_violation="
+                         << api_solve.candidate_route_projection_flow_rejections
+                         << ";candidate_route_station_violation="
+                         << api_solve.candidate_route_projection_station_rejections
+                         << ";candidate_route_service_violation="
+                         << api_solve.candidate_route_projection_service_rejections
+                         << ";candidate_route_duration_violation="
+                         << api_solve.candidate_route_projection_duration_rejections
+                         << ";candidate_route_inventory_violation="
+                         << api_solve.candidate_route_projection_inventory_rejections;
+                    result.tailored_bc_lazy_rejections_by_reason = lazy.str();
+                } else {
+                    result.tailored_bc_lazy_rejections_by_reason = "none";
+                }
+                result.tailored_bc_candidate_projection_checks =
+                    api_solve.candidate_projection_checks;
+                result.tailored_bc_candidate_projection_verified =
+                    api_solve.candidate_projection_verified;
+                result.tailored_bc_candidate_projection_rejections =
+                    api_solve.candidate_projection_rejections;
+                result.tailored_bc_candidate_projection_unsupported_mismatches =
+                    api_solve.candidate_projection_unsupported_mismatches;
+                result.tailored_bc_candidate_projection_rejection_reasons =
+                    "ratio=" +
+                    std::to_string(api_solve.candidate_projection_ratio_rejections) +
+                    ";penalty=" +
+                    std::to_string(api_solve.candidate_projection_penalty_rejections) +
+                    ";objective=" +
+                    std::to_string(api_solve.candidate_projection_objective_rejections);
+                result.tailored_bc_candidate_projection_max_gini_underestimate =
+                    api_solve.candidate_projection_max_gini_underestimate;
+                result.tailored_bc_candidate_projection_max_objective_underestimate =
+                    api_solve.candidate_projection_max_objective_underestimate;
+                result.tailored_bc_candidate_route_projection_checks =
+                    api_solve.candidate_route_projection_checks;
+                result.tailored_bc_candidate_route_projection_verified =
+                    api_solve.candidate_route_projection_verified;
+                result.tailored_bc_candidate_route_projection_rejections =
+                    api_solve.candidate_route_projection_rejections;
+                result.tailored_bc_candidate_route_projection_unsupported_mismatches =
+                    api_solve.candidate_route_projection_unsupported_mismatches;
+                result.tailored_bc_candidate_route_projection_rejection_reasons =
+                    "flow=" +
+                    std::to_string(api_solve.candidate_route_projection_flow_rejections) +
+                    ";station=" +
+                    std::to_string(api_solve.candidate_route_projection_station_rejections) +
+                    ";service=" +
+                    std::to_string(api_solve.candidate_route_projection_service_rejections) +
+                    ";duration=" +
+                    std::to_string(api_solve.candidate_route_projection_duration_rejections) +
+                    ";inventory=" +
+                    std::to_string(api_solve.candidate_route_projection_inventory_rejections) +
+                    ";load_unsupported=" +
+                    std::to_string(api_solve.candidate_route_projection_load_mismatches);
+                result.tailored_bc_gini_branches_created =
+                    api_solve.gini_branches_created;
+                result.tailored_bc_branching_priorities_summary +=
+                    ";cplex_copyorder_status=" + api_solve.branch_priority_status +
+                    ";cplex_priorities_applied=" +
+                    std::to_string(api_solve.branch_priorities_applied);
+                result.tailored_bc_user_cuts_added_by_family +=
+                    ";callback_gini_interval_cap=" +
+                    std::to_string(api_solve.callback_gini_interval_cuts_added) +
+                    ";callback_visit_inventory_linking=" +
+                    std::to_string(api_solve.callback_visit_inventory_cuts_added) +
+                    ";callback_gini_subset_envelope=" +
+                    std::to_string(api_solve.callback_gini_subset_envelope_cuts_added) +
+                    ";callback_low_gini_l1_centering=" +
+                    std::to_string(api_solve.callback_low_gini_l1_cuts_added);
+                result.tailored_bc_gini_subset_envelope_candidates +=
+                    api_solve.callback_gini_subset_envelope_candidates;
+                result.tailored_bc_gini_subset_envelope_violations +=
+                    api_solve.callback_gini_subset_envelope_violations;
+                result.tailored_bc_gini_subset_envelope_cuts_added +=
+                    api_solve.callback_gini_subset_envelope_cuts_added;
+                result.tailored_bc_low_gini_l1_centering_violations +=
+                    api_solve.callback_low_gini_l1_violations;
+                result.tailored_bc_low_gini_l1_centering_rows_added +=
+                    api_solve.callback_low_gini_l1_cuts_added;
+                result.notes.push_back(
+                    "CPLEX dynamic callback API backend used for tailored BC; callback events relaxation="
+                    + std::to_string(api_solve.relaxation_callback_calls)
+                    + ", candidate=" + std::to_string(api_solve.candidate_callback_calls)
+                    + ", branch=" + std::to_string(api_solve.branch_callback_calls)
+                    + ", progress=" + std::to_string(api_solve.progress_callback_calls)
+                    + ", user_cuts=" + std::to_string(api_solve.user_cuts_added)
+                    + ", lazy_rejections=" + std::to_string(api_solve.lazy_rejections)
+                    + ", projection_checks=" +
+                        std::to_string(api_solve.candidate_projection_checks)
+                    + ", projection_verified=" +
+                        std::to_string(api_solve.candidate_projection_verified)
+                    + ", branch_priorities=" +
+                        std::to_string(api_solve.branch_priorities_applied));
+            } else {
+                result.notes.push_back(
+                    "CPLEX dynamic callback API backend unavailable at solve time: "
+                    + api_solve.fail_reason + "; falling back to command-file CPLEX");
+            }
         }
-        cmd << "read " << lp_path.string() << "\n";
-        cmd << "optimize\n";
-        cmd << "write " << sol_path.string() << "\n";
-        cmd << "quit\n";
-        cmd.close();
+        if (!used_callback_api) {
+            std::ofstream cmd(cmd_path);
+            cmd << "set threads " << std::max(1, effective_compact_threads) << "\n";
+            cmd << "set timelimit " << time_limit << "\n";
+            cmd << "set mip tolerances mipgap 0\n";
+            if (options.interval_oracle_profile == "infeasibility-focus") {
+                cmd << "set emphasis mip 1\n";
+            } else if (options.interval_oracle_profile == "bound-focus") {
+                cmd << "set emphasis mip 3\n";
+            } else if (options.interval_oracle_profile == "integrality-focus") {
+                cmd << "set emphasis mip 4\n";
+            }
+            cmd << "read " << lp_path.string() << "\n";
+            cmd << "optimize\n";
+            cmd << "write " << sol_path.string() << "\n";
+            cmd << "quit\n";
+            cmd.close();
 
-        const std::string cplex = defaultCplexPath();
-        const std::string command = "cmd /C \"" + quote(cplex) + " -f "
-            + quote(cmd_path) + " > " + quote(cplex_log) + " 2>&1\"";
-        const int rc = std::system(command.c_str());
+            const std::string cplex = defaultCplexPath();
+            const std::string command = "cmd /C \"" + quote(cplex) + " -f "
+                + quote(cmd_path) + " > " + quote(cplex_log) + " 2>&1\"";
+            rc = std::system(command.c_str());
+            if (std::filesystem::exists(sol_path)) {
+                values = parseSolValues(sol_path, cplex_status, cplex_obj, best_bound);
+            } else {
+                cplex_status = parseCplexTerminalStatus(cplex_log);
+                if (cplex_status == "unknown") {
+                    cplex_status = (rc == 0) ? "no solution file" : "cplex process failed";
+                }
+            }
+            result.nodes = parseCplexNodes(cplex_log);
+        }
         result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
         result.actual_runtime_seconds = result.runtime_seconds;
         result.interval_exact_cutoff_runtime_seconds = result.runtime_seconds;
         result.compact_bc_time_seconds = result.runtime_seconds;
         result.compact_bc_total_solver_time = result.runtime_seconds;
-
-        std::string cplex_status = "unknown";
-        double cplex_obj = std::numeric_limits<double>::quiet_NaN();
-        double best_bound = std::numeric_limits<double>::quiet_NaN();
-        std::unordered_map<std::string, double> values;
-        if (std::filesystem::exists(sol_path)) {
-            values = parseSolValues(sol_path, cplex_status, cplex_obj, best_bound);
-        } else {
-            cplex_status = parseCplexTerminalStatus(cplex_log);
-            if (cplex_status == "unknown") {
-                cplex_status = (rc == 0) ? "no solution file" : "cplex process failed";
-            }
-        }
         result.interval_exact_cutoff_solver_status = cplex_status;
         result.compact_bc_solver_status = cplex_status;
-        result.nodes = parseCplexNodes(cplex_log);
         result.interval_exact_cutoff_nodes = result.nodes;
         result.compact_bc_nodes = result.nodes;
-        const double log_best_bound = parseCplexBestBound(cplex_log);
-        if (!std::isfinite(best_bound) && std::isfinite(log_best_bound)) best_bound = log_best_bound;
+        if (!used_callback_api) {
+            const double log_best_bound = parseCplexBestBound(cplex_log);
+            if (!std::isfinite(best_bound) && std::isfinite(log_best_bound)) best_bound = log_best_bound;
+        }
         result.interval_exact_cutoff_best_bound = std::isfinite(best_bound) ? best_bound : 0.0;
         result.interval_exact_cutoff_objective = std::isfinite(cplex_obj) ? cplex_obj : 0.0;
         result.interval_oracle_solver_best_bound = result.interval_exact_cutoff_best_bound;
@@ -2579,6 +2949,14 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         result.notes.push_back("CPLEX process return code: " + std::to_string(rc));
         result.notes.push_back("LP file: " + lp_path.string());
         result.notes.push_back("CPLEX log: " + cplex_log.string());
+        if (result.tailored_bc_enabled) {
+            result.tailored_bc_source_class = tailoredBCSourceClass(result);
+            if (result.tailored_bc_mode == "static_fallback") {
+                result.notes.push_back(
+                    "paper-gf-tailored-bc callback mode is unavailable in this build; "
+                    "this fixed-interval row is static fallback evidence, not a true callback BC claim.");
+            }
+        }
     } catch (const std::exception& e) {
         result.status = "error";
         result.interval_exact_cutoff_certificate_basis = "interval_exact_cutoff_mip_error";
@@ -2590,6 +2968,9 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
         result.interval_exact_cutoff_runtime_seconds = result.runtime_seconds;
         result.compact_bc_time_seconds = result.runtime_seconds;
+        if (result.tailored_bc_enabled) {
+            result.tailored_bc_source_class = tailoredBCSourceClass(result);
+        }
     }
     return result;
 }

@@ -72,7 +72,7 @@ def main() -> int:
         force_diag = as_bool(data.get("compact_bc_diagnostic_force_leaf_solve"))
         aggressive_low_gini = as_bool(data.get("compact_bc_low_gini_aggressive_diagnostic"))
         paper_row = (
-            preset == "paper-gf-compact-bc" and
+            preset in {"paper-gf-compact-bc", "paper-gf-tailored-bc"} and
             method == "gcap-frontier" and
             not force_diag
         )
@@ -116,6 +116,19 @@ def main() -> int:
                 failure_reasons.append("certified_row_missing_top_level_cut_aggregation")
         if force_diag and as_bool(data.get("certified_original_problem")):
             failure_reasons.append("diagnostic_force_leaf_row_marked_certified")
+        if preset == "paper-gf-tailored-bc":
+            callback_available = as_bool(data.get("tailored_bc_callback_available"))
+            callback_claim = (
+                as_bool(data.get("tailored_bc_user_cut_callback_enabled")) or
+                as_bool(data.get("tailored_bc_lazy_callback_enabled")) or
+                as_bool(data.get("tailored_bc_incumbent_callback_enabled")) or
+                as_bool(data.get("tailored_bc_branch_callback_enabled")) or
+                str(data.get("tailored_bc_source_class", "")) == "tailored_bc_certified"
+            )
+            if callback_claim and not callback_available:
+                failure_reasons.append("tailored_bc_callback_claim_without_callback_api")
+            if paper_row and as_bool(data.get("certified_original_problem")) and str(data.get("tailored_bc_source_class", "")) == "static_fallback":
+                failure_reasons.append("tailored_bc_static_fallback_marked_as_paper_callback_certificate")
         if method == "interval-cutoff-oracle" and as_bool(data.get("compact_interval_bc_enabled")):
             if cut_scope not in {"original_fixed_interval", "none"}:
                 failure_reasons.append("compact_bc_leaf_bad_bound_scope")
