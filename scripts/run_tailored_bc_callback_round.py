@@ -87,7 +87,15 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
-def write_diagnostic_timeout_json(path: Path, name: str, meta: Dict[str, Any]) -> None:
+def write_diagnostic_timeout_json(
+    path: Path,
+    name: str,
+    meta: Dict[str, Any],
+    *,
+    gamma_l: str = "0.0122881381662",
+    gamma_u: str = "0.0245762763324",
+    gini_branch_mode: str = "selector_binary",
+) -> None:
     data = {
         "method": "interval-cutoff-oracle",
         "algorithm_preset": "paper-gf-tailored-bc",
@@ -123,8 +131,16 @@ def write_diagnostic_timeout_json(path: Path, name: str, meta: Dict[str, Any]) -
         "tailored_bc_branching_priorities_summary": "diagnostic_timeout_before_solver_final_json",
         "tailored_bc_gini_branches_created": 0,
         "tailored_bc_gini_selector_variables": 0,
+        "tailored_bc_gini_branch_mode": gini_branch_mode,
         "tailored_bc_callback_fail_reason": "diagnostic_outer_timeout",
         "tailored_bc_source_class": "compact_bc_leaf_diagnostic",
+        "interval_exact_cutoff_attempted": True,
+        "interval_exact_cutoff_gamma_L": float(gamma_l),
+        "interval_exact_cutoff_gamma_U": float(gamma_u),
+        "interval_exact_cutoff_UB": 0.0491525526647,
+        "interval_exact_cutoff_timeout": True,
+        "interval_exact_cutoff_certificate_basis": "diagnostic_outer_timeout",
+        "interval_exact_cutoff_scope": "original fixed-interval cutoff feasibility compact MIP",
         "tailored_bc_gini_subset_envelope_candidates": 0,
         "tailored_bc_gini_subset_envelope_violations": 0,
         "tailored_bc_gini_subset_envelope_cuts_added": 0,
@@ -188,6 +204,7 @@ def result_row(name: str, path: Path, meta: Dict[str, Any]) -> Dict[str, Any]:
         "tailored_bc_candidate_callback_calls": data.get("tailored_bc_candidate_callback_calls", ""),
         "tailored_bc_branch_callback_calls": data.get("tailored_bc_branch_callback_calls", ""),
         "tailored_bc_progress_callback_calls": data.get("tailored_bc_progress_callback_calls", ""),
+        "tailored_bc_gini_branch_mode": data.get("tailored_bc_gini_branch_mode", ""),
         "tailored_bc_gini_branches_created": data.get("tailored_bc_gini_branches_created", ""),
         "tailored_bc_branch_priority_enabled": data.get("tailored_bc_branch_priority_enabled", ""),
         "tailored_bc_lazy_rejections_total": data.get("tailored_bc_lazy_rejections_total", ""),
@@ -215,6 +232,8 @@ def result_row(name: str, path: Path, meta: Dict[str, Any]) -> Dict[str, Any]:
         "lower_bound": data.get("lower_bound", ""),
         "upper_bound": data.get("upper_bound", ""),
         "gap": data.get("gap", ""),
+        "interval_exact_cutoff_gamma_L": data.get("interval_exact_cutoff_gamma_L", ""),
+        "interval_exact_cutoff_gamma_U": data.get("interval_exact_cutoff_gamma_U", ""),
         "compact_bc_solver_status": data.get("compact_bc_solver_status", ""),
         "compact_bc_best_bound": data.get("compact_bc_best_bound", ""),
         "compact_bc_nodes": data.get("compact_bc_nodes", ""),
@@ -429,6 +448,91 @@ def main() -> int:
             hard_min_meta,
         ))
 
+        def run_low_gini_branch_variant(
+            leaf_name: str,
+            gamma_l: str,
+            gamma_u: str,
+            branch_mode: str,
+            label: str,
+        ) -> None:
+            out = RAW / f"{leaf_name}_{label}_short3.json"
+            cmd = [
+                str(EXE),
+                "--method", "interval-cutoff-oracle",
+                "--paper-run-sealed", "true",
+                "--tailored-bc-enabled", "true",
+                "--tailored-bc-mode", "callback",
+                "--tailored-bc-branching-priority", "adaptive",
+                "--tailored-bc-gini-branching", branch_mode,
+                "--tailored-bc-gini-subset-envelope", "false",
+                "--tailored-bc-low-gini-l1-centering", "false",
+                "--tailored-bc-subset-inventory-imbalance", "false",
+                "--tailored-bc-transfer-cutset", "false",
+                "--input", str(MODERATE_INSTANCE),
+                "--lambda", "0.15",
+                "--T", "3600",
+                "--interval-exact-cutoff-oracle", "compact-mip",
+                "--interval-exact-cutoff-gamma-L", gamma_l,
+                "--interval-exact-cutoff-gamma-U", gamma_u,
+                "--interval-exact-cutoff-UB", "0.0491525526647",
+                "--interval-exact-cutoff-time-limit", "3",
+                "--compact-bc-threads", "1",
+                "--mip-threads", "1",
+                "--compact-bc-root-cut-rounds", "0",
+                "--out", str(out),
+            ]
+            meta = run_cmd(
+                cmd,
+                RESULTS / "logs" / f"{leaf_name}_{label}_short3.log",
+                timeout=90,
+            )
+            if meta.get("timeout") or not out.exists():
+                write_diagnostic_timeout_json(
+                    out,
+                    f"{leaf_name}_{label}_short3",
+                    meta,
+                    gamma_l=gamma_l,
+                    gamma_u=gamma_u,
+                    gini_branch_mode=branch_mode,
+                )
+            else:
+                annotate_diagnostic_json(
+                    out,
+                    f"{leaf_name}_{label}_short3",
+                    [
+                        "Diagnostic hard-leaf branch-mode ablation with overlapping static tailored diagnostic families disabled.",
+                        "This row is not certificate evidence and is excluded from paper summaries.",
+                    ],
+                )
+            rows.append(result_row(f"{leaf_name}_{label}_short3", out, meta))
+
+        run_low_gini_branch_variant(
+            "moderate_seed3301_low_gini1_callback",
+            "0.0122881381662",
+            "0.0245762763324",
+            "off",
+            "gini_off",
+        )
+        run_low_gini_branch_variant(
+            "moderate_seed3301_low_gini1_callback",
+            "0.0122881381662",
+            "0.0245762763324",
+            "selector",
+            "gini_selector",
+        )
+        for branch_mode, label in [
+            ("off", "gini_off"),
+            ("auto", "gini_auto"),
+            ("selector", "gini_selector"),
+        ]:
+            run_low_gini_branch_variant(
+                "moderate_seed3301_low_gini2_callback",
+                "0.0245762763324",
+                "0.0368644144986",
+                branch_mode,
+                label,
+            )
+
     callback_available = any(
         str(row.get("tailored_bc_callback_available", "")).lower() == "true"
         for row in rows
@@ -589,19 +693,38 @@ def main() -> int:
     hard_leaf_rows = [
         row for row in rows
         if row["row"].startswith("moderate_seed3301_low_gini1_callback_")
+        or row["row"].startswith("moderate_seed3301_low_gini2_callback_")
     ]
+
+    def hard_leaf_label(row: Dict[str, Any]) -> str:
+        name = str(row.get("row", ""))
+        if "low_gini2" in name:
+            return "moderate_seed3301_low_gini2"
+        return "moderate_seed3301_low_gini1"
+
+    def hard_leaf_gamma(row: Dict[str, Any], which: str) -> str:
+        value = row.get(f"interval_exact_cutoff_gamma_{which}", "")
+        if value != "":
+            return str(value)
+        if hard_leaf_label(row).endswith("low_gini2"):
+            return "0.0245762763324" if which == "L" else "0.0368644144986"
+        return "0.0122881381662" if which == "L" else "0.0245762763324"
+
     write_csv(RESULTS / "hard_leaf_tailored_bc.csv", [
         {
-            "leaf": "moderate_seed3301_low_gini1",
+            "leaf": hard_leaf_label(row),
             "diagnostic": row.get("row", ""),
-            "gamma_L": "0.0122881381662",
-            "gamma_U": "0.0245762763324",
+            "gamma_L": hard_leaf_gamma(row, "L"),
+            "gamma_U": hard_leaf_gamma(row, "U"),
             "status": row.get("status", "not_run"),
             "callback_available": row.get("tailored_bc_callback_available", callback_available),
             "relaxation_callback_calls": row.get("tailored_bc_relaxation_callback_calls", 0),
             "branch_callback_calls": row.get("tailored_bc_branch_callback_calls", 0),
+            "gini_branch_mode": row.get("tailored_bc_gini_branch_mode", ""),
+            "gini_branches_created": row.get("tailored_bc_gini_branches_created", 0),
             "callback_user_cuts": row.get("tailored_bc_user_cuts_added_total", 0),
             "lower_bound": row.get("lower_bound", ""),
+            "compact_bc_best_bound": row.get("compact_bc_best_bound", ""),
             "gap": row.get("gap", ""),
             "compact_bc_solver_status": row.get("compact_bc_solver_status", ""),
             "compact_bc_nodes": row.get("compact_bc_nodes", ""),
@@ -616,9 +739,12 @@ def main() -> int:
     ])
     write_csv(RESULTS / "hard_leaf_comparison.csv", [
         {
-            "leaf": "moderate_seed3301_low_gini1",
+            "leaf": hard_leaf_label(row),
             "diagnostic": row.get("row", ""),
             "status": row.get("status", "not_run"),
+            "gini_branch_mode": row.get("tailored_bc_gini_branch_mode", ""),
+            "branch_callback_calls": row.get("tailored_bc_branch_callback_calls", 0),
+            "gini_branches_created": row.get("tailored_bc_gini_branches_created", 0),
             "reason": (
                 "plain_fixed_interval_mip_not_run_in_this_callback_increment;"
                 + ("full_preset_setup_timeout" if row.get("timeout", False)
@@ -629,7 +755,10 @@ def main() -> int:
                 else ("callback_available_but_no_solver_final_json" if callback_available else "blocked")
             ),
             "tailored_lower_bound": row.get("lower_bound", ""),
+            "tailored_best_bound": row.get("compact_bc_best_bound", ""),
             "tailored_gap": row.get("gap", ""),
+            "compact_bc_nodes": row.get("compact_bc_nodes", ""),
+            "runtime_seconds": row.get("runtime_seconds", ""),
             "plain_fixed_interval_mip_status": "not_run_in_callback_round",
             "diagnostic_only": True,
         }
@@ -823,6 +952,7 @@ def main() -> int:
         "- Candidate callbacks now run compact projection verifiers when route/service variables and `Y_i`, `r_i`, `e_i`, targets, weights, lambda, and cutoff data are available. The route projection verifier checks station disjointness, depot flow, station flow, service linking, duration under the pickup-only handling convention, final-inventory balance, and reconstructed route load order. The objective projection verifier recomputes ratios, penalty, Gini, and the objective from final inventories. Rejections use only already-valid model rows; unsupported route-load or Gini/objective mismatches are recorded instead of adding unsafe no-good cuts.",
         "- `moderate_seed3301_low_gini1_callback_guarded.json` is a guarded full-preset hard-leaf diagnostic. If the full preset setup and solve exceed the outer wrapper timeout, the runner writes an honest noncertificate timeout JSON instead of leaving a missing artifact.",
         "- `moderate_seed3301_low_gini1_callback_minimal_short3.json` is a diagnostic hard-leaf callback run with overlapping static diagnostic families disabled. It is included to preserve solver-final callback evidence on the moderate low-Gini leaf when the full-preset guarded row times out before producing callback counters.",
+        "- `hard_leaf_tailored_bc.csv` and `hard_leaf_comparison.csv` now include short no-branch, callback-Gini-branch, and selector fallback diagnostics for the two known moderate low-Gini leaves. These rows are diagnostic only; they test callback branch behavior and bound direction without changing paper certificate evidence.",
         "- `source_classification.csv` preserves tailored source classes per JSON row.",
         "",
         "## Audit",
@@ -849,7 +979,7 @@ def main() -> int:
         "",
         "## Paper Claim",
         "",
-        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, diagnostic branch-context evidence with one-shot Gini branches in the toy branch smoke, and diagnostic hard-leaf evidence where the moderate low-Gini interval enters branch context and creates Gini branches through `CPXcallbackmakebranch`. A diagnostic moderate low-Gini leaf now reaches solver finalization under the callback path when overlapping static diagnostic families are disabled, recording callback events and a valid noncertifying interval bound. It is not yet the full requested tailored branch-and-cut: independent route-plan reconstruction from compact incumbents, full-preset hard-leaf callback ablations, and performance-positive hard-leaf closure evidence remain incomplete.",
+        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, diagnostic branch-context evidence with one-shot Gini branches in the toy branch smoke, and diagnostic hard-leaf evidence where moderate low-Gini intervals enter branch context and create Gini branches through `CPXcallbackmakebranch`. Short branch-mode ablations now compare no-branch, callback-Gini-branch, and selector fallback behavior on the two known moderate low-Gini leaves. These are not yet performance-positive hard-leaf closure evidence; they are callback and branching diagnostics. It is not yet the full requested tailored branch-and-cut: full-preset hard-leaf callback ablations, longer matched hard-leaf comparisons, and performance-positive hard-leaf closure evidence remain incomplete.",
         "",
         "Final commit SHA: recorded in the final assistant response after commit creation.",
     ])
