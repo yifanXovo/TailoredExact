@@ -69,6 +69,32 @@ GENERATED_DIAGNOSTICS = [
     ("diag_V20_M2_high_transfer_seed7104", HARD_DIAG_DIR / "diag_V20_M2_high_transfer_seed7104.txt"),
     ("diag_V20_M3_dense_duration_seed7105", HARD_DIAG_DIR / "diag_V20_M3_dense_duration_seed7105.txt"),
 ]
+GENERATED_HARD_INTERVAL_TARGETS = [
+    {
+        "leaf": "generated_diag_V12_M2_tight_cutoff_leaf1",
+        "instance": HARD_DIAG_DIR / "diag_V12_M2_tight_cutoff_hard_seed7102.txt",
+        "gamma_L": "0.229166666667",
+        "gamma_U": "0.458333333333",
+        "ub": "1.65777317757",
+        "budgets": [60, 300],
+    },
+    {
+        "leaf": "generated_diag_V20_M2_high_transfer_leaf1",
+        "instance": HARD_DIAG_DIR / "diag_V20_M2_high_transfer_seed7104.txt",
+        "gamma_L": "0.146304771504",
+        "gamma_U": "0.292609543009",
+        "ub": "0.585219086017",
+        "budgets": [60],
+    },
+    {
+        "leaf": "generated_diag_V20_M3_dense_duration_leaf0",
+        "instance": HARD_DIAG_DIR / "diag_V20_M3_dense_duration_seed7105.txt",
+        "gamma_L": "0",
+        "gamma_U": "0.0206402171405",
+        "ub": "0.082560868562",
+        "budgets": [60],
+    },
+]
 NATURAL_HARD_FULL_PRESET_DIAGNOSTICS = [
     ("fullpreset_moderate_seed3301_tailored_callback_120s", MODERATE_INSTANCE, 120),
     (
@@ -1756,6 +1782,128 @@ def main() -> int:
                 for time_limit in [60, 300]:
                     run_matched_interval_baseline(target, variant, time_limit)
 
+    generated_interval_rows: List[Dict[str, Any]] = []
+
+    def run_generated_interval_variant(
+        target: Dict[str, Any],
+        variant: str,
+        time_limit: int,
+    ) -> None:
+        leaf_name = str(target["leaf"])
+        time_label = f"{time_limit}s"
+        out = RAW / f"{leaf_name}_{variant}_{time_label}.json"
+        instance_path = Path(target["instance"])
+        gamma_l = str(target["gamma_L"])
+        gamma_u = str(target["gamma_U"])
+        ub = str(target["ub"])
+        meta: Dict[str, Any]
+        if not instance_path.exists():
+            meta = {"returncode": 2, "runtime_seconds": 0.0, "timeout": False}
+            write_diagnostic_timeout_json(
+                out,
+                f"{leaf_name}_{variant}_{time_label}",
+                meta,
+                gamma_l=gamma_l,
+                gamma_u=gamma_u,
+                ub=ub,
+                instance_path=instance_path,
+                gini_branch_mode="auto" if variant.endswith("gini_auto") else "off",
+            )
+        else:
+            cmd = [
+                str(EXE),
+                "--method", "interval-cutoff-oracle",
+                "--paper-run-sealed", "true",
+                "--input", str(instance_path),
+                "--lambda", "0.15",
+                "--T", "3600",
+                "--time-limit", str(time_limit),
+                "--mip-threads", "1",
+                "--compact-bc-threads", "1",
+                "--compact-bc-time-limit", str(time_limit),
+                "--interval-exact-cutoff-oracle", "compact-mip",
+                "--interval-exact-cutoff-gamma-L", gamma_l,
+                "--interval-exact-cutoff-gamma-U", gamma_u,
+                "--interval-exact-cutoff-UB", ub,
+                "--interval-exact-cutoff-time-limit", str(time_limit),
+                "--out", str(out),
+            ]
+            if variant == "plain":
+                cmd.extend(["--algorithm-preset", "paper-gf-compact-bc"])
+                cmd.extend(plain_disable_flags)
+            elif variant == "static_tailored":
+                cmd.extend(["--algorithm-preset", "paper-gf-compact-bc"])
+                cmd.extend(static_tailored_flags)
+            elif variant == "callback_basic":
+                cmd.extend([
+                    "--algorithm-preset", "paper-gf-tailored-bc",
+                    "--tailored-bc-mode", "callback",
+                    "--tailored-bc-branching-priority", "adaptive",
+                    "--tailored-bc-gini-branching", "off",
+                    "--compact-bc-root-cut-rounds", "1",
+                    "--compact-bc-low-gini-strengthening", "safe",
+                    "--compact-bc-denominator-bound-mode", "tight",
+                    "--compact-bc-objective-estimator-mode", "adaptive",
+                ])
+            else:
+                cmd.extend([
+                    "--algorithm-preset", "paper-gf-tailored-bc",
+                    "--tailored-bc-mode", "callback",
+                    "--tailored-bc-branching-priority", "adaptive",
+                    "--tailored-bc-gini-branching", "auto",
+                    "--compact-bc-root-cut-rounds", "1",
+                    "--compact-bc-low-gini-strengthening", "safe",
+                    "--compact-bc-denominator-bound-mode", "tight",
+                    "--compact-bc-objective-estimator-mode", "adaptive",
+                ])
+            meta = run_cmd(
+                cmd,
+                RESULTS / "logs" / f"{leaf_name}_{variant}_{time_label}.log",
+                timeout=max(120, time_limit + 150),
+            )
+            if meta.get("timeout") or not out.exists():
+                write_diagnostic_timeout_json(
+                    out,
+                    f"{leaf_name}_{variant}_{time_label}",
+                    meta,
+                    gamma_l=gamma_l,
+                    gamma_u=gamma_u,
+                    ub=ub,
+                    instance_path=instance_path,
+                    gini_branch_mode="auto" if variant == "callback_gini_auto" else "off",
+                )
+            elif variant in {"plain", "static_tailored"}:
+                annotate_matched_baseline_json(
+                    out,
+                    f"{leaf_name}_{variant}_{time_label}",
+                    [
+                        "Generated hard fixed-interval matched baseline.",
+                        "This row is benchmark-only and excluded from paper certificate summaries.",
+                    ],
+                )
+            else:
+                annotate_diagnostic_json(
+                    out,
+                    f"{leaf_name}_{variant}_{time_label}",
+                    [
+                        "Generated hard fixed-interval callback tailored diagnostic.",
+                        "This row measures callback behavior on generated hard leaves and is excluded from paper certificate summaries.",
+                    ],
+                )
+        row = result_row(f"{leaf_name}_{variant}_{time_label}", out, meta)
+        row["generated_interval_diagnostic"] = True
+        row["generated_interval_leaf"] = leaf_name
+        row["instance"] = str(instance_path.relative_to(ROOT)) if instance_path.exists() else str(instance_path)
+        row["generated_interval_variant"] = variant
+        row["generated_interval_budget_seconds"] = time_limit
+        rows.append(row)
+        generated_interval_rows.append(row)
+
+    for target in GENERATED_HARD_INTERVAL_TARGETS:
+        for budget in target["budgets"]:
+            for variant in ["plain", "static_tailored", "callback_basic", "callback_gini_auto"]:
+                run_generated_interval_variant(target, variant, int(budget))
+
     generated_rows: List[Dict[str, Any]] = []
     generated_child_rows: List[Dict[str, Any]] = []
     for diag_name, diag_path in GENERATED_DIAGNOSTICS:
@@ -2299,6 +2447,32 @@ def main() -> int:
         }
         for row in generated_rows
     ])
+    write_csv(RESULTS / "generated_hard_interval_comparison.csv", [
+        {
+            "leaf": row.get("generated_interval_leaf", ""),
+            "variant": row.get("generated_interval_variant", ""),
+            "budget_seconds": row.get("generated_interval_budget_seconds", ""),
+            "instance": row.get("instance", ""),
+            "status": row.get("status", ""),
+            "lower_bound": row.get("lower_bound", ""),
+            "upper_bound": row.get("upper_bound", ""),
+            "gap": row.get("gap", ""),
+            "compact_bc_best_bound": row.get("compact_bc_best_bound", ""),
+            "compact_bc_solver_status": row.get("compact_bc_solver_status", ""),
+            "compact_bc_nodes": row.get("compact_bc_nodes", ""),
+            "runtime_seconds": row.get("runtime_seconds", ""),
+            "tailored_bc_callback_available": row.get("tailored_bc_callback_available", ""),
+            "tailored_bc_relaxation_callback_calls": row.get("tailored_bc_relaxation_callback_calls", ""),
+            "tailored_bc_branch_callback_calls": row.get("tailored_bc_branch_callback_calls", ""),
+            "tailored_bc_gini_branches_created": row.get("tailored_bc_gini_branches_created", ""),
+            "tailored_bc_user_cuts_added_total": row.get("tailored_bc_user_cuts_added_total", ""),
+            "tailored_bc_source_class": row.get("tailored_bc_source_class", ""),
+            "diagnostic_only": True,
+            "paper_certificate_contamination": False,
+            "json": row.get("json", ""),
+        }
+        for row in generated_interval_rows
+    ])
     write_csv(RESULTS / "full_preset_hard_row_ablation.csv", [
         {
             "row": row.get("row", ""),
@@ -2467,6 +2641,38 @@ def main() -> int:
                 else "static_compact_bc_baseline"
             ),
             "tailored_bc_role": "baseline",
+            "diagnostic_only": True,
+        })
+    for row in generated_interval_rows:
+        leaf_key = str(row.get("generated_interval_leaf", ""))
+        if not leaf_key:
+            continue
+        budget = row.get("generated_interval_budget_seconds", "")
+        comparison_rows.append({
+            "comparison_group": f"{leaf_key}_{budget}s",
+            "row_type": "generated_hard_interval_current_callback_round",
+            "variant": row.get("generated_interval_variant", ""),
+            "budget_seconds": budget,
+            "status": row.get("status", ""),
+            "lower_bound": row.get("lower_bound", ""),
+            "upper_bound": row.get("upper_bound", ""),
+            "gap": row.get("gap", ""),
+            "gap_to_cutoff": (
+                float(row.get("upper_bound") or 0.0) - float(row.get("lower_bound") or 0.0)
+                if row.get("upper_bound", "") != "" and row.get("lower_bound", "") != ""
+                else ""
+            ),
+            "nodes": row.get("compact_bc_nodes", ""),
+            "json": row.get("json", ""),
+            "gini_branch_mode": row.get("tailored_bc_gini_branch_mode", ""),
+            "branch_callback_calls": row.get("tailored_bc_branch_callback_calls", 0),
+            "gini_branches_created": row.get("tailored_bc_gini_branches_created", 0),
+            "plain_cplex_role": (
+                "benchmark_only"
+                if row.get("generated_interval_variant", "") == "plain"
+                else "not_plain_cplex"
+            ),
+            "tailored_bc_role": row.get("generated_interval_variant", ""),
             "diagnostic_only": True,
         })
     for row in hard_leaf_rows:
@@ -2672,6 +2878,12 @@ def main() -> int:
             "instance": str(natural_path.relative_to(ROOT)),
             "sha256": sha256(natural_path) if natural_path.exists() else "missing",
         })
+    for target in GENERATED_HARD_INTERVAL_TARGETS:
+        target_path = Path(target["instance"])
+        manifest_rows.append({
+            "instance": str(target_path.relative_to(ROOT)),
+            "sha256": sha256(target_path) if target_path.exists() else "missing",
+        })
     write_csv(RESULTS / "instance_hash_manifest.csv", manifest_rows)
     write_csv(RESULTS / "s_bucket_coverage_audit.csv", [
         {
@@ -2752,6 +2964,8 @@ def main() -> int:
         "- In the new matched `moderate_seed3302_hard` comparison, the 300s callback-Gini diagnostic reaches LB `0.144943633094`, above the in-round static-tailored baseline LB `0.14462882586` and plain fixed-interval baseline LB `0.14433212622`. The leaf remains noncertified, so this is bound-quality evidence only.",
         "- `full_row_confirmation_summary.csv` records one-thread `paper-gf-tailored-bc` preservation rows for V12 M1, V12 M2, `tight_T_seed3101`, and `high_imbalance_seed3202`, in addition to the smoke full-row. In this package V12 M2, `tight_T_seed3101`, and `high_imbalance_seed3202` certify directly. V12 M1 has 300s, 1200s, and 3600s noncertified parent frontier JSONs before post-solve interval closure. The 3600s parent reaches LB/gap `0.353171916148` / `0.0112784447991`; exact child Compact-BC evidence closes interval 13, and targeted exact TailoredBC child rows close final leaves 15, 18, and 21. The post-merge JSON `regression_v12_m1_tailored_3600s_postmerge_certified.json` certifies V12 M1 with objective/LB/UB `0.357200583208` after the merge audit reports zero final open leaves.",
         "- `generated_hard_diagnostic_summary.csv`, `generated_hard_leaf_callback_summary.csv`, and `generated_hard_instance_effectiveness.csv` now record guarded one-thread callback probes for the deterministic generated hard-diagnostic instances under `reference/hard_compact_bc_diagnostics/`. Parent full-row summaries aggregate child `auto_oracle/interval_*.json` callback evidence so generated hard-instance effectiveness is not undercounted. These rows are diagnostic only; wrapper timeouts are preserved as noncertificate JSON rather than being treated as failures to emit artifacts.",
+        "- `generated_hard_interval_comparison.csv` now records matched fixed-interval comparisons on generated hard leaves. It includes one-thread plain fixed-interval MIP, static tailored compact-BC, callback-tailored without Gini branching, and callback-tailored with Gini branching, all diagnostic/benchmark-only and excluded from paper certificate summaries.",
+        "- The generated hard interval comparison is deliberately reported as mixed diagnostic evidence: the generated V12/M2 tight-cutoff leaf is closed fastest by plain/static fixed-interval MIP while callback rows time out; the generated V20/M2 high-transfer leaf has the strongest 60s bound from static tailored compact-BC; and the generated V20/M3 dense-duration leaf has the strongest 60s bound from plain fixed-interval MIP. This identifies callback overhead and weak generated-hard cut activation as remaining performance issues rather than paper certificate evidence.",
         "- `full_preset_hard_row_ablation.csv` and `full_preset_hard_leaf_callback_summary.csv` now record bounded natural hard-row probes through the actual `paper-gf-tailored-bc` full frontier preset for `moderate_seed3301`, `high_imbalance_seed3201`, `tight_T_seed3102`, and `moderate_seed3302`. These rows are diagnostic only, aggregate child `auto_oracle` callback leaves, and are intentionally excluded from selected paper evidence.",
         "- `source_classification.csv` preserves tailored source classes per JSON row.",
         "",
@@ -2779,7 +2993,7 @@ def main() -> int:
         "",
         "## Paper Claim",
         "",
-        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, low-Gini L1 centering, basic transfer-cutset, and pair/triple support-duration cover rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, diagnostic branch-context evidence with one-shot Gini branches in the toy branch smoke, and diagnostic hard-leaf evidence where fixed intervals enter branch context and create Gini branches through `CPXcallbackmakebranch`. Branch-mode ablations now compare no-branch, callback-Gini-branch, and selector fallback behavior on the two known moderate low-Gini leaves, including longer 60s/300s/1200s diagnostic rows, and add broader natural hard-leaf callback diagnostics for `high_imbalance_seed3201`, `tight_T_seed3102`, and `moderate_seed3302`. Matched plain/static fixed-interval baselines are imported for the moderate low-Gini leaves and for `high_imbalance_seed3201_hard` / `tight_T_seed3102_hard`; `moderate_seed3302_hard` now has in-round 60s/300s matched plain/static baselines. The generated hard-diagnostic package and the natural hard full-preset probes now aggregate callback evidence from child fixed-interval `auto_oracle` solves. The low-Gini-2 callback-Gini row closes the fixed interval at 300s by integer infeasibility, and the low-Gini-1 callback-Gini rows now provide 60s/300s/1200s bound trajectory evidence against one-thread plain fixed-interval and static compact-BC baselines. The V20 control rows `tight_T_seed3101` and `high_imbalance_seed3202` certify under one-thread `paper-gf-tailored-bc`; V12 M2 also certifies. V12 M1 is certified by the post-merge full-ledger artifact after exact TailoredBC child evidence closes intervals 13, 15, 18, and 21 with matching gamma ranges and original fixed-interval compact certificates. It is not yet the full requested tailored branch-and-cut performance program: the new full-preset hard-row probes are bounded diagnostics, so longer full-row ablations and stronger low-Gini callback cuts remain the next performance work.",
+        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, low-Gini L1 centering, basic transfer-cutset, and pair/triple support-duration cover rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, diagnostic branch-context evidence with one-shot Gini branches in the toy branch smoke, and diagnostic hard-leaf evidence where fixed intervals enter branch context and create Gini branches through `CPXcallbackmakebranch`. Branch-mode ablations now compare no-branch, callback-Gini-branch, and selector fallback behavior on the two known moderate low-Gini leaves, including longer 60s/300s/1200s diagnostic rows, and add broader natural hard-leaf callback diagnostics for `high_imbalance_seed3201`, `tight_T_seed3102`, and `moderate_seed3302`. Matched plain/static fixed-interval baselines are imported for the moderate low-Gini leaves and for `high_imbalance_seed3201_hard` / `tight_T_seed3102_hard`; `moderate_seed3302_hard` now has in-round 60s/300s matched plain/static baselines. The generated hard-diagnostic package and the natural hard full-preset probes now aggregate callback evidence from child fixed-interval `auto_oracle` solves. The generated hard-leaf interval comparison extends this with matched plain, static, callback-basic, and callback-Gini variants on selected generated hard intervals, and its mixed results show that callback cut selection and branching overhead still need work on generated hard leaves. The low-Gini-2 callback-Gini row closes the fixed interval at 300s by integer infeasibility, and the low-Gini-1 callback-Gini rows now provide 60s/300s/1200s bound trajectory evidence against one-thread plain fixed-interval and static compact-BC baselines. The V20 control rows `tight_T_seed3101` and `high_imbalance_seed3202` certify under one-thread `paper-gf-tailored-bc`; V12 M2 also certifies. V12 M1 is certified by the post-merge full-ledger artifact after exact TailoredBC child evidence closes intervals 13, 15, 18, and 21 with matching gamma ranges and original fixed-interval compact certificates. It is not yet the full requested tailored branch-and-cut performance program: the new generated/natural hard probes are bounded diagnostics, so longer full-row ablations and stronger low-Gini callback cuts remain the next performance work.",
         "",
         "Final commit SHA: recorded in the final assistant response after commit creation.",
     ])
