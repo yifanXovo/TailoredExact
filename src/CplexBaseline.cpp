@@ -2687,7 +2687,27 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 options.tailored_bc_gini_subset_max_cuts,
                 options.lambda,
                 cutoff.incumbent_ub - cutoff.epsilon,
-                instance.M);
+                instance.M,
+                options.progress_log_path.empty()
+                    ? std::filesystem::path()
+                    : std::filesystem::path(options.progress_log_path),
+                result.compact_bc_progress_interval_seconds > 0.0
+                    ? result.compact_bc_progress_interval_seconds
+                    : options.progress_interval_seconds);
+            if (api_solve.checkpoint_log_written) {
+                result.progress_log_path = options.progress_log_path;
+                result.progress_checkpoints_written =
+                    api_solve.checkpoint_rows_written;
+                result.gap_trajectory_available =
+                    api_solve.checkpoint_rows_written > 0;
+                result.last_progress_event = "tailored_bc_callback_checkpoint";
+                result.last_bound_improvement_time =
+                    api_solve.last_checkpoint_time;
+            }
+            result.compact_bc_best_bound_available =
+                api_solve.best_bound_available;
+            result.compact_bc_best_bound_fail_reason =
+                api_solve.best_bound_fail_reason;
             used_callback_api = api_solve.available && api_solve.solved;
             rc = api_solve.return_code;
             if (used_callback_api) {
@@ -2790,6 +2810,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     std::to_string(api_solve.candidate_route_projection_load_mismatches);
                 result.tailored_bc_gini_branches_created =
                     api_solve.gini_branches_created;
+                if (api_solve.callback_wall_time_abort) {
+                    result.notes.push_back(
+                        "CPLEX callback wall-clock guard aborted mipopt after the configured interval time limit plus grace; row is unresolved unless a valid bound closes it.");
+                }
                 result.tailored_bc_branching_priorities_summary +=
                     ";cplex_copyorder_status=" + api_solve.branch_priority_status +
                     ";cplex_priorities_applied=" +
@@ -2933,13 +2957,31 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         result.compact_bc_nodes = result.nodes;
         if (!used_callback_api) {
             const double log_best_bound = parseCplexBestBound(cplex_log);
-            if (!std::isfinite(best_bound) && std::isfinite(log_best_bound)) best_bound = log_best_bound;
+            if (!std::isfinite(best_bound) && std::isfinite(log_best_bound)) {
+                best_bound = log_best_bound;
+                result.compact_bc_best_bound_available = true;
+                result.compact_bc_best_bound_fail_reason = "none";
+            }
+            if (!result.compact_bc_best_bound_available &&
+                result.compact_bc_best_bound_fail_reason.empty()) {
+                result.compact_bc_best_bound_fail_reason =
+                    "best_bound_unavailable_in_cplex_log";
+            }
         }
         result.interval_exact_cutoff_best_bound = std::isfinite(best_bound) ? best_bound : 0.0;
         result.interval_exact_cutoff_objective = std::isfinite(cplex_obj) ? cplex_obj : 0.0;
         result.interval_oracle_solver_best_bound = result.interval_exact_cutoff_best_bound;
         result.interval_oracle_solver_incumbent = result.interval_exact_cutoff_objective;
         result.compact_bc_best_bound = result.interval_exact_cutoff_best_bound;
+        if (std::isfinite(best_bound)) {
+            result.compact_bc_best_bound_available = true;
+            if (result.compact_bc_best_bound_fail_reason.empty()) {
+                result.compact_bc_best_bound_fail_reason = "none";
+            }
+        } else if (result.compact_bc_best_bound_fail_reason.empty()) {
+            result.compact_bc_best_bound_fail_reason =
+                "best_bound_unavailable";
+        }
         result.compact_bc_incumbent = result.interval_exact_cutoff_objective;
         result.compact_bc_time_seconds = result.interval_exact_cutoff_runtime_seconds;
 
@@ -3024,8 +3066,13 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 ? "CPLEX found an original feasible incumbent-improving route plan in this interval; it is UB-only and requires frontier restart."
                 : "CPLEX found/optimized an interval solution below the incumbent cutoff; interval remains unresolved but its valid solver bound may be merged.";
         } else {
-            result.status = statusIsTimeLimited(cplex_status) ? "interval_unresolved_timeout" : "interval_unresolved";
-            result.interval_exact_cutoff_timeout = statusIsTimeLimited(cplex_status);
+            const bool interval_timed_out =
+                statusIsTimeLimited(cplex_status) ||
+                (used_callback_api && api_solve.callback_wall_time_abort);
+            result.status = interval_timed_out
+                ? "interval_unresolved_timeout"
+                : "interval_unresolved";
+            result.interval_exact_cutoff_timeout = interval_timed_out;
             result.compact_interval_bc_timed_out_leaves =
                 result.interval_exact_cutoff_timeout ? 1 : 0;
             double merge_bound = 0.0;
@@ -3051,6 +3098,16 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             result.certificate = best_bound_is_valid
                 ? "CPLEX did not close the interval, but returned a valid original fixed-interval objective lower bound; interval remains unresolved unless the bound reaches incumbent cutoff."
                 : "CPLEX did not prove fixed-interval cutoff infeasibility or produce a valid mergeable bound; interval remains unresolved. CPLEX status: " + cplex_status;
+            result.plateau_detected = result.interval_exact_cutoff_timeout;
+            result.plateau_reason = best_bound_is_valid
+                ? "valid_bound_below_cutoff_after_compact_bc_timeout"
+                : result.compact_bc_best_bound_fail_reason;
+            if (result.last_bound_improvement_time <= 0.0) {
+                result.last_bound_improvement_time =
+                    result.progress_checkpoints_written > 0
+                        ? result.runtime_seconds
+                        : 0.0;
+            }
         }
         result.compact_interval_bc_bound_valid = result.interval_oracle_bound_valid;
         result.compact_bc_bound_valid = result.interval_oracle_bound_valid;
@@ -3086,6 +3143,9 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         result.compact_bc_rejection_reason = result.certificate;
         result.compact_interval_bc_bound_valid = false;
         result.compact_bc_bound_valid = false;
+        result.compact_bc_best_bound_available = false;
+        result.compact_bc_best_bound_fail_reason =
+            "exception_before_best_bound:" + std::string(e.what());
         result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
         result.interval_exact_cutoff_runtime_seconds = result.runtime_seconds;
         result.compact_bc_time_seconds = result.runtime_seconds;

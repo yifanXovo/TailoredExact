@@ -657,6 +657,8 @@ struct SolveResult {
     std::string thread_fairness_class = "unknown_not_paper";
     std::string compact_bc_solver_status;
     double compact_bc_best_bound = 0.0;
+    bool compact_bc_best_bound_available = false;
+    std::string compact_bc_best_bound_fail_reason;
     double compact_bc_incumbent = 0.0;
     long long compact_bc_nodes = 0;
     double compact_bc_time_seconds = 0.0;
@@ -795,6 +797,8 @@ struct SolveResult {
     bool interrupted_run_best_bound_preserved = false;
     std::string last_progress_event;
     std::string plateau_reason;
+    bool plateau_detected = false;
+    double last_bound_improvement_time = 0.0;
     bool solver_finalization_reached = false;
     bool wrapper_synthesized_final_json = false;
     int process_return_code = 0;

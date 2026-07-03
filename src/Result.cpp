@@ -497,6 +497,10 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.last_progress_event) << "\",\n";
     out << "  \"plateau_reason\": \""
         << jsonEscape(result.plateau_reason) << "\",\n";
+    out << "  \"plateau_detected\": "
+        << (result.plateau_detected ? "true" : "false") << ",\n";
+    out << "  \"last_bound_improvement_time\": "
+        << result.last_bound_improvement_time << ",\n";
     out << "  \"solver_finalization_reached\": "
         << (result.solver_finalization_reached ? "true" : "false") << ",\n";
     out << "  \"wrapper_synthesized_final_json\": "
@@ -1541,6 +1545,10 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.compact_bc_solver_status) << "\",\n";
     out << "  \"compact_bc_best_bound\": "
         << result.compact_bc_best_bound << ",\n";
+    out << "  \"compact_bc_best_bound_available\": "
+        << (result.compact_bc_best_bound_available ? "true" : "false") << ",\n";
+    out << "  \"compact_bc_best_bound_fail_reason\": \""
+        << jsonEscape(result.compact_bc_best_bound_fail_reason) << "\",\n";
     out << "  \"compact_bc_incumbent\": "
         << result.compact_bc_incumbent << ",\n";
     out << "  \"compact_bc_nodes\": "

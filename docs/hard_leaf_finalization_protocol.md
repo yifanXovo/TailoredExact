@@ -1,0 +1,42 @@
+# Hard Leaf Finalization Protocol
+
+This protocol applies to `paper-gf-tailored-bc` fixed-interval hard-leaf runs where CPLEX is managed through the tailored callback API.
+
+## Required Artifacts
+
+Every hard-leaf run must produce a final JSON, even if the native solver process exceeds the requested time limit or exits before the CPLEX best-bound API can be queried. The wrapper may write a noncertified JSON only when it clearly labels the source as wrapper finalization.
+
+The final JSON and summary CSVs must record:
+
+- `progress_log_path`;
+- `progress_checkpoints_written`;
+- `gap_trajectory_available`;
+- `compact_bc_best_bound_available`;
+- `compact_bc_best_bound_fail_reason`;
+- `plateau_detected`;
+- `last_bound_improvement_time`;
+- `finalization_source`;
+- `wrapper_timeout_noncertified` status when the wrapper, rather than CPLEX, terminates the row.
+
+## Checkpoint Semantics
+
+Callback-managed tailored BC rows must write heartbeat checkpoints at the configured progress interval. These checkpoint rows are diagnostic until CPLEX exposes a valid best bound for the fixed-interval model.
+
+Plain fixed-interval MIP rows and static tailored rows are not callback-managed rows. They are not required to write callback checkpoint rows, but they still must write final JSON.
+
+## Bound Validity
+
+A hard-leaf lower bound may enter paper evidence only when it has an explicit valid scope:
+
+- CPLEX final best bound for the original fixed-interval model;
+- fixed-interval infeasibility certificate;
+- valid relaxation/frontier bound;
+- audited full-frontier ledger aggregation.
+
+Wrapper checkpoints without a valid CPLEX best bound are progress diagnostics only. They must not be merged as paper-core lower-bound evidence.
+
+## Timeout Handling
+
+This round tested CPLEX callback wall-clock abort. The generic callback abort request did not reliably stop the moderate low-Gini hard leaf in this build. Therefore wrapper-managed timeout finalization remains mandatory for callback hard-leaf diagnostics.
+
+When a wrapper timeout occurs, the row must be noncertified unless a valid earlier checkpoint or solver-final certificate exists. If no valid best bound was exposed, summaries use `no_valid_bound_emitted`.

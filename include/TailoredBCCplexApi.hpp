@@ -32,6 +32,12 @@ struct TailoredBCCplexApiSolveResult {
     long long candidate_callback_calls = 0;
     long long branch_callback_calls = 0;
     long long progress_callback_calls = 0;
+    bool best_bound_available = false;
+    std::string best_bound_fail_reason;
+    bool checkpoint_log_written = false;
+    long long checkpoint_rows_written = 0;
+    double last_checkpoint_time = 0.0;
+    bool callback_wall_time_abort = false;
     long long user_cuts_added = 0;
     long long callback_gini_interval_cuts_added = 0;
     long long callback_visit_inventory_cuts_added = 0;
@@ -123,6 +129,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     int gini_subset_max_cuts,
     double lambda,
     double cutoff_value,
-    int vehicle_count);
+    int vehicle_count,
+    const std::filesystem::path& progress_log_path = {},
+    double progress_interval_seconds = 0.0);
 
 } // namespace ebrp

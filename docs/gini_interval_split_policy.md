@@ -14,3 +14,7 @@ This round did not promote a new default split policy. The hard fixed-interval r
 3. Use the outer-controller only through the audited full-frontier ledger, never as an ad hoc timeout switch.
 
 Future split-policy comparisons should use the same fixed intervals, one-thread settings, and completed solver-final or checkpointed bound artifacts.
+
+## Next Optimization Round Note
+
+The next-optimization hard-leaf runs confirmed that callback Gini branching can receive callback contexts, but the moderate low-Gini leaves did not expose a valid final best bound before wrapper termination. No new Gini split policy is promoted to paper default from those diagnostics. Any split-policy result without a solver-final or valid checkpointed bound remains diagnostic.
