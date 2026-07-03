@@ -2708,6 +2708,14 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 api_solve.best_bound_available;
             result.compact_bc_best_bound_fail_reason =
                 api_solve.best_bound_fail_reason;
+            result.compact_bc_native_time_limit_param_id =
+                api_solve.native_time_limit_param_id;
+            result.compact_bc_native_time_limit_seconds =
+                api_solve.native_time_limit_seconds;
+            result.compact_bc_native_time_limit_set_rc =
+                api_solve.native_time_limit_set_rc;
+            result.compact_bc_callback_abort_requests =
+                api_solve.callback_abort_requests;
             used_callback_api = api_solve.available && api_solve.solved;
             rc = api_solve.return_code;
             if (used_callback_api) {

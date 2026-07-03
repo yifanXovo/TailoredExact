@@ -31,3 +31,12 @@ This proves the callback boundary is now technically open for relaxation, candid
 The next-optimization round added callback heartbeat progress logging and explicit best-bound availability fields. It also tested a CPLEX callback wall-clock abort request. On the moderate low-Gini fixed-interval leaves, callback activity continued beyond the requested native time limit and no valid CPLEX best bound was exposed before wrapper termination.
 
 Consequently, wrapper-managed final JSON remains required for hard-leaf diagnostics. A wrapper-finalized row without a valid CPLEX final best bound is noncertified and cannot contribute paper-core lower-bound evidence.
+
+The finalization round records the native CPLEX time-limit boundary explicitly:
+
+- `compact_bc_native_time_limit_param_id = 1039`, the C API parameter id for `CPX_PARAM_TILIM`;
+- `compact_bc_native_time_limit_seconds`, the requested CPLEX native time limit;
+- `compact_bc_native_time_limit_set_rc`, the return code from setting the parameter before `CPXmipopt`;
+- `compact_bc_callback_abort_requests`, the number of callback-side abort requests issued after the same wall-clock deadline was reached.
+
+The branch-callback smoke row passes and verifies that branch callback context can be reached and that custom branch objects can be created. The hard moderate low-Gini rows still show the important empirical limitation: even with `CPX_PARAM_TILIM` set and callback-side abort requests wired into long separation/candidate loops, CPLEX may not return a final best bound before the parent process boundary stops the diagnostic worker. Such rows are deliberately classified as noncertified wrapper finalizations.

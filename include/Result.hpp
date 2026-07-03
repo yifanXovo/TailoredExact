@@ -659,6 +659,10 @@ struct SolveResult {
     double compact_bc_best_bound = 0.0;
     bool compact_bc_best_bound_available = false;
     std::string compact_bc_best_bound_fail_reason;
+    int compact_bc_native_time_limit_param_id = 0;
+    double compact_bc_native_time_limit_seconds = 0.0;
+    int compact_bc_native_time_limit_set_rc = 0;
+    long long compact_bc_callback_abort_requests = 0;
     double compact_bc_incumbent = 0.0;
     long long compact_bc_nodes = 0;
     double compact_bc_time_seconds = 0.0;

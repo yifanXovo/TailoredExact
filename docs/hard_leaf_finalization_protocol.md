@@ -13,6 +13,10 @@ The final JSON and summary CSVs must record:
 - `gap_trajectory_available`;
 - `compact_bc_best_bound_available`;
 - `compact_bc_best_bound_fail_reason`;
+- `compact_bc_native_time_limit_param_id`;
+- `compact_bc_native_time_limit_seconds`;
+- `compact_bc_native_time_limit_set_rc`;
+- `compact_bc_callback_abort_requests`;
 - `plateau_detected`;
 - `last_bound_improvement_time`;
 - `finalization_source`;
@@ -40,3 +44,5 @@ Wrapper checkpoints without a valid CPLEX best bound are progress diagnostics on
 This round tested CPLEX callback wall-clock abort. The generic callback abort request did not reliably stop the moderate low-Gini hard leaf in this build. Therefore wrapper-managed timeout finalization remains mandatory for callback hard-leaf diagnostics.
 
 When a wrapper timeout occurs, the row must be noncertified unless a valid earlier checkpoint or solver-final certificate exists. If no valid best bound was exposed, summaries use `no_valid_bound_emitted`.
+
+The finalization round confirmed that `CPX_PARAM_TILIM` is set before `CPXmipopt` and that callback-side deadline checks can request `CPXcallbackabort`. These safeguards are recorded for audit, but they are not themselves certificate evidence. If CPLEX does not return a final status and best bound, the parent wrapper may preserve progress traces and produce final JSON only under a noncertified status.
