@@ -13,8 +13,8 @@ Current implementation status:
 - selector/outer-controller metadata is emitted;
 - a generic CPLEX callback is registered and branch-context events are counted when CPLEX enters that context;
 - a one-shot custom Gini split callback is wired for branch context when `--tailored-bc-gini-branching callback` is requested;
-- `tailored-bc-branch-callback-smoke-test` now solves a diagnostic-only multidimensional binary knapsack through the same dynamic CPLEX C API with traditional search, presolve disabled, and branch priorities applied.  The current evidence row reports callback availability, relaxation and candidate callbacks, and 30 branch priorities applied, but CPLEX still solves before entering branch context (`tailored_bc_branch_callback_calls=0`, `tailored_bc_gini_branches_created=0`).
+- `tailored-bc-branch-callback-smoke-test` now solves a diagnostic-only multidimensional binary knapsack through the same dynamic CPLEX C API with traditional search, presolve disabled, and branch priorities applied.  The current evidence row reports callback availability, relaxation/candidate callbacks, 90 branch priorities applied, branch callback context calls, and two one-shot Gini branches created through `CPXcallbackmakebranch`.
 
 Any row with callback branching disabled must not claim callback branch-and-cut evidence.
 
-Current paper status: Gini branch callbacks are implemented at the API boundary but not performance- or branch-context validated on ExactEBRP hard leaves.  Branch priorities are the only observed branching control mechanism in the callback round.
+Current paper status: Gini branch callbacks are implemented and mechanically observed in a diagnostic CPLEX toy MIP. They are not yet performance-validated on ExactEBRP hard leaves, so paper rows must still distinguish this boundary test from hard-leaf tailored-BC effectiveness.

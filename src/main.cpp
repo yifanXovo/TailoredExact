@@ -9293,41 +9293,47 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
              ".lp");
         {
             std::ofstream lp(lp_path);
-            lp << "\\ Diagnostic-only fractional knapsack used to exercise CPLEX generic branch callbacks.\n";
+            lp << "\\ Diagnostic-only multidimensional 0-1 knapsack used to exercise CPLEX generic branch callbacks.\n";
             lp << "Minimize\n";
             lp << " obj:";
-            for (int i = 1; i <= 30; ++i) {
-                const int profit = 17 + ((i * 13) % 29);
+            constexpr int toy_vars = 90;
+            constexpr int toy_rows = 20;
+            for (int i = 1; i <= toy_vars; ++i) {
+                const int profit = 31 + ((i * 37 + i * i * 3) % 97);
                 lp << " - " << profit << " bit_" << i;
             }
             lp << "\n";
             lp << "Subject To\n";
-            const int rhs[5] = {137, 149, 126, 118, 144};
-            for (int c = 0; c < 5; ++c) {
+            for (int c = 0; c < toy_rows; ++c) {
                 lp << " cap_" << c << ":";
-                for (int i = 1; i <= 30; ++i) {
-                    const int weight = 5 + ((i * (7 + c * 3) + c * 11) % 23);
+                long long total_weight = 0;
+                for (int i = 1; i <= toy_vars; ++i) {
+                    const int weight =
+                        7 + ((i * (11 + c * 5) + c * 17 + i * i) % 41);
+                    total_weight += weight;
                     if (i > 1) lp << " +";
                     lp << " " << weight << " bit_" << i;
                 }
-                lp << " <= " << rhs[c] << "\n";
+                const long long rhs =
+                    total_weight / 2 - 3 - (c % 5);
+                lp << " <= " << rhs << "\n";
             }
             lp << " g_link: G - bit_1 = 0\n";
             lp << "Bounds\n";
             lp << " 0 <= G <= 1\n";
             lp << "Binaries\n";
-            for (int i = 1; i <= 30; ++i) {
+            for (int i = 1; i <= toy_vars; ++i) {
                 lp << " bit_" << i;
                 if (i % 10 == 0) lp << "\n";
             }
-            if (30 % 10 != 0) lp << "\n";
+            if (toy_vars % 10 != 0) lp << "\n";
             lp << "End\n";
         }
         const ebrp::TailoredBCCplexApiSolveResult api =
             ebrp::solveLpWithTailoredBCCplexApi(
                 lp_path,
                 std::max(5.0, opt.solve_time_limit > 0.0
-                    ? std::min(30.0, opt.solve_time_limit)
+                    ? std::min(8.0, opt.solve_time_limit)
                     : 10.0),
                 std::max(1, opt.compact_bc_threads > 0
                     ? opt.compact_bc_threads

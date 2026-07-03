@@ -628,7 +628,7 @@ def main() -> int:
         "- `tailored_cut_ablation.csv` records paper-safe static tailored cut guards.",
         "- `tailored_bc_vs_static.csv` separates true callback BC from static fallback.",
         "- `callback_event_summary.csv` records callback events from the fixed-interval smoke solve when callbacks are available.",
-        "- `tailored_branch_callback_smoke.csv` records a diagnostic-only CPLEX toy MIP branch-smoke row. It currently applies branch priorities and records relaxation/candidate callbacks, but CPLEX does not enter branch context in the observed run.",
+        "- `tailored_branch_callback_smoke.csv` records a diagnostic-only CPLEX toy MIP branch-smoke row. It applies branch priorities, records relaxation/candidate callbacks, enters CPLEX branch context, and creates one-shot Gini branches through `CPXcallbackmakebranch`.",
         "- `interval_callback_separator_diagnostic.json` disables overlapping static tailored cut families and confirms that relaxation-point callback separators are invoked without using diagnostic evidence as a paper certificate.",
         "- `moderate_seed3301_low_gini1_callback_guarded.json` is a guarded hard-leaf diagnostic. If the in-process CPLEX callback path exceeds the outer wrapper timeout, the runner writes an honest noncertificate timeout JSON instead of leaving a missing artifact.",
         "- `source_classification.csv` preserves tailored source classes per JSON row.",
@@ -657,7 +657,7 @@ def main() -> int:
         "",
         "## Paper Claim",
         "",
-        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate compact-row consistency validation, and branch-order priority injection. A diagnostic branch-smoke row is present, but the current evidence still reports no observed CPLEX branch-context callback calls and no created Gini branches. It is not yet the full requested tailored branch-and-cut: verifier-backed route-plan lazy incumbent rejection, observed custom Gini branch creation on hard leaves, hard-leaf callback ablations, and performance-positive hard-leaf evidence remain incomplete.",
+        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate compact-row consistency validation, branch-order priority injection, and diagnostic branch-context evidence with one-shot Gini branches created through `CPXcallbackmakebranch`. It is not yet the full requested tailored branch-and-cut: verifier-backed route-plan lazy incumbent rejection, observed custom Gini branch creation on ExactEBRP hard leaves, hard-leaf callback ablations, and performance-positive hard-leaf evidence remain incomplete.",
         "",
         "Final commit SHA: recorded in the final assistant response after commit creation.",
     ])
