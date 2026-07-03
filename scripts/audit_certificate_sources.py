@@ -34,6 +34,9 @@ def main() -> int:
         "wrapper_checkpoint_only",
         "model_size_limit",
         "invalid_or_unknown",
+        "static_fallback",
+        "tailored_bc_certified",
+        "tailored_bc_assisted_noncertified",
         # Backward-compatible classes from the first effectiveness package.
         "relaxation_only",
         "relaxation_plus_compact_bc",
@@ -50,6 +53,8 @@ def main() -> int:
             reasons.append("optimal_row_has_noncertified_source_class")
         if certified and cls in {"unresolved", "wrapper_checkpoint_only", "invalid_or_unknown", "model_size_limit"}:
             reasons.append("certified_row_has_invalid_source_class")
+        if certified and cls == "static_fallback":
+            reasons.append("certified_row_static_fallback_not_true_tailored_callback")
         if str(row.get("inconsistent_source_label_detected", "")).lower() == "true":
             reasons.append("inconsistent_source_label_detected")
         if str(row.get("selected_for_summary", "")).lower() == "true" and cls in {"compact_bc_leaf_diagnostic", "benchmark_only"}:

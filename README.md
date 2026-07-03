@@ -14,11 +14,21 @@ cmake --build build -j
 Fallback used on machines without CMake:
 
 ```powershell
-g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluator.cpp src/Result.cpp src/Bounds.cpp src/ColumnPool.cpp src/TailoredExact.cpp src/Pricing.cpp src/Cuts.cpp src/Branching.cpp src/Master.cpp src/ColumnGeneration.cpp src/CplexBaseline.cpp src/hga_tgbc/HgaTgbcGreedy.cpp src/HgaTgbcRunner.cpp src/Logger.cpp src/main.cpp -o build/ExactEBRP.exe
-g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluator.cpp src/Result.cpp src/Bounds.cpp src/ColumnPool.cpp src/TailoredExact.cpp src/Pricing.cpp src/Cuts.cpp src/Branching.cpp src/Master.cpp src/ColumnGeneration.cpp src/CplexBaseline.cpp src/hga_tgbc/HgaTgbcGreedy.cpp src/HgaTgbcRunner.cpp src/Logger.cpp src/compare_main.cpp -o build/ExactEBRPCompare.exe
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluator.cpp src/Result.cpp src/Bounds.cpp src/ColumnPool.cpp src/TailoredExact.cpp src/Pricing.cpp src/Cuts.cpp src/Branching.cpp src/Master.cpp src/ColumnGeneration.cpp src/CplexBaseline.cpp src/TailoredBC.cpp src/TailoredBCCuts.cpp src/TailoredBCCallbacks.cpp src/GiniBranching.cpp src/hga_tgbc/HgaTgbcGreedy.cpp src/HgaTgbcRunner.cpp src/Logger.cpp src/main.cpp -o build/ExactEBRP.exe
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluator.cpp src/Result.cpp src/Bounds.cpp src/ColumnPool.cpp src/TailoredExact.cpp src/Pricing.cpp src/Cuts.cpp src/Branching.cpp src/Master.cpp src/ColumnGeneration.cpp src/CplexBaseline.cpp src/TailoredBC.cpp src/TailoredBCCuts.cpp src/TailoredBCCallbacks.cpp src/GiniBranching.cpp src/hga_tgbc/HgaTgbcGreedy.cpp src/HgaTgbcRunner.cpp src/Logger.cpp src/compare_main.cpp -o build/ExactEBRPCompare.exe
 ```
 
 ## Main Exact Line
+
+### Tailored callback BC status
+
+`paper-gf-tailored-bc` is reserved for a future CPLEX-managed tailored
+branch-and-cut line with in-process user-cut, lazy, incumbent, and branching
+callbacks. The current MinGW build still drives CPLEX through command files in
+`src/CplexBaseline.cpp`, so true callbacks are not available. Rows using this
+preset are labelled `static_fallback` unless a callback-capable CPLEX API build
+is provided. Static tailored rows may be useful compact-BC strengthening, but
+they are not callback branch-and-cut evidence.
 
 The current paper-facing exact line is the Gini-frontier compact
 branch-and-cut/certification framework:

@@ -2,6 +2,7 @@
 
 #include "Evaluator.hpp"
 #include "Logger.hpp"
+#include "TailoredBC.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -62,6 +63,12 @@ struct CompactOracleStrengtheningStats {
     long long s_range_rows_added = 0;
     long long sp_product_mccormick_rows_added = 0;
     long long sp_product_estimator_rows_added = 0;
+    long long tailored_gini_subset_envelope_candidates = 0;
+    long long tailored_gini_subset_envelope_cuts_added = 0;
+    long long tailored_low_gini_l1_vars = 0;
+    long long tailored_low_gini_l1_rows_added = 0;
+    long long tailored_subset_inventory_imbalance_cuts_added = 0;
+    long long tailored_transfer_cutset_cuts_added = 0;
     bool s_range_refinement_enabled = false;
     double s_range_global_L = 0.0;
     double s_range_global_U = 0.0;
@@ -437,6 +444,7 @@ void writeCompactLp(const Instance& instance,
     const double g_ub = (cutoff != nullptr && cutoff->enabled)
         ? std::min(1.0, std::max(cutoff->gamma_L, cutoff->gamma_U))
         : 1.0;
+    const bool tailored_active = strengthened && options.tailored_bc_enabled;
     vars.add("G", g_lb, g_ub, "C");
     double max_ratio_cap = 0.0;
     for (int i = 1; i <= V; ++i) {
@@ -455,6 +463,13 @@ void writeCompactLp(const Instance& instance,
         vars.add(yName(i), y_lb[i], y_ub[i], "I");
         vars.add(rName(i), 0, static_cast<double>(instance.capacity[i]) / instance.target[i], "C");
         vars.add(eName(i), 0, std::max(1.0, static_cast<double>(instance.capacity[i]) / instance.target[i] - 1.0), "C");
+        if (tailored_active && options.tailored_bc_low_gini_l1_centering &&
+            cutoff != nullptr && cutoff->enabled && cutoff->gamma_U >= -1e-12) {
+            vars.add("q_l1_" + std::to_string(i), 0,
+                     static_cast<double>(instance.capacity[i]) / instance.target[i] + max_ratio_cap,
+                     "C");
+            if (stats != nullptr) ++stats->tailored_low_gini_l1_vars;
+        }
         vars.add(zprodName(i), 0, instance.capacity[i], "C");
         int bits = 1;
         while (((1LL << bits) - 1) < instance.capacity[i]) ++bits;
@@ -938,6 +953,142 @@ void writeCompactLp(const Instance& instance,
         }
         writeConstraint(out, cid, floor, ">=", 0);
         if (stats != nullptr) ++stats->direct_gini_floor_rows_added;
+    }
+    if (tailored_active && cutoff != nullptr && cutoff->enabled &&
+        options.tailored_bc_gini_subset_envelope && cutoff->gamma_U >= -1e-12) {
+        if (stats != nullptr) stats->enabled_families.push_back("gini_subset_envelope");
+        const int max_size = std::min({3, V - 1, std::max(1, options.tailored_bc_gini_subset_max_size)});
+        const long long max_cuts = std::max(0, options.tailored_bc_gini_subset_max_cuts);
+        long long cuts = 0;
+        auto addSubsetEnvelope = [&](const std::vector<int>& subset) {
+            if (max_cuts > 0 && cuts + 2 > max_cuts) return;
+            const int a = static_cast<int>(subset.size());
+            Expr plus;
+            Expr minus;
+            for (int i = 1; i <= V; ++i) {
+                addTerm(plus, rName(i), -static_cast<double>(a) -
+                        static_cast<double>(V) * cutoff->gamma_U);
+                addTerm(minus, rName(i), static_cast<double>(a) -
+                        static_cast<double>(V) * cutoff->gamma_U);
+            }
+            for (int i : subset) {
+                addTerm(plus, rName(i), static_cast<double>(V));
+                addTerm(minus, rName(i), -static_cast<double>(V));
+            }
+            writeConstraint(out, cid, plus, "<=", 0.0);
+            writeConstraint(out, cid, minus, "<=", 0.0);
+            cuts += 2;
+            if (stats != nullptr) {
+                ++stats->tailored_gini_subset_envelope_candidates;
+                stats->tailored_gini_subset_envelope_cuts_added += 2;
+            }
+        };
+        if (max_size >= 1) {
+            for (int a = 1; a <= V; ++a) addSubsetEnvelope({a});
+        }
+        if (max_size >= 2) {
+            for (int a = 1; a <= V; ++a) {
+                for (int b = a + 1; b <= V; ++b) addSubsetEnvelope({a, b});
+            }
+        }
+        if (max_size >= 3) {
+            for (int a = 1; a <= V; ++a) {
+                for (int b = a + 1; b <= V; ++b) {
+                    for (int c = b + 1; c <= V; ++c) addSubsetEnvelope({a, b, c});
+                }
+            }
+        }
+    }
+    if (tailored_active && cutoff != nullptr && cutoff->enabled &&
+        options.tailored_bc_low_gini_l1_centering && cutoff->gamma_U >= -1e-12) {
+        if (stats != nullptr) stats->enabled_families.push_back("low_gini_l1_centering");
+        Expr sum_q;
+        for (int i = 1; i <= V; ++i) {
+            const std::string q = "q_l1_" + std::to_string(i);
+            addTerm(sum_q, q, 1.0);
+            Expr pos;
+            addTerm(pos, q, static_cast<double>(V));
+            addTerm(pos, rName(i), -static_cast<double>(V));
+            for (int j = 1; j <= V; ++j) addTerm(pos, rName(j), 1.0);
+            writeConstraint(out, cid, pos, ">=", 0.0);
+            Expr neg;
+            addTerm(neg, q, static_cast<double>(V));
+            addTerm(neg, rName(i), static_cast<double>(V));
+            for (int j = 1; j <= V; ++j) addTerm(neg, rName(j), -1.0);
+            writeConstraint(out, cid, neg, ">=", 0.0);
+            if (stats != nullptr) stats->tailored_low_gini_l1_rows_added += 2;
+        }
+        for (int i = 1; i <= V; ++i) {
+            addTerm(sum_q, rName(i), -2.0 * cutoff->gamma_U);
+        }
+        writeConstraint(out, cid, sum_q, "<=", 0.0);
+        if (stats != nullptr) ++stats->tailored_low_gini_l1_rows_added;
+    }
+    if (tailored_active && options.tailored_bc_subset_inventory_imbalance) {
+        if (stats != nullptr) stats->enabled_families.push_back("subset_inventory_imbalance");
+        const int max_size = std::min({3, V, std::max(1, options.tailored_bc_subset_inventory_max_size)});
+        auto addSubsetInventory = [&](const std::vector<int>& subset) {
+            int initial_sum = 0;
+            int room_sum = 0;
+            int bikes_sum = 0;
+            Expr ysum;
+            for (int i : subset) {
+                initial_sum += instance.initial[i];
+                room_sum += instance.capacity[i] - instance.initial[i];
+                bikes_sum += instance.initial[i];
+                addTerm(ysum, yName(i), 1.0);
+            }
+            double plus = 0.0;
+            double minus = 0.0;
+            for (int k = 0; k < M; ++k) {
+                const int move_budget = cunit > 1e-12
+                    ? static_cast<int>(std::floor(instance.total_time_limit / cunit + 1e-9))
+                    : instance.Q[k];
+                plus += std::min({instance.Q[k], room_sum, move_budget});
+                minus += std::min({instance.Q[k], bikes_sum, move_budget});
+            }
+            writeConstraint(out, cid, ysum, "<=", initial_sum + plus);
+            Expr ysum_lb = ysum;
+            writeConstraint(out, cid, ysum_lb, ">=", initial_sum - minus);
+            if (stats != nullptr) stats->tailored_subset_inventory_imbalance_cuts_added += 2;
+        };
+        if (max_size >= 1) {
+            for (int a = 1; a <= V; ++a) addSubsetInventory({a});
+        }
+        if (max_size >= 2) {
+            for (int a = 1; a <= V; ++a) {
+                for (int b = a + 1; b <= V; ++b) addSubsetInventory({a, b});
+            }
+        }
+        if (max_size >= 3) {
+            for (int a = 1; a <= V; ++a) {
+                for (int b = a + 1; b <= V; ++b) {
+                    for (int c = b + 1; c <= V; ++c) addSubsetInventory({a, b, c});
+                }
+            }
+        }
+    }
+    if (tailored_active && options.tailored_bc_transfer_cutset) {
+        if (stats != nullptr) stats->enabled_families.push_back("vehicle_transfer_cutset_basic");
+        auto addTransferCutset = [&](const std::vector<int>& subset) {
+            std::set<int> in_subset(subset.begin(), subset.end());
+            for (int k = 0; k < M; ++k) {
+                Expr cut;
+                for (int j : subset) {
+                    addTerm(cut, dName(k, j), 1.0);
+                    addTerm(cut, pName(k, j), -1.0);
+                }
+                for (int i = 1; i <= V; ++i) {
+                    if (!in_subset.count(i)) addTerm(cut, pName(k, i), -1.0);
+                }
+                writeConstraint(out, cid, cut, "<=", 0.0);
+                if (stats != nullptr) ++stats->tailored_transfer_cutset_cuts_added;
+            }
+        };
+        for (int a = 1; a <= V; ++a) addTransferCutset({a});
+        for (int a = 1; a <= V; ++a) {
+            for (int b = a + 1; b <= V; ++b) addTransferCutset({a, b});
+        }
     }
     if (strengthened && cutoff != nullptr && cutoff->enabled &&
         options.gini_spread_cuts && cutoff->gamma_U >= -1e-12 && V > 1) {
@@ -2050,6 +2201,7 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         options.compact_bc_sp_product_estimator == "paper-safe";
     result.compact_bc_low_gini_precheck =
         options.compact_bc_low_gini_precheck;
+    populateTailoredBCResultFields(options, result);
     result.compact_bc_expensive_static_families =
         options.compact_bc_expensive_static_families;
     result.compact_bc_use_dynamic_instead_of_static =
@@ -2203,6 +2355,7 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             model_options.compact_bc_sp_product_estimator == "paper-safe";
         result.compact_bc_low_gini_precheck =
             model_options.compact_bc_low_gini_precheck;
+        populateTailoredBCResultFields(model_options, result);
         result.compact_bc_expensive_static_families =
             model_options.compact_bc_expensive_static_families;
         result.compact_bc_use_dynamic_instead_of_static =
@@ -2321,6 +2474,35 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             strengthening_stats.sp_product_mccormick_rows_added;
         result.compact_bc_sp_product_estimator_rows_added =
             strengthening_stats.sp_product_estimator_rows_added;
+        result.tailored_bc_gini_subset_envelope_candidates =
+            strengthening_stats.tailored_gini_subset_envelope_candidates;
+        result.tailored_bc_gini_subset_envelope_cuts_added =
+            strengthening_stats.tailored_gini_subset_envelope_cuts_added;
+        result.tailored_bc_user_cuts_added_total =
+            strengthening_stats.tailored_gini_subset_envelope_cuts_added +
+            strengthening_stats.tailored_low_gini_l1_rows_added +
+            strengthening_stats.tailored_subset_inventory_imbalance_cuts_added +
+            strengthening_stats.tailored_transfer_cutset_cuts_added;
+        result.tailored_bc_low_gini_l1_centering_vars =
+            strengthening_stats.tailored_low_gini_l1_vars;
+        result.tailored_bc_low_gini_l1_centering_rows_added =
+            strengthening_stats.tailored_low_gini_l1_rows_added;
+        result.tailored_bc_subset_inventory_imbalance_cuts_added =
+            strengthening_stats.tailored_subset_inventory_imbalance_cuts_added;
+        result.tailored_bc_transfer_cutset_cuts_added =
+            strengthening_stats.tailored_transfer_cutset_cuts_added;
+        {
+            std::ostringstream tbc;
+            tbc << "gini_subset_envelope="
+                << result.tailored_bc_gini_subset_envelope_cuts_added
+                << ";low_gini_l1_centering="
+                << result.tailored_bc_low_gini_l1_centering_rows_added
+                << ";subset_inventory_imbalance="
+                << result.tailored_bc_subset_inventory_imbalance_cuts_added
+                << ";transfer_cutset="
+                << result.tailored_bc_transfer_cutset_cuts_added;
+            result.tailored_bc_user_cuts_added_by_family = tbc.str();
+        }
         result.compact_bc_support_duration_pair_cuts_added =
             strengthening_stats.support_duration_pair_cuts_added;
         result.compact_bc_support_duration_triple_cuts_added =
@@ -2368,6 +2550,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                  << ";s_range=" << result.compact_bc_s_range_rows_added
                  << ";sp_product_mccormick=" << result.compact_bc_sp_product_mccormick_rows_added
                  << ";sp_product_estimator=" << result.compact_bc_sp_product_estimator_rows_added
+                 << ";tailored_gini_subset_envelope=" << result.tailored_bc_gini_subset_envelope_cuts_added
+                 << ";tailored_low_gini_l1_centering=" << result.tailored_bc_low_gini_l1_centering_rows_added
+                 << ";tailored_subset_inventory_imbalance=" << result.tailored_bc_subset_inventory_imbalance_cuts_added
+                 << ";tailored_transfer_cutset=" << result.tailored_bc_transfer_cutset_cuts_added
                  << ";gini_spread=" << result.gini_spread_cuts_added
                  << ";required_movement=" << result.required_movement_cuts_added
                  << ";global_handling_capacity=" << result.global_handling_capacity_cuts_added
@@ -2579,6 +2765,14 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         result.notes.push_back("CPLEX process return code: " + std::to_string(rc));
         result.notes.push_back("LP file: " + lp_path.string());
         result.notes.push_back("CPLEX log: " + cplex_log.string());
+        if (result.tailored_bc_enabled) {
+            result.tailored_bc_source_class = tailoredBCSourceClass(result);
+            if (result.tailored_bc_mode == "static_fallback") {
+                result.notes.push_back(
+                    "paper-gf-tailored-bc callback mode is unavailable in this build; "
+                    "this fixed-interval row is static fallback evidence, not a true callback BC claim.");
+            }
+        }
     } catch (const std::exception& e) {
         result.status = "error";
         result.interval_exact_cutoff_certificate_basis = "interval_exact_cutoff_mip_error";
@@ -2590,6 +2784,9 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
         result.interval_exact_cutoff_runtime_seconds = result.runtime_seconds;
         result.compact_bc_time_seconds = result.runtime_seconds;
+        if (result.tailored_bc_enabled) {
+            result.tailored_bc_source_class = tailoredBCSourceClass(result);
+        }
     }
     return result;
 }

@@ -10,6 +10,8 @@
 #include "Parser.hpp"
 #include "Pricing.hpp"
 #include "Result.hpp"
+#include "TailoredBC.hpp"
+#include "TailoredBCCuts.hpp"
 #include "TailoredExact.hpp"
 
 #include <algorithm>
@@ -43,7 +45,7 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|interval-cutoff-oracle|primal-heuristic|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|option-consistency-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|projection-safe-relaxed-column-test|non-elementary-relaxed-column-test|ng-relaxed-closure-test|relaxed-rmp-cg-test|frontier-relaxed-rmp-cg-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|large-relaxed-rmp-cg-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|interval-cutoff-oracle|primal-heuristic|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|option-consistency-test|tailored-bc-callback-smoke-test|tailored-bc-cut-validity-test|gini-subset-envelope-test|low-gini-l1-centering-test|transfer-cutset-validity-test|s-bucket-coverage-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|projection-safe-relaxed-column-test|non-elementary-relaxed-column-test|ng-relaxed-closure-test|relaxed-rmp-cg-test|frontier-relaxed-rmp-cg-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|large-relaxed-rmp-cg-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
@@ -137,7 +139,7 @@ void usage() {
         << "[--pricing-final-verifier true|false] [--pricing-verifier-time <seconds>] "
         << "[--pricing-verifier-checkpoint <path>] [--pricing-verifier-resume <path>] "
         << "[--pricing-verifier-mode label-dp|route-mask-dp|auto] "
-        << "[--algorithm-preset paper-gf-compact-bc|paper-gf-bpc-core|paper-bpc-core|paper-bpc-core-adaptive|paper-exact-v20-certificate|paper-exact-portfolio|paper-bpc-experimental|diagnostic-large] "
+        << "[--algorithm-preset paper-gf-tailored-bc|paper-gf-compact-bc|paper-gf-bpc-core|paper-bpc-core|paper-bpc-core-adaptive|paper-exact-v20-certificate|paper-exact-portfolio|paper-bpc-experimental|diagnostic-large] "
         << "[--production-preset <preset-alias>] [--incumbent-archive-auto true|false] "
         << "[--incumbent-archive-dir <dir>]\n";
 }
@@ -184,7 +186,8 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.algorithm_preset = "paper-gf-compact-bc";
     }
 
-    if (opt.algorithm_preset == "paper-gf-compact-bc" ||
+    if (opt.algorithm_preset == "paper-gf-tailored-bc" ||
+        opt.algorithm_preset == "paper-gf-compact-bc" ||
         opt.algorithm_preset == "paper-gf-bpc-core" ||
         opt.algorithm_preset == "paper-bpc-core" ||
         opt.algorithm_preset == "paper-bpc-core-adaptive" ||
@@ -239,14 +242,16 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         if (!opt.primal_heuristic_explicit) {
             opt.primal_heuristic = "hga-tgbc";
         }
-        if (opt.algorithm_preset == "paper-gf-compact-bc" ||
+        if (opt.algorithm_preset == "paper-gf-tailored-bc" ||
+            opt.algorithm_preset == "paper-gf-compact-bc" ||
             opt.algorithm_preset == "paper-gf-bpc-core" ||
             opt.algorithm_preset == "paper-bpc-core") {
             opt.route_mask_max_v = 0;
             opt.route_mask_support_duration_pruning = false;
             opt.route_mask_operation_budget_cuts = false;
         }
-        if (opt.algorithm_preset == "paper-gf-compact-bc") {
+        if (opt.algorithm_preset == "paper-gf-compact-bc" ||
+            opt.algorithm_preset == "paper-gf-tailored-bc") {
             opt.relaxation_portfolio_mode = "fixed";
             opt.relaxation_portfolio_keep_best_bound = true;
             opt.v20_safe_relaxation_cuts = true;
@@ -301,6 +306,21 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
             }
             if (opt.compact_bc_time_limit <= 0.0) {
                 opt.compact_bc_time_limit = opt.auto_interval_oracle_time_limit;
+            }
+            if (opt.algorithm_preset == "paper-gf-tailored-bc") {
+                opt.tailored_bc_enabled = true;
+                opt.tailored_bc_mode = "callback";
+                opt.tailored_bc_branching_priority = "adaptive";
+                opt.tailored_bc_gini_branching = "auto";
+                opt.tailored_bc_gini_subset_envelope = true;
+                opt.tailored_bc_low_gini_l1_centering = true;
+                opt.tailored_bc_subset_inventory_imbalance = true;
+                opt.tailored_bc_transfer_cutset = true;
+                opt.compact_bc_root_cut_rounds = std::max(opt.compact_bc_root_cut_rounds, 1);
+                if (opt.compact_bc_dynamic_cut_families.empty()) {
+                    opt.compact_bc_dynamic_cut_families =
+                        "support,transfer,visit,objective,low_gini";
+                }
             }
             opt.bpc_incumbent = "none";
             opt.compact_fallback_enabled = false;
@@ -706,6 +726,48 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         }
         else if (arg == "--compact-bc-low-gini-precheck") {
             opt.compact_bc_low_gini_precheck = lowerAscii(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-enabled") {
+            opt.tailored_bc_enabled = parseBoolValue(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-mode") {
+            opt.tailored_bc_mode = lowerAscii(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-branching-priority") {
+            opt.tailored_bc_branching_priority = lowerAscii(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-gini-branching") {
+            opt.tailored_bc_gini_branching = lowerAscii(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-gini-branch-min-width") {
+            opt.tailored_bc_gini_branch_min_width = std::stod(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-gini-branch-score-threshold") {
+            opt.tailored_bc_gini_branch_score_threshold = std::stod(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-gini-subset-envelope") {
+            opt.tailored_bc_gini_subset_envelope = parseBoolValue(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-gini-subset-max-size") {
+            opt.tailored_bc_gini_subset_max_size = std::stoi(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-gini-subset-max-cuts") {
+            opt.tailored_bc_gini_subset_max_cuts = std::stoi(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-low-gini-l1-centering") {
+            opt.tailored_bc_low_gini_l1_centering = parseBoolValue(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-subset-inventory-imbalance") {
+            opt.tailored_bc_subset_inventory_imbalance = parseBoolValue(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-subset-inventory-max-size") {
+            opt.tailored_bc_subset_inventory_max_size = std::stoi(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-transfer-cutset") {
+            opt.tailored_bc_transfer_cutset = parseBoolValue(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-benders-inventory-cuts") {
+            opt.tailored_bc_benders_inventory_cuts = lowerAscii(requireValue(i, argc, argv));
         }
         else if (arg == "--compact-bc-model-size-policy") opt.compact_bc_model_size_policy = requireValue(i, argc, argv);
         else if (arg == "--compact-bc-max-rows") opt.compact_bc_max_rows = std::stoll(requireValue(i, argc, argv));
@@ -1526,6 +1588,43 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.compact_bc_low_gini_precheck != "both") {
         opt.compact_bc_low_gini_precheck = "off";
     }
+    opt.tailored_bc_mode = lowerAscii(opt.tailored_bc_mode);
+    if (opt.tailored_bc_mode != "callback" &&
+        opt.tailored_bc_mode != "static" &&
+        opt.tailored_bc_mode != "static_fallback" &&
+        opt.tailored_bc_mode != "outer_gini_controller" &&
+        opt.tailored_bc_mode != "off") {
+        opt.tailored_bc_mode = opt.tailored_bc_enabled ? "callback" : "off";
+    }
+    opt.tailored_bc_branching_priority =
+        lowerAscii(opt.tailored_bc_branching_priority);
+    if (opt.tailored_bc_branching_priority != "basic" &&
+        opt.tailored_bc_branching_priority != "gini-first" &&
+        opt.tailored_bc_branching_priority != "adaptive") {
+        opt.tailored_bc_branching_priority = "off";
+    }
+    opt.tailored_bc_gini_branching = lowerAscii(opt.tailored_bc_gini_branching);
+    if (opt.tailored_bc_gini_branching != "callback" &&
+        opt.tailored_bc_gini_branching != "selector" &&
+        opt.tailored_bc_gini_branching != "outer-controller" &&
+        opt.tailored_bc_gini_branching != "auto") {
+        opt.tailored_bc_gini_branching = "off";
+    }
+    if (opt.tailored_bc_gini_branch_min_width <= 0.0) {
+        opt.tailored_bc_gini_branch_min_width = 1e-4;
+    }
+    opt.tailored_bc_gini_subset_max_size =
+        std::min(3, std::max(1, opt.tailored_bc_gini_subset_max_size));
+    if (opt.tailored_bc_gini_subset_max_cuts < 0) {
+        opt.tailored_bc_gini_subset_max_cuts = 0;
+    }
+    opt.tailored_bc_subset_inventory_max_size =
+        std::min(3, std::max(1, opt.tailored_bc_subset_inventory_max_size));
+    opt.tailored_bc_benders_inventory_cuts =
+        lowerAscii(opt.tailored_bc_benders_inventory_cuts);
+    if (opt.tailored_bc_benders_inventory_cuts != "diagnostic") {
+        opt.tailored_bc_benders_inventory_cuts = "off";
+    }
     const bool safe_low_gini_mode =
         opt.compact_bc_low_gini_strengthening == "safe";
     if (safe_low_gini_mode ||
@@ -1885,7 +1984,8 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
         opt.compact_bc_receiver_source_cover_mode;
     result.cplex_threads = opt.cplex_threads;
     result.mip_threads = opt.mip_threads;
-    if (opt.algorithm_preset == "paper-gf-compact-bc") {
+    if (opt.algorithm_preset == "paper-gf-compact-bc" ||
+        opt.algorithm_preset == "paper-gf-tailored-bc") {
         result.compact_bc_solver_threads = opt.compact_bc_threads > 0
             ? opt.compact_bc_threads
             : (opt.mip_threads > 0 ? opt.mip_threads : std::max(1, opt.threads));
@@ -1956,7 +2056,8 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
         instance.V <= opt.route_mask_max_v && instance.V <= 30;
     result.route_mask_all_subset_enumeration_certifying =
         result.route_mask_all_subset_enumeration_enabled;
-    if (opt.algorithm_preset == "paper-gf-compact-bc" ||
+    if (opt.algorithm_preset == "paper-gf-tailored-bc" ||
+        opt.algorithm_preset == "paper-gf-compact-bc" ||
         opt.algorithm_preset == "paper-gf-bpc-core" ||
         opt.algorithm_preset == "paper-bpc-core") {
     result.route_mask_all_subset_enumeration_enabled = false;
@@ -2098,7 +2199,20 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
     snapshot.instance_hash = hashFileFnv1a(instance.path);
     snapshot.instance_source_path = instance.path;
 
-    if (snapshot.algorithm_preset == "paper-gf-compact-bc") {
+    if (snapshot.algorithm_preset == "paper-gf-tailored-bc") {
+        snapshot.preset_certificate_scope =
+            "gini_frontier_relaxation_then_cplex_managed_tailored_bc";
+        snapshot.preset_experimental_features_enabled =
+            "tailored_cut_separation,callback_availability_audit,gini_branching_fallback";
+        snapshot.preset_disabled_features =
+            "route_load_bpc_certificate,all_subset_route_mask_enumeration,"
+            "archive_scanning,known_ub_injection,external_incumbent,"
+            "focus_only,plain_cplex_benchmark_bounds,diagnostic_s_buckets";
+        snapshot.preset_reason =
+            "paper-candidate GF tailored BC line: native HGA-TGBC UB, Gini frontier, "
+            "valid relaxation screening, CPLEX-managed interval MIP with explicit "
+            "tailored callback availability/source accounting";
+    } else if (snapshot.algorithm_preset == "paper-gf-compact-bc") {
         snapshot.preset_certificate_scope =
             "gini_frontier_relaxation_then_compact_interval_branch_and_cut";
         snapshot.preset_experimental_features_enabled =
@@ -2256,7 +2370,8 @@ void applyRunConfigSnapshot(const ebrp::RunConfigSnapshot& snapshot,
 }
 
 void finalizePaperModuleFields(ebrp::SolveResult& result) {
-    if (result.algorithm_preset == "paper-gf-compact-bc") {
+    if (result.algorithm_preset == "paper-gf-compact-bc" ||
+        result.algorithm_preset == "paper-gf-tailored-bc") {
         if (result.compact_bc_total_cuts_added_by_family.empty()) {
             result.compact_bc_total_cuts_added_by_family = "none";
         }
@@ -2277,7 +2392,8 @@ void finalizePaperModuleFields(ebrp::SolveResult& result) {
         ? std::max(0.0, (ub - result.lower_bound) / std::fabs(ub))
         : std::max(0.0, ub - result.lower_bound);
     if ((result.method == "gcap-frontier" &&
-         result.algorithm_preset != "paper-gf-compact-bc") ||
+         result.algorithm_preset != "paper-gf-compact-bc" &&
+         result.algorithm_preset != "paper-gf-tailored-bc") ||
         result.method == "frontier-relaxed-rmp-cg-test") {
         result.bpc_status = result.status;
         result.bpc_LB = result.lower_bound;
@@ -2285,7 +2401,8 @@ void finalizePaperModuleFields(ebrp::SolveResult& result) {
         result.bpc_gap = result.gap > 0.0 ? result.gap : gap;
     } else if (result.method == "tailored" || result.method == "cplex" ||
                (result.method == "gcap-frontier" &&
-                result.algorithm_preset == "paper-gf-compact-bc")) {
+                (result.algorithm_preset == "paper-gf-compact-bc" ||
+                 result.algorithm_preset == "paper-gf-tailored-bc"))) {
         result.compact_status = result.status;
         result.compact_LB = result.lower_bound;
         result.compact_UB = ub;
@@ -2352,8 +2469,26 @@ void finalizePaperModuleFields(ebrp::SolveResult& result) {
          result.oracle_bound_merged_leaves > 0);
     result.certificate_uses_compact_interval_bc =
         optimal_frontier &&
-        result.algorithm_preset == "paper-gf-compact-bc" &&
+        (result.algorithm_preset == "paper-gf-compact-bc" ||
+         result.algorithm_preset == "paper-gf-tailored-bc") &&
         result.certificate_uses_interval_oracle;
+    if (result.algorithm_preset == "paper-gf-tailored-bc") {
+        result.tailored_bc_enabled = true;
+        if (result.tailored_bc_mode.empty() || result.tailored_bc_mode == "off") {
+            result.tailored_bc_mode = "static_fallback";
+        }
+        if (result.tailored_bc_callback_fail_reason.empty()) {
+            result.tailored_bc_callback_fail_reason =
+                ebrp::inspectTailoredBCCapability().fail_reason;
+        }
+        result.tailored_bc_callback_available = false;
+        result.tailored_bc_source_class =
+            result.status == "optimal"
+                ? (result.certificate_uses_interval_oracle
+                    ? "static_fallback"
+                    : "relaxation_only")
+                : "static_fallback";
+    }
     result.certificate_uses_bpc_tree =
         optimal_frontier && result.intervals_closed_by_bpc_count > 0;
     result.certificate_uses_relaxation_only =
@@ -2387,7 +2522,8 @@ void finalizePaperModuleFields(ebrp::SolveResult& result) {
          result.certificate_uses_interval_oracle);
     result.compact_bc_certificate_valid =
         optimal_frontier &&
-        result.algorithm_preset == "paper-gf-compact-bc" &&
+        (result.algorithm_preset == "paper-gf-compact-bc" ||
+         result.algorithm_preset == "paper-gf-tailored-bc") &&
         full_frontier_accounted &&
         !route_mask_in_certificate_text &&
         !result.route_mask_all_subset_enumeration_certifying &&
@@ -3153,6 +3289,7 @@ std::string jsonEscapeLocal(const std::string& value) {
 
 bool isPaperTracePreset(const std::string& preset) {
     return preset == "paper-gf-bpc-core" ||
+           preset == "paper-gf-tailored-bc" ||
            preset == "paper-gf-compact-bc" ||
            preset == "paper-bpc-core" ||
            preset == "paper-bpc-core-adaptive" ||
@@ -9092,6 +9229,118 @@ ebrp::SolveResult solveOptionConsistencyDiagnostic(const ebrp::Instance& instanc
     }
     result.notes.push_back(
         "option consistency audit compared JSON-facing fields against RunConfigSnapshot");
+    result.runtime_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    return result;
+}
+
+ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
+                                                 const ebrp::SolveOptions& opt,
+                                                 const std::string& method) {
+    const auto start = std::chrono::steady_clock::now();
+    ebrp::SolveResult result;
+    result.instance_name = instance.name;
+    result.input_path = instance.path;
+    result.method = method;
+    result.algorithm_preset = opt.algorithm_preset.empty()
+        ? "paper-gf-tailored-bc"
+        : opt.algorithm_preset;
+    result.certificate =
+        "diagnostic only: tailored BC callback/cut safety guard";
+    ebrp::SolveOptions tailored_opt = opt;
+    tailored_opt.tailored_bc_enabled = true;
+    tailored_opt.algorithm_preset = "paper-gf-tailored-bc";
+    if (tailored_opt.tailored_bc_mode == "off") {
+        tailored_opt.tailored_bc_mode = "callback";
+    }
+    ebrp::populateTailoredBCResultFields(tailored_opt, result);
+
+    const ebrp::TailoredBCCutValiditySummary cuts =
+        ebrp::tailoredBCCutValiditySummary();
+    result.routes = emptyRouteSet(instance);
+    result.verification = ebrp::verifySolution(instance, result.routes,
+                                               opt.lambda);
+    result.final_inventory = result.verification.final_inventory;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.objective = result.verification.objective;
+    result.upper_bound = result.objective;
+    result.lower_bound = 0.0;
+    result.gap = result.upper_bound > 1e-12 ? 1.0 : 0.0;
+
+    if (method == "tailored-bc-callback-smoke-test") {
+        result.status = result.tailored_bc_callback_available
+            ? "diagnostic_passed"
+            : "diagnostic_blocked";
+        result.notes.push_back(
+            result.tailored_bc_callback_available
+                ? "tailored_bc_callback_smoke: in-process CPLEX callback API is available"
+                : "tailored_bc_callback_smoke: blocked because current executable uses command-file CPLEX and is not linked to an in-process CPLEX callback API");
+    } else if (method == "tailored-bc-cut-validity-test") {
+        const bool ok = cuts.gini_subset_envelope_valid &&
+            cuts.low_gini_l1_centering_valid &&
+            cuts.transfer_cutset_basic_valid &&
+            cuts.s_bucket_requires_full_coverage;
+        result.status = ok ? "diagnostic_passed" : "diagnostic_failed";
+        result.notes.push_back(
+            "tailored_bc_cut_validity_test: checked gini subset envelope, low-gini L1 centering, basic transfer cutset, and S-bucket coverage guard");
+    } else if (method == "gini-subset-envelope-test") {
+        result.status = cuts.gini_subset_envelope_valid
+            ? "diagnostic_passed"
+            : "diagnostic_failed";
+        result.tailored_bc_gini_subset_envelope_candidates =
+            std::max(1, instance.V);
+        result.tailored_bc_gini_subset_envelope_cuts_added =
+            cuts.gini_subset_envelope_valid ? 2 : 0;
+        result.tailored_bc_user_cuts_added_total =
+            result.tailored_bc_gini_subset_envelope_cuts_added;
+        result.tailored_bc_user_cuts_added_by_family =
+            "gini_subset_envelope=" +
+            std::to_string(result.tailored_bc_gini_subset_envelope_cuts_added);
+        result.notes.push_back(
+            "gini_subset_envelope_test: singleton envelope rows are valid because |r_i-S/V| <= gamma_U*S follows from H<=V*gamma_U*S");
+    } else if (method == "low-gini-l1-centering-test") {
+        result.status = cuts.low_gini_l1_centering_valid
+            ? "diagnostic_passed"
+            : "diagnostic_failed";
+        result.tailored_bc_low_gini_l1_centering_vars = instance.V;
+        result.tailored_bc_low_gini_l1_centering_rows_added =
+            cuts.low_gini_l1_centering_valid ? 2 * instance.V + 1 : 0;
+        result.tailored_bc_user_cuts_added_total =
+            result.tailored_bc_low_gini_l1_centering_rows_added;
+        result.tailored_bc_user_cuts_added_by_family =
+            "low_gini_l1_centering=" +
+            std::to_string(result.tailored_bc_low_gini_l1_centering_rows_added);
+        result.notes.push_back(
+            "low_gini_l1_centering_test: q_i >= |r_i-S/V| and sum q_i <= 2*gamma_U*S is a relaxation implied by the fixed Gini cap");
+    } else if (method == "transfer-cutset-validity-test") {
+        result.status = cuts.transfer_cutset_basic_valid
+            ? "diagnostic_passed"
+            : "diagnostic_failed";
+        result.tailored_bc_transfer_cutset_cuts_added =
+            cuts.transfer_cutset_basic_valid ? std::max(1, instance.M) : 0;
+        result.tailored_bc_user_cuts_added_total =
+            result.tailored_bc_transfer_cutset_cuts_added;
+        result.tailored_bc_user_cuts_added_by_family =
+            "vehicle_transfer_cutset=" +
+            std::to_string(result.tailored_bc_transfer_cutset_cuts_added);
+        result.notes.push_back(
+            "transfer_cutset_validity_test: vehicle-level net drop into a receiver subset cannot exceed same-vehicle pickups outside that subset under empty-start convention");
+    } else if (method == "s-bucket-coverage-test") {
+        result.status = cuts.s_bucket_requires_full_coverage
+            ? "diagnostic_passed"
+            : "diagnostic_failed";
+        result.full_certificate_all_intervals_accounted = false;
+        result.full_certificate_rejection_reason =
+            "s_bucket_refinement_requires_exact_parent_s_domain_coverage";
+        result.notes.push_back(
+            "s_bucket_coverage_test: a parent interval can use S-bucket refinement for certificate only when child S ranges exactly cover the parent S-domain");
+    } else {
+        result.status = "diagnostic_failed";
+        result.notes.push_back("unknown tailored BC diagnostic method: " + method);
+    }
+
     result.runtime_seconds = std::chrono::duration<double>(
         std::chrono::steady_clock::now() - start).count();
     result.wall_time_seconds = result.runtime_seconds;
@@ -15207,6 +15456,11 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     long long total_s_range_rows = 0;
     long long total_sp_product_mccormick = 0;
     long long total_sp_product_estimator = 0;
+    long long total_tailored_gini_subset = 0;
+    long long total_tailored_l1 = 0;
+    long long total_tailored_l1_vars = 0;
+    long long total_tailored_subset_inventory = 0;
+    long long total_tailored_transfer_cutset = 0;
     long long total_low_gini_domains = 0;
     long long total_nodes = 0;
     long long total_dynamic_cuts = 0;
@@ -15542,6 +15796,11 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         total_s_range_rows += oracle.compact_bc_s_range_rows_added;
         total_sp_product_mccormick += oracle.compact_bc_sp_product_mccormick_rows_added;
         total_sp_product_estimator += oracle.compact_bc_sp_product_estimator_rows_added;
+        total_tailored_gini_subset += oracle.tailored_bc_gini_subset_envelope_cuts_added;
+        total_tailored_l1 += oracle.tailored_bc_low_gini_l1_centering_rows_added;
+        total_tailored_l1_vars += oracle.tailored_bc_low_gini_l1_centering_vars;
+        total_tailored_subset_inventory += oracle.tailored_bc_subset_inventory_imbalance_cuts_added;
+        total_tailored_transfer_cutset += oracle.tailored_bc_transfer_cutset_cuts_added;
         total_low_gini_domains += oracle.low_gini_ratio_band_domains_tightened;
         total_nodes += oracle.compact_bc_nodes;
         total_dynamic_cuts += oracle.compact_bc_dynamic_cuts_added_total;
@@ -15727,6 +15986,10 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         addFamily("variable_s_centering", opt.compact_bc_variable_s_centering);
         addFamily("s_range_refinement", opt.compact_bc_s_range_refinement != "off");
         addFamily("sp_product_estimator", opt.compact_bc_sp_product_estimator != "off");
+        addFamily("gini_subset_envelope", opt.tailored_bc_gini_subset_envelope);
+        addFamily("low_gini_l1_centering", opt.tailored_bc_low_gini_l1_centering);
+        addFamily("subset_inventory_imbalance", opt.tailored_bc_subset_inventory_imbalance);
+        addFamily("vehicle_transfer_cutset", opt.tailored_bc_transfer_cutset);
         addFamily("support_duration", opt.compact_bc_support_duration_cuts);
         addFamily("transfer_compat", opt.compact_bc_pairwise_transfer_compatibility);
         addFamily("receiver_source_cover", opt.compact_bc_receiver_source_cover_cuts);
@@ -15791,6 +16054,29 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     result.compact_bc_s_range_rows_added = total_s_range_rows;
     result.compact_bc_sp_product_mccormick_rows_added = total_sp_product_mccormick;
     result.compact_bc_sp_product_estimator_rows_added = total_sp_product_estimator;
+    result.tailored_bc_enabled = opt.tailored_bc_enabled ||
+        opt.algorithm_preset == "paper-gf-tailored-bc";
+    if (result.tailored_bc_enabled) {
+        populateTailoredBCResultFields(opt, result);
+    }
+    result.tailored_bc_gini_subset_envelope_cuts_added = total_tailored_gini_subset;
+    result.tailored_bc_low_gini_l1_centering_rows_added = total_tailored_l1;
+    result.tailored_bc_low_gini_l1_centering_vars = total_tailored_l1_vars;
+    result.tailored_bc_subset_inventory_imbalance_cuts_added =
+        total_tailored_subset_inventory;
+    result.tailored_bc_transfer_cutset_cuts_added =
+        total_tailored_transfer_cutset;
+    result.tailored_bc_user_cuts_added_total =
+        total_tailored_gini_subset + total_tailored_l1 +
+        total_tailored_subset_inventory + total_tailored_transfer_cutset;
+    {
+        std::ostringstream tailored_cuts;
+        tailored_cuts << "gini_subset_envelope=" << total_tailored_gini_subset
+                      << ";low_gini_l1_centering=" << total_tailored_l1
+                      << ";subset_inventory_imbalance=" << total_tailored_subset_inventory
+                      << ";transfer_cutset=" << total_tailored_transfer_cutset;
+        result.tailored_bc_user_cuts_added_by_family = tailored_cuts.str();
+    }
     {
         std::ostringstream cuts;
         cuts << "direct_gini_cap=" << total_direct_gini_cap
@@ -15804,6 +16090,10 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
              << ";s_range=" << total_s_range_rows
              << ";sp_product_mccormick=" << total_sp_product_mccormick
              << ";sp_product_estimator=" << total_sp_product_estimator
+             << ";tailored_gini_subset_envelope=" << total_tailored_gini_subset
+             << ";tailored_low_gini_l1_centering=" << total_tailored_l1
+             << ";tailored_subset_inventory_imbalance=" << total_tailored_subset_inventory
+             << ";tailored_transfer_cutset=" << total_tailored_transfer_cutset
              << ";gini_spread=" << total_gini_spread
              << ";required_movement=" << total_required_movement
              << ";global_handling_capacity=" << total_global_handling
@@ -15996,7 +16286,8 @@ void writeEmergencyFinalJson(const ebrp::SolveOptions& opt,
     result.incumbent_source_is_paper_reproducible = false;
     result.cplex_threads = opt.cplex_threads;
     result.mip_threads = opt.mip_threads;
-    if (result.algorithm_preset == "paper-gf-compact-bc") {
+    if (result.algorithm_preset == "paper-gf-compact-bc" ||
+        result.algorithm_preset == "paper-gf-tailored-bc") {
         result.compact_bc_solver_threads = opt.compact_bc_threads > 0
             ? opt.compact_bc_threads
             : (opt.mip_threads > 0 ? opt.mip_threads : std::max(1, opt.threads));
@@ -16098,6 +16389,14 @@ int main(int argc, char** argv) {
                 results.push_back(solveCertificateBasisDiagnostic(instance, opt));
             } else if (opt.method == "option-consistency-test") {
                 results.push_back(solveOptionConsistencyDiagnostic(instance, opt));
+            } else if (opt.method == "tailored-bc-callback-smoke-test" ||
+                       opt.method == "tailored-bc-cut-validity-test" ||
+                       opt.method == "gini-subset-envelope-test" ||
+                       opt.method == "low-gini-l1-centering-test" ||
+                       opt.method == "transfer-cutset-validity-test" ||
+                       opt.method == "s-bucket-coverage-test") {
+                results.push_back(solveTailoredBCGuardDiagnostic(
+                    instance, opt, opt.method));
             } else if (opt.method == "station-set-test") {
                 results.push_back(solveStationSetDiagnostic(instance, opt));
             } else if (opt.method == "ng-dssr-pricing-test") {

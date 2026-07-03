@@ -53,7 +53,7 @@ def main() -> int:
         policy = str(data.get("solver_thread_policy", ""))
         cplex_threads = as_int(data.get("cplex_threads"))
         compact_threads = as_int(data.get("compact_bc_solver_threads"))
-        paper_compact = preset == "paper-gf-compact-bc" and method == "gcap-frontier"
+        paper_compact = preset in {"paper-gf-compact-bc", "paper-gf-tailored-bc"} and method == "gcap-frontier"
         cplex_benchmark = method == "cplex"
         diagnostic = fairness == "multithread_diagnostic" or "diagnostic" in str(data.get("classification", "")).lower()
         failure_reasons: List[str] = []
