@@ -324,6 +324,9 @@ struct CallbackState {
     std::atomic<long long> gini_subset_envelope_violations{0};
     std::atomic<long long> low_gini_l1_cuts_added{0};
     std::atomic<long long> low_gini_l1_violations{0};
+    std::atomic<long long> subset_inventory_imbalance_cuts_added{0};
+    std::atomic<long long> subset_inventory_imbalance_candidates{0};
+    std::atomic<long long> subset_inventory_imbalance_violations{0};
     std::atomic<long long> transfer_cutset_cuts_added{0};
     std::atomic<long long> transfer_cutset_candidates{0};
     std::atomic<long long> transfer_cutset_violations{0};
@@ -338,6 +341,7 @@ struct CallbackState {
     std::atomic<long long> lazy_visit_inventory_rejections{0};
     std::atomic<long long> lazy_gini_subset_envelope_rejections{0};
     std::atomic<long long> lazy_low_gini_l1_rejections{0};
+    std::atomic<long long> lazy_subset_inventory_imbalance_rejections{0};
     std::atomic<long long> incumbents_seen{0};
     std::atomic<long long> incumbents_verified{0};
     std::atomic<long long> incumbents_rejected{0};
@@ -363,6 +367,7 @@ struct CallbackState {
     std::atomic<long long> gini_branches_created{0};
     std::atomic<bool> gini_cut_added{false};
     std::atomic<bool> gini_branch_created{false};
+    std::atomic<bool> subset_inventory_separated{false};
     std::atomic<bool> transfer_cutset_separated{false};
     std::atomic<bool> support_duration_separated{false};
 };
@@ -629,6 +634,104 @@ void separateLowGiniL1Centering(CallbackState& state,
         state.low_gini_l1_violations.fetch_add(1);
         if (addOneUserCut(state, context, terms, 'L', 0.0)) {
             state.low_gini_l1_cuts_added.fetch_add(1);
+        }
+    }
+}
+
+void separateSubsetInventoryImbalance(CallbackState& state,
+                                      CPXCALLBACKCONTEXTptr context) {
+    if (state.ncols <= 0 || state.y_cols.size() <= 1 ||
+        state.station_initial.empty() || state.station_capacity.empty()) {
+        return;
+    }
+    bool expected = false;
+    if (!state.subset_inventory_separated.compare_exchange_strong(expected, true)) {
+        return;
+    }
+    std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
+    double obj = 0.0;
+    if (state.api->callbackgetrelaxationpoint(
+            context, x.data(), 0, state.ncols - 1, &obj) != 0) {
+        return;
+    }
+    constexpr double tol = 1e-6;
+    const int station_count = std::min({
+        static_cast<int>(state.y_cols.size()),
+        static_cast<int>(state.station_initial.size()),
+        static_cast<int>(state.station_capacity.size())
+    });
+    const int V = station_count - 1;
+    if (V <= 0) return;
+
+    auto movementBudgetForVehicle = [&](int k) {
+        if (k < 0 || k >= static_cast<int>(state.vehicle_capacity.size())) return 0;
+        if (state.handling_unit <= 1e-12 || state.total_time_limit <= 0.0) {
+            return std::max(0, state.vehicle_capacity[static_cast<std::size_t>(k)]);
+        }
+        const int handling_budget = static_cast<int>(
+            std::floor(state.total_time_limit / state.handling_unit + 1e-9));
+        return std::max(0, std::min(
+            state.vehicle_capacity[static_cast<std::size_t>(k)],
+            handling_budget));
+    };
+
+    auto trySubset = [&](const std::vector<int>& subset) {
+        int initial_sum = 0;
+        int room_sum = 0;
+        int bikes_sum = 0;
+        double y_value = 0.0;
+        std::vector<std::pair<int, double>> upper_terms;
+        std::vector<std::pair<int, double>> lower_terms;
+        upper_terms.reserve(subset.size());
+        lower_terms.reserve(subset.size());
+        for (int i : subset) {
+            if (i <= 0 || i >= station_count) return;
+            const int y = state.y_cols[static_cast<std::size_t>(i)];
+            if (y < 0) return;
+            initial_sum += state.station_initial[static_cast<std::size_t>(i)];
+            room_sum += state.station_capacity[static_cast<std::size_t>(i)] -
+                state.station_initial[static_cast<std::size_t>(i)];
+            bikes_sum += state.station_initial[static_cast<std::size_t>(i)];
+            y_value += x[static_cast<std::size_t>(y)];
+            upper_terms.push_back({y, 1.0});
+            lower_terms.push_back({y, -1.0});
+        }
+        double plus = 0.0;
+        double minus = 0.0;
+        for (int k = 0; k < static_cast<int>(state.vehicle_capacity.size()); ++k) {
+            const int move_budget = movementBudgetForVehicle(k);
+            plus += std::min({state.vehicle_capacity[static_cast<std::size_t>(k)],
+                              std::max(0, room_sum),
+                              move_budget});
+            minus += std::min({state.vehicle_capacity[static_cast<std::size_t>(k)],
+                               std::max(0, bikes_sum),
+                               move_budget});
+        }
+        state.subset_inventory_imbalance_candidates.fetch_add(2);
+        const double upper_rhs = static_cast<double>(initial_sum) + plus;
+        if (y_value > upper_rhs + tol) {
+            state.subset_inventory_imbalance_violations.fetch_add(1);
+            if (addOneUserCut(state, context, upper_terms, 'L', upper_rhs)) {
+                state.subset_inventory_imbalance_cuts_added.fetch_add(1);
+            }
+        }
+        const double lower_lhs = -y_value;
+        const double lower_rhs = -static_cast<double>(initial_sum) + minus;
+        if (lower_lhs > lower_rhs + tol) {
+            state.subset_inventory_imbalance_violations.fetch_add(1);
+            if (addOneUserCut(state, context, lower_terms, 'L', lower_rhs)) {
+                state.subset_inventory_imbalance_cuts_added.fetch_add(1);
+            }
+        }
+    };
+
+    for (int a = 1; a <= V; ++a) trySubset({a});
+    for (int a = 1; a <= V; ++a) {
+        for (int b = a + 1; b <= V; ++b) trySubset({a, b});
+    }
+    for (int a = 1; a <= V; ++a) {
+        for (int b = a + 1; b <= V; ++b) {
+            for (int c = b + 1; c <= V; ++c) trySubset({a, b, c});
         }
     }
 }
@@ -931,6 +1034,98 @@ bool validateCandidateLowGiniL1(CallbackState& state,
         rejectCandidateWithLazyRow(state, context, terms, 'L', 0.0)) {
         ++state.lazy_low_gini_l1_rejections;
         return true;
+    }
+    return false;
+}
+
+bool validateCandidateSubsetInventoryImbalance(CallbackState& state,
+                                               CPXCALLBACKCONTEXTptr context,
+                                               const std::vector<double>& x) {
+    if (state.y_cols.size() <= 1 || state.station_initial.empty() ||
+        state.station_capacity.empty()) {
+        return false;
+    }
+    constexpr double tol = 1e-6;
+    const int station_count = std::min({
+        static_cast<int>(state.y_cols.size()),
+        static_cast<int>(state.station_initial.size()),
+        static_cast<int>(state.station_capacity.size())
+    });
+    const int V = station_count - 1;
+    if (V <= 0) return false;
+
+    auto movementBudgetForVehicle = [&](int k) {
+        if (k < 0 || k >= static_cast<int>(state.vehicle_capacity.size())) return 0;
+        if (state.handling_unit <= 1e-12 || state.total_time_limit <= 0.0) {
+            return std::max(0, state.vehicle_capacity[static_cast<std::size_t>(k)]);
+        }
+        const int handling_budget = static_cast<int>(
+            std::floor(state.total_time_limit / state.handling_unit + 1e-9));
+        return std::max(0, std::min(
+            state.vehicle_capacity[static_cast<std::size_t>(k)],
+            handling_budget));
+    };
+
+    auto rejectSubset = [&](const std::vector<int>& subset) {
+        int initial_sum = 0;
+        int room_sum = 0;
+        int bikes_sum = 0;
+        double y_value = 0.0;
+        std::vector<std::pair<int, double>> upper_terms;
+        std::vector<std::pair<int, double>> lower_terms;
+        for (int i : subset) {
+            if (i <= 0 || i >= station_count) return false;
+            const int y = state.y_cols[static_cast<std::size_t>(i)];
+            if (y < 0) return false;
+            initial_sum += state.station_initial[static_cast<std::size_t>(i)];
+            room_sum += state.station_capacity[static_cast<std::size_t>(i)] -
+                state.station_initial[static_cast<std::size_t>(i)];
+            bikes_sum += state.station_initial[static_cast<std::size_t>(i)];
+            y_value += x[static_cast<std::size_t>(y)];
+            upper_terms.push_back({y, 1.0});
+            lower_terms.push_back({y, -1.0});
+        }
+        double plus = 0.0;
+        double minus = 0.0;
+        for (int k = 0; k < static_cast<int>(state.vehicle_capacity.size()); ++k) {
+            const int move_budget = movementBudgetForVehicle(k);
+            plus += std::min({state.vehicle_capacity[static_cast<std::size_t>(k)],
+                              std::max(0, room_sum),
+                              move_budget});
+            minus += std::min({state.vehicle_capacity[static_cast<std::size_t>(k)],
+                               std::max(0, bikes_sum),
+                               move_budget});
+        }
+        const double upper_rhs = static_cast<double>(initial_sum) + plus;
+        if (y_value > upper_rhs + tol &&
+            rejectCandidateWithLazyRow(state, context, upper_terms, 'L', upper_rhs)) {
+            ++state.lazy_subset_inventory_imbalance_rejections;
+            return true;
+        }
+        const double lower_lhs = -y_value;
+        const double lower_rhs = -static_cast<double>(initial_sum) + minus;
+        if (lower_lhs > lower_rhs + tol &&
+            rejectCandidateWithLazyRow(state, context, lower_terms, 'L', lower_rhs)) {
+            ++state.lazy_subset_inventory_imbalance_rejections;
+            return true;
+        }
+        return false;
+    };
+
+    for (int a = 1; a <= V; ++a) {
+        if (rejectSubset({a})) return true;
+    }
+    for (int a = 1; a <= V; ++a) {
+        for (int b = a + 1; b <= V; ++b) {
+            if (rejectSubset({a, b})) return true;
+        }
+    }
+    for (int a = 1; a <= V; ++a) {
+        for (int b = a + 1; b <= V; ++b) {
+            for (int c = b + 1; c <= V; ++c) {
+                if (rejectSubset({a, b, c})) return true;
+            }
+        }
     }
     return false;
 }
@@ -1399,6 +1594,7 @@ void validateCandidatePoint(CallbackState& state,
     if (validateCandidateVisitInventory(state, context, x)) return;
     if (validateCandidateGiniSubsetEnvelope(state, context, x)) return;
     if (validateCandidateLowGiniL1(state, context, x)) return;
+    if (validateCandidateSubsetInventoryImbalance(state, context, x)) return;
     const CandidateRouteProjectionStatus route_projection =
         validateCandidateRouteProjection(state, context, x);
     if (route_projection == CandidateRouteProjectionStatus::Rejected) return;
@@ -1470,6 +1666,7 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
         separateVisitInventoryLinking(*state, context);
         separateGiniSubsetEnvelope(*state, context);
         separateLowGiniL1Centering(*state, context);
+        separateSubsetInventoryImbalance(*state, context);
         separateTransferCutset(*state, context);
         separateSupportDurationCover(*state, context);
     } else if (contextid == kContextCandidate) {
@@ -1736,6 +1933,12 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         cb_state.low_gini_l1_cuts_added.load();
     out.callback_low_gini_l1_violations =
         cb_state.low_gini_l1_violations.load();
+    out.callback_subset_inventory_imbalance_cuts_added =
+        cb_state.subset_inventory_imbalance_cuts_added.load();
+    out.callback_subset_inventory_imbalance_candidates =
+        cb_state.subset_inventory_imbalance_candidates.load();
+    out.callback_subset_inventory_imbalance_violations =
+        cb_state.subset_inventory_imbalance_violations.load();
     out.callback_transfer_cutset_cuts_added =
         cb_state.transfer_cutset_cuts_added.load();
     out.callback_transfer_cutset_candidates =
@@ -1763,6 +1966,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         cb_state.lazy_gini_subset_envelope_rejections.load();
     out.lazy_low_gini_l1_rejections =
         cb_state.lazy_low_gini_l1_rejections.load();
+    out.lazy_subset_inventory_imbalance_rejections =
+        cb_state.lazy_subset_inventory_imbalance_rejections.load();
     out.incumbents_seen = cb_state.incumbents_seen.load();
     out.incumbents_verified = cb_state.incumbents_verified.load();
     out.incumbents_rejected = cb_state.incumbents_rejected.load();

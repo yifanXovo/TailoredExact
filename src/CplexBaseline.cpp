@@ -2664,6 +2664,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                          << api_solve.lazy_gini_subset_envelope_rejections
                          << ";candidate_low_gini_l1_violation="
                          << api_solve.lazy_low_gini_l1_rejections
+                         << ";candidate_subset_inventory_imbalance_violation="
+                         << api_solve.lazy_subset_inventory_imbalance_rejections
                          << ";candidate_projection_ratio_violation="
                          << api_solve.candidate_projection_ratio_rejections
                          << ";candidate_projection_penalty_violation="
@@ -2739,6 +2741,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     std::to_string(api_solve.callback_gini_subset_envelope_cuts_added) +
                     ";callback_low_gini_l1_centering=" +
                     std::to_string(api_solve.callback_low_gini_l1_cuts_added) +
+                    ";callback_subset_inventory_imbalance=" +
+                    std::to_string(api_solve.callback_subset_inventory_imbalance_cuts_added) +
                     ";callback_transfer_cutset=" +
                     std::to_string(api_solve.callback_transfer_cutset_cuts_added) +
                     ";callback_support_duration_pair=" +
@@ -2755,6 +2759,12 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     api_solve.callback_low_gini_l1_violations;
                 result.tailored_bc_low_gini_l1_centering_rows_added +=
                     api_solve.callback_low_gini_l1_cuts_added;
+                result.tailored_bc_subset_inventory_imbalance_cuts_added +=
+                    api_solve.callback_subset_inventory_imbalance_cuts_added;
+                result.tailored_bc_subset_inventory_imbalance_candidates +=
+                    api_solve.callback_subset_inventory_imbalance_candidates;
+                result.tailored_bc_subset_inventory_imbalance_violations +=
+                    api_solve.callback_subset_inventory_imbalance_violations;
                 result.tailored_bc_transfer_cutset_cuts_added +=
                     api_solve.callback_transfer_cutset_cuts_added;
                 result.tailored_bc_transfer_cutset_candidates +=

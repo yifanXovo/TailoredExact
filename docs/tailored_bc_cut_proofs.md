@@ -30,6 +30,26 @@ Introduce `q_i >= |r_i - S/V|`. The Gini cap implies a valid loose centering con
 
 The relaxation callback may separate the aggregate row `sum_i q_i - 2 gamma_U sum_i r_i <= 0` when the `q_l1_i` variables are present. The callback row is identical to the static aggregate cap, so its certificate role is the same paper-safe row family.
 
+## Subset Inventory Imbalance
+
+For a station subset `A`, let `Y_A = sum_{i in A} Y_i`, `I_A = sum_{i in A} initial_i`, `room(A) = sum_{i in A} (capacity_i - initial_i)`, and `bikes(A) = sum_{i in A} initial_i`. A vehicle can increase `Y_A` only by carrying bikes into `A`, and can decrease `Y_A` only by removing bikes from `A`. For every vehicle `k`, the conservative movement bounds
+
+`DeltaPlus_k(A) <= min(Q_k, room(A), floor(T_k / cunit))`
+
+and
+
+`DeltaMinus_k(A) <= min(Q_k, bikes(A), floor(T_k / cunit))`
+
+are safe under the current duration convention because they ignore travel time and compatibility and therefore overestimate what the vehicle can move. Summing over vehicles gives:
+
+`Y_A <= I_A + sum_k DeltaPlus_k(A)`
+
+and
+
+`Y_A >= I_A - sum_k DeltaMinus_k(A)`.
+
+The callback implementation separates the equivalent `<=` forms for singleton, pair, and triple station subsets from relaxation points. These rows are intentionally weak but paper-safe; stronger route-duration or compatibility-filtered subset inventory rows require separate proof before paper-core use.
+
 ## Vehicle Transfer Cutset
 
 Under the empty-start vehicle convention, the net number of bikes delivered by a vehicle into a receiver subset cannot exceed pickups by that same vehicle outside the subset:
