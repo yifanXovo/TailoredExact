@@ -42,6 +42,18 @@ Equivalently, the basic unfiltered row can be written as:
 
 This latter form is weaker but paper-safe for every receiver subset `D`: a vehicle starts with zero load, so total drops into any subset cannot exceed the total number of bikes picked up by that vehicle. The callback implementation separates this basic row for singleton, pair, and triple receiver subsets at relaxation points. Compatibility-filtered variants remain diagnostic/future work unless their source sets are proved supersets of all feasible external pickup sources.
 
+## Support-Duration Cover Cuts
+
+For vehicle `k` and a station subset `A`, let `cycle_lb_k(A)` be the exact depot-cycle lower bound used by the static compact-BC model for visiting all stations in `A`. Under the current compact duration convention, handling time is charged as `cunit * sum_i p[k,i]`. If a route visits every station in `A`, at least `ceil(|A|/2)` pickup units are required by the support-duration cover rule used in the static model, so any such route requires at least:
+
+`cycle_lb_k(A) + cunit * ceil(|A|/2)`.
+
+When this value exceeds `T_k`, no feasible original route for vehicle `k` can visit all stations in `A`. The cover row
+
+`sum_{i in A} z[k,i] <= |A| - 1`
+
+is therefore valid. The callback implementation currently separates only the violated pair and triple cover rows from high-support relaxation points. It does not add the static model's conditional big-M duration rows in callback form. Quad and lifted support-duration cuts remain future work.
+
 ## S-Bucket Refinement
 
 S-bucket denominator refinement is certificate-safe only when child buckets exactly cover the parent feasible `S` domain and every bucket is closed. The current callback round keeps this as a coverage test rather than a paper certificate mechanism.

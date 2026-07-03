@@ -43,6 +43,12 @@ struct TailoredBCCplexApiSolveResult {
     long long callback_transfer_cutset_cuts_added = 0;
     long long callback_transfer_cutset_candidates = 0;
     long long callback_transfer_cutset_violations = 0;
+    long long callback_support_duration_pair_cuts_added = 0;
+    long long callback_support_duration_pair_candidates = 0;
+    long long callback_support_duration_pair_violations = 0;
+    long long callback_support_duration_triple_cuts_added = 0;
+    long long callback_support_duration_triple_candidates = 0;
+    long long callback_support_duration_triple_violations = 0;
     long long lazy_rejections = 0;
     long long lazy_gini_interval_rejections = 0;
     long long lazy_visit_inventory_rejections = 0;
