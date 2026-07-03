@@ -1,0 +1,4 @@
+policy,coverage_basis,coverage_valid_for_certificate,reason
+callback_auto,"single fixed interval diagnostic, no parent closure claimed",false,diagnostic hard-leaf rows do not replace full frontier ledger
+selector,"single fixed interval diagnostic, no parent closure claimed",false,selector branch mode tested only as diagnostic
+outer_controller,existing full Gini-frontier ledger path,true when all child intervals exactly cover parent and audit passes,no new outer split certificate promoted this round

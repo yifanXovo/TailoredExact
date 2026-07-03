@@ -308,6 +308,8 @@ struct CallbackState {
     double total_time_limit = 0.0;
     double handling_unit = 0.0;
     std::string support_duration_cover_mode = "support_cover_lifted";
+    int gini_subset_max_size = 3;
+    int gini_subset_max_cuts = 50000;
     double lambda = 0.0;
     double cutoff_value = std::numeric_limits<double>::infinity();
     double gamma_L = 0.0;
@@ -326,6 +328,7 @@ struct CallbackState {
     std::atomic<long long> gini_subset_envelope_cuts_added{0};
     std::atomic<long long> gini_subset_envelope_candidates{0};
     std::atomic<long long> gini_subset_envelope_violations{0};
+    std::atomic<double> gini_subset_envelope_max_violation{0.0};
     std::atomic<long long> low_gini_l1_cuts_added{0};
     std::atomic<long long> low_gini_l1_violations{0};
     std::atomic<long long> variable_s_centering_cuts_added{0};
@@ -612,7 +615,14 @@ void separateGiniSubsetEnvelope(CallbackState& state,
         const int r = state.r_cols[static_cast<std::size_t>(i)];
         if (r >= 0) sum_r += x[static_cast<std::size_t>(r)];
     }
+    const int max_subset_size = std::min(
+        std::max(1, state.gini_subset_max_size), std::min(4, V - 1));
+    const int max_cuts = state.gini_subset_max_cuts <= 0
+        ? std::numeric_limits<int>::max()
+        : state.gini_subset_max_cuts;
+    int cuts_added_this_call = 0;
     auto addSubsetCut = [&](const std::vector<int>& subset, int sign) {
+        if (cuts_added_this_call >= max_cuts) return;
         state.gini_subset_envelope_candidates.fetch_add(1);
         const int a = static_cast<int>(subset.size());
         std::vector<std::pair<int, double>> terms;
@@ -633,22 +643,98 @@ void separateGiniSubsetEnvelope(CallbackState& state,
         constexpr double tol = 1e-6;
         if (lhs > tol) {
             state.gini_subset_envelope_violations.fetch_add(1);
+            atomicMax(state.gini_subset_envelope_max_violation, lhs);
             if (addOneUserCut(state, context, terms, 'L', 0.0)) {
                 state.gini_subset_envelope_cuts_added.fetch_add(1);
+                ++cuts_added_this_call;
             }
         }
     };
     if (sum_r <= 1e-12) return;
+
+    std::vector<std::pair<double, int>> positive;
+    std::vector<std::pair<double, int>> negative;
+    positive.reserve(static_cast<std::size_t>(V));
+    negative.reserve(static_cast<std::size_t>(V));
+    const double mean = sum_r / static_cast<double>(V);
     for (int i = 1; i <= V; ++i) {
-        addSubsetCut({i}, 1);
-        addSubsetCut({i}, -1);
+        const int r = state.r_cols[static_cast<std::size_t>(i)];
+        if (r < 0) continue;
+        const double dev = x[static_cast<std::size_t>(r)] - mean;
+        positive.push_back({dev, i});
+        negative.push_back({-dev, i});
     }
-    for (int i = 1; i <= V; ++i) {
-        for (int j = i + 1; j <= V; ++j) {
-            addSubsetCut({i, j}, 1);
-            addSubsetCut({i, j}, -1);
+    auto byDeviation = [](const auto& a, const auto& b) {
+        if (std::fabs(a.first - b.first) > 1e-12) return a.first > b.first;
+        return a.second < b.second;
+    };
+    std::sort(positive.begin(), positive.end(), byDeviation);
+    std::sort(negative.begin(), negative.end(), byDeviation);
+    const int candidate_pool = std::min(V, 8);
+
+    auto testRankedSubsets = [&](const std::vector<std::pair<double, int>>& ranked,
+                                 int sign) {
+        std::vector<int> prefix;
+        prefix.reserve(static_cast<std::size_t>(max_subset_size));
+        for (int i = 0; i < static_cast<int>(ranked.size()) && i < candidate_pool; ++i) {
+            if (ranked[static_cast<std::size_t>(i)].first <= 1e-12) break;
+            prefix.push_back(ranked[static_cast<std::size_t>(i)].second);
+            if (static_cast<int>(prefix.size()) <= max_subset_size) {
+                addSubsetCut(prefix, sign);
+            }
+            if (cuts_added_this_call >= max_cuts) return;
         }
-    }
+        if (max_subset_size >= 2) {
+            const int n = std::min(static_cast<int>(ranked.size()), candidate_pool);
+            for (int i = 0; i < n; ++i) {
+                if (ranked[static_cast<std::size_t>(i)].first <= 1e-12) continue;
+                for (int j = i + 1; j < n; ++j) {
+                    if (ranked[static_cast<std::size_t>(j)].first <= 1e-12) continue;
+                    addSubsetCut({ranked[static_cast<std::size_t>(i)].second,
+                                  ranked[static_cast<std::size_t>(j)].second}, sign);
+                    if (cuts_added_this_call >= max_cuts) return;
+                }
+            }
+        }
+        if (max_subset_size >= 3) {
+            const int n = std::min(static_cast<int>(ranked.size()), std::min(candidate_pool, 6));
+            for (int i = 0; i < n; ++i) {
+                if (ranked[static_cast<std::size_t>(i)].first <= 1e-12) continue;
+                for (int j = i + 1; j < n; ++j) {
+                    if (ranked[static_cast<std::size_t>(j)].first <= 1e-12) continue;
+                    for (int h = j + 1; h < n; ++h) {
+                        if (ranked[static_cast<std::size_t>(h)].first <= 1e-12) continue;
+                        addSubsetCut({ranked[static_cast<std::size_t>(i)].second,
+                                      ranked[static_cast<std::size_t>(j)].second,
+                                      ranked[static_cast<std::size_t>(h)].second}, sign);
+                        if (cuts_added_this_call >= max_cuts) return;
+                    }
+                }
+            }
+        }
+        if (max_subset_size >= 4) {
+            const int n = std::min(static_cast<int>(ranked.size()), std::min(candidate_pool, 5));
+            for (int i = 0; i < n; ++i) {
+                if (ranked[static_cast<std::size_t>(i)].first <= 1e-12) continue;
+                for (int j = i + 1; j < n; ++j) {
+                    if (ranked[static_cast<std::size_t>(j)].first <= 1e-12) continue;
+                    for (int h = j + 1; h < n; ++h) {
+                        if (ranked[static_cast<std::size_t>(h)].first <= 1e-12) continue;
+                        for (int q = h + 1; q < n; ++q) {
+                            if (ranked[static_cast<std::size_t>(q)].first <= 1e-12) continue;
+                            addSubsetCut({ranked[static_cast<std::size_t>(i)].second,
+                                          ranked[static_cast<std::size_t>(j)].second,
+                                          ranked[static_cast<std::size_t>(h)].second,
+                                          ranked[static_cast<std::size_t>(q)].second}, sign);
+                            if (cuts_added_this_call >= max_cuts) return;
+                        }
+                    }
+                }
+            }
+        }
+    };
+    testRankedSubsets(positive, 1);
+    if (cuts_added_this_call < max_cuts) testRankedSubsets(negative, -1);
 }
 
 void separateLowGiniL1Centering(CallbackState& state,
@@ -1918,6 +2004,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     double total_time_limit,
     double handling_unit,
     const std::string& support_duration_cover_mode,
+    int gini_subset_max_size,
+    int gini_subset_max_cuts,
     double lambda,
     double cutoff_value,
     int vehicle_count) {
@@ -2081,6 +2169,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     cb_state.total_time_limit = total_time_limit;
     cb_state.handling_unit = handling_unit;
     cb_state.support_duration_cover_mode = support_duration_cover_mode;
+    cb_state.gini_subset_max_size = gini_subset_max_size;
+    cb_state.gini_subset_max_cuts = gini_subset_max_cuts;
     cb_state.lambda = lambda;
     cb_state.cutoff_value = cutoff_value;
     cb_state.gamma_L = gamma_L;
@@ -2128,6 +2218,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         cb_state.gini_subset_envelope_candidates.load();
     out.callback_gini_subset_envelope_violations =
         cb_state.gini_subset_envelope_violations.load();
+    out.callback_gini_subset_envelope_max_violation =
+        cb_state.gini_subset_envelope_max_violation.load();
     out.callback_low_gini_l1_cuts_added =
         cb_state.low_gini_l1_cuts_added.load();
     out.callback_low_gini_l1_violations =

@@ -9359,6 +9359,8 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
                 tailored_opt.tailored_bc_gini_branch_min_width,
                 {}, {}, {}, {}, {}, {}, 0, 0.0, 0.0,
                 "support_cover_lifted",
+                tailored_opt.tailored_bc_gini_subset_max_size,
+                tailored_opt.tailored_bc_gini_subset_max_cuts,
                 0.0,
                 std::numeric_limits<double>::infinity(),
                 0);

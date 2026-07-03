@@ -1,0 +1,27 @@
+leaf,policy,variant,budget,status,LB,UB,gap,branch_calls,gini_branches,callback_cuts,diagnostic_only,conclusion
+generated_diag_v12_m2_tight_cutoff,callback_auto,callback_auto_gini_branch,60,native_exit_noncertified,0.0,1.65777317757,1.0,,,,true,no_final_bound_due_wrapper_timeout
+generated_diag_v12_m2_tight_cutoff,off,callback_no_gini_branch,60,wrapper_timeout_noncertified,0.0,1.65777317757,1.0,,,,true,no_final_bound_due_wrapper_timeout
+generated_diag_v12_m2_tight_cutoff,selector,callback_selector_gini_branch,60,native_exit_noncertified,0.0,1.65777317757,1.0,,,,true,no_final_bound_due_wrapper_timeout
+generated_diag_v12_m2_tight_cutoff,plain_baseline,plain_fixed_interval_mip,60,wrapper_timeout_noncertified,0.0,1.65777317757,1.0,,,,true,no_final_bound_due_wrapper_timeout
+generated_diag_v12_m2_tight_cutoff,static_no_callback,static_tailored_safe,60,wrapper_timeout_noncertified,0.0,1.65777317757,1.0,,,,true,no_final_bound_due_wrapper_timeout
+high_imbalance_seed3201_hard,callback_auto,callback_auto_gini_branch,60,wrapper_timeout_noncertified,0.0,2.44340319194,1.0,,,,true,no_final_bound_due_wrapper_timeout
+high_imbalance_seed3201_hard,off,callback_no_gini_branch,60,wrapper_timeout_noncertified,0.0,2.44340319194,1.0,,,,true,no_final_bound_due_wrapper_timeout
+high_imbalance_seed3201_hard,selector,callback_selector_gini_branch,60,wrapper_timeout_noncertified,0.0,2.44340319194,1.0,,,,true,no_final_bound_due_wrapper_timeout
+high_imbalance_seed3201_hard,plain_baseline,plain_fixed_interval_mip,60,wrapper_timeout_noncertified,0.0,2.44340319194,1.0,,,,true,no_final_bound_due_wrapper_timeout
+high_imbalance_seed3201_hard,static_no_callback,static_tailored_safe,60,wrapper_timeout_noncertified,0.0,2.44340319194,1.0,,,,true,no_final_bound_due_wrapper_timeout
+moderate_low_gini_1,callback_auto,callback_auto_gini_branch,60,wrapper_timeout_noncertified,0.0,0.0491525526647,1.0,,,,true,no_final_bound_due_wrapper_timeout
+moderate_low_gini_1,off,callback_no_gini_branch,60,wrapper_timeout_noncertified,0.0,0.0491525526647,1.0,,,,true,no_final_bound_due_wrapper_timeout
+moderate_low_gini_1,selector,callback_selector_gini_branch,60,wrapper_timeout_noncertified,0.0,0.0491525526647,1.0,,,,true,no_final_bound_due_wrapper_timeout
+moderate_low_gini_1,plain_baseline,plain_fixed_interval_mip,60,wrapper_timeout_noncertified,0.0,0.0491525526647,1.0,,,,true,no_final_bound_due_wrapper_timeout
+moderate_low_gini_1,static_no_callback,static_tailored_safe,60,wrapper_timeout_noncertified,0.0,0.0491525526647,1.0,,,,true,no_final_bound_due_wrapper_timeout
+moderate_low_gini_2,callback_auto,callback_auto_gini_branch,60,wrapper_timeout_noncertified,0.0,0.0491525526647,1.0,,,,true,no_final_bound_due_wrapper_timeout
+moderate_low_gini_2,off,callback_no_gini_branch,60,wrapper_timeout_noncertified,0.0,0.0491525526647,1.0,,,,true,no_final_bound_due_wrapper_timeout
+moderate_low_gini_2,selector,callback_selector_gini_branch,60,wrapper_timeout_noncertified,0.0,0.0491525526647,1.0,,,,true,no_final_bound_due_wrapper_timeout
+moderate_low_gini_2,plain_baseline,plain_fixed_interval_mip,60,wrapper_timeout_noncertified,0.0,0.0491525526647,1.0,,,,true,no_final_bound_due_wrapper_timeout
+moderate_low_gini_2,static_no_callback,static_tailored_safe,60,wrapper_timeout_noncertified,0.0,0.0491525526647,1.0,,,,true,no_final_bound_due_wrapper_timeout
+tight_T_seed3102_hard,callback_auto,callback_auto_gini_branch,60,wrapper_timeout_noncertified,0.0,0.600704436685,1.0,,,,true,no_final_bound_due_wrapper_timeout
+tight_T_seed3102_hard,off,callback_no_gini_branch,60,wrapper_timeout_noncertified,0.0,0.600704436685,1.0,,,,true,no_final_bound_due_wrapper_timeout
+tight_T_seed3102_hard,selector,callback_selector_gini_branch,60,wrapper_timeout_noncertified,0.0,0.600704436685,1.0,,,,true,no_final_bound_due_wrapper_timeout
+tight_T_seed3102_hard,plain_baseline,plain_fixed_interval_mip,60,wrapper_timeout_noncertified,0.0,0.600704436685,1.0,,,,true,no_final_bound_due_wrapper_timeout
+tight_T_seed3102_hard,static_no_callback,static_tailored_safe,60,wrapper_timeout_noncertified,0.0,0.600704436685,1.0,,,,true,no_final_bound_due_wrapper_timeout
+policy_design,outer_controller,not_run_this_round,0,implemented_as_existing frontier partition controller only,,,,,,,true,kept as fallback design; not selected because fixed-interval rows failed to finalize under short caps
