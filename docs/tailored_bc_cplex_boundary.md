@@ -25,3 +25,9 @@ Separate from the callback-owned mechanisms, `--tailored-bc-benders-inventory-cu
 The callback package includes a diagnostic branch-smoke row that uses a multidimensional binary knapsack to test branch callback reachability.  With current settings, the row applies branch priorities, receives relaxation/candidate callbacks, enters branch context, and creates two one-shot Gini branches through `CPXcallbackmakebranch`.
 
 This proves the callback boundary is now technically open for relaxation, candidate, and diagnostic branching contexts. It does not yet implement the full requested tailored branch-and-cut policy: independent route-plan incumbent verification/rejection, consistently useful custom Gini branches on ExactEBRP hard leaves, and decisive hard-leaf callback cut separation remain incomplete.
+
+## Hard-Leaf Finalization Status
+
+The next-optimization round added callback heartbeat progress logging and explicit best-bound availability fields. It also tested a CPLEX callback wall-clock abort request. On the moderate low-Gini fixed-interval leaves, callback activity continued beyond the requested native time limit and no valid CPLEX best bound was exposed before wrapper termination.
+
+Consequently, wrapper-managed final JSON remains required for hard-leaf diagnostics. A wrapper-finalized row without a valid CPLEX final best bound is noncertified and cannot contribute paper-core lower-bound evidence.

@@ -6,15 +6,20 @@
 
 #include <algorithm>
 #include <atomic>
+#include <chrono>
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
 #include <filesystem>
+#include <fstream>
+#include <iomanip>
 #include <limits>
+#include <mutex>
 #include <numeric>
 #include <set>
 #include <sstream>
 #include <string>
+#include <thread>
 #include <vector>
 
 namespace ebrp {
@@ -71,6 +76,7 @@ using CPXcallbackgetcandidatepoint_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, 
 using CPXcallbackgetrelaxationpoint_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, double*, int, int, double*);
 using CPXcallbackrejectcandidate_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int, int, const double*, const char*, const int*, const int*, const double*);
 using CPXcallbackmakebranch_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int, const int*, const char*, const double*, int, int, const double*, const char*, const int*, const int*, const double*, double, int*);
+using CPXcallbackabort_t = void (__stdcall *)(CPXCALLBACKCONTEXTptr);
 using CPXcopyorder_t = int (__stdcall *)(CPXCENVptr, CPXLPptr, int, const int*, const int*, const int*);
 
 struct Api {
@@ -98,6 +104,7 @@ struct Api {
     CPXcallbackgetrelaxationpoint_t callbackgetrelaxationpoint = nullptr;
     CPXcallbackrejectcandidate_t callbackrejectcandidate = nullptr;
     CPXcallbackmakebranch_t callbackmakebranch = nullptr;
+    CPXcallbackabort_t callbackabort = nullptr;
     CPXcopyorder_t copyorder = nullptr;
 };
 
@@ -159,6 +166,7 @@ bool loadApi(Api& api, std::string& fail_reason) {
     LOAD_REQ(callbackgetrelaxationpoint, "CPXcallbackgetrelaxationpoint");
     LOAD_REQ(callbackrejectcandidate, "CPXcallbackrejectcandidate");
     LOAD_REQ(callbackmakebranch, "CPXcallbackmakebranch");
+    LOAD_REQ(callbackabort, "CPXcallbackabort");
     LOAD_REQ(copyorder, "CPXcopyorder");
 #undef LOAD_REQ
     std::ostringstream missing;
@@ -318,6 +326,10 @@ struct CallbackState {
     bool validate_candidates = false;
     bool enable_gini_branch = false;
     double gini_branch_min_width = 1e-4;
+    std::chrono::steady_clock::time_point wall_start =
+        std::chrono::steady_clock::now();
+    double wall_time_limit_seconds = 0.0;
+    std::atomic<bool> wall_time_abort{false};
     std::atomic<long long> relaxation_calls{0};
     std::atomic<long long> candidate_calls{0};
     std::atomic<long long> branch_calls{0};
@@ -329,6 +341,8 @@ struct CallbackState {
     std::atomic<long long> gini_subset_envelope_candidates{0};
     std::atomic<long long> gini_subset_envelope_violations{0};
     std::atomic<double> gini_subset_envelope_max_violation{0.0};
+    std::mutex gini_subset_envelope_mutex;
+    std::set<std::string> gini_subset_envelope_cut_keys;
     std::atomic<long long> low_gini_l1_cuts_added{0};
     std::atomic<long long> low_gini_l1_violations{0};
     std::atomic<long long> variable_s_centering_cuts_added{0};
@@ -602,7 +616,6 @@ void separateGiniSubsetEnvelope(CallbackState& state,
         state.gamma_U < -1e-12) {
         return;
     }
-    if (state.gini_subset_envelope_cuts_added.load() > 0) return;
     std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
     double obj = 0.0;
     if (state.api->callbackgetrelaxationpoint(
@@ -620,9 +633,11 @@ void separateGiniSubsetEnvelope(CallbackState& state,
     const int max_cuts = state.gini_subset_max_cuts <= 0
         ? std::numeric_limits<int>::max()
         : state.gini_subset_max_cuts;
+    if (state.gini_subset_envelope_cuts_added.load() >= max_cuts) return;
     int cuts_added_this_call = 0;
     auto addSubsetCut = [&](const std::vector<int>& subset, int sign) {
-        if (cuts_added_this_call >= max_cuts) return;
+        if (cuts_added_this_call >= max_cuts ||
+            state.gini_subset_envelope_cuts_added.load() >= max_cuts) return;
         state.gini_subset_envelope_candidates.fetch_add(1);
         const int a = static_cast<int>(subset.size());
         std::vector<std::pair<int, double>> terms;
@@ -644,6 +659,20 @@ void separateGiniSubsetEnvelope(CallbackState& state,
         if (lhs > tol) {
             state.gini_subset_envelope_violations.fetch_add(1);
             atomicMax(state.gini_subset_envelope_max_violation, lhs);
+            std::vector<int> key_subset = subset;
+            std::sort(key_subset.begin(), key_subset.end());
+            std::ostringstream key_stream;
+            key_stream << sign << ":";
+            for (int station : key_subset) key_stream << station << ",";
+            {
+                std::lock_guard<std::mutex> guard(
+                    state.gini_subset_envelope_mutex);
+                if (!state.gini_subset_envelope_cut_keys
+                         .insert(key_stream.str())
+                         .second) {
+                    return;
+                }
+            }
             if (addOneUserCut(state, context, terms, 'L', 0.0)) {
                 state.gini_subset_envelope_cuts_added.fetch_add(1);
                 ++cuts_added_this_call;
@@ -1919,6 +1948,17 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
                                void* userhandle) {
     auto* state = static_cast<CallbackState*>(userhandle);
     if (!state || !state->api) return 0;
+    if (state->wall_time_limit_seconds > 0.0) {
+        const double elapsed = std::chrono::duration<double>(
+            std::chrono::steady_clock::now() - state->wall_start).count();
+        if (elapsed >= state->wall_time_limit_seconds) {
+            state->wall_time_abort.store(true);
+            if (state->api->callbackabort) {
+                state->api->callbackabort(context);
+            }
+            return 0;
+        }
+    }
     if (contextid == kContextRelaxation) {
         ++state->relaxation_calls;
         bool expected = false;
@@ -2008,7 +2048,9 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     int gini_subset_max_cuts,
     double lambda,
     double cutoff_value,
-    int vehicle_count) {
+    int vehicle_count,
+    const std::filesystem::path& progress_log_path,
+    double progress_interval_seconds) {
     TailoredBCCplexApiSolveResult out;
     out.attempted = true;
 #ifdef _WIN32
@@ -2189,20 +2231,176 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         if (api.dll) FreeLibrary(api.dll);
         return out;
     }
+
+    using SteadyClock = std::chrono::steady_clock;
+    const auto solve_start = SteadyClock::now();
+    cb_state.wall_start = solve_start;
+    if (time_limit_seconds > 0.0) {
+        const double grace =
+            std::max(5.0, std::min(60.0, 0.10 * time_limit_seconds));
+        cb_state.wall_time_limit_seconds = time_limit_seconds + grace;
+    }
+    std::atomic<bool> stop_progress{false};
+    std::thread progress_thread;
+    std::mutex progress_mutex;
+    long long checkpoint_rows = 0;
+    double last_checkpoint_time = 0.0;
+    const double heartbeat_seconds =
+        progress_interval_seconds > 0.0 ? progress_interval_seconds : 30.0;
+
+    auto userCutFamilyString = [&]() {
+        std::ostringstream os;
+        os << "gini_interval=" << cb_state.gini_interval_cuts_added.load()
+           << ";visit_inventory_linking=" << cb_state.visit_inventory_cuts_added.load()
+           << ";gini_subset_envelope="
+           << cb_state.gini_subset_envelope_cuts_added.load()
+           << ";low_gini_l1_centering=" << cb_state.low_gini_l1_cuts_added.load()
+           << ";variable_s_centering=" << cb_state.variable_s_centering_cuts_added.load()
+           << ";subset_inventory_imbalance="
+           << cb_state.subset_inventory_imbalance_cuts_added.load()
+           << ";transfer_cutset=" << cb_state.transfer_cutset_cuts_added.load()
+           << ";support_duration_pair="
+           << cb_state.support_duration_pair_cuts_added.load()
+           << ";support_duration_triple="
+           << cb_state.support_duration_triple_cuts_added.load()
+           << ";support_duration_quad="
+           << cb_state.support_duration_quad_cuts_added.load()
+           << ";support_duration_lifted="
+           << cb_state.support_duration_lifted_cuts_added.load();
+        return os.str();
+    };
+    auto violationFamilyString = [&]() {
+        std::ostringstream os;
+        os << "gini_subset_envelope="
+           << cb_state.gini_subset_envelope_violations.load()
+           << ";low_gini_l1_centering=" << cb_state.low_gini_l1_violations.load()
+           << ";variable_s_centering="
+           << cb_state.variable_s_centering_violations.load()
+           << ";subset_inventory_imbalance="
+           << cb_state.subset_inventory_imbalance_violations.load()
+           << ";transfer_cutset=" << cb_state.transfer_cutset_violations.load()
+           << ";support_duration_pair="
+           << cb_state.support_duration_pair_violations.load()
+           << ";support_duration_triple="
+           << cb_state.support_duration_triple_violations.load()
+           << ";support_duration_quad="
+           << cb_state.support_duration_quad_violations.load()
+           << ";support_duration_lifted="
+           << cb_state.support_duration_lifted_violations.load();
+        return os.str();
+    };
+    auto writeProgressRow =
+        [&](const std::string& event,
+            const std::string& solver_status,
+            bool best_bound_available,
+            double best_bound_value,
+            bool bound_valid,
+            long long node_count_value,
+            const std::string& bound_fail_reason) {
+            if (progress_log_path.empty()) return;
+            const double elapsed =
+                std::chrono::duration<double>(SteadyClock::now() - solve_start).count();
+            std::lock_guard<std::mutex> guard(progress_mutex);
+            std::ofstream progress(progress_log_path, std::ios::app);
+            if (!progress) return;
+            progress << std::setprecision(12)
+                     << elapsed << ','
+                     << event << ','
+                     << '"' << solver_status << '"' << ','
+                     << (best_bound_available ? best_bound_value : 0.0) << ','
+                     << (best_bound_available ? "true" : "false") << ','
+                     << (bound_valid ? "true" : "false") << ','
+                     << 0.0 << ','
+                     << cutoff_value << ','
+                     << (best_bound_available ? (cutoff_value - best_bound_value) : 0.0)
+                     << ','
+                     << node_count_value << ','
+                     << 0.0 << ','
+                     << elapsed << ','
+                     << cb_state.relaxation_calls.load() << ','
+                     << cb_state.candidate_calls.load() << ','
+                     << cb_state.branch_calls.load() << ','
+                     << cb_state.progress_calls.load() << ','
+                     << '"' << userCutFamilyString() << '"' << ','
+                     << '"' << violationFamilyString() << '"' << ','
+                     << cb_state.gini_branches_created.load() << ','
+                     << gamma_L << ','
+                     << gamma_U << ','
+                     << "\"tailored_bc_callback\"" << ','
+                     << "\"original_fixed_interval\"" << ','
+                     << '"' << bound_fail_reason << '"'
+                     << '\n';
+            ++checkpoint_rows;
+            last_checkpoint_time = elapsed;
+        };
+
+    if (!progress_log_path.empty()) {
+        try {
+            if (!progress_log_path.parent_path().empty()) {
+                std::filesystem::create_directories(progress_log_path.parent_path());
+            }
+            std::ofstream progress(progress_log_path, std::ios::out | std::ios::trunc);
+            progress
+                << "elapsed_seconds,event,cplex_status,best_bound,"
+                   "best_bound_available,bound_valid,incumbent,cutoff_UB,"
+                   "gap_to_cutoff,node_count,root_bound,last_bound_improvement_time,"
+                   "relaxation_callback_calls,candidate_callback_calls,"
+                   "branch_callback_calls,progress_callback_calls,"
+                   "user_cuts_added_by_family,violations_by_family,"
+                   "gini_branches_created,gamma_L,gamma_U,source_class,"
+                   "bound_scope,bound_fail_reason\n";
+            progress.close();
+            writeProgressRow("start", "running", false, 0.0, false, 0,
+                             "best_bound_unavailable_before_mipopt");
+            progress_thread = std::thread([&]() {
+                while (!stop_progress.load()) {
+                    std::this_thread::sleep_for(
+                        std::chrono::duration<double>(heartbeat_seconds));
+                    if (stop_progress.load()) break;
+                    writeProgressRow("heartbeat", "running", false, 0.0, false, 0,
+                                     "best_bound_unavailable_while_mipopt_running");
+                }
+            });
+            out.checkpoint_log_written = true;
+        } catch (const std::exception& e) {
+            out.best_bound_fail_reason =
+                std::string("progress_log_write_failed:") + e.what();
+        }
+    }
+
     status = api.mipopt(env, lp);
+    stop_progress.store(true);
+    if (progress_thread.joinable()) progress_thread.join();
     out.return_code = status;
     out.status_code = api.getstat(env, lp);
+    out.callback_wall_time_abort = cb_state.wall_time_abort.load();
     char statbuf[1024] = {0};
     if (api.getstatstring(env, out.status_code, statbuf)) {
         out.status = statbuf;
     } else {
         out.status = "status_code_" + std::to_string(out.status_code);
     }
+    if (out.callback_wall_time_abort) {
+        out.status = "callback_wall_time_abort:" + out.status;
+    }
     double obj = 0.0;
     if (api.getobjval(env, lp, &obj) == 0) out.objective = obj;
     double bound = 0.0;
-    if (api.getbestobjval(env, lp, &bound) == 0) out.best_bound = bound;
+    const int best_bound_rc = api.getbestobjval(env, lp, &bound);
+    if (best_bound_rc == 0 && std::isfinite(bound)) {
+        out.best_bound = bound;
+        out.best_bound_available = true;
+        if (out.best_bound_fail_reason.empty()) out.best_bound_fail_reason = "none";
+    } else {
+        out.best_bound_fail_reason =
+            "CPXgetbestobjval_unavailable:" + std::to_string(best_bound_rc);
+    }
     out.node_count = static_cast<long long>(api.getnodecnt(env, lp));
+    writeProgressRow("final", out.status, out.best_bound_available, out.best_bound,
+                     out.best_bound_available, out.node_count,
+                     out.best_bound_available ? "none" : out.best_bound_fail_reason);
+    out.checkpoint_rows_written = checkpoint_rows;
+    out.last_checkpoint_time = last_checkpoint_time;
     out.relaxation_callback_calls = cb_state.relaxation_calls.load();
     out.candidate_callback_calls = cb_state.candidate_calls.load();
     out.branch_callback_calls = cb_state.branch_calls.load();
@@ -2330,7 +2528,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
             }
         }
     }
-    out.solved = status == 0 || out.status_code != 0;
+    out.solved = status == 0 || out.status_code != 0 || out.callback_wall_time_abort;
     api.freeprob(env, &lp);
     api.close(&env);
     if (api.dll) FreeLibrary(api.dll);

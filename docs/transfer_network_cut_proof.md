@@ -17,3 +17,7 @@ The current diagnostic Benders-like rows do not yet have:
 - full paper-core audit flags proving no diagnostic row entered a certificate.
 
 Therefore `paper_safe_transfer_network_cut=false` in `results/gf_tailored_bc_optimization_round/transfer_network_cut_audit.csv`.
+
+## Next Optimization Round Status
+
+The next-optimization round did not promote transfer-network cuts. Transfer-network and Benders-like inventory rows remain diagnostic-only unless a later audit proves that every emitted source set is a conservative superset for all feasible route-load transfers and that no diagnostic row entered a certificate.

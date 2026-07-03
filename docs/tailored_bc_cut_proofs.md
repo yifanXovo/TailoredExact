@@ -97,3 +97,9 @@ is therefore valid. The callback implementation separates violated pair, triple,
 ## S-Bucket Refinement
 
 S-bucket denominator refinement is certificate-safe only when child buckets exactly cover the parent feasible `S` domain and every bucket is closed. The current callback round keeps this as a coverage test rather than a paper certificate mechanism.
+
+## Next Optimization Round Callback Separation
+
+The callback separator now de-duplicates Gini subset-envelope rows and may add violated rows after the root node until the configured global cut cap is reached. This changes only separation scheduling. The row proof remains the fixed-interval Gini subset-envelope proof above.
+
+Rows emitted by diagnostic transfer-network or Benders-like families are not paper-core evidence in this round.
