@@ -11,6 +11,7 @@ Implemented:
 - one redundant paper-safe Gini interval cap from the relaxation callback;
 - relaxation-point separation hooks for visit-inventory linking rows;
 - relaxation-point separation hooks for singleton/pair Gini subset-envelope rows;
+- relaxation-point separation hooks for the aggregate low-Gini L1 centering row;
 - candidate interval-consistency checks with safe lazy rejection of numerical Gini interval violations;
 - CPLEX branch-order priorities through `CPXcopyorder`;
 - a one-shot custom Gini split callback path that is wired but not yet validated on hard leaves.

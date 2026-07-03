@@ -239,6 +239,10 @@ std::string rNameForStation(int station) {
     return "r_" + std::to_string(station);
 }
 
+std::string qL1NameForStation(int station) {
+    return "q_l1_" + std::to_string(station);
+}
+
 std::string zNameForVehicleStation(int vehicle, int station) {
     return "z_" + std::to_string(vehicle) + "_" + std::to_string(station);
 }
@@ -257,6 +261,7 @@ struct CallbackState {
     int ncols = 0;
     int g_col = -1;
     std::vector<int> r_cols;
+    std::vector<int> q_l1_cols;
     std::vector<int> y_cols;
     std::vector<std::vector<int>> z_cols;
     std::vector<int> station_initial;
@@ -277,6 +282,8 @@ struct CallbackState {
     std::atomic<long long> gini_subset_envelope_cuts_added{0};
     std::atomic<long long> gini_subset_envelope_candidates{0};
     std::atomic<long long> gini_subset_envelope_violations{0};
+    std::atomic<long long> low_gini_l1_cuts_added{0};
+    std::atomic<long long> low_gini_l1_violations{0};
     std::atomic<long long> lazy_rejections{0};
     std::atomic<long long> incumbents_seen{0};
     std::atomic<long long> incumbents_verified{0};
@@ -447,6 +454,46 @@ void separateGiniSubsetEnvelope(CallbackState& state,
     }
 }
 
+void separateLowGiniL1Centering(CallbackState& state,
+                                CPXCALLBACKCONTEXTptr context) {
+    if (state.ncols <= 0 || state.r_cols.size() <= 1 ||
+        state.q_l1_cols.size() <= 1 || state.gamma_U < -1e-12) {
+        return;
+    }
+    if (state.low_gini_l1_cuts_added.load() > 0) return;
+    std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
+    double obj = 0.0;
+    if (state.api->callbackgetrelaxationpoint(
+            context, x.data(), 0, state.ncols - 1, &obj) != 0) {
+        return;
+    }
+    const int V = std::min(static_cast<int>(state.r_cols.size()),
+                           static_cast<int>(state.q_l1_cols.size())) - 1;
+    std::vector<std::pair<int, double>> terms;
+    terms.reserve(static_cast<std::size_t>(2 * V));
+    double lhs = 0.0;
+    for (int i = 1; i <= V; ++i) {
+        const int q = state.q_l1_cols[static_cast<std::size_t>(i)];
+        if (q >= 0) {
+            lhs += x[static_cast<std::size_t>(q)];
+            terms.push_back({q, 1.0});
+        }
+        const int r = state.r_cols[static_cast<std::size_t>(i)];
+        if (r >= 0) {
+            const double coef = -2.0 * state.gamma_U;
+            lhs += coef * x[static_cast<std::size_t>(r)];
+            terms.push_back({r, coef});
+        }
+    }
+    constexpr double tol = 1e-6;
+    if (lhs > tol) {
+        state.low_gini_l1_violations.fetch_add(1);
+        if (addOneUserCut(state, context, terms, 'L', 0.0)) {
+            state.low_gini_l1_cuts_added.fetch_add(1);
+        }
+    }
+}
+
 void validateCandidatePoint(CallbackState& state,
                             CPXCALLBACKCONTEXTptr context) {
     if (!state.validate_candidates || state.ncols <= 0 || state.g_col < 0) return;
@@ -532,6 +579,7 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
         }
         separateVisitInventoryLinking(*state, context);
         separateGiniSubsetEnvelope(*state, context);
+        separateLowGiniL1Centering(*state, context);
     } else if (contextid == kContextCandidate) {
         ++state->candidate_calls;
         ++state->incumbents_seen;
@@ -642,11 +690,14 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
                  static_cast<int>(station_capacity.size()));
     std::vector<int> y_cols(static_cast<std::size_t>(station_count), -1);
     std::vector<int> r_cols(static_cast<std::size_t>(station_count), -1);
+    std::vector<int> q_l1_cols(static_cast<std::size_t>(station_count), -1);
     for (int i = 1; i < station_count; ++i) {
         std::vector<int> found = buildNameToIndexLookup(names, yNameForStation(i));
         if (!found.empty()) y_cols[static_cast<std::size_t>(i)] = found.front();
         found = buildNameToIndexLookup(names, rNameForStation(i));
         if (!found.empty()) r_cols[static_cast<std::size_t>(i)] = found.front();
+        found = buildNameToIndexLookup(names, qL1NameForStation(i));
+        if (!found.empty()) q_l1_cols[static_cast<std::size_t>(i)] = found.front();
     }
     std::vector<std::vector<int>> z_cols(
         static_cast<std::size_t>(std::max(0, vehicle_count)),
@@ -666,6 +717,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     cb_state.ncols = ncols;
     cb_state.g_col = g_col;
     cb_state.r_cols = std::move(r_cols);
+    cb_state.q_l1_cols = std::move(q_l1_cols);
     cb_state.y_cols = std::move(y_cols);
     cb_state.z_cols = std::move(z_cols);
     cb_state.station_initial = station_initial;
@@ -715,6 +767,10 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         cb_state.gini_subset_envelope_candidates.load();
     out.callback_gini_subset_envelope_violations =
         cb_state.gini_subset_envelope_violations.load();
+    out.callback_low_gini_l1_cuts_added =
+        cb_state.low_gini_l1_cuts_added.load();
+    out.callback_low_gini_l1_violations =
+        cb_state.low_gini_l1_violations.load();
     out.lazy_rejections = cb_state.lazy_rejections.load();
     out.incumbents_seen = cb_state.incumbents_seen.load();
     out.incumbents_verified = cb_state.incumbents_verified.load();

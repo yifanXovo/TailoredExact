@@ -2655,13 +2655,19 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     ";callback_visit_inventory_linking=" +
                     std::to_string(api_solve.callback_visit_inventory_cuts_added) +
                     ";callback_gini_subset_envelope=" +
-                    std::to_string(api_solve.callback_gini_subset_envelope_cuts_added);
+                    std::to_string(api_solve.callback_gini_subset_envelope_cuts_added) +
+                    ";callback_low_gini_l1_centering=" +
+                    std::to_string(api_solve.callback_low_gini_l1_cuts_added);
                 result.tailored_bc_gini_subset_envelope_candidates +=
                     api_solve.callback_gini_subset_envelope_candidates;
                 result.tailored_bc_gini_subset_envelope_violations +=
                     api_solve.callback_gini_subset_envelope_violations;
                 result.tailored_bc_gini_subset_envelope_cuts_added +=
                     api_solve.callback_gini_subset_envelope_cuts_added;
+                result.tailored_bc_low_gini_l1_centering_violations +=
+                    api_solve.callback_low_gini_l1_violations;
+                result.tailored_bc_low_gini_l1_centering_rows_added +=
+                    api_solve.callback_low_gini_l1_cuts_added;
                 result.notes.push_back(
                     "CPLEX dynamic callback API backend used for tailored BC; callback events relaxation="
                     + std::to_string(api_solve.relaxation_callback_calls)

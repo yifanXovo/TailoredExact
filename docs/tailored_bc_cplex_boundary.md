@@ -14,7 +14,7 @@ The current callback implementation is intentionally narrow:
 - register a generic callback for relaxation, candidate, branching, and global-progress contexts;
 - add one redundant paper-safe user cut `G <= gamma_U` when the `G` column exists;
 - retrieve relaxation points through `CPXcallbackgetrelaxationpoint`;
-- separate visit-inventory linking rows and singleton/pair Gini subset-envelope rows from relaxation points when violated;
+- separate visit-inventory linking rows, singleton/pair Gini subset-envelope rows, and the aggregate low-Gini L1 centering row from relaxation points when violated;
 - inspect candidate points and reject only numerical fixed-Gini interval violations through `CPXcallbackrejectcandidate`;
 - apply CPLEX branch-order priorities through `CPXcopyorder`;
 - wire a one-shot Gini interval split through `CPXcallbackmakebranch` for rows that explicitly request callback Gini branching;

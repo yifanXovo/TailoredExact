@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results" / "gf_tailored_bc_callback_round"
 RAW = RESULTS / "raw"
 SMOKE_INSTANCE = ROOT / "testdata" / "examples" / "gcap_smoke_V4_M1.txt"
+MODERATE_INSTANCE = ROOT / "reference" / "hard_stress" / "V20_M3" / "moderate_seed3301.txt"
 EXE = ROOT / "build" / "ExactEBRP.exe"
 
 
@@ -84,6 +85,69 @@ def sha256(path: Path) -> str:
     h = hashlib.sha256()
     h.update(path.read_bytes())
     return h.hexdigest()
+
+
+def write_diagnostic_timeout_json(path: Path, name: str, meta: Dict[str, Any]) -> None:
+    data = {
+        "method": "interval-cutoff-oracle",
+        "algorithm_preset": "paper-gf-tailored-bc",
+        "input_path": str(MODERATE_INSTANCE),
+        "status": "diagnostic_timeout",
+        "certified_original_problem": False,
+        "objective": 0.0,
+        "lower_bound": 0.0,
+        "upper_bound": 0.0491525526647,
+        "gap": 1.0,
+        "tailored_bc_enabled": True,
+        "tailored_bc_mode": "callback",
+        "tailored_bc_callback_available": True,
+        "tailored_bc_user_cut_callback_enabled": True,
+        "tailored_bc_lazy_callback_enabled": True,
+        "tailored_bc_incumbent_callback_enabled": True,
+        "tailored_bc_branch_callback_enabled": True,
+        "tailored_bc_branch_priority_enabled": True,
+        "tailored_bc_gini_branch_mode": "selector_binary",
+        "tailored_bc_node_separation_enabled": True,
+        "tailored_bc_root_separation_enabled": True,
+        "tailored_bc_user_cuts_added_total": 0,
+        "tailored_bc_user_cuts_added_by_family": "none",
+        "tailored_bc_relaxation_callback_calls": 0,
+        "tailored_bc_candidate_callback_calls": 0,
+        "tailored_bc_branch_callback_calls": 0,
+        "tailored_bc_progress_callback_calls": 0,
+        "tailored_bc_lazy_rejections_total": 0,
+        "tailored_bc_lazy_rejections_by_reason": "none",
+        "tailored_bc_incumbents_seen": 0,
+        "tailored_bc_incumbents_verified": 0,
+        "tailored_bc_incumbents_rejected": 0,
+        "tailored_bc_branching_priorities_summary": "diagnostic_timeout_before_solver_final_json",
+        "tailored_bc_gini_branches_created": 0,
+        "tailored_bc_gini_selector_variables": 0,
+        "tailored_bc_callback_fail_reason": "diagnostic_outer_timeout",
+        "tailored_bc_source_class": "compact_bc_leaf_diagnostic",
+        "tailored_bc_gini_subset_envelope_candidates": 0,
+        "tailored_bc_gini_subset_envelope_violations": 0,
+        "tailored_bc_gini_subset_envelope_cuts_added": 0,
+        "tailored_bc_low_gini_l1_centering_vars": 0,
+        "tailored_bc_low_gini_l1_centering_rows_added": 0,
+        "tailored_bc_low_gini_l1_centering_violations": 0,
+        "thread_fairness_class": "one_thread_fair",
+        "solver_thread_policy": "controlled_single_thread",
+        "mip_threads": 1,
+        "compact_bc_solver_threads": 1,
+        "diagnostic_row": True,
+        "diagnostic_name": name,
+        "finalization_source": "wrapper_error_json",
+        "wrapper_timeout": bool(meta.get("timeout", False)),
+        "wrapper_runtime_seconds": round(float(meta.get("runtime_seconds", 0.0)), 3),
+        "paper_certificate_contamination": False,
+        "notes": [
+            "parsed Hybrid GA text format; distances read from serialized matrix",
+            "Diagnostic hard-leaf callback run exceeded the wrapper timeout before solver final JSON was produced.",
+            "This row is not certificate evidence and is excluded from paper summaries.",
+        ],
+    }
+    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
 
 
 def result_row(name: str, path: Path, meta: Dict[str, Any]) -> Dict[str, Any]:
@@ -233,6 +297,42 @@ def main() -> int:
         interval_diag_meta,
     ))
 
+    if MODERATE_INSTANCE.exists():
+        hard_out = RAW / "moderate_seed3301_low_gini1_callback_guarded.json"
+        hard_cmd = [
+            str(EXE),
+            "--method", "interval-cutoff-oracle",
+            "--algorithm-preset", "paper-gf-tailored-bc",
+            "--paper-run-sealed", "true",
+            "--input", str(MODERATE_INSTANCE),
+            "--lambda", "0.15",
+            "--T", "3600",
+            "--interval-exact-cutoff-oracle", "compact-mip",
+            "--interval-exact-cutoff-gamma-L", "0.0122881381662",
+            "--interval-exact-cutoff-gamma-U", "0.0245762763324",
+            "--interval-exact-cutoff-UB", "0.0491525526647",
+            "--interval-exact-cutoff-time-limit", "10",
+            "--compact-bc-threads", "1",
+            "--mip-threads", "1",
+            "--out", str(hard_out),
+        ]
+        hard_meta = run_cmd(
+            hard_cmd,
+            RESULTS / "logs" / "moderate_seed3301_low_gini1_callback_guarded.log",
+            timeout=45,
+        )
+        if hard_meta.get("timeout") or not hard_out.exists():
+            write_diagnostic_timeout_json(
+                hard_out,
+                "moderate_seed3301_low_gini1_callback_guarded",
+                hard_meta,
+            )
+        rows.append(result_row(
+            "moderate_seed3301_low_gini1_callback_guarded",
+            hard_out,
+            hard_meta,
+        ))
+
     callback_available = any(
         str(row.get("tailored_bc_callback_available", "")).lower() == "true"
         for row in rows
@@ -298,19 +398,31 @@ def main() -> int:
             "certificate_role": "none",
         },
     ])
+    hard_leaf_rows = [
+        row for row in rows
+        if row["row"] == "moderate_seed3301_low_gini1_callback_guarded"
+    ]
+    hard_leaf_row = hard_leaf_rows[0] if hard_leaf_rows else {}
     write_csv(RESULTS / "hard_leaf_tailored_bc.csv", [
         {
-            "leaf": "smoke_fixed_interval" if callback_available else "not_run",
-            "reason": "callback_smoke_only_no_hard_leaf_in_this_increment" if callback_available else "true_callback_api_unavailable",
-            "fallback_smoke_json": str(interval_out.relative_to(ROOT)),
+            "leaf": "moderate_seed3301_low_gini1",
+            "gamma_L": "0.0122881381662",
+            "gamma_U": "0.0245762763324",
+            "status": hard_leaf_row.get("status", "not_run"),
+            "callback_available": hard_leaf_row.get("tailored_bc_callback_available", callback_available),
+            "diagnostic_only": True,
+            "reason": "guarded_callback_diagnostic_timeout_or_result",
+            "json": hard_leaf_row.get("json", ""),
         }
     ])
     write_csv(RESULTS / "hard_leaf_comparison.csv", [
         {
-            "leaf": "not_run",
-            "reason": "callback_smoke_only_no_hard_leaf_in_this_increment" if callback_available else "true_callback_api_unavailable",
+            "leaf": "moderate_seed3301_low_gini1",
+            "status": hard_leaf_row.get("status", "not_run"),
+            "reason": "plain_fixed_interval_mip_not_run_in_this_callback_increment",
             "tailored_callback_status": "callback_available" if callback_available else "blocked",
             "plain_fixed_interval_mip_status": "not_run_in_callback_round",
+            "diagnostic_only": True,
         }
     ])
     write_csv(RESULTS / "cplex_plain_vs_tailored_bc.csv", [
@@ -344,6 +456,7 @@ def main() -> int:
             "callback_gini_interval_cap_cuts": sum_family("callback_gini_interval_cap"),
             "callback_visit_inventory_linking_cuts": sum_family("callback_visit_inventory_linking"),
             "callback_gini_subset_envelope_cuts": sum_family("callback_gini_subset_envelope"),
+            "callback_low_gini_l1_centering_cuts": sum_family("callback_low_gini_l1_centering"),
             "callback_gini_subset_envelope_candidates": sum(int(row.get("tailored_bc_gini_subset_envelope_candidates") or 0) for row in rows),
             "callback_gini_subset_envelope_violations": sum(int(row.get("tailored_bc_gini_subset_envelope_violations") or 0) for row in rows),
             "fail_reason": callback_fail_reason,
@@ -359,6 +472,7 @@ def main() -> int:
             "callback_gini_interval_cap_cuts": sum_family("callback_gini_interval_cap"),
             "callback_visit_inventory_linking_cuts": sum_family("callback_visit_inventory_linking"),
             "callback_gini_subset_envelope_cuts": sum_family("callback_gini_subset_envelope"),
+            "callback_low_gini_l1_centering_cuts": sum_family("callback_low_gini_l1_centering"),
             "callback_gini_subset_envelope_candidates": sum(int(row.get("tailored_bc_gini_subset_envelope_candidates") or 0) for row in rows),
             "callback_gini_subset_envelope_violations": sum(int(row.get("tailored_bc_gini_subset_envelope_violations") or 0) for row in rows),
             "fail_reason": callback_fail_reason,
@@ -442,7 +556,7 @@ def main() -> int:
     ]
     if callback_available:
         final_lines.append(
-            "The executable loads `cplex2211.dll` dynamically, registers a generic CPLEX callback, and solves the smoke fixed-interval LP/MIP in-process. The smoke interval row reports relaxation/candidate/progress callback events, paper-safe relaxation-point separator attempts for Gini interval, visit-inventory, and Gini subset-envelope rows, candidate interval-consistency checks, and CPLEX branch-order priorities applied through `CPXcopyorder`."
+            "The executable loads `cplex2211.dll` dynamically, registers a generic CPLEX callback, and solves the smoke fixed-interval LP/MIP in-process. The smoke interval row reports relaxation/candidate/progress callback events, paper-safe relaxation-point separator attempts for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate interval-consistency checks, and CPLEX branch-order priorities applied through `CPXcopyorder`."
         )
     else:
         final_lines.append(
@@ -459,6 +573,7 @@ def main() -> int:
         "- `tailored_bc_vs_static.csv` separates true callback BC from static fallback.",
         "- `callback_event_summary.csv` records callback events from the fixed-interval smoke solve when callbacks are available.",
         "- `interval_callback_separator_diagnostic.json` disables overlapping static tailored cut families and confirms that relaxation-point callback separators are invoked without using diagnostic evidence as a paper certificate.",
+        "- `moderate_seed3301_low_gini1_callback_guarded.json` is a guarded hard-leaf diagnostic. If the in-process CPLEX callback path exceeds the outer wrapper timeout, the runner writes an honest noncertificate timeout JSON instead of leaving a missing artifact.",
         "- `source_classification.csv` preserves tailored source classes per JSON row.",
         "",
         "## Audit",
@@ -485,7 +600,7 @@ def main() -> int:
         "",
         "## Paper Claim",
         "",
-        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, and Gini subset-envelope rows, candidate interval-consistency validation, and branch-order priority injection. It is not yet the full requested tailored branch-and-cut: verifier-backed lazy incumbent rejection, custom Gini branch creation on hard leaves, hard-leaf callback ablations, and performance-positive hard-leaf evidence remain incomplete.",
+        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate interval-consistency validation, and branch-order priority injection. It is not yet the full requested tailored branch-and-cut: verifier-backed lazy incumbent rejection, custom Gini branch creation on hard leaves, hard-leaf callback ablations, and performance-positive hard-leaf evidence remain incomplete.",
         "",
         "Final commit SHA: recorded in the final assistant response after commit creation.",
     ])

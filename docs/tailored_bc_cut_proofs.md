@@ -28,6 +28,8 @@ They are valid under the station-disjoint compact model because any station inve
 
 Introduce `q_i >= |r_i - S/V|`. The Gini cap implies a valid loose centering condition `sum_i q_i <= 2 gamma_U S`. This is a relaxation of pairwise dispersion and cannot cut original feasible solutions in the interval.
 
+The relaxation callback may separate the aggregate row `sum_i q_i - 2 gamma_U sum_i r_i <= 0` when the `q_l1_i` variables are present. The callback row is identical to the static aggregate cap, so its certificate role is the same paper-safe row family.
+
 ## Vehicle Transfer Cutset
 
 Under the empty-start vehicle convention, the net number of bikes delivered by a vehicle into a receiver subset cannot exceed pickups by that same vehicle outside the subset. The implemented static row is conservative and restricted to singleton/pair subsets.
