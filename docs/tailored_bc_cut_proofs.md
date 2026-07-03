@@ -32,7 +32,15 @@ The relaxation callback may separate the aggregate row `sum_i q_i - 2 gamma_U su
 
 ## Vehicle Transfer Cutset
 
-Under the empty-start vehicle convention, the net number of bikes delivered by a vehicle into a receiver subset cannot exceed pickups by that same vehicle outside the subset. The implemented static row is conservative and restricted to singleton/pair subsets.
+Under the empty-start vehicle convention, the net number of bikes delivered by a vehicle into a receiver subset cannot exceed pickups by that same vehicle outside the subset:
+
+`sum_{j in D} d[k,j] - sum_{j in D} p[k,j] <= sum_{i notin D} p[k,i]`.
+
+Equivalently, the basic unfiltered row can be written as:
+
+`sum_{j in D} d[k,j] <= sum_i p[k,i]`.
+
+This latter form is weaker but paper-safe for every receiver subset `D`: a vehicle starts with zero load, so total drops into any subset cannot exceed the total number of bikes picked up by that vehicle. The callback implementation separates this basic row for singleton, pair, and triple receiver subsets at relaxation points. Compatibility-filtered variants remain diagnostic/future work unless their source sets are proved supersets of all feasible external pickup sources.
 
 ## S-Bucket Refinement
 

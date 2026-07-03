@@ -324,6 +324,9 @@ struct CallbackState {
     std::atomic<long long> gini_subset_envelope_violations{0};
     std::atomic<long long> low_gini_l1_cuts_added{0};
     std::atomic<long long> low_gini_l1_violations{0};
+    std::atomic<long long> transfer_cutset_cuts_added{0};
+    std::atomic<long long> transfer_cutset_candidates{0};
+    std::atomic<long long> transfer_cutset_violations{0};
     std::atomic<long long> lazy_rejections{0};
     std::atomic<long long> lazy_gini_interval_rejections{0};
     std::atomic<long long> lazy_visit_inventory_rejections{0};
@@ -354,6 +357,7 @@ struct CallbackState {
     std::atomic<long long> gini_branches_created{0};
     std::atomic<bool> gini_cut_added{false};
     std::atomic<bool> gini_branch_created{false};
+    std::atomic<bool> transfer_cutset_separated{false};
 };
 
 void atomicMax(std::atomic<double>& target, double value) {
@@ -435,6 +439,8 @@ bool addOneUserCut(CallbackState& state,
     }
     return false;
 }
+
+int safeCol(const std::vector<std::vector<int>>& cols, int k, int i);
 
 void separateVisitInventoryLinking(CallbackState& state,
                                    CPXCALLBACKCONTEXTptr context) {
@@ -583,6 +589,77 @@ void separateLowGiniL1Centering(CallbackState& state,
         state.low_gini_l1_violations.fetch_add(1);
         if (addOneUserCut(state, context, terms, 'L', 0.0)) {
             state.low_gini_l1_cuts_added.fetch_add(1);
+        }
+    }
+}
+
+void separateTransferCutset(CallbackState& state,
+                            CPXCALLBACKCONTEXTptr context) {
+    if (state.ncols <= 0 || state.p_cols.empty() || state.d_cols.empty()) return;
+    bool expected = false;
+    if (!state.transfer_cutset_separated.compare_exchange_strong(expected, true)) {
+        return;
+    }
+    std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
+    double obj = 0.0;
+    if (state.api->callbackgetrelaxationpoint(
+            context, x.data(), 0, state.ncols - 1, &obj) != 0) {
+        return;
+    }
+    constexpr double tol = 1e-6;
+    const int vehicle_count =
+        std::min(static_cast<int>(state.p_cols.size()),
+                 static_cast<int>(state.d_cols.size()));
+    const int station_count = vehicle_count > 0
+        ? std::min(static_cast<int>(state.p_cols.front().size()),
+                   static_cast<int>(state.d_cols.front().size()))
+        : 0;
+    auto trySubset = [&](int k, const std::vector<int>& subset,
+                         const std::vector<std::pair<int, double>>& pickup_terms,
+                         double total_pickup) {
+        state.transfer_cutset_candidates.fetch_add(1);
+        std::vector<std::pair<int, double>> terms = pickup_terms;
+        double lhs = -total_pickup;
+        bool has_drop = false;
+        for (int j : subset) {
+            const int d = safeCol(state.d_cols, k, j);
+            if (d < 0) return;
+            terms.push_back({d, 1.0});
+            lhs += x[static_cast<std::size_t>(d)];
+            has_drop = true;
+        }
+        if (!has_drop) return;
+        if (lhs > tol) {
+            state.transfer_cutset_violations.fetch_add(1);
+            if (addOneUserCut(state, context, terms, 'L', 0.0)) {
+                state.transfer_cutset_cuts_added.fetch_add(1);
+            }
+        }
+    };
+    for (int k = 0; k < vehicle_count; ++k) {
+        std::vector<std::pair<int, double>> pickup_terms;
+        double total_pickup = 0.0;
+        for (int i = 1; i < station_count; ++i) {
+            const int p = safeCol(state.p_cols, k, i);
+            if (p < 0) continue;
+            pickup_terms.push_back({p, -1.0});
+            total_pickup += x[static_cast<std::size_t>(p)];
+        }
+        if (pickup_terms.empty()) continue;
+        for (int i = 1; i < station_count; ++i) {
+            trySubset(k, {i}, pickup_terms, total_pickup);
+        }
+        for (int i = 1; i < station_count; ++i) {
+            for (int j = i + 1; j < station_count; ++j) {
+                trySubset(k, {i, j}, pickup_terms, total_pickup);
+            }
+        }
+        for (int i = 1; i < station_count; ++i) {
+            for (int j = i + 1; j < station_count; ++j) {
+                for (int h = j + 1; h < station_count; ++h) {
+                    trySubset(k, {i, j, h}, pickup_terms, total_pickup);
+                }
+            }
         }
     }
 }
@@ -1251,6 +1328,7 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
         separateVisitInventoryLinking(*state, context);
         separateGiniSubsetEnvelope(*state, context);
         separateLowGiniL1Centering(*state, context);
+        separateTransferCutset(*state, context);
     } else if (contextid == kContextCandidate) {
         ++state->candidate_calls;
         ++state->incumbents_seen;
@@ -1515,6 +1593,12 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         cb_state.low_gini_l1_cuts_added.load();
     out.callback_low_gini_l1_violations =
         cb_state.low_gini_l1_violations.load();
+    out.callback_transfer_cutset_cuts_added =
+        cb_state.transfer_cutset_cuts_added.load();
+    out.callback_transfer_cutset_candidates =
+        cb_state.transfer_cutset_candidates.load();
+    out.callback_transfer_cutset_violations =
+        cb_state.transfer_cutset_violations.load();
     out.lazy_rejections = cb_state.lazy_rejections.load();
     out.lazy_gini_interval_rejections =
         cb_state.lazy_gini_interval_rejections.load();

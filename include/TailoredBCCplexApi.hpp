@@ -40,6 +40,9 @@ struct TailoredBCCplexApiSolveResult {
     long long callback_gini_subset_envelope_violations = 0;
     long long callback_low_gini_l1_cuts_added = 0;
     long long callback_low_gini_l1_violations = 0;
+    long long callback_transfer_cutset_cuts_added = 0;
+    long long callback_transfer_cutset_candidates = 0;
+    long long callback_transfer_cutset_violations = 0;
     long long lazy_rejections = 0;
     long long lazy_gini_interval_rejections = 0;
     long long lazy_visit_inventory_rejections = 0;

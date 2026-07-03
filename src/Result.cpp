@@ -1651,6 +1651,10 @@ std::string resultToJson(const SolveResult& input) {
         << result.tailored_bc_subset_inventory_imbalance_cuts_added << ",\n";
     out << "  \"tailored_bc_transfer_cutset_cuts_added\": "
         << result.tailored_bc_transfer_cutset_cuts_added << ",\n";
+    out << "  \"tailored_bc_transfer_cutset_candidates\": "
+        << result.tailored_bc_transfer_cutset_candidates << ",\n";
+    out << "  \"tailored_bc_transfer_cutset_violations\": "
+        << result.tailored_bc_transfer_cutset_violations << ",\n";
     out << "  \"gini_spread_cuts_added\": "
         << result.gini_spread_cuts_added << ",\n";
     out << "  \"compact_bc_direct_gini_cap_rows_added\": "
