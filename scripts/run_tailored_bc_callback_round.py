@@ -440,6 +440,7 @@ def main() -> int:
     )
 
     rows_by_method = {str(row.get("method", "")): row for row in rows}
+    rows_by_name = {str(row.get("row", "")): row for row in rows}
     guard_methods = [
         "tailored-bc-cut-validity-test",
         "gini-subset-envelope-test",
@@ -477,19 +478,35 @@ def main() -> int:
             "tailored_bc_role": "dynamic_callback_smoke",
         }
     ])
+    branch_smoke_row = rows_by_method.get("tailored-bc-branch-callback-smoke-test", {})
+    hard_branch_row = rows_by_name.get("moderate_seed3301_low_gini1_callback_minimal_short3", {})
     write_csv(RESULTS / "gini_branching_refinement.csv", [
         {
-            "mode": "callback",
+            "mode": "callback_toy_smoke",
             "callback_available": callback_available,
             "gini_branching_status": (
                 "branch_callback_created_gini_branches"
-                if int(rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_gini_branches_created") or 0) > 0
+                if int(branch_smoke_row.get("tailored_bc_gini_branches_created") or 0) > 0
                 else ("callback_registered_no_custom_branch_created" if callback_available
                       else "metadata_only_without_callback_api")
             ),
-            "branch_callback_calls": rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_branch_callback_calls", 0),
-            "gini_branches_created": rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_gini_branches_created", 0),
+            "branch_callback_calls": branch_smoke_row.get("tailored_bc_branch_callback_calls", 0),
+            "gini_branches_created": branch_smoke_row.get("tailored_bc_gini_branches_created", 0),
             "certificate_role": "none",
+        },
+        {
+            "mode": "callback_hard_leaf",
+            "callback_available": callback_available,
+            "gini_branching_status": (
+                "hard_leaf_branch_callback_created_gini_branches"
+                if int(hard_branch_row.get("tailored_bc_gini_branches_created") or 0) > 0
+                else ("hard_leaf_branch_context_without_custom_gini_branch"
+                      if int(hard_branch_row.get("tailored_bc_branch_callback_calls") or 0) > 0
+                      else "hard_leaf_branch_context_not_observed")
+            ),
+            "branch_callback_calls": hard_branch_row.get("tailored_bc_branch_callback_calls", 0),
+            "gini_branches_created": hard_branch_row.get("tailored_bc_gini_branches_created", 0),
+            "certificate_role": "diagnostic_hard_leaf_only",
         },
         {
             "mode": "selector_or_outer_controller",
@@ -506,13 +523,27 @@ def main() -> int:
             "callback_available": callback_available,
             "status": (
                 "branch_callback_created_gini_branches"
-                if int(rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_gini_branches_created") or 0) > 0
+                if int(branch_smoke_row.get("tailored_bc_gini_branches_created") or 0) > 0
                 else ("callback_registered_no_branch_context_observed" if callback_available
                       else "blocked")
             ),
-            "reason": callback_fail_reason if not callback_available else rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("status", "not_run"),
-            "branch_callback_calls": rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_branch_callback_calls", 0),
-            "gini_branches_created": rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_gini_branches_created", 0),
+            "reason": callback_fail_reason if not callback_available else branch_smoke_row.get("status", "not_run"),
+            "branch_callback_calls": branch_smoke_row.get("tailored_bc_branch_callback_calls", 0),
+            "gini_branches_created": branch_smoke_row.get("tailored_bc_gini_branches_created", 0),
+        },
+        {
+            "policy": "callback_branching_hard_leaf",
+            "callback_available": callback_available,
+            "status": (
+                "hard_leaf_gini_branches_created"
+                if int(hard_branch_row.get("tailored_bc_gini_branches_created") or 0) > 0
+                else ("hard_leaf_branch_context_only"
+                      if int(hard_branch_row.get("tailored_bc_branch_callback_calls") or 0) > 0
+                      else "hard_leaf_not_observed")
+            ),
+            "reason": hard_branch_row.get("status", "not_run"),
+            "branch_callback_calls": hard_branch_row.get("tailored_bc_branch_callback_calls", 0),
+            "gini_branches_created": hard_branch_row.get("tailored_bc_gini_branches_created", 0),
         },
         {
             "policy": "branching_priorities",
@@ -523,16 +554,29 @@ def main() -> int:
     ])
     write_csv(RESULTS / "gini_branching_comparison.csv", [
         {
-            "mode": "callback",
+            "mode": "callback_toy_smoke",
             "status": (
                 "branch_callback_created_gini_branches"
-                if int(rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_gini_branches_created") or 0) > 0
+                if int(branch_smoke_row.get("tailored_bc_gini_branches_created") or 0) > 0
                 else ("callback_registered_no_custom_gini_branch_yet" if callback_available
                       else "blocked")
             ),
             "certificate_role": "none_without_callback_api" if not callback_available else "callback_candidate",
-            "branch_callback_calls": rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_branch_callback_calls", 0),
-            "gini_branches_created": rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_gini_branches_created", 0),
+            "branch_callback_calls": branch_smoke_row.get("tailored_bc_branch_callback_calls", 0),
+            "gini_branches_created": branch_smoke_row.get("tailored_bc_gini_branches_created", 0),
+        },
+        {
+            "mode": "callback_hard_leaf",
+            "status": (
+                "hard_leaf_gini_branches_created"
+                if int(hard_branch_row.get("tailored_bc_gini_branches_created") or 0) > 0
+                else ("hard_leaf_branch_context_without_custom_gini_branch"
+                      if int(hard_branch_row.get("tailored_bc_branch_callback_calls") or 0) > 0
+                      else "hard_leaf_not_observed")
+            ),
+            "certificate_role": "diagnostic_hard_leaf_only",
+            "branch_callback_calls": hard_branch_row.get("tailored_bc_branch_callback_calls", 0),
+            "gini_branches_created": hard_branch_row.get("tailored_bc_gini_branches_created", 0),
         },
         {
             "mode": "selector_binary_or_outer_controller",
@@ -774,6 +818,7 @@ def main() -> int:
         "- `tailored_bc_vs_static.csv` separates true callback BC from static fallback.",
         "- `callback_event_summary.csv` records callback events from the fixed-interval smoke solve when callbacks are available.",
         "- `tailored_branch_callback_smoke.csv` records a diagnostic-only CPLEX toy MIP branch-smoke row. It applies branch priorities, records relaxation/candidate callbacks, enters CPLEX branch context, and creates one-shot Gini branches through `CPXcallbackmakebranch`.",
+        "- `gini_branching_comparison.csv` now separates toy branch-smoke evidence from the moderate low-Gini hard-leaf diagnostic. In the hard-leaf row, `--tailored-bc-gini-branching auto` selects the branch-callback path and records branch-context calls plus one-shot Gini branches when CPLEX enters branch context.",
         "- `interval_callback_separator_diagnostic.json` disables overlapping static tailored cut families and confirms that relaxation-point callback separators are invoked without using diagnostic evidence as a paper certificate.",
         "- Candidate callbacks now run compact projection verifiers when route/service variables and `Y_i`, `r_i`, `e_i`, targets, weights, lambda, and cutoff data are available. The route projection verifier checks station disjointness, depot flow, station flow, service linking, duration under the pickup-only handling convention, final-inventory balance, and reconstructed route load order. The objective projection verifier recomputes ratios, penalty, Gini, and the objective from final inventories. Rejections use only already-valid model rows; unsupported route-load or Gini/objective mismatches are recorded instead of adding unsafe no-good cuts.",
         "- `moderate_seed3301_low_gini1_callback_guarded.json` is a guarded full-preset hard-leaf diagnostic. If the full preset setup and solve exceed the outer wrapper timeout, the runner writes an honest noncertificate timeout JSON instead of leaving a missing artifact.",
@@ -804,7 +849,7 @@ def main() -> int:
         "",
         "## Paper Claim",
         "",
-        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, and diagnostic branch-context evidence with one-shot Gini branches created through `CPXcallbackmakebranch`. A diagnostic moderate low-Gini leaf now reaches solver finalization under the callback path when overlapping static diagnostic families are disabled, recording callback events and a valid noncertifying interval bound. It is not yet the full requested tailored branch-and-cut: independent route-plan reconstruction from compact incumbents, observed custom Gini branch creation on ExactEBRP hard leaves, full-preset hard-leaf callback ablations, and performance-positive hard-leaf closure evidence remain incomplete.",
+        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, diagnostic branch-context evidence with one-shot Gini branches in the toy branch smoke, and diagnostic hard-leaf evidence where the moderate low-Gini interval enters branch context and creates Gini branches through `CPXcallbackmakebranch`. A diagnostic moderate low-Gini leaf now reaches solver finalization under the callback path when overlapping static diagnostic families are disabled, recording callback events and a valid noncertifying interval bound. It is not yet the full requested tailored branch-and-cut: independent route-plan reconstruction from compact incumbents, full-preset hard-leaf callback ablations, and performance-positive hard-leaf closure evidence remain incomplete.",
         "",
         "Final commit SHA: recorded in the final assistant response after commit creation.",
     ])

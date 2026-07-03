@@ -23,11 +23,17 @@ GiniBranchingSummary planGiniBranching(const SolveOptions& options,
         out.reason = "interval_below_min_width";
         return out;
     }
-    if (requested == "selector" || requested == "auto") {
+    if (requested == "auto") {
+        out.mode = "branch_callback";
+        out.priorities_assigned = 1;
+        out.reason = "auto_prefers_callback_branching_when_callbacks_available";
+        return out;
+    }
+    if (requested == "selector") {
         out.mode = "selector_binary";
         out.selector_variables = 1;
         out.priorities_assigned = 1;
-        out.reason = "selector_binary_fallback_planned";
+        out.reason = "selector_binary_requested";
         return out;
     }
     if (requested == "outer-controller") {
