@@ -2599,8 +2599,16 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 lp_path,
                 time_limit,
                 std::max(1, effective_compact_threads),
+                cutoff.gamma_L,
                 cutoff.gamma_U,
-                true);
+                true,
+                result.tailored_bc_lazy_callback_enabled ||
+                    result.tailored_bc_incumbent_callback_enabled,
+                result.tailored_bc_branch_callback_enabled &&
+                    (result.tailored_bc_gini_branch_mode == "branch_callback" ||
+                     result.tailored_bc_gini_branch_mode == "outer_controller"),
+                result.tailored_bc_branch_priority_enabled,
+                options.tailored_bc_gini_branch_min_width);
             used_callback_api = api_solve.available && api_solve.solved;
             rc = api_solve.return_code;
             if (used_callback_api) {
@@ -2625,8 +2633,19 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     api_solve.incumbents_seen;
                 result.tailored_bc_incumbents_verified =
                     api_solve.incumbents_verified;
+                result.tailored_bc_incumbents_rejected =
+                    api_solve.incumbents_rejected;
+                result.tailored_bc_lazy_rejections_by_reason =
+                    api_solve.lazy_rejections > 0
+                        ? "candidate_gini_interval_violation=" +
+                              std::to_string(api_solve.lazy_rejections)
+                        : "none";
                 result.tailored_bc_gini_branches_created =
                     api_solve.gini_branches_created;
+                result.tailored_bc_branching_priorities_summary +=
+                    ";cplex_copyorder_status=" + api_solve.branch_priority_status +
+                    ";cplex_priorities_applied=" +
+                    std::to_string(api_solve.branch_priorities_applied);
                 result.tailored_bc_user_cuts_added_by_family +=
                     ";callback_gini_interval_cap=" +
                     std::to_string(api_solve.user_cuts_added);
@@ -2636,7 +2655,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     + ", candidate=" + std::to_string(api_solve.candidate_callback_calls)
                     + ", branch=" + std::to_string(api_solve.branch_callback_calls)
                     + ", progress=" + std::to_string(api_solve.progress_callback_calls)
-                    + ", user_cuts=" + std::to_string(api_solve.user_cuts_added));
+                    + ", user_cuts=" + std::to_string(api_solve.user_cuts_added)
+                    + ", lazy_rejections=" + std::to_string(api_solve.lazy_rejections)
+                    + ", branch_priorities=" +
+                        std::to_string(api_solve.branch_priorities_applied));
             } else {
                 result.notes.push_back(
                     "CPLEX dynamic callback API backend unavailable at solve time: "

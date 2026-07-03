@@ -239,8 +239,8 @@ def main() -> int:
         {
             "policy": "branching_priorities",
             "callback_available": callback_available,
-            "status": "metadata_only",
-            "reason": "priority injection not implemented in this increment",
+            "status": "cplex_copyorder_applied" if callback_available else "blocked",
+            "reason": "smoke interval row reports cplex_priorities_applied in tailored_bc_branching_priorities_summary",
         },
     ])
     write_csv(RESULTS / "gini_branching_comparison.csv", [
@@ -344,9 +344,9 @@ def main() -> int:
     ])
     write_csv(RESULTS / "candidate_validation_audit.csv", [
         {
-            "candidate_validation_layer": "incumbent_callback",
+            "candidate_validation_layer": "generic_candidate_callback",
             "callback_available": callback_available,
-            "status": "blocked_without_in_process_callback_api" if not callback_available else "available",
+            "status": "blocked_without_in_process_callback_api" if not callback_available else "candidate_interval_consistency_checked",
             "paper_certificate_contamination": False,
         }
     ])
@@ -376,7 +376,7 @@ def main() -> int:
     ]
     if callback_available:
         final_lines.append(
-            "The executable loads `cplex2211.dll` dynamically, registers a generic CPLEX callback, and solves the smoke fixed-interval LP/MIP in-process. The smoke interval row reports relaxation/candidate/progress callback events and one redundant paper-safe user cut."
+            "The executable loads `cplex2211.dll` dynamically, registers a generic CPLEX callback, and solves the smoke fixed-interval LP/MIP in-process. The smoke interval row reports relaxation/candidate/progress callback events, one redundant paper-safe user cut, candidate interval-consistency checks, and CPLEX branch-order priorities applied through `CPXcopyorder`."
         )
     else:
         final_lines.append(
@@ -420,7 +420,7 @@ def main() -> int:
         "",
         "## Paper Claim",
         "",
-        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models. It is not yet the full requested tailored branch-and-cut: lazy incumbent rejection, custom Gini branch creation, branch priorities, hard-leaf callback ablations, and performance-positive hard-leaf evidence remain incomplete.",
+        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, candidate interval-consistency validation, and branch-order priority injection. It is not yet the full requested tailored branch-and-cut: verifier-backed lazy incumbent rejection, custom Gini branch creation on hard leaves, hard-leaf callback ablations, and performance-positive hard-leaf evidence remain incomplete.",
         "",
         "Final commit SHA: recorded in the final assistant response after commit creation.",
     ])

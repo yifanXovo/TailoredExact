@@ -13,6 +13,9 @@ The current callback implementation is intentionally narrow:
 - read the existing fixed-interval LP model into an in-process CPLEX environment;
 - register a generic callback for relaxation, candidate, branching, and global-progress contexts;
 - add one redundant paper-safe user cut `G <= gamma_U` when the `G` column exists;
+- inspect candidate points and reject only numerical fixed-Gini interval violations through `CPXcallbackrejectcandidate`;
+- apply CPLEX branch-order priorities through `CPXcopyorder`;
+- wire a one-shot Gini interval split through `CPXcallbackmakebranch` for rows that explicitly request callback Gini branching;
 - count callback events and solve the model through `CPXmipopt`.
 
-This proves the callback boundary is now technically open. It does not yet implement the full requested tailored branch-and-cut policy: incumbent verification/rejection, custom Gini branches, branch priorities, and hard-leaf callback cut separation remain incomplete.
+This proves the callback boundary is now technically open. It does not yet implement the full requested tailored branch-and-cut policy: independent route-plan incumbent verification/rejection, hard-leaf-validated custom Gini branches, and hard-leaf callback cut separation remain incomplete.

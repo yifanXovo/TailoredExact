@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <atomic>
+#include <cmath>
 #include <cstdlib>
 #include <cstring>
 #include <filesystem>
@@ -59,6 +60,11 @@ using CPXgetnumcols_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr);
 using CPXgetx_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr, double*, int, int);
 using CPXgetcolname_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr, char**, char*, int, int*, int, int);
 using CPXcallbackaddusercuts_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int, int, const double*, const char*, const int*, const int*, const double*, const int*, const int*);
+using CPXcallbackcandidateispoint_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int*);
+using CPXcallbackgetcandidatepoint_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, double*, int, int, double*);
+using CPXcallbackrejectcandidate_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int, int, const double*, const char*, const int*, const int*, const double*);
+using CPXcallbackmakebranch_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int, const int*, const char*, const double*, int, int, const double*, const char*, const int*, const int*, const double*, double, int*);
+using CPXcopyorder_t = int (__stdcall *)(CPXCENVptr, CPXLPptr, int, const int*, const int*, const int*);
 
 struct Api {
     HMODULE dll = nullptr;
@@ -80,6 +86,11 @@ struct Api {
     CPXgetx_t getx = nullptr;
     CPXgetcolname_t getcolname = nullptr;
     CPXcallbackaddusercuts_t callbackaddusercuts = nullptr;
+    CPXcallbackcandidateispoint_t callbackcandidateispoint = nullptr;
+    CPXcallbackgetcandidatepoint_t callbackgetcandidatepoint = nullptr;
+    CPXcallbackrejectcandidate_t callbackrejectcandidate = nullptr;
+    CPXcallbackmakebranch_t callbackmakebranch = nullptr;
+    CPXcopyorder_t copyorder = nullptr;
 };
 
 std::filesystem::path defaultCplexDllPath() {
@@ -135,6 +146,11 @@ bool loadApi(Api& api, std::string& fail_reason) {
     LOAD_REQ(getx, "CPXgetx");
     LOAD_REQ(getcolname, "CPXgetcolname");
     LOAD_REQ(callbackaddusercuts, "CPXcallbackaddusercuts");
+    LOAD_REQ(callbackcandidateispoint, "CPXcallbackcandidateispoint");
+    LOAD_REQ(callbackgetcandidatepoint, "CPXcallbackgetcandidatepoint");
+    LOAD_REQ(callbackrejectcandidate, "CPXcallbackrejectcandidate");
+    LOAD_REQ(callbackmakebranch, "CPXcallbackmakebranch");
+    LOAD_REQ(copyorder, "CPXcopyorder");
 #undef LOAD_REQ
     std::ostringstream missing;
     for (const Required& req : checks) {
@@ -171,11 +187,57 @@ std::vector<std::string> getColumnNames(Api& api, CPXENVptr env, CPXLPptr lp, in
     return names;
 }
 
+bool isPriorityTarget(const std::string& name) {
+    return name.rfind("bit_", 0) == 0 ||
+           name.rfind("z_", 0) == 0 ||
+           name.rfind("mode_", 0) == 0;
+}
+
+int priorityForName(const std::string& name) {
+    if (name.rfind("bit_", 0) == 0) return 100;
+    if (name.rfind("z_", 0) == 0) return 80;
+    if (name.rfind("mode_", 0) == 0) return 60;
+    return 1;
+}
+
+long long applyBranchPriorities(Api& api,
+                                CPXENVptr env,
+                                CPXLPptr lp,
+                                const std::vector<std::string>& names,
+                                std::string& status) {
+    std::vector<int> indices;
+    std::vector<int> priorities;
+    std::vector<int> directions;
+    for (int i = 0; i < static_cast<int>(names.size()); ++i) {
+        if (!isPriorityTarget(names[static_cast<std::size_t>(i)])) continue;
+        indices.push_back(i);
+        priorities.push_back(priorityForName(names[static_cast<std::size_t>(i)]));
+        directions.push_back(0);
+    }
+    if (indices.empty()) {
+        status = "no_binary_priority_targets_found";
+        return 0;
+    }
+    const int rc = api.copyorder(env, lp, static_cast<int>(indices.size()),
+                                 indices.data(), priorities.data(), directions.data());
+    if (rc != 0) {
+        status = "CPXcopyorder_failed:" + std::to_string(rc);
+        return 0;
+    }
+    status = "applied";
+    return static_cast<long long>(indices.size());
+}
+
 struct CallbackState {
     Api* api = nullptr;
+    int ncols = 0;
     int g_col = -1;
+    double gamma_L = 0.0;
     double gamma_U = 1.0;
     bool add_gini_cut = false;
+    bool validate_candidates = false;
+    bool enable_gini_branch = false;
+    double gini_branch_min_width = 1e-4;
     std::atomic<long long> relaxation_calls{0};
     std::atomic<long long> candidate_calls{0};
     std::atomic<long long> branch_calls{0};
@@ -183,9 +245,92 @@ struct CallbackState {
     std::atomic<long long> user_cuts_added{0};
     std::atomic<long long> lazy_rejections{0};
     std::atomic<long long> incumbents_seen{0};
+    std::atomic<long long> incumbents_verified{0};
+    std::atomic<long long> incumbents_rejected{0};
     std::atomic<long long> gini_branches_created{0};
     std::atomic<bool> gini_cut_added{false};
+    std::atomic<bool> gini_branch_created{false};
 };
+
+bool rejectCandidateWithGiniBound(CallbackState& state,
+                                  CPXCALLBACKCONTEXTptr context,
+                                  bool upper_bound) {
+    if (state.g_col < 0) return false;
+    const double rhs[1] = {
+        upper_bound ? state.gamma_U : state.gamma_L
+    };
+    const char sense[1] = {upper_bound ? 'L' : 'G'};
+    const int beg[1] = {0};
+    const int ind[1] = {state.g_col};
+    const double val[1] = {1.0};
+    const int rc = state.api->callbackrejectcandidate(
+        context, 1, 1, rhs, sense, beg, ind, val);
+    if (rc == 0) {
+        ++state.lazy_rejections;
+        ++state.incumbents_rejected;
+        return true;
+    }
+    return false;
+}
+
+void validateCandidatePoint(CallbackState& state,
+                            CPXCALLBACKCONTEXTptr context) {
+    if (!state.validate_candidates || state.ncols <= 0 || state.g_col < 0) return;
+    int is_point = 0;
+    if (state.api->callbackcandidateispoint(context, &is_point) != 0 || !is_point) {
+        return;
+    }
+    std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
+    double obj = 0.0;
+    if (state.api->callbackgetcandidatepoint(
+            context, x.data(), 0, state.ncols - 1, &obj) != 0) {
+        return;
+    }
+    const double g = x[static_cast<std::size_t>(state.g_col)];
+    constexpr double tol = 1e-7;
+    if (std::isfinite(g) && g > state.gamma_U + tol) {
+        rejectCandidateWithGiniBound(state, context, true);
+        return;
+    }
+    if (std::isfinite(g) && g < state.gamma_L - tol) {
+        rejectCandidateWithGiniBound(state, context, false);
+        return;
+    }
+    ++state.incumbents_verified;
+}
+
+void createOneShotGiniBranches(CallbackState& state,
+                               CPXCALLBACKCONTEXTptr context) {
+    if (!state.enable_gini_branch || state.g_col < 0) return;
+    if (state.gamma_U - state.gamma_L < state.gini_branch_min_width) return;
+    bool expected = false;
+    if (!state.gini_branch_created.compare_exchange_strong(expected, true)) return;
+    const double mid = 0.5 * (state.gamma_L + state.gamma_U);
+    const int beg[1] = {0};
+    const int ind[1] = {state.g_col};
+    const int varcnt = 0;
+    const int* varind = nullptr;
+    const char* varlu = nullptr;
+    const double* varbd = nullptr;
+    int seq = 0;
+
+    const double rhs_lo[1] = {mid};
+    const char sense_lo[1] = {'L'};
+    const double val_lo[1] = {1.0};
+    const int rc_lo = state.api->callbackmakebranch(
+        context, varcnt, varind, varlu, varbd,
+        1, 1, rhs_lo, sense_lo, beg, ind, val_lo, 0.0, &seq);
+
+    const double rhs_hi[1] = {-mid};
+    const char sense_hi[1] = {'L'};
+    const double val_hi[1] = {-1.0};
+    const int rc_hi = state.api->callbackmakebranch(
+        context, varcnt, varind, varlu, varbd,
+        1, 1, rhs_hi, sense_hi, beg, ind, val_hi, 0.0, &seq);
+
+    if (rc_lo == 0) ++state.gini_branches_created;
+    if (rc_hi == 0) ++state.gini_branches_created;
+}
 
 int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
                                CPXLONG contextid,
@@ -211,8 +356,10 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
     } else if (contextid == kContextCandidate) {
         ++state->candidate_calls;
         ++state->incumbents_seen;
+        validateCandidatePoint(*state, context);
     } else if (contextid == kContextBranching) {
         ++state->branch_calls;
+        createOneShotGiniBranches(*state, context);
     } else if (contextid == kContextGlobalProgress) {
         ++state->progress_calls;
     }
@@ -248,8 +395,13 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     const std::filesystem::path& lp_path,
     double time_limit_seconds,
     int threads,
+    double gamma_L,
     double gamma_U,
-    bool add_redundant_gini_user_cut) {
+    bool add_redundant_gini_user_cut,
+    bool enable_candidate_validation,
+    bool enable_gini_branching,
+    bool enable_branch_priorities,
+    double gini_branch_min_width) {
     TailoredBCCplexApiSolveResult out;
     out.attempted = true;
 #ifdef _WIN32
@@ -290,6 +442,12 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     }
     const int ncols = api.getnumcols(env, lp);
     std::vector<std::string> names = getColumnNames(api, env, lp, ncols);
+    if (enable_branch_priorities) {
+        out.branch_priorities_applied =
+            applyBranchPriorities(api, env, lp, names, out.branch_priority_status);
+    } else {
+        out.branch_priority_status = "disabled";
+    }
     int g_col = -1;
     for (int i = 0; i < ncols; ++i) {
         if (names[static_cast<std::size_t>(i)] == "G") {
@@ -299,9 +457,14 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     }
     CallbackState cb_state;
     cb_state.api = &api;
+    cb_state.ncols = ncols;
     cb_state.g_col = g_col;
+    cb_state.gamma_L = gamma_L;
     cb_state.gamma_U = gamma_U;
     cb_state.add_gini_cut = add_redundant_gini_user_cut && g_col >= 0;
+    cb_state.validate_candidates = enable_candidate_validation;
+    cb_state.enable_gini_branch = enable_gini_branching;
+    cb_state.gini_branch_min_width = std::max(1e-12, gini_branch_min_width);
     const CPXLONG mask = kContextRelaxation | kContextCandidate |
         kContextBranching | kContextGlobalProgress;
     status = api.callbacksetfunc(env, lp, mask, tailoredCallback, &cb_state);
@@ -333,7 +496,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     out.user_cuts_added = cb_state.user_cuts_added.load();
     out.lazy_rejections = cb_state.lazy_rejections.load();
     out.incumbents_seen = cb_state.incumbents_seen.load();
-    out.incumbents_verified = 0;
+    out.incumbents_verified = cb_state.incumbents_verified.load();
+    out.incumbents_rejected = cb_state.incumbents_rejected.load();
     out.gini_branches_created = cb_state.gini_branches_created.load();
     if (ncols > 0) {
         std::vector<double> x(static_cast<std::size_t>(ncols), 0.0);

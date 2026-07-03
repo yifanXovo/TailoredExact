@@ -35,7 +35,10 @@ struct TailoredBCCplexApiSolveResult {
     long long lazy_rejections = 0;
     long long incumbents_seen = 0;
     long long incumbents_verified = 0;
+    long long incumbents_rejected = 0;
     long long gini_branches_created = 0;
+    long long branch_priorities_applied = 0;
+    std::string branch_priority_status;
     std::unordered_map<std::string, double> values;
 };
 
@@ -45,7 +48,12 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     const std::filesystem::path& lp_path,
     double time_limit_seconds,
     int threads,
+    double gamma_L,
     double gamma_U,
-    bool add_redundant_gini_user_cut);
+    bool add_redundant_gini_user_cut,
+    bool enable_candidate_validation,
+    bool enable_gini_branching,
+    bool enable_branch_priorities,
+    double gini_branch_min_width);
 
 } // namespace ebrp
