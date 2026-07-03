@@ -108,3 +108,16 @@ The candidate evidence now reports whether certificates are relaxation-only, Com
 ## Effectiveness Round 3 Evidence
 
 The candidate evidence distinguishes relaxation-only certificates, Compact-BC-assisted certificates, diagnostic fixed-interval probes, and benchmark-only CPLEX rows. Compact-BC dominance is not required for a valid framework certificate.
+
+## Low-Gini Round Evidence
+
+`results/gf_compact_bc_lowgini_round/` adds focused evidence for the remaining
+moderate low-Gini blocker. Variable-S centering and the S*P McCormick objective
+estimator are paper-safe fixed-interval Compact-BC rows; diagnostic S-range
+buckets are not paper evidence until coverage-aware ledger support is
+implemented.
+
+The best low_gini_1 run is noncertified but improves the fixed-interval lower
+bound to `0.048723364` at 3600s. This is positive bound-progress evidence, not
+a full `moderate_seed3301` certificate. Plain CPLEX and diagnostic rows remain
+benchmark/diagnostic-only.

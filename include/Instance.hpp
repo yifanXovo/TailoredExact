@@ -153,6 +153,17 @@ struct SolveOptions {
     std::string compact_bc_low_gini_strengthening = "off";
     std::string compact_bc_denominator_bound_mode = "basic";
     std::string compact_bc_objective_estimator_mode = "single";
+    std::string compact_bc_s_range_refinement = "off";
+    int compact_bc_s_range_buckets = 1;
+    bool compact_bc_s_range_adaptive = false;
+    int compact_bc_s_range_bucket_id = -1;
+    double compact_bc_s_range_bucket_L = -1.0;
+    double compact_bc_s_range_bucket_U = -1.0;
+    bool compact_bc_variable_s_centering = false;
+    std::string compact_bc_rmin_rmax_propagation = "off";
+    std::string compact_bc_sp_product_estimator = "off";
+    std::string compact_bc_sp_product_bounds = "basic";
+    std::string compact_bc_low_gini_precheck = "off";
     bool compact_bc_low_gini_strengthening_explicit = false;
     bool compact_bc_denominator_bound_mode_explicit = false;
     bool compact_bc_objective_estimator_mode_explicit = false;

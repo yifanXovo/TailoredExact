@@ -714,3 +714,19 @@ The round2 effectiveness package separates relaxation-only certificates from Com
 ## Compact-BC Effectiveness Round 3
 
 The round3 package extends Compact-BC effectiveness evidence with clean leaf-solver semantics, longer tailored-vs-plain fixed-interval comparisons, safe low-Gini mode reporting, and generated hard diagnostics. Diagnostic rows remain outside paper certificates.
+
+## Low-Gini Compact-BC Round
+
+`results/gf_compact_bc_lowgini_round/` focuses on the two low-Gini
+`moderate_seed3301` leaves.  The round adds paper-safe variable-S low-Gini
+centering and a McCormick S*P objective estimator for fixed-interval Compact-BC
+rows.  Diagnostic S-range bucket rows are implemented but are not paper-core
+certificate evidence until the full-frontier ledger explicitly partitions and
+merges every parent leaf over the S range.
+
+The 3600s one-thread focused row for the first moderate low-Gini leaf remains
+nonclosed but improves the valid lower bound to `0.048723364` against UB
+`0.0491525526647` (gap about `0.00873`).  Compact-BC remains an
+unresolved-interval subsolver in the Gini-frontier compact certification
+framework; it is not claimed to dominate relaxation closures or plain CPLEX on
+every interval.

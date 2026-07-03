@@ -1459,6 +1459,48 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.compact_bc_objective_estimator_mode) << "\",\n";
     out << "  \"compact_bc_low_gini_aggressive_diagnostic\": "
         << (result.compact_bc_low_gini_aggressive_diagnostic ? "true" : "false") << ",\n";
+    out << "  \"compact_bc_s_range_refinement\": \""
+        << jsonEscape(result.compact_bc_s_range_refinement) << "\",\n";
+    out << "  \"s_range_refinement_enabled\": "
+        << (result.s_range_refinement_enabled ? "true" : "false") << ",\n";
+    out << "  \"s_range_global_L\": " << result.s_range_global_L << ",\n";
+    out << "  \"s_range_global_U\": " << result.s_range_global_U << ",\n";
+    out << "  \"s_range_bucket_count\": " << result.s_range_bucket_count << ",\n";
+    out << "  \"s_range_bucket_id\": " << result.s_range_bucket_id << ",\n";
+    out << "  \"s_range_bucket_L\": " << result.s_range_bucket_L << ",\n";
+    out << "  \"s_range_bucket_U\": " << result.s_range_bucket_U << ",\n";
+    out << "  \"s_range_bucket_closed\": "
+        << (result.s_range_bucket_closed ? "true" : "false") << ",\n";
+    out << "  \"s_range_parent_coverage_valid\": "
+        << (result.s_range_parent_coverage_valid ? "true" : "false") << ",\n";
+    out << "  \"s_range_certificate_valid\": "
+        << (result.s_range_certificate_valid ? "true" : "false") << ",\n";
+    out << "  \"compact_bc_s_range_rows_added\": "
+        << result.compact_bc_s_range_rows_added << ",\n";
+    out << "  \"compact_bc_variable_s_centering\": "
+        << (result.compact_bc_variable_s_centering ? "true" : "false") << ",\n";
+    out << "  \"compact_bc_rmin_rmax_propagation\": \""
+        << jsonEscape(result.compact_bc_rmin_rmax_propagation) << "\",\n";
+    out << "  \"compact_bc_rmin_rmax_propagation_safe\": "
+        << (result.compact_bc_rmin_rmax_propagation_safe ? "true" : "false") << ",\n";
+    out << "  \"compact_bc_variable_s_centering_rows_added\": "
+        << result.compact_bc_variable_s_centering_rows_added << ",\n";
+    out << "  \"compact_bc_sp_product_estimator\": \""
+        << jsonEscape(result.compact_bc_sp_product_estimator) << "\",\n";
+    out << "  \"compact_bc_sp_product_bounds\": \""
+        << jsonEscape(result.compact_bc_sp_product_bounds) << "\",\n";
+    out << "  \"compact_bc_sp_product_paper_safe\": "
+        << (result.compact_bc_sp_product_paper_safe ? "true" : "false") << ",\n";
+    out << "  \"compact_bc_sp_product_mccormick_rows_added\": "
+        << result.compact_bc_sp_product_mccormick_rows_added << ",\n";
+    out << "  \"compact_bc_sp_product_estimator_rows_added\": "
+        << result.compact_bc_sp_product_estimator_rows_added << ",\n";
+    out << "  \"compact_bc_low_gini_precheck\": \""
+        << jsonEscape(result.compact_bc_low_gini_precheck) << "\",\n";
+    out << "  \"compact_bc_low_gini_precheck_status\": \""
+        << jsonEscape(result.compact_bc_low_gini_precheck_status) << "\",\n";
+    out << "  \"compact_bc_low_gini_precheck_closed\": "
+        << (result.compact_bc_low_gini_precheck_closed ? "true" : "false") << ",\n";
     out << "  \"compact_bc_model_size_policy\": \""
         << jsonEscape(result.compact_bc_model_size_policy) << "\",\n";
     out << "  \"compact_bc_rows_estimated\": "

@@ -1350,3 +1350,13 @@ The paper-facing line is the GF compact certification framework. Route-load BPC 
 ## Compact-BC Effectiveness Round 3 Note
 
 The paper-facing line is the GF compact certification framework. Route-load BPC remains separate; Compact-BC is measured on unresolved interval leaves and diagnostic fixed-interval probes.
+## Low-Gini Compact-BC Update
+
+`results/gf_compact_bc_lowgini_round/` reinforces the current paper
+positioning: the empirical paper-facing framework is Gini-frontier compact
+certification with Compact-BC subproblems for unresolved intervals, not
+route-load BPC. BPC remains diagnostic/future work.
+
+For `moderate_seed3301`, the hardest low-Gini leaf remains open but shows
+monotone valid lower-bound progress through 3600 seconds after adding
+paper-safe variable-S centering and the S*P McCormick objective estimator.

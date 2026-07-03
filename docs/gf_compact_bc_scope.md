@@ -100,3 +100,20 @@ Compact-BC is evaluated as an unresolved-interval subsolver. Relaxation-only cer
 ## Effectiveness Round 3 Scope
 
 Compact-BC is evaluated as an unresolved-interval subsolver. Relaxation-only certificates remain framework successes; forced activation, plain fixed-interval MIP comparisons, and generated diagnostics are evidence channels, not paper-core certificate imports.
+
+## Low-Gini Round Scope
+
+`results/gf_compact_bc_lowgini_round/` targets the low-Gini
+`moderate_seed3301` leaves where prior tailored Compact-BC did not dominate
+plain fixed-interval MIP at short budgets.  The paper-safe additions in this
+round are:
+
+- variable-S low-Gini centering:
+  `(V-1)(r_max-r_min) <= V gamma_U sum_i r_i`;
+- S*P McCormick objective estimator over valid interval bounds for
+  `S=sum_i r_i` and `P=sum_i w_i e_i`.
+
+S-range denominator bucket refinement is implemented as diagnostic
+fixed-interval infrastructure only.  It must not be used as a full parent-leaf
+certificate until the ledger proves exact S-bucket coverage and merges every
+bucket.

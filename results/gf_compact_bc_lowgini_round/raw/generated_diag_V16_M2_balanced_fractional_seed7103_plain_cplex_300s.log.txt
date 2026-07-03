@@ -1,0 +1,2 @@
+COMMAND build\ExactEBRP.exe --method cplex --input reference\hard_compact_bc_diagnostics\diag_V16_M2_balanced_fractional_seed7103.txt --lambda 0.15 --T 3600 --time-limit 300 --cplex-threads 1 --mip-threads 1 --out results\gf_compact_bc_lowgini_round\raw\generated_diag_V16_M2_balanced_fractional_seed7103_plain_cplex_300s.json
+diag_V16_M2_balanced_fractional_seed7103.txt cplex optimal obj=0 runtime=3.54779 columns=0

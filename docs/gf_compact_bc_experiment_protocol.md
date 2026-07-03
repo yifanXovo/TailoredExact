@@ -69,6 +69,30 @@ D:\msys64\ucrt64\bin\python.exe scripts\audit_objective_convention.py `
   --out results\gf_compact_bc_strengthening_round\objective_convention_audit.csv
 ```
 
+## Low-Gini Round Protocol
+
+For fixed-interval low-Gini diagnostics, use `interval-cutoff-oracle` with the
+same one-thread policy:
+
+```powershell
+build\ExactEBRP.exe --method interval-cutoff-oracle `
+  --algorithm-preset paper-gf-compact-bc `
+  --paper-run-sealed true `
+  --input reference\hard_stress\V20_M3\moderate_seed3301.txt `
+  --lambda 0.15 --T 3600 --mip-threads 1 --compact-bc-threads 1 `
+  --interval-exact-cutoff-oracle compact-mip `
+  --interval-exact-oracle-mode objective-bound `
+  --compact-bc-low-gini-strengthening safe `
+  --compact-bc-denominator-bound-mode tight `
+  --compact-bc-objective-estimator-mode adaptive `
+  --compact-bc-variable-s-centering true `
+  --compact-bc-sp-product-estimator paper-safe `
+  --out results\gf_compact_bc_lowgini_round\raw\<row>.json
+```
+
+Diagnostic S-range refinement must be labelled diagnostic and excluded from
+paper-core certificates until bucket coverage is merged by the ledger.
+
 Rows with `thread_fairness_class != one_thread_fair` are diagnostic sensitivity
 rows, not fair controlled benchmark evidence.
 ## Round 2 Controlled Protocol
