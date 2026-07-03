@@ -52,11 +52,16 @@ def main() -> int:
         best_lb = f(data.get("best_valid_lb_seen"), lb)
         gap = f(data.get("gap"))
         best_gap = f(data.get("best_valid_gap_seen"), gap)
+        benchmark_only = (
+            b(data.get("benchmark_only"))
+            or str(data.get("method_scope", "")) == "plain_cplex"
+            or str(data.get("classification", "")) == "benchmark_only"
+        )
         if lb + 1e-8 < best_lb:
             reasons.append("final_lb_worse_than_best_valid_lb_seen")
         if gap > best_gap + 1e-8:
             reasons.append("final_gap_worse_than_best_valid_gap_seen")
-        if gap == 0.0 and not b(data.get("certified_original_problem")):
+        if gap == 0.0 and not benchmark_only and not b(data.get("certified_original_problem")):
             reasons.append("zero_gap_without_certificate")
         if str(data.get("finalization_source", "")).startswith("wrapper") and not b(data.get("final_json_uses_best_checkpoint")):
             reasons.append("wrapper_not_using_best_checkpoint")

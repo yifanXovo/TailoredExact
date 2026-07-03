@@ -2683,6 +2683,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 instance.total_time_limit,
                 instance.pickup_time + instance.drop_time,
                 options.tailored_bc_support_duration_cover_mode,
+                options.tailored_bc_gini_subset_max_size,
+                options.tailored_bc_gini_subset_max_cuts,
                 options.lambda,
                 cutoff.incumbent_ub - cutoff.epsilon,
                 instance.M);
@@ -2821,6 +2823,9 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     api_solve.callback_gini_subset_envelope_violations;
                 result.tailored_bc_gini_subset_envelope_cuts_added +=
                     api_solve.callback_gini_subset_envelope_cuts_added;
+                result.tailored_bc_max_gini_subset_violation =
+                    std::max(result.tailored_bc_max_gini_subset_violation,
+                             api_solve.callback_gini_subset_envelope_max_violation);
                 result.tailored_bc_low_gini_l1_centering_violations +=
                     api_solve.callback_low_gini_l1_violations;
                 result.tailored_bc_low_gini_l1_centering_rows_added +=

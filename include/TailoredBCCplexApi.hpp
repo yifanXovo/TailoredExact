@@ -38,6 +38,7 @@ struct TailoredBCCplexApiSolveResult {
     long long callback_gini_subset_envelope_cuts_added = 0;
     long long callback_gini_subset_envelope_candidates = 0;
     long long callback_gini_subset_envelope_violations = 0;
+    double callback_gini_subset_envelope_max_violation = 0.0;
     long long callback_low_gini_l1_cuts_added = 0;
     long long callback_low_gini_l1_violations = 0;
     long long callback_variable_s_centering_cuts_added = 0;
@@ -118,6 +119,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     double total_time_limit,
     double handling_unit,
     const std::string& support_duration_cover_mode,
+    int gini_subset_max_size,
+    int gini_subset_max_cuts,
     double lambda,
     double cutoff_value,
     int vehicle_count);

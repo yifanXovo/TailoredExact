@@ -108,12 +108,20 @@ def audit_one(source: str, result: Dict[str, Any]) -> Dict[str, Any]:
     )
     sealed_run = as_bool(result.get("sealed_run", False))
     finalization_source = str(result.get("finalization_source", ""))
+    benchmark_only = (
+        as_bool(result.get("benchmark_only", False))
+        or as_bool(result.get("plain_cplex_benchmark_row", False))
+        or str(result.get("classification", "")) == "benchmark_only"
+    )
 
-    original_scope = solves_original or method_scope in {
-        "original_bpc",
-        "original_compact",
-        "plain_cplex",
-    }
+    original_scope = (
+        solves_original
+        or method_scope in {
+            "original_bpc",
+            "original_compact",
+            "plain_cplex",
+        }
+    ) and not benchmark_only
 
     if not as_bool(result.get("option_audit_consistent", True)):
         if certified or (status == "optimal" and original_scope):

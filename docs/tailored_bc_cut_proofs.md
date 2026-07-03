@@ -10,7 +10,7 @@ and
 
 `a S - V R_A <= V gamma_U S`.
 
-These rows are enabled only for bounded small subsets. They may be generated statically or separated inside the CPLEX relaxation callback from the current LP relaxation point. Callback separation does not change the proof: every added row is one of the same fixed-interval subset-envelope inequalities.
+These rows are enabled only for bounded small subsets. They may be generated statically or separated inside the CPLEX relaxation callback from the current LP relaxation point. Callback separation does not change the proof: every added row is one of the same fixed-interval subset-envelope inequalities. The current separator ranks candidate subsets by LP deviation from `S/V` and tests only bounded high-deviation subsets before applying the configured cut limit; this is separation throttling, not a new inequality.
 
 ## Visit-Final-Inventory Linking
 
