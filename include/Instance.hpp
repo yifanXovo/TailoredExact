@@ -180,6 +180,7 @@ struct SolveOptions {
     bool tailored_bc_subset_inventory_imbalance = false;
     int tailored_bc_subset_inventory_max_size = 3;
     bool tailored_bc_transfer_cutset = false;
+    std::string tailored_bc_support_duration_cover_mode = "support_cover_lifted";
     std::string tailored_bc_benders_inventory_cuts = "off";
     std::string compact_bc_model_size_policy = "full";
     long long compact_bc_max_rows = 0;

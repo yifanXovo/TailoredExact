@@ -30,6 +30,26 @@ Introduce `q_i >= |r_i - S/V|`. The Gini cap implies a valid loose centering con
 
 The relaxation callback may separate the aggregate row `sum_i q_i - 2 gamma_U sum_i r_i <= 0` when the `q_l1_i` variables are present. The callback row is identical to the static aggregate cap, so its certificate role is the same paper-safe row family.
 
+## Subset Inventory Imbalance
+
+For a station subset `A`, let `Y_A = sum_{i in A} Y_i`, `I_A = sum_{i in A} initial_i`, `room(A) = sum_{i in A} (capacity_i - initial_i)`, and `bikes(A) = sum_{i in A} initial_i`. A vehicle can increase `Y_A` only by carrying bikes into `A`, and can decrease `Y_A` only by removing bikes from `A`. For every vehicle `k`, the conservative movement bounds
+
+`DeltaPlus_k(A) <= min(Q_k, room(A), floor(T_k / cunit))`
+
+and
+
+`DeltaMinus_k(A) <= min(Q_k, bikes(A), floor(T_k / cunit))`
+
+are safe under the current duration convention because they ignore travel time and compatibility and therefore overestimate what the vehicle can move. Summing over vehicles gives:
+
+`Y_A <= I_A + sum_k DeltaPlus_k(A)`
+
+and
+
+`Y_A >= I_A - sum_k DeltaMinus_k(A)`.
+
+The callback implementation separates the equivalent `<=` forms for singleton, pair, and triple station subsets from relaxation points. These rows are intentionally weak but paper-safe; stronger route-duration or compatibility-filtered subset inventory rows require separate proof before paper-core use.
+
 ## Vehicle Transfer Cutset
 
 Under the empty-start vehicle convention, the net number of bikes delivered by a vehicle into a receiver subset cannot exceed pickups by that same vehicle outside the subset:
@@ -42,6 +62,18 @@ Equivalently, the basic unfiltered row can be written as:
 
 This latter form is weaker but paper-safe for every receiver subset `D`: a vehicle starts with zero load, so total drops into any subset cannot exceed the total number of bikes picked up by that vehicle. The callback implementation separates this basic row for singleton, pair, and triple receiver subsets at relaxation points. Compatibility-filtered variants remain diagnostic/future work unless their source sets are proved supersets of all feasible external pickup sources.
 
+## Diagnostic Benders-Like Inventory Capacity Cuts
+
+The diagnostic Benders-like inventory rows are enabled only by `--tailored-bc-benders-inventory-cuts diagnostic`. For a receiver subset `D`, the implementation adds the aggregate capacity row:
+
+`sum_k sum_{j in D} (d[k,j] - p[k,j]) <= U(D)`,
+
+where
+
+`U(D) = min(room(D), initial(outside D), sum_k min(Q_k, floor(T_k / cunit)))`.
+
+This upper bound is intentionally conservative: it ignores travel time, compatibility, sequencing, and vehicle-specific source/receiver structure, so it overestimates the number of bikes that could be moved into `D`. The row is therefore a weak aggregate diagnostic analogue of a transfer-network min-cut. It is not used as paper-core evidence because it is not yet separated from a proved full transfer network and has not passed the required random projection/min-cut audit for stronger Benders feasibility cuts. Promotion to paper-core requires a proof document for the exact transfer network capacities, random feasible-route projection tests, and no false candidate rejections.
+
 ## Support-Duration Cover Cuts
 
 For vehicle `k` and a station subset `A`, let `cycle_lb_k(A)` be the exact depot-cycle lower bound used by the static compact-BC model for visiting all stations in `A`. Under the current compact duration convention, handling time is charged as `cunit * sum_i p[k,i]`. If a route visits every station in `A`, at least `ceil(|A|/2)` pickup units are required by the support-duration cover rule used in the static model, so any such route requires at least:
@@ -52,7 +84,7 @@ When this value exceeds `T_k`, no feasible original route for vehicle `k` can vi
 
 `sum_{i in A} z[k,i] <= |A| - 1`
 
-is therefore valid. The callback implementation currently separates only the violated pair and triple cover rows from high-support relaxation points. It does not add the static model's conditional big-M duration rows in callback form. Quad and lifted support-duration cuts remain future work.
+is therefore valid. The callback implementation separates violated pair, triple, and quad cover rows from high-support relaxation points. It also computes a lifted right-hand side `alpha(A)` for each separated small subset: `alpha(A)` is the largest cardinality of a sub-subset whose depot-cycle lower bound plus `ceil(|B|/2) * cunit` handling lower bound does not prove infeasibility. If every sub-subset of cardinality `t` is infeasible by this lower-bound test, then no original route can visit `t` stations from `A`; therefore `sum_{i in A} z[k,i] <= alpha(A)` is valid. This lifting is conservative because lower-bound feasibility is used only to avoid cutting possibly feasible sub-subsets. The callback does not add the static model's conditional big-M duration rows in callback form.
 
 ## S-Bucket Refinement
 

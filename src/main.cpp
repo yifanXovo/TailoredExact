@@ -136,6 +136,7 @@ void usage() {
         << "[--interval-exact-cutoff-epsilon <eps>] [--interval-exact-cutoff-time-limit <seconds>] "
         << "[--mip-solver cplex] [--mip-threads <N>] [--compact-bc-time-limit <seconds>] "
         << "[--compact-bc-root-cut-rounds <N>] [--compact-bc-cut-profile conservative|balanced|aggressive] "
+        << "[--tailored-bc-support-duration-cover-mode basic|lifted|off] "
         << "[--interval-exact-cutoff-export-lp <path>] [--interval-exact-cutoff-result <path>] "
         << "[--pricing-final-verifier true|false] [--pricing-verifier-time <seconds>] "
         << "[--pricing-verifier-checkpoint <path>] [--pricing-verifier-resume <path>] "
@@ -766,6 +767,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         }
         else if (arg == "--tailored-bc-transfer-cutset") {
             opt.tailored_bc_transfer_cutset = parseBoolValue(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-support-duration-cover-mode") {
+            opt.tailored_bc_support_duration_cover_mode = lowerAscii(requireValue(i, argc, argv));
         }
         else if (arg == "--tailored-bc-benders-inventory-cuts") {
             opt.tailored_bc_benders_inventory_cuts = lowerAscii(requireValue(i, argc, argv));
@@ -1610,6 +1614,18 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.tailored_bc_gini_branching != "outer-controller" &&
         opt.tailored_bc_gini_branching != "auto") {
         opt.tailored_bc_gini_branching = "off";
+    }
+    opt.tailored_bc_support_duration_cover_mode =
+        lowerAscii(opt.tailored_bc_support_duration_cover_mode);
+    if (opt.tailored_bc_support_duration_cover_mode == "basic") {
+        opt.tailored_bc_support_duration_cover_mode = "support_cover_basic";
+    } else if (opt.tailored_bc_support_duration_cover_mode == "lifted") {
+        opt.tailored_bc_support_duration_cover_mode = "support_cover_lifted";
+    }
+    if (opt.tailored_bc_support_duration_cover_mode != "support_cover_basic" &&
+        opt.tailored_bc_support_duration_cover_mode != "support_cover_lifted" &&
+        opt.tailored_bc_support_duration_cover_mode != "off") {
+        opt.tailored_bc_support_duration_cover_mode = "support_cover_lifted";
     }
     if (opt.tailored_bc_gini_branch_min_width <= 0.0) {
         opt.tailored_bc_gini_branch_min_width = 1e-4;
@@ -9341,7 +9357,9 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
                 0.0, 1.0,
                 true, true, true, true,
                 tailored_opt.tailored_bc_gini_branch_min_width,
-                {}, {}, {}, {}, {}, {}, 0, 0.0, 0.0, 0.0,
+                {}, {}, {}, {}, {}, {}, 0, 0.0, 0.0,
+                "support_cover_lifted",
+                0.0,
                 std::numeric_limits<double>::infinity(),
                 0);
         std::error_code remove_ec;
@@ -15628,6 +15646,20 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     long long total_tailored_l1_vars = 0;
     long long total_tailored_subset_inventory = 0;
     long long total_tailored_transfer_cutset = 0;
+    long long total_tailored_benders_inventory = 0;
+    long long total_tailored_benders_inventory_candidates = 0;
+    long long total_tailored_support_pair = 0;
+    long long total_tailored_support_pair_candidates = 0;
+    long long total_tailored_support_pair_violations = 0;
+    long long total_tailored_support_triple = 0;
+    long long total_tailored_support_triple_candidates = 0;
+    long long total_tailored_support_triple_violations = 0;
+    long long total_tailored_support_quad = 0;
+    long long total_tailored_support_quad_candidates = 0;
+    long long total_tailored_support_quad_violations = 0;
+    long long total_tailored_support_lifted = 0;
+    long long total_tailored_support_lifted_candidates = 0;
+    long long total_tailored_support_lifted_violations = 0;
     long long total_low_gini_domains = 0;
     long long total_nodes = 0;
     long long total_dynamic_cuts = 0;
@@ -15968,6 +16000,20 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         total_tailored_l1_vars += oracle.tailored_bc_low_gini_l1_centering_vars;
         total_tailored_subset_inventory += oracle.tailored_bc_subset_inventory_imbalance_cuts_added;
         total_tailored_transfer_cutset += oracle.tailored_bc_transfer_cutset_cuts_added;
+        total_tailored_benders_inventory += oracle.tailored_bc_benders_inventory_cuts_added;
+        total_tailored_benders_inventory_candidates += oracle.tailored_bc_benders_inventory_candidates;
+        total_tailored_support_pair += oracle.tailored_bc_support_duration_pair_cuts_added;
+        total_tailored_support_pair_candidates += oracle.tailored_bc_support_duration_pair_candidates;
+        total_tailored_support_pair_violations += oracle.tailored_bc_support_duration_pair_violations;
+        total_tailored_support_triple += oracle.tailored_bc_support_duration_triple_cuts_added;
+        total_tailored_support_triple_candidates += oracle.tailored_bc_support_duration_triple_candidates;
+        total_tailored_support_triple_violations += oracle.tailored_bc_support_duration_triple_violations;
+        total_tailored_support_quad += oracle.tailored_bc_support_duration_quad_cuts_added;
+        total_tailored_support_quad_candidates += oracle.tailored_bc_support_duration_quad_candidates;
+        total_tailored_support_quad_violations += oracle.tailored_bc_support_duration_quad_violations;
+        total_tailored_support_lifted += oracle.tailored_bc_support_duration_lifted_cuts_added;
+        total_tailored_support_lifted_candidates += oracle.tailored_bc_support_duration_lifted_candidates;
+        total_tailored_support_lifted_violations += oracle.tailored_bc_support_duration_lifted_violations;
         total_low_gini_domains += oracle.low_gini_ratio_band_domains_tightened;
         total_nodes += oracle.compact_bc_nodes;
         total_dynamic_cuts += oracle.compact_bc_dynamic_cuts_added_total;
@@ -16233,15 +16279,53 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         total_tailored_subset_inventory;
     result.tailored_bc_transfer_cutset_cuts_added =
         total_tailored_transfer_cutset;
+    result.tailored_bc_benders_inventory_cuts_mode =
+        opt.tailored_bc_benders_inventory_cuts;
+    result.tailored_bc_benders_inventory_cuts_added =
+        total_tailored_benders_inventory;
+    result.tailored_bc_benders_inventory_candidates =
+        total_tailored_benders_inventory_candidates;
+    result.tailored_bc_support_duration_pair_cuts_added =
+        total_tailored_support_pair;
+    result.tailored_bc_support_duration_pair_candidates =
+        total_tailored_support_pair_candidates;
+    result.tailored_bc_support_duration_pair_violations =
+        total_tailored_support_pair_violations;
+    result.tailored_bc_support_duration_triple_cuts_added =
+        total_tailored_support_triple;
+    result.tailored_bc_support_duration_triple_candidates =
+        total_tailored_support_triple_candidates;
+    result.tailored_bc_support_duration_triple_violations =
+        total_tailored_support_triple_violations;
+    result.tailored_bc_support_duration_quad_cuts_added =
+        total_tailored_support_quad;
+    result.tailored_bc_support_duration_quad_candidates =
+        total_tailored_support_quad_candidates;
+    result.tailored_bc_support_duration_quad_violations =
+        total_tailored_support_quad_violations;
+    result.tailored_bc_support_duration_lifted_cuts_added =
+        total_tailored_support_lifted;
+    result.tailored_bc_support_duration_lifted_candidates =
+        total_tailored_support_lifted_candidates;
+    result.tailored_bc_support_duration_lifted_violations =
+        total_tailored_support_lifted_violations;
     result.tailored_bc_user_cuts_added_total =
         total_tailored_gini_subset + total_tailored_l1 +
-        total_tailored_subset_inventory + total_tailored_transfer_cutset;
+        total_tailored_subset_inventory + total_tailored_transfer_cutset +
+        total_tailored_benders_inventory +
+        total_tailored_support_pair + total_tailored_support_triple +
+        total_tailored_support_quad + total_tailored_support_lifted;
     {
         std::ostringstream tailored_cuts;
         tailored_cuts << "gini_subset_envelope=" << total_tailored_gini_subset
                       << ";low_gini_l1_centering=" << total_tailored_l1
                       << ";subset_inventory_imbalance=" << total_tailored_subset_inventory
-                      << ";transfer_cutset=" << total_tailored_transfer_cutset;
+                      << ";transfer_cutset=" << total_tailored_transfer_cutset
+                      << ";benders_inventory_diagnostic=" << total_tailored_benders_inventory
+                      << ";support_duration_pair=" << total_tailored_support_pair
+                      << ";support_duration_triple=" << total_tailored_support_triple
+                      << ";support_duration_quad=" << total_tailored_support_quad
+                      << ";support_duration_lifted=" << total_tailored_support_lifted;
         result.tailored_bc_user_cuts_added_by_family = tailored_cuts.str();
     }
     {
@@ -16261,6 +16345,11 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
              << ";tailored_low_gini_l1_centering=" << total_tailored_l1
              << ";tailored_subset_inventory_imbalance=" << total_tailored_subset_inventory
              << ";tailored_transfer_cutset=" << total_tailored_transfer_cutset
+             << ";tailored_benders_inventory_diagnostic=" << total_tailored_benders_inventory
+             << ";tailored_support_duration_pair=" << total_tailored_support_pair
+             << ";tailored_support_duration_triple=" << total_tailored_support_triple
+             << ";tailored_support_duration_quad=" << total_tailored_support_quad
+             << ";tailored_support_duration_lifted=" << total_tailored_support_lifted
              << ";gini_spread=" << total_gini_spread
              << ";required_movement=" << total_required_movement
              << ";global_handling_capacity=" << total_global_handling

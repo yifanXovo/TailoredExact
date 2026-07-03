@@ -69,6 +69,50 @@ GENERATED_DIAGNOSTICS = [
     ("diag_V20_M2_high_transfer_seed7104", HARD_DIAG_DIR / "diag_V20_M2_high_transfer_seed7104.txt"),
     ("diag_V20_M3_dense_duration_seed7105", HARD_DIAG_DIR / "diag_V20_M3_dense_duration_seed7105.txt"),
 ]
+GENERATED_HARD_INTERVAL_TARGETS = [
+    {
+        "leaf": "generated_diag_V12_M2_tight_cutoff_leaf1",
+        "instance": HARD_DIAG_DIR / "diag_V12_M2_tight_cutoff_hard_seed7102.txt",
+        "gamma_L": "0.229166666667",
+        "gamma_U": "0.458333333333",
+        "ub": "1.65777317757",
+        "budgets": [60, 300],
+    },
+    {
+        "leaf": "generated_diag_V20_M2_high_transfer_leaf1",
+        "instance": HARD_DIAG_DIR / "diag_V20_M2_high_transfer_seed7104.txt",
+        "gamma_L": "0.146304771504",
+        "gamma_U": "0.292609543009",
+        "ub": "0.585219086017",
+        "budgets": [60],
+    },
+    {
+        "leaf": "generated_diag_V20_M3_dense_duration_leaf0",
+        "instance": HARD_DIAG_DIR / "diag_V20_M3_dense_duration_seed7105.txt",
+        "gamma_L": "0",
+        "gamma_U": "0.0206402171405",
+        "ub": "0.082560868562",
+        "budgets": [60],
+    },
+]
+NATURAL_HARD_FULL_PRESET_DIAGNOSTICS = [
+    ("fullpreset_moderate_seed3301_tailored_callback_120s", MODERATE_INSTANCE, 120),
+    (
+        "fullpreset_high_imbalance_seed3201_tailored_callback_120s",
+        ROOT / "reference" / "hard_stress" / "V20_M3" / "high_imbalance_seed3201.txt",
+        120,
+    ),
+    (
+        "fullpreset_tight_T_seed3102_tailored_callback_120s",
+        ROOT / "reference" / "hard_stress" / "V20_M3" / "tight_T_seed3102.txt",
+        120,
+    ),
+    (
+        "fullpreset_moderate_seed3302_tailored_callback_120s",
+        ROOT / "reference" / "hard_stress" / "V20_M3" / "moderate_seed3302.txt",
+        120,
+    ),
+]
 EXE = ROOT / "build" / "ExactEBRP.exe"
 
 
@@ -267,6 +311,18 @@ def write_diagnostic_timeout_json(
         "tailored_bc_low_gini_l1_centering_vars": 0,
         "tailored_bc_low_gini_l1_centering_rows_added": 0,
         "tailored_bc_low_gini_l1_centering_violations": 0,
+        "tailored_bc_subset_inventory_imbalance_cuts_added": 0,
+        "tailored_bc_subset_inventory_imbalance_candidates": 0,
+        "tailored_bc_subset_inventory_imbalance_violations": 0,
+        "tailored_bc_support_duration_quad_cuts_added": 0,
+        "tailored_bc_support_duration_quad_candidates": 0,
+        "tailored_bc_support_duration_quad_violations": 0,
+        "tailored_bc_support_duration_lifted_cuts_added": 0,
+        "tailored_bc_support_duration_lifted_candidates": 0,
+        "tailored_bc_support_duration_lifted_violations": 0,
+        "tailored_bc_benders_inventory_cuts_mode": "off",
+        "tailored_bc_benders_inventory_cuts_added": 0,
+        "tailored_bc_benders_inventory_candidates": 0,
         "thread_fairness_class": "one_thread_fair",
         "solver_thread_policy": "controlled_single_thread",
         "mip_threads": 1,
@@ -449,7 +505,13 @@ def write_full_row_failure_json(
     path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
 
 
-def annotate_diagnostic_json(path: Path, name: str, notes: List[str]) -> None:
+def annotate_diagnostic_json(
+    path: Path,
+    name: str,
+    notes: List[str],
+    *,
+    source_class: str = "compact_bc_leaf_diagnostic",
+) -> None:
     data = load_json(path)
     if not data:
         return
@@ -457,7 +519,7 @@ def annotate_diagnostic_json(path: Path, name: str, notes: List[str]) -> None:
     data["diagnostic_name"] = name
     data["paper_certificate_contamination"] = False
     data["tailored_bc_diagnostic_only"] = True
-    data["tailored_bc_source_class"] = "compact_bc_leaf_diagnostic"
+    data["tailored_bc_source_class"] = source_class
     existing_notes = data.get("notes", [])
     if not isinstance(existing_notes, list):
         existing_notes = [str(existing_notes)]
@@ -536,6 +598,9 @@ def result_row(name: str, path: Path, meta: Dict[str, Any]) -> Dict[str, Any]:
         "tailored_bc_gini_subset_envelope_candidates": data.get("tailored_bc_gini_subset_envelope_candidates", ""),
         "tailored_bc_gini_subset_envelope_violations": data.get("tailored_bc_gini_subset_envelope_violations", ""),
         "tailored_bc_gini_subset_envelope_cuts_added": data.get("tailored_bc_gini_subset_envelope_cuts_added", ""),
+        "tailored_bc_subset_inventory_imbalance_cuts_added": data.get("tailored_bc_subset_inventory_imbalance_cuts_added", ""),
+        "tailored_bc_subset_inventory_imbalance_candidates": data.get("tailored_bc_subset_inventory_imbalance_candidates", ""),
+        "tailored_bc_subset_inventory_imbalance_violations": data.get("tailored_bc_subset_inventory_imbalance_violations", ""),
         "tailored_bc_transfer_cutset_cuts_added": data.get("tailored_bc_transfer_cutset_cuts_added", ""),
         "tailored_bc_transfer_cutset_candidates": data.get("tailored_bc_transfer_cutset_candidates", ""),
         "tailored_bc_transfer_cutset_violations": data.get("tailored_bc_transfer_cutset_violations", ""),
@@ -545,6 +610,15 @@ def result_row(name: str, path: Path, meta: Dict[str, Any]) -> Dict[str, Any]:
         "tailored_bc_support_duration_triple_cuts_added": data.get("tailored_bc_support_duration_triple_cuts_added", ""),
         "tailored_bc_support_duration_triple_candidates": data.get("tailored_bc_support_duration_triple_candidates", ""),
         "tailored_bc_support_duration_triple_violations": data.get("tailored_bc_support_duration_triple_violations", ""),
+        "tailored_bc_support_duration_quad_cuts_added": data.get("tailored_bc_support_duration_quad_cuts_added", ""),
+        "tailored_bc_support_duration_quad_candidates": data.get("tailored_bc_support_duration_quad_candidates", ""),
+        "tailored_bc_support_duration_quad_violations": data.get("tailored_bc_support_duration_quad_violations", ""),
+        "tailored_bc_support_duration_lifted_cuts_added": data.get("tailored_bc_support_duration_lifted_cuts_added", ""),
+        "tailored_bc_support_duration_lifted_candidates": data.get("tailored_bc_support_duration_lifted_candidates", ""),
+        "tailored_bc_support_duration_lifted_violations": data.get("tailored_bc_support_duration_lifted_violations", ""),
+        "tailored_bc_benders_inventory_cuts_mode": data.get("tailored_bc_benders_inventory_cuts_mode", ""),
+        "tailored_bc_benders_inventory_cuts_added": data.get("tailored_bc_benders_inventory_cuts_added", ""),
+        "tailored_bc_benders_inventory_candidates": data.get("tailored_bc_benders_inventory_candidates", ""),
         "tailored_bc_branching_priorities_summary": data.get("tailored_bc_branching_priorities_summary", ""),
         "certified_original_problem": data.get("certified_original_problem", ""),
         "audit_returncode": meta.get("returncode", ""),
@@ -870,6 +944,9 @@ def collect_auto_oracle_child_rows(
             "tailored_bc_gini_subset_envelope_candidates": data.get("tailored_bc_gini_subset_envelope_candidates", ""),
             "tailored_bc_gini_subset_envelope_violations": data.get("tailored_bc_gini_subset_envelope_violations", ""),
             "tailored_bc_gini_subset_envelope_cuts_added": data.get("tailored_bc_gini_subset_envelope_cuts_added", ""),
+            "tailored_bc_subset_inventory_imbalance_cuts_added": data.get("tailored_bc_subset_inventory_imbalance_cuts_added", ""),
+            "tailored_bc_subset_inventory_imbalance_candidates": data.get("tailored_bc_subset_inventory_imbalance_candidates", ""),
+            "tailored_bc_subset_inventory_imbalance_violations": data.get("tailored_bc_subset_inventory_imbalance_violations", ""),
             "tailored_bc_transfer_cutset_cuts_added": data.get("tailored_bc_transfer_cutset_cuts_added", ""),
             "tailored_bc_transfer_cutset_candidates": data.get("tailored_bc_transfer_cutset_candidates", ""),
             "tailored_bc_transfer_cutset_violations": data.get("tailored_bc_transfer_cutset_violations", ""),
@@ -879,6 +956,15 @@ def collect_auto_oracle_child_rows(
             "tailored_bc_support_duration_triple_cuts_added": data.get("tailored_bc_support_duration_triple_cuts_added", ""),
             "tailored_bc_support_duration_triple_candidates": data.get("tailored_bc_support_duration_triple_candidates", ""),
             "tailored_bc_support_duration_triple_violations": data.get("tailored_bc_support_duration_triple_violations", ""),
+            "tailored_bc_support_duration_quad_cuts_added": data.get("tailored_bc_support_duration_quad_cuts_added", ""),
+            "tailored_bc_support_duration_quad_candidates": data.get("tailored_bc_support_duration_quad_candidates", ""),
+            "tailored_bc_support_duration_quad_violations": data.get("tailored_bc_support_duration_quad_violations", ""),
+            "tailored_bc_support_duration_lifted_cuts_added": data.get("tailored_bc_support_duration_lifted_cuts_added", ""),
+            "tailored_bc_support_duration_lifted_candidates": data.get("tailored_bc_support_duration_lifted_candidates", ""),
+            "tailored_bc_support_duration_lifted_violations": data.get("tailored_bc_support_duration_lifted_violations", ""),
+            "tailored_bc_benders_inventory_cuts_mode": data.get("tailored_bc_benders_inventory_cuts_mode", ""),
+            "tailored_bc_benders_inventory_cuts_added": data.get("tailored_bc_benders_inventory_cuts_added", ""),
+            "tailored_bc_benders_inventory_candidates": data.get("tailored_bc_benders_inventory_candidates", ""),
             "certified_original_problem": data.get("certified_original_problem", ""),
             "runtime_seconds": round(float_value(data.get("runtime_seconds", data.get("actual_runtime_seconds", 0.0))), 3),
             "timeout": data.get("interval_exact_cutoff_timeout", False),
@@ -1277,6 +1363,35 @@ def main() -> int:
     )
     rows.append(result_row("interval_callback_smoke", interval_out, interval_meta))
 
+    subset_interval_out = RAW / "interval_subset_inventory_callback_smoke.json"
+    subset_interval_cmd = [
+        str(EXE),
+        "--method", "interval-cutoff-oracle",
+        "--algorithm-preset", "paper-gf-tailored-bc",
+        "--paper-run-sealed", "true",
+        "--input", str(SMOKE_INSTANCE),
+        "--lambda", "0.15",
+        "--T", "3600",
+        "--interval-exact-cutoff-oracle", "compact-mip",
+        "--interval-exact-cutoff-gamma-L", "0",
+        "--interval-exact-cutoff-gamma-U", "1",
+        "--interval-exact-cutoff-UB", "999",
+        "--interval-exact-cutoff-time-limit", "10",
+        "--compact-bc-threads", "1",
+        "--mip-threads", "1",
+        "--out", str(subset_interval_out),
+    ]
+    subset_interval_meta = run_cmd(
+        subset_interval_cmd,
+        RESULTS / "logs" / "interval_subset_inventory_callback_smoke.log",
+        timeout=90,
+    )
+    rows.append(result_row(
+        "interval_subset_inventory_callback_smoke",
+        subset_interval_out,
+        subset_interval_meta,
+    ))
+
     interval_diag_out = RAW / "interval_callback_separator_diagnostic.json"
     interval_diag_cmd = [
         str(EXE),
@@ -1311,6 +1426,48 @@ def main() -> int:
         "interval_callback_separator_diagnostic",
         interval_diag_out,
         interval_diag_meta,
+    ))
+
+    benders_diag_out = RAW / "interval_benders_inventory_diagnostic.json"
+    benders_diag_cmd = [
+        str(EXE),
+        "--method", "interval-cutoff-oracle",
+        "--paper-run-sealed", "true",
+        "--tailored-bc-enabled", "true",
+        "--tailored-bc-mode", "static",
+        "--tailored-bc-benders-inventory-cuts", "diagnostic",
+        "--input", str(SMOKE_INSTANCE),
+        "--lambda", "0.15",
+        "--T", "3600",
+        "--interval-exact-cutoff-oracle", "compact-mip",
+        "--interval-exact-cutoff-gamma-L", "0",
+        "--interval-exact-cutoff-gamma-U", "1",
+        "--interval-exact-cutoff-UB", "999",
+        "--interval-exact-cutoff-time-limit", "10",
+        "--compact-bc-threads", "1",
+        "--mip-threads", "1",
+        "--out", str(benders_diag_out),
+    ]
+    benders_diag_meta = run_cmd(
+        benders_diag_cmd,
+        RESULTS / "logs" / "interval_benders_inventory_diagnostic.log",
+        timeout=90,
+    )
+    if benders_diag_out.exists():
+        annotate_diagnostic_json(
+            benders_diag_out,
+            "interval_benders_inventory_diagnostic",
+            [
+                "Diagnostic-only Benders-like receiver-set inventory feasibility row smoke.",
+                "Rows are generated only under --tailored-bc-benders-inventory-cuts diagnostic.",
+                "This artifact is excluded from paper certificate evidence.",
+            ],
+            source_class="diagnostic",
+        )
+    rows.append(result_row(
+        "interval_benders_inventory_diagnostic",
+        benders_diag_out,
+        benders_diag_meta,
     ))
 
     if MODERATE_INSTANCE.exists():
@@ -1732,6 +1889,128 @@ def main() -> int:
                 for time_limit in [60, 300]:
                     run_matched_interval_baseline(target, variant, time_limit)
 
+    generated_interval_rows: List[Dict[str, Any]] = []
+
+    def run_generated_interval_variant(
+        target: Dict[str, Any],
+        variant: str,
+        time_limit: int,
+    ) -> None:
+        leaf_name = str(target["leaf"])
+        time_label = f"{time_limit}s"
+        out = RAW / f"{leaf_name}_{variant}_{time_label}.json"
+        instance_path = Path(target["instance"])
+        gamma_l = str(target["gamma_L"])
+        gamma_u = str(target["gamma_U"])
+        ub = str(target["ub"])
+        meta: Dict[str, Any]
+        if not instance_path.exists():
+            meta = {"returncode": 2, "runtime_seconds": 0.0, "timeout": False}
+            write_diagnostic_timeout_json(
+                out,
+                f"{leaf_name}_{variant}_{time_label}",
+                meta,
+                gamma_l=gamma_l,
+                gamma_u=gamma_u,
+                ub=ub,
+                instance_path=instance_path,
+                gini_branch_mode="auto" if variant.endswith("gini_auto") else "off",
+            )
+        else:
+            cmd = [
+                str(EXE),
+                "--method", "interval-cutoff-oracle",
+                "--paper-run-sealed", "true",
+                "--input", str(instance_path),
+                "--lambda", "0.15",
+                "--T", "3600",
+                "--time-limit", str(time_limit),
+                "--mip-threads", "1",
+                "--compact-bc-threads", "1",
+                "--compact-bc-time-limit", str(time_limit),
+                "--interval-exact-cutoff-oracle", "compact-mip",
+                "--interval-exact-cutoff-gamma-L", gamma_l,
+                "--interval-exact-cutoff-gamma-U", gamma_u,
+                "--interval-exact-cutoff-UB", ub,
+                "--interval-exact-cutoff-time-limit", str(time_limit),
+                "--out", str(out),
+            ]
+            if variant == "plain":
+                cmd.extend(["--algorithm-preset", "paper-gf-compact-bc"])
+                cmd.extend(plain_disable_flags)
+            elif variant == "static_tailored":
+                cmd.extend(["--algorithm-preset", "paper-gf-compact-bc"])
+                cmd.extend(static_tailored_flags)
+            elif variant == "callback_basic":
+                cmd.extend([
+                    "--algorithm-preset", "paper-gf-tailored-bc",
+                    "--tailored-bc-mode", "callback",
+                    "--tailored-bc-branching-priority", "adaptive",
+                    "--tailored-bc-gini-branching", "off",
+                    "--compact-bc-root-cut-rounds", "1",
+                    "--compact-bc-low-gini-strengthening", "safe",
+                    "--compact-bc-denominator-bound-mode", "tight",
+                    "--compact-bc-objective-estimator-mode", "adaptive",
+                ])
+            else:
+                cmd.extend([
+                    "--algorithm-preset", "paper-gf-tailored-bc",
+                    "--tailored-bc-mode", "callback",
+                    "--tailored-bc-branching-priority", "adaptive",
+                    "--tailored-bc-gini-branching", "auto",
+                    "--compact-bc-root-cut-rounds", "1",
+                    "--compact-bc-low-gini-strengthening", "safe",
+                    "--compact-bc-denominator-bound-mode", "tight",
+                    "--compact-bc-objective-estimator-mode", "adaptive",
+                ])
+            meta = run_cmd(
+                cmd,
+                RESULTS / "logs" / f"{leaf_name}_{variant}_{time_label}.log",
+                timeout=max(120, time_limit + 150),
+            )
+            if meta.get("timeout") or not out.exists():
+                write_diagnostic_timeout_json(
+                    out,
+                    f"{leaf_name}_{variant}_{time_label}",
+                    meta,
+                    gamma_l=gamma_l,
+                    gamma_u=gamma_u,
+                    ub=ub,
+                    instance_path=instance_path,
+                    gini_branch_mode="auto" if variant == "callback_gini_auto" else "off",
+                )
+            elif variant in {"plain", "static_tailored"}:
+                annotate_matched_baseline_json(
+                    out,
+                    f"{leaf_name}_{variant}_{time_label}",
+                    [
+                        "Generated hard fixed-interval matched baseline.",
+                        "This row is benchmark-only and excluded from paper certificate summaries.",
+                    ],
+                )
+            else:
+                annotate_diagnostic_json(
+                    out,
+                    f"{leaf_name}_{variant}_{time_label}",
+                    [
+                        "Generated hard fixed-interval callback tailored diagnostic.",
+                        "This row measures callback behavior on generated hard leaves and is excluded from paper certificate summaries.",
+                    ],
+                )
+        row = result_row(f"{leaf_name}_{variant}_{time_label}", out, meta)
+        row["generated_interval_diagnostic"] = True
+        row["generated_interval_leaf"] = leaf_name
+        row["instance"] = str(instance_path.relative_to(ROOT)) if instance_path.exists() else str(instance_path)
+        row["generated_interval_variant"] = variant
+        row["generated_interval_budget_seconds"] = time_limit
+        rows.append(row)
+        generated_interval_rows.append(row)
+
+    for target in GENERATED_HARD_INTERVAL_TARGETS:
+        for budget in target["budgets"]:
+            for variant in ["plain", "static_tailored", "callback_basic", "callback_gini_auto"]:
+                run_generated_interval_variant(target, variant, int(budget))
+
     generated_rows: List[Dict[str, Any]] = []
     generated_child_rows: List[Dict[str, Any]] = []
     for diag_name, diag_path in GENERATED_DIAGNOSTICS:
@@ -1799,7 +2078,102 @@ def main() -> int:
             )
         )
 
-    all_callback_rows = rows + generated_child_rows
+    natural_full_rows: List[Dict[str, Any]] = []
+    natural_full_child_rows: List[Dict[str, Any]] = []
+    for row_name, instance_path, budget_seconds in NATURAL_HARD_FULL_PRESET_DIAGNOSTICS:
+        out = RAW / f"{row_name}.json"
+        progress = RESULTS / "progress_traces" / f"{row_name}.progress.csv"
+        if not instance_path.exists():
+            meta = {"returncode": 2, "runtime_seconds": 0.0, "timeout": False}
+            write_full_row_failure_json(
+                out,
+                row_name,
+                instance_path,
+                meta,
+                budget_seconds=budget_seconds,
+                progress_path=progress,
+            )
+            annotate_diagnostic_json(
+                out,
+                row_name,
+                [
+                    "Natural hard full-preset callback diagnostic was not run because the instance path was missing.",
+                    "This row is diagnostic only and is excluded from paper certificate summaries.",
+                ],
+                source_class="diagnostic",
+            )
+        else:
+            cmd = [
+                str(EXE),
+                "--method", "gcap-frontier",
+                "--algorithm-preset", "paper-gf-tailored-bc",
+                "--paper-run-sealed", "true",
+                "--input", str(instance_path),
+                "--lambda", "0.15",
+                "--T", "3600",
+                "--time-limit", str(budget_seconds),
+                "--compact-bc-threads", "1",
+                "--mip-threads", "1",
+                "--compact-bc-root-cut-rounds", "1",
+                "--tailored-bc-gini-branching", "auto",
+                "--auto-interval-oracle-time-limit", "20",
+                "--auto-interval-oracle-total-budget", "45",
+                "--auto-interval-oracle-child-time-limit", "20",
+                "--auto-interval-oracle-max-leaves", "2",
+                "--progress-log", str(progress),
+                "--progress-interval-seconds", "10",
+                "--out", str(out),
+            ]
+            meta = run_cmd(
+                cmd,
+                RESULTS / "logs" / f"{row_name}.log",
+                timeout=max(180, budget_seconds + 180),
+            )
+            if meta.get("timeout") or not out.exists():
+                write_full_row_failure_json(
+                    out,
+                    row_name,
+                    instance_path,
+                    meta,
+                    budget_seconds=budget_seconds,
+                    progress_path=progress,
+                )
+                annotate_diagnostic_json(
+                    out,
+                    row_name,
+                    [
+                        "Natural hard full-preset callback diagnostic timed out before a solver final JSON was available.",
+                        "The wrapper preserves the best valid checkpoint, if present, but does not claim a certificate.",
+                        "This row is diagnostic only and is excluded from paper certificate summaries.",
+                    ],
+                    source_class="diagnostic",
+                )
+            else:
+                annotate_diagnostic_json(
+                    out,
+                    row_name,
+                    [
+                        "Natural hard full-preset callback diagnostic through paper-gf-tailored-bc.",
+                        "Child auto-oracle callback intervals are aggregated separately to evaluate full-preset hard-row behavior.",
+                        "This row is diagnostic only and is excluded from paper certificate summaries.",
+                    ],
+                    source_class="diagnostic",
+                )
+        row = result_row(row_name, out, meta)
+        row["natural_hard_full_preset_diagnostic"] = True
+        row["instance"] = str(instance_path.relative_to(ROOT)) if instance_path.is_absolute() else str(instance_path)
+        rows.append(row)
+        natural_full_rows.append(row)
+        natural_full_child_rows.extend(
+            collect_auto_oracle_child_rows(
+                row_name,
+                out,
+                str(instance_path.relative_to(ROOT)) if instance_path.exists() else str(instance_path),
+            )
+        )
+
+    child_callback_rows = generated_child_rows + natural_full_child_rows
+    all_callback_rows = rows + child_callback_rows
 
     callback_available = any(
         str(row.get("tailored_bc_callback_available", "")).lower() == "true"
@@ -1839,7 +2213,7 @@ def main() -> int:
             "tailored_callback_status": "unavailable" if not callback_available else "available",
             "static_root_cut_status": "implemented_diagnostic_only",
             "conclusion": "not_true_callback_bc" if not callback_available else "dynamic_c_api_callback_path_available",
-            "callback_cut_families": "gini_interval_cap,visit_inventory_linking,gini_subset_envelope,low_gini_l1_centering,transfer_cutset,support_duration_pair,support_duration_triple",
+            "callback_cut_families": "gini_interval_cap,visit_inventory_linking,gini_subset_envelope,low_gini_l1_centering,subset_inventory_imbalance,transfer_cutset,support_duration_pair,support_duration_triple,support_duration_quad,support_duration_lifted",
         }
     ])
     branch_smoke_row = rows_by_method.get("tailored-bc-branch-callback-smoke-test", {})
@@ -2180,6 +2554,79 @@ def main() -> int:
         }
         for row in generated_rows
     ])
+    write_csv(RESULTS / "generated_hard_interval_comparison.csv", [
+        {
+            "leaf": row.get("generated_interval_leaf", ""),
+            "variant": row.get("generated_interval_variant", ""),
+            "budget_seconds": row.get("generated_interval_budget_seconds", ""),
+            "instance": row.get("instance", ""),
+            "status": row.get("status", ""),
+            "lower_bound": row.get("lower_bound", ""),
+            "upper_bound": row.get("upper_bound", ""),
+            "gap": row.get("gap", ""),
+            "compact_bc_best_bound": row.get("compact_bc_best_bound", ""),
+            "compact_bc_solver_status": row.get("compact_bc_solver_status", ""),
+            "compact_bc_nodes": row.get("compact_bc_nodes", ""),
+            "runtime_seconds": row.get("runtime_seconds", ""),
+            "tailored_bc_callback_available": row.get("tailored_bc_callback_available", ""),
+            "tailored_bc_relaxation_callback_calls": row.get("tailored_bc_relaxation_callback_calls", ""),
+            "tailored_bc_branch_callback_calls": row.get("tailored_bc_branch_callback_calls", ""),
+            "tailored_bc_gini_branches_created": row.get("tailored_bc_gini_branches_created", ""),
+            "tailored_bc_user_cuts_added_total": row.get("tailored_bc_user_cuts_added_total", ""),
+            "tailored_bc_source_class": row.get("tailored_bc_source_class", ""),
+            "diagnostic_only": True,
+            "paper_certificate_contamination": False,
+            "json": row.get("json", ""),
+        }
+        for row in generated_interval_rows
+    ])
+    write_csv(RESULTS / "full_preset_hard_row_ablation.csv", [
+        {
+            "row": row.get("row", ""),
+            "instance": row.get("instance", ""),
+            "status": row.get("status", ""),
+            "certified_original_problem": row.get("certified_original_problem", ""),
+            "lower_bound": row.get("lower_bound", ""),
+            "upper_bound": row.get("upper_bound", ""),
+            "gap": row.get("gap", ""),
+            "runtime_seconds": row.get("runtime_seconds", ""),
+            "timeout": row.get("timeout", ""),
+            "tailored_bc_callback_available": row.get("tailored_bc_callback_available", ""),
+            "tailored_bc_relaxation_callback_calls": row.get("tailored_bc_relaxation_callback_calls", ""),
+            "tailored_bc_branch_callback_calls": row.get("tailored_bc_branch_callback_calls", ""),
+            "tailored_bc_user_cuts_added_total": row.get("tailored_bc_user_cuts_added_total", ""),
+            "finalization_source": row.get("finalization_source", ""),
+            **aggregate_child_rows(str(row.get("row", "")), natural_full_child_rows),
+            "diagnostic_only": True,
+            "paper_certificate_contamination": False,
+            "json": row.get("json", ""),
+        }
+        for row in natural_full_rows
+    ])
+    write_csv(RESULTS / "full_preset_hard_leaf_callback_summary.csv", [
+        {
+            "parent_row": row.get("parent_row", ""),
+            "leaf_row": row.get("row", ""),
+            "instance": row.get("instance", ""),
+            "gamma_L": row.get("interval_exact_cutoff_gamma_L", ""),
+            "gamma_U": row.get("interval_exact_cutoff_gamma_U", ""),
+            "status": row.get("status", ""),
+            "lower_bound": row.get("lower_bound", ""),
+            "upper_bound": row.get("upper_bound", ""),
+            "gap": row.get("gap", ""),
+            "compact_bc_solver_status": row.get("compact_bc_solver_status", ""),
+            "compact_bc_best_bound": row.get("compact_bc_best_bound", ""),
+            "compact_bc_nodes": row.get("compact_bc_nodes", ""),
+            "relaxation_callback_calls": row.get("tailored_bc_relaxation_callback_calls", ""),
+            "branch_callback_calls": row.get("tailored_bc_branch_callback_calls", ""),
+            "gini_branches_created": row.get("tailored_bc_gini_branches_created", ""),
+            "user_cuts_added": row.get("tailored_bc_user_cuts_added_total", ""),
+            "user_cuts_by_family": row.get("tailored_bc_user_cuts_added_by_family", ""),
+            "diagnostic_only": True,
+            "json": row.get("json", ""),
+        }
+        for row in natural_full_child_rows
+    ])
     comparison_rows: List[Dict[str, Any]] = []
 
     def comparison_leaf_name(name: str) -> str:
@@ -2303,6 +2750,38 @@ def main() -> int:
             "tailored_bc_role": "baseline",
             "diagnostic_only": True,
         })
+    for row in generated_interval_rows:
+        leaf_key = str(row.get("generated_interval_leaf", ""))
+        if not leaf_key:
+            continue
+        budget = row.get("generated_interval_budget_seconds", "")
+        comparison_rows.append({
+            "comparison_group": f"{leaf_key}_{budget}s",
+            "row_type": "generated_hard_interval_current_callback_round",
+            "variant": row.get("generated_interval_variant", ""),
+            "budget_seconds": budget,
+            "status": row.get("status", ""),
+            "lower_bound": row.get("lower_bound", ""),
+            "upper_bound": row.get("upper_bound", ""),
+            "gap": row.get("gap", ""),
+            "gap_to_cutoff": (
+                float(row.get("upper_bound") or 0.0) - float(row.get("lower_bound") or 0.0)
+                if row.get("upper_bound", "") != "" and row.get("lower_bound", "") != ""
+                else ""
+            ),
+            "nodes": row.get("compact_bc_nodes", ""),
+            "json": row.get("json", ""),
+            "gini_branch_mode": row.get("tailored_bc_gini_branch_mode", ""),
+            "branch_callback_calls": row.get("tailored_bc_branch_callback_calls", 0),
+            "gini_branches_created": row.get("tailored_bc_gini_branches_created", 0),
+            "plain_cplex_role": (
+                "benchmark_only"
+                if row.get("generated_interval_variant", "") == "plain"
+                else "not_plain_cplex"
+            ),
+            "tailored_bc_role": row.get("generated_interval_variant", ""),
+            "diagnostic_only": True,
+        })
     for row in hard_leaf_rows:
         row_name = str(row.get("row", ""))
         if row_name.endswith("_300s"):
@@ -2370,17 +2849,28 @@ def main() -> int:
             "callback_visit_inventory_linking_cuts": sum_family("callback_visit_inventory_linking"),
             "callback_gini_subset_envelope_cuts": sum_family("callback_gini_subset_envelope"),
             "callback_low_gini_l1_centering_cuts": sum_family("callback_low_gini_l1_centering"),
+            "callback_subset_inventory_imbalance_cuts": sum_family("callback_subset_inventory_imbalance"),
             "callback_transfer_cutset_cuts": sum_family("callback_transfer_cutset"),
             "callback_support_duration_pair_cuts": sum_family("callback_support_duration_pair"),
             "callback_support_duration_triple_cuts": sum_family("callback_support_duration_triple"),
+            "callback_support_duration_quad_cuts": sum_family("callback_support_duration_quad"),
+            "callback_support_duration_lifted_cuts": sum_family("callback_support_duration_lifted"),
             "callback_gini_subset_envelope_candidates": sum(int_value(row.get("tailored_bc_gini_subset_envelope_candidates")) for row in all_callback_rows),
             "callback_gini_subset_envelope_violations": sum(int_value(row.get("tailored_bc_gini_subset_envelope_violations")) for row in all_callback_rows),
+            "callback_subset_inventory_imbalance_candidates": sum(int_value(row.get("tailored_bc_subset_inventory_imbalance_candidates")) for row in all_callback_rows),
+            "callback_subset_inventory_imbalance_violations": sum(int_value(row.get("tailored_bc_subset_inventory_imbalance_violations")) for row in all_callback_rows),
             "callback_transfer_cutset_candidates": sum(int_value(row.get("tailored_bc_transfer_cutset_candidates")) for row in all_callback_rows),
             "callback_transfer_cutset_violations": sum(int_value(row.get("tailored_bc_transfer_cutset_violations")) for row in all_callback_rows),
             "callback_support_duration_pair_candidates": sum(int_value(row.get("tailored_bc_support_duration_pair_candidates")) for row in all_callback_rows),
             "callback_support_duration_pair_violations": sum(int_value(row.get("tailored_bc_support_duration_pair_violations")) for row in all_callback_rows),
             "callback_support_duration_triple_candidates": sum(int_value(row.get("tailored_bc_support_duration_triple_candidates")) for row in all_callback_rows),
             "callback_support_duration_triple_violations": sum(int_value(row.get("tailored_bc_support_duration_triple_violations")) for row in all_callback_rows),
+            "callback_support_duration_quad_candidates": sum(int_value(row.get("tailored_bc_support_duration_quad_candidates")) for row in all_callback_rows),
+            "callback_support_duration_quad_violations": sum(int_value(row.get("tailored_bc_support_duration_quad_violations")) for row in all_callback_rows),
+            "callback_support_duration_lifted_candidates": sum(int_value(row.get("tailored_bc_support_duration_lifted_candidates")) for row in all_callback_rows),
+            "callback_support_duration_lifted_violations": sum(int_value(row.get("tailored_bc_support_duration_lifted_violations")) for row in all_callback_rows),
+            "diagnostic_benders_inventory_cuts": sum(int_value(row.get("tailored_bc_benders_inventory_cuts_added")) for row in all_callback_rows),
+            "diagnostic_benders_inventory_candidates": sum(int_value(row.get("tailored_bc_benders_inventory_candidates")) for row in all_callback_rows),
             "candidate_projection_checks": sum(int_value(row.get("tailored_bc_candidate_projection_checks")) for row in all_callback_rows),
             "candidate_projection_verified": sum(int_value(row.get("tailored_bc_candidate_projection_verified")) for row in all_callback_rows),
             "candidate_projection_rejections": sum(int_value(row.get("tailored_bc_candidate_projection_rejections")) for row in all_callback_rows),
@@ -2404,17 +2894,28 @@ def main() -> int:
             "callback_visit_inventory_linking_cuts": sum_family("callback_visit_inventory_linking"),
             "callback_gini_subset_envelope_cuts": sum_family("callback_gini_subset_envelope"),
             "callback_low_gini_l1_centering_cuts": sum_family("callback_low_gini_l1_centering"),
+            "callback_subset_inventory_imbalance_cuts": sum_family("callback_subset_inventory_imbalance"),
             "callback_transfer_cutset_cuts": sum_family("callback_transfer_cutset"),
             "callback_support_duration_pair_cuts": sum_family("callback_support_duration_pair"),
             "callback_support_duration_triple_cuts": sum_family("callback_support_duration_triple"),
+            "callback_support_duration_quad_cuts": sum_family("callback_support_duration_quad"),
+            "callback_support_duration_lifted_cuts": sum_family("callback_support_duration_lifted"),
             "callback_gini_subset_envelope_candidates": sum(int_value(row.get("tailored_bc_gini_subset_envelope_candidates")) for row in all_callback_rows),
             "callback_gini_subset_envelope_violations": sum(int_value(row.get("tailored_bc_gini_subset_envelope_violations")) for row in all_callback_rows),
+            "callback_subset_inventory_imbalance_candidates": sum(int_value(row.get("tailored_bc_subset_inventory_imbalance_candidates")) for row in all_callback_rows),
+            "callback_subset_inventory_imbalance_violations": sum(int_value(row.get("tailored_bc_subset_inventory_imbalance_violations")) for row in all_callback_rows),
             "callback_transfer_cutset_candidates": sum(int_value(row.get("tailored_bc_transfer_cutset_candidates")) for row in all_callback_rows),
             "callback_transfer_cutset_violations": sum(int_value(row.get("tailored_bc_transfer_cutset_violations")) for row in all_callback_rows),
             "callback_support_duration_pair_candidates": sum(int_value(row.get("tailored_bc_support_duration_pair_candidates")) for row in all_callback_rows),
             "callback_support_duration_pair_violations": sum(int_value(row.get("tailored_bc_support_duration_pair_violations")) for row in all_callback_rows),
             "callback_support_duration_triple_candidates": sum(int_value(row.get("tailored_bc_support_duration_triple_candidates")) for row in all_callback_rows),
             "callback_support_duration_triple_violations": sum(int_value(row.get("tailored_bc_support_duration_triple_violations")) for row in all_callback_rows),
+            "callback_support_duration_quad_candidates": sum(int_value(row.get("tailored_bc_support_duration_quad_candidates")) for row in all_callback_rows),
+            "callback_support_duration_quad_violations": sum(int_value(row.get("tailored_bc_support_duration_quad_violations")) for row in all_callback_rows),
+            "callback_support_duration_lifted_candidates": sum(int_value(row.get("tailored_bc_support_duration_lifted_candidates")) for row in all_callback_rows),
+            "callback_support_duration_lifted_violations": sum(int_value(row.get("tailored_bc_support_duration_lifted_violations")) for row in all_callback_rows),
+            "diagnostic_benders_inventory_cuts": sum(int_value(row.get("tailored_bc_benders_inventory_cuts_added")) for row in all_callback_rows),
+            "diagnostic_benders_inventory_candidates": sum(int_value(row.get("tailored_bc_benders_inventory_candidates")) for row in all_callback_rows),
             "candidate_projection_checks": sum(int_value(row.get("tailored_bc_candidate_projection_checks")) for row in all_callback_rows),
             "candidate_projection_verified": sum(int_value(row.get("tailored_bc_candidate_projection_verified")) for row in all_callback_rows),
             "candidate_projection_rejections": sum(int_value(row.get("tailored_bc_candidate_projection_rejections")) for row in all_callback_rows),
@@ -2427,7 +2928,7 @@ def main() -> int:
             "fail_reason": callback_fail_reason,
         }
     ])
-    write_csv(RESULTS / "source_classification.csv", rows + generated_child_rows)
+    write_csv(RESULTS / "source_classification.csv", rows + child_callback_rows)
     write_csv(RESULTS / "gf_tailored_bc_summary.csv", rows)
     full_row_names = {"smoke_paper_gf_tailored_bc_20s"} | {
         name for name, _, _ in REGRESSION_TARGETS
@@ -2435,15 +2936,22 @@ def main() -> int:
     write_csv(RESULTS / "full_row_confirmation_summary.csv", [
         row for row in rows if row["row"] in full_row_names
     ])
-    write_csv(RESULTS / "certificate_source_summary_v3.csv", [
-        {
+    def certificate_source_row(row: Dict[str, Any]) -> Dict[str, Any]:
+        child_agg = aggregate_child_rows(str(row.get("row", "")), child_callback_rows)
+        child_found = int_value(child_agg.get("generated_child_interval_rows"))
+        child_callback_found = int_value(child_agg.get("generated_child_callback_rows"))
+        diagnostic_parent = bool(
+            row.get("generated_diagnostic", False) or
+            row.get("natural_hard_full_preset_diagnostic", False)
+        )
+        return {
             "row": row["row"],
             "selected_for_summary": str(row["row"] in full_row_names).lower(),
             "certified_original_problem": row.get("certified_original_problem", ""),
             "row_certificate_source_class": row.get("tailored_bc_source_class", ""),
             "compact_bc_called_this_row": str(row.get("tailored_bc_enabled", "")).lower(),
-            "compact_bc_called_any_child": "false",
-            "parent_row_compact_bc_called_any_leaf": "false",
+            "compact_bc_called_any_child": str(child_callback_found > 0).lower(),
+            "parent_row_compact_bc_called_any_leaf": str(child_callback_found > 0).lower(),
             "leaf_solver_row": str(row["method"] in {
                 "tailored-bc-callback-smoke-test",
                 "tailored-bc-branch-callback-smoke-test",
@@ -2453,15 +2961,22 @@ def main() -> int:
                 "transfer-cutset-validity-test",
                 "s-bucket-coverage-test",
             }).lower(),
-            "compact_bc_child_rows_found": 0,
-            "compact_bc_child_rows_aggregated": 0,
+            "compact_bc_child_rows_found": child_found,
+            "compact_bc_child_rows_aggregated": child_found,
+            "compact_bc_child_relaxation_callback_calls": child_agg.get("generated_child_relaxation_callback_calls", 0),
+            "compact_bc_child_branch_callback_calls": child_agg.get("generated_child_branch_callback_calls", 0),
+            "compact_bc_child_user_cuts_added": child_agg.get("generated_child_user_cuts_added", 0),
+            "compact_bc_child_closed_leaf_count": child_agg.get("generated_child_closed_leaf_count", 0),
+            "compact_bc_child_timed_out_leaf_count": child_agg.get("generated_child_timed_out_leaf_count", 0),
             "compact_bc_diagnostic_only": str(
-                row["method"] != "gcap-frontier" or row.get("generated_diagnostic", False)
+                row["method"] != "gcap-frontier" or diagnostic_parent
             ).lower(),
             "paper_certificate_contamination": "false",
             "inconsistent_source_label_detected": "false",
         }
-        for row in rows
+
+    write_csv(RESULTS / "certificate_source_summary_v3.csv", [
+        certificate_source_row(row) for row in rows
     ])
     manifest_rows = [
         {
@@ -2482,6 +2997,17 @@ def main() -> int:
             "sha256": sha256(diag_path) if diag_path.exists() else "missing",
         })
     for target in EXTRA_HARD_LEAF_CALLBACK_TARGETS:
+        target_path = Path(target["instance"])
+        manifest_rows.append({
+            "instance": str(target_path.relative_to(ROOT)),
+            "sha256": sha256(target_path) if target_path.exists() else "missing",
+        })
+    for _, natural_path, _ in NATURAL_HARD_FULL_PRESET_DIAGNOSTICS:
+        manifest_rows.append({
+            "instance": str(natural_path.relative_to(ROOT)),
+            "sha256": sha256(natural_path) if natural_path.exists() else "missing",
+        })
+    for target in GENERATED_HARD_INTERVAL_TARGETS:
         target_path = Path(target["instance"])
         manifest_rows.append({
             "instance": str(target_path.relative_to(ROOT)),
@@ -2539,7 +3065,7 @@ def main() -> int:
     ]
     if callback_available:
         final_lines.append(
-            "The executable loads `cplex2211.dll` dynamically, registers a generic CPLEX callback, and solves the smoke fixed-interval LP/MIP in-process. The smoke interval row reports relaxation/candidate/progress callback events, paper-safe relaxation-point separator attempts for Gini interval, visit-inventory, Gini subset-envelope, low-Gini L1 centering, basic transfer-cutset, and pair/triple support-duration cover rows, candidate compact route/service plus objective projection checks, and CPLEX branch-order priorities applied through `CPXcopyorder`."
+            "The executable loads `cplex2211.dll` dynamically, registers a generic CPLEX callback, and solves the smoke fixed-interval LP/MIP in-process. The smoke interval row reports relaxation/candidate/progress callback events, paper-safe relaxation-point separator attempts for Gini interval, visit-inventory, Gini subset-envelope, low-Gini L1 centering, subset-inventory imbalance, basic transfer-cutset, and lifted pair/triple/quad support-duration cover rows, candidate compact route/service plus objective projection checks, and CPLEX branch-order priorities applied through `CPXcopyorder`."
         )
     else:
         final_lines.append(
@@ -2555,7 +3081,9 @@ def main() -> int:
         "- `tailored_cut_ablation.csv` records paper-safe static tailored cut guards.",
         "- `tailored_bc_vs_static.csv` separates true callback BC from static fallback.",
         "- `callback_event_summary.csv` records callback events from the fixed-interval smoke solve when callbacks are available.",
-        "- `callback_activity_summary.csv` now reports basic transfer-cutset and support-duration callback candidates, violations, and cuts. In this package the transfer and support-duration separators were exercised on callback rows; support-duration candidates mean evaluated high-support pair/triple subsets, while violations/cuts require a route-duration-infeasible cover that is violated by the relaxation point.",
+        "- `callback_activity_summary.csv` now reports subset-inventory imbalance, basic transfer-cutset, and support-duration callback candidates, violations, and cuts. In this package those separators were exercised on callback rows; subset-inventory candidates are conservative singleton/pair/triple station inventory-envelope rows, and support-duration candidates mean evaluated high-support pair/triple/quad subsets. Lifted support-duration cuts use the strongest safe small-subset cardinality RHS proved by depot-cycle and pickup-only handling lower bounds.",
+        "- `interval_benders_inventory_diagnostic.json` exercises the diagnostic-only Benders-like receiver-set inventory capacity rows. They are generated only when `--tailored-bc-benders-inventory-cuts diagnostic` is passed and are not paper certificate evidence.",
+        "- `interval_subset_inventory_callback_smoke.json` is a fresh fixed-interval smoke row used to exercise the subset-inventory imbalance callback counters without rerunning the long callback suite.",
         "- `tailored_branch_callback_smoke.csv` records a diagnostic-only CPLEX toy MIP branch-smoke row. It applies branch priorities, records relaxation/candidate callbacks, enters CPLEX branch context, and creates one-shot Gini branches through `CPXcallbackmakebranch`.",
         "- `gini_branching_comparison.csv` now separates toy branch-smoke evidence from the moderate low-Gini hard-leaf diagnostic. In the hard-leaf row, `--tailored-bc-gini-branching auto` selects the branch-callback path and records branch-context calls plus one-shot Gini branches when CPLEX enters branch context.",
         "- `interval_callback_separator_diagnostic.json` disables overlapping static tailored cut families and confirms that relaxation-point callback separators are invoked without using diagnostic evidence as a paper certificate.",
@@ -2567,6 +3095,9 @@ def main() -> int:
         "- In the new matched `moderate_seed3302_hard` comparison, the 300s callback-Gini diagnostic reaches LB `0.144943633094`, above the in-round static-tailored baseline LB `0.14462882586` and plain fixed-interval baseline LB `0.14433212622`. The leaf remains noncertified, so this is bound-quality evidence only.",
         "- `full_row_confirmation_summary.csv` records one-thread `paper-gf-tailored-bc` preservation rows for V12 M1, V12 M2, `tight_T_seed3101`, and `high_imbalance_seed3202`, in addition to the smoke full-row. In this package V12 M2, `tight_T_seed3101`, and `high_imbalance_seed3202` certify directly. V12 M1 has 300s, 1200s, and 3600s noncertified parent frontier JSONs before post-solve interval closure. The 3600s parent reaches LB/gap `0.353171916148` / `0.0112784447991`; exact child Compact-BC evidence closes interval 13, and targeted exact TailoredBC child rows close final leaves 15, 18, and 21. The post-merge JSON `regression_v12_m1_tailored_3600s_postmerge_certified.json` certifies V12 M1 with objective/LB/UB `0.357200583208` after the merge audit reports zero final open leaves.",
         "- `generated_hard_diagnostic_summary.csv`, `generated_hard_leaf_callback_summary.csv`, and `generated_hard_instance_effectiveness.csv` now record guarded one-thread callback probes for the deterministic generated hard-diagnostic instances under `reference/hard_compact_bc_diagnostics/`. Parent full-row summaries aggregate child `auto_oracle/interval_*.json` callback evidence so generated hard-instance effectiveness is not undercounted. These rows are diagnostic only; wrapper timeouts are preserved as noncertificate JSON rather than being treated as failures to emit artifacts.",
+        "- `generated_hard_interval_comparison.csv` now records matched fixed-interval comparisons on generated hard leaves. It includes one-thread plain fixed-interval MIP, static tailored compact-BC, callback-tailored without Gini branching, and callback-tailored with Gini branching, all diagnostic/benchmark-only and excluded from paper certificate summaries.",
+        "- The generated hard interval comparison is deliberately reported as mixed diagnostic evidence: the generated V12/M2 tight-cutoff leaf is closed fastest by plain/static fixed-interval MIP while callback rows time out; the generated V20/M2 high-transfer leaf has the strongest 60s bound from static tailored compact-BC; and the generated V20/M3 dense-duration leaf has the strongest 60s bound from plain fixed-interval MIP. This identifies callback overhead and weak generated-hard cut activation as remaining performance issues rather than paper certificate evidence.",
+        "- `full_preset_hard_row_ablation.csv` and `full_preset_hard_leaf_callback_summary.csv` now record bounded natural hard-row probes through the actual `paper-gf-tailored-bc` full frontier preset for `moderate_seed3301`, `high_imbalance_seed3201`, `tight_T_seed3102`, and `moderate_seed3302`. These rows are diagnostic only, aggregate child `auto_oracle` callback leaves, and are intentionally excluded from selected paper evidence.",
         "- `source_classification.csv` preserves tailored source classes per JSON row.",
         "",
         "## Audit",
@@ -2593,7 +3124,7 @@ def main() -> int:
         "",
         "## Paper Claim",
         "",
-        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, low-Gini L1 centering, basic transfer-cutset, and pair/triple support-duration cover rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, diagnostic branch-context evidence with one-shot Gini branches in the toy branch smoke, and diagnostic hard-leaf evidence where fixed intervals enter branch context and create Gini branches through `CPXcallbackmakebranch`. Branch-mode ablations now compare no-branch, callback-Gini-branch, and selector fallback behavior on the two known moderate low-Gini leaves, including longer 60s/300s/1200s diagnostic rows, and add broader natural hard-leaf callback diagnostics for `high_imbalance_seed3201`, `tight_T_seed3102`, and `moderate_seed3302`. Matched plain/static fixed-interval baselines are imported for the moderate low-Gini leaves and for `high_imbalance_seed3201_hard` / `tight_T_seed3102_hard`; `moderate_seed3302_hard` now has in-round 60s/300s matched plain/static baselines. The generated hard-diagnostic package now aggregates callback evidence from child fixed-interval `auto_oracle` solves. The low-Gini-2 callback-Gini row closes the fixed interval at 300s by integer infeasibility, and the low-Gini-1 callback-Gini rows now provide 60s/300s/1200s bound trajectory evidence against one-thread plain fixed-interval and static compact-BC baselines. The V20 control rows `tight_T_seed3101` and `high_imbalance_seed3202` certify under one-thread `paper-gf-tailored-bc`; V12 M2 also certifies. V12 M1 is certified by the post-merge full-ledger artifact after exact TailoredBC child evidence closes intervals 13, 15, 18, and 21 with matching gamma ranges and original fixed-interval compact certificates. It is not yet the full requested tailored branch-and-cut performance program: full-preset hard-leaf callback ablations beyond the focused fixed-interval diagnostics remain incomplete.",
+        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, low-Gini L1 centering, subset-inventory imbalance, basic transfer-cutset, and lifted pair/triple/quad support-duration cover rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, diagnostic branch-context evidence with one-shot Gini branches in the toy branch smoke, and diagnostic hard-leaf evidence where fixed intervals enter branch context and create Gini branches through `CPXcallbackmakebranch`. It also exposes diagnostic-only aggregate Benders-like receiver-set inventory capacity rows; these are smoke-tested but are not paper-core certificate evidence. Branch-mode ablations now compare no-branch, callback-Gini-branch, and selector fallback behavior on the two known moderate low-Gini leaves, including longer 60s/300s/1200s diagnostic rows, and add broader natural hard-leaf callback diagnostics for `high_imbalance_seed3201`, `tight_T_seed3102`, and `moderate_seed3302`. Matched plain/static fixed-interval baselines are imported for the moderate low-Gini leaves and for `high_imbalance_seed3201_hard` / `tight_T_seed3102_hard`; `moderate_seed3302_hard` now has in-round 60s/300s matched plain/static baselines. The generated hard-diagnostic package and the natural hard full-preset probes now aggregate callback evidence from child fixed-interval `auto_oracle` solves. The generated hard-leaf interval comparison extends this with matched plain, static, callback-basic, and callback-Gini variants on selected generated hard intervals, and its mixed results show that callback cut selection and branching overhead still need work on generated hard leaves. The low-Gini-2 callback-Gini row closes the fixed interval at 300s by integer infeasibility, and the low-Gini-1 callback-Gini rows now provide 60s/300s/1200s bound trajectory evidence against one-thread plain fixed-interval and static compact-BC baselines. The V20 control rows `tight_T_seed3101` and `high_imbalance_seed3202` certify under one-thread `paper-gf-tailored-bc`; V12 M2 also certifies. V12 M1 is certified by the post-merge full-ledger artifact after exact TailoredBC child evidence closes intervals 13, 15, 18, and 21 with matching gamma ranges and original fixed-interval compact certificates. It is not yet the full requested tailored branch-and-cut performance program: the new generated/natural hard probes are bounded diagnostics, so longer full-row ablations and stronger low-Gini callback cuts remain the next performance work.",
         "",
         "Final commit SHA: recorded in the final assistant response after commit creation.",
     ])
