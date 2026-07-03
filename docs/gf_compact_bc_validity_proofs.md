@@ -138,3 +138,47 @@ Diagnostic forced-leaf solves and plain fixed-interval MIP comparisons are valid
 ## Effectiveness Round 3 Evidence Separation
 
 Safe low-Gini mode reuses proved low-Gini centering, movement/domain, penalty lower-bound, and objective-estimator rows. Aggressive diagnostic modes and plain fixed-interval MIP comparisons do not contribute lower-bound evidence to full-frontier certificates.
+
+## Low-Gini Variable-S Centering
+
+For any original fixed-interval solution with
+`S=sum_i r_i`, `H=sum_{i<j} h_ij`, and `G=H/(V S) <= gamma_U`, the max-spread
+inequality gives `H >= (V-1)(r_max-r_min)`.  Combining both inequalities yields
+
+```text
+(V-1)(r_max-r_min) <= V gamma_U S.
+```
+
+The interval upper bound `gamma_U` is constant, so this is a linear valid row.
+It is safe for paper-core Compact-BC when `r_min <= r_i <= r_max` rows are also
+present.  Propagating `r_min/r_max` back into integer final-inventory domains is
+not enabled as paper evidence in this round.
+
+## S*P McCormick Objective Estimator
+
+The no-improver cutoff condition can be written as:
+
+```text
+H + V lambda S P <= V (UB-epsilon) S.
+```
+
+The implementation introduces `W_SP` with McCormick bounds over valid
+nonnegative bounds on `S` and `P`, then adds:
+
+```text
+H + V lambda W_SP <= V (UB-epsilon) S.
+```
+
+Every original feasible solution can set `W_SP=S P` and satisfy the McCormick
+system, so the row cannot cut an original incumbent-improving solution.  The LP
+relaxation may choose a smaller `W_SP`, making the row weaker than the nonlinear
+cutoff but still valid.
+
+## S-Range Bucket Refinement Status
+
+Rows of the form `S_L^b <= S <= S_U^b` with bucket-specific objective
+estimators are valid for the corresponding S subleaf.  They are not yet
+paper-core full-leaf evidence because the full frontier ledger does not
+partition each Gini leaf over S and check exact bucket coverage.  The current
+implementation therefore labels S-range refinement as diagnostic unless a
+single bucket covers the whole parent S domain.

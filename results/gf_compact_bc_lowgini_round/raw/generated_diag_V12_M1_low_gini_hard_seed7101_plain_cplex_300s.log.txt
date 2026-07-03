@@ -1,0 +1,2 @@
+COMMAND build\ExactEBRP.exe --method cplex --input reference\hard_compact_bc_diagnostics\diag_V12_M1_low_gini_hard_seed7101.txt --lambda 0.15 --T 3600 --time-limit 300 --cplex-threads 1 --mip-threads 1 --out results\gf_compact_bc_lowgini_round\raw\generated_diag_V12_M1_low_gini_hard_seed7101_plain_cplex_300s.json
+diag_V12_M1_low_gini_hard_seed7101.txt cplex optimal obj=0.0280241 runtime=158.015 columns=0

@@ -58,6 +58,19 @@ struct CompactOracleStrengtheningStats {
     double penalty_lb = 0.0;
     long long penalty_lb_rows_added = 0;
     long long low_gini_centering_rows_added = 0;
+    long long variable_s_centering_rows_added = 0;
+    long long s_range_rows_added = 0;
+    long long sp_product_mccormick_rows_added = 0;
+    long long sp_product_estimator_rows_added = 0;
+    bool s_range_refinement_enabled = false;
+    double s_range_global_L = 0.0;
+    double s_range_global_U = 0.0;
+    int s_range_bucket_count = 0;
+    int s_range_bucket_id = -1;
+    double s_range_bucket_L = 0.0;
+    double s_range_bucket_U = 0.0;
+    bool s_range_parent_coverage_valid = false;
+    bool s_range_certificate_valid = false;
     long long support_duration_pair_cuts_added = 0;
     long long support_duration_triple_cuts_added = 0;
     long long pairwise_transfer_compatibility_cuts_added = 0;
@@ -329,6 +342,77 @@ void writeCompactLp(const Instance& instance,
             }
         }
     }
+    double s_lower_domain = 0.0;
+    double s_upper_domain = 0.0;
+    double penalty_lb_domain = 0.0;
+    double penalty_ub_domain = 0.0;
+    for (int i = 1; i <= V; ++i) {
+        const double target = std::max(1e-12, static_cast<double>(instance.target[i]));
+        const double r_lo = static_cast<double>(y_lb[i]) / target;
+        const double r_hi = static_cast<double>(y_ub[i]) / target;
+        s_lower_domain += r_lo;
+        s_upper_domain += r_hi;
+        double e_lb = 0.0;
+        if (r_hi < 1.0) {
+            e_lb = 1.0 - r_hi;
+        } else if (r_lo > 1.0) {
+            e_lb = r_lo - 1.0;
+        }
+        const double e_ub = std::max(std::fabs(r_lo - 1.0),
+                                     std::fabs(r_hi - 1.0));
+        penalty_lb_domain += instance.weights[i] * std::max(0.0, e_lb);
+        penalty_ub_domain += instance.weights[i] * std::max(0.0, e_ub);
+    }
+    if (penalty_ub_domain < penalty_lb_domain) {
+        penalty_ub_domain = penalty_lb_domain;
+    }
+    double s_bucket_L = s_lower_domain;
+    double s_bucket_U = s_upper_domain;
+    const bool s_range_requested =
+        strengthened && cutoff != nullptr && cutoff->enabled &&
+        options.compact_bc_s_range_refinement != "off";
+    bool s_range_rows_active = false;
+    if (s_range_requested) {
+        if (options.compact_bc_s_range_bucket_L >= 0.0 &&
+            options.compact_bc_s_range_bucket_U >= options.compact_bc_s_range_bucket_L - 1e-12) {
+            s_bucket_L = std::max(s_lower_domain, options.compact_bc_s_range_bucket_L);
+            s_bucket_U = std::min(s_upper_domain, options.compact_bc_s_range_bucket_U);
+            s_range_rows_active = s_bucket_U >= s_bucket_L - 1e-12;
+        } else if (options.compact_bc_s_range_refinement == "diagnostic" &&
+                   options.compact_bc_s_range_buckets > 1 &&
+                   options.compact_bc_s_range_bucket_id >= 0 &&
+                   s_upper_domain > s_lower_domain + 1e-12) {
+            const int bucket_count = std::max(1, options.compact_bc_s_range_buckets);
+            const int bucket_id = std::min(bucket_count - 1,
+                                           options.compact_bc_s_range_bucket_id);
+            const double width = (s_upper_domain - s_lower_domain) /
+                static_cast<double>(bucket_count);
+            s_bucket_L = s_lower_domain + width * static_cast<double>(bucket_id);
+            s_bucket_U = (bucket_id == bucket_count - 1)
+                ? s_upper_domain
+                : s_bucket_L + width;
+            s_range_rows_active = true;
+        } else if (options.compact_bc_s_range_refinement == "paper-safe" &&
+                   options.compact_bc_s_range_buckets <= 1) {
+            s_range_rows_active = true;
+        }
+    }
+    if (stats != nullptr) {
+        stats->s_range_refinement_enabled = s_range_requested;
+        stats->s_range_global_L = s_lower_domain;
+        stats->s_range_global_U = s_upper_domain;
+        stats->s_range_bucket_count = s_range_requested
+            ? std::max(1, options.compact_bc_s_range_buckets)
+            : 0;
+        stats->s_range_bucket_id = options.compact_bc_s_range_bucket_id;
+        stats->s_range_bucket_L = s_bucket_L;
+        stats->s_range_bucket_U = s_bucket_U;
+        stats->s_range_parent_coverage_valid =
+            options.compact_bc_s_range_refinement == "paper-safe" &&
+            options.compact_bc_s_range_buckets <= 1;
+        stats->s_range_certificate_valid =
+            stats->s_range_parent_coverage_valid && s_range_rows_active;
+    }
 
     for (int k = 0; k < M; ++k) {
         for (int i = 0; i <= V; ++i) {
@@ -385,6 +469,17 @@ void writeCompactLp(const Instance& instance,
                 + static_cast<double>(instance.capacity[j]) / instance.target[j];
             vars.add(hName(i, j), 0, ub, "C");
         }
+    }
+    const bool add_sp_product_estimator =
+        strengthened && cutoff != nullptr && cutoff->enabled &&
+        cutoff->add_objective_cutoff &&
+        options.compact_bc_sp_product_estimator != "off" &&
+        s_upper_domain > s_lower_domain - 1e-12 &&
+        penalty_ub_domain >= penalty_lb_domain - 1e-12;
+    if (add_sp_product_estimator) {
+        const double w_lb = std::max(0.0, s_lower_domain * penalty_lb_domain);
+        const double w_ub = std::max(w_lb, s_upper_domain * penalty_ub_domain);
+        vars.add("W_SP", w_lb, w_ub, "C");
     }
 
     std::filesystem::create_directories(lp_path.parent_path());
@@ -878,6 +973,19 @@ void writeCompactLp(const Instance& instance,
         Expr width; addTerm(width, "r_max", 1); addTerm(width, "r_min", -1);
         writeConstraint(out, cid, width, "<=", std::max(0.0, spread_ub));
         if (stats != nullptr) ++stats->low_gini_centering_rows_added;
+        if (options.compact_bc_variable_s_centering) {
+            Expr variable_width;
+            addTerm(variable_width, "r_max", static_cast<double>(V - 1));
+            addTerm(variable_width, "r_min", -static_cast<double>(V - 1));
+            for (int i = 1; i <= V; ++i) {
+                addTerm(variable_width, rName(i), -static_cast<double>(V) * cutoff->gamma_U);
+            }
+            writeConstraint(out, cid, variable_width, "<=", 0.0);
+            if (stats != nullptr) {
+                stats->enabled_families.push_back("variable_s_low_gini_centering");
+                ++stats->variable_s_centering_rows_added;
+            }
+        }
     }
 
     for (int i = 1; i <= V; ++i) {
@@ -942,9 +1050,21 @@ void writeCompactLp(const Instance& instance,
             writeConstraint(out, cid, obj_cutoff, "<=", cutoff->incumbent_ub - cutoff->epsilon);
         }
         const double cutoff_value = cutoff->incumbent_ub - cutoff->epsilon;
-        double s_upper = 0.0;
-        for (int i = 1; i <= V; ++i) {
-            s_upper += static_cast<double>(y_ub[i]) / instance.target[i];
+        double s_upper = s_upper_domain;
+        if (s_range_rows_active) {
+            if (stats != nullptr) {
+                stats->enabled_families.push_back(
+                    options.compact_bc_s_range_refinement == "paper-safe"
+                        ? "s_range_refinement_paper_safe"
+                        : "s_range_refinement_diagnostic");
+            }
+            Expr s_lo;
+            for (int i = 1; i <= V; ++i) addTerm(s_lo, rName(i), 1);
+            writeConstraint(out, cid, s_lo, ">=", s_bucket_L);
+            Expr s_hi = s_lo;
+            writeConstraint(out, cid, s_hi, "<=", s_bucket_U);
+            if (stats != nullptr) stats->s_range_rows_added += 2;
+            s_upper = std::min(s_upper, s_bucket_U);
         }
         if (strengthened && options.compact_bc_objective_estimator_cutoff &&
             cutoff->add_objective_cutoff && std::isfinite(s_upper) && s_upper > 1e-12) {
@@ -962,17 +1082,50 @@ void writeCompactLp(const Instance& instance,
                             static_cast<double>(V) * s_upper * cutoff_value);
             if (stats != nullptr) ++stats->objective_estimator_cutoff_rows_added;
         }
-        if (strengthened && options.compact_bc_penalty_lb_closure) {
-            double penalty_lb = 0.0;
-            for (int i = 1; i <= V; ++i) {
-                double e_lb = 0.0;
-                if (y_ub[i] < instance.target[i]) {
-                    e_lb = 1.0 - static_cast<double>(y_ub[i]) / instance.target[i];
-                } else if (y_lb[i] > instance.target[i]) {
-                    e_lb = static_cast<double>(y_lb[i]) / instance.target[i] - 1.0;
-                }
-                penalty_lb += instance.weights[i] * std::max(0.0, e_lb);
+        if (add_sp_product_estimator) {
+            if (stats != nullptr) {
+                stats->enabled_families.push_back(
+                    options.compact_bc_sp_product_estimator == "paper-safe"
+                        ? "sp_product_objective_estimator_paper_safe"
+                        : "sp_product_objective_estimator_diagnostic");
             }
+            Expr s_expr;
+            for (int i = 1; i <= V; ++i) addTerm(s_expr, rName(i), 1);
+            Expr p_expr;
+            for (int i = 1; i <= V; ++i) {
+                addTerm(p_expr, eName(i), instance.weights[i]);
+            }
+            Expr mc1; addTerm(mc1, "W_SP", 1);
+            for (const auto& kv : p_expr) addTerm(mc1, kv.first, -s_lower_domain * kv.second);
+            for (const auto& kv : s_expr) addTerm(mc1, kv.first, -penalty_lb_domain * kv.second);
+            writeConstraint(out, cid, mc1, ">=", -s_lower_domain * penalty_lb_domain);
+            Expr mc2; addTerm(mc2, "W_SP", 1);
+            for (const auto& kv : p_expr) addTerm(mc2, kv.first, -s_upper_domain * kv.second);
+            for (const auto& kv : s_expr) addTerm(mc2, kv.first, -penalty_ub_domain * kv.second);
+            writeConstraint(out, cid, mc2, ">=", -s_upper_domain * penalty_ub_domain);
+            Expr mc3; addTerm(mc3, "W_SP", 1);
+            for (const auto& kv : p_expr) addTerm(mc3, kv.first, -s_upper_domain * kv.second);
+            for (const auto& kv : s_expr) addTerm(mc3, kv.first, -penalty_lb_domain * kv.second);
+            writeConstraint(out, cid, mc3, "<=", -s_upper_domain * penalty_lb_domain);
+            Expr mc4; addTerm(mc4, "W_SP", 1);
+            for (const auto& kv : p_expr) addTerm(mc4, kv.first, -s_lower_domain * kv.second);
+            for (const auto& kv : s_expr) addTerm(mc4, kv.first, -penalty_ub_domain * kv.second);
+            writeConstraint(out, cid, mc4, "<=", -s_lower_domain * penalty_ub_domain);
+            if (stats != nullptr) stats->sp_product_mccormick_rows_added += 4;
+
+            Expr sp_estimator;
+            for (int i = 1; i <= V; ++i) {
+                for (int j = i + 1; j <= V; ++j) addTerm(sp_estimator, hName(i, j), 1);
+            }
+            addTerm(sp_estimator, "W_SP", static_cast<double>(V) * options.lambda);
+            for (int i = 1; i <= V; ++i) {
+                addTerm(sp_estimator, rName(i), -static_cast<double>(V) * cutoff_value);
+            }
+            writeConstraint(out, cid, sp_estimator, "<=", 0.0);
+            if (stats != nullptr) ++stats->sp_product_estimator_rows_added;
+        }
+        if (strengthened && options.compact_bc_penalty_lb_closure) {
+            double penalty_lb = penalty_lb_domain;
             if (stats != nullptr) {
                 stats->enabled_families.push_back("penalty_lower_bound_closure");
                 stats->penalty_lb = penalty_lb;
@@ -1877,6 +2030,26 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         options.compact_bc_objective_estimator_mode;
     result.compact_bc_low_gini_aggressive_diagnostic =
         options.compact_bc_low_gini_strengthening == "aggressive-diagnostic";
+    result.compact_bc_s_range_refinement =
+        options.compact_bc_s_range_refinement;
+    result.s_range_bucket_count = options.compact_bc_s_range_buckets;
+    result.s_range_bucket_id = options.compact_bc_s_range_bucket_id;
+    result.s_range_bucket_L = options.compact_bc_s_range_bucket_L;
+    result.s_range_bucket_U = options.compact_bc_s_range_bucket_U;
+    result.compact_bc_variable_s_centering =
+        options.compact_bc_variable_s_centering;
+    result.compact_bc_rmin_rmax_propagation =
+        options.compact_bc_rmin_rmax_propagation;
+    result.compact_bc_rmin_rmax_propagation_safe =
+        options.compact_bc_rmin_rmax_propagation == "safe";
+    result.compact_bc_sp_product_estimator =
+        options.compact_bc_sp_product_estimator;
+    result.compact_bc_sp_product_bounds =
+        options.compact_bc_sp_product_bounds;
+    result.compact_bc_sp_product_paper_safe =
+        options.compact_bc_sp_product_estimator == "paper-safe";
+    result.compact_bc_low_gini_precheck =
+        options.compact_bc_low_gini_precheck;
     result.compact_bc_expensive_static_families =
         options.compact_bc_expensive_static_families;
     result.compact_bc_use_dynamic_instead_of_static =
@@ -2010,6 +2183,26 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             model_options.compact_bc_objective_estimator_mode;
         result.compact_bc_low_gini_aggressive_diagnostic =
             model_options.compact_bc_low_gini_strengthening == "aggressive-diagnostic";
+        result.compact_bc_s_range_refinement =
+            model_options.compact_bc_s_range_refinement;
+        result.s_range_bucket_count = model_options.compact_bc_s_range_buckets;
+        result.s_range_bucket_id = model_options.compact_bc_s_range_bucket_id;
+        result.s_range_bucket_L = model_options.compact_bc_s_range_bucket_L;
+        result.s_range_bucket_U = model_options.compact_bc_s_range_bucket_U;
+        result.compact_bc_variable_s_centering =
+            model_options.compact_bc_variable_s_centering;
+        result.compact_bc_rmin_rmax_propagation =
+            model_options.compact_bc_rmin_rmax_propagation;
+        result.compact_bc_rmin_rmax_propagation_safe =
+            model_options.compact_bc_rmin_rmax_propagation == "safe";
+        result.compact_bc_sp_product_estimator =
+            model_options.compact_bc_sp_product_estimator;
+        result.compact_bc_sp_product_bounds =
+            model_options.compact_bc_sp_product_bounds;
+        result.compact_bc_sp_product_paper_safe =
+            model_options.compact_bc_sp_product_estimator == "paper-safe";
+        result.compact_bc_low_gini_precheck =
+            model_options.compact_bc_low_gini_precheck;
         result.compact_bc_expensive_static_families =
             model_options.compact_bc_expensive_static_families;
         result.compact_bc_use_dynamic_instead_of_static =
@@ -2108,6 +2301,26 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             strengthening_stats.penalty_lb_rows_added;
         result.compact_bc_low_gini_centering_rows_added =
             strengthening_stats.low_gini_centering_rows_added;
+        result.compact_bc_variable_s_centering_rows_added =
+            strengthening_stats.variable_s_centering_rows_added;
+        result.s_range_refinement_enabled =
+            strengthening_stats.s_range_refinement_enabled;
+        result.s_range_global_L = strengthening_stats.s_range_global_L;
+        result.s_range_global_U = strengthening_stats.s_range_global_U;
+        result.s_range_bucket_count = strengthening_stats.s_range_bucket_count;
+        result.s_range_bucket_id = strengthening_stats.s_range_bucket_id;
+        result.s_range_bucket_L = strengthening_stats.s_range_bucket_L;
+        result.s_range_bucket_U = strengthening_stats.s_range_bucket_U;
+        result.s_range_parent_coverage_valid =
+            strengthening_stats.s_range_parent_coverage_valid;
+        result.s_range_certificate_valid =
+            strengthening_stats.s_range_certificate_valid;
+        result.compact_bc_s_range_rows_added =
+            strengthening_stats.s_range_rows_added;
+        result.compact_bc_sp_product_mccormick_rows_added =
+            strengthening_stats.sp_product_mccormick_rows_added;
+        result.compact_bc_sp_product_estimator_rows_added =
+            strengthening_stats.sp_product_estimator_rows_added;
         result.compact_bc_support_duration_pair_cuts_added =
             strengthening_stats.support_duration_pair_cuts_added;
         result.compact_bc_support_duration_triple_cuts_added =
@@ -2151,6 +2364,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                  << ";visit_inventory_linking=" << result.compact_bc_visit_inventory_linking_rows_added
                  << ";objective_estimator_cutoff=" << result.compact_bc_objective_estimator_cutoff_rows_added
                  << ";penalty_lb=" << result.compact_bc_penalty_lb_rows_added
+                 << ";variable_s_centering=" << result.compact_bc_variable_s_centering_rows_added
+                 << ";s_range=" << result.compact_bc_s_range_rows_added
+                 << ";sp_product_mccormick=" << result.compact_bc_sp_product_mccormick_rows_added
+                 << ";sp_product_estimator=" << result.compact_bc_sp_product_estimator_rows_added
                  << ";gini_spread=" << result.gini_spread_cuts_added
                  << ";required_movement=" << result.required_movement_cuts_added
                  << ";global_handling_capacity=" << result.global_handling_capacity_cuts_added
@@ -2348,6 +2565,14 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         result.compact_bc_bound_valid = result.interval_oracle_bound_valid;
         result.compact_interval_bc_bound_scope = result.interval_oracle_bound_scope;
         result.compact_bc_bound_scope = result.interval_oracle_bound_scope;
+        result.s_range_bucket_closed =
+            result.s_range_refinement_enabled && result.status == "interval_closed";
+        if (result.s_range_refinement_enabled &&
+            result.compact_bc_s_range_refinement != "paper-safe") {
+            result.s_range_certificate_valid = false;
+            result.notes.push_back(
+                "S-range refinement was run in diagnostic mode; bucket evidence is not a full parent-leaf certificate unless coverage is explicitly merged.");
+        }
         result.oracle_strengthening_lb_improvement =
             std::max(0.0, result.lower_bound - options.interval_exact_cutoff_gamma_L);
         result.notes.push_back("CPLEX solution status: " + cplex_status);

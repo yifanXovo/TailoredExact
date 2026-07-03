@@ -1,0 +1,2 @@
+COMMAND build\ExactEBRP.exe --method cplex --input reference\hard_compact_bc_diagnostics\diag_V20_M3_dense_duration_seed7105.txt --lambda 0.15 --T 3600 --time-limit 300 --cplex-threads 1 --mip-threads 1 --out results\gf_compact_bc_lowgini_round\raw\generated_diag_V20_M3_dense_duration_seed7105_plain_cplex_300s.json
+diag_V20_M3_dense_duration_seed7105.txt cplex not_certified obj=0.168756 runtime=300.093 columns=0
