@@ -285,6 +285,10 @@ struct CallbackState {
     std::atomic<long long> low_gini_l1_cuts_added{0};
     std::atomic<long long> low_gini_l1_violations{0};
     std::atomic<long long> lazy_rejections{0};
+    std::atomic<long long> lazy_gini_interval_rejections{0};
+    std::atomic<long long> lazy_visit_inventory_rejections{0};
+    std::atomic<long long> lazy_gini_subset_envelope_rejections{0};
+    std::atomic<long long> lazy_low_gini_l1_rejections{0};
     std::atomic<long long> incumbents_seen{0};
     std::atomic<long long> incumbents_verified{0};
     std::atomic<long long> incumbents_rejected{0};
@@ -293,22 +297,44 @@ struct CallbackState {
     std::atomic<bool> gini_branch_created{false};
 };
 
+bool rejectCandidateWithLazyRow(CallbackState& state,
+                                CPXCALLBACKCONTEXTptr context,
+                                const std::vector<std::pair<int, double>>& terms,
+                                char sense_value,
+                                double rhs_value) {
+    std::vector<int> beg = {0};
+    std::vector<int> ind;
+    std::vector<double> val;
+    ind.reserve(terms.size());
+    val.reserve(terms.size());
+    for (const auto& term : terms) {
+        if (term.first < 0 || std::fabs(term.second) <= 1e-12) continue;
+        ind.push_back(term.first);
+        val.push_back(term.second);
+    }
+    if (ind.empty()) return false;
+    const double rhs[1] = {rhs_value};
+    const char sense[1] = {sense_value};
+    const int rc = state.api->callbackrejectcandidate(
+        context, 1, static_cast<int>(ind.size()), rhs, sense,
+        beg.data(), ind.data(), val.data());
+    if (rc == 0) {
+        ++state.lazy_rejections;
+        ++state.incumbents_rejected;
+        return true;
+    }
+    return false;
+}
+
 bool rejectCandidateWithGiniBound(CallbackState& state,
                                   CPXCALLBACKCONTEXTptr context,
                                   bool upper_bound) {
     if (state.g_col < 0) return false;
-    const double rhs[1] = {
-        upper_bound ? state.gamma_U : state.gamma_L
-    };
-    const char sense[1] = {upper_bound ? 'L' : 'G'};
-    const int beg[1] = {0};
-    const int ind[1] = {state.g_col};
-    const double val[1] = {1.0};
-    const int rc = state.api->callbackrejectcandidate(
-        context, 1, 1, rhs, sense, beg, ind, val);
-    if (rc == 0) {
-        ++state.lazy_rejections;
-        ++state.incumbents_rejected;
+    if (rejectCandidateWithLazyRow(
+            state, context, {{state.g_col, 1.0}},
+            upper_bound ? 'L' : 'G',
+            upper_bound ? state.gamma_U : state.gamma_L)) {
+        ++state.lazy_gini_interval_rejections;
         return true;
     }
     return false;
@@ -494,6 +520,135 @@ void separateLowGiniL1Centering(CallbackState& state,
     }
 }
 
+bool validateCandidateVisitInventory(CallbackState& state,
+                                     CPXCALLBACKCONTEXTptr context,
+                                     const std::vector<double>& x) {
+    if (state.y_cols.empty() || state.z_cols.empty()) return false;
+    constexpr double tol = 1e-6;
+    const int station_count =
+        std::min(static_cast<int>(state.y_cols.size()),
+                 static_cast<int>(state.station_initial.size()));
+    for (int i = 1; i < station_count; ++i) {
+        const int y = state.y_cols[static_cast<std::size_t>(i)];
+        if (y < 0) continue;
+        const double initial =
+            static_cast<double>(state.station_initial[static_cast<std::size_t>(i)]);
+        const double capacity =
+            static_cast<double>(state.station_capacity[static_cast<std::size_t>(i)]);
+        std::vector<std::pair<int, double>> upper_terms;
+        std::vector<std::pair<int, double>> lower_terms;
+        upper_terms.push_back({y, 1.0});
+        lower_terms.push_back({y, -1.0});
+        double visit = 0.0;
+        for (const std::vector<int>& row : state.z_cols) {
+            if (i >= static_cast<int>(row.size())) continue;
+            const int z = row[static_cast<std::size_t>(i)];
+            if (z < 0) continue;
+            visit += x[static_cast<std::size_t>(z)];
+            upper_terms.push_back({z, -(capacity - initial)});
+            lower_terms.push_back({z, -initial});
+        }
+        const double upper_lhs =
+            x[static_cast<std::size_t>(y)] - (capacity - initial) * visit;
+        if (upper_lhs > initial + tol &&
+            rejectCandidateWithLazyRow(state, context, upper_terms, 'L', initial)) {
+            ++state.lazy_visit_inventory_rejections;
+            return true;
+        }
+        const double lower_lhs =
+            -x[static_cast<std::size_t>(y)] - initial * visit;
+        if (lower_lhs > -initial + tol &&
+            rejectCandidateWithLazyRow(state, context, lower_terms, 'L', -initial)) {
+            ++state.lazy_visit_inventory_rejections;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool validateCandidateGiniSubsetEnvelope(CallbackState& state,
+                                         CPXCALLBACKCONTEXTptr context,
+                                         const std::vector<double>& x) {
+    if (state.r_cols.size() <= 1 || state.gamma_U < -1e-12) return false;
+    const int V = static_cast<int>(state.r_cols.size()) - 1;
+    double sum_r = 0.0;
+    for (int i = 1; i <= V; ++i) {
+        const int r = state.r_cols[static_cast<std::size_t>(i)];
+        if (r >= 0) sum_r += x[static_cast<std::size_t>(r)];
+    }
+    if (sum_r <= 1e-12) return false;
+    auto rejectSubset = [&](const std::vector<int>& subset, int sign) {
+        const int a = static_cast<int>(subset.size());
+        std::vector<std::pair<int, double>> terms;
+        terms.reserve(static_cast<std::size_t>(V));
+        double lhs = 0.0;
+        for (int i = 1; i <= V; ++i) {
+            const int r = state.r_cols[static_cast<std::size_t>(i)];
+            if (r < 0) continue;
+            double coef = sign > 0
+                ? (-static_cast<double>(a) - static_cast<double>(V) * state.gamma_U)
+                : ( static_cast<double>(a) - static_cast<double>(V) * state.gamma_U);
+            if (std::find(subset.begin(), subset.end(), i) != subset.end()) {
+                coef += sign > 0 ? static_cast<double>(V) : -static_cast<double>(V);
+            }
+            lhs += coef * x[static_cast<std::size_t>(r)];
+            terms.push_back({r, coef});
+        }
+        constexpr double tol = 1e-6;
+        if (lhs > tol &&
+            rejectCandidateWithLazyRow(state, context, terms, 'L', 0.0)) {
+            ++state.lazy_gini_subset_envelope_rejections;
+            return true;
+        }
+        return false;
+    };
+    for (int i = 1; i <= V; ++i) {
+        if (rejectSubset({i}, 1)) return true;
+        if (rejectSubset({i}, -1)) return true;
+    }
+    for (int i = 1; i <= V; ++i) {
+        for (int j = i + 1; j <= V; ++j) {
+            if (rejectSubset({i, j}, 1)) return true;
+            if (rejectSubset({i, j}, -1)) return true;
+        }
+    }
+    return false;
+}
+
+bool validateCandidateLowGiniL1(CallbackState& state,
+                                CPXCALLBACKCONTEXTptr context,
+                                const std::vector<double>& x) {
+    if (state.r_cols.size() <= 1 || state.q_l1_cols.size() <= 1 ||
+        state.gamma_U < -1e-12) {
+        return false;
+    }
+    const int V = std::min(static_cast<int>(state.r_cols.size()),
+                           static_cast<int>(state.q_l1_cols.size())) - 1;
+    std::vector<std::pair<int, double>> terms;
+    terms.reserve(static_cast<std::size_t>(2 * V));
+    double lhs = 0.0;
+    for (int i = 1; i <= V; ++i) {
+        const int q = state.q_l1_cols[static_cast<std::size_t>(i)];
+        if (q >= 0) {
+            lhs += x[static_cast<std::size_t>(q)];
+            terms.push_back({q, 1.0});
+        }
+        const int r = state.r_cols[static_cast<std::size_t>(i)];
+        if (r >= 0) {
+            const double coef = -2.0 * state.gamma_U;
+            lhs += coef * x[static_cast<std::size_t>(r)];
+            terms.push_back({r, coef});
+        }
+    }
+    constexpr double tol = 1e-6;
+    if (lhs > tol &&
+        rejectCandidateWithLazyRow(state, context, terms, 'L', 0.0)) {
+        ++state.lazy_low_gini_l1_rejections;
+        return true;
+    }
+    return false;
+}
+
 void validateCandidatePoint(CallbackState& state,
                             CPXCALLBACKCONTEXTptr context) {
     if (!state.validate_candidates || state.ncols <= 0 || state.g_col < 0) return;
@@ -517,6 +672,9 @@ void validateCandidatePoint(CallbackState& state,
         rejectCandidateWithGiniBound(state, context, false);
         return;
     }
+    if (validateCandidateVisitInventory(state, context, x)) return;
+    if (validateCandidateGiniSubsetEnvelope(state, context, x)) return;
+    if (validateCandidateLowGiniL1(state, context, x)) return;
     ++state.incumbents_verified;
 }
 
@@ -772,6 +930,14 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     out.callback_low_gini_l1_violations =
         cb_state.low_gini_l1_violations.load();
     out.lazy_rejections = cb_state.lazy_rejections.load();
+    out.lazy_gini_interval_rejections =
+        cb_state.lazy_gini_interval_rejections.load();
+    out.lazy_visit_inventory_rejections =
+        cb_state.lazy_visit_inventory_rejections.load();
+    out.lazy_gini_subset_envelope_rejections =
+        cb_state.lazy_gini_subset_envelope_rejections.load();
+    out.lazy_low_gini_l1_rejections =
+        cb_state.lazy_low_gini_l1_rejections.load();
     out.incumbents_seen = cb_state.incumbents_seen.load();
     out.incumbents_verified = cb_state.incumbents_verified.load();
     out.incumbents_rejected = cb_state.incumbents_rejected.load();

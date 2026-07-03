@@ -169,6 +169,8 @@ def result_row(name: str, path: Path, meta: Dict[str, Any]) -> Dict[str, Any]:
         "tailored_bc_candidate_callback_calls": data.get("tailored_bc_candidate_callback_calls", ""),
         "tailored_bc_branch_callback_calls": data.get("tailored_bc_branch_callback_calls", ""),
         "tailored_bc_progress_callback_calls": data.get("tailored_bc_progress_callback_calls", ""),
+        "tailored_bc_lazy_rejections_total": data.get("tailored_bc_lazy_rejections_total", ""),
+        "tailored_bc_lazy_rejections_by_reason": data.get("tailored_bc_lazy_rejections_by_reason", ""),
         "tailored_bc_gini_subset_envelope_candidates": data.get("tailored_bc_gini_subset_envelope_candidates", ""),
         "tailored_bc_gini_subset_envelope_violations": data.get("tailored_bc_gini_subset_envelope_violations", ""),
         "tailored_bc_gini_subset_envelope_cuts_added": data.get("tailored_bc_gini_subset_envelope_cuts_added", ""),
@@ -450,7 +452,7 @@ def main() -> int:
         {
             "callback_available": callback_available,
             "user_cut_events": sum(int(row.get("tailored_bc_relaxation_callback_calls") or 0) for row in rows),
-            "lazy_events": 0,
+            "lazy_events": sum(int(row.get("tailored_bc_lazy_rejections_total") or 0) for row in rows),
             "incumbent_events": sum(int(row.get("tailored_bc_candidate_callback_calls") or 0) for row in rows),
             "branch_events": sum(int(row.get("tailored_bc_branch_callback_calls") or 0) for row in rows),
             "callback_gini_interval_cap_cuts": sum_family("callback_gini_interval_cap"),
@@ -466,7 +468,7 @@ def main() -> int:
         {
             "callback_available": callback_available,
             "user_cut_events": sum(int(row.get("tailored_bc_relaxation_callback_calls") or 0) for row in rows),
-            "lazy_events": 0,
+            "lazy_events": sum(int(row.get("tailored_bc_lazy_rejections_total") or 0) for row in rows),
             "incumbent_events": sum(int(row.get("tailored_bc_candidate_callback_calls") or 0) for row in rows),
             "branch_events": sum(int(row.get("tailored_bc_branch_callback_calls") or 0) for row in rows),
             "callback_gini_interval_cap_cuts": sum_family("callback_gini_interval_cap"),
@@ -526,7 +528,7 @@ def main() -> int:
         {
             "candidate_validation_layer": "generic_candidate_callback",
             "callback_available": callback_available,
-            "status": "blocked_without_in_process_callback_api" if not callback_available else "candidate_interval_consistency_checked",
+            "status": "blocked_without_in_process_callback_api" if not callback_available else "candidate_compact_row_consistency_checked",
             "paper_certificate_contamination": False,
         }
     ])
@@ -556,7 +558,7 @@ def main() -> int:
     ]
     if callback_available:
         final_lines.append(
-            "The executable loads `cplex2211.dll` dynamically, registers a generic CPLEX callback, and solves the smoke fixed-interval LP/MIP in-process. The smoke interval row reports relaxation/candidate/progress callback events, paper-safe relaxation-point separator attempts for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate interval-consistency checks, and CPLEX branch-order priorities applied through `CPXcopyorder`."
+            "The executable loads `cplex2211.dll` dynamically, registers a generic CPLEX callback, and solves the smoke fixed-interval LP/MIP in-process. The smoke interval row reports relaxation/candidate/progress callback events, paper-safe relaxation-point separator attempts for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate compact-row consistency checks, and CPLEX branch-order priorities applied through `CPXcopyorder`."
         )
     else:
         final_lines.append(
@@ -600,7 +602,7 @@ def main() -> int:
         "",
         "## Paper Claim",
         "",
-        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate interval-consistency validation, and branch-order priority injection. It is not yet the full requested tailored branch-and-cut: verifier-backed lazy incumbent rejection, custom Gini branch creation on hard leaves, hard-leaf callback ablations, and performance-positive hard-leaf evidence remain incomplete.",
+        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate compact-row consistency validation, and branch-order priority injection. It is not yet the full requested tailored branch-and-cut: verifier-backed route-plan lazy incumbent rejection, custom Gini branch creation on hard leaves, hard-leaf callback ablations, and performance-positive hard-leaf evidence remain incomplete.",
         "",
         "Final commit SHA: recorded in the final assistant response after commit creation.",
     ])

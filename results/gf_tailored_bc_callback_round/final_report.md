@@ -4,7 +4,7 @@ Status label: `minimal_dynamic_callback_path_available`
 
 ## Callback Boundary
 
-The executable loads `cplex2211.dll` dynamically, registers a generic CPLEX callback, and solves the smoke fixed-interval LP/MIP in-process. The smoke interval row reports relaxation/candidate/progress callback events, paper-safe relaxation-point separator attempts for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate interval-consistency checks, and CPLEX branch-order priorities applied through `CPXcopyorder`.
+The executable loads `cplex2211.dll` dynamically, registers a generic CPLEX callback, and solves the smoke fixed-interval LP/MIP in-process. The smoke interval row reports relaxation/candidate/progress callback events, paper-safe relaxation-point separator attempts for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate compact-row consistency checks, and CPLEX branch-order priorities applied through `CPXcopyorder`.
 
 ## Evidence Generated
 
@@ -40,6 +40,6 @@ D:\msys64\ucrt64\bin\g++.exe -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude s
 
 ## Paper Claim
 
-This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate interval-consistency validation, and branch-order priority injection. It is not yet the full requested tailored branch-and-cut: verifier-backed lazy incumbent rejection, custom Gini branch creation on hard leaves, hard-leaf callback ablations, and performance-positive hard-leaf evidence remain incomplete.
+This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate compact-row consistency validation, and branch-order priority injection. It is not yet the full requested tailored branch-and-cut: verifier-backed route-plan lazy incumbent rejection, custom Gini branch creation on hard leaves, hard-leaf callback ablations, and performance-positive hard-leaf evidence remain incomplete.
 
 Final commit SHA: recorded in the final assistant response after commit creation.

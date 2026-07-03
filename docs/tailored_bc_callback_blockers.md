@@ -12,13 +12,13 @@ Implemented:
 - relaxation-point separation hooks for visit-inventory linking rows;
 - relaxation-point separation hooks for singleton/pair Gini subset-envelope rows;
 - relaxation-point separation hooks for the aggregate low-Gini L1 centering row;
-- candidate interval-consistency checks with safe lazy rejection of numerical Gini interval violations;
+- candidate compact-row consistency checks with safe lazy rejection of numerical Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 violations;
 - CPLEX branch-order priorities through `CPXcopyorder`;
 - a one-shot custom Gini split callback path that is wired but not yet validated on hard leaves.
 
 Remaining blockers:
 
-- verifier-backed lazy incumbent rejection is not implemented;
+- verifier-backed route-plan lazy incumbent rejection is not implemented;
 - independent route-plan feasibility/objective verification inside the callback is not implemented;
 - custom Gini branch creation has no hard-leaf evidence yet;
 - hard-leaf callback separation is not performance-validated;

@@ -2638,11 +2638,20 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     api_solve.incumbents_verified;
                 result.tailored_bc_incumbents_rejected =
                     api_solve.incumbents_rejected;
-                result.tailored_bc_lazy_rejections_by_reason =
-                    api_solve.lazy_rejections > 0
-                        ? "candidate_gini_interval_violation=" +
-                              std::to_string(api_solve.lazy_rejections)
-                        : "none";
+                if (api_solve.lazy_rejections > 0) {
+                    std::ostringstream lazy;
+                    lazy << "candidate_gini_interval_violation="
+                         << api_solve.lazy_gini_interval_rejections
+                         << ";candidate_visit_inventory_violation="
+                         << api_solve.lazy_visit_inventory_rejections
+                         << ";candidate_gini_subset_envelope_violation="
+                         << api_solve.lazy_gini_subset_envelope_rejections
+                         << ";candidate_low_gini_l1_violation="
+                         << api_solve.lazy_low_gini_l1_rejections;
+                    result.tailored_bc_lazy_rejections_by_reason = lazy.str();
+                } else {
+                    result.tailored_bc_lazy_rejections_by_reason = "none";
+                }
                 result.tailored_bc_gini_branches_created =
                     api_solve.gini_branches_created;
                 result.tailored_bc_branching_priorities_summary +=
