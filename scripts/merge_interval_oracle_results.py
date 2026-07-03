@@ -46,6 +46,78 @@ def first_present(row: dict, *keys: str) -> str:
     return ""
 
 
+def as_float(value: object, default: float = 0.0) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def cutoff_value(row: dict, ev: dict) -> str:
+    return (
+        first_present(ev, "bound_used_for_merge", "oracle_bound_used_for_merge")
+        or first_present(ev, "interval_exact_cutoff_UB", "upper_bound", "objective")
+        or str(row.get("incumbent_upper_bound", row.get("interval_final_ub_cutoff", "")))
+    )
+
+
+def is_mergeable_objective_bound(row: dict, ev: dict, basis: str) -> bool:
+    if basis not in {
+        "interval_exact_objective_bound_optimal_no_improver",
+        "interval_exact_cutoff_mip_optimal_no_improver",
+    }:
+        return False
+    if truthy(first_present(ev, "timeout", "oracle_timeout", "interval_exact_cutoff_timeout")):
+        return False
+    if truthy(first_present(ev, "feasible_improving", "oracle_feasible_improving")):
+        return False
+    if not truthy(first_present(ev, "can_merge_bound", "oracle_can_merge_bound", "interval_oracle_can_merge_bound")):
+        return False
+    if not truthy(first_present(ev, "bound_valid", "oracle_bound_valid", "interval_oracle_bound_valid")):
+        return False
+    scope = first_present(ev, "bound_scope", "oracle_bound_scope", "interval_oracle_bound_scope")
+    if scope and scope != "original_fixed_interval":
+        return False
+    model_type = first_present(ev, "model_type", "oracle_model_type", "interval_oracle_model_type")
+    if model_type and model_type not in {
+        "original_compact_objective_bound",
+        "original_compact_cutoff_feasibility",
+    }:
+        return False
+    cutoff = as_float(cutoff_value(row, ev), as_float(row.get("incumbent_upper_bound", row.get("interval_final_ub_cutoff")), 0.0))
+    bound = as_float(
+        first_present(
+            ev,
+            "bound_used_for_merge",
+            "oracle_bound_used_for_merge",
+            "best_bound",
+            "oracle_best_bound",
+            "interval_exact_cutoff_best_bound",
+            "lower_bound",
+        ),
+        -1e100,
+    )
+    return truthy(first_present(ev, "closed_by_bound", "oracle_closed_by_bound")) or bound >= cutoff - 1e-7
+
+
+def apply_merged_cutoff_certificate(out: dict, cutoff: str, basis: str, detail: str) -> None:
+    out["interval_status"] = "bound_fathomed"
+    out["reason"] = detail
+    out["certificate_basis"] = basis
+    out["interval_lower_bound"] = cutoff or out.get("interval_lower_bound", "")
+    out["requires_pricing_closure"] = "false"
+    out["pricing_closure_available"] = "false"
+    out["interval_bound_valid"] = "true"
+    out["interval_closure_source"] = "tailored_compact_bc"
+    out["interval_closure_source_detail"] = detail
+    out["interval_requires_pricing_closure"] = "false"
+    out["interval_pricing_closure_satisfied"] = "false"
+    out["interval_oracle_used_for_certificate"] = "true"
+    out["interval_oracle_is_diagnostic_only"] = "false"
+    out["interval_final_lb"] = cutoff or out.get("interval_final_lb", "")
+    out["interval_final_ub_cutoff"] = cutoff or out.get("interval_final_ub_cutoff", "")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--ledger", required=True, type=Path)
@@ -76,24 +148,23 @@ def main() -> None:
             if proven_infeasible and (
                 basis == "interval_exact_cutoff_mip_infeasible" and "infeasible" in solver_status
             ):
-                cutoff = out.get("incumbent_upper_bound", out.get("interval_final_ub_cutoff", ""))
-                out["interval_status"] = "bound_fathomed"
-                out["reason"] = "merged_exact_interval_cutoff_mip_infeasible"
-                out["certificate_basis"] = "interval_exact_cutoff_mip_infeasible"
-                out["interval_lower_bound"] = cutoff or out.get("interval_lower_bound", "")
-                out["requires_pricing_closure"] = "false"
-                out["pricing_closure_available"] = "false"
-                out["interval_bound_valid"] = "true"
-                out["interval_closure_source"] = "tailored_compact_bc"
-                out["interval_closure_source_detail"] = "merged_exact_interval_cutoff_mip_infeasible"
-                out["interval_requires_pricing_closure"] = "false"
-                out["interval_pricing_closure_satisfied"] = "false"
-                out["interval_oracle_used_for_certificate"] = "true"
-                out["interval_oracle_is_diagnostic_only"] = "false"
-                out["interval_final_lb"] = cutoff or out.get("interval_final_lb", "")
-                out["interval_final_ub_cutoff"] = cutoff or out.get("interval_final_ub_cutoff", "")
+                apply_merged_cutoff_certificate(
+                    out,
+                    out.get("incumbent_upper_bound", out.get("interval_final_ub_cutoff", "")),
+                    "interval_exact_cutoff_mip_infeasible",
+                    "merged_exact_interval_cutoff_mip_infeasible",
+                )
                 applied = True
                 reason = "exact matching leaf closed by proven infeasible cutoff oracle"
+            elif is_mergeable_objective_bound(out, ev, basis):
+                apply_merged_cutoff_certificate(
+                    out,
+                    cutoff_value(out, ev),
+                    basis,
+                    "merged_exact_interval_cutoff_bound",
+                )
+                applied = True
+                reason = "exact matching leaf closed by valid objective-bound cutoff oracle"
             else:
                 reason = (
                     "oracle_not_mergeable:"

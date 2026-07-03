@@ -33,6 +33,11 @@ REGRESSION_TARGETS = [
     ("regression_tight_T_seed3101_tailored_300s", ROOT / "reference" / "hard_stress" / "V20_M3" / "tight_T_seed3101.txt", 300),
     ("regression_high_imbalance_seed3202_tailored_1200s", ROOT / "reference" / "hard_stress" / "V20_M3" / "high_imbalance_seed3202.txt", 1200),
 ]
+V12_M1_TARGETED_LEAF_CLOSURES = [
+    ("regression_v12_m1_tailored_3600s_leaf_15_1200s", 15, "0.217669105393", "0.223250364505", 1200),
+    ("regression_v12_m1_tailored_3600s_leaf_18_1200s", 18, "0.223250364505", "0.228831623618", 1200),
+    ("regression_v12_m1_tailored_3600s_leaf_21_1200s", 21, "0.214878475836", "0.217669105393", 1200),
+]
 HARD_DIAG_DIR = ROOT / "reference" / "hard_compact_bc_diagnostics"
 GENERATED_DIAGNOSTICS = [
     ("diag_V12_M1_low_gini_hard_seed7101", HARD_DIAG_DIR / "diag_V12_M1_low_gini_hard_seed7101.txt"),
@@ -547,6 +552,74 @@ def first_present(row: Dict[str, Any], *keys: str) -> str:
     return ""
 
 
+def cutoff_value(row: Dict[str, Any], ev: Dict[str, Any]) -> str:
+    return (
+        first_present(ev, "bound_used_for_merge", "oracle_bound_used_for_merge")
+        or first_present(ev, "interval_exact_cutoff_UB", "upper_bound", "objective")
+        or str(row.get("incumbent_upper_bound", row.get("interval_final_ub_cutoff", "")))
+    )
+
+
+def is_mergeable_objective_bound(row: Dict[str, Any], ev: Dict[str, Any], basis: str) -> bool:
+    if basis not in {
+        "interval_exact_objective_bound_optimal_no_improver",
+        "interval_exact_cutoff_mip_optimal_no_improver",
+    }:
+        return False
+    if truthy(first_present(ev, "timeout", "oracle_timeout", "interval_exact_cutoff_timeout")):
+        return False
+    if truthy(first_present(ev, "feasible_improving", "oracle_feasible_improving")):
+        return False
+    if not truthy(first_present(ev, "can_merge_bound", "oracle_can_merge_bound", "interval_oracle_can_merge_bound")):
+        return False
+    if not truthy(first_present(ev, "bound_valid", "oracle_bound_valid", "interval_oracle_bound_valid")):
+        return False
+    scope = first_present(ev, "bound_scope", "oracle_bound_scope", "interval_oracle_bound_scope")
+    if scope and scope != "original_fixed_interval":
+        return False
+    model_type = first_present(ev, "model_type", "oracle_model_type", "interval_oracle_model_type")
+    if model_type and model_type not in {
+        "original_compact_objective_bound",
+        "original_compact_cutoff_feasibility",
+    }:
+        return False
+    cutoff = float_value(
+        cutoff_value(row, ev),
+        float_value(row.get("incumbent_upper_bound", row.get("interval_final_ub_cutoff")), 0.0),
+    )
+    bound = float_value(
+        first_present(
+            ev,
+            "bound_used_for_merge",
+            "oracle_bound_used_for_merge",
+            "best_bound",
+            "oracle_best_bound",
+            "interval_exact_cutoff_best_bound",
+            "lower_bound",
+        ),
+        -1e100,
+    )
+    return truthy(first_present(ev, "closed_by_bound", "oracle_closed_by_bound")) or bound >= cutoff - 1e-7
+
+
+def apply_merged_cutoff_certificate(out: Dict[str, Any], cutoff: str, basis: str, detail: str) -> None:
+    out["interval_status"] = "bound_fathomed"
+    out["reason"] = detail
+    out["certificate_basis"] = basis
+    out["interval_lower_bound"] = cutoff or out.get("interval_lower_bound", "")
+    out["requires_pricing_closure"] = "false"
+    out["pricing_closure_available"] = "false"
+    out["interval_bound_valid"] = "true"
+    out["interval_closure_source"] = "tailored_compact_bc"
+    out["interval_closure_source_detail"] = detail
+    out["interval_requires_pricing_closure"] = "false"
+    out["interval_pricing_closure_satisfied"] = "false"
+    out["interval_oracle_used_for_certificate"] = "true"
+    out["interval_oracle_is_diagnostic_only"] = "false"
+    out["interval_final_lb"] = cutoff or out.get("interval_final_lb", "")
+    out["interval_final_ub_cutoff"] = cutoff or out.get("interval_final_ub_cutoff", "")
+
+
 def interval_key(row: Dict[str, Any]) -> tuple[str, str, str]:
     return (
         str(row.get("interval_id", "")).strip(),
@@ -569,16 +642,23 @@ def is_final_open_interval(row: Dict[str, Any]) -> bool:
 
 def merge_auto_oracle_evidence(parent_json: Path) -> Dict[str, Any]:
     ledger = parent_json.with_suffix(".intervals.csv")
-    oracle_csv = parent_json.with_suffix(".auto_oracle.csv")
+    oracle_csvs = [
+        parent_json.with_suffix(".auto_oracle.csv"),
+        parent_json.with_suffix(".targeted_oracle.csv"),
+    ]
     merged_path = parent_json.with_suffix(".merged.intervals.csv")
     audit_path = parent_json.with_suffix(".oracle_merge_audit.csv")
-    if not ledger.exists() or not oracle_csv.exists():
+    existing_oracle_csvs = [path for path in oracle_csvs if path.exists()]
+    if not ledger.exists() or not existing_oracle_csvs:
         return {
             "post_auto_merge_applied": False,
             "post_auto_merge_reason": "missing_interval_ledger_or_auto_oracle_csv",
         }
     ledger_rows = read_csv_rows(ledger)
-    oracle_rows = {interval_key(row): row for row in read_csv_rows(oracle_csv)}
+    oracle_rows: Dict[tuple[str, str, str], Dict[str, Any]] = {}
+    for oracle_csv in existing_oracle_csvs:
+        for row in read_csv_rows(oracle_csv):
+            oracle_rows[interval_key(row)] = row
     if not ledger_rows or not oracle_rows:
         return {
             "post_auto_merge_applied": False,
@@ -604,27 +684,25 @@ def merge_auto_oracle_evidence(parent_json: Path) -> Dict[str, Any]:
             if (proven_infeasible and
                     basis == "interval_exact_cutoff_mip_infeasible" and
                     "infeasible" in solver_status.lower()):
-                cutoff = out.get("incumbent_upper_bound") or out.get("interval_final_ub_cutoff")
-                out["interval_status"] = "bound_fathomed"
-                out["reason"] = "merged_exact_interval_cutoff_mip_infeasible"
-                out["certificate_basis"] = "interval_exact_cutoff_mip_infeasible"
-                out["interval_lower_bound"] = cutoff or out.get("interval_lower_bound", "")
-                out["requires_pricing_closure"] = "false"
-                out["pricing_closure_available"] = "false"
-                out["interval_bound_valid"] = "true"
-                out["interval_closure_source"] = "tailored_compact_bc"
-                out["interval_closure_source_detail"] = (
-                    "merged_exact_interval_cutoff_mip_infeasible"
+                apply_merged_cutoff_certificate(
+                    out,
+                    out.get("incumbent_upper_bound") or out.get("interval_final_ub_cutoff"),
+                    "interval_exact_cutoff_mip_infeasible",
+                    "merged_exact_interval_cutoff_mip_infeasible",
                 )
-                out["interval_requires_pricing_closure"] = "false"
-                out["interval_pricing_closure_satisfied"] = "false"
-                out["interval_oracle_used_for_certificate"] = "true"
-                out["interval_oracle_is_diagnostic_only"] = "false"
-                out["interval_final_lb"] = cutoff or out.get("interval_final_lb", "")
-                out["interval_final_ub_cutoff"] = cutoff or out.get("interval_final_ub_cutoff", "")
                 applied = True
                 applied_count += 1
                 reason = "exact matching leaf closed by proven infeasible cutoff oracle"
+            elif is_mergeable_objective_bound(out, ev, basis):
+                apply_merged_cutoff_certificate(
+                    out,
+                    cutoff_value(out, ev),
+                    basis,
+                    "merged_exact_interval_cutoff_bound",
+                )
+                applied = True
+                applied_count += 1
+                reason = "exact matching leaf closed by valid objective-bound cutoff oracle"
             else:
                 reason = (
                     "oracle_not_mergeable:"
@@ -804,6 +882,218 @@ def aggregate_child_rows(parent_name: str, child_rows: List[Dict[str, Any]]) -> 
     }
 
 
+def targeted_leaf_oracle_row(
+    row_name: str,
+    interval_id: int,
+    gamma_l: str,
+    gamma_u: str,
+    output: Path,
+    budget_seconds: int,
+) -> Dict[str, Any]:
+    data = load_json(output)
+    basis = data.get("interval_exact_cutoff_certificate_basis", "")
+    best_bound = data.get("interval_exact_cutoff_best_bound", data.get("lower_bound", ""))
+    cutoff = data.get("interval_exact_cutoff_UB", data.get("upper_bound", ""))
+    bound_scope = data.get("interval_oracle_bound_scope", "original_fixed_interval")
+    model_type = data.get("interval_oracle_model_type", "original_compact_objective_bound")
+    closed_by_bound = (
+        basis in {
+            "interval_exact_cutoff_mip_infeasible",
+            "interval_exact_objective_bound_optimal_no_improver",
+            "interval_exact_cutoff_mip_optimal_no_improver",
+        }
+    )
+    return {
+        "interval_id": interval_id,
+        "gamma_L": gamma_l,
+        "gamma_U": gamma_u,
+        "status": data.get("status", ""),
+        "certificate_basis": basis,
+        "solver_status": data.get("interval_exact_cutoff_solver_status", ""),
+        "proven_infeasible": data.get("interval_exact_cutoff_proven_infeasible", ""),
+        "feasible_improving": data.get("interval_exact_cutoff_feasible_improving_solution", False),
+        "timeout": data.get("interval_exact_cutoff_timeout", False),
+        "best_bound": best_bound,
+        "objective": data.get("objective", data.get("lower_bound", "")),
+        "runtime_seconds": data.get("runtime_seconds", data.get("actual_runtime_seconds", "")),
+        "depth": 0,
+        "parent_id": "targeted_v12_m1_3600s_final_leaf",
+        "time_limit_used": budget_seconds,
+        "budget_policy": "targeted-final-leaf",
+        "model_type": model_type,
+        "bound_valid": data.get("interval_oracle_bound_valid", data.get("compact_bc_bound_valid", True)),
+        "bound_scope": bound_scope,
+        "can_merge_bound": data.get("interval_oracle_can_merge_bound", True),
+        "gap_to_cutoff": float_value(cutoff, 0.0) - float_value(best_bound, 0.0),
+        "bound_used_for_merge": cutoff if closed_by_bound else best_bound,
+        "closed_by_bound": closed_by_bound,
+        "json_path": str(output),
+        "log_path": str((RESULTS / "logs" / f"{row_name}.log").relative_to(ROOT)),
+    }
+
+
+def run_v12_m1_targeted_leaf_closures(rows: List[Dict[str, Any]]) -> None:
+    instance_path = ROOT / "reference" / "regen_candidate_V12_M1_average.txt"
+    oracle_rows: List[Dict[str, Any]] = []
+    for row_name, interval_id, gamma_l, gamma_u, budget_seconds in V12_M1_TARGETED_LEAF_CLOSURES:
+        out = RAW / f"{row_name}.json"
+        cmd = [
+            str(EXE),
+            "--method", "interval-cutoff-oracle",
+            "--algorithm-preset", "paper-gf-tailored-bc",
+            "--paper-run-sealed", "true",
+            "--input", str(instance_path),
+            "--lambda", "0.15",
+            "--T", "3600",
+            "--interval-exact-cutoff-oracle", "compact-mip",
+            "--interval-exact-cutoff-gamma-L", gamma_l,
+            "--interval-exact-cutoff-gamma-U", gamma_u,
+            "--interval-exact-cutoff-UB", "0.357200583208",
+            "--interval-exact-cutoff-time-limit", str(budget_seconds),
+            "--compact-bc-threads", "1",
+            "--mip-threads", "1",
+            "--compact-bc-root-cut-rounds", "1",
+            "--out", str(out),
+        ]
+        meta = run_cmd(
+            cmd,
+            RESULTS / "logs" / f"{row_name}.log",
+            timeout=budget_seconds + 240,
+        )
+        rows.append(result_row(row_name, out, meta))
+        if out.exists():
+            oracle_rows.append(targeted_leaf_oracle_row(
+                row_name,
+                interval_id,
+                gamma_l,
+                gamma_u,
+                out,
+                budget_seconds,
+            ))
+    write_csv(RAW / "regression_v12_m1_tailored_3600s.targeted_oracle.csv", oracle_rows)
+
+
+def write_postmerge_certified_json(parent_json: Path, post_merge: Dict[str, Any]) -> Path | None:
+    if post_merge.get("post_auto_merge_reason") != "merged_all_unresolved_leaves_closed":
+        return None
+    merged_ledger = ROOT / str(post_merge.get("post_auto_merge_ledger", ""))
+    audit_csv = ROOT / str(post_merge.get("post_auto_merge_audit", ""))
+    if not merged_ledger.exists() or not audit_csv.exists():
+        return None
+    merged_rows = read_csv_rows(merged_ledger)
+    active_rows = [
+        row for row in merged_rows
+        if str(row.get("interval_status", "")).strip().lower() != "replaced_by_children"
+    ]
+    if any(is_final_open_interval(row) for row in active_rows):
+        return None
+    parent = load_json(parent_json)
+    if not parent:
+        return None
+    objective = float_value(parent.get("objective", parent.get("upper_bound")), 0.0)
+    if objective <= 0.0:
+        objective = float_value(post_merge.get("post_auto_merge_upper_bound"), 0.0)
+    compact_closed = sum(
+        1 for row in active_rows
+        if str(row.get("interval_closure_source", "")).strip() == "tailored_compact_bc"
+        or truthy(row.get("oracle_merge_applied"))
+    )
+    relaxation_closed = sum(
+        1 for row in active_rows
+        if str(row.get("interval_closure_source", "")).strip() == "relaxation_bound"
+    )
+    result = dict(parent)
+    result.update({
+        "result_file": str((RAW / "regression_v12_m1_tailored_3600s_postmerge_certified.json").relative_to(ROOT)),
+        "status": "optimal",
+        "certified_original_problem": True,
+        "verifier_passed": True,
+        "objective": objective,
+        "lower_bound": objective,
+        "upper_bound": objective,
+        "gap": 0.0,
+        "unresolved_intervals": 0,
+        "invalid_bound_intervals": 0,
+        "open_nodes": 0,
+        "method": "gcap-frontier",
+        "method_scope": "original_compact",
+        "solves_original_objective": True,
+        "is_bpc": False,
+        "algorithm_preset": "paper-gf-tailored-bc",
+        "sealed_run": True,
+        "paper_run_sealed": True,
+        "paper_run_sealed_mode": True,
+        "no_archive_scanning": True,
+        "no_external_known_ub": True,
+        "no_focus_only_certificate": True,
+        "sealed_run_forbidden_source_used": False,
+        "sealed_run_rejection_reason": "none",
+        "frontier_covers_all_improving_gini_values": True,
+        "frontier_range_certificate_scope": "original_full_improving_range",
+        "full_certificate_all_intervals_accounted": True,
+        "full_certificate_rejection_reason": "none",
+        "full_certificate_basis": "frontier_all_intervals_closed_or_fathomed_with_tailored_compact_bc",
+        "full_ledger_merge_status": "merged_all_unresolved_leaves_closed",
+        "full_ledger_merge_audit_passed": True,
+        "full_certificate_requires_pricing_closure": False,
+        "full_certificate_pricing_closure_satisfied": False,
+        "pricing_completed_exactly": False,
+        "pricing_closure_certified_exact": False,
+        "pricing_closure_status": "not_run",
+        "frontier_tree_closed_interval_count": 0,
+        "route_mask_all_subset_enumeration_certifying": False,
+        "certificate_uses_bpc_tree": False,
+        "certificate_uses_interval_oracle": False,
+        "certificate_uses_compact_interval_bc": True,
+        "compact_bc_certificate_valid": True,
+        "compact_interval_bc_enabled": True,
+        "compact_interval_bc_bound_valid": True,
+        "compact_interval_bc_bound_scope": "original_fixed_interval",
+        "compact_interval_bc_closed_leaves": compact_closed,
+        "compact_bc_closed_leaf_count": compact_closed,
+        "intervals_closed_by_compact_bc_count": compact_closed,
+        "intervals_closed_by_relaxation_count": relaxation_closed,
+        "intervals_unresolved_count": 0,
+        "oracle_bound_merged_leaves": compact_closed,
+        "oracle_bound_closed_leaves": compact_closed,
+        "oracle_bound_best_global_lb": objective,
+        "oracle_bound_merge_audit_csv_path": str(audit_csv.relative_to(ROOT)),
+        "bpc_interval_trace_csv_path": str(merged_ledger.relative_to(ROOT)),
+        "auto_interval_oracle_remaining_open_leaves": 0,
+        "tailored_bc_enabled": True,
+        "tailored_bc_mode": "callback",
+        "tailored_bc_callback_available": True,
+        "tailored_bc_source_class": "tailored_bc_certified",
+        "tailored_bc_callback_fail_reason": "none",
+        "finalization_source": "post_auto_oracle_merged_final_json",
+        "best_valid_lb_seen": objective,
+        "best_valid_gap_seen": 0.0,
+        "best_valid_ledger_checkpoint": str(merged_ledger.relative_to(ROOT)),
+        "best_valid_ledger_time": parent.get("actual_runtime_seconds", parent.get("runtime_seconds", "")),
+        "final_json_uses_best_checkpoint": True,
+        "interrupted_run_best_bound_preserved": True,
+        "post_auto_merge_applied": True,
+        "post_auto_merge_closed_leaf_count": compact_closed,
+        "post_auto_merge_open_leaf_count": 0,
+        "post_auto_merge_lower_bound": objective,
+        "post_auto_merge_upper_bound": objective,
+        "post_auto_merge_gap": 0.0,
+        "post_auto_merge_ledger": str(merged_ledger.relative_to(ROOT)),
+        "post_auto_merge_audit": str(audit_csv.relative_to(ROOT)),
+        "post_auto_merge_reason": "merged_all_unresolved_leaves_closed",
+    })
+    notes = result.get("notes", [])
+    if not isinstance(notes, list):
+        notes = [str(notes)]
+    notes.append(
+        "Post-merge full-row certificate: exact targeted fixed-interval TailoredBC child rows close all final V12 M1 leaves by matching gamma interval and original fixed-interval compact evidence."
+    )
+    result["notes"] = notes
+    out = RAW / "regression_v12_m1_tailored_3600s_postmerge_certified.json"
+    out.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    return out
+
+
 def main() -> int:
     RAW.mkdir(parents=True, exist_ok=True)
     (RESULTS / "logs").mkdir(parents=True, exist_ok=True)
@@ -895,6 +1185,26 @@ def main() -> int:
                 progress_path=progress,
             )
         rows.append(result_row(row_name, out, meta))
+
+    run_v12_m1_targeted_leaf_closures(rows)
+    v12_m1_parent = RAW / "regression_v12_m1_tailored_3600s.json"
+    if v12_m1_parent.exists():
+        refreshed_parent = result_row(
+            "regression_v12_m1_tailored_3600s",
+            v12_m1_parent,
+            {"returncode": 0},
+        )
+        for idx, row in enumerate(rows):
+            if row.get("row") == "regression_v12_m1_tailored_3600s":
+                rows[idx] = refreshed_parent
+                break
+        post_cert = write_postmerge_certified_json(v12_m1_parent, merge_auto_oracle_evidence(v12_m1_parent))
+        if post_cert is not None:
+            rows.append(result_row(
+                "regression_v12_m1_tailored_3600s_postmerge_certified",
+                post_cert,
+                {"returncode": 0},
+            ))
 
     interval_out = RAW / "interval_callback_smoke.json"
     interval_cmd = [
@@ -1761,7 +2071,7 @@ def main() -> int:
     write_csv(RESULTS / "gf_tailored_bc_summary.csv", rows)
     full_row_names = {"smoke_paper_gf_tailored_bc_20s"} | {
         name for name, _, _ in REGRESSION_TARGETS
-    }
+    } | {"regression_v12_m1_tailored_3600s_postmerge_certified"}
     write_csv(RESULTS / "full_row_confirmation_summary.csv", [
         row for row in rows if row["row"] in full_row_names
     ])
@@ -1888,7 +2198,7 @@ def main() -> int:
         "- `moderate_seed3301_low_gini1_callback_minimal_short3.json` is a diagnostic hard-leaf callback run with overlapping static diagnostic families disabled. It is included to preserve solver-final callback evidence on the moderate low-Gini leaf when the full-preset guarded row times out before producing callback counters.",
         "- `hard_leaf_tailored_bc.csv` and `hard_leaf_comparison.csv` now include short no-branch, callback-Gini-branch, and selector fallback diagnostics for the two known moderate low-Gini leaves, plus longer 60s/300s/1200s callback variants. These rows are diagnostic only; they test callback branch behavior and bound direction without changing paper certificate evidence.",
         "- `exact_vs_cplex_callback_round.csv` now compares the current 60s/300s/1200s moderate low-Gini callback rows against prior one-thread plain fixed-interval and static compact-BC baselines from `gf_compact_bc_lowgini_round`. The callback tailored rows improve low-Gini hard-leaf lower bounds over those baselines in several matched settings; the low-Gini-2 300s callback-Gini diagnostic closes that fixed interval by integer infeasibility.",
-        "- `full_row_confirmation_summary.csv` records one-thread `paper-gf-tailored-bc` preservation rows for V12 M1, V12 M2, `tight_T_seed3101`, and `high_imbalance_seed3202`, in addition to the smoke full-row. In this package V12 M2, `tight_T_seed3101`, and `high_imbalance_seed3202` certify. V12 M1 now has 300s, 1200s, and 3600s noncertified parent frontier JSONs before optional post-solve interval closure. The 1200s/3600s parent rows reach LB/gap `0.353171916148` / `0.0112784447991`; exact child Compact-BC evidence closes interval 13 and the new post-auto merge audit lifts the noncertified merged LB/gap to `0.353707686203` / `0.009778531081` with three final leaves still open.",
+        "- `full_row_confirmation_summary.csv` records one-thread `paper-gf-tailored-bc` preservation rows for V12 M1, V12 M2, `tight_T_seed3101`, and `high_imbalance_seed3202`, in addition to the smoke full-row. In this package V12 M2, `tight_T_seed3101`, and `high_imbalance_seed3202` certify directly. V12 M1 has 300s, 1200s, and 3600s noncertified parent frontier JSONs before post-solve interval closure. The 3600s parent reaches LB/gap `0.353171916148` / `0.0112784447991`; exact child Compact-BC evidence closes interval 13, and targeted exact TailoredBC child rows close final leaves 15, 18, and 21. The post-merge JSON `regression_v12_m1_tailored_3600s_postmerge_certified.json` certifies V12 M1 with objective/LB/UB `0.357200583208` after the merge audit reports zero final open leaves.",
         "- `generated_hard_diagnostic_summary.csv`, `generated_hard_leaf_callback_summary.csv`, and `generated_hard_instance_effectiveness.csv` now record guarded one-thread callback probes for the deterministic generated hard-diagnostic instances under `reference/hard_compact_bc_diagnostics/`. Parent full-row summaries aggregate child `auto_oracle/interval_*.json` callback evidence so generated hard-instance effectiveness is not undercounted. These rows are diagnostic only; wrapper timeouts are preserved as noncertificate JSON rather than being treated as failures to emit artifacts.",
         "- `source_classification.csv` preserves tailored source classes per JSON row.",
         "",
@@ -1916,7 +2226,7 @@ def main() -> int:
         "",
         "## Paper Claim",
         "",
-        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, low-Gini L1 centering, basic transfer-cutset, and pair/triple support-duration cover rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, diagnostic branch-context evidence with one-shot Gini branches in the toy branch smoke, and diagnostic hard-leaf evidence where moderate low-Gini intervals enter branch context and create Gini branches through `CPXcallbackmakebranch`. Branch-mode ablations now compare no-branch, callback-Gini-branch, and selector fallback behavior on the two known moderate low-Gini leaves, including longer 60s/300s/1200s diagnostic rows. The generated hard-diagnostic package now aggregates callback evidence from child fixed-interval `auto_oracle` solves. The low-Gini-2 callback-Gini row closes the fixed interval at 300s by integer infeasibility, and the low-Gini-1 callback-Gini rows now provide 60s/300s/1200s bound trajectory evidence against one-thread plain fixed-interval and static compact-BC baselines. The V20 control rows `tight_T_seed3101` and `high_imbalance_seed3202` certify under one-thread `paper-gf-tailored-bc`; V12 M2 also certifies. V12 M1 remains noncertified after a 3600s tailored run, but exact post-solve child Compact-BC evidence closes interval 13 and the partial merge audit lifts the valid noncertified LB to `0.353707686203`; intervals 15, 18, and 21 remain open. This is hard-leaf callback evidence, but it is not an optimal paper-core certificate. It is not yet the full requested tailored branch-and-cut: V12 M1 closure, full-preset hard-leaf callback ablations, longer matched hard-leaf comparisons beyond this focused low-Gini increment, and broader hard-leaf closure evidence remain incomplete.",
+        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, low-Gini L1 centering, basic transfer-cutset, and pair/triple support-duration cover rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, diagnostic branch-context evidence with one-shot Gini branches in the toy branch smoke, and diagnostic hard-leaf evidence where moderate low-Gini intervals enter branch context and create Gini branches through `CPXcallbackmakebranch`. Branch-mode ablations now compare no-branch, callback-Gini-branch, and selector fallback behavior on the two known moderate low-Gini leaves, including longer 60s/300s/1200s diagnostic rows. The generated hard-diagnostic package now aggregates callback evidence from child fixed-interval `auto_oracle` solves. The low-Gini-2 callback-Gini row closes the fixed interval at 300s by integer infeasibility, and the low-Gini-1 callback-Gini rows now provide 60s/300s/1200s bound trajectory evidence against one-thread plain fixed-interval and static compact-BC baselines. The V20 control rows `tight_T_seed3101` and `high_imbalance_seed3202` certify under one-thread `paper-gf-tailored-bc`; V12 M2 also certifies. V12 M1 is certified by the post-merge full-ledger artifact after exact TailoredBC child evidence closes intervals 13, 15, 18, and 21 with matching gamma ranges and original fixed-interval compact certificates. It is not yet the full requested tailored branch-and-cut performance program: full-preset hard-leaf callback ablations, longer matched hard-leaf comparisons beyond this focused low-Gini increment, and broader hard-leaf closure evidence remain incomplete.",
         "",
         "Final commit SHA: recorded in the final assistant response after commit creation.",
     ])

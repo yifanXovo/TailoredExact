@@ -13,8 +13,8 @@ interval_id,gamma_L,gamma_U,original_status,merged_status,oracle_available,oracl
 11,0.21208784628,0.223250364505,replaced_by_children,replaced_by_children,false,false,no_oracle_result_for_exact_leaf,true,false
 12,0.223250364505,0.234412882731,unresolved,bound_fathomed,true,true,exact matching leaf closed by proven infeasible cutoff oracle,true,false
 13,0.234412882731,0.245575400956,unresolved,bound_fathomed,true,true,exact matching leaf closed by proven infeasible cutoff oracle,true,false
-14,0.21208784628,0.217669105393,unresolved,unresolved,true,false,"oracle_not_mergeable:basis=interval_exact_objective_bound_optimal_no_improver;status=interval_closed;solver=integer optimal, tolerance",true,false
+14,0.21208784628,0.217669105393,unresolved,bound_fathomed,true,true,exact matching leaf closed by valid objective-bound cutoff oracle,true,false
 15,0.217669105393,0.223250364505,unresolved,unresolved,false,false,no_oracle_result_for_exact_leaf,true,false
 16,0.245575400956,0.256737919181,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
 17,0.256737919181,0.267900437406,unresolved,unresolved,false,false,no_oracle_result_for_exact_leaf,true,false
-__summary__,,,,certificate_incomplete,,,final_open_leaf_count=3,true,false
+__summary__,,,,certificate_incomplete,,,final_open_leaf_count=2,true,false

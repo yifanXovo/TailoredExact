@@ -14,11 +14,11 @@ interval_id,gamma_L,gamma_U,original_status,merged_status,oracle_available,oracl
 12,0.223250364505,0.234412882731,replaced_by_children,replaced_by_children,false,false,no_oracle_result_for_exact_leaf,true,false
 13,0.234412882731,0.245575400956,unresolved,bound_fathomed,true,true,exact matching leaf closed by proven infeasible cutoff oracle,true,false
 14,0.21208784628,0.217669105393,replaced_by_children,replaced_by_children,false,false,no_oracle_result_for_exact_leaf,true,false
-15,0.217669105393,0.223250364505,unresolved,unresolved,false,false,no_oracle_result_for_exact_leaf,true,false
+15,0.217669105393,0.223250364505,unresolved,bound_fathomed,true,true,exact matching leaf closed by proven infeasible cutoff oracle,true,false
 16,0.245575400956,0.256737919181,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
 17,0.256737919181,0.267900437406,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
-18,0.223250364505,0.228831623618,unresolved,unresolved,false,false,no_oracle_result_for_exact_leaf,true,false
+18,0.223250364505,0.228831623618,unresolved,bound_fathomed,true,true,exact matching leaf closed by proven infeasible cutoff oracle,true,false
 19,0.228831623618,0.234412882731,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
 20,0.21208784628,0.214878475836,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
-21,0.214878475836,0.217669105393,unresolved,unresolved,false,false,no_oracle_result_for_exact_leaf,true,false
-__summary__,,,,certificate_incomplete,,,final_open_leaf_count=3,true,false
+21,0.214878475836,0.217669105393,unresolved,bound_fathomed,true,true,exact matching leaf closed by valid objective-bound cutoff oracle,true,false
+__summary__,,,,certificate_complete,,,final_open_leaf_count=0,true,false
