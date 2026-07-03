@@ -40,6 +40,10 @@ constexpr int kParamThreads = 1067;
 constexpr int kParamTimeLimit = 1039;
 constexpr int kParamScreenOutput = 1035;
 constexpr int kParamMipDisplay = 2012;
+constexpr int kParamPreprocessingPresolve = 1030;
+constexpr int kParamMipStrategyHeuristicFreq = 2031;
+constexpr int kParamMipStrategySearch = 2109;
+constexpr int kMipSearchTraditional = 1;
 constexpr int kUseCutForce = 0;
 
 using CPXopenCPLEX_t = CPXENVptr (__stdcall *)(int*);
@@ -825,6 +829,11 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     api.setintparam(env, kParamThreads, std::max(1, threads));
     api.setintparam(env, kParamScreenOutput, 0);
     api.setintparam(env, kParamMipDisplay, 0);
+    if (enable_gini_branching) {
+        api.setintparam(env, kParamMipStrategySearch, kMipSearchTraditional);
+        api.setintparam(env, kParamPreprocessingPresolve, 0);
+        api.setintparam(env, kParamMipStrategyHeuristicFreq, -1);
+    }
     if (time_limit_seconds > 0.0) {
         api.setdblparam(env, kParamTimeLimit, time_limit_seconds);
     }

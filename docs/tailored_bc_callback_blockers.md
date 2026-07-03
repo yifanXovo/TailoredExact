@@ -14,12 +14,13 @@ Implemented:
 - relaxation-point separation hooks for the aggregate low-Gini L1 centering row;
 - candidate compact-row consistency checks with safe lazy rejection of numerical Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 violations;
 - CPLEX branch-order priorities through `CPXcopyorder`;
-- a one-shot custom Gini split callback path that is wired but not yet validated on hard leaves.
+- a one-shot custom Gini split callback path that is wired but not yet validated on hard leaves;
+- `tailored-bc-branch-callback-smoke-test`, which applies branch priorities on a diagnostic CPLEX toy MIP and records that the branch callback context is still not observed in the current evidence package.
 
 Remaining blockers:
 
 - verifier-backed route-plan lazy incumbent rejection is not implemented;
 - independent route-plan feasibility/objective verification inside the callback is not implemented;
-- custom Gini branch creation has no hard-leaf evidence yet;
+- custom Gini branch creation has no observed branch-context event yet, even in the current diagnostic branch-smoke row;
 - hard-leaf callback separation is not performance-validated;
 - the problem-specific callback cuts have only smoke/diagnostic evidence and have not yet produced hard-leaf bound improvement.

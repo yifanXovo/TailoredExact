@@ -169,6 +169,8 @@ def result_row(name: str, path: Path, meta: Dict[str, Any]) -> Dict[str, Any]:
         "tailored_bc_candidate_callback_calls": data.get("tailored_bc_candidate_callback_calls", ""),
         "tailored_bc_branch_callback_calls": data.get("tailored_bc_branch_callback_calls", ""),
         "tailored_bc_progress_callback_calls": data.get("tailored_bc_progress_callback_calls", ""),
+        "tailored_bc_gini_branches_created": data.get("tailored_bc_gini_branches_created", ""),
+        "tailored_bc_branch_priority_enabled": data.get("tailored_bc_branch_priority_enabled", ""),
         "tailored_bc_lazy_rejections_total": data.get("tailored_bc_lazy_rejections_total", ""),
         "tailored_bc_lazy_rejections_by_reason": data.get("tailored_bc_lazy_rejections_by_reason", ""),
         "tailored_bc_gini_subset_envelope_candidates": data.get("tailored_bc_gini_subset_envelope_candidates", ""),
@@ -194,6 +196,7 @@ def main() -> int:
 
     diagnostic_methods = [
         "tailored-bc-callback-smoke-test",
+        "tailored-bc-branch-callback-smoke-test",
         "tailored-bc-cut-validity-test",
         "gini-subset-envelope-test",
         "low-gini-l1-centering-test",
@@ -345,9 +348,26 @@ def main() -> int:
         "not_reported",
     )
 
-    write_csv(RESULTS / "callback_smoke.csv", [rows[0]])
-    write_csv(RESULTS / "tailored_cut_ablation.csv", rows[1:6])
-    write_csv(RESULTS / "user_cut_family_ablation.csv", rows[1:6])
+    rows_by_method = {str(row.get("method", "")): row for row in rows}
+    guard_methods = [
+        "tailored-bc-cut-validity-test",
+        "gini-subset-envelope-test",
+        "low-gini-l1-centering-test",
+        "transfer-cutset-validity-test",
+        "s-bucket-coverage-test",
+    ]
+    write_csv(RESULTS / "callback_smoke.csv", [
+        rows_by_method.get("tailored-bc-callback-smoke-test", rows[0])
+    ])
+    write_csv(RESULTS / "tailored_branch_callback_smoke.csv", [
+        rows_by_method.get("tailored-bc-branch-callback-smoke-test", {})
+    ])
+    write_csv(RESULTS / "tailored_cut_ablation.csv", [
+        rows_by_method[m] for m in guard_methods if m in rows_by_method
+    ])
+    write_csv(RESULTS / "user_cut_family_ablation.csv", [
+        rows_by_method[m] for m in guard_methods if m in rows_by_method
+    ])
     write_csv(RESULTS / "tailored_bc_vs_static.csv", [
         {
             "comparison": "callback_vs_static_fallback",
@@ -368,9 +388,24 @@ def main() -> int:
     ])
     write_csv(RESULTS / "gini_branching_refinement.csv", [
         {
+            "mode": "callback",
+            "callback_available": callback_available,
+            "gini_branching_status": (
+                "branch_callback_created_gini_branches"
+                if int(rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_gini_branches_created") or 0) > 0
+                else ("callback_registered_no_custom_branch_created" if callback_available
+                      else "metadata_only_without_callback_api")
+            ),
+            "branch_callback_calls": rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_branch_callback_calls", 0),
+            "gini_branches_created": rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_gini_branches_created", 0),
+            "certificate_role": "none",
+        },
+        {
             "mode": "selector_or_outer_controller",
             "callback_available": callback_available,
-            "gini_branching_status": "callback_registered_no_custom_branch_created_yet" if callback_available else "metadata_only_without_callback_api",
+            "gini_branching_status": "not_exercised_in_this_increment",
+            "branch_callback_calls": 0,
+            "gini_branches_created": 0,
             "certificate_role": "none",
         }
     ])
@@ -378,8 +413,15 @@ def main() -> int:
         {
             "policy": "callback_branching",
             "callback_available": callback_available,
-            "status": "blocked" if not callback_available else "callback_registered",
-            "reason": callback_fail_reason if not callback_available else "none",
+            "status": (
+                "branch_callback_created_gini_branches"
+                if int(rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_gini_branches_created") or 0) > 0
+                else ("callback_registered_no_branch_context_observed" if callback_available
+                      else "blocked")
+            ),
+            "reason": callback_fail_reason if not callback_available else rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("status", "not_run"),
+            "branch_callback_calls": rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_branch_callback_calls", 0),
+            "gini_branches_created": rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_gini_branches_created", 0),
         },
         {
             "policy": "branching_priorities",
@@ -391,13 +433,22 @@ def main() -> int:
     write_csv(RESULTS / "gini_branching_comparison.csv", [
         {
             "mode": "callback",
-            "status": "blocked" if not callback_available else "callback_registered_no_custom_gini_branch_yet",
+            "status": (
+                "branch_callback_created_gini_branches"
+                if int(rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_gini_branches_created") or 0) > 0
+                else ("callback_registered_no_custom_gini_branch_yet" if callback_available
+                      else "blocked")
+            ),
             "certificate_role": "none_without_callback_api" if not callback_available else "callback_candidate",
+            "branch_callback_calls": rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_branch_callback_calls", 0),
+            "gini_branches_created": rows_by_method.get("tailored-bc-branch-callback-smoke-test", {}).get("tailored_bc_gini_branches_created", 0),
         },
         {
             "mode": "selector_binary_or_outer_controller",
             "status": "metadata_only",
             "certificate_role": "none",
+            "branch_callback_calls": 0,
+            "gini_branches_created": 0,
         },
     ])
     hard_leaf_rows = [
@@ -461,6 +512,7 @@ def main() -> int:
             "callback_low_gini_l1_centering_cuts": sum_family("callback_low_gini_l1_centering"),
             "callback_gini_subset_envelope_candidates": sum(int(row.get("tailored_bc_gini_subset_envelope_candidates") or 0) for row in rows),
             "callback_gini_subset_envelope_violations": sum(int(row.get("tailored_bc_gini_subset_envelope_violations") or 0) for row in rows),
+            "gini_branches_created": sum(int(row.get("tailored_bc_gini_branches_created") or 0) for row in rows),
             "fail_reason": callback_fail_reason,
         }
     ])
@@ -477,6 +529,7 @@ def main() -> int:
             "callback_low_gini_l1_centering_cuts": sum_family("callback_low_gini_l1_centering"),
             "callback_gini_subset_envelope_candidates": sum(int(row.get("tailored_bc_gini_subset_envelope_candidates") or 0) for row in rows),
             "callback_gini_subset_envelope_violations": sum(int(row.get("tailored_bc_gini_subset_envelope_violations") or 0) for row in rows),
+            "gini_branches_created": sum(int(row.get("tailored_bc_gini_branches_created") or 0) for row in rows),
             "fail_reason": callback_fail_reason,
         }
     ])
@@ -496,6 +549,7 @@ def main() -> int:
             "parent_row_compact_bc_called_any_leaf": "false",
             "leaf_solver_row": str(row["method"] in {
                 "tailored-bc-callback-smoke-test",
+                "tailored-bc-branch-callback-smoke-test",
                 "tailored-bc-cut-validity-test",
                 "gini-subset-envelope-test",
                 "low-gini-l1-centering-test",
@@ -574,6 +628,7 @@ def main() -> int:
         "- `tailored_cut_ablation.csv` records paper-safe static tailored cut guards.",
         "- `tailored_bc_vs_static.csv` separates true callback BC from static fallback.",
         "- `callback_event_summary.csv` records callback events from the fixed-interval smoke solve when callbacks are available.",
+        "- `tailored_branch_callback_smoke.csv` records a diagnostic-only CPLEX toy MIP branch-smoke row. It currently applies branch priorities and records relaxation/candidate callbacks, but CPLEX does not enter branch context in the observed run.",
         "- `interval_callback_separator_diagnostic.json` disables overlapping static tailored cut families and confirms that relaxation-point callback separators are invoked without using diagnostic evidence as a paper certificate.",
         "- `moderate_seed3301_low_gini1_callback_guarded.json` is a guarded hard-leaf diagnostic. If the in-process CPLEX callback path exceeds the outer wrapper timeout, the runner writes an honest noncertificate timeout JSON instead of leaving a missing artifact.",
         "- `source_classification.csv` preserves tailored source classes per JSON row.",
@@ -602,7 +657,7 @@ def main() -> int:
         "",
         "## Paper Claim",
         "",
-        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate compact-row consistency validation, and branch-order priority injection. It is not yet the full requested tailored branch-and-cut: verifier-backed route-plan lazy incumbent rejection, custom Gini branch creation on hard leaves, hard-leaf callback ablations, and performance-positive hard-leaf evidence remain incomplete.",
+        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, and low-Gini L1 centering rows, candidate compact-row consistency validation, and branch-order priority injection. A diagnostic branch-smoke row is present, but the current evidence still reports no observed CPLEX branch-context callback calls and no created Gini branches. It is not yet the full requested tailored branch-and-cut: verifier-backed route-plan lazy incumbent rejection, observed custom Gini branch creation on hard leaves, hard-leaf callback ablations, and performance-positive hard-leaf evidence remain incomplete.",
         "",
         "Final commit SHA: recorded in the final assistant response after commit creation.",
     ])

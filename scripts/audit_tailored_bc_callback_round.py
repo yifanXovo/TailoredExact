@@ -43,6 +43,7 @@ def main() -> int:
     raw_dir = root / "raw"
     rows: List[Dict[str, Any]] = []
     failures = 0
+    saw_branch_smoke = False
 
     for path, data in iter_json(raw_dir):
         preset = str(data.get("algorithm_preset", ""))
@@ -73,6 +74,13 @@ def main() -> int:
             reasons.append("route_mask_contaminates_tailored_certificate")
         if method == "tailored-bc-callback-smoke-test" and callback_available and status != "diagnostic_passed":
             reasons.append("callback_available_but_smoke_not_passed")
+        if method == "tailored-bc-branch-callback-smoke-test":
+            saw_branch_smoke = True
+            if callback_available and status not in {
+                "diagnostic_passed",
+                "diagnostic_branch_not_observed",
+            }:
+                reasons.append("branch_callback_smoke_unexpected_status")
 
         if reasons:
             failures += 1
@@ -88,6 +96,22 @@ def main() -> int:
             "tailored_bc_source_class": data.get("tailored_bc_source_class", ""),
             "audit_passed": not reasons,
             "failures": "|".join(reasons),
+        })
+
+    if not saw_branch_smoke:
+        failures += 1
+        rows.append({
+            "file": "",
+            "method": "tailored-bc-branch-callback-smoke-test",
+            "algorithm_preset": "",
+            "status": "missing",
+            "certified_original_problem": False,
+            "tailored_bc_enabled": False,
+            "tailored_bc_mode": "",
+            "tailored_bc_callback_available": False,
+            "tailored_bc_source_class": "",
+            "audit_passed": False,
+            "failures": "missing_branch_callback_smoke_row",
         })
 
     if not rows:

@@ -12,6 +12,7 @@
 #include "Result.hpp"
 #include "TailoredBC.hpp"
 #include "TailoredBCCuts.hpp"
+#include "TailoredBCCplexApi.hpp"
 #include "TailoredExact.hpp"
 
 #include <algorithm>
@@ -45,7 +46,7 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|interval-cutoff-oracle|primal-heuristic|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|option-consistency-test|tailored-bc-callback-smoke-test|tailored-bc-cut-validity-test|gini-subset-envelope-test|low-gini-l1-centering-test|transfer-cutset-validity-test|s-bucket-coverage-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|projection-safe-relaxed-column-test|non-elementary-relaxed-column-test|ng-relaxed-closure-test|relaxed-rmp-cg-test|frontier-relaxed-rmp-cg-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|large-relaxed-rmp-cg-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|interval-cutoff-oracle|primal-heuristic|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|option-consistency-test|tailored-bc-callback-smoke-test|tailored-bc-branch-callback-smoke-test|tailored-bc-cut-validity-test|gini-subset-envelope-test|low-gini-l1-centering-test|transfer-cutset-validity-test|s-bucket-coverage-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|projection-safe-relaxed-column-test|non-elementary-relaxed-column-test|ng-relaxed-closure-test|relaxed-rmp-cg-test|frontier-relaxed-rmp-cg-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|large-relaxed-rmp-cg-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
@@ -9256,6 +9257,10 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
     if (tailored_opt.tailored_bc_mode == "off") {
         tailored_opt.tailored_bc_mode = "callback";
     }
+    if (method == "tailored-bc-branch-callback-smoke-test") {
+        tailored_opt.tailored_bc_gini_branching = "callback";
+        tailored_opt.tailored_bc_branching_priority = "adaptive";
+    }
     ebrp::populateTailoredBCResultFields(tailored_opt, result);
 
     const ebrp::TailoredBCCutValiditySummary cuts =
@@ -9279,6 +9284,125 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
             result.tailored_bc_callback_available
                 ? "tailored_bc_callback_smoke: in-process CPLEX callback API is available"
                 : "tailored_bc_callback_smoke: blocked because current executable uses command-file CPLEX and is not linked to an in-process CPLEX callback API");
+    } else if (method == "tailored-bc-branch-callback-smoke-test") {
+        const std::filesystem::path lp_path =
+            std::filesystem::temp_directory_path() /
+            ("exactebrp_tailored_branch_smoke_" +
+             std::to_string(static_cast<long long>(
+                 std::chrono::steady_clock::now().time_since_epoch().count())) +
+             ".lp");
+        {
+            std::ofstream lp(lp_path);
+            lp << "\\ Diagnostic-only fractional knapsack used to exercise CPLEX generic branch callbacks.\n";
+            lp << "Minimize\n";
+            lp << " obj:";
+            for (int i = 1; i <= 30; ++i) {
+                const int profit = 17 + ((i * 13) % 29);
+                lp << " - " << profit << " bit_" << i;
+            }
+            lp << "\n";
+            lp << "Subject To\n";
+            const int rhs[5] = {137, 149, 126, 118, 144};
+            for (int c = 0; c < 5; ++c) {
+                lp << " cap_" << c << ":";
+                for (int i = 1; i <= 30; ++i) {
+                    const int weight = 5 + ((i * (7 + c * 3) + c * 11) % 23);
+                    if (i > 1) lp << " +";
+                    lp << " " << weight << " bit_" << i;
+                }
+                lp << " <= " << rhs[c] << "\n";
+            }
+            lp << " g_link: G - bit_1 = 0\n";
+            lp << "Bounds\n";
+            lp << " 0 <= G <= 1\n";
+            lp << "Binaries\n";
+            for (int i = 1; i <= 30; ++i) {
+                lp << " bit_" << i;
+                if (i % 10 == 0) lp << "\n";
+            }
+            if (30 % 10 != 0) lp << "\n";
+            lp << "End\n";
+        }
+        const ebrp::TailoredBCCplexApiSolveResult api =
+            ebrp::solveLpWithTailoredBCCplexApi(
+                lp_path,
+                std::max(5.0, opt.solve_time_limit > 0.0
+                    ? std::min(30.0, opt.solve_time_limit)
+                    : 10.0),
+                std::max(1, opt.compact_bc_threads > 0
+                    ? opt.compact_bc_threads
+                    : opt.mip_threads),
+                0.0, 1.0,
+                true, true, true, true,
+                tailored_opt.tailored_bc_gini_branch_min_width,
+                {}, {}, 0);
+        std::error_code remove_ec;
+        std::filesystem::remove(lp_path, remove_ec);
+
+        result.tailored_bc_callback_available = api.available;
+        result.tailored_bc_callback_fail_reason =
+            api.fail_reason.empty() ? "none" : api.fail_reason;
+        result.tailored_bc_mode = api.available ? "callback" : "static_fallback";
+        result.tailored_bc_user_cut_callback_enabled = api.available;
+        result.tailored_bc_lazy_callback_enabled = api.available;
+        result.tailored_bc_incumbent_callback_enabled = api.available;
+        result.tailored_bc_branch_callback_enabled = api.available;
+        result.tailored_bc_branch_priority_enabled =
+            api.branch_priorities_applied > 0;
+        result.tailored_bc_gini_branch_mode = "branch_callback";
+        result.tailored_bc_relaxation_callback_calls =
+            api.relaxation_callback_calls;
+        result.tailored_bc_candidate_callback_calls =
+            api.candidate_callback_calls;
+        result.tailored_bc_branch_callback_calls =
+            api.branch_callback_calls;
+        result.tailored_bc_progress_callback_calls =
+            api.progress_callback_calls;
+        result.tailored_bc_user_cuts_added_total = api.user_cuts_added;
+        result.tailored_bc_user_cuts_added_by_family =
+            "callback_gini_interval_cap=" +
+            std::to_string(api.callback_gini_interval_cuts_added) +
+            ";callback_visit_inventory_linking=" +
+            std::to_string(api.callback_visit_inventory_cuts_added) +
+            ";callback_gini_subset_envelope=" +
+            std::to_string(api.callback_gini_subset_envelope_cuts_added) +
+            ";callback_low_gini_l1_centering=" +
+            std::to_string(api.callback_low_gini_l1_cuts_added);
+        result.tailored_bc_lazy_rejections_total = api.lazy_rejections;
+        result.tailored_bc_lazy_rejections_by_reason =
+            "candidate_gini_interval_violation=" +
+            std::to_string(api.lazy_gini_interval_rejections) +
+            ";candidate_visit_inventory_violation=" +
+            std::to_string(api.lazy_visit_inventory_rejections) +
+            ";candidate_gini_subset_envelope_violation=" +
+            std::to_string(api.lazy_gini_subset_envelope_rejections) +
+            ";candidate_low_gini_l1_violation=" +
+            std::to_string(api.lazy_low_gini_l1_rejections);
+        result.tailored_bc_incumbents_seen = api.incumbents_seen;
+        result.tailored_bc_incumbents_verified = api.incumbents_verified;
+        result.tailored_bc_incumbents_rejected = api.incumbents_rejected;
+        result.tailored_bc_gini_branches_created = api.gini_branches_created;
+        result.tailored_bc_branching_priorities_summary =
+            "mode=adaptive;gini_branch=branch_callback;cplex_priorities=" +
+            std::to_string(api.branch_priorities_applied) +
+            ";priority_status=" + api.branch_priority_status +
+            ";branch_callback_calls=" +
+            std::to_string(api.branch_callback_calls) +
+            ";gini_branches_created=" +
+            std::to_string(api.gini_branches_created);
+        result.status = (api.available && api.branch_callback_calls > 0 &&
+                         api.gini_branches_created > 0)
+            ? "diagnostic_passed"
+            : (api.available ? "diagnostic_branch_not_observed"
+                             : "diagnostic_blocked");
+        result.certificate =
+            "diagnostic only: toy MIP exercised CPLEX branch callback boundary";
+        result.notes.push_back(
+            "tailored_bc_branch_callback_smoke_test: solves a diagnostic-only fractional knapsack LP/MIP through the dynamic CPLEX C API; it is not ExactEBRP certificate evidence");
+        result.notes.push_back(
+            "branch callback calls=" + std::to_string(api.branch_callback_calls) +
+            ", gini branches created=" +
+            std::to_string(api.gini_branches_created));
     } else if (method == "tailored-bc-cut-validity-test") {
         const bool ok = cuts.gini_subset_envelope_valid &&
             cuts.low_gini_l1_centering_valid &&
@@ -16393,6 +16517,7 @@ int main(int argc, char** argv) {
             } else if (opt.method == "option-consistency-test") {
                 results.push_back(solveOptionConsistencyDiagnostic(instance, opt));
             } else if (opt.method == "tailored-bc-callback-smoke-test" ||
+                       opt.method == "tailored-bc-branch-callback-smoke-test" ||
                        opt.method == "tailored-bc-cut-validity-test" ||
                        opt.method == "gini-subset-envelope-test" ||
                        opt.method == "low-gini-l1-centering-test" ||

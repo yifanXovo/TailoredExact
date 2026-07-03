@@ -20,4 +20,6 @@ The current callback implementation is intentionally narrow:
 - wire a one-shot Gini interval split through `CPXcallbackmakebranch` for rows that explicitly request callback Gini branching;
 - count callback events and solve the model through `CPXmipopt`.
 
-This proves the callback boundary is now technically open. It does not yet implement the full requested tailored branch-and-cut policy: independent route-plan incumbent verification/rejection, hard-leaf-validated custom Gini branches, and hard-leaf callback cut separation remain incomplete.
+The callback package includes a diagnostic branch-smoke row that uses a small multidimensional binary knapsack to test branch callback reachability.  With current settings, the row applies branch priorities and receives relaxation/candidate callbacks, but `tailored_bc_branch_callback_calls=0`; therefore the branch callback boundary is wired but not yet observed in evidence.
+
+This proves the callback boundary is now technically open for relaxation and candidate contexts. It does not yet implement the full requested tailored branch-and-cut policy: independent route-plan incumbent verification/rejection, observed custom Gini branches on hard leaves, and hard-leaf callback cut separation remain incomplete.
