@@ -324,6 +324,15 @@ struct CallbackState {
     std::atomic<long long> gini_subset_envelope_violations{0};
     std::atomic<long long> low_gini_l1_cuts_added{0};
     std::atomic<long long> low_gini_l1_violations{0};
+    std::atomic<long long> transfer_cutset_cuts_added{0};
+    std::atomic<long long> transfer_cutset_candidates{0};
+    std::atomic<long long> transfer_cutset_violations{0};
+    std::atomic<long long> support_duration_pair_cuts_added{0};
+    std::atomic<long long> support_duration_pair_candidates{0};
+    std::atomic<long long> support_duration_pair_violations{0};
+    std::atomic<long long> support_duration_triple_cuts_added{0};
+    std::atomic<long long> support_duration_triple_candidates{0};
+    std::atomic<long long> support_duration_triple_violations{0};
     std::atomic<long long> lazy_rejections{0};
     std::atomic<long long> lazy_gini_interval_rejections{0};
     std::atomic<long long> lazy_visit_inventory_rejections{0};
@@ -354,6 +363,8 @@ struct CallbackState {
     std::atomic<long long> gini_branches_created{0};
     std::atomic<bool> gini_cut_added{false};
     std::atomic<bool> gini_branch_created{false};
+    std::atomic<bool> transfer_cutset_separated{false};
+    std::atomic<bool> support_duration_separated{false};
 };
 
 void atomicMax(std::atomic<double>& target, double value) {
@@ -434,6 +445,41 @@ bool addOneUserCut(CallbackState& state,
         return true;
     }
     return false;
+}
+
+int safeCol(const std::vector<std::vector<int>>& cols, int k, int i);
+
+double callbackDistance(const CallbackState& state, int from, int to) {
+    if (from < 0 || to < 0 || from >= state.node_count || to >= state.node_count) {
+        return std::numeric_limits<double>::infinity();
+    }
+    const std::size_t idx = static_cast<std::size_t>(from) *
+        static_cast<std::size_t>(state.node_count) + static_cast<std::size_t>(to);
+    if (idx >= state.distance_matrix.size()) {
+        return std::numeric_limits<double>::infinity();
+    }
+    return state.distance_matrix[idx];
+}
+
+double callbackPairCycleLowerBound(const CallbackState& state, int a, int b) {
+    return std::min(callbackDistance(state, 0, a) + callbackDistance(state, a, b) +
+                        callbackDistance(state, b, 0),
+                    callbackDistance(state, 0, b) + callbackDistance(state, b, a) +
+                        callbackDistance(state, a, 0));
+}
+
+double callbackTripleCycleLowerBound(const CallbackState& state, int a, int b, int c) {
+    const int s[3] = {a, b, c};
+    int perm[3] = {0, 1, 2};
+    double best = std::numeric_limits<double>::infinity();
+    do {
+        const double travel = callbackDistance(state, 0, s[perm[0]]) +
+            callbackDistance(state, s[perm[0]], s[perm[1]]) +
+            callbackDistance(state, s[perm[1]], s[perm[2]]) +
+            callbackDistance(state, s[perm[2]], 0);
+        best = std::min(best, travel);
+    } while (std::next_permutation(perm, perm + 3));
+    return best;
 }
 
 void separateVisitInventoryLinking(CallbackState& state,
@@ -583,6 +629,179 @@ void separateLowGiniL1Centering(CallbackState& state,
         state.low_gini_l1_violations.fetch_add(1);
         if (addOneUserCut(state, context, terms, 'L', 0.0)) {
             state.low_gini_l1_cuts_added.fetch_add(1);
+        }
+    }
+}
+
+void separateTransferCutset(CallbackState& state,
+                            CPXCALLBACKCONTEXTptr context) {
+    if (state.ncols <= 0 || state.p_cols.empty() || state.d_cols.empty()) return;
+    bool expected = false;
+    if (!state.transfer_cutset_separated.compare_exchange_strong(expected, true)) {
+        return;
+    }
+    std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
+    double obj = 0.0;
+    if (state.api->callbackgetrelaxationpoint(
+            context, x.data(), 0, state.ncols - 1, &obj) != 0) {
+        return;
+    }
+    constexpr double tol = 1e-6;
+    const int vehicle_count =
+        std::min(static_cast<int>(state.p_cols.size()),
+                 static_cast<int>(state.d_cols.size()));
+    const int station_count = vehicle_count > 0
+        ? std::min(static_cast<int>(state.p_cols.front().size()),
+                   static_cast<int>(state.d_cols.front().size()))
+        : 0;
+    auto trySubset = [&](int k, const std::vector<int>& subset,
+                         const std::vector<std::pair<int, double>>& pickup_terms,
+                         double total_pickup) {
+        state.transfer_cutset_candidates.fetch_add(1);
+        std::vector<std::pair<int, double>> terms = pickup_terms;
+        double lhs = -total_pickup;
+        bool has_drop = false;
+        for (int j : subset) {
+            const int d = safeCol(state.d_cols, k, j);
+            if (d < 0) return;
+            terms.push_back({d, 1.0});
+            lhs += x[static_cast<std::size_t>(d)];
+            has_drop = true;
+        }
+        if (!has_drop) return;
+        if (lhs > tol) {
+            state.transfer_cutset_violations.fetch_add(1);
+            if (addOneUserCut(state, context, terms, 'L', 0.0)) {
+                state.transfer_cutset_cuts_added.fetch_add(1);
+            }
+        }
+    };
+    for (int k = 0; k < vehicle_count; ++k) {
+        std::vector<std::pair<int, double>> pickup_terms;
+        double total_pickup = 0.0;
+        for (int i = 1; i < station_count; ++i) {
+            const int p = safeCol(state.p_cols, k, i);
+            if (p < 0) continue;
+            pickup_terms.push_back({p, -1.0});
+            total_pickup += x[static_cast<std::size_t>(p)];
+        }
+        if (pickup_terms.empty()) continue;
+        for (int i = 1; i < station_count; ++i) {
+            trySubset(k, {i}, pickup_terms, total_pickup);
+        }
+        for (int i = 1; i < station_count; ++i) {
+            for (int j = i + 1; j < station_count; ++j) {
+                trySubset(k, {i, j}, pickup_terms, total_pickup);
+            }
+        }
+        for (int i = 1; i < station_count; ++i) {
+            for (int j = i + 1; j < station_count; ++j) {
+                for (int h = j + 1; h < station_count; ++h) {
+                    trySubset(k, {i, j, h}, pickup_terms, total_pickup);
+                }
+            }
+        }
+    }
+}
+
+void separateSupportDurationCover(CallbackState& state,
+                                  CPXCALLBACKCONTEXTptr context) {
+    if (state.ncols <= 0 || state.z_cols.empty() ||
+        state.distance_matrix.empty() || state.node_count <= 0 ||
+        state.total_time_limit <= 0.0 || state.handling_unit <= 0.0) {
+        return;
+    }
+    bool expected = false;
+    if (!state.support_duration_separated.compare_exchange_strong(expected, true)) {
+        return;
+    }
+    std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
+    double obj = 0.0;
+    if (state.api->callbackgetrelaxationpoint(
+            context, x.data(), 0, state.ncols - 1, &obj) != 0) {
+        return;
+    }
+    constexpr double tol = 1e-6;
+    constexpr int max_fractional_support = 16;
+    const int vehicle_count = static_cast<int>(state.z_cols.size());
+    const int station_count = std::min(
+        state.node_count,
+        vehicle_count > 0 ? static_cast<int>(state.z_cols.front().size()) : 0);
+
+    auto addCover = [&](int k, const std::vector<int>& subset, int rhs) {
+        std::vector<std::pair<int, double>> terms;
+        terms.reserve(subset.size());
+        for (int i : subset) {
+            const int z = safeCol(state.z_cols, k, i);
+            if (z < 0) return false;
+            terms.push_back({z, 1.0});
+        }
+        return addOneUserCut(state, context, terms, 'L', static_cast<double>(rhs));
+    };
+
+    for (int k = 0; k < vehicle_count; ++k) {
+        std::vector<std::pair<double, int>> support;
+        support.reserve(static_cast<std::size_t>(std::max(0, station_count - 1)));
+        for (int i = 1; i < station_count; ++i) {
+            const int z = safeCol(state.z_cols, k, i);
+            if (z < 0) continue;
+            const double val = x[static_cast<std::size_t>(z)];
+            if (val > tol) support.push_back({val, i});
+        }
+        std::sort(support.begin(), support.end(),
+                  [](const auto& a, const auto& b) {
+                      if (std::fabs(a.first - b.first) > 1e-12) return a.first > b.first;
+                      return a.second < b.second;
+                  });
+        if (support.size() > static_cast<std::size_t>(max_fractional_support)) {
+            support.resize(static_cast<std::size_t>(max_fractional_support));
+        }
+        const int n = static_cast<int>(support.size());
+        for (int ai = 0; ai < n; ++ai) {
+            const int a = support[static_cast<std::size_t>(ai)].second;
+            const double za = support[static_cast<std::size_t>(ai)].first;
+            for (int bi = ai + 1; bi < n; ++bi) {
+                const int b = support[static_cast<std::size_t>(bi)].second;
+                const double cycle = callbackPairCycleLowerBound(state, a, b);
+                state.support_duration_pair_candidates.fetch_add(1);
+                if (!std::isfinite(cycle) ||
+                    cycle + state.handling_unit <= state.total_time_limit + 1e-9) {
+                    continue;
+                }
+                const double lhs = za + support[static_cast<std::size_t>(bi)].first;
+                if (lhs > 1.0 + tol) {
+                    state.support_duration_pair_violations.fetch_add(1);
+                    if (addCover(k, {a, b}, 1)) {
+                        state.support_duration_pair_cuts_added.fetch_add(1);
+                    }
+                }
+            }
+        }
+        for (int ai = 0; ai < n; ++ai) {
+            const int a = support[static_cast<std::size_t>(ai)].second;
+            const double za = support[static_cast<std::size_t>(ai)].first;
+            for (int bi = ai + 1; bi < n; ++bi) {
+                const int b = support[static_cast<std::size_t>(bi)].second;
+                const double zb = support[static_cast<std::size_t>(bi)].first;
+                for (int ci = bi + 1; ci < n; ++ci) {
+                    const int c = support[static_cast<std::size_t>(ci)].second;
+                    const double cycle = callbackTripleCycleLowerBound(state, a, b, c);
+                    state.support_duration_triple_candidates.fetch_add(1);
+                    if (!std::isfinite(cycle) ||
+                        cycle + 2.0 * state.handling_unit <=
+                            state.total_time_limit + 1e-9) {
+                        continue;
+                    }
+                    const double lhs =
+                        za + zb + support[static_cast<std::size_t>(ci)].first;
+                    if (lhs > 2.0 + tol) {
+                        state.support_duration_triple_violations.fetch_add(1);
+                        if (addCover(k, {a, b, c}, 2)) {
+                            state.support_duration_triple_cuts_added.fetch_add(1);
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -1251,6 +1470,8 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
         separateVisitInventoryLinking(*state, context);
         separateGiniSubsetEnvelope(*state, context);
         separateLowGiniL1Centering(*state, context);
+        separateTransferCutset(*state, context);
+        separateSupportDurationCover(*state, context);
     } else if (contextid == kContextCandidate) {
         ++state->candidate_calls;
         ++state->incumbents_seen;
@@ -1515,6 +1736,24 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         cb_state.low_gini_l1_cuts_added.load();
     out.callback_low_gini_l1_violations =
         cb_state.low_gini_l1_violations.load();
+    out.callback_transfer_cutset_cuts_added =
+        cb_state.transfer_cutset_cuts_added.load();
+    out.callback_transfer_cutset_candidates =
+        cb_state.transfer_cutset_candidates.load();
+    out.callback_transfer_cutset_violations =
+        cb_state.transfer_cutset_violations.load();
+    out.callback_support_duration_pair_cuts_added =
+        cb_state.support_duration_pair_cuts_added.load();
+    out.callback_support_duration_pair_candidates =
+        cb_state.support_duration_pair_candidates.load();
+    out.callback_support_duration_pair_violations =
+        cb_state.support_duration_pair_violations.load();
+    out.callback_support_duration_triple_cuts_added =
+        cb_state.support_duration_triple_cuts_added.load();
+    out.callback_support_duration_triple_candidates =
+        cb_state.support_duration_triple_candidates.load();
+    out.callback_support_duration_triple_violations =
+        cb_state.support_duration_triple_violations.load();
     out.lazy_rejections = cb_state.lazy_rejections.load();
     out.lazy_gini_interval_rejections =
         cb_state.lazy_gini_interval_rejections.load();

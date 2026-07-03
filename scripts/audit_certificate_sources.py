@@ -30,6 +30,7 @@ def main() -> int:
         "mixed_certified",
         "mixed_noncertified",
         "compact_bc_leaf_diagnostic",
+        "diagnostic",
         "benchmark_only",
         "wrapper_checkpoint_only",
         "model_size_limit",

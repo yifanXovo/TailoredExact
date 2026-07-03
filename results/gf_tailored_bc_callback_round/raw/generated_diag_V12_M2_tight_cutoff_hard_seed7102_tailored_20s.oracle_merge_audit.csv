@@ -1,0 +1,8 @@
+interval_id,gamma_L,gamma_U,original_status,merged_status,oracle_available,oracle_merge_applied,merge_reason,coverage_exact,gap_or_overlap
+0,0,0.229166666667,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
+1,0.229166666667,0.458333333333,unresolved,unresolved,true,false,"oracle_not_mergeable:basis=interval_exact_cutoff_mip_timeout;status=interval_unresolved_timeout;solver=time limit exceeded, no integer solution",true,false
+2,0.458333333333,0.6875,replaced_by_children,replaced_by_children,false,false,no_oracle_result_for_exact_leaf,true,false
+3,0.6875,0.916666666667,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
+4,0.458333333333,0.572916666667,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
+5,0.572916666667,0.6875,bound_fathomed,bound_fathomed,false,false,no_oracle_result_for_exact_leaf,true,false
+__summary__,,,,certificate_incomplete,,,final_open_leaf_count=1,true,false

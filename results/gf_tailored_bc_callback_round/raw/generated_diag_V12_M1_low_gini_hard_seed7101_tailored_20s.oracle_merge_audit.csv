@@ -1,0 +1,6 @@
+interval_id,gamma_L,gamma_U,original_status,merged_status,oracle_available,oracle_merge_applied,merge_reason,coverage_exact,gap_or_overlap
+0,0,0.00742725444047,unprocessed_relevant,bound_fathomed,true,true,exact matching leaf closed by proven infeasible cutoff oracle,true,false
+1,0.00742725444047,0.0148545088809,unprocessed_relevant,unprocessed_relevant,true,false,"oracle_not_mergeable:basis=interval_exact_cutoff_mip_timeout;status=interval_unresolved_timeout;solver=time limit exceeded, no integer solution",true,false
+2,0.0148545088809,0.0222817633214,unprocessed_relevant,unprocessed_relevant,true,false,"oracle_not_mergeable:basis=interval_exact_cutoff_mip_timeout;status=interval_unresolved_timeout;solver=time limit exceeded, no integer solution",true,false
+3,0.0222817633214,0.0297090177619,unprocessed_relevant,bound_fathomed,true,true,exact matching leaf closed by proven infeasible cutoff oracle,true,false
+__summary__,,,,certificate_incomplete,,,final_open_leaf_count=2,true,false

@@ -2738,7 +2738,13 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     ";callback_gini_subset_envelope=" +
                     std::to_string(api_solve.callback_gini_subset_envelope_cuts_added) +
                     ";callback_low_gini_l1_centering=" +
-                    std::to_string(api_solve.callback_low_gini_l1_cuts_added);
+                    std::to_string(api_solve.callback_low_gini_l1_cuts_added) +
+                    ";callback_transfer_cutset=" +
+                    std::to_string(api_solve.callback_transfer_cutset_cuts_added) +
+                    ";callback_support_duration_pair=" +
+                    std::to_string(api_solve.callback_support_duration_pair_cuts_added) +
+                    ";callback_support_duration_triple=" +
+                    std::to_string(api_solve.callback_support_duration_triple_cuts_added);
                 result.tailored_bc_gini_subset_envelope_candidates +=
                     api_solve.callback_gini_subset_envelope_candidates;
                 result.tailored_bc_gini_subset_envelope_violations +=
@@ -2749,6 +2755,24 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     api_solve.callback_low_gini_l1_violations;
                 result.tailored_bc_low_gini_l1_centering_rows_added +=
                     api_solve.callback_low_gini_l1_cuts_added;
+                result.tailored_bc_transfer_cutset_cuts_added +=
+                    api_solve.callback_transfer_cutset_cuts_added;
+                result.tailored_bc_transfer_cutset_candidates +=
+                    api_solve.callback_transfer_cutset_candidates;
+                result.tailored_bc_transfer_cutset_violations +=
+                    api_solve.callback_transfer_cutset_violations;
+                result.tailored_bc_support_duration_pair_cuts_added +=
+                    api_solve.callback_support_duration_pair_cuts_added;
+                result.tailored_bc_support_duration_pair_candidates +=
+                    api_solve.callback_support_duration_pair_candidates;
+                result.tailored_bc_support_duration_pair_violations +=
+                    api_solve.callback_support_duration_pair_violations;
+                result.tailored_bc_support_duration_triple_cuts_added +=
+                    api_solve.callback_support_duration_triple_cuts_added;
+                result.tailored_bc_support_duration_triple_candidates +=
+                    api_solve.callback_support_duration_triple_candidates;
+                result.tailored_bc_support_duration_triple_violations +=
+                    api_solve.callback_support_duration_triple_violations;
                 result.notes.push_back(
                     "CPLEX dynamic callback API backend used for tailored BC; callback events relaxation="
                     + std::to_string(api_solve.relaxation_callback_calls)

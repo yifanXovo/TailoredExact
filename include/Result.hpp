@@ -716,6 +716,14 @@ struct SolveResult {
     long long tailored_bc_low_gini_l1_centering_violations = 0;
     long long tailored_bc_subset_inventory_imbalance_cuts_added = 0;
     long long tailored_bc_transfer_cutset_cuts_added = 0;
+    long long tailored_bc_transfer_cutset_candidates = 0;
+    long long tailored_bc_transfer_cutset_violations = 0;
+    long long tailored_bc_support_duration_pair_cuts_added = 0;
+    long long tailored_bc_support_duration_pair_candidates = 0;
+    long long tailored_bc_support_duration_pair_violations = 0;
+    long long tailored_bc_support_duration_triple_cuts_added = 0;
+    long long tailored_bc_support_duration_triple_candidates = 0;
+    long long tailored_bc_support_duration_triple_violations = 0;
     long long gini_spread_cuts_added = 0;
     long long compact_bc_direct_gini_cap_rows_added = 0;
     long long compact_bc_direct_gini_floor_rows_added = 0;
