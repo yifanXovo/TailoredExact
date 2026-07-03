@@ -118,7 +118,8 @@ std::string inferMethodScope(const SolveResult& result) {
     const std::string method = lowerCopy(result.method);
     const std::string text = auditText(result);
     if (method == "gcap-frontier" &&
-        result.algorithm_preset == "paper-gf-compact-bc") {
+        (result.algorithm_preset == "paper-gf-compact-bc" ||
+         result.algorithm_preset == "paper-gf-tailored-bc")) {
         return "original_compact";
     }
     if (method == "gcap-frontier" || containsText(method, "full route-load bpc") ||
@@ -176,7 +177,8 @@ bool inferSolvesOriginalObjective(const SolveResult& result) {
 bool inferIsBpc(const SolveResult& result) {
     const std::string method = lowerCopy(result.method);
     if (method == "gcap-frontier" &&
-        result.algorithm_preset == "paper-gf-compact-bc") {
+        (result.algorithm_preset == "paper-gf-compact-bc" ||
+         result.algorithm_preset == "paper-gf-tailored-bc")) {
         return false;
     }
     return method == "gcap-frontier" || containsText(method, "full route-load bpc");
@@ -186,6 +188,11 @@ std::string inferCertificateType(const SolveResult& result) {
     const std::string method = lowerCopy(result.method);
     const std::string text = auditText(result);
     if (method == "gcap-frontier") {
+        if (result.algorithm_preset == "paper-gf-tailored-bc") {
+            return result.status == "optimal"
+                ? "full_gini_frontier_cplex_managed_tailored_bc"
+                : "incomplete_gini_frontier_cplex_managed_tailored_bc";
+        }
         if (result.algorithm_preset == "paper-gf-compact-bc") {
             return result.status == "optimal"
                 ? "full_gini_frontier_compact_interval_bc"
@@ -295,7 +302,8 @@ bool inferCertifiedOriginalProblem(const SolveResult& result) {
     if (result.gap > 1e-7) return false;
     if (!nearlyEqual(result.lower_bound, result.upper_bound)) return false;
     if (!nearlyEqual(result.objective, result.upper_bound)) return false;
-    if (result.algorithm_preset == "paper-gf-compact-bc") {
+    if (result.algorithm_preset == "paper-gf-compact-bc" ||
+        result.algorithm_preset == "paper-gf-tailored-bc") {
         if (result.method != "gcap-frontier") return false;
         if (result.unresolved_intervals != 0 || result.invalid_bound_intervals != 0) return false;
         if (result.open_nodes != 0) return false;

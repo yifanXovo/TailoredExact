@@ -16383,6 +16383,61 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     }
 }
 
+std::string inferPlateauReasonForFinalization(const ebrp::SolveResult& result);
+
+void writePreAutoOracleParentJson(const ebrp::SolveOptions& opt,
+                                  const ebrp::SolveResult& result) {
+    if (opt.out_path.empty() || !opt.auto_interval_oracle) return;
+    if (!isPaperTracePreset(result.algorithm_preset)) return;
+
+    ebrp::SolveResult checkpoint = result;
+    applySealedRunProvenance(opt, checkpoint);
+    if (checkpoint.finalization_source.empty()) {
+        checkpoint.finalization_source =
+            checkpoint.status == "optimal"
+                ? "solver_final_json"
+                : "solver_final_noncertified_pre_auto_oracle";
+    }
+    if (checkpoint.best_valid_lb_seen <= 0.0) {
+        checkpoint.best_valid_lb_seen = checkpoint.lower_bound;
+    }
+    if (checkpoint.best_valid_gap_seen <= 0.0 ||
+        checkpoint.best_valid_gap_seen > checkpoint.gap) {
+        checkpoint.best_valid_gap_seen = checkpoint.gap;
+    }
+    if (checkpoint.best_valid_ledger_checkpoint.empty()) {
+        checkpoint.best_valid_ledger_checkpoint = opt.out_path;
+    }
+    if (checkpoint.best_valid_ledger_time <= 0.0) {
+        checkpoint.best_valid_ledger_time = checkpoint.runtime_seconds;
+    }
+    checkpoint.final_json_uses_best_checkpoint = true;
+    checkpoint.interrupted_run_best_bound_preserved = true;
+    checkpoint.solver_finalization_reached = true;
+    checkpoint.wrapper_synthesized_final_json = false;
+    checkpoint.process_return_code = 0;
+    checkpoint.abnormal_exit_detected = false;
+    if (checkpoint.abnormal_exit_reason.empty()) {
+        checkpoint.abnormal_exit_reason = "none";
+    }
+    if (checkpoint.last_progress_event.empty()) {
+        checkpoint.last_progress_event =
+            checkpoint.status == "optimal" ? "final_summary" : "solver_returned";
+    }
+    if (checkpoint.plateau_reason.empty()) {
+        checkpoint.plateau_reason = inferPlateauReasonForFinalization(checkpoint);
+    }
+    checkpoint.result_file = opt.out_path;
+    checkpoint.log_file = opt.log_path;
+    checkpoint.notes.push_back(
+        "pre-auto-oracle parent JSON written before optional interval leaf closure; "
+        "if post-solve auto-oracle finishes this file is overwritten by the final ledger");
+    finalizePaperModuleFields(checkpoint);
+    std::vector<ebrp::SolveResult> checkpoint_results;
+    checkpoint_results.push_back(std::move(checkpoint));
+    ebrp::writeTextFile(opt.out_path, ebrp::resultsToJson(checkpoint_results));
+}
+
 std::string inferPlateauReasonForFinalization(const ebrp::SolveResult& result) {
     if (result.status == "optimal") return "certified";
     if (result.auto_interval_oracle_called &&
@@ -16641,6 +16696,7 @@ int main(int argc, char** argv) {
             auto& r = results.back();
             initializeScalabilityFields(instance, effective_opt, r);
             applyRunConfigSnapshot(buildRunConfigSnapshot(instance, effective_opt), r);
+            writePreAutoOracleParentJson(effective_opt, r);
             runAutoIntervalOracleClosure(instance, effective_opt, r);
             applySealedRunProvenance(effective_opt, r);
             if (r.finalization_source.empty()) {
