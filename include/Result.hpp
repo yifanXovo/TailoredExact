@@ -714,6 +714,8 @@ struct SolveResult {
     long long tailored_bc_low_gini_l1_centering_vars = 0;
     long long tailored_bc_low_gini_l1_centering_rows_added = 0;
     long long tailored_bc_low_gini_l1_centering_violations = 0;
+    long long tailored_bc_variable_s_centering_cuts_added = 0;
+    long long tailored_bc_variable_s_centering_violations = 0;
     long long tailored_bc_subset_inventory_imbalance_cuts_added = 0;
     long long tailored_bc_subset_inventory_imbalance_candidates = 0;
     long long tailored_bc_subset_inventory_imbalance_violations = 0;
