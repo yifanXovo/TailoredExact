@@ -52,6 +52,12 @@ struct TailoredBCCplexApiSolveResult {
     long long callback_support_duration_triple_cuts_added = 0;
     long long callback_support_duration_triple_candidates = 0;
     long long callback_support_duration_triple_violations = 0;
+    long long callback_support_duration_quad_cuts_added = 0;
+    long long callback_support_duration_quad_candidates = 0;
+    long long callback_support_duration_quad_violations = 0;
+    long long callback_support_duration_lifted_cuts_added = 0;
+    long long callback_support_duration_lifted_candidates = 0;
+    long long callback_support_duration_lifted_violations = 0;
     long long lazy_rejections = 0;
     long long lazy_gini_interval_rejections = 0;
     long long lazy_visit_inventory_rejections = 0;
@@ -108,6 +114,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     int node_count,
     double total_time_limit,
     double handling_unit,
+    const std::string& support_duration_cover_mode,
     double lambda,
     double cutoff_value,
     int vehicle_count);

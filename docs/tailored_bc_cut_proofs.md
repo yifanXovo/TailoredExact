@@ -72,7 +72,7 @@ When this value exceeds `T_k`, no feasible original route for vehicle `k` can vi
 
 `sum_{i in A} z[k,i] <= |A| - 1`
 
-is therefore valid. The callback implementation currently separates only the violated pair and triple cover rows from high-support relaxation points. It does not add the static model's conditional big-M duration rows in callback form. Quad and lifted support-duration cuts remain future work.
+is therefore valid. The callback implementation separates violated pair, triple, and quad cover rows from high-support relaxation points. It also computes a lifted right-hand side `alpha(A)` for each separated small subset: `alpha(A)` is the largest cardinality of a sub-subset whose depot-cycle lower bound plus `ceil(|B|/2) * cunit` handling lower bound does not prove infeasibility. If every sub-subset of cardinality `t` is infeasible by this lower-bound test, then no original route can visit `t` stations from `A`; therefore `sum_{i in A} z[k,i] <= alpha(A)` is valid. This lifting is conservative because lower-bound feasibility is used only to avoid cutting possibly feasible sub-subsets. The callback does not add the static model's conditional big-M duration rows in callback form.
 
 ## S-Bucket Refinement
 

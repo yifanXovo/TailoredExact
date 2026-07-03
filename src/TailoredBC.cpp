@@ -66,6 +66,8 @@ void populateTailoredBCResultFields(const SolveOptions& options,
         ";gini_branch=" + branch.mode +
         ";priorities=" + std::to_string(branch.priorities_assigned) +
         ";reason=" + branch.reason;
+    result.tailored_bc_support_duration_cover_mode =
+        options.tailored_bc_support_duration_cover_mode;
     result.tailored_bc_source_class = tailoredBCSourceClass(result);
 }
 

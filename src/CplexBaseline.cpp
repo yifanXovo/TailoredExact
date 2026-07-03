@@ -2625,6 +2625,7 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 instance.V + 1,
                 instance.total_time_limit,
                 instance.pickup_time + instance.drop_time,
+                options.tailored_bc_support_duration_cover_mode,
                 options.lambda,
                 cutoff.incumbent_ub - cutoff.epsilon,
                 instance.M);
@@ -2748,7 +2749,11 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     ";callback_support_duration_pair=" +
                     std::to_string(api_solve.callback_support_duration_pair_cuts_added) +
                     ";callback_support_duration_triple=" +
-                    std::to_string(api_solve.callback_support_duration_triple_cuts_added);
+                    std::to_string(api_solve.callback_support_duration_triple_cuts_added) +
+                    ";callback_support_duration_quad=" +
+                    std::to_string(api_solve.callback_support_duration_quad_cuts_added) +
+                    ";callback_support_duration_lifted=" +
+                    std::to_string(api_solve.callback_support_duration_lifted_cuts_added);
                 result.tailored_bc_gini_subset_envelope_candidates +=
                     api_solve.callback_gini_subset_envelope_candidates;
                 result.tailored_bc_gini_subset_envelope_violations +=
@@ -2783,6 +2788,18 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     api_solve.callback_support_duration_triple_candidates;
                 result.tailored_bc_support_duration_triple_violations +=
                     api_solve.callback_support_duration_triple_violations;
+                result.tailored_bc_support_duration_quad_cuts_added +=
+                    api_solve.callback_support_duration_quad_cuts_added;
+                result.tailored_bc_support_duration_quad_candidates +=
+                    api_solve.callback_support_duration_quad_candidates;
+                result.tailored_bc_support_duration_quad_violations +=
+                    api_solve.callback_support_duration_quad_violations;
+                result.tailored_bc_support_duration_lifted_cuts_added +=
+                    api_solve.callback_support_duration_lifted_cuts_added;
+                result.tailored_bc_support_duration_lifted_candidates +=
+                    api_solve.callback_support_duration_lifted_candidates;
+                result.tailored_bc_support_duration_lifted_violations +=
+                    api_solve.callback_support_duration_lifted_violations;
                 result.notes.push_back(
                     "CPLEX dynamic callback API backend used for tailored BC; callback events relaxation="
                     + std::to_string(api_solve.relaxation_callback_calls)

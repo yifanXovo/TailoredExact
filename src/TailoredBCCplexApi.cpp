@@ -11,6 +11,7 @@
 #include <cstring>
 #include <filesystem>
 #include <limits>
+#include <numeric>
 #include <set>
 #include <sstream>
 #include <string>
@@ -304,6 +305,7 @@ struct CallbackState {
     int node_count = 0;
     double total_time_limit = 0.0;
     double handling_unit = 0.0;
+    std::string support_duration_cover_mode = "support_cover_lifted";
     double lambda = 0.0;
     double cutoff_value = std::numeric_limits<double>::infinity();
     double gamma_L = 0.0;
@@ -336,6 +338,12 @@ struct CallbackState {
     std::atomic<long long> support_duration_triple_cuts_added{0};
     std::atomic<long long> support_duration_triple_candidates{0};
     std::atomic<long long> support_duration_triple_violations{0};
+    std::atomic<long long> support_duration_quad_cuts_added{0};
+    std::atomic<long long> support_duration_quad_candidates{0};
+    std::atomic<long long> support_duration_quad_violations{0};
+    std::atomic<long long> support_duration_lifted_cuts_added{0};
+    std::atomic<long long> support_duration_lifted_candidates{0};
+    std::atomic<long long> support_duration_lifted_violations{0};
     std::atomic<long long> lazy_rejections{0};
     std::atomic<long long> lazy_gini_interval_rejections{0};
     std::atomic<long long> lazy_visit_inventory_rejections{0};
@@ -484,6 +492,46 @@ double callbackTripleCycleLowerBound(const CallbackState& state, int a, int b, i
             callbackDistance(state, s[perm[2]], 0);
         best = std::min(best, travel);
     } while (std::next_permutation(perm, perm + 3));
+    return best;
+}
+
+double callbackSubsetCycleLowerBound(const CallbackState& state,
+                                     const std::vector<int>& subset) {
+    if (subset.empty()) return 0.0;
+    if (subset.size() == 1) {
+        return callbackDistance(state, 0, subset.front()) +
+               callbackDistance(state, subset.front(), 0);
+    }
+    if (subset.size() == 2) {
+        return callbackPairCycleLowerBound(state, subset[0], subset[1]);
+    }
+    if (subset.size() == 3) {
+        return callbackTripleCycleLowerBound(state, subset[0], subset[1], subset[2]);
+    }
+    if (subset.size() > 8) {
+        return std::numeric_limits<double>::infinity();
+    }
+    std::vector<int> perm(subset.size());
+    std::iota(perm.begin(), perm.end(), 0);
+    double best = std::numeric_limits<double>::infinity();
+    do {
+        double travel = callbackDistance(state, 0, subset[static_cast<std::size_t>(perm[0])]);
+        bool finite = std::isfinite(travel);
+        for (std::size_t pos = 1; finite && pos < perm.size(); ++pos) {
+            travel += callbackDistance(
+                state,
+                subset[static_cast<std::size_t>(perm[pos - 1])],
+                subset[static_cast<std::size_t>(perm[pos])]);
+            finite = std::isfinite(travel);
+        }
+        if (finite) {
+            travel += callbackDistance(
+                state,
+                subset[static_cast<std::size_t>(perm.back())],
+                0);
+            best = std::min(best, travel);
+        }
+    } while (std::next_permutation(perm.begin(), perm.end()));
     return best;
 }
 
@@ -809,6 +857,9 @@ void separateTransferCutset(CallbackState& state,
 
 void separateSupportDurationCover(CallbackState& state,
                                   CPXCALLBACKCONTEXTptr context) {
+    if (state.support_duration_cover_mode == "off") {
+        return;
+    }
     if (state.ncols <= 0 || state.z_cols.empty() ||
         state.distance_matrix.empty() || state.node_count <= 0 ||
         state.total_time_limit <= 0.0 || state.handling_unit <= 0.0) {
@@ -841,6 +892,72 @@ void separateSupportDurationCover(CallbackState& state,
         }
         return addOneUserCut(state, context, terms, 'L', static_cast<double>(rhs));
     };
+    auto minHandlingUnits = [](int subset_size) {
+        return (subset_size + 1) / 2;
+    };
+    auto subsetPossiblyFeasible = [&](const std::vector<int>& subset) {
+        const double cycle = callbackSubsetCycleLowerBound(state, subset);
+        if (!std::isfinite(cycle)) return false;
+        const double min_handling =
+            static_cast<double>(minHandlingUnits(static_cast<int>(subset.size()))) *
+            state.handling_unit;
+        return cycle + min_handling <= state.total_time_limit + 1e-9;
+    };
+    auto maxPossiblyFeasibleCardinality = [&](const std::vector<int>& subset) {
+        const int n = static_cast<int>(subset.size());
+        int best = 0;
+        const int mask_limit = 1 << n;
+        for (int mask = 1; mask < mask_limit; ++mask) {
+            std::vector<int> child;
+            child.reserve(static_cast<std::size_t>(n));
+            for (int idx = 0; idx < n; ++idx) {
+                if ((mask & (1 << idx)) != 0) {
+                    child.push_back(subset[static_cast<std::size_t>(idx)]);
+                }
+            }
+            const int card = static_cast<int>(child.size());
+            if (card <= best) continue;
+            if (subsetPossiblyFeasible(child)) best = card;
+        }
+        return best;
+    };
+    const bool lifted_enabled =
+        state.support_duration_cover_mode == "support_cover_lifted";
+    auto accountCandidate = [&](int size) {
+        if (size == 2) state.support_duration_pair_candidates.fetch_add(1);
+        else if (size == 3) state.support_duration_triple_candidates.fetch_add(1);
+        else if (size == 4) state.support_duration_quad_candidates.fetch_add(1);
+        if (lifted_enabled) state.support_duration_lifted_candidates.fetch_add(1);
+    };
+    auto accountViolation = [&](int size, bool lifted) {
+        if (size == 2) state.support_duration_pair_violations.fetch_add(1);
+        else if (size == 3) state.support_duration_triple_violations.fetch_add(1);
+        else if (size == 4) state.support_duration_quad_violations.fetch_add(1);
+        if (lifted) state.support_duration_lifted_violations.fetch_add(1);
+    };
+    auto accountCut = [&](int size, bool lifted) {
+        if (size == 2) state.support_duration_pair_cuts_added.fetch_add(1);
+        else if (size == 3) state.support_duration_triple_cuts_added.fetch_add(1);
+        else if (size == 4) state.support_duration_quad_cuts_added.fetch_add(1);
+        if (lifted) state.support_duration_lifted_cuts_added.fetch_add(1);
+    };
+    auto trySupportSubset = [&](int k,
+                                const std::vector<int>& subset,
+                                double lhs) {
+        const int size = static_cast<int>(subset.size());
+        if (size < 2 || size > 4) return;
+        accountCandidate(size);
+        if (subsetPossiblyFeasible(subset)) return;
+        const int rhs = lifted_enabled
+            ? maxPossiblyFeasibleCardinality(subset)
+            : size - 1;
+        if (rhs >= size) return;
+        const bool lifted = lifted_enabled && rhs < size - 1;
+        if (lhs > static_cast<double>(rhs) + tol) {
+            accountViolation(size, lifted);
+            if (addCover(k, subset, rhs)) accountCut(size, lifted);
+        }
+    };
 
     for (int k = 0; k < vehicle_count; ++k) {
         std::vector<std::pair<double, int>> support;
@@ -865,18 +982,21 @@ void separateSupportDurationCover(CallbackState& state,
             const double za = support[static_cast<std::size_t>(ai)].first;
             for (int bi = ai + 1; bi < n; ++bi) {
                 const int b = support[static_cast<std::size_t>(bi)].second;
-                const double cycle = callbackPairCycleLowerBound(state, a, b);
-                state.support_duration_pair_candidates.fetch_add(1);
-                if (!std::isfinite(cycle) ||
-                    cycle + state.handling_unit <= state.total_time_limit + 1e-9) {
-                    continue;
-                }
                 const double lhs = za + support[static_cast<std::size_t>(bi)].first;
-                if (lhs > 1.0 + tol) {
-                    state.support_duration_pair_violations.fetch_add(1);
-                    if (addCover(k, {a, b}, 1)) {
-                        state.support_duration_pair_cuts_added.fetch_add(1);
-                    }
+                trySupportSubset(k, {a, b}, lhs);
+            }
+        }
+        for (int ai = 0; ai < n; ++ai) {
+            const int a = support[static_cast<std::size_t>(ai)].second;
+            const double za = support[static_cast<std::size_t>(ai)].first;
+            for (int bi = ai + 1; bi < n; ++bi) {
+                const int b = support[static_cast<std::size_t>(bi)].second;
+                const double zb = support[static_cast<std::size_t>(bi)].first;
+                for (int ci = bi + 1; ci < n; ++ci) {
+                    const int c = support[static_cast<std::size_t>(ci)].second;
+                    const double lhs =
+                        za + zb + support[static_cast<std::size_t>(ci)].first;
+                    trySupportSubset(k, {a, b, c}, lhs);
                 }
             }
         }
@@ -888,20 +1008,12 @@ void separateSupportDurationCover(CallbackState& state,
                 const double zb = support[static_cast<std::size_t>(bi)].first;
                 for (int ci = bi + 1; ci < n; ++ci) {
                     const int c = support[static_cast<std::size_t>(ci)].second;
-                    const double cycle = callbackTripleCycleLowerBound(state, a, b, c);
-                    state.support_duration_triple_candidates.fetch_add(1);
-                    if (!std::isfinite(cycle) ||
-                        cycle + 2.0 * state.handling_unit <=
-                            state.total_time_limit + 1e-9) {
-                        continue;
-                    }
-                    const double lhs =
-                        za + zb + support[static_cast<std::size_t>(ci)].first;
-                    if (lhs > 2.0 + tol) {
-                        state.support_duration_triple_violations.fetch_add(1);
-                        if (addCover(k, {a, b, c}, 2)) {
-                            state.support_duration_triple_cuts_added.fetch_add(1);
-                        }
+                    const double zc = support[static_cast<std::size_t>(ci)].first;
+                    for (int di = ci + 1; di < n; ++di) {
+                        const int d = support[static_cast<std::size_t>(di)].second;
+                        const double lhs =
+                            za + zb + zc + support[static_cast<std::size_t>(di)].first;
+                        trySupportSubset(k, {a, b, c, d}, lhs);
                     }
                 }
             }
@@ -1727,6 +1839,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     int route_node_count,
     double total_time_limit,
     double handling_unit,
+    const std::string& support_duration_cover_mode,
     double lambda,
     double cutoff_value,
     int vehicle_count) {
@@ -1882,6 +1995,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     cb_state.node_count = route_node_count;
     cb_state.total_time_limit = total_time_limit;
     cb_state.handling_unit = handling_unit;
+    cb_state.support_duration_cover_mode = support_duration_cover_mode;
     cb_state.lambda = lambda;
     cb_state.cutoff_value = cutoff_value;
     cb_state.gamma_L = gamma_L;
@@ -1957,6 +2071,18 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         cb_state.support_duration_triple_candidates.load();
     out.callback_support_duration_triple_violations =
         cb_state.support_duration_triple_violations.load();
+    out.callback_support_duration_quad_cuts_added =
+        cb_state.support_duration_quad_cuts_added.load();
+    out.callback_support_duration_quad_candidates =
+        cb_state.support_duration_quad_candidates.load();
+    out.callback_support_duration_quad_violations =
+        cb_state.support_duration_quad_violations.load();
+    out.callback_support_duration_lifted_cuts_added =
+        cb_state.support_duration_lifted_cuts_added.load();
+    out.callback_support_duration_lifted_candidates =
+        cb_state.support_duration_lifted_candidates.load();
+    out.callback_support_duration_lifted_violations =
+        cb_state.support_duration_lifted_violations.load();
     out.lazy_rejections = cb_state.lazy_rejections.load();
     out.lazy_gini_interval_rejections =
         cb_state.lazy_gini_interval_rejections.load();

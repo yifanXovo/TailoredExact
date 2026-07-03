@@ -1679,6 +1679,20 @@ std::string resultToJson(const SolveResult& input) {
         << result.tailored_bc_support_duration_triple_candidates << ",\n";
     out << "  \"tailored_bc_support_duration_triple_violations\": "
         << result.tailored_bc_support_duration_triple_violations << ",\n";
+    out << "  \"tailored_bc_support_duration_quad_cuts_added\": "
+        << result.tailored_bc_support_duration_quad_cuts_added << ",\n";
+    out << "  \"tailored_bc_support_duration_quad_candidates\": "
+        << result.tailored_bc_support_duration_quad_candidates << ",\n";
+    out << "  \"tailored_bc_support_duration_quad_violations\": "
+        << result.tailored_bc_support_duration_quad_violations << ",\n";
+    out << "  \"tailored_bc_support_duration_lifted_cuts_added\": "
+        << result.tailored_bc_support_duration_lifted_cuts_added << ",\n";
+    out << "  \"tailored_bc_support_duration_lifted_candidates\": "
+        << result.tailored_bc_support_duration_lifted_candidates << ",\n";
+    out << "  \"tailored_bc_support_duration_lifted_violations\": "
+        << result.tailored_bc_support_duration_lifted_violations << ",\n";
+    out << "  \"tailored_bc_support_duration_cover_mode\": \""
+        << jsonEscape(result.tailored_bc_support_duration_cover_mode) << "\",\n";
     out << "  \"gini_spread_cuts_added\": "
         << result.gini_spread_cuts_added << ",\n";
     out << "  \"compact_bc_direct_gini_cap_rows_added\": "
