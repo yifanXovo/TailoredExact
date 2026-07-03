@@ -27,6 +27,7 @@ SMOKE_INSTANCE = ROOT / "testdata" / "examples" / "gcap_smoke_V4_M1.txt"
 MODERATE_INSTANCE = ROOT / "reference" / "hard_stress" / "V20_M3" / "moderate_seed3301.txt"
 REGRESSION_TARGETS = [
     ("regression_v12_m1_tailored_300s", ROOT / "reference" / "regen_candidate_V12_M1_average.txt", 300),
+    ("regression_v12_m1_tailored_1200s", ROOT / "reference" / "regen_candidate_V12_M1_average.txt", 1200),
     ("regression_v12_m2_tailored_300s", ROOT / "reference" / "regen_candidate_V12_M2_average.txt", 300),
     ("regression_tight_T_seed3101_tailored_300s", ROOT / "reference" / "hard_stress" / "V20_M3" / "tight_T_seed3101.txt", 300),
     ("regression_high_imbalance_seed3202_tailored_1200s", ROOT / "reference" / "hard_stress" / "V20_M3" / "high_imbalance_seed3202.txt", 1200),
@@ -145,6 +146,27 @@ def sha256(path: Path) -> str:
     h = hashlib.sha256()
     h.update(path.read_bytes())
     return h.hexdigest()
+
+
+def best_progress_checkpoint(progress_path: Path | None) -> Dict[str, Any]:
+    if progress_path is None or not progress_path.exists():
+        return {}
+    best: Dict[str, Any] = {}
+    try:
+        with progress_path.open(newline="", encoding="utf-8") as handle:
+            for row in csv.DictReader(handle):
+                lb = float_value(row.get("global_LB"), 0.0)
+                ub = float_value(row.get("incumbent_UB"), 0.0)
+                gap = float_value(row.get("gap"), 1.0)
+                if ub <= 0.0 or lb < -1e-12:
+                    continue
+                if (not best or lb > float_value(best.get("global_LB"), -1.0) + 1e-12 or
+                        (abs(lb - float_value(best.get("global_LB"), -1.0)) <= 1e-12 and
+                         gap < float_value(best.get("gap"), 1.0))):
+                    best = dict(row)
+    except Exception:
+        return {}
+    return best
 
 
 def write_diagnostic_timeout_json(
@@ -306,6 +328,12 @@ def write_full_row_failure_json(
     timed_out = bool(meta.get("timeout", False))
     returncode = meta.get("returncode", "")
     status = "wrapper_timeout_noncertified" if timed_out else "wrapper_process_error_noncertified"
+    checkpoint = best_progress_checkpoint(progress_path)
+    checkpoint_lb = float_value(checkpoint.get("global_LB"), 0.0)
+    checkpoint_ub = float_value(checkpoint.get("incumbent_UB"), 0.0)
+    checkpoint_gap = float_value(checkpoint.get("gap"), 1.0)
+    checkpoint_time = float_value(checkpoint.get("elapsed_seconds"), 0.0)
+    use_checkpoint = bool(checkpoint) and checkpoint_ub > 0.0 and checkpoint_lb >= 0.0
     data = {
         "method": "gcap-frontier",
         "algorithm_preset": "paper-gf-tailored-bc",
@@ -314,10 +342,10 @@ def write_full_row_failure_json(
         "certificate": "wrapper did not receive solver final JSON; no optimal certificate claimed",
         "certified_original_problem": False,
         "verifier_passed": False,
-        "objective": 0.0,
-        "lower_bound": 0.0,
-        "upper_bound": 0.0,
-        "gap": 1.0,
+        "objective": checkpoint_ub if use_checkpoint else 0.0,
+        "lower_bound": checkpoint_lb if use_checkpoint else 0.0,
+        "upper_bound": checkpoint_ub if use_checkpoint else 0.0,
+        "gap": checkpoint_gap if use_checkpoint else 1.0,
         "time_budget_seconds": budget_seconds,
         "progress_log": str(progress_path) if progress_path is not None else "",
         "tailored_bc_enabled": True,
@@ -359,11 +387,13 @@ def write_full_row_failure_json(
         "no_archive_scanning": True,
         "no_external_known_ub": True,
         "diagnostic_row": False,
-        "finalization_source": "stale_checkpoint_rejected",
-        "best_valid_lb_seen": 0.0,
-        "best_valid_gap_seen": 1.0,
-        "interrupted_run_best_bound_preserved": False,
-        "final_json_uses_best_checkpoint": False,
+        "finalization_source": "wrapper_best_checkpoint" if use_checkpoint else "stale_checkpoint_rejected",
+        "best_valid_lb_seen": checkpoint_lb if use_checkpoint else 0.0,
+        "best_valid_gap_seen": checkpoint_gap if use_checkpoint else 1.0,
+        "best_valid_ledger_checkpoint": str(progress_path) if use_checkpoint and progress_path is not None else "",
+        "best_valid_ledger_time": checkpoint_time if use_checkpoint else 0.0,
+        "interrupted_run_best_bound_preserved": use_checkpoint,
+        "final_json_uses_best_checkpoint": use_checkpoint,
         "wrapper_timeout": timed_out,
         "wrapper_returncode": returncode,
         "wrapper_runtime_seconds": round(float(meta.get("runtime_seconds", 0.0)), 3),
@@ -371,6 +401,10 @@ def write_full_row_failure_json(
         "notes": [
             "parsed Hybrid GA text format; distances read from serialized matrix",
             "This is an honest noncertified wrapper failure artifact.",
+            (
+                "The best progress checkpoint is preserved as a noncertified bound; "
+                "it is not promoted to an optimal certificate."
+            ) if use_checkpoint else
             "Progress checkpoints, if any, are not promoted to optimal certificate evidence.",
         ],
     }
@@ -1674,7 +1708,7 @@ def main() -> int:
         "- `moderate_seed3301_low_gini1_callback_minimal_short3.json` is a diagnostic hard-leaf callback run with overlapping static diagnostic families disabled. It is included to preserve solver-final callback evidence on the moderate low-Gini leaf when the full-preset guarded row times out before producing callback counters.",
         "- `hard_leaf_tailored_bc.csv` and `hard_leaf_comparison.csv` now include short no-branch, callback-Gini-branch, and selector fallback diagnostics for the two known moderate low-Gini leaves, plus longer 60s/300s/1200s callback variants. These rows are diagnostic only; they test callback branch behavior and bound direction without changing paper certificate evidence.",
         "- `exact_vs_cplex_callback_round.csv` now compares the current 60s/300s/1200s moderate low-Gini callback rows against prior one-thread plain fixed-interval and static compact-BC baselines from `gf_compact_bc_lowgini_round`. The callback tailored rows improve low-Gini hard-leaf lower bounds over those baselines in several matched settings; the low-Gini-2 300s callback-Gini diagnostic closes that fixed interval by integer infeasibility.",
-        "- `full_row_confirmation_summary.csv` records one-thread `paper-gf-tailored-bc` preservation rows for V12 M1, V12 M2, `tight_T_seed3101`, and `high_imbalance_seed3202`, in addition to the smoke full-row. In this package V12 M2, `tight_T_seed3101`, and `high_imbalance_seed3202` certify. V12 M1 now preserves a real noncertified parent frontier JSON before optional post-solve interval closure; it is not a wrapper-synthesized zero-bound artifact.",
+        "- `full_row_confirmation_summary.csv` records one-thread `paper-gf-tailored-bc` preservation rows for V12 M1, V12 M2, `tight_T_seed3101`, and `high_imbalance_seed3202`, in addition to the smoke full-row. In this package V12 M2, `tight_T_seed3101`, and `high_imbalance_seed3202` certify. V12 M1 now has both 300s and 1200s noncertified parent frontier JSONs before optional post-solve interval closure; the 1200s row improves LB/gap to `0.353171916148` / `0.0112784447991` and is not a wrapper-synthesized zero-bound artifact.",
         "- `generated_hard_diagnostic_summary.csv`, `generated_hard_leaf_callback_summary.csv`, and `generated_hard_instance_effectiveness.csv` now record guarded one-thread callback probes for the deterministic generated hard-diagnostic instances under `reference/hard_compact_bc_diagnostics/`. Parent full-row summaries aggregate child `auto_oracle/interval_*.json` callback evidence so generated hard-instance effectiveness is not undercounted. These rows are diagnostic only; wrapper timeouts are preserved as noncertificate JSON rather than being treated as failures to emit artifacts.",
         "- `source_classification.csv` preserves tailored source classes per JSON row.",
         "",
@@ -1702,7 +1736,7 @@ def main() -> int:
         "",
         "## Paper Claim",
         "",
-        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, low-Gini L1 centering, basic transfer-cutset, and pair/triple support-duration cover rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, diagnostic branch-context evidence with one-shot Gini branches in the toy branch smoke, and diagnostic hard-leaf evidence where moderate low-Gini intervals enter branch context and create Gini branches through `CPXcallbackmakebranch`. Branch-mode ablations now compare no-branch, callback-Gini-branch, and selector fallback behavior on the two known moderate low-Gini leaves, including longer 60s/300s/1200s diagnostic rows. The generated hard-diagnostic package now aggregates callback evidence from child fixed-interval `auto_oracle` solves. The low-Gini-2 callback-Gini row closes the fixed interval at 300s by integer infeasibility, and the low-Gini-1 callback-Gini rows now provide 60s/300s/1200s bound trajectory evidence against one-thread plain fixed-interval and static compact-BC baselines. The V20 control rows `tight_T_seed3101` and `high_imbalance_seed3202` certify under one-thread `paper-gf-tailored-bc`; V12 M2 also certifies, while V12 M1 remains noncertified but now preserves a solver-written pre-auto-oracle parent ledger with LB/gap instead of a wrapper failure. This is hard-leaf callback evidence, but it is diagnostic-only and not a paper-core certificate. It is not yet the full requested tailored branch-and-cut: V12 M1 closure, full-preset hard-leaf callback ablations, longer matched hard-leaf comparisons beyond this focused low-Gini increment, and broader hard-leaf closure evidence remain incomplete.",
+        "This package now contains a minimal CPLEX-managed callback path for fixed-interval compact models, including user-cut callback plumbing, relaxation-point separation for Gini interval, visit-inventory, Gini subset-envelope, low-Gini L1 centering, basic transfer-cutset, and pair/triple support-duration cover rows, candidate compact route/service and final-inventory objective projection validation, branch-order priority injection, diagnostic branch-context evidence with one-shot Gini branches in the toy branch smoke, and diagnostic hard-leaf evidence where moderate low-Gini intervals enter branch context and create Gini branches through `CPXcallbackmakebranch`. Branch-mode ablations now compare no-branch, callback-Gini-branch, and selector fallback behavior on the two known moderate low-Gini leaves, including longer 60s/300s/1200s diagnostic rows. The generated hard-diagnostic package now aggregates callback evidence from child fixed-interval `auto_oracle` solves. The low-Gini-2 callback-Gini row closes the fixed interval at 300s by integer infeasibility, and the low-Gini-1 callback-Gini rows now provide 60s/300s/1200s bound trajectory evidence against one-thread plain fixed-interval and static compact-BC baselines. The V20 control rows `tight_T_seed3101` and `high_imbalance_seed3202` certify under one-thread `paper-gf-tailored-bc`; V12 M2 also certifies. V12 M1 remains noncertified, but the added 1200s row preserves a solver-written pre-auto-oracle parent ledger with LB `0.353171916148`, gap `0.0112784447991`, and four unresolved intervals, improving over the 300s tailored row instead of falling back to a wrapper failure. This is hard-leaf callback evidence, but it is diagnostic-only and not a paper-core certificate. It is not yet the full requested tailored branch-and-cut: V12 M1 closure, full-preset hard-leaf callback ablations, longer matched hard-leaf comparisons beyond this focused low-Gini increment, and broader hard-leaf closure evidence remain incomplete.",
         "",
         "Final commit SHA: recorded in the final assistant response after commit creation.",
     ])
