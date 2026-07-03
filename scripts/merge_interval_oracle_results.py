@@ -38,6 +38,14 @@ def truthy(value: object) -> bool:
     return str(value).strip().lower() in {"true", "1", "yes", "on"}
 
 
+def first_present(row: dict, *keys: str) -> str:
+    for key in keys:
+        value = row.get(key, "")
+        if str(value).strip() != "":
+            return str(value)
+    return ""
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--ledger", required=True, type=Path)
@@ -57,25 +65,40 @@ def main() -> None:
         applied = False
         reason = "no_oracle_result_for_exact_leaf"
         if ev:
-            basis = ev.get("oracle_certificate_basis", "")
-            solver_status = str(ev.get("oracle_solver_status", "")).lower()
-            if truthy(ev.get("oracle_proven_infeasible")) and (
+            basis = first_present(ev, "oracle_certificate_basis", "certificate_basis")
+            solver_status_raw = first_present(ev, "oracle_solver_status", "solver_status")
+            solver_status = solver_status_raw.lower()
+            proven_infeasible = truthy(first_present(
+                ev,
+                "oracle_proven_infeasible",
+                "proven_infeasible",
+            ))
+            if proven_infeasible and (
                 basis == "interval_exact_cutoff_mip_infeasible" and "infeasible" in solver_status
             ):
+                cutoff = out.get("incumbent_upper_bound", out.get("interval_final_ub_cutoff", ""))
                 out["interval_status"] = "bound_fathomed"
                 out["reason"] = "merged_exact_interval_cutoff_mip_infeasible"
                 out["certificate_basis"] = "interval_exact_cutoff_mip_infeasible"
-                out["interval_lower_bound"] = out.get("incumbent_upper_bound", out.get("interval_lower_bound", ""))
+                out["interval_lower_bound"] = cutoff or out.get("interval_lower_bound", "")
                 out["requires_pricing_closure"] = "false"
                 out["pricing_closure_available"] = "false"
                 out["interval_bound_valid"] = "true"
+                out["interval_closure_source"] = "tailored_compact_bc"
+                out["interval_closure_source_detail"] = "merged_exact_interval_cutoff_mip_infeasible"
+                out["interval_requires_pricing_closure"] = "false"
+                out["interval_pricing_closure_satisfied"] = "false"
+                out["interval_oracle_used_for_certificate"] = "true"
+                out["interval_oracle_is_diagnostic_only"] = "false"
+                out["interval_final_lb"] = cutoff or out.get("interval_final_lb", "")
+                out["interval_final_ub_cutoff"] = cutoff or out.get("interval_final_ub_cutoff", "")
                 applied = True
                 reason = "exact matching leaf closed by proven infeasible cutoff oracle"
             else:
                 reason = (
                     "oracle_not_mergeable:"
-                    f"basis={basis};status={ev.get('oracle_status','')};"
-                    f"solver={ev.get('oracle_solver_status','')}"
+                    f"basis={basis};status={first_present(ev, 'oracle_status', 'status')};"
+                    f"solver={solver_status_raw}"
                 )
         out["oracle_merge_applied"] = str(applied).lower()
         out["oracle_merge_reason"] = reason
