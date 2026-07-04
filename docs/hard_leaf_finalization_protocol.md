@@ -46,3 +46,20 @@ This round tested CPLEX callback wall-clock abort. The generic callback abort re
 When a wrapper timeout occurs, the row must be noncertified unless a valid earlier checkpoint or solver-final certificate exists. If no valid best bound was exposed, summaries use `no_valid_bound_emitted`.
 
 The finalization round confirmed that `CPX_PARAM_TILIM` is set before `CPXmipopt` and that callback-side deadline checks can request `CPXcallbackabort`. These safeguards are recorded for audit, but they are not themselves certificate evidence. If CPLEX does not return a final status and best bound, the parent wrapper may preserve progress traces and produce final JSON only under a noncertified status.
+
+## Valid Checkpoint Trajectory
+
+The bound-trajectory round distinguishes two checkpoint classes:
+
+- heartbeat-only rows, which show callback activity but no solver-native bound;
+- CPLEX-native bound rows, where `best_bound_available=true` and `progress_source=cplex_native_callback_info`.
+
+A CPLEX-native bound checkpoint is a valid diagnostic lower bound for the original fixed-interval compact model at that point in the solve. If the worker is externally killed before `CPXmipopt` returns, the wrapper may preserve the best checkpoint in final JSON with:
+
+- `status=wrapper_timeout_valid_checkpoint_bound`;
+- `finalization_source=wrapper_best_cplex_native_checkpoint`;
+- `compact_bc_best_bound_available=true`;
+- `compact_bc_bound_valid=true`;
+- `interval_oracle_can_merge_bound=false`.
+
+That row remains noncertified and diagnostic-only unless a future parent-frontier implementation explicitly audits checkpoint-bound evidence before merging it.

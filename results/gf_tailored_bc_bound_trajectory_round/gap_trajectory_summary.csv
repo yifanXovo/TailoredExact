@@ -1,0 +1,9 @@
+row,variant,time_budget_seconds,progress_checkpoints,lower_bound,upper_bound,gap,best_bound_available,callback_abort_requests
+test_certificate_basis,test,10,0,0.0,0.493696053863,1.0,False,0
+test_option_consistency,test,10,0,0.0,0.493696053863,1.0,False,0
+test_callback_smoke,test,10,0,0.0,0.493696053863,1.0,False,0
+test_branch_callback_smoke,test,10,0,0.0,0.493696053863,1.0,False,0
+moderate_low_gini1_plain_10s,plain_fixed_interval,10,0,0.0,0.0491525526647,1.0,False,0
+moderate_low_gini1_callback_auto_10s,callback_auto,10,20,0.0464098904991,0.0491525426647,0.055798785106791524,True,0
+moderate_low_gini2_plain_10s,plain_fixed_interval,10,0,0.0,0.0491525526647,1.0,False,0
+moderate_low_gini2_callback_auto_10s,callback_auto,10,20,0.0489209015481,0.0491525426647,0.004712698551124121,True,0

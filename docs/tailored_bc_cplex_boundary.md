@@ -40,3 +40,12 @@ The finalization round records the native CPLEX time-limit boundary explicitly:
 - `compact_bc_callback_abort_requests`, the number of callback-side abort requests issued after the same wall-clock deadline was reached.
 
 The branch-callback smoke row passes and verifies that branch callback context can be reached and that custom branch objects can be created. The hard moderate low-Gini rows still show the important empirical limitation: even with `CPX_PARAM_TILIM` set and callback-side abort requests wired into long separation/candidate loops, CPLEX may not return a final best bound before the parent process boundary stops the diagnostic worker. Such rows are deliberately classified as noncertified wrapper finalizations.
+
+## Bound-Trajectory Round Update
+
+The bound-trajectory round adds two CPLEX-native safeguards and diagnostics:
+
+- `CPXsetterminate` is loaded dynamically and armed with a worker-local termination flag after the requested time limit plus grace.
+- Generic callback contexts sample `CPXCALLBACKINFO_BEST_BND`, `CPXCALLBACKINFO_BEST_SOL`, and `CPXCALLBACKINFO_NODECOUNT`.
+
+The moderate low-Gini callback workers still may not return a solver-final JSON before parent termination, but the progress CSV now contains CPLEX-native global best-bound checkpoints. These checkpoint rows are valid diagnostic lower-bound trajectory points for the fixed-interval model. They remain noncertified unless a parent ledger explicitly accepts checkpoint-bound evidence under audited rules.

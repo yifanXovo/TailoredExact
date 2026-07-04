@@ -1557,6 +1557,22 @@ std::string resultToJson(const SolveResult& input) {
         << result.compact_bc_native_time_limit_set_rc << ",\n";
     out << "  \"compact_bc_callback_abort_requests\": "
         << result.compact_bc_callback_abort_requests << ",\n";
+    out << "  \"compact_bc_terminate_set_rc\": "
+        << result.compact_bc_terminate_set_rc << ",\n";
+    out << "  \"compact_bc_terminate_triggered\": "
+        << (result.compact_bc_terminate_triggered ? "true" : "false") << ",\n";
+    out << "  \"compact_bc_terminate_after_seconds\": "
+        << result.compact_bc_terminate_after_seconds << ",\n";
+    out << "  \"compact_bc_checkpoint_best_bound_available\": "
+        << (result.compact_bc_checkpoint_best_bound_available ? "true" : "false") << ",\n";
+    out << "  \"compact_bc_checkpoint_best_bound\": "
+        << result.compact_bc_checkpoint_best_bound << ",\n";
+    out << "  \"compact_bc_checkpoint_incumbent_available\": "
+        << (result.compact_bc_checkpoint_incumbent_available ? "true" : "false") << ",\n";
+    out << "  \"compact_bc_checkpoint_incumbent\": "
+        << result.compact_bc_checkpoint_incumbent << ",\n";
+    out << "  \"compact_bc_checkpoint_node_count\": "
+        << result.compact_bc_checkpoint_node_count << ",\n";
     out << "  \"compact_bc_incumbent\": "
         << result.compact_bc_incumbent << ",\n";
     out << "  \"compact_bc_nodes\": "

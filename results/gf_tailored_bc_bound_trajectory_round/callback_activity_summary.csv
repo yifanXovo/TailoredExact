@@ -1,0 +1,9 @@
+row,variant,relaxation_callbacks,branch_callbacks,progress_checkpoints,callback_abort_requests,checkpoint_best_bound_available,checkpoint_best_bound
+test_certificate_basis,test,0,0,0,0,False,0
+test_option_consistency,test,0,0,0,0,False,0
+test_callback_smoke,test,0,0,0,0,False,0
+test_branch_callback_smoke,test,12145,6053,0,0,False,0
+moderate_low_gini1_plain_10s,plain_fixed_interval,0,0,0,0,False,0.0
+moderate_low_gini1_callback_auto_10s,callback_auto,7895,3884,20,0,True,0.0464098904991
+moderate_low_gini2_plain_10s,plain_fixed_interval,0,0,0,0,False,0.0
+moderate_low_gini2_callback_auto_10s,callback_auto,4483,2069,20,0,True,0.0489209015481

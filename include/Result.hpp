@@ -663,6 +663,14 @@ struct SolveResult {
     double compact_bc_native_time_limit_seconds = 0.0;
     int compact_bc_native_time_limit_set_rc = 0;
     long long compact_bc_callback_abort_requests = 0;
+    int compact_bc_terminate_set_rc = 0;
+    bool compact_bc_terminate_triggered = false;
+    double compact_bc_terminate_after_seconds = 0.0;
+    bool compact_bc_checkpoint_best_bound_available = false;
+    double compact_bc_checkpoint_best_bound = 0.0;
+    bool compact_bc_checkpoint_incumbent_available = false;
+    double compact_bc_checkpoint_incumbent = 0.0;
+    long long compact_bc_checkpoint_node_count = 0;
     double compact_bc_incumbent = 0.0;
     long long compact_bc_nodes = 0;
     double compact_bc_time_seconds = 0.0;

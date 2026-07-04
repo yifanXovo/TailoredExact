@@ -42,6 +42,14 @@ struct TailoredBCCplexApiSolveResult {
     double native_time_limit_seconds = 0.0;
     int native_time_limit_set_rc = 0;
     long long callback_abort_requests = 0;
+    int terminate_set_rc = 0;
+    bool terminate_triggered = false;
+    double terminate_after_seconds = 0.0;
+    bool checkpoint_best_bound_available = false;
+    double checkpoint_best_bound = 0.0;
+    bool checkpoint_incumbent_available = false;
+    double checkpoint_incumbent = 0.0;
+    long long checkpoint_node_count = 0;
     long long user_cuts_added = 0;
     long long callback_gini_interval_cuts_added = 0;
     long long callback_visit_inventory_cuts_added = 0;
