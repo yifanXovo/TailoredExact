@@ -63,3 +63,5 @@ A CPLEX-native bound checkpoint is a valid diagnostic lower bound for the origin
 - `interval_oracle_can_merge_bound=false`.
 
 That row remains noncertified and diagnostic-only unless a future parent-frontier implementation explicitly audits checkpoint-bound evidence before merging it.
+
+The long-run convergence runner preserves this distinction for every row: solver-final rows can be certified or noncertified according to the fixed-interval model status, while wrapper checkpoint rows are diagnostic-only even when the checkpoint bound is valid.

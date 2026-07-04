@@ -756,6 +756,12 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--tailored-bc-gini-subset-max-cuts") {
             opt.tailored_bc_gini_subset_max_cuts = std::stoi(requireValue(i, argc, argv));
         }
+        else if (arg == "--tailored-bc-callback-separation-pacing") {
+            opt.tailored_bc_callback_separation_pacing = lowerAscii(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-callback-separation-min-calls") {
+            opt.tailored_bc_callback_separation_min_calls = std::stoi(requireValue(i, argc, argv));
+        }
         else if (arg == "--tailored-bc-low-gini-l1-centering") {
             opt.tailored_bc_low_gini_l1_centering = parseBoolValue(requireValue(i, argc, argv));
         }
@@ -1634,6 +1640,15 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         std::min(3, std::max(1, opt.tailored_bc_gini_subset_max_size));
     if (opt.tailored_bc_gini_subset_max_cuts < 0) {
         opt.tailored_bc_gini_subset_max_cuts = 0;
+    }
+    opt.tailored_bc_callback_separation_pacing =
+        lowerAscii(opt.tailored_bc_callback_separation_pacing);
+    if (opt.tailored_bc_callback_separation_pacing != "off" &&
+        opt.tailored_bc_callback_separation_pacing != "bound-aware") {
+        opt.tailored_bc_callback_separation_pacing = "off";
+    }
+    if (opt.tailored_bc_callback_separation_min_calls < 1) {
+        opt.tailored_bc_callback_separation_min_calls = 1;
     }
     opt.tailored_bc_subset_inventory_max_size =
         std::min(3, std::max(1, opt.tailored_bc_subset_inventory_max_size));
@@ -9361,6 +9376,8 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
                 "support_cover_lifted",
                 tailored_opt.tailored_bc_gini_subset_max_size,
                 tailored_opt.tailored_bc_gini_subset_max_cuts,
+                tailored_opt.tailored_bc_callback_separation_pacing,
+                tailored_opt.tailored_bc_callback_separation_min_calls,
                 0.0,
                 std::numeric_limits<double>::infinity(),
                 0);

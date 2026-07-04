@@ -330,6 +330,8 @@ struct CallbackState {
     std::string support_duration_cover_mode = "support_cover_lifted";
     int gini_subset_max_size = 3;
     int gini_subset_max_cuts = 50000;
+    std::string separation_pacing = "off";
+    int separation_min_relaxation_calls = 25;
     double lambda = 0.0;
     double cutoff_value = std::numeric_limits<double>::infinity();
     double gamma_L = 0.0;
@@ -362,6 +364,11 @@ struct CallbackState {
     std::atomic<double> gini_subset_envelope_max_violation{0.0};
     std::mutex gini_subset_envelope_mutex;
     std::set<std::string> gini_subset_envelope_cut_keys;
+    std::atomic<long long> expensive_separation_calls{0};
+    std::atomic<long long> expensive_separation_skips{0};
+    std::atomic<long long> last_expensive_separation_call{0};
+    std::atomic<double> last_expensive_separation_bound{
+        -std::numeric_limits<double>::infinity()};
     std::atomic<long long> low_gini_l1_cuts_added{0};
     std::atomic<long long> low_gini_l1_violations{0};
     std::atomic<long long> variable_s_centering_cuts_added{0};
@@ -427,6 +434,50 @@ void atomicMax(std::atomic<double>& target, double value) {
     while (value > current &&
            !target.compare_exchange_weak(current, value)) {
     }
+}
+
+bool shouldRunExpensiveSeparation(CallbackState& state) {
+    if (state.separation_pacing != "bound-aware") {
+        state.expensive_separation_calls.fetch_add(1);
+        state.last_expensive_separation_call.store(state.relaxation_calls.load());
+        if (state.native_best_bound_available.load()) {
+            state.last_expensive_separation_bound.store(
+                state.native_best_bound.load());
+        }
+        return true;
+    }
+    const long long call = state.relaxation_calls.load();
+    if (call <= 2) {
+        state.expensive_separation_calls.fetch_add(1);
+        state.last_expensive_separation_call.store(call);
+        if (state.native_best_bound_available.load()) {
+            state.last_expensive_separation_bound.store(
+                state.native_best_bound.load());
+        }
+        return true;
+    }
+    const long long min_calls =
+        std::max(1, state.separation_min_relaxation_calls);
+    const long long last_call = state.last_expensive_separation_call.load();
+    bool due_by_calls = call - last_call >= min_calls;
+    bool due_by_bound = false;
+    if (state.native_best_bound_available.load()) {
+        const double bound = state.native_best_bound.load();
+        const double previous = state.last_expensive_separation_bound.load();
+        due_by_bound = std::isfinite(bound) &&
+            (!std::isfinite(previous) || bound > previous + 1e-8);
+    }
+    if (due_by_calls || due_by_bound) {
+        state.expensive_separation_calls.fetch_add(1);
+        state.last_expensive_separation_call.store(call);
+        if (state.native_best_bound_available.load()) {
+            state.last_expensive_separation_bound.store(
+                state.native_best_bound.load());
+        }
+        return true;
+    }
+    state.expensive_separation_skips.fetch_add(1);
+    return false;
 }
 
 bool rejectCandidateWithLazyRow(CallbackState& state,
@@ -2087,12 +2138,14 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
             }
         }
         separateVisitInventoryLinking(*state, context);
-        separateGiniSubsetEnvelope(*state, context);
         separateLowGiniL1Centering(*state, context);
         separateVariableSCentering(*state, context);
-        separateSubsetInventoryImbalance(*state, context);
-        separateTransferCutset(*state, context);
-        separateSupportDurationCover(*state, context);
+        if (shouldRunExpensiveSeparation(*state)) {
+            separateGiniSubsetEnvelope(*state, context);
+            separateSubsetInventoryImbalance(*state, context);
+            separateTransferCutset(*state, context);
+            separateSupportDurationCover(*state, context);
+        }
     } else if (contextid == kContextCandidate) {
         ++state->candidate_calls;
         ++state->incumbents_seen;
@@ -2154,6 +2207,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     const std::string& support_duration_cover_mode,
     int gini_subset_max_size,
     int gini_subset_max_cuts,
+    const std::string& separation_pacing,
+    int separation_min_relaxation_calls,
     double lambda,
     double cutoff_value,
     int vehicle_count,
@@ -2335,6 +2390,9 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     cb_state.support_duration_cover_mode = support_duration_cover_mode;
     cb_state.gini_subset_max_size = gini_subset_max_size;
     cb_state.gini_subset_max_cuts = gini_subset_max_cuts;
+    cb_state.separation_pacing = separation_pacing;
+    cb_state.separation_min_relaxation_calls =
+        std::max(1, separation_min_relaxation_calls);
     cb_state.lambda = lambda;
     cb_state.cutoff_value = cutoff_value;
     cb_state.gamma_L = gamma_L;
@@ -2481,6 +2539,9 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
                      << cb_state.branch_calls.load() << ','
                      << cb_state.progress_calls.load() << ','
                      << cb_state.callback_abort_requests.load() << ','
+                     << cb_state.expensive_separation_calls.load() << ','
+                     << cb_state.expensive_separation_skips.load() << ','
+                     << '"' << cb_state.separation_pacing << '"' << ','
                      << '"' << userCutFamilyString() << '"' << ','
                      << '"' << violationFamilyString() << '"' << ','
                      << cb_state.gini_branches_created.load() << ','
@@ -2512,6 +2573,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
                    "relaxation_callback_calls,candidate_callback_calls,"
                    "branch_callback_calls,progress_callback_calls,"
                    "callback_abort_requests,"
+                   "expensive_separation_calls,expensive_separation_skips,"
+                   "separation_pacing,"
                    "user_cuts_added_by_family,violations_by_family,"
                    "gini_branches_created,gamma_L,gamma_U,source_class,"
                    "bound_scope,progress_source,bound_fail_reason\n";
@@ -2617,6 +2680,10 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         cb_state.gini_subset_envelope_violations.load();
     out.callback_gini_subset_envelope_max_violation =
         cb_state.gini_subset_envelope_max_violation.load();
+    out.callback_expensive_separation_calls =
+        cb_state.expensive_separation_calls.load();
+    out.callback_expensive_separation_skips =
+        cb_state.expensive_separation_skips.load();
     out.callback_low_gini_l1_cuts_added =
         cb_state.low_gini_l1_cuts_added.load();
     out.callback_low_gini_l1_violations =

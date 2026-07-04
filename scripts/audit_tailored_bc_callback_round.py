@@ -82,6 +82,10 @@ def main() -> int:
             }:
                 reasons.append("branch_callback_smoke_unexpected_status")
         candidate_calls = int(float(data.get("tailored_bc_candidate_callback_calls", 0) or 0))
+        wrapper_diagnostic = (
+            as_bool(data.get("wrapper_synthesized_final_json")) and
+            not certified
+        )
         projection_checks = int(float(data.get("tailored_bc_candidate_projection_checks", 0) or 0))
         projection_verified = int(float(data.get("tailored_bc_candidate_projection_verified", 0) or 0))
         projection_rejected = int(float(data.get("tailored_bc_candidate_projection_rejections", 0) or 0))
@@ -91,9 +95,11 @@ def main() -> int:
         route_rejected = int(float(data.get("tailored_bc_candidate_route_projection_rejections", 0) or 0))
         route_unsupported = int(float(data.get("tailored_bc_candidate_route_projection_unsupported_mismatches", 0) or 0))
         if (method == "interval-cutoff-oracle" and callback_available and
+                not wrapper_diagnostic and
                 candidate_calls > 0 and projection_checks <= 0):
             reasons.append("candidate_callback_without_projection_verifier")
         if (method == "interval-cutoff-oracle" and callback_available and
+                not wrapper_diagnostic and
                 candidate_calls > 0 and route_checks <= 0):
             reasons.append("candidate_callback_without_route_projection_verifier")
         if projection_checks > 0 and (
