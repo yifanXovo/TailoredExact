@@ -2716,6 +2716,55 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 api_solve.native_time_limit_set_rc;
             result.compact_bc_callback_abort_requests =
                 api_solve.callback_abort_requests;
+            result.compact_bc_terminate_set_rc =
+                api_solve.terminate_set_rc;
+            result.compact_bc_terminate_triggered =
+                api_solve.terminate_triggered;
+            result.compact_bc_terminate_after_seconds =
+                api_solve.terminate_after_seconds;
+            result.compact_bc_checkpoint_best_bound_available =
+                api_solve.checkpoint_best_bound_available;
+            result.compact_bc_checkpoint_best_bound =
+                api_solve.checkpoint_best_bound;
+            result.compact_bc_checkpoint_incumbent_available =
+                api_solve.checkpoint_incumbent_available;
+            result.compact_bc_checkpoint_incumbent =
+                api_solve.checkpoint_incumbent;
+            result.compact_bc_checkpoint_node_count =
+                api_solve.checkpoint_node_count;
+            if (api_solve.best_bound_available) {
+                result.best_valid_lb_seen = api_solve.best_bound;
+                result.best_valid_gap_seen =
+                    (std::fabs(options.interval_exact_cutoff_UB) > 1e-12)
+                        ? std::max(0.0,
+                            (options.interval_exact_cutoff_UB - api_solve.best_bound) /
+                                std::fabs(options.interval_exact_cutoff_UB))
+                        : 0.0;
+                result.best_valid_ledger_time = api_solve.last_checkpoint_time;
+                result.best_valid_ledger_checkpoint = options.progress_log_path;
+                result.interrupted_run_best_bound_preserved =
+                    api_solve.terminate_triggered ||
+                    api_solve.callback_wall_time_abort;
+                result.final_json_uses_best_checkpoint =
+                    api_solve.best_bound_fail_reason ==
+                        "checkpoint_cplex_native_best_bound";
+                if (api_solve.best_bound_fail_reason ==
+                    "checkpoint_cplex_native_best_bound") {
+                    result.finalization_source =
+                        "cplex_callback_checkpoint_with_valid_best_bound";
+                } else if (api_solve.terminate_triggered ||
+                           api_solve.callback_wall_time_abort ||
+                           statusIsTimeLimited(api_solve.status)) {
+                    result.finalization_source =
+                        "cplex_time_limit_with_valid_best_bound";
+                } else {
+                    result.finalization_source = "cplex_solver_final";
+                }
+            } else {
+                result.finalization_source = api_solve.terminate_triggered
+                    ? "cplex_terminate_without_valid_best_bound"
+                    : "cplex_solver_final_no_valid_bound";
+            }
             used_callback_api = api_solve.available && api_solve.solved;
             rc = api_solve.return_code;
             if (used_callback_api) {

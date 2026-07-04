@@ -59,6 +59,12 @@ Under these conditions, callbacks only strengthen the search or guide branching.
 
 Time limits affect empirical convergence, not theoretical exactness. A wrapper timeout is not a certificate. A heartbeat row is not a certificate unless it exposes a valid CPLEX best bound or another valid certificate basis for the original fixed-interval model.
 
+## Valid Best-Bound Trajectories
+
+For a fixed-interval compact MIP, CPLEX's global MIP best bound is a valid lower bound for that fixed interval. The bound may be used for diagnostics when it is obtained either from solver-final APIs after `CPXmipopt` returns or from CPLEX-native callback info such as `CPXCALLBACKINFO_BEST_BND`.
+
+Checkpoint bounds are weaker as evidence than solver-final closure: they show valid lower-bound progress but do not by themselves prove interval closure unless the checkpoint bound reaches the incumbent cutoff under the audited tolerance and the parent ledger accepts that scope. Wrapper-finalized rows preserving checkpoint bounds must therefore remain noncertified unless promoted by a separate audited merge rule.
+
 ## Role of Plain CPLEX
 
 Plain CPLEX rows are benchmark and reference rows only. They may be used to compare bound quality, runtime, or to sanity-check small fixed intervals. Their bounds and objectives are never imported into the `paper-gf-tailored-bc` ledger as paper-core evidence.

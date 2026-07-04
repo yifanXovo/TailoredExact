@@ -52,6 +52,9 @@ constexpr int kParamMipStrategyHeuristicFreq = 2031;
 constexpr int kParamMipStrategySearch = 2109;
 constexpr int kMipSearchTraditional = 1;
 constexpr int kUseCutForce = 0;
+constexpr CPXCALLBACKINFO kCallbackInfoNodeCount = 1;
+constexpr CPXCALLBACKINFO kCallbackInfoBestSol = 3;
+constexpr CPXCALLBACKINFO kCallbackInfoBestBnd = 4;
 
 using CPXopenCPLEX_t = CPXENVptr (__stdcall *)(int*);
 using CPXcloseCPLEX_t = int (__stdcall *)(CPXENVptr*);
@@ -74,10 +77,13 @@ using CPXcallbackaddusercuts_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int, i
 using CPXcallbackcandidateispoint_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int*);
 using CPXcallbackgetcandidatepoint_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, double*, int, int, double*);
 using CPXcallbackgetrelaxationpoint_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, double*, int, int, double*);
+using CPXcallbackgetinfodbl_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, CPXCALLBACKINFO, double*);
+using CPXcallbackgetinfolong_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, CPXCALLBACKINFO, CPXLONG*);
 using CPXcallbackrejectcandidate_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int, int, const double*, const char*, const int*, const int*, const double*);
 using CPXcallbackmakebranch_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int, const int*, const char*, const double*, int, int, const double*, const char*, const int*, const int*, const double*, double, int*);
 using CPXcallbackabort_t = void (__stdcall *)(CPXCALLBACKCONTEXTptr);
 using CPXcopyorder_t = int (__stdcall *)(CPXCENVptr, CPXLPptr, int, const int*, const int*, const int*);
+using CPXsetterminate_t = int (__stdcall *)(CPXENVptr, volatile int*);
 
 struct Api {
     HMODULE dll = nullptr;
@@ -102,10 +108,13 @@ struct Api {
     CPXcallbackcandidateispoint_t callbackcandidateispoint = nullptr;
     CPXcallbackgetcandidatepoint_t callbackgetcandidatepoint = nullptr;
     CPXcallbackgetrelaxationpoint_t callbackgetrelaxationpoint = nullptr;
+    CPXcallbackgetinfodbl_t callbackgetinfodbl = nullptr;
+    CPXcallbackgetinfolong_t callbackgetinfolong = nullptr;
     CPXcallbackrejectcandidate_t callbackrejectcandidate = nullptr;
     CPXcallbackmakebranch_t callbackmakebranch = nullptr;
     CPXcallbackabort_t callbackabort = nullptr;
     CPXcopyorder_t copyorder = nullptr;
+    CPXsetterminate_t setterminate = nullptr;
 };
 
 std::filesystem::path defaultCplexDllPath() {
@@ -164,10 +173,13 @@ bool loadApi(Api& api, std::string& fail_reason) {
     LOAD_REQ(callbackcandidateispoint, "CPXcallbackcandidateispoint");
     LOAD_REQ(callbackgetcandidatepoint, "CPXcallbackgetcandidatepoint");
     LOAD_REQ(callbackgetrelaxationpoint, "CPXcallbackgetrelaxationpoint");
+    LOAD_REQ(callbackgetinfodbl, "CPXcallbackgetinfodbl");
+    LOAD_REQ(callbackgetinfolong, "CPXcallbackgetinfolong");
     LOAD_REQ(callbackrejectcandidate, "CPXcallbackrejectcandidate");
     LOAD_REQ(callbackmakebranch, "CPXcallbackmakebranch");
     LOAD_REQ(callbackabort, "CPXcallbackabort");
     LOAD_REQ(copyorder, "CPXcopyorder");
+    LOAD_REQ(setterminate, "CPXsetterminate");
 #undef LOAD_REQ
     std::ostringstream missing;
     for (const Required& req : checks) {
@@ -331,6 +343,12 @@ struct CallbackState {
     double wall_time_limit_seconds = 0.0;
     std::atomic<bool> wall_time_abort{false};
     std::atomic<long long> callback_abort_requests{0};
+    std::atomic<bool> native_best_bound_available{false};
+    std::atomic<double> native_best_bound{0.0};
+    std::atomic<bool> native_incumbent_available{false};
+    std::atomic<double> native_incumbent{0.0};
+    std::atomic<long long> native_node_count{0};
+    std::atomic<double> native_last_bound_improvement_time{0.0};
     std::atomic<long long> relaxation_calls{0};
     std::atomic<long long> candidate_calls{0};
     std::atomic<long long> branch_calls{0};
@@ -627,6 +645,40 @@ bool requestCallbackAbortIfDeadlineExceeded(CallbackState& state,
         state.api->callbackabort(context);
     }
     return true;
+}
+
+void sampleNativeCallbackInfo(CallbackState& state,
+                              CPXCALLBACKCONTEXTptr context) {
+    if (!state.api || !context) return;
+    double best_bound = 0.0;
+    if (state.api->callbackgetinfodbl &&
+        state.api->callbackgetinfodbl(
+            context, kCallbackInfoBestBnd, &best_bound) == 0 &&
+        std::isfinite(best_bound)) {
+        const bool had_bound = state.native_best_bound_available.load();
+        const double old_bound = state.native_best_bound.load();
+        state.native_best_bound.store(best_bound);
+        state.native_best_bound_available.store(true);
+        if (!had_bound || best_bound > old_bound + 1e-9) {
+            const double elapsed = std::chrono::duration<double>(
+                std::chrono::steady_clock::now() - state.wall_start).count();
+            state.native_last_bound_improvement_time.store(elapsed);
+        }
+    }
+    double incumbent = 0.0;
+    if (state.api->callbackgetinfodbl &&
+        state.api->callbackgetinfodbl(
+            context, kCallbackInfoBestSol, &incumbent) == 0 &&
+        std::isfinite(incumbent)) {
+        state.native_incumbent.store(incumbent);
+        state.native_incumbent_available.store(true);
+    }
+    CPXLONG node_count = 0;
+    if (state.api->callbackgetinfolong &&
+        state.api->callbackgetinfolong(
+            context, kCallbackInfoNodeCount, &node_count) == 0) {
+        state.native_node_count.store(static_cast<long long>(node_count));
+    }
 }
 
 void separateGiniSubsetEnvelope(CallbackState& state,
@@ -2013,6 +2065,7 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
                                void* userhandle) {
     auto* state = static_cast<CallbackState*>(userhandle);
     if (!state || !state->api) return 0;
+    sampleNativeCallbackInfo(*state, context);
     if (requestCallbackAbortIfDeadlineExceeded(*state, context)) return 0;
     if (contextid == kContextRelaxation) {
         ++state->relaxation_calls;
@@ -2157,6 +2210,12 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
                 std::to_string(out.native_time_limit_set_rc);
         }
     }
+    volatile int cplex_terminate_flag = 0;
+    out.terminate_set_rc = api.setterminate(env, &cplex_terminate_flag);
+    if (out.terminate_set_rc != 0 && out.best_bound_fail_reason.empty()) {
+        out.best_bound_fail_reason =
+            "CPXsetterminate_failed:" + std::to_string(out.terminate_set_rc);
+    }
     const int ncols = api.getnumcols(env, lp);
     std::vector<std::string> names = getColumnNames(api, env, lp, ncols);
     if (enable_branch_priorities) {
@@ -2298,13 +2357,18 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     using SteadyClock = std::chrono::steady_clock;
     const auto solve_start = SteadyClock::now();
     cb_state.wall_start = solve_start;
+    double terminate_after_seconds = 0.0;
     if (time_limit_seconds > 0.0) {
         const double grace =
             std::max(5.0, std::min(60.0, 0.10 * time_limit_seconds));
         cb_state.wall_time_limit_seconds = time_limit_seconds + grace;
+        terminate_after_seconds = cb_state.wall_time_limit_seconds;
     }
     std::atomic<bool> stop_progress{false};
     std::thread progress_thread;
+    std::atomic<bool> stop_terminator{false};
+    std::atomic<bool> terminate_triggered{false};
+    std::thread terminator_thread;
     std::mutex progress_mutex;
     long long checkpoint_rows = 0;
     double last_checkpoint_time = 0.0;
@@ -2363,6 +2427,34 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
             if (progress_log_path.empty()) return;
             const double elapsed =
                 std::chrono::duration<double>(SteadyClock::now() - solve_start).count();
+            bool effective_best_available = best_bound_available;
+            double effective_best_bound = best_bound_value;
+            if (!effective_best_available &&
+                cb_state.native_best_bound_available.load()) {
+                effective_best_available = true;
+                effective_best_bound = cb_state.native_best_bound.load();
+            }
+            const bool incumbent_available =
+                cb_state.native_incumbent_available.load();
+            const double incumbent =
+                incumbent_available ? cb_state.native_incumbent.load() : 0.0;
+            const long long effective_node_count =
+                node_count_value > 0
+                    ? node_count_value
+                    : cb_state.native_node_count.load();
+            const double absolute_gap =
+                effective_best_available && incumbent_available
+                    ? std::max(0.0, incumbent - effective_best_bound)
+                    : 0.0;
+            const double relative_gap =
+                incumbent_available && std::fabs(incumbent) > 1e-12
+                    ? absolute_gap / std::fabs(incumbent)
+                    : 0.0;
+            const double last_improvement =
+                cb_state.native_last_bound_improvement_time.load();
+            const bool plateau =
+                effective_best_available && last_improvement > 0.0 &&
+                elapsed - last_improvement > std::max(60.0, 3.0 * heartbeat_seconds);
             std::lock_guard<std::mutex> guard(progress_mutex);
             std::ofstream progress(progress_log_path, std::ios::app);
             if (!progress) return;
@@ -2370,16 +2462,20 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
                      << elapsed << ','
                      << event << ','
                      << '"' << solver_status << '"' << ','
-                     << (best_bound_available ? best_bound_value : 0.0) << ','
-                     << (best_bound_available ? "true" : "false") << ','
-                     << (bound_valid ? "true" : "false") << ','
-                     << 0.0 << ','
+                     << (effective_best_available ? effective_best_bound : 0.0) << ','
+                     << (effective_best_available ? "true" : "false") << ','
+                     << ((bound_valid || effective_best_available) ? "true" : "false") << ','
+                     << (incumbent_available ? incumbent : 0.0) << ','
+                     << (incumbent_available ? "true" : "false") << ','
                      << cutoff_value << ','
-                     << (best_bound_available ? (cutoff_value - best_bound_value) : 0.0)
+                     << (effective_best_available ? (cutoff_value - effective_best_bound) : 0.0)
                      << ','
-                     << node_count_value << ','
-                     << 0.0 << ','
-                     << elapsed << ','
+                     << effective_node_count << ','
+                     << (effective_best_available ? effective_best_bound : 0.0) << ','
+                     << last_improvement << ','
+                     << absolute_gap << ','
+                     << relative_gap << ','
+                     << (plateau ? "true" : "false") << ','
                      << cb_state.relaxation_calls.load() << ','
                      << cb_state.candidate_calls.load() << ','
                      << cb_state.branch_calls.load() << ','
@@ -2392,6 +2488,9 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
                      << gamma_U << ','
                      << "\"tailored_bc_callback\"" << ','
                      << "\"original_fixed_interval\"" << ','
+                     << (effective_best_available
+                            ? "\"cplex_native_callback_info\""
+                            : "\"heartbeat_activity_only\"") << ','
                      << '"' << bound_fail_reason << '"'
                      << '\n';
             ++checkpoint_rows;
@@ -2406,14 +2505,16 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
             std::ofstream progress(progress_log_path, std::ios::out | std::ios::trunc);
             progress
                 << "elapsed_seconds,event,cplex_status,best_bound,"
-                   "best_bound_available,bound_valid,incumbent,cutoff_UB,"
-                   "gap_to_cutoff,node_count,root_bound,last_bound_improvement_time,"
+                   "best_bound_available,bound_valid,incumbent,"
+                   "incumbent_available,cutoff_UB,gap_to_cutoff,node_count,"
+                   "root_bound,last_bound_improvement_time,absolute_gap,"
+                   "relative_gap,plateau_detected,"
                    "relaxation_callback_calls,candidate_callback_calls,"
                    "branch_callback_calls,progress_callback_calls,"
                    "callback_abort_requests,"
                    "user_cuts_added_by_family,violations_by_family,"
                    "gini_branches_created,gamma_L,gamma_U,source_class,"
-                   "bound_scope,bound_fail_reason\n";
+                   "bound_scope,progress_source,bound_fail_reason\n";
             progress.close();
             writeProgressRow("start", "running", false, 0.0, false, 0,
                              "best_bound_unavailable_before_mipopt");
@@ -2433,13 +2534,33 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         }
     }
 
+    if (terminate_after_seconds > 0.0 && out.terminate_set_rc == 0) {
+        out.terminate_after_seconds = terminate_after_seconds;
+        terminator_thread = std::thread([&]() {
+            while (!stop_terminator.load()) {
+                const double elapsed = std::chrono::duration<double>(
+                    SteadyClock::now() - solve_start).count();
+                if (elapsed >= terminate_after_seconds) {
+                    cplex_terminate_flag = 1;
+                    terminate_triggered.store(true);
+                    cb_state.wall_time_abort.store(true);
+                    break;
+                }
+                std::this_thread::sleep_for(std::chrono::milliseconds(200));
+            }
+        });
+    }
+
     status = api.mipopt(env, lp);
+    stop_terminator.store(true);
+    if (terminator_thread.joinable()) terminator_thread.join();
     stop_progress.store(true);
     if (progress_thread.joinable()) progress_thread.join();
     out.return_code = status;
     out.status_code = api.getstat(env, lp);
     out.callback_wall_time_abort = cb_state.wall_time_abort.load();
     out.callback_abort_requests = cb_state.callback_abort_requests.load();
+    out.terminate_triggered = terminate_triggered.load();
     char statbuf[1024] = {0};
     if (api.getstatstring(env, out.status_code, statbuf)) {
         out.status = statbuf;
@@ -2462,6 +2583,18 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
             "CPXgetbestobjval_unavailable:" + std::to_string(best_bound_rc);
     }
     out.node_count = static_cast<long long>(api.getnodecnt(env, lp));
+    out.checkpoint_best_bound_available =
+        cb_state.native_best_bound_available.load();
+    out.checkpoint_best_bound = cb_state.native_best_bound.load();
+    out.checkpoint_incumbent_available =
+        cb_state.native_incumbent_available.load();
+    out.checkpoint_incumbent = cb_state.native_incumbent.load();
+    out.checkpoint_node_count = cb_state.native_node_count.load();
+    if (!out.best_bound_available && out.checkpoint_best_bound_available) {
+        out.best_bound = out.checkpoint_best_bound;
+        out.best_bound_available = true;
+        out.best_bound_fail_reason = "checkpoint_cplex_native_best_bound";
+    }
     writeProgressRow("final", out.status, out.best_bound_available, out.best_bound,
                      out.best_bound_available, out.node_count,
                      out.best_bound_available ? "none" : out.best_bound_fail_reason);
