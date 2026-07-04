@@ -1549,6 +1549,14 @@ std::string resultToJson(const SolveResult& input) {
         << (result.compact_bc_best_bound_available ? "true" : "false") << ",\n";
     out << "  \"compact_bc_best_bound_fail_reason\": \""
         << jsonEscape(result.compact_bc_best_bound_fail_reason) << "\",\n";
+    out << "  \"compact_bc_native_time_limit_param_id\": "
+        << result.compact_bc_native_time_limit_param_id << ",\n";
+    out << "  \"compact_bc_native_time_limit_seconds\": "
+        << result.compact_bc_native_time_limit_seconds << ",\n";
+    out << "  \"compact_bc_native_time_limit_set_rc\": "
+        << result.compact_bc_native_time_limit_set_rc << ",\n";
+    out << "  \"compact_bc_callback_abort_requests\": "
+        << result.compact_bc_callback_abort_requests << ",\n";
     out << "  \"compact_bc_incumbent\": "
         << result.compact_bc_incumbent << ",\n";
     out << "  \"compact_bc_nodes\": "

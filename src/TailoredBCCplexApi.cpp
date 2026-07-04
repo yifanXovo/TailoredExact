@@ -330,6 +330,7 @@ struct CallbackState {
         std::chrono::steady_clock::now();
     double wall_time_limit_seconds = 0.0;
     std::atomic<bool> wall_time_abort{false};
+    std::atomic<long long> callback_abort_requests{0};
     std::atomic<long long> relaxation_calls{0};
     std::atomic<long long> candidate_calls{0};
     std::atomic<long long> branch_calls{0};
@@ -610,12 +611,31 @@ void separateVisitInventoryLinking(CallbackState& state,
     }
 }
 
+bool callbackDeadlineExceeded(CallbackState& state) {
+    if (state.wall_time_limit_seconds <= 0.0) return false;
+    const double elapsed = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - state.wall_start).count();
+    return elapsed >= state.wall_time_limit_seconds;
+}
+
+bool requestCallbackAbortIfDeadlineExceeded(CallbackState& state,
+                                            CPXCALLBACKCONTEXTptr context) {
+    if (!callbackDeadlineExceeded(state)) return false;
+    state.wall_time_abort.store(true);
+    state.callback_abort_requests.fetch_add(1);
+    if (state.api && state.api->callbackabort) {
+        state.api->callbackabort(context);
+    }
+    return true;
+}
+
 void separateGiniSubsetEnvelope(CallbackState& state,
                                 CPXCALLBACKCONTEXTptr context) {
     if (state.ncols <= 0 || state.r_cols.size() <= 1 ||
         state.gamma_U < -1e-12) {
         return;
     }
+    if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
     std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
     double obj = 0.0;
     if (state.api->callbackgetrelaxationpoint(
@@ -636,6 +656,7 @@ void separateGiniSubsetEnvelope(CallbackState& state,
     if (state.gini_subset_envelope_cuts_added.load() >= max_cuts) return;
     int cuts_added_this_call = 0;
     auto addSubsetCut = [&](const std::vector<int>& subset, int sign) {
+        if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
         if (cuts_added_this_call >= max_cuts ||
             state.gini_subset_envelope_cuts_added.load() >= max_cuts) return;
         state.gini_subset_envelope_candidates.fetch_add(1);
@@ -706,6 +727,7 @@ void separateGiniSubsetEnvelope(CallbackState& state,
         std::vector<int> prefix;
         prefix.reserve(static_cast<std::size_t>(max_subset_size));
         for (int i = 0; i < static_cast<int>(ranked.size()) && i < candidate_pool; ++i) {
+            if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
             if (ranked[static_cast<std::size_t>(i)].first <= 1e-12) break;
             prefix.push_back(ranked[static_cast<std::size_t>(i)].second);
             if (static_cast<int>(prefix.size()) <= max_subset_size) {
@@ -716,8 +738,10 @@ void separateGiniSubsetEnvelope(CallbackState& state,
         if (max_subset_size >= 2) {
             const int n = std::min(static_cast<int>(ranked.size()), candidate_pool);
             for (int i = 0; i < n; ++i) {
+                if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
                 if (ranked[static_cast<std::size_t>(i)].first <= 1e-12) continue;
                 for (int j = i + 1; j < n; ++j) {
+                    if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
                     if (ranked[static_cast<std::size_t>(j)].first <= 1e-12) continue;
                     addSubsetCut({ranked[static_cast<std::size_t>(i)].second,
                                   ranked[static_cast<std::size_t>(j)].second}, sign);
@@ -728,10 +752,13 @@ void separateGiniSubsetEnvelope(CallbackState& state,
         if (max_subset_size >= 3) {
             const int n = std::min(static_cast<int>(ranked.size()), std::min(candidate_pool, 6));
             for (int i = 0; i < n; ++i) {
+                if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
                 if (ranked[static_cast<std::size_t>(i)].first <= 1e-12) continue;
                 for (int j = i + 1; j < n; ++j) {
+                    if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
                     if (ranked[static_cast<std::size_t>(j)].first <= 1e-12) continue;
                     for (int h = j + 1; h < n; ++h) {
+                        if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
                         if (ranked[static_cast<std::size_t>(h)].first <= 1e-12) continue;
                         addSubsetCut({ranked[static_cast<std::size_t>(i)].second,
                                       ranked[static_cast<std::size_t>(j)].second,
@@ -744,12 +771,16 @@ void separateGiniSubsetEnvelope(CallbackState& state,
         if (max_subset_size >= 4) {
             const int n = std::min(static_cast<int>(ranked.size()), std::min(candidate_pool, 5));
             for (int i = 0; i < n; ++i) {
+                if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
                 if (ranked[static_cast<std::size_t>(i)].first <= 1e-12) continue;
                 for (int j = i + 1; j < n; ++j) {
+                    if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
                     if (ranked[static_cast<std::size_t>(j)].first <= 1e-12) continue;
                     for (int h = j + 1; h < n; ++h) {
+                        if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
                         if (ranked[static_cast<std::size_t>(h)].first <= 1e-12) continue;
                         for (int q = h + 1; q < n; ++q) {
+                            if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
                             if (ranked[static_cast<std::size_t>(q)].first <= 1e-12) continue;
                             addSubsetCut({ranked[static_cast<std::size_t>(i)].second,
                                           ranked[static_cast<std::size_t>(j)].second,
@@ -855,6 +886,7 @@ void separateSubsetInventoryImbalance(CallbackState& state,
     if (!state.subset_inventory_separated.compare_exchange_strong(expected, true)) {
         return;
     }
+    if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
     std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
     double obj = 0.0;
     if (state.api->callbackgetrelaxationpoint(
@@ -883,6 +915,7 @@ void separateSubsetInventoryImbalance(CallbackState& state,
     };
 
     auto trySubset = [&](const std::vector<int>& subset) {
+        if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
         int initial_sum = 0;
         int room_sum = 0;
         int bikes_sum = 0;
@@ -932,12 +965,18 @@ void separateSubsetInventoryImbalance(CallbackState& state,
         }
     };
 
-    for (int a = 1; a <= V; ++a) trySubset({a});
     for (int a = 1; a <= V; ++a) {
+        if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
+        trySubset({a});
+    }
+    for (int a = 1; a <= V; ++a) {
+        if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
         for (int b = a + 1; b <= V; ++b) trySubset({a, b});
     }
     for (int a = 1; a <= V; ++a) {
+        if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
         for (int b = a + 1; b <= V; ++b) {
+            if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
             for (int c = b + 1; c <= V; ++c) trySubset({a, b, c});
         }
     }
@@ -950,6 +989,7 @@ void separateTransferCutset(CallbackState& state,
     if (!state.transfer_cutset_separated.compare_exchange_strong(expected, true)) {
         return;
     }
+    if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
     std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
     double obj = 0.0;
     if (state.api->callbackgetrelaxationpoint(
@@ -967,6 +1007,7 @@ void separateTransferCutset(CallbackState& state,
     auto trySubset = [&](int k, const std::vector<int>& subset,
                          const std::vector<std::pair<int, double>>& pickup_terms,
                          double total_pickup) {
+        if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
         state.transfer_cutset_candidates.fetch_add(1);
         std::vector<std::pair<int, double>> terms = pickup_terms;
         double lhs = -total_pickup;
@@ -987,6 +1028,7 @@ void separateTransferCutset(CallbackState& state,
         }
     };
     for (int k = 0; k < vehicle_count; ++k) {
+        if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
         std::vector<std::pair<int, double>> pickup_terms;
         double total_pickup = 0.0;
         for (int i = 1; i < station_count; ++i) {
@@ -997,15 +1039,19 @@ void separateTransferCutset(CallbackState& state,
         }
         if (pickup_terms.empty()) continue;
         for (int i = 1; i < station_count; ++i) {
+            if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
             trySubset(k, {i}, pickup_terms, total_pickup);
         }
         for (int i = 1; i < station_count; ++i) {
+            if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
             for (int j = i + 1; j < station_count; ++j) {
                 trySubset(k, {i, j}, pickup_terms, total_pickup);
             }
         }
         for (int i = 1; i < station_count; ++i) {
+            if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
             for (int j = i + 1; j < station_count; ++j) {
+                if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
                 for (int h = j + 1; h < station_count; ++h) {
                     trySubset(k, {i, j, h}, pickup_terms, total_pickup);
                 }
@@ -1028,6 +1074,7 @@ void separateSupportDurationCover(CallbackState& state,
     if (!state.support_duration_separated.compare_exchange_strong(expected, true)) {
         return;
     }
+    if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
     std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
     double obj = 0.0;
     if (state.api->callbackgetrelaxationpoint(
@@ -1067,6 +1114,7 @@ void separateSupportDurationCover(CallbackState& state,
         int best = 0;
         const int mask_limit = 1 << n;
         for (int mask = 1; mask < mask_limit; ++mask) {
+            if (requestCallbackAbortIfDeadlineExceeded(state, context)) return best;
             std::vector<int> child;
             child.reserve(static_cast<std::size_t>(n));
             for (int idx = 0; idx < n; ++idx) {
@@ -1103,6 +1151,7 @@ void separateSupportDurationCover(CallbackState& state,
     auto trySupportSubset = [&](int k,
                                 const std::vector<int>& subset,
                                 double lhs) {
+        if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
         const int size = static_cast<int>(subset.size());
         if (size < 2 || size > 4) return;
         accountCandidate(size);
@@ -1119,6 +1168,7 @@ void separateSupportDurationCover(CallbackState& state,
     };
 
     for (int k = 0; k < vehicle_count; ++k) {
+        if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
         std::vector<std::pair<double, int>> support;
         support.reserve(static_cast<std::size_t>(std::max(0, station_count - 1)));
         for (int i = 1; i < station_count; ++i) {
@@ -1137,21 +1187,26 @@ void separateSupportDurationCover(CallbackState& state,
         }
         const int n = static_cast<int>(support.size());
         for (int ai = 0; ai < n; ++ai) {
+            if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
             const int a = support[static_cast<std::size_t>(ai)].second;
             const double za = support[static_cast<std::size_t>(ai)].first;
             for (int bi = ai + 1; bi < n; ++bi) {
+                if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
                 const int b = support[static_cast<std::size_t>(bi)].second;
                 const double lhs = za + support[static_cast<std::size_t>(bi)].first;
                 trySupportSubset(k, {a, b}, lhs);
             }
         }
         for (int ai = 0; ai < n; ++ai) {
+            if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
             const int a = support[static_cast<std::size_t>(ai)].second;
             const double za = support[static_cast<std::size_t>(ai)].first;
             for (int bi = ai + 1; bi < n; ++bi) {
+                if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
                 const int b = support[static_cast<std::size_t>(bi)].second;
                 const double zb = support[static_cast<std::size_t>(bi)].first;
                 for (int ci = bi + 1; ci < n; ++ci) {
+                    if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
                     const int c = support[static_cast<std::size_t>(ci)].second;
                     const double lhs =
                         za + zb + support[static_cast<std::size_t>(ci)].first;
@@ -1160,15 +1215,19 @@ void separateSupportDurationCover(CallbackState& state,
             }
         }
         for (int ai = 0; ai < n; ++ai) {
+            if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
             const int a = support[static_cast<std::size_t>(ai)].second;
             const double za = support[static_cast<std::size_t>(ai)].first;
             for (int bi = ai + 1; bi < n; ++bi) {
+                if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
                 const int b = support[static_cast<std::size_t>(bi)].second;
                 const double zb = support[static_cast<std::size_t>(bi)].first;
                 for (int ci = bi + 1; ci < n; ++ci) {
+                    if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
                     const int c = support[static_cast<std::size_t>(ci)].second;
                     const double zc = support[static_cast<std::size_t>(ci)].first;
                     for (int di = ci + 1; di < n; ++di) {
+                        if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
                         const int d = support[static_cast<std::size_t>(di)].second;
                         const double lhs =
                             za + zb + zc + support[static_cast<std::size_t>(di)].first;
@@ -1874,6 +1933,7 @@ CandidateProjectionStatus validateCandidateProjection(CallbackState& state,
 void validateCandidatePoint(CallbackState& state,
                             CPXCALLBACKCONTEXTptr context) {
     if (!state.validate_candidates || state.ncols <= 0 || state.g_col < 0) return;
+    if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
     int is_point = 0;
     if (state.api->callbackcandidateispoint(context, &is_point) != 0 || !is_point) {
         return;
@@ -1895,10 +1955,15 @@ void validateCandidatePoint(CallbackState& state,
         return;
     }
     if (validateCandidateVisitInventory(state, context, x)) return;
+    if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
     if (validateCandidateGiniSubsetEnvelope(state, context, x)) return;
+    if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
     if (validateCandidateLowGiniL1(state, context, x)) return;
+    if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
     if (validateCandidateVariableSCentering(state, context, x)) return;
+    if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
     if (validateCandidateSubsetInventoryImbalance(state, context, x)) return;
+    if (requestCallbackAbortIfDeadlineExceeded(state, context)) return;
     const CandidateRouteProjectionStatus route_projection =
         validateCandidateRouteProjection(state, context, x);
     if (route_projection == CandidateRouteProjectionStatus::Rejected) return;
@@ -1948,17 +2013,7 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
                                void* userhandle) {
     auto* state = static_cast<CallbackState*>(userhandle);
     if (!state || !state->api) return 0;
-    if (state->wall_time_limit_seconds > 0.0) {
-        const double elapsed = std::chrono::duration<double>(
-            std::chrono::steady_clock::now() - state->wall_start).count();
-        if (elapsed >= state->wall_time_limit_seconds) {
-            state->wall_time_abort.store(true);
-            if (state->api->callbackabort) {
-                state->api->callbackabort(context);
-            }
-            return 0;
-        }
-    }
+    if (requestCallbackAbortIfDeadlineExceeded(*state, context)) return 0;
     if (contextid == kContextRelaxation) {
         ++state->relaxation_calls;
         bool expected = false;
@@ -2091,8 +2146,16 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         api.setintparam(env, kParamPreprocessingPresolve, 0);
         api.setintparam(env, kParamMipStrategyHeuristicFreq, -1);
     }
+    out.native_time_limit_param_id = kParamTimeLimit;
+    out.native_time_limit_seconds = time_limit_seconds;
     if (time_limit_seconds > 0.0) {
-        api.setdblparam(env, kParamTimeLimit, time_limit_seconds);
+        out.native_time_limit_set_rc =
+            api.setdblparam(env, kParamTimeLimit, time_limit_seconds);
+        if (out.native_time_limit_set_rc != 0) {
+            out.best_bound_fail_reason =
+                "CPX_PARAM_TILIM_set_failed:" +
+                std::to_string(out.native_time_limit_set_rc);
+        }
     }
     const int ncols = api.getnumcols(env, lp);
     std::vector<std::string> names = getColumnNames(api, env, lp, ncols);
@@ -2321,6 +2384,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
                      << cb_state.candidate_calls.load() << ','
                      << cb_state.branch_calls.load() << ','
                      << cb_state.progress_calls.load() << ','
+                     << cb_state.callback_abort_requests.load() << ','
                      << '"' << userCutFamilyString() << '"' << ','
                      << '"' << violationFamilyString() << '"' << ','
                      << cb_state.gini_branches_created.load() << ','
@@ -2346,6 +2410,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
                    "gap_to_cutoff,node_count,root_bound,last_bound_improvement_time,"
                    "relaxation_callback_calls,candidate_callback_calls,"
                    "branch_callback_calls,progress_callback_calls,"
+                   "callback_abort_requests,"
                    "user_cuts_added_by_family,violations_by_family,"
                    "gini_branches_created,gamma_L,gamma_U,source_class,"
                    "bound_scope,bound_fail_reason\n";
@@ -2374,6 +2439,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     out.return_code = status;
     out.status_code = api.getstat(env, lp);
     out.callback_wall_time_abort = cb_state.wall_time_abort.load();
+    out.callback_abort_requests = cb_state.callback_abort_requests.load();
     char statbuf[1024] = {0};
     if (api.getstatstring(env, out.status_code, statbuf)) {
         out.status = statbuf;
