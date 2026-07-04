@@ -176,6 +176,8 @@ struct SolveOptions {
     bool tailored_bc_gini_subset_envelope = false;
     int tailored_bc_gini_subset_max_size = 3;
     int tailored_bc_gini_subset_max_cuts = 50000;
+    std::string tailored_bc_callback_separation_pacing = "off";
+    int tailored_bc_callback_separation_min_calls = 25;
     bool tailored_bc_low_gini_l1_centering = false;
     bool tailored_bc_subset_inventory_imbalance = false;
     int tailored_bc_subset_inventory_max_size = 3;

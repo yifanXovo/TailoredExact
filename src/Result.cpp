@@ -1681,6 +1681,12 @@ std::string resultToJson(const SolveResult& input) {
         << result.tailored_bc_gini_subset_envelope_cuts_added << ",\n";
     out << "  \"tailored_bc_max_gini_subset_violation\": "
         << result.tailored_bc_max_gini_subset_violation << ",\n";
+    out << "  \"tailored_bc_callback_separation_pacing\": \""
+        << jsonEscape(result.tailored_bc_callback_separation_pacing) << "\",\n";
+    out << "  \"tailored_bc_callback_expensive_separation_calls\": "
+        << result.tailored_bc_callback_expensive_separation_calls << ",\n";
+    out << "  \"tailored_bc_callback_expensive_separation_skips\": "
+        << result.tailored_bc_callback_expensive_separation_skips << ",\n";
     out << "  \"tailored_bc_low_gini_l1_centering_vars\": "
         << result.tailored_bc_low_gini_l1_centering_vars << ",\n";
     out << "  \"tailored_bc_low_gini_l1_centering_rows_added\": "

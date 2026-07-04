@@ -49,3 +49,9 @@ The bound-trajectory round adds two CPLEX-native safeguards and diagnostics:
 - Generic callback contexts sample `CPXCALLBACKINFO_BEST_BND`, `CPXCALLBACKINFO_BEST_SOL`, and `CPXCALLBACKINFO_NODECOUNT`.
 
 The moderate low-Gini callback workers still may not return a solver-final JSON before parent termination, but the progress CSV now contains CPLEX-native global best-bound checkpoints. These checkpoint rows are valid diagnostic lower-bound trajectory points for the fixed-interval model. They remain noncertified unless a parent ledger explicitly accepts checkpoint-bound evidence under audited rules.
+
+## Long-Run Convergence Round Update
+
+The long-run convergence runner executes fixed-interval callback solves behind a child-process boundary. The parent process can terminate the worker tree while preserving CPLEX-native best-bound trajectory rows from the progress CSV. This is the production diagnostic path for callback hard leaves that may not return solver-final JSON promptly.
+
+The callback backend also exposes optional bound-aware expensive-separation pacing. It throttles only optional valid subset/support/transfer separation. Cheap valid rows remain active, and no feasible solution is removed by the pacing rule.

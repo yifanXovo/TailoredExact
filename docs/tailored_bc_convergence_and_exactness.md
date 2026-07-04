@@ -65,6 +65,8 @@ For a fixed-interval compact MIP, CPLEX's global MIP best bound is a valid lower
 
 Checkpoint bounds are weaker as evidence than solver-final closure: they show valid lower-bound progress but do not by themselves prove interval closure unless the checkpoint bound reaches the incumbent cutoff under the audited tolerance and the parent ledger accepts that scope. Wrapper-finalized rows preserving checkpoint bounds must therefore remain noncertified unless promoted by a separate audited merge rule.
 
+Optional callback separation pacing does not change the feasible region or the certificate theorem. It only controls when globally valid optional cuts are separated. Skipping an optional valid cut can weaken a relaxation or delay closure, but cannot create a false certificate because all solver-final and checkpoint bounds are still CPLEX bounds for the model actually solved.
+
 ## Role of Plain CPLEX
 
 Plain CPLEX rows are benchmark and reference rows only. They may be used to compare bound quality, runtime, or to sanity-check small fixed intervals. Their bounds and objectives are never imported into the `paper-gf-tailored-bc` ledger as paper-core evidence.

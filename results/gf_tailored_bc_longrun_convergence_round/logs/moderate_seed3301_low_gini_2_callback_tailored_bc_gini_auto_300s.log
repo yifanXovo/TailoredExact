@@ -1,0 +1,4 @@
+COMMAND: E:\codes\ExactEBRP\build\ExactEBRP.exe --method interval-cutoff-oracle --algorithm-preset paper-gf-tailored-bc --paper-run-sealed true --input E:\codes\ExactEBRP\reference\hard_stress\V20_M3\moderate_seed3301.txt --lambda 0.15 --T 3600 --interval-exact-cutoff-oracle compact-mip --interval-exact-cutoff-gamma-L 0.0245762763324 --interval-exact-cutoff-gamma-U 0.0368644144986 --interval-exact-cutoff-UB 0.0491525526647 --interval-exact-cutoff-time-limit 300 --compact-bc-threads 1 --mip-threads 1 --progress-log E:\codes\ExactEBRP\results\gf_tailored_bc_longrun_convergence_round\progress_traces\moderate_seed3301_low_gini_2_callback_tailored_bc_gini_auto_300s.progress.csv --compact-bc-progress-interval 30 --out E:\codes\ExactEBRP\results\gf_tailored_bc_longrun_convergence_round\raw\moderate_seed3301_low_gini_2_callback_tailored_bc_gini_auto_300s.json --tailored-bc-mode callback --tailored-bc-gini-branching auto
+
+
+WRAPPER_TIMEOUT
