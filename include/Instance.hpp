@@ -178,7 +178,10 @@ struct SolveOptions {
     int tailored_bc_gini_subset_max_cuts = 50000;
     std::string tailored_bc_callback_separation_pacing = "off";
     int tailored_bc_callback_separation_min_calls = 25;
+    std::string tailored_bc_callback_cut_profile = "full";
+    bool tailored_bc_callback_cut_profile_explicit = false;
     bool tailored_bc_low_gini_l1_centering = false;
+    bool tailored_bc_local_centering = false;
     bool tailored_bc_subset_inventory_imbalance = false;
     int tailored_bc_subset_inventory_max_size = 3;
     bool tailored_bc_transfer_cutset = false;

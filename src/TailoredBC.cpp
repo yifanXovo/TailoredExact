@@ -70,6 +70,10 @@ void populateTailoredBCResultFields(const SolveOptions& options,
         options.tailored_bc_support_duration_cover_mode;
     result.tailored_bc_benders_inventory_cuts_mode =
         options.tailored_bc_benders_inventory_cuts;
+    result.tailored_bc_callback_separation_pacing =
+        options.tailored_bc_callback_separation_pacing;
+    result.tailored_bc_callback_cut_profile =
+        options.tailored_bc_callback_cut_profile;
     result.tailored_bc_source_class = tailoredBCSourceClass(result);
 }
 

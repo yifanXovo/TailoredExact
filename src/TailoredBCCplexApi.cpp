@@ -14,6 +14,7 @@
 #include <fstream>
 #include <iomanip>
 #include <limits>
+#include <map>
 #include <mutex>
 #include <numeric>
 #include <set>
@@ -273,6 +274,11 @@ std::string qL1NameForStation(int station) {
     return "q_l1_" + std::to_string(station);
 }
 
+std::string hNameForPair(int a, int b) {
+    if (a > b) std::swap(a, b);
+    return "h_" + std::to_string(a) + "_" + std::to_string(b);
+}
+
 std::string zNameForVehicleStation(int vehicle, int station) {
     return "z_" + std::to_string(vehicle) + "_" + std::to_string(station);
 }
@@ -312,6 +318,7 @@ struct CallbackState {
     std::vector<int> r_cols;
     std::vector<int> e_cols;
     std::vector<int> q_l1_cols;
+    std::vector<std::vector<int>> h_cols;
     std::vector<int> y_cols;
     std::vector<std::vector<int>> z_cols;
     std::vector<std::vector<std::vector<int>>> x_cols;
@@ -332,6 +339,8 @@ struct CallbackState {
     int gini_subset_max_cuts = 50000;
     std::string separation_pacing = "off";
     int separation_min_relaxation_calls = 25;
+    std::string callback_cut_profile = "full";
+    bool enable_local_centering = false;
     double lambda = 0.0;
     double cutoff_value = std::numeric_limits<double>::infinity();
     double gamma_L = 0.0;
@@ -371,6 +380,11 @@ struct CallbackState {
         -std::numeric_limits<double>::infinity()};
     std::atomic<long long> low_gini_l1_cuts_added{0};
     std::atomic<long long> low_gini_l1_violations{0};
+    std::atomic<long long> local_centering_cuts_added{0};
+    std::atomic<long long> local_centering_violations{0};
+    std::atomic<double> local_centering_max_violation{0.0};
+    std::mutex local_centering_mutex;
+    std::set<std::string> local_centering_cut_keys;
     std::atomic<long long> variable_s_centering_cuts_added{0};
     std::atomic<long long> variable_s_centering_violations{0};
     std::atomic<long long> subset_inventory_imbalance_cuts_added{0};
@@ -478,6 +492,41 @@ bool shouldRunExpensiveSeparation(CallbackState& state) {
     }
     state.expensive_separation_skips.fetch_add(1);
     return false;
+}
+
+bool callbackProfileAllows(const CallbackState& state,
+                           const std::string& family) {
+    const std::string& profile = state.callback_cut_profile;
+    if (profile == "none" || profile == "off") return false;
+    if (profile == "full") return true;
+    if (profile == "cheap") {
+        return family == "gini_interval" || family == "visit_inventory";
+    }
+    if (profile == "low-gini" || profile == "low_gini") {
+        return family == "gini_interval" ||
+            family == "visit_inventory" ||
+            family == "low_gini_l1" ||
+            family == "variable_s" ||
+            family == "local_centering";
+    }
+    if (profile == "local-centering" || profile == "local_centering") {
+        return family == "gini_interval" ||
+            family == "visit_inventory" ||
+            family == "local_centering";
+    }
+    if (profile == "subset-only" || profile == "subset_only") {
+        return family == "gini_interval" ||
+            family == "gini_subset";
+    }
+    if (profile == "transfer-only" || profile == "transfer_only") {
+        return family == "gini_interval" ||
+            family == "transfer_cutset";
+    }
+    if (profile == "support-only" || profile == "support_only") {
+        return family == "gini_interval" ||
+            family == "support_duration";
+    }
+    return true;
 }
 
 bool rejectCandidateWithLazyRow(CallbackState& state,
@@ -937,6 +986,91 @@ void separateLowGiniL1Centering(CallbackState& state,
         if (addOneUserCut(state, context, terms, 'L', 0.0)) {
             state.low_gini_l1_cuts_added.fetch_add(1);
         }
+    }
+}
+
+void separateLocalCentering(CallbackState& state,
+                            CPXCALLBACKCONTEXTptr context) {
+    if (!state.enable_local_centering || state.ncols <= 0 ||
+        state.r_cols.size() <= 1 || state.h_cols.size() <= 1) {
+        return;
+    }
+    std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
+    double obj = 0.0;
+    if (state.api->callbackgetrelaxationpoint(
+            context, x.data(), 0, state.ncols - 1, &obj) != 0) {
+        return;
+    }
+    const int V = static_cast<int>(state.r_cols.size()) - 1;
+    if (V <= 1) return;
+    double sum_r = 0.0;
+    for (int j = 1; j <= V; ++j) {
+        const int r = state.r_cols[static_cast<std::size_t>(j)];
+        if (r >= 0) sum_r += x[static_cast<std::size_t>(r)];
+    }
+    constexpr double tol = 1e-6;
+    auto hCol = [&](int a, int b) -> int {
+        if (a > b) std::swap(a, b);
+        if (a < 0 || b < 0 ||
+            a >= static_cast<int>(state.h_cols.size()) ||
+            b >= static_cast<int>(state.h_cols[static_cast<std::size_t>(a)].size())) {
+            return -1;
+        }
+        return state.h_cols[static_cast<std::size_t>(a)][static_cast<std::size_t>(b)];
+    };
+    auto tryRow = [&](int station, int sign) {
+        const int r_i = state.r_cols[static_cast<std::size_t>(station)];
+        if (r_i < 0) return;
+        std::map<int, double> term_map;
+        auto addTerm = [&](int col, double coef) {
+            if (col < 0 || std::fabs(coef) <= 1e-12) return;
+            term_map[col] += coef;
+            if (std::fabs(term_map[col]) <= 1e-12) term_map.erase(col);
+        };
+        double lhs = sign > 0
+            ? static_cast<double>(V) * x[static_cast<std::size_t>(r_i)] - sum_r
+            : sum_r - static_cast<double>(V) * x[static_cast<std::size_t>(r_i)];
+        if (sign > 0) {
+            addTerm(r_i, static_cast<double>(V));
+            for (int j = 1; j <= V; ++j) {
+                const int r = state.r_cols[static_cast<std::size_t>(j)];
+                addTerm(r, -1.0);
+            }
+        } else {
+            for (int j = 1; j <= V; ++j) {
+                const int r = state.r_cols[static_cast<std::size_t>(j)];
+                addTerm(r, 1.0);
+            }
+            addTerm(r_i, -static_cast<double>(V));
+        }
+        for (int j = 1; j <= V; ++j) {
+            if (j == station) continue;
+            const int h = hCol(station, j);
+            if (h < 0) return;
+            lhs -= x[static_cast<std::size_t>(h)];
+            addTerm(h, -1.0);
+        }
+        if (lhs <= tol) return;
+        state.local_centering_violations.fetch_add(1);
+        atomicMax(state.local_centering_max_violation, lhs);
+        std::ostringstream key;
+        key << sign << ":" << station;
+        {
+            std::lock_guard<std::mutex> guard(state.local_centering_mutex);
+            if (!state.local_centering_cut_keys.insert(key.str()).second) {
+                return;
+            }
+        }
+        std::vector<std::pair<int, double>> terms;
+        terms.reserve(term_map.size());
+        for (const auto& kv : term_map) terms.push_back(kv);
+        if (addOneUserCut(state, context, terms, 'L', 0.0)) {
+            state.local_centering_cuts_added.fetch_add(1);
+        }
+    };
+    for (int i = 1; i <= V; ++i) {
+        tryRow(i, 1);
+        tryRow(i, -1);
     }
 }
 
@@ -2121,7 +2255,8 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
     if (contextid == kContextRelaxation) {
         ++state->relaxation_calls;
         bool expected = false;
-        if (state->add_gini_cut && state->g_col >= 0 &&
+        if (callbackProfileAllows(*state, "gini_interval") &&
+            state->add_gini_cut && state->g_col >= 0 &&
             state->gini_cut_added.compare_exchange_strong(expected, true)) {
             const double rhs[1] = {state->gamma_U};
             const char sense[1] = {'L'};
@@ -2137,14 +2272,36 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
                 ++state->gini_interval_cuts_added;
             }
         }
-        separateVisitInventoryLinking(*state, context);
-        separateLowGiniL1Centering(*state, context);
-        separateVariableSCentering(*state, context);
-        if (shouldRunExpensiveSeparation(*state)) {
-            separateGiniSubsetEnvelope(*state, context);
-            separateSubsetInventoryImbalance(*state, context);
-            separateTransferCutset(*state, context);
-            separateSupportDurationCover(*state, context);
+        if (callbackProfileAllows(*state, "visit_inventory")) {
+            separateVisitInventoryLinking(*state, context);
+        }
+        if (callbackProfileAllows(*state, "low_gini_l1")) {
+            separateLowGiniL1Centering(*state, context);
+        }
+        if (callbackProfileAllows(*state, "local_centering")) {
+            separateLocalCentering(*state, context);
+        }
+        if (callbackProfileAllows(*state, "variable_s")) {
+            separateVariableSCentering(*state, context);
+        }
+        if (callbackProfileAllows(*state, "gini_subset") ||
+            callbackProfileAllows(*state, "subset_inventory") ||
+            callbackProfileAllows(*state, "transfer_cutset") ||
+            callbackProfileAllows(*state, "support_duration")) {
+            if (shouldRunExpensiveSeparation(*state)) {
+                if (callbackProfileAllows(*state, "gini_subset")) {
+                    separateGiniSubsetEnvelope(*state, context);
+                }
+                if (callbackProfileAllows(*state, "subset_inventory")) {
+                    separateSubsetInventoryImbalance(*state, context);
+                }
+                if (callbackProfileAllows(*state, "transfer_cutset")) {
+                    separateTransferCutset(*state, context);
+                }
+                if (callbackProfileAllows(*state, "support_duration")) {
+                    separateSupportDurationCover(*state, context);
+                }
+            }
         }
     } else if (contextid == kContextCandidate) {
         ++state->candidate_calls;
@@ -2209,6 +2366,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     int gini_subset_max_cuts,
     const std::string& separation_pacing,
     int separation_min_relaxation_calls,
+    const std::string& callback_cut_profile,
+    bool enable_local_centering,
     double lambda,
     double cutoff_value,
     int vehicle_count,
@@ -2298,6 +2457,9 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     std::vector<int> r_cols(static_cast<std::size_t>(station_count), -1);
     std::vector<int> e_cols(static_cast<std::size_t>(station_count), -1);
     std::vector<int> q_l1_cols(static_cast<std::size_t>(station_count), -1);
+    std::vector<std::vector<int>> h_cols(
+        static_cast<std::size_t>(station_count),
+        std::vector<int>(static_cast<std::size_t>(station_count), -1));
     for (int i = 1; i < station_count; ++i) {
         std::vector<int> found = buildNameToIndexLookup(names, yNameForStation(i));
         if (!found.empty()) y_cols[static_cast<std::size_t>(i)] = found.front();
@@ -2307,6 +2469,17 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         if (!found.empty()) e_cols[static_cast<std::size_t>(i)] = found.front();
         found = buildNameToIndexLookup(names, qL1NameForStation(i));
         if (!found.empty()) q_l1_cols[static_cast<std::size_t>(i)] = found.front();
+    }
+    for (int i = 1; i < station_count; ++i) {
+        for (int j = i + 1; j < station_count; ++j) {
+            std::vector<int> found = buildNameToIndexLookup(
+                names, hNameForPair(i, j));
+            if (!found.empty()) {
+                const int col = found.front();
+                h_cols[static_cast<std::size_t>(i)][static_cast<std::size_t>(j)] = col;
+                h_cols[static_cast<std::size_t>(j)][static_cast<std::size_t>(i)] = col;
+            }
+        }
     }
     std::vector<std::vector<int>> z_cols(
         static_cast<std::size_t>(std::max(0, vehicle_count)),
@@ -2372,6 +2545,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     cb_state.r_cols = std::move(r_cols);
     cb_state.e_cols = std::move(e_cols);
     cb_state.q_l1_cols = std::move(q_l1_cols);
+    cb_state.h_cols = std::move(h_cols);
     cb_state.y_cols = std::move(y_cols);
     cb_state.z_cols = std::move(z_cols);
     cb_state.x_cols = std::move(x_cols);
@@ -2393,6 +2567,10 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     cb_state.separation_pacing = separation_pacing;
     cb_state.separation_min_relaxation_calls =
         std::max(1, separation_min_relaxation_calls);
+    cb_state.callback_cut_profile = callback_cut_profile.empty()
+        ? "full"
+        : callback_cut_profile;
+    cb_state.enable_local_centering = enable_local_centering;
     cb_state.lambda = lambda;
     cb_state.cutoff_value = cutoff_value;
     cb_state.gamma_L = gamma_L;
@@ -2440,6 +2618,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
            << ";gini_subset_envelope="
            << cb_state.gini_subset_envelope_cuts_added.load()
            << ";low_gini_l1_centering=" << cb_state.low_gini_l1_cuts_added.load()
+           << ";local_centering=" << cb_state.local_centering_cuts_added.load()
            << ";variable_s_centering=" << cb_state.variable_s_centering_cuts_added.load()
            << ";subset_inventory_imbalance="
            << cb_state.subset_inventory_imbalance_cuts_added.load()
@@ -2459,6 +2638,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         os << "gini_subset_envelope="
            << cb_state.gini_subset_envelope_violations.load()
            << ";low_gini_l1_centering=" << cb_state.low_gini_l1_violations.load()
+           << ";local_centering=" << cb_state.local_centering_violations.load()
            << ";variable_s_centering="
            << cb_state.variable_s_centering_violations.load()
            << ";subset_inventory_imbalance="
@@ -2688,6 +2868,12 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         cb_state.low_gini_l1_cuts_added.load();
     out.callback_low_gini_l1_violations =
         cb_state.low_gini_l1_violations.load();
+    out.callback_local_centering_cuts_added =
+        cb_state.local_centering_cuts_added.load();
+    out.callback_local_centering_violations =
+        cb_state.local_centering_violations.load();
+    out.callback_local_centering_max_violation =
+        cb_state.local_centering_max_violation.load();
     out.callback_variable_s_centering_cuts_added =
         cb_state.variable_s_centering_cuts_added.load();
     out.callback_variable_s_centering_violations =

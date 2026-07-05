@@ -61,6 +61,9 @@ struct TailoredBCCplexApiSolveResult {
     long long callback_expensive_separation_skips = 0;
     long long callback_low_gini_l1_cuts_added = 0;
     long long callback_low_gini_l1_violations = 0;
+    long long callback_local_centering_cuts_added = 0;
+    long long callback_local_centering_violations = 0;
+    double callback_local_centering_max_violation = 0.0;
     long long callback_variable_s_centering_cuts_added = 0;
     long long callback_variable_s_centering_violations = 0;
     long long callback_subset_inventory_imbalance_cuts_added = 0;
@@ -143,6 +146,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     int gini_subset_max_cuts,
     const std::string& separation_pacing,
     int separation_min_relaxation_calls,
+    const std::string& callback_cut_profile,
+    bool enable_local_centering,
     double lambda,
     double cutoff_value,
     int vehicle_count,
