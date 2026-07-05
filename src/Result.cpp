@@ -1477,6 +1477,10 @@ std::string resultToJson(const SolveResult& input) {
         << (result.s_range_refinement_enabled ? "true" : "false") << ",\n";
     out << "  \"s_range_global_L\": " << result.s_range_global_L << ",\n";
     out << "  \"s_range_global_U\": " << result.s_range_global_U << ",\n";
+    out << "  \"parent_S_L\": " << result.parent_S_L << ",\n";
+    out << "  \"parent_S_U\": " << result.parent_S_U << ",\n";
+    out << "  \"S_domain_source\": \""
+        << jsonEscape(result.S_domain_source) << "\",\n";
     out << "  \"s_range_bucket_count\": " << result.s_range_bucket_count << ",\n";
     out << "  \"s_range_bucket_id\": " << result.s_range_bucket_id << ",\n";
     out << "  \"s_range_bucket_L\": " << result.s_range_bucket_L << ",\n";
@@ -1701,6 +1705,20 @@ std::string resultToJson(const SolveResult& input) {
         << result.tailored_bc_local_centering_violations << ",\n";
     out << "  \"tailored_bc_local_centering_max_violation\": "
         << result.tailored_bc_local_centering_max_violation << ",\n";
+    out << "  \"tailored_bc_subset_cross_h_centering_rows_added\": "
+        << result.tailored_bc_subset_cross_h_centering_rows_added << ",\n";
+    out << "  \"tailored_bc_subset_cross_h_centering_candidates\": "
+        << result.tailored_bc_subset_cross_h_centering_candidates << ",\n";
+    out << "  \"tailored_bc_subset_cross_h_centering_violations\": "
+        << result.tailored_bc_subset_cross_h_centering_violations << ",\n";
+    out << "  \"tailored_bc_subset_cross_h_centering_max_violation\": "
+        << result.tailored_bc_subset_cross_h_centering_max_violation << ",\n";
+    out << "  \"tailored_bc_local_q_centering_rows_added\": "
+        << result.tailored_bc_local_q_centering_rows_added << ",\n";
+    out << "  \"tailored_bc_local_q_centering_violations\": "
+        << result.tailored_bc_local_q_centering_violations << ",\n";
+    out << "  \"tailored_bc_local_q_centering_max_violation\": "
+        << result.tailored_bc_local_q_centering_max_violation << ",\n";
     out << "  \"tailored_bc_variable_s_centering_cuts_added\": "
         << result.tailored_bc_variable_s_centering_cuts_added << ",\n";
     out << "  \"tailored_bc_variable_s_centering_violations\": "
@@ -1717,6 +1735,12 @@ std::string resultToJson(const SolveResult& input) {
         << result.tailored_bc_transfer_cutset_candidates << ",\n";
     out << "  \"tailored_bc_transfer_cutset_violations\": "
         << result.tailored_bc_transfer_cutset_violations << ",\n";
+    out << "  \"tailored_bc_compatible_source_transfer_cuts_added\": "
+        << result.tailored_bc_compatible_source_transfer_cuts_added << ",\n";
+    out << "  \"tailored_bc_compatible_source_transfer_candidates\": "
+        << result.tailored_bc_compatible_source_transfer_candidates << ",\n";
+    out << "  \"tailored_bc_required_external_source_cuts_added\": "
+        << result.tailored_bc_required_external_source_cuts_added << ",\n";
     out << "  \"tailored_bc_support_duration_pair_cuts_added\": "
         << result.tailored_bc_support_duration_pair_cuts_added << ",\n";
     out << "  \"tailored_bc_support_duration_pair_candidates\": "

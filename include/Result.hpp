@@ -619,6 +619,9 @@ struct SolveResult {
     std::string compact_bc_s_range_refinement = "off";
     double s_range_global_L = 0.0;
     double s_range_global_U = 0.0;
+    double parent_S_L = 0.0;
+    double parent_S_U = 0.0;
+    std::string S_domain_source;
     int s_range_bucket_count = 0;
     int s_range_bucket_id = -1;
     double s_range_bucket_L = 0.0;
@@ -735,6 +738,13 @@ struct SolveResult {
     long long tailored_bc_local_centering_rows_added = 0;
     long long tailored_bc_local_centering_violations = 0;
     double tailored_bc_local_centering_max_violation = 0.0;
+    long long tailored_bc_subset_cross_h_centering_rows_added = 0;
+    long long tailored_bc_subset_cross_h_centering_candidates = 0;
+    long long tailored_bc_subset_cross_h_centering_violations = 0;
+    double tailored_bc_subset_cross_h_centering_max_violation = 0.0;
+    long long tailored_bc_local_q_centering_rows_added = 0;
+    long long tailored_bc_local_q_centering_violations = 0;
+    double tailored_bc_local_q_centering_max_violation = 0.0;
     long long tailored_bc_variable_s_centering_cuts_added = 0;
     long long tailored_bc_variable_s_centering_violations = 0;
     long long tailored_bc_subset_inventory_imbalance_cuts_added = 0;
@@ -743,6 +753,9 @@ struct SolveResult {
     long long tailored_bc_transfer_cutset_cuts_added = 0;
     long long tailored_bc_transfer_cutset_candidates = 0;
     long long tailored_bc_transfer_cutset_violations = 0;
+    long long tailored_bc_compatible_source_transfer_cuts_added = 0;
+    long long tailored_bc_compatible_source_transfer_candidates = 0;
+    long long tailored_bc_required_external_source_cuts_added = 0;
     long long tailored_bc_support_duration_pair_cuts_added = 0;
     long long tailored_bc_support_duration_pair_candidates = 0;
     long long tailored_bc_support_duration_pair_violations = 0;

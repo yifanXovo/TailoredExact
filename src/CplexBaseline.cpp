@@ -69,8 +69,14 @@ struct CompactOracleStrengtheningStats {
     long long tailored_low_gini_l1_vars = 0;
     long long tailored_low_gini_l1_rows_added = 0;
     long long tailored_local_centering_rows_added = 0;
+    long long tailored_subset_cross_h_centering_rows_added = 0;
+    long long tailored_subset_cross_h_centering_candidates = 0;
+    long long tailored_local_q_centering_rows_added = 0;
     long long tailored_subset_inventory_imbalance_cuts_added = 0;
     long long tailored_transfer_cutset_cuts_added = 0;
+    long long tailored_compatible_source_transfer_cuts_added = 0;
+    long long tailored_compatible_source_transfer_candidates = 0;
+    long long tailored_required_external_source_cuts_added = 0;
     long long tailored_benders_inventory_cuts_added = 0;
     long long tailored_benders_inventory_candidates = 0;
     bool s_range_refinement_enabled = false;
@@ -1054,6 +1060,99 @@ void writeCompactLp(const Instance& instance,
             if (stats != nullptr) stats->tailored_local_centering_rows_added += 2;
         }
     }
+    if (tailored_active && cutoff != nullptr && cutoff->enabled &&
+        options.tailored_bc_subset_cross_h_centering && cutoff->gamma_U >= -1e-12) {
+        if (stats != nullptr) {
+            stats->enabled_families.push_back("subset_cross_h_centering");
+        }
+        const int max_size =
+            std::min({4, V, std::max(1, options.tailored_bc_subset_cross_h_max_size)});
+        const long long max_rows =
+            options.tailored_bc_subset_cross_h_max_cuts > 0
+                ? static_cast<long long>(options.tailored_bc_subset_cross_h_max_cuts)
+                : std::numeric_limits<long long>::max();
+        long long rows_added = 0;
+        auto addSubsetCrossH = [&](const std::vector<int>& subset) {
+            if (rows_added + 2 > max_rows) return;
+            std::set<int> in_subset(subset.begin(), subset.end());
+            if (stats != nullptr) ++stats->tailored_subset_cross_h_centering_candidates;
+
+            Expr pos;
+            for (int i : subset) addTerm(pos, rName(i), static_cast<double>(V));
+            for (int j = 1; j <= V; ++j) {
+                addTerm(pos, rName(j), -static_cast<double>(subset.size()));
+            }
+            for (int i : subset) {
+                for (int j = 1; j <= V; ++j) {
+                    if (in_subset.count(j)) continue;
+                    addTerm(pos, i < j ? hName(i, j) : hName(j, i), -1.0);
+                }
+            }
+            writeConstraint(out, cid, pos, "<=", 0.0);
+
+            Expr neg;
+            for (int j = 1; j <= V; ++j) {
+                addTerm(neg, rName(j), static_cast<double>(subset.size()));
+            }
+            for (int i : subset) addTerm(neg, rName(i), -static_cast<double>(V));
+            for (int i : subset) {
+                for (int j = 1; j <= V; ++j) {
+                    if (in_subset.count(j)) continue;
+                    addTerm(neg, i < j ? hName(i, j) : hName(j, i), -1.0);
+                }
+            }
+            writeConstraint(out, cid, neg, "<=", 0.0);
+            rows_added += 2;
+            if (stats != nullptr) stats->tailored_subset_cross_h_centering_rows_added += 2;
+        };
+        for (int a = 1; a <= V && rows_added + 2 <= max_rows; ++a) {
+            addSubsetCrossH({a});
+        }
+        if (max_size >= 2) {
+            for (int a = 1; a <= V && rows_added + 2 <= max_rows; ++a) {
+                for (int b = a + 1; b <= V && rows_added + 2 <= max_rows; ++b) {
+                    addSubsetCrossH({a, b});
+                }
+            }
+        }
+        if (max_size >= 3) {
+            for (int a = 1; a <= V && rows_added + 2 <= max_rows; ++a) {
+                for (int b = a + 1; b <= V && rows_added + 2 <= max_rows; ++b) {
+                    for (int c = b + 1; c <= V && rows_added + 2 <= max_rows; ++c) {
+                        addSubsetCrossH({a, b, c});
+                    }
+                }
+            }
+        }
+        if (max_size >= 4) {
+            for (int a = 1; a <= V && rows_added + 2 <= max_rows; ++a) {
+                for (int b = a + 1; b <= V && rows_added + 2 <= max_rows; ++b) {
+                    for (int c = b + 1; c <= V && rows_added + 2 <= max_rows; ++c) {
+                        for (int d = c + 1; d <= V && rows_added + 2 <= max_rows; ++d) {
+                            addSubsetCrossH({a, b, c, d});
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (tailored_active && cutoff != nullptr && cutoff->enabled &&
+        options.tailored_bc_local_q_centering &&
+        options.tailored_bc_low_gini_l1_centering && cutoff->gamma_U >= -1e-12) {
+        if (stats != nullptr) {
+            stats->enabled_families.push_back("local_q_centering");
+        }
+        for (int i = 1; i <= V; ++i) {
+            Expr row;
+            addTerm(row, "q_l1_" + std::to_string(i), static_cast<double>(V));
+            for (int j = 1; j <= V; ++j) {
+                if (j == i) continue;
+                addTerm(row, i < j ? hName(i, j) : hName(j, i), -1.0);
+            }
+            writeConstraint(out, cid, row, "<=", 0.0);
+            if (stats != nullptr) ++stats->tailored_local_q_centering_rows_added;
+        }
+    }
     if (tailored_active && options.tailored_bc_subset_inventory_imbalance) {
         if (stats != nullptr) stats->enabled_families.push_back("subset_inventory_imbalance");
         const int max_size = std::min({3, V, std::max(1, options.tailored_bc_subset_inventory_max_size)});
@@ -1119,6 +1218,95 @@ void writeCompactLp(const Instance& instance,
         for (int a = 1; a <= V; ++a) {
             for (int b = a + 1; b <= V; ++b) addTransferCutset({a, b});
         }
+    }
+    auto generateReceiverSubsets = [&](int max_size, const auto& add_subset) {
+        const int capped = std::min({3, V, std::max(1, max_size)});
+        for (int a = 1; a <= V; ++a) add_subset(std::vector<int>{a});
+        if (capped >= 2) {
+            for (int a = 1; a <= V; ++a) {
+                for (int b = a + 1; b <= V; ++b) add_subset(std::vector<int>{a, b});
+            }
+        }
+        if (capped >= 3) {
+            for (int a = 1; a <= V; ++a) {
+                for (int b = a + 1; b <= V; ++b) {
+                    for (int c = b + 1; c <= V; ++c) {
+                        add_subset(std::vector<int>{a, b, c});
+                    }
+                }
+            }
+        }
+    };
+    if (tailored_active && options.tailored_bc_compatible_source_transfer_cuts) {
+        if (stats != nullptr) {
+            stats->enabled_families.push_back("compatible_source_transfer_cutset");
+        }
+        auto sourceCompatible = [&](int k, int source, const std::vector<int>& receivers) {
+            (void)k;
+            for (int j : receivers) {
+                const double travel_lb =
+                    instance.dist[0][source] + instance.dist[source][j] + instance.dist[j][0];
+                if (travel_lb <= instance.total_time_limit + 1e-9) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        auto addCompatibleSourceTransfer = [&](const std::vector<int>& subset) {
+            std::set<int> in_subset(subset.begin(), subset.end());
+            for (int k = 0; k < M; ++k) {
+                Expr cut;
+                for (int j : subset) {
+                    addTerm(cut, dName(k, j), 1.0);
+                    addTerm(cut, pName(k, j), -1.0);
+                }
+                int compatible_outside = 0;
+                int all_outside = 0;
+                for (int i = 1; i <= V; ++i) {
+                    if (in_subset.count(i)) continue;
+                    ++all_outside;
+                    if (sourceCompatible(k, i, subset)) {
+                        addTerm(cut, pName(k, i), -1.0);
+                        ++compatible_outside;
+                    }
+                }
+                if (stats != nullptr) ++stats->tailored_compatible_source_transfer_candidates;
+                if (compatible_outside >= all_outside) {
+                    return;
+                }
+                writeConstraint(out, cid, cut, "<=", 0.0);
+                if (stats != nullptr) ++stats->tailored_compatible_source_transfer_cuts_added;
+            }
+        };
+        generateReceiverSubsets(options.tailored_bc_transfer_max_receiver_size,
+                                addCompatibleSourceTransfer);
+    }
+    if (tailored_active && options.tailored_bc_required_external_source_cuts) {
+        if (stats != nullptr) {
+            stats->enabled_families.push_back("required_external_source");
+        }
+        auto addRequiredExternalSource = [&](const std::vector<int>& subset) {
+            std::set<int> in_subset(subset.begin(), subset.end());
+            int lower_inventory = 0;
+            int initial_inventory = 0;
+            for (int j : subset) {
+                lower_inventory += y_lb[j];
+                initial_inventory += instance.initial[j];
+            }
+            const int required_delivery =
+                std::max(0, lower_inventory - initial_inventory);
+            if (required_delivery <= 0) return;
+            Expr cut;
+            for (int k = 0; k < M; ++k) {
+                for (int i = 1; i <= V; ++i) {
+                    if (!in_subset.count(i)) addTerm(cut, pName(k, i), 1.0);
+                }
+            }
+            writeConstraint(out, cid, cut, ">=", static_cast<double>(required_delivery));
+            if (stats != nullptr) ++stats->tailored_required_external_source_cuts_added;
+        };
+        generateReceiverSubsets(options.tailored_bc_transfer_max_receiver_size,
+                                addRequiredExternalSource);
     }
     if (tailored_active && options.tailored_bc_benders_inventory_cuts == "diagnostic") {
         if (stats != nullptr) stats->enabled_families.push_back("benders_inventory_diagnostic");
@@ -2535,6 +2723,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             strengthening_stats.s_range_refinement_enabled;
         result.s_range_global_L = strengthening_stats.s_range_global_L;
         result.s_range_global_U = strengthening_stats.s_range_global_U;
+        result.parent_S_L = strengthening_stats.s_range_global_L;
+        result.parent_S_U = strengthening_stats.s_range_global_U;
+        result.S_domain_source =
+            "Y_bounds_target_ratios_capacity_penalty_movement_domains";
         result.s_range_bucket_count = strengthening_stats.s_range_bucket_count;
         result.s_range_bucket_id = strengthening_stats.s_range_bucket_id;
         result.s_range_bucket_L = strengthening_stats.s_range_bucket_L;
@@ -2557,8 +2749,12 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             strengthening_stats.tailored_gini_subset_envelope_cuts_added +
             strengthening_stats.tailored_low_gini_l1_rows_added +
             strengthening_stats.tailored_local_centering_rows_added +
+            strengthening_stats.tailored_subset_cross_h_centering_rows_added +
+            strengthening_stats.tailored_local_q_centering_rows_added +
             strengthening_stats.tailored_subset_inventory_imbalance_cuts_added +
             strengthening_stats.tailored_transfer_cutset_cuts_added +
+            strengthening_stats.tailored_compatible_source_transfer_cuts_added +
+            strengthening_stats.tailored_required_external_source_cuts_added +
             strengthening_stats.tailored_benders_inventory_cuts_added;
         result.tailored_bc_low_gini_l1_centering_vars =
             strengthening_stats.tailored_low_gini_l1_vars;
@@ -2566,10 +2762,22 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             strengthening_stats.tailored_low_gini_l1_rows_added;
         result.tailored_bc_local_centering_rows_added =
             strengthening_stats.tailored_local_centering_rows_added;
+        result.tailored_bc_subset_cross_h_centering_rows_added =
+            strengthening_stats.tailored_subset_cross_h_centering_rows_added;
+        result.tailored_bc_subset_cross_h_centering_candidates =
+            strengthening_stats.tailored_subset_cross_h_centering_candidates;
+        result.tailored_bc_local_q_centering_rows_added =
+            strengthening_stats.tailored_local_q_centering_rows_added;
         result.tailored_bc_subset_inventory_imbalance_cuts_added =
             strengthening_stats.tailored_subset_inventory_imbalance_cuts_added;
         result.tailored_bc_transfer_cutset_cuts_added =
             strengthening_stats.tailored_transfer_cutset_cuts_added;
+        result.tailored_bc_compatible_source_transfer_cuts_added =
+            strengthening_stats.tailored_compatible_source_transfer_cuts_added;
+        result.tailored_bc_compatible_source_transfer_candidates =
+            strengthening_stats.tailored_compatible_source_transfer_candidates;
+        result.tailored_bc_required_external_source_cuts_added =
+            strengthening_stats.tailored_required_external_source_cuts_added;
         result.tailored_bc_benders_inventory_cuts_mode =
             options.tailored_bc_benders_inventory_cuts;
         result.tailored_bc_benders_inventory_cuts_added =
@@ -2584,10 +2792,18 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 << result.tailored_bc_low_gini_l1_centering_rows_added
                 << ";local_centering="
                 << result.tailored_bc_local_centering_rows_added
+                << ";subset_cross_h_centering="
+                << result.tailored_bc_subset_cross_h_centering_rows_added
+                << ";local_q_centering="
+                << result.tailored_bc_local_q_centering_rows_added
                 << ";subset_inventory_imbalance="
                 << result.tailored_bc_subset_inventory_imbalance_cuts_added
                 << ";transfer_cutset="
                 << result.tailored_bc_transfer_cutset_cuts_added
+                << ";compatible_source_transfer="
+                << result.tailored_bc_compatible_source_transfer_cuts_added
+                << ";required_external_source="
+                << result.tailored_bc_required_external_source_cuts_added
                 << ";benders_inventory_diagnostic="
                 << result.tailored_bc_benders_inventory_cuts_added;
             result.tailored_bc_user_cuts_added_by_family = tbc.str();
@@ -2721,6 +2937,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 options.tailored_bc_callback_separation_min_calls,
                 options.tailored_bc_callback_cut_profile,
                 options.tailored_bc_local_centering,
+                options.tailored_bc_subset_cross_h_centering,
+                options.tailored_bc_subset_cross_h_max_size,
+                options.tailored_bc_subset_cross_h_max_cuts,
+                options.tailored_bc_local_q_centering,
                 options.lambda,
                 cutoff.incumbent_ub - cutoff.epsilon,
                 instance.M,
@@ -2922,6 +3142,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     std::to_string(api_solve.callback_low_gini_l1_cuts_added) +
                     ";callback_local_centering=" +
                     std::to_string(api_solve.callback_local_centering_cuts_added) +
+                    ";callback_subset_cross_h_centering=" +
+                    std::to_string(api_solve.callback_subset_cross_h_centering_cuts_added) +
+                    ";callback_local_q_centering=" +
+                    std::to_string(api_solve.callback_local_q_centering_cuts_added) +
                     ";callback_variable_s_centering=" +
                     std::to_string(api_solve.callback_variable_s_centering_cuts_added) +
                     ";callback_subset_inventory_imbalance=" +
@@ -2964,6 +3188,22 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 result.tailored_bc_local_centering_max_violation =
                     std::max(result.tailored_bc_local_centering_max_violation,
                              api_solve.callback_local_centering_max_violation);
+                result.tailored_bc_subset_cross_h_centering_candidates +=
+                    api_solve.callback_subset_cross_h_centering_candidates;
+                result.tailored_bc_subset_cross_h_centering_violations +=
+                    api_solve.callback_subset_cross_h_centering_violations;
+                result.tailored_bc_subset_cross_h_centering_rows_added +=
+                    api_solve.callback_subset_cross_h_centering_cuts_added;
+                result.tailored_bc_subset_cross_h_centering_max_violation =
+                    std::max(result.tailored_bc_subset_cross_h_centering_max_violation,
+                             api_solve.callback_subset_cross_h_centering_max_violation);
+                result.tailored_bc_local_q_centering_violations +=
+                    api_solve.callback_local_q_centering_violations;
+                result.tailored_bc_local_q_centering_rows_added +=
+                    api_solve.callback_local_q_centering_cuts_added;
+                result.tailored_bc_local_q_centering_max_violation =
+                    std::max(result.tailored_bc_local_q_centering_max_violation,
+                             api_solve.callback_local_q_centering_max_violation);
                 result.tailored_bc_variable_s_centering_violations +=
                     api_solve.callback_variable_s_centering_violations;
                 result.tailored_bc_variable_s_centering_cuts_added +=
