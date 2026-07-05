@@ -385,6 +385,21 @@ struct CallbackState {
     std::atomic<double> local_centering_max_violation{0.0};
     std::mutex local_centering_mutex;
     std::set<std::string> local_centering_cut_keys;
+    bool enable_subset_cross_h_centering = false;
+    int subset_cross_h_max_size = 3;
+    int subset_cross_h_max_cuts = 50000;
+    std::atomic<long long> subset_cross_h_centering_cuts_added{0};
+    std::atomic<long long> subset_cross_h_centering_candidates{0};
+    std::atomic<long long> subset_cross_h_centering_violations{0};
+    std::atomic<double> subset_cross_h_centering_max_violation{0.0};
+    std::mutex subset_cross_h_centering_mutex;
+    std::set<std::string> subset_cross_h_centering_cut_keys;
+    bool enable_local_q_centering = false;
+    std::atomic<long long> local_q_centering_cuts_added{0};
+    std::atomic<long long> local_q_centering_violations{0};
+    std::atomic<double> local_q_centering_max_violation{0.0};
+    std::mutex local_q_centering_mutex;
+    std::set<std::string> local_q_centering_cut_keys;
     std::atomic<long long> variable_s_centering_cuts_added{0};
     std::atomic<long long> variable_s_centering_violations{0};
     std::atomic<long long> subset_inventory_imbalance_cuts_added{0};
@@ -507,16 +522,21 @@ bool callbackProfileAllows(const CallbackState& state,
             family == "visit_inventory" ||
             family == "low_gini_l1" ||
             family == "variable_s" ||
-            family == "local_centering";
+            family == "local_centering" ||
+            family == "subset_cross_h" ||
+            family == "local_q";
     }
     if (profile == "local-centering" || profile == "local_centering") {
         return family == "gini_interval" ||
             family == "visit_inventory" ||
-            family == "local_centering";
+            family == "local_centering" ||
+            family == "subset_cross_h" ||
+            family == "local_q";
     }
     if (profile == "subset-only" || profile == "subset_only") {
         return family == "gini_interval" ||
-            family == "gini_subset";
+            family == "gini_subset" ||
+            family == "subset_cross_h";
     }
     if (profile == "transfer-only" || profile == "transfer_only") {
         return family == "gini_interval" ||
@@ -525,6 +545,14 @@ bool callbackProfileAllows(const CallbackState& state,
     if (profile == "support-only" || profile == "support_only") {
         return family == "gini_interval" ||
             family == "support_duration";
+    }
+    if (profile == "subset-cross-h-only" || profile == "subset_cross_h_only") {
+        return family == "gini_interval" ||
+            family == "subset_cross_h";
+    }
+    if (profile == "local-q-only" || profile == "local_q_only") {
+        return family == "gini_interval" ||
+            family == "local_q";
     }
     return true;
 }
@@ -1071,6 +1099,241 @@ void separateLocalCentering(CallbackState& state,
     for (int i = 1; i <= V; ++i) {
         tryRow(i, 1);
         tryRow(i, -1);
+    }
+}
+
+void separateSubsetCrossHCentering(CallbackState& state,
+                                   CPXCALLBACKCONTEXTptr context) {
+    if (!state.enable_subset_cross_h_centering || state.ncols <= 0 ||
+        state.r_cols.size() <= 1 || state.h_cols.size() <= 1) {
+        return;
+    }
+    const int V = static_cast<int>(state.r_cols.size()) - 1;
+    if (V <= 1) return;
+    const int max_size = std::min({4, V, std::max(1, state.subset_cross_h_max_size)});
+    const long long max_cuts = state.subset_cross_h_max_cuts > 0
+        ? static_cast<long long>(state.subset_cross_h_max_cuts)
+        : std::numeric_limits<long long>::max();
+    if (state.subset_cross_h_centering_cuts_added.load() >= max_cuts) return;
+
+    std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
+    double obj = 0.0;
+    if (state.api->callbackgetrelaxationpoint(
+            context, x.data(), 0, state.ncols - 1, &obj) != 0) {
+        return;
+    }
+    double sum_r = 0.0;
+    for (int j = 1; j <= V; ++j) {
+        const int r = state.r_cols[static_cast<std::size_t>(j)];
+        if (r >= 0) sum_r += x[static_cast<std::size_t>(r)];
+    }
+    const double avg_r = sum_r / static_cast<double>(V);
+    auto hCol = [&](int a, int b) -> int {
+        if (a > b) std::swap(a, b);
+        if (a < 0 || b < 0 ||
+            a >= static_cast<int>(state.h_cols.size()) ||
+            b >= static_cast<int>(state.h_cols[static_cast<std::size_t>(a)].size())) {
+            return -1;
+        }
+        return state.h_cols[static_cast<std::size_t>(a)][static_cast<std::size_t>(b)];
+    };
+    auto safeVal = [&](int col) {
+        return col >= 0 ? x[static_cast<std::size_t>(col)] : 0.0;
+    };
+    std::vector<std::pair<double, int>> ranked;
+    ranked.reserve(static_cast<std::size_t>(V));
+    for (int i = 1; i <= V; ++i) {
+        const int r = state.r_cols[static_cast<std::size_t>(i)];
+        double score = r >= 0 ? std::fabs(x[static_cast<std::size_t>(r)] - avg_r) : 0.0;
+        double z_mass = 0.0;
+        double imbalance = 0.0;
+        for (int k = 0; k < static_cast<int>(state.z_cols.size()); ++k) {
+            const int z = safeCol(state.z_cols, k, i);
+            const double zv = safeVal(z);
+            z_mass += std::min(zv, std::fabs(1.0 - zv));
+            const int p = safeCol(state.p_cols, k, i);
+            const int d = safeCol(state.d_cols, k, i);
+            imbalance += std::fabs(safeVal(p) - safeVal(d));
+        }
+        score += 0.05 * z_mass + 0.01 * imbalance;
+        ranked.push_back({score, i});
+    }
+    std::sort(ranked.begin(), ranked.end(),
+              [](const auto& a, const auto& b) {
+                  if (a.first != b.first) return a.first > b.first;
+                  return a.second < b.second;
+              });
+    const int candidate_count = std::min(V, 12);
+    std::vector<int> pool;
+    pool.reserve(static_cast<std::size_t>(candidate_count));
+    for (int i = 0; i < candidate_count; ++i) {
+        pool.push_back(ranked[static_cast<std::size_t>(i)].second);
+    }
+    std::sort(pool.begin(), pool.end());
+
+    constexpr double tol = 1e-6;
+    auto addSubsetRow = [&](const std::vector<int>& subset, int sign) {
+        if (state.subset_cross_h_centering_cuts_added.load() >= max_cuts) return;
+        state.subset_cross_h_centering_candidates.fetch_add(1);
+        std::set<int> in_subset(subset.begin(), subset.end());
+        std::map<int, double> term_map;
+        auto addTerm = [&](int col, double coef) {
+            if (col < 0 || std::fabs(coef) <= 1e-12) return;
+            term_map[col] += coef;
+            if (std::fabs(term_map[col]) <= 1e-12) term_map.erase(col);
+        };
+        double lhs = 0.0;
+        if (sign > 0) {
+            for (int i : subset) {
+                const int r = state.r_cols[static_cast<std::size_t>(i)];
+                lhs += static_cast<double>(V) * safeVal(r);
+                addTerm(r, static_cast<double>(V));
+            }
+            for (int j = 1; j <= V; ++j) {
+                const int r = state.r_cols[static_cast<std::size_t>(j)];
+                lhs -= static_cast<double>(subset.size()) * safeVal(r);
+                addTerm(r, -static_cast<double>(subset.size()));
+            }
+        } else {
+            for (int j = 1; j <= V; ++j) {
+                const int r = state.r_cols[static_cast<std::size_t>(j)];
+                lhs += static_cast<double>(subset.size()) * safeVal(r);
+                addTerm(r, static_cast<double>(subset.size()));
+            }
+            for (int i : subset) {
+                const int r = state.r_cols[static_cast<std::size_t>(i)];
+                lhs -= static_cast<double>(V) * safeVal(r);
+                addTerm(r, -static_cast<double>(V));
+            }
+        }
+        for (int i : subset) {
+            for (int j = 1; j <= V; ++j) {
+                if (in_subset.count(j)) continue;
+                const int h = hCol(i, j);
+                if (h < 0) return;
+                lhs -= safeVal(h);
+                addTerm(h, -1.0);
+            }
+        }
+        if (lhs <= tol) return;
+        state.subset_cross_h_centering_violations.fetch_add(1);
+        atomicMax(state.subset_cross_h_centering_max_violation, lhs);
+        std::ostringstream key;
+        key << sign;
+        for (int i : subset) key << ":" << i;
+        {
+            std::lock_guard<std::mutex> guard(state.subset_cross_h_centering_mutex);
+            if (!state.subset_cross_h_centering_cut_keys.insert(key.str()).second) {
+                return;
+            }
+        }
+        std::vector<std::pair<int, double>> terms;
+        terms.reserve(term_map.size());
+        for (const auto& kv : term_map) terms.push_back(kv);
+        if (addOneUserCut(state, context, terms, 'L', 0.0)) {
+            state.subset_cross_h_centering_cuts_added.fetch_add(1);
+        }
+    };
+    auto testSubset = [&](const std::vector<int>& subset) {
+        addSubsetRow(subset, 1);
+        addSubsetRow(subset, -1);
+    };
+    for (int a = 0; a < static_cast<int>(pool.size()); ++a) {
+        testSubset({pool[static_cast<std::size_t>(a)]});
+    }
+    if (max_size >= 2) {
+        for (int a = 0; a < static_cast<int>(pool.size()); ++a) {
+            for (int b = a + 1; b < static_cast<int>(pool.size()); ++b) {
+                testSubset({pool[static_cast<std::size_t>(a)],
+                            pool[static_cast<std::size_t>(b)]});
+            }
+        }
+    }
+    if (max_size >= 3) {
+        for (int a = 0; a < static_cast<int>(pool.size()); ++a) {
+            for (int b = a + 1; b < static_cast<int>(pool.size()); ++b) {
+                for (int c = b + 1; c < static_cast<int>(pool.size()); ++c) {
+                    testSubset({pool[static_cast<std::size_t>(a)],
+                                pool[static_cast<std::size_t>(b)],
+                                pool[static_cast<std::size_t>(c)]});
+                }
+            }
+        }
+    }
+    if (max_size >= 4) {
+        for (int a = 0; a < static_cast<int>(pool.size()); ++a) {
+            for (int b = a + 1; b < static_cast<int>(pool.size()); ++b) {
+                for (int c = b + 1; c < static_cast<int>(pool.size()); ++c) {
+                    for (int d = c + 1; d < static_cast<int>(pool.size()); ++d) {
+                        testSubset({pool[static_cast<std::size_t>(a)],
+                                    pool[static_cast<std::size_t>(b)],
+                                    pool[static_cast<std::size_t>(c)],
+                                    pool[static_cast<std::size_t>(d)]});
+                    }
+                }
+            }
+        }
+    }
+}
+
+void separateLocalQCentering(CallbackState& state,
+                             CPXCALLBACKCONTEXTptr context) {
+    if (!state.enable_local_q_centering || state.ncols <= 0 ||
+        state.q_l1_cols.size() <= 1 || state.h_cols.size() <= 1) {
+        return;
+    }
+    std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
+    double obj = 0.0;
+    if (state.api->callbackgetrelaxationpoint(
+            context, x.data(), 0, state.ncols - 1, &obj) != 0) {
+        return;
+    }
+    const int V = std::min(static_cast<int>(state.q_l1_cols.size()),
+                           static_cast<int>(state.h_cols.size())) - 1;
+    if (V <= 1) return;
+    auto hCol = [&](int a, int b) -> int {
+        if (a > b) std::swap(a, b);
+        if (a < 0 || b < 0 ||
+            a >= static_cast<int>(state.h_cols.size()) ||
+            b >= static_cast<int>(state.h_cols[static_cast<std::size_t>(a)].size())) {
+            return -1;
+        }
+        return state.h_cols[static_cast<std::size_t>(a)][static_cast<std::size_t>(b)];
+    };
+    constexpr double tol = 1e-6;
+    for (int i = 1; i <= V; ++i) {
+        const int q = state.q_l1_cols[static_cast<std::size_t>(i)];
+        if (q < 0) continue;
+        std::map<int, double> term_map;
+        term_map[q] = static_cast<double>(V);
+        double lhs = static_cast<double>(V) * x[static_cast<std::size_t>(q)];
+        for (int j = 1; j <= V; ++j) {
+            if (j == i) continue;
+            const int h = hCol(i, j);
+            if (h < 0) {
+                term_map.clear();
+                break;
+            }
+            lhs -= x[static_cast<std::size_t>(h)];
+            term_map[h] -= 1.0;
+        }
+        if (term_map.empty() || lhs <= tol) continue;
+        state.local_q_centering_violations.fetch_add(1);
+        atomicMax(state.local_q_centering_max_violation, lhs);
+        std::ostringstream key;
+        key << i;
+        {
+            std::lock_guard<std::mutex> guard(state.local_q_centering_mutex);
+            if (!state.local_q_centering_cut_keys.insert(key.str()).second) {
+                continue;
+            }
+        }
+        std::vector<std::pair<int, double>> terms;
+        terms.reserve(term_map.size());
+        for (const auto& kv : term_map) terms.push_back(kv);
+        if (addOneUserCut(state, context, terms, 'L', 0.0)) {
+            state.local_q_centering_cuts_added.fetch_add(1);
+        }
     }
 }
 
@@ -2281,6 +2544,12 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
         if (callbackProfileAllows(*state, "local_centering")) {
             separateLocalCentering(*state, context);
         }
+        if (callbackProfileAllows(*state, "subset_cross_h")) {
+            separateSubsetCrossHCentering(*state, context);
+        }
+        if (callbackProfileAllows(*state, "local_q")) {
+            separateLocalQCentering(*state, context);
+        }
         if (callbackProfileAllows(*state, "variable_s")) {
             separateVariableSCentering(*state, context);
         }
@@ -2368,6 +2637,10 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     int separation_min_relaxation_calls,
     const std::string& callback_cut_profile,
     bool enable_local_centering,
+    bool enable_subset_cross_h_centering,
+    int subset_cross_h_max_size,
+    int subset_cross_h_max_cuts,
+    bool enable_local_q_centering,
     double lambda,
     double cutoff_value,
     int vehicle_count,
@@ -2571,6 +2844,12 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         ? "full"
         : callback_cut_profile;
     cb_state.enable_local_centering = enable_local_centering;
+    cb_state.enable_subset_cross_h_centering = enable_subset_cross_h_centering;
+    cb_state.subset_cross_h_max_size =
+        std::min(4, std::max(1, subset_cross_h_max_size));
+    cb_state.subset_cross_h_max_cuts =
+        std::max(0, subset_cross_h_max_cuts);
+    cb_state.enable_local_q_centering = enable_local_q_centering;
     cb_state.lambda = lambda;
     cb_state.cutoff_value = cutoff_value;
     cb_state.gamma_L = gamma_L;
@@ -2619,6 +2898,9 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
            << cb_state.gini_subset_envelope_cuts_added.load()
            << ";low_gini_l1_centering=" << cb_state.low_gini_l1_cuts_added.load()
            << ";local_centering=" << cb_state.local_centering_cuts_added.load()
+           << ";subset_cross_h_centering="
+           << cb_state.subset_cross_h_centering_cuts_added.load()
+           << ";local_q_centering=" << cb_state.local_q_centering_cuts_added.load()
            << ";variable_s_centering=" << cb_state.variable_s_centering_cuts_added.load()
            << ";subset_inventory_imbalance="
            << cb_state.subset_inventory_imbalance_cuts_added.load()
@@ -2639,6 +2921,9 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
            << cb_state.gini_subset_envelope_violations.load()
            << ";low_gini_l1_centering=" << cb_state.low_gini_l1_violations.load()
            << ";local_centering=" << cb_state.local_centering_violations.load()
+           << ";subset_cross_h_centering="
+           << cb_state.subset_cross_h_centering_violations.load()
+           << ";local_q_centering=" << cb_state.local_q_centering_violations.load()
            << ";variable_s_centering="
            << cb_state.variable_s_centering_violations.load()
            << ";subset_inventory_imbalance="
@@ -2874,6 +3159,20 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         cb_state.local_centering_violations.load();
     out.callback_local_centering_max_violation =
         cb_state.local_centering_max_violation.load();
+    out.callback_subset_cross_h_centering_cuts_added =
+        cb_state.subset_cross_h_centering_cuts_added.load();
+    out.callback_subset_cross_h_centering_candidates =
+        cb_state.subset_cross_h_centering_candidates.load();
+    out.callback_subset_cross_h_centering_violations =
+        cb_state.subset_cross_h_centering_violations.load();
+    out.callback_subset_cross_h_centering_max_violation =
+        cb_state.subset_cross_h_centering_max_violation.load();
+    out.callback_local_q_centering_cuts_added =
+        cb_state.local_q_centering_cuts_added.load();
+    out.callback_local_q_centering_violations =
+        cb_state.local_q_centering_violations.load();
+    out.callback_local_q_centering_max_violation =
+        cb_state.local_q_centering_max_violation.load();
     out.callback_variable_s_centering_cuts_added =
         cb_state.variable_s_centering_cuts_added.load();
     out.callback_variable_s_centering_violations =

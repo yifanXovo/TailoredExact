@@ -64,6 +64,13 @@ struct TailoredBCCplexApiSolveResult {
     long long callback_local_centering_cuts_added = 0;
     long long callback_local_centering_violations = 0;
     double callback_local_centering_max_violation = 0.0;
+    long long callback_subset_cross_h_centering_cuts_added = 0;
+    long long callback_subset_cross_h_centering_candidates = 0;
+    long long callback_subset_cross_h_centering_violations = 0;
+    double callback_subset_cross_h_centering_max_violation = 0.0;
+    long long callback_local_q_centering_cuts_added = 0;
+    long long callback_local_q_centering_violations = 0;
+    double callback_local_q_centering_max_violation = 0.0;
     long long callback_variable_s_centering_cuts_added = 0;
     long long callback_variable_s_centering_violations = 0;
     long long callback_subset_inventory_imbalance_cuts_added = 0;
@@ -148,6 +155,10 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     int separation_min_relaxation_calls,
     const std::string& callback_cut_profile,
     bool enable_local_centering,
+    bool enable_subset_cross_h_centering,
+    int subset_cross_h_max_size,
+    int subset_cross_h_max_cuts,
+    bool enable_local_q_centering,
     double lambda,
     double cutoff_value,
     int vehicle_count,

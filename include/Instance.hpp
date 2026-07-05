@@ -182,9 +182,16 @@ struct SolveOptions {
     bool tailored_bc_callback_cut_profile_explicit = false;
     bool tailored_bc_low_gini_l1_centering = false;
     bool tailored_bc_local_centering = false;
+    bool tailored_bc_subset_cross_h_centering = false;
+    int tailored_bc_subset_cross_h_max_size = 3;
+    int tailored_bc_subset_cross_h_max_cuts = 50000;
+    bool tailored_bc_local_q_centering = false;
     bool tailored_bc_subset_inventory_imbalance = false;
     int tailored_bc_subset_inventory_max_size = 3;
     bool tailored_bc_transfer_cutset = false;
+    bool tailored_bc_compatible_source_transfer_cuts = false;
+    bool tailored_bc_required_external_source_cuts = false;
+    int tailored_bc_transfer_max_receiver_size = 2;
     std::string tailored_bc_support_duration_cover_mode = "support_cover_lifted";
     std::string tailored_bc_benders_inventory_cuts = "off";
     std::string compact_bc_model_size_policy = "full";

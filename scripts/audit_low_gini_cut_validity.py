@@ -36,6 +36,7 @@ def main() -> int:
         "tailored-bc-cut-validity-test",
         "low-gini-l1-centering-test",
         "gini-subset-envelope-test",
+        "transfer-cutset-validity-test",
         "s-bucket-coverage-test",
     ]
     rows: List[Dict[str, Any]] = []
@@ -57,11 +58,49 @@ def main() -> int:
             failures += 1
         rows.append({
             "method": method,
+            "row_type": "built_in_validity_test",
             "returncode": proc.returncode,
             "json_path": str(out_json.relative_to(ROOT)),
             "status": data.get("status", "missing"),
             "audit_passed": ok,
             "stdout_tail": proc.stdout[-500:].replace("\n", " "),
+        })
+    proof_ok = failures == 0
+    proof_guard_fields = {
+        "tailored_bc_subset_cross_h_centering_rows_added": "subset_cross_h_centering",
+        "tailored_bc_local_q_centering_rows_added": "local_q_centering",
+        "tailored_bc_compatible_source_transfer_cuts_added": "compatible_source_transfer",
+        "tailored_bc_required_external_source_cuts_added": "required_external_source",
+    }
+    for path in sorted(raw.glob("*.json")):
+        if path.name.startswith("validity_"):
+            continue
+        data = read_json(path)
+        if not data:
+            continue
+        used = []
+        for field, family in proof_guard_fields.items():
+            try:
+                value = float(data.get(field, 0) or 0)
+            except (TypeError, ValueError):
+                value = 0.0
+            if value > 0:
+                used.append(family)
+        if not used:
+            continue
+        diagnostic_only = str(data.get("row_class", "")).lower().startswith("diagnostic") or \
+            str(data.get("tailored_bc_source_class", "")).lower() == "diagnostic"
+        ok = proof_ok or diagnostic_only
+        if not ok:
+            failures += 1
+        rows.append({
+            "method": data.get("method", "json_scan"),
+            "row_type": "round_json_cut_scan",
+            "returncode": "",
+            "json_path": str(path.relative_to(ROOT)),
+            "status": data.get("status", "missing"),
+            "audit_passed": ok,
+            "stdout_tail": "families=" + "|".join(used),
         })
     out = ROOT / args.out if args.out else root / "low_gini_cut_validity_audit.csv"
     out.parent.mkdir(parents=True, exist_ok=True)
