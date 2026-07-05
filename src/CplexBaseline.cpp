@@ -68,6 +68,7 @@ struct CompactOracleStrengtheningStats {
     long long tailored_gini_subset_envelope_cuts_added = 0;
     long long tailored_low_gini_l1_vars = 0;
     long long tailored_low_gini_l1_rows_added = 0;
+    long long tailored_local_centering_rows_added = 0;
     long long tailored_subset_inventory_imbalance_cuts_added = 0;
     long long tailored_transfer_cutset_cuts_added = 0;
     long long tailored_benders_inventory_cuts_added = 0;
@@ -1026,6 +1027,32 @@ void writeCompactLp(const Instance& instance,
         }
         writeConstraint(out, cid, sum_q, "<=", 0.0);
         if (stats != nullptr) ++stats->tailored_low_gini_l1_rows_added;
+    }
+    if (tailored_active && cutoff != nullptr && cutoff->enabled &&
+        options.tailored_bc_local_centering && cutoff->gamma_U >= -1e-12) {
+        if (stats != nullptr) {
+            stats->enabled_families.push_back("local_centering_pairwise_h");
+        }
+        for (int i = 1; i <= V; ++i) {
+            Expr pos;
+            addTerm(pos, rName(i), static_cast<double>(V));
+            for (int j = 1; j <= V; ++j) addTerm(pos, rName(j), -1.0);
+            for (int j = 1; j <= V; ++j) {
+                if (j == i) continue;
+                addTerm(pos, i < j ? hName(i, j) : hName(j, i), -1.0);
+            }
+            writeConstraint(out, cid, pos, "<=", 0.0);
+
+            Expr neg;
+            for (int j = 1; j <= V; ++j) addTerm(neg, rName(j), 1.0);
+            addTerm(neg, rName(i), -static_cast<double>(V));
+            for (int j = 1; j <= V; ++j) {
+                if (j == i) continue;
+                addTerm(neg, i < j ? hName(i, j) : hName(j, i), -1.0);
+            }
+            writeConstraint(out, cid, neg, "<=", 0.0);
+            if (stats != nullptr) stats->tailored_local_centering_rows_added += 2;
+        }
     }
     if (tailored_active && options.tailored_bc_subset_inventory_imbalance) {
         if (stats != nullptr) stats->enabled_families.push_back("subset_inventory_imbalance");
@@ -2529,6 +2556,7 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         result.tailored_bc_user_cuts_added_total =
             strengthening_stats.tailored_gini_subset_envelope_cuts_added +
             strengthening_stats.tailored_low_gini_l1_rows_added +
+            strengthening_stats.tailored_local_centering_rows_added +
             strengthening_stats.tailored_subset_inventory_imbalance_cuts_added +
             strengthening_stats.tailored_transfer_cutset_cuts_added +
             strengthening_stats.tailored_benders_inventory_cuts_added;
@@ -2536,6 +2564,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             strengthening_stats.tailored_low_gini_l1_vars;
         result.tailored_bc_low_gini_l1_centering_rows_added =
             strengthening_stats.tailored_low_gini_l1_rows_added;
+        result.tailored_bc_local_centering_rows_added =
+            strengthening_stats.tailored_local_centering_rows_added;
         result.tailored_bc_subset_inventory_imbalance_cuts_added =
             strengthening_stats.tailored_subset_inventory_imbalance_cuts_added;
         result.tailored_bc_transfer_cutset_cuts_added =
@@ -2552,6 +2582,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 << result.tailored_bc_gini_subset_envelope_cuts_added
                 << ";low_gini_l1_centering="
                 << result.tailored_bc_low_gini_l1_centering_rows_added
+                << ";local_centering="
+                << result.tailored_bc_local_centering_rows_added
                 << ";subset_inventory_imbalance="
                 << result.tailored_bc_subset_inventory_imbalance_cuts_added
                 << ";transfer_cutset="
@@ -2687,6 +2719,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 options.tailored_bc_gini_subset_max_cuts,
                 options.tailored_bc_callback_separation_pacing,
                 options.tailored_bc_callback_separation_min_calls,
+                options.tailored_bc_callback_cut_profile,
+                options.tailored_bc_local_centering,
                 options.lambda,
                 cutoff.incumbent_ub - cutoff.epsilon,
                 instance.M,
@@ -2886,6 +2920,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     std::to_string(api_solve.callback_gini_subset_envelope_cuts_added) +
                     ";callback_low_gini_l1_centering=" +
                     std::to_string(api_solve.callback_low_gini_l1_cuts_added) +
+                    ";callback_local_centering=" +
+                    std::to_string(api_solve.callback_local_centering_cuts_added) +
                     ";callback_variable_s_centering=" +
                     std::to_string(api_solve.callback_variable_s_centering_cuts_added) +
                     ";callback_subset_inventory_imbalance=" +
@@ -2915,10 +2951,19 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     api_solve.callback_expensive_separation_calls;
                 result.tailored_bc_callback_expensive_separation_skips =
                     api_solve.callback_expensive_separation_skips;
+                result.tailored_bc_callback_cut_profile =
+                    options.tailored_bc_callback_cut_profile;
                 result.tailored_bc_low_gini_l1_centering_violations +=
                     api_solve.callback_low_gini_l1_violations;
                 result.tailored_bc_low_gini_l1_centering_rows_added +=
                     api_solve.callback_low_gini_l1_cuts_added;
+                result.tailored_bc_local_centering_violations +=
+                    api_solve.callback_local_centering_violations;
+                result.tailored_bc_local_centering_rows_added +=
+                    api_solve.callback_local_centering_cuts_added;
+                result.tailored_bc_local_centering_max_violation =
+                    std::max(result.tailored_bc_local_centering_max_violation,
+                             api_solve.callback_local_centering_max_violation);
                 result.tailored_bc_variable_s_centering_violations +=
                     api_solve.callback_variable_s_centering_violations;
                 result.tailored_bc_variable_s_centering_cuts_added +=

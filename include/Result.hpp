@@ -728,9 +728,13 @@ struct SolveResult {
     std::string tailored_bc_callback_separation_pacing = "off";
     long long tailored_bc_callback_expensive_separation_calls = 0;
     long long tailored_bc_callback_expensive_separation_skips = 0;
+    std::string tailored_bc_callback_cut_profile = "full";
     long long tailored_bc_low_gini_l1_centering_vars = 0;
     long long tailored_bc_low_gini_l1_centering_rows_added = 0;
     long long tailored_bc_low_gini_l1_centering_violations = 0;
+    long long tailored_bc_local_centering_rows_added = 0;
+    long long tailored_bc_local_centering_violations = 0;
+    double tailored_bc_local_centering_max_violation = 0.0;
     long long tailored_bc_variable_s_centering_cuts_added = 0;
     long long tailored_bc_variable_s_centering_violations = 0;
     long long tailored_bc_subset_inventory_imbalance_cuts_added = 0;

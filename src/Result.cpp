@@ -1687,12 +1687,20 @@ std::string resultToJson(const SolveResult& input) {
         << result.tailored_bc_callback_expensive_separation_calls << ",\n";
     out << "  \"tailored_bc_callback_expensive_separation_skips\": "
         << result.tailored_bc_callback_expensive_separation_skips << ",\n";
+    out << "  \"tailored_bc_callback_cut_profile\": \""
+        << jsonEscape(result.tailored_bc_callback_cut_profile) << "\",\n";
     out << "  \"tailored_bc_low_gini_l1_centering_vars\": "
         << result.tailored_bc_low_gini_l1_centering_vars << ",\n";
     out << "  \"tailored_bc_low_gini_l1_centering_rows_added\": "
         << result.tailored_bc_low_gini_l1_centering_rows_added << ",\n";
     out << "  \"tailored_bc_low_gini_l1_centering_violations\": "
         << result.tailored_bc_low_gini_l1_centering_violations << ",\n";
+    out << "  \"tailored_bc_local_centering_rows_added\": "
+        << result.tailored_bc_local_centering_rows_added << ",\n";
+    out << "  \"tailored_bc_local_centering_violations\": "
+        << result.tailored_bc_local_centering_violations << ",\n";
+    out << "  \"tailored_bc_local_centering_max_violation\": "
+        << result.tailored_bc_local_centering_max_violation << ",\n";
     out << "  \"tailored_bc_variable_s_centering_cuts_added\": "
         << result.tailored_bc_variable_s_centering_cuts_added << ",\n";
     out << "  \"tailored_bc_variable_s_centering_violations\": "

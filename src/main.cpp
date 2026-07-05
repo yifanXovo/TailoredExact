@@ -762,6 +762,13 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--tailored-bc-callback-separation-min-calls") {
             opt.tailored_bc_callback_separation_min_calls = std::stoi(requireValue(i, argc, argv));
         }
+        else if (arg == "--tailored-bc-callback-cut-profile") {
+            opt.tailored_bc_callback_cut_profile = lowerAscii(requireValue(i, argc, argv));
+            opt.tailored_bc_callback_cut_profile_explicit = true;
+        }
+        else if (arg == "--tailored-bc-local-centering") {
+            opt.tailored_bc_local_centering = parseBoolValue(requireValue(i, argc, argv));
+        }
         else if (arg == "--tailored-bc-low-gini-l1-centering") {
             opt.tailored_bc_low_gini_l1_centering = parseBoolValue(requireValue(i, argc, argv));
         }
@@ -1649,6 +1656,31 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if (opt.tailored_bc_callback_separation_min_calls < 1) {
         opt.tailored_bc_callback_separation_min_calls = 1;
+    }
+    opt.tailored_bc_callback_cut_profile =
+        lowerAscii(opt.tailored_bc_callback_cut_profile);
+    if (opt.tailored_bc_callback_cut_profile == "none") {
+        opt.tailored_bc_callback_cut_profile = "off";
+    } else if (opt.tailored_bc_callback_cut_profile == "low_gini") {
+        opt.tailored_bc_callback_cut_profile = "low-gini";
+    } else if (opt.tailored_bc_callback_cut_profile == "local_centering") {
+        opt.tailored_bc_callback_cut_profile = "local-centering";
+    } else if (opt.tailored_bc_callback_cut_profile == "subset_only") {
+        opt.tailored_bc_callback_cut_profile = "subset-only";
+    } else if (opt.tailored_bc_callback_cut_profile == "transfer_only") {
+        opt.tailored_bc_callback_cut_profile = "transfer-only";
+    } else if (opt.tailored_bc_callback_cut_profile == "support_only") {
+        opt.tailored_bc_callback_cut_profile = "support-only";
+    }
+    if (opt.tailored_bc_callback_cut_profile != "off" &&
+        opt.tailored_bc_callback_cut_profile != "full" &&
+        opt.tailored_bc_callback_cut_profile != "cheap" &&
+        opt.tailored_bc_callback_cut_profile != "low-gini" &&
+        opt.tailored_bc_callback_cut_profile != "local-centering" &&
+        opt.tailored_bc_callback_cut_profile != "subset-only" &&
+        opt.tailored_bc_callback_cut_profile != "transfer-only" &&
+        opt.tailored_bc_callback_cut_profile != "support-only") {
+        opt.tailored_bc_callback_cut_profile = "full";
     }
     opt.tailored_bc_subset_inventory_max_size =
         std::min(3, std::max(1, opt.tailored_bc_subset_inventory_max_size));
@@ -9378,6 +9410,8 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
                 tailored_opt.tailored_bc_gini_subset_max_cuts,
                 tailored_opt.tailored_bc_callback_separation_pacing,
                 tailored_opt.tailored_bc_callback_separation_min_calls,
+                tailored_opt.tailored_bc_callback_cut_profile,
+                tailored_opt.tailored_bc_local_centering,
                 0.0,
                 std::numeric_limits<double>::infinity(),
                 0);
@@ -9412,7 +9446,17 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
             ";callback_gini_subset_envelope=" +
             std::to_string(api.callback_gini_subset_envelope_cuts_added) +
             ";callback_low_gini_l1_centering=" +
-            std::to_string(api.callback_low_gini_l1_cuts_added);
+            std::to_string(api.callback_low_gini_l1_cuts_added) +
+            ";callback_local_centering=" +
+            std::to_string(api.callback_local_centering_cuts_added);
+        result.tailored_bc_callback_cut_profile =
+            tailored_opt.tailored_bc_callback_cut_profile;
+        result.tailored_bc_local_centering_rows_added =
+            api.callback_local_centering_cuts_added;
+        result.tailored_bc_local_centering_violations =
+            api.callback_local_centering_violations;
+        result.tailored_bc_local_centering_max_violation =
+            api.callback_local_centering_max_violation;
         result.tailored_bc_lazy_rejections_total = api.lazy_rejections;
         result.tailored_bc_lazy_rejections_by_reason =
             "candidate_gini_interval_violation=" +
@@ -9483,11 +9527,12 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
     } else if (method == "tailored-bc-cut-validity-test") {
         const bool ok = cuts.gini_subset_envelope_valid &&
             cuts.low_gini_l1_centering_valid &&
+            cuts.local_centering_valid &&
             cuts.transfer_cutset_basic_valid &&
             cuts.s_bucket_requires_full_coverage;
         result.status = ok ? "diagnostic_passed" : "diagnostic_failed";
         result.notes.push_back(
-            "tailored_bc_cut_validity_test: checked gini subset envelope, low-gini L1 centering, basic transfer cutset, and S-bucket coverage guard");
+            "tailored_bc_cut_validity_test: checked gini subset envelope, low-gini L1 centering, local centering, basic transfer cutset, and S-bucket coverage guard");
     } else if (method == "gini-subset-envelope-test") {
         result.status = cuts.gini_subset_envelope_valid
             ? "diagnostic_passed"
@@ -15663,6 +15708,8 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     long long total_tailored_gini_subset = 0;
     long long total_tailored_l1 = 0;
     long long total_tailored_l1_vars = 0;
+    long long total_tailored_local_centering = 0;
+    long long total_tailored_local_centering_violations = 0;
     long long total_tailored_variable_s = 0;
     long long total_tailored_variable_s_violations = 0;
     long long total_tailored_subset_inventory = 0;
@@ -16019,6 +16066,8 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         total_tailored_gini_subset += oracle.tailored_bc_gini_subset_envelope_cuts_added;
         total_tailored_l1 += oracle.tailored_bc_low_gini_l1_centering_rows_added;
         total_tailored_l1_vars += oracle.tailored_bc_low_gini_l1_centering_vars;
+        total_tailored_local_centering += oracle.tailored_bc_local_centering_rows_added;
+        total_tailored_local_centering_violations += oracle.tailored_bc_local_centering_violations;
         total_tailored_variable_s += oracle.tailored_bc_variable_s_centering_cuts_added;
         total_tailored_variable_s_violations += oracle.tailored_bc_variable_s_centering_violations;
         total_tailored_subset_inventory += oracle.tailored_bc_subset_inventory_imbalance_cuts_added;
@@ -16224,6 +16273,7 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         addFamily("sp_product_estimator", opt.compact_bc_sp_product_estimator != "off");
         addFamily("gini_subset_envelope", opt.tailored_bc_gini_subset_envelope);
         addFamily("low_gini_l1_centering", opt.tailored_bc_low_gini_l1_centering);
+        addFamily("local_centering", opt.tailored_bc_local_centering);
         addFamily("subset_inventory_imbalance", opt.tailored_bc_subset_inventory_imbalance);
         addFamily("vehicle_transfer_cutset", opt.tailored_bc_transfer_cutset);
         addFamily("support_duration", opt.compact_bc_support_duration_cuts);
@@ -16298,6 +16348,10 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     result.tailored_bc_gini_subset_envelope_cuts_added = total_tailored_gini_subset;
     result.tailored_bc_low_gini_l1_centering_rows_added = total_tailored_l1;
     result.tailored_bc_low_gini_l1_centering_vars = total_tailored_l1_vars;
+    result.tailored_bc_local_centering_rows_added =
+        total_tailored_local_centering;
+    result.tailored_bc_local_centering_violations =
+        total_tailored_local_centering_violations;
     result.tailored_bc_variable_s_centering_cuts_added =
         total_tailored_variable_s;
     result.tailored_bc_variable_s_centering_violations =
@@ -16338,6 +16392,7 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         total_tailored_support_lifted_violations;
     result.tailored_bc_user_cuts_added_total =
         total_tailored_gini_subset + total_tailored_l1 +
+        total_tailored_local_centering +
         total_tailored_variable_s +
         total_tailored_subset_inventory + total_tailored_transfer_cutset +
         total_tailored_benders_inventory +
@@ -16347,6 +16402,7 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         std::ostringstream tailored_cuts;
         tailored_cuts << "gini_subset_envelope=" << total_tailored_gini_subset
                       << ";low_gini_l1_centering=" << total_tailored_l1
+                      << ";local_centering=" << total_tailored_local_centering
                       << ";variable_s_centering=" << total_tailored_variable_s
                       << ";subset_inventory_imbalance=" << total_tailored_subset_inventory
                       << ";transfer_cutset=" << total_tailored_transfer_cutset
@@ -16372,6 +16428,7 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
              << ";sp_product_estimator=" << total_sp_product_estimator
              << ";tailored_gini_subset_envelope=" << total_tailored_gini_subset
              << ";tailored_low_gini_l1_centering=" << total_tailored_l1
+             << ";tailored_local_centering=" << total_tailored_local_centering
              << ";tailored_variable_s_centering=" << total_tailored_variable_s
              << ";tailored_subset_inventory_imbalance=" << total_tailored_subset_inventory
              << ";tailored_transfer_cutset=" << total_tailored_transfer_cutset

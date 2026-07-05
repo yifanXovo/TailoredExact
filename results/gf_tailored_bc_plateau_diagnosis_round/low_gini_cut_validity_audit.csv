@@ -1,0 +1,5 @@
+method,returncode,json_path,status,audit_passed,stdout_tail
+tailored-bc-cut-validity-test,0,results\gf_tailored_bc_plateau_diagnosis_round\raw\validity_tailored-bc-cut-validity-test.json,diagnostic_passed,True,gcap_smoke_V4_M1.txt tailored-bc-cut-validity-test diagnostic_passed obj=0.49 runtime=0.0008723 columns=0 
+low-gini-l1-centering-test,0,results\gf_tailored_bc_plateau_diagnosis_round\raw\validity_low-gini-l1-centering-test.json,diagnostic_passed,True,gcap_smoke_V4_M1.txt low-gini-l1-centering-test diagnostic_passed obj=0.49 runtime=0.0009368 columns=0 
+gini-subset-envelope-test,0,results\gf_tailored_bc_plateau_diagnosis_round\raw\validity_gini-subset-envelope-test.json,diagnostic_passed,True,gcap_smoke_V4_M1.txt gini-subset-envelope-test diagnostic_passed obj=0.49 runtime=0.0012459 columns=0 
+s-bucket-coverage-test,0,results\gf_tailored_bc_plateau_diagnosis_round\raw\validity_s-bucket-coverage-test.json,diagnostic_passed,True,gcap_smoke_V4_M1.txt s-bucket-coverage-test diagnostic_passed obj=0.49 runtime=0.0007936 columns=0 
