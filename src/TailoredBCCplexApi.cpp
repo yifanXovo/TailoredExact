@@ -1168,6 +1168,13 @@ void separateSubsetCrossHCentering(CallbackState& state,
             score = z_mass + 0.05 * deviation + 0.01 * imbalance;
         } else if (state.subset_cross_h_separation_profile == "target-weighted") {
             score = deviation * (1.0 + weight / target) + 0.01 * imbalance;
+        } else if (state.subset_cross_h_separation_profile == "dominant-bucket") {
+            const double capacity_tight =
+                state.station_capacity.size() > static_cast<std::size_t>(i)
+                    ? 1.0 / static_cast<double>(std::max(1, state.station_capacity[static_cast<std::size_t>(i)]))
+                    : 0.0;
+            score = 2.0 * deviation * (1.0 + weight / target) +
+                    0.40 * z_mass + 0.08 * imbalance + capacity_tight;
         } else if (state.subset_cross_h_separation_profile == "hybrid") {
             score = deviation + 0.10 * z_mass + 0.02 * imbalance +
                     0.05 * deviation * (1.0 + weight / target);
