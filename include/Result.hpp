@@ -622,6 +622,8 @@ struct SolveResult {
     double parent_S_L = 0.0;
     double parent_S_U = 0.0;
     std::string S_domain_source;
+    std::string S_domain_proof_status = "not_computed";
+    bool S_domain_audit_passed = false;
     int s_range_bucket_count = 0;
     int s_range_bucket_id = -1;
     double s_range_bucket_L = 0.0;
@@ -630,6 +632,11 @@ struct SolveResult {
     bool s_range_bucket_closed = false;
     bool s_range_parent_coverage_valid = false;
     bool s_range_certificate_valid = false;
+    std::string tailored_bc_s_bucket_ledger = "off";
+    int tailored_bc_s_bucket_count = 1;
+    std::string tailored_bc_s_bucket_policy = "uniform";
+    double tailored_bc_s_bucket_time_budget = 0.0;
+    bool tailored_bc_s_bucket_merge_audit = false;
     long long compact_bc_s_range_rows_added = 0;
     bool compact_bc_variable_s_centering = false;
     bool compact_bc_rmin_rmax_propagation_safe = false;
@@ -742,6 +749,7 @@ struct SolveResult {
     long long tailored_bc_subset_cross_h_centering_candidates = 0;
     long long tailored_bc_subset_cross_h_centering_violations = 0;
     double tailored_bc_subset_cross_h_centering_max_violation = 0.0;
+    std::string tailored_bc_subset_cross_h_separation_profile = "deviation";
     long long tailored_bc_local_q_centering_rows_added = 0;
     long long tailored_bc_local_q_centering_violations = 0;
     double tailored_bc_local_q_centering_max_violation = 0.0;

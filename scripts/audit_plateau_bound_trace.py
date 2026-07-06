@@ -40,6 +40,8 @@ def main() -> int:
     args = parser.parse_args()
     root = Path(args.results)
     source = root / "bound_trace_audit.csv"
+    if not source.exists():
+        source = root / "plateau_bound_trace.csv"
     rows = read_csv(source)
     audited: List[Dict[str, Any]] = []
     failures = 0

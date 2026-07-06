@@ -428,7 +428,8 @@ void writeCompactLp(const Instance& instance,
             options.compact_bc_s_range_refinement == "paper-safe" &&
             options.compact_bc_s_range_buckets <= 1;
         stats->s_range_certificate_valid =
-            stats->s_range_parent_coverage_valid && s_range_rows_active;
+            options.compact_bc_s_range_refinement == "paper-safe" &&
+            s_range_rows_active;
     }
 
     for (int k = 0; k < M; ++k) {
@@ -501,9 +502,11 @@ void writeCompactLp(const Instance& instance,
         options.compact_bc_sp_product_estimator != "off" &&
         s_upper_domain > s_lower_domain - 1e-12 &&
         penalty_ub_domain >= penalty_lb_domain - 1e-12;
+    const double sp_s_lower = s_range_rows_active ? s_bucket_L : s_lower_domain;
+    const double sp_s_upper = s_range_rows_active ? s_bucket_U : s_upper_domain;
     if (add_sp_product_estimator) {
-        const double w_lb = std::max(0.0, s_lower_domain * penalty_lb_domain);
-        const double w_ub = std::max(w_lb, s_upper_domain * penalty_ub_domain);
+        const double w_lb = std::max(0.0, sp_s_lower * penalty_lb_domain);
+        const double w_ub = std::max(w_lb, sp_s_upper * penalty_ub_domain);
         vars.add("W_SP", w_lb, w_ub, "C");
     }
 
@@ -1510,21 +1513,21 @@ void writeCompactLp(const Instance& instance,
                 addTerm(p_expr, eName(i), instance.weights[i]);
             }
             Expr mc1; addTerm(mc1, "W_SP", 1);
-            for (const auto& kv : p_expr) addTerm(mc1, kv.first, -s_lower_domain * kv.second);
+            for (const auto& kv : p_expr) addTerm(mc1, kv.first, -sp_s_lower * kv.second);
             for (const auto& kv : s_expr) addTerm(mc1, kv.first, -penalty_lb_domain * kv.second);
-            writeConstraint(out, cid, mc1, ">=", -s_lower_domain * penalty_lb_domain);
+            writeConstraint(out, cid, mc1, ">=", -sp_s_lower * penalty_lb_domain);
             Expr mc2; addTerm(mc2, "W_SP", 1);
-            for (const auto& kv : p_expr) addTerm(mc2, kv.first, -s_upper_domain * kv.second);
+            for (const auto& kv : p_expr) addTerm(mc2, kv.first, -sp_s_upper * kv.second);
             for (const auto& kv : s_expr) addTerm(mc2, kv.first, -penalty_ub_domain * kv.second);
-            writeConstraint(out, cid, mc2, ">=", -s_upper_domain * penalty_ub_domain);
+            writeConstraint(out, cid, mc2, ">=", -sp_s_upper * penalty_ub_domain);
             Expr mc3; addTerm(mc3, "W_SP", 1);
-            for (const auto& kv : p_expr) addTerm(mc3, kv.first, -s_upper_domain * kv.second);
+            for (const auto& kv : p_expr) addTerm(mc3, kv.first, -sp_s_upper * kv.second);
             for (const auto& kv : s_expr) addTerm(mc3, kv.first, -penalty_lb_domain * kv.second);
-            writeConstraint(out, cid, mc3, "<=", -s_upper_domain * penalty_lb_domain);
+            writeConstraint(out, cid, mc3, "<=", -sp_s_upper * penalty_lb_domain);
             Expr mc4; addTerm(mc4, "W_SP", 1);
-            for (const auto& kv : p_expr) addTerm(mc4, kv.first, -s_lower_domain * kv.second);
+            for (const auto& kv : p_expr) addTerm(mc4, kv.first, -sp_s_lower * kv.second);
             for (const auto& kv : s_expr) addTerm(mc4, kv.first, -penalty_ub_domain * kv.second);
-            writeConstraint(out, cid, mc4, "<=", -s_lower_domain * penalty_ub_domain);
+            writeConstraint(out, cid, mc4, "<=", -sp_s_lower * penalty_ub_domain);
             if (stats != nullptr) stats->sp_product_mccormick_rows_added += 4;
 
             Expr sp_estimator;
@@ -2450,6 +2453,14 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
     result.s_range_bucket_id = options.compact_bc_s_range_bucket_id;
     result.s_range_bucket_L = options.compact_bc_s_range_bucket_L;
     result.s_range_bucket_U = options.compact_bc_s_range_bucket_U;
+    result.tailored_bc_s_bucket_ledger = options.tailored_bc_s_bucket_ledger;
+    result.tailored_bc_s_bucket_count =
+        std::max(1, options.tailored_bc_s_bucket_count);
+    result.tailored_bc_s_bucket_policy = options.tailored_bc_s_bucket_policy;
+    result.tailored_bc_s_bucket_time_budget =
+        options.tailored_bc_s_bucket_time_budget;
+    result.tailored_bc_s_bucket_merge_audit =
+        options.tailored_bc_s_bucket_merge_audit;
     result.compact_bc_variable_s_centering =
         options.compact_bc_variable_s_centering;
     result.compact_bc_rmin_rmax_propagation =
@@ -2604,6 +2615,16 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         result.s_range_bucket_id = model_options.compact_bc_s_range_bucket_id;
         result.s_range_bucket_L = model_options.compact_bc_s_range_bucket_L;
         result.s_range_bucket_U = model_options.compact_bc_s_range_bucket_U;
+        result.tailored_bc_s_bucket_ledger =
+            model_options.tailored_bc_s_bucket_ledger;
+        result.tailored_bc_s_bucket_count =
+            std::max(1, model_options.tailored_bc_s_bucket_count);
+        result.tailored_bc_s_bucket_policy =
+            model_options.tailored_bc_s_bucket_policy;
+        result.tailored_bc_s_bucket_time_budget =
+            model_options.tailored_bc_s_bucket_time_budget;
+        result.tailored_bc_s_bucket_merge_audit =
+            model_options.tailored_bc_s_bucket_merge_audit;
         result.compact_bc_variable_s_centering =
             model_options.compact_bc_variable_s_centering;
         result.compact_bc_rmin_rmax_propagation =
@@ -2727,6 +2748,14 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         result.parent_S_U = strengthening_stats.s_range_global_U;
         result.S_domain_source =
             "Y_bounds_target_ratios_capacity_penalty_movement_domains";
+        result.S_domain_proof_status =
+            (strengthening_stats.s_range_global_U >=
+             strengthening_stats.s_range_global_L - 1e-12)
+                ? "valid_interval_from_model_domain_bounds"
+                : "invalid_empty_or_reversed_domain";
+        result.S_domain_audit_passed =
+            strengthening_stats.s_range_global_U >=
+            strengthening_stats.s_range_global_L - 1e-12;
         result.s_range_bucket_count = strengthening_stats.s_range_bucket_count;
         result.s_range_bucket_id = strengthening_stats.s_range_bucket_id;
         result.s_range_bucket_L = strengthening_stats.s_range_bucket_L;
@@ -2940,6 +2969,7 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 options.tailored_bc_subset_cross_h_centering,
                 options.tailored_bc_subset_cross_h_max_size,
                 options.tailored_bc_subset_cross_h_max_cuts,
+                options.tailored_bc_subset_cross_h_separation_profile,
                 options.tailored_bc_local_q_centering,
                 options.lambda,
                 cutoff.incumbent_ub - cutoff.epsilon,

@@ -22,17 +22,35 @@ def main() -> int:
     if not src.exists():
         src = root / "compact_bc_effectiveness_summary.csv"
     rows = list(csv.DictReader(src.open(newline="", encoding="utf-8"))) if src.exists() else []
+    if not rows:
+        for fallback_name in ("variant_ablation.csv", "s_bucket_bucket_status.csv"):
+            fallback = root / fallback_name
+            if fallback.exists():
+                rows.extend(csv.DictReader(fallback.open(newline="", encoding="utf-8-sig")))
     failures = 0
     out_rows = []
     for row in rows:
         reasons = []
-        called = str(row.get("compact_bc_called", "")).lower() in {"true", "1", "yes"}
+        row_class = str(row.get("row_class", "")).lower()
+        called = str(row.get("compact_bc_called", row.get("compact_bc_called_this_row", ""))).lower() in {"true", "1", "yes"}
         if row.get("variant", "") in {"tailored", "plain"}:
+            called = True
+        if row_class in {
+            "paper_safe_fixed_interval_tailored_bc",
+            "paper_safe_s_bucket_child",
+            "diagnostic_s_bucket",
+            "benchmark_only_plain_fixed_interval_mip",
+        }:
             called = True
         cls = row.get("closure_source_class", "")
         if cls.startswith("compact_bc") and not called:
             reasons.append("compact_bc_class_without_call")
-        final_bound = row.get("final_MIP_bound", "") or row.get("LB", "") or row.get("best_bound", "")
+        final_bound = (
+            row.get("final_MIP_bound", "") or
+            row.get("LB", "") or
+            row.get("best_bound", "") or
+            row.get("lower_bound", "")
+        )
         if called and final_bound == "":
             reasons.append("called_leaf_missing_final_bound")
         runtime = row.get("compact_bc_runtime", "") or row.get("runtime_seconds", "")
@@ -47,8 +65,13 @@ def main() -> int:
         out_rows.append({"audit_passed": False, "failures": "no_hard_leaf_rows"})
     out = Path(args.out) if args.out else root / "compact_bc_effectiveness_audit.csv"
     out.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = []
+    for row in out_rows:
+        for key in row:
+            if key not in fieldnames:
+                fieldnames.append(key)
     with out.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(out_rows[0]))
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(out_rows)
     print(f"audited_rows={len(rows)} failures={failures}")

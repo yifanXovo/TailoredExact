@@ -1481,6 +1481,10 @@ std::string resultToJson(const SolveResult& input) {
     out << "  \"parent_S_U\": " << result.parent_S_U << ",\n";
     out << "  \"S_domain_source\": \""
         << jsonEscape(result.S_domain_source) << "\",\n";
+    out << "  \"S_domain_proof_status\": \""
+        << jsonEscape(result.S_domain_proof_status) << "\",\n";
+    out << "  \"S_domain_audit_passed\": "
+        << (result.S_domain_audit_passed ? "true" : "false") << ",\n";
     out << "  \"s_range_bucket_count\": " << result.s_range_bucket_count << ",\n";
     out << "  \"s_range_bucket_id\": " << result.s_range_bucket_id << ",\n";
     out << "  \"s_range_bucket_L\": " << result.s_range_bucket_L << ",\n";
@@ -1491,6 +1495,16 @@ std::string resultToJson(const SolveResult& input) {
         << (result.s_range_parent_coverage_valid ? "true" : "false") << ",\n";
     out << "  \"s_range_certificate_valid\": "
         << (result.s_range_certificate_valid ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_s_bucket_ledger\": \""
+        << jsonEscape(result.tailored_bc_s_bucket_ledger) << "\",\n";
+    out << "  \"tailored_bc_s_bucket_count\": "
+        << result.tailored_bc_s_bucket_count << ",\n";
+    out << "  \"tailored_bc_s_bucket_policy\": \""
+        << jsonEscape(result.tailored_bc_s_bucket_policy) << "\",\n";
+    out << "  \"tailored_bc_s_bucket_time_budget\": "
+        << result.tailored_bc_s_bucket_time_budget << ",\n";
+    out << "  \"tailored_bc_s_bucket_merge_audit\": "
+        << (result.tailored_bc_s_bucket_merge_audit ? "true" : "false") << ",\n";
     out << "  \"compact_bc_s_range_rows_added\": "
         << result.compact_bc_s_range_rows_added << ",\n";
     out << "  \"compact_bc_variable_s_centering\": "
@@ -1713,6 +1727,8 @@ std::string resultToJson(const SolveResult& input) {
         << result.tailored_bc_subset_cross_h_centering_violations << ",\n";
     out << "  \"tailored_bc_subset_cross_h_centering_max_violation\": "
         << result.tailored_bc_subset_cross_h_centering_max_violation << ",\n";
+    out << "  \"tailored_bc_subset_cross_h_separation_profile\": \""
+        << jsonEscape(result.tailored_bc_subset_cross_h_separation_profile) << "\",\n";
     out << "  \"tailored_bc_local_q_centering_rows_added\": "
         << result.tailored_bc_local_q_centering_rows_added << ",\n";
     out << "  \"tailored_bc_local_q_centering_violations\": "
