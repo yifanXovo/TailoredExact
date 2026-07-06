@@ -729,6 +729,21 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--compact-bc-low-gini-precheck") {
             opt.compact_bc_low_gini_precheck = lowerAscii(requireValue(i, argc, argv));
         }
+        else if (arg == "--tailored-bc-s-bucket-ledger") {
+            opt.tailored_bc_s_bucket_ledger = lowerAscii(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-s-bucket-count") {
+            opt.tailored_bc_s_bucket_count = std::stoi(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-s-bucket-policy") {
+            opt.tailored_bc_s_bucket_policy = lowerAscii(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-s-bucket-time-budget") {
+            opt.tailored_bc_s_bucket_time_budget = std::stod(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-s-bucket-merge-audit") {
+            opt.tailored_bc_s_bucket_merge_audit = parseBoolValue(requireValue(i, argc, argv));
+        }
         else if (arg == "--tailored-bc-enabled") {
             opt.tailored_bc_enabled = parseBoolValue(requireValue(i, argc, argv));
         }
@@ -777,6 +792,10 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         }
         else if (arg == "--tailored-bc-subset-cross-h-max-cuts") {
             opt.tailored_bc_subset_cross_h_max_cuts = std::stoi(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-subset-cross-h-separation-profile") {
+            opt.tailored_bc_subset_cross_h_separation_profile =
+                lowerAscii(requireValue(i, argc, argv));
         }
         else if (arg == "--tailored-bc-local-q-centering") {
             opt.tailored_bc_local_q_centering = parseBoolValue(requireValue(i, argc, argv));
@@ -1710,6 +1729,45 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.tailored_bc_callback_cut_profile != "subset-cross-h-only" &&
         opt.tailored_bc_callback_cut_profile != "local-q-only") {
         opt.tailored_bc_callback_cut_profile = "full";
+    }
+    opt.tailored_bc_s_bucket_ledger = lowerAscii(opt.tailored_bc_s_bucket_ledger);
+    if (opt.tailored_bc_s_bucket_ledger == "none") {
+        opt.tailored_bc_s_bucket_ledger = "off";
+    }
+    if (opt.tailored_bc_s_bucket_ledger != "off" &&
+        opt.tailored_bc_s_bucket_ledger != "diagnostic" &&
+        opt.tailored_bc_s_bucket_ledger != "paper-safe") {
+        opt.tailored_bc_s_bucket_ledger = "off";
+    }
+    opt.tailored_bc_s_bucket_count =
+        std::max(1, opt.tailored_bc_s_bucket_count);
+    opt.tailored_bc_s_bucket_policy =
+        lowerAscii(opt.tailored_bc_s_bucket_policy);
+    if (opt.tailored_bc_s_bucket_policy != "uniform" &&
+        opt.tailored_bc_s_bucket_policy != "adaptive-snapshot" &&
+        opt.tailored_bc_s_bucket_policy != "adaptive-cutoff" &&
+        opt.tailored_bc_s_bucket_policy != "adaptive-hybrid") {
+        opt.tailored_bc_s_bucket_policy = "uniform";
+    }
+    if (opt.tailored_bc_s_bucket_time_budget < 0.0) {
+        opt.tailored_bc_s_bucket_time_budget = 0.0;
+    }
+    if (opt.tailored_bc_s_bucket_ledger != "off") {
+        opt.compact_bc_s_range_refinement = opt.tailored_bc_s_bucket_ledger;
+        opt.compact_bc_s_range_buckets =
+            std::max(opt.compact_bc_s_range_buckets,
+                     opt.tailored_bc_s_bucket_count);
+        opt.compact_bc_s_range_adaptive =
+            opt.compact_bc_s_range_adaptive ||
+            opt.tailored_bc_s_bucket_policy != "uniform";
+    }
+    opt.tailored_bc_subset_cross_h_separation_profile =
+        lowerAscii(opt.tailored_bc_subset_cross_h_separation_profile);
+    if (opt.tailored_bc_subset_cross_h_separation_profile != "deviation" &&
+        opt.tailored_bc_subset_cross_h_separation_profile != "target-weighted" &&
+        opt.tailored_bc_subset_cross_h_separation_profile != "fractional" &&
+        opt.tailored_bc_subset_cross_h_separation_profile != "hybrid") {
+        opt.tailored_bc_subset_cross_h_separation_profile = "deviation";
     }
     opt.tailored_bc_subset_cross_h_max_size =
         std::min(4, std::max(1, opt.tailored_bc_subset_cross_h_max_size));
@@ -9451,6 +9509,7 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
                 tailored_opt.tailored_bc_subset_cross_h_centering,
                 tailored_opt.tailored_bc_subset_cross_h_max_size,
                 tailored_opt.tailored_bc_subset_cross_h_max_cuts,
+                tailored_opt.tailored_bc_subset_cross_h_separation_profile,
                 tailored_opt.tailored_bc_local_q_centering,
                 0.0,
                 std::numeric_limits<double>::infinity(),
@@ -16418,15 +16477,30 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     result.s_range_bucket_U = opt.compact_bc_s_range_bucket_U;
     result.parent_S_L = result.s_range_global_L;
     result.parent_S_U = result.s_range_global_U;
+    result.s_range_refinement_enabled = opt.compact_bc_s_range_refinement != "off";
     result.S_domain_source =
         result.s_range_refinement_enabled
             ? "aggregated_child_s_range_domains"
             : "not_requested";
-    result.s_range_refinement_enabled = opt.compact_bc_s_range_refinement != "off";
+    result.S_domain_proof_status =
+        result.s_range_refinement_enabled
+            ? "aggregated_from_child_fixed_interval_domain_bounds"
+            : "not_requested";
+    result.S_domain_audit_passed =
+        !result.s_range_refinement_enabled ||
+        result.parent_S_U >= result.parent_S_L - 1e-12;
     result.s_range_parent_coverage_valid =
         opt.compact_bc_s_range_refinement == "paper-safe" &&
         opt.compact_bc_s_range_buckets <= 1;
     result.s_range_certificate_valid = result.s_range_parent_coverage_valid;
+    result.tailored_bc_s_bucket_ledger = opt.tailored_bc_s_bucket_ledger;
+    result.tailored_bc_s_bucket_count =
+        std::max(1, opt.tailored_bc_s_bucket_count);
+    result.tailored_bc_s_bucket_policy = opt.tailored_bc_s_bucket_policy;
+    result.tailored_bc_s_bucket_time_budget =
+        opt.tailored_bc_s_bucket_time_budget;
+    result.tailored_bc_s_bucket_merge_audit =
+        opt.tailored_bc_s_bucket_merge_audit;
     result.compact_bc_variable_s_centering = opt.compact_bc_variable_s_centering;
     result.compact_bc_rmin_rmax_propagation = opt.compact_bc_rmin_rmax_propagation;
     result.compact_bc_rmin_rmax_propagation_safe =

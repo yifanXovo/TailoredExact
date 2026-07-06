@@ -167,6 +167,11 @@ struct SolveOptions {
     bool compact_bc_low_gini_strengthening_explicit = false;
     bool compact_bc_denominator_bound_mode_explicit = false;
     bool compact_bc_objective_estimator_mode_explicit = false;
+    std::string tailored_bc_s_bucket_ledger = "off";
+    int tailored_bc_s_bucket_count = 1;
+    std::string tailored_bc_s_bucket_policy = "uniform";
+    double tailored_bc_s_bucket_time_budget = 0.0;
+    bool tailored_bc_s_bucket_merge_audit = false;
     bool tailored_bc_enabled = false;
     std::string tailored_bc_mode = "off";
     std::string tailored_bc_branching_priority = "off";
@@ -185,6 +190,7 @@ struct SolveOptions {
     bool tailored_bc_subset_cross_h_centering = false;
     int tailored_bc_subset_cross_h_max_size = 3;
     int tailored_bc_subset_cross_h_max_cuts = 50000;
+    std::string tailored_bc_subset_cross_h_separation_profile = "deviation";
     bool tailored_bc_local_q_centering = false;
     bool tailored_bc_subset_inventory_imbalance = false;
     int tailored_bc_subset_inventory_max_size = 3;

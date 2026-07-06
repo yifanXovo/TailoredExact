@@ -74,6 +74,16 @@ void populateTailoredBCResultFields(const SolveOptions& options,
         options.tailored_bc_callback_separation_pacing;
     result.tailored_bc_callback_cut_profile =
         options.tailored_bc_callback_cut_profile;
+    result.tailored_bc_subset_cross_h_separation_profile =
+        options.tailored_bc_subset_cross_h_separation_profile;
+    result.tailored_bc_s_bucket_ledger = options.tailored_bc_s_bucket_ledger;
+    result.tailored_bc_s_bucket_count =
+        std::max(1, options.tailored_bc_s_bucket_count);
+    result.tailored_bc_s_bucket_policy = options.tailored_bc_s_bucket_policy;
+    result.tailored_bc_s_bucket_time_budget =
+        options.tailored_bc_s_bucket_time_budget;
+    result.tailored_bc_s_bucket_merge_audit =
+        options.tailored_bc_s_bucket_merge_audit;
     result.tailored_bc_source_class = tailoredBCSourceClass(result);
 }
 

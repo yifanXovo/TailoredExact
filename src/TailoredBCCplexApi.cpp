@@ -388,6 +388,7 @@ struct CallbackState {
     bool enable_subset_cross_h_centering = false;
     int subset_cross_h_max_size = 3;
     int subset_cross_h_max_cuts = 50000;
+    std::string subset_cross_h_separation_profile = "deviation";
     std::atomic<long long> subset_cross_h_centering_cuts_added{0};
     std::atomic<long long> subset_cross_h_centering_candidates{0};
     std::atomic<long long> subset_cross_h_centering_violations{0};
@@ -1144,7 +1145,8 @@ void separateSubsetCrossHCentering(CallbackState& state,
     ranked.reserve(static_cast<std::size_t>(V));
     for (int i = 1; i <= V; ++i) {
         const int r = state.r_cols[static_cast<std::size_t>(i)];
-        double score = r >= 0 ? std::fabs(x[static_cast<std::size_t>(r)] - avg_r) : 0.0;
+        const double deviation =
+            r >= 0 ? std::fabs(x[static_cast<std::size_t>(r)] - avg_r) : 0.0;
         double z_mass = 0.0;
         double imbalance = 0.0;
         for (int k = 0; k < static_cast<int>(state.z_cols.size()); ++k) {
@@ -1155,7 +1157,23 @@ void separateSubsetCrossHCentering(CallbackState& state,
             const int d = safeCol(state.d_cols, k, i);
             imbalance += std::fabs(safeVal(p) - safeVal(d));
         }
-        score += 0.05 * z_mass + 0.01 * imbalance;
+        const double weight = (i < static_cast<int>(state.station_weight.size()))
+            ? std::max(0.0, state.station_weight[static_cast<std::size_t>(i)])
+            : 0.0;
+        const double target = (i < static_cast<int>(state.station_target.size()))
+            ? static_cast<double>(std::max(1, state.station_target[static_cast<std::size_t>(i)]))
+            : 1.0;
+        double score = deviation;
+        if (state.subset_cross_h_separation_profile == "fractional") {
+            score = z_mass + 0.05 * deviation + 0.01 * imbalance;
+        } else if (state.subset_cross_h_separation_profile == "target-weighted") {
+            score = deviation * (1.0 + weight / target) + 0.01 * imbalance;
+        } else if (state.subset_cross_h_separation_profile == "hybrid") {
+            score = deviation + 0.10 * z_mass + 0.02 * imbalance +
+                    0.05 * deviation * (1.0 + weight / target);
+        } else {
+            score = deviation + 0.01 * imbalance;
+        }
         ranked.push_back({score, i});
     }
     std::sort(ranked.begin(), ranked.end(),
@@ -2640,6 +2658,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     bool enable_subset_cross_h_centering,
     int subset_cross_h_max_size,
     int subset_cross_h_max_cuts,
+    const std::string& subset_cross_h_separation_profile,
     bool enable_local_q_centering,
     double lambda,
     double cutoff_value,
@@ -2849,6 +2868,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         std::min(4, std::max(1, subset_cross_h_max_size));
     cb_state.subset_cross_h_max_cuts =
         std::max(0, subset_cross_h_max_cuts);
+    cb_state.subset_cross_h_separation_profile =
+        subset_cross_h_separation_profile;
     cb_state.enable_local_q_centering = enable_local_q_centering;
     cb_state.lambda = lambda;
     cb_state.cutoff_value = cutoff_value;

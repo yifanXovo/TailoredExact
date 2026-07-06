@@ -158,6 +158,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     bool enable_subset_cross_h_centering,
     int subset_cross_h_max_size,
     int subset_cross_h_max_cuts,
+    const std::string& subset_cross_h_separation_profile,
     bool enable_local_q_centering,
     double lambda,
     double cutoff_value,
