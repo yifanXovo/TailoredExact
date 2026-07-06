@@ -84,6 +84,14 @@ void populateTailoredBCResultFields(const SolveOptions& options,
         options.tailored_bc_s_bucket_time_budget;
     result.tailored_bc_s_bucket_merge_audit =
         options.tailored_bc_s_bucket_merge_audit;
+    result.tailored_bc_s_bucket_max_depth =
+        options.tailored_bc_s_bucket_max_depth;
+    result.tailored_bc_s_bucket_min_width =
+        options.tailored_bc_s_bucket_min_width;
+    result.tailored_bc_s_bucket_refine_top_k =
+        options.tailored_bc_s_bucket_refine_top_k;
+    result.tailored_bc_s_bucket_refine_rule =
+        options.tailored_bc_s_bucket_refine_rule;
     result.tailored_bc_source_class = tailoredBCSourceClass(result);
 }
 

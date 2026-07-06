@@ -744,6 +744,18 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--tailored-bc-s-bucket-merge-audit") {
             opt.tailored_bc_s_bucket_merge_audit = parseBoolValue(requireValue(i, argc, argv));
         }
+        else if (arg == "--tailored-bc-s-bucket-max-depth") {
+            opt.tailored_bc_s_bucket_max_depth = std::stoi(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-s-bucket-min-width") {
+            opt.tailored_bc_s_bucket_min_width = std::stod(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-s-bucket-refine-top-k") {
+            opt.tailored_bc_s_bucket_refine_top_k = std::stoi(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-s-bucket-refine-rule") {
+            opt.tailored_bc_s_bucket_refine_rule = lowerAscii(requireValue(i, argc, argv));
+        }
         else if (arg == "--tailored-bc-enabled") {
             opt.tailored_bc_enabled = parseBoolValue(requireValue(i, argc, argv));
         }
@@ -1744,6 +1756,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     opt.tailored_bc_s_bucket_policy =
         lowerAscii(opt.tailored_bc_s_bucket_policy);
     if (opt.tailored_bc_s_bucket_policy != "uniform" &&
+        opt.tailored_bc_s_bucket_policy != "adaptive-open" &&
         opt.tailored_bc_s_bucket_policy != "adaptive-snapshot" &&
         opt.tailored_bc_s_bucket_policy != "adaptive-cutoff" &&
         opt.tailored_bc_s_bucket_policy != "adaptive-hybrid") {
@@ -1751,6 +1764,21 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if (opt.tailored_bc_s_bucket_time_budget < 0.0) {
         opt.tailored_bc_s_bucket_time_budget = 0.0;
+    }
+    opt.tailored_bc_s_bucket_max_depth =
+        std::max(0, opt.tailored_bc_s_bucket_max_depth);
+    if (opt.tailored_bc_s_bucket_min_width < 0.0) {
+        opt.tailored_bc_s_bucket_min_width = 0.0;
+    }
+    opt.tailored_bc_s_bucket_refine_top_k =
+        std::max(1, opt.tailored_bc_s_bucket_refine_top_k);
+    opt.tailored_bc_s_bucket_refine_rule =
+        lowerAscii(opt.tailored_bc_s_bucket_refine_rule);
+    if (opt.tailored_bc_s_bucket_refine_rule != "widest" &&
+        opt.tailored_bc_s_bucket_refine_rule != "worst-gap" &&
+        opt.tailored_bc_s_bucket_refine_rule != "plateau-s" &&
+        opt.tailored_bc_s_bucket_refine_rule != "hybrid") {
+        opt.tailored_bc_s_bucket_refine_rule = "worst-gap";
     }
     if (opt.tailored_bc_s_bucket_ledger != "off") {
         opt.compact_bc_s_range_refinement = opt.tailored_bc_s_bucket_ledger;
@@ -1766,6 +1794,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.tailored_bc_subset_cross_h_separation_profile != "deviation" &&
         opt.tailored_bc_subset_cross_h_separation_profile != "target-weighted" &&
         opt.tailored_bc_subset_cross_h_separation_profile != "fractional" &&
+        opt.tailored_bc_subset_cross_h_separation_profile != "dominant-bucket" &&
         opt.tailored_bc_subset_cross_h_separation_profile != "hybrid") {
         opt.tailored_bc_subset_cross_h_separation_profile = "deviation";
     }
@@ -16501,6 +16530,14 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         opt.tailored_bc_s_bucket_time_budget;
     result.tailored_bc_s_bucket_merge_audit =
         opt.tailored_bc_s_bucket_merge_audit;
+    result.tailored_bc_s_bucket_max_depth =
+        opt.tailored_bc_s_bucket_max_depth;
+    result.tailored_bc_s_bucket_min_width =
+        opt.tailored_bc_s_bucket_min_width;
+    result.tailored_bc_s_bucket_refine_top_k =
+        opt.tailored_bc_s_bucket_refine_top_k;
+    result.tailored_bc_s_bucket_refine_rule =
+        opt.tailored_bc_s_bucket_refine_rule;
     result.compact_bc_variable_s_centering = opt.compact_bc_variable_s_centering;
     result.compact_bc_rmin_rmax_propagation = opt.compact_bc_rmin_rmax_propagation;
     result.compact_bc_rmin_rmax_propagation_safe =

@@ -1505,6 +1505,14 @@ std::string resultToJson(const SolveResult& input) {
         << result.tailored_bc_s_bucket_time_budget << ",\n";
     out << "  \"tailored_bc_s_bucket_merge_audit\": "
         << (result.tailored_bc_s_bucket_merge_audit ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_s_bucket_max_depth\": "
+        << result.tailored_bc_s_bucket_max_depth << ",\n";
+    out << "  \"tailored_bc_s_bucket_min_width\": "
+        << result.tailored_bc_s_bucket_min_width << ",\n";
+    out << "  \"tailored_bc_s_bucket_refine_top_k\": "
+        << result.tailored_bc_s_bucket_refine_top_k << ",\n";
+    out << "  \"tailored_bc_s_bucket_refine_rule\": \""
+        << jsonEscape(result.tailored_bc_s_bucket_refine_rule) << "\",\n";
     out << "  \"compact_bc_s_range_rows_added\": "
         << result.compact_bc_s_range_rows_added << ",\n";
     out << "  \"compact_bc_variable_s_centering\": "

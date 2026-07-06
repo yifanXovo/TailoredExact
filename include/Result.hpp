@@ -637,6 +637,10 @@ struct SolveResult {
     std::string tailored_bc_s_bucket_policy = "uniform";
     double tailored_bc_s_bucket_time_budget = 0.0;
     bool tailored_bc_s_bucket_merge_audit = false;
+    int tailored_bc_s_bucket_max_depth = 0;
+    double tailored_bc_s_bucket_min_width = 0.0;
+    int tailored_bc_s_bucket_refine_top_k = 1;
+    std::string tailored_bc_s_bucket_refine_rule = "worst-gap";
     long long compact_bc_s_range_rows_added = 0;
     bool compact_bc_variable_s_centering = false;
     bool compact_bc_rmin_rmax_propagation_safe = false;

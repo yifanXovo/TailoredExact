@@ -1,0 +1,7 @@
+row_type,path,proof_status,paper_safe,diagnostic_contamination,audit_passed,failures,leaf,variant,budget_seconds,candidate_count,violation_count,cut_count,max_violation,selected_for_paper_certificate,paper_certificate_contamination,row_class
+built_in_transfer_validity_test,results\gf_tailored_bc_adaptive_s_refinement_round\raw\validity_transfer-cutset-validity-test.json,paper_safe_guard,True,False,True,,,,,,,,,,,
+transfer_cut_audit_row,,paper_safe_empty_start_net_delivery,True,False,True,,low_gini_1,best_combined_paper_safe,60,,,1.0,,False,False,paper_safe_fixed_interval_tailored_bc
+transfer_cut_audit_row,,paper_safe_empty_start_net_delivery,True,False,True,,low_gini_1,best_combined_paper_safe,300,,,1.0,,False,False,paper_safe_fixed_interval_tailored_bc
+transfer_cut_audit_row,,paper_safe_empty_start_net_delivery,True,False,True,,low_gini_1,adaptive_transfer_inventory,60,,,1.0,,False,False,paper_safe_fixed_interval_tailored_bc
+transfer_cut_audit_row,,paper_safe_empty_start_net_delivery,True,False,True,,low_gini_1,adaptive_transfer_inventory,300,,,1.0,,False,False,paper_safe_fixed_interval_tailored_bc
+transfer_cut_audit_row,,paper_safe_empty_start_net_delivery,True,False,True,,low_gini_1,best_combined_paper_safe,1200,,,1.0,,False,False,paper_safe_fixed_interval_tailored_bc
