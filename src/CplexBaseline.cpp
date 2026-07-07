@@ -12,6 +12,7 @@
 #include <cstdlib>
 #include <filesystem>
 #include <fstream>
+#include <functional>
 #include <iomanip>
 #include <limits>
 #include <map>
@@ -73,6 +74,11 @@ struct CompactOracleStrengtheningStats {
     long long tailored_subset_cross_h_centering_candidates = 0;
     long long tailored_local_q_centering_rows_added = 0;
     long long tailored_subset_inventory_imbalance_cuts_added = 0;
+    long long tailored_bucket_ratio_domain_rows_added = 0;
+    long long tailored_bucket_ratio_domain_bounds_tightened = 0;
+    long long tailored_bucket_subset_ratio_domain_cuts_added = 0;
+    long long tailored_bucket_subset_ratio_domain_candidates = 0;
+    long long tailored_bucket_h_cap_rows_added = 0;
     long long tailored_transfer_cutset_cuts_added = 0;
     long long tailored_compatible_source_transfer_cuts_added = 0;
     long long tailored_compatible_source_transfer_candidates = 0;
@@ -432,6 +438,43 @@ void writeCompactLp(const Instance& instance,
             s_range_rows_active;
     }
 
+    const bool tailored_active = strengthened && options.tailored_bc_enabled;
+    const bool add_bucket_ratio_domain =
+        strengthened && tailored_active && cutoff != nullptr && cutoff->enabled &&
+        s_range_rows_active && options.tailored_bc_bucket_ratio_domain_tightening &&
+        cutoff->gamma_U >= -1e-12 && s_bucket_U >= s_bucket_L - 1e-12;
+    const bool add_bucket_subset_ratio_domain =
+        strengthened && tailored_active && cutoff != nullptr && cutoff->enabled &&
+        s_range_rows_active && options.tailored_bc_bucket_subset_ratio_domain &&
+        cutoff->gamma_U >= -1e-12 && s_bucket_U >= s_bucket_L - 1e-12;
+    if (add_bucket_ratio_domain) {
+        const double upper_factor = 1.0 / static_cast<double>(V) + cutoff->gamma_U;
+        const double lower_factor = 1.0 / static_cast<double>(V) - cutoff->gamma_U;
+        for (int i = 1; i <= V; ++i) {
+            const double target = std::max(1e-12, static_cast<double>(instance.target[i]));
+            const double r_hi = std::max(0.0, upper_factor * s_bucket_U);
+            const int y_hi =
+                std::min(instance.capacity[i],
+                         static_cast<int>(std::floor(target * r_hi + 1e-9)));
+            if (y_hi < y_ub[i]) {
+                y_ub[i] = std::max(y_lb[i], y_hi);
+                if (stats != nullptr) ++stats->tailored_bucket_ratio_domain_bounds_tightened;
+            }
+            if (lower_factor > 1e-12) {
+                const double r_lo = std::max(0.0, lower_factor * s_bucket_L);
+                const int y_lo =
+                    std::max(0, static_cast<int>(std::ceil(target * r_lo - 1e-9)));
+                if (y_lo > y_lb[i]) {
+                    y_lb[i] = std::min(y_ub[i], y_lo);
+                    if (stats != nullptr) ++stats->tailored_bucket_ratio_domain_bounds_tightened;
+                }
+            }
+        }
+        if (stats != nullptr) {
+            stats->enabled_families.push_back("bucket_ratio_domain_tightening");
+        }
+    }
+
     for (int k = 0; k < M; ++k) {
         for (int i = 0; i <= V; ++i) {
             for (int j = 0; j <= V; ++j) {
@@ -455,7 +498,6 @@ void writeCompactLp(const Instance& instance,
     const double g_ub = (cutoff != nullptr && cutoff->enabled)
         ? std::min(1.0, std::max(cutoff->gamma_L, cutoff->gamma_U))
         : 1.0;
-    const bool tailored_active = strengthened && options.tailored_bc_enabled;
     vars.add("G", g_lb, g_ub, "C");
     double max_ratio_cap = 0.0;
     for (int i = 1; i <= V; ++i) {
@@ -966,6 +1008,65 @@ void writeCompactLp(const Instance& instance,
         }
         writeConstraint(out, cid, floor, ">=", 0);
         if (stats != nullptr) ++stats->direct_gini_floor_rows_added;
+    }
+    if (add_bucket_ratio_domain) {
+        const double upper_factor = 1.0 / static_cast<double>(V) + cutoff->gamma_U;
+        const double lower_factor = 1.0 / static_cast<double>(V) - cutoff->gamma_U;
+        for (int i = 1; i <= V; ++i) {
+            Expr ub;
+            addTerm(ub, rName(i), 1.0);
+            writeConstraint(out, cid, ub, "<=", std::max(0.0, upper_factor * s_bucket_U));
+            if (stats != nullptr) ++stats->tailored_bucket_ratio_domain_rows_added;
+            if (lower_factor > 1e-12) {
+                Expr lb;
+                addTerm(lb, rName(i), 1.0);
+                writeConstraint(out, cid, lb, ">=", std::max(0.0, lower_factor * s_bucket_L));
+                if (stats != nullptr) ++stats->tailored_bucket_ratio_domain_rows_added;
+            }
+        }
+        Expr h_cap;
+        for (int i = 1; i <= V; ++i) {
+            for (int j = i + 1; j <= V; ++j) {
+                addTerm(h_cap, hName(i, j), 1.0);
+            }
+        }
+        writeConstraint(out, cid, h_cap, "<=",
+                        static_cast<double>(V) * cutoff->gamma_U * s_bucket_U);
+        if (stats != nullptr) ++stats->tailored_bucket_h_cap_rows_added;
+    }
+    if (add_bucket_subset_ratio_domain) {
+        if (stats != nullptr) stats->enabled_families.push_back("bucket_subset_ratio_domain");
+        const int max_size = std::min({4, V, std::max(1, options.tailored_bc_bucket_subset_ratio_max_size)});
+        std::vector<int> subset;
+        std::function<void(int, int)> gen = [&](int start, int remaining) {
+            if (remaining == 0) {
+                const int a = static_cast<int>(subset.size());
+                if (stats != nullptr) ++stats->tailored_bucket_subset_ratio_domain_candidates;
+                const double upper = (static_cast<double>(a) / static_cast<double>(V) +
+                                      cutoff->gamma_U) * s_bucket_U;
+                Expr ub;
+                for (int i : subset) addTerm(ub, rName(i), 1.0);
+                writeConstraint(out, cid, ub, "<=", std::max(0.0, upper));
+                if (stats != nullptr) ++stats->tailored_bucket_subset_ratio_domain_cuts_added;
+                const double lower_factor =
+                    static_cast<double>(a) / static_cast<double>(V) - cutoff->gamma_U;
+                if (lower_factor > 1e-12) {
+                    Expr lb;
+                    for (int i : subset) addTerm(lb, rName(i), 1.0);
+                    writeConstraint(out, cid, lb, ">=", std::max(0.0, lower_factor * s_bucket_L));
+                    if (stats != nullptr) ++stats->tailored_bucket_subset_ratio_domain_cuts_added;
+                }
+                return;
+            }
+            for (int i = start; i <= V - remaining + 1; ++i) {
+                subset.push_back(i);
+                gen(i + 1, remaining - 1);
+                subset.pop_back();
+            }
+        };
+        for (int size = 1; size <= max_size; ++size) {
+            gen(1, size);
+        }
     }
     if (tailored_active && cutoff != nullptr && cutoff->enabled &&
         options.tailored_bc_gini_subset_envelope && cutoff->gamma_U >= -1e-12) {
@@ -2815,6 +2916,23 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             strengthening_stats.tailored_local_q_centering_rows_added;
         result.tailored_bc_subset_inventory_imbalance_cuts_added =
             strengthening_stats.tailored_subset_inventory_imbalance_cuts_added;
+        result.tailored_bc_bucket_ratio_domain_rows_added =
+            strengthening_stats.tailored_bucket_ratio_domain_rows_added;
+        result.tailored_bc_bucket_ratio_domain_bounds_tightened =
+            strengthening_stats.tailored_bucket_ratio_domain_bounds_tightened;
+        result.tailored_bc_bucket_ratio_domain_proof_status =
+            result.tailored_bc_bucket_ratio_domain_rows_added > 0 ||
+            result.tailored_bc_bucket_ratio_domain_bounds_tightened > 0
+                ? "paper_safe_s_bucket_ratio_domain"
+                : "not_enabled";
+        result.tailored_bc_bucket_subset_ratio_domain_cuts_added =
+            strengthening_stats.tailored_bucket_subset_ratio_domain_cuts_added;
+        result.tailored_bc_bucket_subset_ratio_domain_candidates =
+            strengthening_stats.tailored_bucket_subset_ratio_domain_candidates;
+        result.tailored_bc_bucket_subset_ratio_domain_max_size =
+            model_options.tailored_bc_bucket_subset_ratio_max_size;
+        result.tailored_bc_bucket_h_cap_rows_added =
+            strengthening_stats.tailored_bucket_h_cap_rows_added;
         result.tailored_bc_transfer_cutset_cuts_added =
             strengthening_stats.tailored_transfer_cutset_cuts_added;
         result.tailored_bc_compatible_source_transfer_cuts_added =
@@ -2843,6 +2961,12 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 << result.tailored_bc_local_q_centering_rows_added
                 << ";subset_inventory_imbalance="
                 << result.tailored_bc_subset_inventory_imbalance_cuts_added
+                << ";bucket_ratio_domain="
+                << result.tailored_bc_bucket_ratio_domain_rows_added
+                << ";bucket_subset_ratio_domain="
+                << result.tailored_bc_bucket_subset_ratio_domain_cuts_added
+                << ";bucket_h_cap="
+                << result.tailored_bc_bucket_h_cap_rows_added
                 << ";transfer_cutset="
                 << result.tailored_bc_transfer_cutset_cuts_added
                 << ";compatible_source_transfer="
@@ -2903,6 +3027,9 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                  << ";tailored_gini_subset_envelope=" << result.tailored_bc_gini_subset_envelope_cuts_added
                  << ";tailored_low_gini_l1_centering=" << result.tailored_bc_low_gini_l1_centering_rows_added
                  << ";tailored_subset_inventory_imbalance=" << result.tailored_bc_subset_inventory_imbalance_cuts_added
+                 << ";tailored_bucket_ratio_domain=" << result.tailored_bc_bucket_ratio_domain_rows_added
+                 << ";tailored_bucket_subset_ratio_domain=" << result.tailored_bc_bucket_subset_ratio_domain_cuts_added
+                 << ";tailored_bucket_h_cap=" << result.tailored_bc_bucket_h_cap_rows_added
                  << ";tailored_transfer_cutset=" << result.tailored_bc_transfer_cutset_cuts_added
                  << ";tailored_benders_inventory_diagnostic=" << result.tailored_bc_benders_inventory_cuts_added
                  << ";gini_spread=" << result.gini_spread_cuts_added
@@ -2922,6 +3049,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             domains << "penalty_domains=" << strengthening_stats.penalty_domains_tightened
                     << ";movement_reachability="
                     << result.compact_bc_movement_reachability_domains_tightened
+                    << ";bucket_ratio_domain="
+                    << result.tailored_bc_bucket_ratio_domain_bounds_tightened
                     << ";domain_width_before=" << strengthening_stats.domain_width_before
                     << ";domain_width_after=" << strengthening_stats.domain_width_after;
         result.compact_bc_domains_tightened_by_family = domains.str();

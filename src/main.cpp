@@ -833,6 +833,18 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--tailored-bc-transfer-max-receiver-size") {
             opt.tailored_bc_transfer_max_receiver_size = std::stoi(requireValue(i, argc, argv));
         }
+        else if (arg == "--tailored-bc-bucket-ratio-domain-tightening") {
+            opt.tailored_bc_bucket_ratio_domain_tightening =
+                parseBoolValue(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-bucket-subset-ratio-domain") {
+            opt.tailored_bc_bucket_subset_ratio_domain =
+                parseBoolValue(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-bucket-subset-ratio-max-size") {
+            opt.tailored_bc_bucket_subset_ratio_max_size =
+                std::stoi(requireValue(i, argc, argv));
+        }
         else if (arg == "--tailored-bc-support-duration-cover-mode") {
             opt.tailored_bc_support_duration_cover_mode = lowerAscii(requireValue(i, argc, argv));
         }
@@ -1807,6 +1819,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         std::min(3, std::max(1, opt.tailored_bc_subset_inventory_max_size));
     opt.tailored_bc_transfer_max_receiver_size =
         std::min(3, std::max(1, opt.tailored_bc_transfer_max_receiver_size));
+    opt.tailored_bc_bucket_subset_ratio_max_size =
+        std::min(4, std::max(1, opt.tailored_bc_bucket_subset_ratio_max_size));
     opt.tailored_bc_benders_inventory_cuts =
         lowerAscii(opt.tailored_bc_benders_inventory_cuts);
     if (opt.tailored_bc_benders_inventory_cuts != "diagnostic") {

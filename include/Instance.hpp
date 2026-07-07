@@ -202,6 +202,9 @@ struct SolveOptions {
     bool tailored_bc_compatible_source_transfer_cuts = false;
     bool tailored_bc_required_external_source_cuts = false;
     int tailored_bc_transfer_max_receiver_size = 2;
+    bool tailored_bc_bucket_ratio_domain_tightening = false;
+    bool tailored_bc_bucket_subset_ratio_domain = false;
+    int tailored_bc_bucket_subset_ratio_max_size = 2;
     std::string tailored_bc_support_duration_cover_mode = "support_cover_lifted";
     std::string tailored_bc_benders_inventory_cuts = "off";
     std::string compact_bc_model_size_policy = "full";
