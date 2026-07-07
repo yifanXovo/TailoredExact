@@ -1,0 +1,17 @@
+policy,bucket_name,variant,best_LB,best_budget_seconds,best_gap_to_cutoff,outperformed_uniform_K4_3600
+dominant-fixed,dominant_k4,plain_fixed_interval_mip,0.048035857993,1200,0.0011166946716999956,False
+dominant-fixed,dominant_k4,static_tailored_compact_bc,0.0487233640003,1200,0.0004291886643999973,False
+dominant-fixed,dominant_k4,best_combined_paper_safe,0.0487233640003,1200,0.0004291886643999973,False
+dominant-fixed,dominant_k4,bucket_ratio_domain_tightening,0.0487188313812,1200,0.0004337212834999993,False
+dominant-fixed,dominant_k4,denominator_estimator_strengthening,0.0487233640003,1200,0.0004291886643999973,False
+dominant-fixed,dominant_k4,targeted_low_gini_centering,0.0487233640003,1200,0.0004291886643999973,False
+dominant-fixed,dominant_k4,transfer_inventory_cuts,0.0487233640003,1200,0.0004291886643999973,False
+dominant-fixed,dominant_k4,best_new_combined_paper_safe,0.04890059983,10800,0.00025195283469999635,True
+adaptive-child-fixed,adaptive_child,plain_fixed_interval_mip,0.047188723442,1200,0.0019638292226999976,False
+adaptive-child-fixed,adaptive_child,static_tailored_compact_bc,0.048388162834,300,0.0007643898306999991,False
+adaptive-child-fixed,adaptive_child,best_combined_paper_safe,0.0487233640003,1200,0.0004291886643999973,False
+adaptive-child-fixed,adaptive_child,bucket_ratio_domain_tightening,0.0487233640003,1200,0.0004291886643999973,False
+adaptive-child-fixed,adaptive_child,denominator_estimator_strengthening,0.0487233640003,1200,0.0004291886643999973,False
+adaptive-child-fixed,adaptive_child,targeted_low_gini_centering,0.0487233640003,1200,0.0004291886643999973,False
+adaptive-child-fixed,adaptive_child,transfer_inventory_cuts,0.0487233640003,1200,0.0004291886643999973,False
+adaptive-child-fixed,adaptive_child,best_new_combined_paper_safe,0.0487233640003,3600,0.0004291886643999973,False

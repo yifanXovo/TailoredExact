@@ -762,6 +762,15 @@ struct SolveResult {
     long long tailored_bc_subset_inventory_imbalance_cuts_added = 0;
     long long tailored_bc_subset_inventory_imbalance_candidates = 0;
     long long tailored_bc_subset_inventory_imbalance_violations = 0;
+    long long tailored_bc_bucket_ratio_domain_rows_added = 0;
+    long long tailored_bc_bucket_ratio_domain_bounds_tightened = 0;
+    std::string tailored_bc_bucket_ratio_domain_proof_status = "not_enabled";
+    long long tailored_bc_bucket_subset_ratio_domain_cuts_added = 0;
+    long long tailored_bc_bucket_subset_ratio_domain_candidates = 0;
+    long long tailored_bc_bucket_subset_ratio_domain_violations = 0;
+    double tailored_bc_bucket_subset_ratio_domain_max_violation = 0.0;
+    int tailored_bc_bucket_subset_ratio_domain_max_size = 0;
+    long long tailored_bc_bucket_h_cap_rows_added = 0;
     long long tailored_bc_transfer_cutset_cuts_added = 0;
     long long tailored_bc_transfer_cutset_candidates = 0;
     long long tailored_bc_transfer_cutset_violations = 0;

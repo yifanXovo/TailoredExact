@@ -1,0 +1,5 @@
+candidate,formula,proof_status,reason,rows_added,LB impact,runtime impact
+A_bucket_H_cap,H <= V gamma_U S_U^b,paper_safe,follows from H <= V gamma_U S and enforced S <= S_U^b,11,,
+B_local_spread_cap,sum_{j!=i} h_ij <= H <= V gamma_U S_U^b,diagnostic,not added until exact H equality/slack semantics are certified for every model path,0,,
+C_H_lower_rows,H >= V gamma_L S_L^b,diagnostic,kept out of paper evidence unless exact-H lower semantics are audited,0,,
+D_P_tightening,bucket-local P upper bound from objective cutoff,rejected_invalid,no stronger paper-safe P upper bound than existing cutoff budget was proved,0,,

@@ -1753,6 +1753,24 @@ std::string resultToJson(const SolveResult& input) {
         << result.tailored_bc_subset_inventory_imbalance_candidates << ",\n";
     out << "  \"tailored_bc_subset_inventory_imbalance_violations\": "
         << result.tailored_bc_subset_inventory_imbalance_violations << ",\n";
+    out << "  \"tailored_bc_bucket_ratio_domain_rows_added\": "
+        << result.tailored_bc_bucket_ratio_domain_rows_added << ",\n";
+    out << "  \"tailored_bc_bucket_ratio_domain_bounds_tightened\": "
+        << result.tailored_bc_bucket_ratio_domain_bounds_tightened << ",\n";
+    out << "  \"tailored_bc_bucket_ratio_domain_proof_status\": \""
+        << jsonEscape(result.tailored_bc_bucket_ratio_domain_proof_status) << "\",\n";
+    out << "  \"tailored_bc_bucket_subset_ratio_domain_cuts_added\": "
+        << result.tailored_bc_bucket_subset_ratio_domain_cuts_added << ",\n";
+    out << "  \"tailored_bc_bucket_subset_ratio_domain_candidates\": "
+        << result.tailored_bc_bucket_subset_ratio_domain_candidates << ",\n";
+    out << "  \"tailored_bc_bucket_subset_ratio_domain_violations\": "
+        << result.tailored_bc_bucket_subset_ratio_domain_violations << ",\n";
+    out << "  \"tailored_bc_bucket_subset_ratio_domain_max_violation\": "
+        << result.tailored_bc_bucket_subset_ratio_domain_max_violation << ",\n";
+    out << "  \"tailored_bc_bucket_subset_ratio_domain_max_size\": "
+        << result.tailored_bc_bucket_subset_ratio_domain_max_size << ",\n";
+    out << "  \"tailored_bc_bucket_h_cap_rows_added\": "
+        << result.tailored_bc_bucket_h_cap_rows_added << ",\n";
     out << "  \"tailored_bc_transfer_cutset_cuts_added\": "
         << result.tailored_bc_transfer_cutset_cuts_added << ",\n";
     out << "  \"tailored_bc_transfer_cutset_candidates\": "
