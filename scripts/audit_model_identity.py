@@ -22,6 +22,14 @@ def read_csv(path: Path) -> List[Dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+def fallback_rows(root: Path) -> List[Dict[str, str]]:
+    rows: List[Dict[str, str]] = []
+    for name in ("dominant_bucket_longrun.csv", "adaptive_child_longrun.csv", "secondary_regression_summary.csv"):
+        for row in read_csv(root / name):
+            rows.append(row)
+    return rows
+
+
 def write_csv(path: Path, rows: List[Dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if not rows:
@@ -40,6 +48,8 @@ def main() -> int:
     args = parser.parse_args()
     root = Path(args.results)
     rows = read_csv(root / "model_identity_audit.csv")
+    if not rows:
+        rows = fallback_rows(root)
     out_rows: List[Dict[str, Any]] = []
     failures = 0
     for row in rows:

@@ -168,6 +168,36 @@ MECHANISMS: List[Dict[str, Any]] = [
         "conditional_valid": True,
         "diagnostic_only": False,
     },
+    {
+        "mechanism_name": "bucket integer inventory domain tightening",
+        "formula": "Y_i in [ceil(target_i*r_i^L), floor(target_i*r_i^U)] inside an enforced S bucket",
+        "where_implemented": "src/CplexBaseline.cpp",
+        "proof_source": "docs/bucket_integer_inventory_domain_tightening.md",
+        "audit_script": "audit_bucket_integer_inventory_domain.py",
+        "paper_safe": True,
+        "conditional_valid": True,
+        "diagnostic_only": False,
+    },
+    {
+        "mechanism_name": "bucket required movement and visit cuts",
+        "formula": "bucket-tight Y bounds imply station/subset net pickup/drop requirements and required visits",
+        "where_implemented": "src/CplexBaseline.cpp",
+        "proof_source": "docs/bucket_required_movement.md",
+        "audit_script": "audit_bucket_required_movement.py",
+        "paper_safe": True,
+        "conditional_valid": True,
+        "diagnostic_only": False,
+    },
+    {
+        "mechanism_name": "S-P-H coupled estimator",
+        "formula": "H + V lambda W_SP <= V(UB-epsilon)S with bucket-local McCormick W_SP",
+        "where_implemented": "src/CplexBaseline.cpp",
+        "proof_source": "docs/sp_h_coupled_estimator.md",
+        "audit_script": "audit_low_gini_cut_validity.py; audit_lp_snapshot_integrity.py",
+        "paper_safe": True,
+        "conditional_valid": True,
+        "diagnostic_only": False,
+    },
 ]
 
 IMPLEMENTATION_PATTERNS = {

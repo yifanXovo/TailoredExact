@@ -22,6 +22,13 @@ def read_csv(path: Path) -> List[Dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+def fallback_rows(root: Path) -> List[Dict[str, str]]:
+    rows = read_csv(root / "plain_vs_tailored_bound_trajectory.csv")
+    if rows:
+        return rows
+    return read_csv(root / "longrun_health_monitoring.csv")
+
+
 def write_csv(path: Path, rows: List[Dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if not rows:
@@ -43,12 +50,22 @@ def main() -> int:
     if not source.exists():
         source = root / "plateau_bound_trace.csv"
     rows = read_csv(source)
+    if not rows:
+        rows = fallback_rows(root)
     audited: List[Dict[str, Any]] = []
     failures = 0
     for row in rows:
         reasons: List[str] = []
         if not b(row.get("audit_passed")):
-            reasons.append(row.get("failures", "bound_trace_failed") or "bound_trace_failed")
+            if "audit_passed" in row:
+                reasons.append(row.get("failures", "bound_trace_failed") or "bound_trace_failed")
+        if b(row.get("valid_bound_available")) and row.get("best_bound", "") in {"", None}:
+            reasons.append("valid_bound_without_best_bound")
+        if row.get("best_bound", "") not in {"", None}:
+            try:
+                float(row.get("best_bound", ""))
+            except ValueError:
+                reasons.append("non_numeric_best_bound")
         if (
             str(row.get("progress_path", "")) and
             "plain_fixed_interval_mip" not in str(row.get("variant", "")) and

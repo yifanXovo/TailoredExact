@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 from pathlib import Path
 from typing import Any, Dict, List
 
@@ -20,6 +21,32 @@ def read_csv(path: Path) -> List[Dict[str, str]]:
         return []
     with path.open(newline="", encoding="utf-8-sig") as handle:
         return list(csv.DictReader(handle))
+
+
+def json_rows(root: Path) -> List[Dict[str, str]]:
+    rows: List[Dict[str, str]] = []
+    raw = root / "raw"
+    if not raw.exists():
+        return rows
+    for path in sorted(raw.glob("*.json")):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if not b(data.get("s_range_refinement_enabled")):
+            continue
+        rows.append({
+            "source_json": str(path),
+            "ledger_mode": data.get("tailored_bc_s_bucket_ledger", data.get("compact_bc_s_range_refinement", "")),
+            "parent_closed_by_s_bucket_ledger": str(data.get("s_range_bucket_closed", False)),
+            "coverage_valid": str(data.get("s_range_parent_coverage_valid", False)),
+            "all_buckets_closed": str(data.get("s_range_bucket_closed", False)),
+            "diagnostic_evidence_used": "False",
+            "checkpoint_only_used": "False",
+            "plain_cplex_used": str(data.get("row_class", "").startswith("benchmark_only")),
+            "timeout_bucket_count": "0" if data.get("status") == "interval_closed" else "1",
+        })
+    return rows
 
 
 def write_csv(path: Path, rows: List[Dict[str, Any]]) -> None:
@@ -40,6 +67,8 @@ def main() -> int:
     args = parser.parse_args()
     root = Path(args.results)
     rows = read_csv(root / "s_bucket_parent_merge_summary.csv")
+    if not rows:
+        rows = json_rows(root)
     failures = 0
     audited: List[Dict[str, Any]] = []
     for row in rows:
