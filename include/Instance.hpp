@@ -205,6 +205,11 @@ struct SolveOptions {
     bool tailored_bc_bucket_ratio_domain_tightening = false;
     bool tailored_bc_bucket_subset_ratio_domain = false;
     int tailored_bc_bucket_subset_ratio_max_size = 2;
+    bool tailored_bc_bucket_integer_inventory_domain = false;
+    std::string tailored_bc_bucket_integer_inventory_domain_mode = "static";
+    bool tailored_bc_bucket_required_movement = false;
+    bool tailored_bc_bucket_required_visit = false;
+    int tailored_bc_bucket_required_movement_max_size = 1;
     std::string tailored_bc_support_duration_cover_mode = "support_cover_lifted";
     std::string tailored_bc_benders_inventory_cuts = "off";
     std::string compact_bc_model_size_policy = "full";

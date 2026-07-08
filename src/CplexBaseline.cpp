@@ -79,6 +79,15 @@ struct CompactOracleStrengtheningStats {
     long long tailored_bucket_subset_ratio_domain_cuts_added = 0;
     long long tailored_bucket_subset_ratio_domain_candidates = 0;
     long long tailored_bucket_h_cap_rows_added = 0;
+    long long bucket_integer_inventory_bounds_tightened = 0;
+    long long bucket_integer_inventory_rows_added = 0;
+    long long bucket_integer_inventory_lower_bounds_tightened = 0;
+    long long bucket_integer_inventory_upper_bounds_tightened = 0;
+    long long bucket_required_movement_rows_added = 0;
+    long long bucket_required_visit_rows_added = 0;
+    long long bucket_subset_required_movement_rows_added = 0;
+    long long bucket_required_movement_violations = 0;
+    double bucket_required_movement_max_violation = 0.0;
     long long tailored_transfer_cutset_cuts_added = 0;
     long long tailored_compatible_source_transfer_cuts_added = 0;
     long long tailored_compatible_source_transfer_candidates = 0;
@@ -447,7 +456,16 @@ void writeCompactLp(const Instance& instance,
         strengthened && tailored_active && cutoff != nullptr && cutoff->enabled &&
         s_range_rows_active && options.tailored_bc_bucket_subset_ratio_domain &&
         cutoff->gamma_U >= -1e-12 && s_bucket_U >= s_bucket_L - 1e-12;
-    if (add_bucket_ratio_domain) {
+    const std::string bucket_inventory_mode =
+        options.tailored_bc_bucket_integer_inventory_domain_mode.empty()
+            ? "static"
+            : options.tailored_bc_bucket_integer_inventory_domain_mode;
+    const bool add_bucket_integer_inventory_domain =
+        strengthened && tailored_active && cutoff != nullptr && cutoff->enabled &&
+        s_range_rows_active && options.tailored_bc_bucket_integer_inventory_domain &&
+        (bucket_inventory_mode == "static" || bucket_inventory_mode == "both") &&
+        cutoff->gamma_U >= -1e-12 && s_bucket_U >= s_bucket_L - 1e-12;
+    if (add_bucket_ratio_domain || add_bucket_integer_inventory_domain) {
         const double upper_factor = 1.0 / static_cast<double>(V) + cutoff->gamma_U;
         const double lower_factor = 1.0 / static_cast<double>(V) - cutoff->gamma_U;
         for (int i = 1; i <= V; ++i) {
@@ -458,7 +476,13 @@ void writeCompactLp(const Instance& instance,
                          static_cast<int>(std::floor(target * r_hi + 1e-9)));
             if (y_hi < y_ub[i]) {
                 y_ub[i] = std::max(y_lb[i], y_hi);
-                if (stats != nullptr) ++stats->tailored_bucket_ratio_domain_bounds_tightened;
+                if (stats != nullptr) {
+                    if (add_bucket_ratio_domain) ++stats->tailored_bucket_ratio_domain_bounds_tightened;
+                    if (add_bucket_integer_inventory_domain) {
+                        ++stats->bucket_integer_inventory_bounds_tightened;
+                        ++stats->bucket_integer_inventory_upper_bounds_tightened;
+                    }
+                }
             }
             if (lower_factor > 1e-12) {
                 const double r_lo = std::max(0.0, lower_factor * s_bucket_L);
@@ -466,12 +490,23 @@ void writeCompactLp(const Instance& instance,
                     std::max(0, static_cast<int>(std::ceil(target * r_lo - 1e-9)));
                 if (y_lo > y_lb[i]) {
                     y_lb[i] = std::min(y_ub[i], y_lo);
-                    if (stats != nullptr) ++stats->tailored_bucket_ratio_domain_bounds_tightened;
+                    if (stats != nullptr) {
+                        if (add_bucket_ratio_domain) ++stats->tailored_bucket_ratio_domain_bounds_tightened;
+                        if (add_bucket_integer_inventory_domain) {
+                            ++stats->bucket_integer_inventory_bounds_tightened;
+                            ++stats->bucket_integer_inventory_lower_bounds_tightened;
+                        }
+                    }
                 }
             }
         }
         if (stats != nullptr) {
-            stats->enabled_families.push_back("bucket_ratio_domain_tightening");
+            if (add_bucket_ratio_domain) {
+                stats->enabled_families.push_back("bucket_ratio_domain_tightening");
+            }
+            if (add_bucket_integer_inventory_domain) {
+                stats->enabled_families.push_back("bucket_integer_inventory_domain");
+            }
         }
     }
 
@@ -1033,6 +1068,129 @@ void writeCompactLp(const Instance& instance,
         writeConstraint(out, cid, h_cap, "<=",
                         static_cast<double>(V) * cutoff->gamma_U * s_bucket_U);
         if (stats != nullptr) ++stats->tailored_bucket_h_cap_rows_added;
+    }
+    if (add_bucket_integer_inventory_domain) {
+        for (int i = 1; i <= V; ++i) {
+            if (y_lb[i] > 0) {
+                Expr lb;
+                addTerm(lb, yName(i), 1.0);
+                writeConstraint(out, cid, lb, ">=", y_lb[i]);
+                if (stats != nullptr) ++stats->bucket_integer_inventory_rows_added;
+            }
+            if (y_ub[i] < instance.capacity[i]) {
+                Expr ub;
+                addTerm(ub, yName(i), 1.0);
+                writeConstraint(out, cid, ub, "<=", y_ub[i]);
+                if (stats != nullptr) ++stats->bucket_integer_inventory_rows_added;
+            }
+        }
+    }
+    const bool add_bucket_required_movement =
+        strengthened && tailored_active && cutoff != nullptr && cutoff->enabled &&
+        s_range_rows_active && options.tailored_bc_bucket_required_movement &&
+        options.tailored_bc_bucket_integer_inventory_domain;
+    const bool add_bucket_required_visit =
+        strengthened && tailored_active && cutoff != nullptr && cutoff->enabled &&
+        s_range_rows_active && options.tailored_bc_bucket_required_visit &&
+        options.tailored_bc_bucket_integer_inventory_domain;
+    if (add_bucket_required_movement || add_bucket_required_visit) {
+        if (stats != nullptr && add_bucket_required_movement) {
+            stats->enabled_families.push_back("bucket_required_movement");
+        }
+        if (stats != nullptr && add_bucket_required_visit) {
+            stats->enabled_families.push_back("bucket_required_visit");
+        }
+        for (int i = 1; i <= V; ++i) {
+            const int required_delivery = std::max(0, y_lb[i] - instance.initial[i]);
+            const int required_loss = std::max(0, instance.initial[i] - y_ub[i]);
+            if (add_bucket_required_movement && required_delivery > 0) {
+                Expr deliver;
+                for (int k = 0; k < M; ++k) {
+                    addTerm(deliver, dName(k, i), 1.0);
+                    addTerm(deliver, pName(k, i), -1.0);
+                }
+                writeConstraint(out, cid, deliver, ">=", required_delivery);
+                if (stats != nullptr) {
+                    ++stats->bucket_required_movement_rows_added;
+                    ++stats->bucket_required_movement_violations;
+                    stats->bucket_required_movement_max_violation =
+                        std::max(stats->bucket_required_movement_max_violation,
+                                 static_cast<double>(required_delivery));
+                }
+            }
+            if (add_bucket_required_movement && required_loss > 0) {
+                Expr loss;
+                for (int k = 0; k < M; ++k) {
+                    addTerm(loss, pName(k, i), 1.0);
+                    addTerm(loss, dName(k, i), -1.0);
+                }
+                writeConstraint(out, cid, loss, ">=", required_loss);
+                if (stats != nullptr) {
+                    ++stats->bucket_required_movement_rows_added;
+                    ++stats->bucket_required_movement_violations;
+                    stats->bucket_required_movement_max_violation =
+                        std::max(stats->bucket_required_movement_max_violation,
+                                 static_cast<double>(required_loss));
+                }
+            }
+            if (add_bucket_required_visit &&
+                (required_delivery > 0 || required_loss > 0)) {
+                Expr visit;
+                for (int k = 0; k < M; ++k) addTerm(visit, zName(k, i), 1.0);
+                writeConstraint(out, cid, visit, ">=", 1.0);
+                if (stats != nullptr) ++stats->bucket_required_visit_rows_added;
+            }
+        }
+        if (add_bucket_required_movement) {
+            const int max_size = std::min({3, V, std::max(1, options.tailored_bc_bucket_required_movement_max_size)});
+            std::vector<int> subset;
+            std::function<void(int, int)> gen_req = [&](int start, int remaining) {
+                if (remaining == 0) {
+                    if (subset.size() <= 1) return;
+                    int lower_inventory = 0;
+                    int upper_inventory = 0;
+                    int initial_inventory = 0;
+                    for (int i : subset) {
+                        lower_inventory += y_lb[i];
+                        upper_inventory += y_ub[i];
+                        initial_inventory += instance.initial[i];
+                    }
+                    const int required_delivery =
+                        std::max(0, lower_inventory - initial_inventory);
+                    const int required_loss =
+                        std::max(0, initial_inventory - upper_inventory);
+                    if (required_delivery > 0) {
+                        Expr deliver;
+                        for (int k = 0; k < M; ++k) {
+                            for (int i : subset) {
+                                addTerm(deliver, dName(k, i), 1.0);
+                                addTerm(deliver, pName(k, i), -1.0);
+                            }
+                        }
+                        writeConstraint(out, cid, deliver, ">=", required_delivery);
+                        if (stats != nullptr) ++stats->bucket_subset_required_movement_rows_added;
+                    }
+                    if (required_loss > 0) {
+                        Expr loss;
+                        for (int k = 0; k < M; ++k) {
+                            for (int i : subset) {
+                                addTerm(loss, pName(k, i), 1.0);
+                                addTerm(loss, dName(k, i), -1.0);
+                            }
+                        }
+                        writeConstraint(out, cid, loss, ">=", required_loss);
+                        if (stats != nullptr) ++stats->bucket_subset_required_movement_rows_added;
+                    }
+                    return;
+                }
+                for (int i = start; i <= V - remaining + 1; ++i) {
+                    subset.push_back(i);
+                    gen_req(i + 1, remaining - 1);
+                    subset.pop_back();
+                }
+            };
+            for (int size = 2; size <= max_size; ++size) gen_req(1, size);
+        }
     }
     if (add_bucket_subset_ratio_domain) {
         if (stats != nullptr) stats->enabled_families.push_back("bucket_subset_ratio_domain");
@@ -2898,6 +3056,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             strengthening_stats.tailored_subset_cross_h_centering_rows_added +
             strengthening_stats.tailored_local_q_centering_rows_added +
             strengthening_stats.tailored_subset_inventory_imbalance_cuts_added +
+            strengthening_stats.bucket_integer_inventory_rows_added +
+            strengthening_stats.bucket_required_movement_rows_added +
+            strengthening_stats.bucket_required_visit_rows_added +
+            strengthening_stats.bucket_subset_required_movement_rows_added +
             strengthening_stats.tailored_transfer_cutset_cuts_added +
             strengthening_stats.tailored_compatible_source_transfer_cuts_added +
             strengthening_stats.tailored_required_external_source_cuts_added +
@@ -2933,6 +3095,41 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             model_options.tailored_bc_bucket_subset_ratio_max_size;
         result.tailored_bc_bucket_h_cap_rows_added =
             strengthening_stats.tailored_bucket_h_cap_rows_added;
+        result.bucket_integer_inventory_bounds_tightened =
+            strengthening_stats.bucket_integer_inventory_bounds_tightened;
+        result.bucket_integer_inventory_rows_added =
+            strengthening_stats.bucket_integer_inventory_rows_added;
+        result.bucket_integer_inventory_lower_bounds_tightened =
+            strengthening_stats.bucket_integer_inventory_lower_bounds_tightened;
+        result.bucket_integer_inventory_upper_bounds_tightened =
+            strengthening_stats.bucket_integer_inventory_upper_bounds_tightened;
+        result.bucket_integer_inventory_domain_mode =
+            model_options.tailored_bc_bucket_integer_inventory_domain
+                ? model_options.tailored_bc_bucket_integer_inventory_domain_mode
+                : "off";
+        result.bucket_integer_inventory_domain_proof_status =
+            result.bucket_integer_inventory_bounds_tightened > 0 ||
+            result.bucket_integer_inventory_rows_added > 0
+                ? "paper_safe_s_bucket_integer_inventory_domain"
+                : "not_enabled";
+        result.bucket_required_movement_rows_added =
+            strengthening_stats.bucket_required_movement_rows_added;
+        result.bucket_required_visit_rows_added =
+            strengthening_stats.bucket_required_visit_rows_added;
+        result.bucket_subset_required_movement_rows_added =
+            strengthening_stats.bucket_subset_required_movement_rows_added;
+        result.bucket_required_movement_violations =
+            strengthening_stats.bucket_required_movement_violations;
+        result.bucket_required_movement_max_violation =
+            strengthening_stats.bucket_required_movement_max_violation;
+        result.bucket_required_movement_max_size =
+            model_options.tailored_bc_bucket_required_movement_max_size;
+        result.bucket_required_movement_proof_status =
+            result.bucket_required_movement_rows_added > 0 ||
+            result.bucket_required_visit_rows_added > 0 ||
+            result.bucket_subset_required_movement_rows_added > 0
+                ? "paper_safe_bucket_integer_inventory_required_movement"
+                : "not_enabled";
         result.tailored_bc_transfer_cutset_cuts_added =
             strengthening_stats.tailored_transfer_cutset_cuts_added;
         result.tailored_bc_compatible_source_transfer_cuts_added =
@@ -2967,6 +3164,14 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 << result.tailored_bc_bucket_subset_ratio_domain_cuts_added
                 << ";bucket_h_cap="
                 << result.tailored_bc_bucket_h_cap_rows_added
+                << ";bucket_integer_inventory="
+                << result.bucket_integer_inventory_rows_added
+                << ";bucket_required_movement="
+                << result.bucket_required_movement_rows_added
+                << ";bucket_required_visit="
+                << result.bucket_required_visit_rows_added
+                << ";bucket_subset_required_movement="
+                << result.bucket_subset_required_movement_rows_added
                 << ";transfer_cutset="
                 << result.tailored_bc_transfer_cutset_cuts_added
                 << ";compatible_source_transfer="
@@ -3030,6 +3235,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                  << ";tailored_bucket_ratio_domain=" << result.tailored_bc_bucket_ratio_domain_rows_added
                  << ";tailored_bucket_subset_ratio_domain=" << result.tailored_bc_bucket_subset_ratio_domain_cuts_added
                  << ";tailored_bucket_h_cap=" << result.tailored_bc_bucket_h_cap_rows_added
+                 << ";bucket_integer_inventory=" << result.bucket_integer_inventory_rows_added
+                 << ";bucket_required_movement=" << result.bucket_required_movement_rows_added
+                 << ";bucket_required_visit=" << result.bucket_required_visit_rows_added
+                 << ";bucket_subset_required_movement=" << result.bucket_subset_required_movement_rows_added
                  << ";tailored_transfer_cutset=" << result.tailored_bc_transfer_cutset_cuts_added
                  << ";tailored_benders_inventory_diagnostic=" << result.tailored_bc_benders_inventory_cuts_added
                  << ";gini_spread=" << result.gini_spread_cuts_added
@@ -3051,6 +3260,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     << result.compact_bc_movement_reachability_domains_tightened
                     << ";bucket_ratio_domain="
                     << result.tailored_bc_bucket_ratio_domain_bounds_tightened
+                    << ";bucket_integer_inventory="
+                    << result.bucket_integer_inventory_bounds_tightened
                     << ";domain_width_before=" << strengthening_stats.domain_width_before
                     << ";domain_width_after=" << strengthening_stats.domain_width_after;
         result.compact_bc_domains_tightened_by_family = domains.str();

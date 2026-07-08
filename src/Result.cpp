@@ -1771,6 +1771,32 @@ std::string resultToJson(const SolveResult& input) {
         << result.tailored_bc_bucket_subset_ratio_domain_max_size << ",\n";
     out << "  \"tailored_bc_bucket_h_cap_rows_added\": "
         << result.tailored_bc_bucket_h_cap_rows_added << ",\n";
+    out << "  \"bucket_integer_inventory_bounds_tightened\": "
+        << result.bucket_integer_inventory_bounds_tightened << ",\n";
+    out << "  \"bucket_integer_inventory_rows_added\": "
+        << result.bucket_integer_inventory_rows_added << ",\n";
+    out << "  \"bucket_integer_inventory_lower_bounds_tightened\": "
+        << result.bucket_integer_inventory_lower_bounds_tightened << ",\n";
+    out << "  \"bucket_integer_inventory_upper_bounds_tightened\": "
+        << result.bucket_integer_inventory_upper_bounds_tightened << ",\n";
+    out << "  \"bucket_integer_inventory_domain_mode\": \""
+        << jsonEscape(result.bucket_integer_inventory_domain_mode) << "\",\n";
+    out << "  \"bucket_integer_inventory_domain_proof_status\": \""
+        << jsonEscape(result.bucket_integer_inventory_domain_proof_status) << "\",\n";
+    out << "  \"bucket_required_movement_rows_added\": "
+        << result.bucket_required_movement_rows_added << ",\n";
+    out << "  \"bucket_required_visit_rows_added\": "
+        << result.bucket_required_visit_rows_added << ",\n";
+    out << "  \"bucket_subset_required_movement_rows_added\": "
+        << result.bucket_subset_required_movement_rows_added << ",\n";
+    out << "  \"bucket_required_movement_violations\": "
+        << result.bucket_required_movement_violations << ",\n";
+    out << "  \"bucket_required_movement_max_violation\": "
+        << result.bucket_required_movement_max_violation << ",\n";
+    out << "  \"bucket_required_movement_max_size\": "
+        << result.bucket_required_movement_max_size << ",\n";
+    out << "  \"bucket_required_movement_proof_status\": \""
+        << jsonEscape(result.bucket_required_movement_proof_status) << "\",\n";
     out << "  \"tailored_bc_transfer_cutset_cuts_added\": "
         << result.tailored_bc_transfer_cutset_cuts_added << ",\n";
     out << "  \"tailored_bc_transfer_cutset_candidates\": "

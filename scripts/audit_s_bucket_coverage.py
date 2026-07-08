@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
@@ -32,6 +33,41 @@ def read_csv(path: Path) -> List[Dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+def json_rows(root: Path) -> List[Dict[str, str]]:
+    rows: List[Dict[str, str]] = []
+    raw = root / "raw"
+    if not raw.exists():
+        return rows
+    for path in sorted(raw.glob("*.json")):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if not b(data.get("s_range_refinement_enabled")):
+            continue
+        lo = data.get("s_range_bucket_L", "")
+        hi = data.get("s_range_bucket_U", "")
+        if lo in {"", None} or hi in {"", None}:
+            continue
+        rows.append({
+            "source_json": str(path),
+            "parent_leaf": data.get("leaf", data.get("dominant_s_bucket_name", data.get("input_path", ""))),
+            "gamma_L": str(data.get("interval_exact_cutoff_gamma_L", data.get("gamma_L", ""))),
+            "gamma_U": str(data.get("interval_exact_cutoff_gamma_U", data.get("gamma_U", ""))),
+            "ledger_mode": data.get("tailored_bc_s_bucket_ledger", data.get("compact_bc_s_range_refinement", "")),
+            "bucket_count": str(data.get("s_range_bucket_count", data.get("tailored_bc_s_bucket_count", ""))),
+            "bucket_policy_effective": data.get("tailored_bc_s_bucket_policy", ""),
+            "budget_seconds": str(data.get("time_budget_seconds", "")),
+            "parent_S_L": str(data.get("s_range_bucket_L", lo)),
+            "parent_S_U": str(data.get("s_range_bucket_U", hi)),
+            "s_bucket_L": str(lo),
+            "s_bucket_U": str(hi),
+            "s_range_certificate_valid": str(data.get("s_range_certificate_valid", "")),
+            "coverage_used_for_paper_certificate": str(data.get("s_range_certificate_valid", "")),
+        })
+    return rows
+
+
 def write_csv(path: Path, rows: List[Dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if not rows:
@@ -43,7 +79,7 @@ def write_csv(path: Path, rows: List[Dict[str, Any]]) -> None:
         writer.writerows(rows)
 
 
-def group_key(row: Dict[str, str]) -> Tuple[str, str, str, str, str, str, str]:
+def group_key(row: Dict[str, str]) -> Tuple[str, str, str, str, str, str, str, str]:
     return (
         row.get("parent_leaf", row.get("leaf", "")),
         row.get("gamma_L", ""),
@@ -52,6 +88,7 @@ def group_key(row: Dict[str, str]) -> Tuple[str, str, str, str, str, str, str]:
         row.get("bucket_count", row.get("s_range_bucket_count", "")),
         row.get("bucket_policy_effective", row.get("tailored_bc_s_bucket_policy", "")),
         row.get("budget_seconds", row.get("budget_seconds_per_bucket", "")),
+        row.get("source_json", ""),
     )
 
 
@@ -66,6 +103,8 @@ def main() -> int:
     if not rows:
         source = root / "s_bucket_coverage_audit.csv"
         rows = read_csv(source)
+    if not rows:
+        rows = json_rows(root)
 
     failures = 0
     audited: List[Dict[str, Any]] = []
