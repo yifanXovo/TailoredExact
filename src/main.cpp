@@ -46,7 +46,7 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|interval-cutoff-oracle|primal-heuristic|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|option-consistency-test|tailored-bc-callback-smoke-test|tailored-bc-branch-callback-smoke-test|tailored-bc-cut-validity-test|gini-subset-envelope-test|low-gini-l1-centering-test|transfer-cutset-validity-test|s-bucket-coverage-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|projection-safe-relaxed-column-test|non-elementary-relaxed-column-test|ng-relaxed-closure-test|relaxed-rmp-cg-test|frontier-relaxed-rmp-cg-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|large-relaxed-rmp-cg-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|interval-cutoff-oracle|primal-heuristic|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|option-consistency-test|tailored-bc-callback-smoke-test|tailored-bc-relaxation-vector-smoke-test|tailored-bc-branch-callback-smoke-test|tailored-bc-cut-validity-test|gini-subset-envelope-test|low-gini-l1-centering-test|transfer-cutset-validity-test|s-bucket-coverage-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|projection-safe-relaxed-column-test|non-elementary-relaxed-column-test|ng-relaxed-closure-test|relaxed-rmp-cg-test|frontier-relaxed-rmp-cg-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|large-relaxed-rmp-cg-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
@@ -9513,6 +9513,188 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
             result.tailored_bc_callback_available
                 ? "tailored_bc_callback_smoke: in-process CPLEX callback API is available"
                 : "tailored_bc_callback_smoke: blocked because current executable uses command-file CPLEX and is not linked to an in-process CPLEX callback API");
+    } else if (method == "tailored-bc-relaxation-vector-smoke-test") {
+        const std::filesystem::path lp_path =
+            std::filesystem::temp_directory_path() /
+            ("exactebrp_tailored_vector_smoke_" +
+             std::to_string(static_cast<long long>(
+                 std::chrono::steady_clock::now().time_since_epoch().count())) +
+             ".lp");
+        {
+            std::ofstream lp(lp_path);
+            lp << "\\ Diagnostic-only toy MIP used to verify CPLEX callback relaxation-vector export.\n";
+            lp << "Minimize\n";
+            lp << " obj:";
+            constexpr int toy_vars = 72;
+            constexpr int toy_rows = 16;
+            for (int i = 1; i <= toy_vars; ++i) {
+                const int profit = 23 + ((i * 29 + i * i * 5) % 83);
+                lp << " - " << profit << " bit_" << i;
+            }
+            lp << " + 0.001 G\n";
+            lp << "Subject To\n";
+            for (int c = 0; c < toy_rows; ++c) {
+                lp << " cap_" << c << ":";
+                long long total_weight = 0;
+                for (int i = 1; i <= toy_vars; ++i) {
+                    const int weight =
+                        5 + ((i * (13 + c * 7) + c * 19 + i * i) % 37);
+                    total_weight += weight;
+                    if (i > 1) lp << " +";
+                    lp << " " << weight << " bit_" << i;
+                }
+                const long long rhs = total_weight / 2 - 1 - (c % 7);
+                lp << " <= " << rhs << "\n";
+            }
+            lp << " g_link: G - bit_1 = 0\n";
+            lp << "Bounds\n";
+            lp << " 0 <= G <= 1\n";
+            lp << "Binaries\n";
+            for (int i = 1; i <= toy_vars; ++i) {
+                lp << " bit_" << i;
+                if (i % 10 == 0) lp << "\n";
+            }
+            if (toy_vars % 10 != 0) lp << "\n";
+            lp << "End\n";
+        }
+        const ebrp::TailoredBCCplexApiSolveResult api =
+            ebrp::solveLpWithTailoredBCCplexApi(
+                lp_path,
+                std::max(5.0, opt.solve_time_limit > 0.0
+                    ? std::min(15.0, opt.solve_time_limit)
+                    : 15.0),
+                std::max(1, opt.compact_bc_threads > 0
+                    ? opt.compact_bc_threads
+                    : opt.mip_threads),
+                0.0, 1.0,
+                true, false, true, false,
+                tailored_opt.tailored_bc_gini_branch_min_width,
+                {}, {}, {}, {}, {}, {}, 0, 0.0, 0.0,
+                "off",
+                1,
+                0,
+                "off",
+                tailored_opt.tailored_bc_callback_separation_min_calls,
+                "off",
+                false,
+                false,
+                1,
+                0,
+                "deviation",
+                false,
+                0.0,
+                std::numeric_limits<double>::infinity(),
+                0);
+        std::error_code remove_ec;
+        std::filesystem::remove(lp_path, remove_ec);
+
+        result.tailored_bc_callback_available = api.available;
+        result.tailored_bc_callback_fail_reason =
+            api.fail_reason.empty() ? "none" : api.fail_reason;
+        result.tailored_bc_mode = api.available ? "callback" : "static_fallback";
+        result.tailored_bc_user_cut_callback_enabled = api.available;
+        result.tailored_bc_lazy_callback_enabled = false;
+        result.tailored_bc_incumbent_callback_enabled = false;
+        result.tailored_bc_branch_callback_enabled = api.available;
+        result.tailored_bc_branch_priority_enabled = false;
+        result.tailored_bc_gini_branch_mode = "branch_callback_diagnostic";
+        result.tailored_bc_relaxation_callback_calls =
+            api.relaxation_callback_calls;
+        result.tailored_bc_candidate_callback_calls =
+            api.candidate_callback_calls;
+        result.tailored_bc_branch_callback_calls =
+            api.branch_callback_calls;
+        result.tailored_bc_progress_callback_calls =
+            api.progress_callback_calls;
+        result.tailored_bc_user_cuts_added_total = api.user_cuts_added;
+        result.tailored_bc_user_cuts_added_by_family =
+            "callback_gini_interval_cap=" +
+            std::to_string(api.callback_gini_interval_cuts_added);
+        result.tailored_bc_callback_cut_profile = "off";
+        result.tailored_bc_gini_branches_created = api.gini_branches_created;
+        result.tailored_bc_callback_vector_export_claimed =
+            api.relaxation_vector_api_called;
+        result.tailored_bc_callback_vector_export_working =
+            api.relaxation_vector_snapshot_available &&
+            api.relaxation_vector_nonzero_values > 0;
+        result.tailored_bc_callback_vector_context_seen =
+            api.relaxation_callback_calls > 0 || api.candidate_callback_calls > 0;
+        result.tailored_bc_callback_vector_relaxation_context_seen =
+            api.relaxation_callback_calls > 0;
+        result.tailored_bc_callback_vector_candidate_context_seen =
+            api.candidate_callback_calls > 0;
+        result.tailored_bc_callback_vector_api_called =
+            api.relaxation_vector_api_called;
+        result.tailored_bc_callback_vector_api_return_code =
+            api.relaxation_vector_api_return_code;
+        result.tailored_bc_callback_vector_length_requested =
+            api.relaxation_vector_length_requested;
+        result.tailored_bc_callback_vector_length_returned =
+            api.relaxation_vector_length_returned;
+        result.tailored_bc_callback_vector_nonzero_values_count =
+            api.relaxation_vector_nonzero_values;
+        result.tailored_bc_callback_vector_sample_variable_names =
+            api.relaxation_vector_sample_variable_names;
+        result.tailored_bc_callback_vector_sample_variable_values =
+            api.relaxation_vector_sample_variable_values;
+        result.tailored_bc_callback_vector_failure_reason =
+            api.relaxation_vector_failure_reason;
+        result.tailored_bc_callback_candidate_vector_api_called =
+            api.candidate_vector_api_called;
+        result.tailored_bc_callback_candidate_vector_api_return_code =
+            api.candidate_vector_api_return_code;
+        result.tailored_bc_callback_candidate_vector_length_requested =
+            api.candidate_vector_length_requested;
+        result.tailored_bc_callback_candidate_vector_length_returned =
+            api.candidate_vector_length_returned;
+        result.tailored_bc_callback_candidate_vector_nonzero_values_count =
+            api.candidate_vector_nonzero_values;
+        result.tailored_bc_callback_candidate_vector_sample_variable_names =
+            api.candidate_vector_sample_variable_names;
+        result.tailored_bc_callback_candidate_vector_sample_variable_values =
+            api.candidate_vector_sample_variable_values;
+        result.tailored_bc_callback_candidate_vector_failure_reason =
+            api.candidate_vector_failure_reason;
+
+        if (!api.available) {
+            result.tailored_bc_callback_vector_export_status =
+                "api_unavailable_in_current_context";
+        } else if (!result.tailored_bc_callback_vector_relaxation_context_seen) {
+            result.tailored_bc_callback_vector_export_status =
+                "callback_context_not_reached";
+        } else if (!api.relaxation_vector_api_called) {
+            result.tailored_bc_callback_vector_export_status =
+                "engineering_bug_fixed";
+        } else if (result.tailored_bc_callback_vector_export_working) {
+            result.tailored_bc_callback_vector_export_status =
+                "callback_vector_export_working";
+        } else if (api.relaxation_vector_api_return_code != 0) {
+            result.tailored_bc_callback_vector_export_status =
+                "api_unavailable_in_current_context";
+        } else if (api.relaxation_vector_sample_variable_names.empty() ||
+                   api.relaxation_vector_sample_variable_names == "not_available") {
+            result.tailored_bc_callback_vector_export_status =
+                "column_mapping_not_available";
+        } else {
+            result.tailored_bc_callback_vector_export_status = "unknown_failure";
+        }
+        result.status = result.tailored_bc_callback_vector_export_working
+            ? "diagnostic_passed"
+            : (api.available ? "diagnostic_vector_unavailable"
+                             : "diagnostic_blocked");
+        result.certificate =
+            "diagnostic only: toy MIP sampled CPLEX relaxation callback vector";
+        result.notes.push_back(
+            "tailored_bc_relaxation_vector_smoke_test: diagnostic-only CPLEX generic callback vector export probe; vector data are not certificate evidence");
+        result.notes.push_back(
+            "vector_status=" +
+            result.tailored_bc_callback_vector_export_status +
+            ";relaxation_callbacks=" +
+            std::to_string(api.relaxation_callback_calls) +
+            ";nonzero_values=" +
+            std::to_string(api.relaxation_vector_nonzero_values) +
+            ";failure_reason=" +
+            result.tailored_bc_callback_vector_failure_reason);
     } else if (method == "tailored-bc-branch-callback-smoke-test") {
         const std::filesystem::path lp_path =
             std::filesystem::temp_directory_path() /
@@ -17085,6 +17267,7 @@ int main(int argc, char** argv) {
             } else if (opt.method == "option-consistency-test") {
                 results.push_back(solveOptionConsistencyDiagnostic(instance, opt));
             } else if (opt.method == "tailored-bc-callback-smoke-test" ||
+                       opt.method == "tailored-bc-relaxation-vector-smoke-test" ||
                        opt.method == "tailored-bc-branch-callback-smoke-test" ||
                        opt.method == "tailored-bc-cut-validity-test" ||
                        opt.method == "gini-subset-envelope-test" ||

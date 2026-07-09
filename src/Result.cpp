@@ -1655,6 +1655,50 @@ std::string resultToJson(const SolveResult& input) {
         << result.tailored_bc_branch_callback_calls << ",\n";
     out << "  \"tailored_bc_progress_callback_calls\": "
         << result.tailored_bc_progress_callback_calls << ",\n";
+    out << "  \"tailored_bc_callback_vector_export_claimed\": "
+        << (result.tailored_bc_callback_vector_export_claimed ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_callback_vector_export_working\": "
+        << (result.tailored_bc_callback_vector_export_working ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_callback_vector_export_status\": \""
+        << jsonEscape(result.tailored_bc_callback_vector_export_status) << "\",\n";
+    out << "  \"tailored_bc_callback_vector_context_seen\": "
+        << (result.tailored_bc_callback_vector_context_seen ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_callback_vector_relaxation_context_seen\": "
+        << (result.tailored_bc_callback_vector_relaxation_context_seen ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_callback_vector_candidate_context_seen\": "
+        << (result.tailored_bc_callback_vector_candidate_context_seen ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_callback_vector_api_called\": "
+        << (result.tailored_bc_callback_vector_api_called ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_callback_vector_api_return_code\": "
+        << result.tailored_bc_callback_vector_api_return_code << ",\n";
+    out << "  \"tailored_bc_callback_vector_length_requested\": "
+        << result.tailored_bc_callback_vector_length_requested << ",\n";
+    out << "  \"tailored_bc_callback_vector_length_returned\": "
+        << result.tailored_bc_callback_vector_length_returned << ",\n";
+    out << "  \"tailored_bc_callback_vector_nonzero_values_count\": "
+        << result.tailored_bc_callback_vector_nonzero_values_count << ",\n";
+    out << "  \"tailored_bc_callback_vector_sample_variable_names\": \""
+        << jsonEscape(result.tailored_bc_callback_vector_sample_variable_names) << "\",\n";
+    out << "  \"tailored_bc_callback_vector_sample_variable_values\": \""
+        << jsonEscape(result.tailored_bc_callback_vector_sample_variable_values) << "\",\n";
+    out << "  \"tailored_bc_callback_vector_failure_reason\": \""
+        << jsonEscape(result.tailored_bc_callback_vector_failure_reason) << "\",\n";
+    out << "  \"tailored_bc_callback_candidate_vector_api_called\": "
+        << (result.tailored_bc_callback_candidate_vector_api_called ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_callback_candidate_vector_api_return_code\": "
+        << result.tailored_bc_callback_candidate_vector_api_return_code << ",\n";
+    out << "  \"tailored_bc_callback_candidate_vector_length_requested\": "
+        << result.tailored_bc_callback_candidate_vector_length_requested << ",\n";
+    out << "  \"tailored_bc_callback_candidate_vector_length_returned\": "
+        << result.tailored_bc_callback_candidate_vector_length_returned << ",\n";
+    out << "  \"tailored_bc_callback_candidate_vector_nonzero_values_count\": "
+        << result.tailored_bc_callback_candidate_vector_nonzero_values_count << ",\n";
+    out << "  \"tailored_bc_callback_candidate_vector_sample_variable_names\": \""
+        << jsonEscape(result.tailored_bc_callback_candidate_vector_sample_variable_names) << "\",\n";
+    out << "  \"tailored_bc_callback_candidate_vector_sample_variable_values\": \""
+        << jsonEscape(result.tailored_bc_callback_candidate_vector_sample_variable_values) << "\",\n";
+    out << "  \"tailored_bc_callback_candidate_vector_failure_reason\": \""
+        << jsonEscape(result.tailored_bc_callback_candidate_vector_failure_reason) << "\",\n";
     out << "  \"tailored_bc_lazy_rejections_total\": "
         << result.tailored_bc_lazy_rejections_total << ",\n";
     out << "  \"tailored_bc_lazy_rejections_by_reason\": \""

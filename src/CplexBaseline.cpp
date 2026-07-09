@@ -3423,6 +3423,56 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     api_solve.branch_callback_calls;
                 result.tailored_bc_progress_callback_calls =
                     api_solve.progress_callback_calls;
+                result.tailored_bc_callback_vector_export_claimed =
+                    api_solve.relaxation_vector_api_called;
+                result.tailored_bc_callback_vector_export_working =
+                    api_solve.relaxation_vector_snapshot_available &&
+                    api_solve.relaxation_vector_nonzero_values > 0;
+                result.tailored_bc_callback_vector_export_status =
+                    result.tailored_bc_callback_vector_export_working
+                        ? "callback_vector_export_working"
+                        : (api_solve.relaxation_vector_api_called
+                               ? "unknown_failure"
+                               : "callback_context_not_reached");
+                result.tailored_bc_callback_vector_context_seen =
+                    api_solve.relaxation_callback_calls > 0 ||
+                    api_solve.candidate_callback_calls > 0;
+                result.tailored_bc_callback_vector_relaxation_context_seen =
+                    api_solve.relaxation_callback_calls > 0;
+                result.tailored_bc_callback_vector_candidate_context_seen =
+                    api_solve.candidate_callback_calls > 0;
+                result.tailored_bc_callback_vector_api_called =
+                    api_solve.relaxation_vector_api_called;
+                result.tailored_bc_callback_vector_api_return_code =
+                    api_solve.relaxation_vector_api_return_code;
+                result.tailored_bc_callback_vector_length_requested =
+                    api_solve.relaxation_vector_length_requested;
+                result.tailored_bc_callback_vector_length_returned =
+                    api_solve.relaxation_vector_length_returned;
+                result.tailored_bc_callback_vector_nonzero_values_count =
+                    api_solve.relaxation_vector_nonzero_values;
+                result.tailored_bc_callback_vector_sample_variable_names =
+                    api_solve.relaxation_vector_sample_variable_names;
+                result.tailored_bc_callback_vector_sample_variable_values =
+                    api_solve.relaxation_vector_sample_variable_values;
+                result.tailored_bc_callback_vector_failure_reason =
+                    api_solve.relaxation_vector_failure_reason;
+                result.tailored_bc_callback_candidate_vector_api_called =
+                    api_solve.candidate_vector_api_called;
+                result.tailored_bc_callback_candidate_vector_api_return_code =
+                    api_solve.candidate_vector_api_return_code;
+                result.tailored_bc_callback_candidate_vector_length_requested =
+                    api_solve.candidate_vector_length_requested;
+                result.tailored_bc_callback_candidate_vector_length_returned =
+                    api_solve.candidate_vector_length_returned;
+                result.tailored_bc_callback_candidate_vector_nonzero_values_count =
+                    api_solve.candidate_vector_nonzero_values;
+                result.tailored_bc_callback_candidate_vector_sample_variable_names =
+                    api_solve.candidate_vector_sample_variable_names;
+                result.tailored_bc_callback_candidate_vector_sample_variable_values =
+                    api_solve.candidate_vector_sample_variable_values;
+                result.tailored_bc_callback_candidate_vector_failure_reason =
+                    api_solve.candidate_vector_failure_reason;
                 result.tailored_bc_user_cuts_added_total +=
                     api_solve.user_cuts_added;
                 result.tailored_bc_lazy_rejections_total =
