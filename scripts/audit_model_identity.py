@@ -24,7 +24,14 @@ def read_csv(path: Path) -> List[Dict[str, str]]:
 
 def fallback_rows(root: Path) -> List[Dict[str, str]]:
     rows: List[Dict[str, str]] = []
-    for name in ("dominant_bucket_longrun.csv", "adaptive_child_longrun.csv", "secondary_regression_summary.csv"):
+    for name in (
+        "dominant_bucket_longrun.csv",
+        "adaptive_child_longrun.csv",
+        "dominant_bucket_diagnostic_longrun.csv",
+        "adaptive_child_diagnostic_longrun.csv",
+        "fixed_interval_model_identity_rows.csv",
+        "secondary_regression_summary.csv",
+    ):
         for row in read_csv(root / name):
             rows.append(row)
     return rows
@@ -35,8 +42,13 @@ def write_csv(path: Path, rows: List[Dict[str, Any]]) -> None:
     if not rows:
         path.write_text("", encoding="utf-8")
         return
+    fields: List[str] = []
+    for row in rows:
+        for key in row:
+            if key not in fields:
+                fields.append(key)
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
         writer.writerows(rows)
 
@@ -47,7 +59,11 @@ def main() -> int:
     parser.add_argument("--out", default="")
     args = parser.parse_args()
     root = Path(args.results)
-    rows = read_csv(root / "model_identity_audit.csv")
+    rows = read_csv(root / "fixed_interval_model_identity_rows.csv")
+    if not rows:
+        rows = read_csv(root / "model_identity_source.csv")
+    if not rows:
+        rows = read_csv(root / "model_identity_audit.csv")
     if not rows:
         rows = fallback_rows(root)
     out_rows: List[Dict[str, Any]] = []

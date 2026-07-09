@@ -1,0 +1,6 @@
+read "E:\codes\ExactEBRP\results\gf_tailored_bc_formulation_snapshot_round\model_exports\dominant_k4_low_gini_1_plain_fixed_interval_mip_300s.lp"
+change problem lp
+set threads 1
+optimize
+write "E:\codes\ExactEBRP\results\gf_tailored_bc_formulation_snapshot_round\lp_snapshots\dominant_k4_low_gini_1_plain_fixed_interval_mip_300s.root_lp.sol"
+quit
