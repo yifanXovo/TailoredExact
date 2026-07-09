@@ -1,0 +1,5 @@
+formulation_name,reason_rejected,could_be_diagnostic,exactness_obstacle
+coarse_SOS2_piecewise_inverse_S,coarse piecewise 1/S approximation is not exact without a complete proof and error-free coverage,True,approximation_error_and_missing_exact_certificate
+coarse_s_bucket_selector,coarse S buckets do not enumerate every exact denominator value,True,missing_complete_exact_S_value_coverage
+charnes_cooper_integer_scaling,integer-variable equivalence under scaling has not been proved for this compact model,True,unproved_integrality_and_denominator_equivalence
+dinkelbach_iterations,finite exact termination certificate is not implemented,True,iterative_convergence_not_an_exact_MIP_certificate

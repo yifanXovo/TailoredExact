@@ -24,7 +24,10 @@ def _fallback_rows_from_round_tables(root: Path) -> list[dict[str, str]]:
     candidates = [
         root / "dominant_bucket_longrun.csv",
         root / "adaptive_child_longrun.csv",
+        root / "dominant_bucket_diagnostic_longrun.csv",
         root / "plain_vs_tailored_10800s.csv",
+        root / "plain_vs_tailored_bound_trajectory.csv",
+        root / "plain_vs_tailored_snapshot_comparison.csv",
         root / "secondary_regression_summary.csv",
         root / "full_convergence_comparison.csv",
     ]

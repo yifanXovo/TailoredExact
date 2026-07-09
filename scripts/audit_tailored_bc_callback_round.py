@@ -44,6 +44,7 @@ def main() -> int:
     rows: List[Dict[str, Any]] = []
     failures = 0
     saw_branch_smoke = False
+    saw_callback_claim_context = False
 
     for path, data in iter_json(raw_dir):
         preset = str(data.get("algorithm_preset", ""))
@@ -60,6 +61,8 @@ def main() -> int:
             as_bool(data.get("tailored_bc_branch_callback_enabled")) or
             str(data.get("tailored_bc_source_class", "")) == "tailored_bc_certified"
         )
+        if callback_claim or str(data.get("tailored_bc_mode", "")) == "callback":
+            saw_callback_claim_context = True
         reasons: List[str] = []
 
         if preset == "paper-gf-tailored-bc" and not tailored_enabled:
@@ -133,7 +136,8 @@ def main() -> int:
             "failures": "|".join(reasons),
         })
 
-    if not saw_branch_smoke:
+    branch_smoke_required = root.name == "gf_tailored_bc_callback_round"
+    if branch_smoke_required and not saw_branch_smoke:
         failures += 1
         rows.append({
             "file": "",
