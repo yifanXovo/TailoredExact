@@ -422,7 +422,10 @@ def all_rows(commit: str) -> List[Dict[str, Any]]:
             run = False
             wrapper_grace = 0
             skip_existing = True
-        rows.append(row(leaf, variant, budget, bucket, Dummy(), commit))
+        rows.append(row(
+            leaf, variant, budget, bucket, Dummy(),
+            str(data.get("git_commit", commit)),
+        ))
     return rows
 
 
