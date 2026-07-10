@@ -312,6 +312,7 @@ std::vector<int> buildNameToIndexLookup(const std::vector<std::string>& names,
 struct CallbackState {
     Api* api = nullptr;
     int ncols = 0;
+    std::vector<std::string> col_names;
     int g_col = -1;
     int r_min_col = -1;
     int r_max_col = -1;
@@ -364,6 +365,27 @@ struct CallbackState {
     std::atomic<long long> candidate_calls{0};
     std::atomic<long long> branch_calls{0};
     std::atomic<long long> progress_calls{0};
+    std::atomic<bool> relaxation_vector_sample_attempted{false};
+    std::atomic<bool> relaxation_vector_snapshot_available{false};
+    std::atomic<int> relaxation_vector_api_return_code{-1};
+    std::atomic<int> relaxation_vector_length_requested{0};
+    std::atomic<int> relaxation_vector_length_returned{0};
+    std::atomic<long long> relaxation_vector_nonzero_values{0};
+    std::atomic<double> relaxation_vector_objective{0.0};
+    std::string relaxation_vector_sample_variable_names;
+    std::string relaxation_vector_sample_variable_values;
+    std::string relaxation_vector_failure_reason;
+    std::atomic<bool> candidate_vector_sample_attempted{false};
+    std::atomic<bool> candidate_vector_snapshot_available{false};
+    std::atomic<int> candidate_vector_api_return_code{-1};
+    std::atomic<int> candidate_vector_length_requested{0};
+    std::atomic<int> candidate_vector_length_returned{0};
+    std::atomic<long long> candidate_vector_nonzero_values{0};
+    std::atomic<double> candidate_vector_objective{0.0};
+    std::string candidate_vector_sample_variable_names;
+    std::string candidate_vector_sample_variable_values;
+    std::string candidate_vector_failure_reason;
+    std::mutex vector_snapshot_mutex;
     std::atomic<long long> user_cuts_added{0};
     std::atomic<long long> gini_interval_cuts_added{0};
     std::atomic<long long> visit_inventory_cuts_added{0};
@@ -463,6 +485,114 @@ void atomicMax(std::atomic<double>& target, double value) {
     double current = target.load();
     while (value > current &&
            !target.compare_exchange_weak(current, value)) {
+    }
+}
+
+void sampleCallbackVector(CallbackState& state,
+                          CPXCALLBACKCONTEXTptr context,
+                          bool relaxation_context) {
+    std::atomic<bool>& attempted = relaxation_context
+        ? state.relaxation_vector_sample_attempted
+        : state.candidate_vector_sample_attempted;
+    bool expected = false;
+    if (!attempted.compare_exchange_strong(expected, true)) return;
+
+    if (state.ncols <= 0) {
+        std::lock_guard<std::mutex> lock(state.vector_snapshot_mutex);
+        if (relaxation_context) {
+            state.relaxation_vector_failure_reason = "no_columns_in_model";
+            state.relaxation_vector_length_requested.store(0);
+            state.relaxation_vector_length_returned.store(0);
+        } else {
+            state.candidate_vector_failure_reason = "no_columns_in_model";
+            state.candidate_vector_length_requested.store(0);
+            state.candidate_vector_length_returned.store(0);
+        }
+        return;
+    }
+
+    if (!relaxation_context) {
+        int is_point = 0;
+        const int point_rc = state.api->callbackcandidateispoint(context, &is_point);
+        if (point_rc != 0 || !is_point) {
+            std::lock_guard<std::mutex> lock(state.vector_snapshot_mutex);
+            state.candidate_vector_api_return_code.store(point_rc);
+            state.candidate_vector_length_requested.store(state.ncols);
+            state.candidate_vector_length_returned.store(0);
+            state.candidate_vector_failure_reason = point_rc == 0
+                ? "candidate_context_without_point"
+                : "CPXcallbackcandidateispoint_failed:" + std::to_string(point_rc);
+            return;
+        }
+    }
+
+    std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
+    double obj = 0.0;
+    const int rc = relaxation_context
+        ? state.api->callbackgetrelaxationpoint(
+              context, x.data(), 0, state.ncols - 1, &obj)
+        : state.api->callbackgetcandidatepoint(
+              context, x.data(), 0, state.ncols - 1, &obj);
+
+    long long nonzero = 0;
+    std::ostringstream sample_names;
+    std::ostringstream sample_values;
+    sample_values << std::setprecision(17);
+    constexpr int sample_limit = 32;
+    int sampled = 0;
+    if (rc == 0) {
+        for (int i = 0; i < state.ncols; ++i) {
+            const double value = x[static_cast<std::size_t>(i)];
+            if (std::fabs(value) <= 1e-10) continue;
+            ++nonzero;
+            if (sampled < sample_limit) {
+                if (sampled > 0) {
+                    sample_names << ';';
+                    sample_values << ';';
+                }
+                const std::string name =
+                    i < static_cast<int>(state.col_names.size()) &&
+                            !state.col_names[static_cast<std::size_t>(i)].empty()
+                        ? state.col_names[static_cast<std::size_t>(i)]
+                        : "col_" + std::to_string(i);
+                sample_names << name;
+                sample_values << value;
+                ++sampled;
+            }
+        }
+    }
+
+    std::lock_guard<std::mutex> lock(state.vector_snapshot_mutex);
+    if (relaxation_context) {
+        state.relaxation_vector_api_return_code.store(rc);
+        state.relaxation_vector_length_requested.store(state.ncols);
+        state.relaxation_vector_length_returned.store(rc == 0 ? state.ncols : 0);
+        state.relaxation_vector_nonzero_values.store(rc == 0 ? nonzero : 0);
+        state.relaxation_vector_objective.store(rc == 0 ? obj : 0.0);
+        state.relaxation_vector_snapshot_available.store(rc == 0);
+        state.relaxation_vector_sample_variable_names =
+            rc == 0 ? sample_names.str() : "not_available";
+        state.relaxation_vector_sample_variable_values =
+            rc == 0 ? sample_values.str() : "not_available";
+        state.relaxation_vector_failure_reason =
+            rc == 0 ? "none"
+                    : "CPXcallbackgetrelaxationpoint_failed:" +
+                          std::to_string(rc);
+    } else {
+        state.candidate_vector_api_return_code.store(rc);
+        state.candidate_vector_length_requested.store(state.ncols);
+        state.candidate_vector_length_returned.store(rc == 0 ? state.ncols : 0);
+        state.candidate_vector_nonzero_values.store(rc == 0 ? nonzero : 0);
+        state.candidate_vector_objective.store(rc == 0 ? obj : 0.0);
+        state.candidate_vector_snapshot_available.store(rc == 0);
+        state.candidate_vector_sample_variable_names =
+            rc == 0 ? sample_names.str() : "not_available";
+        state.candidate_vector_sample_variable_values =
+            rc == 0 ? sample_values.str() : "not_available";
+        state.candidate_vector_failure_reason =
+            rc == 0 ? "none"
+                    : "CPXcallbackgetcandidatepoint_failed:" +
+                          std::to_string(rc);
     }
 }
 
@@ -2542,6 +2672,7 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
     if (requestCallbackAbortIfDeadlineExceeded(*state, context)) return 0;
     if (contextid == kContextRelaxation) {
         ++state->relaxation_calls;
+        sampleCallbackVector(*state, context, true);
         bool expected = false;
         if (callbackProfileAllows(*state, "gini_interval") &&
             state->add_gini_cut && state->g_col >= 0 &&
@@ -2600,6 +2731,7 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
     } else if (contextid == kContextCandidate) {
         ++state->candidate_calls;
         ++state->incumbents_seen;
+        sampleCallbackVector(*state, context, false);
         validateCandidatePoint(*state, context);
     } else if (contextid == kContextBranching) {
         ++state->branch_calls;
@@ -2838,6 +2970,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     CallbackState cb_state;
     cb_state.api = &api;
     cb_state.ncols = ncols;
+    cb_state.col_names = names;
     cb_state.g_col = g_col;
     cb_state.r_min_col = r_min_col;
     cb_state.r_max_col = r_max_col;
@@ -3160,6 +3293,65 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     out.candidate_callback_calls = cb_state.candidate_calls.load();
     out.branch_callback_calls = cb_state.branch_calls.load();
     out.progress_callback_calls = cb_state.progress_calls.load();
+    out.relaxation_vector_snapshot_available =
+        cb_state.relaxation_vector_snapshot_available.load();
+    out.relaxation_vector_api_called =
+        cb_state.relaxation_vector_sample_attempted.load();
+    out.relaxation_vector_api_return_code =
+        cb_state.relaxation_vector_api_return_code.load();
+    out.relaxation_vector_length_requested =
+        cb_state.relaxation_vector_length_requested.load();
+    out.relaxation_vector_length_returned =
+        cb_state.relaxation_vector_length_returned.load();
+    out.relaxation_vector_nonzero_values =
+        cb_state.relaxation_vector_nonzero_values.load();
+    out.relaxation_vector_objective =
+        cb_state.relaxation_vector_objective.load();
+    out.candidate_vector_snapshot_available =
+        cb_state.candidate_vector_snapshot_available.load();
+    out.candidate_vector_api_called =
+        cb_state.candidate_vector_sample_attempted.load();
+    out.candidate_vector_api_return_code =
+        cb_state.candidate_vector_api_return_code.load();
+    out.candidate_vector_length_requested =
+        cb_state.candidate_vector_length_requested.load();
+    out.candidate_vector_length_returned =
+        cb_state.candidate_vector_length_returned.load();
+    out.candidate_vector_nonzero_values =
+        cb_state.candidate_vector_nonzero_values.load();
+    out.candidate_vector_objective =
+        cb_state.candidate_vector_objective.load();
+    {
+        std::lock_guard<std::mutex> lock(cb_state.vector_snapshot_mutex);
+        out.relaxation_vector_sample_variable_names =
+            cb_state.relaxation_vector_sample_variable_names.empty()
+                ? "not_available"
+                : cb_state.relaxation_vector_sample_variable_names;
+        out.relaxation_vector_sample_variable_values =
+            cb_state.relaxation_vector_sample_variable_values.empty()
+                ? "not_available"
+                : cb_state.relaxation_vector_sample_variable_values;
+        out.relaxation_vector_failure_reason =
+            cb_state.relaxation_vector_failure_reason.empty()
+                ? (out.relaxation_vector_api_called
+                       ? "unknown_failure"
+                       : "relaxation_context_not_reached")
+                : cb_state.relaxation_vector_failure_reason;
+        out.candidate_vector_sample_variable_names =
+            cb_state.candidate_vector_sample_variable_names.empty()
+                ? "not_available"
+                : cb_state.candidate_vector_sample_variable_names;
+        out.candidate_vector_sample_variable_values =
+            cb_state.candidate_vector_sample_variable_values.empty()
+                ? "not_available"
+                : cb_state.candidate_vector_sample_variable_values;
+        out.candidate_vector_failure_reason =
+            cb_state.candidate_vector_failure_reason.empty()
+                ? (out.candidate_vector_api_called
+                       ? "unknown_failure"
+                       : "candidate_context_not_reached")
+                : cb_state.candidate_vector_failure_reason;
+    }
     out.user_cuts_added = cb_state.user_cuts_added.load();
     out.callback_gini_interval_cuts_added =
         cb_state.gini_interval_cuts_added.load();
