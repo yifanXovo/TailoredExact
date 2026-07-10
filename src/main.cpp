@@ -16334,7 +16334,8 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         const std::filesystem::path json_path =
             oracle_dir / ("interval_" + file_id + ".json");
         oracle_opt.out_path = json_path.string();
-        oracle_opt.log_path.clear();
+        oracle_opt.log_path =
+            (oracle_dir / ("interval_" + file_id + ".cplex.log")).string();
         oracle_opt.interval_exact_cutoff_export_lp =
             (oracle_dir / ("interval_" + file_id + ".lp")).string();
         oracle_opt.interval_exact_cutoff_result =

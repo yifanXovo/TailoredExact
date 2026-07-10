@@ -1977,6 +1977,20 @@ std::string resultToJson(const SolveResult& input) {
         << result.vector_callback_support_cover_max_violation << ",\n";
     out << "  \"vector_callback_route_cutset_max_violation\": "
         << result.vector_callback_route_cutset_max_violation << ",\n";
+    out << "  \"vector_callback_route_cutset_violations\": "
+        << result.vector_callback_route_cutset_violations << ",\n";
+    out << "  \"vector_callback_route_cutset_violation_sum\": "
+        << result.vector_callback_route_cutset_violation_sum << ",\n";
+    out << "  \"vector_callback_route_cutset_average_violation\": "
+        << result.vector_callback_route_cutset_average_violation << ",\n";
+    out << "  \"vector_callback_route_cutset_cuts_size_2\": "
+        << result.vector_callback_route_cutset_cuts_size_2 << ",\n";
+    out << "  \"vector_callback_route_cutset_cuts_size_3\": "
+        << result.vector_callback_route_cutset_cuts_size_3 << ",\n";
+    out << "  \"vector_callback_route_cutset_cuts_size_4\": "
+        << result.vector_callback_route_cutset_cuts_size_4 << ",\n";
+    out << "  \"vector_callback_route_cutset_cuts_size_5\": "
+        << result.vector_callback_route_cutset_cuts_size_5 << ",\n";
     out << "  \"tailored_bc_structural_profile\": \""
         << jsonEscape(result.tailored_bc_structural_profile) << "\",\n";
     out << "  \"vector_route_cuts_proof_status\": \""

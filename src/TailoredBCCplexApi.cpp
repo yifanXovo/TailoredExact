@@ -5,6 +5,7 @@
 #endif
 
 #include <algorithm>
+#include <array>
 #include <atomic>
 #include <chrono>
 #include <cmath>
@@ -440,6 +441,8 @@ struct CallbackState {
     std::atomic<long long> vector_route_cutset_candidates{0};
     std::atomic<long long> vector_route_cutset_violations{0};
     std::atomic<double> vector_route_cutset_max_violation{0.0};
+    std::atomic<double> vector_route_cutset_violation_sum{0.0};
+    std::array<std::atomic<long long>, 6> vector_route_cutset_cuts_by_size{};
     std::atomic<bool> vector_route_cutset_separated{false};
     std::mutex vector_route_cutset_mutex;
     std::set<std::string> vector_route_cutset_keys;
@@ -507,6 +510,13 @@ void atomicMax(std::atomic<double>& target, double value) {
     double current = target.load();
     while (value > current &&
            !target.compare_exchange_weak(current, value)) {
+    }
+}
+
+void atomicAdd(std::atomic<double>& target, double value) {
+    if (!std::isfinite(value)) return;
+    double current = target.load();
+    while (!target.compare_exchange_weak(current, current + value)) {
     }
 }
 
@@ -966,6 +976,7 @@ void separateVectorRouteCutset(CallbackState& state,
                     if (violation <= tol) continue;
                     state.vector_route_cutset_violations.fetch_add(1);
                     atomicMax(state.vector_route_cutset_max_violation, violation);
+                    atomicAdd(state.vector_route_cutset_violation_sum, violation);
                     std::ostringstream key;
                     key << k << ':' << representative;
                     for (int station : subset) key << ':' << station;
@@ -977,6 +988,11 @@ void separateVectorRouteCutset(CallbackState& state,
                     std::vector<std::pair<int, double>> terms(term_map.begin(), term_map.end());
                     if (addOneUserCut(state, context, terms, 'G', 0.0)) {
                         state.vector_route_cutset_cuts_added.fetch_add(1);
+                        if (target_size >= 0 && target_size <
+                                static_cast<int>(state.vector_route_cutset_cuts_by_size.size())) {
+                            state.vector_route_cutset_cuts_by_size[
+                                static_cast<std::size_t>(target_size)].fetch_add(1);
+                        }
                     }
                     if (max_cuts > 0 && state.vector_route_cutset_cuts_added.load() >= max_cuts) return;
                 }
@@ -3682,6 +3698,16 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         cb_state.vector_route_cutset_violations.load();
     out.callback_vector_route_cutset_max_violation =
         cb_state.vector_route_cutset_max_violation.load();
+    out.callback_vector_route_cutset_violation_sum =
+        cb_state.vector_route_cutset_violation_sum.load();
+    out.callback_vector_route_cutset_cuts_size_2 =
+        cb_state.vector_route_cutset_cuts_by_size[2].load();
+    out.callback_vector_route_cutset_cuts_size_3 =
+        cb_state.vector_route_cutset_cuts_by_size[3].load();
+    out.callback_vector_route_cutset_cuts_size_4 =
+        cb_state.vector_route_cutset_cuts_by_size[4].load();
+    out.callback_vector_route_cutset_cuts_size_5 =
+        cb_state.vector_route_cutset_cuts_by_size[5].load();
     out.callback_variable_s_centering_cuts_added =
         cb_state.variable_s_centering_cuts_added.load();
     out.callback_variable_s_centering_violations =
