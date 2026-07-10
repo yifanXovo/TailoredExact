@@ -59,8 +59,22 @@ def main() -> int:
     add("required_families_observed_or_listed",
         bool(families & required),
         "families=" + "|".join(sorted(families)))
-    unparsed = [r for r in callback_rows + root_rows if r.get("family") == "unparsed"]
-    add("unparsed_columns_listed", True, f"unparsed_rows={len(unparsed)}")
+    unparsed = [r for r in callback_rows + root_rows if r.get("family") == "unknown_unparsed"]
+    add("unparsed_columns_listed", True, f"unknown_unparsed_rows={len(unparsed)}")
+    parsed_fraction = (
+        1.0 - len(unparsed) / len(callback_rows + root_rows)
+        if callback_rows or root_rows else 0.0
+    )
+    add("at_least_95_percent_columns_classified", parsed_fraction >= 0.95,
+        f"parsed_fraction={parsed_fraction:.9f}")
+    documented = {
+        "load variables", "service/mode variables", "bit variables",
+        "McCormick auxiliary variables", "objective-estimator auxiliary variables",
+        "other documented auxiliary variables",
+    }
+    add("documented_auxiliary_families_classified",
+        bool(families & documented),
+        "documented_families=" + "|".join(sorted(families & documented)))
     if root_rows:
         add("root_lp_rows_present", True, f"root_rows={len(root_rows)}")
     else:

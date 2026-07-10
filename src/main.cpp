@@ -903,6 +903,10 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             opt.tailored_bc_vector_support_cover_max_size =
                 std::stoi(requireValue(i, argc, argv));
         }
+        else if (arg == "--tailored-bc-vector-support-cover-max-cuts") {
+            opt.tailored_bc_vector_support_cover_max_cuts =
+                std::stoi(requireValue(i, argc, argv));
+        }
         else if (arg == "--tailored-bc-vector-route-cutset") {
             opt.tailored_bc_vector_route_cutset =
                 parseBoolValue(requireValue(i, argc, argv));
@@ -911,8 +915,20 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             opt.tailored_bc_vector_route_cutset_max_size =
                 std::stoi(requireValue(i, argc, argv));
         }
+        else if (arg == "--tailored-bc-vector-route-cutset-max-cuts") {
+            opt.tailored_bc_vector_route_cutset_max_cuts =
+                std::stoi(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-vector-cut-min-violation") {
+            opt.tailored_bc_vector_cut_min_violation =
+                std::stod(requireValue(i, argc, argv));
+        }
         else if (arg == "--tailored-bc-vector-cut-candidate-source") {
             opt.tailored_bc_vector_cut_candidate_source =
+                lowerAscii(requireValue(i, argc, argv));
+        }
+        else if (arg == "--tailored-bc-structural-profile") {
+            opt.tailored_bc_structural_profile =
                 lowerAscii(requireValue(i, argc, argv));
         }
         else if (arg == "--compact-bc-model-size-policy") opt.compact_bc_model_size_policy = requireValue(i, argc, argv);
@@ -1805,6 +1821,16 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     } else if (opt.tailored_bc_callback_cut_profile == "local_q" ||
                opt.tailored_bc_callback_cut_profile == "local_q_only") {
         opt.tailored_bc_callback_cut_profile = "local-q-only";
+    } else if (opt.tailored_bc_callback_cut_profile == "gs_only") {
+        opt.tailored_bc_callback_cut_profile = "gs-only";
+    } else if (opt.tailored_bc_callback_cut_profile == "sp_only") {
+        opt.tailored_bc_callback_cut_profile = "sp-only";
+    } else if (opt.tailored_bc_callback_cut_profile == "gs_sp_only") {
+        opt.tailored_bc_callback_cut_profile = "gs-sp-only";
+    } else if (opt.tailored_bc_callback_cut_profile == "route_cutset_only") {
+        opt.tailored_bc_callback_cut_profile = "route-cutset-only";
+    } else if (opt.tailored_bc_callback_cut_profile == "route_combined") {
+        opt.tailored_bc_callback_cut_profile = "route-combined";
     }
     if (opt.tailored_bc_callback_cut_profile != "off" &&
         opt.tailored_bc_callback_cut_profile != "full" &&
@@ -1815,7 +1841,12 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.tailored_bc_callback_cut_profile != "transfer-only" &&
         opt.tailored_bc_callback_cut_profile != "support-only" &&
         opt.tailored_bc_callback_cut_profile != "subset-cross-h-only" &&
-        opt.tailored_bc_callback_cut_profile != "local-q-only") {
+        opt.tailored_bc_callback_cut_profile != "local-q-only" &&
+        opt.tailored_bc_callback_cut_profile != "gs-only" &&
+        opt.tailored_bc_callback_cut_profile != "sp-only" &&
+        opt.tailored_bc_callback_cut_profile != "gs-sp-only" &&
+        opt.tailored_bc_callback_cut_profile != "route-cutset-only" &&
+        opt.tailored_bc_callback_cut_profile != "route-combined") {
         opt.tailored_bc_callback_cut_profile = "full";
     }
     opt.tailored_bc_s_bucket_ledger = lowerAscii(opt.tailored_bc_s_bucket_ledger);
@@ -1922,14 +1953,25 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     opt.tailored_bc_vector_support_cover_max_size =
         std::min(6, std::max(2, opt.tailored_bc_vector_support_cover_max_size));
+    opt.tailored_bc_vector_support_cover_max_cuts =
+        std::max(0, opt.tailored_bc_vector_support_cover_max_cuts);
     opt.tailored_bc_vector_route_cutset_max_size =
         std::min(8, std::max(2, opt.tailored_bc_vector_route_cutset_max_size));
+    opt.tailored_bc_vector_route_cutset_max_cuts =
+        std::max(0, opt.tailored_bc_vector_route_cutset_max_cuts);
+    opt.tailored_bc_vector_cut_min_violation =
+        std::max(0.0, opt.tailored_bc_vector_cut_min_violation);
     opt.tailored_bc_vector_cut_candidate_source =
         lowerAscii(opt.tailored_bc_vector_cut_candidate_source);
     if (opt.tailored_bc_vector_cut_candidate_source != "root" &&
         opt.tailored_bc_vector_cut_candidate_source != "callback" &&
         opt.tailored_bc_vector_cut_candidate_source != "both") {
         opt.tailored_bc_vector_cut_candidate_source = "root";
+    }
+    opt.tailored_bc_structural_profile =
+        lowerAscii(opt.tailored_bc_structural_profile);
+    if (opt.tailored_bc_structural_profile.empty()) {
+        opt.tailored_bc_structural_profile = "manual";
     }
     const bool safe_low_gini_mode =
         opt.compact_bc_low_gini_strengthening == "safe";

@@ -143,12 +143,14 @@ struct DynamicCut {
 
 struct DynamicCutStats {
     long long support_duration = 0;
+    long long route_cutset = 0;
     long long transfer_compat = 0;
     long long visit_inventory_linking = 0;
     long long objective_estimator = 0;
     long long receiver_source_cover = 0;
     long long total = 0;
     double support_duration_violation = 0.0;
+    double route_cutset_violation = 0.0;
     double transfer_compat_violation = 0.0;
     double visit_inventory_linking_violation = 0.0;
     double objective_estimator_violation = 0.0;
@@ -636,41 +638,45 @@ void writeCompactLp(const Instance& instance,
     }
     const double sp_s_lower = s_range_rows_active ? s_bucket_L : s_lower_domain;
     const double sp_s_upper = s_range_rows_active ? s_bucket_U : s_upper_domain;
-    const bool add_disagg_sp_estimator =
+    const bool add_disagg_sp_definition =
         strengthened && tailored_active && cutoff != nullptr && cutoff->enabled &&
         cutoff->add_objective_cutoff &&
         options.tailored_bc_disaggregated_sp_estimator &&
-        (options.tailored_bc_disaggregated_sp_mode == "static" ||
-         options.tailored_bc_disaggregated_sp_mode == "both") &&
         s_range_rows_active &&
         sp_s_upper >= sp_s_lower - 1e-12;
+    const bool add_disagg_sp_estimator =
+        add_disagg_sp_definition &&
+        (options.tailored_bc_disaggregated_sp_mode == "static" ||
+         options.tailored_bc_disaggregated_sp_mode == "both");
     const bool add_sp_product_estimator =
         strengthened && cutoff != nullptr && cutoff->enabled &&
         cutoff->add_objective_cutoff &&
         options.compact_bc_sp_product_estimator != "off" &&
         s_upper_domain > s_lower_domain - 1e-12 &&
         penalty_ub_domain >= penalty_lb_domain - 1e-12 &&
-        !(add_disagg_sp_estimator &&
+        !(add_disagg_sp_definition &&
           options.tailored_bc_disaggregated_sp_replace_aggregate);
     if (add_sp_product_estimator) {
         const double w_lb = std::max(0.0, sp_s_lower * penalty_lb_domain);
         const double w_ub = std::max(w_lb, sp_s_upper * penalty_ub_domain);
         vars.add("W_SP", w_lb, w_ub, "C");
     }
-    const bool add_gs_product_coupling =
+    const bool add_gs_product_definition =
         strengthened && tailored_active && cutoff != nullptr && cutoff->enabled &&
         options.tailored_bc_gs_product_coupling &&
-        (options.tailored_bc_gs_product_coupling_mode == "static" ||
-         options.tailored_bc_gs_product_coupling_mode == "both") &&
         s_range_rows_active &&
         sp_s_upper >= sp_s_lower - 1e-12;
-    if (add_gs_product_coupling) {
+    const bool add_gs_product_static_row =
+        add_gs_product_definition &&
+        (options.tailored_bc_gs_product_coupling_mode == "static" ||
+         options.tailored_bc_gs_product_coupling_mode == "both");
+    if (add_gs_product_definition) {
         const double w_lb = std::max(0.0, g_lb * sp_s_lower);
         const double w_ub = std::max(w_lb, g_ub * sp_s_upper);
         vars.add("W_GS", w_lb, w_ub, "C");
         if (stats != nullptr) ++stats->gs_product_variable_added;
     }
-    if (add_disagg_sp_estimator) {
+    if (add_disagg_sp_definition) {
         for (int i = 1; i <= V; ++i) {
             const double t_lb = std::max(0.0, sp_s_lower * e_lower_domain[i]);
             const double t_ub = std::max(t_lb, sp_s_upper * e_upper_domain[i]);
@@ -1043,6 +1049,11 @@ void writeCompactLp(const Instance& instance,
                         ++stats->vector_support_cover_cuts_added;
                         stats->vector_support_cover_max_violation =
                             std::max(stats->vector_support_cover_max_violation, violation);
+                        if (options.tailored_bc_vector_support_cover_max_cuts > 0 &&
+                            stats->vector_support_cover_cuts_added >=
+                                options.tailored_bc_vector_support_cover_max_cuts) {
+                            stop = true;
+                        }
                     }
                 });
             }
@@ -1082,7 +1093,15 @@ void writeCompactLp(const Instance& instance,
                         }
                         addTerm(cut, zName(k, representative), -2.0);
                         writeConstraint(out, cid, cut, ">=", 0.0);
-                        if (stats != nullptr) ++stats->vector_route_cutset_cuts_added;
+                        if (stats != nullptr) {
+                            ++stats->vector_route_cutset_cuts_added;
+                            if (options.tailored_bc_vector_route_cutset_max_cuts > 0 &&
+                                stats->vector_route_cutset_cuts_added >=
+                                    options.tailored_bc_vector_route_cutset_max_cuts) {
+                                stop = true;
+                                break;
+                            }
+                        }
                     }
                 });
             }
@@ -1913,7 +1932,7 @@ void writeCompactLp(const Instance& instance,
             if (stats != nullptr) stats->s_range_rows_added += 2;
             s_upper = std::min(s_upper, s_bucket_U);
         }
-        if (add_gs_product_coupling) {
+        if (add_gs_product_definition) {
             if (stats != nullptr) {
                 stats->enabled_families.push_back("gs_product_coupling");
             }
@@ -1943,18 +1962,20 @@ void writeCompactLp(const Instance& instance,
             writeConstraint(out, cid, gs4, "<=", -g_lb * sp_s_upper);
             if (stats != nullptr) stats->gs_mccormick_rows_added += 4;
 
-            Expr h_upper = h_expr;
-            addTerm(h_upper, "W_GS", -static_cast<double>(V));
-            writeConstraint(out, cid, h_upper, "<=", 0.0);
-            if (stats != nullptr) ++stats->gs_h_upper_rows_added;
-            if (options.tailored_bc_gs_product_lower_row != "off") {
-                Expr h_lower = h_expr;
-                addTerm(h_lower, "W_GS", -static_cast<double>(V));
-                writeConstraint(out, cid, h_lower, ">=", 0.0);
-                if (stats != nullptr) ++stats->gs_h_lower_rows_added;
+            if (add_gs_product_static_row) {
+                Expr h_upper = h_expr;
+                addTerm(h_upper, "W_GS", -static_cast<double>(V));
+                writeConstraint(out, cid, h_upper, "<=", 0.0);
+                if (stats != nullptr) ++stats->gs_h_upper_rows_added;
+                if (options.tailored_bc_gs_product_lower_row != "off") {
+                    Expr h_lower = h_expr;
+                    addTerm(h_lower, "W_GS", -static_cast<double>(V));
+                    writeConstraint(out, cid, h_lower, ">=", 0.0);
+                    if (stats != nullptr) ++stats->gs_h_lower_rows_added;
+                }
             }
         }
-        if (add_disagg_sp_estimator) {
+        if (add_disagg_sp_definition) {
             if (stats != nullptr) {
                 stats->enabled_families.push_back("disaggregated_sp_estimator");
             }
@@ -1982,17 +2003,19 @@ void writeCompactLp(const Instance& instance,
                 writeConstraint(out, cid, t4, "<=", -sp_s_lower * e_u);
                 if (stats != nullptr) stats->disagg_sp_mccormick_rows_added += 4;
             }
-            Expr disagg_estimator;
-            for (int i = 1; i <= V; ++i) {
-                for (int j = i + 1; j <= V; ++j) addTerm(disagg_estimator, hName(i, j), 1);
+            if (add_disagg_sp_estimator) {
+                Expr disagg_estimator;
+                for (int i = 1; i <= V; ++i) {
+                    for (int j = i + 1; j <= V; ++j) addTerm(disagg_estimator, hName(i, j), 1);
+                }
+                for (int i = 1; i <= V; ++i) {
+                    addTerm(disagg_estimator, "T_SP_" + std::to_string(i),
+                            static_cast<double>(V) * options.lambda * instance.weights[i]);
+                    addTerm(disagg_estimator, rName(i), -static_cast<double>(V) * cutoff_value);
+                }
+                writeConstraint(out, cid, disagg_estimator, "<=", 0.0);
+                if (stats != nullptr) ++stats->disagg_sp_estimator_rows_added;
             }
-            for (int i = 1; i <= V; ++i) {
-                addTerm(disagg_estimator, "T_SP_" + std::to_string(i),
-                        static_cast<double>(V) * options.lambda * instance.weights[i]);
-                addTerm(disagg_estimator, rName(i), -static_cast<double>(V) * cutoff_value);
-            }
-            writeConstraint(out, cid, disagg_estimator, "<=", 0.0);
-            if (stats != nullptr) ++stats->disagg_sp_estimator_rows_added;
         }
         if (strengthened && options.compact_bc_objective_estimator_cutoff &&
             cutoff->add_objective_cutoff && std::isfinite(s_upper) && s_upper > 1e-12) {
@@ -2236,6 +2259,10 @@ void addDynamicCut(std::vector<DynamicCut>& cuts,
         ++stats.support_duration;
         stats.support_duration_violation =
             std::max(stats.support_duration_violation, cut.violation);
+    } else if (cut.family == "route_cutset") {
+        ++stats.route_cutset;
+        stats.route_cutset_violation =
+            std::max(stats.route_cutset_violation, cut.violation);
     } else if (cut.family == "transfer_compat") {
         ++stats.transfer_compat;
         stats.transfer_compat_violation =
@@ -2258,6 +2285,7 @@ void addDynamicCut(std::vector<DynamicCut>& cuts,
 std::string dynamicCutSummary(const DynamicCutStats& stats) {
     std::ostringstream out;
     out << "support_duration=" << stats.support_duration
+        << ";route_cutset=" << stats.route_cutset
         << ";transfer_compat=" << stats.transfer_compat
         << ";visit_inventory_linking=" << stats.visit_inventory_linking
         << ";objective_estimator=" << stats.objective_estimator
@@ -2268,6 +2296,7 @@ std::string dynamicCutSummary(const DynamicCutStats& stats) {
 std::string dynamicViolationSummary(const DynamicCutStats& stats) {
     std::ostringstream out;
     out << "support_duration=" << stats.support_duration_violation
+        << ";route_cutset=" << stats.route_cutset_violation
         << ";transfer_compat=" << stats.transfer_compat_violation
         << ";visit_inventory_linking=" << stats.visit_inventory_linking_violation
         << ";objective_estimator=" << stats.objective_estimator_violation
@@ -2289,6 +2318,19 @@ std::vector<DynamicCut> separateDynamicCuts(
     const double tol = std::max(1e-9, options.compact_bc_dynamic_cut_violation_tol);
 
     auto emit = [&](const DynamicCut& cut) {
+        if (cut.family == "support_duration" &&
+            options.tailored_bc_vector_support_cover_max_cuts > 0 &&
+            stats.support_duration >= options.tailored_bc_vector_support_cover_max_cuts) {
+            return;
+        }
+        if (cut.family == "route_cutset" &&
+            options.tailored_bc_vector_route_cutset_max_cuts > 0 &&
+            stats.route_cutset >= options.tailored_bc_vector_route_cutset_max_cuts) {
+            return;
+        }
+        if (cut.violation + 1e-15 < options.tailored_bc_vector_cut_min_violation) {
+            return;
+        }
         const std::size_t before = added.size();
         addDynamicCut(added, signatures, stats, cut);
         if (added.size() == before) {
@@ -2360,6 +2402,70 @@ std::vector<DynamicCut> separateDynamicCuts(
                     }
                 }
             }
+        }
+    }
+
+    if (familyEnabled(options, "route") || familyEnabled(options, "cutset")) {
+        const int max_size = std::min({5, V,
+            std::max(2, options.tailored_bc_vector_route_cutset_max_size)});
+        for (int k = 0; k < M; ++k) {
+            std::vector<std::pair<double, int>> ranked;
+            for (int i = 1; i <= V; ++i) {
+                const double z = solValue(values, zName(k, i));
+                if (z > tol) ranked.push_back({z, i});
+            }
+            std::sort(ranked.begin(), ranked.end(), std::greater<>());
+            if (ranked.size() > 10) ranked.resize(10);
+            std::vector<int> subset;
+            std::function<void(int, int)> enumerate = [&](int start, int target_size) {
+                if (options.tailored_bc_vector_route_cutset_max_cuts > 0 &&
+                    stats.route_cutset >= options.tailored_bc_vector_route_cutset_max_cuts) {
+                    return;
+                }
+                if (static_cast<int>(subset.size()) == target_size) {
+                    std::set<int> inside(subset.begin(), subset.end());
+                    for (int representative : subset) {
+                        double boundary = 0.0;
+                        Expr expr;
+                        for (int i = 0; i <= V; ++i) {
+                            const bool i_in = inside.count(i) > 0;
+                            for (int j = 0; j <= V; ++j) {
+                                if (i == j) continue;
+                                const bool j_in = inside.count(j) > 0;
+                                if (i_in == j_in) continue;
+                                boundary += solValue(values, xName(k, i, j));
+                                addTerm(expr, xName(k, i, j), 1.0);
+                            }
+                        }
+                        const double violation =
+                            2.0 * solValue(values, zName(k, representative)) - boundary;
+                        if (violation <= tol) continue;
+                        DynamicCut cut;
+                        cut.family = "route_cutset";
+                        std::ostringstream signature;
+                        signature << "route:k" << k << ":l" << representative;
+                        for (int station : subset) signature << ':' << station;
+                        cut.signature = signature.str();
+                        cut.expr = expr;
+                        addTerm(cut.expr, zName(k, representative), -2.0);
+                        cut.sense = ">=";
+                        cut.rhs = 0.0;
+                        cut.violation = violation;
+                        emit(cut);
+                        if (options.tailored_bc_vector_route_cutset_max_cuts > 0 &&
+                            stats.route_cutset >= options.tailored_bc_vector_route_cutset_max_cuts) {
+                            return;
+                        }
+                    }
+                    return;
+                }
+                for (int pos = start; pos < static_cast<int>(ranked.size()); ++pos) {
+                    subset.push_back(ranked[static_cast<std::size_t>(pos)].second);
+                    enumerate(pos + 1, target_size);
+                    subset.pop_back();
+                }
+            };
+            for (int size = 2; size <= max_size; ++size) enumerate(0, size);
         }
     }
 
@@ -3423,7 +3529,9 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                        ? "upper_and_lower_rows_paper_safe"
                        : "upper_row_paper_safe_lower_row_" +
                              model_options.tailored_bc_gs_product_lower_row)
-                : "not_enabled";
+                : (result.gs_mccormick_rows_added > 0
+                       ? "paper_safe_product_definition_callback_separation"
+                       : "not_enabled");
         result.tailored_bc_disaggregated_sp_estimator_enabled =
             model_options.tailored_bc_disaggregated_sp_estimator;
         result.tailored_bc_disaggregated_sp_mode =
@@ -3439,17 +3547,27 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         result.disagg_sp_proof_status =
             result.disagg_sp_estimator_rows_added > 0
                 ? "paper_safe_bucket_local_disaggregated_sp_estimator"
-                : "not_enabled";
+                : (result.disagg_sp_mccormick_rows_added > 0
+                       ? "paper_safe_product_definition_callback_separation"
+                       : "not_enabled");
         result.tailored_bc_vector_support_cover_enabled =
             model_options.tailored_bc_vector_support_cover;
         result.tailored_bc_vector_support_cover_max_size =
             model_options.tailored_bc_vector_support_cover_max_size;
+        result.tailored_bc_vector_support_cover_max_cuts =
+            model_options.tailored_bc_vector_support_cover_max_cuts;
         result.tailored_bc_vector_route_cutset_enabled =
             model_options.tailored_bc_vector_route_cutset;
         result.tailored_bc_vector_route_cutset_max_size =
             model_options.tailored_bc_vector_route_cutset_max_size;
+        result.tailored_bc_vector_route_cutset_max_cuts =
+            model_options.tailored_bc_vector_route_cutset_max_cuts;
+        result.tailored_bc_vector_cut_min_violation =
+            model_options.tailored_bc_vector_cut_min_violation;
         result.tailored_bc_vector_cut_candidate_source =
             model_options.tailored_bc_vector_cut_candidate_source;
+        result.tailored_bc_structural_profile =
+            model_options.tailored_bc_structural_profile;
         result.vector_support_cover_candidates =
             strengthening_stats.vector_support_cover_candidates;
         result.vector_support_cover_cuts_added =
@@ -3928,6 +4046,12 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     std::to_string(api_solve.callback_subset_cross_h_centering_cuts_added) +
                     ";callback_local_q_centering=" +
                     std::to_string(api_solve.callback_local_q_centering_cuts_added) +
+                    ";callback_gs_product_coupling=" +
+                    std::to_string(api_solve.callback_gs_product_cuts_added) +
+                    ";callback_disaggregated_sp_estimator=" +
+                    std::to_string(api_solve.callback_disagg_sp_cuts_added) +
+                    ";callback_vector_route_cutset=" +
+                    std::to_string(api_solve.callback_vector_route_cutset_cuts_added) +
                     ";callback_variable_s_centering=" +
                     std::to_string(api_solve.callback_variable_s_centering_cuts_added) +
                     ";callback_subset_inventory_imbalance=" +
@@ -3986,6 +4110,35 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 result.tailored_bc_local_q_centering_max_violation =
                     std::max(result.tailored_bc_local_q_centering_max_violation,
                              api_solve.callback_local_q_centering_max_violation);
+                result.gs_product_callback_rows_added +=
+                    api_solve.callback_gs_product_cuts_added;
+                result.gs_product_coupling_violations +=
+                    api_solve.callback_gs_product_violations;
+                result.gs_product_coupling_max_violation =
+                    std::max(result.gs_product_coupling_max_violation,
+                             api_solve.callback_gs_product_max_violation);
+                result.disagg_sp_callback_rows_added +=
+                    api_solve.callback_disagg_sp_cuts_added;
+                result.disagg_sp_violations +=
+                    api_solve.callback_disagg_sp_violations;
+                result.disagg_sp_max_violation =
+                    std::max(result.disagg_sp_max_violation,
+                             api_solve.callback_disagg_sp_max_violation);
+                result.vector_callback_route_cutset_candidates +=
+                    api_solve.callback_vector_route_cutset_candidates;
+                result.vector_callback_route_cutset_cuts_added +=
+                    api_solve.callback_vector_route_cutset_cuts_added;
+                result.vector_callback_route_cutset_max_violation =
+                    std::max(result.vector_callback_route_cutset_max_violation,
+                             api_solve.callback_vector_route_cutset_max_violation);
+                result.vector_callback_support_cover_candidates +=
+                    api_solve.callback_support_duration_pair_candidates +
+                    api_solve.callback_support_duration_triple_candidates +
+                    api_solve.callback_support_duration_quad_candidates;
+                result.vector_callback_support_cover_cuts_added +=
+                    api_solve.callback_support_duration_pair_cuts_added +
+                    api_solve.callback_support_duration_triple_cuts_added +
+                    api_solve.callback_support_duration_quad_cuts_added;
                 result.tailored_bc_variable_s_centering_violations +=
                     api_solve.callback_variable_s_centering_violations;
                 result.tailored_bc_variable_s_centering_cuts_added +=
@@ -4026,6 +4179,23 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     api_solve.callback_support_duration_lifted_candidates;
                 result.tailored_bc_support_duration_lifted_violations +=
                     api_solve.callback_support_duration_lifted_violations;
+                if (result.gs_h_upper_rows_added > 0 ||
+                    result.gs_product_callback_rows_added > 0) {
+                    result.gs_product_coupling_proof_status =
+                        model_options.tailored_bc_gs_product_lower_row == "diagnostic"
+                            ? "upper_row_paper_safe_lower_row_diagnostic"
+                            : "paper_safe_upper_row";
+                }
+                if (result.disagg_sp_estimator_rows_added > 0 ||
+                    result.disagg_sp_callback_rows_added > 0) {
+                    result.disagg_sp_proof_status =
+                        "paper_safe_bucket_local_disaggregated_sp_estimator";
+                }
+                if (result.vector_callback_route_cutset_cuts_added > 0 ||
+                    result.vector_callback_support_cover_cuts_added > 0) {
+                    result.vector_route_cuts_proof_status =
+                        "paper_safe_universal_rows_vector_selected_candidates";
+                }
                 result.notes.push_back(
                     "CPLEX dynamic callback API backend used for tailored BC; callback events relaxation="
                     + std::to_string(api_solve.relaxation_callback_calls)

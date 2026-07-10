@@ -60,13 +60,23 @@ def main() -> int:
             if math.isfinite(s) and s > 1e-12 and math.isfinite(h):
                 structural += 1
                 if math.isfinite(g):
-                    expected = h / (20.0 * s) - g
+                    v = f(row.get("V", ""))
+                    if not math.isfinite(v) or v <= 0:
+                        v = 20.0
+                    expected = h / (v * s) - g
                     reported = f(row.get("G_gap", ""))
                     add("g_gap_reconstruction", math.isfinite(reported) and abs(expected - reported) < 1e-7,
                         f"snapshot={row.get('snapshot_id')} expected={expected} reported={reported}")
                     break
         add("structural_values_available", structural > 0,
             f"structural_summary_rows={structural}")
+        unknown_bad = [
+            row for row in summaries
+            if math.isfinite(f(row.get("unknown_unparsed_fraction", ""))) and
+            f(row.get("unknown_unparsed_fraction", "")) > 0.05 + 1e-12
+        ]
+        add("unknown_fraction_at_most_five_percent", not unknown_bad,
+            f"bad_snapshots={len(unknown_bad)}")
     out = Path(args.out) if args.out else root / "vector_structural_summary_audit.csv"
     write_csv(out, rows)
     print(f"audits={len(rows)} failures={failures}")

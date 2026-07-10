@@ -1911,6 +1911,8 @@ std::string resultToJson(const SolveResult& input) {
         << result.gs_product_coupling_violations << ",\n";
     out << "  \"gs_product_coupling_max_violation\": "
         << result.gs_product_coupling_max_violation << ",\n";
+    out << "  \"gs_product_callback_rows_added\": "
+        << result.gs_product_callback_rows_added << ",\n";
     out << "  \"gs_product_coupling_proof_status\": \""
         << jsonEscape(result.gs_product_coupling_proof_status) << "\",\n";
     out << "  \"tailored_bc_disaggregated_sp_estimator_enabled\": "
@@ -1929,6 +1931,8 @@ std::string resultToJson(const SolveResult& input) {
         << result.disagg_sp_violations << ",\n";
     out << "  \"disagg_sp_max_violation\": "
         << result.disagg_sp_max_violation << ",\n";
+    out << "  \"disagg_sp_callback_rows_added\": "
+        << result.disagg_sp_callback_rows_added << ",\n";
     out << "  \"disagg_sp_root_gap_reduction\": "
         << result.disagg_sp_root_gap_reduction << ",\n";
     out << "  \"disagg_sp_proof_status\": \""
@@ -1937,10 +1941,16 @@ std::string resultToJson(const SolveResult& input) {
         << (result.tailored_bc_vector_support_cover_enabled ? "true" : "false") << ",\n";
     out << "  \"tailored_bc_vector_support_cover_max_size\": "
         << result.tailored_bc_vector_support_cover_max_size << ",\n";
+    out << "  \"tailored_bc_vector_support_cover_max_cuts\": "
+        << result.tailored_bc_vector_support_cover_max_cuts << ",\n";
     out << "  \"tailored_bc_vector_route_cutset_enabled\": "
         << (result.tailored_bc_vector_route_cutset_enabled ? "true" : "false") << ",\n";
     out << "  \"tailored_bc_vector_route_cutset_max_size\": "
         << result.tailored_bc_vector_route_cutset_max_size << ",\n";
+    out << "  \"tailored_bc_vector_route_cutset_max_cuts\": "
+        << result.tailored_bc_vector_route_cutset_max_cuts << ",\n";
+    out << "  \"tailored_bc_vector_cut_min_violation\": "
+        << result.tailored_bc_vector_cut_min_violation << ",\n";
     out << "  \"tailored_bc_vector_cut_candidate_source\": \""
         << jsonEscape(result.tailored_bc_vector_cut_candidate_source) << "\",\n";
     out << "  \"vector_support_cover_candidates\": "
@@ -1955,6 +1965,20 @@ std::string resultToJson(const SolveResult& input) {
         << result.vector_route_cutset_cuts_added << ",\n";
     out << "  \"vector_route_cutset_max_violation\": "
         << result.vector_route_cutset_max_violation << ",\n";
+    out << "  \"vector_callback_support_cover_candidates\": "
+        << result.vector_callback_support_cover_candidates << ",\n";
+    out << "  \"vector_callback_support_cover_cuts_added\": "
+        << result.vector_callback_support_cover_cuts_added << ",\n";
+    out << "  \"vector_callback_route_cutset_candidates\": "
+        << result.vector_callback_route_cutset_candidates << ",\n";
+    out << "  \"vector_callback_route_cutset_cuts_added\": "
+        << result.vector_callback_route_cutset_cuts_added << ",\n";
+    out << "  \"vector_callback_support_cover_max_violation\": "
+        << result.vector_callback_support_cover_max_violation << ",\n";
+    out << "  \"vector_callback_route_cutset_max_violation\": "
+        << result.vector_callback_route_cutset_max_violation << ",\n";
+    out << "  \"tailored_bc_structural_profile\": \""
+        << jsonEscape(result.tailored_bc_structural_profile) << "\",\n";
     out << "  \"vector_route_cuts_proof_status\": \""
         << jsonEscape(result.vector_route_cuts_proof_status) << "\",\n";
     out << "  \"gini_spread_cuts_added\": "

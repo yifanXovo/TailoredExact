@@ -1,5 +1,7 @@
 # G-S-H Product Coupling
 
+The upper row may be installed statically or separated by the CPLEX relaxation callback. Callback mode still installs the bucket-local product variable and its four McCormick definition rows; only the `H <= V*W_GS` activation is deferred until violation. The lower/equality side remains diagnostic.
+
 This cut family is for fixed-Gini, fixed-S-bucket Tailored-BC subproblems.
 
 For a fixed interval `gamma_L <= G <= gamma_U` and enforced S bucket

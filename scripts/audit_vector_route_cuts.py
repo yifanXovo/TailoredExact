@@ -42,14 +42,20 @@ def main() -> int:
         cutset_enabled = as_bool(data.get("tailored_bc_vector_route_cutset_enabled"))
         if support_enabled or cutset_enabled:
             enabled_count += 1
-        support_candidates = int(float(data.get("vector_support_cover_candidates", 0) or 0))
-        support_cuts = int(float(data.get("vector_support_cover_cuts_added", 0) or 0))
-        cutset_candidates = int(float(data.get("vector_route_cutset_candidates", 0) or 0))
-        cutset_cuts = int(float(data.get("vector_route_cutset_cuts_added", 0) or 0))
+        support_candidates = (int(float(data.get("vector_support_cover_candidates", 0) or 0)) +
+                              int(float(data.get("vector_callback_support_cover_candidates", 0) or 0)))
+        support_cuts = (int(float(data.get("vector_support_cover_cuts_added", 0) or 0)) +
+                        int(float(data.get("vector_callback_support_cover_cuts_added", 0) or 0)))
+        cutset_candidates = (int(float(data.get("vector_route_cutset_candidates", 0) or 0)) +
+                             int(float(data.get("vector_callback_route_cutset_candidates", 0) or 0)))
+        cutset_cuts = (int(float(data.get("vector_route_cutset_cuts_added", 0) or 0)) +
+                       int(float(data.get("vector_callback_route_cutset_cuts_added", 0) or 0)))
         reasons: List[str] = []
-        if support_enabled and support_candidates <= 0:
+        source = str(data.get("tailored_bc_vector_cut_candidate_source", ""))
+        dynamic_summary = str(data.get("compact_bc_dynamic_cuts_added_by_family", ""))
+        if support_enabled and support_candidates <= 0 and "support_duration=" not in dynamic_summary:
             reasons.append("support_cover_enabled_without_candidates")
-        if cutset_enabled and cutset_candidates <= 0:
+        if cutset_enabled and cutset_candidates <= 0 and "route_cutset=" not in dynamic_summary:
             reasons.append("route_cutset_enabled_without_candidates")
         if (support_cuts > 0 or cutset_cuts > 0) and "paper_safe" not in str(data.get("vector_route_cuts_proof_status", "")):
             reasons.append("route_rows_without_paper_safe_status")

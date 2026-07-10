@@ -12,6 +12,7 @@
 #include <cstring>
 #include <filesystem>
 #include <fstream>
+#include <functional>
 #include <iomanip>
 #include <limits>
 #include <map>
@@ -314,10 +315,12 @@ struct CallbackState {
     int ncols = 0;
     std::vector<std::string> col_names;
     int g_col = -1;
+    int w_gs_col = -1;
     int r_min_col = -1;
     int r_max_col = -1;
     std::vector<int> r_cols;
     std::vector<int> e_cols;
+    std::vector<int> t_sp_cols;
     std::vector<int> q_l1_cols;
     std::vector<std::vector<int>> h_cols;
     std::vector<int> y_cols;
@@ -425,6 +428,21 @@ struct CallbackState {
     std::atomic<long long> local_q_centering_cuts_added{0};
     std::atomic<long long> local_q_centering_violations{0};
     std::atomic<double> local_q_centering_max_violation{0.0};
+    std::atomic<long long> gs_product_cuts_added{0};
+    std::atomic<long long> gs_product_violations{0};
+    std::atomic<double> gs_product_max_violation{0.0};
+    std::atomic<bool> gs_product_cut_added{false};
+    std::atomic<long long> disagg_sp_cuts_added{0};
+    std::atomic<long long> disagg_sp_violations{0};
+    std::atomic<double> disagg_sp_max_violation{0.0};
+    std::atomic<bool> disagg_sp_cut_added{false};
+    std::atomic<long long> vector_route_cutset_cuts_added{0};
+    std::atomic<long long> vector_route_cutset_candidates{0};
+    std::atomic<long long> vector_route_cutset_violations{0};
+    std::atomic<double> vector_route_cutset_max_violation{0.0};
+    std::atomic<bool> vector_route_cutset_separated{false};
+    std::mutex vector_route_cutset_mutex;
+    std::set<std::string> vector_route_cutset_keys;
     std::mutex local_q_centering_mutex;
     std::set<std::string> local_q_centering_cut_keys;
     std::atomic<long long> variable_s_centering_cuts_added{0};
@@ -707,6 +725,23 @@ bool callbackProfileAllows(const CallbackState& state,
         return family == "gini_interval" ||
             family == "local_q";
     }
+    if (profile == "gs-only" || profile == "gs_only") {
+        return family == "gini_interval" || family == "gs_product";
+    }
+    if (profile == "sp-only" || profile == "sp_only") {
+        return family == "gini_interval" || family == "disagg_sp";
+    }
+    if (profile == "gs-sp-only" || profile == "gs_sp_only") {
+        return family == "gini_interval" || family == "gs_product" ||
+            family == "disagg_sp";
+    }
+    if (profile == "route-cutset-only" || profile == "route_cutset_only") {
+        return family == "gini_interval" || family == "vector_route_cutset";
+    }
+    if (profile == "route-combined" || profile == "route_combined") {
+        return family == "gini_interval" || family == "support_duration" ||
+            family == "vector_route_cutset";
+    }
     return true;
 }
 
@@ -753,6 +788,8 @@ bool rejectCandidateWithGiniBound(CallbackState& state,
     return false;
 }
 
+int safeCol(const std::vector<std::vector<int>>& cols, int k, int i);
+
 bool addOneUserCut(CallbackState& state,
                    CPXCALLBACKCONTEXTptr context,
                    const std::vector<std::pair<int, double>>& terms,
@@ -780,6 +817,180 @@ bool addOneUserCut(CallbackState& state,
         return true;
     }
     return false;
+}
+
+void separateGsProductCoupling(CallbackState& state,
+                               CPXCALLBACKCONTEXTptr context) {
+    if (state.w_gs_col < 0 || state.h_cols.size() <= 1 ||
+        state.gs_product_cut_added.load()) {
+        return;
+    }
+    std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
+    double obj = 0.0;
+    if (state.api->callbackgetrelaxationpoint(
+            context, x.data(), 0, state.ncols - 1, &obj) != 0) {
+        return;
+    }
+    const int V = static_cast<int>(state.h_cols.size()) - 1;
+    std::vector<std::pair<int, double>> terms;
+    double lhs = -static_cast<double>(V) *
+        x[static_cast<std::size_t>(state.w_gs_col)];
+    terms.push_back({state.w_gs_col, -static_cast<double>(V)});
+    for (int i = 1; i <= V; ++i) {
+        for (int j = i + 1; j <= V; ++j) {
+            const int h = state.h_cols[static_cast<std::size_t>(i)]
+                                      [static_cast<std::size_t>(j)];
+            if (h < 0) return;
+            lhs += x[static_cast<std::size_t>(h)];
+            terms.push_back({h, 1.0});
+        }
+    }
+    constexpr double tol = 1e-6;
+    if (lhs <= tol) return;
+    state.gs_product_violations.fetch_add(1);
+    atomicMax(state.gs_product_max_violation, lhs);
+    bool expected = false;
+    if (!state.gs_product_cut_added.compare_exchange_strong(expected, true)) return;
+    if (addOneUserCut(state, context, terms, 'L', 0.0)) {
+        state.gs_product_cuts_added.fetch_add(1);
+    } else {
+        state.gs_product_cut_added.store(false);
+    }
+}
+
+void separateDisaggregatedSpEstimator(CallbackState& state,
+                                      CPXCALLBACKCONTEXTptr context) {
+    if (state.t_sp_cols.size() <= 1 || state.h_cols.size() <= 1 ||
+        state.r_cols.size() <= 1 || !std::isfinite(state.cutoff_value) ||
+        state.disagg_sp_cut_added.load()) {
+        return;
+    }
+    std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
+    double obj = 0.0;
+    if (state.api->callbackgetrelaxationpoint(
+            context, x.data(), 0, state.ncols - 1, &obj) != 0) {
+        return;
+    }
+    const int V = std::min({static_cast<int>(state.h_cols.size()),
+                            static_cast<int>(state.r_cols.size()),
+                            static_cast<int>(state.t_sp_cols.size()),
+                            static_cast<int>(state.station_weight.size())}) - 1;
+    if (V <= 0) return;
+    std::vector<std::pair<int, double>> terms;
+    double lhs = 0.0;
+    for (int i = 1; i <= V; ++i) {
+        const int r = state.r_cols[static_cast<std::size_t>(i)];
+        const int t = state.t_sp_cols[static_cast<std::size_t>(i)];
+        if (r < 0 || t < 0) return;
+        const double t_coef = static_cast<double>(V) * state.lambda *
+            state.station_weight[static_cast<std::size_t>(i)];
+        const double r_coef = -static_cast<double>(V) * state.cutoff_value;
+        lhs += t_coef * x[static_cast<std::size_t>(t)] +
+               r_coef * x[static_cast<std::size_t>(r)];
+        terms.push_back({t, t_coef});
+        terms.push_back({r, r_coef});
+        for (int j = i + 1; j <= V; ++j) {
+            const int h = state.h_cols[static_cast<std::size_t>(i)]
+                                      [static_cast<std::size_t>(j)];
+            if (h < 0) return;
+            lhs += x[static_cast<std::size_t>(h)];
+            terms.push_back({h, 1.0});
+        }
+    }
+    constexpr double tol = 1e-6;
+    if (lhs <= tol) return;
+    state.disagg_sp_violations.fetch_add(1);
+    atomicMax(state.disagg_sp_max_violation, lhs);
+    bool expected = false;
+    if (!state.disagg_sp_cut_added.compare_exchange_strong(expected, true)) return;
+    if (addOneUserCut(state, context, terms, 'L', 0.0)) {
+        state.disagg_sp_cuts_added.fetch_add(1);
+    } else {
+        state.disagg_sp_cut_added.store(false);
+    }
+}
+
+void separateVectorRouteCutset(CallbackState& state,
+                               CPXCALLBACKCONTEXTptr context) {
+    if (state.x_cols.empty() || state.z_cols.empty() || state.ncols <= 0) return;
+    bool expected = false;
+    if (!state.vector_route_cutset_separated.compare_exchange_strong(expected, true)) {
+        return;
+    }
+    std::vector<double> x(static_cast<std::size_t>(state.ncols), 0.0);
+    double obj = 0.0;
+    if (state.api->callbackgetrelaxationpoint(
+            context, x.data(), 0, state.ncols - 1, &obj) != 0) {
+        return;
+    }
+    const int max_size = std::min(5, std::max(2, state.gini_subset_max_size));
+    const long long max_cuts = std::max(0, state.gini_subset_max_cuts);
+    constexpr double tol = 1e-6;
+    for (int k = 0; k < static_cast<int>(state.z_cols.size()); ++k) {
+        if (max_cuts > 0 && state.vector_route_cutset_cuts_added.load() >= max_cuts) break;
+        std::vector<std::pair<double, int>> ranked;
+        for (int i = 1; i < static_cast<int>(state.z_cols[static_cast<std::size_t>(k)].size()); ++i) {
+            const int z = safeCol(state.z_cols, k, i);
+            if (z >= 0 && x[static_cast<std::size_t>(z)] > tol) {
+                ranked.push_back({x[static_cast<std::size_t>(z)], i});
+            }
+        }
+        std::sort(ranked.begin(), ranked.end(), std::greater<>());
+        if (ranked.size() > 10) ranked.resize(10);
+        std::vector<int> subset;
+        std::function<void(int, int)> enumerate = [&](int start, int target_size) {
+            if (max_cuts > 0 && state.vector_route_cutset_cuts_added.load() >= max_cuts) return;
+            if (static_cast<int>(subset.size()) == target_size) {
+                std::set<int> inside(subset.begin(), subset.end());
+                for (int representative : subset) {
+                    state.vector_route_cutset_candidates.fetch_add(1);
+                    std::map<int, double> term_map;
+                    double boundary = 0.0;
+                    for (int i = 0; i < state.node_count; ++i) {
+                        const bool i_in = inside.count(i) > 0;
+                        for (int j = 0; j < state.node_count; ++j) {
+                            if (i == j) continue;
+                            const bool j_in = inside.count(j) > 0;
+                            if (i_in == j_in) continue;
+                            const int arc = state.x_cols[static_cast<std::size_t>(k)]
+                                                       [static_cast<std::size_t>(i)]
+                                                       [static_cast<std::size_t>(j)];
+                            if (arc < 0) continue;
+                            boundary += x[static_cast<std::size_t>(arc)];
+                            term_map[arc] += 1.0;
+                        }
+                    }
+                    const int z = safeCol(state.z_cols, k, representative);
+                    if (z < 0) continue;
+                    const double violation = 2.0 * x[static_cast<std::size_t>(z)] - boundary;
+                    if (violation <= tol) continue;
+                    state.vector_route_cutset_violations.fetch_add(1);
+                    atomicMax(state.vector_route_cutset_max_violation, violation);
+                    std::ostringstream key;
+                    key << k << ':' << representative;
+                    for (int station : subset) key << ':' << station;
+                    {
+                        std::lock_guard<std::mutex> guard(state.vector_route_cutset_mutex);
+                        if (!state.vector_route_cutset_keys.insert(key.str()).second) continue;
+                    }
+                    term_map[z] -= 2.0;
+                    std::vector<std::pair<int, double>> terms(term_map.begin(), term_map.end());
+                    if (addOneUserCut(state, context, terms, 'G', 0.0)) {
+                        state.vector_route_cutset_cuts_added.fetch_add(1);
+                    }
+                    if (max_cuts > 0 && state.vector_route_cutset_cuts_added.load() >= max_cuts) return;
+                }
+                return;
+            }
+            for (int pos = start; pos < static_cast<int>(ranked.size()); ++pos) {
+                subset.push_back(ranked[static_cast<std::size_t>(pos)].second);
+                enumerate(pos + 1, target_size);
+                subset.pop_back();
+                if (max_cuts > 0 && state.vector_route_cutset_cuts_added.load() >= max_cuts) return;
+            }
+        };
+        for (int size = 2; size <= max_size; ++size) enumerate(0, size);
+    }
 }
 
 int safeCol(const std::vector<std::vector<int>>& cols, int k, int i);
@@ -2728,6 +2939,15 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
         if (callbackProfileAllows(*state, "local_q")) {
             separateLocalQCentering(*state, context);
         }
+        if (callbackProfileAllows(*state, "gs_product")) {
+            separateGsProductCoupling(*state, context);
+        }
+        if (callbackProfileAllows(*state, "disagg_sp")) {
+            separateDisaggregatedSpEstimator(*state, context);
+        }
+        if (callbackProfileAllows(*state, "vector_route_cutset")) {
+            separateVectorRouteCutset(*state, context);
+        }
         if (callbackProfileAllows(*state, "variable_s")) {
             separateVariableSCentering(*state, context);
         }
@@ -2892,11 +3112,14 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         out.branch_priority_status = "disabled";
     }
     int g_col = -1;
+    int w_gs_col = -1;
     int r_min_col = -1;
     int r_max_col = -1;
     for (int i = 0; i < ncols; ++i) {
         if (names[static_cast<std::size_t>(i)] == "G") {
             g_col = i;
+        } else if (names[static_cast<std::size_t>(i)] == "W_GS") {
+            w_gs_col = i;
         } else if (names[static_cast<std::size_t>(i)] == "r_min") {
             r_min_col = i;
         } else if (names[static_cast<std::size_t>(i)] == "r_max") {
@@ -2909,6 +3132,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     std::vector<int> y_cols(static_cast<std::size_t>(station_count), -1);
     std::vector<int> r_cols(static_cast<std::size_t>(station_count), -1);
     std::vector<int> e_cols(static_cast<std::size_t>(station_count), -1);
+    std::vector<int> t_sp_cols(static_cast<std::size_t>(station_count), -1);
     std::vector<int> q_l1_cols(static_cast<std::size_t>(station_count), -1);
     std::vector<std::vector<int>> h_cols(
         static_cast<std::size_t>(station_count),
@@ -2920,6 +3144,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         if (!found.empty()) r_cols[static_cast<std::size_t>(i)] = found.front();
         found = buildNameToIndexLookup(names, eNameForStation(i));
         if (!found.empty()) e_cols[static_cast<std::size_t>(i)] = found.front();
+        found = buildNameToIndexLookup(names, "T_SP_" + std::to_string(i));
+        if (!found.empty()) t_sp_cols[static_cast<std::size_t>(i)] = found.front();
         found = buildNameToIndexLookup(names, qL1NameForStation(i));
         if (!found.empty()) q_l1_cols[static_cast<std::size_t>(i)] = found.front();
     }
@@ -2994,10 +3220,12 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     cb_state.ncols = ncols;
     cb_state.col_names = names;
     cb_state.g_col = g_col;
+    cb_state.w_gs_col = w_gs_col;
     cb_state.r_min_col = r_min_col;
     cb_state.r_max_col = r_max_col;
     cb_state.r_cols = std::move(r_cols);
     cb_state.e_cols = std::move(e_cols);
+    cb_state.t_sp_cols = std::move(t_sp_cols);
     cb_state.q_l1_cols = std::move(q_l1_cols);
     cb_state.h_cols = std::move(h_cols);
     cb_state.y_cols = std::move(y_cols);
@@ -3084,6 +3312,9 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
            << ";subset_cross_h_centering="
            << cb_state.subset_cross_h_centering_cuts_added.load()
            << ";local_q_centering=" << cb_state.local_q_centering_cuts_added.load()
+           << ";gs_product_coupling=" << cb_state.gs_product_cuts_added.load()
+           << ";disaggregated_sp_estimator=" << cb_state.disagg_sp_cuts_added.load()
+           << ";vector_route_cutset=" << cb_state.vector_route_cutset_cuts_added.load()
            << ";variable_s_centering=" << cb_state.variable_s_centering_cuts_added.load()
            << ";subset_inventory_imbalance="
            << cb_state.subset_inventory_imbalance_cuts_added.load()
@@ -3431,6 +3662,26 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         cb_state.local_q_centering_violations.load();
     out.callback_local_q_centering_max_violation =
         cb_state.local_q_centering_max_violation.load();
+    out.callback_gs_product_cuts_added =
+        cb_state.gs_product_cuts_added.load();
+    out.callback_gs_product_violations =
+        cb_state.gs_product_violations.load();
+    out.callback_gs_product_max_violation =
+        cb_state.gs_product_max_violation.load();
+    out.callback_disagg_sp_cuts_added =
+        cb_state.disagg_sp_cuts_added.load();
+    out.callback_disagg_sp_violations =
+        cb_state.disagg_sp_violations.load();
+    out.callback_disagg_sp_max_violation =
+        cb_state.disagg_sp_max_violation.load();
+    out.callback_vector_route_cutset_cuts_added =
+        cb_state.vector_route_cutset_cuts_added.load();
+    out.callback_vector_route_cutset_candidates =
+        cb_state.vector_route_cutset_candidates.load();
+    out.callback_vector_route_cutset_violations =
+        cb_state.vector_route_cutset_violations.load();
+    out.callback_vector_route_cutset_max_violation =
+        cb_state.vector_route_cutset_max_violation.load();
     out.callback_variable_s_centering_cuts_added =
         cb_state.variable_s_centering_cuts_added.load();
     out.callback_variable_s_centering_violations =

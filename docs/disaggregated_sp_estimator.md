@@ -1,5 +1,7 @@
 # Disaggregated S-e_i Product Estimator
 
+Static and callback activation share the same bucket-local `T_SP_i = S*e_i` McCormick definitions. Callback mode separates the global estimator only when violated. Replacing the aggregate `W_SP` estimator is an explicit ablation choice; it is not implied by enabling disaggregation.
+
 This family strengthens the no-improver cutoff estimator inside an enforced
 S bucket.
 
