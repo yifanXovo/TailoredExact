@@ -374,6 +374,8 @@ struct CallbackState {
     std::atomic<double> relaxation_vector_objective{0.0};
     std::string relaxation_vector_sample_variable_names;
     std::string relaxation_vector_sample_variable_values;
+    std::string relaxation_vector_full_variable_names;
+    std::string relaxation_vector_full_variable_values;
     std::string relaxation_vector_failure_reason;
     std::atomic<bool> candidate_vector_sample_attempted{false};
     std::atomic<bool> candidate_vector_snapshot_available{false};
@@ -384,6 +386,8 @@ struct CallbackState {
     std::atomic<double> candidate_vector_objective{0.0};
     std::string candidate_vector_sample_variable_names;
     std::string candidate_vector_sample_variable_values;
+    std::string candidate_vector_full_variable_names;
+    std::string candidate_vector_full_variable_values;
     std::string candidate_vector_failure_reason;
     std::mutex vector_snapshot_mutex;
     std::atomic<long long> user_cuts_added{0};
@@ -537,24 +541,34 @@ void sampleCallbackVector(CallbackState& state,
     long long nonzero = 0;
     std::ostringstream sample_names;
     std::ostringstream sample_values;
+    std::ostringstream full_names;
+    std::ostringstream full_values;
     sample_values << std::setprecision(17);
+    full_values << std::setprecision(17);
     constexpr int sample_limit = 32;
     int sampled = 0;
     if (rc == 0) {
         for (int i = 0; i < state.ncols; ++i) {
             const double value = x[static_cast<std::size_t>(i)];
-            if (std::fabs(value) <= 1e-10) continue;
-            ++nonzero;
-            if (sampled < sample_limit) {
+            const std::string name =
+                i < static_cast<int>(state.col_names.size()) &&
+                        !state.col_names[static_cast<std::size_t>(i)].empty()
+                    ? state.col_names[static_cast<std::size_t>(i)]
+                    : "col_" + std::to_string(i);
+            if (i > 0) {
+                full_names << ';';
+                full_values << ';';
+            }
+            full_names << name;
+            full_values << value;
+            if (std::fabs(value) > 1e-10) {
+                ++nonzero;
+            }
+            if (std::fabs(value) > 1e-10 && sampled < sample_limit) {
                 if (sampled > 0) {
                     sample_names << ';';
                     sample_values << ';';
                 }
-                const std::string name =
-                    i < static_cast<int>(state.col_names.size()) &&
-                            !state.col_names[static_cast<std::size_t>(i)].empty()
-                        ? state.col_names[static_cast<std::size_t>(i)]
-                        : "col_" + std::to_string(i);
                 sample_names << name;
                 sample_values << value;
                 ++sampled;
@@ -574,6 +588,10 @@ void sampleCallbackVector(CallbackState& state,
             rc == 0 ? sample_names.str() : "not_available";
         state.relaxation_vector_sample_variable_values =
             rc == 0 ? sample_values.str() : "not_available";
+        state.relaxation_vector_full_variable_names =
+            rc == 0 ? full_names.str() : "not_available";
+        state.relaxation_vector_full_variable_values =
+            rc == 0 ? full_values.str() : "not_available";
         state.relaxation_vector_failure_reason =
             rc == 0 ? "none"
                     : "CPXcallbackgetrelaxationpoint_failed:" +
@@ -589,6 +607,10 @@ void sampleCallbackVector(CallbackState& state,
             rc == 0 ? sample_names.str() : "not_available";
         state.candidate_vector_sample_variable_values =
             rc == 0 ? sample_values.str() : "not_available";
+        state.candidate_vector_full_variable_names =
+            rc == 0 ? full_names.str() : "not_available";
+        state.candidate_vector_full_variable_values =
+            rc == 0 ? full_values.str() : "not_available";
         state.candidate_vector_failure_reason =
             rc == 0 ? "none"
                     : "CPXcallbackgetcandidatepoint_failed:" +
@@ -3331,6 +3353,14 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
             cb_state.relaxation_vector_sample_variable_values.empty()
                 ? "not_available"
                 : cb_state.relaxation_vector_sample_variable_values;
+        out.relaxation_vector_full_variable_names =
+            cb_state.relaxation_vector_full_variable_names.empty()
+                ? "not_available"
+                : cb_state.relaxation_vector_full_variable_names;
+        out.relaxation_vector_full_variable_values =
+            cb_state.relaxation_vector_full_variable_values.empty()
+                ? "not_available"
+                : cb_state.relaxation_vector_full_variable_values;
         out.relaxation_vector_failure_reason =
             cb_state.relaxation_vector_failure_reason.empty()
                 ? (out.relaxation_vector_api_called
@@ -3345,6 +3375,14 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
             cb_state.candidate_vector_sample_variable_values.empty()
                 ? "not_available"
                 : cb_state.candidate_vector_sample_variable_values;
+        out.candidate_vector_full_variable_names =
+            cb_state.candidate_vector_full_variable_names.empty()
+                ? "not_available"
+                : cb_state.candidate_vector_full_variable_names;
+        out.candidate_vector_full_variable_values =
+            cb_state.candidate_vector_full_variable_values.empty()
+                ? "not_available"
+                : cb_state.candidate_vector_full_variable_values;
         out.candidate_vector_failure_reason =
             cb_state.candidate_vector_failure_reason.empty()
                 ? (out.candidate_vector_api_called

@@ -1,0 +1,6 @@
+read "E:\codes\ExactEBRP\results\gf_tailored_bc_structural_cut_round\model_exports\dominant_k4_low_gini_1_disaggregated_sp_estimator_60s.lp"
+set threads 1
+change problem lp
+optimize
+write "E:\codes\ExactEBRP\results\gf_tailored_bc_structural_cut_round\vector_snapshots\dominant_k4_low_gini_1_disaggregated_sp_estimator_60s.root_lp.sol"
+quit
