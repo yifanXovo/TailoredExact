@@ -94,6 +94,19 @@ struct CompactOracleStrengtheningStats {
     long long tailored_required_external_source_cuts_added = 0;
     long long tailored_benders_inventory_cuts_added = 0;
     long long tailored_benders_inventory_candidates = 0;
+    long long gs_product_variable_added = 0;
+    long long gs_mccormick_rows_added = 0;
+    long long gs_h_upper_rows_added = 0;
+    long long gs_h_lower_rows_added = 0;
+    long long disagg_sp_variables_added = 0;
+    long long disagg_sp_mccormick_rows_added = 0;
+    long long disagg_sp_estimator_rows_added = 0;
+    long long vector_support_cover_candidates = 0;
+    long long vector_support_cover_cuts_added = 0;
+    double vector_support_cover_max_violation = 0.0;
+    long long vector_route_cutset_candidates = 0;
+    long long vector_route_cutset_cuts_added = 0;
+    double vector_route_cutset_max_violation = 0.0;
     bool s_range_refinement_enabled = false;
     double s_range_global_L = 0.0;
     double s_range_global_U = 0.0;
@@ -261,6 +274,50 @@ double tripleCycleLowerBound(const Instance& instance, int a, int b, int c) {
     return best;
 }
 
+double subsetCycleLowerBound(const Instance& instance, const std::vector<int>& subset) {
+    if (subset.empty()) return 0.0;
+    if (subset.size() == 1) {
+        const int a = subset.front();
+        return instance.dist[0][a] + instance.dist[a][0];
+    }
+    if (subset.size() == 2) {
+        return pairCycleLowerBound(instance, subset[0], subset[1]);
+    }
+    if (subset.size() == 3) {
+        return tripleCycleLowerBound(instance, subset[0], subset[1], subset[2]);
+    }
+    std::vector<int> perm = subset;
+    std::sort(perm.begin(), perm.end());
+    double best = std::numeric_limits<double>::infinity();
+    do {
+        double travel = instance.dist[0][perm.front()];
+        for (std::size_t i = 1; i < perm.size(); ++i) {
+            travel += instance.dist[perm[i - 1]][perm[i]];
+        }
+        travel += instance.dist[perm.back()][0];
+        best = std::min(best, travel);
+    } while (std::next_permutation(perm.begin(), perm.end()));
+    return best;
+}
+
+template <typename Fn>
+void enumerateStationSubsets(int V, int size, Fn&& fn) {
+    std::vector<int> subset;
+    std::function<void(int)> rec = [&](int start) {
+        if (static_cast<int>(subset.size()) == size) {
+            fn(subset);
+            return;
+        }
+        const int remaining = size - static_cast<int>(subset.size());
+        for (int i = start; i <= V - remaining + 1; ++i) {
+            subset.push_back(i);
+            rec(i + 1);
+            subset.pop_back();
+        }
+    };
+    rec(1);
+}
+
 std::string joinFamilies(const std::vector<std::string>& families) {
     if (families.empty()) return "none";
     std::ostringstream out;
@@ -378,6 +435,8 @@ void writeCompactLp(const Instance& instance,
     double s_upper_domain = 0.0;
     double penalty_lb_domain = 0.0;
     double penalty_ub_domain = 0.0;
+    std::vector<double> e_lower_domain(V + 1, 0.0);
+    std::vector<double> e_upper_domain(V + 1, 0.0);
     for (int i = 1; i <= V; ++i) {
         const double target = std::max(1e-12, static_cast<double>(instance.target[i]));
         const double r_lo = static_cast<double>(y_lb[i]) / target;
@@ -392,6 +451,8 @@ void writeCompactLp(const Instance& instance,
         }
         const double e_ub = std::max(std::fabs(r_lo - 1.0),
                                      std::fabs(r_hi - 1.0));
+        e_lower_domain[i] = std::max(0.0, e_lb);
+        e_upper_domain[i] = std::max(e_lower_domain[i], e_ub);
         penalty_lb_domain += instance.weights[i] * std::max(0.0, e_lb);
         penalty_ub_domain += instance.weights[i] * std::max(0.0, e_ub);
     }
@@ -573,18 +634,49 @@ void writeCompactLp(const Instance& instance,
             vars.add(hName(i, j), 0, ub, "C");
         }
     }
+    const double sp_s_lower = s_range_rows_active ? s_bucket_L : s_lower_domain;
+    const double sp_s_upper = s_range_rows_active ? s_bucket_U : s_upper_domain;
+    const bool add_disagg_sp_estimator =
+        strengthened && tailored_active && cutoff != nullptr && cutoff->enabled &&
+        cutoff->add_objective_cutoff &&
+        options.tailored_bc_disaggregated_sp_estimator &&
+        (options.tailored_bc_disaggregated_sp_mode == "static" ||
+         options.tailored_bc_disaggregated_sp_mode == "both") &&
+        s_range_rows_active &&
+        sp_s_upper >= sp_s_lower - 1e-12;
     const bool add_sp_product_estimator =
         strengthened && cutoff != nullptr && cutoff->enabled &&
         cutoff->add_objective_cutoff &&
         options.compact_bc_sp_product_estimator != "off" &&
         s_upper_domain > s_lower_domain - 1e-12 &&
-        penalty_ub_domain >= penalty_lb_domain - 1e-12;
-    const double sp_s_lower = s_range_rows_active ? s_bucket_L : s_lower_domain;
-    const double sp_s_upper = s_range_rows_active ? s_bucket_U : s_upper_domain;
+        penalty_ub_domain >= penalty_lb_domain - 1e-12 &&
+        !(add_disagg_sp_estimator &&
+          options.tailored_bc_disaggregated_sp_replace_aggregate);
     if (add_sp_product_estimator) {
         const double w_lb = std::max(0.0, sp_s_lower * penalty_lb_domain);
         const double w_ub = std::max(w_lb, sp_s_upper * penalty_ub_domain);
         vars.add("W_SP", w_lb, w_ub, "C");
+    }
+    const bool add_gs_product_coupling =
+        strengthened && tailored_active && cutoff != nullptr && cutoff->enabled &&
+        options.tailored_bc_gs_product_coupling &&
+        (options.tailored_bc_gs_product_coupling_mode == "static" ||
+         options.tailored_bc_gs_product_coupling_mode == "both") &&
+        s_range_rows_active &&
+        sp_s_upper >= sp_s_lower - 1e-12;
+    if (add_gs_product_coupling) {
+        const double w_lb = std::max(0.0, g_lb * sp_s_lower);
+        const double w_ub = std::max(w_lb, g_ub * sp_s_upper);
+        vars.add("W_GS", w_lb, w_ub, "C");
+        if (stats != nullptr) ++stats->gs_product_variable_added;
+    }
+    if (add_disagg_sp_estimator) {
+        for (int i = 1; i <= V; ++i) {
+            const double t_lb = std::max(0.0, sp_s_lower * e_lower_domain[i]);
+            const double t_ub = std::max(t_lb, sp_s_upper * e_upper_domain[i]);
+            vars.add("T_SP_" + std::to_string(i), t_lb, t_ub, "C");
+            if (stats != nullptr) ++stats->disagg_sp_variables_added;
+        }
     }
 
     std::filesystem::create_directories(lp_path.parent_path());
@@ -914,6 +1006,85 @@ void writeCompactLp(const Instance& instance,
                         }
                     }
                 }
+            }
+        }
+    }
+
+    if (strengthened && tailored_active && options.tailored_bc_vector_support_cover &&
+        (options.tailored_bc_vector_cut_candidate_source == "root" ||
+         options.tailored_bc_vector_cut_candidate_source == "both")) {
+        if (stats != nullptr) {
+            stats->enabled_families.push_back("vector_support_cover");
+        }
+        const int max_size = std::min({6, V, std::max(2, options.tailored_bc_vector_support_cover_max_size)});
+        constexpr long long max_candidates = 50000;
+        long long candidates = 0;
+        bool stop = false;
+        for (int k = 0; k < M && !stop; ++k) {
+            for (int s = 2; s <= max_size && !stop; ++s) {
+                enumerateStationSubsets(V, s, [&](const std::vector<int>& subset) {
+                    if (stop) return;
+                    if (++candidates > max_candidates) {
+                        stop = true;
+                        return;
+                    }
+                    if (stats != nullptr) ++stats->vector_support_cover_candidates;
+                    const double cycle_lb = subsetCycleLowerBound(instance, subset);
+                    const double min_handling =
+                        cunit * static_cast<double>((static_cast<int>(subset.size()) + 1) / 2);
+                    const double violation =
+                        cycle_lb + min_handling - instance.total_time_limit;
+                    if (violation <= 1e-9) return;
+                    Expr cut;
+                    for (int station : subset) addTerm(cut, zName(k, station), 1.0);
+                    writeConstraint(out, cid, cut, "<=",
+                                    static_cast<double>(subset.size() - 1));
+                    if (stats != nullptr) {
+                        ++stats->vector_support_cover_cuts_added;
+                        stats->vector_support_cover_max_violation =
+                            std::max(stats->vector_support_cover_max_violation, violation);
+                    }
+                });
+            }
+        }
+    }
+
+    if (strengthened && tailored_active && options.tailored_bc_vector_route_cutset &&
+        (options.tailored_bc_vector_cut_candidate_source == "root" ||
+         options.tailored_bc_vector_cut_candidate_source == "both")) {
+        if (stats != nullptr) {
+            stats->enabled_families.push_back("vector_route_cutset");
+        }
+        const int max_size = std::min({8, V, std::max(2, options.tailored_bc_vector_route_cutset_max_size)});
+        constexpr long long max_candidates = 50000;
+        long long candidates = 0;
+        bool stop = false;
+        for (int k = 0; k < M && !stop; ++k) {
+            for (int s = 2; s <= max_size && !stop; ++s) {
+                enumerateStationSubsets(V, s, [&](const std::vector<int>& subset) {
+                    if (stop) return;
+                    if (++candidates > max_candidates) {
+                        stop = true;
+                        return;
+                    }
+                    if (stats != nullptr) ++stats->vector_route_cutset_candidates;
+                    std::set<int> in_subset(subset.begin(), subset.end());
+                    for (int representative : subset) {
+                        Expr cut;
+                        for (int i = 0; i <= V; ++i) {
+                            const bool i_in = in_subset.count(i) > 0;
+                            for (int j = 0; j <= V; ++j) {
+                                if (i == j) continue;
+                                const bool j_in = in_subset.count(j) > 0;
+                                if (!i_in && j_in) addTerm(cut, xName(k, i, j), 1.0);
+                                if (i_in && !j_in) addTerm(cut, xName(k, i, j), 1.0);
+                            }
+                        }
+                        addTerm(cut, zName(k, representative), -2.0);
+                        writeConstraint(out, cid, cut, ">=", 0.0);
+                        if (stats != nullptr) ++stats->vector_route_cutset_cuts_added;
+                    }
+                });
             }
         }
     }
@@ -1741,6 +1912,87 @@ void writeCompactLp(const Instance& instance,
             writeConstraint(out, cid, s_hi, "<=", s_bucket_U);
             if (stats != nullptr) stats->s_range_rows_added += 2;
             s_upper = std::min(s_upper, s_bucket_U);
+        }
+        if (add_gs_product_coupling) {
+            if (stats != nullptr) {
+                stats->enabled_families.push_back("gs_product_coupling");
+            }
+            Expr s_expr;
+            for (int i = 1; i <= V; ++i) addTerm(s_expr, rName(i), 1);
+            Expr h_expr;
+            for (int i = 1; i <= V; ++i) {
+                for (int j = i + 1; j <= V; ++j) addTerm(h_expr, hName(i, j), 1);
+            }
+            // McCormick envelope for W_GS = G * S over
+            // G in [g_lb,g_ub], S in [sp_s_lower,sp_s_upper].
+            Expr gs1; addTerm(gs1, "W_GS", 1);
+            for (const auto& kv : s_expr) addTerm(gs1, kv.first, -g_lb * kv.second);
+            addTerm(gs1, "G", -sp_s_lower);
+            writeConstraint(out, cid, gs1, ">=", -g_lb * sp_s_lower);
+            Expr gs2; addTerm(gs2, "W_GS", 1);
+            for (const auto& kv : s_expr) addTerm(gs2, kv.first, -g_ub * kv.second);
+            addTerm(gs2, "G", -sp_s_upper);
+            writeConstraint(out, cid, gs2, ">=", -g_ub * sp_s_upper);
+            Expr gs3; addTerm(gs3, "W_GS", 1);
+            for (const auto& kv : s_expr) addTerm(gs3, kv.first, -g_ub * kv.second);
+            addTerm(gs3, "G", -sp_s_lower);
+            writeConstraint(out, cid, gs3, "<=", -g_ub * sp_s_lower);
+            Expr gs4; addTerm(gs4, "W_GS", 1);
+            for (const auto& kv : s_expr) addTerm(gs4, kv.first, -g_lb * kv.second);
+            addTerm(gs4, "G", -sp_s_upper);
+            writeConstraint(out, cid, gs4, "<=", -g_lb * sp_s_upper);
+            if (stats != nullptr) stats->gs_mccormick_rows_added += 4;
+
+            Expr h_upper = h_expr;
+            addTerm(h_upper, "W_GS", -static_cast<double>(V));
+            writeConstraint(out, cid, h_upper, "<=", 0.0);
+            if (stats != nullptr) ++stats->gs_h_upper_rows_added;
+            if (options.tailored_bc_gs_product_lower_row != "off") {
+                Expr h_lower = h_expr;
+                addTerm(h_lower, "W_GS", -static_cast<double>(V));
+                writeConstraint(out, cid, h_lower, ">=", 0.0);
+                if (stats != nullptr) ++stats->gs_h_lower_rows_added;
+            }
+        }
+        if (add_disagg_sp_estimator) {
+            if (stats != nullptr) {
+                stats->enabled_families.push_back("disaggregated_sp_estimator");
+            }
+            Expr s_expr;
+            for (int i = 1; i <= V; ++i) addTerm(s_expr, rName(i), 1);
+            for (int i = 1; i <= V; ++i) {
+                const std::string t_name = "T_SP_" + std::to_string(i);
+                const double e_l = e_lower_domain[i];
+                const double e_u = e_upper_domain[i];
+                Expr t1; addTerm(t1, t_name, 1);
+                for (const auto& kv : s_expr) addTerm(t1, kv.first, -e_l * kv.second);
+                addTerm(t1, eName(i), -sp_s_lower);
+                writeConstraint(out, cid, t1, ">=", -sp_s_lower * e_l);
+                Expr t2; addTerm(t2, t_name, 1);
+                for (const auto& kv : s_expr) addTerm(t2, kv.first, -e_u * kv.second);
+                addTerm(t2, eName(i), -sp_s_upper);
+                writeConstraint(out, cid, t2, ">=", -sp_s_upper * e_u);
+                Expr t3; addTerm(t3, t_name, 1);
+                for (const auto& kv : s_expr) addTerm(t3, kv.first, -e_l * kv.second);
+                addTerm(t3, eName(i), -sp_s_upper);
+                writeConstraint(out, cid, t3, "<=", -sp_s_upper * e_l);
+                Expr t4; addTerm(t4, t_name, 1);
+                for (const auto& kv : s_expr) addTerm(t4, kv.first, -e_u * kv.second);
+                addTerm(t4, eName(i), -sp_s_lower);
+                writeConstraint(out, cid, t4, "<=", -sp_s_lower * e_u);
+                if (stats != nullptr) stats->disagg_sp_mccormick_rows_added += 4;
+            }
+            Expr disagg_estimator;
+            for (int i = 1; i <= V; ++i) {
+                for (int j = i + 1; j <= V; ++j) addTerm(disagg_estimator, hName(i, j), 1);
+            }
+            for (int i = 1; i <= V; ++i) {
+                addTerm(disagg_estimator, "T_SP_" + std::to_string(i),
+                        static_cast<double>(V) * options.lambda * instance.weights[i]);
+                addTerm(disagg_estimator, rName(i), -static_cast<double>(V) * cutoff_value);
+            }
+            writeConstraint(out, cid, disagg_estimator, "<=", 0.0);
+            if (stats != nullptr) ++stats->disagg_sp_estimator_rows_added;
         }
         if (strengthened && options.compact_bc_objective_estimator_cutoff &&
             cutoff->add_objective_cutoff && std::isfinite(s_upper) && s_upper > 1e-12) {
@@ -3063,7 +3315,14 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             strengthening_stats.tailored_transfer_cutset_cuts_added +
             strengthening_stats.tailored_compatible_source_transfer_cuts_added +
             strengthening_stats.tailored_required_external_source_cuts_added +
-            strengthening_stats.tailored_benders_inventory_cuts_added;
+            strengthening_stats.tailored_benders_inventory_cuts_added +
+            strengthening_stats.gs_mccormick_rows_added +
+            strengthening_stats.gs_h_upper_rows_added +
+            strengthening_stats.gs_h_lower_rows_added +
+            strengthening_stats.disagg_sp_mccormick_rows_added +
+            strengthening_stats.disagg_sp_estimator_rows_added +
+            strengthening_stats.vector_support_cover_cuts_added +
+            strengthening_stats.vector_route_cutset_cuts_added;
         result.tailored_bc_low_gini_l1_centering_vars =
             strengthening_stats.tailored_low_gini_l1_vars;
         result.tailored_bc_low_gini_l1_centering_rows_added =
@@ -3144,6 +3403,70 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             strengthening_stats.tailored_benders_inventory_cuts_added;
         result.tailored_bc_benders_inventory_candidates =
             strengthening_stats.tailored_benders_inventory_candidates;
+        result.tailored_bc_gs_product_coupling_enabled =
+            model_options.tailored_bc_gs_product_coupling;
+        result.tailored_bc_gs_product_coupling_mode =
+            model_options.tailored_bc_gs_product_coupling_mode;
+        result.tailored_bc_gs_product_lower_row =
+            model_options.tailored_bc_gs_product_lower_row;
+        result.gs_product_variable_added =
+            strengthening_stats.gs_product_variable_added;
+        result.gs_mccormick_rows_added =
+            strengthening_stats.gs_mccormick_rows_added;
+        result.gs_h_upper_rows_added =
+            strengthening_stats.gs_h_upper_rows_added;
+        result.gs_h_lower_rows_added =
+            strengthening_stats.gs_h_lower_rows_added;
+        result.gs_product_coupling_proof_status =
+            result.gs_h_upper_rows_added > 0
+                ? (model_options.tailored_bc_gs_product_lower_row == "paper-safe"
+                       ? "upper_and_lower_rows_paper_safe"
+                       : "upper_row_paper_safe_lower_row_" +
+                             model_options.tailored_bc_gs_product_lower_row)
+                : "not_enabled";
+        result.tailored_bc_disaggregated_sp_estimator_enabled =
+            model_options.tailored_bc_disaggregated_sp_estimator;
+        result.tailored_bc_disaggregated_sp_mode =
+            model_options.tailored_bc_disaggregated_sp_mode;
+        result.tailored_bc_disaggregated_sp_replace_aggregate =
+            model_options.tailored_bc_disaggregated_sp_replace_aggregate;
+        result.disagg_sp_variables_added =
+            strengthening_stats.disagg_sp_variables_added;
+        result.disagg_sp_mccormick_rows_added =
+            strengthening_stats.disagg_sp_mccormick_rows_added;
+        result.disagg_sp_estimator_rows_added =
+            strengthening_stats.disagg_sp_estimator_rows_added;
+        result.disagg_sp_proof_status =
+            result.disagg_sp_estimator_rows_added > 0
+                ? "paper_safe_bucket_local_disaggregated_sp_estimator"
+                : "not_enabled";
+        result.tailored_bc_vector_support_cover_enabled =
+            model_options.tailored_bc_vector_support_cover;
+        result.tailored_bc_vector_support_cover_max_size =
+            model_options.tailored_bc_vector_support_cover_max_size;
+        result.tailored_bc_vector_route_cutset_enabled =
+            model_options.tailored_bc_vector_route_cutset;
+        result.tailored_bc_vector_route_cutset_max_size =
+            model_options.tailored_bc_vector_route_cutset_max_size;
+        result.tailored_bc_vector_cut_candidate_source =
+            model_options.tailored_bc_vector_cut_candidate_source;
+        result.vector_support_cover_candidates =
+            strengthening_stats.vector_support_cover_candidates;
+        result.vector_support_cover_cuts_added =
+            strengthening_stats.vector_support_cover_cuts_added;
+        result.vector_support_cover_max_violation =
+            strengthening_stats.vector_support_cover_max_violation;
+        result.vector_route_cutset_candidates =
+            strengthening_stats.vector_route_cutset_candidates;
+        result.vector_route_cutset_cuts_added =
+            strengthening_stats.vector_route_cutset_cuts_added;
+        result.vector_route_cutset_max_violation =
+            strengthening_stats.vector_route_cutset_max_violation;
+        result.vector_route_cuts_proof_status =
+            (result.vector_support_cover_cuts_added > 0 ||
+             result.vector_route_cutset_cuts_added > 0)
+                ? "paper_safe_universal_rows_vector_selected_candidates"
+                : "not_enabled";
         {
             std::ostringstream tbc;
             tbc << "gini_subset_envelope="
@@ -3179,7 +3502,18 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 << ";required_external_source="
                 << result.tailored_bc_required_external_source_cuts_added
                 << ";benders_inventory_diagnostic="
-                << result.tailored_bc_benders_inventory_cuts_added;
+                << result.tailored_bc_benders_inventory_cuts_added
+                << ";gs_product_coupling="
+                << (result.gs_mccormick_rows_added +
+                    result.gs_h_upper_rows_added +
+                    result.gs_h_lower_rows_added)
+                << ";disaggregated_sp_estimator="
+                << (result.disagg_sp_mccormick_rows_added +
+                    result.disagg_sp_estimator_rows_added)
+                << ";vector_support_cover="
+                << result.vector_support_cover_cuts_added
+                << ";vector_route_cutset="
+                << result.vector_route_cutset_cuts_added;
             result.tailored_bc_user_cuts_added_by_family = tbc.str();
         }
         result.compact_bc_support_duration_pair_cuts_added =
@@ -3241,6 +3575,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                  << ";bucket_subset_required_movement=" << result.bucket_subset_required_movement_rows_added
                  << ";tailored_transfer_cutset=" << result.tailored_bc_transfer_cutset_cuts_added
                  << ";tailored_benders_inventory_diagnostic=" << result.tailored_bc_benders_inventory_cuts_added
+                 << ";gs_product_coupling=" << (result.gs_mccormick_rows_added + result.gs_h_upper_rows_added + result.gs_h_lower_rows_added)
+                 << ";disaggregated_sp_estimator=" << (result.disagg_sp_mccormick_rows_added + result.disagg_sp_estimator_rows_added)
+                 << ";vector_support_cover=" << result.vector_support_cover_cuts_added
+                 << ";vector_route_cutset=" << result.vector_route_cutset_cuts_added
                  << ";gini_spread=" << result.gini_spread_cuts_added
                  << ";required_movement=" << result.required_movement_cuts_added
                  << ";global_handling_capacity=" << result.global_handling_capacity_cuts_added
@@ -3455,6 +3793,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     api_solve.relaxation_vector_sample_variable_names;
                 result.tailored_bc_callback_vector_sample_variable_values =
                     api_solve.relaxation_vector_sample_variable_values;
+                result.tailored_bc_callback_vector_full_variable_names =
+                    api_solve.relaxation_vector_full_variable_names;
+                result.tailored_bc_callback_vector_full_variable_values =
+                    api_solve.relaxation_vector_full_variable_values;
                 result.tailored_bc_callback_vector_failure_reason =
                     api_solve.relaxation_vector_failure_reason;
                 result.tailored_bc_callback_candidate_vector_api_called =
@@ -3471,6 +3813,10 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     api_solve.candidate_vector_sample_variable_names;
                 result.tailored_bc_callback_candidate_vector_sample_variable_values =
                     api_solve.candidate_vector_sample_variable_values;
+                result.tailored_bc_callback_candidate_vector_full_variable_names =
+                    api_solve.candidate_vector_full_variable_names;
+                result.tailored_bc_callback_candidate_vector_full_variable_values =
+                    api_solve.candidate_vector_full_variable_values;
                 result.tailored_bc_callback_candidate_vector_failure_reason =
                     api_solve.candidate_vector_failure_reason;
                 result.tailored_bc_user_cuts_added_total +=

@@ -41,6 +41,8 @@ struct TailoredBCCplexApiSolveResult {
     double relaxation_vector_objective = 0.0;
     std::string relaxation_vector_sample_variable_names;
     std::string relaxation_vector_sample_variable_values;
+    std::string relaxation_vector_full_variable_names;
+    std::string relaxation_vector_full_variable_values;
     std::string relaxation_vector_failure_reason;
     bool candidate_vector_snapshot_available = false;
     bool candidate_vector_api_called = false;
@@ -51,6 +53,8 @@ struct TailoredBCCplexApiSolveResult {
     double candidate_vector_objective = 0.0;
     std::string candidate_vector_sample_variable_names;
     std::string candidate_vector_sample_variable_values;
+    std::string candidate_vector_full_variable_names;
+    std::string candidate_vector_full_variable_values;
     std::string candidate_vector_failure_reason;
     bool best_bound_available = false;
     std::string best_bound_fail_reason;

@@ -1,0 +1,173 @@
+audit_section,mechanism_name,formula,where_implemented,proof_source,audit_script,paper_safe,conditional_valid,diagnostic_only,audit_passed,failures,file,line,line_text,warning_only
+global_optimality_logic,invariant_1,"Gini interval parent closure requires relaxation, exact fixed-interval Tailored-BC proof, or complete child coverage.",docs and audit scripts,docs/paper_strict_algorithm_audit.md,audit_paper_strict_algorithm.py,True,True,False,True,,,,,
+global_optimality_logic,invariant_2,S-bucket parent closure requires exact S-domain coverage and closed/fathomed children.,docs and audit scripts,docs/paper_strict_algorithm_audit.md,audit_paper_strict_algorithm.py,True,True,False,True,,,,,
+global_optimality_logic,invariant_3,Wrapper checkpoints remain diagnostic unless accepted by audited merge rules.,docs and audit scripts,docs/paper_strict_algorithm_audit.md,audit_paper_strict_algorithm.py,True,True,False,True,,,,,
+global_optimality_logic,invariant_4,Plain CPLEX benchmark rows are benchmark-only and excluded from paper-gf-tailored-bc ledger.,docs and audit scripts,docs/paper_strict_algorithm_audit.md,audit_paper_strict_algorithm.py,True,True,False,True,,,,,
+global_optimality_logic,invariant_5,"BPC, route-mask enumeration, archive, known-UB, and focus-only evidence are excluded from paper-gf-tailored-bc.",docs and audit scripts,docs/paper_strict_algorithm_audit.md,audit_paper_strict_algorithm.py,True,True,False,True,,,,,
+global_optimality_logic,invariant_6,Default paper-facing preset remains paper-gf-tailored-bc.,docs and audit scripts,docs/paper_strict_algorithm_audit.md,audit_paper_strict_algorithm.py,True,True,False,True,,,,,
+mechanism,direct Gini interval rows,gamma_L <= G <= gamma_U and H <= V gamma_U S,src/CplexBaseline.cpp,docs/gf_compact_bc_validity_proofs.md; docs/s_range_denominator_refinement.md,audit_low_gini_cut_validity.py,True,True,False,True,,,,,
+mechanism,objective cutoff rows,G + lambda P <= UB - epsilon,src/CplexBaseline.cpp,docs/gf_compact_bc_validity_proofs.md,audit_bpc_certificate.py,True,True,False,True,,,,,
+mechanism,S-bucket rows,S_L^b <= sum_i r_i <= S_U^b,src/CplexBaseline.cpp; scripts/run_tailored_bc_*s_bucket*.py,docs/s_range_denominator_refinement.md,audit_s_bucket_coverage.py; audit_s_bucket_ledger_merge.py,True,True,False,True,,,,,
+mechanism,bucket-tight S*P McCormick,McCormick envelope for W_SP=S*P over bucket-local S and P bounds,src/CplexBaseline.cpp,docs/s_range_denominator_refinement.md,audit_low_gini_cut_validity.py,True,True,False,True,,,,,
+mechanism,bucket-tight objective estimator,H + V*S_U^b*lambda*P <= V*S_U^b*(UB-epsilon),src/CplexBaseline.cpp,docs/s_range_denominator_refinement.md,audit_low_gini_cut_validity.py,True,True,False,True,,,,,
+mechanism,local centering,V r_i - S <= sum_{j != i} h_ij and symmetric lower row,src/CplexBaseline.cpp,docs/low_gini_strengthening_cuts.md,audit_low_gini_cut_validity.py,True,True,False,True,,,,,
+mechanism,local q-centering,q_i dominates |V r_i-S| and V q_i <= sum_{j != i} h_ij,src/CplexBaseline.cpp,docs/low_gini_strengthening_cuts.md,audit_low_gini_cut_validity.py,True,True,False,True,,,,,
+mechanism,subset cross-H centering,"|V R_A - |A| S| <= sum_{i in A,j notin A} h_ij",src/CplexBaseline.cpp; src/TailoredBCCplexApi.cpp,docs/low_gini_strengthening_cuts.md,audit_low_gini_cut_validity.py,True,True,False,True,,,,,
+mechanism,Gini subset-envelope,|V R_A - |A| S| <= V gamma_U S,src/CplexBaseline.cpp,docs/gf_compact_bc_validity_proofs.md,audit_low_gini_cut_validity.py,True,True,False,True,,,,,
+mechanism,variable-S centering,(V-1)(r_max-r_min) <= V gamma_U S,src/CplexBaseline.cpp,docs/variable_s_low_gini_centering.md,audit_low_gini_cut_validity.py,True,True,False,True,,,,,
+mechanism,basic transfer cutset,receiver net delivery cannot exceed compatible external pickup support,src/CplexBaseline.cpp; src/TailoredBCCplexApi.cpp,docs/receiver_set_source_cover_round2.md; docs/low_gini_strengthening_cuts.md,audit_transfer_cut_validity.py,True,True,False,True,,,,,
+mechanism,compatible-source transfer cuts,"d[k,j] <= sum_{i in Compat_k(j)} p[k,i]",src/CplexBaseline.cpp,docs/receiver_set_source_cover_proof.md,audit_transfer_cut_validity.py,True,True,False,True,,,,,
+mechanism,required external-source cuts,required receiver net delivery is covered by compatible outside pickups,src/CplexBaseline.cpp,docs/receiver_set_source_cover_pair_proof.md,audit_transfer_cut_validity.py,True,True,False,True,,,,,
+mechanism,subset inventory movement bounds,subset inventory imbalance bounded by reachable pickup/drop movement,src/CplexBaseline.cpp,docs/low_gini_strengthening_cuts.md,audit_low_gini_cut_validity.py,True,True,False,True,,,,,
+mechanism,bucket ratio-domain tightening,"r_i in [(1/V-gamma_U)S_L, (1/V+gamma_U)S_U]",src/CplexBaseline.cpp,docs/bucket_ratio_domain_tightening.md,audit_bucket_ratio_domain_tightening.py,True,True,False,True,,,,,
+mechanism,bucket integer inventory domain tightening,"Y_i in [ceil(target_i*r_i^L), floor(target_i*r_i^U)] inside an enforced S bucket",src/CplexBaseline.cpp,docs/bucket_integer_inventory_domain_tightening.md,audit_bucket_integer_inventory_domain.py,True,True,False,True,,,,,
+mechanism,bucket required movement and visit cuts,bucket-tight Y bounds imply station/subset net pickup/drop requirements and required visits,src/CplexBaseline.cpp,docs/bucket_required_movement.md,audit_bucket_required_movement.py,True,True,False,True,,,,,
+mechanism,S-P-H coupled estimator,H + V lambda W_SP <= V(UB-epsilon)S with bucket-local McCormick W_SP,src/CplexBaseline.cpp,docs/sp_h_coupled_estimator.md,audit_low_gini_cut_validity.py; audit_lp_snapshot_integrity.py,True,True,False,True,,,,,
+mechanism,G-S-H product coupling,bucket-local W_GS=G*S McCormick with H <= V W_GS,src/CplexBaseline.cpp,docs/gs_h_product_coupling.md,audit_gs_h_product_coupling.py,True,True,False,True,,,,,
+mechanism,disaggregated S-e_i estimator,T_i=S e_i and H + V lambda sum_i w_i T_i <= V(UB-epsilon)S,src/CplexBaseline.cpp,docs/disaggregated_sp_estimator.md,audit_disaggregated_sp_estimator.py,True,True,False,True,,,,,
+mechanism,vector-selected route support and cutset cuts,support-duration covers and directed route cutsets selected from vector candidates,src/CplexBaseline.cpp,docs/vector_driven_route_cuts.md,audit_vector_route_cuts.py,True,True,False,True,,,,,
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\compare_main.cpp,619,"out << ""instance,method,method_scope,solves_original_objective,is_bpc,certificate_type,""",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,49,"<< ""Usage: ExactEBRP --method tailored|cplex|interval-cutoff-oracle|primal-heuristic|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|rou",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,85,"<< ""[--external-incumbent <path>] [--external-incumbent-format auto|route_json|csv|legacy_text] [--export-incumbent <path>] """,True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\main.cpp,144,"<< ""[--algorithm-preset paper-gf-tailored-bc|paper-gf-compact-bc|paper-gf-bpc-core|paper-bpc-core|paper-bpc-core-adaptive|paper-exact-v20-certificate|paper-exact-portfolio|paper-bpc-experimental|diagnostic-large] """,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,1037,"else if (arg == ""--external-incumbent"") opt.external_incumbent_path = requireValue(i, argc, argv);",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,1038,"else if (arg == ""--external-incumbent-format"") opt.external_incumbent_format = requireValue(i, argc, argv);",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,2126,"sealed_rejections.push_back(""external_incumbent_json_requested"");",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,2131,if (!opt.external_incumbent_path.empty()) {,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,2132,"sealed_rejections.push_back(""external_incumbent_requested"");",True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,2363,result.route_mask_all_subset_enumeration_certifying =,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,2370,result.route_mask_all_subset_enumeration_certifying = false;,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,2376,result.route_mask_all_subset_enumeration_certifying = false;,True
+source_scan,instance-name mention,,,,,True,False,False,True,,src\main.cpp,2443,"name.find(""regen_candidate"") != std::string::npos) {",True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,2472,snapshot.route_mask_all_subset_enumeration_certifying =,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,2478,snapshot.route_mask_all_subset_enumeration_certifying = false;,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,2482,snapshot.route_mask_all_subset_enumeration_certifying = false;,True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\main.cpp,2514,"""route_load_bpc_certificate,all_subset_route_mask_enumeration,""",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,2515,"""archive_scanning,known_ub_injection,external_incumbent,""",True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\main.cpp,2527,"""route_load_bpc_certificate,all_subset_route_mask_enumeration,""",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,2528,"""archive_scanning,known_ub_injection,external_incumbent,""",True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,2539,"""all_subset_route_mask_enumeration,interval_oracle_certificate,""",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,2540,"""compact_oracle_certificate,archive_scanning,hybrid_ng_dssr,""",True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\main.cpp,2547,"snapshot.preset_certificate_scope = ""core_bpc_certificate_when_frontier_closes"";",True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\main.cpp,2556,"""core_bpc_certificate_with_adaptive_relaxation_portfolio"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,2571,"""archive_scanning,hybrid_ng_dssr,two_track_relaxed_rmp,""",True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\main.cpp,2577,"""bpc_or_compact_module_certificate_when_gap_closes"";",True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,2637,result.route_mask_all_subset_enumeration_certifying =,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,2638,snapshot.route_mask_all_subset_enumeration_certifying;,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,2756,const bool route_mask_in_certificate_text =,True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\main.cpp,2816,result.bpc_core_certificate_valid =,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,2820,!route_mask_in_certificate_text &&,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,2821,!result.route_mask_all_subset_enumeration_certifying &&,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,2827,!route_mask_in_certificate_text &&,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,2836,!route_mask_in_certificate_text &&,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,2837,!result.route_mask_all_subset_enumeration_certifying &&,True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\main.cpp,3244,result.relaxed_rmp_certificate_valid || bpc.relaxed_rmp_certificate_valid;,True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\main.cpp,3245,if (!bpc.relaxed_rmp_certificate_rejection_reason.empty()) {,True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\main.cpp,3247,bpc.relaxed_rmp_certificate_rejection_reason;,True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\main.cpp,3321,if (bpc.relaxed_rmp_certificate_valid) {,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,4320,!result.route_mask_all_subset_enumeration_certifying);,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,4387,"ebrp::SolveResult solveExternalIncumbentDiagnostic(const ebrp::Instance& instance,",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,4391,if (opt.external_incumbent_path.empty()) {,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,4393,"? std::filesystem::path(""results/optimization_update_round12/raw/external_incumbent_synthetic.json"")",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,4394,": std::filesystem::path(opt.out_path).parent_path() / ""external_incumbent_synthetic.json"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,4397,opt.external_incumbent_path = generated_path;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,4398,"opt.external_incumbent_format = ""route_json"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,4401,"result.method = ""external-incumbent-test"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,4402,result.external_incumbent_attempted = true;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,8326,!opt.hga_incumbent_path.empty() || !opt.external_incumbent_path.empty();,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,8327,result.external_incumbent_attempted = !opt.external_incumbent_path.empty();,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,8356,result.external_incumbent_verified = true;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,8357,result.external_incumbent_objective = verification.objective;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,8358,result.external_incumbent_G = verification.G;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,8359,result.external_incumbent_P = verification.P;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,8360,"result.external_incumbent_rejection_reason = ""none"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,8361,result.external_incumbent_used_in_large_run = instance.V >= 20;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,8362,result.external_incumbent_effect_on_UB =,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,8371,result.external_incumbent_rejection_reason =,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,8379,result.external_incumbent_rejection_reason = e.what();,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,8386,"testPath(opt.external_incumbent_path, opt.external_incumbent_format, ""external-incumbent"");",True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,9385,"auto claim = make_claim(""route_mask_not_certifying"");",True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,9390,claim.route_mask_all_subset_enumeration_certifying = false;,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,9391,"add_rejected(""route_mask_not_certifying"", claim);",True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\main.cpp,10957,"""paper-bpc-core skipped default BPC-owned auto incumbent portfolio because a verified archive incumbent was already accepted as UB-only cutoff; no lower-bound certificate is inherited from the archive"");",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,11098,result.external_incumbent_verified = true;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,11099,result.external_incumbent_objective = imported.objective;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,11100,result.external_incumbent_G = imported.G;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,11101,result.external_incumbent_P = imported.P;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,11102,result.external_incumbent_used_in_large_run = instance.V >= 20;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,11103,"result.external_incumbent_rejection_reason = ""none"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,11118,result.external_incumbent_effect_on_UB =,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,15937,result.no_archive_scanning =,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,15940,result.no_external_known_ub =,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,15943,opt.external_incumbent_path.empty() &&,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,15946,!result.external_incumbent_attempted;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,15966,"if (!result.no_archive_scanning) rejections.push_back(""archive_scanning_or_archive_ub"");",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,15967,"if (!result.no_external_known_ub) rejections.push_back(""external_known_ub_or_import"");",True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\main.cpp,17108,result.bpc_interval_certificate_basis =,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\main.cpp,17210,result.route_mask_all_subset_enumeration_certifying = false;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,17230,result.no_archive_scanning = !opt.incumbent_archive_auto;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,17231,result.no_external_known_ub = opt.incumbent_json_path.empty() &&,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,17232,opt.external_incumbent_path.empty() && opt.hga_incumbent_path.empty();,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,17407,"} else if (opt.method == ""external-incumbent-test"") {",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\main.cpp,17408,"results.push_back(solveExternalIncumbentDiagnostic(instance, opt));",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,158,"method == ""external-incumbent-test"" ||",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,250,"if (method == ""external-incumbent-test"") return ""external_incumbent_diagnostic"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,298,if (!result.no_archive_scanning) return false;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,299,if (!result.no_external_known_ub) return false;,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\Result.cpp,316,if (result.route_mask_all_subset_enumeration_certifying) return false;,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\Result.cpp,334,const bool route_mask_based_certificate =,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\Result.cpp,339,route_mask_based_certificate) {,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\Result.cpp,342,if (route_mask_based_certificate &&,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\Result.cpp,343,!result.route_mask_all_subset_enumeration_certifying) {,True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\Result.cpp,348,if (!result.bpc_core_certificate_valid) return false;,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\Result.cpp,704,"out << ""  \""route_mask_all_subset_enumeration_certifying\"": """,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,src\Result.cpp,705,"<< (result.route_mask_all_subset_enumeration_certifying ? ""true"" : ""false"") << "",\n"";",True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\Result.cpp,1030,"out << ""  \""bpc_core_certificate_valid\"": """,True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\Result.cpp,1031,"<< (result.bpc_core_certificate_valid ? ""true"" : ""false"") << "",\n"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,1080,"out << ""  \""external_incumbent_attempted\"": """,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,1081,"<< (result.external_incumbent_attempted ? ""true"" : ""false"") << "",\n"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,1082,"out << ""  \""external_incumbent_verified\"": """,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,1083,"<< (result.external_incumbent_verified ? ""true"" : ""false"") << "",\n"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,1084,"out << ""  \""external_incumbent_objective\"": """,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,1085,"<< result.external_incumbent_objective << "",\n"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,1086,"out << ""  \""external_incumbent_G\"": """,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,1087,"<< result.external_incumbent_G << "",\n"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,1088,"out << ""  \""external_incumbent_P\"": """,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,1089,"<< result.external_incumbent_P << "",\n"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,1090,"out << ""  \""external_incumbent_rejection_reason\"": \""""",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,1091,"<< jsonEscape(result.external_incumbent_rejection_reason) << ""\"",\n"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,2044,"out << ""  \""no_archive_scanning\"": """,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,2045,"<< (result.no_archive_scanning ? ""true"" : ""false"") << "",\n"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,2046,"out << ""  \""no_external_known_ub\"": """,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,2047,"<< (result.no_external_known_ub ? ""true"" : ""false"") << "",\n"";",True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\Result.cpp,2113,"out << ""  \""bpc_interval_certificate_basis\"": \""""",True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,src\Result.cpp,2114,"<< jsonEscape(result.bpc_interval_certificate_basis) << ""\"",\n"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,2278,"out << ""  \""external_incumbent_used_in_large_run\"": """,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,2279,"<< (result.external_incumbent_used_in_large_run ? ""true"" : ""false"") << "",\n"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,2280,"out << ""  \""external_incumbent_used\"": """,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,2281,"<< (result.external_incumbent_used ? ""true"" : ""false"") << "",\n"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,2282,"out << ""  \""external_incumbent_effect_on_UB\"": """,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,2283,"<< result.external_incumbent_effect_on_UB << "",\n"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,2284,"out << ""  \""external_incumbent_improved_UB\"": """,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,2285,"<< (result.external_incumbent_improved_UB ? ""true"" : ""false"") << "",\n"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,2286,"out << ""  \""external_incumbent_effect_on_frontier_range\"": """,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,src\Result.cpp,2287,"<< result.external_incumbent_effect_on_frontier_range << "",\n"";",True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,include\Instance.hpp,340,std::string external_incumbent_path;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,include\Instance.hpp,341,"std::string external_incumbent_format = ""auto"";",True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,include\Instance.hpp,458,bool route_mask_all_subset_enumeration_certifying = true;,True
+source_scan,route-mask certificate mention,,,,,True,False,False,True,,include\Result.hpp,211,bool route_mask_all_subset_enumeration_certifying = true;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,include\Result.hpp,305,bool external_incumbent_used = false;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,include\Result.hpp,306,bool external_incumbent_improved_UB = false;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,include\Result.hpp,307,double external_incumbent_effect_on_frontier_range = 0.0;,True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,include\Result.hpp,379,bool bpc_core_certificate_valid = false;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,include\Result.hpp,409,bool external_incumbent_attempted = false;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,include\Result.hpp,410,bool external_incumbent_verified = false;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,include\Result.hpp,411,double external_incumbent_objective = 0.0;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,include\Result.hpp,412,double external_incumbent_G = 0.0;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,include\Result.hpp,413,double external_incumbent_P = 0.0;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,include\Result.hpp,414,std::string external_incumbent_rejection_reason;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,include\Result.hpp,910,bool no_archive_scanning = true;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,include\Result.hpp,911,bool no_external_known_ub = true;,True
+source_scan,BPC certificate mention,,,,,True,False,False,True,,include\Result.hpp,961,std::string bpc_interval_certificate_basis;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,include\Result.hpp,1035,bool external_incumbent_used_in_large_run = false;,True
+source_scan,known UB/archive/external incumbent mention,,,,,True,False,False,True,,include\Result.hpp,1036,double external_incumbent_effect_on_UB = 0.0;,True

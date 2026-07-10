@@ -198,6 +198,36 @@ MECHANISMS: List[Dict[str, Any]] = [
         "conditional_valid": True,
         "diagnostic_only": False,
     },
+    {
+        "mechanism_name": "G-S-H product coupling",
+        "formula": "bucket-local W_GS=G*S McCormick with H <= V W_GS",
+        "where_implemented": "src/CplexBaseline.cpp",
+        "proof_source": "docs/gs_h_product_coupling.md",
+        "audit_script": "audit_gs_h_product_coupling.py",
+        "paper_safe": True,
+        "conditional_valid": True,
+        "diagnostic_only": False,
+    },
+    {
+        "mechanism_name": "disaggregated S-e_i estimator",
+        "formula": "T_i=S e_i and H + V lambda sum_i w_i T_i <= V(UB-epsilon)S",
+        "where_implemented": "src/CplexBaseline.cpp",
+        "proof_source": "docs/disaggregated_sp_estimator.md",
+        "audit_script": "audit_disaggregated_sp_estimator.py",
+        "paper_safe": True,
+        "conditional_valid": True,
+        "diagnostic_only": False,
+    },
+    {
+        "mechanism_name": "vector-selected route support and cutset cuts",
+        "formula": "support-duration covers and directed route cutsets selected from vector candidates",
+        "where_implemented": "src/CplexBaseline.cpp",
+        "proof_source": "docs/vector_driven_route_cuts.md",
+        "audit_script": "audit_vector_route_cuts.py",
+        "paper_safe": True,
+        "conditional_valid": True,
+        "diagnostic_only": False,
+    },
 ]
 
 IMPLEMENTATION_PATTERNS = {

@@ -1681,6 +1681,10 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.tailored_bc_callback_vector_sample_variable_names) << "\",\n";
     out << "  \"tailored_bc_callback_vector_sample_variable_values\": \""
         << jsonEscape(result.tailored_bc_callback_vector_sample_variable_values) << "\",\n";
+    out << "  \"tailored_bc_callback_vector_full_variable_names\": \""
+        << jsonEscape(result.tailored_bc_callback_vector_full_variable_names) << "\",\n";
+    out << "  \"tailored_bc_callback_vector_full_variable_values\": \""
+        << jsonEscape(result.tailored_bc_callback_vector_full_variable_values) << "\",\n";
     out << "  \"tailored_bc_callback_vector_failure_reason\": \""
         << jsonEscape(result.tailored_bc_callback_vector_failure_reason) << "\",\n";
     out << "  \"tailored_bc_callback_candidate_vector_api_called\": "
@@ -1697,6 +1701,10 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.tailored_bc_callback_candidate_vector_sample_variable_names) << "\",\n";
     out << "  \"tailored_bc_callback_candidate_vector_sample_variable_values\": \""
         << jsonEscape(result.tailored_bc_callback_candidate_vector_sample_variable_values) << "\",\n";
+    out << "  \"tailored_bc_callback_candidate_vector_full_variable_names\": \""
+        << jsonEscape(result.tailored_bc_callback_candidate_vector_full_variable_names) << "\",\n";
+    out << "  \"tailored_bc_callback_candidate_vector_full_variable_values\": \""
+        << jsonEscape(result.tailored_bc_callback_candidate_vector_full_variable_values) << "\",\n";
     out << "  \"tailored_bc_callback_candidate_vector_failure_reason\": \""
         << jsonEscape(result.tailored_bc_callback_candidate_vector_failure_reason) << "\",\n";
     out << "  \"tailored_bc_lazy_rejections_total\": "
@@ -1885,6 +1893,70 @@ std::string resultToJson(const SolveResult& input) {
         << result.tailored_bc_benders_inventory_cuts_added << ",\n";
     out << "  \"tailored_bc_benders_inventory_candidates\": "
         << result.tailored_bc_benders_inventory_candidates << ",\n";
+    out << "  \"tailored_bc_gs_product_coupling_enabled\": "
+        << (result.tailored_bc_gs_product_coupling_enabled ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_gs_product_coupling_mode\": \""
+        << jsonEscape(result.tailored_bc_gs_product_coupling_mode) << "\",\n";
+    out << "  \"tailored_bc_gs_product_lower_row\": \""
+        << jsonEscape(result.tailored_bc_gs_product_lower_row) << "\",\n";
+    out << "  \"gs_product_variable_added\": "
+        << result.gs_product_variable_added << ",\n";
+    out << "  \"gs_mccormick_rows_added\": "
+        << result.gs_mccormick_rows_added << ",\n";
+    out << "  \"gs_h_upper_rows_added\": "
+        << result.gs_h_upper_rows_added << ",\n";
+    out << "  \"gs_h_lower_rows_added\": "
+        << result.gs_h_lower_rows_added << ",\n";
+    out << "  \"gs_product_coupling_violations\": "
+        << result.gs_product_coupling_violations << ",\n";
+    out << "  \"gs_product_coupling_max_violation\": "
+        << result.gs_product_coupling_max_violation << ",\n";
+    out << "  \"gs_product_coupling_proof_status\": \""
+        << jsonEscape(result.gs_product_coupling_proof_status) << "\",\n";
+    out << "  \"tailored_bc_disaggregated_sp_estimator_enabled\": "
+        << (result.tailored_bc_disaggregated_sp_estimator_enabled ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_disaggregated_sp_mode\": \""
+        << jsonEscape(result.tailored_bc_disaggregated_sp_mode) << "\",\n";
+    out << "  \"tailored_bc_disaggregated_sp_replace_aggregate\": "
+        << (result.tailored_bc_disaggregated_sp_replace_aggregate ? "true" : "false") << ",\n";
+    out << "  \"disagg_sp_variables_added\": "
+        << result.disagg_sp_variables_added << ",\n";
+    out << "  \"disagg_sp_mccormick_rows_added\": "
+        << result.disagg_sp_mccormick_rows_added << ",\n";
+    out << "  \"disagg_sp_estimator_rows_added\": "
+        << result.disagg_sp_estimator_rows_added << ",\n";
+    out << "  \"disagg_sp_violations\": "
+        << result.disagg_sp_violations << ",\n";
+    out << "  \"disagg_sp_max_violation\": "
+        << result.disagg_sp_max_violation << ",\n";
+    out << "  \"disagg_sp_root_gap_reduction\": "
+        << result.disagg_sp_root_gap_reduction << ",\n";
+    out << "  \"disagg_sp_proof_status\": \""
+        << jsonEscape(result.disagg_sp_proof_status) << "\",\n";
+    out << "  \"tailored_bc_vector_support_cover_enabled\": "
+        << (result.tailored_bc_vector_support_cover_enabled ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_vector_support_cover_max_size\": "
+        << result.tailored_bc_vector_support_cover_max_size << ",\n";
+    out << "  \"tailored_bc_vector_route_cutset_enabled\": "
+        << (result.tailored_bc_vector_route_cutset_enabled ? "true" : "false") << ",\n";
+    out << "  \"tailored_bc_vector_route_cutset_max_size\": "
+        << result.tailored_bc_vector_route_cutset_max_size << ",\n";
+    out << "  \"tailored_bc_vector_cut_candidate_source\": \""
+        << jsonEscape(result.tailored_bc_vector_cut_candidate_source) << "\",\n";
+    out << "  \"vector_support_cover_candidates\": "
+        << result.vector_support_cover_candidates << ",\n";
+    out << "  \"vector_support_cover_cuts_added\": "
+        << result.vector_support_cover_cuts_added << ",\n";
+    out << "  \"vector_support_cover_max_violation\": "
+        << result.vector_support_cover_max_violation << ",\n";
+    out << "  \"vector_route_cutset_candidates\": "
+        << result.vector_route_cutset_candidates << ",\n";
+    out << "  \"vector_route_cutset_cuts_added\": "
+        << result.vector_route_cutset_cuts_added << ",\n";
+    out << "  \"vector_route_cutset_max_violation\": "
+        << result.vector_route_cutset_max_violation << ",\n";
+    out << "  \"vector_route_cuts_proof_status\": \""
+        << jsonEscape(result.vector_route_cuts_proof_status) << "\",\n";
     out << "  \"gini_spread_cuts_added\": "
         << result.gini_spread_cuts_added << ",\n";
     out << "  \"compact_bc_direct_gini_cap_rows_added\": "
