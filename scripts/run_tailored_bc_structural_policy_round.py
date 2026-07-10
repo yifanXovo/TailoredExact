@@ -299,10 +299,12 @@ def plan(profile: str) -> List[Tuple[str, str, int, str]]:
     if profile == "long":
         return [("low_gini_1", v, 3600, "dominant_k4") for v in (
             "static_tailored_compact_bc", "gs_static_upper_only",
-            "gs_callback_upper_only", "gs_plus_sp")]
+            "gs_callback_upper_only", "sp_disaggregated_additive",
+            "route_cutset_callback_limited")]
     if profile == "very-long":
         return [("low_gini_1", v, 14400, "dominant_k4") for v in (
-            "static_tailored_compact_bc", "gs_static_upper_only", "gs_plus_sp")]
+            "static_tailored_compact_bc", "gs_callback_upper_only",
+            "route_cutset_callback_limited")]
     if profile == "sanity":
         return [(leaf, "gs_static_upper_only", 300, "dominant_k4") for leaf in (
             "low_gini_2", "high_imbalance_seed3201_hard", "tight_T_seed3102_hard")]
