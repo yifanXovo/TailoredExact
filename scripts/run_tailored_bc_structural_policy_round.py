@@ -401,6 +401,10 @@ def row(leaf: str, variant: str, budget: int, bucket: str,
         "vector_callback_support_cover_cuts_added": data.get("vector_callback_support_cover_cuts_added", 0),
         "vector_callback_route_cutset_candidates": data.get("vector_callback_route_cutset_candidates", 0),
         "vector_callback_route_cutset_cuts_added": data.get("vector_callback_route_cutset_cuts_added", 0),
+        "vector_support_cover_max_violation": data.get("vector_support_cover_max_violation", "not_available"),
+        "vector_route_cutset_max_violation": data.get("vector_route_cutset_max_violation", "not_available"),
+        "vector_callback_support_cover_max_violation": data.get("vector_callback_support_cover_max_violation", "not_available"),
+        "vector_callback_route_cutset_max_violation": data.get("vector_callback_route_cutset_max_violation", "not_available"),
         "dynamic_cuts": data.get("compact_bc_dynamic_cuts_added_by_family", ""),
         "thread_fairness_class": data.get("thread_fairness_class", ""),
     }
@@ -433,6 +437,10 @@ def write_vector_tables(rows: Sequence[Dict[str, Any]], extract_root: bool) -> N
     structural.build_vector_outputs(rows, extract_root=extract_root)
     callback = read_csv(RESULTS / "callback_vector_family_summary.csv")
     root = read_csv(RESULTS / "root_lp_family_summary.csv")
+    write_csv(VECTORS / "callback_vector_raw.csv", read_csv(RESULTS / "callback_vector_raw.csv"))
+    write_csv(VECTORS / "root_lp_vector_raw.csv", read_csv(RESULTS / "root_lp_vector_raw.csv"))
+    write_csv(VECTORS / "callback_vector_family_summary.csv", callback)
+    write_csv(VECTORS / "root_lp_family_summary.csv", root)
     combined = callback + root
     write_csv(RESULTS / "root_gap_decomposition.csv", combined)
     write_csv(RESULTS / "sp_gap_decomposition.csv", [
@@ -468,7 +476,68 @@ def write_vector_tables(rows: Sequence[Dict[str, Any]], extract_root: bool) -> N
 
 
 def write_tables(rows: Sequence[Dict[str, Any]]) -> None:
-    target = [r for r in rows if r["leaf"] == "low_gini_1"]
+    callback = read_csv(RESULTS / "callback_vector_family_summary.csv")
+    root = read_csv(RESULTS / "root_lp_family_summary.csv")
+
+    def snapshot(source_rows: Sequence[Dict[str, str]], summary: Dict[str, Any]) -> Dict[str, str]:
+        marker = f"_{summary['variant']}_{summary['budget_seconds']}s"
+        matches = [item for item in source_rows if marker in item.get("snapshot_id", "")]
+        return next(
+            (item for item in matches if item.get("snapshot_source") in {
+                "first_relaxation_callback", "root_lp_relaxation"
+            }),
+            matches[0] if matches else {},
+        )
+
+    target: List[Dict[str, Any]] = []
+    for original in rows:
+        if original["leaf"] != "low_gini_1":
+            continue
+        item = dict(original)
+        root_row = snapshot(root, item)
+        callback_row = snapshot(callback, item)
+        item.update({
+            "root_LP_objective": root_row.get("root_LP_objective", "not_available"),
+            "root_GSH_gap": root_row.get("GSH_gap", "not_available"),
+            "callback_GSH_gap": callback_row.get("GSH_gap", "not_available"),
+            "root_SP_gap_aggregate": root_row.get("SP_gap_aggregate", "not_available"),
+            "root_SP_gap_disaggregated": root_row.get("SP_gap_disaggregated", "not_available"),
+            "callback_SP_gap_aggregate": callback_row.get("SP_gap_aggregate", "not_available"),
+            "callback_SP_gap_disaggregated": callback_row.get("SP_gap_disaggregated", "not_available"),
+            "route_fractionality_root": root_row.get("route_fractionality_score", "not_available"),
+            "route_fractionality_callback": callback_row.get("route_fractionality_score", "not_available"),
+            "fractional_z_count_root": root_row.get("fractional_z_count", "not_available"),
+            "fractional_x_count_root": root_row.get("fractional_x_count", "not_available"),
+            "time_per_node": (
+                f(item.get("runtime_seconds"), 0.0) / f(item.get("nodes"), 1.0)
+                if f(item.get("nodes"), 0.0) > 0 else "not_available"
+            ),
+        })
+        item["route_candidate_count"] = (
+            int(f(item.get("vector_support_cover_candidates"), 0.0)) +
+            int(f(item.get("vector_route_cutset_candidates"), 0.0)) +
+            int(f(item.get("vector_callback_support_cover_candidates"), 0.0)) +
+            int(f(item.get("vector_callback_route_cutset_candidates"), 0.0))
+        )
+        item["route_cuts_added"] = (
+            int(f(item.get("vector_support_cover_cuts_added"), 0.0)) +
+            int(f(item.get("vector_route_cutset_cuts_added"), 0.0)) +
+            int(f(item.get("vector_callback_support_cover_cuts_added"), 0.0)) +
+            int(f(item.get("vector_callback_route_cutset_cuts_added"), 0.0))
+        )
+        item["average_route_cut_violation"] = "not_available_not_logged_by_cplex_callback"
+        target.append(item)
+
+    static_by_budget = {
+        int(item["budget_seconds"]): f(item.get("lower_bound"), math.nan)
+        for item in target if item["variant"] == "static_tailored_compact_bc"
+    }
+    for item in target:
+        baseline = static_by_budget.get(int(item["budget_seconds"]), math.nan)
+        item["bound_weakened_vs_fresh_static"] = (
+            f(item.get("lower_bound"), -math.inf) < baseline - 1e-9
+            if math.isfinite(baseline) else "not_available"
+        )
     write_csv(RESULTS / "dominant_bucket_policy_comparison.csv", target)
     write_csv(RESULTS / "dominant_bucket_fresh_baseline.csv", [
         r for r in target if r["variant"] in {"plain_fixed_interval_mip", "static_tailored_compact_bc"}
@@ -479,8 +548,6 @@ def write_tables(rows: Sequence[Dict[str, Any]]) -> None:
     write_csv(RESULTS / "non_regression_sanity_summary.csv", [r for r in rows if r["leaf"] != "low_gini_1"])
     write_csv(RESULTS / "cut_family_effectiveness.csv", target)
 
-    callback = read_csv(RESULTS / "callback_vector_family_summary.csv")
-    root = read_csv(RESULTS / "root_lp_family_summary.csv")
     write_csv(RESULTS / "gs_gap_impact_summary.csv", [r for r in callback + root if r.get("W_GS") not in {"", "not_available"}])
     write_csv(RESULTS / "disaggregated_sp_gap_summary.csv", [r for r in callback + root if r.get("sum_i_w_i_T_SP_i") not in {"", "not_available"}])
     write_csv(RESULTS / "vector_route_fractionality_impact.csv", callback + root)
@@ -503,13 +570,26 @@ def write_policy(rows: Sequence[Dict[str, Any]]) -> None:
     target_1200 = [r for r in rows if r["leaf"] == "low_gini_1" and r["budget_seconds"] == 1200]
     safe = [r for r in target_1200 if r["paper_safe_or_diagnostic"] == "paper_safe"]
     best = max(safe, key=lambda r: f(r.get("lower_bound"), -math.inf), default={})
+    exact_rows = [
+        r for r in rows
+        if r["leaf"] == "low_gini_1" and
+        r["paper_safe_or_diagnostic"] == "paper_safe" and
+        "optimal" in str(r.get("solver_status", "")).lower()
+    ]
+    if exact_rows:
+        exact_best_lb = max(f(r.get("lower_bound"), -math.inf) for r in exact_rows)
+        tied_exact = [
+            r for r in exact_rows
+            if abs(f(r.get("lower_bound"), -math.inf) - exact_best_lb) <= 1e-9
+        ]
+        best = min(tied_exact, key=lambda r: f(r.get("runtime_seconds"), math.inf))
     decisions = []
     profiles = {
         "structural_none": "static_tailored_compact_bc",
         "structural_gs_only": "gs_static_upper_only",
         "structural_sp_only": "sp_disaggregated_additive",
         "structural_gs_plus_sp": "gs_plus_sp",
-        "structural_route_limited": "combined_route_cuts_limited",
+        "structural_route_limited": "route_cutset_callback_limited",
         "structural_gs_sp_route_limited": "gs_sp_route_limited",
         "static_tailored_baseline": "static_tailored_compact_bc",
     }
@@ -519,9 +599,10 @@ def write_policy(rows: Sequence[Dict[str, Any]]) -> None:
         decisions.append({
             "profile": profile,
             "selection_reason": (
-                "best_fresh_1200s_valid_LB" if selected else "not_best_fresh_1200s_valid_LB"
+                "fastest_fresh_exact_interval_optimum" if selected and exact_rows
+                else ("best_fresh_1200s_valid_LB" if selected else "not_selected_by_fresh_bound_runtime_policy")
             ),
-            "generic_metrics_used": "gamma_U|S_bucket_active|root_GSH_gap|root_SP_gap|route_fractionality|model_size|1200s_LB",
+            "generic_metrics_used": "gamma_U|S_bucket_active|root_GSH_gap|root_SP_gap|route_fractionality|model_size|1200s_LB|exact_interval_runtime",
             "observed_variant": variant,
             "observed_1200s_LB": observed.get("lower_bound", "not_run"),
             "paper_default_candidate": selected,
@@ -532,7 +613,7 @@ def write_policy(rows: Sequence[Dict[str, Any]]) -> None:
         "# Structural Profile Policy\n\n"
         "`auto-diagnostic` recommends a profile from generic interval metrics only. "
         "It does not alter paper-default behavior in this round and never reads an instance name, seed, path, or known outcome.\n\n"
-        f"Fresh 1200s recommendation: `{best.get('variant', 'insufficient_data')}`.\n",
+        f"Fresh evidence recommendation: `{best.get('variant', 'insufficient_data')}`.\n",
         encoding="utf-8",
     )
 

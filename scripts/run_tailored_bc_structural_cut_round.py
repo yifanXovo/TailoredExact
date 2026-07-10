@@ -434,16 +434,18 @@ def cplex_root_solution(lp: Path, timeout: int = 120) -> Tuple[List[Tuple[str, f
     sol = VECTORS / f"{lp.stem}.root_lp.sol"
     cmd_file = VECTORS / f"{lp.stem}.root_lp.cplex.cmd"
     cmd_file.parent.mkdir(parents=True, exist_ok=True)
-    cmd_file.write_text(
-        f'read "{lp}"\nset threads 1\nchange problem lp\noptimize\nwrite "{sol}"\nquit\n',
-        encoding="utf-8",
-    )
-    try:
-        subprocess.run([cplex], stdin=cmd_file.open("r", encoding="utf-8"),
-                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                       timeout=timeout, check=False)
-    except Exception:
-        return [], math.nan
+    reuse = sol.exists() and sol.stat().st_mtime >= lp.stat().st_mtime
+    if not reuse:
+        cmd_file.write_text(
+            f'read "{lp}"\nset threads 1\nchange problem lp\noptimize\nwrite "{sol}"\nquit\n',
+            encoding="utf-8",
+        )
+        try:
+            subprocess.run([cplex], stdin=cmd_file.open("r", encoding="utf-8"),
+                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                           timeout=timeout, check=False)
+        except Exception:
+            return [], math.nan
     if not sol.exists():
         return [], math.nan
     text = sol.read_text(encoding="utf-8", errors="replace")
@@ -516,6 +518,11 @@ def summarize_vectors(raw_rows: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]
             "top_T_SP_i": top_abs(rows, "T_SP_i"),
             "top_q_i": top_abs(rows, "q_i"),
             "top_route_support_station_sets_by_vehicle": route_support_sets(rows),
+            "route_fractionality_score": fractionality_score(rows, {"z_k_i", "x_k_i_j"}),
+            "z_fractionality_score": fractionality_score(rows, {"z_k_i"}),
+            "x_fractionality_score": fractionality_score(rows, {"x_k_i_j"}),
+            "fractional_z_count": fractional_count(rows, "z_k_i"),
+            "fractional_x_count": fractional_count(rows, "x_k_i_j"),
         })
         summary = summaries[-1]
         v_count = int(f(rows[0].get("V"), 0.0)) or sum(1 for r in rows if r.get("family") == "r_i")
@@ -560,6 +567,26 @@ def route_support_sets(rows: Sequence[Dict[str, Any]], limit: int = 6) -> str:
             f"{name}={value:.5g}" for value, name in values[:limit]
         ))
     return "|".join(packed)
+
+
+def fractionality_score(rows: Sequence[Dict[str, Any]], families: set[str]) -> float:
+    score = 0.0
+    for row in rows:
+        if row.get("family") not in families:
+            continue
+        value = f(row.get("value"), math.nan)
+        if math.isfinite(value):
+            score += abs(value - round(value))
+    return score
+
+
+def fractional_count(rows: Sequence[Dict[str, Any]], family: str) -> int:
+    return sum(
+        1 for row in rows
+        if row.get("family") == family and
+        math.isfinite(f(row.get("value"), math.nan)) and
+        abs(f(row.get("value"), math.nan) - round(f(row.get("value"), math.nan))) > 1e-6
+    )
 
 
 def top_fractional(rows: Sequence[Dict[str, Any]], family: str, limit: int = 8) -> str:
