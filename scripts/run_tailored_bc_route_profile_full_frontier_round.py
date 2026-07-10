@@ -415,14 +415,15 @@ def run_row(name: str, kind: str, budget: int, skip_existing: bool, commit: str)
     stem = f"{name}_{kind}_{budget}s"
     out = RAW / f"{stem}.json"
     progress = PROGRESS / f"{stem}.progress.csv"
-    log = LOGS / f"{stem}.log.txt"
+    log = LOGS / f"{stem}.solver.log.txt"
+    stdout_log = LOGS / f"{stem}.stdout.log.txt"
     monitor = PROGRESS / f"{stem}.monitor.csv"
     cmd = tailored_command(name, budget, out, progress, log) if kind == "tailored" else plain_command(name, budget, out, log)
     command_hash = sha16(subprocess.list2cmdline(cmd))
     if skip_existing and out.exists():
         meta = {"returncode": 0, "wrapper_timeout": False, "runtime_seconds": 0.0, "peak_memory_mb": 0.0, "skipped": True}
     else:
-        meta = run_process(cmd, log, monitor, budget + 180)
+        meta = run_process(cmd, stdout_log, monitor, budget + 180)
     if not out.exists():
         write_wrapper(out, name, kind, budget, progress, meta, command_hash, commit)
     annotate_json(out, name=name, kind=kind, nominal_budget=budget, command_hash=command_hash, commit=commit, root_row=True)
@@ -438,7 +439,7 @@ def run_row(name: str, kind: str, budget: int, skip_existing: bool, commit: str)
     if data and model_path:
         data["model_export_path"] = model_path
         write_json(out, data)
-    return summarize_result(out, name, kind, budget, meta, progress, monitor, log, model_path)
+    return summarize_result(out, name, kind, budget, meta, progress, monitor, log, model_path, stdout_log)
 
 
 def child_results(out: Path) -> List[Tuple[Path, Dict[str, Any]]]:
@@ -455,7 +456,7 @@ def child_results(out: Path) -> List[Tuple[Path, Dict[str, Any]]]:
 def summarize_result(out: Path, name: str, kind: str, budget: int,
                      meta: Dict[str, Any] | None = None, progress: Path | None = None,
                      monitor: Path | None = None, log: Path | None = None,
-                     model_path: str = "") -> Dict[str, Any]:
+                     model_path: str = "", stdout_log: Path | None = None) -> Dict[str, Any]:
     data = read_json(out)
     children = child_results(out) if kind == "tailored" else []
     candidates = sum(i(d.get("vector_callback_route_cutset_candidates")) for _, d in children)
@@ -515,6 +516,7 @@ def summarize_result(out: Path, name: str, kind: str, budget: int,
         "progress_path": rel(progress) if progress and progress.exists() else "",
         "monitor_path": rel(monitor) if monitor and monitor.exists() else "",
         "log_path": rel(log) if log and log.exists() else "",
+        "stdout_log_path": rel(stdout_log) if stdout_log and stdout_log.exists() else "",
         "model_path": model_path,
         "benchmark_role": "official_plain_cplex_benchmark" if kind == "plain" else "paper_core",
     }
@@ -533,8 +535,9 @@ def existing_rows() -> List[Dict[str, Any]]:
             path, name, kind, int(budget_text),
             progress=PROGRESS / f"{stem}.progress.csv",
             monitor=PROGRESS / f"{stem}.monitor.csv",
-            log=LOGS / f"{stem}.log.txt",
+            log=LOGS / f"{stem}.solver.log.txt",
             model_path=rel(MODELS / f"{stem}.lp") if (MODELS / f"{stem}.lp").exists() else "",
+            stdout_log=LOGS / f"{stem}.stdout.log.txt",
         ))
     return rows
 

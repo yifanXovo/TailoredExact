@@ -47,6 +47,8 @@ def main() -> int:
 
     def is_result_pointer(key: str) -> bool:
         lowered = key.lower()
+        if lowered in {"result_package", "source_round", "fresh_run"}:
+            return False
         return any(token in lowered for token in result_pointer_tokens)
 
     for path in sorted(root.rglob("*.csv")):
