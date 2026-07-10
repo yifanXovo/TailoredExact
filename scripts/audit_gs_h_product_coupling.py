@@ -41,13 +41,16 @@ def main() -> int:
         enabled = as_bool(data.get("tailored_bc_gs_product_coupling_enabled"))
         if enabled:
             enabled_count += 1
-        rows_added = int(float(data.get("gs_mccormick_rows_added", 0) or 0)) + int(float(data.get("gs_h_upper_rows_added", 0) or 0))
+        rows_added = (int(float(data.get("gs_mccormick_rows_added", 0) or 0)) +
+                      int(float(data.get("gs_h_upper_rows_added", 0) or 0)) +
+                      int(float(data.get("gs_product_callback_rows_added", 0) or 0)))
         lower_mode = str(data.get("tailored_bc_gs_product_lower_row", "off"))
         certified = as_bool(data.get("certified_original_problem")) or data.get("status") == "interval_closed"
         reasons: List[str] = []
         if enabled and rows_added <= 0 and str(data.get("tailored_bc_gs_product_coupling_mode", "")) in {"static", "both"}:
             reasons.append("enabled_without_rows")
-        if certified and lower_mode == "diagnostic":
+        diagnostic_row = as_bool(data.get("diagnostic_row"))
+        if certified and lower_mode == "diagnostic" and not diagnostic_row:
             reasons.append("diagnostic_lower_row_in_certified_row")
         if lower_mode == "paper-safe" and "paper_safe" not in str(data.get("gs_product_coupling_proof_status", "")):
             reasons.append("paper_safe_lower_without_proof_status")

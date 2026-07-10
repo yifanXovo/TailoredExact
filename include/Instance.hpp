@@ -220,9 +220,13 @@ struct SolveOptions {
     bool tailored_bc_disaggregated_sp_replace_aggregate = false;
     bool tailored_bc_vector_support_cover = false;
     int tailored_bc_vector_support_cover_max_size = 3;
+    int tailored_bc_vector_support_cover_max_cuts = 50;
     bool tailored_bc_vector_route_cutset = false;
     int tailored_bc_vector_route_cutset_max_size = 3;
+    int tailored_bc_vector_route_cutset_max_cuts = 50;
+    double tailored_bc_vector_cut_min_violation = 1e-6;
     std::string tailored_bc_vector_cut_candidate_source = "root";
+    std::string tailored_bc_structural_profile = "manual";
     std::string compact_bc_model_size_policy = "full";
     long long compact_bc_max_rows = 0;
     long long compact_bc_max_cols = 0;

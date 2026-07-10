@@ -347,14 +347,18 @@ def family_of(name: str) -> Tuple[str, str]:
         ("p_k_i", r"^p_(\d+)_(\d+)$"),
         ("d_k_i", r"^d_(\d+)_(\d+)$"),
         ("x_k_i_j", r"^x_(\d+)_(\d+)_(\d+)$"),
-        ("bit", r"^(?:bit|b)_.+"),
-        ("load", r"^load_.+"),
-        ("service_mode", r"^(?:service|mode)_.+"),
+        ("load variables", r"^(?:load|L)_.+"),
+        ("service/mode variables", r"^(?:service|mode|ord|pos|visit)_.+"),
+        ("bit variables", r"^(?:bit|b)_.+"),
+        ("McCormick auxiliary variables", r"^(?:prod|zprod)_.+"),
+        ("objective-estimator auxiliary variables", r"^(?:q_l1)_\d+$"),
+        ("objective-estimator auxiliary variables", r"^(?:r_min|r_max)$"),
+        ("other documented auxiliary variables", r"^(?:u|time|arrival|depart|flow)_.+"),
     ]
     for family, pattern in patterns:
         if re.match(pattern, name):
             return family, "|".join(re.match(pattern, name).groups() if re.match(pattern, name).groups() else [])
-    return "unparsed", ""
+    return "unknown_unparsed", ""
 
 
 def parse_instance_weights(path_text: Any) -> Dict[int, float]:
@@ -394,7 +398,7 @@ def vector_rows_from_json(json_path: Path, data: Dict[str, Any]) -> List[Dict[st
         for name, value in split_vector(names, values):
             family, indices = family_of(name)
             weight = ""
-            if family == "e_i" and indices:
+            if family in {"e_i", "T_SP_i"} and indices:
                 try:
                     weight = weights.get(int(indices.split("|")[0]), "")
                 except Exception:
@@ -410,32 +414,46 @@ def vector_rows_from_json(json_path: Path, data: Dict[str, Any]) -> List[Dict[st
                 "value": value,
                 "nonzero": abs(value) > 1e-12 if math.isfinite(value) else "",
                 "diagnostic_only": True,
+                "V": data.get("V", data.get("stations", "")),
+                "gamma_L": data.get("interval_gamma_L", data.get("gamma_L", "")),
+                "gamma_U": data.get("interval_gamma_U", data.get("gamma_U", "")),
+                "cutoff": data.get("interval_final_ub_cutoff", data.get("upper_bound", "")),
+                "snapshot_objective": (
+                    data.get("tailored_bc_callback_vector_objective", "")
+                    if source == "first_relaxation_callback"
+                    else data.get("tailored_bc_callback_candidate_vector_objective", "")
+                ),
             })
     return rows
 
 
-def cplex_root_solution(lp: Path, timeout: int = 120) -> List[Tuple[str, float]]:
+def cplex_root_solution(lp: Path, timeout: int = 120) -> Tuple[List[Tuple[str, float]], float]:
     if not lp.exists():
-        return []
+        return [], math.nan
     cplex = "cplex"
     sol = VECTORS / f"{lp.stem}.root_lp.sol"
     cmd_file = VECTORS / f"{lp.stem}.root_lp.cplex.cmd"
     cmd_file.parent.mkdir(parents=True, exist_ok=True)
-    cmd_file.write_text(
-        f'read "{lp}"\nset threads 1\nchange problem lp\noptimize\nwrite "{sol}"\nquit\n',
-        encoding="utf-8",
-    )
-    try:
-        subprocess.run([cplex], stdin=cmd_file.open("r", encoding="utf-8"),
-                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                       timeout=timeout, check=False)
-    except Exception:
-        return []
+    reuse = sol.exists() and sol.stat().st_mtime >= lp.stat().st_mtime
+    if not reuse:
+        cmd_file.write_text(
+            f'read "{lp}"\nset threads 1\nchange problem lp\noptimize\nwrite "{sol}"\nquit\n',
+            encoding="utf-8",
+        )
+        try:
+            subprocess.run([cplex], stdin=cmd_file.open("r", encoding="utf-8"),
+                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                           timeout=timeout, check=False)
+        except Exception:
+            return [], math.nan
     if not sol.exists():
-        return []
+        return [], math.nan
     text = sol.read_text(encoding="utf-8", errors="replace")
-    return [(m.group(1), f(m.group(2), math.nan))
-            for m in re.finditer(r'<variable name="([^"]+)"[^>]* value="([^"]+)"', text)]
+    objective_match = re.search(r'objectiveValue="([^"]+)"', text)
+    objective = f(objective_match.group(1), math.nan) if objective_match else math.nan
+    return ([(m.group(1), f(m.group(2), math.nan))
+             for m in re.finditer(r'<variable name="([^"]+)"[^>]* value="([^"]+)"', text)],
+            objective)
 
 
 def summarize_vectors(raw_rows: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]]:
@@ -464,18 +482,31 @@ def summarize_vectors(raw_rows: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]
         summaries.append({
             "snapshot_id": sid,
             "snapshot_source": rows[0].get("snapshot_source", ""),
+            "V": rows[0].get("V", ""),
             "variable_count": len(rows),
-            "unparsed_count": family_counts.get("unparsed", 0),
+            "unknown_unparsed_count": family_counts.get("unknown_unparsed", 0),
+            "unknown_unparsed_fraction": (
+                family_counts.get("unknown_unparsed", 0) / len(rows) if rows else "not_available"
+            ),
             "family_counts": ";".join(f"{k}={v}" for k, v in sorted(family_counts.items())),
             "S": s_val,
             "P": p_val,
             "H": h_val,
             "G": g_val,
             "W_SP": wsp,
+            "W_GS": vals.get("W_GS", "not_available"),
+            "sum_i_w_i_T_SP_i": sum(
+                f(r.get("weight"), 0.0) * f(r.get("value"), 0.0)
+                for r in rows
+                if r.get("family") == "T_SP_i" and
+                math.isfinite(f(r.get("weight"), math.nan)) and
+                math.isfinite(f(r.get("value"), math.nan))
+            ) if any(r.get("family") == "T_SP_i" for r in rows) else "not_available",
             "reconstructed_S_times_P": s_val * p_val if math.isfinite(s_val) and math.isfinite(p_val) else "not_available",
             "reconstructed_H_over_VS": h_val / (20.0 * s_val) if math.isfinite(h_val) and math.isfinite(s_val) and s_val > 1e-12 else "not_available",
             "G_gap": h_val / (20.0 * s_val) - g_val if math.isfinite(h_val) and math.isfinite(s_val) and math.isfinite(g_val) and s_val > 1e-12 else "not_available",
             "SP_gap": s_val * p_val - wsp if math.isfinite(s_val) and math.isfinite(p_val) and math.isfinite(wsp) else "not_available",
+            "root_LP_objective": rows[0].get("snapshot_objective", "not_available"),
             "top_fractional_z": top_fractional(rows, "z_k_i"),
             "top_fractional_x": top_fractional(rows, "x_k_i_j"),
             "top_fractional_p": top_fractional(rows, "p_k_i"),
@@ -484,9 +515,78 @@ def summarize_vectors(raw_rows: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]
             "top_Y_i": top_abs(rows, "Y_i"),
             "top_e_i": top_abs(rows, "e_i"),
             "top_h_i_j": top_abs(rows, "h_i_j"),
+            "top_T_SP_i": top_abs(rows, "T_SP_i"),
             "top_q_i": top_abs(rows, "q_i"),
+            "top_route_support_station_sets_by_vehicle": route_support_sets(rows),
+            "route_fractionality_score": fractionality_score(rows, {"z_k_i", "x_k_i_j"}),
+            "z_fractionality_score": fractionality_score(rows, {"z_k_i"}),
+            "x_fractionality_score": fractionality_score(rows, {"x_k_i_j"}),
+            "fractional_z_count": fractional_count(rows, "z_k_i"),
+            "fractional_x_count": fractional_count(rows, "x_k_i_j"),
         })
+        summary = summaries[-1]
+        v_count = int(f(rows[0].get("V"), 0.0)) or sum(1 for r in rows if r.get("family") == "r_i")
+        wgs = f(summary.get("W_GS"), math.nan)
+        tsp_sum = f(summary.get("sum_i_w_i_T_SP_i"), math.nan)
+        cutoff = f(rows[0].get("cutoff"), math.nan)
+        if math.isfinite(s_val) and math.isfinite(g_val) and math.isfinite(wgs):
+            summary["W_GS_gap"] = g_val * s_val - wgs
+        else:
+            summary["W_GS_gap"] = "not_available"
+        if math.isfinite(s_val) and math.isfinite(p_val) and math.isfinite(tsp_sum):
+            summary["SP_gap_disaggregated"] = s_val * p_val - tsp_sum
+        else:
+            summary["SP_gap_disaggregated"] = "not_available"
+        summary["SP_gap_aggregate"] = summary["SP_gap"]
+        summary["GSH_gap"] = summary["G_gap"]
+        if (v_count > 0 and math.isfinite(h_val) and math.isfinite(tsp_sum) and
+                math.isfinite(s_val) and math.isfinite(cutoff)):
+            summary["objective_estimator_slack"] = (
+                v_count * cutoff * s_val - h_val - v_count * 0.15 * tsp_sum
+            )
+        else:
+            summary["objective_estimator_slack"] = "not_available"
     return summaries
+
+
+def route_support_sets(rows: Sequence[Dict[str, Any]], limit: int = 6) -> str:
+    supports: Dict[str, List[Tuple[float, str]]] = {}
+    for row in rows:
+        if row.get("family") != "z_k_i":
+            continue
+        value = f(row.get("value"), math.nan)
+        if not math.isfinite(value) or value <= 1e-6:
+            continue
+        indices = str(row.get("indices", "")).split("|")
+        vehicle = indices[0] if indices else "?"
+        supports.setdefault(vehicle, []).append((value, str(row.get("variable_name", ""))))
+    packed = []
+    for vehicle, values in sorted(supports.items()):
+        values.sort(reverse=True)
+        packed.append(f"k{vehicle}:" + ",".join(
+            f"{name}={value:.5g}" for value, name in values[:limit]
+        ))
+    return "|".join(packed)
+
+
+def fractionality_score(rows: Sequence[Dict[str, Any]], families: set[str]) -> float:
+    score = 0.0
+    for row in rows:
+        if row.get("family") not in families:
+            continue
+        value = f(row.get("value"), math.nan)
+        if math.isfinite(value):
+            score += abs(value - round(value))
+    return score
+
+
+def fractional_count(rows: Sequence[Dict[str, Any]], family: str) -> int:
+    return sum(
+        1 for row in rows
+        if row.get("family") == family and
+        math.isfinite(f(row.get("value"), math.nan)) and
+        abs(f(row.get("value"), math.nan) - round(f(row.get("value"), math.nan))) > 1e-6
+    )
 
 
 def top_fractional(rows: Sequence[Dict[str, Any]], family: str, limit: int = 8) -> str:
@@ -532,11 +632,12 @@ def build_vector_outputs(summary_rows: Sequence[Dict[str, Any]], extract_root: b
         if extract_root and row.get("lp_path"):
             lp_path = ROOT / str(row["lp_path"])
             weights = parse_instance_weights(data.get("input_path", ""))
-            for name, value in cplex_root_solution(lp_path):
+            root_values, root_objective = cplex_root_solution(lp_path)
+            for name, value in root_values:
                 family, indices = family_of(name)
                 sid = f"{lp_path.stem}:root_lp_relaxation"
                 weight = ""
-                if family == "e_i" and indices:
+                if family in {"e_i", "T_SP_i"} and indices:
                     try:
                         weight = weights.get(int(indices.split("|")[0]), "")
                     except Exception:
@@ -552,6 +653,11 @@ def build_vector_outputs(summary_rows: Sequence[Dict[str, Any]], extract_root: b
                     "value": value,
                     "nonzero": abs(value) > 1e-12 if math.isfinite(value) else "",
                     "diagnostic_only": True,
+                    "V": data.get("V", data.get("stations", "")),
+                    "gamma_L": data.get("interval_gamma_L", data.get("gamma_L", "")),
+                    "gamma_U": data.get("interval_gamma_U", data.get("gamma_U", "")),
+                    "cutoff": data.get("interval_final_ub_cutoff", data.get("upper_bound", "")),
+                    "snapshot_objective": root_objective,
                 })
     write_csv(RESULTS / "callback_vector_raw.csv", callback_rows)
     write_csv(RESULTS / "callback_vector_family_summary.csv", summarize_vectors(callback_rows))

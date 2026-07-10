@@ -1,5 +1,7 @@
 # Vector-Driven Route Support And Cutset Cuts
 
+Root-limited activation selects candidates from an actual root relaxation and writes only violated global rows into the final model. Callback-limited activation uses the current relaxation vector. Both paths enforce generic subset-size, cut-count, and violation controls. Broad static all-subset generation is not the selected default policy.
+
 The callback/root LP vector is used only to select candidate subsets. It is not
 used as proof. Every generated row must be valid for all original feasible
 solutions under the compact route convention.

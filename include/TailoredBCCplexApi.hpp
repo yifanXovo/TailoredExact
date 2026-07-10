@@ -95,6 +95,16 @@ struct TailoredBCCplexApiSolveResult {
     long long callback_local_q_centering_cuts_added = 0;
     long long callback_local_q_centering_violations = 0;
     double callback_local_q_centering_max_violation = 0.0;
+    long long callback_gs_product_cuts_added = 0;
+    long long callback_gs_product_violations = 0;
+    double callback_gs_product_max_violation = 0.0;
+    long long callback_disagg_sp_cuts_added = 0;
+    long long callback_disagg_sp_violations = 0;
+    double callback_disagg_sp_max_violation = 0.0;
+    long long callback_vector_route_cutset_cuts_added = 0;
+    long long callback_vector_route_cutset_candidates = 0;
+    long long callback_vector_route_cutset_violations = 0;
+    double callback_vector_route_cutset_max_violation = 0.0;
     long long callback_variable_s_centering_cuts_added = 0;
     long long callback_variable_s_centering_violations = 0;
     long long callback_subset_inventory_imbalance_cuts_added = 0;

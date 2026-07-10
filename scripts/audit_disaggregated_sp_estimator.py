@@ -42,9 +42,11 @@ def main() -> int:
         if enabled:
             enabled_count += 1
         vars_added = int(float(data.get("disagg_sp_variables_added", 0) or 0))
-        rows_added = int(float(data.get("disagg_sp_mccormick_rows_added", 0) or 0)) + int(float(data.get("disagg_sp_estimator_rows_added", 0) or 0))
+        rows_added = (int(float(data.get("disagg_sp_mccormick_rows_added", 0) or 0)) +
+                      int(float(data.get("disagg_sp_estimator_rows_added", 0) or 0)) +
+                      int(float(data.get("disagg_sp_callback_rows_added", 0) or 0)))
         reasons: List[str] = []
-        if enabled and str(data.get("tailored_bc_disaggregated_sp_mode", "")) in {"static", "both"}:
+        if enabled and str(data.get("tailored_bc_disaggregated_sp_mode", "")) in {"static", "both", "callback"}:
             if vars_added <= 0:
                 reasons.append("enabled_without_T_variables")
             if rows_added <= 0:
