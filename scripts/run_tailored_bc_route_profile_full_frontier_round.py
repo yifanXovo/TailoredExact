@@ -17,6 +17,8 @@ import time
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Sequence, Tuple
 
+import run_tailored_bc_structural_cut_round as vector_parser
+
 
 ROOT = Path(__file__).resolve().parents[1]
 ROUND = "gf_tailored_bc_route_profile_full_frontier_round"
@@ -804,6 +806,35 @@ def compare_rows(rows: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]]:
     return output
 
 
+def write_vector_outputs(rows: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    raw_rows: List[Dict[str, Any]] = []
+    snapshot_meta: Dict[str, Dict[str, Any]] = {}
+    for summary in rows:
+        if summary["row_kind"] != "tailored":
+            continue
+        out = ROOT / summary["json_path"]
+        for child_path, data in child_results(out):
+            parsed = vector_parser.vector_rows_from_json(child_path, data)
+            raw_rows.extend(parsed)
+            for item in parsed:
+                snapshot_meta[str(item["snapshot_id"])] = {
+                    "instance": summary["instance"],
+                    "budget_seconds": summary["budget_seconds"],
+                    "child_json_path": rel(child_path),
+                }
+    summaries = vector_parser.summarize_vectors(raw_rows)
+    for item in summaries:
+        item.update(PACKAGE_FIELDS)
+        item.update(snapshot_meta.get(str(item.get("snapshot_id", "")), {}))
+    for item in raw_rows:
+        item.update(PACKAGE_FIELDS)
+    write_csv(RESULTS / "callback_vector_raw.csv", raw_rows)
+    (RESULTS / "root_lp_vector_raw.csv").write_text("", encoding="utf-8")
+    write_csv(RESULTS / "callback_vector_family_summary.csv", summaries)
+    (RESULTS / "root_lp_family_summary.csv").write_text("", encoding="utf-8")
+    return summaries
+
+
 def aggregate() -> None:
     ensure_dirs()
     rows = existing_rows()
@@ -815,6 +846,7 @@ def aggregate() -> None:
         **PACKAGE_FIELDS, "status": "not_run", "reason": "round_scope_is_full_frontier_only"
     }])
     route = [r for r in rows if r["row_kind"] == "tailored"]
+    vector_summaries = write_vector_outputs(rows)
     write_csv(RESULTS / "route_cutset_callback_effectiveness.csv", route)
     write_csv(RESULTS / "route_cutset_cut_inventory.csv", [{
         **PACKAGE_FIELDS,
@@ -825,11 +857,19 @@ def aggregate() -> None:
         "size_4": r["route_cutset_cuts_size_4"], "size_5": r["route_cutset_cuts_size_5"],
     } for r in route])
     write_csv(RESULTS / "route_fractionality_summary.csv", [{
-        **PACKAGE_FIELDS, "instance": r["instance"], "budget_seconds": r["budget_seconds"],
-        "route_fractionality_score_initial": "not_available_parent_child_callback_vector_not_exported",
-        "route_fractionality_score_later": "not_available",
-        "candidate_count": r["route_cutset_candidates"], "cuts_added": r["route_cutset_cuts_added"],
-    } for r in route])
+        **PACKAGE_FIELDS,
+        "instance": item.get("instance", ""),
+        "budget_seconds": item.get("budget_seconds", ""),
+        "snapshot_id": item.get("snapshot_id", ""),
+        "snapshot_source": item.get("snapshot_source", ""),
+        "route_fractionality_score_initial": item.get("route_fractionality_score", ""),
+        "z_fractionality_score_initial": item.get("z_fractionality_score", ""),
+        "x_fractionality_score_initial": item.get("x_fractionality_score", ""),
+        "fractional_z_count_initial": item.get("fractional_z_count", ""),
+        "fractional_x_count_initial": item.get("fractional_x_count", ""),
+        "route_fractionality_score_later": "not_available_no_post_cut_vector_export",
+        "child_json_path": item.get("child_json_path", ""),
+    } for item in vector_summaries])
     write_csv(RESULTS / "route_profile_runtime_overhead.csv", comparisons)
     ledger, open_rows = interval_ledger(rows)
     write_csv(RESULTS / "full_frontier_certificate_ledger.csv", ledger)
