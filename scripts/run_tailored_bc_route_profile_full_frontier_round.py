@@ -168,6 +168,8 @@ def route_profile_flags() -> List[str]:
         "--tailored-bc-vector-route-cutset", "true",
         "--tailored-bc-vector-route-cutset-max-size", "4",
         "--tailored-bc-vector-route-cutset-max-cuts", "50",
+        "--tailored-bc-gini-subset-max-size", "4",
+        "--tailored-bc-gini-subset-max-cuts", "50",
         "--tailored-bc-vector-cut-min-violation", "0.000001",
         "--tailored-bc-vector-cut-candidate-source", "callback",
         "--tailored-bc-structural-profile", "structural_route_limited",
@@ -243,6 +245,25 @@ def run_process(cmd: List[str], log: Path, monitor: Path, wall_limit: int) -> Di
     monitor.parent.mkdir(parents=True, exist_ok=True)
     started = time.time()
     monitor_rows: List[Dict[str, Any]] = []
+    progress_path: Path | None = None
+    if "--progress-log" in cmd:
+        try:
+            progress_path = Path(cmd[cmd.index("--progress-log") + 1])
+        except (ValueError, IndexError):
+            progress_path = None
+
+    def preserve_frontier_progress() -> None:
+        if progress_path is None or not progress_path.exists():
+            return
+        try:
+            with progress_path.open(encoding="utf-8-sig") as handle:
+                header = handle.readline()
+            if "global_LB" not in header or "unresolved_intervals" not in header:
+                return
+            target = progress_path.with_name(progress_path.stem + ".frontier.csv")
+            shutil.copy2(progress_path, target)
+        except Exception:
+            return
     with log.open("w", encoding="utf-8", errors="replace") as handle:
         handle.write("COMMAND: " + subprocess.list2cmdline(cmd) + "\n\n")
         handle.flush()
@@ -261,6 +282,7 @@ def run_process(cmd: List[str], log: Path, monitor: Path, wall_limit: int) -> Di
                     "process_tree_memory_mb": process_memory_mb(proc.pid),
                     "pid": proc.pid,
                 })
+                preserve_frontier_progress()
                 next_monitor = elapsed + 300.0
                 write_csv(monitor, monitor_rows)
             if elapsed > wall_limit:
@@ -284,6 +306,7 @@ def run_process(cmd: List[str], log: Path, monitor: Path, wall_limit: int) -> Di
             "process_tree_memory_mb": process_memory_mb(proc.pid),
             "pid": proc.pid,
         })
+        preserve_frontier_progress()
         write_csv(monitor, monitor_rows)
         return {
             "returncode": 124 if timed_out else return_code,
@@ -361,6 +384,9 @@ def annotate_json(path: Path, *, name: str, kind: str, nominal_budget: int,
     if not data:
         return
     paper = kind == "tailored"
+    source_category = str(data.get("incumbent_source_category", ""))
+    source_detail = str(data.get("incumbent_source_detail", "")).lower()
+    same_run = paper and source_category == "primal_heuristic" and "hga-tgbc" in source_detail
     data.update(PACKAGE_FIELDS)
     data.update({
         "command_hash": command_hash,
@@ -376,8 +402,8 @@ def annotate_json(path: Path, *, name: str, kind: str, nominal_budget: int,
         "external_incumbent_used": False,
         "route_mask_used": False,
         "bpc_used": False,
-        "same_run_incumbent_used": str(data.get("incumbent_source_category", "")) == "same_run_verified_incumbent",
-        "same_run_incumbent_verified": b(data.get("verifier_passed")) and str(data.get("incumbent_source_category", "")) == "same_run_verified_incumbent",
+        "same_run_incumbent_used": same_run,
+        "same_run_incumbent_verified": same_run and b(data.get("verifier_passed")),
         "diagnostic_row": not paper,
         "benchmark_only": not paper,
         "paper_certificate_role": "paper_core" if paper else "benchmark_only",
@@ -389,6 +415,32 @@ def annotate_json(path: Path, *, name: str, kind: str, nominal_budget: int,
         "root_experiment_row": root_row,
     })
     write_json(path, data)
+
+
+def normalize_existing_package_json() -> None:
+    pattern = re.compile(r"^(.+)_(tailored|plain)_(\d+)s$")
+    for root_json in sorted(RAW.glob("*.json")):
+        match = pattern.match(root_json.stem)
+        if not match:
+            continue
+        name, kind, budget_text = match.groups()
+        if name not in INSTANCES:
+            continue
+        data = read_json(root_json)
+        annotate_json(
+            root_json, name=name, kind=kind, nominal_budget=int(budget_text),
+            command_hash=str(data.get("command_hash", "")),
+            commit=str(data.get("git_commit", source_commit())), root_row=True,
+        )
+        if kind == "tailored":
+            for child, _ in child_results(root_json):
+                child_data = read_json(child)
+                annotate_json(
+                    child, name=name, kind=kind, nominal_budget=int(budget_text),
+                    command_hash=str(data.get("command_hash", "")),
+                    commit=str(child_data.get("git_commit", data.get("git_commit", source_commit()))),
+                    root_row=False,
+                )
 
 
 def copy_representative_model(stem: str, out: Path, kind: str) -> str:
@@ -425,6 +477,18 @@ def run_row(name: str, kind: str, budget: int, skip_existing: bool, commit: str)
     if skip_existing and out.exists():
         meta = {"returncode": 0, "wrapper_timeout": False, "runtime_seconds": 0.0, "peak_memory_mb": 0.0, "skipped": True}
     else:
+        if kind == "tailored":
+            child_dir = out.with_suffix("").with_name(out.stem + "_auto_oracle")
+            if child_dir.exists():
+                shutil.rmtree(child_dir)
+            for suffix in (".auto_oracle.csv", ".intervals.csv", ".merged.intervals.csv",
+                           ".oracle_partition_tree.csv", ".trace.json"):
+                sibling = out.with_suffix(suffix)
+                if sibling.exists():
+                    sibling.unlink()
+        for stale in (out, progress, progress.with_name(progress.stem + ".frontier.csv"), monitor):
+            if stale.exists():
+                stale.unlink()
         meta = run_process(cmd, stdout_log, monitor, budget + 180)
     if not out.exists():
         write_wrapper(out, name, kind, budget, progress, meta, command_hash, commit)
@@ -516,6 +580,11 @@ def summarize_result(out: Path, name: str, kind: str, budget: int,
         "peak_memory_mb": (meta or {}).get("peak_memory_mb", "see_monitor"),
         "json_path": rel(out),
         "progress_path": rel(progress) if progress and progress.exists() else "",
+        "frontier_progress_path": (
+            rel(progress.with_name(progress.stem + ".frontier.csv"))
+            if progress and progress.with_name(progress.stem + ".frontier.csv").exists()
+            else ""
+        ),
         "monitor_path": rel(monitor) if monitor and monitor.exists() else "",
         "log_path": rel(log) if log and log.exists() else "",
         "stdout_log_path": rel(stdout_log) if stdout_log and stdout_log.exists() else "",
@@ -549,9 +618,23 @@ def plan(phase: str) -> List[Tuple[str, str, int]]:
         return [("V12_M1", "tailored", 60), ("V12_M1", "plain", 60)]
     if phase == "easy":
         return [(name, kind, budget) for name, spec in INSTANCES.items() if spec["class"] == "easy" for budget in (300, 1200) for kind in ("tailored", "plain")]
+    if phase == "easy-tailored-rerun":
+        rows = [("V12_M1", "tailored", 60)]
+        rows += [(name, "tailored", budget) for name, spec in INSTANCES.items()
+                 if spec["class"] == "easy" for budget in (300, 1200)]
+        rows.append(("V12_M2", "tailored", 3600))
+        return rows
     if phase == "easy-extension":
         previous = existing_rows()
-        need = {r["instance"] for r in previous if r["instance_class"] == "easy" and r["budget_seconds"] == 1200 and not b(r["certified_original_problem"])}
+        tailored_1200 = [
+            r for r in previous
+            if r["instance_class"] == "easy" and r["row_kind"] == "tailored"
+            and r["budget_seconds"] == 1200
+        ]
+        need = {
+            r["instance"] for r in tailored_1200
+            if not b(r["certified_original_problem"])
+        }
         return [(name, kind, 3600) for name in sorted(need) for kind in ("tailored", "plain")]
     if phase == "hard":
         return [(name, kind, 3600) for name, spec in INSTANCES.items() if spec["class"] == "hard" for kind in ("tailored", "plain")]
@@ -695,7 +778,7 @@ def prepare() -> None:
 def progress_trajectory(rows: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]]:
     output: List[Dict[str, Any]] = []
     for summary in rows:
-        path_text = str(summary.get("progress_path", ""))
+        path_text = str(summary.get("frontier_progress_path") or summary.get("progress_path", ""))
         if not path_text:
             continue
         for point in read_csv(ROOT / path_text):
@@ -835,9 +918,57 @@ def write_vector_outputs(rows: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]]
     return summaries
 
 
+def latex_escape(value: Any) -> str:
+    text = str(value)
+    for old, new in (("\\", r"\textbackslash{}"), ("_", r"\_"),
+                     ("%", r"\%"), ("&", r"\&"), ("#", r"\#")):
+        text = text.replace(old, new)
+    return text
+
+
+def write_latex_results(rows: Sequence[Dict[str, Any]]) -> None:
+    selected: List[Dict[str, Any]] = []
+    for instance in INSTANCES:
+        for kind in ("tailored", "plain"):
+            options = [r for r in rows if r["instance"] == instance and r["row_kind"] == kind]
+            certified = [r for r in options if b(r["certified_original_problem"])]
+            if certified:
+                chosen = min(certified, key=lambda r: (i(r["budget_seconds"]), f(r["runtime_seconds"], math.inf)))
+            else:
+                chosen = max(options, key=lambda r: (i(r["budget_seconds"]), f(r["LB"], -math.inf)), default=None)
+            if chosen:
+                selected.append(chosen)
+    lines = [
+        r"\subsection{Fresh selected results}",
+        r"\begin{center}",
+        r"\small",
+        r"\begin{tabular}{llrrrrl}",
+        r"\toprule",
+        r"Instance & Method & Budget & LB & UB & Gap & Status \\",
+        r"\midrule",
+    ]
+    for row in selected:
+        label = "Tailored" if row["row_kind"] == "tailored" else "Plain"
+        lines.append(
+            f"{latex_escape(row['instance'])} & {label} & {i(row['budget_seconds'])} & "
+            f"{f(row['LB']):.6g} & {f(row['UB']):.6g} & {f(row['gap'], 1.0):.4g} & "
+            f"{latex_escape(row['status'])} \\\\"
+        )
+    lines += [
+        r"\bottomrule",
+        r"\end{tabular}",
+        r"\end{center}",
+        "",
+        "Rows are selected from this round only. Certified rows use the smallest fresh budget that certified; otherwise the longest valid row is shown. Plain rows are benchmark-only.",
+    ]
+    (ROOT / "Manuscript" / "generated_results.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
 def aggregate() -> None:
     ensure_dirs()
+    normalize_existing_package_json()
     rows = existing_rows()
+    write_latex_results(rows)
     write_csv(RESULTS / "full_frontier_route_profile_summary.csv", rows)
     write_csv(RESULTS / "plain_cplex_benchmark_summary.csv", [r for r in rows if r["row_kind"] == "plain"])
     comparisons = compare_rows(rows)
@@ -923,7 +1054,7 @@ def run_audits() -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=["prepare", "smoke", "easy", "easy-extension", "hard", "long", "aggregate", "audits"], required=True)
+    parser.add_argument("--phase", choices=["prepare", "smoke", "easy", "easy-tailored-rerun", "easy-extension", "hard", "long", "aggregate", "audits"], required=True)
     parser.add_argument("--jobs", type=int, default=1)
     parser.add_argument("--skip-existing", action="store_true")
     args = parser.parse_args()

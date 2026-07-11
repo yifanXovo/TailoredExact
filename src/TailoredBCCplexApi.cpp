@@ -342,6 +342,9 @@ struct CallbackState {
     std::string support_duration_cover_mode = "support_cover_lifted";
     int gini_subset_max_size = 3;
     int gini_subset_max_cuts = 50000;
+    int vector_route_cutset_max_size = 3;
+    int vector_route_cutset_max_cuts = 50;
+    double vector_route_cutset_min_violation = 1e-6;
     std::string separation_pacing = "off";
     int separation_min_relaxation_calls = 25;
     std::string callback_cut_profile = "full";
@@ -933,9 +936,9 @@ void separateVectorRouteCutset(CallbackState& state,
             context, x.data(), 0, state.ncols - 1, &obj) != 0) {
         return;
     }
-    const int max_size = std::min(5, std::max(2, state.gini_subset_max_size));
-    const long long max_cuts = std::max(0, state.gini_subset_max_cuts);
-    constexpr double tol = 1e-6;
+    const int max_size = std::min(5, std::max(2, state.vector_route_cutset_max_size));
+    const long long max_cuts = std::max(0, state.vector_route_cutset_max_cuts);
+    const double tol = std::max(1e-12, state.vector_route_cutset_min_violation);
     for (int k = 0; k < static_cast<int>(state.z_cols.size()); ++k) {
         if (max_cuts > 0 && state.vector_route_cutset_cuts_added.load() >= max_cuts) break;
         std::vector<std::pair<double, int>> ranked;
@@ -3048,6 +3051,9 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     const std::string& support_duration_cover_mode,
     int gini_subset_max_size,
     int gini_subset_max_cuts,
+    int vector_route_cutset_max_size,
+    int vector_route_cutset_max_cuts,
+    double vector_route_cutset_min_violation,
     const std::string& separation_pacing,
     int separation_min_relaxation_calls,
     const std::string& callback_cut_profile,
@@ -3262,6 +3268,10 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     cb_state.support_duration_cover_mode = support_duration_cover_mode;
     cb_state.gini_subset_max_size = gini_subset_max_size;
     cb_state.gini_subset_max_cuts = gini_subset_max_cuts;
+    cb_state.vector_route_cutset_max_size = vector_route_cutset_max_size;
+    cb_state.vector_route_cutset_max_cuts = vector_route_cutset_max_cuts;
+    cb_state.vector_route_cutset_min_violation =
+        std::max(0.0, vector_route_cutset_min_violation);
     cb_state.separation_pacing = separation_pacing;
     cb_state.separation_min_relaxation_calls =
         std::max(1, separation_min_relaxation_calls);
