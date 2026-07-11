@@ -1313,7 +1313,11 @@ def diagnostic_summaries() -> List[Dict[str, Any]]:
         variant = str(data.get("variant", ""))
         budget = int_value(data.get("time_budget_seconds"), 0)
         status = str(data.get("status", "missing"))
-        bound = float_value(data.get("compact_bc_best_bound", data.get("lower_bound")), 0.0)
+        bound = (
+            float_value(data.get("lower_bound"), 0.0)
+            if status in {"interval_closed", "optimal"}
+            else float_value(data.get("compact_bc_best_bound", data.get("lower_bound")), 0.0)
+        )
         cutoff = float_value(data.get("diagnostic_parent_cutoff", data.get("interval_exact_cutoff_UB")), 0.0)
         rows.append({
             **PACKAGE_FIELDS,
@@ -2032,6 +2036,10 @@ def write_case_reports(diagnoses: Sequence[Dict[str, Any]],
 
 def write_engineering_outputs(diagnostics: Sequence[Dict[str, Any]]) -> None:
     rows = [row for row in diagnostics if row["purpose"] == "engineering"]
+    incident_path = LOGS / "native_exit_v12m2_cheap_first" / "incident.json"
+    incident = read_json(incident_path)
+    if incident:
+        rows.append({**PACKAGE_FIELDS, **incident})
     write_csv(RESULTS / "native_exit_repro_summary.csv", rows)
     sections = ["# Native Exit Debug Log", ""]
     for row in rows:

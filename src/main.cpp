@@ -13751,6 +13751,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             const bool parent_lower_bound_valid = parent.lower_bound_valid;
             const double parent_lower_bound = parent.lower_bound;
             const double parent_relaxation_lower_bound = parent.relaxation_lower_bound;
+            const std::string parent_lower_bound_source =
+                parent.lower_bound_source;
             const double parent_lo = parent.lo;
             const double parent_hi = parent.hi;
             const int parent_depth = parent.split_depth;
@@ -13778,10 +13780,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 if (parent_lower_bound_valid &&
                     parent_lower_bound > child.lo + 1e-12) {
                     child.lower_bound_source =
-                        parent.lower_bound_source.empty()
+                        parent_lower_bound_source.empty()
                             ? "adaptive_split_inherited_parent_lb"
                             : "adaptive_split_inherited_" +
-                                  parent.lower_bound_source;
+                                  parent_lower_bound_source;
                     child.lb_sources += "|adaptive_split_inherited_parent_lb";
                 }
                 child.relaxation_lower_bound = parent_relaxation_lower_bound;
