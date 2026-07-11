@@ -48,6 +48,7 @@ constexpr CPXLONG kContextBranching = 0x0080;
 constexpr CPXLONG kContextGlobalProgress = 0x0010;
 constexpr int kParamThreads = 1067;
 constexpr int kParamTimeLimit = 1039;
+constexpr int kParamMipGap = 2009;
 constexpr int kParamScreenOutput = 1035;
 constexpr int kParamMipDisplay = 2012;
 constexpr int kParamPreprocessingPresolve = 1030;
@@ -3103,6 +3104,15 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     api.setintparam(env, kParamThreads, std::max(1, threads));
     api.setintparam(env, kParamScreenOutput, 0);
     api.setintparam(env, kParamMipDisplay, 0);
+    out.native_mip_gap_param_id = kParamMipGap;
+    out.native_mip_gap = 1e-8;
+    out.native_mip_gap_set_rc =
+        api.setdblparam(env, kParamMipGap, out.native_mip_gap);
+    if (out.native_mip_gap_set_rc != 0) {
+        out.best_bound_fail_reason =
+            "CPX_PARAM_EPGAP_set_failed:" +
+            std::to_string(out.native_mip_gap_set_rc);
+    }
     if (enable_gini_branching) {
         api.setintparam(env, kParamMipStrategySearch, kMipSearchTraditional);
         api.setintparam(env, kParamPreprocessingPresolve, 0);
