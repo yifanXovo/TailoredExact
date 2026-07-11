@@ -1,0 +1,29 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\input{macros}
+\title{A Gini-Frontier Compact Certification Framework for Exact Static Rebalancing}
+\author{Algorithm chapter generated from the audited stable implementation}
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+We present the stable paper-facing exact method implemented by
+\texttt{paper-gf-tailored-bc}.  The method combines a Gini-frontier
+decomposition, valid interval screening, and CPLEX-managed fixed-interval
+compact branch-and-cut.  A relaxation vector selects bounded route-cutset
+candidates, while validity of every added inequality is independent of that
+vector.  A full-frontier ledger, independent incumbent verification, and
+source audits determine whether a global claim is admissible.
+\end{abstract}
+\input{sections/problem_definition}
+\input{sections/algorithm_framework}
+\input{sections/valid_inequalities}
+\input{sections/branch_and_cut_implementation}
+\input{sections/certificate_and_audit}
+\input{sections/computational_protocol}
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}

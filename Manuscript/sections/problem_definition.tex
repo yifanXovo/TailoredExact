@@ -1,0 +1,57 @@
+\section{Problem Definition}
+Let $\I=\{1,\ldots,n\}$ be the stations, let $\K$ be the vehicles, and let
+$0$ denote the depot.  Station $i$ has initial inventory $b_i$, capacity
+$c_i$, positive target $t_i$, and penalty weight $\omega_i$.  Vehicle $k$ has
+capacity $Q_k$ and duration limit $T_k$.  Travel times are $\tau_{ij}$.
+
+The compact model uses binary arc variables $x_{kij}$ and visit variables
+$z_{ki}$, nonnegative integer pickup and drop quantities $p_{ki}$ and
+$d_{ki}$, and final station inventory
+\begin{equation}
+  Y_i=b_i+\sum_{k\in\K}(d_{ki}-p_{ki}),\qquad 0\leq Y_i\leq c_i.
+  \label{eq:inventory}
+\end{equation}
+Standard depot flow, station flow, visit--service linking, station
+disjointness, vehicle load conservation, and load-capacity constraints make
+the selected arcs and operations an original feasible route-load plan.
+Vehicles start empty and may return residual load to the depot.  Under the
+implemented handling convention, route duration is
+\begin{equation}
+  \sum_{i,j}\tau_{ij}x_{kij}
+  +c^{\rm unit}\sum_i p_{ki}\leq T_k,
+  \qquad c^{\rm unit}=c^{\rm pick}+c^{\rm drop}.
+  \label{eq:duration}
+\end{equation}
+Thus a global handling inequality may charge pickups only; charging both
+$p$ and $d$ by $c^{\rm unit}$ would not be valid for this convention.
+
+Define the target ratios, denominator, pairwise deviations, and numerator by
+\begin{equation}
+ r_i=Y_i/t_i,\quad S=\sum_i r_i,\quad
+ h_{ij}=|r_i-r_j|\ (i<j),\quad H=\sum_{i<j}h_{ij}.
+\end{equation}
+Because $t_i>0$ and the feasible model maintains positive aggregate station
+inventory, $S>0$.  The Gini term \cite{gini1912} and weighted
+target-deviation penalty are
+\begin{equation}
+ G=\frac{H}{nS},\qquad
+ P=\sum_i\omega_i e_i,qquad e_i=|r_i-1|.
+ \label{eq:objective-components}
+\end{equation}
+For fixed $\lambda\geq0$, the objective is
+\begin{equation}
+ F=G+\lambda P. \label{eq:objective}
+\end{equation}
+The binary-expansion compact formulation represents the products required by
+the Gini objective to the declared numerical tolerance.  An independently
+reconstructed route-load plan is evaluated directly with
+\eqref{eq:objective-components}--\eqref{eq:objective}; only such a verified
+plan can supply an upper bound.
+
+\begin{definition}[Original feasible set]
+$\mathcal X$ is the set of route, service, load, and final-inventory vectors
+that satisfy the original compact routing and operation constraints and the
+duration convention \eqref{eq:duration}.  Strengthening rows do not redefine
+$\mathcal X$; each paper-core row below is necessary for membership in
+$\mathcal X$ under its stated interval condition.
+\end{definition}

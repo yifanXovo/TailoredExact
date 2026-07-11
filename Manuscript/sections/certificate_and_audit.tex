@@ -1,0 +1,38 @@
+\section{Certificate Ledger and Evidence Boundary}
+Each final Gini leaf records its interval, lower bound, closure basis, scope,
+solver status, and whether exact coverage remains.  A global certificate is
+written only when the verified incumbent exists, the improving domain is
+covered, every final leaf is validly closed, no invalid interval or open node
+remains, and the aggregate lower bound reaches the incumbent within tolerance.
+
+The admissible sources are valid frontier/relaxation bounds, exact original
+fixed-interval infeasibility, valid original fixed-interval CPLEX best bounds,
+and empty-domain proofs.  Same-run heuristic routes are upper bounds only and
+must pass independent route, load, inventory, Gini, penalty, and objective
+verification.
+
+The tested commands disable archive scanning, imported known or external
+incumbents, focus-only closure, route-subset enumeration, manual fixed-interval
+upper-bound import, and the optional S ledger.  Plain CPLEX rows, callback
+vectors, telemetry, and any diagnostic model are benchmark or diagnostic
+artifacts only.  The full-frontier merge does not read them.
+
+Audits enforce these rules at three levels.  Source audits reject
+instance-specific algorithm branches.  Per-JSON certificate audits check
+scope, coverage, verifier status, and forbidden-source flags.  Package audits
+require fresh-run provenance and reject summary or raw-result pointers to a
+different result round.  Thread and objective-convention audits ensure that
+tailored and benchmark rows use one CPLEX thread and the same $\lambda$,
+duration, inventory, target, Gini, and penalty conventions.
+
+\begin{corollary}[No diagnostic contamination]
+If the certificate-source, package-locality, and paper-strict audits pass, and
+the ledger hypotheses of the full-frontier theorem hold, no benchmark or
+diagnostic row is needed to establish the reported optimum.
+\end{corollary}
+\begin{proof}
+The allowed closure-source enumeration is exhaustive in the ledger audit.
+Every disallowed source is either absent or explicitly marked noncontributing;
+the audit rejects any contrary row.  The remaining accepted sources are those
+used in the theorem.
+\end{proof}

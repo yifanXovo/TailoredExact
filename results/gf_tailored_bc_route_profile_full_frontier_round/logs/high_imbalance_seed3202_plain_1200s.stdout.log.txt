@@ -1,0 +1,3 @@
+COMMAND: E:\codes\ExactEBRP\build\ExactEBRP.exe --method cplex --plain-baseline --input E:\codes\ExactEBRP\reference\hard_stress\V20_M3\high_imbalance_seed3202.txt --lambda 0.15 --T 3600 --time-limit 1200 --threads 1 --cplex-threads 1 --mip-threads 1 --log E:\codes\ExactEBRP\results\gf_tailored_bc_route_profile_full_frontier_round\logs\high_imbalance_seed3202_plain_1200s.solver.log.txt --out E:\codes\ExactEBRP\results\gf_tailored_bc_route_profile_full_frontier_round\raw\high_imbalance_seed3202_plain_1200s.json
+
+high_imbalance_seed3202.txt cplex not_certified obj=1.78996 runtime=1200.13 columns=0

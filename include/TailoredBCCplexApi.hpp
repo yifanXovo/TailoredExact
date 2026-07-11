@@ -105,6 +105,11 @@ struct TailoredBCCplexApiSolveResult {
     long long callback_vector_route_cutset_candidates = 0;
     long long callback_vector_route_cutset_violations = 0;
     double callback_vector_route_cutset_max_violation = 0.0;
+    double callback_vector_route_cutset_violation_sum = 0.0;
+    long long callback_vector_route_cutset_cuts_size_2 = 0;
+    long long callback_vector_route_cutset_cuts_size_3 = 0;
+    long long callback_vector_route_cutset_cuts_size_4 = 0;
+    long long callback_vector_route_cutset_cuts_size_5 = 0;
     long long callback_variable_s_centering_cuts_added = 0;
     long long callback_variable_s_centering_violations = 0;
     long long callback_subset_inventory_imbalance_cuts_added = 0;
@@ -185,6 +190,9 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     const std::string& support_duration_cover_mode,
     int gini_subset_max_size,
     int gini_subset_max_cuts,
+    int vector_route_cutset_max_size,
+    int vector_route_cutset_max_cuts,
+    double vector_route_cutset_min_violation,
     const std::string& separation_pacing,
     int separation_min_relaxation_calls,
     const std::string& callback_cut_profile,

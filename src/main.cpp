@@ -9691,6 +9691,9 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
                 "off",
                 1,
                 0,
+                3,
+                50,
+                1e-6,
                 "off",
                 tailored_opt.tailored_bc_callback_separation_min_calls,
                 "off",
@@ -9874,6 +9877,9 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
                 "support_cover_lifted",
                 tailored_opt.tailored_bc_gini_subset_max_size,
                 tailored_opt.tailored_bc_gini_subset_max_cuts,
+                tailored_opt.tailored_bc_vector_route_cutset_max_size,
+                tailored_opt.tailored_bc_vector_route_cutset_max_cuts,
+                tailored_opt.tailored_bc_vector_cut_min_violation,
                 tailored_opt.tailored_bc_callback_separation_pacing,
                 tailored_opt.tailored_bc_callback_separation_min_calls,
                 tailored_opt.tailored_bc_callback_cut_profile,
@@ -16334,7 +16340,8 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         const std::filesystem::path json_path =
             oracle_dir / ("interval_" + file_id + ".json");
         oracle_opt.out_path = json_path.string();
-        oracle_opt.log_path.clear();
+        oracle_opt.log_path =
+            (oracle_dir / ("interval_" + file_id + ".cplex.log")).string();
         oracle_opt.interval_exact_cutoff_export_lp =
             (oracle_dir / ("interval_" + file_id + ".lp")).string();
         oracle_opt.interval_exact_cutoff_result =

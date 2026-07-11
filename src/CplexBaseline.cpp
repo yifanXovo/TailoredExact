@@ -3774,6 +3774,9 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 options.tailored_bc_support_duration_cover_mode,
                 options.tailored_bc_gini_subset_max_size,
                 options.tailored_bc_gini_subset_max_cuts,
+                options.tailored_bc_vector_route_cutset_max_size,
+                options.tailored_bc_vector_route_cutset_max_cuts,
+                options.tailored_bc_vector_cut_min_violation,
                 options.tailored_bc_callback_separation_pacing,
                 options.tailored_bc_callback_separation_min_calls,
                 options.tailored_bc_callback_cut_profile,
@@ -4131,6 +4134,23 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 result.vector_callback_route_cutset_max_violation =
                     std::max(result.vector_callback_route_cutset_max_violation,
                              api_solve.callback_vector_route_cutset_max_violation);
+                result.vector_callback_route_cutset_violations +=
+                    api_solve.callback_vector_route_cutset_violations;
+                result.vector_callback_route_cutset_violation_sum +=
+                    api_solve.callback_vector_route_cutset_violation_sum;
+                result.vector_callback_route_cutset_average_violation =
+                    result.vector_callback_route_cutset_violations > 0
+                        ? result.vector_callback_route_cutset_violation_sum /
+                              static_cast<double>(result.vector_callback_route_cutset_violations)
+                        : 0.0;
+                result.vector_callback_route_cutset_cuts_size_2 +=
+                    api_solve.callback_vector_route_cutset_cuts_size_2;
+                result.vector_callback_route_cutset_cuts_size_3 +=
+                    api_solve.callback_vector_route_cutset_cuts_size_3;
+                result.vector_callback_route_cutset_cuts_size_4 +=
+                    api_solve.callback_vector_route_cutset_cuts_size_4;
+                result.vector_callback_route_cutset_cuts_size_5 +=
+                    api_solve.callback_vector_route_cutset_cuts_size_5;
                 result.vector_callback_support_cover_candidates +=
                     api_solve.callback_support_duration_pair_candidates +
                     api_solve.callback_support_duration_triple_candidates +

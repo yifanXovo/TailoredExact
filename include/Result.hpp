@@ -874,6 +874,13 @@ struct SolveResult {
     long long vector_callback_route_cutset_cuts_added = 0;
     double vector_callback_support_cover_max_violation = 0.0;
     double vector_callback_route_cutset_max_violation = 0.0;
+    long long vector_callback_route_cutset_violations = 0;
+    double vector_callback_route_cutset_violation_sum = 0.0;
+    double vector_callback_route_cutset_average_violation = 0.0;
+    long long vector_callback_route_cutset_cuts_size_2 = 0;
+    long long vector_callback_route_cutset_cuts_size_3 = 0;
+    long long vector_callback_route_cutset_cuts_size_4 = 0;
+    long long vector_callback_route_cutset_cuts_size_5 = 0;
     std::string tailored_bc_structural_profile = "manual";
     std::string vector_route_cuts_proof_status = "not_enabled";
     long long gini_spread_cuts_added = 0;

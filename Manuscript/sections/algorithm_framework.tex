@@ -1,0 +1,82 @@
+\section{Gini-Frontier Certification Framework}
+Suppose a verifier-gated incumbent has objective $\cutoff$.  Any improving
+solution satisfies $G<\cutoff$ because $P\geq0$.  The algorithm partitions the
+relevant improving Gini domain into closed intervals
+$\Gamma_q=[\gamma_q^L,\gamma_q^U]$ whose interiors are disjoint and whose
+union covers that domain.
+
+For each interval, a valid non-enumerative relaxation first supplies a lower
+bound.  An interval not fathomed by that bound is passed to the original
+fixed-interval compact model.  Its no-improver form includes
+\begin{align}
+ \gamma_q^L &\leq G\leq\gamma_q^U,\label{eq:ginterval}\\
+ G+\lambda P &\leq \cutoff-\eps.\label{eq:cutoff}
+\end{align}
+CPLEX then proves infeasibility, proves a valid best bound at least
+$\cutoff-\eps$, or returns an unresolved leaf with its valid bound.  A timeout
+or wrapper checkpoint never becomes an exact closure by itself.
+
+\begin{proposition}[Fixed-interval no-improver validity]
+If the model consisting of the original compact formulation,
+\eqref{eq:ginterval}, \eqref{eq:cutoff}, and globally valid strengthening
+rows is infeasible, then no original feasible solution in $\Gamma_q$ improves
+the incumbent.
+\end{proposition}
+\begin{proof}
+Every original improving solution in $\Gamma_q$ satisfies the original model,
+the interval rows, and \eqref{eq:cutoff}.  Every strengthening row is a
+necessary condition for that same solution.  Such a solution would therefore
+be feasible in the fixed-interval model, contradicting infeasibility.
+\end{proof}
+
+\begin{theorem}[Full-frontier global exactness]
+Let $\widehat x\in\mathcal X$ be independently verified with objective
+$\cutoff$.  Assume (i) the final Gini leaves exactly cover every possible
+improving Gini value; (ii) each final leaf is closed by a valid relaxation
+bound, exact fixed-interval infeasibility, a valid fixed-interval best bound,
+or an empty-domain proof; and (iii) no invalid, unresolved, or open leaf
+remains.  Then $\widehat x$ is globally optimal.
+\end{theorem}
+\begin{proof}
+If a better solution existed, its Gini value would belong to one final leaf.
+The corresponding leaf closure proves that no improving original solution
+exists in that leaf, a contradiction.  Hence no feasible solution has
+objective below $\cutoff$.
+\end{proof}
+
+An optional paper-safe $S$ refinement may partition a fixed Gini leaf's valid
+domain $[S^L,S^U]$ into children.  This option was disabled in the tested
+route profile.
+\begin{proposition}[Optional $S$-ledger disjunction]
+If $[S^L,S^U]=\bigcup_b[S_b^L,S_b^U]$ with disjoint interiors and every child
+is exactly closed using the enforced child bounds, then the parent Gini leaf
+is closed.
+\end{proposition}
+\begin{proof}
+Every parent-feasible point has one denominator value $S$ and therefore lies
+in at least one child.  Closure of every child excludes every parent-feasible
+improver.  Exact coverage prevents an omitted denominator region.
+\end{proof}
+
+\begin{center}
+\begin{minipage}{0.9\linewidth}
+\textbf{Stable algorithm.} Generate and verify a same-run heuristic incumbent;
+construct the full Gini ledger; screen leaves with valid relaxation bounds;
+solve unresolved leaves with the tailored compact model and the selected
+route-cutset callback; merge only exact leaf evidence; certify only after the
+coverage and source audits pass.
+\end{minipage}
+\end{center}
+
+Operationally, the stable implementation executes the following generic
+sequence for every instance:
+\begin{enumerate}
+\item construct and independently verify a same-run HGA--TGBC incumbent;
+\item partition the complete improving Gini domain and initialize its ledger;
+\item apply valid non-enumerative bounds and domain propagation to each leaf;
+\item solve every unresolved leaf with the original fixed-interval compact
+model, paper-safe static rows, and the bounded route-cutset separator;
+\item merge only scope-valid leaf bounds or exact closures; and
+\item issue a global certificate only after coverage, verifier, source, and
+finalization audits all pass.
+\end{enumerate}
