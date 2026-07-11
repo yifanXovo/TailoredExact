@@ -1,0 +1,40 @@
+\section{Computational Protocol}
+The fresh evaluation uses source commit recorded in the package manifest and
+stores every raw JSON, child interval model, progress trace, solver log, and
+summary under one result directory.  No prior raw row or fixed-interval
+incumbent is copied.  Tailored and official plain CPLEX rows both use one
+solver thread.  A generic wall-budget policy allocates 68\% to frontier
+construction, 28\% to exact interval leaves, and 4\% to model and wrapper
+overhead; the benchmark receives the matched nominal wall budget directly.
+Runs longer than three hours emit five-minute progress and process-tree memory
+samples.
+
+The controls are V12/M1, V12/M2, \path{tight_T_seed3101}, and
+\path{high_imbalance_seed3202}.  The hard set is
+\path{moderate_seed3301}, \path{moderate_seed3302},
+\path{high_imbalance_seed3201}, and \path{tight_T_seed3102}.
+Comparisons use matched nominal budgets and distinguish certified runtime from
+noncertified bound/gap evidence.  Fixed-interval diagnostics are not compared
+as if they were full-frontier runs.
+
+\IfFileExists{generated_results.tex}{\input{generated_results}}{
+\paragraph{Result table.} The package aggregation step generates
+\texttt{generated\_results.tex} from fresh selected rows.}
+
+In this matrix the tailored framework certifies all four controls, although
+the required budget is not uniformly lower than plain CPLEX.  None of the
+four hard rows is certified.  The long hard rows expose both valid open-ledger
+progress and wrapper/native-exit failures; these are reported rather than
+converted into closures.  Size-four callback rows are observed, confirming
+that the selected separator is active, but this experiment has no matched
+no-callback tailored arm.  It therefore does not identify the callback's
+causal contribution separately from the rest of the tailored framework.
+The mixed hard-row comparison supports continued experimental use of the
+profile, not a claim of uniform dominance or a universal default policy.
+
+The computational conclusions are deliberately limited to this matrix.  A
+certified control supports stability; an open hard row reports its valid
+ledger bound and blocker.  A route-profile advantage requires either an exact
+certificate absent from the matched benchmark or a clearly stronger valid
+same-budget bound trajectory.  No claim is inferred from callback row count
+alone.

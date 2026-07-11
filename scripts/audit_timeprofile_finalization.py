@@ -70,7 +70,10 @@ def main() -> int:
             reasons.append("final_gap_worse_than_best_valid_gap_seen")
         if gap == 0.0 and not benchmark_only and not b(data.get("certified_original_problem")) and not leaf_closed:
             reasons.append("zero_gap_without_certificate")
-        if str(data.get("finalization_source", "")).startswith("wrapper") and not b(data.get("final_json_uses_best_checkpoint")):
+        checkpoint_available = bool(str(data.get("best_valid_ledger_checkpoint", "")).strip())
+        if (str(data.get("finalization_source", "")).startswith("wrapper")
+                and checkpoint_available
+                and not b(data.get("final_json_uses_best_checkpoint"))):
             reasons.append("wrapper_not_using_best_checkpoint")
         failures += bool(reasons)
         rows.append({

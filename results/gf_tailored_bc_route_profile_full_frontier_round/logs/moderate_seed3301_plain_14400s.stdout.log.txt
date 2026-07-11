@@ -1,0 +1,3 @@
+COMMAND: E:\codes\ExactEBRP\build\ExactEBRP.exe --method cplex --plain-baseline --input E:\codes\ExactEBRP\reference\hard_stress\V20_M3\moderate_seed3301.txt --lambda 0.15 --T 3600 --time-limit 14400 --threads 1 --cplex-threads 1 --mip-threads 1 --log E:\codes\ExactEBRP\results\gf_tailored_bc_route_profile_full_frontier_round\logs\moderate_seed3301_plain_14400s.solver.log.txt --out E:\codes\ExactEBRP\results\gf_tailored_bc_route_profile_full_frontier_round\raw\moderate_seed3301_plain_14400s.json
+
+moderate_seed3301.txt cplex not_certified obj=0.049369 runtime=14460.6 columns=0

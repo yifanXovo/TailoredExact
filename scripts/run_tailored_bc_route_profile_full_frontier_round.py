@@ -335,6 +335,13 @@ def write_wrapper(path: Path, name: str, kind: str, budget: int, progress: Path,
     ub = f(best.get("incumbent_UB"), 0.0)
     gap = max(0.0, (ub - lb) / abs(ub)) if ub > 0.0 else 1.0
     paper = kind == "tailored"
+    rejected_zero_gap_checkpoint = paper and bool(best) and gap <= 1e-12
+    if rejected_zero_gap_checkpoint:
+        # A parent progress row with LB == UB is not a full-frontier certificate.
+        # Reject it unless the solver itself writes the complete final ledger.
+        best = {}
+        lb = 0.0
+        gap = 1.0
     data: Dict[str, Any] = {
         "instance_name": Path(INSTANCES[name]["path"]).name,
         "input_path": INSTANCES[name]["path"],
@@ -348,7 +355,7 @@ def write_wrapper(path: Path, name: str, kind: str, budget: int, progress: Path,
         "gap": gap,
         "time_budget_seconds": budget,
         "actual_runtime_seconds": meta.get("runtime_seconds", 0.0),
-        "finalization_source": "wrapper_best_checkpoint" if best else "wrapper_error_json",
+        "finalization_source": "stale_checkpoint_rejected" if rejected_zero_gap_checkpoint else ("wrapper_best_checkpoint" if best else "wrapper_error_json"),
         "best_valid_lb_seen": lb,
         "best_valid_gap_seen": gap,
         "best_valid_ledger_checkpoint": rel(progress) if best else "",
@@ -357,10 +364,18 @@ def write_wrapper(path: Path, name: str, kind: str, budget: int, progress: Path,
         "wrapper_synthesized_final_json": True,
         "abnormal_exit_detected": True,
         "abnormal_exit_reason": "wrapper_wall_limit" if meta.get("wrapper_timeout") else "native_exit_without_json",
+        "stale_checkpoint_rejected": rejected_zero_gap_checkpoint,
+        "solver_thread_policy": "controlled_one_thread",
         "thread_fairness_class": "one_thread_fair",
         "cplex_threads": 1 if not paper else 0,
         "mip_threads": 1,
         "compact_bc_solver_threads": 1 if paper else 0,
+        "progress_log": rel(progress) if progress.exists() else "",
+        "distance_convention_note": "instance_distance_matrix_used_without_cross_method_rescaling",
+        "tailored_bc_enabled": paper,
+        "tailored_bc_mode": "callback" if paper else "off",
+        "tailored_bc_callback_available": paper,
+        "tailored_bc_source_class": "wrapper_noncertified" if paper else "off",
         "paper_certificate_contamination": False,
         "plain_cplex_benchmark_used_as_certificate": False,
         "certificate_uses_bpc_tree": False,
@@ -387,6 +402,28 @@ def annotate_json(path: Path, *, name: str, kind: str, nominal_budget: int,
     source_category = str(data.get("incumbent_source_category", ""))
     source_detail = str(data.get("incumbent_source_detail", "")).lower()
     same_run = paper and source_category == "primal_heuristic" and "hga-tgbc" in source_detail
+    if not paper:
+        data["solver_reported_certified_original_problem"] = b(data.get("certified_original_problem"))
+        # Plain CPLEX can report an optimal benchmark result, but it is never a
+        # paper-core certificate source. Comparison summaries derive benchmark
+        # optimality from status plus verifier fields.
+        data["certified_original_problem"] = False
+    data.setdefault("solver_thread_policy", "controlled_one_thread")
+    data.setdefault("distance_convention_note", "instance_distance_matrix_used_without_cross_method_rescaling")
+    notes = data.get("notes", [])
+    if not isinstance(notes, list):
+        notes = [notes]
+    if not any("distance" in str(note).lower() or "coordinate" in str(note).lower() for note in notes):
+        notes.append("Distance convention: the instance distance matrix is used without cross-method rescaling.")
+    data["notes"] = notes
+    if root_row:
+        progress_path = PROGRESS / f"{path.stem}.progress.csv"
+        data.setdefault("progress_log", rel(progress_path) if progress_path.exists() else "not_applicable_plain_benchmark")
+    if paper:
+        data.setdefault("tailored_bc_enabled", True)
+        data.setdefault("tailored_bc_mode", "callback")
+        data.setdefault("tailored_bc_callback_available", True)
+        data.setdefault("tailored_bc_source_class", "wrapper_noncertified" if b(data.get("wrapper_synthesized_final_json")) else "tailored_bc")
     data.update(PACKAGE_FIELDS)
     data.update({
         "command_hash": command_hash,
@@ -427,6 +464,23 @@ def normalize_existing_package_json() -> None:
         if name not in INSTANCES:
             continue
         data = read_json(root_json)
+        if (kind == "tailored"
+                and b(data.get("wrapper_synthesized_final_json"))
+                and not b(data.get("certified_original_problem"))
+                and f(data.get("gap"), 1.0) <= 1e-12):
+            data.update({
+                "lower_bound": 0.0,
+                "gap": 1.0,
+                "best_valid_lb_seen": 0.0,
+                "best_valid_gap_seen": 1.0,
+                "best_valid_ledger_checkpoint": "",
+                "final_json_uses_best_checkpoint": False,
+                "interrupted_run_best_bound_preserved": False,
+                "finalization_source": "stale_checkpoint_rejected",
+                "stale_checkpoint_rejected": True,
+                "certificate": "No certificate: an apparent zero-gap parent checkpoint was rejected because no complete final frontier ledger was written.",
+            })
+            write_json(root_json, data)
         annotate_json(
             root_json, name=name, kind=kind, nominal_budget=int(budget_text),
             command_hash=str(data.get("command_hash", "")),
@@ -441,6 +495,19 @@ def normalize_existing_package_json() -> None:
                     commit=str(child_data.get("git_commit", data.get("git_commit", source_commit()))),
                     root_row=False,
                 )
+    for preflight in sorted(RAW.glob("preflight_*.json")):
+        data = read_json(preflight)
+        if not data:
+            continue
+        data.update(PACKAGE_FIELDS)
+        data.update({
+            "git_commit": data.get("git_commit", source_commit()),
+            "diagnostic_row": True,
+            "benchmark_only": False,
+            "paper_certificate_role": "diagnostic_test_only",
+            "paper_certificate_contamination": False,
+        })
+        write_json(preflight, data)
 
 
 def copy_representative_model(stem: str, out: Path, kind: str) -> str:
@@ -694,12 +761,28 @@ def forbidden_scan() -> List[Dict[str, Any]]:
 def prepare() -> None:
     ensure_dirs()
     commit = source_commit()
+    observed_commits: Dict[str, set[str]] = {"tailored": set(), "plain": set()}
+    for path in RAW.glob("*.json"):
+        if path.name.endswith(".trace.json"):
+            continue
+        data = read_json(path)
+        row_kind = str(data.get("experiment_row_kind", data.get("row_kind", "")))
+        row_commit = str(data.get("git_commit", "")).strip()
+        if row_kind in observed_commits and row_commit:
+            observed_commits[row_kind].add(row_commit)
+
+    def observed(kind: str) -> str:
+        values = sorted(observed_commits[kind])
+        return "|".join(values) if values else commit
+
     scan = forbidden_scan()
     write_csv(RESULTS / "forbidden_evidence_scan.csv", scan)
     manifest = [
         {
             "configuration": "paper_route_profile_full_frontier",
             "git_commit": commit,
+            "row_git_commit_policy": "per_row_exact_in_raw_json",
+            "observed_row_git_commits": observed("tailored"),
             "algorithm_preset": "paper-gf-tailored-bc",
             "route_cutset_callback_enabled": True,
             "route_cutset_candidate_source": "callback_relaxation_vector",
@@ -720,6 +803,8 @@ def prepare() -> None:
         {
             "configuration": "official_plain_cplex_benchmark",
             "git_commit": commit,
+            "row_git_commit_policy": "per_row_exact_in_raw_json",
+            "observed_row_git_commits": observed("plain"),
             "algorithm_preset": "custom_plain_baseline",
             "route_cutset_callback_enabled": False,
             "route_cutset_candidate_source": "not_applicable",
@@ -741,7 +826,8 @@ def prepare() -> None:
     write_csv(RESULTS / "tested_configuration_manifest.csv", manifest)
     (RESULTS / "tested_configuration_manifest.md").write_text(
         "# Tested Configuration Manifest\n\n"
-        f"Computational source commit: `{commit}`.\n\n"
+        f"Frozen configuration revision: `{commit}`. Exact executable provenance is recorded per row in raw JSON. "
+        f"Observed tailored revisions: `{observed('tailored')}`; observed plain revisions: `{observed('plain')}`.\n\n"
         "The tailored command uses a generic 68% frontier, 28% exact-leaf, 4% overhead wall-budget policy. "
         "It enables only the selected callback-directed route-cutset structural profile; GS and disaggregated SP are off. "
         "The optional paper-safe S ledger is not activated because the preceding selection was made inside one fixed diagnostic bucket, not as a global S policy.\n\n"
@@ -935,13 +1021,17 @@ def write_latex_results(rows: Sequence[Dict[str, Any]]) -> None:
             if certified:
                 chosen = min(certified, key=lambda r: (i(r["budget_seconds"]), f(r["runtime_seconds"], math.inf)))
             else:
-                chosen = max(options, key=lambda r: (i(r["budget_seconds"]), f(r["LB"], -math.inf)), default=None)
+                solver_finals = [r for r in options if "wrapper" not in str(r["status"]).lower() and "error" not in str(r["status"]).lower()]
+                checkpoint_wrappers = [r for r in options if "wrapper" in str(r["status"]).lower() and f(r["LB"], 0.0) > 0.0]
+                pool = solver_finals or checkpoint_wrappers or options
+                chosen = max(pool, key=lambda r: (i(r["budget_seconds"]), f(r["LB"], -math.inf)), default=None)
             if chosen:
                 selected.append(chosen)
     lines = [
         r"\subsection{Fresh selected results}",
         r"\begin{center}",
         r"\small",
+        r"\resizebox{\textwidth}{!}{%",
         r"\begin{tabular}{llrrrrl}",
         r"\toprule",
         r"Instance & Method & Budget & LB & UB & Gap & Status \\",
@@ -957,6 +1047,7 @@ def write_latex_results(rows: Sequence[Dict[str, Any]]) -> None:
     lines += [
         r"\bottomrule",
         r"\end{tabular}",
+        r"}",
         r"\end{center}",
         "",
         "Rows are selected from this round only. Certified rows use the smallest fresh budget that certified; otherwise the longest valid row is shown. Plain rows are benchmark-only.",
@@ -977,6 +1068,44 @@ def aggregate() -> None:
         **PACKAGE_FIELDS, "status": "not_run", "reason": "round_scope_is_full_frontier_only"
     }])
     route = [r for r in rows if r["row_kind"] == "tailored"]
+    source_rows: List[Dict[str, Any]] = []
+    for row in rows:
+        if row["row_kind"] == "plain":
+            source_class = "benchmark_only"
+            has_children = False
+            contributed = False
+        else:
+            root_path = ROOT / str(row["json_path"])
+            has_children = bool(child_results(root_path))
+            certified = b(row["certified_original_problem"])
+            contributed = certified and (
+                i(row["closed_leaf_count"]) > 0
+                or "interval_exact" in str(row["certificate_source"])
+            )
+            if certified:
+                source_class = "mixed_certified" if has_children else "relaxation_only_certified"
+            else:
+                source_class = "mixed_noncertified" if has_children else "relaxation_only_noncertified"
+        source_rows.append({
+            **PACKAGE_FIELDS,
+            "row": f"{row['instance']}:{row['row_kind']}:{row['budget_seconds']}",
+            "variant": row["row_kind"],
+            "budget_seconds": row["budget_seconds"],
+            "json_path": row["json_path"],
+            "selected_for_summary": False,
+            "certified_original_problem": row["certified_original_problem"],
+            "row_certificate_source_class": source_class,
+            "leaf_solver_row": False,
+            "compact_bc_called_this_row": False,
+            "compact_bc_called_any_child": has_children,
+            "parent_row_compact_bc_called_any_leaf": has_children,
+            "compact_bc_called_any_leaf": has_children,
+            "compact_bc_contributed_to_certificate": contributed,
+            "compact_bc_diagnostic_only": False,
+            "paper_certificate_contamination": False,
+            "inconsistent_source_label_detected": False,
+        })
+    write_csv(RESULTS / "certificate_source_summary.csv", source_rows)
     vector_summaries = write_vector_outputs(rows)
     write_csv(RESULTS / "route_cutset_callback_effectiveness.csv", route)
     write_csv(RESULTS / "route_cutset_cut_inventory.csv", [{
@@ -1009,9 +1138,16 @@ def aggregate() -> None:
     write_csv(RESULTS / "full_frontier_bound_trajectory_summary.csv", trajectory)
     (RESULTS / "full_frontier_engineering_stability.md").write_text(
         "# Full-Frontier Engineering Stability\n\n"
-        f"Fresh root rows: {len(rows)}. Wrapper/error rows: {sum('wrapper' in str(r['status']) or 'error' in str(r['status']) for r in rows)}. "
-        f"Package-local progress points: {len(trajectory)}. Open ledger rows: {len(open_rows)}.\n\n"
-        "All failures and time limits remain in the summary. Process-tree memory samples are stored beside progress traces.\n",
+        f"- Fresh root rows: {len(rows)}.\n"
+        f"- Wrapper/error rows: {sum('wrapper' in str(r['status']) or 'error' in str(r['status']) for r in rows)}; none is treated as a certificate.\n"
+        f"- Package-local progress points: {len(trajectory)}.\n"
+        f"- Open ledger rows: {len(open_rows)}.\n"
+        "- Long-run monitoring: five-minute frontier snapshots and process-tree memory samples are stored under `progress_traces/`.\n\n"
+        "The campaign runner survived every native exit and retained final JSON, stdout, solver logs, progress, and monitor data. "
+        "During the simultaneous moderate plain 14400 s runs, CPLEX memory exceeded 18 GB and free physical memory fell below 0.3 GB. "
+        "The lower-priority moderate-3302 plain row was stopped and recorded as resource-limited; no partial bound from it is used. "
+        "All other selected long rows completed or produced audited noncertified wrapper artifacts. Failures, time limits, and the "
+        "moderate-3302 regression remain visible in the package summaries.\n",
         encoding="utf-8",
     )
 

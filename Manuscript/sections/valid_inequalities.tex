@@ -1,0 +1,121 @@
+\section{Active Paper-Safe Strengthening}
+This section states the families enabled by the tested
+\texttt{structural\_route\_limited} profile.  A family may add zero rows on a
+particular leaf; activation means that its separator or model generator is
+available under the conditions below.
+
+\subsection{Gini and product rows}
+\begin{proposition}[Direct interval rows]
+For a fixed interval, the inequalities
+\begin{equation}
+ H\leq n\gamma^U S,\qquad H\geq n\gamma^L S
+ \label{eq:direct-gini}
+\end{equation}
+are valid.
+\end{proposition}
+\begin{proof}
+Multiply $\gamma^L\leq H/(nS)\leq\gamma^U$ by the positive value $nS$.
+\end{proof}
+
+\begin{proposition}[Interval-tight binary products]
+Let $a\in\{0,1\}$, $G\in[\gamma^L,\gamma^U]$, and $w=Ga$.  The four rows
+\begin{align}
+w&\geq\gamma^L a,&w&\leq\gamma^U a,\\
+w&\geq G-\gamma^U(1-a),&w&\leq G-\gamma^L(1-a)
+\end{align}
+describe $w=Ga$ exactly for binary $a$ and strengthen a generic $[0,1]$
+envelope.
+\end{proposition}
+\begin{proof}
+For $a=0$ they imply $w=0$; for $a=1$ they imply $w=G$.
+\end{proof}
+
+For $A\subseteq\I$, let $R_A=\sum_{i\in A}r_i$.  Triangle inequalities for
+pairwise absolute deviations yield
+\begin{equation}
+ |nR_A-|A|S|\leq\sum_{i\in A,j\notin A}h_{ij}
+ \leq H\leq n\gamma^U S. \label{eq:subset-gini}
+\end{equation}
+Thus the subset-envelope and local centering rows used by the static model are
+valid.  In particular, setting $A=\{i\}$ gives
+$|nr_i-S|\leq\sum_{j\ne i}h_{ij}$.  The low-Gini $L_1$ auxiliaries implement
+the same absolute-deviation logic without changing the feasible integer set.
+
+Let $r_{\min}\leq r_i\leq r_{\max}$ for all $i$.  Since
+$H\geq(n-1)(r_{\max}-r_{\min})$, the active variable-$S$ centering row
+\begin{equation}
+ (n-1)(r_{\max}-r_{\min})\leq n\gamma^U S \label{eq:variables-centering}
+\end{equation}
+follows from \eqref{eq:direct-gini}.
+
+\subsection{Objective estimators}
+Let $P^L\leq P\leq P^U$ and $S^L\leq S\leq S^U$ be valid model-domain bounds.
+The active $W_{SP}$ variable satisfies the four McCormick rows for $SP$ on
+this box.  Every original point admits $W_{SP}=SP$ and hence satisfies
+\begin{equation}
+ H+n\lambda W_{SP}\leq n(\cutoff-\eps)S. \label{eq:sp-estimator}
+\end{equation}
+Consequently, the McCormick system plus \eqref{eq:sp-estimator} is a valid
+relaxation of the nonlinear cutoff.  The simpler active estimator
+\begin{equation}
+ H+nS^U\lambda P\leq nS^U(\cutoff-\eps) \label{eq:su-estimator}
+\end{equation}
+is necessary because $H/(nS)+\lambda P\leq\cutoff-\eps$, $S\leq S^U$, and
+$P\geq0$.  Domain minima of $|Y_i/t_i-1|$ give $P\geq P^L$; if
+$\gamma^L+\lambda P^L\geq\cutoff-\eps$, the leaf is empty of improvers.
+
+\subsection{Inventory, movement, and visit rows}
+Vehicles start empty and may unload residual pickup at the depot.  Therefore
+\begin{equation}
+ \sum_i b_i-\sum_k Q_k\leq\sum_iY_i\leq\sum_i b_i. \label{eq:inventory-total}
+\end{equation}
+For station $i$ and vehicle $k$, define the unavoidable return travel
+$\rho_{ki}=\tau_{0i}+\tau_{i0}$ and
+$m_{ki}=\lfloor(T_k-\rho_{ki})/c^{\rm unit}\rfloor_+$.  Station disjointness
+implies the safe reachability domain
+\begin{align}
+Y_i&\geq b_i-\max_k\min\{b_i,Q_k,m_{ki}\},\\
+Y_i&\leq b_i+\max_k\min\{c_i-b_i,Q_k,m_{ki}\}.
+\end{align}
+Intersecting these bounds with capacities and the incumbent penalty budget is
+valid domain propagation.  The visit links
+\begin{align}
+Y_i-b_i&\leq(c_i-b_i)\sum_kz_{ki},\\
+b_i-Y_i&\leq b_i\sum_kz_{ki}
+\end{align}
+force $Y_i=b_i$ when no vehicle visits.  Required-movement rows merely sum the
+minimum pickup or drop implied by these valid final-inventory domains, so they
+are necessary.  The global handling row
+$c^{\rm unit}\sum_{k,i}p_{ki}\leq\sum_kT_k$ follows by summing
+\eqref{eq:duration} and dropping nonnegative travel.
+
+For any pair $i,j$, valid ratio domains directly bound
+$h_{ij}=|r_i-r_j|$; these are the active Gini spread rows.  Subset inventory
+rows similarly bound the net pickup or delivery of a station subset by the
+sum of valid station and vehicle movement capacities.  They cannot exclude an
+original route-load plan because every such plan obeys the same conservation.
+
+\subsection{Duration and transfer compatibility}
+For a small support $A$ and vehicle $k$, let $L_k(A)$ be a lower bound on the
+depot tour visiting every station in $A$.  If
+\begin{equation}
+ L_k(A)+c^{\rm unit}\lceil |A|/2\rceil>T_k,
+\end{equation}
+then $\sum_{i\in A}z_{ki}\leq|A|-1$ is valid.  The tested model generates this
+family for pairs and triples, using exact small-subset cycle bounds and a
+conservative handling lower bound.
+
+Under the empty-start convention, positive net delivery by vehicle $k$ into
+$D\subseteq\I$ must be sourced by pickups outside $D$:
+\begin{equation}
+ \sum_{j\in D}d_{kj}-\sum_{j\in D}p_{kj}
+ \leq\sum_{i\notin D}p_{ki}. \label{eq:transfer-cutset}
+\end{equation}
+The pairwise compatibility rows further remove a source--receiver pairing only
+when a conservative depot--source--receiver--depot duration lower bound proves
+that pairing impossible.  Both statements are necessary for every original
+route of an empty-start vehicle.
+
+Receiver-set cover, diagnostic lower/equality rows for $H$, GS coupling, and
+disaggregated SP coupling are not active in the tested profile and supply no
+paper evidence here.

@@ -1,0 +1,60 @@
+\section{CPLEX-Managed Tailored Branch-and-Cut}
+The fixed-interval compact model is solved through the CPLEX C API
+\cite{cplex2211}.  CPLEX
+manages presolve, LP relaxations, branching, node selection, incumbents, best
+bounds, and MIP termination.  The tailored layer constructs the original
+fixed-interval model, applies the static valid rows of the previous section,
+and registers a bounded user-cut separator.
+
+\subsection{Selected directed route-cutset separator}
+For vehicle $k$, a station subset $A\subseteq\I$ not containing the depot, and
+a representative $\ell\in A$, define the directed boundary
+\begin{equation}
+ \delta_k(A)=
+ \sum_{i\notin A,j\in A}x_{kij}
+ +\sum_{i\in A,j\notin A}x_{kij}.
+\end{equation}
+The callback separates
+\begin{equation}
+ \delta_k(A)\geq2z_{k\ell}. \label{eq:route-cutset}
+\end{equation}
+
+\begin{proposition}[Validity of the callback route cut]
+Inequality \eqref{eq:route-cutset} is valid for every original integer route,
+regardless of how $A$ was selected.
+\end{proposition}
+\begin{proof}
+If $z_{k\ell}=0$, the right-hand side is zero and the inequality follows from
+nonnegativity.  If $z_{k\ell}=1$, the depot-rooted route visits a node in $A$.
+Because the depot is outside $A$ and the route starts and ends at the depot,
+it must enter $A$ at least once and leave $A$ at least once.  These two arcs
+contribute at least two to $\delta_k(A)$.
+\end{proof}
+
+At a relaxation callback, stations with positive fractional visit values are
+ranked.  Candidate subsets have size at most four, at most 50 cuts are added
+per fixed-interval solve, and only rows violated by more than $10^{-6}$ are
+submitted.  The relaxation vector is therefore a separation heuristic only;
+the proof above, not the sampled vector, establishes validity.  No candidate
+selection rule reads an instance name, seed, path, archived result, or known
+objective.
+
+The implementation records candidate count, violated count, added count,
+maximum and mean violation, and cut counts by subset size.  It also exports the
+first relaxation vector for diagnostic fractionality analysis.  This vector
+never enters the certificate ledger.
+
+\subsection{Solver boundary and exact closure}
+CPLEX best bounds are admissible only for the original fixed-interval compact
+model with paper-safe rows.  Integer infeasibility closes a no-improver leaf;
+integer optimality plus independent route reconstruction may update a same-run
+upper bound according to the sealed-run policy.  A finite time-limit best
+bound may improve the ledger only when its scope and validity flags identify
+the original fixed interval.  Wrapper-only heartbeats and diagnostic vectors
+cannot close a leaf.
+
+The official plain benchmark uses the current binary-expansion compact MILP
+and CPLEX with the same single-thread policy.  It does not use the frontier,
+tailored static rows, or route callback and is never imported into the tailored
+certificate.  Standard branch-and-cut validity follows the requirement that
+user cuts retain every original integer feasible point \cite{wolsey1998}.

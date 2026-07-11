@@ -1,0 +1,9 @@
+audit,passed,reason
+callback_vector_rows_present,True,callback_rows=12574
+missing_values_not_zero_filled,True,bad_value_rows=0
+vectors_marked_diagnostic_only,True,non_diagnostic_rows=0
+required_families_observed_or_listed,True,families=G|McCormick auxiliary variables|W_SP|Y_i|bit variables|d_k_i|e_i|h_i_j|load variables|objective-estimator auxiliary variables|p_k_i|r_i|service/mode variables|x_k_i_j|z_k_i
+unparsed_columns_listed,True,unknown_unparsed_rows=0
+at_least_95_percent_columns_classified,True,parsed_fraction=1.000000000
+documented_auxiliary_families_classified,True,documented_families=McCormick auxiliary variables|bit variables|load variables|objective-estimator auxiliary variables|service/mode variables
+root_lp_rows_absent_labeled_by_empty_file,True,root_lp_vector_raw.csv has no rows; no zero-filled root vector was synthesized

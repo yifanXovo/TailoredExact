@@ -1,0 +1,468 @@
+﻿pdflatex: security risk: running with elevated privileges
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-24>
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cl
+s
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/base\size11.clo
+))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geomet
+ry.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval
+.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.
+sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.s
+ty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geomet
+ry.cfg))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath
+.sty
+For additional information on amsmath, use the `?' option.
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext
+.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.
+sty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.
+sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.
+sty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssym
+b.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfon
+ts.sty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.s
+ty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\bookta
+bs.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphi
+cx.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphi
+cs.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.s
+ty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\gr
+aphics.cfg)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pd
+ftex.def)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperr
+ef.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvset
+keys.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\
+kvdefinekeys.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdf
+escape.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcm
+ds.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pd
+ftexcmds.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\inf
+warerr.sty)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor
+.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\namere
+f.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcou
+nt.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestrin
+g\gettitlestring.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvopt
+ions.sty)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolb
+ox.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\str
+ingenc.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc
+.def)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intca
+lc.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.
+def)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset
+.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bi
+gintcalc.sty)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdfte
+x.def
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\
+rerunfilecheck.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter
+\uniquecounter.sty)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\micro
+type.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\micro
+type-pdftex.def)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\micro
+type.cfg)) (macros.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3bac
+kend-pdftex.def) (main.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\sup
+p-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\ep
+stopdf-base.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstop
+df-sys.cfg)) (main.out) (main.out)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cm
+r.cfg)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.f
+d)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-ms
+a.cfg)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.f
+d)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-ms
+b.cfg) (sections/problem_definition.tex [1{C:/Users/Administrator/AppData/Local
+/MiKTeX/fonts/map/pdftex/pdftex.map}]) (sections/algorithm_framework.tex
+[2]) (sections/valid_inequalities.tex [3] [4])
+(sections/branch_and_cut_implementation.tex [5])
+(sections/certificate_and_audit.tex) (sections/computational_protocol.tex
+[6] (generated_results.tex)) (main.bbl [7]) [8] (main.aux) )<C:/Users/Administr
+ator/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C
+:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
+/cm/cmbx12.pfb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmex10.pfb><C:/Users/Administrator/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Administrator/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Admi
+nistrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pf
+b><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmr12.pfb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmr17.pfb><C:/Users/Administrator/AppData/Local/Program
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Administrator/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Adm
+inistrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.p
+fb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmti10.pfb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on main.pdf (8 pages, 240241 bytes).
+Transcript written on main.log.
+pdflatex: major issue: So far, you have not checked for MiKTeX updates.
+bibtex: security risk: running with elevated privileges
+This is BibTeX, Version 0.99e (MiKTeX 25.12)
+The top-level auxiliary file: main.aux
+The style file: plain.bst
+Database file #1: references.bib
+bibtex: major issue: So far, you have not checked for MiKTeX updates.
+pdflatex: security risk: running with elevated privileges
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-24>
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cl
+s
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/base\size11.clo
+))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geomet
+ry.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval
+.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.
+sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.s
+ty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geomet
+ry.cfg))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath
+.sty
+For additional information on amsmath, use the `?' option.
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext
+.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.
+sty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.
+sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.
+sty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssym
+b.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfon
+ts.sty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.s
+ty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\bookta
+bs.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphi
+cx.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphi
+cs.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.s
+ty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\gr
+aphics.cfg)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pd
+ftex.def)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperr
+ef.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvset
+keys.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\
+kvdefinekeys.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdf
+escape.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcm
+ds.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pd
+ftexcmds.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\inf
+warerr.sty)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor
+.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\namere
+f.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcou
+nt.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestrin
+g\gettitlestring.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvopt
+ions.sty)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolb
+ox.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\str
+ingenc.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc
+.def)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intca
+lc.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.
+def)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset
+.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bi
+gintcalc.sty)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdfte
+x.def
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\
+rerunfilecheck.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter
+\uniquecounter.sty)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\micro
+type.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\micro
+type-pdftex.def)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\micro
+type.cfg)) (macros.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3bac
+kend-pdftex.def) (main.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\sup
+p-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\ep
+stopdf-base.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstop
+df-sys.cfg)) (main.out) (main.out)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cm
+r.cfg)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.f
+d)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-ms
+a.cfg)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.f
+d)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-ms
+b.cfg) (sections/problem_definition.tex [1{C:/Users/Administrator/AppData/Local
+/MiKTeX/fonts/map/pdftex/pdftex.map}]) (sections/algorithm_framework.tex
+[2]) (sections/valid_inequalities.tex [3] [4])
+(sections/branch_and_cut_implementation.tex [5])
+(sections/certificate_and_audit.tex) (sections/computational_protocol.tex
+[6] (generated_results.tex)) (main.bbl [7]) [8] (main.aux) )<C:/Users/Administr
+ator/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C
+:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
+/cm/cmbx12.pfb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmex10.pfb><C:/Users/Administrator/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Administrator/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Admi
+nistrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pf
+b><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmr12.pfb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmr17.pfb><C:/Users/Administrator/AppData/Local/Program
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Administrator/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Adm
+inistrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.p
+fb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmti10.pfb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on main.pdf (8 pages, 240241 bytes).
+Transcript written on main.log.
+pdflatex: major issue: So far, you have not checked for MiKTeX updates.
+pdflatex: security risk: running with elevated privileges
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(main.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-24>
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cl
+s
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/base\size11.clo
+))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geomet
+ry.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval
+.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.
+sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.s
+ty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geomet
+ry.cfg))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath
+.sty
+For additional information on amsmath, use the `?' option.
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext
+.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.
+sty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.
+sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.
+sty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssym
+b.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfon
+ts.sty))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.s
+ty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\bookta
+bs.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphi
+cx.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphi
+cs.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.s
+ty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\gr
+aphics.cfg)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pd
+ftex.def)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperr
+ef.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvset
+keys.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\
+kvdefinekeys.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdf
+escape.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcm
+ds.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pd
+ftexcmds.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\inf
+warerr.sty)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor
+.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\namere
+f.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcou
+nt.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestrin
+g\gettitlestring.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvopt
+ions.sty)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolb
+ox.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\str
+ingenc.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc
+.def)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intca
+lc.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.
+def)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset
+.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bi
+gintcalc.sty)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdfte
+x.def
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\
+rerunfilecheck.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter
+\uniquecounter.sty)))
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\micro
+type.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\micro
+type-pdftex.def)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\micro
+type.cfg)) (macros.tex)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3bac
+kend-pdftex.def) (main.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\sup
+p-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\ep
+stopdf-base.sty
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstop
+df-sys.cfg)) (main.out) (main.out)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cm
+r.cfg)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.f
+d)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-ms
+a.cfg)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.f
+d)
+(C:\Users\Administrator\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-ms
+b.cfg) (sections/problem_definition.tex [1{C:/Users/Administrator/AppData/Local
+/MiKTeX/fonts/map/pdftex/pdftex.map}]) (sections/algorithm_framework.tex
+[2]) (sections/valid_inequalities.tex [3] [4])
+(sections/branch_and_cut_implementation.tex [5])
+(sections/certificate_and_audit.tex) (sections/computational_protocol.tex
+[6] (generated_results.tex)) (main.bbl [7]) [8] (main.aux) )<C:/Users/Administr
+ator/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C
+:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
+/cm/cmbx12.pfb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmex10.pfb><C:/Users/Administrator/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Administrator/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Admi
+nistrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pf
+b><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmr12.pfb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmr17.pfb><C:/Users/Administrator/AppData/Local/Program
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Administrator/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Adm
+inistrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.p
+fb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmti10.pfb><C:/Users/Administrator/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on main.pdf (8 pages, 240241 bytes).
+Transcript written on main.log.
+pdflatex: major issue: So far, you have not checked for MiKTeX updates.
