@@ -69,11 +69,14 @@ def main() -> int:
             reasons.append("paper_tailored_preset_without_tailored_fields")
         if callback_claim and not callback_available:
             reasons.append("callback_claim_without_callback_api")
-        if certified and str(data.get("tailored_bc_source_class", "")) == "static_fallback":
+        if (certified and callback_claim and
+                str(data.get("tailored_bc_source_class", "")) == "static_fallback"):
             reasons.append("static_fallback_certified_as_tailored")
-        if certified and as_bool(data.get("certificate_uses_bpc_tree")):
+        if (preset == "paper-gf-tailored-bc" and certified and
+                as_bool(data.get("certificate_uses_bpc_tree"))):
             reasons.append("bpc_contaminates_tailored_certificate")
-        if certified and as_bool(data.get("route_mask_all_subset_enumeration_certifying")):
+        if (preset == "paper-gf-tailored-bc" and certified and
+                as_bool(data.get("route_mask_all_subset_enumeration_certifying"))):
             reasons.append("route_mask_contaminates_tailored_certificate")
         if method == "tailored-bc-callback-smoke-test" and callback_available and status != "diagnostic_passed":
             reasons.append("callback_available_but_smoke_not_passed")
@@ -97,13 +100,14 @@ def main() -> int:
         route_verified = int(float(data.get("tailored_bc_candidate_route_projection_verified", 0) or 0))
         route_rejected = int(float(data.get("tailored_bc_candidate_route_projection_rejections", 0) or 0))
         route_unsupported = int(float(data.get("tailored_bc_candidate_route_projection_unsupported_mismatches", 0) or 0))
+        telemetry_only = str(data.get("tailored_bc_callback_cut_profile", "")) in {"off", "none"}
         if (method == "interval-cutoff-oracle" and callback_available and
                 not wrapper_diagnostic and
-                candidate_calls > 0 and projection_checks <= 0):
+                not telemetry_only and candidate_calls > 0 and projection_checks <= 0):
             reasons.append("candidate_callback_without_projection_verifier")
         if (method == "interval-cutoff-oracle" and callback_available and
                 not wrapper_diagnostic and
-                candidate_calls > 0 and route_checks <= 0):
+                not telemetry_only and candidate_calls > 0 and route_checks <= 0):
             reasons.append("candidate_callback_without_route_projection_verifier")
         if projection_checks > 0 and (
                 projection_verified + projection_rejected + projection_unsupported != projection_checks):

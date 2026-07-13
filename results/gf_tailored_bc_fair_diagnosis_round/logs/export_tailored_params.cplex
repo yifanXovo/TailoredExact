@@ -1,0 +1,5 @@
+set threads 1
+set mip tolerances mipgap 1e-8
+read E:\codes\ExactEBRP\results\gf_tailored_bc_fair_diagnosis_round\logs\cplex_parameter_probe.lp
+write E:\codes\ExactEBRP\results\gf_tailored_bc_fair_diagnosis_round\cplex_tailored.prm prm
+quit

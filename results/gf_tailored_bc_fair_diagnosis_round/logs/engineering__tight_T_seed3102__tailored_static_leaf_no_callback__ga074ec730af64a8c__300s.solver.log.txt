@@ -1,0 +1,104 @@
+
+Welcome to IBM(R) ILOG(R) CPLEX(R) Interactive Optimizer 22.1.1.0
+  with Simplex, Mixed Integer & Barrier Optimizers
+5725-A06 5725-A29 5724-Y48 5724-Y49 5724-Y54 5724-Y55 5655-Y21
+Copyright IBM Corp. 1988, 2022.  All Rights Reserved.
+
+Type 'help' for a list of available commands.
+Type 'help' followed by a command name for more
+information on commands.
+
+CPLEX> New value for default parallel thread count: 1
+CPLEX> New value for time limit in seconds: 600
+CPLEX> New value for mixed integer optimality gap tolerance: 0
+CPLEX> Problem 'E:\codes\ExactEBRP\results\gf_tailored_bc_fair_diagnosis_round\model_exports\engineering__tight_T_seed3102__tailored_static_leaf_no_callback__ga074ec730af64a8c__300s.lp' read.
+Read time = 0.02 sec. (1.18 ticks)
+CPLEX> Version identifier: 22.1.1.0 | 2022-11-27 | 9160aff4d
+CPXPARAM_Threads                                 1
+CPXPARAM_TimeLimit                               600
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+Tried aggregator 2 times.
+MIP Presolve eliminated 579 rows and 20 columns.
+MIP Presolve modified 35943 coefficients.
+Aggregator did 43 substitutions.
+Reduced MIP has 9233 rows, 2051 columns, and 51149 nonzeros.
+Reduced MIP has 1481 binaries, 191 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.06 sec. (113.24 ticks)
+Probing fixed 90 vars, tightened 399 bounds.
+Probing time = 0.11 sec. (228.03 ticks)
+Cover probing fixed 0 vars, tightened 34 bounds.
+Tried aggregator 1 time.
+Detecting symmetries...
+MIP Presolve eliminated 162 rows and 100 columns.
+MIP Presolve modified 10833 coefficients.
+Reduced MIP has 9071 rows, 1951 columns, and 49813 nonzeros.
+Reduced MIP has 1384 binaries, 188 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.05 sec. (66.51 ticks)
+Probing time = 0.00 sec. (6.17 ticks)
+Cover probing fixed 0 vars, tightened 1 bounds.
+Clique table members: 25944.
+Tightened 1 constraints.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.19 sec. (391.48 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+      0     0        0.5023   194                      0.5023     1763         
+      0     0        0.5144   231                   Cuts: 216     2262         
+      0     0        0.5176   242                   Cuts: 189     2595         
+      0     0        0.5203   217                   Cuts: 135     2891         
+      0     0        0.5210   229                   Cuts: 102     3348         
+      0     0        0.5211   245                    Cuts: 87     3484         
+Detecting symmetries...
+      0     0        0.5211   231                    Cuts: 77     3675         
+      0     0        0.5212   296                    Cuts: 84     3819         
+      0     0        0.5216   279                    Cuts: 55     3942         
+      0     0        0.5224   247                    Cuts: 48     4062         
+      0     0        0.5224   252                    Cuts: 59     4112         
+      0     0        0.5224   254                    Cuts: 14     4153         
+Detecting symmetries...
+      0     2        0.5224   254                      0.5229     4153         
+Elapsed time = 2.30 sec. (5368.42 ticks, tree = 0.01 MB, solutions = 0)
+      2     2        0.5454   279                      0.5454     5072         
+      4     2    infeasible                            0.5454     5811         
+      8     2    infeasible                            0.5464     6037         
+     14     6    infeasible                            0.5486     7133         
+     18    10        0.5503   238                      0.5487     7417         
+     20     8    infeasible                            0.5487     8554         
+     24     8    infeasible                            0.5491    11125         
+     29    11    infeasible                            0.5491    12166         
+     36    14    infeasible                            0.5491    13141         
+     49    19        0.5524   289                      0.5491    15640         
+Elapsed time = 4.05 sec. (9690.88 ticks, tree = 0.11 MB, solutions = 0)
+     84    44        0.5533   270                      0.5493    18572         
+    111    47    infeasible                            0.5501    20847         
+    125    41    infeasible                            0.5508    24296         
+    144    32    infeasible                            0.5523    27692         
+    179    15    infeasible                            0.5547    31423         
+
+Cover cuts applied:  7
+Implied bound cuts applied:  140
+Flow cuts applied:  11
+Mixed integer rounding cuts applied:  63
+Zero-half cuts applied:  20
+Gomory fractional cuts applied:  4
+
+Root node processing (before b&c):
+  Real time             =    2.28 sec. (5289.88 ticks)
+Sequential b&c:
+  Real time             =    4.22 sec. (9900.51 ticks)
+                          ------------
+Total (root+branch&cut) =    6.50 sec. (15190.40 ticks)
+
+
+MIP - Integer infeasible.
+Current MIP best bound is infinite.
+Solution time =    6.50 sec.  Iterations = 34007  Nodes = 211
+Deterministic time = 15190.40 ticks  (2336.98 ticks/sec)
+
+CPLEX> CPLEX Error  1217: No solution exists.
+No file written.
+CPLEX> 

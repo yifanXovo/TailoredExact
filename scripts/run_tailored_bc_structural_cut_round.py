@@ -479,6 +479,9 @@ def summarize_vectors(raw_rows: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]
         p_val = vals.get("P", sum(p_terms) if p_terms else math.nan)
         g_val = vals.get("G", math.nan)
         wsp = vals.get("W_SP", math.nan)
+        v_count = f(rows[0].get("V", ""), 20.0)
+        if not math.isfinite(v_count) or v_count <= 0.0:
+            v_count = 20.0
         summaries.append({
             "snapshot_id": sid,
             "snapshot_source": rows[0].get("snapshot_source", ""),
@@ -503,8 +506,8 @@ def summarize_vectors(raw_rows: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]
                 math.isfinite(f(r.get("value"), math.nan))
             ) if any(r.get("family") == "T_SP_i" for r in rows) else "not_available",
             "reconstructed_S_times_P": s_val * p_val if math.isfinite(s_val) and math.isfinite(p_val) else "not_available",
-            "reconstructed_H_over_VS": h_val / (20.0 * s_val) if math.isfinite(h_val) and math.isfinite(s_val) and s_val > 1e-12 else "not_available",
-            "G_gap": h_val / (20.0 * s_val) - g_val if math.isfinite(h_val) and math.isfinite(s_val) and math.isfinite(g_val) and s_val > 1e-12 else "not_available",
+            "reconstructed_H_over_VS": h_val / (v_count * s_val) if math.isfinite(h_val) and math.isfinite(s_val) and s_val > 1e-12 else "not_available",
+            "G_gap": h_val / (v_count * s_val) - g_val if math.isfinite(h_val) and math.isfinite(s_val) and math.isfinite(g_val) and s_val > 1e-12 else "not_available",
             "SP_gap": s_val * p_val - wsp if math.isfinite(s_val) and math.isfinite(p_val) and math.isfinite(wsp) else "not_available",
             "root_LP_objective": rows[0].get("snapshot_objective", "not_available"),
             "top_fractional_z": top_fractional(rows, "z_k_i"),

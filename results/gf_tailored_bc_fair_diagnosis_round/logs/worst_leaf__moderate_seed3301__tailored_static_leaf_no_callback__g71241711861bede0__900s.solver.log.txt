@@ -1,0 +1,87 @@
+
+Welcome to IBM(R) ILOG(R) CPLEX(R) Interactive Optimizer 22.1.1.0
+  with Simplex, Mixed Integer & Barrier Optimizers
+5725-A06 5725-A29 5724-Y48 5724-Y49 5724-Y54 5724-Y55 5655-Y21
+Copyright IBM Corp. 1988, 2022.  All Rights Reserved.
+
+Type 'help' for a list of available commands.
+Type 'help' followed by a command name for more
+information on commands.
+
+CPLEX> New value for default parallel thread count: 1
+CPLEX> New value for time limit in seconds: 600
+CPLEX> New value for mixed integer optimality gap tolerance: 0
+CPLEX> Problem 'E:\codes\ExactEBRP\results\gf_tailored_bc_fair_diagnosis_round\model_exports\worst_leaf__moderate_seed3301__tailored_static_leaf_no_callback__g71241711861bede0__900s.lp' read.
+Read time = 0.01 sec. (1.18 ticks)
+CPLEX> Version identifier: 22.1.1.0 | 2022-11-27 | 9160aff4d
+CPXPARAM_Threads                                 1
+CPXPARAM_TimeLimit                               600
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+Tried aggregator 2 times.
+MIP Presolve eliminated 599 rows and 47 columns.
+MIP Presolve modified 37767 coefficients.
+Aggregator did 44 substitutions.
+Reduced MIP has 9225 rows, 2029 columns, and 50763 nonzeros.
+Reduced MIP has 1469 binaries, 192 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.05 sec. (97.27 ticks)
+Probing fixed 24 vars, tightened 84 bounds.
+Probing time = 0.09 sec. (196.07 ticks)
+Cover probing fixed 0 vars, tightened 182 bounds.
+Tried aggregator 1 time.
+Detecting symmetries...
+MIP Presolve eliminated 743 rows and 92 columns.
+MIP Presolve modified 18835 coefficients.
+Reduced MIP has 8482 rows, 1937 columns, and 43634 nonzeros.
+Reduced MIP has 1422 binaries, 165 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.05 sec. (79.43 ticks)
+Probing time = 0.02 sec. (28.24 ticks)
+Clique table members: 24776.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.11 sec. (150.45 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+      0     0        0.0429   244                      0.0429     1531         
+      0     0        0.0432   212                   Cuts: 273     1874         
+      0     0        0.0433   231                   Cuts: 140     2182         
+      0     0        0.0433   227                    Cuts: 97     2482         
+      0     0        0.0433   227                    Cuts: 58     2958         
+      0     0        0.0433   197                    Cuts: 23     3088         
+      0     0        0.0433   225                   Cuts: 120     3484         
+Detecting symmetries...
+      0     2        0.0434   191                      0.0434     3488         
+Elapsed time = 1.80 sec. (3493.71 ticks, tree = 0.01 MB, solutions = 0)
+      9    11        0.0452   208                      0.0439     5326         
+     12    10    infeasible                            0.0439     7410         
+     17     7        0.0454   194                      0.0449     8564         
+     26     8        0.0462   179                      0.0449     9792         
+     30     8        0.0475   204                      0.0454    11277         
+     47     3    infeasible                            0.0477    11986         
+
+Cover cuts applied:  2
+Implied bound cuts applied:  44
+Flow cuts applied:  15
+Mixed integer rounding cuts applied:  71
+Zero-half cuts applied:  9
+Multi commodity flow cuts applied:  2
+Gomory fractional cuts applied:  3
+
+Root node processing (before b&c):
+  Real time             =    1.77 sec. (3453.23 ticks)
+Sequential b&c:
+  Real time             =    1.03 sec. (2259.05 ticks)
+                          ------------
+Total (root+branch&cut) =    2.80 sec. (5712.28 ticks)
+
+
+MIP - Integer infeasible.
+Current MIP best bound is infinite.
+Solution time =    2.80 sec.  Iterations = 12149  Nodes = 51
+Deterministic time = 5712.29 ticks  (2042.29 ticks/sec)
+
+CPLEX> CPLEX Error  1217: No solution exists.
+No file written.
+CPLEX> 

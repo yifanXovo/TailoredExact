@@ -1,0 +1,3 @@
+COMMAND: E:\codes\ExactEBRP\build\ExactEBRP.exe --method cplex --plain-baseline --input E:\codes\ExactEBRP\reference\hard_stress\V20_M3\tight_T_seed3102.txt --lambda 0.15 --T 3600 --time-limit 300 --threads 1 --cplex-threads 1 --mip-threads 1 --log E:\codes\ExactEBRP\results\gf_tailored_bc_fair_diagnosis_round\logs\full__tight_T_seed3102__plain_cplex__300s.solver.log.txt --out E:\codes\ExactEBRP\results\gf_tailored_bc_fair_diagnosis_round\raw\full__tight_T_seed3102__plain_cplex__300s.json
+
+tight_T_seed3102.txt cplex not_certified obj=0.615379 runtime=300.113 columns=0
