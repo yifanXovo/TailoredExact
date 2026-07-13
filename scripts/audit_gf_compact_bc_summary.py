@@ -127,7 +127,9 @@ def main() -> int:
             )
             if callback_claim and not callback_available:
                 failure_reasons.append("tailored_bc_callback_claim_without_callback_api")
-            if paper_row and as_bool(data.get("certified_original_problem")) and str(data.get("tailored_bc_source_class", "")) == "static_fallback":
+            if (paper_row and as_bool(data.get("certified_original_problem")) and
+                    callback_claim and
+                    str(data.get("tailored_bc_source_class", "")) == "static_fallback"):
                 failure_reasons.append("tailored_bc_static_fallback_marked_as_paper_callback_certificate")
         if method == "interval-cutoff-oracle" and as_bool(data.get("compact_interval_bc_enabled")):
             if cut_scope not in {"original_fixed_interval", "none"}:

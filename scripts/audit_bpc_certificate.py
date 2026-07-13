@@ -156,7 +156,7 @@ def audit_one(source: str, result: Dict[str, Any]) -> Dict[str, Any]:
     if certified:
         if status != "optimal":
             failures.append("certified_but_status_not_optimal")
-        if not original_scope:
+        if not original_scope and not benchmark_only:
             failures.append("certified_but_not_original_objective_scope")
         if not verifier:
             failures.append("certified_but_verifier_failed")

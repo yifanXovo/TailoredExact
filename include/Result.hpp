@@ -676,6 +676,9 @@ struct SolveResult {
     int compact_bc_native_time_limit_param_id = 0;
     double compact_bc_native_time_limit_seconds = 0.0;
     int compact_bc_native_time_limit_set_rc = 0;
+    int compact_bc_native_mip_gap_param_id = 0;
+    double compact_bc_native_mip_gap = 0.0;
+    int compact_bc_native_mip_gap_set_rc = 0;
     long long compact_bc_callback_abort_requests = 0;
     int compact_bc_terminate_set_rc = 0;
     bool compact_bc_terminate_triggered = false;

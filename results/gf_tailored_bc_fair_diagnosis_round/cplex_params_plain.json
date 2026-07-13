@@ -1,0 +1,18 @@
+{
+  "threads": 1,
+  "mip_tolerances_mipgap": 1e-08,
+  "random_seed": "CPLEX_default",
+  "emphasis": "CPLEX_default",
+  "presolve": "CPLEX_default",
+  "cut_settings": "CPLEX_default_except_problem_specific_rows",
+  "heuristic_frequency": "CPLEX_default",
+  "time_limit_type": "wall_clock",
+  "memory_guard_policy": "serial_observation_then_stop_below_1GiB_for_3_samples",
+  "solver_role": "plain_cplex",
+  "interface": "CPLEX interactive command file",
+  "screen_output": "interactive_default",
+  "mip_display": "interactive_default",
+  "time_limit": "per-row nominal budget",
+  "official_formulation": "current binary-expansion compact MILP",
+  "certificate_role": "benchmark_only"
+}

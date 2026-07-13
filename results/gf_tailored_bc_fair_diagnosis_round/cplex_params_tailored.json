@@ -1,0 +1,18 @@
+{
+  "threads": 1,
+  "mip_tolerances_mipgap": 1e-08,
+  "random_seed": "CPLEX_default",
+  "emphasis": "CPLEX_default",
+  "presolve": "CPLEX_default",
+  "cut_settings": "CPLEX_default_except_problem_specific_rows",
+  "heuristic_frequency": "CPLEX_default",
+  "time_limit_type": "wall_clock",
+  "memory_guard_policy": "serial_observation_then_stop_below_1GiB_for_3_samples",
+  "solver_role": "tailored_compact_bc",
+  "interface": "CPLEX callable-library generic callback or static command file",
+  "screen_output": 0,
+  "mip_display": 0,
+  "time_limit": "generic full-frontier split; fixed leaf subbudget",
+  "official_formulation": "original fixed-interval compact MILP plus paper-safe tailored rows",
+  "certificate_role": "paper_core_when_full_ledger_complete"
+}

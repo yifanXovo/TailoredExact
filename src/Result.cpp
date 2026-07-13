@@ -1581,6 +1581,12 @@ std::string resultToJson(const SolveResult& input) {
         << result.compact_bc_native_time_limit_seconds << ",\n";
     out << "  \"compact_bc_native_time_limit_set_rc\": "
         << result.compact_bc_native_time_limit_set_rc << ",\n";
+    out << "  \"compact_bc_native_mip_gap_param_id\": "
+        << result.compact_bc_native_mip_gap_param_id << ",\n";
+    out << "  \"compact_bc_native_mip_gap\": "
+        << result.compact_bc_native_mip_gap << ",\n";
+    out << "  \"compact_bc_native_mip_gap_set_rc\": "
+        << result.compact_bc_native_mip_gap_set_rc << ",\n";
     out << "  \"compact_bc_callback_abort_requests\": "
         << result.compact_bc_callback_abort_requests << ",\n";
     out << "  \"compact_bc_terminate_set_rc\": "

@@ -3815,6 +3815,12 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 api_solve.native_time_limit_seconds;
             result.compact_bc_native_time_limit_set_rc =
                 api_solve.native_time_limit_set_rc;
+            result.compact_bc_native_mip_gap_param_id =
+                api_solve.native_mip_gap_param_id;
+            result.compact_bc_native_mip_gap =
+                api_solve.native_mip_gap;
+            result.compact_bc_native_mip_gap_set_rc =
+                api_solve.native_mip_gap_set_rc;
             result.compact_bc_callback_abort_requests =
                 api_solve.callback_abort_requests;
             result.compact_bc_terminate_set_rc =

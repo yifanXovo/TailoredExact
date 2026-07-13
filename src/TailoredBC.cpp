@@ -30,15 +30,19 @@ void populateTailoredBCResultFields(const SolveOptions& options,
         cap.callbacks_available ? "none" : cap.fail_reason;
 
     if (cap.callbacks_available && options.tailored_bc_mode != "static") {
+        const bool telemetry_only =
+            options.tailored_bc_callback_cut_profile == "off" ||
+            options.tailored_bc_callback_cut_profile == "none";
         result.tailored_bc_mode = "callback";
         result.tailored_bc_user_cut_callback_enabled = true;
-        result.tailored_bc_lazy_callback_enabled = true;
-        result.tailored_bc_incumbent_callback_enabled = true;
+        result.tailored_bc_lazy_callback_enabled = !telemetry_only;
+        result.tailored_bc_incumbent_callback_enabled = !telemetry_only;
         result.tailored_bc_branch_callback_enabled =
-            options.tailored_bc_gini_branching == "callback" ||
-            options.tailored_bc_gini_branching == "auto";
-        result.tailored_bc_node_separation_enabled = true;
-        result.tailored_bc_root_separation_enabled = true;
+            !telemetry_only &&
+            (options.tailored_bc_gini_branching == "callback" ||
+             options.tailored_bc_gini_branching == "auto");
+        result.tailored_bc_node_separation_enabled = !telemetry_only;
+        result.tailored_bc_root_separation_enabled = !telemetry_only;
     } else {
         result.tailored_bc_mode =
             options.tailored_bc_mode == "outer_gini_controller"

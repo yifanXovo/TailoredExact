@@ -1,0 +1,3 @@
+COMMAND: E:\codes\ExactEBRP\build\ExactEBRP.exe --method cplex --plain-baseline --input E:\codes\ExactEBRP\reference\regen_candidate_V12_M1_average.txt --lambda 0.15 --T 3600 --time-limit 300 --threads 1 --cplex-threads 1 --mip-threads 1 --log E:\codes\ExactEBRP\results\gf_tailored_bc_fair_diagnosis_round\logs\full__V12_M1__plain_cplex__300s.solver.log.txt --out E:\codes\ExactEBRP\results\gf_tailored_bc_fair_diagnosis_round\raw\full__V12_M1__plain_cplex__300s.json
+
+regen_candidate_V12_M1_average.txt cplex optimal obj=0.357201 runtime=181.967 columns=0

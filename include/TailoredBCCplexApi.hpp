@@ -65,6 +65,9 @@ struct TailoredBCCplexApiSolveResult {
     int native_time_limit_param_id = 0;
     double native_time_limit_seconds = 0.0;
     int native_time_limit_set_rc = 0;
+    int native_mip_gap_param_id = 0;
+    double native_mip_gap = 0.0;
+    int native_mip_gap_set_rc = 0;
     long long callback_abort_requests = 0;
     int terminate_set_rc = 0;
     bool terminate_triggered = false;

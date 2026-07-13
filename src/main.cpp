@@ -677,7 +677,10 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--mip-threads") opt.mip_threads = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--compact-bc-threads") opt.compact_bc_threads = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--compact-bc-time-limit") opt.compact_bc_time_limit = std::stod(requireValue(i, argc, argv));
-        else if (arg == "--compact-bc-root-cut-rounds") opt.compact_bc_root_cut_rounds = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--compact-bc-root-cut-rounds") {
+            opt.compact_bc_root_cut_rounds = std::stoi(requireValue(i, argc, argv));
+            opt.compact_bc_root_cut_rounds_explicit = true;
+        }
         else if (arg == "--compact-bc-root-cut-time-limit") opt.compact_bc_root_cut_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--compact-bc-dynamic-cut-families") opt.compact_bc_dynamic_cut_families = requireValue(i, argc, argv);
         else if (arg == "--compact-bc-root-probe") opt.compact_bc_root_probe = requireValue(i, argc, argv);
@@ -758,15 +761,19 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         }
         else if (arg == "--tailored-bc-enabled") {
             opt.tailored_bc_enabled = parseBoolValue(requireValue(i, argc, argv));
+            opt.tailored_bc_enabled_explicit = true;
         }
         else if (arg == "--tailored-bc-mode") {
             opt.tailored_bc_mode = lowerAscii(requireValue(i, argc, argv));
+            opt.tailored_bc_mode_explicit = true;
         }
         else if (arg == "--tailored-bc-branching-priority") {
             opt.tailored_bc_branching_priority = lowerAscii(requireValue(i, argc, argv));
+            opt.tailored_bc_branching_priority_explicit = true;
         }
         else if (arg == "--tailored-bc-gini-branching") {
             opt.tailored_bc_gini_branching = lowerAscii(requireValue(i, argc, argv));
+            opt.tailored_bc_gini_branching_explicit = true;
         }
         else if (arg == "--tailored-bc-gini-branch-min-width") {
             opt.tailored_bc_gini_branch_min_width = std::stod(requireValue(i, argc, argv));
@@ -776,6 +783,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         }
         else if (arg == "--tailored-bc-gini-subset-envelope") {
             opt.tailored_bc_gini_subset_envelope = parseBoolValue(requireValue(i, argc, argv));
+            opt.tailored_bc_gini_subset_envelope_explicit = true;
         }
         else if (arg == "--tailored-bc-gini-subset-max-size") {
             opt.tailored_bc_gini_subset_max_size = std::stoi(requireValue(i, argc, argv));
@@ -795,6 +803,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         }
         else if (arg == "--tailored-bc-local-centering") {
             opt.tailored_bc_local_centering = parseBoolValue(requireValue(i, argc, argv));
+            opt.tailored_bc_local_centering_explicit = true;
         }
         else if (arg == "--tailored-bc-subset-cross-h-centering") {
             opt.tailored_bc_subset_cross_h_centering = parseBoolValue(requireValue(i, argc, argv));
@@ -814,15 +823,18 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         }
         else if (arg == "--tailored-bc-low-gini-l1-centering") {
             opt.tailored_bc_low_gini_l1_centering = parseBoolValue(requireValue(i, argc, argv));
+            opt.tailored_bc_low_gini_l1_centering_explicit = true;
         }
         else if (arg == "--tailored-bc-subset-inventory-imbalance") {
             opt.tailored_bc_subset_inventory_imbalance = parseBoolValue(requireValue(i, argc, argv));
+            opt.tailored_bc_subset_inventory_imbalance_explicit = true;
         }
         else if (arg == "--tailored-bc-subset-inventory-max-size") {
             opt.tailored_bc_subset_inventory_max_size = std::stoi(requireValue(i, argc, argv));
         }
         else if (arg == "--tailored-bc-transfer-cutset") {
             opt.tailored_bc_transfer_cutset = parseBoolValue(requireValue(i, argc, argv));
+            opt.tailored_bc_transfer_cutset_explicit = true;
         }
         else if (arg == "--tailored-bc-compatible-source-transfer-cuts") {
             opt.tailored_bc_compatible_source_transfer_cuts = parseBoolValue(requireValue(i, argc, argv));
@@ -1574,6 +1586,24 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.global_handling_capacity_cuts;
     const bool explicit_low_gini_ratio_band_tightening =
         opt.low_gini_ratio_band_tightening;
+    const int explicit_compact_bc_root_cut_rounds =
+        opt.compact_bc_root_cut_rounds;
+    const bool explicit_tailored_bc_enabled = opt.tailored_bc_enabled;
+    const std::string explicit_tailored_bc_mode = opt.tailored_bc_mode;
+    const std::string explicit_tailored_bc_branching_priority =
+        opt.tailored_bc_branching_priority;
+    const std::string explicit_tailored_bc_gini_branching =
+        opt.tailored_bc_gini_branching;
+    const bool explicit_tailored_bc_local_centering =
+        opt.tailored_bc_local_centering;
+    const bool explicit_tailored_bc_gini_subset_envelope =
+        opt.tailored_bc_gini_subset_envelope;
+    const bool explicit_tailored_bc_low_gini_l1_centering =
+        opt.tailored_bc_low_gini_l1_centering;
+    const bool explicit_tailored_bc_subset_inventory_imbalance =
+        opt.tailored_bc_subset_inventory_imbalance;
+    const bool explicit_tailored_bc_transfer_cutset =
+        opt.tailored_bc_transfer_cutset;
     applyAlgorithmPreset(opt);
     if (opt.pricing_dominance_mode_explicit) {
         opt.pricing_dominance_mode = explicit_pricing_dominance_mode;
@@ -1679,6 +1709,40 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.low_gini_ratio_band_tightening_explicit) {
         opt.low_gini_ratio_band_tightening =
             explicit_low_gini_ratio_band_tightening;
+    }
+    if (opt.compact_bc_root_cut_rounds_explicit) {
+        opt.compact_bc_root_cut_rounds = explicit_compact_bc_root_cut_rounds;
+    }
+    if (opt.tailored_bc_enabled_explicit) {
+        opt.tailored_bc_enabled = explicit_tailored_bc_enabled;
+    }
+    if (opt.tailored_bc_mode_explicit) {
+        opt.tailored_bc_mode = explicit_tailored_bc_mode;
+    }
+    if (opt.tailored_bc_branching_priority_explicit) {
+        opt.tailored_bc_branching_priority =
+            explicit_tailored_bc_branching_priority;
+    }
+    if (opt.tailored_bc_gini_branching_explicit) {
+        opt.tailored_bc_gini_branching = explicit_tailored_bc_gini_branching;
+    }
+    if (opt.tailored_bc_local_centering_explicit) {
+        opt.tailored_bc_local_centering = explicit_tailored_bc_local_centering;
+    }
+    if (opt.tailored_bc_gini_subset_envelope_explicit) {
+        opt.tailored_bc_gini_subset_envelope =
+            explicit_tailored_bc_gini_subset_envelope;
+    }
+    if (opt.tailored_bc_low_gini_l1_centering_explicit) {
+        opt.tailored_bc_low_gini_l1_centering =
+            explicit_tailored_bc_low_gini_l1_centering;
+    }
+    if (opt.tailored_bc_subset_inventory_imbalance_explicit) {
+        opt.tailored_bc_subset_inventory_imbalance =
+            explicit_tailored_bc_subset_inventory_imbalance;
+    }
+    if (opt.tailored_bc_transfer_cutset_explicit) {
+        opt.tailored_bc_transfer_cutset = explicit_tailored_bc_transfer_cutset;
     }
     opt.compact_bc_low_gini_strengthening =
         lowerAscii(opt.compact_bc_low_gini_strengthening);
@@ -13687,6 +13751,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             const bool parent_lower_bound_valid = parent.lower_bound_valid;
             const double parent_lower_bound = parent.lower_bound;
             const double parent_relaxation_lower_bound = parent.relaxation_lower_bound;
+            const std::string parent_lower_bound_source =
+                parent.lower_bound_source;
             const double parent_lo = parent.lo;
             const double parent_hi = parent.hi;
             const int parent_depth = parent.split_depth;
@@ -13714,10 +13780,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 if (parent_lower_bound_valid &&
                     parent_lower_bound > child.lo + 1e-12) {
                     child.lower_bound_source =
-                        parent.lower_bound_source.empty()
+                        parent_lower_bound_source.empty()
                             ? "adaptive_split_inherited_parent_lb"
                             : "adaptive_split_inherited_" +
-                                  parent.lower_bound_source;
+                                  parent_lower_bound_source;
                     child.lb_sources += "|adaptive_split_inherited_parent_lb";
                 }
                 child.relaxation_lower_bound = parent_relaxation_lower_bound;
