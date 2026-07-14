@@ -1,4 +1,5 @@
 #include "TailoredBCCplexApi.hpp"
+#include "ControllingLeafScheduler.hpp"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -3068,7 +3069,9 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     double cutoff_value,
     int vehicle_count,
     const std::filesystem::path& progress_log_path,
-    double progress_interval_seconds) {
+    double progress_interval_seconds,
+    bool register_callbacks,
+    const TailoredBCNativeCheckpointConfig& native_checkpoint) {
     TailoredBCCplexApiSolveResult out;
     out.attempted = true;
 #ifdef _WIN32
@@ -3305,15 +3308,17 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     cb_state.validate_candidates = enable_candidate_validation;
     cb_state.enable_gini_branch = enable_gini_branching;
     cb_state.gini_branch_min_width = std::max(1e-12, gini_branch_min_width);
-    const CPXLONG mask = kContextRelaxation | kContextCandidate |
-        kContextBranching | kContextGlobalProgress;
-    status = api.callbacksetfunc(env, lp, mask, tailoredCallback, &cb_state);
-    if (status != 0) {
-        out.fail_reason = "CPXcallbacksetfunc_failed:" + std::to_string(status);
-        api.freeprob(env, &lp);
-        api.close(&env);
-        if (api.dll) FreeLibrary(api.dll);
-        return out;
+    if (register_callbacks) {
+        const CPXLONG mask = kContextRelaxation | kContextCandidate |
+            kContextBranching | kContextGlobalProgress;
+        status = api.callbacksetfunc(env, lp, mask, tailoredCallback, &cb_state);
+        if (status != 0) {
+            out.fail_reason = "CPXcallbacksetfunc_failed:" + std::to_string(status);
+            api.freeprob(env, &lp);
+            api.close(&env);
+            if (api.dll) FreeLibrary(api.dll);
+            return out;
+        }
     }
 
     using SteadyClock = std::chrono::steady_clock;
@@ -3333,6 +3338,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     std::thread terminator_thread;
     std::mutex progress_mutex;
     long long checkpoint_rows = 0;
+    std::uint64_t native_checkpoint_sequence = 0;
     double last_checkpoint_time = 0.0;
     const double heartbeat_seconds =
         progress_interval_seconds > 0.0 ? progress_interval_seconds : 30.0;
@@ -3471,9 +3477,29 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
                      << '\n';
             ++checkpoint_rows;
             last_checkpoint_time = elapsed;
+            if (native_checkpoint.enabled && effective_best_available &&
+                !native_checkpoint.path.empty()) {
+                NativeCheckpointRecord record;
+                record.run_id = native_checkpoint.run_id;
+                record.sequence = ++native_checkpoint_sequence;
+                record.instance_hash = native_checkpoint.instance_hash;
+                record.gamma_L = gamma_L;
+                record.gamma_U = gamma_U;
+                record.cutoff = cutoff_value;
+                record.model_fingerprint = native_checkpoint.model_fingerprint;
+                record.formulation_profile = native_checkpoint.formulation_profile;
+                record.cplex_threads = std::max(1, threads);
+                record.native_time_limit_param_id = out.native_time_limit_param_id;
+                record.native_time_limit_seconds = out.native_time_limit_seconds;
+                record.native_time_limit_set_rc = out.native_time_limit_set_rc;
+                record.best_bound = effective_best_bound;
+                std::string checkpoint_reason;
+                writeNativeCheckpointAtomic(
+                    native_checkpoint.path, record, &checkpoint_reason);
+            }
         };
 
-    if (!progress_log_path.empty()) {
+    if (register_callbacks && !progress_log_path.empty()) {
         try {
             if (!progress_log_path.parent_path().empty()) {
                 std::filesystem::create_directories(progress_log_path.parent_path());

@@ -17,6 +17,15 @@ struct TailoredBCCplexApiProbe {
     std::string fail_reason;
 };
 
+struct TailoredBCNativeCheckpointConfig {
+    bool enabled = false;
+    std::filesystem::path path;
+    std::string run_id;
+    std::string instance_hash;
+    std::string model_fingerprint;
+    std::string formulation_profile;
+};
+
 struct TailoredBCCplexApiSolveResult {
     bool attempted = false;
     bool available = false;
@@ -209,6 +218,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     double cutoff_value,
     int vehicle_count,
     const std::filesystem::path& progress_log_path = {},
-    double progress_interval_seconds = 0.0);
+    double progress_interval_seconds = 0.0,
+    bool register_callbacks = true,
+    const TailoredBCNativeCheckpointConfig& native_checkpoint = {});
 
 } // namespace ebrp

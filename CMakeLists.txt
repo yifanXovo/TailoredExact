@@ -30,6 +30,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/TailoredBCCuts.cpp
   src/TailoredBCCallbacks.cpp
   src/TailoredBCCplexApi.cpp
+  src/ControllingLeafScheduler.cpp
   src/GiniBranching.cpp
   src/hga_tgbc/HgaTgbcGreedy.cpp
   src/HgaTgbcRunner.cpp
@@ -43,3 +44,6 @@ target_link_libraries(ExactEBRP PRIVATE exact_ebrp_core)
 
 add_executable(ExactEBRPCompare src/compare_main.cpp)
 target_link_libraries(ExactEBRPCompare PRIVATE exact_ebrp_core)
+
+add_executable(ControllingLeafSchedulerTests tests/controlling_leaf_scheduler_tests.cpp)
+target_link_libraries(ControllingLeafSchedulerTests PRIVATE exact_ebrp_core)

@@ -1605,6 +1605,14 @@ std::string resultToJson(const SolveResult& input) {
         << result.compact_bc_checkpoint_incumbent << ",\n";
     out << "  \"compact_bc_checkpoint_node_count\": "
         << result.compact_bc_checkpoint_node_count << ",\n";
+    out << "  \"compact_bc_native_checkpoint_acceptance_status\": \""
+        << jsonEscape(result.compact_bc_native_checkpoint_acceptance_status)
+        << "\",\n";
+    out << "  \"compact_bc_native_checkpoint_rejection_reason\": \""
+        << jsonEscape(result.compact_bc_native_checkpoint_rejection_reason)
+        << "\",\n";
+    out << "  \"compact_bc_native_checkpoint_sequence\": "
+        << result.compact_bc_native_checkpoint_sequence << ",\n";
     out << "  \"compact_bc_incumbent\": "
         << result.compact_bc_incumbent << ",\n";
     out << "  \"compact_bc_nodes\": "
@@ -2123,6 +2131,17 @@ std::string resultToJson(const SolveResult& input) {
         << result.auto_interval_oracle_total_budget << ",\n";
     out << "  \"auto_interval_oracle_budget_policy\": \""
         << jsonEscape(result.auto_interval_oracle_budget_policy) << "\",\n";
+    out << "  \"auto_interval_oracle_budget_policy_requested\": \""
+        << jsonEscape(result.auto_interval_oracle_budget_policy_requested) << "\",\n";
+    out << "  \"auto_interval_oracle_budget_policy_parsed\": \""
+        << jsonEscape(result.auto_interval_oracle_budget_policy_parsed) << "\",\n";
+    out << "  \"auto_interval_oracle_budget_policy_effective\": \""
+        << jsonEscape(result.auto_interval_oracle_budget_policy_effective) << "\",\n";
+    out << "  \"auto_interval_oracle_budget_policy_serialized\": \""
+        << jsonEscape(result.auto_interval_oracle_budget_policy_serialized) << "\",\n";
+    out << "  \"auto_interval_oracle_budget_policy_roundtrip_consistent\": "
+        << (result.auto_interval_oracle_budget_policy_roundtrip_consistent
+                ? "true" : "false") << ",\n";
     out << "  \"auto_interval_oracle_budget_exhausted\": "
         << (result.auto_interval_oracle_budget_exhausted ? "true" : "false") << ",\n";
     out << "  \"per_leaf_oracle_time_limit_used\": \""
@@ -2135,6 +2154,39 @@ std::string resultToJson(const SolveResult& input) {
         << result.auto_interval_oracle_max_children_total << ",\n";
     out << "  \"auto_interval_oracle_partition_tree_csv_path\": \""
         << jsonEscape(result.auto_interval_oracle_partition_tree_csv_path) << "\",\n";
+    out << "  \"scheduler_mode\": \""
+        << jsonEscape(result.scheduler_mode) << "\",\n";
+    out << "  \"controlling_leaf_checkpoint_merge_enabled\": "
+        << (result.controlling_leaf_checkpoint_merge_enabled ? "true" : "false")
+        << ",\n";
+    out << "  \"scheduler_decision_trace_path\": \""
+        << jsonEscape(result.scheduler_decision_trace_path) << "\",\n";
+    out << "  \"scheduler_leaf_allocation_path\": \""
+        << jsonEscape(result.scheduler_leaf_allocation_path) << "\",\n";
+    out << "  \"scheduler_global_bound_trajectory_path\": \""
+        << jsonEscape(result.scheduler_global_bound_trajectory_path) << "\",\n";
+    out << "  \"scheduler_invariants_passed\": "
+        << (result.scheduler_invariants_passed ? "true" : "false") << ",\n";
+    out << "  \"scheduler_invariant_failure\": \""
+        << jsonEscape(result.scheduler_invariant_failure) << "\",\n";
+    out << "  \"nominal_process_wall_budget_seconds\": "
+        << result.nominal_process_wall_budget_seconds << ",\n";
+    out << "  \"finalization_reserve_seconds\": "
+        << result.finalization_reserve_seconds << ",\n";
+    out << "  \"process_elapsed_before_auto_oracle_seconds\": "
+        << result.process_elapsed_before_auto_oracle_seconds << ",\n";
+    out << "  \"process_remaining_before_auto_oracle_seconds\": "
+        << result.process_remaining_before_auto_oracle_seconds << ",\n";
+    out << "  \"final_process_wall_time_seconds\": "
+        << result.final_process_wall_time_seconds << ",\n";
+    out << "  \"process_wall_time_overrun_seconds\": "
+        << result.process_wall_time_overrun_seconds << ",\n";
+    out << "  \"process_wall_time_comparable\": "
+        << (result.process_wall_time_comparable ? "true" : "false") << ",\n";
+    out << "  \"native_leaf_time_limit_param_id\": "
+        << result.native_leaf_time_limit_param_id << ",\n";
+    out << "  \"native_leaf_time_limit_set_rc\": "
+        << result.native_leaf_time_limit_set_rc << ",\n";
     out << "  \"full_ledger_merge_status\": \""
         << jsonEscape(result.full_ledger_merge_status) << "\",\n";
     out << "  \"full_ledger_merge_audit_passed\": "

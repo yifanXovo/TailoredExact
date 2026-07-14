@@ -1,0 +1,49 @@
+{
+  "run_id": "official__tight_T_seed3102__plain_cplex__300s",
+  "instance": "tight_T_seed3102",
+  "arm": "plain_cplex",
+  "budget_seconds": 300,
+  "start_time": "2026-07-13T23:45:06+08:00",
+  "command": [
+    "E:\\codes\\ExactEBRP\\build_round18\\ExactEBRP.exe",
+    "--method",
+    "cplex",
+    "--plain-baseline",
+    "--input",
+    "E:\\codes\\ExactEBRP\\reference\\hard_stress\\V20_M3\\tight_T_seed3102.txt",
+    "--lambda",
+    "0.15",
+    "--T",
+    "3600",
+    "--time-limit",
+    "300",
+    "--threads",
+    "1",
+    "--cplex-threads",
+    "1",
+    "--mip-threads",
+    "1",
+    "--log",
+    "E:\\codes\\ExactEBRP\\results\\gf_tailored_bc_controlling_leaf_scheduler_round\\logs\\official__tight_T_seed3102__plain_cplex__300s.log",
+    "--out",
+    "E:\\codes\\ExactEBRP\\results\\gf_tailored_bc_controlling_leaf_scheduler_round\\raw\\official__tight_T_seed3102__plain_cplex__300s.json"
+  ],
+  "command_line": "E:\\codes\\ExactEBRP\\build_round18\\ExactEBRP.exe --method cplex --plain-baseline --input E:\\codes\\ExactEBRP\\reference\\hard_stress\\V20_M3\\tight_T_seed3102.txt --lambda 0.15 --T 3600 --time-limit 300 --threads 1 --cplex-threads 1 --mip-threads 1 --log E:\\codes\\ExactEBRP\\results\\gf_tailored_bc_controlling_leaf_scheduler_round\\logs\\official__tight_T_seed3102__plain_cplex__300s.log --out E:\\codes\\ExactEBRP\\results\\gf_tailored_bc_controlling_leaf_scheduler_round\\raw\\official__tight_T_seed3102__plain_cplex__300s.json",
+  "executable": "build_round18/ExactEBRP.exe",
+  "executable_sha256": "18078169fdfd83d6333af33f4e8e81e5dacf7a7e7d1b0a32cbc199461291e246",
+  "pre_process_snapshot": {
+    "exactebrp_count": 0,
+    "cplex_count": 0,
+    "detail": "tasklist"
+  },
+  "stale_process_detected": false,
+  "end_time": "2026-07-13T23:50:07+08:00",
+  "actual_process_wall_seconds": 300.1620398000814,
+  "return_code": 0,
+  "runner_timeout": false,
+  "post_process_snapshot": {
+    "exactebrp_count": 0,
+    "cplex_count": 0,
+    "detail": "tasklist"
+  }
+}
