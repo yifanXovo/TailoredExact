@@ -52,6 +52,11 @@ def main() -> int:
         best_lb = f(data.get("best_valid_lb_seen"), lb)
         gap = f(data.get("gap"))
         best_gap = f(data.get("best_valid_gap_seen"), gap)
+        best_gap_available = (
+            best_lb > 0.0
+            or b(data.get("compact_bc_bound_valid"))
+            or bool(str(data.get("best_valid_ledger_checkpoint", "")).strip())
+        )
         leaf_closed = (
             str(data.get("status", "")) == "interval_closed"
             or b(data.get("compact_bc_bound_valid"))
@@ -66,7 +71,9 @@ def main() -> int:
         )
         if lb + 1e-8 < best_lb:
             reasons.append("final_lb_worse_than_best_valid_lb_seen")
-        if gap > best_gap + 1e-8:
+        # Zero is the historical sentinel for "no valid gap checkpoint" on an
+        # unresolved leaf with no accepted lower bound.  It is not a 0% gap.
+        if best_gap_available and gap > best_gap + 1e-8:
             reasons.append("final_gap_worse_than_best_valid_gap_seen")
         if gap == 0.0 and not benchmark_only and not b(data.get("certified_original_problem")) and not leaf_closed:
             reasons.append("zero_gap_without_certificate")

@@ -1,0 +1,49 @@
+{
+  "run_id": "official__moderate_seed3302__plain_cplex__1800s",
+  "instance": "moderate_seed3302",
+  "arm": "plain_cplex",
+  "budget_seconds": 1800,
+  "start_time": "2026-07-14T14:48:32+08:00",
+  "command": [
+    "E:\\codes\\ExactEBRP\\build_round18\\ExactEBRP.exe",
+    "--method",
+    "cplex",
+    "--plain-baseline",
+    "--input",
+    "E:\\codes\\ExactEBRP\\reference\\hard_stress\\V20_M3\\moderate_seed3302.txt",
+    "--lambda",
+    "0.15",
+    "--T",
+    "3600",
+    "--time-limit",
+    "1800",
+    "--threads",
+    "1",
+    "--cplex-threads",
+    "1",
+    "--mip-threads",
+    "1",
+    "--log",
+    "E:\\codes\\ExactEBRP\\results\\gf_tailored_bc_controlling_leaf_scheduler_round\\logs\\official__moderate_seed3302__plain_cplex__1800s.log",
+    "--out",
+    "E:\\codes\\ExactEBRP\\results\\gf_tailored_bc_controlling_leaf_scheduler_round\\raw\\official__moderate_seed3302__plain_cplex__1800s.json"
+  ],
+  "command_line": "E:\\codes\\ExactEBRP\\build_round18\\ExactEBRP.exe --method cplex --plain-baseline --input E:\\codes\\ExactEBRP\\reference\\hard_stress\\V20_M3\\moderate_seed3302.txt --lambda 0.15 --T 3600 --time-limit 1800 --threads 1 --cplex-threads 1 --mip-threads 1 --log E:\\codes\\ExactEBRP\\results\\gf_tailored_bc_controlling_leaf_scheduler_round\\logs\\official__moderate_seed3302__plain_cplex__1800s.log --out E:\\codes\\ExactEBRP\\results\\gf_tailored_bc_controlling_leaf_scheduler_round\\raw\\official__moderate_seed3302__plain_cplex__1800s.json",
+  "executable": "build_round18/ExactEBRP.exe",
+  "executable_sha256": "18078169fdfd83d6333af33f4e8e81e5dacf7a7e7d1b0a32cbc199461291e246",
+  "pre_process_snapshot": {
+    "exactebrp_count": 0,
+    "cplex_count": 0,
+    "detail": "tasklist"
+  },
+  "stale_process_detected": false,
+  "end_time": "2026-07-14T15:18:50+08:00",
+  "actual_process_wall_seconds": 1818.0505228997208,
+  "return_code": 0,
+  "runner_timeout": false,
+  "post_process_snapshot": {
+    "exactebrp_count": 0,
+    "cplex_count": 0,
+    "detail": "tasklist"
+  }
+}

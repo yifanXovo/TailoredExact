@@ -286,6 +286,9 @@ struct SolveOptions {
     int auto_interval_oracle_max_leaves = 0;
     std::string auto_interval_oracle_order = "all";
     std::string auto_interval_oracle_leaf_budget_policy = "per-leaf";
+    std::string auto_interval_oracle_leaf_budget_policy_requested = "omitted";
+    std::string auto_interval_oracle_leaf_budget_policy_parsed = "per-leaf";
+    bool auto_interval_oracle_leaf_budget_policy_explicit = false;
     bool auto_interval_oracle_continue_after_timeout = true;
     bool auto_interval_oracle_split_on_timeout = false;
     bool auto_interval_oracle_recursive_split = false;
@@ -306,6 +309,10 @@ struct SolveOptions {
     bool interval_oracle_service_operation_tightening = true;
     bool interval_oracle_symmetry_breaking = true;
     std::string frontier_scheduling_mode = "default";
+    bool frontier_scheduling_mode_explicit = false;
+    bool controlling_leaf_checkpoint_merge = true;
+    double process_wall_time_limit = 0.0;
+    double process_elapsed_seconds_before_auto_oracle = 0.0;
     bool frontier_critical_band_auto = false;
     int frontier_critical_band_max_depth = 0;
     double frontier_critical_band_min_width = 1e-4;

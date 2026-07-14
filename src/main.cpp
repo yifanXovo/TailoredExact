@@ -1,6 +1,7 @@
 #include "Branching.hpp"
 #include "Bounds.hpp"
 #include "ColumnPool.hpp"
+#include "ControllingLeafScheduler.hpp"
 #include "ColumnGeneration.hpp"
 #include "CplexBaseline.hpp"
 #include "Cuts.hpp"
@@ -40,6 +41,7 @@
 #include <thread>
 #include <unordered_map>
 #include <unordered_set>
+#include <utility>
 #include <vector>
 
 namespace {
@@ -282,7 +284,9 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
                 std::max(opt.compact_bc_support_cut_max_size, 3);
             opt.compact_bc_support_cut_max_subsets =
                 std::max(opt.compact_bc_support_cut_max_subsets, 50000);
-            opt.frontier_scheduling_mode = "default";
+            if (!opt.frontier_scheduling_mode_explicit) {
+                opt.frontier_scheduling_mode = "default";
+            }
             opt.frontier_bpc_fallback_mode = "off";
             opt.core_bpc_reserve_fraction = 0.0;
             opt.core_bpc_min_seconds = 0.0;
@@ -293,7 +297,9 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
             opt.auto_interval_oracle_order = "all";
             opt.auto_interval_oracle_max_leaves = 0;
             opt.auto_interval_oracle_continue_after_timeout = true;
-            opt.auto_interval_oracle_leaf_budget_policy = "per-leaf";
+            if (!opt.auto_interval_oracle_leaf_budget_policy_explicit) {
+                opt.auto_interval_oracle_leaf_budget_policy = "per-leaf";
+            }
             opt.auto_interval_oracle_recursive_split = false;
             opt.interval_exact_cutoff_oracle = "compact-mip";
             opt.interval_exact_oracle_mode = "objective-bound";
@@ -511,6 +517,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         }
         else if (arg == "--parallel-nodes") opt.parallel_nodes = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--time-limit") opt.solve_time_limit = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--process-wall-time-limit") opt.process_wall_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--gini-cap") opt.gini_cap = std::stod(requireValue(i, argc, argv));
         else if (arg == "--gini-floor") opt.gini_floor = std::stod(requireValue(i, argc, argv));
         else if (arg == "--max-nodes") opt.max_branch_nodes = std::stoi(requireValue(i, argc, argv));
@@ -1028,7 +1035,15 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             opt.auto_interval_oracle_max_leaves = (v == "all" || v == "0") ? 0 : std::stoi(v);
         }
         else if (arg == "--auto-interval-oracle-order") opt.auto_interval_oracle_order = requireValue(i, argc, argv);
-        else if (arg == "--auto-interval-oracle-leaf-budget-policy") opt.auto_interval_oracle_leaf_budget_policy = requireValue(i, argc, argv);
+        else if (arg == "--auto-interval-oracle-leaf-budget-policy") {
+            opt.auto_interval_oracle_leaf_budget_policy_requested =
+                requireValue(i, argc, argv);
+            opt.auto_interval_oracle_leaf_budget_policy_parsed =
+                lowerAscii(opt.auto_interval_oracle_leaf_budget_policy_requested);
+            opt.auto_interval_oracle_leaf_budget_policy =
+                opt.auto_interval_oracle_leaf_budget_policy_parsed;
+            opt.auto_interval_oracle_leaf_budget_policy_explicit = true;
+        }
         else if (arg == "--auto-interval-oracle-continue-after-timeout") opt.auto_interval_oracle_continue_after_timeout = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--auto-interval-oracle-split-on-timeout") opt.auto_interval_oracle_split_on_timeout = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--auto-interval-oracle-recursive-split") opt.auto_interval_oracle_recursive_split = parseBoolValue(requireValue(i, argc, argv));
@@ -1048,7 +1063,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--interval-oracle-penalty-domain-tightening") opt.interval_oracle_penalty_domain_tightening = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--interval-oracle-service-operation-tightening") opt.interval_oracle_service_operation_tightening = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--interval-oracle-symmetry-breaking") opt.interval_oracle_symmetry_breaking = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--frontier-scheduling-mode") opt.frontier_scheduling_mode = requireValue(i, argc, argv);
+        else if (arg == "--frontier-scheduling-mode") {
+            opt.frontier_scheduling_mode = requireValue(i, argc, argv);
+            opt.frontier_scheduling_mode_explicit = true;
+        }
+        else if (arg == "--controlling-leaf-checkpoint-merge") opt.controlling_leaf_checkpoint_merge = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-critical-band-auto") opt.frontier_critical_band_auto = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--frontier-critical-band-max-depth") opt.frontier_critical_band_max_depth = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--frontier-critical-band-min-width") opt.frontier_critical_band_min_width = std::stod(requireValue(i, argc, argv));
@@ -1475,7 +1494,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     opt.frontier_scheduling_mode = lowerAscii(opt.frontier_scheduling_mode);
     if (opt.frontier_scheduling_mode != "v12-fast-close" &&
-        opt.frontier_scheduling_mode != "adaptive-best-bound") {
+        opt.frontier_scheduling_mode != "adaptive-best-bound" &&
+        opt.frontier_scheduling_mode != "legacy" &&
+        opt.frontier_scheduling_mode != "controlling-leaf") {
         opt.frontier_scheduling_mode = "default";
     }
     if (opt.frontier_critical_band_max_depth < 0) {
@@ -2171,7 +2192,23 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.auto_interval_oracle_leaf_budget_policy != "per-leaf" &&
         opt.auto_interval_oracle_leaf_budget_policy != "total" &&
         opt.auto_interval_oracle_leaf_budget_policy != "adaptive") {
+        if (opt.auto_interval_oracle_leaf_budget_policy_explicit) {
+            throw std::runtime_error(
+                "invalid --auto-interval-oracle-leaf-budget-policy: " +
+                opt.auto_interval_oracle_leaf_budget_policy_requested);
+        }
         opt.auto_interval_oracle_leaf_budget_policy = "per-leaf";
+    }
+    if (!opt.auto_interval_oracle_leaf_budget_policy_explicit) {
+        opt.auto_interval_oracle_leaf_budget_policy_requested = "omitted";
+        opt.auto_interval_oracle_leaf_budget_policy_parsed = "per-leaf";
+    }
+    if (opt.process_wall_time_limit < 0.0) {
+        throw std::runtime_error("--process-wall-time-limit must be nonnegative");
+    }
+    if (opt.frontier_scheduling_mode == "controlling-leaf" &&
+        opt.process_wall_time_limit <= 0.0) {
+        opt.process_wall_time_limit = opt.solve_time_limit;
     }
     if (opt.auto_interval_oracle_total_budget < 0.0) {
         opt.auto_interval_oracle_total_budget = 0.0;
@@ -13640,7 +13677,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         return ss.str();
     };
     const auto adaptive_split_start = std::chrono::steady_clock::now();
-    const int split_pass_limit = focus_only_effective ? 0 : std::max(
+    const int split_pass_limit =
+        (focus_only_effective ||
+         opt.frontier_scheduling_mode == "controlling-leaf")
+        ? 0 : std::max(
         std::max(0, opt.frontier_refine_splits),
         opt.frontier_adaptive_split
             ? std::max(0, effectiveFrontierAdaptiveMaxDepth(instance, opt))
@@ -16109,6 +16149,47 @@ void applySealedRunProvenance(const ebrp::SolveOptions& opt,
 void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
                                   const ebrp::SolveOptions& opt,
                                   ebrp::SolveResult& result) {
+    result.auto_interval_oracle_budget_policy_requested =
+        opt.auto_interval_oracle_leaf_budget_policy_requested;
+    result.auto_interval_oracle_budget_policy_parsed =
+        opt.auto_interval_oracle_leaf_budget_policy_parsed;
+    result.auto_interval_oracle_budget_policy_effective =
+        opt.auto_interval_oracle_leaf_budget_policy;
+    result.auto_interval_oracle_budget_policy_serialized =
+        opt.auto_interval_oracle_leaf_budget_policy;
+    result.auto_interval_oracle_budget_policy =
+        opt.auto_interval_oracle_leaf_budget_policy;
+    result.auto_interval_oracle_budget_policy_roundtrip_consistent =
+        !opt.auto_interval_oracle_leaf_budget_policy_explicit ||
+        (lowerAscii(opt.auto_interval_oracle_leaf_budget_policy_requested) ==
+             opt.auto_interval_oracle_leaf_budget_policy_parsed &&
+         opt.auto_interval_oracle_leaf_budget_policy_parsed ==
+             opt.auto_interval_oracle_leaf_budget_policy);
+    if (!result.auto_interval_oracle_budget_policy_roundtrip_consistent) {
+        result.option_audit_consistent = false;
+        if (!result.option_audit_mismatches.empty()) {
+            result.option_audit_mismatches += ";";
+        }
+        result.option_audit_mismatches +=
+            "auto_interval_oracle_leaf_budget_policy_roundtrip";
+    }
+    const bool controlling_mode =
+        opt.frontier_scheduling_mode == "controlling-leaf";
+    result.scheduler_mode = controlling_mode ? "controlling-leaf" : "legacy";
+    result.controlling_leaf_checkpoint_merge_enabled =
+        opt.controlling_leaf_checkpoint_merge;
+    result.nominal_process_wall_budget_seconds =
+        opt.process_wall_time_limit > 0.0
+            ? opt.process_wall_time_limit
+            : opt.solve_time_limit;
+    result.finalization_reserve_seconds =
+        ebrp::ControllingLeafScheduler::finalizationReserveSeconds(
+            result.nominal_process_wall_budget_seconds);
+    result.process_elapsed_before_auto_oracle_seconds =
+        opt.process_elapsed_seconds_before_auto_oracle;
+    result.process_remaining_before_auto_oracle_seconds =
+        std::max(0.0, result.nominal_process_wall_budget_seconds -
+            opt.process_elapsed_seconds_before_auto_oracle);
     if (!opt.auto_interval_oracle) {
         result.full_ledger_merge_status = result.full_ledger_merge_status.empty()
             ? "not_requested" : result.full_ledger_merge_status;
@@ -16229,6 +16310,15 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     const std::filesystem::path oracle_csv = base_dir / (stem + ".auto_oracle.csv");
     const std::filesystem::path partition_csv =
         base_dir / (stem + ".oracle_partition_tree.csv");
+    const std::filesystem::path scheduler_trace_csv =
+        base_dir / (stem + ".scheduler_decisions.csv");
+    const std::filesystem::path scheduler_allocation_csv =
+        base_dir / (stem + ".leaf_time_allocation.csv");
+    const std::filesystem::path scheduler_bound_csv =
+        base_dir / (stem + ".global_bound_trajectory.csv");
+    result.scheduler_decision_trace_path = scheduler_trace_csv.string();
+    result.scheduler_leaf_allocation_path = scheduler_allocation_csv.string();
+    result.scheduler_global_bound_trajectory_path = scheduler_bound_csv.string();
     std::ofstream summary(oracle_csv, std::ios::out | std::ios::trunc);
     summary << "interval_id,gamma_L,gamma_U,status,certificate_basis,solver_status,"
             << "proven_infeasible,feasible_improving,timeout,best_bound,objective,"
@@ -16249,6 +16339,23 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     partition << "interval_id,parent_id,depth,gamma_L,gamma_U,status,closed,"
               << "split,children,time_limit_used,runtime_seconds,certificate_basis,"
               << "solver_status\n";
+    std::ofstream scheduler_trace(
+        scheduler_trace_csv, std::ios::out | std::ios::trunc);
+    scheduler_trace
+        << "run_id,event_sequence,elapsed_wall_seconds,remaining_wall_seconds,"
+           "cutoff,global_lb_before,global_lb_after,controlling_set,selected_leaf_id,"
+           "gamma_L,gamma_U,leaf_bound_before,leaf_bound_after,competing_minimum_bound,"
+           "action_type,tie_round,selection_position,attempt_number,requested_quantum,"
+           "effective_native_time_limit,actual_solver_time,solver_status,"
+           "solver_final_best_bound,checkpoint_best_bound,checkpoint_acceptance_status,"
+           "checkpoint_rejection_reason,leaf_status_after,model_fingerprint,parent_id,"
+           "child_ids,finalization_source,native_time_limit_param_id,"
+           "native_time_limit_set_rc\n";
+    std::ofstream scheduler_bound(
+        scheduler_bound_csv, std::ios::out | std::ios::trunc);
+    scheduler_bound
+        << "run_id,event_sequence,elapsed_wall_seconds,global_LB,verified_UB,gap,"
+           "controlling_set,event_source\n";
 
     int closed = 0;
     int attempted = 0;
@@ -16333,6 +16440,19 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         bool feasible_improving = false;
         bool timeout = false;
         double lower_bound = 0.0;
+        double actual_solver_time = 0.0;
+        double solver_final_best_bound = 0.0;
+        bool solver_final_best_bound_valid = false;
+        double checkpoint_best_bound = 0.0;
+        bool checkpoint_best_bound_valid = false;
+        std::uint64_t checkpoint_sequence = 0;
+        std::string checkpoint_acceptance_status = "not_seen";
+        std::string checkpoint_rejection_reason = "not_seen";
+        double effective_native_time_limit = 0.0;
+        int native_time_limit_param_id = 0;
+        int native_time_limit_set_rc = -1;
+        std::string finalization_source = "not_run";
+        std::string model_fingerprint;
         std::string status;
         std::string basis;
         std::string solver_status;
@@ -16358,6 +16478,8 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
     result.auto_interval_oracle_actual_leaf_time_limit = requested_leaf_time;
     result.auto_interval_oracle_total_budget = total_budget;
     result.auto_interval_oracle_budget_policy = budget_policy;
+    result.auto_interval_oracle_budget_policy_effective = budget_policy;
+    result.auto_interval_oracle_budget_policy_serialized = budget_policy;
     result.auto_interval_oracle_max_children_total =
         opt.auto_interval_oracle_max_children_total;
     result.auto_interval_oracle_partition_tree_csv_path = partition_csv.string();
@@ -16366,15 +16488,36 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         return std::chrono::duration<double>(
             std::chrono::steady_clock::now() - oracle_start).count();
     };
+    double controlling_requested_quantum = 0.0;
     auto timeLimitFor = [&](int depth) {
-        const double base = depth > 0 ? requested_child_time : requested_leaf_time;
-        if (total_budget <= 0.0) return base;
-        const double remaining = total_budget - elapsed_oracle_seconds();
+        const double base = controlling_mode && controlling_requested_quantum > 0.0
+            ? controlling_requested_quantum
+            : (depth > 0 ? requested_child_time : requested_leaf_time);
+        double remaining = total_budget > 0.0
+            ? total_budget - elapsed_oracle_seconds()
+            : std::numeric_limits<double>::infinity();
+        if (opt.process_wall_time_limit > 0.0) {
+            remaining = std::min(
+                remaining,
+                opt.process_wall_time_limit -
+                    opt.process_elapsed_seconds_before_auto_oracle -
+                    elapsed_oracle_seconds());
+        }
         if (remaining <= 1e-6) {
             budget_exhausted = true;
             return 0.0;
         }
-        return std::max(0.0, std::min(base, remaining));
+        const double reserve = opt.process_wall_time_limit > 0.0
+            ? ebrp::ControllingLeafScheduler::finalizationReserveSeconds(
+                  opt.process_wall_time_limit)
+            : 0.0;
+        const ebrp::DeadlineLaunchDecision launch =
+            ebrp::ControllingLeafScheduler::planLaunch(base, remaining, reserve);
+        if (!launch.launch_allowed) {
+            budget_exhausted = true;
+            return 0.0;
+        }
+        return launch.effective_native_time_limit_seconds;
     };
     auto safeFileId = [](std::string id) {
         for (char& ch : id) {
@@ -16402,6 +16545,11 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         oracle_opt.interval_exact_cutoff_epsilon =
             std::max(1e-8, opt.cutoff_feasibility_epsilon);
         oracle_opt.interval_exact_cutoff_time_limit = std::max(0.0, time_limit);
+        oracle_opt.interval_oracle_objective_bound_time_limit =
+            std::max(0.0, time_limit);
+        oracle_opt.interval_oracle_cutoff_feasibility_time_limit =
+            std::max(0.0, time_limit);
+        oracle_opt.compact_bc_time_limit = std::max(0.0, time_limit);
         const std::string file_id = safeFileId(interval_id);
         const std::filesystem::path json_path =
             oracle_dir / ("interval_" + file_id + ".json");
@@ -16417,7 +16565,9 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
             instance, oracle_opt);
         initializeScalabilityFields(instance, oracle_opt, oracle);
         applyRunConfigSnapshot(buildRunConfigSnapshot(instance, oracle_opt), oracle);
-        oracle.finalization_source = "solver_final_json";
+        if (oracle.finalization_source.empty()) {
+            oracle.finalization_source = "cplex_solver_final";
+        }
         oracle.solver_finalization_reached = true;
         oracle.wrapper_synthesized_final_json = false;
         oracle.process_return_code = 0;
@@ -16538,6 +16688,37 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         outcome.source_json = oracle.result_file;
         outcome.timeout = oracle.interval_exact_cutoff_timeout;
         outcome.feasible_improving = oracle.interval_exact_cutoff_feasible_improving;
+        outcome.actual_solver_time = oracle.interval_exact_cutoff_runtime_seconds;
+        outcome.solver_final_best_bound = oracle.interval_exact_cutoff_best_bound;
+        outcome.solver_final_best_bound_valid =
+            oracle.interval_oracle_bound_valid &&
+            std::isfinite(oracle.interval_exact_cutoff_best_bound);
+        outcome.checkpoint_best_bound =
+            oracle.compact_bc_checkpoint_best_bound;
+        outcome.checkpoint_best_bound_valid =
+            oracle.compact_bc_checkpoint_best_bound_available &&
+            oracle.compact_bc_native_checkpoint_acceptance_status == "accepted" &&
+            std::isfinite(oracle.compact_bc_checkpoint_best_bound);
+        outcome.checkpoint_sequence =
+            oracle.compact_bc_native_checkpoint_sequence;
+        outcome.checkpoint_acceptance_status =
+            oracle.compact_bc_native_checkpoint_acceptance_status;
+        outcome.checkpoint_rejection_reason =
+            oracle.compact_bc_native_checkpoint_rejection_reason;
+        outcome.effective_native_time_limit = time_limit;
+        outcome.native_time_limit_param_id =
+            oracle.compact_bc_native_time_limit_param_id;
+        outcome.native_time_limit_set_rc =
+            oracle.compact_bc_native_time_limit_set_rc;
+        outcome.finalization_source = oracle.finalization_source.empty()
+            ? "solver_final_json"
+            : oracle.finalization_source;
+        outcome.model_fingerprint = ebrp::stableFileFingerprint(
+            oracle.interval_exact_cutoff_lp_path);
+        result.native_leaf_time_limit_param_id =
+            outcome.native_time_limit_param_id;
+        result.native_leaf_time_limit_set_rc =
+            outcome.native_time_limit_set_rc;
         const bool direct_bound_mergeable =
             opt.interval_oracle_merge_timeout_bound &&
             oracle.interval_oracle_can_merge_bound &&
@@ -16560,6 +16741,7 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         }
         const bool can_split =
             !oracle_closed &&
+            !controlling_mode &&
             oracle.interval_exact_cutoff_timeout &&
             opt.auto_interval_oracle_split_on_timeout &&
             (opt.auto_interval_oracle_recursive_split || depth == 0) &&
@@ -16718,16 +16900,14 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
         return outcome;
     };
 
-    for (const std::size_t target_idx : targets) {
+    auto applyRootOutcome = [&](std::size_t target_idx,
+                                const OracleIntervalOutcome& outcome) {
         IntervalCsvRow& row = rows[target_idx];
         const std::string interval_id = row.get("interval_id").empty()
             ? std::to_string(target_idx)
             : row.get("interval_id");
         const double lo = csvDoubleField(row, "gamma_L", -1.0);
-        const double hi = csvDoubleField(row, "gamma_U", -1.0);
         const double before_lb = csvDoubleField(row, "interval_lower_bound", lo);
-        const OracleIntervalOutcome outcome =
-            close_interval(interval_id, "root", 0, lo, hi);
         const double after_lb = outcome.bound_valid
             ? std::max(before_lb, outcome.lower_bound)
             : before_lb;
@@ -16798,12 +16978,302 @@ void runAutoIntervalOracleClosure(const ebrp::Instance& instance,
                 + interval_id + " without a complete interval certificate";
             result.notes.push_back(oracle_blocker_note);
             if (!opt.auto_interval_oracle_continue_after_timeout) {
+                budget_exhausted = true;
+            }
+        }
+        return std::make_pair(after_lb, closed_by_bound);
+    };
+
+    std::uint64_t scheduler_event_sequence = 0;
+    ebrp::ControllingLeafScheduler controller(1e-7);
+    std::unordered_map<std::string, std::size_t> scheduler_row_by_id;
+    if (controlling_mode) {
+        for (const std::size_t target_idx : targets) {
+            IntervalCsvRow& row = rows[target_idx];
+            const std::string interval_id = row.get("interval_id").empty()
+                ? std::to_string(target_idx)
+                : row.get("interval_id");
+            const double lo = csvDoubleField(row, "gamma_L", -1.0);
+            const double hi = csvDoubleField(row, "gamma_U", -1.0);
+            const double lb = csvDoubleField(row, "interval_lower_bound", lo);
+            ebrp::ControllingLeaf leaf;
+            leaf.id = interval_id;
+            leaf.gamma_L = lo;
+            leaf.gamma_U = hi;
+            leaf.parent_id = row.get("parent_id").empty()
+                ? "root" : row.get("parent_id");
+            leaf.split_depth = static_cast<int>(
+                csvDoubleField(row, "split_depth", 0.0));
+            leaf.child_index = static_cast<int>(
+                csvDoubleField(row, "child_index", -1.0));
+            leaf.base_lower_bound = lb;
+            leaf.lower_bound = lb;
+            leaf.lower_bound_sources.push_back(
+                row.get("lower_bound_sources").empty()
+                    ? "frontier_base_valid_bound"
+                    : row.get("lower_bound_sources"));
+            leaf.cutoff = result.upper_bound;
+            leaf.instance_hash = result.instance_hash;
+            leaf.model_fingerprint = "pending_fixed_interval_export";
+            leaf.formulation_profile = "round17_static_no_callback_paper_safe";
+            std::string add_reason;
+            if (!controller.addLeaf(leaf, &add_reason)) {
+                result.scheduler_invariants_passed = false;
+                result.scheduler_invariant_failure =
+                    "leaf_insert_failed:" + interval_id + ":" + add_reason;
+            }
+            scheduler_row_by_id[interval_id] = target_idx;
+        }
+        auto joinIds = [](const std::vector<std::string>& ids) {
+            std::ostringstream joined;
+            for (std::size_t i = 0; i < ids.size(); ++i) {
+                if (i) joined << "|";
+                joined << ids[i];
+            }
+            return joined.str();
+        };
+        while (result.scheduler_invariants_passed) {
+            const ebrp::ControllingLeafSelection selection =
+                controller.selectNext();
+            if (!selection.available) break;
+            const auto row_it = scheduler_row_by_id.find(
+                selection.selected_leaf_id);
+            if (row_it == scheduler_row_by_id.end()) {
+                result.scheduler_invariants_passed = false;
+                result.scheduler_invariant_failure =
+                    "selected_leaf_missing_from_row_map";
+                break;
+            }
+            const ebrp::ControllingLeaf* selected_before =
+                controller.findLeaf(selection.selected_leaf_id);
+            if (!selected_before) break;
+            const double global_before = controller.globalLowerBound();
+            const double leaf_before = selected_before->lower_bound;
+            const double lo = selected_before->gamma_L;
+            const double hi = selected_before->gamma_U;
+            const double attempt_start = elapsed_oracle_seconds();
+            controlling_requested_quantum = selection.requested_quantum_seconds;
+            const OracleIntervalOutcome outcome = close_interval(
+                selection.selected_leaf_id,
+                selected_before->parent_id.empty()
+                    ? "root" : selected_before->parent_id,
+                selected_before->split_depth,
+                lo,
+                hi);
+            controlling_requested_quantum = 0.0;
+            if (outcome.effective_native_time_limit <= 1e-9) break;
+            const auto applied = applyRootOutcome(row_it->second, outcome);
+            std::string invariant_reason;
+            if (outcome.bound_valid &&
+                !controller.mergeValidLowerBound(
+                    selection.selected_leaf_id,
+                    applied.first,
+                    "solver_final_fixed_interval_bound",
+                    &invariant_reason)) {
+                result.scheduler_invariants_passed = false;
+                result.scheduler_invariant_failure = invariant_reason;
+                break;
+            }
+            ebrp::ControllingLeafAttempt attempt;
+            attempt.attempt_number = selection.next_attempt_number;
+            attempt.requested_quantum_seconds =
+                selection.requested_quantum_seconds;
+            attempt.effective_native_time_limit_seconds =
+                outcome.effective_native_time_limit;
+            attempt.actual_solver_time_seconds = outcome.actual_solver_time;
+            attempt.selected_while_controlling = true;
+            attempt.solver_status = outcome.solver_status;
+            attempt.solver_final_best_bound =
+                outcome.solver_final_best_bound;
+            attempt.solver_final_best_bound_valid =
+                outcome.solver_final_best_bound_valid;
+            attempt.checkpoint_best_bound = outcome.checkpoint_best_bound;
+            attempt.checkpoint_best_bound_valid =
+                outcome.checkpoint_best_bound_valid;
+            attempt.finalization_source = outcome.finalization_source;
+            const double attempt_end = elapsed_oracle_seconds();
+            if (!controller.recordAttempt(
+                    selection.selected_leaf_id, attempt,
+                    attempt_start, attempt_end, &invariant_reason)) {
+                result.scheduler_invariants_passed = false;
+                result.scheduler_invariant_failure = invariant_reason;
+                break;
+            }
+            if (applied.second) {
+                if (!controller.setStatus(
+                        selection.selected_leaf_id,
+                        ebrp::ControllingLeafStatus::Fathomed,
+                        outcome.closed
+                            ? "solver_final_exact_closure"
+                            : "solver_final_bound_reached_cutoff",
+                        &invariant_reason)) {
+                    result.scheduler_invariants_passed = false;
+                    result.scheduler_invariant_failure = invariant_reason;
+                    break;
+                }
+            }
+            if (ebrp::ControllingLeaf* mutable_leaf =
+                    controller.findLeaf(selection.selected_leaf_id)) {
+                if (!outcome.model_fingerprint.empty()) {
+                    mutable_leaf->model_fingerprint =
+                        outcome.model_fingerprint;
+                }
+                mutable_leaf->latest_checkpoint_sequence =
+                    outcome.checkpoint_sequence;
+                mutable_leaf->latest_checkpoint_acceptance_status =
+                    outcome.checkpoint_acceptance_status;
+                mutable_leaf->latest_checkpoint_rejection_reason =
+                    outcome.checkpoint_rejection_reason;
+                mutable_leaf->latest_solver_final_status =
+                    outcome.solver_status;
+            }
+            const ebrp::ControllingLeaf* selected_after =
+                controller.findLeaf(selection.selected_leaf_id);
+            const double global_after = controller.globalLowerBound();
+            const double elapsed_parent =
+                opt.process_elapsed_seconds_before_auto_oracle + attempt_end;
+            const double remaining_parent =
+                result.nominal_process_wall_budget_seconds > 0.0
+                    ? std::max(0.0,
+                          result.nominal_process_wall_budget_seconds -
+                          elapsed_parent)
+                    : 0.0;
+            const std::string controlling_ids =
+                joinIds(selection.controlling_leaf_ids);
+            scheduler_trace
+                << stem << ',' << scheduler_event_sequence << ','
+                << elapsed_parent << ',' << remaining_parent << ','
+                << result.upper_bound << ',' << global_before << ','
+                << global_after << ',' << csvEscapeSimple(controlling_ids) << ','
+                << csvEscapeSimple(selection.selected_leaf_id) << ','
+                << lo << ',' << hi << ',' << leaf_before << ','
+                << (selected_after ? selected_after->lower_bound : applied.first) << ','
+                << selection.competing_minimum_bound << ",exact_solve,"
+                << selection.tie_round << ',' << selection.selection_position << ','
+                << selection.next_attempt_number << ','
+                << selection.requested_quantum_seconds << ','
+                << outcome.effective_native_time_limit << ','
+                << outcome.actual_solver_time << ','
+                << csvEscapeSimple(outcome.solver_status) << ','
+                << (outcome.solver_final_best_bound_valid
+                        ? outcome.solver_final_best_bound : 0.0) << ','
+                << (outcome.checkpoint_best_bound_valid
+                        ? outcome.checkpoint_best_bound : 0.0) << ','
+                << csvEscapeSimple(outcome.checkpoint_acceptance_status) << ','
+                << csvEscapeSimple(outcome.checkpoint_rejection_reason) << ','
+                << csvEscapeSimple(selected_after
+                        ? ebrp::controllingLeafStatusName(selected_after->status)
+                        : "missing") << ','
+                << csvEscapeSimple(selected_after
+                        ? selected_after->model_fingerprint
+                        : "missing") << ','
+                << csvEscapeSimple(selected_after
+                        ? selected_after->parent_id : "root") << ",none,"
+                << csvEscapeSimple(outcome.finalization_source) << ','
+                << outcome.native_time_limit_param_id << ','
+                << outcome.native_time_limit_set_rc << '\n';
+            const double gap = result.upper_bound > 1e-12
+                ? std::max(0.0, (result.upper_bound - global_after) /
+                      std::fabs(result.upper_bound))
+                : 0.0;
+            scheduler_bound
+                << stem << ',' << scheduler_event_sequence << ','
+                << elapsed_parent << ',' << global_after << ','
+                << result.upper_bound << ',' << gap << ','
+                << csvEscapeSimple(joinIds(controller.controllingSet()))
+                << ",solver_final_merge\n";
+            ++scheduler_event_sequence;
+            if (outcome.feasible_improving) {
+                result.notes.push_back(
+                    "controlling-leaf scheduler stopped immediately after a "
+                    "verified improving incumbent; the frontier ledger requires "
+                    "a same-deadline restart before certification");
+                break;
+            }
+            if (budget_exhausted ||
+                (!opt.auto_interval_oracle_continue_after_timeout &&
+                 !applied.second)) {
+                break;
+            }
+        }
+        std::string coverage_reason;
+        if (!controller.leafBoundsMonotone() ||
+            !controller.globalBoundMonotone() ||
+            !controller.parentChildCoverageValid(&coverage_reason)) {
+            result.scheduler_invariants_passed = false;
+            result.scheduler_invariant_failure =
+                !controller.leafBoundsMonotone()
+                    ? "nonmonotone_leaf_bound"
+                    : (!controller.globalBoundMonotone()
+                        ? "nonmonotone_global_bound"
+                        : coverage_reason);
+        }
+        std::ofstream allocation(
+            scheduler_allocation_csv, std::ios::out | std::ios::trunc);
+        allocation
+            << "run_id,leaf_id,gamma_L,gamma_U,parent_id,split_depth,child_index,"
+               "parent_child_coverage_valid,parent_replaced,initial_bound,final_bound,"
+               "lower_bound_sources,screening_time,exact_solver_time,"
+               "time_while_controlling,time_while_noncontrolling,attempt_count,"
+               "cumulative_allocated_time,first_attempt_time,last_attempt_time,"
+               "final_status,closure_source,instance_hash,model_fingerprint,"
+               "formulation_profile,latest_checkpoint_sequence,"
+               "checkpoint_acceptance_status,checkpoint_rejection_reason\n";
+        for (const ebrp::ControllingLeaf& leaf : controller.leaves()) {
+            allocation
+                << stem << ',' << csvEscapeSimple(leaf.id) << ','
+                << leaf.gamma_L << ',' << leaf.gamma_U << ','
+                << csvEscapeSimple(leaf.parent_id) << ',' << leaf.split_depth << ','
+                << leaf.child_index << ','
+                << (leaf.parent_child_coverage_valid ? "true" : "false") << ','
+                << (leaf.parent_replaced ? "true" : "false") << ','
+                << leaf.base_lower_bound << ',' << leaf.lower_bound << ',';
+            std::ostringstream sources;
+            for (std::size_t i = 0; i < leaf.lower_bound_sources.size(); ++i) {
+                if (i) sources << '|';
+                sources << leaf.lower_bound_sources[i];
+            }
+            allocation
+                << csvEscapeSimple(sources.str()) << ','
+                << leaf.screening_time_seconds << ','
+                << leaf.cumulative_solver_time_seconds << ','
+                << leaf.time_while_controlling_seconds << ','
+                << leaf.time_while_noncontrolling_seconds << ','
+                << leaf.exact_solver_attempt_count << ','
+                << leaf.cumulative_allocated_time_seconds << ','
+                << leaf.first_attempt_elapsed_seconds << ','
+                << leaf.last_attempt_elapsed_seconds << ','
+                << ebrp::controllingLeafStatusName(leaf.status) << ','
+                << csvEscapeSimple(leaf.closure_source) << ','
+                << csvEscapeSimple(leaf.instance_hash) << ','
+                << csvEscapeSimple(leaf.model_fingerprint) << ','
+                << csvEscapeSimple(leaf.formulation_profile) << ','
+                << leaf.latest_checkpoint_sequence << ','
+                << csvEscapeSimple(leaf.latest_checkpoint_acceptance_status) << ','
+                << csvEscapeSimple(leaf.latest_checkpoint_rejection_reason) << '\n';
+        }
+    } else {
+        for (const std::size_t target_idx : targets) {
+            IntervalCsvRow& row = rows[target_idx];
+            const std::string interval_id = row.get("interval_id").empty()
+                ? std::to_string(target_idx)
+                : row.get("interval_id");
+            const double lo = csvDoubleField(row, "gamma_L", -1.0);
+            const double hi = csvDoubleField(row, "gamma_U", -1.0);
+            const OracleIntervalOutcome outcome =
+                close_interval(interval_id, "root", 0, lo, hi);
+            const auto applied = applyRootOutcome(target_idx, outcome);
+            if (budget_exhausted ||
+                (!opt.auto_interval_oracle_continue_after_timeout &&
+                 !applied.second)) {
                 break;
             }
         }
     }
     summary.close();
     partition.close();
+    scheduler_trace.close();
+    scheduler_bound.close();
 
     double merged_global_lb = std::numeric_limits<double>::infinity();
     int remaining_open_after_merge = 0;
@@ -17394,6 +17864,7 @@ void writeEmergencyFinalJson(const ebrp::SolveOptions& opt,
 } // namespace
 
 int main(int argc, char** argv) {
+    const auto process_start = std::chrono::steady_clock::now();
     ebrp::SolveOptions opt;
     try {
         opt = parseArgs(argc, argv);
@@ -17403,6 +17874,30 @@ int main(int argc, char** argv) {
             ebrp::Instance instance = ebrp::parseInstanceFile(
                 file, opt.total_time_limit, opt.pickup_time, opt.drop_time);
             ebrp::SolveOptions effective_opt = opt;
+            if (opt.method == "gcap-frontier" &&
+                opt.frontier_scheduling_mode == "controlling-leaf") {
+                const double nominal = opt.process_wall_time_limit > 0.0
+                    ? opt.process_wall_time_limit
+                    : opt.solve_time_limit;
+                const int initial_leaf_estimate =
+                    std::max(1, opt.frontier_intervals + 1);
+                const double screening_cap = std::min(
+                    0.15 * std::max(0.0, nominal),
+                    5.0 * static_cast<double>(initial_leaf_estimate));
+                effective_opt.solve_time_limit = screening_cap;
+                effective_opt.frontier_relax_seconds = std::min(
+                    5.0,
+                    screening_cap /
+                        static_cast<double>(initial_leaf_estimate));
+                effective_opt.frontier_retry_passes = 0;
+                effective_opt.frontier_final_closure = false;
+                effective_opt.frontier_focused_min_lb_retry = false;
+                effective_opt.frontier_focused_intensification = false;
+                effective_opt.frontier_bpc_fallback_mode = "off";
+                effective_opt.auto_interval_bpc_fallback = false;
+                effective_opt.max_branch_nodes = 1;
+                effective_opt.auto_interval_oracle_total_budget = nominal;
+            }
             if (opt.method == "tailored") {
                 results.push_back(ebrp::solveTailoredExact(instance, opt));
             } else if (opt.method == "cplex") {
@@ -17430,7 +17925,8 @@ int main(int argc, char** argv) {
             } else if (opt.method == "gcap-tree") {
                 results.push_back(solveGiniCapTreeDiagnostic(instance, opt));
             } else if (opt.method == "gcap-frontier") {
-                results.push_back(solveGiniFrontierDiagnostic(instance, opt));
+                results.push_back(solveGiniFrontierDiagnostic(
+                    instance, effective_opt));
             } else if (opt.method == "dominance-test") {
                 results.push_back(solveDominanceDiagnostic(instance, opt));
             } else if (opt.method == "support-pruning-test") {
@@ -17544,6 +18040,9 @@ int main(int argc, char** argv) {
             initializeScalabilityFields(instance, effective_opt, r);
             applyRunConfigSnapshot(buildRunConfigSnapshot(instance, effective_opt), r);
             writePreAutoOracleParentJson(effective_opt, r);
+            effective_opt.process_elapsed_seconds_before_auto_oracle =
+                std::chrono::duration<double>(
+                    std::chrono::steady_clock::now() - process_start).count();
             runAutoIntervalOracleClosure(instance, effective_opt, r);
             applySealedRunProvenance(effective_opt, r);
             if (r.finalization_source.empty()) {
@@ -17580,6 +18079,21 @@ int main(int argc, char** argv) {
                 r.plateau_reason = inferPlateauReasonForFinalization(r);
             }
             finalizePaperModuleFields(r);
+            r.final_process_wall_time_seconds =
+                std::chrono::duration<double>(
+                    std::chrono::steady_clock::now() - process_start).count();
+            const double nominal_process_budget =
+                effective_opt.process_wall_time_limit > 0.0
+                    ? effective_opt.process_wall_time_limit
+                    : effective_opt.solve_time_limit;
+            r.nominal_process_wall_budget_seconds = nominal_process_budget;
+            r.process_wall_time_overrun_seconds = std::max(
+                0.0, r.final_process_wall_time_seconds - nominal_process_budget);
+            r.process_wall_time_comparable =
+                nominal_process_budget <= 0.0 ||
+                r.final_process_wall_time_seconds <=
+                    nominal_process_budget +
+                    std::max(2.0, 0.01 * nominal_process_budget);
             if (r.result_file.empty()) r.result_file = opt.out_path;
             if (r.log_file.empty()) r.log_file = opt.log_path;
             if (!opt.export_incumbent_path.empty() && !r.routes.empty()) {

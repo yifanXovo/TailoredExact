@@ -1,0 +1,23 @@
+check,observed,expected,status,notes
+initial_local_head,e4c8c8755f87e2e4416c2a0050d6f02de0274ac0,recorded,PASS,Round 17 experimental branch tip
+initial_local_branch,codex/longrun-round17-local-results,recorded,PASS,Existing branch preserved
+initial_upstream,origin/codex/longrun-round17-local-results,recorded,PASS,Existing upstream preserved
+initial_github_default_branch,main,main,PASS,Read by git ls-remote --symref origin HEAD
+initial_github_main_sha,fcfc91188a8b4086059c10e0710fb4ccdfcc882f,recorded,PASS,Read by git ls-remote without modifying the checkout
+initial_local_github_source_synchronized,false,boolean,PASS,Initial local HEAD differed from GitHub main
+remote_sha_initially_in_object_database,false,boolean,PASS,fcfc911 was absent before the targeted fetch
+initial_relation_after_targeted_fetch,behind,classified,PASS,e4c8c87 is an ancestor of fcfc911
+tree_difference_initial_to_main,0,0,PASS,GitHub main is the tree-identical merge commit for Round 17
+dirty_tracked_overlap_with_main,0,0,PASS,The two pre-existing tracked result edits did not overlap remote changes
+targeted_fetch_count,1,1,PASS,Only git fetch origin main was used because initial SHAs differed
+clone_used,false,false,PASS,Existing checkout retained
+pull_used,false,false,PASS,No pull
+rebase_used,false,false,PASS,No rebase
+reset_used,false,false,PASS,No reset
+clean_used,false,false,PASS,No clean
+force_checkout_used,false,false,PASS,No forced checkout
+round18_branch,codex/round18-controlling-leaf-scheduler,dedicated branch,PASS,Created directly at verified GitHub main
+round18_base_head,fcfc91188a8b4086059c10e0710fb4ccdfcc882f,GitHub main SHA,PASS,Verified after branch creation
+post_sync_local_github_source_synchronized,true,true,PASS,Round 18 branch base equals current GitHub main
+round17_reference_present,true,true,PASS,e4c8c8755f87e2e4416c2a0050d6f02de0274ac0 is in local history
+merged_main_reference_present_after_fetch,true,true,PASS,fcfc91188a8b4086059c10e0710fb4ccdfcc882f fetched and checked out as branch base

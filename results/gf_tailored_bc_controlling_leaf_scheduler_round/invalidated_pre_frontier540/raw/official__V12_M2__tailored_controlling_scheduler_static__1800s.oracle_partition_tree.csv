@@ -1,0 +1,6 @@
+interval_id,parent_id,depth,gamma_L,gamma_U,status,closed,split,children,time_limit_used,runtime_seconds,certificate_basis,solver_status
+2,root,0,0.359252035377,0.538878053066,interval_unresolved_timeout,false,false,0,30,30.2510371,interval_exact_cutoff_mip_timeout,"time limit exceeded, no integer solution"
+3,root,0,0.538878053066,0.718504070755,interval_closed,true,false,0,30,0.5595693,interval_exact_cutoff_mip_infeasible,integer infeasible
+2,root,0,0.359252035377,0.538878053066,interval_unresolved_timeout,false,false,0,60,60.3390868,interval_exact_cutoff_mip_timeout,"time limit exceeded, no integer solution"
+2,root,0,0.359252035377,0.538878053066,interval_unresolved_timeout,false,false,0,120,120.3410145,interval_exact_cutoff_mip_timeout,"time limit exceeded, no integer solution"
+2,root,0,0.359252035377,0.538878053066,interval_closed,true,false,0,240,231.173869,interval_exact_objective_bound_optimal_no_improver,integer optimal solution

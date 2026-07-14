@@ -2,6 +2,7 @@
 
 #include "Instance.hpp"
 
+#include <cstdint>
 #include <string>
 #include <vector>
 
@@ -688,6 +689,9 @@ struct SolveResult {
     bool compact_bc_checkpoint_incumbent_available = false;
     double compact_bc_checkpoint_incumbent = 0.0;
     long long compact_bc_checkpoint_node_count = 0;
+    std::string compact_bc_native_checkpoint_acceptance_status = "not_seen";
+    std::string compact_bc_native_checkpoint_rejection_reason = "not_seen";
+    std::uint64_t compact_bc_native_checkpoint_sequence = 0;
     double compact_bc_incumbent = 0.0;
     long long compact_bc_nodes = 0;
     double compact_bc_time_seconds = 0.0;
@@ -964,12 +968,33 @@ struct SolveResult {
     double auto_interval_oracle_actual_leaf_time_limit = 0.0;
     double auto_interval_oracle_total_budget = 0.0;
     std::string auto_interval_oracle_budget_policy;
+    std::string auto_interval_oracle_budget_policy_requested = "omitted";
+    std::string auto_interval_oracle_budget_policy_parsed = "per-leaf";
+    std::string auto_interval_oracle_budget_policy_effective = "per-leaf";
+    std::string auto_interval_oracle_budget_policy_serialized = "per-leaf";
+    bool auto_interval_oracle_budget_policy_roundtrip_consistent = true;
     bool auto_interval_oracle_budget_exhausted = false;
     std::string per_leaf_oracle_time_limit_used;
     int auto_interval_oracle_recursive_depth_reached = 0;
     int auto_interval_oracle_children_attempted = 0;
     int auto_interval_oracle_max_children_total = 0;
     std::string auto_interval_oracle_partition_tree_csv_path;
+    std::string scheduler_mode = "legacy";
+    bool controlling_leaf_checkpoint_merge_enabled = true;
+    std::string scheduler_decision_trace_path;
+    std::string scheduler_leaf_allocation_path;
+    std::string scheduler_global_bound_trajectory_path;
+    bool scheduler_invariants_passed = true;
+    std::string scheduler_invariant_failure;
+    double nominal_process_wall_budget_seconds = 0.0;
+    double finalization_reserve_seconds = 0.0;
+    double process_elapsed_before_auto_oracle_seconds = 0.0;
+    double process_remaining_before_auto_oracle_seconds = 0.0;
+    double final_process_wall_time_seconds = 0.0;
+    double process_wall_time_overrun_seconds = 0.0;
+    bool process_wall_time_comparable = true;
+    int native_leaf_time_limit_param_id = 0;
+    int native_leaf_time_limit_set_rc = 0;
     std::string full_ledger_merge_status;
     bool full_ledger_merge_audit_passed = false;
     bool bpc_fallback_auto_called = false;

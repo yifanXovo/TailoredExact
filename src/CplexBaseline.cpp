@@ -1,4 +1,5 @@
 #include "CplexBaseline.hpp"
+#include "ControllingLeafScheduler.hpp"
 
 #include "Evaluator.hpp"
 #include "Logger.hpp"
@@ -3738,9 +3739,12 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         int rc = 0;
         bool used_callback_api = false;
         TailoredBCCplexApiSolveResult api_solve;
+        const bool static_native_api =
+            result.tailored_bc_enabled &&
+            result.tailored_bc_mode == "static_fallback";
         if (result.tailored_bc_enabled &&
             result.tailored_bc_callback_available &&
-            result.tailored_bc_mode == "callback") {
+            (result.tailored_bc_mode == "callback" || static_native_api)) {
             std::vector<double> callback_dist;
             callback_dist.reserve(static_cast<std::size_t>((instance.V + 1) * (instance.V + 1)));
             for (int i = 0; i <= instance.V; ++i) {
@@ -3748,19 +3752,35 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     callback_dist.push_back(instance.dist[i][j]);
                 }
             }
+            TailoredBCNativeCheckpointConfig native_checkpoint;
+            native_checkpoint.enabled = !static_native_api &&
+                !options.progress_log_path.empty();
+            if (native_checkpoint.enabled) {
+                native_checkpoint.path =
+                    std::filesystem::path(options.progress_log_path).string() +
+                    ".native_checkpoint.json";
+                native_checkpoint.run_id = lp_path.stem().string();
+                native_checkpoint.instance_hash =
+                    stableFileFingerprint(instance.path);
+                native_checkpoint.model_fingerprint =
+                    stableFileFingerprint(lp_path);
+                native_checkpoint.formulation_profile =
+                    "callback_managed_original_fixed_interval_compact_mip";
+            }
             api_solve = solveLpWithTailoredBCCplexApi(
                 lp_path,
                 time_limit,
                 std::max(1, effective_compact_threads),
                 cutoff.gamma_L,
                 cutoff.gamma_U,
-                true,
-                result.tailored_bc_lazy_callback_enabled ||
-                    result.tailored_bc_incumbent_callback_enabled,
-                result.tailored_bc_branch_callback_enabled &&
+                !static_native_api,
+                !static_native_api &&
+                    (result.tailored_bc_lazy_callback_enabled ||
+                     result.tailored_bc_incumbent_callback_enabled),
+                !static_native_api && result.tailored_bc_branch_callback_enabled &&
                     (result.tailored_bc_gini_branch_mode == "branch_callback" ||
                      result.tailored_bc_gini_branch_mode == "outer_controller"),
-                result.tailored_bc_branch_priority_enabled,
+                !static_native_api && result.tailored_bc_branch_priority_enabled,
                 options.tailored_bc_gini_branch_min_width,
                 instance.initial,
                 instance.capacity,
@@ -3789,12 +3809,85 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 options.lambda,
                 cutoff.incumbent_ub - cutoff.epsilon,
                 instance.M,
-                options.progress_log_path.empty()
+                static_native_api || options.progress_log_path.empty()
                     ? std::filesystem::path()
                     : std::filesystem::path(options.progress_log_path),
                 result.compact_bc_progress_interval_seconds > 0.0
                     ? result.compact_bc_progress_interval_seconds
-                    : options.progress_interval_seconds);
+                    : options.progress_interval_seconds,
+                !static_native_api,
+                native_checkpoint);
+            if (native_checkpoint.enabled) {
+                NativeCheckpointRecord checkpoint_record;
+                std::string checkpoint_read_reason;
+                if (readNativeCheckpoint(
+                        native_checkpoint.path,
+                        checkpoint_record,
+                        &checkpoint_read_reason)) {
+                    NativeCheckpointExpectation expected;
+                    expected.run_id = native_checkpoint.run_id;
+                    expected.instance_hash = native_checkpoint.instance_hash;
+                    expected.gamma_L = cutoff.gamma_L;
+                    expected.gamma_U = cutoff.gamma_U;
+                    expected.cutoff = cutoff.incumbent_ub - cutoff.epsilon;
+                    expected.model_fingerprint =
+                        native_checkpoint.model_fingerprint;
+                    expected.formulation_profile =
+                        native_checkpoint.formulation_profile;
+                    expected.cplex_threads =
+                        std::max(1, effective_compact_threads);
+                    expected.native_time_limit_param_id =
+                        api_solve.native_time_limit_param_id;
+                    expected.native_time_limit_seconds =
+                        api_solve.native_time_limit_seconds;
+                    const NativeCheckpointValidation validation =
+                        validateNativeCheckpoint(checkpoint_record, expected);
+                    result.compact_bc_native_checkpoint_sequence =
+                        checkpoint_record.sequence;
+                    if (!options.controlling_leaf_checkpoint_merge) {
+                        result.compact_bc_native_checkpoint_acceptance_status =
+                            "rejected";
+                        result.compact_bc_native_checkpoint_rejection_reason =
+                            "checkpoint_merge_disabled_by_ablation";
+                    } else if (validation.accepted) {
+                        result.compact_bc_native_checkpoint_acceptance_status =
+                            "accepted";
+                        result.compact_bc_native_checkpoint_rejection_reason =
+                            "none";
+                        api_solve.checkpoint_best_bound_available = true;
+                        api_solve.checkpoint_best_bound =
+                            checkpoint_record.best_bound;
+                        if (!api_solve.best_bound_available ||
+                            checkpoint_record.best_bound >
+                                api_solve.best_bound) {
+                            api_solve.best_bound = checkpoint_record.best_bound;
+                            api_solve.best_bound_available = true;
+                            api_solve.best_bound_fail_reason =
+                                "validated_atomic_native_checkpoint";
+                        }
+                    } else {
+                        result.compact_bc_native_checkpoint_acceptance_status =
+                            "rejected";
+                        result.compact_bc_native_checkpoint_rejection_reason =
+                            validation.reason;
+                    }
+                } else {
+                    result.compact_bc_native_checkpoint_acceptance_status =
+                        "not_seen";
+                    result.compact_bc_native_checkpoint_rejection_reason =
+                        checkpoint_read_reason;
+                }
+                if (api_solve.best_bound_fail_reason ==
+                        "checkpoint_cplex_native_best_bound" &&
+                    result.compact_bc_native_checkpoint_acceptance_status !=
+                        "accepted") {
+                    api_solve.best_bound_available = false;
+                    api_solve.best_bound = 0.0;
+                    api_solve.best_bound_fail_reason =
+                        "unvalidated_checkpoint_not_mergeable:" +
+                        result.compact_bc_native_checkpoint_rejection_reason;
+                }
+            }
             if (api_solve.checkpoint_log_written) {
                 result.progress_log_path = options.progress_log_path;
                 result.progress_checkpoints_written =
@@ -4222,8 +4315,9 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     result.vector_route_cuts_proof_status =
                         "paper_safe_universal_rows_vector_selected_candidates";
                 }
-                result.notes.push_back(
-                    "CPLEX dynamic callback API backend used for tailored BC; callback events relaxation="
+                result.notes.push_back(static_native_api
+                    ? "CPLEX native C API backend used without registering any callback; solver-final best bound and native time-limit return code captured"
+                    : "CPLEX dynamic callback API backend used for tailored BC; callback events relaxation="
                     + std::to_string(api_solve.relaxation_callback_calls)
                     + ", candidate=" + std::to_string(api_solve.candidate_callback_calls)
                     + ", branch=" + std::to_string(api_solve.branch_callback_calls)
@@ -4458,9 +4552,9 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         if (result.tailored_bc_enabled) {
             result.tailored_bc_source_class = tailoredBCSourceClass(result);
             if (result.tailored_bc_mode == "static_fallback") {
-                result.notes.push_back(
-                    "paper-gf-tailored-bc callback mode is unavailable in this build; "
-                    "this fixed-interval row is static fallback evidence, not a true callback BC claim.");
+                result.notes.push_back(options.tailored_bc_mode == "static"
+                    ? "paper-gf-tailored-bc static no-callback mode was explicitly requested; no CPLEX callback was registered."
+                    : "paper-gf-tailored-bc callback mode is unavailable in this build; this fixed-interval row is static fallback evidence, not a true callback BC claim.");
             }
         }
     } catch (const std::exception& e) {
