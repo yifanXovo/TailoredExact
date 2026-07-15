@@ -6,6 +6,7 @@
 #include "CplexBaseline.hpp"
 #include "Cuts.hpp"
 #include "Evaluator.hpp"
+#include "GiniFrontierGeometry.hpp"
 #include "HgaTgbcRunner.hpp"
 #include "Master.hpp"
 #include "Parser.hpp"
@@ -53,6 +54,9 @@ void usage() {
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
         << "[--gini-cap <gamma>] [--gini-floor <gamma>] [--max-nodes <N>] [--frontier-intervals <N>] [--frontier-refine-splits <N>] "
+        << "[--frontier-execution-mode scheduler|global-gini-tree] [--global-gini-tree-presolve on|off] "
+        << "[--global-gini-tree-search dynamic|traditional|auto] [--global-gini-tree-node-trace <path>] "
+        << "[--global-gini-tree-bound-trace <path>] [--global-gini-tree-manifest <path>] [--global-gini-tree-root-export <path>] "
         << "[--frontier-split-batch <N>] [--frontier-retry-passes <N>] [--frontier-retry-nodes <N>] "
         << "[--frontier-retry-reserve <seconds>] [--frontier-relax-seconds <seconds>] [--route-mask-max-v <V>] "
         << "[--bpc-incumbent none|greedy|random|local|pool|pricing|portfolio|strong|compact|compact-cplex|auto|best-of-all] [--bpc-incumbent-seconds <seconds>] [--bpc-incumbent-rounds <N>] "
@@ -522,6 +526,13 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--gini-floor") opt.gini_floor = std::stod(requireValue(i, argc, argv));
         else if (arg == "--max-nodes") opt.max_branch_nodes = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--frontier-intervals") opt.frontier_intervals = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--frontier-execution-mode") opt.frontier_execution_mode = requireValue(i, argc, argv);
+        else if (arg == "--global-gini-tree-presolve") opt.global_gini_tree_presolve = requireValue(i, argc, argv);
+        else if (arg == "--global-gini-tree-search") opt.global_gini_tree_search = requireValue(i, argc, argv);
+        else if (arg == "--global-gini-tree-node-trace") opt.global_gini_tree_node_trace_path = requireValue(i, argc, argv);
+        else if (arg == "--global-gini-tree-bound-trace") opt.global_gini_tree_bound_trace_path = requireValue(i, argc, argv);
+        else if (arg == "--global-gini-tree-manifest") opt.global_gini_tree_manifest_path = requireValue(i, argc, argv);
+        else if (arg == "--global-gini-tree-root-export") opt.global_gini_tree_root_export_path = requireValue(i, argc, argv);
         else if (arg == "--frontier-refine-splits") opt.frontier_refine_splits = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--frontier-split-batch") opt.frontier_split_batch = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--frontier-retry-passes") opt.frontier_retry_passes = std::stoi(requireValue(i, argc, argv));
@@ -1202,6 +1213,19 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         }
     }
     if (opt.input_path.empty()) throw std::runtime_error("--input is required");
+    opt.frontier_execution_mode = lowerAscii(opt.frontier_execution_mode);
+    if (opt.frontier_execution_mode != "global-gini-tree") {
+        opt.frontier_execution_mode = "scheduler";
+    }
+    opt.global_gini_tree_presolve = lowerAscii(opt.global_gini_tree_presolve);
+    if (opt.global_gini_tree_presolve != "off") {
+        opt.global_gini_tree_presolve = "on";
+    }
+    opt.global_gini_tree_search = lowerAscii(opt.global_gini_tree_search);
+    if (opt.global_gini_tree_search != "traditional" &&
+        opt.global_gini_tree_search != "auto") {
+        opt.global_gini_tree_search = "dynamic";
+    }
     if (opt.threads <= 0) opt.threads = 1;
     if (opt.bpc_workers <= 0) opt.bpc_workers = std::max(1, opt.threads);
     if (opt.pricing_threads <= 0) opt.pricing_threads = 1;
@@ -11351,6 +11375,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.frontier_covers_all_improving_gini_values
             ? "original_full_improving_range"
             : (user_gini_cap_truncates ? "capped_diagnostic" : "partial_range");
+    result.frontier_execution_mode = opt.frontier_execution_mode;
 
     if (!result.verification.feasible) {
         result.status = "gcap_frontier_no_incumbent";
@@ -11361,6 +11386,25 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.master_time_seconds + result.bound_time_seconds;
         writeMinimalPaperCoreTrace(instance, opt, result, "no_feasible_incumbent");
         return result;
+    }
+
+    if (opt.frontier_execution_mode == "global-gini-tree") {
+        ebrp::SolveOptions global_opt = opt;
+        global_opt.frontier_adaptive_max_depth =
+            effectiveFrontierAdaptiveMaxDepth(instance, opt);
+        if (opt.solve_time_limit > 0.0) {
+            global_opt.solve_time_limit =
+                std::max(0.001, opt.solve_time_limit - elapsedSeconds());
+        }
+        result.notes.push_back(
+            "frontier execution mode global-gini-tree: one compact root model, one persistent CPLEX problem, recursive child-local Gini branching, native best-bound node selection, and no automatic interval oracle");
+        ebrp::SolveResult global = ebrp::solveGlobalGiniTree(
+            instance, global_opt, result, cover_lo, cover_hi);
+        global.runtime_seconds = elapsedSeconds();
+        global.wall_time_seconds = global.runtime_seconds;
+        global.actual_runtime_seconds = global.runtime_seconds;
+        global.time_budget_seconds = opt.solve_time_limit;
+        return global;
     }
 
     if (result.objective <= 1e-12) {
@@ -11460,12 +11504,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                << (initial_full_objective_range ? "true" : "false")
                << ", range_scope=" << result.frontier_range_certificate_scope;
     result.notes.push_back(cover_note.str());
+    const std::vector<ebrp::GiniIntervalGeometry> legacy_initial_intervals =
+        ebrp::makeLegacyFrontierIntervals(cover_lo, cover_hi, intervals);
     for (int idx = 0; idx < intervals; ++idx) {
-        const double frac0 = static_cast<double>(idx) / intervals;
-        const double frac1 = static_cast<double>(idx + 1) / intervals;
-        interval_records[idx].lo = cover_lo + (cover_hi - cover_lo) * frac0;
-        interval_records[idx].hi = (idx + 1 == intervals)
-            ? cover_hi : cover_lo + (cover_hi - cover_lo) * frac1;
+        interval_records[idx].lo = legacy_initial_intervals[idx].lower;
+        interval_records[idx].hi = legacy_initial_intervals[idx].upper;
         interval_records[idx].lower_bound = std::max(0.0, interval_records[idx].lo);
         interval_records[idx].lower_bound_valid = true;
     }
@@ -13130,11 +13173,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                 record.replaced_by_children) {
                 return false;
             }
-            if (record.split_depth >= effectiveFrontierAdaptiveMaxDepth(instance, opt)) {
-                return false;
-            }
-            if (record.hi - record.lo <=
-                opt.frontier_adaptive_min_width + 1e-12) {
+            if (!ebrp::legacyAdaptiveSplitEligible(
+                    record.lo, record.hi, record.split_depth,
+                    effectiveFrontierAdaptiveMaxDepth(instance, opt),
+                    opt.frontier_adaptive_min_width)) {
                 return false;
             }
             return record.lower_bound_valid &&
@@ -13703,9 +13745,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             if (record.lo >= result.upper_bound - 1e-12) continue;
             if (record.empty_complete || record.complete) continue;
             if (opt.frontier_adaptive_split) {
-                const double width = record.hi - record.lo;
-                if (width <= opt.frontier_adaptive_min_width + 1e-12) continue;
-                if (record.split_depth >= effectiveFrontierAdaptiveMaxDepth(instance, opt)) {
+                if (!ebrp::legacyAdaptiveSplitEligible(
+                        record.lo, record.hi, record.split_depth,
+                        effectiveFrontierAdaptiveMaxDepth(instance, opt),
+                        opt.frontier_adaptive_min_width)) {
                     result.adaptive_split_max_depth_reached = true;
                     continue;
                 }
@@ -13796,15 +13839,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             const double parent_lo = parent.lo;
             const double parent_hi = parent.hi;
             const int parent_depth = parent.split_depth;
-            std::vector<FrontierIntervalRecord> children(split_factor);
+            const std::vector<ebrp::GiniIntervalGeometry> child_geometry =
+                ebrp::splitLegacyFrontierInterval(parent_lo, parent_hi,
+                                                  split_factor);
+            std::vector<FrontierIntervalRecord> children(child_geometry.size());
             for (int child_pos = 0; child_pos < split_factor; ++child_pos) {
-                const double frac0 = static_cast<double>(child_pos) /
-                    static_cast<double>(split_factor);
-                const double frac1 = static_cast<double>(child_pos + 1) /
-                    static_cast<double>(split_factor);
-                children[child_pos].lo = parent_lo + (parent_hi - parent_lo) * frac0;
-                children[child_pos].hi = (child_pos + 1 == split_factor)
-                    ? parent_hi : parent_lo + (parent_hi - parent_lo) * frac1;
+                children[child_pos].lo = child_geometry[child_pos].lower;
+                children[child_pos].hi = child_geometry[child_pos].upper;
                 children[child_pos].parent_id = parent_idx;
                 children[child_pos].split_depth = parent_depth + 1;
                 children[child_pos].child_index = child_pos;
@@ -14031,8 +14072,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             if (!improved) {
                 bool split_performed = false;
                 if (opt.frontier_adaptive_split &&
-                    record.split_depth < effectiveFrontierAdaptiveMaxDepth(instance, opt) &&
-                    record.hi - record.lo > opt.frontier_adaptive_min_width + 1e-12 &&
+                    ebrp::legacyAdaptiveSplitEligible(
+                        record.lo, record.hi, record.split_depth,
+                        effectiveFrontierAdaptiveMaxDepth(instance, opt),
+                        opt.frontier_adaptive_min_width) &&
                     (opt.solve_time_limit <= 0.0 || remainingSeconds() > 0.0)) {
                     const double parent_lo = record.lo;
                     const double parent_hi = record.hi;
@@ -14044,15 +14087,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                     result.focused_intensification_split_triggered = true;
                     split_performed = true;
                     std::vector<int> child_ids;
+                    const std::vector<ebrp::GiniIntervalGeometry> child_geometry =
+                        ebrp::splitLegacyFrontierInterval(
+                            parent_lo, parent_hi, split_factor);
                     for (int child_pos = 0; child_pos < split_factor; ++child_pos) {
                         FrontierIntervalRecord child;
-                        const double frac0 = static_cast<double>(child_pos) /
-                            static_cast<double>(split_factor);
-                        const double frac1 = static_cast<double>(child_pos + 1) /
-                            static_cast<double>(split_factor);
-                        child.lo = parent_lo + (parent_hi - parent_lo) * frac0;
-                        child.hi = (child_pos + 1 == split_factor)
-                            ? parent_hi : parent_lo + (parent_hi - parent_lo) * frac1;
+                        child.lo = child_geometry[child_pos].lower;
+                        child.hi = child_geometry[child_pos].upper;
                         child.parent_id = idx;
                         child.split_depth = parent_depth + 1;
                         child.child_index = child_pos;
@@ -17875,6 +17916,7 @@ int main(int argc, char** argv) {
                 file, opt.total_time_limit, opt.pickup_time, opt.drop_time);
             ebrp::SolveOptions effective_opt = opt;
             if (opt.method == "gcap-frontier" &&
+                opt.frontier_execution_mode != "global-gini-tree" &&
                 opt.frontier_scheduling_mode == "controlling-leaf") {
                 const double nominal = opt.process_wall_time_limit > 0.0
                     ? opt.process_wall_time_limit
@@ -18039,11 +18081,16 @@ int main(int argc, char** argv) {
             auto& r = results.back();
             initializeScalabilityFields(instance, effective_opt, r);
             applyRunConfigSnapshot(buildRunConfigSnapshot(instance, effective_opt), r);
-            writePreAutoOracleParentJson(effective_opt, r);
-            effective_opt.process_elapsed_seconds_before_auto_oracle =
-                std::chrono::duration<double>(
-                    std::chrono::steady_clock::now() - process_start).count();
-            runAutoIntervalOracleClosure(instance, effective_opt, r);
+            if (effective_opt.frontier_execution_mode != "global-gini-tree") {
+                writePreAutoOracleParentJson(effective_opt, r);
+                effective_opt.process_elapsed_seconds_before_auto_oracle =
+                    std::chrono::duration<double>(
+                        std::chrono::steady_clock::now() - process_start).count();
+                runAutoIntervalOracleClosure(instance, effective_opt, r);
+            } else {
+                r.notes.push_back(
+                    "automatic interval oracle bypassed by construction for global-gini-tree mode");
+            }
             applySealedRunProvenance(effective_opt, r);
             if (r.finalization_source.empty()) {
                 r.finalization_source = "solver_final_json";
@@ -18062,11 +18109,18 @@ int main(int argc, char** argv) {
             if (r.best_valid_ledger_time <= 0.0) {
                 r.best_valid_ledger_time = r.runtime_seconds;
             }
-            r.final_json_uses_best_checkpoint = true;
-            r.interrupted_run_best_bound_preserved = true;
-            r.solver_finalization_reached = true;
+            const bool global_single_tree =
+                effective_opt.frontier_execution_mode == "global-gini-tree";
+            r.final_json_uses_best_checkpoint = !global_single_tree;
+            r.interrupted_run_best_bound_preserved =
+                global_single_tree
+                    ? r.global_gini_tree_native_best_bound_available
+                    : true;
+            if (!global_single_tree) {
+                r.solver_finalization_reached = true;
+                r.process_return_code = 0;
+            }
             r.wrapper_synthesized_final_json = false;
-            r.process_return_code = 0;
             r.abnormal_exit_detected = false;
             if (r.abnormal_exit_reason.empty()) {
                 r.abnormal_exit_reason = "none";

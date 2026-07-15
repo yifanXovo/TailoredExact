@@ -1,0 +1,71 @@
+
+--- ROUND19 RUNNER STDOUT ---
+Version identifier: 22.1.1.0 | 2022-11-27 | 9160aff4d
+CPXPARAM_Preprocessing_Presolve                  0
+CPXPARAM_Threads                                 1
+CPXPARAM_MIP_Strategy_Search                     1
+CPXPARAM_TimeLimit                               9.9746081999999987
+CPXPARAM_MIP_Tolerances_MIPGap                   1e-08
+Generic callback                                 0xd0
+Detecting symmetries...
+Reduced MIP has 10602 rows, 2118 columns, and 61976 nonzeros.
+Reduced MIP has 1493 binaries, 200 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.02 sec. (11.12 ticks)
+Clique table members: 2005.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: traditional branch-and-cut.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.16 sec. (263.86 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap         Variable B NodeID Parent  Depth
+
+      0     0        0.0328   216                      0.0328     2969         
+      0     0        0.0340   187                   Cuts: 152     3162         
+      0     0        0.0340   221                   Cuts: 104     3626         
+      0     0        0.0340   197                    Cuts: 37     3752         
+      0     0        0.0340   195                    Cuts: 61     3922         
+      0     0        0.0340   200                    Cuts: 39     4083         
+      0     0        0.0340   206                    Cuts: 33     4163         
+Detecting symmetries...
+      0     2        0.0340   200                      0.0340     4165                                 0             0
+Elapsed time = 2.06 sec. (4418.25 ticks, tree = 0.01 MB, solutions = 0)
+      4     4    infeasible                            0.0340     5221                          X      4      2      3
+      8     8        0.0433   176                      0.0340     6129                          X      8      7      5
+     10    10        0.0441   197                      0.0340     6510                          X     10      8      6
+     14    14        0.0439   166                      0.0340     7035                          X     14     13      8
+     15    15        0.0440   163                      0.0340     7168                          X     15     14      9
+     16    16        0.0440   170                      0.0340     7183                 bit_15_5 D     16     15     10
+     18    16        0.0440   171                      0.0340     7240                  bit_6_4 U     18     16     11
+     21    19        0.0440   178                      0.0340     7264                 bit_18_5 D     21     20     14
+     25    23        0.0464   174                      0.0340     7501                     Y_15 U     25     23     17
+     28    22        0.0470   242                      0.0415    13053                          X     28      0      1
+Elapsed time = 4.94 sec. (9721.31 ticks, tree = 1.82 MB, solutions = 0)
+     32    22    infeasible                            0.0415    18063                          X     32     29      3
+     43    31        0.0484   237                      0.0415    19158                          X     43     41      9
+     45    33        0.0484   239                      0.0415    19163                  bit_6_4 U     45     44     11
+     72    46        0.0489   202                      0.0415    19811                    z_0_3 D     72     70     30
+     75    49        0.0489   235                      0.0415    20932                   z_2_18 U     75     73     31
+     76    49        0.0489   268                      0.0415    22845                    z_1_8 D     76     75     32
+     78    51        0.0489   229                      0.0415    22892                    z_2_7 D     78     77     34
+
+Clique cuts applied:  9
+Cover cuts applied:  4
+Implied bound cuts applied:  17
+Flow cuts applied:  23
+Mixed integer rounding cuts applied:  26
+Zero-half cuts applied:  2
+Lift and project cuts applied:  1
+Gomory fractional cuts applied:  2
+
+Root node processing (before b&c):
+  Real time             =    2.03 sec. (4384.92 ticks)
+Sequential b&c:
+  Real time             =    7.95 sec. (16506.89 ticks)
+                          ------------
+Total (root+branch&cut) =    9.98 sec. (20891.82 ticks)
+CPLEX Error  1217: No solution exists.
+CPLEX Error  1217: No solution exists.
+moderate_seed3301.txt gcap-frontier global_gini_tree_time_limit obj=0.0491526 runtime=30.1026 columns=0
+
+--- ROUND19 RUNNER STDERR ---

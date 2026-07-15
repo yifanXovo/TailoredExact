@@ -1,4 +1,5 @@
 #include "CplexBaseline.hpp"
+#include "IntervalRowFactory.hpp"
 #include "ControllingLeafScheduler.hpp"
 
 #include "Evaluator.hpp"
@@ -574,6 +575,31 @@ void writeCompactLp(const Instance& instance,
         }
     }
 
+    IntervalRowFactoryResult shared_interval_rows;
+    const bool use_shared_interval_rows =
+        options.interval_row_factory_round19 && cutoff != nullptr &&
+        cutoff->enabled && strengthened;
+    if (use_shared_interval_rows) {
+        IntervalRowFactoryRequest request;
+        request.gamma_L = cutoff->gamma_L;
+        request.gamma_U = cutoff->gamma_U;
+        request.verified_incumbent = cutoff->incumbent_ub;
+        request.incumbent_epsilon = cutoff->epsilon;
+        request.add_incumbent_row = cutoff->add_objective_cutoff;
+        request.strengthened = strengthened;
+        shared_interval_rows = buildRound18StaticIntervalRows(
+            instance, options, request);
+        y_lb = shared_interval_rows.domain.y_lower;
+        y_ub = shared_interval_rows.domain.y_upper;
+        domain_infeasible = shared_interval_rows.domain.domain_infeasible;
+        s_lower_domain = shared_interval_rows.domain.s_lower;
+        s_upper_domain = shared_interval_rows.domain.s_upper;
+        penalty_lb_domain = shared_interval_rows.domain.penalty_lower;
+        penalty_ub_domain = shared_interval_rows.domain.penalty_upper;
+        e_lower_domain = shared_interval_rows.domain.e_lower;
+        e_upper_domain = shared_interval_rows.domain.e_upper;
+    }
+
     for (int k = 0; k < M; ++k) {
         for (int i = 0; i <= V; ++i) {
             for (int j = 0; j <= V; ++j) {
@@ -700,6 +726,48 @@ void writeCompactLp(const Instance& instance,
     out << "\nSubject To\n";
 
     int cid = 1;
+    if (use_shared_interval_rows) {
+        for (const CanonicalLinearRow& row : shared_interval_rows.rows) {
+            Expr expression;
+            for (const auto& coefficient : row.coefficients) {
+                addTerm(expression, coefficient.first, coefficient.second);
+            }
+            const std::string sense = row.sense == 'G'
+                ? ">=" : (row.sense == 'E' ? "=" : "<=");
+            writeConstraint(out, cid, expression, sense, row.rhs);
+            if (stats == nullptr) continue;
+            if (row.family == "direct_gini_cap") {
+                ++stats->direct_gini_cap_rows_added;
+            } else if (row.family == "direct_gini_floor") {
+                ++stats->direct_gini_floor_rows_added;
+            } else if (row.family == "interval_tight_mccormick_G_bit") {
+                ++stats->tight_mccormick_rows_added;
+            } else if (row.family == "gini_pairwise_spread") {
+                ++stats->gini_spread_cuts_added;
+            } else if (row.family == "required_station_movement") {
+                ++stats->required_movement_cuts_added;
+            } else if (row.family == "low_gini_centering_band") {
+                ++stats->low_gini_centering_rows_added;
+            } else if (row.family == "variable_s_low_gini_centering") {
+                ++stats->variable_s_centering_rows_added;
+            } else if (row.family == "objective_lower_estimator_cutoff") {
+                ++stats->objective_estimator_cutoff_rows_added;
+            } else if (row.family == "penalty_lower_bound_closure") {
+                ++stats->penalty_lb_rows_added;
+            } else if (row.family == "sp_product_mccormick") {
+                ++stats->sp_product_mccormick_rows_added;
+            } else if (row.family ==
+                       "sp_product_objective_estimator_paper_safe") {
+                ++stats->sp_product_estimator_rows_added;
+            }
+        }
+        if (stats != nullptr) {
+            for (const std::string& family : shared_interval_rows.active_families) {
+                stats->enabled_families.push_back(family);
+            }
+            stats->penalty_lb = shared_interval_rows.domain.penalty_lower;
+        }
+    }
     if (domain_infeasible) {
         Expr impossible;
         writeConstraint(out, cid, impossible, "<=", -1);
@@ -1160,7 +1228,8 @@ void writeCompactLp(const Instance& instance,
 
     double required_pick_min = 0.0;
     double required_drop_min = 0.0;
-    if (strengthened && options.required_movement_cuts) {
+    if (strengthened && options.required_movement_cuts &&
+        !use_shared_interval_rows) {
         if (stats != nullptr) stats->enabled_families.push_back("required_station_movement");
         for (int i = 1; i <= V; ++i) {
             if (y_lb[i] > instance.initial[i]) {
@@ -1217,7 +1286,7 @@ void writeCompactLp(const Instance& instance,
             writeConstraint(out, cid, h2, ">=", 0);
         }
     }
-    if (strengthened && cutoff != nullptr && cutoff->enabled &&
+    if (!use_shared_interval_rows && strengthened && cutoff != nullptr && cutoff->enabled &&
         options.compact_bc_direct_gini_rows) {
         if (stats != nullptr) stats->enabled_families.push_back("direct_gini_cap_floor");
         Expr cap;
@@ -1806,7 +1875,7 @@ void writeCompactLp(const Instance& instance,
             }
         }
     }
-    if (strengthened && cutoff != nullptr && cutoff->enabled &&
+    if (!use_shared_interval_rows && strengthened && cutoff != nullptr && cutoff->enabled &&
         options.gini_spread_cuts && cutoff->gamma_U >= -1e-12 && V > 1) {
         if (stats != nullptr) stats->enabled_families.push_back("gini_pairwise_spread");
         for (int i = 1; i <= V; ++i) {
@@ -1821,7 +1890,7 @@ void writeCompactLp(const Instance& instance,
             }
         }
     }
-    if (add_low_gini_centering) {
+    if (add_low_gini_centering && !use_shared_interval_rows) {
         if (stats != nullptr) stats->enabled_families.push_back("low_gini_centering_band");
         double s_upper = 0.0;
         for (int i = 1; i <= V; ++i) {
@@ -1874,7 +1943,7 @@ void writeCompactLp(const Instance& instance,
             writeConstraint(out, cid, p_le_bit, "<=", 0);
             Expr p_ge; addTerm(p_ge, prodName(i, b), 1); addTerm(p_ge, "G", -1); addTerm(p_ge, bitName(i, b), -1);
             writeConstraint(out, cid, p_ge, ">=", -1);
-            if (strengthened && cutoff != nullptr && cutoff->enabled &&
+            if (!use_shared_interval_rows && strengthened && cutoff != nullptr && cutoff->enabled &&
                 options.compact_bc_tight_mccormick) {
                 if (stats != nullptr && stats->tight_mccormick_rows_added == 0) {
                     stats->enabled_families.push_back("interval_tight_mccormick_G_bit");
@@ -1905,11 +1974,13 @@ void writeCompactLp(const Instance& instance,
     writeConstraint(out, cid, gini, ">=", 0);
 
     if (cutoff != nullptr && cutoff->enabled) {
-        Expr gl; addTerm(gl, "G", 1);
-        writeConstraint(out, cid, gl, ">=", cutoff->gamma_L);
-        Expr gu; addTerm(gu, "G", 1);
-        writeConstraint(out, cid, gu, "<=", cutoff->gamma_U);
-        if (cutoff->add_objective_cutoff) {
+        if (!use_shared_interval_rows) {
+            Expr gl; addTerm(gl, "G", 1);
+            writeConstraint(out, cid, gl, ">=", cutoff->gamma_L);
+            Expr gu; addTerm(gu, "G", 1);
+            writeConstraint(out, cid, gu, "<=", cutoff->gamma_U);
+        }
+        if (cutoff->add_objective_cutoff && !use_shared_interval_rows) {
             Expr obj_cutoff; addTerm(obj_cutoff, "G", 1);
             for (int i = 1; i <= V; ++i) {
                 addTerm(obj_cutoff, eName(i), options.lambda * instance.weights[i]);
@@ -2018,7 +2089,7 @@ void writeCompactLp(const Instance& instance,
                 if (stats != nullptr) ++stats->disagg_sp_estimator_rows_added;
             }
         }
-        if (strengthened && options.compact_bc_objective_estimator_cutoff &&
+        if (!use_shared_interval_rows && strengthened && options.compact_bc_objective_estimator_cutoff &&
             cutoff->add_objective_cutoff && std::isfinite(s_upper) && s_upper > 1e-12) {
             if (stats != nullptr) {
                 stats->enabled_families.push_back("objective_lower_estimator_cutoff");
@@ -2034,7 +2105,7 @@ void writeCompactLp(const Instance& instance,
                             static_cast<double>(V) * s_upper * cutoff_value);
             if (stats != nullptr) ++stats->objective_estimator_cutoff_rows_added;
         }
-        if (add_sp_product_estimator) {
+        if (add_sp_product_estimator && !use_shared_interval_rows) {
             if (stats != nullptr) {
                 stats->enabled_families.push_back(
                     options.compact_bc_sp_product_estimator == "paper-safe"
@@ -2076,7 +2147,7 @@ void writeCompactLp(const Instance& instance,
             writeConstraint(out, cid, sp_estimator, "<=", 0.0);
             if (stats != nullptr) ++stats->sp_product_estimator_rows_added;
         }
-        if (strengthened && options.compact_bc_penalty_lb_closure) {
+        if (!use_shared_interval_rows && strengthened && options.compact_bc_penalty_lb_closure) {
             double penalty_lb = penalty_lb_domain;
             if (stats != nullptr) {
                 stats->enabled_families.push_back("penalty_lower_bound_closure");
@@ -2096,7 +2167,8 @@ void writeCompactLp(const Instance& instance,
             }
         }
 
-        if ((options.interval_oracle_penalty_domain_tightening ||
+        if (!use_shared_interval_rows &&
+            (options.interval_oracle_penalty_domain_tightening ||
              options.interval_oracle_low_gini_tightening) &&
             cutoff->add_objective_cutoff &&
             options.lambda > 1e-12) {
@@ -3219,6 +3291,9 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         if (time_limit <= 0.0) time_limit = std::max(1.0, options.solve_time_limit);
         SolveOptions model_options =
             applyResourceAdaptiveCompactOptions(instance, options, result);
+        // Round 19 keeps standalone fixed-interval and global-tree child
+        // formulations on the same deterministic interval-row path.
+        model_options.interval_row_factory_round19 = true;
         result.compact_bc_root_cut_rounds = model_options.compact_bc_root_cut_rounds;
         result.compact_bc_root_cut_time_limit = model_options.compact_bc_root_cut_time_limit;
         result.compact_bc_dynamic_cut_families = model_options.compact_bc_dynamic_cut_families;
@@ -4575,6 +4650,289 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             result.tailored_bc_source_class = tailoredBCSourceClass(result);
         }
     }
+    return result;
+}
+
+SolveResult solveGlobalGiniTree(const Instance& instance,
+                                const SolveOptions& options,
+                                const SolveResult& verified_seed,
+                                double root_gamma_L,
+                                double root_gamma_U) {
+    const auto start = Clock::now();
+    SolveResult result = verified_seed;
+    result.method = "gcap-frontier";
+    result.frontier_execution_mode = "global-gini-tree";
+    result.certificate_scope = "original_global_gini_single_tree";
+    result.log_file = options.log_path;
+    result.global_gini_tree_attempted = true;
+    result.global_gini_tree_root_gamma_L = root_gamma_L;
+    result.global_gini_tree_root_gamma_U = root_gamma_U;
+    result.time_budget_seconds = options.solve_time_limit;
+    result.finalization_source = "native_single_cplex_problem";
+    result.wrapper_synthesized_final_json = false;
+    result.full_certificate_requires_pricing_closure = false;
+    result.full_certificate_pricing_closure_satisfied = true;
+    result.full_certificate_all_intervals_accounted = false;
+    result.full_certificate_basis = "global_gini_single_tree_native_bound";
+    result.full_certificate_rejection_reason = "global_tree_not_finalized";
+    result.unresolved_intervals = 1;
+    result.open_nodes = 0;
+
+    if (!verified_seed.verification.feasible ||
+        !verified_seed.verification.objective_matches ||
+        !verified_seed.verification.errors.empty()) {
+        result.status = "global_gini_tree_no_verified_incumbent";
+        result.certificate =
+            "Global Gini tree was not started because the same-run incumbent failed independent verification.";
+        result.global_gini_tree_fail_reason = "same_run_incumbent_not_verified";
+        result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
+        result.wall_time_seconds = result.runtime_seconds;
+        return result;
+    }
+    if (root_gamma_L < -1e-12 || root_gamma_U < root_gamma_L - 1e-12 ||
+        !result.frontier_covers_all_improving_gini_values) {
+        result.status = "global_gini_tree_invalid_root_range";
+        result.certificate =
+            "Global Gini tree rejected a root interval that did not cover the complete improving Gini range.";
+        result.global_gini_tree_fail_reason = "incomplete_or_invalid_root_range";
+        result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
+        result.wall_time_seconds = result.runtime_seconds;
+        return result;
+    }
+    if (options.compact_bc_root_cut_rounds > 0) {
+        result.status = "global_gini_tree_unsupported_root_cut_loop";
+        result.certificate =
+            "Global Gini tree forbids preliminary repeated root solves; use the Round 18 static-no-callback profile with zero root cut rounds.";
+        result.global_gini_tree_fail_reason = "root_cut_rounds_would_violate_single_mipopt_lifecycle";
+        result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
+        result.wall_time_seconds = result.runtime_seconds;
+        return result;
+    }
+
+    try {
+        const auto run_id = std::chrono::duration_cast<std::chrono::milliseconds>(
+            Clock::now().time_since_epoch()).count();
+        const std::string stem = std::filesystem::path(instance.name).stem().string();
+        const std::filesystem::path default_dir =
+            std::filesystem::path("results") /
+            "gf_global_gini_tree_feasibility_round" / "runs" /
+            (stem + "_" + std::to_string(run_id));
+        std::filesystem::create_directories(default_dir);
+        const std::filesystem::path root_lp =
+            options.global_gini_tree_root_export_path.empty()
+                ? default_dir / "global_root.lp"
+                : std::filesystem::path(options.global_gini_tree_root_export_path);
+        const std::filesystem::path node_trace =
+            options.global_gini_tree_node_trace_path.empty()
+                ? default_dir / "global_node_trace.csv"
+                : std::filesystem::path(options.global_gini_tree_node_trace_path);
+        const std::filesystem::path bound_trace =
+            options.global_gini_tree_bound_trace_path.empty()
+                ? default_dir / "global_bound_trajectory.csv"
+                : std::filesystem::path(options.global_gini_tree_bound_trace_path);
+        const std::filesystem::path manifest =
+            options.global_gini_tree_manifest_path.empty()
+                ? default_dir / "model_lifecycle_manifest.csv"
+                : std::filesystem::path(options.global_gini_tree_manifest_path);
+        if (root_lp.has_parent_path()) {
+            std::filesystem::create_directories(root_lp.parent_path());
+        }
+
+        SolveOptions model_options = options;
+        model_options.interval_row_factory_round19 = true;
+        CompactIntervalCutoffConfig root_cutoff;
+        root_cutoff.enabled = true;
+        root_cutoff.gamma_L = root_gamma_L;
+        root_cutoff.gamma_U = root_gamma_U;
+        root_cutoff.add_objective_cutoff = true;
+        root_cutoff.incumbent_ub = verified_seed.objective;
+        root_cutoff.epsilon = 0.0;
+        CompactOracleStrengtheningStats root_stats;
+        writeCompactLp(instance, model_options, root_lp, true, &root_cutoff,
+                       &root_stats, nullptr);
+
+        const int solver_threads = options.compact_bc_threads > 0
+            ? options.compact_bc_threads
+            : (options.mip_threads > 0
+                   ? options.mip_threads
+                   : std::max(1, options.threads));
+        const GlobalGiniTreeApiSolveResult api =
+            solveGlobalGiniTreeWithTailoredBCCplexApi(
+                root_lp, instance, model_options, root_gamma_L, root_gamma_U,
+                verified_seed.objective, options.solve_time_limit,
+                solver_threads, node_trace, bound_trace, manifest);
+
+        result.global_gini_tree_available = api.available;
+        result.global_gini_tree_solved = api.solved;
+        result.global_gini_tree_return_code = api.return_code;
+        result.global_gini_tree_status_code = api.status_code;
+        result.global_gini_tree_solver_status = api.status;
+        result.global_gini_tree_fail_reason = api.fail_reason;
+        result.global_gini_tree_environment_count = api.environment_count;
+        result.global_gini_tree_problem_count = api.problem_count;
+        result.global_gini_tree_model_read_count = api.model_read_count;
+        result.global_gini_tree_mipopt_count = api.mipopt_count;
+        result.global_gini_tree_freeprob_count = api.freeprob_count;
+        result.global_gini_tree_close_count = api.close_count;
+        result.global_gini_tree_interval_oracle_count = api.interval_oracle_count;
+        result.global_gini_tree_child_process_count = api.child_process_count;
+        result.global_gini_tree_branch_callback_calls = api.branch_callback_calls;
+        result.global_gini_tree_progress_callback_calls = api.progress_callback_calls;
+        result.global_gini_tree_gini_branch_nodes = api.gini_branch_nodes;
+        result.global_gini_tree_gini_children_created = api.gini_children_created;
+        result.global_gini_tree_gini_branch_generations = api.gini_branch_generations;
+        result.global_gini_tree_ordinary_branch_fallbacks = api.ordinary_branch_fallbacks;
+        result.global_gini_tree_nonoptimal_relaxation_fallbacks =
+            api.nonoptimal_relaxation_fallbacks;
+        result.global_gini_tree_local_rows_attached = api.local_rows_attached;
+        result.global_gini_tree_local_bound_changes_attached =
+            api.local_bound_changes_attached;
+        result.global_gini_tree_local_row_failures = api.local_row_failures;
+        result.global_gini_tree_column_mapping_failures = api.column_mapping_failures;
+        result.global_gini_tree_coverage_failures = api.coverage_failures;
+        result.global_gini_tree_child_estimate_failures = api.child_estimate_failures;
+        result.global_gini_tree_local_bound_api_failures = api.local_bound_api_failures;
+        result.global_gini_tree_node_info_api_failures = api.node_info_api_failures;
+        result.global_gini_tree_callback_failures = api.callback_failures;
+        result.global_gini_tree_presolve_requested = api.presolve_requested;
+        result.global_gini_tree_presolve_set_rc = api.presolve_set_rc;
+        result.global_gini_tree_presolve_effective = api.presolve_effective;
+        result.global_gini_tree_search_requested = api.search_requested;
+        result.global_gini_tree_search_set_rc = api.search_set_rc;
+        result.global_gini_tree_search_effective = api.search_effective;
+        result.global_gini_tree_node_select_requested = api.node_select_requested;
+        result.global_gini_tree_node_select_set_rc = api.node_select_set_rc;
+        result.global_gini_tree_node_select_effective = api.node_select_effective;
+        result.global_gini_tree_heuristics_effective = api.heuristics_effective;
+        result.global_gini_tree_probing_effective = api.probing_effective;
+        result.global_gini_tree_threads_effective = api.threads_effective;
+        result.global_gini_tree_native_time_limit_set_rc =
+            api.native_time_limit_set_rc;
+        result.global_gini_tree_native_time_limit_seconds =
+            api.native_time_limit_seconds;
+        result.global_gini_tree_native_cuts_default = api.native_cuts_default;
+        result.global_gini_tree_solver_finalization_reached =
+            api.solver_finalization_reached;
+        result.global_gini_tree_callback_abort_used = api.callback_abort_used;
+        result.global_gini_tree_recursive_branching_complete =
+            api.recursive_branching_complete;
+        result.global_gini_tree_row_migration_complete = api.row_migration_complete;
+        result.global_gini_tree_sibling_isolation_by_construction =
+            api.sibling_isolation_by_construction;
+        result.global_gini_tree_root_coverage_valid = api.root_coverage_valid;
+        result.global_gini_tree_branch_coverage_valid = api.branch_coverage_valid;
+        result.global_gini_tree_lifecycle_valid = api.lifecycle_valid;
+        result.global_gini_tree_global_bound_monotone = api.global_bound_monotone;
+        result.global_gini_tree_no_time_quantum = api.no_time_quantum;
+        result.global_gini_tree_no_instance_special_case = api.no_instance_special_case;
+        result.global_gini_tree_native_best_bound_available = api.best_bound_available;
+        result.global_gini_tree_native_objective = api.objective;
+        result.global_gini_tree_native_best_bound = api.best_bound;
+        result.global_gini_tree_row_factory_version = api.row_factory_version;
+        result.global_gini_tree_root_model_fingerprint =
+            api.root_model_fingerprint;
+        result.global_gini_tree_objective_fingerprint =
+            api.objective_fingerprint;
+        result.global_gini_tree_root_row_signature = api.root_row_signature;
+        result.global_gini_tree_root_model_path = root_lp.string();
+        result.global_gini_tree_node_trace_path = node_trace.string();
+        result.global_gini_tree_bound_trace_path = bound_trace.string();
+        result.global_gini_tree_manifest_path = manifest.string();
+        result.nodes = api.node_count;
+        result.solver_finalization_reached = api.solver_finalization_reached;
+        result.process_return_code = api.return_code;
+
+        bool native_incumbent_verified = false;
+        if (!api.values.empty()) {
+            const std::vector<RoutePlan> candidate_routes =
+                reconstructRoutes(instance, api.values);
+            const Verification candidate =
+                verifySolution(instance, candidate_routes, options.lambda);
+            const bool objective_consistent = candidate.feasible &&
+                candidate.objective_matches && candidate.errors.empty() &&
+                std::fabs(candidate.objective - api.objective) <=
+                    1e-6 * std::max({1.0, std::fabs(candidate.objective),
+                                     std::fabs(api.objective)});
+            if (objective_consistent &&
+                candidate.objective <= result.objective + 1e-7) {
+                result.routes = candidate_routes;
+                result.verification = candidate;
+                result.final_inventory = candidate.final_inventory;
+                result.G = candidate.G;
+                result.P = candidate.P;
+                result.objective = candidate.objective;
+                result.upper_bound = candidate.objective;
+                native_incumbent_verified = true;
+            } else {
+                result.notes.push_back(
+                    "global Gini tree native incumbent was rejected by the independent original-solution verifier or objective consistency check");
+            }
+        }
+        result.global_gini_tree_incumbent_verified =
+            native_incumbent_verified ||
+            (result.verification.feasible && result.verification.objective_matches &&
+             result.verification.errors.empty());
+        if (api.best_bound_available) result.lower_bound = api.best_bound;
+        result.gap = (std::fabs(result.upper_bound) > 1e-12 &&
+                      api.best_bound_available)
+            ? std::max(0.0, (result.upper_bound - result.lower_bound) /
+                                std::fabs(result.upper_bound))
+            : 0.0;
+
+        const bool native_optimal = statusIsOptimal(api.status);
+        const bool exactness_audit = api.solved && api.lifecycle_valid &&
+            api.solver_finalization_reached && api.best_bound_available &&
+            api.recursive_branching_complete && api.row_migration_complete &&
+            api.sibling_isolation_by_construction && api.root_coverage_valid &&
+            api.branch_coverage_valid && !api.callback_abort_used;
+        const bool optimality_consistent = native_optimal &&
+            native_incumbent_verified && exactness_audit &&
+            std::fabs(result.objective - api.best_bound) <=
+                1e-6 * std::max({1.0, std::fabs(result.objective),
+                                 std::fabs(api.best_bound)});
+        result.global_gini_tree_optimality_accepted = optimality_consistent;
+        if (optimality_consistent) {
+            result.status = "optimal";
+            result.lower_bound = result.objective;
+            result.upper_bound = result.objective;
+            result.gap = 0.0;
+            result.unresolved_intervals = 0;
+            result.full_certificate_all_intervals_accounted = true;
+            result.full_certificate_rejection_reason = "none";
+            result.compact_bc_certificate_valid = true;
+            result.certificate =
+                "One persistent CPLEX global Gini tree reported native optimality and best bound; lifecycle, recursive interval coverage, row migration, and the independent original-solution verifier all passed.";
+        } else if (!api.solved) {
+            result.status = "global_gini_tree_error";
+            result.full_certificate_rejection_reason = api.fail_reason.empty()
+                ? "global_tree_api_solve_failed" : api.fail_reason;
+            result.certificate =
+                "Global Gini tree did not produce a usable solver-final result: " +
+                result.full_certificate_rejection_reason;
+        } else {
+            result.status = statusIsTimeLimited(api.status)
+                ? "global_gini_tree_time_limit"
+                : "global_gini_tree_not_certified";
+            result.full_certificate_rejection_reason = native_optimal
+                ? "native_optimality_failed_verifier_or_exactness_audit"
+                : "native_solver_did_not_report_optimality";
+            result.certificate = api.best_bound_available
+                ? "The one persistent CPLEX tree returned a native solver-final lower bound, but original-problem optimality was not accepted."
+                : "The one persistent CPLEX tree did not return a native solver-final best bound; no official lower-bound row may be synthesized.";
+        }
+        result.notes.push_back("global Gini tree root model: " + root_lp.string());
+        result.notes.push_back("global Gini tree native CPLEX status: " + api.status);
+    } catch (const std::exception& error) {
+        result.status = "global_gini_tree_error";
+        result.global_gini_tree_fail_reason = error.what();
+        result.full_certificate_rejection_reason =
+            "exception_before_native_global_tree_finalization";
+        result.certificate =
+            std::string("Global Gini tree failed: ") + error.what();
+    }
+    result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
+    result.wall_time_seconds = result.runtime_seconds;
+    result.actual_runtime_seconds = result.runtime_seconds;
     return result;
 }
 

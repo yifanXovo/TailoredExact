@@ -1,0 +1,74 @@
+
+--- ROUND19 RUNNER STDOUT ---
+Version identifier: 22.1.1.0 | 2022-11-27 | 9160aff4d
+CPXPARAM_Preprocessing_Presolve                  0
+CPXPARAM_Threads                                 1
+CPXPARAM_MIP_Strategy_Search                     1
+CPXPARAM_TimeLimit                               9.9745586999999993
+CPXPARAM_MIP_Tolerances_MIPGap                   1e-08
+Generic callback                                 0xd0
+Detecting symmetries...
+Reduced MIP has 10580 rows, 2112 columns, and 61947 nonzeros.
+Reduced MIP has 1493 binaries, 197 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.02 sec. (11.14 ticks)
+Clique table members: 2001.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: traditional branch-and-cut.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.09 sec. (158.62 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap         Variable B NodeID Parent  Depth
+
+      0     0        0.4094   177                      0.4094     2166         
+      0     0        0.4273   192                   Cuts: 315     2586         
+      0     0        0.4285   214                   Cuts: 110     2769         
+      0     0        0.4300   234                   Cuts: 110     3068         
+      0     0        0.4318   239                   Cuts: 135     3231         
+      0     0        0.4330   243                   Cuts: 151     3456         
+      0     0        0.4334   271                   Cuts: 125     3581         
+      0     0        0.4338   272                    Cuts: 74     3807         
+      0     0        0.4345   262                    Cuts: 64     3973         
+      0     0        0.4349   284                    Cuts: 84     4244         
+      0     0        0.4359   277                   Cuts: 103     4409         
+      0     0        0.4361   289                   Cuts: 112     4499         
+      0     0        0.4363   302                    Cuts: 56     4562         
+      0     0        0.4363   295                    Cuts: 35     4619         
+      0     0        0.4365   290                    Cuts: 31     4666         
+Detecting symmetries...
+      0     2        0.4365   290                      0.4365     4666                                 0             0
+Elapsed time = 3.45 sec. (8757.63 ticks, tree = 0.01 MB, solutions = 0)
+      2     4        0.4577   288                      0.4365     5863                          X      2      1      2
+      3     5        0.5170   240                      0.4365     8194                          X      3      1      2
+      5     5        0.4839   269                      0.4365     9976                          X      5      2      3
+      6     6        0.5146   281                      0.4365    11061                          X      6      5      4
+      7     7        0.4999   249                      0.4365    11933                          X      7      5      4
+      8     8        0.5024   254                      0.4365    12491                          X      8      7      5
+      9     9        0.5087   241                      0.4365    12763                          X      9      7      5
+     11    11        0.5061   247                      0.4365    13305                          X     11      8      6
+     14    14        0.5073   256                      0.4365    13732                          X     14     12      8
+     18    18        0.5081   250                      0.4365    14090                          X     18     16     10
+Elapsed time = 7.50 sec. (16231.74 ticks, tree = 1.22 MB, solutions = 0)
+     19    19        0.5083   238                      0.4365    14194                          X     19     16     10
+     20    20        0.5083   243                      0.4365    14219                  bit_6_5 D     20     19     11
+
+GUB cover cuts applied:  2
+Clique cuts applied:  42
+Cover cuts applied:  1
+Implied bound cuts applied:  41
+Flow cuts applied:  18
+Mixed integer rounding cuts applied:  68
+Zero-half cuts applied:  25
+Gomory fractional cuts applied:  4
+
+Root node processing (before b&c):
+  Real time             =    3.41 sec. (8692.54 ticks)
+Sequential b&c:
+  Real time             =    6.58 sec. (13810.00 ticks)
+                          ------------
+Total (root+branch&cut) =    9.98 sec. (22502.54 ticks)
+CPLEX Error  1217: No solution exists.
+CPLEX Error  1217: No solution exists.
+tight_T_seed3102.txt gcap-frontier global_gini_tree_time_limit obj=0.600704 runtime=30.0973 columns=0
+
+--- ROUND19 RUNNER STDERR ---

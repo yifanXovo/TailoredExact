@@ -32,6 +32,8 @@ set(EXACT_EBRP_LIB_SOURCES
   src/TailoredBCCplexApi.cpp
   src/ControllingLeafScheduler.cpp
   src/GiniBranching.cpp
+  src/GiniFrontierGeometry.cpp
+  src/IntervalRowFactory.cpp
   src/hga_tgbc/HgaTgbcGreedy.cpp
   src/HgaTgbcRunner.cpp
   src/Logger.cpp
@@ -47,3 +49,6 @@ target_link_libraries(ExactEBRPCompare PRIVATE exact_ebrp_core)
 
 add_executable(ControllingLeafSchedulerTests tests/controlling_leaf_scheduler_tests.cpp)
 target_link_libraries(ControllingLeafSchedulerTests PRIVATE exact_ebrp_core)
+
+add_executable(GlobalGiniTreeTests tests/global_gini_tree_tests.cpp)
+target_link_libraries(GlobalGiniTreeTests PRIVATE exact_ebrp_core)

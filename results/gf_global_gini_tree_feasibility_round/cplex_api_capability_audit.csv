@@ -1,0 +1,12 @@
+capability,symbol_or_parameter,status,reason
+branch_context,CPX_CALLBACKCONTEXT_BRANCHING=0x0080,verified,
+local_bounds,CPXcallbackgetlocallb/CPXcallbackgetlocalub,verified,
+relaxation_status,CPXcallbackgetrelaxationstatus,verified,
+relaxation_bound,CPXcallbackgetrelaxationpoint,verified,
+node_uid_depth,CPXcallbackgetinfolong info 9/10,verified,
+child_creation,CPXcallbackmakebranch,verified,
+local_rows,CPXcallbackaddusercuts local=1 force,verified,
+best_bound,CPXgetbestobjval,verified,
+best_bound_nodes,CPXPARAM_MIP_Strategy_NodeSelect=1,verified,
+native_time_limit,CPXPARAM_TimeLimit=1039,verified,
+dynamic_search,CPXPARAM_MIP_Strategy_Search=2,blocked,reproduced continuous-branch sibling loss; fail-closed
