@@ -117,6 +117,9 @@ ObjectiveParts computeObjectiveParts(const Instance& instance,
 std::string inferMethodScope(const SolveResult& result) {
     const std::string method = lowerCopy(result.method);
     const std::string text = auditText(result);
+    if (result.frontier_execution_mode == "global-gini-tree") {
+        return "original_compact";
+    }
     if (method == "gcap-frontier" &&
         (result.algorithm_preset == "paper-gf-compact-bc" ||
          result.algorithm_preset == "paper-gf-tailored-bc")) {
@@ -176,6 +179,7 @@ bool inferSolvesOriginalObjective(const SolveResult& result) {
 
 bool inferIsBpc(const SolveResult& result) {
     const std::string method = lowerCopy(result.method);
+    if (result.frontier_execution_mode == "global-gini-tree") return false;
     if (method == "gcap-frontier" &&
         (result.algorithm_preset == "paper-gf-compact-bc" ||
          result.algorithm_preset == "paper-gf-tailored-bc")) {
@@ -187,6 +191,11 @@ bool inferIsBpc(const SolveResult& result) {
 std::string inferCertificateType(const SolveResult& result) {
     const std::string method = lowerCopy(result.method);
     const std::string text = auditText(result);
+    if (result.frontier_execution_mode == "global-gini-tree") {
+        return result.status == "optimal"
+            ? "global_gini_single_tree_compact_mip"
+            : "incomplete_global_gini_single_tree_compact_mip";
+    }
     if (method == "gcap-frontier") {
         if (result.algorithm_preset == "paper-gf-tailored-bc") {
             return result.status == "optimal"
@@ -302,6 +311,28 @@ bool inferCertifiedOriginalProblem(const SolveResult& result) {
     if (result.gap > 1e-7) return false;
     if (!nearlyEqual(result.lower_bound, result.upper_bound)) return false;
     if (!nearlyEqual(result.objective, result.upper_bound)) return false;
+    if (result.frontier_execution_mode == "global-gini-tree") {
+        return result.global_gini_tree_attempted &&
+               result.global_gini_tree_solved &&
+               result.global_gini_tree_solver_finalization_reached &&
+               result.global_gini_tree_native_best_bound_available &&
+               result.global_gini_tree_lifecycle_valid &&
+               result.global_gini_tree_recursive_branching_complete &&
+               result.global_gini_tree_row_migration_complete &&
+               result.global_gini_tree_sibling_isolation_by_construction &&
+               result.global_gini_tree_root_coverage_valid &&
+               result.global_gini_tree_branch_coverage_valid &&
+               result.global_gini_tree_incumbent_verified &&
+               result.global_gini_tree_optimality_accepted &&
+               result.global_gini_tree_environment_count == 1 &&
+               result.global_gini_tree_problem_count == 1 &&
+               result.global_gini_tree_model_read_count == 1 &&
+               result.global_gini_tree_mipopt_count == 1 &&
+               result.global_gini_tree_freeprob_count == 1 &&
+               result.global_gini_tree_close_count == 1 &&
+               result.global_gini_tree_interval_oracle_count == 0 &&
+               result.global_gini_tree_child_process_count == 0;
+    }
     if (result.algorithm_preset == "paper-gf-compact-bc" ||
         result.algorithm_preset == "paper-gf-tailored-bc") {
         if (result.method != "gcap-frontier") return false;
@@ -538,6 +569,152 @@ std::string resultToJson(const SolveResult& input) {
         << (result.frontier_covers_all_improving_gini_values ? "true" : "false") << ",\n";
     out << "  \"frontier_range_certificate_scope\": \""
         << jsonEscape(result.frontier_range_certificate_scope) << "\",\n";
+    out << "  \"frontier_execution_mode\": \""
+        << jsonEscape(result.frontier_execution_mode) << "\",\n";
+    out << "  \"global_gini_tree_attempted\": "
+        << (result.global_gini_tree_attempted ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_available\": "
+        << (result.global_gini_tree_available ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_solved\": "
+        << (result.global_gini_tree_solved ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_return_code\": "
+        << result.global_gini_tree_return_code << ",\n";
+    out << "  \"global_gini_tree_status_code\": "
+        << result.global_gini_tree_status_code << ",\n";
+    out << "  \"global_gini_tree_solver_status\": \""
+        << jsonEscape(result.global_gini_tree_solver_status) << "\",\n";
+    out << "  \"global_gini_tree_fail_reason\": \""
+        << jsonEscape(result.global_gini_tree_fail_reason) << "\",\n";
+    out << "  \"global_gini_tree_environment_count\": "
+        << result.global_gini_tree_environment_count << ",\n";
+    out << "  \"global_gini_tree_problem_count\": "
+        << result.global_gini_tree_problem_count << ",\n";
+    out << "  \"global_gini_tree_model_read_count\": "
+        << result.global_gini_tree_model_read_count << ",\n";
+    out << "  \"global_gini_tree_mipopt_count\": "
+        << result.global_gini_tree_mipopt_count << ",\n";
+    out << "  \"global_gini_tree_freeprob_count\": "
+        << result.global_gini_tree_freeprob_count << ",\n";
+    out << "  \"global_gini_tree_close_count\": "
+        << result.global_gini_tree_close_count << ",\n";
+    out << "  \"global_gini_tree_interval_oracle_count\": "
+        << result.global_gini_tree_interval_oracle_count << ",\n";
+    out << "  \"global_gini_tree_child_process_count\": "
+        << result.global_gini_tree_child_process_count << ",\n";
+    out << "  \"global_gini_tree_branch_callback_calls\": "
+        << result.global_gini_tree_branch_callback_calls << ",\n";
+    out << "  \"global_gini_tree_progress_callback_calls\": "
+        << result.global_gini_tree_progress_callback_calls << ",\n";
+    out << "  \"global_gini_tree_gini_branch_nodes\": "
+        << result.global_gini_tree_gini_branch_nodes << ",\n";
+    out << "  \"global_gini_tree_gini_children_created\": "
+        << result.global_gini_tree_gini_children_created << ",\n";
+    out << "  \"global_gini_tree_gini_branch_generations\": "
+        << result.global_gini_tree_gini_branch_generations << ",\n";
+    out << "  \"global_gini_tree_ordinary_branch_fallbacks\": "
+        << result.global_gini_tree_ordinary_branch_fallbacks << ",\n";
+    out << "  \"global_gini_tree_nonoptimal_relaxation_fallbacks\": "
+        << result.global_gini_tree_nonoptimal_relaxation_fallbacks << ",\n";
+    out << "  \"global_gini_tree_local_rows_attached\": "
+        << result.global_gini_tree_local_rows_attached << ",\n";
+    out << "  \"global_gini_tree_local_bound_changes_attached\": "
+        << result.global_gini_tree_local_bound_changes_attached << ",\n";
+    out << "  \"global_gini_tree_local_row_failures\": "
+        << result.global_gini_tree_local_row_failures << ",\n";
+    out << "  \"global_gini_tree_column_mapping_failures\": "
+        << result.global_gini_tree_column_mapping_failures << ",\n";
+    out << "  \"global_gini_tree_coverage_failures\": "
+        << result.global_gini_tree_coverage_failures << ",\n";
+    out << "  \"global_gini_tree_child_estimate_failures\": "
+        << result.global_gini_tree_child_estimate_failures << ",\n";
+    out << "  \"global_gini_tree_local_bound_api_failures\": "
+        << result.global_gini_tree_local_bound_api_failures << ",\n";
+    out << "  \"global_gini_tree_node_info_api_failures\": "
+        << result.global_gini_tree_node_info_api_failures << ",\n";
+    out << "  \"global_gini_tree_callback_failures\": "
+        << result.global_gini_tree_callback_failures << ",\n";
+    out << "  \"global_gini_tree_presolve_requested\": "
+        << result.global_gini_tree_presolve_requested << ",\n";
+    out << "  \"global_gini_tree_presolve_set_rc\": "
+        << result.global_gini_tree_presolve_set_rc << ",\n";
+    out << "  \"global_gini_tree_presolve_effective\": "
+        << result.global_gini_tree_presolve_effective << ",\n";
+    out << "  \"global_gini_tree_search_requested\": "
+        << result.global_gini_tree_search_requested << ",\n";
+    out << "  \"global_gini_tree_search_set_rc\": "
+        << result.global_gini_tree_search_set_rc << ",\n";
+    out << "  \"global_gini_tree_search_effective\": "
+        << result.global_gini_tree_search_effective << ",\n";
+    out << "  \"global_gini_tree_node_select_requested\": "
+        << result.global_gini_tree_node_select_requested << ",\n";
+    out << "  \"global_gini_tree_node_select_set_rc\": "
+        << result.global_gini_tree_node_select_set_rc << ",\n";
+    out << "  \"global_gini_tree_node_select_effective\": "
+        << result.global_gini_tree_node_select_effective << ",\n";
+    out << "  \"global_gini_tree_heuristics_effective\": "
+        << result.global_gini_tree_heuristics_effective << ",\n";
+    out << "  \"global_gini_tree_probing_effective\": "
+        << result.global_gini_tree_probing_effective << ",\n";
+    out << "  \"global_gini_tree_threads_effective\": "
+        << result.global_gini_tree_threads_effective << ",\n";
+    out << "  \"global_gini_tree_native_time_limit_set_rc\": "
+        << result.global_gini_tree_native_time_limit_set_rc << ",\n";
+    out << "  \"global_gini_tree_native_time_limit_seconds\": "
+        << result.global_gini_tree_native_time_limit_seconds << ",\n";
+    out << "  \"global_gini_tree_native_cuts_default\": "
+        << (result.global_gini_tree_native_cuts_default ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_solver_finalization_reached\": "
+        << (result.global_gini_tree_solver_finalization_reached ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_callback_abort_used\": "
+        << (result.global_gini_tree_callback_abort_used ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_recursive_branching_complete\": "
+        << (result.global_gini_tree_recursive_branching_complete ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_row_migration_complete\": "
+        << (result.global_gini_tree_row_migration_complete ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_sibling_isolation_by_construction\": "
+        << (result.global_gini_tree_sibling_isolation_by_construction ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_root_coverage_valid\": "
+        << (result.global_gini_tree_root_coverage_valid ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_branch_coverage_valid\": "
+        << (result.global_gini_tree_branch_coverage_valid ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_lifecycle_valid\": "
+        << (result.global_gini_tree_lifecycle_valid ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_global_bound_monotone\": "
+        << (result.global_gini_tree_global_bound_monotone ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_no_time_quantum\": "
+        << (result.global_gini_tree_no_time_quantum ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_no_instance_special_case\": "
+        << (result.global_gini_tree_no_instance_special_case ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_native_best_bound_available\": "
+        << (result.global_gini_tree_native_best_bound_available ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_incumbent_verified\": "
+        << (result.global_gini_tree_incumbent_verified ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_optimality_accepted\": "
+        << (result.global_gini_tree_optimality_accepted ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_root_gamma_L\": "
+        << result.global_gini_tree_root_gamma_L << ",\n";
+    out << "  \"global_gini_tree_root_gamma_U\": "
+        << result.global_gini_tree_root_gamma_U << ",\n";
+    out << "  \"global_gini_tree_native_objective\": "
+        << result.global_gini_tree_native_objective << ",\n";
+    out << "  \"global_gini_tree_native_best_bound\": "
+        << result.global_gini_tree_native_best_bound << ",\n";
+    out << "  \"global_gini_tree_row_factory_version\": \""
+        << jsonEscape(result.global_gini_tree_row_factory_version) << "\",\n";
+    out << "  \"global_gini_tree_root_model_fingerprint\": \""
+        << jsonEscape(result.global_gini_tree_root_model_fingerprint) << "\",\n";
+    out << "  \"global_gini_tree_objective_fingerprint\": \""
+        << jsonEscape(result.global_gini_tree_objective_fingerprint) << "\",\n";
+    out << "  \"global_gini_tree_root_row_signature\": \""
+        << jsonEscape(result.global_gini_tree_root_row_signature) << "\",\n";
+    out << "  \"global_gini_tree_root_model_path\": \""
+        << jsonEscape(result.global_gini_tree_root_model_path) << "\",\n";
+    out << "  \"global_gini_tree_node_trace_path\": \""
+        << jsonEscape(result.global_gini_tree_node_trace_path) << "\",\n";
+    out << "  \"global_gini_tree_bound_trace_path\": \""
+        << jsonEscape(result.global_gini_tree_bound_trace_path) << "\",\n";
+    out << "  \"global_gini_tree_manifest_path\": \""
+        << jsonEscape(result.global_gini_tree_manifest_path) << "\",\n";
     out << "  \"columns_generated_raw\": " << result.columns_generated_raw << ",\n";
     out << "  \"columns_after_dominance\": " << result.columns_after_dominance << ",\n";
     out << "  \"columns_dominated\": " << result.columns_dominated << ",\n";

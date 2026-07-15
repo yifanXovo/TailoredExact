@@ -177,6 +177,78 @@ struct TailoredBCCplexApiSolveResult {
     std::unordered_map<std::string, double> values;
 };
 
+struct GlobalGiniTreeApiSolveResult {
+    bool attempted = false;
+    bool available = false;
+    bool solved = false;
+    int return_code = -1;
+    int status_code = 0;
+    std::string status;
+    std::string fail_reason;
+    double objective = 0.0;
+    double best_bound = 0.0;
+    bool best_bound_available = false;
+    long long node_count = 0;
+    long long environment_count = 0;
+    long long problem_count = 0;
+    long long model_read_count = 0;
+    long long mipopt_count = 0;
+    long long freeprob_count = 0;
+    long long close_count = 0;
+    long long interval_oracle_count = 0;
+    long long child_process_count = 0;
+    long long branch_callback_calls = 0;
+    long long progress_callback_calls = 0;
+    long long gini_branch_nodes = 0;
+    long long gini_children_created = 0;
+    long long gini_branch_generations = 0;
+    long long ordinary_branch_fallbacks = 0;
+    long long nonoptimal_relaxation_fallbacks = 0;
+    long long local_rows_attached = 0;
+    long long local_bound_changes_attached = 0;
+    long long local_row_failures = 0;
+    long long column_mapping_failures = 0;
+    long long coverage_failures = 0;
+    long long child_estimate_failures = 0;
+    long long local_bound_api_failures = 0;
+    long long node_info_api_failures = 0;
+    long long callback_failures = 0;
+    int presolve_requested = 1;
+    int presolve_set_rc = 0;
+    int presolve_effective = 1;
+    int search_requested = 2;
+    int search_set_rc = 0;
+    int search_effective = 2;
+    int node_select_requested = 1;
+    int node_select_set_rc = 0;
+    int node_select_effective = 1;
+    int heuristics_effective = 0;
+    int probing_effective = 0;
+    int threads_effective = 1;
+    bool native_cuts_default = true;
+    int native_time_limit_set_rc = 0;
+    double native_time_limit_seconds = 0.0;
+    bool solver_finalization_reached = false;
+    bool callback_abort_used = false;
+    bool recursive_branching_complete = false;
+    bool row_migration_complete = false;
+    bool sibling_isolation_by_construction = false;
+    bool root_coverage_valid = false;
+    bool branch_coverage_valid = false;
+    bool lifecycle_valid = false;
+    bool global_bound_monotone = true;
+    bool no_time_quantum = true;
+    bool no_instance_special_case = true;
+    std::string row_factory_version;
+    std::string root_model_fingerprint;
+    std::string objective_fingerprint;
+    std::string root_row_signature;
+    std::string node_trace_path;
+    std::string bound_trace_path;
+    std::string manifest_path;
+    std::unordered_map<std::string, double> values;
+};
+
 TailoredBCCplexApiProbe probeTailoredBCCplexApi();
 
 TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
@@ -221,5 +293,18 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     double progress_interval_seconds = 0.0,
     bool register_callbacks = true,
     const TailoredBCNativeCheckpointConfig& native_checkpoint = {});
+
+GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
+    const std::filesystem::path& root_lp_path,
+    const Instance& instance,
+    const SolveOptions& options,
+    double root_gamma_L,
+    double root_gamma_U,
+    double verified_incumbent,
+    double time_limit_seconds,
+    int threads,
+    const std::filesystem::path& node_trace_path,
+    const std::filesystem::path& bound_trace_path,
+    const std::filesystem::path& manifest_path);
 
 } // namespace ebrp

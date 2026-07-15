@@ -1,5 +1,7 @@
 #include "TailoredBCCplexApi.hpp"
 #include "ControllingLeafScheduler.hpp"
+#include "GiniFrontierGeometry.hpp"
+#include "IntervalRowFactory.hpp"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -12,6 +14,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
+#include <cstdint>
 #include <filesystem>
 #include <fstream>
 #include <functional>
@@ -28,6 +31,36 @@
 
 namespace ebrp {
 namespace {
+
+std::string fnvFingerprint(const std::string& text) {
+    std::uint64_t hash = 1469598103934665603ull;
+    for (unsigned char ch : text) {
+        hash ^= static_cast<std::uint64_t>(ch);
+        hash *= 1099511628211ull;
+    }
+    std::ostringstream out;
+    out << std::hex << std::setw(16) << std::setfill('0') << hash;
+    return out.str();
+}
+
+std::string fileFingerprint(const std::filesystem::path& path) {
+    std::ifstream input(path, std::ios::binary);
+    if (!input) return "unavailable";
+    std::ostringstream bytes;
+    bytes << input.rdbuf();
+    return fnvFingerprint(bytes.str());
+}
+
+std::string originalObjectiveFingerprint(const Instance& instance,
+                                         const SolveOptions& options) {
+    std::ostringstream canonical;
+    canonical << std::setprecision(17) << "min|G=1";
+    for (int station = 1; station <= instance.V; ++station) {
+        canonical << "|e_" << station << '='
+                  << options.lambda * instance.weights[station];
+    }
+    return fnvFingerprint(canonical.str());
+}
 
 #ifdef _WIN32
 using CPXINT = int;
@@ -55,11 +88,19 @@ constexpr int kParamMipDisplay = 2012;
 constexpr int kParamPreprocessingPresolve = 1030;
 constexpr int kParamMipStrategyHeuristicFreq = 2031;
 constexpr int kParamMipStrategySearch = 2109;
+constexpr int kParamMipStrategyNodeSelect = 2018;
+constexpr int kParamMipStrategyProbe = 2042;
 constexpr int kMipSearchTraditional = 1;
+constexpr int kMipSearchDynamic = 2;
+constexpr int kNodeSelectBestBound = 1;
+constexpr int kLpStatusOptimal = 1;
+constexpr int kLpStatusOptimalInfeasible = 5;
 constexpr int kUseCutForce = 0;
 constexpr CPXCALLBACKINFO kCallbackInfoNodeCount = 1;
 constexpr CPXCALLBACKINFO kCallbackInfoBestSol = 3;
 constexpr CPXCALLBACKINFO kCallbackInfoBestBnd = 4;
+constexpr CPXCALLBACKINFO kCallbackInfoNodeUid = 9;
+constexpr CPXCALLBACKINFO kCallbackInfoNodeDepth = 10;
 
 using CPXopenCPLEX_t = CPXENVptr (__stdcall *)(int*);
 using CPXcloseCPLEX_t = int (__stdcall *)(CPXENVptr*);
@@ -68,6 +109,7 @@ using CPXfreeprob_t = int (__stdcall *)(CPXCENVptr, CPXLPptr*);
 using CPXreadcopyprob_t = int (__stdcall *)(CPXCENVptr, CPXLPptr, const char*, const char*);
 using CPXsetintparam_t = int (__stdcall *)(CPXENVptr, int, CPXINT);
 using CPXsetdblparam_t = int (__stdcall *)(CPXENVptr, int, double);
+using CPXgetintparam_t = int (__stdcall *)(CPXCENVptr, int, CPXINT*);
 using CPXcallbacksetfunc_t = int (__stdcall *)(CPXENVptr, CPXLPptr, CPXLONG, CPXCALLBACKFUNC, void*);
 using CPXmipopt_t = int (__stdcall *)(CPXCENVptr, CPXLPptr);
 using CPXgetstat_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr);
@@ -82,8 +124,11 @@ using CPXcallbackaddusercuts_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int, i
 using CPXcallbackcandidateispoint_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int*);
 using CPXcallbackgetcandidatepoint_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, double*, int, int, double*);
 using CPXcallbackgetrelaxationpoint_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, double*, int, int, double*);
+using CPXcallbackgetrelaxationstatus_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int*, CPXLONG);
 using CPXcallbackgetinfodbl_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, CPXCALLBACKINFO, double*);
 using CPXcallbackgetinfolong_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, CPXCALLBACKINFO, CPXLONG*);
+using CPXcallbackgetlocallb_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, double*, int, int);
+using CPXcallbackgetlocalub_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, double*, int, int);
 using CPXcallbackrejectcandidate_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int, int, const double*, const char*, const int*, const int*, const double*);
 using CPXcallbackmakebranch_t = int (__stdcall *)(CPXCALLBACKCONTEXTptr, int, const int*, const char*, const double*, int, int, const double*, const char*, const int*, const int*, const double*, double, int*);
 using CPXcallbackabort_t = void (__stdcall *)(CPXCALLBACKCONTEXTptr);
@@ -99,6 +144,7 @@ struct Api {
     CPXreadcopyprob_t readcopyprob = nullptr;
     CPXsetintparam_t setintparam = nullptr;
     CPXsetdblparam_t setdblparam = nullptr;
+    CPXgetintparam_t getintparam = nullptr;
     CPXcallbacksetfunc_t callbacksetfunc = nullptr;
     CPXmipopt_t mipopt = nullptr;
     CPXgetstat_t getstat = nullptr;
@@ -113,8 +159,11 @@ struct Api {
     CPXcallbackcandidateispoint_t callbackcandidateispoint = nullptr;
     CPXcallbackgetcandidatepoint_t callbackgetcandidatepoint = nullptr;
     CPXcallbackgetrelaxationpoint_t callbackgetrelaxationpoint = nullptr;
+    CPXcallbackgetrelaxationstatus_t callbackgetrelaxationstatus = nullptr;
     CPXcallbackgetinfodbl_t callbackgetinfodbl = nullptr;
     CPXcallbackgetinfolong_t callbackgetinfolong = nullptr;
+    CPXcallbackgetlocallb_t callbackgetlocallb = nullptr;
+    CPXcallbackgetlocalub_t callbackgetlocalub = nullptr;
     CPXcallbackrejectcandidate_t callbackrejectcandidate = nullptr;
     CPXcallbackmakebranch_t callbackmakebranch = nullptr;
     CPXcallbackabort_t callbackabort = nullptr;
@@ -164,6 +213,7 @@ bool loadApi(Api& api, std::string& fail_reason) {
     LOAD_REQ(readcopyprob, "CPXreadcopyprob");
     LOAD_REQ(setintparam, "CPXsetintparam");
     LOAD_REQ(setdblparam, "CPXsetdblparam");
+    LOAD_REQ(getintparam, "CPXgetintparam");
     LOAD_REQ(callbacksetfunc, "CPXcallbacksetfunc");
     LOAD_REQ(mipopt, "CPXmipopt");
     LOAD_REQ(getstat, "CPXgetstat");
@@ -178,8 +228,11 @@ bool loadApi(Api& api, std::string& fail_reason) {
     LOAD_REQ(callbackcandidateispoint, "CPXcallbackcandidateispoint");
     LOAD_REQ(callbackgetcandidatepoint, "CPXcallbackgetcandidatepoint");
     LOAD_REQ(callbackgetrelaxationpoint, "CPXcallbackgetrelaxationpoint");
+    LOAD_REQ(callbackgetrelaxationstatus, "CPXcallbackgetrelaxationstatus");
     LOAD_REQ(callbackgetinfodbl, "CPXcallbackgetinfodbl");
     LOAD_REQ(callbackgetinfolong, "CPXcallbackgetinfolong");
+    LOAD_REQ(callbackgetlocallb, "CPXcallbackgetlocallb");
+    LOAD_REQ(callbackgetlocalub, "CPXcallbackgetlocalub");
     LOAD_REQ(callbackrejectcandidate, "CPXcallbackrejectcandidate");
     LOAD_REQ(callbackmakebranch, "CPXcallbackmakebranch");
     LOAD_REQ(callbackabort, "CPXcallbackabort");
@@ -3004,6 +3057,531 @@ int __stdcall tailoredCallback(CPXCALLBACKCONTEXTptr context,
     }
     return 0;
 }
+
+struct PackedGlobalGiniChild {
+    std::vector<int> varind;
+    std::vector<char> varlu;
+    std::vector<double> varbd;
+    std::vector<double> rhs;
+    std::vector<char> sense;
+    std::vector<int> rmatbeg;
+    std::vector<int> rmatind;
+    std::vector<double> rmatval;
+    std::vector<std::string> row_signatures;
+    std::vector<std::string> families;
+    std::string aggregate_signature;
+    bool valid = true;
+    std::string failure;
+};
+
+struct GlobalGiniCallbackState {
+    Api* api = nullptr;
+    const Instance* instance = nullptr;
+    const SolveOptions* options = nullptr;
+    int ncols = 0;
+    int g_col = -1;
+    std::unordered_map<std::string, int> column_index;
+    double root_lower = 0.0;
+    double root_upper = 1.0;
+    double verified_incumbent = 0.0;
+    std::chrono::steady_clock::time_point start =
+        std::chrono::steady_clock::now();
+    std::ofstream* node_trace = nullptr;
+    std::ofstream* bound_trace = nullptr;
+    std::mutex trace_mutex;
+    std::atomic<long long> branch_calls{0};
+    std::atomic<long long> trace_event_sequence{0};
+    std::atomic<long long> progress_calls{0};
+    std::atomic<long long> gini_branch_nodes{0};
+    std::atomic<long long> gini_children_created{0};
+    std::atomic<long long> max_gini_generation{0};
+    std::atomic<long long> ordinary_fallbacks{0};
+    std::atomic<long long> nonoptimal_relaxation_fallbacks{0};
+    std::atomic<long long> local_rows_attached{0};
+    std::atomic<long long> local_bounds_attached{0};
+    std::atomic<long long> local_row_failures{0};
+    std::atomic<long long> column_mapping_failures{0};
+    std::atomic<long long> coverage_failures{0};
+    std::atomic<long long> child_estimate_failures{0};
+    std::atomic<long long> local_bound_api_failures{0};
+    std::atomic<long long> node_info_api_failures{0};
+    std::atomic<long long> callback_failures{0};
+    std::atomic<bool> callback_abort_used{false};
+    std::atomic<bool> migration_complete{true};
+    std::atomic<bool> branch_coverage_valid{true};
+    std::atomic<bool> bound_monotone{true};
+    std::mutex pending_local_rows_mutex;
+    std::set<int> pending_local_row_nodes;
+    double last_global_bound = -std::numeric_limits<double>::infinity();
+    std::string factory_version = "round19_v2_projected_centering";
+    int presolve_effective = 1;
+    int search_effective = 2;
+    int node_select_effective = 1;
+    std::string run_id;
+    std::vector<std::string> global_families;
+};
+
+double globalTreeElapsed(const GlobalGiniCallbackState& state) {
+    return std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - state.start).count();
+}
+
+std::string csvCell(const std::string& value) {
+    if (value.find_first_of(",\"\n\r") == std::string::npos) return value;
+    std::string out = "\"";
+    for (char ch : value) out += ch == '"' ? "\"\"" : std::string(1, ch);
+    out += '"';
+    return out;
+}
+
+std::string joinText(const std::vector<std::string>& values,
+                     const std::string& separator) {
+    std::ostringstream out;
+    for (std::size_t index = 0; index < values.size(); ++index) {
+        if (index) out << separator;
+        out << values[index];
+    }
+    return out.str();
+}
+
+void abortGlobalTreeCallback(GlobalGiniCallbackState& state,
+                             CPXCALLBACKCONTEXTptr context) {
+    ++state.callback_failures;
+    state.callback_abort_used.store(true);
+    state.api->callbackabort(context);
+}
+
+PackedGlobalGiniChild packGlobalGiniChild(
+    GlobalGiniCallbackState& state,
+    double lower,
+    double upper,
+    bool lower_child,
+    bool pack_rows_for_api = true) {
+    PackedGlobalGiniChild packed;
+    IntervalRowFactoryRequest request;
+    request.gamma_L = lower;
+    request.gamma_U = upper;
+    request.verified_incumbent = state.verified_incumbent;
+    request.incumbent_epsilon = 0.0;
+    request.add_incumbent_row = true;
+    request.strengthened = true;
+    const IntervalRowFactoryResult rows = buildRound18StaticIntervalRows(
+        *state.instance, *state.options, request);
+    packed.aggregate_signature = rows.aggregate_signature;
+    state.factory_version = rows.factory_version;
+    if (!rows.complete_round18_static_migration) {
+        state.migration_complete.store(false);
+        packed.valid = false;
+        packed.failure = "unsupported_active_families:" +
+            joinText(rows.unsupported_active_families, "|");
+        return packed;
+    }
+    std::set<std::string> family_set;
+    for (const CanonicalBoundChange& bound : rows.bound_changes) {
+        if (bound.variable == "G") {
+            if (lower_child && bound.direction != 'U') continue;
+            if (!lower_child && bound.direction != 'L') continue;
+        }
+        const auto column = state.column_index.find(bound.variable);
+        if (column == state.column_index.end()) {
+            packed.valid = false;
+            packed.failure = "missing_bound_column:" + bound.variable;
+            ++state.column_mapping_failures;
+            return packed;
+        }
+        packed.varind.push_back(column->second);
+        packed.varlu.push_back(bound.direction);
+        packed.varbd.push_back(bound.value);
+        family_set.insert(bound.family);
+    }
+    for (const CanonicalLinearRow& row : rows.rows) {
+        // The verified-incumbent row is globally active in the root model.
+        if (row.family == "verified_incumbent_objective_row") continue;
+        if (pack_rows_for_api) {
+            packed.rmatbeg.push_back(static_cast<int>(packed.rmatind.size()));
+            packed.rhs.push_back(row.rhs);
+            packed.sense.push_back(row.sense);
+            for (const auto& coefficient : row.coefficients) {
+                const auto column = state.column_index.find(coefficient.first);
+                if (column == state.column_index.end()) {
+                    packed.valid = false;
+                    packed.failure = "missing_row_column:" + coefficient.first +
+                        ":family=" + row.family;
+                    ++state.column_mapping_failures;
+                    return packed;
+                }
+                packed.rmatind.push_back(column->second);
+                packed.rmatval.push_back(coefficient.second);
+            }
+        }
+        packed.row_signatures.push_back(row.signature);
+        family_set.insert(row.family);
+    }
+    packed.families.assign(family_set.begin(), family_set.end());
+    return packed;
+}
+
+bool chooseGlobalGiniSplit(const GlobalGiniCallbackState& state,
+                           double lower,
+                           double upper,
+                           long long node_depth,
+                           double& split,
+                           long long& gini_generation) {
+    const int initial_count = std::max(1, state.options->frontier_intervals);
+    const std::vector<GiniIntervalGeometry> initial =
+        makeLegacyFrontierIntervals(state.root_lower, state.root_upper,
+                                    initial_count);
+    std::vector<double> interior;
+    for (std::size_t index = 0; index + 1 < initial.size(); ++index) {
+        const double breakpoint = initial[index].upper;
+        if (breakpoint > lower + 1e-10 && breakpoint < upper - 1e-10) {
+            interior.push_back(breakpoint);
+        }
+    }
+    if (!interior.empty()) {
+        split = interior[interior.size() / 2];
+        gini_generation = node_depth + 1;
+        return true;
+    }
+    int initial_depth = 0;
+    int leaves = 1;
+    while (leaves < initial_count) {
+        leaves *= 2;
+        ++initial_depth;
+    }
+    const int adaptive_depth = std::max(
+        0, static_cast<int>(node_depth) - initial_depth);
+    if (!state.options->frontier_adaptive_split ||
+        !legacyAdaptiveSplitEligible(
+            lower, upper, adaptive_depth,
+            state.options->frontier_adaptive_max_depth,
+            state.options->frontier_adaptive_min_width)) {
+        return false;
+    }
+    if (state.options->frontier_adaptive_split_factor != 2) return false;
+    const std::vector<GiniIntervalGeometry> children =
+        splitLegacyFrontierInterval(lower, upper,
+                                    state.options->frontier_adaptive_split_factor);
+    if (children.size() != 2) return false;
+    split = children.front().upper;
+    gini_generation = node_depth + 1;
+    return split > lower + 1e-12 && split < upper - 1e-12;
+}
+
+void writeGlobalNodeEvent(GlobalGiniCallbackState& state,
+                          const std::string& context,
+                          long long uid,
+                          long long depth,
+                          double lower,
+                          double upper,
+                          double relaxation,
+                          double global_bound,
+                          double incumbent,
+                          const std::string& action,
+                          double split,
+                          double lower_child_upper,
+                          double upper_child_lower,
+                          double estimate,
+                          int lower_rc,
+                          int upper_rc,
+                          int lower_id,
+                          int upper_id,
+                          long long node_count,
+                          const PackedGlobalGiniChild* lower_child,
+                          const PackedGlobalGiniChild* upper_child) {
+    if (!state.node_trace) return;
+    std::lock_guard<std::mutex> lock(state.trace_mutex);
+    const std::vector<std::string> empty;
+    const std::string local_flag_description =
+        action == "attach_interval_local_rows"
+            ? "forced_local_user_cut:local=1"
+            : (action == "recursive_gini_split"
+                   ? "child_bound_changes:rows_deferred_to_first_relaxation"
+                   : "none");
+    *state.node_trace
+        << csvCell(state.run_id) << ','
+        << ++state.trace_event_sequence << ','
+        << std::setprecision(17) << globalTreeElapsed(state) << ','
+        << uid << ",," << depth << ',' << lower << ',' << upper << ','
+        << relaxation << ',' << global_bound << ',' << incumbent << ','
+        << csvCell(context) << ',' << csvCell(action) << ',' << split << ','
+        << lower << ',' << lower_child_upper << ',' << upper_child_lower << ','
+        << upper << ',' << estimate << ',' << estimate << ',' << lower_rc << ','
+        << upper_rc << ',' << lower_id << ',' << upper_id << ','
+        << csvCell(joinText(lower_child ? lower_child->families : empty, "|"))
+        << ','
+        << csvCell(joinText(upper_child ? upper_child->families : empty, "|"))
+        << ',' << csvCell(joinText(state.global_families, "|"))
+        << ',' << csvCell(local_flag_description) << ','
+        << csvCell(lower_child ? joinText(lower_child->row_signatures, "|") : "")
+        << ','
+        << csvCell(upper_child ? joinText(upper_child->row_signatures, "|") : "")
+        << ',' << state.presolve_effective << ',' << state.search_effective
+        << ',' << state.node_select_effective << ',' << node_count
+        << ",not_exposed\n";
+    state.node_trace->flush();
+}
+
+int __stdcall globalGiniTreeCallback(CPXCALLBACKCONTEXTptr context,
+                                     CPXLONG contextid,
+                                     void* userhandle) {
+    auto* state = static_cast<GlobalGiniCallbackState*>(userhandle);
+    if (!state || !state->api || !state->instance || !state->options) return 0;
+    if (contextid == kContextGlobalProgress) {
+        ++state->progress_calls;
+        double bound = 0.0;
+        CPXLONG nodes = 0;
+        const int bound_rc = state->api->callbackgetinfodbl(
+            context, kCallbackInfoBestBnd, &bound);
+        state->api->callbackgetinfolong(context, kCallbackInfoNodeCount, &nodes);
+        if (bound_rc == 0 && std::isfinite(bound)) {
+            std::lock_guard<std::mutex> lock(state->trace_mutex);
+            if (bound + 1e-7 < state->last_global_bound) {
+                state->bound_monotone.store(false);
+            }
+            state->last_global_bound = std::max(state->last_global_bound, bound);
+            if (state->bound_trace) {
+                *state->bound_trace << std::setprecision(17)
+                    << globalTreeElapsed(*state) << ',' << bound << ','
+                    << state->verified_incumbent
+                    << ','
+                    << (std::isfinite(state->verified_incumbent)
+                            ? std::max(0.0, state->verified_incumbent - bound)
+                            : 0.0)
+                    << ',' << nodes << ",,global_progress\n";
+                state->bound_trace->flush();
+            }
+        }
+        return 0;
+    }
+    if (contextid == kContextRelaxation) {
+        CPXLONG uid = -1;
+        CPXLONG depth = -1;
+        CPXLONG nodes = -1;
+        if (state->api->callbackgetinfolong(
+                context, kCallbackInfoNodeUid, &uid) != 0 ||
+            state->api->callbackgetinfolong(
+                context, kCallbackInfoNodeDepth, &depth) != 0 ||
+            state->api->callbackgetinfolong(
+                context, kCallbackInfoNodeCount, &nodes) != 0) {
+            ++state->node_info_api_failures;
+            abortGlobalTreeCallback(*state, context);
+            return 0;
+        }
+        {
+            std::lock_guard<std::mutex> lock(state->pending_local_rows_mutex);
+            const auto pending = state->pending_local_row_nodes.find(
+                static_cast<int>(uid));
+            if (pending == state->pending_local_row_nodes.end()) return 0;
+            state->pending_local_row_nodes.erase(pending);
+        }
+        double lower = 0.0;
+        double upper = 0.0;
+        const int lower_rc = state->api->callbackgetlocallb(
+            context, &lower, state->g_col, state->g_col);
+        const int upper_rc = state->api->callbackgetlocalub(
+            context, &upper, state->g_col, state->g_col);
+        if (lower_rc != 0 || upper_rc != 0 || !std::isfinite(lower) ||
+            !std::isfinite(upper) || upper < lower - 1e-9) {
+            ++state->local_bound_api_failures;
+            abortGlobalTreeCallback(*state, context);
+            return 0;
+        }
+        PackedGlobalGiniChild local = packGlobalGiniChild(
+            *state, lower, upper, true, true);
+        if (!local.valid) {
+            ++state->local_row_failures;
+            abortGlobalTreeCallback(*state, context);
+            return 0;
+        }
+        int add_rc = 0;
+        if (!local.rhs.empty()) {
+            std::vector<int> purgeable(local.rhs.size(), kUseCutForce);
+            std::vector<int> local_flags(local.rhs.size(), 1);
+            add_rc = state->api->callbackaddusercuts(
+                context, static_cast<int>(local.rhs.size()),
+                static_cast<int>(local.rmatind.size()), local.rhs.data(),
+                local.sense.data(), local.rmatbeg.data(),
+                local.rmatind.data(), local.rmatval.data(), purgeable.data(),
+                local_flags.data());
+        }
+        double relaxation = std::numeric_limits<double>::quiet_NaN();
+        std::vector<double> relaxation_point(
+            static_cast<std::size_t>(state->ncols), 0.0);
+        state->api->callbackgetrelaxationpoint(
+            context, relaxation_point.data(), 0, state->ncols - 1,
+            &relaxation);
+        double global_bound = 0.0;
+        state->api->callbackgetinfodbl(context, kCallbackInfoBestBnd,
+                                       &global_bound);
+        writeGlobalNodeEvent(
+            *state, "relaxation", uid, depth, lower, upper, relaxation,
+            global_bound, state->verified_incumbent,
+            "attach_interval_local_rows", 0.0, upper, lower, relaxation,
+            add_rc, 0, -1, -1, nodes, &local, nullptr);
+        if (add_rc != 0) {
+            ++state->local_row_failures;
+            abortGlobalTreeCallback(*state, context);
+            return 0;
+        }
+        state->local_rows_attached +=
+            static_cast<long long>(local.rhs.size());
+        return 0;
+    }
+    if (contextid != kContextBranching) return 0;
+    ++state->branch_calls;
+    double lower = 0.0;
+    double upper = 0.0;
+    const int lower_rc = state->api->callbackgetlocallb(
+        context, &lower, state->g_col, state->g_col);
+    const int upper_rc = state->api->callbackgetlocalub(
+        context, &upper, state->g_col, state->g_col);
+    if (lower_rc != 0 || upper_rc != 0 || !std::isfinite(lower) ||
+        !std::isfinite(upper) || upper < lower - 1e-9) {
+        ++state->local_bound_api_failures;
+        abortGlobalTreeCallback(*state, context);
+        return 0;
+    }
+    CPXLONG uid = -1;
+    CPXLONG depth = -1;
+    CPXLONG nodes = -1;
+    if (state->api->callbackgetinfolong(
+            context, kCallbackInfoNodeUid, &uid) != 0 ||
+        state->api->callbackgetinfolong(
+            context, kCallbackInfoNodeDepth, &depth) != 0 ||
+        state->api->callbackgetinfolong(
+            context, kCallbackInfoNodeCount, &nodes) != 0) {
+        ++state->node_info_api_failures;
+        abortGlobalTreeCallback(*state, context);
+        return 0;
+    }
+    int relaxation_status = 0;
+    const int relaxation_status_rc =
+        state->api->callbackgetrelaxationstatus(
+            context, &relaxation_status, 0);
+    if (relaxation_status_rc != 0 ||
+        (relaxation_status != kLpStatusOptimal &&
+         relaxation_status != kLpStatusOptimalInfeasible)) {
+        ++state->ordinary_fallbacks;
+        ++state->nonoptimal_relaxation_fallbacks;
+        double global_bound = 0.0;
+        state->api->callbackgetinfodbl(context, kCallbackInfoBestBnd,
+                                       &global_bound);
+        writeGlobalNodeEvent(
+            *state, "branching", uid, depth, lower, upper,
+            std::numeric_limits<double>::quiet_NaN(), global_bound,
+            state->verified_incumbent,
+            "nonoptimal_relaxation_cplex_fallback_status_" +
+                std::to_string(relaxation_status) + "_rc_" +
+                std::to_string(relaxation_status_rc),
+            0.0, 0.0, 0.0,
+            std::numeric_limits<double>::quiet_NaN(), 0, 0, -1, -1,
+            nodes, nullptr, nullptr);
+        return 0;
+    }
+    std::vector<double> relaxation_point(
+        static_cast<std::size_t>(state->ncols), 0.0);
+    double relaxation = 0.0;
+    if (state->api->callbackgetrelaxationpoint(
+            context, relaxation_point.data(), 0, state->ncols - 1,
+            &relaxation) != 0 || !std::isfinite(relaxation)) {
+        ++state->child_estimate_failures;
+        abortGlobalTreeCallback(*state, context);
+        return 0;
+    }
+    double global_bound = 0.0;
+    double incumbent = std::numeric_limits<double>::infinity();
+    state->api->callbackgetinfodbl(context, kCallbackInfoBestBnd,
+                                   &global_bound);
+    state->api->callbackgetinfodbl(context, kCallbackInfoBestSol,
+                                   &incumbent);
+    incumbent = state->verified_incumbent;
+    double split = 0.0;
+    long long generation = 0;
+    if (!chooseGlobalGiniSplit(*state, lower, upper, depth, split,
+                               generation)) {
+        ++state->ordinary_fallbacks;
+        writeGlobalNodeEvent(*state, "branching", uid, depth, lower, upper,
+                             relaxation, global_bound, incumbent,
+                             "ordinary_cplex_branch_fallback", 0.0, 0.0, 0.0,
+                             relaxation, 0, 0, -1, -1, nodes, nullptr, nullptr);
+        return 0;
+    }
+    const GiniIntervalGeometry parent{lower, upper};
+    const std::vector<GiniIntervalGeometry> children = {
+        {lower, split}, {split, upper}
+    };
+    std::string coverage_reason;
+    if (!exactIntervalCoverage(parent, children, 1e-10, &coverage_reason)) {
+        ++state->coverage_failures;
+        state->branch_coverage_valid.store(false);
+        abortGlobalTreeCallback(*state, context);
+        return 0;
+    }
+    PackedGlobalGiniChild low = packGlobalGiniChild(
+        *state, lower, split, true, false);
+    PackedGlobalGiniChild high = packGlobalGiniChild(
+        *state, split, upper, false, false);
+    if (!low.valid || !high.valid) {
+        ++state->local_row_failures;
+        abortGlobalTreeCallback(*state, context);
+        return 0;
+    }
+    int low_id = -1;
+    int high_id = -1;
+    const int make_low_rc = state->api->callbackmakebranch(
+        context,
+        static_cast<int>(low.varind.size()),
+        low.varind.empty() ? nullptr : low.varind.data(),
+        low.varlu.empty() ? nullptr : low.varlu.data(),
+        low.varbd.empty() ? nullptr : low.varbd.data(),
+        static_cast<int>(low.rhs.size()),
+        static_cast<int>(low.rmatind.size()),
+        low.rhs.empty() ? nullptr : low.rhs.data(),
+        low.sense.empty() ? nullptr : low.sense.data(),
+        low.rmatbeg.empty() ? nullptr : low.rmatbeg.data(),
+        low.rmatind.empty() ? nullptr : low.rmatind.data(),
+        low.rmatval.empty() ? nullptr : low.rmatval.data(),
+        relaxation, &low_id);
+    const int make_high_rc = state->api->callbackmakebranch(
+        context,
+        static_cast<int>(high.varind.size()),
+        high.varind.empty() ? nullptr : high.varind.data(),
+        high.varlu.empty() ? nullptr : high.varlu.data(),
+        high.varbd.empty() ? nullptr : high.varbd.data(),
+        static_cast<int>(high.rhs.size()),
+        static_cast<int>(high.rmatind.size()),
+        high.rhs.empty() ? nullptr : high.rhs.data(),
+        high.sense.empty() ? nullptr : high.sense.data(),
+        high.rmatbeg.empty() ? nullptr : high.rmatbeg.data(),
+        high.rmatind.empty() ? nullptr : high.rmatind.data(),
+        high.rmatval.empty() ? nullptr : high.rmatval.data(),
+        relaxation, &high_id);
+    writeGlobalNodeEvent(*state, "branching", uid, depth, lower, upper,
+                         relaxation, global_bound, incumbent,
+                         "recursive_gini_split", split, split, split,
+                         relaxation, make_low_rc, make_high_rc, low_id, high_id,
+                         nodes, &low, &high);
+    if (make_low_rc != 0 || make_high_rc != 0) {
+        ++state->local_row_failures;
+        abortGlobalTreeCallback(*state, context);
+        return 0;
+    }
+    ++state->gini_branch_nodes;
+    state->gini_children_created += 2;
+    {
+        std::lock_guard<std::mutex> lock(state->pending_local_rows_mutex);
+        state->pending_local_row_nodes.insert(low_id);
+        state->pending_local_row_nodes.insert(high_id);
+    }
+    state->local_bounds_attached += static_cast<long long>(
+        low.varind.size() + high.varind.size());
+    long long previous = state->max_gini_generation.load();
+    while (generation > previous &&
+           !state->max_gini_generation.compare_exchange_weak(
+               previous, generation)) {}
+    return 0;
+}
 #endif
 
 } // namespace
@@ -3864,6 +4442,374 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     api.freeprob(env, &lp);
     api.close(&env);
     if (api.dll) FreeLibrary(api.dll);
+#else
+    out.fail_reason = "cplex_dynamic_callbacks_supported_only_on_windows";
+#endif
+    return out;
+}
+
+GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
+    const std::filesystem::path& root_lp_path,
+    const Instance& instance,
+    const SolveOptions& options,
+    double root_gamma_L,
+    double root_gamma_U,
+    double verified_incumbent,
+    double time_limit_seconds,
+    int threads,
+    const std::filesystem::path& node_trace_path,
+    const std::filesystem::path& bound_trace_path,
+    const std::filesystem::path& manifest_path) {
+    GlobalGiniTreeApiSolveResult out;
+    out.attempted = true;
+    out.node_trace_path = node_trace_path.string();
+    out.bound_trace_path = bound_trace_path.string();
+    out.manifest_path = manifest_path.string();
+    out.native_time_limit_seconds = time_limit_seconds;
+    out.root_model_fingerprint = fileFingerprint(root_lp_path);
+    out.objective_fingerprint = originalObjectiveFingerprint(instance, options);
+    out.presolve_requested = options.global_gini_tree_presolve == "off" ? 0 : 1;
+    out.search_requested = options.global_gini_tree_search == "traditional"
+        ? kMipSearchTraditional
+        : (options.global_gini_tree_search == "auto" ? 0 : kMipSearchDynamic);
+    out.node_select_requested = kNodeSelectBestBound;
+    if (out.search_requested != kMipSearchTraditional) {
+        out.fail_reason =
+            "global_gini_tree_dynamic_search_unsupported_after_reproduced_"
+            "continuous_branch_sibling_loss_use_traditional";
+        return out;
+    }
+#ifdef _WIN32
+    Api api;
+    std::string fail;
+    if (!loadApi(api, fail)) {
+        out.fail_reason = fail;
+        return out;
+    }
+    out.available = true;
+    CPXENVptr env = nullptr;
+    CPXLPptr lp = nullptr;
+    int status = 0;
+    env = api.open(&status);
+    if (!env || status != 0) {
+        out.fail_reason = "CPXopenCPLEX_failed:" + std::to_string(status);
+        if (api.dll) FreeLibrary(api.dll);
+        return out;
+    }
+    ++out.environment_count;
+    lp = api.createprob(env, &status, "global_gini_tree");
+    if (!lp || status != 0) {
+        out.fail_reason = "CPXcreateprob_failed:" + std::to_string(status);
+        api.close(&env);
+        ++out.close_count;
+        if (api.dll) FreeLibrary(api.dll);
+        return out;
+    }
+    ++out.problem_count;
+    status = api.readcopyprob(env, lp, root_lp_path.string().c_str(), nullptr);
+    if (status != 0) {
+        out.fail_reason = "CPXreadcopyprob_failed:" + std::to_string(status);
+        api.freeprob(env, &lp); ++out.freeprob_count;
+        api.close(&env); ++out.close_count;
+        if (api.dll) FreeLibrary(api.dll);
+        return out;
+    }
+    ++out.model_read_count;
+
+    api.setintparam(env, kParamThreads, std::max(1, threads));
+    api.setintparam(env, kParamScreenOutput, 1);
+    api.setintparam(env, kParamMipDisplay, 2);
+    api.setdblparam(env, kParamMipGap, 1e-8);
+    out.presolve_set_rc = api.setintparam(
+        env, kParamPreprocessingPresolve, out.presolve_requested);
+    out.search_set_rc = api.setintparam(
+        env, kParamMipStrategySearch, out.search_requested);
+    out.node_select_set_rc = api.setintparam(
+        env, kParamMipStrategyNodeSelect, out.node_select_requested);
+    if (time_limit_seconds > 0.0) {
+        out.native_time_limit_set_rc = api.setdblparam(
+            env, kParamTimeLimit, time_limit_seconds);
+    }
+    CPXINT effective = 0;
+    if (api.getintparam(env, kParamPreprocessingPresolve, &effective) == 0) {
+        out.presolve_effective = effective;
+    }
+    if (api.getintparam(env, kParamMipStrategySearch, &effective) == 0) {
+        out.search_effective = effective;
+    }
+    if (api.getintparam(env, kParamMipStrategyNodeSelect, &effective) == 0) {
+        out.node_select_effective = effective;
+    }
+    if (api.getintparam(env, kParamMipStrategyHeuristicFreq, &effective) == 0) {
+        out.heuristics_effective = effective;
+    }
+    if (api.getintparam(env, kParamMipStrategyProbe, &effective) == 0) {
+        out.probing_effective = effective;
+    }
+    if (api.getintparam(env, kParamThreads, &effective) == 0) {
+        out.threads_effective = effective;
+    }
+    if (out.presolve_set_rc != 0 || out.search_set_rc != 0 ||
+        out.node_select_set_rc != 0 || out.native_time_limit_set_rc != 0) {
+        out.fail_reason = "required_parameter_configuration_failed";
+        api.freeprob(env, &lp); ++out.freeprob_count;
+        api.close(&env); ++out.close_count;
+        if (api.dll) FreeLibrary(api.dll);
+        return out;
+    }
+
+    const int ncols = api.getnumcols(env, lp);
+    const std::vector<std::string> names = getColumnNames(api, env, lp, ncols);
+    GlobalGiniCallbackState callback_state;
+    callback_state.api = &api;
+    callback_state.instance = &instance;
+    callback_state.options = &options;
+    callback_state.ncols = ncols;
+    callback_state.root_lower = root_gamma_L;
+    callback_state.root_upper = root_gamma_U;
+    callback_state.verified_incumbent = verified_incumbent;
+    callback_state.presolve_effective = out.presolve_effective;
+    callback_state.search_effective = out.search_effective;
+    callback_state.node_select_effective = out.node_select_effective;
+    callback_state.run_id = root_lp_path.parent_path().filename().string();
+    if (callback_state.run_id.empty()) callback_state.run_id = "global_gini_tree";
+    callback_state.start = std::chrono::steady_clock::now();
+    for (int column = 0; column < ncols; ++column) {
+        if (!names[static_cast<std::size_t>(column)].empty()) {
+            callback_state.column_index[names[static_cast<std::size_t>(column)]] =
+                column;
+        }
+    }
+    const auto g_column = callback_state.column_index.find("G");
+    if (g_column == callback_state.column_index.end()) {
+        out.fail_reason = "root_G_column_missing";
+        api.freeprob(env, &lp); ++out.freeprob_count;
+        api.close(&env); ++out.close_count;
+        if (api.dll) FreeLibrary(api.dll);
+        return out;
+    }
+    callback_state.g_col = g_column->second;
+
+    IntervalRowFactoryRequest root_request;
+    root_request.gamma_L = root_gamma_L;
+    root_request.gamma_U = root_gamma_U;
+    root_request.verified_incumbent = verified_incumbent;
+    root_request.incumbent_epsilon = 0.0;
+    root_request.add_incumbent_row = true;
+    root_request.strengthened = true;
+    const IntervalRowFactoryResult root_rows = buildRound18StaticIntervalRows(
+        instance, options, root_request);
+    out.row_factory_version = root_rows.factory_version;
+    out.root_row_signature = root_rows.aggregate_signature;
+    out.row_migration_complete = root_rows.complete_round18_static_migration;
+    for (const IntervalRowFamilyRegistryEntry& entry :
+         root_rows.family_registry) {
+        if (entry.active && entry.scope == IntervalRowScope::Global) {
+            callback_state.global_families.push_back(entry.family);
+        }
+    }
+    out.root_coverage_valid = root_gamma_L <= 1e-12 &&
+        root_gamma_U >= std::min(
+            verified_incumbent,
+            instance.V > 0
+                ? static_cast<double>(instance.V - 1) / instance.V
+                : 1.0) - 1e-10;
+    if (!out.row_migration_complete || !out.root_coverage_valid ||
+        options.frontier_adaptive_split_factor != 2) {
+        out.fail_reason = !out.row_migration_complete
+            ? "row_factory_migration_incomplete"
+            : (!out.root_coverage_valid
+                   ? "root_improving_range_incomplete"
+                   : "official_global_tree_requires_unchanged_binary_split_factor_2");
+        api.freeprob(env, &lp); ++out.freeprob_count;
+        api.close(&env); ++out.close_count;
+        if (api.dll) FreeLibrary(api.dll);
+        return out;
+    }
+
+    std::ofstream node_trace;
+    std::ofstream bound_trace;
+    if (!node_trace_path.empty()) {
+        std::filesystem::create_directories(node_trace_path.parent_path());
+        node_trace.open(node_trace_path, std::ios::out | std::ios::trunc);
+        node_trace
+            << "run_id,event_sequence,elapsed_wall_time,node_uid,parent_uid,"
+            << "node_depth,gamma_L,gamma_U,node_relaxation_bound,global_best_bound,"
+            << "incumbent,callback_context,branch_action,split_point,"
+            << "lower_child_gamma_L,lower_child_gamma_U,upper_child_gamma_L,"
+            << "upper_child_gamma_U,lower_child_estimate,upper_child_estimate,"
+            << "lower_branch_rc,upper_branch_rc,lower_child_uid,upper_child_uid,"
+            << "lower_local_families,upper_local_families,global_rows_active_by_family,local_flags,"
+            << "lower_row_signatures,upper_row_signatures,presolve_state,"
+            << "search_mode,node_selection_mode,node_count,native_cuts\n";
+        callback_state.node_trace = &node_trace;
+    }
+    if (!bound_trace_path.empty()) {
+        std::filesystem::create_directories(bound_trace_path.parent_path());
+        bound_trace.open(bound_trace_path, std::ios::out | std::ios::trunc);
+        bound_trace << "elapsed_time,native_global_LB,verified_UB,gap,node_count,"
+                       "active_gini_interval,event_source\n";
+        callback_state.bound_trace = &bound_trace;
+    }
+    const CPXLONG context_mask =
+        kContextRelaxation | kContextBranching | kContextGlobalProgress;
+    status = api.callbacksetfunc(env, lp, context_mask,
+                                 globalGiniTreeCallback, &callback_state);
+    if (status != 0) {
+        out.fail_reason = "CPXcallbacksetfunc_failed:" + std::to_string(status);
+        api.freeprob(env, &lp); ++out.freeprob_count;
+        api.close(&env); ++out.close_count;
+        if (api.dll) FreeLibrary(api.dll);
+        return out;
+    }
+
+    ++out.mipopt_count;
+    status = api.mipopt(env, lp);
+    out.return_code = status;
+    out.status_code = api.getstat(env, lp);
+    char status_buffer[1024] = {0};
+    if (api.getstatstring(env, out.status_code, status_buffer)) {
+        out.status = status_buffer;
+    } else {
+        out.status = "status_code_" + std::to_string(out.status_code);
+    }
+    out.solver_finalization_reached = true;
+    double objective = 0.0;
+    if (api.getobjval(env, lp, &objective) == 0 && std::isfinite(objective)) {
+        out.objective = objective;
+    }
+    double best_bound = 0.0;
+    if (api.getbestobjval(env, lp, &best_bound) == 0 &&
+        std::isfinite(best_bound)) {
+        out.best_bound = best_bound;
+        out.best_bound_available = true;
+    }
+    out.node_count = static_cast<long long>(api.getnodecnt(env, lp));
+    if (callback_state.bound_trace && out.best_bound_available) {
+        *callback_state.bound_trace << std::setprecision(17)
+            << globalTreeElapsed(callback_state) << ',' << out.best_bound << ','
+            << verified_incumbent << ','
+            << std::max(0.0, verified_incumbent - out.best_bound) << ','
+            << out.node_count << ",,solver_final\n";
+        callback_state.bound_trace->flush();
+    }
+    out.branch_callback_calls = callback_state.branch_calls.load();
+    out.progress_callback_calls = callback_state.progress_calls.load();
+    out.gini_branch_nodes = callback_state.gini_branch_nodes.load();
+    out.gini_children_created = callback_state.gini_children_created.load();
+    out.gini_branch_generations =
+        callback_state.max_gini_generation.load();
+    out.ordinary_branch_fallbacks = callback_state.ordinary_fallbacks.load();
+    out.nonoptimal_relaxation_fallbacks =
+        callback_state.nonoptimal_relaxation_fallbacks.load();
+    out.local_rows_attached = callback_state.local_rows_attached.load();
+    out.local_bound_changes_attached =
+        callback_state.local_bounds_attached.load();
+    out.local_row_failures = callback_state.local_row_failures.load();
+    out.column_mapping_failures = callback_state.column_mapping_failures.load();
+    out.coverage_failures = callback_state.coverage_failures.load();
+    out.child_estimate_failures =
+        callback_state.child_estimate_failures.load();
+    out.local_bound_api_failures =
+        callback_state.local_bound_api_failures.load();
+    out.node_info_api_failures =
+        callback_state.node_info_api_failures.load();
+    out.callback_failures = callback_state.callback_failures.load();
+    out.callback_abort_used = callback_state.callback_abort_used.load();
+    out.row_migration_complete = out.row_migration_complete &&
+        callback_state.migration_complete.load();
+    out.branch_coverage_valid = callback_state.branch_coverage_valid.load() &&
+        out.coverage_failures == 0;
+    out.global_bound_monotone = callback_state.bound_monotone.load();
+    out.sibling_isolation_by_construction = out.local_row_failures == 0 &&
+        out.gini_children_created == 2 * out.gini_branch_nodes;
+    out.recursive_branching_complete = out.row_migration_complete &&
+        out.branch_coverage_valid && out.local_bound_api_failures == 0 &&
+        out.column_mapping_failures == 0 && out.child_estimate_failures == 0;
+    if (ncols > 0) {
+        std::vector<double> x(static_cast<std::size_t>(ncols), 0.0);
+        if (api.getx(env, lp, x.data(), 0, ncols - 1) == 0) {
+            for (int column = 0; column < ncols; ++column) {
+                if (!names[static_cast<std::size_t>(column)].empty()) {
+                    out.values[names[static_cast<std::size_t>(column)]] =
+                        x[static_cast<std::size_t>(column)];
+                }
+            }
+        }
+    }
+    out.solved = status == 0 && out.status_code != 0 &&
+        !out.callback_abort_used;
+
+    api.freeprob(env, &lp); ++out.freeprob_count;
+    api.close(&env); ++out.close_count;
+    if (api.dll) FreeLibrary(api.dll);
+    out.lifecycle_valid = out.environment_count == 1 &&
+        out.problem_count == 1 && out.model_read_count == 1 &&
+        out.mipopt_count == 1 && out.freeprob_count == 1 &&
+        out.close_count == 1 && out.interval_oracle_count == 0 &&
+        out.child_process_count == 0;
+    if (!out.solved && out.fail_reason.empty()) {
+        out.fail_reason = out.callback_abort_used
+            ? "callback_correctness_abort"
+            : "CPXmipopt_failed:" + std::to_string(status);
+    }
+    if (!manifest_path.empty()) {
+        std::filesystem::create_directories(manifest_path.parent_path());
+        std::ofstream manifest(manifest_path, std::ios::out | std::ios::trunc);
+        std::vector<std::string> global_families;
+        std::vector<std::string> local_families;
+        std::vector<std::string> bound_families;
+        std::vector<std::string> excluded_families;
+        for (const IntervalRowFamilyRegistryEntry& entry :
+             root_rows.family_registry) {
+            if (!entry.active) continue;
+            if (entry.scope == IntervalRowScope::Global) {
+                global_families.push_back(entry.family);
+            } else if (entry.scope == IntervalRowScope::IntervalLocal) {
+                local_families.push_back(entry.family);
+            } else if (entry.scope == IntervalRowScope::IntervalBound) {
+                bound_families.push_back(entry.family);
+            } else {
+                excluded_families.push_back(entry.family);
+            }
+        }
+        manifest
+            << "root_model_path," << csvCell(root_lp_path.string()) << '\n'
+            << "root_lp_fingerprint," << out.root_model_fingerprint << '\n'
+            << "objective_definition,min G + lambda*sum_i(weight_i*e_i)\n"
+            << "objective_fingerprint," << out.objective_fingerprint << '\n'
+            << "global_row_fingerprint," << out.root_row_signature << '\n'
+            << "shared_row_factory_version," << out.row_factory_version << '\n'
+            << "active_global_families,"
+            << csvCell(joinText(global_families, "|")) << '\n'
+            << "active_interval_local_families,"
+            << csvCell(joinText(local_families, "|")) << '\n'
+            << "active_interval_bound_families,"
+            << csvCell(joinText(bound_families, "|")) << '\n'
+            << "unsupported_active_families,"
+            << csvCell(joinText(excluded_families, "|")) << '\n'
+            << "cplex_environment_count," << out.environment_count << '\n'
+            << "problem_object_count," << out.problem_count << '\n'
+            << "lp_read_build_count," << out.model_read_count << '\n'
+            << "CPXmipopt_count," << out.mipopt_count << '\n'
+            << "interval_oracle_count," << out.interval_oracle_count << '\n'
+            << "child_process_count," << out.child_process_count << '\n'
+            << "interval_local_attachment,forced_local_user_cut_at_first_child_relaxation\n"
+            << "interval_local_flag,1\n"
+            << "local_rows_attached," << out.local_rows_attached << '\n'
+            << "local_row_failures," << out.local_row_failures << '\n'
+            << "nonoptimal_relaxation_fallbacks,"
+            << out.nonoptimal_relaxation_fallbacks << '\n'
+            << "solver_final_status," << csvCell(out.status) << '\n'
+            << "best_bound_source,CPXgetbestobjval\n"
+            << "presolve_effective," << out.presolve_effective << '\n'
+            << "search_effective," << out.search_effective << '\n'
+            << "dynamic_search_compatibility,rejected_after_reproduced_continuous_branch_sibling_loss\n"
+            << "node_select_effective," << out.node_select_effective << '\n'
+            << "heuristic_frequency_effective," << out.heuristics_effective << '\n'
+            << "probing_effective," << out.probing_effective << '\n'
+            << "native_cuts,CPLEX_default\n";
+    }
 #else
     out.fail_reason = "cplex_dynamic_callbacks_supported_only_on_windows";
 #endif

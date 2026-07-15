@@ -53,6 +53,14 @@ struct SolveOptions {
     double gini_floor = -1.0;
     int max_branch_nodes = 31;
     int frontier_intervals = 4;
+    std::string frontier_execution_mode = "scheduler";
+    std::string global_gini_tree_presolve = "on";
+    std::string global_gini_tree_search = "traditional";
+    std::string global_gini_tree_node_trace_path;
+    std::string global_gini_tree_bound_trace_path;
+    std::string global_gini_tree_manifest_path;
+    std::string global_gini_tree_root_export_path;
+    bool interval_row_factory_round19 = false;
     int frontier_refine_splits = 0;
     int frontier_split_batch = 0;
     int frontier_retry_passes = 2;
