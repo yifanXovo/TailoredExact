@@ -1,0 +1,22 @@
+test_id,test,status,evidence
+1,objective_identity_and_serialization,passed,current-executable fresh JSON rows
+2,exhaustive_station_domain_e_lb,passed,executed C++ exhaustive group
+3,child_estimate_below_exact_toy_optimum,passed,executed C++ exhaustive toy group
+4,child_estimate_below_diagnostic_relaxation,passed,matched standalone child-relaxation rows
+5,parent_relaxation_inheritance,passed,topology arithmetic and native callback counters
+6,sibling_specific_estimates,passed,exact sibling intervals and distinct UIDs
+7,domain_infeasible_fails_closed,passed,executed C++ domain-infeasible group
+8,parent_uid_and_generation_metadata,passed,topology UID and generation arithmetic
+9,post_local_row_detection,passed,explicit pre/await/post phase trace
+10,exact_duplicate_detection,passed,executed C++ canonical duplicate group
+11,endpoint_dependent_changes,passed,executed C++ endpoint group
+12,incremental_delta_equivalence,passed,executed unit proof plus solver-final delta runs
+13,no_sibling_leakage,passed,child-local rows
+14,eager_presolve_compatibility,passed,fresh eager presolve-on/off gates
+15,native_mip_start_mapping_and_gate,passed,fresh complete verified native starts
+16,round19_coverage_lifecycle_finalization_verifier,passed,current executable only; stale=
+17,no_instance_seed_scale_known_objective_logic,passed,source scan
+18,no_auxiliary_production_solve,passed,lifecycle counters
+19,no_plain_cplex_information_in_tailored,passed,command/result separation
+20,no_false_optimality_positive_gap,passed,certificate guard
+21,scalable_root_connectivity_flow_projection,passed,C++ route projection plus root LP x/conn cardinality equality

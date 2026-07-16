@@ -603,6 +603,10 @@ std::string resultToJson(const SolveResult& input) {
         << result.global_gini_tree_child_process_count << ",\n";
     out << "  \"global_gini_tree_branch_callback_calls\": "
         << result.global_gini_tree_branch_callback_calls << ",\n";
+    out << "  \"global_gini_tree_relaxation_callback_calls\": "
+        << result.global_gini_tree_relaxation_callback_calls << ",\n";
+    out << "  \"global_gini_tree_candidate_callback_calls\": "
+        << result.global_gini_tree_candidate_callback_calls << ",\n";
     out << "  \"global_gini_tree_progress_callback_calls\": "
         << result.global_gini_tree_progress_callback_calls << ",\n";
     out << "  \"global_gini_tree_gini_branch_nodes\": "
@@ -633,6 +637,50 @@ std::string resultToJson(const SolveResult& input) {
         << result.global_gini_tree_node_info_api_failures << ",\n";
     out << "  \"global_gini_tree_callback_failures\": "
         << result.global_gini_tree_callback_failures << ",\n";
+    out << "  \"global_gini_tree_post_row_reoptimizations\": "
+        << result.global_gini_tree_post_row_reoptimizations << ",\n";
+    out << "  \"global_gini_tree_post_row_reoptimization_failures\": "
+        << result.global_gini_tree_post_row_reoptimization_failures << ",\n";
+    out << "  \"global_gini_tree_theoretical_full_rows\": "
+        << result.global_gini_tree_theoretical_full_rows << ",\n";
+    out << "  \"global_gini_tree_theoretical_full_bounds\": "
+        << result.global_gini_tree_theoretical_full_bounds << ",\n";
+    out << "  \"global_gini_tree_exact_duplicate_rows_omitted\": "
+        << result.global_gini_tree_exact_duplicate_rows_omitted << ",\n";
+    out << "  \"global_gini_tree_identical_bounds_omitted\": "
+        << result.global_gini_tree_identical_bounds_omitted << ",\n";
+    out << "  \"global_gini_tree_dominance_omissions\": "
+        << result.global_gini_tree_dominance_omissions << ",\n";
+    out << "  \"global_gini_tree_delta_rows_attached\": "
+        << result.global_gini_tree_delta_rows_attached << ",\n";
+    out << "  \"global_gini_tree_delta_bounds_attached\": "
+        << result.global_gini_tree_delta_bounds_attached << ",\n";
+    out << "  \"global_gini_tree_ordinary_branches_before_terminal_gini\": "
+        << result.global_gini_tree_ordinary_branches_before_terminal_gini
+        << ",\n";
+    out << "  \"global_gini_tree_ordinary_branches_after_terminal_gini\": "
+        << result.global_gini_tree_ordinary_branches_after_terminal_gini
+        << ",\n";
+    out << "  \"global_gini_tree_sibling_first_process_count\": "
+        << result.global_gini_tree_sibling_first_process_count << ",\n";
+    out << "  \"global_gini_tree_sibling_equal_estimate_pairs\": "
+        << result.global_gini_tree_sibling_equal_estimate_pairs << ",\n";
+    out << "  \"global_gini_tree_sibling_discriminated_pairs\": "
+        << result.global_gini_tree_sibling_discriminated_pairs << ",\n";
+    out << "  \"global_gini_tree_native_simplex_iterations\": "
+        << result.global_gini_tree_native_simplex_iterations << ",\n";
+    out << "  \"global_gini_tree_native_open_nodes\": "
+        << result.global_gini_tree_native_open_nodes << ",\n";
+    out << "  \"global_gini_tree_native_solution_pool_count\": "
+        << result.global_gini_tree_native_solution_pool_count << ",\n";
+    out << "  \"global_gini_tree_first_gini_branch_time\": "
+        << result.global_gini_tree_first_gini_branch_time << ",\n";
+    out << "  \"global_gini_tree_row_factory_seconds\": "
+        << result.global_gini_tree_row_factory_seconds << ",\n";
+    out << "  \"global_gini_tree_callback_packing_seconds\": "
+        << result.global_gini_tree_callback_packing_seconds << ",\n";
+    out << "  \"global_gini_tree_local_row_api_seconds\": "
+        << result.global_gini_tree_local_row_api_seconds << ",\n";
     out << "  \"global_gini_tree_presolve_requested\": "
         << result.global_gini_tree_presolve_requested << ",\n";
     out << "  \"global_gini_tree_presolve_set_rc\": "
@@ -685,6 +733,36 @@ std::string resultToJson(const SolveResult& input) {
         << (result.global_gini_tree_no_time_quantum ? "true" : "false") << ",\n";
     out << "  \"global_gini_tree_no_instance_special_case\": "
         << (result.global_gini_tree_no_instance_special_case ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_native_mip_start_attempted\": "
+        << (result.global_gini_tree_native_mip_start_attempted ? "true" : "false")
+        << ",\n";
+    out << "  \"global_gini_tree_native_mip_start_mapping_complete\": "
+        << (result.global_gini_tree_native_mip_start_mapping_complete ? "true" : "false")
+        << ",\n";
+    out << "  \"global_gini_tree_native_mip_start_submitted\": "
+        << (result.global_gini_tree_native_mip_start_submitted ? "true" : "false")
+        << ",\n";
+    out << "  \"global_gini_tree_native_mip_start_stored\": "
+        << (result.global_gini_tree_native_mip_start_stored ? "true" : "false")
+        << ",\n";
+    out << "  \"global_gini_tree_native_mip_start_accepted\": "
+        << (result.global_gini_tree_native_mip_start_accepted ? "true" : "false")
+        << ",\n";
+    out << "  \"global_gini_tree_native_mip_start_return_code\": "
+        << result.global_gini_tree_native_mip_start_return_code << ",\n";
+    out << "  \"global_gini_tree_native_mip_start_stored_count\": "
+        << result.global_gini_tree_native_mip_start_stored_count << ",\n";
+    out << "  \"global_gini_tree_native_mip_start_failure_reason\": \""
+        << jsonEscape(result.global_gini_tree_native_mip_start_failure_reason)
+        << "\",\n";
+    out << "  \"global_gini_tree_child_estimate_mode\": \""
+        << jsonEscape(result.global_gini_tree_child_estimate_mode) << "\",\n";
+    out << "  \"global_gini_tree_row_attachment_mode\": \""
+        << jsonEscape(result.global_gini_tree_row_attachment_mode) << "\",\n";
+    out << "  \"global_gini_tree_row_timing_mode\": \""
+        << jsonEscape(result.global_gini_tree_row_timing_mode) << "\",\n";
+    out << "  \"global_gini_tree_native_cut_counts\": \""
+        << jsonEscape(result.global_gini_tree_native_cut_counts) << "\",\n";
     out << "  \"global_gini_tree_native_best_bound_available\": "
         << (result.global_gini_tree_native_best_bound_available ? "true" : "false") << ",\n";
     out << "  \"global_gini_tree_incumbent_verified\": "
@@ -715,6 +793,18 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.global_gini_tree_bound_trace_path) << "\",\n";
     out << "  \"global_gini_tree_manifest_path\": \""
         << jsonEscape(result.global_gini_tree_manifest_path) << "\",\n";
+    out << "  \"global_gini_tree_post_row_trace_path\": \""
+        << jsonEscape(result.global_gini_tree_post_row_trace_path) << "\",\n";
+    out << "  \"global_gini_tree_topology_trace_path\": \""
+        << jsonEscape(result.global_gini_tree_topology_trace_path) << "\",\n";
+    out << "  \"global_gini_tree_sibling_trace_path\": \""
+        << jsonEscape(result.global_gini_tree_sibling_trace_path) << "\",\n";
+    out << "  \"global_gini_tree_row_delta_trace_path\": \""
+        << jsonEscape(result.global_gini_tree_row_delta_trace_path) << "\",\n";
+    out << "  \"global_gini_tree_memory_trace_path\": \""
+        << jsonEscape(result.global_gini_tree_memory_trace_path) << "\",\n";
+    out << "  \"global_gini_tree_mip_start_audit_path\": \""
+        << jsonEscape(result.global_gini_tree_mip_start_audit_path) << "\",\n";
     out << "  \"columns_generated_raw\": " << result.columns_generated_raw << ",\n";
     out << "  \"columns_after_dominance\": " << result.columns_after_dominance << ",\n";
     out << "  \"columns_dominated\": " << result.columns_dominated << ",\n";

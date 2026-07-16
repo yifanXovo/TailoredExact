@@ -1,0 +1,8 @@
+set threads 1
+set timelimit 60
+set mip tolerances mipgap 0
+set mip strategy search 1
+set mip strategy nodeselect 1
+read "E:\codes\ExactEBRP\results\gf_global_gini_tree_regression_round\diagnostic_models\inventory_route_gini_relaxation\high_imbalance_seed3202\interval_0\inventory_gini_bound.lp"
+optimize
+quit
