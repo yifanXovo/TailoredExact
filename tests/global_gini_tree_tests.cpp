@@ -258,6 +258,158 @@ void testProjectedCenteringEquivalence() {
     }
 }
 
+void testObjectiveIdentityAndDomainEstimate() {
+    const auto instance = representativeInstance();
+    const auto options = round18StaticOptions();
+    const std::vector<int> inventory = {0, 3, 7, 5, 2};
+    const ebrp::ObjectiveParts parts =
+        ebrp::computeObjectiveParts(instance, inventory, options.lambda);
+    require(std::fabs(parts.objective -
+                      (parts.G + options.lambda * parts.P)) < 1e-12,
+            "authoritative objective must equal G + lambda P");
+
+    for (int station = 1; station <= instance.V; ++station) {
+        for (int lower = 0; lower <= instance.capacity[station]; ++lower) {
+            for (int upper = lower; upper <= instance.capacity[station]; ++upper) {
+                double exact = 1e100;
+                for (int y = lower; y <= upper; ++y) {
+                    exact = std::min(exact, std::fabs(
+                        static_cast<double>(y) / instance.target[station] - 1.0));
+                }
+                double formula = 0.0;
+                if (upper < instance.target[station]) {
+                    formula = 1.0 - static_cast<double>(upper) /
+                        instance.target[station];
+                } else if (lower > instance.target[station]) {
+                    formula = static_cast<double>(lower) /
+                        instance.target[station] - 1.0;
+                }
+                require(std::fabs(exact - formula) < 1e-12,
+                        "piecewise station deviation lower bound is not exact");
+            }
+        }
+    }
+
+    const auto child = makeRows(0.2, 0.3);
+    const auto estimate = ebrp::computeChildDomainEstimate(
+        instance, options, child.domain, 0.2, 0.17);
+    require(estimate.valid, "valid child-domain estimate was rejected");
+    require(estimate.final_estimate + 1e-12 >= 0.17,
+            "child estimate must inherit the parent relaxation");
+    require(std::fabs(estimate.domain_estimate -
+        (0.2 + options.lambda * child.domain.penalty_lower)) < 1e-12,
+        "domain estimate must contain only the proved gamma and penalty terms");
+
+    double exact_inventory_optimum = 1e100;
+    std::vector<int> y(instance.V + 1, 0);
+    for (int y1 = child.domain.y_lower[1]; y1 <= child.domain.y_upper[1]; ++y1) {
+        y[1] = y1;
+        for (int y2 = child.domain.y_lower[2]; y2 <= child.domain.y_upper[2]; ++y2) {
+            y[2] = y2;
+            for (int y3 = child.domain.y_lower[3]; y3 <= child.domain.y_upper[3]; ++y3) {
+                y[3] = y3;
+                for (int y4 = child.domain.y_lower[4]; y4 <= child.domain.y_upper[4]; ++y4) {
+                    y[4] = y4;
+                    const auto candidate =
+                        ebrp::computeObjectiveParts(instance, y, options.lambda);
+                    if (candidate.G + 1e-12 >= 0.2 &&
+                        candidate.G <= 0.3 + 1e-12) {
+                        exact_inventory_optimum = std::min(
+                            exact_inventory_optimum, candidate.objective);
+                    }
+                }
+            }
+        }
+    }
+    if (std::isfinite(exact_inventory_optimum) &&
+        exact_inventory_optimum < 1e90) {
+        require(estimate.domain_estimate <= exact_inventory_optimum + 1e-10,
+                "domain estimate exceeded an exhaustive child optimum");
+    }
+
+    ebrp::IntervalDomainSummary infeasible = child.domain;
+    infeasible.domain_infeasible = true;
+    const auto rejected = ebrp::computeChildDomainEstimate(
+        instance, options, infeasible, 0.2, 0.17);
+    require(!rejected.valid && !rejected.failure_reason.empty(),
+            "factory-detected infeasibility must fail closed");
+}
+
+void testExactIncrementalInheritance() {
+    const auto parent = makeRows(0.0, 0.4);
+    const auto child = makeRows(0.0, 0.2);
+    auto inherited = ebrp::makeCanonicalInheritanceState(parent);
+    require(inherited.valid, "parent canonical state construction failed");
+    const auto delta = ebrp::computeExactIncrementalDelta(inherited, child);
+    require(delta.valid, "exact incremental delta construction failed");
+    require(delta.exact_duplicate_rows_omitted > 0,
+            "expected inherited exact row duplicates were not detected");
+    require(delta.dominance_omissions == 0,
+            "Round 20 delta mode must not perform unproved dominance omission");
+    require(!delta.rows_to_attach.empty(),
+            "endpoint-dependent child rows must survive the delta");
+    require(ebrp::mergeCanonicalInheritanceState(
+                inherited, delta.rows_to_attach, delta.bounds_to_attach),
+            "delta merge into inherited state failed");
+    for (const auto& row : child.rows) {
+        require(inherited.rows_by_signature.count(row.signature) == 1,
+                "inherited parent plus delta is missing a complete-pack row");
+    }
+    for (const auto& bound : child.bound_changes) {
+        const std::string key = bound.variable + "|" +
+            std::string(1, bound.direction);
+        require(inherited.effective_bounds_by_key.count(key) == 1,
+                "inherited parent plus delta is missing a complete-pack bound");
+    }
+
+    ebrp::CanonicalInheritanceState collision =
+        ebrp::makeCanonicalInheritanceState(parent);
+    ebrp::CanonicalLinearRow forged = parent.rows.front();
+    forged.rhs += 1.0;
+    std::string failure;
+    require(!ebrp::mergeCanonicalInheritanceState(
+                collision, {forged}, {}, &failure) &&
+                failure.find("collision") != std::string::npos,
+            "ambiguous canonical signature matching must fail closed");
+}
+
+void testRootConnectivityFlowProjection() {
+    const int V = 4;
+    const std::vector<int> route = {0, 3, 1, 4, 0};
+    std::map<std::pair<int, int>, double> x;
+    std::map<std::pair<int, int>, double> flow;
+    for (std::size_t pos = 1; pos < route.size(); ++pos) {
+        const std::pair<int, int> arc{route[pos - 1], route[pos]};
+        x[arc] = 1.0;
+        flow[arc] = static_cast<double>(route.size() - 1 - pos);
+    }
+    const std::set<int> visited = {1, 3, 4};
+    for (int i = 0; i <= V; ++i) {
+        for (int j = 0; j <= V; ++j) {
+            if (i == j) continue;
+            const std::pair<int, int> arc{i, j};
+            require(flow[arc] <= V * x[arc] + 1e-12,
+                    "projected connectivity flow violates its arc link");
+        }
+    }
+    for (int i = 1; i <= V; ++i) {
+        double balance = 0.0;
+        for (int j = 0; j <= V; ++j) {
+            if (i == j) continue;
+            balance += flow[{j, i}] - flow[{i, j}];
+        }
+        const double visit = visited.count(i) ? 1.0 : 0.0;
+        require(std::fabs(balance - visit) < 1e-12,
+                "route projection does not consume one flow unit per visit");
+    }
+    double depot_balance = 0.0;
+    for (int j = 1; j <= V; ++j) {
+        depot_balance += flow[{0, j}] - flow[{j, 0}];
+    }
+    require(std::fabs(depot_balance - static_cast<double>(visited.size())) < 1e-12,
+            "route projection has the wrong depot supply");
+}
+
 void testCertificateGuard() {
     ebrp::SolveResult result;
     result.method = "gcap-frontier";
@@ -305,8 +457,11 @@ int main() {
         testFactoryAndRegistry();
         testSiblingIsolation();
         testProjectedCenteringEquivalence();
+        testObjectiveIdentityAndDomainEstimate();
+        testExactIncrementalInheritance();
+        testRootConnectivityFlowProjection();
         testCertificateGuard();
-        std::cout << "GlobalGiniTreeTests: 5 groups passed\n";
+        std::cout << "GlobalGiniTreeTests: 8 groups passed\n";
         return 0;
     } catch (const std::exception& error) {
         std::cerr << "GlobalGiniTreeTests failed: " << error.what() << '\n';

@@ -1,0 +1,6 @@
+set threads 1
+set timelimit 5
+read results\bound_work\moderate_seed3302_1784144049608223000_15729502191765196471\inventory_gini_bound.lp
+optimize
+write results\bound_work\moderate_seed3302_1784144049608223000_15729502191765196471\inventory_gini_bound.sol
+quit

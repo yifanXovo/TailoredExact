@@ -1,0 +1,29 @@
+{
+  "run_id": "diagnostic_legacy__tight_T_seed3101__interval_0",
+  "start_time": "2026-07-16T02:08:53+08:00",
+  "source_lp": "results/gf_global_gini_tree_regression_round/diagnostic_models/inventory_route_gini_relaxation/tight_T_seed3101/interval_0/inventory_gini_bound.lp",
+  "source_lp_sha256": "d54ee09943942461d52509c0834d7e7f5e0838cd0726a8afa807036e2f6197af",
+  "cplex": "C:\\Program Files\\IBM\\ILOG\\CPLEX_Studio2211\\cplex\\bin\\x64_win64\\cplex.exe",
+  "budget_seconds": 5,
+  "command": [
+    "C:\\Program Files\\IBM\\ILOG\\CPLEX_Studio2211\\cplex\\bin\\x64_win64\\cplex.exe",
+    "-f",
+    "E:\\codes\\ExactEBRP\\results\\gf_global_gini_tree_regression_round\\diagnostic_models\\smoke_legacy_cli\\run.cplex"
+  ],
+  "pre_process_snapshot": {
+    "exactebrp_count": 0,
+    "cplex_count": 0,
+    "source": "tasklist"
+  },
+  "stale_process_detected": false,
+  "end_time": "2026-07-16T02:08:54+08:00",
+  "actual_process_wall_seconds": 1.1865814002230763,
+  "return_code": 0,
+  "runner_timeout": false,
+  "post_process_snapshot": {
+    "exactebrp_count": 0,
+    "cplex_count": 0,
+    "source": "tasklist"
+  },
+  "engineering_blocker": ""
+}

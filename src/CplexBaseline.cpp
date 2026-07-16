@@ -215,6 +215,7 @@ std::string pName(int k, int i) { return "p_" + std::to_string(k) + "_" + std::t
 std::string dName(int k, int i) { return "d_" + std::to_string(k) + "_" + std::to_string(i); }
 std::string lName(int k, int i) { return "load_" + std::to_string(k) + "_" + std::to_string(i); }
 std::string uName(int k, int i) { return "ord_" + std::to_string(k) + "_" + std::to_string(i); }
+std::string connectivityName(int k, int i, int j) { return "conn_" + std::to_string(k) + "_" + std::to_string(i) + "_" + std::to_string(j); }
 std::string mName(int k, int i) { return "mode_" + std::to_string(k) + "_" + std::to_string(i); }
 std::string yName(int i) { return "Y_" + std::to_string(i); }
 std::string rName(int i) { return "r_" + std::to_string(i); }
@@ -603,7 +604,12 @@ void writeCompactLp(const Instance& instance,
     for (int k = 0; k < M; ++k) {
         for (int i = 0; i <= V; ++i) {
             for (int j = 0; j <= V; ++j) {
-                if (i != j) vars.add(xName(k, i, j), 0, 1, "B");
+                if (i != j) {
+                    vars.add(xName(k, i, j), 0, 1, "B");
+                    if (options.global_gini_tree_root_connectivity_flow) {
+                        vars.add(connectivityName(k, i, j), 0, V, "C");
+                    }
+                }
             }
         }
         for (int i = 1; i <= V; ++i) {
@@ -794,6 +800,44 @@ void writeCompactLp(const Instance& instance,
             addTerm(out_flow, zName(k, i), -1);
             writeConstraint(out, cid, in_flow, "=", 0);
             writeConstraint(out, cid, out_flow, "=", 0);
+        }
+    }
+
+    // Optional scalable extended formulation.  One unit of a continuous
+    // commodity is consumed at every visited station.  Every depot-closed
+    // feasible route projects to this system by sending the number of
+    // downstream visited stations along each used arc.  Hence these rows do
+    // not remove any feasible original route solution; they only strengthen
+    // the fractional x/z relaxation.  The family has O(M V^2) size and uses
+    // neither route masks nor a restricted route pool.
+    if (options.global_gini_tree_root_connectivity_flow) {
+        for (int k = 0; k < M; ++k) {
+            for (int i = 0; i <= V; ++i) {
+                for (int j = 0; j <= V; ++j) {
+                    if (i == j) continue;
+                    Expr link;
+                    addTerm(link, connectivityName(k, i, j), 1.0);
+                    addTerm(link, xName(k, i, j), -static_cast<double>(V));
+                    writeConstraint(out, cid, link, "<=", 0.0);
+                }
+            }
+            for (int i = 1; i <= V; ++i) {
+                Expr balance;
+                for (int j = 0; j <= V; ++j) {
+                    if (i == j) continue;
+                    addTerm(balance, connectivityName(k, j, i), 1.0);
+                    addTerm(balance, connectivityName(k, i, j), -1.0);
+                }
+                addTerm(balance, zName(k, i), -1.0);
+                writeConstraint(out, cid, balance, "=", 0.0);
+            }
+            Expr depot_balance;
+            for (int j = 1; j <= V; ++j) {
+                addTerm(depot_balance, connectivityName(k, 0, j), 1.0);
+                addTerm(depot_balance, connectivityName(k, j, 0), -1.0);
+                addTerm(depot_balance, zName(k, j), -1.0);
+            }
+            writeConstraint(out, cid, depot_balance, "=", 0.0);
         }
     }
 
@@ -4740,6 +4784,29 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
 
         SolveOptions model_options = options;
         model_options.interval_row_factory_round19 = true;
+        auto defaultTrace = [&](const std::string& configured,
+                                const std::string& filename) {
+            return configured.empty()
+                ? (default_dir / filename).string() : configured;
+        };
+        model_options.global_gini_tree_post_row_trace_path = defaultTrace(
+            options.global_gini_tree_post_row_trace_path,
+            "post_local_row_reoptimization.csv");
+        model_options.global_gini_tree_topology_trace_path = defaultTrace(
+            options.global_gini_tree_topology_trace_path,
+            "gini_branch_topology.csv");
+        model_options.global_gini_tree_sibling_trace_path = defaultTrace(
+            options.global_gini_tree_sibling_trace_path,
+            "gini_sibling_delay.csv");
+        model_options.global_gini_tree_row_delta_trace_path = defaultTrace(
+            options.global_gini_tree_row_delta_trace_path,
+            "row_delta_trace.csv");
+        model_options.global_gini_tree_memory_trace_path = defaultTrace(
+            options.global_gini_tree_memory_trace_path,
+            "tree_memory_trace.csv");
+        model_options.global_gini_tree_mip_start_audit_path = defaultTrace(
+            options.global_gini_tree_mip_start_audit_path,
+            "native_mip_start_audit.csv");
         CompactIntervalCutoffConfig root_cutoff;
         root_cutoff.enabled = true;
         root_cutoff.gamma_L = root_gamma_L;
@@ -4759,7 +4826,8 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
         const GlobalGiniTreeApiSolveResult api =
             solveGlobalGiniTreeWithTailoredBCCplexApi(
                 root_lp, instance, model_options, root_gamma_L, root_gamma_U,
-                verified_seed.objective, options.solve_time_limit,
+                verified_seed.objective, verified_seed.routes,
+                options.solve_time_limit,
                 solver_threads, node_trace, bound_trace, manifest);
 
         result.global_gini_tree_available = api.available;
@@ -4777,6 +4845,10 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
         result.global_gini_tree_interval_oracle_count = api.interval_oracle_count;
         result.global_gini_tree_child_process_count = api.child_process_count;
         result.global_gini_tree_branch_callback_calls = api.branch_callback_calls;
+        result.global_gini_tree_relaxation_callback_calls =
+            api.relaxation_callback_calls;
+        result.global_gini_tree_candidate_callback_calls =
+            api.candidate_callback_calls;
         result.global_gini_tree_progress_callback_calls = api.progress_callback_calls;
         result.global_gini_tree_gini_branch_nodes = api.gini_branch_nodes;
         result.global_gini_tree_gini_children_created = api.gini_children_created;
@@ -4794,6 +4866,43 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
         result.global_gini_tree_local_bound_api_failures = api.local_bound_api_failures;
         result.global_gini_tree_node_info_api_failures = api.node_info_api_failures;
         result.global_gini_tree_callback_failures = api.callback_failures;
+        result.global_gini_tree_post_row_reoptimizations =
+            api.post_row_reoptimizations;
+        result.global_gini_tree_post_row_reoptimization_failures =
+            api.post_row_reoptimization_failures;
+        result.global_gini_tree_theoretical_full_rows =
+            api.theoretical_full_rows;
+        result.global_gini_tree_theoretical_full_bounds =
+            api.theoretical_full_bounds;
+        result.global_gini_tree_exact_duplicate_rows_omitted =
+            api.exact_duplicate_rows_omitted;
+        result.global_gini_tree_identical_bounds_omitted =
+            api.identical_bounds_omitted;
+        result.global_gini_tree_dominance_omissions = api.dominance_omissions;
+        result.global_gini_tree_delta_rows_attached = api.delta_rows_attached;
+        result.global_gini_tree_delta_bounds_attached = api.delta_bounds_attached;
+        result.global_gini_tree_ordinary_branches_before_terminal_gini =
+            api.ordinary_branches_before_terminal_gini;
+        result.global_gini_tree_ordinary_branches_after_terminal_gini =
+            api.ordinary_branches_after_terminal_gini;
+        result.global_gini_tree_sibling_first_process_count =
+            api.sibling_first_process_count;
+        result.global_gini_tree_sibling_equal_estimate_pairs =
+            api.sibling_equal_estimate_pairs;
+        result.global_gini_tree_sibling_discriminated_pairs =
+            api.sibling_discriminated_pairs;
+        result.global_gini_tree_native_simplex_iterations =
+            api.native_simplex_iterations;
+        result.global_gini_tree_native_open_nodes = api.native_open_nodes;
+        result.global_gini_tree_native_solution_pool_count =
+            api.native_solution_pool_count;
+        result.global_gini_tree_first_gini_branch_time =
+            api.first_gini_branch_time;
+        result.global_gini_tree_row_factory_seconds = api.row_factory_seconds;
+        result.global_gini_tree_callback_packing_seconds =
+            api.callback_packing_seconds;
+        result.global_gini_tree_local_row_api_seconds =
+            api.local_row_api_seconds;
         result.global_gini_tree_presolve_requested = api.presolve_requested;
         result.global_gini_tree_presolve_set_rc = api.presolve_set_rc;
         result.global_gini_tree_presolve_effective = api.presolve_effective;
@@ -4825,6 +4934,26 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
         result.global_gini_tree_global_bound_monotone = api.global_bound_monotone;
         result.global_gini_tree_no_time_quantum = api.no_time_quantum;
         result.global_gini_tree_no_instance_special_case = api.no_instance_special_case;
+        result.global_gini_tree_native_mip_start_attempted =
+            api.native_mip_start_attempted;
+        result.global_gini_tree_native_mip_start_mapping_complete =
+            api.native_mip_start_mapping_complete;
+        result.global_gini_tree_native_mip_start_submitted =
+            api.native_mip_start_submitted;
+        result.global_gini_tree_native_mip_start_stored =
+            api.native_mip_start_stored;
+        result.global_gini_tree_native_mip_start_accepted =
+            api.native_mip_start_accepted;
+        result.global_gini_tree_native_mip_start_return_code =
+            api.native_mip_start_return_code;
+        result.global_gini_tree_native_mip_start_stored_count =
+            api.native_mip_start_stored_count;
+        result.global_gini_tree_native_mip_start_failure_reason =
+            api.native_mip_start_failure_reason;
+        result.global_gini_tree_child_estimate_mode = api.child_estimate_mode;
+        result.global_gini_tree_row_attachment_mode = api.row_attachment_mode;
+        result.global_gini_tree_row_timing_mode = api.row_timing_mode;
+        result.global_gini_tree_native_cut_counts = api.native_cut_counts;
         result.global_gini_tree_native_best_bound_available = api.best_bound_available;
         result.global_gini_tree_native_objective = api.objective;
         result.global_gini_tree_native_best_bound = api.best_bound;
@@ -4838,6 +4967,12 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
         result.global_gini_tree_node_trace_path = node_trace.string();
         result.global_gini_tree_bound_trace_path = bound_trace.string();
         result.global_gini_tree_manifest_path = manifest.string();
+        result.global_gini_tree_post_row_trace_path = api.post_row_trace_path;
+        result.global_gini_tree_topology_trace_path = api.topology_trace_path;
+        result.global_gini_tree_sibling_trace_path = api.sibling_trace_path;
+        result.global_gini_tree_row_delta_trace_path = api.row_delta_trace_path;
+        result.global_gini_tree_memory_trace_path = api.memory_trace_path;
+        result.global_gini_tree_mip_start_audit_path = api.mip_start_audit_path;
         result.nodes = api.node_count;
         result.solver_finalization_reached = api.solver_finalization_reached;
         result.process_return_code = api.return_code;

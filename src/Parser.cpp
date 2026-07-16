@@ -189,6 +189,11 @@ Instance parseInstanceFile(const std::filesystem::path& path,
         if (instance.target[i] <= 0) {
             throw std::runtime_error("Station target must be positive at station " + std::to_string(i));
         }
+        if (!std::isfinite(instance.weights[i]) || instance.weights[i] < 0.0) {
+            throw std::runtime_error(
+                "Station weight must be finite and nonnegative at station " +
+                std::to_string(i));
+        }
     }
 
     return instance;

@@ -198,6 +198,8 @@ struct GlobalGiniTreeApiSolveResult {
     long long interval_oracle_count = 0;
     long long child_process_count = 0;
     long long branch_callback_calls = 0;
+    long long relaxation_callback_calls = 0;
+    long long candidate_callback_calls = 0;
     long long progress_callback_calls = 0;
     long long gini_branch_nodes = 0;
     long long gini_children_created = 0;
@@ -213,6 +215,27 @@ struct GlobalGiniTreeApiSolveResult {
     long long local_bound_api_failures = 0;
     long long node_info_api_failures = 0;
     long long callback_failures = 0;
+    long long post_row_reoptimizations = 0;
+    long long post_row_reoptimization_failures = 0;
+    long long theoretical_full_rows = 0;
+    long long theoretical_full_bounds = 0;
+    long long exact_duplicate_rows_omitted = 0;
+    long long identical_bounds_omitted = 0;
+    long long dominance_omissions = 0;
+    long long delta_rows_attached = 0;
+    long long delta_bounds_attached = 0;
+    long long ordinary_branches_before_terminal_gini = 0;
+    long long ordinary_branches_after_terminal_gini = 0;
+    long long sibling_first_process_count = 0;
+    long long sibling_equal_estimate_pairs = 0;
+    long long sibling_discriminated_pairs = 0;
+    long long native_simplex_iterations = 0;
+    long long native_open_nodes = 0;
+    long long native_solution_pool_count = 0;
+    double first_gini_branch_time = -1.0;
+    double row_factory_seconds = 0.0;
+    double callback_packing_seconds = 0.0;
+    double local_row_api_seconds = 0.0;
     int presolve_requested = 1;
     int presolve_set_rc = 0;
     int presolve_effective = 1;
@@ -239,6 +262,18 @@ struct GlobalGiniTreeApiSolveResult {
     bool global_bound_monotone = true;
     bool no_time_quantum = true;
     bool no_instance_special_case = true;
+    bool native_mip_start_attempted = false;
+    bool native_mip_start_mapping_complete = false;
+    bool native_mip_start_submitted = false;
+    bool native_mip_start_stored = false;
+    bool native_mip_start_accepted = false;
+    int native_mip_start_return_code = -1;
+    int native_mip_start_stored_count = 0;
+    std::string native_mip_start_failure_reason;
+    std::string child_estimate_mode;
+    std::string row_attachment_mode;
+    std::string row_timing_mode;
+    std::string native_cut_counts;
     std::string row_factory_version;
     std::string root_model_fingerprint;
     std::string objective_fingerprint;
@@ -246,6 +281,12 @@ struct GlobalGiniTreeApiSolveResult {
     std::string node_trace_path;
     std::string bound_trace_path;
     std::string manifest_path;
+    std::string post_row_trace_path;
+    std::string topology_trace_path;
+    std::string sibling_trace_path;
+    std::string row_delta_trace_path;
+    std::string memory_trace_path;
+    std::string mip_start_audit_path;
     std::unordered_map<std::string, double> values;
 };
 
@@ -301,6 +342,7 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
     double root_gamma_L,
     double root_gamma_U,
     double verified_incumbent,
+    const std::vector<RoutePlan>& verified_routes,
     double time_limit_seconds,
     int threads,
     const std::filesystem::path& node_trace_path,

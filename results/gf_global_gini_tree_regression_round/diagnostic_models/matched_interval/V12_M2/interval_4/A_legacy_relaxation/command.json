@@ -1,0 +1,29 @@
+{
+  "run_id": "diagnostic_legacy__V12_M2__interval_4",
+  "start_time": "2026-07-16T02:17:57+08:00",
+  "source_lp": "results/gf_global_gini_tree_regression_round/diagnostic_models/inventory_route_gini_relaxation/V12_M2/interval_4/inventory_gini_bound.lp",
+  "source_lp_sha256": "1b3ad54dd8c7d7ec32086a156dad187d7fd6739b75ffa68c676a702105f9f020",
+  "cplex": "C:\\Program Files\\IBM\\ILOG\\CPLEX_Studio2211\\cplex\\bin\\x64_win64\\cplex.exe",
+  "budget_seconds": 60,
+  "command": [
+    "C:\\Program Files\\IBM\\ILOG\\CPLEX_Studio2211\\cplex\\bin\\x64_win64\\cplex.exe",
+    "-f",
+    "E:\\codes\\ExactEBRP\\results\\gf_global_gini_tree_regression_round\\diagnostic_models\\matched_interval\\V12_M2\\interval_4\\A_legacy_relaxation\\run.cplex"
+  ],
+  "pre_process_snapshot": {
+    "exactebrp_count": 0,
+    "cplex_count": 0,
+    "source": "tasklist"
+  },
+  "stale_process_detected": false,
+  "end_time": "2026-07-16T02:18:00+08:00",
+  "actual_process_wall_seconds": 2.680913200136274,
+  "return_code": 0,
+  "runner_timeout": false,
+  "post_process_snapshot": {
+    "exactebrp_count": 0,
+    "cplex_count": 0,
+    "source": "tasklist"
+  },
+  "engineering_blocker": ""
+}

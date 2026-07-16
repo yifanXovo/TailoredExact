@@ -159,6 +159,235 @@ std::string canonicalBoundSignature(const CanonicalBoundChange& bound) {
     return stableHash(canonical.str());
 }
 
+namespace {
+
+bool sameCanonicalRow(const CanonicalLinearRow& lhs,
+                      const CanonicalLinearRow& rhs) {
+    return lhs.family == rhs.family &&
+        lhs.coefficients == rhs.coefficients &&
+        lhs.sense == rhs.sense && lhs.rhs == rhs.rhs &&
+        lhs.depends_on_gamma_L == rhs.depends_on_gamma_L &&
+        lhs.depends_on_gamma_U == rhs.depends_on_gamma_U &&
+        lhs.scope == rhs.scope && lhs.proof_tag == rhs.proof_tag &&
+        lhs.signature == rhs.signature;
+}
+
+bool sameCanonicalBound(const CanonicalBoundChange& lhs,
+                        const CanonicalBoundChange& rhs) {
+    return lhs.family == rhs.family && lhs.variable == rhs.variable &&
+        lhs.direction == rhs.direction && lhs.value == rhs.value &&
+        lhs.depends_on_gamma_L == rhs.depends_on_gamma_L &&
+        lhs.depends_on_gamma_U == rhs.depends_on_gamma_U &&
+        lhs.scope == rhs.scope && lhs.proof_tag == rhs.proof_tag &&
+        lhs.signature == rhs.signature;
+}
+
+std::string canonicalBoundKey(const CanonicalBoundChange& bound) {
+    return bound.variable + "|" + std::string(1, bound.direction);
+}
+
+} // namespace
+
+ChildDomainEstimate computeChildDomainEstimate(
+    const Instance& instance,
+    const SolveOptions& options,
+    const IntervalDomainSummary& domain,
+    double child_gamma_lower,
+    double parent_relaxation) {
+    ChildDomainEstimate out;
+    out.parent_relaxation = parent_relaxation;
+    out.gamma_floor_component = child_gamma_lower;
+    out.station_deviation_lower.assign(
+        static_cast<std::size_t>(instance.V + 1), 0.0);
+    out.station_weighted_deviation_lower.assign(
+        static_cast<std::size_t>(instance.V + 1), 0.0);
+    if (!std::isfinite(options.lambda) || options.lambda < 0.0) {
+        out.failure_reason = "lambda_not_finite_nonnegative";
+        return out;
+    }
+    if (!std::isfinite(child_gamma_lower) || child_gamma_lower < -1e-12) {
+        out.failure_reason = "child_gamma_lower_invalid";
+        return out;
+    }
+    if (!std::isfinite(parent_relaxation)) {
+        out.failure_reason = "parent_relaxation_not_finite";
+        return out;
+    }
+    if (domain.domain_infeasible) {
+        out.failure_reason =
+            "factory_domain_infeasible_without_native_contradiction";
+        return out;
+    }
+    if (domain.y_lower.size() <= static_cast<std::size_t>(instance.V) ||
+        domain.y_upper.size() <= static_cast<std::size_t>(instance.V) ||
+        domain.e_lower.size() <= static_cast<std::size_t>(instance.V)) {
+        out.failure_reason = "factory_domain_vector_size_mismatch";
+        return out;
+    }
+    for (int station = 1; station <= instance.V; ++station) {
+        if (instance.target[station] <= 0) {
+            out.failure_reason = "nonpositive_station_target:" +
+                std::to_string(station);
+            return out;
+        }
+        if (!std::isfinite(instance.weights[station]) ||
+            instance.weights[station] < 0.0) {
+            out.failure_reason = "invalid_station_weight:" +
+                std::to_string(station);
+            return out;
+        }
+        const int y_lower = domain.y_lower[station];
+        const int y_upper = domain.y_upper[station];
+        if (y_lower > y_upper) {
+            out.failure_reason = "contradictory_station_domain:" +
+                std::to_string(station);
+            return out;
+        }
+        const double target = static_cast<double>(instance.target[station]);
+        double deviation_lower = 0.0;
+        if (static_cast<double>(y_upper) < target) {
+            deviation_lower = 1.0 - static_cast<double>(y_upper) / target;
+        } else if (static_cast<double>(y_lower) > target) {
+            deviation_lower = static_cast<double>(y_lower) / target - 1.0;
+        }
+        deviation_lower = std::max(0.0, deviation_lower);
+        if (!std::isfinite(domain.e_lower[station]) ||
+            std::fabs(domain.e_lower[station] - deviation_lower) > 1e-10) {
+            out.failure_reason = "factory_deviation_lower_mismatch:" +
+                std::to_string(station);
+            return out;
+        }
+        out.station_deviation_lower[station] = deviation_lower;
+        out.station_weighted_deviation_lower[station] =
+            instance.weights[station] * deviation_lower;
+        out.weighted_penalty_lower +=
+            out.station_weighted_deviation_lower[station];
+    }
+    if (std::fabs(out.weighted_penalty_lower - domain.penalty_lower) >
+        1e-9 * std::max({1.0, std::fabs(out.weighted_penalty_lower),
+                         std::fabs(domain.penalty_lower)})) {
+        out.failure_reason = "factory_penalty_lower_mismatch";
+        return out;
+    }
+    out.domain_estimate = child_gamma_lower +
+        options.lambda * out.weighted_penalty_lower;
+    out.final_estimate = std::max(parent_relaxation, out.domain_estimate);
+    out.lift_over_parent = out.final_estimate - parent_relaxation;
+    out.valid = std::isfinite(out.domain_estimate) &&
+        std::isfinite(out.final_estimate) && out.lift_over_parent >= -1e-12;
+    if (!out.valid) out.failure_reason = "nonfinite_or_decreasing_estimate";
+    return out;
+}
+
+bool mergeCanonicalInheritanceState(
+    CanonicalInheritanceState& inherited,
+    const std::vector<CanonicalLinearRow>& rows,
+    const std::vector<CanonicalBoundChange>& bounds,
+    std::string* failure_reason) {
+    auto fail = [&](const std::string& reason) {
+        inherited.valid = false;
+        inherited.failure_reason = reason;
+        if (failure_reason != nullptr) *failure_reason = reason;
+        return false;
+    };
+    if (!inherited.valid) return fail(
+        inherited.failure_reason.empty()
+            ? "invalid_inherited_state" : inherited.failure_reason);
+    for (const CanonicalLinearRow& row : rows) {
+        if (row.signature.empty()) return fail("empty_row_signature");
+        const auto found = inherited.rows_by_signature.find(row.signature);
+        if (found != inherited.rows_by_signature.end()) {
+            if (!sameCanonicalRow(found->second, row)) {
+                return fail("row_signature_collision:" + row.signature);
+            }
+        } else {
+            inherited.rows_by_signature.emplace(row.signature, row);
+        }
+    }
+    for (const CanonicalBoundChange& bound : bounds) {
+        if (bound.direction != 'L' && bound.direction != 'U') {
+            return fail("unsupported_bound_direction:" +
+                        std::string(1, bound.direction));
+        }
+        if (bound.signature.empty()) return fail("empty_bound_signature");
+        const auto signature_found =
+            inherited.bounds_by_signature.find(bound.signature);
+        if (signature_found != inherited.bounds_by_signature.end()) {
+            if (!sameCanonicalBound(signature_found->second, bound)) {
+                return fail("bound_signature_collision:" + bound.signature);
+            }
+        } else {
+            inherited.bounds_by_signature.emplace(bound.signature, bound);
+        }
+        const std::string key = canonicalBoundKey(bound);
+        const auto effective = inherited.effective_bounds_by_key.find(key);
+        if (effective == inherited.effective_bounds_by_key.end() ||
+            (bound.direction == 'L' && bound.value > effective->second.value) ||
+            (bound.direction == 'U' && bound.value < effective->second.value)) {
+            inherited.effective_bounds_by_key[key] = bound;
+        }
+    }
+    return true;
+}
+
+CanonicalInheritanceState makeCanonicalInheritanceState(
+    const IntervalRowFactoryResult& rows) {
+    CanonicalInheritanceState out;
+    mergeCanonicalInheritanceState(out, rows.rows, rows.bound_changes,
+                                   &out.failure_reason);
+    return out;
+}
+
+ExactIncrementalDelta computeExactIncrementalDelta(
+    const CanonicalInheritanceState& inherited,
+    const IntervalRowFactoryResult& child) {
+    ExactIncrementalDelta out;
+    out.theoretical_full_rows = static_cast<long long>(child.rows.size());
+    out.theoretical_full_bounds =
+        static_cast<long long>(child.bound_changes.size());
+    out.inherited_rows =
+        static_cast<long long>(inherited.rows_by_signature.size());
+    out.inherited_bounds =
+        static_cast<long long>(inherited.effective_bounds_by_key.size());
+    if (!inherited.valid) {
+        out.valid = false;
+        out.failure_reason = inherited.failure_reason.empty()
+            ? "invalid_inherited_state" : inherited.failure_reason;
+        return out;
+    }
+    for (const CanonicalLinearRow& row : child.rows) {
+        const auto found = inherited.rows_by_signature.find(row.signature);
+        if (found == inherited.rows_by_signature.end()) {
+            out.rows_to_attach.push_back(row);
+        } else if (sameCanonicalRow(found->second, row)) {
+            ++out.exact_duplicate_rows_omitted;
+        } else {
+            out.valid = false;
+            out.failure_reason = "row_signature_collision:" + row.signature;
+            return out;
+        }
+    }
+    for (const CanonicalBoundChange& bound : child.bound_changes) {
+        const auto signature_found =
+            inherited.bounds_by_signature.find(bound.signature);
+        if (signature_found != inherited.bounds_by_signature.end() &&
+            !sameCanonicalBound(signature_found->second, bound)) {
+            out.valid = false;
+            out.failure_reason = "bound_signature_collision:" + bound.signature;
+            return out;
+        }
+        const auto effective = inherited.effective_bounds_by_key.find(
+            canonicalBoundKey(bound));
+        if (effective != inherited.effective_bounds_by_key.end() &&
+            effective->second.value == bound.value) {
+            ++out.identical_bounds_omitted;
+        } else {
+            out.bounds_to_attach.push_back(bound);
+        }
+    }
+    return out;
+}
+
 IntervalRowFactoryResult buildRound18StaticIntervalRows(
     const Instance& instance,
     const SolveOptions& options,

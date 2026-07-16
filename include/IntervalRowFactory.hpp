@@ -3,6 +3,7 @@
 #include "Instance.hpp"
 
 #include <map>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -84,10 +85,65 @@ struct IntervalRowFactoryResult {
     std::string aggregate_signature;
 };
 
+struct ChildDomainEstimate {
+    double parent_relaxation = 0.0;
+    double gamma_floor_component = 0.0;
+    std::vector<double> station_deviation_lower;
+    std::vector<double> station_weighted_deviation_lower;
+    double weighted_penalty_lower = 0.0;
+    double domain_estimate = 0.0;
+    double final_estimate = 0.0;
+    double lift_over_parent = 0.0;
+    bool valid = false;
+    std::string failure_reason;
+};
+
+struct CanonicalInheritanceState {
+    std::map<std::string, CanonicalLinearRow> rows_by_signature;
+    std::map<std::string, CanonicalBoundChange> bounds_by_signature;
+    std::map<std::string, CanonicalBoundChange> effective_bounds_by_key;
+    bool valid = true;
+    std::string failure_reason;
+};
+
+struct ExactIncrementalDelta {
+    std::vector<CanonicalLinearRow> rows_to_attach;
+    std::vector<CanonicalBoundChange> bounds_to_attach;
+    long long theoretical_full_rows = 0;
+    long long theoretical_full_bounds = 0;
+    long long inherited_rows = 0;
+    long long inherited_bounds = 0;
+    long long exact_duplicate_rows_omitted = 0;
+    long long identical_bounds_omitted = 0;
+    long long dominance_omissions = 0;
+    bool valid = true;
+    std::string failure_reason;
+};
+
 IntervalRowFactoryResult buildRound18StaticIntervalRows(
     const Instance& instance,
     const SolveOptions& options,
     const IntervalRowFactoryRequest& request);
+
+ChildDomainEstimate computeChildDomainEstimate(
+    const Instance& instance,
+    const SolveOptions& options,
+    const IntervalDomainSummary& domain,
+    double child_gamma_lower,
+    double parent_relaxation);
+
+CanonicalInheritanceState makeCanonicalInheritanceState(
+    const IntervalRowFactoryResult& rows);
+
+bool mergeCanonicalInheritanceState(
+    CanonicalInheritanceState& inherited,
+    const std::vector<CanonicalLinearRow>& rows,
+    const std::vector<CanonicalBoundChange>& bounds,
+    std::string* failure_reason = nullptr);
+
+ExactIncrementalDelta computeExactIncrementalDelta(
+    const CanonicalInheritanceState& inherited,
+    const IntervalRowFactoryResult& child);
 
 std::string canonicalRowSignature(const CanonicalLinearRow& row);
 std::string canonicalBoundSignature(const CanonicalBoundChange& bound);

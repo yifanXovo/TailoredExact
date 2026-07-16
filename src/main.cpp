@@ -55,7 +55,9 @@ void usage() {
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
         << "[--gini-cap <gamma>] [--gini-floor <gamma>] [--max-nodes <N>] [--frontier-intervals <N>] [--frontier-refine-splits <N>] "
         << "[--frontier-execution-mode scheduler|global-gini-tree] [--global-gini-tree-presolve on|off] "
-        << "[--global-gini-tree-search dynamic|traditional|auto] [--global-gini-tree-node-trace <path>] "
+        << "[--global-gini-tree-search dynamic|traditional|auto] [--global-gini-tree-child-estimate parent-copy|factory-domain] "
+        << "[--global-gini-tree-row-attachment full-inherited-pack|exact-incremental-delta] [--global-gini-tree-row-timing deferred|eager] "
+        << "[--global-gini-tree-native-mip-start true|false] [--global-gini-tree-node-trace <path>] "
         << "[--global-gini-tree-bound-trace <path>] [--global-gini-tree-manifest <path>] [--global-gini-tree-root-export <path>] "
         << "[--frontier-split-batch <N>] [--frontier-retry-passes <N>] [--frontier-retry-nodes <N>] "
         << "[--frontier-retry-reserve <seconds>] [--frontier-relax-seconds <seconds>] [--route-mask-max-v <V>] "
@@ -529,10 +531,21 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--frontier-execution-mode") opt.frontier_execution_mode = requireValue(i, argc, argv);
         else if (arg == "--global-gini-tree-presolve") opt.global_gini_tree_presolve = requireValue(i, argc, argv);
         else if (arg == "--global-gini-tree-search") opt.global_gini_tree_search = requireValue(i, argc, argv);
+        else if (arg == "--global-gini-tree-child-estimate") opt.global_gini_tree_child_estimate_mode = requireValue(i, argc, argv);
+        else if (arg == "--global-gini-tree-row-attachment") opt.global_gini_tree_row_attachment_mode = requireValue(i, argc, argv);
+        else if (arg == "--global-gini-tree-row-timing") opt.global_gini_tree_row_timing_mode = requireValue(i, argc, argv);
+        else if (arg == "--global-gini-tree-native-mip-start") opt.global_gini_tree_native_mip_start = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--global-gini-tree-root-connectivity-flow") opt.global_gini_tree_root_connectivity_flow = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--global-gini-tree-node-trace") opt.global_gini_tree_node_trace_path = requireValue(i, argc, argv);
         else if (arg == "--global-gini-tree-bound-trace") opt.global_gini_tree_bound_trace_path = requireValue(i, argc, argv);
         else if (arg == "--global-gini-tree-manifest") opt.global_gini_tree_manifest_path = requireValue(i, argc, argv);
         else if (arg == "--global-gini-tree-root-export") opt.global_gini_tree_root_export_path = requireValue(i, argc, argv);
+        else if (arg == "--global-gini-tree-post-row-trace") opt.global_gini_tree_post_row_trace_path = requireValue(i, argc, argv);
+        else if (arg == "--global-gini-tree-topology-trace") opt.global_gini_tree_topology_trace_path = requireValue(i, argc, argv);
+        else if (arg == "--global-gini-tree-sibling-trace") opt.global_gini_tree_sibling_trace_path = requireValue(i, argc, argv);
+        else if (arg == "--global-gini-tree-row-delta-trace") opt.global_gini_tree_row_delta_trace_path = requireValue(i, argc, argv);
+        else if (arg == "--global-gini-tree-memory-trace") opt.global_gini_tree_memory_trace_path = requireValue(i, argc, argv);
+        else if (arg == "--global-gini-tree-mip-start-audit") opt.global_gini_tree_mip_start_audit_path = requireValue(i, argc, argv);
         else if (arg == "--frontier-refine-splits") opt.frontier_refine_splits = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--frontier-split-batch") opt.frontier_split_batch = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--frontier-retry-passes") opt.frontier_retry_passes = std::stoi(requireValue(i, argc, argv));
@@ -1213,6 +1226,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         }
     }
     if (opt.input_path.empty()) throw std::runtime_error("--input is required");
+    if (!std::isfinite(opt.lambda) || opt.lambda < 0.0) {
+        throw std::runtime_error("--lambda must be finite and nonnegative");
+    }
     opt.frontier_execution_mode = lowerAscii(opt.frontier_execution_mode);
     if (opt.frontier_execution_mode != "global-gini-tree") {
         opt.frontier_execution_mode = "scheduler";
@@ -1225,6 +1241,21 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.global_gini_tree_search != "traditional" &&
         opt.global_gini_tree_search != "auto") {
         opt.global_gini_tree_search = "dynamic";
+    }
+    opt.global_gini_tree_child_estimate_mode =
+        lowerAscii(opt.global_gini_tree_child_estimate_mode);
+    if (opt.global_gini_tree_child_estimate_mode != "factory-domain") {
+        opt.global_gini_tree_child_estimate_mode = "parent-copy";
+    }
+    opt.global_gini_tree_row_attachment_mode =
+        lowerAscii(opt.global_gini_tree_row_attachment_mode);
+    if (opt.global_gini_tree_row_attachment_mode != "exact-incremental-delta") {
+        opt.global_gini_tree_row_attachment_mode = "full-inherited-pack";
+    }
+    opt.global_gini_tree_row_timing_mode =
+        lowerAscii(opt.global_gini_tree_row_timing_mode);
+    if (opt.global_gini_tree_row_timing_mode != "eager") {
+        opt.global_gini_tree_row_timing_mode = "deferred";
     }
     if (opt.threads <= 0) opt.threads = 1;
     if (opt.bpc_workers <= 0) opt.bpc_workers = std::max(1, opt.threads);

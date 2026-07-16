@@ -1,0 +1,7 @@
+set threads 1
+set timelimit 3.13203
+set mip tolerances mipgap 1e-8
+read results\bound_work\regen_candidate_V12_M2_average_1784143911937520600_15729502191765196471\inventory_gini_bound.lp
+optimize
+write results\bound_work\regen_candidate_V12_M2_average_1784143911937520600_15729502191765196471\inventory_gini_bound.sol
+quit
