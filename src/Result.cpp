@@ -6,6 +6,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iomanip>
+#include <limits>
 #include <sstream>
 #include <stdexcept>
 
@@ -48,6 +49,13 @@ void writeStringVector(std::ostringstream& out, const std::vector<std::string>& 
 
 double finiteOrZero(double value) {
     return std::isfinite(value) ? value : 0.0;
+}
+
+void writeOptionalDouble(std::ostringstream& out,
+                         bool available,
+                         double value) {
+    if (available && std::isfinite(value)) out << value;
+    else out << "null";
 }
 
 void writeVerification(std::ostringstream& out, const Verification& v) {
@@ -295,6 +303,13 @@ bool inferVerifierPassed(const SolveResult& result) {
 }
 
 bool inferCertifiedOriginalProblem(const SolveResult& result) {
+    const bool uses_native_mip_strict_policy =
+        lowerCopy(result.method) == "cplex" ||
+        result.frontier_execution_mode == "global-gini-tree" ||
+        result.native_mip_evidence_available;
+    if (uses_native_mip_strict_policy) {
+        return result.strict_certified_original_problem;
+    }
     if (result.status != "optimal") return false;
     if (!result.option_audit_consistent) return false;
     if (!inferSolvesOriginalObjective(result)) return false;
@@ -421,7 +436,11 @@ std::string resultToJson(const SolveResult& input) {
     const SolveResult guarded_result = guardOriginalOptimalityForOutput(input);
     const SolveResult& result = guarded_result;
     std::ostringstream out;
-    out << std::setprecision(12);
+    out << std::setprecision(std::numeric_limits<double>::max_digits10);
+    const bool native_mip_output =
+        lowerCopy(result.method) == "cplex" ||
+        result.frontier_execution_mode == "global-gini-tree" ||
+        result.native_mip_evidence_available;
     const double wall_time = result.wall_time_seconds > 0.0
         ? result.wall_time_seconds : result.runtime_seconds;
     const double aggregate_worker_time = result.aggregate_worker_time_seconds > 0.0
@@ -500,9 +519,359 @@ std::string resultToJson(const SolveResult& input) {
     out << "  \"objective\": " << result.objective << ",\n";
     out << "  \"G\": " << result.G << ",\n";
     out << "  \"P\": " << result.P << ",\n";
-    out << "  \"lower_bound\": " << result.lower_bound << ",\n";
-    out << "  \"upper_bound\": " << result.upper_bound << ",\n";
-    out << "  \"gap\": " << result.gap << ",\n";
+    out << "  \"lower_bound\": ";
+    writeOptionalDouble(out,
+                        !native_mip_output ||
+                            result.native_mip_best_bound_available,
+                        result.lower_bound);
+    out << ",\n";
+    out << "  \"upper_bound\": ";
+    writeOptionalDouble(out,
+                        !native_mip_output ||
+                            result.verified_incumbent_objective_available,
+                        result.upper_bound);
+    out << ",\n";
+    out << "  \"gap\": ";
+    writeOptionalDouble(out,
+                        !native_mip_output ||
+                            result.verified_incumbent_project_relative_gap_available,
+                        result.gap);
+    out << ",\n";
+    out << "  \"native_mip_evidence_available\": "
+        << (result.native_mip_evidence_available ? "true" : "false") << ",\n";
+    out << "  \"native_mipopt_return_code\": "
+        << result.native_mipopt_return_code << ",\n";
+    out << "  \"native_mip_status_code\": "
+        << result.native_mip_status_code << ",\n";
+    out << "  \"native_mip_status_text_available\": "
+        << (result.native_mip_status_text_available ? "true" : "false")
+        << ",\n";
+    out << "  \"native_mip_status_text\": \""
+        << jsonEscape(result.native_mip_status_text) << "\",\n";
+    out << "  \"native_mip_status_class\": \""
+        << jsonEscape(result.native_mip_status_class) << "\",\n";
+    out << "  \"native_mip_status_code_text_consistent\": "
+        << (result.native_mip_status_code_text_consistent ? "true" : "false")
+        << ",\n";
+    out << "  \"native_mip_objective_return_code\": "
+        << result.native_mip_objective_return_code << ",\n";
+    out << "  \"native_mip_objective_available\": "
+        << (result.native_mip_objective_available ? "true" : "false")
+        << ",\n";
+    out << "  \"native_mip_objective\": ";
+    writeOptionalDouble(out, result.native_mip_objective_available,
+                        result.native_mip_objective);
+    out << ",\n";
+    out << "  \"native_mip_best_bound_return_code\": "
+        << result.native_mip_best_bound_return_code << ",\n";
+    out << "  \"native_mip_best_bound_available\": "
+        << (result.native_mip_best_bound_available ? "true" : "false")
+        << ",\n";
+    out << "  \"native_mip_best_bound\": ";
+    writeOptionalDouble(out, result.native_mip_best_bound_available,
+                        result.native_mip_best_bound);
+    out << ",\n";
+    out << "  \"verified_incumbent_objective_available\": "
+        << (result.verified_incumbent_objective_available ? "true" : "false")
+        << ",\n";
+    out << "  \"verified_incumbent_objective\": ";
+    writeOptionalDouble(out, result.verified_incumbent_objective_available,
+                        result.verified_incumbent_objective);
+    out << ",\n";
+    out << "  \"verified_incumbent_original_problem_feasible\": "
+        << (result.verified_incumbent_original_problem_feasible
+                ? "true" : "false") << ",\n";
+    out << "  \"verified_incumbent_objective_consistent\": "
+        << (result.verified_incumbent_objective_consistent
+                ? "true" : "false") << ",\n";
+    out << "  \"verified_incumbent_objective_residual_available\": "
+        << (result.verified_incumbent_objective_residual_available
+                ? "true" : "false") << ",\n";
+    out << "  \"verified_incumbent_objective_residual\": ";
+    writeOptionalDouble(out,
+                        result.verified_incumbent_objective_residual_available,
+                        result.verified_incumbent_objective_residual);
+    out << ",\n";
+
+    out << "  \"native_mip_relative_gap_param_id\": "
+        << result.native_mip_relative_gap_param_id << ",\n";
+    out << "  \"native_mip_relative_gap_requested\": ";
+    writeOptionalDouble(out, result.native_mip_evidence_available,
+                        result.native_mip_relative_gap_requested);
+    out << ",\n";
+    out << "  \"native_mip_relative_gap_set_return_code\": "
+        << result.native_mip_relative_gap_set_return_code << ",\n";
+    out << "  \"native_mip_relative_gap_get_return_code\": "
+        << result.native_mip_relative_gap_get_return_code << ",\n";
+    out << "  \"native_mip_relative_gap_effective_available\": "
+        << (result.native_mip_relative_gap_effective_available
+                ? "true" : "false") << ",\n";
+    out << "  \"native_mip_relative_gap_effective\": ";
+    writeOptionalDouble(out,
+                        result.native_mip_relative_gap_effective_available,
+                        result.native_mip_relative_gap_effective);
+    out << ",\n";
+    out << "  \"native_mip_absolute_gap_param_id\": "
+        << result.native_mip_absolute_gap_param_id << ",\n";
+    out << "  \"native_mip_absolute_gap_requested\": ";
+    writeOptionalDouble(out, result.native_mip_evidence_available,
+                        result.native_mip_absolute_gap_requested);
+    out << ",\n";
+    out << "  \"native_mip_absolute_gap_set_return_code\": "
+        << result.native_mip_absolute_gap_set_return_code << ",\n";
+    out << "  \"native_mip_absolute_gap_get_return_code\": "
+        << result.native_mip_absolute_gap_get_return_code << ",\n";
+    out << "  \"native_mip_absolute_gap_effective_available\": "
+        << (result.native_mip_absolute_gap_effective_available
+                ? "true" : "false") << ",\n";
+    out << "  \"native_mip_absolute_gap_effective\": ";
+    writeOptionalDouble(out,
+                        result.native_mip_absolute_gap_effective_available,
+                        result.native_mip_absolute_gap_effective);
+    out << ",\n";
+    out << "  \"native_mip_strict_gap_parameters_valid\": "
+        << (result.native_mip_strict_gap_parameters_valid
+                ? "true" : "false") << ",\n";
+    out << "  \"native_mip_cplex_relative_gap_return_code\": "
+        << result.native_mip_cplex_relative_gap_return_code << ",\n";
+    out << "  \"native_mip_cplex_relative_gap_available\": "
+        << (result.native_mip_cplex_relative_gap_available
+                ? "true" : "false") << ",\n";
+    out << "  \"native_mip_cplex_relative_gap\": ";
+    writeOptionalDouble(out, result.native_mip_cplex_relative_gap_available,
+                        result.native_mip_cplex_relative_gap);
+    out << ",\n";
+    out << "  \"native_mip_absolute_gap_available\": "
+        << (result.native_mip_absolute_gap_available ? "true" : "false")
+        << ",\n";
+    out << "  \"native_mip_absolute_gap\": ";
+    writeOptionalDouble(out, result.native_mip_absolute_gap_available,
+                        result.native_mip_absolute_gap);
+    out << ",\n";
+    out << "  \"native_mip_signed_bound_residual_available\": "
+        << (result.native_mip_signed_bound_residual_available
+                ? "true" : "false") << ",\n";
+    out << "  \"native_mip_signed_bound_residual\": ";
+    writeOptionalDouble(out,
+                        result.native_mip_signed_bound_residual_available,
+                        result.native_mip_signed_bound_residual);
+    out << ",\n";
+    out << "  \"native_mip_bound_inversion\": "
+        << (result.native_mip_bound_inversion ? "true" : "false")
+        << ",\n";
+    out << "  \"native_mip_relative_gap_available\": "
+        << (result.native_mip_relative_gap_available ? "true" : "false")
+        << ",\n";
+    out << "  \"native_mip_relative_gap\": ";
+    writeOptionalDouble(out, result.native_mip_relative_gap_available,
+                        result.native_mip_relative_gap);
+    out << ",\n";
+    out << "  \"verified_incumbent_absolute_gap_available\": "
+        << (result.verified_incumbent_absolute_gap_available
+                ? "true" : "false") << ",\n";
+    out << "  \"verified_incumbent_absolute_gap\": ";
+    writeOptionalDouble(out, result.verified_incumbent_absolute_gap_available,
+                        result.verified_incumbent_absolute_gap);
+    out << ",\n";
+    out << "  \"verified_incumbent_signed_bound_residual_available\": "
+        << (result.verified_incumbent_signed_bound_residual_available
+                ? "true" : "false") << ",\n";
+    out << "  \"verified_incumbent_signed_bound_residual\": ";
+    writeOptionalDouble(
+        out, result.verified_incumbent_signed_bound_residual_available,
+        result.verified_incumbent_signed_bound_residual);
+    out << ",\n";
+    out << "  \"verified_incumbent_bound_inversion\": "
+        << (result.verified_incumbent_bound_inversion ? "true" : "false")
+        << ",\n";
+    out << "  \"verified_incumbent_relative_gap_available\": "
+        << (result.verified_incumbent_relative_gap_available
+                ? "true" : "false") << ",\n";
+    out << "  \"verified_incumbent_relative_gap\": ";
+    writeOptionalDouble(out, result.verified_incumbent_relative_gap_available,
+                        result.verified_incumbent_relative_gap);
+    out << ",\n";
+    out << "  \"verified_incumbent_project_relative_gap_available\": "
+        << (result.verified_incumbent_project_relative_gap_available
+                ? "true" : "false") << ",\n";
+    out << "  \"verified_incumbent_project_relative_gap\": ";
+    writeOptionalDouble(
+        out, result.verified_incumbent_project_relative_gap_available,
+        result.verified_incumbent_project_relative_gap);
+    out << ",\n";
+
+    out << "  \"native_mip_node_count_available\": "
+        << (result.native_mip_node_count_available ? "true" : "false")
+        << ",\n";
+    out << "  \"native_mip_node_count\": "
+        << result.native_mip_node_count << ",\n";
+    out << "  \"native_mip_open_node_count_available\": "
+        << (result.native_mip_open_node_count_available ? "true" : "false")
+        << ",\n";
+    out << "  \"native_mip_open_node_count\": "
+        << result.native_mip_open_node_count << ",\n";
+    out << "  \"native_mip_solution_count_available\": "
+        << (result.native_mip_solution_count_available ? "true" : "false")
+        << ",\n";
+    out << "  \"native_mip_solution_count\": "
+        << result.native_mip_solution_count << ",\n";
+    out << "  \"native_mip_threads_requested\": "
+        << result.native_mip_threads_requested << ",\n";
+    out << "  \"native_mip_threads_set_return_code\": "
+        << result.native_mip_threads_set_return_code << ",\n";
+    out << "  \"native_mip_threads_get_return_code\": "
+        << result.native_mip_threads_get_return_code << ",\n";
+    out << "  \"native_mip_threads_effective\": "
+        << result.native_mip_threads_effective << ",\n";
+    out << "  \"native_mip_presolve_requested\": "
+        << result.native_mip_presolve_requested << ",\n";
+    out << "  \"native_mip_presolve_set_return_code\": "
+        << result.native_mip_presolve_set_return_code << ",\n";
+    out << "  \"native_mip_presolve_get_return_code\": "
+        << result.native_mip_presolve_get_return_code << ",\n";
+    out << "  \"native_mip_presolve_effective\": "
+        << result.native_mip_presolve_effective << ",\n";
+    out << "  \"native_mip_search_requested\": "
+        << result.native_mip_search_requested << ",\n";
+    out << "  \"native_mip_search_set_return_code\": "
+        << result.native_mip_search_set_return_code << ",\n";
+    out << "  \"native_mip_search_get_return_code\": "
+        << result.native_mip_search_get_return_code << ",\n";
+    out << "  \"native_mip_search_effective\": "
+        << result.native_mip_search_effective << ",\n";
+    out << "  \"native_mip_node_select_requested\": "
+        << result.native_mip_node_select_requested << ",\n";
+    out << "  \"native_mip_node_select_set_return_code\": "
+        << result.native_mip_node_select_set_return_code << ",\n";
+    out << "  \"native_mip_node_select_get_return_code\": "
+        << result.native_mip_node_select_get_return_code << ",\n";
+    out << "  \"native_mip_node_select_effective\": "
+        << result.native_mip_node_select_effective << ",\n";
+    out << "  \"native_mip_time_limit_param_id\": "
+        << result.native_mip_time_limit_param_id << ",\n";
+    out << "  \"native_mip_time_limit_requested\": "
+        << result.native_mip_time_limit_requested << ",\n";
+    out << "  \"native_mip_time_limit_set_return_code\": "
+        << result.native_mip_time_limit_set_return_code << ",\n";
+    out << "  \"native_mip_time_limit_get_return_code\": "
+        << result.native_mip_time_limit_get_return_code << ",\n";
+    out << "  \"native_mip_time_limit_effective_available\": "
+        << (result.native_mip_time_limit_effective_available
+                ? "true" : "false") << ",\n";
+    out << "  \"native_mip_time_limit_effective\": ";
+    writeOptionalDouble(out,
+                        result.native_mip_time_limit_effective_available,
+                        result.native_mip_time_limit_effective);
+    out << ",\n";
+    out << "  \"native_mip_finalization_state\": \""
+        << jsonEscape(result.native_mip_finalization_state) << "\",\n";
+    out << "  \"native_mip_solver_finalization_reached\": "
+        << (result.native_mip_solver_finalization_reached
+                ? "true" : "false") << ",\n";
+    out << "  \"native_mip_evidence_capture_complete\": "
+        << (result.native_mip_evidence_capture_complete
+                ? "true" : "false") << ",\n";
+    out << "  \"native_mip_problem_freed\": "
+        << (result.native_mip_problem_freed ? "true" : "false") << ",\n";
+    out << "  \"native_mip_freeprob_return_code\": "
+        << result.native_mip_freeprob_return_code << ",\n";
+    out << "  \"native_mip_environment_closed\": "
+        << (result.native_mip_environment_closed ? "true" : "false")
+        << ",\n";
+    out << "  \"native_mip_close_return_code\": "
+        << result.native_mip_close_return_code << ",\n";
+    out << "  \"native_mip_environment_count\": "
+        << result.native_mip_environment_count << ",\n";
+    out << "  \"native_mip_problem_count\": "
+        << result.native_mip_problem_count << ",\n";
+    out << "  \"native_mip_model_read_count\": "
+        << result.native_mip_model_read_count << ",\n";
+    out << "  \"native_mip_mipopt_count\": "
+        << result.native_mip_mipopt_count << ",\n";
+    out << "  \"native_mip_freeprob_count\": "
+        << result.native_mip_freeprob_count << ",\n";
+    out << "  \"native_mip_close_count\": "
+        << result.native_mip_close_count << ",\n";
+    out << "  \"native_mip_lifecycle_valid\": "
+        << (result.native_mip_lifecycle_valid ? "true" : "false") << ",\n";
+
+    out << "  \"strict_certificate_policy_version\": \""
+        << jsonEscape(result.strict_certificate_policy_version) << "\",\n";
+    out << "  \"strict_certificate_class\": \""
+        << jsonEscape(result.strict_certificate_class) << "\",\n";
+    out << "  \"strict_certificate_rejection_reason\": \""
+        << jsonEscape(result.strict_certificate_rejection_reason) << "\",\n";
+    out << "  \"strict_certified_original_problem\": "
+        << (result.strict_certified_original_problem ? "true" : "false")
+        << ",\n";
+    out << "  \"strict_native_objective_valid\": "
+        << (result.strict_native_objective_valid ? "true" : "false")
+        << ",\n";
+    out << "  \"strict_native_best_bound_valid\": "
+        << (result.strict_native_best_bound_valid ? "true" : "false")
+        << ",\n";
+    out << "  \"strict_bound_equality_closed\": "
+        << (result.strict_bound_equality_closed ? "true" : "false")
+        << ",\n";
+    out << "  \"strict_bound_equality_proof_module\": \""
+        << jsonEscape(result.strict_bound_equality_proof_module) << "\",\n";
+    out << "  \"strict_bound_equality_proof_conditions_satisfied\": "
+        << (result.strict_bound_equality_proof_conditions_satisfied
+                ? "true" : "false") << ",\n";
+    out << "  \"strict_independent_exact_certificate_module\": \""
+        << jsonEscape(result.strict_independent_exact_certificate_module)
+        << "\",\n";
+    out << "  \"strict_independent_exact_certificate_conditions_satisfied\": "
+        << (result.strict_independent_exact_certificate_conditions_satisfied
+                ? "true" : "false") << ",\n";
+    out << "  \"strict_lower_bound_source\": \""
+        << jsonEscape(result.strict_lower_bound_source) << "\",\n";
+    out << "  \"strict_serialized_lower_bound_matches_native\": "
+        << (result.strict_serialized_lower_bound_matches_native
+                ? "true" : "false") << ",\n";
+    out << "  \"strict_serialized_gap_consistent\": "
+        << (result.strict_serialized_gap_consistent ? "true" : "false")
+        << ",\n";
+
+    out << "  \"global_gini_tree_root_connectivity_flow_variant_requested\": \""
+        << jsonEscape(
+               result.global_gini_tree_root_connectivity_flow_variant_requested)
+        << "\",\n";
+    out << "  \"global_gini_tree_root_connectivity_flow_variant_resolved\": \""
+        << jsonEscape(
+               result.global_gini_tree_root_connectivity_flow_variant_resolved)
+        << "\",\n";
+    out << "  \"global_gini_tree_root_model_size_available\": "
+        << (result.global_gini_tree_root_model_size_available
+                ? "true" : "false") << ",\n";
+    out << "  \"global_gini_tree_root_model_rows\": "
+        << result.global_gini_tree_root_model_rows << ",\n";
+    out << "  \"global_gini_tree_root_model_cols\": "
+        << result.global_gini_tree_root_model_cols << ",\n";
+    out << "  \"global_gini_tree_root_model_nonzeros\": "
+        << result.global_gini_tree_root_model_nonzeros << ",\n";
+    out << "  \"global_gini_tree_connectivity_flow_columns\": "
+        << result.global_gini_tree_connectivity_flow_columns << ",\n";
+    out << "  \"global_gini_tree_connectivity_flow_upper_link_rows\": "
+        << result.global_gini_tree_connectivity_flow_upper_link_rows << ",\n";
+    out << "  \"global_gini_tree_connectivity_flow_lower_link_rows\": "
+        << result.global_gini_tree_connectivity_flow_lower_link_rows << ",\n";
+    out << "  \"global_gini_tree_connectivity_flow_station_balance_rows\": "
+        << result.global_gini_tree_connectivity_flow_station_balance_rows
+        << ",\n";
+    out << "  \"global_gini_tree_connectivity_flow_depot_balance_rows\": "
+        << result.global_gini_tree_connectivity_flow_depot_balance_rows
+        << ",\n";
+    out << "  \"global_gini_tree_connectivity_flow_start_upper_rows\": "
+        << result.global_gini_tree_connectivity_flow_start_upper_rows
+        << ",\n";
+    out << "  \"global_gini_tree_connectivity_flow_start_lower_rows\": "
+        << result.global_gini_tree_connectivity_flow_start_lower_rows
+        << ",\n";
+    out << "  \"global_gini_tree_connectivity_flow_total_rows\": "
+        << result.global_gini_tree_connectivity_flow_total_rows << ",\n";
+    out << "  \"global_gini_tree_connectivity_flow_total_nonzeros\": "
+        << result.global_gini_tree_connectivity_flow_total_nonzeros << ",\n";
     out << "  \"runtime_seconds\": " << result.runtime_seconds << ",\n";
     out << "  \"wall_time_seconds\": " << wall_time << ",\n";
     out << "  \"time_budget_seconds\": " << result.time_budget_seconds << ",\n";

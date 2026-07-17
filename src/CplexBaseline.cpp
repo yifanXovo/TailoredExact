@@ -1,4 +1,5 @@
 #include "CplexBaseline.hpp"
+#include "ConnectivityFlow.hpp"
 #include "IntervalRowFactory.hpp"
 #include "ControllingLeafScheduler.hpp"
 
@@ -175,7 +176,7 @@ void addTerm(Expr& e, const std::string& var, double coef) {
 
 std::string num(double v) {
     std::ostringstream ss;
-    ss << std::setprecision(12) << v;
+    ss << std::setprecision(std::numeric_limits<double>::max_digits10) << v;
     return ss.str();
 }
 
@@ -344,6 +345,16 @@ void writeCompactLp(const Instance& instance,
     const int V = instance.V;
     const int M = instance.M;
     const double cunit = instance.pickup_time + instance.drop_time;
+    const ConnectivityFlowVariantResolution flow_resolution =
+        resolveConnectivityFlowVariant(
+            options.global_gini_tree_root_connectivity_flow,
+            options.global_gini_tree_root_connectivity_flow_variant);
+    if (!flow_resolution.valid) {
+        throw std::runtime_error(
+            "invalid root connectivity-flow configuration: " +
+            flow_resolution.failure_reason);
+    }
+    const ConnectivityFlowVariant flow_variant = flow_resolution.variant;
 
     std::vector<int> y_lb(V + 1, 0);
     std::vector<int> y_ub(V + 1, 0);
@@ -606,8 +617,11 @@ void writeCompactLp(const Instance& instance,
             for (int j = 0; j <= V; ++j) {
                 if (i != j) {
                     vars.add(xName(k, i, j), 0, 1, "B");
-                    if (options.global_gini_tree_root_connectivity_flow) {
-                        vars.add(connectivityName(k, i, j), 0, V, "C");
+                    const std::optional<double> flow_upper =
+                        connectivityFlowArcUpperBound(flow_variant, V, i, j);
+                    if (flow_upper.has_value()) {
+                        vars.add(connectivityName(k, i, j), 0,
+                                 *flow_upper, "C");
                     }
                 }
             }
@@ -721,7 +735,7 @@ void writeCompactLp(const Instance& instance,
     std::filesystem::create_directories(lp_path.parent_path());
     std::ofstream out(lp_path);
     if (!out) throw std::runtime_error("Cannot write CPLEX LP: " + lp_path.string());
-    out << std::setprecision(12);
+    out << std::setprecision(std::numeric_limits<double>::max_digits10);
     out << "\\ ExactEBRP compact MILP generated from C++ command-line runner\n";
     out << "Minimize\n obj: G";
     for (int i = 1; i <= V; ++i) {
@@ -803,30 +817,40 @@ void writeCompactLp(const Instance& instance,
         }
     }
 
-    // Optional scalable extended formulation.  One unit of a continuous
-    // commodity is consumed at every visited station.  Every depot-closed
-    // feasible route projects to this system by sending the number of
-    // downstream visited stations along each used arc.  Hence these rows do
-    // not remove any feasible original route solution; they only strengthen
-    // the fractional x/z relaxation.  The family has O(M V^2) size and uses
-    // neither route masks nor a restricted route pool.
-    if (options.global_gini_tree_root_connectivity_flow) {
+    // Optional scalable connectivity-flow family.  F0 is the Round 20 model;
+    // F1 removes all return-flow columns, F2 adds f>=x normalization and
+    // tighter internal-arc bounds, and F3 couples the start flow to the number
+    // of visited stations.  Every elementary depot-closed route has the
+    // canonical downstream-count projection implemented in ConnectivityFlow.
+    if (connectivityFlowEnabled(flow_variant)) {
         for (int k = 0; k < M; ++k) {
             for (int i = 0; i <= V; ++i) {
                 for (int j = 0; j <= V; ++j) {
-                    if (i == j) continue;
+                    const std::optional<double> flow_upper =
+                        connectivityFlowArcUpperBound(flow_variant, V, i, j);
+                    if (!flow_upper.has_value()) continue;
                     Expr link;
                     addTerm(link, connectivityName(k, i, j), 1.0);
-                    addTerm(link, xName(k, i, j), -static_cast<double>(V));
+                    addTerm(link, xName(k, i, j), -*flow_upper);
                     writeConstraint(out, cid, link, "<=", 0.0);
+                    if (connectivityFlowHasLowerLinks(flow_variant)) {
+                        Expr lower_link;
+                        addTerm(lower_link, connectivityName(k, i, j), 1.0);
+                        addTerm(lower_link, xName(k, i, j), -1.0);
+                        writeConstraint(out, cid, lower_link, ">=", 0.0);
+                    }
                 }
             }
             for (int i = 1; i <= V; ++i) {
                 Expr balance;
                 for (int j = 0; j <= V; ++j) {
                     if (i == j) continue;
-                    addTerm(balance, connectivityName(k, j, i), 1.0);
-                    addTerm(balance, connectivityName(k, i, j), -1.0);
+                    if (hasConnectivityFlowColumn(flow_variant, V, j, i)) {
+                        addTerm(balance, connectivityName(k, j, i), 1.0);
+                    }
+                    if (hasConnectivityFlowColumn(flow_variant, V, i, j)) {
+                        addTerm(balance, connectivityName(k, i, j), -1.0);
+                    }
                 }
                 addTerm(balance, zName(k, i), -1.0);
                 writeConstraint(out, cid, balance, "=", 0.0);
@@ -834,10 +858,28 @@ void writeCompactLp(const Instance& instance,
             Expr depot_balance;
             for (int j = 1; j <= V; ++j) {
                 addTerm(depot_balance, connectivityName(k, 0, j), 1.0);
-                addTerm(depot_balance, connectivityName(k, j, 0), -1.0);
+                if (hasConnectivityFlowColumn(flow_variant, V, j, 0)) {
+                    addTerm(depot_balance, connectivityName(k, j, 0), -1.0);
+                }
                 addTerm(depot_balance, zName(k, j), -1.0);
             }
             writeConstraint(out, cid, depot_balance, "=", 0.0);
+            if (connectivityFlowHasStartCoupling(flow_variant)) {
+                for (int j = 1; j <= V; ++j) {
+                    Expr start_upper;
+                    addTerm(start_upper, connectivityName(k, 0, j), 1.0);
+                    for (int i = 1; i <= V; ++i) {
+                        addTerm(start_upper, zName(k, i), -1.0);
+                    }
+                    writeConstraint(out, cid, start_upper, "<=", 0.0);
+
+                    Expr start_lower = start_upper;
+                    addTerm(start_lower, xName(k, 0, j),
+                            -static_cast<double>(V));
+                    writeConstraint(out, cid, start_lower, ">=",
+                                    -static_cast<double>(V));
+                }
+            }
         }
     }
 
@@ -2994,6 +3036,211 @@ bool statusIsTimeLimited(const std::string& status) {
     return s.find("time") != std::string::npos || s.find("limit") != std::string::npos;
 }
 
+std::string nativeMipStatusClass(int status_code) {
+    switch (status_code) {
+    case kCplexMipOptimal: return "native_exact_optimal_status";
+    case kCplexMipOptimalTolerance: return "native_tolerance_optimal_status";
+    case kCplexMipInfeasible: return "native_infeasible_status";
+    case kCplexMipTimeLimitFeasible: return "native_time_limit_feasible_status";
+    case kCplexMipTimeLimitNoIncumbent:
+        return "native_time_limit_no_incumbent_status";
+    case kCplexMipOptimalUnscaledInfeasibilities:
+        return "native_optimal_unscaled_infeasibilities_status";
+    default: return "unknown_native_status";
+    }
+}
+
+void populateNativeMipEvidenceFields(
+    SolveResult& result,
+    const NativeMipEvidence& native,
+    long long environment_count,
+    long long problem_count,
+    long long model_read_count,
+    long long mipopt_count,
+    long long freeprob_count,
+    long long close_count,
+    long long node_count,
+    long long open_node_count,
+    int solution_count) {
+    result.native_mip_evidence_available = native.solve_returned;
+    result.native_mipopt_return_code = native.mipopt_return_code;
+    result.native_mip_status_code = native.status_code;
+    result.native_mip_status_text_available = !native.status_text.empty();
+    result.native_mip_status_text = native.status_text;
+    result.native_mip_status_class = nativeMipStatusClass(native.status_code);
+    result.native_mip_status_code_text_consistent =
+        cplexMipStatusTextConsistent(native.status_code, native.status_text);
+    result.native_mip_objective_return_code = native.objective_return_code;
+    result.native_mip_objective_available = native.objective_available;
+    result.native_mip_objective = native.objective;
+    result.native_mip_best_bound_return_code = native.best_bound_return_code;
+    result.native_mip_best_bound_available = native.best_bound_available;
+    result.native_mip_best_bound = native.best_bound;
+
+    result.native_mip_relative_gap_param_id = native.relative_gap.parameter_id;
+    result.native_mip_relative_gap_requested = native.relative_gap.requested;
+    result.native_mip_relative_gap_set_return_code =
+        native.relative_gap.setter_return_code;
+    result.native_mip_relative_gap_get_return_code =
+        native.relative_gap.getter_return_code;
+    result.native_mip_relative_gap_effective_available =
+        native.relative_gap.getter_return_code == 0;
+    result.native_mip_relative_gap_effective = native.relative_gap.effective;
+    result.native_mip_absolute_gap_param_id = native.absolute_gap.parameter_id;
+    result.native_mip_absolute_gap_requested = native.absolute_gap.requested;
+    result.native_mip_absolute_gap_set_return_code =
+        native.absolute_gap.setter_return_code;
+    result.native_mip_absolute_gap_get_return_code =
+        native.absolute_gap.getter_return_code;
+    result.native_mip_absolute_gap_effective_available =
+        native.absolute_gap.getter_return_code == 0;
+    result.native_mip_absolute_gap_effective = native.absolute_gap.effective;
+    result.native_mip_strict_gap_parameters_valid =
+        native.strict_gap_configuration_valid;
+    result.native_mip_cplex_relative_gap_return_code =
+        native.mip_relative_gap_return_code;
+    result.native_mip_cplex_relative_gap_available =
+        native.mip_relative_gap_available;
+    result.native_mip_cplex_relative_gap = native.mip_relative_gap;
+
+    result.native_mip_node_count_available = native.solve_returned;
+    result.native_mip_node_count = node_count;
+    result.native_mip_open_node_count_available = native.solve_returned;
+    result.native_mip_open_node_count = open_node_count;
+    result.native_mip_solution_count_available = native.solve_returned;
+    result.native_mip_solution_count = solution_count;
+    result.native_mip_solver_finalization_reached = native.solve_returned &&
+        native.mipopt_return_code == 0;
+    result.native_mip_evidence_capture_complete =
+        native.evidence_capture_complete;
+    result.native_mip_problem_freed = native.free_problem_return_code == 0;
+    result.native_mip_freeprob_return_code = native.free_problem_return_code;
+    result.native_mip_environment_closed =
+        native.close_environment_return_code == 0;
+    result.native_mip_close_return_code =
+        native.close_environment_return_code;
+    result.native_mip_environment_count = environment_count;
+    result.native_mip_problem_count = problem_count;
+    result.native_mip_model_read_count = model_read_count;
+    result.native_mip_mipopt_count = mipopt_count;
+    result.native_mip_freeprob_count = freeprob_count;
+    result.native_mip_close_count = close_count;
+    result.native_mip_lifecycle_valid =
+        environment_count == 1 && problem_count == 1 &&
+        model_read_count == 1 && mipopt_count == 1 &&
+        freeprob_count == 1 && close_count == 1 &&
+        result.native_mip_problem_freed &&
+        result.native_mip_environment_closed;
+    result.native_mip_finalization_state =
+        result.native_mip_lifecycle_valid &&
+                result.native_mip_solver_finalization_reached
+            ? "solver_returned_and_cleanup_complete"
+            : (native.solve_returned ? "solver_returned_cleanup_incomplete"
+                                     : "solver_not_returned");
+}
+
+StrictCertificateDecision evaluateAndPopulateStrictCertificate(
+    SolveResult& result,
+    const NativeMipEvidence& native,
+    bool verified_objective_available,
+    double verified_objective,
+    bool verified_original_feasible,
+    bool verified_objective_consistent,
+    bool exactness_lifecycle_complete) {
+    result.verified_incumbent_objective_available =
+        verified_objective_available;
+    result.verified_incumbent_objective = verified_objective;
+    result.verified_incumbent_original_problem_feasible =
+        verified_original_feasible;
+    result.verified_incumbent_objective_consistent =
+        verified_objective_consistent;
+    result.verified_incumbent_objective_residual_available =
+        verified_objective_available && native.objective_available;
+    if (result.verified_incumbent_objective_residual_available) {
+        result.verified_incumbent_objective_residual =
+            verified_objective - native.objective;
+    }
+
+    StrictCertificateInput input;
+    input.native_status_code = native.status_code;
+    input.native_status_text = native.status_text;
+    input.native_objective_return_code = native.objective_return_code;
+    input.native_objective_available = native.objective_available;
+    input.native_objective = native.objective;
+    input.native_best_bound_return_code = native.best_bound_return_code;
+    input.native_best_bound_available = native.best_bound_available;
+    input.native_best_bound = native.best_bound;
+    input.native_cplex_relative_gap_return_code =
+        native.mip_relative_gap_return_code;
+    input.native_cplex_relative_gap_available =
+        native.mip_relative_gap_available;
+    input.native_cplex_relative_gap = native.mip_relative_gap;
+    input.verified_upper_bound_available = verified_objective_available;
+    input.verified_upper_bound = verified_objective;
+    input.verifier_passed = verified_original_feasible &&
+        verified_objective_consistent;
+    input.solver_finalization_reached = native.solve_returned &&
+        native.mipopt_return_code == 0;
+    input.lifecycle_complete = exactness_lifecycle_complete;
+    // No production objective-lattice or independent exact module exists in
+    // Round 21.  Exact floating-point equality is therefore observational and
+    // cannot close a 102/tolerance certificate.
+    input.bound_equality_proof_conditions_passed = false;
+    input.independent_exact_certificate_conditions_passed = false;
+    input.relative_gap = native.relative_gap;
+    input.absolute_gap = native.absolute_gap;
+    const StrictCertificateDecision decision =
+        classifyStrictCertificate(input);
+
+    result.strict_certificate_class = decision.certificate_class;
+    result.strict_certificate_rejection_reason = decision.rejection_reason.empty()
+        ? "none" : decision.rejection_reason;
+    result.strict_certified_original_problem =
+        decision.strict_certified_original_problem;
+    result.strict_native_objective_valid = decision.native_objective_valid;
+    result.strict_native_best_bound_valid = decision.native_best_bound_valid;
+    result.strict_bound_equality_closed = decision.bound_equality_closed;
+    result.strict_bound_equality_proof_module = "none";
+    result.strict_bound_equality_proof_conditions_satisfied = false;
+    result.strict_independent_exact_certificate_module = "none";
+    result.strict_independent_exact_certificate_conditions_satisfied = false;
+
+    result.native_mip_absolute_gap_available = decision.native_gap_available;
+    result.native_mip_signed_bound_residual_available =
+        decision.native_gap_available;
+    result.native_mip_relative_gap_available = decision.native_gap_available;
+    if (decision.native_gap_available) {
+        result.native_mip_absolute_gap = decision.native_absolute_gap;
+        result.native_mip_signed_bound_residual =
+            decision.native_signed_bound_residual;
+        result.native_mip_bound_inversion = decision.native_bound_inversion;
+        result.native_mip_relative_gap = decision.native_relative_gap;
+    }
+    result.verified_incumbent_absolute_gap_available =
+        decision.verified_gap_available;
+    result.verified_incumbent_signed_bound_residual_available =
+        decision.verified_gap_available;
+    result.verified_incumbent_relative_gap_available =
+        decision.verified_gap_available;
+    result.verified_incumbent_project_relative_gap_available =
+        decision.verified_gap_available;
+    if (decision.verified_gap_available) {
+        result.verified_incumbent_absolute_gap =
+            decision.verified_absolute_gap;
+        result.verified_incumbent_signed_bound_residual =
+            decision.verified_signed_bound_residual;
+        result.verified_incumbent_bound_inversion =
+            decision.verified_bound_inversion;
+        result.verified_incumbent_relative_gap =
+            decision.verified_relative_gap;
+        result.verified_incumbent_project_relative_gap =
+            decision.verified_project_relative_gap;
+    }
+    result.strict_lower_bound_source = native.best_bound_available
+        ? "native_CPXgetbestobjval" : "unavailable";
+    return decision;
+}
+
 } // namespace
 
 SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& options) {
@@ -3003,6 +3250,8 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
     result.input_path = instance.path;
     result.method = "cplex";
     result.status = "running";
+    result.solver_finalization_reached = false;
+    result.process_return_code = -1;
     result.time_budget_seconds = options.solve_time_limit;
     result.notes.push_back(instance.distance_convention);
     const int effective_cplex_threads =
@@ -3033,29 +3282,12 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
             / (stem + "_" + std::to_string(run_id));
         std::filesystem::create_directories(work_dir);
         const std::filesystem::path lp_path = work_dir / "model.lp";
-        const std::filesystem::path sol_path = work_dir / "solution.sol";
-        const std::filesystem::path cmd_path = work_dir / "run.cplex";
         const std::filesystem::path cplex_log = options.log_path.empty()
             ? (work_dir / "cplex.log") : std::filesystem::path(options.log_path);
         result.log_file = cplex_log.string();
-        result.notes.push_back("CPLEX command file sets threads="
+        result.notes.push_back("In-process CPLEX callable-library solve sets and reads back threads="
             + std::to_string(effective_cplex_threads)
             + "; plain CPLEX rows are fair single-thread rows only when --cplex-threads 1 is used.");
-        std::error_code ignored;
-        std::filesystem::remove(sol_path, ignored);
-        std::filesystem::remove(cplex_log, ignored);
-
-        writeCompactLp(instance, options, lp_path, strengthened);
-
-        std::ofstream cmd(cmd_path);
-        cmd << "set threads " << effective_cplex_threads << "\n";
-        cmd << "set timelimit " << options.solve_time_limit << "\n";
-        cmd << "set mip tolerances mipgap 1e-8\n";
-        cmd << "read " << lp_path.string() << "\n";
-        cmd << "optimize\n";
-        cmd << "write " << sol_path.string() << "\n";
-        cmd << "quit\n";
-        cmd.close();
 
         std::string solver_name = options.mip_solver.empty()
             ? "cplex" : options.mip_solver;
@@ -3064,47 +3296,136 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
         if (solver_name != "cplex") {
             throw std::runtime_error("compact interval BC currently supports --mip-solver cplex only");
         }
-        const std::string cplex = defaultCplexPath();
-        std::filesystem::create_directories(cplex_log.parent_path());
-        const std::string command = "cmd /C \"" + quote(cplex) + " -f "
-            + quote(cmd_path) + " > " + quote(cplex_log) + " 2>&1\"";
-        const int rc = std::system(command.c_str());
+
+        writeCompactLp(instance, options, lp_path, strengthened);
+        const PlainCplexApiSolveResult api = solvePlainCplexWithStrictApi(
+            lp_path, options.solve_time_limit, effective_cplex_threads,
+            cplex_log);
         result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
         result.actual_runtime_seconds = result.runtime_seconds;
 
-        std::string cplex_status = "unknown";
-        double cplex_obj = 0.0;
-        double best_bound = std::numeric_limits<double>::quiet_NaN();
-        auto values = parseSolValues(sol_path, cplex_status, cplex_obj, best_bound);
-        result.nodes = parseCplexNodes(cplex_log);
-        const double log_best_bound = parseCplexBestBound(cplex_log);
-        if (!std::isfinite(best_bound) && std::isfinite(log_best_bound)) best_bound = log_best_bound;
-        result.routes = reconstructRoutes(instance, values);
-        result.verification = verifySolution(instance, result.routes, options.lambda);
-        result.final_inventory = result.verification.final_inventory;
-        result.G = result.verification.G;
-        result.P = result.verification.P;
-        result.objective = result.verification.objective;
-        result.upper_bound = result.objective;
-        if (statusIsOptimal(cplex_status)) {
-            result.status = result.verification.feasible ? "optimal" : "verification_failed";
-            result.lower_bound = result.objective;
-            result.gap = 0.0;
-            result.certificate = result.verification.feasible
-                ? "CPLEX reported optimality and the independent verifier recomputed the same feasible objective."
-                : "CPLEX reported optimality, but the independent verifier rejected the reconstructed solution.";
+        populateNativeMipEvidenceFields(
+            result, api.native, api.environment_count, api.problem_count,
+            api.model_read_count, api.mipopt_count, api.freeprob_count,
+            api.close_count, api.node_count, api.open_node_count,
+            api.native_solution_count);
+        result.native_mip_threads_requested = api.threads_requested;
+        result.native_mip_threads_set_return_code =
+            api.threads_set_return_code;
+        result.native_mip_threads_get_return_code =
+            api.threads_get_return_code;
+        result.native_mip_threads_effective = api.threads_effective;
+        result.native_mip_presolve_requested = api.presolve_requested;
+        result.native_mip_presolve_set_return_code =
+            api.presolve_set_return_code;
+        result.native_mip_presolve_get_return_code =
+            api.presolve_get_return_code;
+        result.native_mip_presolve_effective = api.presolve_effective;
+        result.native_mip_search_requested = api.search_requested;
+        result.native_mip_search_set_return_code = api.search_set_return_code;
+        result.native_mip_search_get_return_code = api.search_get_return_code;
+        result.native_mip_search_effective = api.search_effective;
+        result.native_mip_node_select_requested = api.node_select_requested;
+        result.native_mip_node_select_set_return_code =
+            api.node_select_set_return_code;
+        result.native_mip_node_select_get_return_code =
+            api.node_select_get_return_code;
+        result.native_mip_node_select_effective = api.node_select_effective;
+        result.native_mip_time_limit_param_id = api.time_limit_parameter_id;
+        result.native_mip_time_limit_requested = api.time_limit_requested;
+        result.native_mip_time_limit_set_return_code =
+            api.time_limit_set_return_code;
+        result.native_mip_time_limit_get_return_code =
+            api.time_limit_get_return_code;
+        result.native_mip_time_limit_effective_available =
+            api.time_limit_get_return_code == 0;
+        result.native_mip_time_limit_effective = api.time_limit_effective;
+        result.nodes = api.node_count;
+        result.open_nodes = api.open_node_count;
+        result.solver_finalization_reached =
+            result.native_mip_solver_finalization_reached;
+        result.process_return_code = api.native.mipopt_return_code;
+
+        bool verified_objective_available = false;
+        bool verified_original_feasible = false;
+        bool verified_objective_consistent = false;
+        double verified_objective = 0.0;
+        if (api.native.objective_available && !api.values.empty()) {
+            result.routes = reconstructRoutes(instance, api.values);
+            result.verification = verifySolution(
+                instance, result.routes, options.lambda);
+            verified_original_feasible = result.verification.feasible &&
+                result.verification.objective_matches &&
+                result.verification.errors.empty() &&
+                std::isfinite(result.verification.objective);
+            if (verified_original_feasible) {
+                verified_objective_available = true;
+                verified_objective = result.verification.objective;
+                result.final_inventory = result.verification.final_inventory;
+                result.G = result.verification.G;
+                result.P = result.verification.P;
+                result.objective = verified_objective;
+                result.upper_bound = verified_objective;
+                verified_objective_consistent =
+                    std::fabs(verified_objective - api.native.objective) <=
+                    1e-8 * std::max({1.0, std::fabs(verified_objective),
+                                     std::fabs(api.native.objective)});
+            }
+        }
+        if (api.native.best_bound_available) {
+            result.lower_bound = api.native.best_bound;
+        }
+        const StrictCertificateDecision decision =
+            evaluateAndPopulateStrictCertificate(
+                result, api.native, verified_objective_available,
+                verified_objective, verified_original_feasible,
+                verified_objective_consistent,
+                api.lifecycle_valid && api.native.mipopt_return_code == 0);
+        if (decision.verified_gap_available) {
+            result.gap = decision.verified_project_relative_gap;
+        }
+        result.strict_serialized_lower_bound_matches_native =
+            api.native.best_bound_available &&
+            result.lower_bound == api.native.best_bound;
+        result.strict_serialized_gap_consistent =
+            decision.verified_gap_available &&
+            result.gap == decision.verified_project_relative_gap;
+
+        if (decision.strict_certified_original_problem) {
+            result.status = "optimal";
+            result.certificate =
+                "Strict Round 21 certificate: native CPLEX status 101, zero relative/absolute MIP-gap parameter round trips, retained native best bound, completed lifecycle, and independently verified native incumbent.";
+        } else if (decision.certificate_class == "infeasible") {
+            result.status = "infeasible";
+            result.certificate =
+                "Native CPLEX status 103 certifies model infeasibility; no optimal incumbent certificate is claimed.";
+        } else if (decision.certificate_class == "time_limit_valid_bound") {
+            result.status = "time_limit";
+            result.certificate =
+                "Time limit reached; the retained official lower bound is the raw CPXgetbestobjval value and no strict optimality claim is made.";
+        } else if (!api.available || !api.native.solve_returned) {
+            result.status = "error";
+            result.certificate = "In-process CPLEX solve failed before native finalization: " +
+                (api.fail_reason.empty() ? std::string("unknown_failure")
+                                         : api.fail_reason);
         } else {
             result.status = "not_certified";
-            result.lower_bound = std::isfinite(best_bound) ? best_bound : 0.0;
-            result.gap = (std::fabs(result.upper_bound) > 1e-12)
-                ? std::max(0.0, (result.upper_bound - result.lower_bound) / std::fabs(result.upper_bound))
-                : 0.0;
-            result.certificate = "CPLEX did not report optimality: " + cplex_status;
+            result.certificate = "Strict optimality rejected (" +
+                decision.certificate_class + "): " +
+                result.strict_certificate_rejection_reason +
+                ". Raw native objective, best bound, gaps, and status remain serialized.";
         }
-        result.notes.push_back("CPLEX solution status: " + cplex_status);
-        result.notes.push_back("CPLEX process return code: " + std::to_string(rc));
+        result.notes.push_back("CPLEX native status code/text: " +
+            std::to_string(api.native.status_code) + " / " +
+            api.native.status_text);
+        result.notes.push_back("CPXmipopt return code: " +
+            std::to_string(api.native.mipopt_return_code));
+        result.notes.push_back("strict certificate class: " +
+            decision.certificate_class);
         result.notes.push_back("LP file: " + lp_path.string());
-        result.notes.push_back("CPLEX log: " + cplex_log.string());
+        result.notes.push_back(
+            "Solver output is emitted by the in-process callable library to the enclosing run log: " +
+            cplex_log.string());
     } catch (const std::bad_alloc& e) {
         result.status = "model_size_limit";
         result.interval_exact_cutoff_certificate_basis = "compact_interval_bc_model_size_limit";
@@ -4721,6 +5042,111 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
     result.full_certificate_rejection_reason = "global_tree_not_finalized";
     result.unresolved_intervals = 1;
     result.open_nodes = 0;
+    result.solver_finalization_reached = false;
+    result.process_return_code = -1;
+    populateNativeMipEvidenceFields(
+        result, NativeMipEvidence{}, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    // The global-tree solve owns its native evidence.  Do not inherit a seed
+    // solver's certificate merely because its feasible route is copied.
+    result.native_mip_evidence_available = false;
+    result.native_mip_objective_available = false;
+    result.native_mip_best_bound_available = false;
+    result.native_mip_cplex_relative_gap_available = false;
+    result.native_mip_absolute_gap_available = false;
+    result.native_mip_signed_bound_residual_available = false;
+    result.native_mip_bound_inversion = false;
+    result.native_mip_relative_gap_available = false;
+    result.verified_incumbent_absolute_gap_available = false;
+    result.verified_incumbent_signed_bound_residual_available = false;
+    result.verified_incumbent_bound_inversion = false;
+    result.verified_incumbent_relative_gap_available = false;
+    result.verified_incumbent_project_relative_gap_available = false;
+    result.verified_incumbent_objective_residual_available = false;
+    result.native_mip_lifecycle_valid = false;
+    result.native_mip_solver_finalization_reached = false;
+    result.strict_certificate_class = "invalid_or_unavailable_bound";
+    result.strict_certificate_rejection_reason = "global_tree_not_evaluated";
+    result.strict_certified_original_problem = false;
+    result.strict_native_objective_valid = false;
+    result.strict_native_best_bound_valid = false;
+    result.strict_bound_equality_closed = false;
+    result.strict_bound_equality_proof_module = "none";
+    result.strict_bound_equality_proof_conditions_satisfied = false;
+    result.strict_independent_exact_certificate_module = "none";
+    result.strict_independent_exact_certificate_conditions_satisfied = false;
+    result.strict_lower_bound_source = "unavailable";
+    result.strict_serialized_lower_bound_matches_native = false;
+    result.strict_serialized_gap_consistent = false;
+    result.native_mip_threads_requested = 0;
+    result.native_mip_threads_set_return_code = -1;
+    result.native_mip_threads_get_return_code = -1;
+    result.native_mip_threads_effective = 0;
+    result.native_mip_presolve_requested = 0;
+    result.native_mip_presolve_set_return_code = -1;
+    result.native_mip_presolve_get_return_code = -1;
+    result.native_mip_presolve_effective = 0;
+    result.native_mip_search_requested = 0;
+    result.native_mip_search_set_return_code = -1;
+    result.native_mip_search_get_return_code = -1;
+    result.native_mip_search_effective = 0;
+    result.native_mip_node_select_requested = 0;
+    result.native_mip_node_select_set_return_code = -1;
+    result.native_mip_node_select_get_return_code = -1;
+    result.native_mip_node_select_effective = 0;
+    result.native_mip_time_limit_set_return_code = -1;
+    result.native_mip_time_limit_get_return_code = -1;
+    result.native_mip_time_limit_effective_available = false;
+
+    const ConnectivityFlowVariantResolution flow_resolution =
+        resolveConnectivityFlowVariant(
+            options.global_gini_tree_root_connectivity_flow,
+            options.global_gini_tree_root_connectivity_flow_variant);
+    result.global_gini_tree_root_connectivity_flow_variant_requested =
+        flow_resolution.requested.empty() ? "invalid" : flow_resolution.requested;
+    result.global_gini_tree_root_connectivity_flow_variant_resolved =
+        flow_resolution.valid ? flow_resolution.resolved : "invalid";
+    if (!flow_resolution.valid) {
+        result.status = "global_gini_tree_invalid_connectivity_flow_variant";
+        result.certificate =
+            "Global Gini tree rejected an invalid or conflicting root connectivity-flow configuration.";
+        result.global_gini_tree_fail_reason = flow_resolution.failure_reason;
+        result.full_certificate_rejection_reason =
+            "invalid_root_connectivity_flow_variant";
+        result.runtime_seconds =
+            std::chrono::duration<double>(Clock::now() - start).count();
+        result.wall_time_seconds = result.runtime_seconds;
+        return result;
+    }
+    const ConnectivityFlowCounts flow_counts =
+        connectivityFlowTheoreticalCounts(
+            flow_resolution.variant, instance.V, instance.M);
+    if (!flow_counts.valid) {
+        result.status = "global_gini_tree_invalid_connectivity_flow_counts";
+        result.global_gini_tree_fail_reason = flow_counts.failure_reason;
+        result.full_certificate_rejection_reason =
+            "invalid_root_connectivity_flow_dimensions";
+        result.runtime_seconds =
+            std::chrono::duration<double>(Clock::now() - start).count();
+        result.wall_time_seconds = result.runtime_seconds;
+        return result;
+    }
+    result.global_gini_tree_connectivity_flow_columns = flow_counts.columns;
+    result.global_gini_tree_connectivity_flow_upper_link_rows =
+        flow_counts.upper_link_rows;
+    result.global_gini_tree_connectivity_flow_lower_link_rows =
+        flow_counts.lower_link_rows;
+    result.global_gini_tree_connectivity_flow_station_balance_rows =
+        flow_counts.station_balance_rows;
+    result.global_gini_tree_connectivity_flow_depot_balance_rows =
+        flow_counts.depot_balance_rows;
+    result.global_gini_tree_connectivity_flow_start_upper_rows =
+        flow_counts.start_upper_rows;
+    result.global_gini_tree_connectivity_flow_start_lower_rows =
+        flow_counts.start_lower_rows;
+    result.global_gini_tree_connectivity_flow_total_rows =
+        flow_counts.total_rows;
+    result.global_gini_tree_connectivity_flow_total_nonzeros =
+        flow_counts.total_nonzeros;
 
     if (!verified_seed.verification.feasible ||
         !verified_seed.verification.objective_matches ||
@@ -4817,6 +5243,12 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
         CompactOracleStrengtheningStats root_stats;
         writeCompactLp(instance, model_options, root_lp, true, &root_cutoff,
                        &root_stats, nullptr);
+        const ModelSizeStats root_model_size = analyzeLpModel(root_lp);
+        result.global_gini_tree_root_model_size_available =
+            root_model_size.rows > 0 && root_model_size.cols > 0;
+        result.global_gini_tree_root_model_rows = root_model_size.rows;
+        result.global_gini_tree_root_model_cols = root_model_size.cols;
+        result.global_gini_tree_root_model_nonzeros = root_model_size.nonzeros;
 
         const int solver_threads = options.compact_bc_threads > 0
             ? options.compact_bc_threads
@@ -4829,6 +5261,24 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
                 verified_seed.objective, verified_seed.routes,
                 options.solve_time_limit,
                 solver_threads, node_trace, bound_trace, manifest);
+
+        result.global_gini_tree_root_model_size_available =
+            api.model_rows > 0 && api.model_columns > 0;
+        result.global_gini_tree_root_model_rows = api.model_rows;
+        result.global_gini_tree_root_model_cols = api.model_columns;
+        result.global_gini_tree_root_model_nonzeros = api.model_nonzeros;
+        if (root_model_size.rows != api.model_rows ||
+            root_model_size.cols != api.model_columns ||
+            root_model_size.nonzeros != api.model_nonzeros) {
+            result.notes.push_back(
+                "LP text analyzer differs from authoritative CPLEX model dimensions: text=" +
+                std::to_string(root_model_size.rows) + "/" +
+                std::to_string(root_model_size.cols) + "/" +
+                std::to_string(root_model_size.nonzeros) + ", CPLEX=" +
+                std::to_string(api.model_rows) + "/" +
+                std::to_string(api.model_columns) + "/" +
+                std::to_string(api.model_nonzeros));
+        }
 
         result.global_gini_tree_available = api.available;
         result.global_gini_tree_solved = api.solved;
@@ -4975,21 +5425,62 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
         result.global_gini_tree_mip_start_audit_path = api.mip_start_audit_path;
         result.nodes = api.node_count;
         result.solver_finalization_reached = api.solver_finalization_reached;
-        result.process_return_code = api.return_code;
+        result.process_return_code = api.native.mipopt_return_code;
 
-        bool native_incumbent_verified = false;
-        if (!api.values.empty()) {
+        populateNativeMipEvidenceFields(
+            result, api.native, api.environment_count, api.problem_count,
+            api.model_read_count, api.mipopt_count, api.freeprob_count,
+            api.close_count, api.node_count, api.native_open_nodes,
+            static_cast<int>(api.native_solution_pool_count));
+        result.native_mip_threads_requested = api.threads_requested;
+        result.native_mip_threads_set_return_code = api.threads_set_rc;
+        result.native_mip_threads_get_return_code = api.threads_get_rc;
+        result.native_mip_threads_effective = api.threads_effective;
+        result.native_mip_presolve_requested = api.presolve_requested;
+        result.native_mip_presolve_set_return_code = api.presolve_set_rc;
+        result.native_mip_presolve_get_return_code = api.presolve_get_rc;
+        result.native_mip_presolve_effective = api.presolve_effective;
+        result.native_mip_search_requested = api.search_requested;
+        result.native_mip_search_set_return_code = api.search_set_rc;
+        result.native_mip_search_get_return_code = api.search_get_rc;
+        result.native_mip_search_effective = api.search_effective;
+        result.native_mip_node_select_requested = api.node_select_requested;
+        result.native_mip_node_select_set_return_code = api.node_select_set_rc;
+        result.native_mip_node_select_get_return_code = api.node_select_get_rc;
+        result.native_mip_node_select_effective = api.node_select_effective;
+        result.native_mip_time_limit_param_id = 1039;
+        result.native_mip_time_limit_requested =
+            api.native_time_limit_requested;
+        result.native_mip_time_limit_set_return_code =
+            api.native_time_limit_set_rc;
+        result.native_mip_time_limit_get_return_code =
+            api.native_time_limit_get_rc;
+        result.native_mip_time_limit_effective_available =
+            api.native_time_limit_get_rc == 0;
+        result.native_mip_time_limit_effective =
+            api.native_time_limit_effective;
+
+        bool native_candidate_feasible = false;
+        bool native_candidate_objective_consistent = false;
+        double native_candidate_objective = 0.0;
+        if (api.native.objective_available && !api.values.empty()) {
             const std::vector<RoutePlan> candidate_routes =
                 reconstructRoutes(instance, api.values);
             const Verification candidate =
                 verifySolution(instance, candidate_routes, options.lambda);
-            const bool objective_consistent = candidate.feasible &&
+            native_candidate_feasible = candidate.feasible &&
                 candidate.objective_matches && candidate.errors.empty() &&
-                std::fabs(candidate.objective - api.objective) <=
-                    1e-6 * std::max({1.0, std::fabs(candidate.objective),
-                                     std::fabs(api.objective)});
-            if (objective_consistent &&
-                candidate.objective <= result.objective + 1e-7) {
+                std::isfinite(candidate.objective);
+            native_candidate_objective = candidate.objective;
+            native_candidate_objective_consistent =
+                native_candidate_feasible &&
+                std::fabs(candidate.objective - api.native.objective) <=
+                    1e-8 * std::max({1.0, std::fabs(candidate.objective),
+                                     std::fabs(api.native.objective)});
+            if (native_candidate_objective_consistent &&
+                candidate.objective <= result.objective +
+                    1e-8 * std::max({1.0, std::fabs(candidate.objective),
+                                     std::fabs(result.objective)})) {
                 result.routes = candidate_routes;
                 result.verification = candidate;
                 result.final_inventory = candidate.final_inventory;
@@ -4997,46 +5488,94 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
                 result.P = candidate.P;
                 result.objective = candidate.objective;
                 result.upper_bound = candidate.objective;
-                native_incumbent_verified = true;
             } else {
                 result.notes.push_back(
                     "global Gini tree native incumbent was rejected by the independent original-solution verifier or objective consistency check");
             }
         }
+        const bool retained_incumbent_feasible =
+            result.verification.feasible &&
+            result.verification.objective_matches &&
+            result.verification.errors.empty() &&
+            std::isfinite(result.objective);
+        const bool retained_objective_consistent =
+            retained_incumbent_feasible && api.native.objective_available &&
+            std::fabs(result.objective - api.native.objective) <=
+                1e-8 * std::max({1.0, std::fabs(result.objective),
+                                 std::fabs(api.native.objective)});
         result.global_gini_tree_incumbent_verified =
-            native_incumbent_verified ||
-            (result.verification.feasible && result.verification.objective_matches &&
-             result.verification.errors.empty());
-        if (api.best_bound_available) result.lower_bound = api.best_bound;
-        result.gap = (std::fabs(result.upper_bound) > 1e-12 &&
-                      api.best_bound_available)
-            ? std::max(0.0, (result.upper_bound - result.lower_bound) /
-                                std::fabs(result.upper_bound))
-            : 0.0;
+            native_candidate_feasible &&
+            native_candidate_objective_consistent;
+        if (api.native.best_bound_available) {
+            result.lower_bound = api.native.best_bound;
+        }
 
-        const bool native_optimal = statusIsOptimal(api.status);
-        const bool exactness_audit = api.solved && api.lifecycle_valid &&
-            api.solver_finalization_reached && api.best_bound_available &&
+        const bool exactness_lifecycle_complete =
+            api.solved && api.lifecycle_valid &&
+            api.native.mipopt_return_code == 0 &&
+            api.solver_finalization_reached &&
             api.recursive_branching_complete && api.row_migration_complete &&
             api.sibling_isolation_by_construction && api.root_coverage_valid &&
-            api.branch_coverage_valid && !api.callback_abort_used;
-        const bool optimality_consistent = native_optimal &&
-            native_incumbent_verified && exactness_audit &&
-            std::fabs(result.objective - api.best_bound) <=
-                1e-6 * std::max({1.0, std::fabs(result.objective),
-                                 std::fabs(api.best_bound)});
-        result.global_gini_tree_optimality_accepted = optimality_consistent;
-        if (optimality_consistent) {
+            api.branch_coverage_valid && !api.callback_abort_used &&
+            api.callback_failures == 0 && api.coverage_failures == 0 &&
+            api.column_mapping_failures == 0;
+        const StrictCertificateDecision decision =
+            evaluateAndPopulateStrictCertificate(
+                result, api.native, retained_incumbent_feasible,
+                result.objective, retained_incumbent_feasible,
+                retained_objective_consistent,
+                exactness_lifecycle_complete);
+        if (decision.verified_gap_available) {
+            result.gap = decision.verified_project_relative_gap;
+        }
+        result.strict_serialized_lower_bound_matches_native =
+            api.native.best_bound_available &&
+            result.lower_bound == api.native.best_bound;
+        result.strict_serialized_gap_consistent =
+            decision.verified_gap_available &&
+            result.gap == decision.verified_project_relative_gap;
+        result.global_gini_tree_optimality_accepted =
+            decision.strict_certified_original_problem;
+
+        {
+            std::ofstream manifest_out(manifest, std::ios::app);
+            if (manifest_out) {
+                manifest_out
+                    << "root_connectivity_flow_variant_requested,"
+                    << flow_resolution.requested << '\n'
+                    << "root_connectivity_flow_variant_resolved,"
+                    << flow_resolution.resolved << '\n'
+                    << "lp_text_analyzer_rows," << root_model_size.rows << '\n'
+                    << "lp_text_analyzer_columns," << root_model_size.cols << '\n'
+                    << "lp_text_analyzer_nonzeros," << root_model_size.nonzeros << '\n'
+                    << "connectivity_flow_columns," << flow_counts.columns << '\n'
+                    << "connectivity_flow_upper_link_rows,"
+                    << flow_counts.upper_link_rows << '\n'
+                    << "connectivity_flow_lower_link_rows,"
+                    << flow_counts.lower_link_rows << '\n'
+                    << "connectivity_flow_station_balance_rows,"
+                    << flow_counts.station_balance_rows << '\n'
+                    << "connectivity_flow_depot_balance_rows,"
+                    << flow_counts.depot_balance_rows << '\n'
+                    << "connectivity_flow_start_upper_rows,"
+                    << flow_counts.start_upper_rows << '\n'
+                    << "connectivity_flow_start_lower_rows,"
+                    << flow_counts.start_lower_rows << '\n'
+                    << "connectivity_flow_total_rows,"
+                    << flow_counts.total_rows << '\n'
+                    << "connectivity_flow_total_nonzeros,"
+                    << flow_counts.total_nonzeros << '\n';
+            }
+        }
+
+        if (decision.strict_certified_original_problem) {
             result.status = "optimal";
-            result.lower_bound = result.objective;
-            result.upper_bound = result.objective;
-            result.gap = 0.0;
             result.unresolved_intervals = 0;
             result.full_certificate_all_intervals_accounted = true;
             result.full_certificate_rejection_reason = "none";
             result.compact_bc_certificate_valid = true;
             result.certificate =
-                "One persistent CPLEX global Gini tree reported native optimality and best bound; lifecycle, recursive interval coverage, row migration, and the independent original-solution verifier all passed.";
+                "Strict Round 21 global-tree certificate: native CPLEX status 101, zero relative/absolute gap parameter round trips, retained raw best bound, one-problem lifecycle and coverage audits, and an independently verified native incumbent all passed.";
         } else if (!api.solved) {
             result.status = "global_gini_tree_error";
             result.full_certificate_rejection_reason = api.fail_reason.empty()
@@ -5045,18 +5584,28 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
                 "Global Gini tree did not produce a usable solver-final result: " +
                 result.full_certificate_rejection_reason;
         } else {
-            result.status = statusIsTimeLimited(api.status)
+            result.status = decision.certificate_class == "time_limit_valid_bound"
                 ? "global_gini_tree_time_limit"
                 : "global_gini_tree_not_certified";
-            result.full_certificate_rejection_reason = native_optimal
-                ? "native_optimality_failed_verifier_or_exactness_audit"
-                : "native_solver_did_not_report_optimality";
-            result.certificate = api.best_bound_available
-                ? "The one persistent CPLEX tree returned a native solver-final lower bound, but original-problem optimality was not accepted."
+            result.full_certificate_rejection_reason =
+                decision.rejection_reason.empty()
+                    ? decision.certificate_class
+                    : decision.rejection_reason;
+            result.certificate = api.native.best_bound_available
+                ? "The one persistent CPLEX tree returned a raw native solver-final lower bound, but strict original-problem optimality was rejected as " +
+                    decision.certificate_class + "."
                 : "The one persistent CPLEX tree did not return a native solver-final best bound; no official lower-bound row may be synthesized.";
         }
         result.notes.push_back("global Gini tree root model: " + root_lp.string());
-        result.notes.push_back("global Gini tree native CPLEX status: " + api.status);
+        result.notes.push_back("global Gini tree native CPLEX status code/text: " +
+            std::to_string(api.native.status_code) + " / " +
+            api.native.status_text);
+        result.notes.push_back("global Gini tree strict certificate class: " +
+            decision.certificate_class);
+        if (native_candidate_feasible) {
+            result.notes.push_back("verified native candidate objective: " +
+                num(native_candidate_objective));
+        }
     } catch (const std::exception& error) {
         result.status = "global_gini_tree_error";
         result.global_gini_tree_fail_reason = error.what();

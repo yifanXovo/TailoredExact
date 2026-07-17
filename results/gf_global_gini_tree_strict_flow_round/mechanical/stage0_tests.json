@@ -1,0 +1,88 @@
+{
+  "schema": "round21-stage0-mechanical-v1",
+  "generated_at": "2026-07-16T17:07:20+08:00",
+  "executable_sha256": "dfd67bcf4e4dd19cf7096bf5fa16c100d5a6ccefd3bb6df8a30547de39f7136a",
+  "all_passed": true,
+  "tests": [
+    {
+      "test": "StrictCertificateTests",
+      "status": "PASS",
+      "return_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.017220200039446354,
+      "command_line": "E:\\codes\\ExactEBRP\\build_round21\\tests\\StrictCertificateTests.exe",
+      "log": "results/gf_global_gini_tree_strict_flow_round/mechanical/StrictCertificateTests.log",
+      "executable_sha256": "dfd67bcf4e4dd19cf7096bf5fa16c100d5a6ccefd3bb6df8a30547de39f7136a"
+    },
+    {
+      "test": "ConnectivityFlowTests",
+      "status": "PASS",
+      "return_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.018709799740463495,
+      "command_line": "E:\\codes\\ExactEBRP\\build_round21\\tests\\ConnectivityFlowTests.exe",
+      "log": "results/gf_global_gini_tree_strict_flow_round/mechanical/ConnectivityFlowTests.log",
+      "executable_sha256": "dfd67bcf4e4dd19cf7096bf5fa16c100d5a6ccefd3bb6df8a30547de39f7136a"
+    },
+    {
+      "test": "StrictSerializationTests",
+      "status": "PASS",
+      "return_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.017703399993479252,
+      "command_line": "E:\\codes\\ExactEBRP\\build_round21\\tests\\StrictSerializationTests.exe",
+      "log": "results/gf_global_gini_tree_strict_flow_round/mechanical/StrictSerializationTests.log",
+      "executable_sha256": "dfd67bcf4e4dd19cf7096bf5fa16c100d5a6ccefd3bb6df8a30547de39f7136a"
+    },
+    {
+      "test": "GlobalGiniTreeTests",
+      "status": "PASS",
+      "return_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.021468100138008595,
+      "command_line": "E:\\codes\\ExactEBRP\\build_round21\\tests\\GlobalGiniTreeTests.exe",
+      "log": "results/gf_global_gini_tree_strict_flow_round/mechanical/GlobalGiniTreeTests.log",
+      "executable_sha256": "dfd67bcf4e4dd19cf7096bf5fa16c100d5a6ccefd3bb6df8a30547de39f7136a"
+    },
+    {
+      "test": "ControllingLeafSchedulerTests",
+      "status": "PASS",
+      "return_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.018428099807351828,
+      "command_line": "E:\\codes\\ExactEBRP\\build_round21\\tests\\ControllingLeafSchedulerTests.exe",
+      "log": "results/gf_global_gini_tree_strict_flow_round/mechanical/ControllingLeafSchedulerTests.log",
+      "executable_sha256": "dfd67bcf4e4dd19cf7096bf5fa16c100d5a6ccefd3bb6df8a30547de39f7136a"
+    },
+    {
+      "test": "round20_regression_tests",
+      "status": "PASS",
+      "return_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.30767149990424514,
+      "command_line": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round20_regression_tests.py",
+      "log": "results/gf_global_gini_tree_strict_flow_round/mechanical/round20_regression_tests.log",
+      "executable_sha256": "dfd67bcf4e4dd19cf7096bf5fa16c100d5a6ccefd3bb6df8a30547de39f7136a"
+    },
+    {
+      "test": "round21_static_exactness_audit",
+      "status": "PASS",
+      "return_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.20537019986659288,
+      "command_line": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\scripts\\round21_static_exactness_audit.py",
+      "log": "results/gf_global_gini_tree_strict_flow_round/mechanical/round21_static_exactness_audit.log",
+      "executable_sha256": "dfd67bcf4e4dd19cf7096bf5fa16c100d5a6ccefd3bb6df8a30547de39f7136a"
+    },
+    {
+      "test": "round21_historical_certificate_audit",
+      "status": "PASS",
+      "return_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.0834583998657763,
+      "command_line": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\scripts\\round21_historical_certificate_audit.py",
+      "log": "results/gf_global_gini_tree_strict_flow_round/mechanical/round21_historical_certificate_audit.log",
+      "executable_sha256": "dfd67bcf4e4dd19cf7096bf5fa16c100d5a6ccefd3bb6df8a30547de39f7136a"
+    }
+  ]
+}

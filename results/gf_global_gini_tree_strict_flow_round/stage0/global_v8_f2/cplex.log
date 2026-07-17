@@ -1,0 +1,78 @@
+Warning, line 2475: Name 'r_max' does not exist.
+Warning, line 2476: Name 'r_min' does not exist.
+Version identifier: 22.1.1.0 | 2022-11-27 | 9160aff4d
+CPXPARAM_Threads                                 1
+CPXPARAM_MIP_Strategy_Search                     1
+CPXPARAM_TimeLimit                               9.5697891000000013
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+Generic callback                                 0xf0
+Lazy constraint(s) or lazy constraint/branch callback is present.
+    Disabling dual reductions (CPX_PARAM_REDUCE) in presolve.
+    Disabling presolve reductions that prevent crushing forms (CPX_PARAM_PREREFORM).
+Tried aggregator 2 times.
+MIP Presolve eliminated 422 rows and 2 columns.
+MIP Presolve modified 7310 coefficients.
+Aggregator did 16 substitutions.
+Reduced MIP has 1665 rows, 500 columns, and 9072 nonzeros.
+Reduced MIP has 221 binaries, 54 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (12.58 ticks)
+Probing time = 0.00 sec. (4.06 ticks)
+Cover probing fixed 0 vars, tightened 16 bounds.
+Tried aggregator 1 time.
+MIP Presolve modified 16 coefficients.
+Reduced MIP has 1665 rows, 500 columns, and 9072 nonzeros.
+Reduced MIP has 221 binaries, 54 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (3.22 ticks)
+Probing time = 0.00 sec. (3.98 ticks)
+Clique table members: 2427.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: traditional branch-and-cut.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.02 sec. (12.12 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap         Variable B NodeID Parent  Depth
+
+      0     0        0.1037    96                      0.1037      486         
+      0     0        0.1192   101                    Cuts: 35      645         
+      0     0        0.1218   127                    Cuts: 41      969         
+      0     0        0.1218   119                    Cuts: 54     1063         
+      0     0        0.1219   100                    Cuts: 28     1121         
+      0     0        0.1219   101                    Cuts: 21     1166         
+      0     0        0.1219    88                     Cuts: 5     1181         
+      0     0        0.1220    99                    Cuts: 42     1246         
+      0     0        0.1220   111                    Cuts: 36     1371         
+      0     2        0.1220    89                      0.1220     1371                                 0             0
+Elapsed time = 0.23 sec. (497.86 ticks, tree = 0.01 MB, solutions = 0)
+     19    13    infeasible                            0.1500     3183                          X     19     18     10
+     28    18        0.1576    68                      0.1500     3327                  x_1_0_7 D     28     26     17
+     75    36        0.1574    99                      0.1533     4607                          X     75      2      2
+    123    66        0.1553    98                      0.1547     6175                          X    123     10      6
+    160    85        0.1557    97                      0.1552     7731                          X    160    157     10
+    195    82    infeasible                            0.1556     9166                      Y_8 D    195    193     11
+    232    83    infeasible                            0.1559    10711                      Y_8 U    232    159     11
+    272    87        0.1562    88                      0.1561    12388                          X    272    127      9
+    309    92        0.1583    95                      0.1563    13879                      Y_4 D    309    308     11
+*   390+  112                            0.1608        0.1565             2.65%
+    464   133        0.1591    71        0.1608        0.1567    18749    2.52%             Y_8 N    464    463     13
+Elapsed time = 2.39 sec. (3681.13 ticks, tree = 3.25 MB, solutions = 1)
+    607   182        0.1603    86        0.1608        0.1572    22767    2.25%         bit_5_4 U    607    606     16
+    831   235        0.1603    90        0.1608        0.1579    27475    1.79%             Y_4 U    831    829     12
+   1039   216        0.1589   102        0.1608        0.1589    31461    1.15%                 X   1039    949     10
+   1229   178        cutoff              0.1608        0.1597    34854    0.68%             Y_7 U   1229    481     14
+   1420    94        0.1605    98        0.1608        0.1603    38470    0.29%                 X   1420   1419     10
+
+Cover cuts applied:  6
+Implied bound cuts applied:  62
+Flow cuts applied:  2
+Mixed integer rounding cuts applied:  15
+Lift and project cuts applied:  1
+Gomory fractional cuts applied:  3
+
+Root node processing (before b&c):
+  Real time             =    0.22 sec. (497.96 ticks)
+Sequential b&c:
+  Real time             =    5.17 sec. (8651.96 ticks)
+                          ------------
+Total (root+branch&cut) =    5.39 sec. (9149.92 ticks)

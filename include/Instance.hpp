@@ -61,6 +61,10 @@ struct SolveOptions {
     std::string global_gini_tree_row_timing_mode = "deferred";
     bool global_gini_tree_native_mip_start = false;
     bool global_gini_tree_root_connectivity_flow = false;
+    // Empty preserves the legacy Boolean-only interface.  Explicit values are
+    // off, round20-current (F0), zero-return (F1), normalized (F2), and
+    // normalized-start-coupled (F3).
+    std::string global_gini_tree_root_connectivity_flow_variant;
     std::string global_gini_tree_node_trace_path;
     std::string global_gini_tree_bound_trace_path;
     std::string global_gini_tree_manifest_path;

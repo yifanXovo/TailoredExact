@@ -57,7 +57,8 @@ void usage() {
         << "[--frontier-execution-mode scheduler|global-gini-tree] [--global-gini-tree-presolve on|off] "
         << "[--global-gini-tree-search dynamic|traditional|auto] [--global-gini-tree-child-estimate parent-copy|factory-domain] "
         << "[--global-gini-tree-row-attachment full-inherited-pack|exact-incremental-delta] [--global-gini-tree-row-timing deferred|eager] "
-        << "[--global-gini-tree-native-mip-start true|false] [--global-gini-tree-node-trace <path>] "
+        << "[--global-gini-tree-native-mip-start true|false] [--global-gini-tree-root-connectivity-flow true|false] "
+        << "[--global-gini-tree-root-connectivity-flow-variant off|round20-current|zero-return|normalized|normalized-start-coupled] [--global-gini-tree-node-trace <path>] "
         << "[--global-gini-tree-bound-trace <path>] [--global-gini-tree-manifest <path>] [--global-gini-tree-root-export <path>] "
         << "[--frontier-split-batch <N>] [--frontier-retry-passes <N>] [--frontier-retry-nodes <N>] "
         << "[--frontier-retry-reserve <seconds>] [--frontier-relax-seconds <seconds>] [--route-mask-max-v <V>] "
@@ -536,6 +537,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--global-gini-tree-row-timing") opt.global_gini_tree_row_timing_mode = requireValue(i, argc, argv);
         else if (arg == "--global-gini-tree-native-mip-start") opt.global_gini_tree_native_mip_start = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--global-gini-tree-root-connectivity-flow") opt.global_gini_tree_root_connectivity_flow = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--global-gini-tree-root-connectivity-flow-variant") opt.global_gini_tree_root_connectivity_flow_variant = requireValue(i, argc, argv);
         else if (arg == "--global-gini-tree-node-trace") opt.global_gini_tree_node_trace_path = requireValue(i, argc, argv);
         else if (arg == "--global-gini-tree-bound-trace") opt.global_gini_tree_bound_trace_path = requireValue(i, argc, argv);
         else if (arg == "--global-gini-tree-manifest") opt.global_gini_tree_manifest_path = requireValue(i, argc, argv);
@@ -18147,7 +18149,8 @@ int main(int argc, char** argv) {
                 global_single_tree
                     ? r.global_gini_tree_native_best_bound_available
                     : true;
-            if (!global_single_tree) {
+            if (!global_single_tree && r.method != "cplex" &&
+                !r.native_mip_evidence_available) {
                 r.solver_finalization_reached = true;
                 r.process_return_code = 0;
             }

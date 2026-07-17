@@ -1,0 +1,522 @@
+Warning, line 15049: Name 'r_max' does not exist.
+Warning, line 15050: Name 'r_min' does not exist.
+Version identifier: 22.1.1.0 | 2022-11-27 | 9160aff4d
+CPXPARAM_Threads                                 1
+CPXPARAM_MIP_Strategy_Search                     1
+CPXPARAM_TimeLimit                               273.97842900000001
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+Generic callback                                 0xf0
+Lazy constraint(s) or lazy constraint/branch callback is present.
+    Disabling dual reductions (CPX_PARAM_REDUCE) in presolve.
+    Disabling presolve reductions that prevent crushing forms (CPX_PARAM_PREREFORM).
+Tried aggregator 2 times.
+MIP Presolve eliminated 1081 rows and 39 columns.
+MIP Presolve modified 37793 coefficients.
+Aggregator did 44 substitutions.
+Reduced MIP has 11883 rows, 3235 columns, and 63509 nonzeros.
+Reduced MIP has 1474 binaries, 192 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.06 sec. (118.06 ticks)
+Probing fixed 0 vars, tightened 15 bounds.
+Probing time = 0.05 sec. (81.56 ticks)
+Tried aggregator 1 time.
+MIP Presolve eliminated 48 rows and 12 columns.
+MIP Presolve modified 3054 coefficients.
+Reduced MIP has 11835 rows, 3223 columns, and 62963 nonzeros.
+Reduced MIP has 1468 binaries, 186 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.03 sec. (63.02 ticks)
+Probing time = 0.02 sec. (39.34 ticks)
+Clique table members: 33581.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: traditional branch-and-cut.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.45 sec. (939.08 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap         Variable B NodeID Parent  Depth
+
+      0     0        0.0328   300                      0.0328     6261         
+      0     0        0.0347   315                   Cuts: 173    11953         
+      0     0        0.0348   384                   Cuts: 205    14683         
+      0     0        0.0348   377                   Cuts: 201    16461         
+      0     0        0.0348   325                   Cuts: 107    18522         
+      0     0        0.0348   358                   Cuts: 157    20223         
+      0     0        0.0348   263                    Cuts: 37    20276         
+      0     0        0.0348   309                   Cuts: 174    21964         
+      0     2        0.0348   241                      0.0348    21964                                 0             0
+Elapsed time = 6.27 sec. (14042.02 ticks, tree = 0.01 MB, solutions = 0)
+      3     5        0.0415   209                      0.0348    23012                          X      3      1      2
+      5     5        0.0406   280                      0.0348    27076                          X      5      2      3
+      8     8        0.0433   270                      0.0348    27781                          X      8      7      5
+     12    12        0.0431   251                      0.0348    28268                          X     12     10      7
+     15    15        0.0433   259                      0.0348    28704                          X     15     14      9
+     16    16        0.0432   253                      0.0348    28799                          X     16     14      9
+     17    17        0.0433   262                      0.0348    28805                  bit_6_4 U     17     15     10
+     19    17        0.0433   261                      0.0348    28819                 bit_10_4 D     19     17     11
+     21    17        0.0433   263                      0.0348    28875                  bit_8_5 D     21     19     12
+     24    18    infeasible                            0.0348    34150                      Y_2 D     24     23     14
+Elapsed time = 11.81 sec. (24886.83 ticks, tree = 1.54 MB, solutions = 0)
+     26    18        0.0469   292                      0.0415    39749                          X     26      0      1
+     36    28        0.0480   268                      0.0415    40714                          X     36     34      9
+     38    30        0.0480   269                      0.0415    40856                  bit_6_4 U     38     36     10
+     42    32    infeasible                            0.0415    45992                 bit_11_4 D     42     40     13
+     57    43        0.0433   244                      0.0415    48281                          X     57     56      6
+     61    47        0.0435   236                      0.0415    48640                          X     61     60      9
+     69    51    infeasible                            0.0415    50507                     Y_14 D     69     68     15
+     72    50    infeasible                            0.0415    53891                      Y_2 D     72     70     16
+     79    57        0.0452   239                      0.0421    55705                          X     79     78      9
+     80    58        0.0454   235                      0.0421    55826                      Y_5 D     80     79     10
+Elapsed time = 20.94 sec. (41939.25 ticks, tree = 4.97 MB, solutions = 0)
+     92    66        0.0436   295                      0.0427    58979                          X     92     54      4
+    100    74        0.0442   286                      0.0427    59802                          X    100     99      9
+    103    77        0.0477   263                      0.0427    60624                     Y_14 D    103    102     11
+    119    87        0.0437   239                      0.0427    61905                          X    119    118      9
+    124    90    infeasible                            0.0427    64781                     Y_14 D    124    123     13
+    140   100        0.0456   207                      0.0431    67227                      Y_5 U    140    138     10
+    141    99    infeasible                            0.0431    70387                      Y_2 D    141    140     11
+    152   104        0.0433   252                      0.0432    71211                          X    152    151      8
+    160   108        0.0445   251                      0.0432    71895                      Y_5 D    160    159     11
+    163   105    infeasible                            0.0433    95991                  bit_6_4 D    163     16     10
+Elapsed time = 35.45 sec. (68398.05 ticks, tree = 11.22 MB, solutions = 0)
+    169   109    infeasible                            0.0433    99698                      Y_2 D    169    168     12
+    171   109        0.0441   337                      0.0433   102237                          X    171      8      6
+    176   114        0.0446   319                      0.0433   102736                          X    176    174      9
+    177   113    infeasible                            0.0433   106324                      Y_2 D    177    175     10
+    179   113        0.0435   337                      0.0433   109109                          X    179      8      6
+    183   115    infeasible                            0.0433   112662                      Y_2 D    183    182     10
+    188   118        0.0440   250                      0.0433   114146                      Y_5 D    188    186     10
+    191   117    infeasible                            0.0433   119717                      Y_2 D    191    188     11
+    193   119        0.0442   315                      0.0433   125255                      Y_5 D    193    192     10
+    195   119    infeasible                            0.0433   130140                      Y_2 D    195    194     11
+Elapsed time = 45.17 sec. (86743.12 ticks, tree = 12.43 MB, solutions = 0)
+    199   121        0.0455   224                      0.0433   133041                      Y_5 U    199    197     10
+    200   120    infeasible                            0.0433   137369                      Y_2 D    200    199     11
+    203   119    infeasible                            0.0433   141689                      Y_2 D    203    202     11
+    205   119        0.0457   246                      0.0433   144166                      Y_5 U    205    137     10
+    209   117    infeasible                            0.0433   148247                      Y_2 D    209    208     10
+    213   115    infeasible                            0.0433   151284                      Y_2 D    213    211     10
+    217   115        0.0442   307                      0.0434   154471                      Y_5 N    217    153     10
+    218   114    infeasible                            0.0434   159687                      Y_2 D    218    217     11
+    220   114        0.0454   305                      0.0434   162524                      Y_5 U    220    153     10
+    224   114        0.0437   241                      0.0434   164917                          X    224    223      9
+Elapsed time = 53.56 sec. (103229.06 ticks, tree = 11.22 MB, solutions = 0)
+    226   114    infeasible                            0.0434   168502                      Y_2 D    226    224     10
+    231   115    infeasible                            0.0434   172072                      Y_2 D    231    229     10
+    236   118        0.0466   259                      0.0434   174899                     Y_16 D    236    234     11
+    240   118        0.0440   237                      0.0434   175728                      Y_5 D    240    239     10
+    251   123    infeasible                            0.0434   180121                      Y_3 D    251    249     12
+    254   122        0.0440   287                      0.0434   182846                      Y_5 N    254    187     10
+    256   122    infeasible                            0.0434   185433                      Y_2 D    256    255     12
+    258   122        0.0452   237                      0.0434   188646                      Y_5 U    258    187     10
+    259   121    infeasible                            0.0434   191153                      Y_2 D    259    258     11
+    266   124    infeasible                            0.0435   193829                      Y_2 D    266    265     13
+Elapsed time = 61.64 sec. (118596.90 ticks, tree = 12.34 MB, solutions = 0)
+    270   124    infeasible                            0.0435   194899                      Y_3 D    270    268     11
+    273   123        0.0435   333                      0.0435   198253                          X    273    165      9
+    277   123    infeasible                            0.0435   201049                      Y_2 D    277    275     12
+    279   123    infeasible                            0.0435   205270                      Y_2 D    279    278     11
+    282   122        0.0451   250                      0.0435   207877                      Y_5 U    282    239     10
+    286   122        0.0436   281                      0.0435   209979                          X    286    285      9
+    290   124    infeasible                            0.0435   213263                      Y_2 D    290    289     13
+    295   127        0.0456   259                      0.0435   215155                     Y_16 U    295    294     12
+    296   128        0.0467   315                      0.0435   218094                     Y_16 D    296    294     12
+    299   127        0.0437   286                      0.0435   220918                          X    299    179      7
+Elapsed time = 69.08 sec. (133632.78 ticks, tree = 12.44 MB, solutions = 0)
+    301   129        0.0440   273                      0.0435   221148                          X    301    300      9
+    304   128        0.0450   253                      0.0435   224393                      Y_5 U    304     61     10
+    307   127        0.0449   271                      0.0436   227741                      Y_5 U    307     62     10
+    308   126    infeasible                            0.0436   231228                      Y_2 D    308    307     11
+    317   129        0.0449   248                      0.0436   232671                      Y_5 U    317    166     10
+    320   128        0.0438   268                      0.0436   236844                          X    320    115      7
+    327   135        0.0459   280                      0.0436   240483                     Y_16 D    327    325     12
+    331   133    infeasible                            0.0436   244956                      Y_2 D    331    329     14
+    334   132    infeasible                            0.0436   247457                      Y_2 D    334    332     11
+    340   136    infeasible                            0.0436   250076                     Y_14 D    340    339     12
+Elapsed time = 76.95 sec. (149128.68 ticks, tree = 13.28 MB, solutions = 0)
+    344   138    infeasible                            0.0436   254203                      Y_2 D    344    343     14
+    349   139    infeasible                            0.0436   256493                     Y_14 D    349    348     12
+    352   140    infeasible                            0.0436   260695                      Y_2 D    352    351     14
+    356   138    infeasible                            0.0436   264825                      Y_2 D    356    354     11
+    360   138    infeasible                            0.0436   267886                      Y_3 D    360    358     11
+    361   137    infeasible                            0.0436   271182                      Y_2 D    361    359     12
+    371   145        0.0465   301                      0.0436   274087                     Y_16 U    371    370     13
+    374   144        0.0448   257                      0.0436   276430                      Y_5 U    374    310     10
+    376   144    infeasible                            0.0436   279576                      Y_3 D    376    374     11
+    380   142        0.0448   284                      0.0437   285086                      Y_5 U    380    146     10
+Elapsed time = 85.56 sec. (165778.49 ticks, tree = 13.55 MB, solutions = 0)
+    382   142    infeasible                            0.0437   287840                      Y_3 D    382    380     11
+    388   142    infeasible                            0.0437   293415                      Y_2 D    388    386     10
+    390   142        0.0438   305                      0.0437   296221                          X    390    117      8
+    395   147        0.0489   291                      0.0437   299612                     Y_14 D    395    394     12
+    403   149    infeasible                            0.0437   304683                      Y_2 D    403    402     12
+    406   148        0.0442   244                      0.0437   306519                      Y_5 N    406    247     10
+    408   148    infeasible                            0.0437   309483                     Y_14 D    408    407     12
+    416   150    infeasible                            0.0437   312291                      Y_3 D    416    414     11
+    417   149    infeasible                            0.0437   315087                      Y_2 D    417    415     12
+    439   153    infeasible                            0.0438   324363                      Y_2 U    439    437     15
+Elapsed time = 94.61 sec. (183391.69 ticks, tree = 14.80 MB, solutions = 0)
+    446   156        0.0439   271                      0.0438   328975                          X    446    444      9
+    464   166    infeasible                            0.0438   339430                      Y_2 D    464    463     13
+    476   170        0.0445   256                      0.0438   348232                      Y_5 D    476    474     10
+    491   183    infeasible                            0.0438   358004                      Y_2 D    491    489     21
+    509   193        0.0450   275                      0.0438   366144                      Y_3 U    509    508     11
+    520   198        0.0463   272                      0.0438   373284                     Y_16 D    520    518     14
+    534   196    infeasible                            0.0438   383799                      Y_2 D    534    532     13
+    554   202        0.0444   253                      0.0438   392571                      Y_5 N    554    322     10
+    575   219        0.0485   261                      0.0438   401607                      Y_3 U    575    574     19
+    587   223    infeasible                            0.0439   409065                      Y_2 D    587    585     16
+Elapsed time = 116.09 sec. (224337.41 ticks, tree = 21.91 MB, solutions = 0)
+    596   224    infeasible                            0.0439   418676                      Y_3 D    596    594     12
+    601   227    infeasible                            0.0439   422775                      Y_2 D    601    599     16
+    607   229        0.0453   310                      0.0439   430124                  bit_6_4 U    607    606     13
+    630   244        0.0481   299                      0.0439   437346                     Y_14 D    630    629     11
+    644   252        0.0489   322                      0.0439   447566                     Y_14 D    644    643     11
+    667   263    infeasible                            0.0439   458336                      Y_2 D    667    665     10
+    684   276        0.0454   264                      0.0439   466075                      Y_3 D    684    681     19
+    693   277        0.0441   285                      0.0440   474944                          X    693    472      8
+    711   291        0.0450   318                      0.0440   484560                      Y_5 U    711    565     10
+    717   293        0.0483   282                      0.0440   494437                      Y_3 D    717    715     11
+Elapsed time = 138.42 sec. (268355.27 ticks, tree = 28.95 MB, solutions = 0)
+    727   295    infeasible                            0.0440   502790                      Y_3 D    727    254     11
+    742   304        0.0482   249                      0.0441   512086                     Y_14 D    742    741     12
+    757   303        0.0451   281                      0.0441   521886                      Y_5 U    757    475     10
+    770   304        0.0491   310                      0.0441   530613                      Y_3 D    770    274     11
+    785   313    infeasible                            0.0441   540474                      Y_2 D    785    783     19
+    803   319        0.0477   274                      0.0441   549124                     Y_14 D    803    802     11
+    809   319    infeasible                            0.0441   560677                      Y_2 D    809    808     12
+    818   318        0.0482   281                      0.0442   570386                     Y_14 D    818    817     11
+    827   315        0.0452   274                      0.0442   579892                      Y_5 U    827    801     10
+    842   324        0.0487   280                      0.0442   590192                      Y_3 D    842    287     11
+Elapsed time = 161.56 sec. (312863.97 ticks, tree = 31.73 MB, solutions = 0)
+    846   324        0.0477   308                      0.0442   599113                     Y_14 D    846    845     11
+    865   339        0.0457   283                      0.0442   606791                      Y_1 U    865    864     17
+    881   351        0.0476   305                      0.0442   616449                      Y_3 U    881    880     15
+    899   355        0.0457   297                      0.0442   625420                     Y_16 D    899    248     11
+    914   356        0.0452   301                      0.0442   635186                      Y_5 U    914    101     10
+    919   355    infeasible                            0.0443   646028                      Y_2 D    919    918     12
+    927   353        0.0454   294                      0.0443   654386                     Y_16 D    927    875     10
+    935   351        0.0445   296                      0.0443   664825                          X    935     95      7
+    953   365        0.0449   317                      0.0443   672751                     Y_16 U    953    952     11
+    972   376        0.0483   279                      0.0443   681217                      Y_3 D    972    423     11
+Elapsed time = 184.89 sec. (356803.68 ticks, tree = 37.04 MB, solutions = 0)
+    978   374        0.0444   308                      0.0443   687264                     Y_14 N    978    907     10
+    990   378        0.0457   284                      0.0443   697611                     Y_16 D    990    121     11
+   1002   380        0.0486   307                      0.0443   708657                     Y_14 D   1002   1001     11
+   1015   379        0.0480   291                      0.0444   718521                      Y_3 D   1015    393     11
+   1029   387        0.0480   317                      0.0444   727352                      Y_3 U   1029   1027     19
+   1039   393        0.0449   341                      0.0444   735013                     Y_16 U   1039   1038     11
+   1065   409    infeasible                            0.0444   743715                      Y_2 D   1065   1063     22
+   1086   420        0.0476   306                      0.0444   753512                      Y_1 U   1086   1084     19
+   1097   427        0.0473   304                      0.0444   760192                      Y_3 U   1097   1096     17
+   1109   429        0.0471   311                      0.0444   771515                     Y_14 N   1109   1037     10
+Elapsed time = 207.62 sec. (400067.60 ticks, tree = 42.18 MB, solutions = 0)
+   1120   430    infeasible                            0.0444   784256                      Y_2 D   1120   1118     12
+   1143   443        0.0460   297                      0.0445   793830                     Y_10 D   1143   1142     15
+   1149   449        0.0470   311                      0.0445   803183                      Y_1 D   1149   1147     18
+   1180   470        0.0469   338                      0.0445   813220                      Y_1 D   1180   1178     19
+   1183   473        0.0477   273                      0.0445   820606                     Y_19 N   1183   1181     21
+   1210   486    infeasible                            0.0445   830398                      Y_2 D   1210   1208     24
+   1221   487    infeasible                            0.0445   840501                      Y_2 D   1221   1218     15
+   1227   485    infeasible                            0.0445   847993                      Y_2 U   1227    751     10
+   1246   494    infeasible                            0.0445   855946                      Y_2 D   1246   1244     19
+   1257   499    infeasible                            0.0445   865021                      Y_2 D   1257    193     11
+Elapsed time = 231.03 sec. (445325.86 ticks, tree = 49.37 MB, solutions = 0)
+   1272   508    infeasible                            0.0445   874200                      Y_3 D   1272   1270     19
+   1280   508    infeasible                            0.0446   882969                 bit_11_4 D   1280   1278     14
+   1291   517        0.0470   226                      0.0446   891511                   z_0_13 D   1291   1289     22
+   1316   540        0.0474   198                      0.0446   904943                   z_2_18 U   1316   1315     38
+   1339   545        0.0476   331                      0.0446   913031                     Y_16 N   1339   1338     11
+   1353   551        0.0472   288                      0.0446   923005                      Y_5 D   1353   1352     13
+   1370   554    infeasible                            0.0446   932988                      Y_2 D   1370    751     10
+   1386   570        0.0467   218                      0.0446   943140                   z_1_18 U   1386   1384     19
+   1395   577        0.0467   214                      0.0446   954355                   z_1_19 N   1395   1393     25
+   1402   584        0.0471   176                      0.0446   962415                    z_0_3 N   1402   1401     30
+Elapsed time = 253.09 sec. (488777.86 ticks, tree = 57.80 MB, solutions = 0)
+   1417   585        0.0457   320                      0.0446   968814                     Y_16 D   1417    952     11
+   1431   593    infeasible                            0.0446   979028                      Y_2 D   1431   1429     23
+   1450   604        0.0475   290                      0.0446   988099                      Y_1 D   1450   1448     21
+   1462   606        0.0479   302                      0.0446   996833                      Y_3 U   1462   1461     14
+   1481   609    infeasible                            0.0446  1004911                      Y_2 U   1481   1478     10
+   1490   612    infeasible                            0.0446  1014734                      Y_3 D   1490   1488     13
+   1526   624        0.0482   319                      0.0446  1024453                      Y_3 D   1526    632     13
+   1541   631    infeasible                            0.0446  1036007                      Y_2 D   1541   1540     22
+   1548   628    infeasible                            0.0447  1045761                     Y_15 U   1548   1546     12
+
+GUB cover cuts applied:  1
+Cover cuts applied:  10
+Implied bound cuts applied:  232
+Flow cuts applied:  28
+Mixed integer rounding cuts applied:  40
+Zero-half cuts applied:  4
+Gomory fractional cuts applied:  4
+
+Root node processing (before b&c):
+  Real time             =    6.16 sec. (13831.16 ticks)
+Sequential b&c:
+  Real time             =  267.83 sec. (514315.99 ticks)
+                          ------------
+Total (root+branch&cut) =  273.98 sec. (528147.15 ticks)
+CPLEX Error  1217: No solution exists.
+CPLEX Error  1217: No solution exists.
+CPLEX Error  1217: No solution exists.
+
+--- ROUND21 RUNNER CAPTURED STDOUT ---
+Version identifier: 22.1.1.0 | 2022-11-27 | 9160aff4d
+CPXPARAM_Threads                                 1
+CPXPARAM_MIP_Strategy_Search                     1
+CPXPARAM_TimeLimit                               273.97842900000001
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+Generic callback                                 0xf0
+Tried aggregator 2 times.
+MIP Presolve eliminated 1081 rows and 39 columns.
+MIP Presolve modified 37793 coefficients.
+Aggregator did 44 substitutions.
+Reduced MIP has 11883 rows, 3235 columns, and 63509 nonzeros.
+Reduced MIP has 1474 binaries, 192 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.06 sec. (118.06 ticks)
+Probing fixed 0 vars, tightened 15 bounds.
+Probing time = 0.05 sec. (81.56 ticks)
+Tried aggregator 1 time.
+MIP Presolve eliminated 48 rows and 12 columns.
+MIP Presolve modified 3054 coefficients.
+Reduced MIP has 11835 rows, 3223 columns, and 62963 nonzeros.
+Reduced MIP has 1468 binaries, 186 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.03 sec. (63.02 ticks)
+Probing time = 0.02 sec. (39.34 ticks)
+Clique table members: 33581.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: traditional branch-and-cut.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.45 sec. (939.08 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap         Variable B NodeID Parent  Depth
+
+      0     0        0.0328   300                      0.0328     6261         
+      0     0        0.0347   315                   Cuts: 173    11953         
+      0     0        0.0348   384                   Cuts: 205    14683         
+      0     0        0.0348   377                   Cuts: 201    16461         
+      0     0        0.0348   325                   Cuts: 107    18522         
+      0     0        0.0348   358                   Cuts: 157    20223         
+      0     0        0.0348   263                    Cuts: 37    20276         
+      0     0        0.0348   309                   Cuts: 174    21964         
+      0     2        0.0348   241                      0.0348    21964                                 0             0
+Elapsed time = 6.27 sec. (14042.02 ticks, tree = 0.01 MB, solutions = 0)
+      3     5        0.0415   209                      0.0348    23012                          X      3      1      2
+      5     5        0.0406   280                      0.0348    27076                          X      5      2      3
+      8     8        0.0433   270                      0.0348    27781                          X      8      7      5
+     12    12        0.0431   251                      0.0348    28268                          X     12     10      7
+     15    15        0.0433   259                      0.0348    28704                          X     15     14      9
+     16    16        0.0432   253                      0.0348    28799                          X     16     14      9
+     17    17        0.0433   262                      0.0348    28805                  bit_6_4 U     17     15     10
+     19    17        0.0433   261                      0.0348    28819                 bit_10_4 D     19     17     11
+     21    17        0.0433   263                      0.0348    28875                  bit_8_5 D     21     19     12
+     24    18    infeasible                            0.0348    34150                      Y_2 D     24     23     14
+Elapsed time = 11.81 sec. (24886.83 ticks, tree = 1.54 MB, solutions = 0)
+     26    18        0.0469   292                      0.0415    39749                          X     26      0      1
+     36    28        0.0480   268                      0.0415    40714                          X     36     34      9
+     38    30        0.0480   269                      0.0415    40856                  bit_6_4 U     38     36     10
+     42    32    infeasible                            0.0415    45992                 bit_11_4 D     42     40     13
+     57    43        0.0433   244                      0.0415    48281                          X     57     56      6
+     61    47        0.0435   236                      0.0415    48640                          X     61     60      9
+     69    51    infeasible                            0.0415    50507                     Y_14 D     69     68     15
+     72    50    infeasible                            0.0415    53891                      Y_2 D     72     70     16
+     79    57        0.0452   239                      0.0421    55705                          X     79     78      9
+     80    58        0.0454   235                      0.0421    55826                      Y_5 D     80     79     10
+Elapsed time = 20.94 sec. (41939.25 ticks, tree = 4.97 MB, solutions = 0)
+     92    66        0.0436   295                      0.0427    58979                          X     92     54      4
+    100    74        0.0442   286                      0.0427    59802                          X    100     99      9
+    103    77        0.0477   263                      0.0427    60624                     Y_14 D    103    102     11
+    119    87        0.0437   239                      0.0427    61905                          X    119    118      9
+    124    90    infeasible                            0.0427    64781                     Y_14 D    124    123     13
+    140   100        0.0456   207                      0.0431    67227                      Y_5 U    140    138     10
+    141    99    infeasible                            0.0431    70387                      Y_2 D    141    140     11
+    152   104        0.0433   252                      0.0432    71211                          X    152    151      8
+    160   108        0.0445   251                      0.0432    71895                      Y_5 D    160    159     11
+    163   105    infeasible                            0.0433    95991                  bit_6_4 D    163     16     10
+Elapsed time = 35.45 sec. (68398.05 ticks, tree = 11.22 MB, solutions = 0)
+    169   109    infeasible                            0.0433    99698                      Y_2 D    169    168     12
+    171   109        0.0441   337                      0.0433   102237                          X    171      8      6
+    176   114        0.0446   319                      0.0433   102736                          X    176    174      9
+    177   113    infeasible                            0.0433   106324                      Y_2 D    177    175     10
+    179   113        0.0435   337                      0.0433   109109                          X    179      8      6
+    183   115    infeasible                            0.0433   112662                      Y_2 D    183    182     10
+    188   118        0.0440   250                      0.0433   114146                      Y_5 D    188    186     10
+    191   117    infeasible                            0.0433   119717                      Y_2 D    191    188     11
+    193   119        0.0442   315                      0.0433   125255                      Y_5 D    193    192     10
+    195   119    infeasible                            0.0433   130140                      Y_2 D    195    194     11
+Elapsed time = 45.17 sec. (86743.12 ticks, tree = 12.43 MB, solutions = 0)
+    199   121        0.0455   224                      0.0433   133041                      Y_5 U    199    197     10
+    200   120    infeasible                            0.0433   137369                      Y_2 D    200    199     11
+    203   119    infeasible                            0.0433   141689                      Y_2 D    203    202     11
+    205   119        0.0457   246                      0.0433   144166                      Y_5 U    205    137     10
+    209   117    infeasible                            0.0433   148247                      Y_2 D    209    208     10
+    213   115    infeasible                            0.0433   151284                      Y_2 D    213    211     10
+    217   115        0.0442   307                      0.0434   154471                      Y_5 N    217    153     10
+    218   114    infeasible                            0.0434   159687                      Y_2 D    218    217     11
+    220   114        0.0454   305                      0.0434   162524                      Y_5 U    220    153     10
+    224   114        0.0437   241                      0.0434   164917                          X    224    223      9
+Elapsed time = 53.56 sec. (103229.06 ticks, tree = 11.22 MB, solutions = 0)
+    226   114    infeasible                            0.0434   168502                      Y_2 D    226    224     10
+    231   115    infeasible                            0.0434   172072                      Y_2 D    231    229     10
+    236   118        0.0466   259                      0.0434   174899                     Y_16 D    236    234     11
+    240   118        0.0440   237                      0.0434   175728                      Y_5 D    240    239     10
+    251   123    infeasible                            0.0434   180121                      Y_3 D    251    249     12
+    254   122        0.0440   287                      0.0434   182846                      Y_5 N    254    187     10
+    256   122    infeasible                            0.0434   185433                      Y_2 D    256    255     12
+    258   122        0.0452   237                      0.0434   188646                      Y_5 U    258    187     10
+    259   121    infeasible                            0.0434   191153                      Y_2 D    259    258     11
+    266   124    infeasible                            0.0435   193829                      Y_2 D    266    265     13
+Elapsed time = 61.64 sec. (118596.90 ticks, tree = 12.34 MB, solutions = 0)
+    270   124    infeasible                            0.0435   194899                      Y_3 D    270    268     11
+    273   123        0.0435   333                      0.0435   198253                          X    273    165      9
+    277   123    infeasible                            0.0435   201049                      Y_2 D    277    275     12
+    279   123    infeasible                            0.0435   205270                      Y_2 D    279    278     11
+    282   122        0.0451   250                      0.0435   207877                      Y_5 U    282    239     10
+    286   122        0.0436   281                      0.0435   209979                          X    286    285      9
+    290   124    infeasible                            0.0435   213263                      Y_2 D    290    289     13
+    295   127        0.0456   259                      0.0435   215155                     Y_16 U    295    294     12
+    296   128        0.0467   315                      0.0435   218094                     Y_16 D    296    294     12
+    299   127        0.0437   286                      0.0435   220918                          X    299    179      7
+Elapsed time = 69.08 sec. (133632.78 ticks, tree = 12.44 MB, solutions = 0)
+    301   129        0.0440   273                      0.0435   221148                          X    301    300      9
+    304   128        0.0450   253                      0.0435   224393                      Y_5 U    304     61     10
+    307   127        0.0449   271                      0.0436   227741                      Y_5 U    307     62     10
+    308   126    infeasible                            0.0436   231228                      Y_2 D    308    307     11
+    317   129        0.0449   248                      0.0436   232671                      Y_5 U    317    166     10
+    320   128        0.0438   268                      0.0436   236844                          X    320    115      7
+    327   135        0.0459   280                      0.0436   240483                     Y_16 D    327    325     12
+    331   133    infeasible                            0.0436   244956                      Y_2 D    331    329     14
+    334   132    infeasible                            0.0436   247457                      Y_2 D    334    332     11
+    340   136    infeasible                            0.0436   250076                     Y_14 D    340    339     12
+Elapsed time = 76.95 sec. (149128.68 ticks, tree = 13.28 MB, solutions = 0)
+    344   138    infeasible                            0.0436   254203                      Y_2 D    344    343     14
+    349   139    infeasible                            0.0436   256493                     Y_14 D    349    348     12
+    352   140    infeasible                            0.0436   260695                      Y_2 D    352    351     14
+    356   138    infeasible                            0.0436   264825                      Y_2 D    356    354     11
+    360   138    infeasible                            0.0436   267886                      Y_3 D    360    358     11
+    361   137    infeasible                            0.0436   271182                      Y_2 D    361    359     12
+    371   145        0.0465   301                      0.0436   274087                     Y_16 U    371    370     13
+    374   144        0.0448   257                      0.0436   276430                      Y_5 U    374    310     10
+    376   144    infeasible                            0.0436   279576                      Y_3 D    376    374     11
+    380   142        0.0448   284                      0.0437   285086                      Y_5 U    380    146     10
+Elapsed time = 85.56 sec. (165778.49 ticks, tree = 13.55 MB, solutions = 0)
+    382   142    infeasible                            0.0437   287840                      Y_3 D    382    380     11
+    388   142    infeasible                            0.0437   293415                      Y_2 D    388    386     10
+    390   142        0.0438   305                      0.0437   296221                          X    390    117      8
+    395   147        0.0489   291                      0.0437   299612                     Y_14 D    395    394     12
+    403   149    infeasible                            0.0437   304683                      Y_2 D    403    402     12
+    406   148        0.0442   244                      0.0437   306519                      Y_5 N    406    247     10
+    408   148    infeasible                            0.0437   309483                     Y_14 D    408    407     12
+    416   150    infeasible                            0.0437   312291                      Y_3 D    416    414     11
+    417   149    infeasible                            0.0437   315087                      Y_2 D    417    415     12
+    439   153    infeasible                            0.0438   324363                      Y_2 U    439    437     15
+Elapsed time = 94.61 sec. (183391.69 ticks, tree = 14.80 MB, solutions = 0)
+    446   156        0.0439   271                      0.0438   328975                          X    446    444      9
+    464   166    infeasible                            0.0438   339430                      Y_2 D    464    463     13
+    476   170        0.0445   256                      0.0438   348232                      Y_5 D    476    474     10
+    491   183    infeasible                            0.0438   358004                      Y_2 D    491    489     21
+    509   193        0.0450   275                      0.0438   366144                      Y_3 U    509    508     11
+    520   198        0.0463   272                      0.0438   373284                     Y_16 D    520    518     14
+    534   196    infeasible                            0.0438   383799                      Y_2 D    534    532     13
+    554   202        0.0444   253                      0.0438   392571                      Y_5 N    554    322     10
+    575   219        0.0485   261                      0.0438   401607                      Y_3 U    575    574     19
+    587   223    infeasible                            0.0439   409065                      Y_2 D    587    585     16
+Elapsed time = 116.09 sec. (224337.41 ticks, tree = 21.91 MB, solutions = 0)
+    596   224    infeasible                            0.0439   418676                      Y_3 D    596    594     12
+    601   227    infeasible                            0.0439   422775                      Y_2 D    601    599     16
+    607   229        0.0453   310                      0.0439   430124                  bit_6_4 U    607    606     13
+    630   244        0.0481   299                      0.0439   437346                     Y_14 D    630    629     11
+    644   252        0.0489   322                      0.0439   447566                     Y_14 D    644    643     11
+    667   263    infeasible                            0.0439   458336                      Y_2 D    667    665     10
+    684   276        0.0454   264                      0.0439   466075                      Y_3 D    684    681     19
+    693   277        0.0441   285                      0.0440   474944                          X    693    472      8
+    711   291        0.0450   318                      0.0440   484560                      Y_5 U    711    565     10
+    717   293        0.0483   282                      0.0440   494437                      Y_3 D    717    715     11
+Elapsed time = 138.42 sec. (268355.27 ticks, tree = 28.95 MB, solutions = 0)
+    727   295    infeasible                            0.0440   502790                      Y_3 D    727    254     11
+    742   304        0.0482   249                      0.0441   512086                     Y_14 D    742    741     12
+    757   303        0.0451   281                      0.0441   521886                      Y_5 U    757    475     10
+    770   304        0.0491   310                      0.0441   530613                      Y_3 D    770    274     11
+    785   313    infeasible                            0.0441   540474                      Y_2 D    785    783     19
+    803   319        0.0477   274                      0.0441   549124                     Y_14 D    803    802     11
+    809   319    infeasible                            0.0441   560677                      Y_2 D    809    808     12
+    818   318        0.0482   281                      0.0442   570386                     Y_14 D    818    817     11
+    827   315        0.0452   274                      0.0442   579892                      Y_5 U    827    801     10
+    842   324        0.0487   280                      0.0442   590192                      Y_3 D    842    287     11
+Elapsed time = 161.56 sec. (312863.97 ticks, tree = 31.73 MB, solutions = 0)
+    846   324        0.0477   308                      0.0442   599113                     Y_14 D    846    845     11
+    865   339        0.0457   283                      0.0442   606791                      Y_1 U    865    864     17
+    881   351        0.0476   305                      0.0442   616449                      Y_3 U    881    880     15
+    899   355        0.0457   297                      0.0442   625420                     Y_16 D    899    248     11
+    914   356        0.0452   301                      0.0442   635186                      Y_5 U    914    101     10
+    919   355    infeasible                            0.0443   646028                      Y_2 D    919    918     12
+    927   353        0.0454   294                      0.0443   654386                     Y_16 D    927    875     10
+    935   351        0.0445   296                      0.0443   664825                          X    935     95      7
+    953   365        0.0449   317                      0.0443   672751                     Y_16 U    953    952     11
+    972   376        0.0483   279                      0.0443   681217                      Y_3 D    972    423     11
+Elapsed time = 184.89 sec. (356803.68 ticks, tree = 37.04 MB, solutions = 0)
+    978   374        0.0444   308                      0.0443   687264                     Y_14 N    978    907     10
+    990   378        0.0457   284                      0.0443   697611                     Y_16 D    990    121     11
+   1002   380        0.0486   307                      0.0443   708657                     Y_14 D   1002   1001     11
+   1015   379        0.0480   291                      0.0444   718521                      Y_3 D   1015    393     11
+   1029   387        0.0480   317                      0.0444   727352                      Y_3 U   1029   1027     19
+   1039   393        0.0449   341                      0.0444   735013                     Y_16 U   1039   1038     11
+   1065   409    infeasible                            0.0444   743715                      Y_2 D   1065   1063     22
+   1086   420        0.0476   306                      0.0444   753512                      Y_1 U   1086   1084     19
+   1097   427        0.0473   304                      0.0444   760192                      Y_3 U   1097   1096     17
+   1109   429        0.0471   311                      0.0444   771515                     Y_14 N   1109   1037     10
+Elapsed time = 207.62 sec. (400067.60 ticks, tree = 42.18 MB, solutions = 0)
+   1120   430    infeasible                            0.0444   784256                      Y_2 D   1120   1118     12
+   1143   443        0.0460   297                      0.0445   793830                     Y_10 D   1143   1142     15
+   1149   449        0.0470   311                      0.0445   803183                      Y_1 D   1149   1147     18
+   1180   470        0.0469   338                      0.0445   813220                      Y_1 D   1180   1178     19
+   1183   473        0.0477   273                      0.0445   820606                     Y_19 N   1183   1181     21
+   1210   486    infeasible                            0.0445   830398                      Y_2 D   1210   1208     24
+   1221   487    infeasible                            0.0445   840501                      Y_2 D   1221   1218     15
+   1227   485    infeasible                            0.0445   847993                      Y_2 U   1227    751     10
+   1246   494    infeasible                            0.0445   855946                      Y_2 D   1246   1244     19
+   1257   499    infeasible                            0.0445   865021                      Y_2 D   1257    193     11
+Elapsed time = 231.03 sec. (445325.86 ticks, tree = 49.37 MB, solutions = 0)
+   1272   508    infeasible                            0.0445   874200                      Y_3 D   1272   1270     19
+   1280   508    infeasible                            0.0446   882969                 bit_11_4 D   1280   1278     14
+   1291   517        0.0470   226                      0.0446   891511                   z_0_13 D   1291   1289     22
+   1316   540        0.0474   198                      0.0446   904943                   z_2_18 U   1316   1315     38
+   1339   545        0.0476   331                      0.0446   913031                     Y_16 N   1339   1338     11
+   1353   551        0.0472   288                      0.0446   923005                      Y_5 D   1353   1352     13
+   1370   554    infeasible                            0.0446   932988                      Y_2 D   1370    751     10
+   1386   570        0.0467   218                      0.0446   943140                   z_1_18 U   1386   1384     19
+   1395   577        0.0467   214                      0.0446   954355                   z_1_19 N   1395   1393     25
+   1402   584        0.0471   176                      0.0446   962415                    z_0_3 N   1402   1401     30
+Elapsed time = 253.09 sec. (488777.86 ticks, tree = 57.80 MB, solutions = 0)
+   1417   585        0.0457   320                      0.0446   968814                     Y_16 D   1417    952     11
+   1431   593    infeasible                            0.0446   979028                      Y_2 D   1431   1429     23
+   1450   604        0.0475   290                      0.0446   988099                      Y_1 D   1450   1448     21
+   1462   606        0.0479   302                      0.0446   996833                      Y_3 U   1462   1461     14
+   1481   609    infeasible                            0.0446  1004911                      Y_2 U   1481   1478     10
+   1490   612    infeasible                            0.0446  1014734                      Y_3 D   1490   1488     13
+   1526   624        0.0482   319                      0.0446  1024453                      Y_3 D   1526    632     13
+   1541   631    infeasible                            0.0446  1036007                      Y_2 D   1541   1540     22
+   1548   628    infeasible                            0.0447  1045761                     Y_15 U   1548   1546     12
+
+GUB cover cuts applied:  1
+Cover cuts applied:  10
+Implied bound cuts applied:  232
+Flow cuts applied:  28
+Mixed integer rounding cuts applied:  40
+Zero-half cuts applied:  4
+Gomory fractional cuts applied:  4
+
+Root node processing (before b&c):
+  Real time             =    6.16 sec. (13831.16 ticks)
+Sequential b&c:
+  Real time             =  267.83 sec. (514315.99 ticks)
+                          ------------
+Total (root+branch&cut) =  273.98 sec. (528147.15 ticks)
+CPLEX Error  1217: No solution exists.
+CPLEX Error  1217: No solution exists.
+CPLEX Error  1217: No solution exists.
+moderate_seed3301.txt gcap-frontier global_gini_tree_time_limit obj=0.0491526 runtime=294.158 columns=0
+
+--- ROUND21 RUNNER CAPTURED STDERR ---
