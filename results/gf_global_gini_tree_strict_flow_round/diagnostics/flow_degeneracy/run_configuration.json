@@ -1,0 +1,32 @@
+{
+  "cplex_available": true,
+  "cplex_executable": "C:\\Program Files\\IBM\\ILOG\\CPLEX_Studio2211\\cplex\\bin\\x64_win64\\cplex.exe",
+  "created_at": "2026-07-16T19:15:02+08:00",
+  "diagnostic_only": true,
+  "discovered_lp_mappings": {
+    "high_imbalance_seed3202": "results/gf_global_gini_tree_strict_flow_round/runs/stage1__high_imbalance_seed3202__f0__300s/global_root.lp.gz",
+    "moderate_seed3301": "results/gf_global_gini_tree_strict_flow_round/runs/stage1__moderate_seed3301__f0__300s/global_root.lp.gz",
+    "tight_T_seed3101": "results/gf_global_gini_tree_strict_flow_round/runs/stage1__tight_T_seed3101__f0__300s/global_root.lp.gz"
+  },
+  "dry_run": false,
+  "explicit_lp_mappings": {},
+  "face_absolute_tolerance": 1e-09,
+  "face_relative_tolerance": 1e-09,
+  "feeds_production": false,
+  "gzip_threshold_bytes": 262144,
+  "instances": [
+    "moderate_seed3301",
+    "tight_T_seed3101",
+    "high_imbalance_seed3202"
+  ],
+  "positive_threshold": 1e-08,
+  "production_dependency": "none",
+  "serial_threads": 1,
+  "source_origins": {
+    "high_imbalance_seed3202": "json:results/gf_global_gini_tree_strict_flow_round/raw/stage1__high_imbalance_seed3202__f0__300s.json:global_gini_tree_root_model_path",
+    "moderate_seed3301": "json:results/gf_global_gini_tree_strict_flow_round/raw/stage1__moderate_seed3301__f0__300s.json:global_gini_tree_root_model_path",
+    "tight_T_seed3101": "json:results/gf_global_gini_tree_strict_flow_round/raw/stage1__tight_T_seed3101__f0__300s.json:global_gini_tree_root_model_path"
+  },
+  "time_limit_seconds_per_solve": 300,
+  "x_small_threshold": 1e-08
+}

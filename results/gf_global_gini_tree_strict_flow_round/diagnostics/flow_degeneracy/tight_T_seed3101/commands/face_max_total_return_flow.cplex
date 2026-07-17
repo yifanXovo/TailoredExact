@@ -1,0 +1,12 @@
+set threads 1
+set timelimit 300
+set preprocessing presolve yes
+set simplex display 2
+set simplex tolerances feasibility 1e-9
+set simplex tolerances optimality 1e-9
+read "E:/codes/ExactEBRP/results/gf_global_gini_tree_strict_flow_round/diagnostics/flow_degeneracy/tight_T_seed3101/models/face_max_total_return_flow.lp"
+display problem stats
+optimize
+display solution objective
+write "E:/codes/ExactEBRP/results/gf_global_gini_tree_strict_flow_round/diagnostics/flow_degeneracy/tight_T_seed3101/solutions/face_max_total_return_flow.sol"
+quit

@@ -10,6 +10,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <limits>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -615,7 +616,7 @@ void writeMethodRow(std::ostringstream& out,
 
 std::string comparisonCsv(const std::vector<std::pair<ebrp::SolveResult, ebrp::SolveResult>>& rows) {
     std::ostringstream out;
-    out << std::setprecision(12);
+    out << std::setprecision(std::numeric_limits<double>::max_digits10);
     out << "instance,method,method_scope,solves_original_objective,is_bpc,certificate_type,"
         << "status,objective,lower_bound,upper_bound,gap,runtime_seconds,wall_time_seconds,"
         << "aggregate_worker_time_seconds,stop_reason,"

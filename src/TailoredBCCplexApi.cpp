@@ -84,6 +84,7 @@ constexpr CPXLONG kContextGlobalProgress = 0x0010;
 constexpr int kParamThreads = 1067;
 constexpr int kParamTimeLimit = 1039;
 constexpr int kParamMipGap = 2009;
+constexpr int kParamAbsoluteMipGap = 2008;
 constexpr int kParamScreenOutput = 1035;
 constexpr int kParamMipDisplay = 2012;
 constexpr int kParamPreprocessingPresolve = 1030;
@@ -113,21 +114,26 @@ using CPXreadcopyprob_t = int (__stdcall *)(CPXCENVptr, CPXLPptr, const char*, c
 using CPXsetintparam_t = int (__stdcall *)(CPXENVptr, int, CPXINT);
 using CPXsetdblparam_t = int (__stdcall *)(CPXENVptr, int, double);
 using CPXgetintparam_t = int (__stdcall *)(CPXCENVptr, int, CPXINT*);
+using CPXgetdblparam_t = int (__stdcall *)(CPXCENVptr, int, double*);
+using CPXsetlogfilename_t = int (__stdcall *)(CPXENVptr, const char*, const char*);
 using CPXcallbacksetfunc_t = int (__stdcall *)(CPXENVptr, CPXLPptr, CPXLONG, CPXCALLBACKFUNC, void*);
 using CPXmipopt_t = int (__stdcall *)(CPXCENVptr, CPXLPptr);
 using CPXgetstat_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr);
 using CPXgetstatstring_t = char* (__stdcall *)(CPXCENVptr, int, char*);
 using CPXgetobjval_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr, double*);
 using CPXgetbestobjval_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr, double*);
-using CPXgetnodecnt_t = CPXLONG (__stdcall *)(CPXCENVptr, CPXCLPptr);
-using CPXgetnodeleftcnt_t = CPXLONG (__stdcall *)(CPXCENVptr, CPXCLPptr);
-using CPXgetmipitcnt_t = CPXLONG (__stdcall *)(CPXCENVptr, CPXCLPptr);
+using CPXgetmiprelgap_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr, double*);
+using CPXgetnodecnt_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr);
+using CPXgetnodeleftcnt_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr);
+using CPXgetmipitcnt_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr);
 using CPXgetsolnpoolnumsolns_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr);
 using CPXgetnumcuts_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr, int, int*);
 using CPXaddmipstarts_t = int (__stdcall *)(CPXCENVptr, CPXLPptr, int, int,
     const int*, const int*, const double*, const int*, char**);
 using CPXgetnummipstarts_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr);
 using CPXgetnumcols_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr);
+using CPXgetnumrows_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr);
+using CPXgetnumnz_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr);
 using CPXgetx_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr, double*, int, int);
 using CPXgetcolname_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr, char**, char*, int, int*, int, int);
 using CPXgetlb_t = int (__stdcall *)(CPXCENVptr, CPXCLPptr, double*, int, int);
@@ -158,12 +164,15 @@ struct Api {
     CPXsetintparam_t setintparam = nullptr;
     CPXsetdblparam_t setdblparam = nullptr;
     CPXgetintparam_t getintparam = nullptr;
+    CPXgetdblparam_t getdblparam = nullptr;
+    CPXsetlogfilename_t setlogfilename = nullptr;
     CPXcallbacksetfunc_t callbacksetfunc = nullptr;
     CPXmipopt_t mipopt = nullptr;
     CPXgetstat_t getstat = nullptr;
     CPXgetstatstring_t getstatstring = nullptr;
     CPXgetobjval_t getobjval = nullptr;
     CPXgetbestobjval_t getbestobjval = nullptr;
+    CPXgetmiprelgap_t getmiprelgap = nullptr;
     CPXgetnodecnt_t getnodecnt = nullptr;
     CPXgetnodeleftcnt_t getnodeleftcnt = nullptr;
     CPXgetmipitcnt_t getmipitcnt = nullptr;
@@ -172,6 +181,8 @@ struct Api {
     CPXaddmipstarts_t addmipstarts = nullptr;
     CPXgetnummipstarts_t getnummipstarts = nullptr;
     CPXgetnumcols_t getnumcols = nullptr;
+    CPXgetnumrows_t getnumrows = nullptr;
+    CPXgetnumnz_t getnumnz = nullptr;
     CPXgetx_t getx = nullptr;
     CPXgetcolname_t getcolname = nullptr;
     CPXgetlb_t getlb = nullptr;
@@ -236,12 +247,15 @@ bool loadApi(Api& api, std::string& fail_reason) {
     LOAD_REQ(setintparam, "CPXsetintparam");
     LOAD_REQ(setdblparam, "CPXsetdblparam");
     LOAD_REQ(getintparam, "CPXgetintparam");
+    LOAD_REQ(getdblparam, "CPXgetdblparam");
+    LOAD_REQ(setlogfilename, "CPXsetlogfilename");
     LOAD_REQ(callbacksetfunc, "CPXcallbacksetfunc");
     LOAD_REQ(mipopt, "CPXmipopt");
     LOAD_REQ(getstat, "CPXgetstat");
     LOAD_REQ(getstatstring, "CPXgetstatstring");
     LOAD_REQ(getobjval, "CPXgetobjval");
     LOAD_REQ(getbestobjval, "CPXgetbestobjval");
+    LOAD_REQ(getmiprelgap, "CPXgetmiprelgap");
     LOAD_REQ(getnodecnt, "CPXgetnodecnt");
     LOAD_REQ(getnodeleftcnt, "CPXgetnodeleftcnt");
     LOAD_REQ(getmipitcnt, "CPXgetmipitcnt");
@@ -250,6 +264,8 @@ bool loadApi(Api& api, std::string& fail_reason) {
     LOAD_REQ(addmipstarts, "CPXaddmipstarts");
     LOAD_REQ(getnummipstarts, "CPXgetnummipstarts");
     LOAD_REQ(getnumcols, "CPXgetnumcols");
+    LOAD_REQ(getnumrows, "CPXgetnumrows");
+    LOAD_REQ(getnumnz, "CPXgetnumnz");
     LOAD_REQ(getx, "CPXgetx");
     LOAD_REQ(getcolname, "CPXgetcolname");
     LOAD_REQ(getlb, "CPXgetlb");
@@ -303,6 +319,101 @@ std::vector<std::string> getColumnNames(Api& api, CPXENVptr env, CPXLPptr lp, in
         }
     }
     return names;
+}
+
+bool configureStrictMipGaps(Api& api, CPXENVptr env,
+                            NativeMipEvidence& evidence) {
+    evidence.relative_gap.parameter_id = kParamMipGap;
+    evidence.relative_gap.requested = 0.0;
+    evidence.relative_gap.setter_return_code =
+        api.setdblparam(env, kParamMipGap, 0.0);
+    evidence.relative_gap.getter_return_code = api.getdblparam(
+        env, kParamMipGap, &evidence.relative_gap.effective);
+    evidence.absolute_gap.parameter_id = kParamAbsoluteMipGap;
+    evidence.absolute_gap.requested = 0.0;
+    evidence.absolute_gap.setter_return_code =
+        api.setdblparam(env, kParamAbsoluteMipGap, 0.0);
+    evidence.absolute_gap.getter_return_code = api.getdblparam(
+        env, kParamAbsoluteMipGap, &evidence.absolute_gap.effective);
+    evidence.strict_gap_configuration_valid =
+        evidence.relative_gap.setter_return_code == 0 &&
+        evidence.relative_gap.getter_return_code == 0 &&
+        evidence.relative_gap.effective == 0.0 &&
+        evidence.absolute_gap.setter_return_code == 0 &&
+        evidence.absolute_gap.getter_return_code == 0 &&
+        evidence.absolute_gap.effective == 0.0;
+    return evidence.strict_gap_configuration_valid;
+}
+
+void captureNativeMipEvidence(Api& api, CPXENVptr env, CPXLPptr lp,
+                              int mipopt_return_code,
+                              NativeMipEvidence& evidence) {
+    evidence.mipopt_return_code = mipopt_return_code;
+    evidence.solve_returned = true;
+    evidence.status_code = api.getstat(env, lp);
+    char status_buffer[1024] = {0};
+    if (api.getstatstring(env, evidence.status_code, status_buffer)) {
+        evidence.status_text = status_buffer;
+    } else {
+        evidence.status_text =
+            "status_code_" + std::to_string(evidence.status_code);
+    }
+    double objective = 0.0;
+    evidence.objective_return_code = api.getobjval(env, lp, &objective);
+    if (evidence.objective_return_code == 0 && std::isfinite(objective) &&
+        std::fabs(objective) < kCplexInfinityBound) {
+        evidence.objective = objective;
+        evidence.objective_available = true;
+    }
+    double best_bound = 0.0;
+    evidence.best_bound_return_code =
+        api.getbestobjval(env, lp, &best_bound);
+    if (evidence.best_bound_return_code == 0 && std::isfinite(best_bound) &&
+        std::fabs(best_bound) < kCplexInfinityBound) {
+        evidence.best_bound = best_bound;
+        evidence.best_bound_available = true;
+    }
+    double mip_relative_gap = 0.0;
+    evidence.mip_relative_gap_return_code =
+        api.getmiprelgap(env, lp, &mip_relative_gap);
+    if (evidence.mip_relative_gap_return_code == 0 &&
+        std::isfinite(mip_relative_gap) &&
+        std::fabs(mip_relative_gap) < kCplexInfinityBound) {
+        evidence.mip_relative_gap = mip_relative_gap;
+        evidence.mip_relative_gap_available = true;
+    }
+    const bool all_getters_attempted =
+        evidence.objective_return_code != -1 &&
+        evidence.best_bound_return_code != -1 &&
+        evidence.mip_relative_gap_return_code != -1;
+    const bool incumbent_and_gap_expected =
+        evidence.status_code == kCplexMipOptimal ||
+        evidence.status_code == kCplexMipOptimalTolerance ||
+        evidence.status_code == kCplexMipTimeLimitFeasible ||
+        evidence.status_code == kCplexMipOptimalUnscaledInfeasibilities;
+    evidence.evidence_capture_complete = mipopt_return_code == 0 &&
+        evidence.status_code != 0 && all_getters_attempted &&
+        (!incumbent_and_gap_expected ||
+         (evidence.objective_available && evidence.best_bound_available &&
+          evidence.mip_relative_gap_available));
+}
+
+std::string collectNativeCutCounts(Api& api, CPXENVptr env, CPXLPptr lp) {
+    const std::array<const char*, 22> cut_names = {
+        "cover", "gub_cover", "flow_cover", "clique", "fractional",
+        "mir", "flow_path", "disjunctive", "implied_bound", "zero_half",
+        "multi_commodity_flow", "local_cover", "tightening",
+        "objective_disjunctive", "lift_and_project", "user", "table",
+        "solution_pool", "local_implied_bound", "bqp", "rlt", "benders"
+    };
+    std::ostringstream cuts;
+    for (int type = 0; type < static_cast<int>(cut_names.size()); ++type) {
+        int count = 0;
+        if (api.getnumcuts(env, lp, type, &count) != 0) continue;
+        if (cuts.tellp() > 0) cuts << '|';
+        cuts << cut_names[static_cast<std::size_t>(type)] << '=' << count;
+    }
+    return cuts.str();
 }
 
 struct NativeMipStartMapping {
@@ -5047,6 +5158,185 @@ TailoredBCCplexApiProbe probeTailoredBCCplexApi() {
     return probe;
 }
 
+PlainCplexApiSolveResult solvePlainCplexWithStrictApi(
+    const std::filesystem::path& lp_path,
+    double time_limit_seconds,
+    int threads,
+    const std::filesystem::path& log_path) {
+    PlainCplexApiSolveResult out;
+    out.attempted = true;
+    out.threads_requested = std::max(1, threads);
+    out.time_limit_requested = time_limit_seconds;
+    out.log_path = log_path.string();
+    if (!std::isfinite(time_limit_seconds) || time_limit_seconds <= 0.0) {
+        out.fail_reason =
+            "strict_native_deadline_must_be_positive_and_finite";
+        return out;
+    }
+#ifdef _WIN32
+    Api api;
+    std::string fail;
+    if (!loadApi(api, fail)) {
+        out.fail_reason = fail;
+        return out;
+    }
+    out.available = true;
+    CPXENVptr env = nullptr;
+    CPXLPptr lp = nullptr;
+    auto cleanup = [&]() {
+        if (lp != nullptr) {
+            out.native.free_problem_return_code = api.freeprob(env, &lp);
+            ++out.freeprob_count;
+        }
+        if (env != nullptr) {
+            out.native.close_environment_return_code = api.close(&env);
+            ++out.close_count;
+        }
+        if (api.dll) FreeLibrary(api.dll);
+        out.lifecycle_valid = out.environment_count == 1 &&
+            out.problem_count == 1 && out.model_read_count == 1 &&
+            out.mipopt_count == 1 && out.freeprob_count == 1 &&
+            out.close_count == 1 &&
+            out.native.free_problem_return_code == 0 &&
+            out.native.close_environment_return_code == 0;
+    };
+
+    int status = 0;
+    env = api.open(&status);
+    if (!env || status != 0) {
+        out.fail_reason = "CPXopenCPLEX_failed:" + std::to_string(status);
+        if (api.dll) FreeLibrary(api.dll);
+        return out;
+    }
+    ++out.environment_count;
+    if (!log_path.empty()) {
+        if (log_path.has_parent_path()) {
+            std::filesystem::create_directories(log_path.parent_path());
+        }
+        out.log_set_return_code = api.setlogfilename(
+            env, log_path.string().c_str(), "w");
+        if (out.log_set_return_code != 0) {
+            out.fail_reason = "CPXsetlogfilename_failed:" +
+                std::to_string(out.log_set_return_code);
+            cleanup();
+            return out;
+        }
+    } else {
+        out.log_set_return_code = 0;
+    }
+    lp = api.createprob(env, &status, "plain_cplex_strict");
+    if (!lp || status != 0) {
+        out.fail_reason = "CPXcreateprob_failed:" + std::to_string(status);
+        cleanup();
+        return out;
+    }
+    ++out.problem_count;
+    status = api.readcopyprob(env, lp, lp_path.string().c_str(), nullptr);
+    if (status != 0) {
+        out.fail_reason = "CPXreadcopyprob_failed:" + std::to_string(status);
+        cleanup();
+        return out;
+    }
+    ++out.model_read_count;
+    out.model_columns = api.getnumcols(env, lp);
+    out.model_rows = api.getnumrows(env, lp);
+    out.model_nonzeros = static_cast<long long>(api.getnumnz(env, lp));
+
+    api.setintparam(env, kParamScreenOutput, 1);
+    api.setintparam(env, kParamMipDisplay, 2);
+    out.threads_set_return_code = api.setintparam(
+        env, kParamThreads, out.threads_requested);
+    out.presolve_set_return_code = api.setintparam(
+        env, kParamPreprocessingPresolve, out.presolve_requested);
+    out.search_set_return_code = api.setintparam(
+        env, kParamMipStrategySearch, out.search_requested);
+    out.node_select_set_return_code = api.setintparam(
+        env, kParamMipStrategyNodeSelect, out.node_select_requested);
+    if (time_limit_seconds > 0.0) {
+        out.time_limit_set_return_code = api.setdblparam(
+            env, kParamTimeLimit, time_limit_seconds);
+    } else {
+        out.time_limit_set_return_code = 0;
+    }
+    CPXINT int_value = 0;
+    out.threads_get_return_code = api.getintparam(
+        env, kParamThreads, &int_value);
+    out.threads_effective = int_value;
+    out.presolve_get_return_code = api.getintparam(
+        env, kParamPreprocessingPresolve, &int_value);
+    out.presolve_effective = int_value;
+    out.search_get_return_code = api.getintparam(
+        env, kParamMipStrategySearch, &int_value);
+    out.search_effective = int_value;
+    out.node_select_get_return_code = api.getintparam(
+        env, kParamMipStrategyNodeSelect, &int_value);
+    out.node_select_effective = int_value;
+    out.time_limit_get_return_code = api.getdblparam(
+        env, kParamTimeLimit, &out.time_limit_effective);
+    const bool strict_gaps_ok = configureStrictMipGaps(api, env, out.native);
+    const bool required_parameters_ok =
+        out.threads_set_return_code == 0 &&
+        out.threads_get_return_code == 0 &&
+        out.threads_effective == out.threads_requested &&
+        out.presolve_set_return_code == 0 &&
+        out.presolve_get_return_code == 0 && out.presolve_effective == 1 &&
+        out.search_set_return_code == 0 &&
+        out.search_get_return_code == 0 &&
+        out.search_effective == kMipSearchTraditional &&
+        out.node_select_set_return_code == 0 &&
+        out.node_select_get_return_code == 0 &&
+        out.node_select_effective == kNodeSelectBestBound &&
+        out.time_limit_set_return_code == 0 &&
+        out.time_limit_get_return_code == 0 &&
+        (time_limit_seconds <= 0.0 ||
+         out.time_limit_effective == time_limit_seconds) && strict_gaps_ok;
+    if (!required_parameters_ok) {
+        out.fail_reason = "strict_plain_required_parameter_round_trip_failed";
+        cleanup();
+        return out;
+    }
+
+    const std::vector<std::string> names = getColumnNames(
+        api, env, lp, out.model_columns);
+    ++out.mipopt_count;
+    status = api.mipopt(env, lp);
+    captureNativeMipEvidence(api, env, lp, status, out.native);
+    out.node_count = static_cast<long long>(api.getnodecnt(env, lp));
+    out.open_node_count = static_cast<long long>(api.getnodeleftcnt(env, lp));
+    out.simplex_iterations = static_cast<long long>(api.getmipitcnt(env, lp));
+    out.native_solution_count = api.getsolnpoolnumsolns(env, lp);
+    out.native_cut_counts = collectNativeCutCounts(api, env, lp);
+    if (out.native.objective_available && out.model_columns > 0) {
+        std::vector<double> values(
+            static_cast<std::size_t>(out.model_columns), 0.0);
+        if (api.getx(env, lp, values.data(), 0, out.model_columns - 1) == 0) {
+            for (int column = 0; column < out.model_columns; ++column) {
+                const std::string& name = names[static_cast<std::size_t>(column)];
+                if (!name.empty()) {
+                    out.values[name] = values[static_cast<std::size_t>(column)];
+                }
+            }
+        }
+    }
+    out.solved = out.native.solve_returned &&
+        out.native.mipopt_return_code == 0 && out.native.status_code != 0;
+    cleanup();
+    if (!out.lifecycle_valid && out.fail_reason.empty()) {
+        out.fail_reason = "strict_plain_lifecycle_incomplete";
+    } else if (!out.solved && out.fail_reason.empty()) {
+        out.fail_reason = "CPXmipopt_failed:" +
+            std::to_string(out.native.mipopt_return_code);
+    }
+#else
+    (void)lp_path;
+    (void)time_limit_seconds;
+    (void)threads;
+    (void)log_path;
+    out.fail_reason = "cplex_dynamic_api_supported_only_on_windows";
+#endif
+    return out;
+}
+
 TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     const std::filesystem::path& lp_path,
     double time_limit_seconds,
@@ -5918,6 +6208,8 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
     out.child_estimate_mode = options.global_gini_tree_child_estimate_mode;
     out.row_attachment_mode = options.global_gini_tree_row_attachment_mode;
     out.row_timing_mode = options.global_gini_tree_row_timing_mode;
+    out.threads_requested = std::max(1, threads);
+    out.native_time_limit_requested = time_limit_seconds;
     out.native_time_limit_seconds = time_limit_seconds;
     out.root_model_fingerprint = fileFingerprint(root_lp_path);
     out.objective_fingerprint = originalObjectiveFingerprint(instance, options);
@@ -5932,6 +6224,11 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
             "continuous_branch_sibling_loss_use_traditional";
         return out;
     }
+    if (!std::isfinite(time_limit_seconds) || time_limit_seconds <= 0.0) {
+        out.fail_reason =
+            "strict_native_deadline_must_be_positive_and_finite";
+        return out;
+    }
 #ifdef _WIN32
     Api api;
     std::string fail;
@@ -5942,37 +6239,117 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
     out.available = true;
     CPXENVptr env = nullptr;
     CPXLPptr lp = nullptr;
+    auto cleanup = [&]() {
+        if (lp != nullptr) {
+            out.native.free_problem_return_code = api.freeprob(env, &lp);
+            ++out.freeprob_count;
+        }
+        if (env != nullptr) {
+            out.native.close_environment_return_code = api.close(&env);
+            ++out.close_count;
+        }
+        if (api.dll != nullptr) {
+            FreeLibrary(api.dll);
+            api.dll = nullptr;
+        }
+    };
+    auto emitFailureManifest = [&]() {
+        if (manifest_path.empty()) return;
+        if (manifest_path.has_parent_path()) {
+            std::filesystem::create_directories(manifest_path.parent_path());
+        }
+        std::ofstream manifest(manifest_path);
+        if (!manifest) return;
+        manifest
+            << "field,value\n"
+            << "failure_reason," << csvCell(out.fail_reason) << '\n'
+            << "cplex_environment_count," << out.environment_count << '\n'
+            << "problem_object_count," << out.problem_count << '\n'
+            << "lp_read_build_count," << out.model_read_count << '\n'
+            << "CPXmipopt_count," << out.mipopt_count << '\n'
+            << "free_problem_count," << out.freeprob_count << '\n'
+            << "close_environment_count," << out.close_count << '\n'
+            << "free_problem_return_code,"
+            << out.native.free_problem_return_code << '\n'
+            << "close_environment_return_code,"
+            << out.native.close_environment_return_code << '\n'
+            << "threads_requested," << out.threads_requested << '\n'
+            << "threads_set_return_code," << out.threads_set_rc << '\n'
+            << "threads_get_return_code," << out.threads_get_rc << '\n'
+            << "threads_effective," << out.threads_effective << '\n'
+            << "time_limit_requested," << std::setprecision(17)
+            << out.native_time_limit_requested << '\n'
+            << "time_limit_set_return_code,"
+            << out.native_time_limit_set_rc << '\n'
+            << "time_limit_get_return_code,"
+            << out.native_time_limit_get_rc << '\n'
+            << "time_limit_effective," << std::setprecision(17)
+            << out.native_time_limit_effective << '\n'
+            << "relative_gap_setter_return_code,"
+            << out.native.relative_gap.setter_return_code << '\n'
+            << "relative_gap_getter_return_code,"
+            << out.native.relative_gap.getter_return_code << '\n'
+            << "relative_gap_effective,"
+            << out.native.relative_gap.effective << '\n'
+            << "absolute_gap_setter_return_code,"
+            << out.native.absolute_gap.setter_return_code << '\n'
+            << "absolute_gap_getter_return_code,"
+            << out.native.absolute_gap.getter_return_code << '\n'
+            << "absolute_gap_effective,"
+            << out.native.absolute_gap.effective << '\n'
+            << "lifecycle_valid,0\n";
+    };
+    auto finishEarly = [&]() {
+        cleanup();
+        emitFailureManifest();
+    };
     int status = 0;
     env = api.open(&status);
     if (!env || status != 0) {
         out.fail_reason = "CPXopenCPLEX_failed:" + std::to_string(status);
-        if (api.dll) FreeLibrary(api.dll);
+        finishEarly();
         return out;
     }
     ++out.environment_count;
+    if (!options.log_path.empty()) {
+        const std::filesystem::path log_path(options.log_path);
+        if (log_path.has_parent_path()) {
+            std::filesystem::create_directories(log_path.parent_path());
+        }
+        out.log_set_rc = api.setlogfilename(
+            env, options.log_path.c_str(), "w");
+        if (out.log_set_rc != 0) {
+            out.fail_reason = "CPXsetlogfilename_failed:" +
+                std::to_string(out.log_set_rc);
+            finishEarly();
+            return out;
+        }
+    } else {
+        out.log_set_rc = 0;
+    }
     lp = api.createprob(env, &status, "global_gini_tree");
     if (!lp || status != 0) {
         out.fail_reason = "CPXcreateprob_failed:" + std::to_string(status);
-        api.close(&env);
-        ++out.close_count;
-        if (api.dll) FreeLibrary(api.dll);
+        finishEarly();
         return out;
     }
     ++out.problem_count;
     status = api.readcopyprob(env, lp, root_lp_path.string().c_str(), nullptr);
     if (status != 0) {
         out.fail_reason = "CPXreadcopyprob_failed:" + std::to_string(status);
-        api.freeprob(env, &lp); ++out.freeprob_count;
-        api.close(&env); ++out.close_count;
-        if (api.dll) FreeLibrary(api.dll);
+        finishEarly();
         return out;
     }
     ++out.model_read_count;
+    out.model_columns = api.getnumcols(env, lp);
+    out.model_rows = api.getnumrows(env, lp);
+    out.model_nonzeros = static_cast<long long>(api.getnumnz(env, lp));
 
-    api.setintparam(env, kParamThreads, std::max(1, threads));
+    out.threads_set_rc = api.setintparam(
+        env, kParamThreads, out.threads_requested);
     api.setintparam(env, kParamScreenOutput, 1);
     api.setintparam(env, kParamMipDisplay, 2);
-    api.setdblparam(env, kParamMipGap, 1e-8);
+    const bool strict_gaps_ok = configureStrictMipGaps(api, env, out.native);
     out.presolve_set_rc = api.setintparam(
         env, kParamPreprocessingPresolve, out.presolve_requested);
     out.search_set_rc = api.setintparam(
@@ -5982,32 +6359,59 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
     if (time_limit_seconds > 0.0) {
         out.native_time_limit_set_rc = api.setdblparam(
             env, kParamTimeLimit, time_limit_seconds);
+    } else {
+        out.native_time_limit_set_rc = 0;
     }
     CPXINT effective = 0;
-    if (api.getintparam(env, kParamPreprocessingPresolve, &effective) == 0) {
+    out.presolve_get_rc = api.getintparam(
+        env, kParamPreprocessingPresolve, &effective);
+    if (out.presolve_get_rc == 0) {
         out.presolve_effective = effective;
     }
-    if (api.getintparam(env, kParamMipStrategySearch, &effective) == 0) {
+    out.search_get_rc = api.getintparam(
+        env, kParamMipStrategySearch, &effective);
+    if (out.search_get_rc == 0) {
         out.search_effective = effective;
     }
-    if (api.getintparam(env, kParamMipStrategyNodeSelect, &effective) == 0) {
+    out.node_select_get_rc = api.getintparam(
+        env, kParamMipStrategyNodeSelect, &effective);
+    if (out.node_select_get_rc == 0) {
         out.node_select_effective = effective;
     }
-    if (api.getintparam(env, kParamMipStrategyHeuristicFreq, &effective) == 0) {
+    out.heuristics_get_rc = api.getintparam(
+        env, kParamMipStrategyHeuristicFreq, &effective);
+    if (out.heuristics_get_rc == 0) {
         out.heuristics_effective = effective;
     }
-    if (api.getintparam(env, kParamMipStrategyProbe, &effective) == 0) {
+    out.probing_get_rc = api.getintparam(
+        env, kParamMipStrategyProbe, &effective);
+    if (out.probing_get_rc == 0) {
         out.probing_effective = effective;
     }
-    if (api.getintparam(env, kParamThreads, &effective) == 0) {
+    out.threads_get_rc = api.getintparam(env, kParamThreads, &effective);
+    if (out.threads_get_rc == 0) {
         out.threads_effective = effective;
     }
-    if (out.presolve_set_rc != 0 || out.search_set_rc != 0 ||
-        out.node_select_set_rc != 0 || out.native_time_limit_set_rc != 0) {
+    out.native_time_limit_get_rc = api.getdblparam(
+        env, kParamTimeLimit, &out.native_time_limit_effective);
+    const bool required_parameter_round_trips =
+        out.threads_set_rc == 0 && out.threads_get_rc == 0 &&
+        out.threads_effective == out.threads_requested &&
+        out.presolve_set_rc == 0 && out.presolve_get_rc == 0 &&
+        out.presolve_effective == out.presolve_requested &&
+        out.search_set_rc == 0 && out.search_get_rc == 0 &&
+        out.search_effective == out.search_requested &&
+        out.node_select_set_rc == 0 && out.node_select_get_rc == 0 &&
+        out.node_select_effective == out.node_select_requested &&
+        out.heuristics_get_rc == 0 && out.probing_get_rc == 0 &&
+        out.native_time_limit_set_rc == 0 &&
+        out.native_time_limit_get_rc == 0 &&
+        (time_limit_seconds <= 0.0 ||
+         out.native_time_limit_effective == time_limit_seconds) &&
+        strict_gaps_ok;
+    if (!required_parameter_round_trips) {
         out.fail_reason = "required_parameter_configuration_failed";
-        api.freeprob(env, &lp); ++out.freeprob_count;
-        api.close(&env); ++out.close_count;
-        if (api.dll) FreeLibrary(api.dll);
+        finishEarly();
         return out;
     }
 
@@ -6036,9 +6440,7 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
     const auto g_column = callback_state.column_index.find("G");
     if (g_column == callback_state.column_index.end()) {
         out.fail_reason = "root_G_column_missing";
-        api.freeprob(env, &lp); ++out.freeprob_count;
-        api.close(&env); ++out.close_count;
-        if (api.dll) FreeLibrary(api.dll);
+        finishEarly();
         return out;
     }
     callback_state.g_col = g_column->second;
@@ -6088,9 +6490,7 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
                           : (root_rows.domain.domain_infeasible
                                  ? "root_factory_domain_infeasible_fail_closed"
                                  : "official_global_tree_requires_unchanged_binary_split_factor_2")));
-        api.freeprob(env, &lp); ++out.freeprob_count;
-        api.close(&env); ++out.close_count;
-        if (api.dll) FreeLibrary(api.dll);
+        finishEarly();
         return out;
     }
 
@@ -6187,9 +6587,7 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
                                  globalGiniTreeCallback, &callback_state);
     if (status != 0) {
         out.fail_reason = "CPXcallbacksetfunc_failed:" + std::to_string(status);
-        api.freeprob(env, &lp); ++out.freeprob_count;
-        api.close(&env); ++out.close_count;
-        if (api.dll) FreeLibrary(api.dll);
+        finishEarly();
         return out;
     }
 
@@ -6203,9 +6601,7 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
         if (!mapping.complete) {
             out.fail_reason = "native_mip_start_mapping_failed:" +
                 mapping.failure_reason;
-            api.freeprob(env, &lp); ++out.freeprob_count;
-            api.close(&env); ++out.close_count;
-            if (api.dll) FreeLibrary(api.dll);
+            finishEarly();
             return out;
         }
         std::vector<int> indices(static_cast<std::size_t>(ncols), 0);
@@ -6230,9 +6626,7 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
                 ":stored=" +
                 std::to_string(out.native_mip_start_stored_count);
             out.fail_reason = out.native_mip_start_failure_reason;
-            api.freeprob(env, &lp); ++out.freeprob_count;
-            api.close(&env); ++out.close_count;
-            if (api.dll) FreeLibrary(api.dll);
+            finishEarly();
             return out;
         }
     }
@@ -6263,22 +6657,14 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
     ++out.mipopt_count;
     status = api.mipopt(env, lp);
     out.return_code = status;
-    out.status_code = api.getstat(env, lp);
-    char status_buffer[1024] = {0};
-    if (api.getstatstring(env, out.status_code, status_buffer)) {
-        out.status = status_buffer;
-    } else {
-        out.status = "status_code_" + std::to_string(out.status_code);
-    }
-    out.solver_finalization_reached = true;
-    double objective = 0.0;
-    if (api.getobjval(env, lp, &objective) == 0 && std::isfinite(objective)) {
-        out.objective = objective;
-    }
-    double best_bound = 0.0;
-    if (api.getbestobjval(env, lp, &best_bound) == 0 &&
-        std::isfinite(best_bound)) {
-        out.best_bound = best_bound;
+    captureNativeMipEvidence(api, env, lp, status, out.native);
+    out.status_code = out.native.status_code;
+    out.status = out.native.status_text;
+    out.solver_finalization_reached = out.native.solve_returned &&
+        out.native.mipopt_return_code == 0;
+    if (out.native.objective_available) out.objective = out.native.objective;
+    if (out.native.best_bound_available) {
+        out.best_bound = out.native.best_bound;
         out.best_bound_available = true;
     }
     out.node_count = static_cast<long long>(api.getnodecnt(env, lp));
@@ -6287,21 +6673,7 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
     out.native_simplex_iterations =
         static_cast<long long>(api.getmipitcnt(env, lp));
     out.native_solution_pool_count = api.getsolnpoolnumsolns(env, lp);
-    const std::array<const char*, 22> cut_names = {
-        "cover", "gub_cover", "flow_cover", "clique", "fractional",
-        "mir", "flow_path", "disjunctive", "implied_bound", "zero_half",
-        "multi_commodity_flow", "local_cover", "tightening",
-        "objective_disjunctive", "lift_and_project", "user", "table",
-        "solution_pool", "local_implied_bound", "bqp", "rlt", "benders"
-    };
-    std::ostringstream native_cuts;
-    for (int type = 0; type < static_cast<int>(cut_names.size()); ++type) {
-        int count = 0;
-        if (api.getnumcuts(env, lp, type, &count) != 0) continue;
-        if (native_cuts.tellp() > 0) native_cuts << '|';
-        native_cuts << cut_names[static_cast<std::size_t>(type)] << '=' << count;
-    }
-    out.native_cut_counts = native_cuts.str();
+    out.native_cut_counts = collectNativeCutCounts(api, env, lp);
     if (out.native_mip_start_stored && out.objective > 0.0 &&
         out.objective <= verified_incumbent +
             1e-7 * std::max(1.0, std::fabs(verified_incumbent))) {
@@ -6396,21 +6768,23 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
     out.solved = status == 0 && out.status_code != 0 &&
         !out.callback_abort_used;
 
-    api.freeprob(env, &lp); ++out.freeprob_count;
-    api.close(&env); ++out.close_count;
-    if (api.dll) FreeLibrary(api.dll);
+    cleanup();
     out.lifecycle_valid = out.environment_count == 1 &&
         out.problem_count == 1 && out.model_read_count == 1 &&
         out.mipopt_count == 1 && out.freeprob_count == 1 &&
         out.close_count == 1 && out.interval_oracle_count == 0 &&
-        out.child_process_count == 0;
+        out.child_process_count == 0 &&
+        out.native.free_problem_return_code == 0 &&
+        out.native.close_environment_return_code == 0;
     if (!out.solved && out.fail_reason.empty()) {
         out.fail_reason = out.callback_abort_used
             ? "callback_correctness_abort"
             : "CPXmipopt_failed:" + std::to_string(status);
     }
     if (!manifest_path.empty()) {
-        std::filesystem::create_directories(manifest_path.parent_path());
+        if (manifest_path.has_parent_path()) {
+            std::filesystem::create_directories(manifest_path.parent_path());
+        }
         std::ofstream manifest(manifest_path, std::ios::out | std::ios::trunc);
         std::vector<std::string> global_families;
         std::vector<std::string> local_families;
@@ -6429,6 +6803,7 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
                 excluded_families.push_back(entry.family);
             }
         }
+        manifest << "field,value\n";
         manifest
             << "root_model_path," << csvCell(root_lp_path.string()) << '\n'
             << "root_lp_fingerprint," << out.root_model_fingerprint << '\n'
@@ -6447,7 +6822,84 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
             << "cplex_environment_count," << out.environment_count << '\n'
             << "problem_object_count," << out.problem_count << '\n'
             << "lp_read_build_count," << out.model_read_count << '\n'
+            << "root_model_columns," << out.model_columns << '\n'
+            << "root_model_rows," << out.model_rows << '\n'
+            << "root_model_nonzeros," << out.model_nonzeros << '\n'
             << "CPXmipopt_count," << out.mipopt_count << '\n'
+            << "CPXmipopt_return_code," << out.native.mipopt_return_code << '\n'
+            << "native_status_code," << out.native.status_code << '\n'
+            << "native_status_text," << csvCell(out.native.status_text) << '\n'
+            << "CPXgetobjval_return_code,"
+            << out.native.objective_return_code << '\n'
+            << "native_objective_available,"
+            << (out.native.objective_available ? 1 : 0) << '\n'
+            << "native_objective," << std::setprecision(17)
+            << out.native.objective << '\n'
+            << "CPXgetbestobjval_return_code,"
+            << out.native.best_bound_return_code << '\n'
+            << "native_best_bound_available,"
+            << (out.native.best_bound_available ? 1 : 0) << '\n'
+            << "native_best_bound," << std::setprecision(17)
+            << out.native.best_bound << '\n'
+            << "CPXgetmiprelgap_return_code,"
+            << out.native.mip_relative_gap_return_code << '\n'
+            << "CPXgetmiprelgap_available,"
+            << (out.native.mip_relative_gap_available ? 1 : 0) << '\n'
+            << "CPXgetmiprelgap_value," << std::setprecision(17)
+            << out.native.mip_relative_gap << '\n'
+            << "relative_gap_parameter_id,"
+            << out.native.relative_gap.parameter_id << '\n'
+            << "relative_gap_requested,"
+            << out.native.relative_gap.requested << '\n'
+            << "relative_gap_setter_return_code,"
+            << out.native.relative_gap.setter_return_code << '\n'
+            << "relative_gap_getter_return_code,"
+            << out.native.relative_gap.getter_return_code << '\n'
+            << "relative_gap_effective,"
+            << out.native.relative_gap.effective << '\n'
+            << "absolute_gap_parameter_id,"
+            << out.native.absolute_gap.parameter_id << '\n'
+            << "absolute_gap_requested,"
+            << out.native.absolute_gap.requested << '\n'
+            << "absolute_gap_setter_return_code,"
+            << out.native.absolute_gap.setter_return_code << '\n'
+            << "absolute_gap_getter_return_code,"
+            << out.native.absolute_gap.getter_return_code << '\n'
+            << "absolute_gap_effective,"
+            << out.native.absolute_gap.effective << '\n'
+            << "strict_gap_configuration_valid,"
+            << (out.native.strict_gap_configuration_valid ? 1 : 0) << '\n'
+            << "free_problem_return_code,"
+            << out.native.free_problem_return_code << '\n'
+            << "close_environment_return_code,"
+            << out.native.close_environment_return_code << '\n'
+            << "free_problem_count," << out.freeprob_count << '\n'
+            << "close_environment_count," << out.close_count << '\n'
+            << "solver_finalization_reached,"
+            << (out.solver_finalization_reached ? 1 : 0) << '\n'
+            << "lifecycle_valid," << (out.lifecycle_valid ? 1 : 0) << '\n'
+            << "threads_requested," << out.threads_requested << '\n'
+            << "threads_set_return_code," << out.threads_set_rc << '\n'
+            << "threads_get_return_code," << out.threads_get_rc << '\n'
+            << "threads_effective," << out.threads_effective << '\n'
+            << "presolve_requested," << out.presolve_requested << '\n'
+            << "presolve_set_return_code," << out.presolve_set_rc << '\n'
+            << "presolve_get_return_code," << out.presolve_get_rc << '\n'
+            << "search_requested," << out.search_requested << '\n'
+            << "search_set_return_code," << out.search_set_rc << '\n'
+            << "search_get_return_code," << out.search_get_rc << '\n'
+            << "node_select_requested," << out.node_select_requested << '\n'
+            << "node_select_set_return_code," << out.node_select_set_rc << '\n'
+            << "node_select_get_return_code," << out.node_select_get_rc << '\n'
+            << "time_limit_parameter_id," << kParamTimeLimit << '\n'
+            << "time_limit_requested," << std::setprecision(17)
+            << out.native_time_limit_requested << '\n'
+            << "time_limit_set_return_code,"
+            << out.native_time_limit_set_rc << '\n'
+            << "time_limit_get_return_code,"
+            << out.native_time_limit_get_rc << '\n'
+            << "time_limit_effective," << std::setprecision(17)
+            << out.native_time_limit_effective << '\n'
             << "interval_oracle_count," << out.interval_oracle_count << '\n'
             << "child_process_count," << out.child_process_count << '\n'
             << "child_estimate_mode,"

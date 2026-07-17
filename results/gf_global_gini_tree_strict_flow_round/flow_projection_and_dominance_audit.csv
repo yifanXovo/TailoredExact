@@ -1,0 +1,44 @@
+record_type,station_count,vehicle_count,variant,subject,expected,observed,result,evidence,notes
+metadata,,,,artifact_kind,deterministic_helper_audit,deterministic_helper_audit,pass,build_round21/tests/ConnectivityFlowTests.exe,Mechanical enumeration and algebra only; no CPLEX or solver result
+metadata,,,,test_output,ConnectivityFlowTests: 6 groups passed,ConnectivityFlowTests: 6 groups passed,pass,process_exit_code_0,Executed 2026-07-16
+route_enumeration,1,1,all,elementary_routes_including_unused,2,2,pass,exhaustive_helper,1 plus sum of partial permutations
+route_enumeration,2,1,all,elementary_routes_including_unused,5,5,pass,exhaustive_helper,1 plus sum of partial permutations
+route_enumeration,3,1,all,elementary_routes_including_unused,16,16,pass,exhaustive_helper,1 plus sum of partial permutations
+route_enumeration,4,1,all,elementary_routes_including_unused,65,65,pass,exhaustive_helper,1 plus sum of partial permutations
+projection,1,1,F0,canonical_route_lifts,2,2,pass,exhaustive_helper,Exact balances and 0<=f<=Vx checked
+projection,2,1,F0,canonical_route_lifts,5,5,pass,exhaustive_helper,Exact balances and 0<=f<=Vx checked
+projection,3,1,F0,canonical_route_lifts,16,16,pass,exhaustive_helper,Exact balances and 0<=f<=Vx checked
+projection,4,1,F0,canonical_route_lifts,65,65,pass,exhaustive_helper,Exact balances and 0<=f<=Vx checked
+projection,1,1,F1,canonical_route_lifts,2,2,pass,exhaustive_helper,Return columns absent and direct depot equation checked
+projection,2,1,F1,canonical_route_lifts,5,5,pass,exhaustive_helper,Return columns absent and direct depot equation checked
+projection,3,1,F1,canonical_route_lifts,16,16,pass,exhaustive_helper,Return columns absent and direct depot equation checked
+projection,4,1,F1,canonical_route_lifts,65,65,pass,exhaustive_helper,Return columns absent and direct depot equation checked
+projection,1,1,F2,canonical_route_lifts,2,2,pass,exhaustive_helper,Lower links and V or V-1 upper links checked
+projection,2,1,F2,canonical_route_lifts,5,5,pass,exhaustive_helper,Lower links and V or V-1 upper links checked
+projection,3,1,F2,canonical_route_lifts,16,16,pass,exhaustive_helper,Lower links and V or V-1 upper links checked
+projection,4,1,F2,canonical_route_lifts,65,65,pass,exhaustive_helper,Lower links and V or V-1 upper links checked
+projection,1,1,F3,canonical_route_lifts,2,2,pass,exhaustive_helper,Both linear start couplings checked
+projection,2,1,F3,canonical_route_lifts,5,5,pass,exhaustive_helper,Both linear start couplings checked
+projection,3,1,F3,canonical_route_lifts,16,16,pass,exhaustive_helper,Both linear start couplings checked
+projection,4,1,F3,canonical_route_lifts,65,65,pass,exhaustive_helper,Both linear start couplings checked
+edge_case,1,1,F0-F3,unused_vehicle,feasible,feasible,pass,exhaustive_helper,All x z and f are zero
+edge_case,1,1,F0-F3,one_station_route,feasible,feasible,pass,exhaustive_helper,Departure flow is one and canonical return is zero
+edge_case,1,1,F2-F3,V_equals_1_internal_bound,no_internal_arc,no_internal_arc,pass,topology_helper,V-1 equals zero but no internal flow column exists
+edge_case,1..4,1,F0-F3,full_station_route,feasible,feasible,pass,exhaustive_helper,Departure is V and first internal flow is V-1
+dominance,1..4,1,F1_to_F0,zero_return_embedding,all_enumerated_lifts_embed,all_enumerated_lifts_embed,pass,exhaustive_helper,Deleted return columns assigned zero
+dominance,1..4,1,F2_to_F1,subset_constraints,all_enumerated_lifts_embed,all_enumerated_lifts_embed,pass,exhaustive_helper,F2 lower and tighter upper links imply F1
+dominance,1..4,1,F3_to_F2,subset_constraints,all_enumerated_lifts_embed,all_enumerated_lifts_embed,pass,exhaustive_helper,F3 adds only valid linear start rows
+dominance,1..4,1,F3_to_F0,transitive_embedding,all_enumerated_lifts_embed,all_enumerated_lifts_embed,pass,exhaustive_helper,F3 to F2 to F1 then zero-extend into F0
+circulation,2,1,F0,positive_canonical_cycle_cases,2,2,pass,exhaustive_helper,c=0.5 accepted on every route with 0<s<V
+circulation,3,1,F0,positive_canonical_cycle_cases,9,9,pass,exhaustive_helper,c=0.5 accepted on every route with 0<s<V
+circulation,4,1,F0,positive_canonical_cycle_cases,40,40,pass,exhaustive_helper,c=0.5 accepted on every route with 0<s<V
+circulation,2..4,1,F1,corresponding_cycle_perturbation,rejected,rejected,pass,exhaustive_helper,No return column so last-station balance rejects the common increment
+circulation,1..4,1,F0,full_route_positive_increment,rejected,rejected,pass,exhaustive_helper,Departure upper bound V forces c=0 when s=V
+model_size,20,3,F0,extension_columns_rows_nonzeros,1260|1323|5160,1260|1323|5160,pass,theoretical_count_helper,Counts exclude common compact model
+model_size,20,3,F1,extension_columns_rows_nonzeros,1200|1263|4920,1200|1263|4920,pass,theoretical_count_helper,Counts exclude common compact model
+model_size,20,3,F2,extension_columns_rows_nonzeros,1200|2463|7320,1200|2463|7320,pass,theoretical_count_helper,Counts exclude common compact model
+model_size,20,3,F3,extension_columns_rows_nonzeros,1200|2583|9900,1200|2583|9900,pass,theoretical_count_helper,Counts exclude common compact model
+model_size_scan,1..4,1..3,F0-F3,column_topology_and_row_family_sums,match_direct_enumeration,match_direct_enumeration,pass,deterministic_helper,Every variant and dimension combination checked
+invalid_input,3,1,F0-F3,non_depot_or_non_elementary_routes,rejected,rejected,pass,deterministic_helper,Empty nonclosed repeated and out-of-range routes fail closed
+source_scan,,,F0-F3,forbidden_algorithm_tokens,no_matches,no_matches,pass,rg_targeted_scan,Scanned helper header and implementation for seeds named instances V12 V20 route masks route pools and scale tiers
+bound_policy,,,F2-F3,unified_tighter_H_k,not_used,not_used,pass,implementation_and_proof,Universal V and V-1 bounds retained

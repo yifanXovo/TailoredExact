@@ -444,6 +444,7 @@ void testCertificateGuard() {
                 std::string::npos,
             "lifecycle mismatch must reject an optimality claim");
     result.global_gini_tree_lifecycle_valid = true;
+    result.strict_certified_original_problem = true;
     const std::string accepted = ebrp::resultToJson(result);
     require(accepted.find("\"status\": \"optimal\"") != std::string::npos,
             "complete global-tree audit should preserve optimal status");

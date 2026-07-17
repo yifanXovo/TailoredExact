@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Result.hpp"
+#include "StrictCertificate.hpp"
 
 #include <filesystem>
 #include <string>
@@ -8,6 +9,78 @@
 #include <vector>
 
 namespace ebrp {
+
+struct NativeMipEvidence {
+    int mipopt_return_code = -1;
+    int status_code = 0;
+    std::string status_text;
+    int objective_return_code = -1;
+    bool objective_available = false;
+    double objective = 0.0;
+    int best_bound_return_code = -1;
+    bool best_bound_available = false;
+    double best_bound = 0.0;
+    int mip_relative_gap_return_code = -1;
+    bool mip_relative_gap_available = false;
+    double mip_relative_gap = 0.0;
+    StrictGapParameterRecord relative_gap{
+        kCplexRelativeMipGapParam, 0.0, -1, -1, 0.0};
+    StrictGapParameterRecord absolute_gap{
+        kCplexAbsoluteMipGapParam, 0.0, -1, -1, 0.0};
+    bool strict_gap_configuration_valid = false;
+    bool solve_returned = false;
+    bool evidence_capture_complete = false;
+    int free_problem_return_code = -1;
+    int close_environment_return_code = -1;
+};
+
+struct PlainCplexApiSolveResult {
+    bool attempted = false;
+    bool available = false;
+    bool solved = false;
+    std::string fail_reason;
+    NativeMipEvidence native;
+    long long node_count = 0;
+    long long open_node_count = 0;
+    long long simplex_iterations = 0;
+    int native_solution_count = 0;
+    int model_columns = 0;
+    int model_rows = 0;
+    long long model_nonzeros = 0;
+    long long environment_count = 0;
+    long long problem_count = 0;
+    long long model_read_count = 0;
+    long long mipopt_count = 0;
+    long long freeprob_count = 0;
+    long long close_count = 0;
+    bool lifecycle_valid = false;
+    int threads_requested = 1;
+    int threads_set_return_code = -1;
+    int threads_get_return_code = -1;
+    int threads_effective = 0;
+    int presolve_requested = 1;
+    int presolve_set_return_code = -1;
+    int presolve_get_return_code = -1;
+    int presolve_effective = 0;
+    int search_requested = 1;
+    int search_set_return_code = -1;
+    int search_get_return_code = -1;
+    int search_effective = 0;
+    int node_select_requested = 1;
+    int node_select_set_return_code = -1;
+    int node_select_get_return_code = -1;
+    int node_select_effective = 0;
+    int time_limit_parameter_id = 1039;
+    double time_limit_requested = 0.0;
+    int time_limit_set_return_code = -1;
+    int time_limit_get_return_code = -1;
+    double time_limit_effective = 0.0;
+    bool native_cuts_default = true;
+    std::string log_path;
+    int log_set_return_code = -1;
+    std::string native_cut_counts;
+    std::unordered_map<std::string, double> values;
+};
 
 struct TailoredBCCplexApiProbe {
     bool dll_found = false;
@@ -185,6 +258,10 @@ struct GlobalGiniTreeApiSolveResult {
     int status_code = 0;
     std::string status;
     std::string fail_reason;
+    NativeMipEvidence native;
+    int model_columns = 0;
+    int model_rows = 0;
+    long long model_nonzeros = 0;
     double objective = 0.0;
     double best_bound = 0.0;
     bool best_bound_available = false;
@@ -236,21 +313,33 @@ struct GlobalGiniTreeApiSolveResult {
     double row_factory_seconds = 0.0;
     double callback_packing_seconds = 0.0;
     double local_row_api_seconds = 0.0;
+    int threads_requested = 1;
+    int threads_set_rc = -1;
+    int threads_get_rc = -1;
     int presolve_requested = 1;
-    int presolve_set_rc = 0;
+    int presolve_set_rc = -1;
+    int presolve_get_rc = -1;
     int presolve_effective = 1;
     int search_requested = 2;
-    int search_set_rc = 0;
+    int search_set_rc = -1;
+    int search_get_rc = -1;
     int search_effective = 2;
     int node_select_requested = 1;
-    int node_select_set_rc = 0;
+    int node_select_set_rc = -1;
+    int node_select_get_rc = -1;
     int node_select_effective = 1;
+    int heuristics_get_rc = -1;
     int heuristics_effective = 0;
+    int probing_get_rc = -1;
     int probing_effective = 0;
     int threads_effective = 1;
     bool native_cuts_default = true;
-    int native_time_limit_set_rc = 0;
+    int log_set_rc = -1;
+    int native_time_limit_set_rc = -1;
+    int native_time_limit_get_rc = -1;
+    double native_time_limit_requested = 0.0;
     double native_time_limit_seconds = 0.0;
+    double native_time_limit_effective = 0.0;
     bool solver_finalization_reached = false;
     bool callback_abort_used = false;
     bool recursive_branching_complete = false;
@@ -291,6 +380,12 @@ struct GlobalGiniTreeApiSolveResult {
 };
 
 TailoredBCCplexApiProbe probeTailoredBCCplexApi();
+
+PlainCplexApiSolveResult solvePlainCplexWithStrictApi(
+    const std::filesystem::path& lp_path,
+    double time_limit_seconds,
+    int threads,
+    const std::filesystem::path& log_path = {});
 
 TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     const std::filesystem::path& lp_path,

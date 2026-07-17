@@ -1,0 +1,14 @@
+check_id,status,requirement,evidence
+CERT001,PASS,Stage 0 deterministic tests all pass,results/gf_global_gini_tree_strict_flow_round/mechanical/stage0_tests.csv
+SRC001,PASS,Round 21 fail-closed static source audit passes,results/gf_global_gini_tree_strict_flow_round/static_audit/checks.csv
+RUN001,PASS,every retained active official result validates,results/gf_global_gini_tree_strict_flow_round/audits/run_validation_audit.csv
+CERT002,PASS,relative and absolute zero MIP gaps round-trip in every fresh row,fresh validated result JSONs
+CERT003,PASS,raw CPXgetbestobjval is retained as serialized lower_bound,fresh validated result JSONs
+CERT004,PASS,serialized full-precision gaps agree with retained bounds,fresh validated result JSONs
+CERT005,PASS,no tolerance-optimal or time-limit row is labelled strict,numeric native status and strict class
+LIFE001,PASS,one environment/problem/read/mipopt/free/close and native finalization,fresh validated result JSONs
+FAIR001,PASS,"all rows use one thread, presolve on, traditional search, best-bound node selection",effective native parameter readbacks
+TREE001,PASS,"global-tree coverage, row migration, sibling isolation, and bound monotonicity pass",fresh validated global-tree JSONs
+TREE002,PASS,production global-tree rows perform no auxiliary solve or child process,fresh validated global-tree JSONs
+FLOW001,PASS,all requested explicit flow variants resolve exactly,requested/resolved variant fields
+FLOW002,PASS,off/F0/F1/F2/F3 preserve the exact strictly certified toy original optimum,results/gf_global_gini_tree_strict_flow_round/mechanical/toy_original_optimum_comparison.csv

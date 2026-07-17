@@ -1,0 +1,115 @@
+check_id,status,source,source_sha256,line,evidence_kind,line_text
+FLOW001,PASS,include/ConnectivityFlow.hpp,4ad49231d642cae8536b546a5569f5092f8986969070e54bb3b6044e66a238ed,1,scope_scanned,include/ConnectivityFlow.hpp: audited lines 1-109
+FLOW001,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,1,scope_scanned,src/ConnectivityFlow.cpp: audited lines 1-287
+FLOW001,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,616,scope_scanned,writeCompactLp connectivity-flow column block: audited lines 616-628
+FLOW001,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,820,scope_scanned,writeCompactLp connectivity-flow block: audited lines 820-884
+FLOW002,PASS,include/ConnectivityFlow.hpp,4ad49231d642cae8536b546a5569f5092f8986969070e54bb3b6044e66a238ed,1,scope_scanned,include/ConnectivityFlow.hpp: audited lines 1-109
+FLOW002,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,1,scope_scanned,src/ConnectivityFlow.cpp: audited lines 1-287
+FLOW002,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,616,scope_scanned,writeCompactLp connectivity-flow column block: audited lines 616-628
+FLOW002,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,820,scope_scanned,writeCompactLp connectivity-flow block: audited lines 820-884
+FLOW003,PASS,include/ConnectivityFlow.hpp,4ad49231d642cae8536b546a5569f5092f8986969070e54bb3b6044e66a238ed,1,scope_scanned,include/ConnectivityFlow.hpp: audited lines 1-109
+FLOW003,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,1,scope_scanned,src/ConnectivityFlow.cpp: audited lines 1-287
+FLOW003,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,616,scope_scanned,writeCompactLp connectivity-flow column block: audited lines 616-628
+FLOW003,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,820,scope_scanned,writeCompactLp connectivity-flow block: audited lines 820-884
+FLOW004,PASS,include/ConnectivityFlow.hpp,4ad49231d642cae8536b546a5569f5092f8986969070e54bb3b6044e66a238ed,1,scope_scanned,include/ConnectivityFlow.hpp: audited lines 1-109
+FLOW004,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,1,scope_scanned,src/ConnectivityFlow.cpp: audited lines 1-287
+FLOW004,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,616,scope_scanned,writeCompactLp connectivity-flow column block: audited lines 616-628
+FLOW004,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,820,scope_scanned,writeCompactLp connectivity-flow block: audited lines 820-884
+FLOW005,PASS,include/ConnectivityFlow.hpp,4ad49231d642cae8536b546a5569f5092f8986969070e54bb3b6044e66a238ed,1,scope_scanned,include/ConnectivityFlow.hpp: audited lines 1-109
+FLOW005,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,1,scope_scanned,src/ConnectivityFlow.cpp: audited lines 1-287
+FLOW005,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,616,scope_scanned,writeCompactLp connectivity-flow column block: audited lines 616-628
+FLOW005,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,820,scope_scanned,writeCompactLp connectivity-flow block: audited lines 820-884
+FLOW006,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,830,regex_match,"connectivityFlowArcUpperBound(flow_variant, V, i, j);"
+FLOW006,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,836,regex_match,if (connectivityFlowHasLowerLinks(flow_variant)) {
+FLOW006,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,848,regex_match,"if (hasConnectivityFlowColumn(flow_variant, V, j, i)) {"
+FLOW006,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,851,regex_match,"if (hasConnectivityFlowColumn(flow_variant, V, i, j)) {"
+FLOW006,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,861,regex_match,"if (hasConnectivityFlowColumn(flow_variant, V, j, 0)) {"
+FLOW006,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,867,regex_match,if (connectivityFlowHasStartCoupling(flow_variant)) {
+FLOW007,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,147,regex_match,return connectivityFlowUsesReturnColumns(variant) || to != 0;
+FLOW007,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,861,regex_match,"if (hasConnectivityFlowColumn(flow_variant, V, j, 0)) {"
+FLOW008,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,50,regex_match,"case ConnectivityFlowVariant::Off: return ""off"";"
+FLOW008,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,51,regex_match,"case ConnectivityFlowVariant::Round20Current: return ""round20-current"";"
+FLOW008,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,52,regex_match,"case ConnectivityFlowVariant::ZeroReturn: return ""zero-return"";"
+FLOW008,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,53,regex_match,"case ConnectivityFlowVariant::Normalized: return ""normalized"";"
+FLOW008,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,55,regex_match,"return ""normalized-start-coupled"";"
+FLOW008,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,64,regex_match,"if (normalized == ""off"" || normalized == ""none"" ||"
+FLOW008,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,67,regex_match,"} else if (normalized == ""round20-current"" || normalized == ""current"" ||"
+FLOW008,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,71,regex_match,"} else if (normalized == ""zero-return"" || normalized == ""f1"") {"
+FLOW008,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,73,regex_match,"} else if (normalized == ""normalized"" || normalized == ""f2"") {"
+FLOW008,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,75,regex_match,"} else if (normalized == ""normalized-start-coupled"" ||"
+FLOW009,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,1,scope_scanned,src/ConnectivityFlow.cpp: audited lines 1-287
+FLOW009,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,820,scope_scanned,writeCompactLp connectivity-flow block: audited lines 820-884
+OPT001,PASS,include/Instance.hpp,934ff2431cca96e7c4dcaa2bcf824b2d2baca8b080aef959949a2e8d9d5447ad,63,regex_match,bool global_gini_tree_root_connectivity_flow = false;
+OPT001,PASS,include/Instance.hpp,934ff2431cca96e7c4dcaa2bcf824b2d2baca8b080aef959949a2e8d9d5447ad,67,regex_match,std::string global_gini_tree_root_connectivity_flow_variant;
+OPT001,PASS,src/main.cpp,108421d996922631f6240116d154f7d18990b3dd427cb352e2e0f0afb4d4fb85,539,regex_match,"else if (arg == ""--global-gini-tree-root-connectivity-flow"") opt.global_gini_tree_root_connectivity_flow = parseBoolValue(requireValue(i, argc, argv));"
+OPT001,PASS,src/main.cpp,108421d996922631f6240116d154f7d18990b3dd427cb352e2e0f0afb4d4fb85,540,regex_match,"else if (arg == ""--global-gini-tree-root-connectivity-flow-variant"") opt.global_gini_tree_root_connectivity_flow_variant = requireValue(i, argc, argv);"
+OPT002,PASS,src/main.cpp,108421d996922631f6240116d154f7d18990b3dd427cb352e2e0f0afb4d4fb85,60,regex_match,"<< ""[--global-gini-tree-native-mip-start true|false] [--global-gini-tree-root-connectivity-flow true|false] """
+OPT002,PASS,src/main.cpp,108421d996922631f6240116d154f7d18990b3dd427cb352e2e0f0afb4d4fb85,61,regex_match,"<< ""[--global-gini-tree-root-connectivity-flow-variant off|round20-current|zero-return|normalized|normalized-start-coupled] [--global-gini-tree-node-trace <path>] """
+OPT003,PASS,include/Instance.hpp,934ff2431cca96e7c4dcaa2bcf824b2d2baca8b080aef959949a2e8d9d5447ad,59,regex_match,"std::string global_gini_tree_child_estimate_mode = ""parent-copy"";"
+OPT003,PASS,include/Instance.hpp,934ff2431cca96e7c4dcaa2bcf824b2d2baca8b080aef959949a2e8d9d5447ad,60,regex_match,"std::string global_gini_tree_row_attachment_mode = ""full-inherited-pack"";"
+OPT003,PASS,include/Instance.hpp,934ff2431cca96e7c4dcaa2bcf824b2d2baca8b080aef959949a2e8d9d5447ad,61,regex_match,"std::string global_gini_tree_row_timing_mode = ""deferred"";"
+OPT003,PASS,include/Instance.hpp,934ff2431cca96e7c4dcaa2bcf824b2d2baca8b080aef959949a2e8d9d5447ad,62,regex_match,bool global_gini_tree_native_mip_start = false;
+OPT004,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,4923,regex_match,state->options->global_gini_tree_child_estimate_mode ==
+OPT004,PASS,src/main.cpp,108421d996922631f6240116d154f7d18990b3dd427cb352e2e0f0afb4d4fb85,535,regex_match,"else if (arg == ""--global-gini-tree-child-estimate"") opt.global_gini_tree_child_estimate_mode = requireValue(i, argc, argv);"
+OPT005,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,3676,regex_match,const bool incremental = state.options->global_gini_tree_row_attachment_mode ==
+OPT005,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,3928,regex_match,if (state.options->global_gini_tree_row_attachment_mode ==
+OPT005,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,4566,regex_match,state->options->global_gini_tree_row_attachment_mode ==
+OPT005,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,5004,regex_match,state->options->global_gini_tree_row_attachment_mode ==
+OPT005,PASS,src/main.cpp,108421d996922631f6240116d154f7d18990b3dd427cb352e2e0f0afb4d4fb85,536,regex_match,"else if (arg == ""--global-gini-tree-row-attachment"") opt.global_gini_tree_row_attachment_mode = requireValue(i, argc, argv);"
+OPT006,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,3831,regex_match,"? (state.options->global_gini_tree_row_timing_mode == ""eager"""
+OPT006,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,4899,regex_match,"state->options->global_gini_tree_row_timing_mode == ""eager"";"
+OPT006,PASS,src/main.cpp,108421d996922631f6240116d154f7d18990b3dd427cb352e2e0f0afb4d4fb85,537,regex_match,"else if (arg == ""--global-gini-tree-row-timing"") opt.global_gini_tree_row_timing_mode = requireValue(i, argc, argv);"
+OPT007,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,450,regex_match,NativeMipStartMapping buildVerifiedNativeMipStart(
+OPT007,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,6594,regex_match,out.native_mip_start_attempted = options.global_gini_tree_native_mip_start;
+OPT007,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,6595,regex_match,if (options.global_gini_tree_native_mip_start) {
+OPT007,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,6596,regex_match,const NativeMipStartMapping mapping = buildVerifiedNativeMipStart(
+OPT007,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,6641,regex_match,"<< ""enabled,"" << (options.global_gini_tree_native_mip_start"
+OPT007,PASS,src/main.cpp,108421d996922631f6240116d154f7d18990b3dd427cb352e2e0f0afb4d4fb85,538,regex_match,"else if (arg == ""--global-gini-tree-native-mip-start"") opt.global_gini_tree_native_mip_start = parseBoolValue(requireValue(i, argc, argv));"
+OPT008,PASS,include/Instance.hpp,934ff2431cca96e7c4dcaa2bcf824b2d2baca8b080aef959949a2e8d9d5447ad,63,flow_option_assignment,bool global_gini_tree_root_connectivity_flow = false;
+OPT008,PASS,src/main.cpp,108421d996922631f6240116d154f7d18990b3dd427cb352e2e0f0afb4d4fb85,539,flow_option_assignment,"else if (arg == ""--global-gini-tree-root-connectivity-flow"") opt.global_gini_tree_root_connectivity_flow = parseBoolValue(requireValue(i, argc, argv));"
+OPT008,PASS,src/main.cpp,108421d996922631f6240116d154f7d18990b3dd427cb352e2e0f0afb4d4fb85,540,flow_option_assignment,"else if (arg == ""--global-gini-tree-root-connectivity-flow-variant"") opt.global_gini_tree_root_connectivity_flow_variant = requireValue(i, argc, argv);"
+SRC001,PASS,include/ConnectivityFlow.hpp,4ad49231d642cae8536b546a5569f5092f8986969070e54bb3b6044e66a238ed,1,source_loaded,full source hashed
+SRC001,PASS,include/Instance.hpp,934ff2431cca96e7c4dcaa2bcf824b2d2baca8b080aef959949a2e8d9d5447ad,1,source_loaded,full source hashed
+SRC001,PASS,include/Result.hpp,9acb200dee4055d4f618e61fa0f63f59ca14836bfa80cca084dccf3fc60652df,1,source_loaded,full source hashed
+SRC001,PASS,include/StrictCertificate.hpp,7d02754ff15b17ad1e40d928105027d449ec36c80da631b5a12df52a520b3c0c,1,source_loaded,full source hashed
+SRC001,PASS,include/TailoredBCCplexApi.hpp,e8bce15987ebf68bb87ddbf0c22675db9ca32c1bcb9116c4f7fc8020ffb5fca9,1,source_loaded,full source hashed
+SRC001,PASS,scripts/round21_static_exactness_audit.py,0070de2f6b8dd9e5b9e02476a035903d1b367b9ea90f7ce2355bf327db50a0ad,1,source_loaded,full source hashed
+SRC001,PASS,src/ConnectivityFlow.cpp,14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46,1,source_loaded,full source hashed
+SRC001,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,1,source_loaded,full source hashed
+SRC001,PASS,src/Result.cpp,531d7f282d0274943459fb61c0d2719ae85ffd93cac63ad72ca07a17bfaa94c1,1,source_loaded,full source hashed
+SRC001,PASS,src/StrictCertificate.cpp,1bfbfc9b106910845ad4b3258cc19885c38d6a798a2ae838a10533606b3d9adf,1,source_loaded,full source hashed
+SRC001,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,1,source_loaded,full source hashed
+SRC001,PASS,src/main.cpp,108421d996922631f6240116d154f7d18990b3dd427cb352e2e0f0afb4d4fb85,1,source_loaded,full source hashed
+STRICT001,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,86,regex_match,constexpr int kParamMipGap = 2009;
+STRICT001,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,87,regex_match,constexpr int kParamAbsoluteMipGap = 2008;
+STRICT002,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,329,regex_match,"api.setdblparam(env, kParamMipGap, 0.0);"
+STRICT002,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,330,regex_match,evidence.relative_gap.getter_return_code = api.getdblparam(
+STRICT002,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,335,regex_match,"api.setdblparam(env, kParamAbsoluteMipGap, 0.0);"
+STRICT002,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,336,regex_match,evidence.absolute_gap.getter_return_code = api.getdblparam(
+STRICT002,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,338,regex_match,evidence.strict_gap_configuration_valid =
+STRICT003,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,5276,regex_match,"const bool strict_gaps_ok = configureStrictMipGaps(api, env, out.native);"
+STRICT003,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,6352,regex_match,"const bool strict_gaps_ok = configureStrictMipGaps(api, env, out.native);"
+STRICT004,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,5276,regex_match,"const bool strict_gaps_ok = configureStrictMipGaps(api, env, out.native);"
+STRICT004,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,5292,regex_match,out.time_limit_effective == time_limit_seconds) && strict_gaps_ok;
+STRICT004,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,5294,regex_match,"out.fail_reason = ""strict_plain_required_parameter_round_trip_failed"";"
+STRICT004,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,6397,regex_match,const bool required_parameter_round_trips =
+STRICT004,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,6412,regex_match,if (!required_parameter_round_trips) {
+STRICT004,PASS,src/TailoredBCCplexApi.cpp,87180165c3849536d05d258c8ef93b4ed3b84cbba26d921bdca802ba62f053d9,6413,regex_match,"out.fail_reason = ""required_parameter_configuration_failed"";"
+STRICT005,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,3193,regex_match,classifyStrictCertificate(input);
+STRICT005,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,3379,regex_match,evaluateAndPopulateStrictCertificate(
+STRICT005,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,5523,regex_match,evaluateAndPopulateStrictCertificate(
+STRICT005,PASS,src/StrictCertificate.cpp,1bfbfc9b106910845ad4b3258cc19885c38d6a798a2ae838a10533606b3d9adf,79,regex_match,StrictCertificateDecision classifyStrictCertificate(
+STRICT006,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,3240,regex_match,"? ""native_CPXgetbestobjval"" : ""unavailable"";"
+STRICT006,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,3376,regex_match,result.lower_bound = api.native.best_bound;
+STRICT006,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,5510,regex_match,result.lower_bound = api.native.best_bound;
+STRICT007,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,3246,scope_scanned,solveCplexBaseline: audited lines 3246-3450
+STRICT007,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,5021,scope_scanned,solveGlobalGiniTree: audited lines 5021-5621
+STRICT008,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,3246,scope_scanned,solveCplexBaseline: audited lines 3246-3450
+STRICT008,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,5021,scope_scanned,solveGlobalGiniTree: audited lines 5021-5621
+STRICT009,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,3246,scope_scanned,solveCplexBaseline: audited lines 3246-3450
+STRICT009,PASS,src/CplexBaseline.cpp,c539aa3541a1888cd066c5e1f986d47eabdc116d1698966d4ae6d083074a6918,5021,scope_scanned,solveGlobalGiniTree: audited lines 5021-5621
+STRICT010,PASS,src/Result.cpp,531d7f282d0274943459fb61c0d2719ae85ffd93cac63ad72ca07a17bfaa94c1,439,regex_match,out << std::setprecision(std::numeric_limits<double>::max_digits10);
+STRICT010,PASS,src/Result.cpp,531d7f282d0274943459fb61c0d2719ae85ffd93cac63ad72ca07a17bfaa94c1,522,regex_match,"out << ""  \""lower_bound\"": "";"
+STRICT010,PASS,src/Result.cpp,531d7f282d0274943459fb61c0d2719ae85ffd93cac63ad72ca07a17bfaa94c1,534,regex_match,"out << ""  \""gap\"": "";"
+STRICT010,PASS,src/Result.cpp,531d7f282d0274943459fb61c0d2719ae85ffd93cac63ad72ca07a17bfaa94c1,570,regex_match,"out << ""  \""native_mip_best_bound\"": "";"
+STRICT011,PASS,src/Result.cpp,531d7f282d0274943459fb61c0d2719ae85ffd93cac63ad72ca07a17bfaa94c1,1,scope_scanned,src/Result.cpp: audited lines 1-3228

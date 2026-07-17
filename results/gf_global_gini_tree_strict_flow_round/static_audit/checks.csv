@@ -1,0 +1,30 @@
+check_id,category,status,requirement,detail,evidence_count
+FLOW001,flow_prohibited_logic,PASS,"normalized-flow production code contains no instance names, seeds, known benchmark labels, or known-objective literals",no prohibited occurrence in 4 fail-closed scope(s),4
+FLOW002,flow_prohibited_logic,PASS,"normalized-flow production code contains no filename, path, or artifact-dependent logic",no prohibited occurrence in 4 fail-closed scope(s),4
+FLOW003,flow_prohibited_logic,PASS,normalized-flow activation contains no V/M tier or scale-class threshold,no prohibited occurrence in 4 fail-closed scope(s),4
+FLOW004,flow_prohibited_logic,PASS,"normalized-flow production code contains no route masks, subset enumeration, or restricted route pools",no prohibited occurrence in 4 fail-closed scope(s),4
+FLOW005,flow_prohibited_logic,PASS,normalized-flow production scopes perform no auxiliary LP/MIP solve or child-process launch,no prohibited occurrence in 4 fail-closed scope(s),4
+FLOW006,flow_structure,PASS,the production writer delegates column existence/bounds and all optional normalization layers to the shared flow variant policy,all required clauses found,6
+FLOW007,flow_structure,PASS,F1/F2/F3 eliminate return-flow columns and the depot equation uses only existing return columns,all required clauses found,2
+FLOW008,flow_structure,PASS,all required same-binary flow variants are recognized explicitly,all required clauses found,10
+FLOW009,flow_prohibited_logic,PASS,flow-policy call sites are confined to the formulation writer/policy implementation,no unexpected production call site,2
+OPT001,experiment_options,PASS,legacy Round 20 Boolean flow switch and explicit Round 21 variant option both remain in SolveOptions and the CLI parser,all required clauses found,4
+OPT002,experiment_options,PASS,the CLI usage text exposes both legacy and explicit flow controls,all required clauses found,2
+OPT003,experiment_options,PASS,"primary flow-ablation defaults remain parent-copy, full inherited rows, deferred timing, and native MIP start off",all required clauses found,4
+OPT004,legacy_mechanisms,PASS,factory-domain child estimates remain selectable and implemented,all required clauses found,2
+OPT005,legacy_mechanisms,PASS,exact incremental row delta remains selectable and implemented,all required clauses found,5
+OPT006,legacy_mechanisms,PASS,eager row timing remains selectable and implemented,all required clauses found,3
+OPT007,legacy_mechanisms,PASS,verified native MIP start remains selectable and implemented,all required clauses found,6
+OPT008,flow_prohibited_logic,PASS,flow variant selection is assigned only by its neutral default or explicit CLI arguments,found exactly the three permitted assignment sites,3
+SRC001,source_integrity,PASS,"all required production sources are present, nonempty, and UTF-8",loaded 12 required source files,12
+STRICT001,strict_gap_parameters,PASS,installed CPLEX relative and absolute MIP-gap parameter IDs are both explicit,all required clauses found,2
+STRICT002,strict_gap_parameters,PASS,strict setup sets and reads back both relative and absolute gap parameters at zero,all required clauses found,5
+STRICT003,strict_gap_parameters,PASS,fresh plain CPLEX and global-tree solves both invoke the shared strict gap setup,all required clauses found,2
+STRICT004,strict_gap_parameters,PASS,fresh plain CPLEX and global-tree solves fail closed when strict gap setup fails,all required clauses found,6
+STRICT005,strict_result_mapping,PASS,plain CPLEX and global-tree result mapping use the same strict classifier adapter,all required clauses found,4
+STRICT006,strict_result_mapping,PASS,plain and global-tree serialized lower bounds are populated directly from raw CPXgetbestobjval evidence,all required clauses found,3
+STRICT007,strict_result_mapping,PASS,"strict plain/global result mapping never replaces native LB with an incumbent, objective, UB, or verified objective",no prohibited occurrence in 2 fail-closed scope(s),2
+STRICT008,strict_result_mapping,PASS,strict plain/global mapping never hard-codes serialized gap zero,no prohibited occurrence in 2 fail-closed scope(s),2
+STRICT009,strict_result_mapping,PASS,strict plain/global mapping does not infer exactness from status-text substring helpers,no prohibited occurrence in 2 fail-closed scope(s),2
+STRICT010,strict_serialization,PASS,JSON serialization uses max_digits10 and emits raw LB/gap/native-bound fields observationally,all required clauses found,4
+STRICT011,strict_serialization,PASS,the JSON serializer does not assign or recompute lower_bound/gap fields,no prohibited occurrence in 1 fail-closed scope(s),1
