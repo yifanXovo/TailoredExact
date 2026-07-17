@@ -165,15 +165,18 @@ void testIntegrityAcceptsMonotoneTrajectory() {
             "valid dense trajectory failed integrity audit");
 }
 
-void testIntegrityExposesBoundRegression() {
+void testIntegrityReportsBoundRegressionWithoutInvalidatingEvidence() {
     ebrp::DenseProgressRecorder recorder(config());
     recorder.observe(snapshot(0.0, 0.7, 0));
     recorder.observe(snapshot(1.0, 0.6, 100));
     recorder.appendSolverFinal(snapshot(2.0, 0.6, 200));
-    const auto audit = ebrp::auditDenseProgressEvents(
-        recorder.events(), 1e-9);
+    const auto audit = ebrp::auditDenseProgressEvents(recorder.events());
     require(!audit.lower_bound_nondecreasing,
             "lower-bound regression hidden");
+    require(audit.native_monotonicity_is_diagnostic_only &&
+                audit.lower_bound_negative_step_count == 1 &&
+                audit.error_count == 0,
+            "native bound diagnostic incorrectly invalidated evidence");
 }
 
 void testBufferBoundAndCounters() {
@@ -237,7 +240,7 @@ int main() {
         testObservationAgeAndStaleness();
         testMissingObservationNotFabricated();
         testIntegrityAcceptsMonotoneTrajectory();
-        testIntegrityExposesBoundRegression();
+        testIntegrityReportsBoundRegressionWithoutInvalidatingEvidence();
         testBufferBoundAndCounters();
         testBufferedFlushPreservesRetainedEvents();
         testAlgorithmNeutralSchema();

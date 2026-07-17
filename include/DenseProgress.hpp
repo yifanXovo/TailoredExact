@@ -111,9 +111,16 @@ struct DenseProgressStats {
 
 struct DenseProgressIntegrity {
     bool timestamps_strictly_increasing = true;
+    bool native_monotonicity_is_diagnostic_only = true;
     bool lower_bound_nondecreasing = true;
+    long long lower_bound_negative_step_count = 0;
+    double lower_bound_max_negative_step = 0.0;
     bool incumbent_nonincreasing = true;
+    long long incumbent_positive_step_count = 0;
+    double incumbent_max_positive_step = 0.0;
     bool node_counters_consistent = true;
+    long long processed_nodes_negative_step_count = 0;
+    long long processed_nodes_max_negative_step = 0;
     bool final_record_present = false;
     long long error_count = 0;
     std::string errors;
@@ -126,8 +133,7 @@ std::vector<DenseProgressCheckpoint> extractDenseProgressCheckpoints(
     const std::vector<DenseProgressEvent>& events,
     double horizon_seconds);
 DenseProgressIntegrity auditDenseProgressEvents(
-    const std::vector<DenseProgressEvent>& events,
-    double lower_bound_api_noise_tolerance = 1e-7);
+    const std::vector<DenseProgressEvent>& events);
 
 class DenseProgressRecorder {
 public:

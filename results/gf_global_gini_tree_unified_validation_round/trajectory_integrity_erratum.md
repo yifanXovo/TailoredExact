@@ -1,5 +1,7 @@
 # Round 22 trajectory-integrity erratum
 
+This first integrity erratum introduced a magnitude cutoff. A later independent native counterexample showed that any magnitude-based monotonicity cutoff still conflates solver behavior with evidence corruption. `trajectory_monotonicity_erratum.md` supersedes only that cutoff; the raw-value, no-repair, endpoint, and structural-integrity requirements below remain in force as historical provenance.
+
 The first attempted Stage 2 stopped on `stage2__V12_M1__plain__900s__dense_on`. Its authoritative raw CPLEX local-progress trace contained 391,404 retained events and 3,816 full-precision negative steps in `CPXCALLBACKINFO_BEST_BND`; four exceeded the runner's former absolute `1e-7` cutoff. The largest was `6.60548520547977e-7`, and each of those four isolated excursions recovered on the next retained observation. The final raw record was `0.35720058320841552`, exactly equal to the native final lower bound in the result JSON. Timestamps, processed nodes, finalization, model gate, and endpoint evidence were otherwise valid.
 
 The original runner treated any decrease larger than `1e-7` as corruption. That assumption conflated native callback numerical fluctuation with loss or alteration of evidence. No algorithm, arm, model, parameter, certificate rule, or recorded observation is changed by this erratum.

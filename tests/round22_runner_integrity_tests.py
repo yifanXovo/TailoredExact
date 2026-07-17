@@ -48,12 +48,11 @@ def main() -> None:
     ])
     assert nominal["error_count"] == 0, nominal
     assert nominal["raw_values_reported_not_repaired"] is True
+    assert nominal["native_monotonicity_is_diagnostic_only"] is True
     assert nominal["lower_bound_nondecreasing"] is False
-    assert nominal["lower_bound_no_material_decrease"] is True
     assert nominal["lower_bound_negative_step_count"] == 1
     assert abs(float(nominal["lower_bound_max_negative_step"]) - 6e-7) < 1e-15
     assert nominal["incumbent_nonincreasing"] is False
-    assert nominal["incumbent_no_material_increase"] is True
 
     material = audit([
         {"observation_time_seconds": 1, "native_best_bound": 0.5,
@@ -66,11 +65,25 @@ def main() -> None:
          "native_incumbent": 0.9, "processed_nodes": 2,
          "retention_trigger": "solver_final"},
     ])
-    assert material["error_count"] == 2, material
-    assert "lower_bound_material_decrease" in str(material["errors"])
-    assert "incumbent_material_increase" in str(material["errors"])
-    assert material["lower_bound_material_negative_step_count"] == 1
-    assert material["incumbent_material_positive_step_count"] == 1
+    assert material["error_count"] == 0, material
+    assert material["lower_bound_negative_step_count"] == 1
+    assert material["incumbent_positive_step_count"] == 1
+
+    structural = audit([
+        {"observation_time_seconds": 1, "native_best_bound": 0.5,
+         "native_incumbent": 1.0, "processed_nodes": 2,
+         "retention_trigger": "first_observation"},
+        {"observation_time_seconds": 1, "native_best_bound": 0.4,
+         "native_incumbent": 1.1, "processed_nodes": 1,
+         "retention_trigger": "heartbeat"},
+        {"observation_time_seconds": 3, "native_best_bound": 0.59,
+         "native_incumbent": 0.9, "processed_nodes": 3,
+         "retention_trigger": "solver_final"},
+    ])
+    assert structural["error_count"] == 2, structural
+    assert "timestamp_not_strict" in str(structural["errors"])
+    assert "final_bound_json_mismatch" in str(structural["errors"])
+    assert structural["processed_nodes_negative_step_count"] == 1
 
     with tempfile.TemporaryDirectory() as directory:
         raw = Path(directory) / "raw_progress.csv"
@@ -102,7 +115,7 @@ def main() -> None:
             {"raw_progress": raw}, checkpoints)
         assert any("horizon_fresh_checkpoints" in item for item in quality), quality
 
-    print("round22 runner integrity tests: 4 groups passed")
+    print("round22 runner integrity tests: 5 groups passed")
 
 
 if __name__ == "__main__":

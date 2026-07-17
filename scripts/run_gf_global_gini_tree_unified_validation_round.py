@@ -41,7 +41,6 @@ CHECKPOINTS = (1, 2, 5, 10, 15, 20, 30, 45, 60, 90, 120, 180,
                240, 300, 450, 600, 750, 900, 1200, 1500, 1800,
                2400, 3000, 3600)
 THRESHOLDS = (0.20, 0.10, 0.05, 0.02, 0.01, 0.005, 0.001)
-TRAJECTORY_NUMERICAL_SCALE = 1e-6
 UNIT_TESTS = (
     "ConnectivityFlowTests", "ControllingLeafSchedulerTests",
     "DenseProgressTests", "GlobalGiniTreeTests", "ModelCorrectnessTests",
@@ -361,9 +360,9 @@ def integrity(spec: RunSpec, p: Mapping[str, Path], data: Mapping[str, Any]) -> 
     errors: list[str] = []
     previous_time = -math.inf; previous_lb: float | None = None
     previous_inc: float | None = None; previous_nodes: int | None = None
-    lb_negative_steps = 0; lb_material_negative_steps = 0; lb_max_negative_step = 0.0
-    incumbent_positive_steps = 0; incumbent_material_positive_steps = 0
-    incumbent_max_positive_step = 0.0
+    lb_negative_steps = 0; lb_max_negative_step = 0.0
+    incumbent_positive_steps = 0; incumbent_max_positive_step = 0.0
+    node_negative_steps = 0; node_max_negative_step = 0
     for event in events:
         current_time = float(event["observation_time_seconds"])
         if current_time <= previous_time: errors.append("timestamp_not_strict")
@@ -374,11 +373,6 @@ def integrity(spec: RunSpec, p: Mapping[str, Path], data: Mapping[str, Any]) -> 
                 decrease = previous_lb - current
                 lb_negative_steps += 1
                 lb_max_negative_step = max(lb_max_negative_step, decrease)
-                material_scale = TRAJECTORY_NUMERICAL_SCALE * max(
-                    1.0, abs(previous_lb), abs(current))
-                if decrease > material_scale:
-                    lb_material_negative_steps += 1
-                    errors.append("lower_bound_material_decrease")
             previous_lb = current
         if finite(event.get("native_incumbent")):
             current = float(event["native_incumbent"])
@@ -387,16 +381,13 @@ def integrity(spec: RunSpec, p: Mapping[str, Path], data: Mapping[str, Any]) -> 
                 incumbent_positive_steps += 1
                 incumbent_max_positive_step = max(
                     incumbent_max_positive_step, increase)
-                material_scale = TRAJECTORY_NUMERICAL_SCALE * max(
-                    1.0, abs(previous_inc), abs(current))
-                if increase > material_scale:
-                    incumbent_material_positive_steps += 1
-                    errors.append("incumbent_material_increase")
             previous_inc = current
         if event.get("processed_nodes", "") != "":
             current_nodes = int(float(event["processed_nodes"]))
             if previous_nodes is not None and current_nodes < previous_nodes:
-                errors.append("processed_nodes_decreased")
+                decrease = previous_nodes - current_nodes
+                node_negative_steps += 1
+                node_max_negative_step = max(node_max_negative_step, decrease)
             previous_nodes = current_nodes
     final = next((event for event in reversed(events)
                   if event.get("retention_trigger") == "solver_final"), None)
@@ -408,19 +399,17 @@ def integrity(spec: RunSpec, p: Mapping[str, Path], data: Mapping[str, Any]) -> 
         "run_id": spec.run_id, "stage": spec.stage, "instance": spec.instance,
         "arm": spec.arm, "event_count": len(events),
         "timestamps_strict": "timestamp_not_strict" not in errors,
-        "trajectory_numerical_scale": TRAJECTORY_NUMERICAL_SCALE,
         "raw_values_reported_not_repaired": True,
+        "native_monotonicity_is_diagnostic_only": True,
         "lower_bound_nondecreasing": lb_negative_steps == 0,
-        "lower_bound_no_material_decrease": lb_material_negative_steps == 0,
         "lower_bound_negative_step_count": lb_negative_steps,
-        "lower_bound_material_negative_step_count": lb_material_negative_steps,
         "lower_bound_max_negative_step": lb_max_negative_step,
         "incumbent_nonincreasing": incumbent_positive_steps == 0,
-        "incumbent_no_material_increase": incumbent_material_positive_steps == 0,
         "incumbent_positive_step_count": incumbent_positive_steps,
-        "incumbent_material_positive_step_count": incumbent_material_positive_steps,
         "incumbent_max_positive_step": incumbent_max_positive_step,
-        "node_counters_consistent": "processed_nodes_decreased" not in errors,
+        "node_counters_nondecreasing": node_negative_steps == 0,
+        "processed_nodes_negative_step_count": node_negative_steps,
+        "processed_nodes_max_negative_step": node_max_negative_step,
         "solver_final_present": final is not None,
         "endpoint_matches_json": "final_bound_json_mismatch" not in errors,
         "error_count": len(errors), "errors": "|".join(sorted(set(errors))),

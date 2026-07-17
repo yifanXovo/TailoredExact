@@ -80,13 +80,18 @@ def main() -> None:
          and "std::vector<DenseProgressEvent> events_" in text("include/DenseProgress.hpp"),
          "events buffer in memory and serialize once"),
         ("raw_trajectory_numerical_integrity", all(token in runner_source for token in (
-            "TRAJECTORY_NUMERICAL_SCALE = 1e-6",
             "raw_values_reported_not_repaired",
-            "lower_bound_material_negative_step_count",
-            "incumbent_material_positive_step_count",
+            "native_monotonicity_is_diagnostic_only",
+            "lower_bound_negative_step_count",
+            "incumbent_positive_step_count",
+            "processed_nodes_negative_step_count",
             "stage1_dense_horizon_fresh_checkpoints",
-            "math.ceil(0.8 * len(eligible))")),
-         "raw fluctuations and horizon-aware Stage 1 freshness are explicit"),
+            "math.ceil(0.8 * len(eligible))")) and all(
+                token in text("src/DenseProgress.cpp") + text("include/DenseProgress.hpp")
+                for token in ("native_monotonicity_is_diagnostic_only",
+                              "lower_bound_negative_step_count",
+                              "processed_nodes_negative_step_count")),
+         "native monotonicity is diagnostic and Stage 1 freshness is horizon-aware"),
         ("no_round22_seed_literal_in_production", not re.search(
             r"(?:310[12]|320[12]|330[12]|410[12]|420[12]|430[12])", sources),
          "no benchmark seed literal occurs in src/include"),

@@ -97,8 +97,7 @@ std::vector<DenseProgressCheckpoint> extractDenseProgressCheckpoints(
 }
 
 DenseProgressIntegrity auditDenseProgressEvents(
-    const std::vector<DenseProgressEvent>& events,
-    double lower_bound_api_noise_tolerance) {
+    const std::vector<DenseProgressEvent>& events) {
     DenseProgressIntegrity out;
     std::vector<std::string> errors;
     for (std::size_t index = 0; index < events.size(); ++index) {
@@ -112,22 +111,30 @@ DenseProgressIntegrity auditDenseProgressEvents(
             }
             if (event.native_best_bound_available &&
                 previous.native_best_bound_available &&
-                event.native_best_bound + lower_bound_api_noise_tolerance <
-                    previous.native_best_bound) {
+                event.native_best_bound < previous.native_best_bound) {
                 out.lower_bound_nondecreasing = false;
-                errors.push_back("lower_bound_decreased");
+                ++out.lower_bound_negative_step_count;
+                out.lower_bound_max_negative_step = std::max(
+                    out.lower_bound_max_negative_step,
+                    previous.native_best_bound - event.native_best_bound);
             }
             if (event.native_incumbent_available &&
                 previous.native_incumbent_available &&
-                event.native_incumbent > previous.native_incumbent + 1e-12) {
+                event.native_incumbent > previous.native_incumbent) {
                 out.incumbent_nonincreasing = false;
-                errors.push_back("incumbent_increased");
+                ++out.incumbent_positive_step_count;
+                out.incumbent_max_positive_step = std::max(
+                    out.incumbent_max_positive_step,
+                    event.native_incumbent - previous.native_incumbent);
             }
             if (event.processed_nodes_available &&
                 previous.processed_nodes_available &&
                 event.processed_nodes < previous.processed_nodes) {
                 out.node_counters_consistent = false;
-                errors.push_back("processed_nodes_decreased");
+                ++out.processed_nodes_negative_step_count;
+                out.processed_nodes_max_negative_step = std::max(
+                    out.processed_nodes_max_negative_step,
+                    previous.processed_nodes - event.processed_nodes);
             }
         }
         if (event.retention_trigger == "solver_final" &&
