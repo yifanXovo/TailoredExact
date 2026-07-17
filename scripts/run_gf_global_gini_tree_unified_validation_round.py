@@ -398,6 +398,39 @@ def integrity(spec: RunSpec, p: Mapping[str, Path], data: Mapping[str, Any]) -> 
     }
 
 
+def stage1_dense_quality(spec: RunSpec, p: Mapping[str, Path],
+                         checkpoint_rows: Sequence[Mapping[str, Any]]) -> list[str]:
+    """Fail closed when the preregistered live gate is only nominally dense."""
+    if not (spec.official and spec.stage == "stage1" and spec.dense):
+        return []
+    events = read_events(p["raw_progress"])
+    native_events = [event for event in events
+                     if event.get("retention_trigger") != "solver_final"]
+    scheduled = [row for row in checkpoint_rows if row.get("record_type") == "checkpoint"]
+    fresh = sum(row.get("freshness") == "fresh" for row in scheduled)
+    failures: list[str] = []
+    if len(scheduled) != 11:
+        failures.append(f"stage1_dense_checkpoint_count:{len(scheduled)}/11")
+    if len(native_events) < 20:
+        failures.append(f"stage1_dense_native_event_count:{len(native_events)}")
+    if fresh < 9:
+        failures.append(f"stage1_dense_fresh_checkpoints:{fresh}/{len(scheduled)}")
+    if spec.arm == "plain":
+        progress_records = sum(event.get("callback_context") in
+                               ("local_progress", "global_progress")
+                               for event in native_events)
+        if progress_records == 0:
+            failures.append("stage1_plain_supported_progress_context_missing")
+    else:
+        relaxation_records = sum(
+            event.get("observation_source") ==
+            "cplex_generic_relaxation_read_only_progress"
+            for event in native_events)
+        if relaxation_records == 0:
+            failures.append("stage1_tailored_relaxation_progress_missing")
+    return failures
+
+
 def validate(spec: RunSpec, p: Mapping[str, Path], frozen: Mapping[str, Any],
              data: Mapping[str, Any], return_code: int) -> list[str]:
     failures: list[str] = []
@@ -516,10 +549,11 @@ def run_one(spec: RunSpec, frozen: Mapping[str, Any], dry_run: bool = False) -> 
             data = json.loads(p["json"].read_text(encoding="utf-8"))
             failures = validate(spec, p, frozen, data, return_code)
             if spec.dense and p["raw_progress"].exists():
-                derive_checkpoints(spec, p, data)
+                checkpoint_rows = derive_checkpoints(spec, p, data)
                 audit = integrity(spec, p, data)
                 if audit["error_count"]:
                     failures.append("trajectory_integrity:" + audit["errors"])
+                failures.extend(stage1_dense_quality(spec, p, checkpoint_rows))
         except Exception as exc:
             failures = [f"validation_exception:{type(exc).__name__}:{exc}"]
     record["validation_failures"] = failures
@@ -702,6 +736,9 @@ def analyze() -> None:
             "last_observation_seconds": max(times) if times else "",
             "local_progress_records": sum(e.get("callback_context") == "local_progress" for e in events),
             "global_progress_records": sum(e.get("callback_context") == "global_progress" for e in events),
+            "relaxation_progress_records": sum(
+                e.get("observation_source") == "cplex_generic_relaxation_read_only_progress"
+                for e in events),
             "fresh_checkpoints": sum(r["freshness"] == "fresh" for r in scheduled),
             "stale_checkpoints": sum(r["freshness"] == "stale" for r in scheduled),
             "not_observed_checkpoints": sum(r["freshness"] == "not_observed" for r in scheduled),
@@ -731,6 +768,25 @@ def analyze() -> None:
                 "native_status_code": data.get("native_mip_status_code", ""),
                 "native_best_bound": data.get("native_mip_best_bound", ""),
             })
+    overhead_pairs: dict[tuple[str, str], dict[bool, dict[str, Any]]] = {}
+    for row in overhead_rows:
+        overhead_pairs.setdefault((str(row["instance"]), str(row["arm"])), {})[
+            as_bool(row["dense_progress"])] = row
+    for row in overhead_rows:
+        pair = overhead_pairs[(str(row["instance"]), str(row["arm"]))]
+        off = pair.get(False); on = pair.get(True)
+        row["matched_pair_complete"] = off is not None and on is not None
+        row["matched_pair_id"] = f"{row['instance']}__{row['arm']}"
+        for clock in ("runner_wall_seconds", "solver_runtime_seconds"):
+            off_value = float(off[clock]) if off is not None and finite(off.get(clock)) else None
+            on_value = float(on[clock]) if on is not None and finite(on.get(clock)) else None
+            delta = on_value - off_value if off_value is not None and on_value is not None else None
+            percent = (100.0 * delta / off_value
+                       if delta is not None and off_value is not None and off_value != 0 else None)
+            row[f"matched_dense_off_{clock}"] = off_value if off_value is not None else ""
+            row[f"matched_dense_on_{clock}"] = on_value if on_value is not None else ""
+            row[f"matched_dense_on_minus_off_{clock}"] = delta if delta is not None else ""
+            row[f"matched_dense_on_minus_off_{clock}_percent"] = percent if percent is not None else ""
     csv_write(RESULTS / "progress_callback_overhead.csv", overhead_rows)
     paired = []
     auc_map = {row["run_id"]: row for row in auc_rows}

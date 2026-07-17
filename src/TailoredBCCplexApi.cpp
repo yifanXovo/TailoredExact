@@ -4631,6 +4631,89 @@ int __stdcall globalGiniTreeCallback(CPXCALLBACKCONTEXTptr context,
         const double native_incumbent = infoDouble(
             kCallbackInfoBestSol, std::numeric_limits<double>::infinity());
 
+        // GLOBAL_PROGRESS is intentionally sparse in CPLEX, even while a
+        // one-thread traditional tree is processing thousands of nodes.  The
+        // documented RELAXATION context is already required by the Tailored
+        // algorithm, so take the same callback-safe, read-only progress
+        // snapshot here before any row or branch action.  This instrumentation
+        // subpath performs information reads and recorder updates only.
+        if (state->dense_progress) {
+            const auto instrumentation_start =
+                std::chrono::steady_clock::now();
+            DenseProgressSnapshot snapshot;
+            snapshot.callback_invocation_sequence =
+                state->dense_progress->stats().callback_invocation_count + 1;
+            snapshot.observation_time_seconds = globalTreeElapsed(*state);
+            snapshot.callback_context = "relaxation";
+            snapshot.observation_source =
+                "cplex_generic_relaxation_read_only_progress";
+            double deterministic_time = 0.0;
+            if (state->api->callbackgetinfodbl(
+                    context, kCallbackInfoDeterministicTime,
+                    &deterministic_time) == 0 &&
+                std::isfinite(deterministic_time)) {
+                snapshot.deterministic_time_available = true;
+                snapshot.deterministic_time = deterministic_time;
+            }
+            snapshot.native_best_bound_available =
+                std::isfinite(global_bound) &&
+                std::fabs(global_bound) < kCplexInfinityBound;
+            snapshot.native_best_bound = global_bound;
+            snapshot.native_incumbent_available =
+                std::isfinite(native_incumbent) &&
+                std::fabs(native_incumbent) < kCplexInfinityBound;
+            snapshot.native_incumbent = native_incumbent;
+            snapshot.verified_upper_bound_available = true;
+            snapshot.verified_upper_bound = state->verified_incumbent;
+            snapshot.processed_nodes_available = nodes >= 0;
+            snapshot.processed_nodes = nodes;
+            snapshot.open_nodes_available = nodes_left >= 0;
+            snapshot.open_nodes = nodes_left;
+            snapshot.simplex_iterations_available = iterations >= 0;
+            snapshot.simplex_iterations = iterations;
+            snapshot.gini_branch_count = state->gini_branch_nodes.load();
+            snapshot.ordinary_branch_count =
+                state->ordinary_fallbacks.load();
+            if (nodes <= 0) {
+                snapshot.phase = iterations > 0 ? "root_cuts" : "root_lp";
+            } else if (snapshot.ordinary_branch_count > 0) {
+                snapshot.phase = "ordinary_tree";
+            } else if (snapshot.gini_branch_count > 0) {
+                snapshot.phase = "gini_branching";
+            } else {
+                snapshot.phase = "early_tree";
+            }
+            const double now_seconds = snapshot.observation_time_seconds;
+            {
+                std::lock_guard<std::mutex> lock(
+                    state->node_metadata_mutex);
+                double maximum_delay = 0.0;
+                double oldest_delay = 0.0;
+                long long open_siblings = 0;
+                for (const auto& item : state->node_metadata) {
+                    const GlobalGiniNodeMetadata& sibling = item.second;
+                    if (!sibling.created_by_gini_branch ||
+                        sibling.first_process_time >= 0.0) {
+                        continue;
+                    }
+                    ++open_siblings;
+                    const double delay = std::max(
+                        0.0, now_seconds - sibling.creation_time);
+                    maximum_delay = std::max(maximum_delay, delay);
+                    oldest_delay = std::max(oldest_delay, delay);
+                }
+                snapshot.current_open_gini_siblings = open_siblings;
+                snapshot.gini_sibling_delay_available = open_siblings > 0;
+                snapshot.oldest_gini_sibling_delay_seconds = oldest_delay;
+                snapshot.maximum_gini_sibling_delay_seconds = maximum_delay;
+            }
+            state->dense_progress->observe(snapshot);
+            state->dense_progress->noteCallbackInvocation(
+                std::chrono::duration<double>(
+                    std::chrono::steady_clock::now() -
+                    instrumentation_start).count());
+        }
+
         if (metadata.phase == GlobalLocalRowPhase::PendingFirstRelaxation) {
             const auto packing_start = std::chrono::steady_clock::now();
             PackedGlobalGiniChild local = packGlobalGiniChild(

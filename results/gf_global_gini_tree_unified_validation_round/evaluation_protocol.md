@@ -13,7 +13,7 @@ No arm may inspect V, M, capacity, time limit, imbalance, route count, name, see
 All solves are serial on the same machine. Native deadline is nominal process-wall budget minus `min(30, max(2, 0.02 * budget))` seconds; the reserve is for serialization/finalization. No nominal budget exceeds 3,600 seconds.
 
 - Stage 0: clean release build; seven C++ suites; Round 20 Python regression; static model/certificate/dispatch audits; Round 21 no-rerun migration; dense mocks; toy exactness; short live plain/S0/S1 callback checks.
-- Stage 1: V12_M2, moderate_seed3301, and high_imbalance_seed3202 live trajectory gates for S0, S1, and plain. Matched 300-second dense-on/dense-off overhead diagnostics are run for S0 and S1 on all three cases where the native pipeline remains operational. Off rows are excluded from performance tables.
+- Stage 1: V12_M2, moderate_seed3301, and high_imbalance_seed3202 live trajectory gates for S0, S1, and plain. Each official live row must retain at least 20 non-final native observations, cover exactly the 11 preregistered checkpoints through 120 seconds, have at least nine fresh checkpoints, and contain the arm-appropriate documented progress source (global/local progress for plain, or the read-only snapshot subpath at the start of Tailored's relaxation context). Matched 300-second dense-on/dense-off overhead diagnostics are run for S0 and S1 on all three cases where the native pipeline remains operational. Off rows are excluded from performance tables.
 - Stage 2: all eight existing instances × S0/S1/plain at 900 seconds (24 rows).
 - Stage 3: all eight existing instances × S0/S1/plain at 1,800 seconds (24 rows).
 - Stage 4: all six held-out instances × S0/S1/plain at 900 seconds (18 rows).

@@ -6,6 +6,7 @@ model_gate_version,PASS,versioned model gate is compiled
 independent_verifier_fields,PASS,"feasibility, recomputation, and mapping residual are distinct"
 dense_read_only_contract,PASS,dense progress mutations are structurally disabled
 supported_progress_contexts,PASS,documented generic progress contexts and info calls are used
+relaxation_snapshot_precedes_mutation,PASS,Tailored relaxation progress snapshot occurs before any callback mutation
 buffered_single_flush,PASS,events buffer in memory and serialize once
 no_round22_seed_literal_in_production,PASS,no benchmark seed literal occurs in src/include
 no_round22_instance_label_in_production,PASS,no benchmark label occurs in src/include

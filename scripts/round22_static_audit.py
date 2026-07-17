@@ -27,7 +27,8 @@ def main() -> None:
         path.read_text(encoding="utf-8", errors="replace")
         for folder in (ROOT / "src", ROOT / "include")
         for path in sorted(folder.rglob("*")) if path.suffix in {".cpp", ".hpp"})
-    global_source = text("src/CplexBaseline.cpp") + text("src/TailoredBCCplexApi.cpp")
+    tailored_source = text("src/TailoredBCCplexApi.cpp")
+    global_source = text("src/CplexBaseline.cpp") + tailored_source
     main_source = text("src/main.cpp")
     result_source = text("src/Result.cpp")
     manifests = {
@@ -37,6 +38,17 @@ def main() -> None:
     }
     loaded = {key: json.loads(path.read_text(encoding="utf-8"))
               for key, path in manifests.items()}
+    relaxation_marker = tailored_source.find(
+        '"cplex_generic_relaxation_read_only_progress"')
+    relaxation_start = tailored_source.rfind(
+        "if (contextid == kContextRelaxation", 0, relaxation_marker)
+    relaxation_prefix = tailored_source[relaxation_start:relaxation_marker]
+    relaxation_snapshot_precedes_mutation = (
+        relaxation_marker >= 0 and relaxation_start >= 0 and not any(
+            token in relaxation_prefix
+            for token in ("callbackaddusercuts(", "callbackmakebranch(",
+                          "callbackrejectcandidate(", "callbackabort("))
+    )
     checks = [
         ("certificate_policy_version", "round22-engineering-exact-v1" in sources,
          "Round 22 policy is compiled and serialized"),
@@ -57,8 +69,12 @@ def main() -> None:
          "dense progress mutations are structurally disabled"),
         ("supported_progress_contexts", all(token in global_source for token in (
             "kContextGlobalProgress", "kContextLocalProgress",
+            "cplex_generic_relaxation_read_only_progress",
             "callbackgetinfolong", "callbackgetinfodbl")),
          "documented generic progress contexts and info calls are used"),
+        ("relaxation_snapshot_precedes_mutation",
+         relaxation_snapshot_precedes_mutation,
+         "Tailored relaxation progress snapshot occurs before any callback mutation"),
         ("buffered_single_flush", "std::ios::trunc" in text("src/DenseProgress.cpp")
          and "std::vector<DenseProgressEvent> events_" in text("include/DenseProgress.hpp"),
          "events buffer in memory and serialize once"),
