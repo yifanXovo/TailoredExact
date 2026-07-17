@@ -83,8 +83,10 @@ def main() -> None:
             "TRAJECTORY_NUMERICAL_SCALE = 1e-6",
             "raw_values_reported_not_repaired",
             "lower_bound_material_negative_step_count",
-            "incumbent_material_positive_step_count")),
-         "raw native fluctuations are reported; only material steps invalidate integrity"),
+            "incumbent_material_positive_step_count",
+            "stage1_dense_horizon_fresh_checkpoints",
+            "math.ceil(0.8 * len(eligible))")),
+         "raw fluctuations and horizon-aware Stage 1 freshness are explicit"),
         ("no_round22_seed_literal_in_production", not re.search(
             r"(?:310[12]|320[12]|330[12]|410[12]|420[12]|430[12])", sources),
          "no benchmark seed literal occurs in src/include"),

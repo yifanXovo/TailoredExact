@@ -71,7 +71,38 @@ def main() -> None:
     assert "incumbent_material_increase" in str(material["errors"])
     assert material["lower_bound_material_negative_step_count"] == 1
     assert material["incumbent_material_positive_step_count"] == 1
-    print("round22 runner integrity tests: 2 groups passed")
+
+    with tempfile.TemporaryDirectory() as directory:
+        raw = Path(directory) / "raw_progress.csv"
+        with raw.open("w", encoding="utf-8", newline="") as stream:
+            fields = ("observation_time_seconds", "observation_source",
+                      "callback_context", "retention_trigger")
+            writer = csv.DictWriter(stream, fieldnames=fields)
+            writer.writeheader()
+            for sequence in range(20):
+                writer.writerow({
+                    "observation_time_seconds": 0.5 + 5.0 * sequence,
+                    "observation_source":
+                        "cplex_generic_relaxation_read_only_progress",
+                    "callback_context": "relaxation",
+                    "retention_trigger": "heartbeat",
+                })
+        checkpoints = [
+            {"record_type": "checkpoint", "checkpoint_seconds": checkpoint,
+             "freshness": "fresh" if checkpoint not in (5, 45, 120) else "stale"}
+            for checkpoint in (1, 2, 5, 10, 15, 20, 30, 45, 60, 90, 120)
+        ]
+        quality = runner.stage1_dense_quality(
+            runner.RunSpec("stage1", "V12_M2", "S0", 120),
+            {"raw_progress": raw}, checkpoints)
+        assert quality == [], quality
+        checkpoints[5]["freshness"] = "stale"
+        quality = runner.stage1_dense_quality(
+            runner.RunSpec("stage1", "V12_M2", "S0", 120),
+            {"raw_progress": raw}, checkpoints)
+        assert any("horizon_fresh_checkpoints" in item for item in quality), quality
+
+    print("round22 runner integrity tests: 4 groups passed")
 
 
 if __name__ == "__main__":

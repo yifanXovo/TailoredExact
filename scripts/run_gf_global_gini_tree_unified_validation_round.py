@@ -436,14 +436,25 @@ def stage1_dense_quality(spec: RunSpec, p: Mapping[str, Path],
     native_events = [event for event in events
                      if event.get("retention_trigger") != "solver_final"]
     scheduled = [row for row in checkpoint_rows if row.get("record_type") == "checkpoint"]
-    fresh = sum(row.get("freshness") == "fresh" for row in scheduled)
     failures: list[str] = []
     if len(scheduled) != 11:
         failures.append(f"stage1_dense_checkpoint_count:{len(scheduled)}/11")
     if len(native_events) < 20:
         failures.append(f"stage1_dense_native_event_count:{len(native_events)}")
-    if fresh < 9:
-        failures.append(f"stage1_dense_fresh_checkpoints:{fresh}/{len(scheduled)}")
+    last_native_time = max(
+        (float(event["observation_time_seconds"]) for event in native_events
+         if finite(event.get("observation_time_seconds"))), default=-math.inf)
+    eligible = [row for row in scheduled
+                if finite(row.get("checkpoint_seconds")) and
+                float(row["checkpoint_seconds"]) <= last_native_time + 1e-12]
+    fresh_eligible = sum(row.get("freshness") == "fresh" for row in eligible)
+    required_fresh = math.ceil(0.8 * len(eligible))
+    if len(eligible) < 8:
+        failures.append(f"stage1_dense_eligible_checkpoint_count:{len(eligible)}/8")
+    if fresh_eligible < required_fresh:
+        failures.append(
+            f"stage1_dense_horizon_fresh_checkpoints:"
+            f"{fresh_eligible}/{len(eligible)}<{required_fresh}")
     if spec.arm == "plain":
         progress_records = sum(event.get("callback_context") in
                                ("local_progress", "global_progress")
