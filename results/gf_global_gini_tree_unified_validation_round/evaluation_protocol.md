@@ -21,6 +21,8 @@ All solves are serial on the same machine. Native deadline is nominal process-wa
 
 An official row is complete only when process return code is zero; executable/source/manifest/instance hashes match; expected flow and all fixed options resolve; relative/absolute parameter IDs, setter/getter codes, requested/effective values validate; lifecycle and finalization complete; native status is one of the audited outcomes; model gate passes; dense raw/final/flush/read-only fields validate; checkpoint extraction and endpoint consistency pass; and its command/environment/artifact record is retained. Failed or interrupted attempts are archived under `attempts/excluded` and never enter official tables.
 
+Raw native bound and incumbent observations are never clamped, enveloped, rounded, or repaired. The integrity table reports every monotonicity violation, its count, and maximum full-precision step. A fixed trajectory-only numerical corruption scale of `1e-6 * max(1, |previous|, |current|)` distinguishes a material violation from the isolated native callback fluctuations documented in `trajectory_integrity_erratum.md`; only a material step invalidates a row. This scale has no role in solver status, the engineering-exact certificate, the model gate, the independent verifier, objectives, final bounds, gaps, or comparisons.
+
 ## Metrics
 
 Certificate counts are status-101 engineering-exact, status-102 tolerance-only, status-107/108 time limit, status-103 infeasible, status-115 rejected, and other rejected outcomes. Strict time is native runtime only for a valid strict row. Native objective, native LB, verified UB, recomputed objective, residuals, and gaps remain separate.

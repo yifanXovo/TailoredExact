@@ -41,6 +41,7 @@ CHECKPOINTS = (1, 2, 5, 10, 15, 20, 30, 45, 60, 90, 120, 180,
                240, 300, 450, 600, 750, 900, 1200, 1500, 1800,
                2400, 3000, 3600)
 THRESHOLDS = (0.20, 0.10, 0.05, 0.02, 0.01, 0.005, 0.001)
+TRAJECTORY_NUMERICAL_SCALE = 1e-6
 UNIT_TESTS = (
     "ConnectivityFlowTests", "ControllingLeafSchedulerTests",
     "DenseProgressTests", "GlobalGiniTreeTests", "ModelCorrectnessTests",
@@ -360,19 +361,37 @@ def integrity(spec: RunSpec, p: Mapping[str, Path], data: Mapping[str, Any]) -> 
     errors: list[str] = []
     previous_time = -math.inf; previous_lb: float | None = None
     previous_inc: float | None = None; previous_nodes: int | None = None
+    lb_negative_steps = 0; lb_material_negative_steps = 0; lb_max_negative_step = 0.0
+    incumbent_positive_steps = 0; incumbent_material_positive_steps = 0
+    incumbent_max_positive_step = 0.0
     for event in events:
         current_time = float(event["observation_time_seconds"])
         if current_time <= previous_time: errors.append("timestamp_not_strict")
         previous_time = current_time
         if finite(event.get("native_best_bound")):
             current = float(event["native_best_bound"])
-            if previous_lb is not None and current + 1e-7 < previous_lb:
-                errors.append("lower_bound_decreased")
+            if previous_lb is not None and current < previous_lb:
+                decrease = previous_lb - current
+                lb_negative_steps += 1
+                lb_max_negative_step = max(lb_max_negative_step, decrease)
+                material_scale = TRAJECTORY_NUMERICAL_SCALE * max(
+                    1.0, abs(previous_lb), abs(current))
+                if decrease > material_scale:
+                    lb_material_negative_steps += 1
+                    errors.append("lower_bound_material_decrease")
             previous_lb = current
         if finite(event.get("native_incumbent")):
             current = float(event["native_incumbent"])
-            if previous_inc is not None and current > previous_inc + 1e-12:
-                errors.append("incumbent_increased")
+            if previous_inc is not None and current > previous_inc:
+                increase = current - previous_inc
+                incumbent_positive_steps += 1
+                incumbent_max_positive_step = max(
+                    incumbent_max_positive_step, increase)
+                material_scale = TRAJECTORY_NUMERICAL_SCALE * max(
+                    1.0, abs(previous_inc), abs(current))
+                if increase > material_scale:
+                    incumbent_material_positive_steps += 1
+                    errors.append("incumbent_material_increase")
             previous_inc = current
         if event.get("processed_nodes", "") != "":
             current_nodes = int(float(event["processed_nodes"]))
@@ -389,8 +408,18 @@ def integrity(spec: RunSpec, p: Mapping[str, Path], data: Mapping[str, Any]) -> 
         "run_id": spec.run_id, "stage": spec.stage, "instance": spec.instance,
         "arm": spec.arm, "event_count": len(events),
         "timestamps_strict": "timestamp_not_strict" not in errors,
-        "lower_bound_nondecreasing": "lower_bound_decreased" not in errors,
-        "incumbent_nonincreasing": "incumbent_increased" not in errors,
+        "trajectory_numerical_scale": TRAJECTORY_NUMERICAL_SCALE,
+        "raw_values_reported_not_repaired": True,
+        "lower_bound_nondecreasing": lb_negative_steps == 0,
+        "lower_bound_no_material_decrease": lb_material_negative_steps == 0,
+        "lower_bound_negative_step_count": lb_negative_steps,
+        "lower_bound_material_negative_step_count": lb_material_negative_steps,
+        "lower_bound_max_negative_step": lb_max_negative_step,
+        "incumbent_nonincreasing": incumbent_positive_steps == 0,
+        "incumbent_no_material_increase": incumbent_material_positive_steps == 0,
+        "incumbent_positive_step_count": incumbent_positive_steps,
+        "incumbent_material_positive_step_count": incumbent_material_positive_steps,
+        "incumbent_max_positive_step": incumbent_max_positive_step,
         "node_counters_consistent": "processed_nodes_decreased" not in errors,
         "solver_final_present": final is not None,
         "endpoint_matches_json": "final_bound_json_mismatch" not in errors,
@@ -603,6 +632,7 @@ def run_stage0() -> None:
         commands.append((name, [str(TESTS / f"{name}.exe")]))
     commands.extend([
         ("round20_regression_tests", [str(PYTHON), str(ROOT / "tests" / "round20_regression_tests.py")]),
+        ("round22_runner_integrity_tests", [str(PYTHON), str(ROOT / "tests" / "round22_runner_integrity_tests.py")]),
         ("round22_static_audit", [str(PYTHON), str(ROOT / "scripts" / "round22_static_audit.py")]),
         ("round22_certificate_migration", [str(PYTHON), str(ROOT / "scripts" / "round22_certificate_migration_audit.py")]),
     ])

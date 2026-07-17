@@ -31,6 +31,7 @@ def main() -> None:
     global_source = text("src/CplexBaseline.cpp") + tailored_source
     main_source = text("src/main.cpp")
     result_source = text("src/Result.cpp")
+    runner_source = text("scripts/run_gf_global_gini_tree_unified_validation_round.py")
     manifests = {
         "S0": OUT / "stable_mainline_manifest.json",
         "S1": OUT / "candidate_mainline_manifest.json",
@@ -78,6 +79,12 @@ def main() -> None:
         ("buffered_single_flush", "std::ios::trunc" in text("src/DenseProgress.cpp")
          and "std::vector<DenseProgressEvent> events_" in text("include/DenseProgress.hpp"),
          "events buffer in memory and serialize once"),
+        ("raw_trajectory_numerical_integrity", all(token in runner_source for token in (
+            "TRAJECTORY_NUMERICAL_SCALE = 1e-6",
+            "raw_values_reported_not_repaired",
+            "lower_bound_material_negative_step_count",
+            "incumbent_material_positive_step_count")),
+         "raw native fluctuations are reported; only material steps invalidate integrity"),
         ("no_round22_seed_literal_in_production", not re.search(
             r"(?:310[12]|320[12]|330[12]|410[12]|420[12]|430[12])", sources),
          "no benchmark seed literal occurs in src/include"),
