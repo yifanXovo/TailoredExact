@@ -61,6 +61,10 @@ void writeOptionalDouble(std::ostringstream& out,
 void writeVerification(std::ostringstream& out, const Verification& v) {
     out << "{";
     out << "\"feasible\": " << (v.feasible ? "true" : "false") << ", ";
+    out << "\"original_solution_feasible\": "
+        << (v.original_solution_feasible ? "true" : "false") << ", ";
+    out << "\"original_objective_recomputed\": "
+        << (v.original_objective_recomputed ? "true" : "false") << ", ";
     out << "\"routes_start_end_depot\": " << (v.routes_start_end_depot ? "true" : "false") << ", ";
     out << "\"station_disjoint\": " << (v.station_disjoint ? "true" : "false") << ", ";
     out << "\"load_feasible\": " << (v.load_feasible ? "true" : "false") << ", ";
@@ -297,8 +301,8 @@ std::string inferStopReason(const SolveResult& result) {
 }
 
 bool inferVerifierPassed(const SolveResult& result) {
-    return result.verification.feasible &&
-           result.verification.objective_matches &&
+    return result.verification.original_solution_feasible &&
+           result.verification.original_objective_recomputed &&
            result.verification.errors.empty();
 }
 
@@ -592,6 +596,53 @@ std::string resultToJson(const SolveResult& input) {
                         result.verified_incumbent_objective_residual_available,
                         result.verified_incumbent_objective_residual);
     out << ",\n";
+    out << "  \"native_vs_recomputed_objective_residual_available\": "
+        << (result.verified_incumbent_objective_residual_available
+                ? "true" : "false") << ",\n";
+    out << "  \"native_vs_recomputed_objective_residual\": ";
+    writeOptionalDouble(out,
+                        result.verified_incumbent_objective_residual_available,
+                        result.verified_incumbent_objective_residual);
+    out << ",\n";
+    out << "  \"objective_mapping_diagnostic\": \""
+        << jsonEscape(result.objective_mapping_diagnostic) << "\",\n";
+
+    out << "  \"model_correctness_verified\": "
+        << (result.model_correctness_verified ? "true" : "false")
+        << ",\n";
+    out << "  \"model_correctness_gate_version\": \""
+        << jsonEscape(result.model_correctness_gate_version) << "\",\n";
+    out << "  \"model_correctness_failure_reason\": \""
+        << jsonEscape(result.model_correctness_failure_reason) << "\",\n";
+    out << "  \"model_correctness_audit_fingerprint\": \""
+        << jsonEscape(result.model_correctness_audit_fingerprint) << "\",\n";
+    out << "  \"model_correctness_executable_sha256\": \""
+        << jsonEscape(result.model_correctness_executable_sha256) << "\",\n";
+    out << "  \"model_correctness_source_commit_sha\": \""
+        << jsonEscape(result.model_correctness_source_commit_sha) << "\",\n";
+    out << "  \"model_correctness_model_writer_fingerprint\": \""
+        << jsonEscape(result.model_correctness_model_writer_fingerprint)
+        << "\",\n";
+    out << "  \"model_correctness_objective_definition_fingerprint\": \""
+        << jsonEscape(result.model_correctness_objective_definition_fingerprint)
+        << "\",\n";
+    out << "  \"model_correctness_row_family_inventory\": \""
+        << jsonEscape(result.model_correctness_row_family_inventory)
+        << "\",\n";
+    out << "  \"model_correctness_callback_row_inventory\": \""
+        << jsonEscape(result.model_correctness_callback_row_inventory)
+        << "\",\n";
+    out << "  \"model_correctness_variable_domain_inventory\": \""
+        << jsonEscape(result.model_correctness_variable_domain_inventory)
+        << "\",\n";
+    out << "  \"model_correctness_production_option_manifest_sha256\": \""
+        << jsonEscape(
+               result.model_correctness_production_option_manifest_sha256)
+        << "\",\n";
+    out << "  \"model_correctness_algorithm_arm\": \""
+        << jsonEscape(result.model_correctness_algorithm_arm) << "\",\n";
+    out << "  \"model_correctness_flow_variant\": \""
+        << jsonEscape(result.model_correctness_flow_variant) << "\",\n";
 
     out << "  \"native_mip_relative_gap_param_id\": "
         << result.native_mip_relative_gap_param_id << ",\n";
@@ -831,6 +882,40 @@ std::string resultToJson(const SolveResult& input) {
                 ? "true" : "false") << ",\n";
     out << "  \"strict_serialized_gap_consistent\": "
         << (result.strict_serialized_gap_consistent ? "true" : "false")
+        << ",\n";
+
+    out << "  \"dense_progress_enabled\": "
+        << (result.dense_progress_enabled ? "true" : "false") << ",\n";
+    out << "  \"dense_progress_raw_event_path\": \""
+        << jsonEscape(result.dense_progress_raw_event_path) << "\",\n";
+    out << "  \"dense_progress_checkpoint_path\": \""
+        << jsonEscape(result.dense_progress_checkpoint_path) << "\",\n";
+    out << "  \"dense_progress_schema_version\": \""
+        << jsonEscape(result.dense_progress_schema_version) << "\",\n";
+    out << "  \"dense_progress_callback_invocation_count\": "
+        << result.dense_progress_callback_invocation_count << ",\n";
+    out << "  \"dense_progress_record_count\": "
+        << result.dense_progress_record_count << ",\n";
+    out << "  \"dense_progress_dropped_record_count\": "
+        << result.dense_progress_dropped_record_count << ",\n";
+    out << "  \"dense_progress_callback_wall_seconds\": "
+        << result.dense_progress_callback_wall_seconds << ",\n";
+    out << "  \"dense_progress_serialization_seconds\": "
+        << result.dense_progress_serialization_seconds << ",\n";
+    out << "  \"dense_progress_peak_buffer_bytes\": "
+        << result.dense_progress_peak_buffer_bytes << ",\n";
+    out << "  \"dense_progress_instrumentation_wall_percent\": "
+        << result.dense_progress_instrumentation_wall_percent << ",\n";
+    out << "  \"dense_progress_final_record_appended\": "
+        << (result.dense_progress_final_record_appended ? "true" : "false")
+        << ",\n";
+    out << "  \"dense_progress_flush_succeeded\": "
+        << (result.dense_progress_flush_succeeded ? "true" : "false")
+        << ",\n";
+    out << "  \"dense_progress_flush_failure_reason\": \""
+        << jsonEscape(result.dense_progress_flush_failure_reason) << "\",\n";
+    out << "  \"dense_progress_read_only_contract\": "
+        << (result.dense_progress_read_only_contract ? "true" : "false")
         << ",\n";
 
     out << "  \"global_gini_tree_root_connectivity_flow_variant_requested\": \""

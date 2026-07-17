@@ -137,13 +137,17 @@ Verification verifySolution(const Instance& instance,
     v.G = parts.G;
     v.P = parts.P;
     v.objective = parts.objective;
-    v.objective_matches = std::isfinite(v.objective);
-    if (!v.objective_matches || std::fabs(v.objective - parts.objective) > objective_tolerance) {
-        v.objective_matches = false;
+    (void)objective_tolerance;
+    v.original_solution_feasible = v.routes_start_end_depot &&
+        v.station_disjoint && v.load_feasible && v.station_feasible &&
+        v.duration_feasible;
+    v.original_objective_recomputed = std::isfinite(v.objective);
+    v.objective_matches = v.original_objective_recomputed;
+    if (!v.original_objective_recomputed) {
+        addError(v, "Original objective recomputation is not finite");
     }
-
-    v.feasible = v.routes_start_end_depot && v.station_disjoint && v.load_feasible
-        && v.station_feasible && v.duration_feasible && v.objective_matches;
+    v.feasible = v.original_solution_feasible &&
+        v.original_objective_recomputed;
     return v;
 }
 

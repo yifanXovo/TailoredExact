@@ -75,6 +75,16 @@ struct SolveOptions {
     std::string global_gini_tree_row_delta_trace_path;
     std::string global_gini_tree_memory_trace_path;
     std::string global_gini_tree_mip_start_audit_path;
+    // Round 22 production provenance and shared dense native progress capture.
+    bool round22_production_mode = false;
+    std::string round22_source_commit_sha;
+    std::string round22_executable_sha256;
+    std::string round22_production_manifest_sha256;
+    bool dense_progress_enabled = false;
+    std::string dense_progress_run_id;
+    std::string dense_progress_raw_event_path;
+    std::string dense_progress_checkpoint_path;
+    std::string dense_progress_algorithm_arm;
     bool interval_row_factory_round19 = false;
     int frontier_refine_splits = 0;
     int frontier_split_batch = 0;

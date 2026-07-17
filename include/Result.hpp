@@ -22,11 +22,17 @@ struct RoutePlan {
 
 struct Verification {
     bool feasible = false;
+    // Round 22 authoritative verifier semantics. Feasibility and finite
+    // objective recomputation are independent of any native CPLEX objective.
+    bool original_solution_feasible = false;
+    bool original_objective_recomputed = false;
     bool routes_start_end_depot = false;
     bool station_disjoint = false;
     bool load_feasible = false;
     bool station_feasible = false;
     bool duration_feasible = false;
+    // Legacy compatibility alias for original_objective_recomputed. It does
+    // not mean bitwise agreement with a native solver objective.
     bool objective_matches = false;
     std::vector<double> route_travel_time;
     std::vector<double> route_operation_time;
@@ -75,6 +81,24 @@ struct SolveResult {
     bool verified_incumbent_objective_consistent = false;
     bool verified_incumbent_objective_residual_available = false;
     double verified_incumbent_objective_residual = 0.0;
+    std::string objective_mapping_diagnostic =
+        "mapping_residual_unavailable";
+
+    bool model_correctness_verified = false;
+    std::string model_correctness_gate_version =
+        "round22-engineering-model-v1";
+    std::string model_correctness_failure_reason = "not_evaluated";
+    std::string model_correctness_audit_fingerprint;
+    std::string model_correctness_executable_sha256;
+    std::string model_correctness_source_commit_sha;
+    std::string model_correctness_model_writer_fingerprint;
+    std::string model_correctness_objective_definition_fingerprint;
+    std::string model_correctness_row_family_inventory;
+    std::string model_correctness_callback_row_inventory;
+    std::string model_correctness_variable_domain_inventory;
+    std::string model_correctness_production_option_manifest_sha256;
+    std::string model_correctness_algorithm_arm;
+    std::string model_correctness_flow_variant;
 
     int native_mip_relative_gap_param_id = 0;
     double native_mip_relative_gap_requested = 0.0;
@@ -153,7 +177,8 @@ struct SolveResult {
     long long native_mip_close_count = 0;
     bool native_mip_lifecycle_valid = false;
 
-    std::string strict_certificate_policy_version = "round21-v1";
+    std::string strict_certificate_policy_version =
+        "round22-engineering-exact-v1";
     std::string strict_certificate_class = "invalid_or_unavailable_bound";
     std::string strict_certificate_rejection_reason = "not_evaluated";
     bool strict_certified_original_problem = false;
@@ -167,6 +192,22 @@ struct SolveResult {
     std::string strict_lower_bound_source = "unavailable";
     bool strict_serialized_lower_bound_matches_native = false;
     bool strict_serialized_gap_consistent = false;
+
+    bool dense_progress_enabled = false;
+    std::string dense_progress_raw_event_path;
+    std::string dense_progress_checkpoint_path;
+    std::string dense_progress_schema_version = "round22-dense-progress-v1";
+    long long dense_progress_callback_invocation_count = 0;
+    long long dense_progress_record_count = 0;
+    long long dense_progress_dropped_record_count = 0;
+    double dense_progress_callback_wall_seconds = 0.0;
+    double dense_progress_serialization_seconds = 0.0;
+    long long dense_progress_peak_buffer_bytes = 0;
+    double dense_progress_instrumentation_wall_percent = 0.0;
+    bool dense_progress_final_record_appended = false;
+    bool dense_progress_flush_succeeded = false;
+    std::string dense_progress_flush_failure_reason = "not_flushed";
+    bool dense_progress_read_only_contract = false;
 
     // Resolved root connectivity-flow formulation and actual/theoretical
     // model-size inventory used by the Round 21 formulation audits.

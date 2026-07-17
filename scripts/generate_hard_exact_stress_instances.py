@@ -8,6 +8,7 @@ These are regenerated engineering benchmarks, not historical paper targets.
 from __future__ import annotations
 
 import csv
+import argparse
 import hashlib
 import math
 import random
@@ -15,7 +16,6 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT_DIR = ROOT / "reference" / "hard_stress" / "V20_M3"
 RULE_VERSION = "hard_v20_m3_v1"
 
 
@@ -26,6 +26,15 @@ CASES = [
     ("high_imbalance_seed3202", 3202, "high_imbalance", 3600.0),
     ("moderate_seed3301", 3301, "moderate", 3600.0),
     ("moderate_seed3302", 3302, "moderate", 3600.0),
+]
+
+ROUND22_HELDOUT_CASES = [
+    ("tight_T_seed4101", 4101, "tight_T", 2400.0),
+    ("tight_T_seed4102", 4102, "tight_T", 2550.0),
+    ("high_imbalance_seed4201", 4201, "high_imbalance", 3600.0),
+    ("high_imbalance_seed4202", 4202, "high_imbalance", 3600.0),
+    ("moderate_seed4301", 4301, "moderate", 3600.0),
+    ("moderate_seed4302", 4302, "moderate", 3600.0),
 ]
 
 
@@ -139,7 +148,7 @@ def write_instance(path: Path, seed: int, stress_type: str, t_limit: float) -> d
     surplus = sum(1 for i in range(1, v + 1) if initial[i] > target[i])
     deficit = sum(1 for i in range(1, v + 1) if initial[i] < target[i])
     return {
-        "path": str(path.as_posix()),
+        "path": path.resolve().relative_to(ROOT.resolve()).as_posix(),
         "sha256": sha,
         "seed": str(seed),
         "V": str(v),
@@ -160,15 +169,38 @@ def write_instance(path: Path, seed: int, stress_type: str, t_limit: float) -> d
 
 
 def main() -> None:
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--suite",
+        choices=("existing", "round22-heldout"),
+        default="existing",
+        help="deterministic case registry to generate",
+    )
+    parser.add_argument(
+        "--out-dir",
+        type=Path,
+        help="optional output directory (relative paths resolve from the repository root)",
+    )
+    args = parser.parse_args()
+
+    cases = CASES if args.suite == "existing" else ROUND22_HELDOUT_CASES
+    default_out = (
+        ROOT / "reference" / "hard_stress" / "V20_M3"
+        if args.suite == "existing"
+        else ROOT / "reference" / "heldout_round22" / "V20_M3"
+    )
+    out_dir = args.out_dir or default_out
+    if not out_dir.is_absolute():
+        out_dir = ROOT / out_dir
+    out_dir.mkdir(parents=True, exist_ok=True)
     rows = []
-    for instance_id, seed, stress_type, t_limit in CASES:
-        path = OUT_DIR / f"{instance_id}.txt"
+    for instance_id, seed, stress_type, t_limit in cases:
+        path = out_dir / f"{instance_id}.txt"
         row = write_instance(path, seed, stress_type, t_limit)
         row["instance_id"] = instance_id
         rows.append(row)
 
-    manifest = OUT_DIR / "manifest.csv"
+    manifest = out_dir / "manifest.csv"
     fields = [
         "instance_id", "path", "sha256", "seed", "V", "M", "Q", "T",
         "lambda", "capacity_min", "capacity_max", "total_initial",
@@ -179,7 +211,7 @@ def main() -> None:
         writer = csv.DictWriter(out, fieldnames=fields)
         writer.writeheader()
         writer.writerows(rows)
-    print(f"generated {len(rows)} instances under {OUT_DIR}")
+    print(f"generated {len(rows)} instances under {out_dir}")
 
 
 if __name__ == "__main__":

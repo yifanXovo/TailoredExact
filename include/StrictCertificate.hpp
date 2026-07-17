@@ -37,6 +37,8 @@ struct StrictCertificateInput {
     bool verified_upper_bound_available = false;
     double verified_upper_bound = 0.0;
     bool verifier_passed = false;
+    bool model_correctness_verified = false;
+    std::string model_correctness_gate_version;
     bool solver_finalization_reached = false;
     bool lifecycle_complete = false;
     bool bound_equality_proof_conditions_passed = false;
@@ -57,8 +59,13 @@ struct StrictCertificateDecision {
     bool native_best_bound_valid = false;
     bool native_cplex_relative_gap_valid = false;
     bool bound_equality_closed = false;
+    bool model_correctness_verified = false;
     bool native_gap_available = false;
     bool verified_gap_available = false;
+    bool mapping_residual_available = false;
+    double native_vs_recomputed_objective_residual = 0.0;
+    std::string mapping_residual_classification =
+        "mapping_residual_unavailable";
     double native_signed_bound_residual = 0.0;
     bool native_bound_inversion = false;
     double native_absolute_gap = 0.0;

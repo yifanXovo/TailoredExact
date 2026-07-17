@@ -81,6 +81,7 @@ constexpr CPXLONG kContextCandidate = 0x0020;
 constexpr CPXLONG kContextRelaxation = 0x0040;
 constexpr CPXLONG kContextBranching = 0x0080;
 constexpr CPXLONG kContextGlobalProgress = 0x0010;
+constexpr CPXLONG kContextLocalProgress = 0x0008;
 constexpr int kParamThreads = 1067;
 constexpr int kParamTimeLimit = 1039;
 constexpr int kParamMipGap = 2009;
@@ -102,6 +103,7 @@ constexpr CPXCALLBACKINFO kCallbackInfoNodeCount = 1;
 constexpr CPXCALLBACKINFO kCallbackInfoIterationCount = 2;
 constexpr CPXCALLBACKINFO kCallbackInfoBestSol = 3;
 constexpr CPXCALLBACKINFO kCallbackInfoBestBnd = 4;
+constexpr CPXCALLBACKINFO kCallbackInfoDeterministicTime = 8;
 constexpr CPXCALLBACKINFO kCallbackInfoNodeUid = 9;
 constexpr CPXCALLBACKINFO kCallbackInfoNodeDepth = 10;
 constexpr CPXCALLBACKINFO kCallbackInfoNodesLeft = 14;
@@ -319,6 +321,29 @@ std::vector<std::string> getColumnNames(Api& api, CPXENVptr env, CPXLPptr lp, in
         }
     }
     return names;
+}
+
+std::string variableDomainFingerprint(Api& api, CPXENVptr env, CPXLPptr lp,
+                                      const std::vector<std::string>& names) {
+    const int ncols = static_cast<int>(names.size());
+    if (ncols <= 0) return "unavailable";
+    std::vector<double> lower(static_cast<std::size_t>(ncols), 0.0);
+    std::vector<double> upper(static_cast<std::size_t>(ncols), 0.0);
+    std::vector<char> type(static_cast<std::size_t>(ncols), 'C');
+    if (api.getlb(env, lp, lower.data(), 0, ncols - 1) != 0 ||
+        api.getub(env, lp, upper.data(), 0, ncols - 1) != 0 ||
+        api.getctype(env, lp, type.data(), 0, ncols - 1) != 0) {
+        return "unavailable";
+    }
+    std::ostringstream canonical;
+    canonical << std::setprecision(std::numeric_limits<double>::max_digits10);
+    for (int column = 0; column < ncols; ++column) {
+        canonical << names[static_cast<std::size_t>(column)] << ':'
+                  << type[static_cast<std::size_t>(column)] << ':'
+                  << lower[static_cast<std::size_t>(column)] << ':'
+                  << upper[static_cast<std::size_t>(column)] << '|';
+    }
+    return fnvFingerprint(canonical.str());
 }
 
 bool configureStrictMipGaps(Api& api, CPXENVptr env,
@@ -3562,6 +3587,7 @@ struct GlobalGiniCallbackState {
     int node_select_effective = 1;
     std::string run_id;
     std::vector<std::string> global_families;
+    std::unique_ptr<DenseProgressRecorder> dense_progress;
 };
 
 double globalTreeElapsed(const GlobalGiniCallbackState& state) {
@@ -4128,7 +4154,8 @@ int __stdcall globalGiniTreeCallbackRound19Disabled(CPXCALLBACKCONTEXTptr contex
                                      void* userhandle) {
     auto* state = static_cast<GlobalGiniCallbackState*>(userhandle);
     if (!state || !state->api || !state->instance || !state->options) return 0;
-    if (contextid == kContextGlobalProgress) {
+    if (contextid == kContextGlobalProgress ||
+        contextid == kContextLocalProgress) {
         ++state->progress_calls;
         double bound = 0.0;
         CPXLONG nodes = 0;
@@ -4141,7 +4168,7 @@ int __stdcall globalGiniTreeCallbackRound19Disabled(CPXCALLBACKCONTEXTptr contex
                 state->bound_monotone.store(false);
             }
             state->last_global_bound = std::max(state->last_global_bound, bound);
-            if (state->bound_trace) {
+            if (state->bound_trace && !state->dense_progress) {
                 *state->bound_trace << std::setprecision(17)
                     << globalTreeElapsed(*state) << ',' << bound << ','
                     << state->verified_incumbent
@@ -4407,6 +4434,7 @@ int __stdcall globalGiniTreeCallback(CPXCALLBACKCONTEXTptr context,
     };
 
     if (contextid == kContextGlobalProgress) {
+        const auto instrumentation_start = std::chrono::steady_clock::now();
         ++state->progress_calls;
         const CPXLONG nodes = infoLong(kCallbackInfoNodeCount);
         const CPXLONG nodes_left = infoLong(kCallbackInfoNodesLeft);
@@ -4415,13 +4443,91 @@ int __stdcall globalGiniTreeCallback(CPXCALLBACKCONTEXTptr context,
             kCallbackInfoBestBnd, std::numeric_limits<double>::quiet_NaN());
         const double native_incumbent = infoDouble(
             kCallbackInfoBestSol, std::numeric_limits<double>::infinity());
+        if (state->dense_progress) {
+            DenseProgressSnapshot snapshot;
+            snapshot.callback_invocation_sequence =
+                state->dense_progress->stats().callback_invocation_count + 1;
+            snapshot.observation_time_seconds = globalTreeElapsed(*state);
+            const bool global_progress =
+                contextid == kContextGlobalProgress;
+            snapshot.callback_context = global_progress
+                ? "global_progress" : "local_progress";
+            snapshot.observation_source = global_progress
+                ? "cplex_generic_global_progress"
+                : "cplex_generic_local_progress";
+            double deterministic_time = 0.0;
+            if (state->api->callbackgetinfodbl(
+                    context, kCallbackInfoDeterministicTime,
+                    &deterministic_time) == 0 &&
+                std::isfinite(deterministic_time)) {
+                snapshot.deterministic_time_available = true;
+                snapshot.deterministic_time = deterministic_time;
+            }
+            snapshot.native_best_bound_available =
+                std::isfinite(bound) &&
+                std::fabs(bound) < kCplexInfinityBound;
+            snapshot.native_best_bound = bound;
+            snapshot.native_incumbent_available =
+                std::isfinite(native_incumbent) &&
+                std::fabs(native_incumbent) < kCplexInfinityBound;
+            snapshot.native_incumbent = native_incumbent;
+            snapshot.verified_upper_bound_available = true;
+            snapshot.verified_upper_bound = state->verified_incumbent;
+            snapshot.processed_nodes_available = nodes >= 0;
+            snapshot.processed_nodes = nodes;
+            snapshot.open_nodes_available = nodes_left >= 0;
+            snapshot.open_nodes = nodes_left;
+            snapshot.simplex_iterations_available = iterations >= 0;
+            snapshot.simplex_iterations = iterations;
+            snapshot.gini_branch_count = state->gini_branch_nodes.load();
+            snapshot.ordinary_branch_count = state->ordinary_fallbacks.load();
+            if (nodes <= 0) {
+                snapshot.phase = iterations > 0 ? "root_cuts" : "root_lp";
+            } else if (snapshot.ordinary_branch_count > 0) {
+                snapshot.phase = "ordinary_tree";
+            } else if (snapshot.gini_branch_count > 0) {
+                snapshot.phase = "gini_branching";
+            } else {
+                snapshot.phase = "early_tree";
+            }
+            const double now_seconds = snapshot.observation_time_seconds;
+            {
+                std::lock_guard<std::mutex> lock(state->node_metadata_mutex);
+                double maximum_delay = 0.0;
+                double oldest_delay = 0.0;
+                long long open_siblings = 0;
+                for (const auto& item : state->node_metadata) {
+                    const GlobalGiniNodeMetadata& metadata = item.second;
+                    if (!metadata.created_by_gini_branch ||
+                        metadata.first_process_time >= 0.0) {
+                        continue;
+                    }
+                    ++open_siblings;
+                    const double delay = std::max(
+                        0.0, now_seconds - metadata.creation_time);
+                    maximum_delay = std::max(maximum_delay, delay);
+                    oldest_delay = std::max(oldest_delay, delay);
+                }
+                snapshot.current_open_gini_siblings = open_siblings;
+                snapshot.gini_sibling_delay_available = open_siblings > 0;
+                snapshot.oldest_gini_sibling_delay_seconds = oldest_delay;
+                snapshot.maximum_gini_sibling_delay_seconds = maximum_delay;
+            }
+            state->dense_progress->observe(snapshot);
+            const double instrumentation_seconds =
+                std::chrono::duration<double>(
+                    std::chrono::steady_clock::now() - instrumentation_start)
+                    .count();
+            state->dense_progress->noteCallbackInvocation(
+                instrumentation_seconds);
+        }
         if (std::isfinite(bound)) {
             std::lock_guard<std::mutex> lock(state->trace_mutex);
             if (bound + 1e-7 < state->last_global_bound) {
                 state->bound_monotone.store(false);
             }
             state->last_global_bound = std::max(state->last_global_bound, bound);
-            if (state->bound_trace) {
+            if (state->bound_trace && !state->dense_progress) {
                 *state->bound_trace << std::setprecision(17)
                     << globalTreeElapsed(*state) << ',' << bound << ','
                     << native_incumbent << ',' << state->verified_incumbent << ','
@@ -4432,7 +4538,7 @@ int __stdcall globalGiniTreeCallback(CPXCALLBACKCONTEXTptr context,
                     << ",global_progress\n";
                 state->bound_trace->flush();
             }
-            if (state->memory_trace) {
+            if (state->memory_trace && !state->dense_progress) {
                 *state->memory_trace << std::setprecision(17)
                     << csvCell(state->run_id) << ',' << globalTreeElapsed(*state)
                     << ',' << nodes << ',' << nodes_left << ',' << iterations
@@ -4451,7 +4557,7 @@ int __stdcall globalGiniTreeCallback(CPXCALLBACKCONTEXTptr context,
             state->api->callbackgetcandidatepoint(
                 context, point.data(), 0, state->ncols - 1, &objective);
         }
-        if (state->bound_trace) {
+        if (state->bound_trace && !state->dense_progress) {
             std::lock_guard<std::mutex> lock(state->trace_mutex);
             *state->bound_trace << std::setprecision(17)
                 << globalTreeElapsed(*state) << ','
@@ -5132,6 +5238,90 @@ int __stdcall globalGiniTreeCallback(CPXCALLBACKCONTEXTptr context,
     writeGlobalNodeEvent(*state, event, &low, &high);
     return 0;
 }
+
+struct PlainProgressCallbackState {
+    Api* api = nullptr;
+    DenseProgressRecorder* recorder = nullptr;
+    std::chrono::steady_clock::time_point start =
+        std::chrono::steady_clock::now();
+};
+
+int __stdcall plainDenseProgressCallback(CPXCALLBACKCONTEXTptr context,
+                                         CPXLONG contextid,
+                                         void* userhandle) {
+    auto* state = static_cast<PlainProgressCallbackState*>(userhandle);
+    if (!state || !state->api || !state->recorder ||
+        (contextid != kContextGlobalProgress &&
+         contextid != kContextLocalProgress)) {
+        return 0;
+    }
+    const auto instrumentation_start = std::chrono::steady_clock::now();
+    DenseProgressSnapshot snapshot;
+    snapshot.callback_invocation_sequence =
+        state->recorder->stats().callback_invocation_count + 1;
+    snapshot.observation_time_seconds = std::chrono::duration<double>(
+        instrumentation_start - state->start).count();
+    const bool global_progress = contextid == kContextGlobalProgress;
+    snapshot.callback_context = global_progress
+        ? "global_progress" : "local_progress";
+    snapshot.observation_source = global_progress
+        ? "cplex_generic_global_progress"
+        : "cplex_generic_local_progress";
+
+    CPXLONG long_value = 0;
+    if (state->api->callbackgetinfolong(
+            context, kCallbackInfoNodeCount, &long_value) == 0) {
+        snapshot.processed_nodes_available = true;
+        snapshot.processed_nodes = long_value;
+    }
+    if (state->api->callbackgetinfolong(
+            context, kCallbackInfoNodesLeft, &long_value) == 0) {
+        snapshot.open_nodes_available = true;
+        snapshot.open_nodes = long_value;
+    }
+    if (state->api->callbackgetinfolong(
+            context, kCallbackInfoIterationCount, &long_value) == 0) {
+        snapshot.simplex_iterations_available = true;
+        snapshot.simplex_iterations = long_value;
+    }
+    double double_value = 0.0;
+    if (state->api->callbackgetinfodbl(
+            context, kCallbackInfoBestBnd, &double_value) == 0 &&
+        std::isfinite(double_value) &&
+        std::fabs(double_value) < kCplexInfinityBound) {
+        snapshot.native_best_bound_available = true;
+        snapshot.native_best_bound = double_value;
+    }
+    if (state->api->callbackgetinfodbl(
+            context, kCallbackInfoBestSol, &double_value) == 0 &&
+        std::isfinite(double_value) &&
+        std::fabs(double_value) < kCplexInfinityBound) {
+        snapshot.native_incumbent_available = true;
+        snapshot.native_incumbent = double_value;
+    }
+    if (state->api->callbackgetinfodbl(
+            context, kCallbackInfoDeterministicTime, &double_value) == 0 &&
+        std::isfinite(double_value)) {
+        snapshot.deterministic_time_available = true;
+        snapshot.deterministic_time = double_value;
+    }
+    snapshot.verified_upper_bound_available =
+        state->recorder->config().verified_upper_bound_available;
+    snapshot.verified_upper_bound =
+        state->recorder->config().verified_upper_bound;
+    if (!snapshot.processed_nodes_available || snapshot.processed_nodes == 0) {
+        snapshot.phase = snapshot.simplex_iterations_available &&
+                                 snapshot.simplex_iterations > 0
+            ? "root_cuts" : "root_lp";
+    } else {
+        snapshot.phase = "ordinary_tree";
+    }
+    state->recorder->observe(snapshot);
+    const double instrumentation_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - instrumentation_start).count();
+    state->recorder->noteCallbackInvocation(instrumentation_seconds);
+    return 0;
+}
 #endif
 
 } // namespace
@@ -5162,12 +5352,15 @@ PlainCplexApiSolveResult solvePlainCplexWithStrictApi(
     const std::filesystem::path& lp_path,
     double time_limit_seconds,
     int threads,
-    const std::filesystem::path& log_path) {
+    const std::filesystem::path& log_path,
+    const DenseProgressConfig& dense_progress) {
     PlainCplexApiSolveResult out;
     out.attempted = true;
     out.threads_requested = std::max(1, threads);
     out.time_limit_requested = time_limit_seconds;
     out.log_path = log_path.string();
+    out.dense_progress_raw_event_path =
+        dense_progress.raw_event_path.string();
     if (!std::isfinite(time_limit_seconds) || time_limit_seconds <= 0.0) {
         out.fail_reason =
             "strict_native_deadline_must_be_positive_and_finite";
@@ -5241,6 +5434,7 @@ PlainCplexApiSolveResult solvePlainCplexWithStrictApi(
     out.model_columns = api.getnumcols(env, lp);
     out.model_rows = api.getnumrows(env, lp);
     out.model_nonzeros = static_cast<long long>(api.getnumnz(env, lp));
+    out.model_writer_fingerprint = fileFingerprint(lp_path);
 
     api.setintparam(env, kParamScreenOutput, 1);
     api.setintparam(env, kParamMipDisplay, 2);
@@ -5298,6 +5492,42 @@ PlainCplexApiSolveResult solvePlainCplexWithStrictApi(
 
     const std::vector<std::string> names = getColumnNames(
         api, env, lp, out.model_columns);
+    out.variable_domain_fingerprint = variableDomainFingerprint(
+        api, env, lp, names);
+    DenseProgressConfig configured_progress = dense_progress;
+    configured_progress.model_rows = out.model_rows;
+    configured_progress.model_columns = out.model_columns;
+    configured_progress.model_nonzeros = out.model_nonzeros;
+    std::unique_ptr<DenseProgressRecorder> progress_recorder;
+    PlainProgressCallbackState progress_state;
+    if (configured_progress.enabled) {
+        if (configured_progress.raw_event_path.empty()) {
+            out.fail_reason = "dense_progress_raw_event_path_empty";
+            cleanup();
+            return out;
+        }
+        progress_recorder = std::make_unique<DenseProgressRecorder>(
+            configured_progress);
+        progress_state.api = &api;
+        progress_state.recorder = progress_recorder.get();
+        progress_state.start = std::chrono::steady_clock::now();
+        const int callback_rc = api.callbacksetfunc(
+            env, lp, kContextGlobalProgress | kContextLocalProgress,
+            plainDenseProgressCallback, &progress_state);
+        if (callback_rc != 0) {
+            out.fail_reason = "CPXcallbacksetfunc_dense_progress_failed:" +
+                std::to_string(callback_rc);
+            cleanup();
+            return out;
+        }
+        const DenseProgressReadOnlyPolicy policy =
+            denseProgressReadOnlyPolicy();
+        out.dense_progress_read_only_contract =
+            !policy.may_add_rows && !policy.may_branch &&
+            !policy.may_reject_candidate && !policy.may_abort &&
+            !policy.may_change_parameters &&
+            !policy.may_call_auxiliary_optimizer;
+    }
     ++out.mipopt_count;
     status = api.mipopt(env, lp);
     captureNativeMipEvidence(api, env, lp, status, out.native);
@@ -5320,7 +5550,36 @@ PlainCplexApiSolveResult solvePlainCplexWithStrictApi(
     }
     out.solved = out.native.solve_returned &&
         out.native.mipopt_return_code == 0 && out.native.status_code != 0;
+    if (progress_recorder) {
+        DenseProgressSnapshot final;
+        final.observation_time_seconds = std::chrono::duration<double>(
+            std::chrono::steady_clock::now() - progress_state.start).count();
+        final.callback_invocation_sequence =
+            progress_recorder->stats().callback_invocation_count;
+        final.native_best_bound_available = out.native.best_bound_available;
+        final.native_best_bound = out.native.best_bound;
+        final.native_incumbent_available = out.native.objective_available;
+        final.native_incumbent = out.native.objective;
+        final.verified_upper_bound_available =
+            configured_progress.verified_upper_bound_available;
+        final.verified_upper_bound =
+            configured_progress.verified_upper_bound;
+        final.processed_nodes_available = out.node_count >= 0;
+        final.processed_nodes = out.node_count;
+        final.open_nodes_available = out.open_node_count >= 0;
+        final.open_nodes = out.open_node_count;
+        final.native_solution_count_available =
+            out.native_solution_count >= 0;
+        final.native_solution_count = out.native_solution_count;
+        final.simplex_iterations_available = out.simplex_iterations >= 0;
+        final.simplex_iterations = out.simplex_iterations;
+        progress_recorder->appendSolverFinal(final);
+    }
     cleanup();
+    if (progress_recorder) {
+        progress_recorder->flush();
+        out.dense_progress = progress_recorder->stats();
+    }
     if (!out.lifecycle_valid && out.fail_reason.empty()) {
         out.fail_reason = "strict_plain_lifecycle_incomplete";
     } else if (!out.solved && out.fail_reason.empty()) {
@@ -6417,6 +6676,8 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
 
     const int ncols = api.getnumcols(env, lp);
     const std::vector<std::string> names = getColumnNames(api, env, lp, ncols);
+    out.variable_domain_fingerprint = variableDomainFingerprint(
+        api, env, lp, names);
     GlobalGiniCallbackState callback_state;
     callback_state.api = &api;
     callback_state.instance = &instance;
@@ -6431,6 +6692,44 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
     callback_state.run_id = root_lp_path.parent_path().filename().string();
     if (callback_state.run_id.empty()) callback_state.run_id = "global_gini_tree";
     callback_state.start = std::chrono::steady_clock::now();
+    if (options.dense_progress_enabled) {
+        if (options.dense_progress_raw_event_path.empty()) {
+            out.fail_reason = "dense_progress_raw_event_path_empty";
+            finishEarly();
+            return out;
+        }
+        DenseProgressConfig dense;
+        dense.enabled = true;
+        dense.raw_event_path = options.dense_progress_raw_event_path;
+        dense.run_id = options.dense_progress_run_id.empty()
+            ? callback_state.run_id : options.dense_progress_run_id;
+        dense.algorithm = options.dense_progress_algorithm_arm.empty()
+            ? "tailored_global_tree"
+            : options.dense_progress_algorithm_arm;
+        dense.flow_variant =
+            options.global_gini_tree_root_connectivity_flow_variant.empty()
+                ? (options.global_gini_tree_root_connectivity_flow
+                       ? "round20-current" : "off")
+                : options.global_gini_tree_root_connectivity_flow_variant;
+        dense.executable_sha256 = options.round22_executable_sha256;
+        dense.model_rows = out.model_rows;
+        dense.model_columns = out.model_columns;
+        dense.model_nonzeros = out.model_nonzeros;
+        dense.verified_upper_bound_available =
+            std::isfinite(verified_incumbent);
+        dense.verified_upper_bound = verified_incumbent;
+        callback_state.dense_progress =
+            std::make_unique<DenseProgressRecorder>(std::move(dense));
+        out.dense_progress_raw_event_path =
+            options.dense_progress_raw_event_path;
+        const DenseProgressReadOnlyPolicy policy =
+            denseProgressReadOnlyPolicy();
+        out.dense_progress_read_only_contract =
+            !policy.may_add_rows && !policy.may_branch &&
+            !policy.may_reject_candidate && !policy.may_abort &&
+            !policy.may_change_parameters &&
+            !policy.may_call_auxiliary_optimizer;
+    }
     for (int column = 0; column < ncols; ++column) {
         if (!names[static_cast<std::size_t>(column)].empty()) {
             callback_state.column_index[names[static_cast<std::size_t>(column)]] =
@@ -6460,12 +6759,20 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
     callback_state.root_inheritance_state =
         std::make_shared<const CanonicalInheritanceState>(
             makeCanonicalInheritanceState(root_rows));
+    std::vector<std::string> active_row_families;
+    std::vector<std::string> active_callback_families;
     for (const IntervalRowFamilyRegistryEntry& entry :
          root_rows.family_registry) {
-        if (entry.active && entry.scope == IntervalRowScope::Global) {
+        if (!entry.active) continue;
+        active_row_families.push_back(entry.family);
+        if (entry.scope == IntervalRowScope::Global) {
             callback_state.global_families.push_back(entry.family);
+        } else {
+            active_callback_families.push_back(entry.family);
         }
     }
+    out.row_family_inventory = joinText(active_row_families, "|");
+    out.callback_row_inventory = joinText(active_callback_families, "|");
     out.root_coverage_valid = root_gamma_L <= 1e-12 &&
         root_gamma_U >= std::min(
             verified_incumbent,
@@ -6580,9 +6887,12 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
                "native_tree_memory_mb,source\n";
         callback_state.memory_trace = &memory_trace;
     }
-    const CPXLONG context_mask =
+    CPXLONG context_mask =
         kContextCandidate | kContextRelaxation | kContextBranching |
         kContextGlobalProgress;
+    if (options.dense_progress_enabled) {
+        context_mask |= kContextLocalProgress;
+    }
     status = api.callbacksetfunc(env, lp, context_mask,
                                  globalGiniTreeCallback, &callback_state);
     if (status != 0) {
@@ -6768,6 +7078,32 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
     out.solved = status == 0 && out.status_code != 0 &&
         !out.callback_abort_used;
 
+    if (callback_state.dense_progress) {
+        DenseProgressSnapshot final;
+        final.observation_time_seconds = globalTreeElapsed(callback_state);
+        final.callback_invocation_sequence =
+            callback_state.dense_progress->stats().callback_invocation_count;
+        final.native_best_bound_available = out.best_bound_available;
+        final.native_best_bound = out.best_bound;
+        final.native_incumbent_available = out.native.objective_available;
+        final.native_incumbent = out.native.objective;
+        final.verified_upper_bound_available = true;
+        final.verified_upper_bound = verified_incumbent;
+        final.processed_nodes_available = out.node_count >= 0;
+        final.processed_nodes = out.node_count;
+        final.open_nodes_available = out.native_open_nodes >= 0;
+        final.open_nodes = out.native_open_nodes;
+        final.native_solution_count_available =
+            out.native_solution_pool_count >= 0;
+        final.native_solution_count = out.native_solution_pool_count;
+        final.simplex_iterations_available =
+            out.native_simplex_iterations >= 0;
+        final.simplex_iterations = out.native_simplex_iterations;
+        final.gini_branch_count = out.gini_branch_nodes;
+        final.ordinary_branch_count = out.ordinary_branch_fallbacks;
+        callback_state.dense_progress->appendSolverFinal(final);
+    }
+
     cleanup();
     out.lifecycle_valid = out.environment_count == 1 &&
         out.problem_count == 1 && out.model_read_count == 1 &&
@@ -6776,6 +7112,10 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
         out.child_process_count == 0 &&
         out.native.free_problem_return_code == 0 &&
         out.native.close_environment_return_code == 0;
+    if (callback_state.dense_progress) {
+        callback_state.dense_progress->flush();
+        out.dense_progress = callback_state.dense_progress->stats();
+    }
     if (!out.solved && out.fail_reason.empty()) {
         out.fail_reason = out.callback_abort_used
             ? "callback_correctness_abort"

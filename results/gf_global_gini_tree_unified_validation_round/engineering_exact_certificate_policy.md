@@ -1,0 +1,13 @@
+# Round 22 engineering-exact certificate policy
+
+Policy version: `round22-engineering-exact-v1`.
+
+A fresh solve is strictly certified for the original problem exactly when all six authoritative conditions hold: CPLEX relative MIP gap was requested, set, and read back as exact zero; absolute MIP gap was requested, set, and read back as exact zero; native status is 101 (`CPXMIP_OPTIMAL`) with consistent status text; the versioned model-correctness audit binds the complete model and production manifest to the executable and source commit; the independently reconstructed solution passes all original-problem feasibility checks; and native finalization plus the one-environment/one-problem/one-read/one-`CPXmipopt` lifecycle completes successfully.
+
+Native objective, native best bound, native relative gap, and the independently recomputed objective are retained independently at round-trip-safe precision. Their signed residuals, inversion flags, and `mapping_residual_nominal`, `mapping_residual_warning`, or `mapping_residual_unavailable` classification are diagnostics. Bitwise equality is not an authoritative gate because independent floating-point evaluation paths can legitimately differ in their last bits; CPLEX status on the audited model establishes MIP optimality, while the independent verifier establishes feasibility in the original problem.
+
+Status 102 remains `native_tolerance_optimal_only`; no displayed zero or epsilon upgrades it. Statuses 107 and 108 are valid time-limit outcomes when a native bound is available, never strict. Status 115 is rejected. Failed parameter round trips, model audits, lifecycle records, finalization, or independent feasibility reject strict certification. Native lower bounds are never replaced by incumbents and top-level gaps are never forced to zero from status text.
+
+The model gate is `round22-engineering-model-v1`. It binds executable SHA-256, source commit, model-writer and objective fingerprints, row/callback/domain inventories, complete improving Gini range, all 15 migrated static families, selected F0/F3 flow rows, callback interval rows, unchanged `G + lambda P` objective, absence of restricted/fallback dispatch, fixed production options, and the one-model lifecycle design.
+
+Historical Round 21 JSON is immutable. The migration audit can identify engineering-exact candidates under the corrected semantics, but a historical executable lacks the Round 22 versioned model/manifest binding. Such rows require a fresh Round 22 rerun before being called authoritative Round 22 strict certificates. Historical status-102 rows do not change class.

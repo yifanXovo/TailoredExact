@@ -20,6 +20,8 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Evaluator.cpp
   src/Result.cpp
   src/StrictCertificate.cpp
+  src/ModelCorrectness.cpp
+  src/DenseProgress.cpp
   src/ConnectivityFlow.cpp
   src/Bounds.cpp
   src/ColumnPool.cpp
@@ -70,3 +72,11 @@ add_test(NAME ConnectivityFlowTests COMMAND ConnectivityFlowTests)
 add_executable(StrictSerializationTests tests/strict_serialization_tests.cpp)
 target_link_libraries(StrictSerializationTests PRIVATE exact_ebrp_core)
 add_test(NAME StrictSerializationTests COMMAND StrictSerializationTests)
+
+add_executable(ModelCorrectnessTests tests/model_correctness_tests.cpp)
+target_link_libraries(ModelCorrectnessTests PRIVATE exact_ebrp_core)
+add_test(NAME ModelCorrectnessTests COMMAND ModelCorrectnessTests)
+
+add_executable(DenseProgressTests tests/dense_progress_tests.cpp)
+target_link_libraries(DenseProgressTests PRIVATE exact_ebrp_core)
+add_test(NAME DenseProgressTests COMMAND DenseProgressTests)
