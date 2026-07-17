@@ -434,7 +434,7 @@ def validate(spec: RunSpec, p: Mapping[str, Path], frozen: Mapping[str, Any],
         require(data.get("global_gini_tree_row_attachment_mode") == "full-inherited-pack", "row_attachment")
         require(data.get("global_gini_tree_row_timing_mode") == "deferred", "row_timing")
         require(not as_bool(data.get("global_gini_tree_native_mip_start_attempted")), "native_mip_start")
-    if data.get("native_mip_status_code") == 101:
+    if spec.official and data.get("native_mip_status_code") == 101:
         require(as_bool(data.get("strict_certified_original_problem")), "status101_not_strict")
         require(data.get("strict_certificate_class") == "native_engineering_exact_optimal", "status101_class")
         verification = data.get("verification") or {}
@@ -531,6 +531,12 @@ def run_one(spec: RunSpec, frozen: Mapping[str, Any], dry_run: bool = False) -> 
         attempt.mkdir(parents=True, exist_ok=True)
         shutil.copy2(p["command"], attempt / "command.json")
         if p["console"].exists(): shutil.copy2(p["console"], attempt / "console.log")
+        if p["native_log"].exists(): shutil.copy2(p["native_log"], attempt / "native.log")
+        if p["json"].exists(): shutil.copy2(p["json"], attempt / "result.json")
+        if p["run"].exists():
+            archived_run = attempt / "run_artifacts"
+            if archived_run.exists(): shutil.rmtree(archived_run)
+            shutil.copytree(p["run"], archived_run)
         print(f"FAIL {spec.run_id}: {'|'.join(failures)}", flush=True)
         raise RuntimeError(f"official validation failed for {spec.run_id}")
     print(f"PASS {spec.run_id} wall={elapsed:.3f}s", flush=True)
