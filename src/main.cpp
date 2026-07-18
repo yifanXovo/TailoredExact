@@ -112,6 +112,10 @@ void usage() {
         << "[--dssr-relaxed-closure-max-labels <N>] [--dssr-relaxed-closure-checkpoint <path>] [--large-relaxed-rmp true|false] "
         << "[--incumbent-source-name <name>] [--inventory-probe-max-v <V>] [--inventory-probe-seconds <seconds>] "
         << "[--progress-log <path>] [--ub-event-log <path>] [--progress-interval-seconds <seconds>] "
+        << "[--dense-progress <bool>] [--dense-progress-run-id <id>] "
+        << "[--dense-progress-raw <path>] [--dense-progress-checkpoints <path>] "
+        << "[--round22-production-mode <bool>] [--round22-source-commit <sha>] "
+        << "[--round22-executable-sha256 <sha>] [--round22-production-manifest-sha256 <sha>] "
         << "[--frontier-focus-only true|false] [--frontier-focus-interval-id auto|N] "
         << "[--frontier-focus-range <lo,hi>] [--frontier-focus-from-result <json>] "
         << "[--frontier-focus-leaf-id id|auto|min-lb] [--frontier-focus-use-existing-incumbent true|false] "
@@ -548,6 +552,15 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--global-gini-tree-row-delta-trace") opt.global_gini_tree_row_delta_trace_path = requireValue(i, argc, argv);
         else if (arg == "--global-gini-tree-memory-trace") opt.global_gini_tree_memory_trace_path = requireValue(i, argc, argv);
         else if (arg == "--global-gini-tree-mip-start-audit") opt.global_gini_tree_mip_start_audit_path = requireValue(i, argc, argv);
+        else if (arg == "--round22-production-mode") opt.round22_production_mode = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--round22-source-commit") opt.round22_source_commit_sha = requireValue(i, argc, argv);
+        else if (arg == "--round22-executable-sha256") opt.round22_executable_sha256 = requireValue(i, argc, argv);
+        else if (arg == "--round22-production-manifest-sha256") opt.round22_production_manifest_sha256 = requireValue(i, argc, argv);
+        else if (arg == "--dense-progress") opt.dense_progress_enabled = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--dense-progress-run-id") opt.dense_progress_run_id = requireValue(i, argc, argv);
+        else if (arg == "--dense-progress-raw") opt.dense_progress_raw_event_path = requireValue(i, argc, argv);
+        else if (arg == "--dense-progress-checkpoints") opt.dense_progress_checkpoint_path = requireValue(i, argc, argv);
+        else if (arg == "--dense-progress-algorithm-arm") opt.dense_progress_algorithm_arm = requireValue(i, argc, argv);
         else if (arg == "--frontier-refine-splits") opt.frontier_refine_splits = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--frontier-split-batch") opt.frontier_split_batch = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--frontier-retry-passes") opt.frontier_retry_passes = std::stoi(requireValue(i, argc, argv));

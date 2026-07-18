@@ -1,0 +1,25 @@
+audit_id,status,detail
+certificate_policy_version,PASS,Round 22 policy is compiled and serialized
+status101_authoritative_path,PASS,status 101 has a dedicated engineering-exact class
+status102_not_upgraded,PASS,status 102 remains tolerance-only
+model_gate_version,PASS,versioned model gate is compiled
+independent_verifier_fields,PASS,"feasibility, recomputation, and mapping residual are distinct"
+dense_read_only_contract,PASS,dense progress mutations are structurally disabled
+supported_progress_contexts,PASS,documented generic progress contexts and info calls are used
+relaxation_snapshot_precedes_mutation,PASS,Tailored relaxation progress snapshot occurs before any callback mutation
+buffered_single_flush,PASS,events buffer in memory and serialize once
+raw_trajectory_numerical_integrity,PASS,native monotonicity is diagnostic and Stage 1 freshness is horizon-aware
+no_round22_seed_literal_in_production,PASS,no benchmark seed literal occurs in src/include
+no_round22_instance_label_in_production,PASS,no benchmark label occurs in src/include
+official_dispatch_fixed_by_cli,PASS,"official commands select a named fixed path, not an inferred scale tier"
+model_gate_rejects_instance_dispatch,PASS,model gate explicitly audits dispatch absence
+native_bound_preserved,PASS,serialized lower bound is checked against native evidence
+S0_fixed_flow,PASS,S0 always resolves F0
+S1_fixed_flow,PASS,S1 always resolves F3
+plain_fixed,PASS,plain arm is fixed
+same_nonflow_settings,PASS,S0 and S1 differ only by identity/role/flow
+complete_row_inventory,PASS,complete static/callback/flow/Gini inventories feed model gate
+one_model_lifecycle,PASS,one-model lifecycle is checked
+S0_manifest_sha256,PASS,6fd7c7f3b45a1042de9c090d9c6005bc9082a66792c50a272a7f307f972a7fd6
+S1_manifest_sha256,PASS,d8a0ffd3fb7a134a2972a58220483dd05a0255345d602f87dfb8755ae22e0b38
+plain_manifest_sha256,PASS,f944f4603c75c17934458a919a63671581aa5c0059a0d32c0b0ec3e7e19cd27b

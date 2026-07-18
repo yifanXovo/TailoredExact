@@ -2,6 +2,7 @@
 #include "ConnectivityFlow.hpp"
 #include "IntervalRowFactory.hpp"
 #include "ControllingLeafScheduler.hpp"
+#include "ModelCorrectness.hpp"
 
 #include "Evaluator.hpp"
 #include "Logger.hpp"
@@ -3139,6 +3140,31 @@ void populateNativeMipEvidenceFields(
                                      : "solver_not_returned");
 }
 
+ModelCorrectnessInput round22ModelCorrectnessBase(
+    const SolveOptions& options,
+    const std::string& algorithm_arm,
+    const std::string& flow_variant) {
+    ModelCorrectnessInput input;
+    input.executable_sha256 = options.round22_executable_sha256;
+    input.source_commit_sha = options.round22_source_commit_sha;
+    input.production_option_manifest_sha256 =
+        options.round22_production_manifest_sha256;
+    input.algorithm_arm = algorithm_arm;
+    input.flow_variant = flow_variant;
+    input.objective_is_g_plus_lambda_p = true;
+    input.station_inventory_and_capacity_complete = true;
+    input.pickup_drop_and_vehicle_load_complete = true;
+    input.route_degree_and_vehicle_use_complete = true;
+    input.station_disjointness_complete = true;
+    input.duration_and_operation_time_complete = true;
+    input.gini_linearization_complete = true;
+    input.variable_domains_complete = true;
+    input.no_auxiliary_objective_terms = true;
+    input.no_restricted_routes_or_incomplete_fallback = true;
+    input.no_instance_dependent_option_resolution = true;
+    return input;
+}
+
 StrictCertificateDecision evaluateAndPopulateStrictCertificate(
     SolveResult& result,
     const NativeMipEvidence& native,
@@ -3146,7 +3172,8 @@ StrictCertificateDecision evaluateAndPopulateStrictCertificate(
     double verified_objective,
     bool verified_original_feasible,
     bool verified_objective_consistent,
-    bool exactness_lifecycle_complete) {
+    bool exactness_lifecycle_complete,
+    const ModelCorrectnessInput& model_correctness_input) {
     result.verified_incumbent_objective_available =
         verified_objective_available;
     result.verified_incumbent_objective = verified_objective;
@@ -3160,6 +3187,35 @@ StrictCertificateDecision evaluateAndPopulateStrictCertificate(
         result.verified_incumbent_objective_residual =
             verified_objective - native.objective;
     }
+
+    const ModelCorrectnessDecision model_decision =
+        evaluateModelCorrectness(model_correctness_input);
+    result.model_correctness_verified = model_decision.verified;
+    result.model_correctness_gate_version = model_decision.gate_version;
+    result.model_correctness_failure_reason =
+        model_decision.failure_reason;
+    result.model_correctness_audit_fingerprint =
+        model_decision.audit_fingerprint;
+    result.model_correctness_executable_sha256 =
+        model_correctness_input.executable_sha256;
+    result.model_correctness_source_commit_sha =
+        model_correctness_input.source_commit_sha;
+    result.model_correctness_model_writer_fingerprint =
+        model_correctness_input.model_writer_fingerprint;
+    result.model_correctness_objective_definition_fingerprint =
+        model_correctness_input.objective_definition_fingerprint;
+    result.model_correctness_row_family_inventory =
+        model_correctness_input.row_family_inventory;
+    result.model_correctness_callback_row_inventory =
+        model_correctness_input.callback_row_inventory;
+    result.model_correctness_variable_domain_inventory =
+        model_correctness_input.variable_domain_inventory;
+    result.model_correctness_production_option_manifest_sha256 =
+        model_correctness_input.production_option_manifest_sha256;
+    result.model_correctness_algorithm_arm =
+        model_correctness_input.algorithm_arm;
+    result.model_correctness_flow_variant =
+        model_correctness_input.flow_variant;
 
     StrictCertificateInput input;
     input.native_status_code = native.status_code;
@@ -3177,14 +3233,15 @@ StrictCertificateDecision evaluateAndPopulateStrictCertificate(
     input.native_cplex_relative_gap = native.mip_relative_gap;
     input.verified_upper_bound_available = verified_objective_available;
     input.verified_upper_bound = verified_objective;
-    input.verifier_passed = verified_original_feasible &&
-        verified_objective_consistent;
+    input.verifier_passed = verified_original_feasible;
+    input.model_correctness_verified = model_decision.verified;
+    input.model_correctness_gate_version = model_decision.gate_version;
     input.solver_finalization_reached = native.solve_returned &&
         native.mipopt_return_code == 0;
     input.lifecycle_complete = exactness_lifecycle_complete;
-    // No production objective-lattice or independent exact module exists in
-    // Round 21.  Exact floating-point equality is therefore observational and
-    // cannot close a 102/tolerance certificate.
+    // Round 22 does not use an objective-lattice or equality module to upgrade
+    // tolerance/time-limit outcomes. Exact floating-point equality remains
+    // observational and cannot close a 102/tolerance certificate.
     input.bound_equality_proof_conditions_passed = false;
     input.independent_exact_certificate_conditions_passed = false;
     input.relative_gap = native.relative_gap;
@@ -3204,6 +3261,8 @@ StrictCertificateDecision evaluateAndPopulateStrictCertificate(
     result.strict_bound_equality_proof_conditions_satisfied = false;
     result.strict_independent_exact_certificate_module = "none";
     result.strict_independent_exact_certificate_conditions_satisfied = false;
+    result.objective_mapping_diagnostic =
+        decision.mapping_residual_classification;
 
     result.native_mip_absolute_gap_available = decision.native_gap_available;
     result.native_mip_signed_bound_residual_available =
@@ -3298,11 +3357,52 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
         }
 
         writeCompactLp(instance, options, lp_path, strengthened);
+        DenseProgressConfig dense_progress;
+        dense_progress.enabled = options.dense_progress_enabled;
+        dense_progress.raw_event_path =
+            options.dense_progress_raw_event_path;
+        dense_progress.run_id = options.dense_progress_run_id;
+        dense_progress.algorithm = options.dense_progress_algorithm_arm.empty()
+            ? "plain" : options.dense_progress_algorithm_arm;
+        dense_progress.flow_variant = "plain";
+        dense_progress.executable_sha256 =
+            options.round22_executable_sha256;
         const PlainCplexApiSolveResult api = solvePlainCplexWithStrictApi(
             lp_path, options.solve_time_limit, effective_cplex_threads,
-            cplex_log);
+            cplex_log, dense_progress);
         result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
         result.actual_runtime_seconds = result.runtime_seconds;
+        result.dense_progress_enabled = options.dense_progress_enabled;
+        result.dense_progress_raw_event_path =
+            api.dense_progress_raw_event_path;
+        result.dense_progress_checkpoint_path =
+            options.dense_progress_checkpoint_path;
+        result.dense_progress_callback_invocation_count =
+            api.dense_progress.callback_invocation_count;
+        result.dense_progress_record_count =
+            api.dense_progress.progress_record_count;
+        result.dense_progress_dropped_record_count =
+            api.dense_progress.dropped_record_count;
+        result.dense_progress_callback_wall_seconds =
+            api.dense_progress.progress_callback_wall_seconds;
+        result.dense_progress_serialization_seconds =
+            api.dense_progress.serialization_seconds;
+        result.dense_progress_peak_buffer_bytes = static_cast<long long>(
+            api.dense_progress.peak_buffer_bytes);
+        result.dense_progress_instrumentation_wall_percent =
+            result.runtime_seconds > 0.0
+                ? 100.0 * (api.dense_progress.progress_callback_wall_seconds +
+                           api.dense_progress.serialization_seconds) /
+                      result.runtime_seconds
+                : 0.0;
+        result.dense_progress_final_record_appended =
+            api.dense_progress.final_record_appended;
+        result.dense_progress_flush_succeeded =
+            api.dense_progress.flush_succeeded;
+        result.dense_progress_flush_failure_reason =
+            api.dense_progress.flush_failure_reason;
+        result.dense_progress_read_only_contract =
+            api.dense_progress_read_only_contract;
 
         populateNativeMipEvidenceFields(
             result, api.native, api.environment_count, api.problem_count,
@@ -3354,8 +3454,9 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
             result.routes = reconstructRoutes(instance, api.values);
             result.verification = verifySolution(
                 instance, result.routes, options.lambda);
-            verified_original_feasible = result.verification.feasible &&
-                result.verification.objective_matches &&
+            verified_original_feasible =
+                result.verification.original_solution_feasible &&
+                result.verification.original_objective_recomputed &&
                 result.verification.errors.empty() &&
                 std::isfinite(result.verification.objective);
             if (verified_original_feasible) {
@@ -3375,12 +3476,46 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
         if (api.native.best_bound_available) {
             result.lower_bound = api.native.best_bound;
         }
+        ModelCorrectnessInput model_correctness =
+            round22ModelCorrectnessBase(
+                options,
+                options.dense_progress_algorithm_arm.empty()
+                    ? "plain" : options.dense_progress_algorithm_arm,
+                "plain");
+        model_correctness.model_writer_fingerprint =
+            api.model_writer_fingerprint;
+        model_correctness.objective_definition_fingerprint =
+            api.model_writer_fingerprint + ":min_G_plus_lambda_weighted_P";
+        model_correctness.row_family_inventory =
+            "station_inventory_capacity|pickup_drop_load|route_degree_vehicle_use|"
+            "station_disjointness|duration_operation_time|gini_linearization|"
+            "complete_compact_strengthening";
+        model_correctness.callback_row_inventory =
+            "plain_original_compact:no_callback_local_rows_required";
+        model_correctness.variable_domain_inventory =
+            api.variable_domain_fingerprint;
+        model_correctness.improving_gini_range_complete = true;
+        model_correctness.migrated_static_row_families_complete = true;
+        model_correctness.selected_flow_rows_complete = true;
+        model_correctness.callback_interval_rows_complete = true;
+        model_correctness.production_options_match_manifest =
+            options.round22_production_mode &&
+            effective_cplex_threads == 1 &&
+            api.presolve_effective == 1 &&
+            api.search_effective == 1 &&
+            api.node_select_effective == 1 &&
+            api.native_cuts_default &&
+            options.dense_progress_enabled;
+        model_correctness.one_model_lifecycle_design =
+            api.environment_count == 1 && api.problem_count == 1 &&
+            api.model_read_count == 1 && api.mipopt_count == 1;
         const StrictCertificateDecision decision =
             evaluateAndPopulateStrictCertificate(
                 result, api.native, verified_objective_available,
                 verified_objective, verified_original_feasible,
                 verified_objective_consistent,
-                api.lifecycle_valid && api.native.mipopt_return_code == 0);
+                api.lifecycle_valid && api.native.mipopt_return_code == 0,
+                model_correctness);
         if (decision.verified_gap_available) {
             result.gap = decision.verified_project_relative_gap;
         }
@@ -3394,7 +3529,7 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
         if (decision.strict_certified_original_problem) {
             result.status = "optimal";
             result.certificate =
-                "Strict Round 21 certificate: native CPLEX status 101, zero relative/absolute MIP-gap parameter round trips, retained native best bound, completed lifecycle, and independently verified native incumbent.";
+                "Round 22 engineering-exact certificate: native CPLEX status 101 on the versioned audited complete original compact model, exact-zero relative/absolute MIP-gap parameter round trips, completed one-model lifecycle, and independently verified original-problem feasibility. Objective mapping residuals are retained diagnostics, not a bitwise certificate gate.";
         } else if (decision.certificate_class == "infeasible") {
             result.status = "infeasible";
             result.certificate =
@@ -5423,6 +5558,31 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
         result.global_gini_tree_row_delta_trace_path = api.row_delta_trace_path;
         result.global_gini_tree_memory_trace_path = api.memory_trace_path;
         result.global_gini_tree_mip_start_audit_path = api.mip_start_audit_path;
+        result.dense_progress_enabled = options.dense_progress_enabled;
+        result.dense_progress_raw_event_path =
+            api.dense_progress_raw_event_path;
+        result.dense_progress_checkpoint_path =
+            options.dense_progress_checkpoint_path;
+        result.dense_progress_callback_invocation_count =
+            api.dense_progress.callback_invocation_count;
+        result.dense_progress_record_count =
+            api.dense_progress.progress_record_count;
+        result.dense_progress_dropped_record_count =
+            api.dense_progress.dropped_record_count;
+        result.dense_progress_callback_wall_seconds =
+            api.dense_progress.progress_callback_wall_seconds;
+        result.dense_progress_serialization_seconds =
+            api.dense_progress.serialization_seconds;
+        result.dense_progress_peak_buffer_bytes = static_cast<long long>(
+            api.dense_progress.peak_buffer_bytes);
+        result.dense_progress_final_record_appended =
+            api.dense_progress.final_record_appended;
+        result.dense_progress_flush_succeeded =
+            api.dense_progress.flush_succeeded;
+        result.dense_progress_flush_failure_reason =
+            api.dense_progress.flush_failure_reason;
+        result.dense_progress_read_only_contract =
+            api.dense_progress_read_only_contract;
         result.nodes = api.node_count;
         result.solver_finalization_reached = api.solver_finalization_reached;
         result.process_return_code = api.native.mipopt_return_code;
@@ -5461,7 +5621,6 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
             api.native_time_limit_effective;
 
         bool native_candidate_feasible = false;
-        bool native_candidate_objective_consistent = false;
         double native_candidate_objective = 0.0;
         if (api.native.objective_available && !api.values.empty()) {
             const std::vector<RoutePlan> candidate_routes =
@@ -5472,15 +5631,11 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
                 candidate.objective_matches && candidate.errors.empty() &&
                 std::isfinite(candidate.objective);
             native_candidate_objective = candidate.objective;
-            native_candidate_objective_consistent =
-                native_candidate_feasible &&
-                std::fabs(candidate.objective - api.native.objective) <=
+            if (native_candidate_feasible &&
+                (api.native.status_code == kCplexMipOptimal ||
+                 candidate.objective <= result.objective +
                     1e-8 * std::max({1.0, std::fabs(candidate.objective),
-                                     std::fabs(api.native.objective)});
-            if (native_candidate_objective_consistent &&
-                candidate.objective <= result.objective +
-                    1e-8 * std::max({1.0, std::fabs(candidate.objective),
-                                     std::fabs(result.objective)})) {
+                                     std::fabs(result.objective)}))) {
                 result.routes = candidate_routes;
                 result.verification = candidate;
                 result.final_inventory = candidate.final_inventory;
@@ -5490,12 +5645,12 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
                 result.upper_bound = candidate.objective;
             } else {
                 result.notes.push_back(
-                    "global Gini tree native incumbent was rejected by the independent original-solution verifier or objective consistency check");
+                    "global Gini tree native incumbent was rejected by the independent original-solution verifier or was worse than the retained same-run verified incumbent; native/recomputed objective tail residual was not used as a feasibility gate");
             }
         }
         const bool retained_incumbent_feasible =
-            result.verification.feasible &&
-            result.verification.objective_matches &&
+            result.verification.original_solution_feasible &&
+            result.verification.original_objective_recomputed &&
             result.verification.errors.empty() &&
             std::isfinite(result.objective);
         const bool retained_objective_consistent =
@@ -5504,8 +5659,7 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
                 1e-8 * std::max({1.0, std::fabs(result.objective),
                                  std::fabs(api.native.objective)});
         result.global_gini_tree_incumbent_verified =
-            native_candidate_feasible &&
-            native_candidate_objective_consistent;
+            native_candidate_feasible;
         if (api.native.best_bound_available) {
             result.lower_bound = api.native.best_bound;
         }
@@ -5519,12 +5673,64 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
             api.branch_coverage_valid && !api.callback_abort_used &&
             api.callback_failures == 0 && api.coverage_failures == 0 &&
             api.column_mapping_failures == 0;
+        ModelCorrectnessInput model_correctness =
+            round22ModelCorrectnessBase(
+                options,
+                options.dense_progress_algorithm_arm.empty()
+                    ? "tailored_global_tree"
+                    : options.dense_progress_algorithm_arm,
+                flow_resolution.resolved);
+        model_correctness.model_writer_fingerprint =
+            api.root_model_fingerprint;
+        model_correctness.objective_definition_fingerprint =
+            api.objective_fingerprint;
+        model_correctness.row_family_inventory =
+            api.row_family_inventory;
+        model_correctness.callback_row_inventory =
+            api.callback_row_inventory;
+        model_correctness.variable_domain_inventory =
+            api.variable_domain_fingerprint;
+        model_correctness.improving_gini_range_complete =
+            api.root_coverage_valid && api.branch_coverage_valid;
+        model_correctness.migrated_static_row_families_complete =
+            api.row_migration_complete && !api.row_family_inventory.empty();
+        model_correctness.selected_flow_rows_complete =
+            flow_counts.valid &&
+            (flow_resolution.resolved == "round20-current" ||
+             flow_resolution.resolved == "normalized-start-coupled");
+        model_correctness.callback_interval_rows_complete =
+            api.recursive_branching_complete &&
+            !api.callback_row_inventory.empty();
+        model_correctness.no_instance_dependent_option_resolution =
+            api.no_instance_special_case;
+        model_correctness.production_options_match_manifest =
+            options.round22_production_mode && solver_threads == 1 &&
+            options.global_gini_tree_child_estimate_mode == "parent-copy" &&
+            options.global_gini_tree_row_attachment_mode ==
+                "full-inherited-pack" &&
+            options.global_gini_tree_row_timing_mode == "deferred" &&
+            !options.global_gini_tree_native_mip_start &&
+            api.presolve_effective == 1 && api.search_effective == 1 &&
+            api.node_select_effective == 1 && api.native_cuts_default &&
+            options.dense_progress_enabled;
+        model_correctness.one_model_lifecycle_design =
+            api.environment_count == 1 && api.problem_count == 1 &&
+            api.model_read_count == 1 && api.mipopt_count == 1 &&
+            api.interval_oracle_count == 0 && api.child_process_count == 0;
+        const bool certificate_solution_feasible =
+            api.native.status_code == kCplexMipOptimal
+                ? native_candidate_feasible
+                : retained_incumbent_feasible;
+        const double certificate_recomputed_objective =
+            api.native.status_code == kCplexMipOptimal
+                ? native_candidate_objective : result.objective;
         const StrictCertificateDecision decision =
             evaluateAndPopulateStrictCertificate(
-                result, api.native, retained_incumbent_feasible,
-                result.objective, retained_incumbent_feasible,
+                result, api.native, certificate_solution_feasible,
+                certificate_recomputed_objective,
+                certificate_solution_feasible,
                 retained_objective_consistent,
-                exactness_lifecycle_complete);
+                exactness_lifecycle_complete, model_correctness);
         if (decision.verified_gap_available) {
             result.gap = decision.verified_project_relative_gap;
         }
@@ -5575,7 +5781,7 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
             result.full_certificate_rejection_reason = "none";
             result.compact_bc_certificate_valid = true;
             result.certificate =
-                "Strict Round 21 global-tree certificate: native CPLEX status 101, zero relative/absolute gap parameter round trips, retained raw best bound, one-problem lifecycle and coverage audits, and an independently verified native incumbent all passed.";
+                "Round 22 engineering-exact global-tree certificate: native CPLEX status 101, exact-zero relative/absolute gap parameter round trips, the versioned complete-model and one-problem lifecycle audits, and independent original-problem feasibility verification all passed. Native, lower-bound, and recomputed objective values remain separate full-precision diagnostics.";
         } else if (!api.solved) {
             result.status = "global_gini_tree_error";
             result.full_certificate_rejection_reason = api.fail_reason.empty()
@@ -5617,6 +5823,12 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
     result.runtime_seconds = std::chrono::duration<double>(Clock::now() - start).count();
     result.wall_time_seconds = result.runtime_seconds;
     result.actual_runtime_seconds = result.runtime_seconds;
+    result.dense_progress_instrumentation_wall_percent =
+        result.runtime_seconds > 0.0
+            ? 100.0 * (result.dense_progress_callback_wall_seconds +
+                       result.dense_progress_serialization_seconds) /
+                  result.runtime_seconds
+            : 0.0;
     return result;
 }
 

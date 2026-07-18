@@ -93,13 +93,46 @@ void testStoredStrictFlagControlsCplexClaim() {
     ebrp::SolveResult result;
     result.method = "cplex";
     result.status = "optimal";
-    result.strict_certificate_class = "native_exact_optimal";
+    result.strict_certificate_class = "native_engineering_exact_optimal";
     result.strict_certified_original_problem = true;
     require(ebrp::inferCertifiedOriginalProblem(result),
             "stored valid strict CPLEX flag was ignored");
     const std::string json = ebrp::resultToJson(result);
     require(json.find("\"status\": \"optimal\"") != std::string::npos,
             "valid strict status was guarded away");
+}
+
+void testMappingResidualAndRound22GatesRoundTrip() {
+    ebrp::SolveResult result;
+    result.method = "cplex";
+    result.status = "optimal";
+    result.strict_certificate_class = "native_engineering_exact_optimal";
+    result.strict_certified_original_problem = true;
+    result.verified_incumbent_objective_residual_available = true;
+    result.verified_incumbent_objective_residual =
+        std::nextafter(0.0, 1.0);
+    result.objective_mapping_diagnostic = "mapping_residual_nominal";
+    result.model_correctness_verified = true;
+    result.model_correctness_audit_fingerprint = "0123456789abcdef";
+    result.dense_progress_enabled = true;
+    result.dense_progress_final_record_appended = true;
+    result.dense_progress_flush_succeeded = true;
+    const std::string json = ebrp::resultToJson(result);
+    require(json.find("\"native_vs_recomputed_objective_residual\": " +
+                      fullPrecision(
+                          result.verified_incumbent_objective_residual)) !=
+                std::string::npos,
+            "mapping residual lost round-trip-safe precision");
+    require(json.find("\"objective_mapping_diagnostic\": "
+                      "\"mapping_residual_nominal\"") !=
+                std::string::npos,
+            "mapping diagnostic missing");
+    require(json.find("\"model_correctness_verified\": true") !=
+                std::string::npos,
+            "model-correctness gate missing");
+    require(json.find("\"dense_progress_final_record_appended\": true") !=
+                std::string::npos,
+            "dense finalization evidence missing");
 }
 
 } // namespace
@@ -109,7 +142,8 @@ int main() {
         testToleranceGapAndLowerBoundRemainRaw();
         testUnavailableValuesAreNull();
         testStoredStrictFlagControlsCplexClaim();
-        std::cout << "StrictSerializationTests: 3 groups passed\n";
+        testMappingResidualAndRound22GatesRoundTrip();
+        std::cout << "StrictSerializationTests: 4 groups passed\n";
         return 0;
     } catch (const std::exception& error) {
         std::cerr << "StrictSerializationTests failure: "

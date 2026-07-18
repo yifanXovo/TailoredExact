@@ -88,9 +88,13 @@ StrictCertificateDecision classifyStrictCertificate(
     out.verified_signed_bound_residual = unavailable;
     out.verified_relative_gap = unavailable;
     out.verified_project_relative_gap = unavailable;
+    out.native_vs_recomputed_objective_residual = unavailable;
     out.status_code_text_consistent = cplexMipStatusTextConsistent(
         input.native_status_code, input.native_status_text);
     out.gap_parameters_valid = strictGapParametersValid(input);
+    out.model_correctness_verified = input.model_correctness_verified &&
+        input.model_correctness_gate_version ==
+            "round22-engineering-model-v1";
     out.native_objective_valid = input.native_objective_return_code == 0 &&
         input.native_objective_available && std::isfinite(input.native_objective) &&
         std::fabs(input.native_objective) < kCplexInfinityBound;
@@ -140,6 +144,21 @@ StrictCertificateDecision classifyStrictCertificate(
             input.bound_equality_proof_conditions_passed &&
             !input.bound_equality_proof_module.empty();
     }
+    if (out.native_objective_valid &&
+        input.verified_upper_bound_available &&
+        std::isfinite(input.verified_upper_bound)) {
+        out.mapping_residual_available = true;
+        out.native_vs_recomputed_objective_residual =
+            input.verified_upper_bound - input.native_objective;
+        const double diagnostic_scale = std::max({
+            1.0, std::fabs(input.verified_upper_bound),
+            std::fabs(input.native_objective)});
+        out.mapping_residual_classification =
+            std::fabs(out.native_vs_recomputed_objective_residual) <=
+                    1e-9 * diagnostic_scale
+                ? "mapping_residual_nominal"
+                : "mapping_residual_warning";
+    }
 
     if (!out.status_code_text_consistent) {
         out.certificate_class = "certificate_rejected";
@@ -165,87 +184,46 @@ StrictCertificateDecision classifyStrictCertificate(
         out.rejection_reason = "optimal_with_unscaled_infeasibilities";
         return out;
     }
+    if (input.native_status_code == kCplexMipOptimal) {
+        if (!out.model_correctness_verified) {
+            out.certificate_class = "certificate_rejected";
+            out.rejection_reason = "model_correctness_gate_failed";
+        } else if (!input.verifier_passed) {
+            out.certificate_class = "certificate_rejected";
+            out.rejection_reason = "exact_status_verifier_failed";
+        } else {
+            // Round 22 engineering exactness follows the native status of the
+            // audited complete model.  Objective/bound/recomputation residuals
+            // remain signed, full-precision diagnostics; they are not a second
+            // bitwise MIP proof and cannot reject status 101 by themselves.
+            out.certificate_class = "native_engineering_exact_optimal";
+            out.strict_certified_original_problem = true;
+        }
+        return out;
+    }
+    if (input.native_status_code == kCplexMipOptimalTolerance) {
+        out.certificate_class = "native_tolerance_optimal_only";
+        out.rejection_reason =
+            "status_102_is_not_engineering_exact_status_101";
+        return out;
+    }
+    if (input.native_status_code == kCplexMipTimeLimitFeasible ||
+        input.native_status_code == kCplexMipTimeLimitNoIncumbent) {
+        if (out.native_best_bound_valid) {
+            out.certificate_class = "time_limit_valid_bound";
+        } else {
+            out.certificate_class = "invalid_or_unavailable_bound";
+            out.rejection_reason = input.native_best_bound_return_code == 0
+                ? "native_best_bound_nonfinite_or_unavailable"
+                : "CPXgetbestobjval_failed";
+        }
+        return out;
+    }
     if (!out.native_best_bound_valid) {
         out.certificate_class = "invalid_or_unavailable_bound";
         out.rejection_reason = input.native_best_bound_return_code == 0
             ? "native_best_bound_nonfinite_or_unavailable"
             : "CPXgetbestobjval_failed";
-        return out;
-    }
-    const bool strict_route_proposed =
-        input.native_status_code == kCplexMipOptimal ||
-        (input.independent_exact_certificate_conditions_passed &&
-         !input.independent_exact_certificate_module.empty()) ||
-        out.bound_equality_closed;
-    if (strict_route_proposed && !out.native_cplex_relative_gap_valid) {
-        out.certificate_class = "certificate_rejected";
-        out.rejection_reason =
-            "native_mip_relative_gap_unavailable_for_strict_certificate";
-        return out;
-    }
-    if (input.independent_exact_certificate_conditions_passed &&
-        !input.independent_exact_certificate_module.empty()) {
-        if (input.verifier_passed && out.verified_gap_available) {
-            out.certificate_class = "independent_exact_certificate";
-            out.strict_certified_original_problem = true;
-        } else {
-            out.certificate_class = "certificate_rejected";
-            out.rejection_reason = input.verifier_passed
-                ? "independent_certificate_verified_upper_bound_unavailable"
-                : "independent_certificate_verifier_failed";
-        }
-        return out;
-    }
-    if (input.native_status_code == kCplexMipOptimal) {
-        if (input.verifier_passed && out.native_objective_valid &&
-            out.verified_gap_available) {
-            if (input.native_cplex_relative_gap != 0.0) {
-                out.certificate_class = "certificate_rejected";
-                out.rejection_reason =
-                    "exact_status_native_cplex_gap_not_zero";
-            } else if (!out.native_gap_available || out.native_bound_inversion ||
-                out.native_absolute_gap != 0.0) {
-                out.certificate_class = "certificate_rejected";
-                out.rejection_reason =
-                    "exact_status_positive_native_gap_or_bound_inversion";
-            } else if (out.verified_bound_inversion ||
-                       out.verified_absolute_gap != 0.0) {
-                out.certificate_class = "certificate_rejected";
-                out.rejection_reason =
-                    "exact_status_native_bound_not_equal_verified_upper_bound";
-            } else {
-                out.certificate_class = "native_exact_optimal";
-                out.strict_certified_original_problem = true;
-            }
-        } else {
-            out.certificate_class = "certificate_rejected";
-            if (!input.verifier_passed) {
-                out.rejection_reason = "exact_status_verifier_failed";
-            } else if (!out.native_objective_valid) {
-                out.rejection_reason =
-                    "exact_status_native_objective_unavailable";
-            } else {
-                out.rejection_reason =
-                    "exact_status_verified_upper_bound_unavailable";
-            }
-        }
-        return out;
-    }
-    if (out.bound_equality_closed && input.verifier_passed) {
-        out.certificate_class = "native_bound_equality_closed";
-        out.strict_certified_original_problem = true;
-        return out;
-    }
-    if (input.native_status_code == kCplexMipOptimalTolerance) {
-        out.certificate_class = "native_tolerance_optimal_only";
-        out.rejection_reason = out.verified_absolute_gap > 0.0
-            ? "tolerance_status_with_positive_retained_native_gap"
-            : "tolerance_status_without_exact_bound_equality";
-        return out;
-    }
-    if (input.native_status_code == kCplexMipTimeLimitFeasible ||
-        input.native_status_code == kCplexMipTimeLimitNoIncumbent) {
-        out.certificate_class = "time_limit_valid_bound";
         return out;
     }
     out.certificate_class = "invalid_or_unavailable_bound";

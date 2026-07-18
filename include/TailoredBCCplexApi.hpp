@@ -2,6 +2,7 @@
 
 #include "Result.hpp"
 #include "StrictCertificate.hpp"
+#include "DenseProgress.hpp"
 
 #include <filesystem>
 #include <string>
@@ -79,6 +80,11 @@ struct PlainCplexApiSolveResult {
     std::string log_path;
     int log_set_return_code = -1;
     std::string native_cut_counts;
+    std::string model_writer_fingerprint;
+    std::string variable_domain_fingerprint;
+    DenseProgressStats dense_progress;
+    std::string dense_progress_raw_event_path;
+    bool dense_progress_read_only_contract = false;
     std::unordered_map<std::string, double> values;
 };
 
@@ -366,6 +372,9 @@ struct GlobalGiniTreeApiSolveResult {
     std::string row_factory_version;
     std::string root_model_fingerprint;
     std::string objective_fingerprint;
+    std::string variable_domain_fingerprint;
+    std::string row_family_inventory;
+    std::string callback_row_inventory;
     std::string root_row_signature;
     std::string node_trace_path;
     std::string bound_trace_path;
@@ -376,6 +385,9 @@ struct GlobalGiniTreeApiSolveResult {
     std::string row_delta_trace_path;
     std::string memory_trace_path;
     std::string mip_start_audit_path;
+    DenseProgressStats dense_progress;
+    std::string dense_progress_raw_event_path;
+    bool dense_progress_read_only_contract = false;
     std::unordered_map<std::string, double> values;
 };
 
@@ -385,7 +397,8 @@ PlainCplexApiSolveResult solvePlainCplexWithStrictApi(
     const std::filesystem::path& lp_path,
     double time_limit_seconds,
     int threads,
-    const std::filesystem::path& log_path = {});
+    const std::filesystem::path& log_path = {},
+    const DenseProgressConfig& dense_progress = {});
 
 TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     const std::filesystem::path& lp_path,
