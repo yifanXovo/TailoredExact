@@ -1,0 +1,80 @@
+{
+  "certificate": {
+    "independent_verifier_failures": 0,
+    "mapping_warning_rows": 2,
+    "maximum_absolute_mapping_residual": 1.1661410836971697e-08,
+    "model_correctness_failures": 0,
+    "strict_by_arm": {
+      "S0": 5,
+      "S1": 4,
+      "plain": 2
+    },
+    "strict_non_101": 0,
+    "zero_absolute_gap_roundtrips": 81,
+    "zero_relative_gap_roundtrips": 81
+  },
+  "instrumentation": {
+    "matched_pairs": 6,
+    "maximum_matched_solver_delta_percent": 0.34325497183143633,
+    "maximum_matched_wall_delta_percent": 0.3431688543232837,
+    "maximum_peak_buffer_bytes": 15728640,
+    "maximum_percent": 1.5813108370952833,
+    "median_percent": 0.023125141652958175,
+    "minimum_percent": 0.017818912019511517
+  },
+  "official_execution": {
+    "certificate_class_counts": {
+      "infeasible": 2,
+      "native_engineering_exact_optimal": 11,
+      "time_limit_valid_bound": 68
+    },
+    "completed": 81,
+    "failed": 0,
+    "interrupted": 0,
+    "status_counts": {
+      "101": 11,
+      "103": 2,
+      "107": 25,
+      "108": 43
+    }
+  },
+  "production_S1_vs_S0": {
+    "S1_disposition": "exact_optional_research_variant",
+    "auc_wins": {
+      "S0": 14,
+      "S1": 10
+    },
+    "broad_non_regression_passed": false,
+    "paired_counts": {
+      "existing": {
+        "improve": 6,
+        "regress": 11
+      },
+      "heldout": {
+        "improve": 3,
+        "regress": 3,
+        "unavailable": 1
+      }
+    },
+    "selected_stable_mainline": "S0/F0 round20-current"
+  },
+  "schema": "round22-final-audit-v1",
+  "sibling_delay": {
+    "maximum_run_id": "stage5__high_imbalance_seed3202__s0__3600s__dense_on",
+    "maximum_seconds": 2940.0933434,
+    "observed_first_process_delays": 11422,
+    "over_300_seconds": 443,
+    "over_900_seconds": 66
+  },
+  "trajectory": {
+    "endpoint_mismatches": 0,
+    "fresh_checkpoints": 1315,
+    "not_observed_checkpoints": 0,
+    "observed_overtake_intervals": 47,
+    "official_rows": 81,
+    "raw_events": 1667782,
+    "solver_final_rows": 81,
+    "stale_checkpoints": 188,
+    "structural_errors": 0
+  }
+}
