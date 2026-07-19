@@ -40,6 +40,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/GiniBranching.cpp
   src/GiniFrontierGeometry.cpp
   src/IntervalRowFactory.cpp
+  src/DispersionChildBound.cpp
   src/hga_tgbc/HgaTgbcGreedy.cpp
   src/HgaTgbcRunner.cpp
   src/Logger.cpp
@@ -80,3 +81,7 @@ add_test(NAME ModelCorrectnessTests COMMAND ModelCorrectnessTests)
 add_executable(DenseProgressTests tests/dense_progress_tests.cpp)
 target_link_libraries(DenseProgressTests PRIVATE exact_ebrp_core)
 add_test(NAME DenseProgressTests COMMAND DenseProgressTests)
+
+add_executable(DispersionChildBoundTests tests/dispersion_child_bound_tests.cpp)
+target_link_libraries(DispersionChildBoundTests PRIVATE exact_ebrp_core)
+add_test(NAME DispersionChildBoundTests COMMAND DispersionChildBoundTests)

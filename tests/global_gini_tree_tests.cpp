@@ -1,10 +1,12 @@
 #include "GiniFrontierGeometry.hpp"
 #include "IntervalRowFactory.hpp"
 #include "Result.hpp"
+#include "TailoredBCCplexApi.hpp"
 
 #include <algorithm>
 #include <cmath>
 #include <iostream>
+#include <limits>
 #include <map>
 #include <set>
 #include <stdexcept>
@@ -122,6 +124,33 @@ void testGeometry() {
             "eligible interval unexpectedly rejected");
     require(!ebrp::legacyAdaptiveSplitEligible(0.0, 0.2, 2, 2, 1e-4),
             "maximum adaptive depth must be terminal");
+
+    const ebrp::GiniIntervalGeometry inherited{0.0, 0.8};
+    require(ebrp::validNestedIntervalContraction(
+                inherited, {0.1, 0.7}, 1e-12, &reason),
+            "native local bound contraction must preserve inherited validity");
+    require(reason == "valid_nested_interval_contraction",
+            "contraction audit reason must be explicit");
+    require(ebrp::validNestedIntervalContraction(
+                inherited, inherited, 1e-12),
+            "an unchanged native interval must remain valid");
+    require(!ebrp::validNestedIntervalContraction(
+                inherited, {-0.01, 0.7}, 1e-12, &reason) &&
+                reason == "observed_lower_expands_inherited_interval",
+            "lower-end expansion must fail closed");
+    require(!ebrp::validNestedIntervalContraction(
+                inherited, {0.1, 0.81}, 1e-12, &reason) &&
+                reason == "observed_upper_expands_inherited_interval",
+            "upper-end expansion must fail closed");
+    require(!ebrp::validNestedIntervalContraction(
+                inherited, {0.7, 0.1}, 1e-12, &reason) &&
+                reason == "negative_interval_width",
+            "inverted observed interval must fail closed");
+    require(!ebrp::validNestedIntervalContraction(
+                inherited, {std::numeric_limits<double>::quiet_NaN(), 0.7},
+                1e-12, &reason) &&
+                reason == "nonfinite_interval_endpoint",
+            "nonfinite observed interval must fail closed");
 }
 
 void testFactoryAndRegistry() {
@@ -450,6 +479,28 @@ void testCertificateGuard() {
             "complete global-tree audit should preserve optimal status");
 }
 
+void testContinuousBranchPresolvePolicy() {
+    const auto policy = ebrp::requiredContinuousBranchPresolvePolicy();
+    require(policy.reduce_requested == ebrp::kCplexPreReduceNone,
+            "continuous branching must disable primal and dual reductions");
+    require(policy.linear_requested == 0,
+            "continuous branching must disable linear reductions");
+    require(ebrp::continuousBranchPresolveConfigurationValid(
+                0, 0, policy.reduce_requested,
+                0, 0, policy.linear_requested),
+            "documented continuous-branch presolve policy rejected");
+    require(!ebrp::continuousBranchPresolveConfigurationValid(
+                0, 0, 2, 0, 0, policy.linear_requested),
+            "dual reductions were accepted");
+    require(!ebrp::continuousBranchPresolveConfigurationValid(
+                0, 0, policy.reduce_requested, 0, 0, 1),
+            "linear reductions were accepted");
+    require(!ebrp::continuousBranchPresolveConfigurationValid(
+                0, 1016, policy.reduce_requested,
+                0, 0, policy.linear_requested),
+            "failed readback did not fail closed");
+}
+
 } // namespace
 
 int main() {
@@ -462,7 +513,8 @@ int main() {
         testExactIncrementalInheritance();
         testRootConnectivityFlowProjection();
         testCertificateGuard();
-        std::cout << "GlobalGiniTreeTests: 8 groups passed\n";
+        testContinuousBranchPresolvePolicy();
+        std::cout << "GlobalGiniTreeTests: 9 groups passed\n";
         return 0;
     } catch (const std::exception& error) {
         std::cerr << "GlobalGiniTreeTests failed: " << error.what() << '\n';

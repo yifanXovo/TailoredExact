@@ -94,6 +94,14 @@ struct ChildDomainEstimate {
     double domain_estimate = 0.0;
     double final_estimate = 0.0;
     double lift_over_parent = 0.0;
+    double s_lower = 0.0;
+    double required_deviation = 0.0;
+    double deviation_lower_sum = 0.0;
+    double deviation_upper_sum = 0.0;
+    double dispersion_penalty_lower = 0.0;
+    bool dispersion_bound_used = false;
+    bool domain_contradiction_observed = false;
+    std::string validation_status = "not_dispersion_coupled";
     bool valid = false;
     std::string failure_reason;
 };
@@ -126,6 +134,13 @@ IntervalRowFactoryResult buildRound18StaticIntervalRows(
     const IntervalRowFactoryRequest& request);
 
 ChildDomainEstimate computeChildDomainEstimate(
+    const Instance& instance,
+    const SolveOptions& options,
+    const IntervalDomainSummary& domain,
+    double child_gamma_lower,
+    double parent_relaxation);
+
+ChildDomainEstimate computeDispersionCoupledChildEstimate(
     const Instance& instance,
     const SolveOptions& options,
     const IntervalDomainSummary& domain,

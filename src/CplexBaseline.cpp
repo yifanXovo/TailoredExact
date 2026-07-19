@@ -3173,7 +3173,10 @@ StrictCertificateDecision evaluateAndPopulateStrictCertificate(
     bool verified_original_feasible,
     bool verified_objective_consistent,
     bool exactness_lifecycle_complete,
-    const ModelCorrectnessInput& model_correctness_input) {
+    const ModelCorrectnessInput& model_correctness_input,
+    const std::string& native_model_scope,
+    bool native_model_configuration_valid,
+    bool verified_witness_satisfies_native_model) {
     result.verified_incumbent_objective_available =
         verified_objective_available;
     result.verified_incumbent_objective = verified_objective;
@@ -3244,6 +3247,13 @@ StrictCertificateDecision evaluateAndPopulateStrictCertificate(
     // observational and cannot close a 102/tolerance certificate.
     input.bound_equality_proof_conditions_passed = false;
     input.independent_exact_certificate_conditions_passed = false;
+    input.native_model_scope = native_model_scope;
+    input.native_model_configuration_valid =
+        native_model_configuration_valid;
+    input.verified_feasible_witness_available =
+        verified_original_feasible;
+    input.verified_witness_satisfies_native_model =
+        verified_witness_satisfies_native_model;
     input.relative_gap = native.relative_gap;
     input.absolute_gap = native.absolute_gap;
     const StrictCertificateDecision decision =
@@ -3254,6 +3264,10 @@ StrictCertificateDecision evaluateAndPopulateStrictCertificate(
         ? "none" : decision.rejection_reason;
     result.strict_certified_original_problem =
         decision.strict_certified_original_problem;
+    result.strict_native_model_scope = decision.native_model_scope;
+    result.strict_infeasibility_scope = decision.infeasibility_scope;
+    result.feasibility_consistency_gate_passed =
+        decision.feasibility_consistency_gate_passed;
     result.strict_native_objective_valid = decision.native_objective_valid;
     result.strict_native_best_bound_valid = decision.native_best_bound_valid;
     result.strict_bound_equality_closed = decision.bound_equality_closed;
@@ -3515,7 +3529,8 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
                 verified_objective, verified_original_feasible,
                 verified_objective_consistent,
                 api.lifecycle_valid && api.native.mipopt_return_code == 0,
-                model_correctness);
+                model_correctness, "original_problem", true,
+                verified_original_feasible);
         if (decision.verified_gap_available) {
             result.gap = decision.verified_project_relative_gap;
         }
@@ -3530,7 +3545,8 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
             result.status = "optimal";
             result.certificate =
                 "Round 22 engineering-exact certificate: native CPLEX status 101 on the versioned audited complete original compact model, exact-zero relative/absolute MIP-gap parameter round trips, completed one-model lifecycle, and independently verified original-problem feasibility. Objective mapping residuals are retained diagnostics, not a bitwise certificate gate.";
-        } else if (decision.certificate_class == "infeasible") {
+        } else if (decision.certificate_class ==
+                   "original_problem_infeasible") {
             result.status = "infeasible";
             result.certificate =
                 "Native CPLEX status 103 certifies model infeasibility; no optimal incumbent certificate is claimed.";
@@ -5202,6 +5218,9 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
     result.strict_certificate_class = "invalid_or_unavailable_bound";
     result.strict_certificate_rejection_reason = "global_tree_not_evaluated";
     result.strict_certified_original_problem = false;
+    result.strict_native_model_scope = "incumbent_cutoff_model";
+    result.strict_infeasibility_scope = "not_infeasible";
+    result.feasibility_consistency_gate_passed = true;
     result.strict_native_objective_valid = false;
     result.strict_native_best_bound_valid = false;
     result.strict_bound_equality_closed = false;
@@ -5491,6 +5510,24 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
         result.global_gini_tree_presolve_requested = api.presolve_requested;
         result.global_gini_tree_presolve_set_rc = api.presolve_set_rc;
         result.global_gini_tree_presolve_effective = api.presolve_effective;
+        result.global_gini_tree_preprocessing_reduce_requested =
+            api.preprocessing_reduce_requested;
+        result.global_gini_tree_preprocessing_reduce_set_rc =
+            api.preprocessing_reduce_set_rc;
+        result.global_gini_tree_preprocessing_reduce_get_rc =
+            api.preprocessing_reduce_get_rc;
+        result.global_gini_tree_preprocessing_reduce_effective =
+            api.preprocessing_reduce_effective;
+        result.global_gini_tree_preprocessing_linear_requested =
+            api.preprocessing_linear_requested;
+        result.global_gini_tree_preprocessing_linear_set_rc =
+            api.preprocessing_linear_set_rc;
+        result.global_gini_tree_preprocessing_linear_get_rc =
+            api.preprocessing_linear_get_rc;
+        result.global_gini_tree_preprocessing_linear_effective =
+            api.preprocessing_linear_effective;
+        result.global_gini_tree_continuous_branch_presolve_valid =
+            api.continuous_branch_presolve_valid;
         result.global_gini_tree_search_requested = api.search_requested;
         result.global_gini_tree_search_set_rc = api.search_set_rc;
         result.global_gini_tree_search_effective = api.search_effective;
@@ -5672,7 +5709,8 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
             api.sibling_isolation_by_construction && api.root_coverage_valid &&
             api.branch_coverage_valid && !api.callback_abort_used &&
             api.callback_failures == 0 && api.coverage_failures == 0 &&
-            api.column_mapping_failures == 0;
+            api.column_mapping_failures == 0 &&
+            api.child_estimate_failures == 0;
         ModelCorrectnessInput model_correctness =
             round22ModelCorrectnessBase(
                 options,
@@ -5705,12 +5743,16 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
             api.no_instance_special_case;
         model_correctness.production_options_match_manifest =
             options.round22_production_mode && solver_threads == 1 &&
-            options.global_gini_tree_child_estimate_mode == "parent-copy" &&
+            (options.global_gini_tree_child_estimate_mode == "parent-copy" ||
+             options.global_gini_tree_child_estimate_mode ==
+                 "dispersion-coupled") &&
             options.global_gini_tree_row_attachment_mode ==
                 "full-inherited-pack" &&
             options.global_gini_tree_row_timing_mode == "deferred" &&
             !options.global_gini_tree_native_mip_start &&
-            api.presolve_effective == 1 && api.search_effective == 1 &&
+            api.presolve_effective == 0 &&
+            api.continuous_branch_presolve_valid &&
+            api.search_effective == 1 &&
             api.node_select_effective == 1 && api.native_cuts_default &&
             options.dense_progress_enabled;
         model_correctness.one_model_lifecycle_design =
@@ -5730,7 +5772,10 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
                 certificate_recomputed_objective,
                 certificate_solution_feasible,
                 retained_objective_consistent,
-                exactness_lifecycle_complete, model_correctness);
+                exactness_lifecycle_complete, model_correctness,
+                "incumbent_cutoff_model",
+                api.continuous_branch_presolve_valid,
+                retained_incumbent_feasible);
         if (decision.verified_gap_available) {
             result.gap = decision.verified_project_relative_gap;
         }

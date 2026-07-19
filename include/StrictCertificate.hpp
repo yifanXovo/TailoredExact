@@ -45,6 +45,13 @@ struct StrictCertificateInput {
     std::string bound_equality_proof_module;
     bool independent_exact_certificate_conditions_passed = false;
     std::string independent_exact_certificate_module;
+    // The native MIP status is only meaningful relative to the model that was
+    // actually optimized.  Keeping that scope explicit prevents a cutoff or
+    // fixed-child status from being serialized as original-problem evidence.
+    std::string native_model_scope = "original_problem";
+    bool native_model_configuration_valid = true;
+    bool verified_feasible_witness_available = false;
+    bool verified_witness_satisfies_native_model = false;
     StrictGapParameterRecord relative_gap;
     StrictGapParameterRecord absolute_gap;
 };
@@ -53,6 +60,9 @@ struct StrictCertificateDecision {
     std::string certificate_class = "invalid_or_unavailable_bound";
     std::string rejection_reason;
     bool strict_certified_original_problem = false;
+    std::string native_model_scope = "original_problem";
+    std::string infeasibility_scope = "not_infeasible";
+    bool feasibility_consistency_gate_passed = true;
     bool status_code_text_consistent = false;
     bool gap_parameters_valid = false;
     bool native_objective_valid = false;

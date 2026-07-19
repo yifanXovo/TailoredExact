@@ -31,4 +31,13 @@ bool exactIntervalCoverage(const GiniIntervalGeometry& parent,
                            double tolerance,
                            std::string* reason = nullptr);
 
+// CPLEX may tighten a node's local G bounds after valid cuts are installed.
+// Such a contraction preserves every row inherited from the wider interval;
+// an expansion does not and must therefore fail closed.
+bool validNestedIntervalContraction(
+    const GiniIntervalGeometry& inherited,
+    const GiniIntervalGeometry& observed,
+    double tolerance,
+    std::string* reason = nullptr);
+
 } // namespace ebrp

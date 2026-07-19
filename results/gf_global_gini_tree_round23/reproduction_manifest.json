@@ -1,0 +1,59 @@
+{
+  "schema": "round23-reproduction-v1",
+  "authoritative_workspace": "E:/codes/ExactEBRP",
+  "round23_branch": "codex/round23-moderate4301-correctness-unified-convergence",
+  "local_branch_base_sha": "3c69cb2c04889db5ceb40e313a710d600089879d",
+  "observed_remote_main_sha": "91ed0e314caae51ddbd8375d88cd65a5352c917f",
+  "merge_base_sha": "3c69cb2c04889db5ceb40e313a710d600089879d",
+  "local_base_tree_sha": "1b6e852b48dad4f5697909642e10acfb0b6fa81e",
+  "remote_main_tree_sha": "1b6e852b48dad4f5697909642e10acfb0b6fa81e",
+  "repository_relationship": "different commit history, identical source tree",
+  "forbidden_repository_operations_performed": false,
+  "host": "WIN-3NO58RVQ4VC",
+  "os": "Microsoft Windows NT 10.0.19045.0",
+  "architecture": "X64",
+  "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel",
+  "compiler": "D:/msys64/ucrt64/bin/g++.exe",
+  "compiler_version": "g++.exe (Rev2, Built by MSYS2 project) 14.2.0",
+  "build_mode": "release -O3 -DNDEBUG -std=c++17",
+  "cplex_version": "22.1.1.0",
+  "cplex_studio_dir2211": "C:/Program Files/IBM/ILOG/CPLEX_Studio2211",
+  "threads": 1,
+  "source_tree_fingerprint_definition": "SHA-256 of newline-terminated, path-sorted '<file_sha256>  <slash_path>' records for CMakeLists.txt and all non-pyc files under include/src/tests/scripts",
+  "source_tree_file_count_at_protocol_freeze": 169,
+  "source_tree_fingerprint_sha256_at_protocol_freeze": "576aa46e063ee96a9e5a14cdef117ad35e0e4110b3227e172deb0ad28c7c4a73",
+  "official_experiment_source_commit": "427e15f4cb1a993093d3a355356e8a772a964cc3",
+  "final_source_tree_file_count_including_analysis_packaging_tests": 172,
+  "final_source_tree_fingerprint_sha256": "a6f4dd6eff2a69ca9fe841690a039832ebc7c560d0ff47aabb34d638f67e96ab",
+  "executables": {
+    "actual_frozen_round22": {
+      "path": "build_round22/ExactEBRP-frozen.exe",
+      "sha256": "b3fecef84dce8d6a2323d25a7877d5f16d14aa5f1fb644ae642bf636a229ee62",
+      "status": "available_and_verified"
+    },
+    "round23_protocol_smoke": {
+      "path": "build_round23/ExactEBRP-frozen.exe",
+      "sha256": "e343625e22bf04271703ab19228ae44e604790077c6c943679f2366f11e8dad9",
+      "status": "incremental_precommit_smoke_build_not_round22_frozen"
+    },
+    "round23_official_clean": {
+      "path": "build_round23/ExactEBRP-frozen.exe",
+      "sha256": "880f9fb08dd178d0849447b76c8bfbafee2d5abe9402dcfbc594e558d630e3c4",
+      "source_commit_at_build": "427e15f4cb1a993093d3a355356e8a772a964cc3",
+      "status": "clean_release_frozen_and_used_for_all_official_round23_runs"
+    }
+  },
+  "production_manifests": {
+    "stable_s0_reference_manifest.json": "080f4e94481d9da2d8ad768f0ab6b146b1422e23827a6841e9851b35a8cab247",
+    "corrected_s0_manifest.json": "624b3bcbd4d0a70dd1dd93df4b34472808c255734857b3ea75bd750169ce4c2e",
+    "round23_candidate_manifest.json": "5702a9152231298927ce434a13baadfdc818e659dbfb31cf84b5b28bbafa0a25",
+    "plain_cplex_reference_manifest.json": "63dbcd33874b84bdc32f208e648a68dfaeff849b1fa148a15affd106fd7e5c13"
+  },
+  "instance_manifest": {
+    "path": "results/gf_global_gini_tree_round23/round23_instance_manifest.csv",
+    "sha256": "a360dc3ef48c65fa14e2b7e7949ca646014d6056654983dc36b860760f1fd046",
+    "instance_count": 6
+  },
+  "run_provenance_rule": "Each run command record binds source commit, executable SHA-256, instance SHA-256, option-manifest SHA-256, source retained command SHA-256, budgets, paths, and resolved command.",
+  "round22_evidence_modified": false
+}

@@ -1,0 +1,92 @@
+{
+  "root_lp": "E:\\codes\\ExactEBRP\\results\\gf_global_gini_tree_unified_validation_round\\runs\\stage4__moderate_seed4301__s0__900s__dense_on\\global_root.lp.gz",
+  "root_lp_sha256": "d249787bfc53d3aa4ac3a64cd6c7ca5f2d6f482af694768e2c0b5fd292b1cd34",
+  "partial_fix_lp": "E:\\codes\\ExactEBRP\\build_round23\\moderate4301_s0_hga_partial_fix.lp",
+  "original_label_partial_fix_lp": "E:\\codes\\ExactEBRP\\build_round23\\moderate4301_s0_hga_partial_fix_original_labels.lp",
+  "partial_fix_count": 1812,
+  "vehicle_relabeling": [
+    {
+      "retained_vehicle": 0,
+      "canonical_vehicle": 0,
+      "retained_nodes": [
+        0,
+        18,
+        15,
+        5,
+        14,
+        11,
+        0
+      ],
+      "canonical_nodes": [
+        0,
+        10,
+        1,
+        13,
+        16,
+        19,
+        4,
+        2,
+        17,
+        0
+      ]
+    },
+    {
+      "retained_vehicle": 1,
+      "canonical_vehicle": 1,
+      "retained_nodes": [
+        0,
+        10,
+        1,
+        13,
+        16,
+        19,
+        4,
+        2,
+        17,
+        0
+      ],
+      "canonical_nodes": [
+        0,
+        6,
+        3,
+        9,
+        12,
+        20,
+        0
+      ]
+    },
+    {
+      "retained_vehicle": 2,
+      "canonical_vehicle": 2,
+      "retained_nodes": [
+        0,
+        6,
+        3,
+        9,
+        12,
+        20,
+        0
+      ],
+      "canonical_nodes": [
+        0,
+        18,
+        15,
+        5,
+        14,
+        11,
+        0
+      ]
+    }
+  ],
+  "partial_fix_leaves_free": [
+    "connectivity flow",
+    "order variables",
+    "bit variables",
+    "product variables",
+    "other auxiliary variables not in the semantic fixation map"
+  ],
+  "complete_extension_unsupported_columns": [],
+  "complete_extension_column_failures": 0,
+  "complete_extension_violated_rows_at_1e_9": 0,
+  "maximum_scaled_row_violation": 4.2211046439599917e-17
+}

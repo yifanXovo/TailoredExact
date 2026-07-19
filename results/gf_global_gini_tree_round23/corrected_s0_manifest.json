@@ -1,0 +1,17 @@
+{
+  "schema": "round23-official-arm-v1",
+  "arm": "S0-C",
+  "base_manifest": "stable_s0_reference_manifest.json",
+  "flow": "round20-current",
+  "child_estimate": "parent-copy",
+  "presolve": "off",
+  "preprocessing_reduce": 0,
+  "preprocessing_linear": 0,
+  "mechanism_enabled": false,
+  "mechanism_changes_rows": false,
+  "mechanism_changes_bounds": false,
+  "mechanism_changes_objective": false,
+  "mechanism_changes_pruning": false,
+  "uniform_all_official_instances": true,
+  "source_commit_binding": "git_commit_containing_this_manifest"
+}

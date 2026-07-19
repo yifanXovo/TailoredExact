@@ -89,6 +89,7 @@ StrictCertificateDecision classifyStrictCertificate(
     out.verified_relative_gap = unavailable;
     out.verified_project_relative_gap = unavailable;
     out.native_vs_recomputed_objective_residual = unavailable;
+    out.native_model_scope = input.native_model_scope;
     out.status_code_text_consistent = cplexMipStatusTextConsistent(
         input.native_status_code, input.native_status_text);
     out.gap_parameters_valid = strictGapParametersValid(input);
@@ -175,8 +176,41 @@ StrictCertificateDecision classifyStrictCertificate(
         out.rejection_reason = "native_finalization_or_lifecycle_incomplete";
         return out;
     }
+    if (!input.native_model_configuration_valid) {
+        out.certificate_class = "certificate_rejected";
+        out.rejection_reason = "native_model_configuration_invalid";
+        return out;
+    }
     if (input.native_status_code == kCplexMipInfeasible) {
-        out.certificate_class = "infeasible";
+        if (input.verified_feasible_witness_available &&
+            input.verified_witness_satisfies_native_model) {
+            out.certificate_class = "certificate_rejected";
+            out.rejection_reason =
+                "verified_feasible_witness_contradicts_native_infeasibility";
+            out.feasibility_consistency_gate_passed = false;
+            return out;
+        }
+        if (input.native_model_scope == "original_problem") {
+            out.certificate_class = "original_problem_infeasible";
+            out.infeasibility_scope = "original_problem";
+        } else if (input.native_model_scope == "improving_range") {
+            out.certificate_class = "improving_range_infeasible";
+            out.infeasibility_scope = "improving_range";
+        } else if (input.native_model_scope == "incumbent_cutoff_model") {
+            out.certificate_class = "cutoff_model_infeasible";
+            out.infeasibility_scope = "incumbent_cutoff_model";
+        } else if (input.native_model_scope == "fixed_gini_child") {
+            out.certificate_class = "fixed_gini_child_infeasible";
+            out.infeasibility_scope = "fixed_gini_child";
+        } else if (input.native_model_scope ==
+                   "strict_improvement_under_verified_incumbent") {
+            out.certificate_class = "no_strict_improvement_under_valid_incumbent";
+            out.infeasibility_scope =
+                "strict_improvement_under_verified_incumbent";
+        } else {
+            out.certificate_class = "certificate_rejected";
+            out.rejection_reason = "unknown_native_model_scope";
+        }
         return out;
     }
     if (input.native_status_code == kCplexMipOptimalUnscaledInfeasibilities) {

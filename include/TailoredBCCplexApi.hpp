@@ -11,6 +11,25 @@
 
 namespace ebrp {
 
+constexpr int kCplexPreprocessingReduceParam = 1057;
+constexpr int kCplexPreprocessingLinearParam = 1058;
+constexpr int kCplexPreReducePrimalOnly = 1;
+constexpr int kCplexPreReduceNone = 0;
+
+struct ContinuousBranchPresolvePolicy {
+    int reduce_requested = kCplexPreReduceNone;
+    int linear_requested = 0;
+};
+
+ContinuousBranchPresolvePolicy requiredContinuousBranchPresolvePolicy();
+bool continuousBranchPresolveConfigurationValid(
+    int reduce_set_rc,
+    int reduce_get_rc,
+    int reduce_effective,
+    int linear_set_rc,
+    int linear_get_rc,
+    int linear_effective);
+
 struct NativeMipEvidence {
     int mipopt_return_code = -1;
     int status_code = 0;
@@ -62,7 +81,7 @@ struct PlainCplexApiSolveResult {
     int presolve_requested = 1;
     int presolve_set_return_code = -1;
     int presolve_get_return_code = -1;
-    int presolve_effective = 0;
+    int presolve_effective = 1;
     int search_requested = 1;
     int search_set_return_code = -1;
     int search_get_return_code = -1;
@@ -322,10 +341,19 @@ struct GlobalGiniTreeApiSolveResult {
     int threads_requested = 1;
     int threads_set_rc = -1;
     int threads_get_rc = -1;
-    int presolve_requested = 1;
+    int presolve_requested = 0;
     int presolve_set_rc = -1;
     int presolve_get_rc = -1;
-    int presolve_effective = 1;
+    int presolve_effective = 0;
+    int preprocessing_reduce_requested = kCplexPreReduceNone;
+    int preprocessing_reduce_set_rc = -1;
+    int preprocessing_reduce_get_rc = -1;
+    int preprocessing_reduce_effective = -1;
+    int preprocessing_linear_requested = 0;
+    int preprocessing_linear_set_rc = -1;
+    int preprocessing_linear_get_rc = -1;
+    int preprocessing_linear_effective = -1;
+    bool continuous_branch_presolve_valid = false;
     int search_requested = 2;
     int search_set_rc = -1;
     int search_get_rc = -1;
