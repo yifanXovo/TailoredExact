@@ -1,0 +1,7 @@
+instance,arm,budget_seconds,execution_status,exclusion_reason,strict_certificate,contradicted_infeasibility_serialized,static_witness_retention,gurobi_presolve_witness_audit,prior_immutable_round23_conclusion
+moderate_seed4301,S0-SAFE,120,not_run,excluded_by_stage0_gurobi_license_gate,not_observed,false,not_applicable,not_applicable,"corrected presolve-off S0 status 108; no invalid status-103 certificate"
+moderate_seed4301,T-CPX-ST-PON-DIAG,120,not_run,excluded_by_stage0_gurobi_license_gate,forced_false,false,not_observed,not_applicable,"presolve-on child loss is known unsafe; result must remain certificate-rejected"
+moderate_seed4301,T-CPX-EXT-PON,120,not_run,excluded_by_stage0_gurobi_license_gate,not_observed,false,not_observed,not_applicable,"static-model architecture avoids continuous callback child-loss mechanism by construction"
+moderate_seed4301,T-GRB-EXT-COLD,120,not_run,excluded_by_stage0_gurobi_license_gate,not_observed,false,not_observed,not_run,"no Gurobi model created"
+moderate_seed4301,T-GRB-EXT-WARM,120,not_run,excluded_by_stage0_gurobi_license_gate,not_observed,false,not_observed,not_run,"no Gurobi model created"
+moderate_seed4301,P-GRB,120,not_run,excluded_by_stage0_gurobi_license_gate,not_observed,false,not_applicable,not_run,"no Gurobi model created"

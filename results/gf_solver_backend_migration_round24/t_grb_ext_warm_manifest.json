@@ -1,0 +1,26 @@
+{
+  "schema": "round24-arm-manifest-v1",
+  "arm": "T-GRB-EXT-WARM",
+  "role": "external_tree_gurobi_verified_start_backend",
+  "base_manifest": "t_grb_ext_cold_manifest.json",
+  "controller": "solver_neutral_external_gini_tree",
+  "scheduler": "ControllingLeafScheduler",
+  "same_run_verified_hga_ub": true,
+  "retained_per_leaf": true,
+  "model_reset": false,
+  "cross_model_mip_start": true,
+  "start_must_be_complete": true,
+  "start_must_be_independently_verified": true,
+  "permitted_start_sources": [
+    "same_run_verified_HGA_TGBC",
+    "same_run_verified_external_leaf_solution"
+  ],
+  "plain_solver_start_source_permitted": false,
+  "historical_objective_permitted": false,
+  "start_is_lower_bound": false,
+  "start_is_native_tree_inheritance": false,
+  "P1": false,
+  "P2": false,
+  "F3": false,
+  "instance_dispatch": false
+}

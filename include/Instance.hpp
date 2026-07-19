@@ -77,6 +77,28 @@ struct SolveOptions {
     std::string global_gini_tree_row_delta_trace_path;
     std::string global_gini_tree_memory_trace_path;
     std::string global_gini_tree_mip_start_audit_path;
+    // Round 24 optional Gurobi and external-tree research modes.  These are
+    // uniform run options and may never be resolved from instance metadata.
+    int gurobi_threads = 1;
+    int gurobi_seed = 0;
+    int gurobi_presolve = -1;
+    std::string gurobi_home;
+    std::string gurobi_progress_path;
+    std::string gurobi_model_export_path;
+    std::string cplex_model_export_path;
+    int round24_expected_gurobi_model_fingerprint = 0;
+    std::string round24_executable_sha256;
+    std::string round24_manifest_executable_sha256;
+    std::string external_gini_backend = "cplex";
+    std::string external_gini_lifecycle = "retained-per-leaf";
+    bool external_gini_warm_start = false;
+    std::string external_gini_artifact_dir;
+    bool round24_research_mode = false;
+    bool allow_unsafe_continuous_branch_presolve_diagnostic = false;
+    // Exact-zero gap round trips are opt-in for the Round 24 external static
+    // interval adapter.  Legacy static/callback paths retain their frozen
+    // historical tolerance unless this research-only flag is set.
+    bool round24_external_exact_zero_gap = false;
     // Round 22 production provenance and shared dense native progress capture.
     bool round22_production_mode = false;
     std::string round22_source_commit_sha;

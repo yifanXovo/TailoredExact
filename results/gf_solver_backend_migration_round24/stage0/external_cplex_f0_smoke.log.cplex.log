@@ -1,0 +1,100 @@
+Version identifier: 22.1.1.0 | 2022-11-27 | 9160aff4d
+CPXPARAM_Threads                                 1
+CPXPARAM_MIP_Strategy_Search                     1
+CPXPARAM_TimeLimit                               8
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+Tried aggregator 2 times.
+MIP Presolve eliminated 325 rows and 5 columns.
+MIP Presolve modified 110083 coefficients.
+Aggregator did 16 substitutions.
+Reduced MIP has 5215 rows, 624 columns, and 53600 nonzeros.
+Reduced MIP has 252 binaries, 48 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.08 sec. (117.35 ticks)
+Found incumbent of value 0.493696 after 0.08 sec. (129.72 ticks)
+Probing time = 0.00 sec. (9.06 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 5215 rows, 624 columns, and 53600 nonzeros.
+Reduced MIP has 252 binaries, 48 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.03 sec. (25.09 ticks)
+Probing time = 0.00 sec. (9.05 ticks)
+Clique table members: 192.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: traditional branch-and-cut.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.05 sec. (63.13 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap         Variable B NodeID Parent  Depth
+
+*     0+    0                            0.4937        0.0044            99.10%
+      0     0        0.1908   109        0.4937        0.1908      704   61.36%
+      0     0        0.1991   141        0.4937     Cuts: 150      845   59.67%
+      0     0        0.2100   140        0.4937     Cuts: 106      994   57.47%
+      0     0        0.2110   153        0.4937      Cuts: 73     1067   57.26%
+      0     0        0.2112   151        0.4937      Cuts: 49     1147   57.23%
+*     0+    0                            0.4937        0.2112            57.23%
+      0     0  -1.00000e+75     0        0.4937        0.2112     1147   57.23%
+      0     0        0.2113   156        0.4937      Cuts: 25     1175   57.21%
+Detecting symmetries...
+      0     0        0.2113   161        0.4937      Cuts: 18     1190   57.20%
+      0     0        0.2113   150        0.4937      Cuts: 11     1204   57.20%
+      0     0        0.2113   154        0.4937      Cuts: 27     1215   57.20%
+*     0+    0                            0.4123        0.2113            48.75%
+Detecting symmetries...
+      0     2        0.2113   152        0.4123        0.2115     1215   48.70%                        0             0
+Elapsed time = 1.36 sec. (2865.62 ticks, tree = 0.01 MB, solutions = 3)
+      1     3        0.2183   142        0.4123        0.2178     1376   47.17%          z_0_12 U      1      0      1
+      2     4        0.2236   142        0.4123        0.2178     1561   47.17%          z_0_11 U      2      1      2
+      6     8        0.2413   140        0.4123        0.2178     2001   47.17%         bit_7_5 D      6      4      5
+     14    16        0.2755   121        0.4123        0.2178     2472   47.17%         bit_4_4 U     14     12     11
+     27    28        0.3170    87        0.4123        0.2178     2952   47.17%           z_0_5 D     27     26     21
+     41    40        0.3740    41        0.4123        0.2178     3336   47.17%         bit_1_4 U     41     39     29
+*    50+   43                            0.4090        0.2178            46.74%
+*    60+   53                            0.4029        0.2178            45.93%
+     68    63        0.3695    52        0.4029        0.2178     3592   45.93%         x_0_7_1 D     68     67     48
+*    70+   63                            0.4022        0.2178            45.84%
+    100    87        0.4019    11        0.4022        0.2178     3833   45.84%           z_0_2 D    100     99     73
+    111    96        0.2847   100        0.4022        0.2183     4748   45.73%        bit_10_5 U    111    109      8
+*   170+  140                            0.4015        0.2183            45.63%
+    180   152        0.2806   114        0.4015        0.2327     7391   42.03%        bit_10_5 D    180    179     12
+Elapsed time = 2.86 sec. (7318.69 ticks, tree = 0.21 MB, solutions = 7)
+*   270+  221                            0.3933        0.2348            40.30%
+*   270+  220                            0.3924        0.2348            40.16%
+*   270+  220                            0.3922        0.2348            40.13%
+*   270+  219                            0.3918        0.2348            40.06%
+    343   281        0.2810   117        0.3918        0.2376    11050   39.36%           z_0_5 U    343    342      5
+    541   438        cutoff              0.3918        0.2511    15993   35.89%        bit_11_5 U    541      2      3
+    756   624        0.3333    85        0.3918        0.2541    20979   35.14%         bit_2_3 U    756    755     31
+   1008   833        0.2851    96        0.3918        0.2597    26289   33.72%         bit_1_5 D   1008    675     10
+   1258  1035        0.3009   105        0.3918        0.2616    31609   33.22%         bit_1_4 D   1258   1257     15
+   1521  1234        0.3868    31        0.3918        0.2635    37122   32.75%           z_0_8 D   1521   1519     24
+   1802  1469        0.3408    66        0.3918        0.2649    42303   32.37%           z_0_3 U   1802   1801     37
+   2052  1670        0.2780   101        0.3918        0.2661    47107   32.07%        bit_10_5 D   2052   2051     19
+   2351  1920        0.3799    82        0.3918        0.2674    52577   31.74%             Y_4 N   2351   2350     31
+   2576  2114        0.3748    73        0.3918        0.2683    58460   31.51%         bit_8_3 D   2576   2575     46
+Elapsed time = 6.22 sec. (16893.23 ticks, tree = 2.36 MB, solutions = 11)
+   2851  2331        0.3818    41        0.3918        0.2691    64922   31.30%         bit_7_3 D   2851   2849     42
+   3078  2493        0.2810   128        0.3918        0.2707    70723   30.89%           z_0_4 U   3078   3077     15
+   3390  2735        cutoff              0.3918        0.2720    76409   30.57%         bit_5_4 D   3390   3388     27
+Starting limited solution polishing.
+   3629  2924        0.3613    41        0.3918        0.2738    82309   30.10%             Y_4 D   3629   3628     35
+*  3660  2905      integral     0        0.3904        0.2738    82693   29.86%
+*  3760+ 2838                            0.3860        0.2744            28.92%
+   3876  2925        0.3712    48        0.3860        0.2748    88034   28.83%         bit_4_3 D   3876   3875     32
+
+Clique cuts applied:  26
+Cover cuts applied:  1
+Implied bound cuts applied:  149
+Flow cuts applied:  27
+Mixed integer rounding cuts applied:  9
+Lift and project cuts applied:  2
+Gomory fractional cuts applied:  3
+
+Root node processing (before b&c):
+  Real time             =    1.36 sec. (2852.12 ticks)
+Sequential b&c:
+  Real time             =    6.66 sec. (19214.92 ticks)
+                          ------------
+Total (root+branch&cut) =    8.01 sec. (22067.04 ticks)

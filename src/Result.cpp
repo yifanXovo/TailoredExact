@@ -129,7 +129,8 @@ ObjectiveParts computeObjectiveParts(const Instance& instance,
 std::string inferMethodScope(const SolveResult& result) {
     const std::string method = lowerCopy(result.method);
     const std::string text = auditText(result);
-    if (result.frontier_execution_mode == "global-gini-tree") {
+    if (result.frontier_execution_mode == "global-gini-tree" ||
+        result.frontier_execution_mode == "external-gini-tree") {
         return "original_compact";
     }
     if (method == "gcap-frontier" &&
@@ -150,6 +151,7 @@ std::string inferMethodScope(const SolveResult& result) {
         }
         return "original_compact";
     }
+    if (method == "gurobi") return "plain_gurobi";
     if (method == "gcap-cg" || method == "gcap-tree" || method == "master" ||
         containsText(method, "fixed-cap") || containsText(method, "gini-cap")) {
         return "subproblem";
@@ -186,12 +188,14 @@ std::string inferMethodScope(const SolveResult& result) {
 
 bool inferSolvesOriginalObjective(const SolveResult& result) {
     const std::string scope = inferMethodScope(result);
-    return scope == "original_bpc" || scope == "original_compact" || scope == "plain_cplex";
+    return scope == "original_bpc" || scope == "original_compact" ||
+           scope == "plain_cplex" || scope == "plain_gurobi";
 }
 
 bool inferIsBpc(const SolveResult& result) {
     const std::string method = lowerCopy(result.method);
-    if (result.frontier_execution_mode == "global-gini-tree") return false;
+    if (result.frontier_execution_mode == "global-gini-tree" ||
+        result.frontier_execution_mode == "external-gini-tree") return false;
     if (method == "gcap-frontier" &&
         (result.algorithm_preset == "paper-gf-compact-bc" ||
          result.algorithm_preset == "paper-gf-tailored-bc")) {
@@ -207,6 +211,11 @@ std::string inferCertificateType(const SolveResult& result) {
         return result.status == "optimal"
             ? "global_gini_single_tree_compact_mip"
             : "incomplete_global_gini_single_tree_compact_mip";
+    }
+    if (result.frontier_execution_mode == "external-gini-tree") {
+        return result.status == "optimal"
+            ? "global_gini_external_static_mip_tree"
+            : "incomplete_global_gini_external_static_mip_tree";
     }
     if (method == "gcap-frontier") {
         if (result.algorithm_preset == "paper-gf-tailored-bc") {
@@ -245,6 +254,7 @@ std::string inferCertificateType(const SolveResult& result) {
         }
         return "compact_cplex_mip";
     }
+    if (method == "gurobi") return "plain_gurobi_compact_mip";
     if (method == "gcap-cg") return "fixed_gini_cap_root_column_generation";
     if (method == "gcap-tree") {
         return containsText(text, "interval")
@@ -310,6 +320,7 @@ bool inferCertifiedOriginalProblem(const SolveResult& result) {
     const bool uses_native_mip_strict_policy =
         lowerCopy(result.method) == "cplex" ||
         result.frontier_execution_mode == "global-gini-tree" ||
+        result.frontier_execution_mode == "external-gini-tree" ||
         result.native_mip_evidence_available;
     if (uses_native_mip_strict_policy) {
         return result.strict_certified_original_problem;
@@ -351,6 +362,22 @@ bool inferCertifiedOriginalProblem(const SolveResult& result) {
                result.global_gini_tree_close_count == 1 &&
                result.global_gini_tree_interval_oracle_count == 0 &&
                result.global_gini_tree_child_process_count == 0;
+    }
+    if (result.frontier_execution_mode == "external-gini-tree") {
+        return result.external_gini_tree_attempted &&
+               result.external_gini_tree_available &&
+               result.external_gini_tree_root_coverage_valid &&
+               result.external_gini_tree_parent_child_coverage_valid &&
+               result.external_gini_tree_all_relevant_leaves_closed &&
+               result.external_gini_tree_all_leaf_bounds_valid &&
+               result.external_gini_tree_leaf_bounds_monotone &&
+               result.external_gini_tree_global_bound_monotone &&
+               result.external_gini_tree_lifecycle_complete &&
+               result.external_gini_tree_feasibility_consistency_gate &&
+               result.external_gini_tree_strict_certified &&
+               result.external_gini_tree_reset_call_count == 0 &&
+               result.external_gini_tree_optimize_count ==
+                   result.external_gini_tree_attempt_count;
     }
     if (result.algorithm_preset == "paper-gf-compact-bc" ||
         result.algorithm_preset == "paper-gf-tailored-bc") {
@@ -925,6 +952,139 @@ std::string resultToJson(const SolveResult& input) {
         << (result.dense_progress_read_only_contract ? "true" : "false")
         << ",\n";
 
+    out << "  \"gurobi_build_enabled\": "
+        << (result.gurobi_build_enabled ? "true" : "false") << ",\n";
+    out << "  \"gurobi_runtime_library_found\": "
+        << (result.gurobi_runtime_library_found ? "true" : "false") << ",\n";
+    out << "  \"gurobi_license_available\": "
+        << (result.gurobi_license_available ? "true" : "false") << ",\n";
+    out << "  \"gurobi_version\": \"" << jsonEscape(result.gurobi_version)
+        << "\",\n";
+    out << "  \"gurobi_header_version\": \""
+        << jsonEscape(result.gurobi_header_version) << "\",\n";
+    out << "  \"gurobi_native_library\": \""
+        << jsonEscape(result.gurobi_native_library) << "\",\n";
+    out << "  \"gurobi_installation_root\": \""
+        << jsonEscape(result.gurobi_installation_root) << "\",\n";
+    out << "  \"gurobi_failure_reason\": \""
+        << jsonEscape(result.gurobi_failure_reason) << "\",\n";
+    out << "  \"gurobi_optimize_return_code\": "
+        << result.gurobi_optimize_return_code << ",\n";
+    out << "  \"gurobi_status\": " << result.gurobi_status << ",\n";
+    out << "  \"gurobi_status_text\": \""
+        << jsonEscape(result.gurobi_status_text) << "\",\n";
+    out << "  \"gurobi_solution_count\": "
+        << result.gurobi_solution_count << ",\n";
+    out << "  \"gurobi_obj_val_available\": "
+        << (result.gurobi_obj_val_available ? "true" : "false") << ",\n";
+    out << "  \"gurobi_obj_val\": " << result.gurobi_obj_val << ",\n";
+    out << "  \"gurobi_obj_bound_available\": "
+        << (result.gurobi_obj_bound_available ? "true" : "false") << ",\n";
+    out << "  \"gurobi_obj_bound\": " << result.gurobi_obj_bound << ",\n";
+    out << "  \"gurobi_obj_bound_c_available\": "
+        << (result.gurobi_obj_bound_c_available ? "true" : "false") << ",\n";
+    out << "  \"gurobi_obj_bound_c\": " << result.gurobi_obj_bound_c << ",\n";
+    out << "  \"gurobi_mip_gap_available\": "
+        << (result.gurobi_mip_gap_available ? "true" : "false") << ",\n";
+    out << "  \"gurobi_mip_gap\": " << result.gurobi_mip_gap << ",\n";
+    out << "  \"gurobi_runtime\": " << result.gurobi_runtime << ",\n";
+    out << "  \"gurobi_work\": " << result.gurobi_work << ",\n";
+    out << "  \"gurobi_node_count\": " << result.gurobi_node_count << ",\n";
+    out << "  \"gurobi_iter_count\": " << result.gurobi_iter_count << ",\n";
+    out << "  \"gurobi_bar_iter_count\": "
+        << result.gurobi_bar_iter_count << ",\n";
+    out << "  \"gurobi_model_fingerprint\": "
+        << result.gurobi_model_fingerprint << ",\n";
+    out << "  \"gurobi_num_vars\": " << result.gurobi_num_vars << ",\n";
+    out << "  \"gurobi_num_constrs\": " << result.gurobi_num_constrs << ",\n";
+    out << "  \"gurobi_num_nzs\": " << result.gurobi_num_nzs << ",\n";
+    out << "  \"gurobi_num_bin_vars\": " << result.gurobi_num_bin_vars << ",\n";
+    out << "  \"gurobi_num_int_vars\": " << result.gurobi_num_int_vars << ",\n";
+    out << "  \"gurobi_mem_used_gb\": " << result.gurobi_mem_used_gb << ",\n";
+    out << "  \"gurobi_max_mem_used_gb\": "
+        << result.gurobi_max_mem_used_gb << ",\n";
+    out << "  \"gurobi_max_constraint_violation\": "
+        << result.gurobi_max_constraint_violation << ",\n";
+    out << "  \"gurobi_max_bound_violation\": "
+        << result.gurobi_max_bound_violation << ",\n";
+    out << "  \"gurobi_max_integrality_violation\": "
+        << result.gurobi_max_integrality_violation << ",\n";
+    out << "  \"gurobi_threads_requested\": "
+        << result.gurobi_threads_requested << ",\n";
+    out << "  \"gurobi_threads_set_return_code\": "
+        << result.gurobi_threads_set_return_code << ",\n";
+    out << "  \"gurobi_threads_get_return_code\": "
+        << result.gurobi_threads_get_return_code << ",\n";
+    out << "  \"gurobi_threads_effective\": "
+        << result.gurobi_threads_effective << ",\n";
+    out << "  \"gurobi_presolve_requested\": "
+        << result.gurobi_presolve_requested << ",\n";
+    out << "  \"gurobi_presolve_set_return_code\": "
+        << result.gurobi_presolve_set_return_code << ",\n";
+    out << "  \"gurobi_presolve_get_return_code\": "
+        << result.gurobi_presolve_get_return_code << ",\n";
+    out << "  \"gurobi_presolve_effective\": "
+        << result.gurobi_presolve_effective << ",\n";
+    out << "  \"gurobi_seed_requested\": "
+        << result.gurobi_seed_requested << ",\n";
+    out << "  \"gurobi_seed_set_return_code\": "
+        << result.gurobi_seed_set_return_code << ",\n";
+    out << "  \"gurobi_seed_get_return_code\": "
+        << result.gurobi_seed_get_return_code << ",\n";
+    out << "  \"gurobi_seed_effective\": "
+        << result.gurobi_seed_effective << ",\n";
+    out << "  \"gurobi_mip_gap_requested\": "
+        << result.gurobi_mip_gap_requested << ",\n";
+    out << "  \"gurobi_mip_gap_set_return_code\": "
+        << result.gurobi_mip_gap_set_return_code << ",\n";
+    out << "  \"gurobi_mip_gap_get_return_code\": "
+        << result.gurobi_mip_gap_get_return_code << ",\n";
+    out << "  \"gurobi_mip_gap_effective\": "
+        << result.gurobi_mip_gap_effective << ",\n";
+    out << "  \"gurobi_mip_gap_abs_requested\": "
+        << result.gurobi_mip_gap_abs_requested << ",\n";
+    out << "  \"gurobi_mip_gap_abs_set_return_code\": "
+        << result.gurobi_mip_gap_abs_set_return_code << ",\n";
+    out << "  \"gurobi_mip_gap_abs_get_return_code\": "
+        << result.gurobi_mip_gap_abs_get_return_code << ",\n";
+    out << "  \"gurobi_mip_gap_abs_effective\": "
+        << result.gurobi_mip_gap_abs_effective << ",\n";
+    out << "  \"gurobi_environment_count\": "
+        << result.gurobi_environment_count << ",\n";
+    out << "  \"gurobi_model_count\": " << result.gurobi_model_count << ",\n";
+    out << "  \"gurobi_model_read_count\": "
+        << result.gurobi_model_read_count << ",\n";
+    out << "  \"gurobi_optimize_count\": "
+        << result.gurobi_optimize_count << ",\n";
+    out << "  \"gurobi_model_free_count\": "
+        << result.gurobi_model_free_count << ",\n";
+    out << "  \"gurobi_environment_free_count\": "
+        << result.gurobi_environment_free_count << ",\n";
+    out << "  \"gurobi_solver_finalization_reached\": "
+        << (result.gurobi_solver_finalization_reached ? "true" : "false")
+        << ",\n";
+    out << "  \"gurobi_lifecycle_valid\": "
+        << (result.gurobi_lifecycle_valid ? "true" : "false") << ",\n";
+    out << "  \"gurobi_canonical_model_sha256\": \""
+        << jsonEscape(result.gurobi_canonical_model_sha256) << "\",\n";
+    out << "  \"gurobi_progress_path\": \""
+        << jsonEscape(result.gurobi_progress_path) << "\",\n";
+    out << "  \"gurobi_progress_callback_invocations\": "
+        << result.gurobi_progress_callback_invocations << ",\n";
+    out << "  \"gurobi_progress_record_count\": "
+        << result.gurobi_progress_record_count << ",\n";
+    out << "  \"gurobi_first_incumbent_time\": "
+        << result.gurobi_first_incumbent_time << ",\n";
+    out << "  \"gurobi_last_lower_bound_improvement_time\": "
+        << result.gurobi_last_lower_bound_improvement_time << ",\n";
+    out << "  \"gurobi_progress_read_only_contract\": "
+        << (result.gurobi_progress_read_only_contract ? "true" : "false")
+        << ",\n";
+    out << "  \"gurobi_exception_type\": \""
+        << jsonEscape(result.gurobi_exception_type) << "\",\n";
+    out << "  \"gurobi_exception_message\": \""
+        << jsonEscape(result.gurobi_exception_message) << "\",\n";
+
     out << "  \"global_gini_tree_root_connectivity_flow_variant_requested\": \""
         << jsonEscape(
                result.global_gini_tree_root_connectivity_flow_variant_requested)
@@ -1168,6 +1328,10 @@ std::string resultToJson(const SolveResult& input) {
         << (result.global_gini_tree_continuous_branch_presolve_valid
                 ? "true" : "false")
         << ",\n";
+    out << "  \"global_gini_tree_known_unsafe_presolve_diagnostic\": "
+        << (result.global_gini_tree_known_unsafe_presolve_diagnostic
+                ? "true" : "false")
+        << ",\n";
     out << "  \"global_gini_tree_search_requested\": "
         << result.global_gini_tree_search_requested << ",\n";
     out << "  \"global_gini_tree_search_set_rc\": "
@@ -1286,6 +1450,93 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.global_gini_tree_memory_trace_path) << "\",\n";
     out << "  \"global_gini_tree_mip_start_audit_path\": \""
         << jsonEscape(result.global_gini_tree_mip_start_audit_path) << "\",\n";
+    out << "  \"external_gini_tree_attempted\": "
+        << (result.external_gini_tree_attempted ? "true" : "false") << ",\n";
+    out << "  \"external_gini_tree_available\": "
+        << (result.external_gini_tree_available ? "true" : "false") << ",\n";
+    out << "  \"external_gini_tree_backend\": \""
+        << jsonEscape(result.external_gini_tree_backend) << "\",\n";
+    out << "  \"external_gini_tree_lifecycle\": \""
+        << jsonEscape(result.external_gini_tree_lifecycle) << "\",\n";
+    out << "  \"external_gini_tree_failure_reason\": \""
+        << jsonEscape(result.external_gini_tree_failure_reason) << "\",\n";
+    out << "  \"external_gini_tree_root_coverage_valid\": "
+        << (result.external_gini_tree_root_coverage_valid ? "true" : "false") << ",\n";
+    out << "  \"external_gini_tree_parent_child_coverage_valid\": "
+        << (result.external_gini_tree_parent_child_coverage_valid ? "true" : "false") << ",\n";
+    out << "  \"external_gini_tree_all_relevant_leaves_closed\": "
+        << (result.external_gini_tree_all_relevant_leaves_closed ? "true" : "false") << ",\n";
+    out << "  \"external_gini_tree_all_leaf_bounds_valid\": "
+        << (result.external_gini_tree_all_leaf_bounds_valid ? "true" : "false") << ",\n";
+    out << "  \"external_gini_tree_leaf_bounds_monotone\": "
+        << (result.external_gini_tree_leaf_bounds_monotone ? "true" : "false") << ",\n";
+    out << "  \"external_gini_tree_global_bound_monotone\": "
+        << (result.external_gini_tree_global_bound_monotone ? "true" : "false") << ",\n";
+    out << "  \"external_gini_tree_lifecycle_complete\": "
+        << (result.external_gini_tree_lifecycle_complete ? "true" : "false") << ",\n";
+    out << "  \"external_gini_tree_feasibility_consistency_gate\": "
+        << (result.external_gini_tree_feasibility_consistency_gate ? "true" : "false") << ",\n";
+    out << "  \"external_gini_tree_strict_certified\": "
+        << (result.external_gini_tree_strict_certified ? "true" : "false") << ",\n";
+    out << "  \"external_gini_tree_certificate_class\": \""
+        << jsonEscape(result.external_gini_tree_certificate_class) << "\",\n";
+    out << "  \"external_gini_tree_certificate_rejection_reason\": \""
+        << jsonEscape(result.external_gini_tree_certificate_rejection_reason) << "\",\n";
+    out << "  \"external_gini_tree_root_gamma_L\": "
+        << result.external_gini_tree_root_gamma_L << ",\n";
+    out << "  \"external_gini_tree_root_gamma_U\": "
+        << result.external_gini_tree_root_gamma_U << ",\n";
+    out << "  \"external_gini_tree_global_lower_bound\": "
+        << result.external_gini_tree_global_lower_bound << ",\n";
+    out << "  \"external_gini_tree_verified_upper_bound\": "
+        << result.external_gini_tree_verified_upper_bound << ",\n";
+#define WRITE_EXT_COUNT(name) \
+    out << "  \"external_gini_tree_" #name "\": " \
+        << result.external_gini_tree_##name << ",\n"
+    WRITE_EXT_COUNT(initial_leaf_count);
+    WRITE_EXT_COUNT(final_leaf_count);
+    WRITE_EXT_COUNT(open_leaf_count);
+    WRITE_EXT_COUNT(closed_leaf_count);
+    WRITE_EXT_COUNT(split_count);
+    WRITE_EXT_COUNT(attempt_count);
+    WRITE_EXT_COUNT(environment_count);
+    WRITE_EXT_COUNT(model_count);
+    WRITE_EXT_COUNT(model_read_count);
+    WRITE_EXT_COUNT(optimize_count);
+    WRITE_EXT_COUNT(model_free_count);
+    WRITE_EXT_COUNT(environment_free_count);
+    WRITE_EXT_COUNT(same_leaf_resume_count);
+    WRITE_EXT_COUNT(fresh_restart_count);
+    WRITE_EXT_COUNT(child_restart_count);
+    WRITE_EXT_COUNT(reset_call_count);
+    WRITE_EXT_COUNT(warm_start_candidate_count);
+    WRITE_EXT_COUNT(warm_start_complete_count);
+    WRITE_EXT_COUNT(warm_start_submitted_count);
+    WRITE_EXT_COUNT(warm_start_accepted_count);
+    WRITE_EXT_COUNT(warm_start_rejected_count);
+    WRITE_EXT_COUNT(warm_start_unknown_count);
+#undef WRITE_EXT_COUNT
+#define WRITE_EXT_DOUBLE(name) \
+    out << "  \"external_gini_tree_" #name "\": " \
+        << result.external_gini_tree_##name << ",\n"
+    WRITE_EXT_DOUBLE(model_build_seconds);
+    WRITE_EXT_DOUBLE(model_read_seconds);
+    WRITE_EXT_DOUBLE(solver_seconds);
+    WRITE_EXT_DOUBLE(work);
+    WRITE_EXT_DOUBLE(nodes);
+    WRITE_EXT_DOUBLE(simplex_iterations);
+    WRITE_EXT_DOUBLE(barrier_iterations);
+    WRITE_EXT_DOUBLE(peak_memory_gb);
+#undef WRITE_EXT_DOUBLE
+#define WRITE_EXT_PATH(name) \
+    out << "  \"external_gini_tree_" #name "\": \"" \
+        << jsonEscape(result.external_gini_tree_##name) << "\",\n"
+    WRITE_EXT_PATH(event_trace_path);
+    WRITE_EXT_PATH(leaf_ledger_path);
+    WRITE_EXT_PATH(lifecycle_path);
+    WRITE_EXT_PATH(optimize_ledger_path);
+    WRITE_EXT_PATH(warm_start_audit_path);
+#undef WRITE_EXT_PATH
     out << "  \"columns_generated_raw\": " << result.columns_generated_raw << ",\n";
     out << "  \"columns_after_dominance\": " << result.columns_after_dominance << ",\n";
     out << "  \"columns_dominated\": " << result.columns_dominated << ",\n";
@@ -2335,6 +2586,23 @@ std::string resultToJson(const SolveResult& input) {
         << result.compact_bc_native_mip_gap << ",\n";
     out << "  \"compact_bc_native_mip_gap_set_rc\": "
         << result.compact_bc_native_mip_gap_set_rc << ",\n";
+    out << "  \"compact_bc_native_mip_gap_get_rc\": "
+        << result.compact_bc_native_mip_gap_get_rc << ",\n";
+    out << "  \"compact_bc_native_mip_gap_effective\": "
+        << result.compact_bc_native_mip_gap_effective << ",\n";
+    out << "  \"compact_bc_native_absolute_mip_gap_param_id\": "
+        << result.compact_bc_native_absolute_mip_gap_param_id << ",\n";
+    out << "  \"compact_bc_native_absolute_mip_gap\": "
+        << result.compact_bc_native_absolute_mip_gap << ",\n";
+    out << "  \"compact_bc_native_absolute_mip_gap_set_rc\": "
+        << result.compact_bc_native_absolute_mip_gap_set_rc << ",\n";
+    out << "  \"compact_bc_native_absolute_mip_gap_get_rc\": "
+        << result.compact_bc_native_absolute_mip_gap_get_rc << ",\n";
+    out << "  \"compact_bc_native_absolute_mip_gap_effective\": "
+        << result.compact_bc_native_absolute_mip_gap_effective << ",\n";
+    out << "  \"compact_bc_native_exact_zero_gaps_valid\": "
+        << (result.compact_bc_native_exact_zero_gaps_valid
+                ? "true" : "false") << ",\n";
     out << "  \"compact_bc_callback_abort_requests\": "
         << result.compact_bc_callback_abort_requests << ",\n";
     out << "  \"compact_bc_terminate_set_rc\": "

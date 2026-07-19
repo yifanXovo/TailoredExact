@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
 project(ExactEBRP LANGUAGES CXX)
 
+option(EXACT_EBRP_ENABLE_GUROBI "Enable the optional local Gurobi backend" OFF)
+set(GUROBI_ROOT "" CACHE PATH "Root of the local Gurobi win64 installation")
+
 enable_testing()
 
 set(CMAKE_CXX_STANDARD 17)
@@ -21,7 +24,12 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Result.cpp
   src/StrictCertificate.cpp
   src/ModelCorrectness.cpp
+  src/FileSha256.cpp
   src/DenseProgress.cpp
+  src/GurobiCertificate.cpp
+  src/GurobiProgress.cpp
+  src/MipStartMapping.cpp
+  src/ExternalGiniTree.cpp
   src/ConnectivityFlow.cpp
   src/Bounds.cpp
   src/ColumnPool.cpp
@@ -46,7 +54,32 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Logger.cpp
 )
 
+if(EXACT_EBRP_ENABLE_GUROBI)
+  find_path(GUROBI_INCLUDE_DIR gurobi_c.h
+    HINTS "${GUROBI_ROOT}" "$ENV{GUROBI_HOME}"
+    PATH_SUFFIXES include win64/include)
+  if(NOT GUROBI_INCLUDE_DIR)
+    message(FATAL_ERROR
+      "EXACT_EBRP_ENABLE_GUROBI=ON but gurobi_c.h was not found. Set GUROBI_ROOT or GUROBI_HOME to the installed Gurobi win64 root; no fallback backend will be selected.")
+  endif()
+  list(APPEND EXACT_EBRP_LIB_SOURCES src/GurobiBaseline.cpp)
+else()
+  list(APPEND EXACT_EBRP_LIB_SOURCES src/GurobiBaselineStub.cpp)
+endif()
+
 add_library(exact_ebrp_core ${EXACT_EBRP_LIB_SOURCES})
+
+if(EXACT_EBRP_ENABLE_GUROBI)
+  target_include_directories(exact_ebrp_core PRIVATE "${GUROBI_INCLUDE_DIR}")
+  target_compile_definitions(exact_ebrp_core PUBLIC EXACT_EBRP_ENABLE_GUROBI=1)
+  if(GUROBI_ROOT)
+    string(REPLACE "\\" "/" GUROBI_ROOT_NORMALIZED "${GUROBI_ROOT}")
+    target_compile_definitions(exact_ebrp_core PRIVATE
+      EXACT_EBRP_GUROBI_ROOT="${GUROBI_ROOT_NORMALIZED}")
+  endif()
+else()
+  target_compile_definitions(exact_ebrp_core PUBLIC EXACT_EBRP_ENABLE_GUROBI=0)
+endif()
 
 add_executable(ExactEBRP src/main.cpp)
 target_link_libraries(ExactEBRP PRIVATE exact_ebrp_core)
@@ -85,3 +118,7 @@ add_test(NAME DenseProgressTests COMMAND DenseProgressTests)
 add_executable(DispersionChildBoundTests tests/dispersion_child_bound_tests.cpp)
 target_link_libraries(DispersionChildBoundTests PRIVATE exact_ebrp_core)
 add_test(NAME DispersionChildBoundTests COMMAND DispersionChildBoundTests)
+
+add_executable(Round24BackendTests tests/round24_backend_tests.cpp)
+target_link_libraries(Round24BackendTests PRIVATE exact_ebrp_core)
+add_test(NAME Round24BackendTests COMMAND Round24BackendTests)

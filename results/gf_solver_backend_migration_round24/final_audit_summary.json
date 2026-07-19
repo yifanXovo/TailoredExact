@@ -1,0 +1,105 @@
+{
+  "schema": "round24-final-audit-v1",
+  "branch": "codex/round24-gurobi-baseline-external-tree",
+  "local_base_sha": "a977efe52a79877c057ce8e3421901979d16f1be",
+  "observed_remote_main_sha": "f115e9bb600f68e5368df78f06203331a800a33b",
+  "repository_relationship": "different_commit_history_identical_source_tree_at_base",
+  "preregistration_commit": "0e220fcbe2a0f65af9136135081d04b21002ae61",
+  "implementation_commit": "a032baac3e85a0659755cec3ca86a77852c8b9dc",
+  "publication_commit": "reported_by_git_and_final_response_not_self_embedded",
+  "executables": {
+    "cplex_sha256": "7c6f72f94453dfb260f6338c04faff5d139ad3734f089010d134d9e73e9736e6",
+    "gurobi_enabled_sha256": "f6af62afd26425ae8847194fe588d553e5990f733582f5d44b9b877e0137e765"
+  },
+  "environment": {
+    "cplex_version": "22.1.1",
+    "gurobi_version": "13.0.2",
+    "gurobi_build": "v13.0.2rc1",
+    "gurobi_header_version": "13.0.2",
+    "gurobi_native_library": "gurobi130.dll",
+    "gurobi_license_available": false,
+    "gurobi_error_code": 10009,
+    "license_secret_logged_or_committed": false
+  },
+  "validation": {
+    "prechange_cpp_executables_passed": 8,
+    "prechange_cpp_groups_passed": 111,
+    "prechange_python_suites_passed": 6,
+    "prechange_python_checks_passed": 107,
+    "postchange_cpp_configurations_passed": 2,
+    "postchange_cpp_executables_passed": 18,
+    "postchange_cpp_groups_passed": 382,
+    "postchange_python_suites_passed": 5,
+    "postchange_python_checks_passed": 106,
+    "failed": 0,
+    "excluded_parallel_orchestration_collisions": 2
+  },
+  "model_equivalence": {
+    "canonical_plain_toy_bytes_equal": true,
+    "canonical_plain_toy_sha256": "c6bb54a537729bb436d5803f2ef3d1db5d1e1e3196ef8ca774b270849a9171ff",
+    "canonical_plain_v12_m1_bytes_equal": true,
+    "canonical_plain_v12_m1_sha256": "4f3aa09e4192077446237e9b41fa4a09dd6c2fed7b09e90be5656e978d7522fe",
+    "external_f0_sha256": "f2bdf1e59e14844295406a85b8fdb3e7691cc0f8e40578221c11d3b8f18102a2",
+    "external_f0_connectivity_columns": 156,
+    "canonical_audit": "pass",
+    "native_gurobi_import_and_fingerprint": "blocked_by_license"
+  },
+  "stage0": {
+    "build_gate": "pass",
+    "test_gate": "pass",
+    "cplex_toy_exact_gate": "pass_strict",
+    "external_cplex_structural_gate": "pass_non_strict_open_leaf",
+    "gurobi_license_gate": "fail_closed",
+    "official_performance_allowed": false
+  },
+  "official_run_accounting": {
+    "stage1_rows_planned": 13,
+    "stage2_rows_planned": 28,
+    "completed": 0,
+    "failed": 1,
+    "failed_scope": "stage0_gurobi_license_gate",
+    "interrupted": 0,
+    "excluded_without_execution": 41
+  },
+  "moderate4301": {
+    "round24_rows_executed": false,
+    "round24_exclusion": "stage0_gurobi_license_gate",
+    "immutable_round23_contradiction_resolved": true,
+    "root_cause": "presolve-induced loss of a feasible continuous generic-callback child",
+    "corrected_s0_fail_closed": true,
+    "unsafe_diagnostic_strict_certificate_forced_false": true,
+    "hga_witness_independently_feasible": true
+  },
+  "performance": {
+    "plain_gurobi_vs_cplex": "unavailable",
+    "safe_single_tree_vs_external": "unavailable",
+    "unsafe_single_tree_speed_vs_external": "unavailable",
+    "external_gurobi_vs_cplex": "unavailable",
+    "retained_vs_fresh": "unavailable",
+    "warm_vs_cold": "unavailable",
+    "final_lb_gap_auc": "unavailable",
+    "certificate_gains": 0,
+    "certificate_losses": 0
+  },
+  "stage0_external_cplex_smoke": {
+    "optimize_calls": 1,
+    "distinct_models": 1,
+    "distinct_root_presolve_executions": 1,
+    "final_global_lb": 0.26111604306990788,
+    "verified_ub": 0.493696053862549,
+    "root_coverage_valid": true,
+    "parent_child_coverage_valid": true,
+    "leaf_and_global_bounds_monotone": true,
+    "strict_certificate": false,
+    "rejection": "relevant_leaf_open"
+  },
+  "decision": {
+    "plain_gurobi_classification": "unavailable",
+    "single_tree_classification": "unavailable",
+    "gurobi_external_migration_classification": "unavailable",
+    "warm_start_classification": "unavailable",
+    "longer_migration_round_recommended": false,
+    "stable_paper_mainline": "corrected_CPLEX_S0_F0",
+    "next_experiment": "licensed Stage 0 rerun followed only on full pass by the 120-second V12_M2 fresh/cold/warm Stage 1B gate"
+  }
+}

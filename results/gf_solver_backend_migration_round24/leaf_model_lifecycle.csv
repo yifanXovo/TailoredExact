@@ -1,0 +1,6 @@
+evidence_scope,backend,lifecycle,leaf,attempt,new_model,model_read,optimize,same_leaf_resume,fresh_restart,child_restart,reset,model_free,environment_free,continuation_claim,gate
+stage0_external_cplex_F0,CPLEX,retained-per-leaf,L0,0,1,1,1,0,1,1,0,1,1,none,pass
+stage0_external_gurobi,Gurobi,retained-per-leaf,unavailable,unavailable,0,0,0,0,0,0,0,0,0,none,blocked_license_error_10009
+stage1B_fresh,Gurobi,fresh-per-attempt,not_run,not_run,not_run,not_run,not_run,not_run,not_run,not_run,0,not_run,not_run,none,excluded_by_stage0_license_gate
+stage1B_retained_cold,Gurobi,retained-per-leaf,not_run,not_run,not_run,not_run,not_run,not_run,not_run,not_run,0,not_run,not_run,not_observed,excluded_by_stage0_license_gate
+stage1B_retained_warm,Gurobi,retained-per-leaf,not_run,not_run,not_run,not_run,not_run,not_run,not_run,not_run,0,not_run,not_run,not_observed,excluded_by_stage0_license_gate

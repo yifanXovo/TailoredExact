@@ -1,0 +1,64 @@
+{
+  "schema": "round24-stage0-validation-v1",
+  "source_commit": "a032baac3e85a0659755cec3ca86a77852c8b9dc",
+  "builds": {
+    "default_release": "pass",
+    "gurobi_enabled_release": "pass"
+  },
+  "tests": {
+    "cpp_configurations": 2,
+    "cpp_executables_passed": 18,
+    "cpp_groups_or_requirements_passed": 382,
+    "cpp_failed": 0,
+    "python_suites_passed": 5,
+    "python_groups_or_checks_passed": 106,
+    "python_failed": 0,
+    "handling_convention_isolated_test": "pass",
+    "excluded_parallel_orchestration_collisions": 2,
+    "excluded_parallel_orchestration_reason": "Two identical build configurations were incorrectly launched concurrently against shared pre-existing temporary paths; the prescribed sequential reruns passed with zero failures."
+  },
+  "canonical_model": {
+    "toy_plain_cplex_gurobi_lp_bytes_identical": true,
+    "toy_sha256": "c6bb54a537729bb436d5803f2ef3d1db5d1e1e3196ef8ca774b270849a9171ff",
+    "v12_m1_plain_cplex_gurobi_lp_bytes_identical": true,
+    "v12_m1_sha256": "4f3aa09e4192077446237e9b41fa4a09dd6c2fed7b09e90be5656e978d7522fe",
+    "gurobi_native_model_import_audited": false,
+    "gurobi_native_model_import_reason": "license_unavailable_before_model_creation"
+  },
+  "tiny_exact": {
+    "cplex_status": 101,
+    "cplex_objective": 0.0,
+    "cplex_independent_verifier": "pass",
+    "cplex_strict_engineering_exact": true,
+    "gurobi_status": "license_unavailable",
+    "gurobi_error_code": 10009,
+    "gurobi_strict_engineering_exact": false
+  },
+  "external_cplex_f0_smoke": {
+    "status": "time_limit_open_leaf",
+    "canonical_interval_model_sha256": "f2bdf1e59e14844295406a85b8fdb3e7691cc0f8e40578221c11d3b8f18102a2",
+    "f0_connectivity_columns": 156,
+    "root_coverage_valid": true,
+    "parent_child_coverage_valid": true,
+    "leaf_bounds_valid_and_monotone": true,
+    "global_bound_monotone": true,
+    "lifecycle_complete": true,
+    "exact_zero_gap_roundtrip_required": true,
+    "strict_certificate": false,
+    "strict_rejection": "relevant_leaf_open"
+  },
+  "static_source_scans": {
+    "instance_dispatch_in_new_backend_or_controller": 0,
+    "P1_P2_F3_activation_in_new_backend_or_controller": 0,
+    "model_reset_calls_in_retained_gurobi_path": 0,
+    "plain_to_tailored_import": 0,
+    "license_secret_patterns_in_round24_stage0": 0,
+    "status": "pass"
+  },
+  "blocking_gate": {
+    "name": "gurobi_license_smoke",
+    "status": "fail_closed",
+    "reason": "No local Gurobi license was available (error 10009).",
+    "official_stage1_stage2_execution_allowed": false
+  }
+}
