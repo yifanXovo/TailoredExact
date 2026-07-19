@@ -1,10 +1,12 @@
 #include "CplexBaseline.hpp"
+#include "CanonicalCompactModel.hpp"
 #include "ConnectivityFlow.hpp"
 #include "IntervalRowFactory.hpp"
 #include "ControllingLeafScheduler.hpp"
 #include "ModelCorrectness.hpp"
 
 #include "Evaluator.hpp"
+#include "FileSha256.hpp"
 #include "Logger.hpp"
 #include "TailoredBC.hpp"
 #include "TailoredBCCplexApi.hpp"
@@ -3316,6 +3318,71 @@ StrictCertificateDecision evaluateAndPopulateStrictCertificate(
 
 } // namespace
 
+CanonicalCompactModelArtifact writeCanonicalCompactModel(
+    const Instance& instance,
+    const SolveOptions& options,
+    const std::filesystem::path& path,
+    const CanonicalCompactModelSpec& spec) {
+    CanonicalCompactModelArtifact artifact;
+    artifact.path = path;
+    artifact.strengthened = spec.strengthened;
+    artifact.interval_restricted = spec.interval_restricted;
+    artifact.gamma_L = spec.gamma_L;
+    artifact.gamma_U = spec.gamma_U;
+    artifact.verified_incumbent_row = spec.add_verified_incumbent_row;
+    artifact.model_scope = spec.interval_restricted
+        ? "complete_original_compact_milp_intersected_with_static_gini_interval"
+        : "complete_original_compact_milp";
+    try {
+        if (spec.interval_restricted &&
+            (!std::isfinite(spec.gamma_L) || !std::isfinite(spec.gamma_U) ||
+             spec.gamma_L < -1e-12 ||
+             spec.gamma_U < spec.gamma_L - 1e-12)) {
+            throw std::runtime_error("invalid_canonical_static_gini_interval");
+        }
+        if (spec.add_verified_incumbent_row &&
+            !std::isfinite(spec.verified_incumbent)) {
+            throw std::runtime_error("nonfinite_verified_incumbent_cutoff");
+        }
+        SolveOptions model_options = options;
+        if (spec.interval_restricted) {
+            model_options.interval_row_factory_round19 = true;
+        }
+        CompactIntervalCutoffConfig cutoff;
+        cutoff.enabled = spec.interval_restricted;
+        cutoff.gamma_L = spec.gamma_L;
+        cutoff.gamma_U = spec.gamma_U;
+        cutoff.add_objective_cutoff = spec.add_verified_incumbent_row;
+        cutoff.incumbent_ub = spec.verified_incumbent;
+        cutoff.epsilon = spec.incumbent_epsilon;
+        CompactOracleStrengtheningStats stats;
+        writeCompactLp(
+            instance, model_options, path, spec.strengthened,
+            spec.interval_restricted ? &cutoff : nullptr,
+            spec.interval_restricted ? &stats : nullptr, nullptr);
+        const ModelSizeStats size = analyzeLpModel(path);
+        artifact.rows = size.rows;
+        artifact.columns = size.cols;
+        artifact.nonzeros = size.nonzeros;
+        artifact.sha256 = fileSha256(path);
+        artifact.written = std::filesystem::exists(path) &&
+            artifact.rows > 0 && artifact.columns > 0 &&
+            !artifact.sha256.empty();
+        if (!artifact.written) {
+            artifact.failure_reason = "canonical_model_artifact_incomplete";
+        }
+    } catch (const std::exception& ex) {
+        artifact.failure_reason = ex.what();
+    }
+    return artifact;
+}
+
+std::vector<RoutePlan> reconstructCanonicalCompactRoutes(
+    const Instance& instance,
+    const std::unordered_map<std::string, double>& named_values) {
+    return reconstructRoutes(instance, named_values);
+}
+
 SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& options) {
     const auto start = Clock::now();
     SolveResult result;
@@ -3354,7 +3421,13 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
         const std::filesystem::path work_dir = std::filesystem::path("results") / "cplex_work"
             / (stem + "_" + std::to_string(run_id));
         std::filesystem::create_directories(work_dir);
-        const std::filesystem::path lp_path = work_dir / "model.lp";
+        const std::filesystem::path lp_path =
+            options.cplex_model_export_path.empty()
+                ? work_dir / "model.lp"
+                : std::filesystem::path(options.cplex_model_export_path);
+        if (lp_path.has_parent_path()) {
+            std::filesystem::create_directories(lp_path.parent_path());
+        }
         const std::filesystem::path cplex_log = options.log_path.empty()
             ? (work_dir / "cplex.log") : std::filesystem::path(options.log_path);
         result.log_file = cplex_log.string();
@@ -3370,7 +3443,18 @@ SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& opt
             throw std::runtime_error("compact interval BC currently supports --mip-solver cplex only");
         }
 
-        writeCompactLp(instance, options, lp_path, strengthened);
+        CanonicalCompactModelSpec canonical_spec;
+        canonical_spec.strengthened = strengthened;
+        const CanonicalCompactModelArtifact canonical =
+            writeCanonicalCompactModel(
+                instance, options, lp_path, canonical_spec);
+        if (!canonical.written) {
+            throw std::runtime_error(
+                "canonical compact model write failed: " +
+                canonical.failure_reason);
+        }
+        result.notes.push_back(
+            "canonical_compact_model_sha256=" + canonical.sha256);
         DenseProgressConfig dense_progress;
         dense_progress.enabled = options.dense_progress_enabled;
         dense_progress.raw_event_path =
@@ -4407,7 +4491,8 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                     ? result.compact_bc_progress_interval_seconds
                     : options.progress_interval_seconds,
                 !static_native_api,
-                native_checkpoint);
+                native_checkpoint,
+                options.round24_external_exact_zero_gap);
             if (native_checkpoint.enabled) {
                 NativeCheckpointRecord checkpoint_record;
                 std::string checkpoint_read_reason;
@@ -4505,6 +4590,22 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
                 api_solve.native_mip_gap;
             result.compact_bc_native_mip_gap_set_rc =
                 api_solve.native_mip_gap_set_rc;
+            result.compact_bc_native_mip_gap_get_rc =
+                api_solve.native_mip_gap_get_rc;
+            result.compact_bc_native_mip_gap_effective =
+                api_solve.native_mip_gap_effective;
+            result.compact_bc_native_absolute_mip_gap_param_id =
+                api_solve.native_absolute_mip_gap_param_id;
+            result.compact_bc_native_absolute_mip_gap =
+                api_solve.native_absolute_mip_gap;
+            result.compact_bc_native_absolute_mip_gap_set_rc =
+                api_solve.native_absolute_mip_gap_set_rc;
+            result.compact_bc_native_absolute_mip_gap_get_rc =
+                api_solve.native_absolute_mip_gap_get_rc;
+            result.compact_bc_native_absolute_mip_gap_effective =
+                api_solve.native_absolute_mip_gap_effective;
+            result.compact_bc_native_exact_zero_gaps_valid =
+                api_solve.native_exact_zero_gaps_valid;
             result.compact_bc_callback_abort_requests =
                 api_solve.callback_abort_requests;
             result.compact_bc_terminate_set_rc =
@@ -5181,6 +5282,14 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
     result.certificate_scope = "original_global_gini_single_tree";
     result.log_file = options.log_path;
     result.global_gini_tree_attempted = true;
+    result.global_gini_tree_known_unsafe_presolve_diagnostic =
+        options.global_gini_tree_presolve != "off" &&
+        options.round24_research_mode &&
+        options.allow_unsafe_continuous_branch_presolve_diagnostic;
+    if (result.global_gini_tree_known_unsafe_presolve_diagnostic) {
+        result.notes.push_back(
+            "KNOWN-UNSAFE ROUND24 DIAGNOSTIC: presolve is enabled with continuous generic branching; strict original-problem certification is unconditionally disabled.");
+    }
     result.global_gini_tree_root_gamma_L = root_gamma_L;
     result.global_gini_tree_root_gamma_U = root_gamma_U;
     result.time_budget_seconds = options.solve_time_limit;
@@ -5776,6 +5885,13 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
                 "incumbent_cutoff_model",
                 api.continuous_branch_presolve_valid,
                 retained_incumbent_feasible);
+        if (result.global_gini_tree_known_unsafe_presolve_diagnostic) {
+            result.strict_certified_original_problem = false;
+            result.strict_certificate_class =
+                "known_unsafe_presolve_on_diagnostic";
+            result.strict_certificate_rejection_reason =
+                "unsafe_continuous_branch_presolve_override_forces_rejection";
+        }
         if (decision.verified_gap_available) {
             result.gap = decision.verified_project_relative_gap;
         }
@@ -5786,7 +5902,8 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
             decision.verified_gap_available &&
             result.gap == decision.verified_project_relative_gap;
         result.global_gini_tree_optimality_accepted =
-            decision.strict_certified_original_problem;
+            decision.strict_certified_original_problem &&
+            !result.global_gini_tree_known_unsafe_presolve_diagnostic;
 
         {
             std::ofstream manifest_out(manifest, std::ios::app);
@@ -5819,7 +5936,8 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
             }
         }
 
-        if (decision.strict_certified_original_problem) {
+        if (decision.strict_certified_original_problem &&
+            !result.global_gini_tree_known_unsafe_presolve_diagnostic) {
             result.status = "optimal";
             result.unresolved_intervals = 0;
             result.full_certificate_all_intervals_accounted = true;
@@ -5839,7 +5957,9 @@ SolveResult solveGlobalGiniTree(const Instance& instance,
                 ? "global_gini_tree_time_limit"
                 : "global_gini_tree_not_certified";
             result.full_certificate_rejection_reason =
-                decision.rejection_reason.empty()
+                result.global_gini_tree_known_unsafe_presolve_diagnostic
+                    ? "unsafe_continuous_branch_presolve_override_forces_rejection"
+                : decision.rejection_reason.empty()
                     ? decision.certificate_class
                     : decision.rejection_reason;
             result.certificate = api.native.best_bound_available

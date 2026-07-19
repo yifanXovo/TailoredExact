@@ -5809,7 +5809,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     const std::filesystem::path& progress_log_path,
     double progress_interval_seconds,
     bool register_callbacks,
-    const TailoredBCNativeCheckpointConfig& native_checkpoint) {
+    const TailoredBCNativeCheckpointConfig& native_checkpoint,
+    bool exact_zero_mip_gaps) {
     TailoredBCCplexApiSolveResult out;
     out.attempted = true;
 #ifdef _WIN32
@@ -5850,7 +5851,7 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     api.setintparam(env, kParamScreenOutput, 1);
     api.setintparam(env, kParamMipDisplay, 2);
     out.native_mip_gap_param_id = kParamMipGap;
-    out.native_mip_gap = 1e-8;
+    out.native_mip_gap = exact_zero_mip_gaps ? 0.0 : 1e-8;
     out.native_mip_gap_set_rc =
         api.setdblparam(env, kParamMipGap, out.native_mip_gap);
     if (out.native_mip_gap_set_rc != 0) {
@@ -5858,6 +5859,23 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
             "CPX_PARAM_EPGAP_set_failed:" +
             std::to_string(out.native_mip_gap_set_rc);
     }
+    out.native_mip_gap_get_rc = api.getdblparam(
+        env, kParamMipGap, &out.native_mip_gap_effective);
+    out.native_absolute_mip_gap_param_id = kParamAbsoluteMipGap;
+    out.native_absolute_mip_gap = exact_zero_mip_gaps ? 0.0 : 1e-6;
+    if (exact_zero_mip_gaps) {
+        out.native_absolute_mip_gap_set_rc = api.setdblparam(
+            env, kParamAbsoluteMipGap, 0.0);
+        out.native_absolute_mip_gap_get_rc = api.getdblparam(
+            env, kParamAbsoluteMipGap,
+            &out.native_absolute_mip_gap_effective);
+    }
+    out.native_exact_zero_gaps_valid = exact_zero_mip_gaps &&
+        out.native_mip_gap_set_rc == 0 && out.native_mip_gap_get_rc == 0 &&
+        out.native_mip_gap_effective == 0.0 &&
+        out.native_absolute_mip_gap_set_rc == 0 &&
+        out.native_absolute_mip_gap_get_rc == 0 &&
+        out.native_absolute_mip_gap_effective == 0.0;
     if (enable_gini_branching) {
         api.setintparam(env, kParamMipStrategySearch, kMipSearchTraditional);
         api.setintparam(env, kParamPreprocessingPresolve, 0);
@@ -6655,7 +6673,10 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
         ? kMipSearchTraditional
         : (options.global_gini_tree_search == "auto" ? 0 : kMipSearchDynamic);
     out.node_select_requested = kNodeSelectBestBound;
-    if (out.presolve_requested != 0) {
+    const bool unsafe_presolve_diagnostic =
+        out.presolve_requested != 0 && options.round24_research_mode &&
+        options.allow_unsafe_continuous_branch_presolve_diagnostic;
+    if (out.presolve_requested != 0 && !unsafe_presolve_diagnostic) {
         out.fail_reason =
             "continuous_generic_branching_requires_presolve_off";
         return out;
@@ -6844,7 +6865,7 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
     if (out.preprocessing_linear_get_rc == 0) {
         out.preprocessing_linear_effective = effective;
     }
-    out.continuous_branch_presolve_valid =
+    const bool reduction_round_trips_valid =
         continuousBranchPresolveConfigurationValid(
             out.preprocessing_reduce_set_rc,
             out.preprocessing_reduce_get_rc,
@@ -6852,6 +6873,8 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
             out.preprocessing_linear_set_rc,
             out.preprocessing_linear_get_rc,
             out.preprocessing_linear_effective);
+    out.continuous_branch_presolve_valid =
+        out.presolve_effective == 0 && reduction_round_trips_valid;
     out.search_get_rc = api.getintparam(
         env, kParamMipStrategySearch, &effective);
     if (out.search_get_rc == 0) {
@@ -6883,7 +6906,8 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
         out.threads_effective == out.threads_requested &&
         out.presolve_set_rc == 0 && out.presolve_get_rc == 0 &&
         out.presolve_effective == out.presolve_requested &&
-        out.continuous_branch_presolve_valid &&
+        (out.continuous_branch_presolve_valid ||
+         (unsafe_presolve_diagnostic && reduction_round_trips_valid)) &&
         out.search_set_rc == 0 && out.search_get_rc == 0 &&
         out.search_effective == out.search_requested &&
         out.node_select_set_rc == 0 && out.node_select_get_rc == 0 &&
@@ -6895,7 +6919,8 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
          out.native_time_limit_effective == time_limit_seconds) &&
         strict_gaps_ok;
     if (!required_parameter_round_trips) {
-        out.fail_reason = out.continuous_branch_presolve_valid
+        out.fail_reason = (out.continuous_branch_presolve_valid ||
+                           unsafe_presolve_diagnostic)
             ? "required_parameter_configuration_failed"
             : "continuous_branch_presolve_configuration_failed";
         finishEarly();

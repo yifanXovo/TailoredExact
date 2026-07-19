@@ -4,8 +4,10 @@
 #include "ControllingLeafScheduler.hpp"
 #include "ColumnGeneration.hpp"
 #include "CplexBaseline.hpp"
+#include "GurobiBaseline.hpp"
 #include "Cuts.hpp"
 #include "Evaluator.hpp"
+#include "ExternalGiniTree.hpp"
 #include "GiniFrontierGeometry.hpp"
 #include "HgaTgbcRunner.hpp"
 #include "Master.hpp"
@@ -49,12 +51,12 @@ namespace {
 
 void usage() {
     std::cerr
-        << "Usage: ExactEBRP --method tailored|cplex|interval-cutoff-oracle|primal-heuristic|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|option-consistency-test|tailored-bc-callback-smoke-test|tailored-bc-relaxation-vector-smoke-test|tailored-bc-branch-callback-smoke-test|tailored-bc-cut-validity-test|gini-subset-envelope-test|low-gini-l1-centering-test|transfer-cutset-validity-test|s-bucket-coverage-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|projection-safe-relaxed-column-test|non-elementary-relaxed-column-test|ng-relaxed-closure-test|relaxed-rmp-cg-test|frontier-relaxed-rmp-cg-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|large-relaxed-rmp-cg-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
+        << "Usage: ExactEBRP --method tailored|cplex|gurobi|interval-cutoff-oracle|primal-heuristic|pricing|pricing-branch|cuts|branching|master|cg|gcap-cg|gcap-branch|gcap-tree|gcap-frontier|dominance-test|support-pruning-test|route-mask-support-test|route-mask-operation-budget-test|adaptive-frontier-split-test|inventory-branching-test|operation-mode-branching-test|pricing-closure-audit-test|resume-state-test|pricing-verifier-test|iterative-closure-test|certificate-basis-test|option-consistency-test|tailored-bc-callback-smoke-test|tailored-bc-relaxation-vector-smoke-test|tailored-bc-branch-callback-smoke-test|tailored-bc-cut-validity-test|gini-subset-envelope-test|low-gini-l1-centering-test|transfer-cutset-validity-test|s-bucket-coverage-test|station-set-test|ng-dssr-pricing-test|dssr-exactness-test|dual-stabilization-test|bpc-hybrid-pricing-test|two-track-column-test|projection-safe-relaxed-column-test|non-elementary-relaxed-column-test|ng-relaxed-closure-test|relaxed-rmp-cg-test|frontier-relaxed-rmp-cg-test|relaxed-rmp-test|relaxed-pricing-closure-test|relaxed-column-incumbent-safety-test|large-relaxed-rmp-test|large-relaxed-rmp-cg-test|external-incumbent-test|large-instance-mode-test|large-lb-test|incumbent-import-test|route-pool-incumbent-test|pickup-drop-compat-flow-test|pickup-drop-transfer-cap-test|vehicle-indexed-relaxation-test|vehicle-indexed-transfer-flow-test --input <path> "
         << "--lambda 0.15 --T 3600 --threads <N> --time-limit <seconds> "
         << "--log <logfile> --out <json> "
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
         << "[--gini-cap <gamma>] [--gini-floor <gamma>] [--max-nodes <N>] [--frontier-intervals <N>] [--frontier-refine-splits <N>] "
-        << "[--frontier-execution-mode scheduler|global-gini-tree] [--global-gini-tree-presolve on|off] "
+        << "[--frontier-execution-mode scheduler|global-gini-tree|external-gini-tree] [--global-gini-tree-presolve on|off] "
         << "[--global-gini-tree-search dynamic|traditional|auto] [--global-gini-tree-child-estimate parent-copy|dispersion-coupled|factory-domain] "
         << "[--global-gini-tree-row-attachment full-inherited-pack|exact-incremental-delta] [--global-gini-tree-row-timing deferred|eager] "
         << "[--global-gini-tree-native-mip-start true|false] [--global-gini-tree-root-connectivity-flow true|false] "
@@ -552,6 +554,22 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--global-gini-tree-row-delta-trace") opt.global_gini_tree_row_delta_trace_path = requireValue(i, argc, argv);
         else if (arg == "--global-gini-tree-memory-trace") opt.global_gini_tree_memory_trace_path = requireValue(i, argc, argv);
         else if (arg == "--global-gini-tree-mip-start-audit") opt.global_gini_tree_mip_start_audit_path = requireValue(i, argc, argv);
+        else if (arg == "--gurobi-threads") opt.gurobi_threads = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--gurobi-seed") opt.gurobi_seed = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--gurobi-presolve") opt.gurobi_presolve = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--gurobi-home") opt.gurobi_home = requireValue(i, argc, argv);
+        else if (arg == "--gurobi-progress") opt.gurobi_progress_path = requireValue(i, argc, argv);
+        else if (arg == "--gurobi-model-export") opt.gurobi_model_export_path = requireValue(i, argc, argv);
+        else if (arg == "--cplex-model-export") opt.cplex_model_export_path = requireValue(i, argc, argv);
+        else if (arg == "--round24-expected-gurobi-model-fingerprint") opt.round24_expected_gurobi_model_fingerprint = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round24-executable-sha256") opt.round24_executable_sha256 = requireValue(i, argc, argv);
+        else if (arg == "--round24-manifest-executable-sha256") opt.round24_manifest_executable_sha256 = requireValue(i, argc, argv);
+        else if (arg == "--external-gini-backend") opt.external_gini_backend = requireValue(i, argc, argv);
+        else if (arg == "--external-gini-lifecycle") opt.external_gini_lifecycle = requireValue(i, argc, argv);
+        else if (arg == "--external-gini-warm-start") opt.external_gini_warm_start = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--external-gini-artifact-dir") opt.external_gini_artifact_dir = requireValue(i, argc, argv);
+        else if (arg == "--round24-research-mode") opt.round24_research_mode = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--allow-unsafe-continuous-branch-presolve-diagnostic") opt.allow_unsafe_continuous_branch_presolve_diagnostic = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round22-production-mode") opt.round22_production_mode = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round22-source-commit") opt.round22_source_commit_sha = requireValue(i, argc, argv);
         else if (arg == "--round22-executable-sha256") opt.round22_executable_sha256 = requireValue(i, argc, argv);
@@ -1245,7 +1263,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error("--lambda must be finite and nonnegative");
     }
     opt.frontier_execution_mode = lowerAscii(opt.frontier_execution_mode);
-    if (opt.frontier_execution_mode != "global-gini-tree") {
+    if (opt.frontier_execution_mode != "global-gini-tree" &&
+        opt.frontier_execution_mode != "external-gini-tree") {
         opt.frontier_execution_mode = "scheduler";
     }
     opt.global_gini_tree_presolve = lowerAscii(opt.global_gini_tree_presolve);
@@ -1272,6 +1291,17 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         lowerAscii(opt.global_gini_tree_row_timing_mode);
     if (opt.global_gini_tree_row_timing_mode != "eager") {
         opt.global_gini_tree_row_timing_mode = "deferred";
+    }
+    opt.gurobi_threads = 1;
+    opt.gurobi_presolve = std::max(-1, std::min(2, opt.gurobi_presolve));
+    opt.gurobi_seed = std::max(0, opt.gurobi_seed);
+    opt.external_gini_backend = lowerAscii(opt.external_gini_backend);
+    if (opt.external_gini_backend != "gurobi") {
+        opt.external_gini_backend = "cplex";
+    }
+    opt.external_gini_lifecycle = lowerAscii(opt.external_gini_lifecycle);
+    if (opt.external_gini_lifecycle != "fresh-per-attempt") {
+        opt.external_gini_lifecycle = "retained-per-leaf";
     }
     if (opt.threads <= 0) opt.threads = 1;
     if (opt.bpc_workers <= 0) opt.bpc_workers = std::max(1, opt.threads);
@@ -11453,6 +11483,24 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         global.time_budget_seconds = opt.solve_time_limit;
         return global;
     }
+    if (opt.frontier_execution_mode == "external-gini-tree") {
+        ebrp::SolveOptions external_opt = opt;
+        external_opt.frontier_adaptive_max_depth =
+            effectiveFrontierAdaptiveMaxDepth(instance, opt);
+        if (opt.solve_time_limit > 0.0) {
+            external_opt.solve_time_limit =
+                std::max(0.001, opt.solve_time_limit - elapsedSeconds());
+        }
+        result.notes.push_back(
+            "frontier execution mode external-gini-tree: shared ControllingLeafScheduler, deterministic solver-neutral interval geometry, static fixed-interval F0 models, inherited/native leaf bounds, and no continuous callback branch");
+        ebrp::SolveResult external = ebrp::solveExternalGiniTree(
+            instance, external_opt, result, cover_lo, cover_hi);
+        external.runtime_seconds = elapsedSeconds();
+        external.wall_time_seconds = external.runtime_seconds;
+        external.actual_runtime_seconds = external.runtime_seconds;
+        external.time_budget_seconds = opt.solve_time_limit;
+        return external;
+    }
 
     if (result.objective <= 1e-12) {
         result.lower_bound = 0.0;
@@ -17963,7 +18011,7 @@ int main(int argc, char** argv) {
                 file, opt.total_time_limit, opt.pickup_time, opt.drop_time);
             ebrp::SolveOptions effective_opt = opt;
             if (opt.method == "gcap-frontier" &&
-                opt.frontier_execution_mode != "global-gini-tree" &&
+                opt.frontier_execution_mode == "scheduler" &&
                 opt.frontier_scheduling_mode == "controlling-leaf") {
                 const double nominal = opt.process_wall_time_limit > 0.0
                     ? opt.process_wall_time_limit
@@ -17991,6 +18039,8 @@ int main(int argc, char** argv) {
                 results.push_back(ebrp::solveTailoredExact(instance, opt));
             } else if (opt.method == "cplex") {
                 results.push_back(ebrp::solveCplexBaseline(instance, opt));
+            } else if (opt.method == "gurobi") {
+                results.push_back(ebrp::solveGurobiBaseline(instance, opt));
             } else if (opt.method == "interval-cutoff-oracle") {
                 results.push_back(ebrp::solveIntervalExactCutoffOracle(instance, opt));
             } else if (opt.method == "primal-heuristic") {
@@ -18128,7 +18178,7 @@ int main(int argc, char** argv) {
             auto& r = results.back();
             initializeScalabilityFields(instance, effective_opt, r);
             applyRunConfigSnapshot(buildRunConfigSnapshot(instance, effective_opt), r);
-            if (effective_opt.frontier_execution_mode != "global-gini-tree") {
+            if (effective_opt.frontier_execution_mode == "scheduler") {
                 writePreAutoOracleParentJson(effective_opt, r);
                 effective_opt.process_elapsed_seconds_before_auto_oracle =
                     std::chrono::duration<double>(
@@ -18136,7 +18186,7 @@ int main(int argc, char** argv) {
                 runAutoIntervalOracleClosure(instance, effective_opt, r);
             } else {
                 r.notes.push_back(
-                    "automatic interval oracle bypassed by construction for global-gini-tree mode");
+                    "automatic interval oracle bypassed by construction for native or external global-Gini-tree mode");
             }
             applySealedRunProvenance(effective_opt, r);
             if (r.finalization_source.empty()) {
@@ -18158,12 +18208,18 @@ int main(int argc, char** argv) {
             }
             const bool global_single_tree =
                 effective_opt.frontier_execution_mode == "global-gini-tree";
-            r.final_json_uses_best_checkpoint = !global_single_tree;
+            const bool global_external_tree =
+                effective_opt.frontier_execution_mode == "external-gini-tree";
+            r.final_json_uses_best_checkpoint =
+                !global_single_tree && !global_external_tree;
             r.interrupted_run_best_bound_preserved =
                 global_single_tree
                     ? r.global_gini_tree_native_best_bound_available
-                    : true;
-            if (!global_single_tree && r.method != "cplex" &&
+                    : (global_external_tree
+                        ? std::isfinite(r.external_gini_tree_global_lower_bound)
+                        : true);
+            if (!global_single_tree && !global_external_tree &&
+                r.method != "cplex" &&
                 !r.native_mip_evidence_available) {
                 r.solver_finalization_reached = true;
                 r.process_return_code = 0;

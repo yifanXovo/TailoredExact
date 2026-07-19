@@ -175,6 +175,14 @@ struct TailoredBCCplexApiSolveResult {
     int native_mip_gap_param_id = 0;
     double native_mip_gap = 0.0;
     int native_mip_gap_set_rc = 0;
+    int native_mip_gap_get_rc = -1;
+    double native_mip_gap_effective = 0.0;
+    int native_absolute_mip_gap_param_id = 0;
+    double native_absolute_mip_gap = 0.0;
+    int native_absolute_mip_gap_set_rc = -1;
+    int native_absolute_mip_gap_get_rc = -1;
+    double native_absolute_mip_gap_effective = 0.0;
+    bool native_exact_zero_gaps_valid = false;
     long long callback_abort_requests = 0;
     int terminate_set_rc = 0;
     bool terminate_triggered = false;
@@ -469,7 +477,8 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
     const std::filesystem::path& progress_log_path = {},
     double progress_interval_seconds = 0.0,
     bool register_callbacks = true,
-    const TailoredBCNativeCheckpointConfig& native_checkpoint = {});
+    const TailoredBCNativeCheckpointConfig& native_checkpoint = {},
+    bool exact_zero_mip_gaps = false);
 
 GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
     const std::filesystem::path& root_lp_path,
