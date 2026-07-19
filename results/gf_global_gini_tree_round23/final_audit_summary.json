@@ -1,0 +1,69 @@
+{
+  "schema": "round23-final-audit-v1",
+  "branch": "codex/round23-moderate4301-correctness-unified-convergence",
+  "local_base_sha": "3c69cb2c04889db5ceb40e313a710d600089879d",
+  "observed_remote_main_sha": "91ed0e314caae51ddbd8375d88cd65a5352c917f",
+  "repository_relationship": "different commit history, identical source tree",
+  "preregistration_commit": "427e15f4cb1a993093d3a355356e8a772a964cc3",
+  "actual_frozen_round22_executable_sha256": "b3fecef84dce8d6a2323d25a7877d5f16d14aa5f1fb644ae642bf636a229ee62",
+  "official_round23_executable_sha256": "880f9fb08dd178d0849447b76c8bfbafee2d5abe9402dcfbc594e558d630e3c4",
+  "moderate4301": {
+    "contradiction_resolved": true,
+    "primary_root_cause": "presolve-induced loss of a feasible continuous generic-callback child",
+    "secondary_root_cause": "native infeasibility status scope was too broad",
+    "hga_witness_independently_feasible": true,
+    "plain_witness_independently_feasible": true,
+    "partial_root_extension_feasible": true,
+    "complete_root_extension_feasible": true,
+    "first_lost_child_uid": 2,
+    "correction_general_and_instance_independent": true,
+    "feasibility_consistency_gate_fail_closed": true
+  },
+  "mechanism": {
+    "selected": "P2 dispersion-coupled child lower-bound estimate",
+    "proof_artifact": "dispersion_coupled_child_bound_proof.md",
+    "P1_selected": false,
+    "P1_proof_artifact": "inapplicable_and_omitted",
+    "P1_rejection": "current generic callback lacks supported open-node enumeration and next-node selection",
+    "changes_rows": false,
+    "changes_bounds": false,
+    "changes_objective": false,
+    "changes_pruning": false,
+    "uniform_on_all_official_instances": true
+  },
+  "official_runs": {
+    "stage1_completed": 6,
+    "stage2_completed": 12,
+    "failed": 0,
+    "interrupted": 0,
+    "structural_gate_failures": 0,
+    "exactness_audit_rows_passed": 18,
+    "strict_certificates_S0_C": 2,
+    "strict_certificates_S0_M": 2,
+    "certificate_gains": 0,
+    "certificate_losses": 0
+  },
+  "paired_decision": {
+    "improve": 2,
+    "regress": 4,
+    "tie": 0,
+    "unavailable": 0,
+    "material_regressions": 0,
+    "decision_class": "C_candidate_mixed_or_regressive",
+    "candidate_status": "research_only",
+    "future_full_matrix_promotion_eligible": false,
+    "stable_paper_mainline": "corrected_S0_F0"
+  },
+  "artifact_hygiene": {
+    "files_removed": 0,
+    "compressed_streams": 58,
+    "bytes_saved": 244603007,
+    "round22_official_files_affected": 0,
+    "largest_new_artifact": "results/gf_global_gini_tree_round23/official/round23_stage2__tight_T_seed3101__s0m__900s/global_node_trace.csv.gz",
+    "largest_new_artifact_bytes": 9298387
+  },
+  "inapplicable_artifacts": [
+    "sibling_fairness_exactness_proof.md (P1 not selected)"
+  ],
+  "next_recommended_experiment": "preregistered full-matrix corrected-S0/F0 mechanism-off revalidation"
+}

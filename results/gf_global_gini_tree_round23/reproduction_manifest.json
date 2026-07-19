@@ -22,6 +22,9 @@
   "source_tree_fingerprint_definition": "SHA-256 of newline-terminated, path-sorted '<file_sha256>  <slash_path>' records for CMakeLists.txt and all non-pyc files under include/src/tests/scripts",
   "source_tree_file_count_at_protocol_freeze": 169,
   "source_tree_fingerprint_sha256_at_protocol_freeze": "576aa46e063ee96a9e5a14cdef117ad35e0e4110b3227e172deb0ad28c7c4a73",
+  "official_experiment_source_commit": "427e15f4cb1a993093d3a355356e8a772a964cc3",
+  "final_source_tree_file_count_including_analysis_packaging_tests": 172,
+  "final_source_tree_fingerprint_sha256": "a6f4dd6eff2a69ca9fe841690a039832ebc7c560d0ff47aabb34d638f67e96ab",
   "executables": {
     "actual_frozen_round22": {
       "path": "build_round22/ExactEBRP-frozen.exe",
@@ -35,8 +38,9 @@
     },
     "round23_official_clean": {
       "path": "build_round23/ExactEBRP-frozen.exe",
-      "sha256": null,
-      "status": "to_be_frozen_after_preregistration_commit"
+      "sha256": "880f9fb08dd178d0849447b76c8bfbafee2d5abe9402dcfbc594e558d630e3c4",
+      "source_commit_at_build": "427e15f4cb1a993093d3a355356e8a772a964cc3",
+      "status": "clean_release_frozen_and_used_for_all_official_round23_runs"
     }
   },
   "production_manifests": {
