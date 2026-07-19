@@ -1,0 +1,39 @@
+{
+  "schema": "round24-gurobi-environment-audit-v1",
+  "audit_time_local_date": "2026-07-20",
+  "installation_found": true,
+  "installation_root": "D:/gurobi1302/win64",
+  "command_line_executable": "D:/gurobi1302/win64/bin/gurobi_cl.exe",
+  "command_line_version": "13.0.2",
+  "command_line_build": "v13.0.2rc1",
+  "header_version": "13.0.2",
+  "native_library_name": "gurobi130.dll",
+  "c_api_import_library_name": "gurobi130.lib",
+  "cpp_import_libraries_present": [
+    "gurobi_c++md2017.lib",
+    "gurobi_c++mdd2017.lib",
+    "gurobi_c++mt2017.lib",
+    "gurobi_c++mtd2017.lib"
+  ],
+  "gurobi_home_environment_set": false,
+  "grb_license_file_environment_set": false,
+  "standard_license_file_found": false,
+  "minimal_optimize_attempted": true,
+  "license_available": false,
+  "minimal_optimize_exit_code": 1,
+  "minimal_optimize_error_code": 10009,
+  "minimal_optimize_error_class": "no_gurobi_license_found",
+  "license_type": "unavailable",
+  "license_expiration": "unavailable",
+  "license_file_contents_read": false,
+  "license_secret_logged_or_committed": false,
+  "download_or_install_performed": false,
+  "official_performance_gate": "blocked_by_missing_license",
+  "host": "WIN-3NO58RVQ4VC",
+  "os": "Microsoft Windows 10 Pro 10.0.19045 64-bit",
+  "notes": [
+    "The installed local version is the source of truth; no version was hard-coded as an installation assumption.",
+    "Only existence checks were made at standard license paths; no license file was found and no license content was accessed.",
+    "The raw failed smoke output is retained only under ignored build_round24 and contains no key, token, access identifier, or license-file content."
+  ]
+}

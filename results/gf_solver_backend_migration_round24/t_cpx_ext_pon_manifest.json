@@ -1,0 +1,20 @@
+{
+  "schema": "round24-arm-manifest-v1",
+  "arm": "T-CPX-EXT-PON",
+  "role": "external_tree_cplex_backend",
+  "controller": "solver_neutral_external_gini_tree",
+  "scheduler": "ControllingLeafScheduler",
+  "model": "static_fixed_interval_complete_compact_milp_F0",
+  "solver": "CPLEX",
+  "threads": 1,
+  "presolve": "on",
+  "relative_mip_gap": 0.0,
+  "absolute_mip_gap": 0.0,
+  "same_run_verified_hga_ub": true,
+  "parent_copy_lower_bound": true,
+  "P1": false,
+  "P2": false,
+  "F3": false,
+  "cross_model_mip_start": false,
+  "instance_dispatch": false
+}

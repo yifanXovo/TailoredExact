@@ -1,0 +1,22 @@
+{
+  "schema": "round24-arm-manifest-v1",
+  "arm": "T-GRB-EXT-COLD",
+  "role": "external_tree_gurobi_cold_backend",
+  "controller": "solver_neutral_external_gini_tree",
+  "scheduler": "ControllingLeafScheduler",
+  "model": "static_fixed_interval_complete_compact_milp_F0",
+  "solver": "Gurobi",
+  "threads": 1,
+  "presolve": -1,
+  "seed": 0,
+  "mip_gap": 0.0,
+  "mip_gap_abs": 0.0,
+  "same_run_verified_hga_ub": true,
+  "retained_per_leaf": true,
+  "model_reset": false,
+  "cross_model_mip_start": false,
+  "P1": false,
+  "P2": false,
+  "F3": false,
+  "instance_dispatch": false
+}

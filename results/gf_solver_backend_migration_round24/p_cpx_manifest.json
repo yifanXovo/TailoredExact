@@ -1,0 +1,23 @@
+{
+  "schema": "round24-arm-manifest-v1",
+  "arm": "P-CPX",
+  "role": "plain_cplex_benchmark",
+  "model": "complete_original_compact_milp",
+  "canonical_model_source": "shared_deterministic_compact_lp_writer",
+  "solver": "CPLEX",
+  "threads": 1,
+  "presolve": "on",
+  "search": "traditional",
+  "node_selection": "native_best_bound",
+  "cuts": "default",
+  "probing": "default",
+  "heuristics": "default",
+  "relative_mip_gap": 0.0,
+  "absolute_mip_gap": 0.0,
+  "hga_incumbent": false,
+  "external_known_ub": false,
+  "gini_partition": false,
+  "optimize_calls": 1,
+  "solver_threads_uniform": true,
+  "instance_dispatch": false
+}
