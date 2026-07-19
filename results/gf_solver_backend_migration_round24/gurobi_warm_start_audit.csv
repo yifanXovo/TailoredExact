@@ -1,0 +1,7 @@
+scope,arm,candidates_available,mapping_complete,submitted,accepted,rejected,unknown,cold_start_values_set,objective_verified,interval_verified,model_changed,lower_bound_credit,status
+unit_tests,T-GRB-EXT-WARM,1,1,1,not_native_runtime,0,not_native_runtime,false,true,true,false,false,pass_80_check_suite
+stage0_external_cplex,T-CPX-EXT-PON,0,0,0,0,0,0,false,not_applicable,not_applicable,false,false,pass_not_requested
+stage0_external_gurobi,T-GRB-EXT-WARM,0,0,0,0,0,0,false,not_reached,not_reached,false,false,blocked_license_error_10009
+stage1B,T-GRB-EXT-COLD,not_run,not_run,0,0,0,0,false,not_run,not_run,false,false,excluded_by_stage0_license_gate
+stage1B,T-GRB-EXT-WARM,not_run,not_run,not_run,not_run,not_run,not_run,false,not_run,not_run,false,false,excluded_by_stage0_license_gate
+stage2,T-GRB-EXT-WARM,not_run,not_run,not_run,not_run,not_run,not_run,false,not_run,not_run,false,false,excluded_by_stage0_license_gate

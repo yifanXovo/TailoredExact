@@ -33,5 +33,28 @@
   "solver_threads": 1,
   "forbidden_repository_operations_used": false,
   "license_secret_logged_or_committed": false,
-  "executables": []
+  "implementation_commit": "a032baac3e85a0659755cec3ca86a77852c8b9dc",
+  "implementation_tree": "e4f6406ad6fb5fcbe3ec4cf6c7c3040aeffb8a5c",
+  "postchange_cpp_configurations_passed": 2,
+  "postchange_cpp_test_executables_passed": 18,
+  "postchange_cpp_test_executables_failed": 0,
+  "postchange_cpp_groups_or_requirements_passed": 382,
+  "postchange_python_suites_passed": 5,
+  "postchange_python_suites_failed": 0,
+  "postchange_python_groups_or_checks_passed": 106,
+  "excluded_parallel_test_orchestration_collisions": 2,
+  "stage0_gate_status": "blocked_missing_gurobi_license",
+  "stage1_stage2_policy": "all_preregistered_rows_excluded_without_execution",
+  "executables": [
+    {
+      "configuration": "default_without_gurobi",
+      "path": "build_round24/ExactEBRP-round24-cplex.exe",
+      "sha256": "7c6f72f94453dfb260f6338c04faff5d139ad3734f089010d134d9e73e9736e6"
+    },
+    {
+      "configuration": "gurobi_enabled",
+      "path": "build_round24/ExactEBRP-round24-gurobi.exe",
+      "sha256": "f6af62afd26425ae8847194fe588d553e5990f733582f5d44b9b877e0137e765"
+    }
+  ]
 }

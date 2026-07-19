@@ -23,6 +23,7 @@
   "minimal_optimize_exit_code": 1,
   "minimal_optimize_error_code": 10009,
   "minimal_optimize_error_class": "no_gurobi_license_found",
+  "minimal_optimize_serialized_error": "gurobi_error_10009:No Gurobi license found",
   "license_type": "unavailable",
   "license_expiration": "unavailable",
   "license_file_contents_read": false,
@@ -34,6 +35,7 @@
   "notes": [
     "The installed local version is the source of truth; no version was hard-coded as an installation assumption.",
     "Only existence checks were made at standard license paths; no license file was found and no license content was accessed.",
-    "The raw failed smoke output is retained only under ignored build_round24 and contains no key, token, access identifier, or license-file content."
+    "The committed failure text is sanitized to the stable error class and contains no user, hostid, key, token, access identifier, or license-file content.",
+    "The Gurobi-enabled executable discovered and dynamically loaded gurobi130.dll before the license gate failed."
   ]
 }

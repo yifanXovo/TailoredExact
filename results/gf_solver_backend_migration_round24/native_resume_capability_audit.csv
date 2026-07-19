@@ -1,0 +1,4 @@
+backend,lifecycle,unchanged_same_leaf_model_retained,model_reset_allowed,allowed_parameter_change,continuation_evidence_required,new_child_reuses_parent_tree,official_role,stage0_runtime_evidence,status
+CPLEX,fresh-per-attempt,false,false,TimeLimit,not_claimed,false,T-CPX-EXT-PON,"1 model; 1 read; 1 optimize; 1 fresh restart",implemented_and_smoke_passed
+Gurobi,retained-per-leaf,true,false,TimeLimit,"nondecreasing cumulative Runtime/Work/Nodes plus fingerprint identity",false,T-GRB-EXT-COLD_and_WARM,unavailable_license,implemented_unit_tested_runtime_blocked
+Gurobi,fresh-per-attempt,false,false,TimeLimit,not_claimed,false,T-GRB-EXT-FRESH-COLD,unavailable_license,diagnostic_implemented_runtime_blocked
