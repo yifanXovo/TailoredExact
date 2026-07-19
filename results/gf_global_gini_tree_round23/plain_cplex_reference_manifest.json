@@ -1,0 +1,20 @@
+{
+  "schema": "round23-plain-reference-v1",
+  "arm": "plain",
+  "role": "external_benchmark_reused_from_round22",
+  "algorithm": "complete_plain_compact_cplex",
+  "threads": 1,
+  "presolve": "on",
+  "search": "traditional",
+  "node_selection": "native-best-bound",
+  "native_cuts": "default",
+  "native_probing": "default",
+  "native_heuristics": "default",
+  "relative_mip_gap": 0.0,
+  "absolute_mip_gap": 0.0,
+  "dense_progress": true,
+  "round22_executable_sha256": "b3fecef84dce8d6a2323d25a7877d5f16d14aa5f1fb644ae642bf636a229ee62",
+  "round22_manifest_sha256": "f94461333db22f60298f6fd42ef6e9ab6e3a35add7836d11d9cca2a37d6acd27",
+  "reused_only_if_plain_semantics_unchanged": true,
+  "information_enters_tailored_solve": false
+}

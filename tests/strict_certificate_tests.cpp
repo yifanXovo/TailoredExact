@@ -258,6 +258,63 @@ void testStatusTextMismatchRejects() {
             "status code/text mismatch accepted");
 }
 
+void testOriginalInfeasibilityIsExplicitlyScoped() {
+    auto in = engineeringExactInput();
+    in.native_status_code = ebrp::kCplexMipInfeasible;
+    in.native_status_text = "integer infeasible";
+    in.native_objective_available = false;
+    in.native_objective_return_code = 1217;
+    const auto out = ebrp::classifyStrictCertificate(in);
+    require(out.certificate_class == "original_problem_infeasible",
+            "original infeasibility was left unqualified");
+    require(out.infeasibility_scope == "original_problem",
+            "original infeasibility scope missing");
+}
+
+void testCutoffInfeasibilityCannotMasqueradeAsOriginal() {
+    auto in = engineeringExactInput();
+    in.native_status_code = ebrp::kCplexMipInfeasible;
+    in.native_status_text = "integer infeasible";
+    in.native_objective_available = false;
+    in.native_objective_return_code = 1217;
+    in.native_model_scope = "incumbent_cutoff_model";
+    in.verified_feasible_witness_available = false;
+    const auto out = ebrp::classifyStrictCertificate(in);
+    require(out.certificate_class == "cutoff_model_infeasible",
+            "cutoff infeasibility was misclassified");
+    require(out.infeasibility_scope == "incumbent_cutoff_model",
+            "cutoff scope missing");
+}
+
+void testFeasibleWitnessRejectsContradictoryInfeasibility() {
+    auto in = engineeringExactInput();
+    in.native_status_code = ebrp::kCplexMipInfeasible;
+    in.native_status_text = "integer infeasible";
+    in.native_objective_available = false;
+    in.native_objective_return_code = 1217;
+    in.native_model_scope = "incumbent_cutoff_model";
+    in.verified_feasible_witness_available = true;
+    in.verified_witness_satisfies_native_model = true;
+    const auto out = ebrp::classifyStrictCertificate(in);
+    require(out.certificate_class == "certificate_rejected",
+            "contradictory infeasibility was accepted");
+    require(out.rejection_reason ==
+                "verified_feasible_witness_contradicts_native_infeasibility",
+            "contradiction reason missing");
+    require(!out.feasibility_consistency_gate_passed,
+            "feasibility consistency gate did not fail closed");
+}
+
+void testInvalidNativeModelConfigurationFailsClosed() {
+    auto in = engineeringExactInput();
+    in.native_model_configuration_valid = false;
+    const auto out = ebrp::classifyStrictCertificate(in);
+    require(!out.strict_certified_original_problem,
+            "invalid native configuration certified");
+    require(out.rejection_reason == "native_model_configuration_invalid",
+            "configuration failure reason missing");
+}
+
 } // namespace
 
 int main() {
@@ -280,7 +337,11 @@ int main() {
         testLargeMappingAnomalyVisible();
         testObservedNativeGapIsDiagnostic();
         testStatusTextMismatchRejects();
-        std::cout << "StrictCertificateTests: 18 groups passed\n";
+        testOriginalInfeasibilityIsExplicitlyScoped();
+        testCutoffInfeasibilityCannotMasqueradeAsOriginal();
+        testFeasibleWitnessRejectsContradictoryInfeasibility();
+        testInvalidNativeModelConfigurationFailsClosed();
+        std::cout << "StrictCertificateTests: 22 groups passed\n";
         return 0;
     } catch (const std::exception& error) {
         std::cerr << "StrictCertificateTests failure: " << error.what()

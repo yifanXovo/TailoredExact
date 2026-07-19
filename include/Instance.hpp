@@ -54,7 +54,9 @@ struct SolveOptions {
     int max_branch_nodes = 31;
     int frontier_intervals = 4;
     std::string frontier_execution_mode = "scheduler";
-    std::string global_gini_tree_presolve = "on";
+    // CPLEX presolve is disabled for the single-tree implementation because
+    // it creates branches on the continuous G variable in a generic callback.
+    std::string global_gini_tree_presolve = "off";
     std::string global_gini_tree_search = "traditional";
     std::string global_gini_tree_child_estimate_mode = "parent-copy";
     std::string global_gini_tree_row_attachment_mode = "full-inherited-pack";

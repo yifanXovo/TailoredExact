@@ -89,6 +89,8 @@ constexpr int kParamAbsoluteMipGap = 2008;
 constexpr int kParamScreenOutput = 1035;
 constexpr int kParamMipDisplay = 2012;
 constexpr int kParamPreprocessingPresolve = 1030;
+constexpr int kParamPreprocessingReduce = kCplexPreprocessingReduceParam;
+constexpr int kParamPreprocessingLinear = kCplexPreprocessingLinearParam;
 constexpr int kParamMipStrategyHeuristicFreq = 2031;
 constexpr int kParamMipStrategySearch = 2109;
 constexpr int kParamMipStrategyNodeSelect = 2018;
@@ -3996,12 +3998,18 @@ bool snapshotGlobalNode(GlobalGiniCallbackState& state,
             }
         }
         GlobalGiniNodeMetadata& metadata = found->second;
-        if (std::fabs(metadata.lower - lower) > 1e-8 ||
-            std::fabs(metadata.upper - upper) > 1e-8) {
-            failure = "node_interval_metadata_mismatch:" +
-                std::to_string(uid);
+        std::string contraction_reason;
+        if (!validNestedIntervalContraction(
+                {metadata.lower, metadata.upper}, {lower, upper}, 1e-8,
+                &contraction_reason)) {
+            failure = "node_interval_metadata_expansion:" +
+                std::to_string(uid) + ":" + contraction_reason;
             return false;
         }
+        // Retain the intersection when a tolerance-scale endpoint drift is
+        // observed; never widen the canonical interval metadata.
+        metadata.lower = std::max(metadata.lower, lower);
+        metadata.upper = std::min(metadata.upper, upper);
         metadata.native_depth = depth;
         if (metadata.first_process_time < 0.0) {
             metadata.first_process_time = globalTreeElapsed(state);
@@ -4581,6 +4589,17 @@ int __stdcall globalGiniTreeCallback(CPXCALLBACKCONTEXTptr context,
         const CPXLONG nodes_left = infoLong(kCallbackInfoNodesLeft);
         const CPXLONG iterations = infoLong(kCallbackInfoIterationCount);
         if (uid < 0 || depth < 0 || nodes < 0) {
+            GlobalNodeEvent event;
+            event.context = "relaxation";
+            event.action = "node_info_api_failure_uid_" +
+                std::to_string(uid) + "_depth_" + std::to_string(depth) +
+                "_nodes_" + std::to_string(nodes);
+            event.uid = uid;
+            event.depth = depth;
+            event.node_count = nodes;
+            event.nodes_left = nodes_left;
+            event.iteration_count = iterations;
+            writeGlobalNodeEvent(*state, event, nullptr, nullptr);
             ++state->node_info_api_failures;
             abortGlobalTreeCallback(*state, context);
             return 0;
@@ -4611,6 +4630,17 @@ int __stdcall globalGiniTreeCallback(CPXCALLBACKCONTEXTptr context,
         std::string metadata_failure;
         if (!snapshotGlobalNode(*state, uid, depth, nodes, lower, upper,
                                 metadata, metadata_failure)) {
+            GlobalNodeEvent event;
+            event.context = "relaxation";
+            event.action = "node_metadata_snapshot_failure:" + metadata_failure;
+            event.uid = uid;
+            event.depth = depth;
+            event.lower = lower;
+            event.upper = upper;
+            event.node_count = nodes;
+            event.nodes_left = nodes_left;
+            event.iteration_count = iterations;
+            writeGlobalNodeEvent(*state, event, nullptr, nullptr);
             ++state->node_info_api_failures;
             abortGlobalTreeCallback(*state, context);
             return 0;
@@ -4619,6 +4649,17 @@ int __stdcall globalGiniTreeCallback(CPXCALLBACKCONTEXTptr context,
             std::lock_guard<std::mutex> lock(state->node_metadata_mutex);
             auto found = state->node_metadata.find(uid);
             if (found == state->node_metadata.end()) {
+                GlobalNodeEvent event;
+                event.context = "relaxation";
+                event.action = "node_metadata_disappeared_after_snapshot";
+                event.uid = uid;
+                event.depth = depth;
+                event.lower = lower;
+                event.upper = upper;
+                event.node_count = nodes;
+                event.nodes_left = nodes_left;
+                event.iteration_count = iterations;
+                writeGlobalNodeEvent(*state, event, nullptr, nullptr);
                 ++state->node_info_api_failures;
                 abortGlobalTreeCallback(*state, context);
                 return 0;
@@ -5099,21 +5140,34 @@ int __stdcall globalGiniTreeCallback(CPXCALLBACKCONTEXTptr context,
         abortGlobalTreeCallback(*state, context);
         return 0;
     }
-    const ChildDomainEstimate low_domain = computeChildDomainEstimate(
-        *state->instance, *state->options, low.domain, lower, relaxation);
-    const ChildDomainEstimate high_domain = computeChildDomainEstimate(
-        *state->instance, *state->options, high.domain, split, relaxation);
+    const bool dispersion_estimate =
+        state->options->global_gini_tree_child_estimate_mode ==
+        "dispersion-coupled";
+    const ChildDomainEstimate low_domain = dispersion_estimate
+        ? computeDispersionCoupledChildEstimate(
+              *state->instance, *state->options, low.domain, lower,
+              relaxation)
+        : computeChildDomainEstimate(
+              *state->instance, *state->options, low.domain, lower,
+              relaxation);
+    const ChildDomainEstimate high_domain = dispersion_estimate
+        ? computeDispersionCoupledChildEstimate(
+              *state->instance, *state->options, high.domain, split,
+              relaxation)
+        : computeChildDomainEstimate(
+              *state->instance, *state->options, high.domain, split,
+              relaxation);
     if (!low_domain.valid || !high_domain.valid) {
         ++state->child_estimate_failures;
         abortGlobalTreeCallback(*state, context);
         return 0;
     }
-    const bool factory_estimate =
+    const bool proved_estimate = dispersion_estimate ||
         state->options->global_gini_tree_child_estimate_mode ==
         "factory-domain";
-    const double low_estimate = factory_estimate
+    const double low_estimate = proved_estimate
         ? low_domain.final_estimate : relaxation;
-    const double high_estimate = factory_estimate
+    const double high_estimate = proved_estimate
         ? high_domain.final_estimate : relaxation;
     if (!std::isfinite(low_estimate) || !std::isfinite(high_estimate) ||
         low_estimate + 1e-10 < relaxation ||
@@ -5277,12 +5331,28 @@ int __stdcall globalGiniTreeCallback(CPXCALLBACKCONTEXTptr context,
             << low_domain.domain_estimate << ',' << low_domain.lift_over_parent
             << ',' << csvCell(joinDoubles(
                     low_domain.station_deviation_lower, "|", 1)) << ','
+            << low_domain.s_lower << ','
+            << low_domain.required_deviation << ','
+            << low_domain.deviation_lower_sum << ','
+            << low_domain.deviation_upper_sum << ','
+            << low_domain.dispersion_penalty_lower << ','
+            << (low_domain.dispersion_bound_used ? "true" : "false") << ','
+            << (low_domain.domain_contradiction_observed ? "true" : "false")
+            << ',' << csvCell(low_domain.validation_status) << ','
             << high_id << ',' << split << ',' << upper << ','
             << high_estimate << ',' << high_domain.gamma_floor_component << ','
             << high_domain.weighted_penalty_lower << ','
             << high_domain.domain_estimate << ','
             << high_domain.lift_over_parent << ',' << csvCell(joinDoubles(
                     high_domain.station_deviation_lower, "|", 1)) << ','
+            << high_domain.s_lower << ','
+            << high_domain.required_deviation << ','
+            << high_domain.deviation_lower_sum << ','
+            << high_domain.deviation_upper_sum << ','
+            << high_domain.dispersion_penalty_lower << ','
+            << (high_domain.dispersion_bound_used ? "true" : "false") << ','
+            << (high_domain.domain_contradiction_observed ? "true" : "false")
+            << ',' << csvCell(high_domain.validation_status) << ','
             << csvCell(state->options->global_gini_tree_child_estimate_mode)
             << ',' << (std::fabs(low_estimate - high_estimate) > 1e-12
                            ? "true" : "false")
@@ -5408,6 +5478,25 @@ int __stdcall plainDenseProgressCallback(CPXCALLBACKCONTEXTptr context,
 #endif
 
 } // namespace
+
+ContinuousBranchPresolvePolicy requiredContinuousBranchPresolvePolicy() {
+    return {};
+}
+
+bool continuousBranchPresolveConfigurationValid(
+    int reduce_set_rc,
+    int reduce_get_rc,
+    int reduce_effective,
+    int linear_set_rc,
+    int linear_get_rc,
+    int linear_effective) {
+    const ContinuousBranchPresolvePolicy policy =
+        requiredContinuousBranchPresolvePolicy();
+    return reduce_set_rc == 0 && reduce_get_rc == 0 &&
+           reduce_effective == policy.reduce_requested &&
+           linear_set_rc == 0 && linear_get_rc == 0 &&
+           linear_effective == policy.linear_requested;
+}
 
 TailoredBCCplexApiProbe probeTailoredBCCplexApi() {
     TailoredBCCplexApiProbe probe;
@@ -6556,10 +6645,21 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
     out.root_model_fingerprint = fileFingerprint(root_lp_path);
     out.objective_fingerprint = originalObjectiveFingerprint(instance, options);
     out.presolve_requested = options.global_gini_tree_presolve == "off" ? 0 : 1;
+    const ContinuousBranchPresolvePolicy continuous_branch_policy =
+        requiredContinuousBranchPresolvePolicy();
+    out.preprocessing_reduce_requested =
+        continuous_branch_policy.reduce_requested;
+    out.preprocessing_linear_requested =
+        continuous_branch_policy.linear_requested;
     out.search_requested = options.global_gini_tree_search == "traditional"
         ? kMipSearchTraditional
         : (options.global_gini_tree_search == "auto" ? 0 : kMipSearchDynamic);
     out.node_select_requested = kNodeSelectBestBound;
+    if (out.presolve_requested != 0) {
+        out.fail_reason =
+            "continuous_generic_branching_requires_presolve_off";
+        return out;
+    }
     if (out.search_requested != kMipSearchTraditional) {
         out.fail_reason =
             "global_gini_tree_dynamic_search_unsupported_after_reproduced_"
@@ -6619,6 +6719,24 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
             << "threads_set_return_code," << out.threads_set_rc << '\n'
             << "threads_get_return_code," << out.threads_get_rc << '\n'
             << "threads_effective," << out.threads_effective << '\n'
+            << "preprocessing_reduce_requested,"
+            << out.preprocessing_reduce_requested << '\n'
+            << "preprocessing_reduce_set_return_code,"
+            << out.preprocessing_reduce_set_rc << '\n'
+            << "preprocessing_reduce_get_return_code,"
+            << out.preprocessing_reduce_get_rc << '\n'
+            << "preprocessing_reduce_effective,"
+            << out.preprocessing_reduce_effective << '\n'
+            << "preprocessing_linear_requested,"
+            << out.preprocessing_linear_requested << '\n'
+            << "preprocessing_linear_set_return_code,"
+            << out.preprocessing_linear_set_rc << '\n'
+            << "preprocessing_linear_get_return_code,"
+            << out.preprocessing_linear_get_rc << '\n'
+            << "preprocessing_linear_effective,"
+            << out.preprocessing_linear_effective << '\n'
+            << "continuous_branch_presolve_valid,"
+            << (out.continuous_branch_presolve_valid ? 1 : 0) << '\n'
             << "time_limit_requested," << std::setprecision(17)
             << out.native_time_limit_requested << '\n'
             << "time_limit_set_return_code,"
@@ -6694,6 +6812,12 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
     const bool strict_gaps_ok = configureStrictMipGaps(api, env, out.native);
     out.presolve_set_rc = api.setintparam(
         env, kParamPreprocessingPresolve, out.presolve_requested);
+    out.preprocessing_reduce_set_rc = api.setintparam(
+        env, kParamPreprocessingReduce,
+        out.preprocessing_reduce_requested);
+    out.preprocessing_linear_set_rc = api.setintparam(
+        env, kParamPreprocessingLinear,
+        out.preprocessing_linear_requested);
     out.search_set_rc = api.setintparam(
         env, kParamMipStrategySearch, out.search_requested);
     out.node_select_set_rc = api.setintparam(
@@ -6710,6 +6834,24 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
     if (out.presolve_get_rc == 0) {
         out.presolve_effective = effective;
     }
+    out.preprocessing_reduce_get_rc = api.getintparam(
+        env, kParamPreprocessingReduce, &effective);
+    if (out.preprocessing_reduce_get_rc == 0) {
+        out.preprocessing_reduce_effective = effective;
+    }
+    out.preprocessing_linear_get_rc = api.getintparam(
+        env, kParamPreprocessingLinear, &effective);
+    if (out.preprocessing_linear_get_rc == 0) {
+        out.preprocessing_linear_effective = effective;
+    }
+    out.continuous_branch_presolve_valid =
+        continuousBranchPresolveConfigurationValid(
+            out.preprocessing_reduce_set_rc,
+            out.preprocessing_reduce_get_rc,
+            out.preprocessing_reduce_effective,
+            out.preprocessing_linear_set_rc,
+            out.preprocessing_linear_get_rc,
+            out.preprocessing_linear_effective);
     out.search_get_rc = api.getintparam(
         env, kParamMipStrategySearch, &effective);
     if (out.search_get_rc == 0) {
@@ -6741,6 +6883,7 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
         out.threads_effective == out.threads_requested &&
         out.presolve_set_rc == 0 && out.presolve_get_rc == 0 &&
         out.presolve_effective == out.presolve_requested &&
+        out.continuous_branch_presolve_valid &&
         out.search_set_rc == 0 && out.search_get_rc == 0 &&
         out.search_effective == out.search_requested &&
         out.node_select_set_rc == 0 && out.node_select_get_rc == 0 &&
@@ -6752,7 +6895,9 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
          out.native_time_limit_effective == time_limit_seconds) &&
         strict_gaps_ok;
     if (!required_parameter_round_trips) {
-        out.fail_reason = "required_parameter_configuration_failed";
+        out.fail_reason = out.continuous_branch_presolve_valid
+            ? "required_parameter_configuration_failed"
+            : "continuous_branch_presolve_configuration_failed";
         finishEarly();
         return out;
     }
@@ -6939,9 +7084,17 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
                "parent_gamma_U,split,parent_relaxation,lower_uid,lower_gamma_L,lower_gamma_U,"
                "lower_estimate,lower_gamma_floor,lower_weighted_penalty_lb,"
                "lower_domain_estimate,lower_lift,lower_station_deviation_lbs,"
+               "lower_s_lower,lower_required_deviation,lower_deviation_lower_sum,"
+               "lower_deviation_upper_sum,lower_dispersion_penalty_lb,"
+               "lower_dispersion_bound_used,lower_domain_contradiction,"
+               "lower_validation_status,"
                "upper_uid,upper_gamma_L,upper_gamma_U,upper_estimate,"
                "upper_gamma_floor,upper_weighted_penalty_lb,upper_domain_estimate,"
-               "upper_lift,upper_station_deviation_lbs,estimate_mode,sibling_discriminated,creation_time,"
+               "upper_lift,upper_station_deviation_lbs,"
+               "upper_s_lower,upper_required_deviation,upper_deviation_lower_sum,"
+               "upper_deviation_upper_sum,upper_dispersion_penalty_lb,"
+               "upper_dispersion_bound_used,upper_domain_contradiction,"
+               "upper_validation_status,estimate_mode,sibling_discriminated,creation_time,"
                "creation_node_count,open_nodes,simplex_iterations,validity_status,"
                "failure_reason\n";
         callback_state.topology_trace = &topology_trace;
@@ -7308,6 +7461,28 @@ GlobalGiniTreeApiSolveResult solveGlobalGiniTreeWithTailoredBCCplexApi(
             << "presolve_requested," << out.presolve_requested << '\n'
             << "presolve_set_return_code," << out.presolve_set_rc << '\n'
             << "presolve_get_return_code," << out.presolve_get_rc << '\n'
+            << "preprocessing_reduce_parameter_id,"
+            << kParamPreprocessingReduce << '\n'
+            << "preprocessing_reduce_requested,"
+            << out.preprocessing_reduce_requested << '\n'
+            << "preprocessing_reduce_set_return_code,"
+            << out.preprocessing_reduce_set_rc << '\n'
+            << "preprocessing_reduce_get_return_code,"
+            << out.preprocessing_reduce_get_rc << '\n'
+            << "preprocessing_reduce_effective,"
+            << out.preprocessing_reduce_effective << '\n'
+            << "preprocessing_linear_parameter_id,"
+            << kParamPreprocessingLinear << '\n'
+            << "preprocessing_linear_requested,"
+            << out.preprocessing_linear_requested << '\n'
+            << "preprocessing_linear_set_return_code,"
+            << out.preprocessing_linear_set_rc << '\n'
+            << "preprocessing_linear_get_return_code,"
+            << out.preprocessing_linear_get_rc << '\n'
+            << "preprocessing_linear_effective,"
+            << out.preprocessing_linear_effective << '\n'
+            << "continuous_branch_presolve_valid,"
+            << (out.continuous_branch_presolve_valid ? 1 : 0) << '\n'
             << "search_requested," << out.search_requested << '\n'
             << "search_set_return_code," << out.search_set_rc << '\n'
             << "search_get_return_code," << out.search_get_rc << '\n'

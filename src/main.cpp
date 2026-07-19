@@ -55,7 +55,7 @@ void usage() {
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
         << "[--gini-cap <gamma>] [--gini-floor <gamma>] [--max-nodes <N>] [--frontier-intervals <N>] [--frontier-refine-splits <N>] "
         << "[--frontier-execution-mode scheduler|global-gini-tree] [--global-gini-tree-presolve on|off] "
-        << "[--global-gini-tree-search dynamic|traditional|auto] [--global-gini-tree-child-estimate parent-copy|factory-domain] "
+        << "[--global-gini-tree-search dynamic|traditional|auto] [--global-gini-tree-child-estimate parent-copy|dispersion-coupled|factory-domain] "
         << "[--global-gini-tree-row-attachment full-inherited-pack|exact-incremental-delta] [--global-gini-tree-row-timing deferred|eager] "
         << "[--global-gini-tree-native-mip-start true|false] [--global-gini-tree-root-connectivity-flow true|false] "
         << "[--global-gini-tree-root-connectivity-flow-variant off|round20-current|zero-return|normalized|normalized-start-coupled] [--global-gini-tree-node-trace <path>] "
@@ -1259,7 +1259,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     opt.global_gini_tree_child_estimate_mode =
         lowerAscii(opt.global_gini_tree_child_estimate_mode);
-    if (opt.global_gini_tree_child_estimate_mode != "factory-domain") {
+    if (opt.global_gini_tree_child_estimate_mode != "factory-domain" &&
+        opt.global_gini_tree_child_estimate_mode != "dispersion-coupled") {
         opt.global_gini_tree_child_estimate_mode = "parent-copy";
     }
     opt.global_gini_tree_row_attachment_mode =

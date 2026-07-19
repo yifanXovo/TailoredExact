@@ -71,4 +71,32 @@ bool exactIntervalCoverage(const GiniIntervalGeometry& parent,
     return true;
 }
 
+bool validNestedIntervalContraction(
+    const GiniIntervalGeometry& inherited,
+    const GiniIntervalGeometry& observed,
+    double tolerance,
+    std::string* reason) {
+    const double tol = std::max(0.0, tolerance);
+    if (!std::isfinite(inherited.lower) || !std::isfinite(inherited.upper) ||
+        !std::isfinite(observed.lower) || !std::isfinite(observed.upper)) {
+        if (reason) *reason = "nonfinite_interval_endpoint";
+        return false;
+    }
+    if (inherited.upper < inherited.lower - tol ||
+        observed.upper < observed.lower - tol) {
+        if (reason) *reason = "negative_interval_width";
+        return false;
+    }
+    if (observed.lower < inherited.lower - tol) {
+        if (reason) *reason = "observed_lower_expands_inherited_interval";
+        return false;
+    }
+    if (observed.upper > inherited.upper + tol) {
+        if (reason) *reason = "observed_upper_expands_inherited_interval";
+        return false;
+    }
+    if (reason) *reason = "valid_nested_interval_contraction";
+    return true;
+}
+
 } // namespace ebrp

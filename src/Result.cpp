@@ -852,6 +852,13 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.strict_certificate_class) << "\",\n";
     out << "  \"strict_certificate_rejection_reason\": \""
         << jsonEscape(result.strict_certificate_rejection_reason) << "\",\n";
+    out << "  \"strict_native_model_scope\": \""
+        << jsonEscape(result.strict_native_model_scope) << "\",\n";
+    out << "  \"strict_infeasibility_scope\": \""
+        << jsonEscape(result.strict_infeasibility_scope) << "\",\n";
+    out << "  \"feasibility_consistency_gate_passed\": "
+        << (result.feasibility_consistency_gate_passed ? "true" : "false")
+        << ",\n";
     out << "  \"strict_certified_original_problem\": "
         << (result.strict_certified_original_problem ? "true" : "false")
         << ",\n";
@@ -1141,6 +1148,26 @@ std::string resultToJson(const SolveResult& input) {
         << result.global_gini_tree_presolve_set_rc << ",\n";
     out << "  \"global_gini_tree_presolve_effective\": "
         << result.global_gini_tree_presolve_effective << ",\n";
+    out << "  \"global_gini_tree_preprocessing_reduce_requested\": "
+        << result.global_gini_tree_preprocessing_reduce_requested << ",\n";
+    out << "  \"global_gini_tree_preprocessing_reduce_set_rc\": "
+        << result.global_gini_tree_preprocessing_reduce_set_rc << ",\n";
+    out << "  \"global_gini_tree_preprocessing_reduce_get_rc\": "
+        << result.global_gini_tree_preprocessing_reduce_get_rc << ",\n";
+    out << "  \"global_gini_tree_preprocessing_reduce_effective\": "
+        << result.global_gini_tree_preprocessing_reduce_effective << ",\n";
+    out << "  \"global_gini_tree_preprocessing_linear_requested\": "
+        << result.global_gini_tree_preprocessing_linear_requested << ",\n";
+    out << "  \"global_gini_tree_preprocessing_linear_set_rc\": "
+        << result.global_gini_tree_preprocessing_linear_set_rc << ",\n";
+    out << "  \"global_gini_tree_preprocessing_linear_get_rc\": "
+        << result.global_gini_tree_preprocessing_linear_get_rc << ",\n";
+    out << "  \"global_gini_tree_preprocessing_linear_effective\": "
+        << result.global_gini_tree_preprocessing_linear_effective << ",\n";
+    out << "  \"global_gini_tree_continuous_branch_presolve_valid\": "
+        << (result.global_gini_tree_continuous_branch_presolve_valid
+                ? "true" : "false")
+        << ",\n";
     out << "  \"global_gini_tree_search_requested\": "
         << result.global_gini_tree_search_requested << ",\n";
     out << "  \"global_gini_tree_search_set_rc\": "
