@@ -132,6 +132,9 @@ struct TailoredBCCplexApiSolveResult {
     int status_code = 0;
     std::string status;
     std::string fail_reason;
+    int free_problem_return_code = -1;
+    int close_environment_return_code = -1;
+    bool lifecycle_valid = false;
     double objective = 0.0;
     double best_bound = 0.0;
     long long node_count = 0;

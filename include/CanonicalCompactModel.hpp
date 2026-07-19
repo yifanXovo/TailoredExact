@@ -26,6 +26,7 @@ struct CanonicalCompactModelArtifact {
     bool written = false;
     std::filesystem::path path;
     std::string sha256;
+    std::string row_signature;
     long long rows = 0;
     long long columns = 0;
     long long nonzeros = 0;

@@ -47,6 +47,7 @@ ALLOWLIST = {
 }
 
 ALLOW_PREFIXES = (
+    "scripts/analyze_",
     "scripts/summarize_",
     "scripts/run_",
 )

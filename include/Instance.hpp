@@ -99,6 +99,8 @@ struct SolveOptions {
     // interval adapter.  Legacy static/callback paths retain their frozen
     // historical tolerance unless this research-only flag is set.
     bool round24_external_exact_zero_gap = false;
+    bool round24_external_reuse_immutable_lp = false;
+    std::string round24_external_expected_lp_sha256;
     // Round 22 production provenance and shared dense native progress capture.
     bool round22_production_mode = false;
     std::string round22_source_commit_sha;

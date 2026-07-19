@@ -6621,8 +6621,11 @@ TailoredBCCplexApiSolveResult solveLpWithTailoredBCCplexApi(
         }
     }
     out.solved = status == 0 || out.status_code != 0 || out.callback_wall_time_abort;
-    api.freeprob(env, &lp);
-    api.close(&env);
+    out.free_problem_return_code = api.freeprob(env, &lp);
+    out.close_environment_return_code = api.close(&env);
+    out.lifecycle_valid = out.free_problem_return_code == 0 &&
+        out.close_environment_return_code == 0 && lp == nullptr &&
+        env == nullptr;
     if (api.dll) FreeLibrary(api.dll);
 #else
     out.fail_reason = "cplex_dynamic_callbacks_supported_only_on_windows";
