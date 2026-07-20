@@ -96,7 +96,7 @@ def enhanced_metrics(directory: Path) -> dict[str, Any]:
             "presolve_time_status": "unavailable_no_enhanced_attempt_trace",
             "root_time_status": "unavailable_no_enhanced_attempt_trace",
             "native_cut_count": "", "native_cut_count_status": "unavailable",
-            "native_open_nodes": "",
+            "native_open_nodes": "", "native_incumbent": "",
         }
     presolve_values = [float(record["presolve_time_seconds"])
                        for record in records
@@ -114,6 +114,10 @@ def enhanced_metrics(directory: Path) -> dict[str, Any]:
                    for record in records
                    if truth(record.get("open_nodes_available")) and
                    finite(record.get("open_nodes"))]
+    incumbent_values = [float(record["incumbent"])
+                        for record in records
+                        if truth(record.get("incumbent_available")) and
+                        finite(record.get("incumbent"))]
     return {
         "presolve_seconds": sum(presolve_values) if presolve_values
             else "unavailable",
@@ -126,6 +130,7 @@ def enhanced_metrics(directory: Path) -> dict[str, Any]:
         "native_cut_count_status": "available_native_api_sum" if cut_values
             else "unavailable_not_safely_reported",
         "native_open_nodes": max(open_values) if open_values else "",
+        "native_incumbent": min(incumbent_values) if incumbent_values else "",
     }
 
 
@@ -204,40 +209,38 @@ def run_rows() -> list[dict[str, Any]]:
                 if strict and authoritative else "",
             "authoritative": authoritative,
             "verified_witness": witness,
-            "native_incumbent": value(
-                result, "gurobi_obj_val", "native_mip_objective", "objective"),
-            "native_bound": value(
-                result, "gurobi_obj_bound_c", "native_mip_best_bound",
-                "external_gini_tree_global_lower_bound", "lower_bound"),
+            "native_incumbent": enhanced.get("native_incumbent", "")
+                if external else "",
+            "native_bound": result.get(
+                "external_gini_tree_global_lower_bound", "")
+                if external else "",
             "verified_ub": verified_ub,
             "final_lb": final_lb,
             "process_wall_seconds": value(
                 result, "final_process_wall_time_seconds", "runtime_seconds"),
-            "first_incumbent_seconds": value(
-                result, "external_gini_tree_first_incumbent_time_seconds",
-                "gurobi_first_incumbent_time", "first_incumbent_time", default=""),
-            "last_lb_improvement_seconds": value(
-                result, "external_gini_tree_last_global_lb_improvement_time_seconds",
-                "gurobi_last_lower_bound_improvement_time",
-                "last_bound_improvement_time", default=""),
-            "stagnation_seconds": value(
-                result, "external_gini_tree_final_stagnation_seconds", default=""),
-            "nodes": value(result, "external_gini_tree_nodes",
-                           "gurobi_node_count", "native_mip_node_count", "nodes", default=0),
-            "open_nodes": value(result, "open_nodes",
-                                "global_gini_tree_native_open_nodes",
-                                default=enhanced.get("native_open_nodes", "")),
-            "work": value(result, "external_gini_tree_work", "gurobi_work", default=""),
-            "simplex_iterations": value(
-                result, "external_gini_tree_simplex_iterations",
-                "gurobi_iter_count", "global_gini_tree_native_simplex_iterations",
-                default=""),
-            "barrier_iterations": value(
-                result, "external_gini_tree_barrier_iterations",
-                "gurobi_bar_iter_count", default=""),
-            "memory_gb": value(
-                result, "external_gini_tree_peak_memory_gb",
-                "gurobi_max_mem_used_gb", default=""),
+            "first_incumbent_seconds": result.get(
+                "external_gini_tree_first_incumbent_time_seconds", "")
+                if external else "",
+            "last_lb_improvement_seconds": result.get(
+                "external_gini_tree_last_global_lb_improvement_time_seconds", "")
+                if external else "",
+            "stagnation_seconds": result.get(
+                "external_gini_tree_final_stagnation_seconds", "")
+                if external else "",
+            "nodes": result.get("external_gini_tree_nodes", 0)
+                if external else 0,
+            "open_nodes": enhanced.get("native_open_nodes", "")
+                if external else "",
+            "work": result.get("external_gini_tree_work", "")
+                if external else "",
+            "simplex_iterations": result.get(
+                "external_gini_tree_simplex_iterations", "")
+                if external else "",
+            "barrier_iterations": result.get(
+                "external_gini_tree_barrier_iterations", "")
+                if external else "",
+            "memory_gb": result.get("external_gini_tree_peak_memory_gb", "")
+                if external else "",
             "hga_seconds": result.get("incumbent_generation_time_seconds", 0),
             "optimize_count": value(
                 result, "external_gini_tree_optimize_count",
@@ -297,9 +300,11 @@ def run_rows() -> list[dict[str, Any]]:
                 "external_gini_tree_warm_start_unknown_count", 0),
             "coverage_gate": external_gates if external else True,
             "lifecycle_gate": result.get(
-                "external_gini_tree_lifecycle_complete", True),
+                "external_gini_tree_lifecycle_complete", False)
+                if external else True,
             "consistency_gate": result.get(
-                "external_gini_tree_feasibility_consistency_gate", True),
+                "external_gini_tree_feasibility_consistency_gate", False)
+                if external else True,
             "verifier_gate": witness,
             "result_path": relative(directory / "result.json"),
             "run_dir": directory,
@@ -309,6 +314,20 @@ def run_rows() -> list[dict[str, Any]]:
         }
         if arm == "P-GRB":
             row.update({
+                "native_incumbent": result.get("gurobi_obj_val", "")
+                    if result.get("gurobi_obj_val_available", False) else "",
+                "native_bound": result.get("gurobi_obj_bound_c", "")
+                    if result.get("gurobi_obj_bound_c_available", False) else "",
+                "nodes": result.get("gurobi_node_count", 0),
+                "open_nodes": "",
+                "work": result.get("gurobi_work", ""),
+                "simplex_iterations": result.get("gurobi_iter_count", ""),
+                "barrier_iterations": result.get("gurobi_bar_iter_count", ""),
+                "memory_gb": result.get("gurobi_max_mem_used_gb", ""),
+                "first_incumbent_seconds": result.get(
+                    "gurobi_first_incumbent_time", ""),
+                "last_lb_improvement_seconds": result.get(
+                    "gurobi_last_lower_bound_improvement_time", ""),
                 "optimize_count": result.get("gurobi_optimize_count", 0),
                 "model_count": result.get("gurobi_model_count", 0),
                 "model_read_count": result.get("gurobi_model_read_count", 0),
@@ -317,6 +336,18 @@ def run_rows() -> list[dict[str, Any]]:
             })
         elif arm == "P-CPX":
             row.update({
+                "native_incumbent": result.get("native_mip_objective", "")
+                    if result.get("native_mip_objective_available", False) else "",
+                "native_bound": result.get("native_mip_best_bound", "")
+                    if result.get("native_mip_best_bound_available", False) else "",
+                "nodes": result.get("native_mip_node_count", 0),
+                "open_nodes": result.get("native_mip_open_node_count", "")
+                    if result.get("native_mip_open_node_count_available", False)
+                    else "",
+                "first_incumbent_seconds": result.get(
+                    "first_incumbent_time", ""),
+                "last_lb_improvement_seconds": result.get(
+                    "last_bound_improvement_time", ""),
                 "optimize_count": result.get("native_mip_mipopt_count", 0),
                 "model_count": result.get("native_mip_problem_count", 0),
                 "model_read_count": result.get("native_mip_model_read_count", 0),
@@ -325,12 +356,44 @@ def run_rows() -> list[dict[str, Any]]:
             })
         elif arm == "S0-SAFE":
             row.update({
+                "native_incumbent": result.get(
+                    "global_gini_tree_native_objective", "")
+                    if result.get("global_gini_tree_incumbent_verified", False)
+                    else "",
+                "native_bound": result.get(
+                    "global_gini_tree_native_best_bound", "")
+                    if result.get("global_gini_tree_native_best_bound_available", False)
+                    else "",
+                "nodes": result.get("native_mip_node_count", 0),
+                "open_nodes": result.get(
+                    "global_gini_tree_native_open_nodes", ""),
+                "simplex_iterations": result.get(
+                    "global_gini_tree_native_simplex_iterations", ""),
+                "first_incumbent_seconds": value(
+                    result, "incumbent_best_runtime",
+                    "incumbent_generation_time_seconds", default=""),
+                "last_lb_improvement_seconds": result.get(
+                    "last_bound_improvement_time", ""),
                 "optimize_count": result.get("global_gini_tree_mipopt_count", 0),
                 "model_count": result.get("global_gini_tree_problem_count", 0),
                 "model_read_count": result.get("global_gini_tree_model_read_count", 0),
                 "presolve_count": 0,
                 "root_count": 1 if result.get("global_gini_tree_mipopt_count", 0) else 0,
             })
+        if arm == "EXT-CPX":
+            # A zero observation is not evidence that CPLEX skipped the phase:
+            # its callable-library log routing does not safely isolate these
+            # timers per leaf on this build.
+            if row["presolve_time_status"] != "available_native_log_sum":
+                row["presolve_count"] = "unavailable"
+            if row["root_time_status"] != "available_native_log_sum":
+                row["root_count"] = "unavailable"
+        if (not external and finite(row.get("process_wall_seconds")) and
+                finite(row.get("last_lb_improvement_seconds")) and
+                float(row["last_lb_improvement_seconds"]) >= 0.0):
+            row["stagnation_seconds"] = max(
+                0.0, float(row["process_wall_seconds"]) -
+                float(row["last_lb_improvement_seconds"]))
         rows.append(row)
     return rows
 
@@ -574,7 +637,8 @@ def diagnostic_rows(rows: list[dict[str, Any]],
         else:
             attempts = int(float(row.get("attempt_count") or 0))
             fresh = int(float(row.get("fresh_restart_count") or 0))
-            presolve = int(float(row.get("presolve_count") or 0))
+            presolve = int(float(row.get("presolve_count") or 0)) \
+                if finite(row.get("presolve_count")) else 0
             hga = float(row.get("hga_seconds") or 0)
             artifact = float(row.get("artifact_generation_seconds") or 0)
             model_read = float(row.get("model_read_seconds") or 0)
