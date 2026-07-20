@@ -279,6 +279,7 @@ struct SolveResult {
     int gurobi_mip_gap_abs_set_return_code = -1;
     int gurobi_mip_gap_abs_get_return_code = -1;
     double gurobi_mip_gap_abs_effective = 0.0;
+    int gurobi_environment_creation_return_code = -1;
     long long gurobi_environment_count = 0;
     long long gurobi_model_count = 0;
     long long gurobi_model_read_count = 0;
@@ -528,11 +529,17 @@ struct SolveResult {
     double external_gini_tree_simplex_iterations = 0.0;
     double external_gini_tree_barrier_iterations = 0.0;
     double external_gini_tree_peak_memory_gb = 0.0;
+    double external_gini_tree_first_incumbent_time_seconds = -1.0;
+    double external_gini_tree_last_incumbent_improvement_time_seconds = -1.0;
+    double external_gini_tree_last_native_lb_improvement_time_seconds = -1.0;
+    double external_gini_tree_last_global_lb_improvement_time_seconds = -1.0;
+    double external_gini_tree_final_stagnation_seconds = 0.0;
     std::string external_gini_tree_event_trace_path;
     std::string external_gini_tree_leaf_ledger_path;
     std::string external_gini_tree_lifecycle_path;
     std::string external_gini_tree_optimize_ledger_path;
     std::string external_gini_tree_warm_start_audit_path;
+    std::string external_gini_tree_enhanced_attempt_trace_path;
     long long columns_generated_raw = 0;
     long long columns_after_dominance = 0;
     long long columns_dominated = 0;

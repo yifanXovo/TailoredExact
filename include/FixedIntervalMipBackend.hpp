@@ -67,6 +67,16 @@ struct FixedIntervalMipOutcome {
     double memory_gb = 0.0;
     double model_build_seconds = 0.0;
     double model_read_seconds = 0.0;
+    bool presolve_time_available = false;
+    double presolve_time_seconds = 0.0;
+    std::string presolve_time_status = "unavailable";
+    bool root_time_available = false;
+    double root_time_seconds = 0.0;
+    std::string root_time_status = "unavailable";
+    bool open_nodes_available = false;
+    double open_nodes = 0.0;
+    bool native_cut_count_available = false;
+    long long native_cut_count = 0;
     bool exact_zero_gap_roundtrip = false;
     bool model_fingerprint_matches_request = false;
     bool feasibility_consistency_gate = true;
