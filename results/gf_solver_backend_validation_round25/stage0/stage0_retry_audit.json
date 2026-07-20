@@ -1,0 +1,25 @@
+{
+  "affected_gate": "ephemeral_gurobi_cl_license_visibility",
+  "algorithm_or_solver_configuration_changed": false,
+  "first_attempt": {
+    "command_line_exit_code": 0,
+    "ephemeral_sensitive_marker_detected": true,
+    "ephemeral_output_deleted": true,
+    "in_process_environment_creation_return_code": 0,
+    "in_process_status": "OPTIMAL",
+    "outcome": "blocked_by_overconservative_log_classification"
+  },
+  "fix_commit": "b6b8a584",
+  "fix_scope": "The CLI usability check now uses exit code plus ResultFile materialization and never parses a log after a sensitive marker. The independent in-process C++ check remains the exact OPTIMAL-status gate.",
+  "official_rows_started_before_resolution": 0,
+  "retry": {
+    "command_line_exit_code": 0,
+    "command_line_result_file_written": true,
+    "ephemeral_output_deleted": true,
+    "independent_checks_agree": true,
+    "in_process_environment_creation_return_code": 0,
+    "in_process_status": "OPTIMAL",
+    "outcome": "passed"
+  },
+  "schema": "round25-stage0-retry-audit-v1"
+}

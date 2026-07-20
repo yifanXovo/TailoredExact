@@ -1,0 +1,65 @@
+
+Gurobi 13.0.2 (win64) logging started Tue Jul 21 02:40:58 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_solver_backend_validation_round25\runs\stage2__high_imbalance_seed4201__ext_grb_cold__1200s\external\native_logs\L2.0.0.1.0.0.1_attempt_1.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  2.5366657170000025e+01
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11902 rows, 3374 columns and 67341 nonzeros (Min)
+Model fingerprint: 0x7d714f1a
+Model has 21 linear objective coefficients
+Variable types: 1684 continuous, 1690 integer (1490 binary)
+Coefficient statistics:
+  Matrix range     [1e-02, 2e+04]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [5e-01, 2e+03]
+  RHS range        [5e-01, 5e+04]
+
+Presolved: 9746 rows, 3191 columns, 76161 nonzeros
+
+Continuing optimization...
+
+   577   485    2.75212   10  226          -    2.75203      -   124   30s
+   596   489    2.77329   19  127          -    2.75203      -   138   35s
+   641   486    2.75639   14  183          -    2.75203      -   143   40s
+   655   486    2.77822   21  143          -    2.75203      -   148   46s
+   673   483    2.76189   14  180          -    2.75203      -   158   50s
+   727   490    2.77536   17  148          -    2.75203      -   172   55s
+
+Cutting planes:
+  Learned: 13
+  Gomory: 5
+  Cover: 28
+  Implied bound: 57
+  Projected implied bound: 25
+  Clique: 13
+  MIR: 147
+  StrongCG: 8
+  Flow cover: 158
+  GUB cover: 1
+  Zero half: 4
+  Network: 10
+  RLT: 5
+  Relax-and-lift: 49
+  BQP: 10
+  PSD: 1
+
+Explored 728 nodes (151298 simplex iterations) in 55.37 seconds (99.79 work units)
+Most recent optimization runtime was 25.37 seconds (44.42 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound 2.752026341213e+00, gap -
+
+User-callback calls 7899, time in user-callback 0.00 sec

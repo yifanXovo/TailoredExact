@@ -1,0 +1,62 @@
+
+Gurobi 13.0.2 (win64) logging started Tue Jul 21 04:36:31 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_solver_backend_validation_round25\runs\stage2__moderate_seed4302__ext_grb_cold__1200s\external\native_logs\L1.1.0.1_attempt_1.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  60
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11919 rows, 3378 columns and 67378 nonzeros (Min)
+Model fingerprint: 0x74b9f862
+Model has 21 linear objective coefficients
+Variable types: 1686 continuous, 1692 integer (1492 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [2e-02, 8e+01]
+  RHS range        [2e-02, 5e+04]
+
+Presolved: 10587 rows, 3111 columns, 71751 nonzeros
+
+Continuing optimization...
+
+   629   379    0.02770   25  187          -    0.01972      -   310   30s
+   742   407    0.02164   19  114          -    0.01977      -   312   35s
+   755   416    0.02127   18  194          -    0.01977      -   307   40s
+   763   421    0.03409   25  152          -    0.01977      -   303   45s
+   778   431    0.02142   20  104          -    0.01977      -   396   50s
+   815   434    0.02243   17  182          -    0.01977      -   396   55s
+   856   437    0.02098   19  130          -    0.01977      -   402   64s
+   858   436    0.02113   20  116          -    0.01977      -   404   75s
+   965   446    0.01977   17  149          -    0.01977      -   401   80s
+  1016   450    0.02110   20  106          -    0.01977      -   426   85s
+
+Cutting planes:
+  Learned: 11
+  Gomory: 3
+  Cover: 12
+  Implied bound: 96
+  Clique: 2
+  MIR: 111
+  Flow cover: 10
+  GUB cover: 1
+  Relax-and-lift: 5
+
+Explored 1139 nodes (489310 simplex iterations) in 90.00 seconds (180.54 work units)
+Most recent optimization runtime was 60.00 seconds (115.01 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound 1.976716638587e-02, gap -
+
+User-callback calls 17174, time in user-callback 0.00 sec

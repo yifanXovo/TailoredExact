@@ -1,0 +1,64 @@
+
+Gurobi 13.0.2 (win64) logging started Mon Jul 20 17:27:13 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_solver_backend_validation_round25\runs\stage1__high_imbalance_seed4201__ext_grb_warm__900s\external\native_logs\L2.0.0.1.1_attempt_1.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  2.7724633744000016e+01
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11902 rows, 3374 columns and 67341 nonzeros (Min)
+Model fingerprint: 0xaec5531b
+Model has 21 linear objective coefficients
+Variable types: 1684 continuous, 1690 integer (1490 binary)
+Coefficient statistics:
+  Matrix range     [1e-02, 2e+04]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [5e-01, 2e+03]
+  RHS range        [5e-01, 5e+04]
+
+Presolved: 9746 rows, 3191 columns, 76401 nonzeros
+
+Continuing optimization...
+
+   701   449    2.76577   16  156    2.78330    2.76577  0.63%   110   30s
+   820   440    2.77764   38   94    2.78330    2.76577  0.63%   111   35s
+  1071   423    2.77054   17  129    2.78330    2.76943  0.50%   109   40s
+  1565   427    2.77845   32  118    2.78330    2.77468  0.31%  92.8   45s
+  2146   256    2.78287   25   87    2.78330    2.77780  0.20%  87.2   50s
+  2958   164    2.78072   28   94    2.78330    2.78058  0.10%  79.2   56s
+
+Cutting planes:
+  Learned: 5
+  Cover: 54
+  Implied bound: 105
+  Projected implied bound: 16
+  Clique: 18
+  MIR: 168
+  StrongCG: 11
+  Flow cover: 241
+  GUB cover: 7
+  Zero half: 7
+  Network: 2
+  RLT: 13
+  Relax-and-lift: 16
+  BQP: 3
+  PSD: 1
+
+Explored 3322 nodes (280536 simplex iterations) in 57.73 seconds (103.74 work units)
+Most recent optimization runtime was 27.73 seconds (47.86 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 2: 2.7833 2.7833 
+
+Time limit reached
+Best objective 2.783296190895e+00, best bound 2.781396415292e+00, gap 0.0683%
+
+User-callback calls 12973, time in user-callback 0.01 sec

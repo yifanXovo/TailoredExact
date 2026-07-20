@@ -331,11 +331,14 @@ def sensitive_marker_present(directory: Path) -> bool:
     return False
 
 
-def compress_large_files(directory: Path) -> list[dict[str, Any]]:
+def compress_large_files(
+        directory: Path, min_bytes: int = COMPRESSION_THRESHOLD,
+        suffixes: tuple[str, ...] = (".csv", ".log", ".lp"),
+        manifest_name: str = "compression_manifest.csv") -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
     for path in sorted(directory.rglob("*")):
-        if (not path.is_file() or path.stat().st_size < COMPRESSION_THRESHOLD or
-                path.suffix.lower() not in (".csv", ".log", ".lp")):
+        if (not path.is_file() or path.stat().st_size < min_bytes or
+                path.suffix.lower() not in suffixes):
             continue
         target = Path(str(path) + ".gz")
         original_sha = sha256(path)
@@ -365,7 +368,7 @@ def compress_large_files(directory: Path) -> list[dict[str, Any]]:
             "compression": "gzip_level9_mtime0_filename_omitted",
         })
     if records:
-        csv_write(directory / "compression_manifest.csv", records,
+        csv_write(directory / manifest_name, records,
                   list(records[0]))
     return records
 

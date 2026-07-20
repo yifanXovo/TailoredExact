@@ -1,0 +1,63 @@
+
+Gurobi 13.0.2 (win64) logging started Tue Jul 21 06:34:31 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_solver_backend_validation_round25\runs\stage2__tight_T_seed3101__ext_grb_cold__1200s\external\native_logs\L1.1.0.1.0.0.0.1_attempt_1.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  2.5174282282000064e+01
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11940 rows, 3384 columns and 67426 nonzeros (Min)
+Model fingerprint: 0x78f346d9
+Model has 21 linear objective coefficients
+Variable types: 1689 continuous, 1695 integer (1495 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [4e-02, 2e+02]
+  RHS range        [4e-02, 5e+04]
+
+Presolved: 10261 rows, 3224 columns, 73962 nonzeros
+
+Continuing optimization...
+
+   238   134    0.05566    7  203          -    0.05536      -   451   30s
+   302   150    0.05627    6  246          -    0.05537      -   466   35s
+   396   186    0.06020   10  180          -    0.05548      -   470   40s
+   477   199    0.05655    8  179          -    0.05553      -   478   45s
+   521   209    0.05593    5  188          -    0.05561      -   476   50s
+   634   238    0.06228   11  147          -    0.05563      -   460   55s
+
+Cutting planes:
+  Learned: 11
+  Gomory: 3
+  Cover: 32
+  Implied bound: 104
+  Clique: 16
+  MIR: 315
+  StrongCG: 9
+  Flow cover: 63
+  GUB cover: 1
+  Zero half: 4
+  Network: 16
+  RLT: 8
+  Relax-and-lift: 68
+  BQP: 8
+
+Explored 637 nodes (339452 simplex iterations) in 55.17 seconds (127.96 work units)
+Most recent optimization runtime was 25.17 seconds (59.50 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound 5.562927149183e-02, gap -
+
+User-callback calls 3748, time in user-callback 0.00 sec

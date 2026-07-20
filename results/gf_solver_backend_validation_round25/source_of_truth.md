@@ -18,6 +18,16 @@ executables recorded in `round25_build_manifest.json`.  The Gurobi-enabled
 executable is frozen for every official and diagnostic row.  The CPLEX-only
 executable is a qualification control.
 
+The frozen solver executable was built from implementation commit
+`2017358042c48c44c4386256a904bba0f3bcbf85`; the protocol/manifests were frozen
+in `9268330c883a58d6674caebad04c19751417a947`.  The later sanitized-license
+harness correction (`b6b8a584`) occurred before any official row and changed
+only qualification classification.  The later metric-extraction correction
+(`1f481b4b`) and final analysis/package work change reporting only: they do not
+alter the frozen executable, mathematical options, row order, trigger inputs,
+or any retained solver result.  The final package audit independently restores
+and hash-verifies every compressed artifact.
+
 Pre-existing tracked modifications and untracked paths were present before
 Round 25.  They remain user-owned and are excluded from all Round 25 commits.
 The provenance snapshots in this package document them without modifying their
@@ -26,4 +36,3 @@ contents.
 The authorized Gurobi license is exposed only as `GRB_LICENSE_FILE` in child
 process environments.  Its file is never opened, copied, hashed, printed, or
 serialized.  Audit output records only nonsensitive booleans and return codes.
-
