@@ -2,10 +2,12 @@
 
 #include "CanonicalCompactModel.hpp"
 #include "ControllingLeafScheduler.hpp"
+#include "ConnectivityFlow.hpp"
 #include "CplexBaseline.hpp"
 #include "Evaluator.hpp"
 #include "FileSha256.hpp"
 #include "GiniFrontierGeometry.hpp"
+#include "StrictCertificate.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -16,6 +18,7 @@
 #include <limits>
 #include <memory>
 #include <sstream>
+#include <unordered_map>
 
 namespace ebrp {
 namespace {
@@ -85,11 +88,11 @@ public:
         local.threads = 1;
         local.cplex_threads = 1;
         local.round24_external_exact_zero_gap = true;
-        if (request.canonical_model_path.has_parent_path()) {
-            const auto dir = request.canonical_model_path.parent_path();
-            local.log_path = (dir / (request.leaf_id + "_attempt_" +
-                std::to_string(request.attempt_number) + ".cplex.log")).string();
-        }
+        local.round24_external_reuse_immutable_lp = true;
+        local.round24_external_expected_lp_sha256 =
+            request.canonical_model_fingerprint;
+        local.log_path = request.native_log_path.string();
+        out.native_log_path = local.log_path;
 
         const auto began = Clock::now();
         const SolveResult solved = solveIntervalExactCutoffOracle(instance_, local);
@@ -108,23 +111,63 @@ public:
         stats_.cumulative_nodes += static_cast<double>(solved.nodes);
 
         out.solver_finalization_reached =
-            !solved.interval_exact_cutoff_solver_status.empty();
+            solved.interval_exact_cutoff_native_status_available &&
+            solved.interval_exact_cutoff_native_lifecycle_valid;
         out.native_status = solved.interval_exact_cutoff_solver_status;
+        out.native_status_code =
+            solved.interval_exact_cutoff_native_status_code;
         out.optimize_return_code = solved.process_return_code;
-        out.optimal = out.native_status.find("optimal") != std::string::npos;
-        out.infeasible = solved.interval_exact_cutoff_proven_infeasible &&
-            !solved.interval_exact_cutoff_feasible_improving;
-        out.interrupted = solved.interval_exact_cutoff_timeout ||
-            solved.status == "interval_unresolved_timeout";
-        out.native_bound_available = solved.interval_oracle_can_merge_bound &&
-            std::isfinite(solved.lower_bound);
-        out.native_bound = solved.lower_bound;
-        out.nodes = static_cast<double>(solved.nodes);
         out.exact_zero_gap_roundtrip =
             solved.compact_bc_native_exact_zero_gaps_valid;
         out.model_fingerprint_matches_request =
             fileSha256(request.canonical_model_path) ==
             request.canonical_model_fingerprint;
+        bool witness_contradicts_infeasibility = false;
+        if (!request.verified_start_routes.empty()) {
+            const Verification witness = verifySolution(
+                instance_, request.verified_start_routes, options_.lambda);
+            witness_contradicts_infeasibility =
+                witness.original_solution_feasible &&
+                witness.original_objective_recomputed &&
+                witness.errors.empty() &&
+                witness.G >= request.gamma_L - 1e-9 &&
+                witness.G <= request.gamma_U + 1e-9 &&
+                witness.objective <= request.verified_cutoff + 1e-9;
+        }
+        ExternalCplexLeafStatusInput status_input;
+        status_input.native_status_code = out.native_status_code;
+        status_input.exact_zero_gap_roundtrip =
+            out.exact_zero_gap_roundtrip;
+        status_input.solver_finalization_reached =
+            out.solver_finalization_reached;
+        status_input.lifecycle_complete =
+            solved.interval_exact_cutoff_native_lifecycle_valid;
+        status_input.model_fingerprint_matches =
+            out.model_fingerprint_matches_request;
+        status_input.verified_witness_contradicts_infeasibility =
+            witness_contradicts_infeasibility;
+        const ExternalCplexLeafStatusDecision status_decision =
+            evaluateExternalCplexLeafStatus(status_input);
+        out.native_status_supported = status_decision.native_status_supported;
+        out.native_exact_optimal = status_decision.exact_optimal;
+        out.native_tolerance_optimal = status_decision.tolerance_optimal;
+        out.native_optimal_unscaled_infeasibilities =
+            status_decision.optimal_unscaled_infeasibilities;
+        out.optimal = status_decision.exact_optimal &&
+            status_decision.may_close_leaf;
+        out.infeasible = status_decision.infeasible &&
+            status_decision.may_close_leaf &&
+            solved.interval_exact_cutoff_proven_infeasible &&
+            !solved.interval_exact_cutoff_feasible_improving;
+        out.interrupted = status_decision.interrupted;
+        out.feasibility_consistency_gate =
+            status_decision.feasibility_consistency_gate;
+        out.native_bound_available = solved.interval_oracle_can_merge_bound &&
+            std::isfinite(solved.lower_bound) &&
+            out.model_fingerprint_matches_request &&
+            solved.interval_exact_cutoff_native_lifecycle_valid;
+        out.native_bound = solved.lower_bound;
+        out.nodes = static_cast<double>(solved.nodes);
         if (!solved.routes.empty()) {
             const Verification verification =
                 verifySolution(instance_, solved.routes, options_.lambda);
@@ -140,12 +183,17 @@ public:
         }
         if (!out.solver_finalization_reached ||
             !out.exact_zero_gap_roundtrip ||
-            !out.model_fingerprint_matches_request) {
+            !out.model_fingerprint_matches_request ||
+            !out.feasibility_consistency_gate) {
             std::ostringstream reason;
             reason << "cplex_external_gate:finalized="
                    << out.solver_finalization_reached
                    << ";exact_zero_gaps=" << out.exact_zero_gap_roundtrip
                    << ";model_match=" << out.model_fingerprint_matches_request
+                   << ";feasibility_consistency="
+                   << out.feasibility_consistency_gate
+                   << ";native_status_code=" << out.native_status_code
+                   << ";status_class=" << status_decision.status_class
                    << ";status=" << solved.status;
             out.failure_reason = reason.str();
         } else {
@@ -174,6 +222,18 @@ void copyBackendStats(SolveResult& result,
     result.external_gini_tree_fresh_restart_count = stats.fresh_restart_count;
     result.external_gini_tree_child_restart_count = stats.child_restart_count;
     result.external_gini_tree_reset_call_count = stats.reset_call_count;
+    result.external_gini_tree_confirmed_continuation_count =
+        stats.confirmed_continuation_count;
+    result.external_gini_tree_partial_state_reuse_count =
+        stats.partial_state_reuse_count;
+    result.external_gini_tree_observed_fresh_restart_count =
+        stats.observed_fresh_restart_count;
+    result.external_gini_tree_ambiguous_retained_state_count =
+        stats.ambiguous_retained_state_count;
+    result.external_gini_tree_presolve_execution_count =
+        stats.presolve_execution_count;
+    result.external_gini_tree_root_relaxation_execution_count =
+        stats.root_relaxation_execution_count;
     result.external_gini_tree_warm_start_candidate_count =
         stats.warm_start_candidate_count;
     result.external_gini_tree_warm_start_complete_count =
@@ -206,6 +266,101 @@ void copyBackendStats(SolveResult& result,
 std::unique_ptr<FixedIntervalMipBackend> makeCplexFixedIntervalBackend(
     const Instance& instance, const SolveOptions& options) {
     return std::make_unique<CplexFixedIntervalBackend>(instance, options);
+}
+
+ExternalCplexLeafStatusDecision evaluateExternalCplexLeafStatus(
+    const ExternalCplexLeafStatusInput& input) {
+    ExternalCplexLeafStatusDecision out;
+    const bool common_gate = input.solver_finalization_reached &&
+        input.lifecycle_complete && input.model_fingerprint_matches;
+    switch (input.native_status_code) {
+    case kCplexMipOptimal:
+        out.native_status_supported = true;
+        out.exact_optimal = true;
+        out.status_class = "native_exact_optimal";
+        out.may_close_leaf = common_gate &&
+            input.exact_zero_gap_roundtrip;
+        out.rejection_reason = out.may_close_leaf ? "none" :
+            "exact_optimal_engineering_gate_failed";
+        break;
+    case kCplexMipOptimalTolerance:
+        out.native_status_supported = true;
+        out.tolerance_optimal = true;
+        out.status_class = "native_tolerance_optimal";
+        out.rejection_reason = "tolerance_optimal_not_exact";
+        break;
+    case kCplexMipInfeasible:
+        out.native_status_supported = true;
+        out.infeasible = true;
+        out.status_class = "native_fixed_interval_cutoff_infeasible";
+        out.feasibility_consistency_gate =
+            !input.verified_witness_contradicts_infeasibility;
+        out.may_close_leaf = common_gate &&
+            out.feasibility_consistency_gate;
+        out.rejection_reason = out.may_close_leaf ? "none" :
+            (out.feasibility_consistency_gate
+                ? "infeasible_engineering_gate_failed"
+                : "verified_witness_contradicts_fixed_interval_infeasibility");
+        break;
+    case kCplexMipTimeLimitFeasible:
+        out.native_status_supported = true;
+        out.interrupted = true;
+        out.status_class = "native_time_limit_with_incumbent";
+        out.rejection_reason = "time_limit_not_exact";
+        break;
+    case kCplexMipTimeLimitNoIncumbent:
+        out.native_status_supported = true;
+        out.interrupted = true;
+        out.status_class = "native_time_limit_without_incumbent";
+        out.rejection_reason = "time_limit_not_exact";
+        break;
+    case kCplexMipOptimalUnscaledInfeasibilities:
+        out.native_status_supported = true;
+        out.optimal_unscaled_infeasibilities = true;
+        out.status_class = "native_optimal_unscaled_infeasibilities";
+        out.rejection_reason = "unscaled_infeasibilities_not_exact";
+        break;
+    default:
+        out.status_class = "unsupported_native_status";
+        out.rejection_reason = "unsupported_native_status_code:" +
+            std::to_string(input.native_status_code);
+        break;
+    }
+    return out;
+}
+
+bool immutableLeafArtifactReusable(
+    const ImmutableLeafArtifactContract& cached,
+    const ImmutableLeafArtifactContract& requested,
+    std::string* rejection_reason) {
+    auto reject = [&](const std::string& reason) {
+        if (rejection_reason) *rejection_reason = reason;
+        return false;
+    };
+    if (cached.leaf_id != requested.leaf_id) return reject("leaf_id_changed");
+    if (std::fabs(cached.gamma_L - requested.gamma_L) > 1e-12) {
+        return reject("gamma_L_changed");
+    }
+    if (std::fabs(cached.gamma_U - requested.gamma_U) > 1e-12) {
+        return reject("gamma_U_changed");
+    }
+    if (std::fabs(cached.cutoff - requested.cutoff) > 1e-12) {
+        return reject("cutoff_changed");
+    }
+    if (cached.path != requested.path) return reject("path_changed");
+    if (cached.sha256.empty() || cached.sha256 != requested.sha256) {
+        return reject("sha256_changed_or_empty");
+    }
+    if (cached.model_scope.empty() ||
+        cached.model_scope != requested.model_scope) {
+        return reject("model_scope_changed_or_empty");
+    }
+    if (cached.row_signature.empty() ||
+        cached.row_signature != requested.row_signature) {
+        return reject("row_signature_changed_or_empty");
+    }
+    if (rejection_reason) *rejection_reason = "none";
+    return true;
 }
 
 ExternalGiniTreeCertificateDecision evaluateExternalGiniTreeCertificate(
@@ -266,6 +421,43 @@ SolveResult solveExternalGiniTree(const Instance& instance,
     result.certificate = "External global-Gini tree not finalized.";
     result.status = "external_gini_tree_running";
 
+    const ConnectivityFlowVariantResolution flow_resolution =
+        resolveConnectivityFlowVariant(
+            options.global_gini_tree_root_connectivity_flow,
+            options.global_gini_tree_root_connectivity_flow_variant);
+    result.global_gini_tree_root_connectivity_flow_variant_requested =
+        flow_resolution.requested.empty() ? "invalid" : flow_resolution.requested;
+    result.global_gini_tree_root_connectivity_flow_variant_resolved =
+        flow_resolution.valid ? flow_resolution.resolved : "invalid";
+    const ConnectivityFlowCounts flow_counts = flow_resolution.valid
+        ? connectivityFlowTheoreticalCounts(
+              flow_resolution.variant, instance.V, instance.M)
+        : ConnectivityFlowCounts{};
+    if (!flow_resolution.valid || !flow_counts.valid) {
+        result.status = "external_gini_tree_invalid_connectivity_flow_variant";
+        result.external_gini_tree_failure_reason = flow_resolution.valid
+            ? flow_counts.failure_reason : flow_resolution.failure_reason;
+        result.runtime_seconds = elapsed();
+        result.wall_time_seconds = result.runtime_seconds;
+        return result;
+    }
+    result.global_gini_tree_connectivity_flow_columns = flow_counts.columns;
+    result.global_gini_tree_connectivity_flow_upper_link_rows =
+        flow_counts.upper_link_rows;
+    result.global_gini_tree_connectivity_flow_lower_link_rows =
+        flow_counts.lower_link_rows;
+    result.global_gini_tree_connectivity_flow_station_balance_rows =
+        flow_counts.station_balance_rows;
+    result.global_gini_tree_connectivity_flow_depot_balance_rows =
+        flow_counts.depot_balance_rows;
+    result.global_gini_tree_connectivity_flow_start_upper_rows =
+        flow_counts.start_upper_rows;
+    result.global_gini_tree_connectivity_flow_start_lower_rows =
+        flow_counts.start_lower_rows;
+    result.global_gini_tree_connectivity_flow_total_rows = flow_counts.total_rows;
+    result.global_gini_tree_connectivity_flow_total_nonzeros =
+        flow_counts.total_nonzeros;
+
     const bool verified_seed_valid = verified_seed.verification.original_solution_feasible &&
         verified_seed.verification.original_objective_recomputed &&
         verified_seed.verification.errors.empty() &&
@@ -324,6 +516,7 @@ SolveResult solveExternalGiniTree(const Instance& instance,
                  options.external_gini_backend + "_" + std::to_string(stamp))
             : std::filesystem::path(options.external_gini_artifact_dir);
     std::filesystem::create_directories(artifact_dir / "models");
+    std::filesystem::create_directories(artifact_dir / "native_logs");
     const auto event_path = artifact_dir / "external_tree_events.csv";
     const auto leaf_path = artifact_dir / "external_leaf_ledger.csv";
     const auto lifecycle_path = artifact_dir / "leaf_model_lifecycle.csv";
@@ -336,8 +529,8 @@ SolveResult solveExternalGiniTree(const Instance& instance,
     result.external_gini_tree_warm_start_audit_path = warm_path.string();
     std::ofstream events(event_path), lifecycle(lifecycle_path), optimize(optimize_path), warm(warm_path);
     events << "elapsed_seconds,event,leaf_id,gamma_L,gamma_U,attempt,native_status,native_bound,native_bound_available,incumbent,incumbent_available,global_lb,verified_ub,open_leaf_count,failure_reason\n";
-    lifecycle << "leaf_id,attempt,new_leaf,same_leaf_retained,fresh_restart,child_restart,reset_called,continuation_claimed,continuation_evidence,model_fingerprint_match\n";
-    optimize << "leaf_id,attempt,time_limit_seconds,solver_runtime_seconds,work,nodes,simplex_iterations,barrier_iterations,optimize_return_code\n";
+    lifecycle << "leaf_id,attempt,new_leaf,same_leaf_retained,fresh_restart,child_restart,reset_called,model_modified,retained_state_classification,continuation_claimed,continuation_evidence,presolve_rerun,root_relaxation_rerun,incumbent_state_reused,model_fingerprint_match,native_log_path\n";
+    optimize << "leaf_id,attempt,time_limit_seconds,solver_runtime_seconds,work,nodes,simplex_iterations,barrier_iterations,cumulative_runtime,cumulative_work,cumulative_nodes,cumulative_simplex_iterations,cumulative_barrier_iterations,optimize_return_code\n";
     warm << "leaf_id,attempt,candidate_available,mapping_complete,submitted,status,mapping_seconds\n";
 
     ControllingLeafScheduler scheduler(1e-7);
@@ -367,6 +560,16 @@ SolveResult solveExternalGiniTree(const Instance& instance,
 
     double verified_ub = verified_seed.objective;
     double controller_model_build_seconds = 0.0;
+    struct CachedLeafArtifact {
+        CanonicalCompactModelArtifact model;
+        double gamma_L = 0.0;
+        double gamma_U = 0.0;
+        double cutoff = 0.0;
+        std::string model_scope;
+        std::string row_signature;
+        long long reuse_count = 0;
+    };
+    std::unordered_map<std::string, CachedLeafArtifact> artifact_cache;
     std::vector<RoutePlan> best_routes = verified_seed.routes;
     std::string best_source = "same_run_verified_hga";
     const double reserve = ControllingLeafScheduler::finalizationReserveSeconds(
@@ -399,15 +602,21 @@ SolveResult solveExternalGiniTree(const Instance& instance,
                 selected->gamma_L, selected->gamma_U, selected->split_depth,
                 options.frontier_adaptive_max_depth,
                 options.frontier_adaptive_min_width)) {
+            // splitLeafAtomically may grow the scheduler's leaf vector and
+            // invalidate selected.  Preserve every value needed after the
+            // mutation before handing the children to the scheduler.
+            const std::string selected_id = selected->id;
+            const double selected_gamma_L = selected->gamma_L;
+            const double selected_gamma_U = selected->gamma_U;
             const auto geometry = splitLegacyFrontierInterval(
-                selected->gamma_L, selected->gamma_U,
+                selected_gamma_L, selected_gamma_U,
                 options.frontier_adaptive_split_factor);
             std::vector<ControllingLeaf> children;
             children.reserve(geometry.size());
             for (std::size_t index = 0; index < geometry.size(); ++index) {
                 ControllingLeaf child;
                 child.id = selected->id + "." + std::to_string(index);
-                child.parent_id = selected->id;
+                child.parent_id = selected_id;
                 child.child_index = static_cast<int>(index);
                 child.split_depth = selected->split_depth + 1;
                 child.gamma_L = geometry[index].lower;
@@ -419,15 +628,15 @@ SolveResult solveExternalGiniTree(const Instance& instance,
                 children.push_back(child);
             }
             std::string reason;
-            if (!scheduler.splitLeafAtomically(selected->id, children, &reason)) {
+            if (!scheduler.splitLeafAtomically(selected_id, children, &reason)) {
                 hard_failure = true;
                 result.external_gini_tree_failure_reason =
                     "atomic_split_failed:" + reason;
             } else {
                 ++result.external_gini_tree_split_count;
                 events << std::setprecision(17) << elapsed() << ",split,"
-                       << selected->id << ',' << selected->gamma_L << ','
-                       << selected->gamma_U
+                       << selected_id << ',' << selected_gamma_L << ','
+                       << selected_gamma_U
                        << ",-1,not_run,0,false,0,false,"
                        << scheduler.globalLowerBound() << ',' << verified_ub
                        << ',' << scheduler.controllingSet().size() << ",none\n";
@@ -446,17 +655,68 @@ SolveResult solveExternalGiniTree(const Instance& instance,
         model_spec.add_verified_incumbent_row = true;
         model_spec.verified_incumbent = verified_seed.objective;
         model_spec.incumbent_epsilon = 0.0;
-        const auto build_started = Clock::now();
-        const CanonicalCompactModelArtifact model = writeCanonicalCompactModel(
-            instance, options, model_path, model_spec);
-        const double build_seconds = std::chrono::duration<double>(
-            Clock::now() - build_started).count();
-        controller_model_build_seconds += build_seconds;
-        if (!model.written) {
-            hard_failure = true;
-            result.external_gini_tree_failure_reason =
-                "static_leaf_model_build_failed:" + model.failure_reason;
-            break;
+        CanonicalCompactModelArtifact model;
+        double build_seconds = 0.0;
+        auto cached = artifact_cache.find(selected->id);
+        if (cached == artifact_cache.end()) {
+            const auto build_started = Clock::now();
+            model = writeCanonicalCompactModel(
+                instance, options, model_path, model_spec);
+            build_seconds = std::chrono::duration<double>(
+                Clock::now() - build_started).count();
+            controller_model_build_seconds += build_seconds;
+            ++result.external_gini_tree_canonical_artifact_generation_count;
+            if (!model.written) {
+                hard_failure = true;
+                result.external_gini_tree_failure_reason =
+                    "static_leaf_model_build_failed:" + model.failure_reason;
+                break;
+            }
+            CachedLeafArtifact entry;
+            entry.model = model;
+            entry.gamma_L = selected->gamma_L;
+            entry.gamma_U = selected->gamma_U;
+            entry.cutoff = verified_seed.objective;
+            entry.model_scope = model.model_scope;
+            entry.row_signature = model.row_signature;
+            cached = artifact_cache.emplace(selected->id, std::move(entry)).first;
+        } else {
+            ImmutableLeafArtifactContract cached_contract;
+            cached_contract.leaf_id = selected->id;
+            cached_contract.gamma_L = cached->second.gamma_L;
+            cached_contract.gamma_U = cached->second.gamma_U;
+            cached_contract.cutoff = cached->second.cutoff;
+            cached_contract.path = cached->second.model.path;
+            cached_contract.sha256 = cached->second.model.sha256;
+            cached_contract.model_scope = cached->second.model_scope;
+            cached_contract.row_signature = cached->second.row_signature;
+            ImmutableLeafArtifactContract requested_contract;
+            requested_contract.leaf_id = selected->id;
+            requested_contract.gamma_L = selected->gamma_L;
+            requested_contract.gamma_U = selected->gamma_U;
+            requested_contract.cutoff = verified_seed.objective;
+            requested_contract.path = model_path;
+            requested_contract.sha256 = cached->second.model.sha256;
+            requested_contract.model_scope =
+                "complete_original_compact_milp_intersected_with_static_gini_interval";
+            requested_contract.row_signature = cached->second.model.row_signature;
+            std::string immutable_reason;
+            const bool immutable_contract = immutableLeafArtifactReusable(
+                cached_contract, requested_contract, &immutable_reason) &&
+                std::filesystem::exists(cached->second.model.path) &&
+                fileSha256(cached->second.model.path) ==
+                    cached->second.model.sha256;
+            if (!immutable_contract) {
+                ++result.external_gini_tree_canonical_artifact_invalidation_count;
+                hard_failure = true;
+                result.external_gini_tree_failure_reason =
+                    "immutable_leaf_artifact_contract_changed:" + selected->id +
+                    ":" + immutable_reason;
+                break;
+            }
+            ++cached->second.reuse_count;
+            ++result.external_gini_tree_canonical_artifact_cache_hit_count;
+            model = cached->second.model;
         }
         FixedIntervalMipRequest request;
         request.leaf_id = selected->id;
@@ -469,6 +729,12 @@ SolveResult solveExternalGiniTree(const Instance& instance,
         request.warm_start_enabled = options.external_gini_warm_start;
         request.canonical_model_path = model.path;
         request.canonical_model_fingerprint = model.sha256;
+        request.canonical_model_scope = model.model_scope;
+        request.canonical_row_signature = model.row_signature;
+        request.native_log_path = artifact_dir / "native_logs" /
+            (selected->id + "_attempt_" +
+             std::to_string(request.attempt_number) + "." +
+             options.external_gini_backend + ".log");
         request.verified_start_routes = best_routes;
         request.verified_start_source = best_source;
         const double attempt_start = elapsed();
@@ -531,7 +797,8 @@ SolveResult solveExternalGiniTree(const Instance& instance,
         }
         if (!outcome.available || !outcome.solver_finalization_reached ||
             !outcome.exact_zero_gap_roundtrip ||
-            !outcome.model_fingerprint_matches_request) {
+            !outcome.model_fingerprint_matches_request ||
+            !outcome.feasibility_consistency_gate) {
             hard_failure = true;
             result.external_gini_tree_failure_reason = outcome.failure_reason.empty()
                 ? "backend_evidence_gate_failed" : outcome.failure_reason;
@@ -550,14 +817,24 @@ SolveResult solveExternalGiniTree(const Instance& instance,
                   << new_leaf << ',' << outcome.same_leaf_model_retained << ','
                   << outcome.fresh_restart << ',' << outcome.child_restart << ','
                   << outcome.reset_called << ','
+                  << outcome.native_model_modified << ','
+                  << csvEscape(outcome.retained_state_classification) << ','
                   << outcome.native_continuation_claimed << ','
                   << outcome.native_continuation_evidence << ','
-                  << outcome.model_fingerprint_matches_request << '\n';
+                  << outcome.presolve_rerun_observed << ','
+                  << outcome.root_relaxation_rerun_observed << ','
+                  << outcome.incumbent_state_reused << ','
+                  << outcome.model_fingerprint_matches_request << ','
+                  << csvEscape(outcome.native_log_path) << '\n';
         optimize << selected->id << ',' << request.attempt_number << ','
                  << request.time_limit_seconds << ','
                  << outcome.solver_runtime_seconds << ',' << outcome.work << ','
                  << outcome.nodes << ',' << outcome.simplex_iterations << ','
-                 << outcome.barrier_iterations << ','
+                 << outcome.barrier_iterations << ',' << outcome.cumulative_runtime
+                 << ',' << outcome.cumulative_work << ','
+                 << outcome.cumulative_nodes << ','
+                 << outcome.cumulative_simplex_iterations << ','
+                 << outcome.cumulative_barrier_iterations << ','
                  << outcome.optimize_return_code << '\n';
         warm << selected->id << ',' << request.attempt_number << ','
              << outcome.warm_start_candidate_available << ','
@@ -570,7 +847,7 @@ SolveResult solveExternalGiniTree(const Instance& instance,
 
     events.flush(); lifecycle.flush(); optimize.flush(); warm.flush();
     std::ofstream leaves(leaf_path);
-    leaves << "leaf_id,parent_id,depth,child_index,gamma_L,gamma_U,status,base_lb,final_lb,cutoff,attempts,parent_replaced,closure_source\n";
+    leaves << "leaf_id,parent_id,depth,child_index,gamma_L,gamma_U,status,base_lb,final_lb,cutoff,attempts,parent_replaced,closure_source,canonical_model_path,canonical_sha256,model_scope,row_signature,artifact_generations,artifact_reuses\n";
     long long final_count = 0, open_count = 0, closed_count = 0;
     bool all_bounds_valid = true;
     for (const ControllingLeaf& leaf : scheduler.leaves()) {
@@ -580,8 +857,17 @@ SolveResult solveExternalGiniTree(const Instance& instance,
                << controllingLeafStatusName(leaf.status) << ','
                << leaf.base_lower_bound << ',' << leaf.lower_bound << ','
                << leaf.cutoff << ',' << leaf.exact_solver_attempt_count << ','
-               << leaf.parent_replaced << ',' << csvEscape(leaf.closure_source)
-               << '\n';
+               << leaf.parent_replaced << ',' << csvEscape(leaf.closure_source);
+        const auto cached = artifact_cache.find(leaf.id);
+        if (cached == artifact_cache.end()) {
+            leaves << ",,,,0,0\n";
+        } else {
+            leaves << ',' << csvEscape(cached->second.model.path.string())
+                   << ',' << cached->second.model.sha256
+                   << ',' << csvEscape(cached->second.model_scope)
+                   << ',' << cached->second.row_signature
+                   << ",1," << cached->second.reuse_count << '\n';
+        }
         if (leaf.status == ControllingLeafStatus::Replaced ||
             leaf.parent_replaced) continue;
         ++final_count;
@@ -625,6 +911,8 @@ SolveResult solveExternalGiniTree(const Instance& instance,
         result.verification.errors.empty();
     copyBackendStats(result, backend->stats());
     result.external_gini_tree_model_build_seconds +=
+        controller_model_build_seconds;
+    result.external_gini_tree_canonical_artifact_generation_seconds =
         controller_model_build_seconds;
     // Model objects must be destroyed when the backend leaves scope.  The
     // stats visible here intentionally describe the active lifecycle; final

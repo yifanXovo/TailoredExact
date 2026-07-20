@@ -1,0 +1,38 @@
+
+Gurobi 13.0.2 (win64) logging started Mon Jul 20 06:04:45 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_solver_backend_migration_round24r\runs\stage1b__V12_M2__t_grb_ext_fresh_cold__120s\external\native_logs\L0_attempt_0.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  30
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11351 rows, 1034 columns and 113440 nonzeros (Min)
+Model fingerprint: 0xe3996d2b
+Model has 13 linear objective coefficients
+Variable types: 516 continuous, 518 integer (434 binary)
+Coefficient statistics:
+  Matrix range     [5e-05, 1e+05]
+  Objective range  [5e-05, 1e+00]
+  Bounds range     [2e-01, 3e+02]
+  RHS range        [2e-01, 1e+06]
+
+Presolve removed 1295 rows and 112 columns
+Presolve time: 0.30s
+
+Explored 0 nodes (0 simplex iterations) in 0.30 seconds (0.49 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+
+User-callback calls 631, time in user-callback 0.00 sec

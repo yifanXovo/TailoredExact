@@ -1,0 +1,9 @@
+stage,instance,left_arm,right_arm,left_status,right_status,left_strict,right_strict,left_final_lb,right_final_lb,left_common_gap,right_common_gap,left_wall_seconds,right_wall_seconds
+stage1a,moderate4301,T-CPX-EXT-PON,T-GRB-EXT-COLD,external_gini_tree_time_limit,external_gini_tree_time_limit,False,False,0.006612947832778761,0.006664657272597397,0.6569701063848611,0.6542878103667429,112.8328196,112.6405207
+stage1b,V12_M2,T-CPX-EXT-PON,T-GRB-EXT-COLD,missing,external_gini_tree_time_limit,,False,,0.6860464830705811,,0.04517383965589066,,112.7967421
+stage1c,V12_M1,T-CPX-EXT-PON,T-GRB-EXT-COLD,optimal,missing,True,,0.3572005832084155,,0.0,,90.4205244,
+stage1c,V12_M2,T-CPX-EXT-PON,T-GRB-EXT-COLD,external_gini_tree_time_limit,missing,False,,0.6978390145553786,,0.028761223548641097,,171.6149394,
+stage2,V12_M1,T-CPX-EXT-PON,T-GRB-EXT-COLD,optimal,optimal,True,True,0.3572005832084155,0.3572005832084155,0.0,0.0,89.7646853,35.227844
+stage2,V12_M2,T-CPX-EXT-PON,T-GRB-EXT-COLD,optimal,optimal,True,True,0.7185040707549709,0.7185040707549712,0.0,0.0,225.0662543,196.0109699
+stage2,high_imbalance_seed3202,T-CPX-EXT-PON,T-GRB-EXT-COLD,external_gini_tree_time_limit,external_gini_tree_time_limit,False,False,1.7071873441213097,1.6974666494292714,0.02408150916574824,0.029638371877026885,288.7420733,288.579096
+stage2,tight_T_seed3101,T-CPX-EXT-PON,T-GRB-EXT-COLD,external_gini_tree_time_limit,external_gini_tree_time_limit,False,False,0.04832821310827754,0.05281934497726443,0.5493987775833914,0.5075244896666079,288.7178533,288.6980015

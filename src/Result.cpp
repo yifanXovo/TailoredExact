@@ -1000,6 +1000,27 @@ std::string resultToJson(const SolveResult& input) {
     out << "  \"gurobi_num_nzs\": " << result.gurobi_num_nzs << ",\n";
     out << "  \"gurobi_num_bin_vars\": " << result.gurobi_num_bin_vars << ",\n";
     out << "  \"gurobi_num_int_vars\": " << result.gurobi_num_int_vars << ",\n";
+    out << "  \"gurobi_num_cont_vars\": " << result.gurobi_num_cont_vars << ",\n";
+    out << "  \"gurobi_objective_sense\": "
+        << result.gurobi_objective_sense << ",\n";
+    out << "  \"gurobi_native_domain_audit_passed\": "
+        << (result.gurobi_native_domain_audit_passed ? "true" : "false")
+        << ",\n";
+    out << "  \"gurobi_native_variable_names_match\": "
+        << (result.gurobi_native_variable_names_match ? "true" : "false")
+        << ",\n";
+    out << "  \"gurobi_native_variable_types_match\": "
+        << (result.gurobi_native_variable_types_match ? "true" : "false")
+        << ",\n";
+    out << "  \"gurobi_native_variable_bounds_match\": "
+        << (result.gurobi_native_variable_bounds_match ? "true" : "false")
+        << ",\n";
+    out << "  \"gurobi_native_objective_sense_match\": "
+        << (result.gurobi_native_objective_sense_match ? "true" : "false")
+        << ",\n";
+    out << "  \"gurobi_native_domain_audit_failure_reason\": \""
+        << jsonEscape(result.gurobi_native_domain_audit_failure_reason)
+        << "\",\n";
     out << "  \"gurobi_mem_used_gb\": " << result.gurobi_mem_used_gb << ",\n";
     out << "  \"gurobi_max_mem_used_gb\": "
         << result.gurobi_max_mem_used_gb << ",\n";
@@ -1509,6 +1530,15 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_COUNT(fresh_restart_count);
     WRITE_EXT_COUNT(child_restart_count);
     WRITE_EXT_COUNT(reset_call_count);
+    WRITE_EXT_COUNT(canonical_artifact_generation_count);
+    WRITE_EXT_COUNT(canonical_artifact_cache_hit_count);
+    WRITE_EXT_COUNT(canonical_artifact_invalidation_count);
+    WRITE_EXT_COUNT(confirmed_continuation_count);
+    WRITE_EXT_COUNT(partial_state_reuse_count);
+    WRITE_EXT_COUNT(observed_fresh_restart_count);
+    WRITE_EXT_COUNT(ambiguous_retained_state_count);
+    WRITE_EXT_COUNT(presolve_execution_count);
+    WRITE_EXT_COUNT(root_relaxation_execution_count);
     WRITE_EXT_COUNT(warm_start_candidate_count);
     WRITE_EXT_COUNT(warm_start_complete_count);
     WRITE_EXT_COUNT(warm_start_submitted_count);
@@ -1520,6 +1550,7 @@ std::string resultToJson(const SolveResult& input) {
     out << "  \"external_gini_tree_" #name "\": " \
         << result.external_gini_tree_##name << ",\n"
     WRITE_EXT_DOUBLE(model_build_seconds);
+    WRITE_EXT_DOUBLE(canonical_artifact_generation_seconds);
     WRITE_EXT_DOUBLE(model_read_seconds);
     WRITE_EXT_DOUBLE(solver_seconds);
     WRITE_EXT_DOUBLE(work);
@@ -2356,6 +2387,26 @@ std::string resultToJson(const SolveResult& input) {
         << result.interval_exact_cutoff_runtime_seconds << ",\n";
     out << "  \"interval_exact_cutoff_solver_status\": \""
         << jsonEscape(result.interval_exact_cutoff_solver_status) << "\",\n";
+    out << "  \"interval_exact_cutoff_native_status_code\": "
+        << result.interval_exact_cutoff_native_status_code << ",\n";
+    out << "  \"interval_exact_cutoff_native_status_class\": \""
+        << jsonEscape(result.interval_exact_cutoff_native_status_class)
+        << "\",\n";
+    out << "  \"interval_exact_cutoff_native_status_available\": "
+        << (result.interval_exact_cutoff_native_status_available
+                ? "true" : "false") << ",\n";
+    out << "  \"interval_exact_cutoff_native_exact_optimal\": "
+        << (result.interval_exact_cutoff_native_exact_optimal
+                ? "true" : "false") << ",\n";
+    out << "  \"interval_exact_cutoff_native_tolerance_optimal\": "
+        << (result.interval_exact_cutoff_native_tolerance_optimal
+                ? "true" : "false") << ",\n";
+    out << "  \"interval_exact_cutoff_native_optimal_unscaled_infeasibilities\": "
+        << (result.interval_exact_cutoff_native_optimal_unscaled_infeasibilities
+                ? "true" : "false") << ",\n";
+    out << "  \"interval_exact_cutoff_native_lifecycle_valid\": "
+        << (result.interval_exact_cutoff_native_lifecycle_valid
+                ? "true" : "false") << ",\n";
     out << "  \"interval_exact_cutoff_certificate_basis\": \""
         << jsonEscape(result.interval_exact_cutoff_certificate_basis) << "\",\n";
     out << "  \"interval_exact_cutoff_proven_infeasible\": "

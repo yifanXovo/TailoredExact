@@ -4,6 +4,47 @@
 
 namespace ebrp {
 
+struct ExternalCplexLeafStatusInput {
+    int native_status_code = 0;
+    bool exact_zero_gap_roundtrip = false;
+    bool solver_finalization_reached = false;
+    bool lifecycle_complete = false;
+    bool model_fingerprint_matches = false;
+    bool verified_witness_contradicts_infeasibility = false;
+};
+
+struct ExternalCplexLeafStatusDecision {
+    bool native_status_supported = false;
+    bool exact_optimal = false;
+    bool tolerance_optimal = false;
+    bool optimal_unscaled_infeasibilities = false;
+    bool infeasible = false;
+    bool interrupted = false;
+    bool may_close_leaf = false;
+    bool feasibility_consistency_gate = true;
+    std::string status_class = "unsupported";
+    std::string rejection_reason = "unsupported_native_status";
+};
+
+ExternalCplexLeafStatusDecision evaluateExternalCplexLeafStatus(
+    const ExternalCplexLeafStatusInput& input);
+
+struct ImmutableLeafArtifactContract {
+    std::string leaf_id;
+    double gamma_L = 0.0;
+    double gamma_U = 0.0;
+    double cutoff = 0.0;
+    std::filesystem::path path;
+    std::string sha256;
+    std::string model_scope;
+    std::string row_signature;
+};
+
+bool immutableLeafArtifactReusable(
+    const ImmutableLeafArtifactContract& cached,
+    const ImmutableLeafArtifactContract& requested,
+    std::string* rejection_reason = nullptr);
+
 struct ExternalGiniTreeCertificateInput {
     bool complete_root_coverage = false;
     bool parent_child_coverage_valid = false;

@@ -17,6 +17,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <filesystem>
+#include <fstream>
 #include <limits>
 #include <memory>
 #include <set>
@@ -43,6 +44,8 @@ using Clock = std::chrono::steady_clock;
 struct GurobiApi {
     HMODULE library = nullptr;
     decltype(&GRBloadenvinternal) loadenvinternal = nullptr;
+    decltype(&GRBemptyenvinternal) emptyenvinternal = nullptr;
+    decltype(&GRBstartenv) startenv = nullptr;
     decltype(&GRBfreeenv) freeenv = nullptr;
     decltype(&GRBgeterrormsg) geterrormsg = nullptr;
     decltype(&GRBversion) version = nullptr;
@@ -51,6 +54,7 @@ struct GurobiApi {
     decltype(&GRBgetenv) getenv = nullptr;
     decltype(&GRBsetintparam) setintparam = nullptr;
     decltype(&GRBsetdblparam) setdblparam = nullptr;
+    decltype(&GRBsetstrparam) setstrparam = nullptr;
     decltype(&GRBgetintparam) getintparam = nullptr;
     decltype(&GRBgetdblparam) getdblparam = nullptr;
     decltype(&GRBsetcallbackfunc) setcallbackfunc = nullptr;
@@ -171,6 +175,8 @@ bool loadGurobiApi(const SolveOptions& options,
         return false; \
     }
     LOAD_GRB(loadenvinternal, "GRBloadenvinternal");
+    LOAD_GRB(emptyenvinternal, "GRBemptyenvinternal");
+    LOAD_GRB(startenv, "GRBstartenv");
     LOAD_GRB(freeenv, "GRBfreeenv");
     LOAD_GRB(geterrormsg, "GRBgeterrormsg");
     LOAD_GRB(version, "GRBversion");
@@ -179,6 +185,7 @@ bool loadGurobiApi(const SolveOptions& options,
     LOAD_GRB(getenv, "GRBgetenv");
     LOAD_GRB(setintparam, "GRBsetintparam");
     LOAD_GRB(setdblparam, "GRBsetdblparam");
+    LOAD_GRB(setstrparam, "GRBsetstrparam");
     LOAD_GRB(getintparam, "GRBgetintparam");
     LOAD_GRB(getdblparam, "GRBgetdblparam");
     LOAD_GRB(setcallbackfunc, "GRBsetcallbackfunc");
@@ -215,6 +222,34 @@ std::string apiError(const GurobiApi& api, GRBenv* env, int code) {
         }
     }
     return out.str();
+}
+
+int startSilentGurobiEnvironment(
+    const GurobiApi& api,
+    GRBenv** env,
+    const std::filesystem::path& post_license_log = {}) {
+    if (!env) return GRB_ERROR_NULL_ARGUMENT;
+    *env = nullptr;
+    int rc = api.emptyenvinternal(
+        env, GRB_VERSION_MAJOR, GRB_VERSION_MINOR,
+        GRB_VERSION_TECHNICAL);
+    if (rc != 0 || !*env) return rc;
+    rc = api.setintparam(*env, GRB_INT_PAR_LOGTOCONSOLE, 0);
+    if (rc != 0) return rc;
+    // No log target is active while GRBstartenv acquires the license.  This
+    // prevents machine-bound license identifiers from entering console or
+    // evidence logs.  Native solve logging begins only after startup.
+    rc = api.startenv(*env);
+    if (rc != 0) return rc;
+    if (!post_license_log.empty()) {
+        if (post_license_log.has_parent_path()) {
+            std::filesystem::create_directories(
+                post_license_log.parent_path());
+        }
+        rc = api.setstrparam(
+            *env, GRB_STR_PAR_LOGFILE, post_license_log.string().c_str());
+    }
+    return rc;
 }
 
 struct ProgressCallbackState {
@@ -300,6 +335,116 @@ std::string headerVersionString() {
         std::to_string(GRB_VERSION_TECHNICAL);
 }
 
+struct GurobiNativeLogEvidence {
+    bool available = false;
+    bool presolve_executed = false;
+    bool root_relaxation_executed = false;
+    bool explicit_continuation = false;
+    bool explicit_incumbent_reuse = false;
+    bool mip_start_accepted = false;
+    bool mip_start_rejected = false;
+    bool mip_start_no_incumbent = false;
+};
+
+GurobiNativeLogEvidence inspectGurobiNativeLog(
+    const std::filesystem::path& path) {
+    GurobiNativeLogEvidence out;
+    std::ifstream input(path, std::ios::binary);
+    if (!input) return out;
+    out.available = true;
+    std::ostringstream buffer;
+    buffer << input.rdbuf();
+    std::string text = buffer.str();
+    std::transform(text.begin(), text.end(), text.begin(),
+        [](unsigned char ch) { return static_cast<char>(std::tolower(ch)); });
+    out.presolve_executed = text.find("presolve removed") != std::string::npos ||
+        text.find("presolve time") != std::string::npos ||
+        text.find("presolved:") != std::string::npos;
+    out.root_relaxation_executed =
+        text.find("root relaxation:") != std::string::npos;
+    // These classifications deliberately require affirmative native text.
+    // Repeated Optimize calls and monotone-looking attributes are not proof
+    // that a native search tree continued.
+    out.explicit_continuation =
+        text.find("continuing previous optimization") != std::string::npos ||
+        text.find("resuming previous optimization") != std::string::npos;
+    out.explicit_incumbent_reuse =
+        text.find("loaded incumbent from previous solve") != std::string::npos;
+    out.mip_start_accepted =
+        text.find("loaded user mip start with objective") != std::string::npos;
+    out.mip_start_rejected =
+        text.find("user mip start violates constraint") != std::string::npos ||
+        text.find("user mip start is infeasible") != std::string::npos;
+    out.mip_start_no_incumbent =
+        text.find("user mip start did not produce a new incumbent solution") !=
+            std::string::npos;
+    return out;
+}
+
+struct CanonicalLpVariableAudit {
+    struct Variable {
+        double lower = 0.0;
+        double upper = GRB_INFINITY;
+        char type = GRB_CONTINUOUS;
+    };
+    bool parsed = false;
+    int objective_sense = 0;
+    std::unordered_map<std::string, Variable> variables;
+    std::string failure_reason = "not_parsed";
+};
+
+CanonicalLpVariableAudit parseCanonicalLpVariableAudit(
+    const std::filesystem::path& path) {
+    CanonicalLpVariableAudit out;
+    std::ifstream input(path);
+    if (!input) {
+        out.failure_reason = "canonical_lp_open_failed";
+        return out;
+    }
+    enum class Section { Header, Bounds, Generals, Binaries, Done };
+    Section section = Section::Header;
+    std::string line;
+    while (std::getline(input, line)) {
+        if (line == "Minimize") { out.objective_sense = 1; continue; }
+        if (line == "Maximize") { out.objective_sense = -1; continue; }
+        if (line == "Bounds") { section = Section::Bounds; continue; }
+        if (line == "Generals") { section = Section::Generals; continue; }
+        if (line == "Binaries") { section = Section::Binaries; continue; }
+        if (line == "End") { section = Section::Done; break; }
+        if (line.empty() || line.front() == '\\') continue;
+        std::istringstream fields(line);
+        if (section == Section::Bounds) {
+            double lower = 0.0, upper = 0.0;
+            std::string lower_op, name, upper_op;
+            if (!(fields >> lower >> lower_op >> name >> upper_op >> upper) ||
+                lower_op != "<=" || upper_op != "<=") {
+                out.failure_reason = "unsupported_canonical_bound_line";
+                return out;
+            }
+            out.variables[name] = {lower, upper, GRB_CONTINUOUS};
+        } else if (section == Section::Generals ||
+                   section == Section::Binaries) {
+            std::string name;
+            if (!(fields >> name)) continue;
+            auto found = out.variables.find(name);
+            if (found == out.variables.end()) {
+                out.failure_reason = "typed_variable_missing_bound:" + name;
+                return out;
+            }
+            found->second.type = section == Section::Generals
+                ? GRB_INTEGER : GRB_BINARY;
+        }
+    }
+    if (out.objective_sense == 0 || out.variables.empty() ||
+        section != Section::Done) {
+        out.failure_reason = "canonical_lp_required_sections_missing";
+        return out;
+    }
+    out.parsed = true;
+    out.failure_reason = "none";
+    return out;
+}
+
 class GurobiFixedIntervalBackend final : public FixedIntervalMipBackend {
 public:
     GurobiFixedIntervalBackend(const Instance& instance,
@@ -319,9 +464,7 @@ public:
         if (log.has_parent_path()) {
             std::filesystem::create_directories(log.parent_path());
         }
-        const int rc = api_.loadenvinternal(
-            &env_, log.string().c_str(), GRB_VERSION_MAJOR,
-            GRB_VERSION_MINOR, GRB_VERSION_TECHNICAL);
+        const int rc = startSilentGurobiEnvironment(api_, &env_, log);
         if (rc != 0 || !env_) {
             failure_reason_ = apiError(api_, env_, rc);
             if (env_) api_.freeenv(env_);
@@ -385,7 +528,7 @@ public:
         out.retained_same_leaf_resume = available_;
         out.fresh_per_attempt = true;
         out.verified_complete_mip_start = available_;
-        out.native_continuation_evidence = available_;
+        out.native_continuation_evidence = false;
         out.exact_zero_gap_roundtrip = configuration_valid_;
         out.failure_reason = failure_reason_;
         return out;
@@ -456,6 +599,17 @@ public:
         const int time_rc = api_.setdblparam(
             model_env, GRB_DBL_PAR_TIMELIMIT,
             std::max(0.001, request.time_limit_seconds));
+        out.native_log_path = request.native_log_path.string();
+        int log_rc = 0;
+        if (!request.native_log_path.empty()) {
+            if (request.native_log_path.has_parent_path()) {
+                std::filesystem::create_directories(
+                    request.native_log_path.parent_path());
+            }
+            log_rc = api_.setstrparam(
+                model_env, GRB_STR_PAR_LOGFILE,
+                request.native_log_path.string().c_str());
+        }
         double rel_gap = -1.0, abs_gap = -1.0;
         const int rel_get = api_.getdblparam(
             model_env, GRB_DBL_PAR_MIPGAP, &rel_gap);
@@ -508,9 +662,8 @@ public:
                         out.warm_start_submitted = start_rc == 0;
                         if (out.warm_start_submitted) {
                             ++stats_.warm_start_submitted_count;
-                            ++stats_.warm_start_unknown_count;
                             out.warm_start_status =
-                                "unknown_from_supported_native_evidence";
+                                "submitted_pending_native_log_evidence";
                         } else {
                             ++stats_.warm_start_rejected_count;
                             out.warm_start_status = "rejected_on_submission";
@@ -536,6 +689,11 @@ public:
             return out;
         }
         out.optimize_return_code = api_.optimize(model);
+        if (!request.native_log_path.empty()) {
+            // Closing the per-attempt log target makes the evidence immutable
+            // before it is classified or hashed by the experiment harness.
+            api_.setstrparam(model_env, GRB_STR_PAR_LOGFILE, "");
+        }
         ++stats_.optimize_count;
         ++state.optimize_count;
         out.solver_finalization_reached = out.optimize_return_code == 0;
@@ -549,6 +707,9 @@ public:
         getInt(GRB_INT_ATTR_STATUS, out.native_status_code);
         out.native_status = gurobiStatusName(out.native_status_code);
         out.optimal = out.native_status_code == GRB_OPTIMAL;
+        out.native_exact_optimal = out.optimal;
+        out.native_status_supported = out.native_status_code >= GRB_LOADED &&
+            out.native_status_code <= GRB_MEM_LIMIT;
         out.infeasible = out.native_status_code == GRB_INFEASIBLE;
         out.interrupted = out.native_status_code == GRB_TIME_LIMIT ||
             out.native_status_code == GRB_NODE_LIMIT ||
@@ -559,37 +720,34 @@ public:
             out.native_status_code == GRB_MEM_LIMIT;
         out.native_bound_available = getDouble(
             GRB_DBL_ATTR_OBJBOUNDC, out.native_bound);
-        double cumulative_runtime = 0.0, cumulative_work = 0.0,
-               cumulative_nodes = 0.0, cumulative_iter = 0.0;
-        getDouble(GRB_DBL_ATTR_RUNTIME, cumulative_runtime);
-        getDouble(GRB_DBL_ATTR_WORK, cumulative_work);
-        getDouble(GRB_DBL_ATTR_NODECOUNT, cumulative_nodes);
-        getDouble(GRB_DBL_ATTR_ITERCOUNT, cumulative_iter);
+        double per_call_runtime = 0.0, per_call_work = 0.0,
+               per_call_nodes = 0.0, per_call_iter = 0.0;
+        getDouble(GRB_DBL_ATTR_RUNTIME, per_call_runtime);
+        getDouble(GRB_DBL_ATTR_WORK, per_call_work);
+        getDouble(GRB_DBL_ATTR_NODECOUNT, per_call_nodes);
+        getDouble(GRB_DBL_ATTR_ITERCOUNT, per_call_iter);
         int bar_iter = 0;
         getInt(GRB_INT_ATTR_BARITERCOUNT, bar_iter);
         getDouble(GRB_DBL_ATTR_MAXMEMUSED, out.memory_gb);
-        out.solver_runtime_seconds = std::max(
-            0.0, cumulative_runtime - state.last_runtime);
-        out.work = std::max(0.0, cumulative_work - state.last_work);
-        out.nodes = std::max(0.0, cumulative_nodes - state.last_nodes);
-        out.simplex_iterations = std::max(
-            0.0, cumulative_iter - state.last_iterations);
-        out.barrier_iterations = std::max(
-            0.0, static_cast<double>(bar_iter) - state.last_barrier_iterations);
-        if (retained) {
-            out.native_continuation_evidence =
-                cumulative_runtime + 1e-12 >= state.last_runtime &&
-                cumulative_work + 1e-12 >= state.last_work &&
-                cumulative_nodes + 1e-12 >= state.last_nodes &&
-                state.optimize_count >= 2;
-            out.native_continuation_claimed =
-                out.native_continuation_evidence;
-        }
-        state.last_runtime = cumulative_runtime;
-        state.last_work = cumulative_work;
-        state.last_nodes = cumulative_nodes;
-        state.last_iterations = cumulative_iter;
-        state.last_barrier_iterations = static_cast<double>(bar_iter);
+        // Gurobi's work/runtime/node/iteration attributes describe the most
+        // recent Optimize call.  Treat them as per-call values and maintain
+        // our own explicit sums; never infer continuation from them.
+        out.solver_runtime_seconds = std::max(0.0, per_call_runtime);
+        out.work = std::max(0.0, per_call_work);
+        out.nodes = std::max(0.0, per_call_nodes);
+        out.simplex_iterations = std::max(0.0, per_call_iter);
+        out.barrier_iterations = std::max(0.0, static_cast<double>(bar_iter));
+        state.cumulative_runtime += out.solver_runtime_seconds;
+        state.cumulative_work += out.work;
+        state.cumulative_nodes += out.nodes;
+        state.cumulative_iterations += out.simplex_iterations;
+        state.cumulative_barrier_iterations += out.barrier_iterations;
+        out.cumulative_runtime = state.cumulative_runtime;
+        out.cumulative_work = state.cumulative_work;
+        out.cumulative_nodes = state.cumulative_nodes;
+        out.cumulative_simplex_iterations = state.cumulative_iterations;
+        out.cumulative_barrier_iterations =
+            state.cumulative_barrier_iterations;
         stats_.cumulative_solver_runtime_seconds += out.solver_runtime_seconds;
         stats_.cumulative_work += out.work;
         stats_.cumulative_nodes += out.nodes;
@@ -599,6 +757,55 @@ public:
 
         int solution_count = 0;
         getInt(GRB_INT_ATTR_SOLCOUNT, solution_count);
+        const GurobiNativeLogEvidence log_evidence =
+            inspectGurobiNativeLog(request.native_log_path);
+        out.presolve_rerun_observed = log_evidence.presolve_executed;
+        out.root_relaxation_rerun_observed =
+            log_evidence.root_relaxation_executed;
+        out.incumbent_state_reused = log_evidence.explicit_incumbent_reuse;
+        if (out.presolve_rerun_observed) ++stats_.presolve_execution_count;
+        if (out.root_relaxation_rerun_observed) {
+            ++stats_.root_relaxation_execution_count;
+        }
+        if (retained) {
+            if (log_evidence.explicit_continuation &&
+                !out.presolve_rerun_observed &&
+                !out.root_relaxation_rerun_observed) {
+                out.retained_state_classification = "confirmed_continuation";
+                out.native_continuation_evidence = true;
+                out.native_continuation_claimed = true;
+                ++stats_.confirmed_continuation_count;
+            } else if (out.incumbent_state_reused) {
+                out.retained_state_classification = "partial_state_reuse";
+                ++stats_.partial_state_reuse_count;
+            } else if (out.presolve_rerun_observed ||
+                       out.root_relaxation_rerun_observed) {
+                out.retained_state_classification = "fresh_restart";
+                ++stats_.observed_fresh_restart_count;
+            } else {
+                out.retained_state_classification = "unavailable_or_ambiguous";
+                ++stats_.ambiguous_retained_state_count;
+            }
+        } else {
+            out.retained_state_classification = "fresh_model_restart";
+        }
+        if (out.warm_start_submitted) {
+            if (log_evidence.mip_start_accepted) {
+                out.warm_start_status = "accepted_by_native_log";
+                ++stats_.warm_start_accepted_count;
+            } else if (log_evidence.mip_start_rejected) {
+                out.warm_start_status = "rejected_by_native_log";
+                ++stats_.warm_start_rejected_count;
+            } else if (log_evidence.mip_start_no_incumbent) {
+                out.warm_start_status = "submitted_no_new_incumbent";
+                ++stats_.warm_start_unknown_count;
+            } else {
+                out.warm_start_status = log_evidence.available
+                    ? "submitted_native_acceptance_ambiguous"
+                    : "submitted_native_log_unavailable";
+                ++stats_.warm_start_unknown_count;
+            }
+        }
         if (solution_count > 0) {
             int nvars = 0;
             if (getInt(GRB_INT_ATTR_NUMVARS, nvars) && nvars > 0) {
@@ -629,10 +836,21 @@ public:
                 }
             }
         }
+        if (out.infeasible && !request.verified_start_routes.empty()) {
+            const Verification witness = verifySolution(
+                instance_, request.verified_start_routes, options_.lambda);
+            const bool contradicts = witness.original_solution_feasible &&
+                witness.original_objective_recomputed && witness.errors.empty() &&
+                witness.G >= request.gamma_L - 1e-9 &&
+                witness.G <= request.gamma_U + 1e-9 &&
+                witness.objective <= request.verified_cutoff + 1e-9;
+            out.feasibility_consistency_gate = !contradicts;
+        }
+        state.had_incumbent = solution_count > 0;
         if (!out.solver_finalization_reached ||
             !out.exact_zero_gap_roundtrip ||
             !out.model_fingerprint_matches_request ||
-            (retained && !out.native_continuation_evidence)) {
+            !out.feasibility_consistency_gate || log_rc != 0) {
             std::ostringstream reason;
             reason << "gurobi_external_gate:finalized="
                    << out.solver_finalization_reached
@@ -640,7 +858,10 @@ public:
                    << ";model_match=" << out.model_fingerprint_matches_request
                    << ";retained=" << retained
                    << ";continuation_evidence="
-                   << out.native_continuation_evidence;
+                   << out.native_continuation_evidence
+                   << ";feasibility_consistency="
+                   << out.feasibility_consistency_gate
+                   << ";native_log_parameter_rc=" << log_rc;
             out.failure_reason = reason.str();
         } else {
             out.failure_reason = "none";
@@ -656,11 +877,12 @@ private:
         std::string model_fingerprint;
         bool new_child = false;
         int optimize_count = 0;
-        double last_runtime = 0.0;
-        double last_work = 0.0;
-        double last_nodes = 0.0;
-        double last_iterations = 0.0;
-        double last_barrier_iterations = 0.0;
+        bool had_incumbent = false;
+        double cumulative_runtime = 0.0;
+        double cumulative_work = 0.0;
+        double cumulative_nodes = 0.0;
+        double cumulative_iterations = 0.0;
+        double cumulative_barrier_iterations = 0.0;
     };
 
     const Instance& instance_;
@@ -703,9 +925,7 @@ GurobiRuntimeProbe probeGurobiRuntime(const SolveOptions& options) {
     probe.header_version = headerVersionString();
     probe.runtime_version = versionString(api);
     GRBenv* env = nullptr;
-    probe.license_return_code = api.loadenvinternal(
-        &env, nullptr, GRB_VERSION_MAJOR, GRB_VERSION_MINOR,
-        GRB_VERSION_TECHNICAL);
+    probe.license_return_code = startSilentGurobiEnvironment(api, &env);
     probe.license_available = probe.license_return_code == 0 && env != nullptr;
     if (!probe.license_available) {
         probe.failure_reason = apiError(api, env, probe.license_return_code);
@@ -828,9 +1048,8 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             }
         };
 
-        const int env_rc = api.loadenvinternal(
-            &env, log_path.string().c_str(), GRB_VERSION_MAJOR,
-            GRB_VERSION_MINOR, GRB_VERSION_TECHNICAL);
+        const int env_rc = startSilentGurobiEnvironment(
+            api, &env, log_path);
         if (env_rc != 0 || !env) {
             result.status = "license_unavailable";
             result.gurobi_license_available = false;
@@ -925,7 +1144,98 @@ SolveResult solveGurobiBaseline(const Instance& instance,
         getDouble(GRB_DBL_ATTR_DNUMNZS, result.gurobi_num_nzs);
         getInt(GRB_INT_ATTR_NUMBINVARS, result.gurobi_num_bin_vars);
         getInt(GRB_INT_ATTR_NUMINTVARS, result.gurobi_num_int_vars);
+        getInt(GRB_INT_ATTR_MODELSENSE, result.gurobi_objective_sense);
         getInt(GRB_INT_ATTR_FINGERPRINT, result.gurobi_model_fingerprint);
+
+        const CanonicalLpVariableAudit expected_domain =
+            parseCanonicalLpVariableAudit(lp_path);
+        std::vector<double> native_lb(
+            static_cast<std::size_t>(std::max(0, result.gurobi_num_vars)));
+        std::vector<double> native_ub(native_lb.size());
+        std::vector<char> native_type(native_lb.size());
+        std::unordered_map<std::string, CanonicalLpVariableAudit::Variable>
+            native_domain;
+        bool native_arrays_ok = result.gurobi_num_vars >= 0 &&
+            api.getdblattrarray(model, GRB_DBL_ATTR_LB, 0,
+                result.gurobi_num_vars, native_lb.data()) == 0 &&
+            api.getdblattrarray(model, GRB_DBL_ATTR_UB, 0,
+                result.gurobi_num_vars, native_ub.data()) == 0 &&
+            api.getcharattrarray(model, GRB_CHAR_ATTR_VTYPE, 0,
+                result.gurobi_num_vars, native_type.data()) == 0;
+        result.gurobi_num_bin_vars = 0;
+        result.gurobi_num_int_vars = 0;
+        result.gurobi_num_cont_vars = 0;
+        for (int index = 0; native_arrays_ok &&
+             index < result.gurobi_num_vars; ++index) {
+            char* name = nullptr;
+            native_arrays_ok = api.getstrattrelement(
+                model, GRB_STR_ATTR_VARNAME, index, &name) == 0 &&
+                name && *name;
+            if (!native_arrays_ok) break;
+            native_domain[name] = {
+                native_lb[static_cast<std::size_t>(index)],
+                native_ub[static_cast<std::size_t>(index)],
+                native_type[static_cast<std::size_t>(index)]};
+            if (native_type[static_cast<std::size_t>(index)] == GRB_BINARY) {
+                ++result.gurobi_num_bin_vars;
+            } else if (native_type[static_cast<std::size_t>(index)] ==
+                       GRB_INTEGER) {
+                ++result.gurobi_num_int_vars;
+            } else {
+                ++result.gurobi_num_cont_vars;
+            }
+        }
+        result.gurobi_native_variable_names_match = expected_domain.parsed &&
+            native_arrays_ok &&
+            native_domain.size() == expected_domain.variables.size();
+        result.gurobi_native_variable_types_match =
+            result.gurobi_native_variable_names_match;
+        result.gurobi_native_variable_bounds_match =
+            result.gurobi_native_variable_names_match;
+        if (result.gurobi_native_variable_names_match) {
+            for (const auto& expected : expected_domain.variables) {
+                const auto native = native_domain.find(expected.first);
+                if (native == native_domain.end()) {
+                    result.gurobi_native_variable_names_match = false;
+                    result.gurobi_native_variable_types_match = false;
+                    result.gurobi_native_variable_bounds_match = false;
+                    break;
+                }
+                result.gurobi_native_variable_types_match =
+                    result.gurobi_native_variable_types_match &&
+                    native->second.type == expected.second.type;
+                const double scale = std::max({1.0,
+                    std::fabs(expected.second.lower),
+                    std::fabs(expected.second.upper)});
+                result.gurobi_native_variable_bounds_match =
+                    result.gurobi_native_variable_bounds_match &&
+                    std::fabs(native->second.lower - expected.second.lower) <=
+                        1e-12 * scale &&
+                    std::fabs(native->second.upper - expected.second.upper) <=
+                        1e-12 * scale;
+            }
+        }
+        result.gurobi_native_objective_sense_match = expected_domain.parsed &&
+            result.gurobi_objective_sense == expected_domain.objective_sense;
+        result.gurobi_native_domain_audit_passed = expected_domain.parsed &&
+            native_arrays_ok && result.gurobi_native_variable_names_match &&
+            result.gurobi_native_variable_types_match &&
+            result.gurobi_native_variable_bounds_match &&
+            result.gurobi_native_objective_sense_match;
+        if (result.gurobi_native_domain_audit_passed) {
+            result.gurobi_native_domain_audit_failure_reason = "none";
+        } else {
+            std::ostringstream audit;
+            audit << "parse=" << expected_domain.parsed
+                  << ";native_arrays=" << native_arrays_ok
+                  << ";names=" << result.gurobi_native_variable_names_match
+                  << ";types=" << result.gurobi_native_variable_types_match
+                  << ";bounds=" << result.gurobi_native_variable_bounds_match
+                  << ";objective_sense="
+                  << result.gurobi_native_objective_sense_match
+                  << ";parse_reason=" << expected_domain.failure_reason;
+            result.gurobi_native_domain_audit_failure_reason = audit.str();
+        }
 
         ProgressCallbackState callback;
         callback.api = &api;
@@ -1162,7 +1472,8 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             result.gurobi_optimize_return_code == 0;
         certificate_input.solver_finalization_completed =
             result.gurobi_solver_finalization_reached;
-        certificate_input.complete_original_model_scope = true;
+        certificate_input.complete_original_model_scope =
+            result.gurobi_native_domain_audit_passed;
         certificate_input.model_configuration_valid = configuration_valid;
         certificate_input.lifecycle_valid = result.gurobi_lifecycle_valid;
         certificate_input.executable_fingerprint_matches_manifest =

@@ -3365,6 +3365,10 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
         artifact.columns = size.cols;
         artifact.nonzeros = size.nonzeros;
         artifact.sha256 = fileSha256(path);
+        // The deterministic LP SHA binds the complete ordered row stream as
+        // well as the objective and domains.  Keep an explicit row-signature
+        // field so external leaf-cache contracts never rely on path identity.
+        artifact.row_signature = artifact.sha256;
         artifact.written = std::filesystem::exists(path) &&
             artifact.rows > 0 && artifact.columns > 0 &&
             !artifact.sha256.empty();
@@ -3995,8 +3999,24 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         }
 
         CompactOracleStrengtheningStats strengthening_stats;
-        writeCompactLp(instance, model_options, lp_path, true, &cutoff,
-                       &strengthening_stats, &dynamic_cuts);
+        if (options.round24_external_reuse_immutable_lp) {
+            if (!dynamic_cuts.empty()) {
+                throw std::runtime_error(
+                    "immutable external LP cannot accept dynamic row changes");
+            }
+            if (!std::filesystem::is_regular_file(lp_path) ||
+                options.round24_external_expected_lp_sha256.empty() ||
+                fileSha256(lp_path) !=
+                    options.round24_external_expected_lp_sha256) {
+                throw std::runtime_error(
+                    "immutable external LP identity check failed");
+            }
+            result.notes.push_back(
+                "reused immutable controller-owned canonical leaf LP without rewrite");
+        } else {
+            writeCompactLp(instance, model_options, lp_path, true, &cutoff,
+                           &strengthening_stats, &dynamic_cuts);
+        }
         const ModelSizeStats model_size = analyzeLpModel(lp_path);
         result.compact_bc_model_rows = model_size.rows;
         result.compact_bc_model_cols = model_size.cols;
@@ -5066,6 +5086,27 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
         result.compact_bc_time_seconds = result.runtime_seconds;
         result.compact_bc_total_solver_time = result.runtime_seconds;
         result.interval_exact_cutoff_solver_status = cplex_status;
+        result.interval_exact_cutoff_native_status_available =
+            used_callback_api && api_solve.status_code != 0;
+        result.interval_exact_cutoff_native_status_code =
+            result.interval_exact_cutoff_native_status_available
+                ? api_solve.status_code : 0;
+        result.interval_exact_cutoff_native_status_class =
+            result.interval_exact_cutoff_native_status_available
+                ? nativeMipStatusClass(api_solve.status_code)
+                : "unavailable";
+        result.interval_exact_cutoff_native_exact_optimal =
+            result.interval_exact_cutoff_native_status_available &&
+            api_solve.status_code == kCplexMipOptimal;
+        result.interval_exact_cutoff_native_tolerance_optimal =
+            result.interval_exact_cutoff_native_status_available &&
+            api_solve.status_code == kCplexMipOptimalTolerance;
+        result.interval_exact_cutoff_native_optimal_unscaled_infeasibilities =
+            result.interval_exact_cutoff_native_status_available &&
+            api_solve.status_code ==
+                kCplexMipOptimalUnscaledInfeasibilities;
+        result.interval_exact_cutoff_native_lifecycle_valid =
+            used_callback_api && api_solve.lifecycle_valid;
         result.compact_bc_solver_status = cplex_status;
         result.interval_exact_cutoff_nodes = result.nodes;
         result.compact_bc_nodes = result.nodes;
@@ -5115,7 +5156,22 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             result.interval_oracle_bound_scope == "original_fixed_interval";
         result.compact_interval_bc_bound_valid = result.interval_oracle_bound_valid;
         result.compact_bc_bound_valid = result.interval_oracle_bound_valid;
-        if (statusIsInfeasible(cplex_status)) {
+        const bool strict_external_status =
+            options.round24_external_exact_zero_gap;
+        const bool exact_native_optimal =
+            result.interval_exact_cutoff_native_exact_optimal &&
+            result.compact_bc_native_exact_zero_gaps_valid &&
+            result.interval_exact_cutoff_native_lifecycle_valid;
+        const bool exact_native_infeasible =
+            result.interval_exact_cutoff_native_status_available &&
+            result.interval_exact_cutoff_native_status_code ==
+                kCplexMipInfeasible &&
+            result.interval_exact_cutoff_native_lifecycle_valid;
+        const bool accepted_optimal_status = strict_external_status
+            ? exact_native_optimal : statusIsOptimal(cplex_status);
+        const bool accepted_infeasible_status = strict_external_status
+            ? exact_native_infeasible : statusIsInfeasible(cplex_status);
+        if (accepted_infeasible_status) {
             result.status = "interval_closed";
             result.lower_bound = options.interval_exact_cutoff_UB;
             result.upper_bound = options.interval_exact_cutoff_UB;
@@ -5129,7 +5185,7 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             result.compact_interval_bc_closed_leaves = 1;
             result.compact_bc_closed_leaf_count = 1;
             result.certificate = "CPLEX proved the original compact fixed-interval cutoff MIP infeasible; no incumbent-improving original solution exists in this interval.";
-        } else if (statusIsOptimal(cplex_status) && std::isfinite(cplex_obj) &&
+        } else if (accepted_optimal_status && std::isfinite(cplex_obj) &&
                    cplex_obj >= cutoff_value - 1e-7) {
             result.status = "interval_closed";
             result.lower_bound = cplex_obj;
@@ -5146,7 +5202,7 @@ SolveResult solveIntervalExactCutoffOracle(const Instance& instance, const Solve
             result.compact_interval_bc_closed_leaves = 1;
             result.compact_bc_closed_leaf_count = 1;
             result.certificate = "CPLEX optimized the fixed-interval cutoff MIP and its objective excludes all incumbent-improving solutions in this interval.";
-        } else if (statusIsOptimal(cplex_status) && !values.empty()) {
+        } else if (accepted_optimal_status && !values.empty()) {
             result.routes = reconstructRoutes(instance, values);
             result.verification = verifySolution(instance, result.routes, options.lambda);
             result.final_inventory = result.verification.final_inventory;

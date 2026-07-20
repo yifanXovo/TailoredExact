@@ -193,6 +193,94 @@ void statusAndCertificateChecks() {
 }
 
 void externalTreeChecks() {
+    ebrp::ExternalCplexLeafStatusInput cplex_status;
+    cplex_status.native_status_code = 101;
+    cplex_status.exact_zero_gap_roundtrip = true;
+    cplex_status.solver_finalization_reached = true;
+    cplex_status.lifecycle_complete = true;
+    cplex_status.model_fingerprint_matches = true;
+    auto cplex_decision =
+        ebrp::evaluateExternalCplexLeafStatus(cplex_status);
+    require(cplex_decision.exact_optimal && cplex_decision.may_close_leaf,
+            "CPLEX 101 closes only under all engineering gates");
+    auto cplex_gate = cplex_status;
+    cplex_gate.exact_zero_gap_roundtrip = false;
+    require(!ebrp::evaluateExternalCplexLeafStatus(cplex_gate).may_close_leaf,
+            "CPLEX 101 exact-zero-gap gate");
+    cplex_gate = cplex_status; cplex_gate.solver_finalization_reached = false;
+    require(!ebrp::evaluateExternalCplexLeafStatus(cplex_gate).may_close_leaf,
+            "CPLEX 101 finalization gate");
+    cplex_gate = cplex_status; cplex_gate.lifecycle_complete = false;
+    require(!ebrp::evaluateExternalCplexLeafStatus(cplex_gate).may_close_leaf,
+            "CPLEX 101 lifecycle gate");
+    cplex_gate = cplex_status; cplex_gate.model_fingerprint_matches = false;
+    require(!ebrp::evaluateExternalCplexLeafStatus(cplex_gate).may_close_leaf,
+            "CPLEX 101 model binding gate");
+    cplex_gate = cplex_status; cplex_gate.native_status_code = 102;
+    cplex_decision = ebrp::evaluateExternalCplexLeafStatus(cplex_gate);
+    require(cplex_decision.tolerance_optimal && !cplex_decision.may_close_leaf,
+            "CPLEX 102 tolerance optimal never exact-closes");
+    cplex_gate = cplex_status; cplex_gate.native_status_code = 103;
+    require(ebrp::evaluateExternalCplexLeafStatus(cplex_gate).may_close_leaf,
+            "CPLEX 103 closes the fixed interval when consistent");
+    cplex_gate.verified_witness_contradicts_infeasibility = true;
+    cplex_decision = ebrp::evaluateExternalCplexLeafStatus(cplex_gate);
+    require(!cplex_decision.may_close_leaf &&
+            !cplex_decision.feasibility_consistency_gate,
+            "CPLEX 103 verified-witness contradiction fails closed");
+    for (const int interrupted_status : {107, 108}) {
+        cplex_gate = cplex_status;
+        cplex_gate.native_status_code = interrupted_status;
+        cplex_decision = ebrp::evaluateExternalCplexLeafStatus(cplex_gate);
+        require(cplex_decision.interrupted && !cplex_decision.may_close_leaf,
+                "CPLEX limit status never exact-closes");
+    }
+    cplex_gate = cplex_status; cplex_gate.native_status_code = 115;
+    cplex_decision = ebrp::evaluateExternalCplexLeafStatus(cplex_gate);
+    require(cplex_decision.optimal_unscaled_infeasibilities &&
+            !cplex_decision.may_close_leaf,
+            "CPLEX 115 never exact-closes");
+    cplex_gate = cplex_status; cplex_gate.native_status_code = 999;
+    cplex_decision = ebrp::evaluateExternalCplexLeafStatus(cplex_gate);
+    require(!cplex_decision.native_status_supported &&
+            !cplex_decision.may_close_leaf,
+            "unsupported CPLEX status fails closed");
+
+    ebrp::ImmutableLeafArtifactContract artifact;
+    artifact.leaf_id = "L0";
+    artifact.gamma_L = 0.1;
+    artifact.gamma_U = 0.2;
+    artifact.cutoff = 0.7;
+    artifact.path = "L0.lp";
+    artifact.sha256 = "sha";
+    artifact.model_scope = "fixed_interval_complete_model";
+    artifact.row_signature = "rows";
+    std::string artifact_reason;
+    require(ebrp::immutableLeafArtifactReusable(
+                artifact, artifact, &artifact_reason) &&
+            artifact_reason == "none",
+            "same leaf artifact is reusable without regeneration");
+    auto changed_artifact = artifact; changed_artifact.gamma_L = 0.11;
+    require(!ebrp::immutableLeafArtifactReusable(
+                artifact, changed_artifact, &artifact_reason),
+            "changed leaf interval invalidates artifact");
+    changed_artifact = artifact; changed_artifact.cutoff = 0.6;
+    require(!ebrp::immutableLeafArtifactReusable(
+                artifact, changed_artifact, &artifact_reason),
+            "changed leaf cutoff invalidates artifact");
+    changed_artifact = artifact; changed_artifact.sha256 = "other";
+    require(!ebrp::immutableLeafArtifactReusable(
+                artifact, changed_artifact, &artifact_reason),
+            "changed leaf model fingerprint invalidates artifact");
+    changed_artifact = artifact; changed_artifact.row_signature = "other";
+    require(!ebrp::immutableLeafArtifactReusable(
+                artifact, changed_artifact, &artifact_reason),
+            "changed row signature invalidates artifact");
+    changed_artifact = artifact; changed_artifact.leaf_id = "L0.0";
+    require(!ebrp::immutableLeafArtifactReusable(
+                artifact, changed_artifact, &artifact_reason),
+            "child leaf requires a distinct artifact");
+
     require(ebrp::evaluateExternalGiniTreeCertificate(nominalExternal()).certified,
             "nominal external certificate");
     auto gate = nominalExternal(); gate.complete_root_coverage = false;
@@ -337,7 +425,7 @@ int main() {
         statusAndCertificateChecks();
         externalTreeChecks();
         hashingAndStartChecks();
-        if (checks < 55) throw std::runtime_error("fewer than 55 Round24 checks");
+        if (checks < 75) throw std::runtime_error("fewer than 75 Round24 checks");
         std::cout << "Round24BackendTests passed " << checks << " checks\n";
         return 0;
     } catch (const std::exception& ex) {

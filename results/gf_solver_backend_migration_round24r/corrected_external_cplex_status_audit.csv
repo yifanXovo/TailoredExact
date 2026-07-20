@@ -1,0 +1,8 @@
+native_status_code,class,exact_close_permitted,required_gate,test_result
+101,exact_optimal,true,finalization+lifecycle+model_identity+exact_zero_relative_and_absolute_gaps,pass
+102,tolerance_optimal,false,never_exact_close,pass
+103,fixed_interval_cutoff_infeasible,true,finalization+lifecycle+model_identity+no_verified_witness_contradiction,pass
+107,time_limit_with_incumbent,false,never_exact_close,pass
+108,time_limit_without_incumbent,false,never_exact_close,pass
+115,optimal_with_unscaled_infeasibilities,false,never_exact_close,pass
+999,unsupported,false,fail_closed,pass

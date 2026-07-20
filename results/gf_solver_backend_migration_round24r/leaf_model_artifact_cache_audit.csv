@@ -1,0 +1,8 @@
+case,expected,result
+unchanged_same_leaf,reuse_same_path_sha_scope_interval_cutoff_row_signature,pass
+changed_lower_interval,invalidate,pass
+changed_upper_interval,invalidate,pass
+changed_cutoff,invalidate,pass
+changed_sha256,invalidate,pass
+changed_row_signature,invalidate,pass
+new_child_leaf,new_artifact,pass
