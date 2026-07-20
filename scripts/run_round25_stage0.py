@@ -114,16 +114,22 @@ def command_line_license_check(model: Path) -> dict[str, Any]:
             timeout=45, check=False)
     marker = any(sensitive_marker(path) for path in
                  (stdout_path, stderr_path, native_log))
-    native_text = native_log.read_text(encoding="utf-8", errors="replace") \
-        if native_log.exists() and not marker else ""
-    optimal = "Optimal solution found" in native_text
+    # A licensed command-line solve returns zero and materializes ResultFile.
+    # Do not inspect a native log after a sensitive marker is detected: the
+    # independent in-process test below carries the exact OPTIMAL-status gate,
+    # while this check establishes command-line license usability without ever
+    # retaining or parsing a machine-bound identifier.
+    result_file_written = solution.is_file() and solution.stat().st_size > 0
+    usable = completed.returncode == 0 and result_file_written
     audit = {
         "program": "gurobi_cl", "exit_code": completed.returncode,
-        "minimal_solve_status": "OPTIMAL" if optimal else "not_optimal",
-        "license_usable": completed.returncode == 0 and optimal,
+        "minimal_solve_status":
+            "completed_result_file" if usable else "solve_not_completed",
+        "result_file_written": result_file_written,
+        "license_usable": usable,
         "sensitive_marker_detected_in_ephemeral_output": marker,
         "ephemeral_output_retained": False,
-        "sanitized_failure_class": "none" if completed.returncode == 0 and optimal
+        "sanitized_failure_class": "none" if usable
         else "command_line_license_or_solve_failure",
     }
     shutil.rmtree(SCRATCH)
