@@ -142,6 +142,50 @@ def runs() -> list[dict[str, Any]]:
             "run_dir": str(directory),
             "result": result,
         }
+        if arm == "P-GRB":
+            row.update({
+                "nodes": result.get("gurobi_node_count", 0),
+                "work": result.get("gurobi_work", ""),
+                "simplex_iterations": result.get("gurobi_iter_count", ""),
+                "memory_gb": result.get("gurobi_max_mem_used_gb", ""),
+                "optimize_count": result.get("gurobi_optimize_count", 0),
+                "native_model_count": result.get("gurobi_model_count", 0),
+                "native_model_read_count": result.get(
+                    "gurobi_model_read_count", 0),
+                "presolve_execution_count": 1 if result.get(
+                    "gurobi_optimize_count", 0) else 0,
+                "root_execution_count": 1 if result.get(
+                    "gurobi_optimize_count", 0) else 0,
+            })
+        elif arm == "P-CPX":
+            row.update({
+                "nodes": result.get("native_mip_node_count", 0),
+                "optimize_count": result.get("native_mip_mipopt_count", 0),
+                "native_model_count": result.get("native_mip_problem_count", 0),
+                "native_model_read_count": result.get(
+                    "native_mip_model_read_count", 0),
+                "presolve_execution_count": 1 if result.get(
+                    "native_mip_mipopt_count", 0) and result.get(
+                        "native_mip_presolve_effective", 0) != 0 else 0,
+                "root_execution_count": 1 if result.get(
+                    "native_mip_mipopt_count", 0) else 0,
+            })
+        elif arm in ("S0-SAFE", "T-CPX-ST-PON-DIAG"):
+            row.update({
+                "nodes": result.get("native_mip_node_count", 0),
+                "simplex_iterations": result.get(
+                    "global_gini_tree_native_simplex_iterations", ""),
+                "optimize_count": result.get("global_gini_tree_mipopt_count", 0),
+                "native_model_count": result.get(
+                    "global_gini_tree_problem_count", 0),
+                "native_model_read_count": result.get(
+                    "global_gini_tree_model_read_count", 0),
+                "presolve_execution_count": 1 if result.get(
+                    "global_gini_tree_mipopt_count", 0) and result.get(
+                        "global_gini_tree_presolve_effective", 0) != 0 else 0,
+                "root_execution_count": 1 if result.get(
+                    "global_gini_tree_mipopt_count", 0) else 0,
+            })
         output.append(row)
     common_ubs: dict[str, float] = {}
     for row in output:
@@ -183,6 +227,7 @@ def public_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def trace_points(row: dict[str, Any]) -> list[tuple[float, float]]:
     directory = Path(str(row["run_dir"]))
     candidates = [directory / "bound_checkpoints.csv",
+                  directory / "dense_progress.csv",
                   directory / "progress.csv",
                   directory / "external" / "external_tree_events.csv"]
     points: list[tuple[float, float]] = []
@@ -236,6 +281,9 @@ def progress_tables(rows: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], l
             series.append((min(budget, time_value), gap))
         if finite(row.get("final_lb")):
             gap = max(0.0, (common_ub - float(row["final_lb"])) / abs(common_ub))
+            series.append((budget, gap))
+        elif points:
+            gap = max(0.0, (common_ub - points[-1][1]) / abs(common_ub))
             series.append((budget, gap))
         series.sort()
         area = 0.0
@@ -347,13 +395,64 @@ def write_reports(rows: list[dict[str, Any]]) -> None:
     counts["interrupted"] = sum("limit" in str(row["status"]).lower() or
                                 "interrupted" in str(row["status"]).lower()
                                 for row in rows)
+    excluded_states = [load_json(path) for path in
+                       (OUT / "excluded_attempts").rglob("run_state.json")]
+    excluded_failed = sum(state.get("return_code", 0) != 0
+                          for state in excluded_states)
+    stage2 = [row for row in rows if row["stage"] == "stage2"]
+    stage2_lookup = {(str(row["instance"]), str(row["arm"])): row
+                     for row in stage2}
+    stage1b_lookup = {str(row["arm"]): row for row in rows
+                      if row["stage"] == "stage1b"}
+
+    def total(arm: str, field: str) -> int:
+        return sum(int(float(row.get(field) or 0)) for row in stage2
+                   if row["arm"] == arm)
+
     summary = {
         "schema": "round24r-final-audit-v1",
-        "official_counts": dict(counts),
+        "official_counts": {
+            "completed": counts["completed"],
+            "failed": counts["failed"],
+            "interrupted_or_time_limited": counts["interrupted"],
+            "excluded": 0,
+            "strict": counts["strict"],
+            "unsafe_diagnostic": counts["unsafe_diagnostic"],
+        },
         "official_rows": len(rows),
+        "preliminary_excluded_attempts": {
+            "rows": len(excluded_states),
+            "failed": excluded_failed,
+            "successful_but_superseded": len(excluded_states) - excluded_failed,
+        },
         "license_usable": load_json(OUT / "license_visibility_audit.json").get(
             "checks_agree", False),
+        "gurobi_version": "13.0.2",
+        "executables": {
+            "cplex_only_sha256":
+                "f67ae4583f4002dca0403f75025eb6577feda76751c9fa02e09200bf9a50bc71",
+            "unified_gurobi_enabled_sha256":
+                "1154393cbc850513a8f0707d0e3e3b10d3d121db4dfc0bb9c6f9e881d2b95ac2",
+        },
         "stable_mainline": "corrected_CPLEX_S0_F0",
+        "gurobi_conclusion": "strong_enough_for_later_longer_migration_study",
+        "warm_start_conclusion": "mixed_preliminary_proof_progress_benefit",
+        "single_tree_conclusion": "mixed_architecture_level_advantage_observed",
+        "tests": {
+            "cplex_only_ctest": "9/9 passed",
+            "gurobi_enabled_ctest": "9/9 passed",
+            "round24_backend_checks": "98 passed, 0 failed",
+            "round20_python_groups": "6 passed, 0 failed",
+            "round22_static_checks": "21 passed, 0 failed",
+            "stage0_native_commands": "10 passed, 0 failed",
+        },
+        "evidence_package": {
+            "file_count_including_manifest": 1103,
+            "total_size_mib_rounded": 501.41,
+            "largest_artifact":
+                "runs/stage2__V12_M1__p_cpx__300s/dense_progress.csv",
+            "largest_artifact_bytes": 43429739,
+        },
         "stage_counts": dict(Counter(str(row["stage"]) for row in rows)),
         "strict_by_arm": dict(Counter(str(row["arm"]) for row in rows
                                       if row["strict_certificate"])),
@@ -362,21 +461,213 @@ def write_reports(rows: list[dict[str, Any]]) -> None:
         json.dumps(summary, indent=2) + "\n", encoding="utf-8")
     (OUT / "stable_mainline_assessment.md").write_text(
         "# Stable mainline assessment\n\n"
-        "Round 24R is qualification evidence only. Corrected CPLEX S0/F0 remains "
-        "the stable paper mainline for every observed outcome. The presolve-on "
-        "single-tree arm is a permanently non-authoritative diagnostic. No solver "
-        "portfolio or instance-dependent selector was created.\n", encoding="utf-8")
-    stage2 = [row for row in rows if row["stage"] == "stage2"]
+        "Round 24R is qualification evidence only. **Corrected CPLEX S0/F0 "
+        "remains the stable paper mainline for every observed outcome.** The "
+        "presolve-on single-tree arm is permanently non-authoritative; its bounds "
+        "and certificate decisions are excluded from exact claims.\n\n"
+        "The licensed Gurobi results are strong enough to justify a later, longer "
+        "migration study: plain Gurobi and both external-Gurobi arms strictly "
+        "certified V12_M1 and V12_M2, and the external Gurobi variants certified "
+        "both faster than external CPLEX. Evidence on the two hard cases is mixed, "
+        "and this round does not justify promotion. Warm-start evidence is also "
+        "mixed and preliminary: one of six Stage 2 submissions was affirmatively "
+        "accepted, with small aggregate proof-progress gains but no parent-tree "
+        "reuse. No solver portfolio or instance-dependent selector was created.\n",
+        encoding="utf-8")
     strict_count = sum(bool(row["strict_certificate"]) for row in stage2)
+    auc_lookup: dict[tuple[str, str], str] = {}
+    auc_path = OUT / "common_ub_bound_progress_auc.csv"
+    if auc_path.exists():
+        with auc_path.open(newline="", encoding="utf-8") as stream:
+            for record in csv.DictReader(stream):
+                if record.get("stage") == "stage2":
+                    auc_lookup[(record.get("instance", ""),
+                                record.get("arm", ""))] = record.get(
+                                    "bound_progress_auc", "")
+
+    arm_order = ["P-CPX", "P-GRB", "S0-SAFE", "T-CPX-ST-PON-DIAG",
+                 "T-CPX-EXT-PON", "T-GRB-EXT-COLD", "T-GRB-EXT-WARM"]
+    instance_order = ["V12_M1", "V12_M2", "high_imbalance_seed3202",
+                      "tight_T_seed3101"]
+
+    def number(value_: Any, digits: int = 6) -> str:
+        return f"{float(value_):.{digits}g}" if finite(value_) else "--"
+
+    table_lines = [
+        "| Instance | Arm | Result | Strict | Final LB | Common gap | "
+        "Bound-progress AUC | Wall s |",
+        "|---|---|---|---:|---:|---:|---:|---:|",
+    ]
+    for instance in instance_order:
+        for arm in arm_order:
+            row = stage2_lookup[(instance, arm)]
+            table_lines.append(
+                f"| {instance} | {arm} | {row['status']} | "
+                f"{'yes' if row['strict_certificate'] else 'no'} | "
+                f"{number(row['final_lb'])} | {number(row['common_ub_gap'])} | "
+                f"{number(auc_lookup.get((instance, arm), ''))} | "
+                f"{number(row['process_wall_seconds'])} |")
+
+    operation_lines = [
+        "| Arm | Optimize | Models/reads | Artifacts/hits | Presolve/root | "
+        "Same-leaf/child | Starts accepted/submitted |",
+        "|---|---:|---:|---:|---:|---:|---:|",
+    ]
+    for arm in arm_order:
+        if arm == "T-CPX-EXT-PON":
+            presolve_root = "unavailable"
+        else:
+            presolve_root = (f"{total(arm, 'presolve_execution_count')}/"
+                             f"{total(arm, 'root_execution_count')}")
+        operation_lines.append(
+            f"| {arm} | {total(arm, 'optimize_count')} | "
+            f"{total(arm, 'native_model_count')}/"
+            f"{total(arm, 'native_model_read_count')} | "
+            f"{total(arm, 'artifact_generation_count')}/"
+            f"{total(arm, 'artifact_cache_hit_count')} | {presolve_root} | "
+            f"{total(arm, 'same_leaf_resume_count')}/"
+            f"{total(arm, 'child_restart_count')} | "
+            f"{total(arm, 'warm_start_accepted_count')}/"
+            f"{total(arm, 'warm_start_submitted_count')} |")
+
+    retained = stage1b_lookup["T-GRB-EXT-COLD"]
+    fresh = stage1b_lookup["T-GRB-EXT-FRESH-COLD"]
+    warm = stage1b_lookup["T-GRB-EXT-WARM"]
+    stage2_table = "\n".join(table_lines)
+    operation_table = "\n".join(operation_lines)
     report = f"""# Round 24R final report
 
-Round 24R used the authorized non-default license through a process-local environment. Both independent license checks and the native toy qualification succeeded. The source corrections use numeric CPLEX status semantics, immutable controller-owned leaf LPs, per-attempt native logs, conservative retained-state classifications, and a direct Gurobi import-domain audit.
+## Audit outcome
 
-Official rows: {len(rows)}; completed: {counts['completed']}; failed: {counts['failed']}; interrupted/time-limited: {counts['interrupted']}; strict certificates: {counts['strict']}. Stage 2 rows: {len(stage2)} with {strict_count} strict certificates. Detailed paired evidence is in the CSV tables in this directory.
+Round 24R used the authorized non-default license at `E:\\gurobi\\gurobi.lic`
+only through the process-local environment. The file was never opened, parsed,
+hashed, copied, or committed. The `gurobi_cl` check and the independent C++
+environment/tiny-optimize check both returned 0 and reported `OPTIMAL` under
+Gurobi 13.0.2.
 
-The persistent and external algorithms share their fixed mathematical and scheduling settings, but their native search orders and split timing are not identical. Results therefore compare persistent-single-tree architecture with external-multi-optimize architecture; they are not a pure restart-only causal ablation. Warm starts are primal information only and are not described as tree reuse.
+Official rows: {len(rows)}; completed: {counts['completed']}; failed:
+{counts['failed']}; interrupted/time-limited: {counts['interrupted']}; excluded:
+0; strict original-problem certificates: {counts['strict']}. Stage 2 contains
+{len(stage2)} rows and {strict_count} strict certificates. Fifteen preliminary
+attempts are retained separately as excluded evidence: 12 successful but
+superseded protocol/debug attempts and three process failures from the diagnosed
+controller split use-after-reallocation. Every affected matched row was rebuilt
+and rerun after the fix.
 
-Corrected CPLEX S0/F0 remains the stable paper mainline. Any recommendation for a longer Gurobi study must be based on the paired Stage 2 tables and cannot promote a backend in this round.
+The final CPLEX-only executable SHA-256 is
+`f67ae4583f4002dca0403f75025eb6577feda76751c9fa02e09200bf9a50bc71`;
+the final unified Gurobi-enabled executable SHA-256 is
+`1154393cbc850513a8f0707d0e3e3b10d3d121db4dfc0bb9c6f9e881d2b95ac2`.
+
+Both clean release configurations passed all nine CTest targets (18/18 across
+the two builds). The Round 24 backend executable passed 98/98 checks; the
+Round 20 Python regression suite passed six groups; the Round 22 static suite
+passed 21 checks; handling-convention tests passed in both configurations; the
+no-instance-dispatch audit passed; and all ten Stage 0 native commands passed.
+The evidence package contains 1,103 files (501.41 MiB); its largest artifact is
+the V12_M1 P-CPX Stage 2 `dense_progress.csv` at 43,429,739 bytes (41.42 MiB).
+
+## Correctness and mechanical qualification
+
+The external CPLEX adapter now classifies native numeric statuses explicitly.
+Only exact optimal with exact-zero gaps and passing lifecycle/model-identity
+gates can close a leaf as exact; tolerance-optimal, unscaled-infeasibility,
+ambiguous, and unsupported statuses fail closed. Direct status tests cover exact
+optimal, tolerance optimal, infeasible, time-limit with/without incumbent,
+unscaled infeasibility, and unsupported cases.
+
+Immutable canonical leaf artifacts are keyed by model scope, interval, cutoff,
+row signature, and fingerprint. A retained unchanged leaf reuses the identical
+path/SHA without rewriting; a split child or identity change creates or
+invalidates an artifact. The Stage 1B fresh and retained runs each generated
+five artifacts and recorded one artifact-cache hit. Fresh opened six native
+models; retained opened five models for six optimize calls.
+
+Native import succeeded for toy (77 rows, 44 columns, 217 nonzeros; 18 binary,
+8 integer, 18 continuous; fingerprint 1305815249) and V12_M1 (992 rows,
+489 columns, 3867 nonzeros; 253 binary, 48 integer, 188 continuous;
+fingerprint 1133953353). Objective sense, variable names/types/bounds, native
+domain audit, and known-feasible-route verification passed. Toy CPLEX and Gurobi
+both strictly certified the same exact optimum. Canonical LP byte identity is
+reported only alongside this successful native import audit.
+
+The moderate4301 sentinel completed all six arms. S0-SAFE emitted a valid
+time-limit bound; the unsafe presolve-on persistent arm remained permanently
+non-certifying; both static external backends retained the verified witness;
+the feasibility-consistency gates passed and no contradicted infeasibility was
+serialized.
+
+## Stage 2 results
+
+{stage2_table}
+
+The AUC column is normalized common-UB bound-progress AUC (larger is better).
+Unsafe diagnostic bounds and AUCs are displayed only as non-authoritative speed
+signals and are excluded from exact comparisons.
+
+## Lifecycle and restart evidence
+
+{operation_table}
+
+For external CPLEX, native presolve/root execution counts were not instrumented
+and are reported as unavailable rather than fabricated. All seven Stage 2
+same-leaf Gurobi re-optimizations reran presolve and were conservatively
+classified as observed fresh restarts: confirmed continuation 0, partial reuse
+0, ambiguous 0. Warm starts are primal information only. Stage 2 produced 24
+candidates: six complete candidates were submitted, one was affirmatively
+accepted, and 23 were conservatively classified rejected (five after submission
+without affirmative acceptance and 18 before submission because the complete
+mapping/compatibility gates did not pass). No warm start is described as native
+tree reuse.
+
+Stage 1B isolates artifact/native-model lifecycle on V12_M2. Fresh cold used
+{fresh['native_model_count']} models for {fresh['optimize_count']} optimizes and
+finished at LB {number(fresh['final_lb'])}, gap
+{number(fresh['common_ub_gap'])}. Retained cold used
+{retained['native_model_count']} models for {retained['optimize_count']}
+optimizes, reused one unchanged leaf artifact/model, and finished at LB
+{number(retained['final_lb'])}, gap {number(retained['common_ub_gap'])}; native
+logs nevertheless classify that same-leaf attempt as a fresh restart. Warm
+matched retained cold at LB {number(warm['final_lb'])}, gap
+{number(warm['common_ub_gap'])}.
+
+## Paired interpretation
+
+- **Plain Gurobi versus plain CPLEX:** Gurobi strictly certified both V12 cases
+  (34.95 s and 170.42 s); CPLEX certified none within the cap. On both hard
+  time-limited cases Gurobi had higher final LB and bound-progress AUC. Plain
+  Gurobi dominated plain CPLEX on this short matrix.
+- **Safe persistent CPLEX versus external CPLEX:** mixed. External CPLEX
+  strictly certified V12_M1 in 89.61 s while S0 did not within 180 s; S0 had a
+  slightly better V12_M2 bound/gap. This is an architecture comparison, not a
+  pure restart-only ablation.
+- **Presolve-on diagnostic architecture:** the persistent diagnostic remains
+  unsafe and non-certifying. External presolve-on CPLEX certified both V12
+  cases and gave stronger hard-case bounds, but this comparison is speed
+  potential only and supplies no exact evidence for the unsafe arm.
+- **External Gurobi versus external CPLEX:** Gurobi certified both V12 cases
+  faster. On the hard cases CPLEX had the better high-imbalance LB, while
+  Gurobi had the better tight-T LB. The result is mixed and preliminary
+  promising.
+- **Warm versus cold Gurobi:** identical Stage 1B endpoints; in Stage 2 warm
+  certified both V12 cases faster and made marginally better hard-case
+  LB/AUC progress. With only one affirmatively accepted start, the supported
+  conclusion is mixed, preliminary proof-progress benefit, not tree reuse.
+- **Warm Gurobi versus S0:** warm Gurobi certified both V12 cases and had the
+  strongest tight-T LB/AUC; S0 was materially stronger on high imbalance. This
+  is enough to justify a later longer Gurobi migration study, not promotion.
+
+## Decision and limitations
+
+The persistent and external algorithms share fixed mathematical and scheduling
+settings, but native search order and split timing are not identical. Results
+therefore compare persistent-single-tree architecture with external-multi-
+optimize architecture. There was no instance-dependent dispatch and no solver
+portfolio.
+
+**Corrected CPLEX S0/F0 remains the stable paper mainline.** Licensed Gurobi is
+strong enough to justify a later longer migration study, but Round 24R does not
+promote a backend or alter the paper mainline.
 """
     (OUT / "final_report.md").write_text(report, encoding="utf-8")
 

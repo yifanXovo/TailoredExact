@@ -1,0 +1,54 @@
+{
+  "schema": "round24r-final-audit-v1",
+  "official_counts": {
+    "completed": 45,
+    "failed": 0,
+    "interrupted_or_time_limited": 28,
+    "excluded": 0,
+    "strict": 10,
+    "unsafe_diagnostic": 7
+  },
+  "official_rows": 45,
+  "preliminary_excluded_attempts": {
+    "rows": 15,
+    "failed": 3,
+    "successful_but_superseded": 12
+  },
+  "license_usable": true,
+  "gurobi_version": "13.0.2",
+  "executables": {
+    "cplex_only_sha256": "f67ae4583f4002dca0403f75025eb6577feda76751c9fa02e09200bf9a50bc71",
+    "unified_gurobi_enabled_sha256": "1154393cbc850513a8f0707d0e3e3b10d3d121db4dfc0bb9c6f9e881d2b95ac2"
+  },
+  "stable_mainline": "corrected_CPLEX_S0_F0",
+  "gurobi_conclusion": "strong_enough_for_later_longer_migration_study",
+  "warm_start_conclusion": "mixed_preliminary_proof_progress_benefit",
+  "single_tree_conclusion": "mixed_architecture_level_advantage_observed",
+  "tests": {
+    "cplex_only_ctest": "9/9 passed",
+    "gurobi_enabled_ctest": "9/9 passed",
+    "round24_backend_checks": "98 passed, 0 failed",
+    "round20_python_groups": "6 passed, 0 failed",
+    "round22_static_checks": "21 passed, 0 failed",
+    "stage0_native_commands": "10 passed, 0 failed"
+  },
+  "evidence_package": {
+    "file_count_including_manifest": 1103,
+    "total_size_mib_rounded": 501.41,
+    "largest_artifact": "runs/stage2__V12_M1__p_cpx__300s/dense_progress.csv",
+    "largest_artifact_bytes": 43429739
+  },
+  "stage_counts": {
+    "stage1a": 6,
+    "stage1b": 3,
+    "stage1c": 8,
+    "stage2": 28
+  },
+  "strict_by_arm": {
+    "T-CPX-EXT-POFF": 1,
+    "T-CPX-EXT-PON": 3,
+    "P-GRB": 2,
+    "T-GRB-EXT-COLD": 2,
+    "T-GRB-EXT-WARM": 2
+  }
+}
