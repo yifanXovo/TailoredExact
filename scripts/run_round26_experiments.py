@@ -95,6 +95,25 @@ LONG_CASES = (
     "tight_T_seed5102", "moderate_seed6301",
 )
 
+OFFICIAL_STAGES: dict[str, tuple[int, list[tuple[str, str]]]] = {
+    "stage1": (1200, [
+        (instance, arm) for instance in DEVELOPMENT
+        for arm in ("P-GRB", "C0", "C1")
+    ]),
+    "stage2": (1800, [
+        (instance, arm) for instance in HELDOUT_V20
+        for arm in ("P-GRB", "C0", "C1")
+    ]),
+    "stage3": (1800, [
+        (instance, arm) for instance in V50
+        for arm in ("P-GRB", "C1")
+    ]),
+    "stage4": (3600, [
+        (instance, arm) for instance in LONG_CASES
+        for arm in ("P-GRB", "C1")
+    ]),
+}
+
 
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
@@ -133,6 +152,14 @@ def add(args: list[str], name: str, value: object) -> None:
 
 def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def gurobi_fingerprints() -> dict[str, int]:
+    round26 = OUT / "gurobi_fingerprints.json"
+    source = round26 if round26.is_file() else (
+        ROOT / "results/gf_solver_backend_validation_round25/gurobi_fingerprints.json")
+    return {str(key): int(value) for key, value in
+            load_json(source).get("fingerprints", {}).items()}
 
 
 def executable_for_arm(arm: str) -> Path:
@@ -175,9 +202,7 @@ def plain_command(instance: str, budget: int, run_dir: Path) -> list[str]:
         ("--log", run_dir / "native.log"),
     ):
         add(args, name, value)
-    fingerprints = load_json(
-        ROOT / "results/gf_solver_backend_validation_round25/gurobi_fingerprints.json"
-    ).get("fingerprints", {})
+    fingerprints = gurobi_fingerprints()
     add(args, "--round24-expected-gurobi-model-fingerprint",
         int(fingerprints.get(instance, 0)))
     args.append("--plain-baseline")
@@ -443,7 +468,10 @@ def main() -> int:
     parser.add_argument("--prepare-manifests", action="store_true")
     parser.add_argument("--prepare-prototype-manifest", action="store_true")
     parser.add_argument(
-        "--stage", choices=("forensics", "candidate", "candidate-retry"))
+        "--stage", choices=(
+            "forensics", "candidate", "candidate-retry", "sentinel",
+            *OFFICIAL_STAGES,
+        ))
     args = parser.parse_args()
     if args.prepare_manifests:
         prepare_manifests()
@@ -451,7 +479,9 @@ def main() -> int:
     if args.prepare_prototype_manifest:
         prepare_prototype_manifest()
         return 0
-    if args.stage not in ("forensics", "candidate", "candidate-retry"):
+    if args.stage not in (
+            "forensics", "candidate", "candidate-retry", "sentinel",
+            *OFFICIAL_STAGES):
         parser.error("a preparation action or --stage is required")
     if not C0_EXE.is_file() or not LICENSE.is_file():
         raise SystemExit("frozen executable or authorized license path unavailable")
@@ -475,16 +505,28 @@ def main() -> int:
                 for instance in DEVELOPMENT[2:]
                 for arm in ("C0", "C1")
             ]
-        else:
+        elif args.stage == "candidate-retry":
             matrix = [
                 (instance, "C0", 1, 600)
                 for instance in DEVELOPMENT[2:]
             ]
+        elif args.stage == "sentinel":
+            matrix = [
+                ("moderate_seed4301", arm, 0, 120)
+                for arm in ("C0", "C1")
+            ]
+        else:
+            budget, official_matrix = OFFICIAL_STAGES[args.stage]
+            matrix = [
+                (instance, arm, 0, budget)
+                for instance, arm in official_matrix
+            ]
         for instance, arm, repetition, budget in matrix:
             state = run_one(
                 args.stage.replace("-", "_"), instance, arm, budget,
-                repetition=repetition, allow_heldout=False,
-                official=False)
+                repetition=repetition,
+                allow_heldout=args.stage in ("stage2", "stage3", "stage4"),
+                official=args.stage in OFFICIAL_STAGES)
             if state["return_code"] != 0 or not state["result_exists"]:
                 failures += 1
         print(f"{args.stage.upper()} complete process_failures={failures}", flush=True)
