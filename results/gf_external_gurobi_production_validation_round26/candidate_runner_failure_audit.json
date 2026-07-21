@@ -1,0 +1,17 @@
+{
+  "classification": "runner_cli_compatibility_failure",
+  "failed_rows": [
+    "candidate__high_imbalance_seed3202__c0__rep1__600s",
+    "candidate__moderate_seed3302__c0__rep1__600s",
+    "candidate__tight_T_seed3101__c0__rep1__600s"
+  ],
+  "observed_return_code": 1,
+  "observed_result_json": false,
+  "reason": "The development harness passed the new --external-gini-split-after-attempts flag to the immutable pre-prototype C0 executable, which correctly rejected the unknown option before model parsing or optimization.",
+  "performance_evidence": false,
+  "preservation": "All three failed command, stdout, stderr, and run-state records are retained and excluded from performance comparisons.",
+  "repair": "The harness now omits the new flag for C0, whose frozen/default threshold is two. C1 alone receives the explicit value one.",
+  "retry_policy": "Exactly one distinct candidate_retry row is scheduled for each affected development instance. Failed directories are not deleted, edited, or reused.",
+  "scope_changed": false,
+  "solver_or_algorithm_changed": false
+}

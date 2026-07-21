@@ -198,13 +198,14 @@ def external_command(instance: str, arm: str, budget: int,
         ("--global-gini-tree-presolve", "off"),
         ("--external-gini-lifecycle", "retained-per-leaf"),
         ("--external-gini-warm-start", False),
-        ("--external-gini-split-after-attempts", 1 if arm == "C1" else 2),
         ("--gurobi-home", "D:/gurobi1302/win64"),
         ("--gurobi-seed", 0), ("--gurobi-presolve", -1),
         ("--log", run_dir / "native.log"),
         ("--out", run_dir / "result.json"),
     ):
         add(args, name, value)
+    if arm == "C1":
+        add(args, "--external-gini-split-after-attempts", 1)
     return args
 
 
@@ -442,7 +443,8 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--prepare-manifests", action="store_true")
     parser.add_argument("--prepare-prototype-manifest", action="store_true")
-    parser.add_argument("--stage", choices=("forensics", "candidate"))
+    parser.add_argument(
+        "--stage", choices=("forensics", "candidate", "candidate-retry"))
     args = parser.parse_args()
     if args.prepare_manifests:
         prepare_manifests()
@@ -450,7 +452,7 @@ def main() -> int:
     if args.prepare_prototype_manifest:
         prepare_prototype_manifest()
         return 0
-    if args.stage not in ("forensics", "candidate"):
+    if args.stage not in ("forensics", "candidate", "candidate-retry"):
         parser.error("a preparation action or --stage is required")
     if not C0_EXE.is_file() or not LICENSE.is_file():
         raise SystemExit("frozen executable or authorized license path unavailable")
@@ -464,7 +466,7 @@ def main() -> int:
                 for repetition in (1, 2, 3)
                 for arm in ("P-GRB", "C0")
             ]
-        else:
+        elif args.stage == "candidate":
             matrix = [
                 (instance, "C1", repetition, 300)
                 for instance in ("V12_M1", "V12_M2")
@@ -474,9 +476,14 @@ def main() -> int:
                 for instance in DEVELOPMENT[2:]
                 for arm in ("C0", "C1")
             ]
+        else:
+            matrix = [
+                (instance, "C0", 1, 600)
+                for instance in DEVELOPMENT[2:]
+            ]
         for instance, arm, repetition, budget in matrix:
             state = run_one(
-                args.stage, instance, arm, budget,
+                args.stage.replace("-", "_"), instance, arm, budget,
                 repetition=repetition, allow_heldout=False,
                 official=False)
             if state["return_code"] != 0 or not state["result_exists"]:
