@@ -52,8 +52,10 @@ def main() -> None:
             raise RuntimeError(f"round-trip mismatch: {path}")
         path.unlink()
         run_dir = next(
-            parent for parent in path.parents
-            if parent.parent.name == "runs")
+            (parent for parent in path.parents
+             if parent.parent.name == "runs"),
+            path.parent,
+        )
         grouped.setdefault(run_dir, []).append({
             "original_path": relative(path),
             "compressed_path": relative(target),
