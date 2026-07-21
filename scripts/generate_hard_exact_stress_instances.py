@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate deterministic V20/M3 stress instances for exact-phase UB tests.
+"""Generate deterministic V20/M3 and V50/M3 stress instances.
 
 The output uses the Hybrid-GA-compatible text format parsed by ExactEBRP.
 These are regenerated engineering benchmarks, not historical paper targets.
@@ -35,6 +35,25 @@ ROUND22_HELDOUT_CASES = [
     ("high_imbalance_seed4202", 4202, "high_imbalance", 3600.0),
     ("moderate_seed4301", 4301, "moderate", 3600.0),
     ("moderate_seed4302", 4302, "moderate", 3600.0),
+]
+
+# Round 26 selections were fixed before generation and before any solver run.
+# Preferred seeds already present in tracked evidence were replaced by the
+# first globally unused seed above that family's preferred range.  The exact
+# pre-generation audit is retained in the Round 26 evaluation evidence.
+ROUND26_HELDOUT_V20_CASES = [
+    ("tight_T_seed5102", 5102, "tight_T", 2400.0),
+    ("tight_T_seed5103", 5103, "tight_T", 2550.0),
+    ("high_imbalance_seed5202", 5202, "high_imbalance", 3600.0),
+    ("high_imbalance_seed5203", 5203, "high_imbalance", 3600.0),
+    ("moderate_seed5301", 5301, "moderate", 3600.0),
+    ("moderate_seed5302", 5302, "moderate", 3600.0),
+]
+
+ROUND26_V50_CASES = [
+    ("tight_T_seed6102", 6102, "tight_T", 2400.0),
+    ("high_imbalance_seed6202", 6202, "high_imbalance", 3600.0),
+    ("moderate_seed6301", 6301, "moderate", 3600.0),
 ]
 
 
@@ -118,9 +137,9 @@ def min_ratio_vector(initial: list[int], target: list[int]) -> list[float]:
     return out
 
 
-def write_instance(path: Path, seed: int, stress_type: str, t_limit: float) -> dict[str, str]:
+def write_instance(path: Path, seed: int, stress_type: str, t_limit: float,
+                   v: int = 20) -> dict[str, str]:
     rng = random.Random(seed)
-    v = 20
     m = 3
     q = 30
     capacities = [100000] + [rng.randint(20, 50) for _ in range(v)]
@@ -172,7 +191,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--suite",
-        choices=("existing", "round22-heldout"),
+        choices=(
+            "existing", "round22-heldout", "round26-heldout-v20",
+            "round26-v50",
+        ),
         default="existing",
         help="deterministic case registry to generate",
     )
@@ -183,12 +205,20 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    cases = CASES if args.suite == "existing" else ROUND22_HELDOUT_CASES
-    default_out = (
-        ROOT / "reference" / "hard_stress" / "V20_M3"
-        if args.suite == "existing"
-        else ROOT / "reference" / "heldout_round22" / "V20_M3"
-    )
+    suites = {
+        "existing": (
+            CASES, 20, ROOT / "reference" / "hard_stress" / "V20_M3"),
+        "round22-heldout": (
+            ROUND22_HELDOUT_CASES, 20,
+            ROOT / "reference" / "heldout_round22" / "V20_M3"),
+        "round26-heldout-v20": (
+            ROUND26_HELDOUT_V20_CASES, 20,
+            ROOT / "reference" / "heldout_round26" / "V20_M3"),
+        "round26-v50": (
+            ROUND26_V50_CASES, 50,
+            ROOT / "reference" / "heldout_round26" / "V50_M3"),
+    }
+    cases, v, default_out = suites[args.suite]
     out_dir = args.out_dir or default_out
     if not out_dir.is_absolute():
         out_dir = ROOT / out_dir
@@ -196,7 +226,7 @@ def main() -> None:
     rows = []
     for instance_id, seed, stress_type, t_limit in cases:
         path = out_dir / f"{instance_id}.txt"
-        row = write_instance(path, seed, stress_type, t_limit)
+        row = write_instance(path, seed, stress_type, t_limit, v=v)
         row["instance_id"] = instance_id
         rows.append(row)
 
