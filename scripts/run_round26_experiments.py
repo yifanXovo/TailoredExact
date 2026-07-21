@@ -25,11 +25,13 @@ import run_round25_experiments as round25
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "results" / "gf_external_gurobi_production_validation_round26"
 LICENSE = Path(r"E:\gurobi\gurobi.lic")
-EXE = ROOT / "build_round26" / "with_gurobi" / "ExactEBRP.exe"
+C0_EXE = ROOT / "build_round26" / "with_gurobi" / "ExactEBRP.exe"
+C1_EXE = ROOT / "build_round26" / "with_gurobi_c1" / "ExactEBRP.exe"
 PROTOCOL = OUT / "round26_evaluation_protocol.md"
 SEAL = OUT / "heldout_seal.json"
 LOCK = OUT / ".round26_runner.lock"
 BUILD_SOURCE_COMMIT = "e8b37e1f65a0250a4ad52f92dfa59807a16d56ff"
+C1_SOURCE_COMMIT = "a646e8ebde85940091fb226232d5b8de9b21416f"
 COMPRESSION_THRESHOLD = 4 * 1024 * 1024
 
 INSTANCES: dict[str, tuple[Path, str, int]] = {
@@ -133,12 +135,17 @@ def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def production_binding(run_dir: Path, arm: str) -> list[str]:
+def executable_for_arm(arm: str) -> Path:
+    return C1_EXE if arm == "C1" else C0_EXE
+
+
+def production_binding(run_dir: Path, arm: str, exe: Path) -> list[str]:
     args: list[str] = []
     for name, value in (
         ("--round22-production-mode", True),
-        ("--round22-source-commit", BUILD_SOURCE_COMMIT),
-        ("--round22-executable-sha256", sha256(EXE)),
+        ("--round22-source-commit",
+         C1_SOURCE_COMMIT if arm == "C1" else BUILD_SOURCE_COMMIT),
+        ("--round22-executable-sha256", sha256(exe)),
         ("--round22-production-manifest-sha256", sha256(PROTOCOL)),
         ("--dense-progress", True),
         ("--dense-progress-run-id", run_dir.name),
@@ -151,7 +158,8 @@ def production_binding(run_dir: Path, arm: str) -> list[str]:
 
 
 def plain_command(instance: str, budget: int, run_dir: Path) -> list[str]:
-    args = [str(EXE), "--input", str(INSTANCES[instance][0])]
+    exe = C0_EXE
+    args = [str(exe), "--input", str(INSTANCES[instance][0])]
     for name, value in (
         ("--method", "gurobi"), ("--lambda", 0.15), ("--T", 3600),
         ("--time-limit", budget * 0.98),
@@ -161,8 +169,8 @@ def plain_command(instance: str, budget: int, run_dir: Path) -> list[str]:
         ("--gurobi-seed", 0), ("--gurobi-presolve", -1),
         ("--gurobi-model-export", run_dir / "canonical.lp"),
         ("--gurobi-progress", run_dir / "progress.csv"),
-        ("--round24-executable-sha256", sha256(EXE)),
-        ("--round24-manifest-executable-sha256", sha256(EXE)),
+        ("--round24-executable-sha256", sha256(exe)),
+        ("--round24-manifest-executable-sha256", sha256(exe)),
         ("--log", run_dir / "native.log"),
     ):
         add(args, name, value)
@@ -178,10 +186,11 @@ def plain_command(instance: str, budget: int, run_dir: Path) -> list[str]:
 
 def external_command(instance: str, arm: str, budget: int,
                      run_dir: Path) -> list[str]:
-    args = [str(EXE), "--input", str(INSTANCES[instance][0])]
+    exe = executable_for_arm(arm)
+    args = [str(exe), "--input", str(INSTANCES[instance][0])]
     args.extend(round25.tailored_base(run_dir, budget))
     args.extend(round25.trace_args(run_dir))
-    args.extend(production_binding(run_dir, arm))
+    args.extend(production_binding(run_dir, arm, exe))
     for name, value in (
         ("--frontier-execution-mode", "external-gini-tree"),
         ("--external-gini-artifact-dir", run_dir / "external"),
@@ -189,6 +198,7 @@ def external_command(instance: str, arm: str, budget: int,
         ("--global-gini-tree-presolve", "off"),
         ("--external-gini-lifecycle", "retained-per-leaf"),
         ("--external-gini-warm-start", False),
+        ("--external-gini-split-after-attempts", 1 if arm == "C1" else 2),
         ("--gurobi-home", "D:/gurobi1302/win64"),
         ("--gurobi-seed", 0), ("--gurobi-presolve", -1),
         ("--log", run_dir / "native.log"),
@@ -258,12 +268,14 @@ def compress_large_files(directory: Path) -> list[dict[str, Any]]:
 
 
 def verify_frozen(instance: str, arm: str, allow_heldout: bool) -> None:
-    if sha256(EXE) != load_json(OUT / "round26_build_manifest.json")[
-            "gurobi_enabled_sha256"]:
-        raise RuntimeError("frozen executable mismatch")
-    manifest_name = "p_grb_manifest.json" if arm == "P-GRB" else f"{arm.lower()}_manifest.json"
+    exe = executable_for_arm(arm)
+    manifest_name = (
+        "p_grb_manifest.json" if arm == "P-GRB" else
+        "prototype1_manifest.json" if arm == "C1" else
+        "c0_manifest.json"
+    )
     manifest = load_json(OUT / manifest_name)
-    if manifest["executable_sha256"] != sha256(EXE):
+    if manifest["executable_sha256"] != sha256(exe):
         raise RuntimeError(f"{arm} executable mismatch")
     if manifest["protocol_sha256"] != sha256(PROTOCOL):
         raise RuntimeError(f"{arm} protocol mismatch")
@@ -292,6 +304,7 @@ def run_one(stage: str, instance: str, arm: str, budget: int,
             return state
         raise RuntimeError(f"incomplete run requires explicit audit: {run_id}")
     verify_frozen(instance, arm, allow_heldout)
+    exe = executable_for_arm(arm)
     run_dir.mkdir(parents=True, exist_ok=False)
     command = make_command(instance, arm, budget, run_dir)
     record: dict[str, Any] = {
@@ -299,7 +312,7 @@ def run_one(stage: str, instance: str, arm: str, budget: int,
         "instance": instance, "family": INSTANCES[instance][1],
         "V": INSTANCES[instance][2], "arm": arm, "repetition": repetition,
         "budget_seconds": budget, "command": command,
-        "executable_sha256": sha256(EXE),
+        "executable_sha256": sha256(exe),
         "instance_sha256": sha256(INSTANCES[instance][0]),
         "protocol_sha256": sha256(PROTOCOL),
         "license_environment": "process-local-authorized-path-not-serialized",
@@ -367,7 +380,7 @@ def configuration(arm: str) -> dict[str, Any]:
 
 
 def prepare_manifests() -> None:
-    if not EXE.is_file() or not PROTOCOL.is_file() or not SEAL.is_file():
+    if not C0_EXE.is_file() or not PROTOCOL.is_file() or not SEAL.is_file():
         raise RuntimeError("executable, protocol, and held-out seal are required")
     harness_commit = subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip().lower()
@@ -375,8 +388,8 @@ def prepare_manifests() -> None:
         "schema": "round26-build-manifest-v1",
         "build_source_commit": BUILD_SOURCE_COMMIT,
         "harness_commit_at_freeze": harness_commit,
-        "gurobi_enabled_executable": relative(EXE),
-        "gurobi_enabled_sha256": sha256(EXE),
+        "gurobi_enabled_executable": relative(C0_EXE),
+        "gurobi_enabled_sha256": sha256(C0_EXE),
         "protocol_sha256": sha256(PROTOCOL),
         "gurobi_version": "13.0.2",
     }
@@ -387,12 +400,33 @@ def prepare_manifests() -> None:
             "schema": "round26-frozen-arm-v1", "arm": arm,
             "build_source_commit": BUILD_SOURCE_COMMIT,
             "harness_commit_at_freeze": harness_commit,
-            "executable_path": relative(EXE),
-            "executable_sha256": sha256(EXE),
+            "executable_path": relative(C0_EXE),
+            "executable_sha256": sha256(C0_EXE),
             "protocol_sha256": sha256(PROTOCOL),
             "configuration": configuration(arm),
         })
     print("Round 26 P-GRB/C0 manifests frozen", flush=True)
+
+
+def prepare_prototype_manifest() -> None:
+    if not C1_EXE.is_file():
+        raise RuntimeError("prototype executable is required")
+    json_write(OUT / "prototype1_manifest.json", {
+        "schema": "round26-development-prototype-v1",
+        "prototype": "P1",
+        "source_commit": C1_SOURCE_COMMIT,
+        "executable_path": relative(C1_EXE),
+        "executable_sha256": sha256(C1_EXE),
+        "protocol_sha256": sha256(PROTOCOL),
+        "configuration": configuration("C1") | {
+            "candidate_mechanism": "uniform_split_after_one_unresolved_attempt",
+            "external_gini_split_after_attempts": 1,
+            "C0_default_external_gini_split_after_attempts": 2,
+        },
+        "development_only": True,
+        "heldout_access_authorized": False,
+    })
+    print("Round 26 prototype P1 manifest frozen", flush=True)
 
 
 def acquire_lock() -> None:
@@ -407,28 +441,47 @@ def acquire_lock() -> None:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--prepare-manifests", action="store_true")
-    parser.add_argument("--stage", choices=("forensics",))
+    parser.add_argument("--prepare-prototype-manifest", action="store_true")
+    parser.add_argument("--stage", choices=("forensics", "candidate"))
     args = parser.parse_args()
     if args.prepare_manifests:
         prepare_manifests()
         return 0
-    if args.stage != "forensics":
-        parser.error("--stage forensics or --prepare-manifests is required")
-    if not EXE.is_file() or not LICENSE.is_file():
+    if args.prepare_prototype_manifest:
+        prepare_prototype_manifest()
+        return 0
+    if args.stage not in ("forensics", "candidate"):
+        parser.error("a preparation action or --stage is required")
+    if not C0_EXE.is_file() or not LICENSE.is_file():
         raise SystemExit("frozen executable or authorized license path unavailable")
     acquire_lock()
     failures = 0
     try:
-        for instance in ("V12_M1", "V12_M2"):
-            for repetition in (1, 2, 3):
-                for arm in ("P-GRB", "C0"):
-                    state = run_one(
-                        "forensics", instance, arm, 300,
-                        repetition=repetition, allow_heldout=False,
-                        official=False)
-                    if state["return_code"] != 0 or not state["result_exists"]:
-                        failures += 1
-        print(f"FORENSICS complete process_failures={failures}", flush=True)
+        if args.stage == "forensics":
+            matrix = [
+                (instance, arm, repetition, 300)
+                for instance in ("V12_M1", "V12_M2")
+                for repetition in (1, 2, 3)
+                for arm in ("P-GRB", "C0")
+            ]
+        else:
+            matrix = [
+                (instance, "C1", repetition, 300)
+                for instance in ("V12_M1", "V12_M2")
+                for repetition in (1, 2, 3)
+            ] + [
+                (instance, arm, 1, 600)
+                for instance in DEVELOPMENT[2:]
+                for arm in ("C0", "C1")
+            ]
+        for instance, arm, repetition, budget in matrix:
+            state = run_one(
+                args.stage, instance, arm, budget,
+                repetition=repetition, allow_heldout=False,
+                official=False)
+            if state["return_code"] != 0 or not state["result_exists"]:
+                failures += 1
+        print(f"{args.stage.upper()} complete process_failures={failures}", flush=True)
         return 1 if failures else 0
     finally:
         LOCK.unlink(missing_ok=True)
