@@ -1,0 +1,6 @@
+gate,passed,evidence
+all_correctness_coverage_lifecycle_verifier,True,all nine P1 result rows pass; CLI failures excluded as runner-only
+V12_M1_within_5_percent,True,P1 median wall and Work are no worse than P-GRB
+V12_M2_excess_work_reduced_at_least_50_percent,True,excess Work reduction=0.700257
+each_difficult_normalized_LB_and_AUC_loss_at_most_0.02,False,"[{""c0_strict"": true, ""instance"": ""high_imbalance_seed3202"", ""normalized_auc_delta_p1_minus_c0"": -0.01048006274730251, ""normalized_final_lb_delta_p1_minus_c0"": -0.0288346316527629, ""p1_strict"": false}, {""c0_strict"": false, ""instance"": ""moderate_seed3302"", ""normalized_auc_delta_p1_minus_c0"": 0.0029054293079434634, ""normalized_final_lb_delta_p1_minus_c0"": 0.003190617942391949, ""p1_strict"": false}, {""c0_strict"": false, ""instance"": ""tight_T_seed3101"", ""normalized_auc_delta_p1_minus_c0"": -0.0052768390952436794, ""normalized_final_lb_delta_p1_minus_c0"": -0.019279938373701122, ""p1_strict"": false}]"
+one_uniform_parameter_set,True,split-after-attempts=1 on every P1 run

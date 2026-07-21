@@ -1,0 +1,16 @@
+instance,arm,repetitions,horizon_seconds,status,strict_certified,median_wall_seconds,median_work,final_lower_bound,verified_upper_bound,normalized_final_lb,normalized_bound_auc,model_count,optimize_calls,split_count,fresh_restarts,verifier_passed,coverage_passed,lifecycle_passed,included_in_selection,exclusion_reason
+V12_M1,P-GRB,3,300,all_optimal,True,36.4982018,53.573278258640755,0.3572005832084151,0.3572005832084155,0.9999999999999988,0.990897131708572,0.0,0.0,0.0,0.0,True,False,True,True,none
+V12_M1,C0,3,300,all_optimal,True,37.5592412,34.78137617640885,0.3572005832084155,0.3572005832084155,1.0,0.9596853644166666,4.0,4.0,0.0,4.0,True,True,True,True,none
+V12_M1,P1,3,300,all_optimal,True,36.2200514,34.78137617640885,0.3572005832084155,0.3572005832084155,1.0,0.9597788219999999,4.0,4.0,0.0,4.0,True,True,True,True,none
+V12_M2,P-GRB,3,300,all_optimal,True,179.1867241,282.0967431295214,0.7185040707549712,0.7185040707549709,1.0000000000000004,0.9731766634843436,0.0,0.0,0.0,0.0,True,False,True,True,none
+V12_M2,C0,3,300,all_optimal,True,183.0220303,341.7164374139629,0.7185040707549709,0.7185040707549709,1.0,0.915546398801161,6.0,8.0,1.0,6.0,True,True,True,True,none
+V12_M2,P1,3,300,all_optimal,True,181.6387609,299.96730160613123,0.7185040707549709,0.7185040707549709,1.0,0.9212723499433249,10.0,10.0,3.0,10.0,True,True,True,True,none
+high_imbalance_seed3202,C0,1,600,optimal,True,404.5368161,768.6485398040465,1.7493134520506337,1.7493134520506337,1.0,0.9429892496781065,10,15,3,10,True,True,True,True,none
+high_imbalance_seed3202,P1,1,600,external_gini_tree_time_limit,False,576.7367827,1125.1205635769977,1.6988726430155305,1.7493134520506337,0.9711653683472371,0.932509186930804,22,23,9,22,True,True,True,True,none
+moderate_seed3302,C0,1,600,external_gini_tree_time_limit,False,576.8481477,1019.1263779057747,0.16089150760714427,0.19563620654901237,0.8224014891989659,0.7293917565425851,11,16,4,11,True,True,True,True,none
+moderate_seed3302,P1,1,600,external_gini_tree_time_limit,False,576.8640309,1053.6465745465593,0.16151570799794104,0.19563620654901237,0.8255921071413579,0.7322971858505286,21,21,9,21,True,True,True,True,none
+tight_T_seed3101,C0,1,600,external_gini_tree_time_limit,False,576.7215675,1117.5565279859352,0.05531471467560385,0.10725273413394144,0.5157417675387618,0.48520212596647333,9,15,3,9,True,True,True,True,none
+tight_T_seed3101,P1,1,600,external_gini_tree_time_limit,False,576.8542387,1186.3533347808618,0.05324688857109051,0.10725273413394144,0.49646182916506065,0.47992528687122965,20,20,10,20,True,True,True,True,none
+high_imbalance_seed3202,C0_FAILED,1,600,runner_cli_failure,False,0.03200000012293458,0,,,,,0,0,0,0,False,False,False,False,runner_cli_compatibility_failure
+moderate_seed3302,C0_FAILED,1,600,runner_cli_failure,False,0.014999999664723873,0,,,,,0,0,0,0,False,False,False,False,runner_cli_compatibility_failure
+tight_T_seed3101,C0_FAILED,1,600,runner_cli_failure,False,0.03200000012293458,0,,,,,0,0,0,0,False,False,False,False,runner_cli_compatibility_failure
