@@ -109,6 +109,29 @@ def main() -> None:
             c1_command[c1_command.index("--external-gini-warm-start") + 1] == "false",
             "C1 cold command")
 
+    diagnostic = runner.diagnostic_matrix()
+    require(len(diagnostic) == 2, "two Stage 1 regression diagnostics")
+    require({item[0] for item in diagnostic} == {"stage1"},
+            "Stage 1 diagnostic provenance")
+    require({item[1] for item in diagnostic} == {"V12_M1", "V12_M2"},
+            "only P-GRB-winning V12 pairs replay")
+    require({item[2] for item in diagnostic} == {600},
+            "V12 diagnostic budget")
+    require(len({item[3]["trigger_id"] for item in diagnostic}) ==
+            len(diagnostic), "diagnostic trigger IDs unique")
+    for source_stage, instance, budget, trigger in diagnostic:
+        require(trigger["replay_arm"] == "C1", "diagnostic is C1-only")
+        run_id = (f"diagnostic_{source_stage}_{trigger['official_horizon_seconds']}s"
+                  f"__{instance}__c1__{budget}s")
+        state = json.loads((OUT / "runs" / run_id / "run_state.json").read_text(
+            encoding="utf-8"))
+        require(state["completed"] and state["return_code"] == 0,
+                f"diagnostic completed: {trigger['trigger_id']}")
+        require(state["diagnostic_only"] and not state["official"],
+                f"diagnostic excluded from official: {trigger['trigger_id']}")
+        require(state["diagnostic_trigger"]["trigger_id"] == trigger["trigger_id"],
+                f"diagnostic linkage: {trigger['trigger_id']}")
+
     source = (ROOT / "src/ExternalGiniTree.cpp").read_text(encoding="utf-8")
     helper = source[source.index("bool externalLeafReadyForAdaptiveSplit"):]
     helper = helper[:helper.index("SolveResult solveExternalGiniTree")]

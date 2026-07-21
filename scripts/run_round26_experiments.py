@@ -463,6 +463,34 @@ def acquire_lock() -> None:
         stream.write(f"pid={os.getpid()}\n")
 
 
+def diagnostic_matrix() -> list[tuple[str, str, int, dict[str, Any]]]:
+    """Return exactly one frozen C1 replay for each triggered official pair."""
+    path = OUT / "regression_trigger_table.csv"
+    if not path.is_file():
+        raise RuntimeError("regression trigger table is missing")
+    with path.open(newline="", encoding="utf-8") as stream:
+        rows = list(csv.DictReader(stream))
+    triggered = [row for row in rows
+                 if str(row.get("triggered", "")).lower() == "true"]
+    matrix: list[tuple[str, str, int, dict[str, Any]]] = []
+    seen: set[str] = set()
+    for row in triggered:
+        trigger_id = str(row.get("trigger_id", ""))
+        if not trigger_id or trigger_id in seen:
+            raise RuntimeError(f"missing or duplicate diagnostic trigger {trigger_id}")
+        seen.add(trigger_id)
+        if row.get("replay_arm") != "C1":
+            raise RuntimeError(f"non-C1 diagnostic replay requested: {trigger_id}")
+        source_stage = str(row.get("official_stage", ""))
+        instance = str(row.get("instance", ""))
+        budget = int(row.get("diagnostic_budget_seconds", "0"))
+        expected = 900 if INSTANCES[instance][2] == 50 else 600
+        if source_stage not in OFFICIAL_STAGES or budget != expected:
+            raise RuntimeError(f"invalid diagnostic scope or budget: {trigger_id}")
+        matrix.append((source_stage, instance, budget, row))
+    return matrix
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--prepare-manifests", action="store_true")
@@ -470,7 +498,7 @@ def main() -> int:
     parser.add_argument(
         "--stage", choices=(
             "forensics", "candidate", "candidate-retry", "sentinel",
-            *OFFICIAL_STAGES,
+            *OFFICIAL_STAGES, "diagnostic",
         ))
     args = parser.parse_args()
     if args.prepare_manifests:
@@ -481,14 +509,26 @@ def main() -> int:
         return 0
     if args.stage not in (
             "forensics", "candidate", "candidate-retry", "sentinel",
-            *OFFICIAL_STAGES):
+            *OFFICIAL_STAGES, "diagnostic"):
         parser.error("a preparation action or --stage is required")
     if not C0_EXE.is_file() or not LICENSE.is_file():
         raise SystemExit("frozen executable or authorized license path unavailable")
     acquire_lock()
     failures = 0
     try:
-        if args.stage == "forensics":
+        if args.stage == "diagnostic":
+            diagnostic_rows = diagnostic_matrix()
+            for source_stage, instance, budget, trigger in diagnostic_rows:
+                diagnostic_stage = (
+                    f"diagnostic_{source_stage}_{trigger['official_horizon_seconds']}s")
+                state = run_one(
+                    diagnostic_stage, instance, "C1", budget,
+                    allow_heldout=instance in HELDOUT_V20 + V50,
+                    official=False, diagnostic_trigger=trigger)
+                if state["return_code"] != 0 or not state["result_exists"]:
+                    failures += 1
+            matrix = []
+        elif args.stage == "forensics":
             matrix = [
                 (instance, arm, repetition, 300)
                 for instance in ("V12_M1", "V12_M2")
