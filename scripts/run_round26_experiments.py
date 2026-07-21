@@ -136,15 +136,16 @@ def load_json(path: Path) -> dict[str, Any]:
 
 
 def executable_for_arm(arm: str) -> Path:
-    return C1_EXE if arm == "C1" else C0_EXE
+    # The sole development prototype was rejected.  Frozen official C1 is
+    # deliberately identical to C0; C1_EXE remains evidence-only for P1 runs.
+    return C0_EXE
 
 
 def production_binding(run_dir: Path, arm: str, exe: Path) -> list[str]:
     args: list[str] = []
     for name, value in (
         ("--round22-production-mode", True),
-        ("--round22-source-commit",
-         C1_SOURCE_COMMIT if arm == "C1" else BUILD_SOURCE_COMMIT),
+        ("--round22-source-commit", BUILD_SOURCE_COMMIT),
         ("--round22-executable-sha256", sha256(exe)),
         ("--round22-production-manifest-sha256", sha256(PROTOCOL)),
         ("--dense-progress", True),
@@ -204,8 +205,6 @@ def external_command(instance: str, arm: str, budget: int,
         ("--out", run_dir / "result.json"),
     ):
         add(args, name, value)
-    if arm == "C1":
-        add(args, "--external-gini-split-after-attempts", 1)
     return args
 
 
@@ -272,7 +271,7 @@ def verify_frozen(instance: str, arm: str, allow_heldout: bool) -> None:
     exe = executable_for_arm(arm)
     manifest_name = (
         "p_grb_manifest.json" if arm == "P-GRB" else
-        "prototype1_manifest.json" if arm == "C1" else
+        "c1_manifest.json" if arm == "C1" else
         "c0_manifest.json"
     )
     manifest = load_json(OUT / manifest_name)
