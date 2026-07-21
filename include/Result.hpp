@@ -493,6 +493,7 @@ struct SolveResult {
     long long external_gini_tree_final_leaf_count = 0;
     long long external_gini_tree_open_leaf_count = 0;
     long long external_gini_tree_closed_leaf_count = 0;
+    long long external_gini_tree_split_after_attempts = 2;
     long long external_gini_tree_split_count = 0;
     long long external_gini_tree_attempt_count = 0;
     long long external_gini_tree_environment_count = 0;

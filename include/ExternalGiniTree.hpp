@@ -70,6 +70,17 @@ struct ExternalGiniTreeCertificateDecision {
 ExternalGiniTreeCertificateDecision evaluateExternalGiniTreeCertificate(
     const ExternalGiniTreeCertificateInput& input);
 
+// Solver-neutral Round 26 partition timing.  The caller still performs the
+// existing exact atomic replacement and inherited-bound checks.
+bool externalLeafReadyForAdaptiveSplit(
+    int completed_attempts,
+    int split_after_attempts,
+    double gamma_L,
+    double gamma_U,
+    int split_depth,
+    int max_depth,
+    double min_width);
+
 SolveResult solveExternalGiniTree(const Instance& instance,
                                   const SolveOptions& options,
                                   const SolveResult& verified_seed,

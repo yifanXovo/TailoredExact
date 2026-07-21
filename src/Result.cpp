@@ -1520,6 +1520,7 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_COUNT(final_leaf_count);
     WRITE_EXT_COUNT(open_leaf_count);
     WRITE_EXT_COUNT(closed_leaf_count);
+    WRITE_EXT_COUNT(split_after_attempts);
     WRITE_EXT_COUNT(split_count);
     WRITE_EXT_COUNT(attempt_count);
     WRITE_EXT_COUNT(environment_count);

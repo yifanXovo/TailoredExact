@@ -321,6 +321,21 @@ void externalTreeChecks() {
     const auto children = ebrp::splitLegacyFrontierInterval(0.2, 0.4, 2);
     require(ebrp::exactIntervalCoverage({0.2,0.4}, children, 1e-12),
             "adaptive exact coverage");
+    require(!ebrp::externalLeafReadyForAdaptiveSplit(
+                0, 1, 0.2, 0.4, 0, 8, 0.0001),
+            "one-pass policy never splits an unattempted leaf");
+    require(ebrp::externalLeafReadyForAdaptiveSplit(
+                1, 1, 0.2, 0.4, 0, 8, 0.0001),
+            "one-pass policy splits after one unresolved attempt");
+    require(!ebrp::externalLeafReadyForAdaptiveSplit(
+                1, 2, 0.2, 0.4, 0, 8, 0.0001),
+            "C0 policy retains the second attempt");
+    require(ebrp::externalLeafReadyForAdaptiveSplit(
+                2, 2, 0.2, 0.4, 0, 8, 0.0001),
+            "C0 policy splits after two unresolved attempts");
+    require(!ebrp::externalLeafReadyForAdaptiveSplit(
+                1, 1, 0.2, 0.4, 8, 8, 0.0001),
+            "one-pass policy respects the unchanged depth gate");
 
     ebrp::ControllingLeafScheduler scheduler;
     ebrp::ControllingLeaf parent;
@@ -405,6 +420,8 @@ void hashingAndStartChecks() {
             "unsafe override defaults false");
     require(defaults.external_gini_backend=="cplex",
             "default stable backend unchanged");
+    require(defaults.external_gini_split_after_attempts==2,
+            "C0 split threshold remains the default");
     require(defaults.global_gini_tree_child_estimate_mode=="parent-copy",
             "P2 remains off by default");
     require(defaults.global_gini_tree_root_connectivity_flow_variant.empty(),

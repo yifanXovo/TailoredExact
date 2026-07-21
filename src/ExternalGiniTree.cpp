@@ -461,6 +461,20 @@ ExternalGiniTreeCertificateDecision evaluateExternalGiniTreeCertificate(
     return out;
 }
 
+bool externalLeafReadyForAdaptiveSplit(
+        int completed_attempts,
+        int split_after_attempts,
+        double gamma_L,
+        double gamma_U,
+        int split_depth,
+        int max_depth,
+        double min_width) {
+    return split_after_attempts >= 1 &&
+        completed_attempts >= split_after_attempts &&
+        legacyAdaptiveSplitEligible(
+            gamma_L, gamma_U, split_depth, max_depth, min_width);
+}
+
 SolveResult solveExternalGiniTree(const Instance& instance,
                                   const SolveOptions& options,
                                   const SolveResult& verified_seed,
@@ -480,6 +494,8 @@ SolveResult solveExternalGiniTree(const Instance& instance,
     result.external_gini_tree_root_gamma_L = root_gamma_L;
     result.external_gini_tree_root_gamma_U = root_gamma_U;
     result.external_gini_tree_verified_upper_bound = verified_seed.objective;
+    result.external_gini_tree_split_after_attempts =
+        options.external_gini_split_after_attempts;
     result.strict_certified_original_problem = false;
     result.strict_certificate_class = "certificate_rejected";
     result.strict_certificate_rejection_reason = "external_tree_not_finalized";
@@ -691,10 +707,13 @@ SolveResult solveExternalGiniTree(const Instance& instance,
             break;
         }
 
-        // The adaptive rule is deterministic and backend-neutral: after two
-        // unresolved attempts, split at the shared uniform geometry points.
-        if (selected->exact_solver_attempt_count >= 2 &&
-            legacyAdaptiveSplitEligible(
+        // The adaptive rule is deterministic and backend-neutral.  C0 keeps
+        // the historical threshold of two attempts; the Round 26 prototype
+        // uses one uniformly to avoid a repeated fresh-root solve before the
+        // same exact atomic partition.
+        if (externalLeafReadyForAdaptiveSplit(
+                selected->exact_solver_attempt_count,
+                options.external_gini_split_after_attempts,
                 selected->gamma_L, selected->gamma_U, selected->split_depth,
                 options.frontier_adaptive_max_depth,
                 options.frontier_adaptive_min_width)) {

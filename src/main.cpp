@@ -57,6 +57,7 @@ void usage() {
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
         << "[--gini-cap <gamma>] [--gini-floor <gamma>] [--max-nodes <N>] [--frontier-intervals <N>] [--frontier-refine-splits <N>] "
         << "[--frontier-execution-mode scheduler|global-gini-tree|external-gini-tree] [--global-gini-tree-presolve on|off] "
+        << "[--external-gini-split-after-attempts <N>] "
         << "[--global-gini-tree-search dynamic|traditional|auto] [--global-gini-tree-child-estimate parent-copy|dispersion-coupled|factory-domain] "
         << "[--global-gini-tree-row-attachment full-inherited-pack|exact-incremental-delta] [--global-gini-tree-row-timing deferred|eager] "
         << "[--global-gini-tree-native-mip-start true|false] [--global-gini-tree-root-connectivity-flow true|false] "
@@ -567,6 +568,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--external-gini-backend") opt.external_gini_backend = requireValue(i, argc, argv);
         else if (arg == "--external-gini-lifecycle") opt.external_gini_lifecycle = requireValue(i, argc, argv);
         else if (arg == "--external-gini-warm-start") opt.external_gini_warm_start = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--external-gini-split-after-attempts") opt.external_gini_split_after_attempts = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--external-gini-artifact-dir") opt.external_gini_artifact_dir = requireValue(i, argc, argv);
         else if (arg == "--round24-research-mode") opt.round24_research_mode = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--allow-unsafe-continuous-branch-presolve-diagnostic") opt.allow_unsafe_continuous_branch_presolve_diagnostic = parseBoolValue(requireValue(i, argc, argv));
@@ -1303,6 +1305,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.external_gini_lifecycle != "fresh-per-attempt") {
         opt.external_gini_lifecycle = "retained-per-leaf";
     }
+    opt.external_gini_split_after_attempts =
+        std::max(1, opt.external_gini_split_after_attempts);
     if (opt.threads <= 0) opt.threads = 1;
     if (opt.bpc_workers <= 0) opt.bpc_workers = std::max(1, opt.threads);
     if (opt.pricing_threads <= 0) opt.pricing_threads = 1;
