@@ -1,0 +1,67 @@
+
+Gurobi 13.0.2 (win64) logging started Mon Jul 20 20:03:07 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_solver_backend_validation_round25\runs\stage1__moderate_seed4302__ext_grb_cold__900s\external\native_logs\L1.0.1.0_attempt_1.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  60
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11919 rows, 3378 columns and 67378 nonzeros (Min)
+Model fingerprint: 0xfeef0c06
+Model has 21 linear objective coefficients
+Variable types: 1686 continuous, 1692 integer (1492 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [2e-02, 9e+01]
+  RHS range        [2e-02, 5e+04]
+
+Presolved: 10359 rows, 3058 columns, 69105 nonzeros
+
+Continuing optimization...
+
+   932   350 infeasible   18               -    0.01780      -   257   30s
+  1030   326    0.02064   10  115          -    0.01842      -   273   35s
+  1109   313    0.01901   16  133          -    0.01873      -   281   40s
+  1251   295    0.02487   18  178          -    0.01928      -   279   45s
+  1391   257    0.02919   20  181          -    0.02017      -   276   50s
+  1522   202 infeasible   16               -    0.02111      -   275   55s
+  1776   196    0.02283   16   45          -    0.02205      -   263   60s
+  1916   168    0.02309   23   43          -    0.02275      -   258   65s
+  2176    24    0.03053    8  178          -    0.02934      -   250   72s
+
+Cutting planes:
+  Learned: 18
+  Gomory: 9
+  Cover: 115
+  Implied bound: 242
+  Clique: 19
+  MIR: 203
+  StrongCG: 22
+  Flow cover: 61
+  GUB cover: 1
+  Inf proof: 9
+  Zero half: 11
+  Network: 21
+  RLT: 6
+  Relax-and-lift: 51
+  BQP: 9
+
+Explored 2201 nodes (575022 simplex iterations) in 72.75 seconds (143.96 work units)
+Most recent optimization runtime was 42.74 seconds (81.94 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+
+User-callback calls 17802, time in user-callback 0.01 sec

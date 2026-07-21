@@ -1070,6 +1070,8 @@ std::string resultToJson(const SolveResult& input) {
         << result.gurobi_mip_gap_abs_get_return_code << ",\n";
     out << "  \"gurobi_mip_gap_abs_effective\": "
         << result.gurobi_mip_gap_abs_effective << ",\n";
+    out << "  \"gurobi_environment_creation_return_code\": "
+        << result.gurobi_environment_creation_return_code << ",\n";
     out << "  \"gurobi_environment_count\": "
         << result.gurobi_environment_count << ",\n";
     out << "  \"gurobi_model_count\": " << result.gurobi_model_count << ",\n";
@@ -1558,6 +1560,11 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_DOUBLE(simplex_iterations);
     WRITE_EXT_DOUBLE(barrier_iterations);
     WRITE_EXT_DOUBLE(peak_memory_gb);
+    WRITE_EXT_DOUBLE(first_incumbent_time_seconds);
+    WRITE_EXT_DOUBLE(last_incumbent_improvement_time_seconds);
+    WRITE_EXT_DOUBLE(last_native_lb_improvement_time_seconds);
+    WRITE_EXT_DOUBLE(last_global_lb_improvement_time_seconds);
+    WRITE_EXT_DOUBLE(final_stagnation_seconds);
 #undef WRITE_EXT_DOUBLE
 #define WRITE_EXT_PATH(name) \
     out << "  \"external_gini_tree_" #name "\": \"" \
@@ -1567,6 +1574,7 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_PATH(lifecycle_path);
     WRITE_EXT_PATH(optimize_ledger_path);
     WRITE_EXT_PATH(warm_start_audit_path);
+    WRITE_EXT_PATH(enhanced_attempt_trace_path);
 #undef WRITE_EXT_PATH
     out << "  \"columns_generated_raw\": " << result.columns_generated_raw << ",\n";
     out << "  \"columns_after_dominance\": " << result.columns_after_dominance << ",\n";

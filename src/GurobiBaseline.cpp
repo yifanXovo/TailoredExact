@@ -539,6 +539,10 @@ public:
         FixedIntervalMipOutcome out;
         out.attempted = true;
         out.available = available_;
+        out.presolve_time_status =
+            "unavailable_gurobi_c_api_has_no_phase_timer_attribute";
+        out.root_time_status =
+            "unavailable_gurobi_c_api_has_no_phase_timer_attribute";
         if (!available_) {
             out.failure_reason = failure_reason_;
             return out;
@@ -1050,6 +1054,7 @@ SolveResult solveGurobiBaseline(const Instance& instance,
 
         const int env_rc = startSilentGurobiEnvironment(
             api, &env, log_path);
+        result.gurobi_environment_creation_return_code = env_rc;
         if (env_rc != 0 || !env) {
             result.status = "license_unavailable";
             result.gurobi_license_available = false;

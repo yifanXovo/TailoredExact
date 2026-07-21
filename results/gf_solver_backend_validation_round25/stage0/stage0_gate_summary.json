@@ -1,0 +1,49 @@
+{
+  "canonical_native_import": {
+    "inputs_passed": 10,
+    "inputs_total": 10,
+    "names_types_bounds_match": true,
+    "status": "passed"
+  },
+  "cpp_regression": {
+    "executions_passed": 18,
+    "executions_total": 18,
+    "round24_backend_coverage_status_artifact_lifecycle_certificate_warm_start": "passed"
+  },
+  "external_cplex_numeric_status_semantics": "passed_by_Round24BackendTests_and_round25_static_scan",
+  "frozen_executable_sha256": "a8e6d9abee48fee832f0277e9635ef1518c9563f1b32f10ddab3690b4759f4d1",
+  "gurobi_license": {
+    "command_line_check": "passed",
+    "independent_checks_agree": true,
+    "in_process_environment_creation_return_code": 0,
+    "in_process_status": "OPTIMAL",
+    "status": "passed"
+  },
+  "moderate4301_sentinel": {
+    "arms_passed": 3,
+    "arms_total": 3,
+    "contradicted_infeasibility_count": 0,
+    "coverage_lifecycle_consistency_failures": 0,
+    "process_failures": 0,
+    "verified_witnesses_retained": 3
+  },
+  "plain_tiny_exact": {
+    "cplex_gurobi_objective_delta": 0.0,
+    "runs_passed": 4,
+    "runs_total": 4,
+    "strict_toy_certificates": 2
+  },
+  "python_regression": {
+    "scripts_passed": 6,
+    "scripts_total": 6
+  },
+  "same_run_verified_hga_gate": "passed_by_external_sentinel_and_round25_protocol_test",
+  "schema": "round25-stage0-gate-summary-v1",
+  "s0_safe_defaults_unchanged": true,
+  "static_exactness": {
+    "checks_passed": 29,
+    "checks_total": 29,
+    "production_instance_dispatch_matches": 0
+  },
+  "status": "passed"
+}

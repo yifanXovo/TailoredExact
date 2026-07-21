@@ -1,0 +1,62 @@
+
+Gurobi 13.0.2 (win64) logging started Mon Jul 20 19:59:43 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_solver_backend_validation_round25\runs\stage1__moderate_seed4302__ext_grb_cold__900s\external\native_logs\L1.0.0_attempt_1.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  60
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11919 rows, 3378 columns and 67378 nonzeros (Min)
+Model fingerprint: 0x81f970de
+Model has 21 linear objective coefficients
+Variable types: 1686 continuous, 1692 integer (1492 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [1e-02, 9e+01]
+  RHS range        [1e-02, 5e+04]
+
+Presolved: 10225 rows, 3026 columns, 69746 nonzeros
+
+Continuing optimization...
+
+  1086   281    0.01847   16  131          -    0.01414      -   216   30s
+  1379   280 infeasible   12               -    0.01447      -   217   35s
+  1628   233    0.02300   13  160          -    0.01547      -   223   40s
+  1907   174    0.02158   16  175          -    0.01868      -   229   47s
+  2102   141    0.02158   15  211          -    0.02102      -   225   52s
+
+Cutting planes:
+  Learned: 17
+  Gomory: 3
+  Cover: 89
+  Implied bound: 209
+  Clique: 17
+  MIR: 204
+  StrongCG: 26
+  Flow cover: 49
+  Inf proof: 7
+  Zero half: 12
+  Network: 13
+  RLT: 4
+  Relax-and-lift: 47
+  BQP: 8
+
+Explored 2360 nodes (531508 simplex iterations) in 54.11 seconds (105.59 work units)
+Most recent optimization runtime was 24.11 seconds (47.01 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+
+User-callback calls 7351, time in user-callback 0.00 sec

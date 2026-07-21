@@ -1,0 +1,46 @@
+{
+  "all_evidence_rows": 79,
+  "compressed_files_restored_and_hash_verified": 586,
+  "correctness_failures": 0,
+  "diagnostic_replays_completed": 4,
+  "evidence_package_integrity": true,
+  "external_gurobi_broadly_nonregressive": true,
+  "external_gurobi_decision": "ready for a full production validation round",
+  "hierarchy_wins": {
+    "external_gurobi_cold_over_external_cplex": 12,
+    "external_gurobi_cold_over_plain_gurobi": 10,
+    "external_gurobi_cold_over_s0_safe": 12,
+    "external_gurobi_cold_over_warm": 7,
+    "external_gurobi_warm_over_cold": 5,
+    "plain_gurobi_over_external_gurobi_cold": 2
+  },
+  "license_usable": true,
+  "official_counts": {
+    "completed": 72,
+    "excluded": 0,
+    "failed": 0,
+    "interrupted": 0
+  },
+  "official_rows": 72,
+  "production_default_migration_justified": false,
+  "production_migration_round_justified": true,
+  "schema": "round25-final-audit-v1",
+  "stable_mainline": "corrected_CPLEX_S0_F0",
+  "strict_certificate_counts": {
+    "stage1:EXT-CPX": 2,
+    "stage1:EXT-GRB-COLD": 3,
+    "stage1:EXT-GRB-WARM": 3,
+    "stage1:P-CPX": 1,
+    "stage1:P-GRB": 2,
+    "stage1:S0-SAFE": 2,
+    "stage2:EXT-CPX": 0,
+    "stage2:EXT-GRB-COLD": 1,
+    "stage2:EXT-GRB-WARM": 1,
+    "stage2:P-CPX": 0,
+    "stage2:P-GRB": 0,
+    "stage2:S0-SAFE": 0
+  },
+  "time_limited_completed_rows": 57,
+  "triggered_pairs": 4,
+  "warm_start_decision": "mixed"
+}

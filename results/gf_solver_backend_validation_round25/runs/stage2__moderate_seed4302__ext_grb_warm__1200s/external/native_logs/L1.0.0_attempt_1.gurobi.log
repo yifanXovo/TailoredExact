@@ -1,0 +1,62 @@
+
+Gurobi 13.0.2 (win64) logging started Tue Jul 21 04:43:40 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_solver_backend_validation_round25\runs\stage2__moderate_seed4302__ext_grb_warm__1200s\external\native_logs\L1.0.0_attempt_1.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  60
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11919 rows, 3378 columns and 67378 nonzeros (Min)
+Model fingerprint: 0x81f970de
+Model has 21 linear objective coefficients
+Variable types: 1686 continuous, 1692 integer (1492 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [1e-02, 9e+01]
+  RHS range        [1e-02, 5e+04]
+
+Presolved: 10225 rows, 3026 columns, 69746 nonzeros
+
+Continuing optimization...
+
+  1078   283    0.01483    9  101          -    0.01409      -   216   30s
+  1369   290 infeasible   12               -    0.01443      -   220   35s
+  1644   247    0.01850    9  184          -    0.01562      -   226   40s
+  1841   186 infeasible   12               -    0.01761      -   231   45s
+  2158    97 infeasible    5               -    0.02174      -   231   50s
+
+Cutting planes:
+  Learned: 18
+  Gomory: 3
+  Cover: 92
+  Implied bound: 206
+  Clique: 17
+  MIR: 205
+  StrongCG: 27
+  Flow cover: 48
+  Inf proof: 7
+  Zero half: 12
+  Network: 13
+  RLT: 4
+  Relax-and-lift: 45
+  BQP: 8
+
+Explored 2308 nodes (542715 simplex iterations) in 52.69 seconds (103.75 work units)
+Most recent optimization runtime was 22.69 seconds (45.52 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+
+User-callback calls 6464, time in user-callback 0.00 sec
