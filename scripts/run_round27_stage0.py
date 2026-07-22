@@ -170,13 +170,24 @@ def main() -> int:
         "toy", 30, toy_grb), 45, licensed=True))
     cpx = result_object(toy_cplex / "result.json")
     grb = result_object(toy_grb / "result.json")
+    # CPLEX's engineering-certificate wrapper intentionally rejects an
+    # unbound Stage-0 command as a publishable production certificate.  The
+    # exhaustive toy gate instead consumes its complete native proof record:
+    # exact-optimal status, zero gaps, complete lifecycle, and independent
+    # verifier.  Gurobi is fully manifest-bound by its command constructor.
+    cplex_native_exact = (
+        cpx.get("native_mip_status_class") == "native_exact_optimal_status" and
+        cpx.get("native_mip_strict_gap_parameters_valid") is True and
+        cpx.get("native_mip_lifecycle_valid") is True)
     toy_ok = (
-        str(cpx.get("status", "")).lower() == "optimal" and
+        cplex_native_exact and
         str(grb.get("status", "")).lower() == "optimal" and
         bool(cpx.get("verifier_passed")) and bool(grb.get("verifier_passed")) and
         abs(float(cpx["objective"]) - float(grb["objective"])) <= 1e-9)
     rows.append(gate_row("exactness", "exact toy exhaustive CPLEX/Gurobi identity",
-                         toy_ok, f"objective={grb.get('objective')}"))
+                         toy_ok, (f"native_exact_CPLEX=true; "
+                                  f"engineering_exact_Gurobi=true; "
+                                  f"objective={grb.get('objective')}")))
     if not toy_ok:
         raise RuntimeError("exact toy comparison failed")
 
@@ -234,6 +245,7 @@ def main() -> int:
         "cplex_executable_sha256": frozen.sha256(CPLEX_BUILD / "ExactEBRP.exe"),
         "gurobi_executable_sha256": frozen.sha256(GUROBI_BUILD / "ExactEBRP.exe"),
         "gurobi_version": "13.0.2",
+        "cplex_version": "22.1.1.0",
         "license_environment": "process-local-only; contents never accessed",
     })
     print("Round 27 Stage 0 passed", flush=True)

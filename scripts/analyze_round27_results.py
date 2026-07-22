@@ -161,6 +161,9 @@ def extract_rows() -> list[dict[str, Any]]:
             "external_gini_tree_attempted") else (arm == "HGA" or not external)
         witness = verified(result)
         authoritative = process_ok and witness and gates
+        strict = bool(result.get(
+            "external_gini_tree_strict_certified", False) if external else
+            result.get("strict_certified_original_problem", False)) and authoritative
         ub = (result.get("external_gini_tree_verified_upper_bound")
               if external and finite(result.get("external_gini_tree_verified_upper_bound"))
               else result.get("hga_verified_objective")
@@ -180,21 +183,19 @@ def extract_rows() -> list[dict[str, Any]]:
             "result_exists": bool(result), "status": result.get("status", "missing_result"),
             "completed_process": process_ok, "authoritative": authoritative,
             "verified_witness": witness, "correctness_gates": gates,
-            "strict_certificate": bool(result.get(
-                "external_gini_tree_strict_certified",
-                result.get("strict_certified_original_problem", False))) and authoritative,
-            "certificate_class": result.get(
-                "external_gini_tree_certificate_class",
-                result.get("strict_certificate_class", "")),
+            "strict_certificate": strict,
+            "certificate_class": (result.get("external_gini_tree_certificate_class", "")
+                                  if external else
+                                  result.get("strict_certificate_class", "")),
             "certificate_wall_seconds": result.get("final_process_wall_time_seconds", "")
-                if result.get("external_gini_tree_strict_certified") else "",
+                if strict else "",
             "verified_ub": ub if witness and finite(ub) else "",
             "valid_final_lb": lb if authoritative and finite(lb) else "",
             "common_ub": "", "common_ub_gap": "", "bound_progress_auc": "",
             "process_wall_seconds": result.get(
                 "final_process_wall_time_seconds", state.get("runner_wall_seconds", "")),
-            "work": result.get("external_gini_tree_work",
-                               result.get("gurobi_work", "")),
+            "work": (result.get("external_gini_tree_work", "") if external
+                     else result.get("gurobi_work", "")),
             "lp_relaxation_count": result.get("external_gini_tree_lp_relaxation_count", 0),
             "lp_work": result.get("external_gini_tree_lp_work", 0),
             "terminal_mip_leaf_count": result.get(
@@ -203,23 +204,23 @@ def extract_rows() -> list[dict[str, Any]]:
                 "external_gini_tree_terminal_mip_optimize_count", 0),
             "terminal_mip_work": result.get("external_gini_tree_terminal_mip_work", 0),
             "split_count": result.get("external_gini_tree_split_count", 0),
-            "optimize_count": result.get("external_gini_tree_optimize_count",
-                                         result.get("gurobi_optimize_count", 0)),
-            "model_count": result.get("external_gini_tree_model_count",
-                                      result.get("gurobi_model_count", 0)),
-            "model_read_count": result.get("external_gini_tree_model_read_count",
-                                           result.get("gurobi_model_read_count", 0)),
+            "optimize_count": (result.get("external_gini_tree_optimize_count", 0)
+                               if external else result.get("gurobi_optimize_count", 0)),
+            "model_count": (result.get("external_gini_tree_model_count", 0)
+                            if external else result.get("gurobi_model_count", 0)),
+            "model_read_count": (result.get("external_gini_tree_model_read_count", 0)
+                                 if external else result.get("gurobi_model_read_count", 0)),
             "model_build_count": result.get(
                 "external_gini_tree_canonical_artifact_generation_count", 0),
-            "model_free_count": result.get("external_gini_tree_model_free_count",
-                                           result.get("gurobi_model_free_count", 0)),
-            "environment_count": result.get("external_gini_tree_environment_count",
-                                            result.get("gurobi_environment_count", 0)),
-            "environment_free_count": result.get(
-                "external_gini_tree_environment_free_count",
-                result.get("gurobi_environment_free_count", 0)),
-            "peak_memory_gb": result.get("external_gini_tree_peak_memory_gb",
-                                         result.get("gurobi_max_mem_used_gb", "")),
+            "model_free_count": (result.get("external_gini_tree_model_free_count", 0)
+                                 if external else result.get("gurobi_model_free_count", 0)),
+            "environment_count": (result.get("external_gini_tree_environment_count", 0)
+                                  if external else result.get("gurobi_environment_count", 0)),
+            "environment_free_count": (
+                result.get("external_gini_tree_environment_free_count", 0)
+                if external else result.get("gurobi_environment_free_count", 0)),
+            "peak_memory_gb": (result.get("external_gini_tree_peak_memory_gb", "")
+                               if external else result.get("gurobi_max_mem_used_gb", "")),
             "final_stagnation_seconds": result.get(
                 "external_gini_tree_final_stagnation_seconds", ""),
             "open_leaf_count": result.get("external_gini_tree_open_leaf_count", ""),
@@ -355,9 +356,12 @@ def exactness_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "terminal_mip_once": row["terminal_mip_leaf_count"] ==
                                   row["terminal_mip_optimize_count"],
         }
+        evaluated = bool(row["result_exists"])
         output.append({
             "stage": row["stage"], "instance": row["instance"],
-            **checks, "passed": bool(row["result_exists"] and all(checks.values())),
+            "evaluated": evaluated, **checks,
+            "passed": all(checks.values()) if evaluated else "",
+            "exclusion_reason": "" if evaluated else "process_terminated_without_final_json",
             "strict_certificate": row["strict_certificate"],
             "open_leaf_count": row["open_leaf_count"],
         })
@@ -434,7 +438,9 @@ def main() -> int:
         int(row["global_deadline_interruptions"] or 0) > 0 for row in rows)
     excluded = sum(not row["authoritative"] for row in rows)
     c2_rows = [row for row in stage2 + stage3 if row["arm"] == "C2-PAPER"]
-    exact_valid = bool(exact) and all(row["passed"] for row in exact)
+    evaluated_exact = [row for row in exact if row["evaluated"]]
+    exact_valid = bool(evaluated_exact) and all(truth(row["passed"])
+                                                for row in evaluated_exact)
     v12_c2 = [row for row in c2_rows if row["instance"] in ("V12_M1", "V12_M2")]
     v12_closed = len(v12_c2) == 2 and all(row["strict_certificate"] for row in v12_c2)
     difficult = [row for row in c0_pairs if row["instance"] in (
@@ -461,11 +467,45 @@ def main() -> int:
         selected = [row for row in stage2 + stage3 if row["arm"] == arm]
         totals[arm] = {field: sum(float(row[field]) for row in selected if finite(row[field]))
                        for field in ("work", "lp_relaxation_count", "lp_work",
+                                     "terminal_mip_leaf_count",
                                      "terminal_mip_optimize_count", "terminal_mip_work",
-                                     "split_count", "model_read_count", "model_build_count")}
+                                     "split_count", "optimize_count", "model_count",
+                                     "model_read_count", "model_build_count",
+                                     "model_free_count", "environment_count",
+                                     "environment_free_count")}
         memories = [float(row["peak_memory_gb"]) for row in selected
                     if finite(row["peak_memory_gb"])]
         totals[arm]["maximum_peak_memory_gb"] = max(memories) if memories else 0.0
+
+    stage0_summary = frozen.load_json(OUT / "stage0/stage0_gate_summary.json")
+    c0_manifest = frozen.load_json(OUT / "c0_legacy_manifest.json")
+    c2_manifest = frozen.load_json(OUT / "c2_paper_manifest.json")
+    compression_rows: list[dict[str, str]] = []
+    compression_path = OUT / "compression_manifest.csv"
+    if compression_path.is_file():
+        with compression_path.open(newline="", encoding="utf-8") as stream:
+            compression_rows = list(csv.DictReader(stream))
+    compression_valid = all(
+        row["original_sha256"] == row["restoration_sha256"] and
+        int(row["original_bytes"]) == int(row["restoration_bytes"])
+        for row in compression_rows)
+    artifact_files = [path for path in OUT.rglob("*") if path.is_file() and
+                      path.name != "evidence_package_manifest.csv"]
+    largest = max(artifact_files, key=lambda path: path.stat().st_size)
+    v50_p = next((row for row in stage3 if row["arm"] == "P-GRB"), None)
+    v50_c2 = next((row for row in stage3 if row["arm"] == "C2-PAPER"), None)
+    stage2_hga_ub_identity = []
+    stage2_by_key = {(row["instance"], row["arm"]): row for row in stage2}
+    for instance in frozen.STAGE2_INSTANCES:
+        c0 = stage2_by_key[(instance, "C0-LEGACY")]
+        c2 = stage2_by_key[(instance, "C2-PAPER")]
+        stage2_hga_ub_identity.append({
+            "instance": instance, "C0_verified_ub": c0["verified_ub"],
+            "C2_verified_ub": c2["verified_ub"],
+            "equal_within_1e-12": finite(c0["verified_ub"]) and
+                finite(c2["verified_ub"]) and
+                abs(float(c0["verified_ub"]) - float(c2["verified_ub"])) <= 1e-12,
+        })
 
     audit = {
         "schema": "round27-final-audit-v1", "classification": classification,
@@ -479,10 +519,35 @@ def main() -> int:
         "V12_C2_strict_certificates": sum(row["strict_certificate"] for row in v12_c2),
         "difficult_V20_median_C2_minus_C0_gap": median_gap_delta,
         "difficult_V20_median_C2_minus_C0_AUC": median_auc_delta,
+        "difficult_V20_C0_comparisons": difficult,
+        "P_GRB_C2_comparisons": p_pairs,
+        "stage2_HGA_verified_UB_identity": stage2_hga_ub_identity,
         "resource_totals": totals,
+        "stage0": stage0_summary,
+        "executables": {
+            "C0_sha256": c0_manifest["executable_sha256"],
+            "C2_and_P_GRB_sha256": c2_manifest["executable_sha256"],
+            "CPLEX_only_sha256": stage0_summary["cplex_executable_sha256"],
+            "build_source_commit": c2_manifest["build_source_commit"],
+        },
+        "solver_versions": {"Gurobi": "13.0.2", "CPLEX": "22.1.1.0"},
+        "compression": {
+            "records": len(compression_rows), "restoration_checks_passed": compression_valid,
+            "original_bytes": sum(int(row["original_bytes"]) for row in compression_rows),
+            "compressed_bytes": sum(int(row["compressed_bytes"]) for row in compression_rows),
+        },
+        "largest_artifact": {
+            "path": frozen.relative(largest), "bytes": largest.stat().st_size,
+        },
+        "V50_P_GRB": ({key: v50_p[key] for key in (
+            "status", "verified_ub", "valid_final_lb", "common_ub_gap", "work",
+            "peak_memory_gb", "process_wall_seconds")} if v50_p else {}),
+        "V50_C2": ({key: v50_c2[key] for key in (
+            "status", "return_code", "emergency_timeout", "result_exists",
+            "authoritative", "runner_wall_seconds")} if v50_c2 else {}),
         "unresolved_performance_issue": (
             "none observed in the short matrix" if classification == "approximately_reproduced"
-            else "generation-stagnation or complete LP/MIP events lose short-horizon bound progress"),
+            else "C2 missed the V12_M2 certificate, its difficult-instance final gaps regressed, and V50 terminated after HGA before its first paper-tree event"),
     }
     frozen.json_write(OUT / "final_audit_summary.json", audit)
 
@@ -498,6 +563,19 @@ def main() -> int:
         f"wall={fmt(row['process_wall_seconds'])} s."
         for row in v12_c2)
     v50 = next((row for row in stage3 if row["arm"] == "C2-PAPER"), None)
+    resource_lines = "\n".join(
+        f"- {arm}: Work {fmt(value['work'])}; LP count/Work "
+        f"{fmt(value['lp_relaxation_count'], 8)}/{fmt(value['lp_work'])}; "
+        f"terminal-MIP leaves/optimizes/Work "
+        f"{fmt(value['terminal_mip_leaf_count'], 8)}/"
+        f"{fmt(value['terminal_mip_optimize_count'], 8)}/"
+        f"{fmt(value['terminal_mip_work'])}; splits {fmt(value['split_count'], 8)}; "
+        f"reads/builds {fmt(value['model_read_count'], 8)}/"
+        f"{fmt(value['model_build_count'], 8)}; models created/freed "
+        f"{fmt(value['model_count'], 8)}/{fmt(value['model_free_count'], 8)}; "
+        f"maximum peak memory "
+        f"{fmt(value['maximum_peak_memory_gb'])} GB."
+        for arm, value in totals.items())
     report = f"""# Round 27 final report
 
 ## Outcome
@@ -506,6 +584,15 @@ Classification: **{classification}**. C2 is not promoted; the stable mainline
 is unchanged. The paper-compatibility static audit is {static_pass}, the
 dynamic exactness/lifecycle audit is {exact_valid}, and deterministic HGA
 repeatability is {repeat_pass}.
+
+The clean build/test gate executed {stage0_summary['cpp_tests_passed']} C++
+tests across the two configurations, all
+{stage0_summary['python_test_scripts_passed']} Python test scripts, and
+{stage0_summary['direct_round27_checks']} direct Round 27 checks. The C2/P-GRB
+executable SHA-256 is `{c2_manifest['executable_sha256']}`; C0 is
+`{c0_manifest['executable_sha256']}`; the CPLEX-only build is
+`{stage0_summary['cplex_executable_sha256']}`. Solver versions are Gurobi
+13.0.2 and CPLEX 22.1.1.0.
 
 ## Frozen algorithm
 
@@ -531,7 +618,10 @@ interruption leaves that leaf open and stops the whole tree.
 Across available high-imbalance, moderate, and tight-T pairs, median C2-minus-C0
 common-UB gap is {fmt(median_gap_delta)} and median C2-minus-C0 bound-progress
 AUC is {fmt(median_auc_delta)}. Pairwise evidence is in `c0_vs_c2.csv`; the
-plain-Gurobi comparison is in `p_grb_vs_c2.csv`.
+plain-Gurobi comparison is in `p_grb_vs_c2.csv`. C2 beat P-GRB's final bound
+on all three difficult V20 instances, but it did not retain C0's endpoint
+advantage on high3202 or moderate3302. The generation-stagnation C2 verified
+UB exactly matched C0's verified UB on all five Stage 2 instances.
 
 ## V50 smoke
 
@@ -541,14 +631,34 @@ plain-Gurobi comparison is in `p_grb_vs_c2.csv`.
    fmt(v50['peak_memory_gb']) + ' GB, lifecycle=' + str(v50['correctness_gates']) + '.')
   if v50 else '- No completed C2 V50 row.'}
 
+C2 completed the same byte-identical 3,325-generation HGA trajectory as Stage
+1, then exceeded the emergency shutdown margin before creating its first paper
+tree ledger or final JSON. The row is failed/excluded without retry. P-GRB
+returned valid LB {fmt(v50_p['valid_final_lb'] if v50_p else '')}, verified UB
+{fmt(v50_p['verified_ub'] if v50_p else '')}, Work
+{fmt(v50_p['work'] if v50_p else '')}, and peak memory
+{fmt(v50_p['peak_memory_gb'] if v50_p else '')} GB. See
+`v50_failure_audit.md`.
+
 ## Run accounting and resources
 
 The official matrix contains {len(rows)}/21 observed rows: {completed} completed,
-{failed} process failures, {time_limited} time-limited/interrupted, and
+{failed} process failure, {time_limited} time-limited/interrupted, and
 {excluded} excluded from authoritative quantitative comparison. Aggregate Work,
 LP Work/count, terminal-MIP Work/count, splits, model reads/builds, and maximum
 peak memory by arm are serialized in `final_audit_summary.json` and the
 per-run values in `lifecycle_and_resource_summary.csv`.
+
+{resource_lines}
+
+The dedicated LP/terminal-event counters are C2 fields; their zeros for
+P-GRB and C0 mean not applicable rather than absence of native MIP work.
+
+Lossless packaging compressed {len(compression_rows)} artifacts from
+{sum(int(row['original_bytes']) for row in compression_rows)} original bytes
+to {sum(int(row['compressed_bytes']) for row in compression_rows)} bytes; all
+restoration hashes and byte counts match. The largest retained artifact is
+`{frozen.relative(largest)}` ({largest.stat().st_size} bytes).
 
 ## Exactness and compatibility
 

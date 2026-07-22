@@ -1,0 +1,23 @@
+{
+  "arm": "P-GRB",
+  "build_source_commit": "5ddb69a4f4879bc07cb1cbf180447a0109621089",
+  "configuration": {
+    "HGA": false,
+    "MIPGap": 0.0,
+    "MIPGapAbs": 0.0,
+    "T": 3600,
+    "gurobi_presolve": "automatic",
+    "gurobi_seed": 0,
+    "instance_family_size_path_performance_dispatch": false,
+    "lambda": 0.15,
+    "method": "complete_original_compact_milp",
+    "tailored_information": false,
+    "threads": 1,
+    "uniform_all_instances": true
+  },
+  "executable_path": "build_round27/with_gurobi/ExactEBRP.exe",
+  "executable_sha256": "90bc8a3f55c0e372aea78831823ae5aac1422ae2ab2170507bdc96c0b638aa2b",
+  "gurobi_version": "13.0.2",
+  "protocol_sha256": "bb3ac99502f375d879dbaab9662e8b6fbb420be65d09a2189e2394491997a506",
+  "schema": "round27-frozen-p-grb-v1"
+}

@@ -60,6 +60,20 @@ def main() -> int:
             "evidence": "; ".join(f"L{line}:{text}" for line, text in hits),
         })
 
+    for control, expression in {
+        "Gurobi_WorkLimit_parameter": r"GRB_DBL_PAR_WORKLIMIT",
+        "Gurobi_NodeLimit_parameter": r"GRB_DBL_PAR_NODELIMIT",
+        "Gurobi_SolutionLimit_parameter": r"GRB_INT_PAR_SOLUTIONLIMIT",
+    }.items():
+        hits = source_hits(BACKEND, expression)
+        failed = failed or bool(hits)
+        rows.append({
+            "scope": "C2_Gurobi_backend", "control": control,
+            "classification": "forbidden_native_limit_parameter",
+            "occurrence_count": len(hits), "pass": not hits,
+            "evidence": "; ".join(f"L{line}:{text}" for line, text in hits),
+        })
+
     # Gurobi TimeLimit is permitted only as the remaining overall deadline.
     backend_time_hits = source_hits(BACKEND, r"GRB_DBL_PAR_TIMELIMIT")
     backend_context_ok = (

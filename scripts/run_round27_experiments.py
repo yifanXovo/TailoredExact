@@ -32,7 +32,9 @@ C2_EXE = ROOT / "build_round27/with_gurobi/ExactEBRP.exe"
 PROTOCOL = OUT / "round27_protocol.md"
 LOCK = OUT / ".round27_runner.lock"
 NO_IMPROVE_GENERATIONS = 2000
-COMPRESSION_THRESHOLD = 4 * 1024 * 1024
+# A single F0 leaf model is roughly 0.6--4 MiB; treating 512 KiB as large keeps
+# the complete multi-leaf evidence package practical without dropping models.
+COMPRESSION_THRESHOLD = 512 * 1024
 
 INSTANCES: dict[str, tuple[Path, str, int]] = {
     "V12_M1": (ROOT / "reference/regen_candidate_V12_M1_average.txt", "v12", 12),
@@ -405,7 +407,11 @@ def acquire_lock() -> None:
 
 
 def compress_large_files() -> list[dict[str, Any]]:
+    manifest_path = OUT / "compression_manifest.csv"
     records: list[dict[str, Any]] = []
+    if manifest_path.is_file():
+        with manifest_path.open(newline="", encoding="utf-8") as stream:
+            records.extend(csv.DictReader(stream))
     for path in sorted(OUT.rglob("*")):
         if (not path.is_file() or path.stat().st_size < COMPRESSION_THRESHOLD or
                 path.suffix.lower() not in (".csv", ".log", ".lp")):
@@ -435,7 +441,7 @@ def compress_large_files() -> list[dict[str, Any]]:
             "restoration_sha256": restored.hexdigest(), "restoration_bytes": restored_size,
             "compression": "gzip_level9_mtime0_filename_omitted",
         })
-    csv_write(OUT / "compression_manifest.csv", records,
+    csv_write(manifest_path, records,
               list(records[0]) if records else [
                   "original_path", "compressed_path", "original_bytes",
                   "compressed_bytes", "original_sha256", "compressed_sha256",

@@ -1,0 +1,68 @@
+
+Gurobi 13.0.2 (win64) logging started Wed Jul 22 23:05:21 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_paper_safe_gurobi_scheduling_round27\runs\stage2__tight_T_seed3101__c0_legacy__300s\external\native_logs\L1.1_attempt_1.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  60
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11939 rows, 3384 columns and 67420 nonzeros (Min)
+Model fingerprint: 0x6b09723a
+Model has 21 linear objective coefficients
+Variable types: 1689 continuous, 1695 integer (1495 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [4e-02, 2e+02]
+  RHS range        [4e-02, 5e+04]
+
+Presolved: 10249 rows, 3251 columns, 70985 nonzeros
+
+Continuing optimization...
+
+   543   489 infeasible   88               -    0.05245      -   125   30s
+   630   494    0.06764  132  155          -    0.05245      -   146   35s
+   698   528    0.06956   24  200          -    0.05250      -   182   40s
+   748   564    0.06955   49  188          -    0.05250      -   223   45s
+   817   591    0.05366   84  244          -    0.05250      -   257   50s
+   860   608 infeasible  105               -    0.05250      -   281   55s
+   940   612    0.05290    8  207          -    0.05253      -   298   60s
+   978   626    0.05565   27  174          -    0.05253      -   300   65s
+  1104   646    0.06357   10  231          -    0.05259      -   296   70s
+  1235   679    0.05983   20  143          -    0.05260      -   296   75s
+  1429   723    0.07305   58  130          -    0.05265      -   284   80s
+  1462   730    0.05707    4  238          -    0.05268      -   281   85s
+
+Cutting planes:
+  Learned: 16
+  Gomory: 1
+  Cover: 44
+  Implied bound: 101
+  Clique: 20
+  MIR: 202
+  StrongCG: 3
+  Flow cover: 41
+  Zero half: 2
+  Network: 29
+  RLT: 8
+  Relax-and-lift: 71
+  BQP: 5
+
+Explored 1512 nodes (490277 simplex iterations) in 90.00 seconds (186.06 work units)
+Most recent optimization runtime was 60.00 seconds (122.78 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound 5.268167649081e-02, gap -
+
+User-callback calls 18891, time in user-callback 0.00 sec
