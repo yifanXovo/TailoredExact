@@ -1,0 +1,65 @@
+
+Gurobi 13.0.2 (win64) logging started Wed Jul 22 09:38:37 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_external_gurobi_production_validation_round26\runs\stage3__moderate_seed6301__c1__1800s\external\native_logs\L1.0.1.1.1.1.0_attempt_1.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  60
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 93027 rows, 18191 columns and 665810 nonzeros (Min)
+Model fingerprint: 0x76b3dc7f
+Model has 51 linear objective coefficients
+Variable types: 9460 continuous, 8731 integer (8231 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [2e-01, 4e+03]
+  RHS range        [2e-01, 5e+04]
+
+Presolved: 87585 rows, 18036 columns, 718489 nonzeros
+
+Continuing optimization...
+
+     0     0    0.53210    0  388          -    0.53210      -     -   40s
+     0     0    0.53210    0  375          -    0.53210      -     -   41s
+     0     0    0.53232    0  412          -    0.53232      -     -   48s
+     0     0    0.53410    0  406          -    0.53410      -     -   59s
+     0     0    0.53473    0  454          -    0.53473      -     -   64s
+     0     0    0.53634    0  513          -    0.53634      -     -   72s
+     0     0    0.53674    0  496          -    0.53674      -     -   78s
+     0     0    0.53768    0  543          -    0.53768      -     -   87s
+     0     0    0.53784    0  545          -    0.53784      -     -   88s
+
+Cutting planes:
+  Learned: 13
+  Gomory: 7
+  Cover: 88
+  Implied bound: 240
+  Clique: 20
+  MIR: 752
+  StrongCG: 14
+  Flow cover: 350
+  GUB cover: 1
+  Zero half: 16
+  Network: 39
+  RLT: 7
+  Relax-and-lift: 160
+
+Explored 1 nodes (93894 simplex iterations) in 90.02 seconds (254.26 work units)
+Most recent optimization runtime was 60.02 seconds (176.06 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound 5.378398584834e-01, gap -
+
+User-callback calls 5768, time in user-callback 0.00 sec

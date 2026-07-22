@@ -1,0 +1,56 @@
+
+Gurobi 13.0.2 (win64) logging started Wed Jul 22 09:18:36 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_external_gurobi_production_validation_round26\runs\stage3__moderate_seed6301__c1__1800s\external\native_logs\L1.0.0_attempt_0.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  30
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 93026 rows, 18191 columns and 665804 nonzeros (Min)
+Model fingerprint: 0x9d226fdf
+Model has 51 linear objective coefficients
+Variable types: 9460 continuous, 8731 integer (8231 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [2e-01, 5e+03]
+  RHS range        [2e-01, 5e+04]
+
+Presolve removed 5384 rows and 143 columns
+Presolve time: 2.11s
+Presolved: 87642 rows, 18048 columns, 697943 nonzeros
+Variable types: 9350 continuous, 8698 integer (8209 binary)
+Root relaxation presolved: 17913 rows, 105338 columns, 715422 nonzeros
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+    7980    8.2987004e+30   6.393415e+33   8.298700e+00      5s
+   14219    3.9828141e-01   0.000000e+00   4.462417e+06     10s
+Warning: very big Kappa = 2.60093e+14, try parameter NumericFocus
+
+Root relaxation: infeasible, 20743 iterations, 11.43 seconds (36.36 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -   13s
+
+Explored 1 nodes (20743 simplex iterations) in 13.87 seconds (40.78 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+
+User-callback calls 1341, time in user-callback 0.00 sec
