@@ -30,6 +30,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/GurobiProgress.cpp
   src/MipStartMapping.cpp
   src/ExternalGiniTree.cpp
+  src/PaperExternalGiniTree.cpp
   src/ConnectivityFlow.cpp
   src/Bounds.cpp
   src/ColumnPool.cpp
@@ -122,3 +123,7 @@ add_test(NAME DispersionChildBoundTests COMMAND DispersionChildBoundTests)
 add_executable(Round24BackendTests tests/round24_backend_tests.cpp)
 target_link_libraries(Round24BackendTests PRIVATE exact_ebrp_core)
 add_test(NAME Round24BackendTests COMMAND Round24BackendTests)
+
+add_executable(Round27PaperSchedulingTests tests/round27_paper_scheduling_tests.cpp)
+target_link_libraries(Round27PaperSchedulingTests PRIVATE exact_ebrp_core)
+add_test(NAME Round27PaperSchedulingTests COMMAND Round27PaperSchedulingTests)

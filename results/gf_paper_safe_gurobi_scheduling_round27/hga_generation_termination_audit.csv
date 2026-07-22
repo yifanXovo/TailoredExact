@@ -1,0 +1,7 @@
+property,value,role
+seed,20260626,fixed production seed
+stop_mode,generation-stagnation,production selector
+consecutive_completed_nonimproving_generations,2000,sole production loop termination predicate
+strict_improvement,new_fitness > best_fitness,resets stagnation counter
+wall_time,telemetry_only,not read by production loop predicate
+overall_deadline,whole_process_termination_only,never switches HGA to exact phase

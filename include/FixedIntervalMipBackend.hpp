@@ -10,6 +10,12 @@
 
 namespace ebrp {
 
+enum class FixedIntervalSolveKind {
+    LegacyMipQuantum,
+    PaperLpRelaxation,
+    PaperTerminalMip
+};
+
 struct FixedIntervalMipCapabilities {
     std::string backend;
     bool available = false;
@@ -22,12 +28,18 @@ struct FixedIntervalMipCapabilities {
 };
 
 struct FixedIntervalMipRequest {
+    FixedIntervalSolveKind solve_kind =
+        FixedIntervalSolveKind::LegacyMipQuantum;
     std::string leaf_id;
     int attempt_number = 0;
     double gamma_L = 0.0;
     double gamma_U = 0.0;
     double verified_cutoff = 0.0;
     double time_limit_seconds = 0.0;
+    // For paper solves this is the remaining global experiment deadline. It
+    // may only interrupt the complete external algorithm, never schedule a
+    // different leaf or cause a retry.
+    double global_deadline_remaining_seconds = 0.0;
     bool new_leaf = true;
     bool warm_start_enabled = false;
     std::filesystem::path canonical_model_path;
@@ -48,6 +60,9 @@ struct FixedIntervalMipOutcome {
     bool native_tolerance_optimal = false;
     bool native_optimal_unscaled_infeasibilities = false;
     bool native_status_supported = false;
+    bool lp_relaxation = false;
+    bool lp_terminal_valid = false;
+    bool terminal_mip = false;
     bool infeasible = false;
     bool interrupted = false;
     bool native_bound_available = false;
@@ -110,6 +125,8 @@ struct FixedIntervalMipBackendStats {
     long long model_count = 0;
     long long model_read_count = 0;
     long long optimize_count = 0;
+    long long lp_relaxation_optimize_count = 0;
+    long long terminal_mip_optimize_count = 0;
     long long model_free_count = 0;
     long long environment_free_count = 0;
     long long same_leaf_resume_count = 0;
@@ -132,6 +149,8 @@ struct FixedIntervalMipBackendStats {
     double cumulative_model_read_seconds = 0.0;
     double cumulative_solver_runtime_seconds = 0.0;
     double cumulative_work = 0.0;
+    double cumulative_lp_work = 0.0;
+    double cumulative_terminal_mip_work = 0.0;
     double cumulative_nodes = 0.0;
     double cumulative_simplex_iterations = 0.0;
     double cumulative_barrier_iterations = 0.0;
@@ -144,6 +163,9 @@ public:
     virtual FixedIntervalMipCapabilities capabilities() const = 0;
     virtual FixedIntervalMipOutcome solve(
         const FixedIntervalMipRequest& request) = 0;
+    // Idempotently release native resources before the final statistics
+    // snapshot when an evidence path must prove environment/model symmetry.
+    virtual void release() {}
     virtual FixedIntervalMipBackendStats stats() const = 0;
 };
 

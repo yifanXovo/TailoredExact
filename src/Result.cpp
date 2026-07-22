@@ -1481,6 +1481,8 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.external_gini_tree_backend) << "\",\n";
     out << "  \"external_gini_tree_lifecycle\": \""
         << jsonEscape(result.external_gini_tree_lifecycle) << "\",\n";
+    out << "  \"external_gini_tree_scheduling\": \""
+        << jsonEscape(result.external_gini_tree_scheduling) << "\",\n";
     out << "  \"external_gini_tree_failure_reason\": \""
         << jsonEscape(result.external_gini_tree_failure_reason) << "\",\n";
     out << "  \"external_gini_tree_root_coverage_valid\": "
@@ -1527,6 +1529,11 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_COUNT(model_count);
     WRITE_EXT_COUNT(model_read_count);
     WRITE_EXT_COUNT(optimize_count);
+    WRITE_EXT_COUNT(lp_relaxation_count);
+    WRITE_EXT_COUNT(lp_optimize_count);
+    WRITE_EXT_COUNT(terminal_mip_leaf_count);
+    WRITE_EXT_COUNT(terminal_mip_optimize_count);
+    WRITE_EXT_COUNT(global_deadline_interruption_count);
     WRITE_EXT_COUNT(model_free_count);
     WRITE_EXT_COUNT(environment_free_count);
     WRITE_EXT_COUNT(same_leaf_resume_count);
@@ -1557,6 +1564,8 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_DOUBLE(model_read_seconds);
     WRITE_EXT_DOUBLE(solver_seconds);
     WRITE_EXT_DOUBLE(work);
+    WRITE_EXT_DOUBLE(lp_work);
+    WRITE_EXT_DOUBLE(terminal_mip_work);
     WRITE_EXT_DOUBLE(nodes);
     WRITE_EXT_DOUBLE(simplex_iterations);
     WRITE_EXT_DOUBLE(barrier_iterations);
@@ -1576,6 +1585,9 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_PATH(optimize_ledger_path);
     WRITE_EXT_PATH(warm_start_audit_path);
     WRITE_EXT_PATH(enhanced_attempt_trace_path);
+    WRITE_EXT_PATH(lp_status_ledger_path);
+    WRITE_EXT_PATH(parent_child_bound_ledger_path);
+    WRITE_EXT_PATH(split_decision_ledger_path);
 #undef WRITE_EXT_PATH
     out << "  \"columns_generated_raw\": " << result.columns_generated_raw << ",\n";
     out << "  \"columns_after_dominance\": " << result.columns_after_dominance << ",\n";
@@ -2109,6 +2121,22 @@ std::string resultToJson(const SolveResult& input) {
         << (result.incumbent_source_contributes_lower_bound ? "true" : "false") << ",\n";
     out << "  \"primal_heuristic\": \""
         << jsonEscape(result.primal_heuristic) << "\",\n";
+    out << "  \"hga_stop_mode\": \""
+        << jsonEscape(result.hga_stop_mode) << "\",\n";
+    out << "  \"hga_total_generations\": "
+        << result.hga_total_generations << ",\n";
+    out << "  \"hga_generations_since_improvement\": "
+        << result.hga_generations_since_improvement << ",\n";
+    out << "  \"hga_objective_improvement_count\": "
+        << result.hga_objective_improvement_count << ",\n";
+    out << "  \"hga_decoder_calls\": " << result.hga_decoder_calls << ",\n";
+    out << "  \"hga_final_fitness\": " << result.hga_final_fitness << ",\n";
+    out << "  \"hga_verified_objective\": "
+        << result.hga_verified_objective << ",\n";
+    out << "  \"hga_wall_time_seconds\": "
+        << result.hga_wall_time_seconds << ",\n";
+    out << "  \"hga_generation_log_path\": \""
+        << jsonEscape(result.hga_generation_log_path) << "\",\n";
     out << "  \"incumbent_import_attempted\": "
         << (result.incumbent_import_attempted ? "true" : "false") << ",\n";
     out << "  \"incumbent_import_verified\": "

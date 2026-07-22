@@ -5,7 +5,11 @@
 #include "hga_tgbc/HybridGA.h"
 
 #include <algorithm>
+#include <chrono>
 #include <cmath>
+#include <filesystem>
+#include <fstream>
+#include <iomanip>
 #include <sstream>
 
 namespace ebrp {
@@ -64,7 +68,9 @@ std::vector<RoutePlan> routesFromHgaDecode(
 
 HgaTgbcResult runHgaTgbcNative(const Instance& instance,
                                const HgaTgbcOptions& options) {
+    const auto started = std::chrono::steady_clock::now();
     HgaTgbcResult out;
+    out.stop_mode = options.stop_mode;
     InstanceData hga_instance = toHgaInstance(instance);
 
     set_greedy_time_units(instance.pickup_time, instance.drop_time);
@@ -84,9 +90,36 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
                       1.0,
                       options.no_improve_generation_limit);
     ga.set_seed(options.seed);
+    ga.set_generation_stagnation_stop(
+        options.stop_mode == "generation-stagnation");
     ga.set_decoder_compaction_mode(1);
     ga.set_decode_cache_max_entries(200000);
     ga.run();
+
+    out.total_generations = ga.get_total_generations();
+    out.generations_since_improvement =
+        ga.get_generations_since_improvement();
+    out.objective_improvement_count = ga.get_objective_improvement_count();
+    out.decoder_calls = ga.get_decoder_calls();
+    out.final_fitness = ga.get_best_fitness();
+    out.generation_log_path = options.generation_log_path;
+    if (!options.generation_log_path.empty()) {
+        if (options.generation_log_path.has_parent_path()) {
+            std::filesystem::create_directories(
+                options.generation_log_path.parent_path());
+        }
+        std::ofstream trajectory(options.generation_log_path,
+                                 std::ios::out | std::ios::trunc);
+        trajectory << "generation,best_fitness,strict_improvement\n";
+        const auto& fitness = ga.get_fitness_history();
+        const auto& improvements = ga.get_improvement_history();
+        for (std::size_t index = 0; index < fitness.size(); ++index) {
+            trajectory << index << ',' << std::setprecision(17)
+                       << fitness[index] << ','
+                       << (index < improvements.size() && improvements[index]
+                               ? "true" : "false") << '\n';
+        }
+    }
 
     std::vector<std::vector<int>> best_sequences = ga.get_best_solution();
     SolutionResult_ORO decoded = nGreedyLU_RA_compact_full(
@@ -103,6 +136,7 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
         out.found = true;
         out.routes = std::move(routes);
         out.source_label = "native_hga_tgbc";
+        out.verified_objective = verification.objective;
         std::ostringstream note;
         note << "native HGA-TGBC decoded route plan verified objective="
              << verification.objective
@@ -117,6 +151,8 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
         }
         out.notes.push_back(note.str());
     }
+    out.wall_time_seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now() - started).count();
     return out;
 }
 

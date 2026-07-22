@@ -1,0 +1,30 @@
+{
+  "arm": "C0-LEGACY",
+  "schema": "round27-frozen-c0-reference-v1",
+  "paper_compatible": false,
+  "classification": "historical_efficiency_reference_only",
+  "build_source_commit": "e8b37e1f65a0250a4ad52f92dfa59807a16d56ff",
+  "executable_path": "build_round26/with_gurobi/ExactEBRP.exe",
+  "executable_sha256": "002ab0f3f3fc1f80bb4b8a6eb10fddaaf013f5c493317884c977098ede0cc15c",
+  "configuration": {
+    "method": "external_solver_neutral_global_gini_tree",
+    "backend": "gurobi",
+    "HGA_stop": "legacy_time_limited_diagnostic",
+    "HGA_seconds": 10,
+    "HGA_seed": 20260626,
+    "leaf_quanta_seconds": "30,60,120,...",
+    "split_after_unresolved_attempts": 2,
+    "initial_intervals": 4,
+    "adaptive_max_depth": 8,
+    "adaptive_min_width": 0.0001,
+    "adaptive_split_factor": 2,
+    "static_leaf_formulation": "F0",
+    "warm_start": false,
+    "threads": 1,
+    "gurobi_seed": 0,
+    "gurobi_presolve": "automatic",
+    "MIPGap": 0.0,
+    "MIPGapAbs": 0.0,
+    "uniform_all_instances": true
+  }
+}

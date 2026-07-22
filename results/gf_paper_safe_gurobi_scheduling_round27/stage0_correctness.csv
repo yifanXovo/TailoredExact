@@ -1,0 +1,15 @@
+category,check,passed,evidence
+build,clean CPLEX-only Release build and 10 C++ tests,True,build_round27/cplex_only/ExactEBRP.exe
+build,clean Gurobi-enabled Release build and 10 C++ tests,True,build_round27/with_gurobi/ExactEBRP.exe
+tests,all repository Python test scripts,True,8 scripts
+audit,static no-dispatch/no-internal-budget scan,True,forbidden_internal_budget_scan.csv
+exactness,exact toy exhaustive CPLEX/Gurobi identity,True,native_exact_CPLEX=true; engineering_exact_Gurobi=true; objective=0
+sentinel,moderate4301 C2 structural correctness,True,results/gf_paper_safe_gurobi_scheduling_round27/runs/sentinel__moderate_seed4301__c2_paper__60s/result.json
+direct_cpp,generation-stagnation deterministic identity,True,Round27PaperSchedulingTests
+direct_cpp,LP relaxation split strict-tolerance behavior,True,Round27PaperSchedulingTests
+direct_cpp,initial and child interval coverage,True,Round27PaperSchedulingTests
+direct_cpp,inherited parent-bound monotonicity,True,Round27PaperSchedulingTests
+direct_cpp,atomic parent replacement,True,Round27PaperSchedulingTests
+direct_cpp,terminal leaf exactly-once optimize semantics,True,Round27PaperSchedulingTests
+direct_cpp,interrupted global deadline leaves leaf open,True,Round27PaperSchedulingTests
+direct_cpp,LP result cannot close as integer certificate,True,Round27PaperSchedulingTests
