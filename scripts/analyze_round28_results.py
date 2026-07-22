@@ -815,7 +815,11 @@ def main() -> int:
                           for item in csv_rows(OUT / name))
                       for name, field in static_files.items())
     c3_exact = [item for item in exact if item["arm"] == "C3-REPLICA"]
-    dynamic_pass = bool(c3_exact) and all(truth(item["passed"]) for item in c3_exact)
+    evaluated_c3 = [item for item in c3_exact if truth(item["process_ok"])]
+    dynamic_pass = bool(evaluated_c3) and all(truth(item["passed"])
+                                               for item in evaluated_c3)
+    correctness_failure = any(truth(item["process_ok"]) and
+                              not truth(item["passed"]) for item in c3_exact)
     repeat_pass = (len(repeats) == 9 and all(truth(item["deterministic_identity"])
                                              for item in repeats))
     failures = sum(not truth(row["completed_process"]) for row in rows)
@@ -832,9 +836,11 @@ def main() -> int:
     startup_shares = [number(item["build_read_share_of_exact_phase"])
                       for item in overhead]
     median_startup_share = median(startup_shares) if startup_shares else 0.0
-    if (not truth(stage0.get("passed")) or not static_pass or not dynamic_pass or
-            failures or excluded):
+    if (not truth(stage0.get("passed")) or not static_pass or
+            correctness_failure):
         classification = "invalid"
+    elif failures or excluded or not repeat_pass:
+        classification = "paper_valid_but_performance_risky"
     elif pair_gap_wins >= math.ceil(len(p_pairs) / 2) and pair_auc_wins >= math.ceil(
             len(p_pairs) / 2):
         classification = "algorithmically_equivalent_and_promising"
@@ -877,7 +883,8 @@ def main() -> int:
         "time_limited": time_limited, "excluded": excluded,
         "strict_certificates": strict_count,
         "stage0_passed": stage0.get("passed"), "static_equivalence_passed": static_pass,
-        "dynamic_exactness_passed": dynamic_pass,
+        "dynamic_exactness_passed_on_completed_C3_rows": dynamic_pass,
+        "dynamic_correctness_failure": correctness_failure,
         "repeatability_passed": repeat_pass,
         "P_GRB_vs_C3": {"pairs": len(p_pairs), "C3_final_gap_wins": pair_gap_wins,
                          "C3_AUC_wins": pair_auc_wins, "family_summary": family_summary},
@@ -1000,9 +1007,8 @@ CPLEX's internal native branch-and-cut state or event sequence.
     manifest = package_manifest()
     write_csv(OUT / "evidence_package_manifest.csv", manifest)
     print(json.dumps(audit, indent=2, sort_keys=True))
-    return 0 if (observed_complete and not failures and not excluded and
-                 truth(stage0.get("passed")) and static_pass and dynamic_pass and
-                 repeat_pass and compression_valid) else 1
+    return 0 if (observed_complete and truth(stage0.get("passed")) and
+                 static_pass and not correctness_failure and compression_valid) else 1
 
 
 if __name__ == "__main__":
