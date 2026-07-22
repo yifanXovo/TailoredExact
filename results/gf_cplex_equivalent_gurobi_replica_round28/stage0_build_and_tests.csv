@@ -1,0 +1,10 @@
+category,check,passed,evidence
+build,clean CPLEX-only release build,True,build_round28/cplex_only/ExactEBRP.exe
+build,clean Gurobi-enabled release build,True,build_round28/with_gurobi/ExactEBRP.exe
+cpp_tests,11 C++ tests in CPLEX-only build,True,ctest_cplex.stdout.log
+cpp_tests,11 C++ tests in Gurobi-enabled build,True,ctest_gurobi.stdout.log
+direct_cpp,54 deterministic Round 28 replica checks,True,Round28ReplicaTests
+python_tests,all repository Python regression scripts,True,10 scripts
+static_audit,61 equivalence/selector/forbidden-logic audit rows,True,algorithm_equivalence_matrix.csv
+exactness,toy P/S0/C3 exact objective identity,True,stage0_exactness.csv
+sentinel,moderate4301 P/S0/C2/C3 correctness,True,stage0_correctness_sentinel.csv

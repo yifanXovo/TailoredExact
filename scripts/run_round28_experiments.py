@@ -502,6 +502,10 @@ def stage_matrix(stage: str) -> tuple[tuple[str, str, int], ...]:
 
 def compress_large_files() -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
+    manifest_path = OUT / "compression_manifest.csv"
+    if manifest_path.is_file():
+        with manifest_path.open(newline="", encoding="utf-8") as stream:
+            records.extend(csv.DictReader(stream))
     for path in sorted(RUNS.rglob("*")):
         if (not path.is_file() or path.stat().st_size < COMPRESSION_THRESHOLD or
                 path.suffix.lower() not in (".csv", ".log", ".lp")):
@@ -540,7 +544,7 @@ def compress_large_files() -> list[dict[str, Any]]:
         "original_path", "compressed_path", "original_bytes",
         "compressed_bytes", "original_sha256", "compressed_sha256",
         "restoration_sha256", "restoration_bytes", "compression"]
-    csv_write(OUT / "compression_manifest.csv", records, fields)
+    csv_write(manifest_path, records, fields)
     return records
 
 

@@ -191,7 +191,9 @@ def main() -> int:
              "Round28ReplicaTests"),
     ])
 
-    python_tests = sorted((ROOT / "tests").glob("*_tests.py"))
+    python_tests = sorted(
+        set((ROOT / "tests").glob("*_tests.py")) |
+        set((ROOT / "scripts").glob("test_*.py")))
     for test in python_tests:
         commands.append(run("python_" + test.stem,
                             [str(PYTHON), str(test)], 360))
