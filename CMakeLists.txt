@@ -31,6 +31,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/MipStartMapping.cpp
   src/ExternalGiniTree.cpp
   src/PaperExternalGiniTree.cpp
+  src/ReplicaExternalGiniTree.cpp
   src/ConnectivityFlow.cpp
   src/Bounds.cpp
   src/ColumnPool.cpp
@@ -127,3 +128,7 @@ add_test(NAME Round24BackendTests COMMAND Round24BackendTests)
 add_executable(Round27PaperSchedulingTests tests/round27_paper_scheduling_tests.cpp)
 target_link_libraries(Round27PaperSchedulingTests PRIVATE exact_ebrp_core)
 add_test(NAME Round27PaperSchedulingTests COMMAND Round27PaperSchedulingTests)
+
+add_executable(Round28ReplicaTests tests/round28_replica_tests.cpp)
+target_link_libraries(Round28ReplicaTests PRIVATE exact_ebrp_core)
+add_test(NAME Round28ReplicaTests COMMAND Round28ReplicaTests)

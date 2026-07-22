@@ -506,6 +506,33 @@ struct SolveResult {
     long long external_gini_tree_terminal_mip_leaf_count = 0;
     long long external_gini_tree_terminal_mip_optimize_count = 0;
     long long external_gini_tree_global_deadline_interruption_count = 0;
+    // Round 28 C3 algorithm-contract evidence.  These fields remain zero or
+    // empty for the frozen legacy and C2 arms.
+    long long external_gini_tree_contract_initial_interval_count = 0;
+    long long external_gini_tree_scheduler_initial_leaf_count = 0;
+    long long external_gini_tree_unconditional_structural_split_count = 0;
+    long long external_gini_tree_replaced_parent_count = 0;
+    long long external_gini_tree_lp_pruned_leaf_count = 0;
+    long long external_gini_tree_lp_infeasible_leaf_count = 0;
+    long long external_gini_tree_max_observed_depth = 0;
+    long long external_gini_tree_global_row_family_count = 0;
+    long long external_gini_tree_interval_row_family_count = 0;
+    long long external_gini_tree_selector_variable_count = 0;
+    long long external_gini_tree_contract_split_factor = 0;
+    long long external_gini_tree_contract_adaptive_max_depth = 0;
+    double external_gini_tree_contract_minimum_width = 0.0;
+    double external_gini_tree_certificate_tolerance = 0.0;
+    std::string external_gini_tree_algorithm_arm;
+    std::string external_gini_tree_row_factory_version;
+    std::string external_gini_tree_global_row_families;
+    std::string external_gini_tree_interval_row_families;
+    std::string external_gini_tree_best_bound_tie_rule;
+    std::string external_gini_tree_implementation_boundary;
+    bool external_gini_tree_structural_split_unconditional = false;
+    bool external_gini_tree_child_lookahead_required = false;
+    bool external_gini_tree_internal_budget_scheduling = false;
+    bool external_gini_tree_native_tree_reuse_claimed = false;
+    bool external_gini_tree_warm_start_enabled = false;
     long long external_gini_tree_model_free_count = 0;
     long long external_gini_tree_environment_free_count = 0;
     long long external_gini_tree_same_leaf_resume_count = 0;
@@ -552,6 +579,10 @@ struct SolveResult {
     std::string external_gini_tree_lp_status_ledger_path;
     std::string external_gini_tree_parent_child_bound_ledger_path;
     std::string external_gini_tree_split_decision_ledger_path;
+    std::string external_gini_tree_coverage_ledger_path;
+    std::string external_gini_tree_bound_inheritance_ledger_path;
+    std::string external_gini_tree_row_signature_ledger_path;
+    std::string external_gini_tree_global_bound_trace_path;
     long long columns_generated_raw = 0;
     long long columns_after_dominance = 0;
     long long columns_dominated = 0;

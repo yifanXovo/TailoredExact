@@ -1,0 +1,12 @@
+forbidden_logic,pattern,occurrences,passed,scope
+C2 child benefit decision,evaluatePaperLpSplitDecision,0,True,C3 only
+legacy quantum constructor,requestedQuantumSeconds,0,True,C3 only
+attempt split gate,externalLeafReadyForAdaptiveSplit,0,True,C3 only
+WorkLimit scheduling,GRB_DBL_PAR_WORKLIMIT,0,True,C3 only
+NodeLimit scheduling,GRB_DBL_PAR_NODELIMIT,0,True,C3 only
+SolutionLimit scheduling,SolutionLimit,0,True,C3 only
+local TimeLimit scheduling,time_limit_seconds =,0,True,C3 only
+warm-start enable,warm_start_enabled = true,0,True,C3 only
+elapsed scheduler tie,elapsed,0,True,C3 only
+Work scheduler tie,work,0,True,C3 only
+attempt scheduler tie,attempt,0,True,C3 only

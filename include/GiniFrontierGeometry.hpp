@@ -10,6 +10,38 @@ struct GiniIntervalGeometry {
     double upper = 0.0;
 };
 
+enum class CplexReplicaSplitPhase {
+    InitialPartition,
+    AdaptiveRefinement,
+    Terminal
+};
+
+std::string cplexReplicaSplitPhaseName(CplexReplicaSplitPhase phase);
+
+// Solver-neutral statement of the accepted S0/F0 structural Gini rule.  The
+// decision depends only on the root geometry and structural depth; LP values,
+// solver effort, elapsed time, attempts, and instance metadata are absent by
+// construction.
+struct CplexReplicaStructuralSplit {
+    bool eligible = false;
+    CplexReplicaSplitPhase phase = CplexReplicaSplitPhase::Terminal;
+    double split_point = 0.0;
+    int initial_partition_depth = 0;
+    int adaptive_depth = 0;
+    std::string reason = "not_evaluated";
+};
+
+CplexReplicaStructuralSplit evaluateCplexReplicaStructuralSplit(
+    double root_lower,
+    double root_upper,
+    double leaf_lower,
+    double leaf_upper,
+    int gini_depth,
+    int initial_interval_count,
+    int adaptive_max_depth,
+    double adaptive_min_width,
+    int split_factor);
+
 std::vector<GiniIntervalGeometry> makeLegacyFrontierIntervals(
     double lower,
     double upper,

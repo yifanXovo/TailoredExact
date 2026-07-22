@@ -121,6 +121,13 @@ public:
     std::vector<std::string> controllingSet() const;
     ControllingLeafSelection selectNext();
     ControllingLeafSelection selectNextByBoundOnly();
+    // Round 28 C3 deterministic best-bound order: exact valid lower bound,
+    // then smaller interval width, greater structural depth, lower endpoint,
+    // upper endpoint, and deterministic leaf ID.  No effort or timing state
+    // participates.
+    ControllingLeafSelection selectNextCplexReplica();
+    bool tightenVerifiedCutoff(double cutoff,
+                               std::string* reason = nullptr);
     bool everyRelevantLeafClosed() const;
     bool parentChildCoverageValid(std::string* reason = nullptr) const;
     bool leafBoundsMonotone() const;

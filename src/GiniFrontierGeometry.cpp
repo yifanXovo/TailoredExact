@@ -5,6 +5,18 @@
 
 namespace ebrp {
 
+std::string cplexReplicaSplitPhaseName(CplexReplicaSplitPhase phase) {
+    switch (phase) {
+    case CplexReplicaSplitPhase::InitialPartition:
+        return "initial_partition";
+    case CplexReplicaSplitPhase::AdaptiveRefinement:
+        return "adaptive_refinement";
+    case CplexReplicaSplitPhase::Terminal:
+        return "terminal";
+    }
+    return "terminal";
+}
+
 std::vector<GiniIntervalGeometry> makeLegacyFrontierIntervals(
     double lower,
     double upper,
@@ -30,6 +42,78 @@ bool legacyAdaptiveSplitEligible(double lower,
                                  double min_width) {
     return depth < std::max(0, max_depth) &&
            upper - lower > min_width + 1e-12;
+}
+
+CplexReplicaStructuralSplit evaluateCplexReplicaStructuralSplit(
+    double root_lower,
+    double root_upper,
+    double leaf_lower,
+    double leaf_upper,
+    int gini_depth,
+    int initial_interval_count,
+    int adaptive_max_depth,
+    double adaptive_min_width,
+    int split_factor) {
+    CplexReplicaStructuralSplit decision;
+    if (!std::isfinite(root_lower) || !std::isfinite(root_upper) ||
+        !std::isfinite(leaf_lower) || !std::isfinite(leaf_upper) ||
+        root_upper < root_lower - 1e-12 ||
+        leaf_upper < leaf_lower - 1e-12 ||
+        leaf_lower < root_lower - 1e-10 ||
+        leaf_upper > root_upper + 1e-10 || gini_depth < 0) {
+        decision.reason = "invalid_structural_geometry";
+        return decision;
+    }
+    const int initial_count = std::max(1, initial_interval_count);
+    const std::vector<GiniIntervalGeometry> initial =
+        makeLegacyFrontierIntervals(root_lower, root_upper, initial_count);
+    std::vector<double> interior;
+    for (std::size_t index = 0; index + 1 < initial.size(); ++index) {
+        const double breakpoint = initial[index].upper;
+        if (breakpoint > leaf_lower + 1e-10 &&
+            breakpoint < leaf_upper - 1e-10) {
+            interior.push_back(breakpoint);
+        }
+    }
+    int initial_depth = 0;
+    for (int leaves = 1; leaves < initial_count; leaves *= 2) {
+        ++initial_depth;
+    }
+    decision.initial_partition_depth = initial_depth;
+    decision.adaptive_depth = std::max(0, gini_depth - initial_depth);
+    if (!interior.empty()) {
+        decision.eligible = true;
+        decision.phase = CplexReplicaSplitPhase::InitialPartition;
+        decision.split_point = interior[interior.size() / 2];
+        decision.reason = "accepted_initial_partition_breakpoint";
+        return decision;
+    }
+    if (split_factor != 2) {
+        decision.reason = "accepted_contract_requires_binary_split_factor";
+        return decision;
+    }
+    if (!legacyAdaptiveSplitEligible(
+            leaf_lower, leaf_upper, decision.adaptive_depth,
+            adaptive_max_depth, adaptive_min_width)) {
+        decision.reason = decision.adaptive_depth >=
+                std::max(0, adaptive_max_depth)
+            ? "terminal_max_adaptive_depth"
+            : "terminal_minimum_interval_width";
+        return decision;
+    }
+    const std::vector<GiniIntervalGeometry> children =
+        splitLegacyFrontierInterval(leaf_lower, leaf_upper, split_factor);
+    if (children.size() != 2 ||
+        children.front().upper <= leaf_lower + 1e-12 ||
+        children.front().upper >= leaf_upper - 1e-12) {
+        decision.reason = "invalid_binary_split_geometry";
+        return decision;
+    }
+    decision.eligible = true;
+    decision.phase = CplexReplicaSplitPhase::AdaptiveRefinement;
+    decision.split_point = children.front().upper;
+    decision.reason = "accepted_unconditional_adaptive_midpoint";
+    return decision;
 }
 
 std::vector<GiniIntervalGeometry> splitLegacyFrontierInterval(
