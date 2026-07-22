@@ -154,6 +154,38 @@ def main() -> None:
     require("complete root and parent/child coverage" in
             (OUT / "c1_exactness_argument.md").read_text(encoding="utf-8"),
             "exactness scope documented")
+    c0_c1 = rows("c0_vs_c1.csv")
+    require(len(c0_c1) == 11, "C0/C1 table has only matched official rows")
+    require({row["stage"] for row in c0_c1} == {"stage1", "stage2"},
+            "C0/C1 table excludes stages without C0")
+    require(all(row["decision_reason"] != "missing_matched_row"
+                for row in c0_c1), "no unmatched pair classified as tie")
+    for name in ("family_summary.csv", "scalability_summary.csv",
+                 "promotion_gate_audit.csv", "evidence_package_manifest.csv"):
+        require((OUT / name).is_file(), f"final artifact exists: {name}")
+    gates = rows("promotion_gate_audit.csv")
+    require(len(gates) == 10, "ten frozen promotion gates")
+    require({row["gate"] for row in gates if row["passed"] == "False"} ==
+            {"3", "9"}, "promotion fails only unresolved V12 and C0 gates")
+    final = json.loads((OUT / "final_audit_summary.json").read_text(
+        encoding="utf-8"))
+    require(final["official"]["completed"] == 47, "47 completed final rows")
+    require(final["official"]["failed"] == 0, "zero failed official rows")
+    require(final["promotion"] is False, "promotion fails closed")
+    require(final["stable_mainline"] == "corrected_CPLEX_S0_F0",
+            "CPLEX S0/F0 remains stable")
+    package = final["evidence_package"]
+    require(package["status"] == "passed", "final evidence package passes")
+    require(package["raw_lp_files"] == 0, "no raw LP remains")
+    require(package["compression_mismatches"] == 0,
+            "compressed evidence round trips")
+    require(package["sensitive_marker_hits"] == 0,
+            "no sensitive license marker retained")
+    require(len(rows("evidence_package_manifest.csv")) ==
+            package["files_excluding_manifest"], "manifest covers retained files")
+    require("C1 is not promoted" in
+            (OUT / "final_report.md").read_text(encoding="utf-8"),
+            "final report states no promotion")
     require(checks >= 65, "minimum Round 26 static check count")
     print(f"round26_protocol_tests passed {checks} checks")
 

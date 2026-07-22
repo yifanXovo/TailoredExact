@@ -1,0 +1,163 @@
+{
+  "branch": "codex/round26-external-gurobi-production-validation",
+  "c1_definition": "C1_equals_C0_after_uniform_P1_failed_difficult_guard",
+  "diagnostics": {
+    "classifications": {
+      "persistent external-overhead regression": 1,
+      "timing noise": 1
+    },
+    "completed": 2,
+    "trigger_rows": 18,
+    "triggered": 2
+  },
+  "evidence_package": {
+    "bytes_excluding_manifest": 464604435,
+    "compressed_entries_restored_and_hash_verified": 812,
+    "compression_mismatches": 0,
+    "files_excluding_manifest": 3142,
+    "largest_artifact": "results/gf_external_gurobi_production_validation_round26/runs/stage4__tight_T_seed5102__p_grb__3600s/progress.csv",
+    "largest_artifact_bytes": 3993192,
+    "raw_lp_files": 0,
+    "sensitive_marker_hits": 0,
+    "status": "passed"
+  },
+  "executable_sha256": {
+    "frozen_c0_c1": "002ab0f3f3fc1f80bb4b8a6eb10fddaaf013f5c493317884c977098ede0cc15c",
+    "stage0_cplex_only": "f16ec489a9811f5aaa79ed914d473fd2470f7fa0e1edf75121071eea18be0c8a",
+    "stage0_current_gurobi_build": "31a5cc71a454bcdba1b287ddd2f0c84a1b4c4a72c3baa517cab9a06caa7dc299"
+  },
+  "hierarchy": {
+    "c0_vs_c1": {
+      "left": 7,
+      "right": 4
+    },
+    "p_grb_vs_c0": {
+      "left": 2,
+      "right": 9
+    },
+    "p_grb_vs_c1": {
+      "left": 2,
+      "right": 16
+    }
+  },
+  "observed_origin_main_before_round26": "4a608eeae559cc69ca5c37b6eb4abab74fd3bc3b",
+  "official": {
+    "authoritative": 47,
+    "completed": 47,
+    "excluded": 0,
+    "failed": 0,
+    "optimal": 9,
+    "required": 47,
+    "time_limited": 38
+  },
+  "promotion": false,
+  "promotion_failed_gate_ids": [
+    3,
+    9
+  ],
+  "promotion_gates_passed": 8,
+  "promotion_gates_total": 10,
+  "qualification": {
+    "cpp_tests_passed": 18,
+    "license_checks_passed": 2,
+    "native_imports_passed": 15,
+    "python_test_scripts_passed": 7,
+    "sentinel_rows_passed": 2,
+    "static_no_dispatch_findings": 0
+  },
+  "resources": [
+    {
+      "arm": "P-GRB",
+      "max_memory_gb": 0.791694184,
+      "max_stagnation_seconds": 791.056390205722,
+      "mean_stagnation_seconds": 54.18141084943985,
+      "rows": 18,
+      "strict_certificates": 2,
+      "total_attempt_count": 0.0,
+      "total_child_restart_count": 0.0,
+      "total_closed_leaf_count": 0,
+      "total_fresh_restart_count": 0.0,
+      "total_model_count": 18.0,
+      "total_model_read_count": 18.0,
+      "total_model_read_seconds": 0.0,
+      "total_nodes": 1180659.0,
+      "total_optimize_count": 18.0,
+      "total_presolve_count": 18.0,
+      "total_root_count": 18.0,
+      "total_same_leaf_restart_count": 0.0,
+      "total_split_count": 0.0,
+      "total_work": 67511.63868611777
+    },
+    {
+      "arm": "C0",
+      "max_memory_gb": 1.184101201,
+      "max_stagnation_seconds": 1050.1361673000001,
+      "mean_stagnation_seconds": 381.8691070090909,
+      "rows": 11,
+      "strict_certificates": 4,
+      "total_attempt_count": 297.0,
+      "total_child_restart_count": 181.0,
+      "total_closed_leaf_count": 38.0,
+      "total_fresh_restart_count": 181.0,
+      "total_model_count": 181.0,
+      "total_model_read_count": 181.0,
+      "total_model_read_seconds": 3.8842447,
+      "total_nodes": 143946.0,
+      "total_optimize_count": 297.0,
+      "total_presolve_count": 297.0,
+      "total_root_count": 180.0,
+      "total_same_leaf_restart_count": 116.0,
+      "total_split_count": 70.0,
+      "total_work": 22871.462007111422
+    },
+    {
+      "arm": "C1",
+      "max_memory_gb": 6.078290232,
+      "max_stagnation_seconds": 1202.5256673,
+      "mean_stagnation_seconds": 290.99627351666663,
+      "rows": 18,
+      "strict_certificates": 3,
+      "total_attempt_count": 726.0,
+      "total_child_restart_count": 413.0,
+      "total_closed_leaf_count": 63.0,
+      "total_fresh_restart_count": 413.0,
+      "total_model_count": 413.0,
+      "total_model_read_count": 413.0,
+      "total_model_read_seconds": 29.9227503,
+      "total_nodes": 295755.0,
+      "total_optimize_count": 726.0,
+      "total_presolve_count": 726.0,
+      "total_root_count": 412.0,
+      "total_same_leaf_restart_count": 313.0,
+      "total_split_count": 173.0,
+      "total_work": 67242.42495881996
+    }
+  ],
+  "round25_starting_head": "d8cba691424eb990fc22357f7a2911ec5d34f3df",
+  "schema": "round26-final-audit-v1",
+  "solver_versions": {
+    "cplex_historical_reference": "22.1.1.0",
+    "gurobi": "13.0.2"
+  },
+  "stable_mainline": "corrected_CPLEX_S0_F0",
+  "strict_certificates": {
+    "stage1": {
+      "C0": 3,
+      "C1": 2,
+      "P-GRB": 2
+    },
+    "stage2": {
+      "C0": 1,
+      "C1": 1,
+      "P-GRB": 0
+    },
+    "stage3": {
+      "C1": 0,
+      "P-GRB": 0
+    },
+    "stage4": {
+      "C1": 0,
+      "P-GRB": 0
+    }
+  }
+}

@@ -1,0 +1,11 @@
+gate,name,passed,decision,evidence
+1,exactness_and_correctness,True,PASS,47/47 authoritative; zero applicable gate failures
+2,uniform_no_dispatch,True,PASS,zero static no-dispatch findings; one uniform C1 manifest
+3,v12_regressions_resolved_or_bounded,False,FAIL,V12_M1 is timing noise; V12_M2 remains persistent external-overhead regression
+4,broad_p_grb_advantage_known_and_heldout_v20,True,PASS,C1 wins 9/9 non-V12 pairs; held-out mean/median gap and AUC all improve
+5,no_family_systematic_regression,True,PASS,no P-GRB-favoring family majority
+6,new_heldout_v20_strict_certificate,True,PASS,new C1-only strict certificates: high_imbalance_seed5203
+7,v50_validity_and_advantage,True,PASS,C1 wins 3/3 V50 pairs; all bounds valid
+8,long_run_sustained_progress,True,PASS,4/4 C1 rows improve after halfway
+9,broad_c0_nonregression,False,FAIL,"C1 wins/ties 4/11; C0-favoring family majorities=high_imbalance,tight_T; max normalized gap loss=0.024002"
+10,independent_of_warm_start_selection_and_known_objective,True,PASS,"cold C1=C0 binary; no portfolio, known-objective, family, seed, or size dispatch"
