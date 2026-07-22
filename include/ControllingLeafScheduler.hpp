@@ -120,6 +120,7 @@ public:
     double globalLowerBound() const;
     std::vector<std::string> controllingSet() const;
     ControllingLeafSelection selectNext();
+    ControllingLeafSelection selectNextByBoundOnly();
     bool everyRelevantLeafClosed() const;
     bool parentChildCoverageValid(std::string* reason = nullptr) const;
     bool leafBoundsMonotone() const;

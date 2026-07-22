@@ -325,8 +325,7 @@ bool ControllingLeafScheduler::setStatus(const std::string& leaf_id,
     const double before_global = globalLowerBound();
     leaf->status = status;
     leaf->closure_source = closure_source;
-    if (status == ControllingLeafStatus::Closed ||
-        status == ControllingLeafStatus::Fathomed ||
+    if (status == ControllingLeafStatus::Fathomed ||
         status == ControllingLeafStatus::Empty) {
         leaf->lower_bound = std::max(leaf->lower_bound, leaf->cutoff);
     }
@@ -450,6 +449,16 @@ std::vector<std::string> ControllingLeafScheduler::controllingSet() const {
 }
 
 ControllingLeafSelection ControllingLeafScheduler::selectNext() {
+    ControllingLeafSelection result = selectNextByBoundOnly();
+    if (!result.available) return result;
+    const ControllingLeaf* leaf = findLeaf(result.selected_leaf_id);
+    result.next_attempt_number = leaf ? leaf->exact_solver_attempt_count : 0;
+    result.requested_quantum_seconds =
+        requestedQuantumSeconds(result.next_attempt_number);
+    return result;
+}
+
+ControllingLeafSelection ControllingLeafScheduler::selectNextByBoundOnly() {
     ControllingLeafSelection result;
     double min_bound = globalLowerBound();
     std::vector<std::string> order = orderedControllingSet(&min_bound);
@@ -474,10 +483,6 @@ ControllingLeafSelection ControllingLeafScheduler::selectNext() {
     result.selection_position = static_cast<int>(active_tie_cursor_);
     result.tie_round = active_tie_round_;
     result.selected_leaf_id = active_tie_order_[active_tie_cursor_++];
-    const ControllingLeaf* leaf = findLeaf(result.selected_leaf_id);
-    result.next_attempt_number = leaf ? leaf->exact_solver_attempt_count : 0;
-    result.requested_quantum_seconds =
-        requestedQuantumSeconds(result.next_attempt_number);
     return result;
 }
 

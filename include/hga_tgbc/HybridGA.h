@@ -85,8 +85,23 @@ public:
         }
     }
     void clear_decode_cache() { decode_cache.clear(); }
+    void set_generation_stagnation_stop(bool enabled) {
+        generation_stagnation_stop = enabled;
+    }
     vector<vector<int>> get_best_solution() const { return best_solution; }
     double get_best_fitness() const { return best_fitness; }
+    long long get_total_generations() const { return total_generations; }
+    long long get_generations_since_improvement() const {
+        return generations_since_improvement;
+    }
+    long long get_objective_improvement_count() const {
+        return objective_improvement_count;
+    }
+    long long get_decoder_calls() const { return decoder_calls; }
+    const vector<double>& get_fitness_history() const { return history; }
+    const vector<int>& get_improvement_history() const {
+        return improvement_history;
+    }
     void print_results() const {
         cout << "Best fitness: " << best_fitness << "\n";
         for (size_t r = 0; r < best_solution.size(); ++r) {
@@ -106,11 +121,16 @@ public:
         if (selection_style == SelectionStyle::HGSBiased) {
             update_diversity_and_biased(population);
         }
-        update_best(population);
-        int generation = 0;
-        int generations_without_improve = 0;
+        const bool initial_improved = update_best(population);
+        total_generations = 0;
+        generations_since_improvement = 0;
+        objective_improvement_count = initial_improved ? 1 : 0;
+        history.clear();
+        improvement_history.clear();
+        history.push_back(best_fitness);
+        improvement_history.push_back(initial_improved ? 1 : 0);
 
-        while (duration_cast<seconds>(high_resolution_clock::now() - start).count() < max_time) {
+        auto complete_generation = [&]() {
             vector<Individual> offspring;
             offspring.reserve(pop_size);
             while ((int)offspring.size() < pop_size) {
@@ -141,16 +161,38 @@ public:
             }
             population = select_survivors(pool);
             const bool improved = update_best(population);
-            if (improved) generations_without_improve = 0;
-            else ++generations_without_improve;
+            if (improved) {
+                generations_since_improvement = 0;
+                ++objective_improvement_count;
+            } else {
+                ++generations_since_improvement;
+            }
             history.push_back(best_fitness);
-            ++generation;
-            if (generation % log_interval == 0) {
+            improvement_history.push_back(improved ? 1 : 0);
+            ++total_generations;
+            if (total_generations % log_interval == 0) {
                 // Production ExactEBRP bridge keeps the original HGA state update
                 // but suppresses console tracing.
             }
-            if (no_improve_gen_limit > 0 && generations_without_improve >= no_improve_gen_limit) break;
-            //if (generation >= 30000) break;
+        };
+
+        if (generation_stagnation_stop) {
+            // Round 27 production: the sole stop state is the number of
+            // completed generations since strict global-best improvement.
+            while (no_improve_gen_limit > 0 &&
+                   generations_since_improvement < no_improve_gen_limit) {
+                complete_generation();
+            }
+        } else {
+            // Historical time-limited diagnostic behavior.
+            while (duration_cast<seconds>(
+                       high_resolution_clock::now() - start).count() < max_time) {
+                complete_generation();
+                if (no_improve_gen_limit > 0 &&
+                    generations_since_improvement >= no_improve_gen_limit) {
+                    break;
+                }
+            }
         }
     }
 
@@ -189,6 +231,7 @@ private:
     double objective_lambda;
     double objective_scaling;
     int no_improve_gen_limit;
+    bool generation_stagnation_stop = false;
     double inheritance_crossover_ratio = 0.65;
     SelectionStyle selection_style = SelectionStyle::HGAFitness;
     double diversity_weight = 0.20;
@@ -207,6 +250,11 @@ private:
     vector<vector<int>> best_solution;
     double best_fitness;
     vector<double> history;
+    vector<int> improvement_history;
+    long long total_generations = 0;
+    long long generations_since_improvement = 0;
+    long long objective_improvement_count = 0;
+    long long decoder_calls = 0;
     mt19937 gen;
     unordered_map<string, SolutionResult_ORO> decode_cache;
 
@@ -431,6 +479,7 @@ SolutionResult_ORO decode_routes(const vector<vector<int>>& routes, vector<int>*
         auto it = decode_cache.find(key);
         if (it != decode_cache.end()) return it->second;
     }
+    ++decoder_calls;
     SolutionResult_ORO res;
     if (decoder_compaction_mode == 0) {
         res = nGreedyLU_RA(1, instance.V, instance.M, instance.total_time_limit,

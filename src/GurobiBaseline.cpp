@@ -66,6 +66,8 @@ struct GurobiApi {
     decltype(&GRBgetdblattrarray) getdblattrarray = nullptr;
     decltype(&GRBgetcharattrarray) getcharattrarray = nullptr;
     decltype(&GRBsetdblattrarray) setdblattrarray = nullptr;
+    decltype(&GRBsetcharattrarray) setcharattrarray = nullptr;
+    decltype(&GRBupdatemodel) updatemodel = nullptr;
     decltype(&GRBwrite) write = nullptr;
 };
 
@@ -197,6 +199,8 @@ bool loadGurobiApi(const SolveOptions& options,
     LOAD_GRB(getdblattrarray, "GRBgetdblattrarray");
     LOAD_GRB(getcharattrarray, "GRBgetcharattrarray");
     LOAD_GRB(setdblattrarray, "GRBsetdblattrarray");
+    LOAD_GRB(setcharattrarray, "GRBsetcharattrarray");
+    LOAD_GRB(updatemodel, "GRBupdatemodel");
     LOAD_GRB(write, "GRBwrite");
 #undef LOAD_GRB
     reason = "loaded";
@@ -502,6 +506,10 @@ public:
     }
 
     ~GurobiFixedIntervalBackend() override {
+        release();
+    }
+
+    void release() override {
         for (auto& item : leaves_) {
             if (item.second.model) {
                 api_.freemodel(item.second.model);
@@ -547,7 +555,14 @@ public:
             out.failure_reason = failure_reason_;
             return out;
         }
+        const bool paper_solve =
+            request.solve_kind != FixedIntervalSolveKind::LegacyMipQuantum;
+        out.lp_relaxation =
+            request.solve_kind == FixedIntervalSolveKind::PaperLpRelaxation;
+        out.terminal_mip =
+            request.solve_kind == FixedIntervalSolveKind::PaperTerminalMip;
         const bool retained_mode =
+            !paper_solve &&
             options_.external_gini_lifecycle == "retained-per-leaf";
         auto found = leaves_.find(request.leaf_id);
         bool retained = retained_mode && found != leaves_.end();
@@ -583,10 +598,12 @@ public:
             state.new_child = request.new_leaf;
             ++stats_.model_count;
             ++stats_.model_read_count;
-            ++stats_.fresh_restart_count;
-            if (request.new_leaf) ++stats_.child_restart_count;
-            out.fresh_restart = true;
-            out.child_restart = request.new_leaf;
+            if (!paper_solve) {
+                ++stats_.fresh_restart_count;
+                if (request.new_leaf) ++stats_.child_restart_count;
+                out.fresh_restart = true;
+                out.child_restart = request.new_leaf;
+            }
             auto inserted = leaves_.emplace(request.leaf_id, std::move(state));
             found = inserted.first;
         } else {
@@ -600,9 +617,34 @@ public:
             out.failure_reason = "gurobi_external_model_environment_missing";
             return out;
         }
+        if (out.lp_relaxation) {
+            int variable_count = 0;
+            if (api_.getintattr(model, GRB_INT_ATTR_NUMVARS,
+                                &variable_count) != 0 || variable_count <= 0) {
+                out.failure_reason = "paper_lp_variable_count_unavailable";
+                return out;
+            }
+            std::vector<char> continuous(
+                static_cast<std::size_t>(variable_count), GRB_CONTINUOUS);
+            const int type_rc = api_.setcharattrarray(
+                model, GRB_CHAR_ATTR_VTYPE, 0, variable_count,
+                continuous.data());
+            const int update_rc = type_rc == 0 ? api_.updatemodel(model)
+                                                : type_rc;
+            if (type_rc != 0 || update_rc != 0) {
+                out.failure_reason = type_rc != 0
+                    ? apiError(api_, model_env, type_rc)
+                    : apiError(api_, model_env, update_rc);
+                return out;
+            }
+            out.native_model_modified = true;
+        }
+        const double effective_limit = paper_solve
+            ? request.global_deadline_remaining_seconds
+            : request.time_limit_seconds;
         const int time_rc = api_.setdblparam(
             model_env, GRB_DBL_PAR_TIMELIMIT,
-            std::max(0.001, request.time_limit_seconds));
+            std::max(0.001, effective_limit));
         out.native_log_path = request.native_log_path.string();
         int log_rc = 0;
         if (!request.native_log_path.empty()) {
@@ -699,6 +741,8 @@ public:
             api_.setstrparam(model_env, GRB_STR_PAR_LOGFILE, "");
         }
         ++stats_.optimize_count;
+        if (out.lp_relaxation) ++stats_.lp_relaxation_optimize_count;
+        if (out.terminal_mip) ++stats_.terminal_mip_optimize_count;
         ++state.optimize_count;
         out.solver_finalization_reached = out.optimize_return_code == 0;
         auto getInt = [&](const char* attr, int& target) {
@@ -724,6 +768,17 @@ public:
             out.native_status_code == GRB_MEM_LIMIT;
         out.native_bound_available = getDouble(
             GRB_DBL_ATTR_OBJBOUNDC, out.native_bound);
+        if (out.lp_relaxation && out.optimal) {
+            double lp_objective = 0.0;
+            if (getDouble(GRB_DBL_ATTR_OBJVAL, lp_objective)) {
+                out.native_bound = lp_objective;
+                out.native_bound_available = true;
+            }
+        }
+        out.lp_terminal_valid = out.lp_relaxation &&
+            out.solver_finalization_reached &&
+            (out.optimal || out.infeasible) &&
+            (out.infeasible || out.native_bound_available);
         double per_call_runtime = 0.0, per_call_work = 0.0,
                per_call_nodes = 0.0, per_call_iter = 0.0;
         getDouble(GRB_DBL_ATTR_RUNTIME, per_call_runtime);
@@ -754,6 +809,10 @@ public:
             state.cumulative_barrier_iterations;
         stats_.cumulative_solver_runtime_seconds += out.solver_runtime_seconds;
         stats_.cumulative_work += out.work;
+        if (out.lp_relaxation) stats_.cumulative_lp_work += out.work;
+        if (out.terminal_mip) {
+            stats_.cumulative_terminal_mip_work += out.work;
+        }
         stats_.cumulative_nodes += out.nodes;
         stats_.cumulative_simplex_iterations += out.simplex_iterations;
         stats_.cumulative_barrier_iterations += out.barrier_iterations;
@@ -810,7 +869,7 @@ public:
                 ++stats_.warm_start_unknown_count;
             }
         }
-        if (solution_count > 0) {
+        if (!out.lp_relaxation && solution_count > 0) {
             int nvars = 0;
             if (getInt(GRB_INT_ATTR_NUMVARS, nvars) && nvars > 0) {
                 std::vector<double> x(static_cast<std::size_t>(nvars));
@@ -850,7 +909,7 @@ public:
                 witness.objective <= request.verified_cutoff + 1e-9;
             out.feasibility_consistency_gate = !contradicts;
         }
-        state.had_incumbent = solution_count > 0;
+        state.had_incumbent = !out.lp_relaxation && solution_count > 0;
         if (!out.solver_finalization_reached ||
             !out.exact_zero_gap_roundtrip ||
             !out.model_fingerprint_matches_request ||
@@ -869,6 +928,15 @@ public:
             out.failure_reason = reason.str();
         } else {
             out.failure_reason = "none";
+        }
+        if (paper_solve) {
+            out.retained_state_classification = "paper_fresh_event_model";
+            if (state.model) {
+                api_.freemodel(state.model);
+                state.model = nullptr;
+                ++stats_.model_free_count;
+            }
+            leaves_.erase(request.leaf_id);
         }
         return out;
     }

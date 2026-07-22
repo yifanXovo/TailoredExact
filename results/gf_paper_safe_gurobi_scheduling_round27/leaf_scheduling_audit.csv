@@ -1,0 +1,8 @@
+property,required,implementation,pass
+selection,global best valid leaf bound,ControllingLeafScheduler::selectNextByBoundOnly,True
+parent LP,complete optimal/infeasible LP,PaperLpRelaxation event before split decision,True
+child lookahead,both child LPs terminal-valid,atomic decision deferred until two LP outcomes,True
+split trigger,infeasible child or strict bound gain,evaluatePaperLpSplitDecision with certificate tolerance,True
+terminal leaf,one complete interval MIP optimize,terminal_mip_started guard plus lifecycle equality,True
+deadline,stop entire tree; interrupted leaf open,global_deadline_stop; no scheduler continuation,True
+restart counts,all zero,fresh paper event backend; lifecycle gates,True

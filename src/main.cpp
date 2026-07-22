@@ -8,6 +8,7 @@
 #include "Cuts.hpp"
 #include "Evaluator.hpp"
 #include "ExternalGiniTree.hpp"
+#include "PaperExternalGiniTree.hpp"
 #include "GiniFrontierGeometry.hpp"
 #include "HgaTgbcRunner.hpp"
 #include "Master.hpp"
@@ -57,7 +58,7 @@ void usage() {
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
         << "[--gini-cap <gamma>] [--gini-floor <gamma>] [--max-nodes <N>] [--frontier-intervals <N>] [--frontier-refine-splits <N>] "
         << "[--frontier-execution-mode scheduler|global-gini-tree|external-gini-tree] [--global-gini-tree-presolve on|off] "
-        << "[--external-gini-split-after-attempts <N>] "
+        << "[--external-gini-split-after-attempts <N>] [--external-gini-scheduling legacy-quanta|paper-lp-event] "
         << "[--global-gini-tree-search dynamic|traditional|auto] [--global-gini-tree-child-estimate parent-copy|dispersion-coupled|factory-domain] "
         << "[--global-gini-tree-row-attachment full-inherited-pack|exact-incremental-delta] [--global-gini-tree-row-timing deferred|eager] "
         << "[--global-gini-tree-native-mip-start true|false] [--global-gini-tree-root-connectivity-flow true|false] "
@@ -567,6 +568,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round24-manifest-executable-sha256") opt.round24_manifest_executable_sha256 = requireValue(i, argc, argv);
         else if (arg == "--external-gini-backend") opt.external_gini_backend = requireValue(i, argc, argv);
         else if (arg == "--external-gini-lifecycle") opt.external_gini_lifecycle = requireValue(i, argc, argv);
+        else if (arg == "--external-gini-scheduling") opt.external_gini_scheduling = requireValue(i, argc, argv);
         else if (arg == "--external-gini-warm-start") opt.external_gini_warm_start = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--external-gini-split-after-attempts") opt.external_gini_split_after_attempts = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--external-gini-artifact-dir") opt.external_gini_artifact_dir = requireValue(i, argc, argv);
@@ -1150,6 +1152,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--primal-heuristic-seconds") opt.primal_heuristic_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-seed") opt.primal_heuristic_seed = static_cast<unsigned>(std::stoul(requireValue(i, argc, argv)));
         else if (arg == "--primal-heuristic-runs") opt.primal_heuristic_runs = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--primal-heuristic-stop") opt.primal_heuristic_stop = requireValue(i, argc, argv);
+        else if (arg == "--primal-heuristic-no-improve-generations") opt.primal_heuristic_no_improve_generations = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--primal-heuristic-generation-log") opt.primal_heuristic_generation_log = requireValue(i, argc, argv);
         else if (arg == "--heuristic-candidates-csv") opt.heuristic_candidates_csv = requireValue(i, argc, argv);
         else if (arg == "--large-instance-mode") opt.large_instance_mode = requireValue(i, argc, argv);
         else if (arg == "--large-lb-mode") opt.large_lb_mode = requireValue(i, argc, argv);
@@ -1432,6 +1437,17 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.large_relaxed_rmp_column_budget < 1) opt.large_relaxed_rmp_column_budget = 1;
     if (opt.large_relaxed_rmp_time < 0.0) opt.large_relaxed_rmp_time = 0.0;
     opt.primal_heuristic = lowerAscii(opt.primal_heuristic);
+    opt.primal_heuristic_stop = lowerAscii(opt.primal_heuristic_stop);
+    if (opt.primal_heuristic_stop != "generation-stagnation") {
+        opt.primal_heuristic_stop = "legacy-time";
+    }
+    if (opt.primal_heuristic_no_improve_generations < 1) {
+        opt.primal_heuristic_no_improve_generations = 1;
+    }
+    opt.external_gini_scheduling = lowerAscii(opt.external_gini_scheduling);
+    if (opt.external_gini_scheduling != "paper-lp-event") {
+        opt.external_gini_scheduling = "legacy-quanta";
+    }
     if (opt.primal_heuristic != "greedy" &&
         opt.primal_heuristic != "hga-tgbc" &&
         opt.primal_heuristic != "best-of-all") {
@@ -6325,6 +6341,15 @@ struct PaperPrimalHeuristicResult {
     long long candidates_verified = 0;
     long long candidates_rejected = 0;
     long long local_moves_tested = 0;
+    std::string hga_stop_mode = "not_run";
+    long long hga_total_generations = 0;
+    long long hga_generations_since_improvement = 0;
+    long long hga_objective_improvement_count = 0;
+    long long hga_decoder_calls = 0;
+    double hga_final_fitness = 0.0;
+    double hga_verified_objective = 0.0;
+    double hga_wall_time_seconds = 0.0;
+    std::string hga_generation_log_path;
     std::vector<std::string> notes;
     struct CandidateRecord {
         std::string instance;
@@ -6836,6 +6861,8 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         return out;
     }
     const double budget = opt.primal_heuristic_seconds;
+    const bool generation_stagnation =
+        opt.primal_heuristic_stop == "generation-stagnation";
     auto timedOut = [&]() {
         if (budget <= 0.0) return false;
         return std::chrono::duration<double>(
@@ -6913,15 +6940,33 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
                                     out.candidate_records);
     };
 
-    if ((mode == "hga-tgbc" || mode == "best-of-all") && !timedOut()) {
+    if ((mode == "hga-tgbc" || mode == "best-of-all") &&
+        (generation_stagnation || !timedOut())) {
         ebrp::HgaTgbcOptions hga_opt;
         hga_opt.lambda = opt.lambda;
         hga_opt.seed = opt.primal_heuristic_seed;
-        hga_opt.max_time_seconds = std::max(
-            1, static_cast<int>(std::ceil(opt.primal_heuristic_seconds)));
+        hga_opt.stop_mode = opt.primal_heuristic_stop;
+        hga_opt.no_improve_generation_limit =
+            opt.primal_heuristic_no_improve_generations;
+        hga_opt.generation_log_path = opt.primal_heuristic_generation_log;
+        if (!generation_stagnation) {
+            hga_opt.max_time_seconds = std::max(
+                1, static_cast<int>(std::ceil(opt.primal_heuristic_seconds)));
+        }
         hga_opt.pop_size = std::max(24, opt.primal_heuristic_runs);
         hga_opt.iterations = 10;
         ebrp::HgaTgbcResult native = ebrp::runHgaTgbcNative(instance, hga_opt);
+        out.hga_stop_mode = native.stop_mode;
+        out.hga_total_generations = native.total_generations;
+        out.hga_generations_since_improvement =
+            native.generations_since_improvement;
+        out.hga_objective_improvement_count =
+            native.objective_improvement_count;
+        out.hga_decoder_calls = native.decoder_calls;
+        out.hga_final_fitness = native.final_fitness;
+        out.hga_verified_objective = native.verified_objective;
+        out.hga_wall_time_seconds = native.wall_time_seconds;
+        out.hga_generation_log_path = native.generation_log_path.string();
         out.notes.insert(out.notes.end(), native.notes.begin(), native.notes.end());
         if (native.found) {
             consider(native.routes, "native_hga_tgbc_full_migration");
@@ -7166,6 +7211,17 @@ ebrp::SolveResult solvePrimalHeuristicDiagnostic(const ebrp::Instance& instance,
     result.ub_event_log_path = opt.ub_event_log_path;
 
     PaperPrimalHeuristicResult heuristic = runPaperPrimalHeuristic(instance, opt);
+    result.hga_stop_mode = heuristic.hga_stop_mode;
+    result.hga_total_generations = heuristic.hga_total_generations;
+    result.hga_generations_since_improvement =
+        heuristic.hga_generations_since_improvement;
+    result.hga_objective_improvement_count =
+        heuristic.hga_objective_improvement_count;
+    result.hga_decoder_calls = heuristic.hga_decoder_calls;
+    result.hga_final_fitness = heuristic.hga_final_fitness;
+    result.hga_verified_objective = heuristic.hga_verified_objective;
+    result.hga_wall_time_seconds = heuristic.hga_wall_time_seconds;
+    result.hga_generation_log_path = heuristic.hga_generation_log_path;
     result.incumbent_generation_time_seconds = heuristic.runtime_seconds;
     result.incumbent_generation_method = "paper_primal_" + opt.primal_heuristic;
     result.incumbent_candidates_tested = heuristic.candidates_tested;
@@ -10847,6 +10903,17 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         const auto heuristic_start = std::chrono::steady_clock::now();
         PaperPrimalHeuristicResult heuristic =
             runPaperPrimalHeuristic(instance, opt);
+        result.hga_stop_mode = heuristic.hga_stop_mode;
+        result.hga_total_generations = heuristic.hga_total_generations;
+        result.hga_generations_since_improvement =
+            heuristic.hga_generations_since_improvement;
+        result.hga_objective_improvement_count =
+            heuristic.hga_objective_improvement_count;
+        result.hga_decoder_calls = heuristic.hga_decoder_calls;
+        result.hga_final_fitness = heuristic.hga_final_fitness;
+        result.hga_verified_objective = heuristic.hga_verified_objective;
+        result.hga_wall_time_seconds = heuristic.hga_wall_time_seconds;
+        result.hga_generation_log_path = heuristic.hga_generation_log_path;
         result.incumbent_generation_time_seconds += heuristic.runtime_seconds;
         result.incumbent_generation_method = "paper_primal_" + opt.primal_heuristic;
         result.incumbent_candidates_tested += heuristic.candidates_tested;
@@ -11491,14 +11558,40 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         ebrp::SolveOptions external_opt = opt;
         external_opt.frontier_adaptive_max_depth =
             effectiveFrontierAdaptiveMaxDepth(instance, opt);
+        const double exact_phase_remaining = opt.solve_time_limit > 0.0
+            ? opt.solve_time_limit - elapsedSeconds()
+            : std::numeric_limits<double>::max();
+        if (opt.external_gini_scheduling == "paper-lp-event" &&
+            exact_phase_remaining <= 0.0) {
+            result.external_gini_tree_scheduling = "paper-lp-event";
+            result.external_gini_tree_failure_reason =
+                "overall_global_deadline_reached_during_generation_hga";
+            result.strict_certified_original_problem = false;
+            result.strict_certificate_class = "certificate_rejected";
+            result.strict_certificate_rejection_reason =
+                "exact_phase_not_started_after_global_deadline";
+            result.status = "paper_hga_global_deadline";
+            result.certificate =
+                "Global deadline elapsed before the generation-stagnation HGA completed; the exact phase was not started.";
+            result.runtime_seconds = elapsedSeconds();
+            result.wall_time_seconds = result.runtime_seconds;
+            result.actual_runtime_seconds = result.runtime_seconds;
+            return result;
+        }
         if (opt.solve_time_limit > 0.0) {
             external_opt.solve_time_limit =
-                std::max(0.001, opt.solve_time_limit - elapsedSeconds());
+                std::max(0.001, exact_phase_remaining);
         }
-        result.notes.push_back(
-            "frontier execution mode external-gini-tree: shared ControllingLeafScheduler, deterministic solver-neutral interval geometry, static fixed-interval F0 models, inherited/native leaf bounds, and no continuous callback branch");
-        ebrp::SolveResult external = ebrp::solveExternalGiniTree(
-            instance, external_opt, result, cover_lo, cover_hi);
+        const bool paper_scheduling =
+            opt.external_gini_scheduling == "paper-lp-event";
+        result.notes.push_back(paper_scheduling
+            ? "frontier execution mode paper-lp-event: complete LP relaxations drive atomic splits and every terminal MIP is optimized exactly once without internal scheduling budgets"
+            : "frontier execution mode external-gini-tree legacy-quanta: historical retained leaf scheduling with time quanta");
+        ebrp::SolveResult external = paper_scheduling
+            ? ebrp::solvePaperExternalGiniTree(
+                  instance, external_opt, result, cover_lo, cover_hi)
+            : ebrp::solveExternalGiniTree(
+                  instance, external_opt, result, cover_lo, cover_hi);
         external.runtime_seconds = elapsedSeconds();
         external.wall_time_seconds = external.runtime_seconds;
         external.actual_runtime_seconds = external.runtime_seconds;

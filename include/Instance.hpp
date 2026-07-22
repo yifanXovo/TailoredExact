@@ -91,6 +91,7 @@ struct SolveOptions {
     std::string round24_manifest_executable_sha256;
     std::string external_gini_backend = "cplex";
     std::string external_gini_lifecycle = "retained-per-leaf";
+    std::string external_gini_scheduling = "legacy-quanta";
     bool external_gini_warm_start = false;
     int external_gini_split_after_attempts = 2;
     std::string external_gini_artifact_dir;
@@ -426,6 +427,9 @@ struct SolveOptions {
     double primal_heuristic_seconds = 10.0;
     unsigned primal_heuristic_seed = 20260626u;
     int primal_heuristic_runs = 12;
+    std::string primal_heuristic_stop = "legacy-time";
+    int primal_heuristic_no_improve_generations = 2000;
+    std::string primal_heuristic_generation_log;
     bool exact_phase_local_redecode_repair = false;
     double exact_phase_local_redecode_seconds = 10.0;
     std::string heuristic_candidates_csv;

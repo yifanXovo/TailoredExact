@@ -101,6 +101,10 @@ public:
         const FixedIntervalMipRequest& request) override {
         FixedIntervalMipOutcome out;
         out.attempted = true;
+        if (request.solve_kind != FixedIntervalSolveKind::LegacyMipQuantum) {
+            out.failure_reason = "paper_lp_event_path_requires_gurobi";
+            return out;
+        }
         out.available = true;
         out.presolve_time_status =
             "unavailable_cplex_callable_library_has_no_safe_phase_timer";
@@ -491,6 +495,7 @@ SolveResult solveExternalGiniTree(const Instance& instance,
     result.external_gini_tree_attempted = true;
     result.external_gini_tree_backend = options.external_gini_backend;
     result.external_gini_tree_lifecycle = options.external_gini_lifecycle;
+    result.external_gini_tree_scheduling = "legacy-quanta";
     result.external_gini_tree_root_gamma_L = root_gamma_L;
     result.external_gini_tree_root_gamma_U = root_gamma_U;
     result.external_gini_tree_verified_upper_bound = verified_seed.objective;
