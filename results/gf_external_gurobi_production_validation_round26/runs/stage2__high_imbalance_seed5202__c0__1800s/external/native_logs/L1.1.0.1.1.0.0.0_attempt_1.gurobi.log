@@ -1,0 +1,54 @@
+
+Gurobi 13.0.2 (win64) logging started Wed Jul 22 00:46:17 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_external_gurobi_production_validation_round26\runs\stage2__high_imbalance_seed5202__c0__1800s\external\native_logs\L1.1.0.1.1.0.0.0_attempt_1.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  60
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11923 rows, 3380 columns and 67410 nonzeros (Min)
+Model fingerprint: 0x6f7ce4af
+Model has 21 linear objective coefficients
+Variable types: 1687 continuous, 1693 integer (1493 binary)
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+04]
+  Objective range  [2e-02, 1e+00]
+  Bounds range     [4e-01, 7e+02]
+  RHS range        [4e-01, 5e+04]
+
+Presolved: 10098 rows, 3316 columns, 74449 nonzeros
+
+Continuing optimization...
+
+   525   508    1.09363   10  161          -    1.09363      -   201   30s
+   581   540    1.13275   38  189          -    1.09363      -   217   35s
+   645   559    1.12664   26  206          -    1.09363      -   234   40s
+   710   581    1.09806   29  199          -    1.09363      -   241   45s
+   777   597    1.11130   21  189          -    1.09363      -   242   50s
+   843   611    1.14639   36  205          -    1.09363      -   248   55s
+   918   641    1.11488   28  186          -    1.09363      -   252   60s
+  1024   669 infeasible   44               -    1.09363      -   250   65s
+  1164   721    1.12963   49  162          -    1.09363      -   247   70s
+  1324   788    1.11094   32  178          -    1.09363      -   241   75s
+  1462   832 infeasible   53               -    1.09363      -   245   80s
+  1588   875    1.13998   57  163          -    1.09363      -   251   85s
+  1760   932    1.14045   34  198          -    1.09363      -   250   90s
+
+Explored 1761 nodes (469806 simplex iterations) in 90.01 seconds (181.81 work units)
+Most recent optimization runtime was 60.00 seconds (117.97 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound 1.093625262877e+00, gap -
+
+User-callback calls 15990, time in user-callback 0.01 sec

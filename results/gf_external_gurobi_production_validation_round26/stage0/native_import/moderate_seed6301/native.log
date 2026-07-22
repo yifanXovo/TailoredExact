@@ -1,0 +1,46 @@
+
+Gurobi 13.0.2 (win64) logging started Tue Jul 21 20:42:59 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_external_gurobi_production_validation_round26\stage0\native_import\moderate_seed6301\native.log"
+Set parameter Threads to value 1
+Set parameter Presolve to value -1
+Set parameter Seed to value 0
+Set parameter MIPGap to value 0
+Set parameter MIPGapAbs to value 0
+Set parameter TimeLimit to value 0.001
+Read LP format model from file E:\codes\ExactEBRP\results\gf_external_gurobi_production_validation_round26\stage0\native_import\moderate_seed6301\canonical.lp
+Reading time = 0.04 seconds
+obj: 27656 rows, 10538 columns, 135648 nonzeros
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  0.001
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 27656 rows, 10538 columns and 135648 nonzeros (Min)
+Model fingerprint: 0x80d28b19
+Model has 51 linear objective coefficients
+Variable types: 1807 continuous, 8731 integer (8231 binary)
+Coefficient statistics:
+  Matrix range     [3e-02, 6e+02]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [1e+00, 5e+01]
+  RHS range        [1e+00, 4e+03]
+
+Presolve time: 0.00s
+
+Explored 0 nodes (0 simplex iterations) in 0.01 seconds (0.02 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound -, gap -
+
+User-callback calls 37, time in user-callback 0.00 sec

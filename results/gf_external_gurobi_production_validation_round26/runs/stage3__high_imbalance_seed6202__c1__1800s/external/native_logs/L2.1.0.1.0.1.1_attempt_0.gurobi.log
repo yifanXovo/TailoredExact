@@ -1,0 +1,95 @@
+
+Gurobi 13.0.2 (win64) logging started Wed Jul 22 08:41:56 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_external_gurobi_production_validation_round26\runs\stage3__high_imbalance_seed6202__c1__1800s\external\native_logs\L2.1.0.1.0.1.1_attempt_0.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  30
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 93009 rows, 18187 columns and 665803 nonzeros (Min)
+Model fingerprint: 0x16383f79
+Model has 51 linear objective coefficients
+Variable types: 9458 continuous, 8729 integer (8229 binary)
+Coefficient statistics:
+  Matrix range     [1e-02, 2e+04]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [7e-01, 5e+04]
+  RHS range        [7e-01, 1e+05]
+
+Presolve removed 16438 rows and 172 columns
+Presolve time: 1.83s
+Presolved: 76571 rows, 18015 columns, 516027 nonzeros
+Variable types: 9347 continuous, 8668 integer (8196 binary)
+Root relaxation presolved: 17892 rows, 94271 columns, 533538 nonzeros
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+    9078    1.3431526e+32   9.872084e+33   1.343153e+02      5s
+   18840    7.5178456e+00   0.000000e+00   0.000000e+00      9s
+   18840    7.5178456e+00   0.000000e+00   0.000000e+00      9s
+   18840    7.5178456e+00   0.000000e+00   0.000000e+00      9s
+
+Root relaxation: objective 7.517846e+00, 18840 iterations, 6.67 seconds (20.67 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    7.51785    0  274          -    7.51785      -     -    9s
+     0     0    8.19271    0  248          -    8.19271      -     -   11s
+     0     0    8.36830    0  279          -    8.36830      -     -   12s
+     0     0    8.42495    0  274          -    8.42495      -     -   14s
+     0     0    8.43211    0  271          -    8.43211      -     -   15s
+     0     0    8.43254    0  256          -    8.43254      -     -   15s
+     0     0    8.43392    0  277          -    8.43392      -     -   15s
+     0     0    8.43393    0  276          -    8.43393      -     -   15s
+     0     0    8.55052    0  328          -    8.55052      -     -   17s
+     0     0    8.56027    0  339          -    8.56027      -     -   17s
+     0     0    8.56456    0  344          -    8.56456      -     -   18s
+     0     0    8.56534    0  392          -    8.56534      -     -   18s
+     0     0    8.56540    0  393          -    8.56540      -     -   18s
+     0     0    8.58767    0  403          -    8.58767      -     -   20s
+     0     0    8.61882    0  401          -    8.61882      -     -   21s
+     0     0    8.62034    0  423          -    8.62034      -     -   21s
+     0     0    8.62039    0  403          -    8.62039      -     -   21s
+     0     0    8.62829    0  415          -    8.62829      -     -   23s
+     0     0    8.63035    0  423          -    8.63035      -     -   23s
+     0     0    8.63060    0  479          -    8.63060      -     -   24s
+     0     0    8.63108    0  469          -    8.63108      -     -   24s
+     0     0    8.63112    0  476          -    8.63112      -     -   24s
+     0     0    8.66826    0  398          -    8.66826      -     -   26s
+
+Cutting planes:
+  Learned: 14
+  Gomory: 1
+  Cover: 86
+  Implied bound: 210
+  Clique: 39
+  MIR: 774
+  StrongCG: 14
+  Flow cover: 311
+  GUB cover: 4
+  Zero half: 18
+  Network: 19
+  RLT: 12
+  Relax-and-lift: 172
+  BQP: 4
+
+Explored 1 nodes (28069 simplex iterations) in 30.00 seconds (68.60 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound 8.668700188302e+00, gap -
+
+User-callback calls 5023, time in user-callback 0.00 sec

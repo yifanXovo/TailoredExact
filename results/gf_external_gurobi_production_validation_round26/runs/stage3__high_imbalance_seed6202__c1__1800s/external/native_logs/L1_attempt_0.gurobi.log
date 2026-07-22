@@ -1,0 +1,57 @@
+
+Gurobi 13.0.2 (win64) logging started Wed Jul 22 08:15:38 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_external_gurobi_production_validation_round26\runs\stage3__high_imbalance_seed6202__c1__1800s\external\native_logs\L1_attempt_0.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  30
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 93009 rows, 18187 columns and 665803 nonzeros (Min)
+Model fingerprint: 0xdffbc444
+Model has 51 linear objective coefficients
+Variable types: 9458 continuous, 8729 integer (8229 binary)
+Coefficient statistics:
+  Matrix range     [1e-02, 2e+04]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [2e-01, 5e+04]
+  RHS range        [2e-01, 1e+05]
+
+Presolve removed 16030 rows and 172 columns
+Presolve time: 1.83s
+Presolved: 76979 rows, 18015 columns, 515314 nonzeros
+Variable types: 9338 continuous, 8677 integer (8196 binary)
+Root relaxation presolved: 17892 rows, 94679 columns, 532825 nonzeros
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+    8667    3.9049877e+32   4.206337e+35   3.904988e+02      5s
+   17058    1.4236078e+00   0.000000e+00   8.373040e+07     10s
+   23438    6.5004656e+00   0.000000e+00   1.820723e+08     15s
+Warning: very big Kappa = 2.53599e+16, try parameter NumericFocus
+
+Root relaxation: infeasible, 24724 iterations, 14.11 seconds (41.72 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -   16s
+
+Explored 1 nodes (24724 simplex iterations) in 16.15 seconds (45.50 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+
+User-callback calls 1532, time in user-callback 0.00 sec

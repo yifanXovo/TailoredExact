@@ -92,6 +92,7 @@ struct SolveOptions {
     std::string external_gini_backend = "cplex";
     std::string external_gini_lifecycle = "retained-per-leaf";
     bool external_gini_warm_start = false;
+    int external_gini_split_after_attempts = 2;
     std::string external_gini_artifact_dir;
     bool round24_research_mode = false;
     bool allow_unsafe_continuous_branch_presolve_diagnostic = false;

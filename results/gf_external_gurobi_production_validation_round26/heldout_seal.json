@@ -1,0 +1,50 @@
+{
+  "conflicts": {
+    "5101": "tracked V50 moderate evidence",
+    "5201": "tracked V50 high-imbalance evidence",
+    "6101": "tracked V100 moderate evidence",
+    "6201": "tracked V100 high-imbalance evidence"
+  },
+  "created_before_any_round26_solver_run": true,
+  "files": [
+    {
+      "path": "reference/heldout_round26/V20_M3/tight_T_seed5102.txt",
+      "sha256": "7c6d264827a64fc1da476a350f4312c947f27c94ba1b7cf775347fdd407363d5"
+    },
+    {
+      "path": "reference/heldout_round26/V20_M3/tight_T_seed5103.txt",
+      "sha256": "96043ed4a57c0596cd1acf7d7028a3b8c9edcbd7610e6d7a5772d55f75c5b528"
+    },
+    {
+      "path": "reference/heldout_round26/V20_M3/high_imbalance_seed5202.txt",
+      "sha256": "18df273a1bb599a8d85ba695f107711331ffc1ff101eb67d3603cf28ce0510fb"
+    },
+    {
+      "path": "reference/heldout_round26/V20_M3/high_imbalance_seed5203.txt",
+      "sha256": "261a4e276df0a95d5ade89f6067b3451fa74650a70970cfa27248c4884f29761"
+    },
+    {
+      "path": "reference/heldout_round26/V20_M3/moderate_seed5301.txt",
+      "sha256": "7d1b9e36dec1a5389d2d76af66c9476e642fac496530154bd4418e2082e5d0a5"
+    },
+    {
+      "path": "reference/heldout_round26/V20_M3/moderate_seed5302.txt",
+      "sha256": "29d6c063e60366697a215808677ac53e958cb916103382f91a3b92957bd9dc3f"
+    },
+    {
+      "path": "reference/heldout_round26/V50_M3/tight_T_seed6102.txt",
+      "sha256": "62ed13533967116ca5cb0f3d3e8c4b984900b8aa11306aa6bb20a1aa6584e16c"
+    },
+    {
+      "path": "reference/heldout_round26/V50_M3/high_imbalance_seed6202.txt",
+      "sha256": "dc638980e691c1e5a0db8863194d2c961c9548923de05ea66613c11a7b8542ba"
+    },
+    {
+      "path": "reference/heldout_round26/V50_M3/moderate_seed6301.txt",
+      "sha256": "d07c4fc1d6f4c54b1964d7d1c925dd12b780f1973f5b61f1e02c1cfa35404ae3"
+    }
+  ],
+  "generator_commit": "0573d21c39d7c8fa8edb29f9eacb4184faa26bde",
+  "schema": "round26-heldout-seal-v1",
+  "seed_rule": "Keep every unused preferred seed. For each conflicting preferred seed, choose the first globally unused integer strictly above the maximum preferred seed for that family."
+}

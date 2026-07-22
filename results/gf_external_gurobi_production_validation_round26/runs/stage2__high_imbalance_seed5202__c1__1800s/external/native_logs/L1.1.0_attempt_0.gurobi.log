@@ -1,0 +1,99 @@
+
+Gurobi 13.0.2 (win64) logging started Wed Jul 22 00:55:09 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_external_gurobi_production_validation_round26\runs\stage2__high_imbalance_seed5202__c1__1800s\external\native_logs\L1.1.0_attempt_0.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  30
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11923 rows, 3380 columns and 67410 nonzeros (Min)
+Model fingerprint: 0xd20b4b3f
+Model has 21 linear objective coefficients
+Variable types: 1687 continuous, 1693 integer (1493 binary)
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+04]
+  Objective range  [2e-02, 1e+00]
+  Bounds range     [4e-01, 7e+02]
+  RHS range        [4e-01, 5e+04]
+
+Presolve removed 1830 rows and 64 columns
+Presolve time: 0.18s
+Presolved: 10093 rows, 3316 columns, 74508 nonzeros
+Variable types: 1641 continuous, 1675 integer (1496 binary)
+
+Root relaxation: objective 1.004233e+00, 3798 iterations, 0.19 seconds (0.52 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    1.00423    0  258          -    1.00423      -     -    0s
+     0     0    1.03189    0  259          -    1.03189      -     -    0s
+     0     0    1.06113    0  297          -    1.06113      -     -    1s
+     0     0    1.06275    0  303          -    1.06275      -     -    1s
+     0     0    1.06850    0  308          -    1.06850      -     -    1s
+     0     0    1.06938    0  304          -    1.06938      -     -    1s
+     0     0    1.07443    0  323          -    1.07443      -     -    2s
+     0     0    1.07466    0  310          -    1.07466      -     -    2s
+     0     0    1.07620    0  295          -    1.07620      -     -    3s
+     0     0    1.07644    0  325          -    1.07644      -     -    3s
+     0     0    1.07770    0  326          -    1.07770      -     -    4s
+     0     0    1.07824    0  347          -    1.07824      -     -    4s
+     0     0    1.07868    0  293          -    1.07868      -     -    4s
+     0     0    1.07870    0  365          -    1.07870      -     -    4s
+     0     0    1.07883    0  362          -    1.07883      -     -    5s
+     0     0    1.07892    0  309          -    1.07892      -     -    5s
+     0     0    1.07895    0  372          -    1.07895      -     -    5s
+     0     0    1.07898    0  375          -    1.07898      -     -    5s
+     0     0    1.07927    0  356          -    1.07927      -     -    6s
+     0     0    1.07933    0  378          -    1.07933      -     -    6s
+     0     0    1.07946    0  301          -    1.07946      -     -    7s
+     0     0    1.07954    0  332          -    1.07954      -     -    7s
+     0     0    1.07965    0  324          -    1.07965      -     -    7s
+     0     0    1.07972    0  390          -    1.07972      -     -    8s
+     0     0    1.07985    0  364          -    1.07985      -     -    8s
+     0     0    1.07998    0  385          -    1.07998      -     -    9s
+     0     0    1.08007    0  371          -    1.08007      -     -    9s
+     0     0    1.08008    0  403          -    1.08008      -     -    9s
+     0     0    1.08013    0  406          -    1.08013      -     -   10s
+     0     0    1.08014    0  373          -    1.08014      -     -   10s
+     0     0    1.08015    0  392          -    1.08015      -     -   10s
+     0     0    1.08020    0  392          -    1.08020      -     -   11s
+     0     0    1.08020    0  380          -    1.08020      -     -   11s
+     0     2    1.08054    0  374          -    1.08054      -     -   12s
+     6     8    1.08477    3  380          -    1.08477      -  1962   16s
+    28    30    1.09479   21  323          -    1.08490      -  1446   20s
+    55    57    1.10013   45  274          -    1.08490      -   986   25s
+
+Cutting planes:
+  Learned: 14
+  Gomory: 1
+  Cover: 32
+  Implied bound: 81
+  Clique: 16
+  MIR: 110
+  StrongCG: 1
+  Flow cover: 73
+  GUB cover: 1
+  Zero half: 2
+  Network: 24
+  RLT: 7
+  Relax-and-lift: 60
+  BQP: 1
+
+Explored 121 nodes (124084 simplex iterations) in 30.00 seconds (65.45 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound 1.084902711888e+00, gap -
+
+User-callback calls 7997, time in user-callback 0.00 sec

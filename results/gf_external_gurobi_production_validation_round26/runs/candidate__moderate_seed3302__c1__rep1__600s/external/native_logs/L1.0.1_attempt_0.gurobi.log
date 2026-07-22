@@ -1,0 +1,91 @@
+
+Gurobi 13.0.2 (win64) logging started Tue Jul 21 19:47:09 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_external_gurobi_production_validation_round26\runs\candidate__moderate_seed3302__c1__rep1__600s\external\native_logs\L1.0.1_attempt_0.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  30
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11903 rows, 3374 columns and 67328 nonzeros (Min)
+Model fingerprint: 0x3ad844c6
+Model has 21 linear objective coefficients
+Variable types: 1684 continuous, 1690 integer (1490 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 1e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [6e-02, 3e+02]
+  RHS range        [6e-02, 5e+04]
+
+Presolve removed 1094 rows and 63 columns
+Presolve time: 0.21s
+Presolved: 10809 rows, 3311 columns, 73195 nonzeros
+Variable types: 1640 continuous, 1671 integer (1480 binary)
+
+Root relaxation: objective 1.483899e-01, 4221 iterations, 0.32 seconds (0.94 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.14839    0  249          -    0.14839      -     -    0s
+     0     0    0.15103    0  228          -    0.15103      -     -    0s
+     0     0    0.15617    0  292          -    0.15617      -     -    1s
+     0     0    0.15626    0  303          -    0.15626      -     -    2s
+     0     0    0.16036    0  312          -    0.16036      -     -    3s
+     0     0    0.16059    0  334          -    0.16059      -     -    3s
+     0     0    0.16168    0  309          -    0.16168      -     -    4s
+     0     0    0.16210    0  289          -    0.16210      -     -    4s
+     0     0    0.16247    0  315          -    0.16247      -     -    5s
+     0     0    0.16276    0  321          -    0.16276      -     -    6s
+     0     0    0.16314    0  307          -    0.16314      -     -    7s
+     0     0    0.16317    0  322          -    0.16317      -     -    8s
+     0     0    0.16323    0  302          -    0.16323      -     -    8s
+     0     0    0.16323    0  305          -    0.16323      -     -    8s
+     0     0    0.16326    0  318          -    0.16326      -     -    9s
+     0     0    0.16327    0  329          -    0.16327      -     -    9s
+     0     0    0.16327    0  304          -    0.16327      -     -   10s
+     0     0    0.16327    0  324          -    0.16327      -     -   10s
+     0     0    0.16329    0  320          -    0.16329      -     -   11s
+     0     0    0.16330    0  293          -    0.16330      -     -   11s
+     0     0    0.16366    0  296          -    0.16366      -     -   12s
+     0     0    0.16367    0  281          -    0.16367      -     -   13s
+     0     0    0.16369    0  326          -    0.16369      -     -   13s
+     0     0    0.16369    0  295          -    0.16369      -     -   13s
+     0     0    0.16369    0  326          -    0.16369      -     -   14s
+     0     0    0.16369    0  313          -    0.16369      -     -   15s
+     0     0    0.16369    0  294          -    0.16369      -     -   16s
+     0     0    0.16369    0  294          -    0.16369      -     -   16s
+     0     0    0.16369    0  284          -    0.16369      -     -   16s
+     0     2    0.16369    0  284          -    0.16369      -     -   18s
+     6     7    0.16412    3  242          -    0.16372      -  2478   30s
+
+Cutting planes:
+  Learned: 29
+  Gomory: 1
+  Cover: 29
+  Implied bound: 85
+  Clique: 11
+  MIR: 163
+  Flow cover: 56
+  Zero half: 1
+  Network: 15
+  RLT: 7
+  Relax-and-lift: 32
+  BQP: 4
+
+Explored 7 nodes (78143 simplex iterations) in 30.00 seconds (55.58 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound 1.637150031073e-01, gap -
+
+User-callback calls 9742, time in user-callback 0.00 sec

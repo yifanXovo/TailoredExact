@@ -1,0 +1,63 @@
+
+Gurobi 13.0.2 (win64) logging started Tue Jul 21 21:24:48 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_external_gurobi_production_validation_round26\runs\stage1__high_imbalance_seed3202__c0__1200s\external\native_logs\L2.0.0.1_attempt_1.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  60
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11895 rows, 3372 columns and 67322 nonzeros (Min)
+Model fingerprint: 0x2f19c78a
+Model has 21 linear objective coefficients
+Variable types: 1683 continuous, 1689 integer (1489 binary)
+Coefficient statistics:
+  Matrix range     [1e-02, 2e+04]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [5e-01, 2e+03]
+  RHS range        [5e-01, 5e+04]
+
+Presolved: 9493 rows, 3278 columns, 57997 nonzeros
+
+Continuing optimization...
+
+   525   507    1.69713   12  233          -    1.69713      -   236   30s
+   550   510    1.69713   16  284          -    1.69713      -   277   35s
+   610   493    1.69713   17  268          -    1.69713      -   291   40s
+   687   496    1.73516   18  102          -    1.69713      -   291   45s
+   757   494    1.69782   15  294          -    1.69782      -   306   50s
+   815   487 infeasible   26               -    1.70782      -   319   55s
+   898   446    1.73028   20  223          -    1.72138      -   320   60s
+   976   395 infeasible   36               -    1.73380      -   332   65s
+  1044   338 infeasible   15               -    1.75940      -   340   70s
+
+Cutting planes:
+  Learned: 1
+  Cover: 33
+  Implied bound: 105
+  Clique: 1
+  MIR: 115
+  StrongCG: 10
+  Flow cover: 145
+  Zero half: 1
+  Network: 6
+  RLT: 1
+  Relax-and-lift: 2
+
+Explored 1052 nodes (393825 simplex iterations) in 70.22 seconds (153.15 work units)
+Most recent optimization runtime was 40.20 seconds (86.55 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+
+User-callback calls 6577, time in user-callback 0.00 sec

@@ -1,0 +1,61 @@
+
+Gurobi 13.0.2 (win64) logging started Wed Jul 22 05:47:18 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_external_gurobi_production_validation_round26\runs\stage2__tight_T_seed5102__c0__1800s\external\native_logs\L1.1.1.0.0.1.1_attempt_1.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  2.2660487500000045e+01
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11917 rows, 3378 columns and 67382 nonzeros (Min)
+Model fingerprint: 0x78e3dd61
+Model has 21 linear objective coefficients
+Variable types: 1686 continuous, 1692 integer (1492 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [2e-01, 4e+02]
+  RHS range        [8e-02, 5e+04]
+
+Presolved: 10617 rows, 3298 columns, 89519 nonzeros
+
+Continuing optimization...
+
+   529   498 infeasible   30               -    0.32030      -   128   30s
+   554   507    0.32382   43  235          -    0.32030      -   156   35s
+   599   514    0.33173   65  233          -    0.32030      -   192   40s
+   656   529    0.36142   17  155          -    0.32067      -   230   45s
+   688   541 infeasible   33               -    0.32067      -   237   50s
+
+Cutting planes:
+  Learned: 8
+  Gomory: 2
+  Cover: 28
+  Implied bound: 80
+  Clique: 18
+  MIR: 224
+  Flow cover: 110
+  GUB cover: 3
+  Zero half: 3
+  Network: 15
+  RLT: 8
+  Relax-and-lift: 72
+  BQP: 3
+
+Explored 764 nodes (205989 simplex iterations) in 52.66 seconds (103.45 work units)
+Most recent optimization runtime was 22.66 seconds (46.30 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound 3.206695083225e-01, gap -
+
+User-callback calls 6032, time in user-callback 0.00 sec

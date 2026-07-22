@@ -1,0 +1,60 @@
+
+Gurobi 13.0.2 (win64) logging started Tue Jul 21 20:09:27 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_external_gurobi_production_validation_round26\runs\candidate_retry__high_imbalance_seed3202__c0__rep1__600s\external\native_logs\L2.0.1_attempt_1.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  60
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11895 rows, 3372 columns and 67322 nonzeros (Min)
+Model fingerprint: 0x548dc6b0
+Model has 21 linear objective coefficients
+Variable types: 1683 continuous, 1689 integer (1489 binary)
+Coefficient statistics:
+  Matrix range     [1e-02, 2e+04]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [5e-01, 2e+03]
+  RHS range        [5e-01, 5e+04]
+
+Presolved: 9487 rows, 3274 columns, 58270 nonzeros
+
+Continuing optimization...
+
+   736   256     cutoff   13         1.74931    1.73368  0.89%   253   30s
+  1006   176    1.74727   36  173    1.74931    1.73952  0.56%   253   35s
+
+Cutting planes:
+  Learned: 21
+  Gomory: 1
+  Cover: 82
+  Implied bound: 354
+  Clique: 21
+  MIR: 230
+  StrongCG: 12
+  Flow cover: 133
+  GUB cover: 3
+  Zero half: 8
+  Network: 24
+  RLT: 12
+  Relax-and-lift: 80
+  BQP: 9
+  PSD: 2
+
+Explored 1620 nodes (323575 simplex iterations) in 38.58 seconds (81.21 work units)
+Most recent optimization runtime was 8.58 seconds (18.07 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 1: 1.74931 
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 1.749313451866e+00, best bound 1.749313451866e+00, gap 0.0000%
+
+User-callback calls 2682, time in user-callback 0.00 sec
