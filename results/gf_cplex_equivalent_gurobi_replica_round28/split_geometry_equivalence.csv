@@ -1,0 +1,8 @@
+case,parent_L,parent_U,gini_depth,S0_split,C3_split,phase_or_terminal_reason,exact_match,coverage_rule
+root,0.0,0.8,0,0.4,0.4,initial_partition,True,"[L,split] union [split,U] equals [L,U]"
+left_child,0.0,0.4,1,0.2,0.2,initial_partition,True,"[L,split] union [split,U] equals [L,U]"
+right_child,0.4,0.8,1,0.6,0.6,initial_partition,True,"[L,split] union [split,U] equals [L,U]"
+deeper,0.0,0.2,2,0.1,0.1,adaptive_refinement,True,"[L,split] union [split,U] equals [L,U]"
+low_gini,0.0,0.1,3,0.05,0.05,adaptive_refinement,True,"[L,split] union [split,U] equals [L,U]"
+near_cutoff,0.7,0.8,3,0.75,0.75,adaptive_refinement,True,"[L,split] union [split,U] equals [L,U]"
+terminal,0.0,0.0001,2,0.0,0.0,terminal_minimum_width,True,"[L,split] union [split,U] equals [L,U]"

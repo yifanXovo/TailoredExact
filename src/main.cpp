@@ -9,6 +9,7 @@
 #include "Evaluator.hpp"
 #include "ExternalGiniTree.hpp"
 #include "PaperExternalGiniTree.hpp"
+#include "ReplicaExternalGiniTree.hpp"
 #include "GiniFrontierGeometry.hpp"
 #include "HgaTgbcRunner.hpp"
 #include "Master.hpp"
@@ -1445,7 +1446,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.primal_heuristic_no_improve_generations = 1;
     }
     opt.external_gini_scheduling = lowerAscii(opt.external_gini_scheduling);
-    if (opt.external_gini_scheduling != "paper-lp-event") {
+    if (opt.external_gini_scheduling != "paper-lp-event" &&
+        opt.external_gini_scheduling != "cplex-algorithm-replica") {
         opt.external_gini_scheduling = "legacy-quanta";
     }
     if (opt.primal_heuristic != "greedy" &&
@@ -11561,9 +11563,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         const double exact_phase_remaining = opt.solve_time_limit > 0.0
             ? opt.solve_time_limit - elapsedSeconds()
             : std::numeric_limits<double>::max();
-        if (opt.external_gini_scheduling == "paper-lp-event" &&
+        const bool paper_generation_scheduling =
+            opt.external_gini_scheduling == "paper-lp-event" ||
+            opt.external_gini_scheduling == "cplex-algorithm-replica";
+        if (paper_generation_scheduling &&
             exact_phase_remaining <= 0.0) {
-            result.external_gini_tree_scheduling = "paper-lp-event";
+            result.external_gini_tree_scheduling =
+                opt.external_gini_scheduling;
             result.external_gini_tree_failure_reason =
                 "overall_global_deadline_reached_during_generation_hga";
             result.strict_certified_original_problem = false;
@@ -11584,14 +11590,21 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         }
         const bool paper_scheduling =
             opt.external_gini_scheduling == "paper-lp-event";
-        result.notes.push_back(paper_scheduling
-            ? "frontier execution mode paper-lp-event: complete LP relaxations drive atomic splits and every terminal MIP is optimized exactly once without internal scheduling budgets"
-            : "frontier execution mode external-gini-tree legacy-quanta: historical retained leaf scheduling with time quanta");
-        ebrp::SolveResult external = paper_scheduling
-            ? ebrp::solvePaperExternalGiniTree(
+        const bool replica_scheduling =
+            opt.external_gini_scheduling == "cplex-algorithm-replica";
+        result.notes.push_back(replica_scheduling
+            ? "frontier execution mode cplex-algorithm-replica: the cold external Gurobi tree reproduces S0 structural Gini branching with deferred child LP processing and exactly-once terminal MIPs"
+            : (paper_scheduling
+                ? "frontier execution mode paper-lp-event: complete LP relaxations drive atomic splits and every terminal MIP is optimized exactly once without internal scheduling budgets"
+                : "frontier execution mode external-gini-tree legacy-quanta: historical retained leaf scheduling with time quanta"));
+        ebrp::SolveResult external = replica_scheduling
+            ? ebrp::solveReplicaExternalGiniTree(
                   instance, external_opt, result, cover_lo, cover_hi)
-            : ebrp::solveExternalGiniTree(
-                  instance, external_opt, result, cover_lo, cover_hi);
+            : (paper_scheduling
+                ? ebrp::solvePaperExternalGiniTree(
+                      instance, external_opt, result, cover_lo, cover_hi)
+                : ebrp::solveExternalGiniTree(
+                      instance, external_opt, result, cover_lo, cover_hi));
         external.runtime_seconds = elapsedSeconds();
         external.wall_time_seconds = external.runtime_seconds;
         external.actual_runtime_seconds = external.runtime_seconds;

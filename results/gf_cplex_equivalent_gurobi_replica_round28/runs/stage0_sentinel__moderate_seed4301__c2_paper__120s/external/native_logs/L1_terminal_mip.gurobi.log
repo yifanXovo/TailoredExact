@@ -1,0 +1,92 @@
+
+Gurobi 13.0.2 (win64) logging started Thu Jul 23 04:14:24 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_cplex_equivalent_gurobi_replica_round28\runs\stage0_sentinel__moderate_seed4301__c2_paper__120s\external\native_logs\L1_terminal_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  6.3569839999999985e+01
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11912 rows, 3376 columns and 67359 nonzeros (Min)
+Model fingerprint: 0x55021890
+Model has 21 linear objective coefficients
+Variable types: 1685 continuous, 1691 integer (1491 binary)
+Coefficient statistics:
+  Matrix range     [5e-03, 2e+04]
+  Objective range  [8e-03, 1e+00]
+  Bounds range     [5e-03, 5e+01]
+  RHS range        [5e-03, 5e+04]
+
+Presolve removed 2545 rows and 284 columns
+Presolve time: 0.41s
+Presolved: 9367 rows, 3092 columns, 69622 nonzeros
+Variable types: 1573 continuous, 1519 integer (1370 binary)
+
+Root relaxation: objective 6.612367e-03, 2773 iterations, 0.14 seconds (0.35 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00661    0  144          -    0.00661      -     -    0s
+     0     0    0.00661    0  145          -    0.00661      -     -    0s
+     0     0    0.00662    0  185          -    0.00662      -     -    1s
+     0     0    0.00662    0  179          -    0.00662      -     -    1s
+     0     0    0.00663    0  207          -    0.00663      -     -    1s
+     0     0    0.00663    0  181          -    0.00663      -     -    2s
+     0     0    0.00663    0  216          -    0.00663      -     -    2s
+     0     0    0.00663    0  194          -    0.00663      -     -    2s
+     0     0    0.00663    0  259          -    0.00663      -     -    3s
+     0     0    0.00663    0  226          -    0.00663      -     -    3s
+     0     0    0.00663    0  247          -    0.00663      -     -    3s
+     0     0    0.00663    0  235          -    0.00663      -     -    3s
+     0     0    0.00663    0  213          -    0.00663      -     -    3s
+     0     0    0.00663    0  228          -    0.00663      -     -    4s
+     0     0    0.00663    0  228          -    0.00663      -     -    4s
+     0     0    0.00663    0  141          -    0.00663      -     -    5s
+     0     2    0.00663    0  141          -    0.00663      -     -    6s
+    36    18    0.00663    6  167          -    0.00663      -   882   10s
+    79    35    0.00874   13  225          -    0.00663      -   995   15s
+   105    49    0.00663   10  227          -    0.00663      -   994   20s
+   128    60    0.01238   23  195          -    0.00663      -  1036   29s
+   132    62    0.01275   26  167          -    0.00663      -  1019   30s
+   146    66    0.00709   13  175          -    0.00663      -  1005   36s
+   230    94    0.00810   22  133          -    0.00663      -   885   40s
+   359   159    0.00864   14  155          -    0.00663      -   715   45s
+   510   268 infeasible   33               -    0.00663      -   615   50s
+   642   360    0.00663   10  149          -    0.00663      -   570   55s
+   670   378    0.01208   14  214          -    0.00663      -   566   60s
+
+Cutting planes:
+  Learned: 41
+  Gomory: 4
+  Cover: 169
+  Implied bound: 544
+  Clique: 15
+  MIR: 228
+  Knapsack: 1
+  StrongCG: 24
+  Flow cover: 114
+  GUB cover: 2
+  Zero half: 6
+  Network: 24
+  RLT: 15
+  Relax-and-lift: 88
+  BQP: 9
+  PSD: 1
+
+Explored 708 nodes (426200 simplex iterations) in 63.57 seconds (137.84 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound 6.630373210989e-03, gap -
+
+User-callback calls 13874, time in user-callback 0.00 sec

@@ -1,0 +1,17 @@
+component,S0_CPLEX,C3_REPLICA,equivalent,evidence_basis
+root improving range,"[0,min(verified_UB,(V-1)/V)]",same,True,shared main.cpp construction
+initial structure,recursive root breakpoints yielding 4 equal intervals,same,True,shared geometry helper mirrors chooseGlobalGiniSplit
+split eligibility,"remaining initial breakpoint, else adaptive depth/width",same,True,evaluateCplexReplicaStructuralSplit
+split point,"median initial breakpoint, else midpoint",same,True,shared GiniFrontierGeometry
+child coverage,binary exact touching cover,same,True,exactIntervalCoverage and atomic scheduler replacement
+adaptive maximum depth,8 after initial partition,8 after initial partition,True,source contract
+minimum width,1e-4,1e-4,True,source contract
+parent bound inheritance,complete parent LP bound,same,True,scheduler monotonicity gate
+node selection,native minimum best bound,external minimum valid bound,True,algorithmically equivalent; deterministic structural tie
+verified cutoff,"same-run verified UB, epsilon 0",same,True,shared canonical writer
+certificate tolerance,1e-7,1e-7,True,shared certificate semantics
+global row registry,6 accepted families,same 6,True,shared IntervalRowFactory
+interval row registry,9 accepted families,same 9,True,shared IntervalRowFactory
+terminal definition,no eligible structural G split,same,True,shared structural helper
+terminal exact problem,complete fixed-interval F0 MIP,same,True,same canonical artifact imported by backend
+global certificate,coverage + closed leaves + valid LB + verified UB + lifecycle,same,True,evaluateExternalGiniTreeCertificate

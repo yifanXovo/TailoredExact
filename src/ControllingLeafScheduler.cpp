@@ -486,6 +486,69 @@ ControllingLeafSelection ControllingLeafScheduler::selectNextByBoundOnly() {
     return result;
 }
 
+ControllingLeafSelection ControllingLeafScheduler::selectNextCplexReplica() {
+    ControllingLeafSelection result;
+    std::vector<const ControllingLeaf*> open;
+    for (const ControllingLeaf& leaf : leaves_) {
+        if (isOpenRelevantLeaf(leaf)) open.push_back(&leaf);
+    }
+    std::sort(open.begin(), open.end(),
+        [](const ControllingLeaf* lhs, const ControllingLeaf* rhs) {
+            if (lhs->lower_bound != rhs->lower_bound) {
+                return lhs->lower_bound < rhs->lower_bound;
+            }
+            const double lhs_width = lhs->gamma_U - lhs->gamma_L;
+            const double rhs_width = rhs->gamma_U - rhs->gamma_L;
+            if (lhs_width != rhs_width) return lhs_width < rhs_width;
+            if (lhs->split_depth != rhs->split_depth) {
+                return lhs->split_depth > rhs->split_depth;
+            }
+            if (lhs->gamma_L != rhs->gamma_L) {
+                return lhs->gamma_L < rhs->gamma_L;
+            }
+            if (lhs->gamma_U != rhs->gamma_U) {
+                return lhs->gamma_U < rhs->gamma_U;
+            }
+            return lhs->id < rhs->id;
+        });
+    result.global_lower_bound = globalLowerBound();
+    if (open.empty()) return result;
+    result.available = true;
+    result.selected_leaf_id = open.front()->id;
+    result.competing_minimum_bound = open.front()->lower_bound;
+    result.selection_position = 0;
+    for (const ControllingLeaf* leaf : open) {
+        if (leaf->lower_bound != open.front()->lower_bound) break;
+        result.controlling_leaf_ids.push_back(leaf->id);
+        result.deterministic_tie_order.push_back(leaf->id);
+    }
+    return result;
+}
+
+bool ControllingLeafScheduler::tightenVerifiedCutoff(
+    double cutoff, std::string* reason) {
+    if (!finite(cutoff)) {
+        if (reason) *reason = "nonfinite_cutoff";
+        return false;
+    }
+    for (ControllingLeaf& leaf : leaves_) {
+        if (cutoff > leaf.cutoff + tolerance_) {
+            if (reason) *reason = "cutoff_would_weaken_existing_incumbent";
+            return false;
+        }
+    }
+    const double before = globalLowerBound();
+    for (ControllingLeaf& leaf : leaves_) {
+        leaf.cutoff = std::min(leaf.cutoff, cutoff);
+    }
+    const double after = globalLowerBound();
+    if (after + tolerance_ < before) global_bound_monotone_ = false;
+    noteGlobalBound();
+    active_tie_order_.clear();
+    if (reason) *reason = "accepted_tighter_verified_cutoff";
+    return true;
+}
+
 bool ControllingLeafScheduler::everyRelevantLeafClosed() const {
     for (const ControllingLeaf& leaf : leaves_) {
         if (isOpenRelevantLeaf(leaf)) return false;

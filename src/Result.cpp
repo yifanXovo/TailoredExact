@@ -1534,6 +1534,18 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_COUNT(terminal_mip_leaf_count);
     WRITE_EXT_COUNT(terminal_mip_optimize_count);
     WRITE_EXT_COUNT(global_deadline_interruption_count);
+    WRITE_EXT_COUNT(contract_initial_interval_count);
+    WRITE_EXT_COUNT(scheduler_initial_leaf_count);
+    WRITE_EXT_COUNT(unconditional_structural_split_count);
+    WRITE_EXT_COUNT(replaced_parent_count);
+    WRITE_EXT_COUNT(lp_pruned_leaf_count);
+    WRITE_EXT_COUNT(lp_infeasible_leaf_count);
+    WRITE_EXT_COUNT(max_observed_depth);
+    WRITE_EXT_COUNT(global_row_family_count);
+    WRITE_EXT_COUNT(interval_row_family_count);
+    WRITE_EXT_COUNT(selector_variable_count);
+    WRITE_EXT_COUNT(contract_split_factor);
+    WRITE_EXT_COUNT(contract_adaptive_max_depth);
     WRITE_EXT_COUNT(model_free_count);
     WRITE_EXT_COUNT(environment_free_count);
     WRITE_EXT_COUNT(same_leaf_resume_count);
@@ -1556,6 +1568,42 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_COUNT(warm_start_rejected_count);
     WRITE_EXT_COUNT(warm_start_unknown_count);
 #undef WRITE_EXT_COUNT
+    out << "  \"external_gini_tree_contract_minimum_width\": "
+        << result.external_gini_tree_contract_minimum_width << ",\n";
+    out << "  \"external_gini_tree_certificate_tolerance\": "
+        << result.external_gini_tree_certificate_tolerance << ",\n";
+    out << "  \"external_gini_tree_algorithm_arm\": \""
+        << jsonEscape(result.external_gini_tree_algorithm_arm) << "\",\n";
+    out << "  \"external_gini_tree_row_factory_version\": \""
+        << jsonEscape(result.external_gini_tree_row_factory_version)
+        << "\",\n";
+    out << "  \"external_gini_tree_global_row_families\": \""
+        << jsonEscape(result.external_gini_tree_global_row_families)
+        << "\",\n";
+    out << "  \"external_gini_tree_interval_row_families\": \""
+        << jsonEscape(result.external_gini_tree_interval_row_families)
+        << "\",\n";
+    out << "  \"external_gini_tree_best_bound_tie_rule\": \""
+        << jsonEscape(result.external_gini_tree_best_bound_tie_rule)
+        << "\",\n";
+    out << "  \"external_gini_tree_implementation_boundary\": \""
+        << jsonEscape(result.external_gini_tree_implementation_boundary)
+        << "\",\n";
+    out << "  \"external_gini_tree_structural_split_unconditional\": "
+        << (result.external_gini_tree_structural_split_unconditional
+                ? "true" : "false") << ",\n";
+    out << "  \"external_gini_tree_child_lookahead_required\": "
+        << (result.external_gini_tree_child_lookahead_required
+                ? "true" : "false") << ",\n";
+    out << "  \"external_gini_tree_internal_budget_scheduling\": "
+        << (result.external_gini_tree_internal_budget_scheduling
+                ? "true" : "false") << ",\n";
+    out << "  \"external_gini_tree_native_tree_reuse_claimed\": "
+        << (result.external_gini_tree_native_tree_reuse_claimed
+                ? "true" : "false") << ",\n";
+    out << "  \"external_gini_tree_warm_start_enabled\": "
+        << (result.external_gini_tree_warm_start_enabled
+                ? "true" : "false") << ",\n";
 #define WRITE_EXT_DOUBLE(name) \
     out << "  \"external_gini_tree_" #name "\": " \
         << result.external_gini_tree_##name << ",\n"
@@ -1588,6 +1636,10 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_PATH(lp_status_ledger_path);
     WRITE_EXT_PATH(parent_child_bound_ledger_path);
     WRITE_EXT_PATH(split_decision_ledger_path);
+    WRITE_EXT_PATH(coverage_ledger_path);
+    WRITE_EXT_PATH(bound_inheritance_ledger_path);
+    WRITE_EXT_PATH(row_signature_ledger_path);
+    WRITE_EXT_PATH(global_bound_trace_path);
 #undef WRITE_EXT_PATH
     out << "  \"columns_generated_raw\": " << result.columns_generated_raw << ",\n";
     out << "  \"columns_after_dominance\": " << result.columns_after_dominance << ",\n";
