@@ -37,5 +37,5 @@ committed.
   zero emergency watchdog terminations.
 - Final C4 classification: `exact_but_mixed`.
 - Stable-mainline decision: corrected CPLEX S0/F0 remains unchanged.
-- Final evidence package: 14,911 files, 1,691,234,829 bytes; all manifest
+- Final evidence package: 14,911 files, 1,691,235,630 bytes; all manifest
   hashes and all 5,613 compression-restoration records independently pass.
