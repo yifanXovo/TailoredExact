@@ -1,6 +1,7 @@
 #include "HgaTgbcRunner.hpp"
 
 #include "Evaluator.hpp"
+#include "ProcessPhaseLedger.hpp"
 #include "hga_tgbc/GreedyMethods.h"
 #include "hga_tgbc/HybridGA.h"
 
@@ -94,7 +95,32 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
         options.stop_mode == "generation-stagnation");
     ga.set_decoder_compaction_mode(1);
     ga.set_decode_cache_max_entries(200000);
+    if (options.process_options &&
+        processDeadlineConfigured(*options.process_options)) {
+        const double remaining =
+            processWorkRemainingSeconds(*options.process_options);
+        ga.set_absolute_deadline(
+            std::chrono::steady_clock::now() +
+            std::chrono::duration_cast<std::chrono::steady_clock::duration>(
+                std::chrono::duration<double>(std::max(0.0, remaining))));
+    }
+    if (options.process_options) {
+        recordProcessPhase(
+            *options.process_options, "hga_start", "start",
+            "label=" + options.phase_label +
+            ";native_generation_stagnation_hga");
+    }
     ga.run();
+    out.global_deadline_reached = ga.stopped_on_absolute_deadline();
+    if (options.process_options) {
+        recordProcessPhase(
+            *options.process_options, "hga_generation_loop_complete",
+            out.global_deadline_reached ? "deadline_interrupted" : "complete",
+            "label=" + options.phase_label +
+            ";generations=" + std::to_string(ga.get_total_generations()) +
+            ";no_improve=" +
+            std::to_string(ga.get_generations_since_improvement()));
+    }
 
     out.total_generations = ga.get_total_generations();
     out.generations_since_improvement =
@@ -121,16 +147,60 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
         }
     }
 
+    if (options.process_options) {
+        recordProcessPhase(*options.process_options,
+                           "hga_best_solution_extraction_start", "start",
+                           "label=" + options.phase_label);
+    }
     std::vector<std::vector<int>> best_sequences = ga.get_best_solution();
+    if (options.process_options) {
+        recordProcessPhase(*options.process_options,
+                           "hga_best_solution_extraction_complete",
+                           "complete", "label=" + options.phase_label);
+    }
+    if (options.process_options &&
+        processWorkDeadlineReached(*options.process_options)) {
+        recordProcessPhase(*options.process_options, "hga_route_decoding",
+                           "skipped_deadline",
+                           "label=" + options.phase_label +
+                           ";no decoded candidate or verification claim");
+        out.global_deadline_reached = true;
+        out.wall_time_seconds = std::chrono::duration<double>(
+            std::chrono::steady_clock::now() - started).count();
+        return out;
+    }
+    if (options.process_options) {
+        recordProcessPhase(*options.process_options,
+                           "hga_route_decoding_start", "start",
+                           "label=" + options.phase_label);
+    }
     SolutionResult_ORO decoded = nGreedyLU_RA_compact_full(
         1, instance.V, instance.M, instance.total_time_limit,
         best_sequences, instance.Q, instance.initial, instance.capacity,
         instance.target, instance.dist, std::max(1, options.iterations), -1.0,
         instance.weights, instance.min_ratio, options.lambda, 1.0, nullptr);
+    if (options.process_options) {
+        recordProcessPhase(*options.process_options,
+                           "hga_route_decoding_complete", "complete",
+                           "label=" + options.phase_label);
+    }
 
     std::vector<RoutePlan> routes =
         routesFromHgaDecode(instance, best_sequences, decoded.Y_Oper_best);
+    if (options.process_options) {
+        recordProcessPhase(*options.process_options,
+                           "independent_hga_verification_start", "start",
+                           "label=" + options.phase_label);
+    }
     Verification verification = verifySolution(instance, routes, options.lambda);
+    if (options.process_options) {
+        recordProcessPhase(
+            *options.process_options, "independent_hga_verification_complete",
+            processWorkDeadlineReached(*options.process_options)
+                ? "completed_at_or_after_work_deadline" : "complete",
+            "label=" + options.phase_label + ";feasible=" +
+                (verification.feasible ? "true" : "false"));
+    }
     if (verification.feasible && verification.objective_matches &&
         verification.errors.empty()) {
         out.found = true;

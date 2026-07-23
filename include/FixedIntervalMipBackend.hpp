@@ -49,6 +49,10 @@ struct FixedIntervalMipRequest {
     std::filesystem::path native_log_path;
     std::vector<RoutePlan> verified_start_routes;
     std::string verified_start_source;
+    // Round 29 C4 keeps a leaf model only within that leaf's exact lifecycle.
+    // This is model-object reuse, not native-tree or LP-basis reuse.
+    bool incremental_model_reuse_enabled = false;
+    bool retain_model_after_solve = false;
 };
 
 struct FixedIntervalMipOutcome {
@@ -105,6 +109,9 @@ struct FixedIntervalMipOutcome {
     bool presolve_rerun_observed = false;
     bool root_relaxation_rerun_observed = false;
     bool incumbent_state_reused = false;
+    bool in_memory_model_reused = false;
+    bool integer_domain_restored = false;
+    std::string basis_reuse_status = "not_requested";
     std::string retained_state_classification = "not_applicable";
     std::string native_log_path;
     double cumulative_runtime = 0.0;
@@ -145,6 +152,14 @@ struct FixedIntervalMipBackendStats {
     long long warm_start_accepted_count = 0;
     long long warm_start_rejected_count = 0;
     long long warm_start_unknown_count = 0;
+    long long in_memory_model_reuse_count = 0;
+    long long explicit_leaf_model_discard_count = 0;
+    long long integer_domain_restore_count = 0;
+    long long basis_available_count = 0;
+    long long basis_mapped_count = 0;
+    long long basis_submitted_count = 0;
+    long long basis_accepted_count = 0;
+    long long basis_rejected_count = 0;
     double cumulative_model_build_seconds = 0.0;
     double cumulative_model_read_seconds = 0.0;
     double cumulative_solver_runtime_seconds = 0.0;
@@ -163,6 +178,7 @@ public:
     virtual FixedIntervalMipCapabilities capabilities() const = 0;
     virtual FixedIntervalMipOutcome solve(
         const FixedIntervalMipRequest& request) = 0;
+    virtual void discardLeaf(const std::string&) {}
     // Idempotently release native resources before the final statistics
     // snapshot when an evidence path must prove environment/model symmetry.
     virtual void release() {}

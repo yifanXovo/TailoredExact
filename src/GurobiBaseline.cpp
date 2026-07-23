@@ -7,6 +7,7 @@
 #include "FixedIntervalMipBackend.hpp"
 #include "GurobiCertificate.hpp"
 #include "GurobiProgress.hpp"
+#include "ProcessPhaseLedger.hpp"
 #include "MipStartMapping.hpp"
 
 #include <gurobi_c.h>
@@ -469,6 +470,10 @@ public:
             std::filesystem::create_directories(log.parent_path());
         }
         const int rc = startSilentGurobiEnvironment(api_, &env_, log);
+        recordProcessPhase(
+            options_, "gurobi_environment_creation",
+            (rc == 0 && env_) ? "complete" : "failed",
+            "fixed_interval_backend");
         if (rc != 0 || !env_) {
             failure_reason_ = apiError(api_, env_, rc);
             if (env_) api_.freeenv(env_);
@@ -529,6 +534,18 @@ public:
         }
     }
 
+    void discardLeaf(const std::string& leaf_id) override {
+        const auto found = leaves_.find(leaf_id);
+        if (found == leaves_.end()) return;
+        if (found->second.model) {
+            api_.freemodel(found->second.model);
+            found->second.model = nullptr;
+            ++stats_.model_free_count;
+        }
+        leaves_.erase(found);
+        ++stats_.explicit_leaf_model_discard_count;
+    }
+
     FixedIntervalMipCapabilities capabilities() const override {
         FixedIntervalMipCapabilities out;
         out.backend = "gurobi";
@@ -561,11 +578,15 @@ public:
             request.solve_kind == FixedIntervalSolveKind::PaperLpRelaxation;
         out.terminal_mip =
             request.solve_kind == FixedIntervalSolveKind::PaperTerminalMip;
-        const bool retained_mode =
+        const bool legacy_retained_mode =
             !paper_solve &&
             options_.external_gini_lifecycle == "retained-per-leaf";
         auto found = leaves_.find(request.leaf_id);
-        bool retained = retained_mode && found != leaves_.end();
+        const bool incremental_retained_mode =
+            paper_solve && request.incremental_model_reuse_enabled;
+        bool retained =
+            (legacy_retained_mode || incremental_retained_mode) &&
+            found != leaves_.end();
         if (found != leaves_.end() && !retained) {
             if (found->second.model) {
                 api_.freemodel(found->second.model);
@@ -609,6 +630,10 @@ public:
         } else {
             out.same_leaf_model_retained = true;
             ++stats_.same_leaf_resume_count;
+            if (incremental_retained_mode) {
+                out.in_memory_model_reused = true;
+                ++stats_.in_memory_model_reuse_count;
+            }
         }
         LeafState& state = found->second;
         GRBmodel* model = state.model;
@@ -623,6 +648,19 @@ public:
                                 &variable_count) != 0 || variable_count <= 0) {
                 out.failure_reason = "paper_lp_variable_count_unavailable";
                 return out;
+            }
+            if (request.incremental_model_reuse_enabled &&
+                state.original_variable_types.empty()) {
+                state.original_variable_types.resize(
+                    static_cast<std::size_t>(variable_count));
+                if (api_.getcharattrarray(
+                        model, GRB_CHAR_ATTR_VTYPE, 0, variable_count,
+                        state.original_variable_types.data()) != 0) {
+                    state.original_variable_types.clear();
+                    out.failure_reason =
+                        "round29_original_integer_domain_capture_failed";
+                    return out;
+                }
             }
             std::vector<char> continuous(
                 static_cast<std::size_t>(variable_count), GRB_CONTINUOUS);
@@ -910,10 +948,34 @@ public:
             out.feasibility_consistency_gate = !contradicts;
         }
         state.had_incumbent = !out.lp_relaxation && solution_count > 0;
+        bool domain_restore_ok = true;
+        if (out.lp_relaxation &&
+            request.incremental_model_reuse_enabled) {
+            const int nvars =
+                static_cast<int>(state.original_variable_types.size());
+            const int restore_rc = nvars > 0
+                ? api_.setcharattrarray(
+                      model, GRB_CHAR_ATTR_VTYPE, 0, nvars,
+                      state.original_variable_types.data())
+                : -1;
+            const int update_rc = restore_rc == 0
+                ? api_.updatemodel(model) : restore_rc;
+            out.integer_domain_restored =
+                restore_rc == 0 && update_rc == 0;
+            domain_restore_ok = out.integer_domain_restored;
+            if (out.integer_domain_restored) {
+                ++stats_.integer_domain_restore_count;
+                out.basis_reuse_status =
+                    "not_submitted_domain_transition_model_object_only";
+            } else {
+                out.lp_terminal_valid = false;
+            }
+        }
         if (!out.solver_finalization_reached ||
             !out.exact_zero_gap_roundtrip ||
             !out.model_fingerprint_matches_request ||
-            !out.feasibility_consistency_gate || log_rc != 0) {
+            !out.feasibility_consistency_gate || !domain_restore_ok ||
+            log_rc != 0) {
             std::ostringstream reason;
             reason << "gurobi_external_gate:finalized="
                    << out.solver_finalization_reached
@@ -924,19 +986,26 @@ public:
                    << out.native_continuation_evidence
                    << ";feasibility_consistency="
                    << out.feasibility_consistency_gate
+                   << ";integer_domain_restored=" << domain_restore_ok
                    << ";native_log_parameter_rc=" << log_rc;
             out.failure_reason = reason.str();
         } else {
             out.failure_reason = "none";
         }
-        if (paper_solve) {
-            out.retained_state_classification = "paper_fresh_event_model";
+        if (paper_solve && !request.retain_model_after_solve) {
+            out.retained_state_classification =
+                out.in_memory_model_reused
+                    ? "round29_same_leaf_model_reused_then_released"
+                    : "paper_fresh_event_model";
             if (state.model) {
                 api_.freemodel(state.model);
                 state.model = nullptr;
                 ++stats_.model_free_count;
             }
             leaves_.erase(request.leaf_id);
+        } else if (paper_solve) {
+            out.retained_state_classification =
+                "round29_same_leaf_model_retained_no_basis_claim";
         }
         return out;
     }
@@ -955,6 +1024,7 @@ private:
         double cumulative_nodes = 0.0;
         double cumulative_iterations = 0.0;
         double cumulative_barrier_iterations = 0.0;
+        std::vector<char> original_variable_types;
     };
 
     const Instance& instance_;
@@ -1150,7 +1220,7 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             api.setdblparam(env, GRB_DBL_PAR_MIPGAP, 0.0);
         result.gurobi_mip_gap_abs_set_return_code =
             api.setdblparam(env, GRB_DBL_PAR_MIPGAPABS, 0.0);
-        const int time_limit_rc = api.setdblparam(
+        int time_limit_rc = api.setdblparam(
             env, GRB_DBL_PAR_TIMELIMIT,
             std::max(0.001, options.solve_time_limit));
         result.gurobi_threads_get_return_code =
@@ -1327,6 +1397,23 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             return result;
         }
 
+        // Model export, environment startup, model import, and domain audits
+        // are inside the same process-entry work window. Recompute the native
+        // allowance at Optimize launch instead of rebasing a solver-only
+        // duration before those phases.
+        const double optimize_remaining =
+            processDeadlineConfigured(options)
+                ? processWorkRemainingSeconds(options)
+                : options.solve_time_limit;
+        time_limit_rc = time_limit_rc == 0
+            ? api.setdblparam(
+                  model_env, GRB_DBL_PAR_TIMELIMIT,
+                  std::max(0.001, optimize_remaining))
+            : time_limit_rc;
+        recordProcessPhase(
+            options, "plain_gurobi_optimize_launch", "start",
+            "absolute_work_remaining=" +
+                std::to_string(optimize_remaining));
         result.gurobi_optimize_return_code = api.optimize(model);
         ++result.gurobi_optimize_count;
         result.gurobi_solver_finalization_reached = true;

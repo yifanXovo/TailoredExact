@@ -15,6 +15,7 @@
 #include "Master.hpp"
 #include "Parser.hpp"
 #include "Pricing.hpp"
+#include "ProcessPhaseLedger.hpp"
 #include "Result.hpp"
 #include "TailoredBC.hpp"
 #include "TailoredBCCuts.hpp"
@@ -59,7 +60,8 @@ void usage() {
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
         << "[--gini-cap <gamma>] [--gini-floor <gamma>] [--max-nodes <N>] [--frontier-intervals <N>] [--frontier-refine-splits <N>] "
         << "[--frontier-execution-mode scheduler|global-gini-tree|external-gini-tree] [--global-gini-tree-presolve on|off] "
-        << "[--external-gini-split-after-attempts <N>] [--external-gini-scheduling legacy-quanta|paper-lp-event] "
+        << "[--external-gini-split-after-attempts <N>] [--external-gini-scheduling legacy-quanta|paper-lp-event|cplex-algorithm-replica|round29-bound-gain-incremental] "
+        << "[--process-wall-time-limit <seconds>] [--process-shutdown-margin <seconds>] [--process-phase-ledger <csv>] "
         << "[--global-gini-tree-search dynamic|traditional|auto] [--global-gini-tree-child-estimate parent-copy|dispersion-coupled|factory-domain] "
         << "[--global-gini-tree-row-attachment full-inherited-pack|exact-incremental-delta] [--global-gini-tree-row-timing deferred|eager] "
         << "[--global-gini-tree-native-mip-start true|false] [--global-gini-tree-root-connectivity-flow true|false] "
@@ -249,7 +251,9 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.vehicle_indexed_transfer_flow = true;
         opt.route_mask_operation_budget_cuts = true;
         opt.route_pool_incumbent = true;
-        opt.exact_phase_local_redecode_repair = true;
+        if (!opt.exact_phase_local_redecode_repair_explicit) {
+            opt.exact_phase_local_redecode_repair = true;
+        }
         opt.branch_inventory = true;
         opt.branch_operation_mode = true;
         opt.frontier_best_bound_scheduling = true;
@@ -479,7 +483,9 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.vehicle_indexed_transfer_flow = true;
         opt.route_mask_operation_budget_cuts = true;
         opt.route_pool_incumbent = true;
-        opt.exact_phase_local_redecode_repair = true;
+        if (!opt.exact_phase_local_redecode_repair_explicit) {
+            opt.exact_phase_local_redecode_repair = true;
+        }
         opt.branch_inventory = true;
         opt.branch_operation_mode = true;
         opt.bpc_incumbent = (opt.bpc_incumbent == "none" || opt.bpc_incumbent.empty())
@@ -534,6 +540,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--parallel-nodes") opt.parallel_nodes = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--time-limit") opt.solve_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--process-wall-time-limit") opt.process_wall_time_limit = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--process-shutdown-margin") opt.process_shutdown_margin_seconds = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--process-phase-ledger") opt.process_phase_ledger_path = requireValue(i, argc, argv);
         else if (arg == "--gini-cap") opt.gini_cap = std::stod(requireValue(i, argc, argv));
         else if (arg == "--gini-floor") opt.gini_floor = std::stod(requireValue(i, argc, argv));
         else if (arg == "--max-nodes") opt.max_branch_nodes = std::stoi(requireValue(i, argc, argv));
@@ -687,7 +695,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--route-pool-incumbent") opt.route_pool_incumbent = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--route-pool-max-columns-per-vehicle") opt.route_pool_max_columns_per_vehicle = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--route-pool-keep-best-per-projection") opt.route_pool_keep_best_per_projection = parseBoolValue(requireValue(i, argc, argv));
-        else if (arg == "--exact-phase-local-redecode-repair") opt.exact_phase_local_redecode_repair = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--exact-phase-local-redecode-repair") {
+            opt.exact_phase_local_redecode_repair =
+                parseBoolValue(requireValue(i, argc, argv));
+            opt.exact_phase_local_redecode_repair_explicit = true;
+        }
         else if (arg == "--exact-phase-local-redecode-seconds") opt.exact_phase_local_redecode_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--pickup-drop-compat-flow") opt.pickup_drop_compat_flow = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--pickup-drop-transfer-cap-flow") opt.pickup_drop_transfer_cap_flow = parseBoolValue(requireValue(i, argc, argv));
@@ -1308,7 +1320,12 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.external_gini_backend = "cplex";
     }
     opt.external_gini_lifecycle = lowerAscii(opt.external_gini_lifecycle);
-    if (opt.external_gini_lifecycle != "fresh-per-attempt") {
+    if (opt.external_gini_lifecycle != "fresh-per-attempt" &&
+        opt.external_gini_lifecycle != "retained-per-leaf" &&
+        opt.external_gini_lifecycle != "fresh-per-paper-event" &&
+        opt.external_gini_lifecycle != "fresh-per-replica-event" &&
+        opt.external_gini_lifecycle !=
+            "round29-same-leaf-in-memory-model") {
         opt.external_gini_lifecycle = "retained-per-leaf";
     }
     opt.external_gini_split_after_attempts =
@@ -1447,7 +1464,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     opt.external_gini_scheduling = lowerAscii(opt.external_gini_scheduling);
     if (opt.external_gini_scheduling != "paper-lp-event" &&
-        opt.external_gini_scheduling != "cplex-algorithm-replica") {
+        opt.external_gini_scheduling != "cplex-algorithm-replica" &&
+        opt.external_gini_scheduling != "round29-bound-gain-incremental") {
         opt.external_gini_scheduling = "legacy-quanta";
     }
     if (opt.primal_heuristic != "greedy" &&
@@ -2328,6 +2346,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if (opt.process_wall_time_limit < 0.0) {
         throw std::runtime_error("--process-wall-time-limit must be nonnegative");
+    }
+    if (opt.process_shutdown_margin_seconds < 0.0 ||
+        opt.process_shutdown_margin_seconds > 30.0) {
+        throw std::runtime_error(
+            "--process-shutdown-margin must be between 0 and 30 seconds");
     }
     if (opt.frontier_scheduling_mode == "controlling-leaf" &&
         opt.process_wall_time_limit <= 0.0) {
@@ -6951,6 +6974,8 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         hga_opt.no_improve_generation_limit =
             opt.primal_heuristic_no_improve_generations;
         hga_opt.generation_log_path = opt.primal_heuristic_generation_log;
+        hga_opt.phase_label = opt.primal_heuristic_phase_label;
+        hga_opt.process_options = &opt;
         if (!generation_stagnation) {
             hga_opt.max_time_seconds = std::max(
                 1, static_cast<int>(std::ceil(opt.primal_heuristic_seconds)));
@@ -10369,7 +10394,9 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
 
 ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                                               const ebrp::SolveOptions& opt) {
-    const auto start = std::chrono::steady_clock::now();
+    const auto start = opt.process_start_time_valid
+        ? opt.process_start_time
+        : std::chrono::steady_clock::now();
     ebrp::SolveResult result;
     result.instance_name = instance.name;
     result.input_path = instance.path;
@@ -10436,6 +10463,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.pricing_closure_certified_exact = false;
     result.pricing_closure_status = "not_run";
     result.notes.push_back(instance.distance_convention);
+    result.overall_deadline_started_at_process_entry =
+        opt.process_start_time_valid;
+    result.process_shutdown_margin_seconds =
+        opt.process_shutdown_margin_seconds;
+    result.process_phase_ledger_path = opt.process_phase_ledger_path;
+    result.conservative_lower_bound_source =
+        "objective_nonnegative_G_plus_lambda_P";
     result.notes.push_back("Gamma-frontier diagnostic covers Gini intervals with fixed-Gini interval branch-price trees. It reports optimal only if every relevant interval is closed or bound-fathomed and the aggregated lower bound reaches the incumbent. Each interval also uses the valid trivial bound objective>=G>=interval_floor and a final-inventory pickup/route/Gini relaxation bound when it solves.");
     result.notes.push_back("Optimization flags: column_dominance="
         + std::string(opt.column_dominance ? "true" : "false")
@@ -10533,6 +10567,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             std::chrono::steady_clock::now() - start).count();
     };
     auto remainingSeconds = [&]() {
+        if (ebrp::processDeadlineConfigured(opt)) {
+            return std::max(0.0, ebrp::processWorkRemainingSeconds(opt));
+        }
         if (opt.solve_time_limit <= 0.0) return 0.0;
         return std::max(0.0, opt.solve_time_limit - elapsedSeconds());
     };
@@ -10562,6 +10599,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.incumbent_source_is_paper_reproducible = true;
     result.incumbent_source_contributes_lower_bound = false;
     result.final_UB = result.upper_bound;
+    result.lower_bound = 0.0;
+    ebrp::recordProcessPhase(
+        opt, "initial_model_data_preprocessing_complete", "complete",
+        "instance data initialized; empty-route incumbent independently verified");
 
     auto csvEscapeUbEvent = [](const std::string& value) {
         bool needs_quotes = false;
@@ -10961,6 +11002,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
                      std::max(0.1, remainingSeconds()));
         repair_opt.primal_heuristic_runs =
             std::max(opt.primal_heuristic_runs, 4);
+        repair_opt.primal_heuristic_phase_label =
+            "local_redecode_hga";
         repair_opt.heuristic_candidates_csv.clear();
         const auto repair_start = std::chrono::steady_clock::now();
         PaperPrimalHeuristicResult repair =
@@ -11526,6 +11569,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             ? "original_full_improving_range"
             : (user_gini_cap_truncates ? "capped_diagnostic" : "partial_range");
     result.frontier_execution_mode = opt.frontier_execution_mode;
+    ebrp::recordProcessPhase(
+        opt, "improving_gini_range_construction_complete", "complete",
+        "lower=" + std::to_string(cover_lo) +
+        ";upper=" + std::to_string(cover_hi) +
+        ";complete=" +
+        (result.frontier_covers_all_improving_gini_values
+             ? std::string("true") : std::string("false")));
 
     if (!result.verification.feasible) {
         result.status = "gcap_frontier_no_incumbent";
@@ -11560,12 +11610,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         ebrp::SolveOptions external_opt = opt;
         external_opt.frontier_adaptive_max_depth =
             effectiveFrontierAdaptiveMaxDepth(instance, opt);
-        const double exact_phase_remaining = opt.solve_time_limit > 0.0
-            ? opt.solve_time_limit - elapsedSeconds()
-            : std::numeric_limits<double>::max();
+        const double exact_phase_remaining = remainingSeconds();
         const bool paper_generation_scheduling =
             opt.external_gini_scheduling == "paper-lp-event" ||
-            opt.external_gini_scheduling == "cplex-algorithm-replica";
+            opt.external_gini_scheduling == "cplex-algorithm-replica" ||
+            opt.external_gini_scheduling ==
+                "round29-bound-gain-incremental";
         if (paper_generation_scheduling &&
             exact_phase_remaining <= 0.0) {
             result.external_gini_tree_scheduling =
@@ -11577,8 +11627,18 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             result.strict_certificate_rejection_reason =
                 "exact_phase_not_started_after_global_deadline";
             result.status = "paper_hga_global_deadline";
+            result.exact_phase_started = false;
+            result.lower_bound = 0.0;
+            result.external_gini_tree_global_lower_bound = 0.0;
+            result.graceful_deadline_finalization = true;
             result.certificate =
-                "Global deadline elapsed before the generation-stagnation HGA completed; the exact phase was not started.";
+                "Process-entry work deadline elapsed before the external exact "
+                "tree began. The independently verified incumbent is UB-only; "
+                "the conservative original-problem lower bound is zero from "
+                "nonnegative G and penalty terms. No interval-tree bound exists.";
+            ebrp::recordProcessPhase(
+                opt, "exact_phase_not_started", "deadline",
+                "conservative_lb=0;source=nonnegative_objective");
             result.runtime_seconds = elapsedSeconds();
             result.wall_time_seconds = result.runtime_seconds;
             result.actual_runtime_seconds = result.runtime_seconds;
@@ -11592,15 +11652,24 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             opt.external_gini_scheduling == "paper-lp-event";
         const bool replica_scheduling =
             opt.external_gini_scheduling == "cplex-algorithm-replica";
+        const bool c4_scheduling =
+            opt.external_gini_scheduling ==
+                "round29-bound-gain-incremental";
         result.notes.push_back(replica_scheduling
             ? "frontier execution mode cplex-algorithm-replica: the cold external Gurobi tree reproduces S0 structural Gini branching with deferred child LP processing and exactly-once terminal MIPs"
-            : (paper_scheduling
+            : (paper_scheduling || c4_scheduling
                 ? "frontier execution mode paper-lp-event: complete LP relaxations drive atomic splits and every terminal MIP is optimized exactly once without internal scheduling budgets"
                 : "frontier execution mode external-gini-tree legacy-quanta: historical retained leaf scheduling with time quanta"));
+        result.exact_phase_started = true;
+        result.process_elapsed_at_exact_phase_start_seconds =
+            ebrp::processElapsedSeconds(opt);
+        ebrp::recordProcessPhase(
+            opt, "exact_phase_start", "start",
+            "arm=" + opt.external_gini_scheduling);
         ebrp::SolveResult external = replica_scheduling
             ? ebrp::solveReplicaExternalGiniTree(
                   instance, external_opt, result, cover_lo, cover_hi)
-            : (paper_scheduling
+            : (paper_scheduling || c4_scheduling
                 ? ebrp::solvePaperExternalGiniTree(
                       instance, external_opt, result, cover_lo, cover_hi)
                 : ebrp::solveExternalGiniTree(
@@ -18114,12 +18183,33 @@ int main(int argc, char** argv) {
     ebrp::SolveOptions opt;
     try {
         opt = parseArgs(argc, argv);
+        opt.process_start_time = process_start;
+        opt.process_start_time_valid = true;
+        if (opt.process_wall_time_limit <= 0.0) {
+            opt.process_wall_time_limit = opt.solve_time_limit;
+        }
+        if (!opt.process_phase_ledger_path.empty() &&
+            std::filesystem::exists(opt.process_phase_ledger_path)) {
+            std::filesystem::remove(opt.process_phase_ledger_path);
+        }
+        ebrp::recordProcessPhase(
+            opt, "process_entry", "start",
+            "absolute process deadline origin");
         std::vector<std::filesystem::path> files = ebrp::collectInputFiles(opt.input_path);
         std::vector<ebrp::SolveResult> results;
         for (const auto& file : files) {
+            ebrp::recordProcessPhase(
+                opt, "instance_parsing_start", "start", file.string());
             ebrp::Instance instance = ebrp::parseInstanceFile(
                 file, opt.total_time_limit, opt.pickup_time, opt.drop_time);
+            ebrp::recordProcessPhase(
+                opt, "instance_parsing_complete", "complete",
+                "instance=" + instance.name);
             ebrp::SolveOptions effective_opt = opt;
+            if (ebrp::processDeadlineConfigured(effective_opt)) {
+                effective_opt.solve_time_limit = std::max(
+                    0.001, ebrp::processWorkRemainingSeconds(effective_opt));
+            }
             if (opt.method == "gcap-frontier" &&
                 opt.frontier_execution_mode == "scheduler" &&
                 opt.frontier_scheduling_mode == "controlling-leaf") {
@@ -18362,6 +18452,12 @@ int main(int argc, char** argv) {
                 r.final_process_wall_time_seconds <=
                     nominal_process_budget +
                     std::max(2.0, 0.01 * nominal_process_budget);
+            r.overall_deadline_started_at_process_entry =
+                effective_opt.process_start_time_valid;
+            r.process_shutdown_margin_seconds =
+                effective_opt.process_shutdown_margin_seconds;
+            r.process_phase_ledger_path =
+                effective_opt.process_phase_ledger_path;
             if (r.result_file.empty()) r.result_file = opt.out_path;
             if (r.log_file.empty()) r.log_file = opt.log_path;
             if (!opt.export_incumbent_path.empty() && !r.routes.empty()) {
@@ -18378,29 +18474,44 @@ int main(int argc, char** argv) {
                       << " obj=" << r.objective << " runtime=" << r.runtime_seconds
                       << " columns=" << r.columns << "\n";
         }
+        ebrp::recordProcessPhase(
+            opt, "final_result_serialization_start", "start");
         const std::string json = ebrp::resultsToJson(results);
         if (!opt.out_path.empty()) ebrp::writeTextFile(opt.out_path, json);
         else std::cout << json;
+        ebrp::recordProcessPhase(
+            opt, "final_result_serialization_complete", "complete");
+        ebrp::recordProcessPhase(opt, "process_exit", "complete", "rc=0");
         return 0;
     } catch (const std::bad_alloc& e) {
         const std::string reason = std::string("std_bad_alloc: ") + e.what();
         std::cerr << "ExactEBRP error: " << reason << "\n";
         try {
+            ebrp::recordProcessPhase(
+                opt, "final_result_serialization_start", "emergency");
             writeEmergencyFinalJson(opt, "model_size_limit", reason);
+            ebrp::recordProcessPhase(
+                opt, "final_result_serialization_complete", "emergency");
         } catch (const std::exception& write_error) {
             std::cerr << "ExactEBRP emergency JSON write failed: "
                       << write_error.what() << "\n";
         }
+        ebrp::recordProcessPhase(opt, "process_exit", "error", "rc=1");
         return 1;
     } catch (const std::exception& e) {
         std::cerr << "ExactEBRP error: " << e.what() << "\n";
         try {
+            ebrp::recordProcessPhase(
+                opt, "final_result_serialization_start", "emergency");
             writeEmergencyFinalJson(opt, "error_noncertified", e.what());
+            ebrp::recordProcessPhase(
+                opt, "final_result_serialization_complete", "emergency");
         } catch (const std::exception& write_error) {
             std::cerr << "ExactEBRP emergency JSON write failed: "
                       << write_error.what() << "\n";
         }
         usage();
+        ebrp::recordProcessPhase(opt, "process_exit", "error", "rc=1");
         return 1;
     }
 }

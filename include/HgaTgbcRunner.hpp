@@ -21,6 +21,8 @@ struct HgaTgbcOptions {
     int no_improve_generation_limit = 2000;
     std::string stop_mode = "legacy-time";
     std::filesystem::path generation_log_path;
+    std::string phase_label = "primary_hga";
+    const SolveOptions* process_options = nullptr;
 };
 
 struct HgaTgbcResult {
@@ -36,6 +38,7 @@ struct HgaTgbcResult {
     double final_fitness = 0.0;
     double verified_objective = 0.0;
     double wall_time_seconds = 0.0;
+    bool global_deadline_reached = false;
     std::filesystem::path generation_log_path;
 };
 
