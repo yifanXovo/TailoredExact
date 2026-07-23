@@ -504,6 +504,9 @@ struct SolveResult {
     long long external_gini_tree_optimize_count = 0;
     long long external_gini_tree_lp_relaxation_count = 0;
     long long external_gini_tree_lp_optimize_count = 0;
+    long long external_gini_tree_partial_mip_optimize_count = 0;
+    long long external_gini_tree_partial_mip_bound_event_count = 0;
+    long long external_gini_tree_partial_mip_target_reached_count = 0;
     long long external_gini_tree_terminal_mip_leaf_count = 0;
     long long external_gini_tree_terminal_mip_optimize_count = 0;
     long long external_gini_tree_global_deadline_interruption_count = 0;
@@ -569,6 +572,7 @@ struct SolveResult {
     double external_gini_tree_solver_seconds = 0.0;
     double external_gini_tree_work = 0.0;
     double external_gini_tree_lp_work = 0.0;
+    double external_gini_tree_partial_mip_work = 0.0;
     double external_gini_tree_terminal_mip_work = 0.0;
     double external_gini_tree_nodes = 0.0;
     double external_gini_tree_simplex_iterations = 0.0;

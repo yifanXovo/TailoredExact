@@ -1532,6 +1532,9 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_COUNT(optimize_count);
     WRITE_EXT_COUNT(lp_relaxation_count);
     WRITE_EXT_COUNT(lp_optimize_count);
+    WRITE_EXT_COUNT(partial_mip_optimize_count);
+    WRITE_EXT_COUNT(partial_mip_bound_event_count);
+    WRITE_EXT_COUNT(partial_mip_target_reached_count);
     WRITE_EXT_COUNT(terminal_mip_leaf_count);
     WRITE_EXT_COUNT(terminal_mip_optimize_count);
     WRITE_EXT_COUNT(global_deadline_interruption_count);
@@ -1622,6 +1625,7 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_DOUBLE(solver_seconds);
     WRITE_EXT_DOUBLE(work);
     WRITE_EXT_DOUBLE(lp_work);
+    WRITE_EXT_DOUBLE(partial_mip_work);
     WRITE_EXT_DOUBLE(terminal_mip_work);
     WRITE_EXT_DOUBLE(nodes);
     WRITE_EXT_DOUBLE(simplex_iterations);

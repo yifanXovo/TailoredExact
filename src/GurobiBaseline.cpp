@@ -60,6 +60,7 @@ struct GurobiApi {
     decltype(&GRBgetdblparam) getdblparam = nullptr;
     decltype(&GRBsetcallbackfunc) setcallbackfunc = nullptr;
     decltype(&GRBcbget) cbget = nullptr;
+    decltype(&GRBterminate) terminate = nullptr;
     decltype(&GRBoptimize) optimize = nullptr;
     decltype(&GRBgetintattr) getintattr = nullptr;
     decltype(&GRBgetdblattr) getdblattr = nullptr;
@@ -193,6 +194,7 @@ bool loadGurobiApi(const SolveOptions& options,
     LOAD_GRB(getdblparam, "GRBgetdblparam");
     LOAD_GRB(setcallbackfunc, "GRBsetcallbackfunc");
     LOAD_GRB(cbget, "GRBcbget");
+    LOAD_GRB(terminate, "GRBterminate");
     LOAD_GRB(optimize, "GRBoptimize");
     LOAD_GRB(getintattr, "GRBgetintattr");
     LOAD_GRB(getdblattr, "GRBgetdblattr");
@@ -263,14 +265,19 @@ struct ProgressCallbackState {
     double last_record_time = -1.0;
     double last_incumbent = std::numeric_limits<double>::infinity();
     double last_bound = -std::numeric_limits<double>::infinity();
+    bool bound_target_enabled = false;
+    double bound_target = 0.0;
+    double bound_target_tolerance = 1e-7;
+    bool bound_target_reached = false;
+    bool bound_target_termination_requested = false;
 };
 
 bool finiteNative(double value) {
     return std::isfinite(value) && std::fabs(value) < GRB_INFINITY;
 }
 
-int __stdcall readOnlyProgressCallback(
-    GRBmodel*, void* cbdata, int where, void* usrdata) {
+int __stdcall progressAndBoundTargetCallback(
+    GRBmodel* model, void* cbdata, int where, void* usrdata) {
     auto* state = static_cast<ProgressCallbackState*>(usrdata);
     if (!state || !state->api || where != GRB_CB_MIP) return 0;
     ++state->progress.callback_invocations;
@@ -320,6 +327,16 @@ int __stdcall readOnlyProgressCallback(
             state->last_record_time = event.elapsed_runtime_seconds;
         } catch (...) {
             ++state->progress.dropped_records;
+        }
+    }
+    if (state->bound_target_enabled && event.best_bound_available &&
+        event.best_bound + state->bound_target_tolerance >=
+            state->bound_target) {
+        state->bound_target_reached = true;
+        if (!state->bound_target_termination_requested && model &&
+            state->api->terminate) {
+            state->bound_target_termination_requested = true;
+            state->api->terminate(model);
         }
     }
     return 0;
@@ -576,8 +593,12 @@ public:
             request.solve_kind != FixedIntervalSolveKind::LegacyMipQuantum;
         out.lp_relaxation =
             request.solve_kind == FixedIntervalSolveKind::PaperLpRelaxation;
+        out.partial_bound_target_mip =
+            request.solve_kind ==
+                FixedIntervalSolveKind::PaperPartialBoundTargetMip;
         out.terminal_mip =
             request.solve_kind == FixedIntervalSolveKind::PaperTerminalMip;
+        out.native_bound_target = request.native_bound_target;
         const bool legacy_retained_mode =
             !paper_solve &&
             options_.external_gini_lifecycle == "retained-per-leaf";
@@ -766,8 +787,14 @@ public:
 
         ProgressCallbackState callback;
         callback.api = &api_;
+        callback.bound_target_enabled =
+            out.partial_bound_target_mip &&
+            request.native_bound_target_enabled;
+        callback.bound_target = request.native_bound_target;
+        callback.bound_target_tolerance =
+            std::max(0.0, request.native_bound_target_tolerance);
         const int callback_rc = api_.setcallbackfunc(
-            model, readOnlyProgressCallback, &callback);
+            model, progressAndBoundTargetCallback, &callback);
         if (callback_rc != 0) {
             out.failure_reason = apiError(api_, model_env, callback_rc);
             return out;
@@ -780,6 +807,9 @@ public:
         }
         ++stats_.optimize_count;
         if (out.lp_relaxation) ++stats_.lp_relaxation_optimize_count;
+        if (out.partial_bound_target_mip) {
+            ++stats_.partial_bound_target_mip_optimize_count;
+        }
         if (out.terminal_mip) ++stats_.terminal_mip_optimize_count;
         ++state.optimize_count;
         out.solver_finalization_reached = out.optimize_return_code == 0;
@@ -804,6 +834,59 @@ public:
             out.native_status_code == GRB_INTERRUPTED ||
             out.native_status_code == GRB_WORK_LIMIT ||
             out.native_status_code == GRB_MEM_LIMIT;
+        out.native_bound_target_reached = callback.bound_target_reached;
+        out.native_bound_target_termination_requested =
+            callback.bound_target_termination_requested;
+        if (out.partial_bound_target_mip &&
+            out.native_bound_target_termination_requested &&
+            out.native_status_code == GRB_INTERRUPTED) {
+            // This is a mathematical state transition, not a global-deadline
+            // interruption. The leaf remains open with its certified bound.
+            out.interrupted = false;
+        }
+        if (request.capture_native_bound_events) {
+            out.native_bound_events.reserve(callback.progress.events.size());
+            double copied_last_bound =
+                -std::numeric_limits<double>::infinity();
+            for (const GurobiProgressEvent& event :
+                    callback.progress.events) {
+                FixedIntervalNativeBoundEvent copied;
+                copied.solver_runtime_seconds =
+                    event.elapsed_runtime_seconds;
+                copied.work = event.work;
+                copied.native_bound = event.best_bound;
+                copied.native_bound_available =
+                    event.best_bound_available;
+                copied.native_incumbent = event.incumbent;
+                copied.native_incumbent_available =
+                    event.incumbent_available;
+                copied.processed_nodes = event.processed_nodes;
+                copied.open_nodes = event.open_nodes;
+                copied.native_phase = event.phase;
+                copied.bound_improved = event.best_bound_available &&
+                    (!std::isfinite(copied_last_bound) ||
+                     event.best_bound > copied_last_bound +
+                        1e-12 * std::max(
+                            1.0, std::fabs(copied_last_bound)));
+                if (copied.bound_improved) {
+                    copied_last_bound = event.best_bound;
+                }
+                copied.target_reached =
+                    callback.bound_target_enabled &&
+                    event.best_bound_available &&
+                    event.best_bound +
+                        callback.bound_target_tolerance >=
+                        callback.bound_target;
+                out.native_bound_events.push_back(copied);
+            }
+            if (out.partial_bound_target_mip) {
+                stats_.native_bound_event_count +=
+                    static_cast<long long>(out.native_bound_events.size());
+            }
+        }
+        if (out.native_bound_target_reached) {
+            ++stats_.native_bound_target_reached_count;
+        }
         out.native_bound_available = getDouble(
             GRB_DBL_ATTR_OBJBOUNDC, out.native_bound);
         if (out.lp_relaxation && out.optimal) {
@@ -848,6 +931,9 @@ public:
         stats_.cumulative_solver_runtime_seconds += out.solver_runtime_seconds;
         stats_.cumulative_work += out.work;
         if (out.lp_relaxation) stats_.cumulative_lp_work += out.work;
+        if (out.partial_bound_target_mip) {
+            stats_.cumulative_partial_bound_target_mip_work += out.work;
+        }
         if (out.terminal_mip) {
             stats_.cumulative_terminal_mip_work += out.work;
         }
@@ -1383,7 +1469,7 @@ SolveResult solveGurobiBaseline(const Instance& instance,
         ProgressCallbackState callback;
         callback.api = &api;
         const int callback_rc = api.setcallbackfunc(
-            model, readOnlyProgressCallback, &callback);
+            model, progressAndBoundTargetCallback, &callback);
         if (callback_rc != 0) {
             result.status = "callback_configuration_failed";
             result.gurobi_failure_reason = apiError(api, env, callback_rc);
