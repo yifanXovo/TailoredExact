@@ -8,6 +8,7 @@
 #include "GiniFrontierGeometry.hpp"
 #include "IntervalRowFactory.hpp"
 #include "PaperExternalGiniTree.hpp"
+#include "ProcessPhaseLedger.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -132,6 +133,21 @@ void copyBackendStats(SolveResult& result,
         stats.warm_start_rejected_count;
     result.external_gini_tree_warm_start_unknown_count =
         stats.warm_start_unknown_count;
+    result.external_gini_tree_in_memory_model_reuse_count =
+        stats.in_memory_model_reuse_count;
+    result.external_gini_tree_explicit_leaf_model_discard_count =
+        stats.explicit_leaf_model_discard_count;
+    result.external_gini_tree_integer_domain_restore_count =
+        stats.integer_domain_restore_count;
+    result.external_gini_tree_basis_available_count =
+        stats.basis_available_count;
+    result.external_gini_tree_basis_mapped_count = stats.basis_mapped_count;
+    result.external_gini_tree_basis_submitted_count =
+        stats.basis_submitted_count;
+    result.external_gini_tree_basis_accepted_count =
+        stats.basis_accepted_count;
+    result.external_gini_tree_basis_rejected_count =
+        stats.basis_rejected_count;
     result.external_gini_tree_model_read_seconds =
         stats.cumulative_model_read_seconds;
     result.external_gini_tree_solver_seconds =
@@ -227,6 +243,9 @@ SolveResult solveReplicaExternalGiniTree(const Instance& instance,
             .count();
     };
     auto remaining = [&]() {
+        if (processDeadlineConfigured(options)) {
+            return processWorkRemainingSeconds(options);
+        }
         return options.solve_time_limit > 0.0
             ? options.solve_time_limit - elapsed()
             : std::numeric_limits<double>::max();
@@ -274,6 +293,7 @@ SolveResult solveReplicaExternalGiniTree(const Instance& instance,
     result.strict_certificate_class = "certificate_rejected";
     result.strict_certificate_rejection_reason = "replica_tree_not_finalized";
     result.status = "cplex_replica_external_gini_tree_running";
+    result.exact_phase_started = true;
 
     const bool seed_valid =
         verified_seed.verification.original_solution_feasible &&
@@ -326,6 +346,9 @@ SolveResult solveReplicaExternalGiniTree(const Instance& instance,
         flow_counts.total_rows;
     result.global_gini_tree_connectivity_flow_total_nonzeros =
         flow_counts.total_nonzeros;
+    recordProcessPhase(
+        options, "connectivity_flow_preparation_complete", "complete",
+        "variant=" + flow_resolution.resolved);
 
     IntervalRowFactoryRequest root_rows_request;
     root_rows_request.gamma_L = root_gamma_L;
@@ -343,9 +366,15 @@ SolveResult solveReplicaExternalGiniTree(const Instance& instance,
         return result;
     }
     result.external_gini_tree_row_factory_version = root_rows.factory_version;
+    recordProcessPhase(
+        options, "static_row_factory_preparation_complete", "complete",
+        "factory=" + root_rows.factory_version);
 
     std::unique_ptr<FixedIntervalMipBackend> backend =
         makeGurobiFixedIntervalBackend(instance, options);
+    recordProcessPhase(
+        options, "external_backend_creation", backend ? "complete" : "failed",
+        "backend=gurobi;arm=C3-REPLICA");
     if (!backend) {
         result.status = "cplex_replica_external_gini_tree_backend_invalid";
         result.external_gini_tree_failure_reason =
@@ -374,6 +403,9 @@ SolveResult solveReplicaExternalGiniTree(const Instance& instance,
             : std::filesystem::path(options.external_gini_artifact_dir);
     std::filesystem::create_directories(artifact_dir / "models");
     std::filesystem::create_directories(artifact_dir / "native_logs");
+    recordProcessPhase(
+        options, "external_artifact_directory_creation", "complete",
+        artifact_dir.string());
 
     const auto event_path = artifact_dir / "replica_tree_events.csv";
     const auto leaf_path = artifact_dir / "replica_leaf_ledger.csv";
@@ -408,6 +440,16 @@ SolveResult solveReplicaExternalGiniTree(const Instance& instance,
     inheritance_ledger << "parent_id,parent_bound,child_id,child_inherited_bound,inheritance_valid,source\n";
     row_ledger << "leaf_id,gamma_L,gamma_U,factory_version,factory_signature,canonical_row_signature,model_sha256,global_family_count,interval_family_count,selector_variable_count,contract_valid\n";
     global_bound_ledger << "telemetry_seconds,event,leaf_id,global_lb,verified_ub\n";
+    events.flush();
+    optimize.flush();
+    lp_ledger.flush();
+    split_ledger.flush();
+    coverage_ledger.flush();
+    inheritance_ledger.flush();
+    row_ledger.flush();
+    global_bound_ledger.flush();
+    recordProcessPhase(options, "first_tree_ledger_opened", "complete",
+                       event_path.string());
 
     ControllingLeafScheduler scheduler(kCertificateTolerance);
     ControllingLeaf root;
@@ -445,6 +487,9 @@ SolveResult solveReplicaExternalGiniTree(const Instance& instance,
     double verified_ub = verified_seed.objective;
     std::vector<RoutePlan> best_routes = verified_seed.routes;
     double total_model_build_seconds = 0.0;
+    bool first_model_build_recorded = false;
+    bool first_tree_event_recorded = false;
+    bool first_lp_launch_recorded = false;
     double last_global_lb_improvement = -1.0;
 
     auto stopAtDeadline = [&]() {
@@ -498,6 +543,14 @@ SolveResult solveReplicaExternalGiniTree(const Instance& instance,
         spec.verified_incumbent = verified_seed.objective;
         spec.incumbent_epsilon = 0.0;
         const auto build_started = ReplicaClock::now();
+        if (!first_model_build_recorded) {
+            recordProcessPhase(
+                options, "root_canonical_model_construction_start", "start",
+                "leaf=" + leaf.id);
+            recordProcessPhase(
+                options, "first_interval_model_build", "start",
+                "leaf=" + leaf.id);
+        }
         state.artifact = writeCanonicalCompactModel(
             instance, options, artifact_dir / "models" / (leaf.id + ".lp"),
             spec);
@@ -505,6 +558,17 @@ SolveResult solveReplicaExternalGiniTree(const Instance& instance,
             ReplicaClock::now() - build_started).count();
         total_model_build_seconds += build_seconds;
         ++result.external_gini_tree_canonical_artifact_generation_count;
+        if (!first_model_build_recorded) {
+            recordProcessPhase(
+                options, "root_canonical_model_construction_complete",
+                state.artifact.written ? "complete" : "failed",
+                "leaf=" + leaf.id);
+            recordProcessPhase(
+                options, "first_interval_model_build_complete",
+                state.artifact.written ? "complete" : "failed",
+                "leaf=" + leaf.id);
+            first_model_build_recorded = true;
+        }
         state.factory_signature = rows.aggregate_signature;
         state.artifact_ready = state.artifact.written;
         row_ledger << leaf.id << ',' << std::setprecision(17) << leaf.gamma_L
@@ -543,6 +607,12 @@ SolveResult solveReplicaExternalGiniTree(const Instance& instance,
 
     while (!hard_failure && !deadline_stop &&
            !scheduler.everyRelevantLeafClosed()) {
+        if (!first_tree_event_recorded) {
+            recordProcessPhase(
+                options, "first_external_tree_event", "start",
+                "scheduler_select_next");
+            first_tree_event_recorded = true;
+        }
         if (remaining() <= 0.0) {
             stopAtDeadline();
             break;
@@ -593,6 +663,12 @@ SolveResult solveReplicaExternalGiniTree(const Instance& instance,
             (selected.id + "_lp.gurobi.log");
         lp_request.verified_start_routes = best_routes;
         lp_request.verified_start_source = "same_run_verified_incumbent_gate_only";
+        if (!first_lp_launch_recorded) {
+            recordProcessPhase(
+                options, "first_lp_optimize_launch", "start",
+                "leaf=" + selected.id);
+            first_lp_launch_recorded = true;
+        }
         const FixedIntervalMipOutcome lp_outcome = backend->solve(lp_request);
         state.lp_native_status = lp_outcome.native_status;
         recordOptimize(selected, "LP", lp_remaining, state, lp_outcome);
@@ -1071,6 +1147,7 @@ SolveResult solveReplicaExternalGiniTree(const Instance& instance,
     result.runtime_seconds = elapsed();
     result.wall_time_seconds = result.runtime_seconds;
     result.actual_runtime_seconds = result.runtime_seconds;
+    result.graceful_deadline_finalization = deadline_stop && !hard_failure;
     return result;
 }
 

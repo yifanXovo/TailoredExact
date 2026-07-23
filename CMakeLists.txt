@@ -25,6 +25,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/StrictCertificate.cpp
   src/ModelCorrectness.cpp
   src/FileSha256.cpp
+  src/ProcessPhaseLedger.cpp
   src/DenseProgress.cpp
   src/GurobiCertificate.cpp
   src/GurobiProgress.cpp
@@ -132,3 +133,9 @@ add_test(NAME Round27PaperSchedulingTests COMMAND Round27PaperSchedulingTests)
 add_executable(Round28ReplicaTests tests/round28_replica_tests.cpp)
 target_link_libraries(Round28ReplicaTests PRIVATE exact_ebrp_core)
 add_test(NAME Round28ReplicaTests COMMAND Round28ReplicaTests)
+
+add_executable(Round29PerformanceRecoveryTests
+  tests/round29_performance_recovery_tests.cpp)
+target_link_libraries(Round29PerformanceRecoveryTests PRIVATE exact_ebrp_core)
+add_test(NAME Round29PerformanceRecoveryTests
+  COMMAND Round29PerformanceRecoveryTests)

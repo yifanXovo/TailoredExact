@@ -1,5 +1,6 @@
 #pragma once
 
+#include <chrono>
 #include <string>
 #include <utility>
 #include <vector>
@@ -374,6 +375,10 @@ struct SolveOptions {
     bool controlling_leaf_checkpoint_merge = true;
     double process_wall_time_limit = 0.0;
     double process_elapsed_seconds_before_auto_oracle = 0.0;
+    std::chrono::steady_clock::time_point process_start_time{};
+    bool process_start_time_valid = false;
+    double process_shutdown_margin_seconds = 5.0;
+    std::string process_phase_ledger_path;
     bool frontier_critical_band_auto = false;
     int frontier_critical_band_max_depth = 0;
     double frontier_critical_band_min_width = 1e-4;
@@ -430,7 +435,9 @@ struct SolveOptions {
     std::string primal_heuristic_stop = "legacy-time";
     int primal_heuristic_no_improve_generations = 2000;
     std::string primal_heuristic_generation_log;
+    std::string primal_heuristic_phase_label = "primary_hga";
     bool exact_phase_local_redecode_repair = false;
+    bool exact_phase_local_redecode_repair_explicit = false;
     double exact_phase_local_redecode_seconds = 10.0;
     std::string heuristic_candidates_csv;
     std::string large_instance_mode = "auto";

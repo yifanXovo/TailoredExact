@@ -1524,6 +1524,7 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_COUNT(closed_leaf_count);
     WRITE_EXT_COUNT(split_after_attempts);
     WRITE_EXT_COUNT(split_count);
+    WRITE_EXT_COUNT(declined_split_count);
     WRITE_EXT_COUNT(attempt_count);
     WRITE_EXT_COUNT(environment_count);
     WRITE_EXT_COUNT(model_count);
@@ -1567,6 +1568,14 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_COUNT(warm_start_accepted_count);
     WRITE_EXT_COUNT(warm_start_rejected_count);
     WRITE_EXT_COUNT(warm_start_unknown_count);
+    WRITE_EXT_COUNT(in_memory_model_reuse_count);
+    WRITE_EXT_COUNT(explicit_leaf_model_discard_count);
+    WRITE_EXT_COUNT(integer_domain_restore_count);
+    WRITE_EXT_COUNT(basis_available_count);
+    WRITE_EXT_COUNT(basis_mapped_count);
+    WRITE_EXT_COUNT(basis_submitted_count);
+    WRITE_EXT_COUNT(basis_accepted_count);
+    WRITE_EXT_COUNT(basis_rejected_count);
 #undef WRITE_EXT_COUNT
     out << "  \"external_gini_tree_contract_minimum_width\": "
         << result.external_gini_tree_contract_minimum_width << ",\n";
@@ -3339,6 +3348,22 @@ std::string resultToJson(const SolveResult& input) {
         << result.process_wall_time_overrun_seconds << ",\n";
     out << "  \"process_wall_time_comparable\": "
         << (result.process_wall_time_comparable ? "true" : "false") << ",\n";
+    out << "  \"overall_deadline_started_at_process_entry\": "
+        << (result.overall_deadline_started_at_process_entry
+                ? "true" : "false") << ",\n";
+    out << "  \"process_shutdown_margin_seconds\": "
+        << result.process_shutdown_margin_seconds << ",\n";
+    out << "  \"process_phase_ledger_path\": \""
+        << jsonEscape(result.process_phase_ledger_path) << "\",\n";
+    out << "  \"exact_phase_started\": "
+        << (result.exact_phase_started ? "true" : "false") << ",\n";
+    out << "  \"process_elapsed_at_exact_phase_start_seconds\": "
+        << result.process_elapsed_at_exact_phase_start_seconds << ",\n";
+    out << "  \"graceful_deadline_finalization\": "
+        << (result.graceful_deadline_finalization ? "true" : "false")
+        << ",\n";
+    out << "  \"conservative_lower_bound_source\": \""
+        << jsonEscape(result.conservative_lower_bound_source) << "\",\n";
     out << "  \"native_leaf_time_limit_param_id\": "
         << result.native_leaf_time_limit_param_id << ",\n";
     out << "  \"native_leaf_time_limit_set_rc\": "

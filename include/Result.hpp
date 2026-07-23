@@ -496,6 +496,7 @@ struct SolveResult {
     long long external_gini_tree_closed_leaf_count = 0;
     long long external_gini_tree_split_after_attempts = 0;
     long long external_gini_tree_split_count = 0;
+    long long external_gini_tree_declined_split_count = 0;
     long long external_gini_tree_attempt_count = 0;
     long long external_gini_tree_environment_count = 0;
     long long external_gini_tree_model_count = 0;
@@ -554,6 +555,14 @@ struct SolveResult {
     long long external_gini_tree_warm_start_accepted_count = 0;
     long long external_gini_tree_warm_start_rejected_count = 0;
     long long external_gini_tree_warm_start_unknown_count = 0;
+    long long external_gini_tree_in_memory_model_reuse_count = 0;
+    long long external_gini_tree_explicit_leaf_model_discard_count = 0;
+    long long external_gini_tree_integer_domain_restore_count = 0;
+    long long external_gini_tree_basis_available_count = 0;
+    long long external_gini_tree_basis_mapped_count = 0;
+    long long external_gini_tree_basis_submitted_count = 0;
+    long long external_gini_tree_basis_accepted_count = 0;
+    long long external_gini_tree_basis_rejected_count = 0;
     double external_gini_tree_model_build_seconds = 0.0;
     double external_gini_tree_canonical_artifact_generation_seconds = 0.0;
     double external_gini_tree_model_read_seconds = 0.0;
@@ -1521,6 +1530,13 @@ struct SolveResult {
     double final_process_wall_time_seconds = 0.0;
     double process_wall_time_overrun_seconds = 0.0;
     bool process_wall_time_comparable = true;
+    bool overall_deadline_started_at_process_entry = false;
+    double process_shutdown_margin_seconds = 0.0;
+    std::string process_phase_ledger_path;
+    bool exact_phase_started = false;
+    double process_elapsed_at_exact_phase_start_seconds = 0.0;
+    bool graceful_deadline_finalization = false;
+    std::string conservative_lower_bound_source;
     int native_leaf_time_limit_param_id = 0;
     int native_leaf_time_limit_set_rc = 0;
     std::string full_ledger_merge_status;

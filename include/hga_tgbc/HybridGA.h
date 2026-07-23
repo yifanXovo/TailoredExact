@@ -88,6 +88,14 @@ public:
     void set_generation_stagnation_stop(bool enabled) {
         generation_stagnation_stop = enabled;
     }
+    void set_absolute_deadline(
+        const std::chrono::steady_clock::time_point& deadline) {
+        absolute_deadline = deadline;
+        absolute_deadline_enabled = true;
+    }
+    bool stopped_on_absolute_deadline() const {
+        return absolute_deadline_reached;
+    }
     vector<vector<int>> get_best_solution() const { return best_solution; }
     double get_best_fitness() const { return best_fitness; }
     long long get_total_generations() const { return total_generations; }
@@ -112,7 +120,15 @@ public:
     }
 
     void run() {
-        auto start = high_resolution_clock::now();
+        auto start = steady_clock::now();
+        absolute_deadline_reached = false;
+        auto deadlineReached = [&]() {
+            if (!absolute_deadline_enabled) return false;
+            const bool reached = steady_clock::now() >= absolute_deadline;
+            absolute_deadline_reached =
+                absolute_deadline_reached || reached;
+            return reached;
+        };
         set_greedy_time_units(instance.load_time_unit, instance.unload_time_unit);
         set_greedy_objective_params(objective_lambda, objective_scaling);
 
@@ -180,13 +196,15 @@ public:
             // Round 27 production: the sole stop state is the number of
             // completed generations since strict global-best improvement.
             while (no_improve_gen_limit > 0 &&
-                   generations_since_improvement < no_improve_gen_limit) {
+                   generations_since_improvement < no_improve_gen_limit &&
+                   !deadlineReached()) {
                 complete_generation();
             }
         } else {
             // Historical time-limited diagnostic behavior.
             while (duration_cast<seconds>(
-                       high_resolution_clock::now() - start).count() < max_time) {
+                       steady_clock::now() - start).count() < max_time &&
+                   !deadlineReached()) {
                 complete_generation();
                 if (no_improve_gen_limit > 0 &&
                     generations_since_improvement >= no_improve_gen_limit) {
@@ -232,6 +250,9 @@ private:
     double objective_scaling;
     int no_improve_gen_limit;
     bool generation_stagnation_stop = false;
+    bool absolute_deadline_enabled = false;
+    bool absolute_deadline_reached = false;
+    std::chrono::steady_clock::time_point absolute_deadline{};
     double inheritance_crossover_ratio = 0.65;
     SelectionStyle selection_style = SelectionStyle::HGAFitness;
     double diversity_weight = 0.20;
