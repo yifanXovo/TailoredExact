@@ -49,6 +49,7 @@ SOURCE_FILES = (
     "results/gf_c0_mechanism_transfer_c5_round30/c5_solver_event_contract.md",
     "results/gf_c0_mechanism_transfer_c5_round30/c5_split_strategy.md",
     "results/gf_c0_mechanism_transfer_c5_round30/c5_incremental_reoptimization.md",
+    "results/gf_c0_mechanism_transfer_c5_round30/stage0_incident.md",
 )
 
 

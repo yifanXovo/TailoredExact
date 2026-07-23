@@ -35,7 +35,7 @@ SUITES = {
 
 
 def stage_name(suite: str) -> str:
-    return f"stage0_{suite}"
+    return f"stage0r1_{suite}"
 
 
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
@@ -58,7 +58,11 @@ def audit_all() -> None:
     ])
     runs = analysis.raw_runs()
     trace_rows = []
-    for suite in ("trace", "exactness", "sentinel"):
+    # Exact toy closure is an exactness gate, not an anytime-trajectory gate:
+    # plain Gurobi can close the toy in one callback observation.  Trajectory
+    # completeness is required on the four nontrivial external rows and on
+    # the nontrivial P-GRB/C5 sentinels.
+    for suite in ("trace", "sentinel"):
         for instance, arm, _ in SUITES[suite]:
             run = analysis.require_run(
                 runs, stage_name(suite), instance, arm)

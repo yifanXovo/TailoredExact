@@ -14,8 +14,8 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "results/gf_c0_mechanism_transfer_c5_round30"
 BUILD_ROOT = ROOT / "build_round30"
-CPLEX_BUILD = BUILD_ROOT / "cplex_only"
-GUROBI_BUILD = BUILD_ROOT / "with_gurobi"
+CPLEX_BUILD = BUILD_ROOT / "cplex_only_r1"
+GUROBI_BUILD = BUILD_ROOT / "with_gurobi_r1"
 CMAKE = Path(
     r"D:\Program Files\Microsoft Visual Studio\2022\Professional"
     r"\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe")
@@ -61,7 +61,7 @@ def execute(name: str, command: list[str],
     }
     records.append(record)
     write_json(OUT / "build_and_test_record.partial.json", {
-        "schema": "round30-build-tests-v1",
+        "schema": "round30-build-tests-r1-v1",
         "records": records,
     })
     print(
@@ -121,7 +121,7 @@ def main() -> int:
                 [str(PYTHON), str(test)], records)
     except Exception as error:
         write_json(OUT / "build_and_test_record.json", {
-            "schema": "round30-build-tests-v1",
+            "schema": "round30-build-tests-r1-v1",
             "source_commit": subprocess.check_output(
                 ("git", "rev-parse", "HEAD"), cwd=ROOT,
                 text=True).strip(),
@@ -133,7 +133,7 @@ def main() -> int:
     cplex_exe = CPLEX_BUILD / "ExactEBRP.exe"
     gurobi_exe = GUROBI_BUILD / "ExactEBRP.exe"
     result = {
-        "schema": "round30-build-tests-v1",
+        "schema": "round30-build-tests-r1-v1",
         "source_commit": subprocess.check_output(
             ("git", "rev-parse", "HEAD"), cwd=ROOT,
             text=True).strip(),
