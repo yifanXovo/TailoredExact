@@ -1,0 +1,60 @@
+{
+  "algorithm_selector": "round29-bound-gain-incremental",
+  "arm": "C4-CANDIDATE",
+  "deadline": {
+    "engineering_shutdown_margin_seconds": 5,
+    "margin_may_affect_split_decision": false,
+    "official_nominal_seconds": 300,
+    "origin": "process_entry"
+  },
+  "execution": {
+    "absolute_mip_gap": 0.0,
+    "basis_submission": false,
+    "gurobi_presolve": -1,
+    "gurobi_seed": 0,
+    "integer_domain_restored_before_parent_mip": true,
+    "local_redecode_repair": false,
+    "mip_start": false,
+    "native_tree_reuse_claim": false,
+    "relative_mip_gap": 0.0,
+    "same_leaf_model_object_retention": true,
+    "threads": 1
+  },
+  "geometry": {
+    "adaptive": true,
+    "initial_intervals": 4,
+    "maximum_depth": 8,
+    "minimum_width": 0.0001,
+    "selector_variables": 0,
+    "split_factor": 2
+  },
+  "mathematical_split_rule": {
+    "certificate_tolerance": 1e-07,
+    "cutoff_fathom": "complete_lp_bound_ge_verified_ub_minus_1e-7",
+    "declined_split_action": "exact_unsplit_parent_mip",
+    "requires_both_complete_child_lps": true,
+    "requires_complete_parent_lp": true,
+    "split_if_child_lp_infeasible": true,
+    "split_if_min_feasible_child_bound_strictly_exceeds_parent": true
+  },
+  "primal_heuristic": {
+    "configured_runs": 12,
+    "local_redecode_repair": false,
+    "method": "hga-tgbc",
+    "no_improve_generations": 2000,
+    "seed": 20260626,
+    "stop": "generation-stagnation",
+    "verified_incumbent_use": "upper_bound_and_cutoff_only"
+  },
+  "schema": "round29-c4-parameter-freeze-v1",
+  "static_formulation": {
+    "child_estimate": "parent-copy",
+    "connectivity_flow_variant": "round20-current",
+    "global_row_families": 6,
+    "interval_local_row_families": 9,
+    "presolve_contract": "off",
+    "row_attachment": "full-inherited-pack",
+    "row_timing": "deferred",
+    "search_contract": "traditional"
+  }
+}

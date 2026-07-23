@@ -1,0 +1,7 @@
+check,passed,pattern,match_count,interpretation
+no_instance_name_or_path_decision,True,(?:if|switch)\s*\([^\)]*instance\.(?:name|path),0,forbidden decision dependency absent
+no_size_dispatch_in_c4_decision,True,(?:if|switch)\s*\([^\)]*instance\.(?:V|M),0,forbidden decision dependency absent
+no_wall_clock_split_decision,True,(?:elapsed|runtime|wall|deadline|Work|nodes),0,forbidden decision dependency absent
+no_attempt_retry_split_decision,True,(?:attempt|retry|solution_count),0,forbidden decision dependency absent
+no_known_objective_dispatch,True,(?:known_optimum|known_objective|historical_benchmark),0,forbidden decision dependency absent
+explicit_distinct_c4_selector,True,round29-bound-gain-incremental,4,required selector present

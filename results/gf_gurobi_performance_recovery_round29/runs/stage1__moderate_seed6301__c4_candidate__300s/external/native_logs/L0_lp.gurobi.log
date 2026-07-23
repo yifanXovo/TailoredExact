@@ -1,0 +1,46 @@
+
+Gurobi 13.0.2 (win64) logging started Thu Jul 23 14:43:56 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_gurobi_performance_recovery_round29\runs\stage1__moderate_seed6301__c4_candidate__300s\external\native_logs\L0_lp.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  242.060261
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 93026 rows, 18191 columns and 665192 nonzeros (Min)
+Model fingerprint: 0x230c78e1
+Model has 51 linear objective coefficients
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [2e-01, 5e+03]
+  RHS range        [2e-01, 5e+04]
+
+Presolve removed 5241 rows and 259 columns
+Presolve time: 0.40s
+Presolved: 17886 rows, 105644 columns, 663599 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0      handle free variables                          0s
+   13789   -1.5504455e+00   3.987887e-03   1.925413e+13      5s
+   20033   -3.1005600e-01   0.000000e+00   1.458779e+08     10s
+   25293    1.3245558e-01   0.000000e+00   2.197192e+07     15s
+   30863    9.8204666e-01   0.000000e+00   4.134209e+06     20s
+   36483    1.6299114e+00   0.000000e+00   1.209786e+07     25s
+Warning: 1 variables dropped from basis
+Warning: switch to quad precision
+   43278    4.5194610e+07   0.000000e+00   3.540515e+14     30s
+Warning: 1 variables dropped from basis
+Warning: very big Kappa = 1.13105e+21, try parameter NumericFocus
+
+Solved in 44981 iterations and 31.55 seconds (98.19 work units)
+Infeasible model
+
+User-callback calls 45521, time in user-callback 0.01 sec

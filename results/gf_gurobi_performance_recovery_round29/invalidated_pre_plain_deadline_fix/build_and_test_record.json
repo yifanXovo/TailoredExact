@@ -1,0 +1,254 @@
+{
+  "cmake": "cmake version 3.30.5-msvc23",
+  "compiler": "g++.exe (Rev2, Built by MSYS2 project) 14.2.0",
+  "cplex_executable": "build_round29/cplex_only/ExactEBRP.exe",
+  "cplex_executable_sha256": "742b1e3a43d282798d776dba76cded924ac4564fb484ec2f3bec6abf1adeeaa7",
+  "cplex_version": "22.1.1",
+  "cpp_test_count_per_build": 12,
+  "gurobi_executable": "build_round29/with_gurobi/ExactEBRP.exe",
+  "gurobi_executable_sha256": "4fec790ec518b3b52c2a2d498095eba20f839c688e4644be0955a18c421c59c2",
+  "gurobi_version": "13.0.2",
+  "passed": true,
+  "python_test_script_count": 10,
+  "records": [
+    {
+      "command": [
+        "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "-S",
+        "E:\\codes\\ExactEBRP",
+        "-B",
+        "E:\\codes\\ExactEBRP\\build_round29\\cplex_only",
+        "-G",
+        "MinGW Makefiles",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe",
+        "-DCMAKE_MAKE_PROGRAM=D:/msys64/ucrt64/bin/mingw32-make.exe",
+        "-DEXACT_EBRP_ENABLE_GUROBI=OFF"
+      ],
+      "command_text": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe\" -S E:\\codes\\ExactEBRP -B E:\\codes\\ExactEBRP\\build_round29\\cplex_only -G \"MinGW Makefiles\" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe -DCMAKE_MAKE_PROGRAM=D:/msys64/ucrt64/bin/mingw32-make.exe -DEXACT_EBRP_ENABLE_GUROBI=OFF",
+      "name": "stage0_configure_cplex",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_gurobi_performance_recovery_round29/stage0_configure_cplex.stderr.log",
+      "stdout_path": "results/gf_gurobi_performance_recovery_round29/stage0_configure_cplex.stdout.log",
+      "wall_seconds": 1.2030000002123415
+    },
+    {
+      "command": [
+        "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "--build",
+        "E:\\codes\\ExactEBRP\\build_round29\\cplex_only",
+        "-j",
+        "8"
+      ],
+      "command_text": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe\" --build E:\\codes\\ExactEBRP\\build_round29\\cplex_only -j 8",
+      "name": "stage0_build_cplex",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_gurobi_performance_recovery_round29/stage0_build_cplex.stderr.log",
+      "stdout_path": "results/gf_gurobi_performance_recovery_round29/stage0_build_cplex.stdout.log",
+      "wall_seconds": 255.34400000004098
+    },
+    {
+      "command": [
+        "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+        "--test-dir",
+        "E:\\codes\\ExactEBRP\\build_round29\\cplex_only",
+        "--output-on-failure"
+      ],
+      "command_text": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe\" --test-dir E:\\codes\\ExactEBRP\\build_round29\\cplex_only --output-on-failure",
+      "name": "stage0_ctest_cplex",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_gurobi_performance_recovery_round29/stage0_ctest_cplex.stderr.log",
+      "stdout_path": "results/gf_gurobi_performance_recovery_round29/stage0_ctest_cplex.stdout.log",
+      "wall_seconds": 0.7340000001713634
+    },
+    {
+      "command": [
+        "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "-S",
+        "E:\\codes\\ExactEBRP",
+        "-B",
+        "E:\\codes\\ExactEBRP\\build_round29\\with_gurobi",
+        "-G",
+        "MinGW Makefiles",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe",
+        "-DCMAKE_MAKE_PROGRAM=D:/msys64/ucrt64/bin/mingw32-make.exe",
+        "-DEXACT_EBRP_ENABLE_GUROBI=ON",
+        "-DGUROBI_ROOT=D:/gurobi1302/win64"
+      ],
+      "command_text": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe\" -S E:\\codes\\ExactEBRP -B E:\\codes\\ExactEBRP\\build_round29\\with_gurobi -G \"MinGW Makefiles\" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe -DCMAKE_MAKE_PROGRAM=D:/msys64/ucrt64/bin/mingw32-make.exe -DEXACT_EBRP_ENABLE_GUROBI=ON -DGUROBI_ROOT=D:/gurobi1302/win64",
+      "name": "stage0_configure_gurobi",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_gurobi_performance_recovery_round29/stage0_configure_gurobi.stderr.log",
+      "stdout_path": "results/gf_gurobi_performance_recovery_round29/stage0_configure_gurobi.stdout.log",
+      "wall_seconds": 1.1720000002533197
+    },
+    {
+      "command": [
+        "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "--build",
+        "E:\\codes\\ExactEBRP\\build_round29\\with_gurobi",
+        "-j",
+        "8"
+      ],
+      "command_text": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe\" --build E:\\codes\\ExactEBRP\\build_round29\\with_gurobi -j 8",
+      "name": "stage0_build_gurobi",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_gurobi_performance_recovery_round29/stage0_build_gurobi.stderr.log",
+      "stdout_path": "results/gf_gurobi_performance_recovery_round29/stage0_build_gurobi.stdout.log",
+      "wall_seconds": 255.59299999987707
+    },
+    {
+      "command": [
+        "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+        "--test-dir",
+        "E:\\codes\\ExactEBRP\\build_round29\\with_gurobi",
+        "--output-on-failure"
+      ],
+      "command_text": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe\" --test-dir E:\\codes\\ExactEBRP\\build_round29\\with_gurobi --output-on-failure",
+      "name": "stage0_ctest_gurobi",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_gurobi_performance_recovery_round29/stage0_ctest_gurobi.stderr.log",
+      "stdout_path": "results/gf_gurobi_performance_recovery_round29/stage0_ctest_gurobi.stdout.log",
+      "wall_seconds": 0.7349999998696148
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP\\tests\\round20_regression_tests.py"
+      ],
+      "command_text": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round20_regression_tests.py",
+      "name": "stage0_python_round20_regression_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round20_regression_tests.stderr.log",
+      "stdout_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round20_regression_tests.stdout.log",
+      "wall_seconds": 0.32800000021234155
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP\\tests\\round22_runner_integrity_tests.py"
+      ],
+      "command_text": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round22_runner_integrity_tests.py",
+      "name": "stage0_python_round22_runner_integrity_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round22_runner_integrity_tests.stderr.log",
+      "stdout_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round22_runner_integrity_tests.stdout.log",
+      "wall_seconds": 0.10899999970570207
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP\\tests\\round23_final_evidence_tests.py"
+      ],
+      "command_text": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round23_final_evidence_tests.py",
+      "name": "stage0_python_round23_final_evidence_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round23_final_evidence_tests.stderr.log",
+      "stdout_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round23_final_evidence_tests.stdout.log",
+      "wall_seconds": 0.5780000002123415
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP\\tests\\round23_moderate4301_forensic_tests.py"
+      ],
+      "command_text": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round23_moderate4301_forensic_tests.py",
+      "name": "stage0_python_round23_moderate4301_forensic_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round23_moderate4301_forensic_tests.stderr.log",
+      "stdout_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round23_moderate4301_forensic_tests.stdout.log",
+      "wall_seconds": 0.5160000002942979
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP\\tests\\round23_runner_integrity_tests.py"
+      ],
+      "command_text": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round23_runner_integrity_tests.py",
+      "name": "stage0_python_round23_runner_integrity_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round23_runner_integrity_tests.stderr.log",
+      "stdout_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round23_runner_integrity_tests.stdout.log",
+      "wall_seconds": 0.04699999978765845
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP\\tests\\round25_protocol_tests.py"
+      ],
+      "command_text": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round25_protocol_tests.py",
+      "name": "stage0_python_round25_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round25_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round25_protocol_tests.stdout.log",
+      "wall_seconds": 0.17199999978765845
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP\\tests\\round26_protocol_tests.py"
+      ],
+      "command_text": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round26_protocol_tests.py",
+      "name": "stage0_python_round26_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round26_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round26_protocol_tests.stdout.log",
+      "wall_seconds": 0.0940000000409782
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP\\tests\\round27_protocol_tests.py"
+      ],
+      "command_text": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round27_protocol_tests.py",
+      "name": "stage0_python_round27_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round27_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round27_protocol_tests.stdout.log",
+      "wall_seconds": 0.125
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP\\tests\\round28_protocol_tests.py"
+      ],
+      "command_text": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round28_protocol_tests.py",
+      "name": "stage0_python_round28_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round28_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round28_protocol_tests.stdout.log",
+      "wall_seconds": 0.04700000025331974
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP\\tests\\round29_protocol_tests.py"
+      ],
+      "command_text": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round29_protocol_tests.py",
+      "name": "stage0_python_round29_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round29_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_gurobi_performance_recovery_round29/stage0_python_round29_protocol_tests.stdout.log",
+      "wall_seconds": 0.13999999966472387
+    }
+  ],
+  "schema": "round29-build-tests-v1",
+  "source_commit": "4e2f09acb3996923f01484989d8f7840906651e6"
+}

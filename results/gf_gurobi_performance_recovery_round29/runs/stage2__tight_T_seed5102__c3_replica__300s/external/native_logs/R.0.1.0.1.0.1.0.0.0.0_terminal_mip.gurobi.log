@@ -1,0 +1,65 @@
+
+Gurobi 13.0.2 (win64) logging started Thu Jul 23 17:16:23 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_gurobi_performance_recovery_round29\runs\stage2__tight_T_seed5102__c3_replica__300s\external\native_logs\R.0.1.0.1.0.1.0.0.0.0_terminal_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  200.312369
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11916 rows, 3378 columns and 67376 nonzeros (Min)
+Model fingerprint: 0xab9b2d4b
+Model has 21 linear objective coefficients
+Variable types: 1686 continuous, 1692 integer (1492 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [1e-01, 4e+02]
+  RHS range        [8e-02, 5e+04]
+
+Presolve removed 1277 rows and 74 columns
+Presolve time: 0.19s
+Presolved: 10639 rows, 3304 columns, 72840 nonzeros
+Variable types: 1640 continuous, 1664 integer (1479 binary)
+
+Root relaxation: objective 2.298422e-01, 3391 iterations, 0.17 seconds (0.50 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.22984    0  180          -    0.22984      -     -    0s
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Cutting planes:
+  Learned: 5
+  Gomory: 7
+  Cover: 24
+  Implied bound: 157
+  Clique: 13
+  MIR: 263
+  StrongCG: 14
+  Flow cover: 70
+  GUB cover: 2
+  Zero half: 9
+  Network: 18
+  RLT: 4
+  Relax-and-lift: 36
+  BQP: 9
+  PSD: 1
+
+Explored 1 nodes (4091 simplex iterations) in 0.86 seconds (1.67 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+
+User-callback calls 906, time in user-callback 0.00 sec

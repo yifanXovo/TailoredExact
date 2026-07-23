@@ -1,0 +1,6 @@
+parent_id,parent_lp_bound,left_id,left_lp_bound,left_infeasible,right_id,right_lp_bound,right_infeasible,post_split_bound,tolerance,decision
+L0,0.0032094,L0.0,0.00326366,0,L0.1,0.00488933,0,0.00326366,1e-07,"strict_child_lp_bound_improvement"
+L0.0,0.00326366,L0.0.0,0.00347235,0,L0.0.1,0.00406853,0,0.00347235,1e-07,"strict_child_lp_bound_improvement"
+L0.0.0,0.00347235,L0.0.0.0,0,1,L0.0.0.1,0.00378615,0,0.00378615,1e-07,"child_lp_infeasible"
+L0.0.0.1,0.00378615,L0.0.0.1.0,0.00390203,0,L0.0.0.1.1,0.00394404,0,0.00390203,1e-07,"strict_child_lp_bound_improvement"
+L0.0.0.1.0,0.00390203,L0.0.0.1.0.0,0.00396061,0,L0.0.0.1.0.1,0.00398102,0,0.00396061,1e-07,"strict_child_lp_bound_improvement"

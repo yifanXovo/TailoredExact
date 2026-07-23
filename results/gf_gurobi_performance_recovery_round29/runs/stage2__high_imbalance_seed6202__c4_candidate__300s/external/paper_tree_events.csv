@@ -1,0 +1,6 @@
+telemetry_seconds,event,leaf_id,gamma_L,gamma_U,status,global_lb,verified_ub,detail
+5.86383,lp_complete,L0,0,0.245,infeasible,0,9.82066,"complete_lp_relaxation"
+15.4253,lp_complete,L1,0.245,0.49,infeasible,0.245,9.82066,"complete_lp_relaxation"
+18.6279,lp_complete,L2,0.49,0.735,optimal,0.735,9.82066,"complete_lp_relaxation"
+27.1876,atomic_split,L2,0.49,0.735,replaced,0.735,9.82066,"strict_child_lp_bound_improvement"
+30.0145,lp_complete,L3,0.735,0.98,optimal,7.46156,9.82066,"complete_lp_relaxation"

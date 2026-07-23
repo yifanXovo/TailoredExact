@@ -1,0 +1,79 @@
+{
+  "audits": {
+    "basis_audit_rows": 27,
+    "c4_correctness_passed": 17,
+    "c4_correctness_rows": 17,
+    "false_certificates": 0,
+    "incremental_reuse_passed": 27,
+    "incremental_reuse_rows": 27,
+    "stage0_build_test_rows": 16,
+    "stage0_deadline_rows": 5,
+    "stage0_exactness_checks": 132,
+    "stage0_sentinel_rows": 4,
+    "stage0_transition_rows": 2
+  },
+  "basis_reuse_claimed": false,
+  "c4_changes_mathematical_algorithm": true,
+  "c4_incremental_scope": "same-leaf model object only",
+  "c4_totals": {
+    "basis_accepted_count": 0,
+    "basis_rejected_count": 0,
+    "basis_submitted_count": 0,
+    "declined_split_count": 15,
+    "final_leaf_count": 578,
+    "integer_domain_restore_count": 1104,
+    "lp_optimize_count": 1104,
+    "lp_pruned_leaf_count": 0,
+    "lp_work": 1429.5402091365786,
+    "mip_start_accepted_count": 0,
+    "mip_start_rejected_count": 0,
+    "mip_start_submitted_count": 0,
+    "open_leaf_count": 191,
+    "optimize_count": 1459,
+    "peak_memory_gb": 4.334264731,
+    "presolve_count": 1459,
+    "root_relaxation_count": 355,
+    "same_leaf_model_reuse_count": 355,
+    "split_count": 510,
+    "terminal_mip_optimize_count": 355,
+    "terminal_mip_work": 7495.0618627855765,
+    "work": 8924.602071922154
+  },
+  "classification": "exact_but_mixed",
+  "classification_facts": {
+    "c4_correctness_all": true,
+    "c4_vs_c3_losses": 4,
+    "c4_vs_c3_wins": 13,
+    "instances_with_reduced_reads_or_terminal_mips": 11,
+    "v12_material_improvement": false,
+    "v20_c4_vs_p_losses": 4,
+    "v20_c4_vs_p_wins": 8,
+    "v50_systematic_failure": false
+  },
+  "full_long_run_validation_recommended": "not yet; resolve mixed short-run mechanisms first",
+  "native_tree_reuse_claimed": false,
+  "package": {
+    "file_count": 14911,
+    "largest_bytes": 2969941,
+    "largest_path": "results/gf_gurobi_performance_recovery_round29/compression_manifest.csv",
+    "total_bytes": 1691235630
+  },
+  "process": {
+    "completed": 51,
+    "emergency_timeouts": 0,
+    "excluded": 0,
+    "failed": 0,
+    "stage1_rows": 12,
+    "stage2_rows": 51,
+    "stage3_rows": 20,
+    "stage4_repeat_pairs": 5,
+    "time_limited": 48
+  },
+  "schema": "round29-final-audit-v1",
+  "stable_mainline": "corrected CPLEX S0/F0",
+  "terminal_mip_events": {
+    "count": 1425,
+    "global_lb_improvements": 702,
+    "incumbent_improvements": 0
+  }
+}
