@@ -1,0 +1,64 @@
+
+Gurobi 13.0.2 (win64) logging started Thu Jul 23 06:12:18 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_cplex_equivalent_gurobi_replica_round28\runs\stage2__tight_T_seed4101__c3_replica__300s\external\native_logs\R.0.1.0.1.0.1.0.0.1.0_terminal_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1.2305826999999567e+00
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11897 rows, 3372 columns and 67355 nonzeros (Min)
+Model fingerprint: 0xf6b0ccbd
+Model has 21 linear objective coefficients
+Variable types: 1683 continuous, 1689 integer (1489 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [2e-01, 9e+02]
+  RHS range        [2e-01, 5e+04]
+
+Presolve removed 1630 rows and 94 columns
+Presolve time: 0.22s
+Presolved: 10267 rows, 3278 columns, 67804 nonzeros
+Variable types: 1629 continuous, 1649 integer (1467 binary)
+
+Root relaxation: objective 4.228030e-01, 2926 iterations, 0.13 seconds (0.34 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.42280    0  122          -    0.42280      -     -    0s
+     0     0    0.43944    0  153          -    0.43944      -     -    0s
+     0     0    0.46816    0  266          -    0.46816      -     -    1s
+     0     0          -    0               -    0.46816      -     -    1s
+
+Cutting planes:
+  Learned: 7
+  Gomory: 3
+  Cover: 1
+  Implied bound: 42
+  Clique: 4
+  MIR: 13
+  Flow cover: 20
+  GUB cover: 2
+  Network: 4
+  RLT: 10
+  Relax-and-lift: 33
+  BQP: 1
+
+Explored 1 nodes (7351 simplex iterations) in 1.23 seconds (2.74 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound 4.681620656816e-01, gap -
+
+User-callback calls 997, time in user-callback 0.00 sec

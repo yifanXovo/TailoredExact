@@ -1,0 +1,39 @@
+
+Gurobi 13.0.2 (win64) logging started Thu Jul 23 05:40:36 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_cplex_equivalent_gurobi_replica_round28\runs\stage2__tight_T_seed3101__c3_replica__300s\external\native_logs\R.0.0.0.1.1.1.1.1.0.0_lp.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  138.4568534
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11939 rows, 3384 columns and 67420 nonzeros (Min)
+Model fingerprint: 0xf914fe09
+Model has 21 linear objective coefficients
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [1e-02, 3e+02]
+  RHS range        [1e-02, 5e+04]
+
+Presolve removed 1108 rows and 105 columns
+Presolve time: 0.03s
+Presolved: 10831 rows, 3467 columns, 62354 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.2987636e-02   3.431429e+02   0.000000e+00      0s
+
+Extra simplex iterations after uncrush: 4
+    3126    1.4109465e-02   0.000000e+00   0.000000e+00      0s
+
+Solved in 3126 iterations and 0.23 seconds (0.71 work units)
+Optimal objective  1.410946539e-02
+
+User-callback calls 3275, time in user-callback 0.00 sec

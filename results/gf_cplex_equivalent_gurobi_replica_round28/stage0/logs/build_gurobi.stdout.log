@@ -1,0 +1,77 @@
+[  1%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/Parser.cpp.obj
+[  3%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/Evaluator.cpp.obj
+[  4%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/Result.cpp.obj
+[  6%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/StrictCertificate.cpp.obj
+[  7%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/ModelCorrectness.cpp.obj
+[  9%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/FileSha256.cpp.obj
+[ 11%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/DenseProgress.cpp.obj
+[ 12%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/GurobiCertificate.cpp.obj
+[ 14%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/GurobiProgress.cpp.obj
+[ 15%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/MipStartMapping.cpp.obj
+[ 17%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/ExternalGiniTree.cpp.obj
+[ 19%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/PaperExternalGiniTree.cpp.obj
+[ 20%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/ReplicaExternalGiniTree.cpp.obj
+[ 22%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/ConnectivityFlow.cpp.obj
+[ 23%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/Bounds.cpp.obj
+[ 25%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/ColumnPool.cpp.obj
+[ 26%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/TailoredExact.cpp.obj
+[ 28%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/Pricing.cpp.obj
+[ 30%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/Cuts.cpp.obj
+[ 31%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/Branching.cpp.obj
+[ 33%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/Master.cpp.obj
+[ 34%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/ColumnGeneration.cpp.obj
+[ 36%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/CplexBaseline.cpp.obj
+[ 38%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/TailoredBC.cpp.obj
+[ 39%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/TailoredBCCuts.cpp.obj
+[ 41%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/TailoredBCCallbacks.cpp.obj
+[ 42%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/TailoredBCCplexApi.cpp.obj
+[ 44%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/ControllingLeafScheduler.cpp.obj
+[ 46%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/GiniBranching.cpp.obj
+[ 47%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/GiniFrontierGeometry.cpp.obj
+[ 49%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/IntervalRowFactory.cpp.obj
+[ 50%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/DispersionChildBound.cpp.obj
+[ 52%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/hga_tgbc/HgaTgbcGreedy.cpp.obj
+[ 53%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/HgaTgbcRunner.cpp.obj
+[ 55%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/Logger.cpp.obj
+[ 57%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/GurobiBaseline.cpp.obj
+[ 58%] Linking CXX static library libexact_ebrp_core.a
+[ 58%] Built target exact_ebrp_core
+[ 60%] Building CXX object CMakeFiles/ExactEBRPCompare.dir/src/compare_main.cpp.obj
+[ 61%] Building CXX object CMakeFiles/ControllingLeafSchedulerTests.dir/tests/controlling_leaf_scheduler_tests.cpp.obj
+[ 63%] Building CXX object CMakeFiles/ExactEBRP.dir/src/main.cpp.obj
+[ 65%] Building CXX object CMakeFiles/GlobalGiniTreeTests.dir/tests/global_gini_tree_tests.cpp.obj
+[ 66%] Linking CXX executable ControllingLeafSchedulerTests.exe
+[ 66%] Built target ControllingLeafSchedulerTests
+[ 68%] Building CXX object CMakeFiles/StrictCertificateTests.dir/tests/strict_certificate_tests.cpp.obj
+[ 69%] Linking CXX executable StrictCertificateTests.exe
+[ 69%] Built target StrictCertificateTests
+[ 71%] Building CXX object CMakeFiles/ConnectivityFlowTests.dir/tests/connectivity_flow_tests.cpp.obj
+[ 73%] Linking CXX executable GlobalGiniTreeTests.exe
+[ 73%] Built target GlobalGiniTreeTests
+[ 74%] Building CXX object CMakeFiles/StrictSerializationTests.dir/tests/strict_serialization_tests.cpp.obj
+[ 76%] Linking CXX executable ConnectivityFlowTests.exe
+[ 76%] Built target ConnectivityFlowTests
+[ 77%] Building CXX object CMakeFiles/ModelCorrectnessTests.dir/tests/model_correctness_tests.cpp.obj
+[ 79%] Linking CXX executable ModelCorrectnessTests.exe
+[ 79%] Built target ModelCorrectnessTests
+[ 80%] Building CXX object CMakeFiles/DenseProgressTests.dir/tests/dense_progress_tests.cpp.obj
+[ 82%] Linking CXX executable StrictSerializationTests.exe
+[ 82%] Built target StrictSerializationTests
+[ 84%] Building CXX object CMakeFiles/DispersionChildBoundTests.dir/tests/dispersion_child_bound_tests.cpp.obj
+[ 85%] Linking CXX executable DenseProgressTests.exe
+[ 85%] Built target DenseProgressTests
+[ 87%] Building CXX object CMakeFiles/Round24BackendTests.dir/tests/round24_backend_tests.cpp.obj
+[ 88%] Linking CXX executable DispersionChildBoundTests.exe
+[ 88%] Built target DispersionChildBoundTests
+[ 90%] Building CXX object CMakeFiles/Round27PaperSchedulingTests.dir/tests/round27_paper_scheduling_tests.cpp.obj
+[ 92%] Linking CXX executable Round24BackendTests.exe
+[ 92%] Built target Round24BackendTests
+[ 93%] Building CXX object CMakeFiles/Round28ReplicaTests.dir/tests/round28_replica_tests.cpp.obj
+[ 95%] Linking CXX executable Round27PaperSchedulingTests.exe
+[ 95%] Built target Round27PaperSchedulingTests
+[ 96%] Linking CXX executable Round28ReplicaTests.exe
+[ 96%] Built target Round28ReplicaTests
+[ 98%] Linking CXX executable ExactEBRP.exe
+[ 98%] Built target ExactEBRP
+[100%] Linking CXX executable ExactEBRPCompare.exe
+[100%] Built target ExactEBRPCompare

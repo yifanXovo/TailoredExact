@@ -1,0 +1,38 @@
+Warning, line 146: Name 'W_SP' does not exist.
+Warning, line 186: Name 'r_max' does not exist.
+Warning, line 187: Name 'r_min' does not exist.
+Version identifier: 22.1.1.0 | 2022-11-27 | 9160aff4d
+CPXPARAM_Preprocessing_Presolve                  0
+CPXPARAM_Preprocessing_Reduce                    0
+CPXPARAM_Preprocessing_Linear                    0
+CPXPARAM_Threads                                 1
+CPXPARAM_MIP_Strategy_Search                     1
+CPXPARAM_TimeLimit                               293.92448080000003
+CPXPARAM_MIP_Tolerances_AbsMIPGap                0
+CPXPARAM_MIP_Tolerances_MIPGap                   0
+Generic callback                                 0xf8
+Lazy constraint(s) or lazy constraint/branch callback is present.
+    Disabling presolve reductions that prevent crushing forms (CPX_PARAM_PREREFORM).
+Reduced MIP has 139 rows, 50 columns, and 336 nonzeros.
+Reduced MIP has 24 binaries, 2 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.01 ticks)
+Found incumbent of value 0.300000 after 0.00 sec. (0.19 ticks)
+Clique table members: 34.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: traditional branch-and-cut.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.00 sec. (0.08 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap         Variable B NodeID Parent  Depth
+
+*     0+    0                            0.3000        0.0000           100.00%
+*     0     0      integral     0        0.0000        0.0000        2    0.00%                        0             0
+Elapsed time = 0.00 sec. (0.36 ticks, tree = 0.00 MB, solutions = 2)
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (0.36 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (0.36 ticks)

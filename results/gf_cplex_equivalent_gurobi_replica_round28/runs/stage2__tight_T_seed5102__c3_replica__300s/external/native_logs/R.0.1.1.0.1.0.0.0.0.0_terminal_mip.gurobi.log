@@ -1,0 +1,75 @@
+
+Gurobi 13.0.2 (win64) logging started Thu Jul 23 07:01:08 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_cplex_equivalent_gurobi_replica_round28\runs\stage2__tight_T_seed5102__c3_replica__300s\external\native_logs\R.0.1.1.0.1.0.0.0.0.0_terminal_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1.1992471299999977e+01
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11916 rows, 3378 columns and 67376 nonzeros (Min)
+Model fingerprint: 0x452a24ca
+Model has 21 linear objective coefficients
+Variable types: 1686 continuous, 1692 integer (1492 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [1e-01, 4e+02]
+  RHS range        [8e-02, 5e+04]
+
+Presolve removed 1293 rows and 80 columns
+Presolve time: 0.18s
+Presolved: 10623 rows, 3298 columns, 90535 nonzeros
+Variable types: 1640 continuous, 1658 integer (1476 binary)
+
+Root relaxation: objective 2.573555e-01, 3028 iterations, 0.13 seconds (0.36 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.25736    0  190          -    0.25736      -     -    0s
+     0     0    0.30215    0  244          -    0.30215      -     -    0s
+     0     0    0.30369    0  213          -    0.30369      -     -    1s
+     0     0    0.31546    0  232          -    0.31546      -     -    1s
+     0     0    0.32158    0  215          -    0.32158      -     -    1s
+     0     0    0.33850    0  262          -    0.33850      -     -    2s
+     0     0    0.34080    0  265          -    0.34080      -     -    2s
+     0     0    0.35276    0  242          -    0.35276      -     -    3s
+     0     0    0.35335    0  280          -    0.35335      -     -    3s
+     0     0    0.35672    0  333          -    0.35672      -     -    3s
+     0     0    0.35759    0  345          -    0.35759      -     -    3s
+     0     0    0.36058    0  336          -    0.36058      -     -    4s
+     0     0    0.36143    0  346          -    0.36143      -     -    4s
+     0     0 infeasible    0               - infeasible      -     -    5s
+
+Cutting planes:
+  Learned: 17
+  Gomory: 1
+  Cover: 28
+  Implied bound: 110
+  Clique: 23
+  MIR: 304
+  Flow cover: 163
+  GUB cover: 3
+  Zero half: 2
+  Network: 21
+  RLT: 6
+  Relax-and-lift: 67
+  BQP: 1
+
+Explored 1 nodes (17847 simplex iterations) in 5.63 seconds (8.94 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+
+User-callback calls 2429, time in user-callback 0.00 sec

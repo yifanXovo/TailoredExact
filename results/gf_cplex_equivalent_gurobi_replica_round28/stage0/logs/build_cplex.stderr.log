@@ -1,0 +1,256 @@
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = cpxenv* (*)(int*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:246:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'ebrp::{anonymous}::cpxenv* (*)(int*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(cpxenv**)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:247:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(ebrp::{anonymous}::cpxenv**)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = cpxlp* (*)(const cpxenv*, int*, const char*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:248:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'ebrp::{anonymous}::cpxlp* (*)(const ebrp::{anonymous}::cpxenv*, int*, const char*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(const cpxenv*, cpxlp**)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:249:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(const ebrp::{anonymous}::cpxenv*, ebrp::{anonymous}::cpxlp**)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(const cpxenv*, cpxlp*, const char*, const char*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:250:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(const ebrp::{anonymous}::cpxenv*, ebrp::{anonymous}::cpxlp*, const char*, const char*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(cpxenv*, int, int)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:251:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(ebrp::{anonymous}::cpxenv*, int, int)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(cpxenv*, int, double)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:252:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(ebrp::{anonymous}::cpxenv*, int, double)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(const cpxenv*, int, int*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:253:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(const ebrp::{anonymous}::cpxenv*, int, int*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(const cpxenv*, int, double*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:254:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(const ebrp::{anonymous}::cpxenv*, int, double*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(cpxenv*, const char*, const char*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:255:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(ebrp::{anonymous}::cpxenv*, const char*, const char*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(cpxenv*, cpxlp*, long long int, int (*)(cpxcallbackcontext*, long long int, void*), void*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:256:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(ebrp::{anonymous}::cpxenv*, ebrp::{anonymous}::cpxlp*, long long int, int (*)(ebrp::{anonymous}::cpxcallbackcontext*, long long int, void*), void*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(const cpxenv*, cpxlp*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:257:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(const ebrp::{anonymous}::cpxenv*, ebrp::{anonymous}::cpxlp*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(const cpxenv*, const cpxlp*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:258:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(const ebrp::{anonymous}::cpxenv*, const ebrp::{anonymous}::cpxlp*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = char* (*)(const cpxenv*, int, char*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:259:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'char* (*)(const ebrp::{anonymous}::cpxenv*, int, char*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(const cpxenv*, const cpxlp*, double*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:260:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(const ebrp::{anonymous}::cpxenv*, const ebrp::{anonymous}::cpxlp*, double*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(const cpxenv*, const cpxlp*, int, int*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:267:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(const ebrp::{anonymous}::cpxenv*, const ebrp::{anonymous}::cpxlp*, int, int*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(const cpxenv*, cpxlp*, int, int, const int*, const int*, const double*, const int*, char**)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:268:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(const ebrp::{anonymous}::cpxenv*, ebrp::{anonymous}::cpxlp*, int, int, const int*, const int*, const double*, const int*, char**)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(const cpxenv*, const cpxlp*, double*, int, int)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:273:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(const ebrp::{anonymous}::cpxenv*, const ebrp::{anonymous}::cpxlp*, double*, int, int)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(const cpxenv*, const cpxlp*, char**, char*, int, int*, int, int)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:274:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(const ebrp::{anonymous}::cpxenv*, const ebrp::{anonymous}::cpxlp*, char**, char*, int, int*, int, int)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(const cpxenv*, const cpxlp*, char*, int, int)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:277:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(const ebrp::{anonymous}::cpxenv*, const ebrp::{anonymous}::cpxlp*, char*, int, int)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(cpxcallbackcontext*, int, int, const double*, const char*, const int*, const int*, const double*, const int*, const int*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:278:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(ebrp::{anonymous}::cpxcallbackcontext*, int, int, const double*, const char*, const int*, const int*, const double*, const int*, const int*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(cpxcallbackcontext*, int*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:279:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(ebrp::{anonymous}::cpxcallbackcontext*, int*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(cpxcallbackcontext*, double*, int, int, double*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:280:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(ebrp::{anonymous}::cpxcallbackcontext*, double*, int, int, double*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(cpxcallbackcontext*, int*, long long int)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:282:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(ebrp::{anonymous}::cpxcallbackcontext*, int*, long long int)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(cpxcallbackcontext*, int, double*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:283:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(ebrp::{anonymous}::cpxcallbackcontext*, int, double*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(cpxcallbackcontext*, int, long long int*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:284:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(ebrp::{anonymous}::cpxcallbackcontext*, int, long long int*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(cpxcallbackcontext*, double*, int, int)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:285:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(ebrp::{anonymous}::cpxcallbackcontext*, double*, int, int)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(cpxcallbackcontext*, int, int, const double*, const char*, const int*, const int*, const double*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:287:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(ebrp::{anonymous}::cpxcallbackcontext*, int, int, const double*, const char*, const int*, const int*, const double*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(cpxcallbackcontext*, int, const int*, const char*, const double*, int, int, const double*, const char*, const int*, const int*, const double*, double, int*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:288:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(ebrp::{anonymous}::cpxcallbackcontext*, int, const int*, const char*, const double*, int, int, const double*, const char*, const int*, const int*, const double*, double, int*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = void (*)(cpxcallbackcontext*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:289:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'void (*)(ebrp::{anonymous}::cpxcallbackcontext*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(const cpxenv*, cpxlp*, int, const int*, const int*, const int*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:290:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(const ebrp::{anonymous}::cpxenv*, ebrp::{anonymous}::cpxlp*, int, const int*, const int*, const int*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp: In instantiation of 'bool ebrp::{anonymous}::loadSymbol(Api&, Fn&, const char*) [with Fn = int (*)(cpxenv*, volatile int*)]':
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:291:5:   required from here
+  243 |         bool ok = loadSymbol(api, api.member, symbol); \
+      |                   ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:226:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(ebrp::{anonymous}::cpxenv*, volatile int*)' [-Wcast-function-type]
+  226 |     target = reinterpret_cast<Fn>(proc);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\TailoredBCCplexApi.cpp:4080:6: warning: 'bool ebrp::{anonymous}::canonicalStateSatisfiedAtPoint(const GlobalGiniCallbackState&, const ebrp::CanonicalInheritanceState&, const std::vector<double>&, std::string&)' defined but not used [-Wunused-function]
+ 4080 | bool canonicalStateSatisfiedAtPoint(
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from E:/codes/ExactEBRP/include/hga_tgbc/GreedyMethods.h:3,
+                 from E:\codes\ExactEBRP\src\hga_tgbc\HgaTgbcGreedy.cpp:15:
+E:/codes/ExactEBRP/include/hga_tgbc/AVLCalculator.h: In member function 'void AVLCalculator::update(int, int, double, double)':
+E:/codes/ExactEBRP/include/hga_tgbc/AVLCalculator.h:34:32: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<double>::size_type' {aka 'long long unsigned int'} [-Wsign-compare]
+   34 |         if (x_idx < 0 || x_idx >= current_a.size() || y_idx < 0 || y_idx >= current_a.size()) {
+      |                          ~~~~~~^~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/include/hga_tgbc/AVLCalculator.h:34:74: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<double>::size_type' {aka 'long long unsigned int'} [-Wsign-compare]
+   34 |         if (x_idx < 0 || x_idx >= current_a.size() || y_idx < 0 || y_idx >= current_a.size()) {
+      |                                                                    ~~~~~~^~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\hga_tgbc\HgaTgbcGreedy.cpp: In member function 'bool {anonymous}::GreedyEngine::tryResidualPairUnitPolish()':
+E:\codes\ExactEBRP\src\hga_tgbc\HgaTgbcGreedy.cpp:1920:30: warning: unused variable 'PER_SINK_KEEP' [-Wunused-variable]
+ 1920 |         static constexpr int PER_SINK_KEEP = 1;
+      |                              ^~~~~~~~~~~~~
+E:\codes\ExactEBRP\src\hga_tgbc\HgaTgbcGreedy.cpp:1925:14: warning: variable 'better' set but not used [-Wunused-but-set-variable]
+ 1925 |         auto better = [](const Move& a, const Move& b) { return a.objective < b.objective; };
+      |              ^~~~~~
+E:\codes\ExactEBRP\src\hga_tgbc\HgaTgbcGreedy.cpp: In function 'SolutionResult_ORO nGreedyLU_RA(int, int, int, double, const std::vector<std::vector<int> >&, const std::vector<int>&, const std::vector<int>&, const std::vector<int>&, const std::vector<int>&, const std::vector<std::vector<double> >&, const int&, const double&, const std::vector<double>&, const std::vector<double>&, double, double)':
+E:\codes\ExactEBRP\src\hga_tgbc\HgaTgbcGreedy.cpp:2191:37: warning: unused parameter 'IterNum' [-Wunused-parameter]
+ 2191 | SolutionResult_ORO nGreedyLU_RA(int IterNum, int V, int M, double total_time_limit, const vector<vector<int>>& routes,
+      |                                 ~~~~^~~~~~~
+In file included from E:/codes/ExactEBRP/include/hga_tgbc/GreedyMethods.h:3,
+                 from E:\codes\ExactEBRP\src\HgaTgbcRunner.cpp:4:
+E:/codes/ExactEBRP/include/hga_tgbc/AVLCalculator.h: In member function 'void AVLCalculator::update(int, int, double, double)':
+E:/codes/ExactEBRP/include/hga_tgbc/AVLCalculator.h:34:32: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<double>::size_type' {aka 'long long unsigned int'} [-Wsign-compare]
+   34 |         if (x_idx < 0 || x_idx >= current_a.size() || y_idx < 0 || y_idx >= current_a.size()) {
+      |                          ~~~~~~^~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/include/hga_tgbc/AVLCalculator.h:34:74: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<double>::size_type' {aka 'long long unsigned int'} [-Wsign-compare]
+   34 |         if (x_idx < 0 || x_idx >= current_a.size() || y_idx < 0 || y_idx >= current_a.size()) {
+      |                                                                    ~~~~~~^~~~~~~~~~~~~~~~~~~
