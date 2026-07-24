@@ -1,0 +1,51 @@
+
+Gurobi 13.0.2 (win64) logging started Fri Jul 24 05:22:52 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_c0_mechanism_transfer_c5_round30\runs\stage0_exactness__toy__p_grb__30s\native.log"
+Set parameter Threads to value 1
+Set parameter Presolve to value -1
+Set parameter Seed to value 0
+Set parameter MIPGap to value 0
+Set parameter MIPGapAbs to value 0
+Set parameter TimeLimit to value 30
+Read LP format model from file E:\codes\ExactEBRP\results\gf_c0_mechanism_transfer_c5_round30\runs\stage0_exactness__toy__p_grb__30s\canonical.lp
+Reading time = 0.00 seconds
+obj: 77 rows, 44 columns, 217 nonzeros
+Set parameter TimeLimit to value 24.981784
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  24.981784
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 77 rows, 44 columns and 217 nonzeros (Min)
+Model fingerprint: 0x4dd528d1
+Model has 3 linear objective coefficients
+Variable types: 18 continuous, 26 integer (18 binary)
+Coefficient statistics:
+  Matrix range     [2e-01, 1e+02]
+  Objective range  [1e-01, 1e+00]
+  Bounds range     [1e+00, 1e+01]
+  RHS range        [1e+00, 4e+03]
+
+Presolve removed 29 rows and 18 columns
+Presolve time: 0.00s
+Presolved: 48 rows, 26 columns, 148 nonzeros
+Variable types: 7 continuous, 19 integer (16 binary)
+Found heuristic solution: objective 0.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 1: 0 
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0000%
+
+User-callback calls 629, time in user-callback 0.00 sec

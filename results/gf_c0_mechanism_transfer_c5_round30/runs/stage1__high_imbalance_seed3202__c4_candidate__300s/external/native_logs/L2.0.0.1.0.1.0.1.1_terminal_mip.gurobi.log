@@ -1,0 +1,89 @@
+
+Gurobi 13.0.2 (win64) logging started Fri Jul 24 06:12:54 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_c0_mechanism_transfer_c5_round30\runs\stage1__high_imbalance_seed3202__c4_candidate__300s\external\native_logs\L2.0.0.1.0.1.0.1.1_terminal_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  7.6118865999999912e+00
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11895 rows, 3372 columns and 67322 nonzeros (Min)
+Model fingerprint: 0xe57b5202
+Model has 21 linear objective coefficients
+Variable types: 1683 continuous, 1689 integer (1489 binary)
+Coefficient statistics:
+  Matrix range     [1e-02, 2e+04]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [5e-01, 2e+03]
+  RHS range        [5e-01, 5e+04]
+
+Presolve removed 2401 rows and 94 columns
+Presolve time: 0.19s
+Presolved: 9494 rows, 3278 columns, 58042 nonzeros
+Variable types: 1627 continuous, 1651 integer (1466 binary)
+
+Root relaxation: objective 1.612953e+00, 2977 iterations, 0.14 seconds (0.35 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    1.61295    0  161          -    1.61295      -     -    0s
+     0     0    1.65085    0  269          -    1.65085      -     -    0s
+     0     0    1.67741    0  333          -    1.67741      -     -    1s
+     0     0    1.67849    0  312          -    1.67849      -     -    1s
+     0     0    1.68822    0  318          -    1.68822      -     -    1s
+     0     0    1.69062    0  323          -    1.69062      -     -    2s
+     0     0    1.69952    0  345          -    1.69952      -     -    2s
+     0     0    1.70066    0  298          -    1.70066      -     -    2s
+     0     0    1.70800    0  345          -    1.70800      -     -    2s
+     0     0    1.70957    0  337          -    1.70957      -     -    3s
+     0     0    1.71293    0  303          -    1.71293      -     -    3s
+     0     0    1.71348    0  335          -    1.71348      -     -    3s
+     0     0    1.71533    0  341          -    1.71533      -     -    4s
+     0     0    1.71553    0  357          -    1.71553      -     -    4s
+     0     0    1.71601    0  374          -    1.71601      -     -    4s
+     0     0    1.71610    0  351          -    1.71610      -     -    4s
+     0     0    1.71634    0  345          -    1.71634      -     -    5s
+     0     0    1.71644    0  344          -    1.71644      -     -    5s
+     0     0    1.71716    0  354          -    1.71716      -     -    5s
+     0     0    1.71743    0  354          -    1.71743      -     -    5s
+     0     0    1.71788    0  356          -    1.71788      -     -    6s
+     0     0    1.71815    0  351          -    1.71815      -     -    6s
+     0     0    1.71832    0  372          -    1.71832      -     -    6s
+     0     0    1.71836    0  368          -    1.71836      -     -    6s
+     0     0    1.71842    0  363          -    1.71842      -     -    7s
+     0     0    1.71845    0  360          -    1.71845      -     -    7s
+     0     0    1.71858    0  376          -    1.71858      -     -    7s
+     0     0          -    0               -    1.71858      -     -    7s
+
+Cutting planes:
+  Learned: 13
+  Cover: 56
+  Implied bound: 106
+  Clique: 10
+  MIR: 143
+  StrongCG: 2
+  Flow cover: 86
+  GUB cover: 2
+  Zero half: 4
+  Network: 26
+  RLT: 7
+  Relax-and-lift: 42
+  BQP: 5
+
+Explored 1 nodes (31408 simplex iterations) in 7.61 seconds (14.64 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound 1.718578446713e+00, gap -
+
+User-callback calls 2312, time in user-callback 0.00 sec

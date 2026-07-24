@@ -1,0 +1,9 @@
+suite,instance,arm,trace_complete,trace_reason,valid_bound_observation_count,first_process_seconds,last_process_seconds,auc_eligible,no_interpolation,no_post_last_event_extension
+trace,moderate_seed4301,C0-DIAG,True,complete_observed_trace,28,19.3750028,35.1503427,True,True,True
+trace,moderate_seed4301,C3-REPLICA,True,compatible_existing_c3_trace,32,35.0891109,39.927586000000005,True,True,True
+trace,moderate_seed4301,C4-CANDIDATE,True,complete_observed_trace,108,19.2617939,40.0230934,True,True,True
+trace,moderate_seed4301,C5-CANDIDATE,True,complete_observed_trace,23,19.3348546,40.0193479,True,True,True
+exactness,toy,P-GRB,False,too_few_native_callback_bounds,1,0.02130762098083496,0.02130762098083496,False,True,True
+exactness,toy,C5-CANDIDATE,True,complete_observed_trace,0,0.0493159,0.0494079,True,True,True
+sentinel,moderate_seed4301,P-GRB,True,complete_native_callback_trace,813,0.1324045057220459,115.31740444850159,True,True,True
+sentinel,moderate_seed4301,C5-CANDIDATE,True,complete_observed_trace,31,19.7305479,115.0231393,True,True,True

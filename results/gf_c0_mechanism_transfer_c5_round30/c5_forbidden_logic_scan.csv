@@ -1,0 +1,14 @@
+rule,pattern,match_count,passed,scope,reason
+fixed_time_quantum,\b(?:time_limit_seconds|quantum)\b,0,True,c5_decision_and_frozen_command_where_applicable,no_forbidden_occurrence
+work_limit,\bWorkLimit\b,0,True,c5_decision_and_frozen_command_where_applicable,no_forbidden_occurrence
+arbitrary_node_limit,\bNodeLimit\b,0,True,c5_decision_and_frozen_command_where_applicable,no_forbidden_occurrence
+solution_limit,\bSolutionLimit\b,0,True,c5_decision_and_frozen_command_where_applicable,no_forbidden_occurrence
+attempt_count,\battempt(?:s|_number|_count)?\b,0,True,c5_decision_and_frozen_command_where_applicable,no_forbidden_occurrence
+retry_count,\bretr(?:y|ies)\b,0,True,c5_decision_and_frozen_command_where_applicable,no_forbidden_occurrence
+family_dispatch,\bfamily\b,0,True,c5_decision_and_frozen_command_where_applicable,no_forbidden_occurrence
+size_dispatch,\binstance\.(?:V|M)\b,0,True,c5_decision_and_frozen_command_where_applicable,no_forbidden_occurrence
+seed_dispatch,\bseed\b,0,True,c5_decision_and_frozen_command_where_applicable,no_forbidden_occurrence
+instance_name_or_path,\binstance\.(?:name|path)\b,0,True,c5_decision_and_frozen_command_where_applicable,no_forbidden_occurrence
+historical_optimum,\b(?:known|historical)_optimum\b,0,True,c5_decision_and_frozen_command_where_applicable,no_forbidden_occurrence
+plain_gurobi_fallback,\bplain(?:_gurobi|-GRB)?\b,0,True,c5_decision_and_frozen_command_where_applicable,no_forbidden_occurrence
+portfolio_dispatch,\bportfolio\b,0,True,c5_decision_and_frozen_command_where_applicable,no_forbidden_occurrence
