@@ -7,6 +7,7 @@
 #include "Evaluator.hpp"
 #include "FileSha256.hpp"
 #include "GiniFrontierGeometry.hpp"
+#include "ProcessPhaseLedger.hpp"
 #include "StrictCertificate.hpp"
 
 #include <algorithm>
@@ -609,6 +610,7 @@ SolveResult solveExternalGiniTree(const Instance& instance,
     const auto optimize_path = artifact_dir / "optimize_call_ledger.csv";
     const auto warm_path = artifact_dir / "gurobi_warm_start_audit.csv";
     const auto enhanced_path = artifact_dir / "enhanced_attempt_trace.csv";
+    const auto global_bound_path = artifact_dir / "global_bound_trace.csv";
     result.external_gini_tree_event_trace_path = event_path.string();
     result.external_gini_tree_leaf_ledger_path = leaf_path.string();
     result.external_gini_tree_lifecycle_path = lifecycle_path.string();
@@ -616,13 +618,23 @@ SolveResult solveExternalGiniTree(const Instance& instance,
     result.external_gini_tree_warm_start_audit_path = warm_path.string();
     result.external_gini_tree_enhanced_attempt_trace_path =
         enhanced_path.string();
+    result.external_gini_tree_global_bound_trace_path =
+        global_bound_path.string();
     std::ofstream events(event_path), lifecycle(lifecycle_path),
-        optimize(optimize_path), warm(warm_path), enhanced(enhanced_path);
+        optimize(optimize_path), warm(warm_path), enhanced(enhanced_path),
+        global_trace(global_bound_path);
     events << "elapsed_seconds,event,leaf_id,gamma_L,gamma_U,attempt,native_status,native_bound,native_bound_available,incumbent,incumbent_available,global_lb,verified_ub,open_leaf_count,failure_reason\n";
     lifecycle << "leaf_id,attempt,new_leaf,same_leaf_retained,fresh_restart,child_restart,reset_called,model_modified,retained_state_classification,continuation_claimed,continuation_evidence,presolve_rerun,root_relaxation_rerun,incumbent_state_reused,model_fingerprint_match,native_log_path\n";
     optimize << "leaf_id,attempt,time_limit_seconds,solver_runtime_seconds,work,nodes,simplex_iterations,barrier_iterations,cumulative_runtime,cumulative_work,cumulative_nodes,cumulative_simplex_iterations,cumulative_barrier_iterations,optimize_return_code\n";
     warm << "leaf_id,attempt,candidate_available,mapping_complete,submitted,status,mapping_seconds\n";
     enhanced << "attempt_start_seconds,attempt_end_seconds,leaf_id,parent_id,depth,gamma_L,gamma_U,attempt,new_leaf,selected_while_controlling,controlling_leaves_before,controlling_leaves_after,open_leaves_before,closed_leaves_before,open_leaves_after,closed_leaves_after,allocated_time_seconds,solver_runtime_seconds,native_status,native_status_code,optimize_return_code,leaf_lb_before,native_bound,native_bound_available,leaf_lb_after,global_lb_before,global_lb_after,verified_ub_before,verified_ub_after,incumbent,incumbent_available,first_incumbent_time_seconds,last_incumbent_improvement_time_seconds,last_native_lb_improvement_time_seconds,last_global_lb_improvement_time_seconds,stagnation_seconds,work,nodes,open_nodes,open_nodes_available,simplex_iterations,barrier_iterations,memory_gb,model_rows,model_columns,model_nonzeros,interval_row_count,cutoff_row_count,artifact_generation_seconds,model_read_seconds,presolve_rerun,presolve_time_available,presolve_time_seconds,presolve_time_status,root_rerun,root_time_available,root_time_seconds,root_time_status,fresh_restart,child_restart,same_leaf_retained,retained_state_classification,warm_candidate,warm_mapping_complete,warm_submitted,warm_status,warm_mapping_seconds,split_count,cutoff,canonical_sha256,row_signature,native_cut_count_available,native_cut_count,model_path,native_log_path\n";
+    global_trace
+        << "process_elapsed_seconds,exact_phase_elapsed_seconds,event_type,"
+           "active_leaf,active_leaf_valid_lower_bound,"
+           "other_open_leaf_min_valid_lower_bound,"
+           "valid_global_lower_bound,verified_global_upper_bound,"
+           "open_relevant_leaf_count,closed_relevant_leaf_count,event_source\n";
+    global_trace.flush();
 
     ControllingLeafScheduler scheduler(1e-7);
     const auto initial = makeLegacyFrontierIntervals(
@@ -692,6 +704,72 @@ SolveResult solveExternalGiniTree(const Instance& instance,
         }
         return counts;
     };
+    auto relevantCounts = [&scheduler]() {
+        std::pair<long long, long long> counts{0, 0};
+        for (const ControllingLeaf& leaf : scheduler.leaves()) {
+            if (leaf.status == ControllingLeafStatus::Replaced ||
+                leaf.parent_replaced ||
+                leaf.gamma_L >=
+                    leaf.cutoff - scheduler.certificateTolerance()) {
+                continue;
+            }
+            const bool open =
+                (leaf.status == ControllingLeafStatus::Open ||
+                 leaf.status == ControllingLeafStatus::Invalid) &&
+                leaf.lower_bound <
+                    leaf.cutoff - scheduler.certificateTolerance();
+            if (open) ++counts.first;
+            else ++counts.second;
+        }
+        return counts;
+    };
+    auto otherRelevantMinimum = [&scheduler](
+            const std::string& active_leaf) {
+        double minimum = std::numeric_limits<double>::infinity();
+        for (const ControllingLeaf& leaf : scheduler.leaves()) {
+            if (leaf.id == active_leaf ||
+                leaf.status == ControllingLeafStatus::Replaced ||
+                leaf.parent_replaced ||
+                leaf.gamma_L >=
+                    leaf.cutoff - scheduler.certificateTolerance() ||
+                !((leaf.status == ControllingLeafStatus::Open ||
+                   leaf.status == ControllingLeafStatus::Invalid) &&
+                  leaf.lower_bound <
+                    leaf.cutoff - scheduler.certificateTolerance())) {
+                continue;
+            }
+            minimum = std::min(minimum, leaf.lower_bound);
+        }
+        return minimum;
+    };
+    auto writeGlobalTrace = [&](double process_seconds,
+                                double exact_seconds,
+                                const std::string& event_type,
+                                const std::string& active_leaf,
+                                double active_bound,
+                                double other_bound,
+                                const std::string& source) {
+        double global_bound = std::min(active_bound, other_bound);
+        if (!std::isfinite(global_bound)) {
+            global_bound = scheduler.globalLowerBound();
+        }
+        const auto counts = relevantCounts();
+        global_trace << std::setprecision(17) << process_seconds << ','
+                     << exact_seconds << ',' << csvEscape(event_type) << ','
+                     << csvEscape(active_leaf) << ',';
+        if (std::isfinite(active_bound)) global_trace << active_bound;
+        global_trace << ',';
+        if (std::isfinite(other_bound)) global_trace << other_bound;
+        global_trace << ',' << global_bound << ',' << verified_ub << ','
+                     << counts.first << ',' << counts.second << ','
+                     << csvEscape(source) << '\n';
+        global_trace.flush();
+    };
+    writeGlobalTrace(
+        processElapsedSeconds(options), elapsed(),
+        "exact_tree_initialization", "", scheduler.globalLowerBound(),
+        std::numeric_limits<double>::infinity(),
+        "c0_exact_interval_cover");
     while (!hard_failure && !scheduler.everyRelevantLeafClosed()) {
         const double remaining = options.solve_time_limit > 0.0
             ? options.solve_time_limit - elapsed()
@@ -703,6 +781,14 @@ SolveResult solveExternalGiniTree(const Instance& instance,
         if (!launch.launch_allowed) {
             result.external_gini_tree_failure_reason =
                 "budget_finalization:" + launch.rejection_reason;
+            writeGlobalTrace(
+                processElapsedSeconds(options), elapsed(), "interruption",
+                selection.selected_leaf_id,
+                scheduler.findLeaf(selection.selected_leaf_id)
+                    ? scheduler.findLeaf(selection.selected_leaf_id)->lower_bound
+                    : std::numeric_limits<double>::infinity(),
+                otherRelevantMinimum(selection.selected_leaf_id),
+                "unified_process_deadline_launch_guard");
             break;
         }
         const ControllingLeaf* selected = scheduler.findLeaf(selection.selected_leaf_id);
@@ -760,6 +846,11 @@ SolveResult solveExternalGiniTree(const Instance& instance,
                        << ",-1,not_run,0,false,0,false,"
                        << scheduler.globalLowerBound() << ',' << verified_ub
                        << ',' << scheduler.controllingSet().size() << ",none\n";
+                writeGlobalTrace(
+                    processElapsedSeconds(options), elapsed(), "split",
+                    selected_id, std::numeric_limits<double>::infinity(),
+                    scheduler.globalLowerBound(),
+                    "c0_attempt_triggered_atomic_split_diagnostic_only");
             }
             continue;
         }
@@ -857,8 +948,14 @@ SolveResult solveExternalGiniTree(const Instance& instance,
              options.external_gini_backend + ".log");
         request.verified_start_routes = best_routes;
         request.verified_start_source = best_source;
+        request.capture_native_bound_events =
+            options.external_gini_backend == "gurobi";
         const double attempt_start = elapsed();
+        const double attempt_process_start =
+            processElapsedSeconds(options);
         const double leaf_lb_before = selected->lower_bound;
+        const double other_bound_before =
+            otherRelevantMinimum(selected->id);
         const double global_lb_before = scheduler.globalLowerBound();
         const double verified_ub_before = verified_ub;
         const auto counts_before = leafCounts();
@@ -868,6 +965,24 @@ SolveResult solveExternalGiniTree(const Instance& instance,
             joinedLeafIds(selection.controlling_leaf_ids);
         FixedIntervalMipOutcome outcome = backend->solve(request);
         const double attempt_end = elapsed();
+        for (const FixedIntervalNativeBoundEvent& native_event :
+                outcome.native_bound_events) {
+            if (!native_event.native_bound_available ||
+                !native_event.bound_improved) {
+                continue;
+            }
+            writeGlobalTrace(
+                attempt_process_start +
+                    native_event.solver_runtime_seconds,
+                attempt_start + native_event.solver_runtime_seconds,
+                native_event.processed_nodes <= 0.0
+                    ? "native_root_processing_bound"
+                    : "partial_native_mip_bound_improvement",
+                selected->id,
+                std::max(leaf_lb_before, native_event.native_bound),
+                other_bound_before,
+                "gurobi_cb_mip_objbnd_valid_native_bound");
+        }
         outcome.model_build_seconds += build_seconds;
         ++result.external_gini_tree_attempt_count;
         const bool selected_while_controlling =
@@ -917,6 +1032,15 @@ SolveResult solveExternalGiniTree(const Instance& instance,
             best_source = options.external_gini_backend + "_verified_leaf";
             if (first_incumbent_time < 0.0) first_incumbent_time = attempt_end;
             last_incumbent_improvement_time = attempt_end;
+            writeGlobalTrace(
+                processElapsedSeconds(options), attempt_end,
+                "incumbent_improvement", selected->id,
+                outcome.native_bound_available
+                    ? std::max(leaf_lb_before, outcome.native_bound)
+                    : leaf_lb_before,
+                other_bound_before,
+                options.external_gini_backend +
+                    "_independently_verified_native_incumbent");
         }
         if (outcome.optimal || outcome.infeasible) {
             std::string reason;
@@ -947,6 +1071,23 @@ SolveResult solveExternalGiniTree(const Instance& instance,
             joinedLeafIds(scheduler.controllingSet());
         const double leaf_lb_after = recorded ? recorded->lower_bound
                                               : leaf_lb_before;
+        if (outcome.optimal || outcome.infeasible) {
+            writeGlobalTrace(
+                processElapsedSeconds(options), attempt_end,
+                outcome.infeasible ? "infeasible_closure"
+                                   : "terminal_mip_closure",
+                selected->id, std::numeric_limits<double>::infinity(),
+                otherRelevantMinimum(selected->id),
+                options.external_gini_backend +
+                    "_native_exact_leaf_finalization");
+        } else if (outcome.native_bound_available) {
+            writeGlobalTrace(
+                processElapsedSeconds(options), attempt_end,
+                "partial_native_mip_bound_improvement", selected->id,
+                leaf_lb_after, otherRelevantMinimum(selected->id),
+                options.external_gini_backend +
+                    "_native_final_valid_dual_bound");
+        }
         const double stagnation = last_global_lb_improvement_time >= 0.0
             ? std::max(0.0, attempt_end - last_global_lb_improvement_time)
             : attempt_end;
@@ -1116,6 +1257,14 @@ SolveResult solveExternalGiniTree(const Instance& instance,
     result.gap = std::fabs(verified_ub) > 1e-12
         ? std::max(0.0, (verified_ub - result.lower_bound) /
                          std::fabs(verified_ub)) : 0.0;
+    writeGlobalTrace(
+        processElapsedSeconds(options), elapsed(), "finalization", "",
+        result.lower_bound, std::numeric_limits<double>::infinity(),
+        hard_failure ? "c0_failed_finalization"
+                     : (result.external_gini_tree_all_relevant_leaves_closed
+                            ? "c0_exact_tree_complete"
+                            : "c0_deadline_finalization_open_coverage"));
+    global_trace.flush();
     result.external_gini_tree_feasibility_consistency_gate =
         result.verification.original_solution_feasible &&
         result.verification.original_objective_recomputed &&

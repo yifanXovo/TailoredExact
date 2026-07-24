@@ -1,0 +1,11 @@
+mechanism,classification,reason
+valid_native_lower_bound_harvesting,TRANSFERABLE,backend-certified bound remains valid for open leaf
+best_bound_controlling_leaf_scheduling,TRANSFERABLE,uses mathematical valid leaf bounds only
+parent_bound_inheritance_and_atomic_coverage,TRANSFERABLE,exact interval partition proof
+fixed_time_quanta,FORBIDDEN,hardware-dependent stopping decision
+split_after_fixed_attempt_count,FORBIDDEN,attempt ordinal is not a mathematical event
+work_node_solution_or_retry_limits,FORBIDDEN,hardware/solver-effort dependent internal control
+native_root_completion_event,REQUIRES_PROOF_OR_API_AUDIT,Gurobi MIP callback has no unambiguous root-cut-loop-complete event
+native_dual_bound_target_termination,REQUIRES_PROOF_OR_API_AUDIT,valid if callback bound and termination semantics pass direct tests
+same_model_native_tree_continuation,REQUIRES_PROOF_OR_API_AUDIT,same object does not establish retained presolve/cuts/tree
+parent_child_lp_basis_transfer,REQUIRES_PROOF_OR_API_AUDIT,complete compatible row/column mapping not yet proved

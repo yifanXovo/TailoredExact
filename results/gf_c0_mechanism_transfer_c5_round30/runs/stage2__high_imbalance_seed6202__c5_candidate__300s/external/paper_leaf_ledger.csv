@@ -1,0 +1,7 @@
+leaf_id,parent_id,depth,child_index,gamma_L,gamma_U,base_lower_bound,lower_bound,status,lp_complete,lp_optimal,lp_infeasible,lp_bound,terminal_mip_started,closure_source,lower_bound_sources
+L0,"",0,-1,0,0.245,0,9.8206646653025249,empty,1,0,1,0,0,"complete_parent_lp_infeasible","objective_nonnegative_penalty_G_floor"
+L1,"",0,-1,0.245,0.48999999999999999,0.245,9.8206646653025249,empty,1,0,1,0,0,"complete_parent_lp_infeasible","objective_nonnegative_penalty_G_floor"
+L2,"",0,-1,0.48999999999999999,0.73499999999999999,0.48999999999999999,7.4070090034849541,replaced,1,1,0,7.4070090034849541,0,"","objective_nonnegative_penalty_G_floor;optimal_complete_lp_relaxation"
+L3,"",0,-1,0.73499999999999999,0.97999999999999998,0.73499999999999999,9.2605346888087094,open,1,1,0,7.5557176110501905,1,"","objective_nonnegative_penalty_G_floor;optimal_complete_lp_relaxation;native_terminal_mip_bound"
+L2.0,"L2",1,0,0.48999999999999999,0.61250000000000004,7.9098944098966451,7.9098944098966451,open,1,1,0,7.9098944098966451,0,"","inherited_parent_lp_bound;optimal_complete_child_lp_relaxation"
+L2.1,"L2",1,1,0.61250000000000004,0.73499999999999999,7.4615556388896929,7.4615556388896929,open,1,1,0,7.4615556388896929,0,"","inherited_parent_lp_bound;optimal_complete_child_lp_relaxation"

@@ -13,7 +13,22 @@ namespace ebrp {
 enum class FixedIntervalSolveKind {
     LegacyMipQuantum,
     PaperLpRelaxation,
+    PaperPartialBoundTargetMip,
     PaperTerminalMip
+};
+
+struct FixedIntervalNativeBoundEvent {
+    double solver_runtime_seconds = 0.0;
+    double work = 0.0;
+    double native_bound = 0.0;
+    bool native_bound_available = false;
+    double native_incumbent = 0.0;
+    bool native_incumbent_available = false;
+    double processed_nodes = 0.0;
+    double open_nodes = 0.0;
+    int native_phase = 0;
+    bool bound_improved = false;
+    bool target_reached = false;
 };
 
 struct FixedIntervalMipCapabilities {
@@ -53,6 +68,13 @@ struct FixedIntervalMipRequest {
     // This is model-object reuse, not native-tree or LP-basis reuse.
     bool incremental_model_reuse_enabled = false;
     bool retain_model_after_solve = false;
+    // Round 30 C5 may terminate a native MIP only when a backend-certified
+    // dual bound reaches this mathematical target. No time, Work, node,
+    // solution, or attempt quantity participates in the target.
+    bool native_bound_target_enabled = false;
+    double native_bound_target = 0.0;
+    double native_bound_target_tolerance = 1e-7;
+    bool capture_native_bound_events = false;
 };
 
 struct FixedIntervalMipOutcome {
@@ -67,10 +89,15 @@ struct FixedIntervalMipOutcome {
     bool lp_relaxation = false;
     bool lp_terminal_valid = false;
     bool terminal_mip = false;
+    bool partial_bound_target_mip = false;
     bool infeasible = false;
     bool interrupted = false;
     bool native_bound_available = false;
     double native_bound = 0.0;
+    bool native_bound_target_reached = false;
+    bool native_bound_target_termination_requested = false;
+    double native_bound_target = 0.0;
+    std::vector<FixedIntervalNativeBoundEvent> native_bound_events;
     bool incumbent_available = false;
     bool incumbent_independently_verified = false;
     double incumbent_objective = 0.0;
@@ -133,7 +160,10 @@ struct FixedIntervalMipBackendStats {
     long long model_read_count = 0;
     long long optimize_count = 0;
     long long lp_relaxation_optimize_count = 0;
+    long long partial_bound_target_mip_optimize_count = 0;
     long long terminal_mip_optimize_count = 0;
+    long long native_bound_event_count = 0;
+    long long native_bound_target_reached_count = 0;
     long long model_free_count = 0;
     long long environment_free_count = 0;
     long long same_leaf_resume_count = 0;
@@ -165,6 +195,7 @@ struct FixedIntervalMipBackendStats {
     double cumulative_solver_runtime_seconds = 0.0;
     double cumulative_work = 0.0;
     double cumulative_lp_work = 0.0;
+    double cumulative_partial_bound_target_mip_work = 0.0;
     double cumulative_terminal_mip_work = 0.0;
     double cumulative_nodes = 0.0;
     double cumulative_simplex_iterations = 0.0;
