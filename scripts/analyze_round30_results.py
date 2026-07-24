@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import gzip
+import hashlib
 import json
 import math
 from collections import Counter, defaultdict
@@ -348,6 +349,127 @@ def common_window_pair_auc(
     }
 
 
+def file_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def projected_csv_equal(
+        left: Path, right: Path, fields: tuple[str, ...]) -> bool:
+    def projected(path: Path) -> list[tuple[str, ...]]:
+        return [
+            tuple(str(row.get(field, "")) for field in fields)
+            for row in csv_rows(path)
+        ]
+    return projected(left) == projected(right)
+
+
+def repeatability_rows(
+        stage4: list[dict[str, Any]],
+        traces: dict[str, tuple[bool, str, tuple[
+            bound_trace.BoundObservation, ...], int]],
+        common_ubs: dict[str, float]) -> list[dict[str, Any]]:
+    by_key = {
+        (run["state"]["instance"], integer(run["state"]["repetition"])): run
+        for run in stage4
+    }
+    rows = []
+    for instance in frozen.STAGE4_INSTANCES:
+        left = by_key[(instance, 1)]
+        right = by_key[(instance, 2)]
+        left_id = left["state"]["run_id"]
+        right_id = right["state"]["run_id"]
+        left_trace = traces[left_id]
+        right_trace = traces[right_id]
+        auc = (
+            common_window_pair_auc(
+                left_trace[2], right_trace[2], common_ubs[instance])
+            if left_trace[0] and right_trace[0]
+            else {
+                "auc_status": "auc_unavailable",
+                "auc_reason":
+                    f"rep1={left_trace[1]};rep2={right_trace[1]}",
+            })
+        left_lb, _ = result_bounds(left)
+        right_lb, _ = result_bounds(right)
+        left_dir = left["run_dir"]
+        right_dir = right["run_dir"]
+        record = {
+            "instance": instance,
+            "rep1_run_id": left_id,
+            "rep2_run_id": right_id,
+            "hga_trajectory_exact":
+                file_sha256(left_dir / "hga_generations.csv") ==
+                file_sha256(right_dir / "hga_generations.csv"),
+            "leaf_event_order_exact": projected_csv_equal(
+                left_dir / "external/paper_tree_events.csv",
+                right_dir / "external/paper_tree_events.csv",
+                ("event", "leaf_id")),
+            "root_target_event_sequence_exact": projected_csv_equal(
+                left_dir / "external/paper_optimize_ledger.csv",
+                right_dir / "external/paper_optimize_ledger.csv",
+                ("leaf_id", "solve_kind", "native_status")),
+            "split_decisions_exact":
+                file_sha256(
+                    left_dir / "external/split_decision_ledger.csv") ==
+                file_sha256(
+                    right_dir / "external/split_decision_ledger.csv"),
+            "parent_child_bounds_exact":
+                file_sha256(
+                    left_dir / "external/parent_child_bound_ledger.csv") ==
+                file_sha256(
+                    right_dir / "external/parent_child_bound_ledger.csv"),
+            "final_leaf_ledger_exact":
+                file_sha256(left_dir / "external/paper_leaf_ledger.csv") ==
+                file_sha256(right_dir / "external/paper_leaf_ledger.csv"),
+            "rep1_final_lb": left_lb,
+            "rep2_final_lb": right_lb,
+            "final_lb_absolute_delta": abs(right_lb - left_lb),
+            "rep1_strict_certificate":
+                truth(left["result"].get(
+                    "strict_certified_original_problem")),
+            "rep2_strict_certificate":
+                truth(right["result"].get(
+                    "strict_certified_original_problem")),
+            "rep1_lifecycle_complete":
+                truth(result_metric(left, "lifecycle_complete")),
+            "rep2_lifecycle_complete":
+                truth(result_metric(right, "lifecycle_complete")),
+            "rep1_splits": result_metric(left, "split_count"),
+            "rep2_splits": result_metric(right, "split_count"),
+            "rep1_partial_mip_calls":
+                result_metric(left, "partial_mip_optimize_count"),
+            "rep2_partial_mip_calls":
+                result_metric(right, "partial_mip_optimize_count"),
+            "rep1_partial_bound_events":
+                result_metric(left, "partial_mip_bound_event_count"),
+            "rep2_partial_bound_events":
+                result_metric(right, "partial_mip_bound_event_count"),
+            "rep1_targets_reached":
+                result_metric(left, "partial_mip_target_reached_count"),
+            "rep2_targets_reached":
+                result_metric(right, "partial_mip_target_reached_count"),
+            "rep1_model_reuse":
+                result_metric(left, "in_memory_model_reuse_count"),
+            "rep2_model_reuse":
+                result_metric(right, "in_memory_model_reuse_count"),
+            "rep1_graceful_finalization":
+                truth(left["result"].get(
+                    "graceful_deadline_finalization")),
+            "rep2_graceful_finalization":
+                truth(right["result"].get(
+                    "graceful_deadline_finalization")),
+            "rep1_trace_complete": left_trace[0],
+            "rep2_trace_complete": right_trace[0],
+        }
+        record.update(auc)
+        rows.append(record)
+    return rows
+
+
 def pair_rows(
         stage_rows: list[dict[str, Any]], left_arm: str, right_arm: str,
         common_ubs: dict[str, float],
@@ -563,6 +685,9 @@ def main() -> int:
         auc_rows.append(record)
     write_csv(OUT / "actual_bound_progress_auc.csv", auc_rows)
     write_csv(OUT / "time_to_gap_thresholds.csv", time_rows)
+    write_csv(
+        OUT / "stage4_repeatability_audit.csv",
+        repeatability_rows(stages["stage4"], traces, common_ubs))
 
     p_vs_c5 = pair_rows(
         stages["stage2"], "P-GRB", "C5-CANDIDATE", common_ubs, traces)
