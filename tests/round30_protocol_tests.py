@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import csv
 import re
 import sys
 import tempfile
@@ -22,6 +23,20 @@ def option(command: list[str], name: str) -> str:
 
 
 class Round30ProtocolTests(unittest.TestCase):
+    def test_analysis_csv_preserves_heterogeneous_fields(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "heterogeneous.csv"
+            analysis.write_csv(path, [
+                {"status": "auc_unavailable"},
+                {"status": "observed", "normalized_auc": 0.75},
+            ])
+            with path.open(newline="", encoding="utf-8") as stream:
+                rows = list(csv.DictReader(stream))
+        self.assertEqual(
+            list(rows[0]), ["status", "normalized_auc"])
+        self.assertEqual(rows[0]["normalized_auc"], "")
+        self.assertEqual(rows[1]["normalized_auc"], "0.75")
+
     def test_analysis_uses_arm_aware_bounds(self) -> None:
         def run(
                 arm: str, lower: float, upper: float,

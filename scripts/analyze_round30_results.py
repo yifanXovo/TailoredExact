@@ -67,7 +67,13 @@ def write_csv(path: Path, rows: Iterable[dict[str, Any]],
               fields: list[str] | None = None) -> None:
     material = list(rows)
     if fields is None:
-        fields = list(material[0]) if material else ["status"]
+        fields = []
+        for row in material:
+            for field in row:
+                if field not in fields:
+                    fields.append(field)
+        if not fields:
+            fields = ["status"]
     with path.open("w", newline="", encoding="utf-8") as stream:
         writer = csv.DictWriter(
             stream, fieldnames=fields, extrasaction="ignore")
