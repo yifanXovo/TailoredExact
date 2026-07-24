@@ -3,6 +3,7 @@
 #include "ExternalGiniTree.hpp"
 
 #include <string>
+#include <vector>
 
 namespace ebrp {
 
@@ -43,6 +44,41 @@ struct C5BoundTargetSplitDecision {
 
 C5BoundTargetSplitDecision evaluateC5BoundTargetSplitDecision(
     double parent_lower_bound,
+    double verified_upper_bound,
+    const PaperLpResult& left,
+    const PaperLpResult& right,
+    double normalized_split_threshold,
+    double certificate_tolerance);
+
+struct C6FrontierDecision {
+    bool valid = false;
+    bool requeue_without_native = false;
+    bool run_native_target = false;
+    bool allow_child_lookahead = false;
+    double native_bound_target = 0.0;
+    std::string reason = "not_evaluated";
+};
+
+C6FrontierDecision evaluateC6FrontierDecision(
+    double current_leaf_bound,
+    const std::vector<double>& other_relevant_leaf_bounds,
+    double certificate_tolerance,
+    bool frontier_milestone_already_reached = false);
+
+struct C6CurrentSplitDecision {
+    bool valid = false;
+    bool split_immediately = false;
+    bool run_child_bound_target = false;
+    bool launch_exact_closure = false;
+    bool child_infeasibility_trigger = false;
+    double post_split_lower_bound = 0.0;
+    double normalized_disjunction_gain = 0.0;
+    double child_bound_target = 0.0;
+    std::string reason = "not_evaluated";
+};
+
+C6CurrentSplitDecision evaluateC6CurrentSplitDecision(
+    double current_parent_bound,
     double verified_upper_bound,
     const PaperLpResult& left,
     const PaperLpResult& right,

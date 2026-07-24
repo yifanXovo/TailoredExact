@@ -1103,6 +1103,26 @@ std::string resultToJson(const SolveResult& input) {
     out << "  \"gurobi_progress_read_only_contract\": "
         << (result.gurobi_progress_read_only_contract ? "true" : "false")
         << ",\n";
+    out << "  \"gurobi_hga_start_requested\": "
+        << (result.gurobi_hga_start_requested ? "true" : "false")
+        << ",\n";
+    out << "  \"gurobi_hga_incumbent_found\": "
+        << (result.gurobi_hga_incumbent_found ? "true" : "false")
+        << ",\n";
+    out << "  \"gurobi_hga_start_mapping_complete\": "
+        << (result.gurobi_hga_start_mapping_complete ? "true" : "false")
+        << ",\n";
+    out << "  \"gurobi_hga_start_submitted\": "
+        << (result.gurobi_hga_start_submitted ? "true" : "false")
+        << ",\n";
+    out << "  \"gurobi_hga_start_return_code\": "
+        << result.gurobi_hga_start_return_code << ",\n";
+    out << "  \"gurobi_hga_verified_objective\": "
+        << result.gurobi_hga_verified_objective << ",\n";
+    out << "  \"gurobi_hga_runtime_seconds\": "
+        << result.gurobi_hga_runtime_seconds << ",\n";
+    out << "  \"gurobi_hga_start_status\": \""
+        << jsonEscape(result.gurobi_hga_start_status) << "\",\n";
     out << "  \"gurobi_exception_type\": \""
         << jsonEscape(result.gurobi_exception_type) << "\",\n";
     out << "  \"gurobi_exception_message\": \""
@@ -1538,6 +1558,16 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_COUNT(terminal_mip_leaf_count);
     WRITE_EXT_COUNT(terminal_mip_optimize_count);
     WRITE_EXT_COUNT(global_deadline_interruption_count);
+    WRITE_EXT_COUNT(parent_lp_requeue_count);
+    WRITE_EXT_COUNT(next_leaf_target_phase_count);
+    WRITE_EXT_COUNT(next_leaf_target_reached_count);
+    WRITE_EXT_COUNT(child_bound_target_phase_count);
+    WRITE_EXT_COUNT(child_bound_target_reached_count);
+    WRITE_EXT_COUNT(native_requeue_count);
+    WRITE_EXT_COUNT(child_lookahead_avoided_count);
+    WRITE_EXT_COUNT(child_lookahead_reuse_count);
+    WRITE_EXT_COUNT(forced_split_avoided_count);
+    WRITE_EXT_COUNT(exact_closure_launch_count);
     WRITE_EXT_COUNT(contract_initial_interval_count);
     WRITE_EXT_COUNT(scheduler_initial_leaf_count);
     WRITE_EXT_COUNT(unconditional_structural_split_count);
@@ -1653,6 +1683,7 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_PATH(bound_inheritance_ledger_path);
     WRITE_EXT_PATH(row_signature_ledger_path);
     WRITE_EXT_PATH(global_bound_trace_path);
+    WRITE_EXT_PATH(native_target_ledger_path);
 #undef WRITE_EXT_PATH
     out << "  \"columns_generated_raw\": " << result.columns_generated_raw << ",\n";
     out << "  \"columns_after_dominance\": " << result.columns_after_dominance << ",\n";

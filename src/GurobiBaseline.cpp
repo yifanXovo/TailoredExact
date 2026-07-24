@@ -7,6 +7,7 @@
 #include "FixedIntervalMipBackend.hpp"
 #include "GurobiCertificate.hpp"
 #include "GurobiProgress.hpp"
+#include "HgaTgbcRunner.hpp"
 #include "ProcessPhaseLedger.hpp"
 #include "MipStartMapping.hpp"
 
@@ -1190,6 +1191,7 @@ SolveResult solveGurobiBaseline(const Instance& instance,
     result.gurobi_threads_requested = 1;
     result.gurobi_presolve_requested = options.gurobi_presolve;
     result.gurobi_seed_requested = options.gurobi_seed;
+    result.gurobi_hga_start_requested = options.gurobi_hga_start;
     result.gurobi_mip_gap_requested = 0.0;
     result.gurobi_mip_gap_abs_requested = 0.0;
     result.solver_thread_policy = "plain_gurobi_single_thread";
@@ -1198,6 +1200,49 @@ SolveResult solveGurobiBaseline(const Instance& instance,
         "round24-gurobi-engineering-exact-v1";
 
     try {
+        HgaTgbcResult hga_seed;
+        if (options.gurobi_hga_start) {
+            recordProcessPhase(
+                options, "plain_gurobi_hga_start", "start",
+                "independently_verified_same_hga_incumbent_ablation");
+            HgaTgbcOptions hga_options;
+            hga_options.lambda = options.lambda;
+            hga_options.seed = options.primal_heuristic_seed;
+            hga_options.stop_mode = options.primal_heuristic_stop;
+            hga_options.no_improve_generation_limit =
+                options.primal_heuristic_no_improve_generations;
+            hga_options.generation_log_path =
+                options.primal_heuristic_generation_log;
+            hga_options.phase_label = "p_grb_hga_ablation";
+            hga_options.process_options = &options;
+            hga_options.max_time_seconds = std::max(
+                1, static_cast<int>(
+                    std::ceil(options.primal_heuristic_seconds)));
+            hga_options.pop_size =
+                std::max(24, options.primal_heuristic_runs);
+            hga_seed = runHgaTgbcNative(instance, hga_options);
+            result.gurobi_hga_incumbent_found = hga_seed.found;
+            result.gurobi_hga_verified_objective =
+                hga_seed.verified_objective;
+            result.gurobi_hga_runtime_seconds =
+                hga_seed.wall_time_seconds;
+            result.primal_heuristic = "hga-tgbc";
+            result.hga_total_generations = hga_seed.total_generations;
+            result.hga_generations_since_improvement =
+                hga_seed.generations_since_improvement;
+            result.hga_generation_log_path =
+                hga_seed.generation_log_path.string();
+            result.incumbent_generation_time_seconds =
+                hga_seed.wall_time_seconds;
+            result.incumbent_generation_method =
+                "round31_p_grb_hga_ablation";
+            recordProcessPhase(
+                options, "plain_gurobi_hga_complete",
+                hga_seed.found ? "complete" : "failed",
+                hga_seed.found
+                    ? "independently_verified_hga_incumbent_available"
+                    : "no_verified_hga_incumbent");
+        }
         const auto run_id = std::chrono::duration_cast<std::chrono::milliseconds>(
             Clock::now().time_since_epoch()).count();
         const std::string stem =
@@ -1222,8 +1267,10 @@ SolveResult solveGurobiBaseline(const Instance& instance,
         result.log_file = log_path.string();
         result.gurobi_progress_path = progress_path.string();
 
-        // P-GRB is unconditionally plain.  It never consults a Tailored seed
-        // or a caller's strengthened-model switch.
+        // P-GRB is unconditionally plain and never consults a Tailored seed
+        // or strengthened-model switch. Round 31's explicitly named
+        // P-GRB-HGA diagnostic may submit the separately verified HGA start;
+        // it changes no model row, bound, parameter, or benchmark role.
         CanonicalCompactModelSpec spec;
         spec.strengthened = false;
         const CanonicalCompactModelArtifact canonical =
@@ -1382,6 +1429,7 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             static_cast<std::size_t>(std::max(0, result.gurobi_num_vars)));
         std::vector<double> native_ub(native_lb.size());
         std::vector<char> native_type(native_lb.size());
+        std::vector<std::string> native_names(native_lb.size());
         std::unordered_map<std::string, CanonicalLpVariableAudit::Variable>
             native_domain;
         bool native_arrays_ok = result.gurobi_num_vars >= 0 &&
@@ -1401,6 +1449,7 @@ SolveResult solveGurobiBaseline(const Instance& instance,
                 model, GRB_STR_ATTR_VARNAME, index, &name) == 0 &&
                 name && *name;
             if (!native_arrays_ok) break;
+            native_names[static_cast<std::size_t>(index)] = name;
             native_domain[name] = {
                 native_lb[static_cast<std::size_t>(index)],
                 native_ub[static_cast<std::size_t>(index)],
@@ -1464,6 +1513,53 @@ SolveResult solveGurobiBaseline(const Instance& instance,
                   << result.gurobi_native_objective_sense_match
                   << ";parse_reason=" << expected_domain.failure_reason;
             result.gurobi_native_domain_audit_failure_reason = audit.str();
+        }
+
+        if (options.gurobi_hga_start) {
+            if (!hga_seed.found || !native_arrays_ok) {
+                result.gurobi_hga_start_status = !hga_seed.found
+                    ? "no_independently_verified_hga_incumbent"
+                    : "native_model_domain_unavailable";
+            } else {
+                SolverNeutralModelDomain domain;
+                domain.names = native_names;
+                domain.lower_bounds = native_lb;
+                domain.upper_bounds = native_ub;
+                domain.variable_types = native_type;
+                std::vector<RoutePlan> nonempty_routes;
+                for (const RoutePlan& route : hga_seed.routes) {
+                    if (route.nodes.size() == 2 &&
+                        route.nodes.front() == 0 &&
+                        route.nodes.back() == 0 &&
+                        route.operations.empty()) {
+                        continue;
+                    }
+                    nonempty_routes.push_back(route);
+                }
+                const SolverNeutralMipStart mapped =
+                    mapVerifiedRoutesToCanonicalModel(
+                        instance, options, nonempty_routes,
+                        "round31_p_grb_hga_ablation", 0.0, 1.0,
+                        hga_seed.verified_objective, domain);
+                result.gurobi_hga_start_mapping_complete =
+                    mapped.complete;
+                if (mapped.complete) {
+                    result.gurobi_hga_start_return_code =
+                        api.setdblattrarray(
+                            model, GRB_DBL_ATTR_START, 0,
+                            result.gurobi_num_vars,
+                            const_cast<double*>(mapped.values.data()));
+                    result.gurobi_hga_start_submitted =
+                        result.gurobi_hga_start_return_code == 0;
+                    result.gurobi_hga_start_status =
+                        result.gurobi_hga_start_submitted
+                            ? "submitted_complete_independently_verified_start"
+                            : "native_start_submission_failed";
+                } else {
+                    result.gurobi_hga_start_status =
+                        "mapping_rejected:" + mapped.failure_reason;
+                }
+            }
         }
 
         ProgressCallbackState callback;
