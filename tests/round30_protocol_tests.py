@@ -13,6 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS))
+import analyze_round30_results as analysis  # noqa: E402
 import run_round30_experiments as runner  # noqa: E402
 
 
@@ -21,6 +22,33 @@ def option(command: list[str], name: str) -> str:
 
 
 class Round30ProtocolTests(unittest.TestCase):
+    def test_analysis_uses_arm_aware_bounds(self) -> None:
+        def run(
+                arm: str, lower: float, upper: float,
+                external_lower: float, external_upper: float) -> dict:
+            return {
+                "state": {"arm": arm, "instance": "fixture"},
+                "result": {
+                    "lower_bound": lower,
+                    "upper_bound": upper,
+                    "external_gini_tree_global_lower_bound": external_lower,
+                    "external_gini_tree_verified_upper_bound": external_upper,
+                },
+            }
+
+        plain = run("P-GRB", 0.4, 0.5, 0.0, 0.0)
+        mainline = run("S0-CPLEX", 0.3, 0.5, 0.0, 0.0)
+        external = run("C5-CANDIDATE", 0.2, 0.6, 0.25, 0.5)
+        self.assertEqual(analysis.result_bounds(plain), (0.4, 0.5))
+        self.assertEqual(analysis.result_bounds(mainline), (0.3, 0.5))
+        self.assertEqual(analysis.result_bounds(external), (0.25, 0.5))
+        stages = {
+            "stage1": [external],
+            "stage2": [plain],
+            "stage3": [mainline],
+        }
+        self.assertEqual(analysis.common_upper_bounds(stages)["fixture"], 0.5)
+
     def test_matrix_materializes_required_rows_without_rerunning_overlap(
             self) -> None:
         stage1 = runner.stage_matrix("stage1")

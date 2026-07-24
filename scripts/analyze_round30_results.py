@@ -146,23 +146,37 @@ def common_upper_bounds(
         stages: dict[str, list[dict[str, Any]]]) -> dict[str, float]:
     values: dict[str, list[float]] = defaultdict(list)
     for run in stages["stage1"] + stages["stage2"] + stages["stage3"]:
-        result = run["result"]
-        ub = number(result.get(
-            "external_gini_tree_verified_upper_bound",
-            result.get("upper_bound")))
+        _, ub = result_bounds(run)
         if math.isfinite(ub):
             values[run["state"]["instance"]].append(ub)
     return {instance: min(found) for instance, found in values.items()}
 
 
+def result_bounds(run: dict[str, Any]) -> tuple[float, float]:
+    """Return the valid public bounds for the run's actual algorithm arm.
+
+    Plain Gurobi and S0 results retain zero-valued, inactive external-tree
+    serialization fields.  Those dormant fields must never shadow their
+    native original-problem bounds.
+    """
+    state, result = run["state"], run["result"]
+    if state["arm"] in {
+            "C0-DIAG", "C3-REPLICA",
+            "C4-CANDIDATE", "C5-CANDIDATE"}:
+        return (
+            number(result.get(
+                "external_gini_tree_global_lower_bound",
+                result.get("lower_bound"))),
+            number(result.get(
+                "external_gini_tree_verified_upper_bound",
+                result.get("upper_bound"))),
+        )
+    return number(result.get("lower_bound")), number(result.get("upper_bound"))
+
+
 def public_row(run: dict[str, Any], common_ub: float) -> dict[str, Any]:
     state, result = run["state"], run["result"]
-    lb = number(result.get(
-        "external_gini_tree_global_lower_bound",
-        result.get("lower_bound")))
-    ub = number(result.get(
-        "external_gini_tree_verified_upper_bound",
-        result.get("upper_bound")))
+    lb, ub = result_bounds(run)
     gap = (
         max(0.0, (common_ub - lb) / max(abs(common_ub), 1e-12))
         if math.isfinite(lb) and math.isfinite(common_ub) else math.nan)
