@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import run_round32_experiments as runner  # noqa: E402
+import analyze_round32 as analyzer  # noqa: E402
 
 
 def require(condition: bool, message: str) -> None:
@@ -85,6 +86,22 @@ def main() -> int:
     require(
         '"baseline_round31_run_id", "repetition", "category"' in runner_source,
         "frozen matrix discriminators are not projected to row evidence")
+    analyzer_source = (
+        ROOT / "scripts" / "analyze_round32.py"
+    ).read_text(encoding="utf-8")
+    require(
+        '"final_valid_lb_equal": final_valid_lb_equal' in analyzer_source
+        and '"final_valid_lbs_valid": final_valid_lbs_valid' in analyzer_source,
+        "equivalence evidence does not distinguish exact LB equality "
+        "from endpoint validity")
+    require(
+        "all(decision_checks.values())" in analyzer_source
+        and 'endpoint_checks["verified_ub_equal"]' in analyzer_source
+        and 'endpoint_checks["certificate_equal"]' in analyzer_source,
+        "frozen-decision gate does not bind decisions, UB, and certificate")
+    require(
+        analyzer.number("nan") != analyzer.number("nan"),
+        "non-finite endpoint parser regression")
 
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
@@ -147,7 +164,7 @@ def main() -> int:
             not target.with_suffix(".json.tmp").exists(),
             "atomic temporary file was left behind")
 
-    print("Round32RunnerTraceTests: 15 checks passed")
+    print("Round32RunnerTraceTests: 18 checks passed")
     return 0
 
 

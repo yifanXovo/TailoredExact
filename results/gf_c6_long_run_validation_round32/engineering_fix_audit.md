@@ -19,6 +19,21 @@ projection was repaired; the runner then preserved and invalidated all 12
 old Stage 0 directories on source-identity mismatch and reran the full Stage
 0 matrix uniformly. No official row had started.
 
+The corrected Stage 0 evidence then exposed an analyzer-semantics issue on
+the time-limited Moderate4301 equivalence row. Round 31 reserved five seconds
+of its 120-second process cap for shutdown (115 seconds of solver work);
+Round 32's frozen robust runner reserves fifteen seconds (105 seconds of
+solver work). Every discrete C6 record matched exactly, as did the verified
+UB and certificate state, but the deadline callback LB differed by
+`1.6818345520516753e-05`. A callback frontier sampled at different
+engineering horizons is not a C6 mathematical decision. The general gate
+now records exact final-LB equality separately and requires both endpoint
+LBs to be valid, all discrete frozen decisions to match, and the UB and
+certificate outcome to be identical. It does not apply an instance-specific
+exception or a result-selected performance tolerance. The analyzer change
+was made before official execution; the complete clean-build and Stage 0
+procedure is rerun uniformly under the resulting source identity.
+
 The multi-M generator generalizes only its `M` and `Q` function parameters;
 the legacy M3/Q30 defaults and byte output are unchanged. No C6 predicate,
 row family, geometry, target, requeue, split, exact-closure, HGA, or solver

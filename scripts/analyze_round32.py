@@ -790,7 +790,7 @@ def frozen_equivalence(stage0: list[dict[str, Any]]) -> list[dict[str, Any]]:
         after_lb = number(after.get("external_gini_tree_global_lower_bound"))
         before_ub = number(before.get("external_gini_tree_verified_upper_bound"))
         after_ub = number(after.get("external_gini_tree_verified_upper_bound"))
-        checks = {
+        decision_checks = {
             "parent_lp_objectives_equal": projection(
                 baseline / "external/lp_status_ledger.csv",
                 ("leaf_id", "optimal", "infeasible", "lower_bound"),
@@ -826,9 +826,20 @@ def frozen_equivalence(stage0: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 ("event", "leaf_id", "status", "detail")) == projection(
                     current / "external/paper_tree_events.csv",
                     ("event", "leaf_id", "status", "detail")),
-            "final_valid_lb_equal": (
-                abs(before_lb - after_lb)
-                <= TOL * max(1.0, abs(before_lb), abs(after_lb))),
+        }
+        final_valid_lb_equal = (
+            abs(before_lb - after_lb)
+            <= TOL * max(1.0, abs(before_lb), abs(after_lb)))
+        final_valid_lbs_valid = (
+            math.isfinite(before_lb)
+            and math.isfinite(after_lb)
+            and math.isfinite(before_ub)
+            and math.isfinite(after_ub)
+            and before_lb <= before_ub + TOL * max(1.0, abs(before_ub))
+            and after_lb <= after_ub + TOL * max(1.0, abs(after_ub)))
+        endpoint_checks = {
+            "final_valid_lb_equal": final_valid_lb_equal,
+            "final_valid_lbs_valid": final_valid_lbs_valid,
             "verified_ub_equal": (
                 abs(before_ub - after_ub)
                 <= TOL * max(1.0, abs(before_ub), abs(after_ub))),
@@ -840,8 +851,19 @@ def frozen_equivalence(stage0: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "instance_id": run["state"]["instance_id"],
             "baseline_round31_run_id": baseline_id,
             "round32_run_id": run["state"]["run_id"],
-            **checks,
-            "all_frozen_decisions_equivalent": all(checks.values()),
+            **decision_checks,
+            **endpoint_checks,
+            # A time-limited native-MIP callback frontier depends on the
+            # engineering shutdown horizon.  Exact terminal-LB equality is
+            # recorded above, but is not a mathematical decision.  Frozen
+            # equivalence instead requires every discrete decision to match
+            # and both independently reported endpoints to remain valid,
+            # with the same verified UB and certificate outcome.
+            "all_frozen_decisions_equivalent": (
+                all(decision_checks.values())
+                and final_valid_lbs_valid
+                and endpoint_checks["verified_ub_equal"]
+                and endpoint_checks["certificate_equal"]),
             "trace_serialization_allowed_to_differ": True,
         })
     return output
