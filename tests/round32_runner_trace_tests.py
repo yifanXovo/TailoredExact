@@ -82,6 +82,9 @@ def main() -> int:
         "WATCHDOG_SEPARATION = 90" in runner_source
         and "SHUTDOWN_MARGIN = 15" in runner_source,
         "fixed deadline separation is not frozen")
+    require(
+        '"baseline_round31_run_id", "repetition", "category"' in runner_source,
+        "frozen matrix discriminators are not projected to row evidence")
 
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)

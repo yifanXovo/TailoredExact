@@ -453,7 +453,7 @@ def row_record(row: dict[str, str], item: dict[str, Any],
                manifest: dict[str, Any], command: list[str]) -> dict[str, Any]:
     arm = row["arm"]
     budget = int(row["nominal_budget_seconds"])
-    return {
+    record = {
         "schema": "round32-run-v1",
         "round_id": 32,
         "stage_id": row["stage_id"],
@@ -486,6 +486,17 @@ def row_record(row: dict[str, str], item: dict[str, Any],
         "algorithmic_solve_state_resumed": False,
         "completed": False,
     }
+    # Preserve every frozen matrix discriminator needed to reconstruct a row
+    # without inferring it from a run-id string. These values are evidence
+    # metadata only and never enter the solver command.
+    for key in (
+        "suite", "baseline_round31_run_id", "repetition", "category",
+        "serial_order", "frozen_before_stage0_results",
+        "frozen_before_official_results",
+    ):
+        if key in row:
+            record[key] = row[key]
+    return record
 
 
 def run_one(row: dict[str, str], items: dict[str, dict[str, Any]],

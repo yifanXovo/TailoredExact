@@ -19,3 +19,9 @@ invalidation logging, fixed shutdown/watchdog separation, and the absence of
 license-location serialization. This is row-level experiment resume only.
 Round 32 neither implements nor claims preservation of native Gurobi tree
 state.
+
+The mechanism was exercised before official execution: after a general
+completion-metadata projection repair, all 12 initial Stage 0 directories
+were checksum-preserved and invalidated by source-commit identity mismatch
+before uniform relaunch. The invalidation ledger and preserved directories
+are retained as direct resume evidence.
