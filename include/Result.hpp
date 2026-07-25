@@ -295,6 +295,14 @@ struct SolveResult {
     double gurobi_first_incumbent_time = -1.0;
     double gurobi_last_lower_bound_improvement_time = -1.0;
     bool gurobi_progress_read_only_contract = false;
+    bool gurobi_hga_start_requested = false;
+    bool gurobi_hga_incumbent_found = false;
+    bool gurobi_hga_start_mapping_complete = false;
+    bool gurobi_hga_start_submitted = false;
+    int gurobi_hga_start_return_code = -1;
+    double gurobi_hga_verified_objective = 0.0;
+    double gurobi_hga_runtime_seconds = 0.0;
+    std::string gurobi_hga_start_status = "not_requested";
     std::string gurobi_exception_type;
     std::string gurobi_exception_message;
 
@@ -510,6 +518,17 @@ struct SolveResult {
     long long external_gini_tree_terminal_mip_leaf_count = 0;
     long long external_gini_tree_terminal_mip_optimize_count = 0;
     long long external_gini_tree_global_deadline_interruption_count = 0;
+    // Round 31 C6 nonblocking mathematical-state evidence.
+    long long external_gini_tree_parent_lp_requeue_count = 0;
+    long long external_gini_tree_next_leaf_target_phase_count = 0;
+    long long external_gini_tree_next_leaf_target_reached_count = 0;
+    long long external_gini_tree_child_bound_target_phase_count = 0;
+    long long external_gini_tree_child_bound_target_reached_count = 0;
+    long long external_gini_tree_native_requeue_count = 0;
+    long long external_gini_tree_child_lookahead_avoided_count = 0;
+    long long external_gini_tree_child_lookahead_reuse_count = 0;
+    long long external_gini_tree_forced_split_avoided_count = 0;
+    long long external_gini_tree_exact_closure_launch_count = 0;
     // Round 28 C3 algorithm-contract evidence.  These fields remain zero or
     // empty for the frozen legacy and C2 arms.
     long long external_gini_tree_contract_initial_interval_count = 0;
@@ -596,6 +615,7 @@ struct SolveResult {
     std::string external_gini_tree_bound_inheritance_ledger_path;
     std::string external_gini_tree_row_signature_ledger_path;
     std::string external_gini_tree_global_bound_trace_path;
+    std::string external_gini_tree_native_target_ledger_path;
     long long columns_generated_raw = 0;
     long long columns_after_dominance = 0;
     long long columns_dominated = 0;

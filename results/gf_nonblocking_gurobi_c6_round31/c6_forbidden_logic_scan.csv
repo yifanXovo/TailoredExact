@@ -1,0 +1,16 @@
+rule,pattern,match_count,passed,scope
+predicate_elapsed_time,\belapsed\b,0,True,C6 mathematical predicate
+predicate_work,\bwork\b,0,True,C6 mathematical predicate
+predicate_node,\bnode,0,True,C6 mathematical predicate
+predicate_solution_limit,solutionlimit,0,True,C6 mathematical predicate
+predicate_attempt,\battempt,0,True,C6 mathematical predicate
+predicate_retry,\bretry,0,True,C6 mathematical predicate
+predicate_family,\bfamily\b,0,True,C6 mathematical predicate
+predicate_instance,\binstance\b,0,True,C6 mathematical predicate
+predicate_seed,\bseed\b,0,True,C6 mathematical predicate
+predicate_path,\bpath\b,0,True,C6 mathematical predicate
+source_work_limit,grb_dbl_par_worklimit,0,True,C6 implementation source
+source_node_limit,grb_dbl_par_nodelimit,0,True,C6 implementation source
+source_solution_limit,grb_int_par_solutionlimit,0,True,C6 implementation source
+c6_attempt_selector,"c6[^\n]{0,80}split_after_attempt",0,True,C6 implementation source
+c6_family_dispatch,"c6[^\n]{0,80}(family|instance\.name)",0,True,C6 implementation source

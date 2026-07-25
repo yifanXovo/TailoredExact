@@ -1,0 +1,47 @@
+
+Gurobi 13.0.2 (win64) logging started Sat Jul 25 00:06:34 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_nonblocking_gurobi_c6_round31\runs\stage3__round31_sealed_tight_T_V20_seed2113109204__c5_candidate__300s\external\native_logs\L1_partial_target_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  275.6233733
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11902 rows, 3374 columns and 67353 nonzeros (Min)
+Model fingerprint: 0x097f0529
+Model has 21 linear objective coefficients
+Variable types: 1684 continuous, 1690 integer (1490 binary)
+Coefficient statistics:
+  Matrix range     [8e-03, 1e+04]
+  Objective range  [8e-03, 1e+00]
+  Bounds range     [1e-01, 2e+02]
+  RHS range        [1e-01, 5e+04]
+
+Presolve removed 1799 rows and 215 columns
+Presolve time: 0.23s
+Presolved: 10103 rows, 3159 columns, 75819 nonzeros
+Variable types: 1563 continuous, 1596 integer (1405 binary)
+
+Root relaxation: objective 2.454119e-01, 3973 iterations, 0.28 seconds (0.74 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.24541    0  272          -    0.24541      -     -    0s
+
+Explored 1 nodes (3973 simplex iterations) in 0.56 seconds (1.20 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Solve interrupted
+Best objective -, best bound 2.454118716290e-01, gap -
+
+User-callback calls 819, time in user-callback 0.00 sec

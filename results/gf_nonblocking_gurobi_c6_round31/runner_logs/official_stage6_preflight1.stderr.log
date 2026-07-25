@@ -1,0 +1,14 @@
+#< CLIXML
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP\scripts\run_round31_experiments.py", line 378, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "E:\codes\ExactEBRP\scripts\run_round31_experiments.py", line 365, in main
+    state = run_one(row, inventory)
+            ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP\scripts\run_round31_experiments.py", line 262, in run_one
+    validate_frozen(inventory, name, arm)
+  File "E:\codes\ExactEBRP\scripts\run_round31_experiments.py", line 230, in validate_frozen
+    raise RuntimeError(f"frozen source changed: {path_text}")
+RuntimeError: frozen source changed: scripts/analyze_round31_results.py
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>正在准备首次使用模块。</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>

@@ -60,7 +60,7 @@ void usage() {
         << "[--bpc-workers <N>] [--pricing-threads <N>] [--parallel-frontier true|false] [--parallel-nodes true|false] "
         << "[--gini-cap <gamma>] [--gini-floor <gamma>] [--max-nodes <N>] [--frontier-intervals <N>] [--frontier-refine-splits <N>] "
         << "[--frontier-execution-mode scheduler|global-gini-tree|external-gini-tree] [--global-gini-tree-presolve on|off] "
-        << "[--external-gini-split-after-attempts <N>] [--external-gini-scheduling legacy-quanta|paper-lp-event|cplex-algorithm-replica|round29-bound-gain-incremental|round30-dual-bound-target] "
+        << "[--external-gini-split-after-attempts <N>] [--external-gini-scheduling legacy-quanta|paper-lp-event|cplex-algorithm-replica|round29-bound-gain-incremental|round30-dual-bound-target|round31-nonblocking-native-bound] "
         << "[--process-wall-time-limit <seconds>] [--process-shutdown-margin <seconds>] [--process-phase-ledger <csv>] "
         << "[--global-gini-tree-search dynamic|traditional|auto] [--global-gini-tree-child-estimate parent-copy|dispersion-coupled|factory-domain] "
         << "[--global-gini-tree-row-attachment full-inherited-pack|exact-incremental-delta] [--global-gini-tree-row-timing deferred|eager] "
@@ -568,6 +568,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--gurobi-threads") opt.gurobi_threads = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--gurobi-seed") opt.gurobi_seed = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--gurobi-presolve") opt.gurobi_presolve = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--gurobi-hga-start") opt.gurobi_hga_start = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--gurobi-home") opt.gurobi_home = requireValue(i, argc, argv);
         else if (arg == "--gurobi-progress") opt.gurobi_progress_path = requireValue(i, argc, argv);
         else if (arg == "--gurobi-model-export") opt.gurobi_model_export_path = requireValue(i, argc, argv);
@@ -1327,7 +1328,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.external_gini_lifecycle !=
             "round29-same-leaf-in-memory-model" &&
         opt.external_gini_lifecycle !=
-            "round30-same-leaf-bound-target") {
+            "round30-same-leaf-bound-target" &&
+        opt.external_gini_lifecycle !=
+            "round31-open-native-bounded") {
         opt.external_gini_lifecycle = "retained-per-leaf";
     }
     opt.external_gini_split_after_attempts =
@@ -1468,7 +1471,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.external_gini_scheduling != "paper-lp-event" &&
         opt.external_gini_scheduling != "cplex-algorithm-replica" &&
         opt.external_gini_scheduling != "round29-bound-gain-incremental" &&
-        opt.external_gini_scheduling != "round30-dual-bound-target") {
+        opt.external_gini_scheduling != "round30-dual-bound-target" &&
+        opt.external_gini_scheduling !=
+            "round31-nonblocking-native-bound") {
         opt.external_gini_scheduling = "legacy-quanta";
     }
     if (opt.primal_heuristic != "greedy" &&
@@ -11620,7 +11625,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             opt.external_gini_scheduling ==
                 "round29-bound-gain-incremental" ||
             opt.external_gini_scheduling ==
-                "round30-dual-bound-target";
+                "round30-dual-bound-target" ||
+            opt.external_gini_scheduling ==
+                "round31-nonblocking-native-bound";
         if (paper_generation_scheduling &&
             exact_phase_remaining <= 0.0) {
             result.external_gini_tree_scheduling =
@@ -11663,13 +11670,18 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         const bool c5_scheduling =
             opt.external_gini_scheduling ==
                 "round30-dual-bound-target";
+        const bool c6_scheduling =
+            opt.external_gini_scheduling ==
+                "round31-nonblocking-native-bound";
         result.notes.push_back(replica_scheduling
             ? "frontier execution mode cplex-algorithm-replica: the cold external Gurobi tree reproduces S0 structural Gini branching with deferred child LP processing and exactly-once terminal MIPs"
-            : (c5_scheduling
+            : (c6_scheduling
+                ? "frontier execution mode round31-nonblocking-native-bound: every controlling leaf uses parameter-free next-frontier native-bound targets before lazy child lookahead; target attainment requeues an open leaf and never forces a split"
+                : (c5_scheduling
                 ? "frontier execution mode round30-dual-bound-target: complete parent/child LPs plus a dimensionless disjunction rule and backend-certified parent native-bound milestones; no time, Work, node, solution, retry, or attempt scheduling"
                 : (paper_scheduling || c4_scheduling
                     ? "frontier execution mode paper-lp-event: complete LP relaxations drive atomic splits and every terminal MIP is optimized exactly once without internal scheduling budgets"
-                    : "frontier execution mode external-gini-tree legacy-quanta: historical retained leaf scheduling with time quanta")));
+                    : "frontier execution mode external-gini-tree legacy-quanta: historical retained leaf scheduling with time quanta"))));
         result.exact_phase_started = true;
         result.process_elapsed_at_exact_phase_start_seconds =
             ebrp::processElapsedSeconds(opt);
@@ -11679,7 +11691,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         ebrp::SolveResult external = replica_scheduling
             ? ebrp::solveReplicaExternalGiniTree(
                   instance, external_opt, result, cover_lo, cover_hi)
-            : (paper_scheduling || c4_scheduling || c5_scheduling
+            : (paper_scheduling || c4_scheduling || c5_scheduling ||
+                    c6_scheduling
                 ? ebrp::solvePaperExternalGiniTree(
                       instance, external_opt, result, cover_lo, cover_hi)
                 : ebrp::solveExternalGiniTree(

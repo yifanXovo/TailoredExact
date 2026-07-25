@@ -1,0 +1,19 @@
+case,name,test_executable,passed
+1,OPEN_LP_BOUNDED transition,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+2,OPEN_NATIVE_BOUNDED transition,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+3,next-controlling-bound target,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+4,single-leaf target behavior,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+5,tied-leaf behavior,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+6,target reached and requeue,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+7,target reached without forced split,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+8,current child gain split,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+9,no-gain nonblocking behavior,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+10,eventual exact closure,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+11,parent/child mechanical validity,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+12,lazy child lookahead,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+13,interruption retains open leaf,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+14,exact coverage,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+15,valid inherited native bound,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+16,partial status not closure,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+17,global LB correctness,build_round31/official/gurobi_r1/Round31C6Tests.exe,True
+18,trace fail-closed completeness,build_round31/official/gurobi_r1/Round31C6Tests.exe,True

@@ -1,0 +1,8 @@
+sequence,process_seconds,event,status,nominal_deadline_remaining_seconds,work_deadline_remaining_seconds,detail
+0,0,"process_entry","start",299.99929259999999,294.99929259999999,"absolute process deadline origin"
+1,0.000892,"instance_parsing_start","start",299.99910799999998,294.99910799999998,"E:\codes\ExactEBRP\reference\heldout_round26\V20_M3\tight_T_seed5102.txt"
+2,0.001779,"instance_parsing_complete","complete",299.99822110000002,294.998221,"instance=tight_T_seed5102.txt"
+3,0.059657399999999999,"plain_gurobi_optimize_launch","start",299.94034269999997,294.94034260000001,"absolute_work_remaining=294.940462"
+4,295.02307430000002,"final_result_serialization_start","start",4.9769259000000261,-0.023074300000018866,""
+5,295.0239229,"final_result_serialization_complete","complete",4.9760772000000202,-0.023922900000002301,""
+6,295.02400660000001,"process_exit","complete",4.9759935000000155,-0.024006499999984499,"rc=0"

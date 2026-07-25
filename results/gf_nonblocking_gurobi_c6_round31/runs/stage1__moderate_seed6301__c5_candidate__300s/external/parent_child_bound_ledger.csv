@@ -1,0 +1,8 @@
+parent_id,parent_lp_bound,left_id,left_lp_bound,left_infeasible,right_id,right_lp_bound,right_infeasible,post_split_bound,tolerance,decision
+L1,0.437294,L1.0,0.444302,0,L1.1,0.494998,0,0.444302,1e-07,"normalized_child_disjunction_gain_reaches_rho"
+L2,0.570939,L2.0,0.570939,0,L2.1,0,1,0.570939,1e-07,"complete_child_lp_infeasibility"
+L1.0,0.444302,L1.0.0,0,1,L1.0.1,0.466104,0,0.466104,1e-07,"complete_child_lp_infeasibility"
+L1.0.1,0.466104,L1.0.1.0,0.505068,0,L1.0.1.1,0.478225,0,0.478225,1e-07,"normalized_child_disjunction_gain_reaches_rho"
+L1.0.1.1,0.478225,L1.0.1.1.0,0.478736,0,L1.0.1.1.1,0.485506,0,0.478736,1e-07,"small_positive_disjunction_gain_requires_parent_native_target"
+L1.0.1.1.0,0.480618,L1.0.1.1.0.0,0.479796,0,L1.0.1.1.0.1,0.481782,0,0.479796,1e-07,"no_strict_child_disjunction_gain"
+L1.0.1.1.1,0.485506,L1.0.1.1.1.0,0.485506,0,L1.0.1.1.1.1,0.490252,0,0.485506,1e-07,"no_strict_child_disjunction_gain"

@@ -143,3 +143,7 @@ add_test(NAME Round29PerformanceRecoveryTests
 add_executable(Round30C5Tests tests/round30_c5_tests.cpp)
 target_link_libraries(Round30C5Tests PRIVATE exact_ebrp_core)
 add_test(NAME Round30C5Tests COMMAND Round30C5Tests)
+
+add_executable(Round31C6Tests tests/round31_c6_tests.cpp)
+target_link_libraries(Round31C6Tests PRIVATE exact_ebrp_core)
+add_test(NAME Round31C6Tests COMMAND Round31C6Tests)

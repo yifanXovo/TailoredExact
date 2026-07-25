@@ -78,9 +78,14 @@ struct PaperLeafRuntime {
     bool c5_split_pending = false;
     double c5_native_target = 0.0;
     std::vector<ControllingLeaf> c5_pending_children;
+    int c6_native_phase_count = 0;
+    bool c6_frontier_milestone_reached = false;
+    bool c6_children_ready = false;
+    std::vector<ControllingLeaf> c6_cached_children;
 };
 
 constexpr double kRound30C5NormalizedSplitThreshold = 0.01;
+constexpr double kRound31C6NormalizedSplitThreshold = 0.01;
 
 bool round29C4FrozenOptionsValid(const SolveOptions& options,
                                 std::string& reason) {
@@ -157,6 +162,45 @@ bool round30C5FrozenOptionsValid(const SolveOptions& options,
         return false;
     }
     reason = "accepted_round30_c5_frozen_contract";
+    return true;
+}
+
+bool round31C6FrozenOptionsValid(const SolveOptions& options,
+                                std::string& reason) {
+    if (options.external_gini_lifecycle !=
+        "round31-open-native-bounded") {
+        reason = "c6_requires_round31_open_native_bounded_lifecycle";
+        return false;
+    }
+    if (options.primal_heuristic != "hga-tgbc" ||
+        options.primal_heuristic_seed != 20260626u ||
+        options.primal_heuristic_stop != "generation-stagnation" ||
+        options.primal_heuristic_no_improve_generations != 2000 ||
+        options.exact_phase_local_redecode_repair) {
+        reason =
+            "c6_requires_primary_generation_hga_seed20260626_stagnation2000_"
+            "and_no_local_redecode";
+        return false;
+    }
+    if (options.frontier_intervals != 4 ||
+        !options.frontier_adaptive_split ||
+        options.frontier_adaptive_max_depth != 8 ||
+        std::fabs(options.frontier_adaptive_min_width - 1e-4) > 1e-12 ||
+        options.frontier_adaptive_split_factor != 2) {
+        reason = "c6_geometry_not_frozen_4_binary_depth8_width1e-4";
+        return false;
+    }
+    if (options.global_gini_tree_child_estimate_mode != "parent-copy" ||
+        options.global_gini_tree_row_attachment_mode !=
+            "full-inherited-pack" ||
+        options.global_gini_tree_row_timing_mode != "deferred" ||
+        options.global_gini_tree_native_mip_start ||
+        options.global_gini_tree_presolve != "off" ||
+        options.global_gini_tree_search != "traditional") {
+        reason = "c6_static_row_or_s0_f0_contract_mismatch";
+        return false;
+    }
+    reason = "accepted_round31_c6_frozen_contract";
     return true;
 }
 
@@ -327,6 +371,95 @@ C5BoundTargetSplitDecision evaluateC5BoundTargetSplitDecision(
     return decision;
 }
 
+C6FrontierDecision evaluateC6FrontierDecision(
+    double current_leaf_bound,
+    const std::vector<double>& other_relevant_leaf_bounds,
+    double certificate_tolerance,
+    bool frontier_milestone_already_reached) {
+    C6FrontierDecision decision;
+    const double tolerance = std::max(0.0, certificate_tolerance);
+    if (!std::isfinite(current_leaf_bound)) {
+        decision.reason = "nonfinite_current_leaf_bound";
+        return decision;
+    }
+    double next_strict_bound = std::numeric_limits<double>::infinity();
+    for (double bound : other_relevant_leaf_bounds) {
+        if (!std::isfinite(bound)) {
+            decision.reason = "nonfinite_other_relevant_leaf_bound";
+            return decision;
+        }
+        if (bound + tolerance < current_leaf_bound) {
+            decision.valid = true;
+            decision.requeue_without_native = true;
+            decision.reason = "selected_leaf_no_longer_controlling";
+            return decision;
+        }
+        if (bound > current_leaf_bound + tolerance) {
+            next_strict_bound = std::min(next_strict_bound, bound);
+        }
+    }
+    decision.valid = true;
+    if (frontier_milestone_already_reached) {
+        decision.allow_child_lookahead = true;
+        decision.reason =
+            "frontier_milestone_already_reached_lazy_child_recheck";
+        return decision;
+    }
+    if (std::isfinite(next_strict_bound)) {
+        decision.run_native_target = true;
+        decision.native_bound_target = next_strict_bound;
+        decision.reason = "next_strict_frontier_bound_target";
+    } else {
+        decision.allow_child_lookahead = true;
+        decision.reason =
+            other_relevant_leaf_bounds.empty()
+                ? "single_relevant_leaf_no_frontier_target"
+                : "lowest_frontier_plateau_has_no_higher_target";
+    }
+    return decision;
+}
+
+C6CurrentSplitDecision evaluateC6CurrentSplitDecision(
+    double current_parent_bound,
+    double verified_upper_bound,
+    const PaperLpResult& left,
+    const PaperLpResult& right,
+    double normalized_split_threshold,
+    double certificate_tolerance) {
+    C6CurrentSplitDecision decision;
+    const C5BoundTargetSplitDecision base =
+        evaluateC5BoundTargetSplitDecision(
+            current_parent_bound, verified_upper_bound, left, right,
+            normalized_split_threshold, certificate_tolerance);
+    if (!base.valid) {
+        decision.reason = "invalid_current_split_inputs:" + base.reason;
+        return decision;
+    }
+    decision.valid = true;
+    decision.child_infeasibility_trigger =
+        base.child_infeasibility_trigger;
+    decision.post_split_lower_bound = base.post_split_lower_bound;
+    decision.normalized_disjunction_gain =
+        base.normalized_disjunction_gain;
+    if (base.split_immediately) {
+        decision.split_immediately = true;
+        decision.reason = base.child_infeasibility_trigger
+            ? "current_complete_child_infeasibility"
+            : "current_normalized_child_gain_reaches_rho";
+    } else if (base.run_parent_bound_target_phase) {
+        decision.run_child_bound_target = true;
+        decision.child_bound_target = base.parent_native_bound_target;
+        decision.reason = "current_small_child_gain_target";
+    } else if (base.decline_split_and_solve_parent) {
+        decision.launch_exact_closure = true;
+        decision.reason = "current_child_gain_not_strict";
+    } else {
+        decision.valid = false;
+        decision.reason = "unclassified_current_split_decision";
+    }
+    return decision;
+}
+
 PaperTerminalMipDecision evaluatePaperTerminalMipDecision(
     const FixedIntervalMipOutcome& outcome) {
     PaperTerminalMipDecision decision;
@@ -385,8 +518,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     const bool c5_bound_target =
         options.external_gini_scheduling ==
             "round30-dual-bound-target";
+    const bool c6_nonblocking =
+        options.external_gini_scheduling ==
+            "round31-nonblocking-native-bound";
     const bool incremental_model_reuse =
-        c4_incremental || c5_bound_target;
+        c4_incremental || c5_bound_target || c6_nonblocking;
     SolveResult result = verified_seed;
     result.exact_phase_started = true;
     result.method = "gcap-frontier";
@@ -394,11 +530,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     result.certificate_scope = "original_global_gini_external_tree";
     result.external_gini_tree_attempted = true;
     result.external_gini_tree_backend = options.external_gini_backend;
-    result.external_gini_tree_lifecycle = c5_bound_target
-        ? "round30-same-leaf-bound-target"
+    result.external_gini_tree_lifecycle = c6_nonblocking
+        ? "round31-open-native-bounded"
+        : (c5_bound_target
+            ? "round30-same-leaf-bound-target"
         : (c4_incremental
             ? "round29-same-leaf-in-memory-model"
-            : "fresh-per-paper-event");
+            : "fresh-per-paper-event"));
     result.external_gini_tree_scheduling =
         options.external_gini_scheduling;
     result.external_gini_tree_root_gamma_L = root_gamma_L;
@@ -407,14 +545,17 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     result.strict_certified_original_problem = false;
     result.strict_certificate_class = "certificate_rejected";
     result.strict_certificate_rejection_reason = "paper_tree_not_finalized";
-    result.status = c5_bound_target
-        ? "round30_c5_external_gini_tree_running"
+    result.status = c6_nonblocking
+        ? "round31_c6_external_gini_tree_running"
+        : (c5_bound_target
+            ? "round30_c5_external_gini_tree_running"
         : (c4_incremental
             ? "round29_c4_external_gini_tree_running"
-            : "paper_external_gini_tree_running");
+            : "paper_external_gini_tree_running"));
     if (incremental_model_reuse) {
-        result.external_gini_tree_algorithm_arm = c5_bound_target
-            ? "C5-CANDIDATE" : "C4-CANDIDATE";
+        result.external_gini_tree_algorithm_arm = c6_nonblocking
+            ? "C6-CANDIDATE"
+            : (c5_bound_target ? "C5-CANDIDATE" : "C4-CANDIDATE");
         result.external_gini_tree_global_row_family_count =
             static_cast<long long>(kPaperGlobalFamilies.size());
         result.external_gini_tree_interval_row_family_count =
@@ -423,7 +564,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             join(kPaperGlobalFamilies);
         result.external_gini_tree_interval_row_families =
             join(kPaperIntervalFamilies);
-        result.external_gini_tree_child_lookahead_required = true;
+        result.external_gini_tree_child_lookahead_required =
+            !c6_nonblocking;
         result.external_gini_tree_structural_split_unconditional = false;
         result.external_gini_tree_internal_budget_scheduling = false;
         result.external_gini_tree_native_tree_reuse_claimed = false;
@@ -436,14 +578,21 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         result.external_gini_tree_certificate_tolerance = 1e-7;
         result.external_gini_tree_best_bound_tie_rule =
             "lower_bound,lower_endpoint,upper_endpoint,leaf_id";
-        result.external_gini_tree_implementation_boundary = c5_bound_target
+        result.external_gini_tree_implementation_boundary = c6_nonblocking
+            ? "complete parent LP then parameter-free next-strict-frontier "
+              "native-bound targets; lazy complete child LPs only at the "
+              "highest active frontier plateau; current rho split rule; "
+              "target attainment retains and requeues the open parent; "
+              "same-leaf model object only; no LP basis or native-tree "
+              "continuation claim"
+            : (c5_bound_target
             ? "complete parent/child LPs plus normalized disjunction rule; "
               "small positive gains trigger a backend-certified parent "
               "native-bound target before delayed atomic split; same-leaf "
               "model object only; no LP basis or native-tree continuation claim"
             : "complete parent and child LP benefit rule with same-leaf "
               "in-memory Gurobi model retention; integer domain restored "
-              "before exact parent MIP; no LP basis or native tree reuse claim";
+              "before exact parent MIP; no LP basis or native tree reuse claim");
     }
 
     const bool seed_valid =
@@ -457,11 +606,15 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     std::string c5_contract_reason;
     const bool c5_contract_valid = !c5_bound_target ||
         round30C5FrozenOptionsValid(options, c5_contract_reason);
+    std::string c6_contract_reason;
+    const bool c6_contract_valid = !c6_nonblocking ||
+        round31C6FrozenOptionsValid(options, c6_contract_reason);
     if (!seed_valid || options.external_gini_backend != "gurobi" ||
         options.external_gini_warm_start || root_gamma_L < -1e-12 ||
         root_gamma_U < root_gamma_L - 1e-12 ||
         !verified_seed.frontier_covers_all_improving_gini_values ||
-        !c4_contract_valid || !c5_contract_valid) {
+        !c4_contract_valid || !c5_contract_valid ||
+        !c6_contract_valid) {
         result.status = "paper_external_gini_tree_invalid_configuration";
         result.external_gini_tree_failure_reason = !seed_valid
             ? "same_run_seed_not_verified"
@@ -473,7 +626,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                         ? c4_contract_reason
                         : (!c5_contract_valid
                             ? c5_contract_reason
-                            : "incomplete_or_invalid_root_range"))));
+                            : (!c6_contract_valid
+                                ? c6_contract_reason
+                                : "incomplete_or_invalid_root_range")))));
         return result;
     }
 
@@ -493,9 +648,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             ? flow_resolution.failure_reason
             : (!flow_counts.valid
                 ? flow_counts.failure_reason
-                : (c5_bound_target
+                : (c6_nonblocking
+                    ? "c6_requires_f0_round20_current_connectivity"
+                    : (c5_bound_target
                     ? "c5_requires_f0_round20_current_connectivity"
-                    : "c4_requires_f0_round20_current_connectivity"));
+                    : "c4_requires_f0_round20_current_connectivity")));
         return result;
     }
     result.global_gini_tree_root_connectivity_flow_variant_requested =
@@ -516,9 +673,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     recordProcessPhase(
         options, "external_backend_creation", backend ? "complete" : "failed",
         std::string("backend=gurobi;arm=") +
-            (c5_bound_target
+            (c6_nonblocking
+                ? "C6-CANDIDATE"
+                : (c5_bound_target
                 ? "C5-CANDIDATE"
-                : (c4_incremental ? "C4-CANDIDATE" : "C2-PAPER")));
+                : (c4_incremental ? "C4-CANDIDATE" : "C2-PAPER"))));
     if (!backend) {
         result.status = "paper_external_gini_tree_backend_invalid";
         result.external_gini_tree_failure_reason = "gurobi_backend_factory_failed";
@@ -552,6 +711,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     const auto bounds_path = artifact_dir / "parent_child_bound_ledger.csv";
     const auto split_path = artifact_dir / "split_decision_ledger.csv";
     const auto global_bound_path = artifact_dir / "global_bound_trace.csv";
+    const auto native_target_path =
+        artifact_dir / "native_target_ledger.csv";
     result.external_gini_tree_event_trace_path = event_path.string();
     result.external_gini_tree_leaf_ledger_path = leaf_path.string();
     result.external_gini_tree_optimize_ledger_path = optimize_path.string();
@@ -561,9 +722,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     result.external_gini_tree_split_decision_ledger_path = split_path.string();
     result.external_gini_tree_global_bound_trace_path =
         global_bound_path.string();
+    result.external_gini_tree_native_target_ledger_path =
+        native_target_path.string();
     std::ofstream events(event_path), optimize(optimize_path), lp_ledger(lp_path),
         bound_ledger(bounds_path), split_ledger(split_path),
-        global_trace(global_bound_path);
+        global_trace(global_bound_path), native_targets(native_target_path);
     events << "telemetry_seconds,event,leaf_id,gamma_L,gamma_U,status,global_lb,verified_ub,detail\n";
     optimize << "leaf_id,solve_kind,native_status,optimize_return_code,global_deadline_remaining_at_launch,solver_runtime,work,nodes,simplex_iterations,barrier_iterations,memory_gb,model_sha256,in_memory_model_reused,integer_domain_restored,basis_reuse_status,native_log\n";
     lp_ledger << "leaf_id,parent_id,depth,gamma_L,gamma_U,terminal_valid,optimal,infeasible,bound_available,lower_bound,native_status,work,telemetry_seconds\n";
@@ -578,12 +741,18 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
            "other_open_leaf_min_valid_lower_bound,"
            "valid_global_lower_bound,verified_global_upper_bound,"
            "open_relevant_leaf_count,closed_relevant_leaf_count,event_source\n";
+    native_targets
+        << "phase_index,leaf_id,target_kind,current_bound,target_bound,"
+           "other_open_min_bound,verified_cutoff,status,native_status,"
+           "native_bound,target_reached,exact_closure,requeued,"
+           "solver_runtime,work,nodes,event_source\n";
     events.flush();
     optimize.flush();
     lp_ledger.flush();
     bound_ledger.flush();
     split_ledger.flush();
     global_trace.flush();
+    native_targets.flush();
     recordProcessPhase(options, "first_tree_ledger_opened", "complete",
                        event_path.string());
 
@@ -669,6 +838,25 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             minimum = std::min(minimum, leaf.lower_bound);
         }
         return minimum;
+    };
+    auto otherRelevantBounds = [&scheduler](
+            const std::string& active_leaf) {
+        std::vector<double> bounds;
+        for (const ControllingLeaf& leaf : scheduler.leaves()) {
+            if (leaf.id == active_leaf ||
+                leaf.status == ControllingLeafStatus::Replaced ||
+                leaf.parent_replaced ||
+                leaf.gamma_L >=
+                    leaf.cutoff - scheduler.certificateTolerance() ||
+                !((leaf.status == ControllingLeafStatus::Open ||
+                   leaf.status == ControllingLeafStatus::Invalid) &&
+                  leaf.lower_bound <
+                    leaf.cutoff - scheduler.certificateTolerance())) {
+                continue;
+            }
+            bounds.push_back(leaf.lower_bound);
+        }
+        return bounds;
     };
     auto writeGlobalTrace = [&](double process_seconds,
                                 double exact_seconds,
@@ -882,6 +1070,260 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         return true;
     };
 
+    enum class C6TargetDisposition {
+        Requeued,
+        Closed,
+        Deadline,
+        Failed
+    };
+    auto runC6NativeTarget = [&](
+            const ControllingLeaf& bounded,
+            PaperLeafRuntime& state,
+            double target,
+            const std::string& target_kind,
+            const std::string& event_source) {
+        if (!std::isfinite(target) ||
+            target <= bounded.lower_bound +
+                scheduler.certificateTolerance()) {
+            result.external_gini_tree_failure_reason =
+                "c6_invalid_nonincreasing_native_target:" + bounded.id;
+            return C6TargetDisposition::Failed;
+        }
+        const double remaining = globalDeadlineRemaining();
+        if (remaining <= 0.0) {
+            stopAtDeadline();
+            return C6TargetDisposition::Deadline;
+        }
+        ++state.c6_native_phase_count;
+        const int phase_index = state.c6_native_phase_count;
+        if (target_kind == "next_leaf") {
+            ++result.external_gini_tree_next_leaf_target_phase_count;
+            ++result.external_gini_tree_child_lookahead_avoided_count;
+        } else {
+            ++result.external_gini_tree_child_bound_target_phase_count;
+        }
+        FixedIntervalMipRequest request;
+        request.solve_kind =
+            FixedIntervalSolveKind::PaperPartialBoundTargetMip;
+        request.leaf_id = bounded.id;
+        request.gamma_L = bounded.gamma_L;
+        request.gamma_U = bounded.gamma_U;
+        request.verified_cutoff = verified_ub;
+        request.global_deadline_remaining_seconds = remaining;
+        request.new_leaf = false;
+        request.warm_start_enabled = false;
+        request.canonical_model_path = state.artifact.path;
+        request.canonical_model_fingerprint = state.artifact.sha256;
+        request.canonical_model_scope = state.artifact.model_scope;
+        request.canonical_row_signature = state.artifact.row_signature;
+        request.native_log_path = artifact_dir / "native_logs" /
+            (bounded.id + "_c6_" + std::to_string(phase_index) + "_" +
+             target_kind + "_target_mip.gurobi.log");
+        request.incremental_model_reuse_enabled = true;
+        request.retain_model_after_solve = true;
+        request.native_bound_target_enabled = true;
+        request.native_bound_target = target;
+        request.native_bound_target_tolerance =
+            scheduler.certificateTolerance();
+        request.capture_native_bound_events = true;
+        const double process_launch = processElapsedSeconds(options);
+        const double exact_launch = elapsedTelemetry();
+        const double other_bound =
+            otherRelevantMinimum(bounded.id);
+        const FixedIntervalMipOutcome outcome = backend->solve(request);
+        optimize << bounded.id << ','
+                 << (target_kind == "next_leaf"
+                        ? "NEXT_LEAF_TARGET_MIP"
+                        : "CHILD_BOUND_TARGET_MIP")
+                 << ',' << csvField(outcome.native_status) << ','
+                 << outcome.optimize_return_code << ',' << remaining << ','
+                 << outcome.solver_runtime_seconds << ',' << outcome.work
+                 << ',' << outcome.nodes << ',' << outcome.simplex_iterations
+                 << ',' << outcome.barrier_iterations << ','
+                 << outcome.memory_gb << ',' << state.artifact.sha256 << ','
+                 << outcome.in_memory_model_reused << ','
+                 << outcome.integer_domain_restored << ','
+                 << csvField(outcome.basis_reuse_status) << ','
+                 << csvField(outcome.native_log_path) << '\n';
+        for (const FixedIntervalNativeBoundEvent& native_event :
+                outcome.native_bound_events) {
+            if (!native_event.native_bound_available ||
+                (!native_event.bound_improved &&
+                 !native_event.target_reached)) {
+                continue;
+            }
+            writeGlobalTrace(
+                process_launch + native_event.solver_runtime_seconds,
+                exact_launch + native_event.solver_runtime_seconds,
+                native_event.target_reached
+                    ? (target_kind == "next_leaf"
+                        ? "next_leaf_native_bound_target"
+                        : "child_native_bound_target")
+                    : (native_event.processed_nodes <= 0.0
+                        ? "native_root_processing_bound"
+                        : "partial_native_mip_bound_improvement"),
+                bounded.id,
+                std::max(
+                    bounded.lower_bound, native_event.native_bound),
+                other_bound,
+                "gurobi_cb_mip_objbnd_valid_native_bound");
+        }
+        const bool engineering_valid =
+            outcome.attempted && outcome.available &&
+            outcome.solver_finalization_reached &&
+            outcome.model_fingerprint_matches_request &&
+            outcome.exact_zero_gap_roundtrip &&
+            outcome.feasibility_consistency_gate &&
+            outcome.partial_bound_target_mip;
+        if (!engineering_valid) {
+            result.external_gini_tree_failure_reason =
+                "c6_native_target_engineering_gate_failed:" +
+                outcome.failure_reason;
+            native_targets << phase_index << ',' << bounded.id << ','
+                           << target_kind << ',' << bounded.lower_bound << ','
+                           << target << ',' << other_bound << ','
+                           << verified_ub << ",engineering_invalid,"
+                           << csvField(outcome.native_status) << ','
+                           << outcome.native_bound << ",0,0,0,"
+                           << outcome.solver_runtime_seconds << ','
+                           << outcome.work << ',' << outcome.nodes << ','
+                           << csvField(event_source) << '\n';
+            return C6TargetDisposition::Failed;
+        }
+        if (outcome.native_bound_available) {
+            std::string reason;
+            if (!scheduler.mergeValidLowerBound(
+                    bounded.id, outcome.native_bound,
+                    target_kind == "next_leaf"
+                        ? "valid_next_leaf_target_native_bound"
+                        : "valid_child_target_native_bound",
+                    &reason)) {
+                result.external_gini_tree_failure_reason =
+                    "c6_native_target_bound_merge_failed:" + reason;
+                return C6TargetDisposition::Failed;
+            }
+        }
+        if (outcome.incumbent_available &&
+            outcome.incumbent_independently_verified &&
+            outcome.incumbent_objective < verified_ub - 1e-9) {
+            verified_ub = outcome.incumbent_objective;
+            best_routes = outcome.incumbent_routes;
+            std::string cutoff_reason;
+            if (!scheduler.tightenVerifiedCutoff(
+                    verified_ub, &cutoff_reason)) {
+                result.external_gini_tree_failure_reason =
+                    "c6_verified_cutoff_tightening_failed:" + cutoff_reason;
+                return C6TargetDisposition::Failed;
+            }
+            writeGlobalTrace(
+                processElapsedSeconds(options), elapsedTelemetry(),
+                "incumbent_improvement", bounded.id,
+                scheduler.findLeaf(bounded.id)
+                    ? scheduler.findLeaf(bounded.id)->lower_bound
+                    : bounded.lower_bound,
+                otherRelevantMinimum(bounded.id),
+                "independently_verified_c6_partial_mip_incumbent");
+        }
+        if (outcome.optimal || outcome.infeasible) {
+            std::string reason;
+            const ControllingLeafStatus close_status =
+                outcome.infeasible
+                    ? ControllingLeafStatus::Empty
+                    : ControllingLeafStatus::Closed;
+            if (!scheduler.setStatus(
+                    bounded.id, close_status,
+                    outcome.infeasible
+                        ? "c6_native_target_phase_infeasible"
+                        : "c6_native_target_phase_optimal",
+                    &reason)) {
+                result.external_gini_tree_failure_reason =
+                    "c6_native_target_closure_failed:" + reason;
+                return C6TargetDisposition::Failed;
+            }
+            backend->discardLeaf(bounded.id);
+            for (const ControllingLeaf& child :
+                    state.c6_cached_children) {
+                backend->discardLeaf(child.id);
+            }
+            native_targets << phase_index << ',' << bounded.id << ','
+                           << target_kind << ',' << bounded.lower_bound << ','
+                           << target << ',' << other_bound << ','
+                           << verified_ub << ",exact_closure,"
+                           << csvField(outcome.native_status) << ','
+                           << outcome.native_bound << ','
+                           << outcome.native_bound_target_reached
+                           << ",1,0," << outcome.solver_runtime_seconds << ','
+                           << outcome.work << ',' << outcome.nodes << ','
+                           << csvField(event_source) << '\n';
+            writeGlobalTrace(
+                processElapsedSeconds(options), elapsedTelemetry(),
+                outcome.infeasible
+                    ? "infeasible_closure"
+                    : "terminal_mip_closure",
+                bounded.id, std::numeric_limits<double>::infinity(),
+                scheduler.globalLowerBound(),
+                "c6_native_target_phase_exact_closure");
+            return C6TargetDisposition::Closed;
+        }
+        if (outcome.native_bound_target_reached &&
+            outcome.native_bound_target_termination_requested &&
+            outcome.native_bound_available &&
+            outcome.native_bound +
+                scheduler.certificateTolerance() >= target) {
+            if (target_kind == "next_leaf") {
+                ++result.external_gini_tree_next_leaf_target_reached_count;
+                state.c6_frontier_milestone_reached = true;
+            } else {
+                ++result.external_gini_tree_child_bound_target_reached_count;
+                ++result.external_gini_tree_forced_split_avoided_count;
+            }
+            ++result.external_gini_tree_native_requeue_count;
+            const ControllingLeaf* strengthened =
+                scheduler.findLeaf(bounded.id);
+            native_targets << phase_index << ',' << bounded.id << ','
+                           << target_kind << ',' << bounded.lower_bound << ','
+                           << target << ',' << other_bound << ','
+                           << verified_ub << ",target_reached_requeue,"
+                           << csvField(outcome.native_status) << ','
+                           << outcome.native_bound << ",1,0,1,"
+                           << outcome.solver_runtime_seconds << ','
+                           << outcome.work << ',' << outcome.nodes << ','
+                           << csvField(event_source) << '\n';
+            events << elapsedTelemetry()
+                   << ",native_bound_target_reached," << bounded.id << ','
+                   << bounded.gamma_L << ',' << bounded.gamma_U << ",open,"
+                   << scheduler.globalLowerBound() << ',' << verified_ub << ','
+                   << csvField(event_source) << '\n';
+            writeGlobalTrace(
+                processElapsedSeconds(options), elapsedTelemetry(),
+                target_kind == "next_leaf"
+                    ? "next_leaf_native_bound_target"
+                    : "child_native_bound_target",
+                bounded.id,
+                strengthened ? strengthened->lower_bound
+                             : outcome.native_bound,
+                otherRelevantMinimum(bounded.id),
+                event_source);
+            return C6TargetDisposition::Requeued;
+        }
+        if (outcome.interrupted) {
+            native_targets << phase_index << ',' << bounded.id << ','
+                           << target_kind << ',' << bounded.lower_bound << ','
+                           << target << ',' << other_bound << ','
+                           << verified_ub << ",deadline_open,"
+                           << csvField(outcome.native_status) << ','
+                           << outcome.native_bound << ",0,0,0,"
+                           << outcome.solver_runtime_seconds << ','
+                           << outcome.work << ',' << outcome.nodes << ','
+                           << csvField(event_source) << '\n';
+            stopAtDeadline();
+            return C6TargetDisposition::Deadline;
+        }
+        result.external_gini_tree_failure_reason =
+            "c6_native_target_status_invalid:" + outcome.native_status;
+        return C6TargetDisposition::Failed;
+    };
+
     while (!hard_failure && !global_deadline_stop &&
            !scheduler.everyRelevantLeafClosed()) {
         if (!first_tree_event_recorded) {
@@ -967,6 +1409,54 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 "complete_lp_bound_vs_verified_incumbent");
             continue;
         }
+        if (c6_nonblocking) {
+            const C6FrontierDecision frontier =
+                evaluateC6FrontierDecision(
+                    bounded.lower_bound,
+                    otherRelevantBounds(bounded.id),
+                    scheduler.certificateTolerance(),
+                    selected_state.c6_frontier_milestone_reached);
+            if (!frontier.valid) {
+                hard_failure = true;
+                result.external_gini_tree_failure_reason =
+                    "c6_frontier_decision_invalid:" + frontier.reason;
+                break;
+            }
+            if (frontier.requeue_without_native) {
+                ++result.external_gini_tree_parent_lp_requeue_count;
+                ++result.external_gini_tree_child_lookahead_avoided_count;
+                events << elapsedTelemetry() << ",parent_lp_requeue,"
+                       << bounded.id << ',' << bounded.gamma_L << ','
+                       << bounded.gamma_U << ",open,"
+                       << scheduler.globalLowerBound() << ',' << verified_ub
+                       << ',' << csvField(frontier.reason) << '\n';
+                writeGlobalTrace(
+                    processElapsedSeconds(options), elapsedTelemetry(),
+                    "parent_lp_requeue", bounded.id, bounded.lower_bound,
+                    otherRelevantMinimum(bounded.id),
+                    "c6_selected_leaf_no_longer_controlling");
+                continue;
+            }
+            if (frontier.run_native_target) {
+                const C6TargetDisposition disposition =
+                    runC6NativeTarget(
+                        bounded, selected_state,
+                        frontier.native_bound_target, "next_leaf",
+                        "c6_next_strict_frontier_bound_reached_requeue");
+                if (disposition == C6TargetDisposition::Failed) {
+                    hard_failure = true;
+                    break;
+                }
+                if (disposition == C6TargetDisposition::Deadline) break;
+                continue;
+            }
+            if (!frontier.allow_child_lookahead) {
+                hard_failure = true;
+                result.external_gini_tree_failure_reason =
+                    "c6_frontier_decision_has_no_action";
+                break;
+            }
+        }
         if (c5_bound_target && selected_state.c5_split_pending) {
             std::string reason;
             if (!scheduler.splitLeafAtomically(
@@ -1043,10 +1533,38 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 child.cutoff = bounded.cutoff;
                 children.push_back(child);
             }
+            const bool reuse_c6_children =
+                c6_nonblocking && selected_state.c6_children_ready;
+            if (reuse_c6_children) {
+                if (selected_state.c6_cached_children.size() != 2) {
+                    hard_failure = true;
+                    result.external_gini_tree_failure_reason =
+                        "c6_cached_child_count_invalid:" + bounded.id;
+                    break;
+                }
+                children = selected_state.c6_cached_children;
+                for (ControllingLeaf& child : children) {
+                    child.base_lower_bound = std::max(
+                        child.base_lower_bound, bounded.lower_bound);
+                    child.lower_bound = std::max(
+                        child.lower_bound, bounded.lower_bound);
+                    child.cutoff = bounded.cutoff;
+                    child.lower_bound_sources.push_back(
+                        "inherited_requeued_parent_native_bound");
+                }
+                ++result.external_gini_tree_child_lookahead_reuse_count;
+                events << elapsedTelemetry() << ",child_lp_reuse,"
+                       << bounded.id << ',' << bounded.gamma_L << ','
+                       << bounded.gamma_U << ",open,"
+                       << scheduler.globalLowerBound() << ',' << verified_ub
+                       << ',' << csvField(
+                              "c6_cached_complete_child_lp_pair_reused")
+                       << '\n';
+            }
             // Child LPs are structural lookahead events. They are evaluated
             // completely before the scheduler sees either child, preserving
             // atomic parent replacement.
-            for (ControllingLeaf& child : children) {
+            if (!reuse_c6_children) for (ControllingLeaf& child : children) {
                 std::string add_reason;
                 ControllingLeafScheduler isolated(
                     scheduler.certificateTolerance());
@@ -1071,7 +1589,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 request.leaf_id = child.id;
                 request.gamma_L = child.gamma_L;
                 request.gamma_U = child.gamma_U;
-                request.verified_cutoff = verified_seed.objective;
+                request.verified_cutoff =
+                    c6_nonblocking ? verified_ub : verified_seed.objective;
                 request.global_deadline_remaining_seconds = remaining;
                 request.new_leaf = true;
                 request.canonical_model_path = child_state.artifact.path;
@@ -1146,6 +1665,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 }
             }
             if (hard_failure || global_deadline_stop) break;
+            if (c6_nonblocking && !reuse_c6_children) {
+                selected_state.c6_children_ready = true;
+                selected_state.c6_cached_children = children;
+            }
             const PaperLpSplitDecision split = evaluatePaperLpSplitDecision(
                 bounded.lower_bound, runtime[children[0].id].lp,
                 runtime[children[1].id].lp,
@@ -1158,19 +1681,38 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                       kRound30C5NormalizedSplitThreshold,
                       scheduler.certificateTolerance())
                 : C5BoundTargetSplitDecision{};
+            const C6CurrentSplitDecision c6_split = c6_nonblocking
+                ? evaluateC6CurrentSplitDecision(
+                      bounded.lower_bound, verified_ub,
+                      runtime[children[0].id].lp,
+                      runtime[children[1].id].lp,
+                      kRound31C6NormalizedSplitThreshold,
+                      scheduler.certificateTolerance())
+                : C6CurrentSplitDecision{};
             const bool decision_valid =
-                c5_bound_target ? c5_split.valid : split.valid;
+                c6_nonblocking
+                    ? c6_split.valid
+                    : (c5_bound_target ? c5_split.valid : split.valid);
             const bool split_immediately =
-                c5_bound_target ? c5_split.split_immediately
-                                : split.should_split;
+                c6_nonblocking
+                    ? c6_split.split_immediately
+                    : (c5_bound_target ? c5_split.split_immediately
+                                       : split.should_split);
             const bool child_infeasibility_trigger =
-                c5_bound_target ? c5_split.child_infeasibility_trigger
-                                : split.child_infeasibility_trigger;
+                c6_nonblocking
+                    ? c6_split.child_infeasibility_trigger
+                    : (c5_bound_target
+                        ? c5_split.child_infeasibility_trigger
+                        : split.child_infeasibility_trigger);
             const double post_split_bound =
-                c5_bound_target ? c5_split.post_split_lower_bound
-                                : split.post_split_lower_bound;
+                c6_nonblocking
+                    ? c6_split.post_split_lower_bound
+                    : (c5_bound_target ? c5_split.post_split_lower_bound
+                                       : split.post_split_lower_bound);
             const std::string split_reason =
-                c5_bound_target ? c5_split.reason : split.reason;
+                c6_nonblocking
+                    ? c6_split.reason
+                    : (c5_bound_target ? c5_split.reason : split.reason);
             bound_ledger << bounded.id << ',' << bounded.lower_bound << ','
                          << children[0].id << ','
                          << runtime[children[0].id].lp.lower_bound << ','
@@ -1184,21 +1726,30 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             split_ledger << bounded.id << ",true," << decision_valid << ','
                          << split_immediately << ','
                          << child_infeasibility_trigger << ','
-                         << (!c5_bound_target &&
+                         << (!c5_bound_target && !c6_nonblocking &&
                              split.strict_bound_improvement_trigger)
                          << ',';
-            if (c5_bound_target &&
-                std::isfinite(c5_split.normalized_disjunction_gain)) {
+            if (c6_nonblocking &&
+                std::isfinite(c6_split.normalized_disjunction_gain)) {
+                split_ledger << c6_split.normalized_disjunction_gain;
+            } else if (c5_bound_target &&
+                       std::isfinite(
+                           c5_split.normalized_disjunction_gain)) {
                 split_ledger << c5_split.normalized_disjunction_gain;
             }
             split_ledger << ',';
-            if (c5_bound_target &&
-                c5_split.run_parent_bound_target_phase) {
+            if (c6_nonblocking &&
+                c6_split.run_child_bound_target) {
+                split_ledger << c6_split.child_bound_target;
+            } else if (c5_bound_target &&
+                       c5_split.run_parent_bound_target_phase) {
                 split_ledger << c5_split.parent_native_bound_target;
             }
             split_ledger << ','
-                         << (c5_bound_target &&
-                             c5_split.run_parent_bound_target_phase)
+                         << ((c6_nonblocking &&
+                              c6_split.run_child_bound_target) ||
+                             (c5_bound_target &&
+                              c5_split.run_parent_bound_target_phase))
                          << ',' << csvField(split_reason) << '\n';
             if (!decision_valid) {
                 hard_failure = true;
@@ -1243,9 +1794,29 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     "split", bounded.id,
                     std::numeric_limits<double>::infinity(),
                     scheduler.globalLowerBound(),
-                    c5_bound_target
-                        ? "c5_immediate_atomic_split"
-                        : "c4_atomic_split");
+                    c6_nonblocking
+                        ? "c6_current_gain_atomic_split"
+                        : (c5_bound_target
+                            ? "c5_immediate_atomic_split"
+                            : "c4_atomic_split"));
+                if (c6_nonblocking) {
+                    selected_state.c6_children_ready = false;
+                    selected_state.c6_cached_children.clear();
+                }
+                split_parent = true;
+            } else if (c6_nonblocking &&
+                       c6_split.run_child_bound_target) {
+                const C6TargetDisposition disposition =
+                    runC6NativeTarget(
+                        bounded, selected_state,
+                        c6_split.child_bound_target,
+                        "child_disjunction",
+                        "c6_child_bound_reached_parent_requeued_no_forced_split");
+                if (disposition == C6TargetDisposition::Failed) {
+                    hard_failure = true;
+                    break;
+                }
+                if (disposition == C6TargetDisposition::Deadline) break;
                 split_parent = true;
             } else if (c5_bound_target &&
                        c5_split.run_parent_bound_target_phase) {
@@ -1456,13 +2027,19 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 ++result.external_gini_tree_declined_split_count;
                 backend->discardLeaf(children[0].id);
                 backend->discardLeaf(children[1].id);
+                if (c6_nonblocking) {
+                    selected_state.c6_children_ready = false;
+                    selected_state.c6_cached_children.clear();
+                }
                 writeGlobalTrace(
                     processElapsedSeconds(options), elapsedTelemetry(),
                     "declined_split", bounded.id, bounded.lower_bound,
                     otherRelevantMinimum(bounded.id),
-                    c5_bound_target
-                        ? "c5_no_strict_child_disjunction_gain"
-                        : "c4_no_certified_one_level_lp_benefit");
+                    c6_nonblocking
+                        ? "c6_current_child_gain_not_strict_exact_closure"
+                        : (c5_bound_target
+                            ? "c5_no_strict_child_disjunction_gain"
+                            : "c4_no_certified_one_level_lp_benefit"));
             }
         } else {
             split_ledger << bounded.id
@@ -1489,12 +2066,16 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         // creating a phantom optimize/lifecycle event.
         terminal_state.terminal_mip_started = true;
         ++result.external_gini_tree_terminal_mip_leaf_count;
+        if (c6_nonblocking) {
+            ++result.external_gini_tree_exact_closure_launch_count;
+        }
         FixedIntervalMipRequest request;
         request.solve_kind = FixedIntervalSolveKind::PaperTerminalMip;
         request.leaf_id = bounded.id;
         request.gamma_L = bounded.gamma_L;
         request.gamma_U = bounded.gamma_U;
-        request.verified_cutoff = verified_seed.objective;
+        request.verified_cutoff =
+            c6_nonblocking ? verified_ub : verified_seed.objective;
         request.global_deadline_remaining_seconds = remaining;
         request.new_leaf = true;
         request.warm_start_enabled = false;
@@ -1568,6 +2149,17 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             outcome.incumbent_objective < verified_ub - 1e-9) {
             verified_ub = outcome.incumbent_objective;
             best_routes = outcome.incumbent_routes;
+            if (c6_nonblocking) {
+                std::string cutoff_reason;
+                if (!scheduler.tightenVerifiedCutoff(
+                        verified_ub, &cutoff_reason)) {
+                    hard_failure = true;
+                    result.external_gini_tree_failure_reason =
+                        "c6_terminal_verified_cutoff_tightening_failed:" +
+                        cutoff_reason;
+                    break;
+                }
+            }
             writeGlobalTrace(
                 processElapsedSeconds(options), elapsedTelemetry(),
                 "incumbent_improvement", bounded.id,
@@ -1618,7 +2210,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     }
 
     std::ofstream leaves(leaf_path);
-    leaves << "leaf_id,parent_id,depth,child_index,gamma_L,gamma_U,base_lower_bound,lower_bound,status,lp_complete,lp_optimal,lp_infeasible,lp_bound,terminal_mip_started,closure_source,lower_bound_sources\n";
+    leaves << "leaf_id,parent_id,depth,child_index,gamma_L,gamma_U,"
+              "base_lower_bound,lower_bound,status,lp_complete,lp_optimal,"
+              "lp_infeasible,lp_bound,terminal_mip_started,"
+              "c6_native_phase_count,c6_frontier_milestone_reached,"
+              "c6_children_ready,closure_source,"
+              "lower_bound_sources\n";
     long long final_count = 0;
     long long open_count = 0;
     long long closed_count = 0;
@@ -1643,6 +2240,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                << (state && state->lp.infeasible) << ','
                << (state ? state->lp.lower_bound : 0.0) << ','
                << (state && state->terminal_mip_started) << ','
+               << (state ? state->c6_native_phase_count : 0) << ','
+               << (state && state->c6_frontier_milestone_reached) << ','
+               << (state && state->c6_children_ready) << ','
                << csvField(leaf.closure_source) << ','
                << csvField(sources.str()) << '\n';
         if (leaf.status == ControllingLeafStatus::Replaced ||
@@ -1760,43 +2360,66 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     result.strict_certificate_class = certificate.certificate_class;
     result.strict_certificate_rejection_reason = certificate.rejection_reason;
     result.strict_lower_bound_source =
-        c5_bound_target
-            ? "minimum_valid_inherited_lp_partial_native_or_exact_mip_bound_"
-              "over_round30_c5_leaves"
-            : "minimum_valid_inherited_lp_or_terminal_mip_bound_over_paper_leaves";
+        c6_nonblocking
+            ? "minimum_valid_inherited_lp_open_native_target_or_exact_mip_"
+              "bound_over_round31_c6_leaves"
+            : (c5_bound_target
+                ? "minimum_valid_inherited_lp_partial_native_or_exact_mip_"
+                  "bound_over_round30_c5_leaves"
+                : "minimum_valid_inherited_lp_or_terminal_mip_bound_over_"
+                  "paper_leaves");
     result.status = certificate.certified
         ? "optimal"
         : (hard_failure
-            ? (c5_bound_target
-                ? "round30_c5_external_gini_tree_failed"
-                : (c4_incremental
-                    ? "round29_c4_external_gini_tree_failed"
-                    : "paper_external_gini_tree_failed"))
-            : (global_deadline_stop
-                ? (c5_bound_target
-                    ? "round30_c5_external_gini_tree_time_limit"
-                    : (c4_incremental
-                        ? "round29_c4_external_gini_tree_time_limit"
-                        : "paper_external_gini_tree_time_limit"))
+            ? (c6_nonblocking
+                ? "round31_c6_external_gini_tree_failed"
                 : (c5_bound_target
-                    ? "round30_c5_external_gini_tree_not_certified"
+                    ? "round30_c5_external_gini_tree_failed"
                     : (c4_incremental
-                        ? "round29_c4_external_gini_tree_not_certified"
-                        : "paper_external_gini_tree_not_certified"))));
+                        ? "round29_c4_external_gini_tree_failed"
+                        : "paper_external_gini_tree_failed")))
+            : (global_deadline_stop
+                ? (c6_nonblocking
+                    ? "round31_c6_external_gini_tree_time_limit"
+                    : (c5_bound_target
+                        ? "round30_c5_external_gini_tree_time_limit"
+                        : (c4_incremental
+                            ? "round29_c4_external_gini_tree_time_limit"
+                            : "paper_external_gini_tree_time_limit")))
+                : (c6_nonblocking
+                    ? "round31_c6_external_gini_tree_not_certified"
+                    : (c5_bound_target
+                        ? "round30_c5_external_gini_tree_not_certified"
+                        : (c4_incremental
+                            ? "round29_c4_external_gini_tree_not_certified"
+                            : "paper_external_gini_tree_not_certified")))));
     result.certificate = certificate.certified
-        ? (c5_bound_target
-            ? "Round 30 C5 engineering-exact certificate: complete range and "
-              "atomic coverage, complete parent/child LP decisions, "
-              "validity-gated mathematical parent native-bound targets, "
-              "exact remaining MIPs, monotone valid bounds, symmetric model "
-              "lifecycle, and independently verified global incumbent."
-            : (c4_incremental
-                ? "Round 29 C4 engineering-exact certificate: complete range and "
-                  "atomic coverage, complete parent/child LP benefit decisions, "
-                  "exact unsplit-parent terminal MIPs, monotone valid bounds, "
-                  "same-leaf model lifecycle symmetry, and independently "
-                  "verified global incumbent."
-                : "Round 27 engineering-exact paper external-tree certificate: exact interval coverage, complete optimal LP event decisions, exactly-once terminal MIPs, every relevant leaf closed, monotone valid bounds, completed no-restart lifecycle, and independently verified global incumbent."))
+        ? (c6_nonblocking
+            ? "Round 31 C6 engineering-exact certificate: complete range and "
+              "atomic coverage, parameter-free strict-frontier native-bound "
+              "targets, lazy current-bound child decisions, open-parent "
+              "requeue without forced delayed splits, exact closures, "
+              "monotone valid bounds, symmetric model lifecycle, and "
+              "independently verified global incumbent."
+            : (c5_bound_target
+                ? "Round 30 C5 engineering-exact certificate: complete range "
+                  "and atomic coverage, complete parent/child LP decisions, "
+                  "validity-gated mathematical parent native-bound targets, "
+                  "exact remaining MIPs, monotone valid bounds, symmetric "
+                  "model lifecycle, and independently verified global "
+                  "incumbent."
+                : (c4_incremental
+                    ? "Round 29 C4 engineering-exact certificate: complete "
+                      "range and atomic coverage, complete parent/child LP "
+                      "benefit decisions, exact unsplit-parent terminal MIPs, "
+                      "monotone valid bounds, same-leaf model lifecycle "
+                      "symmetry, and independently verified global incumbent."
+                    : "Round 27 engineering-exact paper external-tree "
+                      "certificate: exact interval coverage, complete optimal "
+                      "LP event decisions, exactly-once terminal MIPs, every "
+                      "relevant leaf closed, monotone valid bounds, completed "
+                      "no-restart lifecycle, and independently verified "
+                      "global incumbent.")))
         : "Paper external-tree strict certificate rejected: " +
             certificate.rejection_reason;
     if (result.external_gini_tree_failure_reason.empty()) {
