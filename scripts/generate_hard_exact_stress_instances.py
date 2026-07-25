@@ -138,10 +138,10 @@ def min_ratio_vector(initial: list[int], target: list[int]) -> list[float]:
 
 
 def write_instance(path: Path, seed: int, stress_type: str, t_limit: float,
-                   v: int = 20) -> dict[str, str]:
+                   v: int = 20, m: int = 3, q: int = 30) -> dict[str, str]:
+    if m <= 0 or q <= 0:
+        raise ValueError("vehicle count and vehicle capacity must be positive")
     rng = random.Random(seed)
-    m = 3
-    q = 30
     capacities = [100000] + [rng.randint(20, 50) for _ in range(v)]
     initial, target = make_inventories(rng, capacities, stress_type)
     weights = weight_vector(initial, target)
@@ -183,7 +183,8 @@ def write_instance(path: Path, seed: int, stress_type: str, t_limit: float,
         "deficit_count": str(deficit),
         "coordinate_pattern": "three_cluster_metric",
         "stress_type": stress_type,
-        "generation_rule_version": RULE_VERSION,
+        "generation_rule_version": (
+            RULE_VERSION if m == 3 and q == 30 else "hard_multi_m_v1"),
     }
 
 
