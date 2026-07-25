@@ -633,7 +633,9 @@ def main() -> int:
         }
         if complete:
             row.update(bound_trace.observed_step_auc(
-                observations, upper[run["state"]["instance"]]))
+                observations,
+                common_verified_upper_bound=
+                    upper[run["state"]["instance"]]))
             for threshold in (0.50, 0.25, 0.10, 0.05, 0.02, 0.01):
                 reached = next((
                     point.process_seconds for point in observations

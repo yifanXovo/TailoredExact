@@ -1,0 +1,64 @@
+
+Gurobi 13.0.2 (win64) logging started Fri Jul 24 20:58:23 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_nonblocking_gurobi_c6_round31\runs\stage2__moderate_seed3302__c6_candidate__300s\external\native_logs\L1_c6_1_next_leaf_target_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  268.7516054
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11903 rows, 3374 columns and 67328 nonzeros (Min)
+Model fingerprint: 0xcb30c829
+Model has 21 linear objective coefficients
+Variable types: 1684 continuous, 1690 integer (1490 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 1e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [5e-02, 3e+02]
+  RHS range        [5e-02, 5e+04]
+
+Presolve removed 1129 rows and 63 columns
+Presolve time: 0.20s
+Presolved: 10774 rows, 3311 columns, 70554 nonzeros
+Variable types: 1640 continuous, 1671 integer (1480 binary)
+
+Root relaxation: objective 1.422752e-01, 5036 iterations, 0.39 seconds (1.13 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.14228    0  298          -    0.14228      -     -    0s
+     0     0    0.14460    0  303          -    0.14460      -     -    0s
+     0     0    0.14947    0  294          -    0.14947      -     -    2s
+
+Cutting planes:
+  Learned: 8
+  Gomory: 5
+  Cover: 19
+  Implied bound: 164
+  Clique: 9
+  MIR: 327
+  StrongCG: 28
+  Flow cover: 89
+  Zero half: 8
+  Network: 23
+  RLT: 16
+  Relax-and-lift: 49
+  BQP: 33
+
+Explored 1 nodes (10954 simplex iterations) in 2.18 seconds (4.85 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Solve interrupted
+Best objective -, best bound 1.494681995497e-01, gap -
+
+User-callback calls 1110, time in user-callback 0.00 sec

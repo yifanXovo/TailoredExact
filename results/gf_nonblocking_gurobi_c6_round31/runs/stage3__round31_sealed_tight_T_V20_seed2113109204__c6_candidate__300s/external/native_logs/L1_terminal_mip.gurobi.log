@@ -1,0 +1,62 @@
+
+Gurobi 13.0.2 (win64) logging started Sat Jul 25 00:12:10 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_nonblocking_gurobi_c6_round31\runs\stage3__round31_sealed_tight_T_V20_seed2113109204__c6_candidate__300s\external\native_logs\L1_terminal_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  235.070418
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11902 rows, 3374 columns and 67353 nonzeros (Min)
+Model fingerprint: 0x097f0529
+Model has 21 linear objective coefficients
+Variable types: 1684 continuous, 1690 integer (1490 binary)
+Coefficient statistics:
+  Matrix range     [8e-03, 1e+04]
+  Objective range  [8e-03, 1e+00]
+  Bounds range     [1e-01, 2e+02]
+  RHS range        [1e-01, 5e+04]
+
+Presolved: 10103 rows, 3159 columns, 75819 nonzeros
+
+Continuing optimization...
+
+    35    25    0.33878    2  307          -    0.33023      -   703   33s
+    51    27    0.34719    3  300          -    0.33242      -   686   35s
+    77    43    0.39996   22  235          -    0.33243      -   573   42s
+   113    45    0.36302    8  231          -    0.33259      -   532   45s
+   217    47 infeasible   12               -    0.33736      -   439   50s
+
+Cutting planes:
+  Learned: 11
+  Cover: 34
+  Implied bound: 106
+  Clique: 23
+  MIR: 167
+  StrongCG: 5
+  Flow cover: 62
+  GUB cover: 1
+  Zero half: 3
+  Network: 30
+  RLT: 8
+  Relax-and-lift: 128
+  BQP: 4
+  PSD: 1
+
+Explored 381 nodes (230886 simplex iterations) in 53.78 seconds (113.26 work units)
+Most recent optimization runtime was 20.65 seconds (47.44 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+
+User-callback calls 5408, time in user-callback 0.00 sec

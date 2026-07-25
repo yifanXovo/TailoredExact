@@ -1,0 +1,8 @@
+parent_id,eligible,decision_valid,split,child_infeasibility_trigger,strict_bound_trigger,normalized_disjunction_gain,parent_native_bound_target,target_phase_required,reason
+L2,true,1,1,0,0,0.017621,,0,"normalized_child_disjunction_gain_reaches_rho"
+L3,true,1,0,0,0,0,,0,"no_strict_child_disjunction_gain"
+L2.0,true,1,1,1,0,,,0,"complete_child_lp_infeasibility"
+L2.0.1,true,1,1,0,0,0.0161687,,0,"normalized_child_disjunction_gain_reaches_rho"
+L2.0.1.1,true,1,0,0,0,0.00872698,8.15456,1,"small_positive_disjunction_gain_requires_parent_native_target"
+L2.0.1.1.0,true,1,0,0,0,0.00284536,8.15912,1,"small_positive_disjunction_gain_requires_parent_native_target"
+L2.0.1.1.1,true,1,0,0,0,0,,0,"no_strict_child_disjunction_gain"

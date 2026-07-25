@@ -1,0 +1,5 @@
+telemetry_seconds,event,leaf_id,gamma_L,gamma_U,status,global_lb,verified_ub,detail
+0.405274,lp_complete,L0,0,0.100336,infeasible,0,0.401344,"complete_lp_relaxation"
+0.918851,lp_complete,L1,0.100336,0.200672,optimal,0.200672,0.401344,"complete_lp_relaxation"
+2.46451,partial_native_bound_target_reached,L1,0.100336,0.200672,open,0.200672,0.401344,"backend_certified_parent_bound_requeued"
+2.89119,lp_complete,L2,0.200672,0.301008,optimal,0.245412,0.401344,"complete_lp_relaxation"
