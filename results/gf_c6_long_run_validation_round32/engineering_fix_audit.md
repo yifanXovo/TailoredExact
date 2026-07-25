@@ -34,6 +34,17 @@ exception or a result-selected performance tolerance. The analyzer change
 was made before official execution; the complete clean-build and Stage 0
 procedure is rerun uniformly under the resulting source identity.
 
+That rerun also exercised a native-instrumentation edge case: the trivial
+P-GRB exact row certified at zero gap in 0.022 seconds after one genuine
+progress callback, instead of the two callbacks observed in earlier passes.
+The row is correct, but one point cannot define observed AUC. The general
+trace audit now labels any valid strictly certified single-callback row
+`explicit_unavailable_single_callback_strict_certificate`, passes its
+correctness/availability qualification, and keeps it explicitly
+AUC-ineligible. It neither fabricates a second endpoint nor interpolates a
+trace. This analyzer repair also precedes official execution and triggers
+the same uniform clean-build and Stage 0 invalidation discipline.
+
 The multi-M generator generalizes only its `M` and `Q` function parameters;
 the legacy M3/Q30 defaults and byte output are unchanged. No C6 predicate,
 row family, geometry, target, requeue, split, exact-closure, HGA, or solver

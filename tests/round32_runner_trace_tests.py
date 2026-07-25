@@ -102,6 +102,32 @@ def main() -> int:
     require(
         analyzer.number("nan") != analyzer.number("nan"),
         "non-finite endpoint parser regression")
+    single_callback_run = {
+        "state": {
+            "run_id": "single-callback",
+            "stage_id": "test",
+            "instance_id": "instant-certificate",
+            "arm": "P-GRB",
+        },
+        "result": {
+            "status": "optimal",
+            "lower_bound": 0.0,
+            "upper_bound": 0.0,
+            "strict_certified_original_problem": True,
+        },
+    }
+    single_callback_audit = analyzer.trace_audit_rows(
+        [single_callback_run],
+        {"single-callback": (
+            False, "too_few_native_callback_bounds", (None,))},
+    )[0]
+    require(
+        single_callback_audit["passed"]
+        and not single_callback_audit["trace_complete"]
+        and not single_callback_audit["auc_eligible"]
+        and single_callback_audit["trace_reason"]
+        == "explicit_unavailable_single_callback_strict_certificate",
+        "strict single-callback trace was not explicitly AUC-unavailable")
 
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
@@ -164,7 +190,7 @@ def main() -> int:
             not target.with_suffix(".json.tmp").exists(),
             "atomic temporary file was left behind")
 
-    print("Round32RunnerTraceTests: 18 checks passed")
+    print("Round32RunnerTraceTests: 19 checks passed")
     return 0
 
 

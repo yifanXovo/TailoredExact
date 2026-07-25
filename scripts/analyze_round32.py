@@ -742,6 +742,21 @@ def trace_audit_rows(
         complete, reason, observations = traces[state["run_id"]]
         required = state["arm"] in {
             "P-GRB", "C5-REFERENCE", "C6-FROZEN"}
+        lower, upper = result_bounds(run)
+        certified_single_callback = (
+            required
+            and not complete
+            and reason == "too_few_native_callback_bounds"
+            and len(observations) == 1
+            and truth(run["result"].get(
+                "strict_certified_original_problem"))
+            and math.isfinite(lower)
+            and math.isfinite(upper)
+            and abs(lower - upper)
+            <= TOL * max(1.0, abs(lower), abs(upper)))
+        audited_reason = (
+            "explicit_unavailable_single_callback_strict_certificate"
+            if certified_single_callback else reason)
         output.append({
             "run_id": state["run_id"],
             "stage_id": state["stage_id"],
@@ -749,13 +764,15 @@ def trace_audit_rows(
             "arm": state["arm"],
             "trace_required": required,
             "trace_complete": complete,
-            "trace_reason": reason,
+            "trace_reason": audited_reason,
             "observation_count": len(observations),
+            "auc_eligible": complete,
             "formal_scheduler_global_bound_monotone": (
                 truth(metric(run, "global_bound_monotone"))
                 if state["arm"] in {"C5-REFERENCE", "C6-FROZEN"}
                 else True),
-            "passed": (not required) or complete,
+            "passed": (
+                (not required) or complete or certified_single_callback),
         })
     return output
 
