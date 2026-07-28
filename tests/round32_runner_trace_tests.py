@@ -68,6 +68,21 @@ def main() -> int:
     require(
         "scheduler.mergeValidLowerBound" not in trace_block,
         "trace writer unexpectedly mutates scheduler bounds")
+    gurobi_source = (
+        ROOT / "src" / "GurobiBaseline.cpp"
+    ).read_text(encoding="utf-8")
+    callback_start = gurobi_source.index(
+        "int __stdcall progressAndBoundTargetCallback")
+    callback_finish = gurobi_source.index(
+        "std::string versionString", callback_start)
+    callback_block = gurobi_source[callback_start:callback_finish]
+    require(
+        "Clock::time_point telemetry_start = Clock::now();" in gurobi_source,
+        "callback telemetry has no monotonic launch epoch")
+    require(
+        "Clock::now() - state->telemetry_start" in callback_block
+        and "&event.elapsed_runtime_seconds" not in callback_block,
+        "callback trace timing still trusts rollback-prone native wall time")
 
     runner_source = (
         ROOT / "scripts" / "run_round32_experiments.py"
@@ -190,7 +205,7 @@ def main() -> int:
             not target.with_suffix(".json.tmp").exists(),
             "atomic temporary file was left behind")
 
-    print("Round32RunnerTraceTests: 19 checks passed")
+    print("Round32RunnerTraceTests: 21 checks passed")
     return 0
 
 
