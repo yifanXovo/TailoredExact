@@ -1,0 +1,13 @@
+parent_id,parent_lp_bound,left_id,left_lp_bound,left_infeasible,right_id,right_lp_bound,right_infeasible,post_split_bound,tolerance,decision
+L2,4.24309,L2.0,0,1,L2.1,4.27329,0,4.27329,1e-07,"complete_child_lp_infeasibility"
+L3,4.30298,L3.0,4.30298,0,L3.1,0,1,4.30298,1e-07,"complete_child_lp_infeasibility"
+L2.1,4.27329,L2.1.0,0,1,L2.1.1,4.28941,0,4.28941,1e-07,"complete_child_lp_infeasibility"
+L2.1.1,4.28941,L2.1.1.0,0,1,L2.1.1.1,4.29821,0,4.29821,1e-07,"complete_child_lp_infeasibility"
+L2.1.1.1,4.29821,L2.1.1.1.0,0,1,L2.1.1.1.1,4.30353,0,4.30353,1e-07,"complete_child_lp_infeasibility"
+L3.0,4.30298,L3.0.0,4.30298,0,L3.0.1,0,1,4.30298,1e-07,"complete_child_lp_infeasibility"
+L3.0.0,4.30298,L3.0.0.0,4.30298,0,L3.0.0.1,4.33029,0,4.30298,1e-07,"no_strict_child_disjunction_gain"
+L2.1.1.1.1,4.30353,L2.1.1.1.1.0,0,1,L2.1.1.1.1.1,4.30662,0,4.30662,1e-07,"complete_child_lp_infeasibility"
+L2.1.1.1.1.1,4.30662,L2.1.1.1.1.1.0,0,1,L2.1.1.1.1.1.1,4.30817,0,4.30817,1e-07,"complete_child_lp_infeasibility"
+L2.1.1.1.1.1.1,4.30817,L2.1.1.1.1.1.1.0,4.31046,0,L2.1.1.1.1.1.1.1,4.30895,0,4.30895,1e-07,"normalized_child_disjunction_gain_reaches_rho"
+L2.1.1.1.1.1.1.1,4.30895,L2.1.1.1.1.1.1.1.0,4.31008,0,L2.1.1.1.1.1.1.1.1,4.30934,0,4.30934,1e-07,"small_positive_disjunction_gain_requires_parent_native_target"
+L2.1.1.1.1.1.1.0,4.31046,L2.1.1.1.1.1.1.0.0,4.31195,0,L2.1.1.1.1.1.1.0.1,4.31084,0,4.31084,1e-07,"small_positive_disjunction_gain_requires_parent_native_target"

@@ -1,9 +1,21 @@
 # Round 32 engineering-fix audit
 
-The source audit found one general trace-only issue: a native callback leaf
+The pre-run source audit found one general trace-only issue: a native callback leaf
 bound may exceed the verified incumbent immediately before leaf closure.
 `writeGlobalTrace` now includes the verified incumbent in the minimization
 aggregate. The active leaf value remains visible, preserving audit evidence.
+
+The first complete 133-row long-run matrix exposed a second general,
+telemetry-only issue. Gurobi `GRB_CB_RUNTIME` is elapsed wall-clock time and
+moved backward by 1.318000078 seconds after a host clock correction in one
+long C6 solve. The bound-event order, formal global lower bound, scheduler
+state, decisions, valid endpoint, and certificate semantics remained valid,
+but the frozen trace gate correctly rejected the decreasing timestamp.
+Callback event placement now uses a local `std::chrono::steady_clock`
+epoch. Native runtime remains available in Gurobi's final Runtime attribute
+and native log. The initial matrix, its incomplete report, and every raw row
+are preserved as invalidated evidence; both executables were rebuilt and
+rehashed, and all Stage 0 and official rows are rerun uniformly.
 
 The runner is hardened separately with atomic writes and completion markers,
 post-exit JSON parsing, fixed shutdown and watchdog separation, required

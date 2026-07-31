@@ -1,0 +1,33 @@
+{
+  "actual_atomic_splits": 99,
+  "c6_certificates_1800": 15,
+  "c6_certificates_3600": 3,
+  "child_lookahead_pairs": 280,
+  "classification": "c6_engineering_evidence_incomplete",
+  "classification_gates": {
+    "exactness": true,
+    "trace_complete": false
+  },
+  "completed_rows": 133,
+  "exact_closure_launches": 86,
+  "excluded_primary_auc_pairs": 1,
+  "existing_instance_count": 23,
+  "expected_rows": 133,
+  "failed_rows": 0,
+  "false_certificates": 0,
+  "invalidated_rows": 36,
+  "lp_cutoff_prunes": 0,
+  "native_target_rows": 125,
+  "new_multi_m_instance_count": 12,
+  "p_grb_certificates_1800": 2,
+  "p_grb_certificates_3600": 0,
+  "repeatability_rows": 16,
+  "requeues": 108,
+  "rerun_rows": 36,
+  "same_solver_benchmark": "P-GRB",
+  "schema": "round32-final-audit-v1",
+  "stable_cplex_mainline": "S0/F0-CPLEX",
+  "stage0_gates_passed": true,
+  "time_limited_rows": 44,
+  "validated_gurobi_arm": "C6-FROZEN"
+}

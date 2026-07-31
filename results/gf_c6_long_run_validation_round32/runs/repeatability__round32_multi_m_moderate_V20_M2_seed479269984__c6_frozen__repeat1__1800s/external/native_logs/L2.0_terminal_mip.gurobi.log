@@ -1,0 +1,65 @@
+
+Gurobi 13.0.2 (win64) logging started Fri Jul 31 13:10:17 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_c6_long_run_validation_round32\runs\repeatability__round32_multi_m_moderate_V20_M2_seed479269984__c6_frozen__repeat1__1800s\external\native_logs\L2.0_terminal_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1575.8063742
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 8719 rows, 2418 columns and 50588 nonzeros (Min)
+Model fingerprint: 0x59f709d2
+Model has 21 linear objective coefficients
+Variable types: 1246 continuous, 1172 integer (1032 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [3e-01, 8e+02]
+  RHS range        [3e-01, 5e+04]
+
+Presolve removed 995 rows and 58 columns
+Presolve time: 0.13s
+Presolved: 7724 rows, 2360 columns, 49542 nonzeros
+Variable types: 1199 continuous, 1161 integer (1023 binary)
+
+Root relaxation: objective 5.194490e-01, 2129 iterations, 0.06 seconds (0.16 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.51945    0  100          -    0.51945      -     -    0s
+     0     0    0.54473    0   91          -    0.54473      -     -    0s
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Cutting planes:
+  Learned: 4
+  Gomory: 7
+  Cover: 22
+  Implied bound: 136
+  Clique: 5
+  MIR: 204
+  StrongCG: 11
+  Flow cover: 45
+  GUB cover: 3
+  Zero half: 6
+  Network: 5
+  RLT: 6
+  Relax-and-lift: 43
+  BQP: 1
+
+Explored 1 nodes (2801 simplex iterations) in 0.46 seconds (0.82 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+
+User-callback calls 730, time in user-callback 0.00 sec

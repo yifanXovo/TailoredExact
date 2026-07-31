@@ -1,0 +1,217 @@
+{
+  "clean_release_build_count": 2,
+  "cmake": "cmake version 3.30.5-msvc23",
+  "command_count": 22,
+  "compiler": "g++.exe (Rev2, Built by MSYS2 project) 14.2.0",
+  "cplex_executable": "build_round32/official/cplex/ExactEBRP.exe",
+  "cplex_executable_sha256": "30ca011397b1597904d158d9e1b7636beb6decc20445441335aef0e5f765769d",
+  "cplex_version": "22.1.1",
+  "ctest_invocation_count": 2,
+  "gurobi_executable": "build_round32/official/gurobi/ExactEBRP.exe",
+  "gurobi_executable_sha256": "b45bd17aae1d466d0e8f15c9f978c6a3427998eeae0215a4406d1934a976f508",
+  "gurobi_version": "13.0.2",
+  "passed": true,
+  "python_test_script_count": 16,
+  "records": [
+    {
+      "command": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe\" -S E:\\codes\\ExactEBRP -B E:\\codes\\ExactEBRP\\build_round32\\official\\cplex -G \"MinGW Makefiles\" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe -DCMAKE_MAKE_PROGRAM=D:/msys64/ucrt64/bin/mingw32-make.exe -DEXACT_EBRP_ENABLE_GUROBI=OFF",
+      "name": "stage0_configure_cplex",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_configure_cplex.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_configure_cplex.stdout.log",
+      "wall_seconds": 2.9380000000819564
+    },
+    {
+      "command": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe\" --build E:\\codes\\ExactEBRP\\build_round32\\official\\cplex -j 2",
+      "name": "stage0_build_cplex",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_build_cplex.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_build_cplex.stdout.log",
+      "wall_seconds": 279.625
+    },
+    {
+      "command": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe\" --test-dir E:\\codes\\ExactEBRP\\build_round32\\official\\cplex --output-on-failure",
+      "name": "stage0_ctest_cplex",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_ctest_cplex.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_ctest_cplex.stdout.log",
+      "wall_seconds": 1.4849999998696148
+    },
+    {
+      "command": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe\" -S E:\\codes\\ExactEBRP -B E:\\codes\\ExactEBRP\\build_round32\\official\\gurobi -G \"MinGW Makefiles\" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe -DCMAKE_MAKE_PROGRAM=D:/msys64/ucrt64/bin/mingw32-make.exe -DEXACT_EBRP_ENABLE_GUROBI=ON -DGUROBI_ROOT=D:/gurobi1302/win64",
+      "name": "stage0_configure_gurobi",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_configure_gurobi.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_configure_gurobi.stdout.log",
+      "wall_seconds": 1.2340000001713634
+    },
+    {
+      "command": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe\" --build E:\\codes\\ExactEBRP\\build_round32\\official\\gurobi -j 2",
+      "name": "stage0_build_gurobi",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_build_gurobi.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_build_gurobi.stdout.log",
+      "wall_seconds": 280.3900000001304
+    },
+    {
+      "command": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe\" --test-dir E:\\codes\\ExactEBRP\\build_round32\\official\\gurobi --output-on-failure",
+      "name": "stage0_ctest_gurobi",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_ctest_gurobi.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_ctest_gurobi.stdout.log",
+      "wall_seconds": 1.2190000000409782
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round20_regression_tests.py",
+      "name": "stage0_python_round20_regression_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_python_round20_regression_tests.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_python_round20_regression_tests.stdout.log",
+      "wall_seconds": 3.5
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round22_runner_integrity_tests.py",
+      "name": "stage0_python_round22_runner_integrity_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_python_round22_runner_integrity_tests.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_python_round22_runner_integrity_tests.stdout.log",
+      "wall_seconds": 0.125
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round23_final_evidence_tests.py",
+      "name": "stage0_python_round23_final_evidence_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_python_round23_final_evidence_tests.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_python_round23_final_evidence_tests.stdout.log",
+      "wall_seconds": 3.765000000130385
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round23_moderate4301_forensic_tests.py",
+      "name": "stage0_python_round23_moderate4301_forensic_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_python_round23_moderate4301_forensic_tests.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_python_round23_moderate4301_forensic_tests.stdout.log",
+      "wall_seconds": 0.5469999997876585
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round23_runner_integrity_tests.py",
+      "name": "stage0_python_round23_runner_integrity_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_python_round23_runner_integrity_tests.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_python_round23_runner_integrity_tests.stdout.log",
+      "wall_seconds": 0.0940000000409782
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round25_protocol_tests.py",
+      "name": "stage0_python_round25_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_python_round25_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_python_round25_protocol_tests.stdout.log",
+      "wall_seconds": 0.20300000021234155
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round26_protocol_tests.py",
+      "name": "stage0_python_round26_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_python_round26_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_python_round26_protocol_tests.stdout.log",
+      "wall_seconds": 0.35999999986961484
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round27_protocol_tests.py",
+      "name": "stage0_python_round27_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_python_round27_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_python_round27_protocol_tests.stdout.log",
+      "wall_seconds": 0.375
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round28_protocol_tests.py",
+      "name": "stage0_python_round28_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_python_round28_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_python_round28_protocol_tests.stdout.log",
+      "wall_seconds": 0.04700000025331974
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round29_protocol_tests.py",
+      "name": "stage0_python_round29_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_python_round29_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_python_round29_protocol_tests.stdout.log",
+      "wall_seconds": 0.15700000012293458
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round30_c0_parser_tests.py",
+      "name": "stage0_python_round30_c0_parser_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_python_round30_c0_parser_tests.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_python_round30_c0_parser_tests.stdout.log",
+      "wall_seconds": 1.796000000089407
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round30_protocol_tests.py",
+      "name": "stage0_python_round30_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_python_round30_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_python_round30_protocol_tests.stdout.log",
+      "wall_seconds": 0.125
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round30_trace_tests.py",
+      "name": "stage0_python_round30_trace_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_python_round30_trace_tests.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_python_round30_trace_tests.stdout.log",
+      "wall_seconds": 0.10900000017136335
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round31_protocol_tests.py",
+      "name": "stage0_python_round31_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_python_round31_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_python_round31_protocol_tests.stdout.log",
+      "wall_seconds": 0.15700000012293458
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round32_protocol_tests.py",
+      "name": "stage0_python_round32_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_python_round32_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_python_round32_protocol_tests.stdout.log",
+      "wall_seconds": 0.13999999966472387
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round32_runner_trace_tests.py",
+      "name": "stage0_python_round32_runner_trace_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_python_round32_runner_trace_tests.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_python_round32_runner_trace_tests.stdout.log",
+      "wall_seconds": 0.1869999999180436
+    }
+  ],
+  "schema": "round32-build-tests-v1",
+  "source_commit": "0927d055710f43836053ecca055c0780b955a845"
+}

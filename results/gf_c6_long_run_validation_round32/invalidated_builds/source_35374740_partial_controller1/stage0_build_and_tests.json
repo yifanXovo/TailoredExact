@@ -1,0 +1,35 @@
+{
+  "failure": "[Errno 22] Invalid argument",
+  "passed": false,
+  "records": [
+    {
+      "command": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe\" -S E:\\codes\\ExactEBRP -B E:\\codes\\ExactEBRP\\build_round32\\official\\cplex -G \"MinGW Makefiles\" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe -DCMAKE_MAKE_PROGRAM=D:/msys64/ucrt64/bin/mingw32-make.exe -DEXACT_EBRP_ENABLE_GUROBI=OFF",
+      "name": "stage0_configure_cplex",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_configure_cplex.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_configure_cplex.stdout.log",
+      "wall_seconds": 1.2179999998770654
+    },
+    {
+      "command": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe\" --build E:\\codes\\ExactEBRP\\build_round32\\official\\cplex -j 2",
+      "name": "stage0_build_cplex",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_build_cplex.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_build_cplex.stdout.log",
+      "wall_seconds": 276.6089999997057
+    },
+    {
+      "command": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe\" --test-dir E:\\codes\\ExactEBRP\\build_round32\\official\\cplex --output-on-failure",
+      "name": "stage0_ctest_cplex",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_c6_long_run_validation_round32/stage0_ctest_cplex.stderr.log",
+      "stdout_path": "results/gf_c6_long_run_validation_round32/stage0_ctest_cplex.stdout.log",
+      "wall_seconds": 0.8910000002942979
+    }
+  ],
+  "schema": "round32-build-tests-v1",
+  "source_commit": "353747407c586e001dbc3d29e42d0157264a1531"
+}

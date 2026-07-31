@@ -1,0 +1,8 @@
+sequence,process_seconds,event,status,nominal_deadline_remaining_seconds,work_deadline_remaining_seconds,detail
+0,0,"process_entry","start",59.999242700000003,44.999242700000003,"absolute process deadline origin"
+1,0.00094709999999999998,"instance_parsing_start","start",59.999052900000002,44.999052900000002,"E:\codes\ExactEBRP\tests\data\round24_toy_V2_M1.txt"
+2,0.0016720000000000001,"instance_parsing_complete","complete",59.998328000000001,44.998328000000001,"instance=round24_toy_V2_M1.txt"
+3,0.073741000000000001,"plain_gurobi_optimize_launch","start",59.926259100000003,44.926259000000002,"absolute_work_remaining=44.926430"
+4,0.096981300000000006,"final_result_serialization_start","start",59.903019,44.903018799999998,""
+5,0.098565700000000006,"final_result_serialization_complete","complete",59.901434500000001,44.901434299999998,""
+6,0.098806500000000005,"process_exit","complete",59.9011937,44.901193599999999,"rc=0"
