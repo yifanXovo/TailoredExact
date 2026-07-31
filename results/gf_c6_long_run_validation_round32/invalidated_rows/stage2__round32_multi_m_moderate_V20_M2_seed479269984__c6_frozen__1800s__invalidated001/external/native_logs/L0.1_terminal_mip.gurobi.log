@@ -1,0 +1,116 @@
+
+Gurobi 13.0.2 (win64) logging started Mon Jul 27 03:34:05 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_c6_long_run_validation_round32\runs\stage2__round32_multi_m_moderate_V20_M2_seed479269984__c6_frozen__1800s\external\native_logs\L0.1_terminal_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1758.7347705
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 8719 rows, 2418 columns and 50588 nonzeros (Min)
+Model fingerprint: 0x58d130e1
+Model has 21 linear objective coefficients
+Variable types: 1246 continuous, 1172 integer (1032 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [7e-02, 1e+03]
+  RHS range        [7e-02, 5e+04]
+
+Presolved: 7745 rows, 2362 columns, 49692 nonzeros
+
+Continuing optimization...
+
+     0     0    0.42107    0  191          -    0.42107      -     -    1s
+     0     0    0.42107    0  190          -    0.42107      -     -    1s
+     0     0    0.42187    0  209          -    0.42187      -     -    1s
+     0     0    0.43263    0  254          -    0.43263      -     -    1s
+     0     0    0.43354    0  254          -    0.43354      -     -    1s
+     0     0    0.44349    0  260          -    0.44349      -     -    2s
+     0     0    0.44428    0  238          -    0.44428      -     -    2s
+     0     0    0.44913    0  240          -    0.44913      -     -    3s
+     0     0    0.45000    0  278          -    0.45000      -     -    3s
+     0     0    0.45122    0  251          -    0.45122      -     -    3s
+     0     0    0.45165    0  251          -    0.45165      -     -    3s
+     0     0    0.45304    0  257          -    0.45304      -     -    4s
+     0     0    0.45380    0  276          -    0.45380      -     -    4s
+     0     0    0.46155    0  242          -    0.46155      -     -    5s
+     0     0    0.46314    0  254          -    0.46314      -     -    5s
+     0     0    0.46448    0  252          -    0.46448      -     -    5s
+     0     0    0.46513    0  243          -    0.46513      -     -    5s
+     0     0    0.46991    0  305          -    0.46991      -     -    6s
+     0     0    0.47071    0  310          -    0.47071      -     -    6s
+     0     0    0.47290    0  276          -    0.47290      -     -    7s
+     0     0    0.47317    0  251          -    0.47317      -     -    7s
+     0     0    0.47345    0  249          -    0.47345      -     -    7s
+     0     0    0.47355    0  258          -    0.47355      -     -    7s
+     0     0    0.47703    0  210          -    0.47703      -     -    8s
+     0     0    0.47779    0  225          -    0.47779      -     -    9s
+     0     0    0.47801    0  267          -    0.47801      -     -    9s
+     0     0    0.47812    0  245          -    0.47812      -     -    9s
+     0     0    0.47820    0  243          -    0.47820      -     -   10s
+     0     0    0.47821    0  275          -    0.47821      -     -   10s
+     0     0    0.47825    0  259          -    0.47825      -     -   10s
+     0     0    0.47825    0  259          -    0.47825      -     -   10s
+     0     0    0.47825    0  256          -    0.47825      -     -   10s
+     0     2    0.47825    0  256          -    0.47825      -     -   11s
+     1     3    0.47867    1  235          -    0.47825      -   269   11s
+   113   113    0.52751  102  190          -    0.47946      -   108   15s
+   558   484    0.54246   38  164          -    0.48704      -  89.2   21s
+   562   487    0.51279   25  260          -    0.48704      -  88.6   25s
+   578   498    0.53289  109  237          -    0.48704      -  86.1   30s
+   597   512    0.49481   21  120          -    0.48704      -   112   35s
+   658   535    0.52166   26  166          -    0.48704      -   120   40s
+   749   560    0.53708   42  160          -    0.48704      -   137   45s
+   833   581    0.50811   18  135          -    0.48730      -   146   50s
+   895   597    0.53773   31   89          -    0.48733      -   152   56s
+   985   615    0.51091   26  164          -    0.48917      -   155   60s
+  1143   660    0.49553   18  174          -    0.49138      -   158   65s
+  1349   722    0.53424   26  200          -    0.49283      -   158   70s
+  1543   762 infeasible   31               -    0.49358      -   160   75s
+H 1553   552                       0.5443553    0.49381  9.28%   160   75s
+  1687   533    0.54126   23  152    0.54436    0.49533  9.01%   166   80s
+  1896   473     cutoff   22         0.54436    0.49969  8.21%   177   85s
+  2156   475    0.54305   25  132    0.54436    0.50612  7.02%   185   90s
+  2356   480    0.53387   29  123    0.54436    0.50973  6.36%   189   95s
+  2528   460    0.53661   22  247    0.54436    0.51431  5.52%   197  100s
+  2731   433    0.54304   20  217    0.54436    0.51721  4.99%   202  105s
+  2979   376     cutoff   27         0.54436    0.52271  3.98%   207  110s
+  3167   296     cutoff   19         0.54436    0.52694  3.20%   216  115s
+  3407   149    0.53712   31   48    0.54436    0.53667  1.41%   219  120s
+
+Cutting planes:
+  Learned: 19
+  Gomory: 2
+  Cover: 60
+  Implied bound: 119
+  Projected implied bound: 7
+  Clique: 14
+  MIR: 170
+  Mixing: 2
+  StrongCG: 6
+  Flow cover: 190
+  GUB cover: 3
+  Zero half: 6
+  Network: 18
+  RLT: 4
+  Relax-and-lift: 54
+  BQP: 4
+
+Explored 3633 nodes (790566 simplex iterations) in 121.70 seconds (235.16 work units)
+Most recent optimization runtime was 120.81 seconds (233.92 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 1: 0.544355 
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 5.443553149960e-01, best bound 5.443553149960e-01, gap 0.0000%
+
+User-callback calls 34586, time in user-callback 0.01 sec

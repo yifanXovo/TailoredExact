@@ -1,0 +1,28 @@
+stage0_configure_cplex: rc=0 wall=1.219
+stage0_build_cplex: rc=0 wall=277.719
+stage0_ctest_cplex: rc=0 wall=0.844
+stage0_configure_gurobi: rc=0 wall=1.219
+stage0_build_gurobi: rc=0 wall=280.187
+stage0_ctest_gurobi: rc=0 wall=0.922
+stage0_python_round20_regression_tests: rc=0 wall=0.343
+stage0_python_round22_runner_integrity_tests: rc=0 wall=0.125
+stage0_python_round23_final_evidence_tests: rc=0 wall=0.578
+stage0_python_round23_moderate4301_forensic_tests: rc=0 wall=0.547
+stage0_python_round23_runner_integrity_tests: rc=0 wall=0.063
+stage0_python_round25_protocol_tests: rc=0 wall=0.187
+stage0_python_round26_protocol_tests: rc=0 wall=0.110
+stage0_python_round27_protocol_tests: rc=0 wall=0.125
+stage0_python_round28_protocol_tests: rc=0 wall=0.047
+stage0_python_round29_protocol_tests: rc=0 wall=0.141
+stage0_python_round30_c0_parser_tests: rc=0 wall=0.360
+stage0_python_round30_protocol_tests: rc=0 wall=0.125
+stage0_python_round30_trace_tests: rc=0 wall=0.094
+stage0_python_round31_protocol_tests: rc=0 wall=0.062
+stage0_python_round32_protocol_tests: rc=0 wall=0.063
+stage0_python_round32_runner_trace_tests: rc=0 wall=0.156
+{
+  "passed": true,
+  "cplex_executable_sha256": "9d0ffe17c92915a20996aa5c014fdb037a45a7b6ac10008867b15ce34dfa2ac0",
+  "gurobi_executable_sha256": "c69ef813068b8043ed7e22cf99bd0063416f80da9256b4602f28371b04cc9b6f",
+  "commands": 22
+}

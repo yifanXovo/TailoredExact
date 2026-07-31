@@ -1,0 +1,87 @@
+
+Gurobi 13.0.2 (win64) logging started Fri Jul 31 00:25:00 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_c6_long_run_validation_round32\runs\stage4__moderate_seed3302__c5_reference__1800s\external\native_logs\L0.1.0.1.1.1.0_terminal_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1224.4787867
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11903 rows, 3374 columns and 67328 nonzeros (Min)
+Model fingerprint: 0x037b67d2
+Model has 21 linear objective coefficients
+Variable types: 1684 continuous, 1690 integer (1490 binary)
+Coefficient statistics:
+  Matrix range     [7e-03, 1e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [4e-02, 3e+02]
+  RHS range        [4e-02, 5e+04]
+
+Presolve removed 925 rows and 75 columns
+Presolve time: 0.19s
+Presolved: 10978 rows, 3299 columns, 71013 nonzeros
+Variable types: 1634 continuous, 1665 integer (1474 binary)
+
+Root relaxation: objective 1.395893e-01, 3750 iterations, 0.25 seconds (0.70 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.13959    0  238          -    0.13959      -     -    0s
+     0     0    0.14011    0  322          -    0.14011      -     -    1s
+     0     0    0.14760    0  351          -    0.14760      -     -    2s
+     0     0    0.14760    0  351          -    0.14760      -     -    2s
+     0     0    0.14903    0  320          -    0.14903      -     -    2s
+     0     0    0.16818    0  353          -    0.16818      -     -    3s
+     0     0    0.16935    0  331          -    0.16935      -     -    3s
+     0     0    0.17319    0  341          -    0.17319      -     -    4s
+     0     0    0.17379    0  301          -    0.17379      -     -    5s
+     0     0    0.17743    0  357          -    0.17743      -     -    6s
+     0     0    0.17788    0  381          -    0.17788      -     -    6s
+     0     0    0.17902    0  391          -    0.17902      -     -    7s
+     0     0    0.17911    0  387          -    0.17911      -     -    7s
+     0     0    0.18029    0  342          -    0.18029      -     -    8s
+     0     0    0.18056    0  364          -    0.18056      -     -    8s
+     0     0    0.18079    0  346          -    0.18079      -     -    9s
+     0     0    0.18082    0  310          -    0.18082      -     -   10s
+     0     0    0.18098    0  318          -    0.18098      -     -   10s
+     0     0    0.18103    0  358          -    0.18103      -     -   10s
+     0     0    0.18108    0  356          -    0.18108      -     -   11s
+     0     0    0.18109    0  360          -    0.18109      -     -   12s
+     0     0    0.18112    0  329          -    0.18112      -     -   13s
+     0     0    0.18112    0  308          -    0.18112      -     -   13s
+     0     0    0.18114    0  312          -    0.18114      -     -   14s
+     0     0    0.18115    0  321          -    0.18115      -     -   14s
+     0     0    0.18121    0  352          -    0.18121      -     -   14s
+     0     0    0.18121    0  352          -    0.18121      -     -   15s
+     0     0    0.18121    0  351          -    0.18121      -     -   15s
+     0     2    0.18121    0  349          -    0.18121      -     -   16s
+
+Cutting planes:
+  Learned: 18
+  Cover: 41
+  Implied bound: 61
+  Clique: 13
+  MIR: 178
+  Flow cover: 75
+  Network: 12
+  RLT: 7
+  Relax-and-lift: 31
+  BQP: 2
+
+Explored 23 nodes (69221 simplex iterations) in 19.03 seconds (37.75 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+
+User-callback calls 5011, time in user-callback 0.00 sec

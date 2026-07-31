@@ -1,0 +1,7 @@
+telemetry_seconds,event,leaf_id,gamma_L,gamma_U,status,global_lb,verified_ub,detail
+1.77567,lp_complete,L0,0,0.245,infeasible,0,5.48535,"complete_lp_relaxation"
+25.1775,lp_complete,L1,0.245,0.49,infeasible,0.245,5.48535,"complete_lp_relaxation"
+28.6377,lp_complete,L2,0.49,0.735,optimal,0.735,5.48535,"complete_lp_relaxation"
+28.6377,parent_lp_requeue,L2,0.49,0.735,open,0.735,5.48535,"selected_leaf_no_longer_controlling"
+33.0338,lp_complete,L3,0.735,0.98,optimal,5.20965,5.48535,"complete_lp_relaxation"
+33.0339,parent_lp_requeue,L3,0.735,0.98,open,5.20965,5.48535,"selected_leaf_no_longer_controlling"

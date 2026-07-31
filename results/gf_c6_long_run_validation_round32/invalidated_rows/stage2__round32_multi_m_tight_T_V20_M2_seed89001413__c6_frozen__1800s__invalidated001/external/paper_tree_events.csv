@@ -1,0 +1,13 @@
+telemetry_seconds,event,leaf_id,gamma_L,gamma_U,status,global_lb,verified_ub,detail
+0.219404,lp_complete,L0,0,0.0884097,infeasible,0,0.353639,"complete_lp_relaxation"
+0.465852,lp_complete,L1,0.0884097,0.176819,optimal,0.156614,0.353639,"complete_lp_relaxation"
+0.851188,native_bound_target_reached,L1,0.0884097,0.176819,open,0.176819,0.353639,"c6_next_strict_frontier_bound_reached_requeue"
+1.106,lp_complete,L2,0.176819,0.265229,optimal,0.184936,0.353639,"complete_lp_relaxation"
+1.10603,parent_lp_requeue,L2,0.176819,0.265229,open,0.184936,0.353639,"selected_leaf_no_longer_controlling"
+3.85023,terminal_mip_complete,L1,0.0884097,0.176819,"INFEASIBLE",0.23593,0.353639,"native_terminal_mip_infeasible"
+4.42457,native_bound_target_reached,L2,0.176819,0.265229,open,0.265229,0.353639,"c6_next_strict_frontier_bound_reached_requeue"
+4.65671,lp_complete,L3,0.265229,0.353639,optimal,0.267793,0.353639,"complete_lp_relaxation"
+4.65673,parent_lp_requeue,L3,0.265229,0.353639,open,0.267793,0.353639,"selected_leaf_no_longer_controlling"
+129.082,terminal_mip_complete,L2,0.176819,0.265229,"OPTIMAL",0.32434,0.339936,"native_terminal_mip_optimal"
+129.552,atomic_split,L3,0.265229,0.353639,replaced,0.32434,0.339936,"current_complete_child_infeasibility"
+130.623,terminal_mip_complete,L3.0,0.265229,0.309434,"INFEASIBLE",0.339936,0.339936,"native_terminal_mip_infeasible"

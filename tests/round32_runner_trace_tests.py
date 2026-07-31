@@ -1,0 +1,213 @@
+#!/usr/bin/env python3
+"""Round 32 telemetry and checksum-resume regression tests."""
+
+from __future__ import annotations
+
+import csv
+import json
+import sys
+import tempfile
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import run_round32_experiments as runner  # noqa: E402
+import analyze_round32 as analyzer  # noqa: E402
+
+
+def require(condition: bool, message: str) -> None:
+    if not condition:
+        raise AssertionError(message)
+
+
+def make_complete(
+        run_dir: Path,
+        row: dict[str, str],
+        item: dict[str, str],
+        manifest: dict[str, str]) -> None:
+    run_dir.mkdir(parents=True)
+    for path, text in (
+        (run_dir / "command.json", "{}\n"),
+        (run_dir / "result.json", json.dumps({"status": "ok"}) + "\n"),
+        (run_dir / "process_phases.csv", "phase,status\nx,complete\n"),
+        (run_dir / "progress.csv", "seconds,lower_bound\n0,0\n"),
+    ):
+        runner.write_text_atomic(path, text)
+    artifacts = runner.artifact_inventory(run_dir)
+    artifact_manifest = run_dir / "artifact_manifest.csv"
+    runner.write_csv_atomic(
+        artifact_manifest, artifacts, ["path", "bytes", "sha256"])
+    marker = {
+        "run_id": row["run_id"],
+        "source_commit": manifest["source_commit"],
+        "protocol_sha256": manifest["protocol_sha256"],
+        "instance_sha256": item["sha256"],
+        "executable_sha256": manifest["gurobi_executable_sha256"],
+        "artifact_manifest_sha256": runner.sha256(artifact_manifest),
+        "completed": True,
+    }
+    runner.write_json_atomic(run_dir / "completion_marker.json", marker)
+
+
+def main() -> int:
+    source = (
+        ROOT / "src" / "PaperExternalGiniTree.cpp"
+    ).read_text(encoding="utf-8")
+    start = source.index("auto writeGlobalTrace =")
+    finish = source.index("auto stopAtDeadline =", start)
+    trace_block = source[start:finish]
+    require(
+        "global_bound = std::min(global_bound, verified_ub);" in trace_block,
+        "trace aggregate does not include the verified incumbent")
+    require(
+        trace_block.count("global_bound = std::min(global_bound, verified_ub);")
+        == 1,
+        "trace clamp must be one general telemetry aggregation")
+    require(
+        "scheduler.mergeValidLowerBound" not in trace_block,
+        "trace writer unexpectedly mutates scheduler bounds")
+    gurobi_source = (
+        ROOT / "src" / "GurobiBaseline.cpp"
+    ).read_text(encoding="utf-8")
+    callback_start = gurobi_source.index(
+        "int __stdcall progressAndBoundTargetCallback")
+    callback_finish = gurobi_source.index(
+        "std::string versionString", callback_start)
+    callback_block = gurobi_source[callback_start:callback_finish]
+    require(
+        "Clock::time_point telemetry_start = Clock::now();" in gurobi_source,
+        "callback telemetry has no monotonic launch epoch")
+    require(
+        "Clock::now() - state->telemetry_start" in callback_block
+        and "&event.elapsed_runtime_seconds" not in callback_block,
+        "callback trace timing still trusts rollback-prone native wall time")
+
+    runner_source = (
+        ROOT / "scripts" / "run_round32_experiments.py"
+    ).read_text(encoding="utf-8")
+    require(
+        "gurobi.lic" not in runner_source.lower(),
+        "runner embeds a license location")
+    require(
+        'os.environ["GRB_LICENSE_FILE"]' not in runner_source
+        and "os.environ.get(\"GRB_LICENSE_FILE\")" not in runner_source,
+        "runner reads or serializes the license environment value")
+    require(
+        "WATCHDOG_SEPARATION = 90" in runner_source
+        and "SHUTDOWN_MARGIN = 15" in runner_source,
+        "fixed deadline separation is not frozen")
+    require(
+        '"baseline_round31_run_id", "repetition", "category"' in runner_source,
+        "frozen matrix discriminators are not projected to row evidence")
+    analyzer_source = (
+        ROOT / "scripts" / "analyze_round32.py"
+    ).read_text(encoding="utf-8")
+    require(
+        '"final_valid_lb_equal": final_valid_lb_equal' in analyzer_source
+        and '"final_valid_lbs_valid": final_valid_lbs_valid' in analyzer_source,
+        "equivalence evidence does not distinguish exact LB equality "
+        "from endpoint validity")
+    require(
+        "all(decision_checks.values())" in analyzer_source
+        and 'endpoint_checks["verified_ub_equal"]' in analyzer_source
+        and 'endpoint_checks["certificate_equal"]' in analyzer_source,
+        "frozen-decision gate does not bind decisions, UB, and certificate")
+    require(
+        analyzer.number("nan") != analyzer.number("nan"),
+        "non-finite endpoint parser regression")
+    single_callback_run = {
+        "state": {
+            "run_id": "single-callback",
+            "stage_id": "test",
+            "instance_id": "instant-certificate",
+            "arm": "P-GRB",
+        },
+        "result": {
+            "status": "optimal",
+            "lower_bound": 0.0,
+            "upper_bound": 0.0,
+            "strict_certified_original_problem": True,
+        },
+    }
+    single_callback_audit = analyzer.trace_audit_rows(
+        [single_callback_run],
+        {"single-callback": (
+            False, "too_few_native_callback_bounds", (None,))},
+    )[0]
+    require(
+        single_callback_audit["passed"]
+        and not single_callback_audit["trace_complete"]
+        and not single_callback_audit["auc_eligible"]
+        and single_callback_audit["trace_reason"]
+        == "explicit_unavailable_single_callback_strict_certificate",
+        "strict single-callback trace was not explicitly AUC-unavailable")
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        run_dir = root / "runs" / "row"
+        row = {"run_id": "row", "arm": "P-GRB", "stage_id": "test"}
+        item = {"sha256": "instance-hash"}
+        manifest = {
+            "source_commit": "source",
+            "protocol_sha256": "protocol",
+            "gurobi_executable_sha256": "executable",
+            "cplex_executable_sha256": "cplex",
+        }
+        make_complete(run_dir, row, item, manifest)
+        valid, reason = runner.completion_is_valid(
+            run_dir, row, item, manifest)
+        require(valid, f"valid completed row rejected: {reason}")
+
+        (run_dir / "progress.csv").write_text(
+            "seconds,lower_bound\n0,1\n", encoding="utf-8")
+        valid, reason = runner.completion_is_valid(
+            run_dir, row, item, manifest)
+        require(
+            not valid and reason.startswith("artifact_checksum_mismatch:"),
+            f"artifact tampering not detected: {reason}")
+
+        original_out = runner.OUT
+        original_invalidated = runner.INVALIDATED
+        original_log = runner.INVALIDATION_LOG
+        original_root = runner.ROOT
+        try:
+            runner.ROOT = root
+            runner.OUT = root
+            runner.INVALIDATED = root / "invalidated_rows"
+            runner.INVALIDATION_LOG = root / "runner_invalidations.csv"
+            runner.invalidate_run(run_dir, row, reason)
+            preserved = list(runner.INVALIDATED.iterdir())
+            require(len(preserved) == 1, "invalidated row was not preserved")
+            require(
+                (preserved[0] / "invalidation_record.json").is_file(),
+                "preserved row has no invalidation reason")
+            records = list(csv.DictReader(
+                runner.INVALIDATION_LOG.open(
+                    newline="", encoding="utf-8")))
+            require(
+                len(records) == 1
+                and records[0]["algorithmic_solve_state_resumed"] == "false",
+                "invalidation audit misclaims algorithmic resume")
+        finally:
+            runner.ROOT = original_root
+            runner.OUT = original_out
+            runner.INVALIDATED = original_invalidated
+            runner.INVALIDATION_LOG = original_log
+
+        target = root / "atomic.json"
+        runner.write_json_atomic(target, {"complete": True})
+        require(
+            json.loads(target.read_text(encoding="utf-8"))["complete"],
+            "atomic JSON did not parse")
+        require(
+            not target.with_suffix(".json.tmp").exists(),
+            "atomic temporary file was left behind")
+
+    print("Round32RunnerTraceTests: 21 checks passed")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

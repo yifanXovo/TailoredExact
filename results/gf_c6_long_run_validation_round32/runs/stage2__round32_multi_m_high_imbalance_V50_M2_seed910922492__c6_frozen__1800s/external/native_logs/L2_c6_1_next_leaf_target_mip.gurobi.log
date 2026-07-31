@@ -1,0 +1,68 @@
+
+Gurobi 13.0.2 (win64) logging started Wed Jul 29 22:10:50 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_c6_long_run_validation_round32\runs\stage2__round32_multi_m_high_imbalance_V50_M2_seed910922492__c6_frozen__1800s\external\native_logs\L2_c6_1_next_leaf_target_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1739.4625336
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 73989 rows, 12783 columns and 563715 nonzeros (Min)
+Model fingerprint: 0x1ae3e66e
+Model has 51 linear objective coefficients
+Variable types: 6856 continuous, 5927 integer (5577 binary)
+Coefficient statistics:
+  Matrix range     [1e-02, 2e+04]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [5e-01, 1e+04]
+  RHS range        [5e-01, 5e+04]
+
+Presolve removed 14641 rows and 168 columns
+Presolve time: 1.22s
+Presolved: 59348 rows, 12615 columns, 367628 nonzeros
+Variable types: 6752 continuous, 5863 integer (5545 binary)
+Root relaxation presolved: 12541 rows, 71770 columns, 379939 nonzeros
+
+
+Root relaxation: objective 4.390358e+00, 7975 iterations, 2.17 seconds (6.45 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    4.39036    0  321          -    4.39036      -     -    3s
+     0     0    4.47499    0  340          -    4.47499      -     -    5s
+     0     0    4.55723    0  350          -    4.55723      -     -    6s
+     0     0    4.66981    0  335          -    4.66981      -     -    8s
+
+Cutting planes:
+  Learned: 13
+  Gomory: 4
+  Cover: 104
+  Implied bound: 253
+  Clique: 20
+  MIR: 757
+  StrongCG: 15
+  Flow cover: 308
+  GUB cover: 4
+  Zero half: 9
+  Network: 15
+  RLT: 6
+  Relax-and-lift: 117
+  BQP: 8
+
+Explored 1 nodes (10528 simplex iterations) in 8.09 seconds (18.92 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Solve interrupted
+Best objective -, best bound 4.669809809036e+00, gap -
+
+User-callback calls 1825, time in user-callback 0.00 sec

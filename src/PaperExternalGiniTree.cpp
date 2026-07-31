@@ -869,6 +869,15 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         if (!std::isfinite(global_bound)) {
             global_bound = scheduler.globalLowerBound();
         }
+        // A native callback can prove that the active leaf cannot improve the
+        // already verified incumbent before the scheduler records the leaf's
+        // closure.  The callback bound remains a valid leaf bound, but it is
+        // not the global bound: the closed branch containing the incumbent is
+        // still a candidate for the global optimum.  Include that candidate
+        // in this telemetry-only aggregation so the exported certificate
+        // trace cannot transiently rise above the verified optimum and then
+        // fall when the leaf closure is recorded.
+        global_bound = std::min(global_bound, verified_ub);
         const auto counts = relevantCounts();
         global_trace << std::setprecision(17) << process_seconds << ','
                      << exact_seconds << ',' << csvField(event_type) << ','

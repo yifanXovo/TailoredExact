@@ -1,0 +1,12 @@
+telemetry_seconds,event,leaf_id,gamma_L,gamma_U,status,global_lb,verified_ub,detail
+5.88087,lp_complete,L0,0,0.245,infeasible,0,9.82066,"complete_lp_relaxation"
+15.4936,lp_complete,L1,0.245,0.49,infeasible,0.245,9.82066,"complete_lp_relaxation"
+18.701,lp_complete,L2,0.49,0.735,optimal,0.735,9.82066,"complete_lp_relaxation"
+27.2838,atomic_split,L2,0.49,0.735,replaced,0.735,9.82066,"normalized_child_disjunction_gain_reaches_rho"
+30.1242,lp_complete,L3,0.735,0.98,optimal,7.46156,9.82066,"complete_lp_relaxation"
+1706.64,terminal_mip_complete,L3,0.735,0.98,"OPTIMAL",7.46156,9.7296,"native_terminal_mip_optimal"
+1724.74,partial_native_bound_target_reached,L2.1,0.6125,0.735,open,7.46758,9.7296,"backend_certified_parent_bound_requeued"
+1724.75,atomic_split,L2.1,0.6125,0.735,replaced,7.46758,9.7296,"c5_parent_native_target_reached_delayed_split"
+1741.36,partial_native_bound_target_reached,L2.1.0,0.6125,0.67375,open,7.47942,9.7296,"backend_certified_parent_bound_requeued"
+1741.36,atomic_split,L2.1.0,0.6125,0.67375,replaced,7.47942,9.7296,"c5_parent_native_target_reached_delayed_split"
+1762.68,partial_native_bound_target_reached,L2.1.0.1,0.643125,0.67375,open,7.49447,9.7296,"backend_certified_parent_bound_requeued"

@@ -263,6 +263,7 @@ int startSilentGurobiEnvironment(
 struct ProgressCallbackState {
     GurobiApi* api = nullptr;
     GurobiProgressStats progress;
+    Clock::time_point telemetry_start = Clock::now();
     double last_record_time = -1.0;
     double last_incumbent = std::numeric_limits<double>::infinity();
     double last_bound = -std::numeric_limits<double>::infinity();
@@ -285,8 +286,17 @@ int __stdcall progressAndBoundTargetCallback(
     GurobiProgressEvent event;
     event.callback_where = where;
     event.context = "MIP";
+    double native_wall_runtime_seconds = 0.0;
     if (state->api->cbget(cbdata, where, GRB_CB_RUNTIME,
-                          &event.elapsed_runtime_seconds) != 0) return 0;
+                          &native_wall_runtime_seconds) != 0) return 0;
+    // GRB_CB_RUNTIME is wall-clock time.  A host clock correction can make
+    // consecutive values decrease even though callback/event order is valid.
+    // Trace timing is telemetry only, so use this process's monotonic clock
+    // for event placement.  Native runtime remains available from Gurobi's
+    // final Runtime attribute and native log.
+    event.elapsed_runtime_seconds = std::max(
+        0.0, std::chrono::duration<double>(
+            Clock::now() - state->telemetry_start).count());
     state->api->cbget(cbdata, where, GRB_CB_WORK, &event.work);
     state->api->cbget(cbdata, where, GRB_CB_MIP_OBJBST, &event.incumbent);
     state->api->cbget(cbdata, where, GRB_CB_MIP_OBJBND, &event.best_bound);

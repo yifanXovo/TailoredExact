@@ -1,0 +1,8 @@
+sequence,process_seconds,event,status,nominal_deadline_remaining_seconds,work_deadline_remaining_seconds,detail
+0,0,"process_entry","start",1799.9992774,1784.9992774,"absolute process deadline origin"
+1,0.00091279999999999996,"instance_parsing_start","start",1799.9990872999999,1784.9990872000001,"E:\codes\ExactEBRP\reference\heldout_round22\V20_M3\high_imbalance_seed4201.txt"
+2,0.0019061,"instance_parsing_complete","complete",1799.9980939,1784.9980939,"instance=high_imbalance_seed4201.txt"
+3,0.056833500000000002,"plain_gurobi_optimize_launch","start",1799.9431666,1784.9431666,"absolute_work_remaining=1784.943320"
+4,1785.1213753,"final_result_serialization_start","start",14.878624899999977,-0.12137529999995422,""
+5,1785.1225721999999,"final_result_serialization_complete","complete",14.87742819999994,-0.12257210000007035,""
+6,1785.1228713999999,"process_exit","complete",14.877128699999957,-0.12287139999989449,"rc=0"
