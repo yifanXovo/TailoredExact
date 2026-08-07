@@ -1,0 +1,207 @@
+{
+  "clean_release_build_count": 1,
+  "cmake": "cmake version 3.30.5-msvc23",
+  "command_count": 21,
+  "compiler": "g++.exe (Rev2, Built by MSYS2 project) 14.2.0",
+  "ctest_invocation_count": 1,
+  "frozen_cpp_source_changed": false,
+  "gurobi_executable": "build_round33/official/gurobi/ExactEBRP.exe",
+  "gurobi_executable_sha256": "bdc5145c9c1f6c2fad6a851db08dd96849355cda903bd000363a60e764d35385",
+  "gurobi_version": "13.0.2",
+  "passed": true,
+  "python_test_script_count": 18,
+  "records": [
+    {
+      "command": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe\" -S E:\\codes\\ExactEBRP -B E:\\codes\\ExactEBRP\\build_round33\\official\\gurobi -G \"MinGW Makefiles\" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe -DCMAKE_MAKE_PROGRAM=D:/msys64/ucrt64/bin/mingw32-make.exe -DEXACT_EBRP_ENABLE_GUROBI=ON -DGUROBI_ROOT=D:/gurobi1302/win64",
+      "name": "stage0_configure_gurobi",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_configure_gurobi.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_configure_gurobi.stdout.log",
+      "wall_seconds": 3.2659999998286366
+    },
+    {
+      "command": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe\" --build E:\\codes\\ExactEBRP\\build_round33\\official\\gurobi -j 2",
+      "name": "stage0_build_gurobi",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_build_gurobi.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_build_gurobi.stdout.log",
+      "wall_seconds": 288.10900000017136
+    },
+    {
+      "command": "\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe\" --test-dir E:\\codes\\ExactEBRP\\build_round33\\official\\gurobi --output-on-failure",
+      "name": "stage0_ctest_gurobi",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_ctest_gurobi.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_ctest_gurobi.stdout.log",
+      "wall_seconds": 1.625
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round20_regression_tests.py",
+      "name": "stage0_python_round20_regression_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round20_regression_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round20_regression_tests.stdout.log",
+      "wall_seconds": 3.7659999998286366
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round22_runner_integrity_tests.py",
+      "name": "stage0_python_round22_runner_integrity_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round22_runner_integrity_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round22_runner_integrity_tests.stdout.log",
+      "wall_seconds": 0.23400000017136335
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round23_final_evidence_tests.py",
+      "name": "stage0_python_round23_final_evidence_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round23_final_evidence_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round23_final_evidence_tests.stdout.log",
+      "wall_seconds": 4.156000000424683
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round23_moderate4301_forensic_tests.py",
+      "name": "stage0_python_round23_moderate4301_forensic_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round23_moderate4301_forensic_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round23_moderate4301_forensic_tests.stdout.log",
+      "wall_seconds": 0.5470000002533197
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round23_runner_integrity_tests.py",
+      "name": "stage0_python_round23_runner_integrity_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round23_runner_integrity_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round23_runner_integrity_tests.stdout.log",
+      "wall_seconds": 0.07799999974668026
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round25_protocol_tests.py",
+      "name": "stage0_python_round25_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round25_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round25_protocol_tests.stdout.log",
+      "wall_seconds": 0.1869999999180436
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round26_protocol_tests.py",
+      "name": "stage0_python_round26_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round26_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round26_protocol_tests.stdout.log",
+      "wall_seconds": 0.375
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round27_protocol_tests.py",
+      "name": "stage0_python_round27_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round27_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round27_protocol_tests.stdout.log",
+      "wall_seconds": 0.4069999996572733
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round28_protocol_tests.py",
+      "name": "stage0_python_round28_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round28_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round28_protocol_tests.stdout.log",
+      "wall_seconds": 0.06199999991804361
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round29_protocol_tests.py",
+      "name": "stage0_python_round29_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round29_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round29_protocol_tests.stdout.log",
+      "wall_seconds": 0.17200000025331974
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round30_c0_parser_tests.py",
+      "name": "stage0_python_round30_c0_parser_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round30_c0_parser_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round30_c0_parser_tests.stdout.log",
+      "wall_seconds": 1.9840000001713634
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round30_protocol_tests.py",
+      "name": "stage0_python_round30_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round30_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round30_protocol_tests.stdout.log",
+      "wall_seconds": 0.14099999982863665
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round30_trace_tests.py",
+      "name": "stage0_python_round30_trace_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round30_trace_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round30_trace_tests.stdout.log",
+      "wall_seconds": 0.125
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round31_protocol_tests.py",
+      "name": "stage0_python_round31_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round31_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round31_protocol_tests.stdout.log",
+      "wall_seconds": 0.17200000025331974
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round32_protocol_tests.py",
+      "name": "stage0_python_round32_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round32_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round32_protocol_tests.stdout.log",
+      "wall_seconds": 0.15599999949336052
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round32_runner_trace_tests.py",
+      "name": "stage0_python_round32_runner_trace_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round32_runner_trace_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round32_runner_trace_tests.stdout.log",
+      "wall_seconds": 0.20300000067800283
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round33_protocol_tests.py",
+      "name": "stage0_python_round33_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round33_protocol_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round33_protocol_tests.stdout.log",
+      "wall_seconds": 0.0939999995753169
+    },
+    {
+      "command": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP\\tests\\round33_runner_tests.py",
+      "name": "stage0_python_round33_runner_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_v10_convergence_round33/stage0_python_round33_runner_tests.stderr.log",
+      "stdout_path": "results/gf_v10_convergence_round33/stage0_python_round33_runner_tests.stdout.log",
+      "wall_seconds": 0.10999999940395355
+    }
+  ],
+  "round32_frozen_cpp_source_commit": "0927d055710f43836053ecca055c0780b955a845",
+  "schema": "round33-build-tests-v1",
+  "source_commit": "1a79322dd9c2f2345de1e02909727c49c58cb2dd"
+}

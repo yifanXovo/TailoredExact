@@ -1,0 +1,8 @@
+sequence,process_seconds,event,status,nominal_deadline_remaining_seconds,work_deadline_remaining_seconds,detail
+0,0,"process_entry","start",4.9992498999999997,4.9992498999999997,"absolute process deadline origin"
+1,0.00094950000000000004,"instance_parsing_start","start",4.9990505000000001,4.9990505000000001,"E:\codes\ExactEBRP\reference\regen_candidate_V12_M1_average.txt"
+2,0.001828,"instance_parsing_complete","complete",4.9981720999999997,4.9981720000000003,"instance=regen_candidate_V12_M1_average.txt"
+3,0.087372400000000003,"plain_gurobi_optimize_launch","start",4.9126276999999998,4.9126276000000004,"absolute_work_remaining=4.912735"
+4,5.0094133000000003,"final_result_serialization_start","start",-0.00941309999999973,-0.0094133000000002909,""
+5,5.0102295000000003,"final_result_serialization_complete","complete",-0.010229400000000055,-0.010229400000000055,""
+6,5.0103133,"process_exit","complete",-0.01031329999999997,-0.01031329999999997,"rc=0"

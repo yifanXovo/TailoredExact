@@ -156,8 +156,9 @@ def memory(run: dict[str, Any]) -> float:
 
 
 def final_objective(run: dict[str, Any]) -> float:
-    return number(run["result"].get(
-        "verified_incumbent_objective", run["result"].get("objective")))
+    verified = number(run["result"].get("verified_incumbent_objective"))
+    return verified if math.isfinite(verified) else number(
+        run["result"].get("objective"))
 
 
 def phase_time(run: dict[str, Any], event: str) -> float:
@@ -822,6 +823,16 @@ def main() -> int:
         "stable_algorithm_decision": (
             "C6 remains validated Gurobi mainline; no C7 and no tuning"),
         "round32_raw_rows_imported": 0,
+        "post_run_analysis_repairs": [{
+            "scope": "analysis_only",
+            "issue": (
+                "C6 stores an empty verified_incumbent_objective field; "
+                "the first analysis pass treated it as NaN"),
+            "repair": (
+                "use verified_incumbent_objective when finite, otherwise "
+                "use the authoritative top-level objective"),
+            "solver_evidence_changed": False,
+        }],
     }
     write_json(OUT / "final_audit_summary.json", summary)
     report = f"""# Round 33 final report
@@ -857,6 +868,12 @@ The two V12 anchors produced {summary['v12_p_grb_certificates']}/2 P-GRB and
 {len(repeats)} repeatability arm rows were valid: {repeat_valid}. Certificate
 states, objectives, Work, times, and C6 HGA/target/split sequences are in
 `stage3_repeatability.csv`.
+
+Post-run analysis repair: the first analysis pass treated C6's present-but-
+empty `verified_incumbent_objective` field as NaN. The reporting code now uses
+that field when finite and otherwise uses the authoritative top-level
+`objective`. This analysis-only repair changed no solver result, timing,
+certificate, fingerprint, executable, or frozen C++ input.
 
 Observed proof AUC and gap-threshold times use real left-continuous events,
 including a real final-result event when needed. No interpolation or
