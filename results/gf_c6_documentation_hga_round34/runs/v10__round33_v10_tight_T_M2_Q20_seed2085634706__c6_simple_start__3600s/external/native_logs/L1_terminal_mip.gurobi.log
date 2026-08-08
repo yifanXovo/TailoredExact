@@ -1,0 +1,61 @@
+
+Gurobi 13.0.2 (win64) logging started Sat Aug  8 14:50:16 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_c6_documentation_hga_round34\runs\v10__round33_v10_tight_T_M2_Q20_seed2085634706__c6_simple_start__3600s\external\native_logs\L1_terminal_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  3574.7412286
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 4268 rows, 761 columns and 30644 nonzeros (Min)
+Model fingerprint: 0xc00e4451
+Model has 11 linear objective coefficients
+Variable types: 375 continuous, 386 integer (316 binary)
+Coefficient statistics:
+  Matrix range     [2e-02, 1e+05]
+  Objective range  [2e-02, 1e+00]
+  Bounds range     [2e-01, 2e+02]
+  RHS range        [2e-01, 1e+06]
+
+Presolved: 3414 rows, 720 columns, 32864 nonzeros
+
+Continuing optimization...
+
+   910   354    0.70512   26  111    0.76048    0.58505  23.1%   127    9s
+   991   359    0.70909   11  112    0.76048    0.58922  22.5%   127   10s
+  1716   277    0.69001   18   85    0.76048    0.62498  17.8%   132   15s
+  2513    42     cutoff   14         0.76048    0.73818  2.93%   126   20s
+
+Cutting planes:
+  Learned: 14
+  Gomory: 32
+  Cover: 61
+  Implied bound: 365
+  Clique: 5
+  MIR: 197
+  StrongCG: 14
+  Flow cover: 91
+  GUB cover: 2
+  Zero half: 6
+  Network: 18
+  RLT: 7
+  Relax-and-lift: 33
+  BQP: 4
+
+Explored 2595 nodes (323832 simplex iterations) in 20.10 seconds (39.89 work units)
+Most recent optimization runtime was 10.56 seconds (21.92 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 3: 0.760482 0.763886 0.776367 
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 7.604822606805e-01, best bound 7.604822606805e-01, gap 0.0000%
+
+User-callback calls 5927, time in user-callback 0.01 sec

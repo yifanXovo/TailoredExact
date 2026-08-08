@@ -1,0 +1,48 @@
+
+Gurobi 13.0.2 (win64) logging started Sat Aug  8 14:51:26 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_c6_documentation_hga_round34\runs\v10__round33_v10_moderate_M2_Q30_seed763364383__c6_hga_full__3600s\external\native_logs\L3.0_terminal_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  3559.4491316
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 4272 rows, 761 columns and 30638 nonzeros (Min)
+Model fingerprint: 0x5e18f457
+Model has 11 linear objective coefficients
+Variable types: 375 continuous, 386 integer (316 binary)
+Coefficient statistics:
+  Matrix range     [9e-03, 1e+05]
+  Objective range  [9e-03, 1e+00]
+  Bounds range     [1e-01, 5e+01]
+  RHS range        [1e-01, 1e+06]
+
+Presolve removed 745 rows and 67 columns
+Presolve time: 0.12s
+Presolved: 3527 rows, 694 columns, 36345 nonzeros
+Variable types: 343 continuous, 351 integer (291 binary)
+Warning: very big Kappa = 3.99381e+13, try parameter NumericFocus
+
+Root relaxation: infeasible, 756 iterations, 0.03 seconds (0.10 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Explored 1 nodes (756 simplex iterations) in 0.17 seconds (0.35 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+
+User-callback calls 800, time in user-callback 0.00 sec

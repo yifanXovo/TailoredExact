@@ -1,0 +1,5 @@
+leaf_id,parent_id,depth,child_index,gamma_L,gamma_U,base_lower_bound,lower_bound,status,lp_complete,lp_optimal,lp_infeasible,lp_bound,terminal_mip_started,c6_native_phase_count,c6_frontier_milestone_reached,c6_children_ready,closure_source,lower_bound_sources
+L0,"",0,-1,0,0.19479872999741188,0,0.77919491998964752,empty,1,0,1,0,0,0,0,0,"complete_parent_lp_infeasible","objective_nonnegative_penalty_G_floor"
+L1,"",0,-1,0.19479872999741188,0.38959745999482376,0.19479872999741188,0.76048226068045433,closed,1,1,0,0.49730494913887335,1,1,1,0,"native_terminal_mip_optimal","objective_nonnegative_penalty_G_floor;optimal_complete_lp_relaxation;valid_next_leaf_target_native_bound;native_terminal_mip_bound"
+L2,"",0,-1,0.38959745999482376,0.58439618999223564,0.38959745999482376,0.71944529115383926,closed,1,1,0,0.66214567343457165,1,0,0,0,"native_terminal_mip_optimal","objective_nonnegative_penalty_G_floor;optimal_complete_lp_relaxation;native_terminal_mip_bound"
+L3,"",0,-1,0.58439618999223564,0.77919491998964752,0.58439618999223564,0.76048226068045555,empty,1,0,1,0,0,0,0,0,"complete_parent_lp_infeasible","objective_nonnegative_penalty_G_floor"

@@ -1,0 +1,8 @@
+sequence,process_seconds,event,status,nominal_deadline_remaining_seconds,work_deadline_remaining_seconds,detail
+0,0,"process_entry","start",7199.9992874,7184.9992874,"absolute process deadline origin"
+1,0.0008943,"instance_parsing_start","start",7199.9991057999996,7184.9991057999996,"E:\codes\ExactEBRP\reference\qualification_round33\M3_Q30\round33_v10_high_imbalance_M3_Q30_seed1765289896.txt"
+2,0.001655,"instance_parsing_complete","complete",7199.9983450999998,7184.998345,"instance=round33_v10_high_imbalance_M3_Q30_seed1765289896.txt"
+3,0.031417500000000001,"plain_gurobi_optimize_launch","start",7199.9685826000004,7184.9685824999997,"absolute_work_remaining=7184.968745"
+4,2529.9315236000002,"final_result_serialization_start","start",4670.0684765999995,4655.0684763999998,""
+5,2529.9326046000001,"final_result_serialization_complete","complete",4670.0673956999999,4655.0673955000002,""
+6,2529.9328326,"process_exit","complete",4670.0671676000002,4655.0671674999994,"rc=0"

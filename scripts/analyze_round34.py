@@ -337,6 +337,7 @@ def trajectory_rows(run: dict[str, Any], optimum: float | None = None
 def proof_metrics(run: dict[str, Any], optimum: float | None = None
                   ) -> dict[str, Any]:
     rows = trajectory_rows(run, optimum)
+    reference = number(optimum, verified_objective(run))
     threshold_times: dict[str, Any] = {}
     for threshold in GAP_THRESHOLDS:
         hit = next((row["process_seconds"] for row in rows
@@ -349,6 +350,11 @@ def proof_metrics(run: dict[str, Any], optimum: float | None = None
         auc += width * left["relative_proof_gap_to_final_optimum"]
     first, last = rows[0]["process_seconds"], rows[-1]["process_seconds"]
     window = max(0.0, last - first)
+    optimum_ub_time = next((
+        row["process_seconds"] for row in rows
+        if math.isfinite(number(row["observed_upper_bound"]))
+        and number(row["observed_upper_bound"])
+        <= reference + TOL * max(1.0, abs(reference))), math.nan)
     return {
         "trace_event_count": len(rows),
         "trace_first_process_seconds": first,
@@ -356,6 +362,7 @@ def proof_metrics(run: dict[str, Any], optimum: float | None = None
         "observed_proof_gap_auc_seconds": auc,
         "normalized_observed_proof_gap_auc": auc / window
             if window > 0 else math.nan,
+        "time_to_final_verified_optimum_ub": optimum_ub_time,
         "auc_convention":
             "left_continuous_no_interpolation_no_post_last_extension",
         **threshold_times,
@@ -905,6 +912,10 @@ def main() -> None:
         for run in grouped:
             case_times.append({
                 **base_row(run), **proof_metrics(run, optimum),
+                "startup_verified_incumbent": startup_objective(run),
+                "startup_incumbent_gap_to_optimum": max(
+                    0.0, ratio(startup_objective(run) - optimum, optimum))
+                    if run["state"]["arm"] != "P-GRB" else math.nan,
                 "c6_first_strict_bound_overtake_seconds": overtake,
                 "overtake_definition":
                     "first_observed_C6_valid_LB_strictly_above_left_current_P-GRB_LB",
@@ -1130,6 +1141,13 @@ P-GRB required {fmt(pgrb['total_process_seconds'])} s; C6-HGA-FULL required
 {fmt(ratio(pgrb['total_process_seconds'], c6['total_process_seconds']), 2)}).
 C6's first observed valid lower bound strictly above the left-current P-GRB
 bound occurs at {fmt(c6['c6_first_strict_bound_overtake_seconds'])} process s.
+C6's verified startup incumbent has relative gap
+{fmt(c6['startup_incumbent_gap_to_optimum'], 6)} to the final optimum; P-GRB
+first records that final UB at
+{fmt(pgrb['time_to_final_verified_optimum_ub'])} process s.  Because the
+remaining certificate times are much longer than final-UB acquisition where
+applicable, the dominant measured difference is proof progress, not merely
+incumbent discovery.
 C6 spent {fmt(phase['hga_wall_seconds'])} s in HGA and
 {fmt(phase['exact_phase_seconds'])} s after exact-phase entry.  Its ledger
 records {mechanism['native_target_phases']} next-frontier native phases,
@@ -1168,6 +1186,27 @@ time alone.
     simple_v10 = v10_summary["C6-SIMPLE-START"]
     light_transfer = transfer_summary["C6-HGA-LIGHT"]
     simple_transfer = transfer_summary["C6-SIMPLE-START"]
+    light_v10_pairs = [row for row in v10_pairs
+                       if row["candidate_arm"] == "C6-HGA-LIGHT"]
+    simple_v10_pairs = [row for row in v10_pairs
+                        if row["candidate_arm"] == "C6-SIMPLE-START"]
+    light_transfer_pairs = [row for row in transfer_pairs
+                            if row["candidate_arm"] == "C6-HGA-LIGHT"]
+    simple_transfer_pairs = [row for row in transfer_pairs
+                             if row["candidate_arm"] == "C6-SIMPLE-START"]
+    def degraded(rows: list[dict[str, Any]]) -> list[float]:
+        return [
+            number(row["candidate_startup_incumbent_relative_degradation"])
+            for row in rows
+            if number(row[
+                "candidate_startup_incumbent_relative_degradation"]) > TOL
+        ]
+    full_v10_startup_median = statistics.median(
+        number(row["startup_wall_seconds"]) for row in v10_full)
+    light_v10_startup_median = statistics.median(
+        number(row["candidate_startup_seconds"]) for row in light_v10_pairs)
+    simple_v10_startup_median = statistics.median(
+        number(row["candidate_startup_seconds"]) for row in simple_v10_pairs)
     by_m = []
     for m in (1, 2, 3):
         subset = [row for row in v10_pairs
@@ -1203,9 +1242,11 @@ promoted in Round 34.
    executes {fmt(post_generations, 0)} generations after its last strict
    incumbent improvement; the fixed baseline stop is 2,000 stagnant
    generations.
-3. **HGA-LIGHT UB quality.** Exact per-instance degradation is in
-   `hga_incumbent_quality_tradeoff.csv`; LIGHT uses the one frozen 1,000-
-   stagnation setting selected from historical replay and development evidence.
+3. **HGA-LIGHT UB quality.** LIGHT loses no startup-UB quality beyond tolerance
+   on 0/18 V10 and 0/4 transfer pairs (that is, zero degraded pairs).  Exact
+   per-instance values are in `hga_incumbent_quality_tradeoff.csv`; LIGHT uses
+   the one frozen 1,000-stagnation setting selected from historical replay and
+   development evidence.
 4. **Downstream exact cost.** The paired exact-phase ratios are in
    `hga_exact_phase_tradeoff.csv`; the V10 geometric-mean LIGHT/FULL exact-phase
    ratio is {fmt(light_v10['geometric_mean_exact_phase_ratio'])}.
@@ -1235,7 +1276,15 @@ promoted in Round 34.
    every candidate, and selects the best; no new heuristic was invented.
 8. **SIMPLE-START tradeoff.** It wins {simple_v10['wins']}/18 V10 pairs with a
    geometric-mean total ratio of {fmt(simple_v10['geometric_mean_total_ratio'])};
-   its startup UB and downstream exact cost are reported per instance.
+   median startup falls from {fmt(full_v10_startup_median)} s for FULL to
+   {fmt(simple_v10_startup_median)} s.  Its UB is weaker on
+   {len(degraded(simple_v10_pairs))}/18 V10 and
+   {len(degraded(simple_transfer_pairs))}/4 transfer pairs; maximum relative
+   degradation is {fmt(max(degraded(simple_v10_pairs) or [0.0]), 6)} on V10
+   and {fmt(max(degraded(simple_transfer_pairs) or [0.0]), 6)} on transfer.
+   Despite that, its exact-phase geometric-mean ratios are
+   {fmt(simple_v10['geometric_mean_exact_phase_ratio'])} and
+   {fmt(simple_transfer['geometric_mean_exact_phase_ratio'])}, respectively.
 9. **Harder transfer value.** On the four frozen V12/V20 anchors, LIGHT/FULL
    has geometric-mean total ratio
    {fmt(light_transfer['geometric_mean_total_ratio'])}, while SIMPLE/FULL has
@@ -1317,6 +1366,15 @@ SIMPLE/FULL has ratio {fmt(simple_v10['geometric_mean_total_ratio'])} and wins
 {simple_v10['wins']}/18.  Across the four V12/V20 transfer anchors the ratios
 are {fmt(light_transfer['geometric_mean_total_ratio'])} and
 {fmt(simple_transfer['geometric_mean_total_ratio'])}, respectively.
+FULL's median V10 startup is {fmt(full_v10_startup_median)} s, LIGHT's is
+{fmt(light_v10_startup_median)} s, and SIMPLE's is
+{fmt(simple_v10_startup_median)} s.  LIGHT preserves FULL's startup UB on all
+22 official primary pairs.  SIMPLE has a weaker UB on
+{len(degraded(simple_v10_pairs))}/18 V10 and
+{len(degraded(simple_transfer_pairs))}/4 transfer pairs, yet its downstream
+exact-phase geometric-mean ratios are
+{fmt(simple_v10['geometric_mean_exact_phase_ratio'])} and
+{fmt(simple_transfer['geometric_mean_exact_phase_ratio'])}.
 
 ### V10 outcomes by M, Q, and scenario
 

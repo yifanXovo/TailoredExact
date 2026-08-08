@@ -1,0 +1,70 @@
+{
+  "accepted_cplex_mainline": "S0/F0-CPLEX",
+  "automatic_promotion_allowed": false,
+  "branch": "codex/round34-c6-algorithm-documentation-hga-ablation",
+  "compression_restoration_hashes_verified": true,
+  "evidence_package_bytes_excluding_self": 168231205,
+  "evidence_package_file_count_excluding_self": 3939,
+  "exactness_audit_passed": true,
+  "false_certificate_count": 0,
+  "largest_artifact_bytes": 50796776,
+  "largest_artifact_path": "results/gf_c6_documentation_hga_round34/case_bound_trajectories.csv",
+  "largest_artifact_sha256": "5238a8ea6f7da1401f2ceaa25694e27e661374e50e0b7d17da4e084a99b2fe99",
+  "license_marker_scan_files": 3939,
+  "license_marker_scan_hits": 0,
+  "losslessly_compressed_files": 787,
+  "observed_live_main_at_freeze": "afb3f1043fab73ae28dd5b1a2d71501f6f732b3c",
+  "official_executable_sha256": "3d536c89c4fc5d5777307c9d67be2a8863b6ce62985b91f56df686db7fd574e3",
+  "official_rows": 82,
+  "post_package_completion_markers_are_provenance_only": true,
+  "post_package_integrity_authority": "evidence_package_manifest_and_compression_restoration_hashes",
+  "preexisting_worktree_preservation_audit_passed": true,
+  "preexisting_worktree_rows": 577,
+  "result_separation_audit_passed": true,
+  "round_id": 34,
+  "single_thread_audit_passed": true,
+  "solver_source_commit": "9fef376714dcc25205e677b82e2e473bc4f61398",
+  "starting_head": "201798c6c9daa9b1f6bfae583af5bbdc53608219",
+  "startup_classification": "simple_start_promising_for_future_validation",
+  "startup_classification_reason": "SIMPLE-START passes the material V10 and transfer gates and has a lower geometric-mean ratio than LIGHT on V10 without a worse transfer ratio.",
+  "strict_certificates": 82,
+  "trace_audit_passed": true,
+  "transfer_summary": {
+    "C6-HGA-LIGHT": {
+      "geometric_mean_exact_phase_ratio": 1.001874670766498,
+      "geometric_mean_total_ratio": 0.9180145980691936,
+      "median_total_ratio": 0.9455956094000726,
+      "rows": 4,
+      "strict_rows": 4,
+      "wins": 4
+    },
+    "C6-SIMPLE-START": {
+      "geometric_mean_exact_phase_ratio": 0.8211778219192961,
+      "geometric_mean_total_ratio": 0.5860757786379446,
+      "median_total_ratio": 0.6694094720803054,
+      "rows": 4,
+      "strict_rows": 4,
+      "wins": 4
+    }
+  },
+  "v10_summary": {
+    "C6-HGA-LIGHT": {
+      "geometric_mean_exact_phase_ratio": 0.994010681722017,
+      "geometric_mean_total_ratio": 0.8146593960618367,
+      "median_total_ratio": 0.8805282375994331,
+      "rows": 18,
+      "strict_rows": 18,
+      "wins": 18
+    },
+    "C6-SIMPLE-START": {
+      "geometric_mean_exact_phase_ratio": 0.9539423985100008,
+      "geometric_mean_total_ratio": 0.41293701667086546,
+      "median_total_ratio": 0.39180316727358877,
+      "rows": 18,
+      "strict_rows": 18,
+      "wins": 18
+    }
+  },
+  "validated_gurobi_mainline": "C6-HGA-FULL",
+  "validation_commit_at_freeze": "7e8f92ce358ede993175fa53f72f8c20b9369335"
+}

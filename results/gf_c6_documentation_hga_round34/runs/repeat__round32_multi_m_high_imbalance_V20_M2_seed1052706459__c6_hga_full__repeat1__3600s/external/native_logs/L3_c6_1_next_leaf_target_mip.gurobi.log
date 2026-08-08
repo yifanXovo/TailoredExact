@@ -1,0 +1,40 @@
+
+Gurobi 13.0.2 (win64) logging started Sat Aug  8 15:35:55 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_c6_documentation_hga_round34\runs\repeat__round32_multi_m_high_imbalance_V20_M2_seed1052706459__c6_hga_full__repeat1__3600s\external\native_logs\L3_c6_1_next_leaf_target_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  3576.743577
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 8734 rows, 2422 columns and 50274 nonzeros (Min)
+Model fingerprint: 0x5a0f0e8b
+Model has 21 linear objective coefficients
+Variable types: 1248 continuous, 1174 integer (1034 binary)
+Coefficient statistics:
+  Matrix range     [1e-02, 2e+04]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [7e-01, 3e+03]
+  RHS range        [7e-01, 5e+04]
+
+Presolve removed 8578 rows and 2348 columns
+Presolve time: 0.08s
+Presolved: 156 rows, 74 columns, 528 nonzeros
+Variable types: 24 continuous, 50 integer (22 binary)
+
+Explored 0 nodes (0 simplex iterations) in 0.08 seconds (0.16 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Solve interrupted
+Best objective -, best bound 4.330968081602e+00, gap -
+
+User-callback calls 1598, time in user-callback 0.00 sec

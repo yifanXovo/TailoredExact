@@ -1,0 +1,52 @@
+
+Gurobi 13.0.2 (win64) logging started Sat Aug  8 14:47:20 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_c6_documentation_hga_round34\runs\v10__round33_v10_moderate_M1_Q30_seed82526096__c6_hga_full__3600s\external\native_logs\L2_terminal_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  3581.3750426
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 2552 rows, 483 columns and 17031 nonzeros (Min)
+Model fingerprint: 0x2ded9a2f
+Model has 11 linear objective coefficients
+Variable types: 256 continuous, 227 integer (187 binary)
+Coefficient statistics:
+  Matrix range     [8e-03, 1e+05]
+  Objective range  [8e-03, 1e+00]
+  Bounds range     [3e-01, 1e+02]
+  RHS range        [3e-01, 1e+06]
+
+Presolved: 169 rows, 86 columns, 579 nonzeros
+
+Continuing optimization...
+
+Found heuristic solution: objective 0.5780152
+
+Root relaxation: objective 5.769608e-01, 117 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.57696    0   30    0.57802    0.57696  0.18%     -    0s
+     0     0    0.57778    0   15    0.57802    0.57778  0.04%     -    0s
+     0     0    0.57781    0   13    0.57802    0.57781  0.04%     -    0s
+     0     0    0.57791    0   21    0.57802    0.57791  0.02%     -    0s
+
+Explored 1 nodes (159 simplex iterations) in 0.03 seconds (0.04 work units)
+Most recent optimization runtime was 0.01 seconds (0.01 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 1: 0.578015 
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 5.780151685285e-01, best bound 5.780151685285e-01, gap 0.0000%
+
+User-callback calls 64, time in user-callback 0.00 sec
