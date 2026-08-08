@@ -313,7 +313,9 @@ def trajectory_rows(run: dict[str, Any], optimum: float | None = None
     for sequence, row in enumerate(trace(run)):
         lb = number(row["lower_bound"])
         observed_ub = number(row["upper_bound"])
-        ub = observed_ub if math.isfinite(observed_ub) else reference
+        observed_gap = max(
+            0.0, (observed_ub - lb) / max(abs(observed_ub), 1e-12)) \
+            if math.isfinite(observed_ub) else math.nan
         gap = max(0.0, (reference - lb) / max(abs(reference), 1e-12))
         output.append({
             "round_id": 34, "stage": run["state"]["stage"],
@@ -321,7 +323,9 @@ def trajectory_rows(run: dict[str, Any], optimum: float | None = None
             "instance_id": run["state"]["instance_id"],
             "arm": run["state"]["arm"], "sequence": sequence,
             "process_seconds": row["process_seconds"],
-            "valid_lower_bound": lb, "observed_upper_bound": ub,
+            "valid_lower_bound": lb,
+            "observed_upper_bound": observed_ub,
+            "observed_relative_gap": observed_gap,
             "final_verified_optimum": reference,
             "relative_proof_gap_to_final_optimum": gap,
             "event": row["event"], "source": row["source"],
@@ -355,6 +359,27 @@ def proof_metrics(run: dict[str, Any], optimum: float | None = None
             "left_continuous_no_interpolation_no_post_last_extension",
         **threshold_times,
     }
+
+
+def first_strict_bound_overtake(candidate: dict[str, Any],
+                                baseline: dict[str, Any]) -> float:
+    """First observed candidate LB strictly above the left-current baseline."""
+    candidate_rows = trace(candidate)
+    baseline_rows = trace(baseline)
+    baseline_index = -1
+    for row in candidate_rows:
+        while (baseline_index + 1 < len(baseline_rows)
+               and baseline_rows[baseline_index + 1]["process_seconds"]
+               <= row["process_seconds"] + 1e-12):
+            baseline_index += 1
+        if baseline_index < 0:
+            continue
+        candidate_lb = number(row["lower_bound"])
+        baseline_lb = number(baseline_rows[baseline_index]["lower_bound"])
+        scale = max(1.0, abs(candidate_lb), abs(baseline_lb))
+        if candidate_lb > baseline_lb + TOL * scale:
+            return row["process_seconds"]
+    return math.nan
 
 
 def base_row(run: dict[str, Any]) -> dict[str, Any]:
@@ -400,6 +425,9 @@ def phase_row(run: dict[str, Any]) -> dict[str, Any]:
     model_end = event_time(run, "first_interval_model_build_complete")
     first_lp_launch = event_time(run, "first_lp_optimize_launch")
     trajectory = trace(run)
+    last_observed_before_final = next((
+        row["process_seconds"] for row in reversed(trajectory)
+        if row["event"] != "final_result"), math.nan)
     first_lb = next((row for row in trajectory
                      if number(row["lower_bound"], 0.0) > TOL), None)
     first_lp_complete = next((
@@ -436,6 +464,12 @@ def phase_row(run: dict[str, Any]) -> dict[str, Any]:
         "final_serialization_seconds": final_complete - final_start
             if math.isfinite(final_start) and math.isfinite(final_complete)
             else math.nan,
+        "post_last_bound_to_final_result_seconds":
+            total - last_observed_before_final
+            if math.isfinite(last_observed_before_final) else math.nan,
+        "final_verification_timing_scope":
+            "combined_post_last_bound_verification_result_retrieval_and_finalization",
+        "standalone_final_verification_timer_available": False,
     }
 
 
@@ -784,8 +818,18 @@ def main() -> None:
     case_times, case_traces, case_phases, case_mechanisms = [], [], [], []
     for instance_id, grouped in case_groups.items():
         optimum = min(verified_objective(run) for run in grouped)
+        pgrb_run = next(run for run in grouped
+                        if run["state"]["arm"] == "P-GRB")
+        c6_run = next(run for run in grouped
+                      if run["state"]["arm"] == "C6-HGA-FULL")
+        overtake = first_strict_bound_overtake(c6_run, pgrb_run)
         for run in grouped:
-            case_times.append({**base_row(run), **proof_metrics(run, optimum)})
+            case_times.append({
+                **base_row(run), **proof_metrics(run, optimum),
+                "c6_first_strict_bound_overtake_seconds": overtake,
+                "overtake_definition":
+                    "first_observed_C6_valid_LB_strictly_above_left_current_P-GRB_LB",
+            })
             case_traces.extend(trajectory_rows(run, optimum))
             case_phases.append(phase_row(run))
             case_mechanisms.append(mechanism_row(run))
@@ -814,7 +858,10 @@ def main() -> None:
     # Preserve the pre-frozen historical replay and append directly observed
     # official generation summaries under a wider common schema.
     generation_path = OUT / "hga_generation_improvement_summary.csv"
-    historical = csv_rows(generation_path)
+    historical = [
+        row for row in csv_rows(generation_path)
+        if row.get("evidence_origin") != "round34_official"
+    ]
     observed = []
     for run in startup_runs:
         metrics = generation_metrics(run)
@@ -834,10 +881,17 @@ def main() -> None:
     for run in runs:
         base = base_row(run)
         lower, upper = bounds(run)
-        feasible = bool(run["result"].get("verification", {}).get(
-            "original_solution_feasible", True))
+        verification = run["result"].get("verification", {})
+        feasible = bool(
+            verification.get("original_solution_feasible")
+            and verification.get("original_objective_recomputed")
+            and verification.get("objective_matches")
+            and not verification.get("errors"))
         bound_consistent = lower <= upper + TOL * max(1.0, abs(upper))
-        exact_pass = feasible and bound_consistent and (
+        certificate_class_valid = (
+            not strict(run) or run["result"].get("strict_certificate_class")
+            == "engineering_exact_original_problem_optimal")
+        exact_pass = feasible and bound_consistent and certificate_class_valid and (
             not strict(run) or abs(lower - upper)
             <= TOL * max(1.0, abs(upper)))
         if strict(run) and not exact_pass:
@@ -845,6 +899,7 @@ def main() -> None:
         exactness_rows.append({
             **base, "verified_original_solution_feasible": feasible,
             "bound_order_consistent": bound_consistent,
+            "certificate_class_valid": certificate_class_valid,
             "strict_gap_within_tolerance": not strict(run) or abs(lower-upper)
                 <= TOL * max(1.0, abs(upper)),
             "exactness_audit_passed": exact_pass,
@@ -958,6 +1013,10 @@ lower-bound event against the common final verified optimum.  The phase and
 mechanism tables separate heuristic startup, construction, first LP, native
 targets, child lookahead/splitting, and terminal work.  Runtime alone is not
 used as a mechanism claim: the final interpretation cross-checks these ledgers.
+The executable does not expose a standalone final-verifier timer; the phase
+table therefore reports the auditable combined interval from the last observed
+bound through verification/result retrieval/finalization, plus serialization
+and startup-verifier timers separately, rather than inventing a finer split.
 
 """
     for instance_id in sorted(case_groups):
@@ -970,19 +1029,27 @@ used as a mechanism claim: the final interpretation cross-checks these ledgers.
         phase = next(row for row in case_phases
                      if row["instance_id"] == instance_id
                      and row["arm"] == "C6-HGA-FULL")
+        plain_phase = next(row for row in case_phases
+                           if row["instance_id"] == instance_id
+                           and row["arm"] == "P-GRB")
         case_doc += f"""## {instance_id}
 
 Both arms strictly certified at objective {fmt(c6['final_objective'], 9)}.
 P-GRB required {fmt(pgrb['total_process_seconds'])} s; C6-HGA-FULL required
 {fmt(c6['total_process_seconds'])} s (P-GRB/C6 ratio
 {fmt(ratio(pgrb['total_process_seconds'], c6['total_process_seconds']), 2)}).
+C6's first observed valid lower bound strictly above the left-current P-GRB
+bound occurs at {fmt(c6['c6_first_strict_bound_overtake_seconds'])} process s.
 C6 spent {fmt(phase['hga_wall_seconds'])} s in HGA and
 {fmt(phase['exact_phase_seconds'])} s after exact-phase entry.  Its ledger
 records {mechanism['native_target_phases']} next-frontier native phases,
 {mechanism['child_bound_target_phases']} child-bound target phases,
 {mechanism['split_count']} atomic splits, and
-{mechanism['terminal_mip_leaf_count']} terminal MIP leaves.  The observed
-bound trajectory and work decomposition therefore attribute the difference to
+{mechanism['terminal_mip_leaf_count']} terminal MIP leaves.  P-GRB spends
+{fmt(pgrb['total_process_seconds'] - number(
+    plain_phase['plain_model_and_launch_seconds'], 0.0))} s after native
+optimize launch.  The observed bound trajectory and work decomposition
+therefore attribute the difference to
 the combined verified-incumbent cutoff, interval lower bounds, nonblocking
 scheduling, adaptive splitting where active, and terminal closure—not to wall
 time alone.
