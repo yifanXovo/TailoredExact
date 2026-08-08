@@ -17,7 +17,10 @@ import round34_common as common
 OUT = common.OUT
 MANIFEST = OUT / "evidence_package_manifest.csv"
 COMPRESSION = OUT / "compression_manifest.csv"
-MINIMUM_COMPRESSION_BYTES = 1024 * 1024
+# Most canonical V10 interval models are roughly 0.7--0.9 MiB.  Compressing
+# from 256 KiB keeps the evidence package practical without omitting any byte:
+# every gzip member is restored and checked against its original SHA-256.
+MINIMUM_COMPRESSION_BYTES = 256 * 1024
 COMPRESSIBLE = {".lp", ".csv", ".log"}
 NEVER_COMPRESS = {
     "artifact_manifest.csv", "completion_marker.json", "command.json",
