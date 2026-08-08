@@ -658,6 +658,76 @@ def summarize_pairs(rows: list[dict[str, Any]], arm: str) -> dict[str, Any]:
     }
 
 
+def grouped_pair_summary(rows: list[dict[str, Any]], key: str
+                         ) -> list[dict[str, Any]]:
+    output = []
+    values = sorted({str(row[key]) for row in rows})
+    for arm in ("C6-HGA-LIGHT", "C6-SIMPLE-START"):
+        for value in values:
+            selected = [row for row in rows
+                        if row["candidate_arm"] == arm
+                        and str(row[key]) == value]
+            ratios = [number(row["candidate_over_full_total_ratio"])
+                      for row in selected]
+            output.append({
+                "grouping": key, "group": value, "candidate_arm": arm,
+                "instances": len(selected),
+                "wins": sum(number(row["candidate_total_seconds"])
+                            < number(row["full_total_seconds"])
+                            for row in selected),
+                "geometric_mean_total_ratio": geometric_mean(ratios),
+                "median_total_ratio": statistics.median(ratios)
+                    if ratios else math.nan,
+            })
+    return output
+
+
+def repeatability_rows(runs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    primary: dict[tuple[str, str], dict[str, Any]] = {}
+    repeated: dict[tuple[str, str], dict[str, Any]] = {}
+    for run in runs:
+        key = (run["state"]["instance_id"], run["state"]["arm"])
+        if run["state"]["stage"] == "repeat":
+            repeated[key] = run
+        elif run["state"]["stage"] in {"v10", "transfer"}:
+            primary[key] = run
+    output = []
+    for key, repeat in sorted(repeated.items()):
+        first = primary[key]
+        first_row, repeat_row = startup_row(first), startup_row(repeat)
+        values = [first_row["total_process_seconds"],
+                  repeat_row["total_process_seconds"]]
+        mean = statistics.fmean(values)
+        output.append({
+            "round_id": 34, "instance_id": key[0], "arm": key[1],
+            "V": first_row["V"], "M": first_row["M"],
+            "Q": first_row["Q"], "scenario": first_row["scenario"],
+            "primary_stage": first_row["stage"],
+            "primary_run_id": first_row["run_id"],
+            "repeat_run_id": repeat_row["run_id"],
+            "primary_strict": first_row["strict_certificate"],
+            "repeat_strict": repeat_row["strict_certificate"],
+            "primary_total_seconds": values[0],
+            "repeat_total_seconds": values[1],
+            "repeat_minus_primary_seconds": values[1] - values[0],
+            "repeat_over_primary_ratio": ratio(values[1], values[0]),
+            "two_run_coefficient_of_variation":
+                statistics.stdev(values) / mean if mean > 0 else math.nan,
+            "primary_startup_seconds": first_row["startup_wall_seconds"],
+            "repeat_startup_seconds": repeat_row["startup_wall_seconds"],
+            "primary_startup_incumbent":
+                first_row["startup_verified_incumbent"],
+            "repeat_startup_incumbent":
+                repeat_row["startup_verified_incumbent"],
+            "startup_incumbent_matches_within_tolerance": abs(
+                first_row["startup_verified_incumbent"]
+                - repeat_row["startup_verified_incumbent"])
+                <= TOL * max(
+                    1.0, abs(first_row["startup_verified_incumbent"])),
+        })
+    return output
+
+
 def classification(v10_pairs: list[dict[str, Any]],
                    transfer_pairs: list[dict[str, Any]]) -> tuple[str, str]:
     light_v10 = summarize_pairs(v10_pairs, "C6-HGA-LIGHT")
@@ -732,8 +802,8 @@ def main() -> None:
               [row for row in forensics if row["stage"] == "v10"])
     write_csv(OUT / "hga_transfer_anchor_results.csv",
               [row for row in forensics if row["stage"] == "transfer"])
-    write_csv(OUT / "hga_repeatability.csv",
-              [row for row in forensics if row["stage"] == "repeat"])
+    repeats = repeatability_rows(runs)
+    write_csv(OUT / "hga_repeatability.csv", repeats)
     v10_pairs = pair_rows(runs, "v10")
     transfer_pairs = pair_rows(runs, "transfer")
     paired = v10_pairs + transfer_pairs
@@ -830,6 +900,11 @@ def main() -> None:
         arm: summarize_pairs(transfer_pairs, arm)
         for arm in ("C6-HGA-LIGHT", "C6-SIMPLE-START")
     }
+    v10_group_summary = (
+        grouped_pair_summary(v10_pairs, "M")
+        + grouped_pair_summary(v10_pairs, "Q")
+        + grouped_pair_summary(v10_pairs, "scenario")
+    )
     final_class, class_reason = classification(v10_pairs, transfer_pairs)
     all_trace = all(row["trace_audit_passed"] for row in trace_rows)
     all_thread = all(row["single_thread_audit_passed"] for row in thread_rows)
@@ -923,6 +998,13 @@ time alone.
     m1_full = [row for row in v10_full if integer(row["M"]) == 1]
     m1_hga_fraction = statistics.fmean(
         number(row["hga_fraction_of_total"]) for row in m1_full)
+    m1_exact_fraction = statistics.fmean(
+        number(row["exact_phase_seconds"])
+        / number(row["total_process_seconds"]) for row in m1_full)
+    m1_other_startup_fraction = statistics.fmean(
+        max(0.0, number(row["startup_wall_seconds"])
+            - number(row["hga_wall_seconds"]))
+        / number(row["total_process_seconds"]) for row in m1_full)
     post_generations = statistics.median(
         number(row["post_last_improvement_generations"]) for row in v10_full)
     light_v10 = v10_summary["C6-HGA-LIGHT"]
@@ -956,8 +1038,10 @@ promoted in Round 34.
 
 1. **M=1 HGA fraction.** HGA-TGBC accounts for an arithmetic mean of
    {100.0*m1_hga_fraction:.2f}% of full C6 process time over the six official
-   V10 M=1 rows.  `hga_tgbc_startup_forensics.csv` also separates construction
-   and downstream exact time instance by instance.
+   V10 M=1 rows.  Other pre-exact startup accounts for
+   {100.0*m1_other_startup_fraction:.2f}% and the downstream exact framework
+   accounts for {100.0*m1_exact_fraction:.2f}%.  Phase-level construction and
+   downstream timings remain available per run.
 2. **Work after the last useful improvement.** The median official FULL run
    executes {fmt(post_generations, 0)} generations after its last strict
    incumbent improvement; the fixed baseline stop is 2,000 stagnant
@@ -977,6 +1061,16 @@ promoted in Round 34.
         ("M", "M"), ("instances", "Instances"),
         ("light_wins", "LIGHT wins"),
         ("geometric_mean_ratio", "LIGHT/FULL geometric mean"),
+    ]) + f"""
+
+   The paired outcomes for both exploratory arms, grouped independently by M,
+   Q, and scenario, are:
+
+""" + markdown_table(v10_group_summary, [
+        ("grouping", "Grouping"), ("group", "Value"),
+        ("candidate_arm", "Candidate"), ("instances", "N"),
+        ("wins", "Wins"),
+        ("geometric_mean_total_ratio", "Candidate/FULL geometric mean"),
     ]) + f"""
 
 7. **Simple verified startup.** Yes.  The pre-existing deterministic greedy
@@ -1027,6 +1121,19 @@ strengthening families, HGA implementation, and source-to-paper mapping are in
 the six first-class algorithm documents.  No C7 was created.  S0/F0-CPLEX is
 unchanged and remains the accepted tailored CPLEX mainline.
 
+Round 34 did touch the C++ exact driver file `PaperExternalGiniTree.cpp`, but
+only its startup-contract gate and serialized startup label: it admits the two
+predeclared exploratory verified-incumbent providers while retaining the
+original HGA-FULL contract.  No model-row, scheduler, backend, target, split, or
+closure decision was changed.  Frozen function/body checks cover the active
+frontier, split, and terminal decisions (9/9 equivalent rows), and the clean
+official executable is bound to solver-source commit `9fef376714dcc25205e677b82e2e473bc4f61398`.
+The other C++ changes are observational HGA elapsed telemetry, CLI/result
+plumbing, and serialization.  One engineering test was repaired to compare
+deterministic generation/fitness/improvement columns separately from naturally
+nondeterministic wall-clock telemetry; all 14 C++ tests and all 18 repository
+Python scripts then passed.
+
 ## 2. Complete convergence evidence
 
 """ + markdown_table(case_table, [
@@ -1053,6 +1160,35 @@ SIMPLE/FULL has ratio {fmt(simple_v10['geometric_mean_total_ratio'])} and wins
 {simple_v10['wins']}/18.  Across the four V12/V20 transfer anchors the ratios
 are {fmt(light_transfer['geometric_mean_total_ratio'])} and
 {fmt(simple_transfer['geometric_mean_total_ratio'])}, respectively.
+
+### V10 outcomes by M, Q, and scenario
+
+""" + markdown_table(v10_group_summary, [
+        ("grouping", "Grouping"), ("group", "Value"),
+        ("candidate_arm", "Candidate"), ("instances", "N"),
+        ("wins", "Wins"),
+        ("geometric_mean_total_ratio", "Candidate/FULL geometric mean"),
+    ]) + """
+
+### V12/V20 transfer anchors
+
+""" + markdown_table(transfer_pairs, [
+        ("instance_id", "Instance"), ("V", "V"),
+        ("candidate_arm", "Candidate"),
+        ("full_total_seconds", "FULL s"),
+        ("candidate_total_seconds", "Candidate s"),
+        ("candidate_over_full_total_ratio", "Candidate/FULL"),
+    ]) + """
+
+### Repeatability
+
+""" + markdown_table(repeats, [
+        ("instance_id", "Instance"), ("arm", "Arm"),
+        ("primary_total_seconds", "Primary s"),
+        ("repeat_total_seconds", "Repeat s"),
+        ("repeat_over_primary_ratio", "Repeat/primary"),
+        ("startup_incumbent_matches_within_tolerance", "Same startup UB"),
+    ]) + f"""
 
 Final startup classification:
 `{final_class}`.
