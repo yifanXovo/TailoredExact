@@ -475,6 +475,18 @@ def phase_row(run: dict[str, Any]) -> dict[str, Any]:
 
 def mechanism_row(run: dict[str, Any]) -> dict[str, Any]:
     result = run["result"]
+    split_rows = csv_rows(
+        run["run_dir"] / "external" / "split_decision_ledger.csv")
+    optimize_rows = csv_rows(
+        run["run_dir"] / "external" / "paper_optimize_ledger.csv")
+    native_rows = csv_rows(
+        run["run_dir"] / "external" / "native_target_ledger.csv")
+    leaf_rows = csv_rows(
+        run["run_dir"] / "external" / "paper_leaf_ledger.csv")
+    closure_sources: dict[str, int] = defaultdict(int)
+    for row in leaf_rows:
+        source = row.get("closure_source", "") or "open_or_replaced"
+        closure_sources[source] += 1
     return {
         **base_row(run),
         "initial_leaf_count": integer(result.get(
@@ -495,13 +507,33 @@ def mechanism_row(run: dict[str, Any]) -> dict[str, Any]:
             "external_gini_tree_child_bound_target_reached_count")),
         "child_lookahead_reuses": integer(result.get(
             "external_gini_tree_child_lookahead_reuse_count")),
+        "child_lookahead_decisions": len(split_rows),
+        "child_infeasibility_triggers": sum(
+            truth(row.get("child_infeasibility_trigger"))
+            for row in split_rows),
+        "strict_child_bound_triggers": sum(
+            truth(row.get("strict_bound_trigger")) for row in split_rows),
         "split_count": integer(result.get("external_gini_tree_split_count")),
         "declined_split_count": integer(result.get(
             "external_gini_tree_declined_split_count")),
         "terminal_mip_leaf_count": integer(result.get(
             "external_gini_tree_terminal_mip_leaf_count")),
+        "optimize_ledger_lp_rows": sum(
+            row.get("solve_kind") == "LP" for row in optimize_rows),
+        "optimize_ledger_native_target_rows": sum(
+            "TARGET" in row.get("solve_kind", "") for row in optimize_rows),
+        "optimize_ledger_terminal_mip_rows": sum(
+            row.get("solve_kind") == "MIP" for row in optimize_rows),
+        "native_target_ledger_rows": len(native_rows),
+        "native_target_exact_closures": sum(
+            truth(row.get("exact_closure")) for row in native_rows),
+        "native_target_requeues": sum(
+            truth(row.get("requeued")) for row in native_rows),
         "closed_leaf_count": integer(result.get(
             "external_gini_tree_closed_leaf_count")),
+        "final_leaf_ledger_rows": len(leaf_rows),
+        "final_leaf_closure_sources": json.dumps(
+            closure_sources, sort_keys=True),
         "lp_infeasible_leaf_count": integer(result.get(
             "external_gini_tree_lp_infeasible_leaf_count")),
         "model_count": integer(result.get("external_gini_tree_model_count")),
@@ -967,6 +999,12 @@ def main() -> None:
                         for row in separation_rows)
     audit = {
         "round_id": 34, "official_rows": len(runs),
+        "branch": manifest["branch"],
+        "starting_head": manifest["starting_head"],
+        "observed_live_main_at_freeze": manifest["observed_live_main"],
+        "solver_source_commit": manifest["solver_source_commit"],
+        "validation_commit_at_freeze": manifest["validation_commit_at_freeze"],
+        "official_executable_sha256": manifest["gurobi_executable_sha256"],
         "strict_certificates": sum(strict(run) for run in runs),
         "false_certificate_count": false_certificates,
         "exactness_audit_passed": all(
