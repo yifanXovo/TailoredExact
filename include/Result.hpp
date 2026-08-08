@@ -546,6 +546,7 @@ struct SolveResult {
     double external_gini_tree_contract_minimum_width = 0.0;
     double external_gini_tree_certificate_tolerance = 0.0;
     std::string external_gini_tree_algorithm_arm;
+    std::string external_gini_tree_startup_variant;
     std::string external_gini_tree_row_factory_version;
     std::string external_gini_tree_global_row_families;
     std::string external_gini_tree_interval_row_families;

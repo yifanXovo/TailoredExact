@@ -101,6 +101,7 @@ void usage() {
         << "[--external-incumbent <path>] [--external-incumbent-format auto|route_json|csv|legacy_text] [--export-incumbent <path>] "
         << "[--primal-heuristic none|greedy|hga-tgbc|best-of-all] [--primal-heuristic-seconds <seconds>] "
         << "[--primal-heuristic-seed <seed>] [--primal-heuristic-runs <N>] "
+        << "[--round34-c6-startup-variant hga-full|hga-light-1000|simple-start] "
         << "[--heuristic-candidates-csv <path>] "
         << "[--large-instance-mode auto|off|force] [--large-lb-mode none|inventory-only|movement-projection|column-pool-relaxation|auto] "
         << "[--pricing-engine exact-label|ng-dssr|hybrid] "
@@ -1169,6 +1170,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--primal-heuristic-stop") opt.primal_heuristic_stop = requireValue(i, argc, argv);
         else if (arg == "--primal-heuristic-no-improve-generations") opt.primal_heuristic_no_improve_generations = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-generation-log") opt.primal_heuristic_generation_log = requireValue(i, argc, argv);
+        else if (arg == "--round34-c6-startup-variant") opt.round34_c6_startup_variant = requireValue(i, argc, argv);
         else if (arg == "--heuristic-candidates-csv") opt.heuristic_candidates_csv = requireValue(i, argc, argv);
         else if (arg == "--large-instance-mode") opt.large_instance_mode = requireValue(i, argc, argv);
         else if (arg == "--large-lb-mode") opt.large_lb_mode = requireValue(i, argc, argv);
@@ -1461,6 +1463,15 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.large_relaxed_rmp_time < 0.0) opt.large_relaxed_rmp_time = 0.0;
     opt.primal_heuristic = lowerAscii(opt.primal_heuristic);
     opt.primal_heuristic_stop = lowerAscii(opt.primal_heuristic_stop);
+    opt.round34_c6_startup_variant =
+        lowerAscii(opt.round34_c6_startup_variant);
+    if (opt.round34_c6_startup_variant != "hga-full" &&
+        opt.round34_c6_startup_variant != "hga-light-1000" &&
+        opt.round34_c6_startup_variant != "simple-start") {
+        throw std::runtime_error(
+            "Unsupported --round34-c6-startup-variant: " +
+            opt.round34_c6_startup_variant);
+    }
     if (opt.primal_heuristic_stop != "generation-stagnation") {
         opt.primal_heuristic_stop = "legacy-time";
     }

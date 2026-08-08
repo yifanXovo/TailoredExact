@@ -437,6 +437,10 @@ struct SolveOptions {
     int primal_heuristic_no_improve_generations = 2000;
     std::string primal_heuristic_generation_log;
     std::string primal_heuristic_phase_label = "primary_hga";
+    // Round 34 startup-ablation label.  This flag is consumed only by the
+    // frozen C6 configuration gate; it does not participate in any exact
+    // scheduling, bound, split, row, or closure decision.
+    std::string round34_c6_startup_variant = "hga-full";
     bool exact_phase_local_redecode_repair = false;
     bool exact_phase_local_redecode_repair_explicit = false;
     double exact_phase_local_redecode_seconds = 10.0;
