@@ -833,14 +833,30 @@ def classification(v10_pairs: list[dict[str, Any]],
     simple_transfer = summarize_pairs(transfer_pairs, "C6-SIMPLE-START")
     all_strict = all(item["strict_rows"] == item["rows"] for item in (
         light_v10, light_transfer, simple_v10, simple_transfer))
-    if (all_strict and light_v10["geometric_mean_total_ratio"] <= 0.90
-            and light_transfer["geometric_mean_total_ratio"] <= 1.10):
+    light_qualifies = (
+        all_strict and light_v10["geometric_mean_total_ratio"] <= 0.90
+        and light_transfer["geometric_mean_total_ratio"] <= 1.10)
+    simple_qualifies = (
+        all_strict and simple_v10["geometric_mean_total_ratio"] <= 0.90
+        and simple_transfer["geometric_mean_total_ratio"] <= 1.10)
+    simple_pareto_dominates_light = (
+        simple_qualifies
+        and simple_v10["geometric_mean_total_ratio"]
+        < light_v10["geometric_mean_total_ratio"]
+        and simple_transfer["geometric_mean_total_ratio"]
+        <= light_transfer["geometric_mean_total_ratio"])
+    if simple_pareto_dominates_light:
+        return (
+            "simple_start_promising_for_future_validation",
+            "SIMPLE-START passes the material V10 and transfer gates and has "
+            "a lower geometric-mean ratio than LIGHT on V10 without a worse "
+            "transfer ratio.")
+    if light_qualifies:
         return (
             "lighter_hga_promising_for_future_validation",
             "HGA-LIGHT materially improves the V10 geometric mean while its "
             "uniform V12/V20 transfer penalty remains within 10%.")
-    if (all_strict and simple_v10["geometric_mean_total_ratio"] <= 0.90
-            and simple_transfer["geometric_mean_total_ratio"] <= 1.10):
+    if simple_qualifies:
         return (
             "simple_start_promising_for_future_validation",
             "SIMPLE-START materially improves the V10 geometric mean while its "
