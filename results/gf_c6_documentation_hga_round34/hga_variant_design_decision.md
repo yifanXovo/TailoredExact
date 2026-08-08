@@ -65,3 +65,18 @@ results. No startup arm is dispatched by instance characteristics.
 The final version of this document will append development measurements and
 the official inclusion decision; the rules above were written before any new
 Round 34 solver result.
+
+
+## Development gate results and official inclusion
+
+All 21 heuristic-only development rows passed the independent verifier.
+HGA-LIGHT matched FULL final fitness and verified objective on 7/7 identities.
+SIMPLE produced a verified original solution on 7/7 identities. Median reported
+startup runtimes were 2.109696s (FULL),
+1.311131s (LIGHT), and
+0.000426s (SIMPLE).
+
+Accordingly all three uniform arms are frozen for the official 18-instance V10
+and four-anchor transfer matrices. Repeatability was predeclared for FULL and
+the sole primary exploratory HGA arm, LIGHT. This is an inclusion decision for
+measurement, not a promotion: C6-HGA-FULL remains the validated mainline.
