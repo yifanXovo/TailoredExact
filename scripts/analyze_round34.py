@@ -14,6 +14,7 @@ import json
 import math
 import os
 import statistics
+import subprocess
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Iterable, TextIO
@@ -748,6 +749,36 @@ def grouped_pair_summary(rows: list[dict[str, Any]], key: str
     return output
 
 
+def preservation_audit() -> list[dict[str, Any]]:
+    recorded = csv_rows(OUT / "preexisting_worktree_manifest.csv")
+    status_text = subprocess.check_output(
+        ("git", "status", "--porcelain=v1", "-uall"),
+        cwd=common.ROOT, text=True, encoding="utf-8", errors="replace")
+    current_status = {
+        line[3:].replace("\\", "/"): line[:2]
+        for line in status_text.splitlines() if len(line) >= 4
+    }
+    output = []
+    for row in recorded:
+        path = common.ROOT / row["path"]
+        exists = path.exists()
+        size = path.stat().st_size if path.is_file() else math.nan
+        expected_size = number(row.get("bytes"))
+        passed = (
+            exists == truth(row.get("exists"))
+            and (not math.isfinite(expected_size) or size == expected_size)
+            and current_status.get(row["path"], "") == row["status"])
+        output.append({
+            "path": row["path"], "starting_status": row["status"],
+            "final_status": current_status.get(row["path"], ""),
+            "starting_exists": row["exists"], "final_exists": exists,
+            "starting_bytes": row.get("bytes", ""), "final_bytes": size,
+            "preservation_audit_passed": passed,
+            "audit_scope": "status_existence_and_byte_count",
+        })
+    return output
+
+
 def repeatability_rows(runs: list[dict[str, Any]]) -> list[dict[str, Any]]:
     primary: dict[tuple[str, str], dict[str, Any]] = {}
     repeated: dict[tuple[str, str], dict[str, Any]] = {}
@@ -978,6 +1009,8 @@ def main() -> None:
     write_csv(OUT / "trace_audit.csv", trace_rows)
     write_csv(OUT / "single_thread_audit.csv", thread_rows)
     write_csv(OUT / "result_separation_audit.csv", separation_rows)
+    preserved_rows = preservation_audit()
+    write_csv(OUT / "preexisting_worktree_audit.csv", preserved_rows)
 
     v10_summary = {
         arm: summarize_pairs(v10_pairs, arm)
@@ -1012,6 +1045,9 @@ def main() -> None:
         "trace_audit_passed": all_trace,
         "single_thread_audit_passed": all_thread,
         "result_separation_audit_passed": all_separated,
+        "preexisting_worktree_rows": len(preserved_rows),
+        "preexisting_worktree_preservation_audit_passed": all(
+            row["preservation_audit_passed"] for row in preserved_rows),
         "v10_summary": v10_summary,
         "transfer_summary": transfer_summary,
         "startup_classification": final_class,
@@ -1312,6 +1348,9 @@ later separately frozen qualification round.
 - Trace monotonicity/completeness audit: {all_trace}.
 - Single-thread command audit: {all_thread}.
 - Round/result separation audit: {all_separated}.
+- Pre-existing worktree preservation audit: {all(
+    row['preservation_audit_passed'] for row in preserved_rows)}
+  ({len(preserved_rows)} recorded entries; status/existence/byte-count scope).
 - The official source commit and executable SHA-256 are bound in every row and
   in `round34_frozen_manifest.json`.
 
