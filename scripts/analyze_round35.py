@@ -1198,6 +1198,17 @@ counterfactual is used in this audit.
 
     h18, h36, p18, p36 = map(outcome_summary,
                              (hga1800, hga3600, p1800, p3600))
+    stronger_hga_materially_helps_large = (
+        h36["comparator_gap_wins"] > h36["simple_gap_wins"]
+        or h36["comparator_certificates"] > h36["simple_certificates"] + 1)
+    simple_preserves_tailored_advantage = truth(gates[
+        "simple_preserves_broad_superiority_over_p_grb"])
+    later_interaction_study_justified = (
+        sum(integer(row["structural_sequence_hashes_changed"]) > 0
+            for row in interactions) > 0
+        and (h18["simple_gap_wins"] + h36["simple_gap_wins"]) > 0
+        and (h18["comparator_gap_wins"]
+             + h36["comparator_gap_wins"]) > 0)
     summary = {
         "schema": "round35-final-audit-v1",
         "classification": classification,
@@ -1242,6 +1253,14 @@ counterfactual is used in this audit.
         "validated_gurobi_mainline": "C6-HGA-FULL",
         "promotion_candidate": "C6-SIMPLE-START",
         "automatic_promotion_performed": False,
+        "simple_start_ready_for_promotion_after_review":
+            classification == "simple_start_qualified_for_promotion",
+        "stronger_hga_incumbents_materially_help_large_instances":
+            stronger_hga_materially_helps_large,
+        "simple_preserves_validated_tailored_gurobi_advantage":
+            simple_preserves_tailored_advantage,
+        "later_incumbent_decomposition_study_justified":
+            later_interaction_study_justified,
         "frozen_c6_exact_source_and_decisions_unchanged": frozen_c6_unchanged,
         "clean_release_builds": integer(stage0.get(
             "clean_release_build_count")),
@@ -1316,6 +1335,14 @@ S0/F0-CPLEX remains the tailored CPLEX mainline. C6-HGA-FULL remains the
 validated Gurobi mainline pending review. Round 35 does not automatically
 promote C6-SIMPLE-START. The machine-readable decision gates are preserved in
 `final_audit_summary.json`.
+
+- Stronger HGA incumbents materially help the large-instance matrix under the
+  predeclared decision rule: {stronger_hga_materially_helps_large}.
+- SIMPLE preserves the validated tailored-Gurobi advantage over P-GRB:
+  {simple_preserves_tailored_advantage}.
+- A later incumbent-decomposition mechanism study is justified by mixed
+  performance plus structural-sequence changes:
+  {later_interaction_study_justified}.
 """
     write_text(OUT / "final_report.md", report)
     print(json.dumps(summary, indent=2, sort_keys=True))
