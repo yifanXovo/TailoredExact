@@ -136,12 +136,14 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
         }
         std::ofstream trajectory(options.generation_log_path,
                                  std::ios::out | std::ios::trunc);
-        trajectory << "generation,best_fitness,strict_improvement\n";
+        trajectory << "generation,elapsed_seconds,best_fitness,strict_improvement\n";
         const auto& fitness = ga.get_fitness_history();
+        const auto& elapsed = ga.get_elapsed_history();
         const auto& improvements = ga.get_improvement_history();
         for (std::size_t index = 0; index < fitness.size(); ++index) {
             trajectory << index << ',' << std::setprecision(17)
-                       << fitness[index] << ','
+                       << (index < elapsed.size() ? elapsed[index] : 0.0)
+                       << ',' << fitness[index] << ','
                        << (index < improvements.size() && improvements[index]
                                ? "true" : "false") << '\n';
         }

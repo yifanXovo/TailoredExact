@@ -1,0 +1,55 @@
+{
+  "automatic_promotion_allowed": false,
+  "development_all_verifier_passed": true,
+  "development_instance_count": 7,
+  "development_light_matches_full_fitness": 7,
+  "development_light_matches_full_verified_objective": 7,
+  "development_median_reported_runtime_seconds": {
+    "C6-HGA-FULL": 2.1096961,
+    "C6-HGA-LIGHT": 1.3111314,
+    "C6-SIMPLE-START": 0.0004263
+  },
+  "development_simple_verifier_passed": 7,
+  "exact_phase_identity": "all arms use unchanged C6 after verified incumbent availability",
+  "frozen_before_official_results": true,
+  "historical_candidate_set": [
+    250,
+    500,
+    1000
+  ],
+  "historical_full_fitness_matches": {
+    "1000": 18,
+    "250": 15,
+    "500": 17
+  },
+  "official_results_started_when_written": false,
+  "round_id": 34,
+  "schema": "round34-hga-variant-freeze-v1",
+  "variants": {
+    "C6-HGA-FULL": {
+      "all_other_hga_settings": "unchanged",
+      "no_improve_generations": 2000,
+      "primal_heuristic": "hga-tgbc",
+      "seed": 20260626,
+      "startup_variant": "hga-full",
+      "status": "validated_mainline_unchanged",
+      "stop": "generation-stagnation"
+    },
+    "C6-HGA-LIGHT": {
+      "all_other_hga_settings": "identical_to_full",
+      "no_improve_generations": 1000,
+      "primal_heuristic": "hga-tgbc",
+      "seed": 20260626,
+      "startup_variant": "hga-light-1000",
+      "status": "exploratory_uniform_arm",
+      "stop": "generation-stagnation"
+    },
+    "C6-SIMPLE-START": {
+      "constructor": "existing_three_mode_deterministic_greedy",
+      "independent_verifier_required": true,
+      "primal_heuristic": "greedy",
+      "startup_variant": "simple-start",
+      "status": "exploratory_uniform_arm"
+    }
+  }
+}

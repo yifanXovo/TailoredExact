@@ -172,14 +172,26 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         reason = "c6_requires_round31_open_native_bounded_lifecycle";
         return false;
     }
-    if (options.primal_heuristic != "hga-tgbc" ||
-        options.primal_heuristic_seed != 20260626u ||
-        options.primal_heuristic_stop != "generation-stagnation" ||
-        options.primal_heuristic_no_improve_generations != 2000 ||
+    const bool hga_full =
+        options.round34_c6_startup_variant == "hga-full" &&
+        options.primal_heuristic == "hga-tgbc" &&
+        options.primal_heuristic_seed == 20260626u &&
+        options.primal_heuristic_stop == "generation-stagnation" &&
+        options.primal_heuristic_no_improve_generations == 2000;
+    const bool hga_light =
+        options.round34_c6_startup_variant == "hga-light-1000" &&
+        options.primal_heuristic == "hga-tgbc" &&
+        options.primal_heuristic_seed == 20260626u &&
+        options.primal_heuristic_stop == "generation-stagnation" &&
+        options.primal_heuristic_no_improve_generations == 1000;
+    const bool simple_start =
+        options.round34_c6_startup_variant == "simple-start" &&
+        options.primal_heuristic == "greedy" &&
+        options.primal_heuristic_seed == 20260626u &&
+        options.primal_heuristic_no_improve_generations == 2000;
+    if ((!hga_full && !hga_light && !simple_start) ||
         options.exact_phase_local_redecode_repair) {
-        reason =
-            "c6_requires_primary_generation_hga_seed20260626_stagnation2000_"
-            "and_no_local_redecode";
+        reason = "c6_startup_variant_contract_mismatch_or_local_redecode";
         return false;
     }
     if (options.frontier_intervals != 4 ||
@@ -200,7 +212,8 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         reason = "c6_static_row_or_s0_f0_contract_mismatch";
         return false;
     }
-    reason = "accepted_round31_c6_frozen_contract";
+    reason = "accepted_round31_c6_frozen_exact_contract_with_" +
+        options.round34_c6_startup_variant;
     return true;
 }
 
@@ -539,6 +552,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             : "fresh-per-paper-event"));
     result.external_gini_tree_scheduling =
         options.external_gini_scheduling;
+    result.external_gini_tree_startup_variant = c6_nonblocking
+        ? options.round34_c6_startup_variant : "not_applicable";
     result.external_gini_tree_root_gamma_L = root_gamma_L;
     result.external_gini_tree_root_gamma_U = root_gamma_U;
     result.external_gini_tree_verified_upper_bound = verified_seed.objective;

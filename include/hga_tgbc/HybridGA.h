@@ -107,6 +107,9 @@ public:
     }
     long long get_decoder_calls() const { return decoder_calls; }
     const vector<double>& get_fitness_history() const { return history; }
+    const vector<double>& get_elapsed_history() const {
+        return elapsed_history;
+    }
     const vector<int>& get_improvement_history() const {
         return improvement_history;
     }
@@ -142,8 +145,11 @@ public:
         generations_since_improvement = 0;
         objective_improvement_count = initial_improved ? 1 : 0;
         history.clear();
+        elapsed_history.clear();
         improvement_history.clear();
         history.push_back(best_fitness);
+        elapsed_history.push_back(duration<double>(
+            steady_clock::now() - start).count());
         improvement_history.push_back(initial_improved ? 1 : 0);
 
         auto complete_generation = [&]() {
@@ -184,6 +190,8 @@ public:
                 ++generations_since_improvement;
             }
             history.push_back(best_fitness);
+            elapsed_history.push_back(duration<double>(
+                steady_clock::now() - start).count());
             improvement_history.push_back(improved ? 1 : 0);
             ++total_generations;
             if (total_generations % log_interval == 0) {
@@ -271,6 +279,7 @@ private:
     vector<vector<int>> best_solution;
     double best_fitness;
     vector<double> history;
+    vector<double> elapsed_history;
     vector<int> improvement_history;
     long long total_generations = 0;
     long long generations_since_improvement = 0;

@@ -1616,6 +1616,8 @@ std::string resultToJson(const SolveResult& input) {
         << result.external_gini_tree_certificate_tolerance << ",\n";
     out << "  \"external_gini_tree_algorithm_arm\": \""
         << jsonEscape(result.external_gini_tree_algorithm_arm) << "\",\n";
+    out << "  \"external_gini_tree_startup_variant\": \""
+        << jsonEscape(result.external_gini_tree_startup_variant) << "\",\n";
     out << "  \"external_gini_tree_row_factory_version\": \""
         << jsonEscape(result.external_gini_tree_row_factory_version)
         << "\",\n";

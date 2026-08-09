@@ -86,6 +86,38 @@ std::string readAll(const std::filesystem::path& path) {
     return text.str();
 }
 
+std::string deterministicTrajectory(const std::filesystem::path& path,
+                                    bool* elapsed_monotone) {
+    std::ifstream input(path);
+    std::ostringstream normalized;
+    std::string line;
+    double previous_elapsed = -1.0;
+    *elapsed_monotone = true;
+    bool header = true;
+    while (std::getline(input, line)) {
+        if (header) {
+            require(line ==
+                        "generation,elapsed_seconds,best_fitness,strict_improvement",
+                    "HGA trajectory header does not expose elapsed telemetry");
+            normalized << "generation,best_fitness,strict_improvement\n";
+            header = false;
+            continue;
+        }
+        const std::size_t first = line.find(',');
+        const std::size_t second = line.find(',', first + 1);
+        require(first != std::string::npos && second != std::string::npos,
+                "HGA trajectory row is malformed");
+        const double elapsed = std::stod(
+            line.substr(first + 1, second - first - 1));
+        if (!std::isfinite(elapsed) || elapsed < previous_elapsed) {
+            *elapsed_monotone = false;
+        }
+        previous_elapsed = elapsed;
+        normalized << line.substr(0, first) << line.substr(second) << '\n';
+    }
+    return normalized.str();
+}
+
 void splitDecisionChecks() {
     const double tolerance = 1e-7;
     auto no_gain = ebrp::evaluatePaperLpSplitDecision(
@@ -209,7 +241,15 @@ void deterministicGenerationStopChecks() {
                 near(first.verified_objective, second.verified_objective) &&
                 first.found == second.found,
             "same-seed generation HGA telemetry is nondeterministic");
-    require(readAll(first_path) == readAll(second_path),
+    bool first_elapsed_monotone = false;
+    bool second_elapsed_monotone = false;
+    const std::string first_deterministic = deterministicTrajectory(
+        first_path, &first_elapsed_monotone);
+    const std::string second_deterministic = deterministicTrajectory(
+        second_path, &second_elapsed_monotone);
+    require(first_elapsed_monotone && second_elapsed_monotone,
+            "observational HGA elapsed trajectory is not monotone");
+    require(first_deterministic == second_deterministic,
             "same-seed HGA generation trajectories differ");
     std::filesystem::remove(first_path);
     std::filesystem::remove(second_path);

@@ -1,0 +1,58 @@
+
+Gurobi 13.0.2 (win64) logging started Sat Aug  8 14:57:57 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_c6_documentation_hga_round34\runs\v10__round33_v10_high_imbalance_M3_Q30_seed1765289896__c6_hga_light__3600s\external\native_logs\L2_terminal_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  3531.4778368
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 5993 rows, 1041 columns and 44258 nonzeros (Min)
+Model fingerprint: 0x77ca9e90
+Model has 11 linear objective coefficients
+Variable types: 495 continuous, 546 integer (446 binary)
+Coefficient statistics:
+  Matrix range     [2e-02, 1e+05]
+  Objective range  [2e-02, 1e+00]
+  Bounds range     [5e-01, 2e+02]
+  RHS range        [5e-01, 1e+06]
+
+Presolved: 4467 rows, 946 columns, 40994 nonzeros
+
+Continuing optimization...
+
+    51    43    0.91595    2  103          -    0.88670      -   135    2s
+   215   137    0.97077   20   73          -    0.90818      -  86.5    5s
+   769   417    0.91401   18  136          -    0.91401      -  78.5   10s
+   810   423    0.95866   19  100          -    0.91401      -  94.4   15s
+*  844   398              40       1.0059157    0.91401  9.14%  91.1   15s
+  1075   353    0.91401   22  113    1.00592    0.91401  9.14%   113   20s
+
+Cutting planes:
+  Learned: 1
+  Gomory: 3
+  Cover: 4
+  Implied bound: 8
+  MIR: 15
+  StrongCG: 1
+  RLT: 3
+  Relax-and-lift: 1
+  PSD: 1
+
+Explored 3157 nodes (193195 simplex iterations) in 24.88 seconds (46.06 work units)
+Most recent optimization runtime was 22.22 seconds (40.78 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 1: 1.00592 
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 1.005915740500e+00, best bound 1.005915740500e+00, gap 0.0000%
+
+User-callback calls 13977, time in user-callback 0.00 sec

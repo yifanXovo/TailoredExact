@@ -1,0 +1,11 @@
+process_elapsed_seconds,exact_phase_elapsed_seconds,event_type,active_leaf,active_leaf_valid_lower_bound,other_open_leaf_min_valid_lower_bound,valid_global_lower_bound,verified_global_upper_bound,open_relevant_leaf_count,closed_relevant_leaf_count,event_source
+0.013586900000000001,0.010266300000000001,"exact_tree_initialization","",0,,0,0.060138707950762052,4,0,"initial_exact_interval_cover"
+0.1150457,0.1117248,"parent_lp_completion","L0",0,0.015034676987690513,0,0.060138707950762052,4,0,"complete_parent_lp_optimal"
+0.2570113,0.25369069999999999,"native_root_processing_bound","L0",0,0.015034676987690513,0,0.060138707950762052,4,0,"gurobi_cb_mip_objbnd_valid_native_bound"
+1.5764944000000001,1.5731738,"partial_native_mip_bound_improvement","L0",2.6808151199075377e-05,0.015034676987690513,2.6808151199075377e-05,0.060138707950762052,4,0,"gurobi_cb_mip_objbnd_valid_native_bound"
+1.5780221000000001,1.5747015,"partial_native_mip_bound_improvement","L0",8.7305088185928237e-05,0.015034676987690513,8.7305088185928237e-05,0.060138707950762052,4,0,"gurobi_cb_mip_objbnd_valid_native_bound"
+1.5932613,1.5899406999999999,"partial_native_mip_bound_improvement","L0",0.00018892747252747283,0.015034676987690513,0.00018892747252747283,0.060138707950762052,4,0,"gurobi_cb_mip_objbnd_valid_native_bound"
+1.5953086999999999,1.5919880999999998,"partial_native_mip_bound_improvement","L0",0.00073439187473195531,0.015034676987690513,0.00073439187473195531,0.060138707950762052,4,0,"gurobi_cb_mip_objbnd_valid_native_bound"
+1.6163198999999999,1.6129990000000001,"incumbent_improvement","L0",0.0075314751614797447,,0.0075314751614797368,0.0075314751614797368,0,1,"independently_verified_c6_partial_mip_incumbent"
+1.6171693,1.6138486000000001,"terminal_mip_closure","L0",,0.0075314751614797447,0.0075314751614797368,0.0075314751614797368,0,1,"c6_native_target_phase_exact_closure"
+1.6173420999999999,1.6140215,"finalization","",0.0075314751614797447,,0.0075314751614797368,0.0075314751614797368,0,1,"completed_exact_tree_final_bound"

@@ -1,0 +1,63 @@
+
+Gurobi 13.0.2 (win64) logging started Sat Aug  8 14:55:40 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_c6_documentation_hga_round34\runs\v10__round33_v10_tight_T_M3_Q20_seed284843780__c6_simple_start__3600s\external\native_logs\L1.0_c6_1_next_leaf_target_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  3584.2067716
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 6000 rows, 1043 columns and 44295 nonzeros (Min)
+Model fingerprint: 0x8efe794e
+Model has 11 linear objective coefficients
+Variable types: 496 continuous, 547 integer (447 binary)
+Coefficient statistics:
+  Matrix range     [1e-02, 1e+05]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [2e-01, 4e+02]
+  RHS range        [2e-01, 1e+06]
+
+Presolve removed 1083 rows and 100 columns
+Presolve time: 0.15s
+Presolved: 4917 rows, 943 columns, 48128 nonzeros
+Variable types: 441 continuous, 502 integer (408 binary)
+
+Root relaxation: objective 1.149879e+00, 2118 iterations, 0.17 seconds (0.47 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    1.14988    0  160          -    1.14988      -     -    0s
+     0     0 infeasible    0               - infeasible      -     -    0s
+
+Cutting planes:
+  Learned: 4
+  Gomory: 24
+  Cover: 14
+  Implied bound: 94
+  Clique: 4
+  MIR: 93
+  StrongCG: 6
+  Flow cover: 25
+  Zero half: 3
+  Network: 13
+  RLT: 16
+  Relax-and-lift: 26
+  BQP: 8
+
+Explored 1 nodes (2907 simplex iterations) in 0.66 seconds (1.22 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+
+User-callback calls 841, time in user-callback 0.00 sec
