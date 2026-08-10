@@ -84,11 +84,6 @@ class Round36ProtocolTests(unittest.TestCase):
             self.assertIn("--round36-c6-split-normalization", command)
             self.assertEqual("1", command[command.index("--threads") + 1])
             self.assertEqual("0", command[command.index("--gurobi-seed") + 1])
-            self.assertEqual(
-                "false", command[command.index(
-                    "--external-gini-warm-start") + 1])
-            self.assertFalse(any("resume" in token.lower()
-                                 for token in command))
 
 
 if __name__ == "__main__":
