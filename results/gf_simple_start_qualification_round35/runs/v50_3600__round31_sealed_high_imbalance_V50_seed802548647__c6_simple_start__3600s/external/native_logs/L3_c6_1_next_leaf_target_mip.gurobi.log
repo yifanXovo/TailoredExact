@@ -1,0 +1,59 @@
+
+Gurobi 13.0.2 (win64) logging started Mon Aug 10 03:22:11 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_simple_start_qualification_round35\runs\v50_3600__round31_sealed_high_imbalance_V50_seed802548647__c6_simple_start__3600s\external\native_logs\L3_c6_1_next_leaf_target_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  3547.0793029
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 93037 rows, 18195 columns and 663450 nonzeros (Min)
+Model fingerprint: 0x808ffaf5
+Model has 51 linear objective coefficients
+Variable types: 9462 continuous, 8733 integer (8233 binary)
+Coefficient statistics:
+  Matrix range     [1e-02, 2e+04]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [7e-01, 3e+04]
+  RHS range        [7e-01, 1e+05]
+
+Presolve removed 13533 rows and 111 columns
+Presolve time: 1.72s
+Presolved: 79504 rows, 18084 columns, 518231 nonzeros
+Variable types: 9390 continuous, 8694 integer (8222 binary)
+Root relaxation presolved: 17952 rows, 97265 columns, 535813 nonzeros
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+    9336    8.4959917e+00   6.465221e+01   0.000000e+00      5s
+   10879    8.2917489e+00   0.000000e+00   0.000000e+00      6s
+   10879    8.2917489e+00   0.000000e+00   0.000000e+00      6s
+   10880    8.2917489e+00   0.000000e+00   0.000000e+00      6s
+
+Extra simplex iterations from dual to original model: 1
+
+Root relaxation: objective 8.291749e+00, 10880 iterations, 3.72 seconds (10.91 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    8.29175    0  191          -    8.29175      -     -    5s
+
+Explored 1 nodes (10880 simplex iterations) in 5.75 seconds (14.82 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Solve interrupted
+Best objective -, best bound 8.291748937012e+00, gap -
+
+User-callback calls 1193, time in user-callback 0.00 sec

@@ -1,0 +1,67 @@
+
+Gurobi 13.0.2 (win64) logging started Sun Aug  9 15:04:17 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_simple_start_qualification_round35\runs\matrix1800__high_imbalance_seed5203__c6_simple_start__1800s\external\native_logs\L2_c6_1_next_leaf_target_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1783.5304773
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 11922 rows, 3380 columns and 67404 nonzeros (Min)
+Model fingerprint: 0x7c4c3d7b
+Model has 21 linear objective coefficients
+Variable types: 1687 continuous, 1693 integer (1493 binary)
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+04]
+  Objective range  [2e-02, 1e+00]
+  Bounds range     [5e-01, 4e+03]
+  RHS range        [5e-01, 5e+04]
+
+Presolve removed 2037 rows and 68 columns
+Presolve time: 0.20s
+Presolved: 9885 rows, 3312 columns, 70449 nonzeros
+Variable types: 1646 continuous, 1666 integer (1484 binary)
+
+Root relaxation: objective 1.997110e+00, 4128 iterations, 0.19 seconds (0.50 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    1.99711    0  202          -    1.99711      -     -    0s
+     0     0    2.10096    0  230          -    2.10096      -     -    0s
+     0     0    2.18851    0  258          -    2.18851      -     -    0s
+     0     0    2.18976    0  234          -    2.18976      -     -    1s
+     0     0    2.19700    0  251          -    2.19700      -     -    1s
+     0     0    2.19883    0  246          -    2.19883      -     -    1s
+
+Cutting planes:
+  Learned: 8
+  Cover: 18
+  Implied bound: 56
+  Clique: 5
+  MIR: 86
+  StrongCG: 5
+  Flow cover: 66
+  GUB cover: 3
+  Zero half: 2
+  Network: 12
+  RLT: 7
+  Relax-and-lift: 48
+  BQP: 8
+
+Explored 1 nodes (6693 simplex iterations) in 1.42 seconds (2.57 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Solve interrupted
+Best objective -, best bound 2.198832556378e+00, gap -
+
+User-callback calls 1054, time in user-callback 0.00 sec

@@ -1,0 +1,37 @@
+
+Gurobi 13.0.2 (win64) logging started Mon Aug 10 10:07:26 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_simple_start_qualification_round35\runs\repeat__round31_sealed_moderate_V50_seed1112848618__c6_simple_start__repeat1__3600s\external\native_logs\L0.0_lp.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  3518.0564421
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 93003 rows, 18185 columns and 665126 nonzeros (Min)
+Model fingerprint: 0xf9aae045
+Model has 51 linear objective coefficients
+Coefficient statistics:
+  Matrix range     [7e-03, 2e+04]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [9e-02, 3e+03]
+  RHS range        [9e-02, 5e+04]
+
+Presolve removed 5778 rows and 256 columns
+Presolve time: 0.39s
+Presolved: 17880 rows, 105052 columns, 663062 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0      handle free variables                          0s
+Warning: very big Kappa = 1.39022e+13, try parameter NumericFocus
+
+Solved in 12140 iterations and 4.50 seconds (15.72 work units)
+Infeasible model
+
+User-callback calls 12296, time in user-callback 0.00 sec
