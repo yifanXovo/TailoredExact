@@ -27,6 +27,11 @@ BRANCH = "codex/round36-incumbent-decomposition-causal-study"
 REPO = "yifanXovo/TailoredExact"
 PR_NUMBER = 83
 FINAL_FILES = (
+    "semantic_separation_audit.csv",
+    "semantic_separation_audit.json",
+    "semantic_separation_audit.md",
+    "verified_ub_assignment_audit.csv",
+    "anchor_consumer_occurrence_audit.csv",
     "per_arm_results.csv",
     "initial_decomposition_audit.csv",
     "exactness_certificate_audit.csv",
@@ -205,6 +210,14 @@ def main() -> int:
         and "round36_proof_incumbent_launch" in main_source
         and "round36_decomposition_anchor_launch" in main_source,
         "PaperExternalGiniTree.cpp; main.cpp")
+    semantic = json_value(out / "semantic_separation_audit.json")
+    audit.condition(
+        "2_proof_anchor", "semantic dataflow audit excludes anchor from proof consumers",
+        semantic.get("passed") is True
+        and semantic.get("verified_ub_assignments") ==
+            semantic.get("verified_ub_assignments_guarded")
+        and semantic.get("anchor_forbidden_consumer_occurrences") == 0,
+        "semantic_separation_audit.json")
     audit.condition(
         "3_anchor_coverage", "anchor grid intersects the proof-relevant range",
         "makeProofRelevantAnchorGrid" in geometry_source
