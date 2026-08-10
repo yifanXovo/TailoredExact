@@ -19,6 +19,7 @@ import shutil
 from pathlib import Path
 from typing import Any, Iterable
 
+import analyze_round36 as analysis
 import round36_common as common
 
 
@@ -138,6 +139,44 @@ def number(value: Any, default: float = 0.0) -> float:
     return parsed if math.isfinite(parsed) else default
 
 
+def truth(value: Any) -> bool:
+    return str(value).strip().lower() in {"1", "true", "yes"}
+
+
+def final_exactness_valid(path: Path) -> bool:
+    if not path.is_file():
+        return False
+    rows = csv_rows(path)
+    lifecycle_fields = (
+        "runner_normal_exit", "runner_no_emergency_timeout",
+        "result_json_verified_after_process_exit",
+        "runner_required_artifacts_complete",
+        "atomic_completion_marker_valid",
+        "algorithmic_solve_state_not_resumed", "runner_lifecycle_valid",
+    )
+    return (
+        len(rows) == 56
+        and len({row.get("run_id") for row in rows}) == 56
+        and all(truth(row.get("exactness_certificate_audit_passed"))
+                and not truth(row.get("false_certificate"))
+                and all(truth(row.get(field)) for field in lifecycle_fields)
+                for row in rows)
+    )
+
+
+def validate_official_rows(matrix: list[dict[str, str]],
+                           manifest: dict[str, Any],
+                           items: dict[str, dict[str, Any]]) -> None:
+    for row in matrix:
+        directory = common.RUNS / row["run_id"]
+        valid, reason = analysis.artifact_complete(
+            directory, row, items[row["instance_id"]], manifest)
+        if not valid:
+            raise RuntimeError(
+                f"official row failed checksum revalidation: "
+                f"{row['run_id']}:{reason}")
+
+
 def sensitive(path: Path) -> str:
     data = path.read_bytes().lower()
     return next((marker.decode() for marker in SENSITIVE if marker in data), "")
@@ -190,21 +229,25 @@ def validate_final() -> dict[str, Any]:
     if decision.get("false_certificate_count") != 0 or not decision.get(
             "all_exactness_certificate_audits_passed"):
         raise RuntimeError("final correctness gate is not green")
+    allowed = {
+        "decomposition_geometry_dominant",
+        "split_normalization_coupling_dominant", "both_effects_matter",
+        "neither_isolated_effect_sufficient",
+    }
+    if (decision.get("classification") not in allowed
+            or decision.get("automatic_promotion_performed") is not False
+            or decision.get("validated_gurobi_mainline") != "C6-HGA-FULL"):
+        raise RuntimeError("final classification or mainline contract is invalid")
     for name in FINAL_DERIVED:
         if not (common.OUT / name).is_file():
             raise RuntimeError(f"required final artifact missing: {name}")
+    if not final_exactness_valid(common.OUT / "exactness_certificate_audit.csv"):
+        raise RuntimeError("final lifecycle/exactness table is not 56-row green")
     matrix = common.csv_rows(common.OFFICIAL_MATRIX)
     if len(matrix) != 56:
         raise RuntimeError("official matrix is not 56 rows")
-    for row in matrix:
-        directory = common.RUNS / row["run_id"]
-        marker = directory / "completion_marker.json"
-        inventory = directory / "artifact_manifest.csv"
-        if not marker.is_file() or not inventory.is_file():
-            raise RuntimeError(f"official row incomplete: {row['run_id']}")
-        state = json.loads(marker.read_text(encoding="utf-8"))
-        if sha256(inventory) != state.get("artifact_manifest_sha256"):
-            raise RuntimeError(f"artifact manifest drift: {row['run_id']}")
+    validate_official_rows(matrix, common.load_json(common.FROZEN_MANIFEST),
+                           common.inventory())
     return decision
 
 
