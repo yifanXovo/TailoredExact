@@ -36,7 +36,7 @@ FINAL_FILES = (
     "initial_decomposition_audit.csv",
     "exactness_certificate_audit.csv",
     "interaction_sequence_hashes.csv",
-    "trajectory_events.csv",
+    "trajectory_events.csv.gz",
     "child_lookahead_split_audit.csv",
     "native_target_audit.csv",
     "terminal_closure_audit.csv",

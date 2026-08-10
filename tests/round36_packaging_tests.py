@@ -18,6 +18,14 @@ import package_round36_evidence as package  # noqa: E402
 
 
 class Round36PackagingTests(unittest.TestCase):
+    def test_large_trajectory_table_is_packaged_compressed(self) -> None:
+        self.assertEqual("trajectory_events.csv.gz",
+                         package.COMPRESSED_DERIVED["trajectory_events.csv"])
+        inventory_names = [package.COMPRESSED_DERIVED.get(name, name)
+                           for name in package.FINAL_DERIVED]
+        self.assertIn("trajectory_events.csv.gz", inventory_names)
+        self.assertNotIn("trajectory_events.csv", inventory_names)
+
     def test_official_row_revalidation_is_fail_closed(self) -> None:
         matrix = [{"run_id": "row", "instance_id": "instance"}]
         items = {"instance": {"instance_sha256": "expected"}}

@@ -83,6 +83,9 @@ FINAL_DERIVED = (
     "final_report.md",
     "runner_row_summary.csv",
 )
+COMPRESSED_DERIVED = {
+    "trajectory_events.csv": "trajectory_events.csv.gz",
+}
 
 
 def csv_rows(path: Path) -> list[dict[str, str]]:
@@ -254,6 +257,23 @@ def validate_final() -> dict[str, Any]:
 
 def main() -> int:
     decision = validate_final()
+    compressed_derived = []
+    for source_name, target_name in COMPRESSED_DERIVED.items():
+        source, target = common.OUT / source_name, common.OUT / target_name
+        marker = sensitive(source)
+        if marker:
+            raise RuntimeError(
+                f"license-sensitive marker {marker} in {source}")
+        gzip_deterministic(source, target)
+        compressed_derived.append({
+            "source_path": common.relative(source),
+            "source_bytes": source.stat().st_size,
+            "source_sha256": sha256(source),
+            "compressed_path": common.relative(target),
+            "compressed_bytes": target.stat().st_size,
+            "compressed_sha256": sha256(target),
+            "compression": "gzip_level9_mtime0",
+        })
     selected = representatives()
     matrix = common.csv_rows(common.OFFICIAL_MATRIX)
     by_panel_arm = {(row["panel_row_id"], row["arm"]): row for row in matrix}
@@ -301,7 +321,8 @@ def main() -> int:
     selection_csv = common.OUT / "representative_selection.csv"
     write_csv(selection_csv, selected)
     final_inventory = []
-    inventory_names = list(FINAL_DERIVED) + [
+    inventory_names = [COMPRESSED_DERIVED.get(name, name)
+                       for name in FINAL_DERIVED] + [
         "representative_selection.csv", "representative_raw_manifest.csv"]
     for name in inventory_names:
         path = common.OUT / name
@@ -324,6 +345,7 @@ def main() -> int:
                                       for row in manifest_rows),
         "compressed_raw_bytes": sum(int(row["compressed_bytes"])
                                     for row in manifest_rows),
+        "compressed_derived_artifacts": compressed_derived,
         "representative_manifest_sha256": sha256(manifest_csv),
         "final_evidence_inventory_sha256": sha256(inventory_csv),
         "all_raw_runs_retained_locally": True,
@@ -341,6 +363,8 @@ def main() -> int:
 - Compressed raw artifacts: {len(manifest_rows)}.
 - Raw bytes before/after lossless gzip: {summary['uncompressed_raw_bytes']} /
   {summary['compressed_raw_bytes']}.
+- The all-row trajectory CSV is retained locally and packaged as deterministic
+  `trajectory_events.csv.gz` for repository synchronization.
 - License-sensitive material: none.
 - Model dumps: excluded.
 
