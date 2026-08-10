@@ -61,6 +61,18 @@ class Round36AnalysisTests(unittest.TestCase):
             "left_continuous_no_interpolation_no_post_last_extension"
             for row in observed))
 
+    def test_expanded_mechanism_ledgers_are_joinable(self) -> None:
+        lookahead = rows("child_lookahead_split_audit.csv")
+        targets = rows("native_target_audit.csv")
+        closures = rows("terminal_closure_audit.csv")
+        self.assertTrue(lookahead)
+        self.assertTrue(targets)
+        self.assertTrue(closures)
+        self.assertTrue(all("b_plus" in row and "eta_proof" in row
+                            and "eta_anchor" in row for row in lookahead))
+        self.assertTrue(all(row["run_id"] and row["panel_row_id"]
+                            for row in lookahead + targets + closures))
+
     def test_machine_decision_matches_completion_state(self) -> None:
         decision = json.loads((OUT / f"{PREFIX}final_audit_decision.json").read_text(
             encoding="utf-8"))

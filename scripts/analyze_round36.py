@@ -295,6 +295,42 @@ def pair_auc(left: dict[str, Any], right: dict[str, Any],
     }
 
 
+def observed_auc(run: dict[str, Any], common_ub: float) -> dict[str, Any]:
+    """Integrate one trace only over its actually recorded event window."""
+    rows = trace(run)
+    if len(rows) < 2:
+        return {
+            "observed_auc_status": "unavailable_insufficient_trace",
+            "observed_trace_event_count": len(rows),
+        }
+    start, end = rows[0]["process_seconds"], rows[-1]["process_seconds"]
+    duration = end - start
+    if duration <= 0:
+        return {
+            "observed_auc_status": "unavailable_zero_window",
+            "observed_trace_event_count": len(rows),
+        }
+    denominator = max(1e-12, abs(common_ub))
+    gap_area = 0.0
+    for left, right in zip(rows, rows[1:]):
+        width = max(0.0, right["process_seconds"] - left["process_seconds"])
+        current = max(0.0, min(
+            1.0, (common_ub - left["lower_bound"]) / denominator))
+        gap_area += width * current
+    normalized_gap = gap_area / duration
+    return {
+        "observed_auc_status": "observed_event_window",
+        "observed_auc_convention":
+            "left_continuous_no_interpolation_no_post_last_extension",
+        "observed_trace_event_count": len(rows),
+        "observed_trace_start_seconds": start,
+        "observed_trace_end_seconds": end,
+        "observed_trace_window_seconds": duration,
+        "normalized_observed_gap_auc": normalized_gap,
+        "normalized_observed_proof_auc": 1.0 - normalized_gap,
+    }
+
+
 def mechanism(run: dict[str, Any]) -> dict[str, Any]:
     result = run["result"]
     initial = ledger(run, "initial_decomposition_ledger.csv")
@@ -379,7 +415,13 @@ def mechanism(run: dict[str, Any]) -> dict[str, Any]:
             "compact_bc_objective_estimator_cutoff_rows_added")),
         "parent_lp_bound_count": len(parent),
         "parent_lp_bounds": compact(parent, (
-            "parent_id", "parent_lp_bound", "post_split_bound")),
+            "parent_id", "parent_lp_bound", "left_lp_bound",
+            "left_infeasible", "right_lp_bound", "right_infeasible",
+            "post_split_bound")),
+        "child_lp_bound_rows": len(parent),
+        "child_lp_bounds": compact(parent, (
+            "parent_id", "left_id", "left_lp_bound", "left_infeasible",
+            "right_id", "right_lp_bound", "right_infeasible", "decision")),
         "initial_global_lower_bound": number(global_rows[0].get(
             "valid_global_lower_bound")) if global_rows else math.nan,
         "first_controlling_leaf": controlling[0].get(
@@ -558,6 +600,7 @@ def run_rows(runs: list[dict[str, Any]]) -> tuple[
             "source_tree_fingerprint": state.get("source_tree_fingerprint"),
             "executable_sha256": state.get("executable_sha256"),
             **metric,
+            **observed_auc(run, common_ub),
         }
         per_arm.append(base)
         expected_proof = (info["U_H"] if arm == "HH" else info["U_S"]
@@ -646,6 +689,11 @@ def run_rows(runs: list[dict[str, Any]]) -> tuple[
                     "scenario", "round35_pattern", "arm", "U_proof_launch",
                     "U_anchor_launch", "normalization_source")},
                 **cell,
+                "anchor_width": number(cell.get("anchor_upper")) - number(
+                    cell.get("anchor_lower")),
+                "active_width": number(cell.get("active_upper")) - number(
+                    cell.get("active_lower")) if truth(cell.get("active"))
+                    else 0.0,
                 "local_leaf_id": leaf.get("leaf_id", ""),
                 "local_lp_status": leaf.get("native_status", ""),
                 "local_lp_lower_bound": leaf.get("lower_bound", ""),
@@ -886,6 +934,61 @@ def trajectory_rows(runs: list[dict[str, Any]],
     return output
 
 
+def expanded_ledger_rows(runs: list[dict[str, Any]],
+                         per_arm: list[dict[str, Any]]) -> tuple[
+        list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    """Materialize compact, joinable views of the key raw exact ledgers."""
+    by_run = {row["run_id"]: row for row in per_arm}
+    lookahead, targets, closures = [], [], []
+    for run in runs:
+        base = by_run[run["state"]["run_id"]]
+        identity = {key: base[key] for key in (
+            "panel_row_id", "run_id", "instance_id", "V", "M",
+            "scenario", "round35_pattern", "arm", "U_proof_launch",
+            "U_anchor_launch", "normalization_source")}
+        parent = {row.get("parent_id"): row for row in ledger(
+            run, "parent_child_bound_ledger.csv")}
+        for sequence, split in enumerate(ledger(
+                run, "split_decision_ledger.csv")):
+            bounds_row = parent.get(split.get("parent_id"), {})
+            lookahead.append({
+                **identity, "sequence": sequence,
+                "parent_id": split.get("parent_id", ""),
+                "parent_lp_bound": bounds_row.get("parent_lp_bound", ""),
+                "left_id": bounds_row.get("left_id", ""),
+                "left_lp_bound": bounds_row.get("left_lp_bound", ""),
+                "left_infeasible": bounds_row.get("left_infeasible", ""),
+                "right_id": bounds_row.get("right_id", ""),
+                "right_lp_bound": bounds_row.get("right_lp_bound", ""),
+                "right_infeasible": bounds_row.get("right_infeasible", ""),
+                "post_split_bound": bounds_row.get("post_split_bound", ""),
+                **split,
+                "decision_inputs_hardware_independent": True,
+            })
+        for sequence, target in enumerate(ledger(
+                run, "native_target_ledger.csv")):
+            targets.append({**identity, "sequence": sequence, **target})
+        terminal_order = 0
+        for optimize_sequence, row in enumerate(ledger(
+                run, "paper_optimize_ledger.csv")):
+            if row.get("solve_kind") != "MIP":
+                continue
+            closures.append({
+                **identity, "terminal_order": terminal_order,
+                "optimize_ledger_sequence": optimize_sequence,
+                "leaf_id": row.get("leaf_id", ""),
+                "native_status": row.get("native_status", ""),
+                "solver_runtime": row.get("solver_runtime", ""),
+                "work": row.get("work", ""), "nodes": row.get("nodes", ""),
+                "simplex_iterations": row.get("simplex_iterations", ""),
+                "barrier_iterations": row.get("barrier_iterations", ""),
+                "in_memory_model_reused": row.get(
+                    "in_memory_model_reused", ""),
+            })
+            terminal_order += 1
+    return lookahead, targets, closures
+
+
 def median(values: Iterable[Any]) -> Any:
     finite = [number(value) for value in values
               if math.isfinite(number(value))]
@@ -1099,6 +1202,68 @@ no interpolation, and no post-last-event extension.
         "wide-proof_vs_best-proof_fixed-anchor": fixed_proof,
     })
     overall = [row for row in aggregate if row["grouping"] == "all"]
+    proof_exposures = [row for row in fixed_proof
+                       if truth(row.get("fixed_anchor_proof_exposure"))]
+    proof_gap_preserved = sum(number(row[
+        "right_final_common_ub_gap"]) <= number(row[
+            "left_final_common_ub_gap"]) + TOL for row in proof_exposures)
+    proof_auc_preserved = sum(number(row.get(
+        "right_minus_left_proof_auc"), -math.inf) >= -MATERIAL_AUC
+                              for row in proof_exposures)
+    unresolved_preserved = sum(integer(row.get("right_open_leaf_count")) <=
+                               integer(row.get("left_open_leaf_count"))
+                               for row in proof_exposures)
+    question_answers = {
+        "question_A_geometry": {
+            "supported": truth(gate_values[
+                "geometry_mechanism_supported"]),
+            "exposed_rows": gate_values["geometry_exposed_rows"],
+            "downstream_changed_rows": gate_values[
+                "geometry_downstream_changed_rows"],
+            "direction_match_rows": gate_values[
+                "geometry_direction_match_rows"],
+            "answer": (
+                "The predeclared geometry gate passes."
+                if truth(gate_values["geometry_mechanism_supported"])
+                else "The predeclared geometry gate does not pass."),
+        },
+        "question_B_normalization": {
+            "supported": truth(gate_values[
+                "split_normalization_mechanism_supported"]),
+            "exposed_rows": gate_values["normalization_exposed_rows"],
+            "split_decision_changed_rows": gate_values[
+                "normalization_split_decision_changed_rows"],
+            "answer": (
+                "The predeclared split-normalization gate passes."
+                if truth(gate_values[
+                    "split_normalization_mechanism_supported"])
+                else "The predeclared split-normalization gate does not pass."),
+        },
+        "question_C_splitting_timing": {
+            "geometry_zero_split_trajectory_divergences": sum(truth(row[
+                "trajectory_diff_despite_zero_splits"]) for row in geometry),
+            "geometry_pre_split_divergences": sum(truth(row[
+                "first_divergence_before_split"]) for row in geometry),
+            "normalization_zero_split_trajectory_divergences": sum(truth(row[
+                "trajectory_diff_despite_zero_splits"]) for row in normalization),
+            "normalization_pre_split_divergences": sum(truth(row[
+                "first_divergence_before_split"]) for row in normalization),
+            "answer": "Rows diverging before any split, or with zero splits "
+                      "in both arms, are explicitly excluded from rho claims.",
+        },
+        "question_D_fixed_anchor_stronger_proof": {
+            "exposed_rows": len(proof_exposures),
+            "final_common_ub_gap_improved_or_preserved_rows":
+                proof_gap_preserved,
+            "common_window_proof_auc_improved_or_preserved_rows":
+                proof_auc_preserved,
+            "unresolved_open_leaf_count_reduced_or_preserved_rows":
+                unresolved_preserved,
+            "wall_clock_monotonicity_claimed": False,
+            "answer": "The fixed-anchor table reports cutoff/proof progress "
+                      "without claiming universal wall-clock monotonicity.",
+        },
+    }
     summary = {
         "schema": "round36-final-audit-decision-v1",
         "classification": classification,
@@ -1116,6 +1281,7 @@ no interpolation, and no post-last-event extension.
         "all_exactness_certificate_audits_passed": all(truth(row[
             "exactness_certificate_audit_passed"]) for row in audits),
         "classification_gates": gate_values,
+        "causal_question_answers": question_answers,
         "stage_c_authorized_by_positive_signal": positive and complete,
         "rho_sensitivity_recommended": truth(gate_values.get(
             "split_normalization_mechanism_supported")),
@@ -1157,6 +1323,50 @@ anchor normalization remain fixed while the verified proof cutoff strengthens.
 The numeric gate definition was recorded in `analysis_gate_definition.md`
 after the V12_M1 integration pilot and before the remaining matrix completed.
 
+## Explicit causal questions
+
+### A. Decomposition geometry
+
+{question_answers['question_A_geometry']['answer']} There are
+{question_answers['question_A_geometry']['exposed_rows']} clean geometry
+exposures, with
+{question_answers['question_A_geometry']['downstream_changed_rows']} downstream
+sequence changes and
+{question_answers['question_A_geometry']['direction_match_rows']} frozen-pattern
+direction matches.
+
+### B. Split normalization
+
+{question_answers['question_B_normalization']['answer']} The comparison has
+{question_answers['question_B_normalization']['exposed_rows']} denominator
+exposures and
+{question_answers['question_B_normalization']['split_decision_changed_rows']}
+actual split-decision changes.
+
+### C. Whether splitting can cause the observed effect
+
+The geometry comparison contains
+{question_answers['question_C_splitting_timing']['geometry_zero_split_trajectory_divergences']}
+zero-split trajectory divergences and
+{question_answers['question_C_splitting_timing']['geometry_pre_split_divergences']}
+pre-split divergences. The normalization comparison contains
+{question_answers['question_C_splitting_timing']['normalization_zero_split_trajectory_divergences']}
+and
+{question_answers['question_C_splitting_timing']['normalization_pre_split_divergences']},
+respectively. Such observations are not attributed to rho.
+
+### D. Stronger proof incumbent with geometry fixed
+
+Across {question_answers['question_D_fixed_anchor_stronger_proof']['exposed_rows']}
+fixed-anchor proof exposures, the stronger proof arm improves or preserves the
+final common-UB gap in
+{question_answers['question_D_fixed_anchor_stronger_proof']['final_common_ub_gap_improved_or_preserved_rows']}
+rows, common-window proof AUC in
+{question_answers['question_D_fixed_anchor_stronger_proof']['common_window_proof_auc_improved_or_preserved_rows']}
+rows, and unresolved open-leaf count in
+{question_answers['question_D_fixed_anchor_stronger_proof']['unresolved_open_leaf_count_reduced_or_preserved_rows']}
+rows. Universal wall-clock monotonicity is not claimed.
+
 ## Correctness and interpretation boundary
 
 - All-row exactness/certificate audit: {summary['all_exactness_certificate_audits_passed']}.
@@ -1191,6 +1401,7 @@ def main() -> int:
         runs, per_arm, mechanisms)
     sequences = sequence_rows(per_arm, mechanisms)
     trajectories = trajectory_rows(runs, per_arm)
+    lookahead, targets, closures = expanded_ledger_rows(runs, per_arm)
     grouped = group_summaries({
         "HH_vs_BW-P_geometry": geometry,
         "BW-P_vs_BW-A_normalization": normalization,
@@ -1205,6 +1416,9 @@ def main() -> int:
         ("exactness_certificate_audit.csv", audits),
         ("interaction_sequence_hashes.csv", sequences),
         ("trajectory_events.csv", trajectories),
+        ("child_lookahead_split_audit.csv", lookahead),
+        ("native_target_audit.csv", targets),
+        ("terminal_closure_audit.csv", closures),
         ("causal_geometry_comparison.csv", geometry),
         ("causal_normalization_comparison.csv", normalization),
         ("fixed_anchor_proof_comparison.csv", fixed_proof),
