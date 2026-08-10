@@ -1618,6 +1618,52 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.external_gini_tree_algorithm_arm) << "\",\n";
     out << "  \"external_gini_tree_startup_variant\": \""
         << jsonEscape(result.external_gini_tree_startup_variant) << "\",\n";
+    out << "  \"round36_c6_causal_arm\": \""
+        << jsonEscape(result.round36_c6_causal_arm) << "\",\n";
+    out << "  \"round36_c6_split_normalization\": \""
+        << jsonEscape(result.round36_c6_split_normalization) << "\",\n";
+    out << "  \"round36_hga_start_attempted\": "
+        << (result.round36_hga_start_attempted ? "true" : "false")
+        << ",\n";
+    out << "  \"round36_hga_start_verified\": "
+        << (result.round36_hga_start_verified ? "true" : "false")
+        << ",\n";
+    out << "  \"round36_hga_start_objective\": "
+        << result.round36_hga_start_objective << ",\n";
+    out << "  \"round36_hga_start_seconds\": "
+        << result.round36_hga_start_seconds << ",\n";
+    out << "  \"round36_simple_start_attempted\": "
+        << (result.round36_simple_start_attempted ? "true" : "false")
+        << ",\n";
+    out << "  \"round36_simple_start_verified\": "
+        << (result.round36_simple_start_verified ? "true" : "false")
+        << ",\n";
+    out << "  \"round36_simple_start_objective\": "
+        << result.round36_simple_start_objective << ",\n";
+    out << "  \"round36_simple_start_seconds\": "
+        << result.round36_simple_start_seconds << ",\n";
+    out << "  \"round36_proof_incumbent_launch\": "
+        << result.round36_proof_incumbent_launch << ",\n";
+    out << "  \"round36_decomposition_anchor_launch\": "
+        << result.round36_decomposition_anchor_launch << ",\n";
+    out << "  \"round36_relative_startup_incumbent_difference\": "
+        << result.round36_relative_startup_incumbent_difference << ",\n";
+    out << "  \"round36_anchor_safety_valid\": "
+        << (result.round36_anchor_safety_valid ? "true" : "false")
+        << ",\n";
+    out << "  \"external_gini_tree_proof_relevant_gamma_upper\": "
+        << result.external_gini_tree_proof_relevant_gamma_upper << ",\n";
+    out << "  \"external_gini_tree_anchor_grid_gamma_upper\": "
+        << result.external_gini_tree_anchor_grid_gamma_upper << ",\n";
+    out << "  \"external_gini_tree_anchor_grid_endpoints\": \""
+        << jsonEscape(result.external_gini_tree_anchor_grid_endpoints)
+        << "\",\n";
+    out << "  \"external_gini_tree_active_initial_intervals\": \""
+        << jsonEscape(result.external_gini_tree_active_initial_intervals)
+        << "\",\n";
+    out << "  \"external_gini_tree_truncated_initial_interval_count\": "
+        << result.external_gini_tree_truncated_initial_interval_count
+        << ",\n";
     out << "  \"external_gini_tree_row_factory_version\": \""
         << jsonEscape(result.external_gini_tree_row_factory_version)
         << "\",\n";
@@ -1686,6 +1732,7 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_PATH(row_signature_ledger_path);
     WRITE_EXT_PATH(global_bound_trace_path);
     WRITE_EXT_PATH(native_target_ledger_path);
+    WRITE_EXT_PATH(initial_decomposition_ledger_path);
 #undef WRITE_EXT_PATH
     out << "  \"columns_generated_raw\": " << result.columns_generated_raw << ",\n";
     out << "  \"columns_after_dominance\": " << result.columns_after_dominance << ",\n";

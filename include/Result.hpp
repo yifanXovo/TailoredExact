@@ -547,6 +547,27 @@ struct SolveResult {
     double external_gini_tree_certificate_tolerance = 0.0;
     std::string external_gini_tree_algorithm_arm;
     std::string external_gini_tree_startup_variant;
+    // Round 36 proof-incumbent/decomposition-anchor causal evidence.  These
+    // remain at their defaults for every non-Round-36 run.
+    std::string round36_c6_causal_arm = "off";
+    std::string round36_c6_split_normalization = "proof";
+    bool round36_hga_start_attempted = false;
+    bool round36_hga_start_verified = false;
+    double round36_hga_start_objective = 0.0;
+    double round36_hga_start_seconds = 0.0;
+    bool round36_simple_start_attempted = false;
+    bool round36_simple_start_verified = false;
+    double round36_simple_start_objective = 0.0;
+    double round36_simple_start_seconds = 0.0;
+    double round36_proof_incumbent_launch = 0.0;
+    double round36_decomposition_anchor_launch = 0.0;
+    double round36_relative_startup_incumbent_difference = 0.0;
+    bool round36_anchor_safety_valid = false;
+    double external_gini_tree_proof_relevant_gamma_upper = 0.0;
+    double external_gini_tree_anchor_grid_gamma_upper = 0.0;
+    std::string external_gini_tree_anchor_grid_endpoints;
+    std::string external_gini_tree_active_initial_intervals;
+    long long external_gini_tree_truncated_initial_interval_count = 0;
     std::string external_gini_tree_row_factory_version;
     std::string external_gini_tree_global_row_families;
     std::string external_gini_tree_interval_row_families;
@@ -617,6 +638,7 @@ struct SolveResult {
     std::string external_gini_tree_row_signature_ledger_path;
     std::string external_gini_tree_global_bound_trace_path;
     std::string external_gini_tree_native_target_ledger_path;
+    std::string external_gini_tree_initial_decomposition_ledger_path;
     long long columns_generated_raw = 0;
     long long columns_after_dominance = 0;
     long long columns_dominated = 0;

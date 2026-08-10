@@ -441,6 +441,11 @@ struct SolveOptions {
     // frozen C6 configuration gate; it does not participate in any exact
     // scheduling, bound, split, row, or closure decision.
     std::string round34_c6_startup_variant = "hga-full";
+    // Round 36 causal-study controls.  "off" preserves the validated C6
+    // path.  Experimental arms are uniform run-level choices and are never
+    // inferred from instance size, scenario, M, or historical performance.
+    std::string round36_c6_causal_arm = "off";
+    std::string round36_c6_split_normalization = "proof";
     bool exact_phase_local_redecode_repair = false;
     bool exact_phase_local_redecode_repair_explicit = false;
     double exact_phase_local_redecode_seconds = 10.0;

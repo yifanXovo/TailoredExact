@@ -55,6 +55,28 @@ std::string join(const std::vector<std::string>& values) {
     return out.str();
 }
 
+std::string joinDoubles(const std::vector<double>& values) {
+    std::ostringstream out;
+    out << std::setprecision(17);
+    for (std::size_t index = 0; index < values.size(); ++index) {
+        if (index) out << ';';
+        out << values[index];
+    }
+    return out.str();
+}
+
+std::string joinIntervals(
+    const std::vector<GiniIntervalGeometry>& intervals) {
+    std::ostringstream out;
+    out << std::setprecision(17);
+    for (std::size_t index = 0; index < intervals.size(); ++index) {
+        if (index) out << ';';
+        out << '[' << intervals[index].lower << ',' << intervals[index].upper
+            << ']';
+    }
+    return out.str();
+}
+
 std::string csvField(const std::string& text) {
     std::string escaped;
     escaped.reserve(text.size() + 2);
@@ -194,6 +216,19 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         reason = "c6_startup_variant_contract_mismatch_or_local_redecode";
         return false;
     }
+    const std::string& causal = options.round36_c6_causal_arm;
+    const std::string& normalization =
+        options.round36_c6_split_normalization;
+    const bool causal_contract_valid =
+        (causal == "off" && normalization == "proof") ||
+        (causal == "hh" && hga_full && normalization == "proof") ||
+        (causal == "ss" && simple_start && normalization == "proof") ||
+        (causal == "bw-p" && hga_full && normalization == "proof") ||
+        (causal == "bw-a" && hga_full && normalization == "anchor");
+    if (!causal_contract_valid) {
+        reason = "c6_round36_causal_arm_or_normalization_contract_mismatch";
+        return false;
+    }
     if (options.frontier_intervals != 4 ||
         !options.frontier_adaptive_split ||
         options.frontier_adaptive_max_depth != 8 ||
@@ -213,7 +248,7 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         return false;
     }
     reason = "accepted_round31_c6_frozen_exact_contract_with_" +
-        options.round34_c6_startup_variant;
+        options.round34_c6_startup_variant + "_round36_" + causal;
     return true;
 }
 
@@ -439,10 +474,37 @@ C6CurrentSplitDecision evaluateC6CurrentSplitDecision(
     const PaperLpResult& right,
     double normalized_split_threshold,
     double certificate_tolerance) {
+    return evaluateC6CurrentSplitDecision(
+        current_parent_bound, verified_upper_bound, verified_upper_bound,
+        "proof", left, right, normalized_split_threshold,
+        certificate_tolerance);
+}
+
+C6CurrentSplitDecision evaluateC6CurrentSplitDecision(
+    double current_parent_bound,
+    double proof_upper_bound,
+    double anchor_upper_bound,
+    const std::string& normalization_source,
+    const PaperLpResult& left,
+    const PaperLpResult& right,
+    double normalized_split_threshold,
+    double certificate_tolerance) {
     C6CurrentSplitDecision decision;
+    const double tolerance = std::max(0.0, certificate_tolerance);
+    if ((normalization_source != "proof" &&
+         normalization_source != "anchor") ||
+        !std::isfinite(proof_upper_bound) ||
+        !std::isfinite(anchor_upper_bound) ||
+        anchor_upper_bound + tolerance < proof_upper_bound) {
+        decision.reason = "invalid_c6_normalization_configuration";
+        return decision;
+    }
+    const double normalization_upper_bound =
+        normalization_source == "anchor"
+            ? anchor_upper_bound : proof_upper_bound;
     const C5BoundTargetSplitDecision base =
         evaluateC5BoundTargetSplitDecision(
-            current_parent_bound, verified_upper_bound, left, right,
+            current_parent_bound, normalization_upper_bound, left, right,
             normalized_split_threshold, certificate_tolerance);
     if (!base.valid) {
         decision.reason = "invalid_current_split_inputs:" + base.reason;
@@ -454,6 +516,20 @@ C6CurrentSplitDecision evaluateC6CurrentSplitDecision(
     decision.post_split_lower_bound = base.post_split_lower_bound;
     decision.normalized_disjunction_gain =
         base.normalized_disjunction_gain;
+    decision.b_plus = base.post_split_lower_bound;
+    decision.normalization_source = normalization_source;
+    decision.normalization_upper_bound = normalization_upper_bound;
+    if (base.child_infeasibility_trigger) {
+        decision.eta_proof = std::numeric_limits<double>::infinity();
+        decision.eta_anchor = std::numeric_limits<double>::infinity();
+    } else {
+        const double gain = std::max(
+            0.0, base.post_split_lower_bound - current_parent_bound);
+        decision.eta_proof = gain / std::max(
+            1e-7, proof_upper_bound - current_parent_bound);
+        decision.eta_anchor = gain / std::max(
+            1e-7, anchor_upper_bound - current_parent_bound);
+    }
     if (base.split_immediately) {
         decision.split_immediately = true;
         decision.reason = base.child_infeasibility_trigger
@@ -534,6 +610,23 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     const bool c6_nonblocking =
         options.external_gini_scheduling ==
             "round31-nonblocking-native-bound";
+    const bool round36_causal = c6_nonblocking &&
+        options.round36_c6_causal_arm != "off";
+    const double proof_incumbent_launch = verified_seed.objective;
+    const double decomposition_anchor_launch = round36_causal
+        ? verified_seed.round36_decomposition_anchor_launch
+        : proof_incumbent_launch;
+    const double gini_max_possible = instance.V > 0
+        ? static_cast<double>(instance.V - 1) /
+            static_cast<double>(instance.V)
+        : 1.0;
+    const double anchor_grid_upper = std::min(
+        decomposition_anchor_launch, gini_max_possible);
+    const AnchorGridDecomposition causal_grid = round36_causal
+        ? makeProofRelevantAnchorGrid(
+              root_gamma_L, root_gamma_U, anchor_grid_upper,
+              options.frontier_intervals, 1e-7)
+        : AnchorGridDecomposition{};
     const bool incremental_model_reuse =
         c4_incremental || c5_bound_target || c6_nonblocking;
     SolveResult result = verified_seed;
@@ -554,8 +647,18 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         options.external_gini_scheduling;
     result.external_gini_tree_startup_variant = c6_nonblocking
         ? options.round34_c6_startup_variant : "not_applicable";
+    result.round36_c6_causal_arm = options.round36_c6_causal_arm;
+    result.round36_c6_split_normalization =
+        options.round36_c6_split_normalization;
+    result.round36_proof_incumbent_launch = proof_incumbent_launch;
+    result.round36_decomposition_anchor_launch =
+        decomposition_anchor_launch;
+    result.round36_anchor_safety_valid = !round36_causal ||
+        decomposition_anchor_launch + 1e-7 >= proof_incumbent_launch;
     result.external_gini_tree_root_gamma_L = root_gamma_L;
     result.external_gini_tree_root_gamma_U = root_gamma_U;
+    result.external_gini_tree_proof_relevant_gamma_upper = root_gamma_U;
+    result.external_gini_tree_anchor_grid_gamma_upper = anchor_grid_upper;
     result.external_gini_tree_verified_upper_bound = verified_seed.objective;
     result.strict_certified_original_problem = false;
     result.strict_certificate_class = "certificate_rejected";
@@ -569,7 +672,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             : "paper_external_gini_tree_running"));
     if (incremental_model_reuse) {
         result.external_gini_tree_algorithm_arm = c6_nonblocking
-            ? "C6-CANDIDATE"
+            ? (round36_causal
+                ? "R36-" + options.round36_c6_causal_arm
+                : "C6-CANDIDATE")
             : (c5_bound_target ? "C5-CANDIDATE" : "C4-CANDIDATE");
         result.external_gini_tree_global_row_family_count =
             static_cast<long long>(kPaperGlobalFamilies.size());
@@ -624,12 +729,21 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     std::string c6_contract_reason;
     const bool c6_contract_valid = !c6_nonblocking ||
         round31C6FrozenOptionsValid(options, c6_contract_reason);
+    const bool round36_seed_contract_valid = !round36_causal ||
+        (verified_seed.round36_anchor_safety_valid &&
+         verified_seed.round36_proof_incumbent_launch > 0.0 &&
+         std::fabs(verified_seed.round36_proof_incumbent_launch -
+                   verified_seed.objective) <=
+             1e-7 * std::max(1.0, std::fabs(verified_seed.objective)) &&
+         std::isfinite(decomposition_anchor_launch) &&
+         decomposition_anchor_launch + 1e-7 >= proof_incumbent_launch &&
+         causal_grid.valid);
     if (!seed_valid || options.external_gini_backend != "gurobi" ||
         options.external_gini_warm_start || root_gamma_L < -1e-12 ||
         root_gamma_U < root_gamma_L - 1e-12 ||
         !verified_seed.frontier_covers_all_improving_gini_values ||
         !c4_contract_valid || !c5_contract_valid ||
-        !c6_contract_valid) {
+        !c6_contract_valid || !round36_seed_contract_valid) {
         result.status = "paper_external_gini_tree_invalid_configuration";
         result.external_gini_tree_failure_reason = !seed_valid
             ? "same_run_seed_not_verified"
@@ -643,7 +757,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                             ? c5_contract_reason
                             : (!c6_contract_valid
                                 ? c6_contract_reason
-                                : "incomplete_or_invalid_root_range")))));
+                                : (!round36_seed_contract_valid
+                                    ? "round36_unsafe_or_unverified_anchor_grid"
+                                    : "incomplete_or_invalid_root_range"))))));
         return result;
     }
 
@@ -728,6 +844,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     const auto global_bound_path = artifact_dir / "global_bound_trace.csv";
     const auto native_target_path =
         artifact_dir / "native_target_ledger.csv";
+    const auto initial_decomposition_path =
+        artifact_dir / "initial_decomposition_ledger.csv";
     result.external_gini_tree_event_trace_path = event_path.string();
     result.external_gini_tree_leaf_ledger_path = leaf_path.string();
     result.external_gini_tree_optimize_ledger_path = optimize_path.string();
@@ -739,9 +857,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         global_bound_path.string();
     result.external_gini_tree_native_target_ledger_path =
         native_target_path.string();
+    result.external_gini_tree_initial_decomposition_ledger_path =
+        initial_decomposition_path.string();
     std::ofstream events(event_path), optimize(optimize_path), lp_ledger(lp_path),
         bound_ledger(bounds_path), split_ledger(split_path),
-        global_trace(global_bound_path), native_targets(native_target_path);
+        global_trace(global_bound_path), native_targets(native_target_path),
+        initial_decomposition(initial_decomposition_path);
     events << "telemetry_seconds,event,leaf_id,gamma_L,gamma_U,status,global_lb,verified_ub,detail\n";
     optimize << "leaf_id,solve_kind,native_status,optimize_return_code,global_deadline_remaining_at_launch,solver_runtime,work,nodes,simplex_iterations,barrier_iterations,memory_gb,model_sha256,in_memory_model_reused,integer_domain_restored,basis_reuse_status,native_log\n";
     lp_ledger << "leaf_id,parent_id,depth,gamma_L,gamma_U,terminal_valid,optimal,infeasible,bound_available,lower_bound,native_status,work,telemetry_seconds\n";
@@ -749,7 +870,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     split_ledger << "parent_id,eligible,decision_valid,split,"
                     "child_infeasibility_trigger,strict_bound_trigger,"
                     "normalized_disjunction_gain,parent_native_bound_target,"
-                    "target_phase_required,reason\n";
+                    "target_phase_required,reason,b_plus,eta_proof,eta_anchor,"
+                    "normalization_source,normalization_upper_bound\n";
     global_trace
         << "process_elapsed_seconds,exact_phase_elapsed_seconds,event_type,"
            "active_leaf,active_leaf_valid_lower_bound,"
@@ -761,6 +883,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
            "other_open_min_bound,verified_cutoff,status,native_status,"
            "native_bound,target_reached,exact_closure,requeued,"
            "solver_runtime,work,nodes,event_source\n";
+    initial_decomposition
+        << "anchor_cell_index,anchor_lower,anchor_upper,active,active_lower,"
+           "active_upper,truncated_by_proof_range,U_proof_launch,"
+           "U_anchor_launch,proof_range_lower,proof_range_upper,"
+           "normalization_source\n";
     events.flush();
     optimize.flush();
     lp_ledger.flush();
@@ -768,12 +895,77 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     split_ledger.flush();
     global_trace.flush();
     native_targets.flush();
+    initial_decomposition.flush();
     recordProcessPhase(options, "first_tree_ledger_opened", "complete",
                        event_path.string());
 
     ControllingLeafScheduler scheduler(1e-7);
-    const auto initial = makeLegacyFrontierIntervals(
-        root_gamma_L, root_gamma_U, options.frontier_intervals);
+    const std::vector<GiniIntervalGeometry> initial = round36_causal
+        ? causal_grid.active_intervals
+        : makeLegacyFrontierIntervals(
+              root_gamma_L, root_gamma_U, options.frontier_intervals);
+    const std::vector<GiniIntervalGeometry> audit_anchor_cells =
+        round36_causal
+            ? causal_grid.anchor_cells
+            : makeLegacyFrontierIntervals(
+                  root_gamma_L, root_gamma_U, options.frontier_intervals);
+    std::vector<double> audit_anchor_endpoints;
+    if (round36_causal) {
+        audit_anchor_endpoints = causal_grid.anchor_endpoints;
+    } else if (!audit_anchor_cells.empty()) {
+        audit_anchor_endpoints.push_back(audit_anchor_cells.front().lower);
+        for (const GiniIntervalGeometry& cell : audit_anchor_cells) {
+            audit_anchor_endpoints.push_back(cell.upper);
+        }
+    }
+    result.external_gini_tree_anchor_grid_endpoints =
+        joinDoubles(audit_anchor_endpoints);
+    result.external_gini_tree_active_initial_intervals =
+        joinIntervals(initial);
+    result.external_gini_tree_truncated_initial_interval_count =
+        round36_causal
+            ? causal_grid.truncated_active_interval_count : 0;
+    for (std::size_t cell_index = 0;
+         cell_index < audit_anchor_cells.size(); ++cell_index) {
+        bool active = false;
+        GiniIntervalGeometry active_interval;
+        if (round36_causal) {
+            for (std::size_t active_index = 0;
+                 active_index < causal_grid.active_anchor_cell_indices.size();
+                 ++active_index) {
+                if (causal_grid.active_anchor_cell_indices[active_index] ==
+                    static_cast<int>(cell_index)) {
+                    active = true;
+                    active_interval = causal_grid.active_intervals[active_index];
+                    break;
+                }
+            }
+        } else {
+            active = true;
+            active_interval = audit_anchor_cells[cell_index];
+        }
+        const bool truncated = active &&
+            (std::fabs(active_interval.lower -
+                       audit_anchor_cells[cell_index].lower) >
+                 scheduler.certificateTolerance() ||
+             std::fabs(active_interval.upper -
+                       audit_anchor_cells[cell_index].upper) >
+                 scheduler.certificateTolerance());
+        initial_decomposition << std::setprecision(17) << cell_index << ','
+            << audit_anchor_cells[cell_index].lower << ','
+            << audit_anchor_cells[cell_index].upper << ',' << active << ',';
+        if (active) {
+            initial_decomposition << active_interval.lower << ','
+                                  << active_interval.upper;
+        } else {
+            initial_decomposition << ',';
+        }
+        initial_decomposition << ',' << truncated << ','
+            << proof_incumbent_launch << ',' << decomposition_anchor_launch
+            << ',' << root_gamma_L << ',' << root_gamma_U << ','
+            << csvField(options.round36_c6_split_normalization) << '\n';
+    }
+    initial_decomposition.flush();
     result.external_gini_tree_initial_leaf_count =
         static_cast<long long>(initial.size());
     result.external_gini_tree_root_coverage_valid = exactIntervalCoverage(
@@ -1706,12 +1898,21 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                       scheduler.certificateTolerance())
                 : C5BoundTargetSplitDecision{};
             const C6CurrentSplitDecision c6_split = c6_nonblocking
-                ? evaluateC6CurrentSplitDecision(
-                      bounded.lower_bound, verified_ub,
-                      runtime[children[0].id].lp,
-                      runtime[children[1].id].lp,
-                      kRound31C6NormalizedSplitThreshold,
-                      scheduler.certificateTolerance())
+                ? (round36_causal
+                    ? evaluateC6CurrentSplitDecision(
+                          bounded.lower_bound, verified_ub,
+                          decomposition_anchor_launch,
+                          options.round36_c6_split_normalization,
+                          runtime[children[0].id].lp,
+                          runtime[children[1].id].lp,
+                          kRound31C6NormalizedSplitThreshold,
+                          scheduler.certificateTolerance())
+                    : evaluateC6CurrentSplitDecision(
+                          bounded.lower_bound, verified_ub,
+                          runtime[children[0].id].lp,
+                          runtime[children[1].id].lp,
+                          kRound31C6NormalizedSplitThreshold,
+                          scheduler.certificateTolerance()))
                 : C6CurrentSplitDecision{};
             const bool decision_valid =
                 c6_nonblocking
@@ -1774,7 +1975,26 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                               c6_split.run_child_bound_target) ||
                              (c5_bound_target &&
                               c5_split.run_parent_bound_target_phase))
-                         << ',' << csvField(split_reason) << '\n';
+                         << ',' << csvField(split_reason) << ',';
+            if (c6_nonblocking && std::isfinite(c6_split.b_plus)) {
+                split_ledger << c6_split.b_plus;
+            }
+            split_ledger << ',';
+            if (c6_nonblocking && std::isfinite(c6_split.eta_proof)) {
+                split_ledger << c6_split.eta_proof;
+            }
+            split_ledger << ',';
+            if (c6_nonblocking && std::isfinite(c6_split.eta_anchor)) {
+                split_ledger << c6_split.eta_anchor;
+            }
+            split_ledger << ',';
+            if (c6_nonblocking) {
+                split_ledger << csvField(c6_split.normalization_source)
+                             << ',' << c6_split.normalization_upper_bound;
+            } else {
+                split_ledger << ',';
+            }
+            split_ledger << '\n';
             if (!decision_valid) {
                 hard_failure = true;
                 result.external_gini_tree_failure_reason =
@@ -2068,7 +2288,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         } else {
             split_ledger << bounded.id
                          << ",false,true,false,false,false,,,false,"
-                         << csvField("structurally_terminal") << '\n';
+                         << csvField("structurally_terminal")
+                         << ",,,,,\n";
         }
         if (hard_failure || global_deadline_stop || split_parent) continue;
 
