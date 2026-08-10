@@ -25,6 +25,99 @@ import round36_common as common
 TOL = 1e-7
 MATERIAL_AUC = 1e-4
 ARMS = ("HH", "SS", "BW-P", "BW-A")
+REQUIRED_METRIC_SCHEMAS = {
+    "per_arm_results.csv": {
+        "run_id", "arm", "U_H", "U_S", "HGA_start_seconds_canonical",
+        "SIMPLE_start_seconds_canonical", "U_proof_launch",
+        "U_anchor_launch", "relative_incumbent_difference",
+        "proof_range_lower", "proof_range_upper", "anchor_grid_upper",
+        "anchor_grid_endpoints", "active_initial_intervals",
+        "truncated_initial_intervals", "local_domain_ranges",
+        "interval_row_families", "parent_lp_bounds",
+        "initial_global_lower_bound", "first_controlling_leaf",
+        "controlling_leaf_sequence", "native_target_sequence",
+        "targets_attained", "requeues", "child_lp_bounds",
+        "b_plus_sequence", "selected_eta_sequence", "actual_split_sequence",
+        "actual_splits", "max_depth", "terminal_mip_calls",
+        "terminal_work", "terminal_nodes", "terminal_status_sequence",
+        "closure_sequence", "native_incumbents_during_exact",
+        "first_native_incumbent_process_seconds", "process_seconds",
+        "exact_phase_seconds", "valid_final_lower_bound",
+        "verified_final_upper_bound", "final_common_ub_gap",
+        "strict_certificate", "valid_time_limited_noncertificate",
+        "normalized_observed_proof_auc", "normalized_observed_gap_auc",
+    },
+    "initial_decomposition_audit.csv": {
+        "run_id", "anchor_cell_index", "anchor_lower", "anchor_upper",
+        "active", "active_lower", "active_upper",
+        "truncated_by_proof_range", "proof_range_lower",
+        "proof_range_upper", "anchor_width", "active_width",
+        "local_leaf_id", "local_lp_status", "local_lp_lower_bound",
+        "interval_row_families", "cutoff_derived_rows",
+    },
+    "trajectory_events.csv": {
+        "run_id", "sequence", "process_seconds", "exact_phase_seconds",
+        "valid_lower_bound", "observed_verified_upper_bound",
+        "common_verified_upper_bound", "relative_gap_to_common_ub",
+        "normalized_proof_fraction", "event", "active_leaf", "source",
+        "observed_event_no_post_last_extension",
+    },
+    "child_lookahead_split_audit.csv": {
+        "run_id", "sequence", "parent_id", "parent_lp_bound", "left_id",
+        "left_lp_bound", "left_infeasible", "right_id", "right_lp_bound",
+        "right_infeasible", "post_split_bound", "eligible",
+        "decision_valid", "split", "b_plus", "eta_proof", "eta_anchor",
+        "normalization_source", "normalization_upper_bound", "reason",
+        "decision_inputs_hardware_independent",
+    },
+    "native_target_audit.csv": {
+        "run_id", "sequence", "phase_index", "leaf_id", "target_kind",
+        "current_bound", "target_bound", "other_open_min_bound",
+        "verified_cutoff", "status", "native_status", "native_bound",
+        "target_reached", "exact_closure", "requeued", "work", "nodes",
+        "event_source",
+    },
+    "terminal_closure_audit.csv": {
+        "run_id", "terminal_order", "leaf_id", "native_status",
+        "solver_runtime", "work", "nodes", "simplex_iterations",
+        "barrier_iterations", "in_memory_model_reused",
+    },
+    "interaction_sequence_hashes.csv": {
+        "run_id", "initial_geometry_sha256", "initial_lp_sha256",
+        "controlling_sequence_sha256", "target_sequence_sha256",
+        "split_sequence_sha256", "split_decision_sha256",
+        "closure_sequence_sha256", "pre_first_split_sequence_sha256",
+        "downstream_sequence_sha256", "actual_splits", "max_depth",
+        "hashes_exclude_timing_work_nodes",
+    },
+}
+
+
+def metric_schema_valid(directory: Path, prefix: str = "",
+                        expected_runs: int | None = None) \
+        -> tuple[bool, list[str]]:
+    problems = []
+    for name, required in REQUIRED_METRIC_SCHEMAS.items():
+        path = directory / f"{prefix}{name}"
+        if not path.is_file():
+            problems.append(f"missing:{path.name}")
+            continue
+        with path.open(newline="", encoding="utf-8-sig") as stream:
+            header = set(next(csv.reader(stream), []))
+        missing = sorted(required - header)
+        if missing:
+            problems.append(f"columns:{path.name}:{','.join(missing)}")
+    if expected_runs is not None:
+        for name in ("per_arm_results.csv", "interaction_sequence_hashes.csv"):
+            path = directory / f"{prefix}{name}"
+            if not path.is_file():
+                continue
+            rows = common.csv_rows(path)
+            run_ids = {row.get("run_id") for row in rows}
+            if len(rows) != expected_runs or len(run_ids) != expected_runs:
+                problems.append(
+                    f"coverage:{path.name}:{len(rows)}/{len(run_ids)}")
+    return not problems, problems
 
 
 def number(value: Any, default: float = math.nan) -> float:

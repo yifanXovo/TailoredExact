@@ -310,13 +310,12 @@ def main() -> int:
 
     # 10-12. Metrics, causal questions, and gates.
     final_decision = json_value(out / "final_audit_decision.json")
+    metric_schema_ok, metric_schema_problems = analysis.metric_schema_valid(
+        out, expected_runs=56)
     audit.condition(
         "10_metrics", "required per-arm, trajectory, split, target and closure metrics exist",
-        all((out / name).is_file() for name in (
-            "per_arm_results.csv", "trajectory_events.csv",
-            "child_lookahead_split_audit.csv", "native_target_audit.csv",
-            "terminal_closure_audit.csv", "interaction_sequence_hashes.csv")),
-        "derived causal CSV package", incomplete=True)
+        metric_schema_ok, "derived causal CSV package", incomplete=True,
+        detail=";".join(metric_schema_problems[:5]))
     question_keys = {"question_A_geometry", "question_B_normalization",
                      "question_C_splitting_timing",
                      "question_D_fixed_anchor_stronger_proof"}

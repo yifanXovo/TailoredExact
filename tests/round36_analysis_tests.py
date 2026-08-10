@@ -28,6 +28,11 @@ def yes(value: object) -> bool:
 
 
 class Round36AnalysisTests(unittest.TestCase):
+    def test_required_metric_schema_contract(self) -> None:
+        valid, problems = analysis.metric_schema_valid(
+            OUT, PREFIX, expected_runs=len(rows("per_arm_results.csv")))
+        self.assertTrue(valid, problems)
+
     def test_artifact_inventory_contract_is_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary) / "run"
