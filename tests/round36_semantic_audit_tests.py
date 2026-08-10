@@ -30,9 +30,17 @@ class Round36SemanticAuditTests(unittest.TestCase):
 
     def test_all_semantic_invariants_pass(self) -> None:
         self.assertTrue(self.summary["passed"])
-        self.assertEqual(17, self.summary["semantic_invariants"])
-        self.assertEqual(17, self.summary["semantic_invariants_passed"])
+        self.assertEqual(19, self.summary["semantic_invariants"])
+        self.assertEqual(19, self.summary["semantic_invariants_passed"])
         self.assertTrue(all(row["passed"] == "True" for row in self.rows))
+
+    def test_split_and_action_controls_are_hardware_independent(self) -> None:
+        rows = {row["id"]: row for row in self.rows}
+        self.assertEqual("True", rows[
+            "S18_hardware_independent_split_inputs"]["passed"])
+        self.assertEqual("True", rows["S19_global_deadline_only"]["passed"])
+        self.assertEqual([], self.summary["hardware_dependent_split_tokens"])
+        self.assertEqual([], self.summary["native_action_time_slice_tokens"])
 
     def test_proof_ub_updates_are_verifier_guarded(self) -> None:
         self.assertEqual(4, self.summary["verified_ub_assignments"])

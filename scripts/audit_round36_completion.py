@@ -355,6 +355,8 @@ def main() -> int:
     # 14-17. Frozen knobs and prohibited dispatch/mechanism mixing.
     commands = json_value(common.COMMAND_FREEZE)
     command_text = json.dumps(commands)
+    frozen_commands = [record.get("command", []) for record in
+                       commands.get("commands", {}).values()]
     protocol = (out / "round36_protocol.md").read_text(
         encoding="utf-8", errors="replace")
     audit.condition("14_rho", "rho remains fixed at 0.01 with no sweep",
@@ -374,6 +376,35 @@ def main() -> int:
         "17_no_hga_light_mixing", "HGA-LIGHT is not mixed into this causal study",
         "hga-light" not in command_text.lower(),
         "main.cpp; round36_command_freeze.json")
+    command_reproducibility_valid = (
+        len(frozen_commands) == 56
+        and all(
+            analysis.command_value(command, "--external-gini-warm-start") ==
+                "false"
+            and analysis.command_value(command, "--gurobi-seed") == "0"
+            and all(analysis.command_value(command, option) == "1"
+                    for option in ("--threads", "--mip-threads",
+                                   "--cplex-threads",
+                                   "--compact-bc-threads"))
+            and not any("resume" in token.lower() for token in command)
+            for command in frozen_commands)
+    )
+    completed_states = csv_rows(out / "runner_row_summary.csv")
+    audit.condition(
+        "17_reproducibility",
+        "frozen commands and completed rows exclude warm/resume contamination",
+        command_reproducibility_valid
+        and bool(completed_states)
+        and all(not truth(row.get("algorithmic_solve_state_resumed"))
+                for row in completed_states),
+        "round36_command_freeze.json; runner_row_summary.csv")
+    audit.condition(
+        "17_reproducibility",
+        "split and native-action control is hardware-independent and unsliced",
+        semantic.get("passed") is True
+        and semantic.get("hardware_dependent_split_tokens") == []
+        and semantic.get("native_action_time_slice_tokens") == [],
+        "semantic_separation_audit.json; PaperExternalGiniTree.cpp")
 
     # 18. Theory note.
     theory = (out / "theory_and_mechanism_note.md").read_text(

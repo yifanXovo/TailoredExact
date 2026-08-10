@@ -16,3 +16,5 @@ S14_certificate,strict certificate compares the valid LB with verified proof UB,
 S15_default_wrapper,legacy C6 wrapper delegates with proof normalization and equal proof/anchor UB,tree,True,src/PaperExternalGiniTree.cpp,-1,9d3c875a01168456af4412a56073a35dc3f053d7c6792eacb1b94a40a4289270
 S16_all_ub_updates_verified,every verified_ub assignment is seed initialization or independently verified,tree,True,src/PaperExternalGiniTree.cpp,998,64964ca5087d15834d5893a6b098a96401a6f74723712252707f00dd72379beb
 S17_anchor_consumer_exclusion,decomposition anchor is absent from cutoff/pruning/global-UB/certificate consumers,tree,True,src/PaperExternalGiniTree.cpp,616,4b2acf69ab1b25e5ee56765cd8c10ac58ee4a75e057480c8a1baf20990e370e9
+S18_hardware_independent_split_inputs,"C6 split decisions depend only on bounds, child LP states, rho, and tolerance",tree,True,src/PaperExternalGiniTree.cpp,359,7bff86b44c7a5933892bfd2f933eaeaaed48f07a0d5ada927dd618cd6dd98896
+S19_global_deadline_only,C6 native actions use the remaining global deadline without per-leaf or per-action slices,tree,True,src/PaperExternalGiniTree.cpp,1295,ac3fe4f9add9c83d90964bf73437854ab0e1d89c0fb30fa18d3f5990a8b87f77

@@ -37,6 +37,25 @@ def line_number(text: str, fragment: str) -> int:
     return text.count("\n", 0, position) + 1 if position >= 0 else -1
 
 
+def balanced_body(text: str, marker: str) -> str:
+    """Return the brace-balanced body beginning after a unique marker."""
+    marker_position = text.find(marker)
+    if marker_position < 0:
+        return ""
+    opening = text.find("{", marker_position + len(marker))
+    if opening < 0:
+        return ""
+    depth = 0
+    for position in range(opening, len(text)):
+        if text[position] == "{":
+            depth += 1
+        elif text[position] == "}":
+            depth -= 1
+            if depth == 0:
+                return text[opening + 1:position]
+    return ""
+
+
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
     fields: list[str] = []
     for row in rows:
@@ -230,6 +249,62 @@ def main() -> int:
             anchor_occurrences, sort_keys=True).encode()).hexdigest(),
     })
 
+    c5_body = balanced_body(
+        sources["tree"],
+        "C5BoundTargetSplitDecision evaluateC5BoundTargetSplitDecision(\n"
+        "    double parent_lower_bound,")
+    c6_body = balanced_body(
+        sources["tree"],
+        "C6CurrentSplitDecision evaluateC6CurrentSplitDecision(\n"
+        "    double current_parent_bound,\n"
+        "    double proof_upper_bound,")
+    split_decision_body = c5_body + "\n" + c6_body
+    hardware_pattern = re.compile(
+        r"\b(?:elapsed|seconds|runtime|work|nodes?|machine|threads?|"
+        r"memory|clock|chrono)\b", re.IGNORECASE)
+    hardware_tokens = sorted(set(
+        match.group(0).lower()
+        for match in hardware_pattern.finditer(split_decision_body)))
+    rows.append({
+        "id": "S18_hardware_independent_split_inputs",
+        "claim": "C6 split decisions depend only on bounds, child LP states, rho, and tolerance",
+        "source": "tree",
+        "passed": bool(c5_body) and bool(c6_body) and not hardware_tokens,
+        "source_path": common.relative(TREE),
+        "approximate_line": line_number(
+            sources["tree"],
+            "C5BoundTargetSplitDecision evaluateC5BoundTargetSplitDecision("),
+        "normalized_fragment_sha256": hashlib.sha256(
+            normalized(split_decision_body).encode()).hexdigest(),
+    })
+
+    native_target_body = balanced_body(
+        sources["tree"], "auto runC6NativeTarget = [&](")
+    time_slice_pattern = re.compile(
+        r"request\.time_limit_seconds|requested_quantum_seconds|planLaunch|"
+        r"per[_-]?(?:leaf|action)", re.IGNORECASE)
+    time_slice_tokens = sorted(set(
+        match.group(0).lower()
+        for match in time_slice_pattern.finditer(native_target_body)))
+    global_deadline_only = (
+        "const double remaining = globalDeadlineRemaining();" in
+            native_target_body
+        and "request.global_deadline_remaining_seconds = remaining;" in
+            native_target_body
+        and not time_slice_tokens
+    )
+    rows.append({
+        "id": "S19_global_deadline_only",
+        "claim": "C6 native actions use the remaining global deadline without per-leaf or per-action slices",
+        "source": "tree",
+        "passed": bool(native_target_body) and global_deadline_only,
+        "source_path": common.relative(TREE),
+        "approximate_line": line_number(
+            sources["tree"], "auto runC6NativeTarget = [&]("),
+        "normalized_fragment_sha256": hashlib.sha256(
+            normalized(native_target_body).encode()).hexdigest(),
+    })
+
     write_csv(OUT / "semantic_separation_audit.csv", rows)
     write_csv(OUT / "verified_ub_assignment_audit.csv", ub_assignments)
     write_csv(OUT / "anchor_consumer_occurrence_audit.csv", anchor_occurrences)
@@ -246,6 +321,8 @@ def main() -> int:
         "anchor_symbol_occurrences": len(anchor_occurrences),
         "anchor_forbidden_consumer_occurrences": sum(not bool(row["passed"])
                                                      for row in anchor_occurrences),
+        "hardware_dependent_split_tokens": hardware_tokens,
+        "native_action_time_slice_tokens": time_slice_tokens,
         "source_sha256": {
             common.relative(path): sha256(path) for path in (MAIN, TREE, GEOMETRY)
         },
@@ -261,6 +338,8 @@ def main() -> int:
   guarded by independent incumbent verification.
 - Decomposition-anchor symbol occurrences: {summary['anchor_symbol_occurrences']}.
 - Forbidden anchor consumers: {summary['anchor_forbidden_consumer_occurrences']}.
+- Hardware-dependent split-decision tokens: {len(hardware_tokens)}.
+- Per-leaf/per-action native time-slice tokens: {len(time_slice_tokens)}.
 
 The audit anchors each claim to normalized source fragments and source hashes.
 `U_anchor` is confined to launch-frozen grid construction, safety/telemetry,

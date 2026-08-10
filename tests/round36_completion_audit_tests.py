@@ -47,6 +47,15 @@ class Round36CompletionAuditTests(unittest.TestCase):
         self.assertTrue(all(status.get(requirement) == "achieved"
                             for requirement in required))
 
+    def test_reproducibility_prohibitions_are_explicitly_achieved(self) -> None:
+        required = {
+            "frozen commands and completed rows exclude warm/resume contamination",
+            "split and native-action control is hardware-independent and unsliced",
+        }
+        status = {row["requirement"]: row["status"] for row in self.rows}
+        self.assertTrue(all(status.get(requirement) == "achieved"
+                            for requirement in required))
+
     def test_completion_state_matches_official_row_count(self) -> None:
         count = self.summary["completed_official_rows"]
         stage_b = next(row for row in self.rows if row["requirement"] ==
