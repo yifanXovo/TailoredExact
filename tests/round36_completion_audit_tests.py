@@ -59,9 +59,13 @@ class Round36CompletionAuditTests(unittest.TestCase):
                          exactness["status"])
 
     def test_draft_pr_record_is_covered(self) -> None:
-        row = next(row for row in self.rows if
-                   row["requirement"] == "draft PR 83 is open and unmerged")
-        self.assertEqual("achieved", row["status"])
+        requirements = {
+            "draft PR 83 is open and unmerged",
+            "draft PR record attests the current head or its attestation parent",
+        }
+        rows = {row["requirement"]: row for row in self.rows}
+        self.assertTrue(all(rows[item]["status"] == "achieved"
+                            for item in requirements))
 
 
 if __name__ == "__main__":

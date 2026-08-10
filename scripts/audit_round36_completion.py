@@ -407,17 +407,27 @@ def main() -> int:
     # refreshed from the GitHub connector immediately before final completion.
     upstream = git("rev-parse", "@{upstream}", check=False)
     head = git("rev-parse", "HEAD")
+    parent = git("rev-parse", "HEAD^", check=False)
     audit.condition(
         "21_git_completion", "current committed branch is pushed",
         bool(upstream) and upstream == head,
         f"HEAD={head}; upstream={upstream}", incomplete=True)
     pr = json_value(out / "github_pr_record.json")
+    recorded_head = str(pr.get("head_sha_at_record", ""))
+    pr_head_attested = bool(recorded_head) and recorded_head in {head, parent}
     audit.condition(
         "21_git_completion", "draft PR 83 is open and unmerged",
         pr.get("repository") == REPO and pr.get("number") == PR_NUMBER
         and pr.get("draft") is True and pr.get("state") == "open"
         and pr.get("merged") is False and pr.get("head") == BRANCH,
         "github_pr_record.json; GitHub connector", incomplete=True)
+    audit.condition(
+        "21_git_completion",
+        "draft PR record attests the current head or its attestation parent",
+        pr_head_attested and pr.get("base") == "main"
+        and pr.get("url") == f"https://github.com/{REPO}/pull/{PR_NUMBER}",
+        f"recorded={recorded_head}; HEAD={head}; HEAD^={parent}",
+        incomplete=True)
 
     counts = Counter(row["status"] for row in audit.rows)
     all_achieved = len(audit.rows) > 0 and counts == Counter(
