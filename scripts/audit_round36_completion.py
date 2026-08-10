@@ -282,6 +282,30 @@ def main() -> int:
         complete == 56, "runs/*/completion_marker.json",
         incomplete=complete < 56,
         detail=f"{complete}/56 complete; first missing={invalid[:1]}")
+    exactness_path = out / "exactness_certificate_audit.csv"
+    exactness = common.csv_rows(exactness_path) if exactness_path.is_file() \
+        else []
+    lifecycle_fields = (
+        "runner_normal_exit", "runner_no_emergency_timeout",
+        "result_json_verified_after_process_exit",
+        "runner_required_artifacts_complete",
+        "atomic_completion_marker_valid",
+        "algorithmic_solve_state_not_resumed", "runner_lifecycle_valid",
+    )
+    exactness_valid = (
+        len(exactness) == 56
+        and len({row.get("run_id") for row in exactness}) == 56
+        and all(truth(row.get("exactness_certificate_audit_passed"))
+                and not truth(row.get("false_certificate"))
+                and all(truth(row.get(field)) for field in lifecycle_fields)
+                for row in exactness)
+    )
+    audit.condition(
+        "9_stage_b",
+        "all official rows pass lifecycle, exactness, and certificate audits",
+        exactness_valid, "exactness_certificate_audit.csv",
+        incomplete=not exactness_valid,
+        detail=f"{len(exactness)}/56 final exactness rows")
 
     # 10-12. Metrics, causal questions, and gates.
     final_decision = json_value(out / "final_audit_decision.json")

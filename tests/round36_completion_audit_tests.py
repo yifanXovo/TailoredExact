@@ -49,9 +49,14 @@ class Round36CompletionAuditTests(unittest.TestCase):
 
     def test_completion_state_matches_official_row_count(self) -> None:
         count = self.summary["completed_official_rows"]
-        stage_b = next(row for row in self.rows if row["section"] == "9_stage_b")
+        stage_b = next(row for row in self.rows if row["requirement"] ==
+                       "all 56 official rows are checksum-complete")
         self.assertEqual("achieved" if count == 56 else "incomplete",
                          stage_b["status"])
+        exactness = next(row for row in self.rows if row["requirement"] ==
+                         "all official rows pass lifecycle, exactness, and certificate audits")
+        self.assertEqual("achieved" if count == 56 else "incomplete",
+                         exactness["status"])
 
     def test_draft_pr_record_is_covered(self) -> None:
         row = next(row for row in self.rows if
