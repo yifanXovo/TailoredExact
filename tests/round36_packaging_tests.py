@@ -18,6 +18,17 @@ import package_round36_evidence as package  # noqa: E402
 
 
 class Round36PackagingTests(unittest.TestCase):
+    def test_repository_artifact_size_preflight(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "artifact.bin"
+            path.write_bytes(b"small")
+            package.require_repository_artifact_size(path)
+            with mock.patch.object(Path, "stat") as stat:
+                stat.return_value.st_size = (
+                    package.MAX_REPOSITORY_ARTIFACT_BYTES + 1)
+                with self.assertRaisesRegex(RuntimeError, "exceeds 95 MiB"):
+                    package.require_repository_artifact_size(path)
+
     def test_large_trajectory_table_is_packaged_compressed(self) -> None:
         self.assertEqual("trajectory_events.csv.gz",
                          package.COMPRESSED_DERIVED["trajectory_events.csv"])

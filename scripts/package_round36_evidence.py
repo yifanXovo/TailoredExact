@@ -86,6 +86,7 @@ FINAL_DERIVED = (
 COMPRESSED_DERIVED = {
     "trajectory_events.csv": "trajectory_events.csv.gz",
 }
+MAX_REPOSITORY_ARTIFACT_BYTES = 95 * 1024 * 1024
 
 
 def csv_rows(path: Path) -> list[dict[str, str]]:
@@ -199,6 +200,13 @@ def gzip_deterministic(source: Path, target: Path) -> None:
     temporary.replace(target)
 
 
+def require_repository_artifact_size(path: Path) -> None:
+    size = path.stat().st_size
+    if size > MAX_REPOSITORY_ARTIFACT_BYTES:
+        raise RuntimeError(
+            f"repository artifact exceeds 95 MiB preflight: {path}:{size}")
+
+
 def representatives() -> list[dict[str, str]]:
     rows = csv_rows(common.OUT / "causal_geometry_comparison.csv")
     groups: dict[str, list[dict[str, str]]] = {}
@@ -265,6 +273,7 @@ def main() -> int:
             raise RuntimeError(
                 f"license-sensitive marker {marker} in {source}")
         gzip_deterministic(source, target)
+        require_repository_artifact_size(target)
         compressed_derived.append({
             "source_path": common.relative(source),
             "source_bytes": source.stat().st_size,
@@ -295,6 +304,7 @@ def main() -> int:
                 target = bundle / representative["panel_row_id"] / arm.lower(
                     ).replace("-", "_") / f"{relative}.gz"
                 gzip_deterministic(source, target)
+                require_repository_artifact_size(target)
                 expected_targets.add(target.resolve())
                 manifest_rows.append({
                     **representative, "arm": arm,
@@ -326,6 +336,7 @@ def main() -> int:
         "representative_selection.csv", "representative_raw_manifest.csv"]
     for name in inventory_names:
         path = common.OUT / name
+        require_repository_artifact_size(path)
         final_inventory.append({
             "path": common.relative(path), "bytes": path.stat().st_size,
             "sha256": sha256(path),
@@ -352,6 +363,9 @@ def main() -> int:
         "all_raw_runs_checksum_addressed": True,
         "model_dumps_packaged": False,
         "license_sensitive_material_packaged": False,
+        "repository_artifact_size_limit_bytes":
+            MAX_REPOSITORY_ARTIFACT_BYTES,
+        "all_repository_artifacts_below_size_limit": True,
     }
     write_json(common.OUT / "evidence_package_summary.json", summary)
     report = f"""# Round 36 evidence package

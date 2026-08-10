@@ -391,6 +391,13 @@ def main() -> int:
         "19_reporting", "full compact evidence package is present",
         not missing_final, "final evidence files",
         incomplete=bool(missing_final), detail=f"missing={missing_final}")
+    package_summary = json_value(out / "evidence_package_summary.json")
+    audit.condition(
+        "19_reporting", "repository evidence respects the file-size preflight",
+        package_summary.get("all_repository_artifacts_below_size_limit") is True
+        and int(package_summary.get(
+            "repository_artifact_size_limit_bytes", 0)) <= 100 * 1024 * 1024,
+        "evidence_package_summary.json", incomplete=True)
     allowed_conclusions = {
         "decomposition_geometry_dominant",
         "split_normalization_coupling_dominant", "both_effects_matter",
