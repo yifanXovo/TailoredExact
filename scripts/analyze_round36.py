@@ -46,6 +46,18 @@ def truth(value: Any) -> bool:
     return str(value).strip().lower() in {"1", "true", "yes"}
 
 
+def runner_lifecycle_valid(state: dict[str, Any]) -> bool:
+    return all((
+        integer(state.get("return_code"), -1) == 0,
+        not truth(state.get("emergency_timeout")),
+        truth(state.get("result_json_parse_verified_after_process_exit")),
+        not state.get("missing_required_artifacts", []),
+        truth(state.get("completed")),
+        truth(state.get("completion_marker_atomic")),
+        not truth(state.get("algorithmic_solve_state_resumed")),
+    ))
+
+
 def close(left: Any, right: Any, tolerance: float = TOL) -> bool:
     a, b = number(left), number(right)
     return math.isfinite(a) and math.isfinite(b) and abs(a - b) <= \
@@ -640,11 +652,12 @@ def run_rows(runs: list[dict[str, Any]]) -> tuple[
                 1.0, abs(anchor), abs(proof)) >= proof
         arm_contract = result.get("round36_c6_causal_arm") == arm.lower() \
             and result.get("round36_c6_split_normalization") == expected_norm
+        runner_lifecycle = runner_lifecycle_valid(state)
         audit_passed = all((
             structural, open_preserved, not inversion,
             not false_certificate, startup_contract, proof_anchor_contract,
             arm_contract, truth(result.get("round36_anchor_safety_valid")),
-            active_cover_valid(run), one_thread,
+            active_cover_valid(run), one_thread, runner_lifecycle,
             command_value(command, "--gurobi-seed") == "0",
             command_value(command, "--frontier-intervals") == "4",
             upper <= proof + TOL * max(1.0, abs(proof), abs(upper)),
@@ -660,6 +673,20 @@ def run_rows(runs: list[dict[str, Any]]) -> tuple[
             "startup_verification_contract_valid": startup_contract,
             "proof_anchor_contract_valid": proof_anchor_contract,
             "reported_arm_normalization_contract_valid": arm_contract,
+            "runner_normal_exit": integer(
+                state.get("return_code"), -1) == 0,
+            "runner_no_emergency_timeout": not truth(
+                state.get("emergency_timeout")),
+            "result_json_verified_after_process_exit": truth(state.get(
+                "result_json_parse_verified_after_process_exit")),
+            "runner_required_artifacts_complete": not state.get(
+                "missing_required_artifacts", []),
+            "atomic_completion_marker_valid": truth(
+                state.get("completed")) and truth(
+                    state.get("completion_marker_atomic")),
+            "algorithmic_solve_state_not_resumed": not truth(
+                state.get("algorithmic_solve_state_resumed")),
+            "runner_lifecycle_valid": runner_lifecycle,
             "anchor_safety_valid": result.get(
                 "round36_anchor_safety_valid"),
             "single_thread_command_valid": one_thread,

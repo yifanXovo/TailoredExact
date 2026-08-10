@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import json
+import sys
 import unittest
 from pathlib import Path
 
@@ -12,6 +13,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "results" / "gf_incumbent_decomposition_causal_round36"
 PREFIX = "" if (OUT / "per_arm_results.csv").is_file() else "interim_"
+sys.path.insert(0, str(ROOT / "scripts"))
+import analyze_round36 as analysis  # noqa: E402
 
 
 def rows(name: str) -> list[dict[str, str]]:
@@ -24,6 +27,31 @@ def yes(value: object) -> bool:
 
 
 class Round36AnalysisTests(unittest.TestCase):
+    def test_runner_lifecycle_gate_is_fail_closed(self) -> None:
+        good = {
+            "return_code": 0,
+            "emergency_timeout": False,
+            "result_json_parse_verified_after_process_exit": True,
+            "missing_required_artifacts": [],
+            "completed": True,
+            "completion_marker_atomic": True,
+            "algorithmic_solve_state_resumed": False,
+        }
+        self.assertTrue(analysis.runner_lifecycle_valid(good))
+        corruptions = {
+            "return_code": 1,
+            "emergency_timeout": True,
+            "result_json_parse_verified_after_process_exit": False,
+            "missing_required_artifacts": ["result.json"],
+            "completed": False,
+            "completion_marker_atomic": False,
+            "algorithmic_solve_state_resumed": True,
+        }
+        for field, value in corruptions.items():
+            with self.subTest(field=field):
+                state = {**good, field: value}
+                self.assertFalse(analysis.runner_lifecycle_valid(state))
+
     def test_complete_panels_have_four_arms(self) -> None:
         per_arm = rows("per_arm_results.csv")
         grouped: dict[str, set[str]] = {}
@@ -40,6 +68,15 @@ class Round36AnalysisTests(unittest.TestCase):
                             for row in audits))
         self.assertFalse(any(yes(row["false_certificate"])
                              for row in audits))
+        lifecycle_fields = (
+            "runner_normal_exit", "runner_no_emergency_timeout",
+            "result_json_verified_after_process_exit",
+            "runner_required_artifacts_complete",
+            "atomic_completion_marker_valid",
+            "algorithmic_solve_state_not_resumed", "runner_lifecycle_valid",
+        )
+        self.assertTrue(all(yes(row[field]) for row in audits
+                            for field in lifecycle_fields))
 
     def test_geometry_and_normalization_controls(self) -> None:
         geometry = rows("causal_geometry_comparison.csv")
