@@ -42,6 +42,7 @@ class Round36PackagingTests(unittest.TestCase):
             "runner_required_artifacts_complete",
             "atomic_completion_marker_valid",
             "algorithmic_solve_state_not_resumed", "runner_lifecycle_valid",
+            "certificate_or_graceful_deadline_endpoint_valid",
         )
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "exactness.csv"

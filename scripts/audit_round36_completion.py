@@ -291,6 +291,7 @@ def main() -> int:
         "runner_required_artifacts_complete",
         "atomic_completion_marker_valid",
         "algorithmic_solve_state_not_resumed", "runner_lifecycle_valid",
+        "certificate_or_graceful_deadline_endpoint_valid",
     )
     exactness_valid = (
         len(exactness) == 56

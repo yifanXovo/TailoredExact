@@ -58,6 +58,24 @@ def runner_lifecycle_valid(state: dict[str, Any]) -> bool:
     ))
 
 
+def graceful_deadline_noncertificate(result: dict[str, Any]) -> bool:
+    return all((
+        not truth(result.get("strict_certified_original_problem")),
+        "time_limit" in str(result.get("status", "")).lower(),
+        truth(result.get("graceful_deadline_finalization")),
+        truth(result.get("exact_phase_started")),
+        result.get("external_gini_tree_failure_reason") ==
+            "overall_global_deadline",
+        integer(result.get(
+            "external_gini_tree_global_deadline_interruption_count")) >= 1,
+        integer(result.get("external_gini_tree_open_leaf_count")) > 0,
+        not truth(result.get(
+            "external_gini_tree_all_relevant_leaves_closed")),
+        result.get("strict_certificate_rejection_reason") ==
+            "relevant_leaf_open",
+    ))
+
+
 def close(left: Any, right: Any, tolerance: float = TOL) -> bool:
     a, b = number(left), number(right)
     return math.isfinite(a) and math.isfinite(b) and abs(a - b) <= \
@@ -568,6 +586,8 @@ def run_rows(runs: list[dict[str, Any]]) -> tuple[
         common_ub = final_ubs[panel_id]
         proof = number(result.get("round36_proof_incumbent_launch"))
         anchor = number(result.get("round36_decomposition_anchor_launch"))
+        strict_certificate = strict(run)
+        deadline_noncertificate = graceful_deadline_noncertificate(result)
         base = {
             "round_id": 36, "panel_ordinal": panel["panel_ordinal"],
             "panel_row_id": panel_id, "run_id": state["run_id"],
@@ -602,7 +622,8 @@ def run_rows(runs: list[dict[str, Any]]) -> tuple[
             "verified_final_upper_bound": upper,
             "common_verified_upper_bound": common_ub,
             "final_common_ub_gap": relative_gap(lower, common_ub),
-            "strict_certificate": strict(run),
+            "strict_certificate": strict_certificate,
+            "valid_time_limited_noncertificate": deadline_noncertificate,
             "certificate_class": result.get("strict_certificate_class"),
             "certificate_rejection_reason": result.get(
                 "strict_certificate_rejection_reason"),
@@ -653,11 +674,13 @@ def run_rows(runs: list[dict[str, Any]]) -> tuple[
         arm_contract = result.get("round36_c6_causal_arm") == arm.lower() \
             and result.get("round36_c6_split_normalization") == expected_norm
         runner_lifecycle = runner_lifecycle_valid(state)
+        certificate_endpoint_valid = strict_certificate or deadline_noncertificate
         audit_passed = all((
             structural, open_preserved, not inversion,
             not false_certificate, startup_contract, proof_anchor_contract,
             arm_contract, truth(result.get("round36_anchor_safety_valid")),
             active_cover_valid(run), one_thread, runner_lifecycle,
+            certificate_endpoint_valid,
             command_value(command, "--gurobi-seed") == "0",
             command_value(command, "--frontier-intervals") == "4",
             upper <= proof + TOL * max(1.0, abs(proof), abs(upper)),
@@ -687,6 +710,9 @@ def run_rows(runs: list[dict[str, Any]]) -> tuple[
             "algorithmic_solve_state_not_resumed": not truth(
                 state.get("algorithmic_solve_state_resumed")),
             "runner_lifecycle_valid": runner_lifecycle,
+            "valid_time_limited_noncertificate": deadline_noncertificate,
+            "certificate_or_graceful_deadline_endpoint_valid":
+                certificate_endpoint_valid,
             "anchor_safety_valid": result.get(
                 "round36_anchor_safety_valid"),
             "single_thread_command_valid": one_thread,
@@ -696,9 +722,9 @@ def run_rows(runs: list[dict[str, Any]]) -> tuple[
             "rho_frozen_source_contract": 0.01,
             "finite_bounds": math.isfinite(lower) and math.isfinite(upper),
             "bound_inversion": inversion,
-            "strict_certificate": strict(run),
+            "strict_certificate": strict_certificate,
             "strict_bound_equality_within_tolerance":
-                close(lower, upper) if strict(run) else "not_applicable",
+                close(lower, upper) if strict_certificate else "not_applicable",
             "false_certificate": false_certificate,
             "final_verified_ub_no_worse_than_launch_proof":
                 upper <= proof + TOL * max(1.0, abs(proof), abs(upper)),
@@ -1302,7 +1328,8 @@ no interpolation, and no post-last-event extension.
         "strict_certificates": sum(truth(row["strict_certificate"])
                                    for row in per_arm),
         "time_limited_valid_nocertificates": sum(
-            not truth(row["strict_certificate"]) for row in per_arm),
+            truth(row["valid_time_limited_noncertificate"])
+            for row in per_arm),
         "false_certificate_count": sum(truth(row["false_certificate"])
                                        for row in audits),
         "all_exactness_certificate_audits_passed": all(truth(row[

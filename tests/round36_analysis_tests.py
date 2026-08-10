@@ -27,6 +27,35 @@ def yes(value: object) -> bool:
 
 
 class Round36AnalysisTests(unittest.TestCase):
+    def test_deadline_noncertificate_gate_is_fail_closed(self) -> None:
+        good = {
+            "strict_certified_original_problem": False,
+            "status": "round31_c6_external_gini_tree_time_limit",
+            "graceful_deadline_finalization": True,
+            "exact_phase_started": True,
+            "external_gini_tree_failure_reason": "overall_global_deadline",
+            "external_gini_tree_global_deadline_interruption_count": 1,
+            "external_gini_tree_open_leaf_count": 3,
+            "external_gini_tree_all_relevant_leaves_closed": False,
+            "strict_certificate_rejection_reason": "relevant_leaf_open",
+        }
+        self.assertTrue(analysis.graceful_deadline_noncertificate(good))
+        corruptions = {
+            "strict_certified_original_problem": True,
+            "status": "stopped_early",
+            "graceful_deadline_finalization": False,
+            "exact_phase_started": False,
+            "external_gini_tree_failure_reason": "none",
+            "external_gini_tree_global_deadline_interruption_count": 0,
+            "external_gini_tree_open_leaf_count": 0,
+            "external_gini_tree_all_relevant_leaves_closed": True,
+            "strict_certificate_rejection_reason": "unsupported_status",
+        }
+        for field, value in corruptions.items():
+            with self.subTest(field=field):
+                self.assertFalse(analysis.graceful_deadline_noncertificate(
+                    {**good, field: value}))
+
     def test_runner_lifecycle_gate_is_fail_closed(self) -> None:
         good = {
             "return_code": 0,
@@ -77,6 +106,9 @@ class Round36AnalysisTests(unittest.TestCase):
         )
         self.assertTrue(all(yes(row[field]) for row in audits
                             for field in lifecycle_fields))
+        self.assertTrue(all(yes(row[
+            "certificate_or_graceful_deadline_endpoint_valid"])
+            for row in audits))
 
     def test_geometry_and_normalization_controls(self) -> None:
         geometry = rows("causal_geometry_comparison.csv")
