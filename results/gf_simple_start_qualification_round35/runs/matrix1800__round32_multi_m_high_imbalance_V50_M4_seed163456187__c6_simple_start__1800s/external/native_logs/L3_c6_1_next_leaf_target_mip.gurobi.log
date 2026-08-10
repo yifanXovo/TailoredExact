@@ -1,0 +1,62 @@
+
+Gurobi 13.0.2 (win64) logging started Sun Aug  9 22:21:09 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_simple_start_qualification_round35\runs\matrix1800__round32_multi_m_high_imbalance_V50_M4_seed163456187__c6_simple_start__1800s\external\native_logs\L3_c6_1_next_leaf_target_mip.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1735.8002543
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 103651 rows, 23583 columns and 717669 nonzeros (Min)
+Model fingerprint: 0x4f756001
+Model has 51 linear objective coefficients
+Variable types: 12056 continuous, 11527 integer (10877 binary)
+Coefficient statistics:
+  Matrix range     [1e-02, 2e+04]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [7e-01, 3e+04]
+  RHS range        [7e-01, 1e+05]
+
+Presolve removed 15042 rows and 189 columns
+Presolve time: 2.05s
+Presolved: 88609 rows, 23394 columns, 593055 nonzeros
+Variable types: 11977 continuous, 11417 integer (10827 binary)
+Root relaxation presolved: 23250 rows, 111664 columns, 615923 nonzeros
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+    7546    5.2047657e+32   6.596366e+34   5.204766e+02      5s
+   15196    1.0420660e+32   2.840588e+33   1.042066e+02     10s
+Warning: Markowitz tolerance tightened to 0.03125
+   20674    6.9019307e+00   0.000000e+00   0.000000e+00     12s
+   20674    6.9019307e+00   0.000000e+00   0.000000e+00     12s
+   20923    6.9019421e+00   0.000000e+00   0.000000e+00     13s
+
+Extra simplex iterations from dual to original model: 249
+
+Root relaxation: objective 6.901942e+00, 20923 iterations, 10.30 seconds (30.76 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    6.90194    0  235          -    6.90194      -     -   13s
+     0     0    7.01569    0  262          -    7.01569      -     -   13s
+
+Explored 1 nodes (21724 simplex iterations) in 13.92 seconds (37.86 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 0
+
+Solve interrupted
+Best objective -, best bound 7.015689678472e+00, gap -
+
+User-callback calls 1702, time in user-callback 0.00 sec

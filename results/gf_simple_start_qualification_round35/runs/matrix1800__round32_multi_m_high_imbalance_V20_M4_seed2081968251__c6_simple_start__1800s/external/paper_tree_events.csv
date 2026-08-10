@@ -1,0 +1,12 @@
+telemetry_seconds,event,leaf_id,gamma_L,gamma_U,status,global_lb,verified_ub,detail
+0.250675,lp_complete,L0,0,0.2375,infeasible,0,1.96279,"complete_lp_relaxation"
+1.0519,lp_complete,L1,0.2375,0.475,optimal,0.475,1.96279,"complete_lp_relaxation"
+1.05192,parent_lp_requeue,L1,0.2375,0.475,open,0.475,1.96279,"selected_leaf_no_longer_controlling"
+1.68735,lp_complete,L2,0.475,0.7125,optimal,0.7125,1.96279,"complete_lp_relaxation"
+1.68737,parent_lp_requeue,L2,0.475,0.7125,open,0.7125,1.96279,"selected_leaf_no_longer_controlling"
+2.17617,lp_complete,L3,0.7125,0.95,optimal,1.50051,1.96279,"complete_lp_relaxation"
+2.1762,parent_lp_requeue,L3,0.7125,0.95,open,1.50051,1.96279,"selected_leaf_no_longer_controlling"
+3.3833,native_bound_target_reached,L1,0.2375,0.475,open,1.6071,1.96279,"c6_next_strict_frontier_bound_reached_requeue"
+4.53663,native_bound_target_reached,L2,0.475,0.7125,open,1.62115,1.96279,"c6_next_strict_frontier_bound_reached_requeue"
+5.5051,atomic_split,L1,0.2375,0.475,replaced,1.62115,1.96279,"current_complete_child_infeasibility"
+6.74072,native_bound_target_reached,L1.1,0.35625,0.475,open,1.64503,1.96279,"c6_next_strict_frontier_bound_reached_requeue"
