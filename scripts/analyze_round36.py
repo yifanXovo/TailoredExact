@@ -145,6 +145,29 @@ def write_csv(path: Path, rows: Iterable[dict[str, Any]]) -> None:
     temporary.replace(path)
 
 
+def artifact_inventory_contract(directory: Path,
+                                artifacts: list[dict[str, str]],
+                                marker: dict[str, Any]) -> tuple[bool, str]:
+    paths = [artifact.get("path", "") for artifact in artifacts]
+    if len(paths) != len(set(paths)):
+        return False, "artifact_manifest_duplicate_path"
+    if integer(marker.get("artifact_count"), -1) != len(artifacts):
+        return False, "artifact_count_mismatch"
+    root = directory.resolve()
+    for relative in paths:
+        if not relative:
+            return False, "artifact_manifest_empty_path"
+        resolved = (directory / relative).resolve()
+        if root not in resolved.parents:
+            return False, f"artifact_path_outside_run:{relative}"
+    required = {path.relative_to(directory).as_posix()
+                for path in common.required_artifacts(directory)}
+    missing = sorted(required - set(paths))
+    if missing:
+        return False, f"required_artifact_unlisted:{missing[0]}"
+    return True, "artifact_inventory_contract_valid"
+
+
 def artifact_complete(directory: Path, matrix: dict[str, str],
                       item: dict[str, Any], manifest: dict[str, Any]) \
         -> tuple[bool, str]:
@@ -163,12 +186,17 @@ def artifact_complete(directory: Path, matrix: dict[str, str],
         "instance_sha256": item["instance_sha256"],
         "executable_sha256": manifest["gurobi_executable_sha256"],
         "official_matrix_sha256": manifest["official_matrix_sha256"],
+        "source_tree_fingerprint": manifest["source_tree_fingerprint"],
     }
     for key, value in expected.items():
         if marker.get(key) != value:
             return False, f"identity_mismatch:{key}"
     if marker.get("artifact_manifest_sha256") != common.sha256(inventory_path):
         return False, "artifact_manifest_checksum_mismatch"
+    inventory_valid, reason = artifact_inventory_contract(
+        directory, artifacts, marker)
+    if not inventory_valid:
+        return False, reason
     for artifact in artifacts:
         path = directory / artifact["path"]
         if not path.is_file() or path.stat().st_size != integer(
@@ -657,6 +685,7 @@ def run_rows(runs: list[dict[str, Any]]) -> tuple[
             "external_gini_tree_all_relevant_leaves_closed")) or integer(
                 result.get("external_gini_tree_open_leaf_count")) > 0
         inversion = lower > upper + TOL * max(1.0, abs(upper))
+        finite_bounds = math.isfinite(lower) and math.isfinite(upper)
         false_certificate = strict(run) and not close(lower, upper)
         startup_contract = (
             (arm == "HH" and truth(result.get(
@@ -676,7 +705,7 @@ def run_rows(runs: list[dict[str, Any]]) -> tuple[
         runner_lifecycle = runner_lifecycle_valid(state)
         certificate_endpoint_valid = strict_certificate or deadline_noncertificate
         audit_passed = all((
-            structural, open_preserved, not inversion,
+            structural, open_preserved, finite_bounds, not inversion,
             not false_certificate, startup_contract, proof_anchor_contract,
             arm_contract, truth(result.get("round36_anchor_safety_valid")),
             active_cover_valid(run), one_thread, runner_lifecycle,
@@ -720,7 +749,7 @@ def run_rows(runs: list[dict[str, Any]]) -> tuple[
             "K_equals_four": command_value(
                 command, "--frontier-intervals") == "4",
             "rho_frozen_source_contract": 0.01,
-            "finite_bounds": math.isfinite(lower) and math.isfinite(upper),
+            "finite_bounds": finite_bounds,
             "bound_inversion": inversion,
             "strict_certificate": strict_certificate,
             "strict_bound_equality_within_tolerance":

@@ -6,6 +6,7 @@ from __future__ import annotations
 import csv
 import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -27,6 +28,36 @@ def yes(value: object) -> bool:
 
 
 class Round36AnalysisTests(unittest.TestCase):
+    def test_artifact_inventory_contract_is_fail_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary) / "run"
+            directory.mkdir()
+            required = [path.relative_to(directory).as_posix() for path in
+                        analysis.common.required_artifacts(directory)]
+            artifacts = [{"path": path} for path in required]
+            marker = {"artifact_count": len(artifacts)}
+            self.assertEqual((True, "artifact_inventory_contract_valid"),
+                             analysis.artifact_inventory_contract(
+                                 directory, artifacts, marker))
+            cases = (
+                (artifacts + [artifacts[0]],
+                 {"artifact_count": len(artifacts) + 1},
+                 "artifact_manifest_duplicate_path"),
+                (artifacts[:-1], {"artifact_count": len(artifacts) - 1},
+                 "required_artifact_unlisted"),
+                (artifacts + [{"path": "../escape.txt"}],
+                 {"artifact_count": len(artifacts) + 1},
+                 "artifact_path_outside_run"),
+                (artifacts, {"artifact_count": len(artifacts) + 1},
+                 "artifact_count_mismatch"),
+            )
+            for rows, state, reason in cases:
+                with self.subTest(reason=reason):
+                    valid, actual = analysis.artifact_inventory_contract(
+                        directory, rows, state)
+                    self.assertFalse(valid)
+                    self.assertTrue(actual.startswith(reason))
+
     def test_deadline_noncertificate_gate_is_fail_closed(self) -> None:
         good = {
             "strict_certified_original_problem": False,
@@ -109,6 +140,7 @@ class Round36AnalysisTests(unittest.TestCase):
         self.assertTrue(all(yes(row[
             "certificate_or_graceful_deadline_endpoint_valid"])
             for row in audits))
+        self.assertTrue(all(yes(row["finite_bounds"]) for row in audits))
 
     def test_geometry_and_normalization_controls(self) -> None:
         geometry = rows("causal_geometry_comparison.csv")

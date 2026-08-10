@@ -153,7 +153,7 @@ def final_exactness_valid(path: Path) -> bool:
         "runner_required_artifacts_complete",
         "atomic_completion_marker_valid",
         "algorithmic_solve_state_not_resumed", "runner_lifecycle_valid",
-        "certificate_or_graceful_deadline_endpoint_valid",
+        "certificate_or_graceful_deadline_endpoint_valid", "finite_bounds",
     )
     return (
         len(rows) == 56
