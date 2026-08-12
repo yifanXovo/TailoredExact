@@ -1,0 +1,389 @@
+{
+  "baseline_equivalence_comparison_count": 14,
+  "baseline_equivalence_passed": true,
+  "clean_release_build_directory": "build_round36/official/gurobi",
+  "configured_gurobi_root": "D:/gurobi1302/win64",
+  "cpp_test_count": 15,
+  "cxx_compiler": "MSYS2 UCRT64 g++ 14.2.0",
+  "executable_path": "build_round36/official/gurobi/ExactEBRP.exe",
+  "executable_sha256": "52b85f0e9f1f89fc09e08866c1901a787abd0e7d24c2f02e4e5f8337f48ddbe8",
+  "gurobi_version": "13.0.2",
+  "passed": true,
+  "python_test_script_count": 21,
+  "records": [
+    {
+      "command": [
+        "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "-S",
+        "E:\\codes\\ExactEBRP",
+        "-B",
+        "E:\\codes\\ExactEBRP\\build_round36\\official\\gurobi",
+        "-G",
+        "MinGW Makefiles",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe",
+        "-DCMAKE_MAKE_PROGRAM=D:/msys64/ucrt64/bin/mingw32-make.exe",
+        "-DEXACT_EBRP_ENABLE_GUROBI=ON",
+        "-DGUROBI_ROOT=D:/gurobi1302/win64"
+      ],
+      "name": "configure_gurobi",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_configure_gurobi.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_configure_gurobi.stdout.log",
+      "stdout_sha256": "6d36666667cceabedccee83499e3e61fa125da7403ca0b5002aa95ae74144d96",
+      "wall_seconds": 0.375
+    },
+    {
+      "command": [
+        "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "--build",
+        "E:\\codes\\ExactEBRP\\build_round36\\official\\gurobi",
+        "-j",
+        "4"
+      ],
+      "name": "build_gurobi",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_gurobi.stderr.log",
+      "stderr_sha256": "484e06ea4674e39f54642ca1b2bcf78771635ee07da3a8bf0b7b302278dd9081",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_gurobi.stdout.log",
+      "stdout_sha256": "910c4fb988c0cefbeec529aa906a97b019c516e2b04c7def5ed2fb007d474b52",
+      "wall_seconds": 269.68800000008196
+    },
+    {
+      "command": [
+        "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+        "--test-dir",
+        "E:\\codes\\ExactEBRP\\build_round36\\official\\gurobi",
+        "--output-on-failure"
+      ],
+      "name": "ctest_gurobi",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_ctest_gurobi.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_ctest_gurobi.stdout.log",
+      "stdout_sha256": "29a33fa6d06c052bd39add74835682656646e14c65a9c7aacd5f95affbf5b9f6",
+      "wall_seconds": 1.0780000006780028
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round20_regression_tests.py"
+      ],
+      "name": "python_round20_regression_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round20_regression_tests.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round20_regression_tests.stdout.log",
+      "stdout_sha256": "ff38a6a3a7be400d55e37bb37741837928403071e7294dd22d794a4db4300d92",
+      "wall_seconds": 0.3119999999180436
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round22_runner_integrity_tests.py"
+      ],
+      "name": "python_round22_runner_integrity_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round22_runner_integrity_tests.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round22_runner_integrity_tests.stdout.log",
+      "stdout_sha256": "4b47e3b1f44e10a9948903eb9d0401cbd9f52c2b9a4755598ed051f5cc4ee4ad",
+      "wall_seconds": 0.09400000050663948
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round23_final_evidence_tests.py"
+      ],
+      "name": "python_round23_final_evidence_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round23_final_evidence_tests.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round23_final_evidence_tests.stdout.log",
+      "stdout_sha256": "46b46346eefedf216015f9fcbd6165c4ec1629d62d4b7b0f95194759d627ae38",
+      "wall_seconds": 0.5779999997466803
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round23_moderate4301_forensic_tests.py"
+      ],
+      "name": "python_round23_moderate4301_forensic_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round23_moderate4301_forensic_tests.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round23_moderate4301_forensic_tests.stdout.log",
+      "stdout_sha256": "5a6c561d2ad7d8e853e0ca4805e694840fe145835c12fc7e46f88e233b1cece7",
+      "wall_seconds": 0.5159999998286366
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round23_runner_integrity_tests.py"
+      ],
+      "name": "python_round23_runner_integrity_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round23_runner_integrity_tests.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round23_runner_integrity_tests.stdout.log",
+      "stdout_sha256": "df7c89459118e90242f7c06901051919c3acb0161e4a03b40dd2d98be6b4bb75",
+      "wall_seconds": 0.04700000025331974
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round25_protocol_tests.py"
+      ],
+      "name": "python_round25_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round25_protocol_tests.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round25_protocol_tests.stdout.log",
+      "stdout_sha256": "e9fd4b368eff0c2d2d29f58a29556036d4b96664ac72eec1587c8e1587f46acc",
+      "wall_seconds": 0.1880000000819564
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round26_protocol_tests.py"
+      ],
+      "name": "python_round26_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round26_protocol_tests.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round26_protocol_tests.stdout.log",
+      "stdout_sha256": "8490c87bf8d2d157b497c0ddf9417a2ea2e2f28af628f2fbc80b3d5792afb480",
+      "wall_seconds": 0.09300000034272671
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round27_protocol_tests.py"
+      ],
+      "name": "python_round27_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round27_protocol_tests.stderr.log",
+      "stderr_sha256": "deba66a310fc6633d3d8451f5b84c8008f6c759cbddb73525fd789df08b79f68",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round27_protocol_tests.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wall_seconds": 0.10900000017136335
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round28_protocol_tests.py"
+      ],
+      "name": "python_round28_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round28_protocol_tests.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round28_protocol_tests.stdout.log",
+      "stdout_sha256": "cfb9e0d0288c50e6d758da145f1d4e939cb084b44f6ec214c1d210a54d5df7ea",
+      "wall_seconds": 0.046999999321997166
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round29_protocol_tests.py"
+      ],
+      "name": "python_round29_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round29_protocol_tests.stderr.log",
+      "stderr_sha256": "206ef4df3d3749e02908d02753579842a942c7311d489cc53e03b374b45cb064",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round29_protocol_tests.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wall_seconds": 0.1560000004246831
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round30_c0_parser_tests.py"
+      ],
+      "name": "python_round30_c0_parser_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round30_c0_parser_tests.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round30_c0_parser_tests.stdout.log",
+      "stdout_sha256": "69591405dc39f8f9decf5fb5fbbd8047afbb6b50b3124e8c62f90d313c6cb6e1",
+      "wall_seconds": 0.3600000003352761
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round30_protocol_tests.py"
+      ],
+      "name": "python_round30_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round30_protocol_tests.stderr.log",
+      "stderr_sha256": "0df10976ccd82e259847b457e472dce65c5eba2f5244207b997816c8a780b394",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round30_protocol_tests.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wall_seconds": 0.11000000033527613
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round30_trace_tests.py"
+      ],
+      "name": "python_round30_trace_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round30_trace_tests.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round30_trace_tests.stdout.log",
+      "stdout_sha256": "f0f4fa430d33d17dfcc0820e0aadfc2577f23ffd978763272f65638d66879b87",
+      "wall_seconds": 0.07899999991059303
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round31_protocol_tests.py"
+      ],
+      "name": "python_round31_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round31_protocol_tests.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round31_protocol_tests.stdout.log",
+      "stdout_sha256": "d2518dbb79cb7673f9753675512f87f6e38743b0cecac4f77f6d2a1617ab99d2",
+      "wall_seconds": 0.06199999991804361
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round32_protocol_tests.py"
+      ],
+      "name": "python_round32_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round32_protocol_tests.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round32_protocol_tests.stdout.log",
+      "stdout_sha256": "99639c381fd71fde53a988973cf83060b40b95bcf27b9cc53a88e362682c7705",
+      "wall_seconds": 0.06300000008195639
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round32_runner_trace_tests.py"
+      ],
+      "name": "python_round32_runner_trace_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round32_runner_trace_tests.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round32_runner_trace_tests.stdout.log",
+      "stdout_sha256": "aba30d1fb8875ebb09c5da2c6c5ba77ba07fb8716a6d1303ddc24ff15ca25c89",
+      "wall_seconds": 0.1560000004246831
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round33_protocol_tests.py"
+      ],
+      "name": "python_round33_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round33_protocol_tests.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round33_protocol_tests.stdout.log",
+      "stdout_sha256": "c7d1ed33a9f5abb702339122cdf20d62d17fd899a02dc7df2d3c7ec9008480f6",
+      "wall_seconds": 0.0939999995753169
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round33_runner_tests.py"
+      ],
+      "name": "python_round33_runner_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round33_runner_tests.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round33_runner_tests.stdout.log",
+      "stdout_sha256": "bb15626dfaa1baeb33c9f5b3a5cdef74ed4a2f790b60ae1201c427b8b688a5c7",
+      "wall_seconds": 0.09300000034272671
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round34_protocol_tests.py"
+      ],
+      "name": "python_round34_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round34_protocol_tests.stderr.log",
+      "stderr_sha256": "731497fe438734e5d846eb72a6e10623269b7612b89b976353e7d67fb6c7b7ef",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round34_protocol_tests.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wall_seconds": 0.07799999974668026
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round35_protocol_tests.py"
+      ],
+      "name": "python_round35_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round35_protocol_tests.stderr.log",
+      "stderr_sha256": "deba66a310fc6633d3d8451f5b84c8008f6c759cbddb73525fd789df08b79f68",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round35_protocol_tests.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wall_seconds": 0.10900000017136335
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP\\tests\\round36_protocol_tests.py"
+      ],
+      "name": "python_round36_protocol_tests",
+      "passed": true,
+      "return_code": 0,
+      "stderr_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round36_protocol_tests.stderr.log",
+      "stderr_sha256": "731497fe438734e5d846eb72a6e10623269b7612b89b976353e7d67fb6c7b7ef",
+      "stdout_path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round36_protocol_tests.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wall_seconds": 0.0939999995753169
+    }
+  ],
+  "round_id": 36,
+  "schema": "round36-stage-a-build-tests-v1"
+}

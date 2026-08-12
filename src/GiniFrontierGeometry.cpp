@@ -35,6 +35,98 @@ std::vector<GiniIntervalGeometry> makeLegacyFrontierIntervals(
     return intervals;
 }
 
+AnchorGridDecomposition makeProofRelevantAnchorGrid(
+    double proof_lower,
+    double proof_upper,
+    double anchor_grid_upper,
+    int interval_count,
+    double tolerance) {
+    AnchorGridDecomposition result;
+    result.proof_lower = proof_lower;
+    result.proof_upper = proof_upper;
+    result.anchor_grid_upper = anchor_grid_upper;
+    const double tol = std::max(0.0, tolerance);
+    if (!std::isfinite(proof_lower) || !std::isfinite(proof_upper) ||
+        !std::isfinite(anchor_grid_upper) || interval_count < 1 ||
+        proof_lower < -tol || proof_upper < proof_lower - tol ||
+        anchor_grid_upper < -tol) {
+        result.reason = "invalid_anchor_grid_inputs";
+        return result;
+    }
+    if (anchor_grid_upper + tol < proof_upper) {
+        result.reason = "unsafe_anchor_grid_does_not_cover_proof_range";
+        return result;
+    }
+
+    result.anchor_cells = makeLegacyFrontierIntervals(
+        0.0, anchor_grid_upper, interval_count);
+    result.anchor_endpoints.reserve(
+        static_cast<std::size_t>(interval_count + 1));
+    result.anchor_endpoints.push_back(0.0);
+    for (const GiniIntervalGeometry& cell : result.anchor_cells) {
+        result.anchor_endpoints.push_back(cell.upper);
+    }
+    for (std::size_t index = 0; index < result.anchor_cells.size(); ++index) {
+        const GiniIntervalGeometry& cell = result.anchor_cells[index];
+        const GiniIntervalGeometry active{
+            std::max(cell.lower, proof_lower),
+            std::min(cell.upper, proof_upper)
+        };
+        if (active.upper <= active.lower + tol) continue;
+        result.active_intervals.push_back(active);
+        result.active_anchor_cell_indices.push_back(static_cast<int>(index));
+        if (std::fabs(active.lower - cell.lower) > tol ||
+            std::fabs(active.upper - cell.upper) > tol) {
+            ++result.truncated_active_interval_count;
+        }
+    }
+    if (result.active_intervals.empty()) {
+        result.reason = proof_upper <= proof_lower + tol
+            ? "empty_proof_range"
+            : "anchor_intersection_produced_no_active_intervals";
+        return result;
+    }
+    std::string coverage_reason;
+    if (!exactIntervalCoverage(
+            {proof_lower, proof_upper}, result.active_intervals, tol,
+            &coverage_reason)) {
+        result.reason = "active_anchor_intersection_coverage_failed:" +
+            coverage_reason;
+        return result;
+    }
+    result.valid = true;
+    result.reason = "safe_exact_proof_relevant_anchor_grid";
+    return result;
+}
+
+bool round36ProofAnchorLaunchContractValid(
+    bool startup_pair_verified,
+    double recorded_startup_proof,
+    double current_verified_proof,
+    double decomposition_anchor,
+    double tolerance) {
+    if (!startup_pair_verified ||
+        !std::isfinite(recorded_startup_proof) ||
+        !std::isfinite(current_verified_proof) ||
+        !std::isfinite(decomposition_anchor) ||
+        recorded_startup_proof <= 0.0 || current_verified_proof <= 0.0 ||
+        decomposition_anchor <= 0.0) {
+        return false;
+    }
+    const double scaled_tolerance = std::max(0.0, tolerance) * std::max({
+        1.0,
+        std::fabs(recorded_startup_proof),
+        std::fabs(current_verified_proof),
+        std::fabs(decomposition_anchor)
+    });
+    return current_verified_proof <=
+               recorded_startup_proof + scaled_tolerance &&
+           decomposition_anchor + scaled_tolerance >=
+               recorded_startup_proof &&
+           decomposition_anchor + scaled_tolerance >=
+               current_verified_proof;
+}
+
 bool legacyAdaptiveSplitEligible(double lower,
                                  double upper,
                                  int depth,

@@ -10,6 +10,39 @@ struct GiniIntervalGeometry {
     double upper = 0.0;
 };
 
+// A launch-frozen anchor grid and its intersection with the proof-relevant
+// Gini range.  Anchor cells are geometry only: proof cutoffs and certificates
+// continue to use an independently verified proof incumbent.
+struct AnchorGridDecomposition {
+    bool valid = false;
+    double proof_lower = 0.0;
+    double proof_upper = 0.0;
+    double anchor_grid_upper = 0.0;
+    std::vector<double> anchor_endpoints;
+    std::vector<GiniIntervalGeometry> anchor_cells;
+    std::vector<GiniIntervalGeometry> active_intervals;
+    std::vector<int> active_anchor_cell_indices;
+    int truncated_active_interval_count = 0;
+    std::string reason = "not_evaluated";
+};
+
+AnchorGridDecomposition makeProofRelevantAnchorGrid(
+    double proof_lower,
+    double proof_upper,
+    double anchor_grid_upper,
+    int interval_count,
+    double tolerance);
+
+// The Round 36 startup pair freezes a proof incumbent and a (possibly wider)
+// decomposition anchor.  A subsequently verified, stronger proof incumbent is
+// safe: it only shrinks the proof-relevant range covered by the frozen anchor.
+bool round36ProofAnchorLaunchContractValid(
+    bool startup_pair_verified,
+    double recorded_startup_proof,
+    double current_verified_proof,
+    double decomposition_anchor,
+    double tolerance);
+
 enum class CplexReplicaSplitPhase {
     InitialPartition,
     AdaptiveRefinement,

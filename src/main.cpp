@@ -102,6 +102,8 @@ void usage() {
         << "[--primal-heuristic none|greedy|hga-tgbc|best-of-all] [--primal-heuristic-seconds <seconds>] "
         << "[--primal-heuristic-seed <seed>] [--primal-heuristic-runs <N>] "
         << "[--round34-c6-startup-variant hga-full|hga-light-1000|simple-start] "
+        << "[--round36-c6-causal-arm off|hh|ss|bw-p|bw-a] "
+        << "[--round36-c6-split-normalization proof|anchor] "
         << "[--heuristic-candidates-csv <path>] "
         << "[--large-instance-mode auto|off|force] [--large-lb-mode none|inventory-only|movement-projection|column-pool-relaxation|auto] "
         << "[--pricing-engine exact-label|ng-dssr|hybrid] "
@@ -1171,6 +1173,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--primal-heuristic-no-improve-generations") opt.primal_heuristic_no_improve_generations = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-generation-log") opt.primal_heuristic_generation_log = requireValue(i, argc, argv);
         else if (arg == "--round34-c6-startup-variant") opt.round34_c6_startup_variant = requireValue(i, argc, argv);
+        else if (arg == "--round36-c6-causal-arm") opt.round36_c6_causal_arm = requireValue(i, argc, argv);
+        else if (arg == "--round36-c6-split-normalization") opt.round36_c6_split_normalization = requireValue(i, argc, argv);
         else if (arg == "--heuristic-candidates-csv") opt.heuristic_candidates_csv = requireValue(i, argc, argv);
         else if (arg == "--large-instance-mode") opt.large_instance_mode = requireValue(i, argc, argv);
         else if (arg == "--large-lb-mode") opt.large_lb_mode = requireValue(i, argc, argv);
@@ -1465,12 +1469,43 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     opt.primal_heuristic_stop = lowerAscii(opt.primal_heuristic_stop);
     opt.round34_c6_startup_variant =
         lowerAscii(opt.round34_c6_startup_variant);
+    opt.round36_c6_causal_arm = lowerAscii(opt.round36_c6_causal_arm);
+    opt.round36_c6_split_normalization =
+        lowerAscii(opt.round36_c6_split_normalization);
     if (opt.round34_c6_startup_variant != "hga-full" &&
         opt.round34_c6_startup_variant != "hga-light-1000" &&
         opt.round34_c6_startup_variant != "simple-start") {
         throw std::runtime_error(
             "Unsupported --round34-c6-startup-variant: " +
             opt.round34_c6_startup_variant);
+    }
+    if (opt.round36_c6_causal_arm != "off" &&
+        opt.round36_c6_causal_arm != "hh" &&
+        opt.round36_c6_causal_arm != "ss" &&
+        opt.round36_c6_causal_arm != "bw-p" &&
+        opt.round36_c6_causal_arm != "bw-a") {
+        throw std::runtime_error(
+            "Unsupported --round36-c6-causal-arm: " +
+            opt.round36_c6_causal_arm);
+    }
+    if (opt.round36_c6_split_normalization != "proof" &&
+        opt.round36_c6_split_normalization != "anchor") {
+        throw std::runtime_error(
+            "Unsupported --round36-c6-split-normalization: " +
+            opt.round36_c6_split_normalization);
+    }
+    if ((opt.round36_c6_causal_arm == "off" ||
+         opt.round36_c6_causal_arm == "hh" ||
+         opt.round36_c6_causal_arm == "ss" ||
+         opt.round36_c6_causal_arm == "bw-p") &&
+        opt.round36_c6_split_normalization != "proof") {
+        throw std::runtime_error(
+            "Round 36 off/HH/SS/BW-P requires proof normalization");
+    }
+    if (opt.round36_c6_causal_arm == "bw-a" &&
+        opt.round36_c6_split_normalization != "anchor") {
+        throw std::runtime_error(
+            "Round 36 BW-A requires anchor normalization");
     }
     if (opt.primal_heuristic_stop != "generation-stagnation") {
         opt.primal_heuristic_stop = "legacy-time";
@@ -10422,6 +10457,9 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.method = "gcap-frontier";
     initializeScalabilityFields(instance, opt, result);
     applyRunConfigSnapshot(buildRunConfigSnapshot(instance, opt), result);
+    result.round36_c6_causal_arm = opt.round36_c6_causal_arm;
+    result.round36_c6_split_normalization =
+        opt.round36_c6_split_normalization;
     ebrp::PricingOptions bpc_pricing_options;
     applyPricingOptionsFromSolve(instance, opt, bpc_pricing_options);
     result.bpc_pricing_engine_requested = bpc_pricing_options.pricing_engine;
@@ -10961,10 +10999,40 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             + std::to_string(frontier_route_pool.dropped_by_cap));
     };
     bool verified_archive_incumbent_selected = false;
+    auto round36StartupVerified = [](const PaperPrimalHeuristicResult& value) {
+        return value.found && value.verification.feasible &&
+            value.verification.original_solution_feasible &&
+            value.verification.original_objective_recomputed &&
+            value.verification.errors.empty() &&
+            std::isfinite(value.verification.objective);
+    };
+    auto recordRound36Startup = [&](const PaperPrimalHeuristicResult& value,
+                                    const std::string& kind) {
+        if (opt.round36_c6_causal_arm == "off") return;
+        const bool verified = round36StartupVerified(value);
+        if (kind == "hga") {
+            result.round36_hga_start_attempted = true;
+            result.round36_hga_start_verified = verified;
+            result.round36_hga_start_seconds = value.runtime_seconds;
+            result.round36_hga_start_objective = verified
+                ? value.verification.objective : 0.0;
+        } else {
+            result.round36_simple_start_attempted = true;
+            result.round36_simple_start_verified = verified;
+            result.round36_simple_start_seconds = value.runtime_seconds;
+            result.round36_simple_start_objective = verified
+                ? value.verification.objective : 0.0;
+        }
+    };
     if (opt.primal_heuristic != "none") {
         const auto heuristic_start = std::chrono::steady_clock::now();
         PaperPrimalHeuristicResult heuristic =
             runPaperPrimalHeuristic(instance, opt);
+        if (opt.primal_heuristic == "hga-tgbc") {
+            recordRound36Startup(heuristic, "hga");
+        } else if (opt.primal_heuristic == "greedy") {
+            recordRound36Startup(heuristic, "simple");
+        }
         result.hga_stop_mode = heuristic.hga_stop_mode;
         result.hga_total_generations = heuristic.hga_total_generations;
         result.hga_generations_since_improvement =
@@ -11004,6 +11072,74 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             std::chrono::duration<double>(
                 std::chrono::steady_clock::now() - heuristic_start).count()
             - heuristic.runtime_seconds;
+    }
+    if (opt.round36_c6_causal_arm == "bw-p" ||
+        opt.round36_c6_causal_arm == "bw-a") {
+        ebrp::SolveOptions simple_opt = opt;
+        simple_opt.primal_heuristic = "greedy";
+        simple_opt.primal_heuristic_explicit = true;
+        simple_opt.primal_heuristic_generation_log.clear();
+        simple_opt.primal_heuristic_phase_label =
+            "round36_secondary_simple_anchor";
+        PaperPrimalHeuristicResult simple =
+            runPaperPrimalHeuristic(instance, simple_opt);
+        recordRound36Startup(simple, "simple");
+        result.incumbent_generation_time_seconds += simple.runtime_seconds;
+        result.incumbent_candidates_tested += simple.candidates_tested;
+        result.incumbent_candidates_verified += simple.candidates_verified;
+        result.incumbent_candidates_rejected += simple.candidates_rejected;
+        for (const std::string& note : simple.notes) {
+            result.notes.push_back("Round 36 secondary SIMPLE: " + note);
+        }
+        if (round36StartupVerified(simple)) {
+            acceptIncumbentRoutes(
+                simple.routes,
+                "Round 36 paper primal heuristic greedy anchor candidate");
+        }
+    }
+    if (opt.round36_c6_causal_arm != "off") {
+        const bool hh = opt.round36_c6_causal_arm == "hh";
+        const bool ss = opt.round36_c6_causal_arm == "ss";
+        const bool bw = opt.round36_c6_causal_arm == "bw-p" ||
+            opt.round36_c6_causal_arm == "bw-a";
+        const bool startup_pair_valid =
+            (hh && result.round36_hga_start_verified) ||
+            (ss && result.round36_simple_start_verified) ||
+            (bw && result.round36_hga_start_verified &&
+             result.round36_simple_start_verified);
+        if (startup_pair_valid) {
+            if (hh) {
+                result.round36_proof_incumbent_launch =
+                    result.round36_hga_start_objective;
+                result.round36_decomposition_anchor_launch =
+                    result.round36_hga_start_objective;
+            } else if (ss) {
+                result.round36_proof_incumbent_launch =
+                    result.round36_simple_start_objective;
+                result.round36_decomposition_anchor_launch =
+                    result.round36_simple_start_objective;
+            } else {
+                result.round36_proof_incumbent_launch = std::min(
+                    result.round36_hga_start_objective,
+                    result.round36_simple_start_objective);
+                result.round36_decomposition_anchor_launch = std::max(
+                    result.round36_hga_start_objective,
+                    result.round36_simple_start_objective);
+            }
+            result.round36_relative_startup_incumbent_difference =
+                (result.round36_decomposition_anchor_launch -
+                 result.round36_proof_incumbent_launch) /
+                std::max(1e-12,
+                         std::fabs(result.round36_proof_incumbent_launch));
+            result.round36_anchor_safety_valid =
+                result.round36_decomposition_anchor_launch + 1e-7 >=
+                    result.round36_proof_incumbent_launch;
+        } else {
+            result.round36_anchor_safety_valid = false;
+            result.notes.push_back(
+                "Round 36 startup pair failed independent verification; "
+                "the experimental exact-tree contract will reject the run");
+        }
     }
     if (opt.exact_phase_local_redecode_repair &&
         opt.primal_heuristic != "none" &&

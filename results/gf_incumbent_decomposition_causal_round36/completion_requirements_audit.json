@@ -1,0 +1,256 @@
+{
+  "all_requirements_achieved": true,
+  "allow_incomplete": false,
+  "branch": "codex/round36-incumbent-decomposition-causal-study",
+  "completed_official_rows": 56,
+  "draft_pr_number": 83,
+  "expected_official_rows": 56,
+  "head": "691965111cfa210fb6f91cc999d2f902632ab2d5",
+  "requirement_count": 34,
+  "requirements": [
+    {
+      "detail": "",
+      "evidence": "git branch --show-current = codex/round36-incumbent-decomposition-causal-study",
+      "requirement": "dedicated Round 36 branch is active",
+      "section": "0_git_workspace",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "origin = https://github.com/yifanXovo/TailoredExact.git",
+      "requirement": "existing GitHub remote is used",
+      "section": "0_git_workspace",
+      "status": "achieved"
+    },
+    {
+      "detail": "592/592 entries preserved",
+      "evidence": "Round 35 inherited preexisting_worktree_manifest.csv",
+      "requirement": "pre-existing user work is preserved",
+      "section": "0_git_workspace",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "stage_a_build_and_tests.json",
+      "requirement": "clean licensed build and relevant tests pass",
+      "section": "1_default_c6",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "baseline_equivalence_audit.csv",
+      "requirement": "default-off and explicit HH are decision-equivalent",
+      "section": "1_default_c6",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "include/Instance.hpp",
+      "requirement": "new causal controls default to off/proof",
+      "section": "1_default_c6",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "PaperExternalGiniTree.cpp; main.cpp",
+      "requirement": "U_proof and U_anchor are explicit and separately used",
+      "section": "2_proof_anchor",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "semantic_separation_audit.json",
+      "requirement": "semantic dataflow audit excludes anchor from proof consumers",
+      "section": "2_proof_anchor",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "GiniFrontierGeometry.cpp; round36_causal_tests",
+      "requirement": "anchor grid intersects the proof-relevant range",
+      "section": "3_anchor_coverage",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "PaperExternalGiniTree.cpp; split_decision_ledger.csv",
+      "requirement": "proof and anchor denominator sources are explicit",
+      "section": "4_split_normalization",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "main.cpp; per_arm_results.csv",
+      "requirement": "HGA and SIMPLE starts are independently verified",
+      "section": "5_startup_values",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "round36_official_matrix.csv",
+      "requirement": "HH/SS/BW-P/BW-A are balanced and explicit",
+      "section": "6_causal_arms",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "frozen_causal_panel.csv",
+      "requirement": "14-row representative panel is predeclared",
+      "section": "7_frozen_panel",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "round36_frozen_manifest.json; official_start_record.json",
+      "requirement": "freeze identity precedes and matches official start",
+      "section": "7_frozen_panel",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "tests/round36_causal_tests.cpp; stage_a_build_and_tests.json",
+      "requirement": "anchor safety/equivalence/certificate tests are included",
+      "section": "8_stage_a",
+      "status": "achieved"
+    },
+    {
+      "detail": "56/56 complete; first missing=[]",
+      "evidence": "runs/*/completion_marker.json",
+      "requirement": "all 56 official rows are checksum-complete",
+      "section": "9_stage_b",
+      "status": "achieved"
+    },
+    {
+      "detail": "56/56 final exactness rows",
+      "evidence": "exactness_certificate_audit.csv",
+      "requirement": "all official rows pass lifecycle, exactness, and certificate audits",
+      "section": "9_stage_b",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "derived causal CSV package",
+      "requirement": "required per-arm, trajectory, split, target and closure metrics exist",
+      "section": "10_metrics",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "final_audit_decision.json",
+      "requirement": "Questions A-D have explicit machine-readable answers",
+      "section": "11_causal_questions",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "analysis_gate_definition.md; final_audit_decision.json",
+      "requirement": "geometry and normalization gates are evaluated",
+      "section": "12_decision_gates",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "Stage C frozen design, comparisons, and checksum manifest",
+      "requirement": "positive mechanism receives separately frozen broader validation",
+      "section": "13_stage_c",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "round36_frozen_manifest.json; command freeze",
+      "requirement": "rho remains fixed at 0.01 with no sweep",
+      "section": "14_rho",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "round36_command_freeze.json",
+      "requirement": "K remains four in every official command",
+      "section": "15_K",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "main.cpp; explicit arm matrix",
+      "requirement": "no V/M/scenario startup dispatch is introduced",
+      "section": "16_no_dispatch",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "main.cpp; round36_command_freeze.json",
+      "requirement": "HGA-LIGHT is not mixed into this causal study",
+      "section": "17_no_hga_light_mixing",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "round36_command_freeze.json; runner_row_summary.csv",
+      "requirement": "frozen commands and completed rows exclude warm/resume contamination",
+      "section": "17_reproducibility",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "semantic_separation_audit.json; PaperExternalGiniTree.cpp",
+      "requirement": "split and native-action control is hardware-independent and unsliced",
+      "section": "17_reproducibility",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "theory_and_mechanism_note.md",
+      "requirement": "three requested safety propositions are documented",
+      "section": "18_mathematics",
+      "status": "achieved"
+    },
+    {
+      "detail": "missing=[]",
+      "evidence": "final evidence files",
+      "requirement": "full compact evidence package is present",
+      "section": "19_reporting",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "evidence_package_summary.json",
+      "requirement": "repository evidence respects the file-size preflight",
+      "section": "19_reporting",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "final_audit_decision.json; final_report.md",
+      "requirement": "one required research conclusion is recorded",
+      "section": "20_conclusion",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "HEAD=691965111cfa210fb6f91cc999d2f902632ab2d5; upstream=691965111cfa210fb6f91cc999d2f902632ab2d5",
+      "requirement": "current committed branch is pushed",
+      "section": "21_git_completion",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "github_pr_record.json; GitHub connector",
+      "requirement": "draft PR 83 is open and unmerged",
+      "section": "21_git_completion",
+      "status": "achieved"
+    },
+    {
+      "detail": "",
+      "evidence": "recorded=691965111cfa210fb6f91cc999d2f902632ab2d5; HEAD=691965111cfa210fb6f91cc999d2f902632ab2d5; HEAD^=6419643fdcfb98648e9ff5b003fba8e2f1419cbf",
+      "requirement": "draft PR record attests the current head or its attestation parent",
+      "section": "21_git_completion",
+      "status": "achieved"
+    }
+  ],
+  "round_id": 36,
+  "schema": "round36-completion-requirements-audit-v1",
+  "status_counts": {
+    "achieved": 34
+  },
+  "upstream": "691965111cfa210fb6f91cc999d2f902632ab2d5"
+}

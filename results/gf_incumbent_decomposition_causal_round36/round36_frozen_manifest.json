@@ -1,0 +1,72 @@
+{
+  "arms": [
+    "HH",
+    "SS",
+    "BW-P",
+    "BW-A"
+  ],
+  "command_freeze_path": "results/gf_incumbent_decomposition_causal_round36/round36_command_freeze.json",
+  "command_freeze_sha256": "e08cca943cf26ad73d7a9e99cc672ee32cef55f33d2c63e3c5ae0ccf2f8fabd9",
+  "frozen_artifacts": {
+    "baseline_equivalence": {
+      "path": "results/gf_incumbent_decomposition_causal_round36/baseline_equivalence_audit.json",
+      "sha256": "f32e98c068045f3f5f101fec363be2807d0d5c9cfdf68cf161961a10ff6d8550"
+    },
+    "panel_csv": {
+      "path": "results/gf_incumbent_decomposition_causal_round36/frozen_causal_panel.csv",
+      "sha256": "40ee478d9cc26456f925670b6e2159dedd8132b3fe567c43a6c2ecbde37ccc88"
+    },
+    "panel_json": {
+      "path": "results/gf_incumbent_decomposition_causal_round36/frozen_causal_panel.json",
+      "sha256": "e6c9d828e1eabaf723462395c6bf1fa989093b9d8c848ccbd0c164dc0b83eb37"
+    },
+    "protocol": {
+      "path": "results/gf_incumbent_decomposition_causal_round36/round36_protocol.md",
+      "sha256": "17aca38367cf57f740964f09922b3bd5f09a97fcbdb818ca6f72aa63f6c50114"
+    },
+    "source_of_truth": {
+      "path": "results/gf_incumbent_decomposition_causal_round36/source_of_truth.md",
+      "sha256": "61f59a97daf1731961ae6c30dcbb00c25d97d2631dd5055ab8a97a1c94847378"
+    },
+    "stage_a": {
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "ac8c1b3dfdf9cdb3e7f1dc281b01526be01a027c49c7c410b60fec959a571986"
+    },
+    "theory": {
+      "path": "results/gf_incumbent_decomposition_causal_round36/theory_and_mechanism_note.md",
+      "sha256": "ec8163febb8097f3f33e0308161404da08b0db9a287c2dd0035326d5e7026761"
+    }
+  },
+  "frozen_before_causal_results": true,
+  "gurobi_executable_path": "build_round36/official/gurobi/ExactEBRP.exe",
+  "gurobi_executable_sha256": "52b85f0e9f1f89fc09e08866c1901a787abd0e7d24c2f02e4e5f8337f48ddbe8",
+  "gurobi_version": "13.0.2",
+  "official_matrix_path": "results/gf_incumbent_decomposition_causal_round36/round36_official_matrix.csv",
+  "official_matrix_sha256": "ecc92886a567e70239904b8e7ac7ee15ee6398a7f394103845ac3981094d3af9",
+  "panel_row_count": 14,
+  "round_id": 36,
+  "row_count": 56,
+  "schema": "round36-frozen-manifest-v1",
+  "source_base_commit": "73f03b69e33d7622f023e0a4cb5ab607ba57d712",
+  "source_file_sha256": {
+    "CMakeLists.txt": "eac40f400d1ab8466528c508cfcf3085c9ae382955d8ac9c00565969da66a076",
+    "include/GiniFrontierGeometry.hpp": "394e9cb532f1142ef07dd77d1f89c92f1495da144455b2967d47d877fc82aec4",
+    "include/Instance.hpp": "e9b231000e76f558204e4890cd93089a29862d5246b2fc091a880b09c045f26c",
+    "include/PaperExternalGiniTree.hpp": "0448cf562ddd71e486102afb492cf9d1a27ff4dcef307b3c02f245827b6fcc25",
+    "include/Result.hpp": "da63aa8684d06677987b8ad0db360ae778c295252621696b138e5840fed7c6da",
+    "scripts/freeze_round36.py": "32a872835b3cded6c002df3f43429baec2c9699ceeb3332686579663f27eb280",
+    "scripts/launch_round36_licensed.py": "5a73eee7c8c4b76af021a7989c6345808da8d3335bf375eafb201071aa049ee3",
+    "scripts/prepare_round36.py": "112adfd057eacd440f674b9540fae33736a6971ea86807a84278933a53168a28",
+    "scripts/round36_common.py": "39aa20bbb0a1651679f2098ee4ab870bf1abf150ccec1fbabd06e9ff8fed3dae",
+    "scripts/run_round36_baseline_equivalence.py": "a72137b17809044846d8b0d591720e69c324f53628059c758e0036ae5e81f96c",
+    "scripts/run_round36_experiments.py": "3cd8a4ac00e483e6ad6075cc1bfeea3bf6dd3494967b302c0829e4665ab72e0f",
+    "scripts/run_round36_stage_a.py": "9baea1827670f95bead9d5cb0c25d23449146ccc58e1f1fe6f78663390f2cd44",
+    "src/GiniFrontierGeometry.cpp": "6dd817e1ecc5a5d6b0563798501816780e302657024b37ebf5093656d3c34af7",
+    "src/PaperExternalGiniTree.cpp": "57c274a529f19e1b2d32010d2b10237e850f4a336791f08b7ecb1f01f05e8b94",
+    "src/Result.cpp": "e235ae9ddfd379e49b1eead97f1a17269d0411ac972bf28cfcae770ffdcada74",
+    "src/main.cpp": "07c6e287f465acde7438003833df59108f00c33ae9268e6df69578229e24fa50",
+    "tests/round36_causal_tests.cpp": "191f18cca8b8cf42a07f8b4d233f30888f36b09d155f05126f2404c1f38c7f29",
+    "tests/round36_protocol_tests.py": "2ea7208d8acf785c9b986c8767a60c12ad8cf4d3f3acd1fc11c525f257e83030"
+  },
+  "source_tree_fingerprint": "244a8d662714b952f96e0967f01242206ff6cef6f96b85392425d30f66036878"
+}

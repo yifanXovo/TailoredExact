@@ -1,0 +1,44 @@
+{
+  "accepted_relation": "current_verified_proof <= recorded_startup_proof + tolerance",
+  "anchor_requirement": "decomposition_anchor covers recorded and current proof incumbents",
+  "automatic_promotion_performed": false,
+  "baseline_equivalence": {
+    "all_identical": true,
+    "comparison_count": 14,
+    "comparison_csv_sha256": "0ba6e664efd7dffb0d33a6fdf9d595f362159efd87a693085426f67f0ccb3442",
+    "instance_id": "V12_M1",
+    "process_cap_seconds": 300
+  },
+  "ctest": {
+    "return_code": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "859615899a5cef095096a1ded0766dd9fe7fe0f8e9fe9691dec57a5bb863d382",
+    "test_count": 15,
+    "wall_seconds": 0.2810000004246831
+  },
+  "executables_are_distinct": true,
+  "invalidated_attempt_record_sha256": "7c1f57ee51eec4d682055f278ea856eb9b63e57f41a4ee7966fc90d89ff5b8d2",
+  "passed": true,
+  "reason": "a stronger independently verified current proof incumbent shrinks the proof-relevant range and remains covered by the frozen anchor",
+  "regression_cases": {
+    "anchor_below_recorded_proof_rejected": true,
+    "equal_current_proof_accepted": true,
+    "stronger_current_proof_accepted": true,
+    "unverified_startup_pair_rejected": true,
+    "weaker_current_proof_rejected": true
+  },
+  "rejected_relation": "current_verified_proof > recorded_startup_proof + tolerance",
+  "round_id": 36,
+  "schema": "round36-stage-c-contract-fix-audit-v1",
+  "scope": "Round36 causal launch validation only",
+  "source_sha256": {
+    "include/GiniFrontierGeometry.hpp": "0c8d550ee690a27fb5fc7fea705dd619743327f8309e518a8a883daf19114f40",
+    "src/GiniFrontierGeometry.cpp": "c3b9debf849532d7433a2b91c04306b2f0eb92b2f5f32ab937d7d7de415efdab",
+    "src/PaperExternalGiniTree.cpp": "7942071b5b5cd6de855241084ced5ad4cd17c6fb3e1d1d3a792e764cc2370620",
+    "tests/round36_causal_tests.cpp": "3c7334fdce148b7bf63c34f9ae29c0ceeb4e4ae505e4a43c00bf1a0f14300d47"
+  },
+  "stage": "C",
+  "stage_b_executable_sha256": "52b85f0e9f1f89fc09e08866c1901a787abd0e7d24c2f02e4e5f8337f48ddbe8",
+  "stage_b_executable_unchanged": true,
+  "stage_c_executable_sha256": "b13d1f91835dd706abfc06ea561a6c6f78e902e36448ed76de44db7a27e6db59"
+}

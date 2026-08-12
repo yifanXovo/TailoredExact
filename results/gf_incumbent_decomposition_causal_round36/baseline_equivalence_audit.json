@@ -1,0 +1,1059 @@
+{
+  "comparisons": [
+    {
+      "baseline_sha256": "1ff31efdb598b62ce2428f8d0f87bf78a3d46b9f0f22c0f89fe0bc7d71d858cc",
+      "candidate": "round36_default_off",
+      "candidate_sha256": "1ff31efdb598b62ce2428f8d0f87bf78a3d46b9f0f22c0f89fe0bc7d71d858cc",
+      "component": "initial_intervals",
+      "identical": true
+    },
+    {
+      "baseline_sha256": "1ff31efdb598b62ce2428f8d0f87bf78a3d46b9f0f22c0f89fe0bc7d71d858cc",
+      "candidate": "round36_hh",
+      "candidate_sha256": "1ff31efdb598b62ce2428f8d0f87bf78a3d46b9f0f22c0f89fe0bc7d71d858cc",
+      "component": "initial_intervals",
+      "identical": true
+    },
+    {
+      "baseline_sha256": "1d952c0ddaed37247a115dcc79f0c07adf8520fc57d122c1b36dba5f5a794baa",
+      "candidate": "round36_default_off",
+      "candidate_sha256": "1d952c0ddaed37247a115dcc79f0c07adf8520fc57d122c1b36dba5f5a794baa",
+      "component": "lp_bounds",
+      "identical": true
+    },
+    {
+      "baseline_sha256": "1d952c0ddaed37247a115dcc79f0c07adf8520fc57d122c1b36dba5f5a794baa",
+      "candidate": "round36_hh",
+      "candidate_sha256": "1d952c0ddaed37247a115dcc79f0c07adf8520fc57d122c1b36dba5f5a794baa",
+      "component": "lp_bounds",
+      "identical": true
+    },
+    {
+      "baseline_sha256": "3dc3cfdb36de849cf8adc7fb852f1113e1973258fe8b4385dfb3bc80cf0febe4",
+      "candidate": "round36_default_off",
+      "candidate_sha256": "3dc3cfdb36de849cf8adc7fb852f1113e1973258fe8b4385dfb3bc80cf0febe4",
+      "component": "controlling_leaf_sequence",
+      "identical": true
+    },
+    {
+      "baseline_sha256": "3dc3cfdb36de849cf8adc7fb852f1113e1973258fe8b4385dfb3bc80cf0febe4",
+      "candidate": "round36_hh",
+      "candidate_sha256": "3dc3cfdb36de849cf8adc7fb852f1113e1973258fe8b4385dfb3bc80cf0febe4",
+      "component": "controlling_leaf_sequence",
+      "identical": true
+    },
+    {
+      "baseline_sha256": "cb4c9da5ccde3443adb773406477bf9f4d76abba6831073663ea541cca817d26",
+      "candidate": "round36_default_off",
+      "candidate_sha256": "cb4c9da5ccde3443adb773406477bf9f4d76abba6831073663ea541cca817d26",
+      "component": "native_target_sequence",
+      "identical": true
+    },
+    {
+      "baseline_sha256": "cb4c9da5ccde3443adb773406477bf9f4d76abba6831073663ea541cca817d26",
+      "candidate": "round36_hh",
+      "candidate_sha256": "cb4c9da5ccde3443adb773406477bf9f4d76abba6831073663ea541cca817d26",
+      "component": "native_target_sequence",
+      "identical": true
+    },
+    {
+      "baseline_sha256": "7bd2138c23e42dd055427102b5ca85518bbe84ec68c16760ee8d432fb609dd57",
+      "candidate": "round36_default_off",
+      "candidate_sha256": "7bd2138c23e42dd055427102b5ca85518bbe84ec68c16760ee8d432fb609dd57",
+      "component": "split_sequence",
+      "identical": true
+    },
+    {
+      "baseline_sha256": "7bd2138c23e42dd055427102b5ca85518bbe84ec68c16760ee8d432fb609dd57",
+      "candidate": "round36_hh",
+      "candidate_sha256": "7bd2138c23e42dd055427102b5ca85518bbe84ec68c16760ee8d432fb609dd57",
+      "component": "split_sequence",
+      "identical": true
+    },
+    {
+      "baseline_sha256": "0025b70278885e220333cfb2674fc06230e6c5cf5d64a4a4ef46c883ee502ef9",
+      "candidate": "round36_default_off",
+      "candidate_sha256": "0025b70278885e220333cfb2674fc06230e6c5cf5d64a4a4ef46c883ee502ef9",
+      "component": "closure_sequence",
+      "identical": true
+    },
+    {
+      "baseline_sha256": "0025b70278885e220333cfb2674fc06230e6c5cf5d64a4a4ef46c883ee502ef9",
+      "candidate": "round36_hh",
+      "candidate_sha256": "0025b70278885e220333cfb2674fc06230e6c5cf5d64a4a4ef46c883ee502ef9",
+      "component": "closure_sequence",
+      "identical": true
+    },
+    {
+      "baseline_sha256": "75cf6e8ca38f1322637a2b5114230c33adcdcb5786ad671118c6dc13d6ec81f1",
+      "candidate": "round36_default_off",
+      "candidate_sha256": "75cf6e8ca38f1322637a2b5114230c33adcdcb5786ad671118c6dc13d6ec81f1",
+      "component": "final_objective_certificate",
+      "identical": true
+    },
+    {
+      "baseline_sha256": "75cf6e8ca38f1322637a2b5114230c33adcdcb5786ad671118c6dc13d6ec81f1",
+      "candidate": "round36_hh",
+      "candidate_sha256": "75cf6e8ca38f1322637a2b5114230c33adcdcb5786ad671118c6dc13d6ec81f1",
+      "component": "final_objective_certificate",
+      "identical": true
+    }
+  ],
+  "instance_id": "V12_M1",
+  "passed": true,
+  "process_cap_seconds": 300,
+  "runs": {
+    "frozen_round35_c6": {
+      "component_hashes": {
+        "closure_sequence": "0025b70278885e220333cfb2674fc06230e6c5cf5d64a4a4ef46c883ee502ef9",
+        "controlling_leaf_sequence": "3dc3cfdb36de849cf8adc7fb852f1113e1973258fe8b4385dfb3bc80cf0febe4",
+        "final_objective_certificate": "75cf6e8ca38f1322637a2b5114230c33adcdcb5786ad671118c6dc13d6ec81f1",
+        "initial_intervals": "1ff31efdb598b62ce2428f8d0f87bf78a3d46b9f0f22c0f89fe0bc7d71d858cc",
+        "lp_bounds": "1d952c0ddaed37247a115dcc79f0c07adf8520fc57d122c1b36dba5f5a794baa",
+        "native_target_sequence": "cb4c9da5ccde3443adb773406477bf9f4d76abba6831073663ea541cca817d26",
+        "split_sequence": "7bd2138c23e42dd055427102b5ca85518bbe84ec68c16760ee8d432fb609dd57"
+      },
+      "components": {
+        "closure_sequence": [
+          [
+            "terminal_mip_complete",
+            "L2",
+            "0.1786",
+            "0.2679",
+            "OPTIMAL",
+            "native_terminal_mip_optimal"
+          ]
+        ],
+        "controlling_leaf_sequence": [
+          [
+            "lp_complete",
+            "L0",
+            "0",
+            "0.0893001",
+            "infeasible",
+            "0",
+            "0.357201",
+            "complete_lp_relaxation"
+          ],
+          [
+            "lp_complete",
+            "L1",
+            "0.0893001",
+            "0.1786",
+            "optimal",
+            "0.1786",
+            "0.357201",
+            "complete_lp_relaxation"
+          ],
+          [
+            "parent_lp_requeue",
+            "L1",
+            "0.0893001",
+            "0.1786",
+            "open",
+            "0.1786",
+            "0.357201",
+            "selected_leaf_no_longer_controlling"
+          ],
+          [
+            "lp_complete",
+            "L2",
+            "0.1786",
+            "0.2679",
+            "optimal",
+            "0.2679",
+            "0.357201",
+            "complete_lp_relaxation"
+          ],
+          [
+            "parent_lp_requeue",
+            "L2",
+            "0.1786",
+            "0.2679",
+            "open",
+            "0.2679",
+            "0.357201",
+            "selected_leaf_no_longer_controlling"
+          ],
+          [
+            "lp_complete",
+            "L3",
+            "0.2679",
+            "0.357201",
+            "optimal",
+            "0.277261",
+            "0.357201",
+            "complete_lp_relaxation"
+          ],
+          [
+            "parent_lp_requeue",
+            "L3",
+            "0.2679",
+            "0.357201",
+            "open",
+            "0.277261",
+            "0.357201",
+            "selected_leaf_no_longer_controlling"
+          ],
+          [
+            "native_bound_target_reached",
+            "L2",
+            "0.1786",
+            "0.2679",
+            "open",
+            "0.354035",
+            "0.357201",
+            "c6_next_strict_frontier_bound_reached_requeue"
+          ],
+          [
+            "terminal_mip_complete",
+            "L2",
+            "0.1786",
+            "0.2679",
+            "OPTIMAL",
+            "0.357201",
+            "0.357201",
+            "native_terminal_mip_optimal"
+          ]
+        ],
+        "final_objective_certificate": {
+          "external_gini_tree_global_lower_bound": 0.3572005832084145,
+          "external_gini_tree_initial_leaf_count": 4,
+          "external_gini_tree_parent_child_coverage_valid": true,
+          "external_gini_tree_root_coverage_valid": true,
+          "external_gini_tree_split_count": 0,
+          "external_gini_tree_terminal_mip_optimize_count": 1,
+          "external_gini_tree_verified_upper_bound": 0.3572005832084155,
+          "objective": 0.3572005832084155,
+          "status": "optimal",
+          "strict_certificate_class": "engineering_exact_original_problem_optimal",
+          "strict_certificate_rejection_reason": "none",
+          "strict_certified_original_problem": true
+        },
+        "initial_intervals": [
+          [
+            "L0",
+            "0",
+            "0",
+            "0.089300145802103881",
+            "0",
+            "0.35720058320841552",
+            "empty",
+            "complete_parent_lp_infeasible"
+          ],
+          [
+            "L1",
+            "0",
+            "0.089300145802103881",
+            "0.17860029160420776",
+            "0.089300145802103881",
+            "1e+100",
+            "empty",
+            "c6_native_target_phase_infeasible"
+          ],
+          [
+            "L2",
+            "0",
+            "0.17860029160420776",
+            "0.26790043740631164",
+            "0.17860029160420776",
+            "0.35720058320841452",
+            "closed",
+            "native_terminal_mip_optimal"
+          ],
+          [
+            "L3",
+            "0",
+            "0.26790043740631164",
+            "0.35720058320841552",
+            "0.26790043740631164",
+            "1e+100",
+            "empty",
+            "c6_native_target_phase_infeasible"
+          ]
+        ],
+        "lp_bounds": [
+          [
+            "L0",
+            "",
+            "0",
+            "0",
+            "0.089300145802103881",
+            "1",
+            "0",
+            "1",
+            "0",
+            "0",
+            "INFEASIBLE"
+          ],
+          [
+            "L1",
+            "",
+            "0",
+            "0.089300145802103881",
+            "0.17860029160420776",
+            "1",
+            "1",
+            "0",
+            "1",
+            "0.27726096936095629",
+            "OPTIMAL"
+          ],
+          [
+            "L2",
+            "",
+            "0",
+            "0.17860029160420776",
+            "0.26790043740631164",
+            "1",
+            "1",
+            "0",
+            "1",
+            "0.29424322429778327",
+            "OPTIMAL"
+          ],
+          [
+            "L3",
+            "",
+            "0",
+            "0.26790043740631164",
+            "0.35720058320841552",
+            "1",
+            "1",
+            "0",
+            "1",
+            "0.35403537724225576",
+            "OPTIMAL"
+          ],
+          [
+            "L2.0",
+            "L2",
+            "1",
+            "0.17860029160420776",
+            "0.2232503645052597",
+            "1",
+            "1",
+            "0",
+            "1",
+            "0.2957288394563683",
+            "OPTIMAL"
+          ],
+          [
+            "L2.1",
+            "L2",
+            "1",
+            "0.2232503645052597",
+            "0.26790043740631164",
+            "1",
+            "1",
+            "0",
+            "1",
+            "0.32304981383080583",
+            "OPTIMAL"
+          ]
+        ],
+        "native_target_sequence": [
+          [
+            "1",
+            "L1",
+            "next_leaf",
+            "0.277261",
+            "0.294243",
+            "0.294243",
+            "0.357201",
+            "exact_closure",
+            "INFEASIBLE",
+            "1e+100",
+            "0",
+            "1",
+            "0",
+            "c6_next_strict_frontier_bound_reached_requeue"
+          ],
+          [
+            "1",
+            "L2",
+            "next_leaf",
+            "0.294243",
+            "0.354035",
+            "0.354035",
+            "0.357201",
+            "target_reached_requeue",
+            "INTERRUPTED",
+            "0.35404",
+            "1",
+            "0",
+            "1",
+            "c6_next_strict_frontier_bound_reached_requeue"
+          ],
+          [
+            "1",
+            "L3",
+            "next_leaf",
+            "0.354035",
+            "0.35404",
+            "0.35404",
+            "0.357201",
+            "exact_closure",
+            "INFEASIBLE",
+            "1e+100",
+            "0",
+            "1",
+            "0",
+            "c6_next_strict_frontier_bound_reached_requeue"
+          ]
+        ],
+        "split_sequence": [
+          [
+            "L2",
+            "true",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "",
+            "0",
+            "current_child_gain_not_strict"
+          ]
+        ]
+      },
+      "executable_sha256": "a5b8fd4e2aa9eb75e9bd133e03ddecc9aad54aef9ed592f25a68e842c1f342a3",
+      "result_sha256": "2a9b49f872d0bd75576faf4f8ef7ba9ff884f79a1270fac5e40d4e6feca90a36"
+    },
+    "round36_default_off": {
+      "component_hashes": {
+        "closure_sequence": "0025b70278885e220333cfb2674fc06230e6c5cf5d64a4a4ef46c883ee502ef9",
+        "controlling_leaf_sequence": "3dc3cfdb36de849cf8adc7fb852f1113e1973258fe8b4385dfb3bc80cf0febe4",
+        "final_objective_certificate": "75cf6e8ca38f1322637a2b5114230c33adcdcb5786ad671118c6dc13d6ec81f1",
+        "initial_intervals": "1ff31efdb598b62ce2428f8d0f87bf78a3d46b9f0f22c0f89fe0bc7d71d858cc",
+        "lp_bounds": "1d952c0ddaed37247a115dcc79f0c07adf8520fc57d122c1b36dba5f5a794baa",
+        "native_target_sequence": "cb4c9da5ccde3443adb773406477bf9f4d76abba6831073663ea541cca817d26",
+        "split_sequence": "7bd2138c23e42dd055427102b5ca85518bbe84ec68c16760ee8d432fb609dd57"
+      },
+      "components": {
+        "closure_sequence": [
+          [
+            "terminal_mip_complete",
+            "L2",
+            "0.1786",
+            "0.2679",
+            "OPTIMAL",
+            "native_terminal_mip_optimal"
+          ]
+        ],
+        "controlling_leaf_sequence": [
+          [
+            "lp_complete",
+            "L0",
+            "0",
+            "0.0893001",
+            "infeasible",
+            "0",
+            "0.357201",
+            "complete_lp_relaxation"
+          ],
+          [
+            "lp_complete",
+            "L1",
+            "0.0893001",
+            "0.1786",
+            "optimal",
+            "0.1786",
+            "0.357201",
+            "complete_lp_relaxation"
+          ],
+          [
+            "parent_lp_requeue",
+            "L1",
+            "0.0893001",
+            "0.1786",
+            "open",
+            "0.1786",
+            "0.357201",
+            "selected_leaf_no_longer_controlling"
+          ],
+          [
+            "lp_complete",
+            "L2",
+            "0.1786",
+            "0.2679",
+            "optimal",
+            "0.2679",
+            "0.357201",
+            "complete_lp_relaxation"
+          ],
+          [
+            "parent_lp_requeue",
+            "L2",
+            "0.1786",
+            "0.2679",
+            "open",
+            "0.2679",
+            "0.357201",
+            "selected_leaf_no_longer_controlling"
+          ],
+          [
+            "lp_complete",
+            "L3",
+            "0.2679",
+            "0.357201",
+            "optimal",
+            "0.277261",
+            "0.357201",
+            "complete_lp_relaxation"
+          ],
+          [
+            "parent_lp_requeue",
+            "L3",
+            "0.2679",
+            "0.357201",
+            "open",
+            "0.277261",
+            "0.357201",
+            "selected_leaf_no_longer_controlling"
+          ],
+          [
+            "native_bound_target_reached",
+            "L2",
+            "0.1786",
+            "0.2679",
+            "open",
+            "0.354035",
+            "0.357201",
+            "c6_next_strict_frontier_bound_reached_requeue"
+          ],
+          [
+            "terminal_mip_complete",
+            "L2",
+            "0.1786",
+            "0.2679",
+            "OPTIMAL",
+            "0.357201",
+            "0.357201",
+            "native_terminal_mip_optimal"
+          ]
+        ],
+        "final_objective_certificate": {
+          "external_gini_tree_global_lower_bound": 0.3572005832084145,
+          "external_gini_tree_initial_leaf_count": 4,
+          "external_gini_tree_parent_child_coverage_valid": true,
+          "external_gini_tree_root_coverage_valid": true,
+          "external_gini_tree_split_count": 0,
+          "external_gini_tree_terminal_mip_optimize_count": 1,
+          "external_gini_tree_verified_upper_bound": 0.3572005832084155,
+          "objective": 0.3572005832084155,
+          "status": "optimal",
+          "strict_certificate_class": "engineering_exact_original_problem_optimal",
+          "strict_certificate_rejection_reason": "none",
+          "strict_certified_original_problem": true
+        },
+        "initial_intervals": [
+          [
+            "L0",
+            "0",
+            "0",
+            "0.089300145802103881",
+            "0",
+            "0.35720058320841552",
+            "empty",
+            "complete_parent_lp_infeasible"
+          ],
+          [
+            "L1",
+            "0",
+            "0.089300145802103881",
+            "0.17860029160420776",
+            "0.089300145802103881",
+            "1e+100",
+            "empty",
+            "c6_native_target_phase_infeasible"
+          ],
+          [
+            "L2",
+            "0",
+            "0.17860029160420776",
+            "0.26790043740631164",
+            "0.17860029160420776",
+            "0.35720058320841452",
+            "closed",
+            "native_terminal_mip_optimal"
+          ],
+          [
+            "L3",
+            "0",
+            "0.26790043740631164",
+            "0.35720058320841552",
+            "0.26790043740631164",
+            "1e+100",
+            "empty",
+            "c6_native_target_phase_infeasible"
+          ]
+        ],
+        "lp_bounds": [
+          [
+            "L0",
+            "",
+            "0",
+            "0",
+            "0.089300145802103881",
+            "1",
+            "0",
+            "1",
+            "0",
+            "0",
+            "INFEASIBLE"
+          ],
+          [
+            "L1",
+            "",
+            "0",
+            "0.089300145802103881",
+            "0.17860029160420776",
+            "1",
+            "1",
+            "0",
+            "1",
+            "0.27726096936095629",
+            "OPTIMAL"
+          ],
+          [
+            "L2",
+            "",
+            "0",
+            "0.17860029160420776",
+            "0.26790043740631164",
+            "1",
+            "1",
+            "0",
+            "1",
+            "0.29424322429778327",
+            "OPTIMAL"
+          ],
+          [
+            "L3",
+            "",
+            "0",
+            "0.26790043740631164",
+            "0.35720058320841552",
+            "1",
+            "1",
+            "0",
+            "1",
+            "0.35403537724225576",
+            "OPTIMAL"
+          ],
+          [
+            "L2.0",
+            "L2",
+            "1",
+            "0.17860029160420776",
+            "0.2232503645052597",
+            "1",
+            "1",
+            "0",
+            "1",
+            "0.2957288394563683",
+            "OPTIMAL"
+          ],
+          [
+            "L2.1",
+            "L2",
+            "1",
+            "0.2232503645052597",
+            "0.26790043740631164",
+            "1",
+            "1",
+            "0",
+            "1",
+            "0.32304981383080583",
+            "OPTIMAL"
+          ]
+        ],
+        "native_target_sequence": [
+          [
+            "1",
+            "L1",
+            "next_leaf",
+            "0.277261",
+            "0.294243",
+            "0.294243",
+            "0.357201",
+            "exact_closure",
+            "INFEASIBLE",
+            "1e+100",
+            "0",
+            "1",
+            "0",
+            "c6_next_strict_frontier_bound_reached_requeue"
+          ],
+          [
+            "1",
+            "L2",
+            "next_leaf",
+            "0.294243",
+            "0.354035",
+            "0.354035",
+            "0.357201",
+            "target_reached_requeue",
+            "INTERRUPTED",
+            "0.35404",
+            "1",
+            "0",
+            "1",
+            "c6_next_strict_frontier_bound_reached_requeue"
+          ],
+          [
+            "1",
+            "L3",
+            "next_leaf",
+            "0.354035",
+            "0.35404",
+            "0.35404",
+            "0.357201",
+            "exact_closure",
+            "INFEASIBLE",
+            "1e+100",
+            "0",
+            "1",
+            "0",
+            "c6_next_strict_frontier_bound_reached_requeue"
+          ]
+        ],
+        "split_sequence": [
+          [
+            "L2",
+            "true",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "",
+            "0",
+            "current_child_gain_not_strict"
+          ]
+        ]
+      },
+      "executable_sha256": "ce5fbbf323174b093ce12e064ea739d1d0a8d505d1cf1aff6bf40f1b75b2089b",
+      "result_sha256": "078a221ba73e0c74668c5cac46340dd798d61c3117e0d62d199de430b77b14a4"
+    },
+    "round36_hh": {
+      "component_hashes": {
+        "closure_sequence": "0025b70278885e220333cfb2674fc06230e6c5cf5d64a4a4ef46c883ee502ef9",
+        "controlling_leaf_sequence": "3dc3cfdb36de849cf8adc7fb852f1113e1973258fe8b4385dfb3bc80cf0febe4",
+        "final_objective_certificate": "75cf6e8ca38f1322637a2b5114230c33adcdcb5786ad671118c6dc13d6ec81f1",
+        "initial_intervals": "1ff31efdb598b62ce2428f8d0f87bf78a3d46b9f0f22c0f89fe0bc7d71d858cc",
+        "lp_bounds": "1d952c0ddaed37247a115dcc79f0c07adf8520fc57d122c1b36dba5f5a794baa",
+        "native_target_sequence": "cb4c9da5ccde3443adb773406477bf9f4d76abba6831073663ea541cca817d26",
+        "split_sequence": "7bd2138c23e42dd055427102b5ca85518bbe84ec68c16760ee8d432fb609dd57"
+      },
+      "components": {
+        "closure_sequence": [
+          [
+            "terminal_mip_complete",
+            "L2",
+            "0.1786",
+            "0.2679",
+            "OPTIMAL",
+            "native_terminal_mip_optimal"
+          ]
+        ],
+        "controlling_leaf_sequence": [
+          [
+            "lp_complete",
+            "L0",
+            "0",
+            "0.0893001",
+            "infeasible",
+            "0",
+            "0.357201",
+            "complete_lp_relaxation"
+          ],
+          [
+            "lp_complete",
+            "L1",
+            "0.0893001",
+            "0.1786",
+            "optimal",
+            "0.1786",
+            "0.357201",
+            "complete_lp_relaxation"
+          ],
+          [
+            "parent_lp_requeue",
+            "L1",
+            "0.0893001",
+            "0.1786",
+            "open",
+            "0.1786",
+            "0.357201",
+            "selected_leaf_no_longer_controlling"
+          ],
+          [
+            "lp_complete",
+            "L2",
+            "0.1786",
+            "0.2679",
+            "optimal",
+            "0.2679",
+            "0.357201",
+            "complete_lp_relaxation"
+          ],
+          [
+            "parent_lp_requeue",
+            "L2",
+            "0.1786",
+            "0.2679",
+            "open",
+            "0.2679",
+            "0.357201",
+            "selected_leaf_no_longer_controlling"
+          ],
+          [
+            "lp_complete",
+            "L3",
+            "0.2679",
+            "0.357201",
+            "optimal",
+            "0.277261",
+            "0.357201",
+            "complete_lp_relaxation"
+          ],
+          [
+            "parent_lp_requeue",
+            "L3",
+            "0.2679",
+            "0.357201",
+            "open",
+            "0.277261",
+            "0.357201",
+            "selected_leaf_no_longer_controlling"
+          ],
+          [
+            "native_bound_target_reached",
+            "L2",
+            "0.1786",
+            "0.2679",
+            "open",
+            "0.354035",
+            "0.357201",
+            "c6_next_strict_frontier_bound_reached_requeue"
+          ],
+          [
+            "terminal_mip_complete",
+            "L2",
+            "0.1786",
+            "0.2679",
+            "OPTIMAL",
+            "0.357201",
+            "0.357201",
+            "native_terminal_mip_optimal"
+          ]
+        ],
+        "final_objective_certificate": {
+          "external_gini_tree_global_lower_bound": 0.3572005832084145,
+          "external_gini_tree_initial_leaf_count": 4,
+          "external_gini_tree_parent_child_coverage_valid": true,
+          "external_gini_tree_root_coverage_valid": true,
+          "external_gini_tree_split_count": 0,
+          "external_gini_tree_terminal_mip_optimize_count": 1,
+          "external_gini_tree_verified_upper_bound": 0.3572005832084155,
+          "objective": 0.3572005832084155,
+          "status": "optimal",
+          "strict_certificate_class": "engineering_exact_original_problem_optimal",
+          "strict_certificate_rejection_reason": "none",
+          "strict_certified_original_problem": true
+        },
+        "initial_intervals": [
+          [
+            "L0",
+            "0",
+            "0",
+            "0.089300145802103881",
+            "0",
+            "0.35720058320841552",
+            "empty",
+            "complete_parent_lp_infeasible"
+          ],
+          [
+            "L1",
+            "0",
+            "0.089300145802103881",
+            "0.17860029160420776",
+            "0.089300145802103881",
+            "1e+100",
+            "empty",
+            "c6_native_target_phase_infeasible"
+          ],
+          [
+            "L2",
+            "0",
+            "0.17860029160420776",
+            "0.26790043740631164",
+            "0.17860029160420776",
+            "0.35720058320841452",
+            "closed",
+            "native_terminal_mip_optimal"
+          ],
+          [
+            "L3",
+            "0",
+            "0.26790043740631164",
+            "0.35720058320841552",
+            "0.26790043740631164",
+            "1e+100",
+            "empty",
+            "c6_native_target_phase_infeasible"
+          ]
+        ],
+        "lp_bounds": [
+          [
+            "L0",
+            "",
+            "0",
+            "0",
+            "0.089300145802103881",
+            "1",
+            "0",
+            "1",
+            "0",
+            "0",
+            "INFEASIBLE"
+          ],
+          [
+            "L1",
+            "",
+            "0",
+            "0.089300145802103881",
+            "0.17860029160420776",
+            "1",
+            "1",
+            "0",
+            "1",
+            "0.27726096936095629",
+            "OPTIMAL"
+          ],
+          [
+            "L2",
+            "",
+            "0",
+            "0.17860029160420776",
+            "0.26790043740631164",
+            "1",
+            "1",
+            "0",
+            "1",
+            "0.29424322429778327",
+            "OPTIMAL"
+          ],
+          [
+            "L3",
+            "",
+            "0",
+            "0.26790043740631164",
+            "0.35720058320841552",
+            "1",
+            "1",
+            "0",
+            "1",
+            "0.35403537724225576",
+            "OPTIMAL"
+          ],
+          [
+            "L2.0",
+            "L2",
+            "1",
+            "0.17860029160420776",
+            "0.2232503645052597",
+            "1",
+            "1",
+            "0",
+            "1",
+            "0.2957288394563683",
+            "OPTIMAL"
+          ],
+          [
+            "L2.1",
+            "L2",
+            "1",
+            "0.2232503645052597",
+            "0.26790043740631164",
+            "1",
+            "1",
+            "0",
+            "1",
+            "0.32304981383080583",
+            "OPTIMAL"
+          ]
+        ],
+        "native_target_sequence": [
+          [
+            "1",
+            "L1",
+            "next_leaf",
+            "0.277261",
+            "0.294243",
+            "0.294243",
+            "0.357201",
+            "exact_closure",
+            "INFEASIBLE",
+            "1e+100",
+            "0",
+            "1",
+            "0",
+            "c6_next_strict_frontier_bound_reached_requeue"
+          ],
+          [
+            "1",
+            "L2",
+            "next_leaf",
+            "0.294243",
+            "0.354035",
+            "0.354035",
+            "0.357201",
+            "target_reached_requeue",
+            "INTERRUPTED",
+            "0.35404",
+            "1",
+            "0",
+            "1",
+            "c6_next_strict_frontier_bound_reached_requeue"
+          ],
+          [
+            "1",
+            "L3",
+            "next_leaf",
+            "0.354035",
+            "0.35404",
+            "0.35404",
+            "0.357201",
+            "exact_closure",
+            "INFEASIBLE",
+            "1e+100",
+            "0",
+            "1",
+            "0",
+            "c6_next_strict_frontier_bound_reached_requeue"
+          ]
+        ],
+        "split_sequence": [
+          [
+            "L2",
+            "true",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "",
+            "0",
+            "current_child_gain_not_strict"
+          ]
+        ]
+      },
+      "executable_sha256": "ce5fbbf323174b093ce12e064ea739d1d0a8d505d1cf1aff6bf40f1b75b2089b",
+      "result_sha256": "58c22ce28555a498d88ca60a56fd00f0016cd5141bb292aff2d389b5ff63220c"
+    }
+  },
+  "schema": "round36-baseline-equivalence-v1"
+}
