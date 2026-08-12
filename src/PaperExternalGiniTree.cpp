@@ -730,13 +730,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     const bool c6_contract_valid = !c6_nonblocking ||
         round31C6FrozenOptionsValid(options, c6_contract_reason);
     const bool round36_seed_contract_valid = !round36_causal ||
-        (verified_seed.round36_anchor_safety_valid &&
-         verified_seed.round36_proof_incumbent_launch > 0.0 &&
-         std::fabs(verified_seed.round36_proof_incumbent_launch -
-                   verified_seed.objective) <=
-             1e-7 * std::max(1.0, std::fabs(verified_seed.objective)) &&
-         std::isfinite(decomposition_anchor_launch) &&
-         decomposition_anchor_launch + 1e-7 >= proof_incumbent_launch &&
+        (round36ProofAnchorLaunchContractValid(
+             verified_seed.round36_anchor_safety_valid,
+             verified_seed.round36_proof_incumbent_launch,
+             proof_incumbent_launch,
+             decomposition_anchor_launch,
+             1e-7) &&
          causal_grid.valid);
     if (!seed_valid || options.external_gini_backend != "gurobi" ||
         options.external_gini_warm_start || root_gamma_L < -1e-12 ||

@@ -1,0 +1,73 @@
+{
+  "all_raw_runs_checksum_addressed": true,
+  "all_raw_runs_retained_locally": true,
+  "all_repository_artifacts_below_size_limit": true,
+  "classification": "decomposition_geometry_dominant",
+  "completed_official_rows": 56,
+  "completed_stage_c_rows": 47,
+  "compressed_derived_artifacts": [
+    {
+      "compressed_bytes": 1640057,
+      "compressed_path": "results/gf_incumbent_decomposition_causal_round36/trajectory_events.csv.gz",
+      "compressed_sha256": "176655fa8841b71faa3c743f5d8da78ff2bb21791a2449e20c68533525ba9827",
+      "compression": "gzip_level9_mtime0",
+      "source_bytes": 19180901,
+      "source_path": "results/gf_incumbent_decomposition_causal_round36/trajectory_events.csv",
+      "source_sha256": "5b665120c62f115d1370e0ee56c47a4bdcc891aa738d177baceb50def25fe310"
+    }
+  ],
+  "compressed_raw_artifacts": 280,
+  "compressed_raw_bytes": 1115175,
+  "final_evidence_inventory_sha256": "6ec77e3e2ad36dadba8cbcea642f847bdfba81dbc81e84fc80943a2bc5d8b4cb",
+  "license_sensitive_material_packaged": false,
+  "model_dumps_packaged": false,
+  "repository_artifact_size_limit_bytes": 99614720,
+  "representative_arm_rows": 20,
+  "representative_instances": [
+    {
+      "absolute_geometry_proof_auc_delta": 0.04626639511297465,
+      "instance_id": "round32_multi_m_high_imbalance_V20_M2_seed1052706459",
+      "panel_row_id": "r36_14_round32_multi_m_high_imbalance_V20_M2_seed1052706459",
+      "round35_pattern": "1_simple_ub_not_weaker_simple_faster",
+      "selection_rule": "largest_absolute_HH_vs_BW-P_common_window_proof_AUC_delta"
+    },
+    {
+      "absolute_geometry_proof_auc_delta": 0.012793941003905192,
+      "instance_id": "moderate_seed4302",
+      "panel_row_id": "r36_13_moderate_seed4302",
+      "round35_pattern": "2_simple_ub_weaker_exact_phase_similar",
+      "selection_rule": "largest_absolute_HH_vs_BW-P_common_window_proof_AUC_delta"
+    },
+    {
+      "absolute_geometry_proof_auc_delta": 0.1757544511142652,
+      "instance_id": "moderate_seed5301",
+      "panel_row_id": "r36_06_moderate_seed5301",
+      "round35_pattern": "3_simple_ub_weaker_exact_phase_faster",
+      "selection_rule": "largest_absolute_HH_vs_BW-P_common_window_proof_AUC_delta"
+    },
+    {
+      "absolute_geometry_proof_auc_delta": 0.1268957783521781,
+      "instance_id": "round32_multi_m_tight_T_V20_M2_seed89001413",
+      "panel_row_id": "r36_04_round32_multi_m_tight_T_V20_M2_seed89001413",
+      "round35_pattern": "4_simple_ub_weaker_exact_phase_slower",
+      "selection_rule": "largest_absolute_HH_vs_BW-P_common_window_proof_AUC_delta"
+    },
+    {
+      "absolute_geometry_proof_auc_delta": 0.06116958153554068,
+      "instance_id": "round31_sealed_moderate_V50_seed1112848618",
+      "panel_row_id": "r36_09_round31_sealed_moderate_V50_seed1112848618",
+      "round35_pattern": "5_simple_certification_or_final_gap_regression",
+      "selection_rule": "largest_absolute_HH_vs_BW-P_common_window_proof_AUC_delta"
+    }
+  ],
+  "representative_manifest_sha256": "fe7584a92c3b8ecfd7aa516acd1812a5b4fda30f363c20378ec2c08c4a3a8dcc",
+  "representative_patterns": 5,
+  "round_id": 36,
+  "schema": "round36-evidence-package-v2",
+  "stage_c_automatic_promotion_performed": false,
+  "stage_c_candidate": "C6-BEST-PROOF-WIDE-ANCHOR-PROOF-NORM",
+  "stage_c_completion_manifest_sha256": "135a2347c221241c2dcb3c27845e6bde17955ef0c47b0c19dc67b123e13909c5",
+  "stage_c_predeclared_performance_gate_passed": false,
+  "stage_c_recommendation": "Keep C6-HGA-FULL unchanged; the geometry mechanism remains scientifically identified, but the candidate does not pass the frozen broad performance gate and should not be promoted.",
+  "uncompressed_raw_bytes": 6869623
+}

@@ -1,0 +1,57 @@
+{
+  "automatic_promotion_performed": false,
+  "candidate": "C6-BEST-PROOF-WIDE-ANCHOR-PROOF-NORM",
+  "candidate_vs_hga_gate_by_stage": {
+    "independent_v50_3600": {
+      "candidate_wins": 2,
+      "certificate_regressions": 0,
+      "comparator_wins": 6,
+      "median_candidate_minus_comparator_gap": 4.7672187093034113e-07,
+      "non_tie_candidate_win_fraction": 0.25,
+      "rows": 12,
+      "ties": 4
+    },
+    "qualification_1800": {
+      "candidate_wins": 9,
+      "certificate_regressions": 0,
+      "comparator_wins": 9,
+      "median_candidate_minus_comparator_gap": 0.0,
+      "non_tie_candidate_win_fraction": 0.5,
+      "rows": 35,
+      "ties": 17
+    }
+  },
+  "completed": true,
+  "completed_rows": 47,
+  "expected_rows": 47,
+  "false_certificate_count": 0,
+  "frozen_identity_audit": {
+    "all": true,
+    "candidate_definition": true,
+    "candidate_executable_provenance": true,
+    "candidate_frozen_before_results": true,
+    "command_freeze": true,
+    "contract_fix_audit": true,
+    "executable": true,
+    "historical_comparators": true,
+    "invalidated_attempt": true,
+    "source_tree": true,
+    "stage_b_decision": true,
+    "stage_b_executable": true,
+    "validation_matrix": true
+  },
+  "historical_comparator_compatibility_valid": true,
+  "instance_dependent_dispatch_introduced": false,
+  "predeclared_performance_gate_passed": false,
+  "recommendation": "Keep C6-HGA-FULL unchanged; the geometry mechanism remains scientifically identified, but the candidate does not pass the frozen broad performance gate and should not be promoted.",
+  "rho_sensitivity_performed": false,
+  "round_id": 36,
+  "schema": "round36-stage-c-final-audit-v2",
+  "separately_frozen_validation": true,
+  "stage": "C",
+  "stage_b_classification": "decomposition_geometry_dominant",
+  "strict_certificates": 18,
+  "valid_nocertificates": 29,
+  "valid_rows": 47,
+  "validated_gurobi_mainline": "C6-HGA-FULL"
+}

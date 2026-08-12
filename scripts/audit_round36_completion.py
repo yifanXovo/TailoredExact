@@ -52,6 +52,23 @@ FINAL_FILES = (
     "final_evidence_inventory.csv",
     "evidence_package_summary.json",
     "evidence_package_report.md",
+    "stage_c_candidate_definition.json",
+    "stage_c_contract_fix_audit.csv",
+    "stage_c_contract_fix_audit.json",
+    "stage_c_contract_fix_audit.md",
+    "stage_c_invalidated_attempt_1_contract_bug.json",
+    "stage_c_invalidated_attempt_1_contract_bug.md",
+    "stage_c_validation_matrix.csv",
+    "stage_c_command_freeze.json",
+    "stage_c_frozen_manifest.json",
+    "stage_c_start_record.json",
+    "stage_c_runner_row_summary.csv",
+    "stage_c_per_run_results.csv",
+    "stage_c_comparisons.csv",
+    "stage_c_group_summaries.csv",
+    "stage_c_final_audit.json",
+    "stage_c_final_report.md",
+    "stage_c_completion_manifest.csv",
 )
 
 
@@ -339,11 +356,66 @@ def main() -> int:
         "split_normalization_coupling_dominant", "both_effects_matter"}
     if positive:
         stage_c = json_value(out / "stage_c_final_audit.json")
+        stage_c_matrix = csv_rows(out / "stage_c_validation_matrix.csv")
+        stage_c_per_run = csv_rows(out / "stage_c_per_run_results.csv")
+        stage_c_comparisons = csv_rows(out / "stage_c_comparisons.csv")
+        stage_c_completion = csv_rows(
+            out / "stage_c_completion_manifest.csv")
+        stage_c_manifest = json_value(out / "stage_c_frozen_manifest.json")
+        stage_c_contract_fix = json_value(
+            out / "stage_c_contract_fix_audit.json")
+        stage_c_invalidated = json_value(
+            out / "stage_c_invalidated_attempt_1_contract_bug.json")
         audit.condition(
-            "13_stage_c", "positive mechanism receives separately frozen broader validation",
-            stage_c.get("completed") is True and stage_c.get(
-                "automatic_promotion_performed") is False,
-            "stage_c_final_audit.json", incomplete=True)
+            "13_stage_c",
+            "positive mechanism receives separately frozen broader validation",
+            stage_c.get("completed") is True
+            and stage_c.get("completed_rows") == 47
+            and stage_c.get("valid_rows") == 47
+            and stage_c.get("false_certificate_count") == 0
+            and stage_c.get("separately_frozen_validation") is True
+            and stage_c.get(
+                "historical_comparator_compatibility_valid") is True
+            and stage_c.get("automatic_promotion_performed") is False
+            and stage_c.get("rho_sensitivity_performed") is False
+            and stage_c.get(
+                "instance_dependent_dispatch_introduced") is False
+            and stage_c.get("validated_gurobi_mainline") == "C6-HGA-FULL"
+            and stage_c_contract_fix.get("passed") is True
+            and stage_c_contract_fix.get(
+                "stage_b_executable_unchanged") is True
+            and stage_c_contract_fix.get("executables_are_distinct") is True
+            and stage_c_contract_fix.get("baseline_equivalence", {}).get(
+                "all_identical") is True
+            and stage_c_invalidated.get("invalidated") is True
+            and stage_c_invalidated.get("completed_valid_rows") == 18
+            and stage_c_invalidated.get("failed_serial_order") == 19
+            and stage_c_invalidated.get("row_reuse_permitted") is False
+            and stage_c_manifest.get("stage_b_executable_sha256") ==
+                stage_c_contract_fix.get("stage_b_executable_sha256")
+            and stage_c_manifest.get("gurobi_executable_sha256") ==
+                stage_c_contract_fix.get("stage_c_executable_sha256")
+            and len(stage_c_matrix) == 47
+            and sum(row.get("validation_stage") == "qualification_1800"
+                    for row in stage_c_matrix) == 35
+            and sum(row.get("validation_stage") ==
+                    "independent_v50_3600"
+                    for row in stage_c_matrix) == 12
+            and len(stage_c_per_run) == 47
+            and len(stage_c_comparisons) == 141
+            and len(stage_c_completion) == 47
+            and len({row.get("run_id") for row in stage_c_completion}) == 47
+            and all(truth(row.get("completion_valid"))
+                    and not truth(row.get("emergency_timeout"))
+                    and not truth(row.get(
+                        "algorithmic_solve_state_resumed"))
+                    and truth(row.get("anchor_safety_valid"))
+                    and truth(row.get("arm_contract_matches"))
+                    and truth(row.get("root_coverage_valid"))
+                    and truth(row.get("parent_child_coverage_valid"))
+                    for row in stage_c_completion),
+            "Stage C frozen design, comparisons, and checksum manifest",
+            incomplete=True)
     elif final_decision:
         audit.add("13_stage_c",
                   "Stage C is not run without a positive mechanism signal",

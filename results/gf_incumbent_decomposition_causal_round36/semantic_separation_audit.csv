@@ -3,18 +3,18 @@ S01_startup_pair,BW arms choose min verified startup as proof and max as anchor,
 S02_proof_range,proof-relevant Gini upper range derives from verified result upper bound,main,True,src/main.cpp,-1,0ed5e74aab46b7df177668ad104be8bd01680e1e8caa9d0d7e637b2807f96d3b
 S03_proof_launch,tree proof incumbent is the independently verified seed objective,tree,True,src/PaperExternalGiniTree.cpp,615,74b80bb0880bc0f90a9850549899b05712df4e070804045822d69d9bde6b0f28
 S04_anchor_grid_intersection,anchor defines grid placement while root proof range defines active intersection,tree,True,src/PaperExternalGiniTree.cpp,-1,4fe58a671fba453d1ef204c500cbf719cf9480963e5ab049047eced10c06e014
-S05_anchor_safety_reject,unsafe or unverified anchor configurations are rejected,tree,True,src/PaperExternalGiniTree.cpp,-1,3ffd532b39c2a104e49d4b96b5e1472a9cecc9bfcab3c7c8507ac51e9a82eaca
+S05_anchor_safety_reject,"unsafe, unverified, or weaker-current-proof launch configurations are rejected",tree,True,src/PaperExternalGiniTree.cpp,-1,a0e3da5b80c1eaefde17299e0b4e266bfef22bafe6bced48967b2a6476949fdf
 S06_exact_active_cover,active anchor intersections receive an exact coverage check,geometry,True,src/GiniFrontierGeometry.cpp,-1,695dc589f071f998f121e13e9a19a39d6d4f433c918f8870b2cd09ac783ab8f3
-S07_initial_cutoff,"initial leaf cutoff uses verified proof seed, not anchor",tree,True,src/PaperExternalGiniTree.cpp,988,00d02c2a97a223bec789b9bf2ba3b88bb6bc11544a3038ab7f96e5f8a51e28ac
-S08_runtime_proof_ub,runtime global UB starts from the verified proof seed,tree,True,src/PaperExternalGiniTree.cpp,998,e88bc800125b93c89230a6a962af47c7c35d6c71703e1365f3723026c6b1c4b1
+S07_initial_cutoff,"initial leaf cutoff uses verified proof seed, not anchor",tree,True,src/PaperExternalGiniTree.cpp,987,00d02c2a97a223bec789b9bf2ba3b88bb6bc11544a3038ab7f96e5f8a51e28ac
+S08_runtime_proof_ub,runtime global UB starts from the verified proof seed,tree,True,src/PaperExternalGiniTree.cpp,997,e88bc800125b93c89230a6a962af47c7c35d6c71703e1365f3723026c6b1c4b1
 S09_cutoff_tightening,better verified native incumbents tighten the proof cutoff,tree,True,src/PaperExternalGiniTree.cpp,-1,b1f76d97732da8fc198b53ba3dd85253f5606fb6c4f3dcaae362d72dee72c1d7
 S10_split_isolation,causal split receives proof UB and launch-frozen anchor separately,tree,True,src/PaperExternalGiniTree.cpp,-1,4494c2662c38360e17c2b29137841c32b155e27fafb61d92a9625b7865b2e6c2
 S11_eta_formulas,both proof and anchor eta denominators are ledgered from the same gain,tree,True,src/PaperExternalGiniTree.cpp,-1,a7847b3056b3433484320b59332ea82997113b7458d3197a145868f54bc02619
-S12_final_ub,serialized final UB is the verified proof UB,tree,True,src/PaperExternalGiniTree.cpp,2516,c6804101ea6be53de9cd4e199a10a7b05b6ea92f964433d1da4cee6f743c212a
-S13_final_verifier,final incumbent routes pass the original verifier,tree,True,src/PaperExternalGiniTree.cpp,2523,533083b1de0eddae8cf722b777590fc8ddb23c90132ae42918901ad740236bba
-S14_certificate,strict certificate compares the valid LB with verified proof UB,tree,True,src/PaperExternalGiniTree.cpp,2596,81e9697a254a6a2a31f3cdd585e7020de10658f00628bc3ee22293085753fb7e
+S12_final_ub,serialized final UB is the verified proof UB,tree,True,src/PaperExternalGiniTree.cpp,2515,c6804101ea6be53de9cd4e199a10a7b05b6ea92f964433d1da4cee6f743c212a
+S13_final_verifier,final incumbent routes pass the original verifier,tree,True,src/PaperExternalGiniTree.cpp,2522,533083b1de0eddae8cf722b777590fc8ddb23c90132ae42918901ad740236bba
+S14_certificate,strict certificate compares the valid LB with verified proof UB,tree,True,src/PaperExternalGiniTree.cpp,2595,81e9697a254a6a2a31f3cdd585e7020de10658f00628bc3ee22293085753fb7e
 S15_default_wrapper,legacy C6 wrapper delegates with proof normalization and equal proof/anchor UB,tree,True,src/PaperExternalGiniTree.cpp,-1,9d3c875a01168456af4412a56073a35dc3f053d7c6792eacb1b94a40a4289270
-S16_all_ub_updates_verified,every verified_ub assignment is seed initialization or independently verified,tree,True,src/PaperExternalGiniTree.cpp,998,64964ca5087d15834d5893a6b098a96401a6f74723712252707f00dd72379beb
-S17_anchor_consumer_exclusion,decomposition anchor is absent from cutoff/pruning/global-UB/certificate consumers,tree,True,src/PaperExternalGiniTree.cpp,616,4b2acf69ab1b25e5ee56765cd8c10ac58ee4a75e057480c8a1baf20990e370e9
+S16_all_ub_updates_verified,every verified_ub assignment is seed initialization or independently verified,tree,True,src/PaperExternalGiniTree.cpp,997,9131852caf3fa45cea7309945bf617958c73496fec763a3480152f890840dfd7
+S17_anchor_consumer_exclusion,decomposition anchor is absent from cutoff/pruning/global-UB/certificate consumers,tree,True,src/PaperExternalGiniTree.cpp,616,8bcd12e84003390732d75b20252c58c4d30040b6f270a763b2737269d4e799bf
 S18_hardware_independent_split_inputs,"C6 split decisions depend only on bounds, child LP states, rho, and tolerance",tree,True,src/PaperExternalGiniTree.cpp,359,7bff86b44c7a5933892bfd2f933eaeaaed48f07a0d5ada927dd618cd6dd98896
-S19_global_deadline_only,C6 native actions use the remaining global deadline without per-leaf or per-action slices,tree,True,src/PaperExternalGiniTree.cpp,1295,ac3fe4f9add9c83d90964bf73437854ab0e1d89c0fb30fa18d3f5990a8b87f77
+S19_global_deadline_only,C6 native actions use the remaining global deadline without per-leaf or per-action slices,tree,True,src/PaperExternalGiniTree.cpp,1294,ac3fe4f9add9c83d90964bf73437854ab0e1d89c0fb30fa18d3f5990a8b87f77

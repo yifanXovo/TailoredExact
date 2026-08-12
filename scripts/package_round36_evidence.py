@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Create the compact, auditable Round 36 final evidence bundle.
 
-All 56 raw run directories remain local and checksum-addressed by their
-completion markers.  This script packages all four arms for one deterministic
-representative per frozen Round-35 pattern, retaining the ledgers needed to
-audit the causal claims without committing model dumps or redundant logs.
+All 56 Stage B and 47 Stage C raw run directories remain local and
+checksum-addressed by their completion markers. This script packages all four
+Stage B arms for one deterministic representative per frozen Round-35 pattern,
+plus compact all-row Stage C identities and comparisons, retaining the ledgers
+needed to audit the claims without committing model dumps or redundant logs.
 """
 
 from __future__ import annotations
@@ -21,6 +22,8 @@ from typing import Any, Iterable
 
 import analyze_round36 as analysis
 import round36_common as common
+import round36_stage_c_common as stage_c
+import run_round36_stage_c as stage_c_runner
 
 
 RAW_FILES = (
@@ -82,6 +85,22 @@ FINAL_DERIVED = (
     "final_audit_decision.json",
     "final_report.md",
     "runner_row_summary.csv",
+    "stage_c_candidate_definition.json",
+    "stage_c_contract_fix_audit.csv",
+    "stage_c_contract_fix_audit.json",
+    "stage_c_contract_fix_audit.md",
+    "stage_c_invalidated_attempt_1_contract_bug.json",
+    "stage_c_invalidated_attempt_1_contract_bug.md",
+    "stage_c_validation_matrix.csv",
+    "stage_c_command_freeze.json",
+    "stage_c_frozen_manifest.json",
+    "stage_c_start_record.json",
+    "stage_c_runner_row_summary.csv",
+    "stage_c_per_run_results.csv",
+    "stage_c_comparisons.csv",
+    "stage_c_group_summaries.csv",
+    "stage_c_final_audit.json",
+    "stage_c_final_report.md",
 )
 COMPRESSED_DERIVED = {
     "trajectory_events.csv": "trajectory_events.csv.gz",
@@ -260,11 +279,133 @@ def validate_final() -> dict[str, Any]:
         raise RuntimeError("official matrix is not 56 rows")
     validate_official_rows(matrix, common.load_json(common.FROZEN_MANIFEST),
                            common.inventory())
-    return decision
+    stage_c_decision = common.load_json(stage_c.FINAL_AUDIT)
+    stage_c_manifest = common.load_json(stage_c.FROZEN_MANIFEST)
+    stage_c_candidate = common.load_json(stage_c.CANDIDATE)
+    contract_fix = common.load_json(stage_c.CONTRACT_FIX_AUDIT)
+    invalidated_attempt = common.load_json(
+        stage_c.INVALIDATED_ATTEMPT_RECORD)
+    stage_b_manifest = common.load_json(common.FROZEN_MANIFEST)
+    frozen_stage_c_artifacts = (
+        (stage_c.CANDIDATE, "candidate_definition_sha256"),
+        (stage_c.MATRIX, "validation_matrix_sha256"),
+        (stage_c.COMMAND_FREEZE, "command_freeze_sha256"),
+    )
+    if any(not path.is_file() or sha256(path) != stage_c_manifest[key]
+           for path, key in frozen_stage_c_artifacts):
+        raise RuntimeError("Stage C frozen artifact identity changed")
+    if any(not (common.ROOT / relative).is_file() or
+               sha256(common.ROOT / relative) != expected
+               for relative, expected in
+               stage_c_manifest["source_file_sha256"].items()):
+        raise RuntimeError("Stage C frozen source identity changed")
+    if not (
+            contract_fix.get("passed") is True
+            and contract_fix.get("stage_b_executable_unchanged") is True
+            and contract_fix.get("executables_are_distinct") is True
+            and contract_fix.get("baseline_equivalence", {}).get(
+                "all_identical") is True
+            and invalidated_attempt.get("invalidated") is True
+            and invalidated_attempt.get("completed_valid_rows") == 18
+            and invalidated_attempt.get("failed_serial_order") == 19
+            and invalidated_attempt.get("row_reuse_permitted") is False
+            and sha256(stage_c.CONTRACT_FIX_AUDIT) ==
+                stage_c_manifest["contract_fix_audit_sha256"]
+            and sha256(stage_c.INVALIDATED_ATTEMPT_RECORD) ==
+                stage_c_manifest["invalidated_attempt_record_sha256"]
+            and stage_c_candidate.get("stage_b_executable_sha256") ==
+                stage_b_manifest["gurobi_executable_sha256"]
+            and stage_c_candidate.get("stage_c_executable_sha256") ==
+                stage_c_manifest["gurobi_executable_sha256"]
+            and sha256(stage_c.STAGE_B_EXE) ==
+                stage_c_manifest["stage_b_executable_sha256"]
+            and sha256(stage_c.EXE) ==
+                stage_c_manifest["gurobi_executable_sha256"]):
+        raise RuntimeError(
+            "Stage C contract-fix or invalidated-attempt provenance failed")
+    if not (
+            stage_c_decision.get("completed") is True
+            and stage_c_decision.get("expected_rows") == stage_c.EXPECTED_ROWS
+            and stage_c_decision.get("completed_rows") == stage_c.EXPECTED_ROWS
+            and stage_c_decision.get("valid_rows") == stage_c.EXPECTED_ROWS
+            and stage_c_decision.get("false_certificate_count") == 0
+            and stage_c_decision.get("separately_frozen_validation") is True
+            and stage_c_decision.get(
+                "historical_comparator_compatibility_valid") is True
+            and stage_c_decision.get("automatic_promotion_performed") is False
+            and stage_c_decision.get("rho_sensitivity_performed") is False
+            and stage_c_decision.get(
+                "instance_dependent_dispatch_introduced") is False
+            and stage_c_decision.get(
+                "validated_gurobi_mainline") == "C6-HGA-FULL"):
+        raise RuntimeError(
+            "Stage C final validity or no-promotion gate is not green")
+    stage_c_matrix = stage_c.csv_rows(stage_c.MATRIX)
+    stage_c_summary = stage_c.csv_rows(stage_c.SUMMARY)
+    if (len(stage_c_matrix) != stage_c.EXPECTED_ROWS
+            or len(stage_c_summary) != stage_c.EXPECTED_ROWS
+            or len({row["run_id"] for row in stage_c_summary}) !=
+            stage_c.EXPECTED_ROWS
+            or sum(row["validation_stage"] == "qualification_1800"
+                   for row in stage_c_matrix) != 35
+            or sum(row["validation_stage"] == "independent_v50_3600"
+                   for row in stage_c_matrix) != 12):
+        raise RuntimeError("Stage C matrix or runner summary is not 47-row complete")
+    return {"stage_b": decision, "stage_c": stage_c_decision}
+
+
+def stage_c_completion_manifest() -> list[dict[str, Any]]:
+    """Revalidate every Stage C row and retain compact raw-artifact identities."""
+    matrix = stage_c.csv_rows(stage_c.MATRIX)
+    items = stage_c.inventory()
+    manifest = stage_c.load_json(stage_c.FROZEN_MANIFEST)
+    output = []
+    for row in matrix:
+        directory = stage_c.RUNS / row["run_id"]
+        valid, reason = stage_c_runner.completion_valid(
+            directory, row, items[row["instance_id"]], manifest)
+        if not valid:
+            raise RuntimeError(
+                f"Stage C row failed checksum revalidation: "
+                f"{row['run_id']}:{reason}")
+        marker_path = directory / "completion_marker.json"
+        artifact_path = directory / "artifact_manifest.csv"
+        marker = stage_c.load_json(marker_path)
+        output.append({
+            "serial_order": int(row["serial_order"]),
+            "validation_stage": row["validation_stage"],
+            "run_id": row["run_id"],
+            "instance_id": row["instance_id"],
+            "completion_valid": True,
+            "completion_reason": reason,
+            "completion_marker_path": stage_c.relative(marker_path),
+            "completion_marker_bytes": marker_path.stat().st_size,
+            "completion_marker_sha256": sha256(marker_path),
+            "artifact_manifest_path": stage_c.relative(artifact_path),
+            "artifact_manifest_bytes": artifact_path.stat().st_size,
+            "artifact_manifest_sha256": sha256(artifact_path),
+            "artifact_count": int(marker["artifact_count"]),
+            "result_sha256": marker["result_sha256"],
+            "strict_certificate": marker[
+                "strict_certified_original_problem"],
+            "emergency_timeout": marker["emergency_timeout"],
+            "algorithmic_solve_state_resumed": marker[
+                "algorithmic_solve_state_resumed"],
+            "anchor_safety_valid": marker["anchor_safety_valid"],
+            "arm_contract_matches": marker["arm_contract_matches"],
+            "root_coverage_valid": marker["root_coverage_valid"],
+            "parent_child_coverage_valid": marker[
+                "parent_child_coverage_valid"],
+        })
+    return output
 
 
 def main() -> int:
-    decision = validate_final()
+    decisions = validate_final()
+    decision = decisions["stage_b"]
+    stage_c_decision = decisions["stage_c"]
+    stage_c_completion_csv = common.OUT / "stage_c_completion_manifest.csv"
+    write_csv(stage_c_completion_csv, stage_c_completion_manifest())
     compressed_derived = []
     for source_name, target_name in COMPRESSED_DERIVED.items():
         source, target = common.OUT / source_name, common.OUT / target_name
@@ -333,9 +474,14 @@ def main() -> int:
     final_inventory = []
     inventory_names = [COMPRESSED_DERIVED.get(name, name)
                        for name in FINAL_DERIVED] + [
-        "representative_selection.csv", "representative_raw_manifest.csv"]
+        "representative_selection.csv", "representative_raw_manifest.csv",
+        "stage_c_completion_manifest.csv"]
     for name in inventory_names:
         path = common.OUT / name
+        marker = sensitive(path)
+        if marker:
+            raise RuntimeError(
+                f"license-sensitive marker {marker} in {path}")
         require_repository_artifact_size(path)
         final_inventory.append({
             "path": common.relative(path), "bytes": path.stat().st_size,
@@ -344,10 +490,16 @@ def main() -> int:
     inventory_csv = common.OUT / "final_evidence_inventory.csv"
     write_csv(inventory_csv, final_inventory)
     summary = {
-        "schema": "round36-evidence-package-v1",
+        "schema": "round36-evidence-package-v2",
         "round_id": 36,
         "classification": decision["classification"],
         "completed_official_rows": 56,
+        "completed_stage_c_rows": stage_c.EXPECTED_ROWS,
+        "stage_c_candidate": stage_c_decision["candidate"],
+        "stage_c_predeclared_performance_gate_passed": stage_c_decision[
+            "predeclared_performance_gate_passed"],
+        "stage_c_automatic_promotion_performed": False,
+        "stage_c_recommendation": stage_c_decision["recommendation"],
         "representative_patterns": len(selected),
         "representative_instances": selected,
         "representative_arm_rows": len(selected) * len(common.ARMS),
@@ -358,6 +510,8 @@ def main() -> int:
                                     for row in manifest_rows),
         "compressed_derived_artifacts": compressed_derived,
         "representative_manifest_sha256": sha256(manifest_csv),
+        "stage_c_completion_manifest_sha256": sha256(
+            stage_c_completion_csv),
         "final_evidence_inventory_sha256": sha256(inventory_csv),
         "all_raw_runs_retained_locally": True,
         "all_raw_runs_checksum_addressed": True,
@@ -372,6 +526,10 @@ def main() -> int:
 
 - Final classification: `{decision['classification']}`.
 - Official rows: 56 checksum-complete.
+- Separately frozen Stage C rows: {stage_c.EXPECTED_ROWS} checksum-complete.
+- Stage C historical-comparator gate:
+  `{stage_c_decision['predeclared_performance_gate_passed']}`; no automatic
+  promotion was performed.
 - Representative patterns: {len(selected)}.
 - Representative four-arm rows: {len(selected) * len(common.ARMS)}.
 - Compressed raw artifacts: {len(manifest_rows)}.
@@ -388,6 +546,9 @@ All four arms are packaged for each selected instance. Original raw paths,
 uncompressed hashes, compressed paths, and compressed hashes are recorded in
 `representative_raw_manifest.csv`. All 56 complete raw directories remain
 local and are independently checksum-addressed by their completion markers.
+All 47 Stage C completion markers and artifact manifests are independently
+revalidated and checksum-indexed by `stage_c_completion_manifest.csv`; the
+full Stage C raw directories also remain local.
 """
     write_text(common.OUT / "evidence_package_report.md", report)
     print(json.dumps(summary, indent=2, sort_keys=True))

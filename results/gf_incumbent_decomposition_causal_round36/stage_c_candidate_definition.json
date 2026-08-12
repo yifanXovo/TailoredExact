@@ -1,0 +1,73 @@
+{
+  "K": 4,
+  "automatic_promotion_performed": false,
+  "candidate_name": "C6-BEST-PROOF-WIDE-ANCHOR-PROOF-NORM",
+  "causal_arm": "bw-p",
+  "conditional_contract_fix": {
+    "audit_path": "results/gf_incumbent_decomposition_causal_round36/stage_c_contract_fix_audit.json",
+    "audit_sha256": "278c0a4ada3f390096d46ac9ad741937ec658f3d40ccf56d12775e18a799012c",
+    "default_c6_behavior_changed": false,
+    "invalidated_attempt_record_path": "results/gf_incumbent_decomposition_causal_round36/stage_c_invalidated_attempt_1_contract_bug.json",
+    "invalidated_attempt_record_sha256": "7c1f57ee51eec4d682055f278ea856eb9b63e57f41a4ee7966fc90d89ff5b8d2",
+    "scope": "Round36 causal launch validation only",
+    "stronger_current_verified_proof_is_safe": true,
+    "weaker_current_verified_proof_is_rejected": true
+  },
+  "decomposition_anchor": "max(verified HGA, verified SIMPLE)",
+  "frozen_at_unix_seconds": 1786443329.8980389,
+  "frozen_before_stage_c_results": true,
+  "gurobi_seed": 0,
+  "historical_comparators": [
+    {
+      "path": "results/gf_simple_start_qualification_round35/simple_vs_hga_1800s.csv",
+      "sha256": "f4af7f7a6363390b5d49b3609f9d019631da90dfb08ecb5d29e71bceee36f307"
+    },
+    {
+      "path": "results/gf_simple_start_qualification_round35/simple_vs_hga_3600s.csv",
+      "sha256": "0c7b17e48447365491137164928d09eef15bc1c122b7bd3e3e05e85682790161"
+    },
+    {
+      "path": "results/gf_simple_start_qualification_round35/simple_vs_pgrb_1800s.csv",
+      "sha256": "7eea0c03594fe15c2b3193ba7beb1ee6d7eeb078c332138253ae07cdc30a3b11"
+    },
+    {
+      "path": "results/gf_simple_start_qualification_round35/simple_vs_pgrb_3600s.csv",
+      "sha256": "f4d91b3d657c28fac56032f00976195ce0e67ac4fc1b5c09462af4efe88a0935"
+    },
+    {
+      "path": "results/gf_simple_start_qualification_round35/round35_1800s_matrix.csv",
+      "sha256": "7b049f71b3730bee7b73e5326419e5ec2b27a2ae0be08a7f477af93f24cbcd98"
+    },
+    {
+      "path": "results/gf_simple_start_qualification_round35/round35_3600s_v50_matrix.csv",
+      "sha256": "3fdc9d0cc52c89e5c669658e6549543003198c31371d8f326f254992d45ba161"
+    }
+  ],
+  "predeclared_performance_gate": {
+    "candidate_certificate_regressions_maximum": 0,
+    "comparison": "fresh candidate versus compatible historical C6-HGA-FULL",
+    "independent_v50_non_tie_win_fraction_minimum": 0.6,
+    "interpretation": "gate supports later contemporaneous validation only; never automatic promotion",
+    "median_common_ub_gap_delta_maximum_each_stage": 0.0,
+    "qualification_non_tie_win_fraction_minimum": 0.6,
+    "validity_required": "47/47 valid rows and zero false certificates"
+  },
+  "proof_incumbent": "min(verified HGA, verified SIMPLE)",
+  "rho": 0.01,
+  "round_id": 36,
+  "schema": "round36-stage-c-candidate-definition-v2",
+  "split_normalization": "proof",
+  "stage": "C",
+  "stage_b_classification": "decomposition_geometry_dominant",
+  "stage_b_executable_sha256": "52b85f0e9f1f89fc09e08866c1901a787abd0e7d24c2f02e4e5f8337f48ddbe8",
+  "stage_b_final_decision_sha256": "2d414f28793c4d96575a2f41fd4c35d38ad142f0fd413801f6a83cdab75437a9",
+  "stage_c_executable_sha256": "b13d1f91835dd706abfc06ea561a6c6f78e902e36448ed76de44db7a27e6db59",
+  "startup_variant": "hga-full",
+  "threads": 1,
+  "validation_matrix": {
+    "independent_v50_3600_rows": 12,
+    "qualification_1800_rows": 35,
+    "total_rows": 47
+  },
+  "warm_resume": false
+}

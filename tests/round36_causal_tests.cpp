@@ -72,6 +72,29 @@ int main() {
                 "decreasing U_proof invalidated the fixed anchor cover");
         ++checks;
 
+        require(ebrp::round36ProofAnchorLaunchContractValid(
+                    true, 8.778082265416142, 8.778082265416142,
+                    8.833146456637262, tolerance),
+                "equal verified startup/current proof was rejected");
+        require(ebrp::round36ProofAnchorLaunchContractValid(
+                    true, 8.778082265416142, 8.773853723068965,
+                    8.833146456637262, tolerance),
+                "stronger current proof invalidated the safe frozen anchor");
+        ++checks;
+
+        require(!ebrp::round36ProofAnchorLaunchContractValid(
+                    true, 8.778082265416142, 8.79,
+                    8.833146456637262, tolerance),
+                "weaker current proof was accepted as launch-safe");
+        require(!ebrp::round36ProofAnchorLaunchContractValid(
+                    true, 8.778082265416142, 8.77, 8.76, tolerance),
+                "anchor below the recorded startup proof was accepted");
+        require(!ebrp::round36ProofAnchorLaunchContractValid(
+                    false, 8.778082265416142, 8.77,
+                    8.833146456637262, tolerance),
+                "unverified startup pair was accepted");
+        ++checks;
+
         const auto legacy_decision = ebrp::evaluateC6CurrentSplitDecision(
             10.0, 20.0, optimal(10.1), optimal(10.2), rho, tolerance);
         const auto explicit_proof = ebrp::evaluateC6CurrentSplitDecision(
@@ -128,8 +151,8 @@ int main() {
                 "Round 36 controls changed exact terminal closure semantics");
         ++checks;
 
-        require(checks == 8, "Round 36 causal check count changed");
-        std::cout << "Round36CausalTests: 8 safety/equivalence checks passed\n";
+        require(checks == 10, "Round 36 causal check count changed");
+        std::cout << "Round36CausalTests: 10 safety/equivalence checks passed\n";
         return 0;
     } catch (const std::exception& error) {
         std::cerr << "Round36CausalTests failed: " << error.what() << '\n';

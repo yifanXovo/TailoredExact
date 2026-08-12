@@ -47,18 +47,27 @@ class Round36SemanticAuditTests(unittest.TestCase):
         self.assertEqual(4, self.summary["verified_ub_assignments_guarded"])
 
     def test_anchor_has_no_forbidden_proof_consumer(self) -> None:
-        self.assertEqual(10, self.summary["anchor_symbol_occurrences"])
+        self.assertEqual(9, self.summary["anchor_symbol_occurrences"])
         self.assertEqual(0, self.summary[
             "anchor_forbidden_consumer_occurrences"])
 
-    def test_audited_sources_match_frozen_manifest(self) -> None:
+    def test_audited_sources_match_frozen_or_contract_fix_identity(self) -> None:
         manifest = json.loads((OUT / "round36_frozen_manifest.json").read_text(
+            encoding="utf-8"))
+        contract_audit = json.loads((OUT / "stage_c_contract_fix_audit.json").read_text(
             encoding="utf-8"))
         for relative, audited in self.summary["source_sha256"].items():
             path = ROOT / relative
             actual = hashlib.sha256(path.read_bytes()).hexdigest()
             self.assertEqual(audited, actual)
-            self.assertEqual(manifest["source_file_sha256"][relative], actual)
+            if relative in contract_audit["source_sha256"]:
+                self.assertEqual(
+                    contract_audit["source_sha256"][relative], actual)
+                self.assertNotEqual(
+                    manifest["source_file_sha256"][relative], actual)
+            else:
+                self.assertEqual(
+                    manifest["source_file_sha256"][relative], actual)
 
 
 if __name__ == "__main__":

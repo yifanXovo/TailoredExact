@@ -74,9 +74,18 @@ class Round36RunnerIntegrityTests(unittest.TestCase):
             self.assertFalse(value["algorithmic_solve_state_resumed"])
             self.assertTrue(value["reason"])
 
-    def test_frozen_runner_source_and_executable_still_match(self) -> None:
+    def test_frozen_stage_b_identity_and_audited_stage_c_transition(self) -> None:
+        contract_audit = common.load_json(
+            common.OUT / "stage_c_contract_fix_audit.json")
+        permitted_changes = contract_audit["source_sha256"]
         for relative, expected in self.manifest["source_file_sha256"].items():
-            self.assertEqual(expected, common.sha256(ROOT / relative))
+            actual = common.sha256(ROOT / relative)
+            if relative in permitted_changes:
+                self.assertEqual(permitted_changes[relative], actual)
+                self.assertNotEqual(expected, actual)
+            else:
+                self.assertEqual(expected, actual)
+        self.assertEqual(4, len(permitted_changes))
         self.assertEqual(self.manifest["gurobi_executable_sha256"],
                          common.sha256(common.EXE))
 

@@ -33,6 +33,16 @@ AnchorGridDecomposition makeProofRelevantAnchorGrid(
     int interval_count,
     double tolerance);
 
+// The Round 36 startup pair freezes a proof incumbent and a (possibly wider)
+// decomposition anchor.  A subsequently verified, stronger proof incumbent is
+// safe: it only shrinks the proof-relevant range covered by the frozen anchor.
+bool round36ProofAnchorLaunchContractValid(
+    bool startup_pair_verified,
+    double recorded_startup_proof,
+    double current_verified_proof,
+    double decomposition_anchor,
+    double tolerance);
+
 enum class CplexReplicaSplitPhase {
     InitialPartition,
     AdaptiveRefinement,

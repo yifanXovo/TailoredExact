@@ -99,6 +99,34 @@ AnchorGridDecomposition makeProofRelevantAnchorGrid(
     return result;
 }
 
+bool round36ProofAnchorLaunchContractValid(
+    bool startup_pair_verified,
+    double recorded_startup_proof,
+    double current_verified_proof,
+    double decomposition_anchor,
+    double tolerance) {
+    if (!startup_pair_verified ||
+        !std::isfinite(recorded_startup_proof) ||
+        !std::isfinite(current_verified_proof) ||
+        !std::isfinite(decomposition_anchor) ||
+        recorded_startup_proof <= 0.0 || current_verified_proof <= 0.0 ||
+        decomposition_anchor <= 0.0) {
+        return false;
+    }
+    const double scaled_tolerance = std::max(0.0, tolerance) * std::max({
+        1.0,
+        std::fabs(recorded_startup_proof),
+        std::fabs(current_verified_proof),
+        std::fabs(decomposition_anchor)
+    });
+    return current_verified_proof <=
+               recorded_startup_proof + scaled_tolerance &&
+           decomposition_anchor + scaled_tolerance >=
+               recorded_startup_proof &&
+           decomposition_anchor + scaled_tolerance >=
+               current_verified_proof;
+}
+
 bool legacyAdaptiveSplitEligible(double lower,
                                  double upper,
                                  int depth,

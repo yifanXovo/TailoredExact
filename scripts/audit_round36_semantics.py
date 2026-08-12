@@ -116,9 +116,9 @@ def main() -> int:
         },
         {
             "id": "S05_anchor_safety_reject",
-            "claim": "unsafe or unverified anchor configurations are rejected",
+            "claim": "unsafe, unverified, or weaker-current-proof launch configurations are rejected",
             "source": "tree",
-            "fragment": "decomposition_anchor_launch + 1e-7 >= proof_incumbent_launch && causal_grid.valid",
+            "fragment": "round36ProofAnchorLaunchContractValid( verified_seed.round36_anchor_safety_valid, verified_seed.round36_proof_incumbent_launch, proof_incumbent_launch, decomposition_anchor_launch, 1e-7) && causal_grid.valid",
         },
         {
             "id": "S06_exact_active_cover",

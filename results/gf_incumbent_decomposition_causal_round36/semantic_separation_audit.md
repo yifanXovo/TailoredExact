@@ -5,7 +5,7 @@
 - `verified_ub` assignments: 4/
   4 originate from the verified seed or are
   guarded by independent incumbent verification.
-- Decomposition-anchor symbol occurrences: 10.
+- Decomposition-anchor symbol occurrences: 9.
 - Forbidden anchor consumers: 0.
 - Hardware-dependent split-decision tokens: 0.
 - Per-leaf/per-action native time-slice tokens: 0.
