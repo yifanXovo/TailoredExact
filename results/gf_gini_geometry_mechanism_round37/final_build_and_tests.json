@@ -1,0 +1,23 @@
+{
+  "schema": "round37-final-build-and-tests-v1",
+  "passed": true,
+  "clean_build_directory": "build_round37_final/official/gurobi",
+  "build_directory_created_from_empty": true,
+  "build_type": "Release",
+  "compiler": "GNU 14.2.0",
+  "gurobi_version": "13.0.2",
+  "gurobi_enabled": true,
+  "clean_build_executable_sha256": "98b16849216ecb50f5d8fe2e10fe4b2516b79ba02d4e383af34b9b1867e09a1f",
+  "clean_build_executable_bytes": 5246159,
+  "official_experiment_executable_sha256": "90689ced5d588175d32b5c430c16467d54ce7ebf4ab5c9077e5ef06b362d1927",
+  "official_experiment_executable_bytes": 5246159,
+  "byte_reproducible_link_claimed": false,
+  "hash_difference_interpretation": "same-size independent PE link is not byte-identical; the official experiment executable remains separately frozen and checksum-audited",
+  "cpp_tests_passed": 16,
+  "cpp_tests_failed": 0,
+  "python_test_scripts_passed": 28,
+  "python_test_scripts_failed": 0,
+  "round36_historical_test_lifecycle_fix": "read-only tests compare contemporaneous Stage B, contract-fix, and Stage C recorded hashes instead of requiring a later working tree to retain Round 36 source bytes",
+  "post_implementation_default_c6_equivalence_passed": true,
+  "post_implementation_default_c6_equivalence_comparisons": 18
+}

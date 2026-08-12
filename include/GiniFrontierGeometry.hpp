@@ -10,6 +10,37 @@ struct GiniIntervalGeometry {
     double upper = 0.0;
 };
 
+// Solver-neutral input to the Round 37 exploratory pilot.  The policy may
+// inspect only complete initial-cell LP bounds and the frozen Gini geometry.
+// Runtime, node counts, instance metadata, scenario labels, and historical
+// outcomes are intentionally absent.
+struct PilotGiniCellAssessment {
+    std::string leaf_id;
+    GiniIntervalGeometry interval;
+    bool structurally_open = false;
+    bool lp_complete = false;
+    bool lp_optimal = false;
+    bool lp_bound_available = false;
+    double lp_lower_bound = 0.0;
+    double verified_cutoff = 0.0;
+};
+
+struct PilotWeakestGiniCellSelection {
+    bool valid = false;
+    std::string leaf_id;
+    GiniIntervalGeometry interval;
+    double lp_lower_bound = 0.0;
+    int eligible_cell_count = 0;
+    std::string reason = "not_evaluated";
+};
+
+// Select the weakest proof-relevant initial cell by complete valid LP bound.
+// Bounds equal within tolerance are ordered structurally by lower endpoint,
+// upper endpoint, then leaf id.
+PilotWeakestGiniCellSelection selectPilotWeakestGiniCell(
+    const std::vector<PilotGiniCellAssessment>& cells,
+    double tolerance);
+
 // A launch-frozen anchor grid and its intersection with the proof-relevant
 // Gini range.  Anchor cells are geometry only: proof cutoffs and certificates
 // continue to use an independently verified proof incumbent.

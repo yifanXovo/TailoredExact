@@ -446,6 +446,10 @@ struct SolveOptions {
     // inferred from instance size, scenario, M, or historical performance.
     std::string round36_c6_causal_arm = "off";
     std::string round36_c6_split_normalization = "proof";
+    // Round 37 exploratory geometry policy.  "off" is the frozen C6 default.
+    // The pilot arm is a uniform run-level choice; it is never inferred from
+    // an instance label, size, scenario, elapsed time, or solver effort.
+    std::string round37_c6_geometry_policy = "off";
     bool exact_phase_local_redecode_repair = false;
     bool exact_phase_local_redecode_repair_explicit = false;
     double exact_phase_local_redecode_seconds = 10.0;
