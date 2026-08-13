@@ -5,28 +5,29 @@ from __future__ import annotations
 
 import csv
 import json
-import subprocess
 import unittest
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "results" / "gf_incumbent_decomposition_causal_round36"
-PYTHON = Path(r"D:\msys64\ucrt64\bin\python.exe")
+ROUND37 = ROOT / "results" / "gf_gini_geometry_mechanism_round37"
 
 
 class Round36CompletionAuditTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        subprocess.run(
-            (str(PYTHON), "-B", "scripts/audit_round36_completion.py",
-             "--allow-incomplete"), cwd=ROOT, check=True,
-            stdout=subprocess.DEVNULL)
-        with (OUT / "interim_completion_requirements_audit.csv").open(
+        # This is a historical completion audit.  Re-running its pre-merge
+        # writer after later rounds would conflate live repository state with
+        # the state attested when Round 36 completed.
+        with (OUT / "completion_requirements_audit.csv").open(
                 newline="", encoding="utf-8") as stream:
             cls.rows = list(csv.DictReader(stream))
         cls.summary = json.loads((
-            OUT / "interim_completion_requirements_audit.json").read_text(
+            OUT / "completion_requirements_audit.json").read_text(
+                encoding="utf-8"))
+        cls.current = json.loads((
+            ROUND37 / "round36_reporting_consolidation.json").read_text(
                 encoding="utf-8"))
 
     def test_all_requested_sections_are_represented(self) -> None:
@@ -67,7 +68,7 @@ class Round36CompletionAuditTests(unittest.TestCase):
         self.assertEqual("achieved" if count == 56 else "incomplete",
                          exactness["status"])
 
-    def test_draft_pr_record_is_covered(self) -> None:
+    def test_historical_draft_and_current_merge_are_both_explicit(self) -> None:
         requirements = {
             "draft PR 83 is open and unmerged",
             "draft PR record attests the current head or its attestation parent",
@@ -75,6 +76,11 @@ class Round36CompletionAuditTests(unittest.TestCase):
         rows = {row["requirement"]: row for row in self.rows}
         self.assertTrue(all(rows[item]["status"] == "achieved"
                             for item in requirements))
+        pull = self.current["pull_request"]
+        self.assertEqual(83, pull["number"])
+        self.assertTrue(pull["merged"])
+        self.assertFalse(pull["draft"])
+        self.assertEqual("closed", pull["state"])
 
 
 if __name__ == "__main__":

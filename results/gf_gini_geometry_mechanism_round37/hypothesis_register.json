@@ -1,0 +1,36 @@
+{
+  "schema": "round37-hypothesis-register-v1",
+  "reference": "C6-HGA-FULL-K4-rho0.01",
+  "hypotheses": [
+    {
+      "id": "G0",
+      "name": "generic low-G nonuniform partition",
+      "status": "rejected_before_experiment",
+      "reason": "12 of 14 weakest initial LP cells are interior cells 1 or 2; the historical evidence does not support a generic low-G skew"
+    },
+    {
+      "id": "G1",
+      "name": "pilot weakest-cell pre-refinement",
+      "status": "mechanism_confirmed_policy_not_promoted",
+      "rule": "complete the four initial LPs; choose the open cell with minimum valid LP bound under structural tie breaks; split it once at the midpoint before native targeting; then resume unchanged C6",
+      "evidence": "10/10 exposed runs reproduced the prior weakest-cell index and produced a positive local LP-bound gain; the V20 positive and V50 regression both persisted at 180, 480, and 900 seconds",
+      "conclusion": "finite-width cell geometry creates a real local relaxation bottleneck, but one forced weakest-cell split does not uniformly improve downstream global proof",
+      "forbidden_inputs": [
+        "instance_id",
+        "scenario_label",
+        "elapsed_time",
+        "Work",
+        "nodes",
+        "hardware",
+        "historical_outcome"
+      ]
+    },
+    {
+      "id": "G2",
+      "name": "multi-cell weakness-density repartition",
+      "status": "future_hypothesis_not_tested_or_authorized",
+      "reason": "G1 exposes a coherent local mechanism but also a persistent V50 downstream regression; a new round would need a separately predeclared uniform predictor of bottleneck persistence"
+    }
+  ],
+  "automatic_promotion_allowed": false
+}

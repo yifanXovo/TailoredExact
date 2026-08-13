@@ -4,24 +4,21 @@
 from __future__ import annotations
 
 import csv
-import hashlib
 import json
-import subprocess
 import unittest
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "results" / "gf_incumbent_decomposition_causal_round36"
-PYTHON = Path(r"D:\msys64\ucrt64\bin\python.exe")
 
 
 class Round36SemanticAuditTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        subprocess.run((str(PYTHON), "-B",
-                        "scripts/audit_round36_semantics.py"),
-                       cwd=ROOT, check=True, stdout=subprocess.DEVNULL)
+        # The committed audit is immutable Round 36 evidence.  Re-running its
+        # writer against a later-round working tree would overwrite that
+        # evidence and incorrectly require the repository never to evolve.
         cls.summary = json.loads((OUT / "semantic_separation_audit.json").read_text(
             encoding="utf-8"))
         with (OUT / "semantic_separation_audit.csv").open(
@@ -56,18 +53,20 @@ class Round36SemanticAuditTests(unittest.TestCase):
             encoding="utf-8"))
         contract_audit = json.loads((OUT / "stage_c_contract_fix_audit.json").read_text(
             encoding="utf-8"))
+        stage_c_manifest = json.loads((OUT / "stage_c_frozen_manifest.json").read_text(
+            encoding="utf-8"))
+        stage_c_sources = stage_c_manifest["source_file_sha256"]
         for relative, audited in self.summary["source_sha256"].items():
-            path = ROOT / relative
-            actual = hashlib.sha256(path.read_bytes()).hexdigest()
-            self.assertEqual(audited, actual)
+            self.assertEqual(audited, stage_c_sources[relative])
             if relative in contract_audit["source_sha256"]:
                 self.assertEqual(
-                    contract_audit["source_sha256"][relative], actual)
+                    contract_audit["source_sha256"][relative], audited)
                 self.assertNotEqual(
-                    manifest["source_file_sha256"][relative], actual)
+                    manifest["source_file_sha256"][relative],
+                    contract_audit["source_sha256"][relative])
             else:
                 self.assertEqual(
-                    manifest["source_file_sha256"][relative], actual)
+                    manifest["source_file_sha256"][relative], audited)
 
 
 if __name__ == "__main__":

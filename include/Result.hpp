@@ -551,6 +551,16 @@ struct SolveResult {
     // remain at their defaults for every non-Round-36 run.
     std::string round36_c6_causal_arm = "off";
     std::string round36_c6_split_normalization = "proof";
+    std::string round37_c6_geometry_policy = "off";
+    bool round37_pilot_all_initial_lps_complete = false;
+    long long round37_pilot_initial_lp_count = 0;
+    long long round37_pilot_eligible_cell_count = 0;
+    std::string round37_pilot_weakest_leaf_id;
+    double round37_pilot_weakest_lower_bound = 0.0;
+    double round37_pilot_weakest_gamma_L = 0.0;
+    double round37_pilot_weakest_gamma_U = 0.0;
+    bool round37_pilot_prefinement_performed = false;
+    long long round37_pilot_prefinement_count = 0;
     bool round36_hga_start_attempted = false;
     bool round36_hga_start_verified = false;
     double round36_hga_start_objective = 0.0;

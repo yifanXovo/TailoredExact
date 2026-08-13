@@ -5,6 +5,44 @@
 
 namespace ebrp {
 
+PilotWeakestGiniCellSelection selectPilotWeakestGiniCell(
+    const std::vector<PilotGiniCellAssessment>& cells,
+    double tolerance) {
+    PilotWeakestGiniCellSelection selection;
+    const double tol = std::max(0.0, tolerance);
+    for (const PilotGiniCellAssessment& cell : cells) {
+        const bool eligible = cell.structurally_open && cell.lp_complete &&
+            cell.lp_optimal && cell.lp_bound_available &&
+            std::isfinite(cell.interval.lower) &&
+            std::isfinite(cell.interval.upper) &&
+            std::isfinite(cell.lp_lower_bound) &&
+            std::isfinite(cell.verified_cutoff) &&
+            cell.interval.upper > cell.interval.lower + tol &&
+            cell.lp_lower_bound < cell.verified_cutoff - tol;
+        if (!eligible) continue;
+        ++selection.eligible_cell_count;
+        const bool weaker = !selection.valid ||
+            cell.lp_lower_bound < selection.lp_lower_bound - tol;
+        const bool bound_tie = selection.valid &&
+            std::fabs(cell.lp_lower_bound - selection.lp_lower_bound) <= tol;
+        const bool structural_precedes = bound_tie &&
+            (cell.interval.lower < selection.interval.lower - tol ||
+             (std::fabs(cell.interval.lower - selection.interval.lower) <= tol &&
+              (cell.interval.upper < selection.interval.upper - tol ||
+               (std::fabs(cell.interval.upper - selection.interval.upper) <= tol &&
+                cell.leaf_id < selection.leaf_id))));
+        if (!weaker && !structural_precedes) continue;
+        selection.valid = true;
+        selection.leaf_id = cell.leaf_id;
+        selection.interval = cell.interval;
+        selection.lp_lower_bound = cell.lp_lower_bound;
+    }
+    selection.reason = selection.valid
+        ? "weakest_complete_initial_lp_bound_structural_ties"
+        : "no_open_complete_optimal_initial_lp_cell";
+    return selection;
+}
+
 std::string cplexReplicaSplitPhaseName(CplexReplicaSplitPhase phase) {
     switch (phase) {
     case CplexReplicaSplitPhase::InitialPartition:

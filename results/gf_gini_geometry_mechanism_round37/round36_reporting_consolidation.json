@@ -1,0 +1,48 @@
+{
+  "schema": "round37-round36-reporting-consolidation-v1",
+  "round36_research_head": "4eb8e36515bbb2dd36ba49c5605c7c1b12a7ae32",
+  "round36_main_merge_commit": "414c01216bb3aa30eb1f27f390b6f23bf06cb2eb",
+  "round36_tree": "6d0b1e2727c7729d9013d33fb341145d4ebab135",
+  "pull_request": {
+    "number": 83,
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/83",
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "merged_at": "2026-08-12T14:37:45Z",
+    "head_sha": "4eb8e36515bbb2dd36ba49c5605c7c1b12a7ae32",
+    "merge_commit": "414c01216bb3aa30eb1f27f390b6f23bf06cb2eb"
+  },
+  "historical_stage_b_checkpoint": {
+    "decision_file": "results/gf_incumbent_decomposition_causal_round36/final_audit_decision.json",
+    "decision_sha256": "2d414f28793c4d96575a2f41fd4c35d38ad142f0fd413801f6a83cdab75437a9",
+    "report_file": "results/gf_incumbent_decomposition_causal_round36/final_report.md",
+    "report_sha256": "51adfe95af0620a1042cd9aa5440cead54dbcd8f3f3aa971046f8c008534b0eb",
+    "role": "intermediate_stage_b_decision_authorizing_stage_c",
+    "immutable": true
+  },
+  "terminal_stage_c_decision": {
+    "decision_file": "results/gf_incumbent_decomposition_causal_round36/stage_c_final_audit.json",
+    "decision_sha256": "e5b343da9def67039ffa3e648ce1cdb65480214d546448efe42c04dfd348dda3",
+    "report_file": "results/gf_incumbent_decomposition_causal_round36/stage_c_final_report.md",
+    "report_sha256": "e0484558d0442f5712e807d6bc229f95c1668e56e74a8bffe7bb0fea8884221f",
+    "completed_rows": 47,
+    "strict_certificates": 18,
+    "valid_nocertificates": 29,
+    "false_certificates": 0,
+    "performance_gate_passed": false,
+    "validated_mainline": "C6-HGA-FULL",
+    "automatic_promotion_performed": false
+  },
+  "stale_as_live_state_but_immutable": [
+    {
+      "file": "results/gf_incumbent_decomposition_causal_round36/github_pr_record.json",
+      "sha256": "306991904a0873af78dcfdbc5812e59fcf408f58799688b649e8bb1458553401"
+    },
+    {
+      "file": "results/gf_incumbent_decomposition_causal_round36/completion_requirements_audit.json",
+      "sha256": "4a603874a6da4b5b0634dc09e9c0b4240db3c9ea5621f6a568a7a2dcd1b05180"
+    }
+  ],
+  "current_conclusion": "Round 36 identified a causal decomposition-geometry effect but did not validate BW-P as a generally better exact algorithm; C6-HGA-FULL remains unchanged."
+}

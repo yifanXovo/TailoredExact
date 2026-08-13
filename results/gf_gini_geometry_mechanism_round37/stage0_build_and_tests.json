@@ -1,0 +1,40 @@
+{
+  "schema": "round37-stage0-build-and-tests-v1",
+  "passed": true,
+  "clean_build_directory": "build_round37/official/gurobi",
+  "build_type": "Release",
+  "generator": "MinGW Makefiles",
+  "compiler": "D:/msys64/ucrt64/bin/g++.exe",
+  "gurobi_root": "D:/gurobi1302/win64",
+  "gurobi_version": "13.0.2",
+  "executable": "build_round37/official/gurobi/ExactEBRP.exe",
+  "executable_sha256": "1df031f903f9d4cc8559ff29f886d1a6a660ed73c19a9f3efc68f52a3b545b63",
+  "executable_bytes": 5231731,
+  "cpp_tests": {
+    "passed": 15,
+    "failed": 0,
+    "ctest_command": "ctest --test-dir build_round37/official/gurobi --output-on-failure"
+  },
+  "python_test_scripts": {
+    "passed": 28,
+    "failed": 0,
+    "command_convention": "D:/msys64/ucrt64/bin/python.exe -B tests/<script>.py"
+  },
+  "initial_interrupted_build_invalidated": {
+    "accepted_as_evidence": false,
+    "reason": "short command watchdog left concurrent make processes and a truncated Parser.cpp object",
+    "remediation": "verified build_round37 path removed after all processes exited; configured and built once from an empty directory",
+    "source_or_historical_artifacts_affected": false
+  },
+  "contemporaneous_c6_equivalence": {
+    "passed": true,
+    "comparison_count": 18,
+    "instances": [
+      "V12_M1",
+      "round32_multi_m_high_imbalance_V20_M2_seed1052706459"
+    ],
+    "old_executable_sha256": "b13d1f91835dd706abfc06ea561a6c6f78e902e36448ed76de44db7a27e6db59",
+    "new_executable_sha256": "1df031f903f9d4cc8559ff29f886d1a6a660ed73c19a9f3efc68f52a3b545b63",
+    "audit": "results/gf_gini_geometry_mechanism_round37/baseline_equivalence_audit.json"
+  }
+}

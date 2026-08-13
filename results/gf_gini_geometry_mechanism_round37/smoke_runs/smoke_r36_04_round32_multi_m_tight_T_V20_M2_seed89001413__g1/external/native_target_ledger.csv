@@ -1,0 +1,4 @@
+phase_index,leaf_id,target_kind,current_bound,target_bound,other_open_min_bound,verified_cutoff,status,native_status,native_bound,target_reached,exact_closure,requeued,solver_runtime,work,nodes,event_source
+1,L1.0,next_leaf,0.17379180329874633,0.19198123703792139,0.19198123703792139,0.35363892908469974,exact_closure,"INFEASIBLE",1e+100,0,1,0,0.26900005340576172,0.51932003114228664,1,"c6_next_strict_frontier_bound_reached_requeue"
+1,L1.1,next_leaf,0.19198123703792139,0.23593037105001993,0.23593037105001993,0.35363892908469974,target_reached_requeue,"INTERRUPTED",0.25600675808408568,1,0,1,0.81599998474121094,1.1547966485915995,1,"c6_next_strict_frontier_bound_reached_requeue"
+1,L2,next_leaf,0.23593037105001993,0.25600675808408568,0.25600675808408568,0.35363892908469974,target_reached_requeue,"INTERRUPTED",0.26779345719212061,1,0,1,0.57299995422363281,0.9817308576597793,1,"c6_next_strict_frontier_bound_reached_requeue"

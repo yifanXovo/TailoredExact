@@ -1622,6 +1622,28 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.round36_c6_causal_arm) << "\",\n";
     out << "  \"round36_c6_split_normalization\": \""
         << jsonEscape(result.round36_c6_split_normalization) << "\",\n";
+    out << "  \"round37_c6_geometry_policy\": \""
+        << jsonEscape(result.round37_c6_geometry_policy) << "\",\n";
+    out << "  \"round37_pilot_all_initial_lps_complete\": "
+        << (result.round37_pilot_all_initial_lps_complete ? "true" : "false")
+        << ",\n";
+    out << "  \"round37_pilot_initial_lp_count\": "
+        << result.round37_pilot_initial_lp_count << ",\n";
+    out << "  \"round37_pilot_eligible_cell_count\": "
+        << result.round37_pilot_eligible_cell_count << ",\n";
+    out << "  \"round37_pilot_weakest_leaf_id\": \""
+        << jsonEscape(result.round37_pilot_weakest_leaf_id) << "\",\n";
+    out << "  \"round37_pilot_weakest_lower_bound\": "
+        << result.round37_pilot_weakest_lower_bound << ",\n";
+    out << "  \"round37_pilot_weakest_gamma_L\": "
+        << result.round37_pilot_weakest_gamma_L << ",\n";
+    out << "  \"round37_pilot_weakest_gamma_U\": "
+        << result.round37_pilot_weakest_gamma_U << ",\n";
+    out << "  \"round37_pilot_prefinement_performed\": "
+        << (result.round37_pilot_prefinement_performed ? "true" : "false")
+        << ",\n";
+    out << "  \"round37_pilot_prefinement_count\": "
+        << result.round37_pilot_prefinement_count << ",\n";
     out << "  \"round36_hga_start_attempted\": "
         << (result.round36_hga_start_attempted ? "true" : "false")
         << ",\n";

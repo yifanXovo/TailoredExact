@@ -1,0 +1,53 @@
+{
+  "baseline_equivalence_passed": true,
+  "clean_build_and_tests_passed": true,
+  "cleanup_removed_bytes": 17209698,
+  "cleanup_removed_files": 79,
+  "counter_or_ledger_semantic_failures": 0,
+  "environment_or_model_lifecycle_failures": 0,
+  "false_certificate_count": 0,
+  "historical_run_count": 103,
+  "historical_runs_passing_correctness_lifecycle_semantics": 103,
+  "logging_defect": {
+    "correctness_affected": false,
+    "description": "paper exact ledgers used default six-significant-digit iostream precision",
+    "fix": "setprecision(17) on all eight exact evidence streams before headers",
+    "fixed_source_sha256": "0065468f297ec01000f0bd8bfb80c92b56cd9a3a6ebf4adfb38dacf57d260ab5",
+    "historical_max_absolute_work_delta": 0.048879686703003244,
+    "historical_max_relative_work_delta": 4.612609486402933e-06,
+    "historical_work_reconstruction_failures_at_1e_7": 81,
+    "new_equivalence_work_rows": [
+      {
+        "absolute_delta": 8.881784197001252e-16,
+        "ledger_sum": 4.853018191994489,
+        "reported": 4.85301819199449,
+        "run_id": "round32_multi_m_high_imbalance_V20_M2_seed1052706459__round37_log_precision_fix"
+      },
+      {
+        "absolute_delta": 7.105427357601002e-15,
+        "ledger_sum": 35.463185439743086,
+        "reported": 35.46318543974309,
+        "run_id": "V12_M1__round37_log_precision_fix"
+      }
+    ],
+    "new_work_reconstruction_exact": true
+  },
+  "passed": true,
+  "protected_user_file_sha256": {
+    "results/gf_compact_bc_round/handling_convention_test/handling_convention.json": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+    "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+    "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202"
+  },
+  "protected_user_files_unchanged": true,
+  "reporting_defects_fixed_by_consolidation": [
+    "Stage B files named final are labeled as historical intermediate evidence",
+    "Stage C is the terminal Round 36 decision",
+    "PR 83 current state is merged rather than open draft",
+    "frozen completion writers are no longer rerun by read-only tests"
+  ],
+  "schema": "round37-stage0-engineering-audit-v1",
+  "stage_b_runs": 56,
+  "stage_c_runs": 47,
+  "timestamp_monotonicity_failures": 0,
+  "trajectory_restored_as_test_dependency": true
+}

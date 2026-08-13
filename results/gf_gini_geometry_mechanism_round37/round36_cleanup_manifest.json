@@ -1,0 +1,884 @@
+{
+  "artifacts": [
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/full_controller.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/evidence_package_summary.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient controller log superseded by tracked completion and runner records"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 5055,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/full_controller.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/evidence_package_summary.json",
+      "sha256": "42684898e083baccd10447caffd951e592ee184470daf8346e2e201944cbfb58",
+      "verification": "transient controller log superseded by tracked completion and runner records"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 10926,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_causal_geometry_comparison.csv",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/causal_geometry_comparison.csv",
+      "sha256": "45e029360d01ec739ecc56cf5b228173b9c4d4aaaebc5e300dc384da45052d2d",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 5196,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_causal_group_summaries.csv",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/causal_group_summaries.csv",
+      "sha256": "a34bbbe453b4ed23dab7db1be311ba4290641bab32c887d93a7dd30dab58953d",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 11028,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_causal_normalization_comparison.csv",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/causal_normalization_comparison.csv",
+      "sha256": "966b4e1736b326e4be7d8f9a8e849862d2cc2d09acf54535d17957a153a1f795",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 41745,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_child_lookahead_split_audit.csv",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/child_lookahead_split_audit.csv",
+      "sha256": "399b9c3650f9ff8252732aec56069d840301da983f6bcb5b75d24c6898f1146b",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 4222,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_completion_requirements_audit.csv",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/completion_requirements_audit.csv",
+      "sha256": "ff27bbd759116d4eff94822c15c99e782b23dd4493f108fc904a80a8f5e5c4af",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 8554,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_completion_requirements_audit.json",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/completion_requirements_audit.json",
+      "sha256": "f681bfb15e09384e0cc5285f5d897d9a3095b654aa390314d00df421e62c4d1b",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 4559,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_completion_requirements_audit.md",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/completion_requirements_audit.md",
+      "sha256": "2830c164c5ece9724e0ed03b2196b3671799aed1cac85061134dee24f232e64e",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 15577,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_exactness_certificate_audit.csv",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/exactness_certificate_audit.csv",
+      "sha256": "de991f7fc1acf120fd001ba1bf027032d53e1fb7b5d4ccf31b76fbaf471155ba",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 5694,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_final_audit_decision.json",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/final_audit_decision.json",
+      "sha256": "a15424b1f5eb4763730476b1ca131373ad44d23474f244920b7b4314f06c3dee",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 3745,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_final_report.md",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/final_report.md",
+      "sha256": "607996b4a0edbc8f7c5317e3eb3322fe7a706f120c0fabf1c23129649aea141b",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 11380,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_fixed_anchor_proof_comparison.csv",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/fixed_anchor_proof_comparison.csv",
+      "sha256": "d54aafc3c0f3c4644b21766e727ee3a614b80280898927b3b1fd38a3d8185db7",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 105414,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_initial_decomposition_audit.csv",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/initial_decomposition_audit.csv",
+      "sha256": "b5805dfefd35e4278a4206c070678aebe6667512110960528b3ca9d66732b3bb",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 38643,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_interaction_sequence_hashes.csv",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/interaction_sequence_hashes.csv",
+      "sha256": "833923a6ee0ad140a9d1fd441d374962e1d5a4cfb043f828ddebe7b253b60fa0",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 41617,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_native_target_audit.csv",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/native_target_audit.csv",
+      "sha256": "f7be4c0c520427c6405257d4526a8ff233dd81b27740657cf6350b21ad92850d",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 165963,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_per_arm_results.csv",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/per_arm_results.csv",
+      "sha256": "09fd480a631dffdece3b251eedefe7ff72484fa4764ff28dd5e1d6f29e0af801",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 1240,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_representative_trajectory_report.md",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/representative_trajectory_report.md",
+      "sha256": "3002701fd5605480f000ce7f6cd31e3745fd758e992ce80ad2de5389a351ff8d",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 69289,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_stage_c_comparisons.csv",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_c_comparisons.csv",
+      "sha256": "1c1bf96cbdcbedbb0c6b0fba06d8733a93938b013fe7c1c6825ba12738628f3b",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 1940,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_stage_c_final_audit.json",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_c_final_audit.json",
+      "sha256": "23b0198d45919e89acd253376ceb5cde3c6f45b145664994af64152cf0c48974",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 1243,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_stage_c_final_report.md",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_c_final_report.md",
+      "sha256": "af9c8a88983c65dd67c2761282240e8130ef38e7466863848656182db296c63e",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 4422,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_stage_c_group_summaries.csv",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_c_group_summaries.csv",
+      "sha256": "2af114856d2dd9004c7d57fd8e55171ae9c26a49b418749c7d0ce4ae1e867369",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 19647,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_stage_c_per_run_results.csv",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_c_per_run_results.csv",
+      "sha256": "0d7f9d083997919ffcc0cd6e400531c61379c4ea92310705377098e0c57ae279",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 18296,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_terminal_closure_audit.csv",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/terminal_closure_audit.csv",
+      "sha256": "46c243437569bd6b7f1b1064255686af3faa2ba956adc1555360dca5fe9fd96b",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "intermediate",
+      "bytes": 16551945,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/interim_trajectory_events.csv",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/trajectory_events.csv",
+      "sha256": "e691d023c79a54be84c1e7783be038703ef920390391218316b2316d77993aee",
+      "verification": "superseded by completed final artifact"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/pilot_controller.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/evidence_package_summary.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient controller log superseded by tracked completion and runner records"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 296,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/pilot_controller.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/evidence_package_summary.json",
+      "sha256": "738bb9604b70ffb38112bce26766701c3b75e9728e921a9edcc9422ea1a2ec0b",
+      "verification": "transient controller log superseded by tracked completion and runner records"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 45098,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_gurobi.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "484e06ea4674e39f54642ca1b2bcf78771635ee07da3a8bf0b7b302278dd9081",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 6664,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_gurobi.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "910c4fb988c0cefbeec529aa906a97b019c516e2b04c7def5ed2fb007d474b52",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_configure_gurobi.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 139,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_configure_gurobi.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "6d36666667cceabedccee83499e3e61fa125da7403ca0b5002aa95ae74144d96",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_ctest_gurobi.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 1904,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_ctest_gurobi.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "29a33fa6d06c052bd39add74835682656646e14c65a9c7aacd5f95affbf5b9f6",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round20_regression_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 41,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round20_regression_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "ff38a6a3a7be400d55e37bb37741837928403071e7294dd22d794a4db4300d92",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round22_runner_integrity_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 49,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round22_runner_integrity_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "4b47e3b1f44e10a9948903eb9d0401cbd9f52c2b9a4755598ed051f5cc4ee4ad",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round23_final_evidence_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 45,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round23_final_evidence_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "46b46346eefedf216015f9fcbd6165c4ec1629d62d4b7b0f95194759d627ae38",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round23_moderate4301_forensic_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 73,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round23_moderate4301_forensic_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "5a6c561d2ad7d8e853e0ca4805e694840fe145835c12fc7e46f88e233b1cece7",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round23_runner_integrity_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 47,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round23_runner_integrity_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "df7c89459118e90242f7c06901051919c3acb0161e4a03b40dd2d98be6b4bb75",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round25_protocol_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 106,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round25_protocol_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e9fd4b368eff0c2d2d29f58a29556036d4b96664ac72eec1587c8e1587f46acc",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round26_protocol_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 42,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round26_protocol_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "8490c87bf8d2d157b497c0ddf9417a2ea2e2f28af628f2fbc80b3d5792afb480",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 109,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round27_protocol_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "deba66a310fc6633d3d8451f5b84c8008f6c759cbddb73525fd789df08b79f68",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round27_protocol_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round28_protocol_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 28,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round28_protocol_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "cfb9e0d0288c50e6d758da145f1d4e939cb084b44f6ec214c1d210a54d5df7ea",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 112,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round29_protocol_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "206ef4df3d3749e02908d02753579842a942c7311d489cc53e03b374b45cb064",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round29_protocol_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round30_c0_parser_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 31,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round30_c0_parser_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "69591405dc39f8f9decf5fb5fbbd8047afbb6b50b3124e8c62f90d313c6cb6e1",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 112,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round30_protocol_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "0df10976ccd82e259847b457e472dce65c5eba2f5244207b997816c8a780b394",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round30_protocol_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round30_trace_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 27,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round30_trace_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "f0f4fa430d33d17dfcc0820e0aadfc2577f23ffd978763272f65638d66879b87",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round31_protocol_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 91,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round31_protocol_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "d2518dbb79cb7673f9753675512f87f6e38743b0cecac4f77f6d2a1617ab99d2",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round32_protocol_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 40,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round32_protocol_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "99639c381fd71fde53a988973cf83060b40b95bcf27b9cc53a88e362682c7705",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round32_runner_trace_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 43,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round32_runner_trace_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "aba30d1fb8875ebb09c5da2c6c5ba77ba07fb8716a6d1303ddc24ff15ca25c89",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round33_protocol_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 41,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round33_protocol_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "c7d1ed33a9f5abb702339122cdf20d62d17fd899a02dc7df2d3c7ec9008480f6",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round33_runner_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 38,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round33_runner_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "bb15626dfaa1baeb33c9f5b3a5cdef74ed4a2f790b60ae1201c427b8b688a5c7",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 108,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round34_protocol_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "731497fe438734e5d846eb72a6e10623269b7612b89b976353e7d67fb6c7b7ef",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round34_protocol_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 109,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round35_protocol_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "deba66a310fc6633d3d8451f5b84c8008f6c759cbddb73525fd789df08b79f68",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round35_protocol_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 108,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round36_protocol_tests.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "731497fe438734e5d846eb72a6e10623269b7612b89b976353e7d67fb6c7b7ef",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_a_python_round36_protocol_tests.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_a_build_and_tests.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient command log summarized by tracked Stage A audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_c_contract_fix_ctest.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_c_contract_fix_audit.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient test log summarized by tracked contract-fix audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 1946,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_c_contract_fix_ctest.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/stage_c_contract_fix_audit.json",
+      "sha256": "859615899a5cef095096a1ded0766dd9fe7fe0f8e9fe9691dec57a5bb863d382",
+      "verification": "transient test log summarized by tracked contract-fix audit"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 0,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_c_controller.stderr.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/evidence_package_summary.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification": "transient controller log superseded by tracked completion and runner records"
+    },
+    {
+      "artifact_class": "transient_log",
+      "bytes": 4911,
+      "decision": "remove",
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_c_controller.stdout.log",
+      "removed": true,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/evidence_package_summary.json",
+      "sha256": "cd61d1778b339c15ac751cc322092a967041a635153a077bc12a4a574c737e33",
+      "verification": "transient controller log superseded by tracked completion and runner records"
+    },
+    {
+      "artifact_class": "required_uncompressed_test_fixture",
+      "bytes": 19180901,
+      "decision": "retain",
+      "path": "results/gf_incumbent_decomposition_causal_round36/trajectory_events.csv",
+      "removed": false,
+      "replacement": "results/gf_incumbent_decomposition_causal_round36/trajectory_events.csv.gz",
+      "sha256": "5b665120c62f115d1370e0ee56c47a4bdcc891aa738d177baceb50def25fe310",
+      "verification": "byte-exact gzip identity verified; uncompressed path retained because frozen Round 36 schema tests consume it"
+    }
+  ],
+  "branch": "agent/round37-gini-geometry-mechanism",
+  "candidate_bytes": 36390599,
+  "candidate_count": 80,
+  "execution_status": "removed_verified_redundant_files_and_restored_test_dependency",
+  "generated_at_utc": "2026-08-12T15:43:35.292222+00:00",
+  "head": "414c01216bb3aa30eb1f27f390b6f23bf06cb2eb",
+  "protected_user_file_sha256": {
+    "results/gf_compact_bc_round/handling_convention_test/handling_convention.json": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+    "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+    "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202"
+  },
+  "protected_user_files_unchanged": true,
+  "removed_bytes": 17209698,
+  "removed_count": 79,
+  "retained_directories": [
+    {
+      "bytes": 2042266628,
+      "decision": "retain",
+      "exists": true,
+      "file_count": 2374,
+      "path": "results/gf_incumbent_decomposition_causal_round36/runs",
+      "reason": "raw, invalidated, equivalence, or representative provenance"
+    },
+    {
+      "bytes": 2643646608,
+      "decision": "retain",
+      "exists": true,
+      "file_count": 1874,
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_c_runs",
+      "reason": "raw, invalidated, equivalence, or representative provenance"
+    },
+    {
+      "bytes": 8169289,
+      "decision": "retain",
+      "exists": true,
+      "file_count": 37,
+      "path": "results/gf_incumbent_decomposition_causal_round36/invalidated_rows",
+      "reason": "raw, invalidated, equivalence, or representative provenance"
+    },
+    {
+      "bytes": 467608757,
+      "decision": "retain",
+      "exists": true,
+      "file_count": 754,
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_c_invalidated_attempt_1_contract_bug",
+      "reason": "raw, invalidated, equivalence, or representative provenance"
+    },
+    {
+      "bytes": 19325595,
+      "decision": "retain",
+      "exists": true,
+      "file_count": 101,
+      "path": "results/gf_incumbent_decomposition_causal_round36/baseline_equivalence_runs",
+      "reason": "raw, invalidated, equivalence, or representative provenance"
+    },
+    {
+      "bytes": 12885784,
+      "decision": "retain",
+      "exists": true,
+      "file_count": 68,
+      "path": "results/gf_incumbent_decomposition_causal_round36/stage_c_contract_fix_equivalence_runs",
+      "reason": "raw, invalidated, equivalence, or representative provenance"
+    },
+    {
+      "bytes": 1115175,
+      "decision": "retain",
+      "exists": true,
+      "file_count": 280,
+      "path": "results/gf_incumbent_decomposition_causal_round36/representative_raw",
+      "reason": "raw, invalidated, equivalence, or representative provenance"
+    }
+  ],
+  "round36_commit": "4eb8e36515bbb2dd36ba49c5605c7c1b12a7ae32",
+  "round36_main_merge_commit": "414c01216bb3aa30eb1f27f390b6f23bf06cb2eb",
+  "schema": "round37-round36-local-cleanup-v1",
+  "scope": "untracked top-level Round 36 files only",
+  "trajectory_compressed_sha256": "176655fa8841b71faa3c743f5d8da78ff2bb21791a2449e20c68533525ba9827",
+  "trajectory_decompressed_sha256": "5b665120c62f115d1370e0ee56c47a4bdcc891aa738d177baceb50def25fe310",
+  "trajectory_identity_verified": true,
+  "trajectory_source_sha256": "5b665120c62f115d1370e0ee56c47a4bdcc891aa738d177baceb50def25fe310"
+}

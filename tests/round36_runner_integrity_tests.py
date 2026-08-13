@@ -78,13 +78,16 @@ class Round36RunnerIntegrityTests(unittest.TestCase):
         contract_audit = common.load_json(
             common.OUT / "stage_c_contract_fix_audit.json")
         permitted_changes = contract_audit["source_sha256"]
+        stage_c_manifest = common.load_json(
+            common.OUT / "stage_c_frozen_manifest.json")
+        stage_c_sources = stage_c_manifest["source_file_sha256"]
         for relative, expected in self.manifest["source_file_sha256"].items():
-            actual = common.sha256(ROOT / relative)
             if relative in permitted_changes:
-                self.assertEqual(permitted_changes[relative], actual)
-                self.assertNotEqual(expected, actual)
+                self.assertEqual(
+                    permitted_changes[relative], stage_c_sources[relative])
+                self.assertNotEqual(expected, permitted_changes[relative])
             else:
-                self.assertEqual(expected, actual)
+                self.assertEqual(expected, stage_c_sources[relative])
         self.assertEqual(4, len(permitted_changes))
         self.assertEqual(self.manifest["gurobi_executable_sha256"],
                          common.sha256(common.EXE))

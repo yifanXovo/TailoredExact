@@ -1,0 +1,131 @@
+{
+  "automatic_promotion_performed": false,
+  "candidate": "G1-pilot-weakest-prefine",
+  "candidate_decision": "retain_default_off_diagnostic_not_promoted",
+  "candidate_default": "off",
+  "exactness_audit": {
+    "all_coverage_gates_valid": true,
+    "all_executable_freezes_valid": true,
+    "all_lifecycle_gates_valid": true,
+    "all_manifest_hashes_valid": true,
+    "all_pair_commands_controlled": true,
+    "all_work_and_node_roundtrips_valid": true,
+    "default_c6_equivalence_comparison_count": 18,
+    "documented_postfreeze_document_updates": 6,
+    "executable_sha256": "90689ced5d588175d32b5c430c16467d54ce7ebf4ab5c9077e5ef06b362d1927",
+    "false_certificate_count": 0,
+    "pair_count": 11,
+    "passed": true,
+    "post_implementation_default_c6_equivalence_passed": true,
+    "raw_model_bytes": 980558839,
+    "raw_model_file_count": 170,
+    "raw_model_publication": "local raw retained; committed hash manifest; deterministic recreation via frozen commands",
+    "run_count": 22,
+    "schema": "round37-final-exactness-audit-v1",
+    "single_executable_hash_across_experiments": true,
+    "stage_run_counts": {
+      "confirmation": 4,
+      "diagnostic": 6,
+      "smoke": 12
+    },
+    "strict_certificate_count": 6,
+    "unexpected_postfreeze_source_mismatches": 0,
+    "valid_noncertificate_count": 16
+  },
+  "final_build": {
+    "byte_reproducible_link_claimed": false,
+    "cpp_tests": "16/16",
+    "independent_clean_build_sha256": "98b16849216ecb50f5d8fe2e10fe4b2516b79ba02d4e383af34b9b1867e09a1f",
+    "official_experiment_executable_sha256": "90689ced5d588175d32b5c430c16467d54ce7ebf4ab5c9077e5ef06b362d1927",
+    "python_test_scripts": "28/28"
+  },
+  "future_hypothesis": "G2 multi-cell weakness-density geometry remains untested and unauthorized; it requires a new predeclared round",
+  "geometry_forensics": {
+    "development_panel_rows": 12,
+    "development_panel_sha256": "bc73e8ed85831870112cec68f95aa45a31eb73436b5442b5f1260e695bb6b919",
+    "downstream_changes": 11,
+    "geometry_exposures": 13,
+    "geometry_outcome_counts": {
+      "left_win": 10,
+      "right_win": 4
+    },
+    "interpretation": "The controlling LP weakness is usually interior (cells 1 or 2), so a generic low-G skew is not supported. Geometry changes are causal but bidirectional. The next test must allocate refinement from complete LP weakness rather than an incumbent-sized anchor.",
+    "schema": "round37-geometry-forensics-v1",
+    "source_round36_instances": 14,
+    "weakest_cell_index_counts": {
+      "0": 2,
+      "1": 7,
+      "2": 5
+    },
+    "weakest_cell_is_interior": 12
+  },
+  "mainline_changed": false,
+  "mainline_reference": "C6-HGA-FULL-K4-rho0.01",
+  "mechanism_findings": {
+    "conclusion": "finite-width Gini cells cause a real local relaxation bottleneck, but the one-cell forced pre-refinement does not uniformly improve the downstream global proof tree",
+    "exposed_policy_runs": 10,
+    "generic_low_g_skew": "rejected_before_experiment",
+    "historical_interior_weakest_fraction": "12/14",
+    "historical_weakest_initial_cell_counts": {
+      "0": 2,
+      "1": 7,
+      "2": 5
+    },
+    "positive_selected_cell_lp_gain": "10/10",
+    "prior_weakest_cell_reproduced": "10/10",
+    "v20_tight_T_gap_improvement_by_cap": {
+      "180": 0.07525784617376821,
+      "480": 0.10918782687314472,
+      "900": 0.11225118140359665
+    },
+    "v50_high_imbalance_gap_improvement_by_cap": {
+      "180": -0.028963766116018003,
+      "480": -0.02896406969868337,
+      "900": -0.02896406969868337
+    }
+  },
+  "official_experiments": {
+    "confirmation": {
+      "cap_seconds": 900,
+      "exposures": 2,
+      "improvements": 1,
+      "pairs": 2,
+      "regressions": 1,
+      "ties": 0
+    },
+    "diagnostic": {
+      "cap_seconds": 480,
+      "exposures": 3,
+      "improvements": 2,
+      "pairs": 3,
+      "regressions": 1,
+      "ties": 0
+    },
+    "false_certificates": 0,
+    "pair_count": 11,
+    "run_count": 22,
+    "smoke": {
+      "cap_seconds": 180,
+      "exposures": 5,
+      "improvements": 1,
+      "pairs": 6,
+      "regressions": 1,
+      "ties": 4
+    },
+    "strict_certificates": 6,
+    "valid_noncertificates": 16
+  },
+  "round": 37,
+  "schema": "round37-final-report-v1",
+  "stage0": {
+    "post_implementation_default_c6_equivalence": "18/18",
+    "round36_cleanup_bytes_removed": 17209698,
+    "round36_cleanup_files_removed": 79,
+    "round36_false_certificates": 0,
+    "round36_historical_runs_audited": 103,
+    "round36_terminal_stage_c_runs": 47,
+    "round36_terminal_stage_c_strict_certificates": 18,
+    "round36_terminal_stage_c_valid_noncertificates": 29
+  },
+  "title": "Structural Gini-decomposition geometry mechanism study"
+}
