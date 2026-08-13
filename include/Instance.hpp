@@ -450,6 +450,10 @@ struct SolveOptions {
     // The pilot arm is a uniform run-level choice; it is never inferred from
     // an instance label, size, scenario, elapsed time, or solver effort.
     std::string round37_c6_geometry_policy = "off";
+    // Round 38 global-frontier pilot. "off" preserves frozen C6. The
+    // experimental arm is uniform and uses only complete LP bounds and Gini
+    // geometry; clocks, effort, and instance metadata are not decision inputs.
+    std::string round38_c6_frontier_policy = "off";
     bool exact_phase_local_redecode_repair = false;
     bool exact_phase_local_redecode_repair_explicit = false;
     double exact_phase_local_redecode_seconds = 10.0;

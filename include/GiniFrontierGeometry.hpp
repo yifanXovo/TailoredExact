@@ -41,6 +41,54 @@ PilotWeakestGiniCellSelection selectPilotWeakestGiniCell(
     const std::vector<PilotGiniCellAssessment>& cells,
     double tolerance);
 
+// Round 38 solver-neutral global-frontier pilot.  It accepts only a unique
+// controlling complete initial LP cell with an available next strict frontier.
+// The input deliberately contains no clock, effort, instance, or outcome data.
+struct PilotGlobalFrontierSelection {
+    bool valid = false;
+    bool unique_controlling_cell = false;
+    bool next_strict_frontier_available = false;
+    std::string leaf_id;
+    GiniIntervalGeometry interval;
+    double controlling_lower_bound = 0.0;
+    double next_strict_frontier = 0.0;
+    int eligible_cell_count = 0;
+    int frontier_plateau_size = 0;
+    std::vector<double> sorted_open_bounds;
+    std::string reason = "not_evaluated";
+};
+
+PilotGlobalFrontierSelection selectPilotGlobalFrontierCell(
+    const std::vector<PilotGiniCellAssessment>& cells,
+    double tolerance);
+
+struct PilotFrontierChildBound {
+    bool terminal_valid = false;
+    bool optimal = false;
+    bool infeasible = false;
+    bool bound_available = false;
+    double lower_bound = 0.0;
+};
+
+struct PilotGlobalFrontierLiftDecision {
+    bool valid = false;
+    bool split_immediately = false;
+    bool completes_next_strict_frontier = false;
+    double b_plus = 0.0;
+    double delta_local = 0.0;
+    double hypothetical_global_bound = 0.0;
+    double delta_global = 0.0;
+    double frontier_completion = 0.0;
+    std::vector<double> hypothetical_sorted_open_bounds;
+    std::string reason = "not_evaluated";
+};
+
+PilotGlobalFrontierLiftDecision evaluatePilotGlobalFrontierLift(
+    const PilotGlobalFrontierSelection& selection,
+    const PilotFrontierChildBound& left,
+    const PilotFrontierChildBound& right,
+    double tolerance);
+
 // A launch-frozen anchor grid and its intersection with the proof-relevant
 // Gini range.  Anchor cells are geometry only: proof cutoffs and certificates
 // continue to use an independently verified proof incumbent.

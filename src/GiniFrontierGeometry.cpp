@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <limits>
 
 namespace ebrp {
 
@@ -41,6 +42,150 @@ PilotWeakestGiniCellSelection selectPilotWeakestGiniCell(
         ? "weakest_complete_initial_lp_bound_structural_ties"
         : "no_open_complete_optimal_initial_lp_cell";
     return selection;
+}
+
+namespace {
+
+bool eligiblePilotCell(const PilotGiniCellAssessment& cell, double tolerance) {
+    return cell.structurally_open && cell.lp_complete && cell.lp_optimal &&
+        cell.lp_bound_available && std::isfinite(cell.interval.lower) &&
+        std::isfinite(cell.interval.upper) &&
+        std::isfinite(cell.lp_lower_bound) &&
+        std::isfinite(cell.verified_cutoff) &&
+        cell.interval.upper > cell.interval.lower + tolerance &&
+        cell.lp_lower_bound < cell.verified_cutoff - tolerance;
+}
+
+bool validPilotChild(const PilotFrontierChildBound& child) {
+    return child.terminal_valid &&
+        (child.infeasible ||
+         (child.optimal && child.bound_available &&
+          std::isfinite(child.lower_bound)));
+}
+
+double effectivePilotChildBound(const PilotFrontierChildBound& child) {
+    return child.infeasible
+        ? std::numeric_limits<double>::infinity()
+        : child.lower_bound;
+}
+
+} // namespace
+
+PilotGlobalFrontierSelection selectPilotGlobalFrontierCell(
+    const std::vector<PilotGiniCellAssessment>& cells,
+    double tolerance) {
+    PilotGlobalFrontierSelection selection;
+    const double tol = std::max(0.0, tolerance);
+    std::vector<const PilotGiniCellAssessment*> eligible;
+    for (const PilotGiniCellAssessment& cell : cells) {
+        if (eligiblePilotCell(cell, tol)) eligible.push_back(&cell);
+    }
+    selection.eligible_cell_count = static_cast<int>(eligible.size());
+    if (eligible.empty()) {
+        selection.reason = "no_open_complete_optimal_initial_lp_cell";
+        return selection;
+    }
+    std::sort(
+        eligible.begin(), eligible.end(),
+        [](const PilotGiniCellAssessment* left,
+           const PilotGiniCellAssessment* right) {
+            if (left->lp_lower_bound != right->lp_lower_bound) {
+                return left->lp_lower_bound < right->lp_lower_bound;
+            }
+            if (left->interval.lower != right->interval.lower) {
+                return left->interval.lower < right->interval.lower;
+            }
+            if (left->interval.upper != right->interval.upper) {
+                return left->interval.upper < right->interval.upper;
+            }
+            return left->leaf_id < right->leaf_id;
+        });
+    selection.sorted_open_bounds.reserve(eligible.size());
+    for (const PilotGiniCellAssessment* cell : eligible) {
+        selection.sorted_open_bounds.push_back(cell->lp_lower_bound);
+    }
+    const PilotGiniCellAssessment& controlling = *eligible.front();
+    selection.leaf_id = controlling.leaf_id;
+    selection.interval = controlling.interval;
+    selection.controlling_lower_bound = controlling.lp_lower_bound;
+    selection.frontier_plateau_size = static_cast<int>(std::count_if(
+        eligible.begin(), eligible.end(),
+        [&](const PilotGiniCellAssessment* cell) {
+            return std::fabs(cell->lp_lower_bound -
+                             controlling.lp_lower_bound) <= tol;
+        }));
+    selection.unique_controlling_cell =
+        selection.frontier_plateau_size == 1;
+    if (!selection.unique_controlling_cell) {
+        selection.reason = "minimum_bound_frontier_not_unique";
+        return selection;
+    }
+    for (const PilotGiniCellAssessment* cell : eligible) {
+        if (cell->lp_lower_bound >
+            controlling.lp_lower_bound + tol) {
+            selection.next_strict_frontier = cell->lp_lower_bound;
+            selection.next_strict_frontier_available = true;
+            break;
+        }
+    }
+    if (!selection.next_strict_frontier_available) {
+        selection.reason = "no_next_strict_open_leaf_frontier";
+        return selection;
+    }
+    selection.valid = true;
+    selection.reason = "unique_controlling_initial_cell_with_strict_frontier";
+    return selection;
+}
+
+PilotGlobalFrontierLiftDecision evaluatePilotGlobalFrontierLift(
+    const PilotGlobalFrontierSelection& selection,
+    const PilotFrontierChildBound& left,
+    const PilotFrontierChildBound& right,
+    double tolerance) {
+    PilotGlobalFrontierLiftDecision decision;
+    const double tol = std::max(0.0, tolerance);
+    if (!selection.valid || !selection.unique_controlling_cell ||
+        !selection.next_strict_frontier_available ||
+        !std::isfinite(selection.controlling_lower_bound) ||
+        !std::isfinite(selection.next_strict_frontier) ||
+        selection.next_strict_frontier <=
+            selection.controlling_lower_bound + tol) {
+        decision.reason = "invalid_global_frontier_selection";
+        return decision;
+    }
+    if (!validPilotChild(left) || !validPilotChild(right)) {
+        decision.reason = "child_lp_not_complete_valid_bound_or_infeasible";
+        return decision;
+    }
+    const double left_bound = effectivePilotChildBound(left);
+    const double right_bound = effectivePilotChildBound(right);
+    decision.b_plus = std::min(left_bound, right_bound);
+    decision.delta_local =
+        decision.b_plus - selection.controlling_lower_bound;
+    decision.hypothetical_global_bound =
+        std::min(decision.b_plus, selection.next_strict_frontier);
+    decision.delta_global = decision.hypothetical_global_bound -
+        selection.controlling_lower_bound;
+    decision.frontier_completion = decision.delta_global;
+    decision.completes_next_strict_frontier =
+        decision.b_plus + tol >= selection.next_strict_frontier;
+    decision.split_immediately =
+        decision.completes_next_strict_frontier;
+    decision.hypothetical_sorted_open_bounds =
+        selection.sorted_open_bounds;
+    if (!decision.hypothetical_sorted_open_bounds.empty()) {
+        decision.hypothetical_sorted_open_bounds.erase(
+            decision.hypothetical_sorted_open_bounds.begin());
+    }
+    decision.hypothetical_sorted_open_bounds.push_back(left_bound);
+    decision.hypothetical_sorted_open_bounds.push_back(right_bound);
+    std::sort(decision.hypothetical_sorted_open_bounds.begin(),
+              decision.hypothetical_sorted_open_bounds.end());
+    decision.valid = true;
+    decision.reason = decision.split_immediately
+        ? "midpoint_children_complete_next_strict_frontier"
+        : "midpoint_children_do_not_complete_next_strict_frontier";
+    return decision;
 }
 
 std::string cplexReplicaSplitPhaseName(CplexReplicaSplitPhase phase) {
