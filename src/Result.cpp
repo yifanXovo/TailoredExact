@@ -1644,6 +1644,75 @@ std::string resultToJson(const SolveResult& input) {
         << ",\n";
     out << "  \"round37_pilot_prefinement_count\": "
         << result.round37_pilot_prefinement_count << ",\n";
+    out << "  \"round38_c6_frontier_policy\": \""
+        << jsonEscape(result.round38_c6_frontier_policy) << "\",\n";
+    out << "  \"round38_pilot_all_initial_lps_complete\": "
+        << (result.round38_pilot_all_initial_lps_complete ? "true" : "false")
+        << ",\n";
+    out << "  \"round38_pilot_initial_lp_count\": "
+        << result.round38_pilot_initial_lp_count << ",\n";
+    out << "  \"round38_pilot_eligible_cell_count\": "
+        << result.round38_pilot_eligible_cell_count << ",\n";
+    out << "  \"round38_pilot_selected_leaf_id\": \""
+        << jsonEscape(result.round38_pilot_selected_leaf_id) << "\",\n";
+    out << "  \"round38_pilot_selected_lower_bound\": "
+        << result.round38_pilot_selected_lower_bound << ",\n";
+    out << "  \"round38_pilot_selected_gamma_L\": "
+        << result.round38_pilot_selected_gamma_L << ",\n";
+    out << "  \"round38_pilot_selected_gamma_U\": "
+        << result.round38_pilot_selected_gamma_U << ",\n";
+    out << "  \"round38_pilot_frontier_plateau_size\": "
+        << result.round38_pilot_frontier_plateau_size << ",\n";
+    out << "  \"round38_pilot_unique_controlling_cell\": "
+        << (result.round38_pilot_unique_controlling_cell ? "true" : "false")
+        << ",\n";
+    out << "  \"round38_pilot_next_strict_frontier_available\": "
+        << (result.round38_pilot_next_strict_frontier_available
+                ? "true" : "false") << ",\n";
+    out << "  \"round38_pilot_next_strict_frontier\": "
+        << result.round38_pilot_next_strict_frontier << ",\n";
+    out << "  \"round38_pilot_sorted_initial_bounds\": \""
+        << jsonEscape(result.round38_pilot_sorted_initial_bounds) << "\",\n";
+    out << "  \"round38_pilot_children_evaluated\": "
+        << (result.round38_pilot_children_evaluated ? "true" : "false")
+        << ",\n";
+    out << "  \"round38_pilot_left_child_infeasible\": "
+        << (result.round38_pilot_left_child_infeasible ? "true" : "false")
+        << ",\n";
+    out << "  \"round38_pilot_right_child_infeasible\": "
+        << (result.round38_pilot_right_child_infeasible ? "true" : "false")
+        << ",\n";
+    out << "  \"round38_pilot_left_child_bound\": "
+        << result.round38_pilot_left_child_bound << ",\n";
+    out << "  \"round38_pilot_right_child_bound\": "
+        << result.round38_pilot_right_child_bound << ",\n";
+    out << "  \"round38_pilot_b_plus_infinite\": "
+        << (result.round38_pilot_b_plus_infinite ? "true" : "false")
+        << ",\n";
+    out << "  \"round38_pilot_b_plus\": "
+        << result.round38_pilot_b_plus << ",\n";
+    out << "  \"round38_pilot_delta_local\": "
+        << result.round38_pilot_delta_local << ",\n";
+    out << "  \"round38_pilot_hypothetical_global_bound\": "
+        << result.round38_pilot_hypothetical_global_bound << ",\n";
+    out << "  \"round38_pilot_delta_global\": "
+        << result.round38_pilot_delta_global << ",\n";
+    out << "  \"round38_pilot_frontier_completion\": "
+        << result.round38_pilot_frontier_completion << ",\n";
+    out << "  \"round38_pilot_completes_next_strict_frontier\": "
+        << (result.round38_pilot_completes_next_strict_frontier
+                ? "true" : "false") << ",\n";
+    out << "  \"round38_pilot_sorted_post_bounds\": \""
+        << jsonEscape(result.round38_pilot_sorted_post_bounds) << "\",\n";
+    out << "  \"round38_pilot_refinement_performed\": "
+        << (result.round38_pilot_refinement_performed ? "true" : "false")
+        << ",\n";
+    out << "  \"round38_pilot_refinement_count\": "
+        << result.round38_pilot_refinement_count << ",\n";
+    out << "  \"round38_pilot_rejection_count\": "
+        << result.round38_pilot_rejection_count << ",\n";
+    out << "  \"round38_pilot_decision_reason\": \""
+        << jsonEscape(result.round38_pilot_decision_reason) << "\",\n";
     out << "  \"round36_hga_start_attempted\": "
         << (result.round36_hga_start_attempted ? "true" : "false")
         << ",\n";

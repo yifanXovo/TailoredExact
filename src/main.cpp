@@ -105,6 +105,7 @@ void usage() {
         << "[--round36-c6-causal-arm off|hh|ss|bw-p|bw-a] "
         << "[--round36-c6-split-normalization proof|anchor] "
         << "[--round37-c6-geometry-policy off|pilot-weakest-prefine] "
+        << "[--round38-c6-frontier-policy off|pilot-next-frontier-complete] "
         << "[--heuristic-candidates-csv <path>] "
         << "[--large-instance-mode auto|off|force] [--large-lb-mode none|inventory-only|movement-projection|column-pool-relaxation|auto] "
         << "[--pricing-engine exact-label|ng-dssr|hybrid] "
@@ -1177,6 +1178,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round36-c6-causal-arm") opt.round36_c6_causal_arm = requireValue(i, argc, argv);
         else if (arg == "--round36-c6-split-normalization") opt.round36_c6_split_normalization = requireValue(i, argc, argv);
         else if (arg == "--round37-c6-geometry-policy") opt.round37_c6_geometry_policy = requireValue(i, argc, argv);
+        else if (arg == "--round38-c6-frontier-policy") opt.round38_c6_frontier_policy = requireValue(i, argc, argv);
         else if (arg == "--heuristic-candidates-csv") opt.heuristic_candidates_csv = requireValue(i, argc, argv);
         else if (arg == "--large-instance-mode") opt.large_instance_mode = requireValue(i, argc, argv);
         else if (arg == "--large-lb-mode") opt.large_lb_mode = requireValue(i, argc, argv);
@@ -1476,6 +1478,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         lowerAscii(opt.round36_c6_split_normalization);
     opt.round37_c6_geometry_policy =
         lowerAscii(opt.round37_c6_geometry_policy);
+    opt.round38_c6_frontier_policy =
+        lowerAscii(opt.round38_c6_frontier_policy);
     if (opt.round34_c6_startup_variant != "hga-full" &&
         opt.round34_c6_startup_variant != "hga-light-1000" &&
         opt.round34_c6_startup_variant != "simple-start") {
@@ -1524,6 +1528,22 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error(
             "Round 37 pilot requires C6 HGA-FULL, causal arm off, and proof "
             "normalization");
+    }
+    if (opt.round38_c6_frontier_policy != "off" &&
+        opt.round38_c6_frontier_policy != "pilot-next-frontier-complete") {
+        throw std::runtime_error(
+            "Unsupported --round38-c6-frontier-policy: " +
+            opt.round38_c6_frontier_policy);
+    }
+    if (opt.round38_c6_frontier_policy ==
+            "pilot-next-frontier-complete" &&
+        (opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off")) {
+        throw std::runtime_error(
+            "Round 38 frontier pilot requires C6 HGA-FULL, causal arm off, "
+            "proof normalization, and Round 37 geometry off");
     }
     if (opt.primal_heuristic_stop != "generation-stagnation") {
         opt.primal_heuristic_stop = "legacy-time";
@@ -10480,6 +10500,8 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         opt.round36_c6_split_normalization;
     result.round37_c6_geometry_policy =
         opt.round37_c6_geometry_policy;
+    result.round38_c6_frontier_policy =
+        opt.round38_c6_frontier_policy;
     ebrp::PricingOptions bpc_pricing_options;
     applyPricingOptionsFromSolve(instance, opt, bpc_pricing_options);
     result.bpc_pricing_engine_requested = bpc_pricing_options.pricing_engine;

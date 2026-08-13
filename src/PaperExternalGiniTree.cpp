@@ -238,6 +238,16 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         reason = "c6_round37_geometry_policy_contract_mismatch";
         return false;
     }
+    const std::string& frontier_policy =
+        options.round38_c6_frontier_policy;
+    const bool frontier_policy_valid = frontier_policy == "off" ||
+        (frontier_policy == "pilot-next-frontier-complete" && hga_full &&
+         causal == "off" && normalization == "proof" &&
+         geometry_policy == "off");
+    if (!frontier_policy_valid) {
+        reason = "c6_round38_frontier_policy_contract_mismatch";
+        return false;
+    }
     if (options.frontier_intervals != 4 ||
         !options.frontier_adaptive_split ||
         options.frontier_adaptive_max_depth != 8 ||
@@ -622,6 +632,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             "round31-nonblocking-native-bound";
     const bool round37_pilot_prefine = c6_nonblocking &&
         options.round37_c6_geometry_policy == "pilot-weakest-prefine";
+    const bool round38_frontier_pilot = c6_nonblocking &&
+        options.round38_c6_frontier_policy ==
+            "pilot-next-frontier-complete";
     const bool round36_causal = c6_nonblocking &&
         options.round36_c6_causal_arm != "off";
     const double proof_incumbent_launch = verified_seed.objective;
@@ -664,6 +677,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         options.round36_c6_split_normalization;
     result.round37_c6_geometry_policy =
         options.round37_c6_geometry_policy;
+    result.round38_c6_frontier_policy =
+        options.round38_c6_frontier_policy;
     result.round36_proof_incumbent_launch = proof_incumbent_launch;
     result.round36_decomposition_anchor_launch =
         decomposition_anchor_launch;
@@ -1573,8 +1588,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     };
 
     PilotWeakestGiniCellSelection round37_pilot_selection;
+    PilotGlobalFrontierSelection round38_pilot_selection;
     bool round37_pilot_prefinement_pending = false;
-    if (round37_pilot_prefine && !hard_failure) {
+    bool round38_frontier_pilot_pending = false;
+    if ((round37_pilot_prefine || round38_frontier_pilot) &&
+        !hard_failure) {
         std::vector<PilotGiniCellAssessment> assessments;
         assessments.reserve(initial.size());
         for (std::size_t index = 0;
@@ -1593,16 +1611,25 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 if (!global_deadline_stop) hard_failure = true;
                 break;
             }
-            ++result.round37_pilot_initial_lp_count;
+            if (round37_pilot_prefine) {
+                ++result.round37_pilot_initial_lp_count;
+            } else {
+                ++result.round38_pilot_initial_lp_count;
+            }
             if (state.lp.infeasible) {
+                const std::string source = round37_pilot_prefine
+                    ? "round37_pilot_complete_initial_lp_infeasible"
+                    : "round38_pilot_complete_initial_lp_infeasible";
                 std::string reason;
                 if (!scheduler.setStatus(
                         leaf_id, ControllingLeafStatus::Empty,
-                        "round37_pilot_complete_initial_lp_infeasible",
-                        &reason)) {
+                        source, &reason)) {
                     hard_failure = true;
                     result.external_gini_tree_failure_reason =
-                        "round37_pilot_infeasible_closure_failed:" + reason;
+                        (round37_pilot_prefine
+                            ? "round37_pilot_infeasible_closure_failed:"
+                            : "round38_pilot_infeasible_closure_failed:") +
+                        reason;
                     break;
                 }
                 backend->discardLeaf(leaf_id);
@@ -1611,14 +1638,24 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     "infeasible_closure", leaf_id,
                     std::numeric_limits<double>::infinity(),
                     scheduler.globalLowerBound(),
-                    "round37_pilot_complete_initial_lp_infeasible");
+                    source);
             }
         }
-        result.round37_pilot_all_initial_lps_complete =
+        const long long pilot_initial_lp_count = round37_pilot_prefine
+            ? result.round37_pilot_initial_lp_count
+            : result.round38_pilot_initial_lp_count;
+        const bool all_initial_lps_complete =
             !hard_failure && !global_deadline_stop &&
-            result.round37_pilot_initial_lp_count ==
+            pilot_initial_lp_count ==
                 static_cast<long long>(initial.size());
-        if (result.round37_pilot_all_initial_lps_complete) {
+        if (round37_pilot_prefine) {
+            result.round37_pilot_all_initial_lps_complete =
+                all_initial_lps_complete;
+        } else {
+            result.round38_pilot_all_initial_lps_complete =
+                all_initial_lps_complete;
+        }
+        if (all_initial_lps_complete) {
             for (std::size_t index = 0; index < initial.size(); ++index) {
                 const std::string leaf_id = "L" + std::to_string(index);
                 const ControllingLeaf* leaf = scheduler.findLeaf(leaf_id);
@@ -1637,11 +1674,31 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 assessment.verified_cutoff = verified_ub;
                 assessments.push_back(assessment);
             }
-            round37_pilot_selection = selectPilotWeakestGiniCell(
-                assessments, scheduler.certificateTolerance());
-            result.round37_pilot_eligible_cell_count =
-                round37_pilot_selection.eligible_cell_count;
-            if (round37_pilot_selection.valid) {
+            if (round37_pilot_prefine) {
+                round37_pilot_selection = selectPilotWeakestGiniCell(
+                    assessments, scheduler.certificateTolerance());
+                result.round37_pilot_eligible_cell_count =
+                    round37_pilot_selection.eligible_cell_count;
+            } else {
+                round38_pilot_selection = selectPilotGlobalFrontierCell(
+                    assessments, scheduler.certificateTolerance());
+                result.round38_pilot_eligible_cell_count =
+                    round38_pilot_selection.eligible_cell_count;
+                result.round38_pilot_frontier_plateau_size =
+                    round38_pilot_selection.frontier_plateau_size;
+                result.round38_pilot_unique_controlling_cell =
+                    round38_pilot_selection.unique_controlling_cell;
+                result.round38_pilot_next_strict_frontier_available =
+                    round38_pilot_selection.next_strict_frontier_available;
+                result.round38_pilot_next_strict_frontier =
+                    round38_pilot_selection.next_strict_frontier;
+                result.round38_pilot_sorted_initial_bounds =
+                    joinDoubles(round38_pilot_selection.sorted_open_bounds);
+                result.round38_pilot_decision_reason =
+                    round38_pilot_selection.reason;
+            }
+            if (round37_pilot_prefine &&
+                round37_pilot_selection.valid) {
                 result.round37_pilot_weakest_leaf_id =
                     round37_pilot_selection.leaf_id;
                 result.round37_pilot_weakest_lower_bound =
@@ -1665,6 +1722,31 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     round37_pilot_selection.lp_lower_bound,
                     otherRelevantMinimum(round37_pilot_selection.leaf_id),
                     round37_pilot_selection.reason);
+            } else if (round38_frontier_pilot &&
+                       round38_pilot_selection.valid) {
+                result.round38_pilot_selected_leaf_id =
+                    round38_pilot_selection.leaf_id;
+                result.round38_pilot_selected_lower_bound =
+                    round38_pilot_selection.controlling_lower_bound;
+                result.round38_pilot_selected_gamma_L =
+                    round38_pilot_selection.interval.lower;
+                result.round38_pilot_selected_gamma_U =
+                    round38_pilot_selection.interval.upper;
+                round38_frontier_pilot_pending = true;
+                events << elapsedTelemetry() << ",round38_pilot_selection,"
+                       << round38_pilot_selection.leaf_id << ','
+                       << round38_pilot_selection.interval.lower << ','
+                       << round38_pilot_selection.interval.upper << ",open,"
+                       << scheduler.globalLowerBound() << ',' << verified_ub
+                       << ',' << csvField(round38_pilot_selection.reason)
+                       << '\n';
+                writeGlobalTrace(
+                    processElapsedSeconds(options), elapsedTelemetry(),
+                    "round38_pilot_selection",
+                    round38_pilot_selection.leaf_id,
+                    round38_pilot_selection.controlling_lower_bound,
+                    round38_pilot_selection.next_strict_frontier,
+                    round38_pilot_selection.reason);
             }
         }
     }
@@ -1757,7 +1839,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         const bool round37_force_prefinement =
             round37_pilot_prefinement_pending &&
             bounded.id == round37_pilot_selection.leaf_id;
-        if (c6_nonblocking && !round37_force_prefinement) {
+        const bool round38_force_frontier_evaluation =
+            round38_frontier_pilot_pending &&
+            bounded.id == round38_pilot_selection.leaf_id;
+        if (c6_nonblocking && !round37_force_prefinement &&
+            !round38_force_frontier_evaluation) {
             const C6FrontierDecision frontier =
                 evaluateC6FrontierDecision(
                     bounded.lower_bound,
@@ -2046,18 +2132,70 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                           kRound31C6NormalizedSplitThreshold,
                           scheduler.certificateTolerance()))
                 : C6CurrentSplitDecision{};
+            PilotGlobalFrontierLiftDecision round38_split;
+            if (round38_force_frontier_evaluation) {
+                const PaperLpResult& left_lp =
+                    runtime[children[0].id].lp;
+                const PaperLpResult& right_lp =
+                    runtime[children[1].id].lp;
+                const PilotFrontierChildBound left{
+                    left_lp.terminal_valid, left_lp.optimal,
+                    left_lp.infeasible, left_lp.bound_available,
+                    left_lp.lower_bound};
+                const PilotFrontierChildBound right{
+                    right_lp.terminal_valid, right_lp.optimal,
+                    right_lp.infeasible, right_lp.bound_available,
+                    right_lp.lower_bound};
+                round38_split = evaluatePilotGlobalFrontierLift(
+                    round38_pilot_selection, left, right,
+                    scheduler.certificateTolerance());
+                result.round38_pilot_children_evaluated = true;
+                result.round38_pilot_left_child_infeasible =
+                    left.infeasible;
+                result.round38_pilot_right_child_infeasible =
+                    right.infeasible;
+                result.round38_pilot_left_child_bound =
+                    left.infeasible ? 0.0 : left.lower_bound;
+                result.round38_pilot_right_child_bound =
+                    right.infeasible ? 0.0 : right.lower_bound;
+                result.round38_pilot_b_plus_infinite =
+                    !std::isfinite(round38_split.b_plus);
+                result.round38_pilot_b_plus =
+                    std::isfinite(round38_split.b_plus)
+                        ? round38_split.b_plus : 0.0;
+                result.round38_pilot_delta_local =
+                    std::isfinite(round38_split.delta_local)
+                        ? round38_split.delta_local : 0.0;
+                result.round38_pilot_hypothetical_global_bound =
+                    round38_split.hypothetical_global_bound;
+                result.round38_pilot_delta_global =
+                    round38_split.delta_global;
+                result.round38_pilot_frontier_completion =
+                    round38_split.frontier_completion;
+                result.round38_pilot_completes_next_strict_frontier =
+                    round38_split.completes_next_strict_frontier;
+                result.round38_pilot_sorted_post_bounds =
+                    joinDoubles(
+                        round38_split.hypothetical_sorted_open_bounds);
+                result.round38_pilot_decision_reason =
+                    round38_split.reason;
+            }
             const bool decision_valid =
-                round37_force_prefinement
+                round38_force_frontier_evaluation
+                    ? round38_split.valid
+                    : (round37_force_prefinement
                     ? c6_split.valid
                     : (c6_nonblocking
                     ? c6_split.valid
-                    : (c5_bound_target ? c5_split.valid : split.valid));
+                    : (c5_bound_target ? c5_split.valid : split.valid)));
             const bool split_immediately =
-                round37_force_prefinement ||
-                (c6_nonblocking
+                round38_force_frontier_evaluation
+                    ? round38_split.split_immediately
+                    : (round37_force_prefinement ||
+                       (c6_nonblocking
                     ? c6_split.split_immediately
                     : (c5_bound_target ? c5_split.split_immediately
-                                       : split.should_split));
+                                       : split.should_split)));
             const bool child_infeasibility_trigger =
                 c6_nonblocking
                     ? c6_split.child_infeasibility_trigger
@@ -2065,16 +2203,20 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                         ? c5_split.child_infeasibility_trigger
                         : split.child_infeasibility_trigger);
             const double post_split_bound =
-                c6_nonblocking
+                round38_force_frontier_evaluation
+                    ? round38_split.b_plus
+                    : (c6_nonblocking
                     ? c6_split.post_split_lower_bound
                     : (c5_bound_target ? c5_split.post_split_lower_bound
-                                       : split.post_split_lower_bound);
+                                       : split.post_split_lower_bound));
             const std::string split_reason =
-                round37_force_prefinement
+                round38_force_frontier_evaluation
+                    ? round38_split.reason
+                    : (round37_force_prefinement
                     ? "round37_pilot_weakest_midpoint_prefinement"
                     : (c6_nonblocking
                     ? c6_split.reason
-                    : (c5_bound_target ? c5_split.reason : split.reason));
+                    : (c5_bound_target ? c5_split.reason : split.reason)));
             bound_ledger << bounded.id << ',' << bounded.lower_bound << ','
                          << children[0].id << ','
                          << runtime[children[0].id].lp.lower_bound << ','
@@ -2153,6 +2295,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     result.round37_pilot_prefinement_performed = true;
                     ++result.round37_pilot_prefinement_count;
                 }
+                if (round38_force_frontier_evaluation) {
+                    round38_frontier_pilot_pending = false;
+                    result.round38_pilot_refinement_performed = true;
+                    ++result.round38_pilot_refinement_count;
+                }
                 if (incremental_model_reuse) {
                     backend->discardLeaf(bounded.id);
                 }
@@ -2181,9 +2328,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     std::numeric_limits<double>::infinity(),
                     scheduler.globalLowerBound(),
                     c6_nonblocking
-                        ? (round37_force_prefinement
+                        ? (round38_force_frontier_evaluation
+                            ? "round38_next_frontier_completing_refinement"
+                            : (round37_force_prefinement
                             ? "round37_pilot_weakest_midpoint_prefinement"
-                            : "c6_current_gain_atomic_split")
+                            : "c6_current_gain_atomic_split"))
                         : (c5_bound_target
                             ? "c5_immediate_atomic_split"
                             : "c4_atomic_split"));
@@ -2191,6 +2340,37 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     selected_state.c6_children_ready = false;
                     selected_state.c6_cached_children.clear();
                 }
+                split_parent = true;
+            } else if (round38_force_frontier_evaluation) {
+                round38_frontier_pilot_pending = false;
+                ++result.round38_pilot_rejection_count;
+                backend->discardLeaf(children[0].id);
+                backend->discardLeaf(children[1].id);
+                selected_state.c6_children_ready = false;
+                selected_state.c6_cached_children.clear();
+                events << elapsedTelemetry()
+                       << ",round38_frontier_refinement_rejected,"
+                       << bounded.id << ',' << bounded.gamma_L << ','
+                       << bounded.gamma_U << ",open,"
+                       << scheduler.globalLowerBound() << ',' << verified_ub
+                       << ',' << csvField(round38_split.reason) << '\n';
+                writeGlobalTrace(
+                    processElapsedSeconds(options), elapsedTelemetry(),
+                    "round38_frontier_refinement_rejected",
+                    bounded.id, bounded.lower_bound,
+                    round38_pilot_selection.next_strict_frontier,
+                    round38_split.reason);
+                const C6TargetDisposition disposition =
+                    runC6NativeTarget(
+                        bounded, selected_state,
+                        round38_pilot_selection.next_strict_frontier,
+                        "next_leaf",
+                        "round38_rejected_pilot_resume_c6_next_frontier");
+                if (disposition == C6TargetDisposition::Failed) {
+                    hard_failure = true;
+                    break;
+                }
+                if (disposition == C6TargetDisposition::Deadline) break;
                 split_parent = true;
             } else if (c6_nonblocking &&
                        c6_split.run_child_bound_target) {
