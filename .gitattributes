@@ -3,3 +3,10 @@ results/gf_gurobi_performance_recovery_round29/** -text
 
 # Preserve byte-exact Round 31 evidence and its recorded SHA-256 values.
 results/gf_nonblocking_gurobi_c6_round31/** -text
+
+# Preserve byte-exact Round 39 frozen inputs, scripts, and recorded hashes.
+reference/qualification_round39/** -text
+results/gf_small_hard_light_round39/** -text whitespace=-trailing-space
+scripts/*round39*.py -text
+scripts/round39_common.py whitespace=-blank-at-eof
+tests/round39_protocol_tests.py -text
