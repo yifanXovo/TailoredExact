@@ -1638,6 +1638,92 @@ std::string resultToJson(const SolveResult& input) {
         << result.round40_c6_nested_dyadic_global_cell_count << ",\n";
     out << "  \"round40_c6_nested_dyadic_reason\": \""
         << jsonEscape(result.round40_c6_nested_dyadic_reason) << "\",\n";
+    out << "  \"round41_static_segmented_gini\": \""
+        << jsonEscape(result.round41_static_segmented_gini) << "\",\n";
+    out << "  \"round41_static_segmented_solve\": \""
+        << jsonEscape(result.round41_static_segmented_solve) << "\",\n";
+    out << "  \"round41_root_reference_interval\": \""
+        << jsonEscape(result.round41_root_reference_interval) << "\",\n";
+    out << "  \"round41_static_segmented_attempted\": "
+        << (result.round41_static_segmented_attempted ? "true" : "false")
+        << ",\n";
+    out << "  \"round41_static_segmented_technical_feasible\": "
+        << (result.round41_static_segmented_technical_feasible
+                ? "true" : "false") << ",\n";
+    out << "  \"round41_static_segmented_coverage_valid\": "
+        << (result.round41_static_segmented_coverage_valid
+                ? "true" : "false") << ",\n";
+#define WRITE_R41_NUM(name) \
+    out << "  \"round41_static_" #name "\": " \
+        << result.round41_static_##name << ",\n"
+#define WRITE_R41_BOOL(name) \
+    out << "  \"round41_static_" #name "\": " \
+        << (result.round41_static_##name ? "true" : "false") << ",\n"
+#define WRITE_R41_STR(name) \
+    out << "  \"round41_static_" #name "\": \"" \
+        << jsonEscape(result.round41_static_##name) << "\",\n"
+    out << "  \"round41_static_segmented_gamma_lower\": "
+        << result.round41_static_segmented_gamma_lower << ",\n";
+    out << "  \"round41_static_segmented_gamma_upper\": "
+        << result.round41_static_segmented_gamma_upper << ",\n";
+    out << "  \"round41_static_segmented_midpoint\": "
+        << result.round41_static_segmented_midpoint << ",\n";
+    out << "  \"round41_static_segmented_intervals\": \""
+        << jsonEscape(result.round41_static_segmented_intervals) << "\",\n";
+    out << "  \"round41_static_segmented_model_path\": \""
+        << jsonEscape(result.round41_static_segmented_model_path) << "\",\n";
+    out << "  \"round41_static_segmented_model_sha256\": \""
+        << jsonEscape(result.round41_static_segmented_model_sha256) << "\",\n";
+    out << "  \"round41_static_segmented_model_scope\": \""
+        << jsonEscape(result.round41_static_segmented_model_scope) << "\",\n";
+    out << "  \"round41_static_segmented_family_encoding\": \""
+        << jsonEscape(result.round41_static_segmented_family_encoding) << "\",\n";
+    WRITE_R41_NUM(segment_count);
+    WRITE_R41_NUM(selector_variables);
+    WRITE_R41_NUM(perspective_variables);
+    WRITE_R41_NUM(extended_variables);
+    WRITE_R41_NUM(indicator_rows);
+    WRITE_R41_NUM(linear_rows);
+    WRITE_R41_NUM(model_variables);
+    WRITE_R41_NUM(model_linear_constraints);
+    WRITE_R41_NUM(model_nonzeros);
+    WRITE_R41_NUM(model_binary_variables);
+    WRITE_R41_NUM(model_integer_variables);
+    WRITE_R41_NUM(model_continuous_variables);
+    WRITE_R41_NUM(model_general_constraints);
+    WRITE_R41_BOOL(presolved_size_available);
+    WRITE_R41_NUM(presolved_rows);
+    WRITE_R41_NUM(presolved_columns);
+    WRITE_R41_NUM(presolved_nonzeros);
+    WRITE_R41_NUM(model_build_seconds);
+    WRITE_R41_NUM(model_read_seconds);
+    WRITE_R41_NUM(optimize_count);
+    WRITE_R41_NUM(integer_proof_job_count);
+    WRITE_R41_BOOL(one_native_mip_job);
+    WRITE_R41_BOOL(root_lp_bound_available);
+    WRITE_R41_NUM(root_lp_bound);
+    WRITE_R41_BOOL(lp_diagnostics_available);
+    WRITE_R41_NUM(route_binary_fractionality);
+    WRITE_R41_NUM(visit_binary_fractionality);
+    WRITE_R41_NUM(inventory_bit_fractionality);
+    WRITE_R41_NUM(selector_binary_fractionality);
+    WRITE_R41_NUM(mccormick_ambiguity);
+    WRITE_R41_NUM(segmented_mccormick_ambiguity);
+    WRITE_R41_NUM(solver_runtime_seconds);
+    WRITE_R41_NUM(solver_work);
+    WRITE_R41_NUM(solver_nodes);
+    WRITE_R41_NUM(peak_memory_gb);
+    WRITE_R41_STR(native_status);
+    WRITE_R41_NUM(native_status_code);
+    WRITE_R41_BOOL(native_bound_available);
+    WRITE_R41_NUM(native_bound);
+    WRITE_R41_BOOL(parameter_roundtrip_valid);
+    WRITE_R41_BOOL(original_verifier_passed);
+    WRITE_R41_BOOL(strict_certificate);
+    WRITE_R41_STR(failure_reason);
+#undef WRITE_R41_STR
+#undef WRITE_R41_BOOL
+#undef WRITE_R41_NUM
     out << "  \"round37_pilot_all_initial_lps_complete\": "
         << (result.round37_pilot_all_initial_lps_complete ? "true" : "false")
         << ",\n";

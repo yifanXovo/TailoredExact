@@ -458,6 +458,13 @@ struct SolveOptions {
     // only a deterministic dyadic hierarchy rooted at the mathematical Gini
     // maximum and the verified incumbent as an active-prefix cutoff.
     std::string round40_c6_ub_geometry = "off";
+    // Round 41 static single-tree segmented formulations. Every non-off arm
+    // is explicit, uniformly defined, and constructed before optimize.
+    std::string round41_static_segmented_gini = "off";
+    // Root-LP diagnostics are separate from the one-native-MIP proof run.
+    std::string round41_static_segmented_solve = "mip";
+    // Direct fixed-interval LP references for K1 and the two K2 children.
+    std::string round41_root_reference_interval = "off";
     bool exact_phase_local_redecode_repair = false;
     bool exact_phase_local_redecode_repair_explicit = false;
     double exact_phase_local_redecode_seconds = 10.0;

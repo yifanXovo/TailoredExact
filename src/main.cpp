@@ -107,6 +107,9 @@ void usage() {
         << "[--round37-c6-geometry-policy off|pilot-weakest-prefine] "
         << "[--round40-c6-coarse-start off|k1-single|k1-adaptive|k1-adaptive-decisive] "
         << "[--round40-c6-ub-geometry off|nested-dyadic-k4] "
+        << "[--round41-static-segmented-gini off|st-k2-i|st-k2-p-core|st-k2-p-extended] "
+        << "[--round41-static-segmented-solve mip|root-lp] "
+        << "[--round41-root-reference-interval off|k1|left|right] "
         << "[--heuristic-candidates-csv <path>] "
         << "[--large-instance-mode auto|off|force] [--large-lb-mode none|inventory-only|movement-projection|column-pool-relaxation|auto] "
         << "[--pricing-engine exact-label|ng-dssr|hybrid] "
@@ -1181,6 +1184,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round37-c6-geometry-policy") opt.round37_c6_geometry_policy = requireValue(i, argc, argv);
         else if (arg == "--round40-c6-coarse-start") opt.round40_c6_coarse_start = requireValue(i, argc, argv);
         else if (arg == "--round40-c6-ub-geometry") opt.round40_c6_ub_geometry = requireValue(i, argc, argv);
+        else if (arg == "--round41-static-segmented-gini") opt.round41_static_segmented_gini = requireValue(i, argc, argv);
+        else if (arg == "--round41-static-segmented-solve") opt.round41_static_segmented_solve = requireValue(i, argc, argv);
+        else if (arg == "--round41-root-reference-interval") opt.round41_root_reference_interval = requireValue(i, argc, argv);
         else if (arg == "--heuristic-candidates-csv") opt.heuristic_candidates_csv = requireValue(i, argc, argv);
         else if (arg == "--large-instance-mode") opt.large_instance_mode = requireValue(i, argc, argv);
         else if (arg == "--large-lb-mode") opt.large_lb_mode = requireValue(i, argc, argv);
@@ -1484,6 +1490,12 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         lowerAscii(opt.round40_c6_coarse_start);
     opt.round40_c6_ub_geometry =
         lowerAscii(opt.round40_c6_ub_geometry);
+    opt.round41_static_segmented_gini =
+        lowerAscii(opt.round41_static_segmented_gini);
+    opt.round41_static_segmented_solve =
+        lowerAscii(opt.round41_static_segmented_solve);
+    opt.round41_root_reference_interval =
+        lowerAscii(opt.round41_root_reference_interval);
     if (opt.round34_c6_startup_variant != "hga-full" &&
         opt.round34_c6_startup_variant != "hga-light-1000" &&
         opt.round34_c6_startup_variant != "simple-start") {
@@ -1567,6 +1579,61 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error(
             "Round 40 UB geometry requires HGA-FULL, Round 36 off/proof, "
             "Round 37 off, K=1 off, and frozen Gurobi Auto presolve");
+    }
+    if (opt.round41_static_segmented_gini != "off" &&
+        opt.round41_static_segmented_gini != "st-k2-i" &&
+        opt.round41_static_segmented_gini != "st-k2-p-core" &&
+        opt.round41_static_segmented_gini != "st-k2-p-extended") {
+        throw std::runtime_error(
+            "Unsupported --round41-static-segmented-gini: " +
+            opt.round41_static_segmented_gini);
+    }
+    if (opt.round41_static_segmented_solve != "mip" &&
+        opt.round41_static_segmented_solve != "root-lp") {
+        throw std::runtime_error(
+            "Unsupported --round41-static-segmented-solve: " +
+            opt.round41_static_segmented_solve);
+    }
+    if (opt.round41_static_segmented_gini == "off" &&
+        opt.round41_static_segmented_solve != "mip") {
+        throw std::runtime_error(
+            "Round 41 root-LP mode requires a non-off static formulation");
+    }
+    if (opt.round41_root_reference_interval != "off" &&
+        opt.round41_root_reference_interval != "k1" &&
+        opt.round41_root_reference_interval != "left" &&
+        opt.round41_root_reference_interval != "right") {
+        throw std::runtime_error(
+            "Unsupported --round41-root-reference-interval: " +
+            opt.round41_root_reference_interval);
+    }
+    if (opt.round41_root_reference_interval != "off" &&
+        (opt.round41_static_segmented_gini != "off" ||
+         opt.round41_static_segmented_solve != "mip" ||
+         opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 41 root reference requires static segmentation off, "
+            "HGA-FULL, Round 36 off/proof, Round 37 off, both Round 40 "
+            "arms off, and frozen Gurobi Auto presolve");
+    }
+    if (opt.round41_static_segmented_gini != "off" &&
+        (opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 41 static segmentation requires HGA-FULL, Round 36 "
+            "off/proof, Round 37 off, both Round 40 arms off, and frozen "
+            "Gurobi Auto presolve");
     }
     if (opt.primal_heuristic_stop != "generation-stagnation") {
         opt.primal_heuristic_stop = "legacy-time";
@@ -10525,6 +10592,12 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         opt.round37_c6_geometry_policy;
     result.round40_c6_coarse_start = opt.round40_c6_coarse_start;
     result.round40_c6_ub_geometry = opt.round40_c6_ub_geometry;
+    result.round41_static_segmented_gini =
+        opt.round41_static_segmented_gini;
+    result.round41_static_segmented_solve =
+        opt.round41_static_segmented_solve;
+    result.round41_root_reference_interval =
+        opt.round41_root_reference_interval;
     ebrp::PricingOptions bpc_pricing_options;
     applyPricingOptionsFromSolve(instance, opt, bpc_pricing_options);
     result.bpc_pricing_engine_requested = bpc_pricing_options.pricing_engine;

@@ -20,6 +20,10 @@ struct CanonicalCompactModelSpec {
     bool add_verified_incumbent_row = false;
     double verified_incumbent = 0.0;
     double incumbent_epsilon = 0.0;
+    // Round 41 default-off static single-tree segmentation. Supported values
+    // are off, st-k2-i, st-k2-p-core, and st-k2-p-extended. All segment
+    // variables and rows are written deterministically before optimize.
+    std::string static_segmented_gini = "off";
 };
 
 struct CanonicalCompactModelArtifact {
@@ -35,6 +39,14 @@ struct CanonicalCompactModelArtifact {
     double gamma_L = 0.0;
     double gamma_U = 0.0;
     bool verified_incumbent_row = false;
+    std::string static_segmented_gini = "off";
+    long long static_segment_count = 0;
+    long long static_selector_variables = 0;
+    long long static_perspective_variables = 0;
+    long long static_extended_variables = 0;
+    long long static_indicator_rows = 0;
+    long long static_linear_rows = 0;
+    std::string static_family_encoding;
     std::string objective_definition =
         "min_G_plus_lambda_weighted_absolute_satisfaction_deviation";
     std::string model_scope = "complete_original_compact_milp";

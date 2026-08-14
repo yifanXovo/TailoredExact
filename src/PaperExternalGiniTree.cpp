@@ -7,6 +7,7 @@
 #include "FileSha256.hpp"
 #include "GiniFrontierGeometry.hpp"
 #include "ProcessPhaseLedger.hpp"
+#include "StaticSegmentedGini.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -259,6 +260,7 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         (!hga_full || causal != "off" || normalization != "proof" ||
          geometry_policy != "off" ||
          options.round40_c6_ub_geometry != "off" ||
+         options.round41_static_segmented_gini != "off" ||
          options.gurobi_presolve != -1)) {
         reason = "c6_round40_coarse_start_contract_mismatch";
         return false;
@@ -271,8 +273,45 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
     if (ub_geometry != "off" &&
         (!hga_full || causal != "off" || normalization != "proof" ||
          geometry_policy != "off" || coarse_start != "off" ||
+         options.round41_static_segmented_gini != "off" ||
          options.gurobi_presolve != -1)) {
         reason = "c6_round40_ub_geometry_contract_mismatch";
+        return false;
+    }
+    const std::string& static_segmented =
+        options.round41_static_segmented_gini;
+    const std::string& root_reference =
+        options.round41_root_reference_interval;
+    const bool static_segmented_valid = static_segmented == "off" ||
+        static_segmented == "st-k2-i" ||
+        static_segmented == "st-k2-p-core" ||
+        static_segmented == "st-k2-p-extended";
+    if (!static_segmented_valid) {
+        reason = "c6_round41_static_segmented_policy_unknown";
+        return false;
+    }
+    if (static_segmented != "off" &&
+        (!hga_full || causal != "off" || normalization != "proof" ||
+         geometry_policy != "off" || coarse_start != "off" ||
+         ub_geometry != "off" || options.gurobi_presolve != -1 ||
+         (options.round41_static_segmented_solve != "mip" &&
+          options.round41_static_segmented_solve != "root-lp"))) {
+        reason = "c6_round41_static_segmented_contract_mismatch";
+        return false;
+    }
+    const bool root_reference_valid = root_reference == "off" ||
+        root_reference == "k1" || root_reference == "left" ||
+        root_reference == "right";
+    if (!root_reference_valid) {
+        reason = "c6_round41_root_reference_policy_unknown";
+        return false;
+    }
+    if (root_reference != "off" &&
+        (!hga_full || causal != "off" || normalization != "proof" ||
+         geometry_policy != "off" || coarse_start != "off" ||
+         ub_geometry != "off" || static_segmented != "off" ||
+         options.gurobi_presolve != -1)) {
+        reason = "c6_round41_root_reference_contract_mismatch";
         return false;
     }
     if (options.frontier_intervals != 4 ||
@@ -296,7 +335,8 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
     reason = "accepted_round31_c6_frozen_exact_contract_with_" +
         options.round34_c6_startup_variant + "_round36_" + causal +
         "_round37_" + geometry_policy + "_round40_" + coarse_start +
-        "_ub_geometry_" + ub_geometry;
+        "_ub_geometry_" + ub_geometry + "_round41_" + static_segmented +
+        "_root_reference_" + root_reference;
     return true;
 }
 
@@ -654,6 +694,464 @@ PaperTerminalMipDecision evaluatePaperTerminalMipDecision(
     return decision;
 }
 
+SolveResult solveRound41RootReference(
+    const Instance& instance,
+    const SolveOptions& options,
+    const SolveResult& verified_seed,
+    double root_gamma_L,
+    double root_gamma_U,
+    SolveResult result,
+    std::unique_ptr<FixedIntervalMipBackend> backend,
+    const std::filesystem::path& artifact_dir) {
+    const Round41StaticK2Geometry geometry =
+        makeRound41StaticK2Geometry(root_gamma_L, root_gamma_U, 1e-9);
+    result.method = "round41-fixed-interval-root-reference";
+    result.frontier_execution_mode = "fixed-interval-root-reference";
+    result.certificate_scope = "diagnostic_lp_only";
+    result.external_gini_tree_attempted = false;
+    result.round41_root_reference_interval =
+        options.round41_root_reference_interval;
+    result.strict_certified_original_problem = false;
+    result.strict_certificate_class = "certificate_rejected";
+    result.strict_certificate_rejection_reason =
+        "diagnostic_root_lp_never_issues_original_problem_certificate";
+    result.external_gini_tree_algorithm_arm =
+        "R41-ROOT-REFERENCE-" +
+        options.round41_root_reference_interval;
+    if (!geometry.valid || !backend || !backend->capabilities().available) {
+        result.status = "round41_root_reference_invalid_or_unavailable";
+        result.round41_static_failure_reason = !geometry.valid
+            ? geometry.reason : (backend
+                ? backend->capabilities().failure_reason
+                : "gurobi_backend_factory_failed");
+        return result;
+    }
+
+    GiniIntervalGeometry interval{root_gamma_L, root_gamma_U};
+    if (options.round41_root_reference_interval == "left") {
+        interval = geometry.segments[0];
+    } else if (options.round41_root_reference_interval == "right") {
+        interval = geometry.segments[1];
+    }
+    result.round41_static_segmented_gamma_lower = interval.lower;
+    result.round41_static_segmented_gamma_upper = interval.upper;
+    result.round41_static_segmented_midpoint = geometry.midpoint;
+    result.round41_static_segmented_intervals = joinIntervals({interval});
+
+    CanonicalCompactModelSpec spec;
+    spec.strengthened = true;
+    spec.interval_restricted = true;
+    spec.gamma_L = interval.lower;
+    spec.gamma_U = interval.upper;
+    spec.add_verified_incumbent_row = true;
+    spec.verified_incumbent = verified_seed.objective;
+    spec.incumbent_epsilon = 0.0;
+    const std::filesystem::path model_path = artifact_dir / "models" /
+        ("root-reference-" + options.round41_root_reference_interval + ".lp");
+    const auto build_started = PaperClock::now();
+    const CanonicalCompactModelArtifact artifact =
+        writeCanonicalCompactModel(instance, options, model_path, spec);
+    result.round41_static_model_build_seconds =
+        std::chrono::duration<double>(
+            PaperClock::now() - build_started).count();
+    result.round41_static_segmented_model_path = artifact.path.string();
+    result.round41_static_segmented_model_sha256 = artifact.sha256;
+    result.round41_static_segmented_model_scope = artifact.model_scope;
+    if (!artifact.written) {
+        result.status = "round41_root_reference_model_build_failed";
+        result.round41_static_failure_reason = artifact.failure_reason;
+        backend->release();
+        copyPaperBackendStats(result, backend->stats());
+        return result;
+    }
+
+    double remaining = processDeadlineConfigured(options)
+        ? processWorkRemainingSeconds(options) : options.solve_time_limit;
+    if (!(remaining > 0.0)) {
+        result.status = "round41_root_reference_global_deadline";
+        result.round41_static_failure_reason = "no_root_lp_time_remaining";
+        backend->release();
+        copyPaperBackendStats(result, backend->stats());
+        return result;
+    }
+    FixedIntervalMipRequest request;
+    request.solve_kind = FixedIntervalSolveKind::PaperLpRelaxation;
+    request.leaf_id = "round41_root_reference_" +
+        options.round41_root_reference_interval;
+    request.gamma_L = interval.lower;
+    request.gamma_U = interval.upper;
+    request.verified_cutoff = verified_seed.objective;
+    request.global_deadline_remaining_seconds = remaining;
+    request.new_leaf = true;
+    request.warm_start_enabled = false;
+    request.canonical_model_path = artifact.path;
+    request.canonical_model_fingerprint = artifact.sha256;
+    request.canonical_model_scope = artifact.model_scope;
+    request.canonical_row_signature = artifact.row_signature;
+    request.native_log_path = artifact_dir / "native_logs" /
+        ("root-reference-" + options.round41_root_reference_interval +
+         ".gurobi.log");
+    request.incremental_model_reuse_enabled = false;
+    request.retain_model_after_solve = false;
+    const FixedIntervalMipOutcome outcome = backend->solve(request);
+    backend->release();
+    const FixedIntervalMipBackendStats stats = backend->stats();
+    copyPaperBackendStats(result, stats);
+
+    result.round41_static_model_read_seconds = outcome.model_read_seconds;
+    result.round41_static_model_variables = outcome.model_variable_count;
+    result.round41_static_model_linear_constraints =
+        outcome.model_linear_constraint_count;
+    result.round41_static_model_nonzeros = outcome.model_nonzero_count;
+    result.round41_static_model_binary_variables =
+        outcome.model_binary_variable_count;
+    result.round41_static_model_integer_variables =
+        outcome.model_integer_variable_count;
+    result.round41_static_model_continuous_variables =
+        outcome.model_continuous_variable_count;
+    result.round41_static_model_general_constraints =
+        outcome.model_general_constraint_count;
+    result.round41_static_presolved_size_available =
+        outcome.presolved_model_size_available;
+    result.round41_static_presolved_rows = outcome.presolved_row_count;
+    result.round41_static_presolved_columns = outcome.presolved_column_count;
+    result.round41_static_presolved_nonzeros = outcome.presolved_nonzero_count;
+    result.round41_static_optimize_count = stats.optimize_count;
+    result.round41_static_root_lp_bound_available =
+        outcome.lp_relaxation && outcome.native_bound_available;
+    result.round41_static_root_lp_bound = outcome.native_bound;
+    result.round41_static_lp_diagnostics_available =
+        outcome.lp_solution_diagnostics_available;
+    result.round41_static_route_binary_fractionality =
+        outcome.route_binary_fractionality;
+    result.round41_static_visit_binary_fractionality =
+        outcome.visit_binary_fractionality;
+    result.round41_static_inventory_bit_fractionality =
+        outcome.inventory_bit_fractionality;
+    result.round41_static_mccormick_ambiguity = outcome.mccormick_ambiguity;
+    result.round41_static_solver_runtime_seconds =
+        outcome.solver_runtime_seconds;
+    result.round41_static_solver_work = outcome.work;
+    result.round41_static_solver_nodes = outcome.nodes;
+    result.round41_static_peak_memory_gb = outcome.memory_gb;
+    result.round41_static_native_status = outcome.native_status;
+    result.round41_static_native_status_code = outcome.native_status_code;
+    result.round41_static_native_bound_available =
+        outcome.native_bound_available;
+    result.round41_static_native_bound = outcome.native_bound;
+    result.round41_static_parameter_roundtrip_valid =
+        stats.parameter_roundtrip_valid && outcome.exact_zero_gap_roundtrip;
+    result.round41_static_segmented_technical_feasible =
+        outcome.attempted && outcome.available &&
+        outcome.solver_finalization_reached &&
+        outcome.model_fingerprint_matches_request &&
+        outcome.lp_terminal_valid && outcome.native_bound_available &&
+        outcome.lp_solution_diagnostics_available &&
+        result.round41_static_parameter_roundtrip_valid;
+    result.routes = verified_seed.routes;
+    result.verification = verifySolution(
+        instance, result.routes, options.lambda);
+    result.objective = result.verification.objective;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.final_inventory = result.verification.final_inventory;
+    result.lower_bound = outcome.native_bound_available
+        ? outcome.native_bound : 0.0;
+    result.upper_bound = verified_seed.objective;
+    result.gap = std::max(
+        0.0, (result.upper_bound - result.lower_bound) /
+            std::max(1e-12, std::fabs(result.upper_bound)));
+    result.round41_static_original_verifier_passed =
+        result.verification.original_solution_feasible &&
+        result.verification.original_objective_recomputed &&
+        result.verification.errors.empty();
+    result.status = result.round41_static_segmented_technical_feasible
+        ? "round41_root_reference_complete"
+        : "round41_root_reference_failed";
+    result.round41_static_failure_reason =
+        result.round41_static_segmented_technical_feasible
+            ? "none" : (outcome.failure_reason.empty()
+                ? "root_reference_gate_failed" : outcome.failure_reason);
+    return result;
+}
+
+SolveResult solveRound41StaticSegmentedGini(
+    const Instance& instance,
+    const SolveOptions& options,
+    const SolveResult& verified_seed,
+    double root_gamma_L,
+    double root_gamma_U,
+    SolveResult result,
+    std::unique_ptr<FixedIntervalMipBackend> backend,
+    const std::filesystem::path& artifact_dir) {
+    const auto started = PaperClock::now();
+    const Round41StaticK2Geometry geometry =
+        makeRound41StaticK2Geometry(root_gamma_L, root_gamma_U, 1e-9);
+    result.method = "round41-static-segmented-gini";
+    result.frontier_execution_mode = "static-single-tree-segmented";
+    result.certificate_scope = "original_global_static_segmented_mip";
+    result.external_gini_tree_attempted = false;
+    result.round41_static_segmented_attempted = true;
+    result.round41_static_segmented_gini =
+        options.round41_static_segmented_gini;
+    result.round41_static_segmented_solve =
+        options.round41_static_segmented_solve;
+    result.round41_static_segmented_gamma_lower = root_gamma_L;
+    result.round41_static_segmented_gamma_upper = root_gamma_U;
+    result.round41_static_segmented_midpoint = geometry.midpoint;
+    result.round41_static_segmented_intervals =
+        geometry.valid ? joinIntervals(geometry.segments) : "";
+    result.round41_static_segmented_coverage_valid = geometry.valid &&
+        exactIntervalCoverage(
+            {root_gamma_L, root_gamma_U}, geometry.segments, 1e-9);
+    result.external_gini_tree_algorithm_arm =
+        options.round41_static_segmented_gini == "st-k2-i"
+            ? "R41-ST-K2-I"
+            : (options.round41_static_segmented_gini == "st-k2-p-core"
+                ? "R41-ST-K2-P-CORE"
+                : "R41-ST-K2-P-EXTENDED");
+    result.external_gini_tree_implementation_boundary =
+        "one deterministic canonical static K2 model; every selector, "
+        "indicator, perspective auxiliary, and strengthening row is present "
+        "before optimize; no callback-created nodes or model mutation";
+    result.external_gini_tree_selector_variable_count = 2;
+    result.external_gini_tree_contract_initial_interval_count = 2;
+    result.external_gini_tree_active_initial_intervals =
+        result.round41_static_segmented_intervals;
+    result.external_gini_tree_root_coverage_valid =
+        result.round41_static_segmented_coverage_valid;
+    result.strict_certified_original_problem = false;
+    result.strict_certificate_class = "certificate_rejected";
+    result.strict_certificate_rejection_reason =
+        "round41_static_segmented_not_finalized";
+    if (!geometry.valid || !result.round41_static_segmented_coverage_valid) {
+        result.status = "round41_static_segmented_invalid_geometry";
+        result.round41_static_failure_reason = geometry.reason;
+        return result;
+    }
+    if (!backend || !backend->capabilities().available) {
+        result.status = "round41_static_segmented_backend_unavailable";
+        result.round41_static_failure_reason = backend
+            ? backend->capabilities().failure_reason
+            : "gurobi_backend_factory_failed";
+        return result;
+    }
+
+    CanonicalCompactModelSpec spec;
+    spec.strengthened = true;
+    spec.interval_restricted = true;
+    spec.gamma_L = root_gamma_L;
+    spec.gamma_U = root_gamma_U;
+    spec.add_verified_incumbent_row = true;
+    spec.verified_incumbent = verified_seed.objective;
+    spec.incumbent_epsilon = 0.0;
+    spec.static_segmented_gini = options.round41_static_segmented_gini;
+    const std::filesystem::path model_path = artifact_dir / "models" /
+        (options.round41_static_segmented_gini + ".lp");
+    const auto build_started = PaperClock::now();
+    const CanonicalCompactModelArtifact artifact =
+        writeCanonicalCompactModel(instance, options, model_path, spec);
+    result.round41_static_model_build_seconds =
+        std::chrono::duration<double>(
+            PaperClock::now() - build_started).count();
+    result.round41_static_segmented_model_path = artifact.path.string();
+    result.round41_static_segmented_model_sha256 = artifact.sha256;
+    result.round41_static_segmented_model_scope = artifact.model_scope;
+    result.round41_static_segmented_family_encoding =
+        artifact.static_family_encoding;
+    result.round41_static_segment_count = artifact.static_segment_count;
+    result.round41_static_selector_variables =
+        artifact.static_selector_variables;
+    result.round41_static_perspective_variables =
+        artifact.static_perspective_variables;
+    result.round41_static_extended_variables =
+        artifact.static_extended_variables;
+    result.round41_static_indicator_rows = artifact.static_indicator_rows;
+    result.round41_static_linear_rows = artifact.static_linear_rows;
+    if (!artifact.written) {
+        result.status = "round41_static_segmented_model_build_failed";
+        result.round41_static_failure_reason = artifact.failure_reason;
+        backend->release();
+        copyPaperBackendStats(result, backend->stats());
+        return result;
+    }
+
+    double remaining = options.solve_time_limit;
+    if (processDeadlineConfigured(options)) {
+        remaining = processWorkRemainingSeconds(options);
+    }
+    if (!(remaining > 0.0)) {
+        result.status = "round41_static_segmented_global_deadline";
+        result.round41_static_failure_reason =
+            "no_exact_phase_time_remaining";
+        backend->release();
+        copyPaperBackendStats(result, backend->stats());
+        return result;
+    }
+    FixedIntervalMipRequest request;
+    request.solve_kind = options.round41_static_segmented_solve == "root-lp"
+        ? FixedIntervalSolveKind::PaperLpRelaxation
+        : FixedIntervalSolveKind::PaperTerminalMip;
+    request.leaf_id = "round41_static_k2";
+    request.gamma_L = root_gamma_L;
+    request.gamma_U = root_gamma_U;
+    request.verified_cutoff = verified_seed.objective;
+    request.global_deadline_remaining_seconds = remaining;
+    request.new_leaf = true;
+    request.warm_start_enabled = false;
+    request.canonical_model_path = artifact.path;
+    request.canonical_model_fingerprint = artifact.sha256;
+    request.canonical_model_scope = artifact.model_scope;
+    request.canonical_row_signature = artifact.row_signature;
+    request.native_log_path = artifact_dir / "native_logs" /
+        (options.round41_static_segmented_gini + "_" +
+         options.round41_static_segmented_solve + ".gurobi.log");
+    request.incremental_model_reuse_enabled = false;
+    request.retain_model_after_solve = false;
+    request.capture_native_bound_events = true;
+    const FixedIntervalMipOutcome outcome = backend->solve(request);
+    backend->release();
+    const FixedIntervalMipBackendStats backend_stats = backend->stats();
+    copyPaperBackendStats(result, backend_stats);
+
+    result.round41_static_model_read_seconds = outcome.model_read_seconds;
+    result.round41_static_model_variables = outcome.model_variable_count;
+    result.round41_static_model_linear_constraints =
+        outcome.model_linear_constraint_count;
+    result.round41_static_model_nonzeros = outcome.model_nonzero_count;
+    result.round41_static_model_binary_variables =
+        outcome.model_binary_variable_count;
+    result.round41_static_model_integer_variables =
+        outcome.model_integer_variable_count;
+    result.round41_static_model_continuous_variables =
+        outcome.model_continuous_variable_count;
+    result.round41_static_model_general_constraints =
+        outcome.model_general_constraint_count;
+    result.round41_static_presolved_size_available =
+        outcome.presolved_model_size_available;
+    result.round41_static_presolved_rows = outcome.presolved_row_count;
+    result.round41_static_presolved_columns = outcome.presolved_column_count;
+    result.round41_static_presolved_nonzeros = outcome.presolved_nonzero_count;
+    result.round41_static_optimize_count = backend_stats.optimize_count;
+    result.round41_static_integer_proof_job_count =
+        backend_stats.terminal_mip_optimize_count;
+    result.round41_static_one_native_mip_job =
+        options.round41_static_segmented_solve == "mip" &&
+        backend_stats.optimize_count == 1 &&
+        backend_stats.terminal_mip_optimize_count == 1 &&
+        backend_stats.lp_relaxation_optimize_count == 0 &&
+        backend_stats.model_count == 1 &&
+        backend_stats.model_free_count == 1 &&
+        backend_stats.environment_count == 1 &&
+        backend_stats.environment_free_count == 1;
+    result.round41_static_root_lp_bound_available =
+        outcome.lp_relaxation && outcome.native_bound_available;
+    result.round41_static_root_lp_bound = outcome.native_bound;
+    result.round41_static_lp_diagnostics_available =
+        outcome.lp_solution_diagnostics_available;
+    result.round41_static_route_binary_fractionality =
+        outcome.route_binary_fractionality;
+    result.round41_static_visit_binary_fractionality =
+        outcome.visit_binary_fractionality;
+    result.round41_static_inventory_bit_fractionality =
+        outcome.inventory_bit_fractionality;
+    result.round41_static_selector_binary_fractionality =
+        outcome.selector_binary_fractionality;
+    result.round41_static_mccormick_ambiguity =
+        outcome.mccormick_ambiguity;
+    result.round41_static_segmented_mccormick_ambiguity =
+        outcome.segmented_mccormick_ambiguity;
+    result.round41_static_solver_runtime_seconds =
+        outcome.solver_runtime_seconds;
+    result.round41_static_solver_work = outcome.work;
+    result.round41_static_solver_nodes = outcome.nodes;
+    result.round41_static_peak_memory_gb = outcome.memory_gb;
+    result.round41_static_native_status = outcome.native_status;
+    result.round41_static_native_status_code = outcome.native_status_code;
+    result.round41_static_native_bound_available =
+        outcome.native_bound_available;
+    result.round41_static_native_bound = outcome.native_bound;
+    result.round41_static_parameter_roundtrip_valid =
+        backend_stats.parameter_roundtrip_valid &&
+        outcome.exact_zero_gap_roundtrip;
+    result.round41_static_segmented_technical_feasible =
+        outcome.attempted && outcome.available &&
+        outcome.solver_finalization_reached &&
+        outcome.model_fingerprint_matches_request &&
+        result.round41_static_parameter_roundtrip_valid;
+
+    std::vector<RoutePlan> best_routes = verified_seed.routes;
+    double verified_upper = verified_seed.objective;
+    if (outcome.incumbent_available &&
+        outcome.incumbent_independently_verified &&
+        outcome.incumbent_objective < verified_upper + 1e-9) {
+        best_routes = outcome.incumbent_routes;
+        verified_upper = std::min(verified_upper, outcome.incumbent_objective);
+    }
+    result.routes = best_routes;
+    result.verification = verifySolution(instance, best_routes, options.lambda);
+    result.objective = result.verification.objective;
+    result.G = result.verification.G;
+    result.P = result.verification.P;
+    result.final_inventory = result.verification.final_inventory;
+    result.lower_bound = outcome.native_bound_available
+        ? outcome.native_bound : 0.0;
+    result.upper_bound = verified_upper;
+    result.external_gini_tree_global_lower_bound = result.lower_bound;
+    result.external_gini_tree_verified_upper_bound = verified_upper;
+    result.gap = std::fabs(verified_upper) > 1e-12
+        ? std::max(0.0, (verified_upper - result.lower_bound) /
+                         std::fabs(verified_upper))
+        : std::max(0.0, verified_upper - result.lower_bound);
+    result.round41_static_original_verifier_passed =
+        result.verification.original_solution_feasible &&
+        result.verification.original_objective_recomputed &&
+        result.verification.errors.empty();
+
+    if (options.round41_static_segmented_solve == "root-lp") {
+        const bool valid_root_lp =
+            result.round41_static_segmented_technical_feasible &&
+            outcome.lp_terminal_valid && outcome.native_bound_available &&
+            outcome.lp_solution_diagnostics_available;
+        result.status = valid_root_lp
+            ? "round41_static_segmented_root_lp_complete"
+            : "round41_static_segmented_root_lp_failed";
+        result.round41_static_failure_reason = valid_root_lp
+            ? "none" : (outcome.failure_reason.empty()
+                ? "root_lp_gate_failed" : outcome.failure_reason);
+        result.strict_certificate_rejection_reason =
+            "diagnostic_root_lp_never_issues_original_problem_certificate";
+    } else {
+        const bool exact_native =
+            result.round41_static_segmented_technical_feasible &&
+            result.round41_static_one_native_mip_job &&
+            outcome.native_exact_optimal && outcome.native_bound_available &&
+            result.round41_static_original_verifier_passed &&
+            std::fabs(outcome.native_bound - result.objective) <=
+                1e-7 * std::max(1.0, std::fabs(result.objective));
+        result.round41_static_strict_certificate = exact_native;
+        result.strict_certified_original_problem = exact_native;
+        result.strict_certificate_class = exact_native
+            ? "strict_original_problem_certificate"
+            : "certificate_rejected";
+        result.strict_certificate_rejection_reason = exact_native
+            ? "none" : (outcome.interrupted
+                ? "round41_static_segmented_time_limit"
+                : "round41_static_segmented_exactness_gate_failed");
+        result.status = exact_native
+            ? "optimal"
+            : (outcome.interrupted
+                ? "round41_static_segmented_time_limit"
+                : "round41_static_segmented_failed");
+        result.round41_static_failure_reason = exact_native
+            ? "none" : (outcome.failure_reason.empty()
+                ? result.strict_certificate_rejection_reason
+                : outcome.failure_reason);
+    }
+    (void)started;
+    return result;
+}
+
 SolveResult solvePaperExternalGiniTree(const Instance& instance,
                                        const SolveOptions& options,
                                        const SolveResult& verified_seed,
@@ -690,6 +1188,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         options.round40_c6_coarse_start != "off";
     const bool round40_nested_dyadic = c6_nonblocking &&
         options.round40_c6_ub_geometry == "nested-dyadic-k4";
+    const bool round41_static_segmented = c6_nonblocking &&
+        options.round41_static_segmented_gini != "off";
+    const bool round41_root_reference = c6_nonblocking &&
+        options.round41_root_reference_interval != "off";
     const double proof_incumbent_launch = verified_seed.objective;
     const double decomposition_anchor_launch = round36_causal
         ? verified_seed.round36_decomposition_anchor_launch
@@ -750,6 +1252,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     result.round40_c6_nested_dyadic_global_cell_count =
         round40_ub_geometry.global_cell_count;
     result.round40_c6_nested_dyadic_reason = round40_ub_geometry.reason;
+    result.round41_static_segmented_gini =
+        options.round41_static_segmented_gini;
+    result.round41_static_segmented_solve =
+        options.round41_static_segmented_solve;
+    result.round41_root_reference_interval =
+        options.round41_root_reference_interval;
     result.round36_proof_incumbent_launch = proof_incumbent_launch;
     result.round36_decomposition_anchor_launch =
         decomposition_anchor_launch;
@@ -995,6 +1503,16 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     recordProcessPhase(
         options, "external_artifact_directory_creation", "complete",
         artifact_dir.string());
+    if (round41_static_segmented) {
+        return solveRound41StaticSegmentedGini(
+            instance, options, verified_seed, root_gamma_L, root_gamma_U,
+            std::move(result), std::move(backend), artifact_dir);
+    }
+    if (round41_root_reference) {
+        return solveRound41RootReference(
+            instance, options, verified_seed, root_gamma_L, root_gamma_U,
+            std::move(result), std::move(backend), artifact_dir);
+    }
     const auto event_path = artifact_dir / "paper_tree_events.csv";
     const auto leaf_path = artifact_dir / "paper_leaf_ledger.csv";
     const auto optimize_path = artifact_dir / "paper_optimize_ledger.csv";
