@@ -50,6 +50,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/ControllingLeafScheduler.cpp
   src/GiniBranching.cpp
   src/GiniFrontierGeometry.cpp
+  src/StaticSegmentedGini.cpp
   src/IntervalRowFactory.cpp
   src/DispersionChildBound.cpp
   src/hga_tgbc/HgaTgbcGreedy.cpp
@@ -163,3 +164,8 @@ add_test(NAME Round40CoarseStartTests COMMAND Round40CoarseStartTests)
 add_executable(Round40UbGeometryTests tests/round40_ub_geometry_tests.cpp)
 target_link_libraries(Round40UbGeometryTests PRIVATE exact_ebrp_core)
 add_test(NAME Round40UbGeometryTests COMMAND Round40UbGeometryTests)
+
+add_executable(Round41StaticSegmentedTests
+    tests/round41_static_segmented_tests.cpp)
+target_link_libraries(Round41StaticSegmentedTests PRIVATE exact_ebrp_core)
+add_test(NAME Round41StaticSegmentedTests COMMAND Round41StaticSegmentedTests)

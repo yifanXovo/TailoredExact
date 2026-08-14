@@ -22,6 +22,7 @@
 #include <fstream>
 #include <limits>
 #include <memory>
+#include <regex>
 #include <set>
 #include <sstream>
 #include <stdexcept>
@@ -377,6 +378,10 @@ struct GurobiNativeLogEvidence {
     bool mip_start_accepted = false;
     bool mip_start_rejected = false;
     bool mip_start_no_incumbent = false;
+    bool presolved_size_available = false;
+    long long presolved_rows = 0;
+    long long presolved_columns = 0;
+    long long presolved_nonzeros = 0;
 };
 
 GurobiNativeLogEvidence inspectGurobiNativeLog(
@@ -411,6 +416,15 @@ GurobiNativeLogEvidence inspectGurobiNativeLog(
     out.mip_start_no_incumbent =
         text.find("user mip start did not produce a new incumbent solution") !=
             std::string::npos;
+    std::smatch presolved;
+    const std::regex presolved_pattern(
+        R"(presolved:\s*([0-9]+) rows,\s*([0-9]+) columns,\s*([0-9]+) nonzeros)");
+    if (std::regex_search(text, presolved, presolved_pattern)) {
+        out.presolved_size_available = true;
+        out.presolved_rows = std::stoll(presolved[1].str());
+        out.presolved_columns = std::stoll(presolved[2].str());
+        out.presolved_nonzeros = std::stoll(presolved[3].str());
+    }
     return out;
 }
 
@@ -702,6 +716,41 @@ public:
             out.failure_reason = "gurobi_external_model_environment_missing";
             return out;
         }
+        int native_variables = 0;
+        int native_rows = 0;
+        int native_general_constraints = 0;
+        double native_nonzeros = 0.0;
+        api_.getintattr(model, GRB_INT_ATTR_NUMVARS, &native_variables);
+        api_.getintattr(model, GRB_INT_ATTR_NUMCONSTRS, &native_rows);
+        api_.getintattr(
+            model, GRB_INT_ATTR_NUMGENCONSTRS,
+            &native_general_constraints);
+        api_.getdblattr(model, GRB_DBL_ATTR_DNUMNZS, &native_nonzeros);
+        out.model_variable_count = std::max(0, native_variables);
+        out.model_linear_constraint_count = std::max(0, native_rows);
+        out.model_general_constraint_count =
+            std::max(0, native_general_constraints);
+        out.model_nonzero_count = std::isfinite(native_nonzeros)
+            ? static_cast<long long>(std::llround(
+                std::max(0.0, native_nonzeros))) : 0;
+        if (native_variables > 0) {
+            std::vector<char> native_types(
+                static_cast<std::size_t>(native_variables));
+            if (api_.getcharattrarray(
+                    model, GRB_CHAR_ATTR_VTYPE, 0, native_variables,
+                    native_types.data()) == 0) {
+                for (char type : native_types) {
+                    if (type == GRB_BINARY) {
+                        ++out.model_binary_variable_count;
+                    } else if (type == GRB_INTEGER ||
+                               type == GRB_SEMIINT) {
+                        ++out.model_integer_variable_count;
+                    } else {
+                        ++out.model_continuous_variable_count;
+                    }
+                }
+            }
+        }
         if (out.lp_relaxation) {
             int variable_count = 0;
             if (api_.getintattr(model, GRB_INT_ATTR_NUMVARS,
@@ -934,6 +983,112 @@ public:
                 out.native_bound = lp_objective;
                 out.native_bound_available = true;
             }
+            int diagnostic_variables = 0;
+            if (getInt(GRB_INT_ATTR_NUMVARS, diagnostic_variables) &&
+                diagnostic_variables > 0) {
+                std::vector<double> solution(
+                    static_cast<std::size_t>(diagnostic_variables));
+                std::unordered_map<std::string, double> values;
+                bool diagnostics_ok = api_.getdblattrarray(
+                    model, GRB_DBL_ATTR_X, 0, diagnostic_variables,
+                    solution.data()) == 0;
+                for (int index = 0; diagnostics_ok &&
+                     index < diagnostic_variables; ++index) {
+                    char* name = nullptr;
+                    diagnostics_ok = api_.getstrattrelement(
+                        model, GRB_STR_ATTR_VARNAME, index, &name) == 0 &&
+                        name && *name;
+                    if (diagnostics_ok) {
+                        values[name] = solution[
+                            static_cast<std::size_t>(index)];
+                    }
+                }
+                auto fractionality = [](double value) {
+                    const double clipped = std::max(
+                        0.0, std::min(1.0, value));
+                    return 4.0 * clipped * (1.0 - clipped);
+                };
+                if (diagnostics_ok) {
+                    for (const auto& item : values) {
+                        if (item.first.rfind("x_", 0) == 0) {
+                            out.route_binary_fractionality +=
+                                fractionality(item.second);
+                        } else if (item.first.rfind("z_", 0) == 0) {
+                            out.visit_binary_fractionality +=
+                                fractionality(item.second);
+                        } else if (item.first.rfind("bit_", 0) == 0) {
+                            out.inventory_bit_fractionality +=
+                                fractionality(item.second);
+                        } else if (item.first.rfind("seg_z_", 0) == 0) {
+                            out.selector_binary_fractionality +=
+                                fractionality(item.second);
+                        }
+                    }
+                    const auto global_g = values.find("G");
+                    if (global_g != values.end()) {
+                        for (const auto& item : values) {
+                            if (item.first.rfind("bit_", 0) != 0) continue;
+                            const double bit = item.second;
+                            const double lower = request.gamma_L;
+                            const double upper = request.gamma_U;
+                            const double mc_lower = std::max(
+                                lower * bit,
+                                global_g->second - upper * (1.0 - bit));
+                            const double mc_upper = std::min(
+                                upper * bit,
+                                global_g->second - lower * (1.0 - bit));
+                            out.mccormick_ambiguity +=
+                                std::max(0.0, mc_upper - mc_lower);
+                        }
+                    }
+                    const std::regex activation_pattern(
+                        R"(^seg_w_([0-9]+)_([0-9]+)_([0-9]+)$)");
+                    for (const auto& item : values) {
+                        std::smatch match;
+                        if (!std::regex_match(
+                                item.first, match, activation_pattern)) {
+                            continue;
+                        }
+                        const std::string i = match[1].str();
+                        const std::string b = match[2].str();
+                        const int segment = std::stoi(match[3].str());
+                        const std::string selected_g_name =
+                            "seg_G_" + std::to_string(segment);
+                        const std::string selector_name =
+                            "seg_z_" + std::to_string(segment);
+                        const std::string product_name =
+                            "seg_q_" + i + "_" + b + "_" +
+                            std::to_string(segment);
+                        const auto selected_g = values.find(selected_g_name);
+                        const auto selector = values.find(selector_name);
+                        const auto product = values.find(product_name);
+                        if (selected_g == values.end() ||
+                            selector == values.end() ||
+                            product == values.end()) {
+                            diagnostics_ok = false;
+                            break;
+                        }
+                        const double midpoint = request.gamma_L + 0.5 *
+                            (request.gamma_U - request.gamma_L);
+                        const double lower = segment == 0
+                            ? request.gamma_L : midpoint;
+                        const double upper = segment == 0
+                            ? midpoint : request.gamma_U;
+                        const double activation = item.second;
+                        const double inactive =
+                            selector->second - activation;
+                        const double mc_lower = std::max(
+                            lower * activation,
+                            selected_g->second - upper * inactive);
+                        const double mc_upper = std::min(
+                            upper * activation,
+                            selected_g->second - lower * inactive);
+                        out.segmented_mccormick_ambiguity +=
+                            std::max(0.0, mc_upper - mc_lower);
+                    }
+                }
+                out.lp_solution_diagnostics_available = diagnostics_ok;
+            }
         }
         out.lp_terminal_valid = out.lp_relaxation &&
             out.solver_finalization_reached &&
@@ -985,6 +1140,11 @@ public:
         getInt(GRB_INT_ATTR_SOLCOUNT, solution_count);
         const GurobiNativeLogEvidence log_evidence =
             inspectGurobiNativeLog(request.native_log_path);
+        out.presolved_model_size_available =
+            log_evidence.presolved_size_available;
+        out.presolved_row_count = log_evidence.presolved_rows;
+        out.presolved_column_count = log_evidence.presolved_columns;
+        out.presolved_nonzero_count = log_evidence.presolved_nonzeros;
         out.presolve_rerun_observed = log_evidence.presolve_executed;
         out.root_relaxation_rerun_observed =
             log_evidence.root_relaxation_executed;

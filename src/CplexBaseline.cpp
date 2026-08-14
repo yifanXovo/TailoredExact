@@ -4,6 +4,7 @@
 #include "IntervalRowFactory.hpp"
 #include "ControllingLeafScheduler.hpp"
 #include "ModelCorrectness.hpp"
+#include "StaticSegmentedGini.hpp"
 
 #include "Evaluator.hpp"
 #include "FileSha256.hpp"
@@ -53,6 +54,16 @@ struct CompactIntervalCutoffConfig {
     bool add_objective_cutoff = true;
     double incumbent_ub = 0.0;
     double epsilon = 1e-8;
+};
+
+struct StaticSegmentedWriteStats {
+    long long segment_count = 0;
+    long long selector_variables = 0;
+    long long perspective_variables = 0;
+    long long extended_variables = 0;
+    long long indicator_rows = 0;
+    long long linear_rows = 0;
+    std::string family_encoding;
 };
 
 struct CompactOracleStrengtheningStats {
@@ -213,6 +224,17 @@ void writeConstraint(std::ostream& out,
     out << " " << sense << " " << num(rhs) << "\n";
 }
 
+void writeIndicatorConstraint(std::ostream& out,
+                              int& id,
+                              const std::string& selector,
+                              const Expr& expression,
+                              const std::string& sense,
+                              double rhs) {
+    out << " c" << id++ << ": " << selector << " = 1 -> ";
+    writeExpr(out, expression);
+    out << " " << sense << " " << num(rhs) << "\n";
+}
+
 std::string xName(int k, int i, int j) { return "x_" + std::to_string(k) + "_" + std::to_string(i) + "_" + std::to_string(j); }
 std::string zName(int k, int i) { return "z_" + std::to_string(k) + "_" + std::to_string(i); }
 std::string pName(int k, int i) { return "p_" + std::to_string(k) + "_" + std::to_string(i); }
@@ -228,6 +250,26 @@ std::string hName(int i, int j) { return "h_" + std::to_string(i) + "_" + std::t
 std::string bitName(int i, int b) { return "bit_" + std::to_string(i) + "_" + std::to_string(b); }
 std::string prodName(int i, int b) { return "prod_" + std::to_string(i) + "_" + std::to_string(b); }
 std::string zprodName(int i) { return "zprod_" + std::to_string(i); }
+std::string segmentSelectorName(int k) {
+    return "seg_z_" + std::to_string(k);
+}
+std::string segmentGName(int k) {
+    return "seg_G_" + std::to_string(k);
+}
+std::string segmentActivationName(int i, int b, int k) {
+    return "seg_w_" + std::to_string(i) + "_" + std::to_string(b) +
+        "_" + std::to_string(k);
+}
+std::string segmentProductName(int i, int b, int k) {
+    return "seg_q_" + std::to_string(i) + "_" + std::to_string(b) +
+        "_" + std::to_string(k);
+}
+std::string segmentSName(int k) { return "seg_S_" + std::to_string(k); }
+std::string segmentPName(int k) { return "seg_P_" + std::to_string(k); }
+std::string segmentHName(int k) { return "seg_H_" + std::to_string(k); }
+std::string segmentWSpName(int k) {
+    return "seg_WSP_" + std::to_string(k);
+}
 
 std::vector<double> subsetTspLowerBounds(const Instance& instance) {
     const int V = instance.V;
@@ -343,7 +385,9 @@ void writeCompactLp(const Instance& instance,
                     bool strengthened,
                     const CompactIntervalCutoffConfig* cutoff = nullptr,
                     CompactOracleStrengtheningStats* stats = nullptr,
-                    const std::vector<DynamicCut>* dynamic_cuts = nullptr) {
+                    const std::vector<DynamicCut>* dynamic_cuts = nullptr,
+                    const CanonicalCompactModelSpec* canonical_spec = nullptr,
+                    StaticSegmentedWriteStats* static_stats = nullptr) {
     VarRegistry vars;
     const int V = instance.V;
     const int M = instance.M;
@@ -615,6 +659,62 @@ void writeCompactLp(const Instance& instance,
         e_upper_domain = shared_interval_rows.domain.e_upper;
     }
 
+    const std::string static_mode = canonical_spec
+        ? canonical_spec->static_segmented_gini : "off";
+    const bool static_active = static_mode != "off";
+    const bool static_perspective = static_mode == "st-k2-p-core" ||
+        static_mode == "st-k2-p-extended";
+    const bool static_extended = static_mode == "st-k2-p-extended";
+    if (static_active && static_mode != "st-k2-i" &&
+        !static_perspective) {
+        throw std::runtime_error("unknown_round41_static_segmented_mode");
+    }
+    Round41StaticK2Geometry static_geometry;
+    std::vector<IntervalRowFactoryResult> static_segment_rows;
+    if (static_active) {
+        if (!strengthened || cutoff == nullptr || !cutoff->enabled ||
+            !cutoff->add_objective_cutoff ||
+            !std::isfinite(cutoff->incumbent_ub)) {
+            throw std::runtime_error(
+                "round41_static_segmented_requires_strengthened_cutoff_model");
+        }
+        static_geometry = makeRound41StaticK2Geometry(
+            cutoff->gamma_L, cutoff->gamma_U, 1e-9);
+        if (!static_geometry.valid) {
+            throw std::runtime_error(static_geometry.reason);
+        }
+        for (const GiniIntervalGeometry& segment : static_geometry.segments) {
+            IntervalRowFactoryRequest request;
+            request.gamma_L = segment.lower;
+            request.gamma_U = segment.upper;
+            request.verified_incumbent = cutoff->incumbent_ub;
+            request.incumbent_epsilon = cutoff->epsilon;
+            request.add_incumbent_row = true;
+            request.strengthened = true;
+            IntervalRowFactoryResult rows = buildRound18StaticIntervalRows(
+                instance, options, request);
+            if (!rows.complete_round18_static_migration ||
+                !rows.unsupported_active_families.empty()) {
+                throw std::runtime_error(
+                    "round41_static_segment_interval_factory_incomplete");
+            }
+            static_segment_rows.push_back(std::move(rows));
+        }
+        if (static_stats) {
+            static_stats->segment_count = static_cast<long long>(
+                static_segment_rows.size());
+            static_stats->family_encoding = static_extended
+                ? "all_factory_rows_indicator_except_direct_and_tight_"
+                  "mccormick;perspective_G_bit;aggregated_G_Y_S_P_domains;"
+                  "disaggregated_S_P_H_SP"
+                : (static_perspective
+                    ? "all_factory_rows_indicator_except_tight_mccormick;"
+                      "perspective_G_bit;aggregated_G_Y_S_P_domains"
+                    : "all_factory_rows_native_indicator;"
+                      "aggregated_G_Y_S_P_domains");
+        }
+    }
+
     for (int k = 0; k < M; ++k) {
         for (int i = 0; i <= V; ++i) {
             for (int j = 0; j <= V; ++j) {
@@ -735,6 +835,70 @@ void writeCompactLp(const Instance& instance,
         }
     }
 
+    double static_h_global_upper = 0.0;
+    for (int i = 1; i <= V; ++i) {
+        for (int j = i + 1; j <= V; ++j) {
+            static_h_global_upper +=
+                static_cast<double>(instance.capacity[i]) /
+                    instance.target[i] +
+                static_cast<double>(instance.capacity[j]) /
+                    instance.target[j];
+        }
+    }
+    if (static_active) {
+        for (std::size_t k = 0; k < static_segment_rows.size(); ++k) {
+            const bool infeasible =
+                static_segment_rows[k].domain.domain_infeasible;
+            vars.add(segmentSelectorName(static_cast<int>(k)), 0.0,
+                     infeasible ? 0.0 : 1.0, "B");
+            if (static_stats) ++static_stats->selector_variables;
+            if (static_perspective) {
+                const double segment_g_upper = infeasible
+                    ? 0.0 : static_geometry.segments[k].upper;
+                vars.add(segmentGName(static_cast<int>(k)), 0.0,
+                         segment_g_upper, "C");
+                if (static_stats) ++static_stats->perspective_variables;
+                for (int i = 1; i <= V; ++i) {
+                    int bits = 1;
+                    while (((1LL << bits) - 1) < instance.capacity[i]) ++bits;
+                    for (int b = 0; b < bits; ++b) {
+                        vars.add(segmentActivationName(
+                                     i, b, static_cast<int>(k)),
+                                 0.0, infeasible ? 0.0 : 1.0, "C");
+                        vars.add(segmentProductName(
+                                     i, b, static_cast<int>(k)),
+                                 0.0, segment_g_upper, "C");
+                        if (static_stats) {
+                            static_stats->perspective_variables += 2;
+                        }
+                    }
+                }
+            }
+            if (static_extended) {
+                const IntervalDomainSummary& domain =
+                    static_segment_rows[k].domain;
+                const double s_upper = infeasible
+                    ? 0.0 : std::max(0.0, domain.s_upper);
+                const double p_upper = infeasible
+                    ? 0.0 : std::max(0.0, domain.penalty_upper);
+                const double h_upper = infeasible ? 0.0 : std::min(
+                    static_h_global_upper,
+                    std::max(0.0,
+                        static_cast<double>(V) *
+                        static_geometry.segments[k].upper * s_upper));
+                vars.add(segmentSName(static_cast<int>(k)), 0.0,
+                         s_upper, "C");
+                vars.add(segmentPName(static_cast<int>(k)), 0.0,
+                         p_upper, "C");
+                vars.add(segmentHName(static_cast<int>(k)), 0.0,
+                         h_upper, "C");
+                vars.add(segmentWSpName(static_cast<int>(k)), 0.0,
+                         s_upper * p_upper, "C");
+                if (static_stats) static_stats->extended_variables += 4;
+            }
+        }
+    }
+
     std::filesystem::create_directories(lp_path.parent_path());
     std::ofstream out(lp_path);
     if (!out) throw std::runtime_error("Cannot write CPLEX LP: " + lp_path.string());
@@ -794,6 +958,351 @@ void writeCompactLp(const Instance& instance,
     if (domain_infeasible) {
         Expr impossible;
         writeConstraint(out, cid, impossible, "<=", -1);
+    }
+    if (static_active) {
+        auto addStaticLinear = [&](const Expr& expression,
+                                   const std::string& sense,
+                                   double rhs) {
+            writeConstraint(out, cid, expression, sense, rhs);
+            if (static_stats) ++static_stats->linear_rows;
+        };
+        auto addStaticIndicator = [&](const std::string& selector,
+                                      const Expr& expression,
+                                      const std::string& sense,
+                                      double rhs) {
+            writeIndicatorConstraint(
+                out, cid, selector, expression, sense, rhs);
+            if (static_stats) ++static_stats->indicator_rows;
+        };
+
+        Expr selector_sum;
+        for (std::size_t k = 0; k < static_segment_rows.size(); ++k) {
+            addTerm(selector_sum,
+                    segmentSelectorName(static_cast<int>(k)), 1.0);
+        }
+        addStaticLinear(selector_sum, "=", 1.0);
+
+        Expr g_lower_aggregation;
+        Expr g_upper_aggregation;
+        addTerm(g_lower_aggregation, "G", 1.0);
+        addTerm(g_upper_aggregation, "G", 1.0);
+        for (std::size_t k = 0; k < static_segment_rows.size(); ++k) {
+            const std::string selector =
+                segmentSelectorName(static_cast<int>(k));
+            addTerm(g_lower_aggregation, selector,
+                    -static_geometry.segments[k].lower);
+            addTerm(g_upper_aggregation, selector,
+                    -static_geometry.segments[k].upper);
+        }
+        addStaticLinear(g_lower_aggregation, ">=", 0.0);
+        addStaticLinear(g_upper_aggregation, "<=", 0.0);
+
+        for (int i = 1; i <= V; ++i) {
+            Expr y_lower_aggregation;
+            Expr y_upper_aggregation;
+            addTerm(y_lower_aggregation, yName(i), 1.0);
+            addTerm(y_upper_aggregation, yName(i), 1.0);
+            for (std::size_t k = 0; k < static_segment_rows.size(); ++k) {
+                const std::string selector =
+                    segmentSelectorName(static_cast<int>(k));
+                addTerm(y_lower_aggregation, selector,
+                        -static_cast<double>(
+                            static_segment_rows[k].domain.y_lower[i]));
+                addTerm(y_upper_aggregation, selector,
+                        -static_cast<double>(
+                            static_segment_rows[k].domain.y_upper[i]));
+            }
+            addStaticLinear(y_lower_aggregation, ">=", 0.0);
+            addStaticLinear(y_upper_aggregation, "<=", 0.0);
+        }
+
+        Expr s_lower_aggregation;
+        Expr s_upper_aggregation;
+        Expr p_lower_aggregation;
+        Expr p_upper_aggregation;
+        for (int i = 1; i <= V; ++i) {
+            addTerm(s_lower_aggregation, rName(i), 1.0);
+            addTerm(s_upper_aggregation, rName(i), 1.0);
+            addTerm(p_lower_aggregation, eName(i), instance.weights[i]);
+            addTerm(p_upper_aggregation, eName(i), instance.weights[i]);
+        }
+        for (std::size_t k = 0; k < static_segment_rows.size(); ++k) {
+            const std::string selector =
+                segmentSelectorName(static_cast<int>(k));
+            const IntervalDomainSummary& domain =
+                static_segment_rows[k].domain;
+            addTerm(s_lower_aggregation, selector, -domain.s_lower);
+            addTerm(s_upper_aggregation, selector, -domain.s_upper);
+            addTerm(p_lower_aggregation, selector, -domain.penalty_lower);
+            addTerm(p_upper_aggregation, selector, -domain.penalty_upper);
+        }
+        addStaticLinear(s_lower_aggregation, ">=", 0.0);
+        addStaticLinear(s_upper_aggregation, "<=", 0.0);
+        addStaticLinear(p_lower_aggregation, ">=", 0.0);
+        addStaticLinear(p_upper_aggregation, "<=", 0.0);
+
+        for (std::size_t k = 0; k < static_segment_rows.size(); ++k) {
+            const std::string selector =
+                segmentSelectorName(static_cast<int>(k));
+            for (const CanonicalLinearRow& row :
+                    static_segment_rows[k].rows) {
+                if (row.scope != IntervalRowScope::IntervalLocal) continue;
+                const bool tight_product =
+                    row.family == "interval_tight_mccormick_G_bit";
+                const bool extended_replaced = static_extended &&
+                    (row.family == "direct_gini_cap" ||
+                     row.family == "direct_gini_floor" ||
+                     row.family == "objective_lower_estimator_cutoff" ||
+                     row.family == "penalty_lower_bound_closure" ||
+                     row.family == "sp_product_mccormick" ||
+                     row.family ==
+                         "sp_product_objective_estimator_paper_safe");
+                if ((static_perspective && tight_product) ||
+                    extended_replaced) {
+                    continue;
+                }
+                Expr expression;
+                for (const auto& coefficient : row.coefficients) {
+                    addTerm(expression, coefficient.first,
+                            coefficient.second);
+                }
+                const std::string sense = row.sense == 'G'
+                    ? ">=" : (row.sense == 'E' ? "=" : "<=");
+                addStaticIndicator(selector, expression, sense, row.rhs);
+            }
+        }
+
+        if (static_perspective) {
+            Expr g_sum;
+            addTerm(g_sum, "G", -1.0);
+            for (std::size_t k = 0; k < static_segment_rows.size(); ++k) {
+                const int segment = static_cast<int>(k);
+                const std::string selector = segmentSelectorName(segment);
+                const std::string selected_g = segmentGName(segment);
+                const double lower = static_geometry.segments[k].lower;
+                const double upper = static_geometry.segments[k].upper;
+                addTerm(g_sum, selected_g, 1.0);
+                Expr selected_g_lower;
+                addTerm(selected_g_lower, selected_g, 1.0);
+                addTerm(selected_g_lower, selector, -lower);
+                addStaticLinear(selected_g_lower, ">=", 0.0);
+                Expr selected_g_upper;
+                addTerm(selected_g_upper, selected_g, 1.0);
+                addTerm(selected_g_upper, selector, -upper);
+                addStaticLinear(selected_g_upper, "<=", 0.0);
+            }
+            addStaticLinear(g_sum, "=", 0.0);
+
+            for (int i = 1; i <= V; ++i) {
+                int bits = 1;
+                while (((1LL << bits) - 1) < instance.capacity[i]) ++bits;
+                for (int b = 0; b < bits; ++b) {
+                    Expr activation_sum;
+                    Expr product_sum;
+                    addTerm(activation_sum, bitName(i, b), -1.0);
+                    addTerm(product_sum, prodName(i, b), -1.0);
+                    for (std::size_t k = 0;
+                         k < static_segment_rows.size(); ++k) {
+                        const int segment = static_cast<int>(k);
+                        const std::string selector =
+                            segmentSelectorName(segment);
+                        const std::string selected_g = segmentGName(segment);
+                        const std::string activation =
+                            segmentActivationName(i, b, segment);
+                        const std::string product =
+                            segmentProductName(i, b, segment);
+                        const double lower =
+                            static_geometry.segments[k].lower;
+                        const double upper =
+                            static_geometry.segments[k].upper;
+                        addTerm(activation_sum, activation, 1.0);
+                        addTerm(product_sum, product, 1.0);
+
+                        Expr w_le_selector;
+                        addTerm(w_le_selector, activation, 1.0);
+                        addTerm(w_le_selector, selector, -1.0);
+                        addStaticLinear(w_le_selector, "<=", 0.0);
+                        Expr w_le_bit;
+                        addTerm(w_le_bit, activation, 1.0);
+                        addTerm(w_le_bit, bitName(i, b), -1.0);
+                        addStaticLinear(w_le_bit, "<=", 0.0);
+                        Expr w_ge;
+                        addTerm(w_ge, activation, 1.0);
+                        addTerm(w_ge, selector, -1.0);
+                        addTerm(w_ge, bitName(i, b), -1.0);
+                        addStaticLinear(w_ge, ">=", -1.0);
+
+                        Expr q_lower_activation;
+                        addTerm(q_lower_activation, product, 1.0);
+                        addTerm(q_lower_activation, activation, -lower);
+                        addStaticLinear(q_lower_activation, ">=", 0.0);
+                        Expr q_upper_activation;
+                        addTerm(q_upper_activation, product, 1.0);
+                        addTerm(q_upper_activation, activation, -upper);
+                        addStaticLinear(q_upper_activation, "<=", 0.0);
+                        Expr q_lower_g;
+                        addTerm(q_lower_g, product, 1.0);
+                        addTerm(q_lower_g, selected_g, -1.0);
+                        addTerm(q_lower_g, selector, upper);
+                        addTerm(q_lower_g, activation, -upper);
+                        addStaticLinear(q_lower_g, ">=", 0.0);
+                        Expr q_upper_g;
+                        addTerm(q_upper_g, product, 1.0);
+                        addTerm(q_upper_g, selected_g, -1.0);
+                        addTerm(q_upper_g, selector, lower);
+                        addTerm(q_upper_g, activation, -lower);
+                        addStaticLinear(q_upper_g, "<=", 0.0);
+                    }
+                    addStaticLinear(activation_sum, "=", 0.0);
+                    addStaticLinear(product_sum, "=", 0.0);
+                }
+            }
+        }
+
+        if (static_extended) {
+            Expr s_original;
+            Expr p_original;
+            Expr h_original;
+            for (int i = 1; i <= V; ++i) {
+                addTerm(s_original, rName(i), 1.0);
+                addTerm(p_original, eName(i), instance.weights[i]);
+                for (int j = i + 1; j <= V; ++j) {
+                    addTerm(h_original, hName(i, j), 1.0);
+                }
+            }
+            Expr s_sum = s_original;
+            Expr p_sum = p_original;
+            Expr h_sum = h_original;
+            for (auto& coefficient : s_sum) coefficient.second *= -1.0;
+            for (auto& coefficient : p_sum) coefficient.second *= -1.0;
+            for (auto& coefficient : h_sum) coefficient.second *= -1.0;
+
+            auto addSelectedBlock = [&](const std::string& selected,
+                                        const Expr& original,
+                                        double global_lower,
+                                        double global_upper,
+                                        double selected_lower,
+                                        double selected_upper,
+                                        const std::string& selector) {
+                Expr lower_selected;
+                addTerm(lower_selected, selected, 1.0);
+                addTerm(lower_selected, selector, -selected_lower);
+                addStaticLinear(lower_selected, ">=", 0.0);
+                Expr upper_selected;
+                addTerm(upper_selected, selected, 1.0);
+                addTerm(upper_selected, selector, -selected_upper);
+                addStaticLinear(upper_selected, "<=", 0.0);
+                Expr lower_original;
+                addTerm(lower_original, selected, 1.0);
+                for (const auto& term : original) {
+                    addTerm(lower_original, term.first, -term.second);
+                }
+                addTerm(lower_original, selector, -global_upper);
+                addStaticLinear(lower_original, ">=", -global_upper);
+                Expr upper_original;
+                addTerm(upper_original, selected, 1.0);
+                for (const auto& term : original) {
+                    addTerm(upper_original, term.first, -term.second);
+                }
+                addTerm(upper_original, selector, -global_lower);
+                addStaticLinear(upper_original, "<=", -global_lower);
+            };
+
+            for (std::size_t k = 0; k < static_segment_rows.size(); ++k) {
+                const int segment = static_cast<int>(k);
+                const std::string selector = segmentSelectorName(segment);
+                const IntervalDomainSummary& domain =
+                    static_segment_rows[k].domain;
+                const std::string selected_s = segmentSName(segment);
+                const std::string selected_p = segmentPName(segment);
+                const std::string selected_h = segmentHName(segment);
+                const std::string selected_w = segmentWSpName(segment);
+                addTerm(s_sum, selected_s, 1.0);
+                addTerm(p_sum, selected_p, 1.0);
+                addTerm(h_sum, selected_h, 1.0);
+                addSelectedBlock(
+                    selected_s, s_original, s_lower_domain, s_upper_domain,
+                    domain.s_lower, domain.s_upper, selector);
+                addSelectedBlock(
+                    selected_p, p_original, penalty_lb_domain,
+                    penalty_ub_domain, domain.penalty_lower,
+                    domain.penalty_upper, selector);
+                const double selected_h_upper = std::min(
+                    static_h_global_upper,
+                    std::max(0.0,
+                        static_cast<double>(V) *
+                        static_geometry.segments[k].upper * domain.s_upper));
+                addSelectedBlock(
+                    selected_h, h_original, 0.0, static_h_global_upper,
+                    0.0, selected_h_upper, selector);
+
+                Expr direct_cap;
+                addTerm(direct_cap, selected_h, 1.0);
+                addTerm(direct_cap, selected_s,
+                        -static_cast<double>(V) *
+                            static_geometry.segments[k].upper);
+                addStaticLinear(direct_cap, "<=", 0.0);
+                Expr direct_floor;
+                addTerm(direct_floor, selected_h, 1.0);
+                addTerm(direct_floor, selected_s,
+                        -static_cast<double>(V) *
+                            static_geometry.segments[k].lower);
+                addStaticLinear(direct_floor, ">=", 0.0);
+
+                Expr objective_estimator;
+                addTerm(objective_estimator, selected_h, 1.0);
+                addTerm(objective_estimator, selected_p,
+                        static_cast<double>(V) * domain.s_upper *
+                            options.lambda);
+                addTerm(objective_estimator, selector,
+                        -static_cast<double>(V) * domain.s_upper *
+                            cutoff_value);
+                addStaticLinear(objective_estimator, "<=", 0.0);
+                Expr penalty_lower;
+                addTerm(penalty_lower, selected_p, 1.0);
+                addTerm(penalty_lower, selector, -domain.penalty_lower);
+                addStaticLinear(penalty_lower, ">=", 0.0);
+
+                const double s_l = domain.s_lower;
+                const double s_u = domain.s_upper;
+                const double p_l = domain.penalty_lower;
+                const double p_u = domain.penalty_upper;
+                Expr wsp1;
+                addTerm(wsp1, selected_w, 1.0);
+                addTerm(wsp1, selected_p, -s_l);
+                addTerm(wsp1, selected_s, -p_l);
+                addTerm(wsp1, selector, s_l * p_l);
+                addStaticLinear(wsp1, ">=", 0.0);
+                Expr wsp2;
+                addTerm(wsp2, selected_w, 1.0);
+                addTerm(wsp2, selected_p, -s_u);
+                addTerm(wsp2, selected_s, -p_u);
+                addTerm(wsp2, selector, s_u * p_u);
+                addStaticLinear(wsp2, ">=", 0.0);
+                Expr wsp3;
+                addTerm(wsp3, selected_w, 1.0);
+                addTerm(wsp3, selected_p, -s_u);
+                addTerm(wsp3, selected_s, -p_l);
+                addTerm(wsp3, selector, s_u * p_l);
+                addStaticLinear(wsp3, "<=", 0.0);
+                Expr wsp4;
+                addTerm(wsp4, selected_w, 1.0);
+                addTerm(wsp4, selected_p, -s_l);
+                addTerm(wsp4, selected_s, -p_u);
+                addTerm(wsp4, selector, s_l * p_u);
+                addStaticLinear(wsp4, "<=", 0.0);
+                Expr sp_estimator;
+                addTerm(sp_estimator, selected_h, 1.0);
+                addTerm(sp_estimator, selected_w,
+                        static_cast<double>(V) * options.lambda);
+                addTerm(sp_estimator, selected_s,
+                        -static_cast<double>(V) * cutoff_value);
+                addStaticLinear(sp_estimator, "<=", 0.0);
+            }
+            addStaticLinear(s_sum, "=", 0.0);
+            addStaticLinear(p_sum, "=", 0.0);
+            addStaticLinear(h_sum, "=", 0.0);
+        }
     }
     for (int k = 0; k < M; ++k) {
         Expr start_end;
@@ -3330,9 +3839,13 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
     artifact.gamma_L = spec.gamma_L;
     artifact.gamma_U = spec.gamma_U;
     artifact.verified_incumbent_row = spec.add_verified_incumbent_row;
-    artifact.model_scope = spec.interval_restricted
-        ? "complete_original_compact_milp_intersected_with_static_gini_interval"
-        : "complete_original_compact_milp";
+    artifact.static_segmented_gini = spec.static_segmented_gini;
+    artifact.model_scope = spec.static_segmented_gini != "off"
+        ? "complete_original_compact_milp_with_round41_static_k2_"
+          "segmentation"
+        : (spec.interval_restricted
+            ? "complete_original_compact_milp_intersected_with_static_gini_interval"
+            : "complete_original_compact_milp");
     try {
         if (spec.interval_restricted &&
             (!std::isfinite(spec.gamma_L) || !std::isfinite(spec.gamma_U) ||
@@ -3343,6 +3856,19 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
         if (spec.add_verified_incumbent_row &&
             !std::isfinite(spec.verified_incumbent)) {
             throw std::runtime_error("nonfinite_verified_incumbent_cutoff");
+        }
+        if (spec.static_segmented_gini != "off" &&
+            spec.static_segmented_gini != "st-k2-i" &&
+            spec.static_segmented_gini != "st-k2-p-core" &&
+            spec.static_segmented_gini != "st-k2-p-extended") {
+            throw std::runtime_error(
+                "unsupported_round41_static_segmented_gini_mode");
+        }
+        if (spec.static_segmented_gini != "off" &&
+            (!spec.strengthened || !spec.interval_restricted ||
+             !spec.add_verified_incumbent_row)) {
+            throw std::runtime_error(
+                "round41_static_segmented_spec_contract_mismatch");
         }
         SolveOptions model_options = options;
         if (spec.interval_restricted) {
@@ -3356,10 +3882,20 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
         cutoff.incumbent_ub = spec.verified_incumbent;
         cutoff.epsilon = spec.incumbent_epsilon;
         CompactOracleStrengtheningStats stats;
+        StaticSegmentedWriteStats static_stats;
         writeCompactLp(
             instance, model_options, path, spec.strengthened,
             spec.interval_restricted ? &cutoff : nullptr,
-            spec.interval_restricted ? &stats : nullptr, nullptr);
+            spec.interval_restricted ? &stats : nullptr, nullptr,
+            &spec, &static_stats);
+        artifact.static_segment_count = static_stats.segment_count;
+        artifact.static_selector_variables = static_stats.selector_variables;
+        artifact.static_perspective_variables =
+            static_stats.perspective_variables;
+        artifact.static_extended_variables = static_stats.extended_variables;
+        artifact.static_indicator_rows = static_stats.indicator_rows;
+        artifact.static_linear_rows = static_stats.linear_rows;
+        artifact.static_family_encoding = static_stats.family_encoding;
         const ModelSizeStats size = analyzeLpModel(path);
         artifact.rows = size.rows;
         artifact.columns = size.cols;
