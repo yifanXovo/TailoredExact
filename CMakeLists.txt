@@ -155,3 +155,11 @@ add_test(NAME Round36CausalTests COMMAND Round36CausalTests)
 add_executable(Round37GeometryTests tests/round37_geometry_tests.cpp)
 target_link_libraries(Round37GeometryTests PRIVATE exact_ebrp_core)
 add_test(NAME Round37GeometryTests COMMAND Round37GeometryTests)
+
+add_executable(Round40CoarseStartTests tests/round40_coarse_start_tests.cpp)
+target_link_libraries(Round40CoarseStartTests PRIVATE exact_ebrp_core)
+add_test(NAME Round40CoarseStartTests COMMAND Round40CoarseStartTests)
+
+add_executable(Round40UbGeometryTests tests/round40_ub_geometry_tests.cpp)
+target_link_libraries(Round40UbGeometryTests PRIVATE exact_ebrp_core)
+add_test(NAME Round40UbGeometryTests COMMAND Round40UbGeometryTests)

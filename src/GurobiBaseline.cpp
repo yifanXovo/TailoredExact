@@ -520,16 +520,44 @@ public:
         const int abs_rc = api_.setdblparam(env_, GRB_DBL_PAR_MIPGAPABS, 0.0);
         int threads = 0, presolve = -99, seed = -1;
         double rel = -1.0, abs = -1.0;
-        const bool readbacks =
-            api_.getintparam(env_, GRB_INT_PAR_THREADS, &threads) == 0 &&
-            api_.getintparam(env_, GRB_INT_PAR_PRESOLVE, &presolve) == 0 &&
-            api_.getintparam(env_, GRB_INT_PAR_SEED, &seed) == 0 &&
-            api_.getdblparam(env_, GRB_DBL_PAR_MIPGAP, &rel) == 0 &&
-            api_.getdblparam(env_, GRB_DBL_PAR_MIPGAPABS, &abs) == 0;
+        const int threads_get_rc =
+            api_.getintparam(env_, GRB_INT_PAR_THREADS, &threads);
+        const int presolve_get_rc =
+            api_.getintparam(env_, GRB_INT_PAR_PRESOLVE, &presolve);
+        const int seed_get_rc =
+            api_.getintparam(env_, GRB_INT_PAR_SEED, &seed);
+        const int rel_get_rc =
+            api_.getdblparam(env_, GRB_DBL_PAR_MIPGAP, &rel);
+        const int abs_get_rc =
+            api_.getdblparam(env_, GRB_DBL_PAR_MIPGAPABS, &abs);
+        const bool readbacks = threads_get_rc == 0 &&
+            presolve_get_rc == 0 && seed_get_rc == 0 &&
+            rel_get_rc == 0 && abs_get_rc == 0;
         configuration_valid_ = threads_rc == 0 && presolve_rc == 0 &&
             seed_rc == 0 && rel_rc == 0 && abs_rc == 0 && readbacks &&
             threads == 1 && presolve == options_.gurobi_presolve &&
             seed == options_.gurobi_seed && rel == 0.0 && abs == 0.0;
+        stats_.threads_requested = 1;
+        stats_.threads_set_return_code = threads_rc;
+        stats_.threads_get_return_code = threads_get_rc;
+        stats_.threads_effective = threads;
+        stats_.presolve_requested = options_.gurobi_presolve;
+        stats_.presolve_set_return_code = presolve_rc;
+        stats_.presolve_get_return_code = presolve_get_rc;
+        stats_.presolve_effective = presolve;
+        stats_.seed_requested = options_.gurobi_seed;
+        stats_.seed_set_return_code = seed_rc;
+        stats_.seed_get_return_code = seed_get_rc;
+        stats_.seed_effective = seed;
+        stats_.mip_gap_requested = 0.0;
+        stats_.mip_gap_set_return_code = rel_rc;
+        stats_.mip_gap_get_return_code = rel_get_rc;
+        stats_.mip_gap_effective = rel;
+        stats_.mip_gap_abs_requested = 0.0;
+        stats_.mip_gap_abs_set_return_code = abs_rc;
+        stats_.mip_gap_abs_get_return_code = abs_get_rc;
+        stats_.mip_gap_abs_effective = abs;
+        stats_.parameter_roundtrip_valid = configuration_valid_;
         if (!configuration_valid_) {
             failure_reason_ = "gurobi_external_parameter_roundtrip_failed";
             return;

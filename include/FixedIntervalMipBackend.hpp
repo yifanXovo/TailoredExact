@@ -155,6 +155,27 @@ struct FixedIntervalMipOutcome {
 };
 
 struct FixedIntervalMipBackendStats {
+    int threads_requested = 1;
+    int threads_set_return_code = -1;
+    int threads_get_return_code = -1;
+    int threads_effective = 0;
+    int presolve_requested = -1;
+    int presolve_set_return_code = -1;
+    int presolve_get_return_code = -1;
+    int presolve_effective = -2;
+    int seed_requested = 0;
+    int seed_set_return_code = -1;
+    int seed_get_return_code = -1;
+    int seed_effective = -1;
+    double mip_gap_requested = 0.0;
+    int mip_gap_set_return_code = -1;
+    int mip_gap_get_return_code = -1;
+    double mip_gap_effective = -1.0;
+    double mip_gap_abs_requested = 0.0;
+    int mip_gap_abs_set_return_code = -1;
+    int mip_gap_abs_get_return_code = -1;
+    double mip_gap_abs_effective = -1.0;
+    bool parameter_roundtrip_valid = false;
     long long environment_count = 0;
     long long model_count = 0;
     long long model_read_count = 0;

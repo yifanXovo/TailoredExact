@@ -552,6 +552,11 @@ struct SolveResult {
     std::string round36_c6_causal_arm = "off";
     std::string round36_c6_split_normalization = "proof";
     std::string round37_c6_geometry_policy = "off";
+    std::string round40_c6_coarse_start = "off";
+    std::string round40_c6_ub_geometry = "off";
+    long long round40_c6_nested_dyadic_level = 0;
+    long long round40_c6_nested_dyadic_global_cell_count = 0;
+    std::string round40_c6_nested_dyadic_reason;
     bool round37_pilot_all_initial_lps_complete = false;
     long long round37_pilot_initial_lp_count = 0;
     long long round37_pilot_eligible_cell_count = 0;
@@ -576,6 +581,7 @@ struct SolveResult {
     double external_gini_tree_proof_relevant_gamma_upper = 0.0;
     double external_gini_tree_anchor_grid_gamma_upper = 0.0;
     std::string external_gini_tree_anchor_grid_endpoints;
+    std::string external_gini_tree_anchor_grid_cell_indices;
     std::string external_gini_tree_active_initial_intervals;
     long long external_gini_tree_truncated_initial_interval_count = 0;
     std::string external_gini_tree_row_factory_version;
@@ -601,6 +607,7 @@ struct SolveResult {
     long long external_gini_tree_partial_state_reuse_count = 0;
     long long external_gini_tree_observed_fresh_restart_count = 0;
     long long external_gini_tree_ambiguous_retained_state_count = 0;
+    bool external_gini_tree_backend_parameter_roundtrip_valid = false;
     long long external_gini_tree_presolve_execution_count = 0;
     long long external_gini_tree_root_relaxation_execution_count = 0;
     long long external_gini_tree_warm_start_candidate_count = 0;
