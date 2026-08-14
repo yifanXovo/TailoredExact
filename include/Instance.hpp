@@ -450,6 +450,14 @@ struct SolveOptions {
     // The pilot arm is a uniform run-level choice; it is never inferred from
     // an instance label, size, scenario, elapsed time, or solver effort.
     std::string round37_c6_geometry_policy = "off";
+    // Round 40 coarse-start research. "off" is the validated K=4 default;
+    // the other values are explicit, uniform, default-off experiment arms.
+    std::string round40_c6_coarse_start = "off";
+    // Round 40 incumbent-stable geometry research. "off" preserves the
+    // validated incumbent-rescaled K=4 cover. The experimental policy uses
+    // only a deterministic dyadic hierarchy rooted at the mathematical Gini
+    // maximum and the verified incumbent as an active-prefix cutoff.
+    std::string round40_c6_ub_geometry = "off";
     bool exact_phase_local_redecode_repair = false;
     bool exact_phase_local_redecode_repair_explicit = false;
     double exact_phase_local_redecode_seconds = 10.0;

@@ -1593,6 +1593,10 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_COUNT(partial_state_reuse_count);
     WRITE_EXT_COUNT(observed_fresh_restart_count);
     WRITE_EXT_COUNT(ambiguous_retained_state_count);
+    out << "  \"external_gini_tree_backend_parameter_roundtrip_valid\": "
+        << (result.external_gini_tree_backend_parameter_roundtrip_valid
+                ? "true" : "false")
+        << ",\n";
     WRITE_EXT_COUNT(presolve_execution_count);
     WRITE_EXT_COUNT(root_relaxation_execution_count);
     WRITE_EXT_COUNT(warm_start_candidate_count);
@@ -1624,6 +1628,16 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.round36_c6_split_normalization) << "\",\n";
     out << "  \"round37_c6_geometry_policy\": \""
         << jsonEscape(result.round37_c6_geometry_policy) << "\",\n";
+    out << "  \"round40_c6_coarse_start\": \""
+        << jsonEscape(result.round40_c6_coarse_start) << "\",\n";
+    out << "  \"round40_c6_ub_geometry\": \""
+        << jsonEscape(result.round40_c6_ub_geometry) << "\",\n";
+    out << "  \"round40_c6_nested_dyadic_level\": "
+        << result.round40_c6_nested_dyadic_level << ",\n";
+    out << "  \"round40_c6_nested_dyadic_global_cell_count\": "
+        << result.round40_c6_nested_dyadic_global_cell_count << ",\n";
+    out << "  \"round40_c6_nested_dyadic_reason\": \""
+        << jsonEscape(result.round40_c6_nested_dyadic_reason) << "\",\n";
     out << "  \"round37_pilot_all_initial_lps_complete\": "
         << (result.round37_pilot_all_initial_lps_complete ? "true" : "false")
         << ",\n";
@@ -1679,6 +1693,9 @@ std::string resultToJson(const SolveResult& input) {
         << result.external_gini_tree_anchor_grid_gamma_upper << ",\n";
     out << "  \"external_gini_tree_anchor_grid_endpoints\": \""
         << jsonEscape(result.external_gini_tree_anchor_grid_endpoints)
+        << "\",\n";
+    out << "  \"external_gini_tree_anchor_grid_cell_indices\": \""
+        << jsonEscape(result.external_gini_tree_anchor_grid_cell_indices)
         << "\",\n";
     out << "  \"external_gini_tree_active_initial_intervals\": \""
         << jsonEscape(result.external_gini_tree_active_initial_intervals)

@@ -65,6 +65,15 @@ std::string joinDoubles(const std::vector<double>& values) {
     return out.str();
 }
 
+std::string joinLongLongs(const std::vector<long long>& values) {
+    std::ostringstream out;
+    for (std::size_t index = 0; index < values.size(); ++index) {
+        if (index) out << ';';
+        out << values[index];
+    }
+    return out.str();
+}
+
 std::string joinIntervals(
     const std::vector<GiniIntervalGeometry>& intervals) {
     std::ostringstream out;
@@ -238,6 +247,34 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         reason = "c6_round37_geometry_policy_contract_mismatch";
         return false;
     }
+    const std::string& coarse_start = options.round40_c6_coarse_start;
+    const bool coarse_start_valid = coarse_start == "off" ||
+        coarse_start == "k1-single" || coarse_start == "k1-adaptive" ||
+        coarse_start == "k1-adaptive-decisive";
+    if (!coarse_start_valid) {
+        reason = "c6_round40_coarse_start_policy_unknown";
+        return false;
+    }
+    if (coarse_start != "off" &&
+        (!hga_full || causal != "off" || normalization != "proof" ||
+         geometry_policy != "off" ||
+         options.round40_c6_ub_geometry != "off" ||
+         options.gurobi_presolve != -1)) {
+        reason = "c6_round40_coarse_start_contract_mismatch";
+        return false;
+    }
+    const std::string& ub_geometry = options.round40_c6_ub_geometry;
+    if (ub_geometry != "off" && ub_geometry != "nested-dyadic-k4") {
+        reason = "c6_round40_ub_geometry_policy_unknown";
+        return false;
+    }
+    if (ub_geometry != "off" &&
+        (!hga_full || causal != "off" || normalization != "proof" ||
+         geometry_policy != "off" || coarse_start != "off" ||
+         options.gurobi_presolve != -1)) {
+        reason = "c6_round40_ub_geometry_contract_mismatch";
+        return false;
+    }
     if (options.frontier_intervals != 4 ||
         !options.frontier_adaptive_split ||
         options.frontier_adaptive_max_depth != 8 ||
@@ -258,12 +295,37 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
     }
     reason = "accepted_round31_c6_frozen_exact_contract_with_" +
         options.round34_c6_startup_variant + "_round36_" + causal +
-        "_round37_" + geometry_policy;
+        "_round37_" + geometry_policy + "_round40_" + coarse_start +
+        "_ub_geometry_" + ub_geometry;
     return true;
 }
 
 void copyPaperBackendStats(SolveResult& result,
                            const FixedIntervalMipBackendStats& stats) {
+    result.gurobi_threads_requested = stats.threads_requested;
+    result.gurobi_threads_set_return_code = stats.threads_set_return_code;
+    result.gurobi_threads_get_return_code = stats.threads_get_return_code;
+    result.gurobi_threads_effective = stats.threads_effective;
+    result.gurobi_presolve_requested = stats.presolve_requested;
+    result.gurobi_presolve_set_return_code = stats.presolve_set_return_code;
+    result.gurobi_presolve_get_return_code = stats.presolve_get_return_code;
+    result.gurobi_presolve_effective = stats.presolve_effective;
+    result.gurobi_seed_requested = stats.seed_requested;
+    result.gurobi_seed_set_return_code = stats.seed_set_return_code;
+    result.gurobi_seed_get_return_code = stats.seed_get_return_code;
+    result.gurobi_seed_effective = stats.seed_effective;
+    result.gurobi_mip_gap_requested = stats.mip_gap_requested;
+    result.gurobi_mip_gap_set_return_code = stats.mip_gap_set_return_code;
+    result.gurobi_mip_gap_get_return_code = stats.mip_gap_get_return_code;
+    result.gurobi_mip_gap_effective = stats.mip_gap_effective;
+    result.gurobi_mip_gap_abs_requested = stats.mip_gap_abs_requested;
+    result.gurobi_mip_gap_abs_set_return_code =
+        stats.mip_gap_abs_set_return_code;
+    result.gurobi_mip_gap_abs_get_return_code =
+        stats.mip_gap_abs_get_return_code;
+    result.gurobi_mip_gap_abs_effective = stats.mip_gap_abs_effective;
+    result.external_gini_tree_backend_parameter_roundtrip_valid =
+        stats.parameter_roundtrip_valid;
     result.external_gini_tree_environment_count = stats.environment_count;
     result.external_gini_tree_model_count = stats.model_count;
     result.external_gini_tree_model_read_count = stats.model_read_count;
@@ -624,6 +686,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         options.round37_c6_geometry_policy == "pilot-weakest-prefine";
     const bool round36_causal = c6_nonblocking &&
         options.round36_c6_causal_arm != "off";
+    const bool round40_coarse_start = c6_nonblocking &&
+        options.round40_c6_coarse_start != "off";
+    const bool round40_nested_dyadic = c6_nonblocking &&
+        options.round40_c6_ub_geometry == "nested-dyadic-k4";
     const double proof_incumbent_launch = verified_seed.objective;
     const double decomposition_anchor_launch = round36_causal
         ? verified_seed.round36_decomposition_anchor_launch
@@ -632,13 +698,26 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         ? static_cast<double>(instance.V - 1) /
             static_cast<double>(instance.V)
         : 1.0;
-    const double anchor_grid_upper = std::min(
-        decomposition_anchor_launch, gini_max_possible);
+    const double anchor_grid_upper = round40_nested_dyadic
+        ? gini_max_possible
+        : std::min(decomposition_anchor_launch, gini_max_possible);
     const AnchorGridDecomposition causal_grid = round36_causal
         ? makeProofRelevantAnchorGrid(
               root_gamma_L, root_gamma_U, anchor_grid_upper,
               options.frontier_intervals, 1e-7)
         : AnchorGridDecomposition{};
+    const Round40CoarseStartGeometry round40_geometry =
+        round40_coarse_start
+            ? makeRound40CoarseStartGeometry(
+                  root_gamma_L, root_gamma_U, options.frontier_intervals,
+                  options.round40_c6_coarse_start, 1e-7)
+            : Round40CoarseStartGeometry{};
+    const Round40NestedDyadicGeometry round40_ub_geometry =
+        round40_nested_dyadic
+            ? makeRound40NestedDyadicGeometry(
+                  root_gamma_L, root_gamma_U, gini_max_possible,
+                  options.frontier_intervals, 1e-7)
+            : Round40NestedDyadicGeometry{};
     const bool incremental_model_reuse =
         c4_incremental || c5_bound_target || c6_nonblocking;
     SolveResult result = verified_seed;
@@ -664,6 +743,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         options.round36_c6_split_normalization;
     result.round37_c6_geometry_policy =
         options.round37_c6_geometry_policy;
+    result.round40_c6_coarse_start = options.round40_c6_coarse_start;
+    result.round40_c6_ub_geometry = options.round40_c6_ub_geometry;
+    result.round40_c6_nested_dyadic_level =
+        round40_ub_geometry.dyadic_level;
+    result.round40_c6_nested_dyadic_global_cell_count =
+        round40_ub_geometry.global_cell_count;
+    result.round40_c6_nested_dyadic_reason = round40_ub_geometry.reason;
     result.round36_proof_incumbent_launch = proof_incumbent_launch;
     result.round36_decomposition_anchor_launch =
         decomposition_anchor_launch;
@@ -686,11 +772,19 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             : "paper_external_gini_tree_running"));
     if (incremental_model_reuse) {
         result.external_gini_tree_algorithm_arm = c6_nonblocking
-            ? (round37_pilot_prefine
+            ? (round40_coarse_start
+                ? (options.round40_c6_coarse_start == "k1-single"
+                    ? "R40-K1-SINGLE"
+                    : (options.round40_c6_coarse_start == "k1-adaptive"
+                        ? "R40-K1-ADAPTIVE"
+                        : "R40-K1-ADAPTIVE-DECISIVE"))
+                : (round40_nested_dyadic
+                ? "R40-NESTED-DYADIC-K4"
+                : (round37_pilot_prefine
                 ? "R37-PILOT-WEAKEST-PREFINE"
                 : (round36_causal
                 ? "R36-" + options.round36_c6_causal_arm
-                : "C6-CANDIDATE"))
+                : "C6-CANDIDATE"))))
             : (c5_bound_target ? "C5-CANDIDATE" : "C4-CANDIDATE");
         result.external_gini_tree_global_row_family_count =
             static_cast<long long>(kPaperGlobalFamilies.size());
@@ -701,13 +795,20 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         result.external_gini_tree_interval_row_families =
             join(kPaperIntervalFamilies);
         result.external_gini_tree_child_lookahead_required =
-            !c6_nonblocking || round37_pilot_prefine;
+            !c6_nonblocking || round37_pilot_prefine ||
+            (round40_coarse_start &&
+             options.round40_c6_coarse_start != "k1-single");
         result.external_gini_tree_structural_split_unconditional = false;
         result.external_gini_tree_internal_budget_scheduling = false;
         result.external_gini_tree_native_tree_reuse_claimed = false;
         result.external_gini_tree_warm_start_enabled = false;
         result.external_gini_tree_selector_variable_count = 0;
-        result.external_gini_tree_contract_initial_interval_count = 4;
+        result.external_gini_tree_contract_initial_interval_count =
+            round40_coarse_start ? 1
+            : (round40_nested_dyadic
+                ? static_cast<long long>(
+                    round40_ub_geometry.active_intervals.size())
+                : 4);
         result.external_gini_tree_contract_adaptive_max_depth = 8;
         result.external_gini_tree_contract_split_factor = 2;
         result.external_gini_tree_contract_minimum_width = 1e-4;
@@ -715,7 +816,28 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         result.external_gini_tree_best_bound_tie_rule =
             "lower_bound,lower_endpoint,upper_endpoint,leaf_id";
         result.external_gini_tree_implementation_boundary = c6_nonblocking
-            ? (round37_pilot_prefine
+            ? (round40_coarse_start
+              ? (options.round40_c6_coarse_start == "k1-single"
+                ? "one complete strict-improver Gini interval; complete root "
+                  "LP followed by one exact terminal MIP; no midpoint child "
+                  "lookahead or independent interval proof fragmentation"
+                : (options.round40_c6_coarse_start == "k1-adaptive"
+                ? "one complete strict-improver root interval; existing "
+                  "complete midpoint-child LP evidence and rho=0.01 split "
+                  "logic recursively create an exact nested partition; "
+                  "declined refinement closes the coarser parent exactly"
+                : "one complete strict-improver root interval; complete "
+                  "midpoint-child LP evidence refines only for child "
+                  "infeasibility or a disjunction bound reaching the verified "
+                  "cutoff; all nondecisive evidence closes the coarser parent "
+                  "exactly without a gain threshold"))
+              : (round40_nested_dyadic
+              ? "the verified incumbent only truncates the active prefix of "
+                "a deterministic dyadic hierarchy rooted at the mathematical "
+                "Gini maximum; choose the finest level with at most frozen "
+                "K=4 active cells; preserve the unchanged C6 scheduler, "
+                "rho split rule, atomic coverage, and exact closures"
+              : (round37_pilot_prefine
               ? "complete all four initial LPs; select the weakest open cell "
                 "by LP bound with structural geometry ties; perform exactly "
                 "one complete-child midpoint pre-refinement; then resume the "
@@ -725,7 +847,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
               "highest active frontier plateau; current rho split rule; "
               "target attainment retains and requeues the open parent; "
               "same-leaf model object only; no LP basis or native-tree "
-              "continuation claim")
+              "continuation claim")))
             : (c5_bound_target
             ? "complete parent/child LPs plus normalized disjunction rule; "
               "small positive gains trigger a backend-certified parent "
@@ -758,28 +880,46 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
              decomposition_anchor_launch,
              1e-7) &&
          causal_grid.valid);
+    const bool round40_geometry_valid = !round40_coarse_start ||
+        round40_geometry.valid;
+    const bool round40_ub_geometry_valid = !round40_nested_dyadic ||
+        round40_ub_geometry.valid;
     if (!seed_valid || options.external_gini_backend != "gurobi" ||
         options.external_gini_warm_start || root_gamma_L < -1e-12 ||
         root_gamma_U < root_gamma_L - 1e-12 ||
         !verified_seed.frontier_covers_all_improving_gini_values ||
         !c4_contract_valid || !c5_contract_valid ||
-        !c6_contract_valid || !round36_seed_contract_valid) {
+        !c6_contract_valid || !round36_seed_contract_valid ||
+        !round40_geometry_valid || !round40_ub_geometry_valid) {
         result.status = "paper_external_gini_tree_invalid_configuration";
-        result.external_gini_tree_failure_reason = !seed_valid
-            ? "same_run_seed_not_verified"
-            : (options.external_gini_backend != "gurobi"
-                ? "paper_lp_event_path_requires_gurobi"
-                : (options.external_gini_warm_start
-                    ? "paper_lp_event_path_forbids_warm_start"
-                    : (!c4_contract_valid
-                        ? c4_contract_reason
-                        : (!c5_contract_valid
-                            ? c5_contract_reason
-                            : (!c6_contract_valid
-                                ? c6_contract_reason
-                                : (!round36_seed_contract_valid
-                                    ? "round36_unsafe_or_unverified_anchor_grid"
-                                    : "incomplete_or_invalid_root_range"))))));
+        if (!seed_valid) {
+            result.external_gini_tree_failure_reason =
+                "same_run_seed_not_verified";
+        } else if (options.external_gini_backend != "gurobi") {
+            result.external_gini_tree_failure_reason =
+                "paper_lp_event_path_requires_gurobi";
+        } else if (options.external_gini_warm_start) {
+            result.external_gini_tree_failure_reason =
+                "paper_lp_event_path_forbids_warm_start";
+        } else if (!c4_contract_valid) {
+            result.external_gini_tree_failure_reason = c4_contract_reason;
+        } else if (!c5_contract_valid) {
+            result.external_gini_tree_failure_reason = c5_contract_reason;
+        } else if (!c6_contract_valid) {
+            result.external_gini_tree_failure_reason = c6_contract_reason;
+        } else if (!round36_seed_contract_valid) {
+            result.external_gini_tree_failure_reason =
+                "round36_unsafe_or_unverified_anchor_grid";
+        } else if (!round40_geometry_valid) {
+            result.external_gini_tree_failure_reason =
+                "round40_invalid_coarse_start_geometry";
+        } else if (!round40_ub_geometry_valid) {
+            result.external_gini_tree_failure_reason =
+                "round40_invalid_nested_dyadic_geometry";
+        } else {
+            result.external_gini_tree_failure_reason =
+                "incomplete_or_invalid_root_range";
+        }
         return result;
     }
 
@@ -932,15 +1072,34 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                        event_path.string());
 
     ControllingLeafScheduler scheduler(1e-7);
-    const std::vector<GiniIntervalGeometry> initial = round36_causal
-        ? causal_grid.active_intervals
-        : makeLegacyFrontierIntervals(
-              root_gamma_L, root_gamma_U, options.frontier_intervals);
+    const std::vector<GiniIntervalGeometry> initial = round40_coarse_start
+        ? round40_geometry.initial_intervals
+        : (round40_nested_dyadic
+            ? round40_ub_geometry.active_intervals
+        : (round36_causal
+            ? causal_grid.active_intervals
+            : makeLegacyFrontierIntervals(
+                  root_gamma_L, root_gamma_U, options.frontier_intervals)));
     const std::vector<GiniIntervalGeometry> audit_anchor_cells =
-        round36_causal
+        round40_coarse_start
+            ? round40_geometry.initial_intervals
+            : (round40_nested_dyadic
+            ? round40_ub_geometry.active_anchor_cells
+            : (round36_causal
             ? causal_grid.anchor_cells
             : makeLegacyFrontierIntervals(
-                  root_gamma_L, root_gamma_U, options.frontier_intervals);
+                  root_gamma_L, root_gamma_U, options.frontier_intervals)));
+    std::vector<long long> audit_anchor_cell_indices;
+    if (round40_nested_dyadic) {
+        audit_anchor_cell_indices =
+            round40_ub_geometry.active_global_cell_indices;
+    } else {
+        audit_anchor_cell_indices.reserve(audit_anchor_cells.size());
+        for (std::size_t index = 0; index < audit_anchor_cells.size(); ++index) {
+            audit_anchor_cell_indices.push_back(
+                static_cast<long long>(index));
+        }
+    }
     std::vector<double> audit_anchor_endpoints;
     if (round36_causal) {
         audit_anchor_endpoints = causal_grid.anchor_endpoints;
@@ -952,11 +1111,15 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     }
     result.external_gini_tree_anchor_grid_endpoints =
         joinDoubles(audit_anchor_endpoints);
+    result.external_gini_tree_anchor_grid_cell_indices =
+        joinLongLongs(audit_anchor_cell_indices);
     result.external_gini_tree_active_initial_intervals =
         joinIntervals(initial);
     result.external_gini_tree_truncated_initial_interval_count =
-        round36_causal
-            ? causal_grid.truncated_active_interval_count : 0;
+        round40_nested_dyadic
+            ? round40_ub_geometry.truncated_active_interval_count
+            : (round36_causal
+                ? causal_grid.truncated_active_interval_count : 0);
     for (std::size_t cell_index = 0;
          cell_index < audit_anchor_cells.size(); ++cell_index) {
         bool active = false;
@@ -972,6 +1135,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     break;
                 }
             }
+        } else if (round40_nested_dyadic) {
+            active = cell_index < round40_ub_geometry.active_intervals.size();
+            if (active) {
+                active_interval =
+                    round40_ub_geometry.active_intervals[cell_index];
+            }
         } else {
             active = true;
             active_interval = audit_anchor_cells[cell_index];
@@ -983,7 +1152,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
              std::fabs(active_interval.upper -
                        audit_anchor_cells[cell_index].upper) >
                  scheduler.certificateTolerance());
-        initial_decomposition << std::setprecision(17) << cell_index << ','
+        const long long recorded_cell_index =
+            cell_index < audit_anchor_cell_indices.size()
+                ? audit_anchor_cell_indices[cell_index]
+                : static_cast<long long>(cell_index);
+        initial_decomposition << std::setprecision(17)
+            << recorded_cell_index << ','
             << audit_anchor_cells[cell_index].lower << ','
             << audit_anchor_cells[cell_index].upper << ',' << active << ',';
         if (active) {
@@ -993,12 +1167,18 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             initial_decomposition << ',';
         }
         initial_decomposition << ',' << truncated << ','
-            << proof_incumbent_launch << ',' << decomposition_anchor_launch
+            << proof_incumbent_launch << ','
+            << (round40_nested_dyadic
+                ? gini_max_possible : decomposition_anchor_launch)
             << ',' << root_gamma_L << ',' << root_gamma_U << ','
-            << csvField(options.round36_c6_split_normalization) << '\n';
+            << csvField(round40_nested_dyadic
+                ? "round40-nested-dyadic-proof"
+                : options.round36_c6_split_normalization) << '\n';
     }
     initial_decomposition.flush();
     result.external_gini_tree_initial_leaf_count =
+        static_cast<long long>(initial.size());
+    result.external_gini_tree_scheduler_initial_leaf_count =
         static_cast<long long>(initial.size());
     result.external_gini_tree_root_coverage_valid = exactIntervalCoverage(
         {root_gamma_L, root_gamma_U}, initial,
@@ -1848,10 +2028,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 "c5_parent_native_target_reached_delayed_atomic_split");
             continue;
         }
-        const bool eligible = legacyAdaptiveSplitEligible(
-            bounded.gamma_L, bounded.gamma_U, bounded.split_depth,
-            options.frontier_adaptive_max_depth,
-            options.frontier_adaptive_min_width);
+        const bool eligible =
+            (!round40_coarse_start ||
+             round40_geometry.adaptive_refinement) &&
+            legacyAdaptiveSplitEligible(
+                bounded.gamma_L, bounded.gamma_U, bounded.split_depth,
+                options.frontier_adaptive_max_depth,
+                options.frontier_adaptive_min_width);
         bool split_parent = false;
         if (eligible) {
             const auto geometry = splitLegacyFrontierInterval(
@@ -2029,7 +2212,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                       kRound30C5NormalizedSplitThreshold,
                       scheduler.certificateTolerance())
                 : C5BoundTargetSplitDecision{};
-            const C6CurrentSplitDecision c6_split = c6_nonblocking
+            C6CurrentSplitDecision c6_split = c6_nonblocking
                 ? (round36_causal
                     ? evaluateC6CurrentSplitDecision(
                           bounded.lower_bound, verified_ub,
@@ -2046,6 +2229,21 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                           kRound31C6NormalizedSplitThreshold,
                           scheduler.certificateTolerance()))
                 : C6CurrentSplitDecision{};
+            if (c6_nonblocking &&
+                options.round40_c6_coarse_start ==
+                    "k1-adaptive-decisive" &&
+                c6_split.valid) {
+                const bool decisive_child_evidence =
+                    c6_split.child_infeasibility_trigger ||
+                    c6_split.post_split_lower_bound >=
+                        verified_ub - scheduler.certificateTolerance();
+                c6_split.split_immediately = decisive_child_evidence;
+                c6_split.run_child_bound_target = false;
+                c6_split.launch_exact_closure = !decisive_child_evidence;
+                c6_split.reason = decisive_child_evidence
+                    ? "round40_decisive_child_infeasibility_or_cutoff_split"
+                    : "round40_nondecisive_child_evidence_close_parent";
+            }
             const bool decision_valid =
                 round37_force_prefinement
                     ? c6_split.valid
