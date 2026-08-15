@@ -1724,6 +1724,59 @@ std::string resultToJson(const SolveResult& input) {
 #undef WRITE_R41_STR
 #undef WRITE_R41_BOOL
 #undef WRITE_R41_NUM
+    out << "  \"round42_static_architecture\": \""
+        << jsonEscape(result.round42_static_architecture) << "\",\n";
+    out << "  \"round42_static_solve\": \""
+        << jsonEscape(result.round42_static_solve) << "\",\n";
+    out << "  \"round42_static_attempted\": "
+        << (result.round42_static_attempted ? "true" : "false") << ",\n";
+    out << "  \"round42_block_full_global_cover\": "
+        << (result.round42_block_full_global_cover ? "true" : "false")
+        << ",\n";
+    out << "  \"round42_block_strict_certificate\": "
+        << (result.round42_block_strict_certificate ? "true" : "false")
+        << ",\n";
+    out << "  \"round42_block_union_lower\": "
+        << result.round42_block_union_lower << ",\n";
+    out << "  \"round42_block_union_upper\": "
+        << result.round42_block_union_upper << ",\n";
+    out << "  \"round42_block_intervals\": \""
+        << jsonEscape(result.round42_block_intervals) << "\",\n";
+    out << "  \"round42_common_row_factoring\": "
+        << (result.round42_common_row_factoring ? "true" : "false")
+        << ",\n";
+    out << "  \"round42_hierarchical_selectors\": "
+        << (result.round42_hierarchical_selectors ? "true" : "false")
+        << ",\n";
+    out << "  \"round42_static_model_identity\": \""
+        << jsonEscape(result.round42_static_model_identity) << "\",\n";
+    out << "  \"round42_factored_unconditional_rows\": "
+        << result.round42_factored_unconditional_rows << ",\n";
+    out << "  \"round42_factored_weighted_rhs_rows\": "
+        << result.round42_factored_weighted_rhs_rows << ",\n";
+    out << "  \"round42_factored_indicator_rows_removed\": "
+        << result.round42_factored_indicator_rows_removed << ",\n";
+    out << "  \"round42_hierarchical_selector_variables\": "
+        << result.round42_hierarchical_selector_variables << ",\n";
+    out << "  \"round42_terminal_sibling_coalescing\": \""
+        << jsonEscape(result.round42_terminal_sibling_coalescing) << "\",\n";
+    out << "  \"round42_sibling_pairs_considered\": "
+        << result.round42_sibling_pairs_considered << ",\n";
+    out << "  \"round42_sibling_pairs_coalesced\": "
+        << result.round42_sibling_pairs_coalesced << ",\n";
+    out << "  \"round42_sibling_block_optimize_count\": "
+        << result.round42_sibling_block_optimize_count << ",\n";
+    out << "  \"round42_sibling_replaced_leaf_count\": "
+        << result.round42_sibling_replaced_leaf_count << ",\n";
+    out << "  \"round42_sibling_atomic_coverage_events\": "
+        << result.round42_sibling_atomic_coverage_events << ",\n";
+    out << "  \"round42_sibling_fallback_events\": "
+        << result.round42_sibling_fallback_events << ",\n";
+    out << "  \"round42_sibling_unresolved_union_count\": "
+        << result.round42_sibling_unresolved_union_count << ",\n";
+    out << "  \"round42_sibling_coverage_ledger_path\": \""
+        << jsonEscape(result.round42_sibling_coverage_ledger_path)
+        << "\",\n";
     out << "  \"round37_pilot_all_initial_lps_complete\": "
         << (result.round37_pilot_all_initial_lps_complete ? "true" : "false")
         << ",\n";

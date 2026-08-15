@@ -42,6 +42,7 @@
 #include <numeric>
 #include <random>
 #include <regex>
+#include <set>
 #include <sstream>
 #include <string>
 #include <thread>
@@ -110,6 +111,9 @@ void usage() {
         << "[--round41-static-segmented-gini off|st-k2-i|st-k2-p-core|st-k2-p-extended] "
         << "[--round41-static-segmented-solve mip|root-lp] "
         << "[--round41-root-reference-interval off|k1|left|right] "
+        << "[--round42-static-architecture off|st-k4-p-core|st-k4-p-core-hierarchical|st-k4-p-core-factored|external-k2-left|external-k2-right|paired-k4-lower|paired-k4-upper|paired-k4-lower-factored|paired-k4-upper-factored] "
+        << "[--round42-static-solve mip|root-lp] "
+        << "[--round42-terminal-sibling-coalescing off|core|core-factored] "
         << "[--heuristic-candidates-csv <path>] "
         << "[--large-instance-mode auto|off|force] [--large-lb-mode none|inventory-only|movement-projection|column-pool-relaxation|auto] "
         << "[--pricing-engine exact-label|ng-dssr|hybrid] "
@@ -1187,6 +1191,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round41-static-segmented-gini") opt.round41_static_segmented_gini = requireValue(i, argc, argv);
         else if (arg == "--round41-static-segmented-solve") opt.round41_static_segmented_solve = requireValue(i, argc, argv);
         else if (arg == "--round41-root-reference-interval") opt.round41_root_reference_interval = requireValue(i, argc, argv);
+        else if (arg == "--round42-static-architecture") opt.round42_static_architecture = requireValue(i, argc, argv);
+        else if (arg == "--round42-static-solve") opt.round42_static_solve = requireValue(i, argc, argv);
+        else if (arg == "--round42-terminal-sibling-coalescing") opt.round42_terminal_sibling_coalescing = requireValue(i, argc, argv);
         else if (arg == "--heuristic-candidates-csv") opt.heuristic_candidates_csv = requireValue(i, argc, argv);
         else if (arg == "--large-instance-mode") opt.large_instance_mode = requireValue(i, argc, argv);
         else if (arg == "--large-lb-mode") opt.large_lb_mode = requireValue(i, argc, argv);
@@ -1496,6 +1503,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         lowerAscii(opt.round41_static_segmented_solve);
     opt.round41_root_reference_interval =
         lowerAscii(opt.round41_root_reference_interval);
+    opt.round42_static_architecture =
+        lowerAscii(opt.round42_static_architecture);
+    opt.round42_static_solve = lowerAscii(opt.round42_static_solve);
+    opt.round42_terminal_sibling_coalescing =
+        lowerAscii(opt.round42_terminal_sibling_coalescing);
     if (opt.round34_c6_startup_variant != "hga-full" &&
         opt.round34_c6_startup_variant != "hga-light-1000" &&
         opt.round34_c6_startup_variant != "simple-start") {
@@ -1634,6 +1646,58 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             "Round 41 static segmentation requires HGA-FULL, Round 36 "
             "off/proof, Round 37 off, both Round 40 arms off, and frozen "
             "Gurobi Auto presolve");
+    }
+    const std::set<std::string> round42_static_arms = {
+        "off", "st-k4-p-core", "st-k4-p-core-hierarchical",
+        "st-k4-p-core-factored", "external-k2-left",
+        "external-k2-right", "paired-k4-lower", "paired-k4-upper",
+        "paired-k4-lower-factored", "paired-k4-upper-factored",
+    };
+    if (!round42_static_arms.count(opt.round42_static_architecture)) {
+        throw std::runtime_error(
+            "Unsupported --round42-static-architecture: " +
+            opt.round42_static_architecture);
+    }
+    if (opt.round42_static_solve != "mip" &&
+        opt.round42_static_solve != "root-lp") {
+        throw std::runtime_error(
+            "Unsupported --round42-static-solve: " +
+            opt.round42_static_solve);
+    }
+    if (opt.round42_static_architecture == "off" &&
+        opt.round42_static_solve != "mip") {
+        throw std::runtime_error(
+            "Round 42 root-LP mode requires a non-off static architecture");
+    }
+    if (opt.round42_terminal_sibling_coalescing != "off" &&
+        opt.round42_terminal_sibling_coalescing != "core" &&
+        opt.round42_terminal_sibling_coalescing != "core-factored") {
+        throw std::runtime_error(
+            "Unsupported --round42-terminal-sibling-coalescing: " +
+            opt.round42_terminal_sibling_coalescing);
+    }
+    const bool round42_any = opt.round42_static_architecture != "off" ||
+        opt.round42_terminal_sibling_coalescing != "off";
+    if (round42_any &&
+        (opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.round41_static_segmented_gini != "off" ||
+         opt.round41_root_reference_interval != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 42 architectures require HGA-FULL, Round 36 off/proof, "
+            "Round 37 off, both Round 40 arms off, all Round 41 arms off, "
+            "and frozen Gurobi Auto presolve");
+    }
+    if (opt.round42_static_architecture != "off" &&
+        opt.round42_terminal_sibling_coalescing != "off") {
+        throw std::runtime_error(
+            "Round 42 static blocks and C6 sibling coalescing are mutually "
+            "exclusive experiment arms");
     }
     if (opt.primal_heuristic_stop != "generation-stagnation") {
         opt.primal_heuristic_stop = "legacy-time";
@@ -10598,6 +10662,10 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         opt.round41_static_segmented_solve;
     result.round41_root_reference_interval =
         opt.round41_root_reference_interval;
+    result.round42_static_architecture = opt.round42_static_architecture;
+    result.round42_static_solve = opt.round42_static_solve;
+    result.round42_terminal_sibling_coalescing =
+        opt.round42_terminal_sibling_coalescing;
     ebrp::PricingOptions bpc_pricing_options;
     applyPricingOptionsFromSolve(instance, opt, bpc_pricing_options);
     result.bpc_pricing_engine_requested = bpc_pricing_options.pricing_engine;

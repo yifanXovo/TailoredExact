@@ -2,6 +2,7 @@
 
 #include "Instance.hpp"
 #include "Result.hpp"
+#include "GiniFrontierGeometry.hpp"
 
 #include <filesystem>
 #include <string>
@@ -24,6 +25,12 @@ struct CanonicalCompactModelSpec {
     // are off, st-k2-i, st-k2-p-core, and st-k2-p-extended. All segment
     // variables and rows are written deterministically before optimize.
     std::string static_segmented_gini = "off";
+    // Empty preserves the historical Round 41 equal-midpoint K2 geometry.
+    // Nonempty is an explicit ordered gap-free cover of [gamma_L,gamma_U].
+    std::vector<GiniIntervalGeometry> static_segments;
+    bool static_common_row_factoring = false;
+    bool static_hierarchical_selectors = false;
+    std::string static_model_identity;
 };
 
 struct CanonicalCompactModelArtifact {
@@ -46,6 +53,10 @@ struct CanonicalCompactModelArtifact {
     long long static_extended_variables = 0;
     long long static_indicator_rows = 0;
     long long static_linear_rows = 0;
+    long long static_factored_unconditional_rows = 0;
+    long long static_factored_weighted_rhs_rows = 0;
+    long long static_factored_indicator_rows_removed = 0;
+    long long static_hierarchical_selector_variables = 0;
     std::string static_family_encoding;
     std::string objective_definition =
         "min_G_plus_lambda_weighted_absolute_satisfaction_deviation";
