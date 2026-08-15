@@ -169,3 +169,8 @@ add_executable(Round41StaticSegmentedTests
     tests/round41_static_segmented_tests.cpp)
 target_link_libraries(Round41StaticSegmentedTests PRIVATE exact_ebrp_core)
 add_test(NAME Round41StaticSegmentedTests COMMAND Round41StaticSegmentedTests)
+
+add_executable(Round42StaticSegmentedTests
+    tests/round42_static_segmented_tests.cpp)
+target_link_libraries(Round42StaticSegmentedTests PRIVATE exact_ebrp_core)
+add_test(NAME Round42StaticSegmentedTests COMMAND Round42StaticSegmentedTests)

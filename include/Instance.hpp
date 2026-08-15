@@ -465,6 +465,14 @@ struct SolveOptions {
     std::string round41_static_segmented_solve = "mip";
     // Direct fixed-interval LP references for K1 and the two K2 children.
     std::string round41_root_reference_interval = "off";
+    // Round 42 explicit/default-off static block experiments.  These select
+    // only deterministic geometry/formulation variants; no instance or
+    // runtime observation participates in the choice.
+    std::string round42_static_architecture = "off";
+    std::string round42_static_solve = "mip";
+    // C6 terminal-stage sibling coalescing.  "off" preserves the validated
+    // C6 lifecycle exactly; non-off modes are structural research arms.
+    std::string round42_terminal_sibling_coalescing = "off";
     bool exact_phase_local_redecode_repair = false;
     bool exact_phase_local_redecode_repair_explicit = false;
     double exact_phase_local_redecode_seconds = 10.0;
