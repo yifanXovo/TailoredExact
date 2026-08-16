@@ -473,6 +473,17 @@ struct SolveOptions {
     // C6 terminal-stage sibling coalescing.  "off" preserves the validated
     // C6 lifecycle exactly; non-off modes are structural research arms.
     std::string round42_terminal_sibling_coalescing = "off";
+    // Round 43 unified K0/d/rho envelope-refinement research.  The entire
+    // family is default-off; K0 affects only the initial equal partition.
+    std::string round43_envelope_refinement = "off"; // off|atlas|algorithm
+    int round43_initial_k0 = 4;
+    int round43_lookahead_depth = 1;
+    double round43_rho = 0.01;
+    std::string round43_score = "d"; // d|max-d-c|old|no-adaptive
+    std::string round43_envelope_mode = "single"; // none|constant|single|iterated
+    std::string round43_width_measure = "g-mccormick-unit";
+    std::string round43_lifted_cuts = "off";
+    std::string round43_frontier_consolidation = "off";
     bool exact_phase_local_redecode_repair = false;
     bool exact_phase_local_redecode_repair_explicit = false;
     double exact_phase_local_redecode_seconds = 10.0;

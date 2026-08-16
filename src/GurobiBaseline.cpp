@@ -982,6 +982,8 @@ public:
             if (getDouble(GRB_DBL_ATTR_OBJVAL, lp_objective)) {
                 out.native_bound = lp_objective;
                 out.native_bound_available = true;
+                out.lp_objective_value = lp_objective;
+                out.lp_objective_value_available = true;
             }
             int diagnostic_variables = 0;
             if (getInt(GRB_INT_ATTR_NUMVARS, diagnostic_variables) &&
@@ -1026,6 +1028,9 @@ public:
                     }
                     const auto global_g = values.find("G");
                     if (global_g != values.end()) {
+                        out.lp_g_value = global_g->second;
+                        out.lp_g_value_available =
+                            std::isfinite(out.lp_g_value);
                         for (const auto& item : values) {
                             if (item.first.rfind("bit_", 0) != 0) continue;
                             const double bit = item.second;

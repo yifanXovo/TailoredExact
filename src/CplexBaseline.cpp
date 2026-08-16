@@ -936,6 +936,24 @@ void writeCompactLp(const Instance& instance,
     out << "\nSubject To\n";
 
     int cid = 1;
+    if (canonical_spec) {
+        for (const GiniEnvelopeFacet& facet :
+                canonical_spec->objective_gini_envelope_facets) {
+            std::string scope_reason;
+            if (!validEnvelopeFacetScope(
+                    facet, {g_lb, g_ub}, 1e-7, &scope_reason)) {
+                throw std::runtime_error(
+                    "round43_envelope_facet_scope_invalid:" + scope_reason);
+            }
+            Expr envelope_row;
+            addTerm(envelope_row, "G", 1.0 - facet.beta);
+            for (int i = 1; i <= V; ++i) {
+                addTerm(envelope_row, eName(i),
+                        options.lambda * instance.weights[i]);
+            }
+            writeConstraint(out, cid, envelope_row, ">=", facet.alpha);
+        }
+    }
     if (use_shared_interval_rows) {
         for (const CanonicalLinearRow& row : shared_interval_rows.rows) {
             Expr expression;
@@ -3930,11 +3948,16 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
     artifact.gamma_U = spec.gamma_U;
     artifact.verified_incumbent_row = spec.add_verified_incumbent_row;
     artifact.static_segmented_gini = spec.static_segmented_gini;
+    artifact.objective_gini_envelope_rows = static_cast<long long>(
+        spec.objective_gini_envelope_facets.size());
     artifact.model_scope = spec.static_segmented_gini != "off"
         ? "complete_original_compact_milp_with_static_segmented_block"
+        : (!spec.objective_gini_envelope_facets.empty()
+            ? "complete_original_compact_milp_intersected_with_static_gini_"
+              "interval_and_inherited_objective_envelope"
         : (spec.interval_restricted
             ? "complete_original_compact_milp_intersected_with_static_gini_interval"
-            : "complete_original_compact_milp");
+            : "complete_original_compact_milp"));
     try {
         if (spec.interval_restricted &&
             (!std::isfinite(spec.gamma_L) || !std::isfinite(spec.gamma_U) ||
@@ -3945,6 +3968,16 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
         if (spec.add_verified_incumbent_row &&
             !std::isfinite(spec.verified_incumbent)) {
             throw std::runtime_error("nonfinite_verified_incumbent_cutoff");
+        }
+        for (const GiniEnvelopeFacet& facet :
+                spec.objective_gini_envelope_facets) {
+            std::string scope_reason;
+            if (!validEnvelopeFacetScope(
+                    facet, {spec.gamma_L, spec.gamma_U}, 1e-7,
+                    &scope_reason)) {
+                throw std::runtime_error(
+                    "round43_envelope_facet_scope_invalid:" + scope_reason);
+            }
         }
         if (spec.static_segmented_gini != "off" &&
             spec.static_segmented_gini != "st-k2-i" &&
