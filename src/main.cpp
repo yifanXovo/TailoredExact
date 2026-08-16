@@ -114,6 +114,10 @@ void usage() {
         << "[--round42-static-architecture off|st-k4-p-core|st-k4-p-core-hierarchical|st-k4-p-core-factored|external-k2-left|external-k2-right|paired-k4-lower|paired-k4-upper|paired-k4-lower-factored|paired-k4-upper-factored] "
         << "[--round42-static-solve mip|root-lp] "
         << "[--round42-terminal-sibling-coalescing off|core|core-factored] "
+        << "[--round43-envelope-refinement off|atlas|algorithm] "
+        << "[--round43-initial-k0 1|4] [--round43-lookahead-depth 1|2] "
+        << "[--round43-rho <value>] [--round43-score d|max-d-c|old|no-adaptive] "
+        << "[--round43-envelope-mode none|constant|single|iterated] "
         << "[--heuristic-candidates-csv <path>] "
         << "[--large-instance-mode auto|off|force] [--large-lb-mode none|inventory-only|movement-projection|column-pool-relaxation|auto] "
         << "[--pricing-engine exact-label|ng-dssr|hybrid] "
@@ -1194,6 +1198,15 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round42-static-architecture") opt.round42_static_architecture = requireValue(i, argc, argv);
         else if (arg == "--round42-static-solve") opt.round42_static_solve = requireValue(i, argc, argv);
         else if (arg == "--round42-terminal-sibling-coalescing") opt.round42_terminal_sibling_coalescing = requireValue(i, argc, argv);
+        else if (arg == "--round43-envelope-refinement") opt.round43_envelope_refinement = requireValue(i, argc, argv);
+        else if (arg == "--round43-initial-k0") opt.round43_initial_k0 = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round43-lookahead-depth") opt.round43_lookahead_depth = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round43-rho") opt.round43_rho = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round43-score") opt.round43_score = requireValue(i, argc, argv);
+        else if (arg == "--round43-envelope-mode") opt.round43_envelope_mode = requireValue(i, argc, argv);
+        else if (arg == "--round43-width-measure") opt.round43_width_measure = requireValue(i, argc, argv);
+        else if (arg == "--round43-lifted-cuts") opt.round43_lifted_cuts = requireValue(i, argc, argv);
+        else if (arg == "--round43-frontier-consolidation") opt.round43_frontier_consolidation = requireValue(i, argc, argv);
         else if (arg == "--heuristic-candidates-csv") opt.heuristic_candidates_csv = requireValue(i, argc, argv);
         else if (arg == "--large-instance-mode") opt.large_instance_mode = requireValue(i, argc, argv);
         else if (arg == "--large-lb-mode") opt.large_lb_mode = requireValue(i, argc, argv);
@@ -1508,6 +1521,14 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     opt.round42_static_solve = lowerAscii(opt.round42_static_solve);
     opt.round42_terminal_sibling_coalescing =
         lowerAscii(opt.round42_terminal_sibling_coalescing);
+    opt.round43_envelope_refinement =
+        lowerAscii(opt.round43_envelope_refinement);
+    opt.round43_score = lowerAscii(opt.round43_score);
+    opt.round43_envelope_mode = lowerAscii(opt.round43_envelope_mode);
+    opt.round43_width_measure = lowerAscii(opt.round43_width_measure);
+    opt.round43_lifted_cuts = lowerAscii(opt.round43_lifted_cuts);
+    opt.round43_frontier_consolidation =
+        lowerAscii(opt.round43_frontier_consolidation);
     if (opt.round34_c6_startup_variant != "hga-full" &&
         opt.round34_c6_startup_variant != "hga-light-1000" &&
         opt.round34_c6_startup_variant != "simple-start") {
@@ -1698,6 +1719,45 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error(
             "Round 42 static blocks and C6 sibling coalescing are mutually "
             "exclusive experiment arms");
+    }
+    const bool round43_active =
+        opt.round43_envelope_refinement != "off";
+    const std::set<std::string> round43_execution = {
+        "off", "atlas", "algorithm"};
+    const std::set<std::string> round43_scores = {
+        "d", "max-d-c", "old", "no-adaptive"};
+    const std::set<std::string> round43_envelopes = {
+        "none", "constant", "single", "iterated"};
+    if (!round43_execution.count(opt.round43_envelope_refinement) ||
+        (opt.round43_initial_k0 != 1 && opt.round43_initial_k0 != 4) ||
+        (opt.round43_lookahead_depth != 1 &&
+         opt.round43_lookahead_depth != 2) ||
+        !std::isfinite(opt.round43_rho) || opt.round43_rho < 0.0 ||
+        opt.round43_rho > 1.0 ||
+        !round43_scores.count(opt.round43_score) ||
+        !round43_envelopes.count(opt.round43_envelope_mode) ||
+        opt.round43_width_measure != "g-mccormick-unit" ||
+        (opt.round43_lifted_cuts != "off" &&
+         opt.round43_lifted_cuts != "valid-only") ||
+        (opt.round43_frontier_consolidation != "off" &&
+         opt.round43_frontier_consolidation != "rank1")) {
+        throw std::runtime_error("Invalid Round 43 envelope-refinement arm");
+    }
+    if (round43_active &&
+        (opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.round41_static_segmented_gini != "off" ||
+         opt.round41_root_reference_interval != "off" || round42_any ||
+         opt.gurobi_presolve != -1 ||
+         opt.external_gini_scheduling !=
+             "round31-nonblocking-native-bound")) {
+        throw std::runtime_error(
+            "Round 43 requires frozen HGA-FULL C6 with Auto presolve and "
+            "all Round 36--42 research arms off");
     }
     if (opt.primal_heuristic_stop != "generation-stagnation") {
         opt.primal_heuristic_stop = "legacy-time";

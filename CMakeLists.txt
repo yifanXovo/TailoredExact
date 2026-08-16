@@ -50,6 +50,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/ControllingLeafScheduler.cpp
   src/GiniBranching.cpp
   src/GiniFrontierGeometry.cpp
+  src/GiniEnvelopeRefinement.cpp
   src/StaticSegmentedGini.cpp
   src/IntervalRowFactory.cpp
   src/DispersionChildBound.cpp
@@ -174,3 +175,9 @@ add_executable(Round42StaticSegmentedTests
     tests/round42_static_segmented_tests.cpp)
 target_link_libraries(Round42StaticSegmentedTests PRIVATE exact_ebrp_core)
 add_test(NAME Round42StaticSegmentedTests COMMAND Round42StaticSegmentedTests)
+
+add_executable(Round43EnvelopeRefinementTests
+    tests/round43_envelope_refinement_tests.cpp)
+target_link_libraries(Round43EnvelopeRefinementTests PRIVATE exact_ebrp_core)
+add_test(NAME Round43EnvelopeRefinementTests
+  COMMAND Round43EnvelopeRefinementTests)

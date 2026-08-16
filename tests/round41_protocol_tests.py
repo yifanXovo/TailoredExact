@@ -35,7 +35,10 @@ class Round41ProtocolTests(unittest.TestCase):
 
     def test_static_path_is_prebuilt_and_one_optimize(self) -> None:
         tree = source("src/PaperExternalGiniTree.cpp")
-        start = tree.index("SolveResult solveRound41StaticSegmentedGini(")
+        # Round 42 generalized the Round 41 implementation for its static
+        # architecture arms and renamed the shared function without changing
+        # the prebuilt one-optimize contract guarded below.
+        start = tree.index("SolveResult solveStaticSegmentedGini(")
         end = tree.index("SolveResult solvePaperExternalGiniTree(", start)
         mechanism = tree[start:end]
         self.assertEqual(mechanism.count("backend->solve(request)"), 1)

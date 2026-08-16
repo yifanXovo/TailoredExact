@@ -3,6 +3,7 @@
 #include "Instance.hpp"
 #include "Result.hpp"
 #include "GiniFrontierGeometry.hpp"
+#include "GiniEnvelopeRefinement.hpp"
 
 #include <filesystem>
 #include <string>
@@ -31,6 +32,9 @@ struct CanonicalCompactModelSpec {
     bool static_common_row_factoring = false;
     bool static_hierarchical_selectors = false;
     std::string static_model_identity;
+    // Valid affine lower bounds h(G)=alpha+beta*G whose source interval
+    // contains this model's interval.  The writer emits h(G) <= objective.
+    std::vector<GiniEnvelopeFacet> objective_gini_envelope_facets;
 };
 
 struct CanonicalCompactModelArtifact {
@@ -57,6 +61,7 @@ struct CanonicalCompactModelArtifact {
     long long static_factored_weighted_rhs_rows = 0;
     long long static_factored_indicator_rows_removed = 0;
     long long static_hierarchical_selector_variables = 0;
+    long long objective_gini_envelope_rows = 0;
     std::string static_family_encoding;
     std::string objective_definition =
         "min_G_plus_lambda_weighted_absolute_satisfaction_deviation";

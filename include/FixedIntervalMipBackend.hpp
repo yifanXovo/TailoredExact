@@ -125,6 +125,10 @@ struct FixedIntervalMipOutcome {
     long long presolved_column_count = 0;
     long long presolved_nonzero_count = 0;
     bool lp_solution_diagnostics_available = false;
+    bool lp_g_value_available = false;
+    double lp_g_value = 0.0;
+    bool lp_objective_value_available = false;
+    double lp_objective_value = 0.0;
     double route_binary_fractionality = 0.0;
     double visit_binary_fractionality = 0.0;
     double inventory_bit_fractionality = 0.0;

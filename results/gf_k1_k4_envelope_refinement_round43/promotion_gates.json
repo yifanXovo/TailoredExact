@@ -1,0 +1,39 @@
+{
+  "correctness": {
+    "complete_interval_coverage": true,
+    "default_off_semantic_equivalence": true,
+    "every_incumbent_independently_verified": true,
+    "false_certificates": 0,
+    "incorrect_optimality_claims": 0,
+    "monotone_valid_global_lower_bound": true,
+    "no_c6_certificate_regression": true
+  },
+  "development": {
+    "geomean_candidate_over_c6_work_max": 1.05,
+    "geomean_candidate_over_pgrb_work_max": 0.9,
+    "joint_work_and_time_ratio_max": 1.5,
+    "major_candidate_over_pgrb_work_max": 1.25,
+    "material_candidate_over_pgrb_work_max": 1.35,
+    "material_wins_at_least_losses": true,
+    "strong_control_candidate_over_c6_work_max": 1.2,
+    "strong_control_shifted_exact_time_max": 1.25
+  },
+  "frozen_before_candidate_exact_runs": true,
+  "gates_may_change_after_candidate_results": false,
+  "schema": "round43-promotion-gates-v1",
+  "selection_order": [
+    "correctness",
+    "major severe-regression protection",
+    "strongest C6 positive-control protection",
+    "worst material ratio",
+    "aggregate Work",
+    "aggregate time",
+    "prefer K0=1 only if otherwise materially tied"
+  ],
+  "validation": {
+    "geomean_candidate_over_pgrb_work_max": 1.0,
+    "material_candidate_over_pgrb_work_max": 1.35,
+    "material_wins_at_least_losses": true,
+    "strong_control_uses_frozen_development_result": true
+  }
+}
