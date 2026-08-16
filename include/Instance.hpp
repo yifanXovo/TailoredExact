@@ -484,6 +484,20 @@ struct SolveOptions {
     std::string round43_width_measure = "g-mccormick-unit";
     std::string round43_lifted_cuts = "off";
     std::string round43_frontier_consolidation = "off";
+    // Round 44 C6-compatible K4 affine-envelope tail repair. The entire
+    // family is explicit and default-off.
+    std::string round44_envelope_tail_repair = "off"; // off|atlas|algorithm
+    int round44_initial_k0 = 4;
+    std::string round44_lookahead_policy = "frontier-d2";
+    std::string round44_envelope_injection = "all";
+    std::string round44_envelope_scope = "parent";
+    std::string round44_refinement_family = "c6-overlay";
+    double round44_rho_f = 0.5;
+    double round44_rho_m = 0.0;
+    double round44_rho_h = 0.0;
+    std::string round44_rank1_cuts = "off";
+    std::string round44_mip_starts = "off";
+    std::string round44_frontier_consolidation = "off";
     bool exact_phase_local_redecode_repair = false;
     bool exact_phase_local_redecode_repair_explicit = false;
     double exact_phase_local_redecode_seconds = 10.0;

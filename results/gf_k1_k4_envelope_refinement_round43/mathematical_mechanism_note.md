@@ -8,10 +8,13 @@ and evaluates the same globally fixed score.
 
 For each accepted facet `(alpha,beta)`, the native row is
 `(1-beta) G + lambda sum_i w_i e_i >= alpha`. Facets are interval-local and
-inherited only by nested descendants. The normalized residual-volume score is
-`D_d=(V_local-V_envelope)/V_local` with the frozen zero-volume convention. A
-node splits at its midpoint exactly when `D_d >= rho`; otherwise the strengthened
-parent MIP is solved to a protocol terminal condition. Descendant LP bounds and
+inherited only by nested descendants. The executable-normalized
+residual-volume score is
+`D_R43=V_residual/(|I|*max(U-L_I,epsilon_cert))`. The separately useful profile
+fraction is `P_profile=V_residual/max(V_local,epsilon_volume)=1-tau_d` when
+`V_local` is positive; it is not the Round 43 decision score. A node splits at
+its midpoint exactly when `D_R43 >= rho`; otherwise the strengthened parent MIP
+is solved to a protocol terminal condition. Descendant LP bounds and
 infeasibility proofs remain valid lower-bound information, while an incumbent
 is never treated as a lower bound.
 

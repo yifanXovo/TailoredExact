@@ -234,10 +234,13 @@ and evaluates the same globally fixed score.
 
 For each accepted facet `(alpha,beta)`, the native row is
 `(1-beta) G + lambda sum_i w_i e_i >= alpha`. Facets are interval-local and
-inherited only by nested descendants. The normalized residual-volume score is
-`D_d=(V_local-V_envelope)/V_local` with the frozen zero-volume convention. A
-node splits at its midpoint exactly when `D_d >= rho`; otherwise the strengthened
-parent MIP is solved to a protocol terminal condition. Descendant LP bounds and
+inherited only by nested descendants. The executable-normalized
+residual-volume score is
+`D_R43=V_residual/(|I|*max(U-L_I,epsilon_cert))`. The separately useful profile
+fraction is `P_profile=V_residual/max(V_local,epsilon_volume)=1-tau_d` when
+`V_local` is positive; it is not the Round 43 decision score. A node splits at
+its midpoint exactly when `D_R43 >= rho`; otherwise the strengthened parent MIP
+is solved to a protocol terminal condition. Descendant LP bounds and
 infeasibility proofs remain valid lower-bound information, while an incumbent
 is never treated as a lower bound.
 
@@ -377,8 +380,8 @@ Run from the repository root in PowerShell. The bundled Python path may be
 replaced by any compatible Python 3.11+ interpreter.
 
 ```powershell
-& 'D:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' -S . -B build_round43 -DCMAKE_BUILD_TYPE=Release -DEXACT_EBRP_ENABLE_GUROBI=ON -DEXACT_EBRP_GUROBI_ROOT='D:/gurobi1302/win64'
-& 'D:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' --build build_round43 --config Release
+& 'D:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' -S . -B build_round43 -G 'MinGW Makefiles' -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER='D:/msys64/ucrt64/bin/c++.exe' -DCMAKE_MAKE_PROGRAM='D:/msys64/ucrt64/bin/mingw32-make.exe' -DEXACT_EBRP_ENABLE_GUROBI=ON -DGUROBI_ROOT='D:/gurobi1302/win64'
+& 'D:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' --build build_round43 --parallel 8
 & 'D:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe' --test-dir build_round43 -C Release --output-on-failure
 & $python tests/round43_protocol_tests.py
 & $python tests/round43_evidence_tests.py
@@ -413,8 +416,9 @@ unchanged at K0=4, rho=0.01, Gurobi Presolve Auto, Seed 0, one thread, and zero
 gaps. All Round 43 mechanisms remain explicit and default-off.
 
 The selected global development candidates were {k1_name} and {k4_name}, both
-with the single-pass affine envelope, D_d score, no lifted cuts, and no frontier
-consolidation. Neither passed every frozen development gate.
+with the single-pass affine envelope, executable-normalized `D_R43` score, no
+lifted-cut experiment, and no frontier consolidation. Neither passed every
+frozen development gate.
 
 ## Decisive witnesses
 
@@ -458,10 +462,11 @@ entry conditions were false.
 6. **Can K4 local strength be transferred by affine envelopes?** Not as a
    material complete-root gain on the strongest control; K1 and K4 root LPs
    coincide and chi is vacuous.
-7. **Is D_d stable?** It is valid, reconstructible, and hardware-independent,
+7. **Is D_R43 stable?** It is valid, reconstructible, and hardware-independent,
    but its selected candidates fail the full performance envelope.
 8. **Is C_d admissible/useful?** No; it is the constant `1-2^-d` here.
-9. **Were lifted cuts required?** No. Their entry condition was false.
+9. **Were lifted cuts tested?** No. The predeclared lifted-cut entry condition
+   was not triggered, so lifted cuts were not tested in Round 43.
 10. **Was frontier consolidation required?** No. The control was unprotected
     and the major selected rows did not show adjacent-descendant terminal
     duplication.

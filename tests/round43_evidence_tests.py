@@ -28,7 +28,7 @@ REQUIRED_REPORTS = {
     "holdout_comparison.csv", "certificate_audit.csv",
     "default_off_equivalence.csv", "forbidden_logic_audit.csv",
     "final_build_and_tests.md", "final_evidence_inventory.csv",
-    "reproduction_commands.md",
+    "reproduction_commands.md", "round43_formula_erratum.md",
 }
 
 REQUIRED_ROW_ARTIFACTS = {

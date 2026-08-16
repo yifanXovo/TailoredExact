@@ -51,6 +51,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/GiniBranching.cpp
   src/GiniFrontierGeometry.cpp
   src/GiniEnvelopeRefinement.cpp
+  src/GiniEnvelopeTailRepair.cpp
   src/StaticSegmentedGini.cpp
   src/IntervalRowFactory.cpp
   src/DispersionChildBound.cpp
@@ -181,3 +182,9 @@ add_executable(Round43EnvelopeRefinementTests
 target_link_libraries(Round43EnvelopeRefinementTests PRIVATE exact_ebrp_core)
 add_test(NAME Round43EnvelopeRefinementTests
   COMMAND Round43EnvelopeRefinementTests)
+
+add_executable(Round44EnvelopeTailRepairTests
+    tests/round44_envelope_tail_repair_tests.cpp)
+target_link_libraries(Round44EnvelopeTailRepairTests PRIVATE exact_ebrp_core)
+add_test(NAME Round44EnvelopeTailRepairTests
+  COMMAND Round44EnvelopeTailRepairTests)
