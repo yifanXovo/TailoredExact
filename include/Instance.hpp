@@ -450,6 +450,40 @@ struct SolveOptions {
     // The pilot arm is a uniform run-level choice; it is never inferred from
     // an instance label, size, scenario, elapsed time, or solver effort.
     std::string round37_c6_geometry_policy = "off";
+    // Round 40 coarse-start research. "off" is the validated K=4 default;
+    // the other values are explicit, uniform, default-off experiment arms.
+    std::string round40_c6_coarse_start = "off";
+    // Round 40 incumbent-stable geometry research. "off" preserves the
+    // validated incumbent-rescaled K=4 cover. The experimental policy uses
+    // only a deterministic dyadic hierarchy rooted at the mathematical Gini
+    // maximum and the verified incumbent as an active-prefix cutoff.
+    std::string round40_c6_ub_geometry = "off";
+    // Round 41 static single-tree segmented formulations. Every non-off arm
+    // is explicit, uniformly defined, and constructed before optimize.
+    std::string round41_static_segmented_gini = "off";
+    // Root-LP diagnostics are separate from the one-native-MIP proof run.
+    std::string round41_static_segmented_solve = "mip";
+    // Direct fixed-interval LP references for K1 and the two K2 children.
+    std::string round41_root_reference_interval = "off";
+    // Round 42 explicit/default-off static block experiments.  These select
+    // only deterministic geometry/formulation variants; no instance or
+    // runtime observation participates in the choice.
+    std::string round42_static_architecture = "off";
+    std::string round42_static_solve = "mip";
+    // C6 terminal-stage sibling coalescing.  "off" preserves the validated
+    // C6 lifecycle exactly; non-off modes are structural research arms.
+    std::string round42_terminal_sibling_coalescing = "off";
+    // Round 43 unified K0/d/rho envelope-refinement research.  The entire
+    // family is default-off; K0 affects only the initial equal partition.
+    std::string round43_envelope_refinement = "off"; // off|atlas|algorithm
+    int round43_initial_k0 = 4;
+    int round43_lookahead_depth = 1;
+    double round43_rho = 0.01;
+    std::string round43_score = "d"; // d|max-d-c|old|no-adaptive
+    std::string round43_envelope_mode = "single"; // none|constant|single|iterated
+    std::string round43_width_measure = "g-mccormick-unit";
+    std::string round43_lifted_cuts = "off";
+    std::string round43_frontier_consolidation = "off";
     bool exact_phase_local_redecode_repair = false;
     bool exact_phase_local_redecode_repair_explicit = false;
     double exact_phase_local_redecode_seconds = 10.0;

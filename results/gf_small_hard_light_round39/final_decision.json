@@ -1,0 +1,58 @@
+{
+  "all_51_official_rows_strict": false,
+  "exactness_audit_passed": true,
+  "false_certificate_count": 0,
+  "questions": {
+    "1_new_benchmark_more_informative": {
+      "answer": true,
+      "historical_round33_empty_startup_regions": 1,
+      "qualification": "More informative for the small-instance startup crossover: it adds V8/V10/V12 and an explicit frozen gradient. It is not uniformly harder than Round33's high-imbalance V10 set.",
+      "round39_empty_startup_regions": 1
+    },
+    "2_light_outperforms_p_grb": {
+      "small_hard": "yes",
+      "small_hard_light_wins": 5,
+      "small_hard_p_grb_wins": 2,
+      "small_hard_ties": 0,
+      "small_hard_unresolved": 1,
+      "small_medium": "mixed",
+      "small_medium_light_wins": 4,
+      "small_medium_p_grb_wins": 3,
+      "small_medium_ties": 1
+    },
+    "3_startup_overhead_crossover": {
+      "first_observed_light_win_instance": "round39_small_medium_V8_M3_Q30_slot03_seed1177285734",
+      "first_observed_light_win_score": 60.25883214885914,
+      "interpretation": "The frozen scalar score locates a broad transition rather than a deterministic winner rule; M and proof-tree structure retain substantial within-stratum variation.",
+      "medium_is_mixed": true,
+      "schema": "round39-startup-crossover-v1",
+      "uniform_light_win_suffix_exists": true,
+      "uniform_light_win_suffix_score": 87.08099929500919,
+      "unresolved_pairs_excluded_from_crossover": 1
+    },
+    "4_light_preserves_full": {
+      "all_guard_total_times_nonregressive": true,
+      "answer": true,
+      "guard_count": 3,
+      "same_ub_identical_downstream_count": 3,
+      "startup_ub_equal_count": 3
+    },
+    "5_advance_light_to_broader_qualification": {
+      "answer": false,
+      "automatic_promotion": false,
+      "reason": "One official LIGHT row remains reproducibly unresolved at a closed-tree numerical endpoint, so broader qualification is not yet justified despite a uniformly nonregressive guard."
+    },
+    "6_full_remains_validated_mainline": {
+      "answer": true,
+      "default_changed": false,
+      "mainline": "C6-HGA-FULL-K4-rho0.01"
+    }
+  },
+  "round_id": 39,
+  "schema": "round39-final-decision-v1",
+  "strict_official_row_count": 50,
+  "unresolved_official_row_count": 1,
+  "unresolved_official_rows": [
+    "primary__round39_small_hard_V12_M3_Q20_slot07_seed621538683__c6_hga_light_1000"
+  ]
+}

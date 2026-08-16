@@ -134,6 +134,8 @@ std::string controllingLeafStatusName(ControllingLeafStatus status) {
     case ControllingLeafStatus::Empty: return "empty";
     case ControllingLeafStatus::Invalid: return "invalid";
     case ControllingLeafStatus::Replaced: return "replaced";
+    case ControllingLeafStatus::TerminalReady: return "terminal_ready";
+    case ControllingLeafStatus::Coalesced: return "coalesced";
     }
     return "invalid";
 }
@@ -337,6 +339,119 @@ bool ControllingLeafScheduler::setStatus(const std::string& leaf_id,
     return true;
 }
 
+bool ControllingLeafScheduler::areExactLiveSiblings(
+    const std::string& left_id,
+    const std::string& right_id,
+    std::string* reason) const {
+    const ControllingLeaf* left = findLeaf(left_id);
+    const ControllingLeaf* right = findLeaf(right_id);
+    if (!left || !right || left_id == right_id) {
+        if (reason) *reason = "sibling_leaf_missing_or_identical";
+        return false;
+    }
+    if (left->parent_id.empty() || left->parent_id != right->parent_id ||
+        left->split_depth != right->split_depth ||
+        left->child_index == right->child_index ||
+        !((left->child_index == 0 && right->child_index == 1) ||
+          (left->child_index == 1 && right->child_index == 0))) {
+        if (reason) *reason = "sibling_lineage_mismatch";
+        return false;
+    }
+    const ControllingLeaf* lower = left->gamma_L <= right->gamma_L
+        ? left : right;
+    const ControllingLeaf* upper = lower == left ? right : left;
+    if (std::fabs(lower->gamma_U - upper->gamma_L) > tolerance_) {
+        if (reason) *reason = "sibling_gap_or_overlap";
+        return false;
+    }
+    auto live = [](ControllingLeafStatus status) {
+        return status == ControllingLeafStatus::Open ||
+               status == ControllingLeafStatus::Invalid ||
+               status == ControllingLeafStatus::TerminalReady;
+    };
+    if (!live(left->status) || !live(right->status) ||
+        left->parent_replaced || right->parent_replaced ||
+        left->gamma_L >= left->cutoff - tolerance_ ||
+        right->gamma_L >= right->cutoff - tolerance_ ||
+        left->lower_bound >= left->cutoff - tolerance_ ||
+        right->lower_bound >= right->cutoff - tolerance_) {
+        if (reason) *reason = "sibling_not_live_unresolved";
+        return false;
+    }
+    if (reason) *reason = "exact_live_binary_siblings";
+    return true;
+}
+
+bool ControllingLeafScheduler::coalesceSiblingLeavesAtomically(
+    const std::string& left_id,
+    const std::string& right_id,
+    const ControllingLeaf& input_block,
+    std::string* reason) {
+    std::string sibling_reason;
+    if (!areExactLiveSiblings(left_id, right_id, &sibling_reason)) {
+        if (reason) *reason = sibling_reason;
+        return false;
+    }
+    ControllingLeaf* first = findLeaf(left_id);
+    ControllingLeaf* second = findLeaf(right_id);
+    if (!first || !second ||
+        first->status != ControllingLeafStatus::TerminalReady ||
+        second->status != ControllingLeafStatus::TerminalReady) {
+        if (reason) *reason = "siblings_not_both_terminal_ready";
+        return false;
+    }
+    if (input_block.id.empty() || findLeaf(input_block.id)) {
+        if (reason) *reason = "invalid_or_duplicate_union_block_id";
+        return false;
+    }
+    const ControllingLeaf* lower = first->gamma_L <= second->gamma_L
+        ? first : second;
+    const ControllingLeaf* upper = lower == first ? second : first;
+    if (std::fabs(input_block.gamma_L - lower->gamma_L) > tolerance_ ||
+        std::fabs(input_block.gamma_U - upper->gamma_U) > tolerance_ ||
+        input_block.status != ControllingLeafStatus::Open ||
+        !finite(input_block.lower_bound) ||
+        input_block.lower_bound + tolerance_ < input_block.base_lower_bound ||
+        std::fabs(input_block.lower_bound -
+                  std::min(first->lower_bound, second->lower_bound)) >
+            tolerance_ ||
+        std::fabs(input_block.cutoff -
+                  std::min(first->cutoff, second->cutoff)) > tolerance_) {
+        if (reason) *reason = "invalid_union_block_coverage_or_bound";
+        return false;
+    }
+    const double before = globalLowerBound();
+    ControllingLeaf block = input_block;
+    block.coverage_member_ids = {left_id, right_id};
+    const std::string first_closure_before = first->closure_source;
+    const std::string second_closure_before = second->closure_source;
+    first->status = ControllingLeafStatus::Coalesced;
+    first->coalesced_block_id = block.id;
+    first->closure_source = "atomic_terminal_sibling_union_replacement";
+    second->status = ControllingLeafStatus::Coalesced;
+    second->coalesced_block_id = block.id;
+    second->closure_source = "atomic_terminal_sibling_union_replacement";
+    leaves_.push_back(std::move(block));
+    const double after = globalLowerBound();
+    if (std::fabs(after - before) > tolerance_) {
+        leaves_.pop_back();
+        first = findLeaf(left_id);
+        second = findLeaf(right_id);
+        first->status = ControllingLeafStatus::TerminalReady;
+        first->coalesced_block_id.clear();
+        first->closure_source = first_closure_before;
+        second->status = ControllingLeafStatus::TerminalReady;
+        second->coalesced_block_id.clear();
+        second->closure_source = second_closure_before;
+        if (reason) *reason = "union_replacement_changed_global_bound";
+        return false;
+    }
+    noteGlobalBound();
+    active_tie_order_.clear();
+    if (reason) *reason = "accepted_atomic_terminal_sibling_union";
+    return true;
+}
+
 bool ControllingLeafScheduler::recordAttempt(
     const std::string& leaf_id,
     const ControllingLeafAttempt& attempt,
@@ -387,6 +502,7 @@ bool ControllingLeafScheduler::recordAttempt(
 bool ControllingLeafScheduler::isRelevantFinalLeaf(
     const ControllingLeaf& leaf) const {
     return leaf.status != ControllingLeafStatus::Replaced &&
+           leaf.status != ControllingLeafStatus::Coalesced &&
            !leaf.parent_replaced &&
            leaf.gamma_L < leaf.cutoff - tolerance_;
 }
@@ -551,12 +667,58 @@ bool ControllingLeafScheduler::tightenVerifiedCutoff(
 
 bool ControllingLeafScheduler::everyRelevantLeafClosed() const {
     for (const ControllingLeaf& leaf : leaves_) {
-        if (isOpenRelevantLeaf(leaf)) return false;
+        if (isOpenRelevantLeaf(leaf) ||
+            (isRelevantFinalLeaf(leaf) &&
+             leaf.status == ControllingLeafStatus::TerminalReady &&
+             leaf.lower_bound < leaf.cutoff - tolerance_)) return false;
     }
     return true;
 }
 
 bool ControllingLeafScheduler::parentChildCoverageValid(std::string* reason) const {
+    for (const ControllingLeaf& block : leaves_) {
+        if (block.coverage_member_ids.empty()) continue;
+        if (block.coverage_member_ids.size() != 2) {
+            if (reason) *reason =
+                "coalesced_block_member_count:" + block.id;
+            return false;
+        }
+        const ControllingLeaf* first =
+            findLeaf(block.coverage_member_ids[0]);
+        const ControllingLeaf* second =
+            findLeaf(block.coverage_member_ids[1]);
+        if (!first || !second ||
+            first->status != ControllingLeafStatus::Coalesced ||
+            second->status != ControllingLeafStatus::Coalesced ||
+            first->coalesced_block_id != block.id ||
+            second->coalesced_block_id != block.id) {
+            if (reason) *reason =
+                "coalesced_block_member_lifecycle:" + block.id;
+            return false;
+        }
+        const ControllingLeaf* lower = first->gamma_L <= second->gamma_L
+            ? first : second;
+        const ControllingLeaf* upper = lower == first ? second : first;
+        if (std::fabs(block.gamma_L - lower->gamma_L) > tolerance_ ||
+            std::fabs(lower->gamma_U - upper->gamma_L) > tolerance_ ||
+            std::fabs(block.gamma_U - upper->gamma_U) > tolerance_) {
+            if (reason) *reason =
+                "coalesced_block_endpoint_coverage:" + block.id;
+            return false;
+        }
+    }
+    for (const ControllingLeaf& member : leaves_) {
+        if (member.status != ControllingLeafStatus::Coalesced) continue;
+        const ControllingLeaf* block = findLeaf(member.coalesced_block_id);
+        if (!block ||
+            std::find(block->coverage_member_ids.begin(),
+                      block->coverage_member_ids.end(), member.id) ==
+                block->coverage_member_ids.end()) {
+            if (reason) *reason =
+                "coalesced_member_missing_union:" + member.id;
+            return false;
+        }
+    }
     for (const ControllingLeaf& parent : leaves_) {
         if (parent.status != ControllingLeafStatus::Replaced &&
             !parent.parent_replaced) continue;
