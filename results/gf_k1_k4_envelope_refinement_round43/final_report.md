@@ -7,8 +7,9 @@ unchanged at K0=4, rho=0.01, Gurobi Presolve Auto, Seed 0, one thread, and zero
 gaps. All Round 43 mechanisms remain explicit and default-off.
 
 The selected global development candidates were A(1,2,0.1) and A(4,2,0.1), both
-with the single-pass affine envelope, D_d score, no lifted cuts, and no frontier
-consolidation. Neither passed every frozen development gate.
+with the single-pass affine envelope, executable-normalized `D_R43` score, no
+lifted-cut experiment, and no frontier consolidation. Neither passed every
+frozen development gate.
 
 ## Decisive witnesses
 
@@ -43,10 +44,11 @@ entry conditions were false.
 6. **Can K4 local strength be transferred by affine envelopes?** Not as a
    material complete-root gain on the strongest control; K1 and K4 root LPs
    coincide and chi is vacuous.
-7. **Is D_d stable?** It is valid, reconstructible, and hardware-independent,
+7. **Is D_R43 stable?** It is valid, reconstructible, and hardware-independent,
    but its selected candidates fail the full performance envelope.
 8. **Is C_d admissible/useful?** No; it is the constant `1-2^-d` here.
-9. **Were lifted cuts required?** No. Their entry condition was false.
+9. **Were lifted cuts tested?** No. The predeclared lifted-cut entry condition
+   was not triggered, so lifted cuts were not tested in Round 43.
 10. **Was frontier consolidation required?** No. The control was unprotected
     and the major selected rows did not show adjacent-descendant terminal
     duplication.

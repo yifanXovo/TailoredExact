@@ -1,0 +1,40 @@
+{
+  "activation_is_selection_not_tuning": true,
+  "configuration": {
+    "K0": 4,
+    "consolidation": "off",
+    "decision_identity_sha256": "dbfeaa96f349cf48d28c3b77445c332a3b6741a998c16191c4b3f6d93b545143",
+    "execution": "algorithm",
+    "family": "veto",
+    "injection": "all",
+    "lookahead": "fixed-d1",
+    "mip_starts": "off",
+    "rank1": "off",
+    "rho_F": 0.5,
+    "rho_H": 0.0004,
+    "rho_M": 0.007,
+    "scope": "parent"
+  },
+  "executable_sha256": "bcd0f6c0e473d3b4ae063ab7a19c597d8092de194e9dcd0cb2f86b87ee474ec9",
+  "external_results_observed": false,
+  "fallback_validation_results_observed": false,
+  "frozen_before_fallback_validation": true,
+  "holdout_results_observed": false,
+  "no_post_validation_parameter_change": true,
+  "primary_validation_disposition_sha256": "04a4c6121b9a7bfefd6e9155d469daf656dbccfa3ea82ae43b91087d542efe53",
+  "primary_validation_passed": false,
+  "schema": "round44-fallback-candidate-activation-freeze-v1",
+  "selected_candidate": "veto-f05",
+  "solver_contract": {
+    "additional_v12_cap_seconds": 7200,
+    "gurobi": "13.0.2",
+    "mip_gap": 0.0,
+    "mip_gap_abs": 0.0,
+    "presolve": "Auto",
+    "seed": 0,
+    "small_cap_seconds": 3600,
+    "threads": 1,
+    "v20_cap_seconds": 3600
+  },
+  "source_final_candidate_freeze_sha256": "4f94ae8c951a121a03e061318a69aaab10dcbaf5095ba39998ac6f9bc174573d"
+}

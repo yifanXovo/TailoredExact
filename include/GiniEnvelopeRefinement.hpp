@@ -50,6 +50,10 @@ struct GiniEnvelopeResult {
     double V_envelope = 0.0;
     double V_residual = 0.0;
     double tau_d = 0.0;
+    // Historical field name retained for ledger compatibility. The executable
+    // formula is D_R43 = V_residual /
+    // (|I| * max(U - L_I, certificate_tolerance)); it is not
+    // V_residual / V_local (the latter is the P_profile diagnostic).
     double D_d = 0.0;
     double max_endpoint_violation = 0.0;
     double integral_identity_residual = 0.0;

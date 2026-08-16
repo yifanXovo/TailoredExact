@@ -118,6 +118,15 @@ void usage() {
         << "[--round43-initial-k0 1|4] [--round43-lookahead-depth 1|2] "
         << "[--round43-rho <value>] [--round43-score d|max-d-c|old|no-adaptive] "
         << "[--round43-envelope-mode none|constant|single|iterated] "
+        << "[--round44-envelope-tail-repair off|atlas|algorithm] "
+        << "[--round44-initial-k0 4] "
+        << "[--round44-lookahead-policy fixed-d1|fixed-d2|frontier-d2] "
+        << "[--round44-envelope-injection none|all|violated|active-one] "
+        << "[--round44-envelope-scope parent|nested] "
+        << "[--round44-refinement-family no-adaptive|c6-overlay|veto|veto-promotion|f|f-mroot|h|mroot] "
+        << "[--round44-rho-f <value>] [--round44-rho-m <value>] [--round44-rho-h <value>] "
+        << "[--round44-rank1-cuts off|on] [--round44-mip-starts off|verified] "
+        << "[--round44-frontier-consolidation off|singleton|pair|block] "
         << "[--heuristic-candidates-csv <path>] "
         << "[--large-instance-mode auto|off|force] [--large-lb-mode none|inventory-only|movement-projection|column-pool-relaxation|auto] "
         << "[--pricing-engine exact-label|ng-dssr|hybrid] "
@@ -1207,6 +1216,18 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round43-width-measure") opt.round43_width_measure = requireValue(i, argc, argv);
         else if (arg == "--round43-lifted-cuts") opt.round43_lifted_cuts = requireValue(i, argc, argv);
         else if (arg == "--round43-frontier-consolidation") opt.round43_frontier_consolidation = requireValue(i, argc, argv);
+        else if (arg == "--round44-envelope-tail-repair") opt.round44_envelope_tail_repair = requireValue(i, argc, argv);
+        else if (arg == "--round44-initial-k0") opt.round44_initial_k0 = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round44-lookahead-policy") opt.round44_lookahead_policy = requireValue(i, argc, argv);
+        else if (arg == "--round44-envelope-injection") opt.round44_envelope_injection = requireValue(i, argc, argv);
+        else if (arg == "--round44-envelope-scope") opt.round44_envelope_scope = requireValue(i, argc, argv);
+        else if (arg == "--round44-refinement-family") opt.round44_refinement_family = requireValue(i, argc, argv);
+        else if (arg == "--round44-rho-f") opt.round44_rho_f = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round44-rho-m") opt.round44_rho_m = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round44-rho-h") opt.round44_rho_h = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round44-rank1-cuts") opt.round44_rank1_cuts = requireValue(i, argc, argv);
+        else if (arg == "--round44-mip-starts") opt.round44_mip_starts = requireValue(i, argc, argv);
+        else if (arg == "--round44-frontier-consolidation") opt.round44_frontier_consolidation = requireValue(i, argc, argv);
         else if (arg == "--heuristic-candidates-csv") opt.heuristic_candidates_csv = requireValue(i, argc, argv);
         else if (arg == "--large-instance-mode") opt.large_instance_mode = requireValue(i, argc, argv);
         else if (arg == "--large-lb-mode") opt.large_lb_mode = requireValue(i, argc, argv);
@@ -1529,6 +1550,18 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     opt.round43_lifted_cuts = lowerAscii(opt.round43_lifted_cuts);
     opt.round43_frontier_consolidation =
         lowerAscii(opt.round43_frontier_consolidation);
+    opt.round44_envelope_tail_repair =
+        lowerAscii(opt.round44_envelope_tail_repair);
+    opt.round44_lookahead_policy = lowerAscii(opt.round44_lookahead_policy);
+    opt.round44_envelope_injection =
+        lowerAscii(opt.round44_envelope_injection);
+    opt.round44_envelope_scope = lowerAscii(opt.round44_envelope_scope);
+    opt.round44_refinement_family =
+        lowerAscii(opt.round44_refinement_family);
+    opt.round44_rank1_cuts = lowerAscii(opt.round44_rank1_cuts);
+    opt.round44_mip_starts = lowerAscii(opt.round44_mip_starts);
+    opt.round44_frontier_consolidation =
+        lowerAscii(opt.round44_frontier_consolidation);
     if (opt.round34_c6_startup_variant != "hga-full" &&
         opt.round34_c6_startup_variant != "hga-light-1000" &&
         opt.round34_c6_startup_variant != "simple-start") {
@@ -1758,6 +1791,53 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error(
             "Round 43 requires frozen HGA-FULL C6 with Auto presolve and "
             "all Round 36--42 research arms off");
+    }
+    const bool round44_active = opt.round44_envelope_tail_repair != "off";
+    const std::set<std::string> round44_execution = {
+        "off", "atlas", "algorithm"};
+    const std::set<std::string> round44_lookahead = {
+        "fixed-d1", "fixed-d2", "frontier-d2"};
+    const std::set<std::string> round44_injection = {
+        "none", "all", "violated", "active-one"};
+    const std::set<std::string> round44_scope = {"parent", "nested"};
+    const std::set<std::string> round44_family = {
+        "no-adaptive", "c6-overlay", "veto", "veto-promotion",
+        "f", "f-mroot", "h", "mroot"};
+    const std::set<std::string> round44_rank1 = {"off", "on"};
+    const std::set<std::string> round44_starts = {"off", "verified"};
+    const std::set<std::string> round44_consolidation = {
+        "off", "singleton", "pair", "block"};
+    if (!round44_execution.count(opt.round44_envelope_tail_repair) ||
+        opt.round44_initial_k0 != 4 ||
+        !round44_lookahead.count(opt.round44_lookahead_policy) ||
+        !round44_injection.count(opt.round44_envelope_injection) ||
+        !round44_scope.count(opt.round44_envelope_scope) ||
+        !round44_family.count(opt.round44_refinement_family) ||
+        !std::isfinite(opt.round44_rho_f) || opt.round44_rho_f < 0.0 ||
+        opt.round44_rho_f > 1.0 || !std::isfinite(opt.round44_rho_m) ||
+        opt.round44_rho_m < 0.0 || opt.round44_rho_m > 1.0 ||
+        !std::isfinite(opt.round44_rho_h) || opt.round44_rho_h < 0.0 ||
+        opt.round44_rho_h > 1.0 ||
+        !round44_rank1.count(opt.round44_rank1_cuts) ||
+        !round44_starts.count(opt.round44_mip_starts) ||
+        !round44_consolidation.count(opt.round44_frontier_consolidation)) {
+        throw std::runtime_error("Invalid Round 44 envelope tail-repair arm");
+    }
+    if (round44_active &&
+        (round43_active || opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.round41_static_segmented_gini != "off" ||
+         opt.round41_root_reference_interval != "off" || round42_any ||
+         opt.gurobi_presolve != -1 ||
+         opt.external_gini_scheduling !=
+             "round31-nonblocking-native-bound")) {
+        throw std::runtime_error(
+            "Round 44 requires frozen HGA-FULL C6 with Auto presolve and "
+            "all Round 36--43 research arms off");
     }
     if (opt.primal_heuristic_stop != "generation-stagnation") {
         opt.primal_heuristic_stop = "legacy-time";
