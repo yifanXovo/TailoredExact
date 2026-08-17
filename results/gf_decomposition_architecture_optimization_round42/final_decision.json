@@ -1,0 +1,161 @@
+{
+  "best_candidate_development_gate_passed": false,
+  "best_candidate_required_refinement": "PAIRED-K4-FACTORED",
+  "best_ranked_family_candidate": "PAIRED-K4",
+  "candidate_controls_default_off": true,
+  "candidate_ranking": [
+    {
+      "candidate": "PAIRED-K4",
+      "catastrophic_regressions": "1",
+      "certificate_regressions": "0",
+      "complete_development_panel": "True",
+      "development_gate_passed": "False",
+      "development_rows": "10",
+      "false_certificates": "0",
+      "geometric_mean_shifted_time_ratio": "0.8968175968542079",
+      "geometric_mean_work_ratio": "inf",
+      "lexicographic_rank": "1",
+      "major_fragmentation_shifted_time_ratio": "1.0506921616818417",
+      "major_fragmentation_work_ratio": "1.0600127719417698",
+      "mean_model_nonzeros": "166368.1",
+      "strong_positive_shifted_time_ratio": "1.459460176861388",
+      "strong_positive_work_ratio": "1.4112357279368644"
+    },
+    {
+      "candidate": "PAIRED-K4-FACTORED",
+      "catastrophic_regressions": "1",
+      "certificate_regressions": "0",
+      "complete_development_panel": "True",
+      "development_gate_passed": "False",
+      "development_rows": "10",
+      "false_certificates": "0",
+      "geometric_mean_shifted_time_ratio": "0.9227178008818366",
+      "geometric_mean_work_ratio": "inf",
+      "lexicographic_rank": "2",
+      "major_fragmentation_shifted_time_ratio": "1.114984274768794",
+      "major_fragmentation_work_ratio": "1.1339389204709134",
+      "mean_model_nonzeros": "167556.2",
+      "strong_positive_shifted_time_ratio": "1.3315340322191849",
+      "strong_positive_work_ratio": "1.3422320982368074"
+    },
+    {
+      "candidate": "ST-K4-P-CORE-HIERARCHICAL",
+      "catastrophic_regressions": "2",
+      "certificate_regressions": "0",
+      "complete_development_panel": "True",
+      "development_gate_passed": "False",
+      "development_rows": "10",
+      "false_certificates": "0",
+      "geometric_mean_shifted_time_ratio": "0.8315049941715087",
+      "geometric_mean_work_ratio": "inf",
+      "lexicographic_rank": "3",
+      "major_fragmentation_shifted_time_ratio": "0.4098404250536869",
+      "major_fragmentation_work_ratio": "0.4262417573627321",
+      "mean_model_nonzeros": "85528.8",
+      "strong_positive_shifted_time_ratio": "1.5702429750994957",
+      "strong_positive_work_ratio": "1.5701045949543162"
+    },
+    {
+      "candidate": "ST-K4-P-CORE",
+      "catastrophic_regressions": "2",
+      "certificate_regressions": "0",
+      "complete_development_panel": "True",
+      "development_gate_passed": "False",
+      "development_rows": "10",
+      "false_certificates": "0",
+      "geometric_mean_shifted_time_ratio": "0.888905305705638",
+      "geometric_mean_work_ratio": "inf",
+      "lexicographic_rank": "4",
+      "major_fragmentation_shifted_time_ratio": "0.7500589263325085",
+      "major_fragmentation_work_ratio": "0.7808483589798817",
+      "mean_model_nonzeros": "85520.8",
+      "strong_positive_shifted_time_ratio": "1.2989995142186974",
+      "strong_positive_work_ratio": "1.3298460243911783"
+    },
+    {
+      "candidate": "C6-SIBLING-CORE-FACTORED",
+      "catastrophic_regressions": "1",
+      "certificate_regressions": "1",
+      "complete_development_panel": "True",
+      "development_gate_passed": "False",
+      "development_rows": "10",
+      "false_certificates": "0",
+      "geometric_mean_shifted_time_ratio": "1.0412592702610028",
+      "geometric_mean_work_ratio": "1.021895871484729",
+      "lexicographic_rank": "5",
+      "major_fragmentation_shifted_time_ratio": "1.0000282501429767",
+      "major_fragmentation_work_ratio": "0.9629994785957818",
+      "mean_model_nonzeros": "113533.3",
+      "strong_positive_shifted_time_ratio": "1.5081784700403968",
+      "strong_positive_work_ratio": "1.4218168500268829"
+    },
+    {
+      "candidate": "C6-SIBLING-CORE",
+      "catastrophic_regressions": "1",
+      "certificate_regressions": "1",
+      "complete_development_panel": "True",
+      "development_gate_passed": "False",
+      "development_rows": "10",
+      "false_certificates": "0",
+      "geometric_mean_shifted_time_ratio": "1.0194772118374713",
+      "geometric_mean_work_ratio": "1.0280198922904422",
+      "lexicographic_rank": "6",
+      "major_fragmentation_shifted_time_ratio": "1.0000117595699884",
+      "major_fragmentation_work_ratio": "1.031932284142578",
+      "mean_model_nonzeros": "113870.2",
+      "strong_positive_shifted_time_ratio": "1.4684621801279387",
+      "strong_positive_work_ratio": "1.4892958025440919"
+    }
+  ],
+  "completed_families": {
+    "A": [
+      "ST-K4-P-CORE",
+      "ST-K4-P-CORE-HIERARCHICAL"
+    ],
+    "B": [
+      "PAIRED-K4",
+      "PAIRED-K4-FACTORED"
+    ],
+    "C": [
+      "C6-SIBLING-CORE",
+      "C6-SIBLING-CORE-FACTORED"
+    ]
+  },
+  "conclusion": "No stable improvement was found within the tested static-single-tree, paired-block, and terminal-sibling-coalescing architecture families.",
+  "contemporary_references": [
+    "C6-HGA-FULL-K4",
+    "C6-K1-SINGLE",
+    "EXTERNAL-K2-FIXED",
+    "ST-K2-P-CORE"
+  ],
+  "default_c6_equivalence_passed": true,
+  "default_c6_equivalence_sentinels": 3,
+  "development_candidate_count": 6,
+  "development_candidates_passing": 0,
+  "development_evidence_rows": 100,
+  "false_certificates": 0,
+  "final_holdout": {
+    "eligible": false,
+    "reason": "validation was not reached",
+    "sealed": true,
+    "status": "not_run"
+  },
+  "optional_second_refinement_reason": "required factoring worsened the major witness and aggregate shifted time, so there was no clear general positive signal",
+  "optional_second_refinement_run": false,
+  "outcome": "bounded_systematic_negative_result",
+  "p_grb_reference_reason": "no candidate passed development or supported a repaired-C6 claim requiring a new P-GRB adjudication",
+  "p_grb_reference_run": false,
+  "root_diagnostic_rows": 90,
+  "root_diagnostic_valid_rows": 78,
+  "round_id": 42,
+  "schema": "round42-final-decision-v1",
+  "stable_candidate_for_broad_qualification": false,
+  "strict_certificate_rows": 95,
+  "validated_default": "C6-HGA-FULL K=4 rho=0.01",
+  "validated_default_changed": false,
+  "validation": {
+    "eligible": false,
+    "reason": "no candidate passed every frozen development gate",
+    "status": "not_run"
+  }
+}
