@@ -498,6 +498,15 @@ struct SolveOptions {
     std::string round44_rank1_cuts = "off";
     std::string round44_mip_starts = "off";
     std::string round44_frontier_consolidation = "off";
+    // Round 45 unified adaptive timing and direct parametric-LP partition.
+    // Every non-off arm is explicit. K0 changes only the initial equal cover;
+    // K1 and K4 share the same timing and point operators.
+    std::string round45_adaptive_parametric_partition = "off"; // off|atlas|algorithm
+    int round45_initial_k0 = 4;
+    std::string round45_timing_rule = "gamma-positive";
+    double round45_rho_gamma = 0.0;
+    std::string round45_point_rule = "midpoint"; // midpoint|pmm|fpmm
+    double round45_minimum_child_width = 1e-4;
     bool exact_phase_local_redecode_repair = false;
     bool exact_phase_local_redecode_repair_explicit = false;
     double exact_phase_local_redecode_seconds = 10.0;

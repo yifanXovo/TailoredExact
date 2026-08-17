@@ -1,0 +1,21 @@
+{
+  "schema": "round45-timing-fallback-freeze-v1",
+  "candidate": "GAMMA-VETO",
+  "formula": "old_C6_split AND Gamma_sum >= rho_gamma",
+  "rho_gamma": 0.012,
+  "frozen_before_candidate_full_instance_runtime": true,
+  "frozen_before_validation": true,
+  "frozen_before_parametric_point_runtime": true,
+  "selection_basis": "eight-pair counterfactual-development census",
+  "counterfactual_mean_oracle_regret": 1.01267022181356,
+  "counterfactual_false_split_count": 0,
+  "counterfactual_false_retain_count": 1,
+  "split_count": 1,
+  "retain_count": 7,
+  "major_harmful_leaf_action": "retain",
+  "confirmed_beneficial_leaf_action": "split",
+  "genuinely_adaptive": true,
+  "no_adaptive_eligible": false,
+  "runtime_outcomes_for_this_candidate_observed": false,
+  "point_results_observed": false
+}
