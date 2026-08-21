@@ -436,6 +436,8 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         "decisive-gamma", "no-adaptive"};
     const std::set<std::string> round45_point = {
         "midpoint", "pmm", "fpmm"};
+    const std::set<std::string> round45_counterfactual = {
+        "off", "retain", "midpoint", "pmm", "fpmm"};
     if (round45_active &&
         (!round45_execution.count(
              options.round45_adaptive_parametric_partition) ||
@@ -443,10 +445,17 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
           options.round45_initial_k0 != 4) ||
          !round45_timing.count(options.round45_timing_rule) ||
          !round45_point.count(options.round45_point_rule) ||
+         !round45_counterfactual.count(options.round45_counterfactual_mode) ||
          !std::isfinite(options.round45_rho_gamma) ||
          options.round45_rho_gamma < 0.0 ||
          !std::isfinite(options.round45_minimum_child_width) ||
          options.round45_minimum_child_width <= 0.0 ||
+         (options.round45_counterfactual_mode != "off" &&
+          (options.round45_adaptive_parametric_partition != "algorithm" ||
+           options.round45_initial_k0 != 1 ||
+           (options.round45_counterfactual_mode != "retain" &&
+            options.round45_counterfactual_mode !=
+                options.round45_point_rule))) ||
          round43_active || round44_active || !hga_full ||
          causal != "off" || normalization != "proof" ||
          geometry_policy != "off" || coarse_start != "off" ||
@@ -1738,7 +1747,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     if (!seed_valid || options.external_gini_backend != "gurobi" ||
         options.external_gini_warm_start || root_gamma_L < -1e-12 ||
         root_gamma_U < root_gamma_L - 1e-12 ||
-        !verified_seed.frontier_covers_all_improving_gini_values ||
+        (options.round45_counterfactual_mode == "off" &&
+         !verified_seed.frontier_covers_all_improving_gini_values) ||
         !c4_contract_valid || !c5_contract_valid ||
         !c6_contract_valid || !round36_seed_contract_valid ||
         !round40_geometry_valid || !round40_ub_geometry_valid) {
@@ -3894,6 +3904,20 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                             ? "exact-closure" : "retain"));
                 decision.final_action = adaptive.action;
                 decision.reason = adaptive.reason;
+                if (options.round45_counterfactual_mode != "off") {
+                    const bool root_parent = bounded.split_depth == 0;
+                    const bool force_split = root_parent &&
+                        options.round45_counterfactual_mode != "retain";
+                    decision.split = force_split;
+                    decision.run_native_target = false;
+                    decision.exact_closure = false;
+                    decision.final_action = force_split ? "split" : "retain";
+                    decision.reason = root_parent
+                        ? (force_split
+                            ? "round45_counterfactual_forced_single_split"
+                            : "round45_counterfactual_forced_retain")
+                        : "round45_counterfactual_descendant_split_forbidden";
+                }
             } else {
                 TailRefinementInput decision_input;
                 decision_input.family = adaptive_timing_family;
@@ -4372,6 +4396,16 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     << ",midpoint,1,1,1,1,1,1,1,none\n";
             }
             if (decision.split) {
+                const ControllingLeaf* authoritative_parent =
+                    scheduler.findLeaf(bounded.id);
+                if (!authoritative_parent) {
+                    hard_failure = true;
+                    result.external_gini_tree_failure_reason =
+                        "round44_split_parent_missing:" + bounded.id;
+                    break;
+                }
+                const double inherited_parent_lower =
+                    authoritative_parent->lower_bound;
                 std::vector<ControllingLeaf> children;
                 std::vector<AggregatedLookaheadBound> child_bounds;
                 for (std::size_t index = 0; index < 2; ++index) {
@@ -4386,7 +4420,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                         aggregated.infeasible = direct.infeasible;
                         aggregated.lower_bound = direct.infeasible
                             ? std::numeric_limits<double>::infinity()
-                            : std::max(bounded.lower_bound,
+                            : std::max(inherited_parent_lower,
                                        direct.lower_bound);
                         aggregated.contributing_cell_count = 1;
                         aggregated.reason = aggregated.valid
@@ -4394,7 +4428,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                             : "invalid_direct_parametric_child_lp";
                     } else {
                         aggregated = aggregateLookaheadBoundForInterval(
-                            child_geometry[index], bounded.lower_bound,
+                            child_geometry[index], inherited_parent_lower,
                             terminal_profile, tolerance);
                     }
                     if (!aggregated.valid) {
@@ -7077,6 +7111,29 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         result.status = "round44_structural_atlas_complete";
         result.certificate =
             "Round 44 structural atlas only; no exact certificate claimed.";
+    }
+    if (options.round45_counterfactual_mode != "off") {
+        const bool local_parent_exact = certificate.certified;
+        result.external_gini_tree_strict_certified = false;
+        result.external_gini_tree_certificate_class =
+            local_parent_exact ? "diagnostic_parent_range_exact"
+                               : "diagnostic_parent_range_not_exact";
+        result.external_gini_tree_certificate_rejection_reason =
+            "counterfactual_restricted_range_not_original_problem";
+        result.strict_certified_original_problem = false;
+        result.strict_certificate_class =
+            "diagnostic_parent_range_not_original_problem";
+        result.strict_certificate_rejection_reason =
+            "counterfactual_restricted_range_not_original_problem";
+        result.status = local_parent_exact
+            ? "round45_counterfactual_parent_exact"
+            : (global_deadline_stop
+                ? "round45_counterfactual_parent_time_limit"
+                : "round45_counterfactual_parent_not_exact");
+        result.certificate = local_parent_exact
+            ? "Exact certificate for the restricted counterfactual parent "
+              "range only; not an original-problem certificate."
+            : "Restricted counterfactual parent range not certified exactly.";
     }
     if (result.external_gini_tree_failure_reason.empty()) {
         result.external_gini_tree_failure_reason = "none";

@@ -507,6 +507,7 @@ struct SolveOptions {
     double round45_rho_gamma = 0.0;
     std::string round45_point_rule = "midpoint"; // midpoint|pmm|fpmm
     double round45_minimum_child_width = 1e-4;
+    std::string round45_counterfactual_mode = "off"; // off|retain|midpoint|pmm|fpmm
     bool exact_phase_local_redecode_repair = false;
     bool exact_phase_local_redecode_repair_explicit = false;
     double exact_phase_local_redecode_seconds = 10.0;

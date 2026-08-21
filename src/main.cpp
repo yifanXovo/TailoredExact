@@ -133,6 +133,7 @@ void usage() {
         << "[--round45-rho-gamma <value>] "
         << "[--round45-point-rule midpoint|pmm|fpmm] "
         << "[--round45-minimum-child-width <value>] "
+        << "[--round45-counterfactual-mode off|retain|midpoint|pmm|fpmm] "
         << "[--heuristic-candidates-csv <path>] "
         << "[--large-instance-mode auto|off|force] [--large-lb-mode none|inventory-only|movement-projection|column-pool-relaxation|auto] "
         << "[--pricing-engine exact-label|ng-dssr|hybrid] "
@@ -193,7 +194,7 @@ void usage() {
         << "[--pricing-final-verifier true|false] [--pricing-verifier-time <seconds>] "
         << "[--pricing-verifier-checkpoint <path>] [--pricing-verifier-resume <path>] "
         << "[--pricing-verifier-mode label-dp|route-mask-dp|auto] "
-        << "[--algorithm-preset paper-gf-tailored-bc|paper-gf-adaptive-gamma-veto|paper-gf-compact-bc|paper-gf-bpc-core|paper-bpc-core|paper-bpc-core-adaptive|paper-exact-v20-certificate|paper-exact-portfolio|paper-bpc-experimental|diagnostic-large] "
+        << "[--algorithm-preset paper-gf-tailored-bc|research-gf-adaptive-gamma-veto|paper-gf-adaptive-gamma-veto|paper-gf-compact-bc|paper-gf-bpc-core|paper-bpc-core|paper-bpc-core-adaptive|paper-exact-v20-certificate|paper-exact-portfolio|paper-bpc-experimental|diagnostic-large] "
         << "[--production-preset <preset-alias>] [--incumbent-archive-auto true|false] "
         << "[--incumbent-archive-dir <dir>]\n";
 }
@@ -234,8 +235,11 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
     }
     if (opt.algorithm_preset == "custom") return;
 
-    if (opt.algorithm_preset == "paper-gf-adaptive-gamma-veto") {
-        const std::string requested = opt.algorithm_preset;
+    if (opt.algorithm_preset == "paper-gf-adaptive-gamma-veto" ||
+        opt.algorithm_preset == "research-gf-adaptive-gamma-veto") {
+        // Keep the former paper-facing name only as a compatibility alias
+        // while the Round 45 completion gates are pending.
+        const std::string requested = "research-gf-adaptive-gamma-veto";
         opt.algorithm_preset = "paper-gf-tailored-bc";
         applyAlgorithmPreset(opt);
         opt.algorithm_preset = requested;
@@ -1262,6 +1266,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round45-rho-gamma") opt.round45_rho_gamma = std::stod(requireValue(i, argc, argv));
         else if (arg == "--round45-point-rule") opt.round45_point_rule = requireValue(i, argc, argv);
         else if (arg == "--round45-minimum-child-width") opt.round45_minimum_child_width = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round45-counterfactual-mode") opt.round45_counterfactual_mode = requireValue(i, argc, argv);
         else if (arg == "--heuristic-candidates-csv") opt.heuristic_candidates_csv = requireValue(i, argc, argv);
         else if (arg == "--large-instance-mode") opt.large_instance_mode = requireValue(i, argc, argv);
         else if (arg == "--large-lb-mode") opt.large_lb_mode = requireValue(i, argc, argv);
@@ -1600,6 +1605,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         lowerAscii(opt.round45_adaptive_parametric_partition);
     opt.round45_timing_rule = lowerAscii(opt.round45_timing_rule);
     opt.round45_point_rule = lowerAscii(opt.round45_point_rule);
+    opt.round45_counterfactual_mode =
+        lowerAscii(opt.round45_counterfactual_mode);
     if (opt.round34_c6_startup_variant != "hga-full" &&
         opt.round34_c6_startup_variant != "hga-light-1000" &&
         opt.round34_c6_startup_variant != "simple-start") {
@@ -1887,17 +1894,30 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         "decisive-gamma", "no-adaptive"};
     const std::set<std::string> round45_point = {
         "midpoint", "pmm", "fpmm"};
+    const std::set<std::string> round45_counterfactual = {
+        "off", "retain", "midpoint", "pmm", "fpmm"};
     if (!round45_execution.count(
             opt.round45_adaptive_parametric_partition) ||
         (opt.round45_initial_k0 != 1 && opt.round45_initial_k0 != 4) ||
         !round45_timing.count(opt.round45_timing_rule) ||
         !round45_point.count(opt.round45_point_rule) ||
+        !round45_counterfactual.count(opt.round45_counterfactual_mode) ||
         !std::isfinite(opt.round45_rho_gamma) ||
         opt.round45_rho_gamma < 0.0 ||
         !std::isfinite(opt.round45_minimum_child_width) ||
         opt.round45_minimum_child_width <= 0.0) {
         throw std::runtime_error(
             "Invalid Round 45 adaptive parametric-partition arm");
+    }
+    if (opt.round45_counterfactual_mode != "off" &&
+        (!round45_active ||
+         opt.round45_adaptive_parametric_partition != "algorithm" ||
+         opt.round45_initial_k0 != 1 ||
+         (opt.round45_counterfactual_mode != "retain" &&
+          opt.round45_counterfactual_mode != opt.round45_point_rule))) {
+        throw std::runtime_error(
+            "Round 45 counterfactual mode requires algorithm execution, K0=1, "
+            "and a matching split-point rule");
     }
     if (round45_active &&
         (round43_active || round44_active ||
@@ -4350,7 +4370,6 @@ std::string jsonEscapeLocal(const std::string& value) {
 bool isPaperTracePreset(const std::string& preset) {
     return preset == "paper-gf-bpc-core" ||
            preset == "paper-gf-tailored-bc" ||
-           preset == "paper-gf-adaptive-gamma-veto" ||
            preset == "paper-gf-compact-bc" ||
            preset == "paper-bpc-core" ||
            preset == "paper-bpc-core-adaptive" ||
