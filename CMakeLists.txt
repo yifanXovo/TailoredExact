@@ -195,3 +195,7 @@ add_executable(Round45AdaptiveParametricTests
 target_link_libraries(Round45AdaptiveParametricTests PRIVATE exact_ebrp_core)
 add_test(NAME Round45AdaptiveParametricTests
   COMMAND Round45AdaptiveParametricTests)
+
+add_executable(Round46C6RhoTests tests/round46_c6_rho_tests.cpp)
+target_link_libraries(Round46C6RhoTests PRIVATE exact_ebrp_core)
+add_test(NAME Round46C6RhoTests COMMAND Round46C6RhoTests)

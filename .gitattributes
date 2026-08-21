@@ -13,3 +13,6 @@ tests/round39_protocol_tests.py -text
 
 # Preserve byte-exact Round 45 completion evidence and recorded SHA-256 values.
 results/gf_adaptive_timing_parametric_partition_round45/completion/** -text whitespace=cr-at-eol
+
+# Preserve byte-exact Round 46 screening evidence and recorded SHA-256 values.
+results/gf_c6_rho_k1_k4_screen_round46/** -text whitespace=cr-at-eol

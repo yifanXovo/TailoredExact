@@ -453,6 +453,11 @@ struct SolveOptions {
     // Round 40 coarse-start research. "off" is the validated K=4 default;
     // the other values are explicit, uniform, default-off experiment arms.
     std::string round40_c6_coarse_start = "off";
+    // Round 46 pure-C6 threshold screen. The value is shared by the original
+    // K4 cover and the Round 40 k1-adaptive initialization. Later-round
+    // historical old-C6 reconstructions remain frozen at 0.01.
+    double c6_normalized_split_threshold = 0.01;
+    bool c6_normalized_split_threshold_explicit = false;
     // Round 40 incumbent-stable geometry research. "off" preserves the
     // validated incumbent-rescaled K=4 cover. The experimental policy uses
     // only a deterministic dyadic hierarchy rooted at the mathematical Gini
