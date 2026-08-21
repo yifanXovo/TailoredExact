@@ -10,3 +10,6 @@ results/gf_small_hard_light_round39/** -text whitespace=-trailing-space
 scripts/*round39*.py -text
 scripts/round39_common.py whitespace=-blank-at-eof
 tests/round39_protocol_tests.py -text
+
+# Preserve byte-exact Round 45 completion evidence and recorded SHA-256 values.
+results/gf_adaptive_timing_parametric_partition_round45/completion/** -text whitespace=cr-at-eol

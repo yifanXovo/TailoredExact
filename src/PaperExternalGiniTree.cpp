@@ -8,6 +8,7 @@
 #include "GiniFrontierGeometry.hpp"
 #include "GiniEnvelopeRefinement.hpp"
 #include "GiniEnvelopeTailRepair.hpp"
+#include "GiniAdaptiveParametric.hpp"
 #include "ProcessPhaseLedger.hpp"
 #include "StaticSegmentedGini.hpp"
 
@@ -425,6 +426,45 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         reason = "round44_c6_envelope_tail_repair_contract_mismatch";
         return false;
     }
+    const bool round45_active =
+        options.round45_adaptive_parametric_partition != "off";
+    const std::set<std::string> round45_execution = {
+        "atlas", "algorithm"};
+    const std::set<std::string> round45_timing = {
+        "old-c6", "d-r43", "veto-f", "f", "f-mroot", "h", "mroot",
+        "gamma-positive", "gamma-threshold", "gamma-veto",
+        "decisive-gamma", "no-adaptive"};
+    const std::set<std::string> round45_point = {
+        "midpoint", "pmm", "fpmm"};
+    const std::set<std::string> round45_counterfactual = {
+        "off", "retain", "midpoint", "pmm", "fpmm"};
+    if (round45_active &&
+        (!round45_execution.count(
+             options.round45_adaptive_parametric_partition) ||
+         (options.round45_initial_k0 != 1 &&
+          options.round45_initial_k0 != 4) ||
+         !round45_timing.count(options.round45_timing_rule) ||
+         !round45_point.count(options.round45_point_rule) ||
+         !round45_counterfactual.count(options.round45_counterfactual_mode) ||
+         !std::isfinite(options.round45_rho_gamma) ||
+         options.round45_rho_gamma < 0.0 ||
+         !std::isfinite(options.round45_minimum_child_width) ||
+         options.round45_minimum_child_width <= 0.0 ||
+         (options.round45_counterfactual_mode != "off" &&
+          (options.round45_adaptive_parametric_partition != "algorithm" ||
+           options.round45_initial_k0 != 1 ||
+           (options.round45_counterfactual_mode != "retain" &&
+            options.round45_counterfactual_mode !=
+                options.round45_point_rule))) ||
+         round43_active || round44_active || !hga_full ||
+         causal != "off" || normalization != "proof" ||
+         geometry_policy != "off" || coarse_start != "off" ||
+         ub_geometry != "off" || static_segmented != "off" ||
+         root_reference != "off" || round42_any ||
+         options.gurobi_presolve != -1)) {
+        reason = "round45_adaptive_parametric_partition_contract_mismatch";
+        return false;
+    }
     if (round43_active &&
         ((options.round43_initial_k0 != 1 &&
           options.round43_initial_k0 != 4) ||
@@ -468,7 +508,8 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         "_root_reference_" + root_reference + "_round42_static_" +
         round42_static + "_siblings_" + round42_siblings +
         "_round43_" + options.round43_envelope_refinement +
-        "_round44_" + options.round44_envelope_tail_repair;
+        "_round44_" + options.round44_envelope_tail_repair +
+        "_round45_" + options.round45_adaptive_parametric_partition;
     return true;
 }
 
@@ -1437,10 +1478,34 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         options.round43_envelope_refinement != "off";
     const bool round43_atlas = round43_active &&
         options.round43_envelope_refinement == "atlas";
-    const bool round44_active = c6_nonblocking &&
+    const bool round44_legacy_active = c6_nonblocking &&
         options.round44_envelope_tail_repair != "off";
+    const bool round45_active = c6_nonblocking &&
+        options.round45_adaptive_parametric_partition != "off";
+    // Round 45 intentionally reuses the audited Round 44 LP/envelope/frontier
+    // path. Only the timing decision and (in Part II) split point differ.
+    const bool round44_active = round44_legacy_active || round45_active;
     const bool round44_atlas = round44_active &&
-        options.round44_envelope_tail_repair == "atlas";
+        (round45_active
+            ? options.round45_adaptive_parametric_partition == "atlas"
+            : options.round44_envelope_tail_repair == "atlas");
+    const int adaptive_initial_k0 = round45_active
+        ? options.round45_initial_k0 : options.round44_initial_k0;
+    const std::string adaptive_lookahead = round45_active
+        ? "frontier-d2" : options.round44_lookahead_policy;
+    const std::string adaptive_injection = round45_active
+        ? "all" : options.round44_envelope_injection;
+    const std::string adaptive_scope = round45_active
+        ? "parent" : options.round44_envelope_scope;
+    const std::string adaptive_mip_starts = round45_active
+        ? "off" : options.round44_mip_starts;
+    const std::string adaptive_rank1 = round45_active
+        ? "off" : options.round44_rank1_cuts;
+    const std::string adaptive_timing_family = round45_active
+        ? options.round45_timing_rule : options.round44_refinement_family;
+    const double adaptive_rho_f = options.round44_rho_f;
+    const double adaptive_rho_m = options.round44_rho_m;
+    const double adaptive_rho_h = options.round44_rho_h;
     const double proof_incumbent_launch = verified_seed.objective;
     const double decomposition_anchor_launch = round36_causal
         ? verified_seed.round36_decomposition_anchor_launch
@@ -1480,6 +1545,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     result.external_gini_tree_backend = options.external_gini_backend;
     result.external_gini_tree_lifecycle = round42_sibling_coalescing
         ? "round42-c6-terminal-sibling-block"
+        : (round45_active
+        ? "round45-unified-adaptive-parametric-partition"
         : (round44_active
         ? "round44-c6-envelope-tail-repair"
         : (round43_active
@@ -1490,7 +1557,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             ? "round30-same-leaf-bound-target"
         : (c4_incremental
             ? "round29-same-leaf-in-memory-model"
-            : "fresh-per-paper-event")))));
+            : "fresh-per-paper-event"))))));
     result.external_gini_tree_scheduling =
         options.external_gini_scheduling;
     result.external_gini_tree_startup_variant = c6_nonblocking
@@ -1537,7 +1604,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             : "paper_external_gini_tree_running"));
     if (incremental_model_reuse) {
         result.external_gini_tree_algorithm_arm = c6_nonblocking
-            ? (round44_active
+            ? (round45_active
+                ? "R45-A(K0=" +
+                    std::to_string(options.round45_initial_k0) + ",timing=" +
+                    options.round45_timing_rule + ",point=" +
+                    options.round45_point_rule + ")"
+                : (round44_active
                 ? "R44-C6-ENVELOPE-TAIL-REPAIR"
                 : (round43_active
                 ? "R43-A(K0=" +
@@ -1561,7 +1633,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 ? "R37-PILOT-WEAKEST-PREFINE"
                 : (round36_causal
                 ? "R36-" + options.round36_c6_causal_arm
-                : "C6-CANDIDATE")))))))
+                : "C6-CANDIDATE"))))))))
             : (c5_bound_target ? "C5-CANDIDATE" : "C4-CANDIDATE");
         result.external_gini_tree_global_row_family_count =
             static_cast<long long>(kPaperGlobalFamilies.size());
@@ -1579,10 +1651,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         result.external_gini_tree_internal_budget_scheduling = false;
         result.external_gini_tree_native_tree_reuse_claimed = false;
         result.external_gini_tree_warm_start_enabled = round44_active &&
-            options.round44_mip_starts == "verified";
+            adaptive_mip_starts == "verified";
         result.external_gini_tree_selector_variable_count = 0;
         result.external_gini_tree_contract_initial_interval_count =
-            round44_active ? options.round44_initial_k0
+            round44_active ? adaptive_initial_k0
             : (round43_active ? options.round43_initial_k0
             : (round40_coarse_start ? 1
             : (round40_nested_dyadic
@@ -1675,7 +1747,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     if (!seed_valid || options.external_gini_backend != "gurobi" ||
         options.external_gini_warm_start || root_gamma_L < -1e-12 ||
         root_gamma_U < root_gamma_L - 1e-12 ||
-        !verified_seed.frontier_covers_all_improving_gini_values ||
+        (options.round45_counterfactual_mode == "off" &&
+         !verified_seed.frontier_covers_all_improving_gini_values) ||
         !c4_contract_valid || !c5_contract_valid ||
         !c6_contract_valid || !round36_seed_contract_valid ||
         !round40_geometry_valid || !round40_ub_geometry_valid) {
@@ -1862,10 +1935,14 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             instance, options, verified_seed, root_gamma_L, root_gamma_U,
             std::move(result), std::move(backend), artifact_dir);
     }
-    const auto event_path = artifact_dir / "paper_tree_events.csv";
-    const auto leaf_path = artifact_dir / "paper_leaf_ledger.csv";
-    const auto optimize_path = artifact_dir / "paper_optimize_ledger.csv";
-    const auto lp_path = artifact_dir / "lp_status_ledger.csv";
+    const auto event_path = artifact_dir / (round45_active
+        ? "interval_tree_events.csv" : "paper_tree_events.csv");
+    const auto leaf_path = artifact_dir / (round45_active
+        ? "interval_coverage_ledger.csv" : "paper_leaf_ledger.csv");
+    const auto optimize_path = artifact_dir / (round45_active
+        ? "native_optimize_ledger.csv" : "paper_optimize_ledger.csv");
+    const auto lp_path = artifact_dir / (round45_active
+        ? "parent_lp_ledger.csv" : "lp_status_ledger.csv");
     const auto bounds_path = artifact_dir / "parent_child_bound_ledger.csv";
     const auto split_path = artifact_dir / "split_decision_ledger.csv";
     const auto global_bound_path = artifact_dir / "global_bound_trace.csv";
@@ -1891,7 +1968,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     const auto round44_frontier_path =
         artifact_dir / "frontier_target_ledger.csv";
     const auto round44_decision_path =
-        artifact_dir / "refinement_decision_ledger.csv";
+        artifact_dir / (round45_active
+            ? "timing_decision_ledger.csv"
+            : "refinement_decision_ledger.csv");
     const auto round44_old_c6_path =
         artifact_dir / "old_c6_action_ledger.csv";
     const auto round44_reuse_path =
@@ -1903,6 +1982,16 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         artifact_dir / "cglp_multiplier_ledger.csv";
     const auto round44_consolidation_path =
         artifact_dir / "frontier_consolidation_ledger.csv";
+    const auto round45_timing_score_path =
+        artifact_dir / "timing_score_ledger.csv";
+    const auto round45_segment_path =
+        artifact_dir / "parametric_segment_ledger.csv";
+    const auto round45_breakpoint_path =
+        artifact_dir / "parametric_breakpoint_ledger.csv";
+    const auto round45_choice_path =
+        artifact_dir / "split_point_choice_ledger.csv";
+    const auto round45_validity_path =
+        artifact_dir / "split_point_validity_ledger.csv";
     result.external_gini_tree_event_trace_path = event_path.string();
     result.external_gini_tree_leaf_ledger_path = leaf_path.string();
     result.external_gini_tree_optimize_ledger_path = optimize_path.string();
@@ -1933,6 +2022,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         round44_reuse_ledger, round44_start_ledger,
         round44_cut_scope_ledger, round44_cglp_ledger,
         round44_consolidation_ledger;
+    std::ofstream round45_timing_score_ledger, round45_segment_ledger,
+        round45_breakpoint_ledger, round45_choice_ledger,
+        round45_validity_ledger;
     if (round42_sibling_coalescing) {
         sibling_coverage.open(sibling_coverage_path);
     }
@@ -1954,6 +2046,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         round44_cut_scope_ledger.open(round44_cut_scope_path);
         round44_cglp_ledger.open(round44_cglp_path);
         round44_consolidation_ledger.open(round44_consolidation_path);
+    }
+    if (round45_active) {
+        round45_timing_score_ledger.open(round45_timing_score_path);
+        round45_segment_ledger.open(round45_segment_path);
+        round45_breakpoint_ledger.open(round45_breakpoint_path);
+        round45_choice_ledger.open(round45_choice_path);
+        round45_validity_ledger.open(round45_validity_path);
     }
     // These ledgers are evidence, not presentation-only logs.  Preserve the
     // full round-trip precision of every double from the first row onward so
@@ -1988,6 +2087,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         round44_cut_scope_ledger << std::setprecision(17);
         round44_cglp_ledger << std::setprecision(17);
         round44_consolidation_ledger << std::setprecision(17);
+    }
+    if (round45_active) {
+        round45_timing_score_ledger << std::setprecision(17);
+        round45_segment_ledger << std::setprecision(17);
+        round45_breakpoint_ledger << std::setprecision(17);
+        round45_choice_ledger << std::setprecision(17);
+        round45_validity_ledger << std::setprecision(17);
     }
     events << "telemetry_seconds,event,leaf_id,gamma_L,gamma_U,status,global_lb,verified_ub,detail\n";
     optimize << "leaf_id,solve_kind,native_status,optimize_return_code,global_deadline_remaining_at_launch,solver_runtime,work,nodes,simplex_iterations,barrier_iterations,memory_gb,model_sha256,in_memory_model_reused,integer_domain_restored,basis_reuse_status,native_log\n";
@@ -2071,7 +2177,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                "injection,scope,family,old_c6_action,target,L_I,L_E,L_D,"
                "lookahead_cells,Vlocal,Venvelope,Vresidual,tau,D_R43,P_profile,"
                "M_root,F,H,decisive,rho_F,rho_M,rho_H,selected_facets,"
-               "final_action,reason,decision_hash_input\n";
+               "Gamma_sum,epsilon_gamma,rho_gamma,final_action,reason,"
+               "decision_hash_input\n";
         round44_old_c6_ledger
             << "parent_id,split_immediately,run_child_bound_target,"
                "launch_exact_closure,child_bound_target,post_split_lower_bound,"
@@ -2095,6 +2202,30 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                "union_upper,initial_union_bound,target,model_valid,"
                "model_sha256,native_status,native_bound,target_reached,"
                "exact_closure,work,nodes,coverage_replaced,reason\n";
+    }
+    if (round45_active) {
+        round45_timing_score_ledger
+            << "parent_id,parent_id_parent,depth,lower,upper,K0,L_I,L_E,"
+               "L_minus,L_plus,U,U0,L0,target,G_C6,D_R43,F,M_root,H,"
+               "Gamma_sum,epsilon_gamma,decisive_frontier,rho_D,rho_F,"
+               "rho_gamma,timing_rule,action,reason,decision_hash_input\n";
+        round45_segment_ledger
+            << "parent_id,query_index,side,method,admissible_lower,"
+               "admissible_upper,query_point,value,infeasible,optimal,"
+               "basis_hash,dual_slope,sensitivity_lower,sensitivity_upper,"
+               "monotonicity_residual,endpoint_residual,certified,reason\n";
+        round45_breakpoint_ledger
+            << "parent_id,iteration,method,bracket_lower,bracket_upper,"
+               "probe,left_value,right_value,capped_value,decision,reason\n";
+        round45_choice_ledger
+            << "parent_id,point_rule,parent_lower,parent_upper,"
+               "admissible_lower,admissible_upper,midpoint,maximizer_lower,"
+               "maximizer_upper,selected_point,frontier_target,plateau,"
+               "boundary,tie_break,certified,reason\n";
+        round45_validity_ledger
+            << "parent_id,point_rule,minimum_width_ok,exact_coverage,"
+               "both_child_lp_complete,left_monotone,right_monotone,"
+               "point_in_range,certified,failure_reason\n";
     }
     events.flush();
     optimize.flush();
@@ -2123,6 +2254,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         round44_cut_scope_ledger.flush();
         round44_cglp_ledger.flush();
         round44_consolidation_ledger.flush();
+    }
+    if (round45_active) {
+        round45_timing_score_ledger.flush();
+        round45_segment_ledger.flush();
+        round45_breakpoint_ledger.flush();
+        round45_choice_ledger.flush();
+        round45_validity_ledger.flush();
     }
     recordProcessPhase(options, "first_tree_ledger_opened", "complete",
                        event_path.string());
@@ -2205,7 +2343,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     ControllingLeafScheduler scheduler(1e-7);
     const std::vector<GiniIntervalGeometry> initial = round44_active
         ? makeEnvelopeInitialPartition(
-              {root_gamma_L, root_gamma_U}, options.round44_initial_k0)
+              {root_gamma_L, root_gamma_U}, adaptive_initial_k0)
         : (round43_active
         ? makeEnvelopeInitialPartition(
               {root_gamma_L, root_gamma_U}, options.round43_initial_k0)
@@ -2857,7 +2995,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         request.verified_cutoff = verified_ub;
         request.global_deadline_remaining_seconds = remaining;
         const bool round44_verified_start = round44_active &&
-            options.round44_mip_starts == "verified";
+            adaptive_mip_starts == "verified";
         Verification round44_start_verification;
         bool round44_start_interval_member = false;
         if (round44_verified_start) {
@@ -2904,7 +3042,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         const FixedIntervalMipOutcome outcome = backend->solve(request);
         if (round44_active) {
             round44_start_ledger << bounded.id << ','
-                << csvField(options.round44_mip_starts) << ','
+                << csvField(adaptive_mip_starts) << ','
                 << (round44_verified_start ? 1 : 0) << ','
                 << (request.warm_start_enabled ? 1 : 0) << ',';
             if (round44_verified_start)
@@ -3373,7 +3511,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 break;
             }
             if (!round44_atlas &&
-                options.round44_refinement_family != "no-adaptive") {
+                adaptive_timing_family != "no-adaptive") {
                 const C6FrontierDecision old_frontier =
                     evaluateC6FrontierDecision(
                         bounded.lower_bound,
@@ -3477,8 +3615,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 round44_lookahead_ledger << bounded.id << ','
                     << csvField(bounded.parent_id) << ','
                     << bounded.split_depth << ',' << bounded.gamma_L << ','
-                    << bounded.gamma_U << ',' << options.round44_initial_k0
-                    << ',' << csvField(options.round44_lookahead_policy)
+                    << bounded.gamma_U << ',' << adaptive_initial_k0
+                    << ',' << csvField(adaptive_lookahead)
                     << ',' << frontier.target << ',' << csvField(cell.id)
                     << ',' << cell.split_depth << ',' << cell.gamma_L << ','
                     << cell.gamma_U << ',' << profile.terminal_valid << ','
@@ -3505,7 +3643,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             }
             if (hard_failure || global_deadline_stop) break;
 
-            if (options.round44_lookahead_policy == "fixed-d1") {
+            if (adaptive_lookahead == "fixed-d1") {
                 terminal_profile = d1_profile;
                 for (std::size_t index = 0; index < 2; ++index) {
                     terminal_ids.push_back(
@@ -3516,7 +3654,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             } else {
                 for (std::size_t d1_index = 0; d1_index < 2; ++d1_index) {
                     bool refine =
-                        options.round44_lookahead_policy == "fixed-d2";
+                        adaptive_lookahead == "fixed-d2";
                     if (!refine) {
                         const FrontierLookaheadStop stop =
                             evaluateFrontierD2Stop(
@@ -3600,7 +3738,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             }
             const EnvelopeFacetSelection facet_selection =
                 selectEnvelopeFacets(
-                    envelope.facets, options.round44_envelope_injection,
+                    envelope.facets, adaptive_injection,
                     selected_state.round43_lp_g,
                     selected_state.round43_lp_objective, tolerance);
             if (!facet_selection.valid) {
@@ -3718,27 +3856,91 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 << ',' << old_c6.normalized_disjunction_gain << ','
                 << csvField(old_c6.reason) << '\n';
 
-            TailRefinementInput decision_input;
-            decision_input.family = options.round44_refinement_family;
-            decision_input.old_c6_split = old_c6.split_immediately;
-            decision_input.old_c6_run_target =
-                old_c6.run_child_bound_target;
-            decision_input.old_c6_exact_closure =
-                old_c6.launch_exact_closure;
-            decision_input.F = scores.F;
-            decision_input.M_root = scores.M_root;
-            decision_input.H = scores.H;
-            decision_input.decisive_frontier = scores.decisive_frontier;
-            decision_input.rho_F = options.round44_rho_f;
-            decision_input.rho_M = options.round44_rho_m;
-            decision_input.rho_H = options.round44_rho_h;
-            decision_input.certificate_tolerance = tolerance;
-            const TailRefinementDecision decision =
-                evaluateTailRefinementDecision(decision_input);
+            auto childLower = [](const PaperLpResult& child) {
+                return child.infeasible
+                    ? std::numeric_limits<double>::infinity()
+                    : child.lower_bound;
+            };
+            const GammaSumResult gamma = evaluateGammaSum({
+                parent_geometry, d1_geometry[0], d1_geometry[1],
+                strengthened_lower, childLower(old_c6_child_lp[0]),
+                childLower(old_c6_child_lp[1]), frontier.target,
+                scores.M0, tolerance});
+            if (!gamma.valid) {
+                hard_failure = true;
+                result.external_gini_tree_failure_reason =
+                    "round45_gamma_sum_invalid:" + bounded.id + ":" +
+                    gamma.reason;
+                break;
+            }
+
+            TailRefinementDecision decision;
+            if (round45_active) {
+                AdaptiveTimingInput timing;
+                timing.family = options.round45_timing_rule;
+                timing.old_c6_split = old_c6.split_immediately;
+                timing.D_R43 = scores.D_R43;
+                timing.F = scores.F;
+                timing.M_root = scores.M_root;
+                timing.H = scores.H;
+                timing.Gamma_sum = gamma.gamma_sum;
+                timing.epsilon_gamma = gamma.epsilon_gamma;
+                timing.decisive_frontier = scores.decisive_frontier;
+                timing.rho_D = 0.10;
+                timing.rho_F = 0.50;
+                timing.rho_M = adaptive_rho_m;
+                timing.rho_H = adaptive_rho_h;
+                timing.rho_gamma = options.round45_rho_gamma;
+                timing.certificate_tolerance = tolerance;
+                const AdaptiveTimingDecision adaptive =
+                    evaluateAdaptiveTimingDecision(timing);
+                decision.valid = adaptive.valid;
+                decision.split = adaptive.split;
+                decision.run_native_target = false;
+                decision.exact_closure = false;
+                decision.old_c6_action = old_c6.split_immediately
+                    ? "split" : (old_c6.run_child_bound_target
+                        ? "native-target" : (old_c6.launch_exact_closure
+                            ? "exact-closure" : "retain"));
+                decision.final_action = adaptive.action;
+                decision.reason = adaptive.reason;
+                if (options.round45_counterfactual_mode != "off") {
+                    const bool root_parent = bounded.split_depth == 0;
+                    const bool force_split = root_parent &&
+                        options.round45_counterfactual_mode != "retain";
+                    decision.split = force_split;
+                    decision.run_native_target = false;
+                    decision.exact_closure = false;
+                    decision.final_action = force_split ? "split" : "retain";
+                    decision.reason = root_parent
+                        ? (force_split
+                            ? "round45_counterfactual_forced_single_split"
+                            : "round45_counterfactual_forced_retain")
+                        : "round45_counterfactual_descendant_split_forbidden";
+                }
+            } else {
+                TailRefinementInput decision_input;
+                decision_input.family = adaptive_timing_family;
+                decision_input.old_c6_split = old_c6.split_immediately;
+                decision_input.old_c6_run_target =
+                    old_c6.run_child_bound_target;
+                decision_input.old_c6_exact_closure =
+                    old_c6.launch_exact_closure;
+                decision_input.F = scores.F;
+                decision_input.M_root = scores.M_root;
+                decision_input.H = scores.H;
+                decision_input.decisive_frontier =
+                    scores.decisive_frontier;
+                decision_input.rho_F = adaptive_rho_f;
+                decision_input.rho_M = adaptive_rho_m;
+                decision_input.rho_H = adaptive_rho_h;
+                decision_input.certificate_tolerance = tolerance;
+                decision = evaluateTailRefinementDecision(decision_input);
+            }
             if (!decision.valid) {
                 hard_failure = true;
                 result.external_gini_tree_failure_reason =
-                    "round44_refinement_decision_invalid:" + bounded.id;
+                    "adaptive_refinement_decision_invalid:" + bounded.id;
                 break;
             }
 
@@ -3759,7 +3961,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     << facet.source_lower << ',' << facet.source_upper << ','
                     << csvField(facet.construction) << ',' << violation << ','
                     << selected_facet << ','
-                    << csvField(options.round44_envelope_scope) << ','
+                    << csvField(adaptive_scope) << ','
                     << csvField(canonicalEnvelopeFacetSignature(facet)) << ','
                     << csvField(selected_facet
                         ? "selected_by_uniform_injection_policy"
@@ -3771,14 +3973,14 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     << facet.source_lower << ',' << facet.source_upper << ','
                     << bounded.gamma_L << ',' << bounded.gamma_U << ','
                     << (selected_facet &&
-                        options.round44_envelope_scope == "nested")
+                        adaptive_scope == "nested")
                     << ",0," << csvField(selected_facet
                         ? "valid_on_source_parent_domain"
                         : "not_injected") << '\n';
             }
             round44_envelope_ledger << bounded.id << ','
-                << csvField(options.round44_envelope_injection) << ','
-                << csvField(options.round44_envelope_scope) << ','
+                << csvField(adaptive_injection) << ','
+                << csvField(adaptive_scope) << ','
                 << envelope.valid << ',' << csvField(envelope.status) << ','
                 << envelope.generated_facet_count << ','
                 << envelope.duplicate_facet_count << ','
@@ -3792,24 +3994,25 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 << envelope.integral_identity_residual << ','
                 << envelope.max_endpoint_violation << '\n';
             const std::string decision_hash_input =
-                bounded.id + "|" + options.round44_lookahead_policy + "|" +
-                options.round44_envelope_injection + "|" +
-                options.round44_envelope_scope + "|" +
-                options.round44_refinement_family + "|" +
+                bounded.id + "|" + adaptive_lookahead + "|" +
+                adaptive_injection + "|" + adaptive_scope + "|" +
+                adaptive_timing_family + "|" +
                 std::to_string(frontier.target) + "|" +
                 std::to_string(strengthened_lower) + "|" +
                 std::to_string(scores.L_D) + "|" +
                 std::to_string(scores.F) + "|" +
                 std::to_string(scores.M_root) + "|" +
-                std::to_string(scores.H);
+                std::to_string(scores.H) + "|" +
+                std::to_string(gamma.gamma_sum) + "|" +
+                std::to_string(options.round45_rho_gamma);
             round44_decision_ledger << bounded.id << ','
                 << csvField(bounded.parent_id) << ',' << bounded.split_depth
                 << ',' << bounded.gamma_L << ',' << bounded.gamma_U << ','
-                << options.round44_initial_k0 << ','
-                << csvField(options.round44_lookahead_policy) << ','
-                << csvField(options.round44_envelope_injection) << ','
-                << csvField(options.round44_envelope_scope) << ','
-                << csvField(options.round44_refinement_family) << ','
+                << adaptive_initial_k0 << ','
+                << csvField(adaptive_lookahead) << ','
+                << csvField(adaptive_injection) << ','
+                << csvField(adaptive_scope) << ','
+                << csvField(adaptive_timing_family) << ','
                 << csvField(decision.old_c6_action) << ',' << frontier.target
                 << ',' << selected_state.lp.lower_bound << ','
                 << strengthened_lower << ',' << scores.L_D << ','
@@ -3818,15 +4021,39 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 << envelope.V_residual << ',' << envelope.tau_d << ','
                 << scores.D_R43 << ',' << scores.P_profile << ','
                 << scores.M_root << ',' << scores.F << ',' << scores.H << ','
-                << scores.decisive_frontier << ',' << options.round44_rho_f
-                << ',' << options.round44_rho_m << ','
-                << options.round44_rho_h << ','
+                << scores.decisive_frontier << ',' << adaptive_rho_f
+                << ',' << adaptive_rho_m << ',' << adaptive_rho_h << ','
                 << facet_selection.selected.size() << ','
+                << gamma.gamma_sum << ',' << gamma.epsilon_gamma << ','
+                << (round45_active ? options.round45_rho_gamma : 0.0) << ','
                 << csvField(decision.final_action) << ','
                 << csvField(decision.reason) << ','
                 << csvField(decision_hash_input) << '\n';
+            if (round45_active) {
+                round45_timing_score_ledger << bounded.id << ','
+                    << csvField(bounded.parent_id) << ','
+                    << bounded.split_depth << ',' << bounded.gamma_L << ','
+                    << bounded.gamma_U << ',' << adaptive_initial_k0 << ','
+                    << selected_state.lp.lower_bound << ','
+                    << strengthened_lower << ','
+                    << childLower(old_c6_child_lp[0]) << ','
+                    << childLower(old_c6_child_lp[1]) << ','
+                    << verified_ub << ',' << proof_incumbent_launch << ','
+                    << round44_root_lower_bound_launch << ','
+                    << frontier.target << ','
+                    << old_c6.normalized_disjunction_gain << ','
+                    << scores.D_R43 << ',' << scores.F << ','
+                    << scores.M_root << ',' << scores.H << ','
+                    << gamma.gamma_sum << ',' << gamma.epsilon_gamma << ','
+                    << scores.decisive_frontier << ",0.1,0.5,"
+                    << options.round45_rho_gamma << ','
+                    << csvField(options.round45_timing_rule) << ','
+                    << csvField(decision.final_action) << ','
+                    << csvField(decision.reason) << ','
+                    << csvField(decision_hash_input) << '\n';
+            }
 
-            if (options.round44_rank1_cuts == "off") {
+            if (adaptive_rank1 == "off") {
                 round44_cglp_ledger << bounded.id << ",off,"
                     << bounded.gamma_L << ',' << bounded.gamma_U << ','
                     << 0.5 * (bounded.gamma_L + bounded.gamma_U)
@@ -3861,16 +4088,349 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 continue;
             }
 
-            const auto child_geometry = makeDyadicLookaheadPartition(
-                parent_geometry, 1);
+            std::vector<GiniIntervalGeometry> child_geometry =
+                makeDyadicLookaheadPartition(parent_geometry, 1);
+            std::vector<GiniLookaheadBound> selected_point_profile;
+            bool point_certified = true;
+            std::string point_reason = "certified_midpoint";
+            double selected_point = 0.5 *
+                (parent_geometry.lower + parent_geometry.upper);
+            double maximizer_lower = selected_point;
+            double maximizer_upper = selected_point;
+            bool point_plateau = false;
+            bool point_boundary = false;
+            bool point_both_children = true;
+            bool point_left_monotone = true;
+            bool point_right_monotone = true;
+            if (round45_active && decision.split &&
+                options.round45_point_rule != "midpoint") {
+                const double minimum_width = std::max(
+                    options.round45_minimum_child_width, tolerance);
+                const GiniIntervalGeometry admissible{
+                    parent_geometry.lower + minimum_width,
+                    parent_geometry.upper - minimum_width};
+                struct RootQuery {
+                    ParametricRootSample audit;
+                    GiniLookaheadBound left;
+                    GiniLookaheadBound right;
+                };
+                std::vector<RootQuery> queries;
+                auto queryPoint = [&](double point, int iteration,
+                                      RootQuery& query) {
+                    for (const RootQuery& cached : queries) {
+                        if (std::fabs(cached.audit.point - point) <=
+                            tolerance) {
+                            query = cached;
+                            return true;
+                        }
+                    }
+                    GiniLookaheadBound left, right;
+                    double left_work = 0.0, right_work = 0.0;
+                    const std::string prefix = bounded.id + ".r45p." +
+                        std::to_string(queries.size());
+                    if (!solveRound44Cell(
+                            {parent_geometry.lower, point}, prefix + ".L",
+                            1, false, left, left_work) ||
+                        !solveRound44Cell(
+                            {point, parent_geometry.upper}, prefix + ".R",
+                            1, false, right, right_work)) return false;
+                    query.audit.point = point;
+                    query.audit.left_value = left.lower_bound;
+                    query.audit.right_value = right.lower_bound;
+                    query.audit.left_infeasible = left.infeasible;
+                    query.audit.right_infeasible = right.infeasible;
+                    query.audit.left_optimal = left.infeasible ||
+                        (left.terminal_valid && left.optimal &&
+                         left.bound_available);
+                    query.audit.right_optimal = right.infeasible ||
+                        (right.terminal_valid && right.optimal &&
+                         right.bound_available);
+                    query.left = left;
+                    query.right = right;
+                    queries.push_back(query);
+                    auto writeSide = [&](const char* side,
+                                         const GiniLookaheadBound& value) {
+                        round45_segment_ledger << bounded.id << ','
+                            << queries.size() - 1 << ',' << side
+                            << ",monotone-root-solver," << admissible.lower
+                            << ',' << admissible.upper << ',' << point << ',';
+                        if (value.infeasible)
+                            round45_segment_ledger << "inf";
+                        else round45_segment_ledger << value.lower_bound;
+                        round45_segment_ledger << ',' << value.infeasible
+                            << ',' << (value.infeasible || value.optimal)
+                            << ",unavailable-root-solver,,,,0,0,"
+                            << (value.terminal_valid &&
+                                (value.infeasible ||
+                                 (value.optimal && value.bound_available)))
+                            << ',' << csvField(
+                                "basis_sensitivity_unavailable_direct_root_solver")
+                            << '\n';
+                    };
+                    writeSide("left", left);
+                    writeSide("right", right);
+                    (void)iteration;
+                    return true;
+                };
+                auto value = [](const GiniLookaheadBound& profile) {
+                    return profile.infeasible
+                        ? std::numeric_limits<double>::infinity()
+                        : profile.lower_bound;
+                };
+                auto difference = [&](const RootQuery& query) {
+                    const double left = value(query.left);
+                    const double right = value(query.right);
+                    if (std::isinf(left) && std::isinf(right))
+                        return std::numeric_limits<double>::quiet_NaN();
+                    if (std::isinf(left))
+                        return std::numeric_limits<double>::infinity();
+                    if (std::isinf(right))
+                        return -std::numeric_limits<double>::infinity();
+                    return left - right;
+                };
+                RootQuery selected_query;
+                const bool admissible_valid =
+                    std::isfinite(admissible.lower) &&
+                    std::isfinite(admissible.upper) &&
+                    admissible.upper > admissible.lower;
+                if (!admissible_valid) {
+                    point_certified = false;
+                    point_reason = "minimum_child_width_exhausts_parent_retain";
+                } else {
+                    RootQuery low_query, high_query;
+                    if (!queryPoint(admissible.lower, 0, low_query) ||
+                        !queryPoint(admissible.upper, 0, high_query)) {
+                        point_certified = false;
+                        point_reason =
+                            "certified_parametric_point_unavailable_retain_parent";
+                    } else {
+                        double lower = admissible.lower;
+                        double upper = admissible.upper;
+                        RootQuery lower_query = low_query;
+                        RootQuery upper_query = high_query;
+                        const double d_lower = difference(lower_query);
+                        const double d_upper = difference(upper_query);
+                        if (std::isnan(d_lower) || std::isnan(d_upper)) {
+                            point_certified = false;
+                            point_reason = "both_children_infeasible_at_root_query";
+                        } else if (d_lower <= 0.0) {
+                            upper = lower;
+                            upper_query = lower_query;
+                        } else if (d_upper >= 0.0) {
+                            lower = upper;
+                            lower_query = upper_query;
+                        } else {
+                            const double point_tolerance = std::max(
+                                tolerance, (admissible.upper -
+                                    admissible.lower) * 1e-8);
+                            for (int iteration = 0;
+                                 iteration < 28 &&
+                                 upper - lower > point_tolerance;
+                                 ++iteration) {
+                                const double probe = 0.5 * (lower + upper);
+                                RootQuery probe_query;
+                                if (!queryPoint(
+                                        probe, iteration + 1, probe_query)) {
+                                    point_certified = false;
+                                    point_reason =
+                                        "certified_parametric_point_unavailable_retain_parent";
+                                    break;
+                                }
+                                const double d_probe = difference(probe_query);
+                                const double capped = options.round45_point_rule ==
+                                        "fpmm"
+                                    ? std::min({value(probe_query.left),
+                                                value(probe_query.right),
+                                                frontier.target})
+                                    : std::min(value(probe_query.left),
+                                               value(probe_query.right));
+                                round45_breakpoint_ledger << bounded.id << ','
+                                    << iteration << ",monotone-root-solver,"
+                                    << lower << ',' << upper << ',' << probe
+                                    << ',' << value(probe_query.left) << ','
+                                    << value(probe_query.right) << ',' << capped
+                                    << ',' << (d_probe > 0.0 ? "right" : "left")
+                                    << ',' << csvField(
+                                        "deterministic_difference_bisection")
+                                    << '\n';
+                                if (std::isnan(d_probe)) {
+                                    point_certified = false;
+                                    point_reason =
+                                        "both_children_infeasible_at_probe";
+                                    break;
+                                }
+                                if (d_probe > 0.0) {
+                                    lower = probe;
+                                    lower_query = probe_query;
+                                } else {
+                                    upper = probe;
+                                    upper_query = probe_query;
+                                }
+                            }
+                        }
+                        if (point_certified) {
+                            maximizer_lower = lower;
+                            maximizer_upper = upper;
+                            if (options.round45_point_rule == "fpmm") {
+                                auto rightReachesTarget = [&](double point) {
+                                    RootQuery query;
+                                    return queryPoint(point, 29, query) &&
+                                        value(query.right) >=
+                                            frontier.target - tolerance;
+                                };
+                                auto leftReachesTarget = [&](double point) {
+                                    RootQuery query;
+                                    return queryPoint(point, 30, query) &&
+                                        value(query.left) >=
+                                            frontier.target - tolerance;
+                                };
+                                if (rightReachesTarget(admissible.upper) &&
+                                    leftReachesTarget(admissible.lower)) {
+                                    double lo = admissible.lower;
+                                    double hi = admissible.upper;
+                                    for (int i = 0; i < 24; ++i) {
+                                        const double probe = 0.5 * (lo + hi);
+                                        if (rightReachesTarget(probe)) hi = probe;
+                                        else lo = probe;
+                                    }
+                                    const double plateau_lower = hi;
+                                    lo = admissible.lower;
+                                    hi = admissible.upper;
+                                    for (int i = 0; i < 24; ++i) {
+                                        const double probe = 0.5 * (lo + hi);
+                                        if (leftReachesTarget(probe)) lo = probe;
+                                        else hi = probe;
+                                    }
+                                    const double plateau_upper = lo;
+                                    if (plateau_lower <=
+                                        plateau_upper + tolerance) {
+                                        maximizer_lower = plateau_lower;
+                                        maximizer_upper = plateau_upper;
+                                        point_plateau = plateau_upper -
+                                            plateau_lower > tolerance;
+                                    }
+                                }
+                            }
+                            selected_point = 0.5 *
+                                (maximizer_lower + maximizer_upper);
+                            if (!queryPoint(selected_point, 31,
+                                            selected_query)) {
+                                point_certified = false;
+                                point_reason =
+                                    "certified_parametric_point_unavailable_retain_parent";
+                            }
+                        }
+                    }
+                }
+                if (point_certified) {
+                    std::vector<ParametricRootSample> audit_samples;
+                    for (const RootQuery& query : queries)
+                        audit_samples.push_back(query.audit);
+                    const ParametricRootAudit point_audit =
+                        auditParametricRootSamples(
+                            audit_samples, 10.0 * tolerance);
+                    point_both_children = point_audit.both_child_coverage;
+                    point_left_monotone =
+                        point_audit.left_monotonicity_residual <=
+                            10.0 * tolerance;
+                    point_right_monotone =
+                        point_audit.right_monotonicity_residual <=
+                            10.0 * tolerance;
+                    point_certified = point_audit.valid &&
+                        selected_point >= admissible.lower - tolerance &&
+                        selected_point <= admissible.upper + tolerance;
+                    point_reason = point_certified
+                        ? "certified_direct_parametric_root_solver"
+                        : "certified_parametric_point_unavailable_retain_parent";
+                    if (point_certified) {
+                        selected_point_profile = {
+                            selected_query.left, selected_query.right};
+                        child_geometry = {
+                            {parent_geometry.lower, selected_point},
+                            {selected_point, parent_geometry.upper}};
+                    }
+                }
+                point_boundary = point_certified &&
+                    (std::fabs(selected_point - admissible.lower) <= tolerance ||
+                     std::fabs(selected_point - admissible.upper) <= tolerance);
+                round45_choice_ledger << bounded.id << ','
+                    << csvField(options.round45_point_rule) << ','
+                    << parent_geometry.lower << ',' << parent_geometry.upper
+                    << ',' << admissible.lower << ',' << admissible.upper
+                    << ',' << 0.5 * (parent_geometry.lower +
+                                     parent_geometry.upper) << ','
+                    << maximizer_lower << ',' << maximizer_upper << ','
+                    << selected_point << ',' << frontier.target << ','
+                    << point_plateau << ',' << point_boundary
+                    << ",plateau-midpoint," << point_certified << ','
+                    << csvField(point_reason) << '\n';
+                const bool exact_point_cover = point_certified &&
+                    exactIntervalCoverage(
+                        parent_geometry, child_geometry, tolerance);
+                round45_validity_ledger << bounded.id << ','
+                    << csvField(options.round45_point_rule) << ','
+                    << admissible_valid << ',' << exact_point_cover
+                    << ',' << point_both_children << ','
+                    << point_left_monotone << ',' << point_right_monotone
+                    << ',' << (selected_point >= admissible.lower - tolerance &&
+                               selected_point <= admissible.upper + tolerance)
+                    << ',' << point_certified << ','
+                    << csvField(point_certified ? "none" : point_reason)
+                    << '\n';
+                if (!point_certified) {
+                    decision.split = false;
+                    decision.final_action = "retain";
+                    decision.reason = point_reason;
+                }
+            } else if (round45_active) {
+                selected_point_profile = d1_profile;
+                round45_choice_ledger << bounded.id << ",midpoint,"
+                    << parent_geometry.lower << ',' << parent_geometry.upper
+                    << ',' << parent_geometry.lower << ','
+                    << parent_geometry.upper << ',' << selected_point << ','
+                    << selected_point << ',' << selected_point << ','
+                    << selected_point << ',' << frontier.target
+                    << ",0,0,midpoint," << point_certified << ','
+                    << csvField(point_reason) << '\n';
+                round45_validity_ledger << bounded.id
+                    << ",midpoint,1,1,1,1,1,1,1,none\n";
+            }
             if (decision.split) {
+                const ControllingLeaf* authoritative_parent =
+                    scheduler.findLeaf(bounded.id);
+                if (!authoritative_parent) {
+                    hard_failure = true;
+                    result.external_gini_tree_failure_reason =
+                        "round44_split_parent_missing:" + bounded.id;
+                    break;
+                }
+                const double inherited_parent_lower =
+                    authoritative_parent->lower_bound;
                 std::vector<ControllingLeaf> children;
                 std::vector<AggregatedLookaheadBound> child_bounds;
                 for (std::size_t index = 0; index < 2; ++index) {
-                    const AggregatedLookaheadBound aggregated =
-                        aggregateLookaheadBoundForInterval(
-                            child_geometry[index], bounded.lower_bound,
+                    AggregatedLookaheadBound aggregated;
+                    if (round45_active &&
+                        options.round45_point_rule != "midpoint") {
+                        const GiniLookaheadBound& direct =
+                            selected_point_profile[index];
+                        aggregated.valid = direct.terminal_valid &&
+                            (direct.infeasible ||
+                             (direct.optimal && direct.bound_available));
+                        aggregated.infeasible = direct.infeasible;
+                        aggregated.lower_bound = direct.infeasible
+                            ? std::numeric_limits<double>::infinity()
+                            : std::max(inherited_parent_lower,
+                                       direct.lower_bound);
+                        aggregated.contributing_cell_count = 1;
+                        aggregated.reason = aggregated.valid
+                            ? "direct_parametric_child_lp_bound"
+                            : "invalid_direct_parametric_child_lp";
+                    } else {
+                        aggregated = aggregateLookaheadBoundForInterval(
+                            child_geometry[index], inherited_parent_lower,
                             terminal_profile, tolerance);
+                    }
                     if (!aggregated.valid) {
                         hard_failure = true;
                         result.external_gini_tree_failure_reason =
@@ -3895,7 +4455,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     PaperLeafRuntime& child_state = runtime[child.id];
                     child_state = PaperLeafRuntime{};
                     child_state.round43_inherited_facets =
-                        options.round44_envelope_scope == "nested"
+                        adaptive_scope == "nested"
                             ? parent_facets
                             : selected_state.round43_inherited_facets;
                 }
@@ -6089,7 +6649,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             c6_nonblocking ? verified_ub : verified_seed.objective;
         request.global_deadline_remaining_seconds = remaining;
         const bool round44_verified_terminal_start = round44_active &&
-            options.round44_mip_starts == "verified";
+            adaptive_mip_starts == "verified";
         Verification round44_terminal_start_verification;
         bool round44_terminal_start_member = false;
         if (round44_verified_terminal_start) {
@@ -6133,7 +6693,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         const FixedIntervalMipOutcome outcome = backend->solve(request);
         if (round44_active) {
             round44_start_ledger << bounded.id << ','
-                << csvField(options.round44_mip_starts) << ','
+                << csvField(adaptive_mip_starts) << ','
                 << (round44_verified_terminal_start ? 1 : 0) << ','
                 << (request.warm_start_enabled ? 1 : 0) << ',';
             if (round44_verified_terminal_start)
@@ -6551,6 +7111,29 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         result.status = "round44_structural_atlas_complete";
         result.certificate =
             "Round 44 structural atlas only; no exact certificate claimed.";
+    }
+    if (options.round45_counterfactual_mode != "off") {
+        const bool local_parent_exact = certificate.certified;
+        result.external_gini_tree_strict_certified = false;
+        result.external_gini_tree_certificate_class =
+            local_parent_exact ? "diagnostic_parent_range_exact"
+                               : "diagnostic_parent_range_not_exact";
+        result.external_gini_tree_certificate_rejection_reason =
+            "counterfactual_restricted_range_not_original_problem";
+        result.strict_certified_original_problem = false;
+        result.strict_certificate_class =
+            "diagnostic_parent_range_not_original_problem";
+        result.strict_certificate_rejection_reason =
+            "counterfactual_restricted_range_not_original_problem";
+        result.status = local_parent_exact
+            ? "round45_counterfactual_parent_exact"
+            : (global_deadline_stop
+                ? "round45_counterfactual_parent_time_limit"
+                : "round45_counterfactual_parent_not_exact");
+        result.certificate = local_parent_exact
+            ? "Exact certificate for the restricted counterfactual parent "
+              "range only; not an original-problem certificate."
+            : "Restricted counterfactual parent range not certified exactly.";
     }
     if (result.external_gini_tree_failure_reason.empty()) {
         result.external_gini_tree_failure_reason = "none";
