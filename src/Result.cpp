@@ -1630,6 +1630,14 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.round37_c6_geometry_policy) << "\",\n";
     out << "  \"round40_c6_coarse_start\": \""
         << jsonEscape(result.round40_c6_coarse_start) << "\",\n";
+    out << "  \"c6_normalized_split_threshold\": "
+        << result.c6_normalized_split_threshold << ",\n";
+    out << "  \"c6_normalized_split_threshold_explicit\": "
+        << (result.c6_normalized_split_threshold_explicit ? "true" : "false")
+        << ",\n";
+    out << "  \"c6_normalized_split_threshold_source\": \""
+        << jsonEscape(result.c6_normalized_split_threshold_source)
+        << "\",\n";
     out << "  \"round40_c6_ub_geometry\": \""
         << jsonEscape(result.round40_c6_ub_geometry) << "\",\n";
     out << "  \"round40_c6_nested_dyadic_level\": "
@@ -1905,6 +1913,7 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_PATH(lp_status_ledger_path);
     WRITE_EXT_PATH(parent_child_bound_ledger_path);
     WRITE_EXT_PATH(split_decision_ledger_path);
+    WRITE_EXT_PATH(c6_split_decision_ledger_path);
     WRITE_EXT_PATH(coverage_ledger_path);
     WRITE_EXT_PATH(bound_inheritance_ledger_path);
     WRITE_EXT_PATH(row_signature_ledger_path);

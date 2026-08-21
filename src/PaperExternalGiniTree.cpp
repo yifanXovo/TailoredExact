@@ -282,6 +282,12 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         reason = "c6_round37_geometry_policy_contract_mismatch";
         return false;
     }
+    if (!std::isfinite(options.c6_normalized_split_threshold) ||
+        options.c6_normalized_split_threshold < 0.0 ||
+        options.c6_normalized_split_threshold > 1.0) {
+        reason = "c6_normalized_split_threshold_out_of_range";
+        return false;
+    }
     const std::string& coarse_start = options.round40_c6_coarse_start;
     const bool coarse_start_valid = coarse_start == "off" ||
         coarse_start == "k1-single" || coarse_start == "k1-adaptive" ||
@@ -654,8 +660,8 @@ C5BoundTargetSplitDecision evaluateC5BoundTargetSplitDecision(
         !std::isfinite(verified_upper_bound) ||
         verified_upper_bound + tolerance < parent_lower_bound ||
         !std::isfinite(normalized_split_threshold) ||
-        normalized_split_threshold <= 0.0 ||
-        normalized_split_threshold >= 1.0) {
+        normalized_split_threshold < 0.0 ||
+        normalized_split_threshold > 1.0) {
         decision.reason = "invalid_c5_bound_target_inputs";
         return decision;
     }
@@ -1568,6 +1574,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     result.round37_c6_geometry_policy =
         options.round37_c6_geometry_policy;
     result.round40_c6_coarse_start = options.round40_c6_coarse_start;
+    result.c6_normalized_split_threshold =
+        options.c6_normalized_split_threshold;
+    result.c6_normalized_split_threshold_explicit =
+        options.c6_normalized_split_threshold_explicit;
+    result.c6_normalized_split_threshold_source =
+        options.c6_normalized_split_threshold_explicit
+            ? "explicit" : "implicit-default";
     result.round40_c6_ub_geometry = options.round40_c6_ub_geometry;
     result.round42_terminal_sibling_coalescing =
         options.round42_terminal_sibling_coalescing;
@@ -1945,6 +1958,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         ? "parent_lp_ledger.csv" : "lp_status_ledger.csv");
     const auto bounds_path = artifact_dir / "parent_child_bound_ledger.csv";
     const auto split_path = artifact_dir / "split_decision_ledger.csv";
+    const auto c6_split_path =
+        artifact_dir / "c6_split_decision_ledger.csv";
     const auto global_bound_path = artifact_dir / "global_bound_trace.csv";
     const auto native_target_path =
         artifact_dir / "native_target_ledger.csv";
@@ -1999,6 +2014,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     result.external_gini_tree_parent_child_bound_ledger_path =
         bounds_path.string();
     result.external_gini_tree_split_decision_ledger_path = split_path.string();
+    result.external_gini_tree_c6_split_decision_ledger_path =
+        c6_split_path.string();
     result.external_gini_tree_global_bound_trace_path =
         global_bound_path.string();
     result.external_gini_tree_native_target_ledger_path =
@@ -2011,6 +2028,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     }
     std::ofstream events(event_path), optimize(optimize_path), lp_ledger(lp_path),
         bound_ledger(bounds_path), split_ledger(split_path),
+        c6_split_ledger(c6_split_path),
         global_trace(global_bound_path), native_targets(native_target_path),
         initial_decomposition(initial_decomposition_path);
     std::ofstream sibling_coverage;
@@ -2063,6 +2081,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     lp_ledger << std::setprecision(17);
     bound_ledger << std::setprecision(17);
     split_ledger << std::setprecision(17);
+    c6_split_ledger << std::setprecision(17);
     global_trace << std::setprecision(17);
     native_targets << std::setprecision(17);
     initial_decomposition << std::setprecision(17);
@@ -2104,6 +2123,14 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     "normalized_disjunction_gain,parent_native_bound_target,"
                     "target_phase_required,reason,b_plus,eta_proof,eta_anchor,"
                     "normalization_source,normalization_upper_bound\n";
+    c6_split_ledger
+        << "decision_sequence,K0,rho,rho_source,interval_id,parent_id,depth,"
+           "gamma_L,gamma_U,parent_bound,left_child_id,left_child_bound,"
+           "left_child_infeasible,right_child_id,right_child_bound,"
+           "right_child_infeasible,verified_incumbent,normalized_c6_gain,"
+           "child_infeasibility_trigger,threshold_comparison,selected_action,"
+           "target_value,deterministic_reason,coverage_update\n";
+    long long c6_decision_sequence = 0;
     global_trace
         << "process_elapsed_seconds,exact_phase_elapsed_seconds,event_type,"
            "active_leaf,active_leaf_valid_lower_bound,"
@@ -5448,13 +5475,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                           options.round36_c6_split_normalization,
                           runtime[children[0].id].lp,
                           runtime[children[1].id].lp,
-                          kRound31C6NormalizedSplitThreshold,
+                          options.c6_normalized_split_threshold,
                           scheduler.certificateTolerance())
                     : evaluateC6CurrentSplitDecision(
                           bounded.lower_bound, verified_ub,
                           runtime[children[0].id].lp,
                           runtime[children[1].id].lp,
-                          kRound31C6NormalizedSplitThreshold,
+                          options.c6_normalized_split_threshold,
                           scheduler.certificateTolerance()))
                 : C6CurrentSplitDecision{};
             if (c6_nonblocking &&
@@ -5558,6 +5585,65 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 split_ledger << ',';
             }
             split_ledger << '\n';
+            if (c6_nonblocking && c6_split.valid) {
+                ++c6_decision_sequence;
+                const int c6_initial_k0 = round40_coarse_start ? 1 : 4;
+                const std::string rho_source =
+                    options.c6_normalized_split_threshold_explicit
+                        ? "explicit" : "implicit-default";
+                const std::string threshold_comparison =
+                    c6_split.child_infeasibility_trigger
+                        ? "child_infeasibility_independent_of_rho"
+                        : (c6_split.launch_exact_closure
+                            ? "no_strict_gain"
+                            : (c6_split.normalized_disjunction_gain + 1e-15 >=
+                                    options.c6_normalized_split_threshold
+                                ? "gain_greater_than_or_equal_to_rho"
+                                : "gain_below_rho"));
+                const std::string selected_action =
+                    c6_split.split_immediately
+                        ? "split"
+                        : (c6_split.run_child_bound_target
+                            ? "native-target" : "exact-close");
+                c6_split_ledger
+                    << c6_decision_sequence << ',' << c6_initial_k0 << ','
+                    << options.c6_normalized_split_threshold << ','
+                    << csvField(rho_source) << ',' << csvField(bounded.id)
+                    << ',' << csvField(bounded.parent_id) << ','
+                    << bounded.split_depth << ',' << bounded.gamma_L << ','
+                    << bounded.gamma_U << ',' << bounded.lower_bound << ','
+                    << csvField(children[0].id) << ',';
+                if (!runtime[children[0].id].lp.infeasible) {
+                    c6_split_ledger
+                        << runtime[children[0].id].lp.lower_bound;
+                }
+                c6_split_ledger << ','
+                    << runtime[children[0].id].lp.infeasible << ','
+                    << csvField(children[1].id) << ',';
+                if (!runtime[children[1].id].lp.infeasible) {
+                    c6_split_ledger
+                        << runtime[children[1].id].lp.lower_bound;
+                }
+                c6_split_ledger << ','
+                    << runtime[children[1].id].lp.infeasible << ','
+                    << verified_ub << ',';
+                if (std::isfinite(
+                        c6_split.normalized_disjunction_gain)) {
+                    c6_split_ledger
+                        << c6_split.normalized_disjunction_gain;
+                }
+                c6_split_ledger << ','
+                    << c6_split.child_infeasibility_trigger << ','
+                    << csvField(threshold_comparison) << ','
+                    << csvField(selected_action) << ',';
+                if (c6_split.run_child_bound_target) {
+                    c6_split_ledger << c6_split.child_bound_target;
+                }
+                c6_split_ledger << ',' << csvField(c6_split.reason) << ','
+                    << csvField(c6_split.split_immediately
+                        ? "atomic_parent_replaced_by_two_children"
+                        : "parent_coverage_retained") << '\n';
+            }
             if (!decision_valid) {
                 hard_failure = true;
                 result.external_gini_tree_failure_reason =
