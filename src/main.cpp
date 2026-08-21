@@ -42,6 +42,7 @@
 #include <numeric>
 #include <random>
 #include <regex>
+#include <set>
 #include <sstream>
 #include <string>
 #include <thread>
@@ -105,6 +106,34 @@ void usage() {
         << "[--round36-c6-causal-arm off|hh|ss|bw-p|bw-a] "
         << "[--round36-c6-split-normalization proof|anchor] "
         << "[--round37-c6-geometry-policy off|pilot-weakest-prefine] "
+        << "[--round40-c6-coarse-start off|k1-single|k1-adaptive|k1-adaptive-decisive] "
+        << "[--round40-c6-ub-geometry off|nested-dyadic-k4] "
+        << "[--round41-static-segmented-gini off|st-k2-i|st-k2-p-core|st-k2-p-extended] "
+        << "[--round41-static-segmented-solve mip|root-lp] "
+        << "[--round41-root-reference-interval off|k1|left|right] "
+        << "[--round42-static-architecture off|st-k4-p-core|st-k4-p-core-hierarchical|st-k4-p-core-factored|external-k2-left|external-k2-right|paired-k4-lower|paired-k4-upper|paired-k4-lower-factored|paired-k4-upper-factored] "
+        << "[--round42-static-solve mip|root-lp] "
+        << "[--round42-terminal-sibling-coalescing off|core|core-factored] "
+        << "[--round43-envelope-refinement off|atlas|algorithm] "
+        << "[--round43-initial-k0 1|4] [--round43-lookahead-depth 1|2] "
+        << "[--round43-rho <value>] [--round43-score d|max-d-c|old|no-adaptive] "
+        << "[--round43-envelope-mode none|constant|single|iterated] "
+        << "[--round44-envelope-tail-repair off|atlas|algorithm] "
+        << "[--round44-initial-k0 4] "
+        << "[--round44-lookahead-policy fixed-d1|fixed-d2|frontier-d2] "
+        << "[--round44-envelope-injection none|all|violated|active-one] "
+        << "[--round44-envelope-scope parent|nested] "
+        << "[--round44-refinement-family no-adaptive|c6-overlay|veto|veto-promotion|f|f-mroot|h|mroot] "
+        << "[--round44-rho-f <value>] [--round44-rho-m <value>] [--round44-rho-h <value>] "
+        << "[--round44-rank1-cuts off|on] [--round44-mip-starts off|verified] "
+        << "[--round44-frontier-consolidation off|singleton|pair|block] "
+        << "[--round45-adaptive-parametric-partition off|atlas|algorithm] "
+        << "[--round45-initial-k0 1|4] "
+        << "[--round45-timing-rule old-c6|d-r43|veto-f|f|f-mroot|h|mroot|gamma-positive|gamma-threshold|gamma-veto|decisive-gamma|no-adaptive] "
+        << "[--round45-rho-gamma <value>] "
+        << "[--round45-point-rule midpoint|pmm|fpmm] "
+        << "[--round45-minimum-child-width <value>] "
+        << "[--round45-counterfactual-mode off|retain|midpoint|pmm|fpmm] "
         << "[--heuristic-candidates-csv <path>] "
         << "[--large-instance-mode auto|off|force] [--large-lb-mode none|inventory-only|movement-projection|column-pool-relaxation|auto] "
         << "[--pricing-engine exact-label|ng-dssr|hybrid] "
@@ -165,7 +194,7 @@ void usage() {
         << "[--pricing-final-verifier true|false] [--pricing-verifier-time <seconds>] "
         << "[--pricing-verifier-checkpoint <path>] [--pricing-verifier-resume <path>] "
         << "[--pricing-verifier-mode label-dp|route-mask-dp|auto] "
-        << "[--algorithm-preset paper-gf-tailored-bc|paper-gf-compact-bc|paper-gf-bpc-core|paper-bpc-core|paper-bpc-core-adaptive|paper-exact-v20-certificate|paper-exact-portfolio|paper-bpc-experimental|diagnostic-large] "
+        << "[--algorithm-preset paper-gf-tailored-bc|research-gf-adaptive-gamma-veto|paper-gf-adaptive-gamma-veto|paper-gf-compact-bc|paper-gf-bpc-core|paper-bpc-core|paper-bpc-core-adaptive|paper-exact-v20-certificate|paper-exact-portfolio|paper-bpc-experimental|diagnostic-large] "
         << "[--production-preset <preset-alias>] [--incumbent-archive-auto true|false] "
         << "[--incumbent-archive-dir <dir>]\n";
 }
@@ -205,6 +234,31 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.algorithm_preset = "custom";
     }
     if (opt.algorithm_preset == "custom") return;
+
+    if (opt.algorithm_preset == "paper-gf-adaptive-gamma-veto" ||
+        opt.algorithm_preset == "research-gf-adaptive-gamma-veto") {
+        // Keep the former paper-facing name only as a compatibility alias
+        // while the Round 45 completion gates are pending.
+        const std::string requested = "research-gf-adaptive-gamma-veto";
+        opt.algorithm_preset = "paper-gf-tailored-bc";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = requested;
+        opt.frontier_execution_mode = "external-gini-tree";
+        opt.external_gini_backend = "gurobi";
+        opt.external_gini_lifecycle = "round31-open-native-bounded";
+        opt.external_gini_scheduling = "round31-nonblocking-native-bound";
+        opt.external_gini_warm_start = false;
+        opt.round34_c6_startup_variant = "hga-full";
+        opt.round43_envelope_refinement = "off";
+        opt.round44_envelope_tail_repair = "off";
+        opt.round45_adaptive_parametric_partition = "algorithm";
+        opt.round45_initial_k0 = 4;
+        opt.round45_timing_rule = "gamma-veto";
+        opt.round45_rho_gamma = 0.012;
+        opt.round45_point_rule = "midpoint";
+        opt.round45_minimum_child_width = 1e-4;
+        return;
+    }
 
     if (opt.algorithm_preset == "paper-gf-compact-bc" ||
         opt.algorithm_preset == "paper-gf-interval-bc" ||
@@ -1177,6 +1231,42 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round36-c6-causal-arm") opt.round36_c6_causal_arm = requireValue(i, argc, argv);
         else if (arg == "--round36-c6-split-normalization") opt.round36_c6_split_normalization = requireValue(i, argc, argv);
         else if (arg == "--round37-c6-geometry-policy") opt.round37_c6_geometry_policy = requireValue(i, argc, argv);
+        else if (arg == "--round40-c6-coarse-start") opt.round40_c6_coarse_start = requireValue(i, argc, argv);
+        else if (arg == "--round40-c6-ub-geometry") opt.round40_c6_ub_geometry = requireValue(i, argc, argv);
+        else if (arg == "--round41-static-segmented-gini") opt.round41_static_segmented_gini = requireValue(i, argc, argv);
+        else if (arg == "--round41-static-segmented-solve") opt.round41_static_segmented_solve = requireValue(i, argc, argv);
+        else if (arg == "--round41-root-reference-interval") opt.round41_root_reference_interval = requireValue(i, argc, argv);
+        else if (arg == "--round42-static-architecture") opt.round42_static_architecture = requireValue(i, argc, argv);
+        else if (arg == "--round42-static-solve") opt.round42_static_solve = requireValue(i, argc, argv);
+        else if (arg == "--round42-terminal-sibling-coalescing") opt.round42_terminal_sibling_coalescing = requireValue(i, argc, argv);
+        else if (arg == "--round43-envelope-refinement") opt.round43_envelope_refinement = requireValue(i, argc, argv);
+        else if (arg == "--round43-initial-k0") opt.round43_initial_k0 = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round43-lookahead-depth") opt.round43_lookahead_depth = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round43-rho") opt.round43_rho = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round43-score") opt.round43_score = requireValue(i, argc, argv);
+        else if (arg == "--round43-envelope-mode") opt.round43_envelope_mode = requireValue(i, argc, argv);
+        else if (arg == "--round43-width-measure") opt.round43_width_measure = requireValue(i, argc, argv);
+        else if (arg == "--round43-lifted-cuts") opt.round43_lifted_cuts = requireValue(i, argc, argv);
+        else if (arg == "--round43-frontier-consolidation") opt.round43_frontier_consolidation = requireValue(i, argc, argv);
+        else if (arg == "--round44-envelope-tail-repair") opt.round44_envelope_tail_repair = requireValue(i, argc, argv);
+        else if (arg == "--round44-initial-k0") opt.round44_initial_k0 = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round44-lookahead-policy") opt.round44_lookahead_policy = requireValue(i, argc, argv);
+        else if (arg == "--round44-envelope-injection") opt.round44_envelope_injection = requireValue(i, argc, argv);
+        else if (arg == "--round44-envelope-scope") opt.round44_envelope_scope = requireValue(i, argc, argv);
+        else if (arg == "--round44-refinement-family") opt.round44_refinement_family = requireValue(i, argc, argv);
+        else if (arg == "--round44-rho-f") opt.round44_rho_f = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round44-rho-m") opt.round44_rho_m = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round44-rho-h") opt.round44_rho_h = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round44-rank1-cuts") opt.round44_rank1_cuts = requireValue(i, argc, argv);
+        else if (arg == "--round44-mip-starts") opt.round44_mip_starts = requireValue(i, argc, argv);
+        else if (arg == "--round44-frontier-consolidation") opt.round44_frontier_consolidation = requireValue(i, argc, argv);
+        else if (arg == "--round45-adaptive-parametric-partition") opt.round45_adaptive_parametric_partition = requireValue(i, argc, argv);
+        else if (arg == "--round45-initial-k0") opt.round45_initial_k0 = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round45-timing-rule") opt.round45_timing_rule = requireValue(i, argc, argv);
+        else if (arg == "--round45-rho-gamma") opt.round45_rho_gamma = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round45-point-rule") opt.round45_point_rule = requireValue(i, argc, argv);
+        else if (arg == "--round45-minimum-child-width") opt.round45_minimum_child_width = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round45-counterfactual-mode") opt.round45_counterfactual_mode = requireValue(i, argc, argv);
         else if (arg == "--heuristic-candidates-csv") opt.heuristic_candidates_csv = requireValue(i, argc, argv);
         else if (arg == "--large-instance-mode") opt.large_instance_mode = requireValue(i, argc, argv);
         else if (arg == "--large-lb-mode") opt.large_lb_mode = requireValue(i, argc, argv);
@@ -1476,6 +1566,47 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         lowerAscii(opt.round36_c6_split_normalization);
     opt.round37_c6_geometry_policy =
         lowerAscii(opt.round37_c6_geometry_policy);
+    opt.round40_c6_coarse_start =
+        lowerAscii(opt.round40_c6_coarse_start);
+    opt.round40_c6_ub_geometry =
+        lowerAscii(opt.round40_c6_ub_geometry);
+    opt.round41_static_segmented_gini =
+        lowerAscii(opt.round41_static_segmented_gini);
+    opt.round41_static_segmented_solve =
+        lowerAscii(opt.round41_static_segmented_solve);
+    opt.round41_root_reference_interval =
+        lowerAscii(opt.round41_root_reference_interval);
+    opt.round42_static_architecture =
+        lowerAscii(opt.round42_static_architecture);
+    opt.round42_static_solve = lowerAscii(opt.round42_static_solve);
+    opt.round42_terminal_sibling_coalescing =
+        lowerAscii(opt.round42_terminal_sibling_coalescing);
+    opt.round43_envelope_refinement =
+        lowerAscii(opt.round43_envelope_refinement);
+    opt.round43_score = lowerAscii(opt.round43_score);
+    opt.round43_envelope_mode = lowerAscii(opt.round43_envelope_mode);
+    opt.round43_width_measure = lowerAscii(opt.round43_width_measure);
+    opt.round43_lifted_cuts = lowerAscii(opt.round43_lifted_cuts);
+    opt.round43_frontier_consolidation =
+        lowerAscii(opt.round43_frontier_consolidation);
+    opt.round44_envelope_tail_repair =
+        lowerAscii(opt.round44_envelope_tail_repair);
+    opt.round44_lookahead_policy = lowerAscii(opt.round44_lookahead_policy);
+    opt.round44_envelope_injection =
+        lowerAscii(opt.round44_envelope_injection);
+    opt.round44_envelope_scope = lowerAscii(opt.round44_envelope_scope);
+    opt.round44_refinement_family =
+        lowerAscii(opt.round44_refinement_family);
+    opt.round44_rank1_cuts = lowerAscii(opt.round44_rank1_cuts);
+    opt.round44_mip_starts = lowerAscii(opt.round44_mip_starts);
+    opt.round44_frontier_consolidation =
+        lowerAscii(opt.round44_frontier_consolidation);
+    opt.round45_adaptive_parametric_partition =
+        lowerAscii(opt.round45_adaptive_parametric_partition);
+    opt.round45_timing_rule = lowerAscii(opt.round45_timing_rule);
+    opt.round45_point_rule = lowerAscii(opt.round45_point_rule);
+    opt.round45_counterfactual_mode =
+        lowerAscii(opt.round45_counterfactual_mode);
     if (opt.round34_c6_startup_variant != "hga-full" &&
         opt.round34_c6_startup_variant != "hga-light-1000" &&
         opt.round34_c6_startup_variant != "simple-start") {
@@ -1524,6 +1655,286 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error(
             "Round 37 pilot requires C6 HGA-FULL, causal arm off, and proof "
             "normalization");
+    }
+    if (opt.round40_c6_coarse_start != "off" &&
+        opt.round40_c6_coarse_start != "k1-single" &&
+        opt.round40_c6_coarse_start != "k1-adaptive" &&
+        opt.round40_c6_coarse_start != "k1-adaptive-decisive") {
+        throw std::runtime_error(
+            "Unsupported --round40-c6-coarse-start: " +
+            opt.round40_c6_coarse_start);
+    }
+    if (opt.round40_c6_coarse_start != "off" &&
+        (opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 40 K=1 experiments require HGA-FULL, Round 36 off/proof, "
+            "Round 37 off, and the frozen Gurobi Auto presolve contract");
+    }
+    if (opt.round40_c6_ub_geometry != "off" &&
+        opt.round40_c6_ub_geometry != "nested-dyadic-k4") {
+        throw std::runtime_error(
+            "Unsupported --round40-c6-ub-geometry: " +
+            opt.round40_c6_ub_geometry);
+    }
+    if (opt.round40_c6_ub_geometry != "off" &&
+        (opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 40 UB geometry requires HGA-FULL, Round 36 off/proof, "
+            "Round 37 off, K=1 off, and frozen Gurobi Auto presolve");
+    }
+    if (opt.round41_static_segmented_gini != "off" &&
+        opt.round41_static_segmented_gini != "st-k2-i" &&
+        opt.round41_static_segmented_gini != "st-k2-p-core" &&
+        opt.round41_static_segmented_gini != "st-k2-p-extended") {
+        throw std::runtime_error(
+            "Unsupported --round41-static-segmented-gini: " +
+            opt.round41_static_segmented_gini);
+    }
+    if (opt.round41_static_segmented_solve != "mip" &&
+        opt.round41_static_segmented_solve != "root-lp") {
+        throw std::runtime_error(
+            "Unsupported --round41-static-segmented-solve: " +
+            opt.round41_static_segmented_solve);
+    }
+    if (opt.round41_static_segmented_gini == "off" &&
+        opt.round41_static_segmented_solve != "mip") {
+        throw std::runtime_error(
+            "Round 41 root-LP mode requires a non-off static formulation");
+    }
+    if (opt.round41_root_reference_interval != "off" &&
+        opt.round41_root_reference_interval != "k1" &&
+        opt.round41_root_reference_interval != "left" &&
+        opt.round41_root_reference_interval != "right") {
+        throw std::runtime_error(
+            "Unsupported --round41-root-reference-interval: " +
+            opt.round41_root_reference_interval);
+    }
+    if (opt.round41_root_reference_interval != "off" &&
+        (opt.round41_static_segmented_gini != "off" ||
+         opt.round41_static_segmented_solve != "mip" ||
+         opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 41 root reference requires static segmentation off, "
+            "HGA-FULL, Round 36 off/proof, Round 37 off, both Round 40 "
+            "arms off, and frozen Gurobi Auto presolve");
+    }
+    if (opt.round41_static_segmented_gini != "off" &&
+        (opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 41 static segmentation requires HGA-FULL, Round 36 "
+            "off/proof, Round 37 off, both Round 40 arms off, and frozen "
+            "Gurobi Auto presolve");
+    }
+    const std::set<std::string> round42_static_arms = {
+        "off", "st-k4-p-core", "st-k4-p-core-hierarchical",
+        "st-k4-p-core-factored", "external-k2-left",
+        "external-k2-right", "paired-k4-lower", "paired-k4-upper",
+        "paired-k4-lower-factored", "paired-k4-upper-factored",
+    };
+    if (!round42_static_arms.count(opt.round42_static_architecture)) {
+        throw std::runtime_error(
+            "Unsupported --round42-static-architecture: " +
+            opt.round42_static_architecture);
+    }
+    if (opt.round42_static_solve != "mip" &&
+        opt.round42_static_solve != "root-lp") {
+        throw std::runtime_error(
+            "Unsupported --round42-static-solve: " +
+            opt.round42_static_solve);
+    }
+    if (opt.round42_static_architecture == "off" &&
+        opt.round42_static_solve != "mip") {
+        throw std::runtime_error(
+            "Round 42 root-LP mode requires a non-off static architecture");
+    }
+    if (opt.round42_terminal_sibling_coalescing != "off" &&
+        opt.round42_terminal_sibling_coalescing != "core" &&
+        opt.round42_terminal_sibling_coalescing != "core-factored") {
+        throw std::runtime_error(
+            "Unsupported --round42-terminal-sibling-coalescing: " +
+            opt.round42_terminal_sibling_coalescing);
+    }
+    const bool round42_any = opt.round42_static_architecture != "off" ||
+        opt.round42_terminal_sibling_coalescing != "off";
+    if (round42_any &&
+        (opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.round41_static_segmented_gini != "off" ||
+         opt.round41_root_reference_interval != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 42 architectures require HGA-FULL, Round 36 off/proof, "
+            "Round 37 off, both Round 40 arms off, all Round 41 arms off, "
+            "and frozen Gurobi Auto presolve");
+    }
+    if (opt.round42_static_architecture != "off" &&
+        opt.round42_terminal_sibling_coalescing != "off") {
+        throw std::runtime_error(
+            "Round 42 static blocks and C6 sibling coalescing are mutually "
+            "exclusive experiment arms");
+    }
+    const bool round43_active =
+        opt.round43_envelope_refinement != "off";
+    const std::set<std::string> round43_execution = {
+        "off", "atlas", "algorithm"};
+    const std::set<std::string> round43_scores = {
+        "d", "max-d-c", "old", "no-adaptive"};
+    const std::set<std::string> round43_envelopes = {
+        "none", "constant", "single", "iterated"};
+    if (!round43_execution.count(opt.round43_envelope_refinement) ||
+        (opt.round43_initial_k0 != 1 && opt.round43_initial_k0 != 4) ||
+        (opt.round43_lookahead_depth != 1 &&
+         opt.round43_lookahead_depth != 2) ||
+        !std::isfinite(opt.round43_rho) || opt.round43_rho < 0.0 ||
+        opt.round43_rho > 1.0 ||
+        !round43_scores.count(opt.round43_score) ||
+        !round43_envelopes.count(opt.round43_envelope_mode) ||
+        opt.round43_width_measure != "g-mccormick-unit" ||
+        (opt.round43_lifted_cuts != "off" &&
+         opt.round43_lifted_cuts != "valid-only") ||
+        (opt.round43_frontier_consolidation != "off" &&
+         opt.round43_frontier_consolidation != "rank1")) {
+        throw std::runtime_error("Invalid Round 43 envelope-refinement arm");
+    }
+    if (round43_active &&
+        (opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.round41_static_segmented_gini != "off" ||
+         opt.round41_root_reference_interval != "off" || round42_any ||
+         opt.gurobi_presolve != -1 ||
+         opt.external_gini_scheduling !=
+             "round31-nonblocking-native-bound")) {
+        throw std::runtime_error(
+            "Round 43 requires frozen HGA-FULL C6 with Auto presolve and "
+            "all Round 36--42 research arms off");
+    }
+    const bool round44_active = opt.round44_envelope_tail_repair != "off";
+    const std::set<std::string> round44_execution = {
+        "off", "atlas", "algorithm"};
+    const std::set<std::string> round44_lookahead = {
+        "fixed-d1", "fixed-d2", "frontier-d2"};
+    const std::set<std::string> round44_injection = {
+        "none", "all", "violated", "active-one"};
+    const std::set<std::string> round44_scope = {"parent", "nested"};
+    const std::set<std::string> round44_family = {
+        "no-adaptive", "c6-overlay", "veto", "veto-promotion",
+        "f", "f-mroot", "h", "mroot"};
+    const std::set<std::string> round44_rank1 = {"off", "on"};
+    const std::set<std::string> round44_starts = {"off", "verified"};
+    const std::set<std::string> round44_consolidation = {
+        "off", "singleton", "pair", "block"};
+    if (!round44_execution.count(opt.round44_envelope_tail_repair) ||
+        opt.round44_initial_k0 != 4 ||
+        !round44_lookahead.count(opt.round44_lookahead_policy) ||
+        !round44_injection.count(opt.round44_envelope_injection) ||
+        !round44_scope.count(opt.round44_envelope_scope) ||
+        !round44_family.count(opt.round44_refinement_family) ||
+        !std::isfinite(opt.round44_rho_f) || opt.round44_rho_f < 0.0 ||
+        opt.round44_rho_f > 1.0 || !std::isfinite(opt.round44_rho_m) ||
+        opt.round44_rho_m < 0.0 || opt.round44_rho_m > 1.0 ||
+        !std::isfinite(opt.round44_rho_h) || opt.round44_rho_h < 0.0 ||
+        opt.round44_rho_h > 1.0 ||
+        !round44_rank1.count(opt.round44_rank1_cuts) ||
+        !round44_starts.count(opt.round44_mip_starts) ||
+        !round44_consolidation.count(opt.round44_frontier_consolidation)) {
+        throw std::runtime_error("Invalid Round 44 envelope tail-repair arm");
+    }
+    if (round44_active &&
+        (round43_active || opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.round41_static_segmented_gini != "off" ||
+         opt.round41_root_reference_interval != "off" || round42_any ||
+         opt.gurobi_presolve != -1 ||
+         opt.external_gini_scheduling !=
+             "round31-nonblocking-native-bound")) {
+        throw std::runtime_error(
+            "Round 44 requires frozen HGA-FULL C6 with Auto presolve and "
+            "all Round 36--43 research arms off");
+    }
+    const bool round45_active =
+        opt.round45_adaptive_parametric_partition != "off";
+    const std::set<std::string> round45_execution = {
+        "off", "atlas", "algorithm"};
+    const std::set<std::string> round45_timing = {
+        "old-c6", "d-r43", "veto-f", "f", "f-mroot", "h", "mroot",
+        "gamma-positive", "gamma-threshold", "gamma-veto",
+        "decisive-gamma", "no-adaptive"};
+    const std::set<std::string> round45_point = {
+        "midpoint", "pmm", "fpmm"};
+    const std::set<std::string> round45_counterfactual = {
+        "off", "retain", "midpoint", "pmm", "fpmm"};
+    if (!round45_execution.count(
+            opt.round45_adaptive_parametric_partition) ||
+        (opt.round45_initial_k0 != 1 && opt.round45_initial_k0 != 4) ||
+        !round45_timing.count(opt.round45_timing_rule) ||
+        !round45_point.count(opt.round45_point_rule) ||
+        !round45_counterfactual.count(opt.round45_counterfactual_mode) ||
+        !std::isfinite(opt.round45_rho_gamma) ||
+        opt.round45_rho_gamma < 0.0 ||
+        !std::isfinite(opt.round45_minimum_child_width) ||
+        opt.round45_minimum_child_width <= 0.0) {
+        throw std::runtime_error(
+            "Invalid Round 45 adaptive parametric-partition arm");
+    }
+    if (opt.round45_counterfactual_mode != "off" &&
+        (!round45_active ||
+         opt.round45_adaptive_parametric_partition != "algorithm" ||
+         opt.round45_initial_k0 != 1 ||
+         (opt.round45_counterfactual_mode != "retain" &&
+          opt.round45_counterfactual_mode != opt.round45_point_rule))) {
+        throw std::runtime_error(
+            "Round 45 counterfactual mode requires algorithm execution, K0=1, "
+            "and a matching split-point rule");
+    }
+    if (round45_active &&
+        (round43_active || round44_active ||
+         opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.round41_static_segmented_gini != "off" ||
+         opt.round41_root_reference_interval != "off" || round42_any ||
+         opt.gurobi_presolve != -1 ||
+         opt.external_gini_scheduling !=
+             "round31-nonblocking-native-bound")) {
+        throw std::runtime_error(
+            "Round 45 requires frozen HGA-FULL C6 with Auto presolve and "
+            "all Round 36--44 research arms off");
     }
     if (opt.primal_heuristic_stop != "generation-stagnation") {
         opt.primal_heuristic_stop = "legacy-time";
@@ -10480,6 +10891,18 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         opt.round36_c6_split_normalization;
     result.round37_c6_geometry_policy =
         opt.round37_c6_geometry_policy;
+    result.round40_c6_coarse_start = opt.round40_c6_coarse_start;
+    result.round40_c6_ub_geometry = opt.round40_c6_ub_geometry;
+    result.round41_static_segmented_gini =
+        opt.round41_static_segmented_gini;
+    result.round41_static_segmented_solve =
+        opt.round41_static_segmented_solve;
+    result.round41_root_reference_interval =
+        opt.round41_root_reference_interval;
+    result.round42_static_architecture = opt.round42_static_architecture;
+    result.round42_static_solve = opt.round42_static_solve;
+    result.round42_terminal_sibling_coalescing =
+        opt.round42_terminal_sibling_coalescing;
     ebrp::PricingOptions bpc_pricing_options;
     applyPricingOptionsFromSolve(instance, opt, bpc_pricing_options);
     result.bpc_pricing_engine_requested = bpc_pricing_options.pricing_engine;

@@ -1,0 +1,43 @@
+{
+  "development_results_observed": false,
+  "different_mechanisms": true,
+  "executable_sha256": "c6cd3f8c3d0220da87f96c891dc2cbbe493f6cc6e2d7b64b31210b7993e1e7fd",
+  "finalist_count": 2,
+  "finalist_tags": [
+    "noadaptive",
+    "veto-f05"
+  ],
+  "frozen_before_development_extension": true,
+  "mechanism6_summaries": [
+    {
+      "c6_advantage_retained": true,
+      "certified_rows": 6,
+      "correctness": true,
+      "family": "no-adaptive",
+      "kind": "envelope",
+      "major_gate": true,
+      "no_severe_pgrb_regression": true,
+      "row_count": 6,
+      "shifted_time_gmean": 0.16918602008332592,
+      "shifted_work_gmean": 0.1570768243873391,
+      "tag": "noadaptive",
+      "worst_shifted_work_over_pgrb": 1.1133692418370567
+    },
+    {
+      "c6_advantage_retained": true,
+      "certified_rows": 6,
+      "correctness": true,
+      "family": "veto",
+      "kind": "conservative",
+      "major_gate": true,
+      "no_severe_pgrb_regression": true,
+      "row_count": 6,
+      "shifted_time_gmean": 0.1821344565396724,
+      "shifted_work_gmean": 0.16306836579732778,
+      "tag": "veto-f05",
+      "worst_shifted_work_over_pgrb": 1.166981567816621
+    }
+  ],
+  "schema": "round44-stage3-development-freeze-v1",
+  "validation_observed": false
+}

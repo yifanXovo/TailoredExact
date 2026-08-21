@@ -50,6 +50,10 @@ set(EXACT_EBRP_LIB_SOURCES
   src/ControllingLeafScheduler.cpp
   src/GiniBranching.cpp
   src/GiniFrontierGeometry.cpp
+  src/GiniEnvelopeRefinement.cpp
+  src/GiniEnvelopeTailRepair.cpp
+  src/GiniAdaptiveParametric.cpp
+  src/StaticSegmentedGini.cpp
   src/IntervalRowFactory.cpp
   src/DispersionChildBound.cpp
   src/hga_tgbc/HgaTgbcGreedy.cpp
@@ -155,3 +159,39 @@ add_test(NAME Round36CausalTests COMMAND Round36CausalTests)
 add_executable(Round37GeometryTests tests/round37_geometry_tests.cpp)
 target_link_libraries(Round37GeometryTests PRIVATE exact_ebrp_core)
 add_test(NAME Round37GeometryTests COMMAND Round37GeometryTests)
+
+add_executable(Round40CoarseStartTests tests/round40_coarse_start_tests.cpp)
+target_link_libraries(Round40CoarseStartTests PRIVATE exact_ebrp_core)
+add_test(NAME Round40CoarseStartTests COMMAND Round40CoarseStartTests)
+
+add_executable(Round40UbGeometryTests tests/round40_ub_geometry_tests.cpp)
+target_link_libraries(Round40UbGeometryTests PRIVATE exact_ebrp_core)
+add_test(NAME Round40UbGeometryTests COMMAND Round40UbGeometryTests)
+
+add_executable(Round41StaticSegmentedTests
+    tests/round41_static_segmented_tests.cpp)
+target_link_libraries(Round41StaticSegmentedTests PRIVATE exact_ebrp_core)
+add_test(NAME Round41StaticSegmentedTests COMMAND Round41StaticSegmentedTests)
+
+add_executable(Round42StaticSegmentedTests
+    tests/round42_static_segmented_tests.cpp)
+target_link_libraries(Round42StaticSegmentedTests PRIVATE exact_ebrp_core)
+add_test(NAME Round42StaticSegmentedTests COMMAND Round42StaticSegmentedTests)
+
+add_executable(Round43EnvelopeRefinementTests
+    tests/round43_envelope_refinement_tests.cpp)
+target_link_libraries(Round43EnvelopeRefinementTests PRIVATE exact_ebrp_core)
+add_test(NAME Round43EnvelopeRefinementTests
+  COMMAND Round43EnvelopeRefinementTests)
+
+add_executable(Round44EnvelopeTailRepairTests
+    tests/round44_envelope_tail_repair_tests.cpp)
+target_link_libraries(Round44EnvelopeTailRepairTests PRIVATE exact_ebrp_core)
+add_test(NAME Round44EnvelopeTailRepairTests
+  COMMAND Round44EnvelopeTailRepairTests)
+
+add_executable(Round45AdaptiveParametricTests
+    tests/round45_adaptive_parametric_tests.cpp)
+target_link_libraries(Round45AdaptiveParametricTests PRIVATE exact_ebrp_core)
+add_test(NAME Round45AdaptiveParametricTests
+  COMMAND Round45AdaptiveParametricTests)

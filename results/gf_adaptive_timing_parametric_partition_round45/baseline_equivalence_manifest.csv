@@ -1,0 +1,6 @@
+check,status,expected,observed,evidence
+published_round44_local_remote_tree,passed,6e0637eb91c8703438e22ca97241c0c5f8dc4c82,6e0637eb91c8703438e22ca97241c0c5f8dc4c82,git show local research head and fetched PR #93 head
+clean_release_gurobi_build,passed,Release/Gurobi,GCC 14.2.0/Gurobi 13.0.2,build_round45_base
+ctest,passed,22/22,22/22,build_round45_base/Testing
+existing_python_protocol_tests,passed,all,93/93,python -m unittest discover -s tests -p *protocol_tests.py
+round44_default_off_evidence,passed,3/3,3/3,results/gf_c6_envelope_tail_repair_round44/default_off_equivalence.csv
