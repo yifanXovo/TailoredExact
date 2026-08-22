@@ -63,7 +63,9 @@ def relative_gap(value: dict[str, Any]) -> float:
 
 def row_score(stage: str, arm: str, instances: list[str]) -> tuple[Any, ...]:
     values = [result(stage, name, arm) for name in instances]
-    invalid = sum(bool(value.get("external_gini_tree_failure_reason")) or
+    # A time limit or a deliberately fail-closed endpoint is an outcome, not a
+    # correctness failure. Count only a contradictory claimed certificate.
+    invalid = sum(bool(value.get("strict_certified_original_problem")) and
                   value.get("external_gini_tree_root_coverage_valid") is False
                   for value in values)
     major = values[0]
@@ -78,9 +80,7 @@ def row_score(stage: str, arm: str, instances: list[str]) -> tuple[Any, ...]:
     times = [finite(value.get("final_process_wall_time_seconds",
                               value.get("runtime_seconds")), 1e30)
              for value in values]
-    return (invalid, relative_gap(major),
-            finite(major.get("final_process_wall_time_seconds"), 1e30),
-            relative_gap(strong), -v20_certificates,
+    return (invalid, relative_gap(major), relative_gap(strong), -v20_certificates,
             sum(gaps), sum(works), sum(times))
 
 
