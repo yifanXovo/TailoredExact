@@ -553,6 +553,9 @@ struct SolveResult {
     std::string round36_c6_split_normalization = "proof";
     std::string round37_c6_geometry_policy = "off";
     std::string round40_c6_coarse_start = "off";
+    double c6_normalized_split_threshold = 0.01;
+    bool c6_normalized_split_threshold_explicit = false;
+    std::string c6_normalized_split_threshold_source = "implicit-default";
     std::string round40_c6_ub_geometry = "off";
     long long round40_c6_nested_dyadic_level = 0;
     long long round40_c6_nested_dyadic_global_cell_count = 0;
@@ -731,6 +734,7 @@ struct SolveResult {
     std::string external_gini_tree_lp_status_ledger_path;
     std::string external_gini_tree_parent_child_bound_ledger_path;
     std::string external_gini_tree_split_decision_ledger_path;
+    std::string external_gini_tree_c6_split_decision_ledger_path;
     std::string external_gini_tree_coverage_ledger_path;
     std::string external_gini_tree_bound_inheritance_ledger_path;
     std::string external_gini_tree_row_signature_ledger_path;

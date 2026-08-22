@@ -107,6 +107,7 @@ void usage() {
         << "[--round36-c6-split-normalization proof|anchor] "
         << "[--round37-c6-geometry-policy off|pilot-weakest-prefine] "
         << "[--round40-c6-coarse-start off|k1-single|k1-adaptive|k1-adaptive-decisive] "
+        << "[--c6-normalized-split-threshold <rho>] "
         << "[--round40-c6-ub-geometry off|nested-dyadic-k4] "
         << "[--round41-static-segmented-gini off|st-k2-i|st-k2-p-core|st-k2-p-extended] "
         << "[--round41-static-segmented-solve mip|root-lp] "
@@ -1232,6 +1233,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round36-c6-split-normalization") opt.round36_c6_split_normalization = requireValue(i, argc, argv);
         else if (arg == "--round37-c6-geometry-policy") opt.round37_c6_geometry_policy = requireValue(i, argc, argv);
         else if (arg == "--round40-c6-coarse-start") opt.round40_c6_coarse_start = requireValue(i, argc, argv);
+        else if (arg == "--c6-normalized-split-threshold") {
+            opt.c6_normalized_split_threshold =
+                std::stod(requireValue(i, argc, argv));
+            opt.c6_normalized_split_threshold_explicit = true;
+        }
         else if (arg == "--round40-c6-ub-geometry") opt.round40_c6_ub_geometry = requireValue(i, argc, argv);
         else if (arg == "--round41-static-segmented-gini") opt.round41_static_segmented_gini = requireValue(i, argc, argv);
         else if (arg == "--round41-static-segmented-solve") opt.round41_static_segmented_solve = requireValue(i, argc, argv);
@@ -1663,6 +1669,12 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error(
             "Unsupported --round40-c6-coarse-start: " +
             opt.round40_c6_coarse_start);
+    }
+    if (!std::isfinite(opt.c6_normalized_split_threshold) ||
+        opt.c6_normalized_split_threshold < 0.0 ||
+        opt.c6_normalized_split_threshold > 1.0) {
+        throw std::runtime_error(
+            "--c6-normalized-split-threshold must satisfy 0 <= rho <= 1");
     }
     if (opt.round40_c6_coarse_start != "off" &&
         (opt.round34_c6_startup_variant != "hga-full" ||
@@ -10892,6 +10904,13 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.round37_c6_geometry_policy =
         opt.round37_c6_geometry_policy;
     result.round40_c6_coarse_start = opt.round40_c6_coarse_start;
+    result.c6_normalized_split_threshold =
+        opt.c6_normalized_split_threshold;
+    result.c6_normalized_split_threshold_explicit =
+        opt.c6_normalized_split_threshold_explicit;
+    result.c6_normalized_split_threshold_source =
+        opt.c6_normalized_split_threshold_explicit
+            ? "explicit" : "implicit-default";
     result.round40_c6_ub_geometry = opt.round40_c6_ub_geometry;
     result.round41_static_segmented_gini =
         opt.round41_static_segmented_gini;
