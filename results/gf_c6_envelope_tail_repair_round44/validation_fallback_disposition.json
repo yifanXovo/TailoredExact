@@ -1,0 +1,23 @@
+{
+  "all_correctness_gates": true,
+  "c6_strong_win_advantage_retained": true,
+  "candidate": "veto-f05",
+  "certified_rows": 7,
+  "configuration_sha256": "dbfeaa96f349cf48d28c3b77445c332a3b6741a998c16191c4b3f6d93b545143",
+  "material_losses": 4,
+  "material_wins": 3,
+  "material_wins_at_least_losses": false,
+  "no_post_stage_tuning": true,
+  "no_severe_pgrb_regression": true,
+  "passes_all_gates": false,
+  "row_count": 7,
+  "schema": "round44-validation-disposition-v1",
+  "shifted_time_gmean": 1.6441852572920268,
+  "shifted_work_gmean": 1.2075967620575152,
+  "stage": "validation",
+  "thresholds": {
+    "material_work_deadband": 0.05,
+    "shifted_time_gmean_max": 1.05,
+    "shifted_work_gmean_max": 1.0
+  }
+}

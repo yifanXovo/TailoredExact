@@ -13,7 +13,9 @@ enum class ControllingLeafStatus {
     Fathomed,
     Empty,
     Invalid,
-    Replaced
+    Replaced,
+    TerminalReady,
+    Coalesced
 };
 
 std::string controllingLeafStatusName(ControllingLeafStatus status);
@@ -63,6 +65,8 @@ struct ControllingLeaf {
     std::string latest_checkpoint_rejection_reason = "not_seen";
     std::string latest_solver_final_status = "not_run";
     std::string closure_source;
+    std::string coalesced_block_id;
+    std::vector<std::string> coverage_member_ids;
     std::string instance_hash;
     std::string model_fingerprint;
     std::string formulation_profile;
@@ -107,6 +111,14 @@ public:
                    ControllingLeafStatus status,
                    const std::string& closure_source,
                    std::string* reason = nullptr);
+    bool areExactLiveSiblings(const std::string& left_id,
+                              const std::string& right_id,
+                              std::string* reason = nullptr) const;
+    bool coalesceSiblingLeavesAtomically(
+        const std::string& left_id,
+        const std::string& right_id,
+        const ControllingLeaf& union_block,
+        std::string* reason = nullptr);
     bool recordAttempt(const std::string& leaf_id,
                        const ControllingLeafAttempt& attempt,
                        double elapsed_start_seconds,
