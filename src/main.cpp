@@ -110,6 +110,7 @@ void usage() {
         << "[--c6-normalized-split-threshold <rho>] "
         << "[--round47-c6-adaptive-mass off|adaptive-mass|adaptive-mass-contraction] "
         << "[--round47-c6-adaptive-mass-tau <tau>] [--round48-k1-amf off|k1-amf] "
+        << "[--round49-k1-am-rc off|d-rcd] "
         << "[--round48-counterfactual-mode off|retain|midpoint] "
         << "[--round48-counterfactual-interval <leaf-id>] "
         << "[--round40-c6-ub-geometry off|nested-dyadic-k4] "
@@ -1251,6 +1252,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         }
         else if (arg == "--round48-k1-amf")
             opt.round48_k1_amf = requireValue(i, argc, argv);
+        else if (arg == "--round49-k1-am-rc")
+            opt.round49_k1_am_rc = requireValue(i, argc, argv);
         else if (arg == "--round48-counterfactual-mode")
             opt.round48_counterfactual_mode = requireValue(i, argc, argv);
         else if (arg == "--round48-counterfactual-interval")
@@ -1631,6 +1634,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     opt.round45_counterfactual_mode =
         lowerAscii(opt.round45_counterfactual_mode);
     opt.round48_k1_amf = lowerAscii(opt.round48_k1_amf);
+    opt.round49_k1_am_rc = lowerAscii(opt.round49_k1_am_rc);
     opt.round48_counterfactual_mode =
         lowerAscii(opt.round48_counterfactual_mode);
     if (opt.round34_c6_startup_variant != "hga-full" &&
@@ -1754,6 +1758,37 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             "Round 48 K1-AMF requires frozen K0=1 midpoint K1-AM, explicit "
             "tau=0.07915, contraction off, Auto presolve, and every other "
             "Round 36-45 research mechanism off");
+    }
+    if (opt.round49_k1_am_rc != "off" &&
+        opt.round49_k1_am_rc != "d-rcd") {
+        throw std::runtime_error(
+            "Unsupported --round49-k1-am-rc: " + opt.round49_k1_am_rc);
+    }
+    if (opt.round49_k1_am_rc == "d-rcd" &&
+        (opt.round48_k1_amf != "off" ||
+         opt.round48_counterfactual_mode != "off" ||
+         opt.round40_c6_coarse_start != "k1-adaptive" ||
+         opt.round47_c6_adaptive_mass != "adaptive-mass" ||
+         !opt.round47_c6_adaptive_mass_tau_explicit ||
+         std::fabs(opt.round47_c6_adaptive_mass_tau - 0.07915) > 1e-15 ||
+         opt.external_gini_scheduling != "round31-nonblocking-native-bound" ||
+         opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.round41_static_segmented_gini != "off" ||
+         opt.round41_root_reference_interval != "off" ||
+         opt.round42_static_architecture != "off" ||
+         opt.round42_terminal_sibling_coalescing != "off" ||
+         opt.round43_envelope_refinement != "off" ||
+         opt.round44_envelope_tail_repair != "off" ||
+         opt.round45_adaptive_parametric_partition != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 49 K1-AM-RC requires frozen K0=1 midpoint K1-AM, "
+            "explicit tau=0.07915, D-RCD, Auto presolve, no AMF or "
+            "counterfactual, and every other Round 36-48 mechanism off");
     }
     if (opt.round48_counterfactual_mode != "off" &&
         opt.round48_counterfactual_mode != "retain" &&
@@ -11014,6 +11049,7 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.round47_c6_adaptive_mass_tau_explicit =
         opt.round47_c6_adaptive_mass_tau_explicit;
     result.round48_k1_amf = opt.round48_k1_amf;
+    result.round49_k1_am_rc = opt.round49_k1_am_rc;
     result.round48_counterfactual_mode = opt.round48_counterfactual_mode;
     result.round48_counterfactual_interval =
         opt.round48_counterfactual_interval;

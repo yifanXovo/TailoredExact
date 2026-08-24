@@ -33,6 +33,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/ExternalGiniTree.cpp
   src/PaperExternalGiniTree.cpp
   src/Round48K1AMF.cpp
+  src/Round49K1RC.cpp
   src/ReplicaExternalGiniTree.cpp
   src/ConnectivityFlow.cpp
   src/Bounds.cpp
@@ -212,3 +213,7 @@ add_test(NAME Round48K1AMFTests COMMAND Round48K1AMFTests)
 
 add_executable(Round49RCOfflineExtract src/round49_rc_extract_main.cpp)
 target_link_libraries(Round49RCOfflineExtract PRIVATE exact_ebrp_core)
+
+add_executable(Round49K1LPPrimalDualTests tests/round49_k1_rc_tests.cpp)
+target_link_libraries(Round49K1LPPrimalDualTests PRIVATE exact_ebrp_core)
+add_test(NAME Round49K1LPPrimalDualTests COMMAND Round49K1LPPrimalDualTests)

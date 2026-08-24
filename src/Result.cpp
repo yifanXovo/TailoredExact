@@ -1675,6 +1675,38 @@ std::string resultToJson(const SolveResult& input) {
         << jsonEscape(result.round48_artifact_manifest_path) << "\",\n";
     out << "  \"round48_completion_marker_path\": \""
         << jsonEscape(result.round48_completion_marker_path) << "\",\n";
+    out << "  \"round49_k1_am_rc\": \""
+        << jsonEscape(result.round49_k1_am_rc) << "\",\n";
+    out << "  \"round49_rc_profile_version\": \""
+        << jsonEscape(result.round49_rc_profile_version) << "\",\n";
+    out << "  \"round49_rc_decision_count\": "
+        << result.round49_rc_decision_count << ",\n";
+    out << "  \"round49_rc_valid_decision_count\": "
+        << result.round49_rc_valid_decision_count << ",\n";
+    out << "  \"round49_rc_rescue_count\": "
+        << result.round49_rc_rescue_count << ",\n";
+    out << "  \"round49_rc_invalid_profile_fallback_count\": "
+        << result.round49_rc_invalid_profile_fallback_count << ",\n";
+    out << "  \"round49_rc_extra_lp_count\": "
+        << result.round49_rc_extra_lp_count << ",\n";
+    out << "  \"round49_rc_extra_mip_count\": "
+        << result.round49_rc_extra_mip_count << ",\n";
+    out << "  \"round49_rc_max_primitive_variable_count\": "
+        << result.round49_rc_max_primitive_variable_count << ",\n";
+    out << "  \"round49_rc_decision_ledger_path\": \""
+        << jsonEscape(result.round49_rc_decision_ledger_path) << "\",\n";
+    out << "  \"round49_rc_variable_domain_ledger_path\": \""
+        << jsonEscape(result.round49_rc_variable_domain_ledger_path) << "\",\n";
+    out << "  \"round49_lp_primal_dual_ledger_path\": \""
+        << jsonEscape(result.round49_lp_primal_dual_ledger_path) << "\",\n";
+    out << "  \"round49_model_size_ledger_path\": \""
+        << jsonEscape(result.round49_model_size_ledger_path) << "\",\n";
+    out << "  \"round49_certificate_ledger_path\": \""
+        << jsonEscape(result.round49_certificate_ledger_path) << "\",\n";
+    out << "  \"round49_artifact_manifest_path\": \""
+        << jsonEscape(result.round49_artifact_manifest_path) << "\",\n";
+    out << "  \"round49_completion_marker_path\": \""
+        << jsonEscape(result.round49_completion_marker_path) << "\",\n";
     out << "  \"round48_counterfactual_mode\": \""
         << jsonEscape(result.round48_counterfactual_mode) << "\",\n";
     out << "  \"round48_counterfactual_interval\": \""

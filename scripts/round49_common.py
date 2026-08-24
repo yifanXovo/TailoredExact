@@ -83,3 +83,46 @@ def candidate_command(item, run_dir, process_cap, executable, rule):
     replace_option(command, "--round49-k1-am-rc", rule)
     return command
 
+
+def identity(rule: str = "d-rcd"):
+    if rule != "d-rcd":
+        raise ValueError(f"rule is outside the frozen live menu: {rule}")
+    value = {
+        "algorithm": "K1-AM-RC-A",
+        "runtime_mode": "K1-AM-RC",
+        "rule": rule,
+        "summary": "D",
+        "rescue_condition": "RCD",
+        "K0": 1,
+        "point_rule": "midpoint",
+        "tau": TAU,
+        "profile_version": "round49-primitive-integer-reduced-cost-v1",
+        "primitive_registry_version":
+            "round49-primitive-integer-variable-registry-v1",
+        "primitive_families": [row[0] for row in PRIMITIVE_FAMILIES],
+        "new_continuous_rescue_threshold": False,
+        "family_weights": False,
+        "learned_coefficients": False,
+        "size_depth_width_rule": False,
+        "rho_cap": False,
+        "contraction": False,
+        "root_processing": False,
+        "model_chain_inheritance_change": False,
+        "extra_lp_queries": 0,
+        "extra_mip_queries": 0,
+        "amf_v1": "off",
+        "gamma_veto": "off",
+        "Gamma_sum": "off",
+        "round43": "off",
+        "round44": "off",
+        "round45": "off",
+        "PMM": "off",
+        "FPMM": "off",
+        "rank1": "off",
+        "frontier_consolidation": "off",
+        "verified_mip_starts": "off",
+        "solver": {"Presolve": "Auto", "Seed": 0, "Threads": 1,
+                   "MIPGap": 0.0, "MIPGapAbs": 0.0},
+    }
+    value["decision_identity_sha256"] = stable_hash(value)
+    return value

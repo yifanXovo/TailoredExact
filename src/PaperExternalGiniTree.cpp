@@ -11,6 +11,7 @@
 #include "GiniAdaptiveParametric.hpp"
 #include "ProcessPhaseLedger.hpp"
 #include "Round48K1AMF.hpp"
+#include "Round49K1RC.hpp"
 #include "StaticSegmentedGini.hpp"
 
 #include <algorithm>
@@ -102,6 +103,19 @@ std::string csvField(const std::string& text) {
     }
     escaped.push_back('"');
     return escaped;
+}
+
+void copyLpPrimalDualEvidence(const FixedIntervalMipOutcome& outcome,
+                              PaperLpResult& target) {
+    target.primal_values_available = outcome.lp_primal_values_available;
+    target.reduced_costs_available = outcome.lp_reduced_costs_available;
+    target.basis_status_available = outcome.lp_basis_status_available;
+    target.primal_dual_evidence_available =
+        outcome.lp_primal_dual_evidence_available;
+    target.objective_sense = outcome.lp_objective_sense;
+    target.verified_cutoff = outcome.lp_verified_cutoff;
+    target.model_fingerprint = outcome.lp_model_fingerprint;
+    target.primal_dual_variables = outcome.lp_primal_dual_variable_evidence;
 }
 
 struct PaperLeafRuntime {
@@ -1620,6 +1634,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         options.round47_c6_adaptive_mass == "adaptive-mass-contraction";
     const bool round48_active = c6_nonblocking &&
         options.round48_k1_amf == "k1-amf";
+    const bool round49_active = c6_nonblocking &&
+        options.round49_k1_am_rc == "d-rcd";
     const bool round48_counterfactual_active = c6_nonblocking &&
         options.round48_counterfactual_mode != "off";
     const bool round40_nested_dyadic = c6_nonblocking &&
@@ -1705,6 +1721,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         ? "round42-c6-terminal-sibling-block"
         : (round48_counterfactual_active
         ? "round48-k1-action-counterfactual"
+        : (round49_active
+        ? "round49-k1-am-rc"
         : (round48_active
         ? "round48-k1-amf"
         : (round47_active
@@ -1723,7 +1741,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             ? "round30-same-leaf-bound-target"
         : (c4_incremental
             ? "round29-same-leaf-in-memory-model"
-            : "fresh-per-paper-event")))))))));
+            : "fresh-per-paper-event"))))))))));
     result.external_gini_tree_scheduling =
         options.external_gini_scheduling;
     result.external_gini_tree_startup_variant = c6_nonblocking
@@ -1749,6 +1767,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     result.round48_k1_amf = options.round48_k1_amf;
     result.round48_amf_profile_version = round48_active
         ? kRound48AMFProfileVersion : "off";
+    result.round49_k1_am_rc = options.round49_k1_am_rc;
+    result.round49_rc_profile_version = round49_active
+        ? kRound49RCProfileVersion : "off";
     result.round48_counterfactual_mode = options.round48_counterfactual_mode;
     result.round48_counterfactual_interval =
         options.round48_counterfactual_interval;
@@ -1791,6 +1812,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             ? (round48_counterfactual_active
                 ? "K1-AM-COUNTERFACTUAL-" +
                     options.round48_counterfactual_mode
+                : (round49_active
+                ? "K1-AM-RC-D-RCD"
                 : (round48_active
                 ? "K1-AMF"
                 : (round47_active
@@ -1825,7 +1848,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 ? "R37-PILOT-WEAKEST-PREFINE"
                 : (round36_causal
                 ? "R36-" + options.round36_c6_causal_arm
-                : "C6-CANDIDATE")))))))))))
+                : "C6-CANDIDATE"))))))))))))
             : (c5_bound_target ? "C5-CANDIDATE" : "C4-CANDIDATE");
         result.external_gini_tree_global_row_family_count =
             static_cast<long long>(kPaperGlobalFamilies.size());
@@ -2127,9 +2150,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             instance, options, verified_seed, root_gamma_L, root_gamma_U,
             std::move(result), std::move(backend), artifact_dir);
     }
-    const auto event_path = artifact_dir / (round45_active || round48_active
+    const auto event_path = artifact_dir / (round45_active || round48_active ||
+        round49_active
         ? "interval_tree_events.csv" : "paper_tree_events.csv");
-    const auto leaf_path = artifact_dir / (round45_active || round48_active
+    const auto leaf_path = artifact_dir / (round45_active || round48_active ||
+        round49_active
         ? "interval_coverage_ledger.csv" : "paper_leaf_ledger.csv");
     const auto optimize_path = artifact_dir / (round45_active
         ? "native_optimize_ledger.csv" : "paper_optimize_ledger.csv");
@@ -2152,6 +2177,15 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     const auto round48_certificate_path = artifact_dir / "certificate_ledger.csv";
     const auto round48_artifact_manifest_path = artifact_dir / "artifact_manifest.csv";
     const auto round48_completion_marker_path = artifact_dir / "completion_marker.json";
+    const auto round49_rc_decision_path = artifact_dir / "rc_decision_ledger.csv";
+    const auto round49_rc_variable_domain_path =
+        artifact_dir / "rc_variable_domain_ledger.csv";
+    const auto round49_lp_primal_dual_path =
+        artifact_dir / "lp_primal_dual_ledger.csv";
+    const auto round49_model_size_path = artifact_dir / "model_size_ledger.csv";
+    const auto round49_certificate_path = artifact_dir / "certificate_ledger.csv";
+    const auto round49_artifact_manifest_path = artifact_dir / "artifact_manifest.csv";
+    const auto round49_completion_marker_path = artifact_dir / "completion_marker.json";
     const auto global_bound_path = artifact_dir / "global_bound_trace.csv";
     const auto native_target_path =
         artifact_dir / "native_target_ledger.csv";
@@ -2227,6 +2261,22 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         result.round48_completion_marker_path =
             round48_completion_marker_path.string();
     }
+    if (round49_active) {
+        result.round49_rc_decision_ledger_path =
+            round49_rc_decision_path.string();
+        result.round49_rc_variable_domain_ledger_path =
+            round49_rc_variable_domain_path.string();
+        result.round49_lp_primal_dual_ledger_path =
+            round49_lp_primal_dual_path.string();
+        result.round49_model_size_ledger_path =
+            round49_model_size_path.string();
+        result.round49_certificate_ledger_path =
+            round49_certificate_path.string();
+        result.round49_artifact_manifest_path =
+            round49_artifact_manifest_path.string();
+        result.round49_completion_marker_path =
+            round49_completion_marker_path.string();
+    }
     result.external_gini_tree_global_bound_trace_path =
         global_bound_path.string();
     result.external_gini_tree_native_target_ledger_path =
@@ -2246,6 +2296,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     std::ofstream round48_amf_ledger, round48_strength_ledger,
         round48_registry_ledger, round48_model_size_ledger,
         round48_certificate_ledger;
+    std::ofstream round49_rc_decision_ledger,
+        round49_rc_variable_domain_ledger, round49_lp_primal_dual_ledger,
+        round49_model_size_ledger, round49_certificate_ledger;
     std::ofstream sibling_coverage;
     std::ofstream round43_atlas_ledger, round43_envelope_ledger,
         round43_facet_ledger, round43_reuse_ledger;
@@ -2268,6 +2321,14 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         round48_registry_ledger.open(round48_registry_path);
         round48_model_size_ledger.open(round48_model_size_path);
         round48_certificate_ledger.open(round48_certificate_path);
+    }
+    if (round49_active) {
+        round49_rc_decision_ledger.open(round49_rc_decision_path);
+        round49_rc_variable_domain_ledger.open(
+            round49_rc_variable_domain_path);
+        round49_lp_primal_dual_ledger.open(round49_lp_primal_dual_path);
+        round49_model_size_ledger.open(round49_model_size_path);
+        round49_certificate_ledger.open(round49_certificate_path);
     }
     if (round42_sibling_coalescing) {
         sibling_coverage.open(sibling_coverage_path);
@@ -2318,6 +2379,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         round48_registry_ledger << std::setprecision(17);
         round48_model_size_ledger << std::setprecision(17);
         round48_certificate_ledger << std::setprecision(17);
+    }
+    if (round49_active) {
+        round49_rc_decision_ledger << std::setprecision(17);
+        round49_rc_variable_domain_ledger << std::setprecision(17);
+        round49_lp_primal_dual_ledger << std::setprecision(17);
+        round49_model_size_ledger << std::setprecision(17);
+        round49_certificate_ledger << std::setprecision(17);
     }
     global_trace << std::setprecision(17);
     native_targets << std::setprecision(17);
@@ -2411,6 +2479,47 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                "right_rows,right_columns,right_nonzeros,additional_models_built,"
                "additional_lp_queries,additional_mip_queries\n";
         round48_certificate_ledger
+            << "instance,strict_certificate,certificate_class,rejection_reason,"
+               "root_coverage,parent_child_coverage,all_leaves_closed,"
+               "all_bounds_valid,leaf_bounds_monotone,global_bound_monotone,"
+               "lifecycle_complete,feasibility_consistency,lower_bound,"
+               "verified_upper_bound,gap,false_certificate\n";
+    }
+    if (round49_active) {
+        round49_rc_decision_ledger
+            << "run_id,instance,decision_sequence,interval_id,parent_id,depth,"
+               "gamma_L,gamma_U,parent_model_fingerprint,left_model_fingerprint,"
+               "right_model_fingerprint,incumbent_epoch,B_p,B_L,B_R,U,g_L,g_R,"
+               "eta,mu,S_AM,parent_terminal,parent_optimal,left_terminal,"
+               "left_optimal,right_terminal,right_optimal,parent_primal_valid,"
+               "parent_rc_valid,parent_basis_valid,left_primal_valid,left_rc_valid,"
+               "left_basis_valid,right_primal_valid,right_rc_valid,right_basis_valid,"
+               "primitive_variable_count,rc_valid_variable_count,parent_fixed_count,"
+               "left_fixed_count,right_fixed_count,parent_tightened_count,"
+               "left_tightened_count,right_tightened_count,D_P,D_L,D_R,H_P,H_L,"
+               "H_R,disjoint_domain_count,AM_action,RC_predicted_action,final_action,"
+               "rescue_activated,profile_valid,invalid_profile_reason,selected_rule,"
+               "decision_hash\n";
+        round49_rc_variable_domain_ledger
+            << "run_id,instance,decision_sequence,interval_id,variable,family,"
+               "parent_effective_lower,parent_effective_upper,parent_rc_lower,"
+               "parent_rc_upper,parent_effective_count,parent_rc_count,parent_x,"
+               "parent_rc,parent_vbasis,left_effective_lower,left_effective_upper,"
+               "left_rc_lower,left_rc_upper,left_effective_count,left_rc_count,left_x,"
+               "left_rc,left_vbasis,right_effective_lower,right_effective_upper,"
+               "right_rc_lower,right_rc_upper,right_effective_count,right_rc_count,"
+               "right_x,right_rc,right_vbasis,exact_child_disjoint\n";
+        round49_lp_primal_dual_ledger
+            << "run_id,instance,decision_sequence,interval_id,state,state_interval_id,"
+               "model_fingerprint,incumbent_epoch,objective_sense,terminal_valid,"
+               "optimal,infeasible,bound_available,lower_bound,primal_valid,"
+               "reduced_cost_valid,basis_valid,evidence_valid,variable_count\n";
+        round49_model_size_ledger
+            << "run_id,instance,decision_sequence,interval_id,parent_rows,"
+               "parent_columns,parent_nonzeros,left_rows,left_columns,left_nonzeros,"
+               "right_rows,right_columns,right_nonzeros,additional_models_built,"
+               "additional_lp_queries,additional_mip_queries\n";
+        round49_certificate_ledger
             << "instance,strict_certificate,certificate_class,rejection_reason,"
                "root_coverage,parent_child_coverage,all_leaves_closed,"
                "all_bounds_valid,leaf_bounds_monotone,global_bound_monotone,"
@@ -3091,6 +3200,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             (leaf.id + "_lp.gurobi.log");
         request.incremental_model_reuse_enabled = incremental_model_reuse;
         request.retain_model_after_solve = incremental_model_reuse;
+        request.capture_lp_primal_dual_evidence = round49_active;
         if (!first_lp_launch_recorded) {
             recordProcessPhase(
                 options, "first_lp_optimize_launch", "start",
@@ -3120,6 +3230,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         state.lp.infeasible = outcome.infeasible;
         state.lp.bound_available = outcome.native_bound_available;
         state.lp.lower_bound = outcome.native_bound;
+        copyLpPrimalDualEvidence(outcome, state.lp);
         state.round43_lp_g_available = outcome.lp_g_value_available;
         state.round43_lp_g = outcome.lp_g_value;
         state.round43_lp_objective_available =
@@ -3196,6 +3307,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             (leaf.id + "_lp.gurobi.log");
         request.incremental_model_reuse_enabled = incremental_model_reuse;
         request.retain_model_after_solve = incremental_model_reuse;
+        request.capture_lp_primal_dual_evidence = round49_active;
         const FixedIntervalMipOutcome outcome = backend->solve(request);
         optimize << leaf.id << ",LP," << csvField(outcome.native_status)
                  << ',' << outcome.optimize_return_code << ',' << remaining
@@ -3220,6 +3332,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         state.lp.infeasible = outcome.infeasible;
         state.lp.bound_available = outcome.native_bound_available;
         state.lp.lower_bound = outcome.native_bound;
+        copyLpPrimalDualEvidence(outcome, state.lp);
         state.lp_complete = state.lp.terminal_valid;
         state.round43_lp_g_available = outcome.lp_g_value_available;
         state.round43_lp_g = outcome.lp_g_value;
@@ -5686,6 +5799,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     incremental_model_reuse;
                 request.retain_model_after_solve =
                     incremental_model_reuse;
+                request.capture_lp_primal_dual_evidence = round49_active;
                 const FixedIntervalMipOutcome outcome = backend->solve(request);
                 optimize << child.id << ",LP," << csvField(outcome.native_status)
                          << ',' << outcome.optimize_return_code << ',' << remaining
@@ -5710,6 +5824,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 child_state.lp.infeasible = outcome.infeasible;
                 child_state.lp.bound_available = outcome.native_bound_available;
                 child_state.lp.lower_bound = outcome.native_bound;
+                copyLpPrimalDualEvidence(outcome, child_state.lp);
                 child_state.lp_complete = child_state.lp.terminal_valid;
                 lp_ledger << child.id << ',' << csvField(child.parent_id) << ','
                           << child.split_depth << ',' << child.gamma_L << ','
@@ -5792,6 +5907,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             AMFFormulationProfile round48_profile;
             K1AMFDecision round48_decision;
             bool round48_decision_available = false;
+            Round49RCDomainProfile round49_profile;
+            K1AMRCDecision round49_decision;
+            bool round49_decision_available = false;
             if (round48_active && c6_split.valid &&
                 !runtime[children[0].id].lp.infeasible &&
                 !runtime[children[1].id].lp.infeasible) {
@@ -5817,6 +5935,38 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     }
                     if (round48_decision.fallback_to_am) {
                         ++result.round48_amf_invalid_profile_fallback_count;
+                    }
+                }
+            }
+            if (round49_active && c6_split.valid &&
+                !runtime[children[0].id].lp.infeasible &&
+                !runtime[children[1].id].lp.infeasible) {
+                round49_profile = buildRound49RCDomainProfile(
+                    selected_state.lp,
+                    runtime[children[0].id].lp,
+                    runtime[children[1].id].lp,
+                    verified_ub, scheduler.certificateTolerance());
+                round49_decision = evaluateK1AMRCDecision(
+                    c6_split, round49_profile, options.round49_k1_am_rc,
+                    scheduler.certificateTolerance());
+                round49_decision_available = true;
+                if (!round49_decision.valid) {
+                    c6_split.valid = false;
+                    c6_split.reason = round49_decision.reason;
+                } else {
+                    applyK1AMRCDecision(c6_split, round49_decision);
+                    ++result.round49_rc_decision_count;
+                    if (round49_profile.valid) {
+                        ++result.round49_rc_valid_decision_count;
+                    }
+                    result.round49_rc_max_primitive_variable_count = std::max(
+                        result.round49_rc_max_primitive_variable_count,
+                        round49_profile.primitive_variable_count);
+                    if (round49_decision.rescue_activated) {
+                        ++result.round49_rc_rescue_count;
+                    }
+                    if (round49_decision.fallback_to_am) {
+                        ++result.round49_rc_invalid_profile_fallback_count;
                     }
                 }
             }
@@ -5996,6 +6146,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                             : "child_infeasibility_independent_of_rho")
                         : (c6_split.launch_exact_closure
                             ? "no_strict_gain"
+                            : ((round49_active && round49_decision_available &&
+                                round49_decision.rescue_activated)
+                                ? "parameter_free_rc_domain_dominance_rescue"
                             : (((round48_active && round48_decision_available)
                                 ? round48_decision.s_amf +
                                     round48_decision.score_tolerance >=
@@ -6007,7 +6160,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                                 : c6_split.normalized_disjunction_gain + 1e-15 >=
                                     options.c6_normalized_split_threshold))
                                 ? "gain_greater_than_or_equal_to_rho"
-                                : "gain_below_rho"));
+                                : "gain_below_rho")));
                 const std::string selected_action =
                     c6_split.contract_single_child
                         ? "contract"
@@ -6176,6 +6329,148 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     round48_strength_ledger.flush();
                     round48_registry_ledger.flush();
                     round48_model_size_ledger.flush();
+                }
+                if (round49_active && round49_decision_available) {
+                    const std::string run_id =
+                        artifact_dir.parent_path().filename().string();
+                    const PaperLpResult& left_lp =
+                        runtime[children[0].id].lp;
+                    const PaperLpResult& right_lp =
+                        runtime[children[1].id].lp;
+                    const std::string rc_predicted_action =
+                        round49_decision.rescue_activated ? "split" : "retain";
+                    round49_rc_decision_ledger
+                        << csvField(run_id) << ',' << csvField(instance.name)
+                        << ',' << c6_decision_sequence << ','
+                        << csvField(bounded.id) << ','
+                        << csvField(bounded.parent_id) << ','
+                        << bounded.split_depth << ',' << bounded.gamma_L << ','
+                        << bounded.gamma_U << ','
+                        << csvField(selected_state.lp.model_fingerprint) << ','
+                        << csvField(left_lp.model_fingerprint) << ','
+                        << csvField(right_lp.model_fingerprint) << ','
+                        << verified_ub << ',' << bounded.lower_bound << ','
+                        << left_lp.lower_bound << ',' << right_lp.lower_bound
+                        << ',' << verified_ub << ',' << c6_split.g_left << ','
+                        << c6_split.g_right << ',' << c6_split.adaptive_eta
+                        << ',' << c6_split.adaptive_mu << ','
+                        << c6_split.adaptive_mass_score << ','
+                        << selected_state.lp.terminal_valid << ','
+                        << selected_state.lp.optimal << ','
+                        << left_lp.terminal_valid << ',' << left_lp.optimal
+                        << ',' << right_lp.terminal_valid << ','
+                        << right_lp.optimal << ','
+                        << selected_state.lp.primal_values_available << ','
+                        << selected_state.lp.reduced_costs_available << ','
+                        << selected_state.lp.basis_status_available << ','
+                        << left_lp.primal_values_available << ','
+                        << left_lp.reduced_costs_available << ','
+                        << left_lp.basis_status_available << ','
+                        << right_lp.primal_values_available << ','
+                        << right_lp.reduced_costs_available << ','
+                        << right_lp.basis_status_available << ','
+                        << round49_profile.primitive_variable_count << ','
+                        << round49_profile.rc_valid_variable_count << ','
+                        << round49_profile.parent.fixed_count << ','
+                        << round49_profile.left.fixed_count << ','
+                        << round49_profile.right.fixed_count << ','
+                        << round49_profile.parent.tightened_count << ','
+                        << round49_profile.left.tightened_count << ','
+                        << round49_profile.right.tightened_count << ','
+                        << round49_profile.parent.D << ','
+                        << round49_profile.left.D << ','
+                        << round49_profile.right.D << ','
+                        << round49_profile.parent.H << ','
+                        << round49_profile.left.H << ','
+                        << round49_profile.right.H << ','
+                        << round49_profile.disjoint_domain_count << ','
+                        << csvField(round49_decision.am_action) << ','
+                        << csvField(rc_predicted_action) << ','
+                        << csvField(round49_decision.final_action) << ','
+                        << round49_decision.rescue_activated << ','
+                        << round49_profile.valid << ','
+                        << csvField(round49_profile.failure_reason) << ','
+                        << csvField(round49_decision.rule) << ','
+                        << csvField(round49_decision.decision_hash) << '\n';
+                    for (const Round49RCVariableDomain& variable :
+                         round49_profile.variables) {
+                        round49_rc_variable_domain_ledger
+                            << csvField(run_id) << ','
+                            << csvField(instance.name) << ','
+                            << c6_decision_sequence << ','
+                            << csvField(bounded.id) << ','
+                            << csvField(variable.variable) << ','
+                            << csvField(variable.family) << ','
+                            << variable.parent.effective_lower << ','
+                            << variable.parent.effective_upper << ','
+                            << variable.parent.rc_lower << ','
+                            << variable.parent.rc_upper << ','
+                            << variable.parent.effective_count << ','
+                            << variable.parent.rc_count << ','
+                            << variable.parent.primal_value << ','
+                            << variable.parent.reduced_cost << ','
+                            << variable.parent.variable_basis_status << ','
+                            << variable.left.effective_lower << ','
+                            << variable.left.effective_upper << ','
+                            << variable.left.rc_lower << ','
+                            << variable.left.rc_upper << ','
+                            << variable.left.effective_count << ','
+                            << variable.left.rc_count << ','
+                            << variable.left.primal_value << ','
+                            << variable.left.reduced_cost << ','
+                            << variable.left.variable_basis_status << ','
+                            << variable.right.effective_lower << ','
+                            << variable.right.effective_upper << ','
+                            << variable.right.rc_lower << ','
+                            << variable.right.rc_upper << ','
+                            << variable.right.effective_count << ','
+                            << variable.right.rc_count << ','
+                            << variable.right.primal_value << ','
+                            << variable.right.reduced_cost << ','
+                            << variable.right.variable_basis_status << ','
+                            << variable.exact_child_disjoint << '\n';
+                    }
+                    auto write_lp_evidence = [&](const std::string& state,
+                                                 const std::string& state_id,
+                                                 const PaperLpResult& lp) {
+                        round49_lp_primal_dual_ledger
+                            << csvField(run_id) << ','
+                            << csvField(instance.name) << ','
+                            << c6_decision_sequence << ','
+                            << csvField(bounded.id) << ',' << csvField(state)
+                            << ',' << csvField(state_id) << ','
+                            << csvField(lp.model_fingerprint) << ','
+                            << lp.verified_cutoff << ',' << lp.objective_sense
+                            << ',' << lp.terminal_valid << ',' << lp.optimal
+                            << ',' << lp.infeasible << ',' << lp.bound_available
+                            << ',' << lp.lower_bound << ','
+                            << lp.primal_values_available << ','
+                            << lp.reduced_costs_available << ','
+                            << lp.basis_status_available << ','
+                            << lp.primal_dual_evidence_available << ','
+                            << lp.primal_dual_variables.size() << '\n';
+                    };
+                    write_lp_evidence("P", bounded.id, selected_state.lp);
+                    write_lp_evidence("L", children[0].id, left_lp);
+                    write_lp_evidence("R", children[1].id, right_lp);
+                    round49_model_size_ledger
+                        << csvField(run_id) << ',' << csvField(instance.name)
+                        << ',' << c6_decision_sequence << ','
+                        << csvField(bounded.id) << ','
+                        << selected_state.artifact.rows << ','
+                        << selected_state.artifact.columns << ','
+                        << selected_state.artifact.nonzeros << ','
+                        << runtime[children[0].id].artifact.rows << ','
+                        << runtime[children[0].id].artifact.columns << ','
+                        << runtime[children[0].id].artifact.nonzeros << ','
+                        << runtime[children[1].id].artifact.rows << ','
+                        << runtime[children[1].id].artifact.columns << ','
+                        << runtime[children[1].id].artifact.nonzeros
+                        << ",0,0,0\n";
+                    round49_rc_decision_ledger.flush();
+                    round49_rc_variable_domain_ledger.flush();
+                    round49_lp_primal_dual_ledger.flush();
+                    round49_model_size_ledger.flush();
                 }
                 if (round47_active &&
                     !runtime[children[0].id].lp.infeasible &&
@@ -7789,6 +8084,25 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             << result.gap << ',' << false_certificate << '\n';
         round48_certificate_ledger.flush();
     }
+    if (round49_active) {
+        const bool false_certificate =
+            result.strict_certified_original_problem && !certificate.certified;
+        round49_certificate_ledger
+            << csvField(instance.name) << ',' << certificate.certified << ','
+            << csvField(certificate.certificate_class) << ','
+            << csvField(certificate.rejection_reason) << ','
+            << result.external_gini_tree_root_coverage_valid << ','
+            << result.external_gini_tree_parent_child_coverage_valid << ','
+            << result.external_gini_tree_all_relevant_leaves_closed << ','
+            << result.external_gini_tree_all_leaf_bounds_valid << ','
+            << result.external_gini_tree_leaf_bounds_monotone << ','
+            << result.external_gini_tree_global_bound_monotone << ','
+            << result.external_gini_tree_lifecycle_complete << ','
+            << result.external_gini_tree_feasibility_consistency_gate << ','
+            << result.lower_bound << ',' << result.upper_bound << ','
+            << result.gap << ',' << false_certificate << '\n';
+        round49_certificate_ledger.flush();
+    }
     result.strict_lower_bound_source =
         round44_active
             ? "minimum_valid_parent_lp_strengthened_envelope_lp_complete_"
@@ -8012,6 +8326,65 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             << result.round48_amf_invalid_profile_fallback_count
             << ",\n  \"extra_lp_count\": " << result.round48_amf_extra_lp_count
             << ",\n  \"extra_mip_count\": " << result.round48_amf_extra_mip_count
+            << ",\n  \"failure_reason\": "
+            << csvField(result.external_gini_tree_failure_reason) << "\n}\n";
+        completion.flush();
+    }
+    if (round49_active) {
+        events.flush();
+        optimize.flush();
+        lp_ledger.flush();
+        bound_ledger.flush();
+        split_ledger.flush();
+        c6_split_ledger.flush();
+        round47_adaptive_mass_ledger.flush();
+        global_trace.flush();
+        native_targets.flush();
+        initial_decomposition.flush();
+        round49_rc_decision_ledger.flush();
+        round49_rc_variable_domain_ledger.flush();
+        round49_lp_primal_dual_ledger.flush();
+        round49_model_size_ledger.flush();
+        round49_certificate_ledger.flush();
+        std::vector<std::filesystem::path> artifact_files;
+        for (const auto& entry :
+             std::filesystem::recursive_directory_iterator(artifact_dir)) {
+            if (!entry.is_regular_file()) continue;
+            const auto path = entry.path();
+            if (path == round49_artifact_manifest_path ||
+                path == round49_completion_marker_path) continue;
+            artifact_files.push_back(path);
+        }
+        std::sort(artifact_files.begin(), artifact_files.end());
+        std::ofstream artifact_manifest(round49_artifact_manifest_path);
+        artifact_manifest << "path,sha256,size_bytes\n";
+        for (const auto& path : artifact_files) {
+            artifact_manifest << csvField(
+                std::filesystem::relative(path, artifact_dir).generic_string())
+                << ',' << fileSha256(path) << ','
+                << std::filesystem::file_size(path) << '\n';
+        }
+        artifact_manifest.flush();
+        std::ofstream completion(round49_completion_marker_path);
+        completion << std::setprecision(17)
+            << "{\n"
+            << "  \"schema\": \"round49-completion-marker-v1\",\n"
+            << "  \"completed\": " << (!hard_failure ? "true" : "false")
+            << ",\n  \"instance\": " << csvField(instance.name) << ",\n"
+            << "  \"strict_certificate\": "
+            << (certificate.certified ? "true" : "false") << ",\n"
+            << "  \"selected_rule\": "
+            << csvField(options.round49_k1_am_rc) << ",\n"
+            << "  \"profile_version\": "
+            << csvField(kRound49RCProfileVersion) << ",\n"
+            << "  \"decision_count\": " << result.round49_rc_decision_count
+            << ",\n  \"reduced_cost_valid_decision_count\": "
+            << result.round49_rc_valid_decision_count
+            << ",\n  \"rescue_count\": " << result.round49_rc_rescue_count
+            << ",\n  \"invalid_profile_fallback_count\": "
+            << result.round49_rc_invalid_profile_fallback_count
+            << ",\n  \"extra_lp_count\": " << result.round49_rc_extra_lp_count
+            << ",\n  \"extra_mip_count\": " << result.round49_rc_extra_mip_count
             << ",\n  \"failure_reason\": "
             << csvField(result.external_gini_tree_failure_reason) << "\n}\n";
         completion.flush();
