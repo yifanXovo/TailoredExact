@@ -209,3 +209,6 @@ add_test(NAME Round47AdaptiveMassTests COMMAND Round47AdaptiveMassTests)
 add_executable(Round48K1AMFTests tests/round48_k1_amf_tests.cpp)
 target_link_libraries(Round48K1AMFTests PRIVATE exact_ebrp_core)
 add_test(NAME Round48K1AMFTests COMMAND Round48K1AMFTests)
+
+add_executable(Round49RCOfflineExtract src/round49_rc_extract_main.cpp)
+target_link_libraries(Round49RCOfflineExtract PRIVATE exact_ebrp_core)
