@@ -1,0 +1,52 @@
+{
+  "accepted_changes": [],
+  "active_policy_after_iteration": "interval-mip-v0",
+  "candidate_decisions": [
+    {
+      "decision": "reject",
+      "policy": "b1-primitive-first",
+      "reason": "lost D3 qualification certificate and severe D14 capped regression"
+    },
+    {
+      "decision": "reject",
+      "policy": "b2-route-first",
+      "reason": "lost D4 and D10 core certificates"
+    },
+    {
+      "decision": "reject",
+      "policy": "b3-operation-first",
+      "reason": "severe D4 exact-row Work regression"
+    }
+  ],
+  "candidate_modes_default_off_for_reproduction": true,
+  "classification": "default_branching_retained",
+  "confirmation_opened": false,
+  "core_row_count": 36,
+  "correctness_failures": 0,
+  "false_certificates": 0,
+  "input_summary_hashes": {
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_core_b1_120s.csv": "ec23ec60af0f9bc219eec2aff1dd4a202db74394f5c4f26e5f355e01c2da168c",
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_core_b2_120s.csv": "5315e6f897733ee61e7bffc3c88e764b4689d2d63405b1753372899e4c271a74",
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_core_b3_120s.csv": "5c8723bb9561128432fbb02e7415b8f77caa6cfaf9a58a2558a094a80dd166ad",
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_core_v0_120s.csv": "40d5b5b5c997011760e47703c73da33dc81fb9c47e7db3aef7d7299e89fbf9b1",
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_qualification_b1_300s.csv": "d8126266775707f367156f594644ebb3158e4b8516027a25b259e4903839c064",
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_qualification_v0_300s.csv": "c174f1a3f0a031b6c94e9c7b2e5165140a75137a146dad9cb2063b44e7042b51"
+  },
+  "iteration": 1,
+  "model_identity_failures": 0,
+  "post_screen_tuning": false,
+  "priority_assignment_failures": 0,
+  "qualification_b1_aggregate_work_ratio": 1.0467744997237538,
+  "qualification_b1_certificate_count": 9,
+  "qualification_b1_severe_states": [
+    "D3",
+    "D14"
+  ],
+  "qualification_baseline_certificate_count": 10,
+  "qualification_row_count": 28,
+  "results_path": "results/gf_k1_interval_mip_vnext_round50/branching_candidate_results.csv",
+  "results_sha256": "8c2f54dc2b0f0756008b3381686b88dfc1ce3fe2b62bc78ed369c04652cbb447",
+  "runtime_dispatch": false,
+  "schema": "round50-branching-iteration-decision-v1",
+  "status": "complete"
+}
