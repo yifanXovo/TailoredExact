@@ -1,0 +1,3 @@
+# Evidence storage policy
+
+The branch commits source, tests, frozen manifests, compact state/domain censuses, sealed summary ledgers, reports, hashes, and reproduction commands. The root `rc_variable_domain_ledger.csv` is a decision-by-family compact projection of the full row-level variable ledger. Full per-variable rows, canonical LPs, native solver logs, development smoke output, and duplicated run trees remain local. Their paths and SHA-256 hashes are recorded in `compact_evidence_inventory.csv`; official conclusions use the sealed compact ledgers copied from each run. No complete Round 45–48 result tree is duplicated.

@@ -100,13 +100,16 @@ class Round49ProtocolTests(unittest.TestCase):
     def test_06_registry_is_semantic_and_excludes_auxiliaries(self) -> None:
         registry = common.load_json(
             common.OUT / "primitive_integer_variable_registry.json")
-        families = {row["family"] for row in registry["semantic_families"]}
+        families = {
+            row["family"] for row in registry["included_family_rules"]}
         self.assertEqual(families, {row[0] for row in common.PRIMITIVE_FAMILIES})
         excluded = " ".join(
             pattern for row in registry["always_excluded"]
             for pattern in row["patterns"])
-        for pattern in ("bit_*", "prod_*", "G", "W_GS"):
+        for pattern in ("bit_*", "prod_*", "G"):
             self.assertIn(pattern, excluded)
+        self.assertNotIn("W_GS", {
+            row["prefix"] for row in registry["included_family_rules"]})
         self.assertFalse(registry["post_outcome_selection_allowed"])
 
     def test_07_no_new_parameter_or_family_weight(self) -> None:

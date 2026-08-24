@@ -44,11 +44,29 @@ def copy_required(source: Path, target: Path) -> None:
     shutil.copyfile(source, target)
 
 
+def refresh_live_manifest(external: Path) -> None:
+    """Seal live artifacts after every solver-owned stream has closed."""
+    rows = []
+    for path in sorted(p for p in external.rglob("*") if p.is_file() and
+                       p.name not in {"artifact_manifest.csv",
+                                      "completion_marker.json"}):
+        rows.append({
+            "path": path.relative_to(external).as_posix(),
+            "sha256": common.sha256(path),
+            "size_bytes": path.stat().st_size,
+        })
+    common.write_csv(external / "artifact_manifest.csv", rows)
+
+
 def seal(run_dir: Path, record: dict[str, Any]) -> None:
     external = run_dir / "external"
     live_marker = common.load_json(external / "completion_marker.json")
     if not live_marker.get("completed"):
         raise RuntimeError(f"live completion marker is not complete: {run_dir}")
+    # The executable emits its live manifest while the final coverage and
+    # inherited Round 47 contraction streams are still in scope.  Refresh it
+    # only after process exit, without changing any solver evidence.
+    refresh_live_manifest(external)
     for name in REQUIRED_LIVE_LEDGERS:
         copy_required(external / name, run_dir / name)
     copy_required(common.OUT / "primitive_integer_variable_registry.csv",
@@ -107,6 +125,10 @@ def run_one(args: argparse.Namespace, item: dict[str, Any],
     run_dir = common.RUNS / run_id
     marker = run_dir / "completion_marker.json"
     if marker.is_file() and not args.force:
+        if args.reseal:
+            seal(run_dir, common.load_json(run_dir / "command.json"))
+            print(f"resealed: {run_id}", flush=True)
+            return
         print(f"resume: {run_id}", flush=True)
         return
     run_dir.mkdir(parents=True, exist_ok=True)
@@ -216,6 +238,7 @@ def main() -> int:
     parser.add_argument("--process-cap", type=float, required=True)
     parser.add_argument("--executable", type=Path, default=common.EXE)
     parser.add_argument("--force", action="store_true")
+    parser.add_argument("--reseal", action="store_true")
     args = parser.parse_args()
     if args.process_cap != 300.0:
         raise SystemExit("Round 49 Stage 3 is frozen at exactly 300 seconds")
