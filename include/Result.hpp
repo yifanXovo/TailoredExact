@@ -556,6 +556,16 @@ struct SolveResult {
     double c6_normalized_split_threshold = 0.01;
     bool c6_normalized_split_threshold_explicit = false;
     std::string c6_normalized_split_threshold_source = "implicit-default";
+    std::string round47_c6_adaptive_mass = "off";
+    double round47_c6_adaptive_mass_tau = 0.07915;
+    bool round47_c6_adaptive_mass_tau_explicit = false;
+    long long round47_single_child_contraction_count = 0;
+    long long round47_both_child_infeasible_closure_count = 0;
+    long long round47_adaptive_mass_finite_decision_count = 0;
+    long long round47_adaptive_mass_extra_lp_count = 0;
+    long long round47_adaptive_mass_extra_mip_count = 0;
+    std::string round47_adaptive_mass_decision_ledger_path;
+    std::string round47_contraction_ledger_path;
     std::string round40_c6_ub_geometry = "off";
     long long round40_c6_nested_dyadic_level = 0;
     long long round40_c6_nested_dyadic_global_cell_count = 0;

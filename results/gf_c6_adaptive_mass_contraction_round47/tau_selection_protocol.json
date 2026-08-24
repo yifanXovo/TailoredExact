@@ -1,0 +1,20 @@
+{
+  "nonseparable_order": [
+    "retain K4 major",
+    "retain K1 major",
+    "split K1 moderate",
+    "split K1 high",
+    "maximize minimum margin"
+  ],
+  "primary_harmful": [
+    "H1_k4_major_critical",
+    "H2_k1_major_root"
+  ],
+  "primary_useful": [
+    "B1_k1_moderate_root",
+    "B2_k1_high_root"
+  ],
+  "retuning_after_runtime": false,
+  "schema": "round47-tau-selection-protocol-v1",
+  "separable_rule": "use 0.07 iff strictly inside; otherwise concise midpoint"
+}

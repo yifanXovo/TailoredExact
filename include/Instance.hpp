@@ -458,6 +458,12 @@ struct SolveOptions {
     // historical old-C6 reconstructions remain frozen at 0.01.
     double c6_normalized_split_threshold = 0.01;
     bool c6_normalized_split_threshold_explicit = false;
+    // Round 47 lightweight residual-mass gate. "off" preserves every
+    // historical C6 path. Both research modes use the same globally frozen
+    // tau and only the already-computed midpoint child LP outcomes.
+    std::string round47_c6_adaptive_mass = "off";
+    double round47_c6_adaptive_mass_tau = 0.07915;
+    bool round47_c6_adaptive_mass_tau_explicit = false;
     // Round 40 incumbent-stable geometry research. "off" preserves the
     // validated incumbent-rescaled K=4 cover. The experimental policy uses
     // only a deterministic dyadic hierarchy rooted at the mathematical Gini
