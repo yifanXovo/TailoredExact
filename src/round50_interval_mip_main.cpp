@@ -27,6 +27,7 @@ namespace {
 using Clock = std::chrono::steady_clock;
 
 struct Arguments {
+    std::filesystem::path executable;
     std::string mode = "solve";
     std::string state_id;
     std::filesystem::path input;
@@ -83,6 +84,7 @@ double elapsed(const Clock::time_point& started) {
 
 Arguments parseArguments(int argc, char** argv) {
     Arguments out;
+    out.executable = std::filesystem::absolute(argv[0]);
     auto value = [&](int& index) -> std::string {
         if (++index >= argc) throw std::runtime_error("missing option value");
         return argv[index];
@@ -127,6 +129,8 @@ void writeCommand(const Arguments& args, const std::filesystem::path& path) {
     std::ofstream out(path);
     out << std::setprecision(17)
         << "{\n  \"schema\": \"round50-fixed-interval-command-v1\",\n"
+        << "  \"executable_path\": \"" << jsonEscape(args.executable.generic_string()) << "\",\n"
+        << "  \"executable_sha256\": \"" << ebrp::fileSha256(args.executable) << "\",\n"
         << "  \"mode\": \"" << jsonEscape(args.mode) << "\",\n"
         << "  \"state_id\": \"" << jsonEscape(args.state_id) << "\",\n"
         << "  \"input\": \"" << jsonEscape(args.input.generic_string()) << "\",\n"
