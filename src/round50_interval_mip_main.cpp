@@ -274,7 +274,14 @@ void writeStateIdentity(const ebrp::Instance& instance,
         << "  \"complete_objective\": \"G+0.15*weighted_absolute_satisfaction_deviation\",\n"
         << "  \"model_fingerprint\": \"" << artifact.sha256 << "\",\n"
         << "  \"row_bound_signature\": \"" << artifact.row_signature << "\",\n"
-        << "  \"formulation_profile\": \"Interval-MIP-v0-paper-safe\"\n}\n";
+        << "  \"formulation_profile\": \""
+        << (artifact.exact_duplicate_row_elimination
+                ? "Interval-MIP-v0-paper-safe+C1-exact-duplicate-elimination"
+                : "Interval-MIP-v0-paper-safe") << "\",\n"
+        << "  \"exact_duplicate_row_elimination\": "
+        << boolJson(artifact.exact_duplicate_row_elimination) << ",\n"
+        << "  \"exact_duplicate_rows_omitted\": "
+        << artifact.exact_duplicate_rows_omitted << "\n}\n";
     std::ofstream model(args.artifact_dir / "model_fingerprint.json");
     model << "{\n  \"schema\": \"round50-model-fingerprint-v1\",\n"
           << "  \"sha256\": \"" << artifact.sha256 << "\",\n"
@@ -282,16 +289,22 @@ void writeStateIdentity(const ebrp::Instance& instance,
           << "  \"scope\": \"" << jsonEscape(artifact.model_scope) << "\",\n"
           << "  \"rows\": " << artifact.rows << ",\n"
           << "  \"columns\": " << artifact.columns << ",\n"
-          << "  \"nonzeros\": " << artifact.nonzeros << "\n}\n";
+          << "  \"nonzeros\": " << artifact.nonzeros << ",\n"
+          << "  \"exact_duplicate_row_elimination\": "
+          << boolJson(artifact.exact_duplicate_row_elimination) << ",\n"
+          << "  \"exact_duplicate_rows_omitted\": "
+          << artifact.exact_duplicate_rows_omitted << "\n}\n";
 }
 
 void writeStaticLedgers(const Arguments& args,
                         const ebrp::CanonicalCompactModelArtifact& artifact) {
     std::ofstream size(args.artifact_dir / "formulation_size_ledger.csv");
-    size << "state_id,policy,original_rows,original_columns,original_nonzeros,model_scope\n"
+    size << "state_id,policy,original_rows,original_columns,original_nonzeros,model_scope,exact_duplicate_row_elimination,exact_duplicate_rows_omitted\n"
          << csvField(args.state_id) << ',' << csvField(args.policy) << ','
          << artifact.rows << ',' << artifact.columns << ','
-         << artifact.nonzeros << ',' << csvField(artifact.model_scope) << '\n';
+         << artifact.nonzeros << ',' << csvField(artifact.model_scope) << ','
+         << artifact.exact_duplicate_row_elimination << ','
+         << artifact.exact_duplicate_rows_omitted << '\n';
 }
 
 void writeSolveEvidence(const Arguments& args,
@@ -500,6 +513,8 @@ int main(int argc, char** argv) {
         spec.add_verified_incumbent_row = true;
         spec.verified_incumbent = args.cutoff;
         spec.incumbent_epsilon = 0.0;
+        spec.exact_duplicate_row_elimination =
+            policy.cut_formulation == "exact-duplicate-elimination";
         const auto build_started = Clock::now();
         ebrp::CanonicalCompactModelArtifact artifact =
             ebrp::writeCanonicalCompactModel(

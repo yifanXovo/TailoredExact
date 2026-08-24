@@ -19,8 +19,12 @@ int main() {
         const auto b1 = parseRound50IntervalMipPolicy("B1");
         const auto b2 = parseRound50IntervalMipPolicy("b2-route-first");
         const auto b3 = parseRound50IntervalMipPolicy("b3");
-        require(v0.valid && b1.valid && b2.valid && b3.valid,
-                "all frozen branching policies parse");
+        const auto c1 = parseRound50IntervalMipPolicy("c1-exact-dedup");
+        require(v0.valid && b1.valid && b2.valid && b3.valid && c1.valid,
+                "all frozen branching and C1 policies parse");
+        require(c1.branching == Round50BranchingPolicy::Default &&
+                    c1.cut_formulation == "exact-duplicate-elimination",
+                "C1 changes only cut/formulation policy");
         require(!parseRound50IntervalMipPolicy("instance-special").valid,
                 "unknown policies fail closed");
         require(classifyRound50Variable("x_0_1_2") ==
@@ -79,6 +83,11 @@ int main() {
                     Round50BranchingPolicy::Default,
                     Round50VariableFamily::RoutingArc) == 0,
                 "default-off equivalence uses no priority assignment");
+        require(round50OmitDuplicateModeLink(0, true),
+                "C1 omits the second zero-bound mode link");
+        require(!round50OmitDuplicateModeLink(1, true) &&
+                    !round50OmitDuplicateModeLink(0, false),
+                "C1 preserves nonduplicates and default-off rows");
         SolveOptions options;
         configureRound50IntervalMipV0(options);
         require(options.gurobi_seed == 0 && options.gurobi_presolve == -1 &&

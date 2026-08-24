@@ -185,8 +185,8 @@ def main() -> None:
         lhs_groups: dict[object, list[dict[str, object]]] = defaultdict(list)
         family_counts = defaultdict(lambda: [0, 0])
         for row in parsed:
-            exact_groups[row["exact_signature"]].append(str(row["row_id"]))
-            canonical_groups[row["canonical_signature"]].append(str(row["row_id"]))
+            exact_groups[row["exact_signature"]].append(row)
+            canonical_groups[row["canonical_signature"]].append(row)
             lhs_groups[row["lhs_signature"]].append(row)
             values = [abs(value) for value in row["coefficients"].values()]
             family = str(row["family"])
@@ -203,6 +203,22 @@ def main() -> None:
                                     if len(group) > 1)
         canonical_duplicate_count = sum(
             len(group) - 1 for group in canonical_groups.values() if len(group) > 1)
+        exact_group_details = []
+        for group in exact_groups.values():
+            if len(group) <= 1:
+                continue
+            family = str(group[0]["family"])
+            aggregate[family]["exact_duplicates"] += len(group) - 1
+            exact_group_details.append(
+                family + ":" + ";".join(str(row["row_id"]) for row in group))
+        canonical_group_details = []
+        for group in canonical_groups.values():
+            if len(group) <= 1:
+                continue
+            family = str(group[0]["family"])
+            aggregate[family]["canonical_duplicates"] += len(group) - 1
+            canonical_group_details.append(
+                family + ":" + ";".join(str(row["row_id"]) for row in group))
         dominated = []
         # Identical normalized LHS and sense gives a globally valid dominance
         # proof by RHS ordering; equality rows cannot dominate one another.
@@ -225,6 +241,10 @@ def main() -> None:
             "row_count": len(parsed), "family_count": len(family_counts),
             "exact_duplicate_rows": exact_duplicate_count,
             "canonical_signature_duplicate_rows": canonical_duplicate_count,
+            "exact_duplicate_groups": "|".join(exact_group_details)
+                                      if exact_group_details else "none",
+            "canonical_duplicate_groups": "|".join(canonical_group_details)
+                                          if canonical_group_details else "none",
             "same_lhs_proved_dominated_rows": len(dominated),
             "dominated_row_ids": ";".join(dominated) if dominated else "none",
             "all_rows_parsed": "true", "failure_reason": "none",
@@ -289,7 +309,13 @@ def main() -> None:
         classification = row["classification"]
         protected = classification in {
             "core feasibility/model-definition", "exact reformulation"}
-        if protected:
+        exact_duplicates = int(row["exact_duplicate_count"])
+        if exact_duplicates > 0:
+            eligibility = "entered_C1"
+            reason = (
+                "literal duplicate rows proved identical; one protected core "
+                "representative remains for every omitted copy")
+        elif protected:
             eligibility = "forbidden"
             reason = "core_or_exact_reformulation_row_protected"
         elif row["audit_status"] != "present_and_exhaustively_classified":
@@ -312,52 +338,41 @@ def main() -> None:
         writer.writeheader()
         writer.writerows(leave_rows)
 
-    candidate_path = EVIDENCE / "cut_formulation_candidate_results.csv"
-    with candidate_path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=[
-            "candidate_id", "policy", "entered", "row_count", "decision", "reason"],
-            lineterminator="\n")
-        writer.writeheader()
-        writer.writerow({
-            "candidate_id": "none", "policy": "interval-mip-v0", "entered": "false",
-            "row_count": 0, "decision": "no_valid_candidate",
-            "reason": "C1 found no removable duplicate/dominance proof; C2 had no isolated exact separator; C3 had no analytic tightening proof; C4 had no specific relaxation defect",
-        })
-
     notes_dir = EVIDENCE / "mathematical_validity_notes"
     notes_dir.mkdir(parents=True, exist_ok=True)
-    (notes_dir / "iteration2_no_candidate.md").write_text(f"""# Iteration 2 mathematical validity decision
+    (notes_dir / "c1_exact_duplicate_elimination.md").write_text(f"""# C1 exact duplicate elimination validity
 
-All {all_parsed_rows} canonical constraints from the 23 frozen models were parsed and assigned exactly once to the exhaustive registry. Core feasibility and exact-reformulation rows are protected. The exact/sign-canonical scan found {total_exact_duplicates} exact duplicates and {total_canonical_duplicates} sign-canonical duplicates; the identical-LHS RHS-order scan found {total_dominated} globally proved dominated rows.
+All {all_parsed_rows} canonical constraints from the 23 frozen models were parsed and assigned exactly once to the exhaustive registry. The exact/sign-canonical scan found {total_exact_duplicates} exact duplicates and {total_canonical_duplicates} sign-canonical duplicates; the identical-LHS RHS-order scan found {total_dominated} additional globally proved dominated rows.
 
-C1 is unavailable because no row has a complete removal proof. C2 is unavailable because the current generic canonical row stream does not isolate one full strengthening emitter and no exact lazy separator exists for a single audited family. C3 is unavailable because coefficient ranges alone do not prove a tighter valid bound or big-M; current v0 already uses tight denominator, interval McCormick, and paper-safe SP bounds. C4 is unavailable because the audit identified broad tree/iteration burden, not one specific violated relaxation class, and root-bound improvement alone is insufficient.
+Every literal duplicate is in the operation/load core family. It occurs only when a primitive pickup or drop upper bound is zero: the visit link and operation-mode link both reduce to the same one-variable inequality (`p_k_i <= 0` or `d_k_i <= 0`). C1 keeps the visit-link copy and omits only the second, byte-identical mode-link copy. Thus every core relationship remains represented, the variable domains, objective, feasible set, LP relaxation, integer optimum, and certificate meaning are unchanged, and the candidate is uniform in mathematical bounds rather than instance identity or size.
 
-No model was changed and no candidate solve was entered. This is a bounded negative cut/formulation iteration, not an empirical row deletion.
+C2 is not entered because no complete strengthening emitter has an exact delayed separator. C3 is not entered because coefficient ranges alone do not prove an additional bound or big-M tightening beyond the current tight interval construction. C4 is not entered because the audit did not isolate a specific unaddressed relaxation defect. C1 must complete the frozen 120-second core screen and, if it remains the iteration's best candidate, all D1-D14 at 300 seconds before acceptance.
 """, encoding="utf-8")
 
-    decision = {
-        "schema": "round50-cut-formulation-iteration-decision-v1",
-        "iteration": 2, "status": "complete",
-        "classification": "original_cut_pack_retained",
-        "candidate_count": 0, "accepted_changes": [],
+    gate = {
+        "schema": "round50-cut-formulation-audit-gate-v1",
+        "iteration": 2, "status": "candidate_required",
+        "candidate_count": 1, "candidate_id": "C1",
+        "candidate_policy": "c1-exact-duplicate-elimination",
         "all_rows_parsed": True, "parsed_row_count": all_parsed_rows,
         "state_count": len(states), "registry_family_count": len(registry_rows),
         "exact_duplicate_rows": total_exact_duplicates,
         "canonical_signature_duplicate_rows": total_canonical_duplicates,
         "same_lhs_proved_dominated_rows": total_dominated,
-        "core_row_removals": 0, "exact_reformulation_row_removals": 0,
+        "core_relationships_disabled_or_delayed": 0,
+        "exact_reformulation_row_removals": 0,
         "generic_gurobi_cut_parameter_changed": False,
-        "candidate_run_opened": False,
-        "reason": "no valid exact uniform C1-C4 candidate passed the audit entry gate",
-        "active_policy_after_iteration": "interval-mip-v0 original cut/formulation pack",
+        "candidate_run_opened": True,
+        "reason": "literal duplicates have a complete uniform C1 removal proof",
+        "active_policy_before_candidate": "interval-mip-v0 original cut/formulation pack",
         "confirmation_opened": False, "runtime_dispatch": False,
         "registry_sha256": sha256(registry_path),
         "duplicate_audit_sha256": sha256(duplicate_path),
         "leave_one_audit_sha256": sha256(leave_path),
     }
-    (EVIDENCE / "cut_formulation_iteration_decision.json").write_text(
-        json.dumps(decision, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    print(json.dumps(decision, indent=2, sort_keys=True))
+    (EVIDENCE / "cut_formulation_audit_gate.json").write_text(
+        json.dumps(gate, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    print(json.dumps(gate, indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":

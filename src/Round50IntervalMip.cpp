@@ -34,6 +34,11 @@ Round50IntervalMipPolicy parseRound50IntervalMipPolicy(
     } else if (out.name == "b3" || out.name == "b3-operation-first") {
         out.name = "b3-operation-first";
         out.branching = Round50BranchingPolicy::OperationFirst;
+    } else if (out.name == "c1" || out.name == "c1-exact-dedup" ||
+               out.name == "c1-exact-duplicate-elimination") {
+        out.name = "c1-exact-duplicate-elimination";
+        out.branching = Round50BranchingPolicy::Default;
+        out.cut_formulation = "exact-duplicate-elimination";
     } else {
         out.failure_reason = "unsupported_round50_interval_mip_policy";
         return out;
@@ -109,6 +114,11 @@ int round50BranchPriority(Round50BranchingPolicy policy,
         }
     }
     return -1;
+}
+
+bool round50OmitDuplicateModeLink(int transfer_upper_bound,
+                                  bool exact_dedup_enabled) {
+    return exact_dedup_enabled && transfer_upper_bound == 0;
 }
 
 void configureRound50IntervalMipV0(SolveOptions& options) {

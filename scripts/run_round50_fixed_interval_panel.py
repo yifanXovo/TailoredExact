@@ -146,7 +146,8 @@ def main() -> None:
         "integer_variables", "binary_variables", "min_matrix", "max_matrix",
         "min_objective", "max_objective", "min_bound", "max_bound",
         "min_rhs", "max_rhs", "branch_priority_assignment_status",
-        "branch_priority_tiers",
+        "branch_priority_tiers", "exact_duplicate_row_elimination",
+        "exact_duplicate_rows_omitted",
         "failure_reason", "artifact_dir",
     ]
 
@@ -200,13 +201,29 @@ def main() -> None:
         gi = normalized_gap_integral(
             artifact_dir / "mip_progress.csv", float(result["verified_upper_bound"]),
             args.cap, bool(result["certificate"]), float(result["process_time_seconds"]))
+        dedup_enabled = bool(model.get("exact_duplicate_row_elimination", False))
+        duplicates_omitted = int(model.get("exact_duplicate_rows_omitted", 0))
+        if dedup_enabled:
+            model_identity_match = (
+                args.policy in {"c1", "c1-exact-dedup",
+                                "c1-exact-duplicate-elimination"}
+                and int(model["rows"]) + duplicates_omitted ==
+                    int(frozen["original_rows"])
+                and int(model["columns"]) == int(frozen["original_columns"])
+                and int(model["nonzeros"]) + duplicates_omitted ==
+                    int(frozen["original_nonzeros"])
+                and model["scope"] ==
+                    "complete_original_compact_milp_intersected_with_static_gini_interval"
+            )
+        else:
+            model_identity_match = (
+                model["sha256"] == frozen["canonical_model_fingerprint"])
         summary_rows.append({
             "state_id": state_id, "panel": frozen["panel"],
             "instance": frozen["instance"], "policy": args.policy,
             "process_cap_seconds": format(args.cap, ".17g"),
             "executable_sha256": executable_sha, "model_sha256": model["sha256"],
-            "model_identity_match": str(
-                model["sha256"] == frozen["canonical_model_fingerprint"]).lower(),
+            "model_identity_match": str(model_identity_match).lower(),
             "status": result["status"], "certificate": result["certificate"],
             "certificate_class": result["certificate_class"],
             "false_certificate": result["false_certificate"],
@@ -257,6 +274,8 @@ def main() -> None:
             "min_rhs": numerical["min_rhs"], "max_rhs": numerical["max_rhs"],
             "branch_priority_assignment_status": next(iter(branch_statuses)),
             "branch_priority_tiers": branch_tiers,
+            "exact_duplicate_row_elimination": str(dedup_enabled).lower(),
+            "exact_duplicate_rows_omitted": duplicates_omitted,
             "failure_reason": result["failure_reason"],
             "artifact_dir": artifact_dir.relative_to(ROOT).as_posix(),
         })

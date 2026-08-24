@@ -4,6 +4,7 @@
 #include "IntervalRowFactory.hpp"
 #include "ControllingLeafScheduler.hpp"
 #include "ModelCorrectness.hpp"
+#include "Round50IntervalMip.hpp"
 #include "StaticSegmentedGini.hpp"
 
 #include "Evaluator.hpp"
@@ -67,6 +68,7 @@ struct StaticSegmentedWriteStats {
     long long factored_weighted_rhs_rows = 0;
     long long factored_indicator_rows_removed = 0;
     long long hierarchical_selector_variables = 0;
+    long long exact_duplicate_rows_omitted = 0;
     std::string family_encoding;
 };
 
@@ -1650,9 +1652,25 @@ void writeCompactLp(const Instance& instance,
             Expr mm; addTerm(mm, mName(k, i), 1); addTerm(mm, zName(k, i), -1);
             writeConstraint(out, cid, mm, "<=", 0);
             Expr pm; addTerm(pm, pName(k, i), 1); addTerm(pm, mName(k, i), -pmax);
-            writeConstraint(out, cid, pm, "<=", 0);
+            // If pmax is zero, ep and pm are both exactly p[k,i] <= 0.
+            // Keep ep as the protected core representative and omit only the
+            // literal duplicate in the opt-in Round 50 C1 formulation.
+            if (!round50OmitDuplicateModeLink(
+                    pmax, canonical_spec &&
+                        canonical_spec->exact_duplicate_row_elimination)) {
+                writeConstraint(out, cid, pm, "<=", 0);
+            } else if (static_stats) {
+                ++static_stats->exact_duplicate_rows_omitted;
+            }
             Expr dm; addTerm(dm, dName(k, i), 1); addTerm(dm, zName(k, i), -dmax); addTerm(dm, mName(k, i), dmax);
-            writeConstraint(out, cid, dm, "<=", 0);
+            // Likewise, dmax==0 makes ed and dm the same d[k,i] <= 0 row.
+            if (!round50OmitDuplicateModeLink(
+                    dmax, canonical_spec &&
+                        canonical_spec->exact_duplicate_row_elimination)) {
+                writeConstraint(out, cid, dm, "<=", 0);
+            } else if (static_stats) {
+                ++static_stats->exact_duplicate_rows_omitted;
+            }
             Expr nonzero; addTerm(nonzero, pName(k, i), 1); addTerm(nonzero, dName(k, i), 1); addTerm(nonzero, zName(k, i), -1);
             writeConstraint(out, cid, nonzero, ">=", 0);
             Expr loadz; addTerm(loadz, lName(k, i), 1); addTerm(loadz, zName(k, i), -Q);
@@ -3947,6 +3965,8 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
     artifact.gamma_L = spec.gamma_L;
     artifact.gamma_U = spec.gamma_U;
     artifact.verified_incumbent_row = spec.add_verified_incumbent_row;
+    artifact.exact_duplicate_row_elimination =
+        spec.exact_duplicate_row_elimination;
     artifact.static_segmented_gini = spec.static_segmented_gini;
     artifact.objective_gini_envelope_rows = static_cast<long long>(
         spec.objective_gini_envelope_facets.size());
@@ -4025,6 +4045,8 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
             static_stats.factored_indicator_rows_removed;
         artifact.static_hierarchical_selector_variables =
             static_stats.hierarchical_selector_variables;
+        artifact.exact_duplicate_rows_omitted =
+            static_stats.exact_duplicate_rows_omitted;
         artifact.static_family_encoding = static_stats.family_encoding;
         const ModelSizeStats size = analyzeLpModel(path);
         artifact.rows = size.rows;

@@ -44,6 +44,11 @@ bool round50PrimitiveFamily(Round50VariableFamily family);
 int round50BranchPriority(Round50BranchingPolicy policy,
                           Round50VariableFamily family);
 
+// C1 may omit the mode-link row only when its transfer coefficient is zero,
+// because the already-emitted visit-link row is then byte-identical.
+bool round50OmitDuplicateModeLink(int transfer_upper_bound,
+                                  bool exact_dedup_enabled);
+
 // Freeze the current complete fixed-interval formulation independently of
 // main-program preset expansion.  All Round 50 policies share these options;
 // policy-specific changes are applied separately and uniformly.

@@ -31,6 +31,10 @@ struct CanonicalCompactModelSpec {
     std::vector<GiniIntervalGeometry> static_segments;
     bool static_common_row_factoring = false;
     bool static_hierarchical_selectors = false;
+    // Round 50 C1: omit only a second copy of an already-emitted core row
+    // when a zero transfer bound makes the visit and mode links identical.
+    // Default false preserves every historical model byte-for-byte.
+    bool exact_duplicate_row_elimination = false;
     std::string static_model_identity;
     // Valid affine lower bounds h(G)=alpha+beta*G whose source interval
     // contains this model's interval.  The writer emits h(G) <= objective.
@@ -61,6 +65,8 @@ struct CanonicalCompactModelArtifact {
     long long static_factored_weighted_rhs_rows = 0;
     long long static_factored_indicator_rows_removed = 0;
     long long static_hierarchical_selector_variables = 0;
+    bool exact_duplicate_row_elimination = false;
+    long long exact_duplicate_rows_omitted = 0;
     long long objective_gini_envelope_rows = 0;
     std::string static_family_encoding;
     std::string objective_definition =
