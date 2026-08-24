@@ -1,0 +1,30 @@
+{
+  "base_branch": "codex/round44-c6-envelope-tail-repair",
+  "base_sha": "7cd1ba335aada5a8438cc6c622ef6ec1e6c5061f",
+  "base_tree_sha": "6e0637eb91c8703438e22ca97241c0c5f8dc4c82",
+  "baseline_executable_sha256": "67579faaa27b5b51e2fa486c750788b7e883b3e14cff79e969baffbd165bf653",
+  "baseline_tests": {
+    "clean_release_gurobi_build": "passed",
+    "ctest": "22/22 passed",
+    "existing_python_protocol_tests": "93/93 passed",
+    "round43_round44_default_off_static_contract": "passed in CTest and protocol suites"
+  },
+  "candidate_results_observed": false,
+  "head_at_freeze": "7cd1ba335aada5a8438cc6c622ef6ec1e6c5061f",
+  "machine": {
+    "node": "WIN-3NO58RVQ4VC",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel"
+  },
+  "research_branch": "codex/round45-adaptive-timing-parametric-partition",
+  "schema": "round45-official-start-record-v1",
+  "started_utc": "2026-08-17T14:22:04.240031+00:00",
+  "toolchain": {
+    "cmake": "cmake version 3.30.5-msvc23",
+    "compiler": "g++ (Rev2, Built by MSYS2 project) 14.2.0",
+    "gurobi_home": "D:/gurobi1302/win64",
+    "gurobi_version": "13.0.2"
+  },
+  "tree_at_freeze": "6e0637eb91c8703438e22ca97241c0c5f8dc4c82",
+  "upstream_at_freeze": "origin/codex/round44-c6-envelope-tail-repair"
+}
