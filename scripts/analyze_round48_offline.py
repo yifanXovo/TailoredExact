@@ -269,6 +269,52 @@ def tight_alignment() -> list[dict[str, Any]]:
     return aligned
 
 
+def counterfactual_rows(case: str) -> list[dict[str, Any]]:
+    rows = []
+    interval = "L0" if case == "U1_root" else "L0.0"
+    instance = common.MECHANISM[4] if case == "U1_root" else "tight_T_seed3102"
+    for arm in ("retain", "midpoint"):
+        run_dir = OUT / "counterfactual_runs" / f"{case}__{arm}"
+        result_path = run_dir / "result.json"
+        marker_path = run_dir / "completion_marker.json"
+        if not result_path.is_file() or not marker_path.is_file():
+            raise RuntimeError(f"missing completed counterfactual: {case} {arm}")
+        result = common.load_json(result_path)
+        if isinstance(result, list):
+            result = result[0]
+        marker = common.load_json(marker_path)
+        if not marker.get("complete") or not marker.get("counterfactual_performed"):
+            raise RuntimeError(f"incomplete counterfactual marker: {marker_path}")
+        rows.append({
+            "instance": instance, "interval_id": interval, "arm": arm,
+            "process_cap_seconds": marker["process_cap_seconds"],
+            "matched_parent_identity": True,
+            "further_recursive_splits_forbidden": arm == "midpoint",
+            "descendant_split_suppression_count": result.get(
+                "round48_counterfactual_descendant_split_suppression_count", 0),
+            "restricted_parent_exact":
+                result.get("status") == "round48_counterfactual_exact",
+            "diagnostic_not_original_problem_certificate": True,
+            "strict_original_problem_certificate": bool(
+                result.get("strict_certified_original_problem")),
+            "certificate_class": result.get("strict_certificate_class", ""),
+            "work": result.get("external_gini_tree_work", ""),
+            "time_seconds": result.get("final_process_wall_time_seconds",
+                                       result.get("actual_runtime_seconds", "")),
+            "lower_bound": result.get("lower_bound", ""),
+            "upper_bound": result.get("upper_bound", ""),
+            "gap": result.get("gap", ""),
+            "split_count": result.get("external_gini_tree_split_count", ""),
+            "lp_count": result.get("external_gini_tree_lp_optimize_count", ""),
+            "model_count": result.get("external_gini_tree_model_count", ""),
+            "result_path": result_path.relative_to(ROOT).as_posix(),
+            "result_sha256": common.sha256(result_path),
+            "executable_sha256": marker["executable_sha256"],
+            "status": result.get("status", ""),
+        })
+    return rows
+
+
 def main() -> None:
     freeze = common.load_json(OUT / "stage0_freeze_manifest.json")
     if not freeze.get("frozen_before_candidate_runtime"):
@@ -278,6 +324,15 @@ def main() -> None:
         row, variables = state_row(label)
         census.append(row)
         registry.extend(variables)
+    u1_counterfactual = counterfactual_rows("U1_root")
+    tight_counterfactual = counterfactual_rows("tight3102_L0_0")
+    for row in census:
+        if row["state"] == "U1":
+            row["counterfactual_label"] = (
+                "midpoint_beneficial_exact_work_reduction")
+        elif row["state"] == "T1":
+            row["counterfactual_label"] = (
+                "midpoint_exact_retain_capped_beneficial_divergence")
     common.write_csv(OUT / "formulation_contraction_census.csv", census)
     common.write_csv(OUT / "formulation_variable_registry.csv", registry)
     replay = [{**row, "prediction_differs_from_AM":
@@ -318,14 +373,16 @@ def main() -> None:
     alignment = tight_alignment()
     common.write_csv(OUT / "tight3102_state_alignment.csv", alignment)
     divergence = [row for row in alignment if row["action_divergence"]]
-    common.write_csv(OUT / "tight3102_counterfactual_results.csv", [], fields=[
-        "instance", "interval_id", "arm", "process_cap_seconds", "matched_parent_identity",
-        "further_recursive_splits_forbidden", "restricted_parent_exact", "work", "time_seconds",
-        "lower_bound", "upper_bound", "gap", "result_path", "result_sha256", "status"],
-        allow_empty=True)
+    common.write_csv(
+        OUT / "tight3102_counterfactual_results.csv", tight_counterfactual)
+    common.write_csv(OUT / "u1_counterfactual_results.csv", u1_counterfactual)
+    retain = next(row for row in tight_counterfactual if row["arm"] == "retain")
+    midpoint = next(row for row in tight_counterfactual if row["arm"] == "midpoint")
     common.write_text(OUT / "tight3102_divergence_report.md", f"""# tight3102 divergence reconstruction
 
-The exact historical alignment contains {len(alignment)} common parent state(s) and {len(divergence)} action divergence(s). The first divergence is `L0.0`: identical input, interval, incumbent, parent/child bounds, and byte-identical canonical parent model; K1-r015 splits while K1-AM retains. No later exact common parent exists after that action divergence. The matched one-step RETAIN/MIDPOINT executions are pending the diagnostic implementation and are not yet claimed as evidence.
+The exact historical alignment contains {len(alignment)} common parent state(s) and {len(divergence)} action divergence(s). The first divergence is `L0.0`: identical input, interval, incumbent, parent/child bounds, and byte-identical canonical parent model; K1-r015 splits while K1-AM retains. No later exact common parent exists after that action divergence.
+
+The matched one-step RETAIN arm capped at {float(retain['time_seconds']):.3f} seconds with Work {float(retain['work']):.6f} and gap {float(retain['gap']):.9g}. The MIDPOINT arm, with both descendant split opportunities suppressed, completed exact in {float(midpoint['time_seconds']):.3f} seconds with Work {float(midpoint['work']):.6f} and zero gap. Thus the historical divergence is confirmed beneficial under a matched replay. AMF predicts retain at this state (`S_AMF < tau`), so the frozen formula does not recover the confirmed divergence. Both arms are restricted diagnostics and neither is an original-problem certificate.
 """)
     print({"states": len(census), "primary_pass": primary_pass,
            "failed_checks": audit["failed_checks"],
