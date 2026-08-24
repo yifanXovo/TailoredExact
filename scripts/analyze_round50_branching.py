@@ -97,14 +97,14 @@ def add_phase(output: list[dict[str, object]], phase: str,
 
 def main() -> None:
     core_paths = {
-        "interval-mip-v0": EVIDENCE / "iteration1_core_v0_120s.csv",
-        "b1-primitive-first": EVIDENCE / "iteration1_core_b1_120s.csv",
-        "b2-route-first": EVIDENCE / "iteration1_core_b2_120s.csv",
-        "b3-operation-first": EVIDENCE / "iteration1_core_b3_120s.csv",
+        "interval-mip-v0": EVIDENCE / "iteration1_corrected_core_v0_120s.csv",
+        "b1-primitive-first": EVIDENCE / "iteration1_corrected_core_b1_120s.csv",
+        "b2-route-first": EVIDENCE / "iteration1_corrected_core_b2_120s.csv",
+        "b3-operation-first": EVIDENCE / "iteration1_corrected_core_b3_120s.csv",
     }
     qualification_paths = {
-        "interval-mip-v0": EVIDENCE / "iteration1_qualification_v0_300s.csv",
-        "b1-primitive-first": EVIDENCE / "iteration1_qualification_b1_300s.csv",
+        "interval-mip-v0": EVIDENCE / "iteration1_corrected_qualification_v0_300s.csv",
+        "b1-primitive-first": EVIDENCE / "iteration1_corrected_qualification_b1_300s.csv",
     }
     core = {policy: rows(path) for policy, path in core_paths.items()}
     qualification = {policy: rows(path) for policy, path in qualification_paths.items()}
@@ -170,9 +170,9 @@ def main() -> None:
 
     audit = f"""# Round 50 tailored branching policy audit
 
-All four core policies used one executable (`{all_rows[0]['executable_sha256']}`), identical canonical model fingerprints, and nine frozen states at 120 seconds. B1, B2, and B3 assigned priorities to every integer variable through the semantic registry; assignment status was `applied` on every candidate row. Priority tiers were deterministic by semantic family and ordinal only. Default v0 assigned no priorities.
+All four corrected core policies used one executable (`{all_rows[0]['executable_sha256']}`), identical canonical model fingerprints, and nine frozen states at 120 seconds. B1, B2, and B3 assigned priorities to every integer variable through the corrected semantic registry, including canonical `Y_*` final-inventory variables; assignment status was `applied` on every candidate row. Priority tiers were deterministic by semantic family and ordinal only. Default v0 assigned no priorities. The earlier case-defective attempt is explicitly invalidated by `semantic_registry_correction.json` and excluded here.
 
-B2 was rejected in the core screen after losing D4 and D10 certificates. B3 was rejected because D4 Work rose from 129.528 to 195.896 (ratio 1.512, delta 66.368), a frozen severe regression. B1 alone qualified, but on the full 300-second D1-D14 panel it lost D3's v0 certificate ({exact_base} versus {exact_b1} total certificates) and severely worsened D14 capped proof progress. Its aggregate Work ratio was {total_ratio:.6f}. B1 did materially improve D10 and D12, demonstrating a local semantic effect, but it failed the no-lost-certificate and no-severe-regression gates.
+B2 was rejected in the corrected core screen after losing D4 and D10 certificates. B3 was rejected because D4 Work rose from 129.528 to 195.896 (ratio 1.512, delta 66.368), a frozen severe regression. B1 alone qualified, but on the corrected full 300-second D1-D14 panel it lost both D3 and D13 v0 certificates ({exact_base} versus {exact_b1} total certificates) and severely worsened D14 capped proof progress. Its aggregate Work ratio was {total_ratio:.6f}. B1 did materially improve D10 and reduced D9 Work, demonstrating a local semantic effect, but it failed the no-lost-certificate, no-severe-regression, and aggregate-nonworse gates.
 
 No tailored branching policy is accepted. `interval-mip-v0` default Gurobi branching is restored as the cumulative backend. Candidate modes remain default-off solely to reproduce the rejected ablations; they are not selected by any preset or instance/time/size dispatch.
 """
@@ -187,7 +187,7 @@ No tailored branching policy is accepted. `interval-mip-v0` default Gurobi branc
         "accepted_changes": [],
         "candidate_decisions": [
             {"policy": "b1-primitive-first", "decision": "reject",
-             "reason": "lost D3 qualification certificate and severe D14 capped regression"},
+             "reason": "lost D3 and D13 qualification certificates and severe D14 capped regression"},
             {"policy": "b2-route-first", "decision": "reject",
              "reason": "lost D4 and D10 core certificates"},
             {"policy": "b3-operation-first", "decision": "reject",
@@ -206,6 +206,9 @@ No tailored branching policy is accepted. `interval-mip-v0` default Gurobi branc
         "confirmation_opened": False,
         "post_screen_tuning": False,
         "candidate_modes_default_off_for_reproduction": True,
+        "semantic_registry_correction_applied": True,
+        "supersedes_invalidated_decision_sha256": "5592dd2e956e826359e90029e4ac894fedf98cf71b482982b8a46fa51bfc3fb5",
+        "invalidated_attempt_excluded": True,
         "runtime_dispatch": False,
         "results_path": result_path.relative_to(ROOT).as_posix(),
         "results_sha256": sha256(result_path),
