@@ -53,6 +53,36 @@ def lp_variable_type_counts(path: Path, total_columns: int) -> tuple[int, int, i
     return total_columns - integer, integer, binaries
 
 
+def normalized_gap_integral(path: Path, upper: float, horizon: float,
+                            exact: bool, process_seconds: float) -> float:
+    points = []
+    for row in csv.DictReader(path.open(newline="", encoding="utf-8-sig")):
+        if str(row["bound_available"]).lower() not in {"1", "true"}:
+            continue
+        lower = float(row["best_bound"])
+        gap = max(0.0, (upper - lower) / max(1e-12, abs(upper)))
+        points.append((max(0.0, float(row["time_seconds"])), gap))
+    area = 0.0
+    previous_time = 0.0
+    previous_gap = 1.0
+    for current_time, current_gap in points:
+        current_time = min(horizon, max(previous_time, current_time))
+        area += (current_time - previous_time) * previous_gap
+        previous_time = current_time
+        previous_gap = current_gap
+        if previous_time >= horizon:
+            break
+    end = min(horizon, process_seconds) if exact else horizon
+    if end > previous_time:
+        area += (end - previous_time) * previous_gap
+        previous_time = end
+    if exact and horizon > previous_time:
+        previous_time = horizon
+    elif horizon > previous_time:
+        area += (horizon - previous_time) * previous_gap
+    return area / horizon
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--executable", required=True, type=Path)
@@ -95,7 +125,8 @@ def main() -> None:
         "executable_sha256", "model_sha256", "model_identity_match",
         "status", "certificate", "certificate_class", "false_certificate",
         "evidence_complete", "cap_respected", "native_status", "lower_bound",
-        "verified_upper_bound", "gap", "work", "solver_time_seconds",
+        "frozen_cutoff", "final_incumbent_available", "final_incumbent",
+        "verified_upper_bound", "gap", "gi_common_horizon", "work", "solver_time_seconds",
         "process_time_seconds", "nodes", "simplex_iterations",
         "average_iterations_per_node", "peak_memory_gb",
         "root_relaxation_bound_available", "root_relaxation_bound",
@@ -152,6 +183,9 @@ def main() -> None:
         branch = read_csv_row(artifact_dir / "branching_policy_ledger.csv")
         continuous_count, integer_count, binary_count = lp_variable_type_counts(
             artifact_dir / "canonical_model.lp", int(size["original_columns"]))
+        gi = normalized_gap_integral(
+            artifact_dir / "mip_progress.csv", float(result["verified_upper_bound"]),
+            args.cap, bool(result["certificate"]), float(result["process_time_seconds"]))
         summary_rows.append({
             "state_id": state_id, "panel": frozen["panel"],
             "instance": frozen["instance"], "policy": args.policy,
@@ -166,8 +200,14 @@ def main() -> None:
             "cap_respected": completion["cap_respected"],
             "native_status": result["native_status"],
             "lower_bound": result["lower_bound"],
+            "frozen_cutoff": result.get("frozen_cutoff", frozen["verified_cutoff"]),
+            "final_incumbent_available": result.get(
+                "final_incumbent_available", result["certificate"]),
+            "final_incumbent": result.get(
+                "final_incumbent", result["verified_upper_bound"]),
             "verified_upper_bound": result["verified_upper_bound"],
-            "gap": result["gap"], "work": result["work"],
+            "gap": result["gap"], "gi_common_horizon": gi,
+            "work": result["work"],
             "solver_time_seconds": result["solver_time_seconds"],
             "process_time_seconds": result["process_time_seconds"],
             "nodes": result["nodes"],

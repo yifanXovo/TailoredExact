@@ -25,6 +25,7 @@
 namespace {
 
 using Clock = std::chrono::steady_clock;
+constexpr double kEvidenceFinalizationReserveSeconds = 2.0;
 
 struct Arguments {
     std::filesystem::path executable;
@@ -143,6 +144,8 @@ void writeCommand(const Arguments& args, const std::filesystem::path& path) {
         << "  \"pickup_time\": " << args.pickup_time << ",\n"
         << "  \"drop_time\": " << args.drop_time << ",\n"
         << "  \"process_cap_seconds\": " << args.process_cap_seconds << ",\n"
+        << "  \"evidence_finalization_reserve_seconds\": "
+        << kEvidenceFinalizationReserveSeconds << ",\n"
         << "  \"solver\": {\"Presolve\": \"Auto\", \"Seed\": 0, \"Threads\": 1, \"MIPGap\": 0, \"MIPGapAbs\": 0},\n"
         << "  \"known_optimum_injection\": false,\n"
         << "  \"archive_winner_injection\": false\n}\n";
@@ -186,7 +189,7 @@ void writeCompletion(const std::filesystem::path& dir,
         << "  \"process_seconds\": " << process_seconds << ",\n"
         << "  \"process_cap_seconds\": " << args.process_cap_seconds << ",\n"
         << "  \"cap_respected\": "
-        << boolJson(process_seconds <= args.process_cap_seconds + 1.0) << "\n}\n";
+        << boolJson(process_seconds <= args.process_cap_seconds + 0.05) << "\n}\n";
 }
 
 int resolveCutoff(const ebrp::Instance& instance,
@@ -313,7 +316,12 @@ void writeSolveEvidence(const Arguments& args,
         (outcome.interrupted ? "capped" : "failed");
     const double lower = outcome.native_bound_available
         ? outcome.native_bound : 0.0;
-    const double upper = args.cutoff;
+    const bool verified_native_incumbent = outcome.incumbent_available &&
+        outcome.incumbent_independently_verified &&
+        std::isfinite(outcome.incumbent_objective);
+    const double upper = verified_native_incumbent
+        ? std::min(args.cutoff, outcome.incumbent_objective)
+        : args.cutoff;
     const double gap = std::max(0.0, (upper - lower) /
         std::max(1e-12, std::fabs(upper)));
 
@@ -331,6 +339,12 @@ void writeSolveEvidence(const Arguments& args,
         << "  \"false_certificate\": false,\n"
         << "  \"native_status\": \"" << jsonEscape(outcome.native_status) << "\",\n"
         << "  \"lower_bound\": " << lower << ",\n"
+        << "  \"frozen_cutoff\": " << args.cutoff << ",\n"
+        << "  \"final_incumbent_available\": "
+        << boolJson(verified_native_incumbent) << ",\n"
+        << "  \"final_incumbent\": "
+        << (verified_native_incumbent ? outcome.incumbent_objective : args.cutoff)
+        << ",\n"
         << "  \"verified_upper_bound\": " << upper << ",\n"
         << "  \"gap\": " << gap << ",\n"
         << "  \"work\": " << outcome.work << ",\n"
@@ -517,7 +531,8 @@ int main(int argc, char** argv) {
             return 0;
         }
 
-        const double remaining = args.process_cap_seconds - elapsed(started);
+        const double remaining = args.process_cap_seconds - elapsed(started) -
+            kEvidenceFinalizationReserveSeconds;
         if (!(remaining > 0.01)) {
             throw std::runtime_error("process cap exhausted before optimize");
         }
