@@ -31,6 +31,13 @@ def read_csv_row(path: Path) -> dict[str, str]:
     return rows[0]
 
 
+def read_csv_rows(path: Path) -> list[dict[str, str]]:
+    rows = list(csv.DictReader(path.open(newline="", encoding="utf-8-sig")))
+    if not rows:
+        raise RuntimeError(f"expected data rows in {path}")
+    return rows
+
+
 def lp_variable_type_counts(path: Path, total_columns: int) -> tuple[int, int, int]:
     section = ""
     generals = 0
@@ -139,6 +146,7 @@ def main() -> None:
         "integer_variables", "binary_variables", "min_matrix", "max_matrix",
         "min_objective", "max_objective", "min_bound", "max_bound",
         "min_rhs", "max_rhs", "branch_priority_assignment_status",
+        "branch_priority_tiers",
         "failure_reason", "artifact_dir",
     ]
 
@@ -180,7 +188,13 @@ def main() -> None:
         presolve = read_csv_row(artifact_dir / "presolve_ledger.csv")
         size = read_csv_row(artifact_dir / "formulation_size_ledger.csv")
         numerical = read_csv_row(artifact_dir / "numerical_quality_ledger.csv")
-        branch = read_csv_row(artifact_dir / "branching_policy_ledger.csv")
+        branch_rows = read_csv_rows(artifact_dir / "branching_policy_ledger.csv")
+        branch_statuses = {row["assignment_status"] for row in branch_rows}
+        if len(branch_statuses) != 1:
+            raise RuntimeError(f"mixed branch assignment status for {state_id}")
+        branch_tiers = ";".join(sorted(
+            f"{row['semantic_family']}:{row['variable_type']}:p{row['priority']}={row['variable_count']}"
+            for row in branch_rows))
         continuous_count, integer_count, binary_count = lp_variable_type_counts(
             artifact_dir / "canonical_model.lp", int(size["original_columns"]))
         gi = normalized_gap_integral(
@@ -241,7 +255,8 @@ def main() -> None:
             "max_objective": numerical["max_objective"],
             "min_bound": numerical["min_bound"], "max_bound": numerical["max_bound"],
             "min_rhs": numerical["min_rhs"], "max_rhs": numerical["max_rhs"],
-            "branch_priority_assignment_status": branch["assignment_status"],
+            "branch_priority_assignment_status": next(iter(branch_statuses)),
+            "branch_priority_tiers": branch_tiers,
             "failure_reason": result["failure_reason"],
             "artifact_dir": artifact_dir.relative_to(ROOT).as_posix(),
         })
