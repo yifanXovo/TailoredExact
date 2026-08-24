@@ -464,6 +464,14 @@ struct SolveOptions {
     std::string round47_c6_adaptive_mass = "off";
     double round47_c6_adaptive_mass_tau = 0.07915;
     bool round47_c6_adaptive_mass_tau_explicit = false;
+    // Round 48 K1-only formulation-aware adaptive mass.  This explicit,
+    // default-off mode consumes the unchanged Round 47 K1-AM evidence and
+    // already-written canonical model bounds; it launches no score solve.
+    std::string round48_k1_amf = "off"; // off|k1-amf
+    // Restricted matched-action diagnostics.  These are never candidate
+    // settings and never issue an original-problem certificate.
+    std::string round48_counterfactual_mode = "off"; // off|retain|midpoint
+    std::string round48_counterfactual_interval;
     // Round 40 incumbent-stable geometry research. "off" preserves the
     // validated incumbent-rescaled K=4 cover. The experimental policy uses
     // only a deterministic dyadic hierarchy rooted at the mathematical Gini

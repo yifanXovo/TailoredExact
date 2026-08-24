@@ -10,6 +10,8 @@ import os
 from pathlib import Path
 from typing import Any, Iterable
 
+import round46_common as round46
+
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "results" / "gf_k1_amf_formulation_rescue_round48"
@@ -136,3 +138,89 @@ def write_csv(path: Path, rows: Iterable[dict[str, Any]],
         writer.writerows(material)
     temporary.replace(path)
 
+
+def replace_option(arguments: list[str], option: str, value: Any) -> None:
+    """Replace one CLI value without changing the surrounding frozen command."""
+    rendered = "true" if value is True else (
+        "false" if value is False else format(value, ".17g")
+        if isinstance(value, float) else str(value))
+    if option in arguments:
+        arguments[arguments.index(option) + 1] = rendered
+    else:
+        arguments.extend((option, rendered))
+
+
+def remove_option(arguments: list[str], option: str) -> None:
+    while option in arguments:
+        index = arguments.index(option)
+        del arguments[index:index + 2]
+
+
+def frozen_instances() -> dict[str, dict[str, Any]]:
+    freeze = load_json(OUT / "dataset_freeze.json")
+    return {row["instance"]: row for row in freeze["instances"]}
+
+
+def input_path(item: dict[str, Any]) -> Path:
+    return ROOT / item["path"]
+
+
+def historical_k1_am_command(item: dict[str, Any], run_dir: Path,
+                             process_cap: float,
+                             executable: Path) -> list[str]:
+    """Build the unchanged Round 47 K1-AM command used by diagnostics."""
+    command = round46.c6_command(
+        item, run_dir, process_cap, 1, 0.01, executable)
+    # The old C6 rho is inactive under adaptive-mass. Omit its explicit CLI
+    # form so Round 48 commands cannot be mistaken for a rho-cap experiment.
+    remove_option(command, "--c6-normalized-split-threshold")
+    replace_option(command, "--round47-c6-adaptive-mass", "adaptive-mass")
+    replace_option(command, "--round47-c6-adaptive-mass-tau", TAU)
+    replace_option(command, "--round48-k1-amf", "off")
+    replace_option(command, "--round48-counterfactual-mode", "off")
+    replace_option(command, "--external-gini-artifact-dir", run_dir / "external")
+    return command
+
+
+def candidate_command(item: dict[str, Any], run_dir: Path,
+                      process_cap: float,
+                      executable: Path) -> list[str]:
+    """Build the sole official Round 48 candidate command: K1-AMF."""
+    command = historical_k1_am_command(
+        item, run_dir, process_cap, executable)
+    replace_option(command, "--round48-k1-amf", "k1-amf")
+    return command
+
+
+def counterfactual_command(item: dict[str, Any], run_dir: Path,
+                           process_cap: float, interval: str, arm: str,
+                           executable: Path) -> list[str]:
+    if arm not in {"retain", "midpoint"}:
+        raise ValueError(f"unsupported counterfactual arm: {arm}")
+    if not interval:
+        raise ValueError("counterfactual interval must be nonempty")
+    command = historical_k1_am_command(
+        item, run_dir, process_cap, executable)
+    replace_option(command, "--round48-counterfactual-mode", arm)
+    replace_option(command, "--round48-counterfactual-interval", interval)
+    return command
+
+
+def identity() -> dict[str, Any]:
+    value = {
+        "algorithm": "K1-AMF", "K0": 1, "point_rule": "midpoint",
+        "tau": TAU, "formulation_profile":
+            "round48-canonical-interval-sensitive-v1",
+        "eligible_weighting": "equal_per_model_variable",
+        "gini_coordinate_credit": False, "rho_cap": False,
+        "contraction": False, "model_chain_inheritance_change": False,
+        "extra_lp_queries": 0, "extra_mip_queries": 0,
+        "gamma_veto": "off", "Gamma_sum": "off",
+        "round43": "off", "round44": "off", "round45": "off",
+        "PMM": "off", "FPMM": "off", "rank1": "off",
+        "frontier_consolidation": "off", "verified_mip_starts": "off",
+        "solver": {"Presolve": "Auto", "Seed": 0, "Threads": 1,
+                   "MIPGap": 0.0, "MIPGapAbs": 0.0},
+    }
+    value["decision_identity_sha256"] = stable_hash(value)
+    return value

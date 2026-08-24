@@ -1645,6 +1645,46 @@ std::string resultToJson(const SolveResult& input) {
     out << "  \"round47_c6_adaptive_mass_tau_explicit\": "
         << (result.round47_c6_adaptive_mass_tau_explicit ? "true" : "false")
         << ",\n";
+    out << "  \"round48_k1_amf\": \""
+        << jsonEscape(result.round48_k1_amf) << "\",\n";
+    out << "  \"round48_amf_profile_version\": \""
+        << jsonEscape(result.round48_amf_profile_version) << "\",\n";
+    out << "  \"round48_amf_decision_count\": "
+        << result.round48_amf_decision_count << ",\n";
+    out << "  \"round48_amf_rescue_count\": "
+        << result.round48_amf_rescue_count << ",\n";
+    out << "  \"round48_amf_invalid_profile_fallback_count\": "
+        << result.round48_amf_invalid_profile_fallback_count << ",\n";
+    out << "  \"round48_amf_extra_lp_count\": "
+        << result.round48_amf_extra_lp_count << ",\n";
+    out << "  \"round48_amf_extra_mip_count\": "
+        << result.round48_amf_extra_mip_count << ",\n";
+    out << "  \"round48_amf_max_eligible_variable_count\": "
+        << result.round48_amf_max_eligible_variable_count << ",\n";
+    out << "  \"round48_amf_decision_ledger_path\": \""
+        << jsonEscape(result.round48_amf_decision_ledger_path) << "\",\n";
+    out << "  \"round48_formulation_strength_ledger_path\": \""
+        << jsonEscape(result.round48_formulation_strength_ledger_path) << "\",\n";
+    out << "  \"round48_formulation_variable_registry_path\": \""
+        << jsonEscape(result.round48_formulation_variable_registry_path) << "\",\n";
+    out << "  \"round48_model_size_ledger_path\": \""
+        << jsonEscape(result.round48_model_size_ledger_path) << "\",\n";
+    out << "  \"round48_certificate_ledger_path\": \""
+        << jsonEscape(result.round48_certificate_ledger_path) << "\",\n";
+    out << "  \"round48_artifact_manifest_path\": \""
+        << jsonEscape(result.round48_artifact_manifest_path) << "\",\n";
+    out << "  \"round48_completion_marker_path\": \""
+        << jsonEscape(result.round48_completion_marker_path) << "\",\n";
+    out << "  \"round48_counterfactual_mode\": \""
+        << jsonEscape(result.round48_counterfactual_mode) << "\",\n";
+    out << "  \"round48_counterfactual_interval\": \""
+        << jsonEscape(result.round48_counterfactual_interval) << "\",\n";
+    out << "  \"round48_counterfactual_performed\": "
+        << (result.round48_counterfactual_performed ? "true" : "false")
+        << ",\n";
+    out << "  \"round48_counterfactual_descendant_split_suppression_count\": "
+        << result.round48_counterfactual_descendant_split_suppression_count
+        << ",\n";
     out << "  \"round47_single_child_contraction_count\": "
         << result.round47_single_child_contraction_count << ",\n";
     out << "  \"round47_both_child_infeasible_closure_count\": "

@@ -32,6 +32,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/MipStartMapping.cpp
   src/ExternalGiniTree.cpp
   src/PaperExternalGiniTree.cpp
+  src/Round48K1AMF.cpp
   src/ReplicaExternalGiniTree.cpp
   src/ConnectivityFlow.cpp
   src/Bounds.cpp
@@ -204,3 +205,7 @@ add_executable(Round47AdaptiveMassTests
     tests/round47_adaptive_mass_tests.cpp)
 target_link_libraries(Round47AdaptiveMassTests PRIVATE exact_ebrp_core)
 add_test(NAME Round47AdaptiveMassTests COMMAND Round47AdaptiveMassTests)
+
+add_executable(Round48K1AMFTests tests/round48_k1_amf_tests.cpp)
+target_link_libraries(Round48K1AMFTests PRIVATE exact_ebrp_core)
+add_test(NAME Round48K1AMFTests COMMAND Round48K1AMFTests)

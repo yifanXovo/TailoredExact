@@ -10,6 +10,7 @@
 #include "GiniEnvelopeTailRepair.hpp"
 #include "GiniAdaptiveParametric.hpp"
 #include "ProcessPhaseLedger.hpp"
+#include "Round48K1AMF.hpp"
 #include "StaticSegmentedGini.hpp"
 
 #include <algorithm>
@@ -1617,6 +1618,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         options.round47_c6_adaptive_mass != "off";
     const bool round47_contraction = round47_active &&
         options.round47_c6_adaptive_mass == "adaptive-mass-contraction";
+    const bool round48_active = c6_nonblocking &&
+        options.round48_k1_amf == "k1-amf";
+    const bool round48_counterfactual_active = c6_nonblocking &&
+        options.round48_counterfactual_mode != "off";
     const bool round40_nested_dyadic = c6_nonblocking &&
         options.round40_c6_ub_geometry == "nested-dyadic-k4";
     const bool round41_static_segmented = c6_nonblocking &&
@@ -1698,6 +1703,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     result.external_gini_tree_backend = options.external_gini_backend;
     result.external_gini_tree_lifecycle = round42_sibling_coalescing
         ? "round42-c6-terminal-sibling-block"
+        : (round48_counterfactual_active
+        ? "round48-k1-action-counterfactual"
+        : (round48_active
+        ? "round48-k1-amf"
         : (round47_active
         ? (round47_contraction
             ? "round47-c6-adaptive-mass-contraction"
@@ -1714,7 +1723,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             ? "round30-same-leaf-bound-target"
         : (c4_incremental
             ? "round29-same-leaf-in-memory-model"
-            : "fresh-per-paper-event")))))));
+            : "fresh-per-paper-event")))))))));
     result.external_gini_tree_scheduling =
         options.external_gini_scheduling;
     result.external_gini_tree_startup_variant = c6_nonblocking
@@ -1737,6 +1746,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         options.round47_c6_adaptive_mass_tau;
     result.round47_c6_adaptive_mass_tau_explicit =
         options.round47_c6_adaptive_mass_tau_explicit;
+    result.round48_k1_amf = options.round48_k1_amf;
+    result.round48_amf_profile_version = round48_active
+        ? kRound48AMFProfileVersion : "off";
+    result.round48_counterfactual_mode = options.round48_counterfactual_mode;
+    result.round48_counterfactual_interval =
+        options.round48_counterfactual_interval;
     result.round40_c6_ub_geometry = options.round40_c6_ub_geometry;
     result.round42_terminal_sibling_coalescing =
         options.round42_terminal_sibling_coalescing;
@@ -1773,7 +1788,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             : "paper_external_gini_tree_running"));
     if (incremental_model_reuse) {
         result.external_gini_tree_algorithm_arm = c6_nonblocking
-            ? (round47_active
+            ? (round48_counterfactual_active
+                ? "K1-AM-COUNTERFACTUAL-" +
+                    options.round48_counterfactual_mode
+                : (round48_active
+                ? "K1-AMF"
+                : (round47_active
                 ? (round40_coarse_start ? "K1-" : "K4-") +
                     std::string(round47_contraction ? "AMC" : "AM")
                 : (round45_active
@@ -1805,7 +1825,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 ? "R37-PILOT-WEAKEST-PREFINE"
                 : (round36_causal
                 ? "R36-" + options.round36_c6_causal_arm
-                : "C6-CANDIDATE")))))))))
+                : "C6-CANDIDATE")))))))))))
             : (c5_bound_target ? "C5-CANDIDATE" : "C4-CANDIDATE");
         result.external_gini_tree_global_row_family_count =
             static_cast<long long>(kPaperGlobalFamilies.size());
@@ -2107,9 +2127,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             instance, options, verified_seed, root_gamma_L, root_gamma_U,
             std::move(result), std::move(backend), artifact_dir);
     }
-    const auto event_path = artifact_dir / (round45_active
+    const auto event_path = artifact_dir / (round45_active || round48_active
         ? "interval_tree_events.csv" : "paper_tree_events.csv");
-    const auto leaf_path = artifact_dir / (round45_active
+    const auto leaf_path = artifact_dir / (round45_active || round48_active
         ? "interval_coverage_ledger.csv" : "paper_leaf_ledger.csv");
     const auto optimize_path = artifact_dir / (round45_active
         ? "native_optimize_ledger.csv" : "paper_optimize_ledger.csv");
@@ -2123,6 +2143,15 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         artifact_dir / "adaptive_mass_decision_ledger.csv";
     const auto round47_contraction_path =
         artifact_dir / "contraction_ledger.csv";
+    const auto round48_amf_path = artifact_dir / "amf_decision_ledger.csv";
+    const auto round48_strength_path =
+        artifact_dir / "formulation_strength_ledger.csv";
+    const auto round48_registry_path =
+        artifact_dir / "formulation_variable_registry.csv";
+    const auto round48_model_size_path = artifact_dir / "model_size_ledger.csv";
+    const auto round48_certificate_path = artifact_dir / "certificate_ledger.csv";
+    const auto round48_artifact_manifest_path = artifact_dir / "artifact_manifest.csv";
+    const auto round48_completion_marker_path = artifact_dir / "completion_marker.json";
     const auto global_bound_path = artifact_dir / "global_bound_trace.csv";
     const auto native_target_path =
         artifact_dir / "native_target_ledger.csv";
@@ -2185,6 +2214,19 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         result.round47_contraction_ledger_path =
             round47_contraction_path.string();
     }
+    if (round48_active) {
+        result.round48_amf_decision_ledger_path = round48_amf_path.string();
+        result.round48_formulation_strength_ledger_path =
+            round48_strength_path.string();
+        result.round48_formulation_variable_registry_path =
+            round48_registry_path.string();
+        result.round48_model_size_ledger_path = round48_model_size_path.string();
+        result.round48_certificate_ledger_path = round48_certificate_path.string();
+        result.round48_artifact_manifest_path =
+            round48_artifact_manifest_path.string();
+        result.round48_completion_marker_path =
+            round48_completion_marker_path.string();
+    }
     result.external_gini_tree_global_bound_trace_path =
         global_bound_path.string();
     result.external_gini_tree_native_target_ledger_path =
@@ -2201,6 +2243,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         global_trace(global_bound_path), native_targets(native_target_path),
         initial_decomposition(initial_decomposition_path);
     std::ofstream round47_adaptive_mass_ledger, round47_contraction_ledger;
+    std::ofstream round48_amf_ledger, round48_strength_ledger,
+        round48_registry_ledger, round48_model_size_ledger,
+        round48_certificate_ledger;
     std::ofstream sibling_coverage;
     std::ofstream round43_atlas_ledger, round43_envelope_ledger,
         round43_facet_ledger, round43_reuse_ledger;
@@ -2216,6 +2261,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     if (round47_active) {
         round47_adaptive_mass_ledger.open(round47_adaptive_mass_path);
         round47_contraction_ledger.open(round47_contraction_path);
+    }
+    if (round48_active) {
+        round48_amf_ledger.open(round48_amf_path);
+        round48_strength_ledger.open(round48_strength_path);
+        round48_registry_ledger.open(round48_registry_path);
+        round48_model_size_ledger.open(round48_model_size_path);
+        round48_certificate_ledger.open(round48_certificate_path);
     }
     if (round42_sibling_coalescing) {
         sibling_coverage.open(sibling_coverage_path);
@@ -2259,6 +2311,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     if (round47_active) {
         round47_adaptive_mass_ledger << std::setprecision(17);
         round47_contraction_ledger << std::setprecision(17);
+    }
+    if (round48_active) {
+        round48_amf_ledger << std::setprecision(17);
+        round48_strength_ledger << std::setprecision(17);
+        round48_registry_ledger << std::setprecision(17);
+        round48_model_size_ledger << std::setprecision(17);
+        round48_certificate_ledger << std::setprecision(17);
     }
     global_trace << std::setprecision(17);
     native_targets << std::setprecision(17);
@@ -2322,8 +2381,45 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                "model_reused,basis_reused,rows_reused,model_rebuild_count,"
                "lower_bound_update,endpoint_audit,exactness_status\n";
     }
+    if (round48_active) {
+        round48_amf_ledger
+            << "run_id,instance,decision_sequence,interval_id,parent_id,depth,"
+               "gamma_L,gamma_U,B_p,B_L,B_R,U,g_L,g_R,eta,mu,S_AM,"
+               "eligible_variable_count,excluded_gini_variable_count,"
+               "invalid_variable_count,per_family_eligible_counts,phi_L,phi_R,"
+               "left_min_contraction,left_mean_contraction,left_max_contraction,"
+               "right_min_contraction,right_mean_contraction,right_max_contraction,"
+               "fixed_left_count,fixed_right_count,gtilde_L,gtilde_R,eta_hat,"
+               "S_AMF,tau,score_margin,AM_action,AMF_action,rescue_activated,"
+               "selected_native_target,deterministic_reason,profile_valid,"
+               "fallback_reason,decision_hash\n";
+        round48_strength_ledger
+            << "run_id,instance,decision_sequence,interval_id,profile_version,"
+               "profile_valid,failure_reason,eligible_variable_count,"
+               "excluded_gini_variable_count,invalid_variable_count,phi_L,phi_R,"
+               "left_min,left_mean,left_max,right_min,right_mean,right_max,"
+               "fixed_left_count,fixed_right_count,parent_model_sha256,"
+               "left_model_sha256,right_model_sha256\n";
+        round48_registry_ledger
+            << "run_id,instance,decision_sequence,interval_id,variable,family,"
+               "parent_lower,parent_upper,parent_width,width_tolerance,"
+               "left_lower,left_upper,left_width,c_L,right_lower,right_upper,"
+               "right_width,c_R,fixed_left,fixed_right,equal_weight\n";
+        round48_model_size_ledger
+            << "run_id,instance,decision_sequence,interval_id,parent_rows,"
+               "parent_columns,parent_nonzeros,left_rows,left_columns,left_nonzeros,"
+               "right_rows,right_columns,right_nonzeros,additional_models_built,"
+               "additional_lp_queries,additional_mip_queries\n";
+        round48_certificate_ledger
+            << "instance,strict_certificate,certificate_class,rejection_reason,"
+               "root_coverage,parent_child_coverage,all_leaves_closed,"
+               "all_bounds_valid,leaf_bounds_monotone,global_bound_monotone,"
+               "lifecycle_complete,feasibility_consistency,lower_bound,"
+               "verified_upper_bound,gap,false_certificate\n";
+    }
     long long c6_decision_sequence = 0;
     long long round47_contraction_sequence = 0;
+    bool round48_counterfactual_forced = false;
     global_trace
         << "process_elapsed_seconds,exact_phase_elapsed_seconds,event_type,"
            "active_leaf,active_leaf_valid_lower_bound,"
@@ -5693,6 +5789,91 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                           options.c6_normalized_split_threshold,
                           scheduler.certificateTolerance())))
                 : C6CurrentSplitDecision{};
+            AMFFormulationProfile round48_profile;
+            K1AMFDecision round48_decision;
+            bool round48_decision_available = false;
+            if (round48_active && c6_split.valid &&
+                !runtime[children[0].id].lp.infeasible &&
+                !runtime[children[1].id].lp.infeasible) {
+                round48_profile = buildRound48AMFFormulationProfile(
+                    selected_state.artifact.path,
+                    runtime[children[0].id].artifact.path,
+                    runtime[children[1].id].artifact.path,
+                    scheduler.certificateTolerance());
+                round48_decision = evaluateK1AMFDecision(
+                    c6_split, round48_profile, kRound48K1AMFTau);
+                round48_decision_available = true;
+                if (!round48_decision.valid) {
+                    c6_split.valid = false;
+                    c6_split.reason = round48_decision.reason;
+                } else {
+                    applyK1AMFDecision(c6_split, round48_decision);
+                    ++result.round48_amf_decision_count;
+                    result.round48_amf_max_eligible_variable_count = std::max(
+                        result.round48_amf_max_eligible_variable_count,
+                        round48_profile.eligible_variable_count);
+                    if (round48_decision.rescue_activated) {
+                        ++result.round48_amf_rescue_count;
+                    }
+                    if (round48_decision.fallback_to_am) {
+                        ++result.round48_amf_invalid_profile_fallback_count;
+                    }
+                }
+            }
+            if (round48_counterfactual_active && c6_split.valid) {
+                const bool target_state =
+                    bounded.id == options.round48_counterfactual_interval;
+                const std::string descendant_prefix =
+                    options.round48_counterfactual_interval + ".";
+                const bool target_descendant = bounded.id.rfind(
+                    descendant_prefix, 0) == 0;
+                if (target_state && !round48_counterfactual_forced) {
+                    if (runtime[children[0].id].lp.infeasible ||
+                        runtime[children[1].id].lp.infeasible) {
+                        c6_split.valid = false;
+                        c6_split.reason =
+                            "round48_counterfactual_target_has_infeasible_child";
+                    } else if (options.round48_counterfactual_mode ==
+                               "midpoint") {
+                        c6_split.split_immediately = true;
+                        c6_split.run_child_bound_target = false;
+                        c6_split.launch_exact_closure = false;
+                        c6_split.child_infeasibility_trigger = false;
+                        c6_split.reason =
+                            "round48_counterfactual_forced_single_midpoint";
+                    } else {
+                        const double child_target = std::min(
+                            runtime[children[0].id].lp.lower_bound,
+                            runtime[children[1].id].lp.lower_bound);
+                        const bool strict = child_target >
+                            bounded.lower_bound +
+                                scheduler.certificateTolerance();
+                        c6_split.split_immediately = false;
+                        c6_split.run_child_bound_target = strict;
+                        c6_split.launch_exact_closure = !strict;
+                        c6_split.child_bound_target = child_target;
+                        c6_split.child_infeasibility_trigger = false;
+                        c6_split.reason = strict
+                            ? "round48_counterfactual_forced_retain_native_target"
+                            : "round48_counterfactual_forced_retain_exact_close";
+                    }
+                    round48_counterfactual_forced = c6_split.valid;
+                    result.round48_counterfactual_performed = c6_split.valid;
+                } else if (round48_counterfactual_forced &&
+                           options.round48_counterfactual_mode == "midpoint" &&
+                           target_descendant) {
+                    c6_split.split_immediately = false;
+                    c6_split.run_child_bound_target = false;
+                    c6_split.launch_exact_closure = true;
+                    c6_split.contract_single_child = false;
+                    c6_split.close_parent_infeasible = false;
+                    c6_split.child_infeasibility_trigger = false;
+                    c6_split.reason =
+                        "round48_counterfactual_descendant_split_forbidden";
+                    ++result.
+                        round48_counterfactual_descendant_split_suppression_count;
+                }
+            }
             if (c6_nonblocking &&
                 options.round40_c6_coarse_start ==
                     "k1-adaptive-decisive" &&
@@ -5815,12 +5996,16 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                             : "child_infeasibility_independent_of_rho")
                         : (c6_split.launch_exact_closure
                             ? "no_strict_gain"
-                            : ((round47_active
+                            : (((round48_active && round48_decision_available)
+                                ? round48_decision.s_amf +
+                                    round48_decision.score_tolerance >=
+                                        kRound48K1AMFTau
+                                : (round47_active
                                 ? c6_split.adaptive_mass_score +
                                     c6_split.adaptive_score_tolerance >=
                                         options.round47_c6_adaptive_mass_tau
                                 : c6_split.normalized_disjunction_gain + 1e-15 >=
-                                    options.c6_normalized_split_threshold)
+                                    options.c6_normalized_split_threshold))
                                 ? "gain_greater_than_or_equal_to_rho"
                                 : "gain_below_rho"));
                 const std::string selected_action =
@@ -5876,6 +6061,122 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 }
                 c6_split_ledger << ',' << csvField(c6_split.reason) << ','
                     << csvField(coverage_update) << '\n';
+                if (round48_active && round48_decision_available) {
+                    const std::string run_id =
+                        artifact_dir.parent_path().filename().string();
+                    std::ostringstream family_counts;
+                    for (const auto& item : round48_profile.family_counts) {
+                        if (family_counts.tellp() > 0) family_counts << ';';
+                        family_counts << item.first << '=' << item.second;
+                    }
+                    round48_amf_ledger
+                        << csvField(run_id) << ',' << csvField(instance.name)
+                        << ',' << c6_decision_sequence << ','
+                        << csvField(bounded.id) << ','
+                        << csvField(bounded.parent_id) << ','
+                        << bounded.split_depth << ',' << bounded.gamma_L << ','
+                        << bounded.gamma_U << ',' << bounded.lower_bound << ','
+                        << runtime[children[0].id].lp.lower_bound << ','
+                        << runtime[children[1].id].lp.lower_bound << ','
+                        << verified_ub << ',' << round48_decision.g_left << ','
+                        << round48_decision.g_right << ','
+                        << round48_decision.eta << ',' << round48_decision.mu
+                        << ',' << round48_decision.s_am << ','
+                        << round48_profile.eligible_variable_count << ','
+                        << round48_profile.excluded_gini_variable_count << ','
+                        << round48_profile.invalid_variable_count << ','
+                        << csvField(family_counts.str()) << ','
+                        << round48_decision.phi_left << ','
+                        << round48_decision.phi_right << ','
+                        << round48_profile.left_min_contraction << ','
+                        << round48_profile.left_mean_contraction << ','
+                        << round48_profile.left_max_contraction << ','
+                        << round48_profile.right_min_contraction << ','
+                        << round48_profile.right_mean_contraction << ','
+                        << round48_profile.right_max_contraction << ','
+                        << round48_profile.fixed_left_count << ','
+                        << round48_profile.fixed_right_count << ','
+                        << round48_decision.gtilde_left << ','
+                        << round48_decision.gtilde_right << ','
+                        << round48_decision.eta_hat << ','
+                        << round48_decision.s_amf << ','
+                        << round48_decision.tau << ','
+                        << (round48_decision.s_amf - round48_decision.tau)
+                        << ',' << csvField(round48_decision.am_action) << ','
+                        << csvField(round48_decision.amf_action) << ','
+                        << round48_decision.rescue_activated << ',';
+                    if (c6_split.run_child_bound_target) {
+                        round48_amf_ledger << c6_split.child_bound_target;
+                    }
+                    round48_amf_ledger << ',' << csvField(round48_decision.reason)
+                        << ',' << round48_decision.profile_valid << ','
+                        << csvField(round48_decision.fallback_reason) << ','
+                        << csvField(round48_decision.decision_hash) << '\n';
+                    round48_strength_ledger
+                        << csvField(run_id) << ',' << csvField(instance.name)
+                        << ',' << c6_decision_sequence << ','
+                        << csvField(bounded.id) << ','
+                        << csvField(round48_profile.profile_version) << ','
+                        << round48_profile.valid << ','
+                        << csvField(round48_profile.failure_reason) << ','
+                        << round48_profile.eligible_variable_count << ','
+                        << round48_profile.excluded_gini_variable_count << ','
+                        << round48_profile.invalid_variable_count << ','
+                        << round48_profile.phi_left << ','
+                        << round48_profile.phi_right << ','
+                        << round48_profile.left_min_contraction << ','
+                        << round48_profile.left_mean_contraction << ','
+                        << round48_profile.left_max_contraction << ','
+                        << round48_profile.right_min_contraction << ','
+                        << round48_profile.right_mean_contraction << ','
+                        << round48_profile.right_max_contraction << ','
+                        << round48_profile.fixed_left_count << ','
+                        << round48_profile.fixed_right_count << ','
+                        << fileSha256(selected_state.artifact.path) << ','
+                        << fileSha256(runtime[children[0].id].artifact.path)
+                        << ','
+                        << fileSha256(runtime[children[1].id].artifact.path)
+                        << '\n';
+                    for (const AMFVariableContraction& variable :
+                         round48_profile.variables) {
+                        round48_registry_ledger
+                            << csvField(run_id) << ',' << csvField(instance.name)
+                            << ',' << c6_decision_sequence << ','
+                            << csvField(bounded.id) << ','
+                            << csvField(variable.variable) << ','
+                            << csvField(variable.family) << ','
+                            << variable.parent_lower << ','
+                            << variable.parent_upper << ','
+                            << variable.parent_width << ','
+                            << variable.width_tolerance << ','
+                            << variable.left_lower << ','
+                            << variable.left_upper << ','
+                            << variable.left_width << ',' << variable.c_left
+                            << ',' << variable.right_lower << ','
+                            << variable.right_upper << ','
+                            << variable.right_width << ',' << variable.c_right
+                            << ',' << variable.fixed_left << ','
+                            << variable.fixed_right << ",1\n";
+                    }
+                    round48_model_size_ledger
+                        << csvField(run_id) << ',' << csvField(instance.name)
+                        << ',' << c6_decision_sequence << ','
+                        << csvField(bounded.id) << ','
+                        << selected_state.artifact.rows << ','
+                        << selected_state.artifact.columns << ','
+                        << selected_state.artifact.nonzeros << ','
+                        << runtime[children[0].id].artifact.rows << ','
+                        << runtime[children[0].id].artifact.columns << ','
+                        << runtime[children[0].id].artifact.nonzeros << ','
+                        << runtime[children[1].id].artifact.rows << ','
+                        << runtime[children[1].id].artifact.columns << ','
+                        << runtime[children[1].id].artifact.nonzeros
+                        << ",0,0,0\n";
+                    round48_amf_ledger.flush();
+                    round48_strength_ledger.flush();
+                    round48_registry_ledger.flush();
+                    round48_model_size_ledger.flush();
+                }
                 if (round47_active &&
                     !runtime[children[0].id].lp.infeasible &&
                     !runtime[children[1].id].lp.infeasible) {
@@ -7469,6 +7770,25 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     result.strict_certified_original_problem = certificate.certified;
     result.strict_certificate_class = certificate.certificate_class;
     result.strict_certificate_rejection_reason = certificate.rejection_reason;
+    if (round48_active) {
+        const bool false_certificate =
+            result.strict_certified_original_problem && !certificate.certified;
+        round48_certificate_ledger
+            << csvField(instance.name) << ',' << certificate.certified << ','
+            << csvField(certificate.certificate_class) << ','
+            << csvField(certificate.rejection_reason) << ','
+            << result.external_gini_tree_root_coverage_valid << ','
+            << result.external_gini_tree_parent_child_coverage_valid << ','
+            << result.external_gini_tree_all_relevant_leaves_closed << ','
+            << result.external_gini_tree_all_leaf_bounds_valid << ','
+            << result.external_gini_tree_leaf_bounds_monotone << ','
+            << result.external_gini_tree_global_bound_monotone << ','
+            << result.external_gini_tree_lifecycle_complete << ','
+            << result.external_gini_tree_feasibility_consistency_gate << ','
+            << result.lower_bound << ',' << result.upper_bound << ','
+            << result.gap << ',' << false_certificate << '\n';
+        round48_certificate_ledger.flush();
+    }
     result.strict_lower_bound_source =
         round44_active
             ? "minimum_valid_parent_lp_strengthened_envelope_lp_complete_"
@@ -7617,6 +7937,84 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             ? "Exact certificate for the restricted counterfactual parent "
               "range only; not an original-problem certificate."
             : "Restricted counterfactual parent range not certified exactly.";
+    }
+    if (round48_counterfactual_active) {
+        const bool local_exact = certificate.certified &&
+            result.round48_counterfactual_performed;
+        result.external_gini_tree_strict_certified = false;
+        result.external_gini_tree_certificate_class = local_exact
+            ? "diagnostic_matched_action_exact"
+            : "diagnostic_matched_action_not_exact";
+        result.external_gini_tree_certificate_rejection_reason =
+            "round48_counterfactual_not_original_problem_certificate";
+        result.strict_certified_original_problem = false;
+        result.strict_certificate_class =
+            result.external_gini_tree_certificate_class;
+        result.strict_certificate_rejection_reason =
+            result.external_gini_tree_certificate_rejection_reason;
+        result.status = local_exact
+            ? "round48_counterfactual_exact"
+            : (global_deadline_stop
+                ? "round48_counterfactual_time_limit"
+                : "round48_counterfactual_not_exact");
+        result.certificate = local_exact
+            ? "Matched Round 48 action counterfactual completed exact closure; "
+              "diagnostic only and not an original-problem certificate."
+            : "Matched Round 48 action counterfactual did not complete exact "
+              "closure; diagnostic only.";
+    }
+    if (round48_active) {
+        events.flush();
+        optimize.flush();
+        lp_ledger.flush();
+        bound_ledger.flush();
+        split_ledger.flush();
+        c6_split_ledger.flush();
+        round47_adaptive_mass_ledger.flush();
+        global_trace.flush();
+        native_targets.flush();
+        initial_decomposition.flush();
+        round48_amf_ledger.flush();
+        round48_strength_ledger.flush();
+        round48_registry_ledger.flush();
+        round48_model_size_ledger.flush();
+        round48_certificate_ledger.flush();
+        std::vector<std::filesystem::path> artifact_files;
+        for (const auto& entry :
+             std::filesystem::recursive_directory_iterator(artifact_dir)) {
+            if (!entry.is_regular_file()) continue;
+            const auto path = entry.path();
+            if (path == round48_artifact_manifest_path ||
+                path == round48_completion_marker_path) continue;
+            artifact_files.push_back(path);
+        }
+        std::sort(artifact_files.begin(), artifact_files.end());
+        std::ofstream artifact_manifest(round48_artifact_manifest_path);
+        artifact_manifest << "path,sha256,size_bytes\n";
+        for (const auto& path : artifact_files) {
+            artifact_manifest << csvField(
+                std::filesystem::relative(path, artifact_dir).generic_string())
+                << ',' << fileSha256(path) << ','
+                << std::filesystem::file_size(path) << '\n';
+        }
+        artifact_manifest.flush();
+        std::ofstream completion(round48_completion_marker_path);
+        completion << std::setprecision(17)
+            << "{\n"
+            << "  \"schema\": \"round48-completion-marker-v1\",\n"
+            << "  \"completed\": " << (!hard_failure ? "true" : "false")
+            << ",\n  \"instance\": " << csvField(instance.name) << ",\n"
+            << "  \"strict_certificate\": "
+            << (certificate.certified ? "true" : "false") << ",\n"
+            << "  \"decision_count\": " << result.round48_amf_decision_count
+            << ",\n  \"rescue_count\": " << result.round48_amf_rescue_count
+            << ",\n  \"invalid_profile_fallback_count\": "
+            << result.round48_amf_invalid_profile_fallback_count
+            << ",\n  \"extra_lp_count\": " << result.round48_amf_extra_lp_count
+            << ",\n  \"extra_mip_count\": " << result.round48_amf_extra_mip_count
+            << ",\n  \"failure_reason\": "
+            << csvField(result.external_gini_tree_failure_reason) << "\n}\n";
+        completion.flush();
     }
     if (result.external_gini_tree_failure_reason.empty()) {
         result.external_gini_tree_failure_reason = "none";
