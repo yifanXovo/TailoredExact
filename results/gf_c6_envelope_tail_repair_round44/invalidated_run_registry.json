@@ -1,0 +1,29 @@
+{
+  "runs": [
+    {
+      "candidate_selection_eligible": false,
+      "path": "work/r44_smoke",
+      "reason": "Engineering-only runtime smoke accidentally used a validation-split instance before final candidate freeze. The run is quarantined, excluded from every atlas, threshold, selection, validation, and performance table, and may not support any scientific claim.",
+      "run_id": "r44_smoke_round39_small_easy_V8_M1_Q30_slot01_seed432322553",
+      "stage": "pre_implementation_smoke",
+      "status": "invalidated_protocol_exclusion"
+    },
+    {
+      "candidate_selection_eligible": false,
+      "path": "work/invalidated_round44_zero_range/noadaptive",
+      "reason": "Obsolete-build diagnostic exposed a missing Round 44 vacuous-zero-range certificate path. It is excluded from performance and selection tables and is replaced by a forced run under the corrected frozen development executable.",
+      "run_id": "stage3-development__round39_small_easy_V10_M1_Q30_slot04_seed1099392856__noadaptive",
+      "stage": "stage3_development_pre_edge_case_fix",
+      "status": "invalidated_implementation_defect"
+    },
+    {
+      "candidate_selection_eligible": false,
+      "path": "work/invalidated_round44_zero_range/veto-f05",
+      "reason": "Obsolete-build diagnostic exposed a missing Round 44 vacuous-zero-range certificate path. It is excluded from performance and selection tables and is replaced by a forced run under the corrected frozen development executable.",
+      "run_id": "stage3-development__round39_small_easy_V10_M1_Q30_slot04_seed1099392856__veto-f05",
+      "stage": "stage3_development_pre_edge_case_fix",
+      "status": "invalidated_implementation_defect"
+    }
+  ],
+  "schema": "round44-invalidated-run-registry-v1"
+}

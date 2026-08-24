@@ -75,6 +75,20 @@ struct FixedIntervalMipRequest {
     double native_bound_target = 0.0;
     double native_bound_target_tolerance = 1e-7;
     bool capture_native_bound_events = false;
+    // Round 49 diagnostic/candidate modes may consume the primal/dual state
+    // produced by this already-required LP solve.  This flag only copies
+    // attributes after Optimize; it never launches another solve.
+    bool capture_lp_primal_dual_evidence = false;
+};
+
+struct FixedIntervalLpVariableEvidence {
+    std::string name;
+    char original_type = 'C';
+    double lower_bound = 0.0;
+    double upper_bound = 0.0;
+    double primal_value = 0.0;
+    double reduced_cost = 0.0;
+    int variable_basis_status = 0;
 };
 
 struct FixedIntervalMipOutcome {
@@ -113,6 +127,37 @@ struct FixedIntervalMipOutcome {
     double memory_gb = 0.0;
     double model_build_seconds = 0.0;
     double model_read_seconds = 0.0;
+    long long model_variable_count = 0;
+    long long model_linear_constraint_count = 0;
+    long long model_nonzero_count = 0;
+    long long model_binary_variable_count = 0;
+    long long model_integer_variable_count = 0;
+    long long model_continuous_variable_count = 0;
+    long long model_general_constraint_count = 0;
+    bool presolved_model_size_available = false;
+    long long presolved_row_count = 0;
+    long long presolved_column_count = 0;
+    long long presolved_nonzero_count = 0;
+    bool lp_solution_diagnostics_available = false;
+    bool lp_g_value_available = false;
+    double lp_g_value = 0.0;
+    bool lp_objective_value_available = false;
+    double lp_objective_value = 0.0;
+    bool lp_primal_values_available = false;
+    bool lp_reduced_costs_available = false;
+    bool lp_basis_status_available = false;
+    bool lp_primal_dual_evidence_available = false;
+    int lp_objective_sense = 0;
+    double lp_verified_cutoff = 0.0;
+    std::string lp_model_fingerprint;
+    std::vector<FixedIntervalLpVariableEvidence>
+        lp_primal_dual_variable_evidence;
+    double route_binary_fractionality = 0.0;
+    double visit_binary_fractionality = 0.0;
+    double inventory_bit_fractionality = 0.0;
+    double selector_binary_fractionality = 0.0;
+    double mccormick_ambiguity = 0.0;
+    double segmented_mccormick_ambiguity = 0.0;
     bool presolve_time_available = false;
     double presolve_time_seconds = 0.0;
     std::string presolve_time_status = "unavailable";
@@ -155,6 +200,27 @@ struct FixedIntervalMipOutcome {
 };
 
 struct FixedIntervalMipBackendStats {
+    int threads_requested = 1;
+    int threads_set_return_code = -1;
+    int threads_get_return_code = -1;
+    int threads_effective = 0;
+    int presolve_requested = -1;
+    int presolve_set_return_code = -1;
+    int presolve_get_return_code = -1;
+    int presolve_effective = -2;
+    int seed_requested = 0;
+    int seed_set_return_code = -1;
+    int seed_get_return_code = -1;
+    int seed_effective = -1;
+    double mip_gap_requested = 0.0;
+    int mip_gap_set_return_code = -1;
+    int mip_gap_get_return_code = -1;
+    double mip_gap_effective = -1.0;
+    double mip_gap_abs_requested = 0.0;
+    int mip_gap_abs_set_return_code = -1;
+    int mip_gap_abs_get_return_code = -1;
+    double mip_gap_abs_effective = -1.0;
+    bool parameter_roundtrip_valid = false;
     long long environment_count = 0;
     long long model_count = 0;
     long long model_read_count = 0;

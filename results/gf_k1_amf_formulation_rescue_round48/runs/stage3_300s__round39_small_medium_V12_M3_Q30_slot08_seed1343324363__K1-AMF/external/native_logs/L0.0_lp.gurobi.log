@@ -1,0 +1,37 @@
+
+Gurobi 13.0.2 (win64) logging started Mon Aug 24 17:29:22 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP\results\gf_k1_amf_formulation_rescue_round48\runs\stage3_300s__round39_small_medium_V12_M3_Q30_slot08_seed1343324363__K1-AMF\external\native_logs\L0.0_lp.gurobi.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  277.3229277
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 16430 rows, 1406 columns and 167542 nonzeros (Min)
+Model fingerprint: 0xc40ebc06
+Model has 13 linear objective coefficients
+Coefficient statistics:
+  Matrix range     [2e-02, 1e+05]
+  Objective range  [2e-02, 1e+00]
+  Bounds range     [2e-02, 7e+01]
+  RHS range        [2e-02, 1e+06]
+
+Presolve removed 369 rows and 68 columns
+Presolve time: 0.07s
+Presolved: 1332 rows, 17367 columns, 168196 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0      handle free variables                          0s
+     780    2.4872307e-02   0.000000e+00   0.000000e+00      0s
+
+Solved in 780 iterations and 0.11 seconds (0.36 work units)
+Optimal objective  2.487230737e-02
+
+User-callback calls 931, time in user-callback 0.00 sec
