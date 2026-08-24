@@ -199,3 +199,8 @@ add_test(NAME Round45AdaptiveParametricTests
 add_executable(Round46C6RhoTests tests/round46_c6_rho_tests.cpp)
 target_link_libraries(Round46C6RhoTests PRIVATE exact_ebrp_core)
 add_test(NAME Round46C6RhoTests COMMAND Round46C6RhoTests)
+
+add_executable(Round47AdaptiveMassTests
+    tests/round47_adaptive_mass_tests.cpp)
+target_link_libraries(Round47AdaptiveMassTests PRIVATE exact_ebrp_core)
+add_test(NAME Round47AdaptiveMassTests COMMAND Round47AdaptiveMassTests)

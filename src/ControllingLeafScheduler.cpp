@@ -271,6 +271,90 @@ bool ControllingLeafScheduler::splitLeafAtomically(
     return true;
 }
 
+bool ControllingLeafScheduler::contractLeafAtomically(
+    const std::string& parent_id,
+    const ControllingLeaf& feasible_child_input,
+    double infeasible_gamma_L,
+    double infeasible_gamma_U,
+    bool strict_lp_infeasibility_verified,
+    std::string* reason) {
+    ControllingLeaf* parent = findLeaf(parent_id);
+    if (!parent) {
+        if (reason) *reason = "parent_not_found";
+        return false;
+    }
+    if (parent->status != ControllingLeafStatus::Open &&
+        parent->status != ControllingLeafStatus::Invalid) {
+        if (reason) *reason = "parent_not_open";
+        return false;
+    }
+    if (!strict_lp_infeasibility_verified) {
+        if (reason) *reason = "strict_lp_infeasibility_not_verified";
+        return false;
+    }
+    ControllingLeaf child = feasible_child_input;
+    if (child.id.empty() || findLeaf(child.id)) {
+        if (reason) *reason = "duplicate_or_empty_child_id";
+        return false;
+    }
+    if (child.parent_id != parent_id ||
+        child.split_depth != parent->split_depth + 1 ||
+        (child.child_index != 0 && child.child_index != 1)) {
+        if (reason) *reason = "child_lineage_mismatch";
+        return false;
+    }
+    if (!finite(child.gamma_L) || !finite(child.gamma_U) ||
+        !finite(infeasible_gamma_L) || !finite(infeasible_gamma_U) ||
+        child.gamma_U < child.gamma_L - tolerance_ ||
+        infeasible_gamma_U < infeasible_gamma_L - tolerance_) {
+        if (reason) *reason = "invalid_contraction_interval";
+        return false;
+    }
+    if (child.lower_bound + tolerance_ < parent->lower_bound ||
+        child.base_lower_bound + tolerance_ < parent->lower_bound) {
+        if (reason) *reason = "child_did_not_inherit_parent_bound";
+        return false;
+    }
+    const bool infeasible_left =
+        std::fabs(infeasible_gamma_L - parent->gamma_L) <= tolerance_ &&
+        std::fabs(infeasible_gamma_U - child.gamma_L) <= tolerance_ &&
+        std::fabs(child.gamma_U - parent->gamma_U) <= tolerance_ &&
+        child.child_index == 1;
+    const bool infeasible_right =
+        std::fabs(child.gamma_L - parent->gamma_L) <= tolerance_ &&
+        std::fabs(child.gamma_U - infeasible_gamma_L) <= tolerance_ &&
+        std::fabs(infeasible_gamma_U - parent->gamma_U) <= tolerance_ &&
+        child.child_index == 0;
+    if (!infeasible_left && !infeasible_right) {
+        if (reason) *reason = "contraction_endpoint_partition_invalid";
+        return false;
+    }
+
+    child.parent_child_coverage_valid = true;
+    child.parent_replaced = false;
+    child.status = ControllingLeafStatus::Open;
+    child.lower_bound = std::max(child.lower_bound, parent->lower_bound);
+    child.base_lower_bound = std::max(
+        child.base_lower_bound, parent->lower_bound);
+    const double before = globalLowerBound();
+    leaves_.reserve(leaves_.size() + 1);
+    leaves_.push_back(child);
+    parent = findLeaf(parent_id);
+    parent->single_child_contraction_parent = true;
+    parent->strict_infeasible_half_verified = true;
+    parent->contracted_infeasible_gamma_L = infeasible_gamma_L;
+    parent->contracted_infeasible_gamma_U = infeasible_gamma_U;
+    parent->contraction_source = "strict_complete_midpoint_child_lp_infeasible";
+    parent->parent_replaced = true;
+    parent->status = ControllingLeafStatus::Replaced;
+    const double after = globalLowerBound();
+    if (after + tolerance_ < before) global_bound_monotone_ = false;
+    noteGlobalBound();
+    active_tie_order_.clear();
+    if (reason) *reason = "accepted_exact_single_child_contraction";
+    return true;
+}
+
 bool ControllingLeafScheduler::mergeValidLowerBound(
     const std::string& leaf_id,
     double value,
@@ -725,6 +809,36 @@ bool ControllingLeafScheduler::parentChildCoverageValid(std::string* reason) con
         std::vector<const ControllingLeaf*> children;
         for (const ControllingLeaf& leaf : leaves_) {
             if (leaf.parent_id == parent.id) children.push_back(&leaf);
+        }
+        if (parent.single_child_contraction_parent) {
+            if (children.size() != 1 ||
+                !parent.strict_infeasible_half_verified ||
+                parent.contraction_source.empty()) {
+                if (reason) *reason =
+                    "contracted_parent_invalid_child_or_proof:" + parent.id;
+                return false;
+            }
+            const ControllingLeaf* child = children.front();
+            const bool infeasible_left =
+                std::fabs(parent.contracted_infeasible_gamma_L -
+                          parent.gamma_L) <= tolerance_ &&
+                std::fabs(parent.contracted_infeasible_gamma_U -
+                          child->gamma_L) <= tolerance_ &&
+                std::fabs(child->gamma_U - parent.gamma_U) <= tolerance_ &&
+                child->child_index == 1;
+            const bool infeasible_right =
+                std::fabs(child->gamma_L - parent.gamma_L) <= tolerance_ &&
+                std::fabs(child->gamma_U -
+                          parent.contracted_infeasible_gamma_L) <= tolerance_ &&
+                std::fabs(parent.contracted_infeasible_gamma_U -
+                          parent.gamma_U) <= tolerance_ &&
+                child->child_index == 0;
+            if (!infeasible_left && !infeasible_right) {
+                if (reason) *reason =
+                    "contracted_parent_endpoint_or_side_invalid:" + parent.id;
+                return false;
+            }
+            continue;
         }
         if (children.size() < 2) {
             if (reason) *reason = "replaced_parent_missing_children:" + parent.id;

@@ -1,0 +1,160 @@
+{
+  "best_k1_arm": "K1-AM",
+  "best_k4_arm": "K4-AMC",
+  "frozen_before_confirmation_instances_opened": true,
+  "rankings": {
+    "K1": {
+      "contraction_attributed_gain": false,
+      "contraction_event_comparisons": [
+        {
+          "am_gap": 3.635005563669461e-16,
+          "am_models": 13.0,
+          "am_work": 970.6039194826874,
+          "amc_gap": 3.635005563669461e-16,
+          "amc_models": 13.0,
+          "amc_work": 970.6039194826874,
+          "certificate_not_weakened": true,
+          "contractions": 3,
+          "instance": "high_imbalance_seed3201",
+          "measurable_contraction_attributed_gain": false,
+          "proof_not_weakened": true
+        }
+      ],
+      "finalist": "K1-AM",
+      "ordered_arms": [
+        "K1-AM",
+        "K1-AMC"
+      ],
+      "scores": {
+        "K1-AM": [
+          0,
+          1.5419233104925857e-15,
+          4.0828682536125e-08,
+          -1,
+          970.6039194826874,
+          0.024166104844344193,
+          0.4162886027178915,
+          0,
+          0.4404549500066387,
+          7489.954677611875,
+          3831.4412925,
+          42.0,
+          0
+        ],
+        "K1-AMC": [
+          0,
+          1.5419233104925857e-15,
+          4.0828682536125e-08,
+          -1,
+          970.6039194826874,
+          0.024166104844344193,
+          0.4162886027178915,
+          0,
+          0.4404549500066387,
+          7488.197566743646,
+          3831.6990658,
+          42.0,
+          1
+        ]
+      }
+    },
+    "K4": {
+      "contraction_attributed_gain": true,
+      "contraction_event_comparisons": [
+        {
+          "am_gap": 0.0,
+          "am_models": 14.0,
+          "am_work": 0.989274344317732,
+          "amc_gap": 0.0,
+          "amc_models": 14.0,
+          "amc_work": 0.989274344317732,
+          "certificate_not_weakened": true,
+          "contractions": 3,
+          "instance": "round39_small_hard_V10_M1_Q20_slot01_seed561355351",
+          "measurable_contraction_attributed_gain": false,
+          "proof_not_weakened": true
+        },
+        {
+          "am_gap": 0.0,
+          "am_models": 22.0,
+          "am_work": 10.503884558425527,
+          "amc_gap": 0.0,
+          "amc_models": 22.0,
+          "amc_work": 10.503884558425527,
+          "certificate_not_weakened": true,
+          "contractions": 6,
+          "instance": "round39_small_hard_V10_M3_Q20_slot04_seed1145042375",
+          "measurable_contraction_attributed_gain": false,
+          "proof_not_weakened": true
+        },
+        {
+          "am_gap": 5.872351488108015e-10,
+          "am_models": 10.0,
+          "am_work": 710.8503886196801,
+          "amc_gap": 5.872351488108015e-10,
+          "amc_models": 10.0,
+          "amc_work": 710.8503886196801,
+          "certificate_not_weakened": true,
+          "contractions": 1,
+          "instance": "high_imbalance_seed3201",
+          "measurable_contraction_attributed_gain": false,
+          "proof_not_weakened": true
+        },
+        {
+          "am_gap": 0.1123420662725595,
+          "am_models": 8.0,
+          "am_work": 2035.6397249881973,
+          "amc_gap": 0.1123420662725595,
+          "amc_models": 8.0,
+          "amc_work": 2028.505563711093,
+          "certificate_not_weakened": true,
+          "contractions": 1,
+          "instance": "moderate_seed3301",
+          "measurable_contraction_attributed_gain": true,
+          "proof_not_weakened": true
+        }
+      ],
+      "finalist": "K4-AMC",
+      "ordered_arms": [
+        "K4-AMC",
+        "K4-AM"
+      ],
+      "scores": {
+        "K4-AM": [
+          0,
+          1.3877309794433272e-14,
+          3.0696806124470356e-15,
+          -1,
+          710.8503886196801,
+          0.1123420662725595,
+          0.3645174333068863,
+          0,
+          0.4768597444423602,
+          7142.017061301467,
+          3716.929209,
+          111.0,
+          0
+        ],
+        "K4-AMC": [
+          0,
+          1.3877309794433272e-14,
+          3.0696806124470356e-15,
+          -1,
+          710.8503886196801,
+          0.1123420662725595,
+          0.3578527335880439,
+          0,
+          0.4701950447235178,
+          7150.227166196762,
+          3690.7186455,
+          111.0,
+          1
+        ]
+      }
+    }
+  },
+  "schema": "round47-stage4-finalist-freeze-v1",
+  "selection_order": "Section 17 frozen lexicographic evidence order",
+  "stage4_candidate_rows": 40,
+  "tau": 0.07915
+}

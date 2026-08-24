@@ -1638,6 +1638,28 @@ std::string resultToJson(const SolveResult& input) {
     out << "  \"c6_normalized_split_threshold_source\": \""
         << jsonEscape(result.c6_normalized_split_threshold_source)
         << "\",\n";
+    out << "  \"round47_c6_adaptive_mass\": \""
+        << jsonEscape(result.round47_c6_adaptive_mass) << "\",\n";
+    out << "  \"round47_c6_adaptive_mass_tau\": "
+        << result.round47_c6_adaptive_mass_tau << ",\n";
+    out << "  \"round47_c6_adaptive_mass_tau_explicit\": "
+        << (result.round47_c6_adaptive_mass_tau_explicit ? "true" : "false")
+        << ",\n";
+    out << "  \"round47_single_child_contraction_count\": "
+        << result.round47_single_child_contraction_count << ",\n";
+    out << "  \"round47_both_child_infeasible_closure_count\": "
+        << result.round47_both_child_infeasible_closure_count << ",\n";
+    out << "  \"round47_adaptive_mass_finite_decision_count\": "
+        << result.round47_adaptive_mass_finite_decision_count << ",\n";
+    out << "  \"round47_adaptive_mass_extra_lp_count\": "
+        << result.round47_adaptive_mass_extra_lp_count << ",\n";
+    out << "  \"round47_adaptive_mass_extra_mip_count\": "
+        << result.round47_adaptive_mass_extra_mip_count << ",\n";
+    out << "  \"round47_adaptive_mass_decision_ledger_path\": \""
+        << jsonEscape(result.round47_adaptive_mass_decision_ledger_path)
+        << "\",\n";
+    out << "  \"round47_contraction_ledger_path\": \""
+        << jsonEscape(result.round47_contraction_ledger_path) << "\",\n";
     out << "  \"round40_c6_ub_geometry\": \""
         << jsonEscape(result.round40_c6_ub_geometry) << "\",\n";
     out << "  \"round40_c6_nested_dyadic_level\": "

@@ -1238,6 +1238,13 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
                 std::stod(requireValue(i, argc, argv));
             opt.c6_normalized_split_threshold_explicit = true;
         }
+        else if (arg == "--round47-c6-adaptive-mass")
+            opt.round47_c6_adaptive_mass = requireValue(i, argc, argv);
+        else if (arg == "--round47-c6-adaptive-mass-tau") {
+            opt.round47_c6_adaptive_mass_tau =
+                std::stod(requireValue(i, argc, argv));
+            opt.round47_c6_adaptive_mass_tau_explicit = true;
+        }
         else if (arg == "--round40-c6-ub-geometry") opt.round40_c6_ub_geometry = requireValue(i, argc, argv);
         else if (arg == "--round41-static-segmented-gini") opt.round41_static_segmented_gini = requireValue(i, argc, argv);
         else if (arg == "--round41-static-segmented-solve") opt.round41_static_segmented_solve = requireValue(i, argc, argv);
@@ -1675,6 +1682,39 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.c6_normalized_split_threshold > 1.0) {
         throw std::runtime_error(
             "--c6-normalized-split-threshold must satisfy 0 <= rho <= 1");
+    }
+    if (opt.round47_c6_adaptive_mass != "off" &&
+        opt.round47_c6_adaptive_mass != "adaptive-mass" &&
+        opt.round47_c6_adaptive_mass != "adaptive-mass-contraction") {
+        throw std::runtime_error(
+            "Unsupported --round47-c6-adaptive-mass: " +
+            opt.round47_c6_adaptive_mass);
+    }
+    if (!std::isfinite(opt.round47_c6_adaptive_mass_tau) ||
+        opt.round47_c6_adaptive_mass_tau < 0.0 ||
+        opt.round47_c6_adaptive_mass_tau > 1.0) {
+        throw std::runtime_error(
+            "--round47-c6-adaptive-mass-tau must satisfy 0 <= tau <= 1");
+    }
+    if (opt.round47_c6_adaptive_mass != "off" &&
+        (opt.external_gini_scheduling != "round31-nonblocking-native-bound" ||
+         opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         (opt.round40_c6_coarse_start != "off" &&
+          opt.round40_c6_coarse_start != "k1-adaptive") ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.round41_static_segmented_gini != "off" ||
+         opt.round42_terminal_sibling_coalescing != "off" ||
+         opt.round43_envelope_refinement != "off" ||
+         opt.round44_envelope_tail_repair != "off" ||
+         opt.round45_adaptive_parametric_partition != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 47 adaptive mass requires pure C6 HGA-FULL, midpoint "
+            "K4 or k1-adaptive initialization, Auto presolve, and all "
+            "Round 36-45 refinement mechanisms off");
     }
     if (opt.round40_c6_coarse_start != "off" &&
         (opt.round34_c6_startup_variant != "hga-full" ||
@@ -10911,6 +10951,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.c6_normalized_split_threshold_source =
         opt.c6_normalized_split_threshold_explicit
             ? "explicit" : "implicit-default";
+    result.round47_c6_adaptive_mass = opt.round47_c6_adaptive_mass;
+    result.round47_c6_adaptive_mass_tau =
+        opt.round47_c6_adaptive_mass_tau;
+    result.round47_c6_adaptive_mass_tau_explicit =
+        opt.round47_c6_adaptive_mass_tau_explicit;
     result.round40_c6_ub_geometry = opt.round40_c6_ub_geometry;
     result.round41_static_segmented_gini =
         opt.round41_static_segmented_gini;
