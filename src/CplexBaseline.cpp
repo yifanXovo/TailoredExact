@@ -69,6 +69,7 @@ struct StaticSegmentedWriteStats {
     long long factored_indicator_rows_removed = 0;
     long long hierarchical_selector_variables = 0;
     long long exact_duplicate_rows_omitted = 0;
+    long long round50_symmetry_rows = 0;
     std::string family_encoding;
 };
 
@@ -1904,13 +1905,29 @@ void writeCompactLp(const Instance& instance,
     const bool identical_q = std::all_of(instance.Q.begin(), instance.Q.end(),
         [&](int q) { return q == instance.Q.front(); });
     if (strengthened && options.interval_oracle_symmetry_breaking && identical_q && M > 1) {
+        const bool route_start_order = canonical_spec &&
+            canonical_spec->round50_symmetry_policy == "route-start-order";
         for (int k = 0; k + 1 < M; ++k) {
             Expr e;
-            for (int i = 1; i <= V; ++i) {
-                addTerm(e, zName(k, i), 1);
-                addTerm(e, zName(k + 1, i), -1);
+            if (route_start_order) {
+                // An unused route has start index zero.  Every used route has
+                // one depot exit, and station disjointness makes used starts
+                // unique.  Relabeling identical vehicles therefore always
+                // yields a representative satisfying nondecreasing starts.
+                for (int i = 1; i <= V; ++i) {
+                    addTerm(e, xName(k, 0, i), static_cast<double>(i));
+                    addTerm(e, xName(k + 1, 0, i),
+                            -static_cast<double>(i));
+                }
+                writeConstraint(out, cid, e, "<=", 0);
+            } else {
+                for (int i = 1; i <= V; ++i) {
+                    addTerm(e, zName(k, i), 1);
+                    addTerm(e, zName(k + 1, i), -1);
+                }
+                writeConstraint(out, cid, e, ">=", 0);
             }
-            writeConstraint(out, cid, e, ">=", 0);
+            if (static_stats) ++static_stats->round50_symmetry_rows;
         }
     }
 
@@ -3967,6 +3984,7 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
     artifact.verified_incumbent_row = spec.add_verified_incumbent_row;
     artifact.exact_duplicate_row_elimination =
         spec.exact_duplicate_row_elimination;
+    artifact.round50_symmetry_policy = spec.round50_symmetry_policy;
     artifact.static_segmented_gini = spec.static_segmented_gini;
     artifact.objective_gini_envelope_rows = static_cast<long long>(
         spec.objective_gini_envelope_facets.size());
@@ -4047,6 +4065,7 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
             static_stats.hierarchical_selector_variables;
         artifact.exact_duplicate_rows_omitted =
             static_stats.exact_duplicate_rows_omitted;
+        artifact.round50_symmetry_rows = static_stats.round50_symmetry_rows;
         artifact.static_family_encoding = static_stats.family_encoding;
         const ModelSizeStats size = analyzeLpModel(path);
         artifact.rows = size.rows;

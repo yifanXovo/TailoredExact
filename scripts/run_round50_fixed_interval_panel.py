@@ -147,7 +147,8 @@ def main() -> None:
         "min_objective", "max_objective", "min_bound", "max_bound",
         "min_rhs", "max_rhs", "branch_priority_assignment_status",
         "branch_priority_tiers", "exact_duplicate_row_elimination",
-        "exact_duplicate_rows_omitted",
+        "exact_duplicate_rows_omitted", "round50_symmetry_policy",
+        "round50_symmetry_rows",
         "failure_reason", "artifact_dir",
     ]
 
@@ -203,7 +204,16 @@ def main() -> None:
             args.cap, bool(result["certificate"]), float(result["process_time_seconds"]))
         dedup_enabled = bool(model.get("exact_duplicate_row_elimination", False))
         duplicates_omitted = int(model.get("exact_duplicate_rows_omitted", 0))
-        if dedup_enabled:
+        symmetry_policy = model.get("round50_symmetry_policy", "v0-cardinality")
+        if symmetry_policy == "route-start-order":
+            model_identity_match = (
+                args.policy in {"s1", "s1-route-start-order"}
+                and int(model["rows"]) == int(frozen["original_rows"])
+                and int(model["columns"]) == int(frozen["original_columns"])
+                and model["scope"] ==
+                    "complete_original_compact_milp_intersected_with_static_gini_interval"
+            )
+        elif dedup_enabled:
             model_identity_match = (
                 args.policy in {"c1", "c1-exact-dedup",
                                 "c1-exact-duplicate-elimination"}
@@ -276,6 +286,8 @@ def main() -> None:
             "branch_priority_tiers": branch_tiers,
             "exact_duplicate_row_elimination": str(dedup_enabled).lower(),
             "exact_duplicate_rows_omitted": duplicates_omitted,
+            "round50_symmetry_policy": symmetry_policy,
+            "round50_symmetry_rows": model.get("round50_symmetry_rows", 0),
             "failure_reason": result["failure_reason"],
             "artifact_dir": artifact_dir.relative_to(ROOT).as_posix(),
         })

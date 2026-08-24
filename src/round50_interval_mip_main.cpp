@@ -281,7 +281,11 @@ void writeStateIdentity(const ebrp::Instance& instance,
         << "  \"exact_duplicate_row_elimination\": "
         << boolJson(artifact.exact_duplicate_row_elimination) << ",\n"
         << "  \"exact_duplicate_rows_omitted\": "
-        << artifact.exact_duplicate_rows_omitted << "\n}\n";
+        << artifact.exact_duplicate_rows_omitted << ",\n"
+        << "  \"round50_symmetry_policy\": \""
+        << jsonEscape(artifact.round50_symmetry_policy) << "\",\n"
+        << "  \"round50_symmetry_rows\": "
+        << artifact.round50_symmetry_rows << "\n}\n";
     std::ofstream model(args.artifact_dir / "model_fingerprint.json");
     model << "{\n  \"schema\": \"round50-model-fingerprint-v1\",\n"
           << "  \"sha256\": \"" << artifact.sha256 << "\",\n"
@@ -293,18 +297,24 @@ void writeStateIdentity(const ebrp::Instance& instance,
           << "  \"exact_duplicate_row_elimination\": "
           << boolJson(artifact.exact_duplicate_row_elimination) << ",\n"
           << "  \"exact_duplicate_rows_omitted\": "
-          << artifact.exact_duplicate_rows_omitted << "\n}\n";
+          << artifact.exact_duplicate_rows_omitted << ",\n"
+          << "  \"round50_symmetry_policy\": \""
+          << jsonEscape(artifact.round50_symmetry_policy) << "\",\n"
+          << "  \"round50_symmetry_rows\": "
+          << artifact.round50_symmetry_rows << "\n}\n";
 }
 
 void writeStaticLedgers(const Arguments& args,
                         const ebrp::CanonicalCompactModelArtifact& artifact) {
     std::ofstream size(args.artifact_dir / "formulation_size_ledger.csv");
-    size << "state_id,policy,original_rows,original_columns,original_nonzeros,model_scope,exact_duplicate_row_elimination,exact_duplicate_rows_omitted\n"
+    size << "state_id,policy,original_rows,original_columns,original_nonzeros,model_scope,exact_duplicate_row_elimination,exact_duplicate_rows_omitted,round50_symmetry_policy,round50_symmetry_rows\n"
          << csvField(args.state_id) << ',' << csvField(args.policy) << ','
          << artifact.rows << ',' << artifact.columns << ','
          << artifact.nonzeros << ',' << csvField(artifact.model_scope) << ','
          << artifact.exact_duplicate_row_elimination << ','
-         << artifact.exact_duplicate_rows_omitted << '\n';
+         << artifact.exact_duplicate_rows_omitted << ','
+         << csvField(artifact.round50_symmetry_policy) << ','
+         << artifact.round50_symmetry_rows << '\n';
 }
 
 void writeSolveEvidence(const Arguments& args,
@@ -515,6 +525,9 @@ int main(int argc, char** argv) {
         spec.incumbent_epsilon = 0.0;
         spec.exact_duplicate_row_elimination =
             policy.cut_formulation == "exact-duplicate-elimination";
+        spec.round50_symmetry_policy =
+            policy.symmetry_numerical == "route-start-order"
+                ? "route-start-order" : "v0-cardinality";
         const auto build_started = Clock::now();
         ebrp::CanonicalCompactModelArtifact artifact =
             ebrp::writeCanonicalCompactModel(

@@ -39,6 +39,10 @@ Round50IntervalMipPolicy parseRound50IntervalMipPolicy(
         out.name = "c1-exact-duplicate-elimination";
         out.branching = Round50BranchingPolicy::Default;
         out.cut_formulation = "exact-duplicate-elimination";
+    } else if (out.name == "s1" || out.name == "s1-route-start-order") {
+        out.name = "s1-route-start-order";
+        out.branching = Round50BranchingPolicy::Default;
+        out.symmetry_numerical = "route-start-order";
     } else {
         out.failure_reason = "unsupported_round50_interval_mip_policy";
         return out;
