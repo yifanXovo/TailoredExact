@@ -81,7 +81,8 @@ def parse_lp_mapping(path: Path) -> tuple[str, Counter[str], int, int]:
             ("x_", "routing_arc"), ("z_", "visit_selection"),
             ("mode_", "operation_mode"), ("op_mode_", "operation_mode"),
             ("p_", "pickup_quantity"), ("d_", "drop_quantity"),
-            ("load_", "vehicle_load"), ("y_", "final_inventory"),
+            ("load_", "vehicle_load"), ("Y_", "final_inventory"),
+            ("y_", "final_inventory"),
         )
         for prefix, label in prefixes:
             if name.startswith(prefix):

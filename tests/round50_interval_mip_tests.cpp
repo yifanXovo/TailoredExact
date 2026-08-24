@@ -41,12 +41,19 @@ int main() {
         require(classifyRound50Variable("load_0_1") ==
                     Round50VariableFamily::VehicleLoad,
                 "load family");
+        require(classifyRound50Variable("Y_1") ==
+                    Round50VariableFamily::FinalInventory,
+                "canonical inventory family");
         require(classifyRound50Variable("y_1") ==
                     Round50VariableFamily::FinalInventory,
-                "inventory family");
-        require(classifyRound50Variable("bit_1_2") ==
-                    Round50VariableFamily::Auxiliary,
-                "auxiliary family");
+                "legacy lowercase inventory family");
+        for (const std::string auxiliary : {
+                 "conn_0_1_2", "ord_0_1", "bit_1_2", "prod_1_2",
+                 "h_1_2", "r_1", "e_1", "zprod_1", "W", "G"}) {
+            require(classifyRound50Variable(auxiliary) ==
+                        Round50VariableFamily::Auxiliary,
+                    "canonical auxiliary family: " + auxiliary);
+        }
         require(round50BranchPriority(
                     Round50BranchingPolicy::PrimitiveFirst,
                     Round50VariableFamily::RoutingArc) >

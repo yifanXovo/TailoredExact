@@ -52,7 +52,11 @@ Round50VariableFamily classifyRound50Variable(const std::string& name) {
     if (starts(name, "p_")) return Round50VariableFamily::PickupQuantity;
     if (starts(name, "d_")) return Round50VariableFamily::DropQuantity;
     if (starts(name, "load_")) return Round50VariableFamily::VehicleLoad;
-    if (starts(name, "y_")) return Round50VariableFamily::FinalInventory;
+    // The canonical writer uses uppercase Y_ for original final inventory.
+    // Accept lowercase as well for compatibility with older semantic fixtures.
+    if (starts(name, "Y_") || starts(name, "y_")) {
+        return Round50VariableFamily::FinalInventory;
+    }
     return Round50VariableFamily::Auxiliary;
 }
 
