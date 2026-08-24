@@ -79,6 +79,21 @@ struct FixedIntervalMipRequest {
     // produced by this already-required LP solve.  This flag only copies
     // attributes after Optimize; it never launches another solve.
     bool capture_lp_primal_dual_evidence = false;
+    // Round 50 uniform run-level backend policy.  It is never inferred from
+    // the instance, dimensions, panel, solver progress, or machine state.
+    std::string interval_mip_policy = "interval-mip-v0";
+};
+
+struct FixedIntervalBranchPriorityEvidence {
+    std::string variable_name;
+    std::string semantic_family;
+    char variable_type = 'C';
+    int assigned_priority = 0;
+};
+
+struct FixedIntervalCutFamilyEvidence {
+    std::string family;
+    long long count = 0;
 };
 
 struct FixedIntervalLpVariableEvidence {
@@ -197,6 +212,32 @@ struct FixedIntervalMipOutcome {
     std::string warm_start_status = "not_requested";
     double warm_start_mapping_seconds = 0.0;
     std::string failure_reason;
+    std::string interval_mip_policy = "interval-mip-v0";
+    bool branch_priority_assignment_attempted = false;
+    bool branch_priority_assignment_valid = false;
+    long long branch_priority_assigned_count = 0;
+    std::string branch_priority_assignment_status = "not_requested";
+    std::vector<FixedIntervalBranchPriorityEvidence>
+        branch_priority_evidence;
+    std::vector<FixedIntervalCutFamilyEvidence> root_cut_family_evidence;
+    bool numerical_ranges_available = false;
+    double minimum_matrix_coefficient = 0.0;
+    double maximum_matrix_coefficient = 0.0;
+    double minimum_objective_coefficient = 0.0;
+    double maximum_objective_coefficient = 0.0;
+    double minimum_variable_bound = 0.0;
+    double maximum_variable_bound = 0.0;
+    double minimum_rhs = 0.0;
+    double maximum_rhs = 0.0;
+    bool root_relaxation_bound_available = false;
+    double root_relaxation_bound = 0.0;
+    bool final_root_cut_bound_available = false;
+    double final_root_cut_bound = 0.0;
+    double root_work = 0.0;
+    double root_runtime_seconds = 0.0;
+    double root_simplex_iterations = 0.0;
+    double first_incumbent_work = -1.0;
+    double first_incumbent_runtime_seconds = -1.0;
 };
 
 struct FixedIntervalMipBackendStats {

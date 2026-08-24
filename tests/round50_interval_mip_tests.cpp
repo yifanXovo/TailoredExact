@@ -1,0 +1,90 @@
+#include "Round50IntervalMip.hpp"
+
+#include <iostream>
+#include <stdexcept>
+#include <string>
+
+namespace {
+
+void require(bool condition, const std::string& message) {
+    if (!condition) throw std::runtime_error(message);
+}
+
+} // namespace
+
+int main() {
+    try {
+        using namespace ebrp;
+        const auto v0 = parseRound50IntervalMipPolicy("interval-mip-v0");
+        const auto b1 = parseRound50IntervalMipPolicy("B1");
+        const auto b2 = parseRound50IntervalMipPolicy("b2-route-first");
+        const auto b3 = parseRound50IntervalMipPolicy("b3");
+        require(v0.valid && b1.valid && b2.valid && b3.valid,
+                "all frozen branching policies parse");
+        require(!parseRound50IntervalMipPolicy("instance-special").valid,
+                "unknown policies fail closed");
+        require(classifyRound50Variable("x_0_1_2") ==
+                    Round50VariableFamily::RoutingArc,
+                "routing family");
+        require(classifyRound50Variable("z_0_1") ==
+                    Round50VariableFamily::VisitSelection,
+                "visit family");
+        require(classifyRound50Variable("mode_0_1") ==
+                    Round50VariableFamily::OperationMode,
+                "mode family");
+        require(classifyRound50Variable("p_0_1") ==
+                    Round50VariableFamily::PickupQuantity,
+                "pickup family");
+        require(classifyRound50Variable("d_0_1") ==
+                    Round50VariableFamily::DropQuantity,
+                "drop family");
+        require(classifyRound50Variable("load_0_1") ==
+                    Round50VariableFamily::VehicleLoad,
+                "load family");
+        require(classifyRound50Variable("y_1") ==
+                    Round50VariableFamily::FinalInventory,
+                "inventory family");
+        require(classifyRound50Variable("bit_1_2") ==
+                    Round50VariableFamily::Auxiliary,
+                "auxiliary family");
+        require(round50BranchPriority(
+                    Round50BranchingPolicy::PrimitiveFirst,
+                    Round50VariableFamily::RoutingArc) >
+                round50BranchPriority(
+                    Round50BranchingPolicy::PrimitiveFirst,
+                    Round50VariableFamily::Auxiliary),
+                "B1 primitive above auxiliary");
+        require(round50BranchPriority(
+                    Round50BranchingPolicy::RouteFirst,
+                    Round50VariableFamily::RoutingArc) >
+                round50BranchPriority(
+                    Round50BranchingPolicy::RouteFirst,
+                    Round50VariableFamily::VisitSelection),
+                "B2 route hierarchy");
+        require(round50BranchPriority(
+                    Round50BranchingPolicy::OperationFirst,
+                    Round50VariableFamily::VisitSelection) >
+                round50BranchPriority(
+                    Round50BranchingPolicy::OperationFirst,
+                    Round50VariableFamily::RoutingArc),
+                "B3 operation hierarchy");
+        require(round50BranchPriority(
+                    Round50BranchingPolicy::Default,
+                    Round50VariableFamily::RoutingArc) == 0,
+                "default-off equivalence uses no priority assignment");
+        SolveOptions options;
+        configureRound50IntervalMipV0(options);
+        require(options.gurobi_seed == 0 && options.gurobi_presolve == -1 &&
+                    options.threads == 1 && options.mip_threads == 1,
+                "solver contract options");
+        require(options.round47_c6_adaptive_mass == "off" &&
+                    options.round48_k1_amf == "off" &&
+                    options.round49_k1_am_rc == "off",
+                "split mechanisms remain off in fixed-state driver");
+        std::cout << "Round50IntervalMipTests passed\n";
+        return 0;
+    } catch (const std::exception& ex) {
+        std::cerr << "Round50IntervalMipTests failed: " << ex.what() << '\n';
+        return 1;
+    }
+}
