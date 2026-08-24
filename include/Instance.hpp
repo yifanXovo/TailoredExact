@@ -468,6 +468,10 @@ struct SolveOptions {
     // default-off mode consumes the unchanged Round 47 K1-AM evidence and
     // already-written canonical model bounds; it launches no score solve.
     std::string round48_k1_amf = "off"; // off|k1-amf
+    // Round 49 K1-only LP primal-dual reduced-cost rescue.  The explicit
+    // diagnostic arm consumes attributes from the unchanged K1-AM parent and
+    // midpoint-child LP solves and never launches a scoring solve.
+    std::string round49_k1_am_rc = "off"; // off|d-rcd
     // Restricted matched-action diagnostics.  These are never candidate
     // settings and never issue an original-problem certificate.
     std::string round48_counterfactual_mode = "off"; // off|retain|midpoint

@@ -66,6 +66,7 @@ struct GurobiApi {
     decltype(&GRBoptimize) optimize = nullptr;
     decltype(&GRBgetintattr) getintattr = nullptr;
     decltype(&GRBgetdblattr) getdblattr = nullptr;
+    decltype(&GRBgetintattrarray) getintattrarray = nullptr;
     decltype(&GRBgetstrattrelement) getstrattrelement = nullptr;
     decltype(&GRBgetdblattrarray) getdblattrarray = nullptr;
     decltype(&GRBgetcharattrarray) getcharattrarray = nullptr;
@@ -200,6 +201,7 @@ bool loadGurobiApi(const SolveOptions& options,
     LOAD_GRB(optimize, "GRBoptimize");
     LOAD_GRB(getintattr, "GRBgetintattr");
     LOAD_GRB(getdblattr, "GRBgetdblattr");
+    LOAD_GRB(getintattrarray, "GRBgetintattrarray");
     LOAD_GRB(getstrattrelement, "GRBgetstrattrelement");
     LOAD_GRB(getdblattrarray, "GRBgetdblattrarray");
     LOAD_GRB(getcharattrarray, "GRBgetcharattrarray");
@@ -758,7 +760,8 @@ public:
                 out.failure_reason = "paper_lp_variable_count_unavailable";
                 return out;
             }
-            if (request.incremental_model_reuse_enabled &&
+            if ((request.incremental_model_reuse_enabled ||
+                 request.capture_lp_primal_dual_evidence) &&
                 state.original_variable_types.empty()) {
                 state.original_variable_types.resize(
                     static_cast<std::size_t>(variable_count));
@@ -769,6 +772,49 @@ public:
                     out.failure_reason =
                         "round29_original_integer_domain_capture_failed";
                     return out;
+                }
+            }
+            if (request.capture_lp_primal_dual_evidence) {
+                out.lp_primal_dual_variable_evidence.resize(
+                    static_cast<std::size_t>(variable_count));
+                std::vector<double> lower(
+                    static_cast<std::size_t>(variable_count));
+                std::vector<double> upper(
+                    static_cast<std::size_t>(variable_count));
+                bool metadata_ok = state.original_variable_types.size() ==
+                        static_cast<std::size_t>(variable_count) &&
+                    api_.getdblattrarray(model, GRB_DBL_ATTR_LB, 0,
+                        variable_count, lower.data()) == 0 &&
+                    api_.getdblattrarray(model, GRB_DBL_ATTR_UB, 0,
+                        variable_count, upper.data()) == 0;
+                for (int index = 0; metadata_ok && index < variable_count;
+                     ++index) {
+                    char* name = nullptr;
+                    metadata_ok = api_.getstrattrelement(
+                        model, GRB_STR_ATTR_VARNAME, index, &name) == 0 &&
+                        name && *name;
+                    if (metadata_ok) {
+                        auto& evidence = out.lp_primal_dual_variable_evidence[
+                            static_cast<std::size_t>(index)];
+                        evidence.name = name;
+                        evidence.original_type = state.original_variable_types[
+                            static_cast<std::size_t>(index)];
+                        evidence.lower_bound = lower[
+                            static_cast<std::size_t>(index)];
+                        evidence.upper_bound = upper[
+                            static_cast<std::size_t>(index)];
+                    }
+                }
+                if (!metadata_ok) {
+                    out.lp_primal_dual_variable_evidence.clear();
+                }
+                out.lp_verified_cutoff = request.verified_cutoff;
+                out.lp_model_fingerprint =
+                    request.canonical_model_fingerprint;
+                int objective_sense = 0;
+                if (api_.getintattr(model, GRB_INT_ATTR_MODELSENSE,
+                                    &objective_sense) == 0) {
+                    out.lp_objective_sense = objective_sense;
                 }
             }
             std::vector<char> continuous(
@@ -984,6 +1030,52 @@ public:
                 out.native_bound_available = true;
                 out.lp_objective_value = lp_objective;
                 out.lp_objective_value_available = true;
+            }
+            if (request.capture_lp_primal_dual_evidence &&
+                !out.lp_primal_dual_variable_evidence.empty()) {
+                const int evidence_count = static_cast<int>(
+                    out.lp_primal_dual_variable_evidence.size());
+                std::vector<double> primal(
+                    static_cast<std::size_t>(evidence_count));
+                std::vector<double> reduced_cost(
+                    static_cast<std::size_t>(evidence_count));
+                std::vector<int> basis(
+                    static_cast<std::size_t>(evidence_count));
+                out.lp_primal_values_available = api_.getdblattrarray(
+                    model, GRB_DBL_ATTR_X, 0, evidence_count,
+                    primal.data()) == 0;
+                out.lp_reduced_costs_available = api_.getdblattrarray(
+                    model, GRB_DBL_ATTR_RC, 0, evidence_count,
+                    reduced_cost.data()) == 0;
+                out.lp_basis_status_available = api_.getintattrarray(
+                    model, GRB_INT_ATTR_VBASIS, 0, evidence_count,
+                    basis.data()) == 0;
+                bool finite = out.lp_primal_values_available &&
+                    out.lp_reduced_costs_available;
+                for (int index = 0; finite && index < evidence_count;
+                     ++index) {
+                    auto& evidence = out.lp_primal_dual_variable_evidence[
+                        static_cast<std::size_t>(index)];
+                    evidence.primal_value = primal[
+                        static_cast<std::size_t>(index)];
+                    evidence.reduced_cost = reduced_cost[
+                        static_cast<std::size_t>(index)];
+                    if (out.lp_basis_status_available) {
+                        evidence.variable_basis_status = basis[
+                            static_cast<std::size_t>(index)];
+                    }
+                    finite = std::isfinite(evidence.lower_bound) &&
+                        std::isfinite(evidence.upper_bound) &&
+                        std::isfinite(evidence.primal_value) &&
+                        std::isfinite(evidence.reduced_cost);
+                }
+                out.lp_primal_dual_evidence_available = finite &&
+                    out.lp_basis_status_available &&
+                    out.lp_objective_sense == 1 &&
+                    out.model_fingerprint_matches_request;
+                if (!out.lp_primal_dual_evidence_available) {
+                    out.lp_primal_dual_variable_evidence.clear();
+                }
             }
             int diagnostic_variables = 0;
             if (getInt(GRB_INT_ATTR_NUMVARS, diagnostic_variables) &&

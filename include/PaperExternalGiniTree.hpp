@@ -13,6 +13,14 @@ struct PaperLpResult {
     bool infeasible = false;
     bool bound_available = false;
     double lower_bound = 0.0;
+    bool primal_values_available = false;
+    bool reduced_costs_available = false;
+    bool basis_status_available = false;
+    bool primal_dual_evidence_available = false;
+    int objective_sense = 0;
+    double verified_cutoff = 0.0;
+    std::string model_fingerprint;
+    std::vector<FixedIntervalLpVariableEvidence> primal_dual_variables;
 };
 
 struct PaperLpSplitDecision {
