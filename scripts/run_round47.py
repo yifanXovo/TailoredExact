@@ -78,6 +78,41 @@ def selection_score(arm: str) -> tuple[Any, ...]:
             int(severe_numerical), gaps, works, times, models, simplicity)
 
 
+def contraction_has_measurable_gain(k0: int) -> tuple[bool, list[dict[str, Any]]]:
+    am = f"K{k0}-AM"
+    amc = f"K{k0}-AMC"
+    comparisons = []
+    supported = False
+    for instance in common.DEVELOPMENT:
+        left = result("stage4_1200s", instance, am)
+        right = result("stage4_1200s", instance, amc)
+        contractions = int(right.get(
+            "round47_single_child_contraction_count", 0))
+        if contractions <= 0:
+            continue
+        left_work, right_work = work(left), work(right)
+        left_models, right_models = model_count(left), model_count(right)
+        left_gap, right_gap = relative_gap(left), relative_gap(right)
+        certificate_not_weakened = (
+            not bool(left.get("strict_certified_original_problem")) or
+            bool(right.get("strict_certified_original_problem")))
+        proof_not_weakened = right_gap <= left_gap + 1e-12
+        measurable = certificate_not_weakened and proof_not_weakened and (
+            right_work < left_work - max(1e-9, abs(left_work) * 1e-9) or
+            right_models < left_models)
+        supported = supported or measurable
+        comparisons.append({
+            "instance": instance, "contractions": contractions,
+            "am_work": left_work, "amc_work": right_work,
+            "am_models": left_models, "amc_models": right_models,
+            "am_gap": left_gap, "amc_gap": right_gap,
+            "certificate_not_weakened": certificate_not_weakened,
+            "proof_not_weakened": proof_not_weakened,
+            "measurable_contraction_attributed_gain": measurable,
+        })
+    return supported, comparisons
+
+
 def invoke(executable: Path, stage: str, arm: str,
            instances: tuple[str, ...], cap: int) -> None:
     command = [sys.executable, str(common.ROOT / "scripts" /
@@ -122,9 +157,15 @@ def freeze_stage4() -> tuple[str, str]:
         choices = [arm for arm in common.ARMS
                    if common.ARM_DEFINITIONS[arm]["K0"] == k0]
         ranked = sorted(choices, key=selection_score)
+        contraction_supported, contraction_comparisons = \
+            contraction_has_measurable_gain(k0)
+        if not contraction_supported:
+            ranked = [f"K{k0}-AM", f"K{k0}-AMC"]
         finalists.append(ranked[0])
         rankings[f"K{k0}"] = {
             "ordered_arms": ranked, "finalist": ranked[0],
+            "contraction_attributed_gain": contraction_supported,
+            "contraction_event_comparisons": contraction_comparisons,
             "scores": {arm: selection_score(arm) for arm in ranked},
         }
     common.write_json(common.OUT / "stage4_finalist_freeze.json", {

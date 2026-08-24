@@ -49,7 +49,8 @@ class Round47ProtocolTests(unittest.TestCase):
             common.OUT / "algorithm_arm_definition.json")
         self.assertEqual(tuple(row["arm"] for row in definition["arms"]),
                          common.ARMS)
-        self.assertEqual({row["tau"] for row in definition["arms"]},
+        self.assertEqual({row["identity"]["tau"]
+                          for row in definition["arms"]},
                          {common.TAU})
         self.assertEqual({row["K0"] for row in definition["arms"]}, {1, 4})
         self.assertEqual({row["mode"] for row in definition["arms"]},
@@ -96,14 +97,15 @@ class Round47ProtocolTests(unittest.TestCase):
         source = (ROOT / "src" / "PaperExternalGiniTree.cpp").read_text(
             encoding="utf-8")
         start = source.index("evaluateC6AdaptiveMassSplitDecision(")
-        end = source.index("namespace {", start)
+        end = source.index(
+            "PaperTerminalMipDecision evaluatePaperTerminalMipDecision", start)
         body = source[start:end]
         self.assertNotIn("optimize", body.lower())
         self.assertNotIn("solve", body.lower())
 
     def test_no_baseline_matrix_no_v50_and_frozen_panels(self) -> None:
         freeze = common.load_json(common.OUT / "dataset_freeze.json")
-        self.assertTrue(freeze["no_v50"])
+        self.assertFalse(freeze["V50_allowed"])
         self.assertEqual(len(common.DEVELOPMENT), 10)
         self.assertEqual(len(common.STAGE5), 14)
         self.assertFalse(any("v50" in row["path"].lower()
