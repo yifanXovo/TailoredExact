@@ -88,7 +88,11 @@ def classify(coefficients: dict[str, float], sense: str, rhs: float) -> str:
         return "gini_spread"
     if "G" in names and ("r" in groups or "Y" in groups):
         return "direct_gini_cap_floor"
+    if "r" in groups and "Y" in groups and sense == "=":
+        return "inventory_ratio_and_penalty_definition"
     if "e" in groups and "Y" in groups:
+        return "inventory_ratio_and_penalty_definition"
+    if "e" in groups and "r" in groups and len(groups) == 2:
         return "inventory_ratio_and_penalty_definition"
     if "e" in groups and len(groups) <= 2:
         return "penalty_lower_bound_closure"

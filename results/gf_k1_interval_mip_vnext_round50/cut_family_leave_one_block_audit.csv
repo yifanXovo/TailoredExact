@@ -1,5 +1,5 @@
 family,classification,row_count,leave_one_block_eligibility,candidate_run,reason,root_bound_effect,root_work_effect,total_work_effect,certificate_effect
-inventory_conservation,core feasibility/model-definition,1062,forbidden,false,core_or_exact_reformulation_row_protected,not_run,not_run,not_run,not_run
+inventory_conservation,core feasibility/model-definition,732,forbidden,false,core_or_exact_reformulation_row_protected,not_run,not_run,not_run,not_run
 movement_reachability,core feasibility/model-definition,16164,forbidden,false,core_or_exact_reformulation_row_protected,not_run,not_run,not_run,not_run
 routing_flow_and_connectivity,core feasibility/model-definition,17114,forbidden,false,core_or_exact_reformulation_row_protected,not_run,not_run,not_run,not_run
 visit_inventory_linking,valid strengthening inequality,634,not_entered,false,generic canonical row names do not isolate a complete source emitter and no exact separator/removal proof exists,not_run,not_run,not_run,not_run
@@ -9,13 +9,13 @@ transfer_compatibility,valid strengthening inequality,1707,not_entered,false,gen
 direct_gini_cap_floor,exact reformulation,4870,forbidden,false,core_or_exact_reformulation_row_protected,not_run,not_run,not_run,not_run
 interval_tight_mccormick,exact reformulation,7340,forbidden,false,core_or_exact_reformulation_row_protected,not_run,not_run,not_run,not_run
 objective_estimator_cutoff,valid strengthening inequality,23,not_entered,false,generic canonical row names do not isolate a complete source emitter and no exact separator/removal proof exists,not_run,not_run,not_run,not_run
-penalty_lower_bound_closure,valid strengthening inequality,695,not_entered,false,generic canonical row names do not isolate a complete source emitter and no exact separator/removal proof exists,not_run,not_run,not_run,not_run
+penalty_lower_bound_closure,valid strengthening inequality,35,not_entered,false,generic canonical row names do not isolate a complete source emitter and no exact separator/removal proof exists,not_run,not_run,not_run,not_run
 gini_spread,exact reformulation,40,forbidden,false,core_or_exact_reformulation_row_protected,not_run,not_run,not_run,not_run
 required_movement,valid strengthening inequality,161350,not_entered,false,generic canonical row names do not isolate a complete source emitter and no exact separator/removal proof exists,not_run,not_run,not_run,not_run
 low_gini_centering,valid strengthening inequality,80,not_entered,false,generic canonical row names do not isolate a complete source emitter and no exact separator/removal proof exists,not_run,not_run,not_run,not_run
 variable_s_centering,valid strengthening inequality,23,not_entered,false,generic canonical row names do not isolate a complete source emitter and no exact separator/removal proof exists,not_run,not_run,not_run,not_run
 sp_product_estimator,valid strengthening inequality,330,not_entered,false,generic canonical row names do not isolate a complete source emitter and no exact separator/removal proof exists,not_run,not_run,not_run,not_run
-inventory_ratio_and_penalty_definition,exact reformulation,0,forbidden,false,core_or_exact_reformulation_row_protected,not_run,not_run,not_run,not_run
+inventory_ratio_and_penalty_definition,exact reformulation,990,forbidden,false,core_or_exact_reformulation_row_protected,not_run,not_run,not_run,not_run
 operation_and_load_definition,core feasibility/model-definition,1986,entered_C1,false,literal duplicate rows proved identical; one protected core representative remains for every omitted copy,not_run,not_run,not_run,not_run
 core_model_definition_other,core feasibility/model-definition,8664,forbidden,false,core_or_exact_reformulation_row_protected,not_run,not_run,not_run,not_run
 symmetry_constraint,symmetry constraint,0,not_applicable,false,family_not_present_in_v0,not_run,not_run,not_run,not_run

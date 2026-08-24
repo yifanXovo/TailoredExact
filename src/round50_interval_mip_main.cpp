@@ -592,7 +592,10 @@ int main(int argc, char** argv) {
         const bool exact = engineering && (outcome.infeasible ||
             (outcome.native_exact_optimal && outcome.native_bound_available &&
              outcome.incumbent_available &&
-             outcome.incumbent_independently_verified));
+             outcome.incumbent_independently_verified &&
+             std::fabs(outcome.native_bound - outcome.incumbent_objective) <=
+                 1e-7 * std::max(
+                     1.0, std::fabs(outcome.incumbent_objective))));
         const std::string status = exact ? "exact" :
             (outcome.interrupted ? "capped" : "failed");
         writeCompletion(args.artifact_dir, args, status, exact, engineering,
