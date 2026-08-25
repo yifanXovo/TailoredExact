@@ -4,6 +4,7 @@
 #include "IntervalRowFactory.hpp"
 #include "ControllingLeafScheduler.hpp"
 #include "ModelCorrectness.hpp"
+#include "Round50IntervalMip.hpp"
 #include "StaticSegmentedGini.hpp"
 
 #include "Evaluator.hpp"
@@ -67,6 +68,8 @@ struct StaticSegmentedWriteStats {
     long long factored_weighted_rhs_rows = 0;
     long long factored_indicator_rows_removed = 0;
     long long hierarchical_selector_variables = 0;
+    long long exact_duplicate_rows_omitted = 0;
+    long long round50_symmetry_rows = 0;
     std::string family_encoding;
 };
 
@@ -1650,9 +1653,25 @@ void writeCompactLp(const Instance& instance,
             Expr mm; addTerm(mm, mName(k, i), 1); addTerm(mm, zName(k, i), -1);
             writeConstraint(out, cid, mm, "<=", 0);
             Expr pm; addTerm(pm, pName(k, i), 1); addTerm(pm, mName(k, i), -pmax);
-            writeConstraint(out, cid, pm, "<=", 0);
+            // If pmax is zero, ep and pm are both exactly p[k,i] <= 0.
+            // Keep ep as the protected core representative and omit only the
+            // literal duplicate in the opt-in Round 50 C1 formulation.
+            if (!round50OmitDuplicateModeLink(
+                    pmax, canonical_spec &&
+                        canonical_spec->exact_duplicate_row_elimination)) {
+                writeConstraint(out, cid, pm, "<=", 0);
+            } else if (static_stats) {
+                ++static_stats->exact_duplicate_rows_omitted;
+            }
             Expr dm; addTerm(dm, dName(k, i), 1); addTerm(dm, zName(k, i), -dmax); addTerm(dm, mName(k, i), dmax);
-            writeConstraint(out, cid, dm, "<=", 0);
+            // Likewise, dmax==0 makes ed and dm the same d[k,i] <= 0 row.
+            if (!round50OmitDuplicateModeLink(
+                    dmax, canonical_spec &&
+                        canonical_spec->exact_duplicate_row_elimination)) {
+                writeConstraint(out, cid, dm, "<=", 0);
+            } else if (static_stats) {
+                ++static_stats->exact_duplicate_rows_omitted;
+            }
             Expr nonzero; addTerm(nonzero, pName(k, i), 1); addTerm(nonzero, dName(k, i), 1); addTerm(nonzero, zName(k, i), -1);
             writeConstraint(out, cid, nonzero, ">=", 0);
             Expr loadz; addTerm(loadz, lName(k, i), 1); addTerm(loadz, zName(k, i), -Q);
@@ -1886,13 +1905,38 @@ void writeCompactLp(const Instance& instance,
     const bool identical_q = std::all_of(instance.Q.begin(), instance.Q.end(),
         [&](int q) { return q == instance.Q.front(); });
     if (strengthened && options.interval_oracle_symmetry_breaking && identical_q && M > 1) {
+        const bool route_start_order = canonical_spec &&
+            canonical_spec->round50_symmetry_policy == "route-start-order";
+        const bool used_first_route_start_order = canonical_spec &&
+            canonical_spec->round50_symmetry_policy ==
+                "used-first-route-start-order";
         for (int k = 0; k + 1 < M; ++k) {
             Expr e;
-            for (int i = 1; i <= V; ++i) {
-                addTerm(e, zName(k, i), 1);
-                addTerm(e, zName(k + 1, i), -1);
+            if (route_start_order || used_first_route_start_order) {
+                // S1-v1 ranks an unused route at zero.  The single allowed
+                // revision uses i-(V+1), which is the constant-free form of
+                // rank s+(V+1)(1-a): used starts rank 1..V and unused routes
+                // rank V+1.  Station disjointness makes used starts unique,
+                // so identical vehicles can always be relabeled to satisfy
+                // either exact representative order.
+                for (int i = 1; i <= V; ++i) {
+                    const double rank_coefficient =
+                        used_first_route_start_order
+                            ? static_cast<double>(i - (V + 1))
+                            : static_cast<double>(i);
+                    addTerm(e, xName(k, 0, i), rank_coefficient);
+                    addTerm(e, xName(k + 1, 0, i),
+                            -rank_coefficient);
+                }
+                writeConstraint(out, cid, e, "<=", 0);
+            } else {
+                for (int i = 1; i <= V; ++i) {
+                    addTerm(e, zName(k, i), 1);
+                    addTerm(e, zName(k + 1, i), -1);
+                }
+                writeConstraint(out, cid, e, ">=", 0);
             }
-            writeConstraint(out, cid, e, ">=", 0);
+            if (static_stats) ++static_stats->round50_symmetry_rows;
         }
     }
 
@@ -3947,6 +3991,9 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
     artifact.gamma_L = spec.gamma_L;
     artifact.gamma_U = spec.gamma_U;
     artifact.verified_incumbent_row = spec.add_verified_incumbent_row;
+    artifact.exact_duplicate_row_elimination =
+        spec.exact_duplicate_row_elimination;
+    artifact.round50_symmetry_policy = spec.round50_symmetry_policy;
     artifact.static_segmented_gini = spec.static_segmented_gini;
     artifact.objective_gini_envelope_rows = static_cast<long long>(
         spec.objective_gini_envelope_facets.size());
@@ -4025,6 +4072,9 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
             static_stats.factored_indicator_rows_removed;
         artifact.static_hierarchical_selector_variables =
             static_stats.hierarchical_selector_variables;
+        artifact.exact_duplicate_rows_omitted =
+            static_stats.exact_duplicate_rows_omitted;
+        artifact.round50_symmetry_rows = static_stats.round50_symmetry_rows;
         artifact.static_family_encoding = static_stats.family_encoding;
         const ModelSizeStats size = analyzeLpModel(path);
         artifact.rows = size.rows;

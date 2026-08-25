@@ -10,6 +10,7 @@
 #include "HgaTgbcRunner.hpp"
 #include "ProcessPhaseLedger.hpp"
 #include "MipStartMapping.hpp"
+#include "Round50IntervalMip.hpp"
 
 #include <gurobi_c.h>
 
@@ -71,6 +72,7 @@ struct GurobiApi {
     decltype(&GRBgetdblattrarray) getdblattrarray = nullptr;
     decltype(&GRBgetcharattrarray) getcharattrarray = nullptr;
     decltype(&GRBsetdblattrarray) setdblattrarray = nullptr;
+    decltype(&GRBsetintattrarray) setintattrarray = nullptr;
     decltype(&GRBsetcharattrarray) setcharattrarray = nullptr;
     decltype(&GRBupdatemodel) updatemodel = nullptr;
     decltype(&GRBwrite) write = nullptr;
@@ -206,6 +208,7 @@ bool loadGurobiApi(const SolveOptions& options,
     LOAD_GRB(getdblattrarray, "GRBgetdblattrarray");
     LOAD_GRB(getcharattrarray, "GRBgetcharattrarray");
     LOAD_GRB(setdblattrarray, "GRBsetdblattrarray");
+    LOAD_GRB(setintattrarray, "GRBsetintattrarray");
     LOAD_GRB(setcharattrarray, "GRBsetcharattrarray");
     LOAD_GRB(updatemodel, "GRBupdatemodel");
     LOAD_GRB(write, "GRBwrite");
@@ -384,6 +387,11 @@ struct GurobiNativeLogEvidence {
     long long presolved_rows = 0;
     long long presolved_columns = 0;
     long long presolved_nonzeros = 0;
+    bool root_relaxation_bound_available = false;
+    double root_relaxation_bound = 0.0;
+    double root_runtime_seconds = 0.0;
+    double root_simplex_iterations = 0.0;
+    std::vector<FixedIntervalCutFamilyEvidence> root_cut_families;
 };
 
 GurobiNativeLogEvidence inspectGurobiNativeLog(
@@ -426,6 +434,38 @@ GurobiNativeLogEvidence inspectGurobiNativeLog(
         out.presolved_rows = std::stoll(presolved[1].str());
         out.presolved_columns = std::stoll(presolved[2].str());
         out.presolved_nonzeros = std::stoll(presolved[3].str());
+    }
+    std::smatch root;
+    const std::regex root_pattern(
+        R"(root relaxation:\s*objective\s*([-+0-9.e]+),\s*([0-9]+) iterations,\s*([-+0-9.e]+) seconds)");
+    if (std::regex_search(text, root, root_pattern)) {
+        out.root_relaxation_bound_available = true;
+        out.root_relaxation_bound = std::stod(root[1].str());
+        out.root_simplex_iterations = std::stod(root[2].str());
+        out.root_runtime_seconds = std::stod(root[3].str());
+    }
+    std::istringstream lines(text);
+    std::string line;
+    bool in_cut_block = false;
+    const std::regex cut_pattern(R"(^\s*([a-z][a-z0-9 _-]*):\s*([0-9]+)\s*$)");
+    while (std::getline(lines, line)) {
+        if (line.find("cutting planes:") != std::string::npos) {
+            in_cut_block = true;
+            continue;
+        }
+        if (!in_cut_block) continue;
+        if (line.empty() || line.find("explored ") != std::string::npos ||
+            line.find("thread count") != std::string::npos) {
+            if (!out.root_cut_families.empty()) break;
+            continue;
+        }
+        std::smatch cut;
+        if (std::regex_match(line, cut, cut_pattern)) {
+            FixedIntervalCutFamilyEvidence evidence;
+            evidence.family = cut[1].str();
+            evidence.count = std::stoll(cut[2].str());
+            out.root_cut_families.push_back(std::move(evidence));
+        }
     }
     return out;
 }
@@ -735,13 +775,17 @@ public:
         out.model_nonzero_count = std::isfinite(native_nonzeros)
             ? static_cast<long long>(std::llround(
                 std::max(0.0, native_nonzeros))) : 0;
+        std::vector<char> native_types;
+        std::vector<std::string> native_names;
         if (native_variables > 0) {
-            std::vector<char> native_types(
-                static_cast<std::size_t>(native_variables));
+            native_types.resize(static_cast<std::size_t>(native_variables));
+            native_names.resize(static_cast<std::size_t>(native_variables));
             if (api_.getcharattrarray(
                     model, GRB_CHAR_ATTR_VTYPE, 0, native_variables,
                     native_types.data()) == 0) {
-                for (char type : native_types) {
+                for (int index = 0; index < native_variables; ++index) {
+                    const char type = native_types[
+                        static_cast<std::size_t>(index)];
                     if (type == GRB_BINARY) {
                         ++out.model_binary_variable_count;
                     } else if (type == GRB_INTEGER ||
@@ -750,9 +794,99 @@ public:
                     } else {
                         ++out.model_continuous_variable_count;
                     }
+                    char* name = nullptr;
+                    if (api_.getstrattrelement(
+                            model, GRB_STR_ATTR_VARNAME, index, &name) == 0 &&
+                        name) {
+                        native_names[static_cast<std::size_t>(index)] = name;
+                    }
                 }
             }
         }
+        out.interval_mip_policy = request.interval_mip_policy;
+        const Round50IntervalMipPolicy round50_policy =
+            parseRound50IntervalMipPolicy(request.interval_mip_policy);
+        if (!round50_policy.valid) {
+            out.failure_reason = round50_policy.failure_reason;
+            return out;
+        }
+        if (!out.lp_relaxation &&
+            round50_policy.branching != Round50BranchingPolicy::Default) {
+            out.branch_priority_assignment_attempted = true;
+            std::vector<int> priorities(
+                static_cast<std::size_t>(native_variables), 0);
+            bool registry_valid = native_types.size() == priorities.size() &&
+                native_names.size() == priorities.size();
+            for (int index = 0; registry_valid && index < native_variables;
+                 ++index) {
+                const char type = native_types[static_cast<std::size_t>(index)];
+                if (type != GRB_BINARY && type != GRB_INTEGER &&
+                    type != GRB_SEMIINT) {
+                    continue;
+                }
+                const std::string& name = native_names[
+                    static_cast<std::size_t>(index)];
+                if (name.empty()) {
+                    registry_valid = false;
+                    break;
+                }
+                const Round50VariableFamily family =
+                    classifyRound50Variable(name);
+                const int priority = round50BranchPriority(
+                    round50_policy.branching, family);
+                if (priority <= 0) {
+                    registry_valid = false;
+                    break;
+                }
+                priorities[static_cast<std::size_t>(index)] = priority;
+                FixedIntervalBranchPriorityEvidence evidence;
+                evidence.variable_name = name;
+                evidence.semantic_family = round50VariableFamilyName(family);
+                evidence.variable_type = type;
+                evidence.assigned_priority = priority;
+                out.branch_priority_evidence.push_back(std::move(evidence));
+            }
+            const int priority_rc = registry_valid
+                ? api_.setintattrarray(
+                      model, GRB_INT_ATTR_BRANCHPRIORITY, 0,
+                      native_variables, priorities.data())
+                : -1;
+            const int update_rc = priority_rc == 0
+                ? api_.updatemodel(model) : priority_rc;
+            out.branch_priority_assignment_valid =
+                registry_valid && priority_rc == 0 && update_rc == 0;
+            out.branch_priority_assigned_count =
+                static_cast<long long>(out.branch_priority_evidence.size());
+            out.branch_priority_assignment_status =
+                out.branch_priority_assignment_valid ? "applied"
+                : (!registry_valid ? "semantic_registry_failed"
+                   : "gurobi_branch_priority_attribute_failed");
+            if (!out.branch_priority_assignment_valid) {
+                out.failure_reason = out.branch_priority_assignment_status;
+                return out;
+            }
+        } else {
+            out.branch_priority_assignment_valid = true;
+            out.branch_priority_assignment_status = "default_no_assignment";
+        }
+        auto readRange = [&](const char* min_attr, const char* max_attr,
+                             double& minimum, double& maximum) {
+            return api_.getdblattr(model, min_attr, &minimum) == 0 &&
+                api_.getdblattr(model, max_attr, &maximum) == 0 &&
+                std::isfinite(minimum) && std::isfinite(maximum);
+        };
+        out.numerical_ranges_available =
+            readRange(GRB_DBL_ATTR_MIN_COEFF, GRB_DBL_ATTR_MAX_COEFF,
+                      out.minimum_matrix_coefficient,
+                      out.maximum_matrix_coefficient) &&
+            readRange(GRB_DBL_ATTR_MIN_OBJ_COEFF, GRB_DBL_ATTR_MAX_OBJ_COEFF,
+                      out.minimum_objective_coefficient,
+                      out.maximum_objective_coefficient) &&
+            readRange(GRB_DBL_ATTR_MIN_BOUND, GRB_DBL_ATTR_MAX_BOUND,
+                      out.minimum_variable_bound,
+                      out.maximum_variable_bound) &&
+            readRange(GRB_DBL_ATTR_MIN_RHS, GRB_DBL_ATTR_MAX_RHS,
+                      out.minimum_rhs, out.maximum_rhs);
         if (out.lp_relaxation) {
             int variable_count = 0;
             if (api_.getintattr(model, GRB_INT_ATTR_NUMVARS,
@@ -1242,6 +1376,42 @@ public:
         out.presolved_row_count = log_evidence.presolved_rows;
         out.presolved_column_count = log_evidence.presolved_columns;
         out.presolved_nonzero_count = log_evidence.presolved_nonzeros;
+        out.root_relaxation_bound_available =
+            log_evidence.root_relaxation_bound_available;
+        out.root_relaxation_bound = log_evidence.root_relaxation_bound;
+        out.root_runtime_seconds = log_evidence.root_runtime_seconds;
+        out.root_simplex_iterations =
+            log_evidence.root_simplex_iterations;
+        out.root_cut_family_evidence = log_evidence.root_cut_families;
+        long long root_cut_total = 0;
+        for (const auto& cut : out.root_cut_family_evidence) {
+            root_cut_total += cut.count;
+        }
+        out.native_cut_count_available = !out.root_cut_family_evidence.empty();
+        out.native_cut_count = root_cut_total;
+        for (const FixedIntervalNativeBoundEvent& event :
+             out.native_bound_events) {
+            if (out.first_incumbent_runtime_seconds < 0.0 &&
+                event.native_incumbent_available) {
+                out.first_incumbent_runtime_seconds =
+                    event.solver_runtime_seconds;
+                out.first_incumbent_work = event.work;
+            }
+            if (event.processed_nodes <= 0.0 &&
+                event.native_bound_available) {
+                out.final_root_cut_bound_available = true;
+                out.final_root_cut_bound = event.native_bound;
+                out.root_work = std::max(out.root_work, event.work);
+                out.root_runtime_seconds = std::max(
+                    out.root_runtime_seconds,
+                    event.solver_runtime_seconds);
+            }
+        }
+        if (!out.final_root_cut_bound_available &&
+            out.root_relaxation_bound_available) {
+            out.final_root_cut_bound_available = true;
+            out.final_root_cut_bound = out.root_relaxation_bound;
+        }
         out.presolve_rerun_observed = log_evidence.presolve_executed;
         out.root_relaxation_rerun_observed =
             log_evidence.root_relaxation_executed;
