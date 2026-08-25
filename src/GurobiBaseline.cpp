@@ -810,41 +810,186 @@ public:
             out.failure_reason = round50_policy.failure_reason;
             return out;
         }
+        if (!request.variable_bound_overrides.empty()) {
+            out.variable_bound_override_attempted = true;
+            out.variable_bound_override_count = static_cast<long long>(
+                request.variable_bound_overrides.size());
+            std::unordered_map<std::string, int> indices;
+            bool override_valid = native_names.size() ==
+                static_cast<std::size_t>(native_variables);
+            for (int index = 0; override_valid && index < native_variables;
+                 ++index) {
+                const std::string& name = native_names[
+                    static_cast<std::size_t>(index)];
+                override_valid = !name.empty() &&
+                    indices.emplace(name, index).second;
+            }
+            std::vector<double> lower(
+                static_cast<std::size_t>(native_variables));
+            std::vector<double> upper(
+                static_cast<std::size_t>(native_variables));
+            override_valid = override_valid &&
+                api_.getdblattrarray(model, GRB_DBL_ATTR_LB, 0,
+                    native_variables, lower.data()) == 0 &&
+                api_.getdblattrarray(model, GRB_DBL_ATTR_UB, 0,
+                    native_variables, upper.data()) == 0;
+            std::set<std::string> requested_names;
+            for (const auto& override_value :
+                    request.variable_bound_overrides) {
+                const auto found_index = indices.find(
+                    override_value.variable_name);
+                override_valid = override_valid &&
+                    !override_value.variable_name.empty() &&
+                    found_index != indices.end() &&
+                    requested_names.insert(
+                        override_value.variable_name).second &&
+                    (override_value.lower_bound_enabled ||
+                     override_value.upper_bound_enabled) &&
+                    (!override_value.lower_bound_enabled ||
+                     std::isfinite(override_value.lower_bound)) &&
+                    (!override_value.upper_bound_enabled ||
+                     std::isfinite(override_value.upper_bound));
+                if (!override_valid) break;
+                const std::size_t index = static_cast<std::size_t>(
+                    found_index->second);
+                if (override_value.lower_bound_enabled) {
+                    lower[index] = override_value.lower_bound;
+                }
+                if (override_value.upper_bound_enabled) {
+                    upper[index] = override_value.upper_bound;
+                }
+                override_valid = lower[index] <= upper[index] + 1e-12;
+                if (!override_valid) break;
+            }
+            const int lower_rc = override_valid
+                ? api_.setdblattrarray(model, GRB_DBL_ATTR_LB, 0,
+                      native_variables, lower.data()) : -1;
+            const int upper_rc = lower_rc == 0
+                ? api_.setdblattrarray(model, GRB_DBL_ATTR_UB, 0,
+                      native_variables, upper.data()) : lower_rc;
+            const int update_rc = upper_rc == 0
+                ? api_.updatemodel(model) : upper_rc;
+            std::vector<double> read_lower(
+                static_cast<std::size_t>(native_variables));
+            std::vector<double> read_upper(
+                static_cast<std::size_t>(native_variables));
+            bool readback = update_rc == 0 &&
+                api_.getdblattrarray(model, GRB_DBL_ATTR_LB, 0,
+                    native_variables, read_lower.data()) == 0 &&
+                api_.getdblattrarray(model, GRB_DBL_ATTR_UB, 0,
+                    native_variables, read_upper.data()) == 0;
+            for (int index = 0; readback && index < native_variables;
+                 ++index) {
+                const std::size_t offset = static_cast<std::size_t>(index);
+                readback = read_lower[offset] == lower[offset] &&
+                    read_upper[offset] == upper[offset];
+            }
+            out.variable_bound_override_readback_valid =
+                override_valid && readback;
+            out.variable_bound_override_status =
+                out.variable_bound_override_readback_valid
+                    ? "applied_and_read_back"
+                    : (!override_valid ? "invalid_override_request"
+                       : "gurobi_bound_override_or_readback_failed");
+            if (!out.variable_bound_override_readback_valid) {
+                out.failure_reason = out.variable_bound_override_status;
+                return out;
+            }
+        } else {
+            out.variable_bound_override_readback_valid = true;
+            out.variable_bound_override_status = "not_requested";
+        }
+        const bool explicit_sparse_priorities =
+            !request.branch_priority_overrides.empty();
         if (!out.lp_relaxation &&
-            round50_policy.branching != Round50BranchingPolicy::Default) {
+            (explicit_sparse_priorities ||
+             round50_policy.branching != Round50BranchingPolicy::Default)) {
             out.branch_priority_assignment_attempted = true;
             std::vector<int> priorities(
                 static_cast<std::size_t>(native_variables), 0);
             bool registry_valid = native_types.size() == priorities.size() &&
                 native_names.size() == priorities.size();
-            for (int index = 0; registry_valid && index < native_variables;
-                 ++index) {
-                const char type = native_types[static_cast<std::size_t>(index)];
-                if (type != GRB_BINARY && type != GRB_INTEGER &&
-                    type != GRB_SEMIINT) {
-                    continue;
+            if (explicit_sparse_priorities &&
+                round50_policy.branching != Round50BranchingPolicy::Default) {
+                registry_valid = false;
+            }
+            if (explicit_sparse_priorities) {
+                registry_valid = registry_valid &&
+                    request.branch_priority_overrides.size() <= 2;
+                std::unordered_map<std::string, int> indices;
+                for (int index = 0; registry_valid &&
+                     index < native_variables; ++index) {
+                    registry_valid = !native_names[
+                        static_cast<std::size_t>(index)].empty() &&
+                        indices.emplace(native_names[
+                            static_cast<std::size_t>(index)], index).second;
                 }
-                const std::string& name = native_names[
-                    static_cast<std::size_t>(index)];
-                if (name.empty()) {
-                    registry_valid = false;
-                    break;
+                std::set<std::string> selected;
+                for (const auto& override_value :
+                        request.branch_priority_overrides) {
+                    const auto found_index = indices.find(
+                        override_value.variable_name);
+                    registry_valid = registry_valid &&
+                        found_index != indices.end() &&
+                        selected.insert(
+                            override_value.variable_name).second &&
+                        (override_value.priority == 1 ||
+                         override_value.priority == 2);
+                    if (!registry_valid) break;
+                    const int index = found_index->second;
+                    const char type = native_types[
+                        static_cast<std::size_t>(index)];
+                    const Round50VariableFamily family =
+                        classifyRound50Variable(
+                            override_value.variable_name);
+                    registry_valid =
+                        (type == GRB_BINARY || type == GRB_INTEGER) &&
+                        family != Round50VariableFamily::Auxiliary;
+                    if (!registry_valid) break;
+                    priorities[static_cast<std::size_t>(index)] =
+                        override_value.priority;
+                    FixedIntervalBranchPriorityEvidence evidence;
+                    evidence.variable_name = override_value.variable_name;
+                    evidence.semantic_family =
+                        round50VariableFamilyName(family);
+                    evidence.variable_type = type;
+                    evidence.assigned_priority = override_value.priority;
+                    out.branch_priority_evidence.push_back(
+                        std::move(evidence));
                 }
-                const Round50VariableFamily family =
-                    classifyRound50Variable(name);
-                const int priority = round50BranchPriority(
-                    round50_policy.branching, family);
-                if (priority <= 0) {
-                    registry_valid = false;
-                    break;
+            } else {
+                for (int index = 0; registry_valid &&
+                     index < native_variables; ++index) {
+                    const char type = native_types[
+                        static_cast<std::size_t>(index)];
+                    if (type != GRB_BINARY && type != GRB_INTEGER &&
+                        type != GRB_SEMIINT) {
+                        continue;
+                    }
+                    const std::string& name = native_names[
+                        static_cast<std::size_t>(index)];
+                    if (name.empty()) {
+                        registry_valid = false;
+                        break;
+                    }
+                    const Round50VariableFamily family =
+                        classifyRound50Variable(name);
+                    const int priority = round50BranchPriority(
+                        round50_policy.branching, family);
+                    if (priority <= 0) {
+                        registry_valid = false;
+                        break;
+                    }
+                    priorities[static_cast<std::size_t>(index)] = priority;
+                    FixedIntervalBranchPriorityEvidence evidence;
+                    evidence.variable_name = name;
+                    evidence.semantic_family =
+                        round50VariableFamilyName(family);
+                    evidence.variable_type = type;
+                    evidence.assigned_priority = priority;
+                    out.branch_priority_evidence.push_back(
+                        std::move(evidence));
                 }
-                priorities[static_cast<std::size_t>(index)] = priority;
-                FixedIntervalBranchPriorityEvidence evidence;
-                evidence.variable_name = name;
-                evidence.semantic_family = round50VariableFamilyName(family);
-                evidence.variable_type = type;
-                evidence.assigned_priority = priority;
-                out.branch_priority_evidence.push_back(std::move(evidence));
             }
             const int priority_rc = registry_valid
                 ? api_.setintattrarray(
@@ -853,14 +998,32 @@ public:
                 : -1;
             const int update_rc = priority_rc == 0
                 ? api_.updatemodel(model) : priority_rc;
+            std::vector<int> priority_readback(
+                static_cast<std::size_t>(native_variables), -1);
+            bool readback_valid = update_rc == 0 &&
+                api_.getintattrarray(
+                    model, GRB_INT_ATTR_BRANCHPRIORITY, 0,
+                    native_variables, priority_readback.data()) == 0;
+            long long zero_count = 0;
+            for (int index = 0; readback_valid &&
+                 index < native_variables; ++index) {
+                const int expected = priorities[
+                    static_cast<std::size_t>(index)];
+                const int observed = priority_readback[
+                    static_cast<std::size_t>(index)];
+                readback_valid = observed == expected;
+                if (observed == 0) ++zero_count;
+            }
+            out.branch_priority_zero_readback_count = zero_count;
             out.branch_priority_assignment_valid =
-                registry_valid && priority_rc == 0 && update_rc == 0;
+                registry_valid && priority_rc == 0 && update_rc == 0 &&
+                readback_valid;
             out.branch_priority_assigned_count =
                 static_cast<long long>(out.branch_priority_evidence.size());
             out.branch_priority_assignment_status =
                 out.branch_priority_assignment_valid ? "applied"
                 : (!registry_valid ? "semantic_registry_failed"
-                   : "gurobi_branch_priority_attribute_failed");
+                   : "gurobi_branch_priority_attribute_or_readback_failed");
             if (!out.branch_priority_assignment_valid) {
                 out.failure_reason = out.branch_priority_assignment_status;
                 return out;

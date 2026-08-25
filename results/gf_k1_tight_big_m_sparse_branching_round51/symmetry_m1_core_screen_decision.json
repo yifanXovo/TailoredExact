@@ -1,0 +1,62 @@
+{
+  "baseline": "m1-tight-big-m-v0",
+  "candidates": {
+    "m1-s1-route-start-order": {
+      "aggregate_candidate_work": 1373.598020155588,
+      "aggregate_m1_v0_work": 1526.3584107584054,
+      "aggregate_work_ratio": 0.8999184008643718,
+      "core_qualified": true,
+      "correctness_failures": 0,
+      "false_certificates": 0,
+      "full_development_opened": true,
+      "improved_states": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "D6",
+        "D9",
+        "D10"
+      ],
+      "lost_baseline_certificates": 0,
+      "severe_regressions": 0
+    },
+    "m1-s1r-used-first-route-start-order": {
+      "aggregate_candidate_work": 1515.52280008884,
+      "aggregate_m1_v0_work": 1526.3584107584054,
+      "aggregate_work_ratio": 0.9929010050370926,
+      "core_qualified": true,
+      "correctness_failures": 0,
+      "false_certificates": 0,
+      "full_development_opened": true,
+      "improved_states": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "D6",
+        "D9",
+        "D10",
+        "D11"
+      ],
+      "lost_baseline_certificates": 0,
+      "severe_regressions": 0
+    }
+  },
+  "core_cap_seconds": 120,
+  "core_states": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D9",
+    "D10",
+    "D11"
+  ],
+  "frozen_before_full_development_results": true,
+  "schema": "round51-symmetry-core-screen-decision-v1"
+}

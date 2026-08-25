@@ -48,6 +48,32 @@ Round50IntervalMipPolicy parseRound50IntervalMipPolicy(
         out.name = "s1r-used-first-route-start-order";
         out.branching = Round50BranchingPolicy::Default;
         out.symmetry_numerical = "used-first-route-start-order";
+    } else if (out.name == "m1" ||
+               out.name == "m1-tight-big-m-v0" ||
+               out.name == "m1-v0-cardinality") {
+        out.name = "m1-tight-big-m-v0";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "tight-tsp-lower-bound";
+    } else if (out.name == "m1-s1-route-start-order") {
+        out.name = "m1-s1-route-start-order";
+        out.branching = Round50BranchingPolicy::Default;
+        out.symmetry_numerical = "route-start-order";
+        out.subset_duration_big_m = "tight-tsp-lower-bound";
+    } else if (out.name == "m1-s1r-used-first-route-start-order") {
+        out.name = "m1-s1r-used-first-route-start-order";
+        out.branching = Round50BranchingPolicy::Default;
+        out.symmetry_numerical = "used-first-route-start-order";
+        out.subset_duration_big_m = "tight-tsp-lower-bound";
+    } else if (out.name == "a1-root-sparse-2x2") {
+        out.name = "a1-root-sparse-2x2";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "tight-tsp-lower-bound";
+        out.adaptive_branching = "root-sparse-2x2";
+    } else if (out.name == "a1r-root-sparse-top1") {
+        out.name = "a1r-root-sparse-top1";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "tight-tsp-lower-bound";
+        out.adaptive_branching = "root-sparse-top1";
     } else {
         out.failure_reason = "unsupported_round50_interval_mip_policy";
         return out;

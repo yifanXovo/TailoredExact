@@ -5,6 +5,7 @@
 #include "ControllingLeafScheduler.hpp"
 #include "ModelCorrectness.hpp"
 #include "Round50IntervalMip.hpp"
+#include "Round51IntervalMip.hpp"
 #include "StaticSegmentedGini.hpp"
 
 #include "Evaluator.hpp"
@@ -70,6 +71,11 @@ struct StaticSegmentedWriteStats {
     long long hierarchical_selector_variables = 0;
     long long exact_duplicate_rows_omitted = 0;
     long long round50_symmetry_rows = 0;
+    long long round51_subset_duration_rows = 0;
+    double round51_subset_duration_min_m =
+        std::numeric_limits<double>::infinity();
+    double round51_subset_duration_max_m = 0.0;
+    bool round51_historical_m_may_be_unsafe = false;
     std::string family_encoding;
 };
 
@@ -1730,11 +1736,17 @@ void writeCompactLp(const Instance& instance,
 
     if (strengthened && V <= 12) {
         const std::vector<double> tsp = subsetTspLowerBounds(instance);
-        const double big = 100000.0;
+        const bool round51_tight_big_m = canonical_spec &&
+            canonical_spec->round51_subset_duration_big_m ==
+                "tight-tsp-lower-bound";
         for (int k = 0; k < M; ++k) {
             for (int mask = 1; mask < (1 << V); ++mask) {
                 Expr e;
                 int count = 0;
+                const double analytic_big =
+                    round51SubsetDurationBigM(tsp[mask]);
+                const double big = round51_tight_big_m
+                    ? analytic_big : 100000.0;
                 for (int b = 0; b < V; ++b) {
                     if (mask & (1 << b)) {
                         const int i = b + 1;
@@ -1743,7 +1755,26 @@ void writeCompactLp(const Instance& instance,
                         addTerm(e, zName(k, i), big);
                     }
                 }
-                writeConstraint(out, cid, e, "<=", instance.total_time_limit - tsp[mask] + big * count);
+                const Round51SubsetDurationRowValues row =
+                    round51SubsetDurationRowValues(
+                        tsp[mask], instance.total_time_limit, count);
+                const double rhs = round51_tight_big_m
+                    ? row.rhs
+                    : instance.total_time_limit - tsp[mask] +
+                        big * static_cast<double>(count);
+                writeConstraint(out, cid, e, "<=", rhs);
+                if (static_stats) {
+                    ++static_stats->round51_subset_duration_rows;
+                    static_stats->round51_subset_duration_min_m = std::min(
+                        static_stats->round51_subset_duration_min_m,
+                        analytic_big);
+                    static_stats->round51_subset_duration_max_m = std::max(
+                        static_stats->round51_subset_duration_max_m,
+                        analytic_big);
+                    static_stats->round51_historical_m_may_be_unsafe =
+                        static_stats->round51_historical_m_may_be_unsafe ||
+                        analytic_big > 100000.0;
+                }
             }
         }
     }
@@ -3994,6 +4025,8 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
     artifact.exact_duplicate_row_elimination =
         spec.exact_duplicate_row_elimination;
     artifact.round50_symmetry_policy = spec.round50_symmetry_policy;
+    artifact.round51_subset_duration_big_m =
+        spec.round51_subset_duration_big_m;
     artifact.static_segmented_gini = spec.static_segmented_gini;
     artifact.objective_gini_envelope_rows = static_cast<long long>(
         spec.objective_gini_envelope_facets.size());
@@ -4032,6 +4065,11 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
             spec.static_segmented_gini != "st-k2-p-extended") {
             throw std::runtime_error(
                 "unsupported_round41_static_segmented_gini_mode");
+        }
+        if (spec.round51_subset_duration_big_m != "historical-100000" &&
+            spec.round51_subset_duration_big_m != "tight-tsp-lower-bound") {
+            throw std::runtime_error(
+                "unsupported_round51_subset_duration_big_m_policy");
         }
         if (spec.static_segmented_gini != "off" &&
             (!spec.strengthened || !spec.interval_restricted ||
@@ -4075,6 +4113,15 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
         artifact.exact_duplicate_rows_omitted =
             static_stats.exact_duplicate_rows_omitted;
         artifact.round50_symmetry_rows = static_stats.round50_symmetry_rows;
+        artifact.round51_subset_duration_rows =
+            static_stats.round51_subset_duration_rows;
+        artifact.round51_subset_duration_min_m =
+            static_stats.round51_subset_duration_rows > 0
+                ? static_stats.round51_subset_duration_min_m : 0.0;
+        artifact.round51_subset_duration_max_m =
+            static_stats.round51_subset_duration_max_m;
+        artifact.round51_historical_m_may_be_unsafe =
+            static_stats.round51_historical_m_may_be_unsafe;
         artifact.static_family_encoding = static_stats.family_encoding;
         const ModelSizeStats size = analyzeLpModel(path);
         artifact.rows = size.rows;
