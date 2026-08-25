@@ -1,0 +1,33 @@
+{
+  "accepted_modification_count": 0,
+  "confirmation_opened": false,
+  "definition_equivalence": "Interval-MIP-v0",
+  "development_certificate_count": 10,
+  "development_executable_sha256": "a08a69afb22c12841c1847329b63e16c66b1c553ae94bc4b40e4b28431585243",
+  "development_false_certificate_count": 0,
+  "development_row_count": 14,
+  "frozen_backend": "Interval-MIP-vNext",
+  "input_hashes": {
+    "results/gf_k1_interval_mip_vnext_round50/branching_iteration_decision.json": "bcd88b15613e91720d9244e55ddad35161ebe59b8c1ccb4b8be6c35a01f84560",
+    "results/gf_k1_interval_mip_vnext_round50/cut_formulation_iteration_decision.json": "2d3773cffa91e9f1e47ba00a096791256e1b0c4f9b4b5eddcbececf27a1fc8cd",
+    "results/gf_k1_interval_mip_vnext_round50/interval_mip_ablation_chain.csv": "ec01bcef675745070580c9e0aaeb381b9929a5d60e997bd947ecf37554efdbb2",
+    "results/gf_k1_interval_mip_vnext_round50/interval_mip_vnext_300s_results.csv": "a5cfdb3876b91e44642aebfce11b78bc8a1083bfcbc0b01d17333eae7d4d19f4",
+    "results/gf_k1_interval_mip_vnext_round50/interval_mip_vnext_definition.json": "78e937a5583a705f8c72d897ace957326ea2aba6c6a7fcaf4cd22d1278c66ed7",
+    "results/gf_k1_interval_mip_vnext_round50/iteration3_revision_v0_300s.csv": "4e3837cb60e4397714b36c555be9c1e6a52e1e125467f8aa976dfcc3cf78c63f",
+    "results/gf_k1_interval_mip_vnext_round50/model_reuse_iteration_decision.json": "f137c44ebd2c6c849c66cfb6579a5a33cb985848f62271c1d015389f1557acb7",
+    "results/gf_k1_interval_mip_vnext_round50/symmetry_numerical_iteration_decision.json": "42e850903f2aec16ffe28167bfe58ae827f6db5d0187c4b73e2ef63dd51eec2c"
+  },
+  "iteration_decisions": {
+    "branching": "branching_iteration_decision.json",
+    "cut_formulation": "cut_formulation_iteration_decision.json",
+    "model_reuse": "model_reuse_iteration_decision.json",
+    "symmetry_numerical": "symmetry_numerical_iteration_decision.json"
+  },
+  "official_executable_sha256": "pending-clean-official-build",
+  "post_confirmation_tuning_allowed": false,
+  "runtime_dispatch": false,
+  "schema": "round50-interval-mip-vnext-freeze-manifest-v1",
+  "source_commit": "ca9ee2fb8eb3f3dc4484999036a2921055968c33",
+  "source_tree": "c4df55616c864b6788903ad64ad86673e4dc0bc5",
+  "status": "frozen_before_confirmation"
+}
