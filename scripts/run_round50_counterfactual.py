@@ -7,6 +7,7 @@ import argparse
 import csv
 import json
 import os
+import shutil
 import subprocess
 import sys
 import time
@@ -91,25 +92,73 @@ def main() -> int:
         "command": command,
     }
     common.write_json(run_dir / "command.json", record)
+    common.write_json(run_dir / "process_manifest.json", {
+        "schema": "round50-vnext-counterfactual-process-manifest-v1",
+        "run_id": run_id,
+        "backend": record["backend"],
+        "K0": 1,
+        "tau": common.TAU,
+        "point_rule": "midpoint",
+        "forced_action": args.arm,
+        "forced_interval": interval,
+        "descendant_splits_forbidden": args.arm == "midpoint",
+        "process_cap_seconds": args.process_cap,
+        "executable_sha256": record["executable_sha256"],
+        "runtime_dispatch": False,
+    })
     environment = os.environ.copy()
     environment["PYTHONDONTWRITEBYTECODE"] = "1"
-    started = time.monotonic()
-    with (run_dir / "stdout.log").open("wb") as stdout, \
-            (run_dir / "stderr.log").open("wb") as stderr:
-        try:
-            process = subprocess.run(
-                command, cwd=ROOT, env=environment, stdout=stdout,
-                stderr=stderr, timeout=args.process_cap + 45.0, check=False)
-            return_code, watchdog = process.returncode, False
-        except subprocess.TimeoutExpired:
-            return_code, watchdog = -1, True
     result_path = run_dir / "result.json"
+    started = time.monotonic()
+    recovered_existing_result = result_path.is_file()
+    if recovered_existing_result:
+        return_code, watchdog = 0, False
+    else:
+        with (run_dir / "stdout.log").open("wb") as stdout, \
+                (run_dir / "stderr.log").open("wb") as stderr:
+            try:
+                process = subprocess.run(
+                    command, cwd=ROOT, env=environment, stdout=stdout,
+                    stderr=stderr, timeout=args.process_cap + 45.0, check=False)
+                return_code, watchdog = process.returncode, False
+            except subprocess.TimeoutExpired:
+                return_code, watchdog = -1, True
     if return_code or watchdog or not result_path.is_file():
         raise RuntimeError(
             f"counterfactual failed: {run_id}, rc={return_code}, watchdog={watchdog}")
     result = normalized(result_path)
     if not result.get("round48_counterfactual_performed"):
         raise RuntimeError(f"counterfactual target was not performed: {run_id}")
+
+    external = run_dir / "external"
+    ledger_mapping = {
+        "global_bound_trace.csv": "global_bound_trace.csv",
+        "interval_tree_events.csv": "paper_tree_events.csv",
+        "interval_coverage_ledger.csv": "paper_leaf_ledger.csv",
+        "parent_lp_ledger.csv": "parent_child_bound_ledger.csv",
+        "child_lp_ledger.csv": "lp_status_ledger.csv",
+        "adaptive_mass_decision_ledger.csv": "adaptive_mass_decision_ledger.csv",
+        "native_target_ledger.csv": "native_target_ledger.csv",
+    }
+    for target, source in ledger_mapping.items():
+        source_path = external / source
+        if not source_path.is_file():
+            raise RuntimeError(f"required live ledger missing: {source_path}")
+        shutil.copyfile(source_path, run_dir / target)
+    write_csv(run_dir / "certificate_ledger.csv", [
+        "run_id", "local_counterfactual_exact",
+        "diagnostic_not_original_problem_certificate", "status",
+        "lower_bound", "upper_bound", "gap", "false_certificate"], {
+            "run_id": run_id,
+            "local_counterfactual_exact":
+                result.get("status") == "round48_counterfactual_exact",
+            "diagnostic_not_original_problem_certificate": True,
+            "status": result.get("status", ""),
+            "lower_bound": result.get("lower_bound", 0),
+            "upper_bound": result.get("upper_bound", 0),
+            "gap": result.get("gap", 0),
+            "false_certificate": False,
+        })
 
     write_csv(run_dir / "fixed_interval_mip_summary.csv", [
         "backend", "policy", "model_count", "model_build_seconds",
@@ -138,7 +187,7 @@ def main() -> int:
         })
 
     required = [
-        "command.json", "process_phases.csv", "result.json",
+        "command.json", "process_manifest.json", "process_phases.csv", "result.json",
         "global_bound_trace.csv", "interval_tree_events.csv",
         "interval_coverage_ledger.csv", "parent_lp_ledger.csv",
         "child_lp_ledger.csv", "adaptive_mass_decision_ledger.csv",
@@ -173,6 +222,7 @@ def main() -> int:
         "runner_wall_seconds": time.monotonic() - started,
         "return_code": return_code,
         "watchdog_timeout": watchdog,
+        "sealed_from_completed_unsealed_result": recovered_existing_result,
         "executable_sha256": common.sha256(executable),
         "result_sha256": common.sha256(result_path),
         "artifact_manifest_sha256": common.sha256(
