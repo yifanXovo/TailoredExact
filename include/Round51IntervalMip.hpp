@@ -92,6 +92,12 @@ Round51ScoredCandidate round51ScoreAdaptiveCandidate(
 Round51PrioritySelection round51SelectSparsePriorities(
     std::vector<Round51ScoredCandidate> scored,
     double improvement_tolerance = 1e-12);
+// The sole Round 51 adaptive revision: retain the identical pool, probes,
+// ranking, validity, and fallback rules, but prioritize only the best
+// already-probed candidate at tier 1.
+Round51PrioritySelection round51SelectTopOnePriority(
+    std::vector<Round51ScoredCandidate> scored,
+    double improvement_tolerance = 1e-12);
 std::string round51ProbeStatusName(Round51ProbeStatus status);
 double round51AdaptiveTotal(double root_value,
                             const std::vector<double>& probe_values,

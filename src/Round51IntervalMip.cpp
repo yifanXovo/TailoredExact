@@ -213,6 +213,22 @@ Round51PrioritySelection round51SelectSparsePriorities(
     return out;
 }
 
+Round51PrioritySelection round51SelectTopOnePriority(
+    std::vector<Round51ScoredCandidate> scored,
+    double improvement_tolerance) {
+    Round51PrioritySelection out = round51SelectSparsePriorities(
+        std::move(scored), improvement_tolerance);
+    if (!out.fallback_to_default) {
+        if (out.priorities.empty()) {
+            throw std::runtime_error(
+                "round51_top_one_selection_missing_best_candidate");
+        }
+        out.priorities.resize(1);
+        out.priorities.front().second = 1;
+    }
+    return out;
+}
+
 std::string round51ProbeStatusName(Round51ProbeStatus status) {
     switch (status) {
     case Round51ProbeStatus::Optimal: return "optimal";

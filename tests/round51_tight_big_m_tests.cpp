@@ -111,6 +111,15 @@ int main() {
                         "tight-tsp-lower-bound" &&
                     a1.adaptive_branching == "root-sparse-2x2",
                 "A1 composes only M1-v0 and root sparse branching");
+        const auto a1r = parseRound50IntervalMipPolicy(
+            "a1r-root-sparse-top1");
+        require(a1r.valid && a1r.branching ==
+                    Round50BranchingPolicy::Default &&
+                    a1r.symmetry_numerical == "v0" &&
+                    a1r.subset_duration_big_m ==
+                        "tight-tsp-lower-bound" &&
+                    a1r.adaptive_branching == "root-sparse-top1",
+                "A1-R1 changes only the sparse priority count and tier");
 
         std::vector<Round51RootVariable> root_variables = {
             {"x_0_1_2", 'B', 0.0, 1.0, 0.5},
@@ -181,6 +190,15 @@ int main() {
                     selected.priorities[1] ==
                         std::make_pair(std::string("z_second"), 1),
                 "score ties use pool order and assign at most two priorities");
+        const auto selected_top_one = round51SelectTopOnePriority(
+            {third, second, first});
+        require(!selected_top_one.fallback_to_default &&
+                    selected_top_one.ranked_valid_candidates.size() ==
+                        selected.ranked_valid_candidates.size() &&
+                    selected_top_one.priorities.size() == 1 &&
+                    selected_top_one.priorities[0] ==
+                        std::make_pair(std::string("x_first"), 1),
+                "A1-R1 keeps the ranking but assigns tier one only to best");
         Round51ProbeDirection no_gain = optimal;
         no_gain.child_objective = 10.0;
         const auto zero_score = round51ScoreAdaptiveCandidate(
@@ -190,6 +208,12 @@ int main() {
                     fallback.fallback_reason ==
                         "all_valid_candidates_zero_improvement",
                 "zero bound improvement falls back to default branching");
+        const auto top_one_fallback = round51SelectTopOnePriority(
+            {zero_score});
+        require(top_one_fallback.fallback_to_default &&
+                    top_one_fallback.fallback_reason ==
+                        fallback.fallback_reason,
+                "A1-R1 preserves the frozen fallback rule exactly");
         require(std::fabs(round51AdaptiveTotal(
                     1.0, {2.0, 3.0, 4.0}, 5.0) - 15.0) < 1e-12,
                 "end-to-end overhead accounting sums every phase");

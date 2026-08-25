@@ -801,7 +801,8 @@ int main(int argc, char** argv) {
 
         AdaptiveExecution adaptive;
         ebrp::FixedIntervalMipOutcome outcome;
-        if (policy.adaptive_branching == "root-sparse-2x2") {
+        if (policy.adaptive_branching == "root-sparse-2x2" ||
+            policy.adaptive_branching == "root-sparse-top1") {
             adaptive.active = true;
             auto root_request = makeRequest(
                 ebrp::FixedIntervalSolveKind::PaperLpRelaxation,
@@ -924,8 +925,9 @@ int main(int argc, char** argv) {
                                 args.cutoff));
                     }
                     adaptive.selection =
-                        ebrp::round51SelectSparsePriorities(
-                            adaptive.scored);
+                        policy.adaptive_branching == "root-sparse-top1"
+                        ? ebrp::round51SelectTopOnePriority(adaptive.scored)
+                        : ebrp::round51SelectSparsePriorities(adaptive.scored);
                 }
             }
             adaptive.fallback_reason =

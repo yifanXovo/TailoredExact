@@ -217,6 +217,7 @@ def main() -> None:
                     "m1-s1-route-start-order",
                     "m1-s1r-used-first-route-start-order",
                     "a1-root-sparse-2x2",
+                    "a1r-root-sparse-top1",
                 }
                 and int(model["rows"]) == int(frozen["original_rows"])
                 and int(model["columns"]) == int(frozen["original_columns"])
