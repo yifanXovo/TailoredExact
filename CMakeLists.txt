@@ -35,6 +35,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Round48K1AMF.cpp
   src/Round49K1RC.cpp
   src/Round50IntervalMip.cpp
+  src/Round51IntervalMip.cpp
   src/ReplicaExternalGiniTree.cpp
   src/ConnectivityFlow.cpp
   src/Bounds.cpp
@@ -223,6 +224,17 @@ add_executable(Round50IntervalMipExperiment
   src/round50_interval_mip_main.cpp)
 target_link_libraries(Round50IntervalMipExperiment PRIVATE exact_ebrp_core)
 
+# Round 51 uses the same fixed-state driver and emits an independently hashed
+# executable for its causally staged comparisons. Historical Round 50 policy
+# names remain accepted and byte-preserving for default-off audits.
+add_executable(Round51IntervalMipExperiment
+  src/round50_interval_mip_main.cpp)
+target_link_libraries(Round51IntervalMipExperiment PRIVATE exact_ebrp_core)
+
 add_executable(Round50IntervalMipTests tests/round50_interval_mip_tests.cpp)
 target_link_libraries(Round50IntervalMipTests PRIVATE exact_ebrp_core)
 add_test(NAME Round50IntervalMipTests COMMAND Round50IntervalMipTests)
+
+add_executable(Round51TightBigMTests tests/round51_tight_big_m_tests.cpp)
+target_link_libraries(Round51TightBigMTests PRIVATE exact_ebrp_core)
+add_test(NAME Round51TightBigMTests COMMAND Round51TightBigMTests)

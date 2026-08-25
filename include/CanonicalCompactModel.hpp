@@ -39,6 +39,10 @@ struct CanonicalCompactModelSpec {
     // "v0-cardinality" preserves the historical rule; "route-start-order"
     // sorts identical-vehicle route labels by depot-start station index.
     std::string round50_symmetry_policy = "v0-cardinality";
+    // Round 51 M1. Only "tight-tsp-lower-bound" changes the exhaustive
+    // V<=12 subset-duration conditional rows. The historical default is
+    // deliberately explicit and byte-preserving.
+    std::string round51_subset_duration_big_m = "historical-100000";
     std::string static_model_identity;
     // Valid affine lower bounds h(G)=alpha+beta*G whose source interval
     // contains this model's interval.  The writer emits h(G) <= objective.
@@ -73,6 +77,11 @@ struct CanonicalCompactModelArtifact {
     long long exact_duplicate_rows_omitted = 0;
     std::string round50_symmetry_policy = "v0-cardinality";
     long long round50_symmetry_rows = 0;
+    std::string round51_subset_duration_big_m = "historical-100000";
+    long long round51_subset_duration_rows = 0;
+    double round51_subset_duration_min_m = 0.0;
+    double round51_subset_duration_max_m = 0.0;
+    bool round51_historical_m_may_be_unsafe = false;
     long long objective_gini_envelope_rows = 0;
     std::string static_family_encoding;
     std::string objective_definition =

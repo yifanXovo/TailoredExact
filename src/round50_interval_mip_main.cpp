@@ -275,9 +275,12 @@ void writeStateIdentity(const ebrp::Instance& instance,
         << "  \"model_fingerprint\": \"" << artifact.sha256 << "\",\n"
         << "  \"row_bound_signature\": \"" << artifact.row_signature << "\",\n"
         << "  \"formulation_profile\": \""
-        << (artifact.exact_duplicate_row_elimination
+        << (artifact.round51_subset_duration_big_m ==
+                    "tight-tsp-lower-bound"
+                ? "Interval-MIP-v0-paper-safe+M1-tight-subset-duration-big-m"
+                : (artifact.exact_duplicate_row_elimination
                 ? "Interval-MIP-v0-paper-safe+C1-exact-duplicate-elimination"
-                : "Interval-MIP-v0-paper-safe") << "\",\n"
+                : "Interval-MIP-v0-paper-safe")) << "\",\n"
         << "  \"exact_duplicate_row_elimination\": "
         << boolJson(artifact.exact_duplicate_row_elimination) << ",\n"
         << "  \"exact_duplicate_rows_omitted\": "
@@ -285,7 +288,18 @@ void writeStateIdentity(const ebrp::Instance& instance,
         << "  \"round50_symmetry_policy\": \""
         << jsonEscape(artifact.round50_symmetry_policy) << "\",\n"
         << "  \"round50_symmetry_rows\": "
-        << artifact.round50_symmetry_rows << "\n}\n";
+        << artifact.round50_symmetry_rows << ",\n"
+        << "  \"round51_subset_duration_big_m\": \""
+        << jsonEscape(artifact.round51_subset_duration_big_m) << "\",\n"
+        << "  \"round51_subset_duration_rows\": "
+        << artifact.round51_subset_duration_rows << ",\n"
+        << "  \"round51_subset_duration_min_m\": "
+        << artifact.round51_subset_duration_min_m << ",\n"
+        << "  \"round51_subset_duration_max_m\": "
+        << artifact.round51_subset_duration_max_m << ",\n"
+        << "  \"round51_historical_m_may_be_unsafe\": "
+        << boolJson(artifact.round51_historical_m_may_be_unsafe)
+        << "\n}\n";
     std::ofstream model(args.artifact_dir / "model_fingerprint.json");
     model << "{\n  \"schema\": \"round50-model-fingerprint-v1\",\n"
           << "  \"sha256\": \"" << artifact.sha256 << "\",\n"
@@ -301,20 +315,36 @@ void writeStateIdentity(const ebrp::Instance& instance,
           << "  \"round50_symmetry_policy\": \""
           << jsonEscape(artifact.round50_symmetry_policy) << "\",\n"
           << "  \"round50_symmetry_rows\": "
-          << artifact.round50_symmetry_rows << "\n}\n";
+          << artifact.round50_symmetry_rows << ",\n"
+          << "  \"round51_subset_duration_big_m\": \""
+          << jsonEscape(artifact.round51_subset_duration_big_m) << "\",\n"
+          << "  \"round51_subset_duration_rows\": "
+          << artifact.round51_subset_duration_rows << ",\n"
+          << "  \"round51_subset_duration_min_m\": "
+          << artifact.round51_subset_duration_min_m << ",\n"
+          << "  \"round51_subset_duration_max_m\": "
+          << artifact.round51_subset_duration_max_m << ",\n"
+          << "  \"round51_historical_m_may_be_unsafe\": "
+          << boolJson(artifact.round51_historical_m_may_be_unsafe)
+          << "\n}\n";
 }
 
 void writeStaticLedgers(const Arguments& args,
                         const ebrp::CanonicalCompactModelArtifact& artifact) {
     std::ofstream size(args.artifact_dir / "formulation_size_ledger.csv");
-    size << "state_id,policy,original_rows,original_columns,original_nonzeros,model_scope,exact_duplicate_row_elimination,exact_duplicate_rows_omitted,round50_symmetry_policy,round50_symmetry_rows\n"
+    size << "state_id,policy,original_rows,original_columns,original_nonzeros,model_scope,exact_duplicate_row_elimination,exact_duplicate_rows_omitted,round50_symmetry_policy,round50_symmetry_rows,round51_subset_duration_big_m,round51_subset_duration_rows,round51_subset_duration_min_m,round51_subset_duration_max_m,historical_m_may_be_unsafe\n"
          << csvField(args.state_id) << ',' << csvField(args.policy) << ','
          << artifact.rows << ',' << artifact.columns << ','
          << artifact.nonzeros << ',' << csvField(artifact.model_scope) << ','
          << artifact.exact_duplicate_row_elimination << ','
          << artifact.exact_duplicate_rows_omitted << ','
          << csvField(artifact.round50_symmetry_policy) << ','
-         << artifact.round50_symmetry_rows << '\n';
+         << artifact.round50_symmetry_rows << ','
+         << csvField(artifact.round51_subset_duration_big_m) << ','
+         << artifact.round51_subset_duration_rows << ','
+         << artifact.round51_subset_duration_min_m << ','
+         << artifact.round51_subset_duration_max_m << ','
+         << artifact.round51_historical_m_may_be_unsafe << '\n';
 }
 
 void writeSolveEvidence(const Arguments& args,
@@ -532,6 +562,8 @@ int main(int argc, char** argv) {
                        "used-first-route-start-order"
                     ? "used-first-route-start-order"
                     : "v0-cardinality");
+        spec.round51_subset_duration_big_m =
+            policy.subset_duration_big_m;
         const auto build_started = Clock::now();
         ebrp::CanonicalCompactModelArtifact artifact =
             ebrp::writeCanonicalCompactModel(
