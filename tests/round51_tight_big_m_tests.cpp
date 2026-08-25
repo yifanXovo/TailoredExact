@@ -102,6 +102,101 @@ int main() {
                         "tight-tsp-lower-bound",
                 "M1-S1R composes only the frozen symmetry revision");
 
+        const auto a1 = parseRound50IntervalMipPolicy(
+            "a1-root-sparse-2x2");
+        require(a1.valid && a1.branching ==
+                    Round50BranchingPolicy::Default &&
+                    a1.symmetry_numerical == "v0" &&
+                    a1.subset_duration_big_m ==
+                        "tight-tsp-lower-bound" &&
+                    a1.adaptive_branching == "root-sparse-2x2",
+                "A1 composes only M1-v0 and root sparse branching");
+
+        std::vector<Round51RootVariable> root_variables = {
+            {"x_0_1_2", 'B', 0.0, 1.0, 0.5},
+            {"x_0_1_3", 'B', 0.0, 1.0, 0.5},
+            {"x_0_1_4", 'B', 0.0, 1.0, 0.5},
+            {"z_0_1", 'B', 0.0, 1.0, 0.5},
+            {"p_0_1", 'I', 0.0, 10.0, 3.25},
+            {"d_0_1", 'I', 0.0, 10.0, 4.5},
+            {"ord_0_1", 'I', 0.0, 10.0, 2.5},
+            {"z_0_2", 'C', 0.0, 1.0, 0.5},
+            {"p_0_2", 'I', 2.0, 2.0, 2.0},
+            {"d_0_2", 'I', 0.0, 10.0, 4.0},
+        };
+        const auto pool = round51AdaptiveCandidatePool(root_variables);
+        require(pool.size() == 4, "A1 pool uses the frozen budget four");
+        require(pool[0].name == "x_0_1_2" &&
+                    pool[1].name == "x_0_1_3" &&
+                    pool[2].name == "z_0_1" &&
+                    pool[3].name == "d_0_1",
+                "A1 pool tie-break and family cap are deterministic");
+        require(pool[0].family == Round50VariableFamily::RoutingArc &&
+                    pool[2].family ==
+                        Round50VariableFamily::VisitSelection &&
+                    pool[3].family ==
+                        Round50VariableFamily::DropQuantity,
+                "A1 semantic family classification is canonical");
+        require(pool[3].down_upper_bound == 4.0 &&
+                    pool[3].up_lower_bound == 5.0,
+                "general-integer child bounds use floor and ceil");
+
+        Round51ProbeDirection infeasible;
+        infeasible.status = Round51ProbeStatus::Infeasible;
+        Round51ProbeDirection optimal;
+        optimal.status = Round51ProbeStatus::Optimal;
+        optimal.child_objective = 15.0;
+        const auto scored = round51ScoreAdaptiveCandidate(
+            pool[0], infeasible, optimal, 10.0, 20.0);
+        require(scored.valid && scored.delta_down == 10.0 &&
+                    scored.delta_up == 5.0 &&
+                    std::fabs(scored.score - 50.0) < 1e-12,
+                "child infeasibility and optimal-bound scoring");
+
+        Round51ProbeDirection invalid;
+        invalid.status = Round51ProbeStatus::Invalid;
+        const auto invalid_score = round51ScoreAdaptiveCandidate(
+            pool[1], invalid, optimal, 10.0, 20.0);
+        auto fallback = round51SelectSparsePriorities({invalid_score});
+        require(fallback.fallback_to_default &&
+                    fallback.fallback_reason ==
+                        "no_candidate_with_two_valid_probes",
+                "invalid probes fall back to default branching");
+
+        auto first = scored;
+        auto second = scored;
+        auto third = scored;
+        first.candidate.pool_order = 0;
+        second.candidate.pool_order = 1;
+        third.candidate.pool_order = 2;
+        first.candidate.name = "x_first";
+        second.candidate.name = "z_second";
+        third.candidate.name = "p_third";
+        const auto selected = round51SelectSparsePriorities(
+            {third, second, first});
+        require(!selected.fallback_to_default &&
+                    selected.priorities.size() == 2 &&
+                    selected.priorities[0] ==
+                        std::make_pair(std::string("x_first"), 2) &&
+                    selected.priorities[1] ==
+                        std::make_pair(std::string("z_second"), 1),
+                "score ties use pool order and assign at most two priorities");
+        Round51ProbeDirection no_gain = optimal;
+        no_gain.child_objective = 10.0;
+        const auto zero_score = round51ScoreAdaptiveCandidate(
+            pool[0], no_gain, no_gain, 10.0, 20.0);
+        fallback = round51SelectSparsePriorities({zero_score});
+        require(fallback.fallback_to_default &&
+                    fallback.fallback_reason ==
+                        "all_valid_candidates_zero_improvement",
+                "zero bound improvement falls back to default branching");
+        require(std::fabs(round51AdaptiveTotal(
+                    1.0, {2.0, 3.0, 4.0}, 5.0) - 15.0) < 1e-12,
+                "end-to-end overhead accounting sums every phase");
+        requireThrows([] {
+            round51AdaptiveTotal(1.0, {-1.0}, 2.0);
+        }, "invalid adaptive accounting fails closed");
+
         std::cout << "Round51TightBigMTests passed\n";
         return 0;
     } catch (const std::exception& ex) {

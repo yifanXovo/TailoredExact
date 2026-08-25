@@ -5,6 +5,7 @@
 #include "HgaTgbcRunner.hpp"
 #include "Parser.hpp"
 #include "Round50IntervalMip.hpp"
+#include "Round51IntervalMip.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -43,6 +44,43 @@ struct Arguments {
     double route_time_limit = 2850.0;
     double pickup_time = 60.0;
     double drop_time = 60.0;
+};
+
+struct AdaptiveProbeRecord {
+    ebrp::Round51AdaptiveCandidate candidate;
+    std::string direction;
+    double imposed_bound = 0.0;
+    ebrp::Round51ProbeStatus status = ebrp::Round51ProbeStatus::Invalid;
+    double child_objective = 0.0;
+    ebrp::FixedIntervalMipOutcome outcome;
+};
+
+struct AdaptiveExecution {
+    bool active = false;
+    bool root_valid = false;
+    bool root_infeasible = false;
+    bool root_closes_state = false;
+    bool terminal_model_fresh = false;
+    bool lifecycle_valid = false;
+    bool priority_readback_valid = false;
+    bool priority_retry_used = false;
+    std::string fallback_reason = "not_applicable";
+    ebrp::FixedIntervalMipOutcome root;
+    std::vector<ebrp::Round51AdaptiveCandidate> pool;
+    std::vector<AdaptiveProbeRecord> probes;
+    std::vector<ebrp::Round51ScoredCandidate> scored;
+    ebrp::Round51PrioritySelection selection;
+    std::vector<ebrp::FixedIntervalMipOutcome> terminal_attempts;
+    double root_work = 0.0;
+    double probe_work = 0.0;
+    double terminal_work = 0.0;
+    double total_work = 0.0;
+    double root_solver_time = 0.0;
+    double probe_solver_time = 0.0;
+    double terminal_solver_time = 0.0;
+    double total_solver_time = 0.0;
+    double total_model_read_time = 0.0;
+    double total_simplex_iterations = 0.0;
 };
 
 std::string jsonEscape(const std::string& value) {
@@ -347,17 +385,121 @@ void writeStaticLedgers(const Arguments& args,
          << artifact.round51_historical_m_may_be_unsafe << '\n';
 }
 
+void writeAdaptiveLedgers(
+    const Arguments& args,
+    const AdaptiveExecution& adaptive,
+    const ebrp::FixedIntervalMipOutcome& terminal,
+    double process_seconds) {
+    if (!adaptive.active) return;
+    std::map<std::string, ebrp::Round51ScoredCandidate> scored;
+    for (const auto& item : adaptive.scored) {
+        scored[item.candidate.name] = item;
+    }
+    std::ofstream probes(
+        args.artifact_dir / "adaptive_branching_probe_evidence.csv");
+    probes << "state_id,policy,candidate_pool_order,variable_name,semantic_family,original_type,root_value,fractionality,direction,imposed_bound,probe_status,child_objective,delta,score,work,solver_time_seconds,model_read_seconds,model_fingerprint_match,bound_override_readback_valid,fresh_disposable_model,failure_reason\n";
+    probes << std::setprecision(17);
+    for (const AdaptiveProbeRecord& record : adaptive.probes) {
+        const auto found = scored.find(record.candidate.name);
+        double delta = 0.0, score = 0.0;
+        if (found != scored.end()) {
+            delta = record.direction == "down"
+                ? found->second.delta_down : found->second.delta_up;
+            score = found->second.score;
+        }
+        probes << csvField(args.state_id) << ',' << csvField(args.policy)
+               << ',' << record.candidate.pool_order << ','
+               << csvField(record.candidate.name) << ','
+               << csvField(ebrp::round50VariableFamilyName(
+                      record.candidate.family)) << ','
+               << record.candidate.original_type << ','
+               << record.candidate.root_value << ','
+               << record.candidate.fractionality << ','
+               << record.direction << ',' << record.imposed_bound << ','
+               << ebrp::round51ProbeStatusName(record.status) << ','
+               << record.child_objective << ',' << delta << ',' << score
+               << ',' << record.outcome.work << ','
+               << record.outcome.solver_runtime_seconds << ','
+               << record.outcome.model_read_seconds << ','
+               << record.outcome.model_fingerprint_matches_request << ','
+               << record.outcome.variable_bound_override_readback_valid
+               << ',' << (!record.outcome.in_memory_model_reused) << ','
+               << csvField(record.outcome.failure_reason) << '\n';
+    }
+
+    std::map<std::string, int> assigned;
+    for (const auto& item : adaptive.selection.priorities) {
+        assigned[item.first] = item.second;
+    }
+    std::map<std::string, int> observed;
+    for (const auto& item : terminal.branch_priority_evidence) {
+        observed[item.variable_name] = item.assigned_priority;
+    }
+    std::ofstream priority(
+        args.artifact_dir /
+            "adaptive_branching_priority_assignment_audit.csv");
+    priority << "state_id,policy,fallback_to_default,fallback_reason,variable_name,semantic_family,pool_order,score,delta_down,delta_up,requested_priority,observed_priority,exact_readback,zero_priority_readback_count,terminal_model_fresh,assignment_status\n";
+    priority << std::setprecision(17);
+    if (assigned.empty()) {
+        priority << csvField(args.state_id) << ',' << csvField(args.policy)
+                 << ",1," << csvField(adaptive.fallback_reason)
+                 << ",none,none,-1,0,0,0,0,0,1,"
+                 << terminal.branch_priority_zero_readback_count << ','
+                 << adaptive.terminal_model_fresh << ','
+                 << csvField(terminal.branch_priority_assignment_status)
+                 << '\n';
+    }
+    for (const auto& item : adaptive.selection.ranked_valid_candidates) {
+        const auto requested = assigned.find(item.candidate.name);
+        if (requested == assigned.end()) continue;
+        const int seen = observed.count(item.candidate.name)
+            ? observed[item.candidate.name] : 0;
+        priority << csvField(args.state_id) << ',' << csvField(args.policy)
+                 << ",0,none," << csvField(item.candidate.name) << ','
+                 << csvField(ebrp::round50VariableFamilyName(
+                        item.candidate.family)) << ','
+                 << item.candidate.pool_order << ',' << item.score << ','
+                 << item.delta_down << ',' << item.delta_up << ','
+                 << requested->second << ',' << seen << ','
+                 << (seen == requested->second) << ','
+                 << terminal.branch_priority_zero_readback_count << ','
+                 << adaptive.terminal_model_fresh << ','
+                 << csvField(terminal.branch_priority_assignment_status)
+                 << '\n';
+    }
+
+    std::ofstream overhead(
+        args.artifact_dir / "adaptive_branching_overhead_ledger.csv");
+    overhead << "state_id,policy,root_lp_work,child_probe_work,terminal_mip_work,total_work,root_lp_solver_time,child_probe_solver_time,terminal_mip_solver_time,total_solver_time,total_process_time,root_model_reads,probe_model_reads,terminal_model_reads,candidate_count,probe_count,priority_count,priority_retry_used,fallback_reason,lifecycle_valid\n"
+             << std::setprecision(17) << csvField(args.state_id) << ','
+             << csvField(args.policy) << ',' << adaptive.root_work << ','
+             << adaptive.probe_work << ',' << adaptive.terminal_work << ','
+             << adaptive.total_work << ',' << adaptive.root_solver_time
+             << ',' << adaptive.probe_solver_time << ','
+             << adaptive.terminal_solver_time << ','
+             << adaptive.total_solver_time << ',' << process_seconds << ",1,"
+             << adaptive.probes.size() << ','
+             << adaptive.terminal_attempts.size() << ','
+             << adaptive.pool.size() << ',' << adaptive.probes.size() << ','
+             << adaptive.selection.priorities.size() << ','
+             << adaptive.priority_retry_used << ','
+             << csvField(adaptive.fallback_reason) << ','
+             << adaptive.lifecycle_valid << '\n';
+}
+
 void writeSolveEvidence(const Arguments& args,
                         const ebrp::CanonicalCompactModelArtifact& artifact,
                         const ebrp::FixedIntervalMipOutcome& outcome,
                         const ebrp::FixedIntervalMipBackendStats& stats,
-                        double process_seconds) {
+                        double process_seconds,
+                        const AdaptiveExecution* adaptive = nullptr) {
     const bool engineering = outcome.attempted && outcome.available &&
         outcome.solver_finalization_reached &&
         outcome.model_fingerprint_matches_request &&
         outcome.exact_zero_gap_roundtrip &&
         outcome.feasibility_consistency_gate &&
-        outcome.branch_priority_assignment_valid;
+        outcome.branch_priority_assignment_valid &&
+        (!adaptive || !adaptive->active || adaptive->lifecycle_valid);
     const bool exact_infeasible = engineering && outcome.infeasible;
     const bool exact_feasible = engineering && outcome.native_exact_optimal &&
         outcome.native_bound_available && outcome.incumbent_available &&
@@ -378,6 +520,14 @@ void writeSolveEvidence(const Arguments& args,
     const double gap = std::max(0.0, (upper - lower) /
         std::max(1e-12, std::fabs(upper)));
 
+    const double official_work = adaptive && adaptive->active
+        ? adaptive->total_work : outcome.work;
+    const double official_solver_time = adaptive && adaptive->active
+        ? adaptive->total_solver_time : outcome.solver_runtime_seconds;
+    const double official_model_read_time = adaptive && adaptive->active
+        ? adaptive->total_model_read_time : outcome.model_read_seconds;
+    const double official_simplex_iterations = adaptive && adaptive->active
+        ? adaptive->total_simplex_iterations : outcome.simplex_iterations;
     std::ofstream result(args.artifact_dir / "result.json");
     result << std::setprecision(17)
         << "{\n  \"schema\": \"round50-fixed-interval-result-v1\",\n"
@@ -400,13 +550,13 @@ void writeSolveEvidence(const Arguments& args,
         << ",\n"
         << "  \"verified_upper_bound\": " << upper << ",\n"
         << "  \"gap\": " << gap << ",\n"
-        << "  \"work\": " << outcome.work << ",\n"
-        << "  \"solver_time_seconds\": " << outcome.solver_runtime_seconds << ",\n"
+        << "  \"work\": " << official_work << ",\n"
+        << "  \"solver_time_seconds\": " << official_solver_time << ",\n"
         << "  \"process_time_seconds\": " << process_seconds << ",\n"
         << "  \"nodes\": " << outcome.nodes << ",\n"
-        << "  \"simplex_iterations\": " << outcome.simplex_iterations << ",\n"
+        << "  \"simplex_iterations\": " << official_simplex_iterations << ",\n"
         << "  \"average_iterations_per_node\": "
-        << (outcome.nodes > 0.0 ? outcome.simplex_iterations / outcome.nodes : 0.0) << ",\n"
+        << (outcome.nodes > 0.0 ? official_simplex_iterations / outcome.nodes : 0.0) << ",\n"
         << "  \"peak_memory_gb\": " << outcome.memory_gb << ",\n"
         << "  \"root_relaxation_bound_available\": " << boolJson(outcome.root_relaxation_bound_available) << ",\n"
         << "  \"root_relaxation_bound\": " << outcome.root_relaxation_bound << ",\n"
@@ -418,7 +568,19 @@ void writeSolveEvidence(const Arguments& args,
         << "  \"first_incumbent_work\": " << outcome.first_incumbent_work << ",\n"
         << "  \"first_incumbent_time_seconds\": " << outcome.first_incumbent_runtime_seconds << ",\n"
         << "  \"model_build_seconds\": " << outcome.model_build_seconds << ",\n"
-        << "  \"model_read_seconds\": " << outcome.model_read_seconds << ",\n"
+        << "  \"model_read_seconds\": " << official_model_read_time << ",\n"
+        << "  \"adaptive_branching\": "
+        << boolJson(adaptive && adaptive->active) << ",\n"
+        << "  \"adaptive_root_lp_work\": "
+        << (adaptive && adaptive->active ? adaptive->root_work : 0.0)
+        << ",\n  \"adaptive_child_probe_work\": "
+        << (adaptive && adaptive->active ? adaptive->probe_work : 0.0)
+        << ",\n  \"adaptive_terminal_mip_work\": "
+        << (adaptive && adaptive->active ? adaptive->terminal_work : outcome.work)
+        << ",\n  \"adaptive_total_work\": " << official_work
+        << ",\n  \"adaptive_fallback_reason\": \""
+        << jsonEscape(adaptive && adaptive->active
+              ? adaptive->fallback_reason : "not_applicable") << "\",\n"
         << "  \"model_sha256\": \"" << artifact.sha256 << "\",\n"
         << "  \"engineering_gate\": " << boolJson(engineering) << ",\n"
         << "  \"failure_reason\": \"" << jsonEscape(outcome.failure_reason) << "\"\n}\n";
@@ -595,9 +757,9 @@ int main(int argc, char** argv) {
             return 0;
         }
 
-        const double remaining = args.process_cap_seconds - elapsed(started) -
-            kEvidenceFinalizationReserveSeconds;
-        if (!(remaining > 0.01)) {
+        const double initial_remaining = args.process_cap_seconds -
+            elapsed(started) - kEvidenceFinalizationReserveSeconds;
+        if (!(initial_remaining > 0.01)) {
             throw std::runtime_error("process cap exhausted before optimize");
         }
         std::unique_ptr<ebrp::FixedIntervalMipBackend> backend =
@@ -607,37 +769,282 @@ int main(int argc, char** argv) {
                 ? backend->capabilities().failure_reason
                 : "gurobi backend factory failed");
         }
-        ebrp::FixedIntervalMipRequest request;
-        request.solve_kind = ebrp::FixedIntervalSolveKind::PaperTerminalMip;
-        request.leaf_id = args.state_id;
-        request.gamma_L = args.gamma_lower;
-        request.gamma_U = args.gamma_upper;
-        request.verified_cutoff = args.cutoff;
-        request.global_deadline_remaining_seconds = remaining;
-        request.new_leaf = true;
-        request.warm_start_enabled = false;
-        request.canonical_model_path = artifact.path;
-        request.canonical_model_fingerprint = artifact.sha256;
-        request.canonical_model_scope = artifact.model_scope;
-        request.canonical_row_signature = artifact.row_signature;
-        request.native_log_path = args.artifact_dir / "native_gurobi.log";
-        request.incremental_model_reuse_enabled = false;
-        request.retain_model_after_solve = false;
-        request.capture_native_bound_events = true;
-        request.interval_mip_policy = policy.name;
-        ebrp::FixedIntervalMipOutcome outcome = backend->solve(request);
+        auto remaining = [&]() {
+            return args.process_cap_seconds - elapsed(started) -
+                kEvidenceFinalizationReserveSeconds;
+        };
+        auto makeRequest = [&](ebrp::FixedIntervalSolveKind kind,
+                               const std::string& leaf,
+                               const std::string& log_name) {
+            ebrp::FixedIntervalMipRequest request;
+            request.solve_kind = kind;
+            request.leaf_id = leaf;
+            request.gamma_L = args.gamma_lower;
+            request.gamma_U = args.gamma_upper;
+            request.verified_cutoff = args.cutoff;
+            request.global_deadline_remaining_seconds =
+                std::max(0.001, remaining());
+            request.new_leaf = true;
+            request.warm_start_enabled = false;
+            request.canonical_model_path = artifact.path;
+            request.canonical_model_fingerprint = artifact.sha256;
+            request.canonical_model_scope = artifact.model_scope;
+            request.canonical_row_signature = artifact.row_signature;
+            request.native_log_path = args.artifact_dir / log_name;
+            request.incremental_model_reuse_enabled = false;
+            request.retain_model_after_solve = false;
+            request.capture_native_bound_events =
+                kind == ebrp::FixedIntervalSolveKind::PaperTerminalMip;
+            request.interval_mip_policy = policy.name;
+            return request;
+        };
+
+        AdaptiveExecution adaptive;
+        ebrp::FixedIntervalMipOutcome outcome;
+        if (policy.adaptive_branching == "root-sparse-2x2") {
+            adaptive.active = true;
+            auto root_request = makeRequest(
+                ebrp::FixedIntervalSolveKind::PaperLpRelaxation,
+                args.state_id + "__a1_root", "a1_root_lp.log");
+            root_request.capture_lp_primal_dual_evidence = true;
+            adaptive.root = backend->solve(root_request);
+            adaptive.root_work = adaptive.root.work;
+            adaptive.root_solver_time =
+                adaptive.root.solver_runtime_seconds;
+            adaptive.total_model_read_time +=
+                adaptive.root.model_read_seconds;
+            adaptive.root_infeasible = adaptive.root.lp_terminal_valid &&
+                adaptive.root.infeasible;
+            adaptive.root_valid = adaptive.root.lp_terminal_valid &&
+                adaptive.root.model_fingerprint_matches_request &&
+                !adaptive.root.in_memory_model_reused &&
+                (adaptive.root_infeasible ||
+                 (adaptive.root.optimal &&
+                  adaptive.root.lp_objective_value_available &&
+                  adaptive.root.lp_primal_dual_evidence_available));
+            adaptive.root_closes_state = adaptive.root_infeasible ||
+                (adaptive.root_valid &&
+                 adaptive.root.lp_objective_value >=
+                    args.cutoff - 1e-7 * std::max(
+                        1.0, std::fabs(args.cutoff)));
+
+            if (!adaptive.root_valid) {
+                adaptive.selection.fallback_to_default = true;
+                adaptive.selection.fallback_reason = "root_lp_invalid";
+            } else if (adaptive.root_closes_state) {
+                adaptive.selection.fallback_to_default = true;
+                adaptive.selection.fallback_reason =
+                    adaptive.root_infeasible
+                        ? "root_lp_infeasible" : "root_lp_closes_state";
+            } else {
+                std::vector<ebrp::Round51RootVariable> variables;
+                variables.reserve(
+                    adaptive.root.lp_primal_dual_variable_evidence.size());
+                for (const auto& item :
+                        adaptive.root.lp_primal_dual_variable_evidence) {
+                    ebrp::Round51RootVariable variable;
+                    variable.name = item.name;
+                    variable.original_type = item.original_type;
+                    variable.lower_bound = item.lower_bound;
+                    variable.upper_bound = item.upper_bound;
+                    variable.root_value = item.primal_value;
+                    variables.push_back(std::move(variable));
+                }
+                adaptive.pool =
+                    ebrp::round51AdaptiveCandidatePool(variables);
+                if (adaptive.pool.empty()) {
+                    adaptive.selection.fallback_to_default = true;
+                    adaptive.selection.fallback_reason =
+                        "no_eligible_fractional_variable";
+                } else {
+                    for (const auto& candidate : adaptive.pool) {
+                        ebrp::Round51ProbeDirection directions[2];
+                        for (int direction = 0; direction < 2; ++direction) {
+                            AdaptiveProbeRecord record;
+                            record.candidate = candidate;
+                            record.direction = direction == 0 ? "down" : "up";
+                            record.imposed_bound = direction == 0
+                                ? candidate.down_upper_bound
+                                : candidate.up_lower_bound;
+                            if (remaining() > 0.02) {
+                                auto probe_request = makeRequest(
+                                    ebrp::FixedIntervalSolveKind::PaperLpRelaxation,
+                                    args.state_id + "__a1_probe_" +
+                                        std::to_string(candidate.pool_order) +
+                                        "_" + record.direction,
+                                    "a1_probe_" +
+                                        std::to_string(candidate.pool_order) +
+                                        "_" + record.direction + ".log");
+                                ebrp::FixedIntervalMipRequest::
+                                    VariableBoundOverride bound;
+                                bound.variable_name = candidate.name;
+                                if (direction == 0) {
+                                    bound.upper_bound_enabled = true;
+                                    bound.upper_bound =
+                                        candidate.down_upper_bound;
+                                } else {
+                                    bound.lower_bound_enabled = true;
+                                    bound.lower_bound =
+                                        candidate.up_lower_bound;
+                                }
+                                probe_request.variable_bound_overrides.push_back(
+                                    std::move(bound));
+                                record.outcome = backend->solve(probe_request);
+                                adaptive.probe_work += record.outcome.work;
+                                adaptive.probe_solver_time +=
+                                    record.outcome.solver_runtime_seconds;
+                                adaptive.total_model_read_time +=
+                                    record.outcome.model_read_seconds;
+                                if (record.outcome.lp_terminal_valid &&
+                                    record.outcome.optimal &&
+                                    record.outcome.lp_objective_value_available) {
+                                    record.status =
+                                        ebrp::Round51ProbeStatus::Optimal;
+                                    record.child_objective =
+                                        record.outcome.lp_objective_value;
+                                } else if (
+                                    record.outcome.lp_terminal_valid &&
+                                    record.outcome.infeasible) {
+                                    record.status =
+                                        ebrp::Round51ProbeStatus::Infeasible;
+                                }
+                            } else {
+                                record.outcome.failure_reason =
+                                    "process_cap_exhausted_before_probe";
+                            }
+                            directions[direction].status = record.status;
+                            directions[direction].child_objective =
+                                record.child_objective;
+                            adaptive.probes.push_back(std::move(record));
+                        }
+                        adaptive.scored.push_back(
+                            ebrp::round51ScoreAdaptiveCandidate(
+                                candidate, directions[0], directions[1],
+                                adaptive.root.lp_objective_value,
+                                args.cutoff));
+                    }
+                    adaptive.selection =
+                        ebrp::round51SelectSparsePriorities(
+                            adaptive.scored);
+                }
+            }
+            adaptive.fallback_reason =
+                adaptive.selection.fallback_reason;
+
+            auto terminal_request = makeRequest(
+                ebrp::FixedIntervalSolveKind::PaperTerminalMip,
+                args.state_id + "__a1_terminal", "native_gurobi.log");
+            for (const auto& item : adaptive.selection.priorities) {
+                ebrp::FixedIntervalMipRequest::BranchPriorityOverride value;
+                value.variable_name = item.first;
+                value.priority = item.second;
+                terminal_request.branch_priority_overrides.push_back(
+                    std::move(value));
+            }
+            outcome = backend->solve(terminal_request);
+            adaptive.terminal_attempts.push_back(outcome);
+            adaptive.terminal_work += outcome.work;
+            adaptive.terminal_solver_time +=
+                outcome.solver_runtime_seconds;
+            adaptive.total_model_read_time += outcome.model_read_seconds;
+            if (!adaptive.selection.priorities.empty() &&
+                !outcome.branch_priority_assignment_valid) {
+                adaptive.priority_retry_used = true;
+                adaptive.selection.fallback_to_default = true;
+                adaptive.selection.fallback_reason =
+                    "priority_attribute_apply_or_readback_failed";
+                adaptive.fallback_reason =
+                    adaptive.selection.fallback_reason;
+                if (remaining() > 0.02) {
+                    auto fallback_request = makeRequest(
+                        ebrp::FixedIntervalSolveKind::PaperTerminalMip,
+                        args.state_id + "__a1_terminal_fallback",
+                        "native_gurobi_fallback.log");
+                    outcome = backend->solve(fallback_request);
+                    adaptive.terminal_attempts.push_back(outcome);
+                    adaptive.terminal_work += outcome.work;
+                    adaptive.terminal_solver_time +=
+                        outcome.solver_runtime_seconds;
+                    adaptive.total_model_read_time +=
+                        outcome.model_read_seconds;
+                }
+            }
+            adaptive.priority_readback_valid =
+                adaptive.priority_retry_used
+                    ? outcome.branch_priority_assignment_valid
+                    : (adaptive.selection.priorities.empty()
+                    ? outcome.branch_priority_assignment_valid
+                    : (outcome.branch_priority_assignment_valid &&
+                       outcome.branch_priority_assigned_count ==
+                           static_cast<long long>(
+                               adaptive.selection.priorities.size()) &&
+                       outcome.branch_priority_zero_readback_count ==
+                           outcome.model_variable_count -
+                           static_cast<long long>(
+                               adaptive.selection.priorities.size())));
+            adaptive.terminal_model_fresh =
+                !outcome.in_memory_model_reused &&
+                outcome.model_fingerprint_matches_request &&
+                outcome.variable_bound_override_status == "not_requested";
+            bool probes_clean = true;
+            for (const auto& probe : adaptive.probes) {
+                if (!probe.outcome.attempted) continue;
+                probes_clean = probes_clean &&
+                    probe.outcome.model_fingerprint_matches_request &&
+                    probe.outcome.variable_bound_override_readback_valid &&
+                    !probe.outcome.in_memory_model_reused;
+            }
+            adaptive.lifecycle_valid = adaptive.root_valid &&
+                probes_clean && adaptive.terminal_model_fresh &&
+                adaptive.priority_readback_valid;
+            std::vector<double> probe_work_values;
+            std::vector<double> probe_time_values;
+            for (const auto& probe : adaptive.probes) {
+                probe_work_values.push_back(probe.outcome.work);
+                probe_time_values.push_back(
+                    probe.outcome.solver_runtime_seconds);
+            }
+            adaptive.total_work = ebrp::round51AdaptiveTotal(
+                adaptive.root_work, probe_work_values,
+                adaptive.terminal_work);
+            adaptive.total_solver_time = ebrp::round51AdaptiveTotal(
+                adaptive.root_solver_time, probe_time_values,
+                adaptive.terminal_solver_time);
+            adaptive.total_simplex_iterations =
+                adaptive.root.simplex_iterations;
+            for (const auto& probe : adaptive.probes) {
+                adaptive.total_simplex_iterations +=
+                    probe.outcome.simplex_iterations;
+            }
+            for (const auto& terminal : adaptive.terminal_attempts) {
+                adaptive.total_simplex_iterations +=
+                    terminal.simplex_iterations;
+            }
+        } else {
+            auto request = makeRequest(
+                ebrp::FixedIntervalSolveKind::PaperTerminalMip,
+                args.state_id, "native_gurobi.log");
+            outcome = backend->solve(request);
+        }
         outcome.model_build_seconds = build_seconds;
         backend->release();
         const ebrp::FixedIntervalMipBackendStats stats = backend->stats();
         const double process_seconds = elapsed(started);
-        writeSolveEvidence(args, artifact, outcome, stats, process_seconds);
+        if (adaptive.active) {
+            writeAdaptiveLedgers(
+                args, adaptive, outcome, process_seconds);
+        }
+        writeSolveEvidence(
+            args, artifact, outcome, stats, process_seconds,
+            adaptive.active ? &adaptive : nullptr);
         writeArtifactManifest(args.artifact_dir);
         const bool engineering = outcome.attempted && outcome.available &&
             outcome.solver_finalization_reached &&
             outcome.model_fingerprint_matches_request &&
             outcome.exact_zero_gap_roundtrip &&
             outcome.feasibility_consistency_gate &&
-            outcome.branch_priority_assignment_valid;
+            outcome.branch_priority_assignment_valid &&
+            (!adaptive.active || adaptive.lifecycle_valid);
         const bool exact = engineering && (outcome.infeasible ||
             (outcome.native_exact_optimal && outcome.native_bound_available &&
              outcome.incumbent_available &&

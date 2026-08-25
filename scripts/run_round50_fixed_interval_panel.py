@@ -216,6 +216,7 @@ def main() -> None:
                     "m1", "m1-tight-big-m-v0", "m1-v0-cardinality",
                     "m1-s1-route-start-order",
                     "m1-s1r-used-first-route-start-order",
+                    "a1-root-sparse-2x2",
                 }
                 and int(model["rows"]) == int(frozen["original_rows"])
                 and int(model["columns"]) == int(frozen["original_columns"])

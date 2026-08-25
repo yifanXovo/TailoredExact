@@ -64,6 +64,11 @@ Round50IntervalMipPolicy parseRound50IntervalMipPolicy(
         out.branching = Round50BranchingPolicy::Default;
         out.symmetry_numerical = "used-first-route-start-order";
         out.subset_duration_big_m = "tight-tsp-lower-bound";
+    } else if (out.name == "a1-root-sparse-2x2") {
+        out.name = "a1-root-sparse-2x2";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "tight-tsp-lower-bound";
+        out.adaptive_branching = "root-sparse-2x2";
     } else {
         out.failure_reason = "unsupported_round50_interval_mip_policy";
         return out;

@@ -82,6 +82,24 @@ struct FixedIntervalMipRequest {
     // Round 50 uniform run-level backend policy.  It is never inferred from
     // the instance, dimensions, panel, solver progress, or machine state.
     std::string interval_mip_policy = "interval-mip-v0";
+    // Round 51 A1 disposable child-LP probes. Overrides are applied only to
+    // the freshly read model owned by this solve call and are read back before
+    // Optimize. The immutable canonical LP artifact is never rewritten.
+    struct VariableBoundOverride {
+        std::string variable_name;
+        bool lower_bound_enabled = false;
+        double lower_bound = 0.0;
+        bool upper_bound_enabled = false;
+        double upper_bound = 0.0;
+    };
+    std::vector<VariableBoundOverride> variable_bound_overrides;
+    // Round 51 A1 terminal sparse priorities. The backend assigns zero to all
+    // variables and these exact positive values to the named originals.
+    struct BranchPriorityOverride {
+        std::string variable_name;
+        int priority = 0;
+    };
+    std::vector<BranchPriorityOverride> branch_priority_overrides;
 };
 
 struct FixedIntervalBranchPriorityEvidence {
@@ -219,6 +237,11 @@ struct FixedIntervalMipOutcome {
     std::string branch_priority_assignment_status = "not_requested";
     std::vector<FixedIntervalBranchPriorityEvidence>
         branch_priority_evidence;
+    long long branch_priority_zero_readback_count = 0;
+    bool variable_bound_override_attempted = false;
+    bool variable_bound_override_readback_valid = false;
+    long long variable_bound_override_count = 0;
+    std::string variable_bound_override_status = "not_requested";
     std::vector<FixedIntervalCutFamilyEvidence> root_cut_family_evidence;
     bool numerical_ranges_available = false;
     double minimum_matrix_coefficient = 0.0;

@@ -35,6 +35,7 @@ struct Round50IntervalMipPolicy {
     // Explicit default-off Round 51 formulation switch. Historical Round 50
     // policy names retain the fixed 100000 coefficient byte-for-byte.
     std::string subset_duration_big_m = "historical-100000";
+    std::string adaptive_branching = "off";
     std::string failure_reason;
 };
 
