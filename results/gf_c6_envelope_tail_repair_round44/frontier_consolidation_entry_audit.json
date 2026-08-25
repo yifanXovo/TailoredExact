@@ -1,0 +1,32 @@
+{
+  "adjacent_terminal_pairs": [
+    {
+      "left_id": "L0",
+      "left_seconds": 8.430000066757202,
+      "left_work": 17.5056966786388,
+      "right_id": "L1",
+      "right_seconds": 397.5590000152588,
+      "right_work": 876.3174950166258
+    },
+    {
+      "left_id": "L1",
+      "left_seconds": 397.5590000152588,
+      "left_work": 876.3174950166258,
+      "right_id": "L2",
+      "right_seconds": 345.3029999732971,
+      "right_work": 772.9852136829102
+    }
+  ],
+  "duplicated_adjacent_terminal_proof": true,
+  "formal_experiment_triggered": true,
+  "major_run": "results/gf_c6_envelope_tail_repair_round44/runs/stage3-development__round39_small_medium_V12_M3_Q30_slot08_seed1343324363__noadaptive",
+  "required_modes": [
+    "singleton",
+    "pair",
+    "block"
+  ],
+  "schema": "round44-frontier-consolidation-entry-audit-v1",
+  "selected_candidate": "noadaptive",
+  "terminal_mip_count": 3,
+  "validation_observed": false
+}

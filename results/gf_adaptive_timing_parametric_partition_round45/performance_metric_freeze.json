@@ -1,0 +1,25 @@
+{
+  "candidate_results_observed": false,
+  "checkpoints_seconds": [
+    300,
+    1200,
+    3600
+  ],
+  "primary": "Work",
+  "right_censoring": "lexicographic certificate, GI, gap, LB, Work",
+  "schema": "round45-performance-metric-freeze-v1",
+  "secondary": [
+    "process wall time",
+    "GI(T)",
+    "final gap",
+    "final valid LB",
+    "verified UB",
+    "nodes",
+    "LP jobs",
+    "split count",
+    "interval count",
+    "peak memory"
+  ],
+  "startup_rows_reported_but_nonblocking_alone": true,
+  "work_definition": "native solver work plus every speculative/lookahead/parametric LP and child cost"
+}
