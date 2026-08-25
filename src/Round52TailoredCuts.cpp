@@ -327,18 +327,30 @@ std::vector<Round52CutCandidate> Round52CutManager::process(
                 break;
             }
         }
-        for (const auto& other : eligible) {
-            if (round52ExactlyDominates(other, candidate)) {
-                dominated = true;
-                break;
-            }
-        }
         if (dominated) {
             ++telemetry_.dominated_rejections;
             continue;
         }
         eligible.push_back(std::move(candidate));
     }
+    std::vector<Round52CutCandidate> undominated;
+    undominated.reserve(eligible.size());
+    for (std::size_t index = 0; index < eligible.size(); ++index) {
+        bool dominated = false;
+        for (std::size_t other = 0; other < eligible.size(); ++other) {
+            if (index != other &&
+                round52ExactlyDominates(eligible[other], eligible[index])) {
+                dominated = true;
+                break;
+            }
+        }
+        if (dominated) {
+            ++telemetry_.dominated_rejections;
+        } else {
+            undominated.push_back(std::move(eligible[index]));
+        }
+    }
+    eligible = std::move(undominated);
     std::sort(eligible.begin(), eligible.end(),
         [](const Round52CutCandidate& left,
            const Round52CutCandidate& right) {

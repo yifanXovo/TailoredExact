@@ -191,6 +191,29 @@ int main() {
             const double rhs = instance.total_time_limit - route + route * 2.0;
             require(std::fabs(lhs - rhs) < 1e-12, "validity boundary");
         });
+        test("support_duration_valid_on_inactive_support", [&] {
+            const double route = ebrp::round52RouteDurationLowerBound(
+                instance, {1, 2, 3});
+            const double rhs = instance.total_time_limit - route +
+                route * (3.0 - 2.0);
+            require(rhs == instance.total_time_limit, "inactive RHS");
+        });
+        test("separator_missing_mapping_rejected", [&] {
+            auto input = separationInput(instance);
+            input.model_variable_mapping.erase("p_0_1");
+            bool rejected = false;
+            try { separator.separate(input); }
+            catch (const std::runtime_error&) { rejected = true; }
+            require(rejected, "missing mapping");
+        });
+        test("separator_invalid_effective_bounds_rejected", [&] {
+            auto input = separationInput(instance);
+            input.effective_upper_bounds["z_0_1"] = 0.5;
+            bool rejected = false;
+            try { separator.separate(input); }
+            catch (const std::runtime_error&) { rejected = true; }
+            require(rejected, "invalid effective bounds");
+        });
         test("strict_scaled_threshold", [] {
             ebrp::Round52CutManager manager;
             manager.beginModel("threshold");
@@ -223,6 +246,40 @@ int main() {
             auto selected = manager.process({cut, cut});
             require(selected.size() == 1 &&
                     manager.telemetry().duplicate_rejections == 1, "duplicate");
+        });
+        test("pooled_duplicate_rejection", [] {
+            ebrp::Round52CutManager manager;
+            manager.beginModel("pooled-dup");
+            auto first = manager.process({simpleCut()});
+            manager.recordSubmission(first.front(), true);
+            require(manager.process({simpleCut()}).empty() &&
+                    manager.telemetry().duplicate_rejections == 1,
+                    "pooled duplicate");
+        });
+        test("dominance_is_generation_order_independent", [] {
+            ebrp::Round52CutManager manager;
+            manager.beginModel("dominance-order");
+            auto selected = manager.process(
+                {simpleCut(2.0), simpleCut(1.0)});
+            require(selected.size() == 1 && selected.front().rhs == 1.0 &&
+                    manager.telemetry().dominated_rejections == 1,
+                    "stronger row last");
+        });
+        test("family_and_vehicle_accounting", [] {
+            ebrp::Round52CutManager manager;
+            manager.beginModel("accounting");
+            auto second = simpleCut(1.5, 1);
+            second.coefficients = {{"d", 2.0}, {"c", 1.0}};
+            auto selected = manager.process({simpleCut(1.0, 0), second});
+            for (const auto& cut : selected) {
+                manager.recordSubmission(cut, true);
+            }
+            require(manager.telemetry().generated_by_family.at("test") == 2 &&
+                    manager.telemetry().selected_by_family.at("test") == 2 &&
+                    manager.telemetry().added_by_family.at("test") == 2 &&
+                    manager.telemetry().selected_by_vehicle.at(0) == 1 &&
+                    manager.telemetry().selected_by_vehicle.at(1) == 1,
+                    "family and vehicle accounting");
         });
         test("no_cut_leakage_across_models", [] {
             ebrp::Round52CutManager manager;
