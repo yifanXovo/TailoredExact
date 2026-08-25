@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "results" / "gf_k1_tailored_cut_final_validation_round52"
 CAP = 1800.0
 TAU = 0.08
+FINGERPRINTS = OUT / "final_pgrb_model_fingerprints.json"
 
 
 def sha256(path: Path) -> str:
@@ -46,6 +47,24 @@ def manifest(panel: str) -> list[dict[str, object]]:
     return value["rows"]
 
 
+def fingerprint_map(panel: str, executable_hash: str) -> dict[str, int]:
+    if not FINGERPRINTS.is_file():
+        raise RuntimeError("official P-GRB opening forbidden before fingerprint freeze")
+    value = json.loads(FINGERPRINTS.read_text(encoding="utf-8"))
+    if (value.get("schema") != "round52-pgrb-model-fingerprints-v1" or
+            value.get("executable_sha256") != executable_hash or
+            value.get("created_before_official_bound_rows") is not True):
+        raise RuntimeError("invalid P-GRB fingerprint freeze")
+    entries = value.get("panels", {}).get(panel, {})
+    expected_ids = {str(row["instance_id"]) for row in manifest(panel)}
+    if set(entries) != expected_ids:
+        raise RuntimeError(f"incomplete {panel} P-GRB fingerprint freeze")
+    return {
+        name: int(entry["gurobi_model_fingerprint"])
+        for name, entry in entries.items()
+    }
+
+
 def item(row: dict[str, object]) -> dict[str, object]:
     return {
         "instance": row["instance_id"],
@@ -55,11 +74,23 @@ def item(row: dict[str, object]) -> dict[str, object]:
     }
 
 
+def set_option(command: list[str], option: str, value: object) -> None:
+    if option in command:
+        round46.replace_option(command, option, value)
+    else:
+        command.extend([option, str(value).lower() if isinstance(value, bool)
+                        else str(value)])
+
+
 def command_for(method: str, row: dict[str, object], run_dir: Path,
-                executable: Path) -> list[str]:
+                executable: Path,
+                expected_fingerprint: int | None = None) -> list[str]:
     bound = item(row)
     if method == "P-GRB":
         command = round46.pgrb_command(bound, run_dir, CAP, executable)
+        if expected_fingerprint is not None:
+            set_option(command, "--round24-expected-gurobi-model-fingerprint",
+                       expected_fingerprint)
     else:
         command = round46.c6_command(
             bound, run_dir, CAP, 1, 0.01, executable)
@@ -90,6 +121,12 @@ def seal(run_dir: Path, record: dict[str, object]) -> None:
     process_seconds = float(result.get("final_process_wall_time_seconds", 0.0))
     if process_seconds > CAP + 1e-6:
         raise RuntimeError(f"internal process cap exceeded: {process_seconds}")
+    if record["method"] == "P-GRB":
+        expected = int(record["expected_gurobi_model_fingerprint"])
+        actual = int(result.get("gurobi_model_fingerprint", 0))
+        if actual != expected:
+            raise RuntimeError(
+                f"official P-GRB fingerprint mismatch: {actual} != {expected}")
     inventory = []
     for path in sorted(p for p in run_dir.rglob("*") if p.is_file() and
                        p.name not in {"artifact_manifest.csv",
@@ -109,6 +146,9 @@ def seal(run_dir: Path, record: dict[str, object]) -> None:
         "instance_id": record["instance_id"], "method": record["method"],
         "process_cap_seconds": CAP, "process_seconds": process_seconds,
         "cap_respected": True, "executable_sha256": record["executable_sha256"],
+        "official_strict_contract": True,
+        "expected_gurobi_model_fingerprint": record.get(
+            "expected_gurobi_model_fingerprint"),
         "artifact_count": len(inventory),
         "artifact_manifest_sha256": sha256(run_dir / "artifact_manifest.csv"),
     })
@@ -117,12 +157,17 @@ def seal(run_dir: Path, record: dict[str, object]) -> None:
 def run_one(panel: str, method: str, row: dict[str, object],
             executable: Path, force: bool) -> None:
     executable_hash = sha256(executable)
-    run_id = f"{panel}__{row['instance_id']}__{method}"
+    expected_fingerprint = None
+    if method == "P-GRB":
+        expected_fingerprint = fingerprint_map(
+            panel, executable_hash)[str(row["instance_id"])]
+    run_id = f"{panel}__{row['instance_id']}__{method}__official"
     run_dir = OUT / "local_raw" / "final_panel_runs" / run_id
     marker = run_dir / "completion_marker.json"
     if marker.is_file() and not force:
         prior = json.loads(marker.read_text(encoding="utf-8"))
         if (prior.get("complete") is True and
+                prior.get("official_strict_contract") is True and
                 prior.get("executable_sha256") == executable_hash and
                 prior.get("process_cap_seconds") == CAP):
             print(f"resume: {run_id}", flush=True)
@@ -130,7 +175,8 @@ def run_one(panel: str, method: str, row: dict[str, object],
     run_dir.mkdir(parents=True, exist_ok=True)
     marker.unlink(missing_ok=True)
     (run_dir / "artifact_manifest.csv").unlink(missing_ok=True)
-    command = command_for(method, row, run_dir, executable)
+    command = command_for(method, row, run_dir, executable,
+                          expected_fingerprint)
     record: dict[str, object] = {
         "schema": "round52-final-panel-command-v1", "panel": panel,
         "run_id": run_id, "instance_id": row["instance_id"],
@@ -144,6 +190,8 @@ def run_one(panel: str, method: str, row: dict[str, object],
         "controller": "K1-AM-FINAL" if method != "P-GRB" else "not_applicable",
         "solver": {"Presolve": "Auto", "Seed": 0, "Threads": 1,
                    "MIPGap": 0, "MIPGapAbs": 0},
+        "official_strict_contract": True,
+        "expected_gurobi_model_fingerprint": expected_fingerprint,
         "command": command, "started": False, "completed": False,
     }
     write_json(run_dir / "command.json", record)
