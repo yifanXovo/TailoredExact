@@ -149,6 +149,9 @@ def main() -> None:
         "branch_priority_tiers", "exact_duplicate_row_elimination",
         "exact_duplicate_rows_omitted", "round50_symmetry_policy",
         "round50_symmetry_rows",
+        "round51_subset_duration_big_m", "round51_subset_duration_rows",
+        "round51_subset_duration_min_m", "round51_subset_duration_max_m",
+        "round51_historical_m_may_be_unsafe",
         "failure_reason", "artifact_dir",
     ]
 
@@ -205,7 +208,21 @@ def main() -> None:
         dedup_enabled = bool(model.get("exact_duplicate_row_elimination", False))
         duplicates_omitted = int(model.get("exact_duplicate_rows_omitted", 0))
         symmetry_policy = model.get("round50_symmetry_policy", "v0-cardinality")
-        if symmetry_policy in {"route-start-order",
+        big_m_policy = model.get(
+            "round51_subset_duration_big_m", "historical-100000")
+        if big_m_policy == "tight-tsp-lower-bound":
+            model_identity_match = (
+                args.policy in {
+                    "m1", "m1-tight-big-m-v0", "m1-v0-cardinality",
+                    "m1-s1-route-start-order",
+                    "m1-s1r-used-first-route-start-order",
+                }
+                and int(model["rows"]) == int(frozen["original_rows"])
+                and int(model["columns"]) == int(frozen["original_columns"])
+                and model["scope"] ==
+                    "complete_original_compact_milp_intersected_with_static_gini_interval"
+            )
+        elif symmetry_policy in {"route-start-order",
                                "used-first-route-start-order"}:
             model_identity_match = (
                 args.policy in {"s1", "s1-route-start-order", "s1r",
@@ -290,6 +307,15 @@ def main() -> None:
             "exact_duplicate_rows_omitted": duplicates_omitted,
             "round50_symmetry_policy": symmetry_policy,
             "round50_symmetry_rows": model.get("round50_symmetry_rows", 0),
+            "round51_subset_duration_big_m": big_m_policy,
+            "round51_subset_duration_rows": model.get(
+                "round51_subset_duration_rows", 0),
+            "round51_subset_duration_min_m": model.get(
+                "round51_subset_duration_min_m", 0.0),
+            "round51_subset_duration_max_m": model.get(
+                "round51_subset_duration_max_m", 0.0),
+            "round51_historical_m_may_be_unsafe": model.get(
+                "round51_historical_m_may_be_unsafe", False),
             "failure_reason": result["failure_reason"],
             "artifact_dir": artifact_dir.relative_to(ROOT).as_posix(),
         })
