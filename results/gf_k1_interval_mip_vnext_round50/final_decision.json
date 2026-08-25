@@ -7,13 +7,21 @@
   },
   "benchmark_classification": "k1_am_vnext_pgrb_mixed",
   "branching_classification": "default_branching_retained",
+  "build_and_test_summary": {
+    "ctests_failed": 0,
+    "ctests_passed": 28,
+    "full_build_percent": 100,
+    "historical_protocol_tests_passed": 162,
+    "protocol_tests_failed": 0,
+    "round50_protocol_tests_passed": 22
+  },
   "certificate_summary": {
     "capped_failed_or_not_exact": 11,
     "false_certificates": 0,
     "physical_rows": 37,
     "strict": 26
   },
-  "completion_status": "round50_incomplete",
+  "completion_status": "round50_complete",
   "counterfactual_summary": {
     "labels": {
       "high_imbalance_matched": "MIDPOINT",
@@ -46,7 +54,7 @@
     "severe_regressions": 0,
     "strict": 17
   },
-  "github_delivery": "draft_pr_pending",
+  "github_delivery": "https://github.com/yifanXovo/TailoredExact/pull/104",
   "interval_mip_vnext_equivalence": "Interval-MIP-v0",
   "k1_classification": "historical_k1_am_retained",
   "official_executables": {

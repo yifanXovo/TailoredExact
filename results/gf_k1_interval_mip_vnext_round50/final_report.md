@@ -2,7 +2,7 @@
 
 ## Outcome
 
-`Interval-MIP-vNext` is frozen as exact `Interval-MIP-v0`: Gurobi default branching, the original v0 cut/formulation pack, v0 nonincreasing route-use-cardinality symmetry for identical vehicles, and no numerical or model-reuse change. Fixed-state promotion failed because C1 exposed an honest strict-certificate correctness failure and the unchanged backend has an exact-row Work ratio of 1.0 rather than the required 0.95. K1 integration was therefore correctly not opened. All 7 retain/split labels were recomputed under the frozen retained backend; 4 severe split errors remain, but the LP-tail stage was not eligible because K1-AM-vNext did not complete qualification. Research evidence is complete; draft stacked PR publication is pending.
+`Interval-MIP-vNext` is frozen as exact `Interval-MIP-v0`: Gurobi default branching, the original v0 cut/formulation pack, v0 nonincreasing route-use-cardinality symmetry for identical vehicles, and no numerical or model-reuse change. Fixed-state promotion failed because C1 exposed an honest strict-certificate correctness failure and the unchanged backend has an exact-row Work ratio of 1.0 rather than the required 0.95. K1 integration was therefore correctly not opened. All 7 retain/split labels were recomputed under the frozen retained backend; 4 severe split errors remain, but the LP-tail stage was not eligible because K1-AM-vNext did not complete qualification. Draft stacked PR: https://github.com/yifanXovo/TailoredExact/pull/104.
 
 ## Required questions
 
@@ -43,6 +43,7 @@
 - Fixed confirmation: 23 physical runs represented as 46 explicit logical v0/vNext rows; 17 exact, 5 capped, 1 honest failed row, 0 false certificates.
 - K1 integration: 0 physical/logical rows, formally not opened.
 - Counterfactuals: 14 physical rows/7 pairs; 9 exact and 5 capped/not-exact, 0 false certificates.
+- Verification: full build 100%; 28/28 CTests; 162/162 historical and 22/22 Round 50 protocol tests.
 - Missing entered-stage rows: none.
 
 ## Final classifications

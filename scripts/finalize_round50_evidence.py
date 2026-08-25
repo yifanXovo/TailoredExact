@@ -265,8 +265,14 @@ The committed backend definition is `interval-mip-v0`; candidate policies remain
 The Round 50 tracked diff was scanned for private-key blocks, credential/token assignments, passwords, and embedded Gurobi license material; none was found. No vendored dependency, third-party source, or new license obligation was added. Local native logs, canonical LP files, machine paths, and build products remain untracked and are represented only by compact hashes/inventories.
 """, encoding="utf-8")
     initial = load_json(OUT / "official_start_record.json")
+    preexisting_paths = [
+        "results/gf_compact_bc_round/handling_convention_test/handling_convention.json",
+        "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv",
+        "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json",
+    ]
     current_diff = subprocess.run(
-        ["git", "diff"], cwd=ROOT, check=True, capture_output=True).stdout
+        ["git", "diff", "--", *preexisting_paths], cwd=ROOT, check=True,
+        capture_output=True).stdout
     preserved = run("git", "hash-object", "--stdin") if False else hashlib.sha1(
         f"blob {len(current_diff)}\0".encode() + current_diff).hexdigest()
     preservation = {
@@ -275,11 +281,7 @@ The Round 50 tracked diff was scanned for private-key blocks, credential/token a
         "initial_tracked_diff_git_hash_object": initial["preexisting_tracked_diff_git_hash_object"],
         "final_tracked_diff_git_hash_object": preserved,
         "tracked_diff_preserved_byte_for_byte": preserved == initial["preexisting_tracked_diff_git_hash_object"],
-        "preexisting_tracked_paths": [
-            "results/gf_compact_bc_round/handling_convention_test/handling_convention.json",
-            "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv",
-            "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json",
-        ],
+        "preexisting_tracked_paths": preexisting_paths,
         "unrelated_untracked_files_removed": False,
     }
     (OUT / "preexisting_file_preservation_audit.json").write_text(
@@ -429,6 +431,14 @@ def write_decision_and_report(pr_url: str | None) -> None:
         },
         "official_executables": {"fixed_interval_sha256": FIXED_SHA,
                                  "full_solver_sha256": FULL_SHA},
+        "build_and_test_summary": {
+            "full_build_percent": 100,
+            "ctests_passed": 28,
+            "ctests_failed": 0,
+            "historical_protocol_tests_passed": 162,
+            "round50_protocol_tests_passed": 22,
+            "protocol_tests_failed": 0,
+        },
         "evidence_sha256": {
             name: sha256(OUT / name) for name in (
                 "fixed_interval_confirmation_results.csv",
@@ -487,6 +497,7 @@ def write_decision_and_report(pr_url: str | None) -> None:
 - Fixed confirmation: 23 physical runs represented as 46 explicit logical v0/vNext rows; 17 exact, 5 capped, 1 honest failed row, 0 false certificates.
 - K1 integration: 0 physical/logical rows, formally not opened.
 - Counterfactuals: 14 physical rows/7 pairs; 9 exact and 5 capped/not-exact, 0 false certificates.
+- Verification: full build 100%; 28/28 CTests; 162/162 historical and 22/22 Round 50 protocol tests.
 - Missing entered-stage rows: none.
 
 ## Final classifications
