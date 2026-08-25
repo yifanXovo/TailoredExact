@@ -40,8 +40,8 @@ struct CanonicalCompactModelSpec {
     // sorts identical-vehicle route labels by depot-start station index.
     std::string round50_symmetry_policy = "v0-cardinality";
     // Round 51 M1. Only "tight-tsp-lower-bound" changes the exhaustive
-    // V<=12 subset-duration conditional rows. The historical default is
-    // deliberately explicit and byte-preserving.
+    // Historical exhaustive V<=12 rows plus Round 52 rank-2/rank-3 static
+    // ablations. The historical default remains byte-preserving.
     std::string round51_subset_duration_big_m = "historical-100000";
     std::string static_model_identity;
     // Valid affine lower bounds h(G)=alpha+beta*G whose source interval

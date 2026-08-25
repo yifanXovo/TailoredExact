@@ -36,6 +36,9 @@ struct Round50IntervalMipPolicy {
     // policy names retain the fixed 100000 coefficient byte-for-byte.
     std::string subset_duration_big_m = "historical-100000";
     std::string adaptive_branching = "off";
+    // Round 52 default-off tailored user-cut/static ablation policy.
+    std::string tailored_cut_policy = "off";
+    int tailored_cut_support_rank = 0;
     std::string failure_reason;
 };
 

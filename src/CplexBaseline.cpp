@@ -6,6 +6,7 @@
 #include "ModelCorrectness.hpp"
 #include "Round50IntervalMip.hpp"
 #include "Round51IntervalMip.hpp"
+#include "Round52TailoredCuts.hpp"
 #include "StaticSegmentedGini.hpp"
 
 #include "Evaluator.hpp"
@@ -1734,7 +1735,13 @@ void writeCompactLp(const Instance& instance,
         writeConstraint(out, cid, duration, "<=", instance.total_time_limit);
     }
 
-    if (strengthened && V <= 12) {
+    const std::string subset_duration_policy = canonical_spec
+        ? canonical_spec->round51_subset_duration_big_m
+        : "historical-100000";
+    const bool exhaustive_subset_duration =
+        subset_duration_policy == "historical-100000" ||
+        subset_duration_policy == "tight-tsp-lower-bound";
+    if (strengthened && exhaustive_subset_duration && V <= 12) {
         const std::vector<double> tsp = subsetTspLowerBounds(instance);
         const bool round51_tight_big_m = canonical_spec &&
             canonical_spec->round51_subset_duration_big_m ==
@@ -1774,6 +1781,48 @@ void writeCompactLp(const Instance& instance,
                     static_stats->round51_historical_m_may_be_unsafe =
                         static_stats->round51_historical_m_may_be_unsafe ||
                         analytic_big > 100000.0;
+                }
+            }
+        }
+    }
+
+    const bool round52_rank3_static_loose = strengthened &&
+        subset_duration_policy == "rank3-historical-100000";
+    const bool round52_rank3_static_tight = strengthened &&
+        subset_duration_policy == "rank3-tight-tsp-lower-bound";
+    if (round52_rank3_static_loose || round52_rank3_static_tight) {
+        auto addRound52StaticSupportDuration =
+            [&](int k, const std::vector<int>& support) {
+                const double route = round52RouteDurationLowerBound(
+                    instance, support);
+                const double big = round52_rank3_static_tight
+                    ? route : 100000.0;
+                Expr row;
+                for (int station : support) {
+                    addTerm(row, pName(k, station), cunit);
+                    addTerm(row, zName(k, station), big);
+                }
+                const double rhs = instance.total_time_limit - route +
+                    big * static_cast<double>(support.size());
+                writeConstraint(out, cid, row, "<=", rhs);
+                if (static_stats) {
+                    ++static_stats->round51_subset_duration_rows;
+                    static_stats->round51_subset_duration_min_m = std::min(
+                        static_stats->round51_subset_duration_min_m, route);
+                    static_stats->round51_subset_duration_max_m = std::max(
+                        static_stats->round51_subset_duration_max_m, route);
+                    static_stats->round51_historical_m_may_be_unsafe =
+                        static_stats->round51_historical_m_may_be_unsafe ||
+                        (!round52_rank3_static_tight && route > 100000.0);
+                }
+            };
+        for (int k = 0; k < M; ++k) {
+            for (int i = 1; i <= V; ++i) {
+                for (int j = i + 1; j <= V; ++j) {
+                    addRound52StaticSupportDuration(k, {i, j});
+                    for (int h = j + 1; h <= V; ++h) {
+                        addRound52StaticSupportDuration(k, {i, j, h});
+                    }
                 }
             }
         }
@@ -4067,7 +4116,12 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
                 "unsupported_round41_static_segmented_gini_mode");
         }
         if (spec.round51_subset_duration_big_m != "historical-100000" &&
-            spec.round51_subset_duration_big_m != "tight-tsp-lower-bound") {
+            spec.round51_subset_duration_big_m != "tight-tsp-lower-bound" &&
+            spec.round51_subset_duration_big_m != "off" &&
+            spec.round51_subset_duration_big_m !=
+                "rank3-historical-100000" &&
+            spec.round51_subset_duration_big_m !=
+                "rank3-tight-tsp-lower-bound") {
             throw std::runtime_error(
                 "unsupported_round51_subset_duration_big_m_policy");
         }

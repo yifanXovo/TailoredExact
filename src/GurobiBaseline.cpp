@@ -11,6 +11,8 @@
 #include "ProcessPhaseLedger.hpp"
 #include "MipStartMapping.hpp"
 #include "Round50IntervalMip.hpp"
+#include "Round52GurobiCutAdapter.hpp"
+#include "Round52TailoredCuts.hpp"
 
 #include <gurobi_c.h>
 
@@ -63,6 +65,8 @@ struct GurobiApi {
     decltype(&GRBgetdblparam) getdblparam = nullptr;
     decltype(&GRBsetcallbackfunc) setcallbackfunc = nullptr;
     decltype(&GRBcbget) cbget = nullptr;
+    decltype(&GRBcbcut) cbcut = nullptr;
+    decltype(&GRBcblazy) cblazy = nullptr;
     decltype(&GRBterminate) terminate = nullptr;
     decltype(&GRBoptimize) optimize = nullptr;
     decltype(&GRBgetintattr) getintattr = nullptr;
@@ -199,6 +203,8 @@ bool loadGurobiApi(const SolveOptions& options,
     LOAD_GRB(getdblparam, "GRBgetdblparam");
     LOAD_GRB(setcallbackfunc, "GRBsetcallbackfunc");
     LOAD_GRB(cbget, "GRBcbget");
+    LOAD_GRB(cbcut, "GRBcbcut");
+    LOAD_GRB(cblazy, "GRBcblazy");
     LOAD_GRB(terminate, "GRBterminate");
     LOAD_GRB(optimize, "GRBoptimize");
     LOAD_GRB(getintattr, "GRBgetintattr");
@@ -278,6 +284,25 @@ struct ProgressCallbackState {
     double bound_target_tolerance = 1e-7;
     bool bound_target_reached = false;
     bool bound_target_termination_requested = false;
+    bool tailored_cut_active = false;
+    bool tailored_cut_disabled_after_failure = false;
+    const Instance* cut_instance = nullptr;
+    Round52SupportDurationSeparator* cut_separator = nullptr;
+    Round52CutManager* cut_manager = nullptr;
+    Round52CutSeparationScope cut_scope =
+        Round52CutSeparationScope::RootOnly;
+    int cut_support_rank = 3;
+    double cut_certificate_tolerance = 1e-7;
+    std::string cut_interval_id;
+    std::unordered_map<std::string, int> cut_variable_indices;
+    std::vector<std::string> cut_variable_names;
+    std::vector<double> cut_lower_bounds;
+    std::vector<double> cut_upper_bounds;
+    std::vector<double> cut_relaxation_values;
+    long long cut_nonoptimal_mipnode_callbacks = 0;
+    long long cut_relaxation_vector_failures = 0;
+    long long cut_adapter_failures = 0;
+    double cut_callback_overhead_seconds = 0.0;
 };
 
 bool finiteNative(double value) {
@@ -287,7 +312,100 @@ bool finiteNative(double value) {
 int __stdcall progressAndBoundTargetCallback(
     GRBmodel* model, void* cbdata, int where, void* usrdata) {
     auto* state = static_cast<ProgressCallbackState*>(usrdata);
-    if (!state || !state->api || where != GRB_CB_MIP) return 0;
+    if (!state || !state->api) return 0;
+    if (where == GRB_CB_MIPNODE && state->tailored_cut_active &&
+        !state->tailored_cut_disabled_after_failure) {
+        const auto callback_started = Clock::now();
+        try {
+            int node_status = 0;
+            double node_count = 0.0;
+            const int status_rc = state->api->cbget(
+                cbdata, where, GRB_CB_MIPNODE_STATUS, &node_status);
+            const int node_rc = state->api->cbget(
+                cbdata, where, GRB_CB_MIPNODE_NODCNT, &node_count);
+            if (status_rc != 0 || node_status != GRB_OPTIMAL) {
+                ++state->cut_nonoptimal_mipnode_callbacks;
+            } else if (node_rc != 0 || !std::isfinite(node_count)) {
+                ++state->cut_relaxation_vector_failures;
+            } else {
+                const bool root_node = node_count < 0.5;
+                if (round52SeparationPermitted(
+                        state->cut_scope, root_node, true)) {
+                    state->cut_manager->recordCallback(root_node);
+                    if (state->cut_relaxation_values.size() !=
+                        state->cut_variable_names.size()) {
+                        state->cut_relaxation_values.resize(
+                            state->cut_variable_names.size());
+                    }
+                    const int relaxation_rc = state->api->cbget(
+                        cbdata, where, GRB_CB_MIPNODE_REL,
+                        state->cut_relaxation_values.data());
+                    if (relaxation_rc != 0) {
+                        ++state->cut_relaxation_vector_failures;
+                    } else {
+                        Round52CutSeparationInput input;
+                        input.instance = state->cut_instance;
+                        input.interval_id = state->cut_interval_id;
+                        input.node_context = root_node
+                            ? "optimal_root_MIPNODE"
+                            : "optimal_tree_MIPNODE";
+                        input.root_node = root_node;
+                        input.optimal_relaxation = true;
+                        input.maximum_support_rank = state->cut_support_rank;
+                        input.certificate_tolerance =
+                            state->cut_certificate_tolerance;
+                        input.model_variable_mapping =
+                            state->cut_variable_indices;
+                        for (std::size_t index = 0;
+                             index < state->cut_variable_names.size(); ++index) {
+                            const std::string& name =
+                                state->cut_variable_names[index];
+                            if (name.rfind("p_", 0) != 0 &&
+                                name.rfind("z_", 0) != 0) {
+                                continue;
+                            }
+                            input.lp_values.emplace(
+                                name, state->cut_relaxation_values[index]);
+                            input.effective_lower_bounds.emplace(
+                                name, state->cut_lower_bounds[index]);
+                            input.effective_upper_bounds.emplace(
+                                name, state->cut_upper_bounds[index]);
+                        }
+                        std::vector<Round52CutCandidate> selected =
+                            state->cut_manager->process(
+                                state->cut_separator->separate(input));
+                        Round52GurobiCutAdapter adapter(
+                            state->cut_variable_indices,
+                            [&](int length, const int* indices,
+                                const double* values, char sense,
+                                double rhs) {
+                                return state->api->cbcut(
+                                    cbdata, length,
+                                    const_cast<int*>(indices),
+                                    const_cast<double*>(values), sense, rhs);
+                            });
+                        for (const auto& candidate : selected) {
+                            const bool added = adapter.submit(candidate);
+                            state->cut_manager->recordSubmission(
+                                candidate, added);
+                        }
+                        state->cut_adapter_failures +=
+                            adapter.telemetry().failures;
+                    }
+                }
+            }
+        } catch (...) {
+            if (state->cut_manager) {
+                state->cut_manager->recordCallbackFailure();
+            }
+            state->tailored_cut_disabled_after_failure = true;
+        }
+        state->cut_callback_overhead_seconds +=
+            std::chrono::duration<double>(
+                Clock::now() - callback_started).count();
+        return 0;
+    }
+    if (where != GRB_CB_MIP) return 0;
     ++state->progress.callback_invocations;
     GurobiProgressEvent event;
     event.callback_where = where;
@@ -1216,6 +1334,41 @@ public:
             }
         }
 
+        out.tailored_cut_policy = round50_policy.tailored_cut_policy;
+        out.gurobi_cbcut_symbol_loaded = api_.cbcut != nullptr;
+        out.gurobi_cblazy_symbol_loaded = api_.cblazy != nullptr;
+        const bool tailored_cut_active = out.terminal_mip &&
+            (round50_policy.tailored_cut_policy ==
+                 "sd-r3-root-blockmax" ||
+             round50_policy.tailored_cut_policy ==
+                 "sd-r3-tree-blockmax");
+        Round52SupportDurationSeparator cut_separator;
+        Round52CutManager cut_manager;
+        if (tailored_cut_active) {
+            out.gurobi_precrush_requested =
+                round52RequiredGurobiPreCrush();
+            out.gurobi_precrush_set_return_code = api_.setintparam(
+                model_env, GRB_INT_PAR_PRECRUSH,
+                out.gurobi_precrush_requested);
+            out.gurobi_precrush_get_return_code = api_.getintparam(
+                model_env, GRB_INT_PAR_PRECRUSH,
+                &out.gurobi_precrush_effective);
+            out.gurobi_precrush_roundtrip_valid =
+                out.gurobi_precrush_set_return_code == 0 &&
+                out.gurobi_precrush_get_return_code == 0 &&
+                out.gurobi_precrush_effective ==
+                    out.gurobi_precrush_requested;
+            if (!out.gurobi_precrush_roundtrip_valid ||
+                !out.gurobi_cbcut_symbol_loaded) {
+                out.failure_reason =
+                    "round52_gurobi_user_cut_capability_invalid";
+                return out;
+            }
+            cut_manager.beginModel(
+                request.canonical_model_fingerprint + "|" +
+                request.leaf_id);
+        }
+
         ProgressCallbackState callback;
         callback.api = &api_;
         callback.bound_target_enabled =
@@ -1224,6 +1377,50 @@ public:
         callback.bound_target = request.native_bound_target;
         callback.bound_target_tolerance =
             std::max(0.0, request.native_bound_target_tolerance);
+        callback.tailored_cut_active = tailored_cut_active;
+        if (tailored_cut_active) {
+            callback.cut_instance = &instance_;
+            callback.cut_separator = &cut_separator;
+            callback.cut_manager = &cut_manager;
+            callback.cut_scope = round50_policy.tailored_cut_policy ==
+                    "sd-r3-tree-blockmax"
+                ? Round52CutSeparationScope::AllOptimalTreeNodes
+                : Round52CutSeparationScope::RootOnly;
+            callback.cut_support_rank =
+                round50_policy.tailored_cut_support_rank;
+            callback.cut_certificate_tolerance = 1e-7;
+            callback.cut_interval_id = request.leaf_id;
+            callback.cut_variable_names = native_names;
+            callback.cut_lower_bounds.resize(
+                static_cast<std::size_t>(native_variables));
+            callback.cut_upper_bounds.resize(
+                static_cast<std::size_t>(native_variables));
+            bool cut_registry_valid =
+                callback.cut_variable_names.size() ==
+                    static_cast<std::size_t>(native_variables) &&
+                api_.getdblattrarray(
+                    model, GRB_DBL_ATTR_LB, 0, native_variables,
+                    callback.cut_lower_bounds.data()) == 0 &&
+                api_.getdblattrarray(
+                    model, GRB_DBL_ATTR_UB, 0, native_variables,
+                    callback.cut_upper_bounds.data()) == 0;
+            for (int index = 0; cut_registry_valid &&
+                 index < native_variables; ++index) {
+                const std::string& name = callback.cut_variable_names[
+                    static_cast<std::size_t>(index)];
+                cut_registry_valid = !name.empty() &&
+                    callback.cut_variable_indices.emplace(
+                        name, index).second;
+            }
+            if (!cut_registry_valid) {
+                out.failure_reason =
+                    "round52_gurobi_cut_variable_registry_invalid";
+                return out;
+            }
+            callback.cut_relaxation_values.resize(
+                static_cast<std::size_t>(native_variables));
+            out.tailored_cut_callback_active = true;
+        }
         const int callback_rc = api_.setcallbackfunc(
             model, progressAndBoundTargetCallback, &callback);
         if (callback_rc != 0) {
@@ -1231,6 +1428,41 @@ public:
             return out;
         }
         out.optimize_return_code = api_.optimize(model);
+        if (tailored_cut_active) {
+            const Round52CutManagerTelemetry& cut =
+                cut_manager.telemetry();
+            out.tailored_cut_callback_disabled_after_failure =
+                callback.tailored_cut_disabled_after_failure;
+            out.tailored_cut_callback_calls = cut.callback_calls;
+            out.tailored_cut_root_callback_calls =
+                cut.root_callback_calls;
+            out.tailored_cut_tree_callback_calls =
+                cut.tree_callback_calls;
+            out.tailored_cut_nonoptimal_mipnode_callbacks =
+                callback.cut_nonoptimal_mipnode_callbacks;
+            out.tailored_cut_relaxation_vector_failures =
+                callback.cut_relaxation_vector_failures;
+            out.tailored_cuts_generated = cut.generated;
+            out.tailored_cuts_violated = cut.violated;
+            out.tailored_cuts_selected = cut.selected;
+            out.tailored_cuts_added = cut.added;
+            out.tailored_cut_duplicate_rejections =
+                cut.duplicate_rejections;
+            out.tailored_cut_dominated_rejections =
+                cut.dominated_rejections;
+            out.tailored_cut_nonviolated_rejections =
+                cut.nonviolated_rejections;
+            out.tailored_cut_invalid_rejections =
+                cut.invalid_rejections;
+            out.tailored_cut_submission_failures =
+                cut.submission_failures;
+            out.tailored_cut_callback_failures =
+                cut.callback_failures;
+            out.tailored_cut_pool_size = static_cast<long long>(
+                cut.global_pool_size);
+            out.tailored_cut_callback_overhead_seconds =
+                callback.cut_callback_overhead_seconds;
+        }
         if (!request.native_log_path.empty()) {
             // Closing the per-attempt log target makes the evidence immutable
             // before it is classified or hashed by the experiment harness.

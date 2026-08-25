@@ -74,6 +74,32 @@ Round50IntervalMipPolicy parseRound50IntervalMipPolicy(
         out.branching = Round50BranchingPolicy::Default;
         out.subset_duration_big_m = "tight-tsp-lower-bound";
         out.adaptive_branching = "root-sparse-top1";
+    } else if (out.name == "f0-no-rank3-support-duration") {
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "off";
+        out.tailored_cut_policy = "f0-none";
+    } else if (out.name == "f1-static-rank3-loose") {
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "rank3-historical-100000";
+        out.tailored_cut_policy = "f1-static-loose";
+        out.tailored_cut_support_rank = 3;
+    } else if (out.name == "f2-static-rank3-tight") {
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "rank3-tight-tsp-lower-bound";
+        out.tailored_cut_policy = "f2-static-tight";
+        out.tailored_cut_support_rank = 3;
+    } else if (out.name == "f3-sd-r3-root-blockmax" ||
+               out.name == "sd-r3-root-blockmax") {
+        out.name = "f3-sd-r3-root-blockmax";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "off";
+        out.tailored_cut_policy = "sd-r3-root-blockmax";
+        out.tailored_cut_support_rank = 3;
+    } else if (out.name == "f4-sd-r3-tree-blockmax") {
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "off";
+        out.tailored_cut_policy = "sd-r3-tree-blockmax";
+        out.tailored_cut_support_rank = 3;
     } else {
         out.failure_reason = "unsupported_round50_interval_mip_policy";
         return out;
