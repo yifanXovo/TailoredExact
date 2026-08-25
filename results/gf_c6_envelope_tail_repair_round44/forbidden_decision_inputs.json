@@ -1,0 +1,36 @@
+{
+  "allowed": [
+    "interval_endpoints",
+    "exact_cover_tree",
+    "verified_incumbent",
+    "valid_lp_or_native_mip_bounds",
+    "valid_infeasibility",
+    "next_frontier_target",
+    "valid_envelope_facets",
+    "fixed_global_parameters",
+    "certificate_tolerance"
+  ],
+  "forbidden": [
+    "instance_name",
+    "instance_path",
+    "random_seed",
+    "V",
+    "M",
+    "Q",
+    "difficulty_label",
+    "historical_winner",
+    "dataset_membership",
+    "elapsed_time",
+    "gurobi_work",
+    "node_count",
+    "iterations",
+    "memory",
+    "hardware",
+    "leaf_runtime",
+    "learned_classifier",
+    "known_instance_table",
+    "external_cap_state"
+  ],
+  "schema": "round44-forbidden-inputs-v1",
+  "telemetry_excluded_from_decision_hash": true
+}

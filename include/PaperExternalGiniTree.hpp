@@ -13,6 +13,14 @@ struct PaperLpResult {
     bool infeasible = false;
     bool bound_available = false;
     double lower_bound = 0.0;
+    bool primal_values_available = false;
+    bool reduced_costs_available = false;
+    bool basis_status_available = false;
+    bool primal_dual_evidence_available = false;
+    int objective_sense = 0;
+    double verified_cutoff = 0.0;
+    std::string model_fingerprint;
+    std::vector<FixedIntervalLpVariableEvidence> primal_dual_variables;
 };
 
 struct PaperLpSplitDecision {
@@ -80,6 +88,21 @@ struct C6CurrentSplitDecision {
     std::string normalization_source = "proof";
     double child_bound_target = 0.0;
     std::string reason = "not_evaluated";
+    bool adaptive_mass_enabled = false;
+    bool contraction_enabled = false;
+    bool contract_single_child = false;
+    bool close_parent_infeasible = false;
+    int feasible_child_index = -1;
+    int infeasible_child_index = -1;
+    double g_left_raw = 0.0;
+    double g_right_raw = 0.0;
+    double g_left = 0.0;
+    double g_right = 0.0;
+    double adaptive_eta = 0.0;
+    double adaptive_mu = 0.0;
+    double adaptive_mass_score = 0.0;
+    double adaptive_rho = 1.0;
+    double adaptive_score_tolerance = 0.0;
 };
 
 C6CurrentSplitDecision evaluateC6CurrentSplitDecision(
@@ -89,6 +112,15 @@ C6CurrentSplitDecision evaluateC6CurrentSplitDecision(
     const PaperLpResult& right,
     double normalized_split_threshold,
     double certificate_tolerance);
+
+C6CurrentSplitDecision evaluateC6AdaptiveMassSplitDecision(
+    double current_parent_bound,
+    double verified_upper_bound,
+    const PaperLpResult& left,
+    const PaperLpResult& right,
+    double tau,
+    double certificate_tolerance,
+    bool contraction_enabled);
 
 C6CurrentSplitDecision evaluateC6CurrentSplitDecision(
     double current_parent_bound,

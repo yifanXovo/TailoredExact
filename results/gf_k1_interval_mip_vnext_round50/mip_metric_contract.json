@@ -1,0 +1,65 @@
+{
+  "capped_comparison_order": [
+    "strict_certificate",
+    "lower_GI",
+    "smaller_gap",
+    "larger_valid_LB",
+    "lower_Work",
+    "lower_time"
+  ],
+  "decision_hash_excludes": [
+    "time",
+    "work",
+    "nodes",
+    "memory"
+  ],
+  "primary": "Gurobi Work",
+  "required_model_metrics": [
+    "original_rows",
+    "original_columns",
+    "original_nonzeros",
+    "presolved_rows",
+    "presolved_columns",
+    "presolved_nonzeros",
+    "continuous_columns",
+    "integer_columns",
+    "binary_columns",
+    "coefficient_range",
+    "objective_range",
+    "bound_range",
+    "rhs_range"
+  ],
+  "required_solve_metrics": [
+    "root_relaxation_bound",
+    "final_root_cut_bound",
+    "root_work",
+    "root_time",
+    "root_simplex_iterations",
+    "root_cut_family_counts",
+    "first_incumbent_work",
+    "first_incumbent_time",
+    "final_best_bound",
+    "final_incumbent",
+    "nodes",
+    "simplex_iterations",
+    "average_iterations_per_node",
+    "total_work",
+    "total_process_time",
+    "peak_memory",
+    "exact_or_capped"
+  ],
+  "schema": "round50-mip-metric-contract-v1",
+  "secondary": [
+    "strict_certificate",
+    "GI_common_horizon",
+    "final_gap",
+    "valid_lower_bound",
+    "time",
+    "nodes",
+    "root_bound",
+    "root_work",
+    "simplex_iterations",
+    "presolved_size",
+    "numerical_warnings"
+  ]
+}

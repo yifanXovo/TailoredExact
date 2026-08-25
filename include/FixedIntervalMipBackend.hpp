@@ -75,6 +75,53 @@ struct FixedIntervalMipRequest {
     double native_bound_target = 0.0;
     double native_bound_target_tolerance = 1e-7;
     bool capture_native_bound_events = false;
+    // Round 49 diagnostic/candidate modes may consume the primal/dual state
+    // produced by this already-required LP solve.  This flag only copies
+    // attributes after Optimize; it never launches another solve.
+    bool capture_lp_primal_dual_evidence = false;
+    // Round 50 uniform run-level backend policy.  It is never inferred from
+    // the instance, dimensions, panel, solver progress, or machine state.
+    std::string interval_mip_policy = "interval-mip-v0";
+    // Round 51 A1 disposable child-LP probes. Overrides are applied only to
+    // the freshly read model owned by this solve call and are read back before
+    // Optimize. The immutable canonical LP artifact is never rewritten.
+    struct VariableBoundOverride {
+        std::string variable_name;
+        bool lower_bound_enabled = false;
+        double lower_bound = 0.0;
+        bool upper_bound_enabled = false;
+        double upper_bound = 0.0;
+    };
+    std::vector<VariableBoundOverride> variable_bound_overrides;
+    // Round 51 A1 terminal sparse priorities. The backend assigns zero to all
+    // variables and these exact positive values to the named originals.
+    struct BranchPriorityOverride {
+        std::string variable_name;
+        int priority = 0;
+    };
+    std::vector<BranchPriorityOverride> branch_priority_overrides;
+};
+
+struct FixedIntervalBranchPriorityEvidence {
+    std::string variable_name;
+    std::string semantic_family;
+    char variable_type = 'C';
+    int assigned_priority = 0;
+};
+
+struct FixedIntervalCutFamilyEvidence {
+    std::string family;
+    long long count = 0;
+};
+
+struct FixedIntervalLpVariableEvidence {
+    std::string name;
+    char original_type = 'C';
+    double lower_bound = 0.0;
+    double upper_bound = 0.0;
+    double primal_value = 0.0;
+    double reduced_cost = 0.0;
+    int variable_basis_status = 0;
 };
 
 struct FixedIntervalMipOutcome {
@@ -113,6 +160,37 @@ struct FixedIntervalMipOutcome {
     double memory_gb = 0.0;
     double model_build_seconds = 0.0;
     double model_read_seconds = 0.0;
+    long long model_variable_count = 0;
+    long long model_linear_constraint_count = 0;
+    long long model_nonzero_count = 0;
+    long long model_binary_variable_count = 0;
+    long long model_integer_variable_count = 0;
+    long long model_continuous_variable_count = 0;
+    long long model_general_constraint_count = 0;
+    bool presolved_model_size_available = false;
+    long long presolved_row_count = 0;
+    long long presolved_column_count = 0;
+    long long presolved_nonzero_count = 0;
+    bool lp_solution_diagnostics_available = false;
+    bool lp_g_value_available = false;
+    double lp_g_value = 0.0;
+    bool lp_objective_value_available = false;
+    double lp_objective_value = 0.0;
+    bool lp_primal_values_available = false;
+    bool lp_reduced_costs_available = false;
+    bool lp_basis_status_available = false;
+    bool lp_primal_dual_evidence_available = false;
+    int lp_objective_sense = 0;
+    double lp_verified_cutoff = 0.0;
+    std::string lp_model_fingerprint;
+    std::vector<FixedIntervalLpVariableEvidence>
+        lp_primal_dual_variable_evidence;
+    double route_binary_fractionality = 0.0;
+    double visit_binary_fractionality = 0.0;
+    double inventory_bit_fractionality = 0.0;
+    double selector_binary_fractionality = 0.0;
+    double mccormick_ambiguity = 0.0;
+    double segmented_mccormick_ambiguity = 0.0;
     bool presolve_time_available = false;
     double presolve_time_seconds = 0.0;
     std::string presolve_time_status = "unavailable";
@@ -152,9 +230,61 @@ struct FixedIntervalMipOutcome {
     std::string warm_start_status = "not_requested";
     double warm_start_mapping_seconds = 0.0;
     std::string failure_reason;
+    std::string interval_mip_policy = "interval-mip-v0";
+    bool branch_priority_assignment_attempted = false;
+    bool branch_priority_assignment_valid = false;
+    long long branch_priority_assigned_count = 0;
+    std::string branch_priority_assignment_status = "not_requested";
+    std::vector<FixedIntervalBranchPriorityEvidence>
+        branch_priority_evidence;
+    long long branch_priority_zero_readback_count = 0;
+    bool variable_bound_override_attempted = false;
+    bool variable_bound_override_readback_valid = false;
+    long long variable_bound_override_count = 0;
+    std::string variable_bound_override_status = "not_requested";
+    std::vector<FixedIntervalCutFamilyEvidence> root_cut_family_evidence;
+    bool numerical_ranges_available = false;
+    double minimum_matrix_coefficient = 0.0;
+    double maximum_matrix_coefficient = 0.0;
+    double minimum_objective_coefficient = 0.0;
+    double maximum_objective_coefficient = 0.0;
+    double minimum_variable_bound = 0.0;
+    double maximum_variable_bound = 0.0;
+    double minimum_rhs = 0.0;
+    double maximum_rhs = 0.0;
+    bool root_relaxation_bound_available = false;
+    double root_relaxation_bound = 0.0;
+    bool final_root_cut_bound_available = false;
+    double final_root_cut_bound = 0.0;
+    double root_work = 0.0;
+    double root_runtime_seconds = 0.0;
+    double root_simplex_iterations = 0.0;
+    double first_incumbent_work = -1.0;
+    double first_incumbent_runtime_seconds = -1.0;
 };
 
 struct FixedIntervalMipBackendStats {
+    int threads_requested = 1;
+    int threads_set_return_code = -1;
+    int threads_get_return_code = -1;
+    int threads_effective = 0;
+    int presolve_requested = -1;
+    int presolve_set_return_code = -1;
+    int presolve_get_return_code = -1;
+    int presolve_effective = -2;
+    int seed_requested = 0;
+    int seed_set_return_code = -1;
+    int seed_get_return_code = -1;
+    int seed_effective = -1;
+    double mip_gap_requested = 0.0;
+    int mip_gap_set_return_code = -1;
+    int mip_gap_get_return_code = -1;
+    double mip_gap_effective = -1.0;
+    double mip_gap_abs_requested = 0.0;
+    int mip_gap_abs_set_return_code = -1;
+    int mip_gap_abs_get_return_code = -1;
+    double mip_gap_abs_effective = -1.0;
+    bool parameter_roundtrip_valid = false;
     long long environment_count = 0;
     long long model_count = 0;
     long long model_read_count = 0;

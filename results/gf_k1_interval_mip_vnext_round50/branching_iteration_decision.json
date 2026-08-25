@@ -1,0 +1,56 @@
+{
+  "accepted_changes": [],
+  "active_policy_after_iteration": "interval-mip-v0",
+  "candidate_decisions": [
+    {
+      "decision": "reject",
+      "policy": "b1-primitive-first",
+      "reason": "lost D3 and D13 qualification certificates and severe D14 capped regression"
+    },
+    {
+      "decision": "reject",
+      "policy": "b2-route-first",
+      "reason": "lost D4 and D10 core certificates"
+    },
+    {
+      "decision": "reject",
+      "policy": "b3-operation-first",
+      "reason": "severe D4 exact-row Work regression"
+    }
+  ],
+  "candidate_modes_default_off_for_reproduction": true,
+  "classification": "default_branching_retained",
+  "confirmation_opened": false,
+  "core_row_count": 36,
+  "correctness_failures": 0,
+  "false_certificates": 0,
+  "input_summary_hashes": {
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_corrected_core_b1_120s.csv": "7f63f6c46172e431f698396a4bf6973a1b190e74e2baeb37095d76ba6a9b1fbe",
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_corrected_core_b2_120s.csv": "b9ada3521906eea64d4390a8a3559f8ef101a9a080bcd9f37cc769b9ca9bd0d5",
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_corrected_core_b3_120s.csv": "4da4a307a3a74657c5cd3c67ed36c035af65954621f9cbf93d008a0c678301a8",
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_corrected_core_v0_120s.csv": "b2704c0851ec9cc216378c8a6c516de9612e686b40c075ecfc5d66eb8659a9fb",
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_corrected_qualification_b1_300s.csv": "1358ef62bbd530fdae44a6b0e6ee832a48797c25c731e770d6f7bde247f1ebb4",
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_corrected_qualification_v0_300s.csv": "65037fcc69cfd66fdb6975e6fd82eb3c219c98f947b87fa662f46ce7739497dc"
+  },
+  "invalidated_attempt_excluded": true,
+  "iteration": 1,
+  "model_identity_failures": 0,
+  "post_screen_tuning": false,
+  "priority_assignment_failures": 0,
+  "qualification_b1_aggregate_work_ratio": 1.0108000676795958,
+  "qualification_b1_certificate_count": 8,
+  "qualification_b1_severe_states": [
+    "D3",
+    "D13",
+    "D14"
+  ],
+  "qualification_baseline_certificate_count": 10,
+  "qualification_row_count": 28,
+  "results_path": "results/gf_k1_interval_mip_vnext_round50/branching_candidate_results.csv",
+  "results_sha256": "02dc569a066649c6b33568b92c024ff006830d3ce820190f5b9625d9dc424540",
+  "runtime_dispatch": false,
+  "schema": "round50-branching-iteration-decision-v1",
+  "semantic_registry_correction_applied": true,
+  "status": "complete",
+  "supersedes_invalidated_decision_sha256": "5592dd2e956e826359e90029e4ac894fedf98cf71b482982b8a46fa51bfc3fb5"
+}

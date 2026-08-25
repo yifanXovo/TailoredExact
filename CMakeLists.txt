@@ -32,6 +32,10 @@ set(EXACT_EBRP_LIB_SOURCES
   src/MipStartMapping.cpp
   src/ExternalGiniTree.cpp
   src/PaperExternalGiniTree.cpp
+  src/Round48K1AMF.cpp
+  src/Round49K1RC.cpp
+  src/Round50IntervalMip.cpp
+  src/Round51IntervalMip.cpp
   src/ReplicaExternalGiniTree.cpp
   src/ConnectivityFlow.cpp
   src/Bounds.cpp
@@ -50,6 +54,10 @@ set(EXACT_EBRP_LIB_SOURCES
   src/ControllingLeafScheduler.cpp
   src/GiniBranching.cpp
   src/GiniFrontierGeometry.cpp
+  src/GiniEnvelopeRefinement.cpp
+  src/GiniEnvelopeTailRepair.cpp
+  src/GiniAdaptiveParametric.cpp
+  src/StaticSegmentedGini.cpp
   src/IntervalRowFactory.cpp
   src/DispersionChildBound.cpp
   src/hga_tgbc/HgaTgbcGreedy.cpp
@@ -155,3 +163,78 @@ add_test(NAME Round36CausalTests COMMAND Round36CausalTests)
 add_executable(Round37GeometryTests tests/round37_geometry_tests.cpp)
 target_link_libraries(Round37GeometryTests PRIVATE exact_ebrp_core)
 add_test(NAME Round37GeometryTests COMMAND Round37GeometryTests)
+
+add_executable(Round40CoarseStartTests tests/round40_coarse_start_tests.cpp)
+target_link_libraries(Round40CoarseStartTests PRIVATE exact_ebrp_core)
+add_test(NAME Round40CoarseStartTests COMMAND Round40CoarseStartTests)
+
+add_executable(Round40UbGeometryTests tests/round40_ub_geometry_tests.cpp)
+target_link_libraries(Round40UbGeometryTests PRIVATE exact_ebrp_core)
+add_test(NAME Round40UbGeometryTests COMMAND Round40UbGeometryTests)
+
+add_executable(Round41StaticSegmentedTests
+    tests/round41_static_segmented_tests.cpp)
+target_link_libraries(Round41StaticSegmentedTests PRIVATE exact_ebrp_core)
+add_test(NAME Round41StaticSegmentedTests COMMAND Round41StaticSegmentedTests)
+
+add_executable(Round42StaticSegmentedTests
+    tests/round42_static_segmented_tests.cpp)
+target_link_libraries(Round42StaticSegmentedTests PRIVATE exact_ebrp_core)
+add_test(NAME Round42StaticSegmentedTests COMMAND Round42StaticSegmentedTests)
+
+add_executable(Round43EnvelopeRefinementTests
+    tests/round43_envelope_refinement_tests.cpp)
+target_link_libraries(Round43EnvelopeRefinementTests PRIVATE exact_ebrp_core)
+add_test(NAME Round43EnvelopeRefinementTests
+  COMMAND Round43EnvelopeRefinementTests)
+
+add_executable(Round44EnvelopeTailRepairTests
+    tests/round44_envelope_tail_repair_tests.cpp)
+target_link_libraries(Round44EnvelopeTailRepairTests PRIVATE exact_ebrp_core)
+add_test(NAME Round44EnvelopeTailRepairTests
+  COMMAND Round44EnvelopeTailRepairTests)
+
+add_executable(Round45AdaptiveParametricTests
+    tests/round45_adaptive_parametric_tests.cpp)
+target_link_libraries(Round45AdaptiveParametricTests PRIVATE exact_ebrp_core)
+add_test(NAME Round45AdaptiveParametricTests
+  COMMAND Round45AdaptiveParametricTests)
+
+add_executable(Round46C6RhoTests tests/round46_c6_rho_tests.cpp)
+target_link_libraries(Round46C6RhoTests PRIVATE exact_ebrp_core)
+add_test(NAME Round46C6RhoTests COMMAND Round46C6RhoTests)
+
+add_executable(Round47AdaptiveMassTests
+    tests/round47_adaptive_mass_tests.cpp)
+target_link_libraries(Round47AdaptiveMassTests PRIVATE exact_ebrp_core)
+add_test(NAME Round47AdaptiveMassTests COMMAND Round47AdaptiveMassTests)
+
+add_executable(Round48K1AMFTests tests/round48_k1_amf_tests.cpp)
+target_link_libraries(Round48K1AMFTests PRIVATE exact_ebrp_core)
+add_test(NAME Round48K1AMFTests COMMAND Round48K1AMFTests)
+
+add_executable(Round49RCOfflineExtract src/round49_rc_extract_main.cpp)
+target_link_libraries(Round49RCOfflineExtract PRIVATE exact_ebrp_core)
+
+add_executable(Round49K1LPPrimalDualTests tests/round49_k1_rc_tests.cpp)
+target_link_libraries(Round49K1LPPrimalDualTests PRIVATE exact_ebrp_core)
+add_test(NAME Round49K1LPPrimalDualTests COMMAND Round49K1LPPrimalDualTests)
+
+add_executable(Round50IntervalMipExperiment
+  src/round50_interval_mip_main.cpp)
+target_link_libraries(Round50IntervalMipExperiment PRIVATE exact_ebrp_core)
+
+# Round 51 uses the same fixed-state driver and emits an independently hashed
+# executable for its causally staged comparisons. Historical Round 50 policy
+# names remain accepted and byte-preserving for default-off audits.
+add_executable(Round51IntervalMipExperiment
+  src/round50_interval_mip_main.cpp)
+target_link_libraries(Round51IntervalMipExperiment PRIVATE exact_ebrp_core)
+
+add_executable(Round50IntervalMipTests tests/round50_interval_mip_tests.cpp)
+target_link_libraries(Round50IntervalMipTests PRIVATE exact_ebrp_core)
+add_test(NAME Round50IntervalMipTests COMMAND Round50IntervalMipTests)
+
+add_executable(Round51TightBigMTests tests/round51_tight_big_m_tests.cpp)
+target_link_libraries(Round51TightBigMTests PRIVATE exact_ebrp_core)
+add_test(NAME Round51TightBigMTests COMMAND Round51TightBigMTests)

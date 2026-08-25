@@ -1,0 +1,13 @@
+{
+  "schema": "round50-iteration2-audit-recovery-v1",
+  "status": "recovered_before_candidate_execution",
+  "trigger": "exhaustive audit found 73 exact duplicates after provisional no-candidate text was emitted",
+  "provisional_files_never_committed": true,
+  "provisional_candidate_results_sha256": "0958fe3df9b9312a1d6ab437490d5d30b0b06f9a9b52604efe2d1932e33fe5c5",
+  "provisional_iteration_decision_sha256": "75ea2844f24491a61f536ad6803d5155c289637540d0bb7a6e0fdfd745f503ce",
+  "provisional_no_candidate_note_sha256": "ec48daed404d84cc9113558b7d0e3f1fc4ac7f2880d7ffd450ab3ce2bd6b868d",
+  "candidate_results_inspected": false,
+  "candidate_processes_started": 0,
+  "confirmation_opened": false,
+  "recovery": "invalidate provisional conclusion, classify duplicate source emitters, implement uniform C1 exact duplicate elimination, and run the frozen paired protocol"
+}
