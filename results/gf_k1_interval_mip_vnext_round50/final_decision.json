@@ -1,0 +1,72 @@
+{
+  "accepted_changes": {
+    "branching": [],
+    "cut_formulation": [],
+    "model_reuse": [],
+    "symmetry_numerical": []
+  },
+  "benchmark_classification": "k1_am_vnext_pgrb_mixed",
+  "branching_classification": "default_branching_retained",
+  "certificate_summary": {
+    "capped_failed_or_not_exact": 11,
+    "false_certificates": 0,
+    "physical_rows": 37,
+    "strict": 26
+  },
+  "completion_status": "round50_incomplete",
+  "counterfactual_summary": {
+    "labels": {
+      "high_imbalance_matched": "MIDPOINT",
+      "major_root": "RETAIN",
+      "moderate3301_root": "MIDPOINT",
+      "numerical_endpoint_root": "MIDPOINT",
+      "strong_control_root": "MIDPOINT",
+      "tight3102_L0_0": "MIDPOINT",
+      "v12_m2_root": "MIDPOINT"
+    },
+    "old_known_labels_changed": 0,
+    "severe_errors": 4
+  },
+  "cut_formulation_classification": "original_cut_pack_retained",
+  "derived_from_completed_evidence": true,
+  "entered_stage_missing_rows": [],
+  "evidence_sha256": {
+    "certificate_audit.csv": "d242c0706f17fcbfc3002b7f16687ae6c9d0ae98c955ce41a54b25dd44299a26",
+    "default_off_equivalence.csv": "495d09132320f2e888178066e4de5296c4d52967aa5d93bcafb7b72342dc8f0b",
+    "fixed_interval_confirmation_results.csv": "61584c59042501eab7ca924b1d9f82fd6be26321fb6d6533449f8b1513cd0d5b",
+    "interval_mip_vnext_promotion_audit.json": "3483379fba1e7e3bd25516e04525668eaabc976f44d405df99eda9546db6dfe8",
+    "split_stage_decision.json": "15e2b03b7d55efea5cce0a4306dc7088a480101af33122d6fcad5e4b868404f7",
+    "vnext_counterfactual_pair_summary.csv": "16e0edbb17c5a4f6356bd299a92058b1ea122a8eb28e9980322a828736d86e06"
+  },
+  "fixed_interval_classification": "interval_mip_v0_retained",
+  "fixed_state_summary": {
+    "capped": 5,
+    "correctness_failures": 1,
+    "failed": 1,
+    "severe_regressions": 0,
+    "strict": 17
+  },
+  "github_delivery": "draft_pr_pending",
+  "interval_mip_vnext_equivalence": "Interval-MIP-v0",
+  "k1_classification": "historical_k1_am_retained",
+  "official_executables": {
+    "fixed_interval_sha256": "85a6404acb015ea71e1b56a656f85665cda46b1f72a29a7174e6f48d96f8e81a",
+    "full_solver_sha256": "7cc8ecb324c69526b38f21a8d66cdc4ca6ab6de0cd03639f916f25340d097a2e"
+  },
+  "reuse_classification": "model_reuse_not_opened",
+  "row_counts": {
+    "counterfactual_pairs": 7,
+    "counterfactual_physical": 14,
+    "fixed_confirmation_logical": 46,
+    "fixed_confirmation_physical": 23,
+    "fixed_stage1_baseline": 14,
+    "fixed_vnext_development": 14,
+    "k1_integration_logical": 0,
+    "k1_integration_physical": 0
+  },
+  "scale_qualification": "v20_negative",
+  "schema": "round50-final-decision-v1",
+  "split_classification": "severe_split_error_remains",
+  "split_tail_rules_tested": 0,
+  "split_tail_stage_opened": false
+}
