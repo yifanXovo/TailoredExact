@@ -527,7 +527,11 @@ int main(int argc, char** argv) {
             policy.cut_formulation == "exact-duplicate-elimination";
         spec.round50_symmetry_policy =
             policy.symmetry_numerical == "route-start-order"
-                ? "route-start-order" : "v0-cardinality";
+                ? "route-start-order"
+                : (policy.symmetry_numerical ==
+                       "used-first-route-start-order"
+                    ? "used-first-route-start-order"
+                    : "v0-cardinality");
         const auto build_started = Clock::now();
         ebrp::CanonicalCompactModelArtifact artifact =
             ebrp::writeCanonicalCompactModel(

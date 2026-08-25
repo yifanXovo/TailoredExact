@@ -205,9 +205,11 @@ def main() -> None:
         dedup_enabled = bool(model.get("exact_duplicate_row_elimination", False))
         duplicates_omitted = int(model.get("exact_duplicate_rows_omitted", 0))
         symmetry_policy = model.get("round50_symmetry_policy", "v0-cardinality")
-        if symmetry_policy == "route-start-order":
+        if symmetry_policy in {"route-start-order",
+                               "used-first-route-start-order"}:
             model_identity_match = (
-                args.policy in {"s1", "s1-route-start-order"}
+                args.policy in {"s1", "s1-route-start-order", "s1r",
+                                "s1r-used-first-route-start-order"}
                 and int(model["rows"]) == int(frozen["original_rows"])
                 and int(model["columns"]) == int(frozen["original_columns"])
                 and model["scope"] ==

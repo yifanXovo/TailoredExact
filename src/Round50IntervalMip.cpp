@@ -43,6 +43,11 @@ Round50IntervalMipPolicy parseRound50IntervalMipPolicy(
         out.name = "s1-route-start-order";
         out.branching = Round50BranchingPolicy::Default;
         out.symmetry_numerical = "route-start-order";
+    } else if (out.name == "s1r" ||
+               out.name == "s1r-used-first-route-start-order") {
+        out.name = "s1r-used-first-route-start-order";
+        out.branching = Round50BranchingPolicy::Default;
+        out.symmetry_numerical = "used-first-route-start-order";
     } else {
         out.failure_reason = "unsupported_round50_interval_mip_policy";
         return out;

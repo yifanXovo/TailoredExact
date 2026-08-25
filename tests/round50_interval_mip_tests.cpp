@@ -21,8 +21,10 @@ int main() {
         const auto b3 = parseRound50IntervalMipPolicy("b3");
         const auto c1 = parseRound50IntervalMipPolicy("c1-exact-dedup");
         const auto s1 = parseRound50IntervalMipPolicy("s1-route-start-order");
+        const auto s1r = parseRound50IntervalMipPolicy(
+            "s1r-used-first-route-start-order");
         require(v0.valid && b1.valid && b2.valid && b3.valid && c1.valid &&
-                    s1.valid,
+                    s1.valid && s1r.valid,
                 "all frozen branching and C1 policies parse");
         require(c1.branching == Round50BranchingPolicy::Default &&
                     c1.cut_formulation == "exact-duplicate-elimination",
@@ -31,6 +33,11 @@ int main() {
                     s1.cut_formulation == "v0" &&
                     s1.symmetry_numerical == "route-start-order",
                 "S1 changes only the symmetry policy");
+        require(s1r.branching == Round50BranchingPolicy::Default &&
+                    s1r.cut_formulation == "v0" &&
+                    s1r.symmetry_numerical ==
+                        "used-first-route-start-order",
+                "S1 revision changes only the symmetry representative rank");
         require(!parseRound50IntervalMipPolicy("instance-special").valid,
                 "unknown policies fail closed");
         require(classifyRound50Variable("x_0_1_2") ==

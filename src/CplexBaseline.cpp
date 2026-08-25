@@ -1907,17 +1907,26 @@ void writeCompactLp(const Instance& instance,
     if (strengthened && options.interval_oracle_symmetry_breaking && identical_q && M > 1) {
         const bool route_start_order = canonical_spec &&
             canonical_spec->round50_symmetry_policy == "route-start-order";
+        const bool used_first_route_start_order = canonical_spec &&
+            canonical_spec->round50_symmetry_policy ==
+                "used-first-route-start-order";
         for (int k = 0; k + 1 < M; ++k) {
             Expr e;
-            if (route_start_order) {
-                // An unused route has start index zero.  Every used route has
-                // one depot exit, and station disjointness makes used starts
-                // unique.  Relabeling identical vehicles therefore always
-                // yields a representative satisfying nondecreasing starts.
+            if (route_start_order || used_first_route_start_order) {
+                // S1-v1 ranks an unused route at zero.  The single allowed
+                // revision uses i-(V+1), which is the constant-free form of
+                // rank s+(V+1)(1-a): used starts rank 1..V and unused routes
+                // rank V+1.  Station disjointness makes used starts unique,
+                // so identical vehicles can always be relabeled to satisfy
+                // either exact representative order.
                 for (int i = 1; i <= V; ++i) {
-                    addTerm(e, xName(k, 0, i), static_cast<double>(i));
+                    const double rank_coefficient =
+                        used_first_route_start_order
+                            ? static_cast<double>(i - (V + 1))
+                            : static_cast<double>(i);
+                    addTerm(e, xName(k, 0, i), rank_coefficient);
                     addTerm(e, xName(k + 1, 0, i),
-                            -static_cast<double>(i));
+                            -rank_coefficient);
                 }
                 writeConstraint(out, cid, e, "<=", 0);
             } else {
