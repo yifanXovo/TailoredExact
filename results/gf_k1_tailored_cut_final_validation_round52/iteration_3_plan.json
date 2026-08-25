@@ -1,0 +1,14 @@
+{
+  "schema": "round52-cut-iteration-plan-v1",
+  "iteration": 3,
+  "status_at_freeze": "formally_skipped",
+  "candidate_count": 0,
+  "runs_authorized": false,
+  "second_family_opened": false,
+  "skip_rationale": "Iteration 1 failed certificate retention and aggregate Work gates, and Iteration 2 was formally skipped because all permitted dynamic management variants retain the failed callback/PreCrush path. Opening a second family would not repair the infrastructure-path regression and lacks a qualifying offline violation census.",
+  "negative_termination": true,
+  "result_dependent_dispatch_added": false,
+  "witness_specific_rule_added": false,
+  "source_change": false,
+  "frozen_before_runs": true
+}

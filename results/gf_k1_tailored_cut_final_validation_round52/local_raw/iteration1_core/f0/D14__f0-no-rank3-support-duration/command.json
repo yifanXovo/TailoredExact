@@ -1,0 +1,21 @@
+{
+  "schema": "round50-fixed-interval-command-v1",
+  "executable_path": "E:/codes/ExactEBRP/build/round52/Round51IntervalMipExperiment.exe",
+  "executable_sha256": "4207bb5a27db38dddade73166f979fff869c431239aa17bc8746621c76ce6d57",
+  "mode": "solve",
+  "state_id": "D14",
+  "input": "E:/codes/ExactEBRP/reference/hard_stress/V20_M3/moderate_seed3301.txt",
+  "artifact_dir": "E:/codes/ExactEBRP/results/gf_k1_tailored_cut_final_validation_round52/local_raw/iteration1_core/f0/D14__f0-no-rank3-support-duration",
+  "policy": "f0-no-rank3-support-duration",
+  "gamma_lower": 0,
+  "gamma_upper": 0.024576276332372575,
+  "verified_cutoff": 0.04915255266474515,
+  "route_time_limit": 3600,
+  "pickup_time": 60,
+  "drop_time": 60,
+  "process_cap_seconds": 120,
+  "evidence_finalization_reserve_seconds": 2,
+  "solver": {"Presolve": "Auto", "Seed": 0, "Threads": 1, "MIPGap": 0, "MIPGapAbs": 0},
+  "known_optimum_injection": false,
+  "archive_winner_injection": false
+}
