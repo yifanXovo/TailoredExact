@@ -49,6 +49,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--baseline-root", required=True, type=Path)
     parser.add_argument("--candidate-root", required=True, type=Path)
+    parser.add_argument("--baseline-policy", default="interval-mip-v0")
     parser.add_argument("--candidate-policy", required=True)
     parser.add_argument("--symmetry-policy", required=True,
                         choices=["route-start-order", "used-first-route-start-order"])
@@ -78,7 +79,7 @@ def main() -> None:
         vehicles = int(match.group(2))
         capacities = [int(value.strip()) for value in match.group(3).split(",")]
         identical = len(capacities) == vehicles and len(set(capacities)) == 1
-        base_dir = args.baseline_root / f"{state}__interval-mip-v0"
+        base_dir = args.baseline_root / f"{state}__{args.baseline_policy}"
         candidate_dir = args.candidate_root / f"{state}__{args.candidate_policy}"
         base_lp = base_dir / "canonical_model.lp"
         candidate_lp = candidate_dir / "canonical_model.lp"

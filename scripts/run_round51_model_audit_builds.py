@@ -30,6 +30,10 @@ def main() -> None:
     parser.add_argument("--executable", required=True, type=Path)
     parser.add_argument("--run-root", required=True, type=Path)
     parser.add_argument("--cap", default=120.0, type=float)
+    parser.add_argument(
+        "--policies",
+        default="interval-mip-v0,m1-tight-big-m-v0",
+        help="comma-separated explicit policy names")
     args = parser.parse_args()
     if not (0.0 < args.cap <= 1800.0):
         raise RuntimeError("cap must be in (0,1800]")
@@ -41,10 +45,14 @@ def main() -> None:
         MANIFEST.open(newline="", encoding="utf-8-sig"))}
     if len(frozen) != 23:
         raise RuntimeError(f"expected 23 frozen states, found {len(frozen)}")
+    policies = [value.strip() for value in args.policies.split(",")
+                if value.strip()]
+    if not policies or len(policies) != len(set(policies)):
+        raise RuntimeError("policies must be a nonempty unique list")
     args.run_root.mkdir(parents=True, exist_ok=True)
     for state in frozen:
         state_id = state["state_id"]
-        for policy in ("interval-mip-v0", "m1-tight-big-m-v0"):
+        for policy in policies:
             output = args.run_root / f"{state_id}__{policy}"
             command_path = output / "command.json"
             completion_path = output / "completion_marker.json"
