@@ -1,24 +1,17 @@
 # Round 52 source of truth
 
-The authoritative K1-AM action source is the Round 47 adaptive-mass decision
-ledger, not inferred labels in later counterfactual summaries:
+The authoritative decision is `final_decision.json`; the human-readable interpretation is `final_report.md`.
 
-- `results/gf_c6_adaptive_mass_contraction_round47/adaptive_mass_action_replay.csv`
-- `results/gf_c6_adaptive_mass_contraction_round47/adaptive_mass_score_census.csv`
-- `results/gf_c6_adaptive_mass_contraction_round47/tau_freeze.json`
+- Frozen base: `c6d7109bf69f50bd459174e8f05242b478e57d85`
+- Algorithm/executable freeze: `52ccf3e713e1c57484ac2ec9ba96baf3cb8c8026`
+- Executable SHA-256: `d245c76f6397c757894610d8f5238cfeb971761ff7e05edf51058e451d810151`
+- Tau/controller: 0.08, K0=1, complete interval, midpoint, adaptive mass
+- Final inner backend: historical production v0; tailored cuts off
+- Official final rows: 24 validation + 24 holdout = 48
+- Certificates: validation P-GRB 3, K1 7; holdout P-GRB 3, K1 6
+- Missing rows: none
+- False certificates: zero
+- Severe P-GRB regressions: 0
+- Final benchmark/scale: `pgrb_advantage_supported` / `v12_v20_supported_v50_mixed`
 
-All available Round 47--51 adaptive-mass decision ledgers are replay inputs;
-raw historical files are immutable. Corrections are additive errata. The
-Round 50 fixed-state identity source is
-`results/gf_k1_interval_mip_vnext_round50/fixed_interval_state_manifest.csv`.
-The Round 51 v0/M1 affected-state and experiment ledgers under
-`results/gf_k1_tight_big_m_sparse_branching_round51/` are the telemetry-audit
-inputs. Plain continuous LP solves, rather than MIP callback telemetry, define
-the v0/M1 LP monotonicity audit.
-
-Historical decisions are fixed by each round's `final_decision.json` and
-`stage0_freeze_manifest.json` under the Round 47--51 evidence roots. The Round
-52 validation/holdout identities are the Stage-0 JSON/CSV manifests generated
-from the Round 51 base commit without solver observation. Committed compact
-ledgers are authoritative for conclusions; inventoried native logs are local
-reproduction evidence only.
+Raw evidence is intentionally local-only. Use `compact_evidence_inventory.csv`, `local_raw_evidence_inventory.csv`, and `reproduction_commands.md` to bind compact claims to native artifacts.
