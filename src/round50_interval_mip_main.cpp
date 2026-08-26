@@ -493,12 +493,21 @@ void writeSolveEvidence(const Arguments& args,
                         const ebrp::FixedIntervalMipBackendStats& stats,
                         double process_seconds,
                         const AdaptiveExecution* adaptive = nullptr) {
+    const bool tailored_cut_infrastructure =
+        !outcome.tailored_cut_callback_active ||
+        (outcome.gurobi_cbcut_symbol_loaded &&
+         outcome.gurobi_precrush_roundtrip_valid &&
+         !outcome.tailored_cut_callback_disabled_after_failure &&
+         outcome.tailored_cut_relaxation_vector_failures == 0 &&
+         outcome.tailored_cut_submission_failures == 0 &&
+         outcome.tailored_cut_callback_failures == 0);
     const bool engineering = outcome.attempted && outcome.available &&
         outcome.solver_finalization_reached &&
         outcome.model_fingerprint_matches_request &&
         outcome.exact_zero_gap_roundtrip &&
         outcome.feasibility_consistency_gate &&
         outcome.branch_priority_assignment_valid &&
+        tailored_cut_infrastructure &&
         (!adaptive || !adaptive->active || adaptive->lifecycle_valid);
     const bool exact_infeasible = engineering && outcome.infeasible;
     const bool exact_feasible = engineering && outcome.native_exact_optimal &&
@@ -581,6 +590,59 @@ void writeSolveEvidence(const Arguments& args,
         << ",\n  \"adaptive_fallback_reason\": \""
         << jsonEscape(adaptive && adaptive->active
               ? adaptive->fallback_reason : "not_applicable") << "\",\n"
+        << "  \"tailored_cut_policy\": \""
+        << jsonEscape(outcome.tailored_cut_policy) << "\",\n"
+        << "  \"tailored_cut_callback_active\": "
+        << boolJson(outcome.tailored_cut_callback_active) << ",\n"
+        << "  \"tailored_cut_infrastructure_gate\": "
+        << boolJson(tailored_cut_infrastructure) << ",\n"
+        << "  \"gurobi_cbcut_symbol_loaded\": "
+        << boolJson(outcome.gurobi_cbcut_symbol_loaded) << ",\n"
+        << "  \"gurobi_cblazy_symbol_loaded\": "
+        << boolJson(outcome.gurobi_cblazy_symbol_loaded) << ",\n"
+        << "  \"gurobi_precrush_requested\": "
+        << outcome.gurobi_precrush_requested << ",\n"
+        << "  \"gurobi_precrush_effective\": "
+        << outcome.gurobi_precrush_effective << ",\n"
+        << "  \"gurobi_precrush_roundtrip_valid\": "
+        << boolJson(outcome.gurobi_precrush_roundtrip_valid) << ",\n"
+        << "  \"tailored_cut_callback_disabled_after_failure\": "
+        << boolJson(outcome.tailored_cut_callback_disabled_after_failure)
+        << ",\n"
+        << "  \"tailored_cut_callback_calls\": "
+        << outcome.tailored_cut_callback_calls << ",\n"
+        << "  \"tailored_cut_root_callback_calls\": "
+        << outcome.tailored_cut_root_callback_calls << ",\n"
+        << "  \"tailored_cut_tree_callback_calls\": "
+        << outcome.tailored_cut_tree_callback_calls << ",\n"
+        << "  \"tailored_cut_nonoptimal_mipnode_callbacks\": "
+        << outcome.tailored_cut_nonoptimal_mipnode_callbacks << ",\n"
+        << "  \"tailored_cut_relaxation_vector_failures\": "
+        << outcome.tailored_cut_relaxation_vector_failures << ",\n"
+        << "  \"tailored_cuts_generated\": "
+        << outcome.tailored_cuts_generated << ",\n"
+        << "  \"tailored_cuts_violated\": "
+        << outcome.tailored_cuts_violated << ",\n"
+        << "  \"tailored_cuts_selected\": "
+        << outcome.tailored_cuts_selected << ",\n"
+        << "  \"tailored_cuts_added\": "
+        << outcome.tailored_cuts_added << ",\n"
+        << "  \"tailored_cut_duplicate_rejections\": "
+        << outcome.tailored_cut_duplicate_rejections << ",\n"
+        << "  \"tailored_cut_dominated_rejections\": "
+        << outcome.tailored_cut_dominated_rejections << ",\n"
+        << "  \"tailored_cut_nonviolated_rejections\": "
+        << outcome.tailored_cut_nonviolated_rejections << ",\n"
+        << "  \"tailored_cut_invalid_rejections\": "
+        << outcome.tailored_cut_invalid_rejections << ",\n"
+        << "  \"tailored_cut_submission_failures\": "
+        << outcome.tailored_cut_submission_failures << ",\n"
+        << "  \"tailored_cut_callback_failures\": "
+        << outcome.tailored_cut_callback_failures << ",\n"
+        << "  \"tailored_cut_pool_size\": "
+        << outcome.tailored_cut_pool_size << ",\n"
+        << "  \"tailored_cut_callback_overhead_seconds\": "
+        << outcome.tailored_cut_callback_overhead_seconds << ",\n"
         << "  \"model_sha256\": \"" << artifact.sha256 << "\",\n"
         << "  \"engineering_gate\": " << boolJson(engineering) << ",\n"
         << "  \"failure_reason\": \"" << jsonEscape(outcome.failure_reason) << "\"\n}\n";
@@ -651,6 +713,48 @@ void writeSolveEvidence(const Arguments& args,
              << ',' << csvField(cut.family) << ',' << cut.count
              << ",native_log\n";
     }
+    if (outcome.tailored_cut_callback_active) {
+        cuts << csvField(args.state_id) << ',' << csvField(args.policy)
+             << ",support-duration-user-cuts,"
+             << outcome.tailored_cuts_added << ",GRBcbcut\n";
+    } else if (artifact.round51_subset_duration_rows > 0) {
+        cuts << csvField(args.state_id) << ',' << csvField(args.policy)
+             << ",support-duration-static-rows,"
+             << artifact.round51_subset_duration_rows
+             << ",canonical_model\n";
+    }
+
+    std::ofstream lifecycle(
+        args.artifact_dir / "cut_lifecycle_ledger.csv");
+    lifecycle << "state_id,policy,tailored_cut_policy,callback_active,cbcut_symbol_loaded,cblazy_symbol_loaded,precrush_requested,precrush_effective,precrush_roundtrip_valid,callback_disabled_after_failure,callback_calls,root_callback_calls,tree_callback_calls,nonoptimal_mipnode_callbacks,relaxation_vector_failures,generated,violated,selected,added,duplicate_rejections,dominated_rejections,nonviolated_rejections,invalid_rejections,submission_failures,callback_failures,global_pool_size,callback_overhead_seconds,infrastructure_gate\n"
+              << std::setprecision(17) << csvField(args.state_id) << ','
+              << csvField(args.policy) << ','
+              << csvField(outcome.tailored_cut_policy) << ','
+              << outcome.tailored_cut_callback_active << ','
+              << outcome.gurobi_cbcut_symbol_loaded << ','
+              << outcome.gurobi_cblazy_symbol_loaded << ','
+              << outcome.gurobi_precrush_requested << ','
+              << outcome.gurobi_precrush_effective << ','
+              << outcome.gurobi_precrush_roundtrip_valid << ','
+              << outcome.tailored_cut_callback_disabled_after_failure << ','
+              << outcome.tailored_cut_callback_calls << ','
+              << outcome.tailored_cut_root_callback_calls << ','
+              << outcome.tailored_cut_tree_callback_calls << ','
+              << outcome.tailored_cut_nonoptimal_mipnode_callbacks << ','
+              << outcome.tailored_cut_relaxation_vector_failures << ','
+              << outcome.tailored_cuts_generated << ','
+              << outcome.tailored_cuts_violated << ','
+              << outcome.tailored_cuts_selected << ','
+              << outcome.tailored_cuts_added << ','
+              << outcome.tailored_cut_duplicate_rejections << ','
+              << outcome.tailored_cut_dominated_rejections << ','
+              << outcome.tailored_cut_nonviolated_rejections << ','
+              << outcome.tailored_cut_invalid_rejections << ','
+              << outcome.tailored_cut_submission_failures << ','
+              << outcome.tailored_cut_callback_failures << ','
+              << outcome.tailored_cut_pool_size << ','
+              << outcome.tailored_cut_callback_overhead_seconds << ','
+              << tailored_cut_infrastructure << '\n';
 
     std::ofstream numerical(args.artifact_dir / "numerical_quality_ledger.csv");
     numerical << "state_id,policy,available,min_matrix,max_matrix,min_objective,max_objective,min_bound,max_bound,min_rhs,max_rhs\n"
@@ -746,7 +850,8 @@ int main(int argc, char** argv) {
             const std::vector<std::string> empty_ledgers = {
                 "mip_progress.csv", "root_processing_ledger.csv",
                 "presolve_ledger.csv", "branching_policy_ledger.csv",
-                "cut_family_ledger.csv", "numerical_quality_ledger.csv",
+                "cut_family_ledger.csv", "cut_lifecycle_ledger.csv",
+                "numerical_quality_ledger.csv",
                 "model_reuse_ledger.csv", "certificate_ledger.csv"};
             for (const std::string& name : empty_ledgers) {
                 std::ofstream(args.artifact_dir / name) << "build_only\n";
@@ -1046,6 +1151,13 @@ int main(int argc, char** argv) {
             outcome.exact_zero_gap_roundtrip &&
             outcome.feasibility_consistency_gate &&
             outcome.branch_priority_assignment_valid &&
+            (!outcome.tailored_cut_callback_active ||
+             (outcome.gurobi_cbcut_symbol_loaded &&
+              outcome.gurobi_precrush_roundtrip_valid &&
+              !outcome.tailored_cut_callback_disabled_after_failure &&
+              outcome.tailored_cut_relaxation_vector_failures == 0 &&
+              outcome.tailored_cut_submission_failures == 0 &&
+              outcome.tailored_cut_callback_failures == 0)) &&
             (!adaptive.active || adaptive.lifecycle_valid);
         const bool exact = engineering && (outcome.infeasible ||
             (outcome.native_exact_optimal && outcome.native_bound_available &&

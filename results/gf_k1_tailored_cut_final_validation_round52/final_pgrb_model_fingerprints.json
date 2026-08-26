@@ -1,0 +1,290 @@
+{
+  "algorithm_freeze_commit": "52ccf3e713e1c57484ac2ec9ba96baf3cb8c8026",
+  "algorithm_frozen_before_probes": true,
+  "created_before_official_bound_rows": true,
+  "executable_sha256": "d245c76f6397c757894610d8f5238cfeb971761ff7e05edf51058e451d810151",
+  "machine": "WIN-3NO58RVQ4VC",
+  "orchestration_commit": "c847782ce93e022a77405c71383f8a715c967d17",
+  "panels": {
+    "holdout": {
+      "round52_holdout_high_imbalance_3600_V12_M3_seed11341230": {
+        "accounting_tolerance_seconds": 1.0,
+        "canonical_model_sha256": "939bb8570b14546dc959325b13ca8deacaf9356749c8f2e6d8216a6fd2b5e4f7",
+        "gurobi_model_fingerprint": 1192476411,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "8cc41f45ccccd1c806be48e9c5de62753005c0d280eb50341a26529f2a1894c3",
+        "probe_process_cap_overrun_seconds": 0.004641999999999591,
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.004642,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__holdout__round52_holdout_high_imbalance_3600_V12_M3_seed11341230"
+      },
+      "round52_holdout_high_imbalance_3600_V20_M3_seed1798406134": {
+        "accounting_tolerance_seconds": 1.0,
+        "canonical_model_sha256": "87a5f5668a1d1581bee3a55610fcf9dbb3fae39b53c247568c01572b3d35e5ba",
+        "gurobi_model_fingerprint": -120049711,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "a796a403103d50cdb9b74b5efe20108255c374e6a675e2321027fb5a265c4f74",
+        "probe_process_cap_overrun_seconds": 0.005807299999999849,
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0058073,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__holdout__round52_holdout_high_imbalance_3600_V20_M3_seed1798406134"
+      },
+      "round52_holdout_high_imbalance_3600_V50_M3_seed1732937213": {
+        "accounting_tolerance_seconds": 1.0,
+        "canonical_model_sha256": "494a989dae61a59f00bc257985e3aaa6ab3b34b88c5cfe8695b20dba01a97451",
+        "gurobi_model_fingerprint": 1610389604,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "4920098d8ce5f7542298ff76aa81509352370587f1d33162ac86597b3e558a62",
+        "probe_process_cap_overrun_seconds": 0.013003499999999946,
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0130035,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__holdout__round52_holdout_high_imbalance_3600_V50_M3_seed1732937213"
+      },
+      "round52_holdout_moderate_3600_V12_M3_seed1791940719": {
+        "accounting_tolerance_seconds": 1.0,
+        "canonical_model_sha256": "6f03a64a18ff16c91f505f304c1d35e28d70f562c9272a2ea40ae9d08a013f0a",
+        "gurobi_model_fingerprint": -2111077717,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "f3cf28a944bf55d0463d7dfd5ba062c08d47015a516c8f9992643fae23ba25aa",
+        "probe_process_cap_overrun_seconds": 0.0,
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 0.3010113,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__holdout__round52_holdout_moderate_3600_V12_M3_seed1791940719"
+      },
+      "round52_holdout_moderate_3600_V20_M3_seed1375596646": {
+        "accounting_tolerance_seconds": 1.0,
+        "canonical_model_sha256": "1d0615a8d7af7563ae9993e566edc3abd79b01015febd951be6d1bc6285466dc",
+        "gurobi_model_fingerprint": -1781155559,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "26e818ede51aa16ce91609208c4552ea3021974c047d43abe33a46d732d1d24d",
+        "probe_process_cap_overrun_seconds": 0.006485299999999583,
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0064853,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__holdout__round52_holdout_moderate_3600_V20_M3_seed1375596646"
+      },
+      "round52_holdout_moderate_3600_V50_M3_seed210097992": {
+        "accounting_tolerance_seconds": 1.0,
+        "canonical_model_sha256": "5fe03803a2450c1403c48e40100e9a471d79912f1e5234d23fecb20312282a7f",
+        "gurobi_model_fingerprint": -432220781,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "b15a088619601868e2dab78cf25741c52bdf1817b90d4bf186525a0ff3086b3b",
+        "probe_process_cap_overrun_seconds": 0.20586269999999995,
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.2058627,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__holdout__round52_holdout_moderate_3600_V50_M3_seed210097992"
+      },
+      "round52_holdout_tight_T_2400_V12_M3_seed616900074": {
+        "accounting_tolerance_seconds": 1.0,
+        "canonical_model_sha256": "37a970a46bff162613f11130c99ef6bf1daf0e91c3a7ebc0ed312b452fddb71e",
+        "gurobi_model_fingerprint": -1170406728,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "f3d423d6a4ee06ed6b1ac23ffafff34eb819803cbba19afc3e20df45e2df9489",
+        "probe_process_cap_overrun_seconds": 0.005767200000000194,
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0057672,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__holdout__round52_holdout_tight_T_2400_V12_M3_seed616900074"
+      },
+      "round52_holdout_tight_T_2400_V20_M3_seed1511667738": {
+        "accounting_tolerance_seconds": 1.0,
+        "canonical_model_sha256": "5e7590be31ccd6d1cbe20fd1243b4d378c8e89524fe928286a88999cb04ad778",
+        "gurobi_model_fingerprint": -1255722053,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "31e0f217d1cb4fbbcce71df22256fc5c54b016ab8c1a053f940d3d2f04fafcfc",
+        "probe_process_cap_overrun_seconds": 0.0073334000000002675,
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0073334,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__holdout__round52_holdout_tight_T_2400_V20_M3_seed1511667738"
+      },
+      "round52_holdout_tight_T_2400_V50_M3_seed1725116517": {
+        "accounting_tolerance_seconds": 1.0,
+        "canonical_model_sha256": "6e489f255fd553cbbde3ca93f8a6cde6a8c943567d1a72d08a54a2b5e5efd95e",
+        "gurobi_model_fingerprint": 199047629,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "7149cb6cab0fd17fdc26ce9968b3a060590a0eb189471f6042675876b03f38fb",
+        "probe_process_cap_overrun_seconds": 0.0137122999999999,
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0137123,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__holdout__round52_holdout_tight_T_2400_V50_M3_seed1725116517"
+      },
+      "round52_holdout_tight_T_2550_V12_M3_seed291576968": {
+        "accounting_tolerance_seconds": 1.0,
+        "canonical_model_sha256": "d46a058dd67c5bb5ab07033c1930bbf17b543e96814efecba09bd50e1bd74ef0",
+        "gurobi_model_fingerprint": -993251284,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "4ff822bb9643823a372f8cbf9e0133596de39446999c97ab18bc6d91192d3d56",
+        "probe_process_cap_overrun_seconds": 0.006802699999999717,
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0068027,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__holdout__round52_holdout_tight_T_2550_V12_M3_seed291576968"
+      },
+      "round52_holdout_tight_T_2550_V20_M3_seed456147023": {
+        "accounting_tolerance_seconds": 1.0,
+        "canonical_model_sha256": "ba03e56d0e4a97aceb1863bfe1a67887bbebc2d7edc268d44e1adf24073c5560",
+        "gurobi_model_fingerprint": 1272353197,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "fb06b885fb1f2fdabda8dbf46db993fdcd5cd8146814e19591729b2eeca341eb",
+        "probe_process_cap_overrun_seconds": 0.006165400000000432,
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0061654,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__holdout__round52_holdout_tight_T_2550_V20_M3_seed456147023"
+      },
+      "round52_holdout_tight_T_2550_V50_M3_seed97079863": {
+        "accounting_tolerance_seconds": 1.0,
+        "canonical_model_sha256": "e8897668d7ebe340d94721fa8f3b24b800ed83044d3e105acf231d5b9da944e3",
+        "gurobi_model_fingerprint": 1755329174,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "a581cbaa00264e9774afa938301c4efb6acc8efefd5780096996c52539796380",
+        "probe_process_cap_overrun_seconds": 0.013180000000000192,
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.01318,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__holdout__round52_holdout_tight_T_2550_V50_M3_seed97079863"
+      }
+    },
+    "validation": {
+      "round52_validation_high_imbalance_3600_V12_M3_seed768780894": {
+        "canonical_model_sha256": "447f2dadb9904e8e142deddcfce4d6131f2d8c288f4548af97cdf513a29f1c9b",
+        "gurobi_model_fingerprint": -1560027429,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "196771723efe97c54f4f39934f63e9c85a1102212e7b0d1473358842ec655450",
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.005088,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__validation__round52_validation_high_imbalance_3600_V12_M3_seed768780894"
+      },
+      "round52_validation_high_imbalance_3600_V20_M3_seed881098664": {
+        "canonical_model_sha256": "61905b7018b29306dc432b89d8078dc5b6b9955480201a7b643e7af3bd98eaa2",
+        "gurobi_model_fingerprint": 498969206,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "35f0bd8803ce2d982a8bef4e95198e4956850a61f45cb80a74f61bcde3ce14f0",
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0076336,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__validation__round52_validation_high_imbalance_3600_V20_M3_seed881098664"
+      },
+      "round52_validation_high_imbalance_3600_V50_M3_seed67656343": {
+        "accounting_tolerance_seconds": 1.0,
+        "canonical_model_sha256": "bfaee1e696c87cffd32a23a2559a4cf79f05af88556de79d2a8dc75e4d215308",
+        "gurobi_model_fingerprint": -595874622,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "a0560a14d3e4cdbbaedd5e5536c9ce7eef80940e842b3a5af29ddc5a0262626d",
+        "probe_process_cap_overrun_seconds": 0.013053199999999876,
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0130532,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__validation__round52_validation_high_imbalance_3600_V50_M3_seed67656343"
+      },
+      "round52_validation_moderate_3600_V12_M3_seed299647349": {
+        "canonical_model_sha256": "199f4a62553be4c0f41fdfa89f4d06c586fcf5ee1460113f4f958f39c578f3e4",
+        "gurobi_model_fingerprint": 1250664199,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "1408ec2ece9d93e08a7e863517ba11f8105cdac283302b859b542e61e03bb140",
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 1.1854001,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__validation__round52_validation_moderate_3600_V12_M3_seed299647349"
+      },
+      "round52_validation_moderate_3600_V20_M3_seed1783533980": {
+        "canonical_model_sha256": "9e0c2764d143323c32c92b0d944511edf6e38dfcfbf157e16d696a63d96beef4",
+        "gurobi_model_fingerprint": -171646640,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "82dac1159567ab4544cc974eba075688dc53fae34f222bb5f14ff01caa00c334",
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0067752,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__validation__round52_validation_moderate_3600_V20_M3_seed1783533980"
+      },
+      "round52_validation_moderate_3600_V50_M3_seed664120090": {
+        "accounting_tolerance_seconds": 1.0,
+        "canonical_model_sha256": "18958d47dc76f78ecd1b2cd6e771ecedebb7e1e43766c6fcf63057b0eea92e20",
+        "gurobi_model_fingerprint": 944712990,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "6dac00a7bdd903f54ce257c11e294e667af8e1d5f8947c38335b7fe3306575a3",
+        "probe_process_cap_overrun_seconds": 0.014996700000000196,
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0149967,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__validation__round52_validation_moderate_3600_V50_M3_seed664120090"
+      },
+      "round52_validation_tight_T_2400_V12_M3_seed602591358": {
+        "canonical_model_sha256": "059045a43185b38546ba2e7b54138d704ef2456a25941ad2d8185f5186d28db8",
+        "gurobi_model_fingerprint": -1093600508,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "f62e35e1f822a595c469286a8b266c2d6eb02345fee240201efbf0096269a9e6",
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0053361,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__validation__round52_validation_tight_T_2400_V12_M3_seed602591358"
+      },
+      "round52_validation_tight_T_2400_V20_M3_seed1790316231": {
+        "canonical_model_sha256": "463fa426f9c08d38f01f0022f98a9542c01c4aac836d7d04349318180debe7b9",
+        "gurobi_model_fingerprint": 1468502580,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "86e4116398c54386139641f512f02190571aeb3bcd8f666420820dd0ec1555e7",
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0071255,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__validation__round52_validation_tight_T_2400_V20_M3_seed1790316231"
+      },
+      "round52_validation_tight_T_2400_V50_M3_seed1300319903": {
+        "canonical_model_sha256": "391b3667d9ac2fa0cb7bfc61293ffcbe963fca15b64f9a962a32cd37a3731263",
+        "gurobi_model_fingerprint": 2066739588,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "f7854be6105c695164c3f4f91c6e4c562adbec464dc216f2f4d2541277c4b7dc",
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0203923,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__validation__round52_validation_tight_T_2400_V50_M3_seed1300319903"
+      },
+      "round52_validation_tight_T_2550_V12_M3_seed1562337071": {
+        "canonical_model_sha256": "5aa14c8820929b547364a2cc24a5ae8feca3dded53b5c238c512d56a767eca7a",
+        "gurobi_model_fingerprint": 449600651,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "f85586299dc919a90ec17c89e2c63f9704ebb53230d1240d793d7be4bb113a93",
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0056239,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__validation__round52_validation_tight_T_2550_V12_M3_seed1562337071"
+      },
+      "round52_validation_tight_T_2550_V20_M3_seed978198294": {
+        "canonical_model_sha256": "cde21ad6621c78127a9d1b12b5db66bd454a4db18bb5e74024c13a029fedbaf5",
+        "gurobi_model_fingerprint": -1426256275,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "2ac94be84893cc9a66808a5dac915391c00357ac7ba94979ac3c3cae303ed4fc",
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.0095074,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__validation__round52_validation_tight_T_2550_V20_M3_seed978198294"
+      },
+      "round52_validation_tight_T_2550_V50_M3_seed657579881": {
+        "accounting_tolerance_seconds": 1.0,
+        "canonical_model_sha256": "5b7257de36a51645942817c7e3c58285c27133d0f560d0e8ecbe3dbf170c60da",
+        "gurobi_model_fingerprint": -114571486,
+        "gurobi_native_domain_audit_passed": true,
+        "instance_sha256": "f6d54dbf7ff56e3390c1c2aaf5984e35b8b14aae816df6194ff0c7e4613dda56",
+        "probe_process_cap_overrun_seconds": 0.30790770000000034,
+        "probe_process_cap_seconds": 5.0,
+        "probe_process_seconds": 5.3079077,
+        "probe_solver_cap_seconds": 0.001,
+        "raw_probe_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_model_fingerprint_preflight/fingerprint__validation__round52_validation_tight_T_2550_V50_M3_seed657579881"
+      }
+    }
+  },
+  "probe_accounting_tolerance_seconds": 1.0,
+  "probe_process_cap_seconds": 5.0,
+  "probe_solver_cap_seconds": 0.001,
+  "round_id": 52,
+  "schema": "round52-pgrb-model-fingerprints-v1",
+  "solver_version": "13.0.2rc1"
+}
