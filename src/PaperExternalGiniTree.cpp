@@ -10,6 +10,7 @@
 #include "GiniEnvelopeTailRepair.hpp"
 #include "GiniAdaptiveParametric.hpp"
 #include "ProcessPhaseLedger.hpp"
+#include "Round50IntervalMip.hpp"
 #include "Round48K1AMF.hpp"
 #include "Round49K1RC.hpp"
 #include "StaticSegmentedGini.hpp"
@@ -1076,6 +1077,10 @@ SolveResult solveRound41RootReference(
     result.round41_static_segmented_intervals = joinIntervals({interval});
 
     CanonicalCompactModelSpec spec;
+    spec.round51_subset_duration_big_m =
+        parseRound50IntervalMipPolicy(
+            options.external_gini_interval_mip_policy)
+            .subset_duration_big_m;
     spec.strengthened = true;
     spec.interval_restricted = true;
     spec.gamma_L = interval.lower;
@@ -1112,6 +1117,8 @@ SolveResult solveRound41RootReference(
         return result;
     }
     FixedIntervalMipRequest request;
+    request.interval_mip_policy =
+        options.external_gini_interval_mip_policy;
     request.solve_kind = FixedIntervalSolveKind::PaperLpRelaxation;
     request.leaf_id = "round41_root_reference_" +
         options.round41_root_reference_interval;
@@ -1355,6 +1362,10 @@ SolveResult solveStaticSegmentedGini(
     }
 
     CanonicalCompactModelSpec spec;
+    spec.round51_subset_duration_big_m =
+        parseRound50IntervalMipPolicy(
+            options.external_gini_interval_mip_policy)
+            .subset_duration_big_m;
     spec.strengthened = true;
     spec.interval_restricted = true;
     spec.gamma_L = block_union.lower;
@@ -1419,6 +1430,8 @@ SolveResult solveStaticSegmentedGini(
         return result;
     }
     FixedIntervalMipRequest request;
+    request.interval_mip_policy =
+        options.external_gini_interval_mip_policy;
     request.solve_kind = solve_mode == "root-lp"
         ? FixedIntervalSolveKind::PaperLpRelaxation
         : FixedIntervalSolveKind::PaperTerminalMip;
@@ -1717,6 +1730,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     result.certificate_scope = "original_global_gini_external_tree";
     result.external_gini_tree_attempted = true;
     result.external_gini_tree_backend = options.external_gini_backend;
+    result.external_gini_tree_interval_mip_policy =
+        options.external_gini_interval_mip_policy;
     result.external_gini_tree_lifecycle = round42_sibling_coalescing
         ? "round42-c6-terminal-sibling-block"
         : (round48_counterfactual_active
@@ -3123,6 +3138,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             return false;
         }
         CanonicalCompactModelSpec spec;
+        spec.round51_subset_duration_big_m =
+            parseRound50IntervalMipPolicy(
+                options.external_gini_interval_mip_policy)
+                .subset_duration_big_m;
         spec.strengthened = true;
         spec.interval_restricted = true;
         spec.gamma_L = leaf.gamma_L;
@@ -3184,6 +3203,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             return false;
         }
         FixedIntervalMipRequest request;
+        request.interval_mip_policy =
+            options.external_gini_interval_mip_policy;
         request.solve_kind = FixedIntervalSolveKind::PaperLpRelaxation;
         request.leaf_id = leaf.id;
         request.gamma_L = leaf.gamma_L;
@@ -3291,6 +3312,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             return false;
         }
         FixedIntervalMipRequest request;
+        request.interval_mip_policy =
+            options.external_gini_interval_mip_policy;
         request.solve_kind = FixedIntervalSolveKind::PaperLpRelaxation;
         request.leaf_id = leaf.id;
         request.gamma_L = leaf.gamma_L;
@@ -3424,6 +3447,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             ++result.external_gini_tree_child_bound_target_phase_count;
         }
         FixedIntervalMipRequest request;
+        request.interval_mip_policy =
+            options.external_gini_interval_mip_policy;
         request.solve_kind =
             FixedIntervalSolveKind::PaperPartialBoundTargetMip;
         request.leaf_id = bounded.id;
@@ -5781,7 +5806,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     break;
                 }
                 FixedIntervalMipRequest request;
-                request.solve_kind = FixedIntervalSolveKind::PaperLpRelaxation;
+                request.interval_mip_policy =
+                    options.external_gini_interval_mip_policy;
+                request.solve_kind =
+                    FixedIntervalSolveKind::PaperLpRelaxation;
                 request.leaf_id = child.id;
                 request.gamma_L = child.gamma_L;
                 request.gamma_U = child.gamma_U;
@@ -6710,6 +6738,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 selected_state.c5_native_target =
                     c5_split.parent_native_bound_target;
                 FixedIntervalMipRequest request;
+                request.interval_mip_policy =
+                    options.external_gini_interval_mip_policy;
                 request.solve_kind =
                     FixedIntervalSolveKind::PaperPartialBoundTargetMip;
                 request.leaf_id = bounded.id;
@@ -7074,6 +7104,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                         "st-k2-p-core", false, false,
                         scheduler.certificateTolerance());
                 CanonicalCompactModelSpec block_model_spec;
+                block_model_spec.round51_subset_duration_big_m =
+                    parseRound50IntervalMipPolicy(
+                        options.external_gini_interval_mip_policy)
+                        .subset_duration_big_m;
                 block_model_spec.strengthened = true;
                 block_model_spec.interval_restricted = true;
                 block_model_spec.gamma_L = union_interval.lower;
@@ -7122,6 +7156,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     break;
                 }
                 FixedIntervalMipRequest block_request;
+                block_request.interval_mip_policy =
+                    options.external_gini_interval_mip_policy;
                 block_request.solve_kind =
                     FixedIntervalSolveKind::PaperPartialBoundTargetMip;
                 block_request.leaf_id = block_id;
@@ -7365,6 +7401,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                             "st-k2-p-core", common_row_factoring, false,
                             scheduler.certificateTolerance());
                     CanonicalCompactModelSpec block_model_spec;
+                    block_model_spec.round51_subset_duration_big_m =
+                        parseRound50IntervalMipPolicy(
+                            options.external_gini_interval_mip_policy)
+                            .subset_duration_big_m;
                     block_model_spec.strengthened = true;
                     block_model_spec.interval_restricted = true;
                     block_model_spec.gamma_L = union_interval.lower;
@@ -7434,6 +7474,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                             break;
                         }
                         FixedIntervalMipRequest block_request;
+                        block_request.interval_mip_policy =
+                            options.external_gini_interval_mip_policy;
                         block_request.solve_kind =
                             FixedIntervalSolveKind::PaperTerminalMip;
                         block_request.leaf_id = block_id;
@@ -7708,6 +7750,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             ++result.external_gini_tree_exact_closure_launch_count;
         }
         FixedIntervalMipRequest request;
+        request.interval_mip_policy =
+            options.external_gini_interval_mip_policy;
         request.solve_kind = FixedIntervalSolveKind::PaperTerminalMip;
         request.leaf_id = bounded.id;
         request.gamma_L = bounded.gamma_L;

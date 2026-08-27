@@ -116,6 +116,9 @@ public:
     std::vector<Round52CutCandidate> process(
         std::vector<Round52CutCandidate> candidates);
     void recordSubmission(const Round52CutCandidate& candidate, bool added);
+    // Round 53 C4 retains selected signatures for duplicate/dominance
+    // accounting without recording or attempting a solver cut submission.
+    void recordDryRunSelection(const Round52CutCandidate& candidate);
     bool globalPoolContains(const std::string& canonical_signature) const;
     void recordCallback(bool root);
     void recordCallbackFailure();

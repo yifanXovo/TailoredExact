@@ -1499,6 +1499,9 @@ std::string resultToJson(const SolveResult& input) {
         << (result.external_gini_tree_available ? "true" : "false") << ",\n";
     out << "  \"external_gini_tree_backend\": \""
         << jsonEscape(result.external_gini_tree_backend) << "\",\n";
+    out << "  \"external_gini_tree_interval_mip_policy\": \""
+        << jsonEscape(result.external_gini_tree_interval_mip_policy)
+        << "\",\n";
     out << "  \"external_gini_tree_lifecycle\": \""
         << jsonEscape(result.external_gini_tree_lifecycle) << "\",\n";
     out << "  \"external_gini_tree_scheduling\": \""

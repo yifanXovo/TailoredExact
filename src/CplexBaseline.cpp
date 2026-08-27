@@ -73,6 +73,8 @@ struct StaticSegmentedWriteStats {
     long long exact_duplicate_rows_omitted = 0;
     long long round50_symmetry_rows = 0;
     long long round51_subset_duration_rows = 0;
+    long long round51_subset_duration_first_row_id = -1;
+    long long round51_subset_duration_last_row_id = -1;
     double round51_subset_duration_min_m =
         std::numeric_limits<double>::infinity();
     double round51_subset_duration_max_m = 0.0;
@@ -1769,8 +1771,13 @@ void writeCompactLp(const Instance& instance,
                     ? row.rhs
                     : instance.total_time_limit - tsp[mask] +
                         big * static_cast<double>(count);
-                writeConstraint(out, cid, e, "<=", rhs);
                 if (static_stats) {
+                    if (static_stats->round51_subset_duration_first_row_id <
+                        0) {
+                        static_stats->round51_subset_duration_first_row_id =
+                            cid;
+                    }
+                    static_stats->round51_subset_duration_last_row_id = cid;
                     ++static_stats->round51_subset_duration_rows;
                     static_stats->round51_subset_duration_min_m = std::min(
                         static_stats->round51_subset_duration_min_m,
@@ -1782,6 +1789,7 @@ void writeCompactLp(const Instance& instance,
                         static_stats->round51_historical_m_may_be_unsafe ||
                         analytic_big > 100000.0;
                 }
+                writeConstraint(out, cid, e, "<=", rhs);
             }
         }
     }
@@ -4169,6 +4177,10 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
         artifact.round50_symmetry_rows = static_stats.round50_symmetry_rows;
         artifact.round51_subset_duration_rows =
             static_stats.round51_subset_duration_rows;
+        artifact.round51_subset_duration_first_row_id =
+            static_stats.round51_subset_duration_first_row_id;
+        artifact.round51_subset_duration_last_row_id =
+            static_stats.round51_subset_duration_last_row_id;
         artifact.round51_subset_duration_min_m =
             static_stats.round51_subset_duration_rows > 0
                 ? static_stats.round51_subset_duration_min_m : 0.0;

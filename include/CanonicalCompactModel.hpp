@@ -79,6 +79,8 @@ struct CanonicalCompactModelArtifact {
     long long round50_symmetry_rows = 0;
     std::string round51_subset_duration_big_m = "historical-100000";
     long long round51_subset_duration_rows = 0;
+    long long round51_subset_duration_first_row_id = -1;
+    long long round51_subset_duration_last_row_id = -1;
     double round51_subset_duration_min_m = 0.0;
     double round51_subset_duration_max_m = 0.0;
     bool round51_historical_m_may_be_unsafe = false;

@@ -11,6 +11,7 @@
 #include "ProcessPhaseLedger.hpp"
 #include "MipStartMapping.hpp"
 #include "Round50IntervalMip.hpp"
+#include "Round53CallbackIsolation.hpp"
 #include "Round52GurobiCutAdapter.hpp"
 #include "Round52TailoredCuts.hpp"
 
@@ -284,6 +285,10 @@ struct ProgressCallbackState {
     double bound_target_tolerance = 1e-7;
     bool bound_target_reached = false;
     bool bound_target_termination_requested = false;
+    bool round53_mipnode_path_active = false;
+    bool round53_relaxation_vector_active = false;
+    bool round53_separator_active = false;
+    bool round53_cut_submission_active = false;
     bool tailored_cut_active = false;
     bool tailored_cut_disabled_after_failure = false;
     const Instance* cut_instance = nullptr;
@@ -302,6 +307,11 @@ struct ProgressCallbackState {
     long long cut_nonoptimal_mipnode_callbacks = 0;
     long long cut_relaxation_vector_failures = 0;
     long long cut_adapter_failures = 0;
+    long long round53_mipnode_calls = 0;
+    long long round53_mipnode_status_reads = 0;
+    long long round53_relaxation_vector_reads = 0;
+    long long round53_separator_calls = 0;
+    long long round53_cut_submission_calls = 0;
     double cut_callback_overhead_seconds = 0.0;
 };
 
@@ -313,12 +323,14 @@ int __stdcall progressAndBoundTargetCallback(
     GRBmodel* model, void* cbdata, int where, void* usrdata) {
     auto* state = static_cast<ProgressCallbackState*>(usrdata);
     if (!state || !state->api) return 0;
-    if (where == GRB_CB_MIPNODE && state->tailored_cut_active &&
+    if (where == GRB_CB_MIPNODE && state->round53_mipnode_path_active &&
         !state->tailored_cut_disabled_after_failure) {
         const auto callback_started = Clock::now();
+        ++state->round53_mipnode_calls;
         try {
             int node_status = 0;
             double node_count = 0.0;
+            ++state->round53_mipnode_status_reads;
             const int status_rc = state->api->cbget(
                 cbdata, where, GRB_CB_MIPNODE_STATUS, &node_status);
             const int node_rc = state->api->cbget(
@@ -329,7 +341,9 @@ int __stdcall progressAndBoundTargetCallback(
                 ++state->cut_relaxation_vector_failures;
             } else {
                 const bool root_node = node_count < 0.5;
-                if (round52SeparationPermitted(
+                if (state->round53_separator_active &&
+                    state->round53_relaxation_vector_active &&
+                    round52SeparationPermitted(
                         state->cut_scope, root_node, true)) {
                     state->cut_manager->recordCallback(root_node);
                     if (state->cut_relaxation_values.size() !=
@@ -337,6 +351,7 @@ int __stdcall progressAndBoundTargetCallback(
                         state->cut_relaxation_values.resize(
                             state->cut_variable_names.size());
                     }
+                    ++state->round53_relaxation_vector_reads;
                     const int relaxation_rc = state->api->cbget(
                         cbdata, where, GRB_CB_MIPNODE_REL,
                         state->cut_relaxation_values.data());
@@ -371,26 +386,36 @@ int __stdcall progressAndBoundTargetCallback(
                             input.effective_upper_bounds.emplace(
                                 name, state->cut_upper_bounds[index]);
                         }
+                        ++state->round53_separator_calls;
                         std::vector<Round52CutCandidate> selected =
                             state->cut_manager->process(
                                 state->cut_separator->separate(input));
-                        Round52GurobiCutAdapter adapter(
-                            state->cut_variable_indices,
-                            [&](int length, const int* indices,
-                                const double* values, char sense,
-                                double rhs) {
-                                return state->api->cbcut(
-                                    cbdata, length,
-                                    const_cast<int*>(indices),
-                                    const_cast<double*>(values), sense, rhs);
-                            });
-                        for (const auto& candidate : selected) {
-                            const bool added = adapter.submit(candidate);
-                            state->cut_manager->recordSubmission(
-                                candidate, added);
+                        if (state->round53_cut_submission_active) {
+                            Round52GurobiCutAdapter adapter(
+                                state->cut_variable_indices,
+                                [&](int length, const int* indices,
+                                    const double* values, char sense,
+                                    double rhs) {
+                                    return state->api->cbcut(
+                                        cbdata, length,
+                                        const_cast<int*>(indices),
+                                        const_cast<double*>(values), sense,
+                                        rhs);
+                                });
+                            for (const auto& candidate : selected) {
+                                ++state->round53_cut_submission_calls;
+                                const bool added = adapter.submit(candidate);
+                                state->cut_manager->recordSubmission(
+                                    candidate, added);
+                            }
+                            state->cut_adapter_failures +=
+                                adapter.telemetry().failures;
+                        } else {
+                            for (const auto& candidate : selected) {
+                                state->cut_manager->recordDryRunSelection(
+                                    candidate);
+                            }
                         }
-                        state->cut_adapter_failures +=
-                            adapter.telemetry().failures;
                     }
                 }
             }
@@ -1335,16 +1360,20 @@ public:
         }
 
         out.tailored_cut_policy = round50_policy.tailored_cut_policy;
+        out.round53_callback_mode = round50_policy.round53_callback_mode;
         out.gurobi_cbcut_symbol_loaded = api_.cbcut != nullptr;
         out.gurobi_cblazy_symbol_loaded = api_.cblazy != nullptr;
+        const bool round53_precrush_active = out.terminal_mip &&
+            round53CallbackPreCrushEnabled(round50_policy);
+        const bool round53_mipnode_active = out.terminal_mip &&
+            round53CallbackMipNodeEnabled(round50_policy);
         const bool tailored_cut_active = out.terminal_mip &&
-            (round50_policy.tailored_cut_policy ==
-                 "sd-r3-root-blockmax" ||
-             round50_policy.tailored_cut_policy ==
-                 "sd-r3-tree-blockmax");
+            round53CallbackSeparatorEnabled(round50_policy);
+        const bool cut_submission_active = out.terminal_mip &&
+            round53CallbackSubmissionEnabled(round50_policy);
         Round52SupportDurationSeparator cut_separator;
         Round52CutManager cut_manager;
-        if (tailored_cut_active) {
+        if (round53_precrush_active) {
             out.gurobi_precrush_requested =
                 round52RequiredGurobiPreCrush();
             out.gurobi_precrush_set_return_code = api_.setintparam(
@@ -1359,11 +1388,14 @@ public:
                 out.gurobi_precrush_effective ==
                     out.gurobi_precrush_requested;
             if (!out.gurobi_precrush_roundtrip_valid ||
-                !out.gurobi_cbcut_symbol_loaded) {
+                (cut_submission_active &&
+                 !out.gurobi_cbcut_symbol_loaded)) {
                 out.failure_reason =
-                    "round52_gurobi_user_cut_capability_invalid";
+                    "round53_gurobi_callback_capability_invalid";
                 return out;
             }
+        }
+        if (tailored_cut_active) {
             cut_manager.beginModel(
                 request.canonical_model_fingerprint + "|" +
                 request.leaf_id);
@@ -1377,6 +1409,12 @@ public:
         callback.bound_target = request.native_bound_target;
         callback.bound_target_tolerance =
             std::max(0.0, request.native_bound_target_tolerance);
+        callback.round53_mipnode_path_active = round53_mipnode_active;
+        callback.round53_relaxation_vector_active =
+            out.terminal_mip &&
+            round53CallbackRelaxationEnabled(round50_policy);
+        callback.round53_separator_active = tailored_cut_active;
+        callback.round53_cut_submission_active = cut_submission_active;
         callback.tailored_cut_active = tailored_cut_active;
         if (tailored_cut_active) {
             callback.cut_instance = &instance_;
@@ -1428,6 +1466,16 @@ public:
             return out;
         }
         out.optimize_return_code = api_.optimize(model);
+        out.round53_mipnode_calls = callback.round53_mipnode_calls;
+        out.round53_mipnode_status_reads =
+            callback.round53_mipnode_status_reads;
+        out.round53_relaxation_vector_reads =
+            callback.round53_relaxation_vector_reads;
+        out.round53_separator_calls = callback.round53_separator_calls;
+        out.round53_cut_submission_calls =
+            callback.round53_cut_submission_calls;
+        out.round53_callback_overhead_seconds =
+            callback.cut_callback_overhead_seconds;
         if (tailored_cut_active) {
             const Round52CutManagerTelemetry& cut =
                 cut_manager.telemetry();
@@ -1604,6 +1652,72 @@ public:
                     out.model_fingerprint_matches_request;
                 if (!out.lp_primal_dual_evidence_available) {
                     out.lp_primal_dual_variable_evidence.clear();
+                }
+            }
+            if (request.capture_lp_primal_dual_evidence) {
+                int constraint_count = 0;
+                const bool count_ok = getInt(
+                    GRB_INT_ATTR_NUMCONSTRS, constraint_count) &&
+                    constraint_count >= 0;
+                if (count_ok) {
+                    out.lp_primal_dual_constraint_evidence.resize(
+                        static_cast<std::size_t>(constraint_count));
+                    std::vector<double> slacks(
+                        static_cast<std::size_t>(constraint_count));
+                    std::vector<double> duals(
+                        static_cast<std::size_t>(constraint_count));
+                    std::vector<int> basis(
+                        static_cast<std::size_t>(constraint_count));
+                    out.lp_constraint_slacks_available =
+                        constraint_count == 0 ||
+                        api_.getdblattrarray(
+                            model, GRB_DBL_ATTR_SLACK, 0,
+                            constraint_count, slacks.data()) == 0;
+                    out.lp_constraint_duals_available =
+                        constraint_count == 0 ||
+                        api_.getdblattrarray(
+                            model, GRB_DBL_ATTR_PI, 0,
+                            constraint_count, duals.data()) == 0;
+                    out.lp_constraint_basis_status_available =
+                        constraint_count == 0 ||
+                        api_.getintattrarray(
+                            model, GRB_INT_ATTR_CBASIS, 0,
+                            constraint_count, basis.data()) == 0;
+                    bool constraint_metadata_ok =
+                        out.lp_constraint_slacks_available &&
+                        out.lp_constraint_duals_available &&
+                        out.lp_constraint_basis_status_available;
+                    for (int index = 0;
+                         constraint_metadata_ok &&
+                         index < constraint_count; ++index) {
+                        char* name = nullptr;
+                        constraint_metadata_ok =
+                            api_.getstrattrelement(
+                                model, GRB_STR_ATTR_CONSTRNAME,
+                                index, &name) == 0 && name && *name &&
+                            std::isfinite(slacks[
+                                static_cast<std::size_t>(index)]) &&
+                            std::isfinite(duals[
+                                static_cast<std::size_t>(index)]);
+                        if (constraint_metadata_ok) {
+                            auto& evidence =
+                                out.lp_primal_dual_constraint_evidence[
+                                    static_cast<std::size_t>(index)];
+                            evidence.name = name;
+                            evidence.slack = slacks[
+                                static_cast<std::size_t>(index)];
+                            evidence.dual_multiplier = duals[
+                                static_cast<std::size_t>(index)];
+                            evidence.constraint_basis_status = basis[
+                                static_cast<std::size_t>(index)];
+                        }
+                    }
+                    out.lp_constraint_evidence_available =
+                        constraint_metadata_ok &&
+                        out.model_fingerprint_matches_request;
+                    if (!out.lp_constraint_evidence_available) {
+                        out.lp_primal_dual_constraint_evidence.clear();
+                    }
                 }
             }
             int diagnostic_variables = 0;

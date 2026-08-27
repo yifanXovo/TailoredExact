@@ -35,6 +35,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Round48K1AMF.cpp
   src/Round49K1RC.cpp
   src/Round50IntervalMip.cpp
+  src/Round53CallbackIsolation.cpp
   src/Round51IntervalMip.cpp
   src/Round52TailoredCuts.cpp
   src/Round52GurobiCutAdapter.cpp
@@ -245,3 +246,8 @@ add_executable(Round52TailoredCutTests
   tests/round52_tailored_cut_tests.cpp)
 target_link_libraries(Round52TailoredCutTests PRIVATE exact_ebrp_core)
 add_test(NAME Round52TailoredCutTests COMMAND Round52TailoredCutTests)
+
+add_executable(Round53F0AndCallbackTests
+  tests/round53_f0_callback_tests.cpp)
+target_link_libraries(Round53F0AndCallbackTests PRIVATE exact_ebrp_core)
+add_test(NAME Round53F0AndCallbackTests COMMAND Round53F0AndCallbackTests)

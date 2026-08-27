@@ -92,6 +92,9 @@ struct SolveOptions {
     std::string round24_executable_sha256;
     std::string round24_manifest_executable_sha256;
     std::string external_gini_backend = "cplex";
+    // Uniform inner fixed-interval formulation policy.  Default v0 preserves
+    // all historical controllers; Round 53 may explicitly select F0-CLEAN.
+    std::string external_gini_interval_mip_policy = "interval-mip-v0";
     std::string external_gini_lifecycle = "retained-per-leaf";
     std::string external_gini_scheduling = "legacy-quanta";
     bool external_gini_warm_start = false;

@@ -395,6 +395,12 @@ void Round52CutManager::recordSubmission(
     telemetry_.global_pool_size = global_pool_.size();
 }
 
+void Round52CutManager::recordDryRunSelection(
+    const Round52CutCandidate& candidate) {
+    global_pool_[candidate.canonical_signature] = candidate;
+    telemetry_.global_pool_size = global_pool_.size();
+}
+
 bool Round52CutManager::globalPoolContains(
     const std::string& canonical_signature) const {
     return global_pool_.find(canonical_signature) != global_pool_.end();
