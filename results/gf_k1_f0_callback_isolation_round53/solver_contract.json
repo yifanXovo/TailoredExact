@@ -1,0 +1,27 @@
+{
+  "schema": "round53-solver-contract-v1",
+  "gurobi": {
+    "Presolve": "Auto",
+    "Seed": 0,
+    "Threads": 1,
+    "MIPGap": 0.0,
+    "MIPGapAbs": 0.0
+  },
+  "objective": "complete original minimization objective",
+  "incumbent_cutoff_contract": "same verified incumbent and cutoff",
+  "certificate_tolerance": 1e-07,
+  "ordinary_maximum_total_process_seconds": 3600,
+  "sealed_tight_extension_maximum_total_process_seconds": 7200,
+  "cap_includes": [
+    "construction",
+    "LP diagnostics",
+    "callback",
+    "separator",
+    "solver",
+    "verification",
+    "serialization"
+  ],
+  "known_optimum_injection": false,
+  "archive_winner_injection": false,
+  "one_official_executable_for_all_entered_comparators": true
+}
