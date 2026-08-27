@@ -1,0 +1,21 @@
+{
+  "a1_candidate": "a1-root-sparse-2x2",
+  "all_state_model_identity": "23/23 byte-identical to m1-tight-big-m-v0",
+  "build_directory": "build/round51-m1",
+  "build_type": "Release",
+  "candidate_definition_frozen_before_smoke": true,
+  "cmake": "3.30.5-msvc23",
+  "compiler": "g++ 14.2.0 MSYS2 UCRT64",
+  "correctness_smoke_audit": "pass",
+  "executable": "build/round51-m1/Round51IntervalMipExperiment.exe",
+  "executable_sha256": "abfcf957b30f36d8688635306285934a4d8420e09b95fbcd7367161545a305fa",
+  "fresh_model_lifecycle": "pass: one read and optimize per root/probe/terminal model",
+  "gurobi": "13.0.2 build v13.0.2rc1",
+  "gurobi_root": "D:/gurobi1302/win64",
+  "round50_interval_mip_tests": "pass",
+  "round51_tight_big_m_and_a1_tests": "pass",
+  "schema": "round51-a1-build-and-correctness-record-v1",
+  "source_commit": "00b0501b0a473666f34ca9b8e4d4bf41bfec0324",
+  "source_commit_precedes_official_core_results": true,
+  "total_overhead_accounting": "pass"
+}

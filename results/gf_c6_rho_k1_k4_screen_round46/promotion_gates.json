@@ -1,0 +1,23 @@
+{
+  "candidate_requirements": [
+    "zero_false_certificates",
+    "exact_complete_coverage",
+    "major_fragmentation_regression_repaired_or_materially_reduced",
+    "no_new_severe_pgrb_regression",
+    "strong_c6_win_advantage_substantially_retained",
+    "v20_aggregate_gi_not_materially_worse_than_original_c6",
+    "consistent_v20_development_and_confirmation",
+    "no_lp_mechanism_beyond_original_c6"
+  ],
+  "paper_preset_replacement_automatic": false,
+  "schema": "round46-promotion-gates-v1",
+  "screening_not_validation": true,
+  "severe_regression": {
+    "all_ratio_conditions_and_one_delta_condition": true,
+    "minimum_time_delta_seconds": 60,
+    "minimum_work_delta": 100,
+    "time_ratio_over_pgrb": 1.5,
+    "work_ratio_over_pgrb": 1.5
+  },
+  "startup_pathology_cannot_alone_reject": true
+}

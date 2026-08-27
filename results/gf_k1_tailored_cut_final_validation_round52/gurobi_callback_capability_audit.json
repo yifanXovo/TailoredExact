@@ -1,0 +1,59 @@
+{
+  "schema": "round52-gurobi-callback-capability-audit-v1",
+  "classification": "capability_passed",
+  "gurobi_version": "13.0.2rc1",
+  "gurobi_dll_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "required_symbols": {
+    "GRBcbcut_loaded": true,
+    "GRBcblazy_loaded_for_audit_only": true,
+    "lazy_constraint_used": false
+  },
+  "precrush": {
+    "requested": 1,
+    "effective": 1,
+    "roundtrip_valid": true
+  },
+  "forced_native_submission_test": {
+    "artifact": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/gurobi_live_cbcut_test.json",
+    "artifact_sha256": "8830228bca4d38e1d1a0465e5a0c94a06005809e6825efc9ff260cbe421cddf1",
+    "fixture": "maximize x+y subject to x+y<=1.5 with binary x,y",
+    "globally_valid_user_cut": "x+y<=1",
+    "optimal_mipnode_callback_calls": 1,
+    "fractional_relaxation_sum": 1.5,
+    "GRBcbcut_submissions": 1,
+    "GRBcbcut_successes": 1,
+    "GRBcbcut_return_code": 0,
+    "native_optimum_after_cut": 1.0,
+    "passed": true
+  },
+  "canonical_backend_live_tests": [
+    {
+      "state_id": "D2",
+      "result_sha256": "d38a8311e16084a905b6f41d68cf4d8e1b113a1beb877bd531c4ccafe7bd444c",
+      "optimal_root_callback_rounds": 30,
+      "candidates_generated": 14850,
+      "violated": 0,
+      "added": 0,
+      "callback_failures": 0,
+      "relaxation_vector_failures": 0,
+      "engineering_gate": true
+    },
+    {
+      "state_id": "D13",
+      "result_sha256": "40620ac4c1be733c8d3c245954a75316e2972405a56ee54ca0c51a71f803178d",
+      "optimal_root_callback_rounds": 42,
+      "candidates_generated": 167580,
+      "violated": 0,
+      "added": 0,
+      "callback_failures": 0,
+      "relaxation_vector_failures": 0,
+      "engineering_gate": true
+    }
+  ],
+  "canonical_zero_violation_interpretation": "The canonical live runs prove callback lifecycle and relaxation-vector access but do not claim a native submission. The separate forced valid-MIP fixture proves an actual successful GRBcbcut call.",
+  "exception_boundary_tested": true,
+  "mapping_failure_tested": true,
+  "local_cut_rejection_tested": true,
+  "default_policy_activation": "off",
+  "core_feasibility_rows_removed": 0
+}
