@@ -10,6 +10,6 @@
 - Official rows: 28 development, 18 confirmation, 12 long, 24 callback-300, 12 callback-1200, {'300': 12, '1800': 12, '3600': 2, 'sentinel': 4}, 36 sealed-3600, 0 sealed-7200
 - False certificates / correctness failures: 0 / 0
 - Missing entered rows: none
-- Draft PR: pending
+- Draft PR: https://github.com/yifanXovo/TailoredExact/pull/110
 
 Raw native artifacts remain under `local_raw`; committed compact evidence is bound by `final_evidence_inventory.csv`.

@@ -1,7 +1,7 @@
 # Round 53 evidence storage audit
 
 - Committed compact-root files inventoried: 73
-- Committed compact-root bytes inventoried: 32279562
+- Committed compact-root bytes inventoried: 32279650
 - Local-only groups inventoried: 16
 - Local-only files inventoried: 5546
 - Local-only bytes inventoried: 817523661
