@@ -1,0 +1,25 @@
+{
+  "cutoff_reconstruction": {
+    "archive_scan_forbidden": true,
+    "heuristic": "HGA-TGBC full verified incumbent",
+    "known_optimum_forbidden": true,
+    "no_improve_generations": 2000,
+    "seed": 20260626,
+    "stop": "generation-stagnation"
+  },
+  "identity_fields": [
+    "input_sha256",
+    "interval",
+    "verified_cutoff",
+    "complete_objective",
+    "canonical_model_fingerprint",
+    "formulation_profile",
+    "row_bound_signature",
+    "original_variable_mapping"
+  ],
+  "rebuild": "deterministically from original input, frozen interval, and independently verified cutoff; copied LP files are not identity",
+  "resolution_gate": "all pending cutoffs, fingerprints, row/bound signatures, and mappings must be frozen in fixed_interval_state_reconstruction_audit.csv before any Stage 1 result",
+  "schema": "round50-fixed-interval-state-protocol-v1",
+  "selection_rule": "largest complete terminal/native MIP Work; tie by interval id",
+  "substitution": "forbidden after candidate results; only predeclared recovery states may be used"
+}

@@ -1,0 +1,213 @@
+{
+  "candidate_results_observed": false,
+  "development": [
+    {
+      "classification": "startup_dominated",
+      "excluded_from_severe_tail": true,
+      "frozen_source": "results/gf_regression_adaptive_round40/runs/k1__round39_small_easy_V10_M1_Q30_slot04_seed1099392856__c6_hga_full_k4/result.json",
+      "historical_exact_phase_seconds": 0.012743500000000019,
+      "historical_exact_phase_work": 0.0,
+      "historical_startup_seconds": 2.4529709,
+      "instance_id": "round39_small_easy_V10_M1_Q30_slot04_seed1099392856",
+      "rule": "startup_dominated iff historical C6 exact-phase elapsed is no greater than startup elapsed or exact-phase Work <= 1e-7; all other rows are material_proof",
+      "sha256": "14f4cca30de0990091cebdfd38bd9bb29b0998737fbfa8a2db8e096847ff6097"
+    },
+    {
+      "classification": "material_proof",
+      "excluded_from_severe_tail": false,
+      "frozen_source": "results/gf_regression_adaptive_round40/runs/k1__round39_small_easy_V12_M3_Q30_slot08_seed1167625600__c6_hga_full_k4/result.json",
+      "historical_exact_phase_seconds": 25.0301458,
+      "historical_exact_phase_work": 47.3035471806965,
+      "historical_startup_seconds": 5.0919323,
+      "instance_id": "round39_small_easy_V12_M3_Q30_slot08_seed1167625600",
+      "rule": "startup_dominated iff historical C6 exact-phase elapsed is no greater than startup elapsed or exact-phase Work <= 1e-7; all other rows are material_proof",
+      "sha256": "587737b9d000c1712220232a0fe957073f1f03ac649a63a4775abd9166603acd"
+    },
+    {
+      "classification": "material_proof",
+      "excluded_from_severe_tail": false,
+      "frozen_source": "results/gf_regression_adaptive_round40/runs/k1__round39_small_medium_V12_M3_Q30_slot08_seed1343324363__c6_hga_full_k4/result.json",
+      "historical_exact_phase_seconds": 1909.2935825,
+      "historical_exact_phase_work": 4373.077783569157,
+      "historical_startup_seconds": 2.172606,
+      "instance_id": "round39_small_medium_V12_M3_Q30_slot08_seed1343324363",
+      "rule": "startup_dominated iff historical C6 exact-phase elapsed is no greater than startup elapsed or exact-phase Work <= 1e-7; all other rows are material_proof",
+      "sha256": "29e0ca2c95ec2e061aa1cc524aaf6a41bf6c4a34355dca86df6966aa8a29b6b4"
+    },
+    {
+      "classification": "material_proof",
+      "excluded_from_severe_tail": false,
+      "frozen_source": "results/gf_regression_adaptive_round40/runs/k1__round39_small_medium_V8_M3_Q30_slot03_seed1177285734__c6_hga_full_k4/result.json",
+      "historical_exact_phase_seconds": 2.7465991,
+      "historical_exact_phase_work": 3.407074912530055,
+      "historical_startup_seconds": 1.1220037,
+      "instance_id": "round39_small_medium_V8_M3_Q30_slot03_seed1177285734",
+      "rule": "startup_dominated iff historical C6 exact-phase elapsed is no greater than startup elapsed or exact-phase Work <= 1e-7; all other rows are material_proof",
+      "sha256": "fcbe294480dcacf0303cc2dc12c948335d8d8c8f4f875de2feb58ae21ed83bbb"
+    },
+    {
+      "classification": "material_proof",
+      "excluded_from_severe_tail": false,
+      "frozen_source": "results/gf_regression_adaptive_round40/runs/k1__round39_small_medium_V10_M2_Q20_slot05_seed968549317__c6_hga_full_k4/result.json",
+      "historical_exact_phase_seconds": 64.1182055,
+      "historical_exact_phase_work": 109.91515934198168,
+      "historical_startup_seconds": 1.2626253,
+      "instance_id": "round39_small_medium_V10_M2_Q20_slot05_seed968549317",
+      "rule": "startup_dominated iff historical C6 exact-phase elapsed is no greater than startup elapsed or exact-phase Work <= 1e-7; all other rows are material_proof",
+      "sha256": "26d880932532ff3cff9602b44f5451acc7c47d6642a0faa5c23392bc77c83e4a"
+    },
+    {
+      "classification": "material_proof",
+      "excluded_from_severe_tail": false,
+      "frozen_source": "results/gf_regression_adaptive_round40/runs/k1__round39_small_hard_V10_M1_Q30_slot02_seed1721447042__c6_hga_full_k4/result.json",
+      "historical_exact_phase_seconds": 1.4064016000000001,
+      "historical_exact_phase_work": 1.1499275494877275,
+      "historical_startup_seconds": 0.2534248,
+      "instance_id": "round39_small_hard_V10_M1_Q30_slot02_seed1721447042",
+      "rule": "startup_dominated iff historical C6 exact-phase elapsed is no greater than startup elapsed or exact-phase Work <= 1e-7; all other rows are material_proof",
+      "sha256": "065d0f472f63fb8fe2f6e82c0834e9622db12c64af879f96bd576660c39272c9"
+    },
+    {
+      "classification": "material_proof",
+      "excluded_from_severe_tail": false,
+      "frozen_source": "results/gf_regression_adaptive_round40/runs/k1__round39_small_hard_V10_M1_Q20_slot01_seed561355351__c6_hga_full_k4/result.json",
+      "historical_exact_phase_seconds": 1.3414693,
+      "historical_exact_phase_work": 0.989274344317732,
+      "historical_startup_seconds": 0.3473093,
+      "instance_id": "round39_small_hard_V10_M1_Q20_slot01_seed561355351",
+      "rule": "startup_dominated iff historical C6 exact-phase elapsed is no greater than startup elapsed or exact-phase Work <= 1e-7; all other rows are material_proof",
+      "sha256": "08cc363f365dec28647189686a8f1d7081f922d88e40c1ccac9c42e1b696893c"
+    },
+    {
+      "classification": "material_proof",
+      "excluded_from_severe_tail": false,
+      "frozen_source": "results/gf_regression_adaptive_round40/runs/k1__round39_small_hard_V12_M3_Q20_slot07_seed621538683__c6_hga_full_k4/result.json",
+      "historical_exact_phase_seconds": 77.4271395,
+      "historical_exact_phase_work": 138.4451303784979,
+      "historical_startup_seconds": 2.3024168,
+      "instance_id": "round39_small_hard_V12_M3_Q20_slot07_seed621538683",
+      "rule": "startup_dominated iff historical C6 exact-phase elapsed is no greater than startup elapsed or exact-phase Work <= 1e-7; all other rows are material_proof",
+      "sha256": "963a8887d9c69a19824a0c250de4099a68b8c0e17288196b25cc46d74eb890b1"
+    },
+    {
+      "classification": "material_proof",
+      "excluded_from_severe_tail": false,
+      "frozen_source": "results/gf_regression_adaptive_round40/runs/k1__round39_small_hard_V12_M3_Q30_slot08_seed1288546114__c6_hga_full_k4/result.json",
+      "historical_exact_phase_seconds": 80.4682061,
+      "historical_exact_phase_work": 133.73490192498448,
+      "historical_startup_seconds": 2.0496818,
+      "instance_id": "round39_small_hard_V12_M3_Q30_slot08_seed1288546114",
+      "rule": "startup_dominated iff historical C6 exact-phase elapsed is no greater than startup elapsed or exact-phase Work <= 1e-7; all other rows are material_proof",
+      "sha256": "7ee8a95ca3043f83b2e8c6b3663f8aa212678043d0c98b0153efbeb834d48823"
+    },
+    {
+      "classification": "material_proof",
+      "excluded_from_severe_tail": false,
+      "frozen_source": "results/gf_regression_adaptive_round40/runs/k1__round39_small_hard_V10_M3_Q20_slot04_seed1145042375__c6_hga_full_k4/result.json",
+      "historical_exact_phase_seconds": 8.1768104,
+      "historical_exact_phase_work": 10.503884558425527,
+      "historical_startup_seconds": 0.8835188,
+      "instance_id": "round39_small_hard_V10_M3_Q20_slot04_seed1145042375",
+      "rule": "startup_dominated iff historical C6 exact-phase elapsed is no greater than startup elapsed or exact-phase Work <= 1e-7; all other rows are material_proof",
+      "sha256": "7c4b46a1932e53e6ae193d01085bcc226236ffdc01c03a27bdbb6ebb483455a8"
+    }
+  ],
+  "frozen_before_candidate_exact_runs": true,
+  "holdout_state": "sealed_no_round43_candidate_result",
+  "mechanism_development": [
+    {
+      "instance_id": "round39_small_medium_V12_M3_Q30_slot08_seed1343324363",
+      "role": "major_fragmentation_regression",
+      "sha256": "29e0ca2c95ec2e061aa1cc524aaf6a41bf6c4a34355dca86df6966aa8a29b6b4"
+    },
+    {
+      "instance_id": "round39_small_hard_V12_M3_Q30_slot08_seed1288546114",
+      "role": "strongest_k4_positive_control",
+      "sha256": "7ee8a95ca3043f83b2e8c6b3663f8aa212678043d0c98b0153efbeb834d48823"
+    },
+    {
+      "instance_id": "round39_small_hard_V10_M1_Q20_slot01_seed561355351",
+      "role": "hard_p_grb_win_guard",
+      "sha256": "08cc363f365dec28647189686a8f1d7081f922d88e40c1ccac9c42e1b696893c"
+    },
+    {
+      "instance_id": "round39_small_medium_V10_M2_Q20_slot05_seed968549317",
+      "role": "medium_c6_win_guard",
+      "sha256": "26d880932532ff3cff9602b44f5451acc7c47d6642a0faa5c23392bc77c83e4a"
+    },
+    {
+      "instance_id": "round39_small_hard_V10_M3_Q20_slot04_seed1145042375",
+      "role": "hard_c6_win_guard",
+      "sha256": "7c4b46a1932e53e6ae193d01085bcc226236ffdc01c03a27bdbb6ebb483455a8"
+    },
+    {
+      "instance_id": "round39_small_hard_V12_M3_Q20_slot07_seed621538683",
+      "role": "numerical_fail_closed_endpoint",
+      "sha256": "963a8887d9c69a19824a0c250de4099a68b8c0e17288196b25cc46d74eb890b1"
+    }
+  ],
+  "no_v20_or_v50_generation": true,
+  "round42_split_signature_sha256": "13a9158d40f5cb9f5fb2969f448af0d0ccafb600f20782002bf482e7645f7382",
+  "round_id": 43,
+  "schema": "round43-dataset-freeze-v1",
+  "sealed_holdout": [
+    {
+      "instance_id": "round39_small_easy_V8_M2_Q30_slot03_seed1019524729",
+      "sha256": "fedf24f3a047b6bdf68c72f8569ee6dd353c138739f006844d621f7e31d9e9cf"
+    },
+    {
+      "instance_id": "round39_small_easy_V8_M2_Q20_slot02_seed944712007",
+      "sha256": "0d989e34e63d682718ce2d073f84eff141e9321936e9bceb87fb8bb061559b17"
+    },
+    {
+      "instance_id": "round39_small_easy_V10_M2_Q30_slot05_seed332426708",
+      "sha256": "63bcc9d48fffb98a4e03ccde4f854719a6dfa351ea53c46c0d1fbb7d3cd64b43"
+    },
+    {
+      "instance_id": "round39_small_hard_V12_M2_Q20_slot06_seed258908503",
+      "sha256": "efb62df9be5433dfb5d2def59ee52399bfe10fb2bcc652954892def33e38b2fd"
+    },
+    {
+      "instance_id": "round39_small_medium_V8_M1_Q20_slot01_seed244478273",
+      "sha256": "352afabb52f94963091648d2fdd62f7ef733edffe92354621f2c904745f46668"
+    },
+    {
+      "instance_id": "round39_small_medium_V10_M3_Q30_slot06_seed2147082032",
+      "sha256": "85271db3767b6dfd1075dec56270090beea61b5ace971845bca6ed75e5e0b6dd"
+    },
+    {
+      "instance_id": "round39_small_medium_V10_M1_Q20_slot04_seed1035775879",
+      "sha256": "57b3218f569c53d905efec2feada1bbfa870d7a689cf65c728ece40d8a99c898"
+    }
+  ],
+  "validation": [
+    {
+      "instance_id": "round39_small_easy_V8_M1_Q30_slot01_seed432322553",
+      "sha256": "5a944ace5710c686ea8f8ae4abb412324b48c2042cfade1470034f2e0fdc9c59"
+    },
+    {
+      "instance_id": "round39_small_easy_V10_M3_Q20_slot06_seed1178207568",
+      "sha256": "fd23a2d1c2adf59570fd158aee6adbc61929d375bcc0ee23f28b4b4aadb8fcb8"
+    },
+    {
+      "instance_id": "round39_small_easy_V12_M2_Q30_slot07_seed1210444511",
+      "sha256": "7171ea93b94f8e17cb61ecda9621d1bc1886cae3657dc8d11c967cd53e5189c2"
+    },
+    {
+      "instance_id": "round39_small_medium_V8_M2_Q20_slot02_seed890603285",
+      "sha256": "048af580110a8726bb300aa6133161d4ec577a8967ac5fe3d06a0fe69845f225"
+    },
+    {
+      "instance_id": "round39_small_medium_V12_M1_Q30_slot07_seed907224013",
+      "sha256": "7e7420c416b21367353d44ba384092d0c3639c7c99366ae8b5b822637b711001"
+    },
+    {
+      "instance_id": "round39_small_hard_V12_M1_Q20_slot05_seed180890838",
+      "sha256": "397a0b3d7ac964f3f24356e64ba9b75b4cfa04febcbd869a1195bc26166f5feb"
+    },
+    {
+      "instance_id": "round39_small_hard_V10_M2_Q20_slot03_seed490008310",
+      "sha256": "dbebfddba913f84028ddd0320c4981c67f861590b1acd1cd9bd443a6988226e7"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "round52-development-only-revision-plan-v1",
+  "iteration": 1,
+  "revision": 1,
+  "frozen_before_formal_core_runs": true,
+  "trigger": "unit-audit discovery before the formal core panel",
+  "defect": "batch dominance depended on generation order when a weaker same-LHS row preceded a stronger row",
+  "authorized_change": "replace one-pass prior-row dominance with deterministic all-pairs exact same-normalized-LHS dominance filtering",
+  "test_additions": [
+    "stronger-row-last dominance",
+    "pooled duplicate rejection",
+    "family and vehicle accounting",
+    "separator missing model mapping",
+    "separator invalid effective bounds",
+    "inactive-support validity"
+  ],
+  "candidate_policy_change": false,
+  "cut_family_change": false,
+  "support_rank_change": false,
+  "scope_change": false,
+  "selection_rule_change": false,
+  "formal_candidate_runs_before_revision": 0,
+  "pre_revision_runs_classified_as": "live capability smoke only",
+  "further_development_only_revisions_allowed_in_iteration": 0
+}

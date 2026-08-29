@@ -1,0 +1,32 @@
+{
+  "backend": "gurobi",
+  "certificate_tolerance": 1e-07,
+  "forbidden_algorithm_inputs": [
+    "instance_identity",
+    "instance_size",
+    "time",
+    "work",
+    "nodes",
+    "memory",
+    "hardware",
+    "historical_winner",
+    "known_optimum"
+  ],
+  "gini_range": "complete_strict_improver_range",
+  "gurobi_version": "13.0.2",
+  "incumbent": "independently_verified_hga_full",
+  "maximum_process_cap_seconds": 1800,
+  "mip_gap": 0.0,
+  "mip_gap_abs": 0.0,
+  "objective": "complete_original_objective",
+  "presolve": "Auto",
+  "required_common_horizons_seconds": [
+    300,
+    1200,
+    1800
+  ],
+  "schema": "round46-solver-contract-v1",
+  "seed": 0,
+  "split_point": "midpoint",
+  "threads": 1
+}

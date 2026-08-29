@@ -282,6 +282,30 @@ private:
 
 void copyBackendStats(SolveResult& result,
                       const FixedIntervalMipBackendStats& stats) {
+    result.gurobi_threads_requested = stats.threads_requested;
+    result.gurobi_threads_set_return_code = stats.threads_set_return_code;
+    result.gurobi_threads_get_return_code = stats.threads_get_return_code;
+    result.gurobi_threads_effective = stats.threads_effective;
+    result.gurobi_presolve_requested = stats.presolve_requested;
+    result.gurobi_presolve_set_return_code = stats.presolve_set_return_code;
+    result.gurobi_presolve_get_return_code = stats.presolve_get_return_code;
+    result.gurobi_presolve_effective = stats.presolve_effective;
+    result.gurobi_seed_requested = stats.seed_requested;
+    result.gurobi_seed_set_return_code = stats.seed_set_return_code;
+    result.gurobi_seed_get_return_code = stats.seed_get_return_code;
+    result.gurobi_seed_effective = stats.seed_effective;
+    result.gurobi_mip_gap_requested = stats.mip_gap_requested;
+    result.gurobi_mip_gap_set_return_code = stats.mip_gap_set_return_code;
+    result.gurobi_mip_gap_get_return_code = stats.mip_gap_get_return_code;
+    result.gurobi_mip_gap_effective = stats.mip_gap_effective;
+    result.gurobi_mip_gap_abs_requested = stats.mip_gap_abs_requested;
+    result.gurobi_mip_gap_abs_set_return_code =
+        stats.mip_gap_abs_set_return_code;
+    result.gurobi_mip_gap_abs_get_return_code =
+        stats.mip_gap_abs_get_return_code;
+    result.gurobi_mip_gap_abs_effective = stats.mip_gap_abs_effective;
+    result.external_gini_tree_backend_parameter_roundtrip_valid =
+        stats.parameter_roundtrip_valid;
     result.external_gini_tree_environment_count = stats.environment_count;
     result.external_gini_tree_model_count = stats.model_count;
     result.external_gini_tree_model_read_count = stats.model_read_count;

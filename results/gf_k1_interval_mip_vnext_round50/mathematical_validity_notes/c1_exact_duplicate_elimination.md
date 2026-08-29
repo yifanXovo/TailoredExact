@@ -1,0 +1,7 @@
+# C1 exact duplicate elimination validity
+
+All 250790 canonical constraints from the 23 frozen models were parsed and assigned exactly once to the exhaustive registry. The exact/sign-canonical scan found 73 exact duplicates and 73 sign-canonical duplicates; the identical-LHS RHS-order scan found 0 additional globally proved dominated rows.
+
+Every literal duplicate is in the operation/load core family. It occurs only when a primitive pickup or drop upper bound is zero: the visit link and operation-mode link both reduce to the same one-variable inequality (`p_k_i <= 0` or `d_k_i <= 0`). C1 keeps the visit-link copy and omits only the second, byte-identical mode-link copy. Thus every core relationship remains represented, the variable domains, objective, feasible set, LP relaxation, integer optimum, and certificate meaning are unchanged, and the candidate is uniform in mathematical bounds rather than instance identity or size.
+
+C2 is not entered because no complete strengthening emitter has an exact delayed separator. C3 is not entered because coefficient ranges alone do not prove an additional bound or big-M tightening beyond the current tight interval construction. C4 is not entered because the audit did not isolate a specific unaddressed relaxation defect. C1 must complete the frozen 120-second core screen and, if it remains the iteration's best candidate, all D1-D14 at 300 seconds before acceptance.
