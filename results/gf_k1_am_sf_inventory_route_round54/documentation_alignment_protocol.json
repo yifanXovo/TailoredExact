@@ -1,0 +1,39 @@
+{
+  "schema": "round54-documentation-alignment-protocol-v1",
+  "markdown_paths": [
+    "README.md",
+    "docs/algorithm_report.md",
+    "docs/attempt_log.md",
+    "docs/current_mainline.md",
+    "docs/algorithm_lineage.md",
+    "docs/k1_am_sf_algorithm.md",
+    "docs/f0_sparse_formulation.md",
+    "docs/active_formulation_families.md",
+    "docs/strengthening_roadmap.md",
+    "docs/reproduction_k1_am_sf.md"
+  ],
+  "manuscript_paths": [
+    "Manuscript/sections/algorithm_framework.tex",
+    "Manuscript/sections/valid_inequalities.tex",
+    "Manuscript/sections/branch_and_cut_implementation.tex",
+    "Manuscript/sections/certificate_and_audit.tex",
+    "Manuscript/sections/computational_protocol.tex",
+    "Manuscript/generated_results.tex",
+    "Manuscript/main.tex"
+  ],
+  "required_identity": [
+    "Gurobi MIP engine",
+    "K0=1",
+    "tau=0.08",
+    "midpoint",
+    "F0-CLEAN",
+    "callback off",
+    "native branching",
+    "removed exhaustive family",
+    "exact coverage/certification",
+    "V50 limitations"
+  ],
+  "stable_backend_term": "sparse tailored fixed-interval MILP solved by Gurobi's native branch-and-cut",
+  "whole_framework_term": "tailored Gini-interval branch-and-cut framework",
+  "bibliographic_metadata_may_be_fabricated": false
+}

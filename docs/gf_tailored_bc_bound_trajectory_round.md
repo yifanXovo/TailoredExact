@@ -39,3 +39,5 @@ The corresponding plain/no-cut fixed-interval benchmark rows did not produce a v
 The worker boundary is improved but not fully solved: on hard callback leaves, `CPXmipopt` may still fail to return a solver-final JSON under the requested time limit. Checkpoint bounds are valid diagnostics but are not automatically paper-core certificate evidence.
 
 The next implementation step is a production worker boundary for frontier integration, with explicit audited rules for when checkpoint-bound evidence may be merged.
+> Historical round record. Its paper-facing designation is superseded by
+> K1-AM-SF (`paper-k1-am-sf`).

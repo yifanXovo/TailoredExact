@@ -2483,3 +2483,35 @@ Remaining TODOs:
   `results/heuristic_relaxation_dataset_round/` and
   `results/generated_variant_round/` pass `audit_bpc_certificate.py
   --fail-on-error`.
+## 2026-08-29 - Round 54 K1-AM-SF freeze and inventory--route study
+
+- Froze **K1-AM-SF** as the stable paper mainline: K0=1, one complete initial
+  improving Gini interval, midpoint refinement, adaptive-mass threshold
+  `tau=0.08`, exact-parent closure, and the F0-CLEAN sparse fixed-interval MILP
+  under native single-thread Gurobi branch-and-cut.
+- Added canonical preset `paper-k1-am-sf`; the Round 53 names `k1-am-f0` and
+  `paper-k1-am-f0` remain semantic aliases, and the historical inner-policy
+  name remains accepted. Six controller/model sentinels passed semantic
+  equivalence. V20/V50 sentinels did not reach a fixed-interval model within
+  the bounded startup run, so their identity evidence is command/controller
+  equivalence rather than a runtime LP-file comparison.
+- Repaired the Round 53 P-GRB certificate chain using its original official
+  executable and pre-frozen expected fingerprints. All 12 fingerprints match;
+  the strict certificate count changes from 0/12 to 9/12. Work, time, bounds,
+  gap, and GI are unchanged, and no Round 53 F0 promotion decision changes.
+- Implemented deterministic exact min-cut separation for IR-IN, IR-OUT, and
+  their projected companions, plus fresh-model external root closure. IR1 and
+  IR2 were valid on all 34 frozen root states; each showed strict violations in
+  33 roles and strict final bound gain in 25 states. IR2 added no final closure
+  gain over IR1, so the less expansive IR1 entered the live gate; IR3 was not
+  opened.
+- Completed all 28 Stage-A fixed-interval rows (14 F0/IR1 pairs) at 300
+  seconds. F0 certified 11/14 and IR1 9/14. IR1 improved hard state D4 but lost
+  the D1 and D13 F0 certificates, had shifted Work geometric-mean ratio
+  1.089432, and worsened aggregate GI from 0.498349 to 0.623423. The frozen
+  Stage-B gate therefore failed. Confirmation, K1 integration, and the sealed
+  V12/V20/V50 generalization panel were correctly not opened.
+- Classified the direction as
+  `bounded_negative_inventory_route_strengthening`. K1-AM-SF remains the
+  stable mainline. The single recommended next research step is a separately
+  frozen value-disaggregated formulation for G times final inventory.

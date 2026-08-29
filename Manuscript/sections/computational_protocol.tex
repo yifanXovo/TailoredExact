@@ -1,40 +1,36 @@
 \section{Computational Protocol}
-The fresh evaluation uses source commit recorded in the package manifest and
-stores every raw JSON, child interval model, progress trace, solver log, and
-summary under one result directory.  No prior raw row or fixed-interval
-incumbent is copied.  Tailored and official plain CPLEX rows both use one
-solver thread.  A generic wall-budget policy allocates 68\% to frontier
-construction, 28\% to exact interval leaves, and 4\% to model and wrapper
-overhead; the benchmark receives the matched nominal wall budget directly.
-Runs longer than three hours emit five-minute progress and process-tree memory
-samples.
+Round 54 froze contracts, panels, promotion gates, source identity, and process
+caps before inspecting new performance. Ordinary processes were capped at
+3,600 seconds; the predeclared 7,200-second V50 extension could open only after
+successful K1 integration. Every official fixed-interval comparator and
+candidate row used the same frozen Gurobi-enabled executable, one thread, seed
+zero, automatic presolve, zero MIP gaps, and complete process accounting.
 
-The controls are V12/M1, V12/M2, \path{tight_T_seed3101}, and
-\path{high_imbalance_seed3202}.  The hard set is
-\path{moderate_seed3301}, \path{moderate_seed3302},
-\path{high_imbalance_seed3201}, and \path{tight_T_seed3102}.
-Comparisons use matched nominal budgets and distinguish certified runtime from
-noncertified bound/gap evidence.  Fixed-interval diagnostics are not compared
-as if they were full-frontier runs.
+The paper-preset identity audit used major, strong-control, V10 easy-negative,
+numerical-endpoint, V20, and V50 sentinels. All six have identical deterministic
+settings, controller actions, intervals, backend identity, objective, bound,
+and certificate class. Where model construction was reached, exported model
+files are byte-identical. The bounded V20/V50 runs remained in heuristic
+startup and produced no fixed-interval model file; this is reported as
+semantic command/controller evidence, not fabricated model evidence.
 
-\IfFileExists{generated_results.tex}{\input{generated_results}}{
-\paragraph{Result table.} The package aggregation step generates
-\texttt{generated\_results.tex} from fresh selected rows.}
+The inventory--route offline census covered 34 frozen states and both IR1 and
+IR2. Both variants were valid on every state, showed a strict violation in 33
+structural roles, and improved the final root bound in 25 states. IR2 produced
+no strict final-closure gain over IR1, so the least expansive IR1 entered the
+live fixed-interval gate; the condition to open IR3 was absent.
 
-In this matrix the tailored framework certifies all four controls, although
-the required budget is not uniformly lower than plain CPLEX.  None of the
-four hard rows is certified.  The long hard rows expose both valid open-ledger
-progress and wrapper/native-exit failures; these are reported rather than
-converted into closures.  Size-four callback rows are observed, confirming
-that the selected separator is active, but this experiment has no matched
-no-callback tailored arm.  It therefore does not identify the callback's
-causal contribution separately from the rest of the tailored framework.
-The mixed hard-row comparison supports continued experimental use of the
-profile, not a claim of uniform dominance or a universal default policy.
+Stage A compared F0--CLEAN and IR1 on D1--D14 at 300 seconds: 28 complete rows
+and 14 matched pairs. F0 certified 11/14 and IR1 9/14, with zero false
+certificates. IR1 gained one material hard-state improvement (D4), but lost
+the D1 and D13 certificates. Its shifted Work geometric-mean ratio was
+1.089432; aggregate GI worsened from 0.498349 to 0.623423. The frozen Stage-B
+gate therefore failed. Fixed-interval Stage B, confirmation and long checks,
+full K1 integration, and the sealed V12/V20/V50 generalization runs were not
+opened. Empty schema-valid ledgers and opening decisions record this outcome.
 
-The computational conclusions are deliberately limited to this matrix.  A
-certified control supports stability; an open hard row reports its valid
-ledger bound and blocker.  A route-profile advantage requires either an exact
-certificate absent from the matched benchmark or a clearly stronger valid
-same-budget bound trajectory.  No claim is inferred from callback row count
-alone.
+The evidence supports K1--AM--SF as the stable mainline and classifies
+inventory--route strengthening as a bounded negative result. It does not
+support K1--AM--SF--IR or a universal paper-algorithm claim.
+
+\IfFileExists{generated_results.tex}{\input{generated_results}}{}

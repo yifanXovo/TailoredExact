@@ -43,6 +43,9 @@ struct Round50IntervalMipPolicy {
     // every pre-Round-53 policy.  The c0--c5 values are uniform policies and
     // are never inferred from an instance or solve state.
     std::string round53_callback_mode = "off";
+    // Round 54 default-off external root closure. It is a run-level research
+    // policy and never changes the frozen F0-CLEAN alias.
+    std::string inventory_route_root_closure = "off";
     std::string failure_reason;
 };
 
