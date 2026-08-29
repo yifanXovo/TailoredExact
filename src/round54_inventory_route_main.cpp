@@ -240,8 +240,8 @@ int main(int argc, char** argv) {
         request.gamma_L = args.gamma_lower;
         request.gamma_U = args.gamma_upper;
         request.verified_cutoff = args.cutoff;
-        request.global_deadline_remaining_seconds =
-            std::max(0.001, args.process_cap_seconds - 2.0);
+        request.global_deadline_remaining_seconds = std::max(
+            0.001, args.process_cap_seconds - elapsed(started) - 2.0);
         request.canonical_model_path = artifact.path;
         request.canonical_model_fingerprint = artifact.sha256;
         request.canonical_model_scope = artifact.model_scope;

@@ -306,6 +306,7 @@ int main() {
         ebrp::FixedIntervalMipRequest request;
         request.leaf_id = "test";
         request.canonical_model_fingerprint = "model";
+        request.global_deadline_remaining_seconds = 100.0;
         const auto closure = ebrp::runInventoryRouteRootClosure(
             backend, instance, request,
             ebrp::InventoryRouteClosureVariant::MixedFull);
@@ -324,6 +325,9 @@ int main() {
         cover(std::fabs(closure.cumulative_lp_work - 5.0) <= 1e-12 &&
               std::fabs(closure.cumulative_lp_runtime_seconds - 0.5) <= 1e-12,
               "27 closure overhead accounting");
+        cover(backend.requests[0].global_deadline_remaining_seconds >=
+                  backend.requests[1].global_deadline_remaining_seconds,
+              "27b closure propagates remaining process allowance");
         FakeBackend bad_backend;
         auto invalid = fakeLpOutcome(0.25, 1.0);
         invalid.lp_primal_dual_evidence_available = false;

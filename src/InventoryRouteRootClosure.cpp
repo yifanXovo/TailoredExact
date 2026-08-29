@@ -1,6 +1,7 @@
 #include "InventoryRouteRootClosure.hpp"
 
 #include <algorithm>
+#include <chrono>
 #include <cmath>
 #include <map>
 #include <regex>
@@ -155,6 +156,7 @@ InventoryRouteRootClosureResult runInventoryRouteRootClosure(
     }
     std::set<std::string> signatures;
     int round_index = 0;
+    const auto closure_started = std::chrono::steady_clock::now();
     while (true) {
         InventoryRouteClosureRound round;
         round.round = round_index;
@@ -170,6 +172,17 @@ InventoryRouteRootClosureResult runInventoryRouteRootClosure(
         request.branch_priority_overrides.clear();
         request.variable_bound_overrides.clear();
         request.additional_linear_rows.clear();
+        const double closure_elapsed = std::chrono::duration<double>(
+            std::chrono::steady_clock::now() - closure_started).count();
+        request.global_deadline_remaining_seconds =
+            base_request.global_deadline_remaining_seconds - closure_elapsed;
+        if (!(request.global_deadline_remaining_seconds > 0.0)) {
+            round.status = "external_process_cap_exhausted_before_lp_round";
+            result.rounds.push_back(round);
+            result.fallback_required = true;
+            result.failure_reason = round.status;
+            return result;
+        }
         for (std::size_t index = 0; index < result.accepted_cuts.size(); ++index) {
             request.additional_linear_rows.push_back(inventoryRouteBackendRow(
                 result.accepted_cuts[index], static_cast<int>(index)));

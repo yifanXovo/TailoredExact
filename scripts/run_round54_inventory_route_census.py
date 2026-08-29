@@ -181,7 +181,7 @@ def run_state(
     result_path = run_dir / "result.json"
     if force or not result_path.exists():
         run_dir.mkdir(parents=True, exist_ok=True)
-        process_cap = 300.0 if state["state_id"].startswith("V50") else 120.0
+        process_cap = 3600.0 if state["state_id"].startswith("V50") else 120.0
         command = [
             str(executable),
             "--mode", "closure",
@@ -203,7 +203,7 @@ def run_state(
             cwd=root,
             text=True,
             capture_output=True,
-            timeout=process_cap + 30.0,
+            timeout=process_cap + 60.0,
             check=False,
         )
         (run_dir / "runner_stdout.txt").write_text(
