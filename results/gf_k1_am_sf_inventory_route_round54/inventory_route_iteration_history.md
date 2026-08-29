@@ -15,3 +15,7 @@ The first census launch exposed an accounting defect on the moderate V50 state: 
 ## Corrected offline outcome
 
 The corrected census completed 68 rows (34 states for each of IR1 and IR2). Both variants were valid on every state, had strict violations in 33 recorded structural roles, and produced a strict final LP-bound gain on 25 states. IR2 produced no strict final-closure improvement over IR1, so the frozen least-expansive rule selected IR1. The IR3 entry condition did not occur and iteration 2 remains formally not opened.
+
+## Live Stage A outcome
+
+IR1 entered the mandatory paired 300-second development stage. All 28 physical rows were engineering-valid and produced zero false certificates. F0-CLEAN certified 11/14 states; IR1 certified 9/14 and lost the D1 and D13 baseline certificates. Those losses are two severe regressions. The shifted Work geometric-mean ratio was 1.089432 and aggregate normalized GI was 0.623423 for IR1 versus 0.498349 for F0-CLEAN. D4 supplied one material hard-state Work improvement, but the candidate failed the no-loss, no-severe-regression, and aggregate-nonworse gates. The 1200-second stage, confirmation, long checks, K1 integration, and sealed generalization panel therefore did not open.
