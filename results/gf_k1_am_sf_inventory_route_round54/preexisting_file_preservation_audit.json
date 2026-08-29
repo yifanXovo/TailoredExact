@@ -30,5 +30,18 @@
   },
   "preservation_rule": "Every listed tracked file must retain its byte SHA-256 and Git clean-filtered blob; every path in the local untracked inventory must retain its path, byte length, and SHA-256.",
   "round54_outputs_excluded_from_baseline": true,
-  "final_reverification_pending": true
+  "final_reverification_pending": false,
+  "final_reverification": {
+    "passed": true,
+    "tracked_files_checked": 3,
+    "tracked_failures": [],
+    "untracked_files_checked": 49751,
+    "untracked_failures": [],
+    "untracked_total_bytes": 27089466488,
+    "inventory_sha256_match": true,
+    "file_count_match": true,
+    "total_bytes_match": true,
+    "logical_snapshot_aggregate_match": true,
+    "note": "The frozen inventory file is byte-identical and every listed path, byte length, and SHA-256 was independently rechecked."
+  }
 }
