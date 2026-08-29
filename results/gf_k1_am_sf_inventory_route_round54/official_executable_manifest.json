@@ -3,12 +3,17 @@
   "source_freeze_commit": "b6784e930f5df3b8bb048e7572301f942c017cd0",
   "build_directory": "build/official-round54-b6784e930",
   "compiler": "GCC 14.2.0 x86_64-w64-mingw32",
-  "configuration": "Release",
+  "configuration": "Release; EXACT_EBRP_ENABLE_GUROBI=ON",
   "gurobi": "13.0.2",
   "round54_comparator_executable": "build/official-round54-b6784e930/Round54InventoryRouteExperiment.exe",
-  "round54_comparator_executable_sha256": "5bf75380b4d2611cd9f4c44b1d7a5882a159658c3c98d2a6f189ff7bcf3f1d3d",
+  "round54_comparator_executable_sha256": "55ac7778f8e4a1c009b6d1cc8c4cc5d3b40a54ac241cce5a633363a0a571f441",
   "paper_mainline_executable": "build/official-round54-b6784e930/ExactEBRP.exe",
-  "paper_mainline_executable_sha256": "fdbb3fcc11c6a09abc4343077071970879c7c23d4f7434333602565e6d137fc2",
+  "paper_mainline_executable_sha256": "a08ae3a92483a255593ec22ad6ab6b493db0c598f867c8c0e7d186e1b34a75fc",
+  "invalidated_predecessor": {
+    "round54_comparator_executable_sha256": "5bf75380b4d2611cd9f4c44b1d7a5882a159658c3c98d2a6f189ff7bcf3f1d3d",
+    "reason": "CMake optional Gurobi backend was disabled; the first D1 launch exited before model construction and produced no entered result row"
+  },
+  "gurobi_backend_smoke_passed": true,
   "same_executable_for_fixed_interval_arms": true,
   "source_change_after_freeze_invalidates_entered_live_rows": true
 }
