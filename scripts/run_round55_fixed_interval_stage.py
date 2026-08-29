@@ -48,10 +48,17 @@ def source_command(root: Path, state_id: str) -> dict:
     elif state_id.startswith("C"):
         stage = "f0_confirmation_1200s"
     else:
-        manifest_path = root / EVIDENCE_REL / "offline_census_execution_manifest.json"
-        if manifest_path.exists():
+        manifests = [
+            ("confirmation_extension_execution_manifest.json", "additional_states"),
+            ("key_long_execution_manifest.json", "additional_states"),
+            ("offline_census_execution_manifest.json", "additional_states"),
+        ]
+        for manifest_name, collection in manifests:
+            manifest_path = root / EVIDENCE_REL / manifest_name
+            if not manifest_path.exists():
+                continue
             manifest = read_json(manifest_path)
-            for item in manifest.get("additional_states", []):
+            for item in manifest.get(collection, []):
                 if item["state_id"] == state_id:
                     return {
                         "input": str(root / item["input_path"]),
