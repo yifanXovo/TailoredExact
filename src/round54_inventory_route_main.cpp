@@ -6,6 +6,7 @@
 #include "Round50IntervalMip.hpp"
 
 #include <algorithm>
+#include <cctype>
 #include <chrono>
 #include <cmath>
 #include <filesystem>
@@ -35,6 +36,14 @@ struct Arguments {
     double pickup_time = 60.0;
     double drop_time = 60.0;
 };
+
+bool isF0Variant(const std::string& value) {
+    std::string lowered = value;
+    std::transform(lowered.begin(), lowered.end(), lowered.begin(),
+        [](unsigned char ch) { return static_cast<char>(std::tolower(ch)); });
+    return lowered == "f0" || lowered == "f0-clean" ||
+        lowered == "interval-mip-core-no-exhaustive-subset-duration";
+}
 
 std::string jsonEscape(const std::string& value) {
     std::ostringstream out;
@@ -196,6 +205,22 @@ void writeClosureLedgers(
              << csvField(closure.failure_reason) << '\n';
 }
 
+void writeMipProgress(
+    const Arguments& args,
+    const ebrp::FixedIntervalMipOutcome& terminal) {
+    std::ofstream progress(args.artifact_dir / "mip_progress.csv");
+    progress << "time_seconds,work,bound_available,best_bound,incumbent_available,incumbent,processed_nodes,open_nodes,native_phase,bound_improved\n"
+             << std::setprecision(17);
+    for (const auto& event : terminal.native_bound_events) {
+        progress << event.solver_runtime_seconds << ',' << event.work << ','
+                 << event.native_bound_available << ',' << event.native_bound
+                 << ',' << event.native_incumbent_available << ','
+                 << event.native_incumbent << ',' << event.processed_nodes
+                 << ',' << event.open_nodes << ',' << event.native_phase << ','
+                 << event.bound_improved << '\n';
+    }
+}
+
 } // namespace
 
 int main(int argc, char** argv) {
@@ -204,9 +229,12 @@ int main(int argc, char** argv) {
         const Arguments args = parseArguments(argc, argv);
         std::filesystem::create_directories(args.artifact_dir);
         writeCommand(args);
-        const ebrp::InventoryRouteClosureVariant variant =
-            ebrp::parseInventoryRouteClosureVariant(args.variant);
-        if (variant == ebrp::InventoryRouteClosureVariant::Invalid) {
+        const bool f0_reference = isF0Variant(args.variant);
+        const ebrp::InventoryRouteClosureVariant variant = f0_reference
+            ? ebrp::InventoryRouteClosureVariant::Invalid
+            : ebrp::parseInventoryRouteClosureVariant(args.variant);
+        if (!f0_reference &&
+            variant == ebrp::InventoryRouteClosureVariant::Invalid) {
             throw std::runtime_error("invalid inventory-route variant");
         }
         const ebrp::Instance instance = ebrp::parseInstanceFile(
@@ -247,10 +275,55 @@ int main(int argc, char** argv) {
         request.canonical_model_scope = artifact.model_scope;
         request.canonical_row_signature = artifact.row_signature;
         request.native_log_path = args.artifact_dir / "root_lp.log";
-        request.interval_mip_policy = args.variant;
-        ebrp::InventoryRouteRootClosureResult closure =
-            ebrp::runInventoryRouteRootClosure(
+        request.interval_mip_policy = f0_reference
+            ? "interval-mip-core-no-exhaustive-subset-duration"
+            : args.variant;
+        ebrp::InventoryRouteRootClosureResult closure;
+        if (f0_reference) {
+            closure.attempted = true;
+            closure.variant = "F0-CLEAN";
+            ebrp::FixedIntervalMipRequest root_request = request;
+            root_request.solve_kind =
+                ebrp::FixedIntervalSolveKind::PaperLpRelaxation;
+            root_request.leaf_id = args.state_id + "__f0_reference_root_lp";
+            root_request.capture_lp_primal_dual_evidence = false;
+            root_request.native_log_path = args.artifact_dir / "root_lp.log";
+            const ebrp::FixedIntervalMipOutcome root = backend->solve(root_request);
+            ebrp::InventoryRouteClosureRound round;
+            round.round = 0;
+            round.lp_work = root.work;
+            round.lp_runtime_seconds = root.solver_runtime_seconds;
+            round.lp_simplex_iterations = root.simplex_iterations;
+            round.lp_infeasible = root.lp_terminal_valid && root.infeasible;
+            round.lp_valid = round.lp_infeasible ||
+                (root.lp_terminal_valid && root.optimal &&
+                 root.lp_objective_value_available &&
+                 root.model_fingerprint_matches_request &&
+                 root.additional_linear_rows_valid);
+            round.lp_objective = root.lp_objective_value;
+            round.status = round.lp_valid
+                ? "f0_reference_root_lp_complete"
+                : "f0_reference_root_lp_invalid";
+            closure.rounds.push_back(round);
+            closure.initial_lp_objective = root.lp_objective_value;
+            closure.final_lp_objective = root.lp_objective_value;
+            closure.cumulative_lp_work = root.work;
+            closure.cumulative_lp_runtime_seconds =
+                root.solver_runtime_seconds;
+            closure.cumulative_lp_simplex_iterations =
+                root.simplex_iterations;
+            closure.model_read_seconds = root.model_read_seconds;
+            closure.infeasible = round.lp_infeasible;
+            closure.converged = round.lp_valid;
+            closure.valid = round.lp_valid;
+            closure.fallback_required = !round.lp_valid;
+            closure.failure_reason = round.lp_valid
+                ? "none" : (root.failure_reason.empty()
+                    ? "invalid_f0_reference_root_lp" : root.failure_reason);
+        } else {
+            closure = ebrp::runInventoryRouteRootClosure(
                 *backend, instance, request, variant, 1e-7);
+        }
         writeClosureLedgers(args, closure);
 
         ebrp::FixedIntervalMipOutcome terminal;
@@ -279,6 +352,7 @@ int main(int argc, char** argv) {
                     "interval-mip-core-no-exhaustive-subset-duration";
             }
             terminal = backend->solve(terminal_request);
+            writeMipProgress(args, terminal);
         }
         backend->release();
         const auto stats = backend->stats();
@@ -302,6 +376,16 @@ int main(int argc, char** argv) {
               std::fabs(terminal.native_bound - terminal.incumbent_objective) <=
                   1e-7 * std::max(1.0,
                       std::fabs(terminal.incumbent_objective))));
+        const bool verified_upper_bound_available =
+            terminal.incumbent_available &&
+            terminal.incumbent_independently_verified;
+        const double verified_upper_bound = verified_upper_bound_available
+            ? terminal.incumbent_objective : args.cutoff;
+        const double lower_bound = terminal.native_bound_available
+            ? terminal.native_bound : closure.final_lp_objective;
+        const double final_gap = std::max(0.0,
+            (verified_upper_bound - lower_bound) /
+                std::max(1e-12, std::fabs(verified_upper_bound)));
         const ebrp::InventoryRouteSeparationResult* initial_separation =
             closure.rounds.empty() ? nullptr : &closure.rounds.front().separation;
         auto subsetJson = [](const ebrp::InventoryRouteCut* cut) {
@@ -379,11 +463,37 @@ int main(int argc, char** argv) {
             << "  \"false_certificate\": false,\n"
             << "  \"terminal_native_status\": \""
             << jsonEscape(terminal.native_status) << "\",\n"
+            << "  \"lower_bound\": " << lower_bound << ",\n"
+            << "  \"verified_upper_bound_available\": "
+            << verified_upper_bound_available << ",\n"
+            << "  \"verified_upper_bound\": "
+            << verified_upper_bound << ",\n"
+            << "  \"final_gap\": " << final_gap << ",\n"
             << "  \"terminal_work\": " << terminal.work << ",\n"
             << "  \"total_work\": "
             << closure.cumulative_lp_work + terminal.work << ",\n"
             << "  \"terminal_solver_time_seconds\": "
             << terminal.solver_runtime_seconds << ",\n"
+            << "  \"terminal_nodes\": " << terminal.nodes << ",\n"
+            << "  \"terminal_simplex_iterations\": "
+            << terminal.simplex_iterations << ",\n"
+            << "  \"terminal_peak_memory_gb\": "
+            << terminal.memory_gb << ",\n"
+            << "  \"first_incumbent_work\": "
+            << terminal.first_incumbent_work << ",\n"
+            << "  \"first_incumbent_time_seconds\": "
+            << terminal.first_incumbent_runtime_seconds << ",\n"
+            << "  \"terminal_root_relaxation_bound_available\": "
+            << terminal.root_relaxation_bound_available << ",\n"
+            << "  \"terminal_root_relaxation_bound\": "
+            << terminal.root_relaxation_bound << ",\n"
+            << "  \"terminal_final_root_cut_bound_available\": "
+            << terminal.final_root_cut_bound_available << ",\n"
+            << "  \"terminal_final_root_cut_bound\": "
+            << terminal.final_root_cut_bound << ",\n"
+            << "  \"terminal_root_work\": " << terminal.root_work << ",\n"
+            << "  \"terminal_root_time_seconds\": "
+            << terminal.root_runtime_seconds << ",\n"
             << "  \"terminal_callback_active\": "
             << terminal.tailored_cut_callback_active << ",\n"
             << "  \"terminal_precrush_requested\": "
