@@ -7,8 +7,8 @@ Exact and portfolio solvers for the Equity-aware Bike Repositioning Problem.
 Preferred:
 
 ```powershell
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build -j
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DEXACT_EBRP_ENABLE_GUROBI=ON
+cmake --build build --config Release -j
 ```
 
 Fallback used on machines without CMake:
@@ -18,9 +18,58 @@ g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluat
 g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluator.cpp src/Result.cpp src/Bounds.cpp src/ColumnPool.cpp src/TailoredExact.cpp src/Pricing.cpp src/Cuts.cpp src/Branching.cpp src/Master.cpp src/ColumnGeneration.cpp src/CplexBaseline.cpp src/TailoredBC.cpp src/TailoredBCCuts.cpp src/TailoredBCCallbacks.cpp src/TailoredBCCplexApi.cpp src/GiniBranching.cpp src/hga_tgbc/HgaTgbcGreedy.cpp src/HgaTgbcRunner.cpp src/Logger.cpp src/compare_main.cpp -o build/ExactEBRPCompare.exe
 ```
 
-## Main Exact Line
+## Stable research mainline: K1-AM-SF
 
-### Tailored callback BC status
+The stable paper-facing algorithm is **K1-AM-SF** (K1 Adaptive-Mass with
+Sparse Fixed-Interval Formulation), exposed by the canonical preset
+`paper-k1-am-sf`. It uses one complete initial improving Gini interval,
+midpoint refinement, adaptive-mass splitting with `tau=0.08`, exact interval
+coverage, and the F0-CLEAN sparse fixed-interval MILP solved by Gurobi's native
+branch-and-cut. The fixed-interval model uses one thread, seed zero, automatic
+presolve, zero relative and absolute MIP gaps, native branching, default
+PreCrush, and no dynamic user-cut callback. The exhaustive small-instance
+subset-duration block is omitted; the other audited static families remain
+active.
+
+Minimal paper-preset command:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-k1-am-sf `
+  --input <instance> --lambda 0.15 --T 3600 --time-limit <seconds> `
+  --threads 1 --mip-threads 1 --out <result.json>
+```
+
+`k1-am-f0` and `paper-k1-am-f0` reproduce the canonical preset, while the
+historical inner-policy name
+`interval-mip-core-no-exhaustive-subset-duration` remains a supported backend
+alias. Plain Gurobi (P-GRB) is a contextual benchmark and does not contribute
+proof evidence to K1-AM-SF:
+
+```powershell
+build\ExactEBRP.exe --method gurobi --plain-baseline --input <instance> `
+  --lambda 0.15 --T 3600 --time-limit <seconds> --threads 1 `
+  --mip-threads 1 --gurobi-seed 0 --gurobi-presolve -1 `
+  --gurobi-model-export <model.lp> --out <result.json>
+```
+
+Stable mechanisms are the K1 adaptive-mass controller, F0-CLEAN, and its
+audited static sparse formulation. Contextual mechanisms include plain Gurobi
+and historical CPLEX/route-load baselines. Rejected or default-off research
+mechanisms include exhaustive subset-duration rows, dynamic support-duration
+user cuts, inventory--route root closure, custom branching priorities,
+symmetry, Gini-spread, subset-inventory, and transfer-cutset families. Round 54
+proved and implemented exact inventory--route separation, but its fixed-
+interval gate was negative; it is not a recommended preset and does not alter
+K1-AM-SF. See `docs/current_mainline.md` and `docs/k1_am_sf_algorithm.md`.
+
+## Historical exact lines
+
+The sections below preserve earlier engineering and reproduction records. Any
+statement below that called a CPLEX compact-BC or route-load BPC configuration
+the "current" or "paper-facing" line is historical and is superseded by
+K1-AM-SF above.
+
+### Historical tailored callback BC status
 
 `paper-gf-tailored-bc` is an experimental CPLEX-managed tailored
 branch-and-cut line. The current MinGW build loads `cplex2211.dll` dynamically,
@@ -35,8 +84,8 @@ creation, branch priorities, hard-leaf callback ablations, and positive
 hard-leaf performance evidence remain incomplete. Static fallback rows remain
 labelled separately and are not treated as callback branch-and-cut evidence.
 
-The current paper-facing exact line is the Gini-frontier compact
-branch-and-cut/certification framework:
+The historical paper-facing exact line at the time of that experiment was the
+Gini-frontier compact branch-and-cut/certification framework:
 
 ```powershell
 build\ExactEBRP.exe --method gcap-frontier `
