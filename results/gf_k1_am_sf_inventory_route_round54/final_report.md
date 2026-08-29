@@ -1,6 +1,6 @@
 # Round 54 final report
 
-Status: **round54_complete**. Every mandatory entered-stage row is present; gated stages that did not open have explicit empty ledgers and decisions. Draft stacked PR: pending_draft_creation.
+Status: **round54_complete**. Every mandatory entered-stage row is present; gated stages that did not open have explicit empty ledgers and decisions. Draft stacked PR: https://github.com/yifanXovo/TailoredExact/pull/112.
 
 ## 1. Exact K1-AM-SF definition
 
@@ -54,4 +54,4 @@ There are two severe regressions, D1 and D13. K1-AM-SF remains the stable paper 
 - Algorithm: `k1_am_sf_stable_mainline`
 - Scale: `generalization_panel_not_opened`
 
-Official comparator/candidate executable SHA-256: `55ac7778f8e4a1c009b6d1cc8c4cc5d3b40a54ac241cce5a633363a0a571f441`. Stable paper executable SHA-256: `a08ae3a92483a255593ec22ad6ab6b493db0c598f867c8c0e7d186e1b34a75fc`. Official source freeze: `b6784e930f5df3b8bb048e7572301f942c017cd0`. Packaging snapshot before final binding: `a6f43e025e87f59438ff3746eedae0788a8346f0` (tree `086dfc8f607d4721178c64c3f87baba6a3255ae3`).
+Official comparator/candidate executable SHA-256: `55ac7778f8e4a1c009b6d1cc8c4cc5d3b40a54ac241cce5a633363a0a571f441`. Stable paper executable SHA-256: `a08ae3a92483a255593ec22ad6ab6b493db0c598f867c8c0e7d186e1b34a75fc`. Official source freeze: `b6784e930f5df3b8bb048e7572301f942c017cd0`. Packaging snapshot before final binding: `2072043d484f9d330569aae41534ea48f4300667` (tree `eeacfd69e46cdd3ed04afd455c86d51adcb6412d`).
