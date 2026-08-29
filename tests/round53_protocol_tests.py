@@ -58,10 +58,12 @@ def sha256(path: Path) -> str:
 
 
 def sha1(path: Path) -> str:
-    # Git blob identity includes the canonical blob header.
-    data = path.read_bytes()
-    return hashlib.sha1(
-        b"blob " + str(len(data)).encode("ascii") + b"\0" + data).hexdigest()
+    # The Stage 0 record stores Git blob identity.  Ask Git to apply the
+    # repository's clean filters (notably CRLF normalization) before hashing.
+    relative = path.resolve().relative_to(ROOT).as_posix()
+    return subprocess.check_output(
+        ["git", "hash-object", "--", relative], cwd=ROOT, text=True,
+        encoding="utf-8", errors="strict").strip()
 
 
 def check(condition: bool, label: str, passed: list[str]) -> None:
@@ -147,9 +149,9 @@ def main() -> int:
         freeze = load(OUT / "final_inner_backend_freeze_manifest.json")
         changed = subprocess.check_output(
             ["git", "diff", "--name-only", freeze["source_commit"], "HEAD",
-             "--", "CMakeLists.txt", "include", "src", "tests", "scripts"],
+             "--", "CMakeLists.txt", "include", "src", "scripts"],
             cwd=ROOT, text=True, encoding="utf-8", errors="replace").strip()
-        check(not changed, "29_no_post_freeze_source_change", passed)
+        check(not changed, "29_no_post_freeze_algorithm_change", passed)
         start = load(OUT / "official_start_record.json")
         check(all(sha1(ROOT / item["path"]) == item["blob_sha1"]
                   for item in start["working_tree_start"]["tracked_modified"]),

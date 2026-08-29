@@ -1,0 +1,27 @@
+{
+  "backend_name": "F0-CLEAN",
+  "branching": "Gurobi default",
+  "canonical_compact_model": "Round50 interval-MIP v0 core",
+  "classification": "f0_backend_promoted",
+  "controller": {
+    "K0": 1,
+    "intervals": 1,
+    "point_rule": "midpoint",
+    "tau": 0.08
+  },
+  "exhaustive_subset_duration_policy": "off: omit only the historical exhaustive V<=12 subset-duration row block",
+  "instance_size_time_or_history_dispatch": false,
+  "mip_gap": 0,
+  "mip_gap_abs": 0,
+  "policy": "interval-mip-core-no-exhaustive-subset-duration",
+  "precrush": "Gurobi default",
+  "presolve": "Auto",
+  "schema": "round53-final-inner-backend-definition-v1",
+  "seed": 0,
+  "source_commit": "5b1e7d5bbf63fc0a2c699ff04fe12c3a2afd58f0",
+  "source_tree": "db4f3b9ee9a3e7140976178b783825e52bd8e7ad",
+  "support_duration_callback": "off",
+  "symmetry_numerical": "Round50 v0 unchanged",
+  "tailored_user_cuts": "off",
+  "threads": 1
+}
