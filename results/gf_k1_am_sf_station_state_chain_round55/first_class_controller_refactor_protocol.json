@@ -1,0 +1,26 @@
+{
+  "schema": "round55-first-class-controller-refactor-protocol-v1",
+  "semantic_change_allowed": false,
+  "canonical_fields": {
+    "initial_gini_interval_count": 1,
+    "split_point_rule": "midpoint",
+    "split_score_rule": "balanced-normalized-closure",
+    "split_threshold": 0.08,
+    "maximum_split_depth": 8,
+    "minimum_interval_width": 0.0001,
+    "split_factor": 2,
+    "child_infeasibility_policy": "exact",
+    "native_target_policy": "existing-k1-am-sf",
+    "exact_parent_closure": true
+  },
+  "legacy_fields": [
+    "frontier_intervals",
+    "round43_initial_k0",
+    "c6_normalized_split_threshold",
+    "round40_c6_coarse_start",
+    "round47_c6_adaptive_mass",
+    "round47_c6_adaptive_mass_tau"
+  ],
+  "legacy_role": "compatibility adapters only",
+  "paper_preset_may_depend_on_contradictory_inert_values": false
+}

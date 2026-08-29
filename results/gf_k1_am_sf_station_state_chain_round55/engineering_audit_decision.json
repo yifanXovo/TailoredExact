@@ -1,0 +1,24 @@
+{
+  "baseline_changed": true,
+  "complete": true,
+  "exactness_or_certificate_defects": [],
+  "historical_exact_certificates_invalidated": false,
+  "historical_performance_evidence_invalidated_conditionally": true,
+  "mandatory_rerun": "D1-D14 at 300 seconds plus semantic sentinels",
+  "material_defects": [
+    "E-001"
+  ],
+  "optimization_may_open_after_corrected_baseline_freeze": true,
+  "sanitizer_status": "unavailable: host toolchain lacks libasan/libubsan",
+  "schema": "round55-engineering-audit-decision-v1",
+  "source_lines": {
+    "current_cutoff_model": 3234,
+    "epoch_state": 125,
+    "first_class_assignment": 13,
+    "optimize_return_code": 1556,
+    "station_state_writer": 704,
+    "telemetry_identity": 318
+  },
+  "test_checks": 53,
+  "test_target": "Round55StationStateChainTests"
+}

@@ -315,12 +315,18 @@ void writeStateIdentity(const ebrp::Instance& instance,
         << "  \"model_fingerprint\": \"" << artifact.sha256 << "\",\n"
         << "  \"row_bound_signature\": \"" << artifact.row_signature << "\",\n"
         << "  \"formulation_profile\": \""
-        << (artifact.round51_subset_duration_big_m ==
+        << (artifact.station_state_formulation == "aggregate-mc4"
+                ? "Interval-MIP-F0-CLEAN+SF-MC4"
+                : (artifact.station_state_formulation == "vd-p"
+                ? "Interval-MIP-F0-CLEAN+VD-P"
+                : (artifact.station_state_formulation == "vd-j"
+                ? "Interval-MIP-F0-CLEAN+VD-J"
+                : (artifact.round51_subset_duration_big_m ==
                     "tight-tsp-lower-bound"
                 ? "Interval-MIP-v0-paper-safe+M1-tight-subset-duration-big-m"
                 : (artifact.exact_duplicate_row_elimination
                 ? "Interval-MIP-v0-paper-safe+C1-exact-duplicate-elimination"
-                : "Interval-MIP-v0-paper-safe")) << "\",\n"
+                : "Interval-MIP-v0-paper-safe"))))) << "\",\n"
         << "  \"exact_duplicate_row_elimination\": "
         << boolJson(artifact.exact_duplicate_row_elimination) << ",\n"
         << "  \"exact_duplicate_rows_omitted\": "
@@ -343,6 +349,14 @@ void writeStateIdentity(const ebrp::Instance& instance,
         << artifact.round51_subset_duration_max_m << ",\n"
         << "  \"round51_historical_m_may_be_unsafe\": "
         << boolJson(artifact.round51_historical_m_may_be_unsafe)
+        << ",\n  \"station_state_formulation\": \""
+        << jsonEscape(artifact.station_state_formulation) << "\",\n"
+        << "  \"station_state_selector_variables\": "
+        << artifact.station_state_selector_variables << ",\n"
+        << "  \"station_state_perspective_variables\": "
+        << artifact.station_state_perspective_variables << ",\n"
+        << "  \"aggregate_mccormick_rows\": "
+        << artifact.aggregate_mccormick_rows
         << "\n}\n";
     std::ofstream model(args.artifact_dir / "model_fingerprint.json");
     model << "{\n  \"schema\": \"round50-model-fingerprint-v1\",\n"
@@ -374,13 +388,21 @@ void writeStateIdentity(const ebrp::Instance& instance,
           << artifact.round51_subset_duration_max_m << ",\n"
           << "  \"round51_historical_m_may_be_unsafe\": "
           << boolJson(artifact.round51_historical_m_may_be_unsafe)
+          << ",\n  \"station_state_formulation\": \""
+          << jsonEscape(artifact.station_state_formulation) << "\",\n"
+          << "  \"station_state_selector_variables\": "
+          << artifact.station_state_selector_variables << ",\n"
+          << "  \"station_state_perspective_variables\": "
+          << artifact.station_state_perspective_variables << ",\n"
+          << "  \"aggregate_mccormick_rows\": "
+          << artifact.aggregate_mccormick_rows
           << "\n}\n";
 }
 
 void writeStaticLedgers(const Arguments& args,
                         const ebrp::CanonicalCompactModelArtifact& artifact) {
     std::ofstream size(args.artifact_dir / "formulation_size_ledger.csv");
-    size << "state_id,policy,original_rows,original_columns,original_nonzeros,model_scope,exact_duplicate_row_elimination,exact_duplicate_rows_omitted,round50_symmetry_policy,round50_symmetry_rows,round51_subset_duration_big_m,round51_subset_duration_rows,round51_subset_duration_first_row_id,round51_subset_duration_last_row_id,round51_subset_duration_min_m,round51_subset_duration_max_m,historical_m_may_be_unsafe\n"
+    size << "state_id,policy,original_rows,original_columns,original_nonzeros,model_scope,exact_duplicate_row_elimination,exact_duplicate_rows_omitted,round50_symmetry_policy,round50_symmetry_rows,round51_subset_duration_big_m,round51_subset_duration_rows,round51_subset_duration_first_row_id,round51_subset_duration_last_row_id,round51_subset_duration_min_m,round51_subset_duration_max_m,historical_m_may_be_unsafe,station_state_formulation,station_state_selector_variables,station_state_perspective_variables,aggregate_mccormick_rows\n"
          << csvField(args.state_id) << ',' << csvField(args.policy) << ','
          << artifact.rows << ',' << artifact.columns << ','
          << artifact.nonzeros << ',' << csvField(artifact.model_scope) << ','
@@ -394,7 +416,11 @@ void writeStaticLedgers(const Arguments& args,
          << artifact.round51_subset_duration_last_row_id << ','
          << artifact.round51_subset_duration_min_m << ','
          << artifact.round51_subset_duration_max_m << ','
-         << artifact.round51_historical_m_may_be_unsafe << '\n';
+         << artifact.round51_historical_m_may_be_unsafe << ','
+         << csvField(artifact.station_state_formulation) << ','
+         << artifact.station_state_selector_variables << ','
+         << artifact.station_state_perspective_variables << ','
+         << artifact.aggregate_mccormick_rows << '\n';
 }
 
 void writeAdaptiveLedgers(
@@ -942,6 +968,7 @@ int main(int argc, char** argv) {
                     : "v0-cardinality");
         spec.round51_subset_duration_big_m =
             policy.subset_duration_big_m;
+        spec.station_state_formulation = policy.station_state_formulation;
         const auto build_started = Clock::now();
         ebrp::CanonicalCompactModelArtifact artifact =
             ebrp::writeCanonicalCompactModel(

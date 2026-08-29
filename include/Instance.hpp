@@ -150,6 +150,20 @@ struct SolveOptions {
     bool frontier_adaptive_max_depth_explicit = false;
     double frontier_adaptive_min_width = 1e-4;
     int frontier_adaptive_split_factor = 2;
+    // First-class paper-facing K1-AM-SF controller.  Historical Round/C6
+    // fields remain available below for reproduction, but the canonical
+    // paper preset is evaluated exclusively through these fields.
+    bool k1_am_sf_controller_enabled = false;
+    int initial_gini_interval_count = 1;
+    std::string split_point_rule = "midpoint";
+    std::string split_score_rule = "balanced-normalized-closure";
+    double split_threshold = 0.08;
+    int maximum_split_depth = 8;
+    double minimum_interval_width = 1e-4;
+    int split_factor = 2;
+    std::string child_infeasibility_policy = "exact";
+    std::string native_target_policy = "existing-k1-am-sf";
+    bool exact_parent_closure = true;
     bool frontier_pre_split_critical = false;
     int frontier_critical_max_depth = 0;
     bool route_pool_incumbent = true;

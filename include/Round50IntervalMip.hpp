@@ -46,6 +46,9 @@ struct Round50IntervalMipPolicy {
     // Round 54 default-off external root closure. It is a run-level research
     // policy and never changes the frozen F0-CLEAN alias.
     std::string inventory_route_root_closure = "off";
+    // Round 55 default-off station-state chain. Values are bit-product
+    // (historical), aggregate-mc4, vd-p, and vd-j.
+    std::string station_state_formulation = "bit-product";
     std::string failure_reason;
 };
 

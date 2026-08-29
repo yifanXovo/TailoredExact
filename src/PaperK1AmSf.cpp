@@ -9,11 +9,17 @@ bool isPaperK1AmSfPresetOrAlias(const std::string& lower_name) {
 
 void configurePaperK1AmSfOverrides(SolveOptions& opt) {
     opt.algorithm_preset = "paper-k1-am-sf";
-    opt.frontier_intervals = 4;
-    opt.frontier_adaptive_split = true;
-    opt.frontier_adaptive_max_depth = 8;
-    opt.frontier_adaptive_min_width = 1e-4;
-    opt.frontier_adaptive_split_factor = 2;
+    opt.k1_am_sf_controller_enabled = true;
+    opt.initial_gini_interval_count = 1;
+    opt.split_point_rule = "midpoint";
+    opt.split_score_rule = "balanced-normalized-closure";
+    opt.split_threshold = 0.08;
+    opt.maximum_split_depth = 8;
+    opt.minimum_interval_width = 1e-4;
+    opt.split_factor = 2;
+    opt.child_infeasibility_policy = "exact";
+    opt.native_target_policy = "existing-k1-am-sf";
+    opt.exact_parent_closure = true;
     opt.tailored_bc_enabled = true;
     opt.tailored_bc_mode = "static";
     opt.tailored_bc_callback_cut_profile = "off";
@@ -68,6 +74,14 @@ void configurePaperK1AmSfOverrides(SolveOptions& opt) {
     opt.primal_heuristic_no_improve_generations = 2000;
     opt.round34_c6_startup_variant = "hga-full";
     opt.round43_envelope_refinement = "off";
+    // The historical fields below are neutral compatibility adapters.  The
+    // first-class controller above is the only source of paper-mainline K1
+    // geometry and split decisions.
+    opt.frontier_intervals = 4;
+    opt.frontier_adaptive_split = true;
+    opt.frontier_adaptive_max_depth = 8;
+    opt.frontier_adaptive_min_width = 1e-4;
+    opt.frontier_adaptive_split_factor = 2;
     opt.round43_initial_k0 = 4;
     opt.round43_lookahead_depth = 1;
     opt.round43_rho = 0.1;
@@ -76,7 +90,7 @@ void configurePaperK1AmSfOverrides(SolveOptions& opt) {
     opt.round43_width_measure = "g-mccormick-unit";
     opt.round43_lifted_cuts = "off";
     opt.round43_frontier_consolidation = "off";
-    opt.round40_c6_coarse_start = "k1-adaptive";
+    opt.round40_c6_coarse_start = "off";
     opt.c6_normalized_split_threshold = 0.01;
     opt.c6_normalized_split_threshold_explicit = true;
     opt.round44_envelope_tail_repair = "off";
@@ -85,9 +99,9 @@ void configurePaperK1AmSfOverrides(SolveOptions& opt) {
     opt.round44_frontier_consolidation = "off";
     opt.round45_adaptive_parametric_partition = "off";
     opt.round45_point_rule = "midpoint";
-    opt.round47_c6_adaptive_mass = "adaptive-mass";
-    opt.round47_c6_adaptive_mass_tau = 0.08;
-    opt.round47_c6_adaptive_mass_tau_explicit = true;
+    opt.round47_c6_adaptive_mass = "off";
+    opt.round47_c6_adaptive_mass_tau = 0.07915;
+    opt.round47_c6_adaptive_mass_tau_explicit = false;
     opt.round48_k1_amf = "off";
     opt.round49_k1_am_rc = "off";
 }

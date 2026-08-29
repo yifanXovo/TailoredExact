@@ -151,6 +151,30 @@ Round50IntervalMipPolicy parseRound50IntervalMipPolicy(
         out.tailored_cut_policy = "f0-clean-none";
         out.round53_callback_mode = "c0-baseline";
         out.inventory_route_root_closure = "ir3-mixed-one-pass";
+    } else if (out.name == "sf-mc4" ||
+               out.name == "round55-sf-mc4") {
+        out.name = "round55-sf-mc4";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "off";
+        out.tailored_cut_policy = "f0-clean-none";
+        out.round53_callback_mode = "c0-baseline";
+        out.station_state_formulation = "aggregate-mc4";
+    } else if (out.name == "vd-p" ||
+               out.name == "round55-vd-p") {
+        out.name = "round55-vd-p";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "off";
+        out.tailored_cut_policy = "f0-clean-none";
+        out.round53_callback_mode = "c0-baseline";
+        out.station_state_formulation = "vd-p";
+    } else if (out.name == "vd-j" ||
+               out.name == "round55-vd-j") {
+        out.name = "round55-vd-j";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "off";
+        out.tailored_cut_policy = "f0-clean-none";
+        out.round53_callback_mode = "c0-baseline";
+        out.station_state_formulation = "vd-j";
     } else if (out.name == "f1-static-rank3-loose") {
         out.branching = Round50BranchingPolicy::Default;
         out.subset_duration_big_m = "rank3-historical-100000";

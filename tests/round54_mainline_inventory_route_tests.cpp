@@ -160,8 +160,8 @@ int main() {
               alias_a.external_gini_interval_mip_policy ==
                   alias_b.external_gini_interval_mip_policy,
               "3 alias equivalence");
-        cover(preset.round47_c6_adaptive_mass_tau_explicit &&
-              preset.round47_c6_adaptive_mass_tau == 0.08,
+        cover(preset.k1_am_sf_controller_enabled &&
+              preset.split_threshold == 0.08,
               "4 tau exact roundtrip");
         const auto f0 = ebrp::parseRound50IntervalMipPolicy(
             "interval-mip-core-no-exhaustive-subset-duration");
@@ -344,7 +344,11 @@ int main() {
                   ebrp::parseRound50IntervalMipPolicy("IR1").name &&
               ir1.branching == ebrp::Round50BranchingPolicy::Default,
               "30 no instance size time dispatch");
-        cover(preset.round40_c6_coarse_start == "k1-adaptive" &&
+        cover(preset.initial_gini_interval_count == 1 &&
+              preset.split_point_rule == "midpoint" &&
+              preset.split_score_rule == "balanced-normalized-closure" &&
+              preset.round40_c6_coarse_start == "off" &&
+              preset.round47_c6_adaptive_mass == "off" &&
               preset.round45_point_rule == "midpoint" &&
               preset.round48_k1_amf == "off" &&
               preset.round49_k1_am_rc == "off",

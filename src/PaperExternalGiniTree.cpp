@@ -122,8 +122,10 @@ void copyLpPrimalDualEvidence(const FixedIntervalMipOutcome& outcome,
 struct PaperLeafRuntime {
     bool artifact_ready = false;
     CanonicalCompactModelArtifact artifact;
+    long long artifact_incumbent_epoch = -1;
     bool lp_complete = false;
     PaperLpResult lp;
+    long long lp_incumbent_epoch = -1;
     bool terminal_mip_started = false;
     bool terminal_ready = false;
     bool c5_partial_target_started = false;
@@ -298,23 +300,41 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         reason = "c6_round37_geometry_policy_contract_mismatch";
         return false;
     }
-    if (!std::isfinite(options.c6_normalized_split_threshold) ||
+    const bool first_class_k1 = options.k1_am_sf_controller_enabled;
+    if (first_class_k1 &&
+        (options.initial_gini_interval_count != 1 ||
+         options.split_point_rule != "midpoint" ||
+         options.split_score_rule != "balanced-normalized-closure" ||
+         !std::isfinite(options.split_threshold) ||
+         options.split_threshold < 0.0 || options.split_threshold > 1.0 ||
+         options.maximum_split_depth != 8 ||
+         std::fabs(options.minimum_interval_width - 1e-4) > 1e-12 ||
+         options.split_factor != 2 ||
+         options.child_infeasibility_policy != "exact" ||
+         options.native_target_policy != "existing-k1-am-sf" ||
+         !options.exact_parent_closure)) {
+        reason = "first_class_k1_am_sf_controller_contract_mismatch";
+        return false;
+    }
+    if (!first_class_k1 &&
+        (!std::isfinite(options.c6_normalized_split_threshold) ||
         options.c6_normalized_split_threshold < 0.0 ||
-        options.c6_normalized_split_threshold > 1.0) {
+        options.c6_normalized_split_threshold > 1.0)) {
         reason = "c6_normalized_split_threshold_out_of_range";
         return false;
     }
     const bool round47_active =
-        options.round47_c6_adaptive_mass != "off";
-    if (options.round47_c6_adaptive_mass != "off" &&
+        first_class_k1 || options.round47_c6_adaptive_mass != "off";
+    if (!first_class_k1 && options.round47_c6_adaptive_mass != "off" &&
         options.round47_c6_adaptive_mass != "adaptive-mass" &&
         options.round47_c6_adaptive_mass != "adaptive-mass-contraction") {
         reason = "round47_adaptive_mass_policy_unknown";
         return false;
     }
-    if (!std::isfinite(options.round47_c6_adaptive_mass_tau) ||
+    if (!first_class_k1 &&
+        (!std::isfinite(options.round47_c6_adaptive_mass_tau) ||
         options.round47_c6_adaptive_mass_tau < 0.0 ||
-        options.round47_c6_adaptive_mass_tau > 1.0) {
+        options.round47_c6_adaptive_mass_tau > 1.0)) {
         reason = "round47_adaptive_mass_tau_out_of_range";
         return false;
     }
@@ -331,7 +351,8 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         reason = "round47_adaptive_mass_pure_c6_contract_mismatch";
         return false;
     }
-    const std::string& coarse_start = options.round40_c6_coarse_start;
+    const std::string coarse_start = first_class_k1
+        ? "k1-adaptive" : options.round40_c6_coarse_start;
     const bool coarse_start_valid = coarse_start == "off" ||
         coarse_start == "k1-single" || coarse_start == "k1-adaptive" ||
         coarse_start == "k1-adaptive-decisive";
@@ -537,11 +558,18 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         reason = "round43_unified_envelope_contract_mismatch";
         return false;
     }
-    if (options.frontier_intervals != 4 ||
-        !options.frontier_adaptive_split ||
-        options.frontier_adaptive_max_depth != 8 ||
-        std::fabs(options.frontier_adaptive_min_width - 1e-4) > 1e-12 ||
-        options.frontier_adaptive_split_factor != 2) {
+    const bool geometry_valid = first_class_k1
+        ? options.initial_gini_interval_count == 1 &&
+          options.split_point_rule == "midpoint" &&
+          options.maximum_split_depth == 8 &&
+          std::fabs(options.minimum_interval_width - 1e-4) <= 1e-12 &&
+          options.split_factor == 2
+        : options.frontier_intervals == 4 &&
+          options.frontier_adaptive_split &&
+          options.frontier_adaptive_max_depth == 8 &&
+          std::fabs(options.frontier_adaptive_min_width - 1e-4) <= 1e-12 &&
+          options.frontier_adaptive_split_factor == 2;
+    if (!geometry_valid) {
         reason = "c6_geometry_not_frozen_4_binary_depth8_width1e-4";
         return false;
     }
@@ -555,7 +583,9 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         reason = "c6_static_row_or_s0_f0_contract_mismatch";
         return false;
     }
-    reason = "accepted_round31_c6_frozen_exact_contract_with_" +
+    reason = std::string(first_class_k1
+        ? "accepted_first_class_k1_am_sf_exact_contract_with_"
+        : "accepted_round31_c6_frozen_exact_contract_with_") +
         options.round34_c6_startup_variant + "_round36_" + causal +
         "_round37_" + geometry_policy + "_round40_" + coarse_start +
         "_ub_geometry_" + ub_geometry + "_round41_" + static_segmented +
@@ -1077,10 +1107,13 @@ SolveResult solveRound41RootReference(
     result.round41_static_segmented_intervals = joinIntervals({interval});
 
     CanonicalCompactModelSpec spec;
-    spec.round51_subset_duration_big_m =
+    const Round50IntervalMipPolicy root_reference_policy =
         parseRound50IntervalMipPolicy(
-            options.external_gini_interval_mip_policy)
-            .subset_duration_big_m;
+            options.external_gini_interval_mip_policy);
+    spec.round51_subset_duration_big_m =
+        root_reference_policy.subset_duration_big_m;
+    spec.station_state_formulation =
+        root_reference_policy.station_state_formulation;
     spec.strengthened = true;
     spec.interval_restricted = true;
     spec.gamma_L = interval.lower;
@@ -1362,10 +1395,13 @@ SolveResult solveStaticSegmentedGini(
     }
 
     CanonicalCompactModelSpec spec;
-    spec.round51_subset_duration_big_m =
+    const Round50IntervalMipPolicy static_policy =
         parseRound50IntervalMipPolicy(
-            options.external_gini_interval_mip_policy)
-            .subset_duration_big_m;
+            options.external_gini_interval_mip_policy);
+    spec.round51_subset_duration_big_m =
+        static_policy.subset_duration_big_m;
+    spec.station_state_formulation =
+        static_policy.station_state_formulation;
     spec.strengthened = true;
     spec.interval_restricted = true;
     spec.gamma_L = block_union.lower;
@@ -1639,11 +1675,25 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         options.round37_c6_geometry_policy == "pilot-weakest-prefine";
     const bool round36_causal = c6_nonblocking &&
         options.round36_c6_causal_arm != "off";
+    const bool first_class_k1 = c6_nonblocking &&
+        options.k1_am_sf_controller_enabled;
+    const int controller_initial_interval_count = first_class_k1
+        ? options.initial_gini_interval_count : options.frontier_intervals;
+    const int controller_maximum_split_depth = first_class_k1
+        ? options.maximum_split_depth : options.frontier_adaptive_max_depth;
+    const double controller_minimum_interval_width = first_class_k1
+        ? options.minimum_interval_width : options.frontier_adaptive_min_width;
+    const int controller_split_factor = first_class_k1
+        ? options.split_factor : options.frontier_adaptive_split_factor;
+    const double controller_split_threshold = first_class_k1
+        ? options.split_threshold : options.round47_c6_adaptive_mass_tau;
+    const std::string controller_coarse_policy = first_class_k1
+        ? "k1-adaptive" : options.round40_c6_coarse_start;
     const bool round40_coarse_start = c6_nonblocking &&
-        options.round40_c6_coarse_start != "off";
+        (first_class_k1 || options.round40_c6_coarse_start != "off");
     const bool round47_active = c6_nonblocking &&
-        options.round47_c6_adaptive_mass != "off";
-    const bool round47_contraction = round47_active &&
+        (first_class_k1 || options.round47_c6_adaptive_mass != "off");
+    const bool round47_contraction = !first_class_k1 && round47_active &&
         options.round47_c6_adaptive_mass == "adaptive-mass-contraction";
     const bool round48_active = c6_nonblocking &&
         options.round48_k1_amf == "k1-amf";
@@ -1712,8 +1762,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     const Round40CoarseStartGeometry round40_geometry =
         round40_coarse_start
             ? makeRound40CoarseStartGeometry(
-                  root_gamma_L, root_gamma_U, options.frontier_intervals,
-                  options.round40_c6_coarse_start, 1e-7)
+                  root_gamma_L, root_gamma_U,
+                  controller_initial_interval_count,
+                  controller_coarse_policy, 1e-7)
             : Round40CoarseStartGeometry{};
     const Round40NestedDyadicGeometry round40_ub_geometry =
         round40_nested_dyadic
@@ -1852,9 +1903,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     ? "R42-C6-TERMINAL-SIBLING-CORE-FACTORED"
                     : "R42-C6-TERMINAL-SIBLING-CORE")
                 : (round40_coarse_start
-                ? (options.round40_c6_coarse_start == "k1-single"
+                ? (controller_coarse_policy == "k1-single"
                     ? "R40-K1-SINGLE"
-                    : (options.round40_c6_coarse_start == "k1-adaptive"
+                    : (controller_coarse_policy == "k1-adaptive"
                         ? "R40-K1-ADAPTIVE"
                         : "R40-K1-ADAPTIVE-DECISIVE"))
                 : (round40_nested_dyadic
@@ -1876,7 +1927,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         result.external_gini_tree_child_lookahead_required =
             !c6_nonblocking || round37_pilot_prefine ||
             (round40_coarse_start &&
-             options.round40_c6_coarse_start != "k1-single");
+             controller_coarse_policy != "k1-single");
         result.external_gini_tree_structural_split_unconditional = false;
         result.external_gini_tree_internal_budget_scheduling = false;
         result.external_gini_tree_native_tree_reuse_claimed = false;
@@ -1886,7 +1937,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         result.external_gini_tree_contract_initial_interval_count =
             round44_active ? adaptive_initial_k0
             : (round43_active ? options.round43_initial_k0
-            : (round40_coarse_start ? 1
+            : (round40_coarse_start ? controller_initial_interval_count
             : (round40_nested_dyadic
                 ? static_cast<long long>(
                     round40_ub_geometry.active_intervals.size())
@@ -1907,11 +1958,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 "remain one union coverage object and build/validation "
                 "failure restores the original leaves"
               : (round40_coarse_start
-              ? (options.round40_c6_coarse_start == "k1-single"
+              ? (controller_coarse_policy == "k1-single"
                 ? "one complete strict-improver Gini interval; complete root "
                   "LP followed by one exact terminal MIP; no midpoint child "
                   "lookahead or independent interval proof fragmentation"
-                : (options.round40_c6_coarse_start == "k1-adaptive"
+                : (controller_coarse_policy == "k1-adaptive"
                 ? "one complete strict-improver root interval; existing "
                   "complete midpoint-child LP evidence and rho=0.01 split "
                   "logic recursively create an exact nested partition; "
@@ -2940,6 +2991,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
 
     std::unordered_map<std::string, PaperLeafRuntime> runtime;
     double verified_ub = verified_seed.objective;
+    long long incumbent_epoch = 0;
     std::vector<RoutePlan> best_routes = verified_seed.routes;
     double total_model_build_seconds = 0.0;
     double last_global_lb_improvement = -1.0;
@@ -3122,6 +3174,35 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
 
     auto ensureArtifact = [&](const ControllingLeaf& leaf,
                               PaperLeafRuntime& state) -> bool {
+        if (state.artifact_ready &&
+            state.artifact_incumbent_epoch != incumbent_epoch) {
+            if (!std::filesystem::exists(state.artifact.path) ||
+                fileSha256(state.artifact.path) != state.artifact.sha256) {
+                ++result.external_gini_tree_canonical_artifact_invalidation_count;
+                result.external_gini_tree_failure_reason =
+                    "paper_immutable_artifact_changed:" + leaf.id;
+                return false;
+            }
+            // The canonical model contains the verified-incumbent row. A
+            // tighter independently verified incumbent therefore starts a
+            // new model epoch: retained native state and LP evidence from the
+            // old cutoff must not be reused.
+            backend->discardLeaf(leaf.id);
+            ++result.external_gini_tree_canonical_artifact_invalidation_count;
+            state.artifact_ready = false;
+            state.artifact = CanonicalCompactModelArtifact{};
+            state.artifact_incumbent_epoch = -1;
+            state.lp_complete = false;
+            state.lp = PaperLpResult{};
+            state.lp_incumbent_epoch = -1;
+            state.terminal_mip_started = false;
+            state.terminal_ready = false;
+            state.c6_children_ready = false;
+            state.c6_cached_children.clear();
+            state.round43_lp_g_available = false;
+            state.round43_lp_objective_available = false;
+            state.round43_lp_work = 0.0;
+        }
         if (state.artifact_ready) {
             if (std::filesystem::exists(state.artifact.path) &&
                 fileSha256(state.artifact.path) == state.artifact.sha256) {
@@ -3138,16 +3219,19 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             return false;
         }
         CanonicalCompactModelSpec spec;
-        spec.round51_subset_duration_big_m =
+        const Round50IntervalMipPolicy interval_policy =
             parseRound50IntervalMipPolicy(
-                options.external_gini_interval_mip_policy)
-                .subset_duration_big_m;
+                options.external_gini_interval_mip_policy);
+        spec.round51_subset_duration_big_m =
+            interval_policy.subset_duration_big_m;
+        spec.station_state_formulation =
+            interval_policy.station_state_formulation;
         spec.strengthened = true;
         spec.interval_restricted = true;
         spec.gamma_L = leaf.gamma_L;
         spec.gamma_U = leaf.gamma_U;
         spec.add_verified_incumbent_row = true;
-        spec.verified_incumbent = verified_seed.objective;
+        spec.verified_incumbent = verified_ub;
         spec.incumbent_epsilon = 0.0;
         if (round43_active || round44_active) {
             spec.objective_gini_envelope_facets =
@@ -3185,6 +3269,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             first_model_build_recorded = true;
         }
         state.artifact_ready = state.artifact.written;
+        state.artifact_incumbent_epoch =
+            state.artifact_ready ? incumbent_epoch : -1;
         if (!state.artifact_ready) {
             result.external_gini_tree_failure_reason =
                 "paper_static_leaf_model_build_failed:" +
@@ -3195,7 +3281,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
 
     auto solveLp = [&](const ControllingLeaf& leaf,
                        PaperLeafRuntime& state) -> bool {
-        if (state.lp_complete) return true;
+        if (state.lp_complete &&
+            state.lp_incumbent_epoch == incumbent_epoch) return true;
         if (!ensureArtifact(leaf, state)) return false;
         const double remaining = globalDeadlineRemaining();
         if (remaining <= 0.0) {
@@ -3209,7 +3296,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         request.leaf_id = leaf.id;
         request.gamma_L = leaf.gamma_L;
         request.gamma_U = leaf.gamma_U;
-        request.verified_cutoff = verified_seed.objective;
+        request.verified_cutoff = verified_ub;
         request.global_deadline_remaining_seconds = remaining;
         request.new_leaf = true;
         request.warm_start_enabled = false;
@@ -3259,6 +3346,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         state.round43_lp_objective = outcome.lp_objective_value;
         state.round43_lp_work = outcome.work;
         state.lp_complete = state.lp.terminal_valid;
+        state.lp_incumbent_epoch =
+            state.lp_complete ? incumbent_epoch : -1;
         lp_ledger << leaf.id << ',' << csvField(leaf.parent_id) << ','
                   << leaf.split_depth << ',' << std::setprecision(17)
                   << leaf.gamma_L << ',' << leaf.gamma_U << ','
@@ -3304,7 +3393,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     auto solveSpeculativeLp = [&](const ControllingLeaf& leaf,
                                   PaperLeafRuntime& state,
                                   const std::string& event_source) -> bool {
-        if (state.lp_complete) return true;
+        if (state.lp_complete &&
+            state.lp_incumbent_epoch == incumbent_epoch) return true;
         if (!ensureArtifact(leaf, state)) return false;
         const double remaining = globalDeadlineRemaining();
         if (remaining <= 0.0) {
@@ -3357,6 +3447,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         state.lp.lower_bound = outcome.native_bound;
         copyLpPrimalDualEvidence(outcome, state.lp);
         state.lp_complete = state.lp.terminal_valid;
+        state.lp_incumbent_epoch =
+            state.lp_complete ? incumbent_epoch : -1;
         state.round43_lp_g_available = outcome.lp_g_value_available;
         state.round43_lp_g = outcome.lp_g_value;
         state.round43_lp_objective_available =
@@ -3597,6 +3689,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             outcome.incumbent_independently_verified &&
             outcome.incumbent_objective < verified_ub - 1e-9) {
             verified_ub = outcome.incumbent_objective;
+            ++incumbent_epoch;
             best_routes = outcome.incumbent_routes;
             std::string cutoff_reason;
             if (!scheduler.tightenVerifiedCutoff(
@@ -4978,7 +5071,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 backend->discardLeaf(bounded.id);
                 selected_state.artifact_ready = false;
                 selected_state.artifact = CanonicalCompactModelArtifact{};
+                selected_state.artifact_incumbent_epoch = -1;
                 selected_state.lp_complete = false;
+                selected_state.lp_incumbent_epoch = -1;
                 selected_state.round43_inherited_facets = parent_facets;
                 if (!ensureArtifact(bounded, selected_state)) {
                     if (!global_deadline_stop) hard_failure = true;
@@ -5607,6 +5702,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 backend->discardLeaf(bounded.id);
                 selected_state.artifact_ready = false;
                 selected_state.artifact = CanonicalCompactModelArtifact{};
+                selected_state.artifact_incumbent_epoch = -1;
+                selected_state.lp_complete = false;
+                selected_state.lp_incumbent_epoch = -1;
                 selected_state.round43_inherited_facets =
                     propagated_facets;
                 if (!ensureArtifact(bounded, selected_state)) {
@@ -5723,13 +5821,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
              round40_geometry.adaptive_refinement) &&
             legacyAdaptiveSplitEligible(
                 bounded.gamma_L, bounded.gamma_U, bounded.split_depth,
-                options.frontier_adaptive_max_depth,
-                options.frontier_adaptive_min_width));
+                controller_maximum_split_depth,
+                controller_minimum_interval_width));
         bool split_parent = false;
         if (eligible) {
             const auto geometry = splitLegacyFrontierInterval(
                 bounded.gamma_L, bounded.gamma_U,
-                options.frontier_adaptive_split_factor);
+                controller_split_factor);
             if (geometry.size() != 2 || !exactIntervalCoverage(
                     {bounded.gamma_L, bounded.gamma_U}, geometry,
                     scheduler.certificateTolerance())) {
@@ -5854,6 +5952,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 child_state.lp.lower_bound = outcome.native_bound;
                 copyLpPrimalDualEvidence(outcome, child_state.lp);
                 child_state.lp_complete = child_state.lp.terminal_valid;
+                child_state.lp_incumbent_epoch =
+                    child_state.lp_complete ? incumbent_epoch : -1;
                 lp_ledger << child.id << ',' << csvField(child.parent_id) << ','
                           << child.split_depth << ',' << child.gamma_L << ','
                           << child.gamma_U << ',' << child_state.lp.terminal_valid
@@ -5913,7 +6013,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                           bounded.lower_bound, verified_ub,
                           runtime[children[0].id].lp,
                           runtime[children[1].id].lp,
-                          options.round47_c6_adaptive_mass_tau,
+                          controller_split_threshold,
                           scheduler.certificateTolerance(),
                           round47_contraction)
                     : (round36_causal
@@ -6053,8 +6153,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 }
             }
             if (c6_nonblocking &&
-                options.round40_c6_coarse_start ==
-                    "k1-adaptive-decisive" &&
+                controller_coarse_policy == "k1-adaptive-decisive" &&
                 c6_split.valid) {
                 const bool decisive_child_evidence =
                     c6_split.child_infeasibility_trigger ||
@@ -6159,7 +6258,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             split_ledger << '\n';
             if (c6_nonblocking && c6_split.valid) {
                 ++c6_decision_sequence;
-                const int c6_initial_k0 = round40_coarse_start ? 1 : 4;
+                const int c6_initial_k0 = round40_coarse_start
+                    ? controller_initial_interval_count : 4;
                 const std::string rho_source =
                     options.c6_normalized_split_threshold_explicit
                         ? "explicit" : "implicit-default";
@@ -6184,7 +6284,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                                 : (round47_active
                                 ? c6_split.adaptive_mass_score +
                                     c6_split.adaptive_score_tolerance >=
-                                        options.round47_c6_adaptive_mass_tau
+                                        controller_split_threshold
                                 : c6_split.normalized_disjunction_gain + 1e-15 >=
                                     options.c6_normalized_split_threshold))
                                 ? "gain_greater_than_or_equal_to_rho"
@@ -6509,7 +6609,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                         std::max(scheduler.certificateTolerance(), 1e-12));
                     round47_adaptive_mass_ledger
                         << c6_decision_sequence << ',' << c6_initial_k0 << ','
-                        << options.round47_c6_adaptive_mass_tau << ','
+                        << controller_split_threshold << ','
                         << csvField(bounded.id) << ','
                         << csvField(bounded.parent_id) << ','
                         << bounded.split_depth << ',' << bounded.gamma_L << ','
@@ -6840,6 +6940,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     outcome.incumbent_independently_verified &&
                     outcome.incumbent_objective < verified_ub - 1e-9) {
                     verified_ub = outcome.incumbent_objective;
+                    ++incumbent_epoch;
                     best_routes = outcome.incumbent_routes;
                     const ControllingLeaf* improved_leaf =
                         scheduler.findLeaf(bounded.id);
@@ -7246,6 +7347,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     block_outcome.incumbent_independently_verified &&
                     block_outcome.incumbent_objective < verified_ub - 1e-9) {
                     verified_ub = block_outcome.incumbent_objective;
+                    ++incumbent_epoch;
                     best_routes = block_outcome.incumbent_routes;
                     std::string cutoff_reason;
                     if (!scheduler.tightenVerifiedCutoff(
@@ -7603,7 +7705,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                                 PaperLeafRuntime& block_state = runtime[block_id];
                                 block_state.artifact_ready = true;
                                 block_state.artifact = block_artifact;
+                                block_state.artifact_incumbent_epoch =
+                                    incumbent_epoch;
                                 block_state.lp_complete = true;
+                                block_state.lp_incumbent_epoch =
+                                    incumbent_epoch;
                                 block_state.terminal_ready = true;
                                 block_state.terminal_mip_started = true;
                                 backend->discardLeaf(left.id);
@@ -7629,6 +7735,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                                         verified_ub - 1e-9) {
                                     verified_ub =
                                         block_outcome.incumbent_objective;
+                                    ++incumbent_epoch;
                                     best_routes = block_outcome.incumbent_routes;
                                     std::string cutoff_reason;
                                     if (!scheduler.tightenVerifiedCutoff(
@@ -7877,6 +7984,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             outcome.incumbent_independently_verified &&
             outcome.incumbent_objective < verified_ub - 1e-9) {
             verified_ub = outcome.incumbent_objective;
+            ++incumbent_epoch;
             best_routes = outcome.incumbent_routes;
             if (c6_nonblocking) {
                 std::string cutoff_reason;
