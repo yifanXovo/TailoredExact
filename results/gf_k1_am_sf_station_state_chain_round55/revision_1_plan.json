@@ -1,0 +1,41 @@
+{
+  "schema": "round55-controlled-revision-plan-v1",
+  "revision": 1,
+  "name": "SF-R1",
+  "policy": "round55-sf-r1-remove-triple-duration",
+  "category": "cut_management",
+  "frozen_before_revision_source_change": true,
+  "frozen_before_revision_performance_testing": true,
+  "design_evidence_scope": "offline family-resolved root-LP audit only",
+  "mechanism_changed": "remove triple_support_duration_cover",
+  "mechanisms_changed_count": 1,
+  "retained_families": [
+    "pair_support_duration_cover",
+    "all F0-CLEAN core, domain, linking, objective, and other strengthening families"
+  ],
+  "uniform_activation_rule": "set compact_bc_support_cut_max_size=2 for every model built under the SF-R1 policy",
+  "parameters": [],
+  "instance_dispatch": false,
+  "size_dispatch": false,
+  "time_or_work_dispatch": false,
+  "reason": "Across 27 frozen states the triple family added 216919 rows, had zero root-active/dual-nonzero rate, had zero strict root-bound contribution, and its isolated removal had root-LP Work geometric-mean ratio 0.8687645295438094.",
+  "comparison_arm": "F0-CLEAN",
+  "development_states": [
+    "D1", "D2", "D3", "D4", "D5", "D6", "D7",
+    "D8", "D9", "D10", "D11", "D12", "D13", "D14"
+  ],
+  "development_cap_seconds": 300,
+  "development_rows": 28,
+  "advancement_gate": [
+    "zero correctness failures",
+    "zero false certificates",
+    "no lost F0 certificate",
+    "zero severe regression",
+    "benefit in at least two structural roles",
+    "shifted Work geometric mean <= 0.95 or certificate gain with nonworse aggregate Work and GI",
+    "capped-state aggregate GI nonworse",
+    "no forbidden dispatch"
+  ],
+  "maximum_sparse_revisions_opened": 1,
+  "SF_R2": "declined: pair removal has smaller matrix and root-LP benefit, and one bounded sparse revision is sufficient"
+}

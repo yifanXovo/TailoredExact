@@ -31,6 +31,9 @@ void configurePaperK1AmSfOverrides(SolveOptions& opt) {
     opt.compact_bc_objective_estimator_mode = "adaptive";
     opt.compact_bc_domain_propagation_mode = "iterative";
     opt.compact_bc_domain_propagation_rounds = 2;
+    opt.compact_bc_support_duration_cuts = true;
+    opt.compact_bc_support_cut_max_size = 3;
+    opt.compact_bc_support_cut_max_subsets = 50000;
     opt.compact_bc_variable_s_centering = true;
     opt.compact_bc_sp_product_estimator = "paper-safe";
     opt.compact_bc_sp_product_bounds = "tight";

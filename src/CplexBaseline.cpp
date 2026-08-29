@@ -4191,6 +4191,7 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
     artifact.round51_subset_duration_big_m =
         spec.round51_subset_duration_big_m;
     artifact.station_state_formulation = spec.station_state_formulation;
+    artifact.sparse_family_removal = spec.sparse_family_removal;
     artifact.static_segmented_gini = spec.static_segmented_gini;
     artifact.objective_gini_envelope_rows = static_cast<long long>(
         spec.objective_gini_envelope_facets.size());
@@ -4252,6 +4253,17 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
             throw std::runtime_error(
                 "round55_station_state_requires_strengthened_interval_model");
         }
+        if (spec.sparse_family_removal != "none" &&
+            spec.sparse_family_removal !=
+                "triple-support-duration-cover") {
+            throw std::runtime_error(
+                "unsupported_round55_sparse_family_removal");
+        }
+        if (spec.sparse_family_removal != "none" &&
+            !spec.strengthened) {
+            throw std::runtime_error(
+                "round55_sparse_family_removal_requires_strengthened_model");
+        }
         if (spec.static_segmented_gini != "off" &&
             (!spec.strengthened || !spec.interval_restricted ||
              !spec.add_verified_incumbent_row)) {
@@ -4261,6 +4273,10 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
         SolveOptions model_options = options;
         if (spec.interval_restricted) {
             model_options.interval_row_factory_round19 = true;
+        }
+        if (spec.sparse_family_removal ==
+            "triple-support-duration-cover") {
+            model_options.compact_bc_support_cut_max_size = 2;
         }
         CompactIntervalCutoffConfig cutoff;
         cutoff.enabled = spec.interval_restricted;
@@ -4313,6 +4329,10 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
             static_stats.station_state_perspective_variables;
         artifact.aggregate_mccormick_rows =
             static_stats.aggregate_mccormick_rows;
+        artifact.support_duration_pair_rows =
+            stats.support_duration_pair_cuts_added;
+        artifact.support_duration_triple_rows =
+            stats.support_duration_triple_cuts_added;
         artifact.static_family_encoding = static_stats.family_encoding;
         const ModelSizeStats size = analyzeLpModel(path);
         artifact.rows = size.rows;

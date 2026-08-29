@@ -77,6 +77,9 @@ int main() {
         const auto mc4 = ebrp::parseRound50IntervalMipPolicy("sf-mc4");
         const auto vdp = ebrp::parseRound50IntervalMipPolicy("vd-p");
         const auto vdj = ebrp::parseRound50IntervalMipPolicy("vd-j");
+        const auto sf_r1 = ebrp::parseRound50IntervalMipPolicy("sf-r1");
+        const auto vdp_sf_r1 =
+            ebrp::parseRound50IntervalMipPolicy("vdp-sf-r1");
         check(f0.valid && f0.subset_duration_big_m == "off",
               "7 F0 exhaustive family omission");
         check(mc4.valid && mc4.station_state_formulation == "aggregate-mc4",
@@ -85,6 +88,16 @@ int main() {
               "9 VD-P policy identity");
         check(vdj.valid && vdj.station_state_formulation == "vd-j",
               "10 VD-J policy identity");
+        check(sf_r1.valid &&
+              sf_r1.station_state_formulation == "bit-product" &&
+              sf_r1.sparse_family_removal ==
+                  "triple-support-duration-cover",
+              "10a SF-R1 removes exactly the triple duration family");
+        check(vdp_sf_r1.valid &&
+              vdp_sf_r1.station_state_formulation == "vd-p" &&
+              vdp_sf_r1.sparse_family_removal ==
+                  "triple-support-duration-cover",
+              "10b interaction policy composes only VD-P and SF-R1");
         check(!ebrp::round53CallbackMipNodeEnabled(vdj) &&
               !ebrp::round53CallbackSubmissionEnabled(vdj) &&
               !ebrp::round53CallbackPreCrushEnabled(vdj),
@@ -104,7 +117,8 @@ int main() {
         std::filesystem::create_directories(temp);
         auto build = [&](const std::string& formulation,
                          const std::string& file,
-                         double cutoff = 0.049468682614419446) {
+                         double cutoff = 0.049468682614419446,
+                         const std::string& sparse_removal = "none") {
             ebrp::CanonicalCompactModelSpec spec;
             spec.strengthened = true;
             spec.interval_restricted = true;
@@ -114,6 +128,7 @@ int main() {
             spec.verified_incumbent = cutoff;
             spec.round51_subset_duration_big_m = "off";
             spec.station_state_formulation = formulation;
+            spec.sparse_family_removal = sparse_removal;
             return ebrp::writeCanonicalCompactModel(
                 instance, fixed_options, temp / file, spec);
         };
@@ -124,6 +139,12 @@ int main() {
         const auto vdj_repeat = build("vd-j", "vdj_repeat.lp");
         const auto vdj_tighter = build(
             "vd-j", "vdj_tighter.lp", 0.045);
+        const auto sf_r1_model = build(
+            "bit-product", "sf_r1.lp", 0.049468682614419446,
+            "triple-support-duration-cover");
+        const auto vdp_sf_r1_model = build(
+            "vd-p", "vdp_sf_r1.lp", 0.049468682614419446,
+            "triple-support-duration-cover");
         check(f0_model.written && mc4_model.written &&
               vdp_model.written && vdj_model.written,
               "12 every station-state model constructs");
@@ -170,6 +191,20 @@ int main() {
         check(vdp_model.round51_subset_duration_rows == 0 &&
               vdj_model.round51_subset_duration_rows == 0,
               "26 F0 omission preserved in VD formulations");
+        check(sf_r1_model.support_duration_pair_rows ==
+                  f0_model.support_duration_pair_rows &&
+              sf_r1_model.support_duration_pair_rows > 0,
+              "26a SF-R1 retains every pair-support duration row");
+        check(f0_model.support_duration_triple_rows > 0 &&
+              sf_r1_model.support_duration_triple_rows == 0 &&
+              f0_model.rows - sf_r1_model.rows ==
+                  f0_model.support_duration_triple_rows,
+              "26b SF-R1 removes exactly every triple-support duration row");
+        check(vdp_sf_r1_model.station_state_formulation == "vd-p" &&
+              vdp_sf_r1_model.sparse_family_removal ==
+                  "triple-support-duration-cover" &&
+              vdp_sf_r1_model.support_duration_triple_rows == 0,
+              "26c interaction model preserves both exact policy identities");
         check(vdp_lp.find("Generals\n Y_1") != std::string::npos ||
               vdp_lp.find("\n Y_1") != std::string::npos,
               "27 original integer inventory domain retained");

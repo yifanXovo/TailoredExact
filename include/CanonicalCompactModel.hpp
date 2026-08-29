@@ -46,6 +46,9 @@ struct CanonicalCompactModelSpec {
     // Round 55 exact station-state formulation switch. The historical
     // bit-product representation remains the default.
     std::string station_state_formulation = "bit-product";
+    // Uniform default-off optional-family removal. The only Round 55 value
+    // besides "none" is "triple-support-duration-cover".
+    std::string sparse_family_removal = "none";
     std::string static_model_identity;
     // Valid affine lower bounds h(G)=alpha+beta*G whose source interval
     // contains this model's interval.  The writer emits h(G) <= objective.
@@ -88,9 +91,12 @@ struct CanonicalCompactModelArtifact {
     double round51_subset_duration_max_m = 0.0;
     bool round51_historical_m_may_be_unsafe = false;
     std::string station_state_formulation = "bit-product";
+    std::string sparse_family_removal = "none";
     long long station_state_selector_variables = 0;
     long long station_state_perspective_variables = 0;
     long long aggregate_mccormick_rows = 0;
+    long long support_duration_pair_rows = 0;
+    long long support_duration_triple_rows = 0;
     long long objective_gini_envelope_rows = 0;
     std::string static_family_encoding;
     std::string objective_definition =

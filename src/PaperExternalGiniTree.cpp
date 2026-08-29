@@ -1114,6 +1114,8 @@ SolveResult solveRound41RootReference(
         root_reference_policy.subset_duration_big_m;
     spec.station_state_formulation =
         root_reference_policy.station_state_formulation;
+    spec.sparse_family_removal =
+        root_reference_policy.sparse_family_removal;
     spec.strengthened = true;
     spec.interval_restricted = true;
     spec.gamma_L = interval.lower;
@@ -1402,6 +1404,7 @@ SolveResult solveStaticSegmentedGini(
         static_policy.subset_duration_big_m;
     spec.station_state_formulation =
         static_policy.station_state_formulation;
+    spec.sparse_family_removal = static_policy.sparse_family_removal;
     spec.strengthened = true;
     spec.interval_restricted = true;
     spec.gamma_L = block_union.lower;
@@ -3226,6 +3229,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             interval_policy.subset_duration_big_m;
         spec.station_state_formulation =
             interval_policy.station_state_formulation;
+        spec.sparse_family_removal =
+            interval_policy.sparse_family_removal;
         spec.strengthened = true;
         spec.interval_restricted = true;
         spec.gamma_L = leaf.gamma_L;
@@ -7209,6 +7214,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     parseRound50IntervalMipPolicy(
                         options.external_gini_interval_mip_policy)
                         .subset_duration_big_m;
+                block_model_spec.sparse_family_removal =
+                    parseRound50IntervalMipPolicy(
+                        options.external_gini_interval_mip_policy)
+                        .sparse_family_removal;
                 block_model_spec.strengthened = true;
                 block_model_spec.interval_restricted = true;
                 block_model_spec.gamma_L = union_interval.lower;
@@ -7507,6 +7516,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                         parseRound50IntervalMipPolicy(
                             options.external_gini_interval_mip_policy)
                             .subset_duration_big_m;
+                    block_model_spec.sparse_family_removal =
+                        parseRound50IntervalMipPolicy(
+                            options.external_gini_interval_mip_policy)
+                            .sparse_family_removal;
                     block_model_spec.strengthened = true;
                     block_model_spec.interval_restricted = true;
                     block_model_spec.gamma_L = union_interval.lower;
