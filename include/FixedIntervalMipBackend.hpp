@@ -100,6 +100,20 @@ struct FixedIntervalMipRequest {
         int priority = 0;
     };
     std::vector<BranchPriorityOverride> branch_priority_overrides;
+    // Round 54 external root closure rows. These are deterministic, already
+    // validated inventory-route cuts added to a freshly read model before
+    // either the LP relaxation or terminal MIP. The canonical artifact itself
+    // is immutable and its fingerprint remains the request identity.
+    struct AdditionalLinearRow {
+        std::string row_name;
+        std::vector<std::string> variable_names;
+        std::vector<double> coefficients;
+        char sense = '<';
+        double rhs = 0.0;
+        std::string canonical_signature;
+        std::string scope = "global";
+    };
+    std::vector<AdditionalLinearRow> additional_linear_rows;
 };
 
 struct FixedIntervalBranchPriorityEvidence {
@@ -256,6 +270,11 @@ struct FixedIntervalMipOutcome {
     long long variable_bound_override_count = 0;
     std::string variable_bound_override_status = "not_requested";
     std::vector<FixedIntervalCutFamilyEvidence> root_cut_family_evidence;
+    bool additional_linear_rows_attempted = false;
+    bool additional_linear_rows_valid = false;
+    long long additional_linear_rows_added = 0;
+    std::string additional_linear_row_signatures;
+    std::string additional_linear_rows_status = "not_requested";
     std::string tailored_cut_policy = "off";
     std::string round53_callback_mode = "off";
     long long round53_mipnode_calls = 0;

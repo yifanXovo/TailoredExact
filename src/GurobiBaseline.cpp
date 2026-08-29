@@ -79,6 +79,7 @@ struct GurobiApi {
     decltype(&GRBsetdblattrarray) setdblattrarray = nullptr;
     decltype(&GRBsetintattrarray) setintattrarray = nullptr;
     decltype(&GRBsetcharattrarray) setcharattrarray = nullptr;
+    decltype(&GRBaddconstr) addconstr = nullptr;
     decltype(&GRBupdatemodel) updatemodel = nullptr;
     decltype(&GRBwrite) write = nullptr;
 };
@@ -217,6 +218,7 @@ bool loadGurobiApi(const SolveOptions& options,
     LOAD_GRB(setdblattrarray, "GRBsetdblattrarray");
     LOAD_GRB(setintattrarray, "GRBsetintattrarray");
     LOAD_GRB(setcharattrarray, "GRBsetcharattrarray");
+    LOAD_GRB(addconstr, "GRBaddconstr");
     LOAD_GRB(updatemodel, "GRBupdatemodel");
     LOAD_GRB(write, "GRBwrite");
 #undef LOAD_GRB
@@ -952,6 +954,92 @@ public:
         if (!round50_policy.valid) {
             out.failure_reason = round50_policy.failure_reason;
             return out;
+        }
+        if (!request.additional_linear_rows.empty()) {
+            out.additional_linear_rows_attempted = true;
+            if (retained) {
+                out.additional_linear_rows_status =
+                    "additional_rows_require_fresh_canonical_model";
+                out.failure_reason = out.additional_linear_rows_status;
+                return out;
+            }
+            std::unordered_map<std::string, int> indices;
+            bool rows_valid = native_names.size() ==
+                static_cast<std::size_t>(native_variables);
+            for (int index = 0; rows_valid && index < native_variables;
+                 ++index) {
+                const std::string& name = native_names[
+                    static_cast<std::size_t>(index)];
+                rows_valid = !name.empty() &&
+                    indices.emplace(name, index).second;
+            }
+            std::set<std::string> row_names;
+            std::set<std::string> signatures;
+            std::ostringstream signature_ledger;
+            int add_rc = 0;
+            for (std::size_t row_index = 0;
+                 rows_valid && row_index < request.additional_linear_rows.size();
+                 ++row_index) {
+                const auto& row = request.additional_linear_rows[row_index];
+                rows_valid = !row.row_name.empty() &&
+                    row_names.insert(row.row_name).second &&
+                    !row.canonical_signature.empty() &&
+                    signatures.insert(row.canonical_signature).second &&
+                    row.variable_names.size() == row.coefficients.size() &&
+                    !row.variable_names.empty() && std::isfinite(row.rhs) &&
+                    (row.sense == '<' || row.sense == '>' || row.sense == '=');
+                std::vector<int> columns;
+                std::vector<double> coefficients;
+                std::set<std::string> row_variables;
+                for (std::size_t term = 0;
+                     rows_valid && term < row.variable_names.size(); ++term) {
+                    const auto found_index = indices.find(row.variable_names[term]);
+                    rows_valid = found_index != indices.end() &&
+                        row_variables.insert(row.variable_names[term]).second &&
+                        std::isfinite(row.coefficients[term]) &&
+                        std::fabs(row.coefficients[term]) > 1e-14;
+                    if (rows_valid) {
+                        columns.push_back(found_index->second);
+                        coefficients.push_back(row.coefficients[term]);
+                    }
+                }
+                if (!rows_valid) break;
+                const char native_sense = row.sense == '<'
+                    ? GRB_LESS_EQUAL : (row.sense == '>'
+                        ? GRB_GREATER_EQUAL : GRB_EQUAL);
+                add_rc = api_.addconstr(
+                    model, static_cast<int>(columns.size()), columns.data(),
+                    coefficients.data(), native_sense, row.rhs,
+                    row.row_name.c_str());
+                rows_valid = add_rc == 0;
+                if (rows_valid) {
+                    if (row_index) signature_ledger << ';';
+                    signature_ledger << row.canonical_signature;
+                    ++out.additional_linear_rows_added;
+                }
+            }
+            const int update_rc = rows_valid ? api_.updatemodel(model) : add_rc;
+            int rows_after = -1;
+            const bool row_count_valid = rows_valid && update_rc == 0 &&
+                api_.getintattr(model, GRB_INT_ATTR_NUMCONSTRS, &rows_after) == 0 &&
+                rows_after == native_rows +
+                    static_cast<int>(request.additional_linear_rows.size());
+            out.additional_linear_rows_valid = rows_valid && row_count_valid &&
+                out.additional_linear_rows_added == static_cast<long long>(
+                    request.additional_linear_rows.size());
+            out.additional_linear_row_signatures = signature_ledger.str();
+            out.additional_linear_rows_status = out.additional_linear_rows_valid
+                ? "added_to_fresh_model_and_count_read_back"
+                : (!rows_valid ? "invalid_or_unaddable_linear_row"
+                               : "linear_row_count_readback_failed");
+            if (!out.additional_linear_rows_valid) {
+                out.failure_reason = out.additional_linear_rows_status;
+                return out;
+            }
+            out.native_model_modified = true;
+            out.model_linear_constraint_count = rows_after;
+        } else {
+            out.additional_linear_rows_valid = true;
         }
         if (!request.variable_bound_overrides.empty()) {
             out.variable_bound_override_attempted = true;

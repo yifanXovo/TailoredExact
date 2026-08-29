@@ -126,6 +126,31 @@ Round50IntervalMipPolicy parseRound50IntervalMipPolicy(
         out.tailored_cut_policy = "sd-r3-root-blockmax";
         out.tailored_cut_support_rank = 3;
         out.round53_callback_mode = "c5-live";
+    } else if (out.name == "research-ir1-mixed-root-closure" ||
+               out.name == "ir1") {
+        out.name = "research-ir1-mixed-root-closure";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "off";
+        out.tailored_cut_policy = "f0-clean-none";
+        out.round53_callback_mode = "c0-baseline";
+        out.inventory_route_root_closure = "ir1-mixed-full-closure";
+    } else if (out.name == "research-ir2-mixed-projected-root-closure" ||
+               out.name == "ir2") {
+        out.name = "research-ir2-mixed-projected-root-closure";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "off";
+        out.tailored_cut_policy = "f0-clean-none";
+        out.round53_callback_mode = "c0-baseline";
+        out.inventory_route_root_closure =
+            "ir2-mixed-projected-full-closure";
+    } else if (out.name == "research-ir3-one-pass-mixed" ||
+               out.name == "ir3") {
+        out.name = "research-ir3-one-pass-mixed";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "off";
+        out.tailored_cut_policy = "f0-clean-none";
+        out.round53_callback_mode = "c0-baseline";
+        out.inventory_route_root_closure = "ir3-mixed-one-pass";
     } else if (out.name == "f1-static-rank3-loose") {
         out.branching = Round50BranchingPolicy::Default;
         out.subset_duration_big_m = "rank3-historical-100000";

@@ -35,7 +35,10 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Round48K1AMF.cpp
   src/Round49K1RC.cpp
   src/Round50IntervalMip.cpp
+  src/PaperK1AmSf.cpp
   src/Round53CallbackIsolation.cpp
+  src/InventoryRouteCuts.cpp
+  src/InventoryRouteRootClosure.cpp
   src/Round51IntervalMip.cpp
   src/Round52TailoredCuts.cpp
   src/Round52GurobiCutAdapter.cpp
@@ -251,3 +254,16 @@ add_executable(Round53F0AndCallbackTests
   tests/round53_f0_callback_tests.cpp)
 target_link_libraries(Round53F0AndCallbackTests PRIVATE exact_ebrp_core)
 add_test(NAME Round53F0AndCallbackTests COMMAND Round53F0AndCallbackTests)
+
+add_executable(Round54InventoryRouteExperiment
+  src/round54_inventory_route_main.cpp)
+target_link_libraries(Round54InventoryRouteExperiment PRIVATE exact_ebrp_core)
+
+add_executable(Round54MainlineAndInventoryRouteTests
+  tests/round54_mainline_inventory_route_tests.cpp)
+target_link_libraries(Round54MainlineAndInventoryRouteTests
+  PRIVATE exact_ebrp_core)
+target_compile_definitions(Round54MainlineAndInventoryRouteTests PRIVATE
+  EXACT_EBRP_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
+add_test(NAME Round54MainlineAndInventoryRouteTests
+  COMMAND Round54MainlineAndInventoryRouteTests)
