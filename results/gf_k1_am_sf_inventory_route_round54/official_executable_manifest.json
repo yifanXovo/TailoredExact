@@ -1,0 +1,14 @@
+{
+  "schema": "round54-official-executable-manifest-v1",
+  "source_freeze_commit": "b6784e930f5df3b8bb048e7572301f942c017cd0",
+  "build_directory": "build/official-round54-b6784e930",
+  "compiler": "GCC 14.2.0 x86_64-w64-mingw32",
+  "configuration": "Release",
+  "gurobi": "13.0.2",
+  "round54_comparator_executable": "build/official-round54-b6784e930/Round54InventoryRouteExperiment.exe",
+  "round54_comparator_executable_sha256": "5bf75380b4d2611cd9f4c44b1d7a5882a159658c3c98d2a6f189ff7bcf3f1d3d",
+  "paper_mainline_executable": "build/official-round54-b6784e930/ExactEBRP.exe",
+  "paper_mainline_executable_sha256": "fdbb3fcc11c6a09abc4343077071970879c7c23d4f7434333602565e6d137fc2",
+  "same_executable_for_fixed_interval_arms": true,
+  "source_change_after_freeze_invalidates_entered_live_rows": true
+}
