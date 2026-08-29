@@ -39,6 +39,10 @@ struct Round50IntervalMipPolicy {
     // Round 52 default-off tailored user-cut/static ablation policy.
     std::string tailored_cut_policy = "off";
     int tailored_cut_support_rank = 0;
+    // Round 53 diagnostic-only callback decomposition.  "off" preserves
+    // every pre-Round-53 policy.  The c0--c5 values are uniform policies and
+    // are never inferred from an instance or solve state.
+    std::string round53_callback_mode = "off";
     std::string failure_reason;
 };
 

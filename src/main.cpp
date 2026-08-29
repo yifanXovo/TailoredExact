@@ -17,6 +17,7 @@
 #include "Pricing.hpp"
 #include "ProcessPhaseLedger.hpp"
 #include "Result.hpp"
+#include "Round50IntervalMip.hpp"
 #include "TailoredBC.hpp"
 #include "TailoredBCCuts.hpp"
 #include "TailoredBCCplexApi.hpp"
@@ -62,6 +63,7 @@ void usage() {
         << "[--gini-cap <gamma>] [--gini-floor <gamma>] [--max-nodes <N>] [--frontier-intervals <N>] [--frontier-refine-splits <N>] "
         << "[--frontier-execution-mode scheduler|global-gini-tree|external-gini-tree] [--global-gini-tree-presolve on|off] "
         << "[--external-gini-split-after-attempts <N>] [--external-gini-scheduling legacy-quanta|paper-lp-event|cplex-algorithm-replica|round29-bound-gain-incremental|round30-dual-bound-target|round31-nonblocking-native-bound] "
+        << "[--external-gini-interval-mip-policy <uniform-policy>] "
         << "[--process-wall-time-limit <seconds>] [--process-shutdown-margin <seconds>] [--process-phase-ledger <csv>] "
         << "[--global-gini-tree-search dynamic|traditional|auto] [--global-gini-tree-child-estimate parent-copy|dispersion-coupled|factory-domain] "
         << "[--global-gini-tree-row-attachment full-inherited-pack|exact-incremental-delta] [--global-gini-tree-row-timing deferred|eager] "
@@ -641,6 +643,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round24-executable-sha256") opt.round24_executable_sha256 = requireValue(i, argc, argv);
         else if (arg == "--round24-manifest-executable-sha256") opt.round24_manifest_executable_sha256 = requireValue(i, argc, argv);
         else if (arg == "--external-gini-backend") opt.external_gini_backend = requireValue(i, argc, argv);
+        else if (arg == "--external-gini-interval-mip-policy") opt.external_gini_interval_mip_policy = requireValue(i, argc, argv);
         else if (arg == "--external-gini-lifecycle") opt.external_gini_lifecycle = requireValue(i, argc, argv);
         else if (arg == "--external-gini-scheduling") opt.external_gini_scheduling = requireValue(i, argc, argv);
         else if (arg == "--external-gini-warm-start") opt.external_gini_warm_start = parseBoolValue(requireValue(i, argc, argv));
@@ -1444,6 +1447,14 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.external_gini_backend != "gurobi") {
         opt.external_gini_backend = "cplex";
     }
+    const ebrp::Round50IntervalMipPolicy interval_mip_policy =
+        ebrp::parseRound50IntervalMipPolicy(
+            opt.external_gini_interval_mip_policy);
+    if (!interval_mip_policy.valid) {
+        throw std::runtime_error(
+            "unsupported external Gini interval-MIP policy");
+    }
+    opt.external_gini_interval_mip_policy = interval_mip_policy.name;
     opt.external_gini_lifecycle = lowerAscii(opt.external_gini_lifecycle);
     if (opt.external_gini_lifecycle != "fresh-per-attempt" &&
         opt.external_gini_lifecycle != "retained-per-leaf" &&
@@ -3185,6 +3196,10 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
     result.pricing_operation_dp_dominance_enabled =
         opt.pricing_operation_dp_dominance && opt.pricing_load_dp_dominance;
     result.time_budget_seconds = opt.solve_time_limit;
+    // Record the uniformly selected inner interval-MIP backend even when the
+    // outer process reaches its deadline before entering the external tree.
+    result.external_gini_tree_interval_mip_policy =
+        opt.external_gini_interval_mip_policy;
     result.actual_runtime_seconds = result.runtime_seconds;
     result.compact_bc_root_cut_rounds = opt.compact_bc_root_cut_rounds;
     result.compact_bc_total_root_cut_rounds = opt.compact_bc_root_cut_rounds;

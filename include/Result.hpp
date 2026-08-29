@@ -480,6 +480,8 @@ struct SolveResult {
     bool external_gini_tree_attempted = false;
     bool external_gini_tree_available = false;
     std::string external_gini_tree_backend;
+    std::string external_gini_tree_interval_mip_policy =
+        "interval-mip-v0";
     std::string external_gini_tree_lifecycle;
     std::string external_gini_tree_scheduling = "legacy-quanta";
     std::string external_gini_tree_failure_reason;

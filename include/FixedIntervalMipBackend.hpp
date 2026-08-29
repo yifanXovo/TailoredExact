@@ -124,6 +124,13 @@ struct FixedIntervalLpVariableEvidence {
     int variable_basis_status = 0;
 };
 
+struct FixedIntervalLpConstraintEvidence {
+    std::string name;
+    double slack = 0.0;
+    double dual_multiplier = 0.0;
+    int constraint_basis_status = 0;
+};
+
 struct FixedIntervalMipOutcome {
     bool attempted = false;
     bool available = false;
@@ -185,6 +192,12 @@ struct FixedIntervalMipOutcome {
     std::string lp_model_fingerprint;
     std::vector<FixedIntervalLpVariableEvidence>
         lp_primal_dual_variable_evidence;
+    bool lp_constraint_slacks_available = false;
+    bool lp_constraint_duals_available = false;
+    bool lp_constraint_basis_status_available = false;
+    bool lp_constraint_evidence_available = false;
+    std::vector<FixedIntervalLpConstraintEvidence>
+        lp_primal_dual_constraint_evidence;
     double route_binary_fractionality = 0.0;
     double visit_binary_fractionality = 0.0;
     double inventory_bit_fractionality = 0.0;
@@ -244,14 +257,21 @@ struct FixedIntervalMipOutcome {
     std::string variable_bound_override_status = "not_requested";
     std::vector<FixedIntervalCutFamilyEvidence> root_cut_family_evidence;
     std::string tailored_cut_policy = "off";
+    std::string round53_callback_mode = "off";
+    long long round53_mipnode_calls = 0;
+    long long round53_mipnode_status_reads = 0;
+    long long round53_relaxation_vector_reads = 0;
+    long long round53_separator_calls = 0;
+    long long round53_cut_submission_calls = 0;
+    double round53_callback_overhead_seconds = 0.0;
     bool tailored_cut_callback_active = false;
     bool tailored_cut_callback_disabled_after_failure = false;
     bool gurobi_cbcut_symbol_loaded = false;
     bool gurobi_cblazy_symbol_loaded = false;
-    int gurobi_precrush_requested = 0;
+    int gurobi_precrush_requested = -1;
     int gurobi_precrush_set_return_code = -1;
     int gurobi_precrush_get_return_code = -1;
-    int gurobi_precrush_effective = 0;
+    int gurobi_precrush_effective = -1;
     bool gurobi_precrush_roundtrip_valid = false;
     long long tailored_cut_callback_calls = 0;
     long long tailored_cut_root_callback_calls = 0;

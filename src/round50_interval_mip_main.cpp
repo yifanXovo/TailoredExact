@@ -147,14 +147,15 @@ Arguments parseArguments(int argc, char** argv) {
         else throw std::runtime_error("unsupported option: " + arg);
     }
     if (out.mode != "solve" && out.mode != "build" &&
+        out.mode != "lp" &&
         out.mode != "resolve-cutoff") {
         throw std::runtime_error("unsupported mode");
     }
     if (out.state_id.empty() || out.input.empty() || out.artifact_dir.empty()) {
         throw std::runtime_error("state-id, input, and artifact-dir are required");
     }
-    if (!(out.process_cap_seconds > 0.0) || out.process_cap_seconds > 1800.0) {
-        throw std::runtime_error("process cap must be in (0,1800]");
+    if (!(out.process_cap_seconds > 0.0) || out.process_cap_seconds > 7200.0) {
+        throw std::runtime_error("process cap must be in (0,7200]");
     }
     if (out.mode != "resolve-cutoff" &&
         (!(out.gamma_lower >= 0.0) ||
@@ -178,6 +179,7 @@ void writeCommand(const Arguments& args, const std::filesystem::path& path) {
         << "  \"gamma_lower\": " << args.gamma_lower << ",\n"
         << "  \"gamma_upper\": " << args.gamma_upper << ",\n"
         << "  \"verified_cutoff\": " << args.cutoff << ",\n"
+        << "  \"expected_cutoff\": " << args.expected_cutoff << ",\n"
         << "  \"route_time_limit\": " << args.route_time_limit << ",\n"
         << "  \"pickup_time\": " << args.pickup_time << ",\n"
         << "  \"drop_time\": " << args.drop_time << ",\n"
@@ -331,6 +333,10 @@ void writeStateIdentity(const ebrp::Instance& instance,
         << jsonEscape(artifact.round51_subset_duration_big_m) << "\",\n"
         << "  \"round51_subset_duration_rows\": "
         << artifact.round51_subset_duration_rows << ",\n"
+        << "  \"round51_subset_duration_first_row_id\": "
+        << artifact.round51_subset_duration_first_row_id << ",\n"
+        << "  \"round51_subset_duration_last_row_id\": "
+        << artifact.round51_subset_duration_last_row_id << ",\n"
         << "  \"round51_subset_duration_min_m\": "
         << artifact.round51_subset_duration_min_m << ",\n"
         << "  \"round51_subset_duration_max_m\": "
@@ -358,6 +364,10 @@ void writeStateIdentity(const ebrp::Instance& instance,
           << jsonEscape(artifact.round51_subset_duration_big_m) << "\",\n"
           << "  \"round51_subset_duration_rows\": "
           << artifact.round51_subset_duration_rows << ",\n"
+          << "  \"round51_subset_duration_first_row_id\": "
+          << artifact.round51_subset_duration_first_row_id << ",\n"
+          << "  \"round51_subset_duration_last_row_id\": "
+          << artifact.round51_subset_duration_last_row_id << ",\n"
           << "  \"round51_subset_duration_min_m\": "
           << artifact.round51_subset_duration_min_m << ",\n"
           << "  \"round51_subset_duration_max_m\": "
@@ -370,7 +380,7 @@ void writeStateIdentity(const ebrp::Instance& instance,
 void writeStaticLedgers(const Arguments& args,
                         const ebrp::CanonicalCompactModelArtifact& artifact) {
     std::ofstream size(args.artifact_dir / "formulation_size_ledger.csv");
-    size << "state_id,policy,original_rows,original_columns,original_nonzeros,model_scope,exact_duplicate_row_elimination,exact_duplicate_rows_omitted,round50_symmetry_policy,round50_symmetry_rows,round51_subset_duration_big_m,round51_subset_duration_rows,round51_subset_duration_min_m,round51_subset_duration_max_m,historical_m_may_be_unsafe\n"
+    size << "state_id,policy,original_rows,original_columns,original_nonzeros,model_scope,exact_duplicate_row_elimination,exact_duplicate_rows_omitted,round50_symmetry_policy,round50_symmetry_rows,round51_subset_duration_big_m,round51_subset_duration_rows,round51_subset_duration_first_row_id,round51_subset_duration_last_row_id,round51_subset_duration_min_m,round51_subset_duration_max_m,historical_m_may_be_unsafe\n"
          << csvField(args.state_id) << ',' << csvField(args.policy) << ','
          << artifact.rows << ',' << artifact.columns << ','
          << artifact.nonzeros << ',' << csvField(artifact.model_scope) << ','
@@ -380,6 +390,8 @@ void writeStaticLedgers(const Arguments& args,
          << artifact.round50_symmetry_rows << ','
          << csvField(artifact.round51_subset_duration_big_m) << ','
          << artifact.round51_subset_duration_rows << ','
+         << artifact.round51_subset_duration_first_row_id << ','
+         << artifact.round51_subset_duration_last_row_id << ','
          << artifact.round51_subset_duration_min_m << ','
          << artifact.round51_subset_duration_max_m << ','
          << artifact.round51_historical_m_may_be_unsafe << '\n';
@@ -487,6 +499,82 @@ void writeAdaptiveLedgers(
              << adaptive.lifecycle_valid << '\n';
 }
 
+bool writeLpEvidence(
+    const Arguments& args,
+    const ebrp::CanonicalCompactModelArtifact& artifact,
+    const ebrp::FixedIntervalMipOutcome& outcome,
+    double process_seconds) {
+    const bool valid = outcome.attempted && outcome.available &&
+        outcome.lp_terminal_valid && outcome.optimal &&
+        outcome.lp_objective_value_available &&
+        outcome.lp_primal_dual_evidence_available &&
+        outcome.lp_constraint_evidence_available &&
+        outcome.model_fingerprint_matches_request;
+    std::ofstream result(args.artifact_dir / "lp_result.json");
+    result << std::setprecision(17)
+        << "{\n  \"schema\": \"round53-plain-lp-result-v1\",\n"
+        << "  \"state_id\": \"" << jsonEscape(args.state_id) << "\",\n"
+        << "  \"policy\": \"" << jsonEscape(args.policy) << "\",\n"
+        << "  \"valid\": " << boolJson(valid) << ",\n"
+        << "  \"native_status\": \""
+        << jsonEscape(outcome.native_status) << "\",\n"
+        << "  \"objective_available\": "
+        << boolJson(outcome.lp_objective_value_available) << ",\n"
+        << "  \"objective\": " << outcome.lp_objective_value << ",\n"
+        << "  \"work\": " << outcome.work << ",\n"
+        << "  \"solver_time_seconds\": "
+        << outcome.solver_runtime_seconds << ",\n"
+        << "  \"process_time_seconds\": " << process_seconds << ",\n"
+        << "  \"simplex_iterations\": "
+        << outcome.simplex_iterations << ",\n"
+        << "  \"presolved_model_size_available\": "
+        << boolJson(outcome.presolved_model_size_available) << ",\n"
+        << "  \"presolved_rows\": " << outcome.presolved_row_count << ",\n"
+        << "  \"presolved_columns\": "
+        << outcome.presolved_column_count << ",\n"
+        << "  \"presolved_nonzeros\": "
+        << outcome.presolved_nonzero_count << ",\n"
+        << "  \"constraint_evidence_available\": "
+        << boolJson(outcome.lp_constraint_evidence_available) << ",\n"
+        << "  \"constraint_evidence_count\": "
+        << outcome.lp_primal_dual_constraint_evidence.size() << ",\n"
+        << "  \"model_sha256\": \"" << artifact.sha256 << "\",\n"
+        << "  \"failure_reason\": \""
+        << jsonEscape(outcome.failure_reason) << "\"\n}\n";
+
+    std::ofstream constraints(
+        args.artifact_dir / "lp_constraint_evidence.csv");
+    constraints << "state_id,policy,row_index,row_name,slack,dual_multiplier,constraint_basis_status\n"
+                << std::setprecision(17);
+    for (std::size_t index = 0;
+         index < outcome.lp_primal_dual_constraint_evidence.size();
+         ++index) {
+        const auto& item =
+            outcome.lp_primal_dual_constraint_evidence[index];
+        constraints << csvField(args.state_id) << ','
+                    << csvField(args.policy) << ',' << index << ','
+                    << csvField(item.name) << ',' << item.slack << ','
+                    << item.dual_multiplier << ','
+                    << item.constraint_basis_status << '\n';
+    }
+
+    std::ofstream variables(
+        args.artifact_dir / "lp_variable_evidence.csv");
+    variables << "state_id,policy,column_index,variable_name,original_type,lower_bound,upper_bound,primal_value,reduced_cost,variable_basis_status\n"
+              << std::setprecision(17);
+    for (std::size_t index = 0;
+         index < outcome.lp_primal_dual_variable_evidence.size(); ++index) {
+        const auto& item = outcome.lp_primal_dual_variable_evidence[index];
+        variables << csvField(args.state_id) << ','
+                  << csvField(args.policy) << ',' << index << ','
+                  << csvField(item.name) << ',' << item.original_type << ','
+                  << item.lower_bound << ',' << item.upper_bound << ','
+                  << item.primal_value << ',' << item.reduced_cost << ','
+                  << item.variable_basis_status << '\n';
+    }
+    return valid;
+}
+
 void writeSolveEvidence(const Arguments& args,
                         const ebrp::CanonicalCompactModelArtifact& artifact,
                         const ebrp::FixedIntervalMipOutcome& outcome,
@@ -592,6 +680,20 @@ void writeSolveEvidence(const Arguments& args,
               ? adaptive->fallback_reason : "not_applicable") << "\",\n"
         << "  \"tailored_cut_policy\": \""
         << jsonEscape(outcome.tailored_cut_policy) << "\",\n"
+        << "  \"round53_callback_mode\": \""
+        << jsonEscape(outcome.round53_callback_mode) << "\",\n"
+        << "  \"round53_mipnode_calls\": "
+        << outcome.round53_mipnode_calls << ",\n"
+        << "  \"round53_mipnode_status_reads\": "
+        << outcome.round53_mipnode_status_reads << ",\n"
+        << "  \"round53_relaxation_vector_reads\": "
+        << outcome.round53_relaxation_vector_reads << ",\n"
+        << "  \"round53_separator_calls\": "
+        << outcome.round53_separator_calls << ",\n"
+        << "  \"round53_cut_submission_calls\": "
+        << outcome.round53_cut_submission_calls << ",\n"
+        << "  \"round53_callback_overhead_seconds\": "
+        << outcome.round53_callback_overhead_seconds << ",\n"
         << "  \"tailored_cut_callback_active\": "
         << boolJson(outcome.tailored_cut_callback_active) << ",\n"
         << "  \"tailored_cut_infrastructure_gate\": "
@@ -713,7 +815,11 @@ void writeSolveEvidence(const Arguments& args,
              << ',' << csvField(cut.family) << ',' << cut.count
              << ",native_log\n";
     }
-    if (outcome.tailored_cut_callback_active) {
+    if (outcome.round53_callback_mode == "c4-separator-dry-run") {
+        cuts << csvField(args.state_id) << ',' << csvField(args.policy)
+             << ",support-duration-dry-run-selections,"
+             << outcome.tailored_cuts_selected << ",callback_diagnostic\n";
+    } else if (outcome.tailored_cut_callback_active) {
         cuts << csvField(args.state_id) << ',' << csvField(args.policy)
              << ",support-duration-user-cuts,"
              << outcome.tailored_cuts_added << ",GRBcbcut\n";
@@ -726,16 +832,22 @@ void writeSolveEvidence(const Arguments& args,
 
     std::ofstream lifecycle(
         args.artifact_dir / "cut_lifecycle_ledger.csv");
-    lifecycle << "state_id,policy,tailored_cut_policy,callback_active,cbcut_symbol_loaded,cblazy_symbol_loaded,precrush_requested,precrush_effective,precrush_roundtrip_valid,callback_disabled_after_failure,callback_calls,root_callback_calls,tree_callback_calls,nonoptimal_mipnode_callbacks,relaxation_vector_failures,generated,violated,selected,added,duplicate_rejections,dominated_rejections,nonviolated_rejections,invalid_rejections,submission_failures,callback_failures,global_pool_size,callback_overhead_seconds,infrastructure_gate\n"
+    lifecycle << "state_id,policy,tailored_cut_policy,round53_callback_mode,callback_active,cbcut_symbol_loaded,cblazy_symbol_loaded,precrush_requested,precrush_effective,precrush_roundtrip_valid,mipnode_calls,mipnode_status_reads,relaxation_vector_reads,separator_calls,cut_submission_calls,callback_disabled_after_failure,callback_calls,root_callback_calls,tree_callback_calls,nonoptimal_mipnode_callbacks,relaxation_vector_failures,generated,violated,selected,added,duplicate_rejections,dominated_rejections,nonviolated_rejections,invalid_rejections,submission_failures,callback_failures,global_pool_size,callback_overhead_seconds,infrastructure_gate\n"
               << std::setprecision(17) << csvField(args.state_id) << ','
               << csvField(args.policy) << ','
               << csvField(outcome.tailored_cut_policy) << ','
+              << csvField(outcome.round53_callback_mode) << ','
               << outcome.tailored_cut_callback_active << ','
               << outcome.gurobi_cbcut_symbol_loaded << ','
               << outcome.gurobi_cblazy_symbol_loaded << ','
               << outcome.gurobi_precrush_requested << ','
               << outcome.gurobi_precrush_effective << ','
               << outcome.gurobi_precrush_roundtrip_valid << ','
+              << outcome.round53_mipnode_calls << ','
+              << outcome.round53_mipnode_status_reads << ','
+              << outcome.round53_relaxation_vector_reads << ','
+              << outcome.round53_separator_calls << ','
+              << outcome.round53_cut_submission_calls << ','
               << outcome.tailored_cut_callback_disabled_after_failure << ','
               << outcome.tailored_cut_callback_calls << ','
               << outcome.tailored_cut_root_callback_calls << ','
@@ -903,6 +1015,25 @@ int main(int argc, char** argv) {
             request.interval_mip_policy = policy.name;
             return request;
         };
+
+        if (args.mode == "lp") {
+            auto lp_request = makeRequest(
+                ebrp::FixedIntervalSolveKind::PaperLpRelaxation,
+                args.state_id + "__plain_lp", "plain_lp_gurobi.log");
+            lp_request.capture_lp_primal_dual_evidence = true;
+            ebrp::FixedIntervalMipOutcome lp_outcome =
+                backend->solve(lp_request);
+            lp_outcome.model_build_seconds = build_seconds;
+            backend->release();
+            const double process_seconds = elapsed(started);
+            const bool valid = writeLpEvidence(
+                args, artifact, lp_outcome, process_seconds);
+            writeArtifactManifest(args.artifact_dir);
+            writeCompletion(args.artifact_dir, args,
+                            valid ? "lp_optimal" : "lp_failed",
+                            false, valid, process_seconds);
+            return valid ? 0 : 5;
+        }
 
         AdaptiveExecution adaptive;
         ebrp::FixedIntervalMipOutcome outcome;

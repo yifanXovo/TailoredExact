@@ -1,0 +1,30 @@
+{
+  "schema": "round53-promotion-gates-v1",
+  "f0_development": {
+    "mandatory": [
+      "zero correctness failures",
+      "zero false certificates",
+      "no lost v0 certificate",
+      "zero severe regressions",
+      "capped aggregate GI nonworse",
+      "two structural roles",
+      "V>12 equivalence",
+      "no forbidden dispatch"
+    ],
+    "performance": "common-exact changed-state Work GM <=0.95 OR certificate gain with nonworse aggregate Work/GI"
+  },
+  "f0_confirmation": {
+    "mandatory": [
+      "zero false certificates",
+      "no lost v0 certificate",
+      "zero severe regressions",
+      "capped aggregate GI nonworse",
+      "no post-development source change"
+    ],
+    "performance": "exact Work GM <=0.95 OR certificate gain with nonworse aggregate Work/GI"
+  },
+  "key_long": "no production-v0 certificate lost",
+  "fixed_interval_promotion": "all entered fixed-interval stages pass",
+  "k1_integration": "zero false certificates; repair/control gates; no severe regression; certificates nondecreasing; aggregate Work/GI nonworse; material gain",
+  "sealed": "zero false certificates; candidate certificates >= v0; no severe v0 regression; Work GM <=0.95 OR certificate gain with nonworse Work/GI; GI nonworse; repair preserved; no severe P-GRB regression; benefit spans more than one M/Q configuration"
+}

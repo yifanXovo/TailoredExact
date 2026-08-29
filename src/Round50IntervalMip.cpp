@@ -74,10 +74,58 @@ Round50IntervalMipPolicy parseRound50IntervalMipPolicy(
         out.branching = Round50BranchingPolicy::Default;
         out.subset_duration_big_m = "tight-tsp-lower-bound";
         out.adaptive_branching = "root-sparse-top1";
-    } else if (out.name == "f0-no-rank3-support-duration") {
+    } else if (out.name == "f0-no-rank3-support-duration" ||
+               out.name ==
+                   "interval-mip-core-no-exhaustive-subset-duration") {
+        out.name = "interval-mip-core-no-exhaustive-subset-duration";
         out.branching = Round50BranchingPolicy::Default;
         out.subset_duration_big_m = "off";
-        out.tailored_cut_policy = "f0-none";
+        out.tailored_cut_policy = "f0-clean-none";
+        out.round53_callback_mode = "c0-baseline";
+    } else if (out.name == "round53-c0-f0-clean" ||
+               out.name == "c0-f0-clean") {
+        out.name = "round53-c0-f0-clean";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "off";
+        out.tailored_cut_policy = "f0-clean-none";
+        out.round53_callback_mode = "c0-baseline";
+    } else if (out.name == "round53-c1-precrush-only" ||
+               out.name == "c1-precrush-only") {
+        out.name = "round53-c1-precrush-only";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "off";
+        out.tailored_cut_policy = "f0-clean-none";
+        out.round53_callback_mode = "c1-precrush-only";
+    } else if (out.name == "round53-c2-status-only" ||
+               out.name == "c2-status-only") {
+        out.name = "round53-c2-status-only";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "off";
+        out.tailored_cut_policy = "f0-clean-none";
+        out.round53_callback_mode = "c2-status-only";
+    } else if (out.name == "round53-c3-status-precrush" ||
+               out.name == "c3-status-precrush") {
+        out.name = "round53-c3-status-precrush";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "off";
+        out.tailored_cut_policy = "f0-clean-none";
+        out.round53_callback_mode = "c3-status-precrush";
+    } else if (out.name == "round53-c4-separator-dry-run" ||
+               out.name == "c4-separator-dry-run") {
+        out.name = "round53-c4-separator-dry-run";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "off";
+        out.tailored_cut_policy = "sd-r3-root-blockmax-dry-run";
+        out.tailored_cut_support_rank = 3;
+        out.round53_callback_mode = "c4-separator-dry-run";
+    } else if (out.name == "round53-c5-live" ||
+               out.name == "c5-live") {
+        out.name = "round53-c5-live";
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "off";
+        out.tailored_cut_policy = "sd-r3-root-blockmax";
+        out.tailored_cut_support_rank = 3;
+        out.round53_callback_mode = "c5-live";
     } else if (out.name == "f1-static-rank3-loose") {
         out.branching = Round50BranchingPolicy::Default;
         out.subset_duration_big_m = "rank3-historical-100000";
@@ -95,11 +143,13 @@ Round50IntervalMipPolicy parseRound50IntervalMipPolicy(
         out.subset_duration_big_m = "off";
         out.tailored_cut_policy = "sd-r3-root-blockmax";
         out.tailored_cut_support_rank = 3;
+        out.round53_callback_mode = "legacy-live-root";
     } else if (out.name == "f4-sd-r3-tree-blockmax") {
         out.branching = Round50BranchingPolicy::Default;
         out.subset_duration_big_m = "off";
         out.tailored_cut_policy = "sd-r3-tree-blockmax";
         out.tailored_cut_support_rank = 3;
+        out.round53_callback_mode = "legacy-live-tree";
     } else {
         out.failure_reason = "unsupported_round50_interval_mip_policy";
         return out;
