@@ -1,0 +1,13 @@
+component,historical_K1_AM,round52_frozen_K1_AM,equivalent,evidence
+K0,1,1,True,literal controller setting
+initial_interval_count,1,1,True,complete strict-improver range
+point_rule,midpoint,midpoint,True,no breakpoint research
+adaptive_mass_formula,Round47 eta*mu,Round47 eta*mu,True,source unchanged
+native_target,Round47,Round47,True,source unchanged
+exact_parent_closure,Round47,Round47,True,source unchanged
+infeasible_child_behavior,Round47 K1,Round47 K1,True,source unchanged
+coverage_and_certification,complete/exact,complete/exact,True,source unchanged
+tau_numeric,0.07915,0.08,False,paper rounding candidate
+tau_decision_trace,334 reference actions,334 identical actions,True,zero changed replay rows
+forbidden_rescues,off,off,True,explicit freeze list
+default_off_equivalence,implicit=explicit,implicit=explicit,True,bounded live sentinel

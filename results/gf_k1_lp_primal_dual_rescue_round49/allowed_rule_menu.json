@@ -1,0 +1,30 @@
+{
+  "RCD": "children nonworse than parent and strict mean improvement",
+  "RCDS": "RCD or exact child-domain separation with neither child summary worse",
+  "continuous_rescue_threshold": null,
+  "post_stage3_new_formula_allowed": false,
+  "rules": [
+    {
+      "id": "D-RCD",
+      "separation": false,
+      "summary": "D"
+    },
+    {
+      "id": "D-RCDS",
+      "separation": true,
+      "summary": "D"
+    },
+    {
+      "id": "H-RCD",
+      "separation": false,
+      "summary": "H"
+    },
+    {
+      "id": "H-RCDS",
+      "separation": true,
+      "summary": "H"
+    }
+  ],
+  "schema": "round49-allowed-rule-menu-v1",
+  "tau": 0.07915
+}

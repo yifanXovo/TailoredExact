@@ -1,0 +1,38 @@
+{
+  "schema": "round54-inventory-route-iteration-plan-v1",
+  "iteration": 1,
+  "frozen_before_census": true,
+  "purpose": "Compare the two predeclared exact external root-closure variants on the frozen offline LP-state census.",
+  "variants": {
+    "IR1": "Full closure with globally valid mixed IR-IN and IR-OUT inequalities.",
+    "IR2": "Full closure with the IR1 mixed inequalities plus nondominated interval-local projected companions."
+  },
+  "common_contract": {
+    "base_model": "F0-CLEAN continuous relaxation",
+    "separator": "deterministic exact maximum closure/minimum cut",
+    "depot_fixed_outside_subset": true,
+    "violation_tolerance": 1e-07,
+    "performance_based_stopping": false,
+    "root_closure_stop": "no strict violation or LP infeasibility",
+    "terminal_callback": "off",
+    "terminal_precrush": "default",
+    "terminal_branching": "Gurobi native default",
+    "new_parameter": false
+  },
+  "panel": "offline_root_census_freeze.json",
+  "live_entry_gate": {
+    "valid_on_every_state": true,
+    "minimum_structurally_distinct_violated_roles": 2,
+    "minimum_strict_bound_gain_states": 2,
+    "alternative": "one LP-infeasibility closure plus another strict violation",
+    "numerical_inconsistency_allowed": false,
+    "new_parameter_allowed": false
+  },
+  "candidate_selection": [
+    "Only a variant satisfying the live entry gate may be selected.",
+    "Prefer IR1 when projected companions are redundant at closure.",
+    "Prefer IR2 only when its nondominated projected rows provide strictly stronger closure without invalidity.",
+    "Final-MIP runtime is forbidden as a selection signal at this stage."
+  ],
+  "failure_disposition": "If neither variant passes, classify the direction as an offline negative and do not open a live stage."
+}

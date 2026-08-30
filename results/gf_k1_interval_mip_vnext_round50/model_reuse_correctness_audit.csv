@@ -1,0 +1,6 @@
+candidate,audit_item,observed,required,status,note
+R1-exact-in-memory-lp-to-mip-promotion,corresponding_lp_model_available,false,true,not_applicable,candidate not entered because the prerequisite object does not exist
+R1-exact-in-memory-lp-to-mip-promotion,model_count_per_fixed_state,1,at_least_2_for_promotion,not_applicable,one MIP is built read optimized and released
+R1-exact-in-memory-lp-to-mip-promotion,lp_basis_available,false,true_for_optional_basis_reuse,not_applicable,no preliminary LP optimize occurs
+R1-exact-in-memory-lp-to-mip-promotion,interval_local_cut_leakage,false,false,pass,no reuse path was enabled
+R1-exact-in-memory-lp-to-mip-promotion,mathematical_model_changed,false,false,pass,no candidate source change or run was entered

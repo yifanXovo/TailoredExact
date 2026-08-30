@@ -1,0 +1,52 @@
+{
+  "classifications": {
+    "aggregate_hull": "aggregate_mc_strictly_strengthening",
+    "algorithm": "strengthened_candidate_mixed",
+    "cover_dp": "penalty_cover_not_opened",
+    "engineering": "engineering_semantic_bug_fixed",
+    "mainline": "k1_am_sf_corrected_baseline",
+    "pgrb": "pgrb_panel_not_opened",
+    "scale": "generalization_not_opened",
+    "sparse_management": "no_additional_family_removed",
+    "split": "stable_split_rule_retained",
+    "station_state": "station_state_partial"
+  },
+  "complete": true,
+  "engineering_bug": "stale incumbent epoch in artifact/LP cache identity",
+  "entered_stage_missing_rows": [],
+  "expansion_rows": 0,
+  "final_inner_candidate": {
+    "formulation": "VD-P",
+    "preset": "research-k1-am-sf-vdp",
+    "status": "default-off mixed research candidate"
+  },
+  "historical_exact_certificates_invalidated": false,
+  "historical_performance_evidence_invalidated": true,
+  "k1_integration": {
+    "aggregate_gi_ratio": 0.6090974547960206,
+    "candidate_certificates": 14,
+    "effective_pairs": 17,
+    "entered_physical_rows": 44,
+    "false_certificates": 0,
+    "gate_pass": false,
+    "severe_regressions": 1,
+    "shifted_work_geometric_mean_ratio": 0.5691998368030589,
+    "stable_certificates": 12
+  },
+  "recommendation": "Study the uniform VD-P formulation-lifecycle cost on the major witness without changing the split controller or dispatching by instance.",
+  "schema": "round55-final-decision-v1",
+  "sealed_rows": 0,
+  "stable_algorithm": {
+    "dynamic_user_cut_callback": false,
+    "initial_intervals": 1,
+    "inner_backend": "F0-CLEAN",
+    "name": "K1-AM-SF",
+    "preset": "paper-k1-am-sf",
+    "presolve": "Auto",
+    "seed": 0,
+    "split_point": "midpoint",
+    "split_score": "balanced-normalized-closure",
+    "tau": 0.08,
+    "threads": 1
+  }
+}

@@ -1,0 +1,46 @@
+path,check_id,passed,detail
+README.md,required_file_exists,True,Round 54 required Markdown
+docs/algorithm_report.md,required_file_exists,True,Round 54 required Markdown
+docs/attempt_log.md,required_file_exists,True,Round 54 required Markdown
+docs/current_mainline.md,required_file_exists,True,Round 54 required Markdown
+docs/algorithm_lineage.md,required_file_exists,True,Round 54 required Markdown
+docs/k1_am_sf_algorithm.md,required_file_exists,True,Round 54 required Markdown
+docs/f0_sparse_formulation.md,required_file_exists,True,Round 54 required Markdown
+docs/active_formulation_families.md,required_file_exists,True,Round 54 required Markdown
+docs/strengthening_roadmap.md,required_file_exists,True,Round 54 required Markdown
+docs/reproduction_k1_am_sf.md,required_file_exists,True,Round 54 required Markdown
+README.md,contains_K1-AM-SF,True,K1-AM-SF
+README.md,contains_paper-k1-am-sf,True,paper-k1-am-sf
+README.md,contains_F0-CLEAN,True,F0-CLEAN
+README.md,contains_Gurobi,True,Gurobi
+README.md,contains_Plain Gurobi,True,Plain Gurobi
+README.md,contains_Historical exact lines,True,Historical exact lines
+README.md,legacy_current_line_removed,True,stale CPLEX current-line sentence absent
+required_markdown_set,documents_K0=1,True,K0=1
+required_markdown_set,documents_tau=0.08,True,tau=0.08
+required_markdown_set,documents_midpoint,True,midpoint
+required_markdown_set,documents_F0-CLEAN,True,F0-CLEAN
+required_markdown_set,documents_Gurobi,True,Gurobi
+required_markdown_set,documents_dynamic user-cut callback,True,dynamic user-cut callback
+required_markdown_set,documents_native,True,native
+required_markdown_set,documents_subset-duration,True,subset-duration
+Manuscript/main.tex,required_manuscript_source_exists,True,Round 54 required manuscript source
+Manuscript/sections/algorithm_framework.tex,required_manuscript_source_exists,True,Round 54 required manuscript source
+Manuscript/sections/valid_inequalities.tex,required_manuscript_source_exists,True,Round 54 required manuscript source
+Manuscript/sections/branch_and_cut_implementation.tex,required_manuscript_source_exists,True,Round 54 required manuscript source
+Manuscript/sections/certificate_and_audit.tex,required_manuscript_source_exists,True,Round 54 required manuscript source
+Manuscript/sections/computational_protocol.tex,required_manuscript_source_exists,True,Round 54 required manuscript source
+Manuscript/generated_results.tex,required_manuscript_source_exists,True,Round 54 required manuscript source
+Manuscript,states_K1--AM--SF,True,K1--AM--SF
+Manuscript,states_K_0=1,True,K_0=1
+Manuscript,states_tau=0.08,True,tau=0.08
+Manuscript,states_midpoint,True,midpoint
+Manuscript,states_F0--CLEAN,True,F0--CLEAN
+Manuscript,states_Gurobi,True,Gurobi
+Manuscript,states_native branch-and-cut,True,native branch-and-cut
+Manuscript,states_MIPNODE user-cut callback,True,MIPNODE user-cut callback
+Manuscript,states_exhaustive,True,exhaustive
+Manuscript,states_V20,True,V20
+Manuscript,states_V50,True,V50
+Manuscript,not_current_cplex_title,True,historical CPLEX implementation removed from current manuscript
+Manuscript,not_stable_callback,True,stable callback claim absent

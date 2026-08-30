@@ -1,0 +1,5 @@
+invariant,source,status
+leaf lower bounds monotone,ControllingLeafScheduler,pass
+global lower bound monotone,ControllingLeafScheduler,pass
+valid LB <= verified UB or rejected,strict certificate finalizer,pass
+interruption retains open coverage,stopAtDeadline,pass

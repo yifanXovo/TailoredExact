@@ -1,0 +1,21 @@
+{
+  "schema": "round50-iteration3-screen-decision-v1",
+  "status": "advance_to_complete_development_qualification",
+  "candidate": "s1-route-start-order",
+  "screen_cap_seconds": 120,
+  "screen_states": 9,
+  "baseline_certificates": 5,
+  "candidate_certificates": 5,
+  "correctness_failures": 0,
+  "false_certificates": 0,
+  "severe_regressions": 0,
+  "material_hard_state_improvements": [
+    "D3 capped Work 236.9615575019969 to 216.92328305931193",
+    "D4 exact Work 129.52841701703966 to 114.2538787823678",
+    "D10 exact Work 199.30559044359478 to 85.31695584455741"
+  ],
+  "negative_control": "D2 remained exact and Work improved from 7.798190809248318 to 5.139373390232216",
+  "qualification_cap_seconds": 300,
+  "confirmation_opened": false,
+  "candidate_accepted": false
+}

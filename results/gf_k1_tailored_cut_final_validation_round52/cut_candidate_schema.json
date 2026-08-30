@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "round52-cut-candidate-v1",
+  "title": "Round 52 solver-independent CutCandidate",
+  "type": "object",
+  "required": [
+    "family", "validity_scope", "coefficients", "sense", "rhs",
+    "raw_violation", "scaled_violation", "violation_scale",
+    "canonical_signature", "generating_interval", "generating_context",
+    "support_set", "vehicle_index", "derivation_metadata"
+  ],
+  "properties": {
+    "family": {"type": "string", "minLength": 1},
+    "validity_scope": {"enum": ["global", "local"]},
+    "coefficients": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["variable", "value"],
+        "properties": {
+          "variable": {"type": "string", "minLength": 1},
+          "value": {"type": "number"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "sense": {"enum": ["<=", ">=", "="]},
+    "rhs": {"type": "number"},
+    "raw_violation": {"type": "number"},
+    "scaled_violation": {"type": "number"},
+    "violation_scale": {"type": "number", "minimum": 1},
+    "canonical_signature": {"type": "string"},
+    "canonical_lhs_signature": {"type": "string"},
+    "generating_interval": {"type": "string"},
+    "generating_context": {"type": "string"},
+    "support_set": {
+      "type": "array",
+      "items": {"type": "integer", "minimum": 1},
+      "uniqueItems": true
+    },
+    "vehicle_index": {"type": "integer", "minimum": 0},
+    "derivation_metadata": {"type": "string"}
+  },
+  "additionalProperties": false
+}

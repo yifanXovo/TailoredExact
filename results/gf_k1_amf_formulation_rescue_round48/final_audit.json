@@ -1,0 +1,82 @@
+{
+  "artifact_hash_audit": {
+    "candidate_run_manifests": 8,
+    "failures": [],
+    "passed": true
+  },
+  "candidate_command_audit": {
+    "broad_baseline_rows_rerun": 0,
+    "candidate_rows": 8,
+    "cap_above_1800": false,
+    "forbidden_mechanism_found": false,
+    "one_executable_hash": true,
+    "pgrb_rows_rerun": 0,
+    "rho_cap_found": false,
+    "v50_rows": 0
+  },
+  "certificate_audit": {
+    "candidate_certificates": 2,
+    "candidate_rows": 8,
+    "false_certificates": 0,
+    "passed": true
+  },
+  "default_off_equivalence": {
+    "checks": 20,
+    "passed": true
+  },
+  "extra_score_solve_audit": {
+    "extra_lp_count": 0,
+    "extra_mip_count": 0,
+    "passed": true
+  },
+  "preexisting_user_file_preservation": {
+    "observed_starting_paths_unchanged_by_round48": true,
+    "paths": [
+      {
+        "path": "results/gf_compact_bc_round/handling_convention_test/handling_convention.json",
+        "sha256": "9a5cd06f8a4163cfbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b"
+      },
+      {
+        "path": "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv",
+        "sha256": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb"
+      },
+      {
+        "path": "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json",
+        "sha256": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202"
+      }
+    ]
+  },
+  "secret_license_credential_scan": {
+    "matches": [],
+    "passed": true,
+    "patterns": [
+      "GitHub personal tokens",
+      "AWS access keys",
+      "private-key headers",
+      "Gurobi WLS credentials",
+      "license environment identifiers"
+    ]
+  },
+  "source_scope_audit": {
+    "algorithmic_source_commit": "4c08f36452eaf90c3c0a974a9782abfa37eff16b",
+    "algorithmic_source_tree": "cb554bf511a35c417354e5ce3cf5f5dbb8190e40",
+    "historical_round45_47_modes_changed": false,
+    "original_c6_preset_changed": false,
+    "passed": true,
+    "pr99_modified": false
+  },
+  "stage0_hash_audit": {
+    "files": 11,
+    "manifest_self_excluded": true,
+    "passed": true
+  },
+  "test_audit": {
+    "ctest_passed": 26,
+    "ctest_total": 26,
+    "historical_protocol_passed": 135,
+    "historical_protocol_total": 135,
+    "round48_cpp_checks": 42,
+    "round48_protocol_passed": 14,
+    "round48_protocol_total": 14
+  }
+}

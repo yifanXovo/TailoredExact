@@ -1,0 +1,51 @@
+{
+  "schema": "round54-stable-mainline-contract-v1",
+  "short_name": "K1-AM-SF",
+  "full_name": "K1 Adaptive-Mass with Sparse Fixed-Interval Formulation",
+  "preset": "paper-k1-am-sf",
+  "outer_controller": {
+    "K0": 1,
+    "initial_intervals": 1,
+    "initial_interval": "complete strict-improver Gini interval",
+    "split_point": "midpoint",
+    "split_score": "adaptive-mass",
+    "tau": 0.08,
+    "native_target": "Round 53 unchanged",
+    "exact_parent_closure": true,
+    "child_infeasibility": "strict",
+    "exact_interval_coverage": true,
+    "monotone_valid_global_lower_bound": true,
+    "strict_original_problem_certification": true
+  },
+  "inner_backend": {
+    "name": "F0-CLEAN",
+    "policy": "interval-mip-core-no-exhaustive-subset-duration",
+    "base": "Round 50 interval-MIP v0 core",
+    "only_removed_family": "historical exhaustive V<=12 subset-duration block",
+    "all_other_static_families_retained": true,
+    "callback": "off",
+    "tailored_dynamic_user_cuts": "off",
+    "branching": "Gurobi default",
+    "PreCrush": "default",
+    "Presolve": "Auto",
+    "Seed": 0,
+    "Threads": 1,
+    "MIPGap": 0.0,
+    "MIPGapAbs": 0.0
+  },
+  "forbidden_changes": [
+    "K0",
+    "tau",
+    "split score",
+    "split point",
+    "scheduler",
+    "native-target lifecycle",
+    "exact closure",
+    "incumbent contract",
+    "F0 row omission",
+    "branching priorities",
+    "symmetry",
+    "solver parameters"
+  ],
+  "instance_size_time_or_history_dispatch": false
+}

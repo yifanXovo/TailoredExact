@@ -1,0 +1,38 @@
+{
+  "a1_additional": [
+    "probe_lifecycle_disposable",
+    "terminal_model_clean",
+    "priority_readback_exact",
+    "probe_overhead_included",
+    "candidate_budget_at_most_four",
+    "positive_priorities_at_most_two"
+  ],
+  "confirmation_requires_full_development_pass": true,
+  "frozen_before_candidate_results": true,
+  "global_required": [
+    "zero_correctness_failures",
+    "zero_false_certificates",
+    "complete_model_identity_and_delta_audit",
+    "no_lost_baseline_certificate",
+    "no_severe_regression",
+    "numerical_conditioning_nonworse",
+    "aggregate_paired_end_to_end_work_nonworse_or_predeclared_material_capped_progress_without_aggregate_regression",
+    "improvement_on_more_than_one_structural_role",
+    "no_instance_only_effect"
+  ],
+  "interaction_requires_both_components_independently_passed_confirmation": true,
+  "k1_requires_new_fixed_backend": true,
+  "m1_additional": [
+    "formal_integer_validity_proof",
+    "target_rows_only",
+    "all_retained_incumbents_satisfy_m1",
+    "v_gt_12_model_identical"
+  ],
+  "schema": "round51-promotion-gates-v1",
+  "severe_regression_definition": "Round 50 results/gf_k1_interval_mip_vnext_round50/severe_regression_definition.json",
+  "symmetry_additional": [
+    "optimal_representative_preserved",
+    "D13_included",
+    "D13_no_lost_certificate_or_severe_regression"
+  ]
+}

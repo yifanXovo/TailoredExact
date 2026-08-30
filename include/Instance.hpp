@@ -92,6 +92,9 @@ struct SolveOptions {
     std::string round24_executable_sha256;
     std::string round24_manifest_executable_sha256;
     std::string external_gini_backend = "cplex";
+    // Uniform inner fixed-interval formulation policy.  Default v0 preserves
+    // all historical controllers; Round 53 may explicitly select F0-CLEAN.
+    std::string external_gini_interval_mip_policy = "interval-mip-v0";
     std::string external_gini_lifecycle = "retained-per-leaf";
     std::string external_gini_scheduling = "legacy-quanta";
     bool external_gini_warm_start = false;
@@ -147,6 +150,20 @@ struct SolveOptions {
     bool frontier_adaptive_max_depth_explicit = false;
     double frontier_adaptive_min_width = 1e-4;
     int frontier_adaptive_split_factor = 2;
+    // First-class paper-facing K1-AM-SF controller.  Historical Round/C6
+    // fields remain available below for reproduction, but the canonical
+    // paper preset is evaluated exclusively through these fields.
+    bool k1_am_sf_controller_enabled = false;
+    int initial_gini_interval_count = 1;
+    std::string split_point_rule = "midpoint";
+    std::string split_score_rule = "balanced-normalized-closure";
+    double split_threshold = 0.08;
+    int maximum_split_depth = 8;
+    double minimum_interval_width = 1e-4;
+    int split_factor = 2;
+    std::string child_infeasibility_policy = "exact";
+    std::string native_target_policy = "existing-k1-am-sf";
+    bool exact_parent_closure = true;
     bool frontier_pre_split_critical = false;
     int frontier_critical_max_depth = 0;
     bool route_pool_incumbent = true;
@@ -450,6 +467,87 @@ struct SolveOptions {
     // The pilot arm is a uniform run-level choice; it is never inferred from
     // an instance label, size, scenario, elapsed time, or solver effort.
     std::string round37_c6_geometry_policy = "off";
+    // Round 40 coarse-start research. "off" is the validated K=4 default;
+    // the other values are explicit, uniform, default-off experiment arms.
+    std::string round40_c6_coarse_start = "off";
+    // Round 46 pure-C6 threshold screen. The value is shared by the original
+    // K4 cover and the Round 40 k1-adaptive initialization. Later-round
+    // historical old-C6 reconstructions remain frozen at 0.01.
+    double c6_normalized_split_threshold = 0.01;
+    bool c6_normalized_split_threshold_explicit = false;
+    // Round 47 lightweight residual-mass gate. "off" preserves every
+    // historical C6 path. Both research modes use the same globally frozen
+    // tau and only the already-computed midpoint child LP outcomes.
+    std::string round47_c6_adaptive_mass = "off";
+    double round47_c6_adaptive_mass_tau = 0.07915;
+    bool round47_c6_adaptive_mass_tau_explicit = false;
+    // Round 48 K1-only formulation-aware adaptive mass.  This explicit,
+    // default-off mode consumes the unchanged Round 47 K1-AM evidence and
+    // already-written canonical model bounds; it launches no score solve.
+    std::string round48_k1_amf = "off"; // off|k1-amf
+    // Round 49 K1-only LP primal-dual reduced-cost rescue.  The explicit
+    // diagnostic arm consumes attributes from the unchanged K1-AM parent and
+    // midpoint-child LP solves and never launches a scoring solve.
+    std::string round49_k1_am_rc = "off"; // off|d-rcd
+    // Restricted matched-action diagnostics.  These are never candidate
+    // settings and never issue an original-problem certificate.
+    std::string round48_counterfactual_mode = "off"; // off|retain|midpoint
+    std::string round48_counterfactual_interval;
+    // Round 40 incumbent-stable geometry research. "off" preserves the
+    // validated incumbent-rescaled K=4 cover. The experimental policy uses
+    // only a deterministic dyadic hierarchy rooted at the mathematical Gini
+    // maximum and the verified incumbent as an active-prefix cutoff.
+    std::string round40_c6_ub_geometry = "off";
+    // Round 41 static single-tree segmented formulations. Every non-off arm
+    // is explicit, uniformly defined, and constructed before optimize.
+    std::string round41_static_segmented_gini = "off";
+    // Root-LP diagnostics are separate from the one-native-MIP proof run.
+    std::string round41_static_segmented_solve = "mip";
+    // Direct fixed-interval LP references for K1 and the two K2 children.
+    std::string round41_root_reference_interval = "off";
+    // Round 42 explicit/default-off static block experiments.  These select
+    // only deterministic geometry/formulation variants; no instance or
+    // runtime observation participates in the choice.
+    std::string round42_static_architecture = "off";
+    std::string round42_static_solve = "mip";
+    // C6 terminal-stage sibling coalescing.  "off" preserves the validated
+    // C6 lifecycle exactly; non-off modes are structural research arms.
+    std::string round42_terminal_sibling_coalescing = "off";
+    // Round 43 unified K0/d/rho envelope-refinement research.  The entire
+    // family is default-off; K0 affects only the initial equal partition.
+    std::string round43_envelope_refinement = "off"; // off|atlas|algorithm
+    int round43_initial_k0 = 4;
+    int round43_lookahead_depth = 1;
+    double round43_rho = 0.01;
+    std::string round43_score = "d"; // d|max-d-c|old|no-adaptive
+    std::string round43_envelope_mode = "single"; // none|constant|single|iterated
+    std::string round43_width_measure = "g-mccormick-unit";
+    std::string round43_lifted_cuts = "off";
+    std::string round43_frontier_consolidation = "off";
+    // Round 44 C6-compatible K4 affine-envelope tail repair. The entire
+    // family is explicit and default-off.
+    std::string round44_envelope_tail_repair = "off"; // off|atlas|algorithm
+    int round44_initial_k0 = 4;
+    std::string round44_lookahead_policy = "frontier-d2";
+    std::string round44_envelope_injection = "all";
+    std::string round44_envelope_scope = "parent";
+    std::string round44_refinement_family = "c6-overlay";
+    double round44_rho_f = 0.5;
+    double round44_rho_m = 0.0;
+    double round44_rho_h = 0.0;
+    std::string round44_rank1_cuts = "off";
+    std::string round44_mip_starts = "off";
+    std::string round44_frontier_consolidation = "off";
+    // Round 45 unified adaptive timing and direct parametric-LP partition.
+    // Every non-off arm is explicit. K0 changes only the initial equal cover;
+    // K1 and K4 share the same timing and point operators.
+    std::string round45_adaptive_parametric_partition = "off"; // off|atlas|algorithm
+    int round45_initial_k0 = 4;
+    std::string round45_timing_rule = "gamma-positive";
+    double round45_rho_gamma = 0.0;
+    std::string round45_point_rule = "midpoint"; // midpoint|pmm|fpmm
+    double round45_minimum_child_width = 1e-4;
+    std::string round45_counterfactual_mode = "off"; // off|retain|midpoint|pmm|fpmm
     bool exact_phase_local_redecode_repair = false;
     bool exact_phase_local_redecode_repair_explicit = false;
     double exact_phase_local_redecode_seconds = 10.0;

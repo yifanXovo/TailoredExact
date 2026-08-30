@@ -1,0 +1,31 @@
+scope,row_id,baseline,candidate,baseline_status,candidate_status,baseline_work,candidate_work,baseline_gap,candidate_gap,severe_regression,kind,reason
+fixed_state,D1,Interval-MIP-v0,Interval-MIP-vNext,capped,capped,2720.0980171429305,2720.0980171429305,0.046523398601940096,0.046523398601940096,False,none,definitionally identical physical run
+fixed_state,D2,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,7.798190809248318,7.798190809248318,2.529196102638948e-12,2.529196102638948e-12,False,none,definitionally identical physical run
+fixed_state,D3,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,349.01793759503596,349.01793759503596,4.3852580177814796e-16,4.3852580177814796e-16,False,none,definitionally identical physical run
+fixed_state,D4,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,129.52841701703966,129.52841701703966,0,0,False,none,definitionally identical physical run
+fixed_state,D5,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,8.361526207009655,8.361526207009655,0,0,False,none,definitionally identical physical run
+fixed_state,D6,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,9.501641712092052,9.501641712092052,6.287961224877803e-16,6.287961224877803e-16,False,none,definitionally identical physical run
+fixed_state,D7,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,5.424760527933533,5.424760527933533,0,0,False,none,definitionally identical physical run
+fixed_state,D8,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,0.6099470937080658,0.6099470937080658,0,0,False,none,definitionally identical physical run
+fixed_state,D9,Interval-MIP-v0,Interval-MIP-vNext,capped,capped,2544.6626175838883,2544.6626175838883,0.07307356160145764,0.07307356160145764,False,none,definitionally identical physical run
+fixed_state,D10,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,199.30559044359478,199.30559044359478,0,0,False,none,definitionally identical physical run
+fixed_state,D11,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,845.69208109825,845.69208109825,0,0,False,none,definitionally identical physical run
+fixed_state,D12,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,257.2047290551788,257.2047290551788,6.316677466488924e-09,6.316677466488924e-09,False,none,definitionally identical physical run
+fixed_state,D13,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,469.8380750590921,469.8380750590921,0,0,False,none,definitionally identical physical run
+fixed_state,D14,Interval-MIP-v0,Interval-MIP-vNext,capped,capped,2357.1050117450686,2357.1050117450686,0.007538656692144462,0.007538656692144462,False,none,definitionally identical physical run
+fixed_state,C1,Interval-MIP-v0,Interval-MIP-vNext,failed,failed,126.10066761662394,126.10066761662394,2.7193150457407306e-07,2.7193150457407306e-07,False,none,definitionally identical physical run
+fixed_state,C2,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,19.03364861525721,19.03364861525721,0,0,False,none,definitionally identical physical run
+fixed_state,C3,Interval-MIP-v0,Interval-MIP-vNext,capped,capped,2590.302564350318,2590.302564350318,0.34370038244258194,0.34370038244258194,False,none,definitionally identical physical run
+fixed_state,C4,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,306.9041562390463,306.9041562390463,2.5386485728414124e-16,2.5386485728414124e-16,False,none,definitionally identical physical run
+fixed_state,C5,Interval-MIP-v0,Interval-MIP-vNext,capped,capped,2506.1193435810724,2506.1193435810724,0.25126116903783263,0.25126116903783263,False,none,definitionally identical physical run
+fixed_state,C6,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,0.656998425480512,0.656998425480512,0,0,False,none,definitionally identical physical run
+fixed_state,C7,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,4.524969241928158,4.524969241928158,4.108009046149315e-10,4.108009046149315e-10,False,none,definitionally identical physical run
+fixed_state,C8,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,1.5894980634056448,1.5894980634056448,1.3079623402270068e-15,1.3079623402270068e-15,False,none,definitionally identical physical run
+fixed_state,C9,Interval-MIP-v0,Interval-MIP-vNext,exact,exact,9.428789156733645,9.428789156733645,0,0,False,none,definitionally identical physical run
+split_label,major_root,RETAIN,MIDPOINT,exact,not_exact,843.4563311103416,2651.3206228043236,1.5419233104925857e-15,0.03329563306722952,True,false_split,"severe_false_split: work_ratio=3.1434, work_diff=1807.86, time_ratio=3.0639, time_diff=794.894"
+split_label,strong_control_root,RETAIN,MIDPOINT,exact,exact,740.6340681077912,147.52960295451953,4.0828682536125e-08,4.136686902719266e-09,True,false_retain,"severe_false_retain: work_ratio=5.02024, work_diff=593.104, time_ratio=4.86007, time_diff=325.1"
+split_label,numerical_endpoint_root,RETAIN,MIDPOINT,not_exact,exact,188.18035718118418,134.9044323058757,2.0161571633704306e-07,5.350588995886023e-08,False,none,nonsevere under frozen Work/time/capped-gap thresholds
+split_label,v12_m2_root,RETAIN,MIDPOINT,exact,exact,38.80867136188028,9.651163747815895,1.886388367463341e-15,6.295821176408901e-13,False,none,nonsevere under frozen Work/time/capped-gap thresholds
+split_label,tight3102_L0_0,RETAIN,MIDPOINT,not_exact,exact,2476.504711010769,1500.1976532858937,0.0737047108942378,0,True,false_retain,"severe_false_retain: work_ratio=1.65079, work_diff=976.307, time_ratio=1.51794, time_diff=402.643"
+split_label,high_imbalance_matched,RETAIN,MIDPOINT,exact,exact,970.6039194826874,579.752786444065,3.635005563669461e-16,0,True,false_retain,"severe_false_retain: work_ratio=1.67417, work_diff=390.851, time_ratio=1.6448, time_diff=205.051"
+split_label,moderate3301_root,RETAIN,MIDPOINT,not_exact,not_exact,2321.2019688048103,2183.8839741741926,0.0403478971074104,0.024166104844344193,False,none,nonsevere under frozen Work/time/capped-gap thresholds
