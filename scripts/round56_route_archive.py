@@ -215,6 +215,13 @@ def near(left: float, right: float) -> bool:
     return abs(float(left) - float(right)) <= TOL * max(1.0, abs(float(left)), abs(float(right)))
 
 
+def read_csv(path: Path) -> list[dict[str, str]]:
+    if not path.is_file():
+        raise RuntimeError(f"missing archive CSV: {path}")
+    with path.open(newline="", encoding="utf-8") as stream:
+        return list(csv.DictReader(stream))
+
+
 def verify_package(scenario_id: str, *, write: bool = True) -> dict[str, Any]:
     started = time.perf_counter()
     descriptor = descriptor_for(scenario_id)
@@ -224,6 +231,9 @@ def verify_package(scenario_id: str, *, write: bool = True) -> dict[str, Any]:
     base = load_json(base_path)
     output = SOLUTIONS / scenario_id
     package = load_json(output / "native_solution.json")
+    route_csv = read_csv(output / "routes.csv")
+    operation_csv = read_csv(output / "operations.csv")
+    inventory_csv = read_csv(output / "final_inventory.csv")
     failures: list[str] = []
     if package.get("scenario_id") != scenario_id: failures.append("scenario_id")
     if package.get("mathematical_instance_sha256") != descriptor["mathematical_instance_sha256"]: failures.append("mathematical_hash")
@@ -233,9 +243,19 @@ def verify_package(scenario_id: str, *, write: bool = True) -> dict[str, Any]:
     inventory = list(base["initial"])
     seen: set[int] = set()
     if len(package.get("routes", [])) != descriptor["M"]: failures.append("route_count")
+    if len(route_csv) != descriptor["M"]: failures.append("route_csv_count")
+    expected_operation_count = sum(len(route.get("operations", [])) for route in package.get("routes", []))
+    if len(operation_csv) != expected_operation_count: failures.append("operation_csv_count")
+    if len(inventory_csv) != descriptor["V"] + 1: failures.append("inventory_csv_count")
     for expected_vehicle, route in enumerate(package.get("routes", [])):
         if route.get("native_vehicle_index") != expected_vehicle: failures.append(f"vehicle_index_{expected_vehicle}")
         nodes = route.get("nodes", [])
+        if expected_vehicle < len(route_csv):
+            csv_route = route_csv[expected_vehicle]
+            if int(csv_route["native_vehicle_index"]) != expected_vehicle: failures.append(f"route_csv_vehicle_{expected_vehicle}")
+            if json.loads(csv_route["nodes"]) != nodes: failures.append(f"route_csv_nodes_{expected_vehicle}")
+            for field in ("travel_time", "operation_time", "route_duration", "route_slack", "utilization"):
+                if not near(float(csv_route[field]), float(route[field])): failures.append(f"route_csv_{field}_{expected_vehicle}")
         if len(nodes) < 2 or nodes[0] != 0 or nodes[-1] != 0: failures.append(f"depot_{expected_vehicle}")
         load = 0
         travel = sum(base["distances"][int(a)][int(b)] for a, b in zip(nodes, nodes[1:]))
@@ -249,6 +269,14 @@ def verify_package(scenario_id: str, *, write: bool = True) -> dict[str, Any]:
             if station in seen: failures.append(f"station_unique_{station}")
             seen.add(station)
             pickup, drop = int(operation["pickup"]), int(operation["drop"])
+            csv_matches = [row for row in operation_csv if int(row["native_vehicle_index"]) == expected_vehicle and int(row["route_sequence_position"]) == position]
+            if len(csv_matches) != 1: failures.append(f"operation_csv_identity_{expected_vehicle}_{position}")
+            else:
+                csv_operation = csv_matches[0]
+                for field in ("predecessor", "station", "successor", "pickup", "drop", "load_before_operation", "load_after_operation", "initial_station_inventory", "inventory_change", "final_station_inventory"):
+                    if int(csv_operation[field]) != int(operation[field]): failures.append(f"operation_csv_{field}_{expected_vehicle}_{position}")
+                for field in ("travel_time_from_predecessor", "cumulative_travel_time", "operation_time", "cumulative_route_duration"):
+                    if not near(float(csv_operation[field]), float(operation[field])): failures.append(f"operation_csv_{field}_{expected_vehicle}_{position}")
             if pickup < 0 or drop < 0 or (pickup > 0 and drop > 0) or (pickup == 0 and drop == 0): failures.append(f"operation_valid_{station}")
             if int(operation["load_before_operation"]) != load: failures.append(f"load_before_{station}")
             load += pickup - drop
@@ -265,6 +293,12 @@ def verify_package(scenario_id: str, *, write: bool = True) -> dict[str, Any]:
         if duration > descriptor["route_time_limit_seconds"] + TOL: failures.append(f"route_limit_{expected_vehicle}")
         if int(route["final_depot_unload"]) != load: failures.append(f"depot_unload_{expected_vehicle}")
     if inventory != package.get("final_inventory"): failures.append("final_inventory")
+    if len(inventory_csv) == descriptor["V"] + 1:
+        for station, csv_inventory in enumerate(inventory_csv):
+            if int(csv_inventory["station"]) != station: failures.append(f"inventory_csv_station_{station}")
+            if int(csv_inventory["initial_inventory"]) != int(base["initial"][station]): failures.append(f"inventory_csv_initial_{station}")
+            if int(csv_inventory["target_inventory"]) != int(base["target"][station]): failures.append(f"inventory_csv_target_{station}")
+            if int(csv_inventory["final_inventory"]) != int(inventory[station]): failures.append(f"inventory_csv_final_{station}")
     if any(inventory[i] < 0 or inventory[i] > base["capacities"][i] for i in range(1, base["V"] + 1)): failures.append("station_capacity")
     gini, penalty, obj = objective(base, inventory)
     if not near(gini, package["G"]): failures.append("G")
@@ -284,6 +318,9 @@ def verify_package(scenario_id: str, *, write: bool = True) -> dict[str, Any]:
         "final_inventory_verified": "final_inventory" not in failures and "station_capacity" not in failures,
         "objective_verified": not ({"G", "P", "objective"} & set(failures)),
         "certificate_class_verified": "solution_class_certificate" not in failures,
+        "expanded_route_csv_verified": not any(value.startswith("route_csv_") for value in failures),
+        "expanded_operation_csv_verified": not any(value.startswith("operation_csv_") for value in failures),
+        "expanded_final_inventory_csv_verified": not any(value.startswith("inventory_csv_") for value in failures),
         "optimization_or_repair_performed": False,
         "independent_archive_verification_seconds": time.perf_counter() - started,
     }
