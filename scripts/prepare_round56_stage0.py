@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import platform
@@ -36,10 +37,17 @@ def entry(path: Path) -> dict[str, Any]:
 
 
 def main() -> int:
-    if git("rev-parse", "HEAD") != r56.BASE_COMMIT:
-        raise RuntimeError("Round 56 Stage 0 requires the exact Round 55 base commit")
-    if git("show", "-s", "--format=%T", "HEAD") != r56.BASE_TREE:
-        raise RuntimeError("Round 56 Stage 0 base tree mismatch")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--correct-pre-runtime-freeze", action="store_true")
+    args = parser.parse_args()
+    head = git("rev-parse", "HEAD")
+    exact_base = head == r56.BASE_COMMIT and git("show", "-s", "--format=%T", "HEAD") == r56.BASE_TREE
+    if not exact_base:
+        ancestor = subprocess.run(
+            ["git", "merge-base", "--is-ancestor", r56.BASE_COMMIT, "HEAD"],
+            cwd=r56.ROOT, check=False).returncode == 0
+        if not args.correct_pre_runtime_freeze or not ancestor:
+            raise RuntimeError("Stage 0 correction requires --correct-pre-runtime-freeze and the frozen Round 55 base ancestor")
     if git("branch", "--show-current") != r56.BRANCH:
         raise RuntimeError("Round 56 Stage 0 must run on the declared branch")
     r56.EVIDENCE.mkdir(parents=True, exist_ok=True)
@@ -342,6 +350,23 @@ the frozen factor 1.5). M, Q, and T never enter random generation.
         "official_executable_sha256": "pending_after_clean_build",
         "rule": "update in official_execution_freeze.json before the first official row; do not mutate this Stage 0 record",
     })
+    if args.correct_pre_runtime_freeze:
+        defect_path = r56.EVIDENCE / "stage0_generation_defect_audit.json"
+        if not defect_path.exists():
+            raise RuntimeError("pre-fix generation defect record is missing")
+        r56.write_json(r56.EVIDENCE / "stage0_correction_record.json", {
+            "schema": "round56-stage0-correction-record-v1",
+            "recorded_at_utc": now,
+            "superseded_stage0_commit": "6180354b3",
+            "defect_record": r56.repo_path(defect_path),
+            "defect_record_sha256": r56.sha256_file(defect_path),
+            "optimizer_runtime_result_count_before_correction": 0,
+            "fix": "round coordinates to the serialized three-decimal representation before computing the parser-effective distance matrix",
+            "all_base_landscapes_regenerated": True,
+            "all_fleet_variants_regenerated": True,
+            "all_scenario_identities_regenerated": True,
+            "performance_result_mixing": False,
+        })
 
     stage0_names = [
         "research_contract.md", "source_of_truth.md", *contracts.keys(),
@@ -353,6 +378,8 @@ the frozen factor 1.5). M, Q, and T never enter random generation.
         "scenario_manifest.json", "primary_panel_manifest.json",
         "q20_sentinel_manifest.json", "repeatability_manifest.json",
     ]
+    if args.correct_pre_runtime_freeze:
+        stage0_names += ["stage0_generation_defect_audit.json", "stage0_correction_record.json"]
     frozen_paths = [r56.EVIDENCE / name for name in stage0_names]
     frozen_paths += sorted((r56.REFERENCE / "base").glob("*.json"))
     frozen_paths += sorted((r56.REFERENCE / "fleet_variants").glob("**/*.txt"))

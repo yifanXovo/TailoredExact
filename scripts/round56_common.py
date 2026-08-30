@@ -21,7 +21,7 @@ BASE_BRANCH = "codex/round55-k1-am-sf-station-state-chain"
 BRANCH = "codex/round56-paper-benchmark-time-horizon"
 BASE_PR_URL = "https://github.com/yifanXovo/TailoredExact/pull/113"
 DERIVATION_VERSION = "round56-paper-time-horizon-v1"
-GENERATOR_VERSION = "round56-moderate-landscape-generator-v1"
+GENERATOR_VERSION = "round56-moderate-landscape-generator-v2-serialized-coordinate-distance"
 SCENARIO_SCHEMA_VERSION = "round56-mathematical-scenario-v1"
 RUN_SCHEMA_VERSION = "round56-official-run-v1"
 DISTANCE_CONVENTION = (
@@ -137,7 +137,10 @@ def make_base_landscape(v: int) -> dict[str, Any]:
     initial, target = moderate_inventories(rng, capacities)
     weights = weight_vector(initial, target)
     min_ratio = min_ratio_vector(initial, target)
-    points = clustered_points(rng, v)
+    # The parser reads the serialized three-decimal coordinates and rebuilds
+    # travel times from them. Round before computing distances so the frozen
+    # generator data and the mathematical model are exactly identical.
+    points = [(round(x, 3), round(y, 3)) for x, y in clustered_points(rng, v)]
     distances = parser_distances(points)
     off_diagonal = [
         distances[i][j]
@@ -160,7 +163,7 @@ def make_base_landscape(v: int) -> dict[str, Any]:
         "target": target,
         "weights": [round(value, 6) for value in weights],
         "min_ratio": [round(value, 4) for value in min_ratio],
-        "points": [[round(x, 3), round(y, 3)] for x, y in points],
+        "points": [[x, y] for x, y in points],
         "distances": [[round(value, 10) for value in row] for row in distances],
         "distance_convention": DISTANCE_CONVENTION,
         "statistics": {
@@ -243,4 +246,3 @@ def run_identity(
 
 def final_cap(v: int, t: int) -> int:
     return 7200 if v >= 20 and t == 18000 else 3600
-

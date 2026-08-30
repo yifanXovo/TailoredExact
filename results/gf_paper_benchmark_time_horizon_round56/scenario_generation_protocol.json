@@ -1,7 +1,7 @@
 {
   "base_seed_formula": "10000 + first_64_bits(SHA256(material)) mod 1900000000",
   "deterministic_newlines": "LF",
-  "generator_version": "round56-moderate-landscape-generator-v1",
+  "generator_version": "round56-moderate-landscape-generator-v2-serialized-coordinate-distance",
   "numeric_format": "fixed declared precision",
   "schema": "round56-scenario-generation-protocol-v1",
   "station_data_independent_of_M_Q_T": true
