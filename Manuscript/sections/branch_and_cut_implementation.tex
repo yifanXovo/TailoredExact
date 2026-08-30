@@ -25,6 +25,15 @@ companions; IR3 was a predeclared one-pass option. Only IR1 entered the live
 comparison, and its negative result prevented integration into the stable
 preset.
 
+Round 55 implements three additional default-off fixed-interval policies.
+MC4 adds the four aggregate McCormick inequalities for $Z_i=G Y_i$ on each
+station domain. VD--P replaces the product-only bit block by exact
+station-state selectors and perspective variables. VD--J jointly represents
+the product, ratio, and penalty on the same selectors while retaining the
+original absolute-deviation inequalities. These policies use the same native
+branch-and-cut settings and register no callback. Mathematical exactness and
+root strength are audited separately from total MIP performance.
+
 Plain Gurobi is retained as a contextual benchmark. Its bound or certificate
 never enters the tailored interval ledger. Historical CPLEX-managed callback
 experiments are likewise contextual and are not the current implementation.

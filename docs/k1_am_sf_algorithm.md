@@ -41,3 +41,18 @@ in the deterministic heuristic phase and therefore produced no model file.
 Gamma-veto, AMF, reduced-cost rescue, fixed-rho, PMM/FPMM, non-midpoint split
 points, AMC for K1, custom branching, symmetry, exhaustive Big-M, and Round
 52/53 callback research are not part of K1-AM-SF.
+
+Round 55 replaces the historical-field dependency with explicit first-class
+controller fields. Eleven semantic sentinels cover the major witness, strong
+control, easy negative control, numerical endpoint, V12 M2, startup V12,
+tight/high/moderate V20 roles, and V20/V50 scale sentinels. The historical
+alias remains equal wherever both bounded runs construct the same action or
+model. A corrected incumbent-epoch identity is now part of every reusable
+artifact and LP key; pre-fix performance rows are not used as the corrected
+baseline.
+
+The default-off `research-k1-am-sf-vdp` preset changes only the inner backend
+to exact VD-P. It passed fixed-interval qualification but failed the full K1
+promotion gate on one severe major-witness regression. Its materially changed
+adaptive actions occurred on three other inputs, so no causal split revision
+was opened. The stable controller and F0-CLEAN paper backend remain unchanged.

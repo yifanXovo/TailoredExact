@@ -9,7 +9,6 @@ benchmark rows and not correction solves.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import os
 import platform
@@ -20,6 +19,7 @@ from pathlib import Path
 from typing import Any
 
 import round46_common as round46
+import pgrb_fingerprint_pipeline as fingerprint_pipeline
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,11 +36,7 @@ ACCOUNTING_TOLERANCE = 1.0
 
 
 def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
+    return fingerprint_pipeline.sha256(path)
 
 
 def write_json(path: Path, value: object) -> None:
@@ -68,16 +64,7 @@ def set_option(command: list[str], option: str, value: object) -> None:
 
 
 def objective_fingerprint(lp_path: Path) -> str:
-    lines = lp_path.read_text(encoding="utf-8", errors="replace").splitlines()
-    try:
-        start = next(i for i, line in enumerate(lines)
-                     if line.strip().lower() in {"minimize", "maximize"})
-        end = next(i for i, line in enumerate(lines[start + 1:], start + 1)
-                   if line.strip().lower().startswith("subject to"))
-    except StopIteration as exc:
-        raise RuntimeError(f"canonical LP objective section unavailable: {lp_path}") from exc
-    canonical = "\n".join(line.rstrip() for line in lines[start:end]) + "\n"
-    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+    return fingerprint_pipeline.objective_fingerprint(lp_path)
 
 
 def command_for(row: dict[str, Any], run_dir: Path,
@@ -142,13 +129,15 @@ def probe(row: dict[str, Any], executable: Path,
             result.get("gurobi_native_domain_audit_passed") is not True or
             process_seconds > PROBE_PROCESS_CAP + ACCOUNTING_TOLERANCE):
         raise RuntimeError(f"fingerprint probe audit failed: {row['instance_id']}")
-    entry: dict[str, object] = {
-        "instance_id": row["instance_id"], "input_path": row["input_path"],
-        "input_sha256": row["input_sha256"], "T": row["T"],
-        "expected_gurobi_model_fingerprint": fingerprint,
-        "canonical_model_sha256": sha256(lp_path),
-        "objective_fingerprint_sha256": objective_fingerprint(lp_path),
-        "variable_row_domain_identity": {
+    entry: dict[str, object] = fingerprint_pipeline.freeze_entry(
+        instance_id=str(row["instance_id"]),
+        input_path=str(row["input_path"]),
+        input_sha256=str(row["input_sha256"]),
+        time_limit=float(row["T"]),
+        executable_sha256=executable_hash,
+        native_fingerprint=fingerprint,
+        canonical_lp=lp_path,
+        native_domain={
             "num_vars": int(result["gurobi_num_vars"]),
             "num_rows": int(result["gurobi_num_constrs"]),
             "num_nonzeros": int(result["gurobi_num_nzs"]),
@@ -161,14 +150,14 @@ def probe(row: dict[str, Any], executable: Path,
             "native_bounds_match": result["gurobi_native_variable_bounds_match"],
             "native_domain_audit_passed": result["gurobi_native_domain_audit_passed"],
         },
-        "executable_sha256": executable_hash,
-        "solver": {"Presolve": "Auto", "Seed": 0, "Threads": 1,
-                   "MIPGap": 0.0, "MIPGapAbs": 0.0},
-        "probe_process_cap_seconds": PROBE_PROCESS_CAP,
-        "probe_solver_cap_seconds": PROBE_SOLVER_CAP,
-        "probe_process_seconds": process_seconds,
-        "raw_probe_path": run_dir.relative_to(ROOT).as_posix(),
-    }
+        solver_contract={"Presolve": "Auto", "Seed": 0, "Threads": 1,
+                         "MIPGap": 0.0, "MIPGapAbs": 0.0},
+        probe_metadata={
+            "probe_process_cap_seconds": PROBE_PROCESS_CAP,
+            "probe_solver_cap_seconds": PROBE_SOLVER_CAP,
+            "probe_process_seconds": process_seconds,
+            "raw_probe_path": run_dir.relative_to(ROOT).as_posix(),
+        })
     write_json(marker_path, {
         "schema": "round54-pgrb-fingerprint-probe-completion-v1",
         "complete": True, "official_benchmark_row": False,

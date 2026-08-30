@@ -79,6 +79,9 @@ struct StaticSegmentedWriteStats {
         std::numeric_limits<double>::infinity();
     double round51_subset_duration_max_m = 0.0;
     bool round51_historical_m_may_be_unsafe = false;
+    long long station_state_selector_variables = 0;
+    long long station_state_perspective_variables = 0;
+    long long aggregate_mccormick_rows = 0;
     std::string family_encoding;
 };
 
@@ -266,6 +269,12 @@ std::string hName(int i, int j) { return "h_" + std::to_string(i) + "_" + std::t
 std::string bitName(int i, int b) { return "bit_" + std::to_string(i) + "_" + std::to_string(b); }
 std::string prodName(int i, int b) { return "prod_" + std::to_string(i) + "_" + std::to_string(b); }
 std::string zprodName(int i) { return "zprod_" + std::to_string(i); }
+std::string stateName(int i, int y) {
+    return "state_" + std::to_string(i) + "_" + std::to_string(y);
+}
+std::string stateGName(int i, int y) {
+    return "state_g_" + std::to_string(i) + "_" + std::to_string(y);
+}
 std::string segmentSelectorName(int k) {
     return "seg_z_" + std::to_string(k);
 }
@@ -688,6 +697,21 @@ void writeCompactLp(const Instance& instance,
         canonical_spec->static_common_row_factoring;
     const bool static_hierarchical = static_active && canonical_spec &&
         canonical_spec->static_hierarchical_selectors;
+    const std::string station_state_mode = canonical_spec
+        ? canonical_spec->station_state_formulation : "bit-product";
+    const bool station_state_vdp = station_state_mode == "vd-p";
+    const bool station_state_vdj = station_state_mode == "vd-j";
+    const bool station_state_value_disaggregated =
+        station_state_vdp || station_state_vdj;
+    const bool aggregate_mc4 = station_state_mode == "aggregate-mc4";
+    if (station_state_mode != "bit-product" && !aggregate_mc4 &&
+        !station_state_value_disaggregated) {
+        throw std::runtime_error("unknown_round55_station_state_formulation");
+    }
+    if (static_active && station_state_mode != "bit-product") {
+        throw std::runtime_error(
+            "round55_station_state_not_defined_for_static_segmented_block");
+    }
     if (static_active && static_mode != "st-k2-i" &&
         !static_perspective) {
         throw std::runtime_error("unknown_round41_static_segmented_mode");
@@ -799,11 +823,22 @@ void writeCompactLp(const Instance& instance,
             if (stats != nullptr) ++stats->tailored_low_gini_l1_vars;
         }
         vars.add(zprodName(i), 0, instance.capacity[i], "C");
-        int bits = 1;
-        while (((1LL << bits) - 1) < instance.capacity[i]) ++bits;
-        for (int b = 0; b < bits; ++b) {
-            vars.add(bitName(i, b), 0, 1, "B");
-            vars.add(prodName(i, b), 0, g_ub, "C");
+        if (station_state_value_disaggregated) {
+            for (int y = y_lb[i]; y <= y_ub[i]; ++y) {
+                vars.add(stateName(i, y), 0, 1, "B");
+                vars.add(stateGName(i, y), 0, g_ub, "C");
+                if (static_stats) {
+                    ++static_stats->station_state_selector_variables;
+                    ++static_stats->station_state_perspective_variables;
+                }
+            }
+        } else {
+            int bits = 1;
+            while (((1LL << bits) - 1) < instance.capacity[i]) ++bits;
+            for (int b = 0; b < bits; ++b) {
+                vars.add(bitName(i, b), 0, 1, "B");
+                vars.add(prodName(i, b), 0, g_ub, "C");
+            }
         }
     }
     for (int i = 1; i <= V; ++i) {
@@ -968,6 +1003,10 @@ void writeCompactLp(const Instance& instance,
     }
     if (use_shared_interval_rows) {
         for (const CanonicalLinearRow& row : shared_interval_rows.rows) {
+            if (station_state_value_disaggregated &&
+                row.family == "interval_tight_mccormick_G_bit") {
+                continue;
+            }
             Expr expression;
             for (const auto& coefficient : row.coefficients) {
                 addTerm(expression, coefficient.first, coefficient.second);
@@ -2763,44 +2802,111 @@ void writeCompactLp(const Instance& instance,
     }
 
     for (int i = 1; i <= V; ++i) {
-        int bits = 1;
-        while (((1LL << bits) - 1) < instance.capacity[i]) ++bits;
-        Expr ybits; addTerm(ybits, yName(i), 1);
-        Expr zprod; addTerm(zprod, zprodName(i), 1);
-        for (int b = 0; b < bits; ++b) {
-            const double coef = static_cast<double>(1LL << b);
-            addTerm(ybits, bitName(i, b), -coef);
-            addTerm(zprod, prodName(i, b), -coef);
-        }
-        writeConstraint(out, cid, ybits, "=", 0);
-        writeConstraint(out, cid, zprod, "=", 0);
-        for (int b = 0; b < bits; ++b) {
-            Expr p_le_g; addTerm(p_le_g, prodName(i, b), 1); addTerm(p_le_g, "G", -1);
-            writeConstraint(out, cid, p_le_g, "<=", 0);
-            Expr p_le_bit; addTerm(p_le_bit, prodName(i, b), 1); addTerm(p_le_bit, bitName(i, b), -1);
-            writeConstraint(out, cid, p_le_bit, "<=", 0);
-            Expr p_ge; addTerm(p_ge, prodName(i, b), 1); addTerm(p_ge, "G", -1); addTerm(p_ge, bitName(i, b), -1);
-            writeConstraint(out, cid, p_ge, ">=", -1);
-            if (!use_shared_interval_rows && strengthened && cutoff != nullptr && cutoff->enabled &&
-                options.compact_bc_tight_mccormick) {
-                if (stats != nullptr && stats->tight_mccormick_rows_added == 0) {
-                    stats->enabled_families.push_back("interval_tight_mccormick_G_bit");
+        if (station_state_value_disaggregated) {
+            Expr selector_sum;
+            Expr inventory_link;
+            Expr g_reconstruction;
+            Expr product_reconstruction;
+            Expr ratio_reconstruction;
+            Expr penalty_reconstruction;
+            addTerm(inventory_link, yName(i), 1.0);
+            addTerm(g_reconstruction, "G", -1.0);
+            addTerm(product_reconstruction, zprodName(i), 1.0);
+            addTerm(ratio_reconstruction, rName(i), 1.0);
+            addTerm(penalty_reconstruction, eName(i), 1.0);
+            for (int y = y_lb[i]; y <= y_ub[i]; ++y) {
+                const std::string selector = stateName(i, y);
+                const std::string selected_g = stateGName(i, y);
+                addTerm(selector_sum, selector, 1.0);
+                addTerm(inventory_link, selector, -static_cast<double>(y));
+                addTerm(g_reconstruction, selected_g, 1.0);
+                addTerm(product_reconstruction, selected_g,
+                        -static_cast<double>(y));
+                addTerm(ratio_reconstruction, selector,
+                        -static_cast<double>(y) / instance.target[i]);
+                addTerm(penalty_reconstruction, selector,
+                        -std::fabs(static_cast<double>(y) /
+                                   instance.target[i] - 1.0));
+
+                Expr perspective_lower;
+                addTerm(perspective_lower, selected_g, 1.0);
+                addTerm(perspective_lower, selector, -g_lb);
+                writeConstraint(out, cid, perspective_lower, ">=", 0.0);
+                Expr perspective_upper;
+                addTerm(perspective_upper, selected_g, 1.0);
+                addTerm(perspective_upper, selector, -g_ub);
+                writeConstraint(out, cid, perspective_upper, "<=", 0.0);
+            }
+            writeConstraint(out, cid, selector_sum, "=", 1.0);
+            writeConstraint(out, cid, inventory_link, "=", 0.0);
+            writeConstraint(out, cid, g_reconstruction, "=", 0.0);
+            writeConstraint(out, cid, product_reconstruction, "=", 0.0);
+            if (station_state_vdj) {
+                // These equalities are redundant at integer selectors with
+                // the original Y/r links, but make the joint VD-J state
+                // representation explicit in the relaxation.
+                writeConstraint(out, cid, ratio_reconstruction, "=", 0.0);
+                // The old absolute-value inequalities remain present; this
+                // equality removes only nonminimal auxiliary e_i values.
+                writeConstraint(out, cid, penalty_reconstruction, "=", 0.0);
+            }
+        } else {
+            int bits = 1;
+            while (((1LL << bits) - 1) < instance.capacity[i]) ++bits;
+            Expr ybits; addTerm(ybits, yName(i), 1);
+            Expr zprod; addTerm(zprod, zprodName(i), 1);
+            for (int b = 0; b < bits; ++b) {
+                const double coef = static_cast<double>(1LL << b);
+                addTerm(ybits, bitName(i, b), -coef);
+                addTerm(zprod, prodName(i, b), -coef);
+            }
+            writeConstraint(out, cid, ybits, "=", 0);
+            writeConstraint(out, cid, zprod, "=", 0);
+            for (int b = 0; b < bits; ++b) {
+                Expr p_le_g; addTerm(p_le_g, prodName(i, b), 1); addTerm(p_le_g, "G", -1);
+                writeConstraint(out, cid, p_le_g, "<=", 0);
+                Expr p_le_bit; addTerm(p_le_bit, prodName(i, b), 1); addTerm(p_le_bit, bitName(i, b), -1);
+                writeConstraint(out, cid, p_le_bit, "<=", 0);
+                Expr p_ge; addTerm(p_ge, prodName(i, b), 1); addTerm(p_ge, "G", -1); addTerm(p_ge, bitName(i, b), -1);
+                writeConstraint(out, cid, p_ge, ">=", -1);
+                if (!use_shared_interval_rows && strengthened && cutoff != nullptr && cutoff->enabled &&
+                    options.compact_bc_tight_mccormick) {
+                    if (stats != nullptr && stats->tight_mccormick_rows_added == 0) {
+                        stats->enabled_families.push_back("interval_tight_mccormick_G_bit");
+                    }
+                    Expr lb_bit; addTerm(lb_bit, prodName(i, b), 1);
+                    addTerm(lb_bit, bitName(i, b), -g_lb);
+                    writeConstraint(out, cid, lb_bit, ">=", 0);
+                    Expr ub_bit; addTerm(ub_bit, prodName(i, b), 1);
+                    addTerm(ub_bit, bitName(i, b), -g_ub);
+                    writeConstraint(out, cid, ub_bit, "<=", 0);
+                    Expr lb_g; addTerm(lb_g, prodName(i, b), 1);
+                    addTerm(lb_g, "G", -1);
+                    addTerm(lb_g, bitName(i, b), -g_ub);
+                    writeConstraint(out, cid, lb_g, ">=", -g_ub);
+                    Expr ub_g; addTerm(ub_g, prodName(i, b), 1);
+                    addTerm(ub_g, "G", -1);
+                    addTerm(ub_g, bitName(i, b), -g_lb);
+                    writeConstraint(out, cid, ub_g, "<=", -g_lb);
+                    if (stats != nullptr) stats->tight_mccormick_rows_added += 4;
                 }
-                Expr lb_bit; addTerm(lb_bit, prodName(i, b), 1);
-                addTerm(lb_bit, bitName(i, b), -g_lb);
-                writeConstraint(out, cid, lb_bit, ">=", 0);
-                Expr ub_bit; addTerm(ub_bit, prodName(i, b), 1);
-                addTerm(ub_bit, bitName(i, b), -g_ub);
-                writeConstraint(out, cid, ub_bit, "<=", 0);
-                Expr lb_g; addTerm(lb_g, prodName(i, b), 1);
-                addTerm(lb_g, "G", -1);
-                addTerm(lb_g, bitName(i, b), -g_ub);
-                writeConstraint(out, cid, lb_g, ">=", -g_ub);
-                Expr ub_g; addTerm(ub_g, prodName(i, b), 1);
-                addTerm(ub_g, "G", -1);
-                addTerm(ub_g, bitName(i, b), -g_lb);
-                writeConstraint(out, cid, ub_g, "<=", -g_lb);
-                if (stats != nullptr) stats->tight_mccormick_rows_added += 4;
+            }
+            if (aggregate_mc4) {
+                const double lower_y = static_cast<double>(y_lb[i]);
+                const double upper_y = static_cast<double>(y_ub[i]);
+                Expr mc1; addTerm(mc1, zprodName(i), 1.0);
+                addTerm(mc1, yName(i), -g_lb); addTerm(mc1, "G", -lower_y);
+                writeConstraint(out, cid, mc1, ">=", -g_lb * lower_y);
+                Expr mc2; addTerm(mc2, zprodName(i), 1.0);
+                addTerm(mc2, yName(i), -g_ub); addTerm(mc2, "G", -upper_y);
+                writeConstraint(out, cid, mc2, ">=", -g_ub * upper_y);
+                Expr mc3; addTerm(mc3, zprodName(i), 1.0);
+                addTerm(mc3, yName(i), -g_ub); addTerm(mc3, "G", -lower_y);
+                writeConstraint(out, cid, mc3, "<=", -g_ub * lower_y);
+                Expr mc4; addTerm(mc4, zprodName(i), 1.0);
+                addTerm(mc4, yName(i), -g_lb); addTerm(mc4, "G", -upper_y);
+                writeConstraint(out, cid, mc4, "<=", -g_lb * upper_y);
+                if (static_stats) static_stats->aggregate_mccormick_rows += 4;
             }
         }
     }
@@ -4084,6 +4190,8 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
     artifact.round50_symmetry_policy = spec.round50_symmetry_policy;
     artifact.round51_subset_duration_big_m =
         spec.round51_subset_duration_big_m;
+    artifact.station_state_formulation = spec.station_state_formulation;
+    artifact.sparse_family_removal = spec.sparse_family_removal;
     artifact.static_segmented_gini = spec.static_segmented_gini;
     artifact.objective_gini_envelope_rows = static_cast<long long>(
         spec.objective_gini_envelope_facets.size());
@@ -4133,6 +4241,29 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
             throw std::runtime_error(
                 "unsupported_round51_subset_duration_big_m_policy");
         }
+        if (spec.station_state_formulation != "bit-product" &&
+            spec.station_state_formulation != "aggregate-mc4" &&
+            spec.station_state_formulation != "vd-p" &&
+            spec.station_state_formulation != "vd-j") {
+            throw std::runtime_error(
+                "unsupported_round55_station_state_formulation");
+        }
+        if (spec.station_state_formulation != "bit-product" &&
+            (!spec.strengthened || !spec.interval_restricted)) {
+            throw std::runtime_error(
+                "round55_station_state_requires_strengthened_interval_model");
+        }
+        if (spec.sparse_family_removal != "none" &&
+            spec.sparse_family_removal !=
+                "triple-support-duration-cover") {
+            throw std::runtime_error(
+                "unsupported_round55_sparse_family_removal");
+        }
+        if (spec.sparse_family_removal != "none" &&
+            !spec.strengthened) {
+            throw std::runtime_error(
+                "round55_sparse_family_removal_requires_strengthened_model");
+        }
         if (spec.static_segmented_gini != "off" &&
             (!spec.strengthened || !spec.interval_restricted ||
              !spec.add_verified_incumbent_row)) {
@@ -4142,6 +4273,10 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
         SolveOptions model_options = options;
         if (spec.interval_restricted) {
             model_options.interval_row_factory_round19 = true;
+        }
+        if (spec.sparse_family_removal ==
+            "triple-support-duration-cover") {
+            model_options.compact_bc_support_cut_max_size = 2;
         }
         CompactIntervalCutoffConfig cutoff;
         cutoff.enabled = spec.interval_restricted;
@@ -4188,6 +4323,16 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
             static_stats.round51_subset_duration_max_m;
         artifact.round51_historical_m_may_be_unsafe =
             static_stats.round51_historical_m_may_be_unsafe;
+        artifact.station_state_selector_variables =
+            static_stats.station_state_selector_variables;
+        artifact.station_state_perspective_variables =
+            static_stats.station_state_perspective_variables;
+        artifact.aggregate_mccormick_rows =
+            static_stats.aggregate_mccormick_rows;
+        artifact.support_duration_pair_rows =
+            stats.support_duration_pair_cuts_added;
+        artifact.support_duration_triple_rows =
+            stats.support_duration_triple_cuts_added;
         artifact.static_family_encoding = static_stats.family_encoding;
         const ModelSizeStats size = analyzeLpModel(path);
         artifact.rows = size.rows;

@@ -39,6 +39,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Round53CallbackIsolation.cpp
   src/InventoryRouteCuts.cpp
   src/InventoryRouteRootClosure.cpp
+  src/PenaltyCoverSeparation.cpp
   src/Round51IntervalMip.cpp
   src/Round52TailoredCuts.cpp
   src/Round52GurobiCutAdapter.cpp
@@ -267,3 +268,11 @@ target_compile_definitions(Round54MainlineAndInventoryRouteTests PRIVATE
   EXACT_EBRP_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 add_test(NAME Round54MainlineAndInventoryRouteTests
   COMMAND Round54MainlineAndInventoryRouteTests)
+
+add_executable(Round55StationStateChainTests
+  tests/round55_station_state_chain_tests.cpp)
+target_link_libraries(Round55StationStateChainTests PRIVATE exact_ebrp_core)
+target_compile_definitions(Round55StationStateChainTests PRIVATE
+  EXACT_EBRP_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
+add_test(NAME Round55StationStateChainTests
+  COMMAND Round55StationStateChainTests)

@@ -1,0 +1,46 @@
+{
+  "schema": "round55-confirmation-extension-execution-manifest-v1",
+  "correction_classification": "evidence-only defect",
+  "created_before_extension_results": true,
+  "algorithm_source_changed": false,
+  "executable_changed": false,
+  "leader_changed": false,
+  "reason": "The Stage-0 role manifest omitted executable interval parameters for the major children and named extra V50 instances without interval endpoints or verified cutoffs.",
+  "mechanical_correction": "Add the exact midpoint children of frozen D1 and use two V50 interval states already frozen in the Stage-0 offline census; retain every other predeclared role state.",
+  "states": [
+    "D1", "E_MAJOR_L", "E_MAJOR_R", "D3", "D4", "D5",
+    "D6", "D7", "D8", "D9", "D10", "D11", "D12",
+    "C1", "C2", "D13", "D14", "V50_MODERATE", "V50_TIGHT2400"
+  ],
+  "additional_states": [
+    {
+      "state_id": "E_MAJOR_L",
+      "role": "major exact midpoint left child",
+      "input_path": "reference/qualification_round39/small-medium/round39_small_medium_V12_M3_Q30_slot08_seed1343324363.txt",
+      "input_sha256": "29e0ca2c95ec2e061aa1cc524aaf6a41bf6c4a34355dca86df6966aa8a29b6b4",
+      "gamma_lower": 0.0,
+      "gamma_upper": 0.024734341307209723,
+      "verified_cutoff": 0.049468682614419446,
+      "route_time_limit": 2850,
+      "pickup_time": 60,
+      "drop_time": 60,
+      "derivation": "exact midpoint of frozen D1 interval [0,0.049468682614419446]"
+    },
+    {
+      "state_id": "E_MAJOR_R",
+      "role": "major exact midpoint right child",
+      "input_path": "reference/qualification_round39/small-medium/round39_small_medium_V12_M3_Q30_slot08_seed1343324363.txt",
+      "input_sha256": "29e0ca2c95ec2e061aa1cc524aaf6a41bf6c4a34355dca86df6966aa8a29b6b4",
+      "gamma_lower": 0.024734341307209723,
+      "gamma_upper": 0.049468682614419446,
+      "verified_cutoff": 0.049468682614419446,
+      "route_time_limit": 2850,
+      "pickup_time": 60,
+      "drop_time": 60,
+      "derivation": "exact midpoint of frozen D1 interval [0,0.049468682614419446]"
+    }
+  ],
+  "v50_state_source": "offline_census_execution_manifest.json",
+  "cap_seconds": 1800,
+  "arms": ["F0-CLEAN", "VD-P"]
+}

@@ -203,7 +203,7 @@ void usage() {
         << "[--pricing-final-verifier true|false] [--pricing-verifier-time <seconds>] "
         << "[--pricing-verifier-checkpoint <path>] [--pricing-verifier-resume <path>] "
         << "[--pricing-verifier-mode label-dp|route-mask-dp|auto] "
-        << "[--algorithm-preset paper-k1-am-sf|k1-am-f0|paper-gf-tailored-bc|research-gf-adaptive-gamma-veto|paper-gf-adaptive-gamma-veto|paper-gf-compact-bc|paper-gf-bpc-core|paper-bpc-core|paper-bpc-core-adaptive|paper-exact-v20-certificate|paper-exact-portfolio|paper-bpc-experimental|diagnostic-large] "
+        << "[--algorithm-preset paper-k1-am-sf|k1-am-f0|research-k1-am-sf-vdp|research-k1-am-sf-sf-r1|research-k1-am-sf-vdp-sf-r1|paper-gf-tailored-bc|research-gf-adaptive-gamma-veto|paper-gf-adaptive-gamma-veto|paper-gf-compact-bc|paper-gf-bpc-core|paper-bpc-core|paper-bpc-core-adaptive|paper-exact-v20-certificate|paper-exact-portfolio|paper-bpc-experimental|diagnostic-large] "
         << "[--production-preset <preset-alias>] [--incumbent-archive-auto true|false] "
         << "[--incumbent-archive-dir <dir>]\n";
 }
@@ -243,6 +243,29 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.algorithm_preset = "custom";
     }
     if (opt.algorithm_preset == "custom") return;
+
+    if (opt.algorithm_preset == "research-k1-am-sf-vdp" ||
+        opt.algorithm_preset == "research-k1-am-sf-sf-r1" ||
+        opt.algorithm_preset == "research-k1-am-sf-vdp-sf-r1") {
+        // Default-off Round 55 research adapters. They reuse the complete
+        // first-class paper controller and change only the uniform inner
+        // formulation policy named by the preset.
+        const std::string requested = opt.algorithm_preset;
+        opt.algorithm_preset = "paper-gf-tailored-bc";
+        applyAlgorithmPreset(opt);
+        ebrp::configurePaperK1AmSfOverrides(opt);
+        opt.algorithm_preset = requested;
+        if (requested == "research-k1-am-sf-vdp") {
+            opt.external_gini_interval_mip_policy = "round55-vd-p";
+        } else if (requested == "research-k1-am-sf-sf-r1") {
+            opt.external_gini_interval_mip_policy =
+                "round55-sf-r1-remove-triple-duration";
+        } else {
+            opt.external_gini_interval_mip_policy =
+                "round55-vdp-sf-r1";
+        }
+        return;
+    }
 
     if (ebrp::isPaperK1AmSfPresetOrAlias(opt.algorithm_preset)) {
         // Round 54 canonicalizes the frozen Round 52/53 K1-AM controller and
@@ -3464,6 +3487,20 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
             "Round 54 frozen K1-AM-SF mainline: K0=1 adaptive-mass controller "
             "with tau=0.08, midpoint splits, and the qualified simplified F0 "
             "interval-MIP backend; research strengthening remains default-off";
+    } else if (snapshot.algorithm_preset == "research-k1-am-sf-vdp" ||
+               snapshot.algorithm_preset == "research-k1-am-sf-sf-r1" ||
+               snapshot.algorithm_preset ==
+                   "research-k1-am-sf-vdp-sf-r1") {
+        snapshot.preset_certificate_scope =
+            "k1_adaptive_mass_frontier_with_round55_uniform_research_inner";
+        snapshot.preset_experimental_features_enabled =
+            snapshot.algorithm_preset;
+        snapshot.preset_disabled_features =
+            "all_non_round55_research,tailored_callback_cuts,"
+            "exhaustive_subset_duration_rows,inventory_route_root_closure";
+        snapshot.preset_reason =
+            "Default-off Round 55 research preset: unchanged first-class "
+            "K1-AM-SF outer controller with one frozen uniform inner policy";
     } else if (snapshot.algorithm_preset == "paper-gf-tailored-bc") {
         snapshot.preset_certificate_scope =
             "gini_frontier_relaxation_then_cplex_managed_tailored_bc";
@@ -4556,6 +4593,9 @@ std::string jsonEscapeLocal(const std::string& value) {
 
 bool isPaperTracePreset(const std::string& preset) {
     return preset == "paper-k1-am-sf" ||
+           preset == "research-k1-am-sf-vdp" ||
+           preset == "research-k1-am-sf-sf-r1" ||
+           preset == "research-k1-am-sf-vdp-sf-r1" ||
            preset == "paper-gf-bpc-core" ||
            preset == "paper-gf-tailored-bc" ||
            preset == "paper-gf-compact-bc" ||

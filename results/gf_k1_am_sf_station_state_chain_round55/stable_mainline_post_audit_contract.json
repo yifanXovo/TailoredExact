@@ -1,0 +1,30 @@
+{
+  "schema": "round55-stable-mainline-post-audit-contract-v1",
+  "preset": "paper-k1-am-sf",
+  "algorithm": "K1-AM-SF",
+  "controller": {
+    "K0": 1,
+    "root_range": "complete strict-improver Gini range",
+    "split_point": "midpoint",
+    "split_score": "balanced-normalized-closure",
+    "tau": 0.08,
+    "maximum_depth": 8,
+    "minimum_width": 0.0001,
+    "split_factor": 2,
+    "child_infeasibility": "exact",
+    "exact_parent_closure": true
+  },
+  "backend": "F0-CLEAN",
+  "solver": {
+    "engine": "Gurobi native branch-and-cut",
+    "Presolve": "Auto",
+    "Seed": 0,
+    "Threads": 1,
+    "MIPGap": 0,
+    "MIPGapAbs": 0,
+    "PreCrush": "default",
+    "callback": "off"
+  },
+  "corrected_incumbent_epoch_lifecycle": true,
+  "paper_preset_replaced": false
+}
