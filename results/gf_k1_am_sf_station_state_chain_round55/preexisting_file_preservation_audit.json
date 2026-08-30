@@ -30,5 +30,14 @@
   },
   "preservation_rule": "Retain every listed path byte-for-byte; verify path, byte count, SHA-256, and tracked Git blob at finalization.",
   "round55_outputs_excluded_from_baseline": true,
-  "final_reverification_pending": true
+  "final_reverification_pending": false,
+  "final_verification": {
+    "all_preserved": true,
+    "verified_file_count": 50851,
+    "verified_bytes": 27113346320,
+    "missing_count": 0,
+    "size_mismatch_count": 0,
+    "sha256_mismatch_count": 0,
+    "record": "preexisting_untracked_final_verification.json"
+  }
 }

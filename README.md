@@ -62,6 +62,23 @@ proved and implemented exact inventory--route separation, but its fixed-
 interval gate was negative; it is not a recommended preset and does not alter
 K1-AM-SF. See `docs/current_mainline.md` and `docs/k1_am_sf_algorithm.md`.
 
+Round 55 made the controller first-class: the paper preset now reads explicit
+K1 fields for `K0=1`, midpoint splitting, balanced normalized closure,
+`tau=0.08`, depth/width limits, exact child infeasibility, native targets, and
+exact parent closure. Historical K4/C6 fields remain neutral compatibility
+adapters and no longer define paper behavior. The audit also fixed a stale
+incumbent-epoch cache key across model/LP lifecycles. That fix changes the
+corrected performance baseline but did not create a false certificate in the
+requalification panel. VD-P, VD-J, MC4, sparse-removal, and penalty-cover work
+remain explicitly named default-off research; `paper-k1-am-sf` is unchanged.
+
+VD-P passed every fixed-interval gate and the final long panel, but its full
+K1 integration was mixed: 14 versus 12 effective certificates, shifted-Work
+GM 0.5692, and GI ratio 0.6091, with zero false certificates, alongside one
+severe regression on the frozen major witness. The K1 gate therefore failed;
+the sealed P-GRB and expansion panels did not open, and VD-P remains a
+default-off research candidate rather than a paper preset.
+
 ## Historical exact lines
 
 The sections below preserve earlier engineering and reproduction records. Any

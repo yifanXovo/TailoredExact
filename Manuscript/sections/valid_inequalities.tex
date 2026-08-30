@@ -62,3 +62,28 @@ $\max\{0,\sum_{i\in A}(L_i-b_i)\}$ and
 $\max\{0,\sum_{i\in A}(b_i-U_i)\}$. Exact directed min-cuts separated these
 rows externally at the root. They strengthened many root relaxations but
 failed the frozen live gate, so they remain inactive research families.
+
+\subsection{Audited station-state research formulations}
+For the propagated integer domain $\mathcal Y_i$, VD--P introduces selectors
+$s_{iy}$ and perspective variables $q_{iy}$:
+\begin{align}
+ \sum_{y\in\mathcal Y_i}s_{iy}&=1,&
+ Y_i&=\sum_y y s_{iy},\\
+ \gamma^L s_{iy}\le q_{iy}&\le\gamma^U s_{iy},&
+ \sum_y q_{iy}&=G,&
+ Z_i&=\sum_y yq_{iy}.
+\end{align}
+At integer selector points these equations are exactly $Z_i=GY_i$, and every
+integer product point has the corresponding lift. For the isolated station
+disjunction their continuous relaxation is the perspective convex hull. This
+does not imply universal dominance after projection through the full routing
+model or faster MIP solution.
+
+VD--J further imposes
+\begin{equation}
+ e_i=\sum_{y\in\mathcal Y_i}|y/D_i-1|s_{iy},
+\end{equation}
+while preserving the original absolute-deviation inequalities. The aggregate
+MC4 rows are valid for $G\in[\gamma^L,\gamma^U]$ and
+$Y_i\in[L_i,U_i]$; the Round 55 implication census distinguishes validity from
+whether the current bit-product relaxation already implies them.

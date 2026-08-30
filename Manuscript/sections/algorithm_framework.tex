@@ -9,6 +9,12 @@ $\tau=0.08$. Native-target handling, exact-parent closure, and
 child-infeasibility handling are inherited unchanged from the qualified
 controller.
 
+The implementation represents this policy through first-class fields for the
+initial interval count, midpoint rule, balanced normalized closure score,
+threshold, depth and width limits, split factor, exact child-infeasibility
+policy, native targets, and exact parent closure. Historical K4/C6 fields are
+neutral compatibility adapters and do not determine the paper algorithm.
+
 For each leaf, the sparse tailored fixed-interval MILP solved by Gurobi's
 native branch-and-cut enforces
 \begin{align}
@@ -48,3 +54,7 @@ F0--CLEAN, refines only through the frozen midpoint/adaptive-mass rule, merges
 only scope-valid evidence, and certifies only after coverage and independent
 solution audits pass. The stable algorithm registers no dynamic user-cut
 callback.
+
+Every reusable artifact, relaxation, or basis identity also includes the
+verified-incumbent epoch. Consequently, an incumbent improvement cannot reuse
+a model or LP bound carrying an earlier objective cutoff.
