@@ -55,3 +55,19 @@ VD-P remains a useful default-off research candidate; VD-J, MC4, and SF-R1
 were rejected at earlier gates. The stable split controller is retained
 because the severe witness had no materially changed adaptive action. No
 station-state or sparse variant replaces the paper preset.
+
+## Round 56 status
+
+Round 56 does not tune or replace the algorithm. The corrected first-class
+K1-AM-SF controller, F0-CLEAN backend, branching, rows, certificate policy,
+and Gurobi contract remain frozen. The round audits operational T throughout
+the model and identity pipeline, then applies the same executable and settings
+to a matched V=8 through V=50 paper-candidate screening panel.
+
+`route_time_limit_seconds` is a mathematical per-vehicle limit;
+`solver_process_cap_seconds` is execution metadata. The common proof horizon
+is 3600 seconds, while nine predeclared V>=20/T=18000 rows may continue to a
+7200-second final cap. Native route witnesses are retained exactly as returned,
+independently verified from disk, and never post-optimized. Certified packages
+are exact; capped verified incumbents are not. Round 56 remains screening
+evidence because it has only one base landscape per V.

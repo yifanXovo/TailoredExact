@@ -79,6 +79,17 @@ severe regression on the frozen major witness. The K1 gate therefore failed;
 the sealed P-GRB and expansion panels did not open, and VD-P remains a
 default-off research candidate rather than a paper preset.
 
+Round 56 retains that corrected mainline unchanged and builds a deterministic
+50-scenario paper-candidate screen across V=8/12/20/30/50, two matched fleet
+sizes, primary Q=30, Q=20 sentinels, and operational route horizons from 1800
+to 18000 seconds. Operational T is distinct from the solver process cap; all
+proof-difficulty comparisons use the common 3600-second horizon. Each verified
+row has one native final route package, with capped incumbents explicitly
+separated from exact certified witnesses and no route post-optimization. See
+`docs/round56_paper_candidate_dataset.md` and
+`docs/native_route_witness_interpretation.md`. This screen has only one base
+landscape per V and is not yet final replicated paper evidence.
+
 ## Historical exact lines
 
 The sections below preserve earlier engineering and reproduction records. Any
