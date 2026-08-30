@@ -66,6 +66,7 @@ void usage() {
         << "[--external-gini-split-after-attempts <N>] [--external-gini-scheduling legacy-quanta|paper-lp-event|cplex-algorithm-replica|round29-bound-gain-incremental|round30-dual-bound-target|round31-nonblocking-native-bound] "
         << "[--external-gini-interval-mip-policy <uniform-policy>] "
         << "[--process-wall-time-limit <seconds>] [--process-shutdown-margin <seconds>] [--process-phase-ledger <csv>] "
+        << "[--round56-scenario-id <id>] [--round56-mathematical-instance-sha256 <sha256>] [--round56-run-identity-sha256 <sha256>] "
         << "[--global-gini-tree-search dynamic|traditional|auto] [--global-gini-tree-child-estimate parent-copy|dispersion-coupled|factory-domain] "
         << "[--global-gini-tree-row-attachment full-inherited-pack|exact-incremental-delta] [--global-gini-tree-row-timing deferred|eager] "
         << "[--global-gini-tree-native-mip-start true|false] [--global-gini-tree-root-connectivity-flow true|false] "
@@ -645,6 +646,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--process-wall-time-limit") opt.process_wall_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--process-shutdown-margin") opt.process_shutdown_margin_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--process-phase-ledger") opt.process_phase_ledger_path = requireValue(i, argc, argv);
+        else if (arg == "--round56-scenario-id") opt.round56_scenario_id = requireValue(i, argc, argv);
+        else if (arg == "--round56-mathematical-instance-sha256") opt.round56_mathematical_instance_sha256 = requireValue(i, argc, argv);
+        else if (arg == "--round56-run-identity-sha256") opt.round56_run_identity_sha256 = requireValue(i, argc, argv);
         else if (arg == "--gini-cap") opt.gini_cap = std::stod(requireValue(i, argc, argv));
         else if (arg == "--gini-floor") opt.gini_floor = std::stod(requireValue(i, argc, argv));
         else if (arg == "--max-nodes") opt.max_branch_nodes = std::stoi(requireValue(i, argc, argv));
@@ -18940,6 +18944,21 @@ std::string inferPlateauReasonForFinalization(const ebrp::SolveResult& result) {
     return "not_certified";
 }
 
+void applyRound56ResultMetadata(const ebrp::Instance& instance,
+                                const ebrp::SolveOptions& opt,
+                                ebrp::SolveResult& result) {
+    result.scenario_id = opt.round56_scenario_id;
+    result.route_time_limit_seconds = instance.total_time_limit;
+    result.solver_process_cap_seconds = opt.process_wall_time_limit > 0.0
+        ? opt.process_wall_time_limit : opt.solve_time_limit;
+    result.pickup_time_seconds = instance.pickup_time;
+    result.drop_time_seconds = instance.drop_time;
+    result.distance_convention = instance.distance_convention;
+    result.mathematical_instance_sha256 =
+        opt.round56_mathematical_instance_sha256;
+    result.run_identity_sha256 = opt.round56_run_identity_sha256;
+}
+
 void writeEmergencyFinalJson(const ebrp::SolveOptions& opt,
                              const std::string& status,
                              const std::string& reason) {
@@ -18949,6 +18968,16 @@ void writeEmergencyFinalJson(const ebrp::SolveOptions& opt,
     result.input_path = opt.input_path;
     result.result_file = opt.out_path;
     result.log_file = opt.log_path;
+    result.scenario_id = opt.round56_scenario_id;
+    result.route_time_limit_seconds = opt.total_time_limit;
+    result.solver_process_cap_seconds = opt.process_wall_time_limit > 0.0
+        ? opt.process_wall_time_limit : opt.solve_time_limit;
+    result.pickup_time_seconds = opt.pickup_time;
+    result.drop_time_seconds = opt.drop_time;
+    result.distance_convention = "unavailable_on_emergency_path";
+    result.mathematical_instance_sha256 =
+        opt.round56_mathematical_instance_sha256;
+    result.run_identity_sha256 = opt.round56_run_identity_sha256;
     result.method = opt.method.empty() ? "unknown" : opt.method;
     result.status = status;
     result.certificate = "not_certified";
@@ -19236,6 +19265,7 @@ int main(int argc, char** argv) {
             auto& r = results.back();
             initializeScalabilityFields(instance, effective_opt, r);
             applyRunConfigSnapshot(buildRunConfigSnapshot(instance, effective_opt), r);
+            applyRound56ResultMetadata(instance, effective_opt, r);
             if (effective_opt.frontier_execution_mode == "scheduler") {
                 writePreAutoOracleParentJson(effective_opt, r);
                 effective_opt.process_elapsed_seconds_before_auto_oracle =
