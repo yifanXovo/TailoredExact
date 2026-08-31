@@ -49,6 +49,16 @@ struct SolveResult {
     std::string input_path;
     std::string result_file;
     std::string log_file;
+    // Round 56 separates the operational route horizon from solver runtime
+    // and records the frozen mathematical/run identities explicitly.
+    std::string scenario_id;
+    double route_time_limit_seconds = 0.0;
+    double solver_process_cap_seconds = 0.0;
+    double pickup_time_seconds = 0.0;
+    double drop_time_seconds = 0.0;
+    std::string distance_convention;
+    std::string mathematical_instance_sha256;
+    std::string run_identity_sha256;
     std::string method;
     std::string status;
     std::string certificate;

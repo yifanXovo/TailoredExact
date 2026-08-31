@@ -31,6 +31,11 @@ struct SolveOptions {
     std::string input_path;
     std::string log_path;
     std::string out_path;
+    // Round 56 paper-candidate provenance. These values are descriptive
+    // identities supplied by the frozen runner and never affect the model.
+    std::string round56_scenario_id;
+    std::string round56_mathematical_instance_sha256;
+    std::string round56_run_identity_sha256;
     double lambda = 0.15;
     double total_time_limit = 3600.0;
     double solve_time_limit = 1000.0;

@@ -483,6 +483,21 @@ std::string resultToJson(const SolveResult& input) {
     out << "  \"input_path\": \"" << jsonEscape(result.input_path) << "\",\n";
     out << "  \"result_file\": \"" << jsonEscape(result.result_file) << "\",\n";
     out << "  \"log_file\": \"" << jsonEscape(result.log_file) << "\",\n";
+    out << "  \"scenario_id\": \"" << jsonEscape(result.scenario_id) << "\",\n";
+    out << "  \"route_time_limit_seconds\": "
+        << result.route_time_limit_seconds << ",\n";
+    out << "  \"solver_process_cap_seconds\": "
+        << result.solver_process_cap_seconds << ",\n";
+    out << "  \"pickup_time_seconds\": "
+        << result.pickup_time_seconds << ",\n";
+    out << "  \"drop_time_seconds\": "
+        << result.drop_time_seconds << ",\n";
+    out << "  \"distance_convention\": \""
+        << jsonEscape(result.distance_convention) << "\",\n";
+    out << "  \"mathematical_instance_sha256\": \""
+        << jsonEscape(result.mathematical_instance_sha256) << "\",\n";
+    out << "  \"run_identity_sha256\": \""
+        << jsonEscape(result.run_identity_sha256) << "\",\n";
     out << "  \"method\": \"" << jsonEscape(result.method) << "\",\n";
     out << "  \"method_scope\": \"" << jsonEscape(inferMethodScope(result)) << "\",\n";
     out << "  \"solves_original_objective\": "

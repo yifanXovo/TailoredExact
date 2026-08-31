@@ -1,0 +1,99 @@
+{
+  "additional_7200_certificate_count": 0,
+  "bugs_found_and_fixed": [
+    "pre-run generator distances initially used unrounded coordinates while files serialized rounded coordinates; regenerated from serialized points before optimization",
+    "stable result JSON lacked explicit T/process/service/distance/scenario/run identity metadata; source freeze added it without altering the algorithm"
+  ],
+  "capped_noncertified_count": 10,
+  "certified_counts_by_checkpoint_seconds": {
+    "1200": 38,
+    "300": 32,
+    "3600": 40
+  },
+  "certified_final_count": 40,
+  "completion_status": "round56_complete",
+  "correctness_failure_count": 0,
+  "dataset_classification": "paper_candidate_screen_complete",
+  "engineering_classification": "scenario_identity_bug_fixed",
+  "exact_algorithm_identity": "paper-k1-am-sf; corrected K1-AM-SF; K0=1; midpoint splitting; balanced normalized closure score; tau=0.08; F0-CLEAN; Gurobi native branching; Threads=1; Seed=0; Presolve=Auto; MIPGap=MIPGapAbs=0; default PreCrush; dynamic user-cut callback off",
+  "exact_optimal_route_witness_count": 40,
+  "exact_solution_counts_by_v_and_t": {
+    "V12_T10800": 2,
+    "V12_T1800": 2,
+    "V12_T18000": 3,
+    "V12_T3600": 3,
+    "V20_T10800": 2,
+    "V20_T1800": 2,
+    "V20_T18000": 3,
+    "V20_T3600": 2,
+    "V30_T10800": 2,
+    "V30_T1800": 1,
+    "V30_T18000": 3,
+    "V50_T10800": 2,
+    "V50_T18000": 3,
+    "V8_T10800": 2,
+    "V8_T1800": 2,
+    "V8_T18000": 3,
+    "V8_T3600": 3
+  },
+  "false_certificate_count": 0,
+  "historical_numerical_evidence_affected": false,
+  "m_objective_monotonicity_violation_count": 0,
+  "mainline_classification": "corrected_k1_am_sf_retained",
+  "missing_scenarios": [],
+  "native_route_utilization_summary_by_T": {
+    "10800": {
+      "T": 10800,
+      "maximum_observed_utilization": 0.9816073518035278,
+      "maximum_route_duration_seconds": 10601.3593994781,
+      "mean_maximum_route_duration_seconds": 8478.73591576465,
+      "mean_maximum_utilization": 0.7850681403485786,
+      "mean_used_vehicle_utilization": 0.6742538316875019,
+      "witnesses": 10
+    },
+    "1800": {
+      "T": 1800,
+      "maximum_observed_utilization": 0.9999156683197222,
+      "maximum_route_duration_seconds": 1799.8482029755,
+      "mean_maximum_route_duration_seconds": 1783.3012526898901,
+      "mean_maximum_utilization": 0.99072291816105,
+      "mean_used_vehicle_utilization": 0.9759090039849021,
+      "witnesses": 10
+    },
+    "18000": {
+      "T": 18000,
+      "maximum_observed_utilization": 0.9830519874305333,
+      "maximum_route_duration_seconds": 17694.9357737496,
+      "mean_maximum_route_duration_seconds": 12023.906357831653,
+      "mean_maximum_utilization": 0.6679947976573141,
+      "mean_used_vehicle_utilization": 0.4941521651409171,
+      "witnesses": 15
+    },
+    "3600": {
+      "T": 3600,
+      "maximum_observed_utilization": 0.9992222350992221,
+      "maximum_route_duration_seconds": 3597.2000463572,
+      "mean_maximum_route_duration_seconds": 3583.683097121547,
+      "mean_maximum_utilization": 0.9954675269782074,
+      "mean_used_vehicle_utilization": 0.9735533966404226,
+      "witnesses": 15
+    }
+  },
+  "nonexact_incumbent_witness_count": 10,
+  "official_executable_sha256": "34e992060e3adffd3a7795c2c783672044996edd7234bf7e9f58a662b1c32fea",
+  "panel_classification": "paper-candidate screening panel",
+  "primary_q30_scenario_count": 40,
+  "q20_sentinel_count": 10,
+  "q_objective_monotonicity_violation_count": 0,
+  "ready_as_final_paper_evidence": false,
+  "ready_as_final_paper_evidence_reason": "one frozen base landscape per V is insufficient for replicated statistical generalization",
+  "route_archive_classification": "native_route_archive_complete",
+  "route_verification_failure_count": 0,
+  "scale_classification": "v8_v12_v20_v30_v50_screen_complete",
+  "schema": "round56-final-decision-v1",
+  "source_freeze_commit": "75e58521158aba8628ebc9444444ec3841415285",
+  "t_objective_monotonicity_violation_count": 0,
+  "t_propagation_or_cache_identity_bug_found": false,
+  "time_horizon_classification": "mixed_t_sensitivity",
+  "verified_incumbent_count": 50
+}

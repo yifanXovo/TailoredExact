@@ -63,3 +63,24 @@ The Round 55 K1 evidence consists of 34 initial 1,800-second rows and 10
 conditional 3,600-second rows. Re-run the same panel only from the frozen
 manifests; do not open the sealed runner because
 `k1_integration_decision.json` records `gate_pass=false`.
+
+## Round 56 paper-candidate screen
+
+Round 56 uses the source-frozen executable under
+`build/official-round56-paper-dataset-75e585211/`. The exact executable hash,
+all 50 commands, scenario identities, operational T values, and 3600/7200
+process caps are recorded in
+`results/gf_paper_benchmark_time_horizon_round56/execution_manifest.json`.
+
+```powershell
+$env:PYTHONDONTWRITEBYTECODE='1'
+D:\msys64\ucrt64\bin\python.exe scripts\run_round56_official.py --run
+D:\msys64\ucrt64\bin\python.exe scripts\round56_route_archive.py --all-completed
+D:\msys64\ucrt64\bin\python.exe scripts\analyze_round56_results.py
+D:\msys64\ucrt64\bin\python.exe scripts\run_round56_repeatability.py --run
+```
+
+The runner permits only one official optimizer process at a time. Do not add
+known bounds, archive scanning, imported incumbents, focus-only modes, prior
+interval bounds, alternative presets, or instance-specific settings. Route
+archiving rereads the native witness and does not invoke another optimization.

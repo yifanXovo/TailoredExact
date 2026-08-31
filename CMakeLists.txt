@@ -276,3 +276,11 @@ target_compile_definitions(Round55StationStateChainTests PRIVATE
   EXACT_EBRP_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 add_test(NAME Round55StationStateChainTests
   COMMAND Round55StationStateChainTests)
+
+add_executable(Round56PaperBenchmarkTests
+  tests/round56_paper_benchmark_tests.cpp)
+target_link_libraries(Round56PaperBenchmarkTests PRIVATE exact_ebrp_core)
+target_compile_definitions(Round56PaperBenchmarkTests PRIVATE
+  EXACT_EBRP_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
+add_test(NAME Round56PaperBenchmarkTests
+  COMMAND Round56PaperBenchmarkTests)

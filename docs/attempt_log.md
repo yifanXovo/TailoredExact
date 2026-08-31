@@ -2550,3 +2550,27 @@ Remaining TODOs:
   `bounded_negative_inventory_route_strengthening`. K1-AM-SF remains the
   stable mainline. The single recommended next research step is a separately
   frozen value-disaggregated formulation for G times final inventory.
+
+## 2026-08-30 - Round 56 corrected paper-candidate screening panel
+
+- Retained the corrected Round 55 `paper-k1-am-sf` algorithm with no tuning or
+  candidate mechanism. Added only explicit T/process/service/distance/scenario
+  identity result metadata and native-witness evidence plumbing.
+- Detected before optimization that the first generated distance matrices used
+  unrounded points while inputs serialized coordinates to three decimals.
+  Regenerated every base, fleet variant, descriptor, identity, and manifest
+  from parser-effective serialized coordinates before any official run.
+- Froze five deterministic base landscapes, 15 matched fleet inputs, 40 Q=30
+  scenarios, 10 Q=20 sentinels, and exactly nine predeclared 7200-second
+  extensions. T=21600 is absent.
+- Audited T through parent, child, native-target, exact, propagation, verifier,
+  cache, artifact, and result paths. Solver process caps remain separate from
+  the mathematical model and enter only run identity.
+- Requalified the stable preset, built one clean official Gurobi executable,
+  and froze a strictly sequential 50-row execution manifest. Each available
+  final native witness is exported once and independently reverified from its
+  JSON and expanded CSV files; no postsolve or route compaction is permitted.
+- Final counts, monotonicity results, repeatability, route utilization, and
+  dataset recommendations are generated from the complete official panel under
+  `results/gf_paper_benchmark_time_horizon_round56/`. The panel is explicitly
+  screening evidence, not a final replicated dataset.
