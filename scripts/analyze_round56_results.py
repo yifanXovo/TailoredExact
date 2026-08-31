@@ -355,6 +355,7 @@ def route_tables(results: list[dict[str, Any]], packages: dict[str, dict[str, An
             "scenario_id": scenario_id, "package_available": True, "passed": verification.get("passed"),
             "failures": ";".join(verification.get("failures", [])),
             **{key: value for key, value in verification.items() if key.endswith("_verified")},
+            "native_witness_preserved": verification.get("native_witness_preserved"),
             "optimization_or_repair_performed": verification.get("optimization_or_repair_performed"),
         })
         materialization = as_float(verification.get("route_archive_materialization_seconds")) or 0.0
