@@ -70,6 +70,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/hga_tgbc/HgaTgbcGreedy.cpp
   src/HgaTgbcRunner.cpp
   src/Logger.cpp
+  src/Round58Benchmark.cpp
 )
 
 if(EXACT_EBRP_ENABLE_GUROBI)
@@ -284,3 +285,12 @@ target_compile_definitions(Round56PaperBenchmarkTests PRIVATE
   EXACT_EBRP_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 add_test(NAME Round56PaperBenchmarkTests
   COMMAND Round56PaperBenchmarkTests)
+
+add_executable(Round58CitiBikePairedBenchmarkTests
+  tests/round58_citibike_paired_benchmark_tests.cpp)
+target_link_libraries(Round58CitiBikePairedBenchmarkTests
+  PRIVATE exact_ebrp_core)
+target_compile_definitions(Round58CitiBikePairedBenchmarkTests PRIVATE
+  EXACT_EBRP_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
+add_test(NAME Round58CitiBikePairedBenchmarkTests
+  COMMAND Round58CitiBikePairedBenchmarkTests)
