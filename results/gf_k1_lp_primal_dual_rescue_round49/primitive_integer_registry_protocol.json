@@ -1,0 +1,18 @@
+{
+  "count_once_by_canonical_name": true,
+  "encoding_duplicates_and_auxiliaries_excluded": true,
+  "post_outcome_revision_allowed_only_for_proven_semantic_error": true,
+  "registry_file": "primitive_integer_variable_registry.json",
+  "registry_sha256": "4e1a1295e2463f1f89cdb0e1127d0497dcf4d963b28488dabbd935279cf19142",
+  "required_families": [
+    "routing_arc",
+    "visit_selection",
+    "operation_mode",
+    "pickup_quantity",
+    "drop_quantity",
+    "vehicle_load",
+    "final_inventory"
+  ],
+  "schema": "round49-primitive-integer-registry-protocol-v1",
+  "selection_basis": "semantic original decision role from canonical model factory"
+}

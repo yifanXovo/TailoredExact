@@ -45,6 +45,20 @@ paper benchmark.
 Archive-incumbent rows are also not paper-core default evidence. They may be
 used as diagnostic UB comparisons only, with route plans independently verified
 and with no lower-bound contribution.
+
+## Round 56 paper-candidate policy
+
+`reference/round56_paper_candidate/` contains newly generated, deterministic
+paper-candidate screening data, classified as
+`round56_paper_candidate_generated`. It is neither historical evidence nor a
+recovered paper benchmark. One base landscape is frozen per V in
+{8,12,20,30,50}; M, Q, and T variants preserve that landscape byte-for-byte.
+
+The 40-row primary panel uses Q=30, two M values per V, and four T values. Ten
+Q=20 rows are capacity-transfer sentinels at T=3600 and T=18000. Every row is
+retained regardless of certification or performance. These instances may
+inform structural-cell selection for a later replicated dataset, but one base
+per V is not enough for statistical generalization.
 ## Current Round Note
 
 The V12 M1/M2 rows in `results/primal_ub_improvement_round/` use regenerated

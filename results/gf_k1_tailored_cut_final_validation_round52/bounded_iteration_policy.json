@@ -1,0 +1,15 @@
+{
+  "schema": "round52-bounded-iteration-policy-v1",
+  "maximum_iterations": 3,
+  "maximum_candidates_per_iteration": 2,
+  "maximum_development_only_revisions_per_iteration": 1,
+  "plan_written_and_hashed_before_runs": true,
+  "one_design_dimension_per_iteration": true,
+  "complete_frozen_core_required": true,
+  "failed_candidate_source_and_evidence_retained": true,
+  "rejected_production_change_reverted_before_next_iteration": true,
+  "algorithm_changes_after_confirmation_opens": 0,
+  "algorithm_changes_after_validation_opens": 0,
+  "maximum_process_seconds": 1800,
+  "negative_termination_if_all_permitted_candidates_fail": true
+}

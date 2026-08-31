@@ -1,0 +1,49 @@
+{
+  "schema": "round55-key-long-execution-manifest-v1",
+  "classification": "evidence-only correction",
+  "created_before_key_long_results": true,
+  "algorithm_or_policy_changed": false,
+  "selection_changed": false,
+  "source_freeze": "key_long_state_freeze.json",
+  "cap_seconds": 3600,
+  "arms": [
+    "F0-CLEAN",
+    "VD-P"
+  ],
+  "additional_states": [
+    {
+      "state_id": "KL_V20",
+      "frozen_instance_id": "round54_generalization_tight_T_2400_V20_M3_Q20_seed694334990",
+      "role": "V20 difficult root state",
+      "input_path": "reference/round54_generalization/V20_M3_Q20/round54_generalization_tight_T_2400_V20_M3_Q20_seed694334990.txt",
+      "input_sha256": "07025c112f81d668eab045a0dcddd506791a2473c1f3452ded7222e2838ed860",
+      "gamma_lower": 0.0,
+      "gamma_upper": 0.6927131563039286,
+      "verified_cutoff": 0.6927131563039286,
+      "route_time_limit": 2400.0,
+      "pickup_time": 60.0,
+      "drop_time": 60.0,
+      "endpoint_source": "stable paper-k1-am-sf initial_decomposition_ledger.csv",
+      "incumbent_source": "verifier-passed seeded paper primal heuristic",
+      "preparation_result_sha256": "93473098ebeb992ba750b3741cd7168efcde7c334655bb705f66281c907c0216"
+    },
+    {
+      "state_id": "KL_V50",
+      "frozen_instance_id": "round54_generalization_high_imbalance_3600_V50_M3_Q20_seed1405083217",
+      "role": "V50 difficult root state",
+      "input_path": "reference/round54_generalization/V50_M3_Q20/round54_generalization_high_imbalance_3600_V50_M3_Q20_seed1405083217.txt",
+      "input_sha256": "9d3b971d88277135d7d02e48cb423e62efb1c8a3f0a0667e85965280c2b76767",
+      "gamma_lower": 0.0,
+      "gamma_upper": 0.98,
+      "verified_cutoff": 18.216215354809908,
+      "route_time_limit": 3600.0,
+      "pickup_time": 60.0,
+      "drop_time": 60.0,
+      "endpoint_source": "stable paper-k1-am-sf relevant_gini_upper_for_improvement",
+      "incumbent_source": "verifier-passed empty-route solution after seeded paper primal heuristic",
+      "preparation_result_sha256": "cbea08bebe95897786e00bd94f07f12e698a2c6ae1c2ec27ad3915c5c812995a"
+    }
+  ],
+  "official_executable_sha256": "3af8caf33b0437c6609871d11855be32e9a65f3e351e645de1c0751a10c3f397",
+  "fixed_interval_executable_sha256": "5151efab9fbd82b91004e2255e60f112707278033d74549a4b0705000b681264"
+}

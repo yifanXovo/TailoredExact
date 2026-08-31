@@ -1,0 +1,39 @@
+{
+  "schema": "round55-stable-mainline-contract-v1",
+  "name": "K1-AM-SF",
+  "preset": "paper-k1-am-sf",
+  "outer": {
+    "initial_gini_interval_count": 1,
+    "initial_interval": "complete strict-improver Gini range",
+    "scheduler": "best-valid-bound",
+    "split_point_rule": "midpoint",
+    "split_score_rule": "balanced-normalized-closure",
+    "split_threshold": 0.08,
+    "maximum_split_depth": 8,
+    "minimum_interval_width": 0.0001,
+    "split_factor": 2,
+    "child_infeasibility_policy": "exact",
+    "native_target_policy": "existing-k1-am-sf",
+    "exact_parent_closure": true,
+    "exact_interval_coverage": true,
+    "monotone_global_lower_bound": true,
+    "original_problem_certificate": "strict"
+  },
+  "inner": {
+    "name": "F0-CLEAN",
+    "only_omitted_family": "historical exhaustive V<=12 subset-duration block",
+    "all_other_active_families_retained": true,
+    "callback": false
+  },
+  "solver_contract": {
+    "Presolve": "Auto",
+    "Seed": 0,
+    "Threads": 1,
+    "MIPGap": 0.0,
+    "MIPGapAbs": 0.0,
+    "Branching": "native/default",
+    "PreCrush": "default"
+  },
+  "paper_preset_replacement_allowed": false,
+  "historical_round_fields_are_compatibility_adapters_only": true
+}

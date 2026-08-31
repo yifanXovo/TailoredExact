@@ -1,0 +1,22 @@
+{
+  "base_branch": "codex/round43-k1-k4-envelope-refinement",
+  "base_sha": "3b4b50da3292a834c5731fb2c00f056a22c77cff",
+  "base_tree_sha": "280d711a005d28d54b543606c976f48ce53f5a84",
+  "baseline_tests": {
+    "ctest": "21/21",
+    "msvc_generator_probe": "preexisting_failure_due_to_GNU_builtins_and_Windows_minmax_macros; not_the_audited_generator",
+    "python_protocol_scripts": "19/19",
+    "release_gurobi_build": "passed_gnu_14.2.0_mingw",
+    "round43_default_off": "3/3"
+  },
+  "candidate_results_observed": false,
+  "machine": {
+    "node": "WIN-3NO58RVQ4VC",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel"
+  },
+  "research_branch": "codex/round44-c6-envelope-tail-repair",
+  "round44_executable_frozen": false,
+  "schema": "round44-official-start-record-v1",
+  "started_utc": "2026-08-16T06:56:53.576163+00:00"
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "round56-final-test-summary-v1",
+  "official_executable_sha256": "34e992060e3adffd3a7795c2c783672044996edd7234bf7e9f58a662b1c32fea",
+  "source_freeze_commit": "75e58521158aba8628ebc9444444ec3841415285",
+  "ctest": {
+    "passed": 34,
+    "total": 34
+  },
+  "round56_cpp_checks": {
+    "passed": 55,
+    "total": 55
+  },
+  "historical_python_protocol_tests": {
+    "passed": 233,
+    "total": 233
+  },
+  "round56_python_protocol_tests": {
+    "passed": 49,
+    "total": 49
+  },
+  "repeatability_sentinels": {
+    "passed": 3,
+    "total": 3
+  },
+  "independent_route_packages": {
+    "passed": 50,
+    "total": 50
+  },
+  "preservation": {
+    "preexisting_untracked_files_passed": 57284,
+    "preexisting_untracked_files_total": 57284,
+    "tracked_user_modifications_passed": 3,
+    "tracked_user_modifications_total": 3
+  },
+  "source_scope_changes_after_freeze": 0,
+  "high_confidence_secret_pattern_matches": 0,
+  "dependency_or_license_manifest_changes": 0,
+  "all_passed": true
+}

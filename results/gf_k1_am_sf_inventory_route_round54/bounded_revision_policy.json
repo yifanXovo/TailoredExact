@@ -1,0 +1,34 @@
+{
+  "schema": "round54-bounded-revision-policy-v1",
+  "maximum_development_iterations": 2,
+  "maximum_candidates_per_iteration": 2,
+  "maximum_live_family_count": 1,
+  "maximum_candidate_variants_total": 2,
+  "maximum_confirmation_candidates": 1,
+  "candidates": {
+    "IR1": "full mixed IR-IN/IR-OUT closure",
+    "IR2": "full mixed plus nondominated projected closure",
+    "IR3": "one exact root pass; at most one inbound and one outbound mixed cut"
+  },
+  "IR3_entry": "only when full closure overhead clearly dominates observed bound gain",
+  "allowed_revisions": [
+    "mixed-only versus mixed-plus-projected",
+    "full closure versus one exact pass",
+    "remove projected cut proved dominated",
+    "correct validity/mincut/canonicalization/accounting defect"
+  ],
+  "forbidden": [
+    "instance subset",
+    "V/M/Q dispatch",
+    "difficulty dispatch",
+    "time/Work/node/memory switch",
+    "fitted threshold",
+    "family weight",
+    "learned classifier",
+    "named-witness policy",
+    "other cut/symmetry/branching family",
+    "post-confirmation revision"
+  ],
+  "offline_negative_rule": "if fewer than two structurally distinct strict violations, no live candidate",
+  "failed_evidence_retained": true
+}

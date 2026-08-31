@@ -1,0 +1,59 @@
+{
+  "schema": "round55-live-stage-decision-v1",
+  "stage": "live_pilot_120s",
+  "row_count": 32,
+  "pair_count": 24,
+  "all_engineering_valid": true,
+  "false_certificate_count": 0,
+  "summaries": {
+    "SF-MC4": {
+      "certificate_gain_count": 1,
+      "certificate_loss_count": 0,
+      "severe_regression_count": 1,
+      "severe_states": [
+        "D1"
+      ],
+      "material_improvement_states": [
+        "D3",
+        "D12"
+      ],
+      "shifted_work_geometric_mean_ratio": 0.9004944970726886,
+      "aggregate_gi_ratio": 0.9607629993915774
+    },
+    "VD-P": {
+      "certificate_gain_count": 1,
+      "certificate_loss_count": 0,
+      "severe_regression_count": 0,
+      "severe_states": [],
+      "material_improvement_states": [
+        "D3",
+        "D4",
+        "D12",
+        "V50_MODERATE"
+      ],
+      "shifted_work_geometric_mean_ratio": 0.789283245480973,
+      "aggregate_gi_ratio": 0.7336466274633364
+    },
+    "VD-J": {
+      "certificate_gain_count": 1,
+      "certificate_loss_count": 0,
+      "severe_regression_count": 0,
+      "severe_states": [],
+      "material_improvement_states": [
+        "D3",
+        "D4",
+        "D12",
+        "V50_MODERATE"
+      ],
+      "shifted_work_geometric_mean_ratio": 0.8287668866986568,
+      "aggregate_gi_ratio": 0.7332711204440213
+    }
+  },
+  "selected_for_next_stage": [
+    "VD-P",
+    "VD-J"
+  ],
+  "rejected": [
+    "SF-MC4"
+  ]
+}

@@ -18,3 +18,5 @@ Dominant low-Gini K4 result:
 - Static tailored compact BC 14400s: integer optimal fixed-interval improving solution `0.0491015319884`, gap-to-old-cutoff `0.0000510206763`.
 
 The 14400s tailored result is a fixed-interval subproblem result and a candidate incumbent improvement. It is not a full original-problem certificate until verified and merged through the normal frontier ledger.
+> Historical research note. The paper-facing statement below records its
+> original round and is superseded by K1-AM-SF (`paper-k1-am-sf`).
