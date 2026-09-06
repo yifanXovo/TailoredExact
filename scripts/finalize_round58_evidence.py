@@ -757,6 +757,18 @@ def final_classification(direct: list[dict[str, Any]],
     p_gaps = [float(row["PGRB_relative_gap"]) for row in common_gap_pairs]
     gap_nonworse = bool(k_gaps and p_gaps and statistics.fmean(k_gaps) <=
                         statistics.fmean(p_gaps) + 1e-12)
+    neither_common = [row for row in common_gap_pairs
+                      if not bool(row["K1_certificate"]) and
+                      not bool(row["PGRB_certificate"])]
+    tolerance = 1e-12
+    k_smaller_common_gap = sum(
+        float(row["K1_relative_gap"]) <
+        float(row["PGRB_relative_gap"]) - tolerance
+        for row in neither_common)
+    p_smaller_common_gap = sum(
+        float(row["PGRB_relative_gap"]) <
+        float(row["K1_relative_gap"]) - tolerance
+        for row in neither_common)
     long_count = sum(bool(row["long_run_material_regression"])
                      for row in long_regression)
     k_better_strata = set()
@@ -797,6 +809,15 @@ def final_classification(direct: list[dict[str, Any]],
         "PGRB_paired_exact_shifted_work_geometric_mean": shifted_geomean(
             row["PGRB_exact_work"] for row in exact),
         "common_horizon_gap_nonworse_overall": gap_nonworse,
+        "neither_certified_common_horizon_pair_count": len(neither_common),
+        "K1_smaller_common_horizon_gap_count": k_smaller_common_gap,
+        "PGRB_smaller_common_horizon_gap_count": p_smaller_common_gap,
+        "common_horizon_gap_tie_count": (
+            len(neither_common) - k_smaller_common_gap - p_smaller_common_gap),
+        "mean_K1_neither_certified_common_horizon_relative_gap": mean(
+            row["K1_relative_gap"] for row in neither_common),
+        "mean_PGRB_neither_certified_common_horizon_relative_gap": mean(
+            row["PGRB_relative_gap"] for row in neither_common),
         "long_run_material_regression_count": long_count,
         "K1_better_strata": sorted(k_better_strata),
     }
@@ -811,6 +832,9 @@ def write_markdown(classification: str, metrics: dict[str, Any],
              row["PGRB_final_certificate"]]
     k_work_better = sum(float(row["K1_exact_work"]) < float(row["PGRB_exact_work"])
                         for row in exact)
+    p_work_better = sum(float(row["PGRB_exact_work"]) < float(row["K1_exact_work"])
+                        for row in exact)
+    work_ties = len(exact) - k_work_better - p_work_better
     text = f"""# Round 58 CitiBike443 paired benchmark
 
 ## Decision
@@ -824,7 +848,7 @@ The frozen benchmark classification is `{classification}`.
 - Scale: `{metrics['scale_classification']}`.
 - Routes: `{metrics['route_classification']}`.
 
-The local `citibike443-regional-v1` family was regenerated and hash-validated before selection. The exact tested identifiers and parameters are frozen in `round58_complete_panel.csv`: a deterministic 50-scenario subset (30 structural and 20 matched route-horizon scenarios) of the 960-scenario family. The other 910 scenarios remained unopened reserves. Primary cells use the lower canonical landscape SHA-256, while each matched cell uses the other corresponding replicate under the frozen inventory rotation. Every V/geography/inventory/M/Q/T stratum required by the design is represented. No scenario was replaced after performance was observed, and K1-AM-SF was not tuned.
+The local `citibike443-regional-v1` family was regenerated and hash-validated before selection. The exact tested identifiers and parameters are frozen in `round58_complete_panel.csv`: a deterministic 50-scenario subset (30 structural and 20 matched route-horizon scenarios) of the 960-scenario family. The exact 910 unopened reserves are listed in `round58_reserve_inventory.csv`. Primary cells use the lower canonical landscape SHA-256, while each matched cell uses the other corresponding replicate under the frozen inventory rotation. Every V/geography/inventory/M/Q/T stratum required by the design is represented. No scenario was replaced after performance was observed, and K1-AM-SF was not tuned.
 
 ## Execution completeness
 
@@ -838,7 +862,8 @@ The local `citibike443-regional-v1` family was regenerated and hash-validated be
 - K1 final certificates: {metrics['K1_final_certificate_count']} / 50.
 - P-GRB final certificates: {metrics['PGRB_final_certificate_count']} / 50.
 - Both certified: {metrics['both_certified_count']} / 50.
-- Among both-certified rows, K1 used less Work on {k_work_better} / {len(exact)}.
+- Among both-certified rows, faster counts K1/P-GRB/tie: {outcomes['both_certified_k1_faster']} / {outcomes['both_certified_pgrb_faster']} / {outcomes['both_certified_tie']}.
+- Among both-certified rows, lower-Work counts K1/P-GRB/tie: {k_work_better} / {p_work_better} / {work_ties}.
 - Historical severe regressions: {sum(bool(row['severe_regression']) for row in historical)}.
 - Long-run material regressions: {metrics['long_run_material_regression_count']}.
 - False certificates / other correctness failures: {metrics['false_certificate_count']} / {metrics['correctness_failure_count']}.
@@ -861,6 +886,8 @@ Every optimizer run used the same frozen executable, Gurobi 13.0.2, one thread, 
     text += f"""
 
 The paired exact shifted time geometric means are {metrics['K1_paired_exact_shifted_time_geometric_mean']} seconds for K1 and {metrics['PGRB_paired_exact_shifted_time_geometric_mean']} seconds for P-GRB, giving K1/P-GRB ratio {metrics['paired_exact_shifted_time_ratio_K1_over_PGRB']}. The shifted Work geometric means are {metrics['K1_paired_exact_shifted_work_geometric_mean']} and {metrics['PGRB_paired_exact_shifted_work_geometric_mean']}, giving ratio {metrics['paired_exact_shifted_work_ratio_K1_over_PGRB']}. These exact metrics use only scenarios on which both methods strictly certified. Capped rows retain their qualified LB, independently verified UB, and explicit absolute/relative/scaled gaps; no invented solve time is assigned.
+
+Among {metrics['neither_certified_common_horizon_pair_count']} pairs for which neither method certified and both qualified gaps were available at the largest common authorized horizon, smaller-gap counts K1/P-GRB/tie were {metrics['K1_smaller_common_horizon_gap_count']} / {metrics['PGRB_smaller_common_horizon_gap_count']} / {metrics['common_horizon_gap_tie_count']}. Their mean qualified relative gaps were {metrics['mean_K1_neither_certified_common_horizon_relative_gap']} for K1 and {metrics['mean_PGRB_neither_certified_common_horizon_relative_gap']} for P-GRB. Dominance counts using LB, verified UB, relative gap, and scaled gap jointly are reported in the paired outcomes above and row-by-row in `common_horizon_comparisons.csv`.
 
 ## Structural variation
 
@@ -890,7 +917,7 @@ This paired panel supports only the stated frozen-panel qualification; it is not
     (OUT / "final_report.md").write_text(text, encoding="utf-8", newline="\n")
     analysis = f"""# Round 58 benchmark analysis
 
-The primary evidence is the 50-row paired table in `direct_pair_comparison.csv`. The final classification is `{classification}`. Grouped results by V, geography, inventory regime, T, and Q are provided in the corresponding CSV files. Certificate-count curves use actual strict certificates by entered horizon; capped rows are not assigned artificial completion times.
+The primary evidence is the 50-row paired table in `direct_pair_comparison.csv`. The final classification is `{classification}`. Grouped results by V, geography, inventory regime, replicate, M, fleet density, T, and Q are provided in the corresponding CSV files. Certificate-count curves use actual strict certificates by entered horizon; capped rows are not assigned artificial completion times.
 
 The exact shifted time ratio is {metrics['paired_exact_shifted_time_ratio_K1_over_PGRB']} and the exact shifted Work ratio is {metrics['paired_exact_shifted_work_ratio_K1_over_PGRB']}. The common-horizon gap criterion was {'nonworse' if metrics['common_horizon_gap_nonworse_overall'] else 'not nonworse'} overall. See the two regression audits for row-level definitions and results.
 """
