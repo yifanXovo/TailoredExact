@@ -90,6 +90,17 @@ separated from exact certified witnesses and no route post-optimization. See
 `docs/native_route_witness_interpretation.md`. This screen has only one base
 landscape per V and is not yet final replicated paper evidence.
 
+Round 58 evaluates that same frozen mainline directly against plain Gurobi on
+the replicated `citibike443-regional-v1` family. The panel is a deterministic
+50-scenario subset selected before performance from a 960-scenario family;
+the other 910 scenarios remain unopened reserves. Both methods receive a
+mandatory one-hour screen, with fresh longer runs only under predeclared gap
+and certification rules and an absolute six-hour cap. P-GRB uses one original
+compact MILP with no HGA start or imported route. Native final witnesses are
+independently checked and never post-optimized. See
+`docs/round58_citibike443_paired_benchmark.md` and the compact evidence under
+`results/gf_citibike443_k1_vs_pgrb_round58/`.
+
 ## Historical exact lines
 
 The sections below preserve earlier engineering and reproduction records. Any

@@ -220,3 +220,19 @@ Paper evidence must classify every row as one of:
 
 Hard-generated V20/M3 rows remain engineering stress instances, not historical
 paper targets.
+
+## CitiBike443 regional family and Round 58
+
+`citibike443-regional-v1` is a reproducible Citi Bike-derived candidate family
+with real station geography/capacity provenance and documented constructed
+inventory, demand, fleet, and route-horizon factors. It contains 960 frozen
+mathematical scenarios. Round 58 uses exactly 50 selected before performance:
+30 primary structural cells and 20 matched route-horizon rows using the other
+corresponding replicate. The other 910 rows remain unopened reserves and may
+not replace a difficult selected row.
+
+Round 58 is paired qualification evidence, not a claim that every generated
+row is an established historical paper benchmark. Operational T is part of
+the mathematical scenario identity and is distinct from the solver process
+cap. Capped outcomes remain valid benchmark observations when reported with
+their qualified LB, independently verified UB, and explicit gaps.

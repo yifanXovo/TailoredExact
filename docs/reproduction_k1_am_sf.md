@@ -84,3 +84,23 @@ The runner permits only one official optimizer process at a time. Do not add
 known bounds, archive scanning, imported incumbents, focus-only modes, prior
 interval bounds, alternative presets, or instance-specific settings. Route
 archiving rereads the native witness and does not invoke another optimization.
+
+## Round 58 CitiBike443 paired benchmark
+
+Round 58 uses the source-frozen executable at
+`build/official-round58-citibike443-8ec0e1e15/ExactEBRP.exe` with SHA-256
+`0f7570d4c421b9d2f4cb2941bf4d426fe396a25b26ef1c0618df0f3a675333f2`.
+Expected P-GRB model fingerprints were frozen before timed benchmark runs.
+
+```powershell
+& 'D:\msys64\ucrt64\bin\python.exe' scripts\run_round58_paired_benchmark.py --preflight
+& 'D:\msys64\ucrt64\bin\python.exe' scripts\run_round58_paired_benchmark.py --stage screen
+& 'D:\msys64\ucrt64\bin\python.exe' scripts\run_round58_paired_benchmark.py --stage long
+& 'D:\msys64\ucrt64\bin\python.exe' scripts\run_round58_paired_benchmark.py --stage near
+& 'D:\msys64\ucrt64\bin\python.exe' scripts\finalize_round58_evidence.py
+```
+
+The runner is hash-resumable and permits one optimizer process at a time. Do
+not rerun the fingerprint-discovery preflight after the benchmark-start flag is
+set. The complete commands, hashes, staged rules, and local-raw inventory are
+under `results/gf_citibike443_k1_vs_pgrb_round58/`.

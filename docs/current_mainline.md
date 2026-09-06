@@ -71,3 +71,21 @@ is 3600 seconds, while nine predeclared V>=20/T=18000 rows may continue to a
 independently verified from disk, and never post-optimized. Certified packages
 are exact; capped verified incumbents are not. Round 56 remains screening
 evidence because it has only one base landscape per V.
+
+## Round 58 qualification
+
+Round 58 does not change K1-AM-SF. It compares the same frozen
+`paper-k1-am-sf` preset with plain P-GRB on 50 scenarios selected before
+performance from the replicated 960-scenario `citibike443-regional-v1`
+family. Every selected scenario receives both 3600-second screen arms. Longer
+fresh attempts follow the frozen 10800/16200/21600-second gap rules, and six
+hours is the absolute cap.
+
+P-GRB is one complete original compact MILP with native Gurobi presolve, cuts,
+heuristics, and branching, but no Gini decomposition, tailored rows or
+callbacks, custom branching, HGA start, imported route, or archive-derived
+bound. Both methods use the same executable, Gurobi version, one thread,
+Seed=0, and automatic presolve. Comparisons of capped rows use qualified bounds
+at common horizons; unequal final horizons are labeled. Native route witnesses
+are archived without post-optimization and archive time is excluded from
+algorithm time.
