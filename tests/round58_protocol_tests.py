@@ -250,7 +250,13 @@ def main() -> int:
     require(all(r58.sha256_file(ROOT / item["path"]) == item["sha256"]
                 for item in preservation["tracked_modified_files"]),
             "41 user-file preservation")
-    require(checks == 41, "42 protocol check-count guard")
+    inventory = r58.read_csv(r58.EVIDENCE / "final_evidence_inventory.csv")
+    require(bool(inventory) and all(
+        (ROOT / row["path"]).is_file() and
+        (ROOT / row["path"]).stat().st_size == int(row["bytes"]) and
+        r58.sha256_file(ROOT / row["path"]) == row["sha256"]
+        for row in inventory), "42 evidence hash audit")
+    require(checks == 42, "43 protocol check-count guard")
     print(f"Round58 protocol tests passed {checks} checks")
     return 0
 

@@ -18,18 +18,29 @@ import run_round58_paired_benchmark as runner
 OUT = r58.EVIDENCE
 REQUIRED_ALWAYS = (
     "final_report.md", "final_decision.json", "repository_start_audit.json",
-    "local_round57_dataset_audit.json", "algorithm_identity_audit.csv",
+    "environment_audit.json", "local_round57_dataset_audit.json",
+    "preexisting_file_preservation_audit.json",
+    "preexisting_files_final_verification.json",
+    "algorithm_identity_audit.csv",
     "pgrb_model_scope_audit.csv", "pgrb_expected_fingerprints.json",
-    "gap_definition_contract.json", "round58_complete_panel.csv",
-    "round58_panel_balance_audit.csv", "execution_order_manifest.csv",
+    "gap_definition_contract.json", "gap_field_audit.csv",
+    "round58_panel_selection_protocol.json", "round58_primary_panel.csv",
+    "round58_matched_T_panel.csv", "round58_complete_panel.csv",
+    "round58_reserve_inventory.csv", "round58_panel_balance_audit.csv",
+    "round58_panel_freeze_manifest.json", "execution_order_manifest.csv",
+    "paired_solver_contract.json", "method_order_balance_audit.csv",
     "screen_results_3600.csv", "screen_extension_decisions.csv",
-    "official_final_results.csv", "common_horizon_comparisons.csv",
+    "official_final_results.csv", "final_run_selection.csv",
+    "checkpoint_trajectories.csv", "common_horizon_comparisons.csv",
     "direct_pair_comparison.csv", "historical_severe_regression_audit.csv",
     "long_run_material_regression_audit.csv", "route_archive_inventory.csv",
-    "route_verification_audit.csv", "certificate_audit.csv",
+    "route_verification_audit.csv", "route_archive_timing.csv",
+    "certificate_audit.csv",
     "false_certificate_audit.csv", "comparison_by_V.csv",
     "comparison_by_geography.csv", "comparison_by_inventory_regime.csv",
-    "comparison_by_T.csv", "comparison_by_Q.csv",
+    "comparison_by_replicate.csv", "comparison_by_M.csv",
+    "comparison_by_fleet_density.csv", "comparison_by_T.csv",
+    "comparison_by_Q.csv",
     "certificate_horizon_summary.csv", "performance_profile_data.csv",
     "benchmark_analysis.md", "experimental_compute_accounting.csv",
     "final_build_and_tests.md", "final_evidence_inventory.csv",
@@ -102,6 +113,56 @@ def preservation_failures() -> list[str]:
             r58.sha256_file(r58.ROOT / item["path"]) != item["sha256"]]
 
 
+def finalize_preservation_audit() -> dict[str, Any]:
+    start = r58.read_json(OUT / "preexisting_file_preservation_audit.json")
+    tracked_rows = []
+    for item in start["tracked_modified_files"]:
+        path = r58.ROOT / item["path"]
+        actual = r58.sha256_file(path) if path.is_file() else None
+        tracked_rows.append({
+            "path": item["path"], "expected_sha256": item["sha256"],
+            "actual_sha256": actual, "preserved": actual == item["sha256"],
+        })
+    round57_rows = r58.read_csv(
+        r58.ROOT / "results/data_generation_citibike_round57/final_data_inventory.csv")
+    round57_failures = []
+    for row in round57_rows:
+        path = r58.ROOT / row["path"]
+        if (not path.is_file() or path.stat().st_size != int(row["bytes"]) or
+                r58.sha256_file(path) != row["sha256"]):
+            round57_failures.append(row["path"])
+    round56_path = (r58.ROOT / "results/gf_paper_benchmark_time_horizon_round56/"
+                    "preexisting_files_final_verification.json")
+    round56 = r58.read_json(round56_path) if round56_path.is_file() else {}
+    historical = r58.read_json(
+        r58.ROOT / "results/data_generation_citibike_round57/"
+        "historical_dataset_preservation_manifest.json")
+    result = {
+        "schema": "round58-preexisting-files-final-verification-v1",
+        "verified_at_utc": datetime.now(timezone.utc).isoformat(),
+        "tracked_user_modifications": tracked_rows,
+        "round57_inventory_rows_checked": len(round57_rows),
+        "round57_inventory_failures": round57_failures,
+        "round56_preexisting_snapshot_all_preserved": round56.get("all_preserved"),
+        "round56_preexisting_snapshot_rows": round56.get(
+            "verified_untracked_file_count"),
+        "round57_historical_preservation_classification": historical.get(
+            "classification"),
+    }
+    result["all_preserved"] = bool(
+        all(row["preserved"] for row in tracked_rows) and
+        not round57_failures and round56.get("all_preserved") is True and
+        historical.get("classification") == "all_historical_datasets_preserved")
+    r58.write_json(OUT / "preexisting_files_final_verification.json", result)
+    start["final_reverification_pending"] = False
+    start["final_reverification_at_utc"] = result["verified_at_utc"]
+    start["final_reverification_all_preserved"] = result["all_preserved"]
+    start["final_reverification_path"] = r58.repo_path(
+        OUT / "preexisting_files_final_verification.json")
+    r58.write_json(OUT / "preexisting_file_preservation_audit.json", start)
+    return result
+
+
 def route_failures() -> list[str]:
     failures = []
     inventory = r58.read_csv(OUT / "route_archive_inventory.csv")
@@ -122,6 +183,13 @@ def route_failures() -> list[str]:
         for name in names[:-1]:
             if expected.get(name) != r58.sha256_file(output / name):
                 failures.append(f"hash:{row['scenario_id']}/{row['method']}/{name}")
+    verification_path = OUT / "route_verification_audit.csv"
+    if verification_path.is_file():
+        for row in r58.read_csv(verification_path):
+            if (str(row.get("passed", "")).lower() != "true" and
+                    row.get("failures") != "no_verified_incumbent"):
+                failures.append(
+                    f"verification:{row['scenario_id']}/{row['method']}")
     return failures
 
 
@@ -174,12 +242,43 @@ def raw_inventory() -> list[dict[str, Any]]:
     return rows
 
 
+def stable_evidence_inventory() -> list[dict[str, Any]]:
+    """Inventory final compact evidence without impossible self-reference."""
+    rows = []
+    excluded = {"final_evidence_inventory.csv", "final_delivery_audit.json"}
+    for path in sorted(OUT.rglob("*")):
+        if (not path.is_file() or "local_raw" in path.parts or
+                path.name in excluded):
+            continue
+        rows.append({
+            "path": r58.repo_path(path), "bytes": path.stat().st_size,
+            "sha256": r58.sha256_file(path),
+            "category": ("route_archive" if "solutions" in path.parts
+                         else "compact_evidence"),
+        })
+    return rows
+
+
+def evidence_inventory_failures(rows: list[dict[str, Any]]) -> list[str]:
+    failures = []
+    for row in rows:
+        path = r58.ROOT / row["path"]
+        if not path.is_file():
+            failures.append(f"missing:{row['path']}")
+        elif path.stat().st_size != int(row["bytes"]):
+            failures.append(f"bytes:{row['path']}")
+        elif r58.sha256_file(path) != row["sha256"]:
+            failures.append(f"sha256:{row['path']}")
+    return failures
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--allow-missing-build-report", action="store_true")
     args = parser.parse_args()
     protocol = runner.protocol_audit()
     decision = r58.read_json(OUT / "final_decision.json")
+    preservation_result = finalize_preservation_audit()
     required = list(REQUIRED_ALWAYS)
     counts = decision["stage_entry_counts"]
     if counts["long_10800"]:
@@ -200,6 +299,8 @@ def main() -> int:
                    "gf_citibike443_k1_vs_pgrb_round58/local_raw/official_runs" in path]
     command_failures = command_audit()
     preservation = preservation_failures()
+    if not preservation_result["all_preserved"]:
+        preservation.append("preexisting_files_final_verification")
     routes = route_failures()
     secrets = secret_scan()
     false_audit = r58.read_csv(OUT / "false_certificate_audit.csv")
@@ -231,13 +332,6 @@ def main() -> int:
               "pgrb_fingerprint_coverage"),
     ]
     r58.write_csv(OUT / "local_raw_inventory.csv", raw_inventory(), atomic=True)
-    result = {
-        "schema": "round58-final-delivery-audit-v1",
-        "created_at_utc": datetime.now(timezone.utc).isoformat(),
-        "passed": all(row["passed"] for row in audits),
-        "audit_count": len(audits), "audits": audits,
-    }
-    r58.write_json(OUT / "final_delivery_audit.json", result)
     r58.write_json(OUT / "secret_license_scan.json", {
         "schema": "round58-secret-license-scan-v1",
         "passed": not secrets, "secret_findings": secrets,
@@ -253,6 +347,21 @@ def main() -> int:
         "scenario_replacement_performed": False,
         "command_failures": command_failures,
     })
+    # Generate this only after every stable compact artifact above has reached
+    # its final content, then verify the exact rows just written.  The delivery
+    # audit itself is excluded so it can report this check without a hash cycle.
+    inventory = stable_evidence_inventory()
+    r58.write_csv(OUT / "final_evidence_inventory.csv", inventory, atomic=True)
+    evidence_failures = evidence_inventory_failures(inventory)
+    audits.append(check(not evidence_failures, "evidence_hash_audit",
+                        evidence_failures))
+    result = {
+        "schema": "round58-final-delivery-audit-v1",
+        "created_at_utc": datetime.now(timezone.utc).isoformat(),
+        "passed": all(row["passed"] for row in audits),
+        "audit_count": len(audits), "audits": audits,
+    }
+    r58.write_json(OUT / "final_delivery_audit.json", result)
     print(json.dumps(result, indent=2))
     return 0 if result["passed"] else 1
 

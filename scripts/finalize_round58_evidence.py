@@ -48,6 +48,14 @@ def shifted_ratio(values: Iterable[tuple[Any, Any]]) -> float | None:
         math.log((left + 1.0) / (right + 1.0)) for left, right in pairs))
 
 
+def shifted_geomean(values: Iterable[Any]) -> float | None:
+    material = [float(value) for value in values if finite(value)]
+    if not material:
+        return None
+    return math.exp(statistics.fmean(math.log(value + 1.0)
+                                     for value in material)) - 1.0
+
+
 def mean(values: Iterable[Any]) -> float | None:
     material = [float(value) for value in values if finite(value)]
     return statistics.fmean(material) if material else None
@@ -444,7 +452,9 @@ def direct_rows() -> list[dict[str, Any]]:
         p_integral, p_integral_coverage = gap_integral(
             runner.marker_summary(scenario, "pgrb", common))
         rows.append({
-            "scenario_id": scenario["scenario_id"], "panel_class": scenario["panel_class"],
+            "scenario_id": scenario["scenario_id"],
+            "dataset_family": r58.DATASET_FAMILY,
+            "panel_class": scenario["panel_class"],
             "V": int(scenario["V"]), "geographic_regime": scenario["geographic_regime"],
             "inventory_regime": scenario["inventory_regime"],
             "replicate": int(scenario["replicate"]), "M": int(scenario["M"]),
@@ -564,6 +574,21 @@ def route_archives(official_material: list[dict[str, Any]]) -> tuple[
             inventory.append({
                 "scenario_id": row["scenario_id"], "method": row["method"],
                 "package_available": False, "reason": "no_verified_incumbent",
+            })
+            verification.append({
+                "scenario_id": row["scenario_id"], "method": row["method"],
+                "passed": False, "failures": "no_verified_incumbent",
+                "objective": None,
+                "archive_time_excluded_from_algorithm_time": True,
+                "optimization_or_repair_performed": False,
+                "verification_status": "not_applicable_no_incumbent",
+            })
+            timing.append({
+                "scenario_id": row["scenario_id"], "method": row["method"],
+                "official_algorithm_wall_time": row["official_algorithm_wall_time"],
+                "route_archive_seconds": 0.0,
+                "archive_time_in_algorithm_time": False,
+                "timing_status": "not_entered_no_incumbent",
             })
             continue
         archive = archive_native_result(
@@ -687,14 +712,20 @@ def performance_rows(direct: list[dict[str, Any]]) -> list[dict[str, Any]]:
             rows.append({
                 "scenario_id": item["scenario_id"], "method": method,
                 "time_ratio_to_best": float(item[f"{prefix}_exact_time"]) / best_time,
-                "work_ratio_to_best": (float(item[f"{prefix}_exact_work"]) / best_work
-                                       if best_work > 0 else 1.0),
+                "work_ratio_to_best": (
+                    float(item[f"{prefix}_exact_work"]) / best_work
+                    if best_work > 0 else
+                    1.0 if float(item[f"{prefix}_exact_work"]) == 0 else None),
+                "shifted_work_ratio_to_best": (
+                    (float(item[f"{prefix}_exact_work"]) + 1.0) /
+                    (best_work + 1.0)),
                 "profile_scope": "both_certified_only",
             })
     if not rows:
         rows.append({
             "scenario_id": "none", "method": "not_applicable",
             "time_ratio_to_best": None, "work_ratio_to_best": None,
+            "shifted_work_ratio_to_best": None,
             "profile_scope": "no_both_certified_rows",
         })
     return rows
@@ -703,7 +734,8 @@ def performance_rows(direct: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def final_classification(direct: list[dict[str, Any]],
                          common: list[dict[str, Any]],
                          long_regression: list[dict[str, Any]],
-                         false_certificates: int) -> tuple[str, dict[str, Any]]:
+                         false_certificates: int,
+                         correctness_failures: int) -> tuple[str, dict[str, Any]]:
     exact = [row for row in direct if row["K1_final_certificate"] and
              row["PGRB_final_certificate"]]
     k_cert = sum(bool(row["K1_final_certificate"]) for row in direct)
@@ -735,7 +767,7 @@ def final_classification(direct: list[dict[str, Any]],
                                     f"geography={row['geographic_regime']}",
                                     f"inventory={row['inventory_regime']}"))
     supported = all((
-        false_certificates == 0, k_cert >= p_cert,
+        false_certificates == 0, correctness_failures == 0, k_cert >= p_cert,
         time_ratio is not None and time_ratio < 1.0,
         work_ratio is not None and work_ratio < 1.0,
         gap_nonworse, long_count == 0, len(k_better_strata) > 1,
@@ -750,11 +782,20 @@ def final_classification(direct: list[dict[str, Any]],
         classification = "k1_am_sf_pgrb_advantage_mixed"
     return classification, {
         "false_certificate_count": false_certificates,
+        "correctness_failure_count": correctness_failures,
         "K1_final_certificate_count": k_cert,
         "PGRB_final_certificate_count": p_cert,
         "both_certified_count": len(exact),
         "paired_exact_shifted_time_ratio_K1_over_PGRB": time_ratio,
         "paired_exact_shifted_work_ratio_K1_over_PGRB": work_ratio,
+        "K1_paired_exact_shifted_time_geometric_mean": shifted_geomean(
+            row["K1_exact_time"] for row in exact),
+        "PGRB_paired_exact_shifted_time_geometric_mean": shifted_geomean(
+            row["PGRB_exact_time"] for row in exact),
+        "K1_paired_exact_shifted_work_geometric_mean": shifted_geomean(
+            row["K1_exact_work"] for row in exact),
+        "PGRB_paired_exact_shifted_work_geometric_mean": shifted_geomean(
+            row["PGRB_exact_work"] for row in exact),
         "common_horizon_gap_nonworse_overall": gap_nonworse,
         "long_run_material_regression_count": long_count,
         "K1_better_strata": sorted(k_better_strata),
@@ -776,7 +817,14 @@ def write_markdown(classification: str, metrics: dict[str, Any],
 
 The frozen benchmark classification is `{classification}`.
 
-The local `citibike443-regional-v1` family was regenerated and hash-validated before selection. The tested panel is the deterministic 50-scenario subset (30 structural and 20 matched route-horizon scenarios) of the 960-scenario family; the other 910 scenarios remained unopened reserves. Primary cells use the lower canonical landscape SHA-256, while each matched cell uses the other corresponding replicate under the frozen inventory rotation. Every V/geography/inventory/M/Q/T stratum required by the design is represented. No scenario was replaced after performance was observed, and K1-AM-SF was not tuned.
+- Completion: `{metrics['completion_classification']}`.
+- Dataset: `{metrics['dataset_classification']}`.
+- Benchmark: `{classification}`.
+- Runtime: `{metrics['runtime_classification']}`.
+- Scale: `{metrics['scale_classification']}`.
+- Routes: `{metrics['route_classification']}`.
+
+The local `citibike443-regional-v1` family was regenerated and hash-validated before selection. The exact tested identifiers and parameters are frozen in `round58_complete_panel.csv`: a deterministic 50-scenario subset (30 structural and 20 matched route-horizon scenarios) of the 960-scenario family. The other 910 scenarios remained unopened reserves. Primary cells use the lower canonical landscape SHA-256, while each matched cell uses the other corresponding replicate under the frozen inventory rotation. Every V/geography/inventory/M/Q/T stratum required by the design is represented. No scenario was replaced after performance was observed, and K1-AM-SF was not tuned.
 
 ## Execution completeness
 
@@ -793,6 +841,8 @@ The local `citibike443-regional-v1` family was regenerated and hash-validated be
 - Among both-certified rows, K1 used less Work on {k_work_better} / {len(exact)}.
 - Historical severe regressions: {sum(bool(row['severe_regression']) for row in historical)}.
 - Long-run material regressions: {metrics['long_run_material_regression_count']}.
+- False certificates / other correctness failures: {metrics['false_certificate_count']} / {metrics['correctness_failure_count']}.
+- Required native route packages verified: {metrics['route_verified_count']} / {metrics['route_required_count']}.
 - Material 3600-second fresh-rerun differences: {sum(bool(row['material_repeatability_difference']) for row in repeatability)}.
 - Total experimental compute: {metrics['total_experimental_compute_time']} seconds and {metrics['total_experimental_compute_work']} Work units.
 
@@ -810,14 +860,16 @@ Every optimizer run used the same frozen executable, Gurobi 13.0.2, one thread, 
         text += f"- `{key}`: {outcomes[key]}\n"
     text += f"""
 
-The paired exact shifted time ratio (K1/P-GRB) is {metrics['paired_exact_shifted_time_ratio_K1_over_PGRB']}; the paired exact shifted Work ratio is {metrics['paired_exact_shifted_work_ratio_K1_over_PGRB']}. Ratios use only scenarios on which both methods strictly certified. Capped rows retain their qualified LB, independently verified UB, and explicit absolute/relative/scaled gaps; no invented solve time is assigned.
+The paired exact shifted time geometric means are {metrics['K1_paired_exact_shifted_time_geometric_mean']} seconds for K1 and {metrics['PGRB_paired_exact_shifted_time_geometric_mean']} seconds for P-GRB, giving K1/P-GRB ratio {metrics['paired_exact_shifted_time_ratio_K1_over_PGRB']}. The shifted Work geometric means are {metrics['K1_paired_exact_shifted_work_geometric_mean']} and {metrics['PGRB_paired_exact_shifted_work_geometric_mean']}, giving ratio {metrics['paired_exact_shifted_work_ratio_K1_over_PGRB']}. These exact metrics use only scenarios on which both methods strictly certified. Capped rows retain their qualified LB, independently verified UB, and explicit absolute/relative/scaled gaps; no invented solve time is assigned.
 
 ## Structural variation
 
 """
     for field, label in (("V", "V"), ("geographic_regime", "geography"),
-                         ("inventory_regime", "inventory"), ("T", "T"),
-                         ("Q", "Q")):
+                         ("inventory_regime", "inventory"),
+                         ("replicate", "geographic replicate"), ("M", "M"),
+                         ("fleet_density_V_over_M", "fleet density V/M"),
+                         ("T", "T"), ("Q", "Q")):
         text += f"### By {label}\n\n"
         for group in group_rows(direct, field):
             text += (
@@ -832,6 +884,8 @@ The paired exact shifted time ratio (K1/P-GRB) is {metrics['paired_exact_shifted
 ## Interpretation and route evidence
 
 Final results with a verified incumbent have native, non-post-optimized route packages under `solutions/<scenario>/<method>/`. Archive construction and independent verification time are excluded from solver time. Unequal final horizons are explicitly labeled; bound comparisons used the largest common authorized horizon rather than comparing a six-hour row directly with a one-hour row.
+
+This paired panel supports only the stated frozen-panel qualification; it is not universal validation of the generated family. A second sealed panel drawn from the 910 untouched reserves is still required for a stronger paper benchmark claim. The recommended next step is to freeze that holdout selection before opening any additional solver result, then repeat the unchanged paired protocol.
 """
     (OUT / "final_report.md").write_text(text, encoding="utf-8", newline="\n")
     analysis = f"""# Round 58 benchmark analysis
@@ -847,7 +901,9 @@ The exact shifted time ratio is {metrics['paired_exact_shifted_time_ratio_K1_ove
 def evidence_inventory() -> list[dict[str, Any]]:
     rows = []
     for path in sorted(OUT.rglob("*")):
-        if path.is_file() and "local_raw" not in path.parts:
+        if (path.is_file() and "local_raw" not in path.parts and
+                path.name not in {"final_evidence_inventory.csv",
+                                  "final_delivery_audit.json"}):
             rows.append({
                 "path": r58.repo_path(path), "bytes": path.stat().st_size,
                 "sha256": r58.sha256_file(path),
@@ -913,9 +969,12 @@ def main() -> int:
         r58.write_csv(OUT / filename, group_rows(direct, field), atomic=True)
     r58.write_csv(OUT / "certificate_horizon_summary.csv", horizon_summary(), atomic=True)
     r58.write_csv(OUT / "performance_profile_data.csv", performance_rows(direct), atomic=True)
+    correctness_failures = sum(
+        not bool(row["passed"]) and row.get("failures") != "no_verified_incumbent"
+        for row in route_verification)
     classification, metrics = final_classification(
         direct, common, long_regression,
-        int(false_rows[0]["false_certificate_count"]))
+        int(false_rows[0]["false_certificate_count"]), correctness_failures)
     outcome_counts = Counter(row["pair_outcome"] for row in direct)
     metrics.update({
         "K1_screen_certificate_count": sum(
@@ -936,12 +995,88 @@ def main() -> int:
             float(row["total_experimental_compute_work"]) for row in compute),
         "pair_outcome_counts": dict(sorted(outcome_counts.items())),
     })
+    panel_ids = [row["scenario_id"] for row in panel()]
+    if len(panel_ids) != 50 or len(set(panel_ids)) != 50:
+        dataset_classification = "dataset_panel_invalid"
+    elif protocol["completed_screen_arm_count"] == 100:
+        dataset_classification = "citibike443_paired_panel_complete"
+    else:
+        dataset_classification = "citibike443_paired_panel_partial"
+    if metrics["rows_entering_21600"]:
+        runtime_classification = "six_hour_extensions_used"
+    elif metrics["rows_entering_16200"]:
+        runtime_classification = "near_convergence_extensions_used"
+    else:
+        runtime_classification = "all_results_within_three_hours"
+    route_required = sum(bool(row["verified_incumbent_available"])
+                         for row in official_material)
+    route_verified = sum(bool(row["passed"]) for row in route_verification)
+    if correctness_failures:
+        route_classification = "route_archive_invalid"
+    elif route_verified == route_required:
+        route_classification = "paired_native_route_archive_complete"
+    else:
+        route_classification = "paired_native_route_archive_partial"
+    by_v = {int(float(row["V"])): row for row in group_rows(direct, "V")}
+    supported_v = {
+        value for value, row in by_v.items()
+        if int(row["K1_final_certificate_count"]) >=
+        int(row["PGRB_final_certificate_count"]) and (
+            (finite(row["shifted_exact_time_ratio_K1_over_PGRB"]) and
+             finite(row["shifted_exact_work_ratio_K1_over_PGRB"]) and
+             float(row["shifted_exact_time_ratio_K1_over_PGRB"]) <= 1.0 and
+             float(row["shifted_exact_work_ratio_K1_over_PGRB"]) <= 1.0) or
+            (finite(row["mean_K1_relative_gap"]) and
+             finite(row["mean_PGRB_relative_gap"]) and
+             float(row["mean_K1_relative_gap"]) <=
+             float(row["mean_PGRB_relative_gap"])))
+    }
+    if supported_v == {8, 12, 20, 30, 50}:
+        scale_classification = "v8_v12_v20_v30_v50_supported"
+    elif {8, 12, 20}.issubset(supported_v) and supported_v & {30, 50}:
+        scale_classification = "v8_v12_v20_supported_v30_v50_mixed"
+    elif {8, 12, 20}.issubset(supported_v):
+        scale_classification = "small_medium_only"
+    else:
+        scale_classification = "scale_mixed"
+    build_report = OUT / "final_build_and_tests.md"
+    build_tests_passed = (build_report.is_file() and
+                          "Overall status: PASS" in build_report.read_text(
+                              encoding="utf-8"))
+    completion_classification = (
+        "round58_complete" if all((protocol["protocol_complete"],
+                                    dataset_classification ==
+                                    "citibike443_paired_panel_complete",
+                                    route_classification ==
+                                    "paired_native_route_archive_complete",
+                                    metrics["false_certificate_count"] == 0,
+                                    correctness_failures == 0,
+                                    build_tests_passed))
+        else "round58_incomplete")
+    metrics.update({
+        "completion_classification": completion_classification,
+        "dataset_classification": dataset_classification,
+        "runtime_classification": runtime_classification,
+        "scale_classification": scale_classification,
+        "route_classification": route_classification,
+        "route_required_count": route_required,
+        "route_verified_count": route_verified,
+        "build_and_tests_passed": build_tests_passed,
+    })
     decision = {
         "schema": "round58-final-decision-v1", "created_at_utc": datetime.now(
             timezone.utc).isoformat(), "classification": classification,
         "source_freeze_commit": runner.SOURCE_FREEZE,
-        "execution_pipeline_commit": "6484936e8",
+        "execution_pipeline_commit": "6484936e87f131979259dcb9c34a4ad02bce9785",
         "executable_sha256": runner.EXE_SHA256,
+        "completion_classification": completion_classification,
+        "dataset_classification": dataset_classification,
+        "benchmark_classification": classification,
+        "runtime_classification": runtime_classification,
+        "scale_classification": scale_classification,
+        "route_classification": route_classification,
+        "missing_required_runs": protocol["missing_authorized_runs"],
+        "build_and_tests_passed": build_tests_passed,
         "dataset_validated_before_benchmark": True,
         "panel_selected_before_performance": True,
         "reserve_scenarios_opened": False, "algorithm_tuning_performed": False,
@@ -955,12 +1090,11 @@ def main() -> int:
     }
     r58.write_json(OUT / "final_decision.json", decision)
     write_markdown(classification, metrics, direct, protocol, repeatability, historical)
-    r58.write_csv(OUT / "final_evidence_inventory.csv", evidence_inventory(), atomic=True)
-    # Rewrite inventory once so it includes its prior stable snapshot only via
-    # other files; self-hashing is intentionally omitted.
-    rows = [row for row in evidence_inventory()
-            if row["path"] != r58.repo_path(OUT / "final_evidence_inventory.csv")]
-    r58.write_csv(OUT / "final_evidence_inventory.csv", rows, atomic=True)
+    # The inventory and final delivery audit are excluded to avoid self- and
+    # mutual-reference.  The delivery audit regenerates and verifies this
+    # inventory after writing every other stable compact artifact.
+    r58.write_csv(OUT / "final_evidence_inventory.csv", evidence_inventory(),
+                  atomic=True)
     print(json.dumps({"classification": classification, **metrics,
                       "official_rows": len(official_material)}, indent=2))
     return 0
