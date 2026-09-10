@@ -1,0 +1,1178 @@
+{
+  "environment": {
+    "cmake": "cmake version 3.30.5-msvc23",
+    "gxx": "g++.exe (Rev2, Built by MSYS2 project) 14.2.0",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python_executable": "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "python_used": "3.12.13 (main, Aug  7 2026, 02:26:41) [MSC v.1944 64 bit (AMD64)]"
+  },
+  "exactebrp": {
+    "absolute_path": "E:\\codes\\ExactEBRP",
+    "branch": "codex/round56-paper-benchmark-time-horizon",
+    "head": "6b721dea0dfcadbe80cc862ab3a74c25a211d784",
+    "preexisting_tracked_modifications": [
+      {
+        "bytes": 53767,
+        "path": "results/gf_compact_bc_round/handling_convention_test/handling_convention.json",
+        "sha256": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+        "status": " M"
+      },
+      {
+        "bytes": 6792,
+        "path": "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv",
+        "sha256": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+        "status": " M"
+      },
+      {
+        "bytes": 73034,
+        "path": "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json",
+        "sha256": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202",
+        "status": " M"
+      }
+    ],
+    "status": {
+      "entry_count": 58456,
+      "status_fingerprint_sha256": "9f5ac5fb127e3fd1e3ab73c4342bebae0ac621e2753e4f08368964213f56d17e",
+      "tracked_entries": [
+        {
+          "path": "results/gf_compact_bc_round/handling_convention_test/handling_convention.json",
+          "status": " M"
+        },
+        {
+          "path": "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv",
+          "status": " M"
+        },
+        {
+          "path": "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json",
+          "status": " M"
+        }
+      ],
+      "tracked_entry_count": 3,
+      "untracked_file_entry_count": 58453,
+      "untracked_groups": [
+        {
+          "file_count": 4,
+          "path_group": "Manuscript"
+        },
+        {
+          "file_count": 1,
+          "path_group": "build_round18"
+        },
+        {
+          "file_count": 19,
+          "path_group": "build_round22"
+        },
+        {
+          "file_count": 1,
+          "path_group": "build_round23"
+        },
+        {
+          "file_count": 3,
+          "path_group": "build_round24"
+        },
+        {
+          "file_count": 62,
+          "path_group": "build_round24r"
+        },
+        {
+          "file_count": 10,
+          "path_group": "build_round25"
+        },
+        {
+          "file_count": 13,
+          "path_group": "build_round26"
+        },
+        {
+          "file_count": 29,
+          "path_group": "build_round27"
+        },
+        {
+          "file_count": 24,
+          "path_group": "build_round28"
+        },
+        {
+          "file_count": 41,
+          "path_group": "build_round29"
+        },
+        {
+          "file_count": 43,
+          "path_group": "build_round30"
+        },
+        {
+          "file_count": 79,
+          "path_group": "build_round31"
+        },
+        {
+          "file_count": 55,
+          "path_group": "build_round32"
+        },
+        {
+          "file_count": 6,
+          "path_group": "build_round33"
+        },
+        {
+          "file_count": 5,
+          "path_group": "build_round34"
+        },
+        {
+          "file_count": 5,
+          "path_group": "build_round35"
+        },
+        {
+          "file_count": 5,
+          "path_group": "build_round36"
+        },
+        {
+          "file_count": 5,
+          "path_group": "build_round36_stage_c_contract_fix"
+        },
+        {
+          "file_count": 5,
+          "path_group": "build_round37"
+        },
+        {
+          "file_count": 5,
+          "path_group": "build_round37_final"
+        },
+        {
+          "file_count": 5,
+          "path_group": "build_round38"
+        },
+        {
+          "file_count": 5,
+          "path_group": "build_round38_baseline"
+        },
+        {
+          "file_count": 6,
+          "path_group": "build_round39"
+        },
+        {
+          "file_count": 5,
+          "path_group": "build_round40"
+        },
+        {
+          "file_count": 5,
+          "path_group": "build_round41"
+        },
+        {
+          "file_count": 5,
+          "path_group": "build_round42"
+        },
+        {
+          "file_count": 5,
+          "path_group": "build_round45"
+        },
+        {
+          "file_count": 5,
+          "path_group": "build_round45_base"
+        },
+        {
+          "file_count": 3,
+          "path_group": "build_round45_completion"
+        },
+        {
+          "file_count": 5,
+          "path_group": "build_round45_completion_baseline"
+        },
+        {
+          "file_count": 5,
+          "path_group": "build_round45_completion_clean_20260822"
+        },
+        {
+          "file_count": 5,
+          "path_group": "build_round45_final"
+        },
+        {
+          "file_count": 20,
+          "path_group": "completion"
+        },
+        {
+          "file_count": 1,
+          "path_group": "output"
+        },
+        {
+          "file_count": 13987,
+          "path_group": "results/gf_adaptive_timing_parametric_partition_round45"
+        },
+        {
+          "file_count": 3596,
+          "path_group": "results/gf_c6_adaptive_mass_contraction_round47"
+        },
+        {
+          "file_count": 6604,
+          "path_group": "results/gf_c6_rho_k1_k4_screen_round46"
+        },
+        {
+          "file_count": 14,
+          "path_group": "results/gf_compact_bc_timeprofile_round"
+        },
+        {
+          "file_count": 2068,
+          "path_group": "results/gf_decomposition_architecture_optimization_round42"
+        },
+        {
+          "file_count": 1226,
+          "path_group": "results/gf_decomposition_single_tree_round41"
+        },
+        {
+          "file_count": 890,
+          "path_group": "results/gf_global_frontier_lift_round38"
+        },
+        {
+          "file_count": 2227,
+          "path_group": "results/gf_incumbent_decomposition_causal_round36"
+        },
+        {
+          "file_count": 1069,
+          "path_group": "results/gf_k1_am_sf_inventory_route_round54"
+        },
+        {
+          "file_count": 6412,
+          "path_group": "results/gf_k1_am_sf_station_state_chain_round55"
+        },
+        {
+          "file_count": 3452,
+          "path_group": "results/gf_k1_f0_callback_isolation_round53"
+        },
+        {
+          "file_count": 5305,
+          "path_group": "results/gf_k1_interval_mip_vnext_round50"
+        },
+        {
+          "file_count": 381,
+          "path_group": "results/gf_k1_lp_primal_dual_rescue_round49"
+        },
+        {
+          "file_count": 2545,
+          "path_group": "results/gf_k1_tailored_cut_final_validation_round52"
+        },
+        {
+          "file_count": 5057,
+          "path_group": "results/gf_k1_tight_big_m_sparse_branching_round51"
+        },
+        {
+          "file_count": 1162,
+          "path_group": "results/gf_paper_benchmark_time_horizon_round56"
+        },
+        {
+          "file_count": 1526,
+          "path_group": "results/gf_regression_adaptive_round40"
+        },
+        {
+          "file_count": 2,
+          "path_group": "results/gf_tailored_bc_callback_round"
+        },
+        {
+          "file_count": 2,
+          "path_group": "results/manual"
+        },
+        {
+          "file_count": 1,
+          "path_group": "results/optimization_update_round10"
+        },
+        {
+          "file_count": 5,
+          "path_group": "results/optimization_update_round3"
+        },
+        {
+          "file_count": 345,
+          "path_group": "scripts"
+        },
+        {
+          "file_count": 45,
+          "path_group": "tests"
+        },
+        {
+          "file_count": 32,
+          "path_group": "tmp/pdfs"
+        }
+      ]
+    },
+    "tree": "fa4da2ffa862040ad147503401f92b630b5acf56"
+  },
+  "guardrails": {
+    "algorithm_source_mutation_permitted": false,
+    "commit_push_or_pr_permitted": false,
+    "legacy_project_mutation_permitted": false,
+    "optimizer_execution_permitted": false
+  },
+  "legacy_hybrid_ga": {
+    "absolute_path": "E:\\codes\\Hybrid GA",
+    "branch": "master",
+    "head": "ecfbb6a49307e6a321f31e84f052d3325d1dd7af",
+    "is_git_repository": true,
+    "preexisting_tracked_modifications": [
+      {
+        "bytes": null,
+        "path": "$null",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": 12139,
+        "path": "CitiBikeSubsetGenerator.h",
+        "sha256": "fe8273d999ef238ec5b714941d842482ad6d03f052d7abe4a1884b1bfc2f436e",
+        "status": " M"
+      },
+      {
+        "bytes": 11370,
+        "path": "ClassicGARouting.h",
+        "sha256": "b6017217c2437bad199e5ac56e93940673493c6087f01482a849f0875efb6a5a",
+        "status": " M"
+      },
+      {
+        "bytes": 75503,
+        "path": "Compare_Models.cpp",
+        "sha256": "d5b54480de6bd87561fd921a4fe702e57a0ed69b4ca899ffc22c956e00987dfd",
+        "status": " M"
+      },
+      {
+        "bytes": 52816,
+        "path": "Hybrid GA/HybridGA.h",
+        "sha256": "fb495f04877eec168985b26390d2a62feb15a9083964718f13b2c898bd51c69b",
+        "status": " M"
+      },
+      {
+        "bytes": 26315,
+        "path": "Instance_Generator.cpp",
+        "sha256": "9640c58aff61dd8b1d9c434cd73e2d1197b126f5f13a09db350bcda49a41bb65",
+        "status": " M"
+      },
+      {
+        "bytes": 63301,
+        "path": "LNS.h",
+        "sha256": "77323b2256741276c54c1e17de60a253e2d148ec7af164520939dad8ace926d3",
+        "status": " M"
+      },
+      {
+        "bytes": 30354,
+        "path": "ModelTuner.h",
+        "sha256": "1b7ab8da07167f6bb7a78246a189156a6e62afa61755bcb62a4d215c87f03b16",
+        "status": " M"
+      },
+      {
+        "bytes": 15408,
+        "path": "RunCplexBatch.h",
+        "sha256": "c8621cb1427ff7857b7a5fb7aaa148556acc6aecefc0679eb250327d70b4a150",
+        "status": " M"
+      },
+      {
+        "bytes": 14904,
+        "path": "SAVNSRoutingClassic.h",
+        "sha256": "ae95665947b570aea5371b7ce601d7c39deebcb28311d915d0a758983cccca49",
+        "status": " M"
+      },
+      {
+        "bytes": 14908,
+        "path": "Solver_Exact_CPLEX.cpp",
+        "sha256": "b43ce31c5baedb50be57f27fff52a5bb64a082db18767671bbfa14a958da8a58",
+        "status": " M"
+      },
+      {
+        "bytes": 15063,
+        "path": "Solver_Exact_withRoutes_CPLEX.cpp",
+        "sha256": "5cf078b12d902defabb44092413692234058c200b66ef646ccf7e1d162879574",
+        "status": " M"
+      },
+      {
+        "bytes": 4092,
+        "path": "model_comparison_log.txt",
+        "sha256": "45f38457a5e7b3776006f45f71f6a93efc796ce066964dd5a25956993c3de394",
+        "status": " M"
+      },
+      {
+        "bytes": 2210,
+        "path": "model_comparison_summary.csv",
+        "sha256": "dbf84eae601110d06c587d39e6c8805dd87afb77aab5dd8e3b0d740ce61f8ac4",
+        "status": " M"
+      },
+      {
+        "bytes": 732,
+        "path": "model_comparison_ttest.csv",
+        "sha256": "c0bdbc45c4a0f3a6c6ef11771b5506fa9e9c0cf7ff102d348301f84c46e70a6c",
+        "status": " M"
+      },
+      {
+        "bytes": 101089,
+        "path": "newGreedy.cpp",
+        "sha256": "fa2bf4b5176eec3190502d9f222859e252f6cbd000e11a8901ed011b5e8ed2f6",
+        "status": " M"
+      },
+      {
+        "bytes": 41924,
+        "path": "output/convergence/conv_test_data_V100_M2_average.txt.svg",
+        "sha256": "6c3bb9741f54c47d114bd85351b848c50d6c408268de7caaf0b7ae1b5d13b98a",
+        "status": " M"
+      },
+      {
+        "bytes": 42143,
+        "path": "output/convergence/conv_test_data_V200_M2_average.txt.svg",
+        "sha256": "8b19fdbf7c88362d4bae90bb4128b0acfaeb648011d1f3c757377f36bee92250",
+        "status": " M"
+      },
+      {
+        "bytes": 42245,
+        "path": "output/convergence/conv_test_data_V200_M2_high.txt.svg",
+        "sha256": "e51462b159577af5457edfad37fede22d03feafb58d2ccb30fac175917afb992",
+        "status": " M"
+      },
+      {
+        "bytes": 42191,
+        "path": "output/convergence/conv_test_data_V200_M2_low.txt.svg",
+        "sha256": "3f5e78ccfdaa56cf52d3c94839a16e748c4f3d632410e3fbff1818aa638cf7be",
+        "status": " M"
+      },
+      {
+        "bytes": 42221,
+        "path": "output/convergence/conv_test_data_V200_M3_average.txt.svg",
+        "sha256": "cc192144d98f6e999a1cfe8a0287715462a515fd80f00d03d252c38f2a8a2a11",
+        "status": " M"
+      },
+      {
+        "bytes": 42172,
+        "path": "output/convergence/conv_test_data_V200_M3_high.txt.svg",
+        "sha256": "c6b7edea0c2e52ee1e89d0b7fce7394db3dd25917c0e981ad3aceda1da4ee10b",
+        "status": " M"
+      },
+      {
+        "bytes": 42186,
+        "path": "output/convergence/conv_test_data_V200_M3_low.txt.svg",
+        "sha256": "ef402b6f6963d03f8ae5194ffae0eb4189c25743f7fdd30a742963a2e2a4161b",
+        "status": " M"
+      },
+      {
+        "bytes": 42271,
+        "path": "output/convergence/conv_test_data_V250_M2_average.txt.svg",
+        "sha256": "e79d013bae932350e13f93db2cb8e088fb41b2a8d957d02b897bbcab268dd5b5",
+        "status": " M"
+      },
+      {
+        "bytes": 42231,
+        "path": "output/convergence/conv_test_data_V250_M2_high.txt.svg",
+        "sha256": "76e7d795bccd2fccd7abc7b8632a772f2ac85c2f4b915749cd1fd240f4974578",
+        "status": " M"
+      },
+      {
+        "bytes": 42305,
+        "path": "output/convergence/conv_test_data_V250_M2_low.txt.svg",
+        "sha256": "98af31dc221b3e327d018411fefba1e844bf8a4378eda54d8a2e25c6a246aa9d",
+        "status": " M"
+      },
+      {
+        "bytes": 42242,
+        "path": "output/convergence/conv_test_data_V250_M3_average.txt.svg",
+        "sha256": "256905878137d314e839447c81ac47df50bfcfc2439d3d235ff71364185fb03b",
+        "status": " M"
+      },
+      {
+        "bytes": 42177,
+        "path": "output/convergence/conv_test_data_V250_M3_high.txt.svg",
+        "sha256": "b450643318ed640888955932edb0c3d53b9cb29947361659ebe0d7aed78610ce",
+        "status": " M"
+      },
+      {
+        "bytes": 42195,
+        "path": "output/convergence/conv_test_data_V250_M3_low.txt.svg",
+        "sha256": "dc19d4869177f0800931e65a66996f8226b5915b026136eed9cf3e4d787e25e7",
+        "status": " M"
+      },
+      {
+        "bytes": 42191,
+        "path": "output/convergence/conv_test_data_V300_M2_average.txt.svg",
+        "sha256": "d5d6fa656513e41aba8fb9346b0ae0eee5883191e678c5b4a2ad85a5848be94f",
+        "status": " M"
+      },
+      {
+        "bytes": 42254,
+        "path": "output/convergence/conv_test_data_V300_M2_high.txt.svg",
+        "sha256": "a1e421268de855fe2867c2d33807d3b57e8a4996dd20bf699452a7000caa045d",
+        "status": " M"
+      },
+      {
+        "bytes": 42199,
+        "path": "output/convergence/conv_test_data_V300_M2_low.txt.svg",
+        "sha256": "5ebfa7b821980dba24e5aa1e1de7e50068b44b8511a97771d5f5649e6e77acaa",
+        "status": " M"
+      },
+      {
+        "bytes": 147,
+        "path": "output/convergence/patience_summary.csv",
+        "sha256": "7d2e2d762e9ced878b65114e15790a095e62e05267fbc934818f798830571fef",
+        "status": " M"
+      },
+      {
+        "bytes": 1348,
+        "path": "output/lambda_tradeoff_V10_M2.txt",
+        "sha256": "97a9e1f25771826f6917b79c325ef50ff285026eacfc56ae100ae80146158870",
+        "status": " M"
+      },
+      {
+        "bytes": 1952,
+        "path": "output/lambda_tradeoff_sample_1_V10_M2_average.txt",
+        "sha256": "316dfe66c10e3217d2fd1036af2b32435f584cf9b356340dd64e3e08bdfd221c",
+        "status": " M"
+      },
+      {
+        "bytes": null,
+        "path": "output/lambda_tradeoff_sample_1_V10_M2_high.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "output/lambda_tradeoff_sample_1_V10_M2_low.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": 112974,
+        "path": "testdata/DiffSamples/Set1/test_data_V100_M2_average.txt",
+        "sha256": "155a95bc072362503e9fb2b3422ee0293deeb89266adb0cb51debfc27ea8f6ae",
+        "status": " M"
+      },
+      {
+        "bytes": 113006,
+        "path": "testdata/DiffSamples/Set1/test_data_V100_M2_high.txt",
+        "sha256": "2a5daa43835416dbadaa258b84e053b4e315dd20de746dbadcce0d31e19d9a3e",
+        "status": " M"
+      },
+      {
+        "bytes": 112907,
+        "path": "testdata/DiffSamples/Set1/test_data_V100_M2_low.txt",
+        "sha256": "5826fd9de23585161e5910022a92f8ec80595f32cdb70d32976b3627a309bd06",
+        "status": " M"
+      },
+      {
+        "bytes": 112913,
+        "path": "testdata/DiffSamples/Set1/test_data_V100_M3_average.txt",
+        "sha256": "1dbb50d46cb632b817dc1f890aea324b9e54285aba56b8fd1c7580a496164267",
+        "status": " M"
+      },
+      {
+        "bytes": 112954,
+        "path": "testdata/DiffSamples/Set1/test_data_V100_M3_high.txt",
+        "sha256": "8755bce1143b74e174f365c4b79a5a223bd2606250e827fa6b3c2b035d0fd1a8",
+        "status": " M"
+      },
+      {
+        "bytes": 112845,
+        "path": "testdata/DiffSamples/Set1/test_data_V100_M3_low.txt",
+        "sha256": "105f0d7b9905c9f4d69dec5e4ca102a4fccbf2880e8de17389ce5e8408a68311",
+        "status": " M"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set1/test_data_V150_M2_average.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set1/test_data_V150_M2_high.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set1/test_data_V150_M2_low.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set1/test_data_V150_M3_average.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set1/test_data_V150_M3_high.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set1/test_data_V150_M3_low.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V100_M2_extreme.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V100_M2_extreme.txt.cplex.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V100_M2_normal.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V100_M2_normal.txt.cplex.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V100_M3_extreme.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V100_M3_extreme.txt.cplex.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V100_M3_normal.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V100_M3_normal.txt.cplex.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V150_M2_extreme.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V150_M2_normal.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V150_M3_extreme.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V150_M3_normal.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V200_M3_extreme.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V200_M3_normal.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V200_M5_extreme.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V200_M5_normal.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V250_M3_extreme.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V250_M3_normal.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V250_M5_extreme.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V250_M5_normal.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V75_M2_extreme.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V75_M2_extreme.txt.cplex.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V75_M2_normal.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V75_M2_normal.txt.cplex.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V75_M3_extreme.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V75_M3_extreme.txt.cplex.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V75_M3_normal.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": null,
+        "path": "testdata/DiffSamples/Set2/test_data_V75_M3_normal.txt.cplex.txt",
+        "sha256": null,
+        "status": " D"
+      },
+      {
+        "bytes": 2384,
+        "path": "testdata/Smallnetwork2/smallnetwork_compare_full.csv",
+        "sha256": "ba26ed08f9252a1b924110608d68c51d908073fa8a8c9a0082980f90148993df",
+        "status": " M"
+      },
+      {
+        "bytes": 1948,
+        "path": "testdata/Smallnetwork2/test_data_V10_M2_low.txt",
+        "sha256": "39a5ed2b1fd7e7241f4f09f9698a06524fa75a45f2aadca8e32ecd0fc6d243af",
+        "status": " M"
+      },
+      {
+        "bytes": 2538,
+        "path": "testdata/Smallnetwork2/test_data_V12_M1_average.txt",
+        "sha256": "deb0afbcd51541bc90e08f1550a4d773f6905152e679cf0392b67f6814ee5eb5",
+        "status": " M"
+      },
+      {
+        "bytes": 2546,
+        "path": "testdata/Smallnetwork2/test_data_V12_M1_high.txt",
+        "sha256": "2361ca62c1184272eb10af8b422baa1ede761524f2625e1d7c4fcd4247ef2f2b",
+        "status": " M"
+      },
+      {
+        "bytes": 2545,
+        "path": "testdata/Smallnetwork2/test_data_V12_M2_low.txt",
+        "sha256": "227627e40864edefe49632207cd13d19cb1f2a3c996e7c0b14abe3d91caf7488",
+        "status": " M"
+      },
+      {
+        "bytes": 1434,
+        "path": "testdata/Smallnetwork2/test_data_V8_M1_average.txt",
+        "sha256": "8da3300f21c6962477e3e37dfe2711f3055dea0f08f12982ae700f68c8958863",
+        "status": " M"
+      },
+      {
+        "bytes": 1436,
+        "path": "testdata/Smallnetwork2/test_data_V8_M1_high.txt",
+        "sha256": "c0acb63cdc2aeca0bf4fe6c79d6ab77eb1239be87518d818b7985307cb593e6b",
+        "status": " M"
+      },
+      {
+        "bytes": 1434,
+        "path": "testdata/Smallnetwork2/test_data_V8_M1_low.txt",
+        "sha256": "4e3522189486a84dd49777c3ffa77cb0dc313e29b3571369d1d161a2f46c9a24",
+        "status": " M"
+      }
+    ],
+    "read_only_contract": true,
+    "status": {
+      "entry_count": 220,
+      "status_fingerprint_sha256": "c9f960f8d15d24ae585c1f9bed90257656612fd55576a77ed15f02add2364047",
+      "tracked_entries": [
+        {
+          "path": "$null",
+          "status": " D"
+        },
+        {
+          "path": "CitiBikeSubsetGenerator.h",
+          "status": " M"
+        },
+        {
+          "path": "ClassicGARouting.h",
+          "status": " M"
+        },
+        {
+          "path": "Compare_Models.cpp",
+          "status": " M"
+        },
+        {
+          "path": "Hybrid GA/HybridGA.h",
+          "status": " M"
+        },
+        {
+          "path": "Instance_Generator.cpp",
+          "status": " M"
+        },
+        {
+          "path": "LNS.h",
+          "status": " M"
+        },
+        {
+          "path": "ModelTuner.h",
+          "status": " M"
+        },
+        {
+          "path": "RunCplexBatch.h",
+          "status": " M"
+        },
+        {
+          "path": "SAVNSRoutingClassic.h",
+          "status": " M"
+        },
+        {
+          "path": "Solver_Exact_CPLEX.cpp",
+          "status": " M"
+        },
+        {
+          "path": "Solver_Exact_withRoutes_CPLEX.cpp",
+          "status": " M"
+        },
+        {
+          "path": "model_comparison_log.txt",
+          "status": " M"
+        },
+        {
+          "path": "model_comparison_summary.csv",
+          "status": " M"
+        },
+        {
+          "path": "model_comparison_ttest.csv",
+          "status": " M"
+        },
+        {
+          "path": "newGreedy.cpp",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/conv_test_data_V100_M2_average.txt.svg",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/conv_test_data_V200_M2_average.txt.svg",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/conv_test_data_V200_M2_high.txt.svg",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/conv_test_data_V200_M2_low.txt.svg",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/conv_test_data_V200_M3_average.txt.svg",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/conv_test_data_V200_M3_high.txt.svg",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/conv_test_data_V200_M3_low.txt.svg",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/conv_test_data_V250_M2_average.txt.svg",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/conv_test_data_V250_M2_high.txt.svg",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/conv_test_data_V250_M2_low.txt.svg",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/conv_test_data_V250_M3_average.txt.svg",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/conv_test_data_V250_M3_high.txt.svg",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/conv_test_data_V250_M3_low.txt.svg",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/conv_test_data_V300_M2_average.txt.svg",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/conv_test_data_V300_M2_high.txt.svg",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/conv_test_data_V300_M2_low.txt.svg",
+          "status": " M"
+        },
+        {
+          "path": "output/convergence/patience_summary.csv",
+          "status": " M"
+        },
+        {
+          "path": "output/lambda_tradeoff_V10_M2.txt",
+          "status": " M"
+        },
+        {
+          "path": "output/lambda_tradeoff_sample_1_V10_M2_average.txt",
+          "status": " M"
+        },
+        {
+          "path": "output/lambda_tradeoff_sample_1_V10_M2_high.txt",
+          "status": " D"
+        },
+        {
+          "path": "output/lambda_tradeoff_sample_1_V10_M2_low.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set1/test_data_V100_M2_average.txt",
+          "status": " M"
+        },
+        {
+          "path": "testdata/DiffSamples/Set1/test_data_V100_M2_high.txt",
+          "status": " M"
+        },
+        {
+          "path": "testdata/DiffSamples/Set1/test_data_V100_M2_low.txt",
+          "status": " M"
+        },
+        {
+          "path": "testdata/DiffSamples/Set1/test_data_V100_M3_average.txt",
+          "status": " M"
+        },
+        {
+          "path": "testdata/DiffSamples/Set1/test_data_V100_M3_high.txt",
+          "status": " M"
+        },
+        {
+          "path": "testdata/DiffSamples/Set1/test_data_V100_M3_low.txt",
+          "status": " M"
+        },
+        {
+          "path": "testdata/DiffSamples/Set1/test_data_V150_M2_average.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set1/test_data_V150_M2_high.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set1/test_data_V150_M2_low.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set1/test_data_V150_M3_average.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set1/test_data_V150_M3_high.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set1/test_data_V150_M3_low.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V100_M2_extreme.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V100_M2_extreme.txt.cplex.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V100_M2_normal.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V100_M2_normal.txt.cplex.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V100_M3_extreme.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V100_M3_extreme.txt.cplex.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V100_M3_normal.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V100_M3_normal.txt.cplex.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V150_M2_extreme.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V150_M2_normal.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V150_M3_extreme.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V150_M3_normal.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V200_M3_extreme.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V200_M3_normal.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V200_M5_extreme.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V200_M5_normal.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V250_M3_extreme.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V250_M3_normal.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V250_M5_extreme.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V250_M5_normal.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V75_M2_extreme.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V75_M2_extreme.txt.cplex.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V75_M2_normal.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V75_M2_normal.txt.cplex.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V75_M3_extreme.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V75_M3_extreme.txt.cplex.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V75_M3_normal.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/DiffSamples/Set2/test_data_V75_M3_normal.txt.cplex.txt",
+          "status": " D"
+        },
+        {
+          "path": "testdata/Smallnetwork2/smallnetwork_compare_full.csv",
+          "status": " M"
+        },
+        {
+          "path": "testdata/Smallnetwork2/test_data_V10_M2_low.txt",
+          "status": " M"
+        },
+        {
+          "path": "testdata/Smallnetwork2/test_data_V12_M1_average.txt",
+          "status": " M"
+        },
+        {
+          "path": "testdata/Smallnetwork2/test_data_V12_M1_high.txt",
+          "status": " M"
+        },
+        {
+          "path": "testdata/Smallnetwork2/test_data_V12_M2_low.txt",
+          "status": " M"
+        },
+        {
+          "path": "testdata/Smallnetwork2/test_data_V8_M1_average.txt",
+          "status": " M"
+        },
+        {
+          "path": "testdata/Smallnetwork2/test_data_V8_M1_high.txt",
+          "status": " M"
+        },
+        {
+          "path": "testdata/Smallnetwork2/test_data_V8_M1_low.txt",
+          "status": " M"
+        }
+      ],
+      "tracked_entry_count": 85,
+      "untracked_file_entry_count": 135,
+      "untracked_groups": [
+        {
+          "file_count": 27,
+          "path_group": "output"
+        },
+        {
+          "file_count": 108,
+          "path_group": "testdata"
+        }
+      ]
+    },
+    "tree": "93696bd64636b046a414d826ebde1fdbabacd27e"
+  },
+  "schema": "citibike-data-round-repository-start-audit-v1"
+}

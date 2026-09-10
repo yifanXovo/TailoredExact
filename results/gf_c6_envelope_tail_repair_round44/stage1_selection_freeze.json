@@ -1,0 +1,47 @@
+{
+  "atlas_decision_count": 372,
+  "atlas_run_count": 120,
+  "candidate_algorithm_results_observed": false,
+  "envelope_injection_policies": [
+    "active-one",
+    "violated"
+  ],
+  "executable_sha256": "c6cd3f8c3d0220da87f96c891dc2cbbe493f6cc6e2d7b64b31210b7993e1e7fd",
+  "fixed_d2_role": "causal_reference_only",
+  "forbidden_inputs_used": false,
+  "frozen_before_algorithm_candidate_runs": true,
+  "holdout_observed": false,
+  "principal_lookahead_policy": "frontier-d2",
+  "rho_F_values": [
+    0.5,
+    0.75
+  ],
+  "rho_H_distribution": {
+    "median": 0.00036777170256587893,
+    "positive_count": 9,
+    "upper_quartile": 0.0008147244550313391
+  },
+  "rho_H_values": [
+    0.0004,
+    0.0009000000000000001
+  ],
+  "rho_M_distribution": {
+    "median": 0.006874702390303789,
+    "positive_count": 31,
+    "upper_quartile": 0.010029234191736404
+  },
+  "rho_M_values": [
+    0.007,
+    0.02
+  ],
+  "runtime_fit_used": false,
+  "schema": "round44-stage1-selection-freeze-v1",
+  "scope_policies": [
+    "parent",
+    "nested"
+  ],
+  "secondary_lookahead_reference": "fixed-d1",
+  "source_stage": "diagnostic_atlas_only",
+  "threshold_selection_rule": "median and upper quartile of positive structural scores, each rounded upward to one significant digit; no runtime fitting",
+  "validation_observed": false
+}

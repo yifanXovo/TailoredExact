@@ -1,0 +1,39 @@
+{
+  "T_representation": "scenario manifest and --T CLI argument; not embedded in input text",
+  "array_length": "V+1 including depot at index 0",
+  "arrays": [
+    "capacities",
+    "initial",
+    "target",
+    "weights",
+    "min_ratio"
+  ],
+  "chosen_format": "current ExactEBRP Hybrid-GA-compatible text input",
+  "cli_source": {
+    "path": "src/main.cpp",
+    "sha256": "9f92357e53a0db699629a0a63a28b50a574cd818c821d7bd79d87f416c23aa24"
+  },
+  "coordinates": "points list with V+1 (x,y) pairs; depot first",
+  "depot_placeholders": {
+    "capacity": 100000,
+    "initial": 50000,
+    "min_ratio": 0.0,
+    "target": 0,
+    "weight": 0.0
+  },
+  "effective_distance_rule": "Parser.cpp rebuilds Euclidean(points_i,points_j)/1.5 whenever V+1 points are present",
+  "first_line": "V M [Q_1, ..., Q_M]",
+  "instance_contract_source": {
+    "path": "include/Instance.hpp",
+    "sha256": "35c85465d0011e7ef0a74c6bd5567d99568e6cebeab0db6ce36943df1c878eaf"
+  },
+  "parser_change_required": false,
+  "parser_source": {
+    "path": "src/Parser.cpp",
+    "sha256": "9402d2744b4b2a7a83c3152d90d6d6438ca9c3e417d1a57da14dd8101c3b2911"
+  },
+  "pickup_drop_representation": "fixed current SolveOptions defaults of 60 seconds pickup and 60 seconds drop; no current CLI override",
+  "reason": "The existing parser accepts all required fields and derives the authoritative travel-time matrix from serialized points.",
+  "schema": "citibike443-parser-format-decision-v1",
+  "serialized_distance_matrix": false
+}

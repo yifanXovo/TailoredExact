@@ -1,0 +1,29 @@
+{
+  "families": [
+    {
+      "name": "legacy-hybrid-ga",
+      "path": "E:\\codes\\Hybrid GA\\testdata",
+      "provenance": "mixed",
+      "status": "historical"
+    },
+    {
+      "name": "exactebrp-generated",
+      "path": "E:\\codes\\ExactEBRP\\reference\\generated",
+      "provenance": "synthetic",
+      "status": "historical"
+    },
+    {
+      "name": "round56-paper-candidate",
+      "path": "E:\\codes\\ExactEBRP\\reference\\round56_paper_candidate",
+      "provenance": "synthetic",
+      "status": "historical-controlled-synthetic"
+    },
+    {
+      "name": "citibike443-regional-v1",
+      "path": "E:\\codes\\ExactEBRP\\reference\\citibike443-regional-v1",
+      "provenance": "real coordinates/capacities plus synthetic operational fields",
+      "status": "generated_untested_paper_candidate"
+    }
+  ],
+  "schema": "exactebrp-local-dataset-registry-v1"
+}

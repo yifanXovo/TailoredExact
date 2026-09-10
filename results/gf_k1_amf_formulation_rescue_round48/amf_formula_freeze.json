@@ -1,0 +1,22 @@
+{
+  "K0": 1,
+  "S_AM": "eta*mu",
+  "S_AMF": "mu*eta_hat",
+  "adjustable_parameters_introduced": 0,
+  "c_v_j": "clip(1-(u_v_j-l_v_j)/(u_v_P-l_v_P),0,1)",
+  "decision": "split iff S_AMF+epsilon_score>=tau",
+  "eta": "min(g_L,g_R)",
+  "eta_hat": "min(gtilde_L,gtilde_R)",
+  "formula_sha256": "8a9d922054558da482bcc725fbcd8b1f3dfa233020f467da3c0202b4ebb47895",
+  "g_j": "clip((B_j-B_p)/G_p,0,1)",
+  "gtilde_L": "g_L+phi_L*max(g_R-g_L,0)",
+  "gtilde_R": "g_R+phi_R*max(g_L-g_R,0)",
+  "invalid_profile": "phi_L=phi_R=0 and exact AM fallback",
+  "mu": "(g_L+g_R)/2",
+  "parent_gap": "max(U-B_p,epsilon_cert)",
+  "phi_j": "mean(c_v_j over V_P), or 0 for empty V_P",
+  "schema": "round48-amf-formula-v1",
+  "split_point": "midpoint",
+  "tau": 0.07915,
+  "weighting": "equal_per_eligible_model_variable"
+}

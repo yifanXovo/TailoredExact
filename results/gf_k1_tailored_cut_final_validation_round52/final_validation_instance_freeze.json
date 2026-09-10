@@ -1,0 +1,18 @@
+{
+  "schema": "round52-final-validation-instance-freeze-v1",
+  "frozen_before_any_round52_solver_result": true,
+  "validation_count": 12,
+  "holdout_count": 12,
+  "counts_by_size_per_panel": {
+    "V12": 4,
+    "V20": 4,
+    "V50": 4
+  },
+  "validation_manifest": "results/gf_k1_tailored_cut_final_validation_round52/validation_instance_manifest.json",
+  "holdout_manifest": "results/gf_k1_tailored_cut_final_validation_round52/holdout_instance_manifest.json",
+  "independent_panels": true,
+  "seed_collision_count": 0,
+  "development_use_of_holdout_forbidden": true,
+  "algorithm_change_after_validation_opens_forbidden": true,
+  "algorithm_change_after_holdout_opens_forbidden": true
+}

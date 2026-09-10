@@ -1,0 +1,72 @@
+{
+  "AMC": false,
+  "Gini_coordinate_excluded": true,
+  "K0": 1,
+  "aggregate_sha256": "28f4cbd550f85274225b837662f6cd08f6435c6d0bbcdb449c92b27f87447024",
+  "candidate_runtime_started": false,
+  "equal_weighting": true,
+  "files": [
+    {
+      "path": "research_contract.md",
+      "sha256": "757af37906cf9b1baac651418716dd16cebb5baf9bb28396c3ad9b39463e8071",
+      "size_bytes": 423
+    },
+    {
+      "path": "source_of_truth.md",
+      "sha256": "c411810ca2796318cfbcea5f7bba1afa903abd4673804710456d6a14e4f41330",
+      "size_bytes": 548
+    },
+    {
+      "path": "solver_contract.json",
+      "sha256": "2ba0adf9f3ab96c68e1373094d3dbaa40192357fa9ea0235befe60744b034dc7",
+      "size_bytes": 387
+    },
+    {
+      "path": "forbidden_mechanisms.json",
+      "sha256": "e24a9b373e97036009e5e8f64b13805525e828813ad4d47c662670e3664b08e3",
+      "size_bytes": 722
+    },
+    {
+      "path": "amf_formula_freeze.json",
+      "sha256": "8e8c903b3f86581fe604d114fe708d599ab3737f04e28c134dfdc0936053e299",
+      "size_bytes": 796
+    },
+    {
+      "path": "eligible_variable_registry.json",
+      "sha256": "5b0b52fe47ba42822665ae661c36d88bb6d2f16639f243238250852643acb661",
+      "size_bytes": 2386
+    },
+    {
+      "path": "historical_baseline_reference_manifest.csv",
+      "sha256": "0b050c7d881a44e4a865f7baeeb437427599c14ed3698d59508aa71bd1bf8ece",
+      "size_bytes": 55830
+    },
+    {
+      "path": "dataset_freeze.json",
+      "sha256": "91c2310ff15038e785869cd2f5e746b79c4a8b4376ddfec06a853c2a7762ebbe",
+      "size_bytes": 7189
+    },
+    {
+      "path": "offline_census_protocol.json",
+      "sha256": "2e55092dd4e2ea306e11d30ec166a6ede86aadf811d870b5899c8637cee7a9f0",
+      "size_bytes": 519
+    },
+    {
+      "path": "promotion_gates.json",
+      "sha256": "011f486be9e339dfa789b2ab2c777a7597cca149856cb8888dd244b44f4a531d",
+      "size_bytes": 702
+    },
+    {
+      "path": "official_start_record.json",
+      "sha256": "61cf76cf6007c524bd2105eef8540fa2a2a9708a2812b407797a03f6e5387632",
+      "size_bytes": 1073
+    }
+  ],
+  "frozen_before_candidate_runtime": true,
+  "max_process_cap_seconds": 1800,
+  "model_chain_inheritance_changes": false,
+  "rho_cap": false,
+  "schema": "round48-stage0-freeze-manifest-v1",
+  "split_point": "midpoint",
+  "tau": 0.07915
+}

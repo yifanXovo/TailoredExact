@@ -1,0 +1,19 @@
+{
+  "schema": "round52-promotion-gates-v1",
+  "mandatory": [
+    "zero correctness failures",
+    "zero false certificates",
+    "no lost baseline certificate in confirmation",
+    "no severe regression",
+    "improvement in at least two structural roles",
+    "callback and cut overhead included",
+    "capped-row GI aggregate nonworse",
+    "numerical conditioning nonworse",
+    "no forbidden dispatch"
+  ],
+  "performance_disjunction": {
+    "A": "paired exact-row Work geometric mean <= 0.97",
+    "B": "at least one additional strict certificate with no aggregate Work/GI regression"
+  },
+  "failure_action": "retain historical production v0"
+}

@@ -1,0 +1,13 @@
+{
+  "T_21600_permitted": false,
+  "T_supplied_by_cli_not_duplicated_in_fleet_file": true,
+  "field": "route_time_limit_seconds",
+  "meaning": "per-vehicle route travel plus operation duration limit",
+  "schema": "round56-route-horizon-contract-v1",
+  "values": [
+    1800,
+    3600,
+    10800,
+    18000
+  ]
+}

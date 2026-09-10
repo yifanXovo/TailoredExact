@@ -1,0 +1,29 @@
+\subsection{Balanced normalized closure gate}
+\label{sec:balanced-normalized-closure}
+
+Let $I$ be a controlling Gini interval with valid parent relaxation bound
+$B_I$.  Its midpoint children have valid bounds $B_-$ and $B_+$, and $U$ is
+an independently verified incumbent.  With the existing certificate tolerance
+$\varepsilon$, define
+\begin{align}
+\Delta_I &= \max\{U-B_I,\varepsilon\},\\
+r_- &= \operatorname{clip}_{[0,1]}((B_- - B_I)/\Delta_I),\\
+r_+ &= \operatorname{clip}_{[0,1]}((B_+ - B_I)/\Delta_I),\\
+\beta_I &= \min\{r_-,r_+\},\qquad
+\alpha_I=(r_-+r_+)/2,\\
+M_I &= \alpha_I\beta_I.
+\end{align}
+For two finite valid child bounds, the controller splits if and only if
+$M_I\ge\tau$, where $\tau=0.08$ is fixed throughout the experiments.
+Infeasible children, invalid LP evidence, native-target continuation, and exact
+parent closure are handled by their separate exact lifecycle rules rather than
+by assigning artificial scores.
+
+The score is invariant to exchanging the children, belongs to $[0,1]$, and is
+invariant under a positive affine change of objective units (with the tolerance
+expressed in those units).  It is zero when either child gives no normalized
+improvement.  Moreover, $\beta_I$ is the normalized improvement in the lower
+bound of the union of the two children, while $\alpha_I$ rewards total
+two-sided tightening.  The midpoint uniquely minimizes the maximum child
+width.  These properties motivate the form of the gate; they do not establish
+that the empirically frozen value $0.08$ is universally optimal.

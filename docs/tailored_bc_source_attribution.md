@@ -10,3 +10,5 @@ Tailored-BC source classes are:
 - `diagnostic`: test-only row.
 
 Certified `paper-gf-tailored-bc` rows may be relaxation-only, but static fallback must not be described as true tailored callback evidence.
+> Historical callback attribution note. It is not the current K1-AM-SF
+> implementation.

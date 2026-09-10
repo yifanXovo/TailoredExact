@@ -1,0 +1,31 @@
+{
+  "aggregate_candidate_work": 1526.3584107584054,
+  "aggregate_paired_work_nonworse": false,
+  "aggregate_v0_work": 1313.5133046190956,
+  "aggregate_work_delta": 212.8451061393098,
+  "aggregate_work_ratio": 1.1620425962880008,
+  "candidate": "m1-tight-big-m-v0",
+  "confirmation_opened": false,
+  "core_cap_seconds": 120,
+  "core_gate_passed": false,
+  "core_states": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D9",
+    "D10",
+    "D11"
+  ],
+  "correctness_failures": 0,
+  "decision": "reject_as_production_backend",
+  "development_300s_opened": false,
+  "false_certificates": 0,
+  "lost_baseline_certificates": 1,
+  "m1_retained_as_audited_experimental_baseline_for_stages_2_and_3": true,
+  "reason": "bounded_core_rejection:lost_D4_certificate_and_aggregate_work_regression",
+  "schema": "round51-big-m-decision-v1",
+  "severe_regressions": 2
+}

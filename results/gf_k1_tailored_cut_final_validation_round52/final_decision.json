@@ -1,0 +1,189 @@
+{
+  "algorithm_freeze_commit": "52ccf3e713e1c57484ac2ec9ba96baf3cb8c8026",
+  "benchmark_classification": "pgrb_advantage_supported",
+  "benchmark_gates": {
+    "aggregate_GI_nonworse_holdout": true,
+    "aggregate_GI_nonworse_validation": true,
+    "evidence_spans_multiple_size_classes": true,
+    "k1_certificate_count_at_least_pgrb_holdout": true,
+    "k1_certificate_count_at_least_pgrb_validation": true,
+    "major_historical_repair_preserved": true,
+    "shifted_work_geomean_below_one_holdout": true,
+    "shifted_work_geomean_below_one_validation": true,
+    "zero_false_certificates": true,
+    "zero_severe_pgrb_regressions_holdout": true
+  },
+  "certificate_summary": {
+    "combined": {
+      "K1-AM-FINAL": 13,
+      "K1_gains": 7,
+      "K1_losses": 0,
+      "P-GRB": 6
+    },
+    "holdout": {
+      "K1-AM-FINAL": 6,
+      "P-GRB": 3
+    },
+    "validation": {
+      "K1-AM-FINAL": 7,
+      "P-GRB": 3
+    }
+  },
+  "completion_status": "round52_complete",
+  "cut_backend_classification": "production_v0_backend_retained",
+  "cut_infrastructure_classification": "gurobi_tailored_cut_infrastructure_complete",
+  "design_iterations": {
+    "attempted": [
+      "iteration_1:SD-R3-ROOT-BLOCKMAX"
+    ],
+    "formally_skipped": [
+      "iteration_2",
+      "iteration_3"
+    ],
+    "skip_basis": "retained callback/PreCrush path failed the complete development gates"
+  },
+  "false_certificates": 0,
+  "final_cut_selection_rule": "none",
+  "final_executable_sha256": "d245c76f6397c757894610d8f5238cfeb971761ff7e05edf51058e451d810151",
+  "final_inner_backend": "historical-production-v0",
+  "final_separation_scope": "none",
+  "final_support_rank": 0,
+  "final_tau": 0.08,
+  "holdout_opened_after_freeze": true,
+  "k1_classification": "k1_am_v0_final",
+  "metric_summary": {
+    "combined": {
+      "aggregate_GI_ratio_k1_over_pgrb": 0.45736037868122603,
+      "common_exact_row_count": 6,
+      "common_exact_shifted_work_geometric_mean_ratio": 0.4445988638875409,
+      "false_certificates": 0,
+      "group": "combined",
+      "k1_certificate_gain": 7,
+      "k1_certificate_loss": 0,
+      "k1_certificates": 13,
+      "k1_mean_GI_1800": 0.10226979678620295,
+      "median_shifted_work_ratio": 0.9386468838625682,
+      "p90_shifted_work_ratio": 1.2435550506390372,
+      "pgrb_certificates": 6,
+      "pgrb_mean_GI_1800": 0.22360878106908252,
+      "row_count": 24,
+      "severe_pgrb_regressions": 0,
+      "shifted_process_geometric_mean_ratio_k1_over_pgrb": 0.5118036284220855,
+      "shifted_work_geometric_mean_ratio_k1_over_pgrb": 0.580490735301515
+    },
+    "combined_V12": {
+      "aggregate_GI_ratio_k1_over_pgrb": 0.4685470159203473,
+      "common_exact_row_count": 6,
+      "common_exact_shifted_work_geometric_mean_ratio": 0.4445988638875409,
+      "false_certificates": 0,
+      "group": "combined_V12",
+      "k1_certificate_gain": 1,
+      "k1_certificate_loss": 0,
+      "k1_certificates": 7,
+      "k1_mean_GI_1800": 0.03634469044074967,
+      "median_shifted_work_ratio": 0.5747838327467398,
+      "p90_shifted_work_ratio": 1.0172380523885771,
+      "pgrb_certificates": 6,
+      "pgrb_mean_GI_1800": 0.07756892949015867,
+      "row_count": 8,
+      "severe_pgrb_regressions": 0,
+      "shifted_process_geometric_mean_ratio_k1_over_pgrb": 0.367672405622051,
+      "shifted_work_geometric_mean_ratio_k1_over_pgrb": 0.43619684158970734
+    },
+    "combined_V20": {
+      "aggregate_GI_ratio_k1_over_pgrb": 0.4358091096643763,
+      "common_exact_row_count": 0,
+      "common_exact_shifted_work_geometric_mean_ratio": null,
+      "false_certificates": 0,
+      "group": "combined_V20",
+      "k1_certificate_gain": 6,
+      "k1_certificate_loss": 0,
+      "k1_certificates": 6,
+      "k1_mean_GI_1800": 0.15828575194382846,
+      "median_shifted_work_ratio": 0.6910912444796204,
+      "p90_shifted_work_ratio": 1.2102195422576523,
+      "pgrb_certificates": 0,
+      "pgrb_mean_GI_1800": 0.3631997322537083,
+      "row_count": 8,
+      "severe_pgrb_regressions": 0,
+      "shifted_process_geometric_mean_ratio_k1_over_pgrb": 0.36476941935176765,
+      "shifted_work_geometric_mean_ratio_k1_over_pgrb": 0.3742316370648027
+    },
+    "combined_V50": {
+      "aggregate_GI_ratio_k1_over_pgrb": 0.4876122686296252,
+      "common_exact_row_count": 0,
+      "common_exact_shifted_work_geometric_mean_ratio": null,
+      "false_certificates": 0,
+      "group": "combined_V50",
+      "k1_certificate_gain": 0,
+      "k1_certificate_loss": 0,
+      "k1_certificates": 0,
+      "k1_mean_GI_1800": 0.1121789479740307,
+      "median_shifted_work_ratio": 1.187451520429937,
+      "p90_shifted_work_ratio": 1.2538566583713466,
+      "pgrb_certificates": 0,
+      "pgrb_mean_GI_1800": 0.23005768146338063,
+      "row_count": 8,
+      "severe_pgrb_regressions": 0,
+      "shifted_process_geometric_mean_ratio_k1_over_pgrb": 0.9996100710105542,
+      "shifted_work_geometric_mean_ratio_k1_over_pgrb": 1.1982925581310462
+    },
+    "holdout": {
+      "aggregate_GI_ratio_k1_over_pgrb": 0.44553936464598987,
+      "common_exact_row_count": 3,
+      "common_exact_shifted_work_geometric_mean_ratio": 0.5876614922932716,
+      "false_certificates": 0,
+      "group": "holdout",
+      "k1_certificate_gain": 3,
+      "k1_certificate_loss": 0,
+      "k1_certificates": 6,
+      "k1_mean_GI_1800": 0.0975599025179348,
+      "median_shifted_work_ratio": 1.0232614862146385,
+      "p90_shifted_work_ratio": 1.1825451091252965,
+      "pgrb_certificates": 3,
+      "pgrb_mean_GI_1800": 0.21897033182567946,
+      "row_count": 12,
+      "severe_pgrb_regressions": 0,
+      "shifted_process_geometric_mean_ratio_k1_over_pgrb": 0.4633077833221722,
+      "shifted_work_geometric_mean_ratio_k1_over_pgrb": 0.5114266158344984
+    },
+    "validation": {
+      "aggregate_GI_ratio_k1_over_pgrb": 0.46870093848678374,
+      "common_exact_row_count": 3,
+      "common_exact_shifted_work_geometric_mean_ratio": 0.3363639652459075,
+      "false_certificates": 0,
+      "group": "validation",
+      "k1_certificate_gain": 4,
+      "k1_certificate_loss": 0,
+      "k1_certificates": 7,
+      "k1_mean_GI_1800": 0.10697969105447108,
+      "median_shifted_work_ratio": 0.9386468838625682,
+      "p90_shifted_work_ratio": 1.26842800656891,
+      "pgrb_certificates": 3,
+      "pgrb_mean_GI_1800": 0.22824723031248562,
+      "row_count": 12,
+      "severe_pgrb_regressions": 0,
+      "shifted_process_geometric_mean_ratio_k1_over_pgrb": 0.5653756822036029,
+      "shifted_work_geometric_mean_ratio_k1_over_pgrb": 0.6588814178571015
+    }
+  },
+  "missing_rows": [],
+  "official_rows": {
+    "holdout": 24,
+    "total": 48,
+    "validation": 24
+  },
+  "paper_language": "bounded evidence supports an exact tailored K1-AM controller with the historical production-v0 inner backend; V50 performance remains mixed",
+  "post_freeze_algorithmic_changes": 0,
+  "rejected_candidate": {
+    "name": "SD-R3-ROOT-BLOCKMAX",
+    "selection_rule": "one maximum strictly violated cut per vehicle block",
+    "separation_scope": "root-only",
+    "support_rank": 3
+  },
+  "scale_qualification": "v12_v20_supported_v50_mixed",
+  "schema": "round52-final-decision-v1",
+  "severe_pgrb_regressions": 0,
+  "tau_classification": "tau_008_adopted",
+  "validated_paper_algorithm_claim_allowed": false
+}
