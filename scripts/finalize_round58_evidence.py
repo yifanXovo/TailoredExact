@@ -771,13 +771,17 @@ def final_classification(direct: list[dict[str, Any]],
         for row in neither_common)
     long_count = sum(bool(row["long_run_material_regression"])
                      for row in long_regression)
+    # Count distinct structural cells, not the three labels contributed by a
+    # single row.  The paper-claim gate requires favorable evidence in more
+    # than one V/geography/inventory stratum; treating one favorable scenario
+    # as three strata would make that gate vacuous.
     k_better_strata = set()
     for row in direct:
         if row["pair_outcome"] in {"both_certified_k1_faster", "k1_only_certified",
                                     "neither_certified_k1_better_bound"}:
-            k_better_strata.update((f"V={row['V']}",
-                                    f"geography={row['geographic_regime']}",
-                                    f"inventory={row['inventory_regime']}"))
+            k_better_strata.add(
+                f"V={row['V']}|geography={row['geographic_regime']}|"
+                f"inventory={row['inventory_regime']}")
     supported = all((
         false_certificates == 0, correctness_failures == 0, k_cert >= p_cert,
         time_ratio is not None and time_ratio < 1.0,
