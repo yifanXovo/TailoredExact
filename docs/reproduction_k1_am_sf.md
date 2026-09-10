@@ -84,3 +84,39 @@ The runner permits only one official optimizer process at a time. Do not add
 known bounds, archive scanning, imported incumbents, focus-only modes, prior
 interval bounds, alternative presets, or instance-specific settings. Route
 archiving rereads the native witness and does not invoke another optimization.
+
+## Round 58 CitiBike443 paired benchmark
+
+Round 58 uses the source-frozen executable at
+`build/official-round58-citibike443-8ec0e1e15/ExactEBRP.exe` with SHA-256
+`0f7570d4c421b9d2f4cb2941bf4d426fe396a25b26ef1c0618df0f3a675333f2`.
+Expected P-GRB model fingerprints were frozen before timed benchmark runs.
+
+```powershell
+& 'D:\msys64\ucrt64\bin\python.exe' scripts\run_round58_paired_benchmark.py --preflight
+& 'D:\msys64\ucrt64\bin\python.exe' scripts\run_round58_paired_benchmark.py --stage screen
+& 'D:\msys64\ucrt64\bin\python.exe' scripts\run_round58_paired_benchmark.py --stage long
+& 'D:\msys64\ucrt64\bin\python.exe' scripts\run_round58_paired_benchmark.py --stage near
+& 'D:\msys64\ucrt64\bin\python.exe' scripts\run_round58_paired_benchmark.py --audit
+& 'D:\msys64\ucrt64\bin\python.exe' scripts\finalize_round58_evidence.py
+& 'D:\msys64\ucrt64\bin\python.exe' scripts\audit_round58_delivery.py
+```
+
+The runner is hash-resumable and permits one optimizer process at a time. Do
+not rerun the fingerprint-discovery preflight after the benchmark-start flag is
+set. The complete commands, hashes, staged rules, and local-raw inventory are
+under `results/gf_citibike443_k1_vs_pgrb_round58/`.
+
+The completed execution has 149 fresh optimizer processes: 100 screen arms,
+35 runs at 10800 seconds, 7 at 16200 seconds, and 7 at 21600 seconds. The
+protocol audit must report no missing or unauthorized run. Final validation
+requires 35/35 CTests and all 46 `tests/*.py` scripts in sorted sequential
+order; the historical Round 46--49 tests use their documented
+`EXACTEBRP_ROUND*_EXE` overrides to address the existing hash-qualified build
+directories. The committed `reproduction_commands.md` and
+`final_build_and_tests.md` record the exact invocations and hashes.
+
+The local `tmp/round58_live_runs.csv`, `tmp/round58_live_pairs.csv`, and
+`tmp/round58_live_status.json` are interruption-safe execution views and are
+not committed. Do not rerun a valid completed arm: the runner verifies its
+completion-marker hashes and resumes only from an incomplete authorized arm.

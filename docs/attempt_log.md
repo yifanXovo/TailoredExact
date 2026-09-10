@@ -2574,3 +2574,34 @@ Remaining TODOs:
   dataset recommendations are generated from the complete official panel under
   `results/gf_paper_benchmark_time_horizon_round56/`. The panel is explicitly
   screening evidence, not a final replicated dataset.
+
+## 2026-09-10 - Round 58 CitiBike443 K1-AM-SF versus P-GRB qualification
+
+- Preserved and validated the local Round 57 `citibike443-regional-v1` family,
+  then froze a deterministic 50-scenario panel before performance: 30 primary
+  V/geography/inventory cells and 20 matched route-horizon rows. The remaining
+  910 scenarios were not opened or substituted.
+- Used one source-frozen executable (SHA-256
+  `0f7570d4c421b9d2f4cb2941bf4d426fe396a25b26ef1c0618df0f3a675333f2`)
+  for both the unchanged `paper-k1-am-sf` preset and plain P-GRB. All solves
+  were fresh, sequential, single-thread processes with aligned Gurobi settings;
+  P-GRB fingerprints matched their pre-frozen expectations.
+- Completed 100 mandatory 3600-second arms, 35 fresh 10800-second runs, 7
+  16200-second runs, and 7 21600-second runs. No authorized run is missing and
+  no unauthorized run was entered. Total experimental compute was
+  783691.566276 seconds and 1755117.240247 Work units.
+- K1/P-GRB strict certificates were 34/30 at 3600 seconds and 34/31 finally.
+  Of 31 both-certified pairs, K1/P-GRB faster counts were 7/24 and lower-Work
+  counts were 28/3. The shifted exact K1/P-GRB ratios were 2.83349 for time and
+  0.450095 for Work.
+- For 16 neither-certified pairs, K1/P-GRB/tie smaller common-horizon gap counts
+  were 13/2/1, with mean relative gaps 0.269174/0.330379. Three pairs were
+  K1-only certificates and none were P-GRB-only.
+- Recorded one historical severe-regression flag but zero conservative
+  long-run material regressions, zero false certificates, and zero correctness
+  failures. All 100 native official route packages passed independent
+  verification without post-optimization.
+- Classified the result as `k1_am_sf_pgrb_advantage_mixed`: K1 retains a
+  certificate-count, Work, and open-gap advantage on this frozen panel, while
+  P-GRB is faster on most jointly certified pairs. The next step is a second
+  pre-frozen sealed holdout selected from the 910 untouched reserves.

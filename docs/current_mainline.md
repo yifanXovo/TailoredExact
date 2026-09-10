@@ -71,3 +71,38 @@ is 3600 seconds, while nine predeclared V>=20/T=18000 rows may continue to a
 independently verified from disk, and never post-optimized. Certified packages
 are exact; capped verified incumbents are not. Round 56 remains screening
 evidence because it has only one base landscape per V.
+
+## Round 58 qualification
+
+Round 58 does not change K1-AM-SF. It compares the same frozen
+`paper-k1-am-sf` preset with plain P-GRB on 50 scenarios selected before
+performance from the replicated 960-scenario `citibike443-regional-v1`
+family. Every selected scenario receives both 3600-second screen arms. Longer
+fresh attempts follow the frozen 10800/16200/21600-second gap rules, and six
+hours is the absolute cap.
+
+P-GRB is one complete original compact MILP with native Gurobi presolve, cuts,
+heuristics, and branching, but no Gini decomposition, tailored rows or
+callbacks, custom branching, HGA start, imported route, or archive-derived
+bound. Both methods use the same executable, Gurobi version, one thread,
+Seed=0, and automatic presolve. Comparisons of capped rows use qualified bounds
+at common horizons; unequal final horizons are labeled. Native route witnesses
+are archived without post-optimization and archive time is excluded from
+algorithm time.
+
+Round 58 completed without tuning the preset. K1-AM-SF certified 34/50 rows at
+both the one-hour screen and final authorized caps; P-GRB certified 30/50 at
+one hour and 31/50 finally. Of 31 jointly certified pairs, P-GRB was faster on
+24 and K1 on 7, but K1 used less Work on 28 and P-GRB on 3. The paired shifted
+K1/P-GRB geometric-mean ratios were 2.83349 for exact time and 0.450095 for
+Work. Among 16 pairs where neither method certified, K1 had the smaller
+common-horizon relative gap on 13, P-GRB on 2, with one tie; mean gaps were
+0.269174 and 0.330379. There were zero false certificates, zero correctness
+failures, and zero long-run material regressions, although one historical
+severe-regression flag occurred.
+
+The result is therefore `k1_am_sf_pgrb_advantage_mixed`. It supports the
+frozen K1-AM-SF mainline as competitive and Work-efficient on this panel, but
+does not support a stable universal time advantage. All 100 official native
+route packages passed independent verification. A second panel must be frozen
+from the 910 unopened reserves before making a stronger paper-benchmark claim.
