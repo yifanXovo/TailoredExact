@@ -89,3 +89,20 @@ Seed=0, and automatic presolve. Comparisons of capped rows use qualified bounds
 at common horizons; unequal final horizons are labeled. Native route witnesses
 are archived without post-optimization and archive time is excluded from
 algorithm time.
+
+Round 58 completed without tuning the preset. K1-AM-SF certified 34/50 rows at
+both the one-hour screen and final authorized caps; P-GRB certified 30/50 at
+one hour and 31/50 finally. Of 31 jointly certified pairs, P-GRB was faster on
+24 and K1 on 7, but K1 used less Work on 28 and P-GRB on 3. The paired shifted
+K1/P-GRB geometric-mean ratios were 2.83349 for exact time and 0.450095 for
+Work. Among 16 pairs where neither method certified, K1 had the smaller
+common-horizon relative gap on 13, P-GRB on 2, with one tie; mean gaps were
+0.269174 and 0.330379. There were zero false certificates, zero correctness
+failures, and zero long-run material regressions, although one historical
+severe-regression flag occurred.
+
+The result is therefore `k1_am_sf_pgrb_advantage_mixed`. It supports the
+frozen K1-AM-SF mainline as competitive and Work-efficient on this panel, but
+does not support a stable universal time advantage. All 100 official native
+route packages passed independent verification. A second panel must be frozen
+from the 910 unopened reserves before making a stronger paper-benchmark claim.

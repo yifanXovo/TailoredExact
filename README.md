@@ -101,6 +101,15 @@ independently checked and never post-optimized. See
 `docs/round58_citibike443_paired_benchmark.md` and the compact evidence under
 `results/gf_citibike443_k1_vs_pgrb_round58/`.
 
+The completed Round 58 classification is
+`k1_am_sf_pgrb_advantage_mixed`, not a universal superiority claim. K1-AM-SF
+certified 34/50 scenarios and P-GRB 31/50; 31 pairs were jointly certified.
+P-GRB was faster on 24 of those pairs versus 7 for K1, while K1 used less Work
+on 28 versus 3 and had the smaller common-horizon relative gap on 13 of 16
+neither-certified pairs. All 149 authorized fresh runs completed, all 100
+official native route packages passed independent verification, and the 910
+reserve scenarios remain unopened for a second sealed holdout panel.
+
 ## Historical exact lines
 
 The sections below preserve earlier engineering and reproduction records. Any

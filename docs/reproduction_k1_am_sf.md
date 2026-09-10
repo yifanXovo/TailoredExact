@@ -97,10 +97,26 @@ Expected P-GRB model fingerprints were frozen before timed benchmark runs.
 & 'D:\msys64\ucrt64\bin\python.exe' scripts\run_round58_paired_benchmark.py --stage screen
 & 'D:\msys64\ucrt64\bin\python.exe' scripts\run_round58_paired_benchmark.py --stage long
 & 'D:\msys64\ucrt64\bin\python.exe' scripts\run_round58_paired_benchmark.py --stage near
+& 'D:\msys64\ucrt64\bin\python.exe' scripts\run_round58_paired_benchmark.py --audit
 & 'D:\msys64\ucrt64\bin\python.exe' scripts\finalize_round58_evidence.py
+& 'D:\msys64\ucrt64\bin\python.exe' scripts\audit_round58_delivery.py
 ```
 
 The runner is hash-resumable and permits one optimizer process at a time. Do
 not rerun the fingerprint-discovery preflight after the benchmark-start flag is
 set. The complete commands, hashes, staged rules, and local-raw inventory are
 under `results/gf_citibike443_k1_vs_pgrb_round58/`.
+
+The completed execution has 149 fresh optimizer processes: 100 screen arms,
+35 runs at 10800 seconds, 7 at 16200 seconds, and 7 at 21600 seconds. The
+protocol audit must report no missing or unauthorized run. Final validation
+requires 35/35 CTests and all 46 `tests/*.py` scripts in sorted sequential
+order; the historical Round 46--49 tests use their documented
+`EXACTEBRP_ROUND*_EXE` overrides to address the existing hash-qualified build
+directories. The committed `reproduction_commands.md` and
+`final_build_and_tests.md` record the exact invocations and hashes.
+
+The local `tmp/round58_live_runs.csv`, `tmp/round58_live_pairs.csv`, and
+`tmp/round58_live_status.json` are interruption-safe execution views and are
+not committed. Do not rerun a valid completed arm: the runner verifies its
+completion-marker hashes and resumes only from an incomplete authorized arm.

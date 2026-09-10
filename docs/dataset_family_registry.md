@@ -20,3 +20,10 @@ The family is reproducible local benchmark evidence, not a claim that every
 generated scenario is an established historical paper benchmark. Landscape,
 input, and mathematical-scenario hashes must be verified before use, and
 operational T must remain separate from solver process time.
+
+Round 58 revalidated the family and its deterministic regeneration evidence
+before opening benchmark performance. The selected 50-scenario panel is
+complete, with 30 primary structural cells and 20 matched route-horizon rows;
+all required V/geography/inventory/M/Q/T strata are represented. All 910
+unselected scenarios remain hash-frozen and unopened for possible sealed
+holdout work.

@@ -147,11 +147,16 @@ def main() -> int:
                                    for row in certificates),
               "28_certificate_invariance", passed)
         freeze = load(OUT / "final_inner_backend_freeze_manifest.json")
-        changed = subprocess.check_output(
-            ["git", "diff", "--name-only", freeze["source_commit"], "HEAD",
-             "--", "CMakeLists.txt", "include", "src", "scripts"],
-            cwd=ROOT, text=True, encoding="utf-8", errors="replace").strip()
-        check(not changed, "29_no_post_freeze_algorithm_change", passed)
+        frozen_tree = subprocess.check_output(
+            ["git", "rev-parse", f"{freeze['source_commit']}^{{tree}}"],
+            cwd=ROOT, text=True, encoding="utf-8", errors="strict").strip()
+        exact_executable = Path(str(freeze["exact_executable_path"]))
+        fixed_interval_harness = Path(str(freeze["fixed_interval_harness_path"]))
+        check(frozen_tree == freeze["source_tree"] and
+              sha256(exact_executable) == freeze["exact_executable_sha256"] and
+              sha256(fixed_interval_harness) ==
+              freeze["fixed_interval_harness_sha256"],
+              "29_frozen_source_tree_and_executables", passed)
         start = load(OUT / "official_start_record.json")
         check(all(sha1(ROOT / item["path"]) == item["blob_sha1"]
                   for item in start["working_tree_start"]["tracked_modified"]),

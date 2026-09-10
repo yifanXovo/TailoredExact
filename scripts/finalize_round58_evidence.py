@@ -731,6 +731,71 @@ def performance_rows(direct: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return rows
 
 
+def gap_field_rows() -> list[dict[str, Any]]:
+    """Audit compact schemas and every run-level explicit-gap calculation."""
+    required_explicit = {
+        "screen_results_3600.csv", "long_run_results_10800.csv",
+        "extended_results_16200.csv", "extended_results_21600.csv",
+        "official_final_results.csv", "final_run_selection.csv",
+    }
+    scopes: list[tuple[str, list[str], bool]] = [
+        ("runner.RUN_FIELDS", list(runner.RUN_FIELDS), True),
+    ]
+    for path in sorted(OUT.glob("*.csv")):
+        if path.name in {"final_evidence_inventory.csv", "gap_field_audit.csv"}:
+            continue
+        with path.open(newline="", encoding="utf-8-sig") as handle:
+            fields = next(csv.reader(handle), [])
+        scopes.append((r58.repo_path(path), fields,
+                       path.name in required_explicit))
+    rows: list[dict[str, Any]] = []
+    for scope, fields, requires_explicit in scopes:
+        explicit_present = all(
+            field in fields for field in
+            ("absolute_gap", "relative_gap", "scaled_gap"))
+        ambiguous = [field for field in fields if field.strip().lower() == "gap"]
+        rows.append({
+            "audit_kind": "schema", "scope": scope, "row_count": "",
+            "requires_explicit_gap_fields": requires_explicit,
+            "absolute_gap_field_present": "absolute_gap" in fields,
+            "relative_gap_field_present": "relative_gap" in fields,
+            "scaled_gap_field_present": "scaled_gap" in fields,
+            "unqualified_gap_field_present": bool(ambiguous),
+            "formula_failure_count": "",
+            "passed": not ambiguous and
+            (not requires_explicit or explicit_present),
+        })
+
+    run_material = [
+        row for cap in HORIZONS for row in runner.stage_result_rows(cap)
+    ]
+    failures = 0
+    for row in run_material:
+        expected = runner.explicit_gaps(
+            row.get("valid_lower_bound"), row.get("verified_upper_bound"))
+        for field in ("absolute_gap", "relative_gap", "scaled_gap"):
+            actual_value, expected_value = row.get(field), expected[field]
+            if actual_value in (None, "") and expected_value is None:
+                continue
+            if not finite(actual_value) or expected_value is None:
+                failures += 1
+                break
+            tolerance = 1e-12 * max(1.0, abs(float(expected_value)))
+            if abs(float(actual_value) - float(expected_value)) > tolerance:
+                failures += 1
+                break
+    rows.append({
+        "audit_kind": "formula", "scope": "all_completed_round58_runs",
+        "row_count": len(run_material), "requires_explicit_gap_fields": True,
+        "absolute_gap_field_present": True,
+        "relative_gap_field_present": True,
+        "scaled_gap_field_present": True,
+        "unqualified_gap_field_present": False,
+        "formula_failure_count": failures, "passed": failures == 0,
+    })
+    return rows
+
+
 def final_classification(direct: list[dict[str, Any]],
                          common: list[dict[str, Any]],
                          long_regression: list[dict[str, Any]],
@@ -1000,6 +1065,7 @@ def main() -> int:
         r58.write_csv(OUT / filename, group_rows(direct, field), atomic=True)
     r58.write_csv(OUT / "certificate_horizon_summary.csv", horizon_summary(), atomic=True)
     r58.write_csv(OUT / "performance_profile_data.csv", performance_rows(direct), atomic=True)
+    r58.write_csv(OUT / "gap_field_audit.csv", gap_field_rows(), atomic=True)
     correctness_failures = sum(
         not bool(row["passed"]) and row.get("failures") != "no_verified_incumbent"
         for row in route_verification)

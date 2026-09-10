@@ -236,3 +236,12 @@ row is an established historical paper benchmark. Operational T is part of
 the mathematical scenario identity and is distinct from the solver process
 cap. Capped outcomes remain valid benchmark observations when reported with
 their qualified LB, independently verified UB, and explicit gaps.
+
+The frozen 50-scenario panel completed with no substitutions and no opened
+reserve scenario. Every scenario received both mandatory 3600-second arms;
+fresh extensions were entered only under the predeclared 10800/16200/21600
+rules. The dataset classification is `citibike443_paired_panel_complete`, but
+the benchmark classification is the deliberately qualified
+`k1_am_sf_pgrb_advantage_mixed`. The 910 reserves retain their
+`reserve_not_opened_round58` status and are the source pool for a future
+pre-frozen holdout, not a menu for retrospective replacement.
