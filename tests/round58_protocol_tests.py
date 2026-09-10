@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import round58_common as r58  # noqa: E402
+import finalize_round58_evidence as finalizer  # noqa: E402
 import run_round58_paired_benchmark as runner  # noqa: E402
 from round58_route_archive import archive_native_result, verify_native_result  # noqa: E402
 
@@ -250,13 +251,40 @@ def main() -> int:
     require(all(r58.sha256_file(ROOT / item["path"]) == item["sha256"]
                 for item in preservation["tracked_modified_files"]),
             "41 user-file preservation")
+
+    favorable = {
+        "scenario_id": "favorable-one", "V": 8,
+        "geographic_regime": "compact", "inventory_regime": "shortage",
+        "K1_final_certificate": True, "PGRB_final_certificate": True,
+        "K1_exact_time": 1.0, "PGRB_exact_time": 2.0,
+        "K1_exact_work": 1.0, "PGRB_exact_work": 2.0,
+        "pair_outcome": "both_certified_k1_faster",
+    }
+    common = [{
+        "scenario_id": "favorable-one", "common_run_cap_seconds": 3600,
+        "K1_relative_gap": 0.01, "PGRB_relative_gap": 0.02,
+        "K1_certificate": False, "PGRB_certificate": False,
+    }]
+    one_cell, _ = finalizer.final_classification(
+        [favorable], common, [{"long_run_material_regression": False}], 0, 0)
+    favorable_two = dict(
+        favorable, scenario_id="favorable-two", V=12,
+        geographic_regime="regional", inventory_regime="balanced")
+    common_two = dict(common[0], scenario_id="favorable-two")
+    two_cells, _ = finalizer.final_classification(
+        [favorable, favorable_two], [common[0], common_two],
+        [{"long_run_material_regression": False}], 0, 0)
+    require(one_cell != "k1_am_sf_pgrb_advantage_supported" and
+            two_cells == "k1_am_sf_pgrb_advantage_supported",
+            "42 distinct multi-stratum paper-claim gate")
+
     inventory = r58.read_csv(r58.EVIDENCE / "final_evidence_inventory.csv")
     require(bool(inventory) and all(
         (ROOT / row["path"]).is_file() and
         (ROOT / row["path"]).stat().st_size == int(row["bytes"]) and
         r58.sha256_file(ROOT / row["path"]) == row["sha256"]
-        for row in inventory), "42 evidence hash audit")
-    require(checks == 42, "43 protocol check-count guard")
+        for row in inventory), "43 evidence hash audit")
+    require(checks == 43, "44 protocol check-count guard")
     print(f"Round58 protocol tests passed {checks} checks")
     return 0
 
