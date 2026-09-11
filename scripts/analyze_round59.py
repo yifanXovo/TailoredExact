@@ -65,11 +65,12 @@ def diagnostics():
     rows=[]
     for launch in sorted(RAW.glob('diagnostic_*/*/*/launch.json')):
         ident=json.loads(launch.read_text());dest=launch.parent
-        rp=dest/('lp_result.json' if ident['stage'] in ['diagnostic_roots','diagnostic_hga_lp'] else 'result.json')
+        rp=dest/('lp_result.json' if ident['stage'].endswith(('_roots','_hga_lp')) else 'result.json')
         if not rp.exists(): continue
         r=json.loads(rp.read_text())
         row=dict(id=ident['id'],arm=ident['arm'],stage=ident['stage'],scope='restricted_state_only',cap=ident['cap'],**r)
         row['artifact_dir']=str(dest.relative_to(ROOT));row['result_sha256']=sha(rp)
+        row['model_identity_scope']='current_K1_F0' if ident['stage'].startswith('diagnostic_current_') else 'legacy_harness_excluded_from_current_attribution'
         rows.append({k:v for k,v in row.items() if not isinstance(v,(dict,list))})
     csvwrite(OUT/'fixed_state_results.csv',rows)
     return rows

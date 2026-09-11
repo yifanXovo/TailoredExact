@@ -136,22 +136,22 @@ def diagnostics(phase):
            'cuts':(['D3','D4'],['F0','Monitor','Static','Pool'],'solve'),
            'callback':(['D3'],['PreCrush','StatusPreCrush','DryRun','Dynamic'],'solve'),
            'focus':(['D3','D4'],['Focus1'],'solve'),
-           'hga_lp':(['D4'],['F0','Compact'],'lp'),
-           'hga_state':(['D4'],['F0','Compact'],'solve'),
+           'hga_lp':(['D2'],['F0','Compact'],'lp'),
+           'hga_state':(['D2'],['F0','Compact'],'solve'),
            'startup_state':(['D6','D7'],['F0','Compact'],'solve')}
     ids,arms,mode=plans[phase]
     for r in panel:
         if r['id'] not in ids: continue
         if phase=='startup_state' and not (OUT/('frozen_startup_'+r['id']+'.json')).exists(): continue
         for arm in arms:
-            dest=RAW/('diagnostic_'+phase)/r['id']/arm
+            dest=RAW/('diagnostic_current_'+phase)/r['id']/arm
             if (dest/'completion.json').exists():
                 if json.loads((dest/'completion.json').read_text())['returncode']==0: continue
                 raise RuntimeError('failed diagnostic needs inspection')
             policy,extra=policies[arm]
             cmd=[str(exe),'--mode',mode,'--state-id',r['id']+'-'+phase,
                  '--input',r['instance_path'],'--artifact-dir',str(dest),
-                 '--policy',policy,'--T',str(r['T_seconds']),'--process-cap','120',
+                 '--policy',policy,'--T',str(r['T_seconds']),'--process-cap','120','--round59-current-f0',
                  ]+extra
             if phase in ['hga_lp','hga_state','startup_state']:
                 frozen_path=OUT/('frozen_startup_'+r['id']+'.json') if phase=='startup_state' else OUT/'frozen_hga_state.json'
@@ -162,7 +162,7 @@ def diagnostics(phase):
                       '--cutoff',str(frozen['U'])]
             else:
                 cmd+=['--round59-empty-state']
-            execute(cmd,dest,dict(id=r['id'],arm=arm,cap=120,stage='diagnostic_'+phase,
+            execute(cmd,dest,dict(id=r['id'],arm=arm,cap=120,stage='diagnostic_current_'+phase,
                 scope='restricted_state_diagnostic',incumbent_source=str(frozen_path.relative_to(OUT)) if phase in ['hga_lp','hga_state','startup_state'] else 'independently verified empty routes',incumbent_epoch=0))
 
 def micro():

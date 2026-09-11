@@ -40,6 +40,7 @@ struct Arguments {
     std::string round59_cuts = "off";
     bool round59_empty_state = false;
     bool round59_compact = false;
+    bool round59_current_f0 = false;
     bool round59_monitor = false;
     int round59_focus = -1;
     double gamma_lower = 0.0;
@@ -144,6 +145,7 @@ Arguments parseArguments(int argc, char** argv) {
         else if (arg == "--round59-cuts") out.round59_cuts = value(i);
         else if (arg == "--round59-empty-state") out.round59_empty_state = true;
         else if (arg == "--round59-compact") out.round59_compact = true;
+        else if (arg == "--round59-current-f0") out.round59_current_f0 = true;
         else if (arg == "--round59-monitor") out.round59_monitor = true;
         else if (arg == "--round59-primal-focus") out.round59_focus = 1;
         else if (arg == "--round59-bound-focus") out.round59_focus = 3;
@@ -999,6 +1001,7 @@ int main(int argc, char** argv) {
 
         ebrp::SolveOptions options;
         ebrp::configureRound50IntervalMipV0(options);
+        if (args.round59_current_f0) ebrp::configureRound59CurrentF0(options);
         options.gurobi_home = args.gurobi_home;
         options.solve_time_limit = args.process_cap_seconds;
         options.process_wall_time_limit = args.process_cap_seconds;
