@@ -41,6 +41,7 @@ struct Arguments {
     bool round59_empty_state = false;
     bool round59_compact = false;
     bool round59_current_f0 = false;
+    std::string round59_original_compact_sha256;
     bool round59_monitor = false;
     int round59_focus = -1;
     double gamma_lower = 0.0;
@@ -146,6 +147,7 @@ Arguments parseArguments(int argc, char** argv) {
         else if (arg == "--round59-empty-state") out.round59_empty_state = true;
         else if (arg == "--round59-compact") out.round59_compact = true;
         else if (arg == "--round59-current-f0") out.round59_current_f0 = true;
+        else if (arg == "--round59-original-compact-sha256") out.round59_original_compact_sha256 = value(i);
         else if (arg == "--round59-monitor") out.round59_monitor = true;
         else if (arg == "--round59-primal-focus") out.round59_focus = 1;
         else if (arg == "--round59-bound-focus") out.round59_focus = 3;
@@ -1002,6 +1004,7 @@ int main(int argc, char** argv) {
         ebrp::SolveOptions options;
         ebrp::configureRound50IntervalMipV0(options);
         if (args.round59_current_f0) ebrp::configureRound59CurrentF0(options);
+        if (!args.round59_original_compact_sha256.empty()) options = ebrp::SolveOptions{};
         options.gurobi_home = args.gurobi_home;
         options.solve_time_limit = args.process_cap_seconds;
         options.process_wall_time_limit = args.process_cap_seconds;
@@ -1029,6 +1032,17 @@ int main(int argc, char** argv) {
         spec.station_state_formulation = policy.station_state_formulation;
         spec.sparse_family_removal = policy.sparse_family_removal;
         const auto build_started = Clock::now();
+        if (!args.round59_original_compact_sha256.empty()) {
+            // Bind the unrestricted origin byte-for-byte to the official
+            // P-GRB export before adding only the interval and cutoff.
+            ebrp::CanonicalCompactModelSpec plain;
+            const auto origin = ebrp::writeCanonicalCompactModel(
+                instance, options, args.artifact_dir / "original_compact_origin.lp", plain);
+            if (!origin.written || origin.sha256 != args.round59_original_compact_sha256)
+                throw std::runtime_error("Round59 original compact origin SHA256 mismatch");
+            spec.strengthened = false;
+            spec.round51_subset_duration_big_m = plain.round51_subset_duration_big_m;
+        }
         ebrp::CanonicalCompactModelArtifact artifact =
             ebrp::writeCanonicalCompactModel(
                 instance, options, args.artifact_dir / "canonical_model.lp",

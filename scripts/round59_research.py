@@ -122,6 +122,7 @@ def diagnostics(phase):
     policies={
         'F0':('interval-mip-core-no-exhaustive-subset-duration',[]),
         'Compact':('interval-mip-core-no-exhaustive-subset-duration',['--round59-compact']),
+        'OriginalCompact':('interval-mip-core-no-exhaustive-subset-duration',[]),
         'Monitor':('interval-mip-core-no-exhaustive-subset-duration',['--round59-monitor']),
         'Static':('interval-mip-core-no-exhaustive-subset-duration',['--round59-cuts','static']),
         'Pool':('interval-mip-core-no-exhaustive-subset-duration',['--round59-cuts','pool']),
@@ -133,12 +134,13 @@ def diagnostics(phase):
         'Dynamic':('round53-c5-live',[]),
     }
     plans={'roots':(['D2','D3','D4'],['F0','Compact'],'lp'),
+           'original':(['D3','D4'],['F0','OriginalCompact'],'solve'),
            'cuts':(['D3','D4'],['F0','Monitor','Static','Pool'],'solve'),
            'callback':(['D3'],['PreCrush','StatusPreCrush','DryRun','Dynamic'],'solve'),
            'focus':(['D3','D4'],['Focus1'],'solve'),
            'hga_lp':(['D2'],['F0','Compact'],'lp'),
            'hga_state':(['D2'],['F0','Compact'],'solve'),
-           'startup_state':(['D6','D7'],['F0','Compact'],'solve')}
+           'startup_state':(['D6','D7'],['F0'],'solve')}
     ids,arms,mode=plans[phase]
     for r in panel:
         if r['id'] not in ids: continue
@@ -153,6 +155,9 @@ def diagnostics(phase):
                  '--input',r['instance_path'],'--artifact-dir',str(dest),
                  '--policy',policy,'--T',str(r['T_seconds']),'--process-cap','120','--round59-current-f0',
                  ]+extra
+            if arm=='OriginalCompact':
+                origin=RAW/'screen120'/r.get('artifact_id',r['id'])/'P-GRB/compact.lp'
+                cmd+=['--round59-original-compact-sha256',sha(origin)]
             if phase in ['hga_lp','hga_state','startup_state']:
                 frozen_path=OUT/('frozen_startup_'+r['id']+'.json') if phase=='startup_state' else OUT/'frozen_hga_state.json'
                 frozen=json.loads(frozen_path.read_text())
@@ -183,7 +188,7 @@ def micro():
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser()
-    parser.add_argument('action',choices=['freeze','development','confirmation','roots','cuts','callback','focus','hga_lp','hga_state','startup_state','micro'])
+    parser.add_argument('action',choices=['freeze','development','confirmation','roots','original','cuts','callback','focus','hga_lp','hga_state','startup_state','micro'])
     parser.add_argument('--only')
     parser.add_argument('--cap',type=int,choices=[120,300,600],default=120)
     parser.add_argument('--arms',nargs='+',choices=['P-GRB','K1-H','K1-S','F0-Single-S'])
