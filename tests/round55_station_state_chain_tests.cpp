@@ -315,7 +315,7 @@ int main() {
               "48 canonical cover signature order");
 
         const auto& active = ebrp::paperK1AmSfActiveFamilies();
-        check(active.size() == 17,
+        check(active.size() == 23,
               "49 complete active-family census");
         check(std::find(active.begin(), active.end(),
                         "inventory_conservation") != active.end() &&

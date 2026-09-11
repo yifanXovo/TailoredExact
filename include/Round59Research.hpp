@@ -1,28 +1,15 @@
 #pragma once
 #include "FixedIntervalMipBackend.hpp"
+#include "PaperK1AmSf.hpp"
 #include <algorithm>
 #include <cmath>
 #include <stdexcept>
 
 namespace ebrp {
-// Research harness only: mirror the inherited paper-gf-tailored-bc model flags
-// that configurePaperK1AmSfOverrides does not reset. Stable presets are untouched.
+// Compatibility adapter for the Round 59 fixed-state harness.  Both it and
+// the paper K1 entry point now consume the same authoritative F0 contract.
 inline void configureRound59CurrentF0(SolveOptions& o) {
-    o.gini_spread_cuts = true;
-    o.required_movement_cuts = true;
-    o.global_handling_capacity_cuts = true;
-    o.low_gini_ratio_band_tightening = true;
-    o.transfer_subset_capacity_cuts = true;
-    o.compact_bc_direct_gini_rows = true;
-    o.compact_bc_tight_mccormick = true;
-    o.compact_bc_inventory_conservation = true;
-    o.compact_bc_movement_reachability_domains = true;
-    o.compact_bc_visit_inventory_linking = true;
-    o.compact_bc_objective_estimator_cutoff = true;
-    o.compact_bc_penalty_lb_closure = true;
-    o.compact_bc_pairwise_transfer_compatibility = true;
-    o.compact_bc_receiver_source_cover_cuts = false;
-    o.interval_oracle_penalty_domain_tightening = true;
+    configurePaperK1AmSfCanonicalF0(o);
 }
 // Metric closure makes the lower bound valid even for nonmetric directed data:
 // shortcut a realized route in the closure, not in the original distances.

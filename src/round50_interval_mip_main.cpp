@@ -44,6 +44,10 @@ struct Arguments {
     std::string round59_original_compact_sha256;
     bool round59_monitor = false;
     int round59_focus = -1;
+    std::string round60_candidate_mode = "off";
+    int round60_candidate_maximum_evaluations = 512;
+    int round60_candidate_maximum_stations = 16;
+    std::vector<int> round60_fixed_inventory;
     double gamma_lower = 0.0;
     double gamma_upper = 0.0;
     double cutoff = 0.0;
@@ -129,6 +133,21 @@ double elapsed(const Clock::time_point& started) {
     return std::chrono::duration<double>(Clock::now() - started).count();
 }
 
+std::vector<int> parseIntegerList(const std::string& text) {
+    std::vector<int> values;
+    std::size_t start = 0;
+    while (start <= text.size()) {
+        const std::size_t end = text.find(',', start);
+        const std::string token = text.substr(
+            start, end == std::string::npos ? std::string::npos : end - start);
+        if (token.empty()) throw std::runtime_error("empty integer-list item");
+        values.push_back(std::stoi(token));
+        if (end == std::string::npos) break;
+        start = end + 1;
+    }
+    return values;
+}
+
 Arguments parseArguments(int argc, char** argv) {
     Arguments out;
     out.executable = std::filesystem::absolute(argv[0]);
@@ -151,6 +170,10 @@ Arguments parseArguments(int argc, char** argv) {
         else if (arg == "--round59-monitor") out.round59_monitor = true;
         else if (arg == "--round59-primal-focus") out.round59_focus = 1;
         else if (arg == "--round59-bound-focus") out.round59_focus = 3;
+        else if (arg == "--round60-candidate-mode") out.round60_candidate_mode = value(i);
+        else if (arg == "--round60-candidate-max-evaluations") out.round60_candidate_maximum_evaluations = std::stoi(value(i));
+        else if (arg == "--round60-candidate-max-stations") out.round60_candidate_maximum_stations = std::stoi(value(i));
+        else if (arg == "--round60-fixed-inventory") out.round60_fixed_inventory = parseIntegerList(value(i));
         else if (arg == "--gurobi-home") out.gurobi_home = value(i);
         else if (arg == "--gamma-lower") out.gamma_lower = std::stod(value(i));
         else if (arg == "--gamma-upper") out.gamma_upper = std::stod(value(i));
@@ -180,6 +203,17 @@ Arguments parseArguments(int argc, char** argv) {
     }
     if (out.round59_cuts != "off" && out.round59_cuts != "static" && out.round59_cuts != "pool")
         throw std::runtime_error("invalid Round59 cut execution mode");
+    if (out.round60_candidate_mode != "off" &&
+        out.round60_candidate_mode != "dry" &&
+        out.round60_candidate_mode != "inject") {
+        throw std::runtime_error("invalid Round60 candidate mode");
+    }
+    if (out.round60_candidate_maximum_evaluations <= 0 ||
+        out.round60_candidate_maximum_evaluations > 10000 ||
+        out.round60_candidate_maximum_stations <= 0 ||
+        out.round60_candidate_maximum_stations > 100) {
+        throw std::runtime_error("invalid Round60 candidate work bound");
+    }
     return out;
 }
 
@@ -199,6 +233,14 @@ void writeCommand(const Arguments& args, const std::filesystem::path& path) {
         << "  \"round59_compact\": " << boolJson(args.round59_compact) << ",\n"
         << "  \"round59_monitor\": " << boolJson(args.round59_monitor) << ",\n"
         << "  \"round59_mip_focus\": " << args.round59_focus << ",\n"
+        << "  \"round60_candidate_mode\": \""
+        << args.round60_candidate_mode << "\",\n"
+        << "  \"round60_candidate_maximum_evaluations\": "
+        << args.round60_candidate_maximum_evaluations << ",\n"
+        << "  \"round60_candidate_maximum_stations\": "
+        << args.round60_candidate_maximum_stations << ",\n"
+        << "  \"round60_fixed_inventory_size\": "
+        << args.round60_fixed_inventory.size() << ",\n"
         << "  \"explicit_cutoff_epsilon\": 0,\n"
         << "  \"gamma_lower\": " << args.gamma_lower << ",\n"
         << "  \"gamma_upper\": " << args.gamma_upper << ",\n"
@@ -704,6 +746,33 @@ void writeSolveEvidence(const Arguments& args,
         << "  \"round59_added_rows_status\": \"" << jsonEscape(outcome.additional_linear_rows_status) << "\",\n"
         << "  \"round59_added_rows_count\": " << outcome.additional_linear_rows_added << ",\n"
         << "  \"round59_mip_focus\": " << args.round59_focus << ",\n"
+        << "  \"round60_candidate_mode\": \""
+        << jsonEscape(outcome.round60_candidate_mode) << "\",\n"
+        << "  \"round60_candidate_callback_active\": "
+        << boolJson(outcome.round60_candidate_callback_active) << ",\n"
+        << "  \"round60_candidate_disabled_after_failure\": "
+        << boolJson(outcome.round60_candidate_disabled_after_failure) << ",\n"
+        << "  \"round60_candidate_triggers\": "
+        << outcome.round60_candidate_triggers << ",\n"
+        << "  \"round60_candidates_generated\": "
+        << outcome.round60_candidates_generated << ",\n"
+        << "  \"round60_candidates_verified\": "
+        << outcome.round60_candidates_verified << ",\n"
+        << "  \"round60_candidates_mapped\": "
+        << outcome.round60_candidates_mapped << ",\n"
+        << "  \"round60_candidates_submitted\": "
+        << outcome.round60_candidates_submitted << ",\n"
+        << "  \"round60_candidates_confirmed_accepted\": "
+        << outcome.round60_candidates_confirmed_accepted << ",\n"
+        << "  \"round60_candidates_acceptance_unknown\": "
+        << outcome.round60_candidates_acceptance_unknown << ",\n"
+        << "  \"round60_best_generated_objective_available\": "
+        << boolJson(outcome.round60_best_generated_objective_available)
+        << ",\n"
+        << "  \"round60_best_generated_objective\": "
+        << outcome.round60_best_generated_objective << ",\n"
+        << "  \"round60_candidate_overhead_seconds\": "
+        << outcome.round60_candidate_overhead_seconds << ",\n"
         << "  \"state_id\": \"" << jsonEscape(args.state_id) << "\",\n"
         << "  \"policy\": \"" << jsonEscape(args.policy) << "\",\n"
         << "  \"status\": \"" << status << "\",\n"
@@ -1127,6 +1196,14 @@ int main(int argc, char** argv) {
             request.round59_mip_focus = args.round59_focus;
             if (args.round59_monitor)
                 request.round59_node_samples_path = args.artifact_dir / "node_samples.csv";
+            request.round60_candidate_mode = args.round60_candidate_mode;
+            request.round60_candidate_maximum_evaluations =
+                args.round60_candidate_maximum_evaluations;
+            request.round60_candidate_maximum_stations =
+                args.round60_candidate_maximum_stations;
+            request.round60_candidate_log_path =
+                args.artifact_dir / "round60_candidate_events.csv";
+            request.round60_fixed_inventory = args.round60_fixed_inventory;
             return request;
         };
 

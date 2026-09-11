@@ -10,6 +10,7 @@
 #include <limits>
 #include <sstream>
 #include <string>
+#include <functional>
 
 #if __has_include("GreedyMethods.h")
 #include "GreedyMethods.h"
@@ -37,6 +38,11 @@ public:
         HGSBiased,
         HGAFitness
     };
+    using BestObserver = std::function<void(
+        const vector<vector<int>>& routes,
+        const vector<int>& decoded_operations,
+        double fitness,
+        long long generation)>;
 
     HybridGA_HGS(const InstanceData& inst,
         int ps = 24,
@@ -93,10 +99,19 @@ public:
         absolute_deadline = deadline;
         absolute_deadline_enabled = true;
     }
+    void set_best_observer(BestObserver observer) {
+        best_observer = std::move(observer);
+    }
     bool stopped_on_absolute_deadline() const {
         return absolute_deadline_reached;
     }
+    bool best_observer_failed_and_disabled() const {
+        return best_observer_failed;
+    }
     vector<vector<int>> get_best_solution() const { return best_solution; }
+    vector<int> get_best_decoded_operations() const {
+        return best_decoded_operations;
+    }
     double get_best_fitness() const { return best_fitness; }
     long long get_total_generations() const { return total_generations; }
     long long get_generations_since_improvement() const {
@@ -277,6 +292,7 @@ private:
     size_t decode_cache_max_entries = std::numeric_limits<size_t>::max();
 
     vector<vector<int>> best_solution;
+    vector<int> best_decoded_operations;
     double best_fitness;
     vector<double> history;
     vector<double> elapsed_history;
@@ -287,6 +303,8 @@ private:
     long long decoder_calls = 0;
     mt19937 gen;
     unordered_map<string, SolutionResult_ORO> decode_cache;
+    BestObserver best_observer;
+    bool best_observer_failed = false;
 
     static constexpr int SEP = 0;
 
@@ -1268,6 +1286,19 @@ private:
             if (ind.fitness > best_fitness + 1e-12) {
                 best_fitness = ind.fitness;
                 best_solution = ind.routes;
+                best_decoded_operations = ind.decoded_ops;
+                if (best_observer) {
+                    const long long generation = history.empty()
+                        ? 0 : total_generations + 1;
+                    try {
+                        best_observer(best_solution,
+                                      best_decoded_operations,
+                                      best_fitness, generation);
+                    } catch (...) {
+                        best_observer_failed = true;
+                        best_observer = BestObserver{};
+                    }
+                }
                 improved = true;
             }
         }

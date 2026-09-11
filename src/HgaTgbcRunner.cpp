@@ -2,6 +2,7 @@
 
 #include "Evaluator.hpp"
 #include "ProcessPhaseLedger.hpp"
+#include "Round60Candidates.hpp"
 #include "hga_tgbc/GreedyMethods.h"
 #include "hga_tgbc/HybridGA.h"
 
@@ -65,6 +66,37 @@ std::vector<RoutePlan> routesFromHgaDecode(
     return routes;
 }
 
+bool writeCandidateLedger(
+    const std::filesystem::path& path,
+    const std::vector<CandidateObservation>& observations) noexcept {
+    if (path.empty()) return true;
+    try {
+        if (path.has_parent_path()) {
+            std::filesystem::create_directories(path.parent_path());
+        }
+        std::ofstream out(path, std::ios::out | std::ios::trunc);
+        if (!out) return false;
+        out << "event,source,generation,source_elapsed_seconds,content_sha256,"
+               "duplicate,verifier_passed,published,objective,"
+               "verification_seconds,reason\n";
+        out << std::setprecision(17);
+        for (std::size_t index = 0; index < observations.size(); ++index) {
+            const CandidateObservation& observation = observations[index];
+            out << index << ',' << observation.source << ','
+                << observation.generation << ','
+                << observation.source_elapsed_seconds << ','
+                << observation.content_sha256 << ',' << observation.duplicate
+                << ',' << observation.verifier_passed << ','
+                << observation.published << ',' << observation.objective << ','
+                << observation.verification_seconds << ','
+                << observation.reason << '\n';
+        }
+        return static_cast<bool>(out);
+    } catch (...) {
+        return false;
+    }
+}
+
 } // namespace
 
 HgaTgbcResult runHgaTgbcNative(const Instance& instance,
@@ -95,6 +127,24 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
         options.stop_mode == "generation-stagnation");
     ga.set_decoder_compaction_mode(1);
     ga.set_decode_cache_max_entries(200000);
+    VerifiedCandidateStore published_candidates;
+    if (options.publish_verified_improvements) {
+        ga.set_best_observer(
+            [&](const std::vector<std::vector<int>>& sequences,
+                const std::vector<int>& operations,
+                double,
+                long long generation) {
+                const double event_seconds = std::chrono::duration<double>(
+                    std::chrono::steady_clock::now() - started).count();
+                published_candidates.consider(
+                    instance, options.lambda,
+                    routesFromHgaDecode(instance, sequences, operations),
+                    generation == 0 ? "hga_initial_population_best"
+                                    : "hga_strict_improvement",
+                    options.candidate_model_identity, generation,
+                    event_seconds, 0.0);
+            });
+    }
     if (options.process_options &&
         processDeadlineConfigured(*options.process_options)) {
         const double remaining =
@@ -112,6 +162,13 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
     }
     ga.run();
     out.global_deadline_reached = ga.stopped_on_absolute_deadline();
+    out.candidate_observer_failed =
+        ga.best_observer_failed_and_disabled();
+    if (out.candidate_observer_failed) {
+        out.notes.push_back(
+            "optional HGA candidate observer failed and was disabled; "
+            "the original HGA search continued");
+    }
     if (options.process_options) {
         recordProcessPhase(
             *options.process_options, "hga_generation_loop_complete",
@@ -146,6 +203,44 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
                        << ',' << fitness[index] << ','
                        << (index < improvements.size() && improvements[index]
                                ? "true" : "false") << '\n';
+        }
+    }
+    if (options.publish_verified_improvements) {
+        const bool candidate_ledger_written = writeCandidateLedger(
+            options.verified_candidate_log_path,
+            published_candidates.observations());
+        out.candidate_observations = static_cast<long long>(
+            published_candidates.observations().size());
+        for (const CandidateObservation& observation :
+                 published_candidates.observations()) {
+            if (observation.verifier_passed) ++out.verified_candidate_count;
+            if (observation.published) ++out.published_candidate_count;
+            out.candidate_verification_seconds +=
+                observation.verification_seconds;
+        }
+        if (!candidate_ledger_written) {
+            out.candidate_observer_failed = true;
+            out.published_candidate_count = 0;
+            out.notes.push_back(
+                "optional HGA candidate ledger write failed; event "
+                "publication was disabled and original HGA search retained");
+        } else if (published_candidates.hasBest()) {
+            const VerifiedBrpCandidate& candidate = published_candidates.best();
+            out.found = true;
+            out.routes = candidate.routes;
+            out.source_label = "native_hga_tgbc_verified_event_publish";
+            out.verified_objective = candidate.objective;
+            out.retained_verified_event_candidate = true;
+            out.retained_candidate_sha256 = candidate.content_sha256;
+            std::ostringstream note;
+            note << "retained independently verified HGA event candidate="
+                 << candidate.content_sha256
+                 << ", objective=" << candidate.objective
+                 << ", generation=" << candidate.generation;
+            out.notes.push_back(note.str());
+            out.wall_time_seconds = std::chrono::duration<double>(
+                std::chrono::steady_clock::now() - started).count();
+            return out;
         }
     }
 

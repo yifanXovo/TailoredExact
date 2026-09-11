@@ -7,7 +7,26 @@ bool isPaperK1AmSfPresetOrAlias(const std::string& lower_name) {
            lower_name == "paper-k1-am-f0";
 }
 
+void configurePaperK1AmSfCanonicalF0(SolveOptions& opt) {
+    opt.gini_spread_cuts = true;
+    opt.required_movement_cuts = true;
+    opt.global_handling_capacity_cuts = true;
+    opt.low_gini_ratio_band_tightening = true;
+    opt.transfer_subset_capacity_cuts = true;
+    opt.compact_bc_direct_gini_rows = true;
+    opt.compact_bc_tight_mccormick = true;
+    opt.compact_bc_inventory_conservation = true;
+    opt.compact_bc_movement_reachability_domains = true;
+    opt.compact_bc_visit_inventory_linking = true;
+    opt.compact_bc_objective_estimator_cutoff = true;
+    opt.compact_bc_penalty_lb_closure = true;
+    opt.compact_bc_pairwise_transfer_compatibility = true;
+    opt.compact_bc_receiver_source_cover_cuts = false;
+    opt.interval_oracle_penalty_domain_tightening = true;
+}
+
 void configurePaperK1AmSfOverrides(SolveOptions& opt) {
+    configurePaperK1AmSfCanonicalF0(opt);
     opt.algorithm_preset = "paper-k1-am-sf";
     opt.k1_am_sf_controller_enabled = true;
     opt.initial_gini_interval_count = 1;
@@ -128,6 +147,12 @@ const std::vector<std::string>& paperK1AmSfActiveFamilies() {
         "connectivity_flow_formulation",
         "iterative_domain_propagation",
         "tight_denominator_bounds",
+        "gini_spread_cuts",
+        "required_movement_cuts",
+        "global_handling_capacity_cuts",
+        "low_gini_ratio_band_tightening",
+        "transfer_subset_capacity_cuts",
+        "pairwise_transfer_compatibility",
     };
     return families;
 }
@@ -135,8 +160,6 @@ const std::vector<std::string>& paperK1AmSfActiveFamilies() {
 const std::vector<std::string>& paperK1AmSfInactiveFamilies() {
     static const std::vector<std::string> families = {
         "exhaustive_subset_duration_block",
-        "gini_spread_cuts",
-        "required_movement_cuts",
         "transfer_cutset_cuts",
         "subset_inventory_cuts",
         "dynamic_support_duration_callback",
