@@ -9,8 +9,12 @@ by hash and inventories untracked paths. No reset, stash or cleanup is used.
 `panel.json` freezes eight development and two confirmation scenarios before
 Round59 performance. Original input bytes, V/M/Q, mathematical T and handling
 times are retained. No confirmation result selects a candidate.
-120 seconds is a complete process budget, with six seconds withheld from
-the solver and a three-second normal shutdown margin. A serial Python
+120 seconds is a complete process budget. Full-instance commands set the
+nominal solve limit to 114 seconds and the absolute process deadline to 120
+with a three-second shutdown margin; the existing global-deadline controller
+governs actual work (typically about 117 seconds). Fixed-state diagnostics
+reserve two seconds for evidence finalization (typically about 118 seconds).
+Matched arms within each comparison use the identical contract. A serial Python
 watchdog kills a process at the cap. All attempted performance processes,
 including failed CLI launches, are charged to the 80-process ledger.
 Maximums: 12 distinct performance scenarios; twelve 1800-second processes;

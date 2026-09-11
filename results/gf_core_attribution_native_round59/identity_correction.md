@@ -36,3 +36,27 @@ Earlier D2/D3 full screening overlapped some diagnostic compilation (never
 another optimizer). Wall-time attribution there is descriptive; no clean
 causal timing claim is made. Deterministic Work, domain/model records and
 the unconfounded corrected D4/remaining runs are reported separately.
+
+## Final compact-origin audit (supersedes the optional remaining plan above)
+
+At process 68, the supposedly compact arm was found to retain connectivity
+flow, cutoff-derived domains and the F0 exhaustive-block removal even when
+strengthened=false. Its results remain useful **pack-removal ablations** but
+must not be called original compact. Raw arm labels are preserved; derived
+tables explicitly rename the arm. No internal cut/search pairing is affected.
+
+`--round59-original-compact-sha256` resets model options to plain defaults,
+preserves the original exhaustive-block policy, first builds the unrestricted
+origin, and fails unless its SHA256 matches the official P-GRB export. It
+then applies the frozen interval and cutoff. `literal_original_identity.json`
+records successful build-only origin and current-F0 audits for D3/D4.
+Restricted-origin row comparison shows added gamma/cutoff rows and associated
+G/product upper bounds; it does not inherit connectivity flow or tailored
+domain propagation. Both arms of the new formulation pair use one new binary.
+
+Final remaining budget: four literal-original/F0 solves on D3/D4 and eight
+confirmation runs, for 80 charged processes total including three micro
+correctness runs and the failed initial CLI attempt. D7 pack-removal solve,
+optional D2 narrow-HGA pair and all long extensions are omitted. D6 and D7
+same-U F0 diagnostics after HGA exhaustion are both retained. This is an
+identity correction, not a revision of either internal candidate rule.
