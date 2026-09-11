@@ -74,7 +74,19 @@ def full_rows():
         for filename,target in [('paper_optimize_ledger.csv',lifecycle),('global_bound_trace.csv',bound_trace)]:
             path=dest/'external'/filename
             if path.exists():
-                target.extend(dict(id=row['id'],arm=row['arm'],cap=row['cap'],**x) for x in csv.DictReader(path.open()))
+                records=list(csv.DictReader(path.open()))
+                if filename=='global_bound_trace.csv' and records:
+                    # Keep original event values, not an invented continuous
+                    # trajectory. Full traces remain in local raw artifacts.
+                    indices={0,len(records)-1};seen=set()
+                    for i,event in enumerate(records):
+                        kind=event['event_type']
+                        if kind not in seen:indices.add(i);seen.add(kind)
+                    for checkpoint in [1,5,10,30,60,90,117]:
+                        eligible=[i for i,x in enumerate(records) if float(x['process_elapsed_seconds'])<=checkpoint]
+                        if eligible:indices.add(eligible[-1])
+                    records=[dict(records[i],sampling_scope='selected_events_not_complete_gap_integral') for i in sorted(indices)]
+                target.extend(dict(id=row['id'],arm=row['arm'],cap=row['cap'],**x) for x in records)
     csvwrite(OUT/'full_native_call_ledger.csv',lifecycle)
     csvwrite(OUT/'full_global_bound_events.csv',bound_trace)
     return rows

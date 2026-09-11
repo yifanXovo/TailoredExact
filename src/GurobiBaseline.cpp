@@ -483,8 +483,14 @@ int __stdcall progressAndBoundTargetCallback(
     state->api->cbget(cbdata, where, GRB_CB_MIP_NODCNT,
                       &event.processed_nodes);
     state->api->cbget(cbdata, where, GRB_CB_MIP_NODLFT, &event.open_nodes);
-    state->api->cbget(cbdata, where, GRB_CB_MIP_SOLCNT,
-                      &event.solution_count);
+    // Gurobi's C callback contract returns an int here (not a double).
+    // This field is telemetry only; incumbent/bound decisions use the
+    // independently read objective values below.
+    int callback_solution_count = 0;
+    if (state->api->cbget(cbdata, where, GRB_CB_MIP_SOLCNT,
+                         &callback_solution_count) == 0) {
+        event.solution_count = callback_solution_count;
+    }
     state->api->cbget(cbdata, where, GRB_CB_MIP_PHASE, &event.phase);
     event.incumbent_available = finiteNative(event.incumbent);
     event.best_bound_available = finiteNative(event.best_bound);

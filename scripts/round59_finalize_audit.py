@@ -37,6 +37,13 @@ def main():
     for path in sorted(RAW.rglob('*')):
         if path.is_file():
             files.append(dict(path=str(path.relative_to(ROOT)),bytes=path.stat().st_size,sha256=sha(path)))
+    # Plain P-GRB keeps its native progress CSV in its own work directory.
+    # Record that existing file rather than duplicating a large raw trace.
+    for row in full:
+        if row['arm']!='P-GRB':continue
+        result=json.loads((ROOT/row['artifact_dir']/'result.json').read_text())
+        path=ROOT/result['gurobi_progress_path'];assert path.exists()
+        files.append(dict(path=str(path.relative_to(ROOT)),bytes=path.stat().st_size,sha256=sha(path)))
     csvwrite(OUT/'local_artifact_manifest.csv',files)
     write(OUT/'final_evidence_audit.json',dict(passed=True,full_instance_runs=40,
         independent_route_audits=40,original_formulation_pairs=2,internal_mechanism_and_monitor_pairs=8,
