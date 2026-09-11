@@ -4,6 +4,9 @@
 #include <stdexcept>
 
 int main() {
+    const ebrp::SolveOptions stable_defaults;
+    if (stable_defaults.round59_simple_start || stable_defaults.round59_single_mip)
+        throw std::runtime_error("attribution must default off");
     const ebrp::FixedIntervalMipRequest defaults;
     if (defaults.round59_additional_rows_user_pool || defaults.round59_mip_focus != -1 ||
         !defaults.round59_node_samples_path.empty()) throw std::runtime_error("research must default off");

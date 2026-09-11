@@ -50,15 +50,33 @@ def full_rows():
             startup_seconds=r.get('incumbent_generation_time_seconds'),
             initial_U=initrow.get('U_proof_launch'),anchor_U=initrow.get('U_anchor_launch'),
             initial_gamma_upper=initrow.get('active_upper'),
-            splits=r.get('external_gini_tree_split_count'),lp_calls=len(lp),mip_calls=len(mip),
-            iterations=sum(float(x['simplex_iterations']) for x in calls),
-            nodes=sum(float(x['nodes']) for x in calls),
+            splits=r.get('external_gini_tree_split_count'),lp_calls=len(lp),
+            mip_calls=(1 if r.get('gurobi_runtime',0)>0 else 0) if ident['arm']=='P-GRB' else len(mip),
+            native_mip_start_attempted=r.get('global_gini_tree_native_mip_start_attempted'),
+            native_mip_start_submitted=r.get('global_gini_tree_native_mip_start_submitted'),
+            native_hints='not_requested_no_adapter_path',
+            canonical_model_build_seconds=r.get('external_gini_tree_model_build_seconds'),
+            lp_work=sum(float(x['work']) for x in lp),
+            mip_work=r.get('gurobi_work') if ident['arm']=='P-GRB' else sum(float(x['work']) for x in mip),
+            lp_native_seconds=sum(float(x['solver_runtime']) for x in lp),
+            mip_native_seconds=r.get('gurobi_runtime') if ident['arm']=='P-GRB' else sum(float(x['solver_runtime']) for x in mip),
+            iterations=r.get('gurobi_iter_count') if ident['arm']=='P-GRB' else sum(float(x['simplex_iterations']) for x in calls),
+            nodes=r.get('gurobi_node_count') if ident['arm']=='P-GRB' else sum(float(x['nodes']) for x in calls),
             work=sum(float(x['work']) for x in calls) if calls else r.get('gurobi_work'),
             max_route_travel=max(v.get('route_travel_time',[0]),default=0),
             executable_sha256=ident['executable_sha256'],result_sha256=sha(dest/'result.json'),
             artifact_dir=str(dest.relative_to(ROOT)),failure=r.get('external_gini_tree_failure_reason'))
         rows.append(row)
     csvwrite(OUT/'full_instance_results.csv',rows)
+    lifecycle=[];bound_trace=[]
+    for row in rows:
+        dest=ROOT/row['artifact_dir']
+        for filename,target in [('paper_optimize_ledger.csv',lifecycle),('global_bound_trace.csv',bound_trace)]:
+            path=dest/'external'/filename
+            if path.exists():
+                target.extend(dict(id=row['id'],arm=row['arm'],cap=row['cap'],**x) for x in csv.DictReader(path.open()))
+    csvwrite(OUT/'full_native_call_ledger.csv',lifecycle)
+    csvwrite(OUT/'full_global_bound_events.csv',bound_trace)
     return rows
 
 def diagnostics():
@@ -71,6 +89,9 @@ def diagnostics():
         row=dict(id=ident['id'],arm=ident['arm'],stage=ident['stage'],scope='restricted_state_only',cap=ident['cap'],**r)
         row['artifact_dir']=str(dest.relative_to(ROOT));row['result_sha256']=sha(rp)
         row['model_identity_scope']='current_K1_F0' if ident['stage'].startswith('diagnostic_current_') else 'legacy_harness_excluded_from_current_attribution'
+        row['display_arm']='F0-minus-pack_connectivity_retained' if ident['arm']=='Compact' else ident['arm']
+        if ident['arm']=='Compact': row['model_identity_scope']='pack_removal_ablation_not_original_compact'
+        if ident['arm']=='OriginalCompact': row['model_identity_scope']='official_compact_origin_SHA_bound_plus_interval_cutoff'
         rows.append({k:v for k,v in row.items() if not isinstance(v,(dict,list))})
     csvwrite(OUT/'fixed_state_results.csv',rows)
     return rows

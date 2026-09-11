@@ -8,9 +8,13 @@ from verify_round59_routes import data
 from analyze_round59 import csvwrite
 
 def metrics(values,d):
+    assert 'G' in values and all('Y_'+str(i) in values and 'zprod_'+str(i) in values for i in range(1,d['V']+1))
     def family(prefix): return [v for k,v in values.items() if k.startswith(prefix)]
     def frac(xs): return sum(abs(v-round(v))>1e-7 for v in xs)
     G=values.get('G',0)
+    ratios=[values['Y_'+str(i)]/d['target'][i] for i in range(1,d['V']+1)]
+    S=sum(ratios)
+    inventory_gini=sum(abs(a-b) for i,a in enumerate(ratios) for b in ratios[i+1:])/(d['V']*S) if S>0 else 0
     gy=[abs(values.get('zprod_'+str(i),0)-G*values.get('Y_'+str(i),0)) for i in range(1,d['V']+1)]
     excess=[]
     for i in range(1,d['V']+1):
@@ -34,7 +38,8 @@ def metrics(values,d):
                 raw=120*p+t*(z-1)-d['T'];maxv=max(maxv,raw)
                 rawviolated+=raw>1e-7
                 violated+=raw/max(1,d['T']+t,abs(120*p)+abs(t*z))>1e-7
-    return dict(G=G,fractional_inventory=frac(family('Y_')),fractional_arcs=frac(family('x_')),
+    return dict(G=G,continuous_inventory_gini=inventory_gini,Gini_representation_deficit=inventory_gini-G,
+        fractional_inventory=frac(family('Y_')),fractional_arcs=frac(family('x_')),
         fractional_visits=frac(family('z_')),fractional_pickup=frac(family('p_')),
         fractional_drop=frac(family('d_')),fractional_modes=frac(family('mode_')),
         max_GY_deviation=max(gy),sum_GY_deviation=sum(gy),
