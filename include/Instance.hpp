@@ -465,6 +465,14 @@ struct SolveOptions {
     // Round 59 attribution only; stable presets leave both disabled.
     bool round59_simple_start = false;
     bool round59_single_mip = false;
+    // Round 60 research controls. Every default preserves Round 59 and the
+    // stable paper preset byte-for-byte.
+    bool round60_hga_publish_verified = false;
+    std::string round60_hga_candidate_log;
+    std::string round60_candidate_mode = "off"; // off|dry|inject
+    int round60_candidate_maximum_evaluations = 512;
+    int round60_candidate_maximum_stations = 16;
+    std::string round60_candidate_log_dir;
     std::string round34_c6_startup_variant = "hga-full";
     // Round 36 causal-study controls.  "off" preserves the validated C6
     // path.  Experimental arms are uniform run-level choices and are never

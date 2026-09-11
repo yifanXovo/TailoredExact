@@ -530,6 +530,20 @@ struct SolveResult {
     long long external_gini_tree_terminal_mip_leaf_count = 0;
     long long external_gini_tree_terminal_mip_optimize_count = 0;
     long long external_gini_tree_global_deadline_interruption_count = 0;
+    // Round 60 default-off verified candidate construction/injection.
+    std::string round60_candidate_mode = "off";
+    bool round60_candidate_callback_active = false;
+    bool round60_candidate_disabled_after_failure = false;
+    long long round60_candidate_triggers = 0;
+    long long round60_candidates_generated = 0;
+    long long round60_candidates_verified = 0;
+    long long round60_candidates_mapped = 0;
+    long long round60_candidates_submitted = 0;
+    long long round60_candidates_confirmed_accepted = 0;
+    long long round60_candidates_acceptance_unknown = 0;
+    bool round60_best_generated_objective_available = false;
+    double round60_best_generated_objective = 0.0;
+    double round60_candidate_overhead_seconds = 0.0;
     // Round 31 C6 nonblocking mathematical-state evidence.
     long long external_gini_tree_parent_lp_requeue_count = 0;
     long long external_gini_tree_next_leaf_target_phase_count = 0;
@@ -1130,6 +1144,13 @@ struct SolveResult {
     double hga_verified_objective = 0.0;
     double hga_wall_time_seconds = 0.0;
     std::string hga_generation_log_path;
+    bool hga_retained_verified_event_candidate = false;
+    bool hga_candidate_observer_failed = false;
+    long long hga_candidate_observations = 0;
+    long long hga_verified_candidate_count = 0;
+    long long hga_published_candidate_count = 0;
+    double hga_candidate_verification_seconds = 0.0;
+    std::string hga_retained_candidate_sha256;
     bool incumbent_import_attempted = false;
     bool incumbent_import_verified = false;
     double incumbent_import_objective = 0.0;

@@ -3015,6 +3015,65 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                               : second + "|" + first;
     };
 
+    result.round60_candidate_mode = options.round60_candidate_mode;
+    bool round60_candidate_path_disabled = false;
+
+    auto configureRound60CandidateRequest = [&] (
+        FixedIntervalMipRequest& request) {
+        request.round60_candidate_mode = round60_candidate_path_disabled
+            ? "off" : options.round60_candidate_mode;
+        request.round60_candidate_maximum_evaluations =
+            options.round60_candidate_maximum_evaluations;
+        request.round60_candidate_maximum_stations =
+            options.round60_candidate_maximum_stations;
+        if (request.round60_candidate_mode != "off") {
+            const std::filesystem::path candidate_dir =
+                options.round60_candidate_log_dir.empty()
+                    ? artifact_dir / "round60_candidates"
+                    : std::filesystem::path(
+                          options.round60_candidate_log_dir);
+            const std::string event_stem = request.native_log_path.empty()
+                ? request.leaf_id : request.native_log_path.stem().string();
+            request.round60_candidate_log_path = candidate_dir /
+                (event_stem + "_candidate_events.csv");
+        }
+    };
+    auto mergeRound60CandidateOutcome = [&] (
+        const FixedIntervalMipOutcome& outcome) {
+        result.round60_candidate_callback_active =
+            result.round60_candidate_callback_active ||
+            outcome.round60_candidate_callback_active;
+        result.round60_candidate_disabled_after_failure =
+            result.round60_candidate_disabled_after_failure ||
+            outcome.round60_candidate_disabled_after_failure;
+        round60_candidate_path_disabled = round60_candidate_path_disabled ||
+            outcome.round60_candidate_disabled_after_failure;
+        result.round60_candidate_triggers +=
+            outcome.round60_candidate_triggers;
+        result.round60_candidates_generated +=
+            outcome.round60_candidates_generated;
+        result.round60_candidates_verified +=
+            outcome.round60_candidates_verified;
+        result.round60_candidates_mapped +=
+            outcome.round60_candidates_mapped;
+        result.round60_candidates_submitted +=
+            outcome.round60_candidates_submitted;
+        result.round60_candidates_confirmed_accepted +=
+            outcome.round60_candidates_confirmed_accepted;
+        result.round60_candidates_acceptance_unknown +=
+            outcome.round60_candidates_acceptance_unknown;
+        result.round60_candidate_overhead_seconds +=
+            outcome.round60_candidate_overhead_seconds;
+        if (outcome.round60_best_generated_objective_available &&
+            (!result.round60_best_generated_objective_available ||
+             outcome.round60_best_generated_objective <
+                 result.round60_best_generated_objective)) {
+            result.round60_best_generated_objective_available = true;
+            result.round60_best_generated_objective =
+                outcome.round60_best_generated_objective;
+        }
+    };
+
     auto isSchedulableRelevant = [&scheduler](const ControllingLeaf& leaf) {
         return leaf.status != ControllingLeafStatus::Replaced &&
             leaf.status != ControllingLeafStatus::Coalesced &&
@@ -3594,11 +3653,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         request.native_bound_target_tolerance =
             scheduler.certificateTolerance();
         request.capture_native_bound_events = true;
+        configureRound60CandidateRequest(request);
         const double process_launch = processElapsedSeconds(options);
         const double exact_launch = elapsedTelemetry();
         const double other_bound =
             otherRelevantMinimum(bounded.id);
         const FixedIntervalMipOutcome outcome = backend->solve(request);
+        mergeRound60CandidateOutcome(outcome);
         if (round44_active) {
             round44_start_ledger << bounded.id << ','
                 << csvField(adaptive_mip_starts) << ','
@@ -6872,6 +6933,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 request.native_bound_target_tolerance =
                     scheduler.certificateTolerance();
                 request.capture_native_bound_events = true;
+                configureRound60CandidateRequest(request);
                 const double process_launch =
                     processElapsedSeconds(options);
                 const double exact_launch = elapsedTelemetry();
@@ -6879,6 +6941,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     otherRelevantMinimum(bounded.id);
                 const FixedIntervalMipOutcome outcome =
                     backend->solve(request);
+                mergeRound60CandidateOutcome(outcome);
                 optimize << bounded.id << ",PARTIAL_MIP_TARGET,"
                          << csvField(outcome.native_status) << ','
                          << outcome.optimize_return_code << ',' << remaining
@@ -7294,8 +7357,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 block_request.native_bound_target_tolerance =
                     scheduler.certificateTolerance();
                 block_request.capture_native_bound_events = true;
+                configureRound60CandidateRequest(block_request);
                 const FixedIntervalMipOutcome block_outcome =
                     backend->solve(block_request);
+                mergeRound60CandidateOutcome(block_outcome);
                 optimize << block_id << ",MIP_CONSOLIDATION_TARGET,"
                     << csvField(block_outcome.native_status) << ','
                     << block_outcome.optimize_return_code << ',' << remaining
@@ -7615,6 +7680,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                         block_request.incremental_model_reuse_enabled = false;
                         block_request.retain_model_after_solve = false;
                         block_request.capture_native_bound_events = true;
+                        configureRound60CandidateRequest(block_request);
                         const double block_process_launch =
                             processElapsedSeconds(options);
                         const double block_exact_launch = elapsedTelemetry();
@@ -7626,6 +7692,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                         ++result.round42_sibling_block_optimize_count;
                         const FixedIntervalMipOutcome block_outcome =
                             backend->solve(block_request);
+                        mergeRound60CandidateOutcome(block_outcome);
                         optimize << block_id << ",MIP_BLOCK,"
                             << csvField(block_outcome.native_status) << ','
                             << block_outcome.optimize_return_code << ','
@@ -7916,12 +7983,14 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         request.incremental_model_reuse_enabled = incremental_model_reuse;
         request.retain_model_after_solve = false;
         request.capture_native_bound_events = true;
+        configureRound60CandidateRequest(request);
         const double terminal_process_launch =
             processElapsedSeconds(options);
         const double terminal_exact_launch = elapsedTelemetry();
         const double terminal_other_bound =
             otherRelevantMinimum(bounded.id);
         const FixedIntervalMipOutcome outcome = backend->solve(request);
+        mergeRound60CandidateOutcome(outcome);
         if (round44_active) {
             round44_start_ledger << bounded.id << ','
                 << csvField(adaptive_mip_starts) << ','

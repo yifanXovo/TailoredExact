@@ -246,15 +246,18 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
     if (opt.algorithm_preset == "custom") return;
 
     if (opt.algorithm_preset == "research-round59-k1-s" ||
-        opt.algorithm_preset == "research-round59-f0-single-s") {
+        opt.algorithm_preset == "research-round59-f0-single-s" ||
+        opt.algorithm_preset == "research-round60-f0-single-h") {
         const std::string requested = opt.algorithm_preset;
         opt.algorithm_preset = "paper-k1-am-sf";
         applyAlgorithmPreset(opt);
         opt.algorithm_preset = requested;
-        opt.round59_simple_start = true;
-        opt.round59_single_mip = requested == "research-round59-f0-single-s";
-        opt.primal_heuristic = "greedy";
-        opt.round34_c6_startup_variant = "simple-start";
+        opt.round59_simple_start = requested != "research-round60-f0-single-h";
+        opt.round59_single_mip = requested != "research-round59-k1-s";
+        if (opt.round59_simple_start) {
+            opt.primal_heuristic = "greedy";
+            opt.round34_c6_startup_variant = "simple-start";
+        }
         return;
     }
     if (opt.algorithm_preset == "research-k1-am-sf-vdp" ||
@@ -1289,6 +1292,12 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--primal-heuristic-stop") opt.primal_heuristic_stop = requireValue(i, argc, argv);
         else if (arg == "--primal-heuristic-no-improve-generations") opt.primal_heuristic_no_improve_generations = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-generation-log") opt.primal_heuristic_generation_log = requireValue(i, argc, argv);
+        else if (arg == "--round60-hga-publish-verified") opt.round60_hga_publish_verified = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--round60-hga-candidate-log") opt.round60_hga_candidate_log = requireValue(i, argc, argv);
+        else if (arg == "--round60-candidate-mode") opt.round60_candidate_mode = lowerAscii(requireValue(i, argc, argv));
+        else if (arg == "--round60-candidate-max-evaluations") opt.round60_candidate_maximum_evaluations = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round60-candidate-max-stations") opt.round60_candidate_maximum_stations = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round60-candidate-log-dir") opt.round60_candidate_log_dir = requireValue(i, argc, argv);
         else if (arg == "--round34-c6-startup-variant") opt.round34_c6_startup_variant = requireValue(i, argc, argv);
         else if (arg == "--round36-c6-causal-arm") opt.round36_c6_causal_arm = requireValue(i, argc, argv);
         else if (arg == "--round36-c6-split-normalization") opt.round36_c6_split_normalization = requireValue(i, argc, argv);
@@ -3132,6 +3141,19 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             opt.paper_run_sealed_rejection_reason = joined.str();
         }
     }
+    if (opt.round60_candidate_mode != "off" &&
+        opt.round60_candidate_mode != "dry" &&
+        opt.round60_candidate_mode != "inject") {
+        throw std::runtime_error(
+            "--round60-candidate-mode must be off, dry, or inject");
+    }
+    if (opt.round60_candidate_maximum_evaluations <= 0 ||
+        opt.round60_candidate_maximum_evaluations > 10000 ||
+        opt.round60_candidate_maximum_stations <= 0 ||
+        opt.round60_candidate_maximum_stations > 100) {
+        throw std::runtime_error(
+            "Round 60 candidate work bounds are outside audited limits");
+    }
     return opt;
 }
 
@@ -3612,6 +3634,24 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
     } else {
         snapshot.preset_certificate_scope = "custom";
         snapshot.preset_reason = "custom command-line configuration";
+    }
+    auto append_explicit_research_feature = [&](const std::string& feature) {
+        if (snapshot.preset_experimental_features_enabled.empty() ||
+            snapshot.preset_experimental_features_enabled == "none" ||
+            snapshot.preset_experimental_features_enabled ==
+                "none_frozen_mainline_only") {
+            snapshot.preset_experimental_features_enabled = feature;
+        } else {
+            snapshot.preset_experimental_features_enabled += "," + feature;
+        }
+    };
+    if (opt.round60_hga_publish_verified) {
+        append_explicit_research_feature(
+            "round60_hga_verified_event_publication");
+    }
+    if (opt.round60_candidate_mode != "off") {
+        append_explicit_research_feature(
+            "round60_native_candidate_" + opt.round60_candidate_mode);
     }
     return snapshot;
 }
@@ -4608,7 +4648,8 @@ std::string jsonEscapeLocal(const std::string& value) {
 }
 
 bool isPaperTracePreset(const std::string& preset) {
-    return preset == "research-round59-k1-s" ||
+    return preset == "research-round60-f0-single-h" ||
+           preset == "research-round59-k1-s" ||
            preset == "research-round59-f0-single-s" ||
            preset == "paper-k1-am-sf" ||
            preset == "research-k1-am-sf-vdp" ||
@@ -7104,6 +7145,13 @@ struct PaperPrimalHeuristicResult {
     double hga_verified_objective = 0.0;
     double hga_wall_time_seconds = 0.0;
     std::string hga_generation_log_path;
+    bool hga_retained_verified_event_candidate = false;
+    bool hga_candidate_observer_failed = false;
+    long long hga_candidate_observations = 0;
+    long long hga_verified_candidate_count = 0;
+    long long hga_published_candidate_count = 0;
+    double hga_candidate_verification_seconds = 0.0;
+    std::string hga_retained_candidate_sha256;
     std::vector<std::string> notes;
     struct CandidateRecord {
         std::string instance;
@@ -7715,6 +7763,12 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         hga_opt.generation_log_path = opt.primal_heuristic_generation_log;
         hga_opt.phase_label = opt.primal_heuristic_phase_label;
         hga_opt.process_options = &opt;
+        hga_opt.publish_verified_improvements =
+            opt.round60_hga_publish_verified;
+        hga_opt.verified_candidate_log_path =
+            opt.round60_hga_candidate_log;
+        hga_opt.candidate_model_identity =
+            opt.algorithm_preset + "|original_problem";
         if (!generation_stagnation) {
             hga_opt.max_time_seconds = std::max(
                 1, static_cast<int>(std::ceil(opt.primal_heuristic_seconds)));
@@ -7733,6 +7787,16 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         out.hga_verified_objective = native.verified_objective;
         out.hga_wall_time_seconds = native.wall_time_seconds;
         out.hga_generation_log_path = native.generation_log_path.string();
+        out.hga_retained_verified_event_candidate =
+            native.retained_verified_event_candidate;
+        out.hga_candidate_observer_failed =
+            native.candidate_observer_failed;
+        out.hga_candidate_observations = native.candidate_observations;
+        out.hga_verified_candidate_count = native.verified_candidate_count;
+        out.hga_published_candidate_count = native.published_candidate_count;
+        out.hga_candidate_verification_seconds =
+            native.candidate_verification_seconds;
+        out.hga_retained_candidate_sha256 = native.retained_candidate_sha256;
         out.notes.insert(out.notes.end(), native.notes.begin(), native.notes.end());
         if (native.found) {
             consider(native.routes, "native_hga_tgbc_full_migration");
@@ -7988,6 +8052,19 @@ ebrp::SolveResult solvePrimalHeuristicDiagnostic(const ebrp::Instance& instance,
     result.hga_verified_objective = heuristic.hga_verified_objective;
     result.hga_wall_time_seconds = heuristic.hga_wall_time_seconds;
     result.hga_generation_log_path = heuristic.hga_generation_log_path;
+    result.hga_retained_verified_event_candidate =
+        heuristic.hga_retained_verified_event_candidate;
+    result.hga_candidate_observer_failed =
+        heuristic.hga_candidate_observer_failed;
+    result.hga_candidate_observations = heuristic.hga_candidate_observations;
+    result.hga_verified_candidate_count =
+        heuristic.hga_verified_candidate_count;
+    result.hga_published_candidate_count =
+        heuristic.hga_published_candidate_count;
+    result.hga_candidate_verification_seconds =
+        heuristic.hga_candidate_verification_seconds;
+    result.hga_retained_candidate_sha256 =
+        heuristic.hga_retained_candidate_sha256;
     result.incumbent_generation_time_seconds = heuristic.runtime_seconds;
     result.incumbent_generation_method = "paper_primal_" + opt.primal_heuristic;
     result.incumbent_candidates_tested = heuristic.candidates_tested;
@@ -11760,6 +11837,19 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.hga_verified_objective = heuristic.hga_verified_objective;
         result.hga_wall_time_seconds = heuristic.hga_wall_time_seconds;
         result.hga_generation_log_path = heuristic.hga_generation_log_path;
+        result.hga_retained_verified_event_candidate =
+            heuristic.hga_retained_verified_event_candidate;
+        result.hga_candidate_observer_failed =
+            heuristic.hga_candidate_observer_failed;
+        result.hga_candidate_observations = heuristic.hga_candidate_observations;
+        result.hga_verified_candidate_count =
+            heuristic.hga_verified_candidate_count;
+        result.hga_published_candidate_count =
+            heuristic.hga_published_candidate_count;
+        result.hga_candidate_verification_seconds =
+            heuristic.hga_candidate_verification_seconds;
+        result.hga_retained_candidate_sha256 =
+            heuristic.hga_retained_candidate_sha256;
         result.incumbent_generation_time_seconds += heuristic.runtime_seconds;
         result.incumbent_generation_method = "paper_primal_" + opt.primal_heuristic;
         result.incumbent_candidates_tested += heuristic.candidates_tested;

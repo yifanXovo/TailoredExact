@@ -1586,6 +1586,37 @@ std::string resultToJson(const SolveResult& input) {
     WRITE_EXT_COUNT(child_lookahead_reuse_count);
     WRITE_EXT_COUNT(forced_split_avoided_count);
     WRITE_EXT_COUNT(exact_closure_launch_count);
+    out << "  \"round60_candidate_mode\": \""
+        << jsonEscape(result.round60_candidate_mode) << "\",\n";
+    out << "  \"round60_candidate_callback_active\": "
+        << (result.round60_candidate_callback_active ? "true" : "false")
+        << ",\n";
+    out << "  \"round60_candidate_disabled_after_failure\": "
+        << (result.round60_candidate_disabled_after_failure
+                ? "true" : "false")
+        << ",\n";
+    out << "  \"round60_candidate_triggers\": "
+        << result.round60_candidate_triggers << ",\n";
+    out << "  \"round60_candidates_generated\": "
+        << result.round60_candidates_generated << ",\n";
+    out << "  \"round60_candidates_verified\": "
+        << result.round60_candidates_verified << ",\n";
+    out << "  \"round60_candidates_mapped\": "
+        << result.round60_candidates_mapped << ",\n";
+    out << "  \"round60_candidates_submitted\": "
+        << result.round60_candidates_submitted << ",\n";
+    out << "  \"round60_candidates_confirmed_accepted\": "
+        << result.round60_candidates_confirmed_accepted << ",\n";
+    out << "  \"round60_candidates_acceptance_unknown\": "
+        << result.round60_candidates_acceptance_unknown << ",\n";
+    out << "  \"round60_best_generated_objective_available\": "
+        << (result.round60_best_generated_objective_available
+                ? "true" : "false")
+        << ",\n";
+    out << "  \"round60_best_generated_objective\": "
+        << result.round60_best_generated_objective << ",\n";
+    out << "  \"round60_candidate_overhead_seconds\": "
+        << result.round60_candidate_overhead_seconds << ",\n";
     WRITE_EXT_COUNT(contract_initial_interval_count);
     WRITE_EXT_COUNT(scheduler_initial_leaf_count);
     WRITE_EXT_COUNT(unconditional_structural_split_count);
@@ -2581,6 +2612,22 @@ std::string resultToJson(const SolveResult& input) {
         << result.hga_wall_time_seconds << ",\n";
     out << "  \"hga_generation_log_path\": \""
         << jsonEscape(result.hga_generation_log_path) << "\",\n";
+    out << "  \"hga_retained_verified_event_candidate\": "
+        << (result.hga_retained_verified_event_candidate ? "true" : "false")
+        << ",\n";
+    out << "  \"hga_candidate_observer_failed\": "
+        << (result.hga_candidate_observer_failed ? "true" : "false")
+        << ",\n";
+    out << "  \"hga_candidate_observations\": "
+        << result.hga_candidate_observations << ",\n";
+    out << "  \"hga_verified_candidate_count\": "
+        << result.hga_verified_candidate_count << ",\n";
+    out << "  \"hga_published_candidate_count\": "
+        << result.hga_published_candidate_count << ",\n";
+    out << "  \"hga_candidate_verification_seconds\": "
+        << result.hga_candidate_verification_seconds << ",\n";
+    out << "  \"hga_retained_candidate_sha256\": \""
+        << jsonEscape(result.hga_retained_candidate_sha256) << "\",\n";
     out << "  \"incumbent_import_attempted\": "
         << (result.incumbent_import_attempted ? "true" : "false") << ",\n";
     out << "  \"incumbent_import_verified\": "

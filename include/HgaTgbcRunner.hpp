@@ -23,6 +23,9 @@ struct HgaTgbcOptions {
     std::filesystem::path generation_log_path;
     std::string phase_label = "primary_hga";
     const SolveOptions* process_options = nullptr;
+    bool publish_verified_improvements = false;
+    std::filesystem::path verified_candidate_log_path;
+    std::string candidate_model_identity = "original_problem";
 };
 
 struct HgaTgbcResult {
@@ -39,6 +42,13 @@ struct HgaTgbcResult {
     double verified_objective = 0.0;
     double wall_time_seconds = 0.0;
     bool global_deadline_reached = false;
+    bool retained_verified_event_candidate = false;
+    bool candidate_observer_failed = false;
+    long long candidate_observations = 0;
+    long long verified_candidate_count = 0;
+    long long published_candidate_count = 0;
+    double candidate_verification_seconds = 0.0;
+    std::string retained_candidate_sha256;
     std::filesystem::path generation_log_path;
 };
 

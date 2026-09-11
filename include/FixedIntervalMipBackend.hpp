@@ -31,6 +31,40 @@ struct FixedIntervalNativeBoundEvent {
     bool target_reached = false;
 };
 
+struct FixedIntervalCandidateEvent {
+    long long event_sequence = 0;
+    int callback_where = 0;
+    std::string trigger;
+    std::string source;
+    std::string content_sha256;
+    std::string mode = "off";
+    std::string status = "not_attempted";
+    bool generated = false;
+    bool independently_verified = false;
+    bool strictly_improves_frozen_cutoff = false;
+    bool mapping_complete = false;
+    bool bounds_valid = false;
+    bool integrality_valid = false;
+    bool linear_constraints_checked = false;
+    bool linear_constraints_valid = false;
+    long long linear_rows_checked = 0;
+    long long violated_linear_rows = 0;
+    double maximum_linear_violation = 0.0;
+    bool submitted = false;
+    int submission_return_code = -1;
+    bool native_objective_returned = false;
+    double native_objective = 0.0;
+    std::string acceptance = "not_submitted";
+    int objective_evaluations = 0;
+    double callback_elapsed_seconds = 0.0;
+    double generation_seconds = 0.0;
+    double verification_seconds = 0.0;
+    double mapping_seconds = 0.0;
+    double residual_check_seconds = 0.0;
+    double total_seconds = 0.0;
+    double candidate_objective = 0.0;
+};
+
 struct FixedIntervalMipCapabilities {
     std::string backend;
     bool available = false;
@@ -118,6 +152,13 @@ struct FixedIntervalMipRequest {
     bool round59_additional_rows_user_pool = false;
     int round59_mip_focus = -1;
     std::filesystem::path round59_node_samples_path;
+    // Round 60 default-off candidate construction and native injection.
+    std::string round60_candidate_mode = "off"; // off|dry|inject
+    int round60_candidate_maximum_evaluations = 512;
+    int round60_candidate_maximum_stations = 16;
+    std::filesystem::path round60_candidate_log_path;
+    // Fixed-inventory diagnostic only. Empty means unrestricted.
+    std::vector<int> round60_fixed_inventory;
 };
 
 struct FixedIntervalBranchPriorityEvidence {
@@ -331,6 +372,21 @@ struct FixedIntervalMipOutcome {
     double root_simplex_iterations = 0.0;
     double first_incumbent_work = -1.0;
     double first_incumbent_runtime_seconds = -1.0;
+    bool gurobi_cbsolution_symbol_loaded = false;
+    std::string round60_candidate_mode = "off";
+    bool round60_candidate_callback_active = false;
+    bool round60_candidate_disabled_after_failure = false;
+    long long round60_candidate_triggers = 0;
+    long long round60_candidates_generated = 0;
+    long long round60_candidates_verified = 0;
+    long long round60_candidates_mapped = 0;
+    long long round60_candidates_submitted = 0;
+    long long round60_candidates_confirmed_accepted = 0;
+    long long round60_candidates_acceptance_unknown = 0;
+    double round60_best_generated_objective = 0.0;
+    bool round60_best_generated_objective_available = false;
+    double round60_candidate_overhead_seconds = 0.0;
+    std::vector<FixedIntervalCandidateEvent> round60_candidate_events;
 };
 
 struct FixedIntervalMipBackendStats {

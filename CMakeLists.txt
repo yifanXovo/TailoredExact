@@ -30,6 +30,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/GurobiCertificate.cpp
   src/GurobiProgress.cpp
   src/MipStartMapping.cpp
+  src/Round60Candidates.cpp
   src/ExternalGiniTree.cpp
   src/PaperExternalGiniTree.cpp
   src/Round48K1AMF.cpp
@@ -104,6 +105,9 @@ add_executable(ExactEBRP src/main.cpp)
 add_executable(Round59ResearchTests tests/round59_research_tests.cpp)
 target_link_libraries(Round59ResearchTests PRIVATE exact_ebrp_core)
 add_test(NAME Round59ResearchTests COMMAND Round59ResearchTests)
+add_executable(Round60CandidateTests tests/round60_candidate_tests.cpp)
+target_link_libraries(Round60CandidateTests PRIVATE exact_ebrp_core)
+add_test(NAME Round60CandidateTests COMMAND Round60CandidateTests)
 target_link_libraries(ExactEBRP PRIVATE exact_ebrp_core)
 
 add_executable(ExactEBRPCompare src/compare_main.cpp)
