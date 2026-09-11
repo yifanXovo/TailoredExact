@@ -19,7 +19,7 @@ def full_rows():
     for launch in sorted(RAW.glob('screen*/*/*/launch.json')):
         ident=json.loads(launch.read_text()); dest=launch.parent
         if (dest.parent/'invalidated.json').exists(): continue
-        if not (dest/'result.json').exists(): continue
+        if not (dest/'result.json').exists() or not (dest/'completion.json').exists(): continue
         r=json.loads((dest/'result.json').read_text())
         if ident['arm']=='P-GRB':
             assert r['gurobi_model_fingerprint']==expected[panel[ident['id']]['scenario_id']], str(dest)
@@ -84,7 +84,7 @@ def diagnostics():
     for launch in sorted(RAW.glob('diagnostic_*/*/*/launch.json')):
         ident=json.loads(launch.read_text());dest=launch.parent
         rp=dest/('lp_result.json' if ident['stage'].endswith(('_roots','_hga_lp')) else 'result.json')
-        if not rp.exists(): continue
+        if not rp.exists() or not (dest/'completion.json').exists(): continue
         r=json.loads(rp.read_text())
         row=dict(id=ident['id'],arm=ident['arm'],stage=ident['stage'],scope='restricted_state_only',cap=ident['cap'],**r)
         row['artifact_dir']=str(dest.relative_to(ROOT));row['result_sha256']=sha(rp)
