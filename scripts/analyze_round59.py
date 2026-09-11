@@ -13,10 +13,16 @@ def csvwrite(path, rows):
 
 def full_rows():
     rows=[]
+    panel={r['id']:r for r in json.loads((OUT/'panel.json').read_text())['panel']}
+    expected={r['instance_id']:r['expected_gurobi_model_fingerprint'] for r in json.loads((ROOT/'results/gf_citibike443_k1_vs_pgrb_round58/pgrb_expected_fingerprints.json').read_text())['entries']}
+    expected.update({k:r['gurobi_model_fingerprint'] for k,r in json.loads((ROOT/'results/gf_small_hard_light_round39/gurobi_fingerprints.json').read_text())['instances'].items()})
     for launch in sorted(RAW.glob('screen*/*/*/launch.json')):
         ident=json.loads(launch.read_text()); dest=launch.parent
+        if (dest.parent/'invalidated.json').exists(): continue
         if not (dest/'result.json').exists(): continue
         r=json.loads((dest/'result.json').read_text())
+        if ident['arm']=='P-GRB':
+            assert r['gurobi_model_fingerprint']==expected[panel[ident['id']]['scenario_id']], str(dest)
         c=json.loads((dest/'completion.json').read_text()) if (dest/'completion.json').exists() else {}
         v=r.get('verification',{})
         valid=bool(v.get('original_solution_feasible') and v.get('original_objective_recomputed') and not v.get('errors'))
@@ -72,9 +78,9 @@ def analyze():
     full=full_rows();fixed=diagnostics()
     pairs=[]
     for left,right in [('P-GRB','K1-H'),('K1-H','K1-S'),('K1-S','F0-Single-S')]:
-        for id in sorted({r['id'] for r in full}):
-            a=next((r for r in full if r['id']==id and r['arm']==left),None)
-            b=next((r for r in full if r['id']==id and r['arm']==right),None)
+        for id,cap in sorted({(r['id'],r['cap']) for r in full}):
+            a=next((r for r in full if r['id']==id and r['cap']==cap and r['arm']==left),None)
+            b=next((r for r in full if r['id']==id and r['cap']==cap and r['arm']==right),None)
             if not a or not b: continue
             pairs.append(dict(id=id,left=left,right=right,left_certificate=a['certificate'],right_certificate=b['certificate'],
                 left_LB=a['LB'],right_LB=b['LB'],left_UB=a['UB'],right_UB=b['UB'],

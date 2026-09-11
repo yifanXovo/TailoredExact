@@ -46,7 +46,7 @@ def freeze():
     for i,(key,role) in enumerate(selected):
         if key in ('major','strong'):
             h = historical[0 if key=='major' else 1]
-            r = dict(instance_path=h['input_path'], T_seconds=2850, pickup_seconds=60, drop_seconds=60, V=12, M=3, Q=30, inventory_regime='historical_unmodified')
+            r = dict(instance_path=h['input_path'], T_seconds=2850 if key=='major' else 2400, pickup_seconds=60, drop_seconds=60, V=12, M=3, Q=30, inventory_regime='historical_unmodified')
             key = h['instance_id']
         else:
             r = dict(rows[key])
@@ -82,22 +82,23 @@ def execute(command, dest, identity):
     if rc != 0:
         raise RuntimeError(f'failed run: {dest}')
 
-def run(stage, only):
+def run(stage, only, cap=120, selected_arms=None):
     panel=json.loads((OUT/'panel.json').read_text())['panel']
     fps={r['instance_id']:r['expected_gurobi_model_fingerprint'] for r in json.loads((ROOT/'results/gf_citibike443_k1_vs_pgrb_round58/pgrb_expected_fingerprints.json').read_text())['entries']}
+    fps.update({k:r['gurobi_model_fingerprint'] for k,r in json.loads((ROOT/'results/gf_small_hard_light_round39/gurobi_fingerprints.json').read_text())['instances'].items()})
     arms={'P-GRB':None,'K1-H':'paper-k1-am-sf','K1-S':'research-round59-k1-s','F0-Single-S':'research-round59-f0-single-s'}
     for r in panel:
         if r['stage']!=stage or (only and r['id']!=only): continue
         assert sha(ROOT/r['instance_path'])==r['input_sha256']
         for arm,preset in arms.items():
-            dest=RAW/'screen120'/r['id']/arm
+            if selected_arms and arm not in selected_arms: continue
+            dest=RAW/('screen'+str(cap))/r.get('artifact_id',r['id'])/arm
             if (dest/'completion.json').exists():
                 if json.loads((dest/'completion.json').read_text())['returncode']==0: continue
                 dest=dest.parent/(arm+'-retry1')
                 if (dest/'completion.json').exists():
                     if json.loads((dest/'completion.json').read_text())['returncode']==0: continue
                     raise RuntimeError('retry failed; inspect before continuing')
-            cap=120
             cmd=[str(EXE),'--input',r['instance_path'],'--lambda','0.15','--T',str(r['T_seconds']),
                  '--time-limit',str(cap-6),'--process-wall-time-limit',str(cap),'--process-shutdown-margin','3',
                  '--threads','1','--mip-threads','1','--gurobi-seed','0','--gurobi-presolve','-1',
@@ -125,6 +126,7 @@ def diagnostics(phase):
         'Static':('interval-mip-core-no-exhaustive-subset-duration',['--round59-cuts','static']),
         'Pool':('interval-mip-core-no-exhaustive-subset-duration',['--round59-cuts','pool']),
         'Focus1':('interval-mip-core-no-exhaustive-subset-duration',['--round59-primal-focus']),
+        'Focus3':('interval-mip-core-no-exhaustive-subset-duration',['--round59-bound-focus']),
         'PreCrush':('round53-c1-precrush-only',[]),
         'StatusPreCrush':('round53-c3-status-precrush',[]),
         'DryRun':('round53-c4-separator-dry-run',[]),
@@ -132,13 +134,15 @@ def diagnostics(phase):
     }
     plans={'roots':(['D2','D3','D4'],['F0','Compact'],'lp'),
            'cuts':(['D3','D4'],['F0','Monitor','Static','Pool'],'solve'),
-           'callback':(['D3','D4'],['PreCrush','StatusPreCrush','DryRun','Dynamic'],'solve'),
+           'callback':(['D3'],['PreCrush','StatusPreCrush','DryRun','Dynamic'],'solve'),
            'focus':(['D3','D4'],['Focus1'],'solve'),
            'hga_lp':(['D4'],['F0','Compact'],'lp'),
-           'hga_state':(['D4'],['F0','Compact'],'solve')}
+           'hga_state':(['D4'],['F0','Compact'],'solve'),
+           'startup_state':(['D6','D7'],['F0','Compact'],'solve')}
     ids,arms,mode=plans[phase]
     for r in panel:
         if r['id'] not in ids: continue
+        if phase=='startup_state' and not (OUT/('frozen_startup_'+r['id']+'.json')).exists(): continue
         for arm in arms:
             dest=RAW/('diagnostic_'+phase)/r['id']/arm
             if (dest/'completion.json').exists():
@@ -149,21 +153,42 @@ def diagnostics(phase):
                  '--input',r['instance_path'],'--artifact-dir',str(dest),
                  '--policy',policy,'--T',str(r['T_seconds']),'--process-cap','120',
                  ]+extra
-            if phase in ['hga_lp','hga_state']:
-                frozen=json.loads((OUT/'frozen_hga_state.json').read_text())
+            if phase in ['hga_lp','hga_state','startup_state']:
+                frozen_path=OUT/('frozen_startup_'+r['id']+'.json') if phase=='startup_state' else OUT/'frozen_hga_state.json'
+                frozen=json.loads(frozen_path.read_text())
+                assert frozen.get('status')=='valid'
                 assert sha(ROOT/frozen['source_result'])==frozen['source_result_sha256']
                 cmd+=['--gamma-lower',str(frozen['gamma_lower']),'--gamma-upper',str(frozen['gamma_upper']),
                       '--cutoff',str(frozen['U'])]
             else:
                 cmd+=['--round59-empty-state']
             execute(cmd,dest,dict(id=r['id'],arm=arm,cap=120,stage='diagnostic_'+phase,
-                scope='restricted_state_diagnostic',incumbent_source='frozen_hga_state.json' if phase.startswith('hga_') else 'independently verified empty routes',incumbent_epoch=0))
+                scope='restricted_state_diagnostic',incumbent_source=str(frozen_path.relative_to(OUT)) if phase in ['hga_lp','hga_state','startup_state'] else 'independently verified empty routes',incumbent_epoch=0))
+
+def micro():
+    exe=ROOT/'build/round59-core/Round50IntervalMipExperiment.exe'
+    for arm in ['off','static','pool']:
+        dest=RAW/'micro'/arm
+        cmd=[str(exe),'--mode','solve','--state-id','tiny-positive',
+             '--input','tests/data/round59_tiny.txt','--artifact-dir',str(dest),
+             '--policy','interval-mip-core-no-exhaustive-subset-duration',
+             '--T','5','--pickup-time','1','--drop-time','1','--process-cap','15',
+             '--round59-empty-state','--round59-cuts',arm]
+        execute(cmd,dest,dict(id='micro',arm=arm,cap=15,stage='correctness',scope='tiny_exact_only'))
+        r=json.loads((dest/'result.json').read_text())
+        assert r['certificate'] and abs(r['verified_upper_bound']-5/24)<1e-7
+    # T=5: a pickup at station 2 or 3 needs >=6 time; two visits
+    # also need >=6. Only station 1 pickup=1 fits (travel 2 + handling 2).
+    # It yields Y=(2,1,2), G=2/15 and lambda*P=3/40, hence F=5/24.
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser()
-    parser.add_argument('action',choices=['freeze','development','confirmation','roots','cuts','callback','focus','hga_lp','hga_state'])
+    parser.add_argument('action',choices=['freeze','development','confirmation','roots','cuts','callback','focus','hga_lp','hga_state','startup_state','micro'])
     parser.add_argument('--only')
+    parser.add_argument('--cap',type=int,choices=[120,300,600],default=120)
+    parser.add_argument('--arms',nargs='+',choices=['P-GRB','K1-H','K1-S','F0-Single-S'])
     args=parser.parse_args()
     if args.action=='freeze': freeze()
-    elif args.action in ['development','confirmation']: run(args.action,args.only)
+    elif args.action=='micro': micro()
+    elif args.action in ['development','confirmation']: run(args.action,args.only,args.cap,args.arms)
     else: diagnostics(args.action)

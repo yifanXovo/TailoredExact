@@ -146,6 +146,7 @@ Arguments parseArguments(int argc, char** argv) {
         else if (arg == "--round59-compact") out.round59_compact = true;
         else if (arg == "--round59-monitor") out.round59_monitor = true;
         else if (arg == "--round59-primal-focus") out.round59_focus = 1;
+        else if (arg == "--round59-bound-focus") out.round59_focus = 3;
         else if (arg == "--gurobi-home") out.gurobi_home = value(i);
         else if (arg == "--gamma-lower") out.gamma_lower = std::stod(value(i));
         else if (arg == "--gamma-upper") out.gamma_upper = std::stod(value(i));
@@ -698,7 +699,7 @@ void writeSolveEvidence(const Arguments& args,
         << "  \"round59_cut_execution\": \"" << args.round59_cuts << "\",\n"
         << "  \"round59_added_rows_status\": \"" << jsonEscape(outcome.additional_linear_rows_status) << "\",\n"
         << "  \"round59_added_rows_count\": " << outcome.additional_linear_rows_added << ",\n"
-        << "  \"round59_primal_focus\": " << args.round59_focus << ",\n"
+        << "  \"round59_mip_focus\": " << args.round59_focus << ",\n"
         << "  \"state_id\": \"" << jsonEscape(args.state_id) << "\",\n"
         << "  \"policy\": \"" << jsonEscape(args.policy) << "\",\n"
         << "  \"status\": \"" << status << "\",\n"

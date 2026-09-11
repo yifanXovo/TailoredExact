@@ -59,7 +59,7 @@ def main():
             initial=d['b'],target=d['target'],capacity=d['capacity'],weights=d['weights'],Q=d['Q'],
             total_station_initial=sum(d['b'][1:]),total_station_target=sum(d['target'][1:]),
             empty_objective=objective(d,d['b']),distance_rule='Euclidean from stored points divided by 1.5'))
-        for p in sorted((RAW/'screen120'/id).glob('*/result.json')):
+        for p in sorted((RAW/'screen120'/row.get('artifact_id',id)).glob('*/result.json')):
             result=json.loads(p.read_text());v=result.get('verification',{})
             if not v.get('original_solution_feasible'): continue
             started=time.perf_counter();audit=verify(d,result)

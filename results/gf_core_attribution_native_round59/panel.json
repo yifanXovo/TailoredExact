@@ -92,7 +92,7 @@
     },
     {
       "instance_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q30_slot08_seed1288546114.txt",
-      "T_seconds": 2850,
+      "T_seconds": 2400,
       "pickup_seconds": 60,
       "drop_seconds": 60,
       "V": 12,
@@ -103,7 +103,9 @@
       "scenario_id": "round39_small_hard_V12_M3_Q30_slot08_seed1288546114",
       "role": "historical strong positive control",
       "stage": "development",
-      "input_sha256": "7ee8a95ca3043f83b2e8c6b3663f8aa212678043d0c98b0153efbeb834d48823"
+      "input_sha256": "7ee8a95ca3043f83b2e8c6b3663f8aa212678043d0c98b0153efbeb834d48823",
+      "artifact_id": "D4-corrected-T2400",
+      "T_source": "scripts/run_round55_k1_integration.py:T_BY_INSTANCE"
     },
     {
       "panel_class": "matched_route_horizon",
@@ -336,5 +338,6 @@
     "max_3600_runs": 4
   },
   "confirmation_not_for_selection": true,
-  "selection": "historical roles; frozen before Round59 performance"
+  "selection": "historical roles; frozen before Round59 performance",
+  "correction": "D4 T corrected from mistakenly assumed 2850 to historical 2400; prior four D4 runs excluded; all attempts charged"
 }
