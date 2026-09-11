@@ -1,0 +1,35 @@
+{
+  "schema": "round52-telemetry-field-migration-v1",
+  "new_fields": {
+    "plain_continuous_lp_optimum": "new independent LP solve",
+    "initial_mip_root_relaxation_bound": "formerly root_relaxation_bound",
+    "post_presolve_root_cut_bound": "formerly final_root_cut_bound",
+    "first_branching_bound": "new explicitly event-scoped field",
+    "mip_best_bound": "general event/checkpoint best-bound field"
+  },
+  "forbidden_aliases": [
+    [
+      "plain_continuous_lp_optimum",
+      "initial_mip_root_relaxation_bound"
+    ],
+    [
+      "plain_continuous_lp_optimum",
+      "post_presolve_root_cut_bound"
+    ],
+    [
+      "initial_mip_root_relaxation_bound",
+      "post_presolve_root_cut_bound"
+    ],
+    [
+      "first_branching_bound",
+      "mip_best_bound_without_event"
+    ]
+  ],
+  "historical_raw_files_rewritten": false,
+  "affected_state_count": 15,
+  "all_plain_lp_monotonicity_rows_passed": true,
+  "audit_process_seconds": 3.656999999890104,
+  "audit_process_cap_seconds": 1800.0,
+  "gurobi_library": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+  "gurobi_version": "13.0.2rc1"
+}

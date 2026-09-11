@@ -1,0 +1,19 @@
+{
+  "schema": "round44-stage3-development-refreeze-v1",
+  "reason": "The first zero-objective development diagnostic exposed that Round 44 had not inherited Round 43's vacuous-zero-range certificate path. Both affected diagnostic rows were invalidated before performance use; candidate identities, thresholds, and selection order are unchanged.",
+  "frozen_before_corrected_development_runs": true,
+  "candidate_performance_results_observed_under_corrected_executable": false,
+  "invalidated_diagnostic_results_observed": true,
+  "finalist_tags": [
+    "noadaptive",
+    "veto-f05"
+  ],
+  "candidate_decisions_changed": false,
+  "nonzero_range_algorithm_changed": false,
+  "corrected_edge_case": "verified objective zero and zero-width strict-improver range",
+  "corrected_disposition": "strict certificate from independently verified zero incumbent and global nonnegative objective lower bound",
+  "obsolete_executable_sha256": "c6cd3f8c3d0220da87f96c891dc2cbbe493f6cc6e2d7b64b31210b7993e1e7fd",
+  "corrected_executable_sha256": "db542bbe7047260e80084432695925394c02f1ecce02f47f18fd04eed48f4a1c",
+  "validation_observed": false,
+  "holdout_observed": false
+}

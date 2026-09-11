@@ -1,0 +1,48 @@
+{
+  "frozen_before_performance": true,
+  "matched_route_horizon": {
+    "M": "lower available M",
+    "Q": 30,
+    "T_seconds": [
+      3600,
+      18000
+    ],
+    "count": 20,
+    "inventory_rule": "shortage/balanced/surplus rotation over V-major geography order",
+    "landscape_count": 10,
+    "replicate_rule": "other replicate from the corresponding V/geography/inventory primary cell; the matched landscape itself is not selected in that primary cell"
+  },
+  "panel_adaptation_used": false,
+  "performance_or_visual_information_used": false,
+  "primary": {
+    "M_bits_by_cell_position": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      1
+    ],
+    "Q_bits_by_cell_position": [
+      1,
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    "V_rotations": "M xor V_index%2; Q xor floor(V_index/2)%2; T=(cell_position+V_index)%4",
+    "cells": "V x geography x inventory",
+    "count": 30,
+    "factor_rule": "round58_fixed_balanced_cycle_v1",
+    "replicate_rule": "lexicographically lower canonical landscape SHA-256"
+  },
+  "replacement_allowed": false,
+  "reserve_label": "reserve_not_opened_round58",
+  "reserve_scenario_count": 910,
+  "schema": "round58-panel-selection-protocol-v1",
+  "selected_scenario_count": 50,
+  "source_manifest": "reference/citibike443-regional-v1/manifests/T_scenario_manifest.csv",
+  "source_manifest_sha256": "fe919ef04159fce2c9fb4cc3b0ecee9a8c91f46da6e5269354c6e70cb7f78d67",
+  "source_scenario_count": 960
+}

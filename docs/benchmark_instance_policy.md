@@ -45,6 +45,20 @@ paper benchmark.
 Archive-incumbent rows are also not paper-core default evidence. They may be
 used as diagnostic UB comparisons only, with route plans independently verified
 and with no lower-bound contribution.
+
+## Round 56 paper-candidate policy
+
+`reference/round56_paper_candidate/` contains newly generated, deterministic
+paper-candidate screening data, classified as
+`round56_paper_candidate_generated`. It is neither historical evidence nor a
+recovered paper benchmark. One base landscape is frozen per V in
+{8,12,20,30,50}; M, Q, and T variants preserve that landscape byte-for-byte.
+
+The 40-row primary panel uses Q=30, two M values per V, and four T values. Ten
+Q=20 rows are capacity-transfer sentinels at T=3600 and T=18000. Every row is
+retained regardless of certification or performance. These instances may
+inform structural-cell selection for a later replicated dataset, but one base
+per V is not enough for statistical generalization.
 ## Current Round Note
 
 The V12 M1/M2 rows in `results/primal_ub_improvement_round/` use regenerated
@@ -206,3 +220,28 @@ Paper evidence must classify every row as one of:
 
 Hard-generated V20/M3 rows remain engineering stress instances, not historical
 paper targets.
+
+## CitiBike443 regional family and Round 58
+
+`citibike443-regional-v1` is a reproducible Citi Bike-derived candidate family
+with real station geography/capacity provenance and documented constructed
+inventory, demand, fleet, and route-horizon factors. It contains 960 frozen
+mathematical scenarios. Round 58 uses exactly 50 selected before performance:
+30 primary structural cells and 20 matched route-horizon rows using the other
+corresponding replicate. The other 910 rows remain unopened reserves and may
+not replace a difficult selected row.
+
+Round 58 is paired qualification evidence, not a claim that every generated
+row is an established historical paper benchmark. Operational T is part of
+the mathematical scenario identity and is distinct from the solver process
+cap. Capped outcomes remain valid benchmark observations when reported with
+their qualified LB, independently verified UB, and explicit gaps.
+
+The frozen 50-scenario panel completed with no substitutions and no opened
+reserve scenario. Every scenario received both mandatory 3600-second arms;
+fresh extensions were entered only under the predeclared 10800/16200/21600
+rules. The dataset classification is `citibike443_paired_panel_complete`, but
+the benchmark classification is the deliberately qualified
+`k1_am_sf_pgrb_advantage_mixed`. The 910 reserves retain their
+`reserve_not_opened_round58` status and are the source pool for a future
+pre-frozen holdout, not a menu for retrospective replacement.

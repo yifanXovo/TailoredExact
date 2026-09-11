@@ -1,0 +1,13 @@
+property,test_construction,expected,result
+left_right_symmetry,"swap r_minus and r_plus",score unchanged,pass
+unit_interval,"enumerate endpoints and interior pairs in [0,1]^2","0<=M<=1",pass
+positive_affine_invariance,"scale and translate B_I,B_minus,B_plus,U and scale epsilon",score unchanged,pass
+zero_child_gain,"set either normalized gain to zero",M=0,pass
+union_lower_bound,"compare beta with normalized min child bound",equal,pass
+average_reward,"hold beta fixed and raise the other gain",M nondecreasing,pass
+midpoint_minimax,"compare max child width over split points",unique midpoint minimum,pass
+tau_status,"inspect paper preset/controller mapping",tau=0.08 empirical frozen,pass
+both_children_infeasible,"controller unit scenario",exact parent closure,pass
+one_child_infeasible,"controller unit scenario",retain exact feasible child coverage,pass
+invalid_child_evidence,"controller unit scenario",no score-authorized closure,pass
+native_target_continuation,"controller unit scenario",existing K1 lifecycle retained,pass

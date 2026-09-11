@@ -1,0 +1,19 @@
+{
+  "all_rows_exact": true,
+  "applies_uniformly_to": [
+    "P-GRB target MIP",
+    "C6 interval LP relaxations",
+    "C6 native-bound target MIPs",
+    "C6 terminal interval MIPs"
+  ],
+  "frozen_policy": "gurobi-auto",
+  "gurobi_presolve_value": -1,
+  "instance_dispatch": false,
+  "reason": "Both arms already used Gurobi Presolve=Auto in Round 39; the similarly named global-gini-tree presolve-off flag does not configure the Gurobi fixed-interval backend. Controlled Off/Off and Auto/Auto rows passed common parameter and exactness gates. Auto preserves equal solver-level opportunity and the validated C6 contract.",
+  "round39_contract_was_solver_level_fair": true,
+  "round39_labeling_was_ambiguous": true,
+  "round_id": 40,
+  "row_count": 8,
+  "same_objectives_off_vs_auto": true,
+  "schema": "round40-frozen-presolve-decision-v1"
+}

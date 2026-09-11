@@ -1,0 +1,34 @@
+{
+  "M": 3,
+  "Q": 30,
+  "V": 12,
+  "base_landscape_path": "reference/round56_paper_candidate/base/r56_moderate_V12_seed1330133768.json",
+  "base_landscape_sha256": "b5764c1aac1ea20d8e26e3d628a251ce74f19aa07c5a0c08ccf6fa6870115957",
+  "checkpoint_seconds": [
+    300,
+    1200,
+    3600
+  ],
+  "common_comparison_horizon_seconds": 3600,
+  "complete_Q_vector": [
+    30,
+    30,
+    30
+  ],
+  "descriptor_path": "reference/round56_paper_candidate/scenario_descriptors/r56_V12_M03_Q30_T10800_seed1330133768.json",
+  "distance_convention": "parsed Hybrid GA text format; distances rebuilt from points at speed factor 1.5",
+  "drop_time_seconds": 60,
+  "fleet_variant_file_sha256": "335333bdd84d7488b0dff5a602d36b451832a9eaffa302c9ed7a16b0d316ee8c",
+  "fleet_variant_path": "reference/round56_paper_candidate/fleet_variants/V12/r56_V12_M03_Q30.txt",
+  "generator_version": "round56-moderate-landscape-generator-v2-serialized-coordinate-distance",
+  "lambda": 0.15,
+  "mathematical_instance_identity_material": "b5764c1aac1ea20d8e26e3d628a251ce74f19aa07c5a0c08ccf6fa6870115957||335333bdd84d7488b0dff5a602d36b451832a9eaffa302c9ed7a16b0d316ee8c||12||3||[30,30,30]||10800||60||60||0.14999999999999999||parsed Hybrid GA text format; distances rebuilt from points at speed factor 1.5||round56-mathematical-scenario-v1",
+  "mathematical_instance_sha256": "9657f26a9fa80f428d05eee1f0cfb8ea275ae1c0176d2eb2105fc019a20b1bd0",
+  "panel_class": "primary_q30",
+  "pickup_time_seconds": 60,
+  "route_time_limit_seconds": 10800,
+  "scenario_id": "r56_V12_M03_Q30_T10800_seed1330133768",
+  "scenario_schema_version": "round56-mathematical-scenario-v1",
+  "schema": "round56-mathematical-scenario-v1",
+  "solver_process_cap_seconds": 3600
+}

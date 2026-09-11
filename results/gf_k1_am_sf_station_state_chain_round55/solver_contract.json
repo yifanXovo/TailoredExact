@@ -1,0 +1,28 @@
+{
+  "schema": "round55-solver-contract-v1",
+  "Gurobi": {
+    "Presolve": "Auto",
+    "Seed": 0,
+    "Threads": 1,
+    "MIPGap": 0.0,
+    "MIPGapAbs": 0.0,
+    "Branching": "native/default",
+    "PreCrush": "default"
+  },
+  "dynamic_user_cut_callback": false,
+  "certificate_tolerance": 1e-07,
+  "strict_original_problem_certificate_required": true,
+  "total_process_cap_includes": [
+    "construction",
+    "root LP",
+    "separation",
+    "closure",
+    "terminal MIP",
+    "verification",
+    "serialization"
+  ],
+  "ordinary_cap_seconds": 3600,
+  "sealed_v50_cap_seconds": 7200,
+  "conditional_expansion_cap_seconds": 14400,
+  "known_optimum_injection": false
+}

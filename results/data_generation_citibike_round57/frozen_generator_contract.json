@@ -1,0 +1,91 @@
+{
+  "M_BY_V": {
+    "12": [
+      1,
+      2
+    ],
+    "20": [
+      2,
+      3
+    ],
+    "30": [
+      3,
+      5
+    ],
+    "50": [
+      4,
+      7
+    ],
+    "8": [
+      1,
+      2
+    ]
+  },
+  "Q": [
+    20,
+    30
+  ],
+  "T_seconds": [
+    1800,
+    3600,
+    10800,
+    18000
+  ],
+  "canonical_source_index": "zero-based source_station_row_index",
+  "coordinate_decimals": 3,
+  "dataset_classification": "generated_untested_paper_candidate",
+  "dataset_family": "citibike443-regional-v1",
+  "depot": "artificial centroid of serialized source coordinates rounded to three decimals",
+  "distance_matrix_serialized": false,
+  "distance_rule": "current parser rebuilds Euclidean serialized UTM coordinate distance / 1.5 m/s",
+  "drop_seconds": 60.0,
+  "eligible_station_rule": "0 < capacity < 100",
+  "expected_counts": {
+    "complete_parser_inputs_or_fleet_variants": 240,
+    "future_T_scenarios": 960,
+    "independent_geographic_selections": 20,
+    "station_landscapes": 60
+  },
+  "frozen_after_structural_pilot": true,
+  "generator_source": "scripts/generate_citibike443_regional_v1.py",
+  "generator_source_sha256": "05b60dc92e4f81edaa134fbcb556dcb18efbf36ac02f333712e0b7e8364491c1",
+  "generator_version": "citibike443-regional-v1.0.0",
+  "inventory_regimes": {
+    "balanced": "target total exactly; moderate local imbalance",
+    "shortage": "target total minus max(V, round(0.12*target total)); high local imbalance",
+    "surplus": "target total plus max(V, round(0.12*target total)), capped by total capacity; high local imbalance"
+  },
+  "lambda": 0.15,
+  "minimum_ratio_rule": "0.10+0.40*(target/capacity), rounded to four decimals",
+  "newline": "LF",
+  "optimizer_results_used": false,
+  "pickup_seconds": 60.0,
+  "schema": "citibike443-frozen-generator-contract-v1",
+  "seed_policy": "positive 31-bit display seeds and all ordering/scalars derived from SHA-256 material",
+  "source_files": {
+    "capacity": {
+      "path": "E:\\codes\\Hybrid GA\\testdata\\CitiBike\\coords\\citibike_selected_443_capacity_list.txt",
+      "sha256": "92ca9b05e66d1425bbc801be2dd9c0776b1a9707e62a60b821d941aa98625ae1"
+    },
+    "coordinates": {
+      "path": "E:\\codes\\Hybrid GA\\testdata\\CitiBike\\coords\\citibike_selected_443_coords_utm18n_meters.txt",
+      "sha256": "c5fd892cc82e07332d4796edb0527182d9c60883acc9b87a5410dab569f990d1"
+    }
+  },
+  "station_selection": {
+    "V": [
+      8,
+      12,
+      20,
+      30,
+      50
+    ],
+    "anchor_set": "SHA-256-ranked initial anchor followed by deterministic farthest-first anchors",
+    "compact": "V nearest eligible stations to anchor",
+    "regional": "farthest-first V-station coverage within the 2V nearest eligible stations",
+    "replicates_per_geographic_regime": 2,
+    "tie_breaking": "ascending source_station_row_index"
+  },
+  "target_rule": "per-station fill fraction 0.44+0.12*hash_unit, rounded half-up and bounded [1,capacity]",
+  "weight_rule": "max(0.1,(target/max_target)^2), then normalized to maximum 1"
+}

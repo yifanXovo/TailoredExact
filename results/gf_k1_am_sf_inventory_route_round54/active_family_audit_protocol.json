@@ -1,0 +1,51 @@
+{
+  "schema": "round54-active-family-audit-protocol-v1",
+  "source": "actual paper-k1-am-sf runtime telemetry and code",
+  "documentation_is_not_authoritative": true,
+  "families_minimum": [
+    "Gini interval bounds",
+    "direct Gini cap/floor",
+    "interval-tight G x binary McCormick hull",
+    "final-inventory penalty domains",
+    "movement-reachability domains",
+    "inventory conservation",
+    "visit-inventory linking",
+    "verified-incumbent objective row",
+    "objective lower estimator",
+    "penalty lower-bound closure",
+    "SP-product McCormick rows",
+    "SP-product objective estimator",
+    "pair/triple support-duration covers",
+    "connectivity-flow formulation",
+    "iterative domain propagation",
+    "tight denominator bounds",
+    "removed exhaustive subset-duration block",
+    "inactive Gini spread",
+    "inactive required movement",
+    "inactive transfer cutset",
+    "inactive subset-inventory cuts",
+    "inactive dynamic callback families"
+  ],
+  "fields": [
+    "family",
+    "active",
+    "type",
+    "scope",
+    "proof_tag",
+    "code_location",
+    "activation_condition",
+    "representative_count",
+    "depends_gamma_L",
+    "depends_gamma_U",
+    "depends_verified_incumbent",
+    "ablation_evidence",
+    "novelty_status"
+  ],
+  "novelty_labels": [
+    "standard formulation",
+    "standard technique adapted to this problem",
+    "potentially novel and literature review required",
+    "inactive research family"
+  ],
+  "unverified_novelty_must_be_explicit": true
+}
