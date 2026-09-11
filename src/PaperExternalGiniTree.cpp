@@ -339,7 +339,7 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         return false;
     }
     if (round47_active &&
-        (!hga_full || causal != "off" || normalization != "proof" ||
+        (!(hga_full || (options.round59_simple_start && simple_start)) || causal != "off" || normalization != "proof" ||
          geometry_policy != "off" ||
          options.round40_c6_ub_geometry != "off" ||
          options.round41_static_segmented_gini != "off" ||
@@ -366,7 +366,7 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         return false;
     }
     if (coarse_start != "off" &&
-        (!hga_full || causal != "off" || normalization != "proof" ||
+        (!(hga_full || (options.round59_simple_start && simple_start)) || causal != "off" || normalization != "proof" ||
          geometry_policy != "off" ||
          options.round40_c6_ub_geometry != "off" ||
          options.round41_static_segmented_gini != "off" ||
@@ -5729,7 +5729,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         const bool round37_force_prefinement =
             round37_pilot_prefinement_pending &&
             bounded.id == round37_pilot_selection.leaf_id;
-        if (c6_nonblocking && !round43_active && !round44_active &&
+        if (!options.round59_single_mip && c6_nonblocking && !round43_active && !round44_active &&
             !round37_force_prefinement) {
             const C6FrontierDecision frontier =
                 evaluateC6FrontierDecision(
@@ -5821,7 +5821,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 "c5_parent_native_target_reached_delayed_atomic_split");
             continue;
         }
-        const bool eligible = !round43_active && !round44_active &&
+        const bool eligible = !options.round59_single_mip && !round43_active && !round44_active &&
             ((!round40_coarse_start ||
              round40_geometry.adaptive_refinement) &&
             legacyAdaptiveSplitEligible(
