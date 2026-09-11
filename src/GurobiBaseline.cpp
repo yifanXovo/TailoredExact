@@ -276,6 +276,9 @@ int startSilentGurobiEnvironment(
 }
 
 struct ProgressCallbackState {
+    std::ostream* round59_samples = nullptr;
+    std::vector<std::string> round59_names;
+    std::set<int> round59_sampled;
     GurobiApi* api = nullptr;
     GurobiProgressStats progress;
     Clock::time_point telemetry_start = Clock::now();
@@ -325,6 +328,24 @@ int __stdcall progressAndBoundTargetCallback(
     GRBmodel* model, void* cbdata, int where, void* usrdata) {
     auto* state = static_cast<ProgressCallbackState*>(usrdata);
     if (!state || !state->api) return 0;
+    if (where == GRB_CB_MIPNODE && state->round59_samples) {
+        int status = 0;
+        double node = 0;
+        if (state->api->cbget(cbdata, where, GRB_CB_MIPNODE_STATUS, &status) == 0 &&
+            status == GRB_OPTIMAL &&
+            state->api->cbget(cbdata, where, GRB_CB_MIPNODE_NODCNT, &node) == 0) {
+            const int bucket = node < 0.5 ? 0 : node < 10 ? 1 : node < 100 ? 2 : 3;
+            if (!state->round59_sampled.count(bucket)) {
+                state->round59_sampled.insert(bucket);
+                std::vector<double> values(state->round59_names.size());
+                if (state->api->cbget(cbdata, where, GRB_CB_MIPNODE_REL, values.data()) == 0) {
+                    for (std::size_t i=0; i<values.size(); ++i)
+                        *state->round59_samples << node << ',' << state->round59_names[i]
+                                               << ',' << values[i] << '\n';
+                }
+            }
+        }
+    }
     if (where == GRB_CB_MIPNODE && state->round53_mipnode_path_active &&
         !state->tailored_cut_disabled_after_failure) {
         const auto callback_started = Clock::now();
@@ -987,6 +1008,8 @@ public:
                     signatures.insert(row.canonical_signature).second &&
                     row.variable_names.size() == row.coefficients.size() &&
                     !row.variable_names.empty() && std::isfinite(row.rhs) &&
+                    (!request.round59_additional_rows_user_pool ||
+                     (row.scope == "global" && row.sense != '=')) &&
                     (row.sense == '<' || row.sense == '>' || row.sense == '=');
                 std::vector<int> columns;
                 std::vector<double> coefficients;
@@ -1038,8 +1061,32 @@ public:
             }
             out.native_model_modified = true;
             out.model_linear_constraint_count = rows_after;
+            if (request.round59_additional_rows_user_pool) {
+                const int count = static_cast<int>(request.additional_linear_rows.size());
+                std::vector<int> lazy(static_cast<std::size_t>(count), -1);
+                std::vector<int> readback(static_cast<std::size_t>(count), 0);
+                if (api_.setintattrarray(model, GRB_INT_ATTR_LAZY,
+                        native_rows, count, lazy.data()) != 0 ||
+                    api_.updatemodel(model) != 0 ||
+                    api_.getintattrarray(model, GRB_INT_ATTR_LAZY,
+                        native_rows, count, readback.data()) != 0 || readback != lazy) {
+                    out.failure_reason = "round59_user_pool_attribute_readback_failed";
+                    return out;
+                }
+                out.additional_linear_rows_status = "round59_Lazy_minus1_readback_valid";
+            }
         } else {
             out.additional_linear_rows_valid = true;
+        }
+        if (request.round59_mip_focus != -1) {
+            int readback = -1;
+            if (request.round59_mip_focus != 1 ||
+                api_.setintparam(model_env, GRB_INT_PAR_MIPFOCUS, 1) != 0 ||
+                api_.getintparam(model_env, GRB_INT_PAR_MIPFOCUS, &readback) != 0 ||
+                readback != 1) {
+                out.failure_reason = "round59_mip_focus_readback_failed";
+                return out;
+            }
         }
         if (!request.variable_bound_overrides.empty()) {
             out.variable_bound_override_attempted = true;
@@ -1490,6 +1537,18 @@ public:
         }
 
         ProgressCallbackState callback;
+        std::ofstream round59_samples;
+        if (!request.round59_node_samples_path.empty() && out.terminal_mip) {
+            round59_samples.open(request.round59_node_samples_path);
+            if (!round59_samples) {
+                out.failure_reason = "round59_sample_output_open_failed";
+                return out;
+            }
+            round59_samples.precision(17);
+            round59_samples << "node_count,variable,value\n";
+            callback.round59_samples = &round59_samples;
+            callback.round59_names = native_names;
+        }
         callback.api = &api_;
         callback.bound_target_enabled =
             out.partial_bound_target_mip &&

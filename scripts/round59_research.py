@@ -115,10 +115,55 @@ def run(stage, only):
                     cmd+=['--round24-expected-gurobi-model-fingerprint',str(fps[r['scenario_id']]),'--round24-executable-sha256',sha(EXE),'--round24-manifest-executable-sha256',sha(EXE)]
             execute(cmd,dest,dict(id=r['id'],arm=arm,cap=cap,stage=stage,scope='full_instance'))
 
+def diagnostics(phase):
+    panel=json.loads((OUT/'panel.json').read_text())['panel']
+    exe=ROOT/'build/round59-core/Round50IntervalMipExperiment.exe'
+    policies={
+        'F0':('interval-mip-core-no-exhaustive-subset-duration',[]),
+        'Compact':('interval-mip-core-no-exhaustive-subset-duration',['--round59-compact']),
+        'Monitor':('interval-mip-core-no-exhaustive-subset-duration',['--round59-monitor']),
+        'Static':('interval-mip-core-no-exhaustive-subset-duration',['--round59-cuts','static']),
+        'Pool':('interval-mip-core-no-exhaustive-subset-duration',['--round59-cuts','pool']),
+        'Focus1':('interval-mip-core-no-exhaustive-subset-duration',['--round59-primal-focus']),
+        'PreCrush':('round53-c1-precrush-only',[]),
+        'StatusPreCrush':('round53-c3-status-precrush',[]),
+        'DryRun':('round53-c4-separator-dry-run',[]),
+        'Dynamic':('round53-c5-live',[]),
+    }
+    plans={'roots':(['D2','D3','D4'],['F0','Compact'],'lp'),
+           'cuts':(['D3','D4'],['F0','Monitor','Static','Pool'],'solve'),
+           'callback':(['D3','D4'],['PreCrush','StatusPreCrush','DryRun','Dynamic'],'solve'),
+           'focus':(['D3','D4'],['Focus1'],'solve'),
+           'hga_lp':(['D4'],['F0','Compact'],'lp'),
+           'hga_state':(['D4'],['F0','Compact'],'solve')}
+    ids,arms,mode=plans[phase]
+    for r in panel:
+        if r['id'] not in ids: continue
+        for arm in arms:
+            dest=RAW/('diagnostic_'+phase)/r['id']/arm
+            if (dest/'completion.json').exists():
+                if json.loads((dest/'completion.json').read_text())['returncode']==0: continue
+                raise RuntimeError('failed diagnostic needs inspection')
+            policy,extra=policies[arm]
+            cmd=[str(exe),'--mode',mode,'--state-id',r['id']+'-'+phase,
+                 '--input',r['instance_path'],'--artifact-dir',str(dest),
+                 '--policy',policy,'--T',str(r['T_seconds']),'--process-cap','120',
+                 ]+extra
+            if phase in ['hga_lp','hga_state']:
+                frozen=json.loads((OUT/'frozen_hga_state.json').read_text())
+                assert sha(ROOT/frozen['source_result'])==frozen['source_result_sha256']
+                cmd+=['--gamma-lower',str(frozen['gamma_lower']),'--gamma-upper',str(frozen['gamma_upper']),
+                      '--cutoff',str(frozen['U'])]
+            else:
+                cmd+=['--round59-empty-state']
+            execute(cmd,dest,dict(id=r['id'],arm=arm,cap=120,stage='diagnostic_'+phase,
+                scope='restricted_state_diagnostic',incumbent_source='frozen_hga_state.json' if phase.startswith('hga_') else 'independently verified empty routes',incumbent_epoch=0))
+
 if __name__=='__main__':
     parser=argparse.ArgumentParser()
-    parser.add_argument('action',choices=['freeze','development','confirmation'])
+    parser.add_argument('action',choices=['freeze','development','confirmation','roots','cuts','callback','focus','hga_lp','hga_state'])
     parser.add_argument('--only')
     args=parser.parse_args()
     if args.action=='freeze': freeze()
-    else: run(args.action,args.only)
+    elif args.action in ['development','confirmation']: run(args.action,args.only)
+    else: diagnostics(args.action)

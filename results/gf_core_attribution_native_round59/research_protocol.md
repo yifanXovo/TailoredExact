@@ -26,6 +26,11 @@ processing remains part of the measured process; a state closed by its LP
 may legitimately make zero MIP calls. It must never make speculative child
 LP calls or multiple terminal MIP calls. This is checked from lifecycle logs.
 No native MIP start or hint is requested by either simple-start arm.
+Source inspection confirms that the existing canonical K1 writer actually
+sets `incumbent_epsilon=0`: its explicit row is F<=U, a closed superset of
+strict improvers. Round59 preserves this value and logs it; it does not
+silently change it to F<=U-epsilon. The original global certificate still
+requires independently verified U, valid lower bounds and complete coverage.
 
 ## Internal hypothesis A: tighter support-duration rows and execution
 

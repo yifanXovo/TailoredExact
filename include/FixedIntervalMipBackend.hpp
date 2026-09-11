@@ -114,6 +114,10 @@ struct FixedIntervalMipRequest {
         std::string scope = "global";
     };
     std::vector<AdditionalLinearRow> additional_linear_rows;
+    // Default-off Round59: only already-proved integer-redundant rows.
+    bool round59_additional_rows_user_pool = false;
+    int round59_mip_focus = -1;
+    std::filesystem::path round59_node_samples_path;
 };
 
 struct FixedIntervalBranchPriorityEvidence {
