@@ -1,0 +1,102 @@
+[
+  {
+    "id": "D3",
+    "arm": "F0",
+    "scope": "build_only_no_optimizer",
+    "command": [
+      "E:\\codes\\ExactEBRP\\build\\round59-core\\Round50IntervalMipExperiment.exe",
+      "--mode",
+      "build",
+      "--state-id",
+      "D3",
+      "--input",
+      "reference/qualification_round39/small-medium/round39_small_medium_V12_M3_Q30_slot08_seed1343324363.txt",
+      "--T",
+      "2850",
+      "--artifact-dir",
+      "E:\\codes\\ExactEBRP\\results\\gf_core_attribution_native_round59\\local_raw\\identity_literal_original\\D3\\F0",
+      "--policy",
+      "interval-mip-core-no-exhaustive-subset-duration",
+      "--round59-empty-state",
+      "--round59-current-f0"
+    ],
+    "model_sha256": "66d0428e14ffd3e31764d324d6cd00d23f2eb3b3053d77f32178df87d7f630e5"
+  },
+  {
+    "id": "D3",
+    "arm": "OriginalCompact",
+    "scope": "build_only_no_optimizer",
+    "command": [
+      "E:\\codes\\ExactEBRP\\build\\round59-core\\Round50IntervalMipExperiment.exe",
+      "--mode",
+      "build",
+      "--state-id",
+      "D3",
+      "--input",
+      "reference/qualification_round39/small-medium/round39_small_medium_V12_M3_Q30_slot08_seed1343324363.txt",
+      "--T",
+      "2850",
+      "--artifact-dir",
+      "E:\\codes\\ExactEBRP\\results\\gf_core_attribution_native_round59\\local_raw\\identity_literal_original\\D3\\OriginalCompact",
+      "--policy",
+      "interval-mip-core-no-exhaustive-subset-duration",
+      "--round59-empty-state",
+      "--round59-current-f0",
+      "--round59-original-compact-sha256",
+      "e9e2fae0b045a3e244047ac79b2afbeafcbf3486464f5fd0567317bf6e7f838b"
+    ],
+    "model_sha256": "46ae3bef93751390faf920f090ed8210ce9d02fdac1752feaf2e94a2b908e144",
+    "official_original_sha256": "e9e2fae0b045a3e244047ac79b2afbeafcbf3486464f5fd0567317bf6e7f838b",
+    "generated_original_sha256": "e9e2fae0b045a3e244047ac79b2afbeafcbf3486464f5fd0567317bf6e7f838b"
+  },
+  {
+    "id": "D4",
+    "arm": "F0",
+    "scope": "build_only_no_optimizer",
+    "command": [
+      "E:\\codes\\ExactEBRP\\build\\round59-core\\Round50IntervalMipExperiment.exe",
+      "--mode",
+      "build",
+      "--state-id",
+      "D4",
+      "--input",
+      "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q30_slot08_seed1288546114.txt",
+      "--T",
+      "2400",
+      "--artifact-dir",
+      "E:\\codes\\ExactEBRP\\results\\gf_core_attribution_native_round59\\local_raw\\identity_literal_original\\D4\\F0",
+      "--policy",
+      "interval-mip-core-no-exhaustive-subset-duration",
+      "--round59-empty-state",
+      "--round59-current-f0"
+    ],
+    "model_sha256": "33e165ce2552c44f0787b696542f57aeee981aa404a3f93c70d0feb926ae2601"
+  },
+  {
+    "id": "D4",
+    "arm": "OriginalCompact",
+    "scope": "build_only_no_optimizer",
+    "command": [
+      "E:\\codes\\ExactEBRP\\build\\round59-core\\Round50IntervalMipExperiment.exe",
+      "--mode",
+      "build",
+      "--state-id",
+      "D4",
+      "--input",
+      "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q30_slot08_seed1288546114.txt",
+      "--T",
+      "2400",
+      "--artifact-dir",
+      "E:\\codes\\ExactEBRP\\results\\gf_core_attribution_native_round59\\local_raw\\identity_literal_original\\D4\\OriginalCompact",
+      "--policy",
+      "interval-mip-core-no-exhaustive-subset-duration",
+      "--round59-empty-state",
+      "--round59-current-f0",
+      "--round59-original-compact-sha256",
+      "298d8b5e689f4ec563659219a784f8719c9121715a116993c69c40a875d73a15"
+    ],
+    "model_sha256": "270dec2f3449c234dfc81dce6626c95c05e4affd0cdddad18978d22288824a8f",
+    "official_original_sha256": "298d8b5e689f4ec563659219a784f8719c9121715a116993c69c40a875d73a15",
+    "generated_original_sha256": "298d8b5e689f4ec563659219a784f8719c9121715a116993c69c40a875d73a15"
+  }
+]

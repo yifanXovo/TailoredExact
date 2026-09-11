@@ -101,6 +101,9 @@ else()
 endif()
 
 add_executable(ExactEBRP src/main.cpp)
+add_executable(Round59ResearchTests tests/round59_research_tests.cpp)
+target_link_libraries(Round59ResearchTests PRIVATE exact_ebrp_core)
+add_test(NAME Round59ResearchTests COMMAND Round59ResearchTests)
 target_link_libraries(ExactEBRP PRIVATE exact_ebrp_core)
 
 add_executable(ExactEBRPCompare src/compare_main.cpp)

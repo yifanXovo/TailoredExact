@@ -6,6 +6,7 @@
 #include "Parser.hpp"
 #include "Round50IntervalMip.hpp"
 #include "Round51IntervalMip.hpp"
+#include "Round59Research.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -36,6 +37,13 @@ struct Arguments {
     std::filesystem::path artifact_dir;
     std::string policy = "interval-mip-v0";
     std::string gurobi_home;
+    std::string round59_cuts = "off";
+    bool round59_empty_state = false;
+    bool round59_compact = false;
+    bool round59_current_f0 = false;
+    std::string round59_original_compact_sha256;
+    bool round59_monitor = false;
+    int round59_focus = -1;
     double gamma_lower = 0.0;
     double gamma_upper = 0.0;
     double cutoff = 0.0;
@@ -135,6 +143,14 @@ Arguments parseArguments(int argc, char** argv) {
         else if (arg == "--input") out.input = value(i);
         else if (arg == "--artifact-dir") out.artifact_dir = value(i);
         else if (arg == "--policy") out.policy = value(i);
+        else if (arg == "--round59-cuts") out.round59_cuts = value(i);
+        else if (arg == "--round59-empty-state") out.round59_empty_state = true;
+        else if (arg == "--round59-compact") out.round59_compact = true;
+        else if (arg == "--round59-current-f0") out.round59_current_f0 = true;
+        else if (arg == "--round59-original-compact-sha256") out.round59_original_compact_sha256 = value(i);
+        else if (arg == "--round59-monitor") out.round59_monitor = true;
+        else if (arg == "--round59-primal-focus") out.round59_focus = 1;
+        else if (arg == "--round59-bound-focus") out.round59_focus = 3;
         else if (arg == "--gurobi-home") out.gurobi_home = value(i);
         else if (arg == "--gamma-lower") out.gamma_lower = std::stod(value(i));
         else if (arg == "--gamma-upper") out.gamma_upper = std::stod(value(i));
@@ -162,6 +178,8 @@ Arguments parseArguments(int argc, char** argv) {
          !(out.gamma_upper >= out.gamma_lower) || !std::isfinite(out.cutoff))) {
         throw std::runtime_error("invalid interval or cutoff");
     }
+    if (out.round59_cuts != "off" && out.round59_cuts != "static" && out.round59_cuts != "pool")
+        throw std::runtime_error("invalid Round59 cut execution mode");
     return out;
 }
 
@@ -176,6 +194,12 @@ void writeCommand(const Arguments& args, const std::filesystem::path& path) {
         << "  \"input\": \"" << jsonEscape(args.input.generic_string()) << "\",\n"
         << "  \"artifact_dir\": \"" << jsonEscape(args.artifact_dir.generic_string()) << "\",\n"
         << "  \"policy\": \"" << jsonEscape(args.policy) << "\",\n"
+        << "  \"round59_cut_execution\": \"" << args.round59_cuts << "\",\n"
+        << "  \"round59_empty_state\": " << boolJson(args.round59_empty_state) << ",\n"
+        << "  \"round59_compact\": " << boolJson(args.round59_compact) << ",\n"
+        << "  \"round59_monitor\": " << boolJson(args.round59_monitor) << ",\n"
+        << "  \"round59_mip_focus\": " << args.round59_focus << ",\n"
+        << "  \"explicit_cutoff_epsilon\": 0,\n"
         << "  \"gamma_lower\": " << args.gamma_lower << ",\n"
         << "  \"gamma_upper\": " << args.gamma_upper << ",\n"
         << "  \"verified_cutoff\": " << args.cutoff << ",\n"
@@ -676,6 +700,10 @@ void writeSolveEvidence(const Arguments& args,
     std::ofstream result(args.artifact_dir / "result.json");
     result << std::setprecision(17)
         << "{\n  \"schema\": \"round50-fixed-interval-result-v1\",\n"
+        << "  \"round59_cut_execution\": \"" << args.round59_cuts << "\",\n"
+        << "  \"round59_added_rows_status\": \"" << jsonEscape(outcome.additional_linear_rows_status) << "\",\n"
+        << "  \"round59_added_rows_count\": " << outcome.additional_linear_rows_added << ",\n"
+        << "  \"round59_mip_focus\": " << args.round59_focus << ",\n"
         << "  \"state_id\": \"" << jsonEscape(args.state_id) << "\",\n"
         << "  \"policy\": \"" << jsonEscape(args.policy) << "\",\n"
         << "  \"status\": \"" << status << "\",\n"
@@ -951,7 +979,7 @@ void writeSolveEvidence(const Arguments& args,
 int main(int argc, char** argv) {
     const auto started = Clock::now();
     try {
-        const Arguments args = parseArguments(argc, argv);
+        Arguments args = parseArguments(argc, argv);
         const ebrp::Round50IntervalMipPolicy policy =
             ebrp::parseRound50IntervalMipPolicy(args.policy);
         if (!policy.valid) throw std::runtime_error(policy.failure_reason);
@@ -960,19 +988,30 @@ int main(int argc, char** argv) {
         const ebrp::Instance instance = ebrp::parseInstanceFile(
             args.input, args.route_time_limit, args.pickup_time,
             args.drop_time);
+        if (args.round59_empty_state) {
+            const auto verified = ebrp::verifySolution(instance, {}, 0.15);
+            if (!verified.feasible || !verified.original_objective_recomputed || !verified.errors.empty())
+                throw std::runtime_error("Round59 diagnostic empty incumbent invalid");
+            args.cutoff = verified.objective;
+            args.gamma_lower = 0;
+            args.gamma_upper = std::min(verified.objective, 1.0-1.0/instance.V);
+            writeCommand(args, args.artifact_dir / "command.json");
+        }
         if (args.mode == "resolve-cutoff") {
             return resolveCutoff(instance, args, started);
         }
 
         ebrp::SolveOptions options;
         ebrp::configureRound50IntervalMipV0(options);
+        if (args.round59_current_f0) ebrp::configureRound59CurrentF0(options);
+        if (!args.round59_original_compact_sha256.empty()) options = ebrp::SolveOptions{};
         options.gurobi_home = args.gurobi_home;
         options.solve_time_limit = args.process_cap_seconds;
         options.process_wall_time_limit = args.process_cap_seconds;
         options.log_path =
             (args.artifact_dir / "backend_environment.log").string();
         ebrp::CanonicalCompactModelSpec spec;
-        spec.strengthened = true;
+        spec.strengthened = !args.round59_compact;
         spec.interval_restricted = true;
         spec.gamma_L = args.gamma_lower;
         spec.gamma_U = args.gamma_upper;
@@ -993,6 +1032,17 @@ int main(int argc, char** argv) {
         spec.station_state_formulation = policy.station_state_formulation;
         spec.sparse_family_removal = policy.sparse_family_removal;
         const auto build_started = Clock::now();
+        if (!args.round59_original_compact_sha256.empty()) {
+            // Bind the unrestricted origin byte-for-byte to the official
+            // P-GRB export before adding only the interval and cutoff.
+            ebrp::CanonicalCompactModelSpec plain;
+            const auto origin = ebrp::writeCanonicalCompactModel(
+                instance, options, args.artifact_dir / "original_compact_origin.lp", plain);
+            if (!origin.written || origin.sha256 != args.round59_original_compact_sha256)
+                throw std::runtime_error("Round59 original compact origin SHA256 mismatch");
+            spec.strengthened = false;
+            spec.round51_subset_duration_big_m = plain.round51_subset_duration_big_m;
+        }
         ebrp::CanonicalCompactModelArtifact artifact =
             ebrp::writeCanonicalCompactModel(
                 instance, options, args.artifact_dir / "canonical_model.lp",
@@ -1063,6 +1113,20 @@ int main(int argc, char** argv) {
             request.capture_native_bound_events =
                 kind == ebrp::FixedIntervalSolveKind::PaperTerminalMip;
             request.interval_mip_policy = policy.name;
+            if (args.round59_cuts != "off") {
+                request.additional_linear_rows = ebrp::round59PairDurationRows(instance);
+                std::ofstream rows(args.artifact_dir / "round59_additional_rows.csv");
+                rows << std::setprecision(17) << "row,variable,coefficient,rhs,scope\n";
+                for (const auto& row : request.additional_linear_rows)
+                    for (std::size_t i=0; i<row.variable_names.size(); ++i)
+                        rows << row.row_name << ',' << row.variable_names[i] << ','
+                             << row.coefficients[i] << ',' << row.rhs << ',' << row.scope << '\n';
+                if (!rows) throw std::runtime_error("Round59 row ledger write failed");
+            }
+            request.round59_additional_rows_user_pool = args.round59_cuts == "pool";
+            request.round59_mip_focus = args.round59_focus;
+            if (args.round59_monitor)
+                request.round59_node_samples_path = args.artifact_dir / "node_samples.csv";
             return request;
         };
 

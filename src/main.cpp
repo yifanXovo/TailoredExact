@@ -245,6 +245,18 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
     }
     if (opt.algorithm_preset == "custom") return;
 
+    if (opt.algorithm_preset == "research-round59-k1-s" ||
+        opt.algorithm_preset == "research-round59-f0-single-s") {
+        const std::string requested = opt.algorithm_preset;
+        opt.algorithm_preset = "paper-k1-am-sf";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = requested;
+        opt.round59_simple_start = true;
+        opt.round59_single_mip = requested == "research-round59-f0-single-s";
+        opt.primal_heuristic = "greedy";
+        opt.round34_c6_startup_variant = "simple-start";
+        return;
+    }
     if (opt.algorithm_preset == "research-k1-am-sf-vdp" ||
         opt.algorithm_preset == "research-k1-am-sf-sf-r1" ||
         opt.algorithm_preset == "research-k1-am-sf-vdp-sf-r1") {
@@ -4596,7 +4608,9 @@ std::string jsonEscapeLocal(const std::string& value) {
 }
 
 bool isPaperTracePreset(const std::string& preset) {
-    return preset == "paper-k1-am-sf" ||
+    return preset == "research-round59-k1-s" ||
+           preset == "research-round59-f0-single-s" ||
+           preset == "paper-k1-am-sf" ||
            preset == "research-k1-am-sf-vdp" ||
            preset == "research-k1-am-sf-sf-r1" ||
            preset == "research-k1-am-sf-vdp-sf-r1" ||
@@ -7680,6 +7694,16 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
                                     out.candidate_records);
     };
 
+    if (opt.round59_simple_start) {
+        consider({}, "round59_empty_routes_Y_equals_b");
+        if (!out.found) {
+            throw std::runtime_error(
+                "Round59 empty-route start failed independent verification; "
+                "no HGA fallback is permitted");
+        }
+        finalizeHeuristic();
+        return out;
+    }
     if ((mode == "hga-tgbc" || mode == "best-of-all") &&
         (generation_stagnation || !timedOut())) {
         ebrp::HgaTgbcOptions hga_opt;

@@ -462,6 +462,9 @@ struct SolveOptions {
     // Round 34 startup-ablation label.  This flag is consumed only by the
     // frozen C6 configuration gate; it does not participate in any exact
     // scheduling, bound, split, row, or closure decision.
+    // Round 59 attribution only; stable presets leave both disabled.
+    bool round59_simple_start = false;
+    bool round59_single_mip = false;
     std::string round34_c6_startup_variant = "hga-full";
     // Round 36 causal-study controls.  "off" preserves the validated C6
     // path.  Experimental arms are uniform run-level choices and are never

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "D2",
+    "command": [
+      "E:\\codes\\ExactEBRP\\build\\round59-core\\Round50IntervalMipExperiment.exe",
+      "--mode",
+      "build",
+      "--state-id",
+      "D2",
+      "--input",
+      "reference/citibike443-regional-v1/instances/V20/cb443_V20_regional_r2_surplus_M03_Q20.txt",
+      "--T",
+      "18000",
+      "--artifact-dir",
+      "E:\\codes\\ExactEBRP\\results\\gf_core_attribution_native_round59\\local_raw\\identity_current_f0_verified\\D2",
+      "--policy",
+      "interval-mip-core-no-exhaustive-subset-duration",
+      "--round59-empty-state",
+      "--round59-current-f0"
+    ],
+    "scope": "build_only_no_optimizer",
+    "main_sha256": "01eb80f6b68d69ad44578e339376bed2d11be5ac41c747b36d1cb2a99ff5fedc",
+    "diagnostic_sha256": "01eb80f6b68d69ad44578e339376bed2d11be5ac41c747b36d1cb2a99ff5fedc",
+    "byte_identical": true
+  },
+  {
+    "id": "D3",
+    "command": [
+      "E:\\codes\\ExactEBRP\\build\\round59-core\\Round50IntervalMipExperiment.exe",
+      "--mode",
+      "build",
+      "--state-id",
+      "D3",
+      "--input",
+      "reference/qualification_round39/small-medium/round39_small_medium_V12_M3_Q30_slot08_seed1343324363.txt",
+      "--T",
+      "2850",
+      "--artifact-dir",
+      "E:\\codes\\ExactEBRP\\results\\gf_core_attribution_native_round59\\local_raw\\identity_current_f0_verified\\D3",
+      "--policy",
+      "interval-mip-core-no-exhaustive-subset-duration",
+      "--round59-empty-state",
+      "--round59-current-f0"
+    ],
+    "scope": "build_only_no_optimizer",
+    "main_sha256": "66d0428e14ffd3e31764d324d6cd00d23f2eb3b3053d77f32178df87d7f630e5",
+    "diagnostic_sha256": "66d0428e14ffd3e31764d324d6cd00d23f2eb3b3053d77f32178df87d7f630e5",
+    "byte_identical": true
+  },
+  {
+    "id": "D4",
+    "command": [
+      "E:\\codes\\ExactEBRP\\build\\round59-core\\Round50IntervalMipExperiment.exe",
+      "--mode",
+      "build",
+      "--state-id",
+      "D4",
+      "--input",
+      "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q30_slot08_seed1288546114.txt",
+      "--T",
+      "2400",
+      "--artifact-dir",
+      "E:\\codes\\ExactEBRP\\results\\gf_core_attribution_native_round59\\local_raw\\identity_current_f0_verified\\D4",
+      "--policy",
+      "interval-mip-core-no-exhaustive-subset-duration",
+      "--round59-empty-state",
+      "--round59-current-f0"
+    ],
+    "scope": "build_only_no_optimizer",
+    "main_sha256": "33e165ce2552c44f0787b696542f57aeee981aa404a3f93c70d0feb926ae2601",
+    "diagnostic_sha256": "33e165ce2552c44f0787b696542f57aeee981aa404a3f93c70d0feb926ae2601",
+    "byte_identical": true
+  }
+]
