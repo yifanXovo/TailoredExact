@@ -127,7 +127,7 @@ void oracleAndScopeTests() {
     require(!incompatible.complete,"global candidate should miss current G interval");
     auto compatible=ebrp::mapVerifiedRoutesToCanonicalModel(in,options,{},"empty",.1,.9,1,domain);
     require(compatible.complete,"model-applicable candidate incorrectly blocked by global best");
-    auto at_cutoff=ebrp::mapVerifiedRoutesToCanonicalModel(in,options,good.routes,
+    auto at_cutoff=ebrp::mapVerifiedRoutesToCanonicalModel(in,options,normalized,
         "archive_at_cutoff",0,.9,good.objective,domain);
     require(at_cutoff.complete && at_cutoff.cutoff_valid,
         "archive equality is legal under the canonical F<=U row");
