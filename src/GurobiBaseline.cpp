@@ -738,8 +738,11 @@ int __stdcall progressAndBoundTargetCallback(
         if (state->api->cbget(cbdata, where, GRB_CB_MIPNODE_STATUS, &status) == 0 &&
             status == GRB_OPTIMAL &&
             state->api->cbget(cbdata, where, GRB_CB_MIPNODE_NODCNT, &node) == 0) {
-            std::vector<double> values(state->round59_names.size());
-            if (state->api->cbget(
+            const int sampling_bucket = node < 10 ? 1 : node < 100 ? 2 : 3;
+            const bool need_values = node < .5 ||
+                (state->round59_samples && !state->round59_sampled.count(sampling_bucket));
+            std::vector<double> values(need_values ? state->round59_names.size() : 0);
+            if (need_values && state->api->cbget(
                     cbdata, where, GRB_CB_MIPNODE_REL, values.data()) == 0) {
                 if (node < 0.5) {
                     ++state->round59_root_callback_sequence;
@@ -2046,7 +2049,8 @@ public:
         callback.api = &api_;
         out.gurobi_cbsolution_symbol_loaded = api_.cbsolution != nullptr;
         out.round60_candidate_mode = request.round60_candidate_mode;
-        const bool round60_candidate_active = out.terminal_mip &&
+        const bool round60_candidate_active = (out.terminal_mip ||
+            (request.round61_session && out.partial_bound_target_mip)) &&
             request.round60_candidate_mode != "off";
         if (request.round60_candidate_mode != "off" &&
             request.round60_candidate_mode != "dry" &&

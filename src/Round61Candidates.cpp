@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iomanip>
 #include <limits>
+#include <map>
 #include <stdexcept>
 #include <tuple>
 
@@ -53,8 +54,10 @@ std::shared_ptr<Round61CandidateSession> prepareRound61Candidate(
     store.consider(in,options.lambda,{},"empty_fallback","original_problem");
     try {
         auto prefix=constructRound61Prefix(in,options.lambda,&options,true,path);
+        session->source_snapshot_sha256=prefix.retained_candidate_sha256;
         session->evidence_persisted=prefix.candidate_evidence_persisted;
-        if(prefix.found) store.consider(in,options.lambda,prefix.routes,"PREFIX","original_problem");
+        if(prefix.found) store.consider(in,options.lambda,
+            normalizeRound61Routes(in,options.lambda,prefix.routes),"PREFIX","original_problem");
         else session->failure_reason="prefix_no_verified_result";
     } catch(const std::exception& e) { session->failure_reason=e.what(); }
     session->archive=store.best();
@@ -65,10 +68,39 @@ std::shared_ptr<Round61CandidateSession> prepareRound61Candidate(
         std::ofstream f(path/"archive_state.json"); f<<std::setprecision(17)
             <<"{\"mode\":\""<<session->mode<<"\",\"F\":"<<session->archive.objective
             <<",\"construction_seconds\":"<<session->construction_seconds
-            <<",\"evidence_persisted\":"<<session->evidence_persisted<<"}\n";
+            <<",\"evidence_persisted\":"<<session->evidence_persisted
+            <<",\"construction_failed\":"<<!session->failure_reason.empty()
+            <<",\"source_snapshot_sha256\":\""<<session->source_snapshot_sha256
+            <<"\",\"normalized_snapshot_sha256\":\""<<session->archive.content_sha256<<"\"}\n";
         if(!f) session->evidence_persisted=false;
     } catch(...) { session->evidence_persisted=false; }
     return session;
+}
+
+std::vector<RoutePlan> normalizeRound61Routes(const Instance& in,double lambda,
+    const std::vector<RoutePlan>& routes) {
+    VerifiedCandidateStore before;
+    if(!before.consider(in,lambda,routes,"before_normalization","original_problem"))
+        throw std::invalid_argument("normalization requires verified complete routes");
+    std::map<int,std::vector<int>> classes;
+    for(int k=0;k<in.M;++k) classes[in.Q[k]].push_back(k);
+    std::vector<RoutePlan> out;
+    for(const auto& c:classes) {
+        std::vector<RoutePlan> used;
+        for(int k:c.second) for(const auto& route:routes)
+            if(route.vehicle==k && !route.operations.empty()) used.push_back(route);
+        std::stable_sort(used.begin(),used.end(),[](const RoutePlan& a,const RoutePlan& b) {
+            return a.operations.size()>b.operations.size();
+        });
+        for(size_t j=0;j<used.size();++j) { used[j].vehicle=c.second[j]; out.push_back(used[j]); }
+    }
+    std::sort(out.begin(),out.end(),[](const RoutePlan& a,const RoutePlan& b){return a.vehicle<b.vehicle;});
+    VerifiedCandidateStore after;
+    if(!after.consider(in,lambda,out,"after_normalization","original_problem") ||
+       before.best().final_inventory!=after.best().final_inventory ||
+       std::abs(before.best().objective-after.best().objective)>1e-10)
+        throw std::runtime_error("normalization changed physical witness");
+    return out;
 }
 
 ObjectiveParts round61Increment(const Instance& in, const std::vector<int>& y,
@@ -90,7 +122,7 @@ ObjectiveParts round61Increment(const Instance& in, const std::vector<int>& y,
     out.P+=in.weights[a]*(std::abs(na-1)-std::abs(ra-1));
     if(b) out.P+=in.weights[b]*(std::abs(nb-1)-std::abs(rb-1));
     // Follow the original exact S=0 convention, avoid cancellation at zero.
-    long long sum=da+db;
+    long long sum=static_cast<long long>(da)+db;
     for(int j=1;j<=in.V;++j) sum+=y[j];
     if(sum==0) { out.S=0; out.H=0; }
     out.G=out.S>0 ? std::max(0.0,out.H)/(in.V*out.S) : 0;

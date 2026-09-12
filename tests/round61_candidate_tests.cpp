@@ -111,6 +111,15 @@ void oracleAndScopeTests() {
     // applicable candidate: mapping is assessed per current model, independent
     // of the global store's better objective.
     in=tiny(); auto good=ebrp::constructRound61Block(in,.15).candidate;
+    auto route_set=good.routes;
+    ebrp::RoutePlan empty;empty.vehicle=0;empty.nodes={0,0};route_set.push_back(empty);
+    auto normalized=ebrp::normalizeRound61Routes(in,.15,route_set);
+    require(normalized.size()==1 && normalized.front().vehicle==1,
+        "must remove empty placeholders without crossing unequal capacities");
+    in.Q={20,20};
+    normalized=ebrp::normalizeRound61Routes(in,.15,route_set);
+    require(normalized.size()==1 && normalized.front().vehicle==0,
+        "equal-Q used routes must precede unused vehicles");
     ebrp::VerifiedCandidateStore global; global.consider(in,.15,good.routes,"global","all");
     ebrp::SolveOptions options; ebrp::SolverNeutralModelDomain domain;
     domain.names={"G"}; domain.variable_types={'C'}; domain.lower_bounds={0};domain.upper_bounds={1};

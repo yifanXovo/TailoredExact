@@ -145,12 +145,15 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
                 auto routes = routesFromHgaDecode(instance, sequences, operations);
                 out.conversion_seconds += std::chrono::duration<double>(
                     std::chrono::steady_clock::now() - observer_started).count();
-                published_candidates.consider(
+                const bool published = published_candidates.consider(
                     instance, options.lambda, routes,
                     generation == 0 ? "hga_initial_population_best"
                                     : "hga_strict_improvement",
                     options.candidate_model_identity, generation,
                     event_seconds, 0.0);
+                if(published && out.first_nonempty_seconds<0 &&
+                    std::any_of(routes.begin(),routes.end(),[](const RoutePlan& r) { return !r.operations.empty(); }))
+                    out.first_nonempty_seconds=event_seconds;
                 out.observer_seconds += std::chrono::duration<double>(
                     std::chrono::steady_clock::now() - observer_started).count();
             });
@@ -255,9 +258,9 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
             out.candidate_observer_failed = true;
             if (!options.retain_verified_on_log_failure)
                 out.published_candidate_count = 0;
-            out.notes.push_back(
-                "optional HGA candidate ledger write failed; event "
-                "publication was disabled and original HGA search retained");
+            out.notes.push_back(options.retain_verified_on_log_failure
+                ? "candidate ledger failed; independent memory retained; persistence audit invalid"
+                : "optional HGA candidate ledger write failed; event publication was disabled and original HGA search retained");
         }
         if ((candidate_ledger_written || options.retain_verified_on_log_failure) &&
             published_candidates.hasBest()) {

@@ -33,15 +33,15 @@ int main(int argc,char** argv) {
         for(size_t k=0;k<in.Q.size();++k) identity<<(k?",":"")<<in.Q[k];
         identity<<"]}\n";
         std::ofstream summary(out/"quality.csv"); summary<<std::setprecision(17);
-        summary<<"method,F,G,P,seconds,stations,pickup,drop,maximum_duration,quantity_evaluations,pairs,blocks,stop,verified\n";
+        summary<<"method,F,G,P,seconds,stations,pickup,drop,maximum_duration,quantity_evaluations,pairs,blocks,stop,verified,first_nonempty_seconds\n";
         auto report=[&](const std::string& label,const ebrp::VerifiedBrpCandidate& c,double seconds,
-                        long long eval,long long pairs,int blocks,const std::string& stop) {
+                        long long eval,long long pairs,int blocks,const std::string& stop,double first=-1.0) {
             auto v=ebrp::verifySolution(in,c.routes,lambda);
             int ns=0,np=0,nd=0; double maxd=0;
             for(const auto& r:c.routes) for(const auto& o:r.operations) { ++ns; np+=o.pickup; nd+=o.drop; }
             for(double d:v.route_duration) maxd=std::max(maxd,d);
             summary<<label<<','<<v.objective<<','<<v.G<<','<<v.P<<','<<seconds<<','<<ns<<','<<np<<','<<nd<<','
-                   <<maxd<<','<<eval<<','<<pairs<<','<<blocks<<','<<stop<<','<<v.feasible<<'\n';
+                   <<maxd<<','<<eval<<','<<pairs<<','<<blocks<<','<<stop<<','<<v.feasible<<','<<first<<'\n';
             ebrp::writeRound61Witness(out/(label+"_witness.json"),in,lambda,c);
         };
         if(mode=="batch") {
@@ -50,15 +50,21 @@ int main(int argc,char** argv) {
             ebrp::VerifiedCandidateStore fallback;
             fallback.consider(in,lambda,{},"LEGACY60-empty","original_problem");
             report("LEGACY60",legacy.generated?legacy.candidate:fallback.best(),
-                   legacy.generation_seconds,legacy.objective_evaluations,0,0,legacy.reason);
+                   legacy.generation_seconds,legacy.objective_evaluations,0,0,legacy.termination_reason,legacy.first_nonempty_seconds);
             const auto block=ebrp::constructRound61Block(in,lambda);
             report("BLOCK",block.candidate,block.seconds,block.quantity_evaluations,
-                   block.evaluated_pairs,block.completed_blocks,block.stop_reason);
+                   block.evaluated_pairs,block.completed_blocks,block.stop_reason,
+                   block.trajectory.size()>1?block.trajectory[1].seconds:-1);
             const auto repaired=ebrp::repairRound61Block(in,lambda,block.candidate);
             report("BLOCK-R",repaired.candidate,block.seconds+repaired.seconds,
                    block.quantity_evaluations+repaired.quantity_evaluations,
                    block.evaluated_pairs+repaired.evaluated_pairs,
-                   block.completed_blocks+repaired.completed_blocks,repaired.stop_reason);
+                   block.completed_blocks+repaired.completed_blocks,repaired.stop_reason,
+                   block.trajectory.size()>1?block.trajectory[1].seconds:-1);
+            std::ofstream repair_trace(out/"block_repair_trajectory.csv"); repair_trace<<std::setprecision(17);
+            repair_trace<<"round,evaluations,seconds,F,G,P,stations,pickup,drop,blocks,maximum_duration\n";
+            for(const auto& t:repaired.trajectory) repair_trace<<t.round<<','<<t.evaluations<<','<<t.seconds<<','
+                <<t.F<<','<<t.G<<','<<t.P<<','<<t.stations<<','<<t.pickup<<','<<t.drop<<','<<t.blocks<<','<<t.maximum_duration<<'\n';
             std::ofstream trace(out/"block_trajectory.csv"); trace<<std::setprecision(17);
             trace<<"round,evaluations,seconds,F,G,P,stations,pickup,drop,blocks,maximum_duration\n";
             for(const auto& t:block.trajectory) trace<<t.round<<','<<t.evaluations<<','<<t.seconds<<','
@@ -70,15 +76,15 @@ int main(int argc,char** argv) {
         }
         const auto hga=ebrp::constructRound61Prefix(in,lambda,nullptr,mode!="prefix-off",out);
         ebrp::VerifiedCandidateStore hs;
-        hs.consider(in,lambda,hga.routes,"PREFIX","original_problem");
+        hs.consider(in,lambda,ebrp::normalizeRound61Routes(in,lambda,hga.routes),"PREFIX","original_problem");
         if(!hga.found || !hs.hasBest()) throw std::runtime_error("PREFIX failed to return legal snapshot");
         report("PREFIX",hs.best(),hga.wall_time_seconds,0,0,0,
-               hga.global_deadline_reached?"safety_deadline":"initialization_plus_16_generations");
+               hga.global_deadline_reached?"safety_deadline":"initialization_plus_16_generations",hga.first_nonempty_seconds);
         if(mode=="batch") {
             const auto repaired=ebrp::repairRound61Block(in,lambda,hs.best());
             report("PREFIX-R",repaired.candidate,hga.wall_time_seconds+repaired.seconds,
                    repaired.quantity_evaluations,repaired.evaluated_pairs,
-                   repaired.completed_blocks,repaired.stop_reason);
+                   repaired.completed_blocks,repaired.stop_reason,hga.first_nonempty_seconds);
         }
         std::ofstream cost(out/"prefix_costs.json"); cost<<std::setprecision(17)
             <<"{\"generations\":"<<hga.total_generations<<",\"decoder_calls\":"<<hga.decoder_calls

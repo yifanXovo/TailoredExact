@@ -197,8 +197,28 @@ def full(ids,cap,stage,k1=False):
                 {'id':identity,'arm':('K1-S' if k1 else 'Single-S')+'-'+mode,'stage':stage,
                  'scope':'full_original_problem'},cap,solver_calls='recorded_by_native_lifecycle')
 
+def reference(identity,cap):
+    p=panel()[identity]
+    expected={e['instance_id']:e['expected_gurobi_model_fingerprint'] for e in json.loads(
+        (ROOT/'results/gf_citibike443_k1_vs_pgrb_round58/pgrb_expected_fingerprints.json').read_text())['entries']}
+    for arm in ['P-GRB','K1-H']:
+        dest=RAW/'references'/identity/arm
+        if arm=='K1-H': cmd=full_command(p,dest,'paper-k1-am-sf','off',cap)
+        else:
+            cmd=[BUILD/'ExactEBRP.exe','--input',p['instance_path'],'--lambda',p['lambda'],
+                 '--T',p['T_seconds'],'--pickup-time',p['pickup_seconds'],'--drop-time',p['drop_seconds'],
+                 '--time-limit',cap-6,'--process-wall-time-limit',cap,'--process-shutdown-margin',3,
+                 '--threads',1,'--mip-threads',1,'--gurobi-seed',0,'--gurobi-presolve',-1,
+                 '--method','gurobi','--plain-baseline','--out',dest/'result.json','--log',dest/'native.log',
+                 '--process-phase-ledger',dest/'phases.csv','--gurobi-model-export',dest/'compact.lp',
+                 '--round24-expected-gurobi-model-fingerprint',expected[p['scenario_id']],
+                 '--round24-executable-sha256',sha(BUILD/'ExactEBRP.exe'),
+                 '--round24-manifest-executable-sha256',sha(BUILD/'ExactEBRP.exe')]
+        execute(cmd,dest,{'id':identity,'arm':arm,'stage':'references','scope':'same_build_unchanged_reference'},cap,
+                solver_calls='recorded_by_native_lifecycle')
+
 def main():
-    p=argparse.ArgumentParser(); p.add_argument('action',choices=['freeze','quality','publication','fixed','micro','oracle','oracle-micro','full','k1'])
+    p=argparse.ArgumentParser(); p.add_argument('action',choices=['freeze','quality','publication','fixed','micro','oracle','oracle-micro','full','k1','reference'])
     p.add_argument('--ids',nargs='+',default=['D1','D2','D3','D4','D6','D7'])
     p.add_argument('--stage',default='quality_v1')
     p.add_argument('--cap',type=int,default=120)
@@ -212,5 +232,6 @@ def main():
     elif a.action=='oracle-micro': oracle_micro()
     elif a.action=='full': full(a.ids,a.cap,a.stage)
     elif a.action=='k1': full(a.ids,a.cap,a.stage,True)
+    elif a.action=='reference': reference(a.ids[0],a.cap)
 
 if __name__=='__main__': main()

@@ -13,11 +13,14 @@ struct Round61CandidateSession {
     bool construction_attempted = false;
     bool evidence_persisted = true;
     std::string failure_reason;
+    std::string source_snapshot_sha256;
     double construction_seconds = 0;
 };
 
 std::shared_ptr<Round61CandidateSession> prepareRound61Candidate(
     const Instance&, const SolveOptions&, const std::filesystem::path&);
+std::vector<RoutePlan> normalizeRound61Routes(const Instance&, double lambda,
+    const std::vector<RoutePlan>&);
 
 // Exact O(n) evaluation for any one/two changed inventories (0 = no station).
 ObjectiveParts round61Increment(const Instance&, const std::vector<int>&,

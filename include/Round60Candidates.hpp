@@ -82,6 +82,9 @@ struct Round60ConstructionResult {
     bool generated = false;
     std::string reason = "not_attempted";
     int objective_evaluations = 0;
+    int accepted_stations = 0;
+    double first_nonempty_seconds = -1.0;
+    std::string termination_reason;
     double generation_seconds = 0.0;
     VerifiedBrpCandidate candidate;
 };

@@ -62,6 +62,7 @@ struct HgaTgbcResult {
     double hash_seconds = 0.0;
     double copy_seconds = 0.0;
     double ledger_seconds = 0.0;
+    double first_nonempty_seconds = -1.0;
     std::vector<double> fitness_history;
     std::vector<double> elapsed_history;
 };

@@ -1478,6 +1478,17 @@ int main(int argc, char** argv) {
         outcome.model_build_seconds = build_seconds;
         backend->release();
         const ebrp::FixedIntervalMipBackendStats stats = backend->stats();
+        if(args.round59_current_f0 && outcome.incumbent_available &&
+           outcome.incumbent_independently_verified) {
+            ebrp::VerifiedCandidateStore native_store;
+            native_store.consider(instance,options.lambda,outcome.incumbent_routes,
+                                  "native_final","fixed_F0");
+            if(native_store.hasBest()) {
+                try { ebrp::writeRound61Witness(args.artifact_dir/"native_witness.json",
+                        instance,options.lambda,native_store.best()); }
+                catch(const std::exception& e) { std::cerr<<"native witness evidence not persisted: "<<e.what()<<'\n'; }
+            }
+        }
         const double process_seconds = elapsed(started);
         if (adaptive.active) {
             writeAdaptiveLedgers(

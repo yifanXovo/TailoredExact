@@ -300,7 +300,13 @@ Round60ConstructionResult constructRound60BrpCandidate(
         used_stations.insert(best.station);
         incumbent = best.objective;
         ++accepted_stations;
+        if(accepted_stations==1) out.first_nonempty_seconds=secondsSince(started);
     }
+
+    out.accepted_stations=accepted_stations;
+    out.termination_reason=out.objective_evaluations>=input.maximum_evaluations
+        ? "objective_evaluation_budget" : accepted_stations>=input.maximum_stations
+        ? "accepted_station_budget" : "no_strictly_improving_single_operation";
 
     if (used_stations.empty()) {
         out.reason = "no_strictly_improving_feasible_operation";

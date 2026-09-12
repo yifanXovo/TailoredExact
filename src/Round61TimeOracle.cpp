@@ -131,7 +131,9 @@ Round61TimeResult solveRound61TimeOracle(const Instance& in,double lambda,const 
     out.safe_duration_bound=round61SafeDurationBound(in);
     writeRound61TimeModel(in,r);
 #if defined(_WIN32) && EXACT_EBRP_ENABLE_GUROBI
-    HMODULE dll=LoadLibraryW(L"gurobi130.dll");
+    const auto dll_name=L"gurobi"+std::to_wstring(GRB_VERSION_MAJOR)+
+        std::to_wstring(GRB_VERSION_MINOR)+L".dll";
+    HMODULE dll=LoadLibraryW(dll_name.c_str());
     if(!dll) throw std::runtime_error("cannot load installed Gurobi 13 DLL");
     GRBenv* env=nullptr; GRBmodel* model=nullptr;
 #define API(name) auto name=reinterpret_cast<decltype(&GRB##name)>(GetProcAddress(dll,"GRB" #name)); if(!name) throw std::runtime_error("Gurobi symbol " #name)
@@ -160,11 +162,23 @@ Round61TimeResult solveRound61TimeOracle(const Instance& in,double lambda,const 
         if(!out.parameters_verified) throw std::runtime_error("oracle parameter readback mismatch");
         check(optimize(model)); check(getintattr(model,"Status",&out.status));
         getdblattr(model,"Runtime",&out.solver_seconds); getdblattr(model,"Work",&out.work);
+        double constraint_violation=0, bound_violation=0, dual_violation=0;
+        bool primal_quality=getdblattr(model,"ConstrVio",&constraint_violation)==0 &&
+            getdblattr(model,"BoundVio",&bound_violation)==0;
+        bool dual_quality=!r.lp || getdblattr(model,"DualVio",&dual_violation)==0;
+        const bool numeric_ok=primal_quality && dual_quality && constraint_violation<=1e-5 &&
+            bound_violation<=1e-5 && dual_violation<=1e-5;
+        std::ofstream quality(r.directory/"numerical_quality.json"); quality<<std::setprecision(17)
+            <<"{\"primal_quality_available\":"<<primal_quality<<",\"dual_quality_available\":"<<dual_quality
+            <<",\"constraint_violation\":"<<constraint_violation<<",\"bound_violation\":"<<bound_violation
+            <<",\"dual_violation\":"<<dual_violation<<",\"numeric_ok\":"<<numeric_ok<<"}\n";
         out.time_independent_infeasible=out.status==GRB_INFEASIBLE;
         if(r.lp && out.status==GRB_OPTIMAL) out.lower_available=getdblattr(model,"ObjVal",&out.lower)==0;
         if(!r.lp && (out.status==GRB_OPTIMAL || out.status==GRB_TIME_LIMIT || out.status==GRB_INTERRUPTED))
             out.lower_available=getdblattr(model,"ObjBound",&out.lower)==0 && std::isfinite(out.lower) && std::abs(out.lower)<GRB_INFINITY;
         int solcount=0; check(getintattr(model,"SolCount",&solcount));
+        if((out.status==GRB_OPTIMAL && !numeric_ok) || out.status==GRB_NUMERIC)
+            out.lower_available=false;
         if(!r.lp && solcount>0) {
             int n=0; check(getintattr(model,"NumVars",&n)); std::vector<double> values(n);
             check(getdblattrarray(model,"X",0,n,values.data())); std::map<std::string,double> vars;

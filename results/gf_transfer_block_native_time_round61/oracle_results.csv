@@ -1,0 +1,5 @@
+stage,id,arm,classification,status,LP,T_original,safe_duration_bound,lower,upper,time_independent_infeasible,parameters_verified,seconds,solver_seconds,work
+oracle_micro,transfer,lp,original_T_strictly_infeasible,2,1,12,24.242640687119284,13.21895141649746,,0,1,0.0088943,0.0019998550415039062,4.989226452380958e-05
+oracle_micro,transfer,mip,original_T_strictly_infeasible,2,0,12,24.242640687119284,13.414213562373096,13.414213562373096,0,1,0.0078216,0.0009999275207519531,3.9677e-05
+oracle_micro,supply_infeasible,mip,MIP_infeasible_time_independent,3,0,12,24.242640687119284,,,1,1,0.0076161,0.0009999275207519531,0.00014049
+oracle_micro,released_supplier,mip,original_T_feasible,2,0,20,24.242640687119284,15.414213562373096,15.414213562373096,0,1,0.0077118,0.0010001659393310547,6.669128571428572e-05
