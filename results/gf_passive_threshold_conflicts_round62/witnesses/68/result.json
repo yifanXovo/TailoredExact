@@ -1,0 +1,131 @@
+{
+  "objective": 0.26181696296169055,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        3,
+        4,
+        8,
+        9,
+        7,
+        10,
+        0
+      ],
+      "operations": [
+        {
+          "station": 3,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 4,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 8,
+          "pickup": 12,
+          "drop": 0
+        },
+        {
+          "station": 9,
+          "pickup": 0,
+          "drop": 6
+        },
+        {
+          "station": 7,
+          "pickup": 0,
+          "drop": 7
+        },
+        {
+          "station": 10,
+          "pickup": 0,
+          "drop": 8
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        5,
+        12,
+        11,
+        6,
+        2,
+        0
+      ],
+      "operations": [
+        {
+          "station": 5,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 12,
+          "pickup": 14,
+          "drop": 0
+        },
+        {
+          "station": 11,
+          "pickup": 0,
+          "drop": 8
+        },
+        {
+          "station": 6,
+          "pickup": 0,
+          "drop": 2
+        },
+        {
+          "station": 2,
+          "pickup": 0,
+          "drop": 9
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "feasible": true,
+    "original_solution_feasible": true,
+    "original_objective_recomputed": true,
+    "routes_start_end_depot": true,
+    "station_disjoint": true,
+    "load_feasible": true,
+    "station_feasible": true,
+    "duration_feasible": true,
+    "objective_matches": true,
+    "route_travel_time": [
+      1040.53480062375,
+      1256.0937248837317
+    ],
+    "route_operation_time": [
+      2520,
+      2280
+    ],
+    "route_duration": [
+      3560.53480062375,
+      3536.0937248837317
+    ],
+    "final_inventories": [
+      50000,
+      19,
+      11,
+      12,
+      14,
+      14,
+      10,
+      10,
+      26,
+      8,
+      10,
+      8,
+      47
+    ],
+    "G": 0.15883527066962777,
+    "P": 0.6865446152804185,
+    "objective": 0.26181696296169055,
+    "errors": []
+  }
+}

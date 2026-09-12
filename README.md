@@ -842,3 +842,13 @@ nonclosed but improves the valid lower bound to `0.048723364` against UB
 unresolved-interval subsolver in the Gini-frontier compact certification
 framework; it is not claimed to dominate relaxation closures or plain CPLEX on
 every interval.
+
+## Round 62 passive certification and threshold conflicts
+
+Explicit research modes add a verified passive upper-bound archive with legal
+external certification, bounded service-threshold clique generation, and sparse
+event or no-new-variable projections. All new options default off; the stable
+paper preset and official compact P-GRB remain unchanged. The finite panel has
+both benefits and regressions. See the [Round 62 report](results/gf_passive_threshold_conflicts_round62/final_report.md),
+[mathematical contracts](results/gf_passive_threshold_conflicts_round62/mathematics.md)
+and [reproduction commands](results/gf_passive_threshold_conflicts_round62/reproduce.md).
