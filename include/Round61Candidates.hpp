@@ -22,6 +22,11 @@ std::shared_ptr<Round61CandidateSession> prepareRound61Candidate(
 std::vector<RoutePlan> normalizeRound61Routes(const Instance&, double lambda,
     const std::vector<RoutePlan>&);
 
+// Admission only: physical verification and complete current-model mapping
+// remain mandatory. The archive is not a native incumbent; F==cutoff is legal.
+bool round61ShouldSubmitCandidate(double objective, double current_cutoff,
+    bool native_incumbent_available, double native_incumbent);
+
 // Exact O(n) evaluation for any one/two changed inventories (0 = no station).
 ObjectiveParts round61Increment(const Instance&, const std::vector<int>&,
     const ObjectiveParts&, double lambda, int a, int da, int b, int db);

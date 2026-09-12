@@ -127,6 +127,18 @@ void oracleAndScopeTests() {
     require(!incompatible.complete,"global candidate should miss current G interval");
     auto compatible=ebrp::mapVerifiedRoutesToCanonicalModel(in,options,{},"empty",.1,.9,1,domain);
     require(compatible.complete,"model-applicable candidate incorrectly blocked by global best");
+    auto at_cutoff=ebrp::mapVerifiedRoutesToCanonicalModel(in,options,good.routes,
+        "archive_at_cutoff",0,.9,good.objective,domain);
+    require(at_cutoff.complete && at_cutoff.cutoff_valid,
+        "archive equality is legal under the canonical F<=U row");
+    require(ebrp::round61ShouldSubmitCandidate(good.objective,good.objective,false,0),
+        "global archive cutoff must not suppress a missing native incumbent");
+    require(ebrp::round61ShouldSubmitCandidate(good.objective,good.objective,true,good.objective+.1),
+        "archive at cutoff should improve a worse native incumbent");
+    require(!ebrp::round61ShouldSubmitCandidate(good.objective,good.objective,true,good.objective),
+        "equal native incumbent must not be resubmitted");
+    require(!ebrp::round61ShouldSubmitCandidate(good.objective,good.objective-.1,false,0),
+        "a candidate outside the current cutoff must remain inadmissible");
 }
 }
 int main() { try { incrementTests(); blockTests(); prefixTests(); oracleAndScopeTests();

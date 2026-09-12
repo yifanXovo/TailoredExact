@@ -77,6 +77,15 @@ std::shared_ptr<Round61CandidateSession> prepareRound61Candidate(
     return session;
 }
 
+bool round61ShouldSubmitCandidate(double objective, double cutoff,
+    bool native_available, double native_incumbent) {
+    if(!std::isfinite(objective) || !std::isfinite(cutoff) ||
+       (native_available && !std::isfinite(native_incumbent))) return false;
+    const double tolerance=1e-8*std::max({1.0,std::abs(objective),std::abs(cutoff)});
+    return objective<=cutoff+tolerance &&
+        (!native_available || objective<native_incumbent-tolerance);
+}
+
 std::vector<RoutePlan> normalizeRound61Routes(const Instance& in,double lambda,
     const std::vector<RoutePlan>& routes) {
     VerifiedCandidateStore before;

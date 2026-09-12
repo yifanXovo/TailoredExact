@@ -555,15 +555,19 @@ void attemptRound60Candidate(
     double native_incumbent = GRB_INFINITY;
     if(state.round61_session) state.api->cbget(cbdata,where,
         where==GRB_CB_MIP ? GRB_CB_MIP_OBJBST : GRB_CB_MIPNODE_OBJBST,&native_incumbent);
-    const bool improves_native = !finiteNative(native_incumbent) ||
-        event.candidate_objective < native_incumbent - cutoff_tolerance;
     event.native_incumbent_before_available = finiteNative(native_incumbent);
     if(event.native_incumbent_before_available) event.native_incumbent_before_submission = native_incumbent;
-    if (!event.strictly_improves_frozen_cutoff ||
-        (!state.round61_session && !improves_published_candidate) ||
-        (state.round61_session && !improves_native)) {
-        event.status = !event.strictly_improves_frozen_cutoff
-            ? "verified_but_not_strictly_better_than_frozen_cutoff"
+    const bool cutoff_admissible = state.round61_session
+        ? event.candidate_objective <= state.candidate_cutoff + cutoff_tolerance
+        : event.strictly_improves_frozen_cutoff;
+    const bool admitted = state.round61_session
+        ? round61ShouldSubmitCandidate(event.candidate_objective,
+            state.candidate_cutoff,event.native_incumbent_before_available,native_incumbent)
+        : event.strictly_improves_frozen_cutoff && improves_published_candidate;
+    if (!admitted) {
+        event.status = !cutoff_admissible
+            ? (state.round61_session ? "verified_exceeds_current_model_cutoff"
+                                     : "verified_but_not_strictly_better_than_frozen_cutoff")
             : (state.round61_session ? "verified_archive_not_better_than_current_native_incumbent"
                                      : "verified_but_not_strictly_better_than_published_candidate");
         event.total_seconds = std::chrono::duration<double>(
