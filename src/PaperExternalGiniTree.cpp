@@ -14,6 +14,7 @@
 #include "Round48K1AMF.hpp"
 #include "Round49K1RC.hpp"
 #include "StaticSegmentedGini.hpp"
+#include "Round61Candidates.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -3016,12 +3017,18 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     };
 
     result.round60_candidate_mode = options.round60_candidate_mode;
+    auto round61_session = options.round61_candidate_mode == "off"
+        ? std::shared_ptr<Round61CandidateSession>{}
+        : prepareRound61Candidate(instance, options, artifact_dir / "round61");
     bool round60_candidate_path_disabled = false;
 
     auto configureRound60CandidateRequest = [&] (
         FixedIntervalMipRequest& request) {
         request.round60_candidate_mode = round60_candidate_path_disabled
             ? "off" : options.round60_candidate_mode;
+        request.round61_session = round61_session;
+        if(round61_session && !round60_candidate_path_disabled)
+            request.round60_candidate_mode = round61_session->mode == "submit" ? "inject" : "dry";
         request.round60_candidate_maximum_evaluations =
             options.round60_candidate_maximum_evaluations;
         request.round60_candidate_maximum_stations =
@@ -3040,6 +3047,18 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     };
     auto mergeRound60CandidateOutcome = [&] (
         const FixedIntervalMipOutcome& outcome) {
+        // Full algorithm only: a verified global archive may tighten the
+        // outer cutoff after a native call. Fixed-model experiments never do.
+        if(round61_session && round61_session->archive.verified &&
+           round61_session->archive.objective < verified_ub - 1e-9) {
+            verified_ub = round61_session->archive.objective;
+            best_routes = round61_session->archive.routes;
+            ++incumbent_epoch;
+            std::string reason;
+            if(!scheduler.tightenVerifiedCutoff(verified_ub,&reason))
+                throw std::runtime_error("Round61 archive cutoff contract: " + reason);
+            result.notes.push_back("Round61 archive merged after native call; subsequent outer geometry may change");
+        }
         result.round60_candidate_callback_active =
             result.round60_candidate_callback_active ||
             outcome.round60_candidate_callback_active;

@@ -120,8 +120,10 @@ bool VerifiedCandidateStore::consider(
     observation.source = source;
     observation.generation = generation;
     observation.source_elapsed_seconds = source_elapsed_seconds;
+    const auto hash_started = Clock::now();
     observation.content_sha256 = textSha256(
         canonicalCandidateSerialization(routes));
+    hash_seconds += secondsSince(hash_started);
     if (!seen_.insert(observation.content_sha256).second) {
         observation.duplicate = true;
         observation.reason = "duplicate_candidate_hash";
@@ -176,9 +178,11 @@ bool VerifiedCandidateStore::consider(
     candidate.objective = verification.objective;
     candidate.G = verification.G;
     candidate.P = verification.P;
+    const auto copy_started = Clock::now();
     candidate.routes = routes;
     candidate.final_inventory = verification.final_inventory;
     best_ = std::move(candidate);
+    copy_seconds += secondsSince(copy_started);
     has_best_ = true;
     observation.published = true;
     observation.reason = "published_monotone_verified_upper_bound";

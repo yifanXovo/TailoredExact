@@ -15,6 +15,7 @@
 #include "Round52GurobiCutAdapter.hpp"
 #include "Round52TailoredCuts.hpp"
 #include "Round60Candidates.hpp"
+#include "Round61Candidates.hpp"
 
 #include <gurobi_c.h>
 
@@ -343,6 +344,7 @@ struct ProgressCallbackState {
     const Instance* candidate_instance = nullptr;
     const SolveOptions* candidate_options = nullptr;
     std::string candidate_mode = "off";
+    std::shared_ptr<Round61CandidateSession> round61_session;
     std::string candidate_model_identity;
     double candidate_gamma_L = 0.0;
     double candidate_gamma_U = 0.0;
@@ -502,9 +504,16 @@ void attemptRound60Candidate(
         }
     }
 
-    const Round60ConstructionResult built = constructRound60BrpCandidate(
-        *state.candidate_instance, state.candidate_options->lambda,
-        construction);
+    Round60ConstructionResult built;
+    if(state.round61_session) {
+        construction.source = "PREFIX_precomputed_once";
+        built.candidate = state.round61_session->archive;
+        built.generated = built.candidate.verified;
+        built.generation_seconds = state.round61_session->construction_seconds;
+        built.reason = "precomputed_verified_archive";
+        event.mode = state.round61_session->mode;
+    } else built = constructRound60BrpCandidate(
+        *state.candidate_instance, state.candidate_options->lambda, construction);
     event.source = construction.source;
     event.generated = built.generated;
     event.objective_evaluations = built.objective_evaluations;
@@ -543,18 +552,27 @@ void attemptRound60Candidate(
         !std::isfinite(state.candidate_best_verified_objective) ||
         event.candidate_objective <
             state.candidate_best_verified_objective - published_tolerance;
+    double native_incumbent = GRB_INFINITY;
+    if(state.round61_session) state.api->cbget(cbdata,where,
+        where==GRB_CB_MIP ? GRB_CB_MIP_OBJBST : GRB_CB_MIPNODE_OBJBST,&native_incumbent);
+    const bool improves_native = !finiteNative(native_incumbent) ||
+        event.candidate_objective < native_incumbent - cutoff_tolerance;
+    event.native_incumbent_before_available = finiteNative(native_incumbent);
+    if(event.native_incumbent_before_available) event.native_incumbent_before_submission = native_incumbent;
     if (!event.strictly_improves_frozen_cutoff ||
-        !improves_published_candidate) {
+        (!state.round61_session && !improves_published_candidate) ||
+        (state.round61_session && !improves_native)) {
         event.status = !event.strictly_improves_frozen_cutoff
             ? "verified_but_not_strictly_better_than_frozen_cutoff"
-            : "verified_but_not_strictly_better_than_published_candidate";
+            : (state.round61_session ? "verified_archive_not_better_than_current_native_incumbent"
+                                     : "verified_but_not_strictly_better_than_published_candidate");
         event.total_seconds = std::chrono::duration<double>(
             Clock::now() - started).count();
         state.candidate_overhead_seconds += event.total_seconds;
         state.candidate_events.push_back(std::move(event));
         return;
     }
-    state.candidate_best_verified_objective = event.candidate_objective;
+    if(!state.round61_session) state.candidate_best_verified_objective = event.candidate_objective;
     const SolverNeutralMipStart mapped = mapVerifiedRoutesToCanonicalModel(
         *state.candidate_instance, *state.candidate_options,
         built.candidate.routes, construction.source,
@@ -594,6 +612,7 @@ void attemptRound60Candidate(
         return;
     }
 
+    if(state.round61_session) state.candidate_best_verified_objective = event.candidate_objective;
     event.status = state.candidate_mode == "dry"
         ? "verified_mapped_dry_run" : "verified_mapped_pending_submission";
     if (state.candidate_mode == "inject") {
@@ -662,6 +681,16 @@ int __stdcall progressAndBoundTargetCallback(
     GRBmodel* model, void* cbdata, int where, void* usrdata) {
     auto* state = static_cast<ProgressCallbackState*>(usrdata);
     if (!state || !state->api) return 0;
+    if(state->round61_session && where==GRB_CB_MIP && !state->submitted_candidates.empty()) {
+        double incumbent=GRB_INFINITY;
+        if(state->api->cbget(cbdata,where,GRB_CB_MIP_OBJBST,&incumbent)==0 && finiteNative(incumbent))
+            for(const auto& submitted:state->submitted_candidates) {
+                auto& e=state->candidate_events[submitted.event_index];
+                if(incumbent<=submitted.objective+1e-8 &&
+                    (!e.native_incumbent_before_available || incumbent<e.native_incumbent_before_submission-1e-8))
+                    e.native_incumbent_change_observed=true;
+            }
+    }
     if (where == GRB_CB_MIP && state->candidate_mode != "off" &&
         !state->candidate_data_triggered &&
         !state->candidate_disabled_after_failure) {
@@ -675,7 +704,7 @@ int __stdcall progressAndBoundTargetCallback(
         if (!solution.empty() && state->api->cbget(
                 cbdata, where, GRB_CB_MIPSOL_SOL, solution.data()) == 0) {
             for (auto& submitted : state->submitted_candidates) {
-                if (submitted.confirmed ||
+                if ((submitted.confirmed && !state->round61_session) ||
                     submitted.values.size() != solution.size() ||
                     submitted.event_index >= state->candidate_events.size()) {
                     continue;
@@ -692,13 +721,16 @@ int __stdcall progressAndBoundTargetCallback(
                         submitted.event_index];
                     event.acceptance =
                         "confirmed_exact_vector_observed_in_MIPSOL";
+                    event.exact_vector_observed_in_mipsol = true;
                     event.status = "submitted_and_observed_in_MIPSOL";
                 }
             }
         }
     }
     if (where == GRB_CB_MIPNODE &&
-        (state->round59_samples || state->candidate_mode != "off")) {
+        (state->round59_samples || (state->candidate_mode != "off" &&
+            !state->round61_session && state->candidate_root_triggers < 2 &&
+            !state->candidate_disabled_after_failure))) {
         const auto sample_started = Clock::now();
         if (state->round59_samples) ++state->round59_sample_checks;
         int status = 0;
@@ -730,6 +762,7 @@ int __stdcall progressAndBoundTargetCallback(
                         state->round59_root_scalars.push_back(scalar);
                     }
                     if (state->candidate_mode != "off" &&
+                        !state->round61_session &&
                         state->candidate_root_triggers < 2 &&
                         !state->candidate_disabled_after_failure) {
                         ++state->candidate_root_triggers;
@@ -2022,6 +2055,7 @@ public:
             return out;
         }
         if (round60_candidate_active) {
+            callback.round61_session = request.round61_session;
             callback.candidate_instance = &instance_;
             callback.candidate_options = &options_;
             callback.candidate_mode = request.round60_candidate_mode;
@@ -2205,7 +2239,7 @@ public:
                     final_solution.data()) == 0;
             if (final_solution_available) {
                 for (auto& submitted : callback.submitted_candidates) {
-                    if (submitted.confirmed ||
+                    if ((submitted.confirmed && !callback.round61_session) ||
                         submitted.values.size() != final_solution.size() ||
                         submitted.event_index >=
                             callback.candidate_events.size()) {
@@ -2235,6 +2269,7 @@ public:
                         event.acceptance =
                             "confirmed_submitted_integer_decision_vector_"
                             "is_final_native_solution";
+                        event.final_integer_vector_matches = true;
                         event.status =
                             "submitted_integer_decisions_match_final_native_"
                             "solution";
@@ -2289,7 +2324,7 @@ public:
                            "native_objective,acceptance,objective_evaluations,"
                            "callback_elapsed_seconds,generation_seconds,"
                            "verification_seconds,mapping_seconds,residual_check_seconds,"
-                           "total_seconds,candidate_objective\n";
+                           "total_seconds,candidate_objective,exact_vector_observed_in_mipsol,final_integer_vector_matches,native_incumbent_change_observed,native_incumbent_before_available,native_incumbent_before_submission\n";
                     for (const auto& event : out.round60_candidate_events) {
                         candidate_log << event.event_sequence << ','
                             << event.callback_where << ',' << event.trigger << ','
@@ -2314,6 +2349,11 @@ public:
                             << event.mapping_seconds << ','
                             << event.residual_check_seconds << ','
                             << event.total_seconds << ',' << event.candidate_objective
+                            << ',' << event.exact_vector_observed_in_mipsol
+                            << ',' << event.final_integer_vector_matches
+                            << ',' << event.native_incumbent_change_observed
+                            << ',' << event.native_incumbent_before_available
+                            << ',' << event.native_incumbent_before_submission
                             << '\n';
                     }
                     candidate_log_written = static_cast<bool>(candidate_log);

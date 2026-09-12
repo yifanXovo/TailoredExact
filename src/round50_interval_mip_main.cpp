@@ -23,6 +23,7 @@
 #include <string>
 #include <tuple>
 #include <vector>
+#include "Round61Candidates.hpp"
 
 namespace {
 
@@ -45,6 +46,8 @@ struct Arguments {
     bool round59_monitor = false;
     int round59_focus = -1;
     std::string round60_candidate_mode = "off";
+    std::string round61_candidate_mode = "off";
+    double lambda = 0.15;
     int round60_candidate_maximum_evaluations = 512;
     int round60_candidate_maximum_stations = 16;
     std::vector<int> round60_fixed_inventory;
@@ -171,6 +174,8 @@ Arguments parseArguments(int argc, char** argv) {
         else if (arg == "--round59-primal-focus") out.round59_focus = 1;
         else if (arg == "--round59-bound-focus") out.round59_focus = 3;
         else if (arg == "--round60-candidate-mode") out.round60_candidate_mode = value(i);
+        else if (arg == "--round61-candidate-mode") out.round61_candidate_mode = value(i);
+        else if (arg == "--lambda") out.lambda = std::stod(value(i));
         else if (arg == "--round60-candidate-max-evaluations") out.round60_candidate_maximum_evaluations = std::stoi(value(i));
         else if (arg == "--round60-candidate-max-stations") out.round60_candidate_maximum_stations = std::stoi(value(i));
         else if (arg == "--round60-fixed-inventory") out.round60_fixed_inventory = parseIntegerList(value(i));
@@ -203,6 +208,10 @@ Arguments parseArguments(int argc, char** argv) {
     }
     if (out.round59_cuts != "off" && out.round59_cuts != "static" && out.round59_cuts != "pool")
         throw std::runtime_error("invalid Round59 cut execution mode");
+    if (out.round61_candidate_mode != "off" && out.round61_candidate_mode != "archive" &&
+        out.round61_candidate_mode != "submit") throw std::runtime_error("invalid Round61 mode");
+    if (out.round61_candidate_mode != "off" && out.round60_candidate_mode != "off")
+        throw std::runtime_error("Round61 and Round60 candidate modes cannot combine");
     if (out.round60_candidate_mode != "off" &&
         out.round60_candidate_mode != "dry" &&
         out.round60_candidate_mode != "inject") {
@@ -1058,7 +1067,7 @@ int main(int argc, char** argv) {
             args.input, args.route_time_limit, args.pickup_time,
             args.drop_time);
         if (args.round59_empty_state) {
-            const auto verified = ebrp::verifySolution(instance, {}, 0.15);
+            const auto verified = ebrp::verifySolution(instance, {}, args.lambda);
             if (!verified.feasible || !verified.original_objective_recomputed || !verified.errors.empty())
                 throw std::runtime_error("Round59 diagnostic empty incumbent invalid");
             args.cutoff = verified.objective;
@@ -1075,8 +1084,13 @@ int main(int argc, char** argv) {
         if (args.round59_current_f0) ebrp::configureRound59CurrentF0(options);
         if (!args.round59_original_compact_sha256.empty()) options = ebrp::SolveOptions{};
         options.gurobi_home = args.gurobi_home;
+        options.lambda = args.lambda;
+        options.round61_candidate_mode = args.round61_candidate_mode;
         options.solve_time_limit = args.process_cap_seconds;
         options.process_wall_time_limit = args.process_cap_seconds;
+        options.process_start_time = started;
+        options.process_start_time_valid = true;
+        options.process_shutdown_margin_seconds = kEvidenceFinalizationReserveSeconds;
         options.log_path =
             (args.artifact_dir / "backend_environment.log").string();
         ebrp::CanonicalCompactModelSpec spec;
@@ -1143,6 +1157,9 @@ int main(int argc, char** argv) {
             return 0;
         }
 
+        auto round61_session = args.round61_candidate_mode == "off"
+            ? std::shared_ptr<ebrp::Round61CandidateSession>{}
+            : ebrp::prepareRound61Candidate(instance, options, args.artifact_dir / "round61");
         const double initial_remaining = args.process_cap_seconds -
             elapsed(started) - kEvidenceFinalizationReserveSeconds;
         if (!(initial_remaining > 0.01)) {
@@ -1197,6 +1214,9 @@ int main(int argc, char** argv) {
             if (args.round59_monitor)
                 request.round59_node_samples_path = args.artifact_dir / "node_samples.csv";
             request.round60_candidate_mode = args.round60_candidate_mode;
+            request.round61_session = round61_session;
+            if (round61_session) request.round60_candidate_mode =
+                round61_session->mode == "submit" ? "inject" : "dry";
             request.round60_candidate_maximum_evaluations =
                 args.round60_candidate_maximum_evaluations;
             request.round60_candidate_maximum_stations =

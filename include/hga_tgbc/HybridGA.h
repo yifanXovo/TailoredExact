@@ -66,6 +66,9 @@ public:
     }
 
     void set_seed(unsigned int seed) { gen.seed(seed); }
+    void set_fixed_generations(int value) { fixed_generations = value; }
+    double get_initialization_seconds() const { return initialization_seconds; }
+    double get_decoder_seconds() const { return decoder_seconds; }
     void set_diversity_weight(double v) { if (v >= 0.0) diversity_weight = v; }
     void set_education_probability(double v) { if (v >= 0.0 && v <= 1.0) education_probability = v; }
     void set_education_trials(int v) { education_trials = std::max(0, v); }
@@ -166,6 +169,7 @@ public:
         elapsed_history.push_back(duration<double>(
             steady_clock::now() - start).count());
         improvement_history.push_back(initial_improved ? 1 : 0);
+        initialization_seconds = duration<double>(steady_clock::now() - start).count();
 
         auto complete_generation = [&]() {
             vector<Individual> offspring;
@@ -215,7 +219,11 @@ public:
             }
         };
 
-        if (generation_stagnation_stop) {
+        if (fixed_generations >= 0) {
+            while (total_generations < fixed_generations && !deadlineReached()) {
+                complete_generation();
+            }
+        } else if (generation_stagnation_stop) {
             // Round 27 production: the sole stop state is the number of
             // completed generations since strict global-best improvement.
             while (no_improve_gen_limit > 0 &&
@@ -238,6 +246,9 @@ public:
     }
 
 private:
+    int fixed_generations = -1;
+    double initialization_seconds = 0.0;
+    double decoder_seconds = 0.0;
     struct Individual {
         vector<vector<int>> routes;
         vector<int> chrom;
@@ -528,6 +539,8 @@ SolutionResult_ORO decode_routes(const vector<vector<int>>& routes, vector<int>*
         if (it != decode_cache.end()) return it->second;
     }
     ++decoder_calls;
+    const auto decode_started = fixed_generations >= 0 ? steady_clock::now()
+                                                       : steady_clock::time_point{};
     SolutionResult_ORO res;
     if (decoder_compaction_mode == 0) {
         res = nGreedyLU_RA(1, instance.V, instance.M, instance.total_time_limit,
@@ -555,6 +568,8 @@ SolutionResult_ORO decode_routes(const vector<vector<int>>& routes, vector<int>*
             instance.dist, g_iternum, -1.0, instance.weights, instance.min_ratio,
             objective_lambda, objective_scaling, nullptr);
     }
+    if (fixed_generations >= 0)
+        decoder_seconds += duration<double>(steady_clock::now() - decode_started).count();
     if (decode_cache_max_entries != 0) {
         if (decode_cache_max_entries != std::numeric_limits<size_t>::max() &&
             decode_cache.size() >= decode_cache_max_entries) {

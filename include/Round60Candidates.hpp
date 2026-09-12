@@ -41,6 +41,9 @@ struct CandidateObservation {
 
 class VerifiedCandidateStore {
 public:
+    // Timings are disjoint store work; verifier time stays in observations.
+    double hash_seconds = 0.0;
+    double copy_seconds = 0.0;
     bool consider(const Instance& instance,
                   double lambda,
                   const std::vector<RoutePlan>& routes,

@@ -123,6 +123,11 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
                       1.0,
                       options.no_improve_generation_limit);
     ga.set_seed(options.seed);
+    ga.set_fixed_generations(options.fixed_generations);
+    if (options.fixed_generations >= 0) {
+        ga.set_absolute_deadline(started + std::chrono::seconds(
+            std::max(1, options.max_time_seconds)));
+    }
     ga.set_generation_stagnation_stop(
         options.stop_mode == "generation-stagnation");
     ga.set_decoder_compaction_mode(1);
@@ -134,21 +139,29 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
                 const std::vector<int>& operations,
                 double,
                 long long generation) {
+                const auto observer_started = std::chrono::steady_clock::now();
                 const double event_seconds = std::chrono::duration<double>(
                     std::chrono::steady_clock::now() - started).count();
+                auto routes = routesFromHgaDecode(instance, sequences, operations);
+                out.conversion_seconds += std::chrono::duration<double>(
+                    std::chrono::steady_clock::now() - observer_started).count();
                 published_candidates.consider(
-                    instance, options.lambda,
-                    routesFromHgaDecode(instance, sequences, operations),
+                    instance, options.lambda, routes,
                     generation == 0 ? "hga_initial_population_best"
                                     : "hga_strict_improvement",
                     options.candidate_model_identity, generation,
                     event_seconds, 0.0);
+                out.observer_seconds += std::chrono::duration<double>(
+                    std::chrono::steady_clock::now() - observer_started).count();
             });
     }
     if (options.process_options &&
         processDeadlineConfigured(*options.process_options)) {
-        const double remaining =
+        double remaining =
             processWorkRemainingSeconds(*options.process_options);
+        if (options.fixed_generations >= 0) remaining = std::min(remaining,
+            std::max(0.0, options.max_time_seconds - std::chrono::duration<double>(
+                std::chrono::steady_clock::now() - started).count()));
         ga.set_absolute_deadline(
             std::chrono::steady_clock::now() +
             std::chrono::duration_cast<std::chrono::steady_clock::duration>(
@@ -180,6 +193,14 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
     }
 
     out.total_generations = ga.get_total_generations();
+    out.initialization_seconds = ga.get_initialization_seconds();
+    out.decoder_seconds = ga.get_decoder_seconds();
+    out.hash_seconds = published_candidates.hash_seconds;
+    out.copy_seconds = published_candidates.copy_seconds;
+    if (options.fixed_generations >= 0) {
+        out.fitness_history = ga.get_fitness_history();
+        out.elapsed_history = ga.get_elapsed_history();
+    }
     out.generations_since_improvement =
         ga.get_generations_since_improvement();
     out.objective_improvement_count = ga.get_objective_improvement_count();
@@ -187,6 +208,7 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
     out.final_fitness = ga.get_best_fitness();
     out.generation_log_path = options.generation_log_path;
     if (!options.generation_log_path.empty()) {
+      try {
         if (options.generation_log_path.has_parent_path()) {
             std::filesystem::create_directories(
                 options.generation_log_path.parent_path());
@@ -204,11 +226,22 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
                        << (index < improvements.size() && improvements[index]
                                ? "true" : "false") << '\n';
         }
+        if (!trajectory) throw std::runtime_error("HGA trajectory write failed");
+      } catch (...) {
+        if (!options.retain_verified_on_log_failure) throw;
+        out.candidate_evidence_persisted = false;
+        out.notes.push_back("trajectory not persisted; verified memory retained");
+      }
     }
     if (options.publish_verified_improvements) {
+        const auto ledger_started = std::chrono::steady_clock::now();
         const bool candidate_ledger_written = writeCandidateLedger(
             options.verified_candidate_log_path,
             published_candidates.observations());
+        out.ledger_seconds = std::chrono::duration<double>(
+            std::chrono::steady_clock::now() - ledger_started).count();
+        out.candidate_evidence_persisted = out.candidate_evidence_persisted &&
+            candidate_ledger_written;
         out.candidate_observations = static_cast<long long>(
             published_candidates.observations().size());
         for (const CandidateObservation& observation :
@@ -220,11 +253,14 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
         }
         if (!candidate_ledger_written) {
             out.candidate_observer_failed = true;
-            out.published_candidate_count = 0;
+            if (!options.retain_verified_on_log_failure)
+                out.published_candidate_count = 0;
             out.notes.push_back(
                 "optional HGA candidate ledger write failed; event "
                 "publication was disabled and original HGA search retained");
-        } else if (published_candidates.hasBest()) {
+        }
+        if ((candidate_ledger_written || options.retain_verified_on_log_failure) &&
+            published_candidates.hasBest()) {
             const VerifiedBrpCandidate& candidate = published_candidates.best();
             out.found = true;
             out.routes = candidate.routes;
@@ -242,6 +278,26 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
                 std::chrono::steady_clock::now() - started).count();
             return out;
         }
+    }
+
+    // PREFIX OFF extracts the same cached complete snapshot as ON, without
+    // another stochastic/expensive decode. This is exclusive to Round 61.
+    if (options.fixed_generations >= 0) {
+        auto routes = routesFromHgaDecode(instance, ga.get_best_solution(),
+                                         ga.get_best_decoded_operations());
+        VerifiedCandidateStore final_store;
+        final_store.consider(instance, options.lambda, routes, "prefix_cached_best",
+                             options.candidate_model_identity);
+        if (final_store.hasBest()) {
+            out.found = true;
+            out.routes = final_store.best().routes;
+            out.verified_objective = final_store.best().objective;
+            out.retained_candidate_sha256 = final_store.best().content_sha256;
+            out.source_label = "prefix_cached_best";
+        }
+        out.wall_time_seconds = std::chrono::duration<double>(
+            std::chrono::steady_clock::now() - started).count();
+        return out;
     }
 
     if (options.process_options) {
