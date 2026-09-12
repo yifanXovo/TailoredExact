@@ -9,7 +9,7 @@ already supports this non-strict cutoff; the old preliminary gate can suppress
 it before mapping. This is a scope/contract correction, not a gap threshold
 tuned to the C2 performance result.
 
-After the current serial suite finishes, the Round61 gate will require
+The corrected Round61 gate requires
 admissibility under the current non-strict cutoff plus strict improvement of
 the native incumbent. Current bounds, variable types and all linear rows are
 still checked. A candidate in an incompatible Gini leaf is still rejected by
@@ -29,7 +29,7 @@ pair, at 300 seconds each. Combined with the declared final coverage and up to
 three conflict solves, projected total is 71/72. No new candidate quality
 selection, confirmation-driven threshold change, MIP-start arm or parameter grid.
 
-The same post-performance build will correct a legacy fixed-model metadata
+The same post-performance build corrected a legacy fixed-model metadata
 description that prints lambda=0.15 even when the new CLI accepts another lambda.
 The actual model already reads the supplied lambda. Verify default and nondefault
 model bytes in free build-only checks and preserve the original paired binaries.
@@ -44,3 +44,16 @@ The whole run has 8 LP calls, 1 partial MIP, 1 terminal MIP and 1 split; OFF has
 3 LP calls, 1 partial MIP, 1 terminal MIP and no split. Thus archive propagation
 already changes the formal controller, while actual native processing remains
 unknown. This is the case the corrected paired build must cover.
+
+## Completed matched validation
+
+The final pair is `k1_corrected/C2`, frozen in `admission_build_freeze.json`.
+OFF has 5 optimize calls; SUBMIT has 10 and submits twice. In the later terminal
+MIP, F=U=0.83709146755470198 with no native incumbent passes all 8,663 current
+rows, is submitted, is observed as the same full vector in MIPSOL, and an
+incumbent improvement is observed. The final integer vector differs after
+further native improvement. The first partial-target call remains delayed/
+unknown. No unique-source inference is made from the matching vector.
+Default D2/D3/D4 canonical LP bytes remain equal to the prior and Round60
+builds. At lambda=.27 the old/new fixed-driver LP bytes are also identical;
+only incorrect metadata text was corrected. See `admission_identity.json`.

@@ -60,6 +60,10 @@ Gini range and canonical rows (actual row is F<=U). ARCHIVE never changes the
 native optimization. SUBMIT maps the same precomputed snapshot once, checks
 current bounds/types/all linear rows and the current native incumbent. A
 model-incompatible global archive does not update the model-applicable gate.
+The final admission gate allows F equal to the current non-strict cutoff when
+the native call has no incumbent or a strictly worse one. Global archive U is
+not an incumbent of every later native model. Equality does not bypass Gini
+membership, propagated bounds, any row, or per-call hash deduplication.
 There is no HGA invocation in callbacks and no new LP-guided claim. The full
 outer algorithm can merge the global archive after a native call, through the
 existing verified-cutoff/coverage contract; this is separately measured.
@@ -78,6 +82,10 @@ station, vehicle assignment, arc degrees, ordering and load propagation. It
 contains no Gini variables, F cutoff, original-T arc deletion, original-T
 propagated domain, or inherited tailored rows. Released stations remain in
 the model and can supply/deliver under their original capacities.
+Inventory index 0 is the input's depot placeholder, excluded from objective,
+station inventory conditions and available supply; vehicles still start with
+zero load. Historical diagnostic vectors use 0 there, while parsed PREFIX
+witnesses preserve the input placeholder. This does not provide depot bikes.
 
 A simple route has at most n+1 arcs, each bounded by d_max. Because service is
 single and unidirectional, total pickups across all vehicles cannot exceed
@@ -95,6 +103,13 @@ that witness to meet original T. Strict time infeasibility needs a valid lower
 bound > T + 1e-5 max(1,T). Intervals crossing T remain unknown. Model
 infeasibility under B is time-independent infeasibility; numerical failure,
 LP infeasibility, MIP infeasibility and unfinished runs remain distinct.
+
+For the frozen Euclidean inputs, an additional solver-free necessary condition
+uses pair travel lower bound d(0,i)+d(i,j)+d(j,0) and pickup lower bound
+max(p_i+p_j,d_i+d_j). A clique of M+1 required services whose pair bounds all
+exceed T is impossible with M vehicles, even when other stations can help.
+This is conditional on those inventories, not a new F bound. See
+`cheap_time_proof.md` for its metric assumption and the bounded search policy.
 
 A proved impossible partial inventory pattern gives a logical no-good only
 in its proven scope. Exact little-endian inventory bits give sum of mismatching

@@ -1,0 +1,26 @@
+{
+  "source_commit": "d937928a1c6abcc34d56f044bfcd9347755492ee",
+  "executables": [
+    {
+      "executable": "ExactEBRP.exe",
+      "sha256": "7b507913dbf7cad21ddb8ab9b36694afdef54b7d8cf6342c9f099b5e8e6310fd"
+    },
+    {
+      "executable": "Round50IntervalMipExperiment.exe",
+      "sha256": "f4ed0b6440a9ad2133216478eb0c1a7ebb060afbf9be8629ea161f039e7c3a18"
+    },
+    {
+      "executable": "Round61CandidateExperiment.exe",
+      "sha256": "1416a829647ec3978198666044dc481ec4f06627f1cb0f329ee40841f28ea735"
+    },
+    {
+      "executable": "Round61TimeOracle.exe",
+      "sha256": "620480e2fd1062eb8eeac2511fe30869f493579987fec10fe88a9808bdf658d0"
+    }
+  ],
+  "tests": "38/38 passed",
+  "test_log_sha256": "1cc70d7f3744d4869ce920eaa60f6db6a52595596b45c1bf40f6a5765a984e8e",
+  "build_log_sha256": "bbdf7d3e113123cb25e0e32669a62433217047d69a5c05bc6547e5eeb03a85c9",
+  "performance_uses_recorded_prior_freezes": true,
+  "change": "Only failed legacy generation-log stream behavior restored when research retention flag is off; no recorded run had this failure. No change to successful model/search/candidate paths."
+}

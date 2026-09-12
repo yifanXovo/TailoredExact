@@ -1,0 +1,105 @@
+[  1%] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/HgaTgbcRunner.cpp.obj
+In file included from E:/codes/ExactEBRP/include/hga_tgbc/GreedyMethods.h:3,
+                 from E:\codes\ExactEBRP\src\HgaTgbcRunner.cpp:6:
+E:/codes/ExactEBRP/include/hga_tgbc/AVLCalculator.h: In member function 'void AVLCalculator::update(int, int, double, double)':
+E:/codes/ExactEBRP/include/hga_tgbc/AVLCalculator.h:34:32: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<double>::size_type' {aka 'long long unsigned int'} [-Wsign-compare]
+   34 |         if (x_idx < 0 || x_idx >= current_a.size() || y_idx < 0 || y_idx >= current_a.size()) {
+      |                          ~~~~~~^~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/include/hga_tgbc/AVLCalculator.h:34:74: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<double>::size_type' {aka 'long long unsigned int'} [-Wsign-compare]
+   34 |         if (x_idx < 0 || x_idx >= current_a.size() || y_idx < 0 || y_idx >= current_a.size()) {
+      |                                                                    ~~~~~~^~~~~~~~~~~~~~~~~~~
+[  2%] Linking CXX static library libexact_ebrp_core.a
+[ 39%] Built target exact_ebrp_core
+[ 39%] Linking CXX executable ExactEBRP.exe
+[ 40%] Linking CXX executable Round61TimeOracle.exe
+[ 41%] Linking CXX executable Round61CandidateExperiment.exe
+[ 42%] Building CXX object CMakeFiles/Round61CandidateTests.dir/tests/round61_candidate_tests.cpp.obj
+[ 43%] Built target Round61TimeOracle
+[ 43%] Built target Round61CandidateExperiment
+[ 44%] Built target ExactEBRP
+[ 44%] Linking CXX executable Round59ResearchTests.exe
+[ 45%] Linking CXX executable Round60CandidateTests.exe
+[ 46%] Linking CXX executable ExactEBRPCompare.exe
+[ 47%] Built target Round59ResearchTests
+[ 48%] Built target Round60CandidateTests
+[ 49%] Built target ExactEBRPCompare
+[ 49%] Linking CXX executable ControllingLeafSchedulerTests.exe
+[ 50%] Linking CXX executable GlobalGiniTreeTests.exe
+[ 51%] Linking CXX executable StrictCertificateTests.exe
+[ 52%] Built target ControllingLeafSchedulerTests
+[ 52%] Built target StrictCertificateTests
+[ 52%] Built target GlobalGiniTreeTests
+[ 53%] Linking CXX executable ConnectivityFlowTests.exe
+[ 53%] Linking CXX executable StrictSerializationTests.exe
+[ 53%] Linking CXX executable ModelCorrectnessTests.exe
+[ 53%] Built target ConnectivityFlowTests
+[ 54%] Built target ModelCorrectnessTests
+[ 55%] Built target StrictSerializationTests
+[ 56%] Linking CXX executable DenseProgressTests.exe
+[ 57%] Linking CXX executable DispersionChildBoundTests.exe
+[ 58%] Linking CXX executable Round24BackendTests.exe
+[ 59%] Built target DenseProgressTests
+[ 59%] Built target DispersionChildBoundTests
+[ 60%] Built target Round24BackendTests
+[ 61%] Linking CXX executable Round27PaperSchedulingTests.exe
+[ 61%] Linking CXX executable Round28ReplicaTests.exe
+[ 62%] Linking CXX executable Round29PerformanceRecoveryTests.exe
+[ 63%] Built target Round28ReplicaTests
+[ 63%] Built target Round27PaperSchedulingTests
+[ 64%] Built target Round29PerformanceRecoveryTests
+[ 65%] Linking CXX executable Round30C5Tests.exe
+[ 65%] Linking CXX executable Round31C6Tests.exe
+[ 66%] Linking CXX executable Round36CausalTests.exe
+[ 66%] Linking CXX executable Round61CandidateTests.exe
+[ 66%] Built target Round30C5Tests
+[ 67%] Built target Round31C6Tests
+[ 68%] Built target Round36CausalTests
+[ 68%] Built target Round61CandidateTests
+[ 69%] Linking CXX executable Round37GeometryTests.exe
+[ 69%] Linking CXX executable Round40CoarseStartTests.exe
+[ 70%] Linking CXX executable Round40UbGeometryTests.exe
+[ 71%] Linking CXX executable Round41StaticSegmentedTests.exe
+[ 71%] Built target Round37GeometryTests
+[ 72%] Built target Round40UbGeometryTests
+[ 73%] Built target Round40CoarseStartTests
+[ 73%] Built target Round41StaticSegmentedTests
+[ 73%] Linking CXX executable Round42StaticSegmentedTests.exe
+[ 74%] Linking CXX executable Round43EnvelopeRefinementTests.exe
+[ 75%] Linking CXX executable Round44EnvelopeTailRepairTests.exe
+[ 75%] Linking CXX executable Round45AdaptiveParametricTests.exe
+[ 75%] Built target Round44EnvelopeTailRepairTests
+[ 76%] Built target Round43EnvelopeRefinementTests
+[ 77%] Built target Round45AdaptiveParametricTests
+[ 78%] Built target Round42StaticSegmentedTests
+[ 79%] Linking CXX executable Round46C6RhoTests.exe
+[ 80%] Linking CXX executable Round47AdaptiveMassTests.exe
+[ 80%] Linking CXX executable Round48K1AMFTests.exe
+[ 81%] Linking CXX executable Round49RCOfflineExtract.exe
+[ 82%] Built target Round48K1AMFTests
+[ 82%] Built target Round49RCOfflineExtract
+[ 82%] Built target Round47AdaptiveMassTests
+[ 83%] Built target Round46C6RhoTests
+[ 84%] Linking CXX executable Round49K1LPPrimalDualTests.exe
+[ 84%] Linking CXX executable Round50IntervalMipExperiment.exe
+[ 85%] Linking CXX executable Round51IntervalMipExperiment.exe
+[ 86%] Linking CXX executable Round50IntervalMipTests.exe
+[ 87%] Built target Round49K1LPPrimalDualTests
+[ 87%] Linking CXX executable Round51TightBigMTests.exe
+[ 88%] Built target Round50IntervalMipTests
+[ 89%] Built target Round50IntervalMipExperiment
+[ 89%] Built target Round51IntervalMipExperiment
+[ 90%] Linking CXX executable Round52TailoredCutTests.exe
+[ 91%] Linking CXX executable Round53F0AndCallbackTests.exe
+[ 91%] Linking CXX executable Round54InventoryRouteExperiment.exe
+[ 92%] Built target Round51TightBigMTests
+[ 93%] Linking CXX executable Round54MainlineAndInventoryRouteTests.exe
+[ 94%] Built target Round52TailoredCutTests
+[ 95%] Linking CXX executable Round55StationStateChainTests.exe
+[ 95%] Built target Round53F0AndCallbackTests
+[ 96%] Built target Round54InventoryRouteExperiment
+[ 97%] Linking CXX executable Round56PaperBenchmarkTests.exe
+[ 98%] Linking CXX executable Round58CitiBikePairedBenchmarkTests.exe
+[ 99%] Built target Round54MainlineAndInventoryRouteTests
+[ 99%] Built target Round55StationStateChainTests
+[ 99%] Built target Round58CitiBikePairedBenchmarkTests
+[100%] Built target Round56PaperBenchmarkTests

@@ -1,0 +1,40 @@
+{
+  "id": "supply_infeasible",
+  "arm": "mip",
+  "stage": "oracle_micro",
+  "scope": "inventory_time_diagnostic",
+  "fixed_inventory": [
+    0,
+    5,
+    6
+  ],
+  "command": [
+    "E:\\codes\\ExactEBRP\\build\\round61-dev\\Round61TimeOracle.exe",
+    "--input",
+    "tests/data/round61_transfer.txt",
+    "--out",
+    "E:\\codes\\ExactEBRP\\results\\gf_transfer_block_native_time_round61\\local_raw\\oracle_micro\\supply_infeasible\\mip",
+    "--T",
+    "12",
+    "--pickup-time",
+    "1",
+    "--drop-time",
+    "1",
+    "--lambda",
+    "0.15",
+    "--mode",
+    "mip",
+    "--cap",
+    "10",
+    "--inventory",
+    "0,5,6"
+  ],
+  "executable_sha256": "157ca15575657d28404cf7cbaf0194d997e3e2ea204ad2dbcb21767d56ed2fb0",
+  "cap_seconds": 10,
+  "kind": "oracle",
+  "charged": true,
+  "charged_number": 18,
+  "solver_calls_planned": 1,
+  "started_unix": 1789202847.6913161,
+  "destination": "results\\gf_transfer_block_native_time_round61\\local_raw\\oracle_micro\\supply_infeasible\\mip"
+}
