@@ -86,6 +86,13 @@ void prefixTests() {
     require(!failed.candidate_evidence_persisted && failed.found && failed.retained_verified_event_candidate,
             "telemetry failure lost independently verified memory");
     require(failed.retained_candidate_sha256==on.retained_candidate_sha256,"snapshot mismatch after log failure");
+    // Opening a directory as an output stream fails without a directory-
+    // creation exception. The opt-out policy must retain legacy behavior.
+    options.publish_verified_improvements=false;
+    options.retain_verified_on_log_failure=false;
+    options.generation_log_path=std::filesystem::temp_directory_path();
+    auto legacy_log_failure=ebrp::runHgaTgbcNative(in,options);
+    require(legacy_log_failure.found,"new audit policy changed legacy stream-failure behavior");
 }
 void oracleAndScopeTests() {
     auto in=tiny();

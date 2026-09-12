@@ -229,7 +229,11 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
                        << (index < improvements.size() && improvements[index]
                                ? "true" : "false") << '\n';
         }
-        if (!trajectory) throw std::runtime_error("HGA trajectory write failed");
+        // Preserve the legacy silent stream-failure behavior when the new
+        // retention/audit policy is off. Directory exceptions keep their
+        // existing behavior through the catch below.
+        if (!trajectory && options.retain_verified_on_log_failure)
+            throw std::runtime_error("HGA trajectory write failed");
       } catch (...) {
         if (!options.retain_verified_on_log_failure) throw;
         out.candidate_evidence_persisted = false;
