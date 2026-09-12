@@ -345,6 +345,8 @@ struct ProgressCallbackState {
     const SolveOptions* candidate_options = nullptr;
     std::string candidate_mode = "off";
     std::shared_ptr<Round61CandidateSession> round61_session;
+    std::function<bool(double)> round62_external_stop;
+    bool round62_external_termination_requested = false;
     std::string candidate_model_identity;
     double candidate_gamma_L = 0.0;
     double candidate_gamma_U = 0.0;
@@ -924,7 +926,7 @@ int __stdcall progressAndBoundTargetCallback(
             Clock::now() - state->telemetry_start).count());
     state->api->cbget(cbdata, where, GRB_CB_WORK, &event.work);
     state->api->cbget(cbdata, where, GRB_CB_MIP_OBJBST, &event.incumbent);
-    state->api->cbget(cbdata, where, GRB_CB_MIP_OBJBND, &event.best_bound);
+    const bool native_bound_read = state->api->cbget(cbdata, where, GRB_CB_MIP_OBJBND, &event.best_bound)==0;
     state->api->cbget(cbdata, where, GRB_CB_MIP_NODCNT,
                       &event.processed_nodes);
     state->api->cbget(cbdata, where, GRB_CB_MIP_NODLFT, &event.open_nodes);
@@ -938,7 +940,7 @@ int __stdcall progressAndBoundTargetCallback(
     }
     state->api->cbget(cbdata, where, GRB_CB_MIP_PHASE, &event.phase);
     event.incumbent_available = finiteNative(event.incumbent);
-    event.best_bound_available = finiteNative(event.best_bound);
+    event.best_bound_available = native_bound_read && finiteNative(event.best_bound);
     if (event.incumbent_available &&
         state->progress.first_incumbent_time < 0.0) {
         state->progress.first_incumbent_time = event.elapsed_runtime_seconds;
@@ -970,6 +972,15 @@ int __stdcall progressAndBoundTargetCallback(
         } catch (...) {
             ++state->progress.dropped_records;
         }
+    }
+    if (state->round62_external_stop && event.best_bound_available &&
+        !state->round62_external_termination_requested) {
+        try {
+            if (state->round62_external_stop(event.best_bound) && model && state->api->terminate) {
+                state->round62_external_termination_requested=true;
+                state->api->terminate(model);
+            }
+        } catch (...) { state->round62_external_stop={}; }
     }
     if (state->bound_target_enabled && event.best_bound_available &&
         event.best_bound + state->bound_target_tolerance >=
@@ -2051,6 +2062,7 @@ public:
             callback.round59_names = native_names;
         }
         callback.api = &api_;
+        if (!out.lp_relaxation) callback.round62_external_stop=request.round62_external_stop;
         out.gurobi_cbsolution_symbol_loaded = api_.cbsolution != nullptr;
         out.round60_candidate_mode = request.round60_candidate_mode;
         const bool round60_candidate_active = (out.terminal_mip ||
@@ -2453,6 +2465,7 @@ public:
             out.native_status_code == GRB_WORK_LIMIT ||
             out.native_status_code == GRB_MEM_LIMIT;
         out.native_bound_target_reached = callback.bound_target_reached;
+        out.round62_external_termination_requested=callback.round62_external_termination_requested;
         out.native_bound_target_termination_requested =
             callback.bound_target_termination_requested;
         if (out.partial_bound_target_mip &&
@@ -2787,6 +2800,28 @@ public:
         getInt(GRB_INT_ATTR_SOLCOUNT, solution_count);
         const GurobiNativeLogEvidence log_evidence =
             inspectGurobiNativeLog(request.native_log_path);
+        if (request.round62_external_stop) {
+            out.round62_numeric_valid=out.native_status_code==GRB_OPTIMAL ||
+                out.native_status_code==GRB_INTERRUPTED || out.native_status_code==GRB_TIME_LIMIT ||
+                out.native_status_code==GRB_INFEASIBLE;
+            if (solution_count>0) {
+                for (const char* attr:{"ConstrVio","BoundVio","IntVio"}) {
+                    double violation=0;
+                    out.round62_numeric_valid=out.round62_numeric_valid &&
+                        getDouble(attr,violation) && violation<=1e-5;
+                }
+            }
+            std::ifstream quality_log(request.native_log_path);
+            std::string quality_line;
+            while(std::getline(quality_log,quality_line)) {
+                std::transform(quality_line.begin(),quality_line.end(),quality_line.begin(),
+                    [](unsigned char c){return static_cast<char>(std::tolower(c));});
+                if(quality_line.find("numerical trouble")!=std::string::npos ||
+                   quality_line.find("unscaled primal violation")!=std::string::npos ||
+                   quality_line.find("unscaled dual violation")!=std::string::npos)
+                    out.round62_numeric_valid=false;
+            }
+        }
         out.presolved_model_size_available =
             log_evidence.presolved_size_available;
         out.presolved_row_count = log_evidence.presolved_rows;

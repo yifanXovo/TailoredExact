@@ -2,6 +2,7 @@
 #include "Evaluator.hpp"
 #include <algorithm>
 #include <cmath>
+#include <cctype>
 #include <fstream>
 #include <iomanip>
 #include <limits>
@@ -9,6 +10,7 @@
 #include <numeric>
 #include <stdexcept>
 #include <sstream>
+#include <set>
 #if defined(_WIN32) && EXACT_EBRP_ENABLE_GUROBI
 #define NOMINMAX
 #include <windows.h>
@@ -22,6 +24,25 @@ double seconds(Clock::time_point t) { return std::chrono::duration<double>(Clock
 std::string v(const char* prefix,int k,int i) { return std::string(prefix)+"_"+std::to_string(k)+"_"+std::to_string(i); }
 std::string x(int k,int i,int j) { return v("x",k,i)+"_"+std::to_string(j); }
 std::string y(int i) { return "Y_"+std::to_string(i); }
+#if defined(_WIN32) && EXACT_EBRP_ENABLE_GUROBI
+struct ThresholdStop {
+    decltype(&GRBcbget) get=nullptr;
+    decltype(&GRBterminate) terminate=nullptr;
+    double T=0,margin=0;
+    bool requested=false;
+};
+int __stdcall thresholdStop(GRBmodel* model,void* cbdata,int where,void* userdata) {
+    auto& s=*static_cast<ThresholdStop*>(userdata);
+    if(where!=GRB_CB_MIP||s.requested)return 0;
+    double lb=-GRB_INFINITY,ub=GRB_INFINITY;
+    const bool lower=s.get(cbdata,where,GRB_CB_MIP_OBJBND,&lb)==0;
+    const bool upper=s.get(cbdata,where,GRB_CB_MIP_OBJBST,&ub)==0;
+    if((lower&&lb<GRB_INFINITY&&lb>s.T+s.margin)||(upper&&ub<=s.T)) {
+        s.requested=true;s.terminate(model);
+    }
+    return 0;
+}
+#endif
 }
 
 double round61SafeDurationBound(const Instance& in) {
@@ -46,6 +67,14 @@ void writeRound61TimeModel(const Instance& in,const Round61TimeRequest& r) {
     f<<"Minimize\n obj: Tstar\nSubject To\n";
     int row=0;
     auto line=[&]() -> std::ofstream& { f<<" r"<<++row<<":"; return f; };
+    std::set<int> threshold_stations;
+    for(const auto& e:r.threshold_events) {
+        if(e.station<1||e.station>in.V||e.quantity<=0||
+           (e.direction!=-1&&e.direction!=1)||!threshold_stations.insert(e.station).second)
+            throw std::runtime_error("invalid time-oracle threshold event");
+        line()<<" + "<<y(e.station)<<(e.direction<0?" <= ":" >= ")
+            <<in.initial[e.station]+e.direction*e.quantity<<'\n';
+    }
     std::vector<std::string> binaries,integers;
     std::ostringstream bounds; bounds<<std::setprecision(17);
     const double c=in.pickup_time+in.drop_time;
@@ -130,6 +159,16 @@ Round61TimeResult solveRound61TimeOracle(const Instance& in,double lambda,const 
     const auto start=Clock::now(); Round61TimeResult out;
     out.safe_duration_bound=round61SafeDurationBound(in);
     writeRound61TimeModel(in,r);
+    if(r.threshold_decision && !r.force_native && !r.threshold_events.empty()) {
+        Round62Conflict conflict;
+        if(proveRound62Conflict(in,round62Shortest(in),r.threshold_events,&conflict)) {
+            out.classification="original_T_strictly_infeasible_cheap_threshold";
+            out.seconds=seconds(start);
+            std::ofstream f(r.directory/"oracle_result.json");
+            f<<"{\"classification\":\""<<out.classification<<"\",\"optimizer_calls\":0,\"seconds\":"<<out.seconds<<"}\n";
+            return out;
+        }
+    }
 #if defined(_WIN32) && EXACT_EBRP_ENABLE_GUROBI
     const auto dll_name=L"gurobi"+std::to_wstring(GRB_VERSION_MAJOR)+
         std::to_wstring(GRB_VERSION_MINOR)+L".dll";
@@ -140,11 +179,13 @@ Round61TimeResult solveRound61TimeOracle(const Instance& in,double lambda,const 
     API(emptyenvinternal); API(startenv); API(freeenv); API(readmodel); API(freemodel);
     API(setintparam); API(setdblparam); API(setstrparam); API(getintparam); API(getdblparam);
     API(optimize); API(getintattr); API(getdblattr); API(getdblattrarray); API(getstrattrelement); API(getenv);
+    API(setcallbackfunc);API(cbget);API(terminate);
 #undef API
     auto check=[](int code) { if(code) throw std::runtime_error("Gurobi oracle error "+std::to_string(code)); };
     try {
         check(emptyenvinternal(&env,GRB_VERSION_MAJOR,GRB_VERSION_MINOR,GRB_VERSION_TECHNICAL));
-        check(setintparam(env,"OutputFlag",0));
+        check(setintparam(env,"OutputFlag",r.threshold_decision?1:0));
+        if(r.threshold_decision)check(setintparam(env,"LogToConsole",0));
         check(setstrparam(env,"LogFile",(r.directory/"native.log").string().c_str()));
         check(startenv(env));
         check(readmodel(env,(r.directory/"time_oracle.lp").string().c_str(),&model));
@@ -160,24 +201,44 @@ Round61TimeResult solveRound61TimeOracle(const Instance& in,double lambda,const 
         check(getdblparam(me,"MIPGap",&ga));check(getdblparam(me,"MIPGapAbs",&ab));
         out.parameters_verified=th==1 && se==0 && pre==-1 && ga==0 && ab==0;
         if(!out.parameters_verified) throw std::runtime_error("oracle parameter readback mismatch");
+        ThresholdStop stopping{cbget,terminate,in.total_time_limit,1e-5*std::max(1.0,in.total_time_limit),false};
+        if(r.threshold_decision && !r.lp) check(setcallbackfunc(model,thresholdStop,&stopping));
         check(optimize(model)); check(getintattr(model,"Status",&out.status));
+        out.threshold_stop_requested=stopping.requested;
+        int solcount=0;check(getintattr(model,"SolCount",&solcount));
         getdblattr(model,"Runtime",&out.solver_seconds); getdblattr(model,"Work",&out.work);
         double constraint_violation=0, bound_violation=0, dual_violation=0;
         bool primal_quality=getdblattr(model,"ConstrVio",&constraint_violation)==0 &&
             getdblattr(model,"BoundVio",&bound_violation)==0;
         bool dual_quality=!r.lp || getdblattr(model,"DualVio",&dual_violation)==0;
-        const bool numeric_ok=primal_quality && dual_quality && constraint_violation<=1e-5 &&
-            bound_violation<=1e-5 && dual_violation<=1e-5;
+        double integer_violation=0;
+        const bool integer_quality=!r.threshold_decision || r.lp || solcount==0 ||
+            getdblattr(model,"IntVio",&integer_violation)==0;
+        bool numerical_warning=false;
+        if(r.threshold_decision) {
+            std::ifstream native_log(r.directory/"native.log");std::string line;
+            while(std::getline(native_log,line)) {
+                std::transform(line.begin(),line.end(),line.begin(),[](unsigned char c){return static_cast<char>(std::tolower(c));});
+                numerical_warning=numerical_warning || line.find("numerical trouble")!=std::string::npos ||
+                    line.find("unscaled primal violation")!=std::string::npos || line.find("unscaled dual violation")!=std::string::npos;
+            }
+        }
+        const bool numeric_ok=primal_quality && dual_quality && integer_quality &&
+            constraint_violation<=1e-5 && bound_violation<=1e-5 && dual_violation<=1e-5 &&
+            integer_violation<=1e-5 && !numerical_warning;
         std::ofstream quality(r.directory/"numerical_quality.json"); quality<<std::setprecision(17)
             <<"{\"primal_quality_available\":"<<primal_quality<<",\"dual_quality_available\":"<<dual_quality
             <<",\"constraint_violation\":"<<constraint_violation<<",\"bound_violation\":"<<bound_violation
-            <<",\"dual_violation\":"<<dual_violation<<",\"numeric_ok\":"<<numeric_ok<<"}\n";
-        out.time_independent_infeasible=out.status==GRB_INFEASIBLE;
+            <<",\"dual_violation\":"<<dual_violation<<",\"integer_violation\":"<<integer_violation
+            <<",\"native_solution_count\":"<<solcount<<",\"numerical_warning\":"<<numerical_warning<<",\"numeric_ok\":"<<numeric_ok<<"}\n";
+        out.time_independent_infeasible=out.status==GRB_INFEASIBLE && !numerical_warning;
         if(r.lp && out.status==GRB_OPTIMAL) out.lower_available=getdblattr(model,"ObjVal",&out.lower)==0;
         if(!r.lp && (out.status==GRB_OPTIMAL || out.status==GRB_TIME_LIMIT || out.status==GRB_INTERRUPTED))
             out.lower_available=getdblattr(model,"ObjBound",&out.lower)==0 && std::isfinite(out.lower) && std::abs(out.lower)<GRB_INFINITY;
-        int solcount=0; check(getintattr(model,"SolCount",&solcount));
-        if((out.status==GRB_OPTIMAL && !numeric_ok) || out.status==GRB_NUMERIC)
+        // A bound does not require an incumbent. When one exists in threshold
+        // mode, reject bad primal/integer quality also after a tentative stop.
+        if(((out.status==GRB_OPTIMAL || (r.threshold_decision && solcount>0)) && !numeric_ok) ||
+           out.status==GRB_NUMERIC || numerical_warning)
             out.lower_available=false;
         if(!r.lp && solcount>0) {
             int n=0; check(getintattr(model,"NumVars",&n)); std::vector<double> values(n);
@@ -207,6 +268,10 @@ Round61TimeResult solveRound61TimeOracle(const Instance& in,double lambda,const 
             if(!store.hasBest()) throw std::runtime_error("oracle route independent verification failed");
             for(int i=1;i<=in.V;++i) if(r.inventory[i]>=0 && store.best().final_inventory[i]!=r.inventory[i])
                 throw std::runtime_error("oracle fixed inventory mismatch");
+            for(const auto& e:r.threshold_events) {
+                const int change=e.direction*(store.best().final_inventory[e.station]-in.initial[e.station]);
+                if(change<e.quantity)throw std::runtime_error("oracle threshold witness mismatch");
+            }
             out.witness=store.best(); auto verified=verifySolution(relaxed,routes,lambda);
             for(double d:verified.route_duration) out.upper=std::max(out.upper,d);
             out.upper_verified=true;
@@ -225,6 +290,8 @@ Round61TimeResult solveRound61TimeOracle(const Instance& in,double lambda,const 
     out.seconds=seconds(start);
     std::ofstream f(r.directory/"oracle_result.json"); f<<std::setprecision(17)
         <<"{\"classification\":\""<<out.classification<<"\",\"status\":"<<out.status
+        <<",\"optimizer_calls\":1,\"threshold_decision\":"<<r.threshold_decision
+        <<",\"threshold_stop_requested\":"<<out.threshold_stop_requested
         <<",\"LP\":"<<r.lp<<",\"T_original\":"<<in.total_time_limit
         <<",\"safe_duration_bound\":"<<out.safe_duration_bound<<",\"lower\":";
     if(out.lower_available) f<<out.lower; else f<<"null";

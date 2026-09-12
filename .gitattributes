@@ -19,3 +19,8 @@ results/gf_c6_rho_k1_k4_screen_round46/** -text whitespace=cr-at-eol
 
 # Preserve byte-exact Round 49 compact evidence and recorded SHA-256 values.
 results/gf_k1_lp_primal_dual_rescue_round49/** -text whitespace=cr-at-eol
+
+# Round62 preflight found automatic CRLF conversion changes manifest input hashes.
+# Keep the original checked-in dataset bytes and this round's evidence exact.
+reference/citibike443-regional-v1/** -text
+results/gf_passive_threshold_conflicts_round62/** -text

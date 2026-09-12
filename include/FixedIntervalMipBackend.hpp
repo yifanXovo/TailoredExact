@@ -4,6 +4,7 @@
 #include "Result.hpp"
 
 #include <filesystem>
+#include <functional>
 #include <memory>
 #include <string>
 #include <vector>
@@ -160,6 +161,8 @@ struct FixedIntervalMipRequest {
     // Round 60 default-off candidate construction and native injection.
     std::string round60_candidate_mode = "off"; // off|dry|inject
     std::shared_ptr<Round61CandidateSession> round61_session;
+    // Read-only full-ledger closure predicate; true permits final termination only.
+    std::function<bool(double)> round62_external_stop;
     int round60_candidate_maximum_evaluations = 512;
     int round60_candidate_maximum_stations = 16;
     std::filesystem::path round60_candidate_log_path;
@@ -197,6 +200,8 @@ struct FixedIntervalLpConstraintEvidence {
 };
 
 struct FixedIntervalMipOutcome {
+    bool round62_external_termination_requested = false;
+    bool round62_numeric_valid = true;
     bool attempted = false;
     bool available = false;
     bool solver_finalization_reached = false;

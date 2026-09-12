@@ -29,6 +29,7 @@ struct Instance {
 };
 
 struct SolveOptions {
+    std::string round62_threshold_mode = "off"; // off|events|conflicts|projection|service|service-conflicts|projection-rlt|projection-service
     std::string method = "tailored";
     std::string input_path;
     std::string log_path;

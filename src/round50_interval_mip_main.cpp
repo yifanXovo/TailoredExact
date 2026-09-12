@@ -47,6 +47,7 @@ struct Arguments {
     int round59_focus = -1;
     std::string round60_candidate_mode = "off";
     std::string round61_candidate_mode = "off";
+    std::string round62_threshold_mode = "off";
     double lambda = 0.15;
     int round60_candidate_maximum_evaluations = 512;
     int round60_candidate_maximum_stations = 16;
@@ -175,6 +176,7 @@ Arguments parseArguments(int argc, char** argv) {
         else if (arg == "--round59-bound-focus") out.round59_focus = 3;
         else if (arg == "--round60-candidate-mode") out.round60_candidate_mode = value(i);
         else if (arg == "--round61-candidate-mode") out.round61_candidate_mode = value(i);
+        else if (arg == "--round62-threshold-mode") out.round62_threshold_mode = value(i);
         else if (arg == "--lambda") out.lambda = std::stod(value(i));
         else if (arg == "--round60-candidate-max-evaluations") out.round60_candidate_maximum_evaluations = std::stoi(value(i));
         else if (arg == "--round60-candidate-max-stations") out.round60_candidate_maximum_stations = std::stoi(value(i));
@@ -238,6 +240,7 @@ void writeCommand(const Arguments& args, const std::filesystem::path& path) {
         << "  \"artifact_dir\": \"" << jsonEscape(args.artifact_dir.generic_string()) << "\",\n"
         << "  \"policy\": \"" << jsonEscape(args.policy) << "\",\n"
         << "  \"round59_cut_execution\": \"" << args.round59_cuts << "\",\n"
+        << "  \"round62_threshold_mode\": \"" << args.round62_threshold_mode << "\",\n"
         << "  \"round59_empty_state\": " << boolJson(args.round59_empty_state) << ",\n"
         << "  \"round59_compact\": " << boolJson(args.round59_compact) << ",\n"
         << "  \"round59_monitor\": " << boolJson(args.round59_monitor) << ",\n"
@@ -753,6 +756,7 @@ void writeSolveEvidence(const Arguments& args,
     std::ofstream result(args.artifact_dir / "result.json");
     result << std::setprecision(17)
         << "{\n  \"schema\": \"round50-fixed-interval-result-v1\",\n"
+        << "  \"round62_threshold_mode\": \"" << args.round62_threshold_mode << "\",\n"
         << "  \"round59_cut_execution\": \"" << args.round59_cuts << "\",\n"
         << "  \"round59_added_rows_status\": \"" << jsonEscape(outcome.additional_linear_rows_status) << "\",\n"
         << "  \"round59_added_rows_count\": " << outcome.additional_linear_rows_added << ",\n"
@@ -1088,6 +1092,7 @@ int main(int argc, char** argv) {
         options.gurobi_home = args.gurobi_home;
         options.lambda = args.lambda;
         options.round61_candidate_mode = args.round61_candidate_mode;
+        options.round62_threshold_mode = args.round62_threshold_mode;
         options.solve_time_limit = args.process_cap_seconds;
         options.process_wall_time_limit = args.process_cap_seconds;
         options.process_start_time = started;

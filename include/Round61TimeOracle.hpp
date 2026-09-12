@@ -1,5 +1,6 @@
 #pragma once
 #include "Round61Candidates.hpp"
+#include "Round62Thresholds.hpp"
 
 namespace ebrp {
 struct Round61TimeRequest {
@@ -9,12 +10,16 @@ struct Round61TimeRequest {
     bool lp = false;
     double process_cap_seconds = 120;
     std::filesystem::path directory;
+    std::vector<Round62Event> threshold_events;
+    bool threshold_decision = false;
+    bool force_native = false; // explicit cost comparison after a cheap proof
 };
 struct Round61TimeResult {
     std::string classification = "unknown";
     int status = 0;
     bool lower_available = false, upper_verified = false;
     bool time_independent_infeasible = false, parameters_verified = false;
+    bool threshold_stop_requested = false;
     double lower = 0, upper = 0, safe_duration_bound = 0;
     double seconds = 0, solver_seconds = 0, work = 0;
     VerifiedBrpCandidate witness;

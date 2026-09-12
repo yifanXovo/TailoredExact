@@ -368,7 +368,9 @@ bool inferCertifiedOriginalProblem(const SolveResult& result) {
                result.external_gini_tree_available &&
                result.external_gini_tree_root_coverage_valid &&
                result.external_gini_tree_parent_child_coverage_valid &&
-               result.external_gini_tree_all_relevant_leaves_closed &&
+               (result.external_gini_tree_all_relevant_leaves_closed ||
+                (result.round62_external_certificate &&
+                 (result.round62_archive_mode=="passive-cert" || result.round62_archive_mode=="passive-observe"))) &&
                result.external_gini_tree_all_leaf_bounds_valid &&
                result.external_gini_tree_leaf_bounds_monotone &&
                result.external_gini_tree_global_bound_monotone &&
@@ -519,6 +521,14 @@ std::string resultToJson(const SolveResult& input) {
         << (result.option_audit_consistent ? "true" : "false") << ",\n";
     out << "  \"option_audit_mismatches\": \""
         << jsonEscape(result.option_audit_mismatches) << "\",\n";
+    out << "  \"round62_archive_mode\": \"" << result.round62_archive_mode << "\",\n"
+        << "  \"round62_threshold_mode\": \"" << result.round62_threshold_mode << "\",\n"
+        << "  \"round62_archive_evidence_persisted\": " << (result.round62_archive_evidence_persisted?"true":"false") << ",\n"
+        << "  \"round62_external_stop_requested\": " << (result.round62_external_stop_requested?"true":"false") << ",\n"
+        << "  \"round62_external_certificate\": " << (result.round62_external_certificate?"true":"false") << ",\n"
+        << "  \"round62_control_upper_bound\": " << result.round62_control_upper_bound << ",\n"
+        << "  \"round62_archive_upper_bound\": " << result.round62_archive_upper_bound << ",\n"
+        << "  \"round62_archive_construction_seconds\": " << result.round62_archive_construction_seconds << ",\n";
     out << "  \"incumbent_archive_attempted\": "
         << (result.incumbent_archive_attempted ? "true" : "false") << ",\n";
     out << "  \"incumbent_archive_files_scanned\": "
