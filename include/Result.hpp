@@ -910,6 +910,14 @@ struct SolveResult {
     std::string preset_reason;
     bool option_audit_consistent = true;
     std::string option_audit_mismatches;
+    std::string round62_archive_mode = "off";
+    std::string round62_threshold_mode = "off";
+    bool round62_archive_evidence_persisted = false;
+    bool round62_external_stop_requested = false;
+    bool round62_external_certificate = false;
+    double round62_control_upper_bound = 0;
+    double round62_archive_upper_bound = 0;
+    double round62_archive_construction_seconds = 0;
     bool incumbent_archive_attempted = false;
     long long incumbent_archive_files_scanned = 0;
     long long incumbent_archive_candidates_verified = 0;

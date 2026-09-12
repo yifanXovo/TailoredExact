@@ -15,6 +15,7 @@
 #include "Round49K1RC.hpp"
 #include "StaticSegmentedGini.hpp"
 #include "Round61Candidates.hpp"
+#include "Round62Passive.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -3020,6 +3021,35 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     auto round61_session = options.round61_candidate_mode == "off"
         ? std::shared_ptr<Round61CandidateSession>{}
         : prepareRound61Candidate(instance, options, artifact_dir / "round61");
+    const bool round62_passive=round62PassiveMode(options.round61_candidate_mode);
+    const bool round62_cert=options.round61_candidate_mode=="passive-cert";
+    bool round62_stopped=false;
+    bool round62_native_quality=true;
+    long long round62_call_sequence=0;
+    std::ofstream round62_coverage,round62_observations;
+    if (round62_passive) {
+        round62_coverage.open(artifact_dir/"round62_coverage.csv");
+        round62_observations.open(artifact_dir/"round62_observations.csv");
+        round62_coverage << std::setprecision(17)
+            << "call,epoch,active,model,control_ub,archive_ub,leaf,gamma_L,gamma_U,lower_bound,status,cutoff,root_coverage,tree_coverage\n";
+        round62_observations << std::setprecision(17)
+            << "call,process_seconds,native_bound,global_bound,usable_ub,valid,eligible,termination_requested,reason\n";
+    }
+    auto round62_snapshot = [&](const std::string& active, const std::string& identity) {
+        Round62CoverageSnapshot s;
+        s.leaves=scheduler.leaves(); s.active_leaf=active; s.model_identity=identity;
+        s.epoch=s.request_epoch=incumbent_epoch;
+        s.control_ub=s.request_cutoff=verified_ub;
+        s.archive_verified=round61_session && round61_session->archive.verified;
+        s.archive_ub=s.archive_verified?round61_session->archive.objective:verified_ub;
+        s.root_lower=root_gamma_L; s.root_upper=root_gamma_U;
+        s.tolerance=scheduler.certificateTolerance();
+        s.root_coverage=result.external_gini_tree_root_coverage_valid &&
+            root_gamma_L<=s.tolerance && root_gamma_U+s.tolerance>=
+                std::min(verified_ub,static_cast<double>(instance.V-1)/instance.V);
+        s.tree_coverage=scheduler.parentChildCoverageValid();
+        return s;
+    };
     bool round60_candidate_path_disabled = false;
 
     auto configureRound60CandidateRequest = [&] (
@@ -3027,8 +3057,32 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         request.round60_candidate_mode = round60_candidate_path_disabled
             ? "off" : options.round60_candidate_mode;
         request.round61_session = round61_session;
-        if(round61_session && !round60_candidate_path_disabled)
+        if(round61_session && !round62_passive && !round60_candidate_path_disabled)
             request.round60_candidate_mode = round61_session->mode == "submit" ? "inject" : "dry";
+        if (round62_passive) {
+            request.round61_session.reset();
+            request.round60_candidate_mode="off";
+            auto s=round62_snapshot(request.leaf_id,request.canonical_model_fingerprint);
+            s.request_cutoff=request.verified_cutoff;
+            const long long call=++round62_call_sequence;
+            for (const auto& leaf:s.leaves) {
+                round62_coverage << call << ',' << s.epoch << ',' << s.active_leaf << ',' << s.model_identity
+                    << ',' << s.control_ub << ',' << s.archive_ub << ',' << leaf.id << ',' << leaf.gamma_L
+                    << ',' << leaf.gamma_U << ',' << leaf.lower_bound << ',' << controllingLeafStatusName(leaf.status)
+                    << ',' << leaf.cutoff << ',' << s.root_coverage << ',' << s.tree_coverage << '\n';
+            }
+            round62_coverage.flush();
+            request.round62_external_stop=[&,s,call,last=-std::numeric_limits<double>::infinity()](double b) mutable {
+                const auto d=evaluateRound62Passive(s,b);
+                if (b>last+1e-12) {
+                    round62_observations << call << ',' << processElapsedSeconds(options) << ',' << b << ','
+                        << d.lower_bound << ',' << d.usable_ub << ',' << d.valid << ',' << d.certified << ','
+                        << (round62_cert && d.certified) << ',' << d.reason << '\n';
+                    last=b;
+                }
+                return round62_cert && d.certified;
+            };
+        }
         request.round60_candidate_maximum_evaluations =
             options.round60_candidate_maximum_evaluations;
         request.round60_candidate_maximum_stations =
@@ -3047,9 +3101,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     };
     auto mergeRound60CandidateOutcome = [&] (
         const FixedIntervalMipOutcome& outcome) {
+        if(round62_passive)round62_native_quality=round62_native_quality && outcome.round62_numeric_valid;
         // Full algorithm only: a verified global archive may tighten the
         // outer cutoff after a native call. Fixed-model experiments never do.
-        if(round61_session && round61_session->archive.verified &&
+        if(round61_session && !round62_passive && round61_session->archive.verified &&
            round61_session->archive.objective < verified_ub - 1e-9) {
             verified_ub = round61_session->archive.objective;
             best_routes = round61_session->archive.routes;
@@ -3833,6 +3888,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 "c6_native_target_phase_exact_closure");
             return C6TargetDisposition::Closed;
         }
+        if (outcome.round62_external_termination_requested) {
+            round62_stopped=true;
+            return C6TargetDisposition::Deadline; // stop whole lifecycle, no deadline flag or requeue
+        }
         if (outcome.native_bound_target_reached &&
             outcome.native_bound_target_termination_requested &&
             outcome.native_bound_available &&
@@ -3991,6 +4050,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
 
     while (!hard_failure && !global_deadline_stop &&
            !scheduler.everyRelevantLeafClosed()) {
+        if (round62_passive) {
+            const auto d=evaluateRound62Passive(round62_snapshot("",""));
+            if (round62_stopped || (round62_cert && d.certified)) {
+                round62_stopped=true;
+                break;
+            }
+        }
         if (!first_tree_event_recorded) {
             recordProcessPhase(
                 options, "first_external_tree_event", "start",
@@ -8107,6 +8173,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 otherRelevantMinimum(bounded.id),
                 "independently_verified_native_incumbent");
         }
+        if (outcome.round62_external_termination_requested) {
+            round62_stopped=true;
+            break;
+        }
         if (terminal.leave_open_and_stop) {
             writeGlobalTrace(
                 processElapsedSeconds(options), elapsedTelemetry(),
@@ -8232,16 +8302,33 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     result.external_gini_tree_open_leaf_count = open_count;
     result.external_gini_tree_closed_leaf_count = closed_count;
     result.lower_bound = scheduler.globalLowerBound();
-    result.upper_bound = verified_ub;
+    result.round62_archive_mode=options.round61_candidate_mode;
+    result.round62_threshold_mode=options.round62_threshold_mode;
+    result.round62_archive_evidence_persisted=round61_session && round61_session->evidence_persisted;
+    result.round62_control_upper_bound=verified_ub;
+    result.round62_archive_upper_bound=round61_session && round61_session->archive.verified
+        ? round61_session->archive.objective:verified_ub;
+    result.round62_archive_construction_seconds=round61_session?round61_session->construction_seconds:0;
+    result.round62_external_stop_requested=round62_stopped;
+    const auto round62_final=evaluateRound62Passive(round62_snapshot("",""));
+    if (round62_passive && round62_final.valid) result.lower_bound=round62_final.lower_bound;
+    double round62_usable_ub=verified_ub;
+    if (round62_passive && round61_session && round61_session->archive.verified &&
+        round61_session->archive.objective < round62_usable_ub) {
+        // Final result selection only: control cutoff, epoch and ledger remain untouched.
+        round62_usable_ub=round61_session->archive.objective;
+        best_routes=round61_session->archive.routes;
+    }
+    result.upper_bound = round62_usable_ub;
     result.routes = best_routes;
     result.verification = verifySolution(instance, best_routes, options.lambda);
     result.objective = result.verification.objective;
     result.G = result.verification.G;
     result.P = result.verification.P;
     result.final_inventory = result.verification.final_inventory;
-    result.gap = std::fabs(verified_ub) > 1e-12
-        ? std::max(0.0, (verified_ub - result.lower_bound) /
-                         std::fabs(verified_ub))
+    result.gap = std::fabs(round62_usable_ub) > 1e-12
+        ? std::max(0.0, (round62_usable_ub - result.lower_bound) /
+                         std::fabs(round62_usable_ub))
         : 0.0;
     result.external_gini_tree_feasibility_consistency_gate =
         result.verification.original_solution_feasible &&
@@ -8309,8 +8396,17 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     certificate_input.global_lb = result.lower_bound;
     certificate_input.verified_ub = verified_ub;
     certificate_input.tolerance = scheduler.certificateTolerance();
+    if (round62_passive) {
+        certificate_input.verified_ub=round62_usable_ub;
+        // Logical closure relative to U_usable is checked on the full snapshot;
+        // no leaf status is rewritten and native termination remains INTERRUPTED.
+        certificate_input.all_relevant_leaves_closed=round62_final.valid && round62_final.certified;
+        certificate_input.feasibility_consistency_gate=certificate_input.feasibility_consistency_gate && round62_native_quality &&
+            std::fabs(result.objective-round62_usable_ub)<=scheduler.certificateTolerance();
+    }
     const ExternalGiniTreeCertificateDecision certificate =
         evaluateExternalGiniTreeCertificate(certificate_input);
+    result.round62_external_certificate=round62_passive && certificate.certified;
     result.external_gini_tree_strict_certified = certificate.certified;
     result.external_gini_tree_certificate_class = certificate.certificate_class;
     result.external_gini_tree_certificate_rejection_reason =

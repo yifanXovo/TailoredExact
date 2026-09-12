@@ -65,6 +65,8 @@ void usage() {
         << "[--frontier-execution-mode scheduler|global-gini-tree|external-gini-tree] [--global-gini-tree-presolve on|off] "
         << "[--external-gini-split-after-attempts <N>] [--external-gini-scheduling legacy-quanta|paper-lp-event|cplex-algorithm-replica|round29-bound-gain-incremental|round30-dual-bound-target|round31-nonblocking-native-bound] "
         << "[--external-gini-interval-mip-policy <uniform-policy>] "
+        << "[--round62-archive-mode off|passive-observe|passive-cert|outer|submit] "
+        << "[--round62-threshold-mode off|events|conflicts|projection|service|service-conflicts|projection-rlt|projection-service] "
         << "[--process-wall-time-limit <seconds>] [--process-shutdown-margin <seconds>] [--process-phase-ledger <csv>] "
         << "[--round56-scenario-id <id>] [--round56-mathematical-instance-sha256 <sha256>] [--round56-run-identity-sha256 <sha256>] "
         << "[--global-gini-tree-search dynamic|traditional|auto] [--global-gini-tree-child-estimate parent-copy|dispersion-coupled|factory-domain] "
@@ -1296,6 +1298,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round60-hga-candidate-log") opt.round60_hga_candidate_log = requireValue(i, argc, argv);
         else if (arg == "--round60-candidate-mode") opt.round60_candidate_mode = lowerAscii(requireValue(i, argc, argv));
         else if (arg == "--round61-candidate-mode") opt.round61_candidate_mode = lowerAscii(requireValue(i, argc, argv));
+        else if (arg == "--round62-archive-mode") {
+            opt.round61_candidate_mode=lowerAscii(requireValue(i,argc,argv));
+            if (opt.round61_candidate_mode=="outer") opt.round61_candidate_mode="archive";
+        }
+        else if (arg == "--round62-threshold-mode") opt.round62_threshold_mode=lowerAscii(requireValue(i,argc,argv));
         else if (arg == "--pickup-time") opt.pickup_time = std::stod(requireValue(i, argc, argv));
         else if (arg == "--drop-time") opt.drop_time = std::stod(requireValue(i, argc, argv));
         else if (arg == "--round60-candidate-max-evaluations") opt.round60_candidate_maximum_evaluations = std::stoi(requireValue(i, argc, argv));
@@ -3146,8 +3153,18 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if(!std::isfinite(opt.pickup_time) || !std::isfinite(opt.drop_time) ||
        opt.pickup_time<0 || opt.drop_time<0) throw std::runtime_error("invalid common service times");
+    const bool r62passive=opt.round61_candidate_mode=="passive-cert"||opt.round61_candidate_mode=="passive-observe";
+    if ((r62passive||opt.round62_threshold_mode!="off") &&
+        (opt.plain_baseline || (opt.algorithm_preset!="research-round59-k1-s" &&
+                               opt.algorithm_preset!="research-round59-f0-single-s")))
+        throw std::runtime_error("Round62 requires explicit Single-S or K1-S research preset");
+    if (opt.round62_threshold_mode!="off" && opt.round62_threshold_mode!="events" &&
+        opt.round62_threshold_mode!="conflicts" && opt.round62_threshold_mode!="projection" &&
+        opt.round62_threshold_mode!="service" && opt.round62_threshold_mode!="service-conflicts" && opt.round62_threshold_mode!="projection-rlt" && opt.round62_threshold_mode!="projection-service")
+        throw std::runtime_error("invalid Round62 threshold mode");
     if (opt.round61_candidate_mode != "off" && opt.round61_candidate_mode != "archive" &&
-        opt.round61_candidate_mode != "submit") throw std::runtime_error("invalid Round61 mode");
+        opt.round61_candidate_mode != "submit" && opt.round61_candidate_mode != "passive-observe" &&
+        opt.round61_candidate_mode != "passive-cert") throw std::runtime_error("invalid archive mode");
     if (opt.round61_candidate_mode != "off" &&
         (opt.round60_candidate_mode != "off" || opt.plain_baseline))
         throw std::runtime_error("Round61 requires isolated research path");

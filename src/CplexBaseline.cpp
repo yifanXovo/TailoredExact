@@ -1,4 +1,5 @@
 #include "CplexBaseline.hpp"
+#include "Round62Thresholds.hpp"
 #include "CanonicalCompactModel.hpp"
 #include "ConnectivityFlow.hpp"
 #include "IntervalRowFactory.hpp"
@@ -3639,7 +3640,7 @@ ModelSizeStats analyzeLpModel(const std::filesystem::path& lp_path) {
     bool in_generals = false;
     bool in_binaries = false;
     std::set<std::string> vars;
-    const std::regex var_re(R"(([A-Za-z_][A-Za-z0-9_]*))");
+    const std::regex var_re(R"(\b([A-Za-z_][A-Za-z0-9_]*)\b)");
     while (std::getline(in, line)) {
         if (line == "Subject To") {
             in_subject = true; in_bounds = in_generals = in_binaries = false; continue;
@@ -3650,13 +3651,17 @@ ModelSizeStats analyzeLpModel(const std::filesystem::path& lp_path) {
         if (line == "Generals") {
             in_generals = true; in_subject = in_bounds = in_binaries = false; continue;
         }
-        if (line == "Binaries") {
+        if (line == "Binaries" || line == "Binary") {
             in_binaries = true; in_subject = in_bounds = in_generals = false; continue;
         }
         if (line == "End") break;
         if (in_subject && !line.empty() && line[0] == ' ') {
             ++stats.rows;
-            for (auto it = std::sregex_iterator(line.begin(), line.end(), var_re);
+            // Row labels are not columns/nonzeros. Word boundaries also keep
+            // scientific-notation exponent markers out of variable counts.
+            const auto colon=line.find(':');
+            const std::string expression=colon==std::string::npos?line:line.substr(colon+1);
+            for (auto it = std::sregex_iterator(expression.begin(), expression.end(), var_re);
                  it != std::sregex_iterator(); ++it) {
                 const std::string token = it->str(1);
                 if (token == "c") continue;
@@ -4334,6 +4339,11 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
         artifact.support_duration_triple_rows =
             stats.support_duration_triple_cuts_added;
         artifact.static_family_encoding = static_stats.family_encoding;
+        if (options.round62_threshold_mode != "off") {
+            if (!spec.strengthened || !spec.interval_restricted || options.plain_baseline)
+                throw std::runtime_error("Round62 requires isolated complete F0 interval model");
+            appendRound62ThresholdModel(instance,path,options.round62_threshold_mode,spec.gamma_L,spec.gamma_U);
+        }
         const ModelSizeStats size = analyzeLpModel(path);
         artifact.rows = size.rows;
         artifact.columns = size.cols;

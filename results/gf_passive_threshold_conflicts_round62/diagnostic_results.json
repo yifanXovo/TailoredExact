@@ -1,0 +1,129 @@
+[
+  {
+    "number": 22,
+    "id": "D1",
+    "stage": "native_micro",
+    "arm": "passive-native-stop",
+    "source": "results/gf_passive_threshold_conflicts_round62/local_raw/native_micro/D1/micro_result.json",
+    "sha256": "a09353c2697840b4364bbd281a43b6b7750bb3078d7789096103d594b221908a",
+    "result": {
+      "native_status": "INTERRUPTED",
+      "native_optimal": 0,
+      "external_requested": 1,
+      "external_certified": 1,
+      "native_incumbent": 0,
+      "checks": 1,
+      "LB": 0,
+      "archive_UB": 0,
+      "control_UB": 0.47752994459271064,
+      "optimizer_calls": 1
+    }
+  },
+  {
+    "number": 35,
+    "id": "D4",
+    "stage": "threshold_oracle",
+    "arm": "cheap",
+    "source": "results/gf_passive_threshold_conflicts_round62/local_raw/threshold_oracle/D4/cheap/oracle_result.json",
+    "sha256": "251263993959bcd2218b0f9774415dea5d60f08aa291bda4f0db9a0d92db7a52",
+    "result": {
+      "classification": "original_T_strictly_infeasible_cheap_threshold",
+      "optimizer_calls": 0,
+      "seconds": 0.0021773
+    }
+  },
+  {
+    "number": 36,
+    "id": "D4",
+    "stage": "threshold_oracle",
+    "arm": "force-native",
+    "source": "results/gf_passive_threshold_conflicts_round62/local_raw/threshold_oracle/D4/force-native/oracle_result.json",
+    "sha256": "31a26b38f347180e6d46036c27904d5150460dcfc2e3a3084fa9ef4eb7efc6aa",
+    "result": {
+      "classification": "original_T_strictly_infeasible",
+      "status": 2,
+      "optimizer_calls": 1,
+      "threshold_decision": 1,
+      "LP": 0,
+      "T_original": 2400,
+      "safe_duration_bound": 37524.716539059635,
+      "lower": 2407.052930515325,
+      "upper": 2407.0529307561305,
+      "time_independent_infeasible": 0,
+      "parameters_verified": 1,
+      "seconds": 64.8130752,
+      "solver_seconds": 64.79500007629395,
+      "work": 101.89326003045441
+    }
+  },
+  {
+    "number": 55,
+    "id": "D3",
+    "stage": "projection_audit_v3",
+    "arm": "projection-containment",
+    "source": "results/gf_passive_threshold_conflicts_round62/local_raw/projection_audit_v3/D3/audit_result.json",
+    "sha256": "9d1e48750fec531c336cb9914069928cdb587efe455b1854a94739b88b8794e3",
+    "result": {
+      "source_model_sha256": "66d0428e14ffd3e31764d324d6cd00d23f2eb3b3053d77f32178df87d7f630e5",
+      "query_limit": 33,
+      "rows_available": 32,
+      "optimizer_calls": 33,
+      "valid_optimal_queries": 32,
+      "strictly_separating_rows": 20,
+      "maximum_violation": 0.625,
+      "maximum_violation_row": "r62conflict_2",
+      "service_projection_LP_optimal": 1,
+      "service_projection_LP_objective": 0.02055001075057826,
+      "service_projection_LP_work": 0.05497734103623946,
+      "service_projection_LP_seconds": 0.023999929428100586,
+      "parameters_verified": true,
+      "work": 1.3001489828357415,
+      "seconds": 0.6470815
+    }
+  },
+  {
+    "number": 56,
+    "id": "D4",
+    "stage": "projection_audit_v3",
+    "arm": "projection-containment",
+    "source": "results/gf_passive_threshold_conflicts_round62/local_raw/projection_audit_v3/D4/audit_result.json",
+    "sha256": "7319c0ea5de7da40f1c0320dfabbb6924fed3dfd85757aae2ff673f95fedab55",
+    "result": {
+      "source_model_sha256": "33e165ce2552c44f0787b696542f57aeee981aa404a3f93c70d0feb926ae2601",
+      "query_limit": 33,
+      "rows_available": 32,
+      "optimizer_calls": 33,
+      "valid_optimal_queries": 32,
+      "strictly_separating_rows": 4,
+      "maximum_violation": 0.35,
+      "maximum_violation_row": "r62conflict_7",
+      "service_projection_LP_optimal": 1,
+      "service_projection_LP_objective": 0.09394825539359328,
+      "service_projection_LP_work": 0.1866363116434454,
+      "service_projection_LP_seconds": 0.0709998607635498,
+      "parameters_verified": true,
+      "work": 1.096241886325726,
+      "seconds": 0.5382236
+    }
+  },
+  {
+    "number": 64,
+    "id": "D1",
+    "stage": "native_micro_v3",
+    "arm": "passive-native-stop",
+    "source": "results/gf_passive_threshold_conflicts_round62/local_raw/native_micro_v3/D1/micro_result.json",
+    "sha256": "a09353c2697840b4364bbd281a43b6b7750bb3078d7789096103d594b221908a",
+    "result": {
+      "native_status": "INTERRUPTED",
+      "native_optimal": 0,
+      "external_requested": 1,
+      "external_certified": 1,
+      "native_incumbent": 0,
+      "checks": 1,
+      "LB": 0,
+      "archive_UB": 0,
+      "control_UB": 0.47752994459271064,
+      "optimizer_calls": 1
+    }
+  }
+]

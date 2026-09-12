@@ -33,6 +33,8 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Round60Candidates.cpp
   src/Round61Candidates.cpp
   src/Round61TimeOracle.cpp
+  src/Round62Passive.cpp
+  src/Round62Thresholds.cpp
   src/ExternalGiniTree.cpp
   src/PaperExternalGiniTree.cpp
   src/Round48K1AMF.cpp
@@ -106,9 +108,21 @@ endif()
 add_executable(ExactEBRP src/main.cpp)
 add_executable(Round61CandidateExperiment src/round61_candidate_main.cpp)
 add_executable(Round61TimeOracle src/round61_time_main.cpp)
+add_executable(Round62ThresholdProbe src/round62_threshold_main.cpp)
+add_executable(Round62NativeMicro src/round62_native_micro.cpp)
+add_executable(Round62ProjectionAudit src/round62_projection_audit.cpp)
+target_link_libraries(Round62ProjectionAudit PRIVATE exact_ebrp_core)
+if(EXACT_EBRP_ENABLE_GUROBI)
+  target_include_directories(Round62ProjectionAudit PRIVATE "${GUROBI_INCLUDE_DIR}")
+endif()
+target_link_libraries(Round62NativeMicro PRIVATE exact_ebrp_core)
+target_link_libraries(Round62ThresholdProbe PRIVATE exact_ebrp_core)
 target_link_libraries(Round61TimeOracle PRIVATE exact_ebrp_core)
 target_link_libraries(Round61CandidateExperiment PRIVATE exact_ebrp_core)
 add_executable(Round61CandidateTests tests/round61_candidate_tests.cpp)
+add_executable(Round62Tests tests/round62_tests.cpp)
+target_link_libraries(Round62Tests PRIVATE exact_ebrp_core)
+add_test(NAME Round62Tests COMMAND Round62Tests)
 target_link_libraries(Round61CandidateTests PRIVATE exact_ebrp_core)
 add_test(NAME Round61CandidateTests COMMAND Round61CandidateTests)
 add_executable(Round59ResearchTests tests/round59_research_tests.cpp)
