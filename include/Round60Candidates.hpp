@@ -41,6 +41,9 @@ struct CandidateObservation {
 
 class VerifiedCandidateStore {
 public:
+    // Timings are disjoint store work; verifier time stays in observations.
+    double hash_seconds = 0.0;
+    double copy_seconds = 0.0;
     bool consider(const Instance& instance,
                   double lambda,
                   const std::vector<RoutePlan>& routes,
@@ -79,6 +82,9 @@ struct Round60ConstructionResult {
     bool generated = false;
     std::string reason = "not_attempted";
     int objective_evaluations = 0;
+    int accepted_stations = 0;
+    double first_nonempty_seconds = -1.0;
+    std::string termination_reason;
     double generation_seconds = 0.0;
     VerifiedBrpCandidate candidate;
 };

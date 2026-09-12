@@ -1,11 +1,13 @@
 #pragma once
 
 #include <chrono>
+#include <memory>
 #include <string>
 #include <utility>
 #include <vector>
 
 namespace ebrp {
+struct Round61CandidateSession;
 
 struct Instance {
     std::string path;
@@ -470,6 +472,7 @@ struct SolveOptions {
     bool round60_hga_publish_verified = false;
     std::string round60_hga_candidate_log;
     std::string round60_candidate_mode = "off"; // off|dry|inject
+    std::string round61_candidate_mode = "off"; // off|archive|submit
     int round60_candidate_maximum_evaluations = 512;
     int round60_candidate_maximum_stations = 16;
     std::string round60_candidate_log_dir;

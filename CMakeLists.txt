@@ -31,6 +31,8 @@ set(EXACT_EBRP_LIB_SOURCES
   src/GurobiProgress.cpp
   src/MipStartMapping.cpp
   src/Round60Candidates.cpp
+  src/Round61Candidates.cpp
+  src/Round61TimeOracle.cpp
   src/ExternalGiniTree.cpp
   src/PaperExternalGiniTree.cpp
   src/Round48K1AMF.cpp
@@ -102,6 +104,13 @@ else()
 endif()
 
 add_executable(ExactEBRP src/main.cpp)
+add_executable(Round61CandidateExperiment src/round61_candidate_main.cpp)
+add_executable(Round61TimeOracle src/round61_time_main.cpp)
+target_link_libraries(Round61TimeOracle PRIVATE exact_ebrp_core)
+target_link_libraries(Round61CandidateExperiment PRIVATE exact_ebrp_core)
+add_executable(Round61CandidateTests tests/round61_candidate_tests.cpp)
+target_link_libraries(Round61CandidateTests PRIVATE exact_ebrp_core)
+add_test(NAME Round61CandidateTests COMMAND Round61CandidateTests)
 add_executable(Round59ResearchTests tests/round59_research_tests.cpp)
 target_link_libraries(Round59ResearchTests PRIVATE exact_ebrp_core)
 add_test(NAME Round59ResearchTests COMMAND Round59ResearchTests)

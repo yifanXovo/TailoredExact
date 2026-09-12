@@ -1,0 +1,23 @@
+{
+  "source_commit": "06e65c5677278e177aac52777a6826a1e61f412b",
+  "executables": [
+    {
+      "executable": "ExactEBRP.exe",
+      "sha256": "ca8793940815e6fd6f431a9151965bbad2d5474bfd6ecca1cac2694fcf9e4cdc"
+    },
+    {
+      "executable": "Round50IntervalMipExperiment.exe",
+      "sha256": "0564c26d1f4a6cc3ce1349b85b7b358b07ca0554cd4089d3a5855a4e016d315d"
+    },
+    {
+      "executable": "Round61CandidateExperiment.exe",
+      "sha256": "2c3629e75c435c68fedbca9ea9ac8abd004395690cd929955364b5eec3dd90d4"
+    },
+    {
+      "executable": "Round61TimeOracle.exe",
+      "sha256": "0f8d091d21c5e1a997d8091f06bdee7ce589c230453c686164a1603270b7c469"
+    }
+  ],
+  "tests": "38/38 passed",
+  "reason": "Only new-mode native cutoff admission changed: F==U is legal if current model validates and native incumbent is absent or worse. Candidate algorithm unchanged; K1 comparison rerun in a matched build. Fixed driver lambda metadata corrected; LP bytes checked separately."
+}

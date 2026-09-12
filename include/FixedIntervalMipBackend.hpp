@@ -63,6 +63,11 @@ struct FixedIntervalCandidateEvent {
     double residual_check_seconds = 0.0;
     double total_seconds = 0.0;
     double candidate_objective = 0.0;
+    bool exact_vector_observed_in_mipsol = false;
+    bool final_integer_vector_matches = false;
+    bool native_incumbent_change_observed = false;
+    double native_incumbent_before_submission = 0.0;
+    bool native_incumbent_before_available = false;
 };
 
 struct FixedIntervalMipCapabilities {
@@ -154,6 +159,7 @@ struct FixedIntervalMipRequest {
     std::filesystem::path round59_node_samples_path;
     // Round 60 default-off candidate construction and native injection.
     std::string round60_candidate_mode = "off"; // off|dry|inject
+    std::shared_ptr<Round61CandidateSession> round61_session;
     int round60_candidate_maximum_evaluations = 512;
     int round60_candidate_maximum_stations = 16;
     std::filesystem::path round60_candidate_log_path;

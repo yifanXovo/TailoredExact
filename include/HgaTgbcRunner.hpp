@@ -26,6 +26,10 @@ struct HgaTgbcOptions {
     bool publish_verified_improvements = false;
     std::filesystem::path verified_candidate_log_path;
     std::string candidate_model_identity = "original_problem";
+    // Round 61 only: initialization plus exactly this many generations.
+    // Negative leaves every historical stopping/extraction rule unchanged.
+    int fixed_generations = -1;
+    bool retain_verified_on_log_failure = false;
 };
 
 struct HgaTgbcResult {
@@ -50,6 +54,17 @@ struct HgaTgbcResult {
     double candidate_verification_seconds = 0.0;
     std::string retained_candidate_sha256;
     std::filesystem::path generation_log_path;
+    bool candidate_evidence_persisted = true;
+    double initialization_seconds = 0.0;
+    double decoder_seconds = 0.0;
+    double observer_seconds = 0.0;
+    double conversion_seconds = 0.0;
+    double hash_seconds = 0.0;
+    double copy_seconds = 0.0;
+    double ledger_seconds = 0.0;
+    double first_nonempty_seconds = -1.0;
+    std::vector<double> fitness_history;
+    std::vector<double> elapsed_history;
 };
 
 HgaTgbcResult runHgaTgbcNative(const Instance& instance,

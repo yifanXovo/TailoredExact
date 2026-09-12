@@ -1,0 +1,24 @@
+{
+  "scope": "diagnostic inventory-time subproblems; never original-F bounds",
+  "historical_patterns": ["D3", "D4", "D6"],
+  "historical_source": "../gf_verified_candidate_native_round60/fixed_inventory_selection.json",
+  "historical_rounding": "nearest integer heuristic from last recorded fractional root Y",
+  "fourth_pattern": "D3 inventory from this round's frozen initialization-plus-16-generations PREFIX",
+  "solves_per_pattern": ["LP relaxation", "integer min-max route duration"],
+  "process_cap_seconds": 120,
+  "shutdown_reserve_seconds": 2,
+  "solver": {"Threads": 1, "Seed": 0, "Presolve": -1, "MIPGap": 0, "MIPGapAbs": 0, "DualReductions": 0},
+  "T_infeasible_test": "valid LB > T + 1e-5 max(1,T)",
+  "optimal_solution_numerical_gate": "available primal quality and (LP) dual quality, each violation <=1e-5",
+  "safe_Tstar_bound": "(V+1)*max_arc_distance + (pickup_time+drop_time)*sum_station_initial_inventory",
+  "released_inventory": "-1 leaves original station, route and service variables in the model",
+  "conflict_attempt": {
+    "maximum_additional_integer_solves": 3,
+    "selection": "among proven strictly time-infeasible historical patterns, largest LB/T",
+    "release_order": "zero-displacement stations together first if any, then smallest absolute displacement with depot-distance tie breaking",
+    "accept_release": "remaining conditions still have valid LB strictly above T, or proven time-independent infeasibility",
+    "unknown_or_feasible_release": "retain last proved conflict; do not infer infeasibility from failure to find a route",
+    "static_cut_gate": "only if a reduced conflict is reusable, violates a recorded relevant LP bit point, and its cost is supported; otherwise no static cut trial"
+  },
+  "no_callback_oracle": true
+}

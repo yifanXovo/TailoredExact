@@ -1295,6 +1295,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round60-hga-publish-verified") opt.round60_hga_publish_verified = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round60-hga-candidate-log") opt.round60_hga_candidate_log = requireValue(i, argc, argv);
         else if (arg == "--round60-candidate-mode") opt.round60_candidate_mode = lowerAscii(requireValue(i, argc, argv));
+        else if (arg == "--round61-candidate-mode") opt.round61_candidate_mode = lowerAscii(requireValue(i, argc, argv));
+        else if (arg == "--pickup-time") opt.pickup_time = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--drop-time") opt.drop_time = std::stod(requireValue(i, argc, argv));
         else if (arg == "--round60-candidate-max-evaluations") opt.round60_candidate_maximum_evaluations = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--round60-candidate-max-stations") opt.round60_candidate_maximum_stations = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--round60-candidate-log-dir") opt.round60_candidate_log_dir = requireValue(i, argc, argv);
@@ -3141,6 +3144,13 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             opt.paper_run_sealed_rejection_reason = joined.str();
         }
     }
+    if(!std::isfinite(opt.pickup_time) || !std::isfinite(opt.drop_time) ||
+       opt.pickup_time<0 || opt.drop_time<0) throw std::runtime_error("invalid common service times");
+    if (opt.round61_candidate_mode != "off" && opt.round61_candidate_mode != "archive" &&
+        opt.round61_candidate_mode != "submit") throw std::runtime_error("invalid Round61 mode");
+    if (opt.round61_candidate_mode != "off" &&
+        (opt.round60_candidate_mode != "off" || opt.plain_baseline))
+        throw std::runtime_error("Round61 requires isolated research path");
     if (opt.round60_candidate_mode != "off" &&
         opt.round60_candidate_mode != "dry" &&
         opt.round60_candidate_mode != "inject") {
