@@ -1,4 +1,5 @@
 #include "Round63TimeResource.hpp"
+#include "Round64SharedResource.hpp"
 #include "Branching.hpp"
 #include "Bounds.hpp"
 #include "ColumnPool.hpp"
@@ -248,6 +249,21 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
     }
     if (opt.algorithm_preset == "custom") return;
 
+    if(opt.algorithm_preset=="research-round64-k1-s" ||
+       opt.algorithm_preset=="research-round64-k1-h" ||
+       opt.algorithm_preset=="research-round64-single-s") {
+        const std::string requested=opt.algorithm_preset;
+        opt.algorithm_preset="paper-k1-am-sf";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset=requested;
+        opt.round59_simple_start=requested!="research-round64-k1-h";
+        opt.round59_single_mip=requested=="research-round64-single-s";
+        if(opt.round59_simple_start) {
+            opt.primal_heuristic="greedy";
+            opt.round34_c6_startup_variant="simple-start";
+        }
+        return;
+    }
     if (opt.algorithm_preset == "research-round59-k1-s" ||
         opt.algorithm_preset == "research-round59-f0-single-s" ||
         opt.algorithm_preset == "research-round60-f0-single-h") {
@@ -1304,6 +1320,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             if (opt.round61_candidate_mode=="outer") opt.round61_candidate_mode="archive";
         }
         else if (arg == "--round63-time-mode") opt.round63_time_mode=lowerAscii(requireValue(i,argc,argv));
+        else if (arg == "--round64-shared-mode") opt.round64_shared_mode=lowerAscii(requireValue(i,argc,argv));
         else if (arg == "--round62-threshold-mode") opt.round62_threshold_mode=lowerAscii(requireValue(i,argc,argv));
         else if (arg == "--pickup-time") opt.pickup_time = std::stod(requireValue(i, argc, argv));
         else if (arg == "--drop-time") opt.drop_time = std::stod(requireValue(i, argc, argv));
@@ -3155,6 +3172,14 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if(!std::isfinite(opt.pickup_time) || !std::isfinite(opt.drop_time) ||
        opt.pickup_time<0 || opt.drop_time<0) throw std::runtime_error("invalid common service times");
+    if(!ebrp::validRound64SharedMode(opt.round64_shared_mode))throw std::runtime_error("invalid Round64 shared mode");
+    const bool r64preset=opt.algorithm_preset=="research-round64-k1-s" ||
+        opt.algorithm_preset=="research-round64-k1-h" || opt.algorithm_preset=="research-round64-single-s";
+    if(opt.round64_shared_mode!="off" && (!r64preset||opt.plain_baseline))
+        throw std::runtime_error("Round64 requires its explicit research preset");
+    if(r64preset && (opt.plain_baseline||opt.round63_time_mode!="off"||opt.round62_threshold_mode!="off"||
+        opt.round60_candidate_mode!="off"||opt.round61_candidate_mode!="off"))
+        throw std::runtime_error("Round64 requires isolated startup and resource configuration");
     if (!ebrp::validRound63TimeMode(opt.round63_time_mode)) throw std::runtime_error("invalid Round63 time mode");
     if (opt.round63_time_mode!="off" && (opt.plain_baseline ||
         (opt.algorithm_preset!="research-round59-k1-s" && opt.algorithm_preset!="research-round59-f0-single-s")))
@@ -4681,7 +4706,8 @@ std::string jsonEscapeLocal(const std::string& value) {
 }
 
 bool isPaperTracePreset(const std::string& preset) {
-    return preset == "research-round60-f0-single-h" ||
+    return preset == "research-round64-k1-s" || preset == "research-round64-k1-h" ||
+           preset == "research-round64-single-s" || preset == "research-round60-f0-single-h" ||
            preset == "research-round59-k1-s" ||
            preset == "research-round59-f0-single-s" ||
            preset == "paper-k1-am-sf" ||
