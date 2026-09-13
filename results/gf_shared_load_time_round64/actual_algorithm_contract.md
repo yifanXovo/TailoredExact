@@ -1,11 +1,11 @@
-# Actual algorithm and state contract (Round64 initial implementation)
+# Actual algorithm and state contract (Round64)
 
 | Component | Actual policy and evidence source |
 |---|---|
 | Cold startup | A verified empty route set, Y=b, in BOTH cold full algorithms and the fixed-F0 harness. `round59_simple_start` returns directly after this candidate; the CLI's inherited `greedy` label does not mean a greedy route search ran. No PREFIX, archive, injected candidate or historical routes. |
 | Warm startup | `research-round64-k1-h` explicitly inherits `paper-k1-am-sf`: full HGA, seed 20260626, generation-stagnation 2000. Current process constructs/independently validates candidate and pays its entire wall cost. Source: PaperK1AmSf.cpp and main.cpp preset adapter. |
 | Outer | F0, K0=1, midpoint, balanced normalized closure, tau=.08, native-target, exact-parent, inherited coverage. Compatibility C6 rho=.01 is not tau. Current decision ledger is authoritative. |
-| LP | Full canonical F0 continuous relaxation with current G interval, F<=U and safe domains. Q/T/SEP/JOINT canonical rows are present in every LP. |
+| LP | Full canonical F0 continuous relaxation with current G interval, F<=U and safe domains. The selected Q/T/SEP/JOINT/QCAP canonical rows are present in every LP. |
 | MIP | Same canonical F0 with original integer variables; new q/f continuous. All original physical/Gini rows retained. No new resource callback, cut pool or branch setting. Inherited progress/native-bound-target callbacks remain active. |
 | Optional row scope | Round64 rows are global physical; B/c/taubar are bound to all original physical data. Diagnostic pin rows belong only to fresh feasibility probes and never enter full algorithms. |
 | Model lifecycle | Inherited per-leaf model object reuse when request permits it and fingerprint is unchanged. New leaves read canonical model; stale fingerprint is an error. Temporary LP types restored to integer types on subsequent MIP. Terminal requests release model. Disposable child probes remain disposable. See request flags and actual per-call ledger. |

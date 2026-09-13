@@ -11,7 +11,8 @@ import round61_research as runner
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/os.environ.get('EBRP_ROUND64_RESULTS','results/gf_shared_load_time_round64')
 if not OUT.resolve().is_relative_to(ROOT.resolve()):raise RuntimeError('output outside checkout')
-RAW=OUT/'local_raw';BUILD=ROOT/'build/round64'
+RAW=OUT/'local_raw';BUILD=ROOT/os.environ.get('EBRP_ROUND64_BUILD','build/round64')
+if not BUILD.resolve().is_relative_to(ROOT.resolve()):raise RuntimeError('build outside checkout')
 sha=runner.sha;write=runner.write
 def bind():
     runner.ROOT=ROOT;runner.OUT=OUT;runner.RAW=RAW;runner.BUILD=BUILD;runner.LEDGER=OUT/'processes.jsonl'

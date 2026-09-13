@@ -23,13 +23,15 @@ route embeddings, resource identities, physical edge cases, mapping and
 default-off model isolation. Native feasibility and Farkas checks are charged
 experiments, not hidden in CTest.
 
-`build_freeze_v1.json`, `build_freeze_v2.json`, `build_freeze_v3.json` bind
+`build_freeze_v1.json` through `build_freeze_v4.json` bind
 source commits, source-file hashes, executables, test logs and protocol.
 v2 adds the auxiliary projection executable; its main/fixed executables are
 identical to v1. v3 adds current-run startup witness persistence without
-changing model/search rules. Formal pairs always use one executable hash.
-Local retained v1/v2 binaries are under `build/round64-v1` and
-`build/round64-v2`; the current binaries are under `build/round64`.
+changing model/search rules. v4 adds QCAP and its eight-LP diagnostic; all
+existing F0/Q model identities remain unchanged. Formal pairs always use one
+executable hash. Local retained v1/v2/v3 binaries are under `build/round64-v1`,
+`build/round64-v2` and `build/round64-v3`; current v4 binaries are under
+`build/round64`.
 
 ## Inspect and recompute existing evidence
 
@@ -87,6 +89,7 @@ python scripts/round64_research.py warm --ids C2 --modes off q sep joint --stage
 The D7 warm matrix uses cap1200 and the same four modes. Cold full K1 uses
 `cold`; the fixed-F0 harness uses `fixed`; `reference` runs unchanged P-GRB and
 stable K1-H. Structural `probe` uses seven LPs under one shared cap;
+`qcap-probe` uses eight LPs, including re-completion at Q and SEP optima;
 `projection` uses two auxiliary LPs under one shared cap. Their required
 canonical inputs/pins and expected identities are explicit in the driver.
 Confirmation needs an independent candidate freeze before opening either

@@ -248,3 +248,54 @@ v1 experiments; it did not call an optimizer and is not silently erased.
 Proceed with the already declared four-launch QCAP gate. D7's all-redundant
 case, if observed, remains Q with its measured regression; no safety switch
 will remove Q based on historical results. No confirmation role has opened.
+
+## QCAP stop gate and complete-validation selection (after launch 32)
+
+All 41 solver-free tests pass for v4 (source cdf6ccb044fac860ea8ee571e6e764de2f4ed09d).
+Build-only identities preserve OFF and Q. QCAP adds 432 rows on D4 and 800
+on C2, with no additional columns beyond Q; D7 has zero such rows and is
+byte-identical to Q. The two charged structural batches use exactly eight
+LPs each. D4 Q/QCAP objectives are 0.093969105660899596/0.10886850365388422;
+C2 gives 0.55076138505661809/0.59443678496331087. At both recorded Q and SEP
+optimal original points, Q is feasible and QCAP strictly infeasible after
+all q are re-completed. Full row/bound and pin residual checks pass. This
+establishes smaller shared-capacity increment; it is not the entire closure.
+
+The matched v4 D4 native screen is decisive for the declared stop gate:
+Q certifies F=0.50634330756520596 in 91.547 seconds, whereas QCAP consumes
+118.093 seconds under cap120 without a certificate (LB=0.48960010587766817,
+gap=0.01674320168753779). The new rows do not exclude the legal final route,
+but they lose proof completion. Stop QCAP advancement as declared, retaining
+its valid mathematics, implementation and negative measurement. No claim
+that every possible small/shared projection has been disproved is justified.
+
+Freeze JOINT as the uniform **diagnostic research candidate** for the remaining
+complete validation. Its strict original-point projection increment warrants
+testing, while D4's fixed-F0 certificate loss and D7's warm gap regression
+already reject mainline adoption. C2's warm gain is stronger with SEP, so it
+does not establish arc-sharing speedup. Selecting JOINT here does not claim
+it was the fastest mode, relax any gate, or remove any negative result.
+The complete qualification must answer the original arc-sharing question on
+C5, D4, stable references and unopened roles, even if the final answer is
+negative. No per-instance mode or new tuning is allowed.
+
+Use the retained, exact v3 binary for every remaining full JOINT/OFF/reference
+run. This is the already measured JOINT implementation, not a new search or
+an in-process restart. v4 changed only the now-stopped QCAP option and its
+diagnostic; v3 is retained in build/round64-v3. The driver accepts a single
+campaign build-directory setting, validates every executable against the
+immutable active build and logs its full path/hash. Restore active_build to
+v3 before launching, retaining v4 and both measurement identities. Thus the
+existing C2/D7 warm matrices remain direct same-build evidence and need not
+be repeated. This saves four redundant full launches and about an hour of
+machine time without mixing binary identities in a pair.
+
+Remaining declared matrix: cap600 warm OFF/JOINT on D3, D4, C3, C5; cap600
+cold OFF/JOINT on C5 and cap1200 on D7; same-v3 official P-GRB and stable
+K1-H on C2 cap600 and D7 cap1200. Before opening C6, freeze the candidate,
+driver, build and both confirmation roles at cap600. Run warm OFF/JOINT and
+both references, plus cold OFF/JOINT, on each confirmation role in C6 then
+C7 order. Total planned charged launches are 60/72, including the completed
+32. C5/D7/C6 cold long pairs ensure the zero-HGA possibility does not make
+all search protection uninformative. Only justified follow-ups may use the
+remaining twelve launches; no more native micros.
