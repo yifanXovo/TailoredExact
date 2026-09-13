@@ -1,0 +1,53 @@
+{
+  "base_head": "71e955acad596acba2a9e74e738173113116d9f7",
+  "round62_measured_head": "7936ed53951113297df07d2fb243954e2f784906",
+  "files_read": {
+    "results\\gf_passive_threshold_conflicts_round62\\final_report.md": "b65a2716db96da0e14c17f7081842c4be505a051716aa03573f36e92c9bd04ff",
+    "results\\gf_passive_threshold_conflicts_round62\\mathematics.md": "ad52669c2b5cf3b8569cba84ddc04881c194b15ae1460ac514b435e5296d3969",
+    "results\\gf_passive_threshold_conflicts_round62\\research_log.md": "e33b18d749a3a048a85616c878ed80c31400f3a49fb63aa69275aef123bc03ea",
+    "results\\gf_passive_threshold_conflicts_round62\\selected_candidate.json": "3ad303986bd270c9315bd091832dbb862a7808bc77e82a562083e194d1de2d7e",
+    "results\\gf_passive_threshold_conflicts_round62\\runs.csv": "d505c0d8fb6691eb81b9f0880f2ce5df2211f8af1aa0b5c1a32f360e3d4a9d69",
+    "results\\gf_passive_threshold_conflicts_round62\\pairs.csv": "96501a2c3b174edb67666e397916c746d11b7149a62cec79ba956da2f6197c18",
+    "results\\gf_passive_threshold_conflicts_round62\\protocol.json": "f47c14fb9228ce4a163301fa4cdaef1c2c49bf20d3bef799a2e91da81f43758f"
+  },
+  "round61_report_sha256": "a88803295ef7108cd98e4781f50a8611beb60e9a1d2f172b52592cbdeebf5081",
+  "all_round62_runs_parsed": 95,
+  "charged_runs": 72,
+  "pairs_read": 54,
+  "unchanged_inherited_code": {
+    "src/Round62Thresholds.cpp": {
+      "new_checkout_sha256": "474c49d10d710785fb063a4f538391cd6618b456cf256da4f6a6686cd4923256",
+      "old_worktree_sha256": "bba373676d8270a16312ef526c8f2f535496ef9dc0d0d83d8601af43acaf73cc",
+      "normalized_text_equal": true
+    },
+    "src/Round62Passive.cpp": {
+      "new_checkout_sha256": "da73ae99af2d0069f5d453abf69673cb771b9d973eed4405d30d85595e1ce4d4",
+      "old_worktree_sha256": "8a613aa32382a69be6633e7780db9375768e1930f5996acf083d0e013502b933",
+      "normalized_text_equal": true
+    },
+    "include/Round62Thresholds.hpp": {
+      "new_checkout_sha256": "9bad4401fde82b7632a9bd6c4eec0b0ea1482c17d8f9b94455ac83d771f592bf",
+      "old_worktree_sha256": "3d86530e9580109f9a55a73409d7d02fc3dbd1ab41ccdee563eb336ddf64e803",
+      "normalized_text_equal": true
+    },
+    "include/Round62Passive.hpp": {
+      "new_checkout_sha256": "985daaa5614398e76d5e46cda838dc63b96fbf5a0a2ea0c0df2d851e5eed356d",
+      "old_worktree_sha256": "c6dcbb7583511fc92cc257333fdb316e7f4ab41995627f1e30eb09f15cc86ad1",
+      "normalized_text_equal": true
+    }
+  },
+  "line_endings": "fresh Git checkout uses CRLF; previous worktree LF. Normalized code identical; OFF exported models byte-identical.",
+  "historical_service_projection_failed_gate": true,
+  "v3_fixed_builds": [
+    "b00547427ac64fedeae087df70803f32c8812e5a5b0f60f81682019a7cf0d958"
+  ],
+  "v3_complete_builds": [
+    "fa87fac2b57d7b0f68fe58bd12b340499f65405f29948f17f1b148b46ba5d3d4"
+  ],
+  "performance_exclusions": [
+    {
+      "number": "54",
+      "reason": "Git commit unexpectedly triggered automatic object maintenance while this D3 run was active. The new pack was 703551 bytes; exact CPU interference is unknown. Retain native status, proof and witness but exclude timing/gap performance attribution; repeat the same configuration using the final reserved launch."
+    }
+  ]
+}
