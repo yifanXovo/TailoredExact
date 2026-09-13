@@ -83,3 +83,60 @@ confirmation budget. Add a bounded auxiliary LP Farkas diagnostic after this
 queue, with feasible SEP control, finite physical variable bounds, independent
 dual recomputation and global scope; do not submit its rows in production.
 Compiler/Git/large audits are paused for the entire performance queue.
+
+## v1 screens, v2 projection certificates and full native lifecycle checks
+
+All ten 120-second screens finish without budget or semantic failures; all
+ten original route witnesses independently pass. D4 OFF/Q/T/SEP/JOINT walls
+are 89.688/91.625/118.079/90.672/118.093 s. OFF/Q/SEP certify; T and JOINT
+do not. D7 absolute gaps are .476160675254/.088563589689/.169525735238/
+.216596814479/.153121368169. JOINT improves on SEP but is much worse than
+Q-only; these gains predominantly concern native primal quality, not proved
+long-T objective-LP improvement. All outcomes, including the D4 certificate
+loss, remain visible. No uniform qualification or stable-reference advantage.
+
+v2 source adds only the independent projection executable/reporting. Actual
+ExactEBRP and Round50IntervalMipExperiment hashes are unchanged from v1.
+All 41 CTests pass. #16/#17 use two auxiliary LPs each (D4/D7) under shared
+120 s caps, costing .094/.766 s process wall. SEP feasibility independently
+checks. Finite-bound-corrected Farkas combinations yield normalized violations
+.310508012343/.026835215067, with 16/220 nonzero dual rows. Independent
+physical matrix reconstruction, multiplier signs, all column/bound terms,
+raw point, normalization and scope pass. No projection row is submitted.
+
+#18/#19 are full cold K1 OFF/JOINT native micros under cap20. Both certify
+F=.2083333333333333. Each makes three LP calls, one target-interrupted MIP
+and one terminal MIP. L0's canonical SHA stays unchanged across LP/target/
+terminal calls, while model-object reuse is actually observed for the MIPs.
+No new rows are attached at these transitions and no fresh-model override
+is active. This confirms the common canonical scope and lifecycle integration.
+Three native micro launches are now used, leaving one of four.
+
+An algorithm-description erratum is resolved explicitly: both cold research
+presets and the fixed harness use verified EMPTY routes, Y=b. The inherited
+CLI calls the heuristic `greedy`, but main.cpp's round59_simple_start returns
+immediately after the empty candidate. The initial protocol wording inherited
+that label; preserve its frozen bytes and correct actual_algorithm_contract.md.
+This is not an algorithm change or a performance contribution. Warm modes
+retain actual full HGA. Frozen F0/model/executable identities are unaffected.
+
+## Warm-state evidence preparation, before formal warm runs
+
+Add only current-run startup witness persistence for explicit Round64 presets,
+before any native call and before the universal verified-zero stop. Both OFF
+and resource arms pay identical snapshot work. Enable inherited UB event logs
+in all Round64 full runs and stable full references. This addresses a real
+evidence gap: equal U alone cannot establish identical warm routes. It changes
+no startup generation, model, native-start flag, cutoff or outer rule. Preserve
+v1/v2 binaries and compile/freeze v3 before all ensuing formal pairs. The old
+structural and screening measurements retain their original binary identities.
+
+Spend the fourth/final native micro on warm full-K1 JOINT (tiny physical input,
+cap20, every HGA/LP/MIP cost charged). Then compare the SAME four warm states
+OFF/Q/SEP/JOINT in full K1 on C2 at cap600 and D7 at cap1200. Each process
+independently runs the frozen HGA; check initial witness bytes/U/root interval
+and actual disabled native-start handling. This is eight formal launches,
+not a HGA-length matrix or free replay. The larger D7 cap leaves substantial
+native time after its established costly full HGA. Record all calls. Keep
+at least 22 further launches for long cold diagnostics, actual stable/official
+references, D3/D4/C3/C5 protection and both frozen confirmation roles.

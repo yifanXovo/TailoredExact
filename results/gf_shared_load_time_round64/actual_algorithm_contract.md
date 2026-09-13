@@ -2,7 +2,7 @@
 
 | Component | Actual policy and evidence source |
 |---|---|
-| Cold startup | Existing simple greedy startup; empty initial diagnostic state only in fixed-F0 structural harness. No PREFIX, archive, injected candidate or historical routes. |
+| Cold startup | A verified empty route set, Y=b, in BOTH cold full algorithms and the fixed-F0 harness. `round59_simple_start` returns directly after this candidate; the CLI's inherited `greedy` label does not mean a greedy route search ran. No PREFIX, archive, injected candidate or historical routes. |
 | Warm startup | `research-round64-k1-h` explicitly inherits `paper-k1-am-sf`: full HGA, seed 20260626, generation-stagnation 2000. Current process constructs/independently validates candidate and pays its entire wall cost. Source: PaperK1AmSf.cpp and main.cpp preset adapter. |
 | Outer | F0, K0=1, midpoint, balanced normalized closure, tau=.08, native-target, exact-parent, inherited coverage. Compatibility C6 rho=.01 is not tau. Current decision ledger is authoritative. |
 | LP | Full canonical F0 continuous relaxation with current G interval, F<=U and safe domains. Q/T/SEP/JOINT canonical rows are present in every LP. |
@@ -20,6 +20,13 @@ guard workaround, no additional first-LP solve, no copy model and no implicit
 restart. Every main arm has the same lifecycle policy; candidate-dependent
 incumbent/bound changes may still change the unchanged outer controller's calls.
 Cold-to-warm startup differences are never credited to the resource block.
+
+Description correction after the full native micro: the initial protocol's
+`startup.cold="inherited simple greedy"` repeated a CLI label and was imprecise.
+The code at main.cpp's `round59_simple_start` branch, heuristic.csv's
+`round59_empty_routes_Y_equals_b` event and frozen canonical hashes establish
+the actual empty-route behavior. The original frozen protocol is preserved;
+this is a description erratum, not a baseline/model/algorithm modification.
 
 The implementation adapter and telemetry are engineering, not theoretical
 contributions. The q lift is a familiar inventory flow. Claims for arc sharing

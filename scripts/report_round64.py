@@ -39,7 +39,7 @@ def summary():
         result['build_freeze']=e.get('build_freeze');result['kind']=e['kind']
         result['performance_eligible']=result['performance_eligible'] and e['kind']=='performance' and result['returncode']==0 and result['within_budget'] and result.get('status') not in ['failed','engine_failed']
         mode=e['command'][e['command'].index('--round64-shared-mode')+1] if '--round64-shared-mode' in e['command'] else 'off'
-        result['shared_mode']=mode;result['startup']='HGA-current-process' if e['arm']=='K1-H' or e['arm'].startswith('warm-') else 'official-default' if e['arm']=='P-GRB' else 'simple-current-process'
+        result['shared_mode']=mode;result['startup']='HGA-current-process' if e['arm']=='K1-H' or e['arm'].startswith('warm-') else 'official-default' if e['arm']=='P-GRB' else 'verified-empty-routes'
         if r and result.get('scope')=='full_original_problem':
             if count==0:result['native_statuses']='no native optimize';result['work']=0;result['nodes']=0
             result['initial_upper_bound']=r.get('initial_upper_bound')

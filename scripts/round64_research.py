@@ -109,7 +109,7 @@ def full(ids,modes,cap,stage,warm=False,single=False):
         p=panel()[identity]
         for mode in modes:
             arm=('warm' if warm else 'single' if single else 'cold')+'-'+mode;dest=RAW/stage/identity/arm
-            cmd=runner.full_command(p,dest,preset,'off',cap)+['--round64-shared-mode',mode]
+            cmd=runner.full_command(p,dest,preset,'off',cap)+['--round64-shared-mode',mode,'--ub-event-log',dest/'ub_events.csv']
             execute(cmd,dest,p,arm,stage,cap,calls='all calls in external/paper_optimize_ledger.csv')
 
 def projection(ids,cap,stage):
@@ -128,6 +128,12 @@ def full_micro(stage,cap):
         cmd=runner.full_command(p,dest,'research-round64-k1-s','off',cap)+['--round64-shared-mode',mode]
         execute(cmd,dest,p,mode,stage,cap,'native-micro','all calls in external/paper_optimize_ledger.csv')
 
+def warm_micro(stage,cap):
+    p=dict(id='warm_micro',instance_path='tests/data/round59_tiny.txt',T_seconds=5,pickup_seconds=1,drop_seconds=1,**{'lambda':.15})
+    dest=RAW/stage/p['id']
+    cmd=runner.full_command(p,dest,'research-round64-k1-h','off',cap)+['--round64-shared-mode','joint','--ub-event-log',dest/'ub_events.csv']
+    execute(cmd,dest,p,'warm-joint',stage,cap,'native-micro','all calls in external/paper_optimize_ledger.csv')
+
 def reference(ids,cap,stage):
     expected={e['instance_id']:e['expected_gurobi_model_fingerprint'] for e in read(
         ROOT/'results/gf_citibike443_k1_vs_pgrb_round58/pgrb_expected_fingerprints.json')['entries']}
@@ -135,7 +141,7 @@ def reference(ids,cap,stage):
         p=panel()[identity]
         for arm in ['P-GRB','K1-H']:
             dest=RAW/stage/identity/arm
-            if arm=='K1-H':cmd=runner.full_command(p,dest,'paper-k1-am-sf','off',cap)
+            if arm=='K1-H':cmd=runner.full_command(p,dest,'paper-k1-am-sf','off',cap)+['--ub-event-log',dest/'ub_events.csv']
             else:cmd=[BUILD/'ExactEBRP.exe','--input',p['instance_path'],'--lambda',p['lambda'],'--T',p['T_seconds'],
                 '--pickup-time',p['pickup_seconds'],'--drop-time',p['drop_seconds'],'--time-limit',cap-6,
                 '--process-wall-time-limit',cap,'--process-shutdown-margin',3,'--threads',1,'--mip-threads',1,
@@ -155,7 +161,7 @@ def confirm_freeze(mode,cap):
         protocol_sha256=sha(OUT/'protocol.json'),selection_sha256=sha(OUT/'selected_candidate.json')))
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('action',choices=['freeze','build-freeze','build','fixed','probe','micro','full-micro','projection','cold','warm','single','reference','confirm-freeze'])
+    parser=argparse.ArgumentParser();parser.add_argument('action',choices=['freeze','build-freeze','build','fixed','probe','micro','full-micro','warm-micro','projection','cold','warm','single','reference','confirm-freeze'])
     parser.add_argument('--ids',nargs='+',default=['D4']);parser.add_argument('--modes',nargs='+',default=['off']);parser.add_argument('--cap',type=int,default=120)
     parser.add_argument('--stage',default='preflight');parser.add_argument('--version',default='v1');a=parser.parse_args()
     if a.action=='freeze':freeze()
@@ -165,6 +171,7 @@ def main():
     elif a.action in ['probe','micro']:probe(a.ids,a.cap,a.stage,a.action=='micro')
     elif a.action=='projection':projection(a.ids,a.cap,a.stage)
     elif a.action=='full-micro':full_micro(a.stage,a.cap)
+    elif a.action=='warm-micro':warm_micro(a.stage,a.cap)
     elif a.action=='reference':reference(a.ids,a.cap,a.stage)
     else:full(a.ids,a.modes,a.cap,a.stage,a.action=='warm',a.action=='single')
 if __name__=='__main__':main()
