@@ -4,6 +4,13 @@ All original rows, objective, S=0 convention, one nonzero unidirectional service
 empty departure and possibly loaded return remain. Common T/handling and actual
 vehicle-specific Q are read from the existing interface. No total-pickup cap.
 
+The unchanged objective is `F=H/(n*S)+lambda*sum_i omega_i*abs(Y_i/D_i-1)`,
+with `Y=b+sum_k(d-p)`, `S=sum_i Y_i/D_i`, and
+`H=sum_(i<j) abs(Y_i/D_i-Y_j/D_j)`. The original S=0 handling remains in
+the verifier. Route duration is original travel plus
+`(pickup_time+drop_time)*sum_i p_ki`, including the prepaid unloading cost
+of cargo returned to the depot. Capacity constrains every prefix load.
+
 ## Integer embedding and continuous containment
 
 On route 0,i1,...,im,0, q on each outgoing station arc is the post-service load
@@ -15,6 +22,25 @@ the new explicit lift also connects individual vehicle/node L. Optional historic
 InventoryRouteCuts uses aggregate capacity sum_k Q_k x and net final-initial
 inventory (or projected inventory domains). Core F0 enables none of its optional
 root closures. We do not attribute familiar q flow to new coupling.
+
+More explicitly, `InventoryRouteCuts.cpp::buildRow` generates, for a station
+set W (depot outside W), the two global mixed rows
+
+    sum(i in W) (Y_i-b_i) <= sum(k, (h,i) in delta-(W)) Q_k x_khi,
+    sum(i in W) (b_i-Y_i) <= sum(k, (i,j) in delta+(W)) Q_k x_kij.
+
+Its domain-projected forms replace the left side respectively by
+`max(0,sum(Y_lower-b))` and `max(0,sum(b-Y_upper))`; their scope is the
+interval/domain that justified those bounds. Summing the Round64 q balances
+over W and k yields incoming q minus outgoing q equal to `sum(Y-b)`.
+Nonnegativity and q capacities imply both mixed rows and hence their valid
+domain-projected versions. This derivation does not cap cumulative route
+pickup by Q. Round64 keeps vehicle-specific balances, exact outgoing-q/L
+links and zero depot departures; it does not assert equivalence to the old
+aggregate cut closure. The actual inherited F0 preset lists
+`inventory_route_root_closure` as inactive and sets root cut rounds to zero.
+The new arc sharing is an additional restriction after this familiar Q lift
+and the independent T/B4 control have already been included.
 
 Use prepareRound63Time once: s=max(1,T), cbar downward rounded
 (pickup_time+drop_time)/s, taubar downward rounded original directed costs/s,
@@ -46,6 +72,15 @@ Q and T have no asserted dominance over one another. At a recorded original
 point all columns of canonical F0 are pinned, including its own auxiliaries;
 new q/f remain free. Only a valid feasible SEP control and strictly infeasible
 JOINT establish exclusion. Testing a particular auxiliary assignment is weaker.
+
+For positive handling, with V stations and M vehicles, Q adds MV^2 continuous
+columns and M(V^2+2V) rows; T adds MV^2 columns and M(V^2+V) rows. SEP adds
+2MV^2 columns and M(2V^2+4V) rows. JOINT has the same columns as SEP and
+M(3V^2+4V) added rows. Fixed-zero departure columns are eliminated and return
+columns remain. D7 therefore adds 10,000 q columns, or 20,000 q/f columns;
+JOINT adds 10,000 sharing rows beyond SEP. These are pre-presolve increments,
+not predicted runtime gains. Actual native/presolved dimensions and costs are
+reported separately. Zero handling omits both vacuous B4 and sharing rows.
 
 ## A bounded local separating example, before optimizer measurements
 

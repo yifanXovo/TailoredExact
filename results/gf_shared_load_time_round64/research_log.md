@@ -140,3 +140,33 @@ not a HGA-length matrix or free replay. The larger D7 cap leaves substantial
 native time after its established costly full HGA. Record all calls. Keep
 at least 22 further launches for long cold diagnostics, actual stable/official
 references, D3/D4/C3/C5 protection and both frozen confirmation roles.
+
+## Completed C2 warm matrix, before D7 performance
+
+#21-24 all certify original F=.8299634131717752. OFF/Q/SEP/JOINT process
+walls are 526.281/573.625/325.016/397.156 s, with 7/7/8/8 native calls.
+All four independently generated startup snapshots are byte-identical, with
+the same U, initial interval and disabled native-start handling. Q is 47.344 s
+(about 9.0%) slower than OFF: below the frozen joint time gate, not identical.
+SEP and JOINT beat OFF by 201.265 and 129.125 s. JOINT is 72.140 s (22.2%)
+slower than SEP. Thus this role establishes a genuine warm full-cost resource
+combination benefit, but no extra speed benefit for the arcwise constraint.
+The final original objective is already the common HGA objective; the gain is
+in proof search, not improved startup/primal quality. The unchanged controller
+makes one split in OFF/Q and two in SEP/JOINT. Every native model uses the
+same inherited lifecycle policy, without fresh overrides.
+
+Between queues, all 35 preflight identities, 30 independent LP/micro
+combination checks, four auxiliary/Farkas checks and 22 original route
+snapshots pass. Independent warm identity checks cover all three C2 pairs.
+The raw resource certificates are repackaged (not newly generated/optimized)
+into D4/D7 JSON evidence. A submitted-data-only verifier reconstructs physical
+rows, checks sparse SEP completions and the corrected dual exclusion. The
+largest SEP residual is 7.07e-14; the largest projection coefficient residual
+is 2.78e-17. No multiplier/value is removed by a numerical threshold.
+
+Accounting is 24/72 launches, 4/4 native micros, 110 optimizer calls, no
+charged failure/overrun or unknown internal call counts. No source model or
+search change is needed after v3. Next execute the previously declared D7
+OFF/Q/SEP/JOINT warm cap1200 matrix on the same v3 binary. Do not choose a
+uniform candidate from C2 alone, and keep the frozen confirmation roles closed.

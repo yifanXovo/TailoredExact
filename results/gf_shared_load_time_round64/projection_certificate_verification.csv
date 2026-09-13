@@ -1,5 +1,5 @@
-id,kind,original_LP_objective_recomputed,original_LP_rows_checked,maximum_original_row_violation,worst_original_row,maximum_bound_violation,scope,column_and_projection_residual,corrected_rhs,raw_activity,violation,original_terms,nonzero_dual_rows,submitted
-D4,independent_auxiliary_SEP_feasibility,0.0,1008,1.8318679906315083e-15,q_balance_1_7,0.0,,,,,,,,
-D4,finite_bound_corrected_Farkas_combination,,,,,,original_physical_global,0,-4.163336342344337e-16,-0.31050801234254016,0.3105080123425398,576,16,False
-D7,independent_auxiliary_SEP_feasibility,0.0,20800,7.061018436615996e-14,q_balance_0_9,0.0,,,,,,,,
-D7,finite_bound_corrected_Farkas_combination,,,,,,original_physical_global,2.7755575615628914e-17,-2.6020852139652106e-17,-0.026835215066864655,0.026835215066864627,10800,220,False
+id,kind,original_LP_objective_recomputed,original_LP_rows_checked,maximum_original_row_violation,worst_original_row,maximum_bound_violation,scope,column_and_projection_residual,corrected_rhs,raw_activity,violation,original_terms,nonzero_original_terms,nonzero_dual_rows,submitted
+D4,independent_auxiliary_SEP_feasibility,0.0,1008,1.8318679906315083e-15,q_balance_1_7,0.0,,,,,,,,,
+D4,finite_bound_corrected_Farkas_combination,,,,,,original_physical_global,0,-4.163336342344337e-16,-0.31050801234254016,0.3105080123425398,576,16,16,False
+D7,independent_auxiliary_SEP_feasibility,0.0,20800,7.061018436615996e-14,q_balance_0_9,0.0,,,,,,,,,
+D7,finite_bound_corrected_Farkas_combination,,,,,,original_physical_global,2.7755575615628914e-17,-2.6020852139652106e-17,-0.026835215066864655,0.026835215066864627,10800,347,220,False

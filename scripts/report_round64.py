@@ -42,8 +42,10 @@ def summary():
         result['shared_mode']=mode;result['startup']='HGA-current-process' if e['arm']=='K1-H' or e['arm'].startswith('warm-') else 'official-default' if e['arm']=='P-GRB' else 'verified-empty-routes'
         if r and result.get('scope')=='full_original_problem':
             if count==0:result['native_statuses']='no native optimize';result['work']=0;result['nodes']=0
-            result['initial_upper_bound']=r.get('initial_upper_bound')
-            result['heuristic_seconds']=r.get('primal_heuristic_seconds',r.get('heuristic_elapsed_seconds'))
+            initial=folder/'external/initial_witness.json'
+            result['initial_upper_bound']=read(initial)['objective'] if initial.exists() else r.get('initial_upper_bound')
+            heuristic=folder/'heuristic.csv'
+            result['heuristic_seconds']=sum(float(h['runtime']) for h in rows(heuristic)) if heuristic.exists() else None
     table('runs.csv',results);table('optimizer_calls.csv',calls)
     charged=[e for e in entries if e['charged']]
     budget=dict(charged=len(charged),maximum=72,native_micro=sum(e['kind']=='native-micro' for e in charged),
@@ -128,6 +130,74 @@ def audit_contracts():
     table('parameter_verification.csv',parameters);table('outer_contract_verification.csv',outer)
     table('native_lifecycle.csv',lifecycle);table('native_model_shapes.csv',shapes)
 
+def trajectories():
+    endpoints=[];accepted=[];native=[];costs=[]
+    for e in run.runner.entries():
+        folder=ROOT/e['destination'];result=folder/'result.json'
+        if not e['charged'] or not (folder/'completion.json').exists() or not result.exists():continue
+        r=read(result)
+        if r.get('schema')=='round50-fixed-interval-result-v1' or e['kind'] not in ['performance','native-micro']:continue
+        pre=dict(number=e['charged_number'],id=e['id'],arm=e['arm'],stage=e['stage'])
+        final=r.get('upper_bound',r.get('objective'));certificate=r.get('strict_certified_original_problem',False)
+        if final is None:continue
+        phases=rows(folder/'phases.csv') if (folder/'phases.csv').exists() else []
+        first_feasible=next((float(p['process_seconds']) for p in phases if p['event']=='initial_model_data_preprocessing_complete' and 'empty-route incumbent independently verified' in p['detail']),None)
+        # The common parser may verify empty routes, but the official native
+        # P-GRB receives no algorithm incumbent/cutoff from that preprocessing.
+        if e['arm']=='P-GRB':first_feasible=None
+        process_end=next((float(p['process_seconds']) for p in phases if p['event']=='process_exit'),None)
+        verified=[]
+        ub=folder/'ub_events.csv'
+        if ub.exists():
+            for v in rows(ub):
+                if v['accepted']=='true' and v['verifier_passed']=='true':
+                    verified.append((float(v['time_seconds']),float(v['objective']),'accepted_UB_event'))
+        trace=folder/'external/global_bound_trace.csv'
+        if trace.exists():
+            for v in rows(trace):
+                accepted.append(dict(pre,**v))
+                if v['event_type'] in ['exact_tree_initialization','incumbent_improvement','round62_archive_ub_improvement']:
+                    verified.append((float(v['process_elapsed_seconds']),float(v['verified_global_upper_bound']),v['event_type']))
+        best_times=[t for t,u,source in verified if u<=final+1e-9]
+        zero_times=[t for t,u,source in verified if u==0]
+        first_best=min(best_times) if best_times else None
+        endpoints.append(dict(pre,final_UB=final,final_LB=r.get('lower_bound'),certificate=certificate,
+            first_verified_feasible_process_seconds=first_feasible,
+            first_accepted_final_UB_process_seconds=first_best,
+            first_accepted_exact_zero_process_seconds=min(zero_times) if zero_times else None,
+            process_exit_seconds=process_end,
+            after_accepted_final_UB_to_exit_seconds=process_end-first_best if certificate and process_end is not None and first_best is not None else None,
+            timing_scope='internal process clock; accepted original witness; native discovery separately rounded'))
+        ledger=folder/'external/paper_optimize_ledger.csv'
+        calls=rows(ledger) if ledger.exists() else []
+        for c in calls:
+            nodes=float(c['nodes']);seconds=float(c['solver_runtime']);work=float(c['work'])
+            costs.append(dict(pre,leaf=c['leaf_id'],kind=c['solve_kind'],native_status=c['native_status'],
+                seconds=seconds,work=work,nodes=nodes,simplex_iterations=float(c['simplex_iterations']),
+                call_work_per_node_including_root=work/nodes if nodes>0 else None,
+                call_seconds_per_node_including_root=seconds/nodes if nodes>0 else None))
+        logs=[Path(c['native_log']) for c in calls if c['native_log']]
+        if e['arm']=='P-GRB':logs.append(folder/'native.log')
+        for path in logs:
+            if not path.exists():continue
+            for i,line in enumerate(path.read_text(encoding='utf-8',errors='replace').splitlines(),1):
+                found=re.search(r'^Found heuristic solution: objective ([-+\d.eE]+)',line)
+                if found:
+                    u=float(found[1]);native.append(dict(pre,path=str(path.relative_to(ROOT)),line=i,native_incumbent_rounded=u,
+                        solver_seconds_integer_precision=None,reaches_final_UB_with_log_rounding=u<=final+5e-7,
+                        raw_line=line,scope='native heuristic solution; no timestamp printed; do not infer exact discovery time'))
+                    continue
+                if not line.startswith(('H','*')):continue
+                tokens=line.split()
+                if len(tokens)<6 or not tokens[-1].endswith('s'):continue
+                try:u=float(tokens[-5]);t=float(tokens[-1][:-1])
+                except ValueError:continue
+                native.append(dict(pre,path=str(path.relative_to(ROOT)),line=i,native_incumbent_rounded=u,
+                    solver_seconds_integer_precision=t,reaches_final_UB_with_log_rounding=u<=final+5e-7,
+                    raw_line=line,scope='per native call; log precision; not independently verified until call returns'))
+    table('primal_timing.csv',endpoints);table('global_bound_trajectories.csv',accepted)
+    table('native_incumbent_observations.csv',native);table('native_call_costs.csv',costs)
+
 def index():
     records=[]
     for e in run.runner.entries():
@@ -136,6 +206,6 @@ def index():
     table('evidence_index.csv',records);print('indexed',len(records),'local files')
 def main():
     p=argparse.ArgumentParser();p.add_argument('--audit',action='store_true');p.add_argument('--index',action='store_true');a=p.parse_args();summary()
-    if a.audit:audit_contracts()
+    if a.audit:audit_contracts();trajectories()
     if a.index:index()
 if __name__=='__main__':main()

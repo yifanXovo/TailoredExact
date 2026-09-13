@@ -72,12 +72,19 @@ def probes():
 def witnesses(submitted=False):
     records=[];entries={e['charged_number']:e for e in run.runner.entries() if e['charged']};panels=run.panel()
     for number,e in entries.items():
-        if e['id'] not in panels:continue
+        if e['id'] in panels:p=panels[e['id']]
+        elif e['id'] in ['full_micro','warm_micro']:
+            command=e['command']
+            def arg(name):return command[command.index(name)+1]
+            p=dict(instance_path=arg('--input'),T_seconds=arg('--T'),pickup_seconds=arg('--pickup-time'),drop_seconds=arg('--drop-time'))
+            p['lambda']=arg('--lambda')
+        else:continue
+        if not (ROOT/e['destination']/'completion.json').exists():continue
         folder=OUT/'witnesses'/str(number) if submitted else ROOT/e['destination']
         paths=list(folder.glob('**/*witness.json'))
         if (folder/'result.json').exists() and 'routes' in run.read(folder/'result.json'):paths.append(folder/'result.json')
         for path in paths:
-            witness=run.read(path);checked=physical_module.physical(panels[e['id']],witness);assert checked['original_T_feasible']
+            witness=run.read(path);checked=physical_module.physical(p,witness);assert checked['original_T_feasible']
             records.append(dict(number=number,id=e['id'],arm=e['arm'],path=str(path.relative_to(ROOT)),**checked))
             if not submitted:
                 dest=OUT/'witnesses'/str(number)/path.relative_to(folder);dest.parent.mkdir(parents=True,exist_ok=True)
@@ -85,6 +92,29 @@ def witnesses(submitted=False):
                 else:shutil.copyfile(path,dest)
     table('witness_verification.csv' if not submitted else 'submitted_witness_verification.csv',records)
     print('independent original route checks',len(records))
+
+def resource_matrix(resource,capacities):
+    """Independent physical equations; no native LP parser or solver needed."""
+    expected={};V,M=resource['V'],resource['M'];c=resource['handling']
+    def add(name,eq,a,b):expected[name]=(str(int(eq)),a,b)
+    for k in range(M):
+        for i in range(1,V+1):
+            qb={f'q_{k}_{i}_{j}':1. for j in range(V+1) if j!=i};qload=dict(qb)
+            fb={f'f_{k}_{i}_{j}':1. for j in range(V+1) if j!=i};b4={n:-v for n,v in fb.items()}
+            for h in range(1,V+1):
+                if h!=i:qb[f'q_{k}_{h}_{i}']=-1.;fb[f'f_{k}_{h}_{i}']=-1.
+            fb_rhs={f'p_{k}_{i}':c,**{f'x_{k}_{h}_{i}':resource['travel'][h][i] for h in range(V+1) if h!=i}}
+            add(f'q_balance_{k}_{i}',True,qb,{f'p_{k}_{i}':1.,f'd_{k}_{i}':-1.})
+            add(f'q_load_{k}_{i}',True,qload,{f'load_{k}_{i}':1.})
+            add(f'f_balance_{k}_{i}',True,fb,fb_rhs)
+            add(f'B4_{k}_{i}',False,b4,{f'load_{k}_{i}':-c})
+            for j in range(V+1):
+                if j==i:continue
+                q,f,x=f'q_{k}_{i}_{j}',f'f_{k}_{i}_{j}',f'x_{k}_{i}_{j}'
+                add(f'q_cap_{k}_{i}_{j}',False,{q:1.},{x:float(capacities[k])})
+                add(f'f_cap_{k}_{i}_{j}',False,{f:1.},{x:resource['upper'][i][j]})
+                add(f'shared_{k}_{i}_{j}',False,{q:c,f:-1.},{})
+    return expected
 
 def projections():
     records=[]
@@ -104,27 +134,7 @@ def projections():
         physical=run.panel()[folder.name]
         header=(ROOT/physical['instance_path']).read_text(encoding='utf-8').splitlines()[0]
         capacities=ast.literal_eval(header[header.index('['):])
-        expected={};V,M=resource['V'],resource['M'];c=resource['handling']
-        def add(name,eq,a,b):expected[name]=(str(int(eq)),a,b)
-        for k in range(M):
-            for i in range(1,V+1):
-                qb={f'q_{k}_{i}_{j}':1. for j in range(V+1) if j!=i}
-                qload=dict(qb)
-                fb={f'f_{k}_{i}_{j}':1. for j in range(V+1) if j!=i}
-                b4={n:-v for n,v in fb.items()}
-                for h in range(1,V+1):
-                    if h!=i:qb[f'q_{k}_{h}_{i}']=-1.;fb[f'f_{k}_{h}_{i}']=-1.
-                fb_rhs={f'p_{k}_{i}':c,**{f'x_{k}_{h}_{i}':resource['travel'][h][i] for h in range(V+1) if h!=i}}
-                add(f'q_balance_{k}_{i}',True,qb,{f'p_{k}_{i}':1.,f'd_{k}_{i}':-1.})
-                add(f'q_load_{k}_{i}',True,qload,{f'load_{k}_{i}':1.})
-                add(f'f_balance_{k}_{i}',True,fb,fb_rhs)
-                add(f'B4_{k}_{i}',False,b4,{f'load_{k}_{i}':-c})
-                for j in range(V+1):
-                    if j==i:continue
-                    q,f,x=f'q_{k}_{i}_{j}',f'f_{k}_{i}_{j}',f'x_{k}_{i}_{j}'
-                    add(f'q_cap_{k}_{i}_{j}',False,{q:1.},{x:float(capacities[k])})
-                    add(f'f_cap_{k}_{i}_{j}',False,{f:1.},{x:resource['upper'][i][j]})
-                    add(f'shared_{k}_{i}_{j}',False,{q:c,f:-1.},{})
+        expected=resource_matrix(resource,capacities)
         observed={n:[e,{},{}] for n,(e,a,b) in expected.items()}
         for t in terms:
             assert t['row'] in expected and t['equality']==expected[t['row']][0]
@@ -151,11 +161,98 @@ def projections():
         violation=rhs-activity;assert violation>1e-7 and abs(violation-cert['violation'])<1e-9
         records.append(dict(id=folder.name,kind='finite_bound_corrected_Farkas_combination',scope=cert['scope'],
             column_and_projection_residual=error,corrected_rhs=rhs,raw_activity=activity,violation=violation,original_terms=len(projected),
+            nonzero_original_terms=sum(a!=0 for a in projected.values()),
             nonzero_dual_rows=sum(float(y['normalized_multiplier'])!=0 for y in dual.values()),submitted=False))
     table('projection_certificate_verification.csv',records);print('independent auxiliary/Farkas checks',len(records))
+
+def warm_states():
+    records=[];groups={}
+    for e in run.runner.entries():
+        folder=ROOT/e['destination']
+        if not e['charged'] or not (folder/'completion.json').exists() or not (e['arm'].startswith('warm-') or e['arm']=='K1-H'):continue
+        r=run.read(folder/'result.json')
+        assert r['primal_heuristic']=='hga-tgbc' and not r['external_gini_tree_warm_start_enabled']
+        assert r['external_gini_tree_warm_start_submitted_count']==0 and not r['incumbent_archive_selected']
+        events=[v for v in rows(folder/'ub_events.csv') if v['source']=='native_hga_tgbc_initial']
+        assert len(events)==1 and events[0]['verifier_passed']=='true' and events[0]['accepted']=='true'
+        event=events[0];initial=folder/'external/initial_witness.json'
+        interval=folder/'external/initial_decomposition_ledger.csv'
+        state=dict(number=e['charged_number'],id=e['id'],arm=e['arm'],stage=e['stage'],cap=e['cap_seconds'],
+            executable_sha256=e['executable_sha256'],initial_U=float(event['objective']),initial_hash=event['incumbent_hash'],
+            generated_in_this_process=True,startup_accepted_seconds=float(event['time_seconds']),
+            native_start_enabled=False,native_start_submitted=0,
+            route_snapshot_sha256=run.sha(initial) if initial.exists() else None,
+            initial_domain_sha256=run.sha(interval) if interval.exists() else None)
+        if initial.exists():
+            w=run.read(initial);assert abs(w['objective']-state['initial_U'])<=1e-10
+        records.append(state)
+        groups.setdefault((e['id'],e['stage'],e['cap_seconds'],e['executable_sha256']),[]).append(state)
+    comparisons=[]
+    for group in groups.values():
+        base=next((r for r in group if r['arm']=='warm-off'),None)
+        if base is None:continue
+        for r in group:
+            if r is base:continue
+            for key in ['initial_U','initial_hash','initial_domain_sha256']:assert r[key]==base[key],(r['number'],key)
+            if r['arm']!='K1-H':assert r['route_snapshot_sha256']==base['route_snapshot_sha256']
+            comparisons.append(dict(baseline=base['number'],candidate=r['number'],id=r['id'],
+                identical_startup_hash_U_domain=True,identical_route_snapshot=r['arm']!='K1-H',native_starts_both_disabled=True))
+    table('warm_state_verification.csv',records);table('warm_pairs_verification.csv',comparisons)
+    print('warm states',len(records),'matched pairs',len(comparisons))
+
+def pack_projection_evidence():
+    """Repackage existing charged diagnostics; never generate or optimize a cut."""
+    for folder in sorted((RAW/'projection_v2').glob('*')):
+        if not (folder/'projection_certificate.json').exists():continue
+        cert=run.read(folder/'projection_certificate.json');resource=run.read(folder/'resource.json');p=run.panel()[folder.name]
+        header=(ROOT/p['instance_path']).read_text(encoding='utf-8').splitlines()[0]
+        capacities=ast.literal_eval(header[header.index('['):]);matrix=resource_matrix(resource,capacities)
+        used={n for eq,a,b in matrix.values() for n in b};pins=point(folder/'original_pins.csv')
+        proof=dict(id=folder.name,certificate=cert,resource=resource,capacities=capacities,
+            physical_input_sha256=p['input_sha256'],physical_point={n:pins[n] for n in sorted(used)},
+            sep_completion={n:v for n,v in point(folder/'sep_point.csv').items() if v!=0},
+            dual={y['row']:float(y['normalized_multiplier']) for y in rows(folder/'dual.csv') if float(y['normalized_multiplier'])!=0},
+            projected_row={y['variable']:float(y['coefficient']) for y in rows(folder/'projection_row.csv') if float(y['coefficient'])!=0},
+            auxiliary_unlisted_values=0,pruned_tolerance=0,generated_new_evidence=False,
+            source_hashes={name:run.sha(folder/name) for name in ['original_pins.csv','sep_point.csv','joint_terms.csv','dual.csv','projection_row.csv','column_residuals.csv','projection_certificate.json','audit_result.json']})
+        run.write(OUT/'projection_evidence'/(folder.name+'.json'),proof)
+
+def submitted_projections():
+    records=[]
+    for path in sorted((OUT/'projection_evidence').glob('*.json')):
+        proof=run.read(path);r=proof['resource'];Q=proof['capacities'];cert=proof['certificate']
+        assert proof['physical_input_sha256']==run.panel()[proof['id']]['input_sha256']
+        assert cert['identity']==r['identity'] and cert['pins_sha256']==proof['source_hashes']['original_pins.csv']
+        assert cert['scope']=='original_physical_global' and not cert['submitted']
+        assert proof['pruned_tolerance']==0 and proof['auxiliary_unlisted_values']==0 and not proof['generated_new_evidence']
+        matrix=resource_matrix(r,Q);pins=proof['physical_point'];sep=proof['sep_completion'];alpha={};row={};error=0.
+        def upper(n):
+            family,k,i,j=n.split('_');return Q[int(k)] if family=='q' else r['upper'][int(i)][int(j)]
+        for n,v in sep.items():assert -1e-7<=v<=upper(n)+1e-7
+        for name,(eq,a,b) in matrix.items():
+            if name.startswith('shared_'):continue
+            activity=math.fsum(c*sep.get(n,0) for n,c in a.items())-math.fsum(c*pins[n] for n,c in b.items())
+            error=max(error,abs(activity) if eq=='1' else max(0,activity))
+        assert error<=1e-7
+        for name,y in proof['dual'].items():
+            eq,a,b=matrix[name];assert math.isfinite(y) and (eq=='1' or y>=0)
+            for n,c in a.items():alpha.setdefault(n,[]).append(y*c)
+            for n,c in b.items():row.setdefault(n,[]).append(y*c)
+        alpha={n:math.fsum(v) for n,v in alpha.items()};row={n:math.fsum(v) for n,v in row.items()}
+        beta=math.fsum(min(0,c*upper(n)) for n,c in alpha.items())
+        activity=math.fsum(c*pins[n] for n,c in row.items());saved=proof['projected_row']
+        residual=max((abs(row.get(n,0)-saved.get(n,0)) for n in set(row)|set(saved)),default=0)
+        assert residual<=1e-10 and abs(beta-cert['rhs'])<=1e-9 and abs(activity-cert['raw_activity'])<=1e-9
+        assert beta-activity>1e-7 and abs(beta-activity-cert['violation'])<=1e-9
+        records.append(dict(id=proof['id'],path=str(path.relative_to(ROOT)),sha256=run.sha(path),
+            sep_maximum_row_residual=error,projection_coefficient_residual=residual,corrected_rhs=beta,
+            raw_activity=activity,strict_violation=beta-activity,dual_support=len(proof['dual']),
+            source_point_in_full_F0='linked to full target-LP residual evidence; this file rechecks resource projection'))
+    table('submitted_projection_verification.csv',records);print('submitted resource projection checks',len(records))
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--preflight',action='store_true');p.add_argument('--submitted',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--preflight',action='store_true');p.add_argument('--submitted',action='store_true');p.add_argument('--package',action='store_true');a=p.parse_args()
     if a.preflight:preflight()
-    elif a.submitted:witnesses(True)
-    else:probes();projections();witnesses()
+    elif a.submitted:witnesses(True);submitted_projections()
+    elif a.package:pack_projection_evidence();submitted_projections()
+    else:probes();projections();witnesses();warm_states()
 if __name__=='__main__':main()
