@@ -347,10 +347,56 @@ def submitted_projections():
             raw_activity=activity,strict_violation=beta-activity,dual_support=len(proof['dual']),
             source_point_in_full_F0='linked to full target-LP residual evidence; this file rechecks resource projection'))
     table('submitted_projection_verification.csv',records);print('submitted resource projection checks',len(records))
+def confirmation(require_complete=False):
+    freeze_path=OUT/'confirmation_freeze.json'
+    if not freeze_path.exists():
+        assert not require_complete,'confirmation has not been frozen'
+        return
+    frozen=run.read(freeze_path);selected=run.read(OUT/'selected_candidate.json')
+    for key,path in [('active_build',OUT/'active_build.json'),('driver',Path(run.__file__)),
+                     ('protocol',OUT/'protocol.json'),('selection',OUT/'selected_candidate.json')]:
+        assert run.sha(path)==frozen[key+'_sha256'],('confirmation binding changed',key)
+    assert selected['selected_unix']<=frozen['frozen_unix'] and selected['mode']==frozen['mode']
+    identities=selected['confirmation_roles'];mode=frozen['mode']
+    expected={'warm-off','warm-'+mode,'cold-off','cold-'+mode,'P-GRB','K1-H'}
+    entries=[e for e in run.runner.entries() if e['id'] in identities]
+    assert all(e['started_unix']>frozen['frozen_unix'] for e in entries)
+    checked=[];previous=[]
+    for identity in identities:
+        group=[e for e in entries if e['id']==identity]
+        assert len({e['arm'] for e in group})==len(group),'confirmation arm repeated'
+        assert all(e['arm'] in expected for e in group)
+        if group and identity!=identities[0]:
+            first=min(e['started_unix'] for e in group)
+            assert len(previous)==len(expected),'next confirmation opened before prior matrix'
+            for e in previous:
+                done=ROOT/e['destination']/'completion.json';assert done.exists()
+                assert e['started_unix']+run.read(done)['wall_seconds']<=first
+        for e in group:
+            assert e['charged'] and e['cap_seconds']==frozen['cap_seconds']
+            assert e['executable_sha256']==selected['executable_sha256']
+            assert e['build_freeze']==selected['build_freeze']
+            if e['arm'].startswith(('warm-','cold-')):
+                actual=e['command'][e['command'].index('--round64-shared-mode')+1]
+                assert actual==e['arm'].split('-',1)[1]
+        complete=len(group)==len(expected) and all((ROOT/e['destination']/'completion.json').exists() for e in group)
+        checked.append(dict(id=identity,opened=bool(group),complete=complete,
+            numbers=[e['charged_number'] for e in group],arms=[e['arm'] for e in group]))
+        previous.extend(group)
+    # There are exactly two preregistered roles; the cumulative prior list above
+    # checks that all six C6 runs finish before any C7 run starts.
+    assert len(identities)==2
+    complete=all(r['complete'] for r in checked)
+    if require_complete:assert complete,'declared confirmation matrix incomplete'
+    run.write(OUT/'confirmation_verification.json',dict(frozen_bindings_verified=True,
+        freeze_sha256=run.sha(freeze_path),uniform_mode=mode,cap_seconds=frozen['cap_seconds'],
+        original_role_order_verified=True,complete=complete,roles=checked))
+    print('confirmation bindings/order verified; complete',complete)
+
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--preflight',action='store_true');p.add_argument('--submitted',action='store_true');p.add_argument('--package',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--preflight',action='store_true');p.add_argument('--submitted',action='store_true');p.add_argument('--package',action='store_true');p.add_argument('--final',action='store_true');a=p.parse_args()
     if a.preflight:preflight()
     elif a.submitted:witnesses(True);submitted_projections()
     elif a.package:pack_projection_evidence();submitted_projections()
-    else:probes();projections();witnesses();warm_states();cold_states()
+    else:probes();projections();witnesses();warm_states();cold_states();confirmation(a.final)
 if __name__=='__main__':main()

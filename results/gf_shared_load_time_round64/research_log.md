@@ -133,7 +133,7 @@ structural and screening measurements retain their original binary identities.
 
 Spend the fourth/final native micro on warm full-K1 JOINT (tiny physical input,
 cap20, every HGA/LP/MIP cost charged). Then compare the SAME four warm states
-OFF/Q/SEP/JOINT in full K1 on C2 at cap600 and D7 at cap1200. Each process
+OFF/Q/SEP/JOINT in full K1 on C2 at cap600 and D7 at cap 1200. Each process
 independently runs the frozen HGA; check initial witness bytes/U/root interval
 and actual disabled native-start handling. This is eight formal launches,
 not a HGA-length matrix or free replay. The larger D7 cap leaves substantial
@@ -168,7 +168,7 @@ is 2.78e-17. No multiplier/value is removed by a numerical threshold.
 Accounting is 24/72 launches, 4/4 native micros, 110 optimizer calls, no
 charged failure/overrun or unknown internal call counts. No source model or
 search change is needed after v3. Next execute the previously declared D7
-OFF/Q/SEP/JOINT warm cap1200 matrix on the same v3 binary. Do not choose a
+OFF/Q/SEP/JOINT warm cap 1200 matrix on the same v3 binary. Do not choose a
 uniform candidate from C2 alone, and keep the frozen confirmation roles closed.
 
 Ledger correction during D7: the first prose version accidentally transcribed
@@ -226,7 +226,7 @@ Launches 25--28 use the unchanged v3 executable. OFF/Q/SEP/JOINT all retain
 the identical current-process HGA witness (hash 223301de8cf037a8), U
 0.21564407531579505 and initial domain. Every arm pays about 568--572 seconds
 for HGA; native starts remain disabled. All use six native calls and two
-splits. No arm improves the initial U or certifies within cap1200.
+splits. No arm improves the initial U or certifies within cap 1200.
 
 The final absolute gaps are 0.017914352795947386 / 0.019341441693344674 /
 0.019361159959621843 / 0.019405854678165302. Q, SEP and JOINT each regress
@@ -291,8 +291,8 @@ be repeated. This saves four redundant full launches and about an hour of
 machine time without mixing binary identities in a pair.
 
 Remaining declared matrix: cap600 warm OFF/JOINT on D3, D4, C3, C5; cap600
-cold OFF/JOINT on C5 and cap1200 on D7; same-v3 official P-GRB and stable
-K1-H on C2 cap600 and D7 cap1200. Before opening C6, freeze the candidate,
+cold OFF/JOINT on C5 and cap 1200 on D7; same-v3 official P-GRB and stable
+K1-H on C2 cap600 and D7 cap 1200. Before opening C6, freeze the candidate,
 driver, build and both confirmation roles at cap600. Run warm OFF/JOINT and
 both references, plus cold OFF/JOINT, on each confirmation role in C6 then
 C7 order. Total planned charged launches are 60/72, including the completed
@@ -370,7 +370,7 @@ only integer-second log precision. Original zero is accepted at process
 accepted-witness proof/finalization tail is about .0103/.0052 seconds. Native
 work/nodes are 104.549/14 versus 380.62/1: JOINT spends longer discovering zero
 while still at the root. Do not interpret the small node count as cheap nodes.
-The warm C5 no-native result had hidden this search cost. D7 cold cap1200
+The warm C5 no-native result had hidden this search cost. D7 cold cap 1200
 OFF/JOINT follows in the same serial queue; no source change is made.
 
 Before either confirmation role is opened, write confirmation_freeze.json
@@ -418,7 +418,7 @@ these before the unchanged C2/D7 references and still open C6 before C7.
 
 ## Completed cold long matrix, before SEP controls/references
 
-D7 launches 43/44 (cap1200) finish uncertified. OFF has U=0.2760665094310133,
+D7 launches 43/44 (cap 1200) finish uncertified. OFF has U=0.2760665094310133,
 LB=0.196435140633266, gap=0.07963136879774729; JOINT has
 U=0.26547702332085715, LB=0.19588172293058817, gap=0.06959530039026898.
 The gap reduction 0.01003606840747831 (12.6%) passes both gates. It comes
@@ -439,3 +439,48 @@ algorithm, witness or performance-result change. Submitted-only witness and
 projection checks pass afterward. Accounting is 44/72 launches, 4/4 native
 micros, 202 optimizer calls, no charged failure or budget overrun. Commit
 the completed evidence before starting the declared SEP/reference queue.
+
+The first additional attribution control, D4 warm SEP launch 45, certifies
+the identical original F=0.506343307565206 in 263.968 seconds (four calls,
+zero splits). Its initial route/domain bytes and HGA U match OFF/JOINT.
+JOINT's 53.390 seconds saves 210.578 seconds (79.8%) versus SEP. This is a
+genuine complete warm-state arc-sharing improvement relative to the exact
+same Q/T/B4 control, not credit for adding q-only or for changing startup.
+
+The actual LP path supplies a mechanism: SEP root/left-child bounds remain
+0.29009672768829708/0.29009672768829697 and the right child
+[0.25321139461208148,0.50642278922416295] is feasible with bound
+0.49296724784343526. JOINT gives root 0.31730264358211679, proves that right
+child infeasible, and then proves [0,0.12660569730604074] infeasible too.
+The unchanged controller makes two splits and focuses on the surviving Gini
+region. SEP instead proceeds to an exact parent MIP. Because SEP already
+contains Q and B4, the newly established child infeasibility is attributable
+to arc sharing. No warm Q runtime ranking is inferred for D4. This positive
+development contrast does not erase C2/D7's negative arc contrasts or
+D3/D7/C5 protection regressions. C3 SEP and real references follow unchanged.
+
+### Development attribution follow-up: C3 SEP (#46)
+
+The declared second and final extra SEP control completed at cap600: wall597.094, uncertified, U=.8142420757383566, LB=.71780632637948627, absolute gap=.09643574935887034. It uses seven calls/one split like JOINT and already excludes the same right Gini child. JOINT reduces this gap by .00209236407579017 (2.2%); absolute improvement passes .001 but relative improvement fails 5%. This small measured arc increment is not a substantial qualified gain. SEP explains most of the OFF-to-JOINT improvement on C3, whereas D4 has a genuine large complete warm arc-sharing gain. Both follow-ups are development attribution, not independent confirmation; candidate/configuration/holdouts remain frozen.
+
+### Official reference evidence fields
+
+C2 P-GRB launch47 completes at cap600 without certification: wall597.078, U=.8299634131717752, LB=.786523162522037, expected compact fingerprint 51964193. Its generic Round22 model-correctness field remains not_evaluated. Source inspection confirms the actual Round24 Gurobi certificate path separately checks domains, lifecycle, native settings, model/executable bindings and independent original witness; it does not populate that legacy field. Add a report-only reference audit for those actual fields and exact ObjBoundC-to-LB identity, without changing the frozen experiment driver, model or certificate policy. Final independent route/reference audits run between queues.
+
+### C2 actual stable reference (#48)
+
+Stable K1-H certifies F=.8299634131717752 in 526.204 seconds, with 7 calls/1 split, final LB=.8299634029496857. Initial HGA hash 8e0f632eed80ae79, U, domain SHA 5fb719b79bb3075ec38d192341f2c7167e35e0780f25bc4447c3ddd7d7225c96, first F0 SHA 48f00424ac4080a0b940b5a8c9351072ce8bb94243b95cfeec26fc580474e014 and final bounds exactly match research warm OFF 526.281 seconds. JOINT 397.156 saves 129.048 seconds/24.5% against actual stable K1-H; SEP 325.016 is still faster than JOINT. P-GRB final LB is precisely .7865231625220372, gap .043440250649738. D7 actual references follow at the already declared cap 1200.
+
+### Confirmation audit prepared before opening either holdout
+
+Add report-only verification of unchanged candidate/driver/protocol/active-build bindings, all six declared arms per role, identical frozen executable/cap, and completion of the entire first role before the second starts. The final verifier option rejects an incomplete matrix; interim audit can record that no confirmation has opened yet. No experiment-driver, model, search rule, candidate selection or budget threshold changes accompany this audit.
+
+### D7 actual official reference (#49)
+
+P-GRB cap 1200 completes uncertified in 1197.078 seconds: U=.27732086593398886, LB=.1972864787145512, gap=.08003438721943765; native work2586.297571879278 and nodes2318. Original physical recomputation gives F=.27732086593398864, 47 served stations, pickup/drop209/209 and maximum route duration17978.256445183477. Expected signed compact fingerprint -373258443 and actual domain/lifecycle checks pass. Cold JOINT gap=.06959530039026898 improves on this actual P-GRB reference by .01043908682916867/13.0%, though its LB is weaker. Warm JOINT also has a smaller gap. Do not inherit Round63 ranking or infer stable K1-H from P-GRB; actual stable reference #50 is still running.
+
+### Completed real references and audit before confirmation
+
+D7 stable K1-H launch50 ends at 1197.141 seconds, uncertified, with U=.21564407531579505, LB=.19772972251984766 and gap=.017914352795947386. Current-process HGA acceptance is at555.3726619 seconds. Initial hash/U/domain, first F0 model hash, six calls/two splits and final bounds match research warm OFF. Warm JOINT gap is .001491501882217916/8.3% worse than the actual stable reference; cold JOINT gap is .0516809475943216 larger. JOINT beats measured P-GRB but not K1-H on D7.
+
+Between queues, native parameter/reference audits pass, along with42 full LP/combination checks,4 auxiliary/Farkas checks,64 original route snapshots,21 warm states/14 matched warm pairs, and4 cold states/2 pairs. Confirmation freeze bindings verify unchanged and neither role has opened. Accounting is50/72 charged launches,4/4 native micros,228 optimizer calls,17672.951 charged wall seconds, no charged failure/overrun/unknown call count. The48 build-only records include the retained pre-v1 CLI guard failure. Complete all six frozen C6 runs before opening C7; total planned launch count remains62.

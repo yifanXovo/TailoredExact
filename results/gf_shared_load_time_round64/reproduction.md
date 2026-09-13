@@ -55,7 +55,7 @@ historical executable. Current PR source also retains the stopped QCAP facility.
 ```powershell
 python scripts/report_round64.py --audit
 python scripts/verify_round64.py --preflight
-python scripts/verify_round64.py
+python scripts/verify_round64.py --final
 python scripts/verify_round64.py --package
 python scripts/verify_round64.py --submitted
 python scripts/report_round64.py --index
@@ -82,12 +82,23 @@ current-process HGA routes/U/initial domains and disabled native starts.
 actual depot-only [0,0] plans with no station operations, identical U/domain
 and disabled starts. Stable K1-H additionally must match research OFF's
 first canonical F0 model hash whenever native optimization occurs.
+`confirmation_verification.json` verifies unchanged freeze bindings, every
+declared arm, paired implementation/cap and complete first-role-before-second-
+role ordering. `--final` rejects an incomplete confirmation matrix; omit it
+only for interim audits between development queues.
 `native_lifecycle.csv`, `native_model_shapes.csv`, `native_call_costs.csv` and
 `parameter_verification.csv` expose actual reuse, row/column cost and readback.
 `primal_timing.csv` uses accepted, verified original U events on the process
 clock. `native_incumbent_observations.csv` separately preserves per-call native
 discovery lines at the log's integer-second precision; those rounded native
 values are not independently verified witnesses until extraction at call end.
+`native_bound_observations.csv` preserves rounded native progress bounds,
+including official P-GRB. A leaf-local native bound is explicitly distinguished
+from the outer controller's valid global LB in `global_bound_trajectories.csv`.
+The latter compresses only consecutive records whose every non-time field is
+identical, preserving first/last process and exact-phase times plus observation
+counts. Every semantic state change remains. `global_bound_trace_compaction.csv`
+binds each complete original trace by path/SHA and records raw/state counts.
 
 ## Re-run an experiment without overwriting evidence
 
@@ -115,6 +126,29 @@ stable K1-H. Structural `probe` uses seven LPs under one shared cap;
 canonical inputs/pins and expected identities are explicit in the driver.
 Confirmation needs an independent candidate freeze before opening either
 role; the original confirmation cannot be retrospectively relabeled as new.
+
+The recorded full qualification uses the retained v3 executable and these
+settings (do not execute against the original destinations again):
+
+| Stage | Roles | Arms | Process cap |
+|---|---|---|---:|
+| warm_dev_v3 | C2 | warm OFF/Q/SEP/JOINT; P-GRB/K1-H | 600 |
+| warm_dev_v3 | D7 | warm OFF/Q/SEP/JOINT; P-GRB/K1-H | 1200 |
+| warm_protection_v3 | D3/D4/C3/C5 | warm OFF/JOINT | 600 |
+| warm_protection_v3 | D4/C3 | additional warm SEP development attribution | 600 |
+| cold_long_v3 | C5 | cold OFF/JOINT | 600 |
+| cold_long_v3 | D7 | cold OFF/JOINT | 1200 |
+| confirmation_v3 | C6, then C7 | warm OFF/JOINT, P-GRB/K1-H, cold OFF/JOINT | 600 |
+
+Each confirmation role is completed in full before opening the next. The
+original `confirmation_freeze.json` binds the candidate, driver, protocol and
+active build before either role is opened. A later rerun is reproduction of
+this fixed policy, not a new independent confirmation. In a separate results
+directory, create a selection record describing that reproduction and its
+actual executable, then run `confirm-freeze --modes joint --cap 600` before
+opening these protocol-marked roles; do not copy old build/hash bindings onto
+a newly compiled executable. Full argument arrays in `processes.jsonl` remain
+the authoritative commands for every historical launch.
 
 For a new structural campaign without the original large local models, first
 run `build --ids D3 D4 D6 D7 C2 C3 C5 --modes off q t sep joint --stage preflight_v1`

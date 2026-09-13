@@ -83,7 +83,7 @@ def summary():
             if link['baseline'] in by_number and link['candidate'] in by_number:
                 a,b=by_number[link['baseline']],by_number[link['candidate']]
                 assert a['id']==b['id'] and a['performance_eligible'] and b['performance_eligible']
-                pair=compare(a,b);pair['link_reason']=link['reason'];comparisons.append(pair)
+                pair=compare(a,b);pair.update(link_reason=link['reason'],baseline_stage=a['stage'],candidate_stage=b['stage']);comparisons.append(pair)
     table('pairs.csv',comparisons)
     text=['# Round64 automatically generated endpoints\n',
           'Wall includes the complete charged process. Uncertified wall is budget use, not solution time. Fixed-F0 and full original-problem certificates have separate scopes.\n',
@@ -100,7 +100,7 @@ def summary():
     return results
 
 def audit_contracts():
-    parameters=[];outer=[];lifecycle=[];shapes=[]
+    parameters=[];outer=[];lifecycle=[];shapes=[];references=[]
     for e in run.runner.entries():
         folder=ROOT/e['destination']
         if not e['charged'] or not (folder/'completion.json').exists() or not (folder/'result.json').exists():continue
@@ -108,7 +108,23 @@ def audit_contracts():
         for c in calls:lifecycle.append(dict(number=e['charged_number'],id=e['id'],arm=e['arm'],**c))
         applicable=True
         if r.get('schema')=='round50-fixed-interval-result-v1':valid=all(x['zero_gap_roundtrip']=='1' for x in rows(folder/'certificate_ledger.csv'))
-        elif e['arm']=='P-GRB':valid=all(r.get('gurobi_'+n+'_effective')==v for n,v in [('threads',1),('seed',0),('presolve',-1),('mip_gap',0),('mip_gap_abs',0)])
+        elif e['arm']=='P-GRB':
+            valid=all(r.get('gurobi_'+n+'_effective')==v and r.get('gurobi_'+n+'_set_return_code')==0 and r.get('gurobi_'+n+'_get_return_code')==0 for n,v in [('threads',1),('seed',0),('presolve',-1),('mip_gap',0),('mip_gap_abs',0)])
+            required=['gurobi_native_domain_audit_passed','gurobi_lifecycle_valid',
+                'gurobi_obj_bound_c_available','verified_incumbent_objective_available',
+                'verified_incumbent_original_problem_feasible','verified_incumbent_objective_consistent']
+            assert all(r.get(k) is True for k in required),'official reference evidence incomplete'
+            assert r['gurobi_optimize_return_code']==0 and math.isfinite(r['gurobi_obj_bound_c'])
+            assert r['lower_bound']==r['gurobi_obj_bound_c']
+            assert '--plain-baseline' in e['command'] and not r['gurobi_hga_start_requested']
+            expected=int(e['command'][e['command'].index('--round24-expected-gurobi-model-fingerprint')+1])
+            assert r['gurobi_model_fingerprint']==expected
+            references.append(dict(number=e['charged_number'],id=e['id'],arm=e['arm'],
+                compact_fingerprint=expected,original_domain_lifecycle_verified=True,
+                bound_source='Gurobi_ObjBoundC',native_bound=r['gurobi_obj_bound_c'],
+                original_incumbent_verified=True,default_heuristics_preserved=True,
+                strict_certificate=r['strict_certified_original_problem'],
+                legacy_model_correctness_field=r.get('model_correctness_failure_reason')))
         else:
             applicable=bool(calls) or r.get('external_gini_tree_optimize_count',0)>0
             valid=r.get('external_gini_tree_backend_parameter_roundtrip_valid') if applicable else None
@@ -136,9 +152,10 @@ def audit_contracts():
                 root_iterations=int(root[2]) if root else None,root_seconds=float(root[3]) if root else None))
     table('parameter_verification.csv',parameters);table('outer_contract_verification.csv',outer)
     table('native_lifecycle.csv',lifecycle);table('native_model_shapes.csv',shapes)
+    table('reference_contract_verification.csv',references)
 
 def trajectories():
-    endpoints=[];accepted=[];native=[];costs=[]
+    endpoints=[];accepted=[];trace_compaction=[];native=[];native_bounds=[];costs=[]
     for e in run.runner.entries():
         folder=ROOT/e['destination'];result=folder/'result.json'
         if not e['charged'] or not (folder/'completion.json').exists() or not result.exists():continue
@@ -161,10 +178,20 @@ def trajectories():
                     verified.append((float(v['time_seconds']),float(v['objective']),'accepted_UB_event'))
         trace=folder/'external/global_bound_trace.csv'
         if trace.exists():
-            for v in rows(trace):
-                accepted.append(dict(pre,**v))
+            trace_rows=rows(trace);last_key=None;state=None;groups=0
+            for v in trace_rows:
+                key=tuple((k,value) for k,value in v.items() if k not in ['process_elapsed_seconds','exact_phase_elapsed_seconds'])
+                if key!=last_key:
+                    state=dict(pre,**v,same_state_observations=0)
+                    accepted.append(state);groups+=1;last_key=key
+                state['same_state_observations']+=1
+                state['last_observed_process_seconds']=v['process_elapsed_seconds']
+                state['last_observed_exact_phase_seconds']=v['exact_phase_elapsed_seconds']
                 if v['event_type'] in ['exact_tree_initialization','incumbent_improvement','round62_archive_ub_improvement']:
                     verified.append((float(v['process_elapsed_seconds']),float(v['verified_global_upper_bound']),v['event_type']))
+            trace_compaction.append(dict(pre,source=str(trace.relative_to(ROOT)),sha256=run.sha(trace),
+                raw_observations=len(trace_rows),consecutive_semantic_states=groups,
+                rule='all non-time fields exact; preserve first/last times and count of every consecutive state'))
         best_times=[t for t,u,source in verified if u<=final+1e-9]
         zero_times=[t for t,u,source in verified if u==0]
         first_best=min(best_times) if best_times else None
@@ -184,10 +211,28 @@ def trajectories():
                 call_work_per_node_including_root=work/nodes if nodes>0 else None,
                 call_seconds_per_node_including_root=seconds/nodes if nodes>0 else None))
         logs=[Path(c['native_log']) for c in calls if c['native_log']]
-        if e['arm']=='P-GRB':logs.append(folder/'native.log')
+        if e['arm']=='P-GRB':
+            logs.append(folder/'native.log')
+            nodes=float(r['gurobi_node_count']);seconds=float(r['gurobi_runtime']);work=float(r['gurobi_work'])
+            costs.append(dict(pre,leaf='original-compact',kind='MIP',native_status=r['gurobi_status_text'],
+                seconds=seconds,work=work,nodes=nodes,simplex_iterations=float(r['gurobi_iter_count']),
+                call_work_per_node_including_root=work/nodes if nodes>0 else None,
+                call_seconds_per_node_including_root=seconds/nodes if nodes>0 else None))
         for path in logs:
             if not path.exists():continue
             for i,line in enumerate(path.read_text(encoding='utf-8',errors='replace').splitlines(),1):
+                tokens=line.split()
+                if len(tokens)>=6 and tokens[-1].endswith('s') and (tokens[-3].endswith('%') or tokens[-3]=='-') and re.match(r'^\s*(?:[H*]\s*)?\d+\s+\d+\s+',line):
+                    try:bound=float(tokens[-4]);t=float(tokens[-1][:-1])
+                    except ValueError:pass
+                    else:
+                        if math.isfinite(bound):
+                            try:incumbent=float(tokens[-5])
+                            except ValueError:incumbent=None
+                            native_bounds.append(dict(pre,path=str(path.relative_to(ROOT)),line=i,
+                                solver_seconds_integer_precision=t,native_bound_rounded=bound,
+                                native_incumbent_rounded=incumbent,raw_line=line,
+                                scope='complete compact native bound, rounded' if e['arm']=='P-GRB' else 'per-call model bound, rounded; not the complete outer global LB'))
                 found=re.search(r'^Found heuristic solution: objective ([-+\d.eE]+)',line)
                 if found:
                     u=float(found[1]);native.append(dict(pre,path=str(path.relative_to(ROOT)),line=i,native_incumbent_rounded=u,
@@ -203,6 +248,8 @@ def trajectories():
                     solver_seconds_integer_precision=t,native_value_at_most_final_original_UB_with_rounding=u<=final+5e-7,
                     raw_line=line,scope='native model objective and per-call log precision; original route/F verified only at extraction'))
     table('primal_timing.csv',endpoints);table('global_bound_trajectories.csv',accepted)
+    table('global_bound_trace_compaction.csv',trace_compaction)
+    table('native_bound_observations.csv',native_bounds)
     table('native_incumbent_observations.csv',native);table('native_call_costs.csv',costs)
 
 def index():

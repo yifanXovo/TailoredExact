@@ -20,6 +20,16 @@ guard workaround, no additional first-LP solve, no copy model and no implicit
 restart. Every main arm has the same lifecycle policy; candidate-dependent
 incumbent/bound changes may still change the unchanged outer controller's calls.
 Cold-to-warm startup differences are never credited to the resource block.
+"Starts disabled" means no explicit route-start submission. Any information
+that Gurobi may internally retain from previous solves of a reused model is
+part of the unchanged native lifecycle, not a claim that every native solve
+starts without internal state. It is not a free HGA route submission.
+
+v3 research presets additionally persist an already verified initial-route
+snapshot before native optimization; its export cost is included in wall time.
+Stable K1-H keeps its original outputs. The measured reference is matched
+using its accepted HGA hash/U event, initial interval and first F0 model hash;
+absence of the research-only snapshot is not treated as a different candidate.
 
 The frozen protocol's formulation `callback="off"` refers to the added
 resource mechanism. It does not disable the inherited progress and native
@@ -44,6 +54,15 @@ verification and coverage establish the contract and certificate scope. The
 generic description fields are not used to certify a run or to claim stable
 mainline qualification. They are documented rather than silently interpreted
 as complete algorithm metadata; no model/search change is needed.
+
+Official P-GRB also retains the generic Round22
+`model_correctness_failure_reason="not_evaluated"` field. Its actual Round24
+Gurobi path instead checks native domains, completed lifecycle, expected compact
+fingerprint, executable binding, exact-zero gaps and the reconstructed original
+witness before its certificate decision. `reference_contract_verification.csv`
+rechecks those measured native facts and binds the reported LB to ObjBoundC;
+it does not reinterpret the unused legacy field as a passed audit. Time-limit
+results remain uncertified even when their feasible U and native LB are valid.
 
 The implementation adapter and telemetry are engineering, not theoretical
 contributions. The q lift is a familiar inventory flow. Claims for arc sharing

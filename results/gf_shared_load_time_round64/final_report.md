@@ -189,6 +189,17 @@ combined representation helps this real-start proof search, but extra arc
 sharing does not add a speed gain. Q's 47.344-second slowdown is about 9.0%,
 below the joint time gate; that is not equality.
 
+The actual same-v3 stable C2 K1-H reference also certifies this F in
+526.204 seconds, with the same seven calls, one split, initial candidate
+hash/U/domain, first canonical F0 hash and final bounds as research warm OFF
+(526.281 seconds). JOINT therefore saves 129.048 seconds (24.5%) against
+the measured stable algorithm; SEP remains faster than JOINT. Official
+unmodified P-GRB uses 597.078 seconds without certification, with the same
+U=.8299634131717752, LB=.7865231625220372 and gap=.043440250649738.
+Its expected compact fingerprint51964193, native domain and parameter
+readbacks match. These are complete-policy references, distinct from the
+isolated SEP/JOINT resource comparison.
+
 For full warm D7 cap1200, all four keep the same HGA F=.21564407531579505,
 and none certifies or improves it. HGA costs about 568--572 seconds, charged
 separately in every process. OFF/Q/SEP/JOINT final gaps are
@@ -196,7 +207,9 @@ separately in every process. OFF/Q/SEP/JOINT final gaps are
 Each resource arm regresses beyond both the .001 and 5% gates. All use six
 native calls and two splits; there is no startup or model-lifecycle policy
 change. Stronger projection alone did not overcome the positive-objective
-proof bottleneck. Same-build official/stable references remain to be reported.
+proof bottleneck. The actual same-build stable K1-H reference below reproduces
+OFF's final bounds, so this regression also holds against the real stable
+algorithm rather than only its research adapter.
 
 ### Native size and cost explain why strength is insufficient
 
@@ -264,8 +277,9 @@ controller: JOINT raises the initial LP bound to .5756432922 and proves the
 right child [G=.4071210379,.8142420757] infeasible. The inherited infeasibility
 split rule fires; subsequent decisions still use K0=1 and tau=.08. OFF's
 initial LP bound is .3573298053 and the same controller retains the parent.
-This observation concerns the entire JOINT resource block; Q/SEP warm
-counterfactuals were not run on C3 and no arc-only attribution is made.
+The later matched SEP control also proves the right child infeasible and
+uses seven calls/one split. Thus that split is not attributable specifically
+to arc sharing: Q/T/B4 already suffice on this role.
 
 C5 warm OFF/JOINT both certify F=0 from the identical current-process HGA
 witness, with zero native calls. Wall is 199.437/204.469 seconds; accepted
@@ -318,11 +332,76 @@ marginal nodes.
 
 The cold JOINT gap .0695953 remains much larger than the same-cap warm JOINT
 gap .0194059, despite warm HGA consuming about 570 seconds of its process
-budget. This is a paid-startup comparison, not a free route replay. It still
-does not replace actual stable K1-H and official P-GRB reference runs.
+budget. This is a paid-startup comparison, not a free route replay. The actual
+stable K1-H and official P-GRB runs provide the separate policy comparison.
 
-Pending at the time of this working draft: the two declared D4/C3 SEP warm
-attribution controls; same-build P-GRB/K1-H references; and frozen C6/C7 warm/cold
+The actual same-v3 official D7 P-GRB cap1200 run finishes uncertified in
+1197.078 seconds, U=.27732086593398886, LB=.1972864787145512,
+gap=.08003438721943765. Its original route independently verifies at
+F=.27732086593398864; the expected compact fingerprint is -373258443 and
+native domain/lifecycle checks pass. Cold JOINT therefore improves this
+measured reference gap by .01043908682916867 (13.0%), despite a weaker LB;
+warm JOINT's gap is also smaller. This round does not blindly carry forward
+Round63's reference ranking.
+
+Actual stable K1-H takes 1197.141 seconds without certification, with
+U=.21564407531579505, LB=.19772972251984766 and gap=.017914352795947386.
+Its current-process HGA costs about 555 seconds. The startup hash/U/domain,
+first canonical F0 hash, six-call/two-split structure and final bounds match
+research warm OFF. Warm JOINT worsens this actual stable gap by
+.001491501882217916 (8.3%), passing both regression gates. Cold JOINT's gap
+is .0516809475943216 larger than stable K1-H's. Thus the answer to whether
+D7 beats the real references is mixed: yes against this measured official
+P-GRB, no against stable K1-H, including after matched paid warm startup.
+
+| D7 complete policy, cap1200 | UB | LB | Absolute gap | Certificate |
+|---|---:|---:|---:|---|
+| Official P-GRB | .277320865934 | .197286478715 | .0800343872194 | no |
+| Stable K1-H | .215644075316 | .197729722520 | .0179143527959 | no |
+| Cold OFF | .276066509431 | .196435140633 | .0796313687977 | no |
+| Cold JOINT | .265477023321 | .195881722931 | .0695953003903 | no |
+| Warm JOINT | .215644075316 | .196238220638 | .0194058546782 | no |
+
+The actual reference audits are in
+[reference_contract_verification.csv](reference_contract_verification.csv);
+explicit cross-stage comparison links preserve matching executable, physical
+cap and complete-problem scope. These comparisons are not mislabeled as
+isolated resource ablations.
+
+### D4 identifies a real complete-algorithm arc-sharing gain
+
+The additional same-v3 warm SEP control certifies the same original
+F=.506343307565206 in 263.968 seconds, from byte-identical initial routes and
+domain and the same paid HGA U. JOINT takes 53.390 seconds: a 210.578-second
+(79.8%) saving. Q, T and B4 are identical in these arms, so this gain is not
+misattributed q-only strengthening or an initial-quality/lifecycle change.
+
+The logged LP states show why the unchanged outer algorithm takes different
+paths. SEP's root and left-child bounds both remain .2900967277; its right
+child G in [.2532113946,.5064227892] is feasible with bound .4929672478.
+JOINT raises the root bound to .3173026436 and proves that right child
+infeasible, then also excludes G in [0,.1266056973]. The existing exact
+infeasibility split rule focuses the subsequent proof on the surviving Gini
+region. SEP uses four calls/zero splits and JOINT nine calls/two splits.
+This is a concrete setting where the new projection increment matters to
+complete proof cost. A separate warm Q runtime was not measured on D4;
+no claim that JOINT is its fastest possible representation is made.
+
+The contrast is a development follow-up selected after observing the OFF/
+JOINT result, not an independent confirmation. It is retained alongside the
+opposite cold fixed-F0 D4 result and the negative C2/D7 SEP/JOINT contrasts.
+The frozen candidate, holdouts and decision gates remain unchanged.
+
+The additional C3 SEP control retains the same U=.8142420757383566 and
+finishes uncertified at LB=.71780632637948627, gap=.09643574935887034,
+wall597.094 seconds. JOINT's gap .09434338528308017 is smaller by
+.00209236407579017 (2.2%), below the required 5% relative gate even though
+the absolute gate passes. SEP already accounts for most of the observed
+OFF-to-JOINT improvement. This is a measured small arc-only bound gain,
+not a qualified substantial gain or equality. Initial route/U/domain and
+native-start treatment are matched; Q-only warm C3 remains unmeasured.
+
+Pending at the time of this working draft: frozen C6/C7 warm/cold
 and reference qualification. The final report must replace this paragraph
 with all outcomes, first-feasible/zero/best timings, proof tails and explicit
 confirmation classifications. No performance claim is made for these pending
@@ -349,6 +428,16 @@ timing nor QCAP's failed execution establishes that such a production method
 already exists. Another unrestricted representation or parameter matrix is
 not supported by this round's evidence.
 
+From a reviewer-facing algorithm description, the candidate is simply the
+inherited complete K1-H controller with the static Q/T/B4/arc-sharing lift in
+each canonical LP/MIP. The cold counterpart changes only the declared initial
+candidate source. The other resource switches belong to controlled ablations
+and the stopped QCAP branch, not the final policy. No per-instance selector,
+historical-route injection, tolerance relaxation or extra model restart was
+introduced. The actual shortcomings are mixed complete cost and failed
+protection, which are grounds to withhold a stable upgrade rather than to
+introduce a role-specific safety switch.
+
 ## Correctness, accounting and reproduction
 
 All 41 optimizer-free CTests pass through v4. Native micro is exhausted at
@@ -372,7 +461,8 @@ including diagnostic LPs and both alternative screens. No charged failure,
 overrun or unknown call count exists. The original preflight D3/Q CLI-guard
 failure is retained as build-only, corrected before measured v1 and never
 misrepresented as an optimizer run. The remaining declared campaign reaches
-60 launches, with twelve reserved for justified follow-ups rather than a grid.
+62 launches, including the two declared warm SEP attribution follow-ups,
+with ten launches left unused unless justified by a new issue.
 
 Every launch has a write-ahead record, physical cap, executable/source
 identity, actual native call count and raw destination. Optimization is serial;
@@ -381,6 +471,12 @@ All process cost is included. Uncertified wall time is consumed budget, not
 time to solve. Gates require both 10 seconds/10% for certified time or
 .001/5% for uncertified absolute gap; certificate loss is a separate veto.
 Raw values below a gate are still reported.
+
+Each performance cell is one serial launch on the frozen representative
+panel. The thresholds classify observed effects; they are not statistical
+significance tests or estimates of performance on the full instance family.
+Same settings and executable control the comparison, while different native
+paths and wall-limited stopping can still affect the final endpoint.
 
 [reproduction.md](reproduction.md) is the entry point. Automatically generated
 [measured_tables.md](measured_tables.md), [pairs.csv](pairs.csv), native shapes,
