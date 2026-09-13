@@ -33,6 +33,18 @@ The code at main.cpp's `round59_simple_start` branch, heuristic.csv's
 the actual empty-route behavior. The original frozen protocol is preserved;
 this is a description erratum, not a baseline/model/algorithm modification.
 
+The legacy configuration snapshot has no dedicated Round64 description case,
+so research results retain `preset_certificate_scope="custom"` and
+`preset_reason="custom command-line configuration"`, with empty descriptive
+feature lists. These strings do not imply that actual options are custom or
+unknown: the explicit adapter first applies the canonical `paper-k1-am-sf`
+configuration and restores the research name, with isolated resource/startup
+guards. Actual option values, canonical models, decision ledgers, original
+verification and coverage establish the contract and certificate scope. The
+generic description fields are not used to certify a run or to claim stable
+mainline qualification. They are documented rather than silently interpreted
+as complete algorithm metadata; no model/search change is needed.
+
 The implementation adapter and telemetry are engineering, not theoretical
 contributions. The q lift is a familiar inventory flow. Claims for arc sharing
 require incremental projection evidence and separate complete-cost validation.

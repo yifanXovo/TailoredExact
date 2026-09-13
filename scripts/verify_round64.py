@@ -243,12 +243,14 @@ def warm_states():
         assert len(events)==1 and events[0]['verifier_passed']=='true' and events[0]['accepted']=='true'
         event=events[0];initial=folder/'external/initial_witness.json'
         interval=folder/'external/initial_decomposition_ledger.csv'
+        ledger=folder/'external/paper_optimize_ledger.csv';calls=rows(ledger) if ledger.exists() else []
         state=dict(number=e['charged_number'],id=e['id'],arm=e['arm'],stage=e['stage'],cap=e['cap_seconds'],
             executable_sha256=e['executable_sha256'],initial_U=float(event['objective']),initial_hash=event['incumbent_hash'],
             generated_in_this_process=True,startup_accepted_seconds=float(event['time_seconds']),
             native_start_enabled=False,native_start_submitted=0,
             route_snapshot_sha256=run.sha(initial) if initial.exists() else None,
-            initial_domain_sha256=run.sha(interval) if interval.exists() else None)
+            initial_domain_sha256=run.sha(interval) if interval.exists() else None,
+            first_canonical_model_sha256=calls[0]['model_sha256'] if calls else None)
         if initial.exists():
             w=run.read(initial);assert abs(w['objective']-state['initial_U'])<=1e-10
         records.append(state)
@@ -261,10 +263,39 @@ def warm_states():
             if r is base:continue
             for key in ['initial_U','initial_hash','initial_domain_sha256']:assert r[key]==base[key],(r['number'],key)
             if r['arm']!='K1-H':assert r['route_snapshot_sha256']==base['route_snapshot_sha256']
+            else:assert r['first_canonical_model_sha256']==base['first_canonical_model_sha256'],'stable and research OFF first F0 models differ'
             comparisons.append(dict(baseline=base['number'],candidate=r['number'],id=r['id'],
-                identical_startup_hash_U_domain=True,identical_route_snapshot=r['arm']!='K1-H',native_starts_both_disabled=True))
+                identical_startup_hash_U_domain=True,identical_route_snapshot=r['arm']!='K1-H',native_starts_both_disabled=True,
+                first_F0_identical_to_stable_reference=True if r['arm']=='K1-H' else None))
     table('warm_state_verification.csv',records);table('warm_pairs_verification.csv',comparisons)
     print('warm states',len(records),'matched pairs',len(comparisons))
+
+def cold_states():
+    records=[];groups={}
+    for e in run.runner.entries():
+        folder=ROOT/e['destination']
+        if not e['charged'] or not e['arm'].startswith('cold-') or not (folder/'completion.json').exists():continue
+        r=run.read(folder/'result.json');initial=folder/'external/initial_witness.json';w=run.read(initial)
+        assert all(route['nodes']==[0,0] and not route['operations'] for route in w['routes']),'cold startup contained station service'
+        assert r['primal_heuristic']=='greedy' and not r['external_gini_tree_warm_start_enabled']
+        assert r['external_gini_tree_warm_start_submitted_count']==0 and not r['incumbent_archive_selected']
+        assert not any(v['source']=='native_hga_tgbc_initial' and v['accepted']=='true' for v in rows(folder/'ub_events.csv'))
+        domain=folder/'external/initial_decomposition_ledger.csv'
+        state=dict(number=e['charged_number'],id=e['id'],arm=e['arm'],stage=e['stage'],cap=e['cap_seconds'],
+            executable_sha256=e['executable_sha256'],initial_U=w['objective'],verified_empty_routes=True,
+            route_snapshot_sha256=run.sha(initial),initial_domain_sha256=run.sha(domain),native_start_enabled=False)
+        records.append(state)
+        groups.setdefault((e['id'],e['stage'],e['cap_seconds'],e['executable_sha256']),[]).append(state)
+    pairs=[]
+    for group in groups.values():
+        base=next((s for s in group if s['arm']=='cold-off'),None)
+        if base is None:continue
+        for s in group:
+            if s is base:continue
+            for key in ['initial_U','route_snapshot_sha256','initial_domain_sha256']:assert s[key]==base[key]
+            pairs.append(dict(baseline=base['number'],candidate=s['number'],id=s['id'],identical_empty_start_U_domain=True,native_starts_both_disabled=True))
+    table('cold_state_verification.csv',records);table('cold_pairs_verification.csv',pairs)
+    print('cold states',len(records),'matched pairs',len(pairs))
 
 def pack_projection_evidence():
     """Repackage existing charged diagnostics; never generate or optimize a cut."""
@@ -321,5 +352,5 @@ def main():
     if a.preflight:preflight()
     elif a.submitted:witnesses(True);submitted_projections()
     elif a.package:pack_projection_evidence();submitted_projections()
-    else:probes();projections();witnesses();warm_states()
+    else:probes();projections();witnesses();warm_states();cold_states()
 if __name__=='__main__':main()

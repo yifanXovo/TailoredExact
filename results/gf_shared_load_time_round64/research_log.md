@@ -350,3 +350,92 @@ canonical hashes exactly; no optimizer is called and v3 remains the active
 performance build. Accounting is 40/72 charged launches, 4/4 micros and 186
 optimizer calls, without charged failure, overrun or unknown call counts.
 Large reporting/verification now runs before the next serial optimizer queue.
+
+The between-queue checks pass 42 full LP/combination checks, four auxiliary
+checks, 48 original route snapshots and all ten warm pairs (17 warm states).
+Submitted-only verification and current/retained model identities also pass.
+
+Cold long C5 launches 41/42 (cap600, same v3) both certify F=0, but OFF wall
+59.453 seconds grows to JOINT 208.000 seconds, a 148.547-second slowdown
+(about 249.9%, 3.5 times total time). Both start with the identical empty
+witness/domain, use four native calls and zero splits. Original final routes
+verify: pickup 225 / drop 150 / return 75, maximum duration 17956.919102623026 OFF
+and 17714.513155535315 JOINT. This is a real known-regression protection loss,
+not exclusion of the legal zero solution or a lifecycle/startup policy change.
+
+The native terminal calls show zero at rounded solver seconds 49/176 and finish
+at 49.851/176.30 seconds; these are native model objective observations, with
+only integer-second log precision. Original zero is accepted at process
+59.4238164/207.9746524, followed by exit at 59.4341457/207.9798957. Thus the
+accepted-witness proof/finalization tail is about .0103/.0052 seconds. Native
+work/nodes are 104.549/14 versus 380.62/1: JOINT spends longer discovering zero
+while still at the root. Do not interpret the small node count as cheap nodes.
+The warm C5 no-native result had hidden this search cost. D7 cold cap1200
+OFF/JOINT follows in the same serial queue; no source change is made.
+
+Before either confirmation role is opened, write confirmation_freeze.json
+while the D7 cold queue continues. This is only a lightweight hash-binding
+operation, not an optimizer launch or a model change. It freezes JOINT,
+cap600, the active retained v3 build, the driver, protocol and selection
+hashes. Allowed confirmation arms are OFF/JOINT in the declared warm/cold
+policies plus original P-GRB and stable K1-H. C6 must open before C7. No
+later source/configuration edit may be silently treated as this independent
+confirmation; no role result has been used in selection.
+
+A focused source/metadata check finds that the legacy configuration snapshot
+labels Round64 `preset_certificate_scope=custom` because its description
+switch does not recognize the new research names. The adapter actually
+inherits all canonical stable flags before restoring the research name;
+the remaining name comparison only selects description text. Actual options,
+models and decision ledgers remain authoritative. Document this description
+limitation in the contract; do not silently treat its empty feature strings
+as actual enabled/disabled lists, change the measured algorithm, or market
+a logging-label fix as a contribution.
+
+## Two bounded warm attribution controls, declared before launch
+
+Warm D4 and C3 now show full JOINT improvements over OFF, but those gains
+could come from the independent Q/T/B4 block. C2 already shows SEP faster
+than JOINT, so neither a positive OFF comparison nor mathematical arc
+increment warrants arc-only runtime credit on these newly positive roles.
+
+After the current D7 cold queue ends and its audit finishes, add exactly two
+development runs: SEP on D4 and C3, each cap600, retained v3, unchanged paid
+HGA and disabled native starts. Reuse the already measured same-stage,
+same-cap, same-build OFF/JOINT endpoints; verify the same initial routes/U/
+domain. These are contribution controls, not a new candidate or instance-wise
+mode policy. Compare SEP versus JOINT under the original double gates and
+preserve all outcomes. Stop after these two controls; no additional warm
+representation grid or parameter revision follows their outcomes.
+
+The explicit hypothesis is that the shorter-T warm geometry may make arc
+sharing relevant to actual proof progress, unlike the C2/D7 negative arc
+contrasts. A negative or below-gate comparison rejects that claim for the
+observed window; it does not undo the proven projection increment. The
+selected JOINT and all confirmation bindings stay unchanged. Two of twelve
+reserved launches are used, making the complete planned total 62/72. Run
+these before the unchanged C2/D7 references and still open C6 before C7.
+
+## Completed cold long matrix, before SEP controls/references
+
+D7 launches 43/44 (cap1200) finish uncertified. OFF has U=0.2760665094310133,
+LB=0.196435140633266, gap=0.07963136879774729; JOINT has
+U=0.26547702332085715, LB=0.19588172293058817, gap=0.06959530039026898.
+The gap reduction 0.01003606840747831 (12.6%) passes both gates. It comes
+entirely from U improving by 0.01058948611015615 while LB worsens by
+0.00055341770267783. Both use four native calls and zero splits; total
+work/nodes are 3062.977/570 and 2908.528/34. No certificate or bound gain is
+claimed. Even cold JOINT remains substantially worse than the already paid
+HGA warm JOINT gap 0.019405854678165302. Actual stable/official references
+are still required rather than inferred from the warm adapter.
+
+Between queues, all 42 LP/combination, four auxiliary and 56 original route
+checks pass, together with ten warm pairs and two cold pairs. The newly added
+cold-state checker initially assumed an empty JSON route array. Actual cold
+encoding contains one [0,0]/no-operation plan per vehicle. Fix the checker
+to test that real empty-route semantics; all original physical checks had
+already passed. This is an audit representation correction, with no model,
+algorithm, witness or performance-result change. Submitted-only witness and
+projection checks pass afterward. Accounting is 44/72 launches, 4/4 native
+micros, 202 optimizer calls, no charged failure or budget overrun. Commit
+the completed evidence before starting the declared SEP/reference queue.

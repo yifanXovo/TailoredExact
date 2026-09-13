@@ -78,6 +78,10 @@ certify original-objective optimality and are never submitted to search.
 
 `warm_state_verification.csv` and `warm_pairs_verification.csv` bind actual
 current-process HGA routes/U/initial domains and disabled native starts.
+`cold_state_verification.csv` and `cold_pairs_verification.csv` check the
+actual depot-only [0,0] plans with no station operations, identical U/domain
+and disabled starts. Stable K1-H additionally must match research OFF's
+first canonical F0 model hash whenever native optimization occurs.
 `native_lifecycle.csv`, `native_model_shapes.csv`, `native_call_costs.csv` and
 `parameter_verification.csv` expose actual reuse, row/column cost and readback.
 `primal_timing.csv` uses accepted, verified original U events on the process

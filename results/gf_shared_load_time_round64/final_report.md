@@ -161,6 +161,15 @@ verification. QCAP is stopped for advancement; its mathematics, code and
 negative result are retained. This bounded failure does not reject every
 possible shared projection or robust separator.
 
+This loss is not explained solely by root construction overhead. Q/QCAP's
+native presolved root objectives are .1189913/.1432834 and final root-cut
+bounds .3931858562/.4047008097. Root processing takes 3.184/4.805 seconds;
+total work is 147.997/198.462 and explored nodes 14648/20521. The stronger
+root is followed by a more costly, incomplete search. Ratios that include
+root work are not interpreted as isolated marginal node costs. The smaller
+representation therefore removes the doubled f block without establishing
+a better complete proof process on this matched screen.
+
 ## Cold versus real-start evidence available before complete qualification
 
 Cold fixed-F0 screens and full-original K1 results have different certificate
@@ -224,6 +233,12 @@ binds the unchanged rule, startup and retained v3 executable. The tested v4
 QCAP alternative is separate; existing same-v3 C2/D7 matrices need not be
 repeated simply to change a packaging version.
 
+[confirmation_freeze.json](confirmation_freeze.json) binds the mode,
+uniform cap600, active build, driver, original protocol and selection hashes
+before either holdout is opened. It enforces C6-before-C7 and the declared
+warm/cold OFF/JOINT plus unchanged reference arms. The roles and thresholds
+are not changed in response to results.
+
 Warm D3 completes with identical initial routes/U/domain and final original
 F=.04500155005562836. OFF/JOINT both certify, using five calls and zero splits,
 in 357.141/519.313 seconds. The 162.172-second (45.4%) JOINT slowdown passes
@@ -260,7 +275,54 @@ routes pick up 225, deliver 150 and return 75 to depot; original duration and
 prefix capacities verify. Because F>=0 closes the problem before native
 search, this warm pair does not exercise the resource block's search cost.
 
-Pending at the time of this working draft: cold long C5/D7; same-build P-GRB/K1-H references; and frozen C6/C7 warm/cold
+### C5: legal zero preserved, search protection fails
+
+The matched cold cap600 pair reproduces the important failure that the warm
+zero shortcut cannot reveal. OFF certifies F=0 in 59.453 seconds; JOINT takes
+208.000 seconds, 148.547 seconds more (249.9% slower, about 3.5 times total
+time). Initial empty witnesses and domains are identical; both use four
+native calls and zero splits. Both final original zero routes independently
+verify, with pickup225/drop150/return75. The shared rows have not removed
+the zero solution, but they delay its discovery substantially.
+
+| C5 cold event | OFF | JOINT |
+|---|---:|---:|
+| First original feasible empty witness, process seconds | .0023766 | .0024055 |
+| Native zero objective line, rounded per-call seconds | 49 | 176 |
+| Terminal native runtime, seconds | 49.851 | 176.30 |
+| Accepted original zero, process seconds | 59.4238164 | 207.9746524 |
+| Process exit, internal seconds | 59.4341457 | 207.9798957 |
+| Accepted-zero-to-exit tail, seconds | .0103293 | .0052433 |
+| Terminal native work / explored nodes | 104.549 / 14 | 380.62 / 1 |
+
+Native zero lines are rounded model-objective observations and are validated
+as original F=0 only at extraction. Their discovery-to-native-return tail is
+short at the log's precision; the precisely recorded original acceptance tail
+is also short. The regression is primarily in discovery/root processing,
+not a long proof after an accepted original zero. The JOINT native root bound
+was already zero. This rejects a claim of robust C5 search protection; its
+warm end-to-end pair remains below the time gate. Independently, D3/D7 fail
+the actual paid-HGA upgrade tests. No C5-specific disable switch is added.
+
+### D7 cold long result: primal gain, weaker final bound
+
+The same-v3 cap1200 cold pair is uncertified in both arms. OFF has
+U=.2760665094310133, LB=.196435140633266, gap=.07963136879774729;
+JOINT has U=.26547702332085715, LB=.19588172293058817,
+gap=.06959530039026898. The .01003606840747831 (12.6%) gap reduction passes
+both gates. U improves by .0105894861 while LB declines by .0005534177:
+this is wholly a primal gain, not stronger proof progress. Both have four
+native calls and zero splits. Total native work/nodes are 3062.977/570
+versus 2908.528/34; fewer nodes do not imply a stronger bound or cheaper
+marginal nodes.
+
+The cold JOINT gap .0695953 remains much larger than the same-cap warm JOINT
+gap .0194059, despite warm HGA consuming about 570 seconds of its process
+budget. This is a paid-startup comparison, not a free route replay. It still
+does not replace actual stable K1-H and official P-GRB reference runs.
+
+Pending at the time of this working draft: the two declared D4/C3 SEP warm
+attribution controls; same-build P-GRB/K1-H references; and frozen C6/C7 warm/cold
 and reference qualification. The final report must replace this paragraph
 with all outcomes, first-feasible/zero/best timings, proof tails and explicit
 confirmation classifications. No performance claim is made for these pending
