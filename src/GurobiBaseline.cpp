@@ -16,6 +16,7 @@
 #include "Round52TailoredCuts.hpp"
 #include "Round60Candidates.hpp"
 #include "Round61Candidates.hpp"
+#include "Round63TimeResource.hpp"
 
 #include <gurobi_c.h>
 
@@ -281,7 +282,57 @@ int startSilentGurobiEnvironment(
     return rc;
 }
 
+
+struct Round63NativeState {
+    Round63TimeData data;
+    Round63TimePoint point;
+    std::map<std::string,int> index;
+    std::vector<std::vector<std::vector<int>>> xindex;
+    std::vector<std::vector<int>> pindex;
+    std::vector<double> values;
+    std::set<std::string> seen;
+    std::ofstream cuts,points;
+    std::string mode;
+    long long queries=0,graphs=0,selected=0,submitted=0,api_success=0,duplicates=0,root_queries=0,status_reads=0,vector_reads=0;
+    double next_tree_node=1,seconds=0,setup_seconds=0,max_violation=0;
+    bool disabled=false;
+    void query(GurobiApi& api,void* cbdata) noexcept {
+        if(disabled||queries>=64||selected>=256)return;
+        const auto started=Clock::now();
+        struct Timer {double& seconds;Clock::time_point start;~Timer(){seconds+=std::chrono::duration<double>(Clock::now()-start).count();}} timer{seconds,started};
+        try {
+            double node=0;
+            if(api.cbget(cbdata,GRB_CB_MIPNODE,GRB_CB_MIPNODE_NODCNT,&node))throw std::runtime_error("resource node read");
+            if((node<.5&&root_queries>=16)||(node>=.5&&node<next_tree_node))return;
+            int status=0;++status_reads;
+            if(api.cbget(cbdata,GRB_CB_MIPNODE,GRB_CB_MIPNODE_STATUS,&status))throw std::runtime_error("resource status read");
+            if(status!=GRB_OPTIMAL)return;
+            if(node<.5)++root_queries;else next_tree_node=node+64;
+            ++queries;++vector_reads;
+            if(api.cbget(cbdata,GRB_CB_MIPNODE,GRB_CB_MIPNODE_REL,values.data()))throw std::runtime_error("resource relaxation read");
+            for(int k=0;k<data.M;++k)for(int i=0;i<=data.V;++i) {
+                if(i)point.pickup[k][i]=values.at(pindex[k][i]);
+                for(int j=0;j<=data.V;++j)if(i!=j)point.x[k][i][j]=values.at(xindex[k][i][j]);
+            }
+            for(int k=0;k<data.M&&selected<256;++k) {
+                ++graphs;auto cut=separateRound63Time(data,point,k);max_violation=std::max(max_violation,cut.violation);
+                if(!cut.violated)continue;
+                if(!acceptRound63TimeCut(data,cut,seen)){++duplicates;continue;}
+                ++selected;std::vector<int> indices;std::vector<double> coefficients;
+                for(const auto& [name,c]:cut.coefficients){indices.push_back(index.at(name));coefficients.push_back(c);}
+                int code=-1;
+                // The unmodified relaxation, original physical coefficients and global scope were checked above.
+                if(mode=="cuts"){++submitted;code=api.cbcut(cbdata,static_cast<int>(indices.size()),indices.data(),coefficients.data(),GRB_LESS_EQUAL,0);api_success+=code==0;}
+                writeRound63TimeCut(cut,cuts,queries,node,code);
+                for(const auto& [name,c]:cut.coefficients){(void)c;points<<queries<<','<<k<<','<<name<<','<<values.at(index.at(name))<<'\n';}
+                if(!cuts||!points||code>0)throw std::runtime_error("resource evidence or submission failed");
+            }
+        } catch(...) {disabled=true;}
+    }
+};
+
 struct ProgressCallbackState {
+    Round63NativeState* round63 = nullptr;
     struct RootScalar {
         long long callback_sequence = 0;
         double node_count = 0.0;
@@ -687,6 +738,7 @@ int __stdcall progressAndBoundTargetCallback(
     GRBmodel* model, void* cbdata, int where, void* usrdata) {
     auto* state = static_cast<ProgressCallbackState*>(usrdata);
     if (!state || !state->api) return 0;
+    if (where==GRB_CB_MIPNODE && state->round63) state->round63->query(*state->api,cbdata);
     if(state->round61_session && where==GRB_CB_MIP && !state->submitted_candidates.empty()) {
         double incumbent=GRB_INFINITY;
         if(state->api->cbget(cbdata,where,GRB_CB_MIP_OBJBST,&incumbent)==0 && finiteNative(incumbent))
@@ -2176,6 +2228,37 @@ public:
                 static_cast<std::size_t>(native_variables));
             out.tailored_cut_callback_active = true;
         }
+
+        Round63NativeState resource;
+        const bool resource_mip=!out.lp_relaxation && options_.round63_time_mode!="off";
+        const bool resource_separator=resource_mip && (options_.round63_time_mode=="dry"||options_.round63_time_mode=="cuts");
+        if(resource_mip && (resource_separator||options_.round63_time_mode=="precrush")) {
+            out.gurobi_precrush_requested=1;
+            out.gurobi_precrush_set_return_code=api_.setintparam(model_env,GRB_INT_PAR_PRECRUSH,1);
+            out.gurobi_precrush_get_return_code=api_.getintparam(model_env,GRB_INT_PAR_PRECRUSH,&out.gurobi_precrush_effective);
+            out.gurobi_precrush_roundtrip_valid=out.gurobi_precrush_set_return_code==0 && out.gurobi_precrush_get_return_code==0 && out.gurobi_precrush_effective==1;
+            if(!out.gurobi_precrush_roundtrip_valid || (resource_separator&&!api_.cbcut)) {
+                out.failure_reason="round63_precrush_or_api_invalid";return out;
+            }
+        }
+        if(resource_separator) {
+            const auto started=Clock::now();
+            resource.data=prepareRound63Time(instance_);resource.point=emptyRound63TimePoint(resource.data);resource.mode=options_.round63_time_mode;
+            resource.values.resize(native_variables);
+            for(int i=0;i<native_variables;++i)resource.index.emplace(native_names[i],i);
+            resource.xindex.assign(instance_.M,std::vector<std::vector<int>>(instance_.V+1,std::vector<int>(instance_.V+1,-1)));
+            resource.pindex.assign(instance_.M,std::vector<int>(instance_.V+1,-1));
+            for(int k=0;k<instance_.M;++k)for(int i=0;i<=instance_.V;++i) {
+                if(i)resource.pindex[k][i]=resource.index.at("p_"+std::to_string(k)+"_"+std::to_string(i));
+                for(int j=0;j<=instance_.V;++j)if(i!=j)resource.xindex[k][i][j]=resource.index.at("x_"+std::to_string(k)+"_"+std::to_string(i)+"_"+std::to_string(j));
+            }
+            resource.cuts.open(request.native_log_path.string()+".round63.cuts.jsonl");
+            resource.points.open(request.native_log_path.string()+".round63.points.csv");
+            resource.points.precision(17);resource.points<<"query,vehicle,variable,raw_value\n";
+            if(!resource.cuts||!resource.points){out.failure_reason="round63_evidence_open_failed";return out;}
+            callback.round63=&resource;
+            resource.setup_seconds=std::chrono::duration<double>(Clock::now()-started).count();
+        }
         const int callback_rc = api_.setcallbackfunc(
             model, progressAndBoundTargetCallback, &callback);
         if (callback_rc != 0) {
@@ -2183,6 +2266,19 @@ public:
             return out;
         }
         out.optimize_return_code = api_.optimize(model);
+
+        if(resource_mip) {
+            resource.cuts.close();resource.points.close();
+            std::ofstream log(request.native_log_path.string()+".round63.json");log.precision(17);
+            log<<"{\"mode\":\""<<options_.round63_time_mode<<"\",\"model_sha256\":\""<<request.canonical_model_fingerprint
+               <<"\",\"resource_identity\":\""<<resource.data.identity<<"\",\"queries\":"<<resource.queries
+               <<",\"maxflow_calls\":"<<resource.graphs<<",\"root_queries\":"<<resource.root_queries<<",\"status_reads\":"<<resource.status_reads
+               <<",\"vector_reads\":"<<resource.vector_reads<<",\"selected\":"<<resource.selected<<",\"submitted\":"<<resource.submitted
+               <<",\"api_success\":"<<resource.api_success<<",\"duplicates\":"<<resource.duplicates<<",\"disabled_after_failure\":"<<resource.disabled
+               <<",\"setup_seconds\":"<<resource.setup_seconds<<",\"callback_seconds\":"<<resource.seconds
+               <<",\"maximum_normalized_violation\":"<<resource.max_violation<<",\"precrush\":"<<out.gurobi_precrush_effective<<"}\n";
+        }
+
         if (callback.round59_samples) {
             int post_optimize_status = 0;
             const bool solved_at_root = api_.getintattr(

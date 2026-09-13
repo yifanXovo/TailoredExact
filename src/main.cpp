@@ -1,3 +1,4 @@
+#include "Round63TimeResource.hpp"
 #include "Branching.hpp"
 #include "Bounds.hpp"
 #include "ColumnPool.hpp"
@@ -1302,6 +1303,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             opt.round61_candidate_mode=lowerAscii(requireValue(i,argc,argv));
             if (opt.round61_candidate_mode=="outer") opt.round61_candidate_mode="archive";
         }
+        else if (arg == "--round63-time-mode") opt.round63_time_mode=lowerAscii(requireValue(i,argc,argv));
         else if (arg == "--round62-threshold-mode") opt.round62_threshold_mode=lowerAscii(requireValue(i,argc,argv));
         else if (arg == "--pickup-time") opt.pickup_time = std::stod(requireValue(i, argc, argv));
         else if (arg == "--drop-time") opt.drop_time = std::stod(requireValue(i, argc, argv));
@@ -3153,6 +3155,10 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if(!std::isfinite(opt.pickup_time) || !std::isfinite(opt.drop_time) ||
        opt.pickup_time<0 || opt.drop_time<0) throw std::runtime_error("invalid common service times");
+    if (!ebrp::validRound63TimeMode(opt.round63_time_mode)) throw std::runtime_error("invalid Round63 time mode");
+    if (opt.round63_time_mode!="off" && (opt.plain_baseline ||
+        (opt.algorithm_preset!="research-round59-k1-s" && opt.algorithm_preset!="research-round59-f0-single-s")))
+        throw std::runtime_error("Round63 requires explicit Single-S or K1-S research preset");
     const bool r62passive=opt.round61_candidate_mode=="passive-cert"||opt.round61_candidate_mode=="passive-observe";
     if ((r62passive||opt.round62_threshold_mode!="off") &&
         (opt.plain_baseline || (opt.algorithm_preset!="research-round59-k1-s" &&

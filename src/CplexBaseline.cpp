@@ -1,5 +1,6 @@
 #include "CplexBaseline.hpp"
 #include "Round62Thresholds.hpp"
+#include "Round63TimeResource.hpp"
 #include "CanonicalCompactModel.hpp"
 #include "ConnectivityFlow.hpp"
 #include "IntervalRowFactory.hpp"
@@ -4343,6 +4344,11 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
             if (!spec.strengthened || !spec.interval_restricted || options.plain_baseline)
                 throw std::runtime_error("Round62 requires isolated complete F0 interval model");
             appendRound62ThresholdModel(instance,path,options.round62_threshold_mode,spec.gamma_L,spec.gamma_U);
+        }
+        if (options.round63_time_mode != "off") {
+            if (!spec.strengthened || !spec.interval_restricted || options.plain_baseline)
+                throw std::runtime_error("Round63 requires complete isolated F0 interval");
+            appendRound63TimeModel(instance,path,options.round63_time_mode);
         }
         const ModelSizeStats size = analyzeLpModel(path);
         artifact.rows = size.rows;

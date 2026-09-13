@@ -48,6 +48,7 @@ struct Arguments {
     std::string round60_candidate_mode = "off";
     std::string round61_candidate_mode = "off";
     std::string round62_threshold_mode = "off";
+    std::string round63_time_mode = "off";
     double lambda = 0.15;
     int round60_candidate_maximum_evaluations = 512;
     int round60_candidate_maximum_stations = 16;
@@ -176,6 +177,7 @@ Arguments parseArguments(int argc, char** argv) {
         else if (arg == "--round59-bound-focus") out.round59_focus = 3;
         else if (arg == "--round60-candidate-mode") out.round60_candidate_mode = value(i);
         else if (arg == "--round61-candidate-mode") out.round61_candidate_mode = value(i);
+        else if (arg == "--round63-time-mode") out.round63_time_mode = value(i);
         else if (arg == "--round62-threshold-mode") out.round62_threshold_mode = value(i);
         else if (arg == "--lambda") out.lambda = std::stod(value(i));
         else if (arg == "--round60-candidate-max-evaluations") out.round60_candidate_maximum_evaluations = std::stoi(value(i));
@@ -1093,6 +1095,7 @@ int main(int argc, char** argv) {
         options.lambda = args.lambda;
         options.round61_candidate_mode = args.round61_candidate_mode;
         options.round62_threshold_mode = args.round62_threshold_mode;
+        options.round63_time_mode = args.round63_time_mode;
         options.solve_time_limit = args.process_cap_seconds;
         options.process_wall_time_limit = args.process_cap_seconds;
         options.process_start_time = started;

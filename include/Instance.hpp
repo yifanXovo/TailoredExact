@@ -29,6 +29,7 @@ struct Instance {
 };
 
 struct SolveOptions {
+    std::string round63_time_mode = "off"; // explicit research resource block/separator
     std::string round62_threshold_mode = "off"; // off|events|conflicts|projection|service|service-conflicts|projection-rlt|projection-service
     std::string method = "tailored";
     std::string input_path;
