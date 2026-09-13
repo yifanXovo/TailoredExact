@@ -83,6 +83,51 @@ Process wall includes setup and finalization. Uncertified wall is budget use, no
 | 37 | C3 | K1-projection-service-off | 600 | 598.422 | no | 0.828917 | 0.718842 | 0.110075 | 1294.59 | 4 | yes |
 
 
+## screen_coupled_v4
+
+| # | id | arm | cap | wall s | certificate | UB | LB | absolute gap | Work | calls | eligible |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 40 | D7 | explicit | 120 | 118.485 | no | 0.365027 | 0.195501 | 0.169526 | 265.76 | 1 | yes |
+| 41 | D7 | coupled | 120 | 118.484 | no | 0.777466 | 0.194832 | 0.582634 | 296.363 | 1 | yes |
+
+
+## full_dev_v4
+
+| # | id | arm | cap | wall s | certificate | UB | LB | absolute gap | Work | calls | eligible |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 42 | D4 | Single-off-off | 600 | 90.141 | yes | 0.506343 | 0.506343 | 3.19211e-10 | 140.987 | 2 | yes |
+| 43 | D4 | Single-off-explicit | 600 | 136.469 | yes | 0.506343 | 0.506343 | 6.03072e-08 | 207.818 | 2 | yes |
+| 44 | D4 | Single-off-root | 600 | 121.391 | yes | 0.506343 | 0.506343 | 5.26804e-09 | 193.227 | 2 | yes |
+| 45 | C2 | K1-off-off | 600 | 597.109 | no | 0.829963 | 0.822454 | 0.00750931 | 1229.56 | 5 | yes |
+| 46 | C2 | K1-off-explicit | 600 | 597.063 | no | 0.830248 | 0.810787 | 0.0194618 | 1223.92 | 8 | yes |
+| 47 | C2 | K1-off-root-dry | 600 | 552.454 | yes | 0.829963 | 0.829963 | 1.88738e-15 | 1146.28 | 5 | yes |
+| 48 | C2 | K1-off-root | 600 | 485.719 | yes | 0.829963 | 0.829963 | 2.91989e-14 | 1016.25 | 8 | yes |
+| 49 | D7 | K1-off-off | 600 | 597.11 | no | 0.371894 | 0.195569 | 0.176325 | 1498 | 4 | yes |
+| 50 | D7 | K1-off-explicit | 600 | 597.125 | no | 0.306832 | 0.196208 | 0.110624 | 1561.34 | 4 | yes |
+| 51 | D7 | K1-off-root | 600 | 597.422 | no | 0.35384 | 0.195662 | 0.158179 | 1526.09 | 4 | yes |
+| 52 | D7 | K1-off-root-dry | 600 | 597.344 | no | 0.371894 | 0.195569 | 0.176325 | 1499.99 | 4 | yes |
+| 53 | C3 | K1-off-off | 600 | 597.062 | no | 0.817996 | 0.719468 | 0.0985278 | 1340.88 | 4 | yes |
+| 54 | C3 | K1-off-root | 600 | 597.11 | no | 0.817996 | 0.712781 | 0.105215 | 1330.28 | 4 | yes |
+| 55 | C2 | P-GRB | 600 | 597.094 | no | 0.829963 | 0.786523 | 0.0434403 | 1170.86 | 1 | yes |
+| 56 | C2 | K1-H | 600 | 525.719 | yes | 0.829963 | 0.829963 | 1.02221e-08 | 1069.64 | 7 | yes |
+| 57 | D7 | P-GRB | 600 | 597.079 | no | 0.290186 | 0.196955 | 0.0932313 | 1399.95 | 1 | yes |
+| 58 | D7 | K1-H | 600 | 597.109 | no | 0.215644 | 0.195865 | 0.0197791 | 128.03 | 6 | yes |
+
+
+## confirmation_v4
+
+| # | id | arm | cap | wall s | certificate | UB | LB | absolute gap | Work | calls | eligible |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 59 | C4 | K1-off-off | 600 | 3.188 | yes | 0 | 0 | 0 | 5.28908 | 4 | yes |
+| 60 | C4 | K1-off-root | 600 | 3.203 | yes | 0 | 0 | 0 | 5.28908 | 4 | yes |
+| 61 | C4 | P-GRB | 600 | 2.453 | yes | 0 | 0 | 0 | 3.78506 | 1 | yes |
+| 62 | C4 | K1-H | 600 | 21.203 | yes | 0 | 0 | 0 | 0 | 0 | yes |
+| 63 | C5 | K1-off-off | 600 | 59.344 | yes | 0 | 0 | 0 | 121.62 | 4 | yes |
+| 64 | C5 | K1-off-root | 600 | 290.422 | yes | 0 | 0 | 0 | 661.441 | 4 | yes |
+| 65 | C5 | P-GRB | 600 | 17.312 | yes | 0 | 0 | 0 | 31.8944 | 1 | yes |
+| 66 | C5 | K1-H | 600 | 193.328 | yes | 0 | 0 | 0 | 0 | 0 | yes |
+
+
 ## Predeclared dual-threshold decisions
 
 | id | scope | baseline # | candidate # | baseline | candidate | decision |
@@ -113,4 +158,53 @@ Process wall includes setup and finalization. Uncertified wall is budget use, no
 | D4 | full_original_problem | 32 | 34 | Single-off-off | Single-projection-service-off | time_gain |
 | C3 | full_original_problem | 35 | 36 | K1-off-off | K1-projection-off | gap_loss |
 | C3 | full_original_problem | 35 | 37 | K1-off-off | K1-projection-service-off | gap_loss |
+| D7 | fixed_F0_improving_domain | 40 | 41 | explicit | coupled | gap_loss |
+| D4 | full_original_problem | 42 | 43 | Single-off-off | Single-off-explicit | time_loss |
+| D4 | full_original_problem | 42 | 44 | Single-off-off | Single-off-root | time_loss |
+| D4 | full_original_problem | 43 | 44 | Single-off-explicit | Single-off-root | time_gain |
+| C2 | full_original_problem | 45 | 46 | K1-off-off | K1-off-explicit | gap_loss |
+| C2 | full_original_problem | 45 | 47 | K1-off-off | K1-off-root-dry | certificate_gain |
+| C2 | full_original_problem | 45 | 48 | K1-off-off | K1-off-root | certificate_gain |
+| C2 | full_original_problem | 45 | 55 | K1-off-off | P-GRB | gap_loss |
+| C2 | full_original_problem | 45 | 56 | K1-off-off | K1-H | certificate_gain |
+| C2 | full_original_problem | 47 | 48 | K1-off-root-dry | K1-off-root | time_gain |
+| C2 | full_original_problem | 46 | 48 | K1-off-explicit | K1-off-root | certificate_gain |
+| D7 | full_original_problem | 49 | 50 | K1-off-off | K1-off-explicit | gap_gain |
+| D7 | full_original_problem | 49 | 51 | K1-off-off | K1-off-root | gap_gain |
+| D7 | full_original_problem | 49 | 52 | K1-off-off | K1-off-root-dry | below_gap_threshold |
+| D7 | full_original_problem | 49 | 57 | K1-off-off | P-GRB | gap_gain |
+| D7 | full_original_problem | 49 | 58 | K1-off-off | K1-H | gap_gain |
+| D7 | full_original_problem | 52 | 51 | K1-off-root-dry | K1-off-root | gap_gain |
+| D7 | full_original_problem | 50 | 51 | K1-off-explicit | K1-off-root | gap_loss |
+| C3 | full_original_problem | 53 | 54 | K1-off-off | K1-off-root | gap_loss |
+| C4 | full_original_problem | 59 | 60 | K1-off-off | K1-off-root | below_time_threshold |
+| C4 | full_original_problem | 59 | 61 | K1-off-off | P-GRB | below_time_threshold |
+| C4 | full_original_problem | 59 | 62 | K1-off-off | K1-H | time_loss |
+| C5 | full_original_problem | 63 | 64 | K1-off-off | K1-off-root | time_loss |
+| C5 | full_original_problem | 63 | 65 | K1-off-off | P-GRB | time_gain |
+| C5 | full_original_problem | 63 | 66 | K1-off-off | K1-H | time_loss |
 | D4 | fixed_F0_improving_domain | 6 | 18 | off | explicit | certificate_loss |
+| C2 | full_original_problem | 56 | 45 | K1-H | K1-off-off | certificate_loss |
+| C2 | full_original_problem | 56 | 46 | K1-H | K1-off-explicit | certificate_loss |
+| C2 | full_original_problem | 56 | 47 | K1-H | K1-off-root-dry | below_time_threshold |
+| C2 | full_original_problem | 56 | 48 | K1-H | K1-off-root | below_time_threshold |
+| C2 | full_original_problem | 55 | 45 | P-GRB | K1-off-off | gap_gain |
+| C2 | full_original_problem | 55 | 46 | P-GRB | K1-off-explicit | gap_gain |
+| C2 | full_original_problem | 55 | 47 | P-GRB | K1-off-root-dry | certificate_gain |
+| C2 | full_original_problem | 55 | 48 | P-GRB | K1-off-root | certificate_gain |
+| D7 | full_original_problem | 58 | 49 | K1-H | K1-off-off | gap_loss |
+| D7 | full_original_problem | 58 | 50 | K1-H | K1-off-explicit | gap_loss |
+| D7 | full_original_problem | 58 | 51 | K1-H | K1-off-root | gap_loss |
+| D7 | full_original_problem | 58 | 52 | K1-H | K1-off-root-dry | gap_loss |
+| D7 | full_original_problem | 57 | 49 | P-GRB | K1-off-off | gap_loss |
+| D7 | full_original_problem | 57 | 50 | P-GRB | K1-off-explicit | gap_loss |
+| D7 | full_original_problem | 57 | 51 | P-GRB | K1-off-root | gap_loss |
+| D7 | full_original_problem | 57 | 52 | P-GRB | K1-off-root-dry | gap_loss |
+| C4 | full_original_problem | 62 | 59 | K1-H | K1-off-off | time_gain |
+| C4 | full_original_problem | 62 | 60 | K1-H | K1-off-root | time_gain |
+| C4 | full_original_problem | 61 | 59 | P-GRB | K1-off-off | below_time_threshold |
+| C4 | full_original_problem | 61 | 60 | P-GRB | K1-off-root | below_time_threshold |
+| C5 | full_original_problem | 66 | 63 | K1-H | K1-off-off | time_gain |
+| C5 | full_original_problem | 66 | 64 | K1-H | K1-off-root | time_loss |
+| C5 | full_original_problem | 65 | 63 | P-GRB | K1-off-off | time_loss |
+| C5 | full_original_problem | 65 | 64 | P-GRB | K1-off-root | time_loss |

@@ -103,12 +103,18 @@ def summarize():
             native=csvrows(dest/'external/paper_optimize_ledger.csv');attempts=len(native)
             # An engineering rejection can be recorded before native optimize.
             count=sum(bool(c['native_status']) or int(c['optimize_return_code'])!=-1 for c in native)
-        elif e['charged'] and (dest/'result.json').exists():count=1
-        calls.append(dict(number=e['charged_number'],id=e['id'],stage=e['stage'],arm=e['arm'],optimizer_calls=count,backend_attempts=attempts or count))
-        if e['charged_number'] in by_number:
+        elif e['charged'] and (dest/'result.json').exists():
+            result=read(dest/'result.json')
+            # A full algorithm can certify a verified zero objective before
+            # starting any native model. Missing ledger is not one optimize.
+            if e['arm'].startswith(('K1-','Single-')) and result.get('external_gini_tree_optimize_count')==0:
+                count=0
+            else:count=1
+        calls.append(dict(charged=e['charged'],number=e['charged_number'],id=e['id'],stage=e['stage'],arm=e['arm'],optimizer_calls=count,backend_attempts=attempts or count))
+        if e['charged'] and e['charged_number'] in by_number:
             by_number[e['charged_number']]['optimizer_calls']=count
             by_number[e['charged_number']]['backend_attempts']=attempts or count
-        if e['charged_number'] in by_number and (dest/'round63_root_lp_result.json').exists():
+        if e['charged'] and e['charged_number'] in by_number and (dest/'round63_root_lp_result.json').exists():
             r=by_number[e['charged_number']];prep=read(dest/'round63_root_lp_result.json')
             r['mip_work']=r['work'];r['preparation_lp_work']=prep['work'];r['work']+=prep['work'];r['optimizer_calls']=count
         for p in sorted(dest.glob('**/*.round63*.json')):
@@ -116,10 +122,17 @@ def summarize():
             if 'queries' in obj:resource.append(dict(number=e['charged_number'],id=e['id'],stage=e['stage'],arm=e['arm'],path=str(p.relative_to(ROOT)),**obj))
     table('resource_lifecycle.csv',resource);table('optimizer_calls.csv',calls)
     table('runs.csv',rows)
-    run.write(OUT/'budget.json',dict(charged=sum(e['charged'] for e in run.runner.entries()),maximum=72,
-        native_micro=sum(e['kind']=='native-micro' for e in run.runner.entries()),optimizer_calls=sum(c['optimizer_calls'] for c in calls),
+    entries=run.runner.entries()
+    run.write(OUT/'budget.json',dict(charged=sum(e['charged'] for e in entries),maximum=72,
+        native_micro=sum(e['kind']=='native-micro' for e in entries),optimizer_calls=sum(c['optimizer_calls'] for c in calls),
         maxflow_calls=sum(r['maxflow_calls'] for r in resource)+sum(read(p)['maxflow_calls'] for p in RAW.glob('**/probe_result.json')),
-        completed_charged=sum(r['charged'] for r in rows)))
+        completed_charged=sum(r['charged'] for r in rows),
+        charged_by_kind={kind:sum(e['charged'] and e['kind']==kind for e in entries) for kind in sorted({e['kind'] for e in entries if e['charged']})},
+        charged_by_cap={str(cap):sum(e['charged'] and e['cap_seconds']==cap for e in entries) for cap in sorted({e['cap_seconds'] for e in entries if e['charged']})},
+        incomplete_charged_numbers=[e['charged_number'] for e in entries if e['charged'] and not (ROOT/e['destination']/'completion.json').exists()],
+        excluded_performance_numbers=[r['number'] for r in rows if r['charged'] and not r['performance_eligible']],
+        over_budget_numbers=[r['number'] for r in rows if r['charged'] and (r['watchdog'] or not r['within_budget'])],
+        failed_numbers=[r['number'] for r in rows if r['charged'] and (r['returncode'] or (r.get('status') or '').endswith('_failed') or r.get('status')=='failed')]))
     for r in rows:
         if r.get('objective') is not None:print(r['number'],r['id'],r['arm'],round(r['wall'],3),r.get('fixed_interval_certificate',r.get('strict_certified_original_problem')),r.get('absolute_gap'))
     groups={}
@@ -132,8 +145,12 @@ def summarize():
             if baseline in group:
                 for arm in group:
                     if arm!=baseline:pairs.append(compare(group[baseline],group[arm]))
-        for baseline,candidate in [('precrush','dry'),('dry','cuts'),('root-dry','root'),('simple','explicit')]:
+        for baseline,candidate in [('precrush','dry'),('dry','cuts'),('root-dry','root'),('simple','explicit'),('explicit','coupled')]:
             if baseline in group and candidate in group:pairs.append(compare(group[baseline],group[candidate]))
+        for prefix in ['Single-off-','K1-off-']:
+            for baseline,candidate in [('root-dry','root'),('explicit','root')]:
+                a,b=prefix+baseline,prefix+candidate
+                if a in group and b in group:pairs.append(compare(group[a],group[b]))
     # Exact same-build repeat or a predeclared shared lifecycle may live in a
     # different storage stage. Explicit links preserve both charged identities.
     links=OUT/'comparison_links.json'

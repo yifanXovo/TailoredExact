@@ -153,7 +153,11 @@ the paid preparation LP are included in process wall/Work accounting.
 In v3 both root and root-dry read a fresh canonical model for each native
 call; retained-model reuse is disabled for these two research modes. This
 prevents MIP-only rows from contaminating a later LP or being appended twice.
-It adds model-read cost, not optimizer calls, and the dry control isolates it.
+It adds model-read cost and discards retained native model/search state
+between calls, without forcing extra optimizer calls. The dry control
+isolates this entire lifecycle policy, not just file-reading overhead.
+The unchanged outer controller can still make different subsequent calls
+when the native evidence or incumbent changes.
 
 ## Carried-load strengthening of the explicit extension
 
@@ -189,3 +193,24 @@ inventory projection term. This does not imply objective LP or MIP superiority.
 Round63's predeclared qualification is relative to real OFF protection and
 confirmation, not to the fastest historical research arm on every instance.
 This new criterion never retroactively changes the Round62 failed gate.
+
+## A concrete untested continuation
+
+One remaining structural hypothesis is to share resource capacity with an
+arc-disaggregated carried-load flow q, rather than only the tested aggregate
+node-load lower bound. On a legal route, q is post-service load on the used
+outgoing arc, q_0i=0, q<=Q*x and out(q)-in(q)=p-d. With the same normalized
+handling coefficient cbar, define h=f-cbar*q. The canonical embedding gives
+h>=0 and out(h)-in(h)=incoming-travel+cbar*d. The existing time upper bound
+then becomes the shared capacity h+cbar*q<=B*x. This identity respects
+loaded return and repeated capacity recycling.
+
+Current F0 uses node-load variables; this proposal would require a separate
+arc-load lift and cannot be described as simply reusing an existing q block.
+A q-only lift is a familiar inventory/capacity-flow strengthening, not a new
+contribution by itself; the proposed increment is its shared time capacity.
+A future comparison must first isolate the q-only lift from the shared
+capacity rows and use pinned old-variable feasibility controls. B4's zero
+node-aggregate violations do not establish whether this finer sharing is
+stronger. No implementation, complete projection separator, target-LP gain
+or MIP benefit for this continuation is claimed in Round63.

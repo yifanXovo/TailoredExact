@@ -75,6 +75,8 @@ def execute(cmd,dest,p,arm,stage,cap,kind='performance',calls=1):
         frozen=json.loads((OUT/'confirmation_freeze.json').read_text())
         assert sha(OUT/'active_build.json')==frozen['active_build_sha256']
         assert sha(Path(__file__))==frozen['driver_sha256']
+        assert sha(OUT/'protocol.json')==frozen['protocol_sha256']
+        assert sha(OUT/'selected_candidate.json')==frozen['selection_sha256']
         allowed=['off',frozen['resource_mode']] if kind=='build-only' else frozen['allowed_arms']
         if arm not in allowed:raise RuntimeError('arm outside confirmation freeze')
         if cap!=frozen['cap_seconds'] and kind!='build-only':raise RuntimeError('confirmation cap changed')

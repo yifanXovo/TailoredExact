@@ -261,3 +261,169 @@ Round62 historical gate. Stop A at nine launches: an extra C2 success could
 not repair this observed protection failure. No A+B combination or new
 service confirmation is claimed. B long/K1/reference/two-confirmation work
 remains required and reserved.
+
+v4 measured source is dc8d3e4a0ee3f63f0858b2c3b38a59a92cd1e783. All 40
+solver-free tests pass, including carried-load embedding on the enumerated
+legal routes. OFF/explicit/coupled preflight succeeds on D4/D6/D7/C2 before
+measurements. B4 LP launches 38/39 finish in 1.719/12.406 s, four calls each.
+For D6 and D7, coupled and explicit objective LP values agree; the explicit
+optimum violates no carried-load row, and both pinned explicit/coupled
+controls remain feasible. Full LP row residual and pin consistency checks
+pass. This supplies no strict projection or objective-strength witness at
+these target points. One D7 v4 explicit/coupled native pair at 120 s will
+close the remaining integer-propagation question at screening scale; it
+does not turn a zero LP gain into a presumed negative MIP result.
+
+B4 native pair 40/41 completes in 118.485/118.484 s on the same v4 build.
+D7 explicit has UB 0.3650270766, LB 0.1955013413 (gap 0.1695257352);
+coupled has native UB about 0.7774662749 and LB 0.1948323900 (gap about
+0.5826338848). No certificate. The coupled variant materially worsens
+primal quality with a slightly weaker bound. Stop B4 here: no target-LP
+gain, no pinned-point projection witness, and negative native propagation
+screen. It remains an implemented, valid default-off diagnostic prototype;
+full K1/confirmation for coupled is deliberately not claimed.
+
+The remaining development uses uniform OFF/explicit/root on v4: Single-S
+D4 (three 600 s runs), full K1 C2 (those three plus root-dry, 600 s each),
+and full K1 D7 (three 600 s runs). Then take one uniform candidate through
+C3 OFF/candidate regression follow-up on v4, both confirmations and the
+unchanged K1-H/P-GRB references. This keeps the forecast at 65 charged
+launches and leaves seven reserve launches; A stops at nine. Root-dry pays
+the same fresh-model policy as root. No A+B combination is opened.
+
+Long D4 v4 runs 42--44 all certify. OFF/explicit/root process walls are
+90.141/136.469/121.391 seconds. Both resource executions fail the predeclared
+time protection against actual OFF, even though they remain correct research
+integrations. The prescribed full-K1/confirmation diagnosis continues; later
+positive results cannot erase this development regression.
+
+C2 v4 runs 45/46 use their 600-second caps without certification. OFF ends
+at UB/LB 0.82996341317/0.82245410139 (gap 0.00750931179), explicit at
+0.83024848649/0.81078670517 (gap 0.01946178132). OFF has 3 LP calls plus a
+target-bound interrupted MIP and a terminal MIP; explicit has 6 LP calls
+plus those two MIP roles, because its changed native evidence triggers the
+existing controller's re-evaluation. Actual calls and all cost are charged.
+Root-dry/root were pending at this observation; do not select a final
+candidate from these first two arms.
+
+C2 root-dry #47 completes in 552.454 seconds with a strict original-problem
+certificate, UB/LB 0.8299634131717752/0.8299634131717734. It has three LPs,
+one target MIP and one terminal MIP, all on fresh canonical models. The
+first LP observation takes 0.004184 seconds, selects two supports and adds
+none. The certificate gain versus OFF is consequently evidence for the
+changed native lifecycle, not for adding resource rows. Root #48 is now
+running with the same two-support preparation and common fresh-model policy.
+If long D7 later shows a root gain, reserve one extra D7 root-dry run to
+isolate that effect before selecting the confirmation candidate. This would
+raise the forecast from 65 to 66, leaving six reserve launches.
+
+C2's first target MIP native root relaxations are OFF/root-dry 0.6064756,
+explicit 0.6428263 and root 0.6129122. Native matrix sizes are respectively
+8663/2402/48314 (rows/columns/nonzeros), 9503/3202/52314 and
+8665/2402/48858. Thus explicit's stronger initial native relaxation did not
+prevent its worse final gap, while root-dry's certificate gain occurs
+without changing that initial relaxation or adding rows. Fresh models
+discard retained native state as well as paying model-read cost. These
+observations concern the first native target MIP, not an assertion that
+the diagnostic F0 objective LP or every later cutoff/epoch is identical.
+
+C2 root #48 certifies in 485.719 seconds, UB/LB
+0.8299634131717752/0.829963413171746. This is a certificate gain versus
+actual OFF and a further 66.735 s / 12.08% certified-time gain versus
+root-dry. The added two global rows thus have an isolated incremental
+benefit in this full multi-call role, in addition to the lifecycle gain.
+The four C2 witnesses and both prepared row pools pass independent checks;
+all 41 parameter records pass, as do actual balanced-normalized-score
+recomputations. D4 regression remains disqualifying. Launch D7 full K1
+OFF/explicit/root at 600 s each on unchanged v4, charged 49--51.
+
+D7 full K1 49--51 ends without certification. OFF/explicit/root absolute
+gaps are 0.176324583005 / 0.110623925824 / 0.158178585231; both candidates
+improve relative to OFF by the declared dual gap gate (37.26% / 10.29%).
+The LB improvements are only 0.000638461 / 0.000092449; about 99% of the
+gap gains are native primal changes. All three final witnesses pass the
+original physical/objective audit. Root's supports are 34,17,6 out of 50,
+prepared by four maxflows in 0.018437 s. Explicit/root both pick up 206 and
+deliver 204, with maximum route durations 17972.466/17937.569 under 18000.
+All three follow the actual 3-LP/1-terminal-MIP path with declined refinement.
+Charge reserved D7 root-dry #52 at 600 s, same v4/stage, to isolate the
+positive root effect. Forecast is now 66 launches, six remaining reserve.
+Before confirmation, finish C3 OFF/one-uniform-candidate on v4, the unchanged
+C2/D7 K1-H/P-GRB references, and the already selected C4/C5 roles in order.
+
+Before opening confirmation, the Python driver now also enforces the frozen
+protocol and selection hashes in addition to driver/build identity. This
+affects only the closed confirmation guard, not native code, commands or
+the ongoing development optimization. Final confirmation freeze will bind
+this exact driver version. No confirmation input or performance is opened.
+
+D7 root-dry #52 completes in 597.344 s with exactly the OFF UB/LB,
+0.3718940096799275/0.19556942667467492, no certificate. Its independently
+verified route and all parameter/row evidence pass. This isolates root's
+D7 gap gain from model lifecycle changes; C2's separate multi-MIP lifecycle
+gain remains real. Select one uniform diagnostic candidate, root, in
+selected_candidate.json now, before C3 follow-up. C2 isolated row benefit,
+D7 long-route gap gain and lower size support this choice; explicit's larger
+D7 gain does not outweigh its C2 regression for this diagnostic selection.
+The D4 regression permanently fails this round's promotion gate, and later
+outcomes will not change the mode. C3 v4 OFF/root build-only succeeds;
+launch its 600 s full-K1 pair as #53/#54. Confirmation inputs remain closed.
+
+C3 #53/#54 finishes without certification. Both UBs are 0.8179955412057756;
+OFF/root LBs are 0.719467697315918 / 0.7127806955675012. Root's absolute
+gap grows from 0.098527843890 to 0.105214845638: +0.006687002 / 6.79%, a
+second material protection failure under the original declared rule.
+Its three supports (22,17,17) take 0.008741 s to prepare and have no failure.
+Both final physical witnesses and all traces pass; 47 parameter records
+are verified. Keep the already chosen root mode for diagnostic confirmation,
+with no default promotion and no candidate change. Launch unchanged
+C2 then D7 P-GRB/K1-H references as #55--#58, cap600, same v4/stage.
+
+Final per-call review confirms C2 OFF/explicit/root-dry/root use 5/8/5/8
+optimizations. Root, as well as explicit, triggers a second three-LP
+evaluation after changed native evidence. The final report text now reflects
+that complete ledger rather than assuming equal call counts. No native
+calls were added by this reporting correction; the original accounting and
+measured process costs already include them.
+
+References #55--#58 and both confirmations #59--#66 are complete. C2 P-GRB
+ends with gap 0.043440251; stable K1-H certifies in 525.719 s, so root's
+40 s / 7.61% advantage is below the relative time gate. D7 P-GRB ends at
+UB/LB 0.290186246296/0.196954926915; stable K1-H at
+0.215644075316/0.195865015973. Its unchanged HGA takes about 543 s and
+leaves time for six native calls; its gap is nevertheless much better than
+both cold resource arms. Official fingerprints match; D7's hex log and
+signed API/manifest integer represent the same 32-bit value.
+
+Confirmation freeze follows #58 and precedes C4 input/build. C4 finishes
+all four arms before C5 opens. OFF/root/P-GRB/K1-H certify zero objective
+on C4 in 3.188/3.203/2.453/21.203 s, and on C5 in
+59.344/290.422/17.312/193.328 s. Both K1-H confirmation runs make zero
+native optimizer calls; readback is explicitly not applicable. C4 selects
+no rows. C5's two rows materially slow zero-route discovery, a confirmation
+regression under the frozen gate, not a nonzero proof-tail result. The
+OFF zero witness satisfies both rows (maximum activity -0.957609347).
+No candidate, runtime parameter or guard changes after opening confirmation.
+
+A final reporting correction prevents noncharged build-only entries (which
+carry the most recent counter number) from overwriting the charged run's
+displayed optimizer count. Explicit charged flags now accompany call/index
+rows. Every charged per-run count matches its call ledger; native records,
+total accounting and measured timings are unchanged. Zero-native early
+certificates are counted as zero calls and do not claim parameter readback.
+
+Final audits pass 59 original-route witnesses, 20 resource traces including
+cross-witness checks, 10 threshold proofs, 8 coupling LP/control records and
+262 strength-cut occurrences. Submitted-only route verification passes 59.
+All frozen v4 source/executable/test-log and confirmation hashes remain
+unchanged. Final budget: 66 charged, four native micro, 278 optimizer calls,
+971 recorded maxflow/separator calls (including guarded attempts), no cap
+overruns, exclusions #7/#27 retained, six reserve launches unused. Evidence
+index covers 3,305 local files / 1,030,702,641 bytes; 267 native matrix/root
+log records are summarized. Raw logs, large LP/point data and binaries stay
+local. Remote PR #123/base branch is rechecked at the original 71e955a head.
+
+Native adoption evidence is narrower than API acceptance: D4 screen cuts
+has 57 API-success submissions and a native `User: 23` aggregate. D7's
+native summary omits User, so adoption count is unavailable, not assumed to
+equal its 40 successful submissions. Reporting now preserves both fields.

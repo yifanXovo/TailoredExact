@@ -70,7 +70,22 @@ def audit_native():
                 native=read(mip)
                 if native.get('mode')=='root':assert native['prepared_static_rows']==native['static_rows_added']==len(records)
                 elif native.get('mode')=='root-dry':assert native['prepared_static_rows']==len(records) and native['static_rows_added']==0
-            resources.append(dict(number=e['charged_number'],id=e['id'],arm=e['arm'],path=str(path.relative_to(ROOT)),rows=len(records),passed=True,kind='first_LP_static_pool'))
+            cross={}
+            baseline_arm='K1-off-off' if e['arm'].startswith('K1-off-') else 'Single-off-off' if e['arm'].startswith('Single-off-') else 'off'
+            witness_path=folder.parent/baseline_arm/'result.json'
+            if witness_path.exists() and 'routes' in read(witness_path):
+                witness=read(witness_path);point={}
+                for route in witness['routes']:
+                    k=int(route['vehicle']);nodes=route['nodes']
+                    for i,j in zip(nodes,nodes[1:]):
+                        if i!=j:point[f'x_{k}_{i}_{j}']=1.0
+                    for op in route['operations']:point[f'p_{k}_{int(op["station"])}']=float(op['pickup'])
+                activities=[math.fsum(a*point.get(n,0.0) for n,a in cut['coefficients'].items()) for cut in records]
+                maximum=max(activities,default=0.0)
+                assert maximum<=1e-7,'global root row excludes independently checked OFF witness'
+                cross=dict(baseline_witness_path=str(witness_path.relative_to(ROOT)),baseline_witness_sha256=run.sha(witness_path),
+                    baseline_witness_objective=witness['objective'],baseline_witness_rows_checked=len(records),baseline_witness_maximum_row_activity=maximum)
+            resources.append(dict(number=e['charged_number'],id=e['id'],arm=e['arm'],path=str(path.relative_to(ROOT)),rows=len(records),passed=True,kind='first_LP_static_pool',**cross))
     table('witness_verification.csv',witnesses);run.write(OUT/'native_resource_verification.json',resources);run.write(OUT/'threshold_verification.json',thresholds)
     print('independent routes',len(witnesses),'resource call traces',len(resources),'threshold proofs',len(thresholds))
 
