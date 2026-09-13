@@ -147,3 +147,53 @@ The sign convention and bound contribution follow the official
 [Gurobi FarkasDual/FarkasProof definition](https://docs.gurobi.com/projects/optimizer/en/current/reference/attributes/constraintlinear.html#attrfarkasdual).
 The required diagnostic flag is documented under
 [InfUnbdInfo](https://docs.gurobi.com/projects/optimizer/en/current/reference/parameters.html#parameter.InfUnbdInfo).
+
+## QCAP: a smaller necessary projection, after the v3 warm evidence
+
+Combining the two inequalities `cbar*q_ij<=f_ij<=B_ij*x_ij` gives
+
+    cbar*q_ij <= B_ij*x_ij.
+
+Define QCAP as F0 + the exact same Q balances, q/L links and Q capacities,
+plus these arc rows. It uses no f/h columns or time balance rows. Every legal
+integer route embeds by the previously proved q/f construction, so the rows
+are globally physical. In particular capacity recycling and loaded returns
+remain legal. This is a necessary projection of JOINT: on common original
+variables `proj(JOINT) subset proj(QCAP) subset proj(Q)`. It does not claim
+equivalence to JOINT or to the shared network's entire projection. Without
+the time balances it has no asserted dominance over T or SEP.
+
+For cbar>0 the row could be described as an effective arc load capacity
+`min(Q_k,B_ij/cbar)`, but the implementation retains the undivided row and
+never divides by a small cbar. A row is omitted only when an outward-rounded
+upper bound on the stored product `cbar*Q_k` is <= the stored B_ij; then
+q<=Q_k*x and x>=0 imply it. All other rows are kept. This conservative
+redundancy test is based on the actual physical coefficients and has no
+instance/seed/size classifier. At zero handling every row is redundant and
+QCAP is byte-identical to Q. It may also reduce exactly to Q on loose-horizon
+physical data; that is a model identity, not evidence of extra strengthening.
+
+The added block has zero columns beyond Q and at most MV^2 additional rows,
+versus JOINT's extra MV^2 time columns and associated balance/capacity rows.
+The actual presolve and search costs still require measurement. QCAP's own
+target tests re-complete every q at the Q-optimal original point; a violated
+chosen q alone is never treated as projection separation. The eight-call
+diagnostic includes a fresh OFF LP to identify the exact original F0 column
+set, Q/QCAP/SEP target LPs, and Q/QCAP re-completion at both the Q-optimal
+and SEP-optimal original points. All share the same F0/domain/cutoff and one
+physical cap. The second point distinguishes smaller shared-arc increment
+from a Q-only improvement; a feasible completion is not discarded.
+
+Each arrow below means containment after projecting onto the original F0
+variables (stronger to weaker). An arrow is not a runtime claim.
+
+```mermaid
+flowchart TD
+    J["JOINT: Q + T + B4 + arc sharing"] --> S["SEP: Q + T + B4"]
+    J --> C["QCAP: Q + cbar q <= B x"]
+    S --> Q["Q: load flow and L links"]
+    S --> T["T: independent time flow"]
+    C --> Q
+    Q --> F["F0"]
+    T --> F
+```

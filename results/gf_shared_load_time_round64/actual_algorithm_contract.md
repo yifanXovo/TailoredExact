@@ -6,7 +6,7 @@
 | Warm startup | `research-round64-k1-h` explicitly inherits `paper-k1-am-sf`: full HGA, seed 20260626, generation-stagnation 2000. Current process constructs/independently validates candidate and pays its entire wall cost. Source: PaperK1AmSf.cpp and main.cpp preset adapter. |
 | Outer | F0, K0=1, midpoint, balanced normalized closure, tau=.08, native-target, exact-parent, inherited coverage. Compatibility C6 rho=.01 is not tau. Current decision ledger is authoritative. |
 | LP | Full canonical F0 continuous relaxation with current G interval, F<=U and safe domains. Q/T/SEP/JOINT canonical rows are present in every LP. |
-| MIP | Same canonical F0 with original integer variables; new q/f continuous. All original physical/Gini rows retained. No callback/resource cut pool or new branch setting. |
+| MIP | Same canonical F0 with original integer variables; new q/f continuous. All original physical/Gini rows retained. No new resource callback, cut pool or branch setting. Inherited progress/native-bound-target callbacks remain active. |
 | Optional row scope | Round64 rows are global physical; B/c/taubar are bound to all original physical data. Diagnostic pin rows belong only to fresh feasibility probes and never enter full algorithms. |
 | Model lifecycle | Inherited per-leaf model object reuse when request permits it and fingerprint is unchanged. New leaves read canonical model; stale fingerprint is an error. Temporary LP types restored to integer types on subsequent MIP. Terminal requests release model. Disposable child probes remain disposable. See request flags and actual per-call ledger. |
 | Reused state | Gurobi model object and whatever state its API retains after type/domain changes; no claim to retained or copied entire B&B tree, nor guaranteed LP basis reuse. No Round63 root/fresh override is enabled. |
@@ -20,6 +20,11 @@ guard workaround, no additional first-LP solve, no copy model and no implicit
 restart. Every main arm has the same lifecycle policy; candidate-dependent
 incumbent/bound changes may still change the unchanged outer controller's calls.
 Cold-to-warm startup differences are never credited to the resource block.
+
+The frozen protocol's formulation `callback="off"` refers to the added
+resource mechanism. It does not disable the inherited progress and native
+target callbacks that appear in the native logs. Their existing cost and
+termination behavior remain part of every complete algorithm run.
 
 Description correction after the full native micro: the initial protocol's
 `startup.cold="inherited simple greedy"` repeated a CLI label and was imprecise.

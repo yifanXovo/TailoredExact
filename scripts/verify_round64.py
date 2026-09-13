@@ -4,7 +4,9 @@ import ast
 import csv
 import json
 import math
+import re
 import shutil
+from decimal import Decimal, localcontext
 from pathlib import Path
 from verify_round62 import check_lp_point
 import analyze_round61 as physical_module
@@ -38,29 +40,45 @@ def preflight():
             checks.append(dict(id=identity,mode=mode,model_sha256=run.sha(path),q_present=has_q,time_present=has_t,
                 inherited_off_identical=mode=='off' and identity in historic))
     table('model_identity_preflight.csv',checks);print('solver-free preflight identities',len(checks))
+    projected=[]
+    for folder in sorted((RAW/'preflight_qcap_v4').glob('*')):
+        identity=folder.name
+        base=folder/'off/canonical_model.lp';old=RAW/'preflight_v1'/identity/'off/canonical_model.lp'
+        assert run.sha(base)==run.sha(old),'F0 changed in QCAP build'
+        q=folder/'q/canonical_model.lp';small=folder/'qcap/canonical_model.lp';content=small.read_text()
+        assert run.sha(q)==run.sha(RAW/'preflight_v1'/identity/'q/canonical_model.lp'),'Q changed in QCAP build'
+        assert 'r64_q_balance_' in content and 'r64_q_load_' in content and 'r63f_' not in content
+        active=content.count('r64_q_time_capacity_')
+        if not active:assert run.sha(q)==run.sha(small)
+        projected.append(dict(id=identity,off_unchanged=True,qcap_model_sha256=run.sha(small),
+            projected_capacity_rows=active,no_time_columns=True,identical_to_Q=run.sha(q)==run.sha(small)))
+    table('qcap_model_identity_preflight.csv',projected)
 def probes():
     checked=[];strength=[]
     for path in RAW.glob('**/probe_result.json'):
         folder=path.parent;r=run.read(path);queries=rows(folder/'lp_queries.csv')
-        assert len(rows(folder/'native_calls.csv'))==r['optimizer_calls']==7
+        assert len(rows(folder/'native_calls.csv'))==r['optimizer_calls']==r['query_limit']
         originals=point(folder/'original_pins.csv')
         for q in queries:
             arm=q['arm'];strength.append(dict(id=folder.name,stage=folder.parent.name,**q))
             assert q['valid']=='1'
             if q['optimal']!='1':continue
             values=point(folder/(arm+'_point.csv'))
-            model=folder/((arm.removeprefix('pinned_'))+'.lp')
+            sep_source=arm.startswith('pinned_sep_')
+            model=folder/((arm.removeprefix('pinned_sep_') if sep_source else arm.removeprefix('pinned_'))+'.lp')
             audit=check_lp_point(model,values)
             if arm.startswith('pinned_'):
-                pin_error=max(abs(values[n]-v) for n,v in originals.items());assert pin_error<=1e-7
+                pinned=point(folder/'sep_original_pins.csv') if sep_source else originals
+                pin_error=max(abs(values[n]-v) for n,v in pinned.items());assert pin_error<=1e-7
             else:pin_error=0
             if arm=='off':assert set(values)==set(originals)
             assert abs(audit['original_LP_objective_recomputed']-float(q['objective']))<=1e-7
             checked.append(dict(id=folder.name,arm=arm,pin_error=pin_error,**audit))
-        assert r['pinned_sep_feasible']
+        assert r.get('pinned_control_feasible',r.get('pinned_sep_feasible'))
+        if r.get('qcap_sep_point_checked'):assert r['sep_point_q_feasible']
         assert r['parameter_roundtrip']
         if r['micro']:
-            assert r['pinned_joint_infeasible']
+            assert r.get('pinned_candidate_infeasible',r.get('pinned_joint_infeasible'))
             data=run.read(folder/'resource.json');c=data['handling']
             rhs=math.fsum(min(c, data['upper'][1][j])*originals[f'x_0_1_{j}'] for j in [0,2])
             violation=c*originals['load_0_1']-rhs
@@ -79,7 +97,8 @@ def witnesses(submitted=False):
             p=dict(instance_path=arg('--input'),T_seconds=arg('--T'),pickup_seconds=arg('--pickup-time'),drop_seconds=arg('--drop-time'))
             p['lambda']=arg('--lambda')
         else:continue
-        if not (ROOT/e['destination']/'completion.json').exists():continue
+        if not submitted and not (ROOT/e['destination']/'completion.json').exists():continue
+        if 'input_sha256' in p:assert run.sha(ROOT/p['instance_path'])==p['input_sha256']
         folder=OUT/'witnesses'/str(number) if submitted else ROOT/e['destination']
         paths=list(folder.glob('**/*witness.json'))
         if (folder/'result.json').exists() and 'routes' in run.read(folder/'result.json'):paths.append(folder/'result.json')
@@ -116,6 +135,42 @@ def resource_matrix(resource,capacities):
                 add(f'shared_{k}_{i}_{j}',False,{q:c,f:-1.},{})
     return expected
 
+def check_resource_physics(identity,resource,capacities):
+    """Check coefficient safety against original parsed physical distances.
+
+    Decimal shortest paths use exact binary-double inputs, independently of
+    the native downward-rounded Floyd computation. This verifies safe bounds,
+    rather than treating a matching identity string as physical correctness.
+    """
+    p=run.panel()[identity];source=ROOT/p['instance_path'];assert run.sha(source)==p['input_sha256']
+    content=source.read_text(encoding='utf-8');header=content.splitlines()[0]
+    assert capacities==ast.literal_eval(header[header.index('['):])
+    V,M=map(int,header[:header.index('[')].split());assert (V,M)==(resource['V'],resource['M']) and len(capacities)==M
+    points=ast.literal_eval(re.search(r'(?m)^\s*points\s*=\s*(\[[^\n]*\])',content)[1]);assert len(points)==V+1
+    dist=[]
+    for a in points:
+        row=[]
+        for b in points:
+            dx,dy=float(a[0])-float(b[0]),float(a[1])-float(b[1]);row.append(math.sqrt(dx*dx+dy*dy)/1.5)
+        dist.append(row)
+    with localcontext() as ctx:
+        ctx.prec=100
+        T=Decimal(str(p['T_seconds']));scale=max(Decimal(1),T);assert Decimal.from_float(resource['scale'])==scale
+        c=Decimal(str(p['pickup_seconds']))+Decimal(str(p['drop_seconds']))
+        assert 0<=Decimal.from_float(resource['handling'])<=c/scale
+        shortest=[[Decimal.from_float(v) for v in row] for row in dist]
+        for h in range(V+1):
+            for i in range(V+1):
+                for j in range(V+1):shortest[i][j]=min(shortest[i][j],shortest[i][h]+shortest[h][j])
+        for i in range(V+1):
+            assert len(resource['travel'][i])==len(resource['upper'][i])==V+1
+            for j in range(V+1):
+                tau=Decimal.from_float(dist[i][j]);stored=Decimal.from_float(resource['travel'][i][j])
+                assert 0<=stored<=tau/scale
+                upper=Decimal.from_float(resource['upper'][i][j]);assert upper>=0
+                if i and i!=j:assert upper>=max(Decimal(0),(T-tau-shortest[j][0])/scale)
+                else:assert upper==0
+
 def projections():
     records=[]
     for path in RAW.glob('**/audit_result.json'):
@@ -134,6 +189,7 @@ def projections():
         physical=run.panel()[folder.name]
         header=(ROOT/physical['instance_path']).read_text(encoding='utf-8').splitlines()[0]
         capacities=ast.literal_eval(header[header.index('['):])
+        check_resource_physics(folder.name,resource,capacities)
         expected=resource_matrix(resource,capacities)
         observed={n:[e,{},{}] for n,(e,a,b) in expected.items()}
         for t in terms:
@@ -221,6 +277,7 @@ def submitted_projections():
     records=[]
     for path in sorted((OUT/'projection_evidence').glob('*.json')):
         proof=run.read(path);r=proof['resource'];Q=proof['capacities'];cert=proof['certificate']
+        check_resource_physics(proof['id'],r,Q)
         assert proof['physical_input_sha256']==run.panel()[proof['id']]['input_sha256']
         assert cert['identity']==r['identity'] and cert['pins_sha256']==proof['source_hashes']['original_pins.csv']
         assert cert['scope']=='original_physical_global' and not cert['submitted']

@@ -37,7 +37,8 @@ def summary():
         if not e['charged']:continue
         result=by_number[e['charged_number']];result['optimizer_calls']=count;result['backend_attempts']=attempts or count
         result['build_freeze']=e.get('build_freeze');result['kind']=e['kind']
-        result['performance_eligible']=result['performance_eligible'] and e['kind']=='performance' and result['returncode']==0 and result['within_budget'] and result.get('status') not in ['failed','engine_failed']
+        semantic_failure=result.get('status')=='failed' or str(result.get('status','')).endswith('_failed')
+        result['performance_eligible']=result['performance_eligible'] and e['kind']=='performance' and result['returncode']==0 and result['within_budget'] and not semantic_failure
         mode=e['command'][e['command'].index('--round64-shared-mode')+1] if '--round64-shared-mode' in e['command'] else 'off'
         result['shared_mode']=mode;result['startup']='HGA-current-process' if e['arm']=='K1-H' or e['arm'].startswith('warm-') else 'official-default' if e['arm']=='P-GRB' else 'verified-empty-routes'
         if r and result.get('scope')=='full_original_problem':
@@ -50,6 +51,9 @@ def summary():
     charged=[e for e in entries if e['charged']]
     budget=dict(charged=len(charged),maximum=72,native_micro=sum(e['kind']=='native-micro' for e in charged),
         completed=sum(e['charged_number'] in by_number for e in charged),optimizer_calls=sum(c['optimizer_calls'] or 0 for c in calls),
+        charged_wall_seconds=sum(r['wall'] for r in by_number.values()),
+        build_only_launches=sum(not e['charged'] for e in entries),
+        build_only_failures=[dict(id=r['id'],stage=r['stage'],arm=r['arm'],returncode=r['returncode']) for r in results if not r['charged'] and r['returncode']],
         unknown_call_counts=[c['number'] for c in calls if c['charged'] and c['optimizer_calls'] is None],
         by_kind=dict(Counter(e['kind'] for e in charged)),by_cap=dict(Counter(str(e['cap_seconds']) for e in charged)),
         incomplete=[e['charged_number'] for e in charged if e['charged_number'] not in by_number],
@@ -68,7 +72,7 @@ def summary():
                 if arm!=base and (base in ['K1-H','P-GRB'] or base=='off' or arm.rsplit('-',1)[0]==base.rsplit('-',1)[0]):
                     comparisons.append(compare(group[base],candidate))
         for prefix in ['','cold-','warm-','single-']:
-            for a,b in [('q','sep'),('t','sep'),('sep','joint')]:
+            for a,b in [('q','sep'),('t','sep'),('sep','joint'),('q','qcap'),('joint','qcap')]:
                 if prefix+a in group and prefix+b in group:comparisons.append(compare(group[prefix+a],group[prefix+b]))
     links=OUT/'comparison_links.json'
     if links.exists():

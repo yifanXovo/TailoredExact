@@ -1,4 +1,5 @@
-// Seven LPs under one physical cap. Diagnostic original-variable projection;
+// Seven (shared matrix) or eight (QCAP) LPs under one physical cap.
+// Diagnostic original-variable projection;
 // no result is an original integer-program certificate or a production cut.
 #include "Round64SharedResource.hpp"
 #include "FixedIntervalMipBackend.hpp"
@@ -22,15 +23,19 @@ int main(int argc,char** argv) {
  try {
     const auto started=std::chrono::steady_clock::now();
     auto elapsed=[&](){return std::chrono::duration<double>(std::chrono::steady_clock::now()-started).count();};
-    std::string input,source,expected,output;double T=0,pickup=60,drop=60,cap=120;bool micro=false;
+    std::string input,source,expected,output;double T=0,pickup=60,drop=60,cap=120;bool micro=false,qcap=false;
     for(int i=1;i<argc;++i) {
         const std::string a=argv[i];auto value=[&](){if(++i>=argc)throw std::runtime_error("missing argument");return std::string(argv[i]);};
         if(a=="--input")input=value();else if(a=="--model")source=value();else if(a=="--expected-sha")expected=value();
         else if(a=="--out")output=value();else if(a=="--T")T=std::stod(value());else if(a=="--pickup-time")pickup=std::stod(value());
         else if(a=="--drop-time")drop=std::stod(value());else if(a=="--cap")cap=std::stod(value());else if(a=="--micro")micro=true;
+        else if(a=="--qcap-probe")qcap=true;
         else throw std::runtime_error("unknown argument "+a);
     }
     if(output.empty()||cap<=3||cap>300)throw std::runtime_error("invalid bounded probe cap/output");
+    if(qcap&&micro)throw std::runtime_error("QCAP diagnostic requires an actual frozen F0 input");
+    const int query_limit=qcap?8:7;
+    const std::string control_mode=qcap?"q":"sep",candidate_mode=qcap?"qcap":"joint";
     const std::filesystem::path dir(output);std::filesystem::create_directories(dir);Instance in;
     if(micro) {
         in.V=2;in.M=1;in.Q={1};in.initial={0,2,0};in.capacity={0,3,3};in.target={0,1,1};in.weights={0,.5,.5};
@@ -52,7 +57,7 @@ int main(int argc,char** argv) {
     int count=0;std::vector<FixedIntervalMipRequest::AdditionalLinearRow> pins;
     auto solve=[&](const std::filesystem::path& path,const std::string& arm) {
         const double remaining=cap-elapsed()-3;
-        if(remaining<=0||count>=7)throw std::runtime_error("bounded seven-call probe exhausted");
+        if(remaining<=0||count>=query_limit)throw std::runtime_error("bounded probe exhausted");
         FixedIntervalMipRequest req;req.solve_kind=FixedIntervalSolveKind::PaperLpRelaxation;req.leaf_id=arm;
         req.gamma_L=0;req.gamma_U=1;req.verified_cutoff=1e6;req.global_deadline_remaining_seconds=remaining;req.time_limit_seconds=remaining;
         req.canonical_model_path=path;req.canonical_model_fingerprint=fileSha256(path);req.canonical_row_signature=req.canonical_model_fingerprint;
@@ -71,27 +76,41 @@ int main(int argc,char** argv) {
     };
     std::map<std::string,FixedIntervalMipOutcome> outcomes;
     std::map<std::string,std::filesystem::path> models;
-    for(const std::string mode:{"off","q","t","sep","joint"}) {
+    const std::vector<std::string> modes=qcap?std::vector<std::string>{"off","q","qcap","sep"}:
+        std::vector<std::string>{"off","q","t","sep","joint"};
+    for(const std::string& mode:modes) {
         auto path=dir/(mode+".lp");std::filesystem::copy_file(source,path);appendRound64SharedModel(in,path,mode);models[mode]=path;
         outcomes[mode]=solve(path,mode);
         if(!outcomes[mode].optimal&&!(micro&&mode=="joint"))throw std::runtime_error("unexpected target infeasibility");
     }
     // The complete original variable set is taken from actual canonical F0,
     // never guessed by filtering unknown names in an extended solution.
-    std::map<std::string,double> sep_values;
-    for(const auto& v:outcomes.at("sep").lp_primal_dual_variable_evidence)sep_values[v.name]=v.primal_value;
-    std::ofstream pinfile(dir/"original_pins.csv");pinfile<<std::setprecision(17)<<"variable,value\n";
-    for(const auto& v:outcomes.at("off").lp_primal_dual_variable_evidence) {
-        FixedIntervalMipRequest::AdditionalLinearRow row;row.row_name="r64_pin_"+std::to_string(pins.size());
-        row.canonical_signature="diagnostic_pin:"+v.name;row.scope="diagnostic_fixed_point";row.sense='=';
-        row.rhs=sep_values.at(v.name);row.variable_names={v.name};row.coefficients={1};pins.push_back(row);pinfile<<v.name<<','<<row.rhs<<'\n';
+    auto set_pins=[&](const std::string& mode,const std::string& filename) {
+        pins.clear();std::map<std::string,double> values;
+        for(const auto& v:outcomes.at(mode).lp_primal_dual_variable_evidence)values[v.name]=v.primal_value;
+        std::ofstream pinfile(dir/filename);pinfile<<std::setprecision(17)<<"variable,value\n";
+        for(const auto& v:outcomes.at("off").lp_primal_dual_variable_evidence) {
+            FixedIntervalMipRequest::AdditionalLinearRow row;row.row_name="r64_pin_"+std::to_string(pins.size());
+            row.canonical_signature="diagnostic_pin:"+v.name;row.scope="diagnostic_fixed_point";row.sense='=';
+            row.rhs=values.at(v.name);row.variable_names={v.name};row.coefficients={1};pins.push_back(row);pinfile<<v.name<<','<<row.rhs<<'\n';
+        }
+        if(!pinfile)throw std::runtime_error("pin persistence failed");
+    };
+    set_pins(control_mode,"original_pins.csv");
+    const auto control=solve(models.at(control_mode),"pinned_"+control_mode),candidate=solve(models.at(candidate_mode),"pinned_"+candidate_mode);
+    if(!control.optimal)throw std::runtime_error("pinned control is not feasible");
+    if(micro&&!candidate.infeasible)throw std::runtime_error("known strict projection witness lost");
+    FixedIntervalMipOutcome sep_q,sep_qcap;
+    if(qcap) {
+        set_pins("sep","sep_original_pins.csv");
+        sep_q=solve(models.at("q"),"pinned_sep_q");sep_qcap=solve(models.at("qcap"),"pinned_sep_qcap");
+        if(!sep_q.optimal)throw std::runtime_error("SEP-optimal point is not feasible in Q control");
     }
-    pinfile.close();const auto sep=solve(models.at("sep"),"pinned_sep"),joint=solve(models.at("joint"),"pinned_joint");
-    if(!sep.optimal)throw std::runtime_error("SEP pinned control is not feasible");
-    if(micro&&!joint.infeasible)throw std::runtime_error("known strict projection witness lost");
     backend->release();std::ofstream result(dir/"probe_result.json");result<<std::setprecision(17)
-        <<"{\"optimizer_calls\":"<<count<<",\"query_limit\":7,\"process_seconds\":"<<elapsed()<<",\"original_variables_pinned\":"<<pins.size()
-        <<",\"pinned_sep_feasible\":"<<sep.optimal<<",\"pinned_joint_feasible\":"<<joint.optimal<<",\"pinned_joint_infeasible\":"<<joint.infeasible
+        <<"{\"optimizer_calls\":"<<count<<",\"query_limit\":"<<query_limit<<",\"process_seconds\":"<<elapsed()<<",\"original_variables_pinned\":"<<pins.size()
+        <<",\"control_mode\":\""<<control_mode<<"\",\"candidate_mode\":\""<<candidate_mode<<"\""
+        <<",\"pinned_control_feasible\":"<<control.optimal<<",\"pinned_candidate_feasible\":"<<candidate.optimal<<",\"pinned_candidate_infeasible\":"<<candidate.infeasible
+        <<",\"qcap_sep_point_checked\":"<<qcap<<",\"sep_point_q_feasible\":"<<sep_q.optimal<<",\"sep_point_qcap_feasible\":"<<sep_qcap.optimal<<",\"sep_point_qcap_infeasible\":"<<sep_qcap.infeasible
         <<",\"parameter_roundtrip\":"<<backend->stats().parameter_roundtrip_valid<<",\"micro\":"<<micro<<"}\n";
     if(!result)throw std::runtime_error("result persistence failed");
     return 0;

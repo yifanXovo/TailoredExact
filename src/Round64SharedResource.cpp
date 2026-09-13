@@ -2,6 +2,7 @@
 #include <cmath>
 #include <fstream>
 #include <iomanip>
+#include <limits>
 #include <sstream>
 #include <stdexcept>
 
@@ -21,7 +22,7 @@ void emit(std::ostream& out,const std::string& name,
 }
 }
 bool validRound64SharedMode(const std::string& m) {
-    return m=="off"||m=="q"||m=="t"||m=="sep"||m=="joint";
+    return m=="off"||m=="q"||m=="t"||m=="sep"||m=="joint"||m=="qcap";
 }
 void appendRound64SharedModel(const Instance& in,const std::filesystem::path& path,const std::string& mode) {
     if(!validRound64SharedMode(mode))throw std::runtime_error("invalid shared resource mode");
@@ -48,6 +49,12 @@ void appendRound64SharedModel(const Instance& in,const std::filesystem::path& pa
             const auto q=arc("r64q_",k,i,j);
             balance[q]=1;load[q]=1;
             emit(rows,arc("r64_q_capacity_",k,i,j),{{q,1},{arc("x_",k,i,j),-double(in.Q[k])}},true);
+            // Projection of shared cq<=f and f<=Bx. Keep the familiar Q
+            // block, without any f columns/balances. Omit only a row proved
+            // redundant by an outward-rounded upper bound on c*Q.
+            if(mode=="qcap"&&data.handling>0&&data.upper[i][j]<
+                std::nextafter(data.handling*double(in.Q[k]),std::numeric_limits<double>::infinity()))
+                emit(rows,arc("r64_q_time_capacity_",k,i,j),{{q,data.handling},{arc("x_",k,i,j),-data.upper[i][j]}},true);
             if(mode=="joint"&&data.handling>0)
                 emit(rows,arc("r64_shared_",k,i,j),{{q,data.handling},{arc("r63f_",k,i,j),-1}},true);
         }

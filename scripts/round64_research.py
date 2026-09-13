@@ -92,16 +92,17 @@ def fixed(ids,modes,cap,stage,build):
             cmd=runner.fixed_command(p,dest,'off',cap,build)+['--round64-shared-mode',mode]
             execute(cmd,dest,p,mode,stage,cap,'build-only' if build else 'performance',0 if build else 1)
 
-def probe(ids,cap,stage,micro=False):
+def probe(ids,cap,stage,micro=False,qcap=False):
     for identity in (['resource_micro'] if micro else ids):
         p=dict(id=identity) if micro else panel()[identity];dest=RAW/stage/identity
         cmd=[BUILD/'Round64ResourceProbe.exe','--out',dest,'--cap',cap]
+        if qcap:cmd+=['--qcap-probe']
         if micro:cmd+=['--micro']
         else:
             source=RAW/'preflight_v1'/identity/'off'/'canonical_model.lp'
             cmd+=['--input',p['instance_path'],'--T',p['T_seconds'],'--pickup-time',p['pickup_seconds'],'--drop-time',p['drop_seconds'],
                   '--model',source,'--expected-sha',sha(source)]
-        execute(cmd,dest,p,'five-LP-and-pinned-controls',stage,cap,'native-micro' if micro else 'LP',7)
+        execute(cmd,dest,p,'OFF-Q-QCAP-SEP-and-two-point-controls' if qcap else 'five-LP-and-pinned-controls',stage,cap,'native-micro' if micro else 'LP',8 if qcap else 7)
 
 def full(ids,modes,cap,stage,warm=False,single=False):
     preset='research-round64-k1-h' if warm else 'research-round64-single-s' if single else 'research-round64-k1-s'
@@ -161,7 +162,7 @@ def confirm_freeze(mode,cap):
         protocol_sha256=sha(OUT/'protocol.json'),selection_sha256=sha(OUT/'selected_candidate.json')))
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('action',choices=['freeze','build-freeze','build','fixed','probe','micro','full-micro','warm-micro','projection','cold','warm','single','reference','confirm-freeze'])
+    parser=argparse.ArgumentParser();parser.add_argument('action',choices=['freeze','build-freeze','build','fixed','probe','qcap-probe','micro','full-micro','warm-micro','projection','cold','warm','single','reference','confirm-freeze'])
     parser.add_argument('--ids',nargs='+',default=['D4']);parser.add_argument('--modes',nargs='+',default=['off']);parser.add_argument('--cap',type=int,default=120)
     parser.add_argument('--stage',default='preflight');parser.add_argument('--version',default='v1');a=parser.parse_args()
     if a.action=='freeze':freeze()
@@ -169,6 +170,7 @@ def main():
     elif a.action=='confirm-freeze':confirm_freeze(a.modes[0],a.cap)
     elif a.action in ['build','fixed']:fixed(a.ids,a.modes,a.cap,a.stage,a.action=='build')
     elif a.action in ['probe','micro']:probe(a.ids,a.cap,a.stage,a.action=='micro')
+    elif a.action=='qcap-probe':probe(a.ids,a.cap,a.stage,qcap=True)
     elif a.action=='projection':projection(a.ids,a.cap,a.stage)
     elif a.action=='full-micro':full_micro(a.stage,a.cap)
     elif a.action=='warm-micro':warm_micro(a.stage,a.cap)

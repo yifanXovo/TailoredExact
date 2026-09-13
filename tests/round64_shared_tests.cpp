@@ -34,6 +34,7 @@ void embedding() {
             require(std::fabs(val("r63f_",i,next)-val("r64h_",i,next)-d.handling*prefix)<1e-12,"f=h+cq identity");
             require(val("r64q_",i,next)==prefix,"out(q)=load");require(val("r64h_",i,next)>=0,"negative h");
             require(val("r63f_",i,next)<=d.upper[i][next]+1e-12,"time capacity");
+            require(d.handling*prefix<=d.upper[i][next]+1e-12,"projected load-time capacity");
             double bq=0,bf=0,bh=0;
             for(int j=0;j<=in.V;++j)if(i!=j){bq+=val("r64q_",i,j)-val("r64q_",j,i);bf+=val("r63f_",i,j)-val("r63f_",j,i);bh+=val("r64h_",i,j)-val("r64h_",j,i);}
             require(std::fabs(bq-op.pickup+op.drop)<1e-12,"q balance");
@@ -64,11 +65,16 @@ void model() {
     write();const auto hash=ebrp::fileSha256(path);ebrp::appendRound64SharedModel(in,path,"off");require(hash==ebrp::fileSha256(path),"default modifies bytes");
     require(ebrp::SolveOptions{}.round64_shared_mode=="off","default not off");
     write();ebrp::appendRound64SharedModel(in,path,"q");auto q=contents();require(q.find("r64_q_load_")!=q.npos&&q.find("r63f_")==q.npos,"q isolation");
+    write();ebrp::appendRound64SharedModel(in,path,"qcap");require(contents()==q,"provably redundant qcap must preserve Q model bytes");
+    auto short_in=in;short_in.total_time_limit=10;
+    write();ebrp::appendRound64SharedModel(short_in,path,"qcap");auto qcap=contents();
+    require(qcap.find("r64_q_time_capacity_")!=qcap.npos&&qcap.find("r63f_")==qcap.npos,"projected capacity without f");
     write();ebrp::appendRound64SharedModel(in,path,"sep");auto sep=contents();require(sep.find("r63_carried_")!=sep.npos&&sep.find("r64_shared_")==sep.npos,"SEP B4 control");
     write();ebrp::appendRound64SharedModel(in,path,"joint");auto joint=contents();require(joint.find("r64_shared_")!=joint.npos&&joint.find("r64q_0_1_0")!=joint.npos,"joint/return absent");
     require(joint.find("r64q_0_0_")==joint.npos,"depot q should be eliminated");
     bool duplicate=false;try{ebrp::appendRound64SharedModel(in,path,"joint");}catch(...){duplicate=true;}require(duplicate,"duplicate block accepted");
     in.pickup_time=in.drop_time=0;write();ebrp::appendRound64SharedModel(in,path,"joint");require(contents().find("r64_shared_")==std::string::npos,"zero handling row retained");
+    write();ebrp::appendRound64SharedModel(in,path,"qcap");require(contents()==q,"zero handling qcap is Q");
     require(!ebrp::validRound64SharedMode("auto-by-instance"),"nonuniform selector accepted");
     std::filesystem::remove(path);std::filesystem::remove(path.string()+".round63.json");std::filesystem::remove(path.string()+".round64.json");
 }
