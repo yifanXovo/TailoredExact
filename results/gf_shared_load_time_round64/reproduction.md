@@ -172,3 +172,20 @@ point SHA and complete local LP residual audit. Packaging creates no new
 projection experiment and calls no optimizer. All negative and failed-run identities remain
 in the launch ledger. No model or performance data from the user's dirty
 workspace is used.
+
+## Completed campaign receipt
+
+The delivered ledger closes at 62/72 charged launches, 4/4 native micros and 262
+optimizer calls, with no charged failure, overrun or incomplete process. Total
+charged wall is 21422.216 seconds. All 41 solver-free tests, 42 LP/combination
+checks, 4 auxiliary/Farkas checks, 84 original route snapshots, 18 warm pairs and
+4 cold pairs pass; both frozen confirmation roles are complete. Ten launches
+are intentionally unused.
+
+`C7_hga_trace_verification.json` records the observed startup-time difference
+between identical HGA trajectories. To reproduce its semantic checksum, read
+each named source CSV, remove only `elapsed_seconds` from each row, and hash
+the UTF-8 JSON produced by `json.dumps(rows, sort_keys=True, separators=(",", ":"))`.
+All 2058 generation/fitness/improvement records match exactly for 57/58/60;
+elapsed times differ. This diagnostic does not exclude any measured result
+or attribute startup variation to native resource rows.

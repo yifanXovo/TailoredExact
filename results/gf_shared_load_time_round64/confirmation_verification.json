@@ -4,7 +4,7 @@
   "uniform_mode": "joint",
   "cap_seconds": 600,
   "original_role_order_verified": true,
-  "complete": false,
+  "complete": true,
   "roles": [
     {
       "id": "C6",
@@ -29,10 +29,24 @@
     },
     {
       "id": "C7",
-      "opened": false,
-      "complete": false,
-      "numbers": [],
-      "arms": []
+      "opened": true,
+      "complete": true,
+      "numbers": [
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ],
+      "arms": [
+        "warm-off",
+        "warm-joint",
+        "P-GRB",
+        "K1-H",
+        "cold-off",
+        "cold-joint"
+      ]
     }
   ]
 }

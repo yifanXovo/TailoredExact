@@ -266,7 +266,8 @@ def warm_states():
             else:assert r['first_canonical_model_sha256']==base['first_canonical_model_sha256'],'stable and research OFF first F0 models differ'
             comparisons.append(dict(baseline=base['number'],candidate=r['number'],id=r['id'],
                 identical_startup_hash_U_domain=True,identical_route_snapshot=r['arm']!='K1-H',native_starts_both_disabled=True,
-                first_F0_identical_to_stable_reference=True if r['arm']=='K1-H' else None))
+                first_F0_identical_to_stable_reference=True if r['arm']=='K1-H' and r['first_canonical_model_sha256'] is not None else None,
+                both_native_models_skipped=r['first_canonical_model_sha256'] is None and base['first_canonical_model_sha256'] is None if r['arm']=='K1-H' else None))
     table('warm_state_verification.csv',records);table('warm_pairs_verification.csv',comparisons)
     print('warm states',len(records),'matched pairs',len(comparisons))
 

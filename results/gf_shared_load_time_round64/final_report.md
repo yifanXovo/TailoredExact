@@ -1,8 +1,8 @@
 # Round64: shared load/time capacity and complete-algorithm qualification
 
-**Campaign status: complete validation is running.** This working report will
-be finalized only after the declared protection, reference and confirmation
-runs and their audits finish. No stable default is upgraded.
+**Completed:** 62/72 charged launches, 4/4 native micros, 262 optimizer calls;
+all declared protection, reference and confirmation runs and audits are
+complete. No stable default is upgraded.
 
 The evidence supports a real arc-sharing increment and a useful research
 implementation, but rejects a uniform stable-algorithm upgrade. D4 has a
@@ -12,8 +12,10 @@ provide counterexamples to robust complete-cost improvement. D7 beats this
 round's official P-GRB reference but regresses against actual stable K1-H.
 Long-T target LP objectives remain unchanged despite strict point exclusions.
 The smaller QCAP alternative also has strict incremental strength, but fails
-its predeclared D4 certificate-loss gate. Independent confirmation outcomes
-are reported separately below once their frozen matrix is complete.
+its predeclared D4 certificate-loss gate. Independent C6 confirmation finds
+a strong cold JOINT gain over both actual references but a warm regression
+caused by costly LP lookahead. C7 is a verified zero-objective role with
+below-gate isolated OFF/JOINT time differences. Neither role is replaced.
 
 ## Research baseline and scope
 
@@ -250,7 +252,7 @@ blanket claim that resource extensions always hurt.
 
 The frozen uniform candidate is JOINT, explicitly a diagnostic research
 candidate rather than a mainline recommendation. Its mathematical increment
-warrants the remaining full qualification even though D4's fixed-F0 loss and
+warranted the complete qualification even though D4's fixed-F0 loss and
 D7's warm regression already veto adoption. It is not selected as the fastest
 mode and its negative results are not removed. [selected_candidate.json](selected_candidate.json)
 binds the unchanged rule, startup and retained v3 executable. The tested v4
@@ -460,7 +462,7 @@ LB=1.5827153668210585 and gap=.10272327950095828. The gap improves by
 .0842025080854023, so this is predominantly a bound gain with a primal
 gain too. Both use five calls/zero splits, and their initial depot-only
 routes/U/domain match. Final original witnesses verify. Cold JOINT also
-beats actual stable K1-H's gap by46.1% and official P-GRB's by67.3% on this
+beats actual stable K1-H's gap by 46.1% and official P-GRB's by 67.3% on this
 role; the positive confirmation is not suppressed because warm JOINT fails.
 
 | C6 complete policy, cap600 | Wall seconds | UB | LB | Absolute gap | Calls / splits |
@@ -473,11 +475,11 @@ role; the positive confirmation is not suppressed because warm JOINT fails.
 | Cold JOINT | 597.125 | 1.685438646322 | 1.582715366821 | .102723279501 | 5 / 0 |
 
 The actual paths explain why better startup quality does not guarantee a
-better endpoint for this controller. Cold JOINT's initial U is1.9864507064376138.
-Its right-child LP is feasible at bound1.7646613772821627, above warm U but
+better endpoint for this controller. Cold JOINT's initial U is 1.9864507064376138.
+Its right-child LP is feasible at bound 1.7646613772821627, above warm U but
 below cold U. Under the tighter warm cutoff/propagated domain, this child is
 infeasible, forcing the additional split and the expensive grandchild LP.
-Cold JOINT instead reaches native MIP; its terminal MIP uses404.050 seconds
+Cold JOINT instead reaches native MIP; its terminal MIP uses 404.050 seconds
 and improves the original incumbent and global bound. The HGA fee here is
 only about three seconds. The dominant difference is the resulting proof
 path, not that fee, a changed lifecycle, or an explicit native start.
@@ -490,11 +492,60 @@ uniform cold upgrade. A cost-controlled lookahead or cheaper projection
 would need its own implementation and fresh qualification; neither is
 retroactively claimed to have been tested by these results.
 
-Pending at the time of this working draft: frozen C7 warm/cold
-and reference qualification. The final report must replace this paragraph
-with all outcomes, first-feasible/zero/best timings, proof tails and explicit
-confirmation classifications. No performance claim is made for these pending
-runs.
+### C7: different operations, actual zero confirmation
+
+All six frozen C7 runs certify original F=0. They serve all 20 stations,
+pick up and deliver 65, and independently satisfy Q20 prefix capacities and
+T10800. In particular total pickup exceeds the two vehicles' combined
+capacity 40; this is legitimate capacity reuse, not a total-pickup cap.
+The role is retained as the actual zero case it turned out to be. C6 supplies
+the separate nonzero, unfinished-proof confirmation; C7 is not presented as
+evidence of difficult positive-objective proof performance.
+
+| C7 complete policy, cap600 | Wall seconds | Native calls | Original certificate |
+|---|---:|---:|---|
+| Warm OFF | 56.687 | 0 | F=0 |
+| Warm JOINT | 56.594 | 0 | F=0 |
+| Official P-GRB | 4.609 | 1 | F=0 |
+| Stable K1-H | 42.219 | 0 | F=0 |
+| Cold OFF | 2.875 | 4 | F=0 |
+| Cold JOINT | 3.375 | 4 | F=0 |
+
+The three HGA runs produce the identical verified zero witness hash
+502794a91a628edd; warm initial snapshots/U/domain match. Warm OFF/JOINT
+terminate before constructing native resource models, and their .093-second
+difference is below both gates. Cold JOINT takes .500 seconds longer than
+cold OFF (17.4%): below the required ten-second absolute gate, not equality.
+Its four native calls actually exercise the resource model and preserve
+the legal zero. No special-case disabling rule is used.
+
+The actual stable reference is 14.375 seconds (34.0%) faster than warm JOINT,
+so that raw complete-policy comparison crosses the time-loss gate. However,
+warm OFF has essentially the same added time. All three HGA generation logs
+have exactly 2058 records with identical generations, fitness and improvement
+flags; only elapsed times differ. See
+[C7_hga_trace_verification.json](C7_hga_trace_verification.json). No native
+resource model is constructed in these three runs. Thus the observed timing
+variation belongs to startup execution and is not an arc-row overhead claim.
+Its physical cause is not established, and no run is removed or relabeled
+as an algorithm change. Official P-GRB's 4.609 seconds also exposes the cost
+of the inherited full HGA on this easy zero role.
+
+| C7 accepted original zero timing | Warm OFF | Warm JOINT | K1-H | Cold OFF | Cold JOINT |
+|---|---:|---:|---:|---:|---:|
+| Process seconds at accepted zero | 56.6496035 | 56.5535717 | 42.1785929 | 2.8268046 | 3.3392190 |
+| Accepted-zero-to-exit tail | .0131358 | .0133242 | .0153726 | .0075688 | .0049100 |
+
+The first verified empty witness is available at about .002 seconds in
+these five runs. Official P-GRB has no accepted-UB event timestamp; its
+verified final zero is available before serialization at 4.5714065 seconds.
+No exact native-discovery or proof-tail timestamp is invented for that arm.
+
+The two independent confirmation roles are complete in their original
+order, with unchanged configuration hashes. Warm JOINT fails the nonzero
+C6 confirmation; cold JOINT has a substantial C6 gain and a below-gate C7
+time loss. The C5 and D7 protections prevent promotion of a uniform cold
+policy as well. No role-specific choice between warm and cold is proposed.
 
 ## Explored mechanisms and scope
 
@@ -502,7 +553,7 @@ runs.
 |---|---|---|
 | Q-only | Familiar load-flow lift; strong cold D7 primal result, worse D7 warm gap; slower warm C2 below the joint time gate | Retain as an attribution baseline; do not credit its gains to new sharing |
 | T and SEP/B4 | D4 target strengthening; SEP warm C2 is faster than JOINT; long-T target objective unchanged | Retain independent-resource control; no claim of a uniformly qualified SEP upgrade or independent SEP confirmation |
-| JOINT | Actual SEP-optimal x/p/d/L points excluded, with re-completion and checked D4/D7 dual evidence; mixed complete warm outcomes | Frozen uniform diagnostic candidate; mainline adoption rejected by observed complete warm regressions; finish the declared qualification |
+| JOINT | Actual SEP-optimal x/p/d/L points excluded; checked D4/D7 dual evidence; complete D4 warm arc gain; C6 cold gain over both real references but warm failure | Completed uniform diagnostic qualification; retain research implementation, reject stable promotion and instance-wise startup selection |
 | QCAP | Smaller necessary projection; own target/projection increment on D4/C2, exactly Q on D7 | Stop advancement after the predeclared D4 matched certificate-loss gate; keep implementation and negative result |
 | Full auxiliary/Farkas projection | Bounded diagnostic and portable checked row combinations | Evidence tool only; production separator, callback integration and full closure remain unimplemented/unmeasured, not experimentally rejected |
 | Fresh-model or native-start changes | Not needed to implement static common LP/MIP rows | No new lifecycle/start policy is introduced; inherited model-object reuse and disabled starts remain the controls |
@@ -545,13 +596,23 @@ canonical model objective space and are not themselves verified original F.
 Their comparison with the final original UB is a numerical observation,
 not evidence that the same final route was already accepted at that time.
 
-At selection, accounting is 32/72 charged launches and 152 optimizer calls,
-including diagnostic LPs and both alternative screens. No charged failure,
-overrun or unknown call count exists. The original preflight D3/Q CLI-guard
-failure is retained as build-only, corrected before measured v1 and never
-misrepresented as an optimizer run. The remaining declared campaign reaches
-62 launches, including the two declared warm SEP attribution follow-ups,
-with ten launches left unused unless justified by a new issue.
+Final accounting is 62/72 charged launches, 262 optimizer calls and
+21422.216 charged wall seconds (about 5.95 hours). There are 50 performance,
+six LP, two auxiliary LP-audit and four native-micro launches. Physical caps
+are 20 seconds for four launches, 120 for twenty, 600 for thirty and 1200 for
+eight. No charged failure, overrun, incomplete run or unknown call count
+exists. Ten launches remain unused. The 48 build-only records include the
+original preflight D3/Q CLI-guard
+failure, corrected before measured v1 and never misrepresented as an
+optimizer run. The two additional warm SEP controls
+were declared before their launches and remain development attribution.
+
+Final checks cover 42 complete LP/combination records, four auxiliary/Farkas
+records, 84 original route snapshots, 27 warm states/18 matched pairs and
+eight cold states/four pairs. All confirmation bindings/order/completeness
+checks pass. Original witness and submitted projection checks also pass
+without the large local native logs. For zero-skipped references, no native
+F0 identity comparison is claimed; the corresponding check is not applicable.
 
 Every launch has a write-ahead record, physical cap, executable/source
 identity, actual native call count and raw destination. Optimization is serial;
@@ -570,6 +631,9 @@ paths and wall-limited stopping can still affect the final endpoint.
 [reproduction.md](reproduction.md) is the entry point. Automatically generated
 [measured_tables.md](measured_tables.md), [pairs.csv](pairs.csv), native shapes,
 costs, trajectories, warm checks and route snapshots support the conclusions.
+The [validation receipt](validation_receipt.json) records the closed budget,
+checks and confirmation identities. [evidence_index.csv](evidence_index.csv)
+binds 3091 local raw files (1469977217 bytes) by path, size and SHA256.
 Large local models/logs/binaries remain outside Git with paths and hashes;
 submitted projection and route evidence can be verified without those logs.
 Projection diagnostic timings include their own construction/solve/export,

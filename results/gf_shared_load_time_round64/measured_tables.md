@@ -51,3 +51,9 @@ Wall includes the complete charged process. Uncertified wall is budget use, not 
 | 54 | C6 | confirmation_v3 | K1-H | 600 | 597.109 | False | 1.68915724 | 1.49847985 | 0.190677392 | 1535.76593 | 5 |
 | 55 | C6 | confirmation_v3 | cold-off | 600 | 597.172 | False | 1.71525991 | 1.49851286 | 0.216747052 | 1625.49283 | 5 |
 | 56 | C6 | confirmation_v3 | cold-joint | 600 | 597.125 | False | 1.68543865 | 1.58271537 | 0.10272328 | 1676.9618 | 5 |
+| 57 | C7 | confirmation_v3 | warm-off | 600 | 56.687 | True | 0 | 0 | 0 | 0 | 0 |
+| 58 | C7 | confirmation_v3 | warm-joint | 600 | 56.594 | True | 0 | 0 | 0 | 0 | 0 |
+| 59 | C7 | confirmation_v3 | P-GRB | 600 | 4.609 | True | 0 | 0 | 0 | 7.64921237 | 1 |
+| 60 | C7 | confirmation_v3 | K1-H | 600 | 42.219 | True | 0 | 0 | 0 | 0 | 0 |
+| 61 | C7 | confirmation_v3 | cold-off | 600 | 2.875 | True | 0 | 0 | 0 | 4.41837454 | 4 |
+| 62 | C7 | confirmation_v3 | cold-joint | 600 | 3.375 | True | 0 | 0 | 0 | 5.4623426 | 4 |
