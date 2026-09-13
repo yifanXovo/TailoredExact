@@ -119,10 +119,14 @@ def audit_contracts():
             assert '--plain-baseline' in e['command'] and not r['gurobi_hga_start_requested']
             expected=int(e['command'][e['command'].index('--round24-expected-gurobi-model-fingerprint')+1])
             assert r['gurobi_model_fingerprint']==expected
+            official_log=(folder/'native.log').read_text(encoding='utf-8',errors='replace')
+            assert 'Non-default parameters:' in official_log
+            assert not re.search(r'(?m)^\s*Heuristics\s+[-+\d.]',official_log),'official native heuristics changed from default'
             references.append(dict(number=e['charged_number'],id=e['id'],arm=e['arm'],
                 compact_fingerprint=expected,original_domain_lifecycle_verified=True,
                 bound_source='Gurobi_ObjBoundC',native_bound=r['gurobi_obj_bound_c'],
                 original_incumbent_verified=True,default_heuristics_preserved=True,
+                heuristics_evidence='native nondefault-parameter list; original P-GRB path has no override',
                 strict_certificate=r['strict_certified_original_problem'],
                 legacy_model_correctness_field=r.get('model_correctness_failure_reason')))
         else:

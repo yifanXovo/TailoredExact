@@ -4,6 +4,17 @@
 be finalized only after the declared protection, reference and confirmation
 runs and their audits finish. No stable default is upgraded.
 
+The evidence supports a real arc-sharing increment and a useful research
+implementation, but rejects a uniform stable-algorithm upgrade. D4 has a
+large complete warm proof gain over the exact SEP control; C2 improves over
+measured stable K1-H while SEP is faster still. D3 warm, D7 warm and C5 cold
+provide counterexamples to robust complete-cost improvement. D7 beats this
+round's official P-GRB reference but regresses against actual stable K1-H.
+Long-T target LP objectives remain unchanged despite strict point exclusions.
+The smaller QCAP alternative also has strict incremental strength, but fails
+its predeclared D4 certificate-loss gate. Independent confirmation outcomes
+are reported separately below once their frozen matrix is complete.
+
 ## Research baseline and scope
 
 The branch is based on Round63 PR #124 at
@@ -401,7 +412,85 @@ OFF-to-JOINT improvement. This is a measured small arc-only bound gain,
 not a qualified substantial gain or equality. Initial route/U/domain and
 native-start treatment are matched; Q-only warm C3 remains unmeasured.
 
-Pending at the time of this working draft: frozen C6/C7 warm/cold
+### C6: independent nonzero proof confirmation exposes LP cost
+
+C6's frozen cap600 warm OFF/JOINT pair has byte-identical initial routes,
+U=1.6935230573348528 and interval. Both are uncertified. OFF finishes in
+597.125 seconds with U=1.6891572379504287, LB=1.498479846432248 and
+gap=.19067739151818075. JOINT uses 597.297 seconds, retains its initial U,
+and ends at LB=1.4340819109709753, gap=.2594411463638775: about 36.1%
+worse, beyond both gates. Both original final routes independently verify.
+The positive complete-root OFF LP bound 1.204589644846392 also establishes
+that this is a nonzero-objective role, not another zero shortcut.
+
+The JOINT root LP improves to 1.3989160879585034, yet complete progress is
+worse. Its four calls are all LPs: root 47.374 seconds, left child 58.448,
+right child 44.373 (infeasible), then L0.0.0 consumes 438.485 seconds and
+times out after 360768 simplex iterations. It never reaches MIP. The last
+LP's raw model has 134280 rows/43533 columns; its LP presolve reports 39410
+rows/141138 columns. These LP counts are not directly comparable to MIP
+presolve sizes. Large intermediate native LP infeasibility/objective displays
+are not original feasible F or qualified bounds. The status is TIME_LIMIT,
+not NUMERIC, and the controller correctly retains the earlier valid global
+bound 1.4340819109709753. All four LP calls restore integer domains.
+
+OFF uses five calls/zero splits and reaches MIP; its longest call takes
+568.5 seconds. This independent failure is in the cost of required lookahead
+LPs as well as the eventual absence of primal search. The whole JOINT block
+is being confirmed here; without a C6 SEP control, the failure is not assigned
+solely to the arc rows. No candidate/parameter/threshold revision or instance
+replacement follows this result. The complete C6 controls below preserve
+both the positive cold result and the negative warm result.
+
+Actual C6 stable K1-H uses 597.109 seconds and reproduces OFF's final
+U=1.6891572379504287, LB=1.498479846432248 and gap=.19067739151818075,
+with five calls/zero splits. Its initial hash/U/domain and first F0 model
+hash also match. JOINT therefore regresses by .06876375484569675 (36.1%)
+against the real stable reference. Official P-GRB uses 597.078 seconds,
+U=1.6891007322131457, LB=1.3750901078582853 and gap=.3140106243548604,
+with expected compact fingerprint 1286464518. Both official/stable final
+original witnesses independently verify. JOINT beats this official gap but
+not stable K1-H; those two comparisons are kept separate.
+
+C6 cold OFF/JOINT both remain uncertified in 597.172/597.125 seconds.
+OFF has U=1.7152599109121676, LB=1.4985128587356562 and
+gap=.21674705217651136. JOINT has U=1.6854386463220168,
+LB=1.5827153668210585 and gap=.10272327950095828. The gap improves by
+.11402377267555308 (52.6%): U improves by .0298212645901508 and LB by
+.0842025080854023, so this is predominantly a bound gain with a primal
+gain too. Both use five calls/zero splits, and their initial depot-only
+routes/U/domain match. Final original witnesses verify. Cold JOINT also
+beats actual stable K1-H's gap by46.1% and official P-GRB's by67.3% on this
+role; the positive confirmation is not suppressed because warm JOINT fails.
+
+| C6 complete policy, cap600 | Wall seconds | UB | LB | Absolute gap | Calls / splits |
+|---|---:|---:|---:|---:|---:|
+| Warm OFF | 597.125 | 1.689157237950 | 1.498479846432 | .190677391518 | 5 / 0 |
+| Warm JOINT | 597.297 | 1.693523057335 | 1.434081910971 | .259441146364 | 4 / 1 |
+| Official P-GRB | 597.078 | 1.689100732213 | 1.375090107858 | .314010624355 | 1 / N/A |
+| Stable K1-H | 597.109 | 1.689157237950 | 1.498479846432 | .190677391518 | 5 / 0 |
+| Cold OFF | 597.172 | 1.715259910912 | 1.498512858736 | .216747052177 | 5 / 0 |
+| Cold JOINT | 597.125 | 1.685438646322 | 1.582715366821 | .102723279501 | 5 / 0 |
+
+The actual paths explain why better startup quality does not guarantee a
+better endpoint for this controller. Cold JOINT's initial U is1.9864507064376138.
+Its right-child LP is feasible at bound1.7646613772821627, above warm U but
+below cold U. Under the tighter warm cutoff/propagated domain, this child is
+infeasible, forcing the additional split and the expensive grandchild LP.
+Cold JOINT instead reaches native MIP; its terminal MIP uses404.050 seconds
+and improves the original incumbent and global bound. The HGA fee here is
+only about three seconds. The dominant difference is the resulting proof
+path, not that fee, a changed lifecycle, or an explicit native start.
+
+This is a measured startup/domain interaction under the same uniform rule,
+not evidence for a C6-specific switch. The selected warm candidate fails
+independent confirmation here. Cold JOINT has a valuable positive result,
+but its D7 stable-reference loss and C5 search regression still reject a
+uniform cold upgrade. A cost-controlled lookahead or cheaper projection
+would need its own implementation and fresh qualification; neither is
+retroactively claimed to have been tested by these results.
+
+Pending at the time of this working draft: frozen C7 warm/cold
 and reference qualification. The final report must replace this paragraph
 with all outcomes, first-feasible/zero/best timings, proof tails and explicit
 confirmation classifications. No performance claim is made for these pending
