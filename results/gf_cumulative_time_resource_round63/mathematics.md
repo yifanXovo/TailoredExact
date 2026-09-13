@@ -130,6 +130,10 @@ improved integer search is not an improved outer-LP bound by construction.
 Global physical scope permits reuse across intervals and incumbent epochs.
 Failure or an invalid LP lifecycle clears the optional pool. Root setup and
 the paid preparation LP are included in process wall/Work accounting.
+In v3 both root and root-dry read a fresh canonical model for each native
+call; retained-model reuse is disabled for these two research modes. This
+prevents MIP-only rows from contaminating a later LP or being appended twice.
+It adds model-read cost, not optimizer calls, and the dry control isolates it.
 
 Native API scope and the presolve isolation follow Gurobi's
 [GRBcbcut documentation](https://docs.gurobi.com/projects/optimizer/en/current/reference/c/callback.html#c.GRBcbcut)

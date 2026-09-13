@@ -77,12 +77,18 @@ def summarize():
     for e in run.runner.entries():
         dest=ROOT/e['destination']
         if not (dest/'completion.json').exists():continue
-        count=0
+        count=0;attempts=0
         if (dest/'round63_optimizer_calls.csv').exists():count=len(csvrows(dest/'round63_optimizer_calls.csv'))
         elif (dest/'native_calls.csv').exists():count=len(csvrows(dest/'native_calls.csv'))
-        elif (dest/'external/paper_optimize_ledger.csv').exists():count=len(csvrows(dest/'external/paper_optimize_ledger.csv'))
+        elif (dest/'external/paper_optimize_ledger.csv').exists():
+            native=csvrows(dest/'external/paper_optimize_ledger.csv');attempts=len(native)
+            # An engineering rejection can be recorded before native optimize.
+            count=sum(bool(c['native_status']) or int(c['optimize_return_code'])!=-1 for c in native)
         elif e['charged'] and (dest/'result.json').exists():count=1
-        calls.append(dict(number=e['charged_number'],id=e['id'],stage=e['stage'],arm=e['arm'],optimizer_calls=count))
+        calls.append(dict(number=e['charged_number'],id=e['id'],stage=e['stage'],arm=e['arm'],optimizer_calls=count,backend_attempts=attempts or count))
+        if e['charged_number'] in by_number:
+            by_number[e['charged_number']]['optimizer_calls']=count
+            by_number[e['charged_number']]['backend_attempts']=attempts or count
         if e['charged_number'] in by_number and (dest/'round63_root_lp_result.json').exists():
             r=by_number[e['charged_number']];prep=read(dest/'round63_root_lp_result.json')
             r['mip_work']=r['work'];r['preparation_lp_work']=prep['work'];r['work']+=prep['work'];r['optimizer_calls']=count

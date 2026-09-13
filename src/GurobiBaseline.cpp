@@ -1390,8 +1390,15 @@ public:
             !paper_solve &&
             options_.external_gini_lifecycle == "retained-per-leaf";
         auto found = leaves_.find(request.leaf_id);
+        // Static root rows are MIP-only. A fresh canonical model on every
+        // lifecycle prevents them leaking back into a later LP or being
+        // appended twice to a retained MIP. The dry control pays the same
+        // model-read policy. This does not add any optimizer call.
+        const bool round63_static_execution = options_.round63_time_mode == "root" ||
+            options_.round63_time_mode == "root-dry";
         const bool incremental_retained_mode =
-            paper_solve && request.incremental_model_reuse_enabled;
+            paper_solve && request.incremental_model_reuse_enabled &&
+            !round63_static_execution;
         bool retained =
             (legacy_retained_mode || incremental_retained_mode) &&
             found != leaves_.end();
@@ -2238,6 +2245,9 @@ public:
 
         Round63NativeState resource;
         const bool resource_mip=!out.lp_relaxation && options_.round63_time_mode!="off";
+        int resource_precrush_read_return=-1;
+        if(resource_mip)
+            resource_precrush_read_return=api_.getintparam(model_env,GRB_INT_PAR_PRECRUSH,&out.gurobi_precrush_effective);
         const bool resource_separator=resource_mip && (options_.round63_time_mode=="dry"||options_.round63_time_mode=="cuts");
         if(resource_mip && (resource_separator||options_.round63_time_mode=="precrush")) {
             out.gurobi_precrush_requested=1;
@@ -2291,7 +2301,8 @@ public:
                <<",\"minimum_raw_pickup\":"<<resource.minimum_raw_pickup<<",\"prepared_static_rows\":"<<round63_root_rows_.size()
                <<",\"static_rows_added\":"<<((options_.round63_time_mode=="root")?out.additional_linear_rows_added:0)
                <<",\"static_pool_failure\":"<<std::quoted(round63_root_failure_)
-               <<",\"maximum_normalized_violation\":"<<resource.max_violation<<",\"precrush\":"<<out.gurobi_precrush_effective<<"}\n";
+               <<",\"maximum_normalized_violation\":"<<resource.max_violation<<",\"precrush\":"<<out.gurobi_precrush_effective
+               <<",\"precrush_read_return\":"<<resource_precrush_read_return<<",\"fresh_static_lifecycle\":"<<round63_static_execution<<"}\n";
         }
 
         if (callback.round59_samples) {

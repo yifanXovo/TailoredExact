@@ -82,6 +82,11 @@ def execute(cmd,dest,p,arm,stage,cap,kind='performance',calls=1):
         expected={p['name']:p['sha256'] for p in json.loads((OUT/build).read_text())['executables']}
         assert sha(cmd[0])==expected[Path(cmd[0]).name]
     runner.execute(cmd,dest,dict(id=p['id'],arm=arm,stage=stage,build_freeze=build),cap,kind,calls)
+    result=dest/'result.json'
+    if result.exists():
+        status=json.loads(result.read_text(encoding='utf-8')).get('status','')
+        if status=='failed' or status.endswith('_failed'):
+            raise RuntimeError('charged semantic engine failure: '+status+' at '+str(dest))
 
 def fixed(ids,modes,cap,stage,kind):
     bind_runner()

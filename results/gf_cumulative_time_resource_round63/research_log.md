@@ -168,3 +168,24 @@ K1-H/P-GRB runs on C2, D7, C4 and C5 at the same 600 s cap. Candidate and
 driver/source/build hashes must be frozen before C4 input is opened, then
 C5 follows without intervening mechanism changes. Maximum forecast is 59
 charged launches including C2's optional service supplement, leaving reserve.
+
+v2 full-K1 micro launch 27 reveals a real integration defect before long runs:
+the retained LP model reaches the existing additional-row guard and the MIP
+is rejected before optimize (`additional_rows_require_fresh_canonical_model`).
+The process exits zero but the semantic engine status is failed. Preserve
+and exclude it from performance; count three optimizations and four backend
+attempts, not four native optimizations. The initial physical route remains
+valid, but this is not a successful full-algorithm check. Source commit
+11f5139b09e638355539cfb99b0c5d10fbb33024 records that version.
+
+v3 fixes the required lifecycle: both root and root-dry use a fresh canonical
+model per native call, so MIP-only resource rows cannot leak into later LPs
+or be duplicated in a retained MIP. The required first LP is still reused as
+the separation source, no extra optimizer is called, and all additional
+model reads are charged. Dry pays the same read policy. OFF and explicit
+retain their original reuse policy. Add a full K1 root-dry control on C2
+at 600 s to isolate this cost. A has not started: all subsequent core A/B,
+long/reference/confirmation pairs use one frozen v3 build. v1/v2 screens
+remain separately identified evidence. Add actual PreCrush get-return/value
+telemetry without changing its setting. All 40 solver-free tests pass.
+The fourth/final native micro now rechecks the complete K1 root lifecycle.
