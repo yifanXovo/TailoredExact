@@ -92,7 +92,8 @@ def fixed(ids,modes,cap,stage,kind):
             cmd=runner.fixed_command(p,dest,'off',cap,kind=='build')
             cmd[cmd.index('--mode')+1]=kind
             cmd+=['--round63-time-mode',mode]
-            execute(cmd,dest,p,mode,stage,cap,'build-only' if kind=='build' else 'LP' if kind=='lp' else 'performance',0 if kind=='build' else 1)
+            execute(cmd,dest,p,mode,stage,cap,'build-only' if kind=='build' else 'LP' if kind=='lp' else 'performance',
+                    0 if kind=='build' else 2 if kind=='solve' and mode in ['root','root-dry'] else 1)
 
 def full(ids,modes,cap,stage,k1,threshold='off'):
     bind_runner()
@@ -105,13 +106,46 @@ def full(ids,modes,cap,stage,k1,threshold='off'):
             cmd+=['--round62-threshold-mode',threshold,'--round63-time-mode',mode]
             execute(cmd,dest,p,arm,stage,cap,calls='all calls in external/paper_optimize_ledger.csv')
 
+def reference(ids,cap,stage):
+    bind_runner()
+    expected={e['instance_id']:e['expected_gurobi_model_fingerprint'] for e in json.loads(
+        (ROOT/'results/gf_citibike443_k1_vs_pgrb_round58/pgrb_expected_fingerprints.json').read_text())['entries']}
+    for identity in ids:
+        p=panel()[identity]
+        for arm in ['P-GRB','K1-H']:
+            dest=RAW/stage/identity/arm
+            if arm=='K1-H':cmd=runner.full_command(p,dest,'paper-k1-am-sf','off',cap)
+            else:
+                cmd=[BUILD/'ExactEBRP.exe','--input',p['instance_path'],'--lambda',p['lambda'],'--T',p['T_seconds'],
+                    '--pickup-time',p['pickup_seconds'],'--drop-time',p['drop_seconds'],'--time-limit',cap-6,
+                    '--process-wall-time-limit',cap,'--process-shutdown-margin',3,'--threads',1,'--mip-threads',1,
+                    '--gurobi-seed',0,'--gurobi-presolve',-1,'--method','gurobi','--plain-baseline',
+                    '--out',dest/'result.json','--log',dest/'native.log','--process-phase-ledger',dest/'phases.csv',
+                    '--gurobi-model-export',dest/'compact.lp','--round24-expected-gurobi-model-fingerprint',expected[p['scenario_id']],
+                    '--round24-executable-sha256',sha(BUILD/'ExactEBRP.exe'),
+                    '--round24-manifest-executable-sha256',sha(BUILD/'ExactEBRP.exe')]
+            execute(cmd,dest,p,arm,stage,cap,calls='native lifecycle / original single P-GRB')
+
+def service(ids,cap,stage,build=False):
+    """The unchanged Round62 dictionary; three same-lifecycle arms per role."""
+    bind_runner()
+    for identity in ids:
+        for threshold in ['off','projection','projection-service']:
+            if build:
+                p=panel()[identity];dest=RAW/stage/identity/threshold
+                cmd=runner.fixed_command(p,dest,'off',cap,True)+['--round62-threshold-mode',threshold]
+                execute(cmd,dest,p,threshold,stage,cap,'build-only',0)
+            else:full([identity],['off'],cap,stage,identity in ['C2','C3'],threshold)
+
 def main():
-    p=argparse.ArgumentParser();p.add_argument('action',choices=['freeze','build-freeze','build','lp','solve','full','k1'])
+    p=argparse.ArgumentParser();p.add_argument('action',choices=['freeze','build-freeze','build','lp','solve','full','k1','reference','service','service-build'])
     p.add_argument('--ids',nargs='+',default=['D4']);p.add_argument('--modes',nargs='+',default=['off'])
     p.add_argument('--version',default='v1');p.add_argument('--cap',type=int,default=120)
     p.add_argument('--stage',default='dev');p.add_argument('--threshold',default='off');a=p.parse_args()
     if a.action=='freeze': freeze()
     elif a.action=='build-freeze': build_freeze(a.version)
     elif a.action in ['build','lp','solve']: fixed(a.ids,a.modes,a.cap,a.stage,a.action)
+    elif a.action=='reference':reference(a.ids,a.cap,a.stage)
+    elif a.action in ['service','service-build']:service(a.ids,a.cap,a.stage,a.action=='service-build')
     else: full(a.ids,a.modes,a.cap,a.stage,a.action=='k1',a.threshold)
 if __name__=='__main__': main()

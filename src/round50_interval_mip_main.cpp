@@ -1256,6 +1256,20 @@ int main(int argc, char** argv) {
             return valid ? 0 : 5;
         }
 
+
+        if(args.round63_time_mode=="root"||args.round63_time_mode=="root-dry") {
+            auto root_request=makeRequest(ebrp::FixedIntervalSolveKind::PaperLpRelaxation,args.state_id+"__resource_root","round63_root_lp.log");
+            root_request.capture_lp_primal_dual_evidence=true;
+            std::ofstream calls(args.artifact_dir/"round63_optimizer_calls.csv");calls<<"kind,remaining_seconds\nLP,"<<remaining()<<'\n';calls.flush();
+            const auto root_outcome=backend->solve(root_request);
+            std::ofstream prep(args.artifact_dir/"round63_root_lp_result.json");prep.precision(17);
+            prep<<"{\"work\":"<<root_outcome.work<<",\"solver_seconds\":"<<root_outcome.solver_runtime_seconds
+                <<",\"optimal\":"<<root_outcome.optimal<<",\"valid\":"<<root_outcome.lp_terminal_valid
+                <<",\"model_match\":"<<root_outcome.model_fingerprint_matches_request<<",\"parameters_verified\":"<<root_outcome.exact_zero_gap_roundtrip<<"}\n";
+
+            if(!root_outcome.lp_terminal_valid||!root_outcome.optimal)throw std::runtime_error("Round63 preparation LP did not finish validly");
+            calls<<"MIP,"<<remaining()<<'\n';calls.flush();
+        }
         AdaptiveExecution adaptive;
         ebrp::FixedIntervalMipOutcome outcome;
         if (policy.adaptive_branching == "root-sparse-2x2" ||

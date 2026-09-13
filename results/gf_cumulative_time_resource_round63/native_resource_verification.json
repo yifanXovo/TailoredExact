@@ -38,5 +38,69 @@
     "maximum_violation": 0.6538378538037433,
     "passed": true,
     "disabled_after_failure": 1
+  },
+  {
+    "number": 19,
+    "id": "micro-root",
+    "arm": "root",
+    "path": "results\\gf_cumulative_time_resource_round63\\local_raw\\micro_root_v2\\round63_root_lp.log.round63_prepare.cuts.jsonl",
+    "rows": 1,
+    "passed": true,
+    "kind": "first_LP_static_pool"
+  },
+  {
+    "number": 20,
+    "id": "D7",
+    "arm": "cuts",
+    "path": "results\\gf_cumulative_time_resource_round63\\local_raw\\failure_diagnostic_v2\\D7\\cuts\\native_gurobi.log.round63.cuts.jsonl",
+    "rows": 40,
+    "maximum_violation": 0.6538378538037433,
+    "passed": true,
+    "disabled_after_failure": 1
+  },
+  {
+    "number": 22,
+    "id": "D4",
+    "arm": "root-dry",
+    "path": "results\\gf_cumulative_time_resource_round63\\local_raw\\screen_root_v2\\D4\\root-dry\\round63_root_lp.log.round63_prepare.cuts.jsonl",
+    "rows": 3,
+    "passed": true,
+    "kind": "first_LP_static_pool"
+  },
+  {
+    "number": 23,
+    "id": "D4",
+    "arm": "root",
+    "path": "results\\gf_cumulative_time_resource_round63\\local_raw\\screen_root_v2\\D4\\root\\round63_root_lp.log.round63_prepare.cuts.jsonl",
+    "rows": 3,
+    "passed": true,
+    "kind": "first_LP_static_pool"
+  },
+  {
+    "number": 25,
+    "id": "D7",
+    "arm": "root-dry",
+    "path": "results\\gf_cumulative_time_resource_round63\\local_raw\\screen_root_v2\\D7\\root-dry\\round63_root_lp.log.round63_prepare.cuts.jsonl",
+    "rows": 3,
+    "passed": true,
+    "kind": "first_LP_static_pool"
+  },
+  {
+    "number": 26,
+    "id": "D7",
+    "arm": "root",
+    "path": "results\\gf_cumulative_time_resource_round63\\local_raw\\screen_root_v2\\D7\\root\\round63_root_lp.log.round63_prepare.cuts.jsonl",
+    "rows": 3,
+    "passed": true,
+    "kind": "first_LP_static_pool"
+  },
+  {
+    "number": 27,
+    "id": "micro-full-root",
+    "arm": "K1-off-root",
+    "path": "results\\gf_cumulative_time_resource_round63\\local_raw\\micro_full_root_v2\\external\\native_logs\\L0_lp.gurobi.log.round63_prepare.cuts.jsonl",
+    "rows": 1,
+    "passed": true,
+    "kind": "first_LP_static_pool"
   }
 ]

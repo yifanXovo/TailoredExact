@@ -14,9 +14,14 @@ def audit_native():
     witnesses=[];resources=[];thresholds=[];panels=run.panel()
     for e in run.runner.entries():
         folder=ROOT/e['destination']
-        if not e['charged'] or not (folder/'completion.json').exists() or e['id'] not in panels:continue
-        p=panels[e['id']]
-        assert run.sha(ROOT/p['instance_path'])==p['input_sha256']
+        if not e['charged'] or not (folder/'completion.json').exists():continue
+        if e['id'] in panels:
+            p=panels[e['id']]
+            assert run.sha(ROOT/p['instance_path'])==p['input_sha256']
+        elif e['kind']=='native-micro' and '--input' in e['command']:
+            cmd=e['command'];value=lambda arg:cmd[cmd.index(arg)+1]
+            p=dict(instance_path=value('--input'),T_seconds=value('--T'),pickup_seconds=value('--pickup-time'),drop_seconds=value('--drop-time'),**{'lambda':value('--lambda')})
+        else:continue
         paths=list(folder.glob('**/*witness.json'))
         if (folder/'result.json').exists() and 'routes' in read(folder/'result.json'):paths.append(folder/'result.json')
         for path in paths:
@@ -51,6 +56,21 @@ def audit_native():
             if stats['mode']=='cuts':assert stats['submitted']==stats['api_success']==len(records)
             else:assert stats['submitted']==stats['api_success']==0
             resources.append(dict(number=e['charged_number'],id=e['id'],arm=e['arm'],path=str(path.relative_to(ROOT)),rows=len(records),maximum_violation=maximum,passed=True,disabled_after_failure=stats['disabled_after_failure']))
+        for path in folder.glob('**/*.round63_prepare.cuts.jsonl'):
+            prefix=str(path)[:-len('.cuts.jsonl')];data=read(Path(prefix+'.data.json'));stats=read(Path(prefix+'.json'))
+            points={(int(r['query']),int(r['vehicle']),r['variable']):float(r['raw_value']) for r in csvrows(Path(prefix+'.points.csv'))}
+            records=[json.loads(s) for s in path.read_text().splitlines()];seen=set()
+            for cut in records:
+                assert cut['scope']=='original_physical_global' and cut['identity']==data['identity'] and cut['api_return']==-1
+                assert cut['vehicle'] not in seen;seen.add(cut['vehicle'])
+                c=resource_row(data,cut['vehicle'],cut['support']);assert c==cut['coefficients']
+                v=math.fsum(a*points[(1,cut['vehicle'],n)] for n,a in c.items());assert v>1e-7 and abs(v-cut['violation'])<1e-9
+            assert stats['queries']==1 and stats['maxflow_calls']==data['M'] and len(records)==stats['selected']<=data['M']
+            for mip in folder.glob('**/*.round63.json'):
+                native=read(mip)
+                if native.get('mode')=='root':assert native['prepared_static_rows']==native['static_rows_added']==len(records)
+                elif native.get('mode')=='root-dry':assert native['prepared_static_rows']==len(records) and native['static_rows_added']==0
+            resources.append(dict(number=e['charged_number'],id=e['id'],arm=e['arm'],path=str(path.relative_to(ROOT)),rows=len(records),passed=True,kind='first_LP_static_pool'))
     table('witness_verification.csv',witnesses);run.write(OUT/'native_resource_verification.json',resources);run.write(OUT/'threshold_verification.json',thresholds)
     print('independent routes',len(witnesses),'resource call traces',len(resources),'threshold proofs',len(thresholds))
 
@@ -58,7 +78,11 @@ def submitted():
     entries={e['charged_number']:e for e in run.runner.entries() if e['charged']};panels=run.panel();count=0
     for path in (OUT/'witnesses').glob('**/*.json'):
         e=entries[int(path.relative_to(OUT/'witnesses').parts[0])]
-        result=physical(panels[e['id']],read(path));assert result['original_T_feasible'];count+=1
+        if e['id'] in panels:p=panels[e['id']]
+        else:
+            cmd=e['command'];value=lambda arg:cmd[cmd.index(arg)+1]
+            p=dict(instance_path=value('--input'),T_seconds=value('--T'),pickup_seconds=value('--pickup-time'),drop_seconds=value('--drop-time'),**{'lambda':value('--lambda')})
+        result=physical(p,read(path));assert result['original_T_feasible'];count+=1
     assert count>0
     print('submitted independent original-route checks passed:',count)
 

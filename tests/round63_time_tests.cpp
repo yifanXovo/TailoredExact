@@ -76,6 +76,7 @@ void boundaries() {
     {std::ofstream o(path);o<<"unaltered model bytes\n";}auto hash=ebrp::fileSha256(path);
     ebrp::appendRound63TimeModel(in,path,"off");require(ebrp::fileSha256(path)==hash,"default off modifies model");std::filesystem::remove(path);
     require(ebrp::SolveOptions{}.round63_time_mode=="off","default not off");
+    require(ebrp::validRound63TimeMode("root")&&ebrp::validRound63TimeMode("root-dry")&&!ebrp::validRound63TimeMode("automatic-fastest"),"explicit mode registry");
 }
 }
 int main(){try{routes();fractions();boundaries();std::cout<<"Round63 route/subset enumeration, mincut, numerical and scope checks passed\n";return 0;}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

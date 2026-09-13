@@ -89,3 +89,82 @@ Round62's import had reset its global ledger in analysis processes only.
 Experiment processes import Round63 directly and used the correct ledger,
 commands and destinations. Explicitly rebind before reused runner operations;
 recompute summaries after the queue. This changes no solver/model mechanism.
+
+## B2 endpoints and B3 one-pass execution hypothesis
+
+v1 measured-source commit is 2e55f4d96; executables are preserved in
+build/round63-v1. All 12 physical witnesses and 4 dynamic cut traces pass
+independent recomputation after the queue. D4 OFF/simple/PreCrush/dry/cuts
+certify in 90.125/115.828/89.593/89.766/95.890 seconds. Simple materially
+regresses; dynamic separation costs 0.015-0.018 s and has no qualifying gain.
+D7 (120 s, uncertified) absolute gaps are OFF 0.4761606753, explicit
+0.1695257352, simple 0.5152904098, PreCrush=dry 0.3111209086, cuts 0.3642580016.
+Thus PreCrush confounds a naive OFF-versus-cuts improvement claim. Actual
+user cuts worsen gap relative to dry. Explicit flow independently improves
+the native UB to 0.3650270766 (OFF 0.6712367708), with small LB gain; it is
+not a proof-tail speed result. Simple rows cannot replace the useful full
+resource experiment on this evidence.
+
+D7 cuts submitted 40 valid rows, then disabled at query 15 / graph 57 by its
+optional failure guard. All API returns were zero; v1 did not persist the
+exception reason. First/last inherited root samples are nonnegative, so they
+cannot establish the failing intermediate point. Report this fallback and
+do not call it a complete 64-query execution. Add failure reason and one
+failure-point snapshot in the next build; retain original tolerances until
+the actual reason is known. No invalid cut or false certificate was found.
+
+B3 is a representation/execution alternative using the same proved resource,
+not a new threshold search: on the *first actual LP optimum*, run mincut once
+per vehicle, retain at most M most-violated rows, then add this small static
+set to subsequent MIPs. Full K1/Single-S reuse their already-required first
+LP; extraction, graphs and recording are new costs. A fixed-MIP harness pays
+one explicit preparation LP. No LP closure, callback, PreCrush, candidate,
+archive, start, local bound or historical point enters this arm. Root-dry
+performs the same preparation but adds no rows. All supports are global
+physical rows, so reuse across Gini intervals/epochs remains valid.
+
+Hypothesis: a few current-LP resource rows may retain useful long-route
+information with less native representation/search disruption than thousands
+of continuous variables or repeated user cuts. Before qualification, compare
+OFF/root-dry/root on D4 and D7 in one new frozen build, and inspect actual
+static row insertion, raw violations, native cost and original witnesses.
+Keep long/protection/K1/reference/two-confirmation reservations. First complete
+the charged same-v1 D4 explicit repeat required by interference record 7.
+
+The clean repeated v1 D4 explicit launch 18 again fails to certify at 120 s
+(118.094 s wall), whereas the same-build OFF launch 6 certifies at 90.125 s.
+No timing claim is drawn from excluded launch 7. v2 diagnostic launch 20
+identifies the dynamic fallback: `invalid raw route arc`, minimum raw x
+-2.5152396252603651e-8, after 15 queries / 57 graphs / 40 successful API
+submissions. The frozen -1e-8 search-input guard is unchanged. The optional
+separator stops safely and saves the failing raw point. All 40 earlier rows
+pass independent raw-activity verification. Do not label this a full-budget
+dynamic execution or relax the original certificate tolerance to hide it.
+
+The root-static native micro (launch 19) pays two LP/MIP optimizer calls,
+generates one valid global row and inserts exactly one ordinary MIP row.
+Independent route and resource checks pass. Screen_root_v2 now compares
+D4/D7 OFF, root-dry and root at 120 s (six launches). The pure-root modes
+never set PreCrush; their inherited `precrush=-1` summary is an unset telemetry
+sentinel, not a parameter setting. Core solver parameters retain readback.
+
+A's bounded supplement is fixed at nine launches: Single-S D3 and D4, and
+full multi-call K1-S C3, each OFF/inventory/service at cap 600. If C2 is useful
+after these outcomes, add only its service arm against the same-build K1-S
+OFF reserved for B, for at most ten A-attributed launches. This is a role
+selection for the experiment, not an instance-conditioned solver rule.
+
+The final development allocation is set before opening confirmations: after
+the root screen, run one bounded full-K1 root micro (third of at most four
+native micro launches), then A's nine runs. For B compare the same OFF /
+explicit / root rules in full K1 on C2 and D7 at 600 s, and Single-S D4 at
+600 s using the same-build A OFF as shared baseline. These eight additional
+B launches test both representations at the long budget without a parameter
+grid. Select at most one uniform B execution for C3 regression follow-up and
+both confirmations; a mathematically correct negative candidate may be
+selected for diagnostic integration, never described as promoted. Reserve
+four confirmation OFF/candidate runs (600 s each) and eight unchanged
+K1-H/P-GRB runs on C2, D7, C4 and C5 at the same 600 s cap. Candidate and
+driver/source/build hashes must be frozen before C4 input is opened, then
+C5 follows without intervening mechanism changes. Maximum forecast is 59
+charged launches including C2's optional service supplement, leaving reserve.

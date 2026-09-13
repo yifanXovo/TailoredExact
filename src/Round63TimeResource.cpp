@@ -118,7 +118,7 @@ bool acceptRound63TimeCut(const Round63TimeData& d,const Round63TimeCut& r,std::
         throw std::runtime_error("resource scope/coefficients mismatch");
     return r.violated&&r.violation>1e-7&&!r.support.empty()&&seen.insert(r.signature).second;
 }
-bool validRound63TimeMode(const std::string& m) {return m=="off"||m=="explicit"||m=="simple"||m=="dry"||m=="cuts"||m=="precrush";}
+bool validRound63TimeMode(const std::string& m) {return m=="off"||m=="explicit"||m=="simple"||m=="dry"||m=="cuts"||m=="precrush"||m=="root"||m=="root-dry";}
 void writeRound63TimeData(const Round63TimeData& d,const std::filesystem::path& path) {
     std::ofstream o(path);o<<std::setprecision(17)<<"{\"schema\":\"round63-resource-v1\",\"identity\":\""<<d.identity
         <<"\",\"scope\":\"original_physical_global\",\"V\":"<<d.V<<",\"M\":"<<d.M<<",\"scale\":"<<d.scale<<",\"handling\":"<<d.handling;

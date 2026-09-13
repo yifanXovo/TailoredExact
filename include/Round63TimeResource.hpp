@@ -2,6 +2,7 @@
 #include "Instance.hpp"
 #include <filesystem>
 #include <map>
+#include <ostream>
 #include <set>
 
 namespace ebrp {

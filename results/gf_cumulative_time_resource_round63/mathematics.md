@@ -118,6 +118,19 @@ separator; all required original rows remain. The LP diagnostic runs at most
 native flow micro has at most 24 LP calls under its shared cap. These are
 charged batches, not production-speed claims.
 
+The v2 `root` execution observes only the first optimal required LP, builds
+one graph per vehicle and retains at most M global rows. It performs no LP
+closure. `root-dry` uses the same observation and recording without insertion.
+Full algorithms reuse an LP already required by their control; the fixed
+MIP harness pays and records one extra preparation LP. Subsequent MIPs add
+the cached rows as ordinary static constraints, retaining the original
+canonical model and recording the actual native insertion count. No callback
+or PreCrush change is involved. LPs themselves remain unmodified, so an
+improved integer search is not an improved outer-LP bound by construction.
+Global physical scope permits reuse across intervals and incumbent epochs.
+Failure or an invalid LP lifecycle clears the optional pool. Root setup and
+the paid preparation LP are included in process wall/Work accounting.
+
 Native API scope and the presolve isolation follow Gurobi's
 [GRBcbcut documentation](https://docs.gurobi.com/projects/optimizer/en/current/reference/c/callback.html#c.GRBcbcut)
 and [PreCrush parameter](https://docs.gurobi.com/projects/optimizer/en/current/reference/parameters.html#parameter.PreCrush).

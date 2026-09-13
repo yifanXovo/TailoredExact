@@ -27,6 +27,7 @@
 #include <cstdlib>
 #include <filesystem>
 #include <fstream>
+#include <iomanip>
 #include <limits>
 #include <memory>
 #include <regex>
@@ -296,6 +297,8 @@ struct Round63NativeState {
     long long queries=0,graphs=0,selected=0,submitted=0,api_success=0,duplicates=0,root_queries=0,status_reads=0,vector_reads=0;
     double next_tree_node=1,seconds=0,setup_seconds=0,max_violation=0;
     bool disabled=false;
+    std::string failure_reason;
+    double minimum_raw_x=0,minimum_raw_pickup=0;
     void query(GurobiApi& api,void* cbdata) noexcept {
         if(disabled||queries>=64||selected>=256)return;
         const auto started=Clock::now();
@@ -311,8 +314,8 @@ struct Round63NativeState {
             ++queries;++vector_reads;
             if(api.cbget(cbdata,GRB_CB_MIPNODE,GRB_CB_MIPNODE_REL,values.data()))throw std::runtime_error("resource relaxation read");
             for(int k=0;k<data.M;++k)for(int i=0;i<=data.V;++i) {
-                if(i)point.pickup[k][i]=values.at(pindex[k][i]);
-                for(int j=0;j<=data.V;++j)if(i!=j)point.x[k][i][j]=values.at(xindex[k][i][j]);
+                if(i){point.pickup[k][i]=values.at(pindex[k][i]);minimum_raw_pickup=std::min(minimum_raw_pickup,point.pickup[k][i]);}
+                for(int j=0;j<=data.V;++j)if(i!=j){point.x[k][i][j]=values.at(xindex[k][i][j]);minimum_raw_x=std::min(minimum_raw_x,point.x[k][i][j]);}
             }
             for(int k=0;k<data.M&&selected<256;++k) {
                 ++graphs;auto cut=separateRound63Time(data,point,k);max_violation=std::max(max_violation,cut.violation);
@@ -327,7 +330,8 @@ struct Round63NativeState {
                 for(const auto& [name,c]:cut.coefficients){(void)c;points<<queries<<','<<k<<','<<name<<','<<values.at(index.at(name))<<'\n';}
                 if(!cuts||!points||code>0)throw std::runtime_error("resource evidence or submission failed");
             }
-        } catch(...) {disabled=true;}
+        } catch(const std::exception& e) {disabled=true;failure_reason=e.what();}
+          catch(...) {disabled=true;failure_reason="unknown_resource_exception";}
     }
 };
 
@@ -1498,7 +1502,10 @@ public:
             out.failure_reason = round50_policy.failure_reason;
             return out;
         }
-        if (!request.additional_linear_rows.empty()) {
+        auto additional_rows=request.additional_linear_rows;
+        if (!out.lp_relaxation && options_.round63_time_mode=="root")
+            additional_rows.insert(additional_rows.end(),round63_root_rows_.begin(),round63_root_rows_.end());
+        if (!additional_rows.empty()) {
             out.additional_linear_rows_attempted = true;
             if (retained) {
                 out.additional_linear_rows_status =
@@ -1521,9 +1528,9 @@ public:
             std::ostringstream signature_ledger;
             int add_rc = 0;
             for (std::size_t row_index = 0;
-                 rows_valid && row_index < request.additional_linear_rows.size();
+                 rows_valid && row_index < additional_rows.size();
                  ++row_index) {
-                const auto& row = request.additional_linear_rows[row_index];
+                const auto& row = additional_rows[row_index];
                 rows_valid = !row.row_name.empty() &&
                     row_names.insert(row.row_name).second &&
                     !row.canonical_signature.empty() &&
@@ -1568,10 +1575,10 @@ public:
             const bool row_count_valid = rows_valid && update_rc == 0 &&
                 api_.getintattr(model, GRB_INT_ATTR_NUMCONSTRS, &rows_after) == 0 &&
                 rows_after == native_rows +
-                    static_cast<int>(request.additional_linear_rows.size());
+                    static_cast<int>(additional_rows.size());
             out.additional_linear_rows_valid = rows_valid && row_count_valid &&
                 out.additional_linear_rows_added == static_cast<long long>(
-                    request.additional_linear_rows.size());
+                    additional_rows.size());
             out.additional_linear_row_signatures = signature_ledger.str();
             out.additional_linear_rows_status = out.additional_linear_rows_valid
                 ? "added_to_fresh_model_and_count_read_back"
@@ -1584,7 +1591,7 @@ public:
             out.native_model_modified = true;
             out.model_linear_constraint_count = rows_after;
             if (request.round59_additional_rows_user_pool) {
-                const int count = static_cast<int>(request.additional_linear_rows.size());
+                const int count = static_cast<int>(additional_rows.size());
                 std::vector<int> lazy(static_cast<std::size_t>(count), -1);
                 std::vector<int> readback(static_cast<std::size_t>(count), 0);
                 if (api_.setintattrarray(model, GRB_INT_ATTR_LAZY,
@@ -2269,6 +2276,10 @@ public:
 
         if(resource_mip) {
             resource.cuts.close();resource.points.close();
+            if(resource.disabled) {
+                std::ofstream failed(request.native_log_path.string()+".round63.failure_point.csv");failed.precision(17);failed<<"variable,raw_value\n";
+                for(const auto& [name,index]:resource.index)if(name.rfind("x_",0)==0||name.rfind("p_",0)==0)failed<<name<<','<<resource.values.at(index)<<'\n';
+            }
             std::ofstream log(request.native_log_path.string()+".round63.json");log.precision(17);
             log<<"{\"mode\":\""<<options_.round63_time_mode<<"\",\"model_sha256\":\""<<request.canonical_model_fingerprint
                <<"\",\"resource_identity\":\""<<resource.data.identity<<"\",\"queries\":"<<resource.queries
@@ -2276,6 +2287,10 @@ public:
                <<",\"vector_reads\":"<<resource.vector_reads<<",\"selected\":"<<resource.selected<<",\"submitted\":"<<resource.submitted
                <<",\"api_success\":"<<resource.api_success<<",\"duplicates\":"<<resource.duplicates<<",\"disabled_after_failure\":"<<resource.disabled
                <<",\"setup_seconds\":"<<resource.setup_seconds<<",\"callback_seconds\":"<<resource.seconds
+               <<",\"failure_reason\":"<<std::quoted(resource.failure_reason)<<",\"minimum_raw_x\":"<<resource.minimum_raw_x
+               <<",\"minimum_raw_pickup\":"<<resource.minimum_raw_pickup<<",\"prepared_static_rows\":"<<round63_root_rows_.size()
+               <<",\"static_rows_added\":"<<((options_.round63_time_mode=="root")?out.additional_linear_rows_added:0)
+               <<",\"static_pool_failure\":"<<std::quoted(round63_root_failure_)
                <<",\"maximum_normalized_violation\":"<<resource.max_violation<<",\"precrush\":"<<out.gurobi_precrush_effective<<"}\n";
         }
 
@@ -2762,6 +2777,8 @@ public:
                     return 4.0 * clipped * (1.0 - clipped);
                 };
                 if (diagnostics_ok) {
+                    if ((options_.round63_time_mode=="root"||options_.round63_time_mode=="root-dry") && !round63_root_observed_)
+                        observeRound63Root(values,request);
                     for (const auto& item : values) {
                         if (item.first.rfind("x_", 0) == 0) {
                             out.route_binary_fractionality +=
@@ -3091,6 +3108,10 @@ public:
         } else {
             out.failure_reason = "none";
         }
+        if (out.lp_relaxation && round63_root_source_==request.native_log_path.string() &&
+            (!out.lp_terminal_valid||!out.model_fingerprint_matches_request)) {
+            round63_root_rows_.clear();round63_root_failure_="invalid_source_lp_lifecycle";
+        }
         if (paper_solve && !request.retain_model_after_solve) {
             out.retained_state_classification =
                 out.in_memory_model_reused
@@ -3125,6 +3146,42 @@ private:
         double cumulative_barrier_iterations = 0.0;
         std::vector<char> original_variable_types;
     };
+
+
+    bool round63_root_observed_=false;
+    std::string round63_root_source_,round63_root_failure_;
+    std::vector<FixedIntervalMipRequest::AdditionalLinearRow> round63_root_rows_;
+    void observeRound63Root(const std::unordered_map<std::string,double>& values,const FixedIntervalMipRequest& request) {
+        round63_root_observed_=true;round63_root_source_=request.native_log_path.string();
+        const auto start=Clock::now();long long graphs=0;
+        try {
+            const auto data=prepareRound63Time(instance_);auto point=emptyRound63TimePoint(data);
+            for(int k=0;k<data.M;++k)for(int i=0;i<=data.V;++i){
+                if(i)point.pickup[k][i]=values.at("p_"+std::to_string(k)+"_"+std::to_string(i));
+                for(int j=0;j<=data.V;++j)if(i!=j)point.x[k][i][j]=values.at("x_"+std::to_string(k)+"_"+std::to_string(i)+"_"+std::to_string(j));
+            }
+            const auto prefix=round63_root_source_+".round63_prepare";
+            writeRound63TimeData(data,prefix+".data.json");
+            std::ofstream cuts(prefix+".cuts.jsonl"),terms(prefix+".points.csv");terms.precision(17);terms<<"query,vehicle,variable,raw_value\n";
+            std::set<std::string> seen;
+            std::vector<FixedIntervalMipRequest::AdditionalLinearRow> pending;
+            for(int k=0;k<data.M;++k){++graphs;const auto cut=separateRound63Time(data,point,k);
+                if(!acceptRound63TimeCut(data,cut,seen))continue;
+                writeRound63TimeCut(cut,cuts,1,0,-1);
+                FixedIntervalMipRequest::AdditionalLinearRow row;row.row_name="r63_root_"+std::to_string(k);row.scope="global";row.canonical_signature=cut.signature;
+                for(const auto& [n,c]:cut.coefficients){row.variable_names.push_back(n);row.coefficients.push_back(c);terms<<1<<','<<k<<','<<n<<','<<values.at(n)<<'\n';}
+                pending.push_back(std::move(row));
+            }
+            if(!cuts||!terms)throw std::runtime_error("root resource persistence failed");
+            round63_root_rows_=std::move(pending);
+        } catch(const std::exception& e) {round63_root_rows_.clear();round63_root_failure_=e.what();}
+          catch(...) {round63_root_rows_.clear();round63_root_failure_="unknown_root_resource_exception";}
+        std::ofstream log(round63_root_source_+".round63_prepare.json");log.precision(17);
+        log<<"{\"mode\":"<<std::quoted(options_.round63_time_mode)<<",\"sample_kind\":\"first_optimal_required_LP\",\"model_sha256\":"
+           <<std::quoted(request.canonical_model_fingerprint)<<",\"queries\":1,\"maxflow_calls\":"<<graphs<<",\"root_queries\":0,\"selected\":"<<round63_root_rows_.size()
+           <<",\"submitted\":0,\"api_success\":0,\"disabled_after_failure\":"<<(!round63_root_failure_.empty())<<",\"failure_reason\":"<<std::quoted(round63_root_failure_)
+           <<",\"callback_seconds\":0,\"setup_seconds\":"<<std::chrono::duration<double>(Clock::now()-start).count()<<"}\n";
+    }
 
     const Instance& instance_;
     SolveOptions options_;
