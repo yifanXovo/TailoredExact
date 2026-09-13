@@ -2139,6 +2139,33 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             : std::filesystem::path(options.external_gini_artifact_dir);
     std::filesystem::create_directories(artifact_dir / "models");
     std::filesystem::create_directories(artifact_dir / "native_logs");
+    if (options.algorithm_preset.rfind("research-round64-", 0) == 0) {
+        // Exact current-run startup witness, before any native LP/MIP and
+        // before the universal verified-zero stop. No replay or native Start.
+        // Both research OFF and resource arms pay the same persistence cost.
+        std::ofstream witness(artifact_dir / "initial_witness.json");
+        witness << std::setprecision(17) << "{\"objective\":"
+                << verified_seed.objective << ",\"routes\":[";
+        for (std::size_t k = 0; k < verified_seed.routes.size(); ++k) {
+            const auto& route = verified_seed.routes[k];
+            if (k) witness << ',';
+            witness << "{\"vehicle\":" << route.vehicle << ",\"nodes\":[";
+            for (std::size_t i = 0; i < route.nodes.size(); ++i) {
+                if (i) witness << ',';
+                witness << route.nodes[i];
+            }
+            witness << "],\"operations\":[";
+            for (std::size_t i = 0; i < route.operations.size(); ++i) {
+                const auto& op = route.operations[i];
+                if (i) witness << ',';
+                witness << "{\"station\":" << op.station << ",\"pickup\":"
+                        << op.pickup << ",\"drop\":" << op.drop << '}';
+            }
+            witness << "]}";
+        }
+        witness << "]}\n";
+        if (!witness) throw std::runtime_error("Round64 startup witness persistence failed");
+    }
     recordProcessPhase(
         options, "external_artifact_directory_creation", "complete",
         artifact_dir.string());

@@ -1,6 +1,7 @@
 #include "CplexBaseline.hpp"
 #include "Round62Thresholds.hpp"
 #include "Round63TimeResource.hpp"
+#include "Round64SharedResource.hpp"
 #include "CanonicalCompactModel.hpp"
 #include "ConnectivityFlow.hpp"
 #include "IntervalRowFactory.hpp"
@@ -4344,6 +4345,12 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
             if (!spec.strengthened || !spec.interval_restricted || options.plain_baseline)
                 throw std::runtime_error("Round62 requires isolated complete F0 interval model");
             appendRound62ThresholdModel(instance,path,options.round62_threshold_mode,spec.gamma_L,spec.gamma_U);
+        }
+        if (options.round64_shared_mode != "off") {
+            if(!spec.strengthened || !spec.interval_restricted || options.plain_baseline ||
+               options.round63_time_mode!="off" || options.round62_threshold_mode!="off")
+                throw std::runtime_error("Round64 requires isolated canonical F0");
+            appendRound64SharedModel(instance,path,options.round64_shared_mode);
         }
         if (options.round63_time_mode != "off") {
             if (!spec.strengthened || !spec.interval_restricted || options.plain_baseline)
