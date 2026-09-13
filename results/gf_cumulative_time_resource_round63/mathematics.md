@@ -70,6 +70,26 @@ subset-duration block is not restored. Any empirical extra strength must be
 shown in the actual F0 region, with the old blocks present, not inferred from
 the family names. No equivalence of replacing any of those blocks is claimed.
 
+The optional historical IR1/IR2/IR3 root closures are **off** in this round's
+core F0. Their formulas, not their optional execution, are the comparison
+above. A concrete algebraic separation of the flow families is useful:
+take four stations, zero travel, c=1, T=1, Q=2 and x=1/2 on the cycle
+0,1,2,3,4,0 (zero on every other arc). Set p1=p3=d2=d4=1/2.
+Initial inventories (2,0,2,0), final inventories (3/2,1/2,3/2,1/2) and
+domains [0,2] satisfy inventory balance. Load flow is 1/2 on arcs 1->2
+and 3->4 and zero otherwise, below Q*x=1. Summing this load balance over
+any W proves every mixed inbound/outbound IR inequality. Their projected
+versions using these physical domains are weaker. Visit flow can send 2 from
+depot and consume 1/2 per station: arc amounts 2,3/2,1,1/2,0, within 4*x=2.
+Global duration
+is c*sum p=1=T and singleton resource rows hold, but the whole-set resource
+row requires 1<=T*x40=1/2 and is violated. Thus those load/visit-flow and
+inventory-route families do not by themselves imply cumulative duration.
+This is an algebraic family comparison, not a claim that every other F0 row
+or the nonlinear objective has been checked on this toy point. The actual
+optimal F0 LP witnesses and the proper-subset violations after the simple
+arm establish the separately measured incremental strength in the real model.
+
 ## Numerical implementation and scope
 
 The code validates nonnegative finite original travel/handling/T. Shortest
@@ -134,6 +154,27 @@ In v3 both root and root-dry read a fresh canonical model for each native
 call; retained-model reuse is disabled for these two research modes. This
 prevents MIP-only rows from contaminating a later LP or being appended twice.
 It adds model-read cost, not optimizer calls, and the dry control isolates it.
+
+## Carried-load strengthening of the explicit extension
+
+Let load_ki be the existing post-service node load, zero at an unvisited
+station by load_ki<=Q_k*z_ki. Empty departure and nonnegative deliveries give
+load_ki<=sum of prior/current pickups. On the unique outgoing used arc the
+canonical f embedding is accumulated downward-rounded travel plus the same
+downward-rounded c/scale times those pickups. Therefore the additional row
+`(c/scale)*load_ki - sum_j f_kij <= 0` is valid for every original route
+embedding, including loaded return and total pickup greater than Q_k. This
+uses M*V extra rows, no extra variables beyond explicit time flow. c=0 rows
+are redundant and omitted. The `coupled` research mode retains all base rows.
+
+This is a lower bound on node throughput in the resource network. The earlier
+ordinary mincut equivalence covers the original explicit extension, not
+these additional lower bounds. No separator for their complete projection is
+claimed. A violated added row at one explicit f solution only proves a change
+in extended space. To test projection at a recorded old-variable point, leave
+all f variables free and solve the pinned explicit/coupled feasibility pair;
+require the explicit control to remain feasible before interpreting any
+coupled infeasibility. These diagnostic bounds never enter a global certificate.
 
 Native API scope and the presolve isolation follow Gurobi's
 [GRBcbcut documentation](https://docs.gurobi.com/projects/optimizer/en/current/reference/c/callback.html#c.GRBcbcut)

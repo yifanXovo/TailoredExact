@@ -51,6 +51,10 @@ def strength_tables():
         markdown(['id','sample','vehicle','proper/support size','max raw normalized violation','whole-set violation','max singleton violation'],[
             [r[k] for k in ['id','arm','vehicle','support_size','maximum_violation','all_violation','max_singleton_violation']] for r in supports])]
     (OUT/'strength_tables.md').write_text('\n'.join(text),encoding='utf-8')
+    coupling=[]
+    for path in sorted(RAW.glob('**/coupling_result.json')):
+        d=read(path);coupling.append(dict(id=path.parent.name,**d))
+    if coupling:analysis.table('coupling_summary.csv',coupling)
 
 def audit_parameters():
     checked=[]
@@ -71,6 +75,22 @@ def audit_parameters():
     run.write(OUT/'parameter_verification.json',checked)
     return checked
 
+def audit_outer_contract():
+    records=[]
+    for e in run.runner.entries():
+        folder=ROOT/e['destination'];ledger=folder/'external/adaptive_mass_decision_ledger.csv'
+        if not (folder/'completion.json').exists() or not ledger.exists():continue
+        decisions=rows(ledger)
+        for d in decisions:
+            assert int(d['K0'])==1 and abs(float(d['tau'])-.08)<1e-14
+        result=read(folder/'result.json')
+        records.append(dict(number=e['charged_number'],id=e['id'],arm=e['arm'],
+            actual_adaptive_decisions=len(decisions),actual_tau=.08 if decisions else None,
+            inherited_compatibility_rho=result.get('c6_normalized_split_threshold'),
+            distinction='first-class controller uses split_threshold; compatibility C6 rho is not its tau',
+            evidence=str(ledger.relative_to(ROOT))))
+    run.write(OUT/'outer_contract_verification.json',records)
+
 def evidence_index():
     # Hash once after performance, never compete with optimizer timing. Keep
     # logs/binaries local; submit sparse rows and physically checked witnesses.
@@ -89,7 +109,7 @@ def evidence_index():
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--index',action='store_true');a=p.parse_args()
-    runs=analysis.summarize();compact_tables(runs);strength_tables();checked=audit_parameters()
+    runs=analysis.summarize();compact_tables(runs);strength_tables();checked=audit_parameters();audit_outer_contract()
     print('parameter records',len(checked),'unverified',[r['number'] for r in checked if not r['roundtrip_valid']])
     if a.index:print('indexed',len(evidence_index()),'local files')
 if __name__=='__main__':main()

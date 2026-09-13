@@ -54,6 +54,35 @@ Process wall includes setup and finalization. Uncertified wall is budget use, no
 | 26 | D7 | root | 120 | 118.437 | no | 0.63257 | 0.195138 | 0.437432 | 283.778 | 2 | yes |
 
 
+## micro_full_root_v2
+
+| # | id | arm | cap | wall s | certificate | UB | LB | absolute gap | Work | calls | eligible |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 27 | micro-full-root | K1-off-root | 20 | 0.219 | no | 0.725 | 0.225 | 0.5 | 0.00131852 | 3 | no |
+
+
+## micro_full_root_v3
+
+| # | id | arm | cap | wall s | certificate | UB | LB | absolute gap | Work | calls | eligible |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 28 | micro-full-root | K1-off-root | 20 | 0.204 | yes | 0.325 | 0.325 | -5.55112e-17 | 0.00244911 | 4 | yes |
+
+
+## full_dev_v3
+
+| # | id | arm | cap | wall s | certificate | UB | LB | absolute gap | Work | calls | eligible |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 29 | D3 | Single-off-off | 600 | 316.047 | yes | 0.0450016 | 0.0450015 | 3.68193e-10 | 523.338 | 2 | yes |
+| 30 | D3 | Single-projection-off | 600 | 462.531 | yes | 0.0450016 | 0.0450016 | 1.8735e-16 | 853.121 | 2 | yes |
+| 31 | D3 | Single-projection-service-off | 600 | 308.843 | yes | 0.0450016 | 0.0450016 | 6.93889e-18 | 523.65 | 2 | yes |
+| 32 | D4 | Single-off-off | 600 | 90.14 | yes | 0.506343 | 0.506343 | 3.19211e-10 | 140.987 | 2 | yes |
+| 33 | D4 | Single-projection-off | 600 | 55.109 | yes | 0.506343 | 0.506343 | 2.11653e-09 | 85.953 | 2 | yes |
+| 34 | D4 | Single-projection-service-off | 600 | 78.547 | yes | 0.506343 | 0.506343 | -1.11022e-16 | 120.819 | 2 | yes |
+| 35 | C3 | K1-off-off | 600 | 597.078 | no | 0.817996 | 0.719468 | 0.0985278 | 1337.74 | 4 | yes |
+| 36 | C3 | K1-projection-off | 600 | 597.063 | no | 0.823086 | 0.717253 | 0.105832 | 1318.39 | 4 | yes |
+| 37 | C3 | K1-projection-service-off | 600 | 598.422 | no | 0.828917 | 0.718842 | 0.110075 | 1294.59 | 4 | yes |
+
+
 ## Predeclared dual-threshold decisions
 
 | id | scope | baseline # | candidate # | baseline | candidate | decision |
@@ -78,4 +107,10 @@ Process wall includes setup and finalization. Uncertified wall is budget use, no
 | D7 | fixed_F0_improving_domain | 24 | 25 | off | root-dry | below_gap_threshold |
 | D7 | fixed_F0_improving_domain | 24 | 26 | off | root | gap_gain |
 | D7 | fixed_F0_improving_domain | 25 | 26 | root-dry | root | gap_gain |
+| D3 | full_original_problem | 29 | 30 | Single-off-off | Single-projection-off | time_loss |
+| D3 | full_original_problem | 29 | 31 | Single-off-off | Single-projection-service-off | below_time_threshold |
+| D4 | full_original_problem | 32 | 33 | Single-off-off | Single-projection-off | time_gain |
+| D4 | full_original_problem | 32 | 34 | Single-off-off | Single-projection-service-off | time_gain |
+| C3 | full_original_problem | 35 | 36 | K1-off-off | K1-projection-off | gap_loss |
+| C3 | full_original_problem | 35 | 37 | K1-off-off | K1-projection-service-off | gap_loss |
 | D4 | fixed_F0_improving_domain | 6 | 18 | off | explicit | certificate_loss |

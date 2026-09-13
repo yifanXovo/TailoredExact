@@ -33,12 +33,13 @@ void savePoint(const FixedIntervalMipOutcome& o,const std::filesystem::path& pat
 int main(int argc,char** argv) {
     try {
         const auto started=std::chrono::steady_clock::now();auto elapsed=[&](){return std::chrono::duration<double>(std::chrono::steady_clock::now()-started).count();};
-        std::string input,source,expected,output;double T=3600,pickup=60,drop=60,cap=120;bool micro=false;
+        std::string input,source,expected,output;double T=3600,pickup=60,drop=60,cap=120;bool micro=false,coupling=false,pinned_feasibility=false;
         for(int i=1;i<argc;++i){std::string a=argv[i];auto value=[&](){if(++i==argc)throw std::runtime_error("argument missing");return std::string(argv[i]);};
             if(a=="--input")input=value();else if(a=="--model")source=value();else if(a=="--expected-sha")expected=value();else if(a=="--out")output=value();
             else if(a=="--T")T=std::stod(value());else if(a=="--pickup-time")pickup=std::stod(value());else if(a=="--drop-time")drop=std::stod(value());
-            else if(a=="--cap")cap=std::stod(value());else if(a=="--micro")micro=true;else throw std::runtime_error("unknown probe argument");}
-        if(output.empty()||cap<=0||cap>300)throw std::runtime_error("invalid probe cap/output");
+            else if(a=="--cap")cap=std::stod(value());else if(a=="--micro")micro=true;else if(a=="--coupling-probe")coupling=true;else throw std::runtime_error("unknown probe argument");}
+        if(output.empty()||cap<=0||cap>300||(micro&&coupling))throw std::runtime_error("invalid probe cap/output");
+        const int query_limit=micro?24:coupling?4:67;
         const std::filesystem::path dir(output);std::filesystem::create_directories(dir);
         Instance in;
         if(micro){in.V=4;in.M=1;in.Q={3};in.initial.assign(5,5);in.capacity.assign(5,10);in.target.assign(5,5);in.weights.assign(5,.25);
@@ -57,17 +58,17 @@ int main(int argc,char** argv) {
         terms<<std::setprecision(17)<<"query,vehicle,variable,value\n";int count=0,graphs=0,total_rows=0;double separation_seconds=0;bool closed=false;double base_obj=0,explicit_obj=0,simple_obj=0,closure_obj=0;
         std::vector<FixedIntervalMipRequest::AdditionalLinearRow> rows;
         auto solve=[&](const std::filesystem::path& path,const std::string& arm) {
-            const double remaining=cap-elapsed()-3;if(remaining<=0||count>=(micro?24:67))throw std::runtime_error("probe bounded budget exhausted");
+            const double remaining=cap-elapsed()-3;if(remaining<=0||count>=query_limit)throw std::runtime_error("probe bounded budget exhausted");
             FixedIntervalMipRequest req;req.solve_kind=FixedIntervalSolveKind::PaperLpRelaxation;req.leaf_id=arm+std::to_string(count);
             req.gamma_L=0;req.gamma_U=1;req.verified_cutoff=1e6;req.global_deadline_remaining_seconds=remaining;req.time_limit_seconds=remaining;
             req.canonical_model_path=path;req.canonical_model_fingerprint=fileSha256(path);req.canonical_row_signature=req.canonical_model_fingerprint;
-            req.canonical_model_scope="diagnostic_physical_global";req.native_log_path=dir/("lp_"+std::to_string(count)+".log");
+            req.canonical_model_scope=pinned_feasibility?"diagnostic_fixed_LP_point":"diagnostic_physical_global";req.native_log_path=dir/("lp_"+std::to_string(count)+".log");
             req.capture_lp_primal_dual_evidence=true;req.interval_mip_policy="interval-mip-core-no-exhaustive-subset-duration";req.additional_linear_rows=rows;
             calls<<std::setprecision(17)<<count<<','<<arm<<','<<remaining<<','<<req.canonical_model_fingerprint<<','<<rows.size()<<'\n';calls.flush();++count;
             const auto o=backend->solve(req);const bool valid=o.optimal&&o.lp_terminal_valid&&o.lp_primal_dual_evidence_available&&o.model_fingerprint_matches_request;
             summary<<count-1<<','<<arm<<','<<o.native_status<<','<<o.optimal<<','<<o.lp_objective_value<<','<<o.work<<','<<o.solver_runtime_seconds<<','
                 <<o.model_linear_constraint_count<<','<<o.model_variable_count<<','<<o.model_nonzero_count<<','<<valid<<','<<elapsed()<<'\n';summary.flush();
-            if(!o.available||!o.attempted||(!micro&&!valid))throw std::runtime_error("invalid LP probe outcome: "+o.failure_reason+" "+o.native_status);
+            if(!o.available||!o.attempted||(!micro&&!valid&&!(pinned_feasibility&&o.infeasible&&o.lp_terminal_valid)))throw std::runtime_error("invalid LP probe outcome: "+o.failure_reason+" "+o.native_status);
             return o;
         };
         auto analyze=[&](const FixedIntervalMipOutcome& o,const std::string& arm,bool add){
@@ -104,6 +105,43 @@ int main(int argc,char** argv) {
                 if(!agrees)throw std::runtime_error("micro explicit flow equivalence failure");
             }
             if(!feasible||!infeasible)throw std::runtime_error("micro classes absent");closed=true;
+        } else if(coupling) {
+            auto explicit_path=dir/"explicit.lp",coupled_path=dir/"coupled.lp";
+            std::filesystem::copy_file(source,explicit_path);appendRound63TimeModel(in,explicit_path,"explicit");
+            std::filesystem::copy_file(source,coupled_path);appendRound63TimeModel(in,coupled_path,"coupled");
+            const auto original=solve(explicit_path,"explicit");savePoint(original,dir/"explicit_point.csv");
+            const auto joined=solve(coupled_path,"coupled");savePoint(joined,dir/"coupled_point.csv");
+            std::map<std::string,double> values;
+            for(const auto& v:original.lp_primal_dual_variable_evidence)values[v.name]=v.primal_value;
+            double maximum=0;
+            for(int k=0;k<d.M;++k)for(int i=1;i<=d.V;++i){
+                double activity=d.handling*values.at("load_"+std::to_string(k)+"_"+std::to_string(i));
+                for(int j=0;j<=d.V;++j)if(i!=j)activity-=values.at("r63f_"+std::to_string(k)+"_"+std::to_string(i)+"_"+std::to_string(j));
+                maximum=std::max(maximum,activity);
+            }
+            // Check extension feasibility at the same complete old-variable
+            // point. Pin neither version's f. The pinned explicit control
+            // detects numerical inconsistency of the point-fixing operation.
+            pinned_feasibility=true;
+            for(const auto& v:original.lp_primal_dual_variable_evidence){
+                if(v.name.rfind("r63f_",0)==0)continue;
+                FixedIntervalMipRequest::AdditionalLinearRow row;row.row_name="r63_pin_"+std::to_string(rows.size());
+                row.canonical_signature="diagnostic_pin:"+v.name;row.scope="diagnostic_fixed_point";row.sense='=';row.rhs=v.primal_value;
+                row.variable_names={v.name};row.coefficients={1};rows.push_back(std::move(row));
+            }
+            const auto pinned_original=solve(explicit_path,"pinned-explicit");
+            const auto pinned_joined=solve(coupled_path,"pinned-coupled");
+            if(pinned_joined.optimal)savePoint(pinned_joined,dir/"pinned_coupled_point.csv");
+            backend->release();const auto stats=backend->stats();
+            std::ofstream result(dir/"coupling_result.json");result<<std::setprecision(17)
+                <<"{\"optimizer_calls\":"<<count<<",\"query_limit\":4,\"maxflow_calls\":0,\"explicit\":"<<original.lp_objective_value
+                <<",\"coupled\":"<<joined.lp_objective_value<<",\"explicit_point_maximum_carried_violation\":"<<maximum
+                <<",\"pinned_explicit_feasible\":"<<pinned_original.optimal<<",\"pinned_coupled_feasible\":"<<pinned_joined.optimal
+                <<",\"pinned_coupled_infeasible\":"<<pinned_joined.infeasible<<",\"original_variables_pinned\":"<<rows.size()
+                <<",\"carried_rows\":"<<(d.handling>0?d.M*d.V:0)<<",\"process_seconds\":"<<elapsed()
+                <<",\"parameter_roundtrip\":"<<stats.parameter_roundtrip_valid<<"}\n";
+            if(!result)throw std::runtime_error("coupling evidence persistence failure");
+            return 0;
         } else {
             auto baseline=solve(source,"F0");base_obj=baseline.lp_objective_value;savePoint(baseline,dir/"F0_point.csv");analyze(baseline,"F0",false);
             auto flow=dir/"explicit.lp";std::filesystem::copy_file(source,flow);appendRound63TimeModel(in,flow,"explicit");

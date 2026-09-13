@@ -70,7 +70,15 @@ def build_freeze(version):
 
 def execute(cmd,dest,p,arm,stage,cap,kind='performance',calls=1):
     bind_runner()
-    if p.get('stage')=='confirmation' and not (OUT/'confirmation_freeze.json').exists(): raise RuntimeError('confirmation closed')
+    if p.get('stage')=='confirmation':
+        if not (OUT/'confirmation_freeze.json').exists():raise RuntimeError('confirmation closed')
+        frozen=json.loads((OUT/'confirmation_freeze.json').read_text())
+        assert sha(OUT/'active_build.json')==frozen['active_build_sha256']
+        assert sha(Path(__file__))==frozen['driver_sha256']
+        allowed=['off',frozen['resource_mode']] if kind=='build-only' else frozen['allowed_arms']
+        if arm not in allowed:raise RuntimeError('arm outside confirmation freeze')
+        if cap!=frozen['cap_seconds'] and kind!='build-only':raise RuntimeError('confirmation cap changed')
+        if p['id']=='C5' and not any(e['id']=='C4' for e in runner.entries()):raise RuntimeError('C4 must open first')
     if 'input_sha256' in p: assert sha(ROOT/p['instance_path'])==p['input_sha256']
     entries=runner.entries()
     for seconds,maximum in [(1800,4),(3600,2)]:
@@ -142,13 +150,42 @@ def service(ids,cap,stage,build=False):
                 execute(cmd,dest,p,threshold,stage,cap,'build-only',0)
             else:full([identity],['off'],cap,stage,identity in ['C2','C3'],threshold)
 
+def confirm_freeze(mode,cap):
+    if mode not in ['explicit','root','coupled']:raise RuntimeError('freeze one developed resource execution')
+    path=OUT/'confirmation_freeze.json'
+    if path.exists():raise RuntimeError('confirmation already frozen')
+    if any(e['id'] in ['C4','C5'] for e in runner.entries()):raise RuntimeError('confirmation already opened')
+    candidate=OUT/'selected_candidate.json'
+    if not candidate.exists():raise RuntimeError('write reviewable selection rationale first')
+    selected=json.loads(candidate.read_text());assert selected['resource_mode']==mode
+    active=json.loads((OUT/'active_build.json').read_text())
+    write(path,dict(frozen_unix=time.time(),resource_mode=mode,cap_seconds=cap,
+        allowed_arms=['K1-off-off','K1-off-'+mode,'K1-H','P-GRB'],threshold_mode='off',
+        active_build_sha256=sha(OUT/'active_build.json'),build_freeze=active,
+        driver_sha256=sha(Path(__file__)),protocol_sha256=sha(OUT/'protocol.json'),
+        selection_sha256=sha(candidate),opening_order=['C4','C5'],
+        previous_evidence_charged=[e['charged_number'] for e in runner.entries() if e['charged']],
+        uniformity='one frozen execution, no per-instance fallback/winner selection',
+        source_status='previously public; not used in Round63 selection; no sealed-new claim'))
+
+def coupling(ids,cap,stage):
+    for identity in ids:
+        p=panel()[identity];dest=RAW/stage/identity
+        source=RAW/'preflight_v4'/identity/'off'/'canonical_model.lp'
+        cmd=[BUILD/'Round63ResourceProbe.exe','--coupling-probe','--input',p['instance_path'],
+             '--T',p['T_seconds'],'--pickup-time',p['pickup_seconds'],'--drop-time',p['drop_seconds'],
+             '--model',source,'--expected-sha',sha(source),'--out',dest,'--cap',cap]
+        execute(cmd,dest,p,'explicit-carried-load-LP',stage,cap,'LP',4)
+
 def main():
-    p=argparse.ArgumentParser();p.add_argument('action',choices=['freeze','build-freeze','build','lp','solve','full','k1','reference','service','service-build'])
+    p=argparse.ArgumentParser();p.add_argument('action',choices=['freeze','build-freeze','build','lp','solve','full','k1','reference','service','service-build','confirm-freeze','coupling'])
     p.add_argument('--ids',nargs='+',default=['D4']);p.add_argument('--modes',nargs='+',default=['off'])
     p.add_argument('--version',default='v1');p.add_argument('--cap',type=int,default=120)
     p.add_argument('--stage',default='dev');p.add_argument('--threshold',default='off');a=p.parse_args()
     if a.action=='freeze': freeze()
     elif a.action=='build-freeze': build_freeze(a.version)
+    elif a.action=='confirm-freeze':confirm_freeze(a.modes[0],a.cap)
+    elif a.action=='coupling':coupling(a.ids,a.cap,a.stage)
     elif a.action in ['build','lp','solve']: fixed(a.ids,a.modes,a.cap,a.stage,a.action)
     elif a.action=='reference':reference(a.ids,a.cap,a.stage)
     elif a.action in ['service','service-build']:service(a.ids,a.cap,a.stage,a.action=='service-build')

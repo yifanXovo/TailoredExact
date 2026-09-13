@@ -1,0 +1,167 @@
+{
+  "objective": 0.8230855227563115,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        10,
+        19,
+        13,
+        12,
+        0
+      ],
+      "operations": [
+        {
+          "station": 10,
+          "pickup": 3,
+          "drop": 0
+        },
+        {
+          "station": 19,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 13,
+          "pickup": 0,
+          "drop": 4
+        },
+        {
+          "station": 12,
+          "pickup": 0,
+          "drop": 3
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        14,
+        21,
+        18,
+        16,
+        0
+      ],
+      "operations": [
+        {
+          "station": 14,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 21,
+          "pickup": 0,
+          "drop": 2
+        },
+        {
+          "station": 18,
+          "pickup": 0,
+          "drop": 3
+        },
+        {
+          "station": 16,
+          "pickup": 1,
+          "drop": 0
+        }
+      ]
+    },
+    {
+      "vehicle": 2,
+      "nodes": [
+        0,
+        5,
+        4,
+        2,
+        3,
+        0
+      ],
+      "operations": [
+        {
+          "station": 5,
+          "pickup": 1,
+          "drop": 0
+        },
+        {
+          "station": 4,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 2,
+          "pickup": 0,
+          "drop": 3
+        },
+        {
+          "station": 3,
+          "pickup": 0,
+          "drop": 3
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "feasible": true,
+    "original_solution_feasible": true,
+    "original_objective_recomputed": true,
+    "routes_start_end_depot": true,
+    "station_disjoint": true,
+    "load_feasible": true,
+    "station_feasible": true,
+    "duration_feasible": true,
+    "objective_matches": true,
+    "route_travel_time": [
+      803.6459689792396,
+      1052.426345403305,
+      1016.314054148175
+    ],
+    "route_operation_time": [
+      960,
+      720,
+      720
+    ],
+    "route_duration": [
+      1763.6459689792396,
+      1772.426345403305,
+      1736.314054148175
+    ],
+    "final_inventories": [
+      50000,
+      7,
+      8,
+      10,
+      14,
+      14,
+      6,
+      14,
+      15,
+      13,
+      14,
+      12,
+      9,
+      10,
+      11,
+      6,
+      15,
+      7,
+      9,
+      14,
+      16,
+      8,
+      9,
+      7,
+      13,
+      7,
+      13,
+      7,
+      7,
+      14,
+      15
+    ],
+    "G": 0.1679835170919759,
+    "P": 4.367346704428904,
+    "objective": 0.8230855227563115,
+    "errors": []
+  }
+}

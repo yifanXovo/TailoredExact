@@ -29,10 +29,12 @@ void routes() {
             double travel=in.dist[0][order[0]]+in.dist[order.back()][0];
             for(int t=1;t<4;++t)travel+=in.dist[order[t-1]][order[t]];
             in.total_time_limit=travel+(in.pickup_time+in.drop_time)*pickups;
-            auto d=ebrp::prepareRound63Time(in);auto p=ebrp::emptyRound63TimePoint(d);int last=0;double prepaid=0;
+            auto d=ebrp::prepareRound63Time(in);auto p=ebrp::emptyRound63TimePoint(d);int last=0,prefix_load=0;double prepaid=0;
             for(int t=0;t<4;++t) {
                 int i=order[t];p.x[k][last][i]=1;p.pickup[k][i]=std::max(0,op[t]);
                 prepaid+=d.travel[last][i]+d.handling*p.pickup[k][i];int next=t==3?0:order[t+1];
+                prefix_load+=op[t];
+                require(prepaid+1e-12>=d.handling*prefix_load,"carried load exceeds prepaid resource");
                 require(prepaid<=d.upper[i][next]+1e-12,"canonical cumulative f exceeds capacity");last=i;
             }
             p.x[k][last][0]=1;
@@ -77,6 +79,7 @@ void boundaries() {
     ebrp::appendRound63TimeModel(in,path,"off");require(ebrp::fileSha256(path)==hash,"default off modifies model");std::filesystem::remove(path);
     require(ebrp::SolveOptions{}.round63_time_mode=="off","default not off");
     require(ebrp::validRound63TimeMode("root")&&ebrp::validRound63TimeMode("root-dry")&&!ebrp::validRound63TimeMode("automatic-fastest"),"explicit mode registry");
+    require(ebrp::validRound63TimeMode("coupled"),"coupled resource mode registry");
 }
 }
 int main(){try{routes();fractions();boundaries();std::cout<<"Round63 route/subset enumeration, mincut, numerical and scope checks passed\n";return 0;}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

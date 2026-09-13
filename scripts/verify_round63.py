@@ -6,7 +6,7 @@ import shutil
 from pathlib import Path
 from analyze_round63 import ROOT,OUT,RAW,read,csvrows,resource_row,table,audit_strength
 from analyze_round61 import physical
-from verify_round62 import proof_check
+from verify_round62 import proof_check,check_lp_point
 import round63_research as run
 run.bind_runner()
 
@@ -86,7 +86,34 @@ def submitted():
     assert count>0
     print('submitted independent original-route checks passed:',count)
 
+def audit_coupling():
+    records=[]
+    for path in sorted(RAW.glob('**/coupling_result.json')):
+        folder=path.parent;r=read(path);data=read(folder/'resource.json');points={}
+        for name in ['explicit','coupled','pinned_coupled']:
+            p=folder/(name+'_point.csv')
+            if not p.exists():continue
+            point={v['variable']:float(v['value']) for v in csvrows(p)};points[name]=point
+            model=folder/('explicit.lp' if name=='explicit' else 'coupled.lp')
+            residual=check_lp_point(model,point)
+            records.append(dict(id=folder.name,kind=name,**residual))
+        maximum=max(0,max(data['handling']*points['explicit'][f'load_{k}_{i}']-
+            math.fsum(points['explicit'][f'r63f_{k}_{i}_{j}'] for j in range(data['V']+1) if j!=i)
+            for k in range(data['M']) for i in range(1,data['V']+1)))
+        assert abs(maximum-r['explicit_point_maximum_carried_violation'])<1e-9
+        assert len(csvrows(folder/'native_calls.csv'))==r['optimizer_calls']==4
+        if 'pinned_coupled' in points:
+            discrepancy=max(abs(v-points['pinned_coupled'][n]) for n,v in points['explicit'].items() if not n.startswith('r63f_'))
+            assert discrepancy<1e-5
+        else:discrepancy=None
+        records.append(dict(id=folder.name,kind='projection_diagnostic',maximum_extended_point_violation=maximum,
+            pinned_original_variables_match=discrepancy,pinned_explicit_feasible=r['pinned_explicit_feasible'],
+            pinned_coupled_feasible=r['pinned_coupled_feasible'],
+            strict_projection_witness=bool(r['pinned_explicit_feasible'] and r['pinned_coupled_infeasible'])))
+    run.write(OUT/'coupling_verification.json',records)
+    print('coupling verification records',len(records))
+
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--submitted',action='store_true');a=p.parse_args()
     if a.submitted:submitted()
-    else:audit_strength();audit_native()
+    else:audit_strength();audit_coupling();audit_native()

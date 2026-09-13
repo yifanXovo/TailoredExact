@@ -40,7 +40,26 @@ def audit_strength():
             point_file=folder/(name+'_point.csv')
             if not point_file.exists():continue
             point={r['variable']:float(r['value']) for r in csvrows(point_file)}
-            residual=check_lp_point(model,point);audits.append(dict(id=identity,stage=folder.parent.name,point=name,**residual))
+            residual=check_lp_point(model,point)
+            if name=='closed':
+                # Bound the difference between clipped-search and raw subset
+                # activities using saved data only; no additional separation.
+                supply=[];capacity=[];raw=[]
+                for k in range(d['M']):
+                    for i in range(1,d['V']+1):
+                        pickup=point[f'p_{k}_{i}'];raw.append(pickup);supply.append(d['handling']*max(0,-pickup))
+                        for h in range(d['V']+1):
+                            if h!=i:supply.append(d['travel'][h][i]*max(0,-point[f'x_{k}_{h}_{i}']))
+                        for j in range(d['V']+1):
+                            if j!=i:
+                                arc=point[f'x_{k}_{i}_{j}'];raw.append(arc);capacity.append(d['upper'][i][j]*max(0,-arc))
+                observed=[r for r in csvrows(folder/'separation.csv') if r['arm']=='closure']
+                last=max(int(r['query']) for r in observed)
+                selected=max(float(r['maximum_violation']) for r in observed if int(r['query'])==last)
+                residual.update(minimum_raw_resource_value=min(raw),negative_supply_envelope=math.fsum(supply),
+                    negative_capacity_envelope=math.fsum(capacity),last_selected_raw_violation=selected,
+                    selected_plus_clipping_envelope=selected+math.fsum(supply)+math.fsum(capacity))
+            audits.append(dict(id=identity,stage=folder.parent.name,point=name,**residual))
         # The first closure inspection reuses F0 after the simple LP query.
         # Consume the ordered term stream per cut occurrence: a query number
         # alone is not a unique point identity in this diagnostic trace.

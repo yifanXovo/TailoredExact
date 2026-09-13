@@ -189,3 +189,75 @@ long/reference/confirmation pairs use one frozen v3 build. v1/v2 screens
 remain separately identified evidence. Add actual PreCrush get-return/value
 telemetry without changing its setting. All 40 solver-free tests pass.
 The fourth/final native micro now rechecks the complete K1 root lifecycle.
+
+Launch 28 passes: full K1 performs three LP optimizations and one terminal
+MIP, inserts the one prepared row once, reads PreCrush=0 successfully, and
+certifies original objective 0.325 with independent physical verification.
+v3 measured-source commit is b1bde3eab6c6fb9c4e1c4575acbdfa9141a46eaf.
+v3 D4/D7 OFF/root/root-dry build-only exports and A D3/D4/C3 three-way
+build-only exports all succeed before performance. Four native micros are
+now exhausted. A starts on this frozen build with stage `full_dev_v3`.
+
+## B4: prepaid time coupled to the existing post-service load
+
+Before any B4 measurements, examine an additional physical relation. Empty
+departure gives load_i <= cumulative pickup through i; hence the canonical
+route embedding satisfies sum_j f_ij >= (c/scale)*load_i. The repository has
+post-service node loads, not arc load variables. Use that existing variable
+and the same safely downward-rounded handling coefficient. The coupled arm
+keeps the explicit time-flow extension and adds only M*V rows (none if c=0).
+Unused loads are already zero through load_i<=Q*z_i. No new capacity rule,
+arrival-time interpretation or total-pickup cap is introduced. Loaded returns,
+multiple pickup/drop blocks and heterogeneous Q remain valid. Route enumeration
+will additionally check this lower bound. No simple s-t mincut equivalence
+is claimed for these extra node-throughput lower bounds.
+
+Hypothesis: the MTZ load variables and accumulated time flow may otherwise
+choose incompatible fractional histories. First test D6/D7 actual explicit
+LP optima, then coupled LP, with all other old variables pinned for an
+explicit-control/coupled feasibility pair: four bounded LP optimizations per
+120 s charged batch, zero maxflows. Pinning control guards against numerical
+infeasibility from fixing a saved point. Violating one selected f assignment
+alone does NOT prove stronger projection if another f completion exists.
+If useful or still plausibly relevant to integer propagation, run just one
+same-build D7 explicit/coupled 120 s native pair before selecting long arms.
+
+A continues in the already-frozen v3 executable. Compile B4 only after that
+performance queue ends, preserve v3 binaries, run all regression tests and
+freeze v4. All subsequent B long/reference/confirmation comparisons receive
+new v4 OFF baselines; never reuse v3 A timings as their direct control. The
+two LP batches, optional two native screens and needed new OFF controls fit
+within 68 projected launches, retaining the required long/K1/reference/two
+confirmation roles. No additional native micro is permitted. B3 root stays
+a correctly integrated mixed execution alternative; choose final long-arm
+allocation using B4 evidence, and document any stopped branch.
+
+A runtime-label discrepancy is explicitly resolved: result.json and the
+compatibility C6 split ledger retain rho=0.01 and an inherited generic
+implementation-boundary sentence. PaperK1AmSf.cpp enables the first-class
+controller and sets split_threshold=0.08; PaperExternalGiniTree.cpp selects
+that threshold when first_class_k1 is true. The actual
+adaptive_mass_decision_ledger.csv for C3 reads K0=1, tau=0.08. Preserve these
+historical compatibility fields but never interpret rho as the active K1
+threshold. The read-only report now verifies every actual adaptive decision's
+K0/tau. Single-S does not exercise child decisions. This changes no search.
+
+## A completed: bounded qualification decision
+
+All nine v3 launches (29-37) finish within their 600 s physical caps and
+pass independent original-route and unchanged-threshold proof verification.
+D3 Single-S OFF/inventory/service certify in 316.047/462.531/308.843 s.
+Service removes the inventory arm's 46.3% regression on this full role but
+its own 7.20 s / 2.28% gain is below the dual threshold. D4 certifies in
+90.140/55.109/78.547 s: service gains 11.59 s / 12.86% against actual OFF,
+although inventory is faster. The predeclared relative-to-OFF criterion
+therefore recognizes this service gain. C3 full K1 makes three LP calls and
+one terminal MIP in all arms, with declined refinement. None certifies:
+absolute gaps OFF/inventory/service are 0.09852784389 / 0.10583249243 /
+0.11007479251. Service's 0.01154694862 / 11.72% gap regression fails the
+uniform qualification criterion. Retain its D3/D4 value as a default-off
+research result, not a promoted uniform candidate, and do not rewrite the
+Round62 historical gate. Stop A at nine launches: an extra C2 success could
+not repair this observed protection failure. No A+B combination or new
+service confirmation is claimed. B long/K1/reference/two-confirmation work
+remains required and reserved.

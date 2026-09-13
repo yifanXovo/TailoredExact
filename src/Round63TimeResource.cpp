@@ -118,7 +118,7 @@ bool acceptRound63TimeCut(const Round63TimeData& d,const Round63TimeCut& r,std::
         throw std::runtime_error("resource scope/coefficients mismatch");
     return r.violated&&r.violation>1e-7&&!r.support.empty()&&seen.insert(r.signature).second;
 }
-bool validRound63TimeMode(const std::string& m) {return m=="off"||m=="explicit"||m=="simple"||m=="dry"||m=="cuts"||m=="precrush"||m=="root"||m=="root-dry";}
+bool validRound63TimeMode(const std::string& m) {return m=="off"||m=="explicit"||m=="coupled"||m=="simple"||m=="dry"||m=="cuts"||m=="precrush"||m=="root"||m=="root-dry";}
 void writeRound63TimeData(const Round63TimeData& d,const std::filesystem::path& path) {
     std::ofstream o(path);o<<std::setprecision(17)<<"{\"schema\":\"round63-resource-v1\",\"identity\":\""<<d.identity
         <<"\",\"scope\":\"original_physical_global\",\"V\":"<<d.V<<",\"M\":"<<d.M<<",\"scale\":"<<d.scale<<",\"handling\":"<<d.handling;
@@ -130,7 +130,7 @@ void appendRound63TimeModel(const Instance& in,const std::filesystem::path& path
     if(!validRound63TimeMode(mode))throw std::runtime_error("invalid Round63 mode");
     if(mode=="off")return;
     const auto d=prepareRound63Time(in);writeRound63TimeData(d,path.string()+".round63.json");
-    if(mode!="explicit"&&mode!="simple")return;
+    if(mode!="explicit"&&mode!="coupled"&&mode!="simple")return;
     std::ifstream f(path);std::string text((std::istreambuf_iterator<char>(f)),{});f.close();
     std::ostringstream rows;rows<<std::setprecision(17);long long count=0;
     for(int k=0;k<d.M;++k) {
@@ -150,6 +150,15 @@ void appendRound63TimeModel(const Instance& in,const std::filesystem::path& path
             for(int j=0;j<=d.V;++j)if(i!=j) {
                 c={{fname(k,i,j),1}};if(d.upper[i][j])c[xname(k,i,j)]=-d.upper[i][j];
                 emitRow(rows,"r63_capacity_"+std::to_string(count++),c,'<');
+            }
+            if(mode=="coupled" && d.handling>0) {
+                // load[k,i] is the existing post-service load. Empty departure
+                // and nonnegative deliveries give load <= cumulative pickup.
+                // On the unique outgoing route arc, f carries that prepaid
+                // pickup resource plus nonnegative cumulative travel.
+                c={{"load_"+std::to_string(k)+"_"+std::to_string(i),d.handling}};
+                for(int j=0;j<=d.V;++j)if(i!=j)c[fname(k,i,j)]=-1;
+                emitRow(rows,"r63_carried_"+std::to_string(k)+"_"+std::to_string(i),c,'<');
             }
         }
     }

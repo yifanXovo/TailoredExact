@@ -57,3 +57,27 @@ local_raw directory. The term streams are ordered per cut occurrence; initial
 F0 reuse during closure must not be joined solely by the displayed last-query
 number. Native optimizer logs give actual post-insertion sizes. API success,
 native status, physical witness feasibility and strict certificates are separate.
+
+The complete algorithms use the measured v3 source commit
+b1bde3eab6c6fb9c4e1c4575acbdfa9141a46eaf (manifest build_freeze_v3.json).
+v1 binaries are retained locally in build/round63-v1 and v2 in
+build/round63-v2. v2's full-K1 micro safely rejects retained-model row
+insertion and is excluded; v3 uses fresh models in root/root-dry and passes
+the full-K1 micro. Do not mix these versions' timings.
+
+Full lifecycle commands, with a new output root and frozen build:
+
+```powershell
+& $python63 scripts/round63_research.py service-build --ids D3 D4 C3 --stage preflight_A
+& $python63 scripts/round63_research.py service --ids D3 D4 C3 --stage full_dev --cap 600
+& $python63 scripts/round63_research.py k1 --ids C2 D7 --modes off explicit root --stage full_dev --cap 600
+& $python63 scripts/round63_research.py k1 --ids C2 --modes root-dry --stage full_dev --cap 600
+& $python63 scripts/round63_research.py reference --ids C2 D7 --stage full_dev --cap 600
+& $python63 scripts/report_round63.py
+```
+
+The driver rejects semantic engine failures even if the native executable
+returns zero. Optimizer counts distinguish write-ahead backend attempts from
+actual calls that reach optimize (the failed v2 micro has 4 versus 3).
+`report_round63.py --index` hashes the complete local evidence set and copies
+sparse cut records for delivery; run it only after all performance ends.
