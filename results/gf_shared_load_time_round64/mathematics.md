@@ -79,3 +79,36 @@ cut submission. The local inequality above has a direct nonnegative derivation
 from arc q/Q, shared and time capacities plus out(q)=L; it is globally physical,
 independent of objective interval/cutoff. If a projection execution is later
 chosen its certificate implementation must be separately tested and recorded.
+
+## Bounded full auxiliary dual diagnostic (after the initial target matrix)
+
+The independent diagnostic constructs only q/f resource variables, with
+Q/time capacities, q/f balances, q-to-L links and B4 in both controls; JOINT
+adds arc sharing. Original F0 values appear solely as affine right-hand sides.
+Two optimizations share one process cap. Both use diagnostic InfUnbdInfo=1 and
+DualReductions=0; production settings do not change. SEP must be feasible.
+
+For the actual resource model all q have finite global upper Q_k and all f
+have finite global upper B_ij (because physical x is binary). These are redundant
+also on the original continuous x domain [0,1]. Given a normalized Gurobi
+Farkas multiplier vector, retain free equality multipliers and project inequality
+multipliers onto the nonnegative half-line. Recompute the entire combination;
+do not reuse the old reported proof after changing multipliers. Put a=y^T A.
+The valid original-variable row is
+
+    y^T b(v) >= beta = sum_z min(0,a_z * upper_z).
+
+This accounts for ALL negative column residuals through finite physical bounds;
+it never pretends a slightly negative a_z is nonnegative or silently drops
+bound terms. Recompute coefficients/activity with long-double accumulation and
+independently with Python math.fsum. Require agreement and strict raw violation
+above 1e-7, alongside feasible SEP/control residual checks. Export raw and
+normalized multipliers, every matrix/RHS term, column sums, finite-bound
+corrections, original-variable row, physical identity and raw-point checksum.
+These are numerical-supported projection certificates and are not submitted
+to native search. They are not certificates of original objective optimality.
+
+The sign convention and bound contribution follow the official
+[Gurobi FarkasDual/FarkasProof definition](https://docs.gurobi.com/projects/optimizer/en/current/reference/attributes/constraintlinear.html#attrfarkasdual).
+The required diagnostic flag is documented under
+[InfUnbdInfo](https://docs.gurobi.com/projects/optimizer/en/current/reference/parameters.html#parameter.InfUnbdInfo).

@@ -112,6 +112,22 @@ def full(ids,modes,cap,stage,warm=False,single=False):
             cmd=runner.full_command(p,dest,preset,'off',cap)+['--round64-shared-mode',mode]
             execute(cmd,dest,p,arm,stage,cap,calls='all calls in external/paper_optimize_ledger.csv')
 
+def projection(ids,cap,stage):
+    for identity in ids:
+        p=panel()[identity];dest=RAW/stage/identity
+        pins=RAW/'strength_v1'/identity/'original_pins.csv'
+        cmd=[BUILD/'Round64ProjectionAudit.exe','--input',p['instance_path'],'--T',p['T_seconds'],
+             '--pickup-time',p['pickup_seconds'],'--drop-time',p['drop_seconds'],'--pins',pins,
+             '--expected-sha',sha(pins),'--expected-resource-identity',read(pins.parent/'resource.json')['identity'],'--out',dest,'--cap',cap]
+        execute(cmd,dest,p,'SEP-JOINT-Farkas',stage,cap,'LP-audit',2)
+
+def full_micro(stage,cap):
+    p=dict(id='full_micro',instance_path='tests/data/round59_tiny.txt',T_seconds=5,pickup_seconds=1,drop_seconds=1,**{'lambda':.15})
+    for mode in ['off','joint']:
+        dest=RAW/stage/p['id']/mode
+        cmd=runner.full_command(p,dest,'research-round64-k1-s','off',cap)+['--round64-shared-mode',mode]
+        execute(cmd,dest,p,mode,stage,cap,'native-micro','all calls in external/paper_optimize_ledger.csv')
+
 def reference(ids,cap,stage):
     expected={e['instance_id']:e['expected_gurobi_model_fingerprint'] for e in read(
         ROOT/'results/gf_citibike443_k1_vs_pgrb_round58/pgrb_expected_fingerprints.json')['entries']}
@@ -139,7 +155,7 @@ def confirm_freeze(mode,cap):
         protocol_sha256=sha(OUT/'protocol.json'),selection_sha256=sha(OUT/'selected_candidate.json')))
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('action',choices=['freeze','build-freeze','build','fixed','probe','micro','cold','warm','single','reference','confirm-freeze'])
+    parser=argparse.ArgumentParser();parser.add_argument('action',choices=['freeze','build-freeze','build','fixed','probe','micro','full-micro','projection','cold','warm','single','reference','confirm-freeze'])
     parser.add_argument('--ids',nargs='+',default=['D4']);parser.add_argument('--modes',nargs='+',default=['off']);parser.add_argument('--cap',type=int,default=120)
     parser.add_argument('--stage',default='preflight');parser.add_argument('--version',default='v1');a=parser.parse_args()
     if a.action=='freeze':freeze()
@@ -147,6 +163,8 @@ def main():
     elif a.action=='confirm-freeze':confirm_freeze(a.modes[0],a.cap)
     elif a.action in ['build','fixed']:fixed(a.ids,a.modes,a.cap,a.stage,a.action=='build')
     elif a.action in ['probe','micro']:probe(a.ids,a.cap,a.stage,a.action=='micro')
+    elif a.action=='projection':projection(a.ids,a.cap,a.stage)
+    elif a.action=='full-micro':full_micro(a.stage,a.cap)
     elif a.action=='reference':reference(a.ids,a.cap,a.stage)
     else:full(a.ids,a.modes,a.cap,a.stage,a.action=='warm',a.action=='single')
 if __name__=='__main__':main()

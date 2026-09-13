@@ -1,5 +1,6 @@
 """Solver-free independent physical, LP-residual and identity checks."""
 import argparse
+import ast
 import csv
 import json
 import math
@@ -84,9 +85,77 @@ def witnesses(submitted=False):
                 else:shutil.copyfile(path,dest)
     table('witness_verification.csv' if not submitted else 'submitted_witness_verification.csv',records)
     print('independent original route checks',len(records))
+
+def projections():
+    records=[]
+    for path in RAW.glob('**/audit_result.json'):
+        folder=path.parent;r=run.read(path)
+        if not (folder/'sep_terms.csv').exists():continue
+        assert len(rows(folder/'native_calls.csv'))==r['optimizer_calls']==2
+        for p in rows(folder/'parameters.csv'):assert float(p['requested'])==float(p['actual'])
+        p=point(folder/'sep_point.csv');audit=check_lp_point(folder/'sep.lp',p)
+        records.append(dict(id=folder.name,kind='independent_auxiliary_SEP_feasibility',**audit))
+        if not r['projection_certificate']:continue
+        cert=run.read(folder/'projection_certificate.json');resource=run.read(folder/'resource.json')
+        assert cert['identity']==resource['identity'] and cert['scope']=='original_physical_global' and not cert['submitted']
+        assert run.sha(folder/'original_pins.csv')==cert['pins_sha256']
+        pins=point(folder/'original_pins.csv')
+        terms=rows(folder/'joint_terms.csv');dual={p['row']:p for p in rows(folder/'dual.csv')}
+        physical=run.panel()[folder.name]
+        header=(ROOT/physical['instance_path']).read_text(encoding='utf-8').splitlines()[0]
+        capacities=ast.literal_eval(header[header.index('['):])
+        expected={};V,M=resource['V'],resource['M'];c=resource['handling']
+        def add(name,eq,a,b):expected[name]=(str(int(eq)),a,b)
+        for k in range(M):
+            for i in range(1,V+1):
+                qb={f'q_{k}_{i}_{j}':1. for j in range(V+1) if j!=i}
+                qload=dict(qb)
+                fb={f'f_{k}_{i}_{j}':1. for j in range(V+1) if j!=i}
+                b4={n:-v for n,v in fb.items()}
+                for h in range(1,V+1):
+                    if h!=i:qb[f'q_{k}_{h}_{i}']=-1.;fb[f'f_{k}_{h}_{i}']=-1.
+                fb_rhs={f'p_{k}_{i}':c,**{f'x_{k}_{h}_{i}':resource['travel'][h][i] for h in range(V+1) if h!=i}}
+                add(f'q_balance_{k}_{i}',True,qb,{f'p_{k}_{i}':1.,f'd_{k}_{i}':-1.})
+                add(f'q_load_{k}_{i}',True,qload,{f'load_{k}_{i}':1.})
+                add(f'f_balance_{k}_{i}',True,fb,fb_rhs)
+                add(f'B4_{k}_{i}',False,b4,{f'load_{k}_{i}':-c})
+                for j in range(V+1):
+                    if j==i:continue
+                    q,f,x=f'q_{k}_{i}_{j}',f'f_{k}_{i}_{j}',f'x_{k}_{i}_{j}'
+                    add(f'q_cap_{k}_{i}_{j}',False,{q:1.},{x:float(capacities[k])})
+                    add(f'f_cap_{k}_{i}_{j}',False,{f:1.},{x:resource['upper'][i][j]})
+                    add(f'shared_{k}_{i}_{j}',False,{q:c,f:-1.},{})
+        observed={n:[e,{},{}] for n,(e,a,b) in expected.items()}
+        for t in terms:
+            assert t['row'] in expected and t['equality']==expected[t['row']][0]
+            observed[t['row']][1 if t['side']=='aux' else 2][t['variable']]=float(t['coefficient'])
+        assert {n:tuple(v) for n,v in observed.items()}==expected,'auxiliary matrix is not the physical SEP/JOINT contract'
+        aggregate={};projected={}
+        for t in terms:
+            y=dual[t['row']];value=float(y['normalized_multiplier']);assert y['equality']==t['equality']
+            if y['equality']=='0':assert value>=0
+            dst=aggregate if t['side']=='aux' else projected
+            dst.setdefault(t['variable'],[]).append(value*float(t['coefficient']))
+        aggregate={n:math.fsum(v) for n,v in aggregate.items()};projected={n:math.fsum(v) for n,v in projected.items()}
+        bounds=rows(folder/'column_residuals.csv');beta=[];error=0
+        for z in bounds:
+            a=aggregate.get(z['variable'],0.);u=float(z['upper']);assert float(z['lower'])==0 and u>=0
+            family,k,i,j=z['variable'].split('_');k,i,j=int(k),int(i),int(j)
+            assert u==(capacities[k] if family=='q' else resource['upper'][i][j])
+            error=max(error,abs(a-float(z['aggregate_coefficient'])))
+            beta.append(min(0,a*u))
+        rhs=math.fsum(beta);activity=math.fsum(a*pins[n] for n,a in projected.items())
+        saved={t['variable']:float(t['coefficient']) for t in rows(folder/'projection_row.csv')}
+        error=max(error,max((abs(saved[n]-a) for n,a in projected.items()),default=0.))
+        assert error<1e-10 and abs(rhs-cert['rhs'])<1e-9 and abs(activity-cert['raw_activity'])<1e-9
+        violation=rhs-activity;assert violation>1e-7 and abs(violation-cert['violation'])<1e-9
+        records.append(dict(id=folder.name,kind='finite_bound_corrected_Farkas_combination',scope=cert['scope'],
+            column_and_projection_residual=error,corrected_rhs=rhs,raw_activity=activity,violation=violation,original_terms=len(projected),
+            nonzero_dual_rows=sum(float(y['normalized_multiplier'])!=0 for y in dual.values()),submitted=False))
+    table('projection_certificate_verification.csv',records);print('independent auxiliary/Farkas checks',len(records))
 def main():
     p=argparse.ArgumentParser();p.add_argument('--preflight',action='store_true');p.add_argument('--submitted',action='store_true');a=p.parse_args()
     if a.preflight:preflight()
     elif a.submitted:witnesses(True)
-    else:probes();witnesses()
+    else:probes();projections();witnesses()
 if __name__=='__main__':main()
