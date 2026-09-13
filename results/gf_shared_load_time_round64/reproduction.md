@@ -33,6 +33,23 @@ executable hash. Local retained v1/v2/v3 binaries are under `build/round64-v1`,
 `build/round64-v2` and `build/round64-v3`; current v4 binaries are under
 `build/round64`.
 
+The final JOINT qualification deliberately selects the retained **v3**
+implementation after v4 QCAP loses its D4 certificate. `active_build.json`
+therefore points back to the immutable v3 freeze; this does not overwrite v4
+or change any already measured launch. Set the campaign build directory before
+continuing or reproducing the retained-binary full matrix:
+
+```powershell
+$env:EBRP_ROUND64_BUILD = 'build/round64-v3'
+```
+
+Every launch validates the chosen executable's hash against the active freeze
+and saves its full path. Using the current v4 binary with an active v3 freeze
+is rejected. To rebuild the exact algorithm version in another checkout, use
+the v3 source commit `438e9a286957370df2f962893f43a1026902839f`; a newly built
+binary receives its own freeze and should not be mislabeled as an identical
+historical executable. Current PR source also retains the stopped QCAP facility.
+
 ## Inspect and recompute existing evidence
 
 ```powershell
@@ -94,6 +111,14 @@ stable K1-H. Structural `probe` uses seven LPs under one shared cap;
 canonical inputs/pins and expected identities are explicit in the driver.
 Confirmation needs an independent candidate freeze before opening either
 role; the original confirmation cannot be retrospectively relabeled as new.
+
+For a new structural campaign without the original large local models, first
+run `build --ids D3 D4 D6 D7 C2 C3 C5 --modes off q t sep joint --stage preflight_v1`
+in the new results directory. This is build-only, with no optimizer call.
+`probe` can then use those independently regenerated canonical inputs and
+hashes. `projection` additionally requires the recorded original pins from
+`probe --ids D4 D7 --stage strength_v1 --cap 120`. These target solves are
+charged; the old diagnostic's timing never includes them for free.
 
 Large original logs/models/points/binaries remain under
 `results/gf_shared_load_time_round64/local_raw` and `build`, excluded from Git.

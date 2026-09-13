@@ -53,6 +53,16 @@ def preflight():
         projected.append(dict(id=identity,off_unchanged=True,qcap_model_sha256=run.sha(small),
             projected_capacity_rows=active,no_time_columns=True,identical_to_Q=run.sha(q)==run.sha(small)))
     table('qcap_model_identity_preflight.csv',projected)
+    retained=[]
+    for folder in sorted((RAW/'joint_identity_v4').glob('*')):
+        identity=folder.name;new=folder/'joint/canonical_model.lp'
+        old=RAW/'preflight_v1'/identity/'joint/canonical_model.lp'
+        assert run.sha(new)==run.sha(old)
+        launch=run.read(new.parent/'launch.json')
+        assert not launch['charged'] and launch['executable_sha256']==run.read(OUT/'build_freeze_v4.json')['executables']['Round50IntervalMipExperiment.exe']
+        retained.append(dict(id=identity,model_sha256=run.sha(new),existing_JOINT_model_unchanged=True,
+            construction_executable_build='v4',performance_qualification_build='v3',optimizer_calls=0))
+    table('retained_joint_identity_verification.csv',retained)
 def probes():
     checked=[];strength=[]
     for path in RAW.glob('**/probe_result.json'):

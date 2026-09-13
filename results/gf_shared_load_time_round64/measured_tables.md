@@ -27,3 +27,11 @@ Wall includes the complete charged process. Uncertified wall is budget use, not 
 | 28 | D7 | warm_dev_v3 | warm-joint | 1200 | 1197.156 | False | 0.215644075 | 0.196238221 | 0.0194058547 | 1477.85216 | 6 |
 | 31 | D4 | qcap_screen_v4 | q | 120 | 91.547 | True | 0.506343308 | 0.506343308 | 2.22044605e-16 | 147.997387 | 1 |
 | 32 | D4 | qcap_screen_v4 | qcap | 120 | 118.093 | False | 0.506343308 | 0.489600106 | 0.0167432017 | 198.461593 | 1 |
+| 33 | D3 | warm_protection_v3 | warm-off | 600 | 357.141 | True | 0.0450015501 | 0.0450015501 | 7.63278329e-17 | 541.173796 | 5 |
+| 34 | D3 | warm_protection_v3 | warm-joint | 600 | 519.313 | True | 0.0450015501 | 0.0450015501 | 2.35922393e-16 | 833.131904 | 5 |
+| 35 | D4 | warm_protection_v3 | warm-off | 600 | 129 | True | 0.506343308 | 0.506343307 | 2.38642328e-10 | 208.951923 | 4 |
+| 36 | D4 | warm_protection_v3 | warm-joint | 600 | 53.39 | True | 0.506343308 | 0.506343303 | 4.36819081e-09 | 80.7636003 | 9 |
+| 37 | C3 | warm_protection_v3 | warm-off | 600 | 597.078 | False | 0.814242076 | 0.702684835 | 0.111557241 | 1226.38137 | 4 |
+| 38 | C3 | warm_protection_v3 | warm-joint | 600 | 597.093 | False | 0.814242076 | 0.71989869 | 0.0943433853 | 1240.57295 | 7 |
+| 39 | C5 | warm_protection_v3 | warm-off | 600 | 199.437 | True | 0 | 0 | 0 | 0 | 0 |
+| 40 | C5 | warm_protection_v3 | warm-joint | 600 | 204.469 | True | 0 | 0 | 0 | 0 | 0 |

@@ -45,6 +45,9 @@ def summary():
             if count==0:result['native_statuses']='no native optimize';result['work']=0;result['nodes']=0
             initial=folder/'external/initial_witness.json'
             result['initial_upper_bound']=read(initial)['objective'] if initial.exists() else r.get('initial_upper_bound')
+            if result['initial_upper_bound'] is None and (folder/'ub_events.csv').exists():
+                startup=[v for v in rows(folder/'ub_events.csv') if v['source']=='native_hga_tgbc_initial' and v['accepted']=='true' and v['verifier_passed']=='true']
+                if len(startup)==1:result['initial_upper_bound']=float(startup[0]['objective'])
             heuristic=folder/'heuristic.csv'
             result['heuristic_seconds']=sum(float(h['runtime']) for h in rows(heuristic)) if heuristic.exists() else None
     table('runs.csv',results);table('optimizer_calls.csv',calls)
@@ -188,8 +191,8 @@ def trajectories():
                 found=re.search(r'^Found heuristic solution: objective ([-+\d.eE]+)',line)
                 if found:
                     u=float(found[1]);native.append(dict(pre,path=str(path.relative_to(ROOT)),line=i,native_incumbent_rounded=u,
-                        solver_seconds_integer_precision=None,reaches_final_UB_with_log_rounding=u<=final+5e-7,
-                        raw_line=line,scope='native heuristic solution; no timestamp printed; do not infer exact discovery time'))
+                        solver_seconds_integer_precision=None,native_value_at_most_final_original_UB_with_rounding=u<=final+5e-7,
+                        raw_line=line,scope='native model objective, not verified original F; heuristic line has no timestamp'))
                     continue
                 if not line.startswith(('H','*')):continue
                 tokens=line.split()
@@ -197,8 +200,8 @@ def trajectories():
                 try:u=float(tokens[-5]);t=float(tokens[-1][:-1])
                 except ValueError:continue
                 native.append(dict(pre,path=str(path.relative_to(ROOT)),line=i,native_incumbent_rounded=u,
-                    solver_seconds_integer_precision=t,reaches_final_UB_with_log_rounding=u<=final+5e-7,
-                    raw_line=line,scope='per native call; log precision; not independently verified until call returns'))
+                    solver_seconds_integer_precision=t,native_value_at_most_final_original_UB_with_rounding=u<=final+5e-7,
+                    raw_line=line,scope='native model objective and per-call log precision; original route/F verified only at extraction'))
     table('primal_timing.csv',endpoints);table('global_bound_trajectories.csv',accepted)
     table('native_incumbent_observations.csv',native);table('native_call_costs.csv',costs)
 

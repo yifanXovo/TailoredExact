@@ -299,3 +299,54 @@ C7 order. Total planned charged launches are 60/72, including the completed
 32. C5/D7/C6 cold long pairs ensure the zero-HGA possibility does not make
 all search protection uninformative. Only justified follow-ups may use the
 remaining twelve launches; no more native micros.
+
+During the serial warm protection queue, D3 completes at launches 33/34.
+OFF/JOINT both certify the same improved original F=0.04500155005562836,
+from identical HGA U=0.049468682614419446 and byte-identical initial routes
+and domains. Each uses five native calls and zero splits. Full wall is
+357.141/519.313 seconds: JOINT costs 162.172 seconds more (about 45.4%),
+passing both regression gates. Lightweight independent physical checks of
+both completed final routes pass. The full between-queue audit remains due.
+No build, Git maintenance or large verification is run during this queue.
+
+D4 warm protection completes at launches 35/36. Identical startup snapshots
+and domains lead to the same verified F=0.506343307565206 in both arms.
+OFF certifies in 129.000 seconds (four calls, zero splits); JOINT certifies in
+53.390 seconds (nine calls, two splits). The 75.610-second, 58.6% improvement
+passes both time gates. This positive full-HGA result must be reported beside,
+not replaced by, the cold fixed-F0 JOINT certificate loss. It also cannot erase
+D3/D7 full warm regressions. Original final route checks pass in both arms;
+the complete queue audit is still pending while C3 runs serially.
+
+Source/log wording clarification during the queue: GurobiBaseline restores
+original variable types immediately after a retained LP solve, rather than
+waiting for the next MIP request. Accordingly the LP ledger rows carry
+integer_domain_restored=1, while a subsequent reused MIP need not restore
+them again. The contract text is made precise; no code, model or benchmark
+setting changes, and this is not an algorithmic contribution.
+
+C3 warm launches 37/38 both consume about 597.1 seconds under cap600 and
+remain uncertified at identical unchanged U=0.8142420757383566. OFF/JOINT LB
+is 0.702684834668421/0.7198986904552764; absolute gap is
+0.11155724106993559/0.09434338528308017. The reduction 0.01721385578685542
+(about 15.4%) passes both gap gates and comes from bound progression, not
+primal or startup improvement. Calls/splits are 4/0 versus 7/1. Initial
+route and domain bytes match, and independent final route checks pass,
+including one unit of cargo returned to depot. C5 warm runs follow serially.
+
+C5 warm launches 39/40 both certify F=0 entirely from the current-process
+HGA witness, with no native optimize. Full wall is 199.437/204.469 seconds;
+accepted zero occurs at process seconds 199.3910454/204.4206948. The initial
+route hash 43b2c856b1babac2, snapshot bytes and domain match. Both routes serve
+50 stations, pick up 225, deliver 150 and return 75 to depot, with maximum
+original duration 17222.582857437577 <=18000. The 5.032-second difference is
+below both time gates and does not measure the resource model's search cost:
+the universal F>=0 bound certifies before native search. The planned cold
+cap600 pair remains essential to test the known zero-discovery regression.
+
+The eight-run warm protection queue is complete. Between queues, two v4
+build-only JOINT constructions on D4/D7 match the retained formulation's
+canonical hashes exactly; no optimizer is called and v3 remains the active
+performance build. Accounting is 40/72 charged launches, 4/4 micros and 186
+optimizer calls, without charged failure, overrun or unknown call counts.
+Large reporting/verification now runs before the next serial optimizer queue.
