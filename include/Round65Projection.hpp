@@ -20,7 +20,7 @@ struct Round65VehicleMatrix {
     std::map<std::string,double> original_upper;
     std::vector<Round65ResourceRow> rows;
 };
-Round65VehicleMatrix makeRound65VehicleMatrix(const Instance&, const Round63TimeData&, int vehicle, bool joint=true);
+Round65VehicleMatrix makeRound65VehicleMatrix(const Instance&, const Round63TimeData&, int vehicle, bool joint=true, bool release_load=false);
 struct Round65ProjectionRow {
     bool valid = false;
     std::string identity, signature;
@@ -40,7 +40,7 @@ struct Round65ProjectionReply {
 };
 class Round65ProjectionService {
 public:
-    Round65ProjectionService(const Instance&, const std::filesystem::path& evidence);
+    Round65ProjectionService(const Instance&, const std::filesystem::path& evidence, bool release_load=false);
     ~Round65ProjectionService();
     Round65ProjectionReply query(int vehicle, const std::map<std::string,double>& point,
                                 double remaining, Round65Budget&);

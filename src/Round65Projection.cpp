@@ -23,7 +23,7 @@ struct Enclosure {
     }
 };
 }
-Round65VehicleMatrix makeRound65VehicleMatrix(const Instance& in,const Round63TimeData& d,int k,bool joint) {
+Round65VehicleMatrix makeRound65VehicleMatrix(const Instance& in,const Round63TimeData& d,int k,bool joint,bool release_load) {
     if(k<0||k>=in.M)throw std::runtime_error("vehicle index");
     Round65VehicleMatrix m;m.vehicle=k;m.identity=d.identity;
     std::map<std::string,int> index;
@@ -35,7 +35,7 @@ Round65VehicleMatrix makeRound65VehicleMatrix(const Instance& in,const Round63Ti
     for(int i=1;i<=in.V;++i) {
         m.original_upper[node("p_",k,i)]=in.capacity[i];
         m.original_upper[node("d_",k,i)]=in.capacity[i];
-        m.original_upper[node("load_",k,i)]=in.Q[k];
+        if(!release_load)m.original_upper[node("load_",k,i)]=in.Q[k];
         Round65ResourceRow qb{node("q_balance_",k,i),true,{},{{node("p_",k,i),1},{node("d_",k,i),-1}}};
         Round65ResourceRow ql{node("q_load_",k,i),true,{},{{node("load_",k,i),1}}};
         Round65ResourceRow fb{node("f_balance_",k,i),true,{},{{node("p_",k,i),d.handling}}};
@@ -49,8 +49,8 @@ Round65VehicleMatrix makeRound65VehicleMatrix(const Instance& in,const Round63Ti
         }
         for(int h=1;h<=in.V;++h)if(h!=i){qb.auxiliary[index.at(arc("q_",k,h,i))]=-1;fb.auxiliary[index.at(arc("f_",k,h,i))]=-1;}
         for(int h=0;h<=in.V;++h)if(h!=i)fb.rhs[arc("x_",k,h,i)]+=d.travel[h][i];
-        m.rows.push_back(qb);m.rows.push_back(ql);m.rows.push_back(fb);
-        if(d.handling>0)m.rows.push_back(b4);
+        m.rows.push_back(qb);if(!release_load)m.rows.push_back(ql);m.rows.push_back(fb);
+        if(d.handling>0 && !release_load)m.rows.push_back(b4);
     }
     return m;
 }
@@ -103,9 +103,11 @@ struct Round65ProjectionService::Impl {
 #undef DECL
     void check(int rc) {if(rc)throw std::runtime_error("Round65 auxiliary API "+std::to_string(rc));}
 #endif
-    Impl(const Instance& instance,const std::filesystem::path& path):in(instance),data(prepareRound63Time(instance)),evidence(path) {
+    Impl(const Instance& instance,const std::filesystem::path& path,bool release_load):in(instance),data(prepareRound63Time(instance)),evidence(path) {
         std::filesystem::create_directories(path);writeRound63TimeData(data,path/"physical.json");
-        for(int k=0;k<in.M;++k)matrices.push_back(makeRound65VehicleMatrix(in,data,k));
+        for(int k=0;k<in.M;++k)matrices.push_back(makeRound65VehicleMatrix(in,data,k,true,release_load));
+        std::ofstream representation(path/"representation.json");representation<<"{\"release_load\":"<<(release_load?"true":"false")<<",\"matrix_reuse\":\"affine_rhs_only\"}\n";
+        if(!representation)throw std::runtime_error("representation persistence");
 #if defined(_WIN32) && EXACT_EBRP_ENABLE_GUROBI
         dll=LoadLibraryW((L"gurobi"+std::to_wstring(GRB_VERSION_MAJOR)+std::to_wstring(GRB_VERSION_MINOR)+L".dll").c_str());
         if(!dll)throw std::runtime_error("Round65 auxiliary DLL");
@@ -128,7 +130,7 @@ struct Round65ProjectionService::Impl {
 #endif
     }
 };
-Round65ProjectionService::Round65ProjectionService(const Instance& in,const std::filesystem::path& path):impl_(std::make_unique<Impl>(in,path)){}
+Round65ProjectionService::Round65ProjectionService(const Instance& in,const std::filesystem::path& path,bool release_load):impl_(std::make_unique<Impl>(in,path,release_load)){}
 Round65ProjectionService::~Round65ProjectionService()=default;
 const std::string& Round65ProjectionService::identity()const{return impl_->data.identity;}
 Round65ProjectionReply Round65ProjectionService::query(int k,const std::map<std::string,double>& point,double remaining,Round65Budget& budget) {

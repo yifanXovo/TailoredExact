@@ -84,4 +84,45 @@ The6-run reliability queue is terminal before any v2 compile/audit. Retain v1
 binaries at build/round65-v1; no subsequent build is substituted for these runs.
 The new production projection code has not yet been performance qualified.
 
+## v4 hypothesis, registered while v3 screening runs (no confirmations opened)
+
+The first v3 D4 bounded/proof pair certifies in132.063/132.016 seconds.
+PROOF produces current-point rows but all three reoptimizations have unchanged
+F objective; sparse remains uncertified at177.078s (gap about.02668). The initial
+rows repeatedly repair local load>=pickup-drop relations. On C6, F0 LP returns
+WORK_LIMIT at10.0025026 Work in about3.4s and proceeds to full parent MIP. The
+historical qualified F0 LP required12.43 Work; the current optional account still
+has about20 Work, but the call cap discards the LP before it can provide a point.
+These are public development observations, not confirmation outcomes.
+
+Test two named revisions, without an instance selector or threshold grid:
+
+* `credit-seed`: same30 Work/30s account and15s/half-remaining wall guard;
+  per-call Work ceiling30 permits the current call to use its seed allowance.
+  Original `credit10` remains a same-build ablation. Exhaustion and unknown
+  semantics are identical; no partial objective is exported.
+* `release-load`: delete q_load equations and B4 from the physical auxiliary
+  system. Keep q/f capacities, q/f balances and per-arc shared coupling. This
+  is a relaxation of the exact conditioned full shared block, so every derived
+  x/p/d row is globally valid. It does NOT establish that an existing F0 L vector
+  can be completed, nor that all remaining original L restrictions are satisfied.
+  Infeasible relaxed resource completion can reject its x/p/d point; feasible
+  completion says nothing about original integer feasibility. The native F0 L
+  variables/constraints stay intact. This change seeks more relevant rows,
+  despite a weaker resource feasible-set test, by avoiding local L-only repair.
+
+v4 also adds complete startup/native-return witness persistence (an observational
+flag is paid equally in stable K1-H controls), charges backend finalization after
+projection, and discards models on failed type/identity restoration. v1-v3 final
+routes independently verify; intermediate startup route snapshots were missing
+in research-round65 due to a Round64-only persistence guard. Therefore v3 is
+preliminary mechanism evidence; final policy comparisons must use the v4 audit
+path. No earlier timing is relabeled as v4. Stable defaults remain unchanged.
+
+Planned limited v4 development before selecting policy: C6 credit10 vs
+credit-seed bounded vs credit-seed released PROOF; D4 bounded, fixed-L PROOF,
+released PROOF, released SPARSE; D7 cold bounded vs released PROOF. Use180s on
+D4/C6 and120s on cold D7. C5 cold protection and actual warm long K1-H/P-GRB
+controls follow. Preserve at least18 launches for final/long/confirmation work.
+
 Before v3 production: v2 micros8/9 complete. Low credit is exhausted by canonical construction and safely skips LP into exact MIP; projection micro uses one reusable vehicle model over three leaves and two MIPs, all witnesses valid. Windows append-stream tellp repeated CSV headers; fix uses file_size and retains v2 evidence with exact-header filtering. No algorithmic bound change. v3 tests42/42. Next bounded screen: warm D4/C6 bounded,proof,sparse cap180; cold D7 same3 cap120. All nine are planned production runs, no history point reuse, all calls paid; compare separation costs, usable bound and native row lifecycle before long pairs. No confirmation outcomes opened.

@@ -2141,15 +2141,15 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             : std::filesystem::path(options.external_gini_artifact_dir);
     std::filesystem::create_directories(artifact_dir / "models");
     std::filesystem::create_directories(artifact_dir / "native_logs");
-    if (options.algorithm_preset.rfind("research-round64-", 0) == 0) {
+    auto persistCurrentWitness = [&](double objective,const std::vector<RoutePlan>& routes,const std::string& filename) {
         // Exact current-run startup witness, before any native LP/MIP and
         // before the universal verified-zero stop. No replay or native Start.
         // Both research OFF and resource arms pay the same persistence cost.
-        std::ofstream witness(artifact_dir / "initial_witness.json");
+        std::ofstream witness(artifact_dir / filename);
         witness << std::setprecision(17) << "{\"objective\":"
-                << verified_seed.objective << ",\"routes\":[";
-        for (std::size_t k = 0; k < verified_seed.routes.size(); ++k) {
-            const auto& route = verified_seed.routes[k];
+                << objective << ",\"routes\":[";
+        for (std::size_t k = 0; k < routes.size(); ++k) {
+            const auto& route = routes[k];
             if (k) witness << ',';
             witness << "{\"vehicle\":" << route.vehicle << ",\"nodes\":[";
             for (std::size_t i = 0; i < route.nodes.size(); ++i) {
@@ -2166,7 +2166,17 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             witness << "]}";
         }
         witness << "]}\n";
-        if (!witness) throw std::runtime_error("Round64 startup witness persistence failed");
+        if (!witness) {
+            if(options.round65_witness_audit || options.algorithm_preset.rfind("research-round65-",0)==0)
+                result.notes.push_back("witness audit persistence failed: "+filename);
+            else throw std::runtime_error("Round64 startup witness persistence failed");
+        }
+    };
+    const bool round65_witness_audit=options.round65_witness_audit ||
+        options.algorithm_preset.rfind("research-round65-",0)==0;
+    long long round65_native_witness_count=0;
+    if (round65_witness_audit || options.algorithm_preset.rfind("research-round64-", 0) == 0) {
+        persistCurrentWitness(verified_seed.objective,verified_seed.routes,"initial_witness.json");
     }
     recordProcessPhase(
         options, "external_artifact_directory_creation", "complete",
@@ -3339,12 +3349,18 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
 
     Round65Budget proof_budget;
     proof_budget.seed_work = proof_budget.seed_seconds = options.round65_seed_credit;
+    if(options.round65_controller=="credit-seed")proof_budget.call_work=30;
     if (options.round65_budget) {
         proof_budget.ledger.open(artifact_dir / "optional_budget.csv");
         proof_budget.ledger << "call,state,kind,status,grant_work,grant_seconds,work,seconds,optional_work,core_work,optional_seconds,core_seconds\n";
     }
     auto solveBudgeted = [&](FixedIntervalMipRequest request) {
-        if (!options.round65_budget) return backend->solve(request);
+        auto captureNative = [&](const FixedIntervalMipOutcome& out) {
+            if(round65_witness_audit && out.incumbent_available && out.incumbent_independently_verified)
+                persistCurrentWitness(out.incumbent_objective,out.incumbent_routes,
+                    "native_"+std::to_string(round65_native_witness_count++)+"_witness.json");
+        };
+        if (!options.round65_budget) {auto out=backend->solve(request);captureNative(out);return out;}
         const bool optional = request.solve_kind == FixedIntervalSolveKind::PaperLpRelaxation;
         const auto grant = proof_budget.grant(globalDeadlineRemaining());
         if (optional && !grant.allowed()) {
@@ -3359,16 +3375,25 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             request.global_deadline_remaining_seconds = grant.seconds;
         }
         const auto start = PaperClock::now();
+        const double optional_seconds_before = proof_budget.optional_seconds;
         request.round65_budget = &proof_budget;
         auto out = backend->solve(request);
+        captureNative(out);
         const double seconds = std::chrono::duration<double>(PaperClock::now()-start).count();
         if (!out.round65_optional_base_charged) proof_budget.charge(optional, out.work, seconds, request.leaf_id + "|" +
             request.canonical_model_fingerprint, out.native_status, optional ? grant : Round65Budget::Grant{});
+        else proof_budget.charge(true, 0, std::max(0., seconds -
+            (proof_budget.optional_seconds - optional_seconds_before)), request.leaf_id,
+            "backend_type_restore_and_finalization", {});
         if (optional && !(out.lp_terminal_valid && out.exact_zero_gap_roundtrip &&
             out.model_fingerprint_matches_request && out.feasibility_consistency_gate)) {
             out.optional_unknown = true;
             // No partial primal objective or unchecked dual evidence is exported.
             out.optimal = out.infeasible = out.native_bound_available = false;
+            // A normal limit preserves the restored model. A damaged type or
+            // identity transition must never reach core MIP as a relaxation.
+            if (!out.integer_domain_restored || !out.model_fingerprint_matches_request)
+                backend->discardLeaf(request.leaf_id);
         }
         if (!out.optional_unknown && optional) {
             if (out.round65_proof_bound_available) out.native_bound = std::max(out.native_bound, out.round65_proof_bound);

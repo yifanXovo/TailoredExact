@@ -5,11 +5,48 @@
 #include "Round65Projection.hpp"
 #include "Round64SharedResource.hpp"
 #include "ControllingLeafScheduler.hpp"
+#include "CanonicalCompactModel.hpp"
+#include <sstream>
 #include <filesystem>
 #include <iostream>
 #include <stdexcept>
 using namespace ebrp;
 void require(bool b, const char* why) { if (!b) throw std::runtime_error(why); }
+void emittedMatrixTest(const Instance& in) {
+    const auto path=std::filesystem::temp_directory_path()/"round65_matrix_equivalence.lp";
+    {std::ofstream f(path);f<<"Minimize\n obj: load_0_1\nSubject To\nBounds\nEnd\n";}
+    appendRound64SharedModel(in,path,"joint");
+    using Terms=std::map<std::string,double>;
+    std::multiset<std::pair<bool,Terms>> actual,blocks;
+    std::ifstream file(path);std::string line;
+    while(std::getline(file,line)){
+        const auto colon=line.find(':');if(colon==std::string::npos||line.substr(0,colon).find("r6")==std::string::npos)continue;
+        std::istringstream input(line.substr(colon+1));std::string sign,name;Terms terms;double coefficient;
+        while(input>>sign && sign!="=" && sign!="<="){
+            require(sign=="+"||sign=="-","known emitted sign");require(bool(input>>coefficient>>name),"emitted row grammar");
+            if(name.rfind("r64q_",0)==0)name="q_"+name.substr(5);
+            if(name.rfind("r63f_",0)==0)name="f_"+name.substr(5);
+            terms[name]+=(sign=="+"?coefficient:-coefficient);
+        }
+        double rhs=1;require(bool(input>>rhs)&&rhs==0,"resource RHS zero");actual.insert({sign=="=",terms});
+    }
+    const auto data=prepareRound63Time(in);
+    for(int k=0;k<in.M;++k){auto m=makeRound65VehicleMatrix(in,data,k);
+        for(const auto& row:m.rows){Terms terms;
+            for(auto [j,a]:row.auxiliary)if(a)terms[m.names.at(j)]+=a;
+            for(auto [v,a]:row.rhs)if(a)terms[v]-=a;
+            blocks.insert({row.equality,terms});}
+    }
+    require(actual==blocks,"per-vehicle union equals actual Round64 emitted shared matrix coefficient for coefficient");
+    file.close();
+    std::filesystem::remove(path);std::filesystem::remove(path.string()+".round63.json");std::filesystem::remove(path.string()+".round64.json");
+    SolveOptions off;CanonicalCompactModelSpec spec;
+    const auto a=writeCanonicalCompactModel(in,off,path,spec);
+    off.round65_budget=true;off.round65_hga_zero_stop=true;off.round65_projection="sparse";
+    const auto b=writeCanonicalCompactModel(in,off,path,spec);
+    require(a.written&&b.written&&a.sha256==b.sha256,"new research flags cannot modify original compact writer");
+    std::filesystem::remove(path);
+}
 void projectionTests() {
     Instance in; in.V=4;in.M=2;in.Q={2,4};in.initial={0,5,5,5,5};in.capacity={0,10,10,10,10};
     in.target={0,5,5,5,5};in.weights={0,.25,.25,.25,.25};in.pickup_time=.3;in.drop_time=.7;in.total_time_limit=100;
@@ -18,10 +55,18 @@ void projectionTests() {
     const auto resource=round64RouteResourceValues(in,routes);
     for(bool zero:{false,true}){
         if(zero)in.pickup_time=in.drop_time=0;
+        emittedMatrixTest(in);
         auto data=prepareRound63Time(in);const auto qf=round64RouteResourceValues(in,routes);
         std::set<std::string> all_names;
         for(int k=0;k<2;++k){
             auto m=makeRound65VehicleMatrix(in,data,k);
+            auto free_load=makeRound65VehicleMatrix(in,data,k,true,true);
+            for(const auto& r:free_load.rows){
+                require(r.name.rfind("q_load_",0)!=0 && r.name.rfind("B4_",0)!=0,"released rows absent");
+                for(const auto& [n,c]:r.rhs){(void)c;require(n.rfind("load_",0)!=0,"released proof contains no L");}
+                auto same=std::find_if(m.rows.begin(),m.rows.end(),[&](const auto& old){return old.name==r.name;});
+                require(same!=m.rows.end() && same->rhs==r.rhs && same->auxiliary==r.auxiliary && same->equality==r.equality,"released matrix is an exact physical relaxation");
+            }
             require(m.names.size()==32 && m.vehicle==k,"per vehicle size");
             std::map<std::string,double> v;
             for(auto [n,u]:m.original_upper){(void)u;v[n]=0;}
@@ -60,7 +105,8 @@ void projectionTests() {
 int main() { try {
     projectionTests();
     SolveOptions defaults; configurePaperK1AmSfOverrides(defaults);
-    require(!defaults.round65_budget && !defaults.round65_hga_zero_stop && defaults.round65_projection=="off", "stable defaults");
+    require(!defaults.round65_budget && !defaults.round65_hga_zero_stop && !defaults.round65_witness_audit &&
+        !defaults.round65_release_load && defaults.round65_controller=="credit10" && defaults.round65_projection=="off", "stable defaults");
     Round65Budget b;
     require(b.grant(100).work==10 && b.grant(2).seconds==1, "single call and physical reserve");
     b.charge(true,31,31,"a","WORK_LIMIT",b.grant(100));

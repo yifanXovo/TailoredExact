@@ -3195,7 +3195,7 @@ private:
         GRBmodel* proof=nullptr;
         try {
             auto check=[](int rc){if(rc)throw std::runtime_error("Round65 proof API "+std::to_string(rc));};
-            if(!round65_service_) round65_service_=std::make_unique<Round65ProjectionService>(instance_,dir);
+            if(!round65_service_) round65_service_=std::make_unique<Round65ProjectionService>(instance_,dir,options_.round65_release_load);
             std::map<std::string,int> indices;
             for(std::size_t i=0;i<names.size();++i)if(names[i].empty()||!indices.emplace(names[i],int(i)).second)throw std::runtime_error("original names");
             auto readPoint=[&](GRBmodel* m){std::vector<double> x(names.size());check(api_.getdblattrarray(m,"X",0,int(x.size()),x.data()));
@@ -3256,7 +3256,12 @@ private:
                 if(status==GRB_OPTIMAL){
                     double cv=GRB_INFINITY,bv=GRB_INFINITY,dv=GRB_INFINITY;
                     check(api_.getdblattr(proof,"ConstrVio",&cv));check(api_.getdblattr(proof,"BoundVio",&bv));check(api_.getdblattr(proof,"DualVio",&dv));
-                    if(!std::isfinite(cv)||!std::isfinite(bv)||!std::isfinite(dv)||std::max({cv,bv,dv})>1e-7)throw std::runtime_error("proof residual gate");
+                    if(!std::isfinite(cv)||!std::isfinite(bv)||!std::isfinite(dv)||std::max({cv,bv,dv})>1e-7){
+                        trace<<query<<','<<std::quoted(request.leaf_id)<<','<<round<<','<<request.gamma_L<<','<<request.gamma_U<<','<<request.verified_cutoff<<','
+                            <<last_bound<<','<<work<<','<<seconds<<','<<selected.size()<<",rejected_residual\n";trace.flush();
+                        std::ostringstream reason;reason<<std::setprecision(17)<<"proof residual gate: ConstrVio="<<cv<<" BoundVio="<<bv<<" DualVio="<<dv;
+                        throw std::runtime_error(reason.str());
+                    }
                     check(api_.getdblattr(proof,"ObjVal",&bound));if(!std::isfinite(bound))throw std::runtime_error("proof bound");
                     out.round65_proof_bound_available=true;out.round65_proof_bound=std::max(last_bound,bound);
                 }else if(status==GRB_INFEASIBLE){out.round65_proof_infeasible=true;}

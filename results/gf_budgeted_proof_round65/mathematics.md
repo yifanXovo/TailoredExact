@@ -111,3 +111,21 @@ initialization/generation boundary. No RNG call, genetic operation, population,
 decoder setting or positive-objective stagnation rule changes. Audit write
 failure is reported separately and cannot delete the verified memory witness.
 This feature has no bearing on the nonzero bound proof or projection novelty.
+# Released-load revision (v4, explicitly selected)
+
+Let A_full(v,L) denote the conditioned per-vehicle shared physical system. Delete
+the equations out(q)=L and inequalities cL<=out(f), retaining q/f balances,
+capacities and cq<=f. The resulting A_free(v), v=(x,p,d), admits every completion
+of A_full(v,L). Thus an infeasibility certificate of A_free at v gives a valid
+row on all original integer solutions; all retained multipliers also define a
+legal full-matrix combination with the deleted-row multipliers zero. The finite
+q/f bounds are unchanged, and no bound correction uses a fixed L value. Rows
+therefore contain only x,p,d. This is a valid relaxation, not a claim that free
+resource completion restores all original L-based routing constraints. The main
+F0 still includes those constraints and its original L variables.
+
+The revision can return feasible for a point excluded with fixed L; it is not
+a uniformly stronger relaxation. Its rationale is proof relevance: an arbitrary
+Farkas ray for the fixed-L system can spend a scarce separation round repairing
+local L inconsistency with zero F-bound gain. Whether released rows improve
+objective proof or integer search is an empirical question, with full costs.
