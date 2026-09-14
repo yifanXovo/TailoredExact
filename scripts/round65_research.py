@@ -4,7 +4,8 @@ from pathlib import Path
 import round61_research as runner
 
 ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT/'results/gf_budgeted_proof_round65'
+OUT=ROOT/os.environ.get('EBRP_ROUND65_OUTPUT','results/gf_budgeted_proof_round65')
+if not OUT.resolve().is_relative_to(ROOT):raise RuntimeError('campaign output must stay inside the worktree')
 RAW=OUT/'local_raw'
 BUILD=ROOT/os.environ.get('EBRP_ROUND65_BUILD','build/round65')
 runner.ROOT=ROOT; runner.OUT=OUT; runner.RAW=RAW; runner.BUILD=BUILD; runner.LEDGER=OUT/'processes.jsonl'

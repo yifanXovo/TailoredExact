@@ -25,3 +25,7 @@ results/gf_k1_lp_primal_dual_rescue_round49/** -text whitespace=cr-at-eol
 reference/citibike443-regional-v1/** -text
 results/gf_passive_threshold_conflicts_round62/** -text whitespace=cr-at-eol
 scripts/*round62*.py -text whitespace=cr-at-eol
+
+# Preserve Round 65 ledger, freeze, receipt and diagnostic source byte hashes.
+results/gf_budgeted_proof_round65/** -text whitespace=cr-at-eol
+scripts/*round65* -text whitespace=cr-at-eol

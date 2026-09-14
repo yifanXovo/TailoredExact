@@ -85,6 +85,15 @@ identifies the immutable domain model; row_use and main_shapes identify the actu
 augmented matrix. A merged proof bound is a valid bound for the same integer
 domain, not necessarily the optimal value of the current sparse native LP.
 
+The outer LP evidence may combine the base optimum with a qualified proof-copy
+bound or full proof-copy infeasibility. The original base call's `native_status`
+is retained in paper_optimize_ledger; the supplemental status is in proof_calls.
+An auxiliary INFEASIBLE never supplies that composite infeasibility. Earlier
+qualified bounds remain usable if a later proof pass fails; unqualified later
+objectives are discarded. v5 additionally requests and reads back1e-8 feasibility
+and optimality tolerances on the proof copy to support the unchanged1e-7 residual
+acceptance gate. Main/official tolerances remain unchanged.
+
 ## HGA reliability
 
 The original initialization/strict-improvement observer decodes and verifies a
@@ -109,3 +118,34 @@ Performance, resource feasibility, fixed-domain LP proof, retained-memory witnes
 audit persistence and strict original-problem certification are distinct statuses.
 Unknown never sets an infeasible flag. On permanent optional shutdown the full
 original exact search and certificate path remain available.
+
+`--round65-witness-audit true` is observational and can be applied equally to
+stable K1-H controls. It persists the current startup routes and independently
+verified native-return routes without submitting them as starts. New research
+presets enable this persistence automatically. A write failure leaves the
+in-memory witness intact and adds an audit-failure note. Legacy measured v1-v3
+research runs retained final routes but missed this startup file because their
+persistence guard recognized only Round64; they are kept as preliminary evidence.
+
+The standalone `scripts/round65_hga_timing.cpp` harness is observational and uses
+the same seed/population/decoder/stagnation/zero-stop options. Its first two
+charged runs link the unchanged retained v5 core. They expose an unavailable
+decoder timer: the inherited counter is enabled only with fixed generations,
+so its raw zero is not a cost measurement in the original stagnation mode.
+
+Two further charged diagnostics enable only the two decoder timing guards in a
+copied header under `build/`. The unchanged HGA adapter is compiled against that
+copy and its object is linked before the retained core archive. This does not
+change or rebuild ExactEBRP, supply a candidate to another run, or call an
+optimizer. All four complete logical prefixes must match their bound production
+reliability trajectories. `hga_timing_build.json` and
+`hga_decoder_timing_build.json` separately bind the harness, archive, executable,
+and, where applicable, transformed header/adapter object. The formal confirmation
+build is unchanged.
+
+The enabled decoder counter measures cache misses through `decode_routes`.
+Initialization/decoder/observer timers and the observer's conversion/hash/copy/
+verification sub-timers overlap; they are not additive wall costs or an individual
+winning-decode duration. Discovery, verification, publication, zero certification
+and process exit use explicitly labeled phases. The two unavailable-counter
+records remain in the charged ledger and are marked unavailable in the summary.

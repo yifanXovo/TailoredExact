@@ -42,3 +42,8 @@ Desktop.ini
 # Round65 local evidence is indexed by hashes, not committed in full.
 /results/gf_budgeted_proof_round65/local_raw/
 /scripts/__pycache__/
+
+# Small Round65 audit records required by submitted-only reproduction.
+!/results/gf_budgeted_proof_round65/audit_final.log
+!/results/gf_budgeted_proof_round65/tests/*.log
+!/results/gf_budgeted_proof_round65/receipts/**/native.log

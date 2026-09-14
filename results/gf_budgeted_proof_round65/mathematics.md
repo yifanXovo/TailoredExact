@@ -38,6 +38,11 @@ a model or running another probe does not mint core Work. A state whose LP or
 child lookahead is incomplete is marked core-due and cannot immediately repeat
 it. No amount of unused speculative structure prevents the full-domain MIP.
 
+The original `credit10` formula above uses a 10 Work per-call ceiling. The
+separately named and finally selected `credit-seed` revision substitutes 30
+for that ceiling, while keeping the shared seed, replenishment and wall rules.
+Neither revision allocates a fresh seed to each leaf or auxiliary module.
+
 Only completed qualifying LP optima/infeasibility are accepted. Interrupted
 primal ObjVal is never a lower bound. The fallback is inherited LB (initially
 the old safe nonnegative bound), not an invented partial-dual value. LP evidence
