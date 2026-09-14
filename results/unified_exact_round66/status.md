@@ -1,6 +1,7 @@
 # Round66 live recovery status
 
-Stage is completed and audited; draft PR publication is next. Branch:
+Stage is completed, audited and published as draft PR127:
+https://github.com/yifanXovo/TailoredExact/pull/127 . Branch:
 codex/round66-arc-load-replacement, based on Round65 112d6b2.
 The initial Git fetch failed; a subsequent HTTP/1.1 fetch completed successfully.
 The repository/API baseline agreement remains intact.
@@ -50,7 +51,7 @@ do not attribute the full runtime difference to pure matrix cost.
 All19 experiments pass the final audit and 216 compact evidence artifacts are
 packed. See final_report.md. Resource cost is 3696.157 seconds, 94 experiment
 optimizer calls; 17 performance and2 native micro launches, zero invalid runs.
-Next: publish the new draft PR, then enter the inventory-state hypothesis with
+Next: enter the inventory-state hypothesis with
 ARC off and a fresh predeclared resource plan. Existing measured source files
 still match build_v1.json; the source snapshot includes nested source/header files.
 processes.jsonl and each completion.json are authoritative for launch status

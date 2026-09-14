@@ -10,7 +10,9 @@ or 3600-second expansion was opened. The overall research goal remains unmet;
 the next substantive stage will investigate inventory-state representation.
 
 Baseline: Round65 PR126, commit `112d6b26905848557048d52083d3709b46e15750`.
-Branch: `codex/round66-arc-load-replacement`. All measured arms use the same
+Branch: `codex/round66-arc-load-replacement`, published as
+[draft PR127](https://github.com/yifanXovo/TailoredExact/pull/127).
+All measured arms use the same
 frozen Release executable, SHA256
 `f0b1fba4dcebdd358a03a8a01c22872ebf12dd95398f4969797ae8e039201d2e`.
 The source snapshot and build manifest identify its then-uncommitted source.

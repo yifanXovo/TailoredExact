@@ -4,6 +4,8 @@ User contract: results/unified_exact_round66/task_contract.txt (verbatim).
 Latest baseline: Round65 PR126, 112d6b26905848557048d52083d3709b46e15750.
 Latest completed stage: Round66, codex/round66-arc-load-replacement,
 E:/codes/ExactEBRP-round66. The original Round61 working directory is preserved.
+Draft PR: https://github.com/yifanXovo/TailoredExact/pull/127 .
+Implementation/evidence commit: 4ba0d30cc871c5affd6c88db3f1dbd956fd3096b.
 
 Read results/unified_exact_round66/final_report.md, research_map.md and status.md
 before further work. Full historical reports R51–65 already read; do not restart
