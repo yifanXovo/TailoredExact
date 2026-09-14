@@ -1,6 +1,14 @@
 # Unified exact BRP research — resume here
 
-Latest stage: Round68 on codex/round68-vdp-verified-start, based on completed
+Active stage: Round69 on codex/round69-vds-validation, based on completed
+Round68 final07c6e899d56230920c162c14bd8b7c07a960c79f. Read
+results/unified_exact_round69/plan.md and status.md. Same frozen VD-S binary;
+bounded16-run validation: D3 repeat, E7/S12/N12 at120, D6 at3600 and D7 at1200.
+No new algorithm, time policy, qualification batch or sealed confirmation.
+Use scripts/round69_progress.py for a compact read-only recovery snapshot.
+Every launch is serial and write-ahead recorded. Overall goal remains unmet.
+
+Latest completed stage: Round68 on codex/round68-vdp-verified-start, based on completed
 Round67 PR128 final a47e86a57a1f68ca6e515877193cb8696d1aa13e. Owned checkout
 E:/codes/ExactEBRP-round66. Complete, draft PR129:
 https://github.com/yifanXovo/TailoredExact/pull/129 . Implementation/evidence
