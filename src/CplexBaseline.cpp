@@ -219,7 +219,10 @@ std::string num(double v) {
 
 void writeExpr(std::ostream& out, const Expr& e) {
     if (e.empty()) {
-        out << "0";
+        // LP constraint left sides require a linear term. A bare "0" is
+        // otherwise read by Gurobi as an unintended variable named "0".
+        // G is declared in every compact model, so this is exactly zero.
+        out << "0 G";
         return;
     }
     bool first = true;

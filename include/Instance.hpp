@@ -29,6 +29,8 @@ struct Instance {
 };
 
 struct SolveOptions {
+    // Round68: supply the already-paid complete outer witness to native VD-P.
+    bool round68_verified_start = false;
     // Replace node-load Big-M recurrences by the exact arc-load formulation.
     // Research only; the original compact benchmark and stable presets stay off.
     bool round66_arc_load_replacement = false;

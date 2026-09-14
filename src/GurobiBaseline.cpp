@@ -78,6 +78,7 @@ struct GurobiApi {
     decltype(&GRBterminate) terminate = nullptr;
     decltype(&GRBoptimize) optimize = nullptr;
     decltype(&GRBgetintattr) getintattr = nullptr;
+    decltype(&GRBsetintattr) setintattr = nullptr;
     decltype(&GRBgetdblattr) getdblattr = nullptr;
     decltype(&GRBgetintattrarray) getintattrarray = nullptr;
     decltype(&GRBgetstrattrelement) getstrattrelement = nullptr;
@@ -219,6 +220,7 @@ bool loadGurobiApi(const SolveOptions& options,
     LOAD_GRB(terminate, "GRBterminate");
     LOAD_GRB(optimize, "GRBoptimize");
     LOAD_GRB(getintattr, "GRBgetintattr");
+    LOAD_GRB(setintattr, "GRBsetintattr");
     LOAD_GRB(getdblattr, "GRBgetdblattr");
     LOAD_GRB(getintattrarray, "GRBgetintattrarray");
     LOAD_GRB(getstrattrelement, "GRBgetstrattrelement");
@@ -429,6 +431,10 @@ struct ProgressCallbackState {
         bool confirmed = false;
     };
     std::vector<SubmittedCandidate> submitted_candidates;
+    const std::vector<double>* round68_start_values = nullptr;
+    const std::vector<char>* round68_start_types = nullptr;
+    bool round68_start_vector_observed = false;
+    bool round68_start_integer_vector_observed = false;
 };
 
 bool finiteNative(double value) {
@@ -474,6 +480,138 @@ bool readLinearModel(const GurobiApi& api,
                              out.senses.data()) == 0 &&
          api.getdblattrarray(model, GRB_DBL_ATTR_RHS, 0, rows,
                             out.rhs.data()) == 0);
+}
+
+void writeRound68StartEvidence(const FixedIntervalMipRequest& request,
+                               const FixedIntervalMipOutcome& out) {
+    std::ofstream file(request.native_log_path.string() + ".round68.start.json");
+    if (!file) throw std::runtime_error("round68_start_evidence_open_failed");
+    file << std::setprecision(17) << std::boolalpha
+         << "{\"source\":" << std::quoted(request.verified_start_source)
+         << ",\"leaf\":" << std::quoted(request.leaf_id)
+         << ",\"model_sha256\":" << std::quoted(request.canonical_model_fingerprint)
+         << ",\"retained_model\":" << out.in_memory_model_reused
+         << ",\"status\":" << std::quoted(out.warm_start_status)
+         << ",\"mapping_complete\":" << out.warm_start_mapping_complete
+         << ",\"rows_valid\":" << out.round68_start_rows_valid
+         << ",\"checked_rows\":" << out.round68_start_checked_rows
+         << ",\"maximum_row_violation\":" << out.round68_start_maximum_row_violation
+         << ",\"objective_valid\":" << out.round68_start_objective_valid
+         << ",\"objective\":" << out.round68_start_objective
+         << ",\"submitted\":" << out.warm_start_submitted
+         << ",\"readback_valid\":" << out.round68_start_readback_valid
+         << ",\"exact_vector_observed_in_mipsol\":" << out.round68_start_vector_observed
+         << ",\"integer_vector_observed_in_mipsol\":" << out.round68_start_integer_vector_observed
+         << ",\"mapping_validation_submission_seconds\":" << out.round68_start_seconds
+         << ",\"native_deadline_remaining_at_optimize\":" << out.round68_effective_native_deadline
+         << "}\n";
+    if (!file) throw std::runtime_error("round68_start_evidence_write_failed");
+}
+
+bool prepareRound68Start(const GurobiApi& api, GRBmodel* model,
+                        const Instance& instance, const SolveOptions& options,
+                        const FixedIntervalMipRequest& request,
+                        FixedIntervalMipOutcome& out,
+                        std::vector<double>& submitted_values,
+                        std::vector<char>& submitted_types) {
+    const auto started = Clock::now();
+    auto checked = [](int code) {
+        if (code != 0) throw std::runtime_error("native_api_code_" + std::to_string(code));
+    };
+    auto finish = [&]() {
+        out.round68_start_seconds = std::chrono::duration<double>(Clock::now()-started).count();
+        writeRound68StartEvidence(request, out);
+    };
+    out.warm_start_candidate_available = true;
+    try {
+        if (!options.round68_verified_start || options.plain_baseline ||
+            options.round65_budget || out.lp_relaxation ||
+            request.interval_mip_policy != "round55-vd-p")
+            throw std::runtime_error("requires_isolated_vdp_mip");
+        // An obsolete explicit Start must not silently survive an ineligible
+        // replacement. Native reuse of a previous solution is separate.
+        checked(api.setintattr(model, GRB_INT_ATTR_NUMSTART, 0));
+        checked(api.updatemodel(model));
+        int variables=0, rows=0, general=0, quadratic=0;
+        checked(api.getintattr(model, GRB_INT_ATTR_NUMVARS, &variables));
+        checked(api.getintattr(model, GRB_INT_ATTR_NUMCONSTRS, &rows));
+        checked(api.getintattr(model, GRB_INT_ATTR_NUMGENCONSTRS, &general));
+        checked(api.getintattr(model, GRB_INT_ATTR_NUMQCONSTRS, &quadratic));
+        if (variables <= 0 || general || quadratic)
+            throw std::runtime_error("unexpected_non_linear_model");
+        SolverNeutralModelDomain domain;
+        domain.names.resize(variables);domain.lower_bounds.resize(variables);
+        domain.upper_bounds.resize(variables);domain.variable_types.resize(variables);
+        checked(api.getdblattrarray(model, GRB_DBL_ATTR_LB, 0, variables, domain.lower_bounds.data()));
+        checked(api.getdblattrarray(model, GRB_DBL_ATTR_UB, 0, variables, domain.upper_bounds.data()));
+        checked(api.getcharattrarray(model, GRB_CHAR_ATTR_VTYPE, 0, variables, domain.variable_types.data()));
+        for (int i=0;i<variables;++i) {
+            char* name=nullptr;checked(api.getstrattrelement(model, GRB_STR_ATTR_VARNAME, i, &name));
+            if (!name) throw std::runtime_error("missing_native_column_name");
+            domain.names[i]=name;
+        }
+        const auto routes=normalizeRound61Routes(instance, options.lambda, request.verified_start_routes);
+        const auto mapped=mapVerifiedRoutesToCanonicalModel(instance, options, routes,
+            request.verified_start_source, request.gamma_L, request.gamma_U, request.verified_cutoff, domain);
+        out.warm_start_mapping_seconds=mapped.mapping_seconds;
+        out.warm_start_mapping_complete=mapped.complete;
+        out.round68_start_objective=mapped.objective;
+        if (!mapped.complete) {
+            if (mapped.failure_reason=="verified_start_outside_static_gini_interval" ||
+                mapped.failure_reason=="verified_start_violates_non_strict_cutoff") {
+                out.warm_start_status="ineligible:"+mapped.failure_reason;
+                finish();return true;
+            }
+            throw std::runtime_error("eligible_mapping_rejected:"+mapped.failure_reason);
+        }
+        SolverNeutralLinearModel linear;
+        if (!readLinearModel(api, model, variables, rows, linear))
+            throw std::runtime_error("linear_matrix_read_failed");
+        const auto residual=validateCandidateLinearResidual(linear,mapped.values,1e-7);
+        out.round68_start_rows_valid=residual.checked && residual.valid;
+        out.round68_start_checked_rows=residual.checked_rows;
+        out.round68_start_maximum_row_violation=residual.maximum_violation;
+        if (!out.round68_start_rows_valid)
+            throw std::runtime_error("eligible_linear_residual_rejected:"+residual.failure_reason);
+        std::vector<double> objective(variables);
+        double constant=0;int sense=0, quadratic_nonzeros=0;
+        checked(api.getdblattrarray(model,GRB_DBL_ATTR_OBJ,0,variables,objective.data()));
+        checked(api.getdblattr(model,GRB_DBL_ATTR_OBJCON,&constant));
+        checked(api.getintattr(model,GRB_INT_ATTR_MODELSENSE,&sense));
+        checked(api.getintattr(model,GRB_INT_ATTR_NUMQNZS,&quadratic_nonzeros));
+        double native_objective=constant;
+        for (int i=0;i<variables;++i) native_objective+=objective[i]*mapped.values[i];
+        out.round68_start_objective_valid=sense==GRB_MINIMIZE && quadratic_nonzeros==0 &&
+            std::isfinite(native_objective) && std::fabs(native_objective-mapped.objective)<=1e-7;
+        if (!out.round68_start_objective_valid) throw std::runtime_error("eligible_objective_mismatch");
+        checked(api.setintattr(model,GRB_INT_ATTR_NUMSTART,1));
+        checked(api.setintparam(api.getenv(model),GRB_INT_PAR_STARTNUMBER,0));
+        checked(api.updatemodel(model));
+        checked(api.setdblattrarray(model,GRB_DBL_ATTR_START,0,variables,
+                                   const_cast<double*>(mapped.values.data())));
+        out.warm_start_submitted=true;
+        checked(api.updatemodel(model));
+        std::vector<double> readback(variables);
+        checked(api.getdblattrarray(model,GRB_DBL_ATTR_START,0,variables,readback.data()));
+        out.round68_start_readback_valid=true;
+        for (int i=0;i<variables;++i)
+            if (!std::isfinite(readback[i]) || std::fabs(readback[i]-mapped.values[i])>1e-12)
+                out.round68_start_readback_valid=false;
+        if (!out.round68_start_readback_valid) throw std::runtime_error("start_readback_mismatch");
+        std::ofstream values(request.native_log_path.string()+".round68.start.values.csv");
+        values<<std::setprecision(17)<<"variable,type,value,readback\n";
+        for(int i=0;i<variables;++i)
+            values<<domain.names[i]<<','<<domain.variable_types[i]<<','<<mapped.values[i]<<','<<readback[i]<<'\n';
+        values.close();
+        if(!values)throw std::runtime_error("start_vector_evidence_write_failed");
+        submitted_values=mapped.values;submitted_types=domain.variable_types;
+        out.warm_start_status="submitted_pending_native_log_evidence";
+        finish();return true;
+    } catch (const std::exception& error) {
+        out.failure_reason="round68_start_"+std::string(error.what());
+        out.warm_start_status=out.failure_reason;
+        finish();return false;
+    }
 }
 
 bool parseSingleIndex(const std::string& name,
@@ -745,6 +883,23 @@ int __stdcall progressAndBoundTargetCallback(
     GRBmodel* model, void* cbdata, int where, void* usrdata) {
     auto* state = static_cast<ProgressCallbackState*>(usrdata);
     if (!state || !state->api) return 0;
+    if (where==GRB_CB_MIPSOL && state->round68_start_values &&
+        state->round68_start_types && !state->round68_start_vector_observed) {
+        const auto& start=*state->round68_start_values;
+        const auto& types=*state->round68_start_types;
+        std::vector<double> solution(start.size());
+        if (!solution.empty() && types.size()==start.size() &&
+            state->api->cbget(cbdata,where,GRB_CB_MIPSOL_SOL,solution.data())==0) {
+            bool same=true, same_integer=true;
+            for (std::size_t i=0;i<solution.size();++i) {
+                const bool equal=std::isfinite(solution[i]) && std::fabs(solution[i]-start[i])<=1e-6;
+                same= same && equal;
+                if (types[i]=='B' || types[i]=='I') same_integer=same_integer && equal;
+            }
+            state->round68_start_vector_observed|=same;
+            state->round68_start_integer_vector_observed|=same_integer;
+        }
+    }
     if (where==GRB_CB_MIPNODE && state->round63) state->round63->query(*state->api,cbdata);
     if(state->round61_session && where==GRB_CB_MIP && !state->submitted_candidates.empty()) {
         double incumbent=GRB_INFINITY;
@@ -2025,7 +2180,17 @@ public:
             fileSha256(request.canonical_model_path) ==
                 request.canonical_model_fingerprint;
 
-        if (!retained && request.warm_start_enabled &&
+        std::vector<double> round68_start_values;
+        std::vector<char> round68_start_types;
+        if (request.round68_verified_start) {
+            ++stats_.warm_start_candidate_count;
+            const bool prepared=prepareRound68Start(api_,model,instance_,options_,request,out,
+                round68_start_values,round68_start_types);
+            if (out.warm_start_mapping_complete) ++stats_.warm_start_complete_count;
+            if (out.warm_start_submitted) ++stats_.warm_start_submitted_count;
+            if (!prepared) {++stats_.warm_start_rejected_count;return out;}
+        }
+        if (!request.round68_verified_start && !retained && request.warm_start_enabled &&
             !request.verified_start_routes.empty()) {
             out.warm_start_candidate_available = true;
             ++stats_.warm_start_candidate_count;
@@ -2127,6 +2292,10 @@ public:
         }
 
         ProgressCallbackState callback;
+        if (request.round68_verified_start && out.warm_start_submitted) {
+            callback.round68_start_values=&round68_start_values;
+            callback.round68_start_types=&round68_start_types;
+        }
         std::ofstream round59_samples;
         if (!request.round59_node_samples_path.empty() && out.terminal_mip) {
             round59_samples.open(request.round59_node_samples_path);
@@ -2295,7 +2464,21 @@ public:
             out.failure_reason = apiError(api_, model_env, callback_rc);
             return out;
         }
+        if (request.round68_verified_start) {
+            out.round68_effective_native_deadline=std::max(0.0,
+                request.global_deadline_remaining_seconds-
+                std::chrono::duration<double>(Clock::now()-round65_started).count());
+            const int deadline_rc=api_.setdblparam(model_env,GRB_DBL_PAR_TIMELIMIT,
+                out.round68_effective_native_deadline);
+            double readback=-1;
+            const int deadline_read_rc=api_.getdblparam(model_env,GRB_DBL_PAR_TIMELIMIT,&readback);
+            if (deadline_rc || deadline_read_rc || readback!=out.round68_effective_native_deadline) {
+                out.failure_reason="round68_global_deadline_readback_failed";return out;
+            }
+        }
         out.optimize_return_code = api_.optimize(model);
+        out.round68_start_vector_observed=callback.round68_start_vector_observed;
+        out.round68_start_integer_vector_observed=callback.round68_start_integer_vector_observed;
 
         if(resource_mip) {
             resource.cuts.close();resource.points.close();
@@ -3047,6 +3230,7 @@ public:
                 ++stats_.warm_start_unknown_count;
             }
         }
+        if (request.round68_verified_start) writeRound68StartEvidence(request,out);
         if (!out.lp_relaxation && solution_count > 0) {
             int nvars = 0;
             if (getInt(GRB_INT_ATTR_NUMVARS, nvars) && nvars > 0) {

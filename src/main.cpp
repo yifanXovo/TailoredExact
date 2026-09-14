@@ -249,6 +249,14 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
     }
     if (opt.algorithm_preset == "custom") return;
 
+    if (opt.algorithm_preset == "research-round68-vdp-start") {
+        opt.algorithm_preset = "research-round67-vdp";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = "research-round68-vdp-start";
+        opt.round68_verified_start = true;
+        return;
+    }
+
     if (opt.algorithm_preset == "research-round67-vdp" ||
         opt.algorithm_preset == "research-round67-log-vdp") {
         const std::string requested = opt.algorithm_preset;
@@ -3197,7 +3205,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if(!ebrp::validRound64SharedMode(opt.round64_shared_mode))throw std::runtime_error("invalid Round64 shared mode");
     const bool r65preset=opt.algorithm_preset=="research-round65-k1-s" || opt.algorithm_preset=="research-round65-k1-h";
     const bool r67preset = opt.algorithm_preset == "research-round67-vdp" ||
-        opt.algorithm_preset == "research-round67-log-vdp";
+        opt.algorithm_preset == "research-round67-log-vdp" ||
+        opt.algorithm_preset == "research-round68-vdp-start";
     if (r67preset && (opt.plain_baseline || opt.round66_arc_load_replacement ||
         opt.round65_budget || opt.round65_projection != "off" ||
         opt.round64_shared_mode != "off" || opt.round63_time_mode != "off" ||
@@ -3635,7 +3644,8 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
             "with tau=0.08, midpoint splits, and the qualified simplified F0 "
             "interval-MIP backend; research strengthening remains default-off";
     } else if (snapshot.algorithm_preset == "research-round67-vdp" ||
-               snapshot.algorithm_preset == "research-round67-log-vdp") {
+               snapshot.algorithm_preset == "research-round67-log-vdp" ||
+               snapshot.algorithm_preset == "research-round68-vdp-start") {
         snapshot.preset_certificate_scope = "k1_original_problem_with_inventory_state_product";
         snapshot.preset_experimental_features_enabled = snapshot.algorithm_preset;
         snapshot.preset_disabled_features = "round65_resource_budgets,projection,arc_load_replacement,other_research";
@@ -3761,6 +3771,7 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         }
     };
     if (opt.round66_arc_load_replacement) append_explicit_research_feature("round66_arc_load_replaces_node_big_m");
+    if (opt.round68_verified_start) append_explicit_research_feature("round68_existing_complete_witness_native_start");
     if (opt.round65_budget) append_explicit_research_feature("round65_optional_credit_core_MIP_fallback");
     if (opt.round65_projection!="off") append_explicit_research_feature("round65_vehicle_projection_"+opt.round65_projection);
     if (opt.round65_budget) append_explicit_research_feature("round65_controller_"+opt.round65_controller);
@@ -4769,7 +4780,8 @@ std::string jsonEscapeLocal(const std::string& value) {
 }
 
 bool isPaperTracePreset(const std::string& preset) {
-    return preset == "research-round67-vdp" || preset == "research-round67-log-vdp" ||
+    return preset == "research-round68-vdp-start" ||
+           preset == "research-round67-vdp" || preset == "research-round67-log-vdp" ||
            preset == "research-round65-k1-s" || preset == "research-round65-k1-h" ||
            preset == "research-round64-k1-s" || preset == "research-round64-k1-h" ||
            preset == "research-round64-single-s" || preset == "research-round60-f0-single-h" ||
@@ -19330,7 +19342,8 @@ int main(int argc, char** argv) {
             ebrp::Instance instance = ebrp::parseInstanceFile(
                 file, opt.total_time_limit, opt.pickup_time, opt.drop_time);
             if ((opt.algorithm_preset == "research-round67-vdp" ||
-                 opt.algorithm_preset == "research-round67-log-vdp") &&
+                 opt.algorithm_preset == "research-round67-log-vdp" ||
+                 opt.algorithm_preset == "research-round68-vdp-start") &&
                 !ebrp::hasMetricTravelLowerBounds(instance)) {
                 throw std::runtime_error(
                     "Round67 strengthened presets require symmetric metric travel; "

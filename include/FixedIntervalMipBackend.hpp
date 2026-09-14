@@ -100,6 +100,7 @@ struct FixedIntervalMipRequest {
     double global_deadline_remaining_seconds = 0.0;
     bool new_leaf = true;
     bool warm_start_enabled = false;
+    bool round68_verified_start = false; // complete existing witness; retained MIP allowed
     std::filesystem::path canonical_model_path;
     std::string canonical_model_fingerprint;
     std::string canonical_model_scope;
@@ -320,6 +321,16 @@ struct FixedIntervalMipOutcome {
     bool warm_start_submitted = false;
     std::string warm_start_status = "not_requested";
     double warm_start_mapping_seconds = 0.0;
+    bool round68_start_rows_valid = false;
+    bool round68_start_objective_valid = false;
+    bool round68_start_readback_valid = false;
+    bool round68_start_vector_observed = false;
+    bool round68_start_integer_vector_observed = false;
+    long long round68_start_checked_rows = 0;
+    double round68_start_maximum_row_violation = 0.0;
+    double round68_start_objective = 0.0;
+    double round68_start_seconds = 0.0;
+    double round68_effective_native_deadline = 0.0;
     std::string failure_reason;
     std::string interval_mip_policy = "interval-mip-v0";
     bool branch_priority_assignment_attempted = false;

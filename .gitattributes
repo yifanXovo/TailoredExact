@@ -33,3 +33,6 @@ scripts/*round65* -text whitespace=cr-at-eol
 # Preserve Round67 compact evidence and measured Python driver byte hashes.
 results/unified_exact_round67/** -text whitespace=cr-at-eol
 scripts/*round67*.py -text whitespace=cr-at-eol
+results/unified_exact_round68/** -text whitespace=cr-at-eol
+scripts/*round68*.py -text whitespace=cr-at-eol
+results/unified_exact_round68/qualification_native_v4/*.log -text -whitespace

@@ -1,5 +1,22 @@
 # Unified exact BRP research — resume here
 
+Latest stage: Round68 on codex/round68-vdp-verified-start, based on completed
+Round67 PR128 final a47e86a57a1f68ca6e515877193cb8696d1aa13e. Owned checkout
+E:/codes/ExactEBRP-round66. Complete, draft PR129:
+https://github.com/yifanXovo/TailoredExact/pull/129 . Implementation/evidence
+commit cb8d7ce560d460dfa87537cc3352c1ffe66a8e40.
+Read results/unified_exact_round68/final_report.md and status.md.
+VD-S adds complete paid-witness native Starts to VD-P, including retained LP
+models and actual-row/readback/MIPSOL checks. All8 Starts accepted/observed.
+45/45 CTests;20 runs,94 native calls,4735.860s paid wall, zero failures.
+D3 cert84.172s versus all controls open300; D6 modest aligned P improvement
+below material threshold; C2 cert123.640s preserved; D4 cert54.453s slower than
+VD-P40.062 but much faster than K1-R129.657, P open. Useful default-off candidate.
+No confirmation, extra repeat or long comparison yet. Overall goal remains unmet.
+Next: separate bounded validation plan, limited repeat and informative long
+window; startup work needs an admissible rule. Never package a frozen stage
+against later modified source. Every substantive stage gets its own draft PR.
+
 Latest completed experiments: Round67 on codex/round67-log-inventory-states, using the same owned
 E:/codes/ExactEBRP-round66 checkout, based on Round66's final7c3b189 commit.
 Read results/unified_exact_round67/final_report.md and status.md.

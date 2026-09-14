@@ -1938,8 +1938,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         result.external_gini_tree_structural_split_unconditional = false;
         result.external_gini_tree_internal_budget_scheduling = options.round65_budget;
         result.external_gini_tree_native_tree_reuse_claimed = false;
-        result.external_gini_tree_warm_start_enabled = round44_active &&
-            adaptive_mip_starts == "verified";
+        result.external_gini_tree_warm_start_enabled = options.round68_verified_start ||
+            (round44_active && adaptive_mip_starts == "verified");
         result.external_gini_tree_selector_variable_count = 0;
         result.external_gini_tree_contract_initial_interval_count =
             round44_active ? adaptive_initial_k0
@@ -2142,9 +2142,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     std::filesystem::create_directories(artifact_dir / "models");
     std::filesystem::create_directories(artifact_dir / "native_logs");
     auto persistCurrentWitness = [&](double objective,const std::vector<RoutePlan>& routes,const std::string& filename) {
-        // Exact current-run startup witness, before any native LP/MIP and
-        // before the universal verified-zero stop. No replay or native Start.
-        // Both research OFF and resource arms pay the same persistence cost.
+        // Original-route evidence acquired within this paid run. Round68 also
+        // records the current witness before each complete native Start map.
         std::ofstream witness(artifact_dir / filename);
         witness << std::setprecision(17) << "{\"objective\":"
                 << objective << ",\"routes\":[";
@@ -3354,7 +3353,20 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         proof_budget.ledger.open(artifact_dir / "optional_budget.csv");
         proof_budget.ledger << "call,state,kind,status,grant_work,grant_seconds,work,seconds,optional_work,core_work,optional_seconds,core_seconds\n";
     }
+    long long round68_start_sequence = 0;
     auto solveBudgeted = [&](FixedIntervalMipRequest request) {
+        if (options.round68_verified_start &&
+            request.solve_kind != FixedIntervalSolveKind::PaperLpRelaxation) {
+            request.round68_verified_start = true;
+            request.warm_start_enabled = true;
+            request.verified_start_routes = best_routes;
+            request.verified_start_source =
+                "round68_existing_" + std::to_string(round68_start_sequence++);
+            if (round65_witness_audit)
+                persistCurrentWitness(verified_ub, best_routes,
+                    request.verified_start_source + "_witness.json");
+            request.global_deadline_remaining_seconds = globalDeadlineRemaining();
+        }
         auto captureNative = [&](const FixedIntervalMipOutcome& out) {
             if(round65_witness_audit && out.incumbent_available && out.incumbent_independently_verified)
                 persistCurrentWitness(out.incumbent_objective,out.incumbent_routes,
