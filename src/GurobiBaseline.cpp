@@ -1990,6 +1990,15 @@ public:
         const int time_rc = api_.setdblparam(
             model_env, GRB_DBL_PAR_TIMELIMIT,
             std::max(0.001, effective_limit));
+        int work_rc = 0;
+        if (options_.round65_budget) {
+            const double requested_work = request.optional_work_limit >= 0
+                ? request.optional_work_limit : GRB_INFINITY;
+            double actual_work = -1;
+            work_rc = api_.setdblparam(model_env, GRB_DBL_PAR_WORKLIMIT, requested_work);
+            work_rc |= api_.getdblparam(model_env, GRB_DBL_PAR_WORKLIMIT, &actual_work);
+            if (actual_work != requested_work) work_rc = -1;
+        }
         out.native_log_path = request.native_log_path.string();
         int log_rc = 0;
         if (!request.native_log_path.empty()) {
@@ -2006,7 +2015,7 @@ public:
             model_env, GRB_DBL_PAR_MIPGAP, &rel_gap);
         const int abs_get = api_.getdblparam(
             model_env, GRB_DBL_PAR_MIPGAPABS, &abs_gap);
-        out.exact_zero_gap_roundtrip = configuration_valid_ && time_rc == 0 &&
+        out.exact_zero_gap_roundtrip = configuration_valid_ && time_rc == 0 && work_rc == 0 &&
             rel_get == 0 && abs_get == 0 && rel_gap == 0.0 && abs_gap == 0.0;
         out.model_fingerprint_matches_request =
             fileSha256(request.canonical_model_path) ==

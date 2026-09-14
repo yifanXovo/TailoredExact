@@ -83,6 +83,7 @@ struct FixedIntervalMipCapabilities {
 };
 
 struct FixedIntervalMipRequest {
+    double optional_work_limit = -1.0; // Round65 only; reset before every core call
     FixedIntervalSolveKind solve_kind =
         FixedIntervalSolveKind::LegacyMipQuantum;
     std::string leaf_id;
@@ -200,6 +201,7 @@ struct FixedIntervalLpConstraintEvidence {
 };
 
 struct FixedIntervalMipOutcome {
+    bool optional_unknown = false;
     bool round62_external_termination_requested = false;
     bool round62_numeric_valid = true;
     bool attempted = false;
