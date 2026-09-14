@@ -1,6 +1,31 @@
 #include "PaperK1AmSf.hpp"
+#include <algorithm>
+#include <cmath>
 
 namespace ebrp {
+
+bool hasMetricTravelLowerBounds(const Instance& instance) {
+    const int count = instance.V + 1;
+    if (static_cast<int>(instance.dist.size()) != count) return false;
+    for (const auto& row : instance.dist)
+        if (static_cast<int>(row.size()) != count) return false;
+    auto tolerance = [](double a, double b) {
+        return 1e-9 * std::max({1.0, std::abs(a), std::abs(b)});
+    };
+    for (int i = 0; i < count; ++i) {
+        if (std::abs(instance.dist[i][i]) > 1e-9) return false;
+        for (int j = 0; j < count; ++j) {
+            const double distance = instance.dist[i][j];
+            if (!std::isfinite(distance) || distance < 0 ||
+                std::abs(distance-instance.dist[j][i]) > tolerance(distance,instance.dist[j][i])) return false;
+            for (int k = 0; k < count; ++k) {
+                const double through = instance.dist[i][k] + instance.dist[k][j];
+                if (distance > through + tolerance(distance,through)) return false;
+            }
+        }
+    }
+    return true;
+}
 
 bool isPaperK1AmSfPresetOrAlias(const std::string& lower_name) {
     return lower_name == "paper-k1-am-sf" || lower_name == "k1-am-f0" ||

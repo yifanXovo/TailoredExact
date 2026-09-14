@@ -47,7 +47,7 @@ struct Round50IntervalMipPolicy {
     // policy and never changes the frozen F0-CLEAN alias.
     std::string inventory_route_root_closure = "off";
     // Round 55 default-off station-state chain. Values are bit-product
-    // (historical), aggregate-mc4, vd-p, and vd-j.
+    // (historical), aggregate-mc4, vd-p, vd-j, and log-vd-p.
     std::string station_state_formulation = "bit-product";
     // Round 55 default-off sparse-family revision. "none" preserves the
     // paper mainline; "triple-support-duration-cover" removes exactly the

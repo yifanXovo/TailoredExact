@@ -29,3 +29,7 @@ scripts/*round62*.py -text whitespace=cr-at-eol
 # Preserve Round 65 ledger, freeze, receipt and diagnostic source byte hashes.
 results/gf_budgeted_proof_round65/** -text whitespace=cr-at-eol
 scripts/*round65* -text whitespace=cr-at-eol
+
+# Preserve Round67 compact evidence and measured Python driver byte hashes.
+results/unified_exact_round67/** -text whitespace=cr-at-eol
+scripts/*round67*.py -text whitespace=cr-at-eol
