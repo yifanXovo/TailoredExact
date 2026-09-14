@@ -12,7 +12,7 @@ calls,5157.483s paid process wall, zero failures. No confirmation or long-run
 extension opened. VD-P certifies D4 in39.891s and C2 in132.656s and nearly matches
 P's D6 gap, but loses most K1 D3 protection. LOG retains D4/C2 benefits but is
 materially worse than P on D6. Default-off, overall goal unmet. Round67 draft
-PR publication is pending. Next stage isolates full existing-witness native
+PR128: https://github.com/yifanXovo/TailoredExact/pull/128 . Implementation/evidence commit 1aa398ef31d8de22bc62049ca08f3adad0affd09. Next stage isolates full existing-witness native
 Start integration with VD-P; see provisional_integration_question.md and its
 official API review. No new experimental phase until a separate plan is saved.
 

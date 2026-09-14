@@ -2,7 +2,8 @@
 
 Stage base: Round66 PR127, commit7c3b18912e16c66f9927ff71563fc25a9f488ff5.
 Branch: codex/round67-log-inventory-states. Overall research goal remains unmet.
-Stage experiments and final audit are complete; draft PR publication follows.
+Stage complete. Draft PR128: https://github.com/yifanXovo/TailoredExact/pull/128 .
+Implementation/evidence commit: 1aa398ef31d8de22bc62049ca08f3adad0affd09.
 
 ## Question and implemented change
 

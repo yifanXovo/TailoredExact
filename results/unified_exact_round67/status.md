@@ -2,7 +2,8 @@
 
 Round67 experiments, analysis and packaging are complete on
 codex/round67-log-inventory-states, base7c3b189, owned checkout
-E:/codes/ExactEBRP-round66. Draft PR publication is pending. The original
+E:/codes/ExactEBRP-round66. Draft PR: https://github.com/yifanXovo/TailoredExact/pull/128 .
+Implementation/evidence commit: 1aa398ef31d8de22bc62049ca08f3adad0affd09. The original
 user-owned Round61 checkout remains untouched. Overall goal active and unmet.
 
 Read final_report.md and the four role screens. VD-P certifies D4 in39.891s and
@@ -19,7 +20,7 @@ Offline mapping:84 models,34 incompatible Gini ranges,50 feasible mappings,
 404337 rows, zero failures.254 compact evidence artifacts packaged and hashed.
 All source/binary hashes still match the measured freeze. No optimizer active.
 
-Next: save this independent draft PR, branch a new stage, and isolate native
+Next: branch a new stage from this completed PR and isolate native
 Start reuse of the already-paid full verified witness with VD-P. Read
 provisional_integration_question.md and gurobi_start_api_review.md; existing
 Round44/61 work does not already establish the proposed retained-model path.
