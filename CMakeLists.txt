@@ -37,6 +37,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Round62Thresholds.cpp
   src/Round63TimeResource.cpp
   src/Round64SharedResource.cpp
+  src/Round65Projection.cpp
   src/ExternalGiniTree.cpp
   src/PaperExternalGiniTree.cpp
   src/Round48K1AMF.cpp
@@ -118,10 +119,16 @@ add_executable(Round64ResourceProbe src/round64_resource_probe.cpp)
 target_link_libraries(Round64ResourceProbe PRIVATE exact_ebrp_core)
 add_executable(Round64ProjectionAudit src/round64_projection_audit.cpp)
 target_link_libraries(Round64ProjectionAudit PRIVATE exact_ebrp_core)
+add_executable(Round65ReferenceBuild src/round65_reference_build.cpp)
+target_link_libraries(Round65ReferenceBuild PRIVATE exact_ebrp_core)
 if(EXACT_EBRP_ENABLE_GUROBI)
   target_include_directories(Round64ProjectionAudit PRIVATE "${GUROBI_INCLUDE_DIR}")
+  target_include_directories(Round65ReferenceBuild PRIVATE "${GUROBI_INCLUDE_DIR}")
 endif()
 add_executable(Round64Tests tests/round64_shared_tests.cpp)
+add_executable(Round65Tests tests/round65_proof_tests.cpp)
+target_link_libraries(Round65Tests PRIVATE exact_ebrp_core)
+add_test(NAME Round65Tests COMMAND Round65Tests)
 target_link_libraries(Round64Tests PRIVATE exact_ebrp_core)
 add_test(NAME Round64Tests COMMAND Round64Tests)
 add_executable(Round62ProjectionAudit src/round62_projection_audit.cpp)

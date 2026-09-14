@@ -105,6 +105,8 @@ public:
     void set_best_observer(BestObserver observer) {
         best_observer = std::move(observer);
     }
+    // Only the independent route verifier in the bridge authorizes this stop.
+    void request_verified_stop() { verified_stop_requested = true; }
     bool stopped_on_absolute_deadline() const {
         return absolute_deadline_reached;
     }
@@ -220,20 +222,20 @@ public:
         };
 
         if (fixed_generations >= 0) {
-            while (total_generations < fixed_generations && !deadlineReached()) {
+            while (!verified_stop_requested && total_generations < fixed_generations && !deadlineReached()) {
                 complete_generation();
             }
         } else if (generation_stagnation_stop) {
             // Round 27 production: the sole stop state is the number of
             // completed generations since strict global-best improvement.
-            while (no_improve_gen_limit > 0 &&
+            while (!verified_stop_requested && no_improve_gen_limit > 0 &&
                    generations_since_improvement < no_improve_gen_limit &&
                    !deadlineReached()) {
                 complete_generation();
             }
         } else {
             // Historical time-limited diagnostic behavior.
-            while (duration_cast<seconds>(
+            while (!verified_stop_requested && duration_cast<seconds>(
                        steady_clock::now() - start).count() < max_time &&
                    !deadlineReached()) {
                 complete_generation();
@@ -246,6 +248,7 @@ public:
     }
 
 private:
+    bool verified_stop_requested = false;
     int fixed_generations = -1;
     double initialization_seconds = 0.0;
     double decoder_seconds = 0.0;

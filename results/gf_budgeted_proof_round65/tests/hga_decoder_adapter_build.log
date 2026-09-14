@@ -1,0 +1,9 @@
+In file included from E:\codes\ExactEBRP-round65\build\round65-hga-decoder-timing\counter-include/hga_tgbc/GreedyMethods.h:3,
+                 from E:\codes\ExactEBRP-round65\src\HgaTgbcRunner.cpp:6:
+E:\codes\ExactEBRP-round65\build\round65-hga-decoder-timing\counter-include/hga_tgbc/AVLCalculator.h: In member function 'void AVLCalculator::update(int, int, double, double)':
+E:\codes\ExactEBRP-round65\build\round65-hga-decoder-timing\counter-include/hga_tgbc/AVLCalculator.h:34:32: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<double>::size_type' {aka 'long long unsigned int'} [-Wsign-compare]
+   34 |         if (x_idx < 0 || x_idx >= current_a.size() || y_idx < 0 || y_idx >= current_a.size()) {
+      |                          ~~~~~~^~~~~~~~~~~~~~~~~~~
+E:\codes\ExactEBRP-round65\build\round65-hga-decoder-timing\counter-include/hga_tgbc/AVLCalculator.h:34:74: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<double>::size_type' {aka 'long long unsigned int'} [-Wsign-compare]
+   34 |         if (x_idx < 0 || x_idx >= current_a.size() || y_idx < 0 || y_idx >= current_a.size()) {
+      |                                                                    ~~~~~~^~~~~~~~~~~~~~~~~~~

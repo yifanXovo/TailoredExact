@@ -10,6 +10,7 @@
 #include <vector>
 
 namespace ebrp {
+struct Round65Budget;
 
 enum class FixedIntervalSolveKind {
     LegacyMipQuantum,
@@ -83,6 +84,8 @@ struct FixedIntervalMipCapabilities {
 };
 
 struct FixedIntervalMipRequest {
+    double optional_work_limit = -1.0; // Round65 only; reset before every core call
+    Round65Budget* round65_budget = nullptr; // synchronous, same run-level account
     FixedIntervalSolveKind solve_kind =
         FixedIntervalSolveKind::LegacyMipQuantum;
     std::string leaf_id;
@@ -200,6 +203,11 @@ struct FixedIntervalLpConstraintEvidence {
 };
 
 struct FixedIntervalMipOutcome {
+    bool optional_unknown = false;
+    bool round65_optional_base_charged = false;
+    bool round65_proof_bound_available = false;
+    bool round65_proof_infeasible = false;
+    double round65_proof_bound = 0;
     bool round62_external_termination_requested = false;
     bool round62_numeric_valid = true;
     bool attempted = false;

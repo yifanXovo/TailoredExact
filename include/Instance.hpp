@@ -31,6 +31,13 @@ struct Instance {
 struct SolveOptions {
     std::string round63_time_mode = "off"; // explicit research resource block/separator
     std::string round64_shared_mode = "off"; // global static Q/T/SEP/JOINT research
+    bool round65_hga_zero_stop = false;
+    bool round65_witness_audit = false; // observational route persistence only
+    bool round65_budget = false;
+    std::string round65_controller = "credit10"; // credit10|credit-seed
+    bool round65_release_load = false;
+    double round65_seed_credit = 30.0; // explicit stress-only override; frozen main policy=30
+    std::string round65_projection = "off"; // off|proof|sparse
     std::string round62_threshold_mode = "off"; // off|events|conflicts|projection|service|service-conflicts|projection-rlt|projection-service
     std::string method = "tailored";
     std::string input_path;

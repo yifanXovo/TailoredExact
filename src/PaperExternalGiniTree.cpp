@@ -16,6 +16,7 @@
 #include "StaticSegmentedGini.hpp"
 #include "Round61Candidates.hpp"
 #include "Round62Passive.hpp"
+#include "Round65Proof.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -122,6 +123,7 @@ void copyLpPrimalDualEvidence(const FixedIntervalMipOutcome& outcome,
 }
 
 struct PaperLeafRuntime {
+    bool round65_core_due = false;
     bool artifact_ready = false;
     CanonicalCompactModelArtifact artifact;
     long long artifact_incumbent_epoch = -1;
@@ -1934,7 +1936,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             (round40_coarse_start &&
              controller_coarse_policy != "k1-single");
         result.external_gini_tree_structural_split_unconditional = false;
-        result.external_gini_tree_internal_budget_scheduling = false;
+        result.external_gini_tree_internal_budget_scheduling = options.round65_budget;
         result.external_gini_tree_native_tree_reuse_claimed = false;
         result.external_gini_tree_warm_start_enabled = round44_active &&
             adaptive_mip_starts == "verified";
@@ -2139,15 +2141,15 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             : std::filesystem::path(options.external_gini_artifact_dir);
     std::filesystem::create_directories(artifact_dir / "models");
     std::filesystem::create_directories(artifact_dir / "native_logs");
-    if (options.algorithm_preset.rfind("research-round64-", 0) == 0) {
+    auto persistCurrentWitness = [&](double objective,const std::vector<RoutePlan>& routes,const std::string& filename) {
         // Exact current-run startup witness, before any native LP/MIP and
         // before the universal verified-zero stop. No replay or native Start.
         // Both research OFF and resource arms pay the same persistence cost.
-        std::ofstream witness(artifact_dir / "initial_witness.json");
+        std::ofstream witness(artifact_dir / filename);
         witness << std::setprecision(17) << "{\"objective\":"
-                << verified_seed.objective << ",\"routes\":[";
-        for (std::size_t k = 0; k < verified_seed.routes.size(); ++k) {
-            const auto& route = verified_seed.routes[k];
+                << objective << ",\"routes\":[";
+        for (std::size_t k = 0; k < routes.size(); ++k) {
+            const auto& route = routes[k];
             if (k) witness << ',';
             witness << "{\"vehicle\":" << route.vehicle << ",\"nodes\":[";
             for (std::size_t i = 0; i < route.nodes.size(); ++i) {
@@ -2164,7 +2166,17 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             witness << "]}";
         }
         witness << "]}\n";
-        if (!witness) throw std::runtime_error("Round64 startup witness persistence failed");
+        if (!witness) {
+            if(options.round65_witness_audit || options.algorithm_preset.rfind("research-round65-",0)==0)
+                result.notes.push_back("witness audit persistence failed: "+filename);
+            else throw std::runtime_error("Round64 startup witness persistence failed");
+        }
+    };
+    const bool round65_witness_audit=options.round65_witness_audit ||
+        options.algorithm_preset.rfind("research-round65-",0)==0;
+    long long round65_native_witness_count=0;
+    if (round65_witness_audit || options.algorithm_preset.rfind("research-round64-", 0) == 0) {
+        persistCurrentWitness(verified_seed.objective,verified_seed.routes,"initial_witness.json");
     }
     recordProcessPhase(
         options, "external_artifact_directory_creation", "complete",
@@ -3335,6 +3347,60 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         result.external_gini_tree_failure_reason = "overall_global_deadline";
     };
 
+    Round65Budget proof_budget;
+    proof_budget.seed_work = proof_budget.seed_seconds = options.round65_seed_credit;
+    if(options.round65_controller=="credit-seed")proof_budget.call_work=30;
+    if (options.round65_budget) {
+        proof_budget.ledger.open(artifact_dir / "optional_budget.csv");
+        proof_budget.ledger << "call,state,kind,status,grant_work,grant_seconds,work,seconds,optional_work,core_work,optional_seconds,core_seconds\n";
+    }
+    auto solveBudgeted = [&](FixedIntervalMipRequest request) {
+        auto captureNative = [&](const FixedIntervalMipOutcome& out) {
+            if(round65_witness_audit && out.incumbent_available && out.incumbent_independently_verified)
+                persistCurrentWitness(out.incumbent_objective,out.incumbent_routes,
+                    "native_"+std::to_string(round65_native_witness_count++)+"_witness.json");
+        };
+        if (!options.round65_budget) {auto out=backend->solve(request);captureNative(out);return out;}
+        const bool optional = request.solve_kind == FixedIntervalSolveKind::PaperLpRelaxation;
+        const auto grant = proof_budget.grant(globalDeadlineRemaining());
+        if (optional && !grant.allowed()) {
+            FixedIntervalMipOutcome unknown;
+            unknown.optional_unknown = true;
+            unknown.native_status = "OPTIONAL_BUDGET_EXHAUSTED";
+            proof_budget.charge(true, 0, 0, request.leaf_id, unknown.native_status, grant);
+            return unknown;
+        }
+        if (optional) {
+            request.optional_work_limit = grant.work;
+            request.global_deadline_remaining_seconds = grant.seconds;
+        }
+        const auto start = PaperClock::now();
+        const double optional_seconds_before = proof_budget.optional_seconds;
+        request.round65_budget = &proof_budget;
+        auto out = backend->solve(request);
+        captureNative(out);
+        const double seconds = std::chrono::duration<double>(PaperClock::now()-start).count();
+        if (!out.round65_optional_base_charged) proof_budget.charge(optional, out.work, seconds, request.leaf_id + "|" +
+            request.canonical_model_fingerprint, out.native_status, optional ? grant : Round65Budget::Grant{});
+        else proof_budget.charge(true, 0, std::max(0., seconds -
+            (proof_budget.optional_seconds - optional_seconds_before)), request.leaf_id,
+            "backend_type_restore_and_finalization", {});
+        if (optional && !(out.lp_terminal_valid && out.exact_zero_gap_roundtrip &&
+            out.model_fingerprint_matches_request && out.feasibility_consistency_gate)) {
+            out.optional_unknown = true;
+            // No partial primal objective or unchecked dual evidence is exported.
+            out.optimal = out.infeasible = out.native_bound_available = false;
+            // A normal limit preserves the restored model. A damaged type or
+            // identity transition must never reach core MIP as a relaxation.
+            if (!out.integer_domain_restored || !out.model_fingerprint_matches_request)
+                backend->discardLeaf(request.leaf_id);
+        }
+        if (!out.optional_unknown && optional) {
+            if (out.round65_proof_bound_available) out.native_bound = std::max(out.native_bound, out.round65_proof_bound);
+            if (out.round65_proof_infeasible) {out.infeasible=true;out.optimal=false;}
+        }
+        return out;
+    };
     auto ensureArtifact = [&](const ControllingLeaf& leaf,
                               PaperLeafRuntime& state) -> bool {
         if (state.artifact_ready &&
@@ -3417,6 +3483,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         const double build_seconds = std::chrono::duration<double>(
             PaperClock::now() - build_started).count();
         total_model_build_seconds += build_seconds;
+        if (options.round65_budget) proof_budget.charge(true, 0, build_seconds,
+            leaf.id, "canonical_build", Round65Budget::Grant{});
         ++result.external_gini_tree_canonical_artifact_generation_count;
         if (!first_model_build_recorded) {
             recordProcessPhase(
@@ -3449,6 +3517,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         if (state.lp_complete &&
             state.lp_incumbent_epoch == incumbent_epoch) return true;
         if (!ensureArtifact(leaf, state)) return false;
+        if (options.round65_budget && state.round65_core_due) return true;
         const double remaining = globalDeadlineRemaining();
         if (remaining <= 0.0) {
             stopAtDeadline();
@@ -3480,8 +3549,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 "leaf=" + leaf.id);
             first_lp_launch_recorded = true;
         }
-        const FixedIntervalMipOutcome outcome = backend->solve(request);
-        optimize << leaf.id << ",LP," << csvField(outcome.native_status) << ','
+        const FixedIntervalMipOutcome outcome = solveBudgeted(request);
+        if (outcome.attempted) optimize << leaf.id << ",LP," << csvField(outcome.native_status) << ','
                  << outcome.optimize_return_code << ',' << remaining << ','
                  << outcome.solver_runtime_seconds << ',' << outcome.work << ','
                  << outcome.nodes << ',' << outcome.simplex_iterations << ','
@@ -3491,6 +3560,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                  << outcome.integer_domain_restored << ','
                  << csvField(outcome.basis_reuse_status) << ','
                  << csvField(outcome.native_log_path) << '\n';
+        if (outcome.optional_unknown) {
+            state.round65_core_due = true;
+            state.lp = PaperLpResult{};
+            state.lp.lower_bound = leaf.lower_bound;
+            return true;
+        }
         if (outcome.interrupted) {
             stopAtDeadline();
             return false;
@@ -3586,7 +3661,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         request.incremental_model_reuse_enabled = incremental_model_reuse;
         request.retain_model_after_solve = incremental_model_reuse;
         request.capture_lp_primal_dual_evidence = round49_active;
-        const FixedIntervalMipOutcome outcome = backend->solve(request);
+        const FixedIntervalMipOutcome outcome = solveBudgeted(request);
         optimize << leaf.id << ",LP," << csvField(outcome.native_status)
                  << ',' << outcome.optimize_return_code << ',' << remaining
                  << ',' << outcome.solver_runtime_seconds << ','
@@ -3759,7 +3834,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         const double exact_launch = elapsedTelemetry();
         const double other_bound =
             otherRelevantMinimum(bounded.id);
-        const FixedIntervalMipOutcome outcome = backend->solve(request);
+        const FixedIntervalMipOutcome outcome = solveBudgeted(request);
         mergeRound60CandidateOutcome(outcome);
         if (round44_active) {
             round44_start_ledger << bounded.id << ','
@@ -5902,7 +5977,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         const bool round37_force_prefinement =
             round37_pilot_prefinement_pending &&
             bounded.id == round37_pilot_selection.leaf_id;
-        if (!options.round59_single_mip && c6_nonblocking && !round43_active && !round44_active &&
+        if (!(options.round65_budget && selected_state.round65_core_due) && !options.round59_single_mip && c6_nonblocking && !round43_active && !round44_active &&
             !round37_force_prefinement) {
             const C6FrontierDecision frontier =
                 evaluateC6FrontierDecision(
@@ -5994,7 +6069,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 "c5_parent_native_target_reached_delayed_atomic_split");
             continue;
         }
-        const bool eligible = !options.round59_single_mip && !round43_active && !round44_active &&
+        const bool eligible = !(options.round65_budget && selected_state.round65_core_due) &&
+            !options.round59_single_mip && !round43_active && !round44_active &&
             ((!round40_coarse_start ||
              round40_geometry.adaptive_refinement) &&
             legacyAdaptiveSplitEligible(
@@ -6061,7 +6137,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             // Child LPs are structural lookahead events. They are evaluated
             // completely before the scheduler sees either child, preserving
             // atomic parent replacement.
+            bool round65_unknown_child = false;
             if (!reuse_c6_children) for (ControllingLeaf& child : children) {
+                if (options.round65_budget && !proof_budget.grant(globalDeadlineRemaining()).allowed()) {
+                    round65_unknown_child = true;
+                    break;
+                }
                 std::string add_reason;
                 ControllingLeafScheduler isolated(
                     scheduler.certificateTolerance());
@@ -6104,8 +6185,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 request.retain_model_after_solve =
                     incremental_model_reuse;
                 request.capture_lp_primal_dual_evidence = round49_active;
-                const FixedIntervalMipOutcome outcome = backend->solve(request);
-                optimize << child.id << ",LP," << csvField(outcome.native_status)
+                const FixedIntervalMipOutcome outcome = solveBudgeted(request);
+                if (outcome.attempted) optimize << child.id << ",LP," << csvField(outcome.native_status)
                          << ',' << outcome.optimize_return_code << ',' << remaining
                          << ',' << outcome.solver_runtime_seconds << ','
                          << outcome.work << ',' << outcome.nodes << ','
@@ -6116,6 +6197,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                          << outcome.integer_domain_restored << ','
                          << csvField(outcome.basis_reuse_status) << ','
                          << csvField(outcome.native_log_path) << '\n';
+                if (outcome.optional_unknown) {
+                    round65_unknown_child = true;
+                    child_state.lp = PaperLpResult{};
+                    child_state.lp.lower_bound = bounded.lower_bound;
+                    break;
+                }
                 if (outcome.interrupted) {
                     stopAtDeadline();
                     break;
@@ -6169,6 +6256,17 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 }
             }
             if (hard_failure || global_deadline_stop) break;
+            if (round65_unknown_child) {
+                // No replacement transaction occurred: the complete parent is
+                // still authoritative, even if one child has an empty proof.
+                // Force its exact MIP on re-entry, without repeating lookahead.
+                selected_state.round65_core_due = true;
+                for (const auto& child : children) backend->discardLeaf(child.id);
+                events << elapsedTelemetry() << ",optional_unknown_parent_retained," << bounded.id
+                    << ',' << bounded.gamma_L << ',' << bounded.gamma_U << ",open,"
+                    << scheduler.globalLowerBound() << ',' << verified_ub << ",core_due\n";
+                continue;
+            }
             if (c6_nonblocking && !reuse_c6_children) {
                 selected_state.c6_children_ready = true;
                 selected_state.c6_cached_children = children;
@@ -7052,7 +7150,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 const double other_bound =
                     otherRelevantMinimum(bounded.id);
                 const FixedIntervalMipOutcome outcome =
-                    backend->solve(request);
+                    solveBudgeted(request);
                 mergeRound60CandidateOutcome(outcome);
                 optimize << bounded.id << ",PARTIAL_MIP_TARGET,"
                          << csvField(outcome.native_status) << ','
@@ -7471,7 +7569,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 block_request.capture_native_bound_events = true;
                 configureRound60CandidateRequest(block_request);
                 const FixedIntervalMipOutcome block_outcome =
-                    backend->solve(block_request);
+                    solveBudgeted(block_request);
                 mergeRound60CandidateOutcome(block_outcome);
                 optimize << block_id << ",MIP_CONSOLIDATION_TARGET,"
                     << csvField(block_outcome.native_status) << ','
@@ -7803,7 +7901,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                         ++result.external_gini_tree_exact_closure_launch_count;
                         ++result.round42_sibling_block_optimize_count;
                         const FixedIntervalMipOutcome block_outcome =
-                            backend->solve(block_request);
+                            solveBudgeted(block_request);
                         mergeRound60CandidateOutcome(block_outcome);
                         optimize << block_id << ",MIP_BLOCK,"
                             << csvField(block_outcome.native_status) << ','
@@ -8101,7 +8199,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         const double terminal_exact_launch = elapsedTelemetry();
         const double terminal_other_bound =
             otherRelevantMinimum(bounded.id);
-        const FixedIntervalMipOutcome outcome = backend->solve(request);
+        const FixedIntervalMipOutcome outcome = solveBudgeted(request);
         mergeRound60CandidateOutcome(outcome);
         if (round44_active) {
             round44_start_ledger << bounded.id << ','

@@ -1,0 +1,32 @@
+{
+  "launch": {
+    "id": "C9",
+    "arm": "plain-build",
+    "stage": "reference_build",
+    "command": [
+      "E:\\codes\\ExactEBRP-round65\\build\\round65\\Round65ReferenceBuild.exe",
+      "reference/citibike443-regional-v1/instances/V20/cb443_V20_compact_r1_balanced_M02_Q20.txt",
+      "10800",
+      "60.0",
+      "60.0",
+      "0.15",
+      "E:\\codes\\ExactEBRP-round65\\results\\gf_budgeted_proof_round65\\local_raw\\reference_build\\C9"
+    ],
+    "executable_sha256": "74cac3b28464f88faf8b86b4a336258ec8eaea3832e07c147750f035246ec0ce",
+    "cap_seconds": 30,
+    "kind": "build-only",
+    "charged": false,
+    "charged_number": null,
+    "solver_calls_planned": 0,
+    "started_unix": 1789374954.0856695,
+    "destination": "results\\gf_budgeted_proof_round65\\local_raw\\reference_build\\C9"
+  },
+  "completion": {
+    "returncode": 0,
+    "wall_seconds": 0.04600000008940697,
+    "watchdog": false,
+    "within_budget": true,
+    "solver_calls_planned": 0
+  },
+  "result": {}
+}

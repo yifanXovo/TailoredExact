@@ -1,0 +1,30 @@
+
+Gurobi 13.0.2 (win64) logging started Mon Sep 14 18:27:38 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP-round65\results\gf_budgeted_proof_round65\local_raw\protection_v5\D3\P-GRB\native.log"
+Set parameter Threads to value 1
+Set parameter Presolve to value -1
+Set parameter Seed to value 0
+Set parameter MIPGap to value 0
+Set parameter MIPGapAbs to value 0
+Set parameter TimeLimit to value 294
+Read LP format model from file E:\codes\ExactEBRP-round65\results\gf_budgeted_proof_round65\local_raw\protection_v5\D3\P-GRB\compact.lp
+Reading time = 0.00 seconds
+obj: 2089 rows, 935 columns, 9078 nonzeros
+Set parameter TimeLimit to value 296.9324475
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  296.9324475
+MIPGap  0
+MIPGapAbs  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 2089 rows, 935 columns and 9078 nonzeros (Min)
+Model fingerprint: 0x70b4569c
+Model has 13 linear objective coefficients
+Variable types: 207 continuous, 728 integer (608 binary)

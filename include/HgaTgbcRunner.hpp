@@ -30,6 +30,7 @@ struct HgaTgbcOptions {
     // Negative leaves every historical stopping/extraction rule unchanged.
     int fixed_generations = -1;
     bool retain_verified_on_log_failure = false;
+    bool stop_on_verified_zero = false;
 };
 
 struct HgaTgbcResult {
@@ -55,6 +56,8 @@ struct HgaTgbcResult {
     std::string retained_candidate_sha256;
     std::filesystem::path generation_log_path;
     bool candidate_evidence_persisted = true;
+    bool verified_zero_stop = false;
+    double verified_zero_seconds = -1.0;
     double initialization_seconds = 0.0;
     double decoder_seconds = 0.0;
     double observer_seconds = 0.0;

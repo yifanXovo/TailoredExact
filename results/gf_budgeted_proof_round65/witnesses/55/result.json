@@ -1,0 +1,143 @@
+{
+  "objective": 0.8068189167868076,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        7,
+        27,
+        20,
+        5,
+        0
+      ],
+      "operations": [
+        {
+          "station": 7,
+          "pickup": 14,
+          "drop": 0
+        },
+        {
+          "station": 27,
+          "pickup": 0,
+          "drop": 3
+        },
+        {
+          "station": 20,
+          "pickup": 0,
+          "drop": 4
+        },
+        {
+          "station": 5,
+          "pickup": 0,
+          "drop": 7
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        12,
+        28,
+        0
+      ],
+      "operations": [
+        {
+          "station": 12,
+          "pickup": 16,
+          "drop": 0
+        },
+        {
+          "station": 28,
+          "pickup": 0,
+          "drop": 16
+        }
+      ]
+    },
+    {
+      "vehicle": 2,
+      "nodes": [
+        0,
+        13,
+        1,
+        0
+      ],
+      "operations": [
+        {
+          "station": 13,
+          "pickup": 20,
+          "drop": 0
+        },
+        {
+          "station": 1,
+          "pickup": 0,
+          "drop": 20
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "feasible": true,
+    "original_solution_feasible": true,
+    "original_objective_recomputed": true,
+    "routes_start_end_depot": true,
+    "station_disjoint": true,
+    "load_feasible": true,
+    "station_feasible": true,
+    "duration_feasible": true,
+    "objective_matches": true,
+    "route_travel_time": [
+      1838.0449578076905,
+      1353.9952530729124,
+      1101.5048444463607
+    ],
+    "route_operation_time": [
+      1680,
+      1920,
+      2400
+    ],
+    "route_duration": [
+      3518.0449578076905,
+      3273.9952530729124,
+      3501.504844446361
+    ],
+    "final_inventories": [
+      50000,
+      30,
+      21,
+      16,
+      5,
+      10,
+      20,
+      28,
+      6,
+      14,
+      6,
+      3,
+      33,
+      34,
+      19,
+      4,
+      12,
+      5,
+      2,
+      2,
+      5,
+      11,
+      15,
+      19,
+      24,
+      2,
+      41,
+      6,
+      27,
+      23,
+      2
+    ],
+    "G": 0.3415507434015503,
+    "P": 3.101787822568382,
+    "objective": 0.8068189167868076,
+    "errors": []
+  }
+}
