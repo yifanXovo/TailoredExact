@@ -1,0 +1,119 @@
+{
+  "objective": 0.021337006039780566,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        5,
+        9,
+        0
+      ],
+      "operations": [
+        {
+          "station": 5,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 9,
+          "pickup": 0,
+          "drop": 6
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        10,
+        7,
+        0
+      ],
+      "operations": [
+        {
+          "station": 10,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 7,
+          "pickup": 0,
+          "drop": 6
+        }
+      ]
+    },
+    {
+      "vehicle": 2,
+      "nodes": [
+        0,
+        3,
+        4,
+        1,
+        0
+      ],
+      "operations": [
+        {
+          "station": 3,
+          "pickup": 2,
+          "drop": 0
+        },
+        {
+          "station": 4,
+          "pickup": 2,
+          "drop": 0
+        },
+        {
+          "station": 1,
+          "pickup": 0,
+          "drop": 4
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "feasible": true,
+    "original_solution_feasible": true,
+    "original_objective_recomputed": true,
+    "routes_start_end_depot": true,
+    "station_disjoint": true,
+    "load_feasible": true,
+    "station_feasible": true,
+    "duration_feasible": true,
+    "objective_matches": true,
+    "route_travel_time": [
+      413.6997461552672,
+      1252.091172934482,
+      1294.0097544490538
+    ],
+    "route_operation_time": [
+      720,
+      720,
+      480
+    ],
+    "route_duration": [
+      1133.6997461552671,
+      1972.091172934482,
+      1774.0097544490538
+    ],
+    "final_inventories": [
+      50000,
+      17,
+      14,
+      25,
+      22,
+      29,
+      16,
+      11,
+      10,
+      12,
+      16,
+      16,
+      14
+    ],
+    "G": 0.014397839373113895,
+    "P": 0.04626111111111114,
+    "objective": 0.021337006039780566,
+    "errors": []
+  }
+}

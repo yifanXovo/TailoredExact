@@ -29,6 +29,9 @@ struct Instance {
 };
 
 struct SolveOptions {
+    // Replace node-load Big-M recurrences by the exact arc-load formulation.
+    // Research only; the original compact benchmark and stable presets stay off.
+    bool round66_arc_load_replacement = false;
     std::string round63_time_mode = "off"; // explicit research resource block/separator
     std::string round64_shared_mode = "off"; // global static Q/T/SEP/JOINT research
     bool round65_hga_zero_stop = false;

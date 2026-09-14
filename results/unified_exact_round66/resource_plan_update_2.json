@@ -1,0 +1,16 @@
+{
+  "revision": 2,
+  "declared_before_followup_result": true,
+  "change": "After the 16 initial performance runs, add exactly one D4 Q-PLUS complete-run control at cap 300 seconds.",
+  "reason": "D4 ARC improved K1-R complete certificate time by 17%. A same-build paid Q-PLUS control separates q-strength from redundant-row/integer-declaration replacement; historical Round64 did not run warm Q on this role.",
+  "allowed_id": "D4",
+  "allowed_arm": "Q-PLUS",
+  "cap_seconds": 300,
+  "maximum_additional_launches": 1,
+  "revised_performance_total": 17,
+  "native_micro_total_unchanged": 2,
+  "additional_worst_case_seconds": 300,
+  "revised_stage_worst_case_seconds": 4960,
+  "frozen_candidate_and_v1_driver_unchanged": true,
+  "entry_point": "scripts/round66_q_control.py"
+}
