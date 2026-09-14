@@ -1936,7 +1936,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             (round40_coarse_start &&
              controller_coarse_policy != "k1-single");
         result.external_gini_tree_structural_split_unconditional = false;
-        result.external_gini_tree_internal_budget_scheduling = false;
+        result.external_gini_tree_internal_budget_scheduling = options.round65_budget;
         result.external_gini_tree_native_tree_reuse_claimed = false;
         result.external_gini_tree_warm_start_enabled = round44_active &&
             adaptive_mip_starts == "verified";
@@ -3359,15 +3359,20 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             request.global_deadline_remaining_seconds = grant.seconds;
         }
         const auto start = PaperClock::now();
+        request.round65_budget = &proof_budget;
         auto out = backend->solve(request);
         const double seconds = std::chrono::duration<double>(PaperClock::now()-start).count();
-        proof_budget.charge(optional, out.work, seconds, request.leaf_id + "|" +
+        if (!out.round65_optional_base_charged) proof_budget.charge(optional, out.work, seconds, request.leaf_id + "|" +
             request.canonical_model_fingerprint, out.native_status, optional ? grant : Round65Budget::Grant{});
         if (optional && !(out.lp_terminal_valid && out.exact_zero_gap_roundtrip &&
             out.model_fingerprint_matches_request && out.feasibility_consistency_gate)) {
             out.optional_unknown = true;
             // No partial primal objective or unchecked dual evidence is exported.
             out.optimal = out.infeasible = out.native_bound_available = false;
+        }
+        if (!out.optional_unknown && optional) {
+            if (out.round65_proof_bound_available) out.native_bound = std::max(out.native_bound, out.round65_proof_bound);
+            if (out.round65_proof_infeasible) {out.infeasible=true;out.optimal=false;}
         }
         return out;
     };

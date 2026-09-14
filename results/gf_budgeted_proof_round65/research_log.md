@@ -62,3 +62,24 @@ long pairs/references/confirmation. Long pairs must cover C6,D7,C8 (600-1200 s).
 Gates: time >=10 seconds AND >=10%; gap >=.001 AND >=5%; certificates separate.
 Every process, failure and internal optimize charged; no simultaneous optimizers,
 compilation/Git/heavy auditing during performance. No claim of guaranteed speedup.
+
+## v1 completed: seven launches, before projection qualification
+
+v1 native source c109cbfc5 (main executable SHA45d885dfc451075c1d2526027c0e742418e46457c2ca4c8592309c24637f0e7c)
+passes42 solver-free CTests. Launch1 is cap20 native micro with zero optional
+credit: no LP optimize, one exact MIP, original F=5/24 certified. This is a
+stress/correctness result, not a performance gain. Active parent remains covered.
+
+Launches2-7 are cap300 same-build OFF/reliable on C5,C7,C2. C5 certifies zero in
+252.110/3.594 seconds, C7 in37.812/2.187 seconds. Both pairs have identical
+logical HGA prefixes (11 and58 rows); early stops after generations10 and57,
+versus the unchanged2010/2057 generations. C2 executes2793 generations in both,
+same full2794-row logical trajectory, same U=.8299634131717752, seven calls and
+one split. Final gaps .032289760274486934/.032286469736093615 differ below both
+gates. All seven final original routes independently verify. No native injection
+or startup-length tuning was used. Actual find/observe/verify timing is in HGA
+events and phases; accepted zero closes with the existing nonnegative bound.
+
+The6-run reliability queue is terminal before any v2 compile/audit. Retain v1
+binaries at build/round65-v1; no subsequent build is substituted for these runs.
+The new production projection code has not yet been performance qualified.

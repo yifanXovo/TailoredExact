@@ -3720,6 +3720,9 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
             snapshot.preset_experimental_features_enabled += "," + feature;
         }
     };
+    if (opt.round65_budget) append_explicit_research_feature("round65_optional_credit_core_MIP_fallback");
+    if (opt.round65_projection!="off") append_explicit_research_feature("round65_vehicle_projection_"+opt.round65_projection);
+    if (opt.round65_hga_zero_stop) append_explicit_research_feature("round65_verified_zero_stop_and_memory_retention");
     if (opt.round60_hga_publish_verified) {
         append_explicit_research_feature(
             "round60_hga_verified_event_publication");

@@ -37,6 +37,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Round62Thresholds.cpp
   src/Round63TimeResource.cpp
   src/Round64SharedResource.cpp
+  src/Round65Projection.cpp
   src/ExternalGiniTree.cpp
   src/PaperExternalGiniTree.cpp
   src/Round48K1AMF.cpp

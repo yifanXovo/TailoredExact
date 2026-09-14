@@ -17,6 +17,7 @@
 #include "Round60Candidates.hpp"
 #include "Round61Candidates.hpp"
 #include "Round63TimeResource.hpp"
+#include "Round65Projection.hpp"
 
 #include <gurobi_c.h>
 
@@ -61,6 +62,7 @@ struct GurobiApi {
     decltype(&GRBgeterrormsg) geterrormsg = nullptr;
     decltype(&GRBversion) version = nullptr;
     decltype(&GRBreadmodel) readmodel = nullptr;
+    decltype(&GRBcopymodel) copymodel = nullptr;
     decltype(&GRBfreemodel) freemodel = nullptr;
     decltype(&GRBgetenv) getenv = nullptr;
     decltype(&GRBsetintparam) setintparam = nullptr;
@@ -229,6 +231,7 @@ bool loadGurobiApi(const SolveOptions& options,
     LOAD_GRB(updatemodel, "GRBupdatemodel");
     LOAD_GRB(write, "GRBwrite");
     LOAD_GRB(getconstrs, "GRBgetconstrs");
+    LOAD_GRB(copymodel, "GRBcopymodel");
 #undef LOAD_GRB
     reason = "loaded";
     return true;
@@ -1365,6 +1368,7 @@ public:
 
     FixedIntervalMipOutcome solve(
         const FixedIntervalMipRequest& request) override {
+        const auto round65_started = Clock::now();
         FixedIntervalMipOutcome out;
         out.attempted = true;
         out.available = available_;
@@ -3084,6 +3088,14 @@ public:
             out.feasibility_consistency_gate = !contradicts;
         }
         state.had_incumbent = !out.lp_relaxation && solution_count > 0;
+        if (options_.round65_projection!="off" && out.lp_terminal_valid && out.optimal &&
+            out.exact_zero_gap_roundtrip && out.model_fingerprint_matches_request && out.feasibility_consistency_gate && request.round65_budget) {
+            const double seconds=std::chrono::duration<double>(Clock::now()-round65_started).count();
+            request.round65_budget->charge(true,out.work,seconds,request.leaf_id,"base_LP_"+out.native_status,
+                {request.optional_work_limit,request.global_deadline_remaining_seconds});
+            out.round65_optional_base_charged=true;
+            runRound65Projection(model,state.round65_rows,native_names,request,out);
+        }
         bool domain_restore_ok = true;
         if (out.lp_relaxation &&
             request.incremental_model_reuse_enabled) {
@@ -3154,6 +3166,7 @@ public:
 
 private:
     struct LeafState {
+        std::set<std::string> round65_rows;
         GRBmodel* model = nullptr;
         std::string model_fingerprint;
         bool new_child = false;
@@ -3166,6 +3179,113 @@ private:
         double cumulative_barrier_iterations = 0.0;
         std::vector<char> original_variable_types;
     };
+
+    std::unique_ptr<Round65ProjectionService> round65_service_;
+    std::vector<Round65ProjectionRow> round65_pool_;
+    std::set<std::string> round65_signatures_;
+    long long round65_proof_calls_=0;
+    bool round65_projection_failed_=false;
+    void runRound65Projection(GRBmodel* main_model,std::set<std::string>& attached,
+        const std::vector<std::string>& names,const FixedIntervalMipRequest& request,FixedIntervalMipOutcome& out) {
+        auto& budget=*request.round65_budget;
+        if(round65_projection_failed_ || !budget.grant(processWorkRemainingSeconds(options_)).allowed())return;
+        const auto started=Clock::now();double accounted_seconds=0;
+        auto elapsed=[&](){return std::chrono::duration<double>(Clock::now()-started).count();};
+        const auto dir=request.native_log_path.parent_path().parent_path()/"projection";
+        GRBmodel* proof=nullptr;
+        try {
+            auto check=[](int rc){if(rc)throw std::runtime_error("Round65 proof API "+std::to_string(rc));};
+            if(!round65_service_) round65_service_=std::make_unique<Round65ProjectionService>(instance_,dir);
+            std::map<std::string,int> indices;
+            for(std::size_t i=0;i<names.size();++i)if(names[i].empty()||!indices.emplace(names[i],int(i)).second)throw std::runtime_error("original names");
+            auto readPoint=[&](GRBmodel* m){std::vector<double> x(names.size());check(api_.getdblattrarray(m,"X",0,int(x.size()),x.data()));
+                std::map<std::string,double> values;for(std::size_t i=0;i<x.size();++i){if(!std::isfinite(x[i]))throw std::runtime_error("nonfinite point");values[names[i]]=x[i];}return values;};
+            auto point=readPoint(main_model);
+            check(api_.updatemodel(main_model));proof=api_.copymodel(main_model);if(!proof)throw std::runtime_error("proof copy");
+            check(api_.setcallbackfunc(proof,nullptr,nullptr));auto env=api_.getenv(proof);
+            // This is an independent bounded LP. No native MIP reset or reload.
+            std::set<std::string> proof_rows=attached;
+            std::vector<Round65ProjectionRow> selected;
+            auto activity=[&](const Round65ProjectionRow& r){long double a=0;for(const auto& [n,c]:r.coefficients)a+=static_cast<long double>(c)*point.at(n);return double(a);};
+            auto add=[&](GRBmodel* m,const Round65ProjectionRow& r){
+                if(!r.valid||r.identity!=round65_service_->identity())throw std::runtime_error("row physical identity");
+                std::vector<int> ix;std::vector<double> a;for(const auto& [n,c]:r.coefficients){ix.push_back(indices.at(n));a.push_back(c);}
+                check(api_.addconstr(m,int(ix.size()),ix.data(),a.data(),'>',r.rhs,("r65_"+r.signature).c_str()));
+            };
+            std::ofstream trace(dir/"proof_calls.csv",std::ios::app),uses(dir/"row_use.csv",std::ios::app);
+            if(trace.tellp()==0)trace<<"call,leaf,round,gamma_L,gamma_U,cutoff,bound,work,seconds,selected,status\n";
+            if(uses.tellp()==0)uses<<"leaf,model_sha256,cutoff,signature,support,raw_violation,target\n";
+            double last_bound=out.native_bound;
+            // At most four LP reoptimizations and eight selected rows per call.
+            // Stop after a non-improving objective pass. Global pool capped at64.
+            for(int round=0;round<4 && selected.size()<8;++round){
+                std::vector<Round65ProjectionRow> pending;
+                for(const auto& row:round65_pool_)if(selected.size()+pending.size()<8 && !proof_rows.count(row.signature) && row.rhs-activity(row)>1e-7){
+                    pending.push_back(row);proof_rows.insert(row.signature);
+                }
+                for(int k=0;k<instance_.M && selected.size()+pending.size()<8 && round65_pool_.size()<64;++k){
+                    if(!budget.grant(processWorkRemainingSeconds(options_)).allowed())break;
+                    const double before=budget.optional_seconds;
+                    auto answer=round65_service_->query(k,point,processWorkRemainingSeconds(options_),budget);
+                    accounted_seconds+=budget.optional_seconds-before;
+                    if(answer.row.valid && round65_signatures_.insert(answer.row.signature).second){
+                        round65_pool_.push_back(answer.row);
+                        if(proof_rows.insert(answer.row.signature).second)pending.push_back(answer.row);
+                    }
+                }
+                if(pending.empty())break;
+                for(const auto& row:pending){add(proof,row);selected.push_back(row);
+                    uses<<std::quoted(request.leaf_id)<<','<<std::quoted(request.canonical_model_fingerprint)<<','<<request.verified_cutoff<<','
+                        <<row.signature<<','<<row.coefficients.size()<<','<<row.rhs-activity(row)<<",proof\n";}
+                check(api_.updatemodel(proof));
+                // Debit construction/validation/copy overhead before admission.
+                const double overhead=std::max(0.,elapsed()-accounted_seconds);
+                budget.charge(true,0,overhead,request.leaf_id,"projection_overhead",{});accounted_seconds+=overhead;
+                auto grant=budget.grant(processWorkRemainingSeconds(options_));if(!grant.allowed())break;
+                check(api_.setdblparam(env,"WorkLimit",grant.work));check(api_.setdblparam(env,"TimeLimit",grant.seconds));
+                double actual=0;check(api_.getdblparam(env,"WorkLimit",&actual));if(actual!=grant.work)throw std::runtime_error("proof work readback");
+                const auto query=round65_proof_calls_++;
+                check(api_.setstrparam(env,"LogFile",(dir/("proof_"+std::to_string(query)+".log")).string().c_str()));
+                trace<<std::setprecision(17)<<query<<','<<std::quoted(request.leaf_id)<<','<<round<<','<<request.gamma_L<<','<<request.gamma_U<<','
+                    <<request.verified_cutoff<<','<<last_bound<<','<<grant.work<<','<<grant.seconds<<','<<selected.size()<<",launch\n";trace.flush();
+                const auto native_start=Clock::now();const int rc=api_.optimize(proof);double work=0;api_.getdblattr(proof,"Work",&work);
+                const double seconds=std::chrono::duration<double>(Clock::now()-native_start).count();
+                budget.charge(true,work,seconds,request.leaf_id,"projection_reopt",grant);accounted_seconds+=seconds;check(rc);
+                int status=0;check(api_.getintattr(proof,"Status",&status));double bound=last_bound;
+                if(status==GRB_OPTIMAL){
+                    double cv=GRB_INFINITY,bv=GRB_INFINITY,dv=GRB_INFINITY;
+                    check(api_.getdblattr(proof,"ConstrVio",&cv));check(api_.getdblattr(proof,"BoundVio",&bv));check(api_.getdblattr(proof,"DualVio",&dv));
+                    if(!std::isfinite(cv)||!std::isfinite(bv)||!std::isfinite(dv)||std::max({cv,bv,dv})>1e-7)throw std::runtime_error("proof residual gate");
+                    check(api_.getdblattr(proof,"ObjVal",&bound));if(!std::isfinite(bound))throw std::runtime_error("proof bound");
+                    out.round65_proof_bound_available=true;out.round65_proof_bound=std::max(last_bound,bound);
+                }else if(status==GRB_INFEASIBLE){out.round65_proof_infeasible=true;}
+                trace<<query<<','<<std::quoted(request.leaf_id)<<','<<round<<','<<request.gamma_L<<','<<request.gamma_U<<','<<request.verified_cutoff<<','
+                    <<bound<<','<<work<<','<<seconds<<','<<selected.size()<<','<<status<<'\n';trace.flush();
+                if(status!=GRB_OPTIMAL || bound>=request.verified_cutoff-1e-7 || bound<=last_bound+1e-7)break;
+                last_bound=bound;point=readPoint(proof);
+            }
+            if(options_.round65_projection=="sparse"){
+                for(const auto& row:selected)if(attached.insert(row.signature).second){add(main_model,row);
+                    uses<<std::quoted(request.leaf_id)<<','<<std::quoted(request.canonical_model_fingerprint)<<','<<request.verified_cutoff<<','
+                        <<row.signature<<','<<row.coefficients.size()<<",,native\n";}
+                check(api_.updatemodel(main_model));
+            }
+            int count=0,cols=0;check(api_.getintattr(main_model,"NumConstrs",&count));check(api_.getintattr(main_model,"NumVars",&cols));
+            std::ofstream shape(dir/"main_shapes.csv",std::ios::app);
+            if(shape.tellp()==0)shape<<"leaf,mode,columns,rows,attached\n";
+            shape<<std::quoted(request.leaf_id)<<','<<options_.round65_projection<<','<<cols<<','<<count<<','<<attached.size()<<'\n';
+            if(cols!=int(names.size()))throw std::runtime_error("projection added a column");
+            if(!trace||!uses||!shape)throw std::runtime_error("proof evidence persistence");
+        }catch(const std::exception& e){
+            round65_projection_failed_=true;
+            std::filesystem::create_directories(dir);
+            std::ofstream fail(dir/"failures.txt",std::ios::app);fail<<request.leaf_id<<' '<<e.what()<<'\n';
+            // Qualified earlier evidence remains valid; no auxiliary status
+            // alone changes the active interval or certifies the original F.
+        }
+        if(proof)api_.freemodel(proof);
+        budget.charge(true,0,std::max(0.,elapsed()-accounted_seconds),request.leaf_id,"projection_finalization",{});
+    }
 
 
     bool round63_root_observed_=false;
