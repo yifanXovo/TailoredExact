@@ -133,7 +133,7 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
     ga.set_decoder_compaction_mode(1);
     ga.set_decode_cache_max_entries(200000);
     VerifiedCandidateStore published_candidates;
-    if (options.publish_verified_improvements) {
+    if (options.publish_verified_improvements || options.stop_on_verified_zero) {
         ga.set_best_observer(
             [&](const std::vector<std::vector<int>>& sequences,
                 const std::vector<int>& operations,
@@ -151,6 +151,20 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
                                     : "hga_strict_improvement",
                     options.candidate_model_identity, generation,
                     event_seconds, 0.0);
+                // Same tolerance as main's existing F >= 0 certificate. The
+                // observer sees a complete cached decode, never raw fitness.
+                if (options.stop_on_verified_zero && published_candidates.hasBest() &&
+                    published_candidates.best().objective >= 0.0 &&
+                    published_candidates.best().objective <= 1e-12 &&
+                    !out.verified_zero_stop) {
+                    out.verified_zero_stop = true;
+                    out.verified_zero_seconds = std::chrono::duration<double>(
+                        std::chrono::steady_clock::now() - started).count();
+                    ga.request_verified_stop();
+                    if (options.process_options) recordProcessPhase(
+                        *options.process_options, "round65_verified_zero", "certified",
+                        "complete_cached_decode_independently_verified;F_ge_0");
+                }
                 if(published && out.first_nonempty_seconds<0 &&
                     std::any_of(routes.begin(),routes.end(),[](const RoutePlan& r) { return !r.operations.empty(); }))
                     out.first_nonempty_seconds=event_seconds;
@@ -240,7 +254,7 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
         out.notes.push_back("trajectory not persisted; verified memory retained");
       }
     }
-    if (options.publish_verified_improvements) {
+    if (options.publish_verified_improvements || options.stop_on_verified_zero) {
         const auto ledger_started = std::chrono::steady_clock::now();
         const bool candidate_ledger_written = writeCandidateLedger(
             options.verified_candidate_log_path,
