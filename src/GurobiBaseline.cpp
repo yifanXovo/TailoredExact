@@ -3203,6 +3203,13 @@ private:
             auto point=readPoint(main_model);
             check(api_.updatemodel(main_model));proof=api_.copymodel(main_model);if(!proof)throw std::runtime_error("proof copy");
             check(api_.setcallbackfunc(proof,nullptr,nullptr));auto env=api_.getenv(proof);
+            // Native defaults allow residuals up to 1e-6; the evidence gate
+            // below remains 1e-7. Request stricter optional LP convergence,
+            // never weaken that acceptance gate or alter main/official models.
+            for(const char* parameter:{"FeasibilityTol","OptimalityTol"}) {
+                double actual=0;check(api_.setdblparam(env,parameter,1e-8));check(api_.getdblparam(env,parameter,&actual));
+                if(actual!=1e-8)throw std::runtime_error("proof tolerance readback");
+            }
             // This is an independent bounded LP. No native MIP reset or reload.
             std::set<std::string> proof_rows=attached;
             std::vector<Round65ProjectionRow> selected;

@@ -58,16 +58,17 @@ def confirmation_freeze(policy,cap,controller,release_load):
                    confirmations=['C8','C9'],no_revision_after_confirmation=True))
 
 def reference_build(identities):
-    assert (OUT/'confirmation_freeze.json').exists()
     expected=read(OUT/'new_reference_fingerprints.json') if (OUT/'new_reference_fingerprints.json').exists() else {}
     for identity in identities:
         p=panel()[identity];dest=RAW/'reference_build'/identity
+        if p.get('stage')=='confirmation':assert (OUT/'confirmation_freeze.json').exists()
         cmd=[BUILD/'Round65ReferenceBuild.exe',p['instance_path'],p['T_seconds'],p['pickup_seconds'],p['drop_seconds'],p['lambda'],dest]
         runner.execute(cmd,dest,dict(id=identity,arm='plain-build',stage='reference_build'),30,'build-only',0)
         r=read(dest/'build.json');assert r['optimizer_calls']==0
         expected[p['scenario_id']]=r['fingerprint']
         write(OUT/'new_reference_fingerprints.json',expected)
 def execute(p,arm,cap,stage,kind='performance',credit=30):
+    if (OUT/'pause_before_launch').exists():raise RuntimeError('campaign paused before any charged launch')
     if cap not in [20,30,120,180,240,300,600,1200,1800,3600]: raise RuntimeError('undeclared cap')
     active=read(OUT/'active_build.json');assert sha(OUT/active['file'])==active['sha256']
     frozen=read(OUT/active['file']);assert sha(BUILD/'ExactEBRP.exe')==frozen['executables']['ExactEBRP.exe']
@@ -78,7 +79,7 @@ def execute(p,arm,cap,stage,kind='performance',credit=30):
         assert sha(OUT/'main_policy.json')==freeze['policy']
         assert arm in freeze['arms'] and cap==freeze['cap']
         if p['id']=='C9':
-            previous=[e for e in runner.entries() if e['id']=='C8']
+            previous=[e for e in runner.entries() if e['id']=='C8' and e['charged']]
             assert set(e['arm'] for e in previous)==set(freeze['arms'])
             assert all((ROOT/e['destination']/'completion.json').exists() for e in previous)
     entries=runner.entries()

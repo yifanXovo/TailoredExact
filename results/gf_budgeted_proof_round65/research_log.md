@@ -125,4 +125,22 @@ released PROOF, released SPARSE; D7 cold bounded vs released PROOF. Use180s on
 D4/C6 and120s on cold D7. C5 cold protection and actual warm long K1-H/P-GRB
 controls follow. Preserve at least18 launches for final/long/confirmation work.
 
+v4 C6 first two calls show credit-seed LP optimal at12.4295135 Work, then child
+unknown at17.5714126 Work. Parent is retained and its complete MIP runs. In the
+third run released projection generated four x/p/d rows, but proof was rejected:
+ConstrVio5.15e-12, BoundVio1.03e-13, DualVio9.943971e-7. The native default
+OptimalityTol1e-6 is looser than our unchanged1e-7 evidence acceptance gate.
+This explains the numeric rejection; it is not a license to accept that bound.
+
+Pause the next unlaunched v4 processes after C6 finishes. v5 requests1e-8
+FeasibilityTol/OptimalityTol only on the independent proof LP and reads both
+back, keeping the1e-7 gate and all main/official tolerances unchanged. All work
+remains charged. Retain the v3/v4 failures. This numerical repair requires a
+fresh paired build; it does not tune a performance threshold or use confirmation.
+Resume the planned D4 four-arm screen and D7 cold pair in v5; repeat the C6
+credit-seed bounded/released-PROOF pair in v5. The v4 credit10/credit-seed
+controller comparison remains matched and is not relabeled as v5.
+
 Before v3 production: v2 micros8/9 complete. Low credit is exhausted by canonical construction and safely skips LP into exact MIP; projection micro uses one reusable vehicle model over three leaves and two MIPs, all witnesses valid. Windows append-stream tellp repeated CSV headers; fix uses file_size and retains v2 evidence with exact-header filtering. No algorithmic bound change. v3 tests42/42. Next bounded screen: warm D4/C6 bounded,proof,sparse cap180; cold D7 same3 cap120. All nine are planned production runs, no history point reuse, all calls paid; compare separation costs, usable bound and native row lifecycle before long pairs. No confirmation outcomes opened.
+
+Remote transport recovered with command-local curloptResolve to public DNS A record140.82.113.4; successful ls-remote/fetch confirm unchanged Round64 head. No global DNS/config change. v5 passes42/42 tests. There are21 charged launches and3 native micros so far; v4 unlaunched D4/D7 processes were paused before creating any charge or optimizer.
