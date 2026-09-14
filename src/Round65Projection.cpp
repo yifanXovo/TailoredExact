@@ -159,7 +159,7 @@ Round65ProjectionReply Round65ProjectionService::query(int k,const std::map<std:
         s.check(s.setdblparam(env,"TimeLimit",seconds));s.check(s.setdblparam(env,"WorkLimit",grant.work));
         double actual=0;s.check(s.getdblparam(env,"WorkLimit",&actual));if(actual!=grant.work)throw std::runtime_error("work readback");
         std::ofstream calls(s.evidence/"calls.csv",std::ios::app);
-        if(calls.tellp()==0)calls<<"query,vehicle,model_reused,work_limit,time_limit,columns,rows\n";
+        if(std::filesystem::file_size(s.evidence/"calls.csv")==0)calls<<"query,vehicle,model_reused,work_limit,time_limit,columns,rows\n";
         calls<<std::setprecision(17)<<sequence<<','<<k<<','<<reply.reused<<','<<grant.work<<','<<seconds<<','<<m.names.size()<<','<<m.rows.size()<<'\n';calls.flush();
         s.check(s.setstrparam(env,"LogFile",(s.evidence/("aux_"+std::to_string(sequence)+".log")).string().c_str()));
         const int rc=s.optimize(model);s.getdblattr(model,"Work",&work);s.check(rc);

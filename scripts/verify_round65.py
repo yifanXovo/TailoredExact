@@ -4,16 +4,22 @@ from decimal import Decimal, localcontext
 from pathlib import Path
 import verify_round64 as prior
 import round65_research as run
+from types import SimpleNamespace
 ROOT,OUT,RAW=run.ROOT,run.OUT,run.RAW
 prior.run=run
 prior.physical_module.ROOT=ROOT
-def rows(p): return list(csv.DictReader(p.open(encoding='utf-8-sig',newline=''))) if p.exists() else []
+def rows(p):
+    # The retained v2 micro exposed MinGW append tellp()==0 on a nonempty file.
+    # Skip only exact repeated header records; source fixed before production.
+    return [r for r in csv.DictReader(p.open(encoding='utf-8-sig',newline='')) if not all(k==v for k,v in r.items())] if p.exists() else []
 def table(name,records):
     if not records:return
     with (OUT/name).open('w',newline='',encoding='utf-8') as f:
         w=csv.DictWriter(f,fieldnames=list(dict.fromkeys(k for r in records for k in r)));w.writeheader();w.writerows(records)
 def main():
     records=[];runs=[];proofs=[];prefix=[]
+    physical_panel=run.panel()
+    prior.run=SimpleNamespace(panel=lambda:physical_panel,sha=run.sha)
     for e in run.runner.entries():
         if not e['charged']:continue
         folder=ROOT/e['destination'];completion=folder/'completion.json'
@@ -22,6 +28,8 @@ def main():
         if not p:
             cmd=e['command']; arg=lambda n:cmd[cmd.index(n)+1]
             p=dict(instance_path=arg('--input'),T_seconds=arg('--T'),pickup_seconds=arg('--pickup-time'),drop_seconds=arg('--drop-time'),**{'lambda':arg('--lambda')})
+            p['input_sha256']=run.sha(ROOT/p['instance_path'])
+        physical_panel[e['id']]=p
         result_path=folder/'result.json'
         if not result_path.exists():
             runs.append(dict(number=e['charged_number'],id=e['id'],arm=e['arm'],failure=True,wall=done['wall_seconds']));continue

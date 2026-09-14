@@ -83,3 +83,5 @@ events and phases; accepted zero closes with the existing nonnegative bound.
 The6-run reliability queue is terminal before any v2 compile/audit. Retain v1
 binaries at build/round65-v1; no subsequent build is substituted for these runs.
 The new production projection code has not yet been performance qualified.
+
+Before v3 production: v2 micros8/9 complete. Low credit is exhausted by canonical construction and safely skips LP into exact MIP; projection micro uses one reusable vehicle model over three leaves and two MIPs, all witnesses valid. Windows append-stream tellp repeated CSV headers; fix uses file_size and retains v2 evidence with exact-header filtering. No algorithmic bound change. v3 tests42/42. Next bounded screen: warm D4/C6 bounded,proof,sparse cap180; cold D7 same3 cap120. All nine are planned production runs, no history point reuse, all calls paid; compare separation costs, usable bound and native row lifecycle before long pairs. No confirmation outcomes opened.

@@ -3213,8 +3213,9 @@ private:
                 check(api_.addconstr(m,int(ix.size()),ix.data(),a.data(),'>',r.rhs,("r65_"+r.signature).c_str()));
             };
             std::ofstream trace(dir/"proof_calls.csv",std::ios::app),uses(dir/"row_use.csv",std::ios::app);
-            if(trace.tellp()==0)trace<<"call,leaf,round,gamma_L,gamma_U,cutoff,bound,work,seconds,selected,status\n";
-            if(uses.tellp()==0)uses<<"leaf,model_sha256,cutoff,signature,support,raw_violation,target\n";
+            if(std::filesystem::file_size(dir/"proof_calls.csv")==0)trace<<"call,leaf,round,gamma_L,gamma_U,cutoff,bound,work,seconds,selected,status\n";
+            if(std::filesystem::file_size(dir/"row_use.csv")==0)uses<<"leaf,model_sha256,cutoff,signature,support,raw_violation,target\n";
+            uses<<std::setprecision(17);
             double last_bound=out.native_bound;
             // At most four LP reoptimizations and eight selected rows per call.
             // Stop after a non-improving objective pass. Global pool capped at64.
@@ -3272,7 +3273,7 @@ private:
             }
             int count=0,cols=0;check(api_.getintattr(main_model,"NumConstrs",&count));check(api_.getintattr(main_model,"NumVars",&cols));
             std::ofstream shape(dir/"main_shapes.csv",std::ios::app);
-            if(shape.tellp()==0)shape<<"leaf,mode,columns,rows,attached\n";
+            if(std::filesystem::file_size(dir/"main_shapes.csv")==0)shape<<"leaf,mode,columns,rows,attached\n";
             shape<<std::quoted(request.leaf_id)<<','<<options_.round65_projection<<','<<cols<<','<<count<<','<<attached.size()<<'\n';
             if(cols!=int(names.size()))throw std::runtime_error("projection added a column");
             if(!trace||!uses||!shape)throw std::runtime_error("proof evidence persistence");
