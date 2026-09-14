@@ -225,6 +225,12 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
             value = ratio_max;
         } else if (name == "W_SP") {
             value = objective_parts.S * objective_parts.P;
+        } else if (parseIndexedName(name, "state_", 2, indices) &&
+                   indices[0] >= 1 && indices[0] <= instance.V) {
+            value = final_inventory[indices[0]] == indices[1] ? 1.0 : 0.0;
+        } else if (parseIndexedName(name, "state_g_", 2, indices) &&
+                   indices[0] >= 1 && indices[0] <= instance.V) {
+            value = final_inventory[indices[0]] == indices[1] ? out.G : 0.0;
         } else if ((parseIndexedName(name,"r62lo_",2,indices) || parseIndexedName(name,"r62hi_",2,indices)) &&
                    indices[0]>=1 && indices[0]<=instance.V && indices[1]>0) {
             value=name.rfind("r62lo_",0)==0
