@@ -1,6 +1,8 @@
 # Recovery status
 
-Round68 experiments and stage acceptance complete, publication pending.
+Round68 complete and published as draft PR129:
+https://github.com/yifanXovo/TailoredExact/pull/129 . Implementation/evidence
+commit cb8d7ce560d460dfa87537cc3352c1ffe66a8e40.
 Branch codex/round68-vdp-verified-start; base Round67 PR128 final
  a47e86a57a1f68ca6e515877193cb8696d1aa13e. Owned E:/codes/ExactEBRP-round66.
 Read final_report.md and algorithm.md; overall goal remains active and unmet.
@@ -23,5 +25,5 @@ original20-run allowance is complete; do not append experiments without a new
 bounded plan/binding. Next stage should test frozen VD-S beyond the design
 panel and include limited D3 repeat and an informative matched long window.
 Startup improvement remains separate and cannot use an observed seconds cutoff.
-Do not edit this measured source before publishing, or package this stage after
+Keep this measured source/binary binding intact; do not package this stage after
 switching source. No new stage experiment until the new stage plan is saved.

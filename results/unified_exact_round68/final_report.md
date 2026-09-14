@@ -1,8 +1,10 @@
 # Round68 — complete existing-witness Starts for VD-P
 
 Base: completed Round67 PR128, a47e86a57a1f68ca6e515877193cb8696d1aa13e.
-Branch: codex/round68-vdp-verified-start. Stage experiments complete; publication
-identity is recorded separately. The overall research goal remains unmet.
+Branch: codex/round68-vdp-verified-start. Stage complete, draft PR129:
+https://github.com/yifanXovo/TailoredExact/pull/129 . Implementation/evidence
+commit cb8d7ce560d460dfa87537cc3352c1ffe66a8e40. See publication.json.
+The overall research goal remains unmet.
 
 ## Implemented method
 

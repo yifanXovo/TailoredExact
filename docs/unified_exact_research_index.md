@@ -2,7 +2,9 @@
 
 Latest stage: Round68 on codex/round68-vdp-verified-start, based on completed
 Round67 PR128 final a47e86a57a1f68ca6e515877193cb8696d1aa13e. Owned checkout
-E:/codes/ExactEBRP-round66. Stage acceptance complete, new draft PR pending.
+E:/codes/ExactEBRP-round66. Complete, draft PR129:
+https://github.com/yifanXovo/TailoredExact/pull/129 . Implementation/evidence
+commit cb8d7ce560d460dfa87537cc3352c1ffe66a8e40.
 Read results/unified_exact_round68/final_report.md and status.md.
 VD-S adds complete paid-witness native Starts to VD-P, including retained LP
 models and actual-row/readback/MIPSOL checks. All8 Starts accepted/observed.
