@@ -2,7 +2,8 @@
 
 Current stage: Round76, codex/round76-physical-route-closure, based on published
 R75 final692cf9f0ef8852d4ee0d62c5ed206c081658d158 / draft PR136.
-Substantive implementation/startup screen complete locally, publication pending.
+Substantive implementation/startup screen complete, draft PR137:
+https://github.com/yifanXovo/TailoredExact/pull/137 . Evidence head2953ca8c.
 Read results/unified_exact_round76/final_report.md, status.md and mathematics.md.
 JDS-C physically closes the current JDS-X witness. Ten fresh startup runs pass;
 D7 F.380773687462 to.331621561270 via2 insertions and5 quantity changes;
@@ -10,7 +11,7 @@ other four roles unchanged, all25 logical descent paths equal.58/58 tests pass,
 129 Optimize/101.889281s, no repair; startup32.502s/zero Optimize.619 raw files
 in3 verified bundles. No process active, no full-performance/confirmation run.
 Measured source4f6254c2639972ce3ac2b80906ce6d4ebd701f3e, build/round76/v1.
-Next publish this stage, then separately freeze fresh D7 complete-method controls.
+Next separately freeze fresh D7 complete-method controls.
 Overall goal remains active/unmet; R74 severe D7 failure is not yet repaired.
 
 Latest completed stage: Round75, codex/round75-physical-quantity-descent,

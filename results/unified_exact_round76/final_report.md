@@ -9,8 +9,10 @@ objectives and route hashes. This establishes a cheap physical handoff repair,
 not a repaired complete-method regression or an overall successful algorithm.
 
 Base: published R75 commit692cf9f0ef8852d4ee0d62c5ed206c081658d158 / draft PR136.
-Branch: codex/round76-physical-route-closure. Publication metadata records this
-stage's independent draft PR when created. No main merge or default change.
+Branch: codex/round76-physical-route-closure. Draft PR137 is open:
+https://github.com/yifanXovo/TailoredExact/pull/137 . publication.json records
+the verified evidence head/base; ordinary Git push preserves measured history.
+No main merge or default change.
 
 ## Diagnosis, method and scope
 
