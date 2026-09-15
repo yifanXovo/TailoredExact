@@ -1314,6 +1314,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--primal-heuristic-no-improve-generations") opt.primal_heuristic_no_improve_generations = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-generation-log") opt.primal_heuristic_generation_log = requireValue(i, argc, argv);
         else if (arg == "--round60-hga-publish-verified") opt.round60_hga_publish_verified = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--round66-arc-load-replacement") opt.round66_arc_load_replacement = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round65-hga-zero-stop") opt.round65_hga_zero_stop = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round65-witness-audit") opt.round65_witness_audit = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round65-budget") opt.round65_budget = parseBoolValue(requireValue(i, argc, argv));
@@ -3183,6 +3184,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
        opt.pickup_time<0 || opt.drop_time<0) throw std::runtime_error("invalid common service times");
     if(!ebrp::validRound64SharedMode(opt.round64_shared_mode))throw std::runtime_error("invalid Round64 shared mode");
     const bool r65preset=opt.algorithm_preset=="research-round65-k1-s" || opt.algorithm_preset=="research-round65-k1-h";
+    if (opt.round66_arc_load_replacement &&
+        (!r65preset || opt.plain_baseline || opt.round65_budget ||
+         opt.round65_projection != "off" || opt.round64_shared_mode != "off" ||
+         opt.round63_time_mode != "off" || opt.round62_threshold_mode != "off"))
+        throw std::runtime_error("Round66 arc replacement requires isolated research K1 without resource budgets");
     if(opt.round65_controller!="credit10" && opt.round65_controller!="credit-seed")
         throw std::runtime_error("unknown Round65 controller");
     if((opt.round65_controller!="credit10" || opt.round65_release_load) && (!r65preset || !opt.round65_budget))
@@ -3729,6 +3735,7 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
             snapshot.preset_experimental_features_enabled += "," + feature;
         }
     };
+    if (opt.round66_arc_load_replacement) append_explicit_research_feature("round66_arc_load_replaces_node_big_m");
     if (opt.round65_budget) append_explicit_research_feature("round65_optional_credit_core_MIP_fallback");
     if (opt.round65_projection!="off") append_explicit_research_feature("round65_vehicle_projection_"+opt.round65_projection);
     if (opt.round65_budget) append_explicit_research_feature("round65_controller_"+opt.round65_controller);

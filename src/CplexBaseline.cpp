@@ -790,7 +790,8 @@ void writeCompactLp(const Instance& instance,
             vars.add(mName(k, i), 0, 1, "B");
             vars.add(pName(k, i), 0, pmax, "I");
             vars.add(dName(k, i), 0, dmax, "I");
-            vars.add(lName(k, i), 0, instance.Q[k], "I");
+            vars.add(lName(k, i), 0, instance.Q[k],
+                     options.round66_arc_load_replacement ? "C" : "I");
             vars.add(uName(k, i), 0, V, "C");
         }
     }
@@ -1729,6 +1730,10 @@ void writeCompactLp(const Instance& instance,
             writeConstraint(out, cid, loadz, "<=", 0);
         }
 
+        // With arc load, out(q_i)=load_i and out(q_i)-in(q_i)=p_i-d_i.
+        // These equations imply every recurrence below, including the inactive
+        // arc Big-M bounds. Integer x/p/d also imply integral prefix loads.
+        if (!options.round66_arc_load_replacement) {
         for (int i = 1; i <= V; ++i) {
             Expr up;
             addTerm(up, lName(k, i), 1);
@@ -1761,6 +1766,7 @@ void writeCompactLp(const Instance& instance,
                 addTerm(lo, xName(k, i, j), -Q);
                 writeConstraint(out, cid, lo, ">=", -Q);
             }
+        }
         }
         Expr final_load;
         for (int i = 1; i <= V; ++i) {
@@ -4211,6 +4217,13 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
             ? "complete_original_compact_milp_intersected_with_static_gini_interval"
             : "complete_original_compact_milp"));
     try {
+        if (options.round66_arc_load_replacement &&
+            (options.plain_baseline || !spec.strengthened || !spec.interval_restricted ||
+             options.round64_shared_mode != "off" || options.round63_time_mode != "off" ||
+             options.round62_threshold_mode != "off" || options.round65_budget ||
+             options.round65_projection != "off")) {
+            throw std::runtime_error("Round66 replacement requires isolated full F0 without resource budgets");
+        }
         if (spec.interval_restricted &&
             (!std::isfinite(spec.gamma_L) || !std::isfinite(spec.gamma_U) ||
              spec.gamma_L < -1e-12 ||
@@ -4345,6 +4358,10 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
             if (!spec.strengthened || !spec.interval_restricted || options.plain_baseline)
                 throw std::runtime_error("Round62 requires isolated complete F0 interval model");
             appendRound62ThresholdModel(instance,path,options.round62_threshold_mode,spec.gamma_L,spec.gamma_U);
+        }
+        if (options.round66_arc_load_replacement) {
+            appendRound64SharedModel(instance, path, "q");
+            artifact.model_scope += ";node_load_big_m_replaced_by_arc_flow";
         }
         if (options.round64_shared_mode != "off") {
             if(!spec.strengthened || !spec.interval_restricted || options.plain_baseline ||
