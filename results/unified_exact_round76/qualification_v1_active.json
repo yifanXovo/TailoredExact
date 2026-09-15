@@ -1,0 +1,33 @@
+{
+  "version": "v1",
+  "phase": "tests",
+  "command": [
+    "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+    "--test-dir",
+    "E:\\codes\\ExactEBRP-round66\\build\\round76\\v1",
+    "--output-on-failure",
+    "-V",
+    "-j",
+    "1"
+  ],
+  "started_unix": 1789490956.0208166,
+  "whole_phase_cap": 600,
+  "pid": 47868,
+  "affinity": {
+    "launcher_pid": 42444,
+    "before": {
+      "process_mask": 1048575,
+      "system_mask": 1048575
+    },
+    "effective": {
+      "process_mask": 4,
+      "system_mask": 1048575
+    },
+    "selected_logical_processor": 2,
+    "explicit_set_target": "own launcher only"
+  },
+  "child_affinity": {
+    "process_mask": 4,
+    "system_mask": 1048575
+  }
+}

@@ -16,6 +16,7 @@
 #include "HgaTgbcRunner.hpp"
 #include "Round73JointInsertion.hpp"
 #include "Round75QuantityDescent.hpp"
+#include "Round76PhysicalClosure.hpp"
 #include "Master.hpp"
 #include "Parser.hpp"
 #include "Pricing.hpp"
@@ -250,6 +251,13 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.algorithm_preset = "custom";
     }
     if (opt.algorithm_preset == "custom") return;
+
+    if (opt.algorithm_preset == "research-round76-vds-physical-closure") {
+        opt.algorithm_preset = "research-round73-vds-joint-seeded-descent";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = "research-round76-vds-physical-closure";
+        return;
+    }
 
     if (opt.algorithm_preset == "research-round75-vds-quantity-descent") {
         opt.algorithm_preset = "research-round73-vds-joint-seeded-descent";
@@ -3260,7 +3268,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.algorithm_preset == "research-round71-vds-interroute-descent" ||
         opt.algorithm_preset == "research-round73-vds-joint-insertion" ||
         opt.algorithm_preset == "research-round73-vds-joint-seeded-descent" ||
-        opt.algorithm_preset == "research-round75-vds-quantity-descent";
+        opt.algorithm_preset == "research-round75-vds-quantity-descent" ||
+        opt.algorithm_preset == "research-round76-vds-physical-closure";
     const bool joint_insertion = opt.algorithm_preset == "research-round73-vds-joint-insertion";
     if ((opt.primal_heuristic == "joint-insertion") != joint_insertion ||
         (opt.primal_heuristic_stop == "motif-exhaustion") != joint_insertion)
@@ -3270,7 +3279,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         (opt.primal_heuristic_stop == "decoded-descent-interroute") !=
         (opt.algorithm_preset == "research-round71-vds-interroute-descent" ||
          opt.algorithm_preset == "research-round73-vds-joint-seeded-descent" ||
-         opt.algorithm_preset == "research-round75-vds-quantity-descent"))
+         opt.algorithm_preset == "research-round75-vds-quantity-descent" ||
+         opt.algorithm_preset == "research-round76-vds-physical-closure"))
         throw std::runtime_error("Decoded descent requires its isolated VD-S research preset");
     if (ebrp::isDecodedDescentStopMode(opt.primal_heuristic_stop) &&
         opt.primal_heuristic != "hga-tgbc")
@@ -3718,11 +3728,14 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
                snapshot.algorithm_preset == "research-round71-vds-interroute-descent" ||
                snapshot.algorithm_preset == "research-round73-vds-joint-insertion" ||
                snapshot.algorithm_preset == "research-round73-vds-joint-seeded-descent" ||
-               snapshot.algorithm_preset == "research-round75-vds-quantity-descent") {
+               snapshot.algorithm_preset == "research-round75-vds-quantity-descent" ||
+               snapshot.algorithm_preset == "research-round76-vds-physical-closure") {
         snapshot.preset_certificate_scope = "k1_original_problem_with_inventory_state_product";
         snapshot.preset_experimental_features_enabled = snapshot.algorithm_preset;
         snapshot.preset_disabled_features = "round65_resource_budgets,projection,arc_load_replacement,other_research";
-        snapshot.preset_reason = opt.algorithm_preset == "research-round75-vds-quantity-descent"
+        snapshot.preset_reason = opt.algorithm_preset == "research-round76-vds-physical-closure"
+            ? "Full paid VD-S proof after constructive-seeded descent and joint physical insertion/quantity closure"
+            : opt.algorithm_preset == "research-round75-vds-quantity-descent"
             ? "Full paid VD-S proof after constructive-seeded descent and finite physical single/pair quantity descent"
             : opt.algorithm_preset == "research-round73-vds-joint-seeded-descent"
             ? "Full paid VD-S proof with one constructive seed and unchanged24 finite random inter-route descent seeds"
@@ -4861,7 +4874,8 @@ std::string jsonEscapeLocal(const std::string& value) {
 }
 
 bool isPaperTracePreset(const std::string& preset) {
-    return preset == "research-round75-vds-quantity-descent" ||
+    return preset == "research-round76-vds-physical-closure" ||
+           preset == "research-round75-vds-quantity-descent" ||
            preset == "research-round73-vds-joint-seeded-descent" ||
            preset == "research-round73-vds-joint-insertion" ||
            preset == "research-round71-vds-interroute-descent" ||
@@ -7975,7 +7989,8 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
     };
 
     const bool joint_seeded = opt.algorithm_preset == "research-round73-vds-joint-seeded-descent" ||
-        opt.algorithm_preset == "research-round75-vds-quantity-descent";
+        opt.algorithm_preset == "research-round75-vds-quantity-descent" ||
+        opt.algorithm_preset == "research-round76-vds-physical-closure";
     std::vector<ebrp::RoutePlan> joint_seed_routes;
     if (mode == "joint-insertion" || joint_seeded) {
         const auto trace_path = opt.primal_heuristic_generation_log.empty()
@@ -8101,6 +8116,28 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
                  << ", whole_run_deadline=" << repaired.stats.deadline_reached
                  << ", verification_failed=" << repaired.stats.verification_failed
                  << ", rejection_reason=" << repaired.stats.rejection_reason
+                 << ", trace=" << trace_path.string();
+            out.notes.push_back(note.str());
+        }
+        if (opt.algorithm_preset == "research-round76-vds-physical-closure" && out.found &&
+            !ebrp::processWorkDeadlineReached(opt)) {
+            const auto trace_path = opt.primal_heuristic_generation_log.empty()
+                ? std::filesystem::path{}
+                : std::filesystem::path(opt.primal_heuristic_generation_log + ".closure.csv");
+            const auto closed = ebrp::runRound76PhysicalClosure(instance, opt, out.routes, trace_path);
+            consider(closed.routes, "round76_physical_insertion_quantity_closure");
+            out.local_moves_tested += closed.stats.insertion.quantity_evaluations + closed.stats.quantity.objective_evaluations;
+            std::ostringstream note;
+            note << "Round76 physical closure: insertion_passes=" << closed.stats.insertion.passes
+                 << ", quantity_passes=" << closed.stats.quantity.passes
+                 << ", insertion_placements=" << closed.stats.insertion.placements
+                 << ", insertion_quantities=" << closed.stats.insertion.quantity_evaluations
+                 << ", quantity_feasible=" << closed.stats.quantity.feasible_candidates
+                 << ", accepted_insertions=" << closed.stats.accepted_insertions
+                 << ", accepted_quantities=" << closed.stats.accepted_quantities
+                 << ", exhausted=" << closed.stats.exhausted
+                 << ", whole_run_deadline=" << closed.stats.deadline_reached
+                 << ", verification_failed=" << closed.stats.verification_failed
                  << ", trace=" << trace_path.string();
             out.notes.push_back(note.str());
         }
@@ -19531,7 +19568,8 @@ int main(int argc, char** argv) {
                  opt.algorithm_preset == "research-round71-vds-interroute-descent" ||
                  opt.algorithm_preset == "research-round73-vds-joint-insertion" ||
                  opt.algorithm_preset == "research-round73-vds-joint-seeded-descent" ||
-                 opt.algorithm_preset == "research-round75-vds-quantity-descent") &&
+                 opt.algorithm_preset == "research-round75-vds-quantity-descent" ||
+                 opt.algorithm_preset == "research-round76-vds-physical-closure") &&
                 !ebrp::hasMetricTravelLowerBounds(instance)) {
                 throw std::runtime_error(
                     "Round67 strengthened presets require symmetric metric travel; "
