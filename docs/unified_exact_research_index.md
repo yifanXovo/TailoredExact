@@ -7,7 +7,9 @@ Six original serial arms admitted: E8 P/BDS-C/K1-R common120, then D6
 P/BDS-C/K1-R common3600. Maximum11160 process seconds, two zero-Optimize
 reference exports, no build/test. Same qualified R78 source/binary and preset.
 Original driver session54674 active: E8 all3 valid/certified at P1.781,
-BDS-C2.516, K1-R7.359s; D6 P arm running, BDS/K1 queued in same driver.
+BDS-C2.516, K1-R7.359s. D6 P normal/valid3597.172s, U.157241175852,
+L.150782310390, gap.006458865462, open. D6 BDS-C running, K1 queued.
+E8 two neutral moves leave F unchanged; outer retains initial route.
 Inspect R80 campaign active/summary/process files; NEVER rerun the campaign. E8 is a
 current small total-time regression; D6 is a true K1/P proof deficit, not K1
 protection. No additional experiment/confirmation admitted. Overall goal unmet;
