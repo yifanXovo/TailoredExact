@@ -1,0 +1,11 @@
+id,cap,candidate_arm,candidate_number,reference_number,reference,candidate_certificate,reference_certificate,wall_delta,UB_delta,LB_delta,signed_gap_delta,paired_build,practical_classification,bound_tradeoff,same_paid_initial_routes
+E7,120,VD-S,4,2,P-GRB,True,True,4.344000000040978,0.0,3.469446951953614e-17,-3.469446951953614e-17,True,material_regression,aligned_or_unchanged,
+E7,120,VD-S,4,3,K1-R,True,True,0.0,0.0,2.0816681711721685e-17,-2.0816681711721685e-17,True,below_practical_threshold,aligned_or_unchanged,True
+S12,120,VD-S,7,5,P-GRB,True,True,34.51599999982864,-6.938893903907228e-18,-2.3592239273284576e-16,2.2898349882893854e-16,True,severe_regression,aligned_or_unchanged,
+S12,120,VD-S,7,6,K1-R,True,True,-1.266000000294298,0.0,-8.326672684688674e-17,8.326672684688674e-17,True,below_practical_threshold,aligned_or_unchanged,True
+N12,120,VD-S,10,8,P-GRB,True,True,-0.26500000013038516,0.0,-8.881784197001252e-16,8.881784197001252e-16,True,below_practical_threshold,aligned_or_unchanged,
+N12,120,VD-S,10,9,K1-R,True,True,-3.562000000383705,0.0,2.4424906541753444e-15,-2.4424906541753444e-15,True,material_improvement,aligned_or_unchanged,True
+D6,3600,VD-S,13,11,P-GRB,False,False,-0.029999999795109034,-0.00015804474911804145,0.0022718352443589773,-0.0024298799934770188,True,material_improvement,aligned_or_unchanged,
+D6,3600,VD-S,13,12,K1-R,False,False,0.016000000294297934,0.0,0.004774735382642226,-0.004774735382642226,True,material_improvement,aligned_or_unchanged,True
+D7,1200,VD-S,16,14,P-GRB,False,False,-0.03099999949336052,-0.06167679061819381,0.006593620427883723,-0.06827041104607753,True,severe_improvement,aligned_or_unchanged,
+D7,1200,VD-S,16,15,K1-R,False,False,-0.06300000008195639,0.0,0.0061503766225872725,-0.0061503766225872725,True,material_improvement,aligned_or_unchanged,True

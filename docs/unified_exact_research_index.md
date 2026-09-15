@@ -1,6 +1,33 @@
 # Unified exact BRP research — resume here
 
-Latest stage: Round68 on codex/round68-vdp-verified-start, based on completed
+Latest completed stage: Round69, draft PR130:
+https://github.com/yifanXovo/TailoredExact/pull/130 . Evidence commit
+d37ba536a99c5dc828d7d2a7f9a11d2b2d6fe3be; remote identities verified.
+Branch codex/round69-vds-validation, based on Round68 final07c6e899. Read
+results/unified_exact_round69/final_report.md, long_validation.md and status.md.
+All16 runs complete,14580.595s paid wall,63 experiment Optimize calls,zero
+failures. Same frozen VD-S binary and unchanged C++; inherited45 tests, no new
+qualification. Eight Starts accepted/full-vector observed;43 initial-witness
+model checks and full physical/frontier audits pass;236 compact artifacts.
+No active optimizer queue. Interim remote checkpoint is dcab0020.
+
+D3 repeats its certificate in84.687s. N12 repairs a non-startup K1-R loss and
+is close to P. E7/S12 retain startup regressions. D6's3600 VD-S endpoint has
+37.9339% less gap than P and54.5658% less than K1-R, with both bounds better
+than P. Its large HGA timing variation and worse600 checkpoint are disclosed;
+no actual time is subtracted or clean timing stability claimed. D7 at1200
+retains and strengthens K1 protection:85.3013% less gap than P,34.3321% less
+than K1-R, same candidate UB and stronger LB. All six long runs remain open.
+These are design/public historical data, not sealed independent confirmation.
+
+Round69 publication is complete. Startup is the remaining immediate target;
+isolated uncompiled/untested
+source/test drafts are in ignored build/round70_draft. They were never applied
+to measured source. Any uniform common-core measurement needs new controls
+for every arm. Overall goal remains unmet; continue bounded research after
+publication. Never package a frozen stage against later modified C++ sources.
+
+Previous completed stage: Round68 on codex/round68-vdp-verified-start, based on completed
 Round67 PR128 final a47e86a57a1f68ca6e515877193cb8696d1aa13e. Owned checkout
 E:/codes/ExactEBRP-round66. Complete, draft PR129:
 https://github.com/yifanXovo/TailoredExact/pull/129 . Implementation/evidence
@@ -17,7 +44,7 @@ Next: separate bounded validation plan, limited repeat and informative long
 window; startup work needs an admissible rule. Never package a frozen stage
 against later modified source. Every substantive stage gets its own draft PR.
 
-Latest completed experiments: Round67 on codex/round67-log-inventory-states, using the same owned
+Completed Round67 on codex/round67-log-inventory-states, using the same owned
 E:/codes/ExactEBRP-round66 checkout, based on Round66's final7c3b189 commit.
 Read results/unified_exact_round67/final_report.md and status.md.
 LOG replaces VD-P selector integrality with uniform binary offset codes; all
