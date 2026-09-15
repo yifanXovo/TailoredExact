@@ -121,7 +121,15 @@ add_test(NAME Round68StartTests COMMAND Round68StartTests)
 add_executable(Round70DescentTests tests/round70_descent_tests.cpp)
 target_link_libraries(Round70DescentTests PRIVATE exact_ebrp_core)
 add_test(NAME Round70DescentTests COMMAND Round70DescentTests)
+add_executable(Round71InterrouteTests tests/round71_interroute_tests.cpp)
+target_link_libraries(Round71InterrouteTests PRIVATE exact_ebrp_core)
+add_test(NAME Round71InterrouteTests COMMAND Round71InterrouteTests)
 if(EXACT_EBRP_ENABLE_GUROBI)
+  add_test(NAME Round71InterrouteCliTests COMMAND ${CMAKE_COMMAND}
+    "-DEXACT_EXE=$<TARGET_FILE:ExactEBRP>"
+    "-DSOURCE_ROOT=${CMAKE_CURRENT_SOURCE_DIR}"
+    "-DOUTPUT_ROOT=${CMAKE_CURRENT_BINARY_DIR}"
+    -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/round71_interroute_cli_test.cmake")
   add_test(NAME Round70DescentCliTests COMMAND ${CMAKE_COMMAND}
     "-DEXACT_EXE=$<TARGET_FILE:ExactEBRP>"
     "-DSOURCE_ROOT=${CMAKE_CURRENT_SOURCE_DIR}"

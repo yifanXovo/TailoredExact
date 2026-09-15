@@ -1,5 +1,56 @@
 # Unified exact BRP research — resume here
 
+Latest completed research stage: Round71, closed at the resource checkpoint.
+Read results/unified_exact_round71/final_report.md, stage_decision.json and
+status.md.16 performance+6 micros,95 experiment Optimize calls/6600.169s,
+49 CTests/39 qualification calls,75 witness/model checks,12 actual Starts and
+348 compact artifacts all pass. Small gains and D6's42.9% P gap improvement
+are retained. D7 DS-X gap improves35.4% versus DS, but only7.3% versus P and
+retains9.5% of K1's P-relative advantage. Overall goal remains unmet.
+
+D3/C2/D4 nine predeclared experiments are unlaunched, not assumed passed.
+At closure ordinary usage was allowed with2% weekly remaining; publication
+and recovery take priority over opening that additional2700s panel. A reset
+authorization question is pending; no credit used. No optimizer active.
+Published as draft PR132: https://github.com/yifanXovo/TailoredExact/pull/132 .
+Evidence commit8810393f5b2bc4d044b533fc0ab6cb14b2591cd4 is pushed; creation
+verified base1cf8381 and the evidence head. Ordinary Git recovered after three
+connection failures; see publication_transport.json. No merge requested.
+After resources permit, use a new stage/output identity for missing roles;
+do not mutate this closed stage or claim independent confirmation. See
+next_hypothesis.md. Earlier checkpoint details follow.
+
+Round71 checkpoint history on codex/round71-interroute-descent, based on Round70
+final1cf8381206edd5925eca0b03185ac1cd7dc99d2a / draft PR131. Read
+results/unified_exact_round71/plan.md, mathematics.md and status.md.
+DS-X enables existing finite cross-route tail relocation within24-seed decoded
+descent, retaining VD-S proof. First build and49/49 new tests passed, including
+two actual CLI certificates. The new unit decoded74 cross-route candidates
+and accepted67 moves. Qualification uses39 native calls, independent of the
+planned six micros and25 performance runs. Six micros and nine small-instance
+performance runs now pass the full audit:15 runs,67 Optimize calls,20.530s.
+DS-X certifies E7/S12/N12 in1.172/2.125/1.422s, preserving DS startup gains.
+Small-screen checkpoint cdeac43c8957178458aac9a9b5568e3b97ecdc79 is pushed.
+The frozen source is3867214f480d0a4fef4d77f03404f9fd89fb8b42, binary4f60ed8c.
+D7 four-arm1200s screen is now fully audited: P/DS/DS-X/K1-R gaps are
+0.080034387/0.114881641/0.074188972/0.018286596, all open. DS-X materially
+improves DS, but its P advantage is below threshold and it loses most K1
+protection. New cross-route checks298/moves178 execute; startup9.380s supplies
+verifiedU0.544511 versus K1's U0.215644 after612.421s. All19 experiments cost
+4808.951s/82 Optimize calls.65 witness-model checks,10 actual Starts and300
+compact artifacts pass. Continue the predeclared panel, first D6 then D3/C2/D4;
+see screen_decision.json. No optimizer active at this checkpoint. Use the
+process ledger/progress helper to recover later launches without duplicates.
+D7 is predeclared1200 for all four arms because old600 HGA controls never
+reached proof. Other roles retain120/300/600 caps. Maximum10560 experiment
+seconds, no repeat/confirmation/3600 extension opened. No measured code may
+change after the new freeze. Never rerun old packagers against this source.
+Current ordinary usage permits work with5% weekly remaining; no reset used.
+One optional reset-credit authorization question is pending, with no answer
+yet. Do not redeem a credit without explicit authorization; ordinary work continues.
+Round71 draft PR is pending the substantive screen/stage decision. Resume at
+the current run boundary, not the older completed-stage status text below.
+
 Latest completed stage: Round70 on codex/round70-vds-descent, based on Round69
 final b87850c474c8cb9ac45b65f881ebc629bb137f24. Draft PR131 is published:
 https://github.com/yifanXovo/TailoredExact/pull/131 . Evidence commit

@@ -9,6 +9,10 @@
 
 namespace ebrp {
 
+inline bool isDecodedDescentStopMode(const std::string& mode) {
+    return mode == "decoded-descent" || mode == "decoded-descent-interroute";
+}
+
 struct HgaTgbcOptions {
     double lambda = 0.15;
     unsigned seed = 20260626u;
@@ -70,6 +74,10 @@ struct HgaTgbcResult {
     int decoded_descent_seeds_completed = 0;
     long long decoded_descent_passes = 0;
     long long decoded_descent_checks = 0;
+    bool decoded_descent_cross_route_enabled = false;
+    long long decoded_descent_cross_route_neighbors = 0;
+    long long decoded_descent_cross_route_checks = 0;
+    long long decoded_descent_cross_route_moves = 0;
     std::filesystem::path decoded_descent_log_path;
     std::vector<double> fitness_history;
     std::vector<double> elapsed_history;

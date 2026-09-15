@@ -104,7 +104,8 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
     const auto started = std::chrono::steady_clock::now();
     HgaTgbcResult out;
     out.stop_mode = options.stop_mode;
-    const bool decoded_descent = options.stop_mode == "decoded-descent";
+    const bool decoded_descent = isDecodedDescentStopMode(options.stop_mode);
+    const bool interroute = options.stop_mode == "decoded-descent-interroute";
     if (decoded_descent && options.fixed_generations >= 0)
         throw std::runtime_error("Decoded descent cannot use a generation quota");
     InstanceData hga_instance = toHgaInstance(instance);
@@ -134,6 +135,7 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
     ga.set_generation_stagnation_stop(
         options.stop_mode == "generation-stagnation");
     ga.set_decoded_descent_only(decoded_descent);
+    ga.set_enable_tail_cross_route(interroute);
     ga.set_decoder_compaction_mode(1);
     ga.set_decode_cache_max_entries(200000);
     VerifiedCandidateStore published_candidates;
@@ -227,8 +229,13 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
     out.decoded_descent_complete = ga.completed_decoded_descent();
     out.decoded_descent_seeds_completed = ga.get_descent_seeds_completed();
     out.decoded_descent_passes = static_cast<long long>(ga.get_descent_passes().size());
-    for (const auto& row : ga.get_descent_passes())
+    out.decoded_descent_cross_route_enabled = interroute;
+    for (const auto& row : ga.get_descent_passes()) {
         out.decoded_descent_checks += static_cast<long long>(row.full_evaluations);
+        out.decoded_descent_cross_route_neighbors += static_cast<long long>(row.cross_route_neighbors);
+        out.decoded_descent_cross_route_checks += static_cast<long long>(row.cross_route_evaluations);
+        out.decoded_descent_cross_route_moves += row.accepted_cross_route ? 1 : 0;
+    }
     out.hash_seconds = published_candidates.hash_seconds;
     out.copy_seconds = published_candidates.copy_seconds;
     if (options.fixed_generations >= 0) {
@@ -247,13 +254,16 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
                 std::filesystem::create_directories(out.decoded_descent_log_path.parent_path());
             std::ofstream trajectory(out.decoded_descent_log_path);
             trajectory << "seed,pass,neighbors,decoded_checks,accepted,exhausted,interrupted,"
-                          "fitness_before,fitness_after,accepted_proxy_fitness,elapsed_seconds\n";
+                          "fitness_before,fitness_after,accepted_proxy_fitness,elapsed_seconds,"
+                          "cross_route_neighbors,cross_route_checks,accepted_cross_route\n";
             trajectory << std::setprecision(17);
             for (const auto& row : ga.get_descent_passes()) {
                 trajectory << row.seed << ',' << row.pass << ',' << row.neighbors << ','
                     << row.full_evaluations << ',' << row.accepted << ',' << row.exhausted << ','
                     << row.interrupted << ',' << row.fitness_before << ',' << row.fitness_after << ','
-                    << row.accepted_proxy_fitness << ',' << row.elapsed_seconds << '\n';
+                    << row.accepted_proxy_fitness << ',' << row.elapsed_seconds << ','
+                    << row.cross_route_neighbors << ',' << row.cross_route_evaluations << ','
+                    << row.accepted_cross_route << '\n';
             }
             if (!trajectory) throw std::runtime_error("Decoded descent trajectory write failed");
         } catch (...) {

@@ -1163,6 +1163,10 @@ struct SolveResult {
     int decoded_descent_seeds_completed = 0;
     long long decoded_descent_passes = 0;
     long long decoded_descent_checks = 0;
+    bool decoded_descent_cross_route_enabled = false;
+    long long decoded_descent_cross_route_neighbors = 0;
+    long long decoded_descent_cross_route_checks = 0;
+    long long decoded_descent_cross_route_moves = 0;
     std::string decoded_descent_log_path;
     bool incumbent_import_attempted = false;
     bool incumbent_import_verified = false;
