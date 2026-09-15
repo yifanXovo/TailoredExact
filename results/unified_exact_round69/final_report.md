@@ -141,3 +141,7 @@ substitute for independent validation of a subsequently revised candidate.
 A new draft PR preserves this stage; it does not complete the sustained goal.
 Reproduction, frozen algorithm, source identity and raw/compact evidence
 locations are documented in reproduce.md, algorithm.md and build_v1.json.
+
+Stage complete, draft PR130: https://github.com/yifanXovo/TailoredExact/pull/130
+Evidence commit d37ba536a99c5dc828d7d2a7f9a11d2b2d6fe3be. Publication metadata and
+committed-tree byte checks are retained separately. Overall goal remains unmet.

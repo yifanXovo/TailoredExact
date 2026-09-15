@@ -122,6 +122,12 @@ def main():
         'A new draft PR preserves this stage; it does not complete the sustained goal.',
         'Reproduction, frozen algorithm, source identity and raw/compact evidence',
         'locations are documented in reproduce.md, algorithm.md and build_v1.json.','']
+    publication=run.OUT/'publication.json'
+    if publication.exists():
+        published=run.read(publication)
+        lines+=['Stage complete, draft PR'+str(published['pr_number'])+': '+published['pr_url'],
+            'Evidence commit '+published['evidence_commit']+'. Publication metadata and',
+            'committed-tree byte checks are retained separately. Overall goal remains unmet.','']
     (run.OUT/'final_report.md').write_text('\n'.join(lines),encoding='utf-8')
     print('Complete-stage report prepared from all16 audited runs')
 

@@ -1,6 +1,8 @@
 # Unified exact BRP research — resume here
 
-Active stage: Round69 evidence accepted; final commit/draft PR being published.
+Latest completed stage: Round69, draft PR130:
+https://github.com/yifanXovo/TailoredExact/pull/130 . Evidence commit
+d37ba536a99c5dc828d7d2a7f9a11d2b2d6fe3be; remote identities verified.
 Branch codex/round69-vds-validation, based on Round68 final07c6e899. Read
 results/unified_exact_round69/final_report.md, long_validation.md and status.md.
 All16 runs complete,14580.595s paid wall,63 experiment Optimize calls,zero
@@ -18,14 +20,14 @@ retains and strengthens K1 protection:85.3013% less gap than P,34.3321% less
 than K1-R, same candidate UB and stronger LB. All six long runs remain open.
 These are design/public historical data, not sealed independent confirmation.
 
-Finish the new Round69 draft PR and verify remote identity before the next
-stage. Startup is the remaining immediate target; isolated uncompiled/untested
+Round69 publication is complete. Startup is the remaining immediate target;
+isolated uncompiled/untested
 source/test drafts are in ignored build/round70_draft. They were never applied
 to measured source. Any uniform common-core measurement needs new controls
 for every arm. Overall goal remains unmet; continue bounded research after
 publication. Never package a frozen stage against later modified C++ sources.
 
-Latest completed stage: Round68 on codex/round68-vdp-verified-start, based on completed
+Previous completed stage: Round68 on codex/round68-vdp-verified-start, based on completed
 Round67 PR128 final a47e86a57a1f68ca6e515877193cb8696d1aa13e. Owned checkout
 E:/codes/ExactEBRP-round66. Complete, draft PR129:
 https://github.com/yifanXovo/TailoredExact/pull/129 . Implementation/evidence

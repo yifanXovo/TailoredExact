@@ -1,10 +1,12 @@
-# Round69 status — accepted evidence, publication pending
+# Round69 status — complete, draft PR130
 
 Branch codex/round69-vds-validation; base completed Round68 final
 07c6e899d56230920c162c14bd8b7c07a960c79f. All measured C++ source and
 executables are unchanged from that qualified build. The original user's
-checkout is untouched. Interim remote checkpoint dcab0020 preserves the
-frozen plan/driver and short overview; the final evidence commit/PR is next.
+checkout is untouched. Draft PR130: https://github.com/yifanXovo/TailoredExact/pull/130 .
+Evidence commit d37ba536a99c5dc828d7d2a7f9a11d2b2d6fe3be; see
+publication.json. Its remote head/base/draft state were verified. Ordinary
+git push succeeded. The interim dcab0020 checkpoint is retained in history.
 
 All16 planned performance runs completed:14580.595s paid process wall,
 63 experiment Optimize calls, zero failures. Six no-opt P exports took.641s.
@@ -30,12 +32,13 @@ interpretation. Its600 checkpoint is worse than P. D7/VD-S reduces gap
 this important protection. All D7 arms remain open; paired initial routes
 and final UBs match between the two candidates.
 
-Next publication steps: verify final artifact/source/staged identities, commit
-and push this owned branch, create a new draft PR against
-codex/round68-vdp-verified-start, and verify remote head/base/draft state.
-Do not edit the completed Round68 PR or merge main. Overall goal is unmet.
+Publication is complete. No main merge or completed prior-PR edit occurred.
+The committed-tree check confirms337 exact file-byte matches and only the
+index document's ordinary CRLF-to-LF normalization. Solver/evidence content
+needed no correction. See delivery_checks.json and committed_tree_check.json.
+Overall goal remains unmet; this stage PR is a saved research result.
 
-After publication, open a separately bounded startup stage. The prospective
+Next, open a separately bounded startup stage. The prospective
 source/tests exist only in ignored build/round70_draft; they were not applied,
 compiled or run in Round69. Verify original file hashes before applying them
 on the next owned branch. Any common-core measurement must bind every arm
