@@ -1,5 +1,10 @@
 # Round72 active: same-byte DS-X validation
 
+Draft PR133 is published: https://github.com/yifanXovo/TailoredExact/pull/133 .
+Audited short-panel checkpointcf8e9f1d48a63ca442e0193ce7c9856e04d2a765 is
+pushed; creation verifies the exact Round71 base and checkpoint head, draft/open.
+The stage continues into its admitted D7 long reserve; this is not final success.
+
 Base Round71 final73ce04d9a3c5031c2b5a1021523502f0a9a85168 / draft PR132.
 Branch codex/round72-vdsx-validation. The six startup-only diagnostics passed
 independent physical and strict terminal-trace checks: 0.390s, zero Optimize

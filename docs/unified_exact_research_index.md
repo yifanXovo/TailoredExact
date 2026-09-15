@@ -1,7 +1,10 @@
 # Unified exact BRP research — resume here
 
 Current active stage: Round72 on codex/round72-vdsx-validation, based on Round71
-final73ce04d9a3c5031c2b5a1021523502f0a9a85168 / draft PR132. Read
+final73ce04d9a3c5031c2b5a1021523502f0a9a85168 / draft PR132. Its draft PR133
+https://github.com/yifanXovo/TailoredExact/pull/133 is published with audited
+checkpointcf8e9f1d48a63ca442e0193ce7c9856e04d2a765, exact base/head verified.
+Read
 results/unified_exact_round72/short_validation.md and status.md. Nine full
 D3/C2/D4 P/DS/DS-X300s comparisons are audited:1817.642s/36 Optimize calls.
 DS-X certifies all three in255.360/111.234/54.703s; all P arms remain open.
