@@ -1,0 +1,18 @@
+[
+  {
+    "attempt": 1,
+    "head": "9736ab0b9",
+    "returncode": 1,
+    "stderr": "fatal: unable to access 'https://github.com/yifanXovo/TailoredExact.git/': Recv failure: Connection was reset",
+    "wall_seconds": null,
+    "scope": "Transport failure; native campaign remains active and unaffected"
+  },
+  {
+    "attempt": 2,
+    "head": "9736ab0b9",
+    "returncode": 128,
+    "stdout": "",
+    "stderr": "fatal: unable to access 'https://github.com/yifanXovo/TailoredExact.git/': Failed to connect to github.com port 443 after 21077 ms: Could not connect to server\n",
+    "wall_seconds": 21.151852500159293
+  }
+]
