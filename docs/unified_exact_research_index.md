@@ -1,6 +1,6 @@
 # Unified exact BRP research - resume here
 
-Current stage R78 is complete, publication pending, on
+Current completed stage R78, published as draft PR139, on
 codex/round78-balanced-block-descent. Base R77 final
 88e963a1f10cc4ff9f1d3a17950f0a5708f68318 / draft PR138.
 Read results/unified_exact_round78/final_report.md, status.md, mathematics.md
@@ -11,8 +11,9 @@ better L than K1. This repairs the exposed1200s protection screen only.
 60/60 qualification,147 Optimize;10 startup,zero Optimize;3 full runs3591.344s,
 11 Optimize;8 verified bundles1686 files. No failures or solver reruns.
 Production source4a0561e0f8193e3e874c1bd0bfa8bc381fb66f5e/build/round78/v1.
-All optimizer/build/package/monitor sessions ended. Create independent draft
-PR against R77, no main merge; then separately admit the small/nonzero panel
+All optimizer/build/package/monitor sessions ended. Draft PR139:
+https://github.com/yifanXovo/TailoredExact/pull/139 . No main merge; next
+separately admit the small/nonzero panel
 in prospective_validation.md. No next-stage run/long extension/confirmation
 is yet admitted. Overall goal unmet, no reset consumed. Original dirty
 checkout untouched; owned workspace E:/codes/ExactEBRP-round66.
