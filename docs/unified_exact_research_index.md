@@ -1,26 +1,44 @@
 # Unified exact BRP research - resume here
 
-Draft PR134: https://github.com/yifanXovo/TailoredExact/pull/134 . Audited head
-51941dc4b29c5d972e834a258857125564cc3d04, exact base/head verified at creation.
-Read runtime_design.md for the pending evidence-persistence prerequisite.
-Current active stage: Round73, codex/round73-joint-insertion, based on Round72
-finaldb7976fe94627c00d76d50c0adfed11223fbf646 (publication verified). Read
-results/unified_exact_round73/status.md and seed_checkpoint.md. Initial JI
-quality tradeoffs retained; revised JDS-X appends one constructive seed to
-unchanged24 finite DS-X seeds. Code1716206cc5967dc40dd2e41badbb2d101cadce8a,
-build/round73/v4,53 tests pass. Four qualification batches total210 native
-calls/386.401s, including two retained configuration failures. Both startup
-tranches complete:20 diagnoses/46.686s/zero Optimize;332 lossless artifacts.
-Latest initialU D3=.0781153, C2=.8370915, D4=.5064228, D6=.1600273,
-D7=.3807737. C2/D6 preserve DS-X, D3/D4/D7 improve; all five first24 logical
-paths match fresh controls. Startup evidence only; no full-proof benefit claim.
-No active build/optimizer; session65693 completed. Do not overwrite v1-v4 or
-re-run frozen diagnostic namespaces. Next: durable native evidence and valid
-full-frontier aggregation; original six30s native diagnoses unused. No formal
-performance/long/confirmation panel opened. Stage/overall goal active/unmet.
-Latest ordinary usage allowed86% remaining; no reset credit consumed.
+Latest evidence-complete stage: Round74 on codex/round74-jdsx-protection, based on
+closed R73 final8c4129b58592d35c34f56a4beddbf18cacacbf81. Read
+results/unified_exact_round74/final_report.md, status.md and stage_decision.json.
+Four fresh D7 runs all return normally: P/DS-X/JDS-X/K1-R absolute gaps
+.080034387/.094084933/.121030952/.017914353. JDS-X has a severe51.2% P gap
+regression and loses the important K1 advantage. R73's small gains remain
+valid but are insufficient for overall acceptance. Session61813 exited1 on
+an over-narrow native-witness guard; the separate independent scope correction
+validates K1's retained HGA UB and complete-cover LB, retaining every raw
+failure. No native rerun. Two offline-script failures also remain retained.
+Total4 runs/15 Optimize/4788.437s;1251 raw files in5 verified bundles29MB.
+No optimizer/build/package process remains. Draft PR publication is pending.
+Next separately admit physical quantity/assignment repair, not a long extension
+of this unchanged candidate. No new allocation or confirmation. Original dirty
+E:/codes/ExactEBRP remains untouched; owned worktree is ExactEBRP-round66.
 
-Latest completed stage: Round72, codex/round72-vdsx-validation, based on
+R74 reuses qualified source4ba09609cf3fb92ef29598dce8201231668324f9 and
+build/round73/v6/ExactEBRP.exe SHA256
+90d7bd2f84744b87958ff19a6e35bed76722cf680964a04ad6331135f5ff9029.
+All54 tests are inherited; no new tests/builds/native fixtures. The opt-in
+durable native journal is qualified by six R73 normal/forced diagnoses;
+observer costs are paid and interrupted evidence never implies certification.
+Current ordinary usage74% remaining; no reset credit consumed. Goal active/unmet.
+
+Earlier completed stage: R73, draft PR134
+https://github.com/yifanXovo/TailoredExact/pull/134 . Final head above and
+base db7976fe94627c00d76d50c0adfed11223fbf646 were freshly verified remote.
+JDS-X adds one constructive seed after the original24 DS-X trajectories.
+Initial standalone-JI losses remain retained. The complete D3 pair certifies
+in138.578s versus DS-X259.968s, a46.69% gain; D4 retains certification near
+DS-X while both P controls remain open300s. D7 startup U.380774 is still
+far above K1 U.215644; R74 now confirms the complete D7 failure above.
+R73 paid583.930s/360 Optimize across all six qualification revisions,
+plus32 research runs1215.278s/54 Optimize. Three failed test batches retained.
+The full screen's29614 raw files are in7 verified lossless bundles. Read
+R73 final_report.md/resource summaries for complete costs and scope; do not
+reopen closed namespaces or infer C2/D6 full-method retention from startup.
+
+Earlier completed stage: Round72, codex/round72-vdsx-validation, based on
 Round71 final73ce04d9a3c5031c2b5a1021523502f0a9a85168. Draft PR133:
 https://github.com/yifanXovo/TailoredExact/pull/133 . Read
 results/unified_exact_round72/final_report.md, status.md and long_failure.json.
