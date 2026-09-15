@@ -1,8 +1,10 @@
-# Round77 admitted, not launched
+# Round77 complete-method campaign active
 
-Read plan.md and closed R76 final_report.md. Frozen R76 v1 source/binary will
-be reused; no new compilation or CTest batch. Three fresh D7 complete-method
-arms P/JDS-C/K1-R, each1200s, plus one<=30s zero-Optimize reference export.
-No long/confirmation panel or automatic retry. Prepare corrected native
-evidence driver, freeze all commands and commit it before launching.
-Goal active/unmet. No optimizer is running at this planning checkpoint.
+Frozen driver committed32155e8e6; session75825 runs the serial P/JDS-C/K1-R
+D7 screen. Read campaign/active_experiment.json, processes.jsonl and summary.json
+when present for current progress. Three whole-process caps1200s; no additional
+launches/retries/long/confirmation runs. Qualified R76 v1 source and binary
+unchanged. Do not compile or run heavy audits alongside the optimizer.
+After all runs, audit original physical/scoped bounds, actual native logs and
+Start vectors, checkpoints and fresh P-relative/K1 protection; then publish
+independent draft PR. Goal remains active/unmet.
