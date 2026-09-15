@@ -22,3 +22,6 @@ remain available; exact roles/commands must be recorded before launch.
 No formal performance/long/confirmation campaign opened. Stage and overall
 goal remain active. Ordinary use allowed86% remaining; no reset used.
 Round72 PR133 head/base publication is verified in prior_publication_verified.json.
+
+Draft PR134 published at audited51941dc4 checkpoint, exact base/head verified
+from creation response. Read runtime_design.md before implementing persistence.

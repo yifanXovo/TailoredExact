@@ -1,5 +1,8 @@
 # Unified exact BRP research - resume here
 
+Draft PR134: https://github.com/yifanXovo/TailoredExact/pull/134 . Audited head
+51941dc4b29c5d972e834a258857125564cc3d04, exact base/head verified at creation.
+Read runtime_design.md for the pending evidence-persistence prerequisite.
 Current active stage: Round73, codex/round73-joint-insertion, based on Round72
 finaldb7976fe94627c00d76d50c0adfed11223fbf646 (publication verified). Read
 results/unified_exact_round73/status.md and seed_checkpoint.md. Initial JI
