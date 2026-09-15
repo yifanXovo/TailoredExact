@@ -419,6 +419,7 @@ struct SolveOptions {
     bool process_start_time_valid = false;
     double process_shutdown_margin_seconds = 5.0;
     std::string process_phase_ledger_path;
+    std::string native_evidence_dir; // default-off, read-only process-kill journal
     bool frontier_critical_band_auto = false;
     int frontier_critical_band_max_depth = 0;
     double frontier_critical_band_min_width = 1e-4;

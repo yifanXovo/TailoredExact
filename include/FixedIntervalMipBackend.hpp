@@ -2,6 +2,7 @@
 
 #include "Instance.hpp"
 #include "Result.hpp"
+#include "NativeEvidenceJournal.hpp"
 
 #include <filesystem>
 #include <functional>
@@ -84,6 +85,8 @@ struct FixedIntervalMipCapabilities {
 };
 
 struct FixedIntervalMipRequest {
+    std::shared_ptr<NativeEvidenceJournal> native_evidence;
+    NativeEvidenceScope native_evidence_scope;
     double optional_work_limit = -1.0; // Round65 only; reset before every core call
     Round65Budget* round65_budget = nullptr; // synchronous, same run-level account
     FixedIntervalSolveKind solve_kind =

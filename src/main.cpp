@@ -739,6 +739,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--process-wall-time-limit") opt.process_wall_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--process-shutdown-margin") opt.process_shutdown_margin_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--process-phase-ledger") opt.process_phase_ledger_path = requireValue(i, argc, argv);
+        else if (arg == "--native-evidence-dir") opt.native_evidence_dir = requireValue(i, argc, argv);
         else if (arg == "--round56-scenario-id") opt.round56_scenario_id = requireValue(i, argc, argv);
         else if (arg == "--round56-mathematical-instance-sha256") opt.round56_mathematical_instance_sha256 = requireValue(i, argc, argv);
         else if (arg == "--round56-run-identity-sha256") opt.round56_run_identity_sha256 = requireValue(i, argc, argv);

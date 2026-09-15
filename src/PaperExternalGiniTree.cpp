@@ -10,6 +10,7 @@
 #include "GiniEnvelopeTailRepair.hpp"
 #include "GiniAdaptiveParametric.hpp"
 #include "ProcessPhaseLedger.hpp"
+#include "NativeEvidenceJournal.hpp"
 #include "Round50IntervalMip.hpp"
 #include "Round48K1AMF.hpp"
 #include "Round49K1RC.hpp"
@@ -2193,6 +2194,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     const bool round65_witness_audit=options.round65_witness_audit ||
         options.algorithm_preset.rfind("research-round65-",0)==0;
     long long round65_native_witness_count=0;
+    std::shared_ptr<NativeEvidenceJournal> native_evidence;
+    if (!options.native_evidence_dir.empty()) {
+        native_evidence=std::make_shared<NativeEvidenceJournal>(instance,options);
+        native_evidence->witness(verified_seed.routes,"same_run_verified_startup");
+    }
     if (round65_witness_audit || options.algorithm_preset.rfind("research-round64-", 0) == 0) {
         persistCurrentWitness(verified_seed.objective,verified_seed.routes,"initial_witness.json");
     }
@@ -3374,6 +3380,17 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     }
     long long round68_start_sequence = 0;
     auto solveBudgeted = [&](FixedIntervalMipRequest request) {
+        if(native_evidence) {
+            request.native_evidence=native_evidence;
+            auto& s=request.native_evidence_scope;
+            s.leaf=request.leaf_id;s.model_sha256=request.canonical_model_fingerprint;
+            s.model_path=request.canonical_model_path.string();s.model_scope=request.canonical_model_scope;
+            s.native_log_path=request.native_log_path.string();
+            s.lower_g=request.gamma_L;s.upper_g=request.gamma_U;s.cutoff=request.verified_cutoff;
+            s.gmax=static_cast<double>(instance.V-1)/instance.V;
+            s.cover=nativeEvidenceCover(scheduler.leaves());
+            native_evidence->witness(best_routes,"same_run_outer_before_call");
+        }
         if (options.round68_verified_start &&
             request.solve_kind != FixedIntervalSolveKind::PaperLpRelaxation) {
             request.round68_verified_start = true;

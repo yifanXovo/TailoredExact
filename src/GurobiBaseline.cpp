@@ -9,6 +9,7 @@
 #include "GurobiProgress.hpp"
 #include "HgaTgbcRunner.hpp"
 #include "ProcessPhaseLedger.hpp"
+#include "NativeEvidenceJournal.hpp"
 #include "MipStartMapping.hpp"
 #include "Round50IntervalMip.hpp"
 #include "Round53CallbackIsolation.hpp"
@@ -340,7 +341,31 @@ struct Round63NativeState {
     }
 };
 
+bool evidenceParameterReadback(GurobiApi& api,GRBenv* env,NativeEvidenceScope& s) {
+    int threads=-1,seed=-1,presolve=-2;
+    double gap=-1,absgap=-1,feas=-1,intfeas=-1,optimality=-1;
+    const int rc=api.getintparam(env,GRB_INT_PAR_THREADS,&threads) |
+        api.getintparam(env,GRB_INT_PAR_SEED,&seed) |
+        api.getintparam(env,GRB_INT_PAR_PRESOLVE,&presolve) |
+        api.getdblparam(env,GRB_DBL_PAR_MIPGAP,&gap) |
+        api.getdblparam(env,GRB_DBL_PAR_MIPGAPABS,&absgap) |
+        api.getdblparam(env,GRB_DBL_PAR_FEASIBILITYTOL,&feas) |
+        api.getdblparam(env,GRB_DBL_PAR_INTFEASTOL,&intfeas) |
+        api.getdblparam(env,GRB_DBL_PAR_OPTIMALITYTOL,&optimality);
+    std::ostringstream o;o << std::setprecision(17) << "{\"read_return_code\":" << rc
+      << ",\"Threads\":" << threads << ",\"Seed\":" << seed << ",\"Presolve\":" << presolve
+      << ",\"MIPGap\":" << gap << ",\"MIPGapAbs\":" << absgap << ",\"FeasibilityTol\":" << feas
+      << ",\"IntFeasTol\":" << intfeas << ",\"OptimalityTol\":" << optimality << '}';
+    s.settings_json=o.str();
+    return rc==0 && threads==1 && seed==0 && presolve==-1 && gap==0 && absgap==0 &&
+        feas==1e-6 && intfeas==1e-5 && optimality==1e-6;
+}
+
 struct ProgressCallbackState {
+    std::shared_ptr<NativeEvidenceJournal> native_evidence;
+    const Instance* evidence_instance = nullptr;
+    const std::vector<std::string>* evidence_names = nullptr;
+    long long evidence_call = 0;
     Round63NativeState* round63 = nullptr;
     struct RootScalar {
         long long callback_sequence = 0;
@@ -883,6 +908,27 @@ int __stdcall progressAndBoundTargetCallback(
     GRBmodel* model, void* cbdata, int where, void* usrdata) {
     auto* state = static_cast<ProgressCallbackState*>(usrdata);
     if (!state || !state->api) return 0;
+    if(where==GRB_CB_MIPSOL && state->native_evidence && state->native_evidence->enabled()) {
+        // The full original-model vector is a documented MIPSOL callback read.
+        // All new exceptions are contained inside the C callback boundary.
+        try {
+            const auto& names=*state->evidence_names;
+            std::vector<double> x(names.size());
+            if(x.empty() || state->api->cbget(cbdata,where,GRB_CB_MIPSOL_SOL,x.data()))
+                state->native_evidence->failure("MIPSOL_vector_read_failed");
+            else {
+                std::unordered_map<std::string,double> values;
+                for(std::size_t i=0;i<x.size();++i) {
+                    if(!std::isfinite(x[i]) || names[i].empty() || !values.emplace(names[i],x[i]).second)
+                        throw std::runtime_error("MIPSOL_original_vector_identity_invalid");
+                }
+                state->native_evidence->witness(
+                    reconstructCanonicalCompactRoutes(*state->evidence_instance,values),
+                    "native_MIPSOL_verified_original_routes",state->evidence_call);
+            }
+        } catch(const std::exception& e) {state->native_evidence->failure(e.what());}
+          catch(...) {state->native_evidence->failure("MIPSOL_unknown_observer_exception");}
+    }
     if (where==GRB_CB_MIPSOL && state->round68_start_values &&
         state->round68_start_types && !state->round68_start_vector_observed) {
         const auto& start=*state->round68_start_values;
@@ -1155,6 +1201,11 @@ int __stdcall progressAndBoundTargetCallback(
     state->api->cbget(cbdata, where, GRB_CB_MIP_PHASE, &event.phase);
     event.incumbent_available = finiteNative(event.incumbent);
     event.best_bound_available = native_bound_read && finiteNative(event.best_bound);
+    if(state->native_evidence && event.best_bound_available) {
+        try {state->native_evidence->nativeBound(state->evidence_call,event.best_bound);}
+        catch(const std::exception& e) {state->native_evidence->failure(e.what());}
+        catch(...) {state->native_evidence->failure("MIP_bound_observer_exception");}
+    }
     if (event.incumbent_available &&
         state->progress.first_incumbent_time < 0.0) {
         state->progress.first_incumbent_time = event.elapsed_runtime_seconds;
@@ -2464,6 +2515,17 @@ public:
             out.failure_reason = apiError(api_, model_env, callback_rc);
             return out;
         }
+        if(request.native_evidence) {
+            auto scope=request.native_evidence_scope;
+            scope.native_preconditions=evidenceParameterReadback(api_,model_env,scope) &&
+                out.exact_zero_gap_roundtrip && out.model_fingerprint_matches_request && !out.lp_relaxation &&
+                request.variable_bound_overrides.empty() && request.round60_fixed_inventory.empty() &&
+                request.additional_linear_rows.empty() && options_.round63_time_mode=="off" &&
+                options_.round65_projection=="off" && !options_.round65_budget;
+            callback.native_evidence=request.native_evidence;
+            callback.evidence_instance=&instance_;callback.evidence_names=&native_names;
+            callback.evidence_call=request.native_evidence->beginCall(scope);
+        }
         if (request.round68_verified_start) {
             out.round68_effective_native_deadline=std::max(0.0,
                 request.global_deadline_remaining_seconds-
@@ -2477,6 +2539,7 @@ public:
             }
         }
         out.optimize_return_code = api_.optimize(model);
+        if(callback.native_evidence) callback.native_evidence->returned(callback.evidence_call,out.optimize_return_code);
         out.round68_start_vector_observed=callback.round68_start_vector_observed;
         out.round68_start_integer_vector_observed=callback.round68_start_integer_vector_observed;
 
@@ -3985,6 +4048,18 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             return result;
         }
 
+        if(!options.native_evidence_dir.empty()) {
+            callback.native_evidence=std::make_shared<NativeEvidenceJournal>(instance,options);
+            NativeEvidenceScope scope;scope.full_original=true;
+            scope.model_sha256=canonical.sha256;scope.model_path=canonical.path.string();
+            scope.model_scope=canonical.model_scope;scope.native_log_path=log_path.string();
+            scope.gmax=static_cast<double>(instance.V-1)/instance.V;scope.upper_g=scope.gmax;
+            scope.native_preconditions=evidenceParameterReadback(api,model_env,scope) &&
+                result.gurobi_native_domain_audit_passed && time_limit_rc==0;
+            callback.evidence_instance=&instance;callback.evidence_names=&native_names;
+            callback.evidence_call=callback.native_evidence->beginCall(scope);
+        }
+
         // Model export, environment startup, model import, and domain audits
         // are inside the same process-entry work window. Recompute the native
         // allowance at Optimize launch instead of rebasing a solver-only
@@ -4003,6 +4078,7 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             "absolute_work_remaining=" +
                 std::to_string(optimize_remaining));
         result.gurobi_optimize_return_code = api.optimize(model);
+        if(callback.native_evidence) callback.native_evidence->returned(callback.evidence_call,result.gurobi_optimize_return_code);
         ++result.gurobi_optimize_count;
         result.gurobi_solver_finalization_reached = true;
         getInt(GRB_INT_ATTR_STATUS, result.gurobi_status);

@@ -27,6 +27,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/ModelCorrectness.cpp
   src/FileSha256.cpp
   src/ProcessPhaseLedger.cpp
+  src/NativeEvidenceJournal.cpp
   src/DenseProgress.cpp
   src/GurobiCertificate.cpp
   src/GurobiProgress.cpp
@@ -96,6 +97,10 @@ else()
 endif()
 
 add_library(exact_ebrp_core ${EXACT_EBRP_LIB_SOURCES})
+
+add_executable(NativeEvidenceJournalTests tests/native_evidence_journal_tests.cpp)
+target_link_libraries(NativeEvidenceJournalTests PRIVATE exact_ebrp_core)
+add_test(NAME NativeEvidenceJournalTests COMMAND NativeEvidenceJournalTests)
 
 if(EXACT_EBRP_ENABLE_GUROBI)
   target_include_directories(exact_ebrp_core PRIVATE "${GUROBI_INCLUDE_DIR}")
