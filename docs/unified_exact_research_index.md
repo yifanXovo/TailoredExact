@@ -2,10 +2,14 @@
 
 Current stage: Round77 on codex/round77-jdsc-protection, based on closed R76
 finalcc3bced895bc0f17c25c5bc23b3466e470d9633e / draft PR137. Read Round77
-plan.md/status.md: three fresh D7 P/JDS-C/K1-R complete-method1200s arms,
-plus one<=30s zero-Optimize reference export, unchanged qualified R76 v1.
-No rebuild/retest/retry/long/confirmation panel. Planning checkpoint; no launches
-yet. Overall goal remains active and unmet.
+plan.md/status.md and supervisor_repair_plan.md. P/JDS-C returned normally,
+with gaps.080034387/.115532282. A snapshot-array versus CLI-dict adapter
+exception stopped the original supervisor after JDS-C. Separate full offline
+scope/Start-vector correction passes and preserves every raw failure; no solve
+was repeated. The originally frozen third K1-R control is active in session72242
+under round77_continue.py, with separate continuation records. No rebuild,
+retest, long or confirmation panel. Goal active/unmet; ordinary usage64%
+remaining at last check, no reset. Do not launch heavy work alongside K1.
 
 Latest completed stage: Round76, codex/round76-physical-route-closure, based on published
 R75 final692cf9f0ef8852d4ee0d62c5ed206c081658d158 / draft PR136.

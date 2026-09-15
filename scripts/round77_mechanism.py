@@ -92,6 +92,21 @@ def main():
                 extra_seed_cross_route_neighbors=sum(int(r['cross_route_neighbors']) for r in trace if r['seed']=='25'),
                 extra_seed_cross_route_checks=sum(int(r['cross_route_checks']) for r in trace if r['seed']=='25'),
                 extra_seed_cross_route_moves=sum(int(r['accepted_cross_route']) for r in trace if r['seed']=='25'))
+        native_costs=[]
+        for c in calls:
+            text=Path(c['native_log_path']).read_text(encoding='utf-8',errors='replace')
+            size=re.search(r'Optimize a model with (\d+) rows, (\d+) columns and (\d+) nonzeros',text)
+            assert size,'Native model dimension line missing'
+            record=dict(call=c['call'],rows=int(size[1]),columns=int(size[2]),nonzeros=int(size[3]),
+                gamma=[c['lower_g'],c['upper_g']],cutoff=c['cutoff'],
+                root_relaxation_lines=[line for line in text.splitlines() if line.startswith('Root relaxation:')],
+                scope='Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost')
+            explored=re.search(r'Explored (\d+) nodes \((\d+) simplex iterations\) in ([0-9.]+) seconds \(([0-9.]+) work units\)',text)
+            if explored:record.update(nodes=int(explored[1]),simplex_iterations=int(explored[2]),native_seconds=float(explored[3]),native_work=float(explored[4]))
+            lp=re.search(r'Solved in (\d+) iterations and ([0-9.]+) seconds',text)
+            if lp and not explored:record.update(lp_iterations=int(lp[1]),native_seconds=float(lp[2]))
+            native_costs.append(record)
+        row['native_cost_attribution']=native_costs
         arms.append(row)
     logical=lambda r:{k:v for k,v in r.items() if k!='elapsed_seconds'}
     previous=rows(ROOT/'results/unified_exact_round76/startup/local_raw/D7/JDS-C/hga.csv.descent.csv')
