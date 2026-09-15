@@ -1,5 +1,5 @@
 {
-  "active_queue": true,
+  "active_queue": false,
   "tool_session_id": 81623,
   "first_long_run_number": 10,
   "first_arm": "P-GRB",
@@ -11,5 +11,11 @@
     "DS-X"
   ],
   "maximum_additional_launches": 3,
-  "scope": "Dispatch checkpoint only; inspect process ledger and completion files for current state. Never duplicate or splice runs."
+  "scope": "Dispatch checkpoint only; inspect process ledger and completion files for current state. Never duplicate or splice runs.",
+  "terminal_session_exit_code": 1,
+  "status": "first_long_arm_watchdog_failure_queue_aborted",
+  "unlaunched_arms": [
+    "K1-R",
+    "DS-X"
+  ]
 }

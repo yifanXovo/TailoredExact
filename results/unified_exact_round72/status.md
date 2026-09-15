@@ -1,48 +1,18 @@
-# Round72 active: same-byte DS-X validation
+# Round72 closed; overall goal active
 
-Draft PR133 is published: https://github.com/yifanXovo/TailoredExact/pull/133 .
-Audited short-panel checkpointcf8e9f1d48a63ca442e0193ce7c9856e04d2a765 is
-pushed; creation verifies the exact Round71 base and checkpoint head, draft/open.
-The stage continues into its admitted D7 long reserve; this is not final success.
+Read final_report.md, stage_decision.json, resource_summary.json and long_failure.json.
+Draft PR133 retains short-panel gains and a failed first long baseline.
+No optimizer queue remains active. Session81623 exited1; child8404 was killed
+by the supervisor at3610.063s. K1-R and DS-X long arms never launched.
+Do not restart the old queue, repeat this stage, run its all-valid aggregate
+packager, or fabricate a formal endpoint from native log values.
 
-D7 long queue is now dispatched, beginning with charged run10 P-GRB, followed
-serially by K1-R and DS-X. Each has the declared3600s common cap. Tool session
-81623 identifies the live queue in this conversation; long_dispatch.json and
-campaign/processes.jsonl are the recovery anchors. Inspect actual completion
-files before any dispatch. No heavy model audit or rebuild while it runs.
-PR metadata commit e3f4894ffcd186cab19f76ce64da13fdb0cf416a is pushed and
-fresh PR lookup verifies its exact head, original base, draft/open status.
-The pre-dispatch checkpoint text below remains the earlier state.
-
-Base Round71 final73ce04d9a3c5031c2b5a1021523502f0a9a85168 / draft PR132.
-Branch codex/round72-vdsx-validation. The six startup-only diagnostics passed
-independent physical and strict terminal-trace checks: 0.390s, zero Optimize
-calls, zero new qualification. 48 compact artifacts are archived. One observed
-offline packaging failure was repaired without changing raw solver evidence.
-
-DS-X improves startup U from0.166376 to0.129719 onD3, from0.854344 to0.837091
-onC2, and from0.723143 to0.592081 onD4. Actual cross-route checks/moves are
-47/28,94/22,131/46. This is UB-only evidence, not proof performance.
-
-The service subsequently reported100% remaining with ordinary use allowed.
-The agent did not consume a reset credit. The earlier authorization question
-has no explicit answer and confers no authority to redeem a credit. The reason
-for restoration is unknown; no reset is needed for current work.
-
-The nine fullD3/C2/D4 runs are complete and fully audited:1817.642s,36 native
-Optimize calls, zero solver failures. DS-X certifiesD3/C2/D4 in255.360/111.234/
-54.703s; all three P arms remain open. DS is open onD3 and certifiesC2/D4 in
-154.219/53.860s. Read short_validation.md and campaign/result_tables.md.
-22 model checks,11 accepted/fully observed Starts,159 full-run compact artifacts
-pass. All six formal startups independently reproduce diagnostic route hashes
-and logical traces. Combined15 experiments cost1818.032s; no new qualification.
-
-campaign/long_gate.json now admits the predeclared D7 three-arm3600s reserve.
-Latest resource check: ordinary use allowed,97% remaining, no agent reset.
-Next preserve the audited checkpoint, then execute
-python scripts/round72_campaign.py run --ids D7 .
-Do not repackage before dispatch: the gate binds the exact audited nine-row
-runs.csv. Later full packaging retains short_runs.csv/short_pairs.csv and the
-checkpoint commit preserves all gate audits. Inspect processes.jsonl and the
-active_run.lock before resuming; no long run has launched at this checkpoint.
-The overall goal remains unmet; no independent confirmation is claimed.
+campaign/runs.csv, pairs.csv, short_* copies, gate and nine-run QA are immutable
+short evidence. attempts.csv and the root resource summary cover all16 attempts
+including the failure. failure_evidence/ retains lossless long-run artifacts.
+round72_close.py rechecks closure only while compiled sources remain frozen;
+use this branch's recorded commit after later source changes.
+Next: separate stage and bounded plan for durable deadline evidence and direct
+joint insertion. Shared runtime changes require freshly bound controls.
+DS-X stays default-off. No independent confirmation or overall completion.
+No main merge or reset credit was used.
