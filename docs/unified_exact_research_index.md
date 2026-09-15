@@ -1,5 +1,19 @@
 # Unified exact BRP research - resume here
 
+Current stage R80, plan frozen on codex/round80-bdsc-primary-deficits,
+based on R79 finalc29173a6cb34c299cd818310eee59844ed36d8f6 / draft PR140.
+Read R80 plan.md/status.md and R79 final_report.md/long_role_review.md.
+Six original serial arms admitted: E8 P/BDS-C/K1-R common120, then D6
+P/BDS-C/K1-R common3600. Maximum11160 process seconds, two zero-Optimize
+reference exports, no build/test. Same qualified R78 source/binary and preset.
+At this commit not yet launched; inspect R80 campaign active/summary/process
+files before doing anything and NEVER rerun an existing campaign. E8 is a
+current small total-time regression; D6 is a true K1/P proof deficit, not K1
+protection. No additional experiment/confirmation admitted. Overall goal unmet;
+D7 long protection/replication and diverse unadapted confirmation remain.
+51% weekly remaining at admission, no reset. Owned E:/codes/ExactEBRP-round66;
+original dirty checkout untouched. Close R80 as independent draft PR.
+
 Current completed stage R79, published as draft PR140, on
 codex/round79-bdsc-small-validation. Base R78 final
 d064fe38c14caf7f8bcc201212cd7654e99f52c1 / draft PR139. Read R79 final_report,
