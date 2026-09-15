@@ -42,3 +42,12 @@ Further nonzero medium/large confirmation is still necessary. Known C6/C8
 protection roles are public history and cannot be relabeled sealed new data.
 Confirmation data must remain unused in this candidate's design decisions,
 cover structural differences and describe related geography accurately.
+
+R66's completed E7/E8 check also matters for eventual acceptance. E8 was
+P1.688s versus K1-R7.359s; it is not in the current six-role panel and remains
+an explicit later BDS-C regression check. The old R39 non-startup losses did
+not reproduce as large current K1 losses: most current E7/E8 cost was HGA.
+Do not invent a remaining non-startup defect from the obsolete label. R79's
+D3 certificate gain is evidence of full nonzero proof performance, while its
+current K1 endpoint still has a smaller gap than P. These are distinct claims.
+No E8 run or other extra arm is admitted by this clarification.
