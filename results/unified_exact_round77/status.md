@@ -1,4 +1,4 @@
-# Round77: completed negative full-method screen, awaiting publication
+# Round77: completed negative full-method screen, draft PR138 published
 
 All three original D7 arms returned normally. P/JDS-C/K1-R absolute gaps are
 .080034387/.115532282/.018286596. JDS-C materially regresses against P
@@ -12,5 +12,6 @@ Three runs cost3591.312s/11 returned Optimize. All joint/mechanism/actual Start
 checks pass. Four verified bundles contain834 files. No active process, new
 build/test, long panel or confirmation. Source/binary/driver hashes rechecked.
 
-Publish an independent draft PR against R76 finalcc3bced895bc0f17c25c5bc23b3466e470d9633e,
-then declare the next bounded stage. Last ordinary usage64% remaining; no reset.
+Published draft PR138: https://github.com/yifanXovo/TailoredExact/pull/138
+against R76 finalcc3bced895bc0f17c25c5bc23b3466e470d9633e,
+Next declare the bounded structural stage. Last ordinary usage64% remaining; no reset.
