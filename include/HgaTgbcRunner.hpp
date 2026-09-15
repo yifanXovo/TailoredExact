@@ -66,6 +66,11 @@ struct HgaTgbcResult {
     double copy_seconds = 0.0;
     double ledger_seconds = 0.0;
     double first_nonempty_seconds = -1.0;
+    bool decoded_descent_complete = false;
+    int decoded_descent_seeds_completed = 0;
+    long long decoded_descent_passes = 0;
+    long long decoded_descent_checks = 0;
+    std::filesystem::path decoded_descent_log_path;
     std::vector<double> fitness_history;
     std::vector<double> elapsed_history;
 };

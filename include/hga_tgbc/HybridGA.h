@@ -11,6 +11,7 @@
 #include <sstream>
 #include <string>
 #include <functional>
+#include <stdexcept>
 
 #if __has_include("GreedyMethods.h")
 #include "GreedyMethods.h"
@@ -43,6 +44,24 @@ public:
         const vector<int>& decoded_operations,
         double fitness,
         long long generation)>;
+
+    struct DescentPass {
+        int seed = 0;
+        long long pass = 0;
+        size_t neighbors = 0;
+        size_t full_evaluations = 0;
+        bool accepted = false;
+        bool exhausted = false;
+        bool interrupted = false;
+        double fitness_before = 0.0;
+        double fitness_after = 0.0;
+        double accepted_proxy_fitness = 0.0;
+        double elapsed_seconds = 0.0;
+    };
+    void set_decoded_descent_only(bool enabled) { decoded_descent_only = enabled; }
+    const vector<DescentPass>& get_descent_passes() const { return descent_passes; }
+    int get_descent_seeds_completed() const { return descent_seeds_completed; }
+    bool completed_decoded_descent() const { return descent_complete; }
 
     HybridGA_HGS(const InstanceData& inst,
         int ps = 24,
@@ -155,6 +174,13 @@ public:
         set_greedy_time_units(instance.load_time_unit, instance.unload_time_unit);
         set_greedy_objective_params(objective_lambda, objective_scaling);
 
+        if (decoded_descent_only) {
+            if (fixed_generations >= 0)
+                throw std::runtime_error("Decoded descent cannot use a generation quota");
+            run_decoded_descent(start, deadlineReached);
+            return;
+        }
+
         vector<Individual> population = initialize_population();
         evaluate_population(population);
         if (selection_style == SelectionStyle::HGSBiased) {
@@ -248,6 +274,10 @@ public:
     }
 
 private:
+    bool decoded_descent_only = false;
+    bool descent_complete = false;
+    int descent_seeds_completed = 0;
+    vector<DescentPass> descent_passes;
     bool verified_stop_requested = false;
     int fixed_generations = -1;
     double initialization_seconds = 0.0;
@@ -542,7 +572,7 @@ SolutionResult_ORO decode_routes(const vector<vector<int>>& routes, vector<int>*
         if (it != decode_cache.end()) return it->second;
     }
     ++decoder_calls;
-    const auto decode_started = fixed_generations >= 0 ? steady_clock::now()
+    const auto decode_started = (fixed_generations >= 0 || decoded_descent_only) ? steady_clock::now()
                                                        : steady_clock::time_point{};
     SolutionResult_ORO res;
     if (decoder_compaction_mode == 0) {
@@ -571,7 +601,7 @@ SolutionResult_ORO decode_routes(const vector<vector<int>>& routes, vector<int>*
             instance.dist, g_iternum, -1.0, instance.weights, instance.min_ratio,
             objective_lambda, objective_scaling, nullptr);
     }
-    if (fixed_generations >= 0)
+    if (fixed_generations >= 0 || decoded_descent_only)
         decoder_seconds += duration<double>(steady_clock::now() - decode_started).count();
     if (decode_cache_max_entries != 0) {
         if (decode_cache_max_entries != std::numeric_limits<size_t>::max() &&
@@ -1235,6 +1265,77 @@ private:
             }
         }
         return false;
+    }
+
+    // Each unsuccessful pass decodes every generated guided neighbor. The
+    // proxy only orders this finite neighborhood; it is never a rejection
+    // bound. No statement about all relocations or global optimality follows.
+    template <typename DeadlineReached>
+    void run_decoded_descent(const steady_clock::time_point& start,
+                             DeadlineReached deadlineReached) {
+        descent_complete = false;
+        descent_seeds_completed = 0;
+        descent_passes.clear();
+        history.clear();
+        elapsed_history.clear();
+        improvement_history.clear();
+        total_generations = 0;
+        generations_since_improvement = 0;
+        objective_improvement_count = 0;
+        vector<Individual> population = initialize_population();
+        auto interrupted = [&]() {
+            return verified_stop_requested || deadlineReached();
+        };
+        auto publish = [&](const Individual& ind) {
+            if (update_best(vector<Individual>{ind})) ++objective_improvement_count;
+        };
+        for (auto& ind : population) {
+            if (interrupted()) return;
+            decode_individual(ind);
+            if (!isfinite(ind.fitness))
+                throw std::runtime_error("Decoded descent seed has nonfinite fitness");
+            publish(ind);
+            initialization_seconds = duration<double>(steady_clock::now() - start).count();
+        }
+        initialization_seconds = duration<double>(steady_clock::now() - start).count();
+        for (size_t seed = 0; seed < population.size(); ++seed) {
+            Individual& ind = population[seed];
+            while (true) {
+                if (interrupted()) return;
+                DescentPass row;
+                row.seed = static_cast<int>(seed + 1);
+                row.pass = static_cast<long long>(descent_passes.size() + 1);
+                row.fitness_before = ind.fitness;
+                vector<GuidedCandidate> candidates = build_guided_candidates(ind);
+                row.neighbors = candidates.size();
+                for (const auto& cand : candidates) {
+                    if (interrupted()) { row.interrupted = true; break; }
+                    vector<int> chrom = routes_to_chromosome(cand.routes);
+                    const auto decoded = decode_routes(cand.routes, &chrom);
+                    if (!isfinite(decoded.objective_value))
+                        throw std::runtime_error("Decoded descent neighbor has nonfinite fitness");
+                    ++row.full_evaluations;
+                    if (decoded.objective_value > ind.fitness + 1e-12) {
+                        ind.routes = cand.routes;
+                        ind.chrom = std::move(chrom);
+                        ind.fitness = decoded.objective_value;
+                        ind.decoded_ops = decoded.Y_Oper_best;
+                        row.accepted = true;
+                        row.accepted_proxy_fitness = cand.approx_fitness;
+                        publish(ind);
+                        break;
+                    }
+                }
+                row.exhausted = !row.accepted && !row.interrupted &&
+                    row.full_evaluations == row.neighbors;
+                row.fitness_after = ind.fitness;
+                row.elapsed_seconds = duration<double>(steady_clock::now() - start).count();
+                descent_passes.push_back(row);
+                if (row.interrupted || interrupted()) return;
+                if (row.exhausted) { ++descent_seeds_completed; break; }
+            }
+        }
+        descent_complete = descent_seeds_completed == static_cast<int>(population.size());
     }
 
     void educate(Individual& ind) {

@@ -1,5 +1,18 @@
 # Unified exact BRP research — resume here
 
+Active stage: Round70 preflight on codex/round70-vds-descent, based on
+Round69 final b87850c474c8cb9ac45b65f881ebc629bb137f24. Read
+results/unified_exact_round70/plan.md, mathematics.md and status.md.
+Finite decoded descent replaces the initial HGA search; full VD-S proof stays.
+Eight verified source/test drafts are applied; first build and all46 CTests
+passed. No performance or micro runs yet; frozen identities and fresh controls
+are required first. Ten no-opt exports cover eight roles and two micro settings.
+Plan: at most27 performance+6 micros,9060 worst-case experiment seconds,
+uniform logical2/mask4 measurement for all newly matched arms. Own-launcher
+and child affinity qualification passed, with parent restoration and no unrelated
+process changes. Do not rerun old frozen-stage packagers after this source
+revision. Overall goal remains unmet; no new draft PR until this stage's work.
+
 Latest completed stage: Round69, draft PR130:
 https://github.com/yifanXovo/TailoredExact/pull/130 . Evidence commit
 d37ba536a99c5dc828d7d2a7f9a11d2b2d6fe3be; remote identities verified.

@@ -249,6 +249,17 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
     }
     if (opt.algorithm_preset == "custom") return;
 
+    if (opt.algorithm_preset == "research-round70-vds-descent") {
+        opt.algorithm_preset = "research-round68-vdp-start";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = "research-round70-vds-descent";
+        opt.primal_heuristic_stop = "decoded-descent";
+        // This legacy option supplies the native seed population size.
+        // Explicitly report the 24 seeds already used by the VD-S bridge.
+        opt.primal_heuristic_runs = 24;
+        return;
+    }
+
     if (opt.algorithm_preset == "research-round68-vdp-start") {
         opt.algorithm_preset = "research-round67-vdp";
         applyAlgorithmPreset(opt);
@@ -2212,7 +2223,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             "Round 45 requires frozen HGA-FULL C6 with Auto presolve and "
             "all Round 36--44 research arms off");
     }
-    if (opt.primal_heuristic_stop != "generation-stagnation") {
+    if (opt.primal_heuristic_stop != "generation-stagnation" &&
+        opt.primal_heuristic_stop != "decoded-descent") {
         opt.primal_heuristic_stop = "legacy-time";
     }
     if (opt.primal_heuristic_no_improve_generations < 1) {
@@ -3206,7 +3218,14 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     const bool r65preset=opt.algorithm_preset=="research-round65-k1-s" || opt.algorithm_preset=="research-round65-k1-h";
     const bool r67preset = opt.algorithm_preset == "research-round67-vdp" ||
         opt.algorithm_preset == "research-round67-log-vdp" ||
-        opt.algorithm_preset == "research-round68-vdp-start";
+        opt.algorithm_preset == "research-round68-vdp-start" ||
+        opt.algorithm_preset == "research-round70-vds-descent";
+    if ((opt.primal_heuristic_stop == "decoded-descent") !=
+        (opt.algorithm_preset == "research-round70-vds-descent"))
+        throw std::runtime_error("Decoded descent requires its isolated VD-S research preset");
+    if (opt.primal_heuristic_stop == "decoded-descent" &&
+        opt.primal_heuristic != "hga-tgbc")
+        throw std::runtime_error("Decoded descent requires the single native witness-search path");
     if (r67preset && (opt.plain_baseline || opt.round66_arc_load_replacement ||
         opt.round65_budget || opt.round65_projection != "off" ||
         opt.round64_shared_mode != "off" || opt.round63_time_mode != "off" ||
@@ -3645,11 +3664,14 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
             "interval-MIP backend; research strengthening remains default-off";
     } else if (snapshot.algorithm_preset == "research-round67-vdp" ||
                snapshot.algorithm_preset == "research-round67-log-vdp" ||
-               snapshot.algorithm_preset == "research-round68-vdp-start") {
+               snapshot.algorithm_preset == "research-round68-vdp-start" ||
+               snapshot.algorithm_preset == "research-round70-vds-descent") {
         snapshot.preset_certificate_scope = "k1_original_problem_with_inventory_state_product";
         snapshot.preset_experimental_features_enabled = snapshot.algorithm_preset;
         snapshot.preset_disabled_features = "round65_resource_budgets,projection,arc_load_replacement,other_research";
-        snapshot.preset_reason = "Full paid K1-R with uniform one-hot or logarithmic inventory-state representation";
+        snapshot.preset_reason = snapshot.algorithm_preset == "research-round70-vds-descent"
+            ? "Full paid VD-S proof with finite random-seed decoded local descent"
+            : "Full paid K1-R with uniform one-hot or logarithmic inventory-state representation";
     } else if (snapshot.algorithm_preset == "research-k1-am-sf-vdp" ||
                snapshot.algorithm_preset == "research-k1-am-sf-sf-r1" ||
                snapshot.algorithm_preset ==
@@ -4780,7 +4802,8 @@ std::string jsonEscapeLocal(const std::string& value) {
 }
 
 bool isPaperTracePreset(const std::string& preset) {
-    return preset == "research-round68-vdp-start" ||
+    return preset == "research-round70-vds-descent" ||
+           preset == "research-round68-vdp-start" ||
            preset == "research-round67-vdp" || preset == "research-round67-log-vdp" ||
            preset == "research-round65-k1-s" || preset == "research-round65-k1-h" ||
            preset == "research-round64-k1-s" || preset == "research-round64-k1-h" ||
@@ -7288,6 +7311,11 @@ struct PaperPrimalHeuristicResult {
     long long hga_published_candidate_count = 0;
     double hga_candidate_verification_seconds = 0.0;
     std::string hga_retained_candidate_sha256;
+    bool decoded_descent_complete = false;
+    int decoded_descent_seeds_completed = 0;
+    long long decoded_descent_passes = 0;
+    long long decoded_descent_checks = 0;
+    std::string decoded_descent_log_path;
     std::vector<std::string> notes;
     struct CandidateRecord {
         std::string instance;
@@ -7799,8 +7827,9 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         return out;
     }
     const double budget = opt.primal_heuristic_seconds;
-    const bool generation_stagnation =
-        opt.primal_heuristic_stop == "generation-stagnation";
+    const bool search_state_stop =
+        opt.primal_heuristic_stop == "generation-stagnation" ||
+        opt.primal_heuristic_stop == "decoded-descent";
     auto timedOut = [&]() {
         if (budget <= 0.0) return false;
         return std::chrono::duration<double>(
@@ -7889,7 +7918,7 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         return out;
     }
     if ((mode == "hga-tgbc" || mode == "best-of-all") &&
-        (generation_stagnation || !timedOut())) {
+        (search_state_stop || !timedOut())) {
         ebrp::HgaTgbcOptions hga_opt;
         hga_opt.lambda = opt.lambda;
         hga_opt.seed = opt.primal_heuristic_seed;
@@ -7907,7 +7936,7 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
             opt.round60_hga_candidate_log;
         hga_opt.candidate_model_identity =
             opt.algorithm_preset + "|original_problem";
-        if (!generation_stagnation) {
+        if (!search_state_stop) {
             hga_opt.max_time_seconds = std::max(
                 1, static_cast<int>(std::ceil(opt.primal_heuristic_seconds)));
         }
@@ -7935,9 +7964,15 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         out.hga_candidate_verification_seconds =
             native.candidate_verification_seconds;
         out.hga_retained_candidate_sha256 = native.retained_candidate_sha256;
+        out.decoded_descent_complete = native.decoded_descent_complete;
+        out.decoded_descent_seeds_completed = native.decoded_descent_seeds_completed;
+        out.decoded_descent_passes = native.decoded_descent_passes;
+        out.decoded_descent_checks = native.decoded_descent_checks;
+        out.decoded_descent_log_path = native.decoded_descent_log_path.string();
         out.notes.insert(out.notes.end(), native.notes.begin(), native.notes.end());
         if (native.found) {
-            consider(native.routes, "native_hga_tgbc_full_migration");
+            consider(native.routes, opt.primal_heuristic_stop == "decoded-descent"
+                ? "decoded_descent_verified_seed" : "native_hga_tgbc_full_migration");
         }
         if (mode == "hga-tgbc") {
             finalizeHeuristic();
@@ -8203,6 +8238,11 @@ ebrp::SolveResult solvePrimalHeuristicDiagnostic(const ebrp::Instance& instance,
         heuristic.hga_candidate_verification_seconds;
     result.hga_retained_candidate_sha256 =
         heuristic.hga_retained_candidate_sha256;
+    result.decoded_descent_complete = heuristic.decoded_descent_complete;
+    result.decoded_descent_seeds_completed = heuristic.decoded_descent_seeds_completed;
+    result.decoded_descent_passes = heuristic.decoded_descent_passes;
+    result.decoded_descent_checks = heuristic.decoded_descent_checks;
+    result.decoded_descent_log_path = heuristic.decoded_descent_log_path;
     result.incumbent_generation_time_seconds = heuristic.runtime_seconds;
     result.incumbent_generation_method = "paper_primal_" + opt.primal_heuristic;
     result.incumbent_candidates_tested = heuristic.candidates_tested;
@@ -11988,6 +12028,11 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
             heuristic.hga_candidate_verification_seconds;
         result.hga_retained_candidate_sha256 =
             heuristic.hga_retained_candidate_sha256;
+        result.decoded_descent_complete = heuristic.decoded_descent_complete;
+        result.decoded_descent_seeds_completed = heuristic.decoded_descent_seeds_completed;
+        result.decoded_descent_passes = heuristic.decoded_descent_passes;
+        result.decoded_descent_checks = heuristic.decoded_descent_checks;
+        result.decoded_descent_log_path = heuristic.decoded_descent_log_path;
         result.incumbent_generation_time_seconds += heuristic.runtime_seconds;
         result.incumbent_generation_method = "paper_primal_" + opt.primal_heuristic;
         result.incumbent_candidates_tested += heuristic.candidates_tested;
@@ -19343,7 +19388,8 @@ int main(int argc, char** argv) {
                 file, opt.total_time_limit, opt.pickup_time, opt.drop_time);
             if ((opt.algorithm_preset == "research-round67-vdp" ||
                  opt.algorithm_preset == "research-round67-log-vdp" ||
-                 opt.algorithm_preset == "research-round68-vdp-start") &&
+                 opt.algorithm_preset == "research-round68-vdp-start" ||
+                 opt.algorithm_preset == "research-round70-vds-descent") &&
                 !ebrp::hasMetricTravelLowerBounds(instance)) {
                 throw std::runtime_error(
                     "Round67 strengthened presets require symmetric metric travel; "

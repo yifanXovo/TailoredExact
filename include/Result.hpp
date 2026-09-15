@@ -1159,6 +1159,11 @@ struct SolveResult {
     long long hga_published_candidate_count = 0;
     double hga_candidate_verification_seconds = 0.0;
     std::string hga_retained_candidate_sha256;
+    bool decoded_descent_complete = false;
+    int decoded_descent_seeds_completed = 0;
+    long long decoded_descent_passes = 0;
+    long long decoded_descent_checks = 0;
+    std::string decoded_descent_log_path;
     bool incumbent_import_attempted = false;
     bool incumbent_import_verified = false;
     double incumbent_import_objective = 0.0;

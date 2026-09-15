@@ -2638,6 +2638,11 @@ std::string resultToJson(const SolveResult& input) {
         << result.hga_candidate_verification_seconds << ",\n";
     out << "  \"hga_retained_candidate_sha256\": \""
         << jsonEscape(result.hga_retained_candidate_sha256) << "\",\n";
+    out << "  \"decoded_descent_complete\": " << (result.decoded_descent_complete ? "true" : "false") << ",\n";
+    out << "  \"decoded_descent_seeds_completed\": " << result.decoded_descent_seeds_completed << ",\n";
+    out << "  \"decoded_descent_passes\": " << result.decoded_descent_passes << ",\n";
+    out << "  \"decoded_descent_checks\": " << result.decoded_descent_checks << ",\n";
+    out << "  \"decoded_descent_log_path\": " << "\"" << jsonEscape(result.decoded_descent_log_path) << "\"" << ",\n";
     out << "  \"incumbent_import_attempted\": "
         << (result.incumbent_import_attempted ? "true" : "false") << ",\n";
     out << "  \"incumbent_import_verified\": "

@@ -104,6 +104,9 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
     const auto started = std::chrono::steady_clock::now();
     HgaTgbcResult out;
     out.stop_mode = options.stop_mode;
+    const bool decoded_descent = options.stop_mode == "decoded-descent";
+    if (decoded_descent && options.fixed_generations >= 0)
+        throw std::runtime_error("Decoded descent cannot use a generation quota");
     InstanceData hga_instance = toHgaInstance(instance);
 
     set_greedy_time_units(instance.pickup_time, instance.drop_time);
@@ -130,6 +133,7 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
     }
     ga.set_generation_stagnation_stop(
         options.stop_mode == "generation-stagnation");
+    ga.set_decoded_descent_only(decoded_descent);
     ga.set_decoder_compaction_mode(1);
     ga.set_decode_cache_max_entries(200000);
     VerifiedCandidateStore published_candidates;
@@ -147,8 +151,9 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
                     std::chrono::steady_clock::now() - observer_started).count();
                 const bool published = published_candidates.consider(
                     instance, options.lambda, routes,
-                    generation == 0 ? "hga_initial_population_best"
-                                    : "hga_strict_improvement",
+                    decoded_descent ? "decoded_descent_verified_improvement"
+                        : (generation == 0 ? "hga_initial_population_best"
+                                           : "hga_strict_improvement"),
                     options.candidate_model_identity, generation,
                     event_seconds, 0.0);
                 // Same tolerance as main's existing F >= 0 certificate. The
@@ -188,7 +193,8 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
         recordProcessPhase(
             *options.process_options, "hga_start", "start",
             "label=" + options.phase_label +
-            ";native_generation_stagnation_hga");
+            (decoded_descent ? ";finite_random_seed_decoded_descent"
+                             : ";native_generation_stagnation_hga"));
     }
     ga.run();
     out.global_deadline_reached = ga.stopped_on_absolute_deadline();
@@ -196,22 +202,33 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
         ga.best_observer_failed_and_disabled();
     if (out.candidate_observer_failed) {
         out.notes.push_back(
-            "optional HGA candidate observer failed and was disabled; "
-            "the original HGA search continued");
+            decoded_descent
+                ? "candidate observer failed and was disabled; decoded descent continued"
+                : "optional HGA candidate observer failed and was disabled; the original HGA search continued");
     }
     if (options.process_options) {
+        const std::string stop_status = out.global_deadline_reached ? "deadline_interrupted"
+            : (decoded_descent && out.verified_zero_stop ? "certified_zero"
+               : (decoded_descent && !ga.completed_decoded_descent() ? "incomplete" : "complete"));
         recordProcessPhase(
-            *options.process_options, "hga_generation_loop_complete",
-            out.global_deadline_reached ? "deadline_interrupted" : "complete",
+            *options.process_options,
+            decoded_descent ? "decoded_descent_complete" : "hga_generation_loop_complete",
+            stop_status,
             "label=" + options.phase_label +
             ";generations=" + std::to_string(ga.get_total_generations()) +
             ";no_improve=" +
-            std::to_string(ga.get_generations_since_improvement()));
+            std::to_string(ga.get_generations_since_improvement()) +
+            (decoded_descent ? ";completed_seeds=" + std::to_string(ga.get_descent_seeds_completed()) : ""));
     }
 
     out.total_generations = ga.get_total_generations();
     out.initialization_seconds = ga.get_initialization_seconds();
     out.decoder_seconds = ga.get_decoder_seconds();
+    out.decoded_descent_complete = ga.completed_decoded_descent();
+    out.decoded_descent_seeds_completed = ga.get_descent_seeds_completed();
+    out.decoded_descent_passes = static_cast<long long>(ga.get_descent_passes().size());
+    for (const auto& row : ga.get_descent_passes())
+        out.decoded_descent_checks += static_cast<long long>(row.full_evaluations);
     out.hash_seconds = published_candidates.hash_seconds;
     out.copy_seconds = published_candidates.copy_seconds;
     if (options.fixed_generations >= 0) {
@@ -223,8 +240,30 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
     out.objective_improvement_count = ga.get_objective_improvement_count();
     out.decoder_calls = ga.get_decoder_calls();
     out.final_fitness = ga.get_best_fitness();
-    out.generation_log_path = options.generation_log_path;
-    if (!options.generation_log_path.empty()) {
+    if (decoded_descent && !options.generation_log_path.empty()) {
+        out.decoded_descent_log_path = options.generation_log_path.string() + ".descent.csv";
+        try {
+            if (out.decoded_descent_log_path.has_parent_path())
+                std::filesystem::create_directories(out.decoded_descent_log_path.parent_path());
+            std::ofstream trajectory(out.decoded_descent_log_path);
+            trajectory << "seed,pass,neighbors,decoded_checks,accepted,exhausted,interrupted,"
+                          "fitness_before,fitness_after,accepted_proxy_fitness,elapsed_seconds\n";
+            trajectory << std::setprecision(17);
+            for (const auto& row : ga.get_descent_passes()) {
+                trajectory << row.seed << ',' << row.pass << ',' << row.neighbors << ','
+                    << row.full_evaluations << ',' << row.accepted << ',' << row.exhausted << ','
+                    << row.interrupted << ',' << row.fitness_before << ',' << row.fitness_after << ','
+                    << row.accepted_proxy_fitness << ',' << row.elapsed_seconds << '\n';
+            }
+            if (!trajectory) throw std::runtime_error("Decoded descent trajectory write failed");
+        } catch (...) {
+            if (!options.retain_verified_on_log_failure) throw;
+            out.candidate_evidence_persisted = false;
+            out.notes.push_back("descent trajectory not persisted; verified memory retained");
+        }
+    }
+    if (!decoded_descent) out.generation_log_path = options.generation_log_path;
+    if (!decoded_descent && !options.generation_log_path.empty()) {
       try {
         if (options.generation_log_path.has_parent_path()) {
             std::filesystem::create_directories(
@@ -285,12 +324,14 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
             const VerifiedBrpCandidate& candidate = published_candidates.best();
             out.found = true;
             out.routes = candidate.routes;
-            out.source_label = "native_hga_tgbc_verified_event_publish";
+            out.source_label = decoded_descent ? "decoded_descent_verified_event_publish"
+                                              : "native_hga_tgbc_verified_event_publish";
             out.verified_objective = candidate.objective;
             out.retained_verified_event_candidate = true;
             out.retained_candidate_sha256 = candidate.content_sha256;
             std::ostringstream note;
-            note << "retained independently verified HGA event candidate="
+            note << "retained independently verified "
+                 << (decoded_descent ? "decoded-descent" : "HGA") << " event candidate="
                  << candidate.content_sha256
                  << ", objective=" << candidate.objective
                  << ", generation=" << candidate.generation;
@@ -302,19 +343,21 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
     }
 
     // PREFIX OFF extracts the same cached complete snapshot as ON, without
-    // another stochastic/expensive decode. This is exclusive to Round 61.
-    if (options.fixed_generations >= 0) {
+    // another stochastic/expensive decode. Used by the fixed-prefix diagnostic
+    // and finite decoded descent; the legacy full HGA path is unchanged.
+    if (options.fixed_generations >= 0 || decoded_descent) {
         auto routes = routesFromHgaDecode(instance, ga.get_best_solution(),
                                          ga.get_best_decoded_operations());
         VerifiedCandidateStore final_store;
-        final_store.consider(instance, options.lambda, routes, "prefix_cached_best",
+        const std::string source = decoded_descent ? "decoded_descent_cached_best" : "prefix_cached_best";
+        final_store.consider(instance, options.lambda, routes, source,
                              options.candidate_model_identity);
         if (final_store.hasBest()) {
             out.found = true;
             out.routes = final_store.best().routes;
             out.verified_objective = final_store.best().objective;
             out.retained_candidate_sha256 = final_store.best().content_sha256;
-            out.source_label = "prefix_cached_best";
+            out.source_label = source;
         }
         out.wall_time_seconds = std::chrono::duration<double>(
             std::chrono::steady_clock::now() - started).count();
