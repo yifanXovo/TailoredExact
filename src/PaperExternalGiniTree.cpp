@@ -388,7 +388,7 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         return false;
     }
     if (coarse_start != "off" &&
-        (!(hga_full || decoded_descent || (options.round59_simple_start && simple_start)) || causal != "off" || normalization != "proof" ||
+        (!(hga_full || decoded_descent || joint_insertion || (options.round59_simple_start && simple_start)) || causal != "off" || normalization != "proof" ||
          geometry_policy != "off" ||
          options.round40_c6_ub_geometry != "off" ||
          options.round41_static_segmented_gini != "off" ||
