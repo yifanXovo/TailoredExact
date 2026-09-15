@@ -2,14 +2,16 @@
 
 Current active stage: R78, codex/round78-balanced-block-descent, base R77
 final88e963a1f10cc4ff9f1d3a17950f0a5708f68318 / draft PR138. Read R78 status.md,
-diagnostic_review.md, implementation_plan.md and mathematics.md. Fixed diagnosis
-passes: D6 F.157849713, D7 F.300543518 from respective JDS-C starters via neutral
-balanced-block relocation and reopened quantity descent. Zero Optimize;3.890512s
-total driver. Exact original prototype source bytes archived before integration.
-Shared production controller/default-off BDS-C preset now ready for one60-test
-qualification and actual Start audit, then ten fresh startup controls. No full
-comparison or confirmation yet. Overall goal active/unmet; no reset credit.
-Original dirty checkout untouched; owned E:/codes/ExactEBRP-round66.
+full_screen_plan.md and startup_review.json. Source4a0561e0f8193e3e874c1bd0bfa8bc381fb66f5e,
+build/round78/v1. Qualification60/60 passes,147 Optimize/103.905918s, no repair.
+Ten fresh startup runs32.482s/zero Optimize: D3/C2/D4 unchanged, D6/D7 legal
+U.157849713/.300543518. All25 paths/physical transitions and actual Start pass.
+Now exactly three fresh serial D7 P/BDS-C/K1-R complete runs, each1200s, are
+admitted; see frozen driver/campaign ledgers. No rerun, other full panel or
+confirmation admitted. Do not overlap optimizer/compile/heavy audits. Preserve
+all failures. Goal active/unmet, ordinary usage59% remaining, no reset. Finish
+this substantive R78 stage with an independent draft PR; no main merge.
+Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.
 
 Current completed stage: Round77 on codex/round77-jdsc-protection, based on
 R76 finalcc3bced895bc0f17c25c5bc23b3466e470d9633e / draft PR137. Read R77

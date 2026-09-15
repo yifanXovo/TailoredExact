@@ -1,12 +1,19 @@
-# Round78: prototype passes; production qualification ready
+# Round78: qualification/startup complete; fresh full screen admitted
 
-Fixed D6/D7 diagnosis is closed and valid, all zero Optimize. Seven placement
-oracles pass. D6 F.160027281 to.157849713 via2 neutral/4 quantity; D7 F.331621561
-to.300543518 via4 neutral/39 quantity. Total diagnostic driver3.890512s.
-Exact measured prototype sources are preserved in diagnostic/v1/source_archive.
+Shared BDS-C production source4a0561e0f8193e3e874c1bd0bfa8bc381fb66f5e,
+build/round78/v1 SHA2563fae847a75c3c9d07d8f5f0444daeafb73559865e6bffb816746802b9e2f43ab.
+One qualification60/60,147 Optimize,103.905918s; actual BDS-C/JDS-C Start
+vectors and tiny5/24 certificates pass. No repair. Ten fresh startup runs all
+pass in32.482s/zero Optimize. D3/C2/D4 routes unchanged; D6/D7 reproduce legal
+F.157849713/.300543518. All25 paths match and actual handoff uses module final.
 
-Shared production controller and explicit default-off BDS-C preset integrated.
-Read implementation_plan.md and mathematics.md. One60-test qualification and
-actual Start-vector audit, then ten fresh JDS-C/BDS-C startup runs are admitted.
-No full-performance panel/confirmation yet. Overall goal active/unmet. No active
-optimizer. Original dirty checkout untouched. No reset credit consumed.
+Read full_screen_plan.md. Exactly three fresh serial D7 P/BDS-C/K1-R arms at
+1200s whole cap each, one zero-Optimize reference, no further build/test/retry.
+Driver round78_research.py frozen before launch; campaign/active_experiment.json,
+processes.jsonl, summary.json and driver_completion.json give live recovery.
+No overlapping optimizer/heavy audit. No long extension/confirmation admitted.
+
+Prototype diagnostic and exact original source bytes remain preserved. Overall
+goal active/unmet. Ordinary usage59% remaining; no reset credit consumed.
+Original dirty checkout untouched. Stage draft PR is due after full evidence
+closure; do not end the overall goal merely after publication.
