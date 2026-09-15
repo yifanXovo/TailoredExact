@@ -1,6 +1,21 @@
 # Unified exact BRP research - resume here
 
-Current stage: Round76, codex/round76-physical-route-closure, based on published
+Current completed stage: Round77 on codex/round77-jdsc-protection, based on
+R76 finalcc3bced895bc0f17c25c5bc23b3466e470d9633e / draft PR137. Read R77
+final_report.md, status.md and reproduce.md. Draft PR138: https://github.com/yifanXovo/TailoredExact/pull/138 . All3 normal
+D7 runs valid: P/JDS-C/K1 gaps.080034387/.115532282/.018286596. Candidate has
+material44.35% P regression (below frozen severe rule), loses K1 protection.
+No certificates. Better startup/stronger LB do not establish whole-method gain.
+Original array/dict supervisor failure remains; separate correction passes,
+only original unlaunched K1 control continued. No solver rerun.11 Optimize,
+3591.312s full wall,834 files in4 verified bundles. All audits complete.
+No optimizer/build/package process active, no new build/test or confirmation.
+Qualified source4f6254c2639972ce3ac2b80906ce6d4ebd701f3e, build/round76/v1.
+Next admit a bounded structural question; see prospective
+physical/compact-core review. Overall goal active/unmet; ordinary usage64%
+remaining at last check, no reset. Original dirty checkout untouched.
+
+Latest completed stage: Round76, codex/round76-physical-route-closure, based on published
 R75 final692cf9f0ef8852d4ee0d62c5ed206c081658d158 / draft PR136.
 Substantive implementation/startup screen complete, draft PR137:
 https://github.com/yifanXovo/TailoredExact/pull/137 . Evidence head2953ca8c.
