@@ -123,9 +123,11 @@ Paid full-run wall totals1996.015s within the declared3780s maximum, with
 reference exports. Joint analysis costs3.214856s, actual mechanism audit.850892s,
 packaging/verification10.741997s and a separate byte check1.432970s. No new
 qualification, solver failure, supervisor exception, solver rerun, extra seed,
-extension, confirmation run or reset credit occurs. Two git transport attempts
-fail before an ordinary third push succeeds; these are preserved separately
-and never treated as native experimental failures. Interactive work is not
+extension, confirmation run or reset credit occurs. Two early git attempts fail
+before a third succeeds. Three later publication pushes fail; authenticated
+Git Data API transport then verifies every original blob/tree/commit hash and
+updates the branch without force in110.544634s. All original history is retained;
+these transport failures never become native experimental failures. Interactive work is not
 represented as a complete machine-time census.
 
 Nineteen lossless bundles retain44084 files,46988126 raw bytes and8002390

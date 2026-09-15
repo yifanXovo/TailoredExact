@@ -1,4 +1,4 @@
-# Round79 closed; independent draft PR pending
+# Round79 closed and published as draft PR140
 
 Read final_report.md, stage_decision.json, reproduce.md and long_role_review.md.
 All18 original runs normal and valid. BDS-C certifies E7/S12/N12/D3/C2/D4;
@@ -11,10 +11,12 @@ handoffs and all25 paths validated;9 actual Start vectors/models/readback and
 native acceptance pass. All18 coverage/physical/normal-certificate audits pass.
 
 64 actual Optimize calls all returned;1996.015s paid wall. No build/test/solver
-failure/supervisor exception/rerun. Two transport failures, then ordinary push
-succeeded.19 verified bundles44084 files. All optimizer/build/package processes
-ended; exec26444 and90013 closed. No pending monitor cell. Commit and publish
-this stage against R78 finald064fe38c14caf7f8bcc201212cd7654e99f52c1 / PR139.
+failure/supervisor exception/rerun. Two initial transport failures, then ordinary push succeeded; three later
+publication push failures recovered by exact-object Git Data API transport.19 verified bundles44084 files. All optimizer/build/package processes
+ended; exec26444 and90013 closed. No pending monitor cell. Draft PR140:
+https://github.com/yifanXovo/TailoredExact/pull/140 . Base R78 final
+d064fe38c14caf7f8bcc201212cd7654e99f52c1 / PR139. Evidence head e7ae3a985;
+original history preserved, open/draft/unmerged verified.
 No main merge. Qualified source4a0561e0f8193e3e874c1bd0bfa8bc381fb66f5e,
 unchanged build/round78/v1 SHA2563fae847a75c3c9d07d8f5f0444daeafb73559865e6bffb816746802b9e2f43ab.
 
