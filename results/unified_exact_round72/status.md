@@ -5,6 +5,15 @@ Audited short-panel checkpointcf8e9f1d48a63ca442e0193ce7c9856e04d2a765 is
 pushed; creation verifies the exact Round71 base and checkpoint head, draft/open.
 The stage continues into its admitted D7 long reserve; this is not final success.
 
+D7 long queue is now dispatched, beginning with charged run10 P-GRB, followed
+serially by K1-R and DS-X. Each has the declared3600s common cap. Tool session
+81623 identifies the live queue in this conversation; long_dispatch.json and
+campaign/processes.jsonl are the recovery anchors. Inspect actual completion
+files before any dispatch. No heavy model audit or rebuild while it runs.
+PR metadata commit e3f4894ffcd186cab19f76ce64da13fdb0cf416a is pushed and
+fresh PR lookup verifies its exact head, original base, draft/open status.
+The pre-dispatch checkpoint text below remains the earlier state.
+
 Base Round71 final73ce04d9a3c5031c2b5a1021523502f0a9a85168 / draft PR132.
 Branch codex/round72-vdsx-validation. The six startup-only diagnostics passed
 independent physical and strict terminal-trace checks: 0.390s, zero Optimize
