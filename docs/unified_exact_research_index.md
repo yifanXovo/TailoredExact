@@ -221,3 +221,5 @@ Overall target remains active and unmet. A stage draft PR is not completion.
 R73 runtime update: v6 passes54 tests; all6 native persistence diagnoses pass,32 Optimize/65.484s. Read results/unified_exact_round73/runtime_checkpoint.md and runtime_resource_summary.json. First full D3/D4 P/DS-X/JDS-X screen declared (6x300s), not yet launched; stage active.
 
 R73 closed: full D3 JDS-X138.578s vsDS-X259.968s certified (46.69% improvement); D4 remains near-tied certified while both P controls remain open. All6 formal runs pass,22 Optimize/1103.108s; stage has414 Optimize incl all qualifications. See Round73 final_report.md and stage_decision.json. No optimizer remains. Next D7 validation; overall goal unmet.
+
+R74 active on codex/round74-jdsx-protection, base8c4129b58592d35c34f56a4beddbf18cacacbf81. Same qualified R73 v6 bytes; prospective D7 P/DS-X/JDS-X/K1-R4x1200s plus1 no-Optimize reference. Read Round74 plan.md/status.md; no launches at initial planning checkpoint.
