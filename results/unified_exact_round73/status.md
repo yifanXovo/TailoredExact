@@ -1,22 +1,23 @@
-# Round73 active — runtime prerequisite qualified
+# Round73 complete; overall goal remains active
 
-Read task_contract in Round66, docs/unified_exact_research_index.md, seed_checkpoint.md,
-runtime_checkpoint.md and formal_small_plan.md. Original dirty checkout is untouched.
+Read final_report.md, stage_decision.json and formal_resource_summary.json.
+PR134 is the independent draft for this stage. No main merge.
+Qualified source4ba09609cf3fb92ef29598dce8201231668324f9 / build/round73/v6;
+54/54 tests. Every v1-v6 build and failed revision is retained.
 
-Latest compiled source:4ba09609cf3fb92ef29598dce8201231668324f9, build/round73/v6.
-54/54 tests pass. Source and binary are frozen in runtime_revision/identity.json.
-All6 native persistence diagnoses completed and passed; no process/build is active
-at this checkpoint. Raw and lossless archives include failed v5 qualification.
-20 startup diagnoses:46.686s/zero Optimize. Six qualification batches:583.930s/360
-native calls, three failed batches retained. Native diagnoses:65.484s/32 Optimize.
-Three build-only bindings:.265s. runtime_resource_summary.json is current;
-combined_resource_summary.json remains the earlier startup checkpoint.
+All6 formal runs completed (session6348 exited0); package session87641 also
+completed. No optimizer, build, active lock or pending exec session remains.
+D3 P open; DS-X259.968s/JDS-X138.578s certified. D4 P open;
+DS-X57.484s/JDS-X52.937s certified, below material-difference threshold.
+Full artifacts: formal_small/bundles + bundle_manifest.json; verification
+helper checks29614 source members with no extraction or optimizer.
+The initial per-file gzip copies remain local and ignored, with their cost
+retained. Existing startup/native archives are unchanged.
 
-First full small screen is now declared in formal_small_plan.md: D3/D4 x fresh
-P/DS-X/JDS-X,6 runs at300s max, plus1 D4 no-Optimize reference. It has not
-launched yet. No medium/long/independent-confirmation panel is opened.
-
-PR134 remains draft/active; publication head53595a00b was pushed successfully.
-The stage and overall goal are not complete. Preserve original startup drivers,
-v1-v6 builds and each immutable evidence namespace. No reset credit was used;
-ordinary account usage had84% remaining at the latest query.
+Next stage: bounded fresh D7 main/protection comparison on this exact build,
+then follow its evidence. C2/D6 full v6 comparisons and generalization remain
+unproved. D7 startup0.380774 still trails prior K1 startup0.215644, and one
+vehicle is unused in the archived witness. No new relocation mechanism was
+implemented. Do not rerun frozen startup/native/formal drivers, do not modify
+closed R72 or R73 data, and never launch into an existing output namespace.
+The original dirty E:/codes/ExactEBRP checkout remains untouched.

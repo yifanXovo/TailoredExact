@@ -219,3 +219,5 @@ new stage's bounded resource plan before optimization; don't inherit R65 budgets
 Overall target remains active and unmet. A stage draft PR is not completion.
 
 R73 runtime update: v6 passes54 tests; all6 native persistence diagnoses pass,32 Optimize/65.484s. Read results/unified_exact_round73/runtime_checkpoint.md and runtime_resource_summary.json. First full D3/D4 P/DS-X/JDS-X screen declared (6x300s), not yet launched; stage active.
+
+R73 closed: full D3 JDS-X138.578s vsDS-X259.968s certified (46.69% improvement); D4 remains near-tied certified while both P controls remain open. All6 formal runs pass,22 Optimize/1103.108s; stage has414 Optimize incl all qualifications. See Round73 final_report.md and stage_decision.json. No optimizer remains. Next D7 validation; overall goal unmet.
