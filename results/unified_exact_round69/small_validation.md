@@ -48,5 +48,7 @@ witness is backdated, and no retrospectively selected prefix or time limit
 is introduced. A future startup candidate needs a separately declared,
 uniform algorithmic rule and new development/validation separation.
 
-D6 and D7 long comparisons remain pending. These short results neither prove
-nor refute their long-window performance. Overall goal remains unmet.
+At this short-prefix analysis, D6/D7 long comparisons were pending. They are
+now complete and separately interpreted in long_validation.md; the short
+results alone neither prove nor refute long-window performance. Overall goal
+remains unmet.

@@ -1,0 +1,24 @@
+{
+  "artifacts": 236,
+  "lossless_artifacts": 220,
+  "lossless_gzip_artifacts": 43,
+  "exact_field_result_summaries": 16,
+  "compact_bytes": 1587722,
+  "all_artifact_hashes_valid": true,
+  "all_original_source_hashes_valid": true,
+  "all_lossless_content_matches_raw": true,
+  "all_summary_fields_match_raw": true,
+  "frozen_solver_source_and_binary_valid": true,
+  "experiment_runs": 16,
+  "experiment_optimize_calls": 63,
+  "candidate_native_ledger_rows": 58,
+  "plain_P_calls": 5,
+  "optimizer_calls_for_this_delivery_check": 0,
+  "wall_seconds": 0.08106330037117004,
+  "scope": "Final source/manifest/content check; staged Git blob bytes are checked separately before commit",
+  "check_preflight_corrections": [
+    "Handle exact-field result summaries separately from lossless copies.",
+    "The candidate native-call CSV excludes five plain P calls; match per-run counts before totaling63."
+  ],
+  "solver_or_evidence_correction_required": false
+}

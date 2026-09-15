@@ -1,12 +1,29 @@
 # Unified exact BRP research — resume here
 
-Active stage: Round69 on codex/round69-vds-validation, based on completed
-Round68 final07c6e899d56230920c162c14bd8b7c07a960c79f. Read
-results/unified_exact_round69/plan.md and status.md. Same frozen VD-S binary;
-bounded16-run validation: D3 repeat, E7/S12/N12 at120, D6 at3600 and D7 at1200.
-No new algorithm, time policy, qualification batch or sealed confirmation.
-Use scripts/round69_progress.py for a compact read-only recovery snapshot.
-Every launch is serial and write-ahead recorded. Overall goal remains unmet.
+Active stage: Round69 evidence accepted; final commit/draft PR being published.
+Branch codex/round69-vds-validation, based on Round68 final07c6e899. Read
+results/unified_exact_round69/final_report.md, long_validation.md and status.md.
+All16 runs complete,14580.595s paid wall,63 experiment Optimize calls,zero
+failures. Same frozen VD-S binary and unchanged C++; inherited45 tests, no new
+qualification. Eight Starts accepted/full-vector observed;43 initial-witness
+model checks and full physical/frontier audits pass;236 compact artifacts.
+No active optimizer queue. Interim remote checkpoint is dcab0020.
+
+D3 repeats its certificate in84.687s. N12 repairs a non-startup K1-R loss and
+is close to P. E7/S12 retain startup regressions. D6's3600 VD-S endpoint has
+37.9339% less gap than P and54.5658% less than K1-R, with both bounds better
+than P. Its large HGA timing variation and worse600 checkpoint are disclosed;
+no actual time is subtracted or clean timing stability claimed. D7 at1200
+retains and strengthens K1 protection:85.3013% less gap than P,34.3321% less
+than K1-R, same candidate UB and stronger LB. All six long runs remain open.
+These are design/public historical data, not sealed independent confirmation.
+
+Finish the new Round69 draft PR and verify remote identity before the next
+stage. Startup is the remaining immediate target; isolated uncompiled/untested
+source/test drafts are in ignored build/round70_draft. They were never applied
+to measured source. Any uniform common-core measurement needs new controls
+for every arm. Overall goal remains unmet; continue bounded research after
+publication. Never package a frozen stage against later modified C++ sources.
 
 Latest completed stage: Round68 on codex/round68-vdp-verified-start, based on completed
 Round67 PR128 final a47e86a57a1f68ca6e515877193cb8696d1aa13e. Owned checkout
@@ -25,7 +42,7 @@ Next: separate bounded validation plan, limited repeat and informative long
 window; startup work needs an admissible rule. Never package a frozen stage
 against later modified source. Every substantive stage gets its own draft PR.
 
-Latest completed experiments: Round67 on codex/round67-log-inventory-states, using the same owned
+Completed Round67 on codex/round67-log-inventory-states, using the same owned
 E:/codes/ExactEBRP-round66 checkout, based on Round66's final7c3b189 commit.
 Read results/unified_exact_round67/final_report.md and status.md.
 LOG replaces VD-P selector integrality with uniform binary offset codes; all

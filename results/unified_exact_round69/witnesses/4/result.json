@@ -1,0 +1,119 @@
+{
+  "objective": 0.020382503842219304,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        2,
+        9,
+        1,
+        11,
+        8,
+        0
+      ],
+      "operations": [
+        {
+          "station": 2,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 9,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 1,
+          "pickup": 0,
+          "drop": 5
+        },
+        {
+          "station": 11,
+          "pickup": 1,
+          "drop": 0
+        },
+        {
+          "station": 8,
+          "pickup": 0,
+          "drop": 6
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        5,
+        12,
+        10,
+        3,
+        0
+      ],
+      "operations": [
+        {
+          "station": 5,
+          "pickup": 1,
+          "drop": 0
+        },
+        {
+          "station": 12,
+          "pickup": 3,
+          "drop": 0
+        },
+        {
+          "station": 10,
+          "pickup": 1,
+          "drop": 0
+        },
+        {
+          "station": 3,
+          "pickup": 0,
+          "drop": 5
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "feasible": true,
+    "original_solution_feasible": true,
+    "original_objective_recomputed": true,
+    "routes_start_end_depot": true,
+    "station_disjoint": true,
+    "load_feasible": true,
+    "station_feasible": true,
+    "duration_feasible": true,
+    "objective_matches": true,
+    "route_travel_time": [
+      1412.3403284083117,
+      1448.1560865106244
+    ],
+    "route_operation_time": [
+      1320,
+      600
+    ],
+    "route_duration": [
+      2732.3403284083115,
+      2048.1560865106244
+    ],
+    "final_inventories": [
+      50000,
+      26,
+      15,
+      23,
+      14,
+      14,
+      13,
+      14,
+      15,
+      11,
+      15,
+      16,
+      11
+    ],
+    "G": 0.013395524430454596,
+    "P": 0.046579862745098066,
+    "objective": 0.020382503842219304,
+    "errors": []
+  }
+}
