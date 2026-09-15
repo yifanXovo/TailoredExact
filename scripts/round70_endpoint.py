@@ -27,6 +27,9 @@ def check(number):
         assert not result['gurobi_hga_start_requested']
         assert result['gurobi_obj_bound_c_available'] and result['gurobi_obj_bound_c']==lower
         calls=1
+    elif package.startup_deadline.matches(result):
+        coverage=package.startup_deadline.check(folder,p,result,run,audit,package.route_hash)
+        calls=0
     else:
         assert result['external_gini_tree_root_coverage_valid'] and result['external_gini_tree_parent_child_coverage_valid']
         assert not result['external_gini_tree_internal_budget_scheduling']
@@ -43,7 +46,9 @@ def check(number):
     report=dict(number=number,id=entry['id'],arm=entry['arm'],cap=entry['cap_seconds'],
         wall=done['wall_seconds'],UB=upper,LB=lower,signed_gap=upper-lower,
         certificate=result['strict_certified_original_problem'],physical=physical,
-        endpoint_settings_and_coverage_checks=True,independent_interval_union=coverage,
+        endpoint_settings_and_coverage_checks=True,
+        independent_interval_union=coverage if not package.startup_deadline.matches(result) else None,
+        pre_proof_full_domain_bound=coverage if package.startup_deadline.matches(result) else None,
         optimize_calls=calls,result_sha256=run.sha(folder/'result.json'),script_sha256=run.sha(__file__),
         scope='Light completed endpoint only; full model, Start-vector and trajectory audits remain required at queue boundary')
     run.write(run.OUT/'endpoint_checks'/f'{number}.json',report)

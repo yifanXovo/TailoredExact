@@ -1,0 +1,55 @@
+{
+  "pairs": [
+    {
+      "id": "D3",
+      "k1_hga_wall": 2.0586058,
+      "vds_hga_wall": 2.0600967,
+      "vds_over_k1_wall": 1.0007242280187882,
+      "both_searches_completed": true,
+      "k1_search_completed": true,
+      "vds_search_completed": true,
+      "k1_decoder_calls": 12574,
+      "vds_decoder_calls": 12574,
+      "same_total_generations": true,
+      "same_decoder_calls": true,
+      "same_generation_best_trace": true,
+      "same_full_initial_routes": true,
+      "logical_trace_sha256": "054edaa8b82a05a10fc9894964f145aa9838224c1fc5242778a08d5b9ad20fa0"
+    },
+    {
+      "id": "D6",
+      "k1_hga_wall": 318.5083117,
+      "vds_hga_wall": 319.1286111,
+      "vds_over_k1_wall": 1.001947514012081,
+      "both_searches_completed": true,
+      "k1_search_completed": true,
+      "vds_search_completed": true,
+      "k1_decoder_calls": 26383,
+      "vds_decoder_calls": 26383,
+      "same_total_generations": true,
+      "same_decoder_calls": true,
+      "same_generation_best_trace": true,
+      "same_full_initial_routes": true,
+      "logical_trace_sha256": "f0ae472465d21dc0f8f34175103d0b9c21ce49efcae38813be21cad573168ce8"
+    },
+    {
+      "id": "D7",
+      "k1_hga_wall": 597.1629035,
+      "vds_hga_wall": 597.0584006,
+      "vds_over_k1_wall": 0.9998250010183362,
+      "both_searches_completed": false,
+      "k1_search_completed": false,
+      "vds_search_completed": false,
+      "k1_decoder_calls": 37533,
+      "vds_decoder_calls": 40512,
+      "same_total_generations": false,
+      "same_decoder_calls": false,
+      "same_generation_best_trace": false,
+      "same_full_initial_routes": true,
+      "logical_trace_sha256": "5f40a18765bc66a0d9b352fad8f50fb3f1cc413659da53e81726cd4d49ab54b1"
+    }
+  ],
+  "optimizer_calls": 0,
+  "script_sha256": "94712917f0c4b1c9fe04c9f93baed6a3c71157286f83cfb4e448f94516c6d91d",
+  "scope": "HGA arms only, with completion/censoring explicit. Matching generations/uncached calls/best-history/full routes do not reveal all offspring or prove timing stability. Ratios involving interrupted searches are paid-cost ratios, not equal-work timing comparisons. Actual wall is never corrected."
+}

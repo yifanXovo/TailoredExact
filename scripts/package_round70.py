@@ -7,8 +7,10 @@ import gzip,hashlib,json,re
 import package_round68 as shared
 import round70_research_v2 as run
 import round70_start_audit as starts
+import analyze_round70 as audit
+import round70_startup_deadline as startup_deadline
 
-audit=shared.analyze_round68
+shared.analyze_round68=audit
 mapping=shared.round67_witness_model_audit
 
 def bind():
@@ -28,7 +30,7 @@ def route_hash(witness):
     return hashlib.sha256(''.join(parts).encode('ascii')).hexdigest()
 
 def extra_checks():
-    checks=[];descent=[];provenance=[]
+    checks=[];descent=[];provenance=[];versions=[];deadlines=[]
     for e in run.runner.entries():
         folder=run.ROOT/e['destination']
         if not (folder/'completion.json').exists():continue
@@ -40,6 +42,18 @@ def extra_checks():
         if not e['charged']:continue
         assert done['returncode']==0 and not done['watchdog'] and done['within_budget']
         result=run.read(folder/'result.json')
+        if startup_deadline.matches(result):
+            deadlines.append(dict(number=e['charged_number'],id=e['id'],arm=e['arm'],
+                **startup_deadline.check(folder,run.panel()[e['id']],result,run,audit,route_hash)))
+        native_logs=[folder/'native.log'] if e['arm']=='P-GRB' else [run.ROOT/c['native_log'] for c in audit.rows(folder/'external/paper_optimize_ledger.csv')]
+        if e['arm']=='P-GRB':
+            assert result['gurobi_version']==result['gurobi_header_version']=='13.0.2'
+        for native_log in native_logs:
+            with native_log.open(encoding='utf-8',errors='replace') as stream:header=stream.read(4096)
+            match=re.search(r'Gurobi Optimizer version (\d+\.\d+\.\d+)\b',header)
+            assert match and match.group(1)=='13.0.2',(native_log,match)
+        versions.append(dict(number=e['charged_number'],id=e['id'],arm=e['arm'],version='13.0.2',
+            actual_native_logs_checked=len(native_logs),scope='Actual Optimize log headers; no claim of a frozen DLL hash'))
         witness=folder/'external/initial_witness.json'
         if e['arm']!='P-GRB' and witness.exists():
             physical=run.read(witness);digest=route_hash(physical)
@@ -88,6 +102,8 @@ def extra_checks():
     run.write(run.OUT/'affinity_checks.json',checks)
     run.write(run.OUT/'descent_checks.json',descent)
     run.write(run.OUT/'witness_event_provenance.json',provenance)
+    run.write(run.OUT/'native_version_checks.json',versions)
+    run.write(run.OUT/'startup_deadline_checks.json',deadlines)
 
 def primary_pairs():
     records=audit.rows(run.OUT/'runs.csv');pairs=[]
@@ -135,10 +151,17 @@ def main():
         inherited_packaging=identity['packaging'],reproduction=run.sha(run.ROOT/'scripts/round70_reproduce.py'),
         reproduction_scope='Fresh bounded same-byte helper; not invoked as an extra campaign run',
         light_endpoint=run.sha(run.ROOT/'scripts/round70_endpoint.py'),
+        startup_deadline_audit=run.sha(startup_deadline.__file__),
+        inherited_analysis_reference=run.sha(run.ROOT/'scripts/analyze_round68.py'),
         startup_attribution=run.sha(run.ROOT/'scripts/round70_startup_analysis.py'),
         qualification_scope='47 newly executed tests, not inherited')
     run.write(run.OUT/'analysis_identity.json',identity)
     run.write(run.OUT/'source_snapshot.json',run.read(run.OUT/'build_v1.json')['source'])
+    resource=run.read(run.OUT/'resource_status.json')
+    incidents=run.OUT/'supervisor_postcondition_failures.json'
+    resource.update(valid_startup_deadline_runs=len(run.read(run.OUT/'startup_deadline_checks.json')),
+        supervisor_postcondition_failures=len(run.read(incidents)) if incidents.exists() else 0)
+    run.write(run.OUT/'resource_status.json',resource)
     print('Round70 compact artifacts',len(manifest),'including uniform affinity and separate DS traces')
 
 if __name__=='__main__':main()

@@ -16,12 +16,19 @@ Read-only audit after the optimizer queue stops:
 ```powershell
 D:/msys64/ucrt64/bin/python.exe scripts/package_round70.py
 D:/msys64/ucrt64/bin/python.exe scripts/round70_startup_analysis.py
+D:/msys64/ucrt64/bin/python.exe scripts/round70_checkpoints.py
+D:/msys64/ucrt64/bin/python.exe scripts/round70_report.py
 ```
 
 The package checks current source and executable against the frozen identity;
 do not run it from a later changed source tree. It verifies routes, complete
 frontier, original P fingerprints, native parameters, submitted/readback Start
-vectors, actual model rows and DS descent records. It writes only revision2
+vectors, actual model rows, DS descent records and every actual native log's
+Gurobi13.0.2 version header. This checks executed runtime versions; no DLL hash
+was frozen. The checkpoint wrapper uses verified event hashes and process
+clocks, never DS generation0 or backdated final routes. Add --complete only to
+the report command after all27 performance and6 revision2 micros are audited.
+These tools write only revision2
 analysis and compact evidence, never historical-stage or raw solver data.
 
 Fresh same-byte replay into a new local directory, only when intentionally

@@ -1,25 +1,32 @@
 # Unified exact BRP research — resume here
 
-Active stage: Round70 experiments on codex/round70-vds-descent, based on
-Round69 final b87850c474c8cb9ac45b65f881ebc629bb137f24. Read
-results/unified_exact_round70/plan.md, mathematics.md and status.md.
-Finite decoded descent replaces the initial HGA search; full VD-S proof stays.
-Revision1's46 tests passed but full-CLI micros exposed an omitted backend
-startup-contract admission: two DS runs returned invalid configuration. All six
-micros and21 Optimize calls/.766s are retained in revision1_failure.json.
-Revision2 is in results/unified_exact_round70/revision2,
-with a fixed contract and real CLI regression test; use scripts/round70_research_v2.py
-and build/round70_v2.47 tests/six fresh micros pass.19 revision2 runs are audited,
-13 performance+6 micro,82 Optimize calls/1039.687s,zero revision2 failures.
-E7/S12 startup losses repaired; N12 improves. D3 DS gap0.001781355 is materially
-better than P0.003475853, slightly worse than K1-R0.001160313 under the frozen
-absolute threshold, and loses VD-S's84.187s certificate. C2/D4 is the active
-queue; D6/D7's eight600-second runs remain. Never overwrite revision1 freezes.
-Stage-wide plan: at most27 performance+12 micros,9240 worst-case experiment seconds,
-uniform logical2/mask4 measurement for all newly matched arms. Own-launcher
-and child affinity qualification passed, with parent restoration and no unrelated
-process changes. Do not rerun old frozen-stage packagers after this source
-revision. Overall goal remains unmet; no new draft PR until this stage's work.
+Latest completed stage: Round70 on codex/round70-vds-descent, based on Round69
+final b87850c474c8cb9ac45b65f881ebc629bb137f24. Publication is being finalized;
+read results/unified_exact_round70/final_report.md and status.md.
+Finite decoded descent replaces initial HGA; full VD-S proof stays.47/47
+new CTests and all33 revision2 runs complete (27 performance+6 micro),133
+Optimize calls/6797.377s.97 model-witness checks,22 actual Starts,522 compact
+artifacts and16 conservative checkpoints pass. All new arms use logical2/mask4.
+
+DS repairs E7/S12 startup losses, improves N12 and retains C2/D4 P protection.
+D6 gap0.006996067 materially improves P0.012255293. D3 loses VD-S84.187s
+certificate; C2 is30.219s slower than VD-S. D7 is a material P regression:
+DS gap0.127888629 versus P0.093231319, despite a stronger LB. Both D7 HGA
+controls exhaust the whole deadline before exact proof, returning verified
+U0.215644075/LB0. This does not establish historical K1 protection retention.
+
+All six revision1 micros, including two DS backend-contract failures, are
+retained (21 calls/.766s). Revision2 has zero solver validity failures and two
+explicit supervisor postcondition exceptions on legal startup-only deadlines.
+No rerun, raw-tree-flag rewrite or time correction. All39 experiments total
+154 calls/6798.143s; both CTest batches add24 native calls. No optimizer active.
+
+Overall goal unmet; next hypothesis is finite tail cross-route descent to
+improve service allocation, preserving small startup gains. Read next_hypothesis.md.
+Long/confirmation proposal deferred; no new implementation or run yet. Never
+package old frozen results against later changed C++. Original dirty checkout
+untouched; no subagents/main merge/reset. Latest ordinary usage allowed,12%
+weekly remaining. Finish the independent Round70 draft PR, then continue.
 
 Latest completed stage: Round69, draft PR130:
 https://github.com/yifanXovo/TailoredExact/pull/130 . Evidence commit

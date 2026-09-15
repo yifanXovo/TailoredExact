@@ -51,3 +51,29 @@ small finite local search provides useful starts without the long evolutionary
 stagnation tail. A weaker initial UB can enlarge the proof problem; only the
 complete paired outcomes establish efficiency. The constituent local-search,
 one-hot and native-Start techniques are not claimed as new theory.
+
+The actual guided neighborhood is deliberately limited. For each route, form
+the longest prefix whose travel plus return fits T (handling is checked by
+the decoder, not this ordering proxy). Its first decoded drop and last decoded
+pickup are insertion anchors. Move supply-role nodes to the supply anchor,
+demand-role nodes after the pickup anchor, and the last zero-operation prefix
+node to the tail, using the existing eligibility rules. Roles follow decoded
+operations, then residual inventory surplus/shortage for zero-operation nodes.
+The first eligible supply/demand nodes beyond the travel prefix are included.
+Cross-route moves are disabled. Consequently each seed preserves its sampled
+station-to-vehicle allocation. Duplicate generated candidates can remain and
+are counted; cached evaluations still count as inspected candidates.
+
+The inherited proof controller is the first-class K1-AM-SF controller:
+one initial Gini interval, midpoint bisection, balanced normalized closure
+threshold0.08, maximum split depth8 and minimum width1e-4. The historical
+round47 tau0.07915 field is inactive compatibility metadata. Given parent
+bound b, verified U and terminal child LP bounds bL,bR, normalize child gains
+by max(U-b, certificate tolerance,1e-12), clip these decision scores to[0,1],
+and multiply their minimum by their mean. This clips only the heuristic score,
+never a reported legal bound. A score reaching0.08 admits the complete child
+partition; small strict gain supplies a mathematical native-bound target;
+no strict gain sends the parent to full exact closure. Strict child
+infeasibility and all logical depth/width limits retain complete proof
+obligations. Every required MIP uses the one-hot model and compatible verified
+Start. These inherited rules are unchanged, not newly tuned in Round70.

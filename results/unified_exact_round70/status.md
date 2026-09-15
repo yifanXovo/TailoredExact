@@ -1,46 +1,47 @@
-# Round70 recovery status
+# Round70 complete; resume after publication
 
-Active branch codex/round70-vds-descent in the owned ExactEBRP-round66 worktree,
-based on Round69 final b87850c474c8cb9ac45b65f881ebc629bb137f24 (draft PR130).
-Source checkpoints9f6608c4c and86c35aa7f are pushed; this stage has no PR yet.
-The sustained goal is unmet and the bounded stage is in progress.
+Branch codex/round70-vds-descent, owned E:/codes/ExactEBRP-round66 worktree.
+Base Round69 final b87850c474c8cb9ac45b65f881ebc629bb137f24 / draft PR130.
+All declared work is complete and no optimizer queue is active. Overall goal
+remains unmet. Read final_report.md, result_tables.md and next_hypothesis.md.
 
-Use revision2/, build/round70_v2, scripts/round70_research_v2.py and
-scripts/package_round70.py. Source/binary/plan are frozen.47/47 CTests passed,
-including the real-CLI certificate regression; all six fresh micros passed.
-Binary2e841e23cdbc81f71b9373f35b7c82494223a7ecfbb670bcdc33f7ec2b66e6f3.
-Uniform logical processor2/mask4 is verified for every newly paired child.
-Do not rebuild or run old-stage packagers while this campaign is active.
+Revision2:27 performance+6 micros,133 Optimize calls,6797.377s paid wall.
+47/47 newly executed CTests; frozen source86c35aa7f and binary
+2e841e23cdbc81f71b9373f35b7c82494223a7ecfbb670bcdc33f7ec2b66e6f3.
+All native calls use Gurobi13.0.2/Threads1/Seed0/PresolveAuto/original standards.
+All fresh arms inherit logical2/mask4; launcher restoration verified.
+97 initial-witness/model checks (38 incompatible intervals),22 actual Starts
+eligible/accepted/full-vector observed,522 compact artifacts and16 checkpoints.
+Full physical, started-tree coverage, analytic pre-proof LB0 and content audits pass.
 
-Latest completed full audit:19 revision2 runs (13 performance+6 micro),
-82 experiment Optimize calls,1039.687s paid process wall,zero revision2 failures.
-63 initial-witness/model checks (25 incompatible Gini intervals) and all11
-actual Start decisions pass, with11 native acceptances/full-vector observations.
-303 compact artifacts retain the audited prefix. Read small_screen.md and
-the current revision2/runs.csv and pairs.csv. E7/S12 startup losses are repaired;
-N12 improves. D3 DS is open at300 with gap0.001781355 versus P0.003475853 and
-K1-R0.001160313. It has better UB but weaker LB than K1-R, below the frozen
-absolute material-gap threshold. VD-S alone certifies in84.187s; DS loses that
-certificate gain. Keep this negative result visible, without a per-point veto.
+DS repairs E7/S12 startup losses, improves N12, retains C2/D4 P certification
+advantages and reduces D6 gap42.9% against P. D3 loses VD-S84.187s certificate,
+C2 is30.219s slower than VD-S, and D7 is materially worse than P: gap0.127888629
+versus0.093231319. Its stronger LB is outweighed by poorer UB. Do not call
+this a D7 repair or overall success. Full-HGA D7 controls both exhaust the
+whole deadline before proof, with U0.215644075/LB0; their short-window results
+cannot establish retention of historical long-window K1 protection.
 
-Current queue: C2 then D4, each P-GRB/VD-S/DS at300. After this boundary audit,
-the remaining declared runs are D6/D7 at600 for P-GRB/VD-S/DS/K1-R (eight).
-No extra repeat, extension or independent confirmation is open. Stage-wide
-limit27 performance+12 micro launches,9240 experiment seconds worst case;
-revision2 uses27+6/9060, including the already completed short prefix.
+Revision1's six micros include two real DS backend-contract failures;21 calls
+and.766s are retained. Revision2 has no solver validity failure, but two
+supervisor postcondition exceptions on legal HGA startup deadlines. See
+revision2/supervisor_postcondition_failures.json and startup_deadline_checks.json.
+Raw false tree flags remain false; no rerun, invented tree, LB clipping or
+measurement correction. All39 experiments total154 calls/6798.143s. Two CTest
+batches add24 native calls/191.134s;20 no-opt exports cost1.658s. Stage maximum
+27 performance+12 micros/9240s was never expanded after performance opened.
 
-Revision1 remains here at its original paths, with its own frozen identities:
-six micros included two DS invalid-configuration failures. The old backend
-startup guard omitted the new mode and the first driver failed to stop on that
-status. All21 calls/.766s are retained in revision1_failure.json; its four
-successful controls are superseded qualification, not new performance data.
-Ten no-opt P exports per revision (20 total) are separate costs. The two CTest
-batches use24 native calls in total, verified in qualification_native_call_audit.json.
-Do not overwrite revision1 results, models, source identities or logs.
+No extra repeat, long extension or independent confirmation was run. The
+conditional validation proposal is deferred. The next bounded hypothesis is
+uniform finite cross-route tail relocation within the24-seed descent, with
+full decoding and exact proof unchanged. No next-stage implementation or
+experiment exists yet. Preserve Round70's frozen source and raw evidence;
+never rerun this stage's packager against a later changed C++ checkout.
 
-Read algorithm.md, plan.md, revision2/plan.md, mathematics.md and reproduce.md.
-The replay helper is provided but has not opened any additional experiment.
-No subagents, unrelated process affinity changes, OS service changes, reset
-credit redemption or main-branch merge occurred. Continue this bounded stage,
-publish a new draft PR with positive and negative evidence, then reassess the
-next stage against the full goal and available resources.
+Reproduce.md documents scripts/round70_research_v2.py, build/round70_v2 and
+scripts/package_round70.py. The new analyze_round70.py preserves ordinary
+Round68 checks and adds only the qualified startup-before-proof deadline case.
+Same-byte replay is provided but was not executed. Original dirty checkout
+is untouched. No subagents, unrelated affinity changes, OS service changes,
+reset redemption or main merge occurred. Latest ordinary usage allowed,
+12% weekly remaining. Publish a new draft PR, then continue bounded research.
