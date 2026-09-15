@@ -1,0 +1,33 @@
+{
+  "command": [
+    "E:\\codes\\ExactEBRP-round66\\build\\round73\\v6\\Round65ReferenceBuild.exe",
+    "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q30_slot08_seed1288546114.txt",
+    "2400",
+    "60",
+    "60",
+    "0.15",
+    "E:\\codes\\ExactEBRP-round66\\results\\unified_exact_round73\\formal_small\\reference\\D4"
+  ],
+  "binary_sha256": "540af9bbe171b58675045259bb9ca50adb80d19ce3b6546cddbfc84a30a3dbcb",
+  "input": {
+    "instance_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q30_slot08_seed1288546114.txt",
+    "T_seconds": 2400,
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "V": 12,
+    "M": 3,
+    "Q": 30,
+    "inventory_regime": "historical_unmodified",
+    "id": "D4",
+    "scenario_id": "round39_small_hard_V12_M3_Q30_slot08_seed1288546114",
+    "role": "Round71 exposed development/protection; see plan.md",
+    "stage": "development",
+    "input_sha256": "7ee8a95ca3043f83b2e8c6b3663f8aa212678043d0c98b0153efbeb834d48823",
+    "artifact_id": "D4-corrected-T2400",
+    "T_source": "scripts/run_round55_k1_integration.py:T_BY_INSTANCE",
+    "lambda": 0.15
+  },
+  "cap": 30,
+  "expected_optimize_calls": 0,
+  "plan_sha256": "ca51348330b7ed8c12ba51ea45297a81d0909d42631bca02fbc19286b3c87bde"
+}

@@ -10,6 +10,7 @@
 #include "GiniEnvelopeTailRepair.hpp"
 #include "GiniAdaptiveParametric.hpp"
 #include "ProcessPhaseLedger.hpp"
+#include "NativeEvidenceJournal.hpp"
 #include "Round50IntervalMip.hpp"
 #include "Round48K1AMF.hpp"
 #include "Round49K1RC.hpp"
@@ -278,7 +279,8 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
     const bool decoded_descent =
         ((options.algorithm_preset == "research-round70-vds-descent" &&
           options.primal_heuristic_stop == "decoded-descent") ||
-         (options.algorithm_preset == "research-round71-vds-interroute-descent" &&
+         ((options.algorithm_preset == "research-round71-vds-interroute-descent" ||
+           options.algorithm_preset == "research-round73-vds-joint-seeded-descent") &&
           options.primal_heuristic_stop == "decoded-descent-interroute")) &&
         options.round34_c6_startup_variant == "hga-full" &&
         options.primal_heuristic == "hga-tgbc" &&
@@ -289,7 +291,13 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         options.primal_heuristic == "greedy" &&
         options.primal_heuristic_seed == 20260626u &&
         options.primal_heuristic_no_improve_generations == 2000;
-    if ((!hga_full && !hga_light && !simple_start && !decoded_descent) ||
+    const bool joint_insertion =
+        options.algorithm_preset == "research-round73-vds-joint-insertion" &&
+        options.primal_heuristic == "joint-insertion" &&
+        options.primal_heuristic_stop == "motif-exhaustion" &&
+        options.primal_heuristic_runs == 1 &&
+        options.round34_c6_startup_variant == "hga-full";
+    if ((!hga_full && !hga_light && !simple_start && !decoded_descent && !joint_insertion) ||
         options.exact_phase_local_redecode_repair) {
         reason = "c6_startup_variant_contract_mismatch_or_local_redecode";
         return false;
@@ -355,7 +363,7 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         return false;
     }
     if (round47_active &&
-        (!(hga_full || decoded_descent || (options.round59_simple_start && simple_start)) || causal != "off" || normalization != "proof" ||
+        (!(hga_full || decoded_descent || joint_insertion || (options.round59_simple_start && simple_start)) || causal != "off" || normalization != "proof" ||
          geometry_policy != "off" ||
          options.round40_c6_ub_geometry != "off" ||
          options.round41_static_segmented_gini != "off" ||
@@ -382,7 +390,7 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         return false;
     }
     if (coarse_start != "off" &&
-        (!(hga_full || decoded_descent || (options.round59_simple_start && simple_start)) || causal != "off" || normalization != "proof" ||
+        (!(hga_full || decoded_descent || joint_insertion || (options.round59_simple_start && simple_start)) || causal != "off" || normalization != "proof" ||
          geometry_policy != "off" ||
          options.round40_c6_ub_geometry != "off" ||
          options.round41_static_segmented_gini != "off" ||
@@ -2186,6 +2194,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     const bool round65_witness_audit=options.round65_witness_audit ||
         options.algorithm_preset.rfind("research-round65-",0)==0;
     long long round65_native_witness_count=0;
+    std::shared_ptr<NativeEvidenceJournal> native_evidence;
+    if (!options.native_evidence_dir.empty()) {
+        native_evidence=std::make_shared<NativeEvidenceJournal>(instance,options);
+        native_evidence->witness(verified_seed.routes,"same_run_verified_startup");
+    }
     if (round65_witness_audit || options.algorithm_preset.rfind("research-round64-", 0) == 0) {
         persistCurrentWitness(verified_seed.objective,verified_seed.routes,"initial_witness.json");
     }
@@ -3367,6 +3380,17 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     }
     long long round68_start_sequence = 0;
     auto solveBudgeted = [&](FixedIntervalMipRequest request) {
+        if(native_evidence) {
+            request.native_evidence=native_evidence;
+            auto& s=request.native_evidence_scope;
+            s.leaf=request.leaf_id;s.model_sha256=request.canonical_model_fingerprint;
+            s.model_path=request.canonical_model_path.string();s.model_scope=request.canonical_model_scope;
+            s.native_log_path=request.native_log_path.string();
+            s.lower_g=request.gamma_L;s.upper_g=request.gamma_U;s.cutoff=request.verified_cutoff;
+            s.gmax=static_cast<double>(instance.V-1)/instance.V;
+            s.cover=nativeEvidenceCover(scheduler.leaves());
+            native_evidence->witness(best_routes,"same_run_outer_before_call");
+        }
         if (options.round68_verified_start &&
             request.solve_kind != FixedIntervalSolveKind::PaperLpRelaxation) {
             request.round68_verified_start = true;

@@ -21,11 +21,13 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 set(EXACT_EBRP_LIB_SOURCES
   src/Parser.cpp
   src/Evaluator.cpp
+  src/Round73JointInsertion.cpp
   src/Result.cpp
   src/StrictCertificate.cpp
   src/ModelCorrectness.cpp
   src/FileSha256.cpp
   src/ProcessPhaseLedger.cpp
+  src/NativeEvidenceJournal.cpp
   src/DenseProgress.cpp
   src/GurobiCertificate.cpp
   src/GurobiProgress.cpp
@@ -96,6 +98,10 @@ endif()
 
 add_library(exact_ebrp_core ${EXACT_EBRP_LIB_SOURCES})
 
+add_executable(NativeEvidenceJournalTests tests/native_evidence_journal_tests.cpp)
+target_link_libraries(NativeEvidenceJournalTests PRIVATE exact_ebrp_core)
+add_test(NAME NativeEvidenceJournalTests COMMAND NativeEvidenceJournalTests)
+
 if(EXACT_EBRP_ENABLE_GUROBI)
   target_include_directories(exact_ebrp_core PRIVATE "${GUROBI_INCLUDE_DIR}")
   target_compile_definitions(exact_ebrp_core PUBLIC EXACT_EBRP_ENABLE_GUROBI=1)
@@ -124,7 +130,23 @@ add_test(NAME Round70DescentTests COMMAND Round70DescentTests)
 add_executable(Round71InterrouteTests tests/round71_interroute_tests.cpp)
 target_link_libraries(Round71InterrouteTests PRIVATE exact_ebrp_core)
 add_test(NAME Round71InterrouteTests COMMAND Round71InterrouteTests)
+add_executable(Round73JointInsertionTests tests/round73_joint_insertion_tests.cpp)
+target_link_libraries(Round73JointInsertionTests PRIVATE exact_ebrp_core)
+add_test(NAME Round73JointInsertionTests COMMAND Round73JointInsertionTests)
+add_executable(Round73ConstructiveSeedTests tests/round73_constructive_seed_tests.cpp)
+target_link_libraries(Round73ConstructiveSeedTests PRIVATE exact_ebrp_core)
+add_test(NAME Round73ConstructiveSeedTests COMMAND Round73ConstructiveSeedTests)
 if(EXACT_EBRP_ENABLE_GUROBI)
+  add_test(NAME Round73ConstructiveSeedCliTests COMMAND ${CMAKE_COMMAND}
+    "-DEXACT_EXE=$<TARGET_FILE:ExactEBRP>"
+    "-DSOURCE_ROOT=${CMAKE_CURRENT_SOURCE_DIR}"
+    "-DOUTPUT_ROOT=${CMAKE_CURRENT_BINARY_DIR}"
+    -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/round73_constructive_seed_cli_test.cmake")
+  add_test(NAME Round73JointInsertionCliTests COMMAND ${CMAKE_COMMAND}
+    "-DEXACT_EXE=$<TARGET_FILE:ExactEBRP>"
+    "-DSOURCE_ROOT=${CMAKE_CURRENT_SOURCE_DIR}"
+    "-DOUTPUT_ROOT=${CMAKE_CURRENT_BINARY_DIR}"
+    -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/round73_joint_insertion_cli_test.cmake")
   add_test(NAME Round71InterrouteCliTests COMMAND ${CMAKE_COMMAND}
     "-DEXACT_EXE=$<TARGET_FILE:ExactEBRP>"
     "-DSOURCE_ROOT=${CMAKE_CURRENT_SOURCE_DIR}"

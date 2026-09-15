@@ -1,5 +1,25 @@
 # Unified exact BRP research - resume here
 
+Draft PR134: https://github.com/yifanXovo/TailoredExact/pull/134 . Audited head
+51941dc4b29c5d972e834a258857125564cc3d04, exact base/head verified at creation.
+Read runtime_design.md for the pending evidence-persistence prerequisite.
+Current active stage: Round73, codex/round73-joint-insertion, based on Round72
+finaldb7976fe94627c00d76d50c0adfed11223fbf646 (publication verified). Read
+results/unified_exact_round73/status.md and seed_checkpoint.md. Initial JI
+quality tradeoffs retained; revised JDS-X appends one constructive seed to
+unchanged24 finite DS-X seeds. Code1716206cc5967dc40dd2e41badbb2d101cadce8a,
+build/round73/v4,53 tests pass. Four qualification batches total210 native
+calls/386.401s, including two retained configuration failures. Both startup
+tranches complete:20 diagnoses/46.686s/zero Optimize;332 lossless artifacts.
+Latest initialU D3=.0781153, C2=.8370915, D4=.5064228, D6=.1600273,
+D7=.3807737. C2/D6 preserve DS-X, D3/D4/D7 improve; all five first24 logical
+paths match fresh controls. Startup evidence only; no full-proof benefit claim.
+No active build/optimizer; session65693 completed. Do not overwrite v1-v4 or
+re-run frozen diagnostic namespaces. Next: durable native evidence and valid
+full-frontier aggregation; original six30s native diagnoses unused. No formal
+performance/long/confirmation panel opened. Stage/overall goal active/unmet.
+Latest ordinary usage allowed86% remaining; no reset credit consumed.
+
 Latest completed stage: Round72, codex/round72-vdsx-validation, based on
 Round71 final73ce04d9a3c5031c2b5a1021523502f0a9a85168. Draft PR133:
 https://github.com/yifanXovo/TailoredExact/pull/133 . Read
@@ -197,3 +217,7 @@ the same LP projection. See next_hypothesis.md. Near-zero LP-gain sensitivity
 in the D4 Q-PLUS controller is an additional open attribution issue. Declare the
 new stage's bounded resource plan before optimization; don't inherit R65 budgets.
 Overall target remains active and unmet. A stage draft PR is not completion.
+
+R73 runtime update: v6 passes54 tests; all6 native persistence diagnoses pass,32 Optimize/65.484s. Read results/unified_exact_round73/runtime_checkpoint.md and runtime_resource_summary.json. First full D3/D4 P/DS-X/JDS-X screen declared (6x300s), not yet launched; stage active.
+
+R73 closed: full D3 JDS-X138.578s vsDS-X259.968s certified (46.69% improvement); D4 remains near-tied certified while both P controls remain open. All6 formal runs pass,22 Optimize/1103.108s; stage has414 Optimize incl all qualifications. See Round73 final_report.md and stage_decision.json. No optimizer remains. Next D7 validation; overall goal unmet.

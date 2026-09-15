@@ -1,0 +1,31 @@
+{
+  "command": [
+    "E:\\codes\\ExactEBRP-round66\\build\\round73\\v6\\Round65ReferenceBuild.exe",
+    "reference/qualification_round39/small-medium/round39_small_medium_V12_M3_Q30_slot08_seed1343324363.txt",
+    "2850",
+    "60",
+    "60",
+    "0.15",
+    "E:\\codes\\ExactEBRP-round66\\results\\unified_exact_round73\\runtime_revision\\reference\\D3"
+  ],
+  "binary_sha256": "540af9bbe171b58675045259bb9ca50adb80d19ce3b6546cddbfc84a30a3dbcb",
+  "input": {
+    "instance_path": "reference/qualification_round39/small-medium/round39_small_medium_V12_M3_Q30_slot08_seed1343324363.txt",
+    "T_seconds": 2850,
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "V": 12,
+    "M": 3,
+    "Q": 30,
+    "inventory_regime": "historical_unmodified",
+    "id": "D3",
+    "scenario_id": "round39_small_medium_V12_M3_Q30_slot08_seed1343324363",
+    "role": "Round71 exposed development/protection; see plan.md",
+    "stage": "development",
+    "input_sha256": "29e0ca2c95ec2e061aa1cc524aaf6a41bf6c4a34355dca86df6966aa8a29b6b4",
+    "lambda": 0.15
+  },
+  "cap": 30,
+  "expected_optimize_calls": 0,
+  "plan_sha256": "6b410842ef4604d1cc5d8ed7fa24dd889c7b86c097293ddf3b1facdbc42376a6"
+}

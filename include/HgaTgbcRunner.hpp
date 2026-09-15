@@ -35,6 +35,10 @@ struct HgaTgbcOptions {
     int fixed_generations = -1;
     bool retain_verified_on_log_failure = false;
     bool stop_on_verified_zero = false;
+    // Round73 only: a paid, physically verified construction supplies one
+    // additional permutation seed to the finite descent. Never read from disk.
+    bool joint_constructive_seed = false;
+    std::vector<RoutePlan> joint_constructive_routes;
 };
 
 struct HgaTgbcResult {

@@ -138,6 +138,51 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
     ga.set_enable_tail_cross_route(interroute);
     ga.set_decoder_compaction_mode(1);
     ga.set_decode_cache_max_entries(200000);
+    if (options.joint_constructive_seed) {
+        if (!interroute || options.pop_size != 24 || options.fixed_generations >= 0)
+            throw std::runtime_error("Joint seed requires unchanged24 random inter-route descent seeds");
+        std::vector<std::vector<int>> sequences(instance.M);
+        std::vector<bool> seen(instance.V + 1, false), used_vehicle(instance.M, false);
+        for (const auto& route : options.joint_constructive_routes) {
+            if (route.vehicle < 0 || route.vehicle >= instance.M || used_vehicle[route.vehicle])
+                throw std::runtime_error("Joint seed has duplicate or invalid vehicle");
+            if (route.nodes.size()<2 || route.nodes.front()!=0 || route.nodes.back()!=0)
+                throw std::runtime_error("Joint seed route has invalid depot endpoints");
+            used_vehicle[route.vehicle] = true;
+            for (std::size_t j=1; j+1<route.nodes.size(); ++j) {
+                int station=route.nodes[j];
+                if(station<=0 || station>instance.V || seen[station])
+                    throw std::runtime_error("Joint seed has duplicate or invalid station");
+                seen[station]=true; sequences[route.vehicle].push_back(station);
+            }
+        }
+        const auto physical = verifySolution(instance, options.joint_constructive_routes, options.lambda);
+        if (!physical.feasible || !physical.errors.empty())
+            throw std::runtime_error("Joint seed requires a verified physical route prefix");
+        // Complete the permutation deterministically. The existing physical
+        // duration plus append-travel delta is a tail-order proxy only;
+        // unspecified tail operations are decided by the full greedy decode.
+        auto proxy=physical.route_duration;
+        for(int i=1;i<=instance.V;++i) if(!seen[i]) {
+            int chosen=0;double minimum=std::numeric_limits<double>::infinity();
+            for(int k=0;k<instance.M;++k) {
+                int last=sequences[k].empty()?0:sequences[k].back();
+                double value=proxy[k]+instance.dist[last][i]+instance.dist[i][0]-instance.dist[last][0];
+                if(value<minimum) {minimum=value;chosen=k;}
+            }
+            sequences[chosen].push_back(i);proxy[chosen]=minimum;
+        }
+        ga.set_extra_descent_seed(sequences);
+        out.notes.push_back("Round73: appended one verified constructive-order seed after unchanged24 random seeds; tail completion uses physical-duration-plus-travel proxy");
+        if(!options.generation_log_path.empty()) {
+            auto path=std::filesystem::path(options.generation_log_path.string()+".joint_seed.csv");
+            if(path.has_parent_path())std::filesystem::create_directories(path.parent_path());
+            std::ofstream seed_log(path);seed_log<<"vehicle,position,station\n";
+            for(int k=0;k<instance.M;++k)for(std::size_t j=0;j<sequences[k].size();++j)
+                seed_log<<k<<','<<j<<','<<sequences[k][j]<<'\n';
+            seed_log.flush();if(!seed_log)throw std::runtime_error("Cannot persist constructive seed order");
+        }
+    }
     VerifiedCandidateStore published_candidates;
     if (options.publish_verified_improvements || options.stop_on_verified_zero) {
         ga.set_best_observer(
