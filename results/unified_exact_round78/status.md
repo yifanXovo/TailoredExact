@@ -18,6 +18,9 @@ goal active/unmet. Ordinary usage59% remaining; no reset credit consumed.
 Original dirty checkout untouched. Stage draft PR is due after full evidence
 closure; do not end the overall goal merely after publication.
 
-Live checkpoint: serial full-screen driver is active in exec session85176,
-owned Python PID42564; P-GRB is launch1. Monitor cell1805 has finished;
-monitor.py is read-only. Prior pushes completed; R78 is not yet a stage PR.
+Live checkpoint: exec session85176 / owned Python PID42564 remains active.
+P-GRB completed1197.110s, validated U.277320866/L.197286479/gap.080034387.
+BDS-C is launch2; its native log has improved U to approximately.21963 but
+full physical/global endpoint is pending. K1-R is still the original pending
+third launch. Monitor cells1805/1807/1810 finished; monitor.py is read-only.
+No full-stage PR yet; full driver and post-run tools are already committed.
