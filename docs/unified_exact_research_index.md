@@ -1,5 +1,19 @@
 # Unified exact BRP research — resume here
 
+Current active stage: Round72 on codex/round72-vdsx-validation, based on Round71
+final73ce04d9a3c5031c2b5a1021523502f0a9a85168 / draft PR132. Read
+results/unified_exact_round72/status.md and formal_campaign_plan.md. Same R71
+qualified bytes; six completed startup-only diagnoses cost0.390s/zero Optimize
+calls, all physical/trace checks pass,48 compact artifacts. Startup U improves
+onD3/C2/D4, without any inference about exact performance. One offline schema
+error was fixed and retained in postprocess_failures.json.
+Resources subsequently returned to100% remaining; cause unknown, no agent
+reset call. Continue nine fresh full P/DS/DS-X300s comparisons in the new
+campaign output. A conditional D7 P/K1-R/DS-X3600s reserve requires an audited
+gate. Overall goal unmet; these exposed roles are not independent confirmation.
+Use processes.jsonl/active_run.lock to resume without duplicate launches.
+Older resource snapshots below are historical, not the current limitation.
+
 Latest completed research stage: Round71, closed at the resource checkpoint.
 Read results/unified_exact_round71/final_report.md, stage_decision.json and
 status.md.16 performance+6 micros,95 experiment Optimize calls/6600.169s,

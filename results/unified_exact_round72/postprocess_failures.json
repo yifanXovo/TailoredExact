@@ -1,0 +1,11 @@
+[
+  {
+    "action": "round72_package_diagnostics.py",
+    "observed_attempt": 1,
+    "returncode": 1,
+    "error": "KeyError: final_inventory",
+    "scope": "Offline packaging only; no solver rerun and no raw result change",
+    "repair": "Copy verification.final_inventories, the actual result schema",
+    "earlier_unobserved_attempt": "A preceding tool output was truncated at compaction; its completion was not established. No diagnostic_audit.json existed before the observed failure."
+  }
+]
