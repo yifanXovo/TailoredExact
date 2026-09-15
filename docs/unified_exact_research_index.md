@@ -1,5 +1,22 @@
 # Unified exact BRP research - resume here
 
+Current completed stage R79, published as draft PR140, on
+codex/round79-bdsc-small-validation. Base R78 final
+d064fe38c14caf7f8bcc201212cd7654e99f52c1 / draft PR139. Read R79 final_report,
+status, stage_decision and long_role_review. All18 fresh runs normal/valid;
+BDS-C certifies all6 exposed roles. P comparisons: E7 near; S12/N12 materially
+faster; D3/C2/D4 certificate gains. D4 K1 protection retained and faster.
+64 Optimize/1996.015s;9 actual Starts pass;19 verified bundles44084 files.
+No solver failure/rerun/new build/test. No neutral moves in this panel; N12
+has2 inherited quantity moves. All solver/package processes ended. Draft PR140:
+https://github.com/yifanXovo/TailoredExact/pull/140 . Exact original Git history
+published through API after transport failures.
+Then separately admit E8 and common3600 D6 proof-deficit validation. D7 long
+protection/independent confirmation still needed. No new experiment admitted.
+Overall goal unmet, no reset consumed. Owned E:/codes/ExactEBRP-round66;
+original dirty checkout untouched. D6 is a P proof-deficit role, not K1
+protection; see explicit historical-scope correction in long_role_review.md.
+
 Current completed stage R78, published as draft PR139, on
 codex/round78-balanced-block-descent. Base R77 final
 88e963a1f10cc4ff9f1d3a17950f0a5708f68318 / draft PR138.
