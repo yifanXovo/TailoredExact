@@ -8,6 +8,8 @@
 namespace ebrp {
 
 bool isPaperK1AmSfPresetOrAlias(const std::string& lower_name);
+// Qualification guard for route-derived domains using direct travel bounds.
+bool hasMetricTravelLowerBounds(const Instance& instance);
 
 // Single authoritative construction contract for the canonical K1 fixed
 // interval model. It contains model flags only, so build-only and full

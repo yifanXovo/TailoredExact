@@ -84,6 +84,7 @@ struct StaticSegmentedWriteStats {
     bool round51_historical_m_may_be_unsafe = false;
     long long station_state_selector_variables = 0;
     long long station_state_perspective_variables = 0;
+    long long station_state_code_variables = 0;
     long long aggregate_mccormick_rows = 0;
     std::string family_encoding;
 };
@@ -277,6 +278,16 @@ std::string stateName(int i, int y) {
 }
 std::string stateGName(int i, int y) {
     return "state_g_" + std::to_string(i) + "_" + std::to_string(y);
+}
+std::string stateCodeName(int i, int bit) {
+    return "state_code_" + std::to_string(i) + "_" + std::to_string(bit);
+}
+int stateCodeBits(int lower, int upper) {
+    const long long cardinality = static_cast<long long>(upper) - lower + 1;
+    if (cardinality <= 0) throw std::runtime_error("empty_inventory_state_code_domain");
+    int bits = 0;
+    while ((1LL << bits) < cardinality) ++bits;
+    return bits;
 }
 std::string segmentSelectorName(int k) {
     return "seg_z_" + std::to_string(k);
@@ -489,9 +500,11 @@ void writeCompactLp(const Instance& instance,
             for (int k = 0; k < M; ++k) {
                 const double rt_lb = instance.dist[0][i] + instance.dist[i][0];
                 int move_budget = 0;
-                if (instance.total_time_limit + 1e-9 >= rt_lb && cunit > 1e-12) {
-                    move_budget = static_cast<int>(
-                        std::floor((instance.total_time_limit - rt_lb) / cunit + 1e-9));
+                if (instance.total_time_limit + 1e-9 >= rt_lb) {
+                    move_budget = cunit > 1e-12
+                        ? static_cast<int>(std::min<double>(instance.Q[k],
+                            std::floor((instance.total_time_limit - rt_lb) / cunit + 1e-9)))
+                        : instance.Q[k];
                 }
                 pickup_reach = std::max(pickup_reach,
                     std::min({instance.initial[i], instance.Q[k], move_budget}));
@@ -703,9 +716,10 @@ void writeCompactLp(const Instance& instance,
     const std::string station_state_mode = canonical_spec
         ? canonical_spec->station_state_formulation : "bit-product";
     const bool station_state_vdp = station_state_mode == "vd-p";
+    const bool station_state_log = station_state_mode == "log-vd-p";
     const bool station_state_vdj = station_state_mode == "vd-j";
     const bool station_state_value_disaggregated =
-        station_state_vdp || station_state_vdj;
+        station_state_vdp || station_state_vdj || station_state_log;
     const bool aggregate_mc4 = station_state_mode == "aggregate-mc4";
     if (station_state_mode != "bit-product" && !aggregate_mc4 &&
         !station_state_value_disaggregated) {
@@ -829,11 +843,17 @@ void writeCompactLp(const Instance& instance,
         vars.add(zprodName(i), 0, instance.capacity[i], "C");
         if (station_state_value_disaggregated) {
             for (int y = y_lb[i]; y <= y_ub[i]; ++y) {
-                vars.add(stateName(i, y), 0, 1, "B");
+                vars.add(stateName(i, y), 0, 1, station_state_log ? "C" : "B");
                 vars.add(stateGName(i, y), 0, g_ub, "C");
                 if (static_stats) {
                     ++static_stats->station_state_selector_variables;
                     ++static_stats->station_state_perspective_variables;
+                }
+            }
+            if (station_state_log) {
+                for (int b = 0; b < stateCodeBits(y_lb[i], y_ub[i]); ++b) {
+                    vars.add(stateCodeName(i, b), 0, 1, "B");
+                    if (static_stats) ++static_stats->station_state_code_variables;
                 }
             }
         } else {
@@ -2850,6 +2870,19 @@ void writeCompactLp(const Instance& instance,
             writeConstraint(out, cid, inventory_link, "=", 0.0);
             writeConstraint(out, cid, g_reconstruction, "=", 0.0);
             writeConstraint(out, cid, product_reconstruction, "=", 0.0);
+            if (station_state_log) {
+                // An integral convex combination of distinct 0/1 codes can
+                // use only the single state sharing every bit of that code.
+                for (int b = 0; b < stateCodeBits(y_lb[i], y_ub[i]); ++b) {
+                    Expr code_link;
+                    addTerm(code_link, stateCodeName(i, b), 1.0);
+                    for (int y = y_lb[i]; y <= y_ub[i]; ++y) {
+                        const long long offset = static_cast<long long>(y) - y_lb[i];
+                        if ((offset >> b) & 1LL) addTerm(code_link, stateName(i, y), -1.0);
+                    }
+                    writeConstraint(out, cid, code_link, "=", 0.0);
+                }
+            }
             if (station_state_vdj) {
                 // These equalities are redundant at integer selectors with
                 // the original Y/r links, but make the joint VD-J state
@@ -4264,9 +4297,17 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
         if (spec.station_state_formulation != "bit-product" &&
             spec.station_state_formulation != "aggregate-mc4" &&
             spec.station_state_formulation != "vd-p" &&
+            spec.station_state_formulation != "log-vd-p" &&
             spec.station_state_formulation != "vd-j") {
             throw std::runtime_error(
                 "unsupported_round55_station_state_formulation");
+        }
+        if (spec.station_state_formulation == "log-vd-p" &&
+            (options.plain_baseline || options.round66_arc_load_replacement ||
+             options.round65_budget || options.round65_projection != "off" ||
+             options.round64_shared_mode != "off" || options.round63_time_mode != "off" ||
+             options.round62_threshold_mode != "off")) {
+            throw std::runtime_error("Round67 log-state model requires isolated unbudgeted K1");
         }
         if (spec.station_state_formulation != "bit-product" &&
             (!spec.strengthened || !spec.interval_restricted)) {
@@ -4347,6 +4388,7 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
             static_stats.station_state_selector_variables;
         artifact.station_state_perspective_variables =
             static_stats.station_state_perspective_variables;
+        artifact.station_state_code_variables = static_stats.station_state_code_variables;
         artifact.aggregate_mccormick_rows =
             static_stats.aggregate_mccormick_rows;
         artifact.support_duration_pair_rows =

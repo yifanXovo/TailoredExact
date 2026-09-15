@@ -167,6 +167,12 @@ Round50IntervalMipPolicy parseRound50IntervalMipPolicy(
         out.tailored_cut_policy = "f0-clean-none";
         out.round53_callback_mode = "c0-baseline";
         out.station_state_formulation = "vd-p";
+    } else if (out.name == "round67-log-vd-p") {
+        out.branching = Round50BranchingPolicy::Default;
+        out.subset_duration_big_m = "off";
+        out.tailored_cut_policy = "f0-clean-none";
+        out.round53_callback_mode = "c0-baseline";
+        out.station_state_formulation = "log-vd-p";
     } else if (out.name == "vd-j" ||
                out.name == "round55-vd-j") {
         out.name = "round55-vd-j";

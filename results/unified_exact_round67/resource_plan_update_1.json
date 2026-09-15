@@ -1,0 +1,12 @@
+{
+  "revision": 1,
+  "declared_before_native_experiments": true,
+  "reason": "A preflight model test exposed the inherited zero-handling domain defect. Add a separate nonzero zero-handling native check for P-GRB, repaired K1-R, and LOG.",
+  "additional_micro_role": "micro-zero: round59_tiny input, physical T=3, pickup=drop=0; correctness only",
+  "additional_micro_arms": ["P-GRB", "K1-R", "LOG"],
+  "additional_micro_cap_seconds": 20,
+  "maximum_native_micro_total": 6,
+  "maximum_performance_total_unchanged": 16,
+  "revised_worst_case_experiment_seconds": 6120,
+  "no_original_performance_instance_changed": true
+}

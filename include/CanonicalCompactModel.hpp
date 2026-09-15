@@ -44,7 +44,7 @@ struct CanonicalCompactModelSpec {
     // ablations. The historical default remains byte-preserving.
     std::string round51_subset_duration_big_m = "historical-100000";
     // Round 55 exact station-state formulation switch. The historical
-    // bit-product representation remains the default.
+    // bit-product representation remains the default. Round67 adds log-vd-p.
     std::string station_state_formulation = "bit-product";
     // Uniform default-off optional-family removal. The only Round 55 value
     // besides "none" is "triple-support-duration-cover".
@@ -94,6 +94,7 @@ struct CanonicalCompactModelArtifact {
     std::string sparse_family_removal = "none";
     long long station_state_selector_variables = 0;
     long long station_state_perspective_variables = 0;
+    long long station_state_code_variables = 0;
     long long aggregate_mccormick_rows = 0;
     long long support_duration_pair_rows = 0;
     long long support_duration_triple_rows = 0;

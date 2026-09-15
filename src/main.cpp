@@ -249,6 +249,18 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
     }
     if (opt.algorithm_preset == "custom") return;
 
+    if (opt.algorithm_preset == "research-round67-vdp" ||
+        opt.algorithm_preset == "research-round67-log-vdp") {
+        const std::string requested = opt.algorithm_preset;
+        opt.algorithm_preset = "research-round65-k1-h";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = requested;
+        opt.round65_hga_zero_stop = true;
+        opt.external_gini_interval_mip_policy = requested == "research-round67-vdp"
+            ? "round55-vd-p" : "round67-log-vd-p";
+        return;
+    }
+
     if(opt.algorithm_preset=="research-round65-k1-s" ||
        opt.algorithm_preset=="research-round65-k1-h" ||
        opt.algorithm_preset=="research-round64-k1-s" ||
@@ -3184,6 +3196,13 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
        opt.pickup_time<0 || opt.drop_time<0) throw std::runtime_error("invalid common service times");
     if(!ebrp::validRound64SharedMode(opt.round64_shared_mode))throw std::runtime_error("invalid Round64 shared mode");
     const bool r65preset=opt.algorithm_preset=="research-round65-k1-s" || opt.algorithm_preset=="research-round65-k1-h";
+    const bool r67preset = opt.algorithm_preset == "research-round67-vdp" ||
+        opt.algorithm_preset == "research-round67-log-vdp";
+    if (r67preset && (opt.plain_baseline || opt.round66_arc_load_replacement ||
+        opt.round65_budget || opt.round65_projection != "off" ||
+        opt.round64_shared_mode != "off" || opt.round63_time_mode != "off" ||
+        opt.round62_threshold_mode != "off"))
+        throw std::runtime_error("Round67 inventory encoding requires isolated unbudgeted K1");
     if (opt.round66_arc_load_replacement &&
         (!r65preset || opt.plain_baseline || opt.round65_budget ||
          opt.round65_projection != "off" || opt.round64_shared_mode != "off" ||
@@ -3195,7 +3214,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error("Round65 controller/resource revisions require the explicit research budget");
     if(opt.round65_release_load && opt.round65_projection=="off")
         throw std::runtime_error("Round65 released load requires projection");
-    if(opt.round65_hga_zero_stop && (!r65preset || opt.plain_baseline))
+    if(opt.round65_hga_zero_stop && (!(r65preset || r67preset) || opt.plain_baseline))
         throw std::runtime_error("Round65 zero-stop requires explicit research preset");
     if ((opt.round65_budget || opt.round65_projection!="off" || opt.round65_seed_credit!=30) && (!r65preset || opt.plain_baseline))
         throw std::runtime_error("Round65 controls require explicit research preset");
@@ -3615,6 +3634,12 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
             "Round 54 frozen K1-AM-SF mainline: K0=1 adaptive-mass controller "
             "with tau=0.08, midpoint splits, and the qualified simplified F0 "
             "interval-MIP backend; research strengthening remains default-off";
+    } else if (snapshot.algorithm_preset == "research-round67-vdp" ||
+               snapshot.algorithm_preset == "research-round67-log-vdp") {
+        snapshot.preset_certificate_scope = "k1_original_problem_with_inventory_state_product";
+        snapshot.preset_experimental_features_enabled = snapshot.algorithm_preset;
+        snapshot.preset_disabled_features = "round65_resource_budgets,projection,arc_load_replacement,other_research";
+        snapshot.preset_reason = "Full paid K1-R with uniform one-hot or logarithmic inventory-state representation";
     } else if (snapshot.algorithm_preset == "research-k1-am-sf-vdp" ||
                snapshot.algorithm_preset == "research-k1-am-sf-sf-r1" ||
                snapshot.algorithm_preset ==
@@ -4744,7 +4769,8 @@ std::string jsonEscapeLocal(const std::string& value) {
 }
 
 bool isPaperTracePreset(const std::string& preset) {
-    return preset == "research-round65-k1-s" || preset == "research-round65-k1-h" ||
+    return preset == "research-round67-vdp" || preset == "research-round67-log-vdp" ||
+           preset == "research-round65-k1-s" || preset == "research-round65-k1-h" ||
            preset == "research-round64-k1-s" || preset == "research-round64-k1-h" ||
            preset == "research-round64-single-s" || preset == "research-round60-f0-single-h" ||
            preset == "research-round59-k1-s" ||
@@ -19303,6 +19329,13 @@ int main(int argc, char** argv) {
                 opt, "instance_parsing_start", "start", file.string());
             ebrp::Instance instance = ebrp::parseInstanceFile(
                 file, opt.total_time_limit, opt.pickup_time, opt.drop_time);
+            if ((opt.algorithm_preset == "research-round67-vdp" ||
+                 opt.algorithm_preset == "research-round67-log-vdp") &&
+                !ebrp::hasMetricTravelLowerBounds(instance)) {
+                throw std::runtime_error(
+                    "Round67 strengthened presets require symmetric metric travel; "
+                    "nonmetric qualification of inherited cuts is not established");
+            }
             ebrp::recordProcessPhase(
                 opt, "instance_parsing_complete", "complete",
                 "instance=" + instance.name);
