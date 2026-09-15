@@ -1,27 +1,24 @@
-# Round78: qualification/startup complete; fresh full screen admitted
+# Round78 closed; independent draft PR pending
 
-Shared BDS-C production source4a0561e0f8193e3e874c1bd0bfa8bc381fb66f5e,
-build/round78/v1 SHA2563fae847a75c3c9d07d8f5f0444daeafb73559865e6bffb816746802b9e2f43ab.
-One qualification60/60,147 Optimize,103.905918s; actual BDS-C/JDS-C Start
-vectors and tiny5/24 certificates pass. No repair. Ten fresh startup runs all
-pass in32.482s/zero Optimize. D3/C2/D4 routes unchanged; D6/D7 reproduce legal
-F.157849713/.300543518. All25 paths match and actual handoff uses module final.
+Read final_report.md, mathematics.md, stage_decision.json and reproduce.md.
+BDS-C is qualified and this exposed D7 full screen passes primary/protection
+questions. P/BDS-C/K1-R gaps are .080034387/.016871704/.018286596 at common
+1200s; all normal and uncertified. BDS-C improves both P bounds and retains
+1.022914 of the fresh K1 P-relative gap advantage. Its U is worse than K1 and
+L better; their gap difference is below the frozen material rule.
 
-Read full_screen_plan.md. Exactly three fresh serial D7 P/BDS-C/K1-R arms at
-1200s whole cap each, one zero-Optimize reference, no further build/test/retry.
-Driver round78_research.py frozen before launch; campaign/active_experiment.json,
-processes.jsonl, summary.json and driver_completion.json give live recovery.
-No overlapping optimizer/heavy audit. No long extension/confirmation admitted.
+One qualification60/60,147 Optimize/103.905918s; ten fresh startup32.482s,
+zero Optimize. Full3 runs3591.344s/11 Optimize. No failure or rerun. All physical,
+scope/coverage, actual Start and byte audits pass. Eight bundles1686 files.
+Source4a0561e0f8193e3e874c1bd0bfa8bc381fb66f5e; build/round78/v1 SHA256
+3fae847a75c3c9d07d8f5f0444daeafb73559865e6bffb816746802b9e2f43ab.
 
-Prototype diagnostic and exact original source bytes remain preserved. Overall
-goal active/unmet. Ordinary usage59% remaining; no reset credit consumed.
-Original dirty checkout untouched. Stage draft PR is due after full evidence
-closure; do not end the overall goal merely after publication.
+All optimizer/build/package processes have ended. Exec85176 and23752 closed;
+monitor cell1827 closed. Final report/resource/delivery records are complete.
+Commit/push and create this stage's independent draft PR against R77 final
+88e963a1f10cc4ff9f1d3a17950f0a5708f68318. No main merge.
 
-Live checkpoint: exec session85176 / owned Python PID42564 remains active.
-P-GRB completed1197.110s, validated U.277320866/L.197286479/gap.080034387.
-BDS-C completed1197.109s, validated U.219629792/L.202758088/gap.016871704,
-78.9194% less gap than P with both bounds better; both remain uncertified.
-K1-R is the original third launch, currently in HGA startup. No early formal
-recorded U is backdated. Monitor cells1805/1807/1810/1812 finished. Final joint
-analysis, actual-vector audit, packaging and stage draft PR remain pending.
+Overall goal unmet; continue after publication with a separately bounded
+small/nonzero full panel, then necessary common3600 medium/large comparisons
+and unadapted confirmation. prospective_validation.md is planning only, no
+new run admitted. No reset consumed. Original dirty checkout untouched.

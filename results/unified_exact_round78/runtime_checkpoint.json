@@ -1,18 +1,13 @@
 {
-  "main_exec_session_id": 85176,
-  "driver_pid": 42564,
-  "active_arm": "K1-R",
-  "active_launch": 3,
-  "checkpoint_unix": 1789500488.0167818,
-  "monitor_exec_cell_1805_finished": true,
-  "qualification_and_startup_complete": true,
-  "full_screen_complete": false,
-  "measured_source": "4a0561e0f8193e3e874c1bd0bfa8bc381fb66f5e",
-  "binary_sha256": "3fae847a75c3c9d07d8f5f0444daeafb73559865e6bffb816746802b9e2f43ab",
+  "stage": 78,
+  "state": "all_runs_and_audits_closed_pending_publication",
+  "optimizer_active": false,
+  "build_active": false,
+  "package_active": false,
+  "campaign_driver_session": 85176,
+  "campaign_driver_returncode": 0,
+  "completed_runs": 3,
+  "valid_runs": 3,
   "overall_goal_complete": false,
-  "resume": "Read status.md, full_screen_plan.md, campaign ledgers; poll main session85176 or run read-only round78_monitor.py. Do not rerun producer, source qualification or startup. Run analyze, mechanism, package only after original three-arm driver closes validly.",
-  "completed_valid_runs": 2,
-  "monitor_exec_cell_1807_finished": true,
-  "monitor_exec_cell_1810_finished": true,
-  "monitor_exec_cell_1812_finished": true
+  "saved_unix": 1789501755.648799
 }

@@ -3605,11 +3605,70 @@
         "passed": true,
         "offline_replay_seconds": 0.16656979965046048
       }
+    },
+    {
+      "number": 3,
+      "id": "D7",
+      "arm": "K1-R",
+      "returncode": 0,
+      "wall_seconds": 1197.125,
+      "within_cap": true,
+      "stop_reason": "normal_return",
+      "restored": {
+        "process_mask": 1048575,
+        "system_mask": 1048575
+      },
+      "forced_criterion_seen": false,
+      "observed_commits": 52,
+      "audit": {
+        "binary_sha256": "3fae847a75c3c9d07d8f5f0444daeafb73559865e6bffb816746802b9e2f43ab",
+        "committed_events": 52,
+        "native_calls_started": 6,
+        "native_calls_returned": 6,
+        "physical_witnesses": 1,
+        "native_physical_witnesses": 0,
+        "scoped_bound_events": 38,
+        "global_native_bound_events": 38,
+        "UB": 0.21564407531579494,
+        "LB": 0.1973574792283258,
+        "gap": 0.01828659608746913,
+        "lower_bound_source": "complete_domain_native_evidence",
+        "certificate": false,
+        "solver_finalization_certificate": false,
+        "explanation": "Observational interrupted endpoint; no native optimality or rational certificate is inferred.",
+        "witnesses": [
+          {
+            "F": 0.21564407531579494,
+            "G": 0.03872267378877319,
+            "P": 1.179476010180145,
+            "stations": 50,
+            "pickup": 228,
+            "drop": 228,
+            "maximum_duration": 17975.490961810894,
+            "original_T_feasible": true,
+            "source": "same_run_verified_startup",
+            "call": 0,
+            "sequence": 2,
+            "available": 610.5160000002943
+          }
+        ],
+        "normal_result_certificate": false,
+        "endpoint": {
+          "U": 0.21564407531579505,
+          "L": 0.1973574792283258,
+          "gap": 0.018286596087469242,
+          "certificate": false,
+          "source": "normal_finalized_physical_endpoint",
+          "status": "round31_c6_external_gini_tree_time_limit"
+        },
+        "passed": true,
+        "offline_replay_seconds": 0.075120999943465
+      }
     }
   ],
-  "total_wall_seconds": 2394.2190000005066,
-  "offline_replay_seconds": 0.36107359966263175,
-  "completed": 2,
+  "total_wall_seconds": 3591.3440000005066,
+  "offline_replay_seconds": 0.43619459960609674,
+  "completed": 3,
   "planned": 3,
   "formal_performance": true
 }

@@ -1,17 +1,21 @@
 # Unified exact BRP research - resume here
 
-Current active stage: R78, codex/round78-balanced-block-descent, base R77
-final88e963a1f10cc4ff9f1d3a17950f0a5708f68318 / draft PR138. Read R78 status.md,
-full_screen_plan.md and startup_review.json. Source4a0561e0f8193e3e874c1bd0bfa8bc381fb66f5e,
-build/round78/v1. Qualification60/60 passes,147 Optimize/103.905918s, no repair.
-Ten fresh startup runs32.482s/zero Optimize: D3/C2/D4 unchanged, D6/D7 legal
-U.157849713/.300543518. All25 paths/physical transitions and actual Start pass.
-Now exactly three fresh serial D7 P/BDS-C/K1-R complete runs, each1200s, are
-admitted; see frozen driver/campaign ledgers. No rerun, other full panel or
-confirmation admitted. Do not overlap optimizer/compile/heavy audits. Preserve
-all failures. Goal active/unmet, ordinary usage59% remaining, no reset. Finish
-this substantive R78 stage with an independent draft PR; no main merge.
-Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.
+Current stage R78 is complete, publication pending, on
+codex/round78-balanced-block-descent. Base R77 final
+88e963a1f10cc4ff9f1d3a17950f0a5708f68318 / draft PR138.
+Read results/unified_exact_round78/final_report.md, status.md, mathematics.md
+and reproduce.md. BDS-C materially improves fresh P on D7: gaps at1200s
+P .080034387, BDS-C .016871704, K1-R .018286596, all valid/uncertified.
+78.92% P gap reduction, K1 advantage retained1.022914; BDS-C has worse U and
+better L than K1. This repairs the exposed1200s protection screen only.
+60/60 qualification,147 Optimize;10 startup,zero Optimize;3 full runs3591.344s,
+11 Optimize;8 verified bundles1686 files. No failures or solver reruns.
+Production source4a0561e0f8193e3e874c1bd0bfa8bc381fb66f5e/build/round78/v1.
+All optimizer/build/package/monitor sessions ended. Create independent draft
+PR against R77, no main merge; then separately admit the small/nonzero panel
+in prospective_validation.md. No next-stage run/long extension/confirmation
+is yet admitted. Overall goal unmet, no reset consumed. Original dirty
+checkout untouched; owned workspace E:/codes/ExactEBRP-round66.
 
 Current completed stage: Round77 on codex/round77-jdsc-protection, based on
 R76 finalcc3bced895bc0f17c25c5bc23b3466e470d9633e / draft PR137. Read R77
