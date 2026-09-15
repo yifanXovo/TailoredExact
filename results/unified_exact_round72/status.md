@@ -15,8 +15,20 @@ The agent did not consume a reset credit. The earlier authorization question
 has no explicit answer and confers no authority to redeem a credit. The reason
 for restoration is unknown; no reset is needed for current work.
 
-Next execute formal_campaign_plan.md with scripts/round72_campaign.py. First
-freeze its new campaign identity, then runD3/C2/D4 P/DS/DS-X at300s. Do not
-overwrite Round71 or import diagnostic routes. A conditional D7 three-arm3600s
-reserve requires the recorded full-panel audit gate; it is not yet opened.
+The nine fullD3/C2/D4 runs are complete and fully audited:1817.642s,36 native
+Optimize calls, zero solver failures. DS-X certifiesD3/C2/D4 in255.360/111.234/
+54.703s; all three P arms remain open. DS is open onD3 and certifiesC2/D4 in
+154.219/53.860s. Read short_validation.md and campaign/result_tables.md.
+22 model checks,11 accepted/fully observed Starts,159 full-run compact artifacts
+pass. All six formal startups independently reproduce diagnostic route hashes
+and logical traces. Combined15 experiments cost1818.032s; no new qualification.
+
+campaign/long_gate.json now admits the predeclared D7 three-arm3600s reserve.
+Latest resource check: ordinary use allowed,97% remaining, no agent reset.
+Next preserve the audited checkpoint, then execute
+python scripts/round72_campaign.py run --ids D7 .
+Do not repackage before dispatch: the gate binds the exact audited nine-row
+runs.csv. Later full packaging retains short_runs.csv/short_pairs.csv and the
+checkpoint commit preserves all gate audits. Inspect processes.jsonl and the
+active_run.lock before resuming; no long run has launched at this checkpoint.
 The overall goal remains unmet; no independent confirmation is claimed.

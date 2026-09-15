@@ -16,6 +16,7 @@ def main():
         assert r['certificate_scope']=='primal_heuristic_ub_only' and r['method']=='primal-heuristic'
         assert not r['strict_certified_original_problem'] and not (folder/'external').exists()
         physical=base.audit.physical_module.physical(entry['input'],r)
+        base.audit.physical_module.physical(entry['input'],dict(r,inventory=r['verification']['final_inventories']))
         assert physical['original_T_feasible'] and abs(physical['F']-r['upper_bound'])<=1e-7
         trace=base.audit.rows(folder/'hga.csv.descent.csv');exhausted=[];previous_time=0
         assert len(trace)==r['decoded_descent_passes']

@@ -2,15 +2,18 @@
 
 Current active stage: Round72 on codex/round72-vdsx-validation, based on Round71
 final73ce04d9a3c5031c2b5a1021523502f0a9a85168 / draft PR132. Read
-results/unified_exact_round72/status.md and formal_campaign_plan.md. Same R71
-qualified bytes; six completed startup-only diagnoses cost0.390s/zero Optimize
-calls, all physical/trace checks pass,48 compact artifacts. Startup U improves
-onD3/C2/D4, without any inference about exact performance. One offline schema
-error was fixed and retained in postprocess_failures.json.
-Resources subsequently returned to100% remaining; cause unknown, no agent
-reset call. Continue nine fresh full P/DS/DS-X300s comparisons in the new
-campaign output. A conditional D7 P/K1-R/DS-X3600s reserve requires an audited
-gate. Overall goal unmet; these exposed roles are not independent confirmation.
+results/unified_exact_round72/short_validation.md and status.md. Nine full
+D3/C2/D4 P/DS/DS-X300s comparisons are audited:1817.642s/36 Optimize calls.
+DS-X certifies all three in255.360/111.234/54.703s; all P arms remain open.
+D3 recovers DS's lost certificate; C2 improves DS by42.985s/27.87%; D4 differs
+by only0.843s.22 witness/model checks,11 actual Starts and159 compact artifacts
+pass. Six additional startup-only diagnoses add0.390s/zero Optimize calls and
+48 artifacts; all formal startup route hashes/logical traces independently match.
+The predeclared D7 P/K1-R/DS-X3600s gate is admitted, maximum3 fresh runs/
+10800s. Preserve the checkpoint, then dispatch; inspect ledger for actual state.
+Same R71 qualified bytes,49 inherited tests and zero new qualification. Latest
+resources97% remaining; no agent reset. Overall goal unmet; these exposed roles
+are not independent confirmation. R71's serious D7 protection loss remains open.
 Use processes.jsonl/active_run.lock to resume without duplicate launches.
 Older resource snapshots below are historical, not the current limitation.
 
