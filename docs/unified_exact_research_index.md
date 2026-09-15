@@ -1,6 +1,25 @@
 # Unified exact BRP research — resume here
 
-Active stage: Round71 on codex/round71-interroute-descent, based on Round70
+Latest completed research stage: Round71, closed at the resource checkpoint.
+Read results/unified_exact_round71/final_report.md, stage_decision.json and
+status.md.16 performance+6 micros,95 experiment Optimize calls/6600.169s,
+49 CTests/39 qualification calls,75 witness/model checks,12 actual Starts and
+348 compact artifacts all pass. Small gains and D6's42.9% P gap improvement
+are retained. D7 DS-X gap improves35.4% versus DS, but only7.3% versus P and
+retains9.5% of K1's P-relative advantage. Overall goal remains unmet.
+
+D3/C2/D4 nine predeclared experiments are unlaunched, not assumed passed.
+At closure ordinary usage was allowed with2% weekly remaining; publication
+and recovery take priority over opening that additional2700s panel. A reset
+authorization question is pending; no credit used. No optimizer active.
+Publication is pending: local checkpoint b362dcd is safe, ordinary Git transport
+failed three times while authenticated GitHub API still works. See
+publication_transport.json. Complete the new draft PR before further experiments.
+After resources permit, use a new stage/output identity for missing roles;
+do not mutate this closed stage or claim independent confirmation. See
+next_hypothesis.md. Earlier checkpoint details follow.
+
+Round71 checkpoint history on codex/round71-interroute-descent, based on Round70
 final1cf8381206edd5925eca0b03185ac1cd7dc99d2a / draft PR131. Read
 results/unified_exact_round71/plan.md, mathematics.md and status.md.
 DS-X enables existing finite cross-route tail relocation within24-seed decoded

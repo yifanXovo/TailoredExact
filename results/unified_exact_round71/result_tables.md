@@ -1,6 +1,6 @@
 # Round71 result tables
 
-Audited prefix; stage in progress. Overall research goal remains unmet.
+Completed bounded stage. Overall research goal remains unmet.
 
 All roles are exposed development data. No independent confirmation or extra repeat is included. D7 is one fresh1200s run per arm, not a continuation of Round70.
 
@@ -19,6 +19,9 @@ All roles are exposed development data. No independent confirmation or extra rep
 |D7|DS|1200|False|1197.109|0.318958799087|0.204077158583|0.114881640504|2.829|
 |D7|DS-X|1200|False|1197.109|0.278335266779|0.204146294626|0.0741889721534|9.380|
 |D7|K1-R|1200|False|1197.125|0.215644075316|0.197357479228|0.0182865960875|612.421|
+|D6|P-GRB|600|False|597.094|0.157241175852|0.144985883254|0.012255292598|0.000|
+|D6|DS|600|False|597.062|0.157083131103|0.150079042237|0.00700408886618|5.509|
+|D6|DS-X|600|False|597.062|0.157083131103|0.150087063918|0.0069960671847|5.511|
 
 Signed gaps preserve tiny numerical discrepancies. Requested gaps0 do not imply a rational certificate. Startup remains part of formal paid time.
 
@@ -33,13 +36,15 @@ Signed gaps preserve tiny numerical discrepancies. Requested gaps0 do not imply 
 |D7|P-GRB|below_practical_threshold|0.031|0.00101440084517|0.00685981591119|-0.00584541506601|mixed|
 |D7|DS|material_improvement|-0.000|-0.0406235323077|6.91360424403e-05|-0.0406926683502|aligned_or_unchanged|
 |D7|K1-R|severe_regression|-0.016|0.0626911914634|0.00678881539741|0.055902376066|mixed|
+|D6|P-GRB|material_improvement|-0.032|-0.000158044749118|0.00510118066416|-0.00525922541327|aligned_or_unchanged|
+|D6|DS|below_practical_threshold|0.000|0|8.02168148439e-06|-8.02168148439e-06|aligned_or_unchanged|
 
 Classifications use the frozen absolute and relative thresholds. Missing certificates and mixed UB/LB changes remain explicit. All DS diagnostic pairs are retained in pairs.csv; micros are excluded.
 
-13 performance + 6 micro runs; 82 experiment Optimize calls; 4808.951s paid process wall; zero validity failures.
+16 performance + 6 micro runs; 95 experiment Optimize calls; 6600.169s paid process wall; zero validity failures.
 Valid startup-only whole-run deadlines: 0; supervisor exceptions: 0. Such deadlines use independently justified global LB0, without a fabricated tree/certificate or replacement run.
 Qualification: 49/49 new CTests, 39 native calls and 95.131s configure/build/test. Ten no-opt reference exports cost 0.797s.
-Initial-witness/model checks: 65, including 26 incompatible Gini intervals. Actual Start decisions: 10; eligible 10, accepted 10, full submitted vectors observed 10.
+Initial-witness/model checks: 75, including 30 incompatible Gini intervals. Actual Start decisions: 12; eligible 12, accepted 12, full submitted vectors observed 12.
 Native MIPSOL equality is qualified C++ observer evidence; independent replay checks retained submitted/readback vectors, rows, domains, objective and physical routes. Unretained full native event vectors cannot be replayed.
 
 Source freeze: 3867214f480d0a4fef4d77f03404f9fd89fb8b42; binary SHA256: 4f60ed8cd6f65c695947e8ac3bd525b77d28d94733faf2c9ef25d057a69023af.

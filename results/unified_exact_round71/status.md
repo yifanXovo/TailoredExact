@@ -1,3 +1,20 @@
+# Final stage status
+
+Round71 is closed at the resource checkpoint in stage_decision.json:16
+performance+6 micros,95 experiment Optimize calls,6600.169s,zero failures.
+All49 new CTests,75 witness/model checks,12 actual Starts,18 checkpoints and
+348 compact artifact integrity checks pass. Read final_report.md first.
+The remaining D3/C2/D4 nine experiments were never launched; their outcomes
+are unknown. Do not overwrite this closed stage to fill those cells later.
+Latest ordinary usage was allowed with2% weekly remaining, reserved for
+reviewable publication/recovery. The reset question has no explicit answer;
+no credit was used. No optimizer is active. Overall goal is unmet.
+Publish this stage as a new draft PR and preserve the transport incident record.
+After resources permit, resume in a new separately identified stage as described
+in next_hypothesis.md. No automatic future execution is promised.
+
+## Earlier checkpoints retained for context
+
 Round71 qualification and the small-instance screen are complete and audited.
 Branch codex/round71-interroute-descent, base1cf8381206edd5925eca0b03185ac1cd7dc99d2a / PR131.
 New preset research-round71-vds-interroute-descent; binary
