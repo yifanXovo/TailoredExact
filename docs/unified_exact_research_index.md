@@ -6,8 +6,9 @@ Read R80 plan.md/status.md and R79 final_report.md/long_role_review.md.
 Six original serial arms admitted: E8 P/BDS-C/K1-R common120, then D6
 P/BDS-C/K1-R common3600. Maximum11160 process seconds, two zero-Optimize
 reference exports, no build/test. Same qualified R78 source/binary and preset.
-At this commit not yet launched; inspect R80 campaign active/summary/process
-files before doing anything and NEVER rerun an existing campaign. E8 is a
+Original driver session54674 active: E8 all3 valid/certified at P1.781,
+BDS-C2.516, K1-R7.359s; D6 P arm running, BDS/K1 queued in same driver.
+Inspect R80 campaign active/summary/process files; NEVER rerun the campaign. E8 is a
 current small total-time regression; D6 is a true K1/P proof deficit, not K1
 protection. No additional experiment/confirmation admitted. Overall goal unmet;
 D7 long protection/replication and diverse unadapted confirmation remain.
