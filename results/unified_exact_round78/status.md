@@ -17,3 +17,7 @@ Prototype diagnostic and exact original source bytes remain preserved. Overall
 goal active/unmet. Ordinary usage59% remaining; no reset credit consumed.
 Original dirty checkout untouched. Stage draft PR is due after full evidence
 closure; do not end the overall goal merely after publication.
+
+Live checkpoint: serial full-screen driver is active in exec session85176,
+owned Python PID42564; P-GRB is launch1. Monitor cell1805 has finished;
+monitor.py is read-only. Prior pushes completed; R78 is not yet a stage PR.
