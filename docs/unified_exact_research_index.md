@@ -1,5 +1,12 @@
 # Unified exact BRP research - resume here
 
+Current active stage: R78 on codex/round78-balanced-block-descent, based on R77
+final88e963a1f10cc4ff9f1d3a17950f0a5708f68318 / draft PR138. Read R78 plan.md
+and status.md. Default-off standalone balanced-block module and fixed-witness
+harness prepared; one compile and structural/D6/D7 diagnostics admitted, all
+zero Optimize. No production preset/native batch/full comparison yet. Goal
+active/unmet, original dirty checkout untouched. No diagnostic launched yet.
+
 Current completed stage: Round77 on codex/round77-jdsc-protection, based on
 R76 finalcc3bced895bc0f17c25c5bc23b3466e470d9633e / draft PR137. Read R77
 final_report.md, status.md and reproduce.md. Draft PR138: https://github.com/yifanXovo/TailoredExact/pull/138 . All3 normal
