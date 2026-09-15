@@ -1,16 +1,19 @@
 # Unified exact BRP research - resume here
 
-Current active stage: Round73, codex/round73-joint-insertion, based on local
-Round72 closure db7976fe94627c00d76d50c0adfed11223fbf646. Read
-results/unified_exact_round73/plan.md. Initial tranche only: one qualified
-build/test batch, at most10 UB-only startup diagnoses (30s each, zero Optimize)
-and6 separately declared native persistence/termination diagnoses (30s each).
-No formal performance/long/confirmation campaign is opened yet. Main hypothesis:
-joint insertion of unvisited stations and integer service quantities; execution
-prerequisite: durable physical/global-scope evidence under whole-run deadline.
-Round72 commit publication is pending Git connection recovery; PR133 description
-already reflects failure/closure. Current ordinary use allowed90% remaining,
-no reset credit consumed. No optimizer currently active.
+Current active stage: Round73, codex/round73-joint-insertion, based on
+Round72 finaldb7976fe94627c00d76d50c0adfed11223fbf646 (publication now verified).
+Read results/unified_exact_round73/status.md, startup_checkpoint.md and
+seed_extension.md. Initial JI qualified at sourcec825be043cb1ebb5d8b1f4f0a21ff71747c7d2a4,
+build/round73/v3,51/51 tests; two prior configuration failures retained. Total
+qualification135 native calls. Ten UB-only diagnoses pass in15.438s with zero
+Optimize calls;155 lossless artifacts pass. D7 initialF0.5445->0.4426, but D6
+0.1600->0.3020 and C2 also worsens. No full exact performance claim.
+New declared extension: one constructive seed integrated with unchanged24
+finite DS-X seeds, rather than selecting a mode by role. New v4/v5 qualification
+and at most10 additional fresh startup diagnoses30s each; none launched.
+Native persistence repair and its six30s diagnostics remain pending. No formal
+performance/long/confirmation panel opened. No active optimizer/build session.
+Do not overwrite initial runs/builds or package against later changed sources.
 
 Latest completed stage: Round72, codex/round72-vdsx-validation, based on
 Round71 final73ce04d9a3c5031c2b5a1021523502f0a9a85168. Draft PR133:
