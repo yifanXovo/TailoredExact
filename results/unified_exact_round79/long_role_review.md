@@ -51,3 +51,11 @@ Do not invent a remaining non-startup defect from the obsolete label. R79's
 D3 certificate gain is evidence of full nonzero proof performance, while its
 current K1 endpoint still has a smaller gap than P. These are distinct claims.
 No E8 run or other extra arm is admitted by this clarification.
+
+A concrete next-stage option, still unadmitted, is the outstanding E8 triple
+at120s followed by the D6 triple at3600s: six fresh serial arms, maximum11160s,
+plus two zero-Optimize P references. This would test two verified P deficits
+without re-running the current six-role panel or changing BDS-C. The actual
+admission must follow R79 closure/publication and a fresh resource check; no
+new allocation is implied here. D7 common3600 and independent confirmation
+remain separate later questions.
