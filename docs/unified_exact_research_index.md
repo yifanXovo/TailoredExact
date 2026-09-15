@@ -1,5 +1,13 @@
 # Unified exact BRP research - resume here
 
+Current stage: Round76, codex/round76-physical-route-closure, based on closed
+R75 published final692cf9f0ef8852d4ee0d62c5ed206c081658d158 / draft PR136.
+Read results/unified_exact_round76/plan.md and status.md. Initial allocation:
+one diagnostic harness compile<=60s and two fixed-witness residual-insertion
+closures on D6/D7<=30s each, zero Optimize. No production extension or full
+campaign yet. All R75 processes ended; R75 final remote head/base/draft/open
+and local reconstructed commit were verified. Goal remains active/unmet.
+
 Latest completed stage: Round75, codex/round75-physical-quantity-descent,
 based on R74 final ac06e8a4efc3203db55fd64795ed89d1528c9322. Read
 results/unified_exact_round75/final_report.md, status.md and stage_decision.json.
