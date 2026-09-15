@@ -20,11 +20,13 @@ S12 5.657/1.812/40.734s; N12 4.281/1.391/7.438s. These are normal endpoint
 checks; final joint/actual-vector audits remain pending. Prepared analyzer,
 mechanism and package scripts have not been executed. No heavy overlap.
 
-Updated checkpoint: first12 complete and valid. D3 P-GRB normal297.062s,
-U.045054162/L.041540120, uncertified. BDS-C certifies in138.968s, original
-F.045001550056. K1-R normal297.078s, U.045054162/L.043855266, uncertified.
-Original C2 P-GRB launch13 active; six allocated C2/D4 arms remain in total.
-All monitor cells through1856 finished; exec26444 remains active. Two git
-transport failures and successful third push are preserved in push_attempts;
-remote branch reaches76f2f2784. No solver failure or rerun. Final joint/actual
-Start-vector audit and packaging must wait until all18 original arms close.
+Updated checkpoint: first14 complete and valid. D3 P/K1 are open300s with
+gaps.003514042/.001198895; BDS-C certifies in138.968s. C2 P is open300s,
+U.829963413/L.771071520/gap.058891893; BDS-C certifies the same U in113.875s.
+Original C2 K1-R launch15 active, then the original three D4 arms. No extra
+run/extension. All monitor cells through1864 finished; exec26444 active.
+Two git transport failures and successful third push preserved. No solver
+failure/rerun. Final joint/actual Start audit and packaging remain pending.
+Read long_role_review.md: D6 is a K1/P proof deficit (not K1 protection), D7
+is protection. This corrects one imprecise prospective R78 sentence; closed
+historical evidence is unchanged and no long experiment is yet admitted.
