@@ -2642,6 +2642,10 @@ std::string resultToJson(const SolveResult& input) {
     out << "  \"decoded_descent_seeds_completed\": " << result.decoded_descent_seeds_completed << ",\n";
     out << "  \"decoded_descent_passes\": " << result.decoded_descent_passes << ",\n";
     out << "  \"decoded_descent_checks\": " << result.decoded_descent_checks << ",\n";
+    out << "  \"decoded_descent_cross_route_enabled\": " << (result.decoded_descent_cross_route_enabled ? "true" : "false") << ",\n";
+    out << "  \"decoded_descent_cross_route_neighbors\": " << result.decoded_descent_cross_route_neighbors << ",\n";
+    out << "  \"decoded_descent_cross_route_checks\": " << result.decoded_descent_cross_route_checks << ",\n";
+    out << "  \"decoded_descent_cross_route_moves\": " << result.decoded_descent_cross_route_moves << ",\n";
     out << "  \"decoded_descent_log_path\": " << "\"" << jsonEscape(result.decoded_descent_log_path) << "\"" << ",\n";
     out << "  \"incumbent_import_attempted\": "
         << (result.incumbent_import_attempted ? "true" : "false") << ",\n";

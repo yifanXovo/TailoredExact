@@ -50,6 +50,9 @@ public:
         long long pass = 0;
         size_t neighbors = 0;
         size_t full_evaluations = 0;
+        size_t cross_route_neighbors = 0;
+        size_t cross_route_evaluations = 0;
+        bool accepted_cross_route = false;
         bool accepted = false;
         bool exhausted = false;
         bool interrupted = false;
@@ -1308,6 +1311,9 @@ private:
                 row.fitness_before = ind.fitness;
                 vector<GuidedCandidate> candidates = build_guided_candidates(ind);
                 row.neighbors = candidates.size();
+                row.cross_route_neighbors = static_cast<size_t>(std::count_if(
+                    candidates.begin(), candidates.end(),
+                    [](const GuidedCandidate& candidate) { return candidate.route_b >= 0; }));
                 for (const auto& cand : candidates) {
                     if (interrupted()) { row.interrupted = true; break; }
                     vector<int> chrom = routes_to_chromosome(cand.routes);
@@ -1315,12 +1321,14 @@ private:
                     if (!isfinite(decoded.objective_value))
                         throw std::runtime_error("Decoded descent neighbor has nonfinite fitness");
                     ++row.full_evaluations;
+                    if (cand.route_b >= 0) ++row.cross_route_evaluations;
                     if (decoded.objective_value > ind.fitness + 1e-12) {
                         ind.routes = cand.routes;
                         ind.chrom = std::move(chrom);
                         ind.fitness = decoded.objective_value;
                         ind.decoded_ops = decoded.Y_Oper_best;
                         row.accepted = true;
+                        row.accepted_cross_route = cand.route_b >= 0;
                         row.accepted_proxy_fitness = cand.approx_fitness;
                         publish(ind);
                         break;

@@ -276,11 +276,13 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
     // shares the original proof controller, not the historical HGA stopping
     // contract. Keep unrelated historical variants restricted to hga_full.
     const bool decoded_descent =
-        options.algorithm_preset == "research-round70-vds-descent" &&
+        ((options.algorithm_preset == "research-round70-vds-descent" &&
+          options.primal_heuristic_stop == "decoded-descent") ||
+         (options.algorithm_preset == "research-round71-vds-interroute-descent" &&
+          options.primal_heuristic_stop == "decoded-descent-interroute")) &&
         options.round34_c6_startup_variant == "hga-full" &&
         options.primal_heuristic == "hga-tgbc" &&
         options.primal_heuristic_seed == 20260626u &&
-        options.primal_heuristic_stop == "decoded-descent" &&
         options.primal_heuristic_runs == 24;
     const bool simple_start =
         options.round34_c6_startup_variant == "simple-start" &&

@@ -1,5 +1,18 @@
 # Unified exact BRP research — resume here
 
+Active stage: Round71 on codex/round71-interroute-descent, based on Round70
+final1cf8381206edd5925eca0b03185ac1cd7dc99d2a / draft PR131. Read
+results/unified_exact_round71/plan.md, mathematics.md and status.md.
+DS-X enables existing finite cross-route tail relocation within24-seed decoded
+descent, retaining VD-S proof. First build and49/49 new tests passed, including
+two actual CLI certificates. The new unit decoded74 cross-route candidates
+and accepted67 moves. Qualification uses39 native calls, independent of the
+planned six micros and25 performance runs. No experiments have started yet.
+D7 is predeclared1200 for all four arms because old600 HGA controls never
+reached proof. Other roles retain120/300/600 caps. Maximum10560 experiment
+seconds, no repeat/confirmation/3600 extension opened. No measured code may
+change after the new freeze. Never rerun old packagers against this source.
+
 Latest completed stage: Round70 on codex/round70-vds-descent, based on Round69
 final b87850c474c8cb9ac45b65f881ebc629bb137f24. Draft PR131 is published:
 https://github.com/yifanXovo/TailoredExact/pull/131 . Evidence commit
