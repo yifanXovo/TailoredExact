@@ -19,3 +19,9 @@ certified; D3 P-GRB (launch10) active. E7 P/BDS/K1 walls1.422/1.235/5.750s;
 S12 5.657/1.812/40.734s; N12 4.281/1.391/7.438s. These are normal endpoint
 checks; final joint/actual-vector audits remain pending. Prepared analyzer,
 mechanism and package scripts have not been executed. No heavy overlap.
+
+Updated checkpoint: first11 complete and valid. D3 P-GRB normal297.062s, U.045054162/L.041540120, uncertified. D3 BDS-C
+certifies in138.968s, original F.045001550056. Original D3 K1-R launch12
+is active near its300s cap. C2/D4 six arms remain. All monitor cells through
+1856 are finished; exec26444 remains active. Two git transport failures are
+preserved in push_attempts.json; no solver failure or rerun.
