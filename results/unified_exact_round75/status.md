@@ -1,4 +1,4 @@
-# Round75 evidence complete - publication pending
+# Round75 complete - draft PR136 open
 
 The five fresh QDS-X starters accept zero quantity moves and are byte-canonical
 route-identical to their JDS-X controls. All25 descent paths match. D6/D7
@@ -9,7 +9,12 @@ ten startup runs32.843s/zero Optimize, and two offline oracles0.849162s.
 All793 selected raw files in3 bundles pass per-member verification. No build,
 optimizer, startup driver or package process remains; sessions56198/74523/15544
 all ended. No full-performance or confirmation run was admitted.
-Next publish a new draft PR, then separately admit a changed neighborhood.
+Draft PR136: https://github.com/yifanXovo/TailoredExact/pull/136 .
+Connector headff65be994a3ebe509aa5696e0eb236d47928e067 has the exact local
+publication treef78bb2aa36f6ccf9243fb615b73d4214eb6e080e. Original measured
+commits remain in codex/round75-measured-history and measured_history.bundle.
+The active local published branch now has the exact remote commit. Next
+separately admit a changed neighborhood.
 Ordinary usage71% remaining; no reset consumed. Overall goal active/unmet.
 
 The following earlier checkpoints are historical and do not override closure.

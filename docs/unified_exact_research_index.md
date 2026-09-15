@@ -1,6 +1,6 @@
 # Unified exact BRP research - resume here
 
-Latest evidence-complete stage: Round75, codex/round75-physical-quantity-descent,
+Latest completed stage: Round75, codex/round75-physical-quantity-descent,
 based on R74 final ac06e8a4efc3203db55fd64795ed89d1528c9322. Read
 results/unified_exact_round75/final_report.md, status.md and stage_decision.json.
 Default-off QDS-X exhaustively scans physical single/pair quantity changes after
@@ -10,8 +10,13 @@ without improvement. No full-performance extension/confirmation is admitted.
 V1 passes55/56 and exposes a missing outer preset whitelist; V2 registers the
 explicit preset and passes56/56 including actual native Start/certificate checks.
 Total qualification201.148s/186 Optimize plus ten startup runs32.843s/zero
-Optimize.793 raw files in3 verified bundles; all processes ended. Draft PR
-publication pending. Overall goal active/unmet; usage71% remaining, no reset.
+Optimize.793 raw files in3 verified bundles; all processes ended. Draft PR136:
+https://github.com/yifanXovo/TailoredExact/pull/136 . Connector evidence head
+ff65be994a3ebe509aa5696e0eb236d47928e067 is tree-identical to local publication
+head3fbedb185519207aa4f51f07d0606100be27f54d. Original measured commits remain
+in codex/round75-measured-history and measured_history.bundle; active published
+branch has the exact reconstructed remote commit. Overall goal active/unmet;
+usage71% remaining, no reset.
 Next investigate a changed route/assignment or larger quantity neighborhood;
 local optimality does not prove a unique cause. No next-stage allocation yet.
 Original dirty E:/codes/ExactEBRP remains untouched.

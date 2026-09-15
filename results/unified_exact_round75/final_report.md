@@ -8,10 +8,11 @@ enumerated, but does not repair the D7 startup deficit. The overall unified
 exact-algorithm goal remains unmet.
 
 Base: closed R74 ac06e8a4efc3203db55fd64795ed89d1528c9322 / draft PR135.
-Branch: codex/round75-physical-quantity-descent. Independent draft publication
-will be recorded in publication.json. No main merge or default change.
+Branch: codex/round75-physical-quantity-descent. Draft PR136:
+https://github.com/yifanXovo/TailoredExact/pull/136 . publication.json records
+the verified evidence head and exact tree. No main merge or default change.
 Four ordinary Git transport failures require a connector publication. Its file
-tree will be checked against the local tree; measured_history.bundle preserves
+tree was checked against the local tree; measured_history.bundle preserves
 the original measured commits. This changes transport, not experiment identity.
 
 ## Method and actual evidence
