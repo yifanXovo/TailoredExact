@@ -11,7 +11,27 @@ def read(p):return json.loads(Path(p).read_text(encoding='utf-8'))
 
 
 def campaign_summary():
-    return read(OUT/'summary.json')
+    summary=read(OUT/'summary.json')
+    path=OUT/'supervisor_scope_correction.json'
+    if path.exists():
+        correction=read(path)
+        assert correction['independent_checks_passed'] and correction['number']==2 and correction['arm']=='JDS-C'
+        assert correction['original_summary_sha256']==sha(OUT/'summary.json')
+        row=summary['records'][1]
+        assert row['audit']==correction['original_audit'] and not row['audit']['passed']
+        row['raw_supervisor_audit']=row['audit'];row['audit']=correction['validated_audit']
+        summary['supervisor_scope_correction_sha256']=sha(path)
+    path=OUT/'continuation_summary.json'
+    if path.exists():
+        resumed=read(path);identity=read(OUT/'continuation_identity.json')
+        assert identity['original_summary_sha256']==sha(OUT/'summary.json')
+        assert identity['correction_sha256']==summary['supervisor_scope_correction_sha256']
+        assert resumed['records'][:2]==summary['records']
+        assert [r['number'] for r in resumed['records']]==[1,2,3]
+        assert sha(ROOT/'scripts/round77_continue.py')==identity['driver_sha256']
+        resumed['supervisor_scope_correction_sha256']=summary['supervisor_scope_correction_sha256']
+        return resumed
+    return summary
 
 
 def gap_fields(endpoint):
@@ -136,6 +156,8 @@ def main():
         normal_returned_runs=sum(d['stop_reason']=='normal_return' for d in summary['records']),
         relative_gap_definition='(U-L)/abs(U) for an available nonzero U; otherwise null. Signed differences retained.',
         original_summary_sha256=sha(OUT/'summary.json'),
+        continuation_summary_sha256=sha(OUT/'continuation_summary.json'),
+        supervisor_scope_correction_sha256=summary['supervisor_scope_correction_sha256'],
         wall_seconds=time.perf_counter()-started,optimizer_calls_in_this_audit=0,script_sha256=sha(__file__))
     write(OUT/'audit.json',audit)
     print(json.dumps(dict(audit=audit,endpoints=endpoint_checks,protection=protection),indent=2))
