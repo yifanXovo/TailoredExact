@@ -1,5 +1,17 @@
 # Unified exact BRP research - resume here
 
+Current active stage: Round73, codex/round73-joint-insertion, based on local
+Round72 closure db7976fe94627c00d76d50c0adfed11223fbf646. Read
+results/unified_exact_round73/plan.md. Initial tranche only: one qualified
+build/test batch, at most10 UB-only startup diagnoses (30s each, zero Optimize)
+and6 separately declared native persistence/termination diagnoses (30s each).
+No formal performance/long/confirmation campaign is opened yet. Main hypothesis:
+joint insertion of unvisited stations and integer service quantities; execution
+prerequisite: durable physical/global-scope evidence under whole-run deadline.
+Round72 commit publication is pending Git connection recovery; PR133 description
+already reflects failure/closure. Current ordinary use allowed90% remaining,
+no reset credit consumed. No optimizer currently active.
+
 Latest completed stage: Round72, codex/round72-vdsx-validation, based on
 Round71 final73ce04d9a3c5031c2b5a1021523502f0a9a85168. Draft PR133:
 https://github.com/yifanXovo/TailoredExact/pull/133 . Read
