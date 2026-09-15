@@ -7,11 +7,29 @@ DS-X enables existing finite cross-route tail relocation within24-seed decoded
 descent, retaining VD-S proof. First build and49/49 new tests passed, including
 two actual CLI certificates. The new unit decoded74 cross-route candidates
 and accepted67 moves. Qualification uses39 native calls, independent of the
-planned six micros and25 performance runs. No experiments have started yet.
+planned six micros and25 performance runs. Six micros and nine small-instance
+performance runs now pass the full audit:15 runs,67 Optimize calls,20.530s.
+DS-X certifies E7/S12/N12 in1.172/2.125/1.422s, preserving DS startup gains.
+Small-screen checkpoint cdeac43c8957178458aac9a9b5568e3b97ecdc79 is pushed.
+The frozen source is3867214f480d0a4fef4d77f03404f9fd89fb8b42, binary4f60ed8c.
+D7 four-arm1200s screen is now fully audited: P/DS/DS-X/K1-R gaps are
+0.080034387/0.114881641/0.074188972/0.018286596, all open. DS-X materially
+improves DS, but its P advantage is below threshold and it loses most K1
+protection. New cross-route checks298/moves178 execute; startup9.380s supplies
+verifiedU0.544511 versus K1's U0.215644 after612.421s. All19 experiments cost
+4808.951s/82 Optimize calls.65 witness-model checks,10 actual Starts and300
+compact artifacts pass. Continue the predeclared panel, first D6 then D3/C2/D4;
+see screen_decision.json. No optimizer active at this checkpoint. Use the
+process ledger/progress helper to recover later launches without duplicates.
 D7 is predeclared1200 for all four arms because old600 HGA controls never
 reached proof. Other roles retain120/300/600 caps. Maximum10560 experiment
 seconds, no repeat/confirmation/3600 extension opened. No measured code may
 change after the new freeze. Never rerun old packagers against this source.
+Current ordinary usage permits work with5% weekly remaining; no reset used.
+One optional reset-credit authorization question is pending, with no answer
+yet. Do not redeem a credit without explicit authorization; ordinary work continues.
+Round71 draft PR is pending the substantive screen/stage decision. Resume at
+the current run boundary, not the older completed-stage status text below.
 
 Latest completed stage: Round70 on codex/round70-vds-descent, based on Round69
 final b87850c474c8cb9ac45b65f881ebc629bb137f24. Draft PR131 is published:

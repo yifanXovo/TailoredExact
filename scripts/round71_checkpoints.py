@@ -80,7 +80,7 @@ def main():
     records.sort(key=lambda r:(int(r['number']),int(r['checkpoint'])))
     audit.table('within_run_checkpoints.csv',records)
     scope=run.read(run.OUT/'checkpoint_scope.json')
-    scope.update(round70_wrapper_sha256=run.sha(__file__),hga_provenance_helper_sha256=run.sha(hga.__file__),
+    scope.update(round71_wrapper_sha256=run.sha(__file__),hga_provenance_helper_sha256=run.sha(hga.__file__),
         records=len(records),startup_deadline_runs=len(startup),
         current_package_sha256=run.sha(package.__file__),
         DS_clock='Synchronous verified-event hash plus decoded_descent_complete phase, never generation0',

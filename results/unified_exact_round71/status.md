@@ -15,10 +15,24 @@ E7/S12/N12 in1.172/2.125/1.422s; P in1.313/5.140/3.891s, DS in1.172/2.156/1.437s
 Two cross-route moves execute on E7; single-vehicle roles have none. Source,
 parameters, driver, plan and measured binary unchanged.
 
-Next launch the four predeclared D7 arms P-GRB/DS/DS-X/K1-R at1200s, then audit
-and review the remaining D6/D3/C2/D4 panel under plan.md. No additional launch
-or confirmation is authorized by this checkpoint. Never run old-stage packagers
+The D7 four-arm1200s screen is complete and fully audited. P/DS/DS-X/K1-R gaps
+are0.080034387/0.114881641/0.074188972/0.018286596; all are open. DS-X improves
+DS materially, while its7.3% P gap reduction is below the frozen threshold.
+It preserves only9.5% of K1's P-relative gap advantage, a serious open problem.
+DS-X startup9.380493s supplies verifiedU0.544510590,39 served stations,298
+cross-route checks and178 accepted moves. K1-R startup612.421181s supplies
+U0.215644075 and50 served stations. The full screen has no validity failures.
+Completed19 experiments cost4808.951s/82 Optimize calls;65 witness/model checks,
+10 actual accepted/observed Starts,12 checkpoints and300 compact artifacts pass.
+Read d7_screen.md and screen_decision.json. No optimizer is active at this
+checkpoint. Continue the original remaining panel, first D6 P/DS/DS-X at600,
+then D3/C2/D4 at300 if the current bounded stage remains informative.
+
+No extra repeat, extension or confirmation is opened. Never run old-stage packagers
 on the current source. The original dirty checkout and old evidence are intact.
-Overall goal unmet; ordinary usage last allowed with12% weekly remaining.
-No reset, subagents or main merge. No Round71 PR yet; save this checkpoint
-before the substantive D7 screen, then publish the completed stage separately.
+Overall goal unmet; ordinary usage last allowed with5% weekly remaining.
+One optional reset-credit authorization question is pending; no credit is used
+without an explicit answer. Current ordinary work does not depend on that answer.
+No reset, subagents or main merge. No Round71 PR yet. Small-screen checkpoint
+cdeac43c8957178458aac9a9b5568e3b97ecdc79 is pushed. Publish the completed stage
+separately after its substantive screen and panel decision.

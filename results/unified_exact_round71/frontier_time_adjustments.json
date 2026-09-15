@@ -1,0 +1,46 @@
+{
+  "adjustments": [
+    {
+      "number": 17,
+      "id": "D7",
+      "arm": "DS",
+      "first_data_row": 6,
+      "last_data_row": 44,
+      "leaf": "L0",
+      "recorded_last_callback_process_seconds": 302.2416166,
+      "following_actual_process_seconds": 1197.0556997,
+      "following_event": "incumbent_improvement",
+      "conservative_setup_and_unobserved_tail_shift_seconds": 894.8140831000001,
+      "callback_records": 39
+    },
+    {
+      "number": 18,
+      "id": "D7",
+      "arm": "DS-X",
+      "first_data_row": 6,
+      "last_data_row": 47,
+      "leaf": "L0",
+      "recorded_last_callback_process_seconds": 992.8567787,
+      "following_actual_process_seconds": 1197.0722406,
+      "following_event": "incumbent_improvement",
+      "conservative_setup_and_unobserved_tail_shift_seconds": 204.21546190000004,
+      "callback_records": 42
+    },
+    {
+      "number": 19,
+      "id": "D7",
+      "arm": "K1-R",
+      "first_data_row": 9,
+      "last_data_row": 44,
+      "leaf": "L0.0.0",
+      "recorded_last_callback_process_seconds": 1189.2420741,
+      "following_actual_process_seconds": 1197.0694646,
+      "following_event": "interruption",
+      "conservative_setup_and_unobserved_tail_shift_seconds": 7.827390499999865,
+      "callback_records": 36
+    }
+  ],
+  "optimizer_calls": 0,
+  "method": "Shift each buffered native-bound group so its last recorded improvement coincides with the subsequent actual process-clock event; this upper-bounds missing setup plus an unobserved tail",
+  "effect": "Conservative intermediate availability only. Whole-run endpoints, solver source, parameters and completed wall costs are unchanged."
+}
