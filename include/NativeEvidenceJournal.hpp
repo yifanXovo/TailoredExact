@@ -51,6 +51,7 @@ private:
     bool failed_ = false;
     std::vector<NativeEvidenceScope> calls_;
     std::vector<double> last_bounds_;
+    std::vector<bool> first_native_witness_;
     std::vector<Verification> witnesses_;
     double best_ = std::numeric_limits<double>::infinity();
 };

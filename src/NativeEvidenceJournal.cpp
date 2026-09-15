@@ -152,6 +152,7 @@ void NativeEvidenceJournal::publish(const std::string& kind,const std::string& f
 }
 long long NativeEvidenceJournal::beginCall(const NativeEvidenceScope& scope) {
     calls_.push_back(scope);last_bounds_.push_back(-std::numeric_limits<double>::infinity());
+    first_native_witness_.push_back(false);
     const auto call=static_cast<long long>(calls_.size());
     publish("call", "\"call\":"+std::to_string(call)+","+scopeJson(scope));
     return call;
@@ -163,14 +164,18 @@ void NativeEvidenceJournal::witness(const std::vector<RoutePlan>& routes,const s
         publish("witness_rejected","\"call\":"+std::to_string(call)+",\"source\":"+quoted(source));return;
     }
     // Even non-improving MIPSOL vectors may expose a contradictory local bound.
+    std::string contradiction;
     for(std::size_t i=0;i<calls_.size();++i) {
         auto all=witnesses_;all.push_back(v);
         const auto check=evaluateNativeEvidenceBound(calls_[i],last_bounds_[i],all);
-        if(check.inconsistent) {failure(check.reason);return;}
+        if(check.inconsistent) contradiction=check.reason;
     }
-    if(v.objective>=best_)return;
+    const bool first_native=call>0 && source=="native_MIPSOL_verified_original_routes" &&
+        !first_native_witness_.at(static_cast<std::size_t>(call-1));
+    const bool improving=v.objective<best_;
+    if(!improving && !first_native && contradiction.empty())return;
     std::ostringstream o; o << std::setprecision(17) << "\"call\":" << call
-      << ",\"source\":" << quoted(source) << ",\"objective\":" << v.objective
+      << ",\"source\":" << quoted(source) << ",\"improving\":" << improving << ",\"objective\":" << v.objective
       << ",\"G\":" << v.G << ",\"P\":" << v.P << ",\"routes\":[";
     for(std::size_t i=0;i<routes.size();++i) {
         const auto& r=routes[i];if(i)o << ',';
@@ -181,7 +186,9 @@ void NativeEvidenceJournal::witness(const std::vector<RoutePlan>& routes,const s
           o << "{\"station\":" << op.station << ",\"pickup\":" << op.pickup << ",\"drop\":" << op.drop << '}';}
         o << "]}";
     }
-    o << ']';publish("witness",o.str());best_=v.objective;witnesses_.push_back(std::move(v));
+    o << ']';publish("witness",o.str());best_=std::min(best_,v.objective);witnesses_.push_back(std::move(v));
+    if(first_native)first_native_witness_[static_cast<std::size_t>(call-1)]=true;
+    if(!contradiction.empty())failure(contradiction);
 }
 void NativeEvidenceJournal::nativeBound(long long call,double bound) {
     if(failed_ || !std::isfinite(bound))return;

@@ -82,14 +82,20 @@ int main(){try{
     write(root/"partial/event_4.commit","NEJ1 4 0.1 20 deadbeef");
     require(!readNativeEvidenceReceipt(root/"partial/event_4.commit",1,2,payload,why),"partial receipt rejected");
     require(!readNativeEvidenceReceipt(root/"partial/event_9.commit",1,2,payload,why),"missing receipt rejected");
-    std::filesystem::copy_file(receipt,root/"partial/event_4.commit",std::filesystem::copy_options::overwrite_existing);
-    write(root/"partial/event_4.json","corrupt\n");
-    require(!readNativeEvidenceReceipt(root/"partial/event_4.commit",1,2,payload,why),"corrupt immutable content rejected");
+    std::filesystem::create_directory(root/"corrupt");
+    std::filesystem::copy_file(receipt,root/"corrupt/event_4.commit");
+    write(root/"corrupt/event_4.json","corrupt\n");
+    require(!readNativeEvidenceReceipt(root/"corrupt/event_4.commit",1,2,payload,why),"corrupt immutable content rejected");
     bool duplicate=false;try{NativeEvidenceJournal again(in,opt);}catch(...){duplicate=true;}
     require(duplicate,"journal cannot overwrite an earlier run");
+    journal.witness(empty,"native_MIPSOL_verified_original_routes",call);
+    require(readNativeEvidenceReceipt(root/"journal/event_5.commit",1,2,payload,why)&&
+        payload.find("\"improving\":0")!=std::string::npos,"first non-improving native witness is persisted");
     journal.witness({{0,{0,1,2,0},{{1,1,0},{2,0,1}}}},"new_better_physical_witness");
     require(!journal.enabled(),"later witness also rejects previously stored contradictory bound");
-    require(readNativeEvidenceReceipt(root/"journal/event_5.commit",1,2,payload,why)&&
+    require(readNativeEvidenceReceipt(root/"journal/event_6.commit",1,2,payload,why)&&
+        payload.find("new_better_physical_witness")!=std::string::npos,"contradicting physical evidence retained");
+    require(readNativeEvidenceReceipt(root/"journal/event_7.commit",1,2,payload,why)&&
         payload.find("\"kind\":\"failure\"")!=std::string::npos,"inconsistency evidence retained");
     std::cout << checks << " scope, coverage, physical contradiction and receipt checks passed; zero Optimize calls\n";
     return 0;

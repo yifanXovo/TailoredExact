@@ -19,7 +19,7 @@ def write(path, value):
 
 def main():
     version = sys.argv[1]
-    assert version in ['v1', 'v2', 'v3', 'v4', 'v5']
+    assert version in ['v1', 'v2', 'v3', 'v4', 'v5', 'v6']
     build = ROOT / 'build/round73' / version
     assert not build.exists(), 'Never replace a prior build/test revision'
     assert subprocess.check_output(['git', 'branch', '--show-current'], cwd=ROOT).decode().strip() == 'codex/round73-joint-insertion'
