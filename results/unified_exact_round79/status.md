@@ -1,4 +1,4 @@
-# Round79 frozen; original 18-arm campaign ready
+# Round79 original campaign active
 
 Base R78 final d064fe38c14caf7f8bcc201212cd7654e99f52c1 / draft PR139,
 verified published/open/draft/unmerged. Read plan.md. No C++ or parameter change;
@@ -13,3 +13,9 @@ and driver_completion for recovery. Preserve failures; no automatic retry.
 Post-run checkpoint, physical, coverage and actual Start audits plus lossless
 bundles are due before independent stage draft PR. Overall goal remains unmet;
 ordinary usage55% remaining, no reset consumed. Original dirty checkout untouched.
+
+Live recovery: exec26444 / Python PID26312. First9 arms normal, valid and
+certified; D3 P-GRB (launch10) active. E7 P/BDS/K1 walls1.422/1.235/5.750s;
+S12 5.657/1.812/40.734s; N12 4.281/1.391/7.438s. These are normal endpoint
+checks; final joint/actual-vector audits remain pending. Prepared analyzer,
+mechanism and package scripts have not been executed. No heavy overlap.
