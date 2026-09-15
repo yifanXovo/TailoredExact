@@ -1,15 +1,20 @@
 # Unified exact BRP research — resume here
 
-Active stage: Round70 preflight on codex/round70-vds-descent, based on
+Active stage: Round70 experiments on codex/round70-vds-descent, based on
 Round69 final b87850c474c8cb9ac45b65f881ebc629bb137f24. Read
 results/unified_exact_round70/plan.md, mathematics.md and status.md.
 Finite decoded descent replaces the initial HGA search; full VD-S proof stays.
 Revision1's46 tests passed but full-CLI micros exposed an omitted backend
 startup-contract admission: two DS runs returned invalid configuration. All six
 micros and21 Optimize calls/.766s are retained in revision1_failure.json.
-No performance has started. Revision2 is in results/unified_exact_round70/revision2,
+Revision2 is in results/unified_exact_round70/revision2,
 with a fixed contract and real CLI regression test; use scripts/round70_research_v2.py
-and build/round70_v2. Qualification is underway. Never overwrite revision1 freezes.
+and build/round70_v2.47 tests/six fresh micros pass.19 revision2 runs are audited,
+13 performance+6 micro,82 Optimize calls/1039.687s,zero revision2 failures.
+E7/S12 startup losses repaired; N12 improves. D3 DS gap0.001781355 is materially
+better than P0.003475853, slightly worse than K1-R0.001160313 under the frozen
+absolute threshold, and loses VD-S's84.187s certificate. C2/D4 is the active
+queue; D6/D7's eight600-second runs remain. Never overwrite revision1 freezes.
 Stage-wide plan: at most27 performance+12 micros,9240 worst-case experiment seconds,
 uniform logical2/mask4 measurement for all newly matched arms. Own-launcher
 and child affinity qualification passed, with parent restoration and no unrelated

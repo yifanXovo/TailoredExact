@@ -132,8 +132,10 @@ def main():
     run.write(run.OUT/'evidence_manifest.json',manifest)
     identity=run.read(run.OUT/'analysis_identity.json')
     identity.update(round70_binding_and_extra_audits=run.sha(__file__),actual_start_audit=run.sha(starts.__file__),
-        inherited_packaging=identity['packaging'],reproduction=run.sha(run.__file__),
-        reproduction_scope='Frozen bounded stage launcher; refuses overwrites and undeclared runs',
+        inherited_packaging=identity['packaging'],reproduction=run.sha(run.ROOT/'scripts/round70_reproduce.py'),
+        reproduction_scope='Fresh bounded same-byte helper; not invoked as an extra campaign run',
+        light_endpoint=run.sha(run.ROOT/'scripts/round70_endpoint.py'),
+        startup_attribution=run.sha(run.ROOT/'scripts/round70_startup_analysis.py'),
         qualification_scope='47 newly executed tests, not inherited')
     run.write(run.OUT/'analysis_identity.json',identity)
     run.write(run.OUT/'source_snapshot.json',run.read(run.OUT/'build_v1.json')['source'])
