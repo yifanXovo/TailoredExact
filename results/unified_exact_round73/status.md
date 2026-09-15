@@ -1,20 +1,24 @@
-# Round73 active, initial tranche audited
+# Round73 active: two startup tranches audited; native persistence pending
 
-Read plan.md, algorithm.md, startup_checkpoint.md and seed_extension.md.
-Initial JI sourcec825be043cb1ebb5d8b1f4f0a21ff71747c7d2a4 is qualified in
-build/round73/v3,51/51 CTests. Two earlier configuration failures are retained.
-All10 startup diagnoses pass,15.438s/zero Optimize,155 lossless artifacts.
-D7 startup F improves0.5445->0.4426; D6 worsens0.1600->0.3020. No full exact
-performance comparison or independent confirmation has launched.
+Read plan.md, startup_checkpoint.md, seed_extension.md and seed_checkpoint.md.
+Latest qualified code1716206cc5967dc40dd2e41badbb2d101cadce8a, build/round73/v4,
+53/53 tests. New preset research-round73-vds-joint-seeded-descent appends one
+constructive order to unchanged24 finite DS-X seeds and retains the physical
+JI witness. All25 seeds complete on the five fresh paired startup roles.
+D3/D4/D7 initial U improve; C2/D6 retain DS-X. D7 U0.380773687462 versus
+DS-X0.544510590216 with0.750s more startup; still worse than old K1 startup.
+First24 complete logical paths match on all five pairs. No full-proof claim.
+Both tranches:20 diagnoses/46.686s/zero Optimize. Four qualification batches:
+210 native calls/386.401s, including two retained failed JI configuration
+revisions. Initial155 plus seeded177 lossless artifacts pass all audits.
 
-No optimizer/build session is active. Former sessions33312 and94711 completed.
-Do not rerun the initial diagnostic driver or overwrite v1-v3 builds. Its
-packager requires the original frozen sources; use its checkpoint commit after
-revision changes. Current work is the explicitly declared seed_extension.md:
-one constructive individual added to unchanged24 finite DS-X seeds, actual
-descent and retained physical JI witness. New isolated v4/v5 qualification and
-10 additional component diagnoses are bounded there; none has launched yet.
-Native durable deadline evidence and its six diagnostic experiments are still
-pending. No formal3600/7200 or performance panel is opened. Overall goal unmet.
-Prior Round72 PR133 publication has recovered and its exact head/base were
-freshly verified; prior_publication_verified.json contains the receipt.
+No optimizer/build is active; session65693 completed. Initial/build v1-v4
+namespaces are immutable. Do not rerun drivers or package against later
+changed sources. Latest new-source packager is round73_package_seed.py;
+initial packager only works at its older frozen checkpoint.
+Next implement and qualify durable native physical witnesses/scoped bounds,
+with full frontier coverage for global promotion. Six native diagnoses <=30s
+remain available; exact roles/commands must be recorded before launch.
+No formal performance/long/confirmation campaign opened. Stage and overall
+goal remain active. Ordinary use allowed86% remaining; no reset used.
+Round72 PR133 head/base publication is verified in prior_publication_verified.json.
