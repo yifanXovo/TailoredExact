@@ -1,6 +1,6 @@
 # Unified exact BRP research - resume here
 
-Latest evidence-complete stage: Round74 on codex/round74-jdsx-protection, based on
+Latest completed stage: Round74 on codex/round74-jdsx-protection, based on
 closed R73 final8c4129b58592d35c34f56a4beddbf18cacacbf81. Read
 results/unified_exact_round74/final_report.md, status.md and stage_decision.json.
 Four fresh D7 runs all return normally: P/DS-X/JDS-X/K1-R absolute gaps
@@ -11,7 +11,9 @@ an over-narrow native-witness guard; the separate independent scope correction
 validates K1's retained HGA UB and complete-cover LB, retaining every raw
 failure. No native rerun. Two offline-script failures also remain retained.
 Total4 runs/15 Optimize/4788.437s;1251 raw files in5 verified bundles29MB.
-No optimizer/build/package process remains. Draft PR publication is pending.
+No optimizer/build/package process remains. Draft PR135 is open:
+https://github.com/yifanXovo/TailoredExact/pull/135 . Creation verified evidence
+head8d66459421463724b71ea292bd49916fa132bfa3 and exact R73 base.
 Next separately admit physical quantity/assignment repair, not a long extension
 of this unchanged candidate. No new allocation or confirmation. Original dirty
 E:/codes/ExactEBRP remains untouched; owned worktree is ExactEBRP-round66.

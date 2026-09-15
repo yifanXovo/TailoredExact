@@ -8,8 +8,9 @@ does not offset this negative medium/large-role evidence. This validation
 stage is complete as a research result; the overall goal remains unmet.
 
 Base: R73 final8c4129b58592d35c34f56a4beddbf18cacacbf81, draft PR134.
-Branch: codex/round74-jdsx-protection. Independent draft PR publication is
-recorded in publication.json when available. No main merge or default change.
+Branch: codex/round74-jdsx-protection. Draft PR135:
+https://github.com/yifanXovo/TailoredExact/pull/135 . publication.json records
+the verified evidence head/base. No main merge or default change.
 
 ## Matched complete outcomes
 

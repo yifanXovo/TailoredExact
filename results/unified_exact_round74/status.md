@@ -1,4 +1,4 @@
-# Round74 evidence complete — publication pending
+# Round74 complete - draft PR135 open
 
 Current result: JDS-X fails D7 protection at1200s. Read final_report.md,
 campaign/endpoint_checks.json and stage_decision.json. All four optimizer
@@ -11,7 +11,9 @@ complete.1251 files in5 bundles passed full member verification.
 
 Total4 runs/15 Optimize/4788.437s;54 tests inherited, zero new builds/tests.
 Fresh ordinary resource check:74% remaining, no reset used. Overall goal
-active/unmet. Complete the independent draft PR, then separately admit the
+active/unmet. Draft PR135: https://github.com/yifanXovo/TailoredExact/pull/135 .
+Evidence head8d66459421463724b71ea292bd49916fa132bfa3 and exact R73 base
+were verified by the creation response. Separately admit the
 next physical quantity/assignment hypothesis. No long/confirmation allocation.
 
 Historical planning and live checkpoints follow; they do not override the
