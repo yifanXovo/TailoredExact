@@ -32,6 +32,13 @@ records admission and remains bound to the audited nine-run table:
 python scripts/round72_campaign.py run --ids D7
 ```
 
+After the complete serial long queue has stopped, run package, verify and
+summary again, then `python scripts/round72_checkpoints.py`. The last command
+extracts conservative300/600/1200/1800/2400/3600s points from these fresh runs
+and refuses an active queue. It adds zero optimizer calls and never joins
+historical short runs to a new long run. The gate and short-table snapshots
+remain immutable; do not rerun the gate action after the long results arrive.
+
 For a separately budgeted replay, use a new nonexistent repository-relative
 output directory. Each selected role runs all three declared arms; the exact
 caps, uniform mask4 and paid startup are unchanged. The script is provided but
