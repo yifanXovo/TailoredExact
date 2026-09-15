@@ -1,7 +1,9 @@
 # Unified exact BRP research — resume here
 
 Latest completed stage: Round70 on codex/round70-vds-descent, based on Round69
-final b87850c474c8cb9ac45b65f881ebc629bb137f24. Publication is being finalized;
+final b87850c474c8cb9ac45b65f881ebc629bb137f24. Draft PR131 is published:
+https://github.com/yifanXovo/TailoredExact/pull/131 . Evidence commit
+1a41a59c3723d91212d77d929ebfa5a47f60f717; base/head/draft verified. Continue and
 read results/unified_exact_round70/final_report.md and status.md.
 Finite decoded descent replaces initial HGA; full VD-S proof stays.47/47
 new CTests and all33 revision2 runs complete (27 performance+6 micro),133
@@ -26,7 +28,7 @@ improve service allocation, preserving small startup gains. Read next_hypothesis
 Long/confirmation proposal deferred; no new implementation or run yet. Never
 package old frozen results against later changed C++. Original dirty checkout
 untouched; no subagents/main merge/reset. Latest ordinary usage allowed,12%
-weekly remaining. Finish the independent Round70 draft PR, then continue.
+weekly remaining. Round70 publication is complete; continue bounded research.
 
 Latest completed stage: Round69, draft PR130:
 https://github.com/yifanXovo/TailoredExact/pull/130 . Evidence commit

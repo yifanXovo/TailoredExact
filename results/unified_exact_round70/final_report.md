@@ -6,6 +6,9 @@ against official P-GRB. The overall research goal is unmet. No independent
 confirmation, extra repeat or long extension was opened; all eight roles are
 exposed development data. The proposed long/confirmation campaign is deferred.
 
+Published as draft PR131: https://github.com/yifanXovo/TailoredExact/pull/131 .
+The evidence commit is1a41a59c3723d91212d77d929ebfa5a47f60f717.
+
 Baseline is Round69 final b87850c474c8cb9ac45b65f881ebc629bb137f24 / draft
 PR130. The accepted revision2 source freeze is86c35aa7fc055e784fecf7eb1a623483c6206dc8;
 executable SHA256 is2e841e23cdbc81f71b9373f35b7c82494223a7ecfbb670bcdc33f7ec2b66e6f3.

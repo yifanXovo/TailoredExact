@@ -1,6 +1,8 @@
 # Round70 complete; resume after publication
 
 Branch codex/round70-vds-descent, owned E:/codes/ExactEBRP-round66 worktree.
+Published draft PR131: https://github.com/yifanXovo/TailoredExact/pull/131 .
+Evidence commit1a41a59c3723d91212d77d929ebfa5a47f60f717; base/head/draft verified.
 Base Round69 final b87850c474c8cb9ac45b65f881ebc629bb137f24 / draft PR130.
 All declared work is complete and no optimizer queue is active. Overall goal
 remains unmet. Read final_report.md, result_tables.md and next_hypothesis.md.
@@ -44,4 +46,4 @@ Round68 checks and adds only the qualified startup-before-proof deadline case.
 Same-byte replay is provided but was not executed. Original dirty checkout
 is untouched. No subagents, unrelated affinity changes, OS service changes,
 reset redemption or main merge occurred. Latest ordinary usage allowed,
-12% weekly remaining. Publish a new draft PR, then continue bounded research.
+12% weekly remaining. Publication is complete; continue bounded research.
