@@ -1,6 +1,13 @@
 # Unified exact BRP research - resume here
 
-Current stage: Round76, codex/round76-physical-route-closure, based on published
+Current stage: Round77 on codex/round77-jdsc-protection, based on closed R76
+finalcc3bced895bc0f17c25c5bc23b3466e470d9633e / draft PR137. Read Round77
+plan.md/status.md: three fresh D7 P/JDS-C/K1-R complete-method1200s arms,
+plus one<=30s zero-Optimize reference export, unchanged qualified R76 v1.
+No rebuild/retest/retry/long/confirmation panel. Planning checkpoint; no launches
+yet. Overall goal remains active and unmet.
+
+Latest completed stage: Round76, codex/round76-physical-route-closure, based on published
 R75 final692cf9f0ef8852d4ee0d62c5ed206c081658d158 / draft PR136.
 Substantive implementation/startup screen complete, draft PR137:
 https://github.com/yifanXovo/TailoredExact/pull/137 . Evidence head2953ca8c.
