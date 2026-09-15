@@ -217,3 +217,5 @@ the same LP projection. See next_hypothesis.md. Near-zero LP-gain sensitivity
 in the D4 Q-PLUS controller is an additional open attribution issue. Declare the
 new stage's bounded resource plan before optimization; don't inherit R65 budgets.
 Overall target remains active and unmet. A stage draft PR is not completion.
+
+R73 runtime update: v6 passes54 tests; all6 native persistence diagnoses pass,32 Optimize/65.484s. Read results/unified_exact_round73/runtime_checkpoint.md and runtime_resource_summary.json. First full D3/D4 P/DS-X/JDS-X screen declared (6x300s), not yet launched; stage active.

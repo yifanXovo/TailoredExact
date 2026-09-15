@@ -1,0 +1,32 @@
+{
+  "native_diagnoses": 6,
+  "actual_optimize_calls": 32,
+  "physical_witnesses": 32,
+  "full_domain_native_bound_events": 215,
+  "negative_replay_checks": 13,
+  "artifacts": 1322,
+  "raw_bytes": 29863101,
+  "compressed_bytes": 5027984,
+  "qualification": [
+    {
+      "version": "v5",
+      "native_calls": 75,
+      "passed": false,
+      "wall_seconds": 98.86855590064079,
+      "source": "110ca82298b4ea52d2474b477fe67322b5c8f5f8"
+    },
+    {
+      "version": "v6",
+      "native_calls": 75,
+      "passed": true,
+      "wall_seconds": 98.66005170019343,
+      "source": "4ba09609cf3fb92ef29598dce8201231668324f9"
+    }
+  ],
+  "reference_builds": 3,
+  "reference_optimizer_calls": 0,
+  "reference_wall_seconds": 0.26500000013038516,
+  "wall_seconds": 6.958608399610966,
+  "all_checks_passed": true,
+  "script_sha256": "51c2460b89c3af617ae53c7f1b3b2df8185ce8388754e70f32af27223123f748"
+}

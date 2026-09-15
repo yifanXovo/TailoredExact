@@ -1,0 +1,27 @@
+{
+  "command": [
+    "E:\\codes\\ExactEBRP-round66\\build\\round73\\v6\\Round65ReferenceBuild.exe",
+    "tests/data/round59_tiny.txt",
+    "3",
+    "0",
+    "0",
+    "0.15",
+    "E:\\codes\\ExactEBRP-round66\\results\\unified_exact_round73\\runtime_revision\\reference\\microzero"
+  ],
+  "binary_sha256": "540af9bbe171b58675045259bb9ca50adb80d19ce3b6546cddbfc84a30a3dbcb",
+  "input": {
+    "id": "microzero",
+    "instance_path": "tests/data/round59_tiny.txt",
+    "input_sha256": "8794991888f65387b21ae457635e32eed7a4072e837cf8e06b17f3c9751dcd16",
+    "V": 3,
+    "M": 1,
+    "Q": 3,
+    "T_seconds": 3,
+    "pickup_seconds": 0,
+    "drop_seconds": 0,
+    "lambda": 0.15
+  },
+  "cap": 30,
+  "expected_optimize_calls": 0,
+  "plan_sha256": "6b410842ef4604d1cc5d8ed7fa24dd889c7b86c097293ddf3b1facdbc42376a6"
+}

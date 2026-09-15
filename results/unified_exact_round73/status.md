@@ -1,27 +1,22 @@
-# Round73 active: two startup tranches audited; native persistence pending
+# Round73 active — runtime prerequisite qualified
 
-Read plan.md, startup_checkpoint.md, seed_extension.md and seed_checkpoint.md.
-Latest qualified code1716206cc5967dc40dd2e41badbb2d101cadce8a, build/round73/v4,
-53/53 tests. New preset research-round73-vds-joint-seeded-descent appends one
-constructive order to unchanged24 finite DS-X seeds and retains the physical
-JI witness. All25 seeds complete on the five fresh paired startup roles.
-D3/D4/D7 initial U improve; C2/D6 retain DS-X. D7 U0.380773687462 versus
-DS-X0.544510590216 with0.750s more startup; still worse than old K1 startup.
-First24 complete logical paths match on all five pairs. No full-proof claim.
-Both tranches:20 diagnoses/46.686s/zero Optimize. Four qualification batches:
-210 native calls/386.401s, including two retained failed JI configuration
-revisions. Initial155 plus seeded177 lossless artifacts pass all audits.
+Read task_contract in Round66, docs/unified_exact_research_index.md, seed_checkpoint.md,
+runtime_checkpoint.md and formal_small_plan.md. Original dirty checkout is untouched.
 
-No optimizer/build is active; session65693 completed. Initial/build v1-v4
-namespaces are immutable. Do not rerun drivers or package against later
-changed sources. Latest new-source packager is round73_package_seed.py;
-initial packager only works at its older frozen checkpoint.
-Next implement and qualify durable native physical witnesses/scoped bounds,
-with full frontier coverage for global promotion. Six native diagnoses <=30s
-remain available; exact roles/commands must be recorded before launch.
-No formal performance/long/confirmation campaign opened. Stage and overall
-goal remain active. Ordinary use allowed86% remaining; no reset used.
-Round72 PR133 head/base publication is verified in prior_publication_verified.json.
+Latest compiled source:4ba09609cf3fb92ef29598dce8201231668324f9, build/round73/v6.
+54/54 tests pass. Source and binary are frozen in runtime_revision/identity.json.
+All6 native persistence diagnoses completed and passed; no process/build is active
+at this checkpoint. Raw and lossless archives include failed v5 qualification.
+20 startup diagnoses:46.686s/zero Optimize. Six qualification batches:583.930s/360
+native calls, three failed batches retained. Native diagnoses:65.484s/32 Optimize.
+Three build-only bindings:.265s. runtime_resource_summary.json is current;
+combined_resource_summary.json remains the earlier startup checkpoint.
 
-Draft PR134 published at audited51941dc4 checkpoint, exact base/head verified
-from creation response. Read runtime_design.md before implementing persistence.
+First full small screen is now declared in formal_small_plan.md: D3/D4 x fresh
+P/DS-X/JDS-X,6 runs at300s max, plus1 D4 no-Optimize reference. It has not
+launched yet. No medium/long/independent-confirmation panel is opened.
+
+PR134 remains draft/active; publication head53595a00b was pushed successfully.
+The stage and overall goal are not complete. Preserve original startup drivers,
+v1-v6 builds and each immutable evidence namespace. No reset credit was used;
+ordinary account usage had84% remaining at the latest query.
