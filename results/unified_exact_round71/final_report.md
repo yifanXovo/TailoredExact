@@ -6,6 +6,10 @@ the overall research goal is unmet. It preserves the measured small-instance
 and D6 gains and materially improves DS on D7, but does not establish a
 material D7 advantage over official P-GRB and loses most K1 protection there.
 
+Published as draft PR132: https://github.com/yifanXovo/TailoredExact/pull/132 .
+Evidence commit:8810393f5b2bc4d044b533fc0ab6cb14b2591cd4. Base/head/draft
+were verified on creation; no merge was requested.
+
 Base: Round70 final1cf8381206edd5925eca0b03185ac1cd7dc99d2a / draft PR131.
 Branch: codex/round71-interroute-descent. Source freeze:
 3867214f480d0a4fef4d77f03404f9fd89fb8b42. Executable SHA256:

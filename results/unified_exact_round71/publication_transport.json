@@ -1,14 +1,15 @@
 {
   "checkpoint_local_commit": "b362dcd81fbf7e6ca6686ce3a616a75505a6a31c",
-  "last_verified_remote_commit": "cdeac43c8957178458aac9a9b5568e3b97ecdc79",
-  "remote_verification": "Authenticated GitHub git-ref API read after the first two failed pushes",
-  "checkpoint_pushed": false,
+  "last_verified_remote_commit": "8810393f5b2bc4d044b533fc0ab6cb14b2591cd4",
+  "remote_verification": "Initial git-ref API read found cdeac43; successful later ordinary push and PR132 creation verified evidence head8810393, which includes the earlier checkpoint",
+  "checkpoint_pushed": true,
   "attempts": [
     {"attempt": 1, "command": "git push", "exit_code": 1, "error": "Empty reply from server"},
     {"attempt": 2, "command": "git push", "exit_code": 1, "error": "Recv failure: Connection was reset"},
-    {"attempt": 3, "command": "git -c http.version=HTTP/1.1 push", "exit_code": 1, "error": "Failed to connect to github.com port 443 after 21100 ms"}
+    {"attempt": 3, "command": "git -c http.version=HTTP/1.1 push", "exit_code": 1, "error": "Failed to connect to github.com port 443 after 21100 ms"},
+    {"attempt": 4, "command": "git push", "exit_code": 0, "head": "8810393f5b2bc4d044b533fc0ab6cb14b2591cd4"}
   ],
   "optimizer_calls": 0,
   "scope": "Publication transport only; local commit and audited solver evidence remain intact. No solver rerun, changed parameters or evidence replacement.",
-  "next_action": "Continue the already declared D6 queue, retry publication at its audit boundary; authenticated GitHub API remains available if ordinary Git transport still fails."
+  "next_action": "Resolved through ordinary Git; no Git Data API fallback was needed. PR132 is published as a draft."
 }

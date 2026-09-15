@@ -12,9 +12,10 @@ D3/C2/D4 nine predeclared experiments are unlaunched, not assumed passed.
 At closure ordinary usage was allowed with2% weekly remaining; publication
 and recovery take priority over opening that additional2700s panel. A reset
 authorization question is pending; no credit used. No optimizer active.
-Publication is pending: local checkpoint b362dcd is safe, ordinary Git transport
-failed three times while authenticated GitHub API still works. See
-publication_transport.json. Complete the new draft PR before further experiments.
+Published as draft PR132: https://github.com/yifanXovo/TailoredExact/pull/132 .
+Evidence commit8810393f5b2bc4d044b533fc0ab6cb14b2591cd4 is pushed; creation
+verified base1cf8381 and the evidence head. Ordinary Git recovered after three
+connection failures; see publication_transport.json. No merge requested.
 After resources permit, use a new stage/output identity for missing roles;
 do not mutate this closed stage or claim independent confirmation. See
 next_hypothesis.md. Earlier checkpoint details follow.

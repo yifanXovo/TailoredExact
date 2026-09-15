@@ -9,7 +9,10 @@ are unknown. Do not overwrite this closed stage to fill those cells later.
 Latest ordinary usage was allowed with2% weekly remaining, reserved for
 reviewable publication/recovery. The reset question has no explicit answer;
 no credit was used. No optimizer is active. Overall goal is unmet.
-Publish this stage as a new draft PR and preserve the transport incident record.
+Published as draft PR132: https://github.com/yifanXovo/TailoredExact/pull/132 .
+Evidence commit8810393f5b2bc4d044b533fc0ab6cb14b2591cd4 is pushed and the
+base/head/draft were verified. Ordinary Git recovered after three recorded
+connection failures; no API object-upload fallback or merge was needed.
 After resources permit, resume in a new separately identified stage as described
 in next_hypothesis.md. No automatic future execution is promised.
 
