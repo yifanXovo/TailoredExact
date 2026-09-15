@@ -1,5 +1,6 @@
 """Read-only compact progress snapshot; never a formal checkpoint or algorithm gate."""
 import json
+import csv
 import re
 import time
 from pathlib import Path
@@ -9,6 +10,9 @@ def read(p):return json.loads(p.read_text(encoding='utf-8'))
 a=read(OUT/'active_experiment.json');folder=ROOT/a['destination']
 out=dict(arm=a['arm'],launch=a['number'],elapsed_seconds=round(time.time()-a['started_unix'],1),
     campaign_lock_present=(OUT/'active_run.lock').exists(),committed_events=len(list((folder/'journal').glob('*.commit'))))
+if (folder/'phases.csv').exists():
+    with (folder/'phases.csv').open(encoding='utf-8',newline='') as f: phases=list(csv.DictReader(f))
+    if phases:out['latest_phase']={k:phases[-1].get(k) for k in ['event','status','detail']}
 if (OUT/'summary.json').exists():
     s=read(OUT/'summary.json');out['completed']=s['completed']
     out['completed_endpoints']=[dict(arm=r['arm'],valid=r['audit']['passed'],endpoint=r['audit'].get('endpoint')) for r in s['records']]

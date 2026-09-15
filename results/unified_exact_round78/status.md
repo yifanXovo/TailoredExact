@@ -20,7 +20,8 @@ closure; do not end the overall goal merely after publication.
 
 Live checkpoint: exec session85176 / owned Python PID42564 remains active.
 P-GRB completed1197.110s, validated U.277320866/L.197286479/gap.080034387.
-BDS-C is launch2; its native log has improved U to approximately.21963 but
-full physical/global endpoint is pending. K1-R is still the original pending
-third launch. Monitor cells1805/1807/1810 finished; monitor.py is read-only.
-No full-stage PR yet; full driver and post-run tools are already committed.
+BDS-C completed1197.109s, validated U.219629792/L.202758088/gap.016871704,
+78.9194% less gap than P with both bounds better; both remain uncertified.
+K1-R is the original third launch, currently in HGA startup. No early formal
+recorded U is backdated. Monitor cells1805/1807/1810/1812 finished. Final joint
+analysis, actual-vector audit, packaging and stage draft PR remain pending.
