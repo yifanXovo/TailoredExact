@@ -14,6 +14,7 @@
 #include "ReplicaExternalGiniTree.hpp"
 #include "GiniFrontierGeometry.hpp"
 #include "HgaTgbcRunner.hpp"
+#include "Round73JointInsertion.hpp"
 #include "Master.hpp"
 #include "Parser.hpp"
 #include "Pricing.hpp"
@@ -248,6 +249,16 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.algorithm_preset = "custom";
     }
     if (opt.algorithm_preset == "custom") return;
+
+    if (opt.algorithm_preset == "research-round73-vds-joint-insertion") {
+        opt.algorithm_preset = "research-round68-vdp-start";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = "research-round73-vds-joint-insertion";
+        opt.primal_heuristic = "joint-insertion";
+        opt.primal_heuristic_stop = "motif-exhaustion";
+        opt.primal_heuristic_runs = 1;
+        return;
+    }
 
     if (opt.algorithm_preset == "research-round71-vds-interroute-descent") {
         opt.algorithm_preset = "research-round70-vds-descent";
@@ -2232,6 +2243,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             "all Round 36--44 research arms off");
     }
     if (opt.primal_heuristic_stop != "generation-stagnation" &&
+        opt.primal_heuristic_stop != "motif-exhaustion" &&
         !ebrp::isDecodedDescentStopMode(opt.primal_heuristic_stop)) {
         opt.primal_heuristic_stop = "legacy-time";
     }
@@ -2249,6 +2261,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if (opt.primal_heuristic != "greedy" &&
         opt.primal_heuristic != "hga-tgbc" &&
+        opt.primal_heuristic != "joint-insertion" &&
         opt.primal_heuristic != "best-of-all") {
         opt.primal_heuristic = "none";
     }
@@ -3228,7 +3241,12 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.algorithm_preset == "research-round67-log-vdp" ||
         opt.algorithm_preset == "research-round68-vdp-start" ||
         opt.algorithm_preset == "research-round70-vds-descent" ||
-        opt.algorithm_preset == "research-round71-vds-interroute-descent";
+        opt.algorithm_preset == "research-round71-vds-interroute-descent" ||
+        opt.algorithm_preset == "research-round73-vds-joint-insertion";
+    const bool joint_insertion = opt.algorithm_preset == "research-round73-vds-joint-insertion";
+    if ((opt.primal_heuristic == "joint-insertion") != joint_insertion ||
+        (opt.primal_heuristic_stop == "motif-exhaustion") != joint_insertion)
+        throw std::runtime_error("Joint insertion requires its isolated VD-S research preset");
     if ((opt.primal_heuristic_stop == "decoded-descent") !=
         (opt.algorithm_preset == "research-round70-vds-descent") ||
         (opt.primal_heuristic_stop == "decoded-descent-interroute") !=
@@ -3677,11 +3695,14 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
                snapshot.algorithm_preset == "research-round67-log-vdp" ||
                snapshot.algorithm_preset == "research-round68-vdp-start" ||
                snapshot.algorithm_preset == "research-round70-vds-descent" ||
-               snapshot.algorithm_preset == "research-round71-vds-interroute-descent") {
+               snapshot.algorithm_preset == "research-round71-vds-interroute-descent" ||
+               snapshot.algorithm_preset == "research-round73-vds-joint-insertion") {
         snapshot.preset_certificate_scope = "k1_original_problem_with_inventory_state_product";
         snapshot.preset_experimental_features_enabled = snapshot.algorithm_preset;
         snapshot.preset_disabled_features = "round65_resource_budgets,projection,arc_load_replacement,other_research";
-        snapshot.preset_reason = ebrp::isDecodedDescentStopMode(opt.primal_heuristic_stop)
+        snapshot.preset_reason = opt.primal_heuristic == "joint-insertion"
+            ? "Full paid VD-S proof with finite joint position/quantity insertion"
+            : ebrp::isDecodedDescentStopMode(opt.primal_heuristic_stop)
             ? "Full paid VD-S proof with finite random-seed decoded local descent"
             : "Full paid K1-R with uniform one-hot or logarithmic inventory-state representation";
     } else if (snapshot.algorithm_preset == "research-k1-am-sf-vdp" ||
@@ -4814,7 +4835,8 @@ std::string jsonEscapeLocal(const std::string& value) {
 }
 
 bool isPaperTracePreset(const std::string& preset) {
-    return preset == "research-round71-vds-interroute-descent" ||
+    return preset == "research-round73-vds-joint-insertion" ||
+           preset == "research-round71-vds-interroute-descent" ||
            preset == "research-round70-vds-descent" ||
            preset == "research-round68-vdp-start" ||
            preset == "research-round67-vdp" || preset == "research-round67-log-vdp" ||
@@ -7924,6 +7946,30 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
                                     out.candidate_records);
     };
 
+    if (mode == "joint-insertion") {
+        const auto trace_path = opt.primal_heuristic_generation_log.empty()
+            ? std::filesystem::path{}
+            : std::filesystem::path(opt.primal_heuristic_generation_log + ".joint.csv");
+        const auto constructed = ebrp::runRound73JointInsertion(instance, opt, trace_path);
+        consider(constructed.routes, "round73_joint_position_quantity_insertion");
+        out.hga_stop_mode = "motif-exhaustion"; // legacy output field; no HGA executes
+        out.hga_total_generations = 0;
+        out.local_moves_tested = constructed.stats.quantity_evaluations;
+        std::ostringstream note;
+        note << "Round73 joint insertion: passes=" << constructed.stats.passes
+             << ", placements=" << constructed.stats.placements
+             << ", quantity_evaluations=" << constructed.stats.quantity_evaluations
+             << ", accepted=" << constructed.stats.accepted
+             << ", pairs=" << constructed.stats.pairs
+             << ", pickups=" << constructed.stats.single_pickups
+             << ", drops=" << constructed.stats.single_drops
+             << ", exhausted=" << constructed.stats.exhausted
+             << ", whole_run_deadline=" << constructed.stats.deadline_reached
+             << ", trace=" << trace_path.string();
+        out.notes.push_back(note.str());
+        finalizeHeuristic();
+        return out;
+    }
     if (opt.round59_simple_start) {
         consider({}, "round59_empty_routes_Y_equals_b");
         if (!out.found) {
@@ -19419,7 +19465,8 @@ int main(int argc, char** argv) {
                  opt.algorithm_preset == "research-round67-log-vdp" ||
                  opt.algorithm_preset == "research-round68-vdp-start" ||
                  opt.algorithm_preset == "research-round70-vds-descent" ||
-                 opt.algorithm_preset == "research-round71-vds-interroute-descent") &&
+                 opt.algorithm_preset == "research-round71-vds-interroute-descent" ||
+                 opt.algorithm_preset == "research-round73-vds-joint-insertion") &&
                 !ebrp::hasMetricTravelLowerBounds(instance)) {
                 throw std::runtime_error(
                     "Round67 strengthened presets require symmetric metric travel; "

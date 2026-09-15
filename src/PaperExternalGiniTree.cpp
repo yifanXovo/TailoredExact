@@ -289,7 +289,13 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         options.primal_heuristic == "greedy" &&
         options.primal_heuristic_seed == 20260626u &&
         options.primal_heuristic_no_improve_generations == 2000;
-    if ((!hga_full && !hga_light && !simple_start && !decoded_descent) ||
+    const bool joint_insertion =
+        options.algorithm_preset == "research-round73-vds-joint-insertion" &&
+        options.primal_heuristic == "joint-insertion" &&
+        options.primal_heuristic_stop == "motif-exhaustion" &&
+        options.primal_heuristic_runs == 1 &&
+        options.round34_c6_startup_variant == "hga-full";
+    if ((!hga_full && !hga_light && !simple_start && !decoded_descent && !joint_insertion) ||
         options.exact_phase_local_redecode_repair) {
         reason = "c6_startup_variant_contract_mismatch_or_local_redecode";
         return false;
