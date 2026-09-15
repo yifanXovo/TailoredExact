@@ -1,5 +1,6 @@
 """Lossless stage evidence bundles and per-member byte verification."""
 import hashlib
+import gzip
 import io
 import json
 import sys
@@ -10,7 +11,14 @@ from round78_qualify import ROOT,sha,read,write
 OUT=ROOT/'results/unified_exact_round80'
 
 def verify():
-    manifest=read(OUT/'bundle_manifest.json');count=0
+    index=read(OUT/'bundle_manifest.json')
+    member_path=OUT/index['member_manifest_file']
+    assert sha(member_path)==index['member_manifest_sha256']
+    manifest=json.loads(gzip.decompress(member_path.read_bytes()))
+    assert index['raw_files']==manifest['raw_files']
+    assert index['raw_bytes']==manifest['raw_bytes']
+    assert index['delivered_bytes']==manifest['delivered_bytes']
+    count=0
     for bundle in manifest['bundles']:
         path=ROOT/bundle['path'].replace('\\','/');assert sha(path)==bundle['sha256']
         expected={row['member']:row for row in bundle['files']}
@@ -52,7 +60,14 @@ def main():
     manifest=dict(bundles=bundles,source_scope='All six complete-run raw files and two original compact reference trees; inherited R78 qualification/startup/diagnostic bundles are referenced, not duplicated',
         raw_files=sum(len(b['files']) for b in bundles),raw_bytes=sum(r['bytes'] for b in bundles for r in b['files']),
         delivered_bytes=sum(b['bytes'] for b in bundles),script_sha256=sha(__file__))
-    write(OUT/'bundle_manifest.json',manifest)
+    member_path=OUT/'bundle_members.json.gz'
+    member_path.write_bytes(gzip.compress((json.dumps(manifest,indent=2)+'\n').encode('utf-8'),compresslevel=9,mtime=0))
+    index={k:v for k,v in manifest.items() if k!='bundles'}
+    index['bundles']=[{**{k:v for k,v in b.items() if k!='files'},'file_count':len(b['files'])} for b in bundles]
+    index.update(member_manifest_file=member_path.name,member_manifest_sha256=sha(member_path),
+        member_manifest_bytes=member_path.stat().st_size,
+        manifest_format='Full original per-member source/path/bytes/SHA256 records in gzip JSON; this index is compact.')
+    write(OUT/'bundle_manifest.json',index)
     result=verify();result['package_and_verify_seconds']=time.perf_counter()-started
     result.update({k:manifest[k] for k in ['raw_files','raw_bytes','delivered_bytes']})
     write(OUT/'delivery.json',result)
