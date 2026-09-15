@@ -1,4 +1,27 @@
-# Unified exact BRP research — resume here
+# Unified exact BRP research - resume here
+
+Latest completed stage: Round72, codex/round72-vdsx-validation, based on
+Round71 final73ce04d9a3c5031c2b5a1021523502f0a9a85168. Draft PR133:
+https://github.com/yifanXovo/TailoredExact/pull/133 . Read
+results/unified_exact_round72/final_report.md, status.md and long_failure.json.
+Nine short P/DS/DS-X runs pass: D3 DS-X cert255.360s, C2 cert111.234s, D4
+cert54.703s; all P arms open300s. Same qualified R71 bytes; no new tests.
+D3 recovers DS's certificate; C2 improves DS42.985s/27.87%.
+The admitted D7 long P-GRB run10 was killed at3610.063s without result.json
+or a retained physical endpoint. Formal UB/LB/gap unavailable; K1-R and DS-X
+long arms never launched. Session81623 terminated, child8404 gone, no active
+lock. Do not duplicate/restart it or run the all-valid aggregate packager.
+Total16 experimental attempts/5428.095s/37 native Optimize calls, including
+six diagnoses and the failed long arm; four no-opt exports0.516s.
+Frozen short tables/gate/audits remain intact. attempts.csv/root resource
+summary include the failure.15 added lossless failure/reference artifacts
+and159 short artifacts passed closure checks. No more Round72 launches.
+Next: separate stage to qualify durable whole-run deadline evidence and
+investigate direct joint insertion for D7 primal quality. See the prospective
+note. Do not package closed stages against changed source. Shared runtime
+changes require fresh controls. DS-X remains default-off; no main merge.
+Overall goal active/unmet; R71 D7 protection loss and independent confirmation
+remain open. No reset credit consumed. Older usage snapshots are historical.
 
 Latest completed research stage: Round71, closed at the resource checkpoint.
 Read results/unified_exact_round71/final_report.md, stage_decision.json and
