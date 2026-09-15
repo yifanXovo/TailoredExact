@@ -1,0 +1,42 @@
+{
+  "transport": "Git Data connector planned after four ordinary Git transport failures",
+  "local_evidence_head": "0ea9781aba59fa629c48d48bea2f6df5d6c56ba6",
+  "published_tree_equivalence_required": true,
+  "base": "ac06e8a4efc3203db55fd64795ed89d1528c9322",
+  "measured_history_bundle": {
+    "path": "results/unified_exact_round75/measured_history.bundle",
+    "bytes": 781532,
+    "sha256": "d05faf8c6f6b99f8123026798e4a6f33ec5a9adbbfa3df7d278e79dbdca59ab9",
+    "verified": true,
+    "required_base": "ac06e8a4efc3203db55fd64795ed89d1528c9322"
+  },
+  "attempts": [
+    {
+      "number": 1,
+      "session": 25962,
+      "exit_code": 1,
+      "error": "Recv failure: Connection was reset"
+    },
+    {
+      "number": 2,
+      "session": 66543,
+      "exit_code": 1,
+      "error": "Failed to connect to github.com port 443 after21073ms"
+    },
+    {
+      "number": 3,
+      "session": 64009,
+      "exit_code": 1,
+      "error": "Failed to connect to github.com port 443 after21060ms"
+    },
+    {
+      "number": 4,
+      "session": 16927,
+      "http_version": "HTTP/1.1",
+      "exit_code": 1,
+      "error": "Failed to connect to github.com port443 after21119ms"
+    }
+  ],
+  "optimizer_calls": 0,
+  "scope": "Publication transport only. Git bundle preserves original measured source/evidence commit objects; final public tree must match local publication tree byte for byte. No force update or main merge."
+}

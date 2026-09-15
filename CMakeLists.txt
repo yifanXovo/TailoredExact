@@ -22,6 +22,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Parser.cpp
   src/Evaluator.cpp
   src/Round73JointInsertion.cpp
+  src/Round75QuantityDescent.cpp
   src/Result.cpp
   src/StrictCertificate.cpp
   src/ModelCorrectness.cpp
@@ -130,6 +131,9 @@ add_test(NAME Round70DescentTests COMMAND Round70DescentTests)
 add_executable(Round71InterrouteTests tests/round71_interroute_tests.cpp)
 target_link_libraries(Round71InterrouteTests PRIVATE exact_ebrp_core)
 add_test(NAME Round71InterrouteTests COMMAND Round71InterrouteTests)
+add_executable(Round75QuantityDescentTests tests/round75_quantity_descent_tests.cpp)
+target_link_libraries(Round75QuantityDescentTests PRIVATE exact_ebrp_core)
+add_test(NAME Round75QuantityDescentTests COMMAND Round75QuantityDescentTests)
 add_executable(Round73JointInsertionTests tests/round73_joint_insertion_tests.cpp)
 target_link_libraries(Round73JointInsertionTests PRIVATE exact_ebrp_core)
 add_test(NAME Round73JointInsertionTests COMMAND Round73JointInsertionTests)
@@ -137,6 +141,11 @@ add_executable(Round73ConstructiveSeedTests tests/round73_constructive_seed_test
 target_link_libraries(Round73ConstructiveSeedTests PRIVATE exact_ebrp_core)
 add_test(NAME Round73ConstructiveSeedTests COMMAND Round73ConstructiveSeedTests)
 if(EXACT_EBRP_ENABLE_GUROBI)
+  add_test(NAME Round75QuantityDescentCliTests COMMAND ${CMAKE_COMMAND}
+    "-DEXACT_EXE=$<TARGET_FILE:ExactEBRP>"
+    "-DSOURCE_ROOT=${CMAKE_CURRENT_SOURCE_DIR}"
+    "-DOUTPUT_ROOT=${CMAKE_CURRENT_BINARY_DIR}"
+    -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/round75_quantity_descent_cli_test.cmake")
   add_test(NAME Round73ConstructiveSeedCliTests COMMAND ${CMAKE_COMMAND}
     "-DEXACT_EXE=$<TARGET_FILE:ExactEBRP>"
     "-DSOURCE_ROOT=${CMAKE_CURRENT_SOURCE_DIR}"
