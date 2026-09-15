@@ -18,6 +18,7 @@ def verify():
     assert index['raw_files']==manifest['raw_files']
     assert index['raw_bytes']==manifest['raw_bytes']
     assert index['delivered_bytes']==manifest['delivered_bytes']
+    assert index['bundles']==[{**{k:v for k,v in b.items() if k!='files'},'file_count':len(b['files'])} for b in manifest['bundles']]
     count=0
     for bundle in manifest['bundles']:
         path=ROOT/bundle['path'].replace('\\','/');assert sha(path)==bundle['sha256']
@@ -30,6 +31,7 @@ def verify():
                 data=archive.extractfile(member).read()
                 assert len(data)==row['bytes'] and hashlib.sha256(data).hexdigest()==row['sha256']
                 count+=1
+    assert count==manifest['raw_files']
     return dict(verified_files=count,bundles=len(manifest['bundles']),optimize_calls=0,extracted_files=0)
 
 def main():
