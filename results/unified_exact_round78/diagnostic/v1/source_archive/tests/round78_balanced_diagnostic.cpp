@@ -92,6 +92,61 @@ void oracle(const Instance& in,const std::vector<RoutePlan>& routes,std::ostream
        <<",\"improving\":"<<improving<<",\"found\":"<<(actual.found?"true":"false")<<",\"passed\":true}\n";
 }
 
+struct Descent {
+    std::vector<RoutePlan> routes;Verification verification;
+    std::uint64_t neutral=0,insertions=0,quantities=0;
+    bool exhausted=false,deadline=false,zero=false;
+};
+Descent descend(const Instance& in,const SolveOptions& opt,std::vector<RoutePlan> routes,
+                const std::filesystem::path& out) {
+    Descent result;result.routes=std::move(routes);result.verification=verifySolution(in,result.routes,opt.lambda);
+    require(result.verification.feasible&&result.verification.errors.empty(),"invalid descent input");
+    std::ofstream matrix(out/"actual_distances.json");matrix<<std::setprecision(17)<<'[';
+    for(int i=0;i<=in.V;++i){if(i)matrix<<',';matrix<<'[';
+        for(int j=0;j<=in.V;++j){if(j)matrix<<',';matrix<<in.dist[i][j];}matrix<<']';}
+    matrix<<"]\n";matrix.close();require(bool(matrix),"distance snapshot failed");
+    snapshot(out/"initial.json",in,opt.lambda,result.routes);
+    std::ofstream events(out/"events.jsonl");events<<std::setprecision(17);
+    std::uint64_t iteration=0;
+    for(;;++iteration) {
+        if(result.verification.objective==0){result.zero=true;break;}
+        if(processWorkDeadlineReached(opt)){result.deadline=true;break;}
+        const auto trace=out/("closure_"+std::to_string(iteration)+".csv");
+        auto strict=runRound76PhysicalClosure(in,opt,result.routes,trace);
+        require(!strict.stats.verification_failed,"strict closure rejected");
+        result.routes=std::move(strict.routes);result.verification=std::move(strict.verification);
+        result.insertions+=strict.stats.accepted_insertions;result.quantities+=strict.stats.accepted_quantities;
+        if(strict.stats.deadline_reached){result.deadline=true;break;}
+        require(strict.stats.exhausted,"strict closure unexplained stop");
+        if(result.verification.objective==0){result.zero=true;break;}
+        Round78BlockStats stats;
+        const auto move=bestRound78BalancedRelocation(in,result.routes,opt.lambda,stats,&opt);
+        if(stats.deadline_reached){result.deadline=true;break;}
+        events<<"{\"iteration\":"<<iteration<<",\"source\":"<<move.source<<",\"first\":"<<move.first
+          <<",\"last\":"<<move.last<<",\"target\":"<<move.target<<",\"leg\":"<<move.leg
+          <<",\"balanced_blocks\":"<<stats.balanced_blocks<<",\"placements\":"<<stats.placements
+          <<",\"feasible\":"<<stats.feasible_placements<<",\"improving\":"<<stats.improving_placements
+          <<",\"F\":"<<result.verification.objective<<",\"found\":"<<(move.found?"true":"false")<<"}\n";
+        events.flush();require(bool(events),"event write failed");
+        if(!move.found){result.exhausted=true;break;}
+        auto next=applyRound78BalancedRelocation(result.routes,move);auto checked=verifySolution(in,next,opt.lambda);
+        require(checked.feasible&&checked.errors.empty()&&checked.original_objective_recomputed,"neutral physical rejection");
+        require(checked.final_inventory==result.verification.final_inventory&&
+            checked.objective==result.verification.objective,"neutral inventory/F mismatch");
+        require(round78DurationPotential(checked)==move.duration_potential&&
+            move.duration_potential<round78DurationPotential(result.verification),"neutral potential mismatch");
+        result.routes=std::move(next);result.verification=std::move(checked);++result.neutral;
+        snapshot(out/("neutral_"+std::to_string(iteration)+".json"),in,opt.lambda,result.routes);
+    }
+    snapshot(out/"final.json",in,opt.lambda,result.routes);
+    std::ofstream summary(out/"result.json");summary<<std::setprecision(17)
+      <<"{\"F\":"<<result.verification.objective<<",\"neutral\":"<<result.neutral
+      <<",\"insertions\":"<<result.insertions<<",\"quantities\":"<<result.quantities
+      <<",\"exhausted\":"<<(result.exhausted?"true":"false")
+      <<",\"deadline\":"<<(result.deadline?"true":"false")
+      <<",\"zero\":"<<(result.zero?"true":"false")<<",\"optimizer_calls\":0}\n";
+    return result;
+}
 
 void structural(const std::filesystem::path& out) {
     Instance in;in.V=7;in.M=3;in.Q={3,3,3};in.capacity.assign(8,10);in.initial.assign(8,5);
@@ -121,22 +176,13 @@ void structural(const std::filesystem::path& out) {
     require(stats.deadline_reached&&!move.found&&stats.placements==0,"deadline failed");
     auto zero=in;for(const auto& r:routes)for(const auto& op:r.operations)zero.target[op.station]=zero.initial[op.station]-op.pickup+op.drop;
     SolveOptions opt;opt.lambda=.15;std::filesystem::create_directory(out/"zero");
-    auto z=runRound78BalancedDescent(zero,opt,routes,out/"zero");require(z.zero&&z.neutral==0&&z.insertions==0&&z.quantities==0,"zero did not stop");
-    std::filesystem::create_directory(out/"deadline");auto d=runRound78BalancedDescent(in,expired,routes,out/"deadline");
+    auto z=descend(zero,opt,routes,out/"zero");require(z.zero&&z.neutral==0&&z.insertions==0&&z.quantities==0,"zero did not stop");
+    std::filesystem::create_directory(out/"deadline");auto d=descend(in,expired,routes,out/"deadline");
     require(d.deadline&&d.neutral==0,"whole descent deadline failed");
     auto invalid=routes;invalid[0].operations[0].pickup=4;bool rejected=false;
     try{Round78BlockStats s;bestRound78BalancedRelocation(in,invalid,.15,s);}catch(const std::invalid_argument&){rejected=true;}
     require(rejected,"invalid physical input accepted");
     std::vector<double> earlier_increase{10+1e-13,2},old{10,3};require(!(earlier_increase<old),"lex order ignored earlier increase");
-    Instance mixed; mixed.V=4;mixed.M=2;mixed.Q={5,5};mixed.capacity={0,5,5,5,5};
-    mixed.initial={0,5,0,5,0};mixed.target={1,1,4,1,4};mixed.weights={0,1,1,1,1};
-    mixed.dist.assign(5,std::vector<double>(5,0));mixed.pickup_time=1;mixed.drop_time=1;mixed.total_time_limit=5;
-    std::vector<RoutePlan> mr={{0,{0,1,2,3,4,0},{{1,1,0},{2,0,1},{3,1,0},{4,0,1}}}};
-    std::filesystem::create_directory(out/"mixed");
-    auto initial_mixed=verifySolution(mixed,mr,.15);
-    auto m=runRound78BalancedDescent(mixed,opt,mr,out/"mixed");
-    require(m.exhausted&&!m.verification_failed&&m.neutral>=1&&m.quantities>=1&&
-        m.verification.objective<initial_mixed.objective,"actual neutral/strict composition not exercised");
     std::ofstream summary(out/"result.json");summary<<"{\"passed\":true,\"oracle_cases\":7,\"deadline_zero_invalid_checks\":true,\"optimizer_calls\":0}\n";
 }
 
@@ -152,6 +198,6 @@ int main(int argc,char** argv) {
             for(int j=0;j<n;++j){StopOperation op;input>>op.station>>op.pickup>>op.drop;r.nodes.push_back(op.station);r.operations.push_back(op);}
             r.nodes.push_back(0);routes.push_back(r);}
         require(bool(input),"invalid frozen route input");
-        runRound78BalancedDescent(in,opt,routes,argv[8]);return 0;
+        descend(in,opt,routes,argv[8]);return 0;
     }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}
 }

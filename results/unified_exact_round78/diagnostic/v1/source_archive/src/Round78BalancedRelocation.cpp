@@ -1,9 +1,5 @@
 #include "Round78BalancedRelocation.hpp"
 #include "Evaluator.hpp"
-#include "Round76PhysicalClosure.hpp"
-#include "Round61Candidates.hpp"
-#include <fstream>
-#include <iomanip>
 #include "ProcessPhaseLedger.hpp"
 #include <algorithm>
 #include <cmath>
@@ -184,81 +180,4 @@ std::vector<RoutePlan> applyRound78BalancedRelocation(const std::vector<RoutePla
     std::sort(out.begin(), out.end(), [](const RoutePlan& a, const RoutePlan& b) { return a.vehicle < b.vehicle; });
     return out;
 }
-
-Round78BalancedDescentResult runRound78BalancedDescent(const Instance& in,const SolveOptions& opt,const std::vector<RoutePlan>& routes,
-                const std::filesystem::path& out) {
-    auto require=[](bool condition,const char* why){if(!condition)throw std::runtime_error(why);};
-    Round78BalancedDescentResult result;result.routes=routes;result.verification=verifySolution(in,result.routes,opt.lambda);
-    require(result.verification.feasible&&result.verification.errors.empty()&&
-        result.verification.original_objective_recomputed,"invalid descent input");
-    if(!out.empty()) {
-    std::filesystem::create_directories(out);
-    if(std::filesystem::exists(out/"initial.json"))throw std::runtime_error("Balanced trace directory already used");
-    std::ofstream matrix(out/"actual_distances.json");matrix<<std::setprecision(17)<<'[';
-    for(int i=0;i<=in.V;++i){if(i)matrix<<',';matrix<<'[';
-        for(int j=0;j<=in.V;++j){if(j)matrix<<',';matrix<<in.dist[i][j];}matrix<<']';}
-    matrix<<"]\n";matrix.close();require(bool(matrix),"distance snapshot failed");
-    }
-    auto snapshot = [&](const std::filesystem::path& path,const Instance& instance,double lambda,const std::vector<RoutePlan>& witness) {
-        if(out.empty())return;
-        VerifiedCandidateStore store;
-        if(!store.consider(instance,lambda,witness,"round78_balanced_descent","original_problem"))
-            throw std::runtime_error("Balanced descent snapshot failed");
-        writeRound61Witness(path,instance,lambda,store.best());
-    };
-    snapshot(out/"initial.json",in,opt.lambda,result.routes);
-    std::ofstream events;
-    if(!out.empty()){events.open(out/"events.jsonl");require(bool(events),"Cannot open balanced events");events<<std::setprecision(17);}
-    std::uint64_t iteration=0;
-    for(;;++iteration) {
-        if(result.verification.objective==0){result.zero=true;break;}
-        if(processWorkDeadlineReached(opt)){result.deadline=true;break;}
-        const auto trace=out.empty()?std::filesystem::path{}:out/("closure_"+std::to_string(iteration)+".csv");
-        auto strict=runRound76PhysicalClosure(in,opt,result.routes,trace);
-        if(strict.stats.verification_failed){result.verification_failed=true;break;}
-        result.routes=std::move(strict.routes);result.verification=std::move(strict.verification);
-        result.insertions+=strict.stats.accepted_insertions;result.quantities+=strict.stats.accepted_quantities;
-        result.insertion_evaluations+=strict.stats.insertion.quantity_evaluations;
-        result.quantity_evaluations+=strict.stats.quantity.objective_evaluations;
-        if(strict.stats.deadline_reached){result.deadline=true;break;}
-        require(strict.stats.exhausted,"strict closure unexplained stop");
-        if(result.verification.objective==0){result.zero=true;break;}
-        Round78BlockStats stats;
-        const auto move=bestRound78BalancedRelocation(in,result.routes,opt.lambda,stats,&opt);
-        result.block_placements+=stats.placements;
-        if(stats.deadline_reached){result.deadline=true;break;}
-        if(events.is_open()) {
-        events<<"{\"iteration\":"<<iteration<<",\"source\":"<<move.source<<",\"first\":"<<move.first
-          <<",\"last\":"<<move.last<<",\"target\":"<<move.target<<",\"leg\":"<<move.leg
-          <<",\"balanced_blocks\":"<<stats.balanced_blocks<<",\"placements\":"<<stats.placements
-          <<",\"feasible\":"<<stats.feasible_placements<<",\"improving\":"<<stats.improving_placements
-          <<",\"F\":"<<result.verification.objective<<",\"found\":"<<(move.found?"true":"false")<<"}\n";
-        events.flush();require(bool(events),"event write failed");
-        }
-        if(!move.found){result.exhausted=true;break;}
-        auto next=applyRound78BalancedRelocation(result.routes,move);auto checked=verifySolution(in,next,opt.lambda);
-        if(!checked.feasible||!checked.errors.empty()||!checked.original_objective_recomputed||
-            checked.final_inventory!=result.verification.final_inventory||
-            checked.objective!=result.verification.objective||
-            round78DurationPotential(checked)!=move.duration_potential||
-            !(move.duration_potential<round78DurationPotential(result.verification))) {
-            result.verification_failed=true;break;
-        }
-        result.routes=std::move(next);result.verification=std::move(checked);++result.neutral;
-        snapshot(out/("neutral_"+std::to_string(iteration)+".json"),in,opt.lambda,result.routes);
-    }
-    snapshot(out/"final.json",in,opt.lambda,result.routes);
-    if(!out.empty()) {
-    std::ofstream summary(out/"result.json");summary<<std::setprecision(17)
-      <<"{\"F\":"<<result.verification.objective<<",\"neutral\":"<<result.neutral
-      <<",\"insertions\":"<<result.insertions<<",\"quantities\":"<<result.quantities
-      <<",\"exhausted\":"<<(result.exhausted?"true":"false")
-      <<",\"deadline\":"<<(result.deadline?"true":"false")
-      <<",\"zero\":"<<(result.zero?"true":"false")
-      <<",\"verification_failed\":"<<(result.verification_failed?"true":"false")<<",\"optimizer_calls\":0}\n";
-    summary.flush();require(bool(summary),"Balanced result write failed");
-    }
-    return result;
-}
-
 } // namespace ebrp

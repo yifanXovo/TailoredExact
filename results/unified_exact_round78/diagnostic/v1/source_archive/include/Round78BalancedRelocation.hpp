@@ -3,7 +3,6 @@
 #include "Instance.hpp"
 #include "Result.hpp"
 #include <cstdint>
-#include <filesystem>
 #include <vector>
 
 namespace ebrp {
@@ -24,14 +23,4 @@ Round78BlockChoice bestRound78BalancedRelocation(const Instance&,
     const SolveOptions* deadline = nullptr);
 std::vector<RoutePlan> applyRound78BalancedRelocation(const std::vector<RoutePlan>&,
     const Round78BlockChoice&);
-struct Round78BalancedDescentResult {
-    std::vector<RoutePlan> routes;
-    Verification verification;
-    std::uint64_t neutral = 0, insertions = 0, quantities = 0;
-    std::uint64_t insertion_evaluations = 0, quantity_evaluations = 0, block_placements = 0;
-    bool exhausted = false, deadline = false, zero = false, verification_failed = false;
-};
-Round78BalancedDescentResult runRound78BalancedDescent(const Instance&,
-    const SolveOptions&, const std::vector<RoutePlan>&,
-    const std::filesystem::path& trace_directory = {});
 } // namespace ebrp
