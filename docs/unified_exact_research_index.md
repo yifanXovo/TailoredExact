@@ -1,14 +1,19 @@
 # Unified exact BRP research - resume here
 
-Current active stage R79, codex/round79-bdsc-small-validation, based on
-R78 finald064fe38c14caf7f8bcc201212cd7654e99f52c1 / draft PR139.
-Read results/unified_exact_round79/status.md and plan.md. Unchanged BDS-C and
-qualified R78 binary;18 fresh serial full arms on E7/S12/N12/D3/C2/D4, each
-P/BDS-C/K1-R, common120/300s by role, at most3780s. Six zero-Optimize reference
-exports. No compile/test/rerun/long/confirmation admitted. Preserve original
-campaign ledgers and all failures. Audit and publish one substantive draft PR.
-Overall goal unmet; ordinary usage55% remaining, no reset consumed. Owned
-E:/codes/ExactEBRP-round66; original dirty checkout untouched.
+Current stage R79 complete, independent draft PR pending, on
+codex/round79-bdsc-small-validation. Base R78 final
+d064fe38c14caf7f8bcc201212cd7654e99f52c1 / draft PR139. Read R79 final_report,
+status, stage_decision and long_role_review. All18 fresh runs normal/valid;
+BDS-C certifies all6 exposed roles. P comparisons: E7 near; S12/N12 materially
+faster; D3/C2/D4 certificate gains. D4 K1 protection retained and faster.
+64 Optimize/1996.015s;9 actual Starts pass;19 verified bundles44084 files.
+No solver failure/rerun/new build/test. No neutral moves in this panel; N12
+has2 inherited quantity moves. All processes ended. Publish against R78.
+Then separately admit E8 and common3600 D6 proof-deficit validation. D7 long
+protection/independent confirmation still needed. No new experiment admitted.
+Overall goal unmet, no reset consumed. Owned E:/codes/ExactEBRP-round66;
+original dirty checkout untouched. D6 is a P proof-deficit role, not K1
+protection; see explicit historical-scope correction in long_role_review.md.
 
 Current completed stage R78, published as draft PR139, on
 codex/round78-balanced-block-descent. Base R77 final

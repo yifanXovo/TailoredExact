@@ -1,32 +1,25 @@
-# Round79 original campaign active
+# Round79 closed; independent draft PR pending
 
-Base R78 final d064fe38c14caf7f8bcc201212cd7654e99f52c1 / draft PR139,
-verified published/open/draft/unmerged. Read plan.md. No C++ or parameter change;
-reuse build/round78/v1, source4a0561e0f8193e3e874c1bd0bfa8bc381fb66f5e.
-Exactly18 serial full runs E7,S12,N12,D3,C2,D4, each P/BDS-C/K1-R in that order;
-first3 roles120s, last3 roles300s, total<=3780s, six zero-Optimize P references.
-No new build/test/rerun/extension/confirmation. No overlapping heavy work.
-Campaign driver round79_research.py must be committed before launch.
+Read final_report.md, stage_decision.json, reproduce.md and long_role_review.md.
+All18 original runs normal and valid. BDS-C certifies E7/S12/N12/D3/C2/D4;
+P certifies first3 only, K1 first3 plus D4. P comparisons: E7 practically close,
+S12/N12 material time gains, D3/C2/D4 certificate gains. D4 BDS-C52.922s vs
+K1 135.172s; D3/C2 BDS-C138.968/113.875s while P/K1 remain open300s.
+The stage validates the unchanged unified candidate, not a neutral-move effect:
+no neutral moves here, two inherited quantity moves on N12. All6 actual outer
+handoffs and all25 paths validated;9 actual Start vectors/models/readback and
+native acceptance pass. All18 coverage/physical/normal-certificate audits pass.
 
-Inspect campaign/identity.json, processes.jsonl, summary.json, active_experiment
-and driver_completion for recovery. Preserve failures; no automatic retry.
-Post-run checkpoint, physical, coverage and actual Start audits plus lossless
-bundles are due before independent stage draft PR. Overall goal remains unmet;
-ordinary usage55% remaining, no reset consumed. Original dirty checkout untouched.
+64 actual Optimize calls all returned;1996.015s paid wall. No build/test/solver
+failure/supervisor exception/rerun. Two transport failures, then ordinary push
+succeeded.19 verified bundles44084 files. All optimizer/build/package processes
+ended; exec26444 and90013 closed. No pending monitor cell. Commit and publish
+this stage against R78 finald064fe38c14caf7f8bcc201212cd7654e99f52c1 / PR139.
+No main merge. Qualified source4a0561e0f8193e3e874c1bd0bfa8bc381fb66f5e,
+unchanged build/round78/v1 SHA2563fae847a75c3c9d07d8f5f0444daeafb73559865e6bffb816746802b9e2f43ab.
 
-Live recovery: exec26444 / Python PID26312. First9 arms normal, valid and
-certified; D3 P-GRB (launch10) active. E7 P/BDS/K1 walls1.422/1.235/5.750s;
-S12 5.657/1.812/40.734s; N12 4.281/1.391/7.438s. These are normal endpoint
-checks; final joint/actual-vector audits remain pending. Prepared analyzer,
-mechanism and package scripts have not been executed. No heavy overlap.
-
-Updated checkpoint: first14 complete and valid. D3 P/K1 are open300s with
-gaps.003514042/.001198895; BDS-C certifies in138.968s. C2 P is open300s,
-U.829963413/L.771071520/gap.058891893; BDS-C certifies the same U in113.875s.
-Original C2 K1-R launch15 active, then the original three D4 arms. No extra
-run/extension. All monitor cells through1864 finished; exec26444 active.
-Two git transport failures and successful third push preserved. No solver
-failure/rerun. Final joint/actual Start audit and packaging remain pending.
-Read long_role_review.md: D6 is a K1/P proof deficit (not K1 protection), D7
-is protection. This corrects one imprecise prospective R78 sentence; closed
-historical evidence is unchanged and no long experiment is yet admitted.
+Overall goal unmet. E8 small regression check, D6 actual K1/P long proof deficit,
+D7 common3600 protection and unadapted confirmation remain. long_role_review
+corrects the imprecise R78 prospective D6 label; retain closed history. Next
+allocation only after publication and fresh resource check. No reset consumed;
+original dirty checkout untouched, owned E:/codes/ExactEBRP-round66.
