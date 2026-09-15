@@ -278,7 +278,8 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
     const bool decoded_descent =
         ((options.algorithm_preset == "research-round70-vds-descent" &&
           options.primal_heuristic_stop == "decoded-descent") ||
-         (options.algorithm_preset == "research-round71-vds-interroute-descent" &&
+         ((options.algorithm_preset == "research-round71-vds-interroute-descent" ||
+           options.algorithm_preset == "research-round73-vds-joint-seeded-descent") &&
           options.primal_heuristic_stop == "decoded-descent-interroute")) &&
         options.round34_c6_startup_variant == "hga-full" &&
         options.primal_heuristic == "hga-tgbc" &&

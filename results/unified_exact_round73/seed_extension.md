@@ -43,3 +43,12 @@ If the extra seed cannot improve the relevant quality/cost tradeoff, retain
 that negative evidence and reassess direct quantity/vehicle-assignment repair.
 The first priority is the known D6/D7 startup tradeoff; full proof benefit and
 deadline persistence must still be established before a long comparison.
+
+Before execution, tail completion is fixed as follows: scan unvisited station
+IDs ascending; append each to the vehicle minimizing existing constructed
+physical duration plus the append-travel delta, updating this travel proxy.
+Ties choose the lowest vehicle index. This is only a permutation-completion
+proxy; no unverified service quantity or physical UB is assigned to a tail.
+All24 random individuals are initialized before the constructive individual
+is appended, so its creation consumes no random draws. Native tests must
+verify all25 seed terminal neighborhoods and retain the original24 traces.

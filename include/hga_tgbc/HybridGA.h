@@ -65,6 +65,22 @@ public:
     const vector<DescentPass>& get_descent_passes() const { return descent_passes; }
     int get_descent_seeds_completed() const { return descent_seeds_completed; }
     bool completed_decoded_descent() const { return descent_complete; }
+    void set_extra_descent_seed(const vector<vector<int>>& routes) {
+        if (!decoded_descent_only)
+            throw std::runtime_error("Extra constructive seed requires finite decoded descent");
+        if (routes.size() != static_cast<size_t>(instance.M))
+            throw std::runtime_error("Extra constructive seed vehicle count mismatch");
+        vector<bool> seen(instance.V + 1, false);
+        size_t count = 0;
+        for (const auto& route : routes) for (int station : route) {
+            if (station <= 0 || station > instance.V || seen[station])
+                throw std::runtime_error("Extra constructive seed must contain each station once");
+            seen[station] = true; ++count;
+        }
+        if (count != static_cast<size_t>(instance.V))
+            throw std::runtime_error("Extra constructive seed omits a station");
+        extra_descent_seed = routes;
+    }
 
     HybridGA_HGS(const InstanceData& inst,
         int ps = 24,
@@ -278,6 +294,7 @@ public:
 
 private:
     bool decoded_descent_only = false;
+    vector<vector<int>> extra_descent_seed;
     bool descent_complete = false;
     int descent_seeds_completed = 0;
     vector<DescentPass> descent_passes;
@@ -778,6 +795,15 @@ private:
             Individual ind;
             if (i < cc) ind.routes = build_constructive_individual();
             else ind.routes = chromosome_to_routes(make_random_chromosome());
+            ind.chrom = routes_to_chromosome(ind.routes);
+            pop.push_back(std::move(ind));
+        }
+        // Appending after the unchanged random initialization preserves its
+        // generator draws, seed order and local descent paths. This extra
+        // individual uses the same decoder/neighborhood as every other seed.
+        if (decoded_descent_only && !extra_descent_seed.empty()) {
+            Individual ind;
+            ind.routes = extra_descent_seed;
             ind.chrom = routes_to_chromosome(ind.routes);
             pop.push_back(std::move(ind));
         }
