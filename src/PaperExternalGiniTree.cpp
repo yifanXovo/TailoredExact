@@ -272,12 +272,22 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         options.primal_heuristic_seed == 20260626u &&
         options.primal_heuristic_stop == "generation-stagnation" &&
         options.primal_heuristic_no_improve_generations == 1000;
+    // The new startup is admitted only with its explicit frozen preset. It
+    // shares the original proof controller, not the historical HGA stopping
+    // contract. Keep unrelated historical variants restricted to hga_full.
+    const bool decoded_descent =
+        options.algorithm_preset == "research-round70-vds-descent" &&
+        options.round34_c6_startup_variant == "hga-full" &&
+        options.primal_heuristic == "hga-tgbc" &&
+        options.primal_heuristic_seed == 20260626u &&
+        options.primal_heuristic_stop == "decoded-descent" &&
+        options.primal_heuristic_runs == 24;
     const bool simple_start =
         options.round34_c6_startup_variant == "simple-start" &&
         options.primal_heuristic == "greedy" &&
         options.primal_heuristic_seed == 20260626u &&
         options.primal_heuristic_no_improve_generations == 2000;
-    if ((!hga_full && !hga_light && !simple_start) ||
+    if ((!hga_full && !hga_light && !simple_start && !decoded_descent) ||
         options.exact_phase_local_redecode_repair) {
         reason = "c6_startup_variant_contract_mismatch_or_local_redecode";
         return false;
@@ -343,7 +353,7 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         return false;
     }
     if (round47_active &&
-        (!(hga_full || (options.round59_simple_start && simple_start)) || causal != "off" || normalization != "proof" ||
+        (!(hga_full || decoded_descent || (options.round59_simple_start && simple_start)) || causal != "off" || normalization != "proof" ||
          geometry_policy != "off" ||
          options.round40_c6_ub_geometry != "off" ||
          options.round41_static_segmented_gini != "off" ||
@@ -370,7 +380,7 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         return false;
     }
     if (coarse_start != "off" &&
-        (!(hga_full || (options.round59_simple_start && simple_start)) || causal != "off" || normalization != "proof" ||
+        (!(hga_full || decoded_descent || (options.round59_simple_start && simple_start)) || causal != "off" || normalization != "proof" ||
          geometry_policy != "off" ||
          options.round40_c6_ub_geometry != "off" ||
          options.round41_static_segmented_gini != "off" ||

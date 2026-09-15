@@ -5,12 +5,11 @@ is launched, no old evidence is written, and generation clocks are not used.
 """
 import gzip,hashlib,json,re
 import package_round68 as shared
-import round70_research as run
+import round70_research_v2 as run
 import round70_start_audit as starts
 
 audit=shared.analyze_round68
 mapping=shared.round67_witness_model_audit
-legacy_analyze=audit.analyze
 
 def bind():
     shared.run=run;shared.round68_start_audit=starts
@@ -109,7 +108,8 @@ def primary_pairs():
                 practical_classification=audit.practical_classification(c,b),
                 bound_tradeoff='mixed' if (c['UB']-b['UB'])*(c['LB']-b['LB'])>1e-14 else 'aligned_or_unchanged'))
     # Micros remain correctness evidence, never performance pairs.
-    audit.table('pairs.csv',pairs)
+    if pairs:audit.table('pairs.csv',pairs)
+    else:(run.OUT/'pairs.csv').write_text('id,candidate_arm,reference,practical_classification\n',encoding='utf-8')
 
 def main():
     bind();run.assert_frozen();shared.main();extra_checks();primary_pairs()
@@ -134,8 +134,9 @@ def main():
     identity.update(round70_binding_and_extra_audits=run.sha(__file__),actual_start_audit=run.sha(starts.__file__),
         inherited_packaging=identity['packaging'],reproduction=run.sha(run.__file__),
         reproduction_scope='Frozen bounded stage launcher; refuses overwrites and undeclared runs',
-        qualification_scope='46 newly executed tests, not inherited')
+        qualification_scope='47 newly executed tests, not inherited')
     run.write(run.OUT/'analysis_identity.json',identity)
+    run.write(run.OUT/'source_snapshot.json',run.read(run.OUT/'build_v1.json')['source'])
     print('Round70 compact artifacts',len(manifest),'including uniform affinity and separate DS traces')
 
 if __name__=='__main__':main()
