@@ -1,5 +1,35 @@
 # Unified exact BRP research — resume here
 
+Latest completed stage: Round70 on codex/round70-vds-descent, based on Round69
+final b87850c474c8cb9ac45b65f881ebc629bb137f24. Draft PR131 is published:
+https://github.com/yifanXovo/TailoredExact/pull/131 . Evidence commit
+1a41a59c3723d91212d77d929ebfa5a47f60f717; base/head/draft verified. Continue and
+read results/unified_exact_round70/final_report.md and status.md.
+Finite decoded descent replaces initial HGA; full VD-S proof stays.47/47
+new CTests and all33 revision2 runs complete (27 performance+6 micro),133
+Optimize calls/6797.377s.97 model-witness checks,22 actual Starts,522 compact
+artifacts and16 conservative checkpoints pass. All new arms use logical2/mask4.
+
+DS repairs E7/S12 startup losses, improves N12 and retains C2/D4 P protection.
+D6 gap0.006996067 materially improves P0.012255293. D3 loses VD-S84.187s
+certificate; C2 is30.219s slower than VD-S. D7 is a material P regression:
+DS gap0.127888629 versus P0.093231319, despite a stronger LB. Both D7 HGA
+controls exhaust the whole deadline before exact proof, returning verified
+U0.215644075/LB0. This does not establish historical K1 protection retention.
+
+All six revision1 micros, including two DS backend-contract failures, are
+retained (21 calls/.766s). Revision2 has zero solver validity failures and two
+explicit supervisor postcondition exceptions on legal startup-only deadlines.
+No rerun, raw-tree-flag rewrite or time correction. All39 experiments total
+154 calls/6798.143s; both CTest batches add24 native calls. No optimizer active.
+
+Overall goal unmet; next hypothesis is finite tail cross-route descent to
+improve service allocation, preserving small startup gains. Read next_hypothesis.md.
+Long/confirmation proposal deferred; no new implementation or run yet. Never
+package old frozen results against later changed C++. Original dirty checkout
+untouched; no subagents/main merge/reset. Latest ordinary usage allowed,12%
+weekly remaining. Round70 publication is complete; continue bounded research.
+
 Latest completed stage: Round69, draft PR130:
 https://github.com/yifanXovo/TailoredExact/pull/130 . Evidence commit
 d37ba536a99c5dc828d7d2a7f9a11d2b2d6fe3be; remote identities verified.

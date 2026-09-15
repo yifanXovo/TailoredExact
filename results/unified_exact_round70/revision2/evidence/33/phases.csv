@@ -1,0 +1,12 @@
+sequence,process_seconds,event,status,nominal_deadline_remaining_seconds,work_deadline_remaining_seconds,detail
+0,0,"process_entry","start",599.99906750000002,596.99906739999994,"absolute process deadline origin"
+1,0.0011079,"instance_parsing_start","start",599.9988922,596.99889210000003,"reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt"
+2,0.0022785000000000001,"instance_parsing_complete","complete",599.99772159999998,596.99772150000001,"instance=cb443_V50_regional_r1_shortage_M04_Q30.txt"
+3,0.0024938,"initial_model_data_preprocessing_complete","complete",599.99750630000005,596.99750630000005,"instance data initialized; empty-route incumbent independently verified"
+4,0.0028736999999999999,"hga_start","start",599.99712629999999,596.99712629999999,"label=primary_hga;native_generation_stagnation_hga"
+5,597.16166339999995,"hga_generation_loop_complete","deadline_interrupted",2.8383367999999791,-0.16166329999998652,"label=primary_hga;generations=2463;no_improve=1724"
+6,597.17362560000004,"improving_gini_range_construction_complete","complete",2.8263745000000426,-0.17362560000003668,"lower=0.000000;upper=0.215644;complete=true"
+7,597.17370519999997,"exact_phase_not_started","deadline",2.8262948999999935,-0.17370519999997214,"conservative_lb=0;source=nonnegative_objective"
+8,597.17390899999998,"final_result_serialization_start","start",2.8260910999999851,-0.17390899999998055,""
+9,597.1748758,"final_result_serialization_complete","complete",2.8251242999999704,-0.17487579999999525,""
+10,597.17495029999998,"process_exit","complete",2.8250497000000223,-0.17495029999997769,"rc=0"
