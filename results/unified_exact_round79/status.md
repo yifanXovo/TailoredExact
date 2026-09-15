@@ -20,8 +20,11 @@ S12 5.657/1.812/40.734s; N12 4.281/1.391/7.438s. These are normal endpoint
 checks; final joint/actual-vector audits remain pending. Prepared analyzer,
 mechanism and package scripts have not been executed. No heavy overlap.
 
-Updated checkpoint: first11 complete and valid. D3 P-GRB normal297.062s, U.045054162/L.041540120, uncertified. D3 BDS-C
-certifies in138.968s, original F.045001550056. Original D3 K1-R launch12
-is active near its300s cap. C2/D4 six arms remain. All monitor cells through
-1856 are finished; exec26444 remains active. Two git transport failures are
-preserved in push_attempts.json; no solver failure or rerun.
+Updated checkpoint: first12 complete and valid. D3 P-GRB normal297.062s,
+U.045054162/L.041540120, uncertified. BDS-C certifies in138.968s, original
+F.045001550056. K1-R normal297.078s, U.045054162/L.043855266, uncertified.
+Original C2 P-GRB launch13 active; six allocated C2/D4 arms remain in total.
+All monitor cells through1856 finished; exec26444 remains active. Two git
+transport failures and successful third push are preserved in push_attempts;
+remote branch reaches76f2f2784. No solver failure or rerun. Final joint/actual
+Start-vector audit and packaging must wait until all18 original arms close.
