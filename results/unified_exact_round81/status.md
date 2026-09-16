@@ -30,3 +30,17 @@ all25 paths and prior-repeat identity, then package and publish independent
 stage draft PR. No main merge. Diverse unadapted confirmation remains unadmitted
 and necessary; overall goal unmet.43% weekly remaining, no reset consumed.
 Owned E:/codes/ExactEBRP-round66; original dirty E:/codes/ExactEBRP untouched.
+
+The source-grounded complete method is consolidated in unified_method.md;
+reproduce.md describes the offline sequence and byte verifier. Analyze and
+replication also check cross-run global-bound/physical-UB consistency without
+pooling endpoints. These processors have not executed while optimization runs.
+No extra build/test/native solve. The original driver remains the only active
+optimizer; it must not be restarted.
+
+Interim publication recovered through exact Git objects after three HTTPS
+failures and three CLI API attempts plus one connector tree error. A verified
+prefix first reached784fbd7b0, then directory-delta publication reached
+2dd0ea993dba9fb25e1172f22c039a7fd329097c, with original hashes preserved and
+non-force ref updates. publication_api/directory_deltas.json is the successful
+receipt. All publication sessions ended; the stage PR awaits campaign closure.
