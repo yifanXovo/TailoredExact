@@ -45,7 +45,7 @@ def main():
     def save():
         record['wall_seconds']=time.perf_counter()-started
         ledger.write_text(json.dumps(record,indent=2)+'\n',encoding='utf-8')
-    def api(method,path,data=None):
+    def api(method,path,data=None,missing_ok=False):
         index=len(record['requests'])+1
         command=[GH,'api','--method',method,REPO+'/'+path]
         if data is not None:
@@ -59,7 +59,9 @@ def main():
                  wall_seconds=time.perf_counter()-before,stderr=run.stderr,
                  returned_sha=result.get('sha',result.get('object',{}).get('sha')) if result else None)
         record['requests'].append(row);save()
-        if run.returncode:raise RuntimeError('GitHub API request failed; see ledger')
+        if run.returncode:
+            if missing_ok and method=='GET' and 'HTTP 404' in run.stderr:return None
+            raise RuntimeError('GitHub API request failed; see ledger')
         return result
     try:
         current=api('GET','git/ref/heads/'+BRANCH)['object']['sha']
@@ -86,6 +88,11 @@ def main():
             return entries
         def exact_tree(previous,target_tree):
             if previous==target_tree:return target_tree
+            existing=api('GET','git/trees/'+target_tree,missing_ok=True)
+            if existing is not None:
+                assert existing['sha']==target_tree
+                record.setdefault('verified_existing_trees',[]).append(target_tree);save()
+                return target_tree
             old=tree_entries(previous);new=tree_entries(target_tree)
             for name,entry in new.items():
                 before=old.get(name)
@@ -100,7 +107,13 @@ def main():
                     uploaded.add(digest)
             # Publish only immediate directory entries. Referencing unchanged
             # child trees avoids the API's recursive base-tree expansion timeout.
-            created=api('POST','git/trees',dict(tree=list(new.values())))
+            try:
+                created=api('POST','git/trees',dict(tree=list(new.values())))
+            except RuntimeError:
+                # A timeout can occur after the immutable object was stored.
+                # Read its expected hash before deciding whether the write failed.
+                created=api('GET','git/trees/'+target_tree)
+                record.setdefault('recovered_uncertain_tree_creations',[]).append(target_tree)
             assert created['sha']==target_tree,'Original subtree hash mismatch; no ref update'
             record.setdefault('verified_exact_trees',[]).append(target_tree);save()
             return target_tree
@@ -116,15 +129,23 @@ def main():
             parent=parents[0]
             base_tree=git('rev-parse',parent+'^{tree}').decode().strip()
             exact_tree(base_tree,fields['tree'])
-            created=api('POST','git/commits',dict(message=message,tree=fields['tree'],parents=parents,
-                author=identity(fields['author']),committer=identity(fields['committer'])))
+            try:
+                created=api('POST','git/commits',dict(message=message,tree=fields['tree'],parents=parents,
+                    author=identity(fields['author']),committer=identity(fields['committer'])))
+            except RuntimeError:
+                created=api('GET','git/commits/'+commit)
+                record.setdefault('recovered_uncertain_commit_creations',[]).append(commit)
             assert created['sha']==commit,'Original commit hash mismatch; no ref update'
             record.setdefault('verified_exact_commits',[]).append(commit);save()
             print(json.dumps(dict(verified_original_commit=commit)),flush=True)
         fresh=api('GET','git/ref/heads/'+BRANCH)['object']['sha']
         assert fresh==current,'Remote changed concurrently; no ref update'
         if current!=target:
-            changed=api('PATCH','git/refs/heads/'+BRANCH,dict(sha=target,force=False))
+            try:
+                changed=api('PATCH','git/refs/heads/'+BRANCH,dict(sha=target,force=False))
+            except RuntimeError:
+                changed=api('GET','git/ref/heads/'+BRANCH)
+                record['ref_read_after_uncertain_update']=True
             assert changed['object']['sha']==target
         final=api('GET','git/ref/heads/'+BRANCH)['object']['sha']
         assert final==target
