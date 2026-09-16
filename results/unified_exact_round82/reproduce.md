@@ -58,7 +58,13 @@ arms use the same legal-witness and zero-stop reliability repairs. The complete
 method is R81/unified_method.md; R82 changes no method or parameter.
 
 The original driver is scripts/round82_research.py, launched once with
-D:/msys64/ucrt64/bin/python.exe and PYTHONUTF8=1. It refuses to reuse campaign/.
+D:/msys64/ucrt64/bin/python.exe (Python3.12.7, GCC UCRT14.2.0) and PYTHONUTF8=1.
+runtime_environment.json records a readback during this same campaign. Gurobi
+uses Seed0. The inherited heuristic RNG seed is20260626 for BDS-C and K1-R
+(include/Instance.hpp and src/main.cpp feed it into HgaTgbcRunner.cpp). BDS-C
+uses24 random initial orders plus the constructive25th order; these pathway
+indices and the independent data-generation seeds are distinct from Gurobi Seed.
+No seed was changed or searched in this stage. It refuses to reuse campaign/.
 Do not restart it or rerun completed arms. A deliberate replication requires
 a separately admitted namespace and current controls, not removal of guards
 or selecting the best of repeats. No replication is admitted here.
