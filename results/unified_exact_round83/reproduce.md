@@ -58,8 +58,8 @@ binary, input and configuration hashes are in campaign. Only committed payloads
 whose completed observer read is available by the checkpoint may contribute.
 The sole whole deadline is distinct from the post-run independent audit cost.
 
-After the queue closes, scripts/round83_analyze.py and round83_mechanism.py each
-run once. They check physical/global coverage, all native calls and model
+The queue is closed; scripts/round83_analyze.py and round83_mechanism.py each
+ran once and passed. They check physical/global coverage, all native calls and model
 identity, fixed checkpoint comparisons, actual Start vectors and readback,
 all25 current paths and the available same-build startup pairs. They guard
 against replacing completed analysis outputs. Do not reinterpret acceptance
@@ -67,7 +67,7 @@ of a Start as causal performance benefit.
 
 ## Portable byte verification and replay limits
 
-After delivery.json and bundle_manifest.json exist, byte-only verification is:
+Delivery and its separate byte-only verification both passed. The review-only command is:
 
 ```powershell
 $env:PYTHONUTF8='1'
@@ -94,5 +94,6 @@ declare a bounded plan and current controls, and preserve the new identity.
 Do not remove guards or overwrite these original records. Recompilation on
 different tools is not automatically the same binary or a matched timing test.
 
-ENS-C is default-off and overall acceptance remains pending. This stage will
-be published as its own draft after complete evidence review; no main merge.
+ENS-C is default-off and overall acceptance remains pending. Stage evidence review is complete; its independent draft publication is pending.
+No main merge. All producers are closed; see next_hypothesis.md for resource-paused
+follow-up, not a command to restart this campaign.

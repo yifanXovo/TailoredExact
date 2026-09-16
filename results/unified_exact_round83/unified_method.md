@@ -255,7 +255,7 @@ protection remain necessary before overall acceptance.
 |Strict physical closure|R76 `mathematics.md`; `src/Round76PhysicalClosure.cpp`|
 |Balanced relocation|R78 `mathematics.md`; `src/Round78BalancedRelocation.cpp`|
 |Equal-net exchange and union composition|R83 `mathematics.md`; `src/Round83BlockExchange.cpp`|
-|Actual rather than intended mechanisms|R83 diagnostic/startup audits and completed full campaign mechanism audit when available|
+|Actual rather than intended mechanisms|R83 diagnostic/startup audits and completed full campaign mechanism audit|
 
 This description reuses the R81 source-grounded definition for unchanged
 components and explicitly replaces the physical neutral controller. Its
@@ -277,3 +277,8 @@ D7 startup is re-audited without rerun, and all old failed metadata remains.
 This reader change does not change the algorithm or its numerical tolerances.
 Every future use of a prior confirmation role in design changes that role to
 development for the revision. New unadapted confirmation is still required.
+
+The closed R83 screen has13 valid normal runs and50 Optimize calls. All actual
+Start/cover/physical audits pass. U6 ENS improves P gap13.5852% and retains
+88.4470% of current K1 advantage, with worse U and stronger L. This development
+result does not remove the long-protection and unadapted-confirmation requirements.
