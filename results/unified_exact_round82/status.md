@@ -1,0 +1,14 @@
+# Round82 status
+
+Active on codex/round82-bdsc-unadapted-confirmation, base R81 final298e97f5d163a54eb9d899c664cafd9f07c8647c / draft PR142.
+Pre-generation freeze commit d7e5d5fd6; all six original inputs generated once,
+zero rejected/reseeded and zero Optimize. See plan, preregistration, generation,
+protocol and scripts/round82_generate.py. Generation costs0.288694s.
+Five roles including U4/U5/U6 analytically exclude zero; U2 zero status unknown.
+Citi source overlap disclosed, no independence claim. No production/default/
+parameter/binary changes.18 serial formal arms, max34020s, not yet launched.
+Inherit R78 qualification; no new build or CTest. No automatic reruns.
+Overall goal remains unmet. Ordinary usage33% weekly remaining; no reset.
+After original queue closes, audit endpoints/checkpoints, current mechanism,
+actual Starts and all positive/negative outcomes; package once and publish a
+new independent draft PR. Never rerun completed producers or merge main.
