@@ -1,24 +1,22 @@
 # Unified exact BRP research - resume here
 
-Current stage R80, plan frozen on codex/round80-bdsc-primary-deficits,
+Current stage R80 evidence closed on codex/round80-bdsc-primary-deficits,
 based on R79 finalc29173a6cb34c299cd818310eee59844ed36d8f6 / draft PR140.
-Read R80 plan.md/status.md and R79 final_report.md/long_role_review.md.
-Six original serial arms admitted: E8 P/BDS-C/K1-R common120, then D6
-P/BDS-C/K1-R common3600. Maximum11160 process seconds, two zero-Optimize
-reference exports, no build/test. Same qualified R78 source/binary and preset.
-Original driver session54674 active: E8 all3 valid/certified at P1.781,
-BDS-C2.516, K1-R7.359s. D6 P normal/valid3597.172s, U.157241175852,
-L.150782310390, gap.006458865462, open. D6 BDS-C normal/valid3597.125s,
-U.157509803615, L.155807553801, gap.001702249813, open:73.645% P gap gain,
-worse U/stronger L. Final original K1 arm running, no further run queued.
-Joint offline/actual Start audits and packaging await closure.
-E8 two neutral moves leave F unchanged; outer retains initial route.
-Inspect R80 campaign active/summary/process files; NEVER rerun the campaign. E8 is a
-current small total-time regression; D6 is a true K1/P proof deficit, not K1
-protection. No additional experiment/confirmation admitted. Overall goal unmet;
-D7 long protection/replication and diverse unadapted confirmation remain.
-51% weekly remaining at admission, no reset. Owned E:/codes/ExactEBRP-round66;
-original dirty checkout untouched. Close R80 as independent draft PR.
+Read R80 final_report.md, status.md, stage_decision.json and reproduce.md.
+All6 original serial runs normal/valid. E8 P/BDS-C/K1-R certify at1.781/2.516/
+7.359s; BDS-C near P, current severe K1 regression repaired. D6 common3600 gaps
+P.006458865462, BDS-C.001702249813, K1-R.008766562222, all open. BDS-C gains
+73.6448% against P,80.5825% against K1, with worse U/stronger L. D6 is confirmed
+K1/P proof deficit, not K1 protection. E8 two neutral moves leave F unchanged
+and outer retains initial route; D6 two neutral/four quantity moves reach outer.
+25 Optimize/10803.094s;3 actual Starts pass;7 verified bundles19648 files.
+All audits/byte checks pass. Driver54674 exits0; all monitor/build/package
+processes ended. No build/test/solver failure/rerun. Independent draft PR still
+pending against R79; publish before any new allocation. Earlier pushes succeed.
+No main merge. Same qualified R78 source/binary. D7 common3600 protection,
+limited replication and diverse unadapted confirmation remain; overall goal
+unmet.48% weekly remaining at close, no reset. Owned E:/codes/ExactEBRP-round66;
+original dirty checkout untouched. Do not rerun a completed producer.
 
 Current completed stage R79, published as draft PR140, on
 codex/round79-bdsc-small-validation. Base R78 final

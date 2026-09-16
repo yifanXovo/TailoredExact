@@ -1,0 +1,38 @@
+{
+  "stage": 80,
+  "evidence_valid": true,
+  "architecture_admissible_default_off": true,
+  "full_method_validation_complete": true,
+  "completed_runs": 6,
+  "primary_practically_close": [
+    "E8"
+  ],
+  "primary_material_gap_improvements": [
+    "D6"
+  ],
+  "primary_material_regressions": [],
+  "current_K1_severe_P_regressions": [
+    "E8"
+  ],
+  "current_K1_material_P_gap_regressions": [
+    "D6"
+  ],
+  "D6_BDS_P_gap_reduction": 0.7364475505591057,
+  "D6_BDS_K1_gap_reduction": 0.8058247041307498,
+  "D6_primal_tradeoff": "BDS-C has worse U and stronger L than both controls; all three remain uncertified.",
+  "E8_neutral_moves": 2,
+  "E8_outer_uses_initial": true,
+  "D6_neutral_moves": 2,
+  "D6_quantity_moves": 4,
+  "D6_outer_uses_final": true,
+  "actual_optimize_calls": 25,
+  "actual_Start_decisions": 3,
+  "all_actual_Starts_valid_and_accepted": true,
+  "overall_goal_complete": false,
+  "qualified_source": "4a0561e0f8193e3e874c1bd0bfa8bc381fb66f5e",
+  "binary_sha256": "3fae847a75c3c9d07d8f5f0444daeafb73559865e6bffb816746802b9e2f43ab",
+  "independent_confirmation_opened": false,
+  "next_stage_admitted": false,
+  "next": "Publish independent draft PR, then separately admit D7 common3600 protection, limited replication and diverse unadapted confirmation.",
+  "scope": "One fresh realization on each of two exposed roles; not a causal neutral-move ablation or statistical replication."
+}
