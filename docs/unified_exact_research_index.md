@@ -10,14 +10,16 @@ pair3600, D7 trio3600; max20160 process seconds plus5 zero-Optimize references.
 Original driver session24123 active: first nine runs normal/valid. S12 trio
 certifies atP5.640/BDS-C1.797/K1-R40.594s; C2 BDS-C certifies113.469s,
 P/K1 open gaps.058891893183/.032805674652; D4 BDS-C/K1 certify52.734/134.687s,
-P open gap.311831107997. D6 P-GRB running; stage joint audit still pending.
+P open gap.311831107997. D6 P-GRB also normal/valid at3597.172s,
+U.1572411758522922/L.15078948840741413/gap.006451687444878063, open.
+D6 BDS-C running; D7 trio queued. Stage joint audit still pending.
 Other original arms queued in same driver. Inspect lock/active/summary/completion
 before any action; NEVER rerun an existing campaign. Freeze driver/plan before
 launch, keep optimizers serial and defer heavy audit until closure. Preserve
 all repeats, no best-result selection or imported R80 K1 for D6. D7 long1200
 checkpoint is not identical-cap replication. No other experiment/confirmation
 admitted. Close independent draft PR; no main merge. Overall goal unmet,
-diverse unadapted confirmation still needed.47% weekly remaining, no reset.
+diverse unadapted confirmation still needed.43% weekly remaining, no reset.
 Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.
 
 Current completed stage R80 published as draft PR141 on

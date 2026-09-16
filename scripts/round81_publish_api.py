@@ -73,6 +73,37 @@ def main():
             for request in previous.get('requests',[]):
                 if request['path']=='git/blobs' and request['returncode']==0:
                     uploaded.add(request['returned_sha'])
+        def tree_entries(tree):
+            if tree is None:return {}
+            entries={}
+            for row in git('ls-tree','-z',tree).split(b'\0'):
+                if not row:continue
+                meta,path=row.split(b'\t',1)
+                mode,kind,digest=meta.decode().split()
+                name=path.decode('utf-8')
+                assert '/' not in name and kind in ['blob','tree']
+                entries[name]=dict(path=name,mode=mode,type=kind,sha=digest)
+            return entries
+        def exact_tree(previous,target_tree):
+            if previous==target_tree:return target_tree
+            old=tree_entries(previous);new=tree_entries(target_tree)
+            for name,entry in new.items():
+                before=old.get(name)
+                if before==entry:continue
+                digest=entry['sha']
+                if entry['type']=='tree':
+                    exact_tree(before['sha'] if before and before['type']=='tree' else None,digest)
+                elif digest not in uploaded:
+                    data=git('cat-file','blob',digest)
+                    response=api('POST','git/blobs',dict(content=base64.b64encode(data).decode(),encoding='base64'))
+                    assert response['sha']==digest,'Uploaded blob is not byte-identical'
+                    uploaded.add(digest)
+            # Publish only immediate directory entries. Referencing unchanged
+            # child trees avoids the API's recursive base-tree expansion timeout.
+            created=api('POST','git/trees',dict(tree=list(new.values())))
+            assert created['sha']==target_tree,'Original subtree hash mismatch; no ref update'
+            record.setdefault('verified_exact_trees',[]).append(target_tree);save()
+            return target_tree
         for commit in commits:
             raw=git('cat-file','commit',commit)
             assert hashlib.sha1(b'commit '+str(len(raw)).encode()+b'\0'+raw).hexdigest()==commit
@@ -82,28 +113,10 @@ def main():
             fields={key:value for key,value in (line.split(' ',1) for line in lines) if key!='parent'}
             parents=[line[7:] for line in lines if line.startswith('parent ')]
             assert len(parents)==1,'Only the existing linear publication branch is supported'
-            parent=parents[0];elements=[]
-            paths=git('diff-tree','--name-only','-r','--no-commit-id','--no-renames','-z',parent,commit).split(b'\0')
-            for rawpath in paths:
-                if not rawpath:continue
-                path=rawpath.decode('utf-8')
-                entry=git('ls-tree','-z',commit,'--',path)
-                if not entry:
-                    elements.append(dict(path=path,mode='100644',type='blob',sha=None));continue
-                meta,actual_path=entry[:-1].split(b'\t',1)
-                assert actual_path==rawpath
-                mode,kind,sha=meta.decode().split()
-                assert kind=='blob','Unexpected non-blob publication change'
-                if sha not in uploaded:
-                    data=git('cat-file','blob',sha)
-                    response=api('POST','git/blobs',dict(content=base64.b64encode(data).decode(),encoding='base64'))
-                    assert response['sha']==sha,'Uploaded blob is not byte-identical'
-                    uploaded.add(sha)
-                elements.append(dict(path=path,mode=mode,type=kind,sha=sha))
+            parent=parents[0]
             base_tree=git('rev-parse',parent+'^{tree}').decode().strip()
-            tree=api('POST','git/trees',dict(base_tree=base_tree,tree=elements))
-            assert tree['sha']==fields['tree'],'Complete tree hash mismatch; no ref update'
-            created=api('POST','git/commits',dict(message=message,tree=tree['sha'],parents=parents,
+            exact_tree(base_tree,fields['tree'])
+            created=api('POST','git/commits',dict(message=message,tree=fields['tree'],parents=parents,
                 author=identity(fields['author']),committer=identity(fields['committer'])))
             assert created['sha']==commit,'Original commit hash mismatch; no ref update'
             record.setdefault('verified_exact_commits',[]).append(commit);save()
