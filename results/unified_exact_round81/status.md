@@ -54,4 +54,7 @@ non-force ref updates. publication_api/directory_deltas.json is the successful
 receipt. A later incremental timeout is retained in d6_replication_progress.json;
 d6_replication_recovery.json then verifies all three original commits and the
 non-force remote update to b5951a3dc44ea4e7276090c73ac3a2b00125cbe4 in40.034784s.
+The subsequent D7 interruption checkpoint also publishes successfully to
+aaf8de23ceaef0620c825a48667aa81f6d67385a in27.938310s;
+publication_api/d7_p_interruption.json preserves the exact-history receipt.
 All publication sessions ended; the stage PR awaits campaign closure.
