@@ -5,7 +5,7 @@ base R81 final298e97f5d163a54eb9d899c664cafd9f07c8647c / verified draft PR142.
 Read R82 plan/status/preregistration/generation/protocol. Six new unadapted
 roles fixed and committed before generation atd7e5d5fd6; no selection or
 performance screening, same R78 candidate bytes.18 serial P/BDS/K1 arms,
-maximum34020s; six no-Optimize reference exports. Queue not yet launched.
+maximum34020s; six no-Optimize reference exports. Original queue active: driver78681/PID10832; never restart. Read current summary/checkpoint.
 U4--U6 are common3600 nonzero medium/large roles. Shared Citi source and
 familiar synthetic recipes limit independence; overlap retained explicitly.
 33% weekly remaining, no reset, no main merge. Overall goal unmet.
