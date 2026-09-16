@@ -31,7 +31,8 @@ D7 BDS-C then returns normally/valid at3597.391s, U.219311768493348,
 L.20469321128735088/gap.014618557205997113, still uncertified. Its gap is
 62.2245% smaller than fresh P, with better U and L. All4 native calls return;
 startup reports4 neutral/2 insertion/44 quantity moves and full exhaustion.
-K1-R is the final active arm, initially in paid HGA startup. Thirteen arms
+K1-R is the final active arm, now in the exact phase after613.190993s paid
+startup (2739 HGA generations,2000 without improvement). Thirteen arms
 total15629.936 process seconds/.723130 separate replay,46 native calls started
 and45 returned. Twelve normal returns plus one valid within-cap hard stop.
 Read d7_p_termination.md. Joint stage replay and K1 protection remain pending.
@@ -71,3 +72,7 @@ The subsequent D7 interruption checkpoint also publishes successfully to
 aaf8de23ceaef0620c825a48667aa81f6d67385a in27.938310s;
 publication_api/d7_p_interruption.json preserves the exact-history receipt.
 All publication sessions ended; the stage PR awaits campaign closure.
+
+The thirteen-arm progress and prepared plot/reporting files also publish
+successfully to002aa711a6bc5e6a745546f4d3dd9003ae82ca68 in64.904755s;
+publication_api/d7_bdsc_endpoint.json retains the exact-history receipt.

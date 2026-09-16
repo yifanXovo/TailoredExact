@@ -21,7 +21,8 @@ uncertified and not normal return. One native call starts but does not return;
 D7 BDS-C also normal/valid at3597.391s, U.219311768493348,
 L.20469321128735088/gap.014618557205997113, open:62.2245% less P gap,
 better U and L. All4 native calls return;4 neutral/2 insertion/44 quantity
-startup moves. K1-R is the final active arm, in paid HGA startup;13 complete,
+startup moves. K1-R is the final active arm, now in exact proof after613.191s
+paid HGA startup (2739 generations/2000 without improvement);13 complete,
 15629.936 process seconds,46 native calls started/45 returned. Read R81
 d7_p_termination.md. Stage joint audit and K1 protection still pending.
 Other original arms queued in same driver. Inspect lock/active/summary/completion
