@@ -2,25 +2,26 @@
 
 Current active stage R82, codex/round82-bdsc-unadapted-confirmation,
 base R81 final298e97f5d163a54eb9d899c664cafd9f07c8647c / verified draft PR142.
-Read R82 plan/status/preregistration/generation/protocol/reproduce. Six fresh
-roles fixed before generation atd7e5d5fd6; no screening or replacement, same
-qualified R78 BDS-C bytes.18 serial P/BDS/K1 arms, maximum34020s plus six
-zero-Optimize references. Original driver78681/PID10832 remains active; never
-restart it. Latest durable checkpoint has13 completed/valid normal arms and
-U5 BDS-C active; inspect campaign/summary.json for live progress.
+Read R82 plan/status/preregistration/generation/protocol/reproduce and
+current goal_evidence_scope.md. Six roles fixed before generation atd7e5d5fd6;
+no screening/replacement, unchanged qualified R78 BDS-C bytes.18 serial
+P/BDS/K1 arms, max34020s plus six zero-Optimize references. Original driver
+78681/PID10832 remains active; never restart it. Latest durable snapshot has
+14 normal/valid completions, 18500.766s paid process wall,
+U5 K1-R active, all U6 arms unlaunched. Inspect campaign/summary.json live.
 U1 P/BDS/K1 certify3.641/.875/2.063s; U2 36.265/11.969/20.047s. U3 P remains
-open300 (gap.315606693), BDS/K1 certify61.937/81.156s. All three nonzero.
-U4 common3600 P/BDS gaps.102101449/.055711507,45.4351% primary reduction with
-worse U/stronger L. K1 gap.092950997, BDS improves it40.0636%; all three
-normal/open. U5 P ends normally at3597.141s, U.442174286/L.306494229,
-gap.135680056. U5 BDS-C active; U5 K1 and all U6 unlaunched at this checkpoint.
-Final joint audits/Start checks/plot/package pending; prepared producers must
-not be run while the original queue is active. No R82 draft PR or overall
-acceptance yet. Shared Citi geography and familiar synthetic recipes limit
-independence.25% weekly remaining, no reset, no main merge. Overall goal unmet.
-Remote through4cc87d93a verified after two HTTPS failures; exact-object recovery
-retains all original commits. See publication_api ledgers. All negative outcomes
-remain, and any later adaptation would convert these roles to development.
+open300 gap.315606693, BDS/K1 certify61.937/81.156s. All three nonzero.
+U4 common3600 P/BDS/K1 gaps.102101449/.055711507/.092950997; BDS improves
+P45.4351%, K1 40.0636%, with worse U/stronger L; all normal/open.
+U5 P/BDS gaps.135680056/.042988450; BDS improves P68.3163%
+with both U and L better; both normal/open. K1 comparison remains pending.
+Final joint/Start audits, plot, bundles and independent R82 draft PR pending.
+Prepared final producers must not run while the original queue is active.
+Familiar recipes/shared Citi geography limit independence. Any later revision
+using these outcomes converts them to development. Overall goal unmet;
+no main merge, no reset; latest readback25% weekly remaining.
+Remote throughfdc3e3054 freshly verified; exact-object publication preserves
+original commits after two HTTPS failures. See publication_api ledgers.
 
 Current R81 experiments and audits closed on
 codex/round81-bdsc-long-protection-replication, base R80 final
