@@ -69,3 +69,7 @@ scripts/round81*.py -text
 results/unified_exact_round82/** -text
 scripts/round82*.py -text
 reference/round82_unadapted_confirmation/** -text
+
+# Preserve measured Matplotlib SVG bytes, including harmless path whitespace.
+results/unified_exact_round82/figures/long_window_gaps.svg -whitespace
+results/unified_exact_round82/figures_v2/long_window_gaps.svg -whitespace

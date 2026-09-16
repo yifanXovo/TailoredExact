@@ -203,6 +203,10 @@ rendering costs1.326963s; its U5 legend/curve overlap is retained with a failed
 layout review. A separate0.572565s layout revision moves the shared legend
 outside all axes, passes visual review and has identical checkpoint bytes.
 Both images, receipts and scripts remain; no solver or audit producer is rerun.
+A generated-SVG trailing-whitespace diagnostic is preserved in metadata_check.json
+and its compressed log. A rule scoped to the two generated SVG files makes
+that harmless formatting explicit without changing recorded image bytes;
+subsequent repository whitespace checking passes.
 
 Two initial HTTPS publication failures and all exact-object recovery ledgers
 remain. Successful non-force API publication preserves original blobs, trees,
