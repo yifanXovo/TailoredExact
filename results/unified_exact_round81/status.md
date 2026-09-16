@@ -1,4 +1,4 @@
-# Round81 plan frozen; fourteen original serial runs admitted
+# Round81 original serial campaign active; S12 repeats complete
 
 Base R80 final634cf03982e71849079699848ceecc3cd19ecb72 / draft PR141,
 verified open/draft/unmerged. Branch codex/round81-bdsc-long-protection-replication.
@@ -13,7 +13,9 @@ whole deadline only. All original/repeated results retained; no best-repeat
 selection. D6 has no new K1 arm, so do not import R80 K1 into its fresh pair.
 D7 is a fresh longer-cap experiment, not identical-cap replication of R78.
 
-At this commit nothing is launched. On recovery first inspect campaign's
+Original driver exec24123 is active. S12 P/BDS-C/K1-R all normal, valid and
+certified at5.640/1.797/40.594s. C2 P-GRB is active at this snapshot; the other
+original scheduled arms remain in the same driver. On recovery inspect campaign's
 active_run.lock, active_experiment.json, summary.json and driver_completion.json.
 Never invoke a producer again if campaign exists. No heavy audit or build while
 the driver is active. After closure audit physical/scope/coverage/actual Starts,
