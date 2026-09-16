@@ -1,5 +1,29 @@
 # Unified exact BRP research - resume here
 
+R83 evidence CLOSED on codex/round83-equal-net-block-exchange, base R82 final
+30996a5c023adc2257cf9f4581e3672cf9a644d1 / draft PR143. Independent draft PR144
+published and verified open/draft/unmerged: https://github.com/yifanXovo/TailoredExact/pull/144 .
+Evidence head88403238e7e27f940f232e593a6d0d65356f5a20. Read R83 final_report/status/stage_decision/unified_method/
+reproduce/next_hypothesis. All13 arms normal/valid,50 Optimize/14898.861s;
+62 tests/165 qualification calls. All6 diagnostics and10 original startup
+commands complete; reader-only failure retained and recovered without native rerun.
+All physical/cover/Start/source/checkpoint audits pass.19 bundles/26405 members
+verify twice; first trajectory layout passes visual review. No optimizer remains.
+
+U6 common3600 gaps P .021678307359 / BDS .029216245365 / ENS .018733264994 /
+K1 .018348583122. ENS improves P13.5852% (worse U,stronger L), BDS35.8807%
+(both bounds better), retains88.4470% of K1's P advantage; near K1 under frozen
+material rule. BDS still regresses P34.7718%. E8 repair, N12 gain and D4
+certificate protection hold. This is exposed development, not overall acceptance.
+Long D6/D7 protection, finite U6 repetition and new unadapted confirmation remain.
+Qualified ENS source4496078f2/binary25b7ec3a6d unchanged throughout all runs.
+
+Published-stage pause near actual resources:97% weekly used,3% left at snapshot.
+No reset, next-stage launch, main merge or scheduled continuation. Proposed
+nine-arm long follow-up is not yet allocated. Resume after a fresh resource
+check; never rerun closed producers. Overall research goal remains unmet.
+Owned E:/codes/ExactEBRP-round66; original dirty workspace untouched.
+
 R82 original experiments and offline producers are CLOSED on
 codex/round82-bdsc-unadapted-confirmation, base R81 final298e97f5d163a54eb9d899c664cafd9f07c8647c / PR142.
 Read R82 final_report/status/stage_decision/goal_evidence_scope/next_hypothesis.

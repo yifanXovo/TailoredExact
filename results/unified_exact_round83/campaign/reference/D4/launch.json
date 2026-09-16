@@ -1,0 +1,33 @@
+{
+  "command": [
+    "E:\\codes\\ExactEBRP-round66\\build\\round83\\v1\\Round65ReferenceBuild.exe",
+    "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q30_slot08_seed1288546114.txt",
+    "2400",
+    "60",
+    "60",
+    "0.15",
+    "E:\\codes\\ExactEBRP-round66\\results\\unified_exact_round83\\campaign\\reference\\D4"
+  ],
+  "binary_sha256": "f9456c99759c9e9e62dcf19cc13300ce55f6d30d616d0547e75026a1d68fa3c3",
+  "input": {
+    "instance_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q30_slot08_seed1288546114.txt",
+    "T_seconds": 2400,
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "V": 12,
+    "M": 3,
+    "Q": 30,
+    "inventory_regime": "historical_unmodified",
+    "id": "D4",
+    "scenario_id": "round39_small_hard_V12_M3_Q30_slot08_seed1288546114",
+    "role": "R83 fixed complete-method role; see full_screen_plan.md",
+    "stage": "exposed_development",
+    "input_sha256": "7ee8a95ca3043f83b2e8c6b3663f8aa212678043d0c98b0153efbeb834d48823",
+    "artifact_id": "D4-corrected-T2400",
+    "T_source": "scripts/run_round55_k1_integration.py:T_BY_INSTANCE",
+    "lambda": 0.15
+  },
+  "cap": 30,
+  "expected_optimize_calls": 0,
+  "plan_sha256": "8653c5ebc07a3e4f2408fac45296189975f12449dfa71f94f3bffb8a5e1a1b50"
+}
