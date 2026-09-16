@@ -14,3 +14,5 @@ actual Starts and all positive/negative outcomes; package once and publish a
 new independent draft PR. Never rerun completed producers or merge main.
 
 Live progress is in runtime_checkpoint.json and campaign/summary.json; snapshots become stale while the original driver advances.
+
+Progress: first12 arms normal/valid,56 Optimize starts/returns and11306.515s paid process wall. U4 BDS gap improves P45.4351% and K1 40.0636%, with worse U/stronger L. U5 P is active; final joint audit and two V50 roles remain. See u4_complete_progress.json and current runtime checkpoint.
