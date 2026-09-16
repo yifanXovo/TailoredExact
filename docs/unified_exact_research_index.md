@@ -1,11 +1,15 @@
 # Unified exact BRP research - resume here
 
 R83 ACTIVE on codex/round83-equal-net-block-exchange, base R82 final
-30996a5c023adc2257cf9f4581e3672cf9a644d1 / draft PR143. Read R83 plan and
-mathematics before work. Initial standalone equal-net block exchange diagnostic
-only: one compile, eight oracle fixtures in one process, five fixed witnesses
-U6/D6/D7/E8/N12, zero Optimize. No production integration or full solves yet.
-Overall unmet; U6 confirmation loss preserved. Do not rerun closed R82 work.
+30996a5c023adc2257cf9f4581e3672cf9a644d1 / draft PR143. Read R83 status,
+plan/implementation_plan/full_screen_plan and campaign records. ENS-C actual
+source4496078f2, binary25b7ec3a6d;62 tests165 qualification calls pass.
+All6 standalone diagnostic processes and10 original startup commands complete.
+Reader-only empty-route failure is preserved, v2 recovers original D7 without
+rerun. Actual U6 starter.173039906 vs BDS.214430472; no full-effect claim yet.
+13 full arms admitted with current controls and U6 common3600 (max16020s),
+zero repeats/extensions. Overall unmet; retain R82 U6 negative confirmation.
+Do not rerun closed R82 work or successful R83 producers. No main merge.
 
 R82 original experiments and offline producers are CLOSED on
 codex/round82-bdsc-unadapted-confirmation, base R81 final298e97f5d163a54eb9d899c664cafd9f07c8647c / PR142.
