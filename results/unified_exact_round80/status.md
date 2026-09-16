@@ -1,4 +1,4 @@
-# Round80 evidence closed; independent draft PR pending
+# Round80 closed and published as draft PR141
 
 Read final_report.md, stage_decision.json and reproduce.md. All six original
 serial runs return normally and pass per-run, joint physical/coverage and
@@ -23,7 +23,9 @@ Three actual Starts fully checked and accepted. Seven verified bundles19648
 files; compact index plus compressed complete member hashes. Standalone
 --verify-only entrypoint passed. No reset consumed;48% weekly remaining.
 
-Commit and publish a new independent draft PR against R79 branch
+Published draft PR141: https://github.com/yifanXovo/TailoredExact/pull/141 .
+Fresh metadata verifies open/draft/unmerged, evidence head1754b9ffe and exact
+R79 base. Original history retained. Final metadata commit follows. R79 branch
 codex/round79-bdsc-small-validation, basefinalc29173a6cb34c299cd818310eee59844ed36d8f6.
 Earlier pushes succeeded; preserve all original Git history. No main merge.
 After publication, separately admit D7 common3600 protection, limited replication

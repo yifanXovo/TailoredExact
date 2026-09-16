@@ -14,7 +14,9 @@ binary build/round78/v1/ExactEBRP.exe, SHA256
 3fae847a75c3c9d07d8f5f0444daeafb73559865e6bffb816746802b9e2f43ab.
 The single uniform preset remains research-round78-vds-balanced-descent.
 R78 mathematics.md/final_report.md define the inherited exact method and scope.
-publication.json will record the independent draft PR after evidence closure.
+publication.json records independent draft PR141,
+https://github.com/yifanXovo/TailoredExact/pull/141 . Original history and exact
+evidence head1754b9ffe/basec29173a6 were verified, open/draft/unmerged.
 
 ## Fresh common-budget results
 
@@ -129,7 +131,8 @@ zero-Optimize reference exports. Joint analysis1.769534s, actual mechanism
 checking.770794s, packaging/verification7.872809s, separate documented byte
 verification.800255s. No new build/test/qualification, solver or supervisor
 failure, rerun, extra seed, long extension or confirmation occurs. Two progress
-pushes succeed; final publication transport is recorded separately. No reset
+pushes and the evidence publication push succeed; the latter costs13.260363s.
+Final metadata transport is retained locally and copied into the next stage. No reset
 credit is consumed. Interactive work is not a complete machine-time census.
 
 Seven lossless bundles retain19648 files,59705185 raw bytes and9790348
