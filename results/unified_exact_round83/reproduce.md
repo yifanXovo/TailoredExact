@@ -14,6 +14,13 @@ and draft PR143. Qualified production source4496078f25c0cdad1cf7a5c39835fd23121e
 build/round83/v1/ExactEBRP.exe SHA256
 25b7ec3a6d89d9f0f921c2984fbb1d9876f36f67e617af144275c88b44e6255e.
 Release MinGW/UCRT compiler and core/source hashes are recorded by qualification.
+Git stores LF in main.cpp, PaperExternalGiniTree.cpp and CMakeLists.txt while
+this qualified Windows working copy uses CRLF. A literal blob-byte check
+therefore fails; normalized source text agrees and every measured source hash
+remains unchanged. production_commit_byte_check.json preserves that observation.
+The measured_source_bytes bundle preserves exact qualified working source bytes;
+use its hashes when reproducing the build, rather than assuming Git EOL policy.
+
 The standalone prototype uses13bf7a5317220ea60a283e814aefbf77245de1fd and the
 unchanged R78 core library; do not rebuild it against later integrated source.
 

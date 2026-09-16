@@ -57,6 +57,14 @@ def main():
                 archive.addfile(info,io.BytesIO(data))
                 members.append(dict(source=str(source),member=member,bytes=len(data),sha256=hashlib.sha256(data).hexdigest()))
         bundles.append(dict(path=str(path.relative_to(ROOT)),sha256=sha(path),bytes=path.stat().st_size,files=members))
+    qualified=read(OUT/'qualification_v1.json')['identity']
+    measured=[]
+    for name,digest in qualified['source'].items():
+        path=ROOT/name;assert sha(path)==digest
+        measured.append((path,Path(name).as_posix()))
+    assert sha(ROOT/'CMakeLists.txt')==qualified['cmake_sha256']
+    measured.append((ROOT/'CMakeLists.txt','CMakeLists.txt'))
+    package('measured_source_bytes',measured)
     for version in ['v1']:
         build=ROOT/'build/round83'/version;audit=read(OUT/f'qualification_{version}_audit.json')
         files=[(build/name,name) for name in ['configure.log','build.log','tests.log','CMakeCache.txt']]
@@ -80,7 +88,7 @@ def main():
         package(f"full_run_{launch['number']}",[(p,p.relative_to(raw).as_posix()) for p in sorted(raw.rglob('*')) if p.is_file()])
     raw=OUT/'campaign/reference'
     package('full_reference',[(p,p.relative_to(raw).as_posix()) for p in sorted(raw.rglob('*')) if p.is_file()])
-    manifest=dict(bundles=bundles,source_scope='All13 complete-run trees, four original compact references, ten startup outputs including recovered original run6, six standalone diagnostic trees, and new native/CLI/structural qualification evidence and build logs; no executable or license',
+    manifest=dict(bundles=bundles,source_scope='All13 complete-run trees, four original compact references, ten startup outputs including recovered original run6, six standalone diagnostic trees, new native/CLI/structural qualification evidence/build logs, and exact qualified working source bytes including line endings; no executable or license',
         raw_files=sum(len(b['files']) for b in bundles),raw_bytes=sum(r['bytes'] for b in bundles for r in b['files']),
         delivered_bytes=sum(b['bytes'] for b in bundles),script_sha256=sha(__file__))
     member_path=OUT/'bundle_members.json.gz'
