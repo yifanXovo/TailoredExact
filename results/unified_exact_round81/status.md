@@ -36,7 +36,7 @@ Never invoke a producer again if campaign exists. No heavy audit or build while
 the driver is active. After closure audit physical/scope/coverage/actual Starts,
 all25 paths and prior-repeat identity, then package and publish independent
 stage draft PR. No main merge. Diverse unadapted confirmation remains unadmitted
-and necessary; overall goal unmet.40% weekly remaining, no reset consumed.
+and necessary; overall goal unmet.38% weekly remaining, no reset consumed.
 Owned E:/codes/ExactEBRP-round66; original dirty E:/codes/ExactEBRP untouched.
 
 The source-grounded complete method is consolidated in unified_method.md;
@@ -45,6 +45,13 @@ replication also check cross-run global-bound/physical-UB consistency without
 pooling endpoints. These processors have not executed while optimization runs.
 No extra build/test/native solve. The original driver remains the only active
 optimizer; it must not be restarted.
+
+round81_plot.py is prepared and syntax-checked only. After all three offline
+audits pass, render its audited checkpoint figure in a separate Python plotting
+environment and inspect the PNG. Matplotlib is absent in both current Python
+runtimes; install it in an isolated build/round81 environment only after the
+optimizer queue closes. No plotting dependency has yet been installed and no
+figure producer has run. Bundled Windows Python3.12.14 supports venv and pip.
 
 Interim publication recovered through exact Git objects after three HTTPS
 failures and four failed CLI API attempts plus one connector tree error. A verified

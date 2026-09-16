@@ -26,7 +26,7 @@ launch, keep optimizers serial and defer heavy audit until closure. Preserve
 all repeats, no best-result selection or imported R80 K1 for D6. D7 long1200
 checkpoint is not identical-cap replication. No other experiment/confirmation
 admitted. Close independent draft PR; no main merge. Overall goal unmet,
-diverse unadapted confirmation still needed.40% weekly remaining, no reset.
+diverse unadapted confirmation still needed.38% weekly remaining, no reset.
 Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.
 
 Current completed stage R80 published as draft PR141 on
