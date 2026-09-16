@@ -7,9 +7,11 @@ R80 final_report/stage_decision and R79 final_report. Same qualified R78 source,
 binary and unified BDS-C preset; no build/test/parameter change.
 Exactly14 fresh serial runs admitted: S12 trio120, C2/D4 trios300, D6 P/BDS
 pair3600, D7 trio3600; max20160 process seconds plus5 zero-Optimize references.
-Original driver session24123 active: S12 trio all normal/valid/certified at
-P5.640/BDS-C1.797/K1-R40.594s; C2 P-GRB running at snapshot. Other original
-arms queued in same driver. Inspect campaign lock/active/summary/completion
+Original driver session24123 active: first nine runs normal/valid. S12 trio
+certifies atP5.640/BDS-C1.797/K1-R40.594s; C2 BDS-C certifies113.469s,
+P/K1 open gaps.058891893183/.032805674652; D4 BDS-C/K1 certify52.734/134.687s,
+P open gap.311831107997. D6 P-GRB running; stage joint audit still pending.
+Other original arms queued in same driver. Inspect lock/active/summary/completion
 before any action; NEVER rerun an existing campaign. Freeze driver/plan before
 launch, keep optimizers serial and defer heavy audit until closure. Preserve
 all repeats, no best-result selection or imported R80 K1 for D6. D7 long1200

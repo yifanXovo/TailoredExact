@@ -1,4 +1,4 @@
-# Round81 original serial campaign active; S12 repeats complete
+# Round81 original serial campaign active; nine short repeats complete
 
 Base R80 final634cf03982e71849079699848ceecc3cd19ecb72 / draft PR141,
 verified open/draft/unmerged. Branch codex/round81-bdsc-long-protection-replication.
@@ -13,9 +13,13 @@ whole deadline only. All original/repeated results retained; no best-repeat
 selection. D6 has no new K1 arm, so do not import R80 K1 into its fresh pair.
 D7 is a fresh longer-cap experiment, not identical-cap replication of R78.
 
-Original driver exec24123 is active. S12 P/BDS-C/K1-R all normal, valid and
-certified at5.640/1.797/40.594s. C2 P-GRB is active at this snapshot; the other
-original scheduled arms remain in the same driver. On recovery inspect campaign's
+Original driver exec24123 is active. The first nine runs are normal and valid.
+S12 P/BDS-C/K1-R certify at5.640/1.797/40.594s. C2 BDS-C certifies at113.469s;
+P/K1 finish open with gaps.058891893183/.032805674652. D4 BDS-C/K1 certify at
+52.734/134.687s; P finishes open with gap.311831107997. D6 P-GRB is active at
+this snapshot; the other original scheduled arms remain in the same driver.
+These are completed driver endpoints, pending the joint stage audit.
+On recovery inspect campaign's
 active_run.lock, active_experiment.json, summary.json and driver_completion.json.
 Never invoke a producer again if campaign exists. No heavy audit or build while
 the driver is active. After closure audit physical/scope/coverage/actual Starts,
