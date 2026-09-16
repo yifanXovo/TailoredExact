@@ -1,5 +1,35 @@
 # Unified exact BRP research - resume here
 
+Current R81 experiments and audits closed on
+codex/round81-bdsc-long-protection-replication, base R80 final
+634cf03982e71849079699848ceecc3cd19ecb72 / draft PR141. Published as independent
+draft PR142: https://github.com/yifanXovo/TailoredExact/pull/142 . Fresh readback
+verifies open/draft/unmerged, exact evidence head
+b5b290d1ba940a82934fe7108cb1b20665fd8887 and the exact R80 base. Read R81 final_report/status/stage_decision,
+unified_method and reproduce. No production/default/parameter change; qualified
+R78 source4a0561e0 and frozen BDS-C preset remain the single candidate.
+
+All14 original arms valid,13 normal returns and one valid D7 P whole-deadline
+hard stop. Driver24123 exits0; no optimizer or offline producer active. S12
+P/BDS/K1 certify5.640/1.797/40.594s; C2 BDS113.469s certifies versus both open;
+D4 BDS/K1 certify52.734/134.687s versus P open. D6 P/BDS3600 gaps
+.006451687445/.001726523844 reproduce73.2392% primary gain with worse U/stronger
+L and no fresh K1. D7 P/BDS/K1 gaps.038698498372/.014618557206/.017135655033
+are all open: BDS improves P62.2245% and K1 14.6892%, retention1.116733.
+P's3598.062s hard-stop evidence remains explicitly uncertified; no rerun.
+
+52 Optimize starts/51 returns,19227.077s paid wall. All original physical,
+coverage, actual7 Start vectors/readback, all25 paths and11 same-cap repeat
+checks pass. Fifteen bundles/46670 raw files verify twice; reviewed long-window
+figure included. D7 cross-cap checks are not identical-cap replication. No new
+build/test/qualification/extension/confirmation. Never rerun completed producers.
+
+Next: separately admit diverse,
+unadapted confirmation including nonzero medium/large proof roles; no new
+confirmation input/result has been opened or next experiment admitted. Overall
+goal unmet.37% weekly remaining, no reset. No main merge. Owned
+E:/codes/ExactEBRP-round66; original dirty checkout untouched.
+
 Current completed stage R80 published as draft PR141 on
 codex/round80-bdsc-primary-deficits,
 based on R79 finalc29173a6cb34c299cd818310eee59844ed36d8f6 / draft PR140.

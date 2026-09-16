@@ -125,3 +125,8 @@ results/unified_exact_round80/campaign/active_run.lock
 
 # Final publication receipt is retained locally and copied to the next stage.
 results/unified_exact_round80/metadata_push.json
+
+# Round81 raw complete runs stay local; lossless bundles will be committed.
+results/unified_exact_round81/campaign/local_raw/
+results/unified_exact_round81/campaign/reference/
+results/unified_exact_round81/campaign/active_run.lock
