@@ -7,9 +7,9 @@ current goal_evidence_scope.md. Six roles fixed before generation atd7e5d5fd6;
 no screening/replacement, unchanged qualified R78 BDS-C bytes.18 serial
 P/BDS/K1 arms, max34020s plus six zero-Optimize references. Original driver
 78681/PID10832 remains active; never restart it. Latest durable snapshot has
-15 normal/valid completions,67 Optimize starts/67 returns,
-22097.923s paid process wall. U6 P-GRB active; U6 BDS/K1
-unlaunched. Inspect campaign/summary.json for live updates.
+16 normal/valid completions,68 Optimize starts/68 returns,
+25695.220s paid process wall. U6 BDS-C active; K1 unlaunched.
+U6 P normal/open3597.297s, U.148197475/L.126444468/gap.021753007. Inspect campaign/summary.json for live updates.
 U1 P/BDS/K1 certify3.641/.875/2.063s; U2 36.265/11.969/20.047s. U3 P remains
 open300 gap.315606693, BDS/K1 certify61.937/81.156s. All three nonzero.
 U4 common3600 P/BDS/K1 gaps.102101449/.055711507/.092950997; BDS improves
@@ -22,7 +22,7 @@ draft PR still pending. Final producers must not run while queue is active.
 Familiar recipes/shared Citi geography limit independence. Any later revision
 using these outcomes converts them to development. Overall goal unmet;
 no main merge/reset,21% weekly remaining at2026-09-16T12:04:51Z.
-Remote throughba176af1e freshly verified; exact-object publication preserves
+Remote through6332dc492 freshly verified; exact-object publication preserves
 original commits after two HTTPS failures. See publication_api ledgers.
 
 Current R81 experiments and audits closed on

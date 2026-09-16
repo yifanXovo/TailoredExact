@@ -15,4 +15,4 @@ new independent draft PR. Never rerun completed producers or merge main.
 
 Live progress is in runtime_checkpoint.json and campaign/summary.json; snapshots become stale while the original driver advances.
 
-Progress: first15 arms normal/valid,67 Optimize starts/67 returns,22097.923s paid process wall. U5 common3600 P/BDS/K1 gaps .135680056/.042988450/.124216669; BDS improves P68.3163% and K165.3924%, with both bounds better. K1/P gap difference remains below the frozen10% relative rule; no invented deficit/protection label. U6 P-GRB is active, BDS/K1 unlaunched. Final joint audit, actual Starts, plot/package and R82 PR pending. Latest readback21% weekly remaining; no reset.
+Progress: first16 arms normal/valid,68 Optimize starts/68 returns,25695.220s paid process wall. U5 P/BDS/K1 gaps .135680056/.042988450/.124216669; BDS improves both controls materially. U6 P ends normally at3597.297s, U.148197475/L.126444468/gap.021753007, uncertified. U6 BDS-C is active, K1 unlaunched. Final joint/Start audits, plot/package and independent R82 PR pending. Latest readback21% weekly remaining; no reset.
