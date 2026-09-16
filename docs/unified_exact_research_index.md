@@ -7,20 +7,22 @@ current goal_evidence_scope.md. Six roles fixed before generation atd7e5d5fd6;
 no screening/replacement, unchanged qualified R78 BDS-C bytes.18 serial
 P/BDS/K1 arms, max34020s plus six zero-Optimize references. Original driver
 78681/PID10832 remains active; never restart it. Latest durable snapshot has
-14 normal/valid completions, 18500.766s paid process wall,
-U5 K1-R active, all U6 arms unlaunched. Inspect campaign/summary.json live.
+15 normal/valid completions,67 Optimize starts/67 returns,
+22097.923s paid process wall. U6 P-GRB active; U6 BDS/K1
+unlaunched. Inspect campaign/summary.json for live updates.
 U1 P/BDS/K1 certify3.641/.875/2.063s; U2 36.265/11.969/20.047s. U3 P remains
 open300 gap.315606693, BDS/K1 certify61.937/81.156s. All three nonzero.
 U4 common3600 P/BDS/K1 gaps.102101449/.055711507/.092950997; BDS improves
 P45.4351%, K1 40.0636%, with worse U/stronger L; all normal/open.
-U5 P/BDS gaps.135680056/.042988450; BDS improves P68.3163%
-with both U and L better; both normal/open. K1 comparison remains pending.
-Final joint/Start audits, plot, bundles and independent R82 draft PR pending.
-Prepared final producers must not run while the original queue is active.
+U5 common3600 P/BDS/K1 gaps.135680056/.042988450/.124216669; BDS improves
+P68.3163% and K165.3924%, with both U and L better.
+K1/P gap difference is below the frozen10% relative rule; no invented role.
+All18 endpoints, final joint/Start audits, plot, bundles and independent R82
+draft PR still pending. Final producers must not run while queue is active.
 Familiar recipes/shared Citi geography limit independence. Any later revision
 using these outcomes converts them to development. Overall goal unmet;
-no main merge, no reset; latest readback25% weekly remaining.
-Remote throughfdc3e3054 freshly verified; exact-object publication preserves
+no main merge/reset,21% weekly remaining at2026-09-16T12:04:51Z.
+Remote throughba176af1e freshly verified; exact-object publication preserves
 original commits after two HTTPS failures. See publication_api ledgers.
 
 Current R81 experiments and audits closed on
