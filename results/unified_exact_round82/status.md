@@ -12,10 +12,11 @@ frozen rules) and K1 59.0955% (severe pairwise rule), with worse U/stronger L.
 K1 itself improves P15.5796%; BDS retention is-2.202171. Overall goal unmet.
 See final_report.md, stage_decision.json and goal_evidence_scope.md.
 
-Independent draft publication is pending on
-codex/round82-bdsc-unadapted-confirmation, base R81 final298e97f5d163a54eb9d899c664cafd9f07c8647c.
-Current remote checkpoint f48b80f143428058ee9351d74ab085f2d69d80a3 preserves
-all negative outcomes; final evidence commit and fresh PR readback follow.
+Independent draft PR143 is published and freshly verified open/draft/unmerged:
+https://github.com/yifanXovo/TailoredExact/pull/143 . Evidence head
+9455901e5ca14dc775a8c171791fffaeaecf9129, exact R81 base
+298e97f5d163a54eb9d899c664cafd9f07c8647c. Two final API failures are retained;
+ordinary non-force Git push succeeds, preserving original history.
 No next experiment admitted yet. next_hypothesis.md motivates served-block
 exchanges with equal net load; it is not an implemented or measured fix.
 After publishing, separately plan bounded follow-up within available resources.

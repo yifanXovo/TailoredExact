@@ -16,8 +16,10 @@ default or binary changes. One preset remains
 build/round78/v1/ExactEBRP.exe SHA256
 3fae847a75c3c9d07d8f5f0444daeafb73559865e6bffb816746802b9e2f43ab.
 R81/unified_method.md and R78/mathematics.md define the unchanged algorithm,
-parameters and analytic/numerical proof scope. Independent draft publication
-is pending; publication.json will bind its actual head, base and draft state.
+parameters and analytic/numerical proof scope. Independent draft PR143 is
+published at https://github.com/yifanXovo/TailoredExact/pull/143 . Fresh readback
+verifies evidence head9455901e5ca14dc775a8c171791fffaeaecf9129, the exact R81
+base and open/draft/unmerged state; publication.json records these identities.
 
 ## Prospective data and comparison scope
 
@@ -209,11 +211,14 @@ that harmless formatting explicit without changing recorded image bytes;
 subsequent repository whitespace checking passes.
 
 Two initial HTTPS publication failures and all exact-object recovery ledgers
-remain. Successful non-force API publication preserves original blobs, trees,
-author/committer metadata and commit hashes. They are transport events, not
-solver failures. Interactive work is not a complete machine-time census.
+remain. Final API upload then fails after123.631384s on a connection timeout;
+a second attempt fails its initial GET after21.100555s. An ordinary non-force
+HTTPS Git push succeeds in26.141s and publishes the original final commits.
+A connectivity check returns API HTTP200; a separate external DNS query times
+out. No host/network setting is changed. These transport observations are
+not solver failures. Original blobs, trees, authors and commit hashes survive. Interactive work is not a complete machine-time census.
 Ordinary usage remains available with19% weekly remaining at queue closure;
-no reset credit is consumed. Publication metadata will bind the separate draft.
+no reset credit is consumed. Publication metadata binds the separate draft.
 
 Evidence and inherited architecture pass stage review. Confirmation performance
 is mixed and fails overall acceptance because of U6's material P loss and

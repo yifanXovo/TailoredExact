@@ -3,7 +3,9 @@
 R82 original experiments and offline producers are CLOSED on
 codex/round82-bdsc-unadapted-confirmation, base R81 final298e97f5d163a54eb9d899c664cafd9f07c8647c / PR142.
 Read R82 final_report/status/stage_decision/goal_evidence_scope/next_hypothesis.
-Independent R82 draft publication pending. All18 original arms normal/valid;
+Independent R82 draft PR143 published and verified open/draft/unmerged:
+https://github.com/yifanXovo/TailoredExact/pull/143 . Evidence head9455901e5,
+exact R81 base298e97f5. All18 original arms normal/valid;
 driver78681 exits0, no optimizer remains.81 Optimize starts/returns,32889.548s.
 Six roles fixed before generation atd7e5d5fd6, no rejection/reseed; unchanged
 qualified R78 source/binary/preset. All269 hashes, physical/global evidence,
@@ -22,13 +24,14 @@ stronger L does not compensate for worse U. K1 improves P15.5796%; BDS retains
 All18 objectives nonzero. This consequential confirmation loss prevents
 whole-goal acceptance; it must not be averaged away or labeled random noise.
 
-First publish this complete mixed stage as its own draft against R81. Then
+The complete mixed stage is published as its own draft against R81. Next
 separately admit bounded investigation of equal-net-load served-block exchange;
 source/mathematical rationale in next_hypothesis.md, no implementation or next
 run allocation yet. Any revision using R82 makes these roles development and
 needs new unadapted confirmation. Existing positive R79-R81 evidence remains
 scoped; no main/default merge.19% weekly remaining, ordinary usage available,
-no reset. Remote throughf48b80f14 verified; final evidence push/PR still pending.
+no reset. Final evidence remote9455901e5 verified; metadata follows.
+Both final API connection failures retained; ordinary non-force push succeeds.
 Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.
 
 Current R81 experiments and audits closed on

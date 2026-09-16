@@ -3,7 +3,7 @@
 All18 original arms are closed, normal and valid; driver78681 exits0. Joint
 and actual-mechanism audits pass,19 bundles verify twice, and the final figure
 passes visual review. Never rerun the original driver or completed producers.
-The U6 performance failure remains; overall goal is unmet. Publication pending.
+The U6 performance failure remains; overall goal is unmet. Published as draft PR143; see publication.json for verified evidence/base identity.
 
 ## Frozen identities and prospective generation
 
