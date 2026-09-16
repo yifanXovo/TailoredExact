@@ -32,3 +32,11 @@ backdated, clipped or assigned a missing final native Work total of zero.
 This arm is retained without rerun. It is distinct from the invalid R72 D7
 watchdog experiment, which exceeded its cap and remains excluded. The present
 run does not establish an optimality certificate or strict rational proof.
+
+The official Gurobi13.0 parameter reference, checked2026-09-16, states that
+TimeLimit can be exceeded while termination-related attribute computations
+finish. Thus a native TimeLimit is not itself an exact whole-process deadline.
+This documents a general API limitation; the present logs do not identify
+which internal computation delayed this particular return. No settings or
+deadline margins are changed after observing it. Source:
+[Gurobi TimeLimit parameter reference](https://docs.gurobi.com/projects/optimizer/en/current/reference/parameters.html).
