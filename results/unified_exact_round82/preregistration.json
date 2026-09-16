@@ -1,0 +1,96 @@
+{
+  "base": "298e97f5d163a54eb9d899c664cafd9f07c8647c",
+  "version": "round82-unadapted-confirmation-v1",
+  "roles": [
+    {
+      "id": "U1",
+      "family": "synthetic",
+      "V": 12,
+      "M": 1,
+      "Q": 20,
+      "stress": "tight_T",
+      "T_seconds": 2400,
+      "cap": 120
+    },
+    {
+      "id": "U2",
+      "family": "citibike",
+      "V": 12,
+      "M": 2,
+      "Q": 30,
+      "geography": "compact",
+      "inventory": "surplus",
+      "T_seconds": 3600,
+      "cap": 120
+    },
+    {
+      "id": "U3",
+      "family": "synthetic",
+      "V": 20,
+      "M": 2,
+      "Q": 30,
+      "stress": "high_imbalance",
+      "T_seconds": 3600,
+      "cap": 300
+    },
+    {
+      "id": "U4",
+      "family": "citibike",
+      "V": 30,
+      "M": 3,
+      "Q": 20,
+      "geography": "regional",
+      "inventory": "balanced",
+      "T_seconds": 3600,
+      "cap": 3600
+    },
+    {
+      "id": "U5",
+      "family": "synthetic",
+      "V": 50,
+      "M": 3,
+      "Q": 20,
+      "stress": "moderate",
+      "T_seconds": 3600,
+      "cap": 3600
+    },
+    {
+      "id": "U6",
+      "family": "citibike",
+      "V": 50,
+      "M": 4,
+      "Q": 30,
+      "geography": "compact",
+      "inventory": "shortage",
+      "T_seconds": 18000,
+      "cap": 3600
+    }
+  ],
+  "synthetic_seeds": {
+    "U1": {
+      "material": "298e97f5d163a54eb9d899c664cafd9f07c8647c|round82-unadapted-confirmation-v1|{\"M\":1,\"Q\":20,\"T_seconds\":2400,\"V\":12,\"cap\":120,\"family\":\"synthetic\",\"id\":\"U1\",\"stress\":\"tight_T\"}",
+      "seed": 1240521025
+    },
+    "U3": {
+      "material": "298e97f5d163a54eb9d899c664cafd9f07c8647c|round82-unadapted-confirmation-v1|{\"M\":2,\"Q\":30,\"T_seconds\":3600,\"V\":20,\"cap\":300,\"family\":\"synthetic\",\"id\":\"U3\",\"stress\":\"high_imbalance\"}",
+      "seed": 358233656
+    },
+    "U5": {
+      "material": "298e97f5d163a54eb9d899c664cafd9f07c8647c|round82-unadapted-confirmation-v1|{\"M\":3,\"Q\":20,\"T_seconds\":3600,\"V\":50,\"cap\":3600,\"family\":\"synthetic\",\"id\":\"U5\",\"stress\":\"moderate\"}",
+      "seed": 828845427
+    }
+  },
+  "citi_family_namespace": "citibike443-round82-unadapted-confirmation-v1-298e97f5d163a54eb9d899c664cafd9f07c8647c",
+  "citi_replicate": 1,
+  "citi_selection_id_prefix": "round82_",
+  "generators": {
+    "scripts\\round82_generate.py": "8678ceff947b505a625b7d8cd9e39d9b9783efe577c237884c314ad8e27e3a41",
+    "scripts\\generate_hard_exact_stress_instances.py": "c2c4146e9845c965486acbf75e6e5461532a98595304f2f2e5e6feff20cb2f51",
+    "scripts\\generate_citibike443_regional_v1.py": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8"
+  },
+  "generated_inputs_exist": false,
+  "optimizer_calls": 0,
+  "planned_runs": 18,
+  "maximum_process_seconds": 34020,
+  "policy": "All six fixed roles retained, no outcome screening, reseeding, resizing or T adjustment."
+}
