@@ -1,5 +1,26 @@
 # Unified exact BRP research - resume here
 
+Current completed stage R80 published as draft PR141 on
+codex/round80-bdsc-primary-deficits,
+based on R79 finalc29173a6cb34c299cd818310eee59844ed36d8f6 / draft PR140.
+Read R80 final_report.md, status.md, stage_decision.json and reproduce.md.
+All6 original serial runs normal/valid. E8 P/BDS-C/K1-R certify at1.781/2.516/
+7.359s; BDS-C near P, current severe K1 regression repaired. D6 common3600 gaps
+P.006458865462, BDS-C.001702249813, K1-R.008766562222, all open. BDS-C gains
+73.6448% against P,80.5825% against K1, with worse U/stronger L. D6 is confirmed
+K1/P proof deficit, not K1 protection. E8 two neutral moves leave F unchanged
+and outer retains initial route; D6 two neutral/four quantity moves reach outer.
+25 Optimize/10803.094s;3 actual Starts pass;7 verified bundles19648 files.
+All audits/byte checks pass. Driver54674 exits0; all monitor/build/package
+processes ended. No build/test/solver failure/rerun. Draft PR141:
+https://github.com/yifanXovo/TailoredExact/pull/141 . Exact evidence head1754b9ffe
+and R79 base verified open/draft/unmerged; original history retained. Three
+ordinary pushes succeed; final metadata commit follows. No next allocation yet.
+No main merge. Same qualified R78 source/binary. D7 common3600 protection,
+limited replication and diverse unadapted confirmation remain; overall goal
+unmet.48% weekly remaining at close, no reset. Owned E:/codes/ExactEBRP-round66;
+original dirty checkout untouched. Do not rerun a completed producer.
+
 Current completed stage R79, published as draft PR140, on
 codex/round79-bdsc-small-validation. Base R78 final
 d064fe38c14caf7f8bcc201212cd7654e99f52c1 / draft PR139. Read R79 final_report,
