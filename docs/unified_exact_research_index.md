@@ -18,8 +18,12 @@ D7 P-GRB reaches the frozen whole-run hard stop within cap at3598.062s:
 valid committed U.2372849915487284/L.19858649317712468/gap.03869849837160372,
 uncertified and not normal return. One native call starts but does not return;
 235 physical witnesses/68 global bounds replay successfully. No rerun.
-D7 BDS-C running, K1-R queued;12 arms complete. Read R81 d7_p_termination.md.
-Stage joint audit still pending.
+D7 BDS-C also normal/valid at3597.391s, U.219311768493348,
+L.20469321128735088/gap.014618557205997113, open:62.2245% less P gap,
+better U and L. All4 native calls return;4 neutral/2 insertion/44 quantity
+startup moves. K1-R is the final active arm, in paid HGA startup;13 complete,
+15629.936 process seconds,46 native calls started/45 returned. Read R81
+d7_p_termination.md. Stage joint audit and K1 protection still pending.
 Other original arms queued in same driver. Inspect lock/active/summary/completion
 before any action; NEVER rerun an existing campaign. Freeze driver/plan before
 launch, keep optimizers serial and defer heavy audit until closure. Preserve

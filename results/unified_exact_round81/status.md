@@ -1,4 +1,4 @@
-# Round81 original serial campaign active; twelve runs complete
+# Round81 original serial campaign active; thirteen runs complete
 
 Base R80 final634cf03982e71849079699848ceecc3cd19ecb72 / draft PR141,
 verified open/draft/unmerged. Branch codex/round81-bdsc-long-protection-replication.
@@ -27,8 +27,14 @@ whole-run hard stop at3598.062s, within3600, with235 physical witnesses and68
 global bounds validated: U.2372849915487284, L.19858649317712468,
 gap.03869849837160372. This is interrupted committed evidence, not normal
 return or certification; one Optimize starts and does not return. No rerun.
-D7 BDS-C is active and K1-R remains queued in the same original driver.
-Read d7_p_termination.md. Joint stage replay is pending.
+D7 BDS-C then returns normally/valid at3597.391s, U.219311768493348,
+L.20469321128735088/gap.014618557205997113, still uncertified. Its gap is
+62.2245% smaller than fresh P, with better U and L. All4 native calls return;
+startup reports4 neutral/2 insertion/44 quantity moves and full exhaustion.
+K1-R is the final active arm, initially in paid HGA startup. Thirteen arms
+total15629.936 process seconds/.723130 separate replay,46 native calls started
+and45 returned. Twelve normal returns plus one valid within-cap hard stop.
+Read d7_p_termination.md. Joint stage replay and K1 protection remain pending.
 These are completed driver endpoints, pending the joint stage audit.
 On recovery inspect campaign's
 active_run.lock, active_experiment.json, summary.json and driver_completion.json.
