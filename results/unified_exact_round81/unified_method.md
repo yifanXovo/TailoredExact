@@ -91,6 +91,11 @@ is passed as `max_iter` but explicitly ignored by this function, as are
 holds at most200000 decoded orders and clears on reaching that size. Cache
 eviction changes recomputation cost, not the search neighborhood or stopping
 rule. These details describe existing source, with no parameter change.
+The old `tryRouteExactNeighborhood` and `tryPairExactNeighborhood` immediately
+return false and are not called by the active `runFromCurrentState` loop.
+Their unreachable local-oracle seconds/node caps are not live BDS-C rules.
+The active loop uses constructive seeding, interval, local-composite,
+paired-interval, residual-unit and pair-flow improvements.
 
 Decoded descent uses first strict improvement in proxy-ordered candidates.
 Same-route moves reposition selected supply/demand or unused stations around
