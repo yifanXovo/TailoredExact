@@ -283,7 +283,8 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
            options.algorithm_preset == "research-round73-vds-joint-seeded-descent" ||
            options.algorithm_preset == "research-round75-vds-quantity-descent" ||
            options.algorithm_preset == "research-round76-vds-physical-closure" ||
-           options.algorithm_preset == "research-round78-vds-balanced-descent") &&
+           options.algorithm_preset == "research-round78-vds-balanced-descent" ||
+           options.algorithm_preset == "research-round83-vds-equal-net-exchange") &&
           options.primal_heuristic_stop == "decoded-descent-interroute")) &&
         options.round34_c6_startup_variant == "hga-full" &&
         options.primal_heuristic == "hga-tgbc" &&
