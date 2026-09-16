@@ -33,6 +33,7 @@ not qualify all retained model strengthening for that broader input class.
 
 ```text
 Start the one process clock; parse and check the original problem.
+Whenever the implemented verified-zero check closes against F>=0, end early.
 Construct one verified physical route set by joint insertion.
 Initialize 24 fixed-seed random route/separator orders; append the constructive
   order as the 25th seed without consuming another random draw.
