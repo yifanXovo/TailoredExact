@@ -1,5 +1,6 @@
 """Same-run observed checkpoints and final P/K1 comparisons; no optimization."""
 import json
+import math
 import time
 from pathlib import Path
 from round78_qualify import ROOT, sha, write
@@ -59,6 +60,23 @@ def compare(a,b,V):
 
 def checkpoint_times(cap):
     return {120:[30,60,120],300:[60,120,180,300],3600:[300,600,1200,1800,2400,3600]}[cap]
+
+
+def cross_run_consistency(records):
+    """Diagnostic only: every qualified global L must respect every physical U."""
+    checked=[]
+    for identity in sorted({r['id'] for r in records}):
+        rows=[r for r in records if r['id']==identity]
+        upper=[r['U'] for r in rows if r['U'] is not None]
+        lower=[r['L'] for r in rows if r['L'] is not None]
+        assert all(math.isfinite(v) for v in upper+lower),(identity,'nonfinite qualified endpoint')
+        strongest=max(lower) if lower else None;best=min(upper) if upper else None
+        available=strongest is not None and best is not None
+        if available:assert strongest<=best+1e-7,(identity,'cross-run global-bound contradiction',strongest,best)
+        checked.append(dict(id=identity,records=len(rows),physical_upper_values=len(upper),global_lower_values=len(lower),
+            checked=available,maximum_global_L=strongest,minimum_physical_U=best,tolerance=1e-7,
+            scope='Offline contradiction check only; never a synthesized performance endpoint, checkpoint, Start or imported algorithm bound.'))
+    return checked
 
 
 def main():
@@ -121,6 +139,7 @@ def main():
             policy='All raw files retained; unobserved or incomplete evidence never promoted or backdated.'))
         endpoint_checks.append(dict(id=launch['panel']['id'],arm=launch['arm'],wall_seconds=done['wall_seconds'],
             stop_reason=done['stop_reason'],**gap_fields(endpoint)))
+    consistency=cross_run_consistency(endpoint_checks+all_checkpoints)
     comparisons=[];protection=[]
     for identity in ['S12','C2','D4','D6','D7']:
         representative=next(l for l in frozen['launches'] if l['panel']['id']==identity)
@@ -152,7 +171,9 @@ def main():
     write(OUT/'protection.json',protection);write(OUT/'actual_calls.json',actual_calls)
     write(OUT/'endpoint_checks.json',endpoint_checks)
     write(OUT/'observation_coverage.json',observation_coverage)
+    write(OUT/'cross_arm_bound_consistency.json',consistency)
     audit=dict(all_checks_passed=True,completed=14,actual_optimize_calls=len(actual_calls),
+        cross_arm_consistency_roles=len(consistency),
         normal_returned_runs=sum(d['stop_reason']=='normal_return' for d in summary['records']),
         relative_gap_definition='(U-L)/abs(U) for an available nonzero U; otherwise null. Signed differences retained.',
         original_summary_sha256=sha(OUT/'summary.json'),

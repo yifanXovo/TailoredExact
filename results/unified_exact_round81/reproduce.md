@@ -45,6 +45,10 @@ separate namespace before a new offline replay; preserve the recorded originals.
 
 `round81_analyze.py` rechecks durable receipts, original physical endpoints,
 bound scope/coverage, observed availability and the frozen comparison rules.
+It additionally checks that global bounds from any arm/checkpoint respect
+every retained physical upper bound for the same instance. Replication applies
+the same diagnostic to the already admitted original/repeated endpoints. These
+cross-run consistency records never replace any arm's own U/L or timing.
 `round81_mechanism.py` checks actual Start vectors, model rows, readback/native
 logs, all25 startup paths, every balanced/strict transition and outer handoff.
 It reuses the unchanged R78 physical replay. `round81_replication.py` binds prior
