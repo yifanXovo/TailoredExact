@@ -1,5 +1,21 @@
 # Unified exact BRP research - resume here
 
+Current stage R81 plan frozen on codex/round81-bdsc-long-protection-replication,
+based on R80 final634cf03982e71849079699848ceecc3cd19ecb72 / draft PR141,
+verified open/draft/unmerged with exact original history. Read R81 plan/status,
+R80 final_report/stage_decision and R79 final_report. Same qualified R78 source,
+binary and unified BDS-C preset; no build/test/parameter change.
+Exactly14 fresh serial runs admitted: S12 trio120, C2/D4 trios300, D6 P/BDS
+pair3600, D7 trio3600; max20160 process seconds plus5 zero-Optimize references.
+At this commit not launched. Inspect campaign lock/active/summary/completion
+before any action; NEVER rerun an existing campaign. Freeze driver/plan before
+launch, keep optimizers serial and defer heavy audit until closure. Preserve
+all repeats, no best-result selection or imported R80 K1 for D6. D7 long1200
+checkpoint is not identical-cap replication. No other experiment/confirmation
+admitted. Close independent draft PR; no main merge. Overall goal unmet,
+diverse unadapted confirmation still needed.47% weekly remaining, no reset.
+Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.
+
 Current completed stage R80 published as draft PR141 on
 codex/round80-bdsc-primary-deficits,
 based on R79 finalc29173a6cb34c299cd818310eee59844ed36d8f6 / draft PR140.
