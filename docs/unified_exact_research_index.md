@@ -2,8 +2,10 @@
 
 Current R81 experiments and audits closed on
 codex/round81-bdsc-long-protection-replication, base R80 final
-634cf03982e71849079699848ceecc3cd19ecb72 / draft PR141. Independent draft
-publication is pending. Read R81 final_report/status/stage_decision,
+634cf03982e71849079699848ceecc3cd19ecb72 / draft PR141. Published as independent
+draft PR142: https://github.com/yifanXovo/TailoredExact/pull/142 . Fresh readback
+verifies open/draft/unmerged, exact evidence head
+b5b290d1ba940a82934fe7108cb1b20665fd8887 and the exact R80 base. Read R81 final_report/status/stage_decision,
 unified_method and reproduce. No production/default/parameter change; qualified
 R78 source4a0561e0 and frozen BDS-C preset remain the single candidate.
 
@@ -22,7 +24,7 @@ checks pass. Fifteen bundles/46670 raw files verify twice; reviewed long-window
 figure included. D7 cross-cap checks are not identical-cap replication. No new
 build/test/qualification/extension/confirmation. Never rerun completed producers.
 
-Next: publish independent stage draft PR, then separately admit diverse,
+Next: separately admit diverse,
 unadapted confirmation including nonzero medium/large proof roles; no new
 confirmation input/result has been opened or next experiment admitted. Overall
 goal unmet.37% weekly remaining, no reset. No main merge. Owned

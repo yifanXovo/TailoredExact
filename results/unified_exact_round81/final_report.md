@@ -184,7 +184,9 @@ publication subsequently verifies original blobs/trees/commits and uses only
 non-force ref updates. These are publication failures, not solver failures.
 The evidence push succeeds in29.130782s and a fresh read verifies its exact
 head. Final metadata transport is retained locally and carried into the next
-stage. Publication receipts bind the independent draft PR. Interactive work is
+stage. A retained metadata-edit charset error is fixed with explicit UTF-8;
+no experiment or evidence producer is rerun. Publication receipts bind the
+independent draft PR. Interactive work is
 not a complete machine-time census; ordinary usage remains available with37%
 weekly remaining at closure, and no reset credit is consumed.
 
