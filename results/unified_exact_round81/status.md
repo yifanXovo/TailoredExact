@@ -1,4 +1,4 @@
-# Round81 experiments and audits closed; independent draft publication pending
+# Round81 closed and published as draft PR142
 
 Base R80 final634cf03982e71849079699848ceecc3cd19ecb72 / draft PR141.
 Branch codex/round81-bdsc-long-protection-replication, owned checkout
@@ -38,7 +38,8 @@ are in plot_environment.json and plot_requirements.txt. No new native solve.
 
 Ordinary usage remains allowed,37% weekly remaining, no reset consumed.
 The evidence and frozen architecture pass stage review. Overall goal is still
-unmet: publish this independent draft PR, then separately admit structurally
+unmet: independently published draft PR142 preserves this stage; next separately
+admit structurally
 diverse unadapted confirmation, including nonzero medium/large proof roles.
 No new confirmation input/result has been opened and no next allocation has
 been admitted. Keep the one unchanged candidate. Do not merge main.
@@ -47,4 +48,7 @@ Interim publication succeeded through exact Git objects to
 002aa711a6bc5e6a745546f4d3dd9003ae82ca68. All original hashes and non-force
 updates were verified. Preserve the three ordinary HTTPS failures, four failed
 CLI API attempts and one connector tree error; successful subsequent receipts
-are in publication_api/. Final evidence publication and draft PR follow.
+are in publication_api/. Final evidence head b5b290d1ba940a82934fe7108cb1b20665fd8887 publishes
+successfully through ordinary git in29.130782s. Draft PR142 is freshly verified
+open/draft/unmerged against the exact R80 base:
+https://github.com/yifanXovo/TailoredExact/pull/142 . Final metadata follows.

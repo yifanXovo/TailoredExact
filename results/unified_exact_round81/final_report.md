@@ -15,7 +15,10 @@ research-round78-vds-balanced-descent, qualified source
 4a0561e0f8193e3e874c1bd0bfa8bc381fb66f5e and executable
 build/round78/v1/ExactEBRP.exe, SHA256
 3fae847a75c3c9d07d8f5f0444daeafb73559865e6bffb816746802b9e2f43ab.
-The independent stage draft PR is recorded in publication.json when published.
+publication.json records independent draft PR142,
+https://github.com/yifanXovo/TailoredExact/pull/142 . Fresh readback verifies the
+exact evidence head b5b290d1ba940a82934fe7108cb1b20665fd8887, R80 base,
+open/draft/unmerged state and original history.
 
 ## Complete fresh results
 
@@ -179,7 +182,9 @@ Interim transport preserves three ordinary HTTPS failures, four failed CLI
 Git Data API attempts and one connector tree error. Exact-object directory
 publication subsequently verifies original blobs/trees/commits and uses only
 non-force ref updates. These are publication failures, not solver failures.
-Final publication receipts bind the independent draft PR. Interactive work is
+The evidence push succeeds in29.130782s and a fresh read verifies its exact
+head. Final metadata transport is retained locally and carried into the next
+stage. Publication receipts bind the independent draft PR. Interactive work is
 not a complete machine-time census; ordinary usage remains available with37%
 weekly remaining at closure, and no reset credit is consumed.
 
