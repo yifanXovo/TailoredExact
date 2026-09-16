@@ -1,5 +1,6 @@
 """Read-only compact progress snapshot; never a formal checkpoint or algorithm gate."""
 import json
+import sys
 import csv
 import re
 import time
@@ -25,4 +26,6 @@ if logs:
     progress=[s.strip() for s in lines if re.match(r'\s*[H*]?\s*\d+\s+\d+',s)]
     out['native_log']=str(p.relative_to(ROOT));out['latest_native_progress']=progress[-1] if progress else lines[-1] if lines else None
 out['scope']='Unreviewed live progress; formal observed checkpoints are produced only by the frozen driver/audit.'
+if '--compact' in sys.argv:
+    out={k:v for k,v in out.items() if k in ['id','arm','launch','elapsed_seconds','campaign_lock_present','committed_events','completed','latest_native_progress']}
 print(json.dumps(out,ensure_ascii=True))

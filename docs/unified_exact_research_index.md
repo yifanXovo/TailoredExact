@@ -2,13 +2,23 @@
 
 Current active stage R82, codex/round82-bdsc-unadapted-confirmation,
 base R81 final298e97f5d163a54eb9d899c664cafd9f07c8647c / verified draft PR142.
-Read R82 plan/status/preregistration/generation/protocol. Six new unadapted
-roles fixed and committed before generation atd7e5d5fd6; no selection or
-performance screening, same R78 candidate bytes.18 serial P/BDS/K1 arms,
-maximum34020s; six no-Optimize reference exports. Original queue active: driver78681/PID10832; never restart. Read current summary/checkpoint.
-U4--U6 are common3600 nonzero medium/large roles. Shared Citi source and
-familiar synthetic recipes limit independence; overlap retained explicitly.
-33% weekly remaining, no reset, no main merge. Overall goal unmet.
+Read R82 plan/status/preregistration/generation/protocol/reproduce. Six fresh
+roles fixed before generation atd7e5d5fd6; no screening or replacement, same
+qualified R78 BDS-C bytes.18 serial P/BDS/K1 arms, maximum34020s plus six
+zero-Optimize references. Original driver78681/PID10832 remains active; never
+restart it. Latest durable checkpoint has11 completed/valid normal arms and
+U4 K1 active; inspect campaign/summary.json for live progress.
+U1 P/BDS/K1 certify3.641/.875/2.063s; U2 36.265/11.969/20.047s. U3 P remains
+open300 (gap.315606693), BDS/K1 certify61.937/81.156s. All three nonzero.
+U4 common3600 P/BDS gaps.102101449/.055711507,45.4351% primary reduction with
+worse U/stronger L; K1 still pending. U5/U6 unlaunched at this checkpoint.
+Final joint audits/Start checks/plot/package pending; prepared producers must
+not be run while the original queue is active. No R82 draft PR or overall
+acceptance yet. Shared Citi geography and familiar synthetic recipes limit
+independence.31% weekly remaining, no reset, no main merge. Overall goal unmet.
+Remote through8d5fd4a4f verified after two HTTPS failures; exact-object recovery
+retains all original commits. See publication_api ledgers. All negative outcomes
+remain, and any later adaptation would convert these roles to development.
 
 Current R81 experiments and audits closed on
 codex/round81-bdsc-long-protection-replication, base R80 final
