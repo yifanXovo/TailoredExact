@@ -30,6 +30,14 @@ Each producer refuses to overwrite its completed output. Inspect the stored
 audit rather than rerun it in place. Offline costs are separate from paid
 complete-run wall times; none of these steps optimizes another model.
 
+After all three audits, optional `round81_plot.py` uses Matplotlib to render the
+six already-frozen D6/D7 checkpoints. It refuses to run while the campaign is
+active or overwrite its figures directory, and records library/source/data/output
+hashes and plotting cost. A missing physical U is not plotted as a zero gap;
+hard-stop endpoints are marked separately. The figure does not introduce an
+additional outcome criterion or a fresh D6 K1 control. The rendering environment
+is separate from the measured executable and its production configuration.
+
 After delivery, verify every retained byte without extraction or Gurobi:
 
 ```
