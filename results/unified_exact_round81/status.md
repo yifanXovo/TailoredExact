@@ -1,4 +1,4 @@
-# Round81 original serial campaign active; eleven runs complete
+# Round81 original serial campaign active; twelve runs complete
 
 Base R80 final634cf03982e71849079699848ceecc3cd19ecb72 / draft PR141,
 verified open/draft/unmerged. Branch codex/round81-bdsc-long-protection-replication.
@@ -22,8 +22,13 @@ gap.006451687444878063, uncertified. D6 BDS-C also returns normally/valid at
 3597.172s, U.15750980361456174, L.15578327977056106,
 gap.0017265238440006825, uncertified: about73.2% lower gap than fresh P,
 with worse U and stronger L. Its startup reports2 neutral and4 quantity moves,
-exhausted with no verification failure. D7 P-GRB is active; D7 BDS-C/K1-R
-remain queued in the same original driver. Joint stage replay is pending.
+exhausted with no verification failure. D7 P-GRB reaches the predeclared
+whole-run hard stop at3598.062s, within3600, with235 physical witnesses and68
+global bounds validated: U.2372849915487284, L.19858649317712468,
+gap.03869849837160372. This is interrupted committed evidence, not normal
+return or certification; one Optimize starts and does not return. No rerun.
+D7 BDS-C is active and K1-R remains queued in the same original driver.
+Read d7_p_termination.md. Joint stage replay is pending.
 These are completed driver endpoints, pending the joint stage audit.
 On recovery inspect campaign's
 active_run.lock, active_experiment.json, summary.json and driver_completion.json.

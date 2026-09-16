@@ -14,7 +14,12 @@ P open gap.311831107997. D6 P-GRB also normal/valid at3597.172s,
 U.1572411758522922/L.15078948840741413/gap.006451687444878063, open.
 D6 BDS-C also normal/valid at3597.172s, U.15750980361456174,
 L.15578327977056106/gap.0017265238440006825, open; about73.2% P gap gain.
-D7 P-GRB running, BDS-C/K1-R queued. Stage joint audit still pending.
+D7 P-GRB reaches the frozen whole-run hard stop within cap at3598.062s:
+valid committed U.2372849915487284/L.19858649317712468/gap.03869849837160372,
+uncertified and not normal return. One native call starts but does not return;
+235 physical witnesses/68 global bounds replay successfully. No rerun.
+D7 BDS-C running, K1-R queued;12 arms complete. Read R81 d7_p_termination.md.
+Stage joint audit still pending.
 Other original arms queued in same driver. Inspect lock/active/summary/completion
 before any action; NEVER rerun an existing campaign. Freeze driver/plan before
 launch, keep optimizers serial and defer heavy audit until closure. Preserve
