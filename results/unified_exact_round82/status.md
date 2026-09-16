@@ -15,4 +15,4 @@ new independent draft PR. Never rerun completed producers or merge main.
 
 Live progress is in runtime_checkpoint.json and campaign/summary.json; snapshots become stale while the original driver advances.
 
-Progress: first16 arms normal/valid,68 Optimize starts/68 returns,25695.220s paid process wall. U5 P/BDS/K1 gaps .135680056/.042988450/.124216669; BDS improves both controls materially. U6 P ends normally at3597.297s, U.148197475/L.126444468/gap.021753007, uncertified. U6 BDS-C is active, K1 unlaunched. Final joint/Start audits, plot/package and independent R82 PR pending. Latest readback21% weekly remaining; no reset.
+Progress: first17 arms normal/valid,72 Optimize starts/72 returns,29292.377s paid process wall. U6 BDS is a material P regression: gap .029216245 versus .021753007, +34.3090%, stronger L but worse U. It does not meet the frozen severe threshold; do not suppress or relabel the negative result. U6 K1-R is active, last arm. Final joint/Start audits, plot/package and independent R82 PR pending. Overall goal unmet; no new experiment allocation or algorithm revision yet. Latest readback21% weekly remaining; no reset.

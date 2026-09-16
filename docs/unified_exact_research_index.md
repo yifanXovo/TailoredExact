@@ -7,22 +7,25 @@ current goal_evidence_scope.md. Six roles fixed before generation atd7e5d5fd6;
 no screening/replacement, unchanged qualified R78 BDS-C bytes.18 serial
 P/BDS/K1 arms, max34020s plus six zero-Optimize references. Original driver
 78681/PID10832 remains active; never restart it. Latest durable snapshot has
-16 normal/valid completions,68 Optimize starts/68 returns,
-25695.220s paid process wall. U6 BDS-C active; K1 unlaunched.
-U6 P normal/open3597.297s, U.148197475/L.126444468/gap.021753007. Inspect campaign/summary.json for live updates.
+17 normal/valid completions,72 Optimize starts/72 returns,
+29292.377s paid process wall. U6 K1-R active, last arm.
+U6 P/BDS normal/open gaps.021753007/.029216245; BDS regresses
+34.3090% materially with worse U/stronger L (not severe under frozen rules).
+This negative confirmation result remains; overall goal unmet. No revision or
+extra experiment admitted yet. K1 and full audits precede the next decision. Inspect campaign/summary.json for live updates.
 U1 P/BDS/K1 certify3.641/.875/2.063s; U2 36.265/11.969/20.047s. U3 P remains
 open300 gap.315606693, BDS/K1 certify61.937/81.156s. All three nonzero.
 U4 common3600 P/BDS/K1 gaps.102101449/.055711507/.092950997; BDS improves
 P45.4351%, K1 40.0636%, with worse U/stronger L; all normal/open.
 U5 common3600 P/BDS/K1 gaps.135680056/.042988450/.124216669; BDS improves
-P68.3163% and K165.3924%, with both U and L better.
+P68.3163% and K1 65.3924%, with both U and L better.
 K1/P gap difference is below the frozen10% relative rule; no invented role.
 All18 endpoints, final joint/Start audits, plot, bundles and independent R82
 draft PR still pending. Final producers must not run while queue is active.
 Familiar recipes/shared Citi geography limit independence. Any later revision
 using these outcomes converts them to development. Overall goal unmet;
 no main merge/reset,21% weekly remaining at2026-09-16T12:04:51Z.
-Remote through6332dc492 freshly verified; exact-object publication preserves
+Remote through5547f8e3a freshly verified; exact-object publication preserves
 original commits after two HTTPS failures. See publication_api ledgers.
 
 Current R81 experiments and audits closed on
