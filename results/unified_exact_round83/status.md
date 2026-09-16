@@ -13,8 +13,10 @@ ENS .018733264994, K1 .018348583122. ENS improves P13.5852% with worse U/
 stronger L and retains88.4470% of K1's P advantage. E8 repair, N12 gain and
 D4 certificate protection hold in this small development screen. Overall unmet.
 
-Independent draft publication pending against R82 final30996a5c0 / draft PR143.
-After publication, resource pause: ordinary weekly97% used,3% remaining.
+Independent draft PR144 published and verified open/draft/unmerged:
+https://github.com/yifanXovo/TailoredExact/pull/144 . Exact R82 base30996a5c0.
+Evidence head88403238e7e27f940f232e593a6d0d65356f5a20; final metadata follows.
+Current resource pause: ordinary weekly snapshot97% used,3% remaining.
 No reset consumed, no next-stage queue/automation, no main/default merge.
 Resume via next_hypothesis.md after fresh resources are available. Never rerun
 completed producers. Owned E:/codes/ExactEBRP-round66; original checkout untouched.

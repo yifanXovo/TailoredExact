@@ -1,8 +1,9 @@
 # Unified exact BRP research - resume here
 
 R83 evidence CLOSED on codex/round83-equal-net-block-exchange, base R82 final
-30996a5c023adc2257cf9f4581e3672cf9a644d1 / draft PR143. Independent draft
-publication pending. Read R83 final_report/status/stage_decision/unified_method/
+30996a5c023adc2257cf9f4581e3672cf9a644d1 / draft PR143. Independent draft PR144
+published and verified open/draft/unmerged: https://github.com/yifanXovo/TailoredExact/pull/144 .
+Evidence head88403238e7e27f940f232e593a6d0d65356f5a20. Read R83 final_report/status/stage_decision/unified_method/
 reproduce/next_hypothesis. All13 arms normal/valid,50 Optimize/14898.861s;
 62 tests/165 qualification calls. All6 diagnostics and10 original startup
 commands complete; reader-only failure retained and recovered without native rerun.
@@ -17,7 +18,7 @@ certificate protection hold. This is exposed development, not overall acceptance
 Long D6/D7 protection, finite U6 repetition and new unadapted confirmation remain.
 Qualified ENS source4496078f2/binary25b7ec3a6d unchanged throughout all runs.
 
-After draft publication, pause near actual resources:97% weekly used,3% left.
+Published-stage pause near actual resources:97% weekly used,3% left at snapshot.
 No reset, next-stage launch, main merge or scheduled continuation. Proposed
 nine-arm long follow-up is not yet allocated. Resume after a fresh resource
 check; never rerun closed producers. Overall research goal remains unmet.

@@ -30,6 +30,7 @@ medium/large proof difficulty. Do not reuse R82's six draws as independent
 confirmation for this revision. The shared Citi geography also limits independence.
 
 Current state: all R83 native and offline work closed; near-resource pause after
-its independent draft publication. Ordinary weekly97% used (3% remaining) at
+published draft PR144: https://github.com/yifanXovo/TailoredExact/pull/144 .
+Ordinary weekly97% used (3% remaining) at
 last read. One reset credit exists but was not redeemed or authorized. No
 scheduled/background continuation. Overall goal remains unmet.

@@ -2,7 +2,9 @@
 
 All thirteen original full runs are normal and valid. Complete campaign and
 mechanism audits pass; delivery verifies twice. Stage evidence review is complete.
-Independent draft publication is pending; no research process remains active.
+Independent draft PR144 is published: https://github.com/yifanXovo/TailoredExact/pull/144 .
+Fresh readback verifies evidence head88403238e7e27f940f232e593a6d0d65356f5a20,
+the exact R82 base and open/draft/unmerged state. No research process remains active.
 Overall research goal remains unmet. No main/default merge.
 
 ENS-C adds an inventory-preserving exchange of equal-net served blocks to the
@@ -196,11 +198,19 @@ These metadata/reader corrections do not alter mathematical inputs or tolerances
 R83 uses exposed E8/N12/D4/U6, and startup development D6/D7. It is not
 independent confirmation. The audited current K1 comparison supports further validation, but the
 candidate still requires long D6/D7 protection, finite U6 repeat evidence and
-new unadapted confirmation before broader acceptance. Stage publication is pending. Current ordinary weekly usage is97% (3% remaining).
-Close publication and pause near the actual resource limit; do not start another
+new unadapted confirmation before broader acceptance. Stage is published as draft PR144.
+The resource snapshot is97% weekly used (3% remaining).
+Pause near the actual resource limit; do not start another
 long queue or consume a reset credit. No background continuation is scheduled.
 
 Git whitespace review initially treated retained CRLF evidence bytes as trailing
 whitespace under the byte-preserving -text attributes. The full diagnostic is
 retained in metadata_whitespace_failure.txt.gz; cr-at-eol metadata resolves this
 without changing evidence bytes. The existing exact SVG whitespace rule remains.
+
+Two ordinary HTTPS pushes failed (40.1982336s and21.1299693s); receipts remain.
+The exact-object API publisher completed122 requests in166.6367158s and
+verified all three original commit hashes before a non-force ref update.
+Fresh PR readback confirms the exact head/base and draft/unmerged state.
+Final metadata transport stays local to avoid a self-referential evidence
+commit. No history was rewritten.

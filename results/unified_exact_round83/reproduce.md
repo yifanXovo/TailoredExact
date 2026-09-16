@@ -94,6 +94,9 @@ declare a bounded plan and current controls, and preserve the new identity.
 Do not remove guards or overwrite these original records. Recompilation on
 different tools is not automatically the same binary or a matched timing test.
 
-ENS-C is default-off and overall acceptance remains pending. Stage evidence review is complete; its independent draft publication is pending.
+ENS-C is default-off and overall acceptance remains pending. Stage evidence review
+and publication are complete: draft PR144, https://github.com/yifanXovo/TailoredExact/pull/144 .
+publication.json binds the exact evidence head/base. Two HTTPS failures and the
+successful exact-object API transport are retained.
 No main merge. All producers are closed; see next_hypothesis.md for resource-paused
 follow-up, not a command to restart this campaign.
