@@ -12,7 +12,9 @@ certifies atP5.640/BDS-C1.797/K1-R40.594s; C2 BDS-C certifies113.469s,
 P/K1 open gaps.058891893183/.032805674652; D4 BDS-C/K1 certify52.734/134.687s,
 P open gap.311831107997. D6 P-GRB also normal/valid at3597.172s,
 U.1572411758522922/L.15078948840741413/gap.006451687444878063, open.
-D6 BDS-C running; D7 trio queued. Stage joint audit still pending.
+D6 BDS-C also normal/valid at3597.172s, U.15750980361456174,
+L.15578327977056106/gap.0017265238440006825, open; about73.2% P gap gain.
+D7 P-GRB running, BDS-C/K1-R queued. Stage joint audit still pending.
 Other original arms queued in same driver. Inspect lock/active/summary/completion
 before any action; NEVER rerun an existing campaign. Freeze driver/plan before
 launch, keep optimizers serial and defer heavy audit until closure. Preserve
