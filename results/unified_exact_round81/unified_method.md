@@ -82,6 +82,16 @@ orders are not unverified service operations. The full deterministic decoder
 assigns operations. The original 24 random seeds are initialized first using
 seed20260626; all25 use the same decoder and guided neighborhood.
 
+The actual decoder is `nGreedyLU_RA_compact_full` (compaction mode1). It runs
+the deterministic greedy procedure, removes zero-operation stations from the
+active prefix when present, and fully decodes the compacted route order once
+more, retaining the better objective. The wrapper's legacy `iterations=10`
+is passed as `max_iter` but explicitly ignored by this function, as are
+`IterNum` and `r_avg_start`; it is not an operative ten-pass rule. The cache
+holds at most200000 decoded orders and clears on reaching that size. Cache
+eviction changes recomputation cost, not the search neighborhood or stopping
+rule. These details describe existing source, with no parameter change.
+
 Decoded descent uses first strict improvement in proxy-ordered candidates.
 Same-route moves reposition selected supply/demand or unused stations around
 the executed route's supply/demand anchors. Cross-route moves consider the
