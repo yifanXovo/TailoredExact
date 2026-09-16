@@ -42,8 +42,11 @@ No extra build/test/native solve. The original driver remains the only active
 optimizer; it must not be restarted.
 
 Interim publication recovered through exact Git objects after three HTTPS
-failures and three failed CLI API attempts plus one connector tree error. A verified
+failures and four failed CLI API attempts plus one connector tree error. A verified
 prefix first reached784fbd7b0, then directory-delta publication reached
 2dd0ea993dba9fb25e1172f22c039a7fd329097c, with original hashes preserved and
 non-force ref updates. publication_api/directory_deltas.json is the successful
-receipt. All publication sessions ended; the stage PR awaits campaign closure.
+receipt. A later incremental timeout is retained in d6_replication_progress.json;
+d6_replication_recovery.json then verifies all three original commits and the
+non-force remote update to b5951a3dc44ea4e7276090c73ac3a2b00125cbe4 in40.034784s.
+All publication sessions ended; the stage PR awaits campaign closure.
