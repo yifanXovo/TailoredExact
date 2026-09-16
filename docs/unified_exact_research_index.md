@@ -1,5 +1,39 @@
 # Unified exact BRP research - resume here
 
+R82 original experiments and offline producers are CLOSED on
+codex/round82-bdsc-unadapted-confirmation, base R81 final298e97f5d163a54eb9d899c664cafd9f07c8647c / PR142.
+Read R82 final_report/status/stage_decision/goal_evidence_scope/next_hypothesis.
+Independent R82 draft PR143 published and verified open/draft/unmerged:
+https://github.com/yifanXovo/TailoredExact/pull/143 . Evidence head9455901e5,
+exact R81 base298e97f5. All18 original arms normal/valid;
+driver78681 exits0, no optimizer remains.81 Optimize starts/returns,32889.548s.
+Six roles fixed before generation atd7e5d5fd6, no rejection/reseed; unchanged
+qualified R78 source/binary/preset. All269 hashes, physical/global evidence,
+84 checkpoints,9 Start decisions(8 eligible/accepted),150 logical startup paths
+and actual handoffs audit correctly.19 bundles/18523 files byte-verify twice.
+First plot's legend overlap retained; figures_v2 shared legend passes review,
+identical checkpoint bytes. Never rerun completed producers.
+
+U1 P/BDS/K1 certify3.641/.875/2.063s; U2 36.265/11.969/20.047s; U3 P open300,
+BDS/K1 certify61.937/81.156s. U4 P/BDS/K1 gaps.102101449/.055711507/.092950997;
+U5 .135680056/.042988450/.124216669. Primary gains on U1-U5 remain.
+U6 common3600 gaps P.021753007/BDS.029216245/K1.018363970. BDS regresses
+P34.3090% materially and K1 59.0955% severely under frozen pairwise rules;
+stronger L does not compensate for worse U. K1 improves P15.5796%; BDS retains
+-2.202171 of its advantage. BDS led P through1800 but loses by2400/3600.
+All18 objectives nonzero. This consequential confirmation loss prevents
+whole-goal acceptance; it must not be averaged away or labeled random noise.
+
+The complete mixed stage is published as its own draft against R81. Next
+separately admit bounded investigation of equal-net-load served-block exchange;
+source/mathematical rationale in next_hypothesis.md, no implementation or next
+run allocation yet. Any revision using R82 makes these roles development and
+needs new unadapted confirmation. Existing positive R79-R81 evidence remains
+scoped; no main/default merge.19% weekly remaining, ordinary usage available,
+no reset. Final evidence remote9455901e5 verified; metadata follows.
+Both final API connection failures retained; ordinary non-force push succeeds.
+Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.
+
 Current R81 experiments and audits closed on
 codex/round81-bdsc-long-protection-replication, base R80 final
 634cf03982e71849079699848ceecc3cd19ecb72 / draft PR141. Published as independent

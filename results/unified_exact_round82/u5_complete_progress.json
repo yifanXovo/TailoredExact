@@ -1,0 +1,86 @@
+{
+  "scope": "Original common3600 U5 trio; final joint and actual-Start audits pending.",
+  "records": [
+    {
+      "arm": "P-GRB",
+      "wall": 3597.1410000002943,
+      "passed": true,
+      "endpoint": {
+        "U": 0.4421742857486199,
+        "L": 0.3064942293042369,
+        "gap": 0.13568005644438297,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      }
+    },
+    {
+      "arm": "BDS-C",
+      "wall": 3597.1099999998696,
+      "passed": true,
+      "endpoint": {
+        "U": 0.429510307126033,
+        "L": 0.38652185682673973,
+        "gap": 0.04298845029929327,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      }
+    },
+    {
+      "arm": "K1-R",
+      "wall": 3597.157000000123,
+      "passed": true,
+      "endpoint": {
+        "U": 0.45012277390815464,
+        "L": 0.32590610472093523,
+        "gap": 0.12421666918721941,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "reference": "P-GRB",
+      "candidate": "BDS-C",
+      "gap_reduction_percent": 68.31630865593367,
+      "UB_delta": -0.012663978622586891,
+      "LB_delta": 0.08002762752250281,
+      "gap_delta": -0.0926916061450897,
+      "mixed_UB_LB_directions": false,
+      "classification": "both_open",
+      "material_improvement": true,
+      "material_regression": false,
+      "severe_regression": false
+    },
+    {
+      "reference": "P-GRB",
+      "candidate": "K1-R",
+      "gap_reduction_percent": 8.448837329208034,
+      "UB_delta": 0.00794848815953475,
+      "LB_delta": 0.01941187541669831,
+      "gap_delta": -0.01146338725716356,
+      "mixed_UB_LB_directions": true,
+      "classification": "both_open",
+      "material_improvement": false,
+      "material_regression": false,
+      "severe_regression": false
+    },
+    {
+      "reference": "K1-R",
+      "candidate": "BDS-C",
+      "gap_reduction_percent": 65.39236595170568,
+      "UB_delta": -0.02061246678212164,
+      "LB_delta": 0.0606157521058045,
+      "gap_delta": -0.08122821888792614,
+      "mixed_UB_LB_directions": false,
+      "classification": "both_open",
+      "material_improvement": true,
+      "material_regression": false,
+      "severe_regression": false
+    }
+  ],
+  "new_optimizer_calls": 0
+}
