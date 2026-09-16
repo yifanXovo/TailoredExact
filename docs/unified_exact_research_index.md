@@ -1,38 +1,32 @@
 # Unified exact BRP research - resume here
 
-Current stage R81 plan frozen on codex/round81-bdsc-long-protection-replication,
-based on R80 final634cf03982e71849079699848ceecc3cd19ecb72 / draft PR141,
-verified open/draft/unmerged with exact original history. Read R81 plan/status,
-R80 final_report/stage_decision and R79 final_report. Same qualified R78 source,
-binary and unified BDS-C preset; no build/test/parameter change.
-Exactly14 fresh serial runs admitted: S12 trio120, C2/D4 trios300, D6 P/BDS
-pair3600, D7 trio3600; max20160 process seconds plus5 zero-Optimize references.
-Original driver session24123 active: first nine runs normal/valid. S12 trio
-certifies atP5.640/BDS-C1.797/K1-R40.594s; C2 BDS-C certifies113.469s,
-P/K1 open gaps.058891893183/.032805674652; D4 BDS-C/K1 certify52.734/134.687s,
-P open gap.311831107997. D6 P-GRB also normal/valid at3597.172s,
-U.1572411758522922/L.15078948840741413/gap.006451687444878063, open.
-D6 BDS-C also normal/valid at3597.172s, U.15750980361456174,
-L.15578327977056106/gap.0017265238440006825, open; about73.2% P gap gain.
-D7 P-GRB reaches the frozen whole-run hard stop within cap at3598.062s:
-valid committed U.2372849915487284/L.19858649317712468/gap.03869849837160372,
-uncertified and not normal return. One native call starts but does not return;
-235 physical witnesses/68 global bounds replay successfully. No rerun.
-D7 BDS-C also normal/valid at3597.391s, U.219311768493348,
-L.20469321128735088/gap.014618557205997113, open:62.2245% less P gap,
-better U and L. All4 native calls return;4 neutral/2 insertion/44 quantity
-startup moves. K1-R is the final active arm, now in exact proof after613.191s
-paid HGA startup (2739 generations/2000 without improvement);13 complete,
-15629.936 process seconds,46 native calls started/45 returned. Read R81
-d7_p_termination.md. Stage joint audit and K1 protection still pending.
-Other original arms queued in same driver. Inspect lock/active/summary/completion
-before any action; NEVER rerun an existing campaign. Freeze driver/plan before
-launch, keep optimizers serial and defer heavy audit until closure. Preserve
-all repeats, no best-result selection or imported R80 K1 for D6. D7 long1200
-checkpoint is not identical-cap replication. No other experiment/confirmation
-admitted. Close independent draft PR; no main merge. Overall goal unmet,
-diverse unadapted confirmation still needed.38% weekly remaining, no reset.
-Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.
+Current R81 experiments and audits closed on
+codex/round81-bdsc-long-protection-replication, base R80 final
+634cf03982e71849079699848ceecc3cd19ecb72 / draft PR141. Independent draft
+publication is pending. Read R81 final_report/status/stage_decision,
+unified_method and reproduce. No production/default/parameter change; qualified
+R78 source4a0561e0 and frozen BDS-C preset remain the single candidate.
+
+All14 original arms valid,13 normal returns and one valid D7 P whole-deadline
+hard stop. Driver24123 exits0; no optimizer or offline producer active. S12
+P/BDS/K1 certify5.640/1.797/40.594s; C2 BDS113.469s certifies versus both open;
+D4 BDS/K1 certify52.734/134.687s versus P open. D6 P/BDS3600 gaps
+.006451687445/.001726523844 reproduce73.2392% primary gain with worse U/stronger
+L and no fresh K1. D7 P/BDS/K1 gaps.038698498372/.014618557206/.017135655033
+are all open: BDS improves P62.2245% and K1 14.6892%, retention1.116733.
+P's3598.062s hard-stop evidence remains explicitly uncertified; no rerun.
+
+52 Optimize starts/51 returns,19227.077s paid wall. All original physical,
+coverage, actual7 Start vectors/readback, all25 paths and11 same-cap repeat
+checks pass. Fifteen bundles/46670 raw files verify twice; reviewed long-window
+figure included. D7 cross-cap checks are not identical-cap replication. No new
+build/test/qualification/extension/confirmation. Never rerun completed producers.
+
+Next: publish independent stage draft PR, then separately admit diverse,
+unadapted confirmation including nonzero medium/large proof roles; no new
+confirmation input/result has been opened or next experiment admitted. Overall
+goal unmet.37% weekly remaining, no reset. No main merge. Owned
+E:/codes/ExactEBRP-round66; original dirty checkout untouched.
 
 Current completed stage R80 published as draft PR141 on
 codex/round80-bdsc-primary-deficits,

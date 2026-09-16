@@ -1,78 +1,50 @@
-# Round81 original serial campaign active; thirteen runs complete
+# Round81 experiments and audits closed; independent draft publication pending
 
-Base R80 final634cf03982e71849079699848ceecc3cd19ecb72 / draft PR141,
-verified open/draft/unmerged. Branch codex/round81-bdsc-long-protection-replication.
-Read plan.md, R80 final_report.md/status.md and R79 final_report.md.
-No C++/parameter/default change; qualified R78 source4a0561e0/build/round78/v1.
+Base R80 final634cf03982e71849079699848ceecc3cd19ecb72 / draft PR141.
+Branch codex/round81-bdsc-long-protection-replication, owned checkout
+E:/codes/ExactEBRP-round66; original dirty E:/codes/ExactEBRP untouched.
+Read final_report.md, stage_decision.json, unified_method.md and reproduce.md.
+No C++/parameter/default change; same qualified R78 source4a0561e0 and binary.
 
-Order S12 P/BDS/K1 common120, C2 P/BDS/K1 common300, D4 P/BDS/K1 common300,
-D6 P/BDS common3600, D7 P/BDS/K1 common3600. Exactly14 runs, maximum20160
-process seconds, five zero-Optimize reference exports. No build/test/micro.
-Stop on a validity failure, no automatic rerun. Same seed0/Threads1/core2mask4,
-whole deadline only. All original/repeated results retained; no best-repeat
-selection. D6 has no new K1 arm, so do not import R80 K1 into its fresh pair.
-D7 is a fresh longer-cap experiment, not identical-cap replication of R78.
+All14 original arms are valid:13 normal returns and one within-cap D7 P hard
+stop. Driver24123 exits0; driver_completion.json confirms14/14. No optimizer,
+build, audit, package, plot or publication session is active. Never rerun any
+completed producer. The original native queue and all offline work are closed.
 
-Original driver exec24123 is active. The first nine runs are normal and valid.
-S12 P/BDS-C/K1-R certify at5.640/1.797/40.594s. C2 BDS-C certifies at113.469s;
-P/K1 finish open with gaps.058891893183/.032805674652. D4 BDS-C/K1 certify at
-52.734/134.687s; P finishes open with gap.311831107997. D6 P-GRB also returns
-normally/valid at3597.172s, U.1572411758522922, L.15078948840741413,
-gap.006451687444878063, uncertified. D6 BDS-C also returns normally/valid at
-3597.172s, U.15750980361456174, L.15578327977056106,
-gap.0017265238440006825, uncertified: about73.2% lower gap than fresh P,
-with worse U and stronger L. Its startup reports2 neutral and4 quantity moves,
-exhausted with no verification failure. D7 P-GRB reaches the predeclared
-whole-run hard stop at3598.062s, within3600, with235 physical witnesses and68
-global bounds validated: U.2372849915487284, L.19858649317712468,
-gap.03869849837160372. This is interrupted committed evidence, not normal
-return or certification; one Optimize starts and does not return. No rerun.
-D7 BDS-C then returns normally/valid at3597.391s, U.219311768493348,
-L.20469321128735088/gap.014618557205997113, still uncertified. Its gap is
-62.2245% smaller than fresh P, with better U and L. All4 native calls return;
-startup reports4 neutral/2 insertion/44 quantity moves and full exhaustion.
-K1-R is the final active arm, now in the exact phase after613.190993s paid
-startup (2739 HGA generations,2000 without improvement). Thirteen arms
-total15629.936 process seconds/.723130 separate replay,46 native calls started
-and45 returned. Twelve normal returns plus one valid within-cap hard stop.
-Read d7_p_termination.md. Joint stage replay and K1 protection remain pending.
-These are completed driver endpoints, pending the joint stage audit.
-On recovery inspect campaign's
-active_run.lock, active_experiment.json, summary.json and driver_completion.json.
-Never invoke a producer again if campaign exists. No heavy audit or build while
-the driver is active. After closure audit physical/scope/coverage/actual Starts,
-all25 paths and prior-repeat identity, then package and publish independent
-stage draft PR. No main merge. Diverse unadapted confirmation remains unadmitted
-and necessary; overall goal unmet.38% weekly remaining, no reset consumed.
-Owned E:/codes/ExactEBRP-round66; original dirty E:/codes/ExactEBRP untouched.
+S12 P/BDS/K1 certify at5.640/1.797/40.594s. C2 BDS certifies113.469s while
+P/K1 remain open at300. D4 BDS/K1 certify52.734/134.687s while P remains open.
+D6 fresh P/BDS3600 gaps.006451687445/.001726523844:73.2392% primary gain,
+worse U/stronger L; no fresh D6 K1 arm. D7 P/BDS/K1 gaps at3600 are
+.038698498372/.014618557206/.017135655033, all uncertified. BDS improves P
+62.2245% and K1 14.6892%; K1 P-advantage retention1.116733. D7 BDS has better
+U/L than P and worse U/stronger L than K1. d7_p_termination.md records P's
+3598.062s hard stop: valid committed evidence, no normal finalization/certificate.
+The invalid over-cap R72 D7 experiment remains excluded; no rerun occurs here.
 
-The source-grounded complete method is consolidated in unified_method.md;
-reproduce.md describes the offline sequence and byte verifier. Analyze and
-replication also check cross-run global-bound/physical-UB consistency without
-pooling endpoints. These processors have not executed while optimization runs.
-No extra build/test/native solve. The original driver remains the only active
-optimizer; it must not be restarted.
+All source/physical/scope/coverage/Start/path audits pass.52 Optimize starts,
+51 returns,436 physical witnesses,22534 global-bound events,23087 observed
+commits; no unseen/uncommitted payload promoted. Seven actual Starts pass full
+vector/row/readback checks and are accepted. Eleven identical-cap arms repeat
+prior outcomes; all original and repeated endpoints remain. D7's9 cross-cap
+checkpoint rows are consistency evidence, not identical-cap replication.
 
-round81_plot.py is prepared and syntax-checked only. After all three offline
-audits pass, render its audited checkpoint figure in a separate Python plotting
-environment and inspect the PNG. Matplotlib is absent in both current Python
-runtimes; install it in an isolated build/round81 environment only after the
-optimizer queue closes. No plotting dependency has yet been installed and no
-figure producer has run. Bundled Windows Python3.12.14 supports venv and pip.
+Paid process wall19227.077s; separate replay.799696s, primary audit108.352397s,
+mechanism3.325866s, replication.069753s. Fifteen lossless bundles retain46670
+files/208721039 raw bytes/32013149 compressed bundle bytes. Packaging/verification
+22.893553s and byte-only verification2.160114s both pass. Reviewed PNG/SVG and
+plotted data are in figures/. Isolated Python3.12.14/Matplotlib3.11.2 environment
+build/round81/plot_env is created only after solving; exact package versions
+are in plot_environment.json and plot_requirements.txt. No new native solve.
 
-Interim publication recovered through exact Git objects after three HTTPS
-failures and four failed CLI API attempts plus one connector tree error. A verified
-prefix first reached784fbd7b0, then directory-delta publication reached
-2dd0ea993dba9fb25e1172f22c039a7fd329097c, with original hashes preserved and
-non-force ref updates. publication_api/directory_deltas.json is the successful
-receipt. A later incremental timeout is retained in d6_replication_progress.json;
-d6_replication_recovery.json then verifies all three original commits and the
-non-force remote update to b5951a3dc44ea4e7276090c73ac3a2b00125cbe4 in40.034784s.
-The subsequent D7 interruption checkpoint also publishes successfully to
-aaf8de23ceaef0620c825a48667aa81f6d67385a in27.938310s;
-publication_api/d7_p_interruption.json preserves the exact-history receipt.
-All publication sessions ended; the stage PR awaits campaign closure.
+Ordinary usage remains allowed,37% weekly remaining, no reset consumed.
+The evidence and frozen architecture pass stage review. Overall goal is still
+unmet: publish this independent draft PR, then separately admit structurally
+diverse unadapted confirmation, including nonzero medium/large proof roles.
+No new confirmation input/result has been opened and no next allocation has
+been admitted. Keep the one unchanged candidate. Do not merge main.
 
-The thirteen-arm progress and prepared plot/reporting files also publish
-successfully to002aa711a6bc5e6a745546f4d3dd9003ae82ca68 in64.904755s;
-publication_api/d7_bdsc_endpoint.json retains the exact-history receipt.
+Interim publication succeeded through exact Git objects to
+002aa711a6bc5e6a745546f4d3dd9003ae82ca68. All original hashes and non-force
+updates were verified. Preserve the three ordinary HTTPS failures, four failed
+CLI API attempts and one connector tree error; successful subsequent receipts
+are in publication_api/. Final evidence publication and draft PR follow.

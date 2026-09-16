@@ -37,6 +37,14 @@ hashes and plotting cost. A missing physical U is not plotted as a zero gap;
 hard-stop endpoints are marked separately. The figure does not introduce an
 additional outcome criterion or a fresh D6 K1 control. The rendering environment
 is separate from the measured executable and its production configuration.
+The completed rendering uses an isolated Python3.12.14 environment at
+`build/round81/plot_env` and Matplotlib3.11.2. `plot_requirements.txt` pins its
+packages and `plot_environment.json` records setup cost. In a separate
+reproduction checkout with the audited campaign and no generated figures
+directory, create a Python3.12 venv, install those pinned requirements and run
+`scripts/round81_plot.py` with that venv's interpreter. Keep the original figures
+and receipts. The supplied PNG was visually reviewed without a rerender;
+cross-platform byte-identical rendering is not claimed.
 
 After delivery, verify every retained byte without extraction or Gurobi:
 
