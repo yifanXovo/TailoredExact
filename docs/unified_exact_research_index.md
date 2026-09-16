@@ -1,32 +1,35 @@
 # Unified exact BRP research - resume here
 
-Current active stage R82, codex/round82-bdsc-unadapted-confirmation,
-base R81 final298e97f5d163a54eb9d899c664cafd9f07c8647c / verified draft PR142.
-Read R82 plan/status/preregistration/generation/protocol/reproduce and
-current goal_evidence_scope.md. Six roles fixed before generation atd7e5d5fd6;
-no screening/replacement, unchanged qualified R78 BDS-C bytes.18 serial
-P/BDS/K1 arms, max34020s plus six zero-Optimize references. Original driver
-78681/PID10832 remains active; never restart it. Latest durable snapshot has
-17 normal/valid completions,72 Optimize starts/72 returns,
-29292.377s paid process wall. U6 K1-R active, last arm.
-U6 P/BDS normal/open gaps.021753007/.029216245; BDS regresses
-34.3090% materially with worse U/stronger L (not severe under frozen rules).
-This negative confirmation result remains; overall goal unmet. No revision or
-extra experiment admitted yet. K1 and full audits precede the next decision. Inspect campaign/summary.json for live updates.
-U1 P/BDS/K1 certify3.641/.875/2.063s; U2 36.265/11.969/20.047s. U3 P remains
-open300 gap.315606693, BDS/K1 certify61.937/81.156s. All three nonzero.
-U4 common3600 P/BDS/K1 gaps.102101449/.055711507/.092950997; BDS improves
-P45.4351%, K1 40.0636%, with worse U/stronger L; all normal/open.
-U5 common3600 P/BDS/K1 gaps.135680056/.042988450/.124216669; BDS improves
-P68.3163% and K1 65.3924%, with both U and L better.
-K1/P gap difference is below the frozen10% relative rule; no invented role.
-All18 endpoints, final joint/Start audits, plot, bundles and independent R82
-draft PR still pending. Final producers must not run while queue is active.
-Familiar recipes/shared Citi geography limit independence. Any later revision
-using these outcomes converts them to development. Overall goal unmet;
-no main merge/reset,21% weekly remaining at2026-09-16T12:04:51Z.
-Remote through5547f8e3a freshly verified; exact-object publication preserves
-original commits after two HTTPS failures. See publication_api ledgers.
+R82 original experiments and offline producers are CLOSED on
+codex/round82-bdsc-unadapted-confirmation, base R81 final298e97f5d163a54eb9d899c664cafd9f07c8647c / PR142.
+Read R82 final_report/status/stage_decision/goal_evidence_scope/next_hypothesis.
+Independent R82 draft publication pending. All18 original arms normal/valid;
+driver78681 exits0, no optimizer remains.81 Optimize starts/returns,32889.548s.
+Six roles fixed before generation atd7e5d5fd6, no rejection/reseed; unchanged
+qualified R78 source/binary/preset. All269 hashes, physical/global evidence,
+84 checkpoints,9 Start decisions(8 eligible/accepted),150 logical startup paths
+and actual handoffs audit correctly.19 bundles/18523 files byte-verify twice.
+First plot's legend overlap retained; figures_v2 shared legend passes review,
+identical checkpoint bytes. Never rerun completed producers.
+
+U1 P/BDS/K1 certify3.641/.875/2.063s; U2 36.265/11.969/20.047s; U3 P open300,
+BDS/K1 certify61.937/81.156s. U4 P/BDS/K1 gaps.102101449/.055711507/.092950997;
+U5 .135680056/.042988450/.124216669. Primary gains on U1-U5 remain.
+U6 common3600 gaps P.021753007/BDS.029216245/K1.018363970. BDS regresses
+P34.3090% materially and K1 59.0955% severely under frozen pairwise rules;
+stronger L does not compensate for worse U. K1 improves P15.5796%; BDS retains
+-2.202171 of its advantage. BDS led P through1800 but loses by2400/3600.
+All18 objectives nonzero. This consequential confirmation loss prevents
+whole-goal acceptance; it must not be averaged away or labeled random noise.
+
+First publish this complete mixed stage as its own draft against R81. Then
+separately admit bounded investigation of equal-net-load served-block exchange;
+source/mathematical rationale in next_hypothesis.md, no implementation or next
+run allocation yet. Any revision using R82 makes these roles development and
+needs new unadapted confirmation. Existing positive R79-R81 evidence remains
+scoped; no main/default merge.19% weekly remaining, ordinary usage available,
+no reset. Remote throughf48b80f14 verified; final evidence push/PR still pending.
+Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.
 
 Current R81 experiments and audits closed on
 codex/round81-bdsc-long-protection-replication, base R80 final

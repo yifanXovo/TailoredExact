@@ -1,8 +1,9 @@
 # Round82 evidence and reproduction
 
-This stage is still running. Final audit, mechanism, bundle and figure outputs
-below are produced only after the original18-arm queue closes; their names are
-not evidence that they already exist. Check status.md and campaign/summary.json.
+All18 original arms are closed, normal and valid; driver78681 exits0. Joint
+and actual-mechanism audits pass,19 bundles verify twice, and the final figure
+passes visual review. Never rerun the original driver or completed producers.
+The U6 performance failure remains; overall goal is unmet. Publication pending.
 
 ## Frozen identities and prospective generation
 
@@ -98,8 +99,11 @@ The checked figure producer is scripts/round82_plot.py. After the two audits
 pass it reads only their long-window observations. It uses the existing
 build/round81/plot_env/Scripts/python.exe environment, whose exact packages
 are recorded in R81/plot_requirements.txt. No new installation or optimizer is
-required. It refuses to overwrite figures/. PNG layout is inspected before
-delivery. Dashed lines guide the eye; missing physical U is not a zero gap.
+required. It refuses to overwrite figures/. The first rendering is preserved in figures/ with its legend-overlap review.
+A separate scripts/round82_plot_v2.py writes figures_v2/ with a shared external
+legend and passes visual review. Both renders have identical plotted-checkpoint
+bytes, recorded hashes and costs. Dashed lines guide the eye; missing physical
+U is not a zero gap.
 
 Absolute Windows model/log paths are retained in raw journal receipts. Byte
 verification is portable, but full mathematical replay may need the original
@@ -124,5 +128,6 @@ recovery, not replacement experimental evidence.
 The six draws use familiar generator recipes and partly overlapping CitiBike
 stations. See scope_and_nonzero.md; confirmation is restricted to this evidence
 range. Negative outcomes stay in the table. If used to revise the algorithm,
-these data become development for the revision. No overall success or draft PR
-acceptance is inferred from an unfinished queue.
+these data become development for the revision. Final evidence passes, but U6 prevents overall performance acceptance.
+The complete mixed result is published as a separate draft; no main merge.
+Any subsequent revision informed by R82 must use new unadapted confirmation.
