@@ -1,0 +1,21 @@
+{
+  "wall_seconds": 1.105,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "GitHub API error 422: {\"message\":\"base_tree is not a valid tree oid\",\"documentation_url\":\"https://docs.github.com/rest/git/trees#create-a-tree\",\"status\":\"422\"}"
+      }
+    ],
+    "structuredContent": {
+      "error": "GitHub API error 422: {\"message\":\"base_tree is not a valid tree oid\",\"documentation_url\":\"https://docs.github.com/rest/git/trees#create-a-tree\",\"status\":\"422\"}",
+      "error_code": "INVALID_ARGUMENT",
+      "error_data": {
+        "message": "base_tree is not a valid tree oid",
+        "documentation_url": "https://docs.github.com/rest/git/trees#create-a-tree",
+        "status": "422"
+      }
+    },
+    "isError": true
+  }
+}

@@ -105,10 +105,14 @@ def main():
                     response=api('POST','git/blobs',dict(content=base64.b64encode(data).decode(),encoding='base64'))
                     assert response['sha']==digest,'Uploaded blob is not byte-identical'
                     uploaded.add(digest)
-            # Publish only immediate directory entries. Referencing unchanged
-            # child trees avoids the API's recursive base-tree expansion timeout.
+            # Apply only immediate changed entries to this directory's base.
+            # Unchanged large sibling trees need no recreation or validation.
+            elements=[entry for name,entry in new.items() if old.get(name)!=entry]
+            elements += [dict(entry,sha=None) for name,entry in old.items() if name not in new]
+            payload=dict(tree=elements)
+            if previous is not None:payload['base_tree']=previous
             try:
-                created=api('POST','git/trees',dict(tree=list(new.values())))
+                created=api('POST','git/trees',payload)
             except RuntimeError:
                 # A timeout can occur after the immutable object was stored.
                 # Read its expected hash before deciding whether the write failed.
