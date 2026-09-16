@@ -1,5 +1,12 @@
 # Unified exact BRP research - resume here
 
+R83 ACTIVE on codex/round83-equal-net-block-exchange, base R82 final
+30996a5c023adc2257cf9f4581e3672cf9a644d1 / draft PR143. Read R83 plan and
+mathematics before work. Initial standalone equal-net block exchange diagnostic
+only: one compile, eight oracle fixtures in one process, five fixed witnesses
+U6/D6/D7/E8/N12, zero Optimize. No production integration or full solves yet.
+Overall unmet; U6 confirmation loss preserved. Do not rerun closed R82 work.
+
 R82 original experiments and offline producers are CLOSED on
 codex/round82-bdsc-unadapted-confirmation, base R81 final298e97f5d163a54eb9d899c664cafd9f07c8647c / PR142.
 Read R82 final_report/status/stage_decision/goal_evidence_scope/next_hypothesis.
