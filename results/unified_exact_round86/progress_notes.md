@@ -49,3 +49,13 @@ Full campaign/mechanism/confirmation audits remain pending.
 F5 P original #7 started1789684278.4751797 Unix,cap3600; driver88121/PID45336
 continues. Resource snapshot22:31:57Z: ordinary allowed,weekly36% remaining,
 shared account,zero reset. No added role, repeat, extension or seed allocation.
+
+## F5 original P closes; ENS original starts
+
+F5 P is normal/per-run-valid at3597.125s, U=.43423583676402355,
+L=.2682505969243228, signed gap=.16598523983970076, open. All early/middle/
+late observations remain in its original journal; no rerun. First seven
+originals total4593.391s,21 Optimize starts/returns. F5 ENS #8 is active at
+cap3600 on the same source/input/core/settings; no F5 pair conclusion yet.
+Fresh23:32:26Z usage: ordinary allowed,weekly31% remaining; zero resets.
+The remaining five declared originals are unchanged; no extra allocation.
