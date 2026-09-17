@@ -1,0 +1,213 @@
+{
+  "passed": true,
+  "tests": [
+    {
+      "name": "historical_observed_run_1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_4",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_5",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_6",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_7",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_8",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_9",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_10",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_11",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_12",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_13",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_14",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_15",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_16",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_17",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_18",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_19",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_20",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "historical_observed_run_21",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "all_84_historical_checkpoints_unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "no_observed_U_retains_qualified_full_original_L",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "normal_no_U_does_not_become_available_or_zero_gap",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "final_only_physical_route_is_available_only_after_exit",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "missing_U_cannot_hide_certificate_gain_or_loss",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "interrupted_no_U_remains_open",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "unavailable_native_final_L_uses_only_previously_qualified_L",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "full_scope_without_native_preconditions",
+      "passed": true,
+      "detail": "missing_full_native_preconditions"
+    },
+    {
+      "name": "restricted_cutoff_without_physical_witness",
+      "passed": true,
+      "detail": "unwitnessed_cutoff"
+    },
+    {
+      "name": "inconsistent_bound_flag",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "final_only_witness_contradicts_prior_L",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "wrong_original_model_finalization",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "native_solution_without_verified_physical_U",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "receipt_later_than_cutoff",
+      "passed": true,
+      "detail": "outside_cutoff"
+    },
+    {
+      "name": "receipt_hash_or_length_mismatch",
+      "passed": true,
+      "detail": "data_hash_or_length_mismatch"
+    },
+    {
+      "name": "receipt_availability_after_complete_observation",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "test_count": 37,
+  "historical_runs_checked": 21,
+  "validation_revision": 2,
+  "prior_successful_receipt": "offline_validation.json",
+  "preregistered_generator_git_bytes_checked": true,
+  "historical_checkpoints_checked": 84,
+  "optimizer_calls": 0,
+  "new_performance_runs": 0,
+  "script_sha256": {
+    "scripts/round86_native_evidence.py": "d88cd16dd3e2c93b70ed42f3cbd269bf7f3184bc1ad801a1712dc867e387ee58",
+    "scripts/round86_research.py": "97f20c8c3ffb58da8bdaece8f558513bed0f85b05c0f210e1b7ed60633062bbf",
+    "scripts/round86_analyze.py": "421d50a6a63f3a8a2281a4da3cbfca1b0aec95a1e38417532cf8e74c754188f9",
+    "scripts/round86_offline_validate.py": "56e8d10c168827039ee65e4bac72bb256c072187c36a0f2f65301150d8912a39",
+    "scripts/round86_mechanism.py": "02b54efe481d295a4c5013753e20816dfe60627b7dc642a83934f0785c2d346a",
+    "scripts/round86_summarize.py": "435cee0c123d49e2df1b8723cadafd3a68b1211a66701ab056fbfec895039fc5",
+    "scripts/round86_plot.py": "fc17cac6849cdb7ce7d275cd6d6187d52361a9b8eb51610c69b7da9b6218e261",
+    "scripts/round86_confirmation_audit.py": "719d47424ef90f57a54694250eaf7c3f77d24e45189d980902ac5864abe18d31",
+    "scripts/round86_package.py": "86be674e11098b090b116592a8cd12586ef01ffa38650c9b3f06986f15942743"
+  },
+  "historical_identity_sha256": "0a266c5a784d222718e948ddf50876c04511730dff4883beb59cdec227484c9c",
+  "historical_summary_sha256": "3faffb6fbd7ae8f0c4727ae680eb1df5058664a89f492ae3909e4321cf4399b6",
+  "wall_seconds": 0.7923932000994682,
+  "scope": "Offline reader tests only. Counterfactual event/result fixtures are not native observations, performance rows, qualification calls or new evidence about algorithm speed."
+}

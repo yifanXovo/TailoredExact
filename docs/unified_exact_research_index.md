@@ -3,9 +3,10 @@
 R86 ADMITTED on codex/round86-ensc-varied-unadapted-confirmation, based on R85
 final a3a7c89cfa752fd0c029c83d43996562df0be3fd / draft PR146. Read R86 plan,
 preregistration, status and admission_resource. Selected F1/F2/F5/F6 before
-generation:12 arms,max22860s,4 zero-Optimize references. No input/solve yet.
-Source/preset/build unchanged. Freeze exact recipe, then generate once; review
-and offline-test missing-UB/final-only witness evidence before native launch.
+generation:12 arms,max22860s,4 zero-Optimize references. Four inputs generated once after recipe freeze2d770ba01; no solve yet.
+Source/preset/build unchanged. Offline validation v2 passes37 checks; missing U/final-only route cases handled.
+Prior validation and corrected inherited Git/local CRLF check retained.
+Freeze all driver/tool bytes and input hashes, then launch original driver once.
 Weekly remaining40%, account-wide; no reset. Overall goal still unmet.
 
 R85 evidence CLOSED on codex/round85-ensc-remaining-protection-replication,

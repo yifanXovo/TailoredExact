@@ -1,0 +1,117 @@
+{
+  "base": "a3a7c89cfa752fd0c029c83d43996562df0be3fd",
+  "candidate_source": "4496078f25c0cdad1cf7a5c39835fd23121e8978",
+  "panel": [
+    {
+      "id": "F1",
+      "family": "citibike",
+      "V": 12,
+      "M": 2,
+      "Q": 20,
+      "geography": "regional",
+      "inventory": "surplus",
+      "T_seconds": 3600,
+      "cap": 120,
+      "instance_path": "reference/round86_unadapted_confirmation/F1.txt",
+      "input_sha256": "93d04694c4003e0e868885a2da5671c953c7544270bd8977205293faff3fb318",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "stage": "confirmation_unadapted",
+      "role": "Prospectively frozen varied structure; all generated outcomes retained",
+      "lambda": 0.15
+    },
+    {
+      "id": "F2",
+      "family": "synthetic",
+      "V": 20,
+      "M": 2,
+      "Q": 30,
+      "geometry": "alternating_rings",
+      "inventory": "paired_shortage",
+      "T_seconds": 3600,
+      "cap": 300,
+      "instance_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "stage": "confirmation_unadapted",
+      "role": "Prospectively frozen varied structure; all generated outcomes retained",
+      "lambda": 0.15
+    },
+    {
+      "id": "F5",
+      "family": "synthetic",
+      "V": 50,
+      "M": 4,
+      "Q": 30,
+      "geometry": "perturbed_grid",
+      "inventory": "paired_shortage",
+      "T_seconds": 7200,
+      "cap": 3600,
+      "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+      "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "stage": "confirmation_unadapted",
+      "role": "Prospectively frozen varied structure; all generated outcomes retained",
+      "lambda": 0.15
+    },
+    {
+      "id": "F6",
+      "family": "citibike",
+      "V": 50,
+      "M": 4,
+      "Q": 30,
+      "geography": "compact",
+      "inventory": "shortage",
+      "T_seconds": 18000,
+      "cap": 3600,
+      "instance_path": "reference/round86_unadapted_confirmation/F6.txt",
+      "input_sha256": "aeda223c50294226f6447e2cd2a6fe023fbf22e84a67e2bfa1f61d3dba919925",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F6",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "stage": "confirmation_unadapted",
+      "role": "Prospectively frozen varied structure; all generated outcomes retained",
+      "lambda": 0.15
+    }
+  ],
+  "order": [
+    "F1",
+    "F2",
+    "F5",
+    "F6"
+  ],
+  "arms": [
+    "P-GRB",
+    "ENS-C",
+    "K1-R"
+  ],
+  "all_inputs_exposed": false,
+  "prior_bindings": {},
+  "maximum_process_seconds": 22860,
+  "checkpoints": {
+    "120": [
+      30,
+      60,
+      120
+    ],
+    "300": [
+      60,
+      120,
+      180,
+      300
+    ],
+    "3600": [
+      300,
+      600,
+      1200,
+      1800,
+      2400,
+      3600
+    ]
+  }
+}
