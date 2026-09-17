@@ -9,7 +9,10 @@ Source/preset/build unchanged. Offline validation v2 passes37 checks; missing U/
 Prior validation and corrected inherited Git/local CRLF check retained.
 Read runtime_checkpoint and campaign summary. No heavy audit/build/plot/package
 while native solver is active; after closure run each producer once.
-Weekly remaining40%, account-wide; no reset. Overall goal still unmet.
+First6 originals normal/valid,20 calls returned,996.266s. F1 ENS11.891s
+vsP49.953/K143.203 certified. F2 ENS/P gap gain75.8535%, ENS/K1 gain60.6100%,
+all open300 with same U. F5 P #7 now active3600; no new allocation.
+Latest weekly remaining36%, account-wide; no reset. Overall goal still unmet.
 
 R85 evidence CLOSED on codex/round85-ensc-remaining-protection-replication,
 base R84 final ed0cd977ac2ea1cf7a7bf1236a15dd845a3ed948 / draft PR145.
