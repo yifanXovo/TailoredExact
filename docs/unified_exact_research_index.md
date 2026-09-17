@@ -1,5 +1,31 @@
 # Unified exact BRP research - resume here
 
+R85 evidence CLOSED on codex/round85-ensc-remaining-protection-replication,
+base R84 final ed0cd977ac2ea1cf7a7bf1236a15dd845a3ed948 / draft PR145.
+Read R85 final_report.md, status.md, stage_decision.json, goal_evidence_scope.md
+and reproduce.md. Independent draft PR146 is published, open/draft/unmerged:
+https://github.com/yifanXovo/TailoredExact/pull/146 . Exact evidence head
+0f490ce49ef4662365165bbeebb249d6732cab1e is independently verified remotely.
+
+All21 originals normal/valid;81 Optimize starts/returns;15456.440s paid.
+Driver22846/PID49028 and all native processes CLOSED. Never poll/relaunch.
+Campaign/mechanism/replication audits pass;11 actual Starts mapped, read back
+and native accepted;22 bundles/41210 members verified twice;5 figures reviewed.
+No new build, qualification, startup run or input generation. Source4496078f2
+and R83 ENS-C binary remain unchanged. All producer outputs are immutable.
+
+E7 near P; S12 nonzero repair; D3/C2 ENS certificates vsP/K1 open300.
+C6/C8 ENS/P gap gains52.4137%/40.0738% at600, K1 retention1.33445/1.60112.
+C8 U worse than K1 by.00503987, L stronger by.03962291. D6 ENS repeats
+certificate3181.735s with exact R84 U/L; current P/K1 remain open3600.
+Earlier D7 material final and severe1200 K1 losses remain disclosed.
+
+Overall goal unmet: exposed protection is not unadapted confirmation. R86
+recipe/scripts remain local preparation only; no generation or solver run.
+Fresh account-wide weekly remaining41%, no reset. Next,
+freeze a finite confirmation plan and review missing-UB handling before use.
+Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.
+
 R84 evidence CLOSED on codex/round84-ensc-long-protection-replication, base R83
 final131d09280a1563243d0201e68367b26baf5079c3 / draft PR144. Evidence review
 passes; independent draft PR145 is published and verified open/draft/unmerged:
