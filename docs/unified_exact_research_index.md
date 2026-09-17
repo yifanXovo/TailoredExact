@@ -5,7 +5,8 @@ R84 ACTIVE on codex/round84-ensc-long-protection-replication, base R83 final
 Original queue is already launched: exec session19331 / driver PID48520.
 Runs1/2 normal/valid: D6 P3597.187s,gap.006425693916377456,open;
 ENS certifies3171.157s,U.15708313110317415,L.15708313110316996.
-Run3 D6 K1-R started at1789637812.5953043.7 Optimize/6768.344s so far.
+Run3 D6 K1-R started at1789637812.5953043. The completed prefix costs
+7 returned Optimize/6768.344s; the active run's cost is still accumulating.
 Final campaign/Start/replication audits remain pending. Read current summary/runtime_checkpoint
 for later progress and never restart the producer. Preliminary remote5ad3564c2
 preserves the frozen plan/readers; local871e3b812 also records transport recovery.
