@@ -1,35 +1,35 @@
 {
   "stage": 86,
   "plan_commit": "0666c13e2ee8c21c318667def1149980fbd692ac",
-  "recipe_commit": "2d770ba0163329794edc918a8ccad1735ed50b12",
   "driver_session": 88121,
   "driver_pid": 45336,
-  "completed": 1,
+  "completed": 3,
   "planned": 12,
   "active": {
-    "number": 2,
-    "arm": "ENS-C",
-    "started_unix": 1789683332.056803,
+    "number": 4,
+    "arm": "P-GRB",
+    "started_unix": 1789683387.1834073,
     "driver_pid": 45336,
-    "destination": "results\\unified_exact_round86\\campaign\\local_raw\\02_F1_ENS-C"
+    "destination": "results\\unified_exact_round86\\campaign\\local_raw\\04_F2_P-GRB"
   },
   "last_experiment": {
-    "number": 2,
-    "arm": "ENS-C",
-    "started_unix": 1789683332.056803,
+    "number": 4,
+    "arm": "P-GRB",
+    "started_unix": 1789683387.1834073,
     "driver_pid": 45336,
-    "destination": "results\\unified_exact_round86\\campaign\\local_raw\\02_F1_ENS-C"
+    "destination": "results\\unified_exact_round86\\campaign\\local_raw\\04_F2_P-GRB"
   },
   "campaign_lock_present": true,
-  "recorded_child_pid": 38784,
+  "recorded_child_pid": 49796,
   "recorded_child_mask": 4,
-  "active_elapsed_at_snapshot": 1.9591681957244873,
-  "total_completed_process_seconds": 49.95300000021234,
-  "completed_native_starts": 1,
-  "completed_native_returns": 1,
-  "updated_unix": 1789683334.0159712,
+  "active_elapsed_at_snapshot": 47.282057762145996,
+  "total_completed_process_seconds": 105.04700000071898,
+  "completed_native_starts": 9,
+  "completed_native_returns": 9,
+  "updated_unix": 1789683434.465465,
   "stage_complete": false,
   "overall_goal_complete": false,
   "no_relaunch": true,
-  "scope": "Mutable recovery snapshot only; original driver88121 must never be relaunched. No active native evidence is a formal checkpoint until independently audited."
+  "snapshot_script_sha256": "f803657c9c5b3958742244256125a0fd1a59a677c80d129c4f36e3724ff4abf4",
+  "scope": "Mutable recovery snapshot, not a performance checkpoint or proof of PID liveness. Native and driver status must be read independently."
 }

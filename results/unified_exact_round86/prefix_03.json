@@ -1,0 +1,98 @@
+{
+  "completed_prefix": 3,
+  "total_paid_seconds": 105.04700000071898,
+  "calls": 9,
+  "returns": 9,
+  "all_per_run_valid": true,
+  "rows": [
+    {
+      "id": "F1",
+      "arm": "P-GRB",
+      "normal": true,
+      "calls": 1,
+      "U": 0.195558533871107,
+      "L": 0.19555853387105568,
+      "gap": 5.132005931329786e-14,
+      "certificate": true,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "optimal",
+      "available": true,
+      "paid_completion_seconds": 49.95300000021234,
+      "relative_gap": 2.62428124702157e-13
+    },
+    {
+      "id": "F1",
+      "arm": "ENS-C",
+      "normal": true,
+      "calls": 4,
+      "U": 0.195558533871107,
+      "L": 0.19555853387110694,
+      "gap": 5.551115123125783e-17,
+      "certificate": true,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "optimal",
+      "available": true,
+      "paid_completion_seconds": 11.891000000294298,
+      "relative_gap": 2.838595183365679e-16
+    },
+    {
+      "id": "F1",
+      "arm": "K1-R",
+      "normal": true,
+      "calls": 4,
+      "U": 0.195558533871107,
+      "L": 0.1955585338711074,
+      "gap": -3.885780586188048e-16,
+      "certificate": true,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "optimal",
+      "available": true,
+      "paid_completion_seconds": 43.20300000021234,
+      "relative_gap": -1.987016628355975e-15
+    }
+  ],
+  "pairs": [
+    {
+      "reference": "P-GRB",
+      "candidate": "ENS-C",
+      "UB_delta": 0.0,
+      "LB_delta": 5.1264548162066603e-14,
+      "gap_delta": -5.1264548162066603e-14,
+      "mixed_UB_LB_directions": false,
+      "classification": "both_certified_small",
+      "wall_delta": -38.061999999918044,
+      "material_improvement": true,
+      "material_regression": false,
+      "severe_regression": false
+    },
+    {
+      "reference": "P-GRB",
+      "candidate": "K1-R",
+      "UB_delta": 0.0,
+      "LB_delta": 5.1708637371916666e-14,
+      "gap_delta": -5.1708637371916666e-14,
+      "mixed_UB_LB_directions": false,
+      "classification": "both_certified_small",
+      "wall_delta": -6.75,
+      "material_improvement": false,
+      "material_regression": false,
+      "severe_regression": false
+    },
+    {
+      "reference": "K1-R",
+      "candidate": "ENS-C",
+      "UB_delta": 0.0,
+      "LB_delta": -4.440892098500626e-16,
+      "gap_delta": 4.440892098500626e-16,
+      "mixed_UB_LB_directions": false,
+      "classification": "both_certified_small",
+      "wall_delta": -31.311999999918044,
+      "material_improvement": true,
+      "material_regression": false,
+      "severe_regression": false
+    }
+  ],
+  "raw_summary_sha256_at_read": "ac17bba232c64c76bc0dbd6df058f2602b869873008370ca0fa8f0a59c0f7afb",
+  "recorded_unix": 1789683434.4009213,
+  "scope": "Immutable first-three original per-run-checked endpoints. Whole campaign, actual mechanism, input-freeze and packaging audits remain pending. No new solve."
+}
