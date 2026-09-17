@@ -1,17 +1,23 @@
 # Round84 status
 
-Latest: D6 is complete, three independently valid runs. P is open after
+Latest: four runs complete and independently valid. D6 P is open after
 3597.187s (gap.006425693916377456), ENS certifies in3171.157s, and K1-R
 reaches the whole-run guard at3598.078s with valid committed evidence:
 U.15708313110317407,L.1483180363170433,gap.008765094786130773, no certificate.
 K1 returns code1 due to the external whole-run stop; it is not a normal return.
-There are2 normal returns and1 valid hard stop,14 Optimize starts/13 returns,
-and10366.422000000253s paid in this completed prefix. See d6_completed_prefix.json.
-Run4 D7 P-GRB started at1789641408.4727015 in the same original queue.
+D7 P also reaches the whole-run guard at3598.0469999997877s: valid committed
+U.2372849915487284,L.19858649317712468,gap.03869849837160372, no certificate.
+It returns code1 with1 Optimize start/0 returns;235 physical witnesses,
+68 global-bound events and305 commits pass replay in.24535810016095638s.
+There are now2 normal returns and2 valid hard stops,15 Optimize starts/13 returns,
+and13964.469000000041s paid in the completed prefix. See d7_control_completed_prefix.json.
+Run5 D7 ENS-C started at1789645006.8230615 in the same original queue.
 Its active cost is additional. Final nine-run/Start/replication audits remain
 pending; no R84 PR yet and no overall-goal claim. Never restart the producer.
-Exact remote preparation/prefix head2796b9c8b was independently verified;
-publication_prefix.json and publication_api/d6_certificate_prefix.json retain it.
+Exact remote preparation/prefix head71c21c5b4 was independently verified.
+The syntax-checked binary publisher v3 is prepared but unexecuted; it refuses
+use while the campaign lock exists. v2 remains the tested text-prefix transport.
+Latest resource read: ordinary usage allowed,86% weekly remaining, no reset call.
 
 Earlier two-run snapshot:
 

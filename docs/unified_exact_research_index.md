@@ -3,15 +3,19 @@
 R84 ACTIVE on codex/round84-ensc-long-protection-replication, base R83 final
 131d09280a1563243d0201e68367b26baf5079c3 / draft PR144.
 Original queue is already launched: exec session19331 / driver PID48520.
-Runs1-3 valid: D6 P3597.187s,gap.006425693916377456,open;
+Runs1-4 valid: D6 P3597.187s,gap.006425693916377456,open;
 ENS certifies3171.157s,U.15708313110317415,L.15708313110316996;
 K1-R valid whole-run hard stop3598.078s,gap.008765094786130773,open.
-Two normal returns and one hard stop;14 Optimize starts/13 returns,
-10366.422000000253s completed process cost. Run4 D7 P-GRB started at
-1789641408.4727015; its active cost is additional. See d6_completed_prefix.json.
+D7 P valid hard stop3598.047s,U.2372849915487284,L.19858649317712468,
+gap.03869849837160372,open. Two normal returns and two hard stops;
+15 Optimize starts/13 returns,13964.469000000041s completed process cost.
+Run5 D7 ENS-C started at1789645006.8230615; active cost is additional.
+See d7_control_completed_prefix.json. Ordinary weekly86% remaining at the
+latest D7 resource snapshot; this agent made no reset call.
 Final campaign/Start/replication audits remain pending. Read current summary/runtime_checkpoint
-for later progress and never restart the producer. Exact remote2796b9c8b
-preserves the frozen plan/readers, transport recovery and the two-run prefix.
+for later progress and never restart the producer. Exact remote71c21c5b4
+preserves the frozen plan/readers, transport recovery, complete D6 prefix and
+prepared binary transport. v3 is unexecuted and must wait for optimizer closure.
 The prior resource
 block is resolved: fresh ordinary weekly read0% used/100% remaining; this
 agent made no reset call. Read R84 plan/protocol/status and current campaign
