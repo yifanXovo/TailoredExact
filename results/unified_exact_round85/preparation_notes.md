@@ -17,3 +17,9 @@ initial commit despite that native command's nonzero exit. No solver had been
 launched. A separate follow-up declares whitespace=cr-at-eol for R85 scripts,
 preserving their measured bytes, and checks the entire stage diff again before
 launch. Subsequent command sequences explicitly gate on native exit codes.
+
+One bounded ordinary preparation push failed with an empty server reply,
+Git128 after5.2738275s; initial_push_attempt.json retains the original receipt.
+The unchanged R84 UTF-8-only exact-tree publisher is adapted only for this
+stage branch/base/output paths. It verifies exact original tree/commit IDs
+and uses a non-force update; no evidence history is rewritten.
