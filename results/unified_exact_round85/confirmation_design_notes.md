@@ -120,6 +120,15 @@ Weights are independent hash-derived values in[0.25,1] rounded to six
 decimals; use the existing synthetic minimum-ratio formula for serialization.
 These are generated artificial profiles, not observed demand.
 
+The receiver's minimum stock is at least2,2,1 for F2/F3/F5, respectively;
+the donor has at least4 units of capacity slack. Positive serialized weights
+are at least1/4, and shortage is at least30,30,50. With lambda3/20 and maximum
+targets28,26,24, the elementary penalty bound above yields, for every input
+from the proposed recipe, F>=9/224,9/208,5/64 respectively. This is a
+recipe-level mathematical nonzero guarantee, computed without generated
+coordinates or optimizer calls. It does not establish native proof difficulty
+and is not injected as a bound into either candidate or benchmark.
+
 CitiBike selection and inventory construction reuse the hash-bound original
 generator under a new fixed namespace. Keep source coordinates/capacities,
 its nearest-V or farthest-first-in-nearest-2V geography, controlled stock
@@ -130,3 +139,30 @@ If a later implementation reveals a formula/format ambiguity, resolve it
 before generation and record the change. An outcome may motivate a future
 algorithm revision, but never replacement, reseeding or rescaling of these
 already generated roles.
+
+## Prospective evidence-tool limit found before generation
+
+Read-only preparation found that `round73_native_evidence.audit` currently
+requires at least one committed physical witness. All19 completed R85 runs
+have witnesses and passed that reader; this finding does not invalidate or
+alter them. The frozen R85 driver/reader remains unchanged.
+
+For future unseen roles, the user contract also permits a legitimate cutoff
+with no finite U. `GurobiBaseline.cpp` reads SolCount and only extracts routes
+when it is positive; `Result.cpp` serializes native U/gap as null when their
+verified availability flags are false. The later confirmation tooling should
+therefore retain a valid no-UB P endpoint as unavailable U/gap with only its
+qualified original-model L, instead of assuming a witness or treating missing
+primal progress as an implementation failure. This needs a separate narrow
+reader/summary adaptation, with original model/settings/receipt checks kept
+and no synthetic route, gap, certificate or inherited UB supplied to the run.
+No such outcome has been observed or selected in the prospective data.
+
+A generator preparation copy exists locally at
+`build/round86_preparation/round86_generate.py` (SHA256
+`d7e249b8276ab87cf366b1f5bcfaf481f01d6749b1b1220946203c5ae7be4042`).
+Only AST parsing was executed (0.0033779s); no generator import/execution,
+new data or Optimize call. Its guard prevents generation from the preparation
+directory. Install, review and freeze it in the eventual stage only after
+R85 publication and resource admission; the source and exact executable
+recipe still require that committed freeze.
