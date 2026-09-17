@@ -1,6 +1,17 @@
 # Round84 status
 
 Original nine-arm queue is running, exec session19331 / driver PID48520.
+Runs1/2 are complete, normal and independently valid. D6 ENS-C certifies the
+original problem in3171.157000000123s:U.15708313110317415,
+L.15708313110316996,gap4.191091917959966e-15. D6 P remains open at3600.
+This is a current matched certificate gain, subject to final campaign/Start
+audits. ENS uses6 returned Optimize calls;4 physical witnesses,3452 global
+bound events and3469 committed events pass replay. Current startup has4
+exchanges,4 quantity moves,0 relocations/insertions and1161 equal-net pairs;
+the outer handoff matches its final route. Per-run replay.12716879975050688s.
+Run3 D6 K1-R started at1789637812.5953043. Completed process cost6768.344s,
+7 Optimize starts/returns. Keep the original queue running; do not relaunch.
+
 Run1 D6 P-GRB is complete, normal and independently valid:3597.186999999918s,
 U.1572411758522922,L.15081548193591474,gap.006425693916377456,not certified.
 One Optimize starts/returns,62 physical witnesses,3480 global bound events;
