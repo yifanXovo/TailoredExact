@@ -1,11 +1,11 @@
 # Unified exact BRP research - resume here
 
-R85 PREPARED on codex/round85-ensc-remaining-protection-replication, base R84
+R85 ACTIVE on codex/round85-ensc-remaining-protection-replication, base R84
 final ed0cd977ac2ea1cf7a7bf1236a15dd845a3ed948 / draft PR145. Read R85
 plan.md, protocol.json, status.md and reproduce.md. Qualified R83 source and
 ENS-C parameters unchanged. Exactly21 fresh P/ENS/K1 arms: E7/S12 cap120,
 D3/C2 cap300, C6/C8 cap600, D6 cap3600; max16920 process seconds, plus7
-zero-Optimize compact exports. No native launch yet. Development/protection
+zero-Optimize compact exports. Original driver session22846 is active; frozen at77dcc0ee1. Never relaunch. Development/protection
 plus one D6 finite repeat, not unadapted confirmation. Overall goal unmet.
 Latest ordinary weekly availability61%; no reset call. Never rerun R84.
 Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.

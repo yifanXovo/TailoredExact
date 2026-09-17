@@ -23,3 +23,8 @@ Git128 after5.2738275s; initial_push_attempt.json retains the original receipt.
 The unchanged R84 UTF-8-only exact-tree publisher is adapted only for this
 stage branch/base/output paths. It verifies exact original tree/commit IDs
 and uses a non-force update; no evidence history is rewritten.
+
+A read-only follow-up guessed a nonexistent R82 design.json path. The retained
+preregistration.json and generator provide the actual frozen design. No file
+was changed or generator executed by that failed lookup. Some console reads
+were output-truncated; raw files remain intact and claims use inspected fields.

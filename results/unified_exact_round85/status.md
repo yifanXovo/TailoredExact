@@ -1,12 +1,10 @@
-# R85 prepared; no new run has started
+# R85 original campaign active
 
-Branch codex/round85-ensc-remaining-protection-replication, exact base R84
-ed0cd977ac2ea1cf7a7bf1236a15dd845a3ed948 / draft PR145.
-Read plan.md, protocol.json and base_publication.json. The seven-role,
-21-arm finite allocation is ready for its first commit and original launch.
-No R85 campaign directory yet. No R84 producer may be rerun.
+Frozen at77dcc0ee1090d2e9f99d7d91d4cd60513967b24c. Original driver session22846;
+no producer rerun. Read runtime_checkpoint.json and the live campaign summary.
+Seven roles /21 arms; qualified R83 source and parameters remain unchanged.
+Per-run valid endpoints are preliminary until final campaign/mechanism audits.
+No heavy audit, package, plot or build while a native solve is active.
 
-Qualified R83 source/binary and uniform ENS-C parameters remain unchanged.
-This is remaining exposed protection plus one D6 repeat, not new confirmation.
-Overall goal remains unmet. Ordinary weekly availability61%; no reset consumed.
-Owned workspace E:/codes/ExactEBRP-round66; original dirty checkout untouched.
+Overall goal remains unmet. This is exposed protection and finite D6 repeat,
+not unadapted confirmation. Continue the original session through closure.
