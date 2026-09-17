@@ -1,12 +1,17 @@
-# R86 generated and tooling validated; native launch pending
+# R86 original campaign ACTIVE
 
-Base R85 final a3a7c89cfa752fd0c029c83d43996562df0be3fd / draft PR146.
-Recipe freeze2d770ba01 generated F1/F2/F5/F6 ONCE;12 arms,max22860 process
-seconds. No native process launched. Source/preset/build remain R83's
-qualified ENS-C. Offline validation v2 passes37 checks with zero Optimize;
-prior pass and EOL-precheck failure remain in preparation_notes/prelaunch_review.
+Driver session88121 is the only original producer. Never relaunch. Frozen
+launch commit0666c13e2ee8c21c318667def1149980fbd692ac was independently read
+back remotely before launch. Recipe freeze2d770ba01 preceded all four inputs.
+12 admitted runs: F1/F2/F5/F6, each P/ENS/K1, maximum22860 paid process seconds.
+Read runtime_checkpoint.json and current campaign summary for completed arms.
 
-Both V50 inputs have positive aggregate shortage; nonzero structure is not
-a native difficulty guarantee. Keep all four outcomes. Freeze driver/tooling
-and all generated hashes before original launch. Never restart a completed
-producer. Overall goal remains unmet. All R85 producers are closed.
+Source/preset/build remain R83's qualified ENS-C. Offline validation v2 passes
+37 checks, zero Optimize; prior pass and corrected Git-EOL precheck retained.
+No audit, plot, compression or build may overlap native optimization. After
+original queue closes, run the frozen auditors/summary/package/plots once,
+review all outcomes and publish one independent draft PR against R85.
+
+Overall goal unmet. All four confirmation outcomes must remain; any revision
+uses these as development and requires another unadapted check. No extension,
+repeat, new seed or F3/F4 allocation. R85 producers are closed; PR146 remains open/draft/unmerged.

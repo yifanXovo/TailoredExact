@@ -1,12 +1,14 @@
 # Unified exact BRP research - resume here
 
-R86 ADMITTED on codex/round86-ensc-varied-unadapted-confirmation, based on R85
+R86 ACTIVE on codex/round86-ensc-varied-unadapted-confirmation, based on R85
 final a3a7c89cfa752fd0c029c83d43996562df0be3fd / draft PR146. Read R86 plan,
 preregistration, status and admission_resource. Selected F1/F2/F5/F6 before
-generation:12 arms,max22860s,4 zero-Optimize references. Four inputs generated once after recipe freeze2d770ba01; no solve yet.
+generation:12 arms,max22860s,4 zero-Optimize references. Four inputs generated once after recipe freeze2d770ba01. Original driver88121
+is running; do not relaunch. Launch/tool freeze0666c13e2 verified remotely.
 Source/preset/build unchanged. Offline validation v2 passes37 checks; missing U/final-only route cases handled.
 Prior validation and corrected inherited Git/local CRLF check retained.
-Freeze all driver/tool bytes and input hashes, then launch original driver once.
+Read runtime_checkpoint and campaign summary. No heavy audit/build/plot/package
+while native solver is active; after closure run each producer once.
 Weekly remaining40%, account-wide; no reset. Overall goal still unmet.
 
 R85 evidence CLOSED on codex/round85-ensc-remaining-protection-replication,
