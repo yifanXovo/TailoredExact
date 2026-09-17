@@ -1,5 +1,17 @@
 # Round84 status
 
+Latest seven-run prefix: U6 P-GRB returns normally and validates in
+3597.1099999998696s, with U.14819747529511856,L.12651916793596993,
+gap.021678307359148635, no certificate. The finalized endpoint matches R83;
+formal paired replication audit remains pending. It has1 Optimize start/return,
+168 physical witnesses,56 global bound events and227 commits. Independent
+per-run replay costs.16569760022684932s. The completed prefix has5 normal
+returns and2 valid hard stops,26 Optimize starts/24 returns and
+24756.01599999983s paid process cost. Run8 U6 ENS-C started at1789655799.3342073
+in the original queue. See u6_control_completed_prefix.json. Final audits remain
+pending; no extra run is admitted. Exact remote451725a44 preserves the previous
+six-run prefix. Latest fresh ordinary weekly availability is70%; no reset call.
+
 Latest: six runs complete and independently valid. D6 P is open after
 3597.187s (gap.006425693916377456), ENS certifies in3171.157s, and K1-R
 reaches the whole-run guard at3598.078s with valid committed evidence:

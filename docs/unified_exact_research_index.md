@@ -1,5 +1,14 @@
 # Unified exact BRP research - resume here
 
+R84 latest: seven valid runs complete, run8 U6 ENS-C active since1789655799.3342073.
+U6 P returns normally3597.1099999998696s with U.14819747529511856,
+L.12651916793596993,gap.021678307359148635, open. This matches R83's finalized
+endpoint; formal replication audit remains pending. Completed cost24756.01599999983s,
+26 Optimize starts/24 returns,5 normal returns/2 valid whole-run hard stops.
+Read u6_control_completed_prefix.json and runtime_checkpoint.json. Latest fresh
+ordinary weekly availability70%; no reset call. Exact remote451725a44 preserves
+the six-run prefix. Keep the original queue; final audits wait for all9 closures.
+
 R84 ACTIVE on codex/round84-ensc-long-protection-replication, base R83 final
 131d09280a1563243d0201e68367b26baf5079c3 / draft PR144.
 Original queue is already launched: exec session19331 / driver PID48520.
