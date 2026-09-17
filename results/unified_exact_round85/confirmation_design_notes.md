@@ -166,3 +166,5 @@ new data or Optimize call. Its guard prevents generation from the preparation
 directory. Install, review and freeze it in the eventual stage only after
 R85 publication and resource admission; the source and exact executable
 recipe still require that committed freeze.
+
+A read-only follow-up checked zero-stop artifact handling: HgaTgbcRunner.cpp writes the descent CSV after ga.run even when a verified zero stops the seeds; main.cpp invokes the exchange controller whenever a witness is found and the whole deadline has not expired, including zero witnesses. Future audit code must keep its explicit verified-zero exception to all25 completion. This inspection does not execute a new test or alter the frozen method.

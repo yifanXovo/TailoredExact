@@ -2,8 +2,9 @@
 
 Keep the qualified ENS-C source, parameter rules and candidate preset unchanged
 through the already frozen R85 campaign. The six completed protection roles
-are encouraging, but the D6 repeat and final audits are still pending. Do not
-claim final stage acceptance from the provisional18-run prefix.
+are encouraging, and D6 ENS has repeated its numerical certificate at3181.735s.
+The final K1 arm and complete audits remain pending. Do not claim final stage
+acceptance from the provisional20-run prefix.
 
 If the remaining evidence supports continuation, publish this stage's draft
 first, recheck real resources, then freeze one distinct prospective confirmation
