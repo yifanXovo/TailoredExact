@@ -104,3 +104,8 @@ coverage exceptions, no material ENS checkpoint regression under frozen rules.
 Package session85467 was already closed when later polled (unknown-process
 response); delivery files confirm its successful original output. No rerun.
 R85 final report closes evidence; independent draft publication remains next.
+
+Draft PR146 created against R84, verified open/draft/unmerged at evidence head
+0f490ce49ef4662365165bbeebb249d6732cab1e. Binary publication passed97.029992500s,
+28 current creation-SHA acknowledgments, exact trees/commits and non-force ref.
+No full remote binary-body readback claim. Final text closure metadata follows.

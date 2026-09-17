@@ -3,7 +3,9 @@
 R85 evidence CLOSED on codex/round85-ensc-remaining-protection-replication,
 base R84 final ed0cd977ac2ea1cf7a7bf1236a15dd845a3ed948 / draft PR145.
 Read R85 final_report.md, status.md, stage_decision.json, goal_evidence_scope.md
-and reproduce.md. Its independent draft PR is the remaining publication step.
+and reproduce.md. Independent draft PR146 is published, open/draft/unmerged:
+https://github.com/yifanXovo/TailoredExact/pull/146 . Exact evidence head
+0f490ce49ef4662365165bbeebb249d6732cab1e is independently verified remotely.
 
 All21 originals normal/valid;81 Optimize starts/returns;15456.440s paid.
 Driver22846/PID49028 and all native processes CLOSED. Never poll/relaunch.
@@ -20,7 +22,7 @@ Earlier D7 material final and severe1200 K1 losses remain disclosed.
 
 Overall goal unmet: exposed protection is not unadapted confirmation. R86
 recipe/scripts remain local preparation only; no generation or solver run.
-Fresh account-wide weekly remaining41%, no reset. After publishing R85,
+Fresh account-wide weekly remaining41%, no reset. Next,
 freeze a finite confirmation plan and review missing-UB handling before use.
 Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.
 

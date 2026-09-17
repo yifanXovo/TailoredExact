@@ -198,3 +198,11 @@ freeze a finite confirmation scope before generation, review missing-UB
 evidence handling, and retain every admitted outcome. No further run is
 authorized by this report itself; admission is a separate recorded step under
 the user's ongoing research authorization.
+
+Publication: draft [PR146](https://github.com/yifanXovo/TailoredExact/pull/146)
+is open and unmerged, stacked on R84. Evidence head
+`0f490ce49ef4662365165bbeebb249d6732cab1e` was independently read back.
+Binary-capable publication took97.029992500 seconds, preserving the original
+three unpublished commits;28 new binary blobs have locally recomputed Git
+SHA and creation-response SHA agreement. No full remote binary-body readback
+is claimed. Final text metadata publication follows without changing evidence.
