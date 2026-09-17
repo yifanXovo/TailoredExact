@@ -27,3 +27,10 @@ the actual generator is round82_generate.py. These were metadata reads, with
 zero optimizer calls and no changed experimental state. A transient plus sign
 in the new recovery prose was removed before committing. None required a
 native retry or changed the frozen experiment.
+
+During D7 ENS-C, two further historical lookup commands failed: literal
+scripts/round6*.py and scripts/round7*.py arguments again required --glob on
+Windows, and guessed unified_exact_round64/65 report directories did not exist.
+Discovery located the actual gf_shared_load_time_round64 and
+gf_budgeted_proof_round65 reports. These read-only command errors caused no
+optimizer call, native retry, input change or change to the frozen R84 plan.

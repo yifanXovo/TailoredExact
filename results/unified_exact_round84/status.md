@@ -1,6 +1,6 @@
 # Round84 status
 
-Latest: four runs complete and independently valid. D6 P is open after
+Latest: five runs complete and independently valid. D6 P is open after
 3597.187s (gap.006425693916377456), ENS certifies in3171.157s, and K1-R
 reaches the whole-run guard at3598.078s with valid committed evidence:
 U.15708313110317407,L.1483180363170433,gap.008765094786130773, no certificate.
@@ -9,15 +9,23 @@ D7 P also reaches the whole-run guard at3598.0469999997877s: valid committed
 U.2372849915487284,L.19858649317712468,gap.03869849837160372, no certificate.
 It returns code1 with1 Optimize start/0 returns;235 physical witnesses,
 68 global-bound events and305 commits pass replay in.24535810016095638s.
-There are now2 normal returns and2 valid hard stops,15 Optimize starts/13 returns,
-and13964.469000000041s paid in the completed prefix. See d7_control_completed_prefix.json.
-Run5 D7 ENS-C started at1789645006.8230615 in the same original queue.
+D7 ENS-C returns normally in3597.186999999918s: U.22515085005563812,
+L.20473785631837987,gap.020412993737258245, no certificate. Relative gap is
+.09066363165945805 versus P.1630886897608805. Both bounds improve;
+absolute gap decreases.018285504634345473 (47.25119941026719%).
+Four Optimize starts/returns (3 LP plus parent-domain MIP),52 physical
+witnesses,93 global-bound events and154 commits pass replay in.643729000352323s.
+Actual startup executes3 exchanges,3 relocations,2 insertions,38 quantity moves
+and7519 equal-net pairs; its outer witness matches the final route.
+There are now3 normal returns and2 valid hard stops,19 Optimize starts/17 returns,
+and17561.65599999996s paid in the completed prefix. See d7_ens_completed_prefix.json.
+Run6 D7 K1-R started at1789648604.6758657 in the same original queue.
 Its active cost is additional. Final nine-run/Start/replication audits remain
 pending; no R84 PR yet and no overall-goal claim. Never restart the producer.
-Exact remote preparation/prefix head71c21c5b4 was independently verified.
+Exact remote preparation/prefix head6ec534c3a was independently verified.
 The syntax-checked binary publisher v3 is prepared but unexecuted; it refuses
 use while the campaign lock exists. v2 remains the tested text-prefix transport.
-Latest resource read: ordinary usage allowed,86% weekly remaining, no reset call.
+Latest resource read: ordinary usage allowed,80% weekly remaining, no reset call.
 
 Earlier two-run snapshot:
 

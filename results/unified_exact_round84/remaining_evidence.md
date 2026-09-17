@@ -19,6 +19,26 @@ ENS screen should cover those retained obligations before broad adoption.
 Historical C6/C8 medium/large short-T K1 advantages remain further protection
 context; they should not silently disappear from the final evidence assessment.
 
+The original R65 report and protocol were revisited during D7 ENS-C. Their
+cap600 rows below are rounded historical context, not current-build controls:
+
+|Role|Original scenario|V/M/Q/math T|P gap|Literal K1-H gap|
+|---|---|---|---:|---:|
+|C6|cb443_V50_compact_r1_shortage_M04_Q30_T01800|50/4/30/1800|0.314010624355|0.190677391518|
+|C8|cb443_V30_regional_r1_shortage_M03_Q30_T03600|30/3/30/3600|0.229862167194|0.172330809606|
+
+Both are nonzero and uncertified. C6 has slightly worse K1 U but much stronger
+L; C8 improves both bounds. They are established protection roles, not invented
+P-GRB regressions. The R65 budgeted candidate's rows and resource policies are
+not inherited. Actual sources are results/gf_budgeted_proof_round65/final_report.md
+and protocol.json. C6 input SHA256 is
+9a0c5824c118b24f895b58d052ca9db277d38d57083c6e37c1df81ff39555dbe;
+C8 is6e3020a12de204dd36e4da1c5a273750951c6c5b7e5ea424d5481dfc74d377aa.
+Both use lambda.15 and pickup/drop60 seconds. C8's old confirmation label
+does not make it unadapted confirmation for this research. No new experiment
+or source change is authorized by this scope note; a later stage needs its
+own finite allocation and current-build controls.
+
 If the R84 long protection and repeat support the direction, the next stage
 needs a fresh resource allocation and an explicit choice of the remaining
 development/protection roles, then unadapted confirmation of the unchanged
