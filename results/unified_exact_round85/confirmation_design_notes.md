@@ -27,6 +27,11 @@ generation. Do not inspect generated difficulty or outcomes to resize, filter,
 reseed, shorten/extend or replace roles. A source-format failure can be repaired
 with the failed bytes retained; it does not authorize performance selection.
 
+Prefer deriving each data seed from the already-frozen candidate source ID,
+a single version string and the canonical structural-role description. Keep
+the eventual R85 results/publication commit as branch provenance, without
+using measured outcomes or publication timing as a seed-selection input.
+
 For the new synthetic recipes, use serialized Euclidean coordinates and the
 project's original parser conventions, with strictly positive targets/weights,
 legal stocks/capacities and both local pickup/delivery opportunities. An
