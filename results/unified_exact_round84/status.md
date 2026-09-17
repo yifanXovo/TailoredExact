@@ -1,5 +1,20 @@
 # Round84 status
 
+Latest: D6 is complete, three independently valid runs. P is open after
+3597.187s (gap.006425693916377456), ENS certifies in3171.157s, and K1-R
+reaches the whole-run guard at3598.078s with valid committed evidence:
+U.15708313110317407,L.1483180363170433,gap.008765094786130773, no certificate.
+K1 returns code1 due to the external whole-run stop; it is not a normal return.
+There are2 normal returns and1 valid hard stop,14 Optimize starts/13 returns,
+and10366.422000000253s paid in this completed prefix. See d6_completed_prefix.json.
+Run4 D7 P-GRB started at1789641408.4727015 in the same original queue.
+Its active cost is additional. Final nine-run/Start/replication audits remain
+pending; no R84 PR yet and no overall-goal claim. Never restart the producer.
+Exact remote preparation/prefix head2796b9c8b was independently verified;
+publication_prefix.json and publication_api/d6_certificate_prefix.json retain it.
+
+Earlier two-run snapshot:
+
 Original nine-arm queue is running, exec session19331 / driver PID48520.
 Runs1/2 are complete, normal and independently valid. D6 ENS-C certifies the
 original problem in3171.157000000123s:U.15708313110317415,
