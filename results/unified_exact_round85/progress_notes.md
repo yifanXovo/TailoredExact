@@ -24,3 +24,17 @@ E7 ENS/P is near under the frozen practical rule. S12 ENS retains the nonzero sm
 All four ENS starts finish25 decoded paths. E7 accepts one equal-net exchange and one subsequent quantity move; S12/D3/C2 accept no neutral moves. Their full-method gains cannot be causally assigned to the added exchange. Actual Start mapping/readback/native acceptance awaits the closed-campaign mechanism audit.
 
 Original driver session22846 / PID49028 continues serially. Never restart it or rerun completed producers. Current state is in runtime_checkpoint.json and the live campaign summary.
+
+## C6 complete; final stage audits still pending
+
+All three C6 arms return normally and pass per-run audits at the common600s cap; all remain open.
+
+|Arm|Paid seconds|Physical U|Global L|Signed gap|
+|---|---:|---:|---:|---:|
+|P-GRB|597.109|1.68910073221|1.37508782921|0.314012903008|
+|ENS-C|597.156|1.68604175628|1.53661450055|0.149427255735|
+|K1-R|597.125|1.68915723795|1.49847984643|0.190677391518|
+
+ENS improves P gap52.413657% and K1 gap21.633470%, with both better U and stronger L against each. Unclipped K1/P advantage retention is1.334454654. This600s exposed protection does not establish long-window generalization.
+
+All15 completed runs are normal/valid, 56 Optimize starts/returns and3289.141000s paid. C8 and the D6 repeat remain. ENS C6 accepts no neutral move, performs one quantity move and exhausts its controller; do not attribute the full-method gain to an accepted exchange.

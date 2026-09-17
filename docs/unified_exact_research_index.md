@@ -2,12 +2,23 @@
 
 R85 ACTIVE on codex/round85-ensc-remaining-protection-replication, base R84
 final ed0cd977ac2ea1cf7a7bf1236a15dd845a3ed948 / draft PR145. Read R85
-plan.md, protocol.json, status.md and reproduce.md. Qualified R83 source and
-ENS-C parameters unchanged. Exactly21 fresh P/ENS/K1 arms: E7/S12 cap120,
-D3/C2 cap300, C6/C8 cap600, D6 cap3600; max16920 process seconds, plus7
-zero-Optimize compact exports. Original driver session22846 is active; frozen at77dcc0ee1. Never relaunch. Development/protection
-plus one D6 finite repeat, not unadapted confirmation. Overall goal unmet.
-Latest ordinary weekly availability61%; no reset call. Never rerun R84.
+plan.md, protocol.json, status.md, progress_notes.md and runtime_checkpoint.json.
+Original driver session22846 / PID49028 continues; NEVER relaunch it.
+Frozen plan/driver commit77dcc0ee1. Qualified R83 source/binary and parameters
+unchanged.21 arms: E7/S12 cap120, D3/C2 cap300, C6/C8 cap600, D6 cap3600;
+maximum16920 process seconds plus7 zero-Optimize compact exports.
+
+First15 originals are normal/valid:56 Optimize starts/returns,3289.141s paid.
+E7 near P; S12 nonzero repair; D3/C2 ENS certify while P/K1 stay open300.
+C6 ENS gap.149427255735 versus P.314012903008/K1.190677391518:52.4137% P
+and21.6335% K1 gains, both bounds better; K1/P advantage retention1.334454654.
+C6 scope is600s, not long-window generalization. C8 has started; D6 repeat
+remains. Final campaign/mechanism/replication audits and stage draft are pending.
+Do not run heavy audits, plotting, packaging or compilation with the optimizer.
+
+Overall goal unmet. This is exposed protection and finite repetition, not new
+confirmation. Prospective design notes allocate no further runs. Latest
+ordinary weekly availability58%; no reset. Prior R84 producers remain closed.
 Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.
 
 R84 evidence CLOSED on codex/round84-ensc-long-protection-replication, base R83

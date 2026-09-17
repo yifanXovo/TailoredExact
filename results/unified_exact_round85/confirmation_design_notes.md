@@ -49,6 +49,8 @@ It follows from the penalty term, the triangle inequality and nonnegative
 return loads. This is a structural nonzero certificate, not a performance
 selection rule, a strict rational solver certificate, or an imported bound
 for the frozen algorithm. No new optimizer call is needed to establish it.
+All sums and minima here are over service stations; the depot's sentinel
+inventory/target fields do not enter the original objective.
 
 Keep at least the V50 long-T shortage role to challenge the behavior implicated
 by R82 U6; do not quietly replace it with only short-T or zero-objective roles.
