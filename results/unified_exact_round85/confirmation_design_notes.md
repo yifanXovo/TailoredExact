@@ -34,8 +34,16 @@ analytically enforced aggregate shortage can guarantee a nonzero optimum
 without solving or selecting the instance: empty departure and nonnegative
 terminal load imply sum(Y)<=sum(b)<sum(D), while positive penalty weights
 make F=0 require Y=D. This guarantees nonzero objective, not proof difficulty
-or a positive lower bound at a particular runtime. Full-model difficulty must
+or a useful native proof bound at a particular runtime. Full-model difficulty must
 be observed and reported, including unexpected easy certification.
+
+For those strictly positive-weight shortage roles, an input-only diagnostic
+can also state the elementary lower bound
+F >= lambda * min_i(weight_i / D_i) * (sum(D)-sum(b)) > 0.
+It follows from the penalty term, the triangle inequality and nonnegative
+return loads. This is a structural nonzero certificate, not a performance
+selection rule, a strict rational solver certificate, or an imported bound
+for the frozen algorithm. No new optimizer call is needed to establish it.
 
 Keep at least the V50 long-T shortage role to challenge the behavior implicated
 by R82 U6; do not quietly replace it with only short-T or zero-objective roles.
