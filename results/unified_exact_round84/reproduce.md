@@ -1,13 +1,21 @@
 # Round84 recovery and review
 
+All nine original runs and all listed offline producers are now complete.
+Driver session19331 exited0, all nine per-run audits pass, and the campaign
+lock is absent. Campaign/Start/replication audits pass; ten bundles verify twice
+and all three first-layout figures pass visual review. Do not rerun a closed
+producer. The commands below document the original completed workflow.
+Read final_report.md and runtime_checkpoint.json for the closed state.
+
 Owned checkout: E:/codes/ExactEBRP-round66. Base is R83 final
 131d09280a1563243d0201e68367b26baf5079c3, draft PR144. Plan/protocol/original
 driver were committed before launch at3dae75c03. The original nine-run queue
-has already started: do not run scripts/round84_research.py again.
+has already completed: do not run scripts/round84_research.py again.
 
-Poll exec session19331 and inspect campaign/active_experiment.json plus the
-completed prefix in campaign/summary.json. Runtime checkpoint PID48520 is an
-identity hint, not proof of liveness after a restart. The driver refuses an
+The former exec session19331 is closed. campaign/active_experiment.json is
+the retained last launch, not evidence of a live process. Read the complete
+campaign/summary.json and driver_completion.json. PID48520 is only a historical
+identity hint. The driver refuses an
 existing campaign. It records each original command, affinity, observations,
 completion and per-run physical/global audit, and stops on the first validity
 failure. Keep raw artifacts and every attempt. A missing summary before the
@@ -21,8 +29,8 @@ The exact qualified Windows working source bytes, including line endings,
 are in R83's measured_source_bytes bundle. A Git blob can use different line
 endings; do not silently replace measured bytes and retain the old hash claim.
 
-After all original native processes close and all nine per-run audits pass,
-execute the following offline producers once, in order, from this checkout:
+The following offline producers were executed once in this order after all
+original native processes closed and all nine per-run audits passed:
 
 ```powershell
 $env:PYTHONUTF8='1'

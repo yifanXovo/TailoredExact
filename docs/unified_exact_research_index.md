@@ -1,54 +1,30 @@
 # Unified exact BRP research - resume here
 
-R84 latest: eight valid runs complete; final run9 U6 K1-R started1789659397.4052365.
-U6 ENS normal3597.1400000001304s,U.14990547589906003,L.13117221090547532,
-gap.018733264993584714,open. Both current U6 P/ENS finalized endpoints match
-R83. ENS/P gap improves13.58520440167604%, with worse U and stronger L.
-Read u6_ens_completed_prefix.json. Completed cost28353.15599999996s,32 Optimize
-starts/30 returns,6 normal/2 valid hard stops. Final campaign/Start/replication
-audits remain pending. Latest ordinary weekly availability68%; no reset call.
-Exact remote3b22ed7e6 preserves the seven-run prefix. Do not restart the queue.
+R84 evidence CLOSED on codex/round84-ensc-long-protection-replication, base R83
+final131d09280a1563243d0201e68367b26baf5079c3 / draft PR144. Evidence review
+passes; new independent draft publication pending. Read R84 final_report,
+status, stage_decision, goal_evidence_scope, reproduce and next_hypothesis.
+Original driver session19331 exited0; all9 valid,7 normal/2 valid hard stops,
+41 Optimize starts/39 returns,31950.312s. Never restart any closed producer.
 
-R84 latest: seven valid runs complete, run8 U6 ENS-C active since1789655799.3342073.
-U6 P returns normally3597.1099999998696s with U.14819747529511856,
-L.12651916793596993,gap.021678307359148635, open. This matches R83's finalized
-endpoint; formal replication audit remains pending. Completed cost24756.01599999983s,
-26 Optimize starts/24 returns,5 normal returns/2 valid whole-run hard stops.
-Read u6_control_completed_prefix.json and runtime_checkpoint.json. Latest fresh
-ordinary weekly availability70%; no reset call. Exact remote451725a44 preserves
-the six-run prefix. Keep the original queue; final audits wait for all9 closures.
+D6 ENS certifies3171.157s versus P/K1 open3600. D7 ENS/P gap improves47.2512%,
+with a material19.1258% final K1 gap loss and84.8010% K1/P advantage retained.
+D7's1200s K1 loss is severe; ENS still beats P58.4705% and retains75.3324%
+of K1's P advantage there. U6 ENS/P13.5852% gap gain repeats exactly at the
+final endpoint; current K1 L improves2.81848e-6. ENS retains88.3722% of K1's
+P advantage, with a near2.1122% final K1 difference. Mixed U/L directions remain.
 
-R84 ACTIVE on codex/round84-ensc-long-protection-replication, base R83 final
-131d09280a1563243d0201e68367b26baf5079c3 / draft PR144.
-Original queue is already launched: exec session19331 / driver PID48520.
-Runs1-6 valid: D6 P3597.187s,gap.006425693916377456,open;
-ENS certifies3171.157s,U.15708313110317415,L.15708313110316996;
-K1-R valid whole-run hard stop3598.078s,gap.008765094786130773,open.
-D7 P valid hard stop3598.047s,U.2372849915487284,L.19858649317712468,
-gap.03869849837160372,open. D7 ENS normal3597.187s,U.22515085005563812,
-L.20473785631837987,gap.020412993737258245,open; both bounds better and
-gap47.25119941026719% lower than current P. D7 K1 normal3597.25s,
-gap.017135655033282265,open. ENS has a material19.1258443% larger K1 gap
-(worse U,stronger L), retaining84.8009901% of K1's P advantage. See
-d7_completed_comparison.json; K1 witness available595.266s, U absent at300,
-U available but L=0 at600. Four normal returns and two hard stops;
-25 Optimize starts/23 returns,21158.90599999996s completed process cost.
-Run7 U6 P-GRB started at1789652202.0036876; active cost is additional.
-Ordinary weekly80% remaining at the
-latest D7 resource snapshot; this agent made no reset call.
-Final campaign/Start/replication audits remain pending. Read current summary/runtime_checkpoint
-for later progress and never restart the producer. Exact remotee1ee5c143
-preserves the frozen plan/readers, transport recovery, five-run prefix and
-prepared binary transport. v3 is unexecuted and must wait for optimizer closure.
-The prior resource
-block is resolved: fresh ordinary weekly read0% used/100% remaining; this
-agent made no reset call. Read R84 plan/protocol/status and current campaign
-records. Nine serial P/ENS/K1 arms on D6,D7,U6, each whole cap3600s, maximum
-32400s, plus three zero-Optimize reference exports<=30s. No new build, source,
-parameter or input change; inherited R83 source4496078f2/binary25b7ec3a6d.
-All274 source hashes and both executable identities revalidate. This is exposed
-long protection and one finite U6 repeat, not new unadapted confirmation.
-Do not rerun an existing campaign or any R83 producer. Overall goal unmet.
+All physical/coverage/source/Start/replication audits pass;547 physical witnesses,
+9519 global bounds,10155 commits. Three actual Starts accepted;75 logical
+startup paths match. Ten bundles/20726 members verify twice; all3 figures pass.
+No source/default/build/parameter/input change; qualified R83 source4496078f2
+and binary25b7ec3a6d. Inherited62 tests/165 calls are not recharged.
+
+Overall goal remains unmet. The D6 gain needs finite repetition; remaining
+ENS-specific E7/S12/D3/C2/C6/C8 protection and varied unadapted confirmation
+remain. The next-stage proposal has no allocation yet. Latest ordinary weekly
+availability65%; no reset call. Preserve all originals, including the two valid
+hard stops and D7 K1 losses. No main/default merge. Owned E:/codes/ExactEBRP-round66.
 
 R83 evidence CLOSED on codex/round83-equal-net-block-exchange, base R82 final
 30996a5c023adc2257cf9f4581e3672cf9a644d1 / draft PR143. Independent draft PR144

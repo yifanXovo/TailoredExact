@@ -1,6 +1,6 @@
 {
   "stage": "round84",
-  "campaign_status": "running_original_queue",
+  "campaign_status": "closed_all_nine_valid",
   "frozen_plan_commit": "3dae75c03",
   "exec_session_id": 19331,
   "driver_pid": 48520,
@@ -12,19 +12,19 @@
   "repeat_policy": "Never restart this producer. Poll the owned exec session and inspect original campaign records. A validity failure stops further launches.",
   "offline_policy": "No heavy audit, plotting, packaging, compilation or second optimizer while this queue is active.",
   "overall_goal_complete": false,
-  "last_recorded_unix": 1789659488.7323425,
-  "completed": 8,
-  "completed_paid_process_seconds": 28353.15599999996,
-  "completed_optimize_calls": 32,
+  "last_recorded_unix": 1789663639.630827,
+  "completed": 9,
+  "completed_paid_process_seconds": 31950.311999999918,
+  "completed_optimize_calls": 41,
   "all_completed_valid": true,
-  "current_active": {
-    "number": 9,
-    "arm": "K1-R",
-    "started_unix": 1789659397.4052365,
-    "driver_pid": 48520,
-    "destination": "results\\unified_exact_round84\\campaign\\local_raw\\09_U6_K1-R"
-  },
-  "completed_optimize_returns": 30,
-  "normal_returned_runs": 6,
-  "valid_whole_run_hard_stops": 2
+  "current_active": null,
+  "completed_optimize_returns": 39,
+  "normal_returned_runs": 7,
+  "valid_whole_run_hard_stops": 2,
+  "driver_exit_code": 0,
+  "all_offline_audits_passed": true,
+  "delivery_verified_twice": true,
+  "visual_review_passed": true,
+  "evidence_review_complete": true,
+  "publication_status": "pending_draft_PR"
 }

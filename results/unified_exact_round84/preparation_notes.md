@@ -40,3 +40,20 @@ Directory inspection confirmed only launch/affinity/phase/progress/stdout/stderr
 files at that time. No generation trace or formal U was inferred from that
 absence, and the original HGA process was left running. This was a read-only
 observation, not a failed native run or a reason to retry it.
+
+During final metadata assembly, an implicit-encoding read of the existing
+research index failed under GBK after the new status/resource/visual metadata
+had been written but before the index was changed. metadata_encoding_failure.json
+records the exception and partial state; explicit UTF-8 completed only the
+remaining metadata. One follow-up documentation patch used a split context
+line that did not match and made no write; the actual tail was read and the
+patch corrected. No solver, audit, package or plot was rerun. The successful
+verify-only command printed its timing instead of altering delivery.json, so
+delivery_verify_only.json preserves that original receipt and the temporary
+null resource metadata was filled from it.
+
+U6 live-monitor quiet periods were checked against the owned processes; CPU
+continued growing and native logs resumed without intervention. The U6 K1
+initial r_min bounds warning also occurs in R83's same-build U6 K1 native.log;
+all current call read-return codes are0 and the final frozen audits pass.
+No source, setting or native run was changed in response to those observations.

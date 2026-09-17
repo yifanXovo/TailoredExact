@@ -1,0 +1,32 @@
+{
+  "checked_at_utc": "2026-09-17T16:47:19.629827+00:00",
+  "all_figures_passed": true,
+  "layout_revision": 1,
+  "figures": [
+    {
+      "file": "d6_bounds_and_gap.png",
+      "sha256": "db3d2d70e4706d02cc24bda5af898794eec142aaf27394edd90fd819b9abf1bb",
+      "passed": true
+    },
+    {
+      "file": "d7_bounds_and_gap.png",
+      "sha256": "3aaa3ff0f657a7e3c78870d25bfc5b7d64a54592a045f1088e2ee5f5a2ed5ba8",
+      "passed": true
+    },
+    {
+      "file": "u6_bounds_and_gap.png",
+      "sha256": "61cd64b856f2463cbc5f87a30a3c0fd219316a87c49dbbfc0b53d34c6b7c10d3",
+      "passed": true
+    }
+  ],
+  "checks": [
+    "Readable titles, shared legends, axes and footnotes without clipping or overlap",
+    "All three original roles and all three arms retained",
+    "Missing U/gap left blank; available nonnegative L retained",
+    "Hard-stop endpoint squares visible on D6 K1 and D7 P",
+    "Only audited checkpoint markers; dashed segments explicitly guide the eye"
+  ],
+  "optimizer_calls": 0,
+  "new_plot_runs": 1,
+  "scope": "Direct visual review of all three rendered PNGs; no image or data edit required."
+}
