@@ -52,3 +52,25 @@ All three C8 arms return normally and pass per-run audits at600s; all remain ope
 ENS improves P gap40.073756% with both bounds better. Against K1, U is worse by0.00503986647479 but L is stronger by0.039622912321; gap improves20.067825%. Unclipped K1/P advantage retention is1.601116457. This mixed U/L direction is retained.
 
 All18 completed runs are normal/valid, 67 Optimize starts/returns and5080.376000s paid. Original D6 P/ENS/K1 repeat now runs at3600s each; session22846 remains the same original driver. Latest ordinary weekly availability54%; no reset. Final audits remain pending.
+## Completed D3/C2 cost attribution before final campaign audit
+
+These fields are read from the four original normal `result.json` files in
+`campaign/local_raw/08_D3_ENS-C`, `09_D3_K1-R`, `11_C2_ENS-C` and
+`12_C2_K1-R`. Their per-run audits have passed; full mechanism review remains
+pending. Reported native totals explain the completed runs and are never
+subtracted from formal paid time or used to create a counterfactual endpoint.
+
+|Role / arm|Paid whole seconds|Startup seconds|Exact-phase start|Native solver seconds|Startup physical F|Outcome|
+|---|---:|---:|---:|---:|---:|---|
+|D3 ENS|139.047|0.0298273|0.0342756|138.738999844|0.0781153026105612|nonzero certificate|
+|D3 K1|297.062|2.0891961|2.0928606|294.717999697|0.049468682614419446|open|
+|C2 ENS|113.766|0.0420530|0.0468946|112.969000101|0.837091467554702|nonzero certificate|
+|C2 K1|297.078|2.7168636|2.7229749|293.636000156|0.8299634131717752|open|
+
+K1 starts with a better physical objective on both roles, and spends almost
+the entire common cap in the native proof core. The observed complete-method
+certificate gains therefore cannot be described solely as saved HGA seconds
+or zero-objective termination. This does not isolate the causal effects of
+the startup witness, Start submission, formulation and downstream AM path.
+Neither ENS trace accepts a neutral relocation/exchange here, so these gains
+are not evidence that an accepted equal-net exchange caused the repair.

@@ -71,3 +71,62 @@ medium/large evidence, finite repeats and this separate unadapted check in a
 single scope table. Unsolved, unavailable-UB, mixed-U/L, negative and certificate
 loss rows remain explicit. No fixed number of positive samples alone satisfies
 the overall user goal.
+
+## Concrete recipe proposal while D6 P is still active
+
+The following dimensions make the structural proposal reviewable before any
+new input exists. They remain conditional on R85 closure and fresh resource
+admission. A later stage must commit executable generation rules and their
+hashes before generating any row; these notes do not start that stage.
+
+|Role|Geometry / inventory|V|M|Q|Mathematical T|Whole cap|
+|---|---|---:|---:|---:|---:|---:|
+|F1|CitiBike regional / surplus|12|2|20|3600|120|
+|F2|Synthetic alternating rings / high local imbalance, aggregate shortage|20|2|30|3600|300|
+|F3|Synthetic two-lane corridor / aggregate shortage|30|3|20|5400|3600|
+|F4|CitiBike regional / shortage|30|3|20|5400|3600|
+|F5|Synthetic perturbed rectangular grid / aggregate shortage|50|4|30|7200|3600|
+|F6|CitiBike compact / shortage, long route horizon|50|4|30|18000|3600|
+
+All roles keep lambda0.15, pickup/drop60 and the unchanged original distance
+and inventory semantics. The candidate and native settings remain R83's.
+The eighteen-run maximum stays44460s. F1 is retained even if it is zero/easy;
+the other roles target nonzero behavior without requiring any observed runtime.
+
+Use a deterministic field hash derived from source4496078f25c0cdad1cf7a5c39835fd23121e8978,
+one version namespace and the canonical role JSON. Field-specific suffixes
+separate coordinates, station ordering, targets, transfers and weights.
+No publication timestamp, measured objective or outcome enters this material.
+The executable recipe must define exact byte encoding and integer conversions.
+
+Proposed synthetic coordinates are in meters before translation, serialized
+to three decimals. F2 uses twenty angular positions on alternating700/1000m
+rings with angle perturbation at most0.04 radians and radial perturbation at
+most50m. F3 uses fifteen x positions150m apart on two lanes y=-175/+175m,
+with each coordinate perturbed at most40m. F5 uses a10-by5 grid at220m spacing,
+with each coordinate perturbed at most40m. The depot is the serialized point
+centroid, and the original parser supplies Euclidean travel seconds at1.5m/s.
+The fixed shapes broaden the old three-cluster recipe; they do not represent
+measured cities or guarantee difficult routing.
+
+For each even-sized synthetic role, hash-order stations and pair consecutive
+indices. In each pair set donor inventory D_i+a and receiver inventory
+D_j-a-delta. Proposed inclusive integer ranges are F2: D20..28,a8..12,
+delta3..6; F3: D16..26,a4..9,delta2..5; F5: D14..24,a3..8,delta2..5.
+Station capacity is D plus the role's maximum a plus an integer4..12.
+Thus every donor and receiver remains legal without repair/rejection, both
+local imbalance signs occur, and total shortage is exactly sum(delta)>0.
+Weights are independent hash-derived values in[0.25,1] rounded to six
+decimals; use the existing synthetic minimum-ratio formula for serialization.
+These are generated artificial profiles, not observed demand.
+
+CitiBike selection and inventory construction reuse the hash-bound original
+generator under a new fixed namespace. Keep source coordinates/capacities,
+its nearest-V or farthest-first-in-nearest-2V geography, controlled stock
+profile, artificial centroid and explicit source-station overlap report.
+The same underlying443-station source remains a limitation.
+
+If a later implementation reveals a formula/format ambiguity, resolve it
+before generation and record the change. An outcome may motivate a future
+algorithm revision, but never replacement, reseeding or rescaling of these
+already generated roles.

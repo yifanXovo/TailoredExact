@@ -8,15 +8,17 @@ Frozen plan/driver commit77dcc0ee1. Qualified R83 source/binary and parameters
 unchanged.21 arms: E7/S12 cap120, D3/C2 cap300, C6/C8 cap600, D6 cap3600;
 maximum16920 process seconds plus7 zero-Optimize compact exports.
 
-First18 originals are normal/valid:67 Optimize starts/returns,5080.376s paid.
+First19 originals are normal/valid:68 Optimize starts/returns,8677.564s paid.
 E7 near P; S12 nonzero repair; D3/C2 ENS certify while P/K1 stay open300.
 C6 ENS gap.149427255735 versus P.314012903008/K1.190677391518:52.4137% P
 and21.6335% K1 gains, both bounds better; K1/P advantage retention1.334454654.
 C8 ENS gap.137747763760 versus P.229862167194/K1.172330809606:40.0738% P
 and20.0678% K1 gains. Against K1, ENS U is worse by.005039866475 while L
 is stronger by.039622912321; retention1.601116457. Both are600s protection,
-not long-window generalization. The original D6 P/ENS/K1 repeat is now active
-at3600s each. Final campaign/mechanism/replication audits and stage draft are
+not long-window generalization. D6 P is normal/open at3597.188s with
+U.1572411758522922,L.15080268707762462,gap.006438488774667572.
+The original D6 ENS repeat is active; K1 follows, each cap3600.
+Final campaign/mechanism/replication audits and stage draft are
 pending. Do not run heavy audits, plotting, packaging or compilation with the
 optimizer. Never restart the original driver or repeat a closed producer.
 
