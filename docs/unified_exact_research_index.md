@@ -1,7 +1,13 @@
 # Unified exact BRP research - resume here
 
 R84 ACTIVE on codex/round84-ensc-long-protection-replication, base R83 final
-131d09280a1563243d0201e68367b26baf5079c3 / draft PR144. The prior resource
+131d09280a1563243d0201e68367b26baf5079c3 / draft PR144.
+Original queue is already launched: exec session19331 / driver PID48520.
+Run1 D6 P normal/valid3597.187s, gap.006425693916377456,open; run2 D6 ENS
+started at1789634641.2657506. Read current campaign summary/runtime_checkpoint
+for later progress and never restart the producer. Preliminary remote5ad3564c2
+preserves the frozen plan/readers; local871e3b812 also records transport recovery.
+The prior resource
 block is resolved: fresh ordinary weekly read0% used/100% remaining; this
 agent made no reset call. Read R84 plan/protocol/status and current campaign
 records. Nine serial P/ENS/K1 arms on D6,D7,U6, each whole cap3600s, maximum

@@ -1,6 +1,16 @@
 # Round84 status
 
 Original nine-arm queue is running, exec session19331 / driver PID48520.
+Run1 D6 P-GRB is complete, normal and independently valid:3597.186999999918s,
+U.1572411758522922,L.15081548193591474,gap.006425693916377456,not certified.
+One Optimize starts/returns,62 physical witnesses,3480 global bound events;
+per-run replay.05177119979634881s. Run2 D6 ENS-C started at1789634641.2657506.
+The original queue proceeds; whole nine-run campaign/mechanism/replication
+audits remain pending. No run is repeated.
+
+Preparation was preserved remotely at5ad3564c2f338737bcb2e65ca31b512c1da14507.
+Local later commit871e3b812 retains all transport failures and exact-hash
+API recovery. Read publication_recovery.md; no R84 draft PR exists yet.
 First arm D6 P-GRB started at Unix1789631043.9638808. The plan/driver/protocol
 were committed together at3dae75c03 before launch. Never restart this producer.
 Use campaign/active_experiment.json, summary.json and the owned process handle
@@ -19,6 +29,6 @@ Read plan.md and protocol.json. Formal driver refuses an existing campaign.
 
 Fresh preflight1.0566500998102129s includes three compact exports totaling
 0.7969999997876585s and zero Optimize. All274 source hashes and both executable
-identities revalidate. No R84 full performance result yet. Keep R83 and earlier producers closed. This
+identities revalidate. Keep R83 and earlier producers closed. This
 stage is exposed protection/repetition, not new unadapted confirmation. Overall
 goal unmet; no main/default merge. Owned E:/codes/ExactEBRP-round66.

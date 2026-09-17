@@ -11,5 +11,17 @@
   "maximum_process_seconds": 32400,
   "repeat_policy": "Never restart this producer. Poll the owned exec session and inspect original campaign records. A validity failure stops further launches.",
   "offline_policy": "No heavy audit, plotting, packaging, compilation or second optimizer while this queue is active.",
-  "overall_goal_complete": false
+  "overall_goal_complete": false,
+  "last_recorded_unix": 1789634697.0665116,
+  "completed": 1,
+  "completed_paid_process_seconds": 3597.186999999918,
+  "completed_optimize_calls": 1,
+  "all_completed_valid": true,
+  "current_active": {
+    "number": 2,
+    "arm": "ENS-C",
+    "started_unix": 1789634641.2657506,
+    "driver_pid": 48520,
+    "destination": "results\\unified_exact_round84\\campaign\\local_raw\\02_D6_ENS-C"
+  }
 }
