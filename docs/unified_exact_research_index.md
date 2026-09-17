@@ -1,5 +1,14 @@
 # Unified exact BRP research - resume here
 
+R84 latest: eight valid runs complete; final run9 U6 K1-R started1789659397.4052365.
+U6 ENS normal3597.1400000001304s,U.14990547589906003,L.13117221090547532,
+gap.018733264993584714,open. Both current U6 P/ENS finalized endpoints match
+R83. ENS/P gap improves13.58520440167604%, with worse U and stronger L.
+Read u6_ens_completed_prefix.json. Completed cost28353.15599999996s,32 Optimize
+starts/30 returns,6 normal/2 valid hard stops. Final campaign/Start/replication
+audits remain pending. Latest ordinary weekly availability68%; no reset call.
+Exact remote3b22ed7e6 preserves the seven-run prefix. Do not restart the queue.
+
 R84 latest: seven valid runs complete, run8 U6 ENS-C active since1789655799.3342073.
 U6 P returns normally3597.1099999998696s with U.14819747529511856,
 L.12651916793596993,gap.021678307359148635, open. This matches R83's finalized

@@ -1,5 +1,21 @@
 # Round84 status
 
+Latest eight-run prefix: U6 ENS-C returns normally and validates in
+3597.1400000001304s, with U.14990547589906003,L.13117221090547532,
+gap.018733264993584714, no certificate. Current P and ENS finalized endpoints
+both equal R83 values. ENS improves the current P gap13.58520440167604%,
+with worse U by.0017080006039414675 and stronger L by.004653042969505389.
+This finite endpoint repetition is subject to final replication/Start audits.
+ENS makes6 Optimize starts/returns,23 physical witnesses,100 global bound
+events and136 commits; per-run replay.9122426998801529s. Its startup executes
+17 exchanges,0 relocations,6 insertions,61 quantity moves and17687 equal-net
+pairs, exhausts the neighborhood and hands off the final route.
+Completed cost28353.15599999996s,32 Optimize starts/30 returns,6 normal returns
+and2 valid hard stops. Run9 U6 K1-R started at1789659397.4052365 in the original
+queue. See u6_ens_completed_prefix.json. No final audit/PR or overall claim yet.
+Exact remote3b22ed7e695cb86280fd48987515dec3df4e8046 was independently verified
+for the seven-run prefix. Latest ordinary weekly availability68%; no reset call.
+
 Latest seven-run prefix: U6 P-GRB returns normally and validates in
 3597.1099999998696s, with U.14819747529511856,L.12651916793596993,
 gap.021678307359148635, no certificate. The finalized endpoint matches R83;
