@@ -1,10 +1,16 @@
-# R85 original campaign active
+# R85 evidence closed; draft publication pending
 
-Frozen at77dcc0ee1090d2e9f99d7d91d4cd60513967b24c. Original driver session22846;
-no producer rerun. Read runtime_checkpoint.json and the live campaign summary.
-Seven roles /21 arms; qualified R83 source and parameters remain unchanged.
-Per-run valid endpoints are preliminary until final campaign/mechanism audits.
-No heavy audit, package, plot or build while a native solve is active.
+All 21 originals are normal and valid, 81 Optimize calls returned, 15456.440
+paid process seconds. Driver session22846 and all native processes are CLOSED;
+never poll or relaunch them. Campaign/mechanism/replication audits pass, bundles
+are verified twice, and all five figures have passed visual review. Closed
+producers must not be rerun. Read final_report.md, findings.json and stage_decision.json.
 
-Overall goal remains unmet. This is exposed protection and finite D6 repeat,
-not unadapted confirmation. Continue the original session through closure.
+Source4496078f2 and the qualified R83 binary/preset remain unchanged. D6 ENS
+repeats certification at3181.735s, versus both current controls open3600.
+E7 near P; S12 nonzero repair; D3/C2 certificates; C6/C8 protect K1 gains.
+C8 has worse U but stronger L than K1. Earlier D7 losses remain in scope.
+
+Overall goal remains unmet. Publication is the remaining R85 step. Do not
+start prospective R86 generation/solves before separate resource admission,
+recipe freeze and review. Latest account-wide weekly remaining41%; no reset.

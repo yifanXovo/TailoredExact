@@ -1,32 +1,27 @@
 # Unified exact BRP research - resume here
 
-R85 ACTIVE on codex/round85-ensc-remaining-protection-replication, base R84
-final ed0cd977ac2ea1cf7a7bf1236a15dd845a3ed948 / draft PR145. Read R85
-plan.md, protocol.json, status.md, progress_notes.md and runtime_checkpoint.json.
-Original driver session22846 / PID49028 continues; NEVER relaunch it.
-Frozen plan/driver commit77dcc0ee1. Qualified R83 source/binary and parameters
-unchanged.21 arms: E7/S12 cap120, D3/C2 cap300, C6/C8 cap600, D6 cap3600;
-maximum16920 process seconds plus7 zero-Optimize compact exports.
+R85 evidence CLOSED on codex/round85-ensc-remaining-protection-replication,
+base R84 final ed0cd977ac2ea1cf7a7bf1236a15dd845a3ed948 / draft PR145.
+Read R85 final_report.md, status.md, stage_decision.json, goal_evidence_scope.md
+and reproduce.md. Its independent draft PR is the remaining publication step.
 
-First20 originals are normal/valid:74 Optimize starts/returns,11859.299s paid.
-E7 near P; S12 nonzero repair; D3/C2 ENS certify while P/K1 stay open300.
-C6 ENS gap.149427255735 versus P.314012903008/K1.190677391518:52.4137% P
-and21.6335% K1 gains, both bounds better; K1/P advantage retention1.334454654.
-C8 ENS gap.137747763760 versus P.229862167194/K1.172330809606:40.0738% P
-and20.0678% K1 gains. Against K1, ENS U is worse by.005039866475 while L
-is stronger by.039622912321; retention1.601116457. Both are600s protection,
-not long-window generalization. D6 P is normal/open at3597.188s with
-U.1572411758522922,L.15080268707762462,gap.006438488774667572.
-D6 ENS repeats the numerical certificate at3181.735s; U/L exactly match R84
-(.15708313110317415/.15708313110316996). The original D6 K1 final arm is
-now active at cap3600; no producer rerun.
-Final campaign/mechanism/replication audits and stage draft are
-pending. Do not run heavy audits, plotting, packaging or compilation with the
-optimizer. Never restart the original driver or repeat a closed producer.
+All21 originals normal/valid;81 Optimize starts/returns;15456.440s paid.
+Driver22846/PID49028 and all native processes CLOSED. Never poll/relaunch.
+Campaign/mechanism/replication audits pass;11 actual Starts mapped, read back
+and native accepted;22 bundles/41210 members verified twice;5 figures reviewed.
+No new build, qualification, startup run or input generation. Source4496078f2
+and R83 ENS-C binary remain unchanged. All producer outputs are immutable.
 
-Overall goal unmet. This is exposed protection and finite repetition, not new
-confirmation. Prospective design notes allocate no further runs. Latest
-ordinary weekly availability43% (resource_during_final_arm.json); no reset. Prior R84 producers remain closed.
+E7 near P; S12 nonzero repair; D3/C2 ENS certificates vsP/K1 open300.
+C6/C8 ENS/P gap gains52.4137%/40.0738% at600, K1 retention1.33445/1.60112.
+C8 U worse than K1 by.00503987, L stronger by.03962291. D6 ENS repeats
+certificate3181.735s with exact R84 U/L; current P/K1 remain open3600.
+Earlier D7 material final and severe1200 K1 losses remain disclosed.
+
+Overall goal unmet: exposed protection is not unadapted confirmation. R86
+recipe/scripts remain local preparation only; no generation or solver run.
+Fresh account-wide weekly remaining41%, no reset. After publishing R85,
+freeze a finite confirmation plan and review missing-UB handling before use.
 Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.
 
 R84 evidence CLOSED on codex/round84-ensc-long-protection-replication, base R83

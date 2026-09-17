@@ -94,3 +94,13 @@ in R84 and last in R85, with the relative P/ENS/K1 order preserved.
 The20-run prefix has74 Optimize starts/returns and11859.299s paid. These are
 all original normal/per-run-valid outcomes; K1's active cost is still accruing
 and will be added at completion. No new qualification or generated input.
+
+## Original campaign closure and evidence review
+
+All21 original runs normal/valid;81 native calls returned;15456.440s paid.
+All three final audits pass. Summary, packaging, separate member verification
+and plotting completed once; all five figures visually pass. No observation
+coverage exceptions, no material ENS checkpoint regression under frozen rules.
+Package session85467 was already closed when later polled (unknown-process
+response); delivery files confirm its successful original output. No rerun.
+R85 final report closes evidence; independent draft publication remains next.
