@@ -20,13 +20,17 @@ All three first-layout figures pass visual review. No new source/build/test,
 extra seed, rerun or extension. Qualified R83 binary remains25b7ec3a6d.
 
 Read final_report.md, stage_decision.md, goal_evidence_scope.md and reproduce.md.
-Evidence review complete; draft PR publication pending. Latest independently
-verified remote prefixbaf19b2d5d923a1578adc31019500c6cb215ee68 holds eight runs.
-Binary-capable publisher v3 is prepared and remains unexecuted; ordinary push
-will be tried after the final evidence commit. All previous failures remain.
+Evidence review complete; independent draft PR145 is published and verified:
+https://github.com/yifanXovo/TailoredExact/pull/145 . Exact evidence head
+3189c5ae0834a7e023ae281ed6151aac67131b4d and R83 base131d09280 are verified;
+the PR is open, draft and unmerged. Final ordinary Git push and two large-body
+API readback failures are retained. Content-address publisher v4 succeeds with
+the exact original tree/commit and a non-force update. It distinguishes9
+complete binary readbacks from5 creation-SHA acknowledgments; all local
+evidence members still verify twice. Read publication_recovery.md.
 
 Overall goal unmet. A finite D6 repeat, remaining ENS protection and varied
 unadapted confirmation remain. next_hypothesis.md is a proposal, not a run
-allocation. Latest ordinary weekly availability65%; no reset credit consumed
+allocation. Latest ordinary weekly availability62%; no reset credit consumed
 by this agent. No main/default merge or scheduled continuation.
 Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.

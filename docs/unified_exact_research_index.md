@@ -2,7 +2,10 @@
 
 R84 evidence CLOSED on codex/round84-ensc-long-protection-replication, base R83
 final131d09280a1563243d0201e68367b26baf5079c3 / draft PR144. Evidence review
-passes; new independent draft publication pending. Read R84 final_report,
+passes; independent draft PR145 is published and verified open/draft/unmerged:
+https://github.com/yifanXovo/TailoredExact/pull/145 . Exact evidence head
+3189c5ae0834a7e023ae281ed6151aac67131b4d and R83 base131d09280 are verified.
+Read R84 final_report,
 status, stage_decision, goal_evidence_scope, reproduce and next_hypothesis.
 Original driver session19331 exited0; all9 valid,7 normal/2 valid hard stops,
 41 Optimize starts/39 returns,31950.312s. Never restart any closed producer.
@@ -23,8 +26,11 @@ and binary25b7ec3a6d. Inherited62 tests/165 calls are not recharged.
 Overall goal remains unmet. The D6 gain needs finite repetition; remaining
 ENS-specific E7/S12/D3/C2/C6/C8 protection and varied unadapted confirmation
 remain. The next-stage proposal has no allocation yet. Latest ordinary weekly
-availability65%; no reset call. Preserve all originals, including the two valid
-hard stops and D7 K1 losses. No main/default merge. Owned E:/codes/ExactEBRP-round66.
+availability62%; no reset call. Preserve all originals, including the two valid
+hard stops and D7 K1 losses. Final ordinary push and large-body API readback
+failures are retained; exact content-address publication succeeds. Nine binary
+bodies were read back, five are creation-SHA acknowledgments; the exact tree,
+commit and remote ref verify. No main/default merge. Owned E:/codes/ExactEBRP-round66.
 
 R83 evidence CLOSED on codex/round83-equal-net-block-exchange, base R82 final
 30996a5c023adc2257cf9f4581e3672cf9a644d1 / draft PR143. Independent draft PR144

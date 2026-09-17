@@ -7,6 +7,11 @@ and all three first-layout figures pass visual review. Do not rerun a closed
 producer. The commands below document the original completed workflow.
 Read final_report.md and runtime_checkpoint.json for the closed state.
 
+R84 is published as independent draft PR145 against R83. Exact evidence head
+3189c5ae0834a7e023ae281ed6151aac67131b4d is independently verified. Publication
+recovery preserves the original commit and distinguishes complete remote binary
+readbacks from creation-SHA acknowledgments; see publication_recovery.md.
+
 Owned checkout: E:/codes/ExactEBRP-round66. Base is R83 final
 131d09280a1563243d0201e68367b26baf5079c3, draft PR144. Plan/protocol/original
 driver were committed before launch at3dae75c03. The original nine-run queue

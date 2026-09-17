@@ -4,7 +4,9 @@ Evidence review passes. All nine original runs are valid, all frozen audits
 pass, all ten bundles verify twice and all figures pass visual review.
 Seven normal returns and two valid hard stops are distinguished. Source,
 configuration, physical witnesses, full coverage, actual Starts and all costs
-remain bound to the original runs. Draft publication is pending.
+remain bound to the original runs. Independent draft PR145 is published and
+verified open/draft/unmerged at the exact evidence head and R83 base:
+https://github.com/yifanXovo/TailoredExact/pull/145 .
 
 The unchanged ENS-C architecture remains eligible: original BRP semantics,
 complete Gurobi MIP obligations, mathematically triggered domain transitions,
@@ -23,6 +25,6 @@ with a near final K1 difference and mixed U/L directions.
 Overall acceptance remains unmet. R84 is exposed long protection and one finite
 U6 repeat. The important D6 certificate gain needs a finite repeat; remaining
 ENS-specific protection and new varied confirmation are still outstanding.
-Do not merge main or enable a stable default. Publish this substantive stage
-as its own draft against R83, then admit the next bounded validation stage
+Do not merge main or enable a stable default. This substantive stage is
+published as its own draft against R83; next admit a bounded validation stage
 after a fresh resource check. Do not restart any closed R84 producer.

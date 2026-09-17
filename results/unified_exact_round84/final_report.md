@@ -3,8 +3,11 @@
 All nine original full runs are valid: seven normal returns and two valid
 whole-run hard stops. Campaign, mechanism and replication audits pass. Ten
 new evidence bundles verify twice, and all three figures pass visual review.
-Evidence review is complete; draft publication is pending. Overall research
-acceptance remains unmet. No production/default change or main merge.
+Evidence review is complete. Independent draft PR145 is published:
+https://github.com/yifanXovo/TailoredExact/pull/145 . Fresh readback verifies
+evidence head3189c5ae0834a7e023ae281ed6151aac67131b4d, the exact R83 base
+and open/draft/unmerged state. Overall research acceptance remains unmet.
+No production/default change or main merge.
 
 The unchanged ENS-C candidate certifies D6 in3171.157s while current P-GRB and
 K1-R remain open at the common3600s cap. On D7 its final absolute gap improves
@@ -177,7 +180,8 @@ BDS U6 failure remain visible. A finite D6 certificate repeat, remaining
 E7/S12/D3/C2/C6/C8 protection and varied unadapted confirmation remain before
 overall acceptance. Current resource snapshot: ordinary usage allowed,65%
 weekly remaining, no reset consumed by this agent. Further work requires its
-own finite stage plan after this draft is published.
+own finite stage plan after this draft is published. At publication readback,
+ordinary weekly availability is62%; no reset call was made.
 
 One closure-metadata update initially read the existing research index using
 Windows GBK and failed before writing that index. The failure and partial
@@ -187,3 +191,16 @@ failed without a write, then was corrected against the actual line. Neither
 required a native or audit rerun. The successful separate verify-only receipt
 is saved in delivery_verify_only.json; an intermediate null metadata duration
 was replaced from that original tool output, not from another verification.
+
+Final ordinary Git push failed after42.2790544s with a connection reset.
+Binary publisher v3 failed during large-object GET readback after224.5686046s;
+one HTTP/1 transport attempt failed on another readback after226.7080545s.
+The exact original head was not advanced on either failure. The content-address
+recovery verifies14 binary Git object IDs, reusing9 successful complete byte
+readbacks and distinguishing5 creation-SHA acknowledgments without full
+readback. It then verifies the exact original root tree and commit before a
+non-force update, completing11 requests in31.0141403s. This is not a claim
+that all14 remote bodies were downloaded. Local package verification still
+checks all20726 members twice. Independent GitHub readback confirms the
+original evidence commit and draft PR. See publication_recovery.md and the
+retained attempt receipts; no evidence or commit history was rewritten.
