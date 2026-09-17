@@ -168,3 +168,26 @@ R85 publication and resource admission; the source and exact executable
 recipe still require that committed freeze.
 
 A read-only follow-up checked zero-stop artifact handling: HgaTgbcRunner.cpp writes the descent CSV after ga.run even when a verified zero stops the seeds; main.cpp invokes the exchange controller whenever a witness is found and the whole deadline has not expired, including zero witnesses. Future audit code must keep its explicit verified-zero exception to all25 completion. This inspection does not execute a new test or alter the frozen method.
+
+## Resource review while the final K1 arm is active
+
+The21:15:49 UTC snapshot reports ordinary usage available and43% weekly
+remaining on the shared account. No confirmation input exists and no next
+stage is admitted. The original six-role proposal would allocate44460 whole
+process seconds (up to12.35h), before review/publication or any needed revision.
+At R85 closure, review whether that remains a reasonable finite allocation.
+
+One smaller prospective option is F1/F2/F5/F6, preserving the small CitiBike
+role, distinct V20 ring geometry, V50 synthetic grid and V50 long-T CitiBike
+shortage challenge. Those twelve arms would allocate at most22860 process
+seconds. The two structurally different nonzero V50 roles retain3600s caps;
+the high-imbalance V20 role retains300s. This option has not been selected,
+generated or solved. F3/F4 would remain unallocated proposal roles if it is
+chosen before generation, rather than generated outcomes removed afterward.
+
+The actual roles, recipe, whole caps, interpretation and finite evidence scope
+must be committed before generation. Keep every role in that admitted plan,
+including failures and unexpectedly easy cases. Do not change an admitted
+scope after seeing favorable or unfavorable confirmation outcomes. This is
+resource planning outside the algorithm and does not change a benchmark's
+mathematical T, an existing input, or the frozen candidate's decisions.

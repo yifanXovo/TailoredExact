@@ -26,7 +26,7 @@ optimizer. Never restart the original driver or repeat a closed producer.
 
 Overall goal unmet. This is exposed protection and finite repetition, not new
 confirmation. Prospective design notes allocate no further runs. Latest
-ordinary weekly availability47% (resource_during_D6_ENS.json); no reset. Prior R84 producers remain closed.
+ordinary weekly availability43% (resource_during_final_arm.json); no reset. Prior R84 producers remain closed.
 Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.
 
 R84 evidence CLOSED on codex/round84-ensc-long-protection-replication, base R83
