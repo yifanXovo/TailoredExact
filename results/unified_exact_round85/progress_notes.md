@@ -38,3 +38,17 @@ All three C6 arms return normally and pass per-run audits at the common600s cap;
 ENS improves P gap52.413657% and K1 gap21.633470%, with both better U and stronger L against each. Unclipped K1/P advantage retention is1.334454654. This600s exposed protection does not establish long-window generalization.
 
 All15 completed runs are normal/valid, 56 Optimize starts/returns and3289.141000s paid. C8 and the D6 repeat remain. ENS C6 accepts no neutral move, performs one quantity move and exhausts its controller; do not attribute the full-method gain to an accepted exchange.
+
+## C8 complete; D6 repeat active
+
+All three C8 arms return normally and pass per-run audits at600s; all remain open.
+
+|Arm|Paid seconds|Physical U|Global L|Signed gap|
+|---|---:|---:|---:|---:|
+|P-GRB|597.063|0.806818916787|0.576956749593|0.229862167194|
+|ENS-C|597.062|0.806689827932|0.668942064172|0.13774776376|
+|K1-R|597.110|0.801649961457|0.629319151851|0.172330809606|
+
+ENS improves P gap40.073756% with both bounds better. Against K1, U is worse by0.00503986647479 but L is stronger by0.039622912321; gap improves20.067825%. Unclipped K1/P advantage retention is1.601116457. This mixed U/L direction is retained.
+
+All18 completed runs are normal/valid, 67 Optimize starts/returns and5080.376000s paid. Original D6 P/ENS/K1 repeat now runs at3600s each; session22846 remains the same original driver. Latest ordinary weekly availability54%; no reset. Final audits remain pending.

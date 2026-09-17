@@ -8,17 +8,21 @@ Frozen plan/driver commit77dcc0ee1. Qualified R83 source/binary and parameters
 unchanged.21 arms: E7/S12 cap120, D3/C2 cap300, C6/C8 cap600, D6 cap3600;
 maximum16920 process seconds plus7 zero-Optimize compact exports.
 
-First15 originals are normal/valid:56 Optimize starts/returns,3289.141s paid.
+First18 originals are normal/valid:67 Optimize starts/returns,5080.376s paid.
 E7 near P; S12 nonzero repair; D3/C2 ENS certify while P/K1 stay open300.
 C6 ENS gap.149427255735 versus P.314012903008/K1.190677391518:52.4137% P
 and21.6335% K1 gains, both bounds better; K1/P advantage retention1.334454654.
-C6 scope is600s, not long-window generalization. C8 has started; D6 repeat
-remains. Final campaign/mechanism/replication audits and stage draft are pending.
-Do not run heavy audits, plotting, packaging or compilation with the optimizer.
+C8 ENS gap.137747763760 versus P.229862167194/K1.172330809606:40.0738% P
+and20.0678% K1 gains. Against K1, ENS U is worse by.005039866475 while L
+is stronger by.039622912321; retention1.601116457. Both are600s protection,
+not long-window generalization. The original D6 P/ENS/K1 repeat is now active
+at3600s each. Final campaign/mechanism/replication audits and stage draft are
+pending. Do not run heavy audits, plotting, packaging or compilation with the
+optimizer. Never restart the original driver or repeat a closed producer.
 
 Overall goal unmet. This is exposed protection and finite repetition, not new
 confirmation. Prospective design notes allocate no further runs. Latest
-ordinary weekly availability58%; no reset. Prior R84 producers remain closed.
+ordinary weekly availability54%; no reset. Prior R84 producers remain closed.
 Owned E:/codes/ExactEBRP-round66; original dirty checkout untouched.
 
 R84 evidence CLOSED on codex/round84-ensc-long-protection-replication, base R83
