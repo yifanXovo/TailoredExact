@@ -23,6 +23,12 @@ veto for being slower than K1. Historical faster BDS configurations are not
 substituted into current matched pairs. Every formal endpoint retains its own
 physical U, qualified complete-domain L, whole cost and certificate status.
 
+D6 was the first R84 role and the last R85 role. Its relative P/ENS/K1 order
+is preserved, but the whole campaign order differs. Source, input, settings,
+core binding and cap are matched; frequency is not locked. The planned finite
+repeat is descriptive and does not establish statistical equivalence or a
+cause for timing differences.
+
 The R85 evidence adds useful protection coverage without another parameter or
 neighborhood change. Whether this frozen candidate meets the whole finite-scope
 goal still depends on the pending D6 repeat, complete audits and an
