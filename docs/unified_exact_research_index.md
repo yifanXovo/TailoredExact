@@ -1,5 +1,16 @@
 # Unified exact BRP research - resume here
 
+R84 ACTIVE on codex/round84-ensc-long-protection-replication, base R83 final
+131d09280a1563243d0201e68367b26baf5079c3 / draft PR144. The prior resource
+block is resolved: fresh ordinary weekly read0% used/100% remaining; this
+agent made no reset call. Read R84 plan/protocol/status and current campaign
+records. Nine serial P/ENS/K1 arms on D6,D7,U6, each whole cap3600s, maximum
+32400s, plus three zero-Optimize reference exports<=30s. No new build, source,
+parameter or input change; inherited R83 source4496078f2/binary25b7ec3a6d.
+All274 source hashes and both executable identities revalidate. This is exposed
+long protection and one finite U6 repeat, not new unadapted confirmation.
+Do not rerun an existing campaign or any R83 producer. Overall goal unmet.
+
 R83 evidence CLOSED on codex/round83-equal-net-block-exchange, base R82 final
 30996a5c023adc2257cf9f4581e3672cf9a644d1 / draft PR143. Independent draft PR144
 published and verified open/draft/unmerged: https://github.com/yifanXovo/TailoredExact/pull/144 .
