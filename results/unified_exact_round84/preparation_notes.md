@@ -34,3 +34,9 @@ Windows, and guessed unified_exact_round64/65 report directories did not exist.
 Discovery located the actual gf_shared_load_time_round64 and
 gf_budgeted_proof_round65 reports. These read-only command errors caused no
 optimizer call, native retry, input change or change to the frozen R84 plan.
+
+An attempted live read of D7 K1-R hga.csv found no file during its startup.
+Directory inspection confirmed only launch/affinity/phase/progress/stdout/stderr
+files at that time. No generation trace or formal U was inferred from that
+absence, and the original HGA process was left running. This was a read-only
+observation, not a failed native run or a reason to retry it.

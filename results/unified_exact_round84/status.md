@@ -1,6 +1,6 @@
 # Round84 status
 
-Latest: five runs complete and independently valid. D6 P is open after
+Latest: six runs complete and independently valid. D6 P is open after
 3597.187s (gap.006425693916377456), ENS certifies in3171.157s, and K1-R
 reaches the whole-run guard at3598.078s with valid committed evidence:
 U.15708313110317407,L.1483180363170433,gap.008765094786130773, no certificate.
@@ -17,12 +17,22 @@ Four Optimize starts/returns (3 LP plus parent-domain MIP),52 physical
 witnesses,93 global-bound events and154 commits pass replay in.643729000352323s.
 Actual startup executes3 exchanges,3 relocations,2 insertions,38 quantity moves
 and7519 equal-net pairs; its outer witness matches the final route.
-There are now3 normal returns and2 valid hard stops,19 Optimize starts/17 returns,
-and17561.65599999996s paid in the completed prefix. See d7_ens_completed_prefix.json.
-Run6 D7 K1-R started at1789648604.6758657 in the same original queue.
+D7 K1-R returns normally in3597.25s: U.21564407531579505,
+L.19850842028251278,gap.017135655033282265, no certificate. Six Optimize
+starts/returns,1 physical witness,47 global-bound events and61 commits pass
+replay in.07675880007445812s. ENS has worse U and stronger L than K1;
+its gap is.0032773387039759794 (19.125844314737108%) larger. It retains
+84.80099005240418% of K1's absolute-gap advantage over current P. This is
+a material K1 gap tradeoff under the frozen rule, alongside the47.2512% P gain.
+K1 HGA completes2739 generations at595.0508286s; its first witness is available
+at595.2660000002943s. At300s U is unavailable; at600s U is available but L=0.
+These are original observed checkpoints, not backdated generation-log values.
+There are now4 normal returns and2 valid hard stops,25 Optimize starts/23 returns,
+and21158.90599999996s paid in the completed prefix. See d7_completed_comparison.json.
+Run7 U6 P-GRB started at1789652202.0036876 in the same original queue.
 Its active cost is additional. Final nine-run/Start/replication audits remain
 pending; no R84 PR yet and no overall-goal claim. Never restart the producer.
-Exact remote preparation/prefix head6ec534c3a was independently verified.
+Exact remote preparation/prefix heade1ee5c143 was independently verified.
 The syntax-checked binary publisher v3 is prepared but unexecuted; it refuses
 use while the campaign lock exists. v2 remains the tested text-prefix transport.
 Latest resource read: ordinary usage allowed,80% weekly remaining, no reset call.
