@@ -1,5 +1,37 @@
 # Unified exact BRP research - resume here
 
+R84 evidence CLOSED on codex/round84-ensc-long-protection-replication, base R83
+final131d09280a1563243d0201e68367b26baf5079c3 / draft PR144. Evidence review
+passes; independent draft PR145 is published and verified open/draft/unmerged:
+https://github.com/yifanXovo/TailoredExact/pull/145 . Exact evidence head
+3189c5ae0834a7e023ae281ed6151aac67131b4d and R83 base131d09280 are verified.
+Read R84 final_report,
+status, stage_decision, goal_evidence_scope, reproduce and next_hypothesis.
+Original driver session19331 exited0; all9 valid,7 normal/2 valid hard stops,
+41 Optimize starts/39 returns,31950.312s. Never restart any closed producer.
+
+D6 ENS certifies3171.157s versus P/K1 open3600. D7 ENS/P gap improves47.2512%,
+with a material19.1258% final K1 gap loss and84.8010% K1/P advantage retained.
+D7's1200s K1 loss is severe; ENS still beats P58.4705% and retains75.3324%
+of K1's P advantage there. U6 ENS/P13.5852% gap gain repeats exactly at the
+final endpoint; current K1 L improves2.81848e-6. ENS retains88.3722% of K1's
+P advantage, with a near2.1122% final K1 difference. Mixed U/L directions remain.
+
+All physical/coverage/source/Start/replication audits pass;547 physical witnesses,
+9519 global bounds,10155 commits. Three actual Starts accepted;75 logical
+startup paths match. Ten bundles/20726 members verify twice; all3 figures pass.
+No source/default/build/parameter/input change; qualified R83 source4496078f2
+and binary25b7ec3a6d. Inherited62 tests/165 calls are not recharged.
+
+Overall goal remains unmet. The D6 gain needs finite repetition; remaining
+ENS-specific E7/S12/D3/C2/C6/C8 protection and varied unadapted confirmation
+remain. The next-stage proposal has no allocation yet. Latest ordinary weekly
+availability62%; no reset call. Preserve all originals, including the two valid
+hard stops and D7 K1 losses. Final ordinary push and large-body API readback
+failures are retained; exact content-address publication succeeds. Nine binary
+bodies were read back, five are creation-SHA acknowledgments; the exact tree,
+commit and remote ref verify. No main/default merge. Owned E:/codes/ExactEBRP-round66.
+
 R83 evidence CLOSED on codex/round83-equal-net-block-exchange, base R82 final
 30996a5c023adc2257cf9f4581e3672cf9a644d1 / draft PR143. Independent draft PR144
 published and verified open/draft/unmerged: https://github.com/yifanXovo/TailoredExact/pull/144 .

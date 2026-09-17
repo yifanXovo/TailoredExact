@@ -1,0 +1,29 @@
+{
+  "recorded_unix": 1789634697.0665116,
+  "completed": 1,
+  "active": {
+    "number": 2,
+    "arm": "ENS-C",
+    "started_unix": 1789634641.2657506,
+    "driver_pid": 48520,
+    "destination": "results\\unified_exact_round84\\campaign\\local_raw\\02_D6_ENS-C"
+  },
+  "records": [
+    {
+      "id": "D6",
+      "arm": "P-GRB",
+      "wall": 3597.186999999918,
+      "passed": true,
+      "endpoint": {
+        "U": 0.1572411758522922,
+        "L": 0.15081548193591474,
+        "gap": 0.006425693916377456,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      }
+    }
+  ],
+  "scope": "Completed original prefix only; final nine-run audits remain pending",
+  "optimizer_calls_in_recording": 0
+}

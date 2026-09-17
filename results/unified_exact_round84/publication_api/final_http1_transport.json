@@ -1,0 +1,12 @@
+{
+  "reason": "One bounded transport retry after HTTP/2 stream CANCEL during readback; remote head independently unchanged",
+  "source": "https://pkg.go.dev/net/http#hdr-HTTP_2",
+  "requested_setting": "GODEBUG=http2client=0",
+  "scope": "Only this publisher process and children; no global setting, source, evidence or solver change",
+  "publisher_sha256": "24211f91182e540d1aa3a628cc66b02a5c0e57141069b98aab3d46c93f62d520",
+  "target": "3189c5ae0834a7e023ae281ed6151aac67131b4d",
+  "label": "final_evidence_http1",
+  "optimizer_calls": 0,
+  "returncode": 1,
+  "wall_seconds": 226.81837770016864
+}
