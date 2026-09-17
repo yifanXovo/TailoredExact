@@ -60,7 +60,7 @@ These fields are read from the four original normal `result.json` files in
 pending. Reported native totals explain the completed runs and are never
 subtracted from formal paid time or used to create a counterfactual endpoint.
 
-|Role / arm|Paid whole seconds|Startup seconds|Exact-phase start|Native solver seconds|Startup physical F|Outcome|
+|Role / arm|Paid whole seconds|HGA wall field|Exact-phase start|Native solver seconds|Startup physical F|Outcome|
 |---|---:|---:|---:|---:|---:|---|
 |D3 ENS|139.047|0.0298273|0.0342756|138.738999844|0.0781153026105612|nonzero certificate|
 |D3 K1|297.062|2.0891961|2.0928606|294.717999697|0.049468682614419446|open|
@@ -74,3 +74,23 @@ or zero-objective termination. This does not isolate the causal effects of
 the startup witness, Start submission, formulation and downstream AM path.
 Neither ENS trace accepts a neutral relocation/exchange here, so these gains
 are not evidence that an accepted equal-net exchange caused the repair.
+
+## D6 original repeat after20 completed arms
+
+Both completed D6 arms returned normally and passed individual audits. P-GRB
+uses3597.188s, U0.1572411758522922, L0.15080268707762462 and gap
+0.006438488774667572; it remains open. ENS-C certifies in3181.735s, with
+U0.15708313110317415, L0.15708313110316996 and signed gap
+4.191091917959966e-15. Its U/L exactly match the R84 numerical certificate.
+The original K1-R final arm has started; no preferred repeat or replacement.
+
+ENS whole time is10.578s longer than the R84 realization, a small descriptive
+difference under the unchanged absolute-and-relative rule. This is finite
+replication of the certificate gain against current P, not statistical
+equivalence or a causal account of timing differences. Complete repetition
+and mechanism audits remain pending until all21 arms close. D6 appears first
+in R84 and last in R85, with the relative P/ENS/K1 order preserved.
+
+The20-run prefix has74 Optimize starts/returns and11859.299s paid. These are
+all original normal/per-run-valid outcomes; K1's active cost is still accruing
+and will be added at completion. No new qualification or generated input.
