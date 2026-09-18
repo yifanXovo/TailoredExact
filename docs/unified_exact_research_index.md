@@ -1,31 +1,28 @@
-# Unified exact BRP research - resume here
+# Unified exact BRP research - current delivery state
 
-R86 ACTIVE on codex/round86-ensc-varied-unadapted-confirmation, based on R85
-final a3a7c89cfa752fd0c029c83d43996562df0be3fd / draft PR146. Read R86 plan,
-preregistration, status and admission_resource. Selected F1/F2/F5/F6 before
-generation:12 arms,max22860s,4 zero-Optimize references. Four inputs generated once after recipe freeze2d770ba01. Original driver88121
-is running; do not relaunch. Launch/tool freeze0666c13e2 verified remotely.
-Source/preset/build unchanged. Offline validation v2 passes37 checks; missing U/final-only route cases handled.
-Prior validation and corrected inherited Git/local CRLF check retained.
-Read runtime_checkpoint and campaign summary. No heavy audit/build/plot/package
-while native solver is active; after closure run each producer once.
-First6 originals normal/valid,20 calls returned,996.266s. F1 ENS11.891s
-vsP49.953/K143.203 certified. F2 ENS/P gap gain75.8535%, ENS/K1 gain60.6100%,
-all open300 with same U. F5 P #7 normal/open3597.125s, U.434235836764,
-L.268250596924,gap.165985239840. First7 normal/valid,21 calls returned,
-4593.391s paid. F5 ENS #8 now normal/open3597.172s, U.329323694641,
-L.281453806344,gap.047869888297; ENS/P gap gain71.1602%, both bounds better.
-F5 K1 #9 normal/open3597.203s, U.316133367575,L.276147052028,gap.039986315548.
-ENS/K1 gap loss19.7157% is material, with worse U/stronger L; retain this loss.
-ENS retains93.7431% of K1/P's gap advantage. First9 normal/valid,35 Optimize
-starts/returns,11787.766s paid. F6 P #10 now normal/open3597.187s,
-U.305585444373,L.265294704234,gap.040290740140; retain its late primal gain.
-F6 ENS #11 now normal/open3597.313s, U.292941308691,L.278026253182,
-gap.014915055509; ENS/P gain62.9814%, both bounds better. First11 normal/valid,
-43 Optimize starts/returns,18982.266s paid. Final F6 K1 #12 active3600,
-PID24448; original driver88121/PID45336; no relaunch. Read prefix_11 and
-runtime_checkpoint. Latest weekly remaining27%, account-wide; no reset or
-new allocation. F6 K1 and full final audits pending; overall goal still unmet.
+R86 evidence CLOSED on codex/round86-ensc-varied-unadapted-confirmation,
+base R85 a3a7c89cfa752fd0c029c83d43996562df0be3fd / draft PR146.
+All12 originals normal/valid;49 Optimize starts/returns;22579.454s paid.
+Driver88121/PID45336 and all native processes CLOSED. Never poll/relaunch.
+All audit/summary/package/plot producers CLOSED and passed. Thirteen bundles,
+15277 files byte-verified twice;4 figures visually reviewed;7 actual Starts
+mapped/read back/native accepted. Source4496078f2 and preset unchanged.
+
+F1 ENS11.891s vsP49.953/K143.203 certified. F2/F5/F6 final P-gap gains
+75.8535%/71.1602%/62.9814%. F5 final K1-gap loss19.7157% is retained,
+with93.7431% K1/P advantage preserved. F6 K1-gap gain26.6121% has worse U,
+stronger L; its22 exchanges plus1 relocation execute on fresh large data.
+Earlier D7 severe1200s/material final K1 losses remain disclosed.
+
+Read R86 final_report.md, goal_evidence_scope.md, unified_method.md and
+reproduce.md. Five research criteria are now met in the frozen finite scope;
+exact publication/draft PR delivery is pending, so overall goal is still active.
+No new experiment allocation, no default switch or main merge. Last post-driver
+account-wide weekly remaining26%, ordinary usage allowed, no reset consumed.
+Owned E:/codes/ExactEBRP-round66; original dirty checkout remains untouched.
+
+The entries below are historical stage snapshots. Their then-active/unmet
+statements do not override the current R86 closure above.
 
 R85 evidence CLOSED on codex/round85-ensc-remaining-protection-replication,
 base R84 final ed0cd977ac2ea1cf7a7bf1236a15dd845a3ed948 / draft PR145.

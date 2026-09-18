@@ -1,0 +1,24 @@
+{
+  "stage": 86,
+  "evidence_review_passed": true,
+  "architecture_admissible": true,
+  "research_acceptance_satisfied": true,
+  "acceptance_scope": "Frozen finite repair/protection scope and all four prospective R86 roles, not universal runtime dominance",
+  "normal_valid_runs": 12,
+  "certified": 3,
+  "open": 9,
+  "invalid_runs": 0,
+  "optimize_starts": 49,
+  "optimize_returns": 49,
+  "retained_negatives": [
+    "R86 F5 material K1 losses at600/1200/1800/2400/3600",
+    "R84 D7 severe1200s and material final K1 losses",
+    "Mixed U/L against K1 on U6/C8/F5/F6; U6 also mixed against P"
+  ],
+  "uniform_preset": "research-round83-vds-equal-net-exchange",
+  "default_adoption": false,
+  "stage_complete": false,
+  "overall_goal_complete": false,
+  "publication_complete": false,
+  "next_step": "Publish exact evidence and final delivery metadata in one independent draft PR against R85; verify remote head/base/draft/unmerged state. No further performance runs allocated."
+}

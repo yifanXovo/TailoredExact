@@ -150,3 +150,23 @@ prefix_11.json preserves that closed prefix. Final original F6 K1 #12 started
 1789702266.3837655 Unix, PID24448, cap3600; original driver88121/PID45336
 continues. Fresh ordinary usage allowed,weekly27% remaining,zero resets or
 additional allocation. Full final audits remain pending; no producer rerun.
+
+## F6 ENS original startup attribution (full mechanism audit pending)
+
+ENS HGA wall16.6819062s, exact-phase start16.8307054s, native solver total
+3571.0649995803833s. Initial physical handoff F=.29294130869051743 remains
+its final U. The per-run independently replayed controller accepts23 neutral
+moves:22 equal-net exchanges and1 relocation, plus3 insertions and82 quantity
+moves. It checks21560 equal-net pairs and finishes exhausted=true, deadline=false,
+zero=false and verification_failed=false; final route matches the handoff,
+initial route does not. Thus the neutral union actually executes on this
+unadapted large role. This is complete-method evidence, not a same-start
+ablation or proof that every accepted exchange improves total solve time.
+
+The active F6 K1 original's initial-witness artifact reads F=.2884111621352751,
+and its first LP starts at809.2015514s. These are read-only active observations;
+the completed K1 per-run audit, final bounds and full cost remain pending.
+
+## Final evidence review
+
+All12 originals and49 Optimize calls closed normally. Campaign, mechanism and confirmation audits pass. Summary retains57 checkpoints/57 comparisons/19 protection rows, including five material F5/K1 losses and three missing-U checkpoints. Thirteen bundles/15277 members verified during packaging and separately; all four PNGs visually reviewed. Research acceptance now passes in the predefined finite scope with earlier D7 losses retained; exact publication/PR remains pending. No further solver or producer is allocated. A report-edit apply_patch invocation failed atomically on duplicate-path syntax; no producer or evidence was affected.
