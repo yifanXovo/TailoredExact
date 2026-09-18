@@ -122,3 +122,15 @@ driver88121/PID45336 continues. F6 ENS/K1 are the only subsequent declared
 arms. Fresh usage: ordinary allowed,weekly28% remaining,zero reset or added
 allocation. Full campaign/mechanism/confirmation audits and overall judgment
 remain pending. No R86 original producer has been restarted.
+
+## F6 P original closes; ENS original starts
+
+F6 P is normal/per-run-valid at3597.186999999918s, U=.305585444373343,
+L=.26529470423353146, gap=.04029074013981154, relative gap=.13184770702163132,
+open. Its substantial late primal improvement is included in this final
+endpoint; do not replace it with an earlier weaker upper bound. First ten
+originals total15384.953s,36 Optimize starts/returns; prefix_10.json preserves
+the closed prefix. F6 ENS #11 started1789698667.8059545 Unix, PID23324,
+same3600 cap and original driver88121/PID45336. Only K1 #12 follows.
+Fresh usage: ordinary allowed,weekly27% remaining,zero reset or added
+allocation. F6 has no paired conclusion yet. Full final audits remain pending.
