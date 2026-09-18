@@ -13,8 +13,12 @@ First6 originals normal/valid,20 calls returned,996.266s. F1 ENS11.891s
 vsP49.953/K143.203 certified. F2 ENS/P gap gain75.8535%, ENS/K1 gain60.6100%,
 all open300 with same U. F5 P #7 normal/open3597.125s, U.434235836764,
 L.268250596924,gap.165985239840. First7 normal/valid,21 calls returned,
-4593.391s paid; F5 ENS #8 now active3600. No new allocation.
-Latest weekly remaining31%, account-wide; no reset. Overall goal still unmet.
+4593.391s paid. F5 ENS #8 now normal/open3597.172s, U.329323694641,
+L.281453806344,gap.047869888297; ENS/P gap gain71.1602%, both bounds better.
+First8 normal/valid,28 Optimize starts/returns,8190.563s paid. F5 K1 #9 active3600,
+PID1780, original driver88121/PID45336; no relaunch. Read prefix_08 and runtime_checkpoint.
+Latest weekly remaining29%, account-wide; no reset or new allocation.
+F5 K1 and all F6 pending; full final audits pending; overall goal still unmet.
 
 R85 evidence CLOSED on codex/round85-ensc-remaining-protection-replication,
 base R84 final ed0cd977ac2ea1cf7a7bf1236a15dd845a3ed948 / draft PR145.

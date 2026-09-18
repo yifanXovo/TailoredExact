@@ -59,3 +59,36 @@ originals total4593.391s,21 Optimize starts/returns. F5 ENS #8 is active at
 cap3600 on the same source/input/core/settings; no F5 pair conclusion yet.
 Fresh23:32:26Z usage: ordinary allowed,weekly31% remaining; zero resets.
 The remaining five declared originals are unchanged; no extra allocation.
+
+## F2 original cost attribution (full mechanism audit still pending)
+
+ENS HGA wall=.0534587s, exact-phase start=.0594568s, native solver total
+=296.48200011253357s. Its initial physical witness is F=.88534830093457795;
+the result's earlier hga_verified_objective=.9139186744864067 is not the
+post-controller handoff. The controller records zero accepted neutral moves
+and two quantity moves, ten block placements, exhausted=true and no deadline
+or verification failure. Do not attribute the gain to accepted exchanges.
+
+K1 HGA wall=5.0127283s, exact-phase start=5.0200281s, native solver total
+=291.56600022315979s, with4074 generations and2000 without improvement.
+Its initial physical F=.876928528996376 is better than ENS's initial witness.
+Both end with the same physical U=.8659435203229894; the final ENS/K1 gap
+gain is entirely a stronger global L. The roughly4.96-second startup saving
+is included in the formal whole cost, but these traces alone cannot isolate
+its causal contribution from changed model/domain/search behavior. There is
+no same-start ablation in this confirmation allocation.
+
+## F5 ENS original closes; K1 original starts
+
+F5 ENS is normal/per-run-valid at3597.1720000002533s, U=.32932369464104827,
+L=.2814538063444285, gap=.047869888296619756, relative gap=.1453581660706082,
+open. Its final gap improves71.16015355169543% against P, with U better by
+.10491214212297528 and L stronger by.013203209420105722. The improvement is
+material under the frozen rule; retain both primal and proof contributions.
+Full campaign/mechanism/confirmation audits remain pending. First eight
+originals total8190.563s,28 Optimize starts/returns; prefix_08.json preserves
+this closed per-run-checked prefix. F5 K1 #9 is active with the same3600 cap.
+No native run was restarted. A bounded read-only monitoring wrapper was
+stopped after the transition; original driver88121/PID45336 keeps running.
+Fresh usage remains ordinary allowed,weekly29% remaining,zero reset. No new
+role, seed, extension or repeat was allocated. F5 K1 and all F6 remain pending.
