@@ -92,3 +92,33 @@ No native run was restarted. A bounded read-only monitoring wrapper was
 stopped after the transition; original driver88121/PID45336 keeps running.
 Fresh usage remains ordinary allowed,weekly29% remaining,zero reset. No new
 role, seed, extension or repeat was allocated. F5 K1 and all F6 remain pending.
+
+## F5 complete original triplet; F6 P starts
+
+F5 K1 is normal/per-run-valid at3597.2030000002123s, U=.3161333675751888,
+L=.2761470520275795, gap=.039986315547609286, relative gap=.12648559009861238,
+open. ENS/K1 gap is worse by.00788357274901047 or19.71567682854895%, a material
+but not severe regression under the frozen rule. ENS U is worse by
+.013190327065859486 and L stronger by.005306754316849016. K1 improves P gap
+75.90971607702839%; ENS retains.9374314281387457 of that meaningful advantage.
+Keep this new confirmation tradeoff beside ENS's71.1602% P gain, rather than
+discarding it or treating any K1-only loss as an automatic whole-goal veto.
+All three remain open3600. Complete early/middle/late analysis is still pending.
+
+ENS HGA wall2.2540566s, exact-phase start2.3446118s, native total3585.7460000514984s;
+initial physical handoff F=.38430409168754603. Its neutral controller records
+0 accepted neutral/exchange/relocation moves,2 insertions and8 quantity moves,
+790 equal-net pairs, exhausted=true; final handoff matches the independently
+checked route. This is not evidence of a causal benefit from accepted exchange.
+K1 HGA wall335.9866038s, exact-phase start336.0024665s, native total3252.4170002937317s,
+4849 generations/2000 without improvement. Its initial F=.3161333675751888
+also remains its final U. All startup and subsequent native work is paid;
+neither method's formal wall excludes a phase.
+
+First nine originals normal/valid,35 Optimize starts/returns,11787.766s paid;
+prefix_09.json retains all final F5 endpoints and the three frozen comparisons.
+F6 P #10 started1789695070.4400876 Unix on PID47220, cap3600; original
+driver88121/PID45336 continues. F6 ENS/K1 are the only subsequent declared
+arms. Fresh usage: ordinary allowed,weekly28% remaining,zero reset or added
+allocation. Full campaign/mechanism/confirmation audits and overall judgment
+remain pending. No R86 original producer has been restarted.
