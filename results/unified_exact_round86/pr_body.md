@@ -26,7 +26,7 @@ Review `results/unified_exact_round86/final_report.md`, `unified_method.md`,
 `goal_evidence_scope.md`, `result_tables.md`, `reproduce.md`, and the cross-stage
 index. Recommend the single explicit `research-round83-vds-equal-net-exchange`
 preset for the stated joint primal/proof scope. This closes the predefined
-research criteria; publication completion is tracked separately. No universal
+research criteria; evidence publication and independent readback are complete. No universal
 dominance, independent-city sampling, statistical equivalence or rational
 certificate is claimed. Main/default are unchanged; merge remains the user's
 decision. No additional performance experiment is allocated.

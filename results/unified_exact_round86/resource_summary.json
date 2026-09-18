@@ -22,8 +22,8 @@
   "offline_validation_seconds": 1.523634099867195,
   "new_inputs_generated": 4,
   "package_and_verify_seconds": 28.456061400007457,
-  "stage_complete": false,
-  "overall_goal_complete": false,
+  "stage_complete": true,
+  "overall_goal_complete": true,
   "reset_credits_consumed_by_this_agent": 0,
   "scope": "All paid original processes and measured offline steps; inherited and nested work is not added again. Interactive work is not a complete machine-time census.",
   "summary_seconds": 0.016768000088632107,
@@ -33,5 +33,55 @@
   "visual_review_timed": false,
   "failed_prelaunch_combined_prepare_git_eol_check_seconds": 0.4451809,
   "research_acceptance_satisfied": true,
-  "publication_cost_scope": "Per-invocation receipts in publication_api; final delivery transport remains pending"
+  "publication_cost_scope": "Receipts through evidence summed here; final metadata transport measured separately in the local receipt, not included in this pre-transport total. Connector/interactive work is not a complete wall/CPU census.",
+  "publication_complete": true,
+  "publication_invocations_through_evidence": [
+    {
+      "receipt": "active_recovery.json",
+      "wall_seconds": 7.165072800125927,
+      "passed": true
+    },
+    {
+      "receipt": "final_evidence.json",
+      "wall_seconds": 82.15493440022692,
+      "passed": true
+    },
+    {
+      "receipt": "prefix06.json",
+      "wall_seconds": 9.609128300100565,
+      "passed": true
+    },
+    {
+      "receipt": "prefix07.json",
+      "wall_seconds": 14.164152900222689,
+      "passed": true
+    },
+    {
+      "receipt": "prefix08.json",
+      "wall_seconds": 8.987077199853957,
+      "passed": true
+    },
+    {
+      "receipt": "prefix09.json",
+      "wall_seconds": 10.241920799948275,
+      "passed": true
+    },
+    {
+      "receipt": "prefix10.json",
+      "wall_seconds": 10.309233400039375,
+      "passed": true
+    },
+    {
+      "receipt": "prefix11.json",
+      "wall_seconds": 10.557406699750572,
+      "passed": true
+    },
+    {
+      "receipt": "prelaunch_freeze.json",
+      "wall_seconds": 14.12431970005855,
+      "passed": true
+    }
+  ],
+  "publication_seconds_through_evidence": 167.31324620032683,
+  "final_metadata_transport_receipt_local": "build/round86/final_delivery/final_metadata.json"
 }

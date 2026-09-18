@@ -1,24 +1,26 @@
-# R86 evidence CLOSED — publication pending
+# R86 and finite-scope research COMPLETE
 
-Driver session88121/PID45336 and all native processes are CLOSED. Never relaunch
-or poll the closed session. All12 originals are normal/valid,49 Optimize calls
-started/returned,22579.454s paid. No process remains active. Frozen
-launch commit0666c13e2ee8c21c318667def1149980fbd692ac was independently read
-back remotely before launch. Recipe freeze2d770ba01 preceded all four inputs.
-12 admitted runs: F1/F2/F5/F6, each P/ENS/K1, maximum22860 paid process seconds.
-Read runtime_checkpoint.json and campaign/driver_completion.json for closure.
+Independent draft PR147: https://github.com/yifanXovo/TailoredExact/pull/147
+Base R85 a3a7c89cfa752fd0c029c83d43996562df0be3fd / draft PR146.
+Evidence commit92988134e3c983b118e545124522235ffb19692d independently verified.
+PR is open/draft/unmerged, clean against the recorded base. publication.json
+binds this evidence; final metadata is a descendant with its readback in
+build/round86/final_delivery/final_readback.json.
 
-Source/preset/build remain R83's qualified ENS-C. Offline validation v2 passes
-37 checks, zero Optimize; prior pass and corrected Git-EOL precheck retained.
-Campaign/mechanism/confirmation audits, summary, package and plots ran once
-after the queue closed and passed. A separate byte check passed;13 bundles,
-15277 files,4 visually reviewed figures. No producer rerun is pending.
+All12 originals normal/valid:3 certified/9 open,49 Optimize starts/returns,
+22579.454s paid. Driver88121/PID45336 and all native processes are CLOSED.
+Never poll or relaunch closed sessions. All auditors/summary/package/plots
+are CLOSED and pass. Thirteen bundles/15277 files byte-verified twice, four
+figures visually reviewed,7 actual full Starts mapped/read back/native accepted.
+No new build/qualification/startup-only run; R83 source and preset unchanged.
 
-Research criteria are satisfied within the declared finite scope; final delivery
-is pending exact-object publication and one independent draft PR against R85.
-Stage/overall completion remain false until that delivery is verified. Read
-final_report.md, goal_evidence_scope.md, unified_method.md and reproduce.md.
-All four confirmation outcomes remain, including F5's persistent material K1
-loss; earlier D7's severe1200s loss remains. A revision would turn R86 into
-development and need a new unadapted check. No extension, repeat, new seed or
-F3/F4 allocation. No main merge/default switch. R85 PR146 remains historical.
+Research criteria are satisfied in the frozen finite scope, with all four
+confirmation roles retained. Read final_report.md, goal_evidence_scope.md,
+unified_method.md and reproduce.md. F5 persistent material K1 gap losses and
+earlier D7 severe1200s/material final losses remain part of the judgment;
+no pointwise dominance, statistical equivalence or rational proof is claimed.
+
+No extension/repeat/new seed/F3/F4 allocation, automatic continuation, main
+merge or stable-default switch. Recommend the single explicit ENS-C preset
+for the stated supported joint primal/proof objective. The user decides adoption.
+A later revision must treat R86 as development and obtain a new unadapted check.

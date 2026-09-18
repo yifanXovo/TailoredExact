@@ -1,6 +1,6 @@
 # Unified exact BRP research - current delivery state
 
-R86 evidence CLOSED on codex/round86-ensc-varied-unadapted-confirmation,
+R86 research and delivery COMPLETE on codex/round86-ensc-varied-unadapted-confirmation,
 base R85 a3a7c89cfa752fd0c029c83d43996562df0be3fd / draft PR146.
 All12 originals normal/valid;49 Optimize starts/returns;22579.454s paid.
 Driver88121/PID45336 and all native processes CLOSED. Never poll/relaunch.
@@ -16,7 +16,11 @@ Earlier D7 severe1200s/material final K1 losses remain disclosed.
 
 Read R86 final_report.md, goal_evidence_scope.md, unified_method.md and
 reproduce.md. Five research criteria are now met in the frozen finite scope;
-exact publication/draft PR delivery is pending, so overall goal is still active.
+independent draft PR147 is published, open/draft/unmerged, base/head verified.
+https://github.com/yifanXovo/TailoredExact/pull/147
+Evidence head92988134e3c983b118e545124522235ffb19692d. Final metadata readback
+is local at build/round86/final_delivery/final_readback.json; publication.json
+binds the immutable evidence commit. Overall finite-scope research is complete.
 No new experiment allocation, no default switch or main merge. Last post-driver
 account-wide weekly remaining26%, ordinary usage allowed, no reset consumed.
 Owned E:/codes/ExactEBRP-round66; original dirty checkout remains untouched.

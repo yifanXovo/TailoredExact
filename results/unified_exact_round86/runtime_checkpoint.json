@@ -21,8 +21,8 @@
   "completed_native_starts": 49,
   "completed_native_returns": 49,
   "updated_unix": 1789705887.842713,
-  "stage_complete": false,
-  "overall_goal_complete": false,
+  "stage_complete": true,
+  "overall_goal_complete": true,
   "no_relaunch": true,
   "snapshot_script_sha256": "f803657c9c5b3958742244256125a0fd1a59a677c80d129c4f36e3724ff4abf4",
   "scope": "Mutable recovery snapshot, not a performance checkpoint or proof of PID liveness. Native and driver status must be read independently.",
@@ -31,5 +31,8 @@
     "planned": 12,
     "all_valid": true,
     "ended_unix": 1789705863.6461186
-  }
+  },
+  "publication_complete": true,
+  "pr": 147,
+  "closure_note": "Original driver and all native/audit/package/plot producers closed. Historical PIDs are not live. Evidence PR147 independently verified."
 }

@@ -170,3 +170,7 @@ the completed K1 per-run audit, final bounds and full cost remain pending.
 ## Final evidence review
 
 All12 originals and49 Optimize calls closed normally. Campaign, mechanism and confirmation audits pass. Summary retains57 checkpoints/57 comparisons/19 protection rows, including five material F5/K1 losses and three missing-U checkpoints. Thirteen bundles/15277 members verified during packaging and separately; all four PNGs visually reviewed. Research acceptance now passes in the predefined finite scope with earlier D7 losses retained; exact publication/PR remains pending. No further solver or producer is allocated. A report-edit apply_patch invocation failed atomically on duplicate-path syntax; no producer or evidence was affected.
+
+## Publication and goal closure
+
+Evidence92988134e3c983b118e545124522235ffb19692d published by exact Git-object API in82.15493440022692s, then independently read back at2026-09-18 04:57:05 UTC. Draft PR147 created and independently checked at04:57:45 UTC: expected R85 base, exact evidence head, open/draft/unmerged, mergeable clean. No main/default change. The frozen finite-scope goal is achieved; final metadata publication/readback follows. No additional research run or automatic continuation is allocated.

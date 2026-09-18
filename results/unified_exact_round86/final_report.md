@@ -4,8 +4,10 @@ The unchanged ENS-C method passes prospective confirmation within the declared
 finite BRP scope. All four retained roles materially improve on official P-GRB
 under the frozen rules. F5 retains a material loss against K1-R, while preserving
 93.7431% of K1-R's advantage over P. Together with R83–R85, this supports the five
-research acceptance requirements. At this evidence commit, publication remains
-the delivery step; `stage_decision.json` records the subsequent delivery state.
+research acceptance requirements. Independent draft [PR147](https://github.com/yifanXovo/TailoredExact/pull/147)
+is published and verified against R85, open/draft/unmerged. Evidence commit
+`92988134e3c983b118e545124522235ffb19692d` is independently verified remotely;
+`publication.json` and `stage_decision.json` bind the completed delivery.
 
 This is not universal runtime dominance, uniformly better incumbents,
 statistical generalization or a new general theory. No default switch, main
