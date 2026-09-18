@@ -89,3 +89,9 @@ results/unified_exact_round84/figures/*.svg -whitespace
 results/unified_exact_round85/** -text whitespace=cr-at-eol
 scripts/round85*.py -text whitespace=cr-at-eol
 results/unified_exact_round85/figures/*.svg -whitespace
+
+# Round86 immutable research bytes
+/results/unified_exact_round86/** -text whitespace=cr-at-eol
+/scripts/round86_*.py -text whitespace=cr-at-eol
+/reference/round86_unadapted_confirmation/** -text whitespace=cr-at-eol
+/results/unified_exact_round86/figures/*.svg -whitespace

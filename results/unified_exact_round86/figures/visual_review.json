@@ -1,0 +1,36 @@
+{
+  "reviewed_utc": "2026-09-18T04:54:05.154424+00:00",
+  "review_method": "All four original PNGs visually inspected with view_image before report creation",
+  "all_passed": true,
+  "images": [
+    {
+      "path": "f1_bounds_and_gap.png",
+      "sha256": "83ae03eac7230083ef53ecd7cf8acd702ffb10fc35d7414d513c3b927afe03a7",
+      "passed": true
+    },
+    {
+      "path": "f2_bounds_and_gap.png",
+      "sha256": "3474ac7b4928248209045c63e53b4800367a18de276ec74e8314cf6c05c3ae0d",
+      "passed": true
+    },
+    {
+      "path": "f5_bounds_and_gap.png",
+      "sha256": "94a1fb9734005ff3f070055363993bc1a1c69a4af570aa8cd48c54d8f8c87e10",
+      "passed": true
+    },
+    {
+      "path": "f6_bounds_and_gap.png",
+      "sha256": "10176bd96294fea63e309bacbc9cc6c318b68c23dd227d757cc82a2d271e6859",
+      "passed": true
+    }
+  ],
+  "checks": [
+    "Readable labels, ticks, legends and captions without clipping or overlap",
+    "All 57 frozen checkpoints retained; missing K1 U and gap not filled",
+    "Conservative L=0 visible; F6 late P improvement retained",
+    "Dashed guides not asserted to be interpolation evidence"
+  ],
+  "optimizer_calls": 0,
+  "wall_seconds": null,
+  "scope": "Human-visible model visual review, not an independently timed producer"
+}

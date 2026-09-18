@@ -1,4 +1,32 @@
-# Unified exact BRP research - resume here
+# Unified exact BRP research - current delivery state
+
+R86 research and delivery COMPLETE on codex/round86-ensc-varied-unadapted-confirmation,
+base R85 a3a7c89cfa752fd0c029c83d43996562df0be3fd / draft PR146.
+All12 originals normal/valid;49 Optimize starts/returns;22579.454s paid.
+Driver88121/PID45336 and all native processes CLOSED. Never poll/relaunch.
+All audit/summary/package/plot producers CLOSED and passed. Thirteen bundles,
+15277 files byte-verified twice;4 figures visually reviewed;7 actual Starts
+mapped/read back/native accepted. Source4496078f2 and preset unchanged.
+
+F1 ENS11.891s vsP49.953/K143.203 certified. F2/F5/F6 final P-gap gains
+75.8535%/71.1602%/62.9814%. F5 final K1-gap loss19.7157% is retained,
+with93.7431% K1/P advantage preserved. F6 K1-gap gain26.6121% has worse U,
+stronger L; its22 exchanges plus1 relocation execute on fresh large data.
+Earlier D7 severe1200s/material final K1 losses remain disclosed.
+
+Read R86 final_report.md, goal_evidence_scope.md, unified_method.md and
+reproduce.md. Five research criteria are now met in the frozen finite scope;
+independent draft PR147 is published, open/draft/unmerged, base/head verified.
+https://github.com/yifanXovo/TailoredExact/pull/147
+Evidence head92988134e3c983b118e545124522235ffb19692d. Final metadata readback
+is local at build/round86/final_delivery/final_readback.json; publication.json
+binds the immutable evidence commit. Overall finite-scope research is complete.
+No new experiment allocation, no default switch or main merge. Last post-driver
+account-wide weekly remaining26%, ordinary usage allowed, no reset consumed.
+Owned E:/codes/ExactEBRP-round66; original dirty checkout remains untouched.
+
+The entries below are historical stage snapshots. Their then-active/unmet
+statements do not override the current R86 closure above.
 
 R85 evidence CLOSED on codex/round85-ensc-remaining-protection-replication,
 base R84 final ed0cd977ac2ea1cf7a7bf1236a15dd845a3ed948 / draft PR145.
