@@ -134,3 +134,19 @@ the closed prefix. F6 ENS #11 started1789698667.8059545 Unix, PID23324,
 same3600 cap and original driver88121/PID45336. Only K1 #12 follows.
 Fresh usage: ordinary allowed,weekly27% remaining,zero reset or added
 allocation. F6 has no paired conclusion yet. Full final audits remain pending.
+
+## F6 ENS original closes; final original K1 starts
+
+F6 ENS is normal/per-run-valid at3597.313000000082s, U=.29294130869051743,
+L=.27802625318195556, gap=.01491505550856187, relative gap=.050914825141028915,
+open. Against P's complete endpoint (including its late primal improvement),
+ENS gap improves62.98143082801249%; U is better by.012644135682825575 and
+L stronger by.012731548948424098. This is a material P improvement under the
+frozen rule, with both primal and proof contributions. K1 remains pending,
+so do not yet conclude complete F6 protection or overall acceptance.
+
+First eleven originals normal/valid,43 Optimize starts/returns,18982.266s paid;
+prefix_11.json preserves that closed prefix. Final original F6 K1 #12 started
+1789702266.3837655 Unix, PID24448, cap3600; original driver88121/PID45336
+continues. Fresh ordinary usage allowed,weekly27% remaining,zero resets or
+additional allocation. Full final audits remain pending; no producer rerun.

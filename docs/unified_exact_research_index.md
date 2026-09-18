@@ -20,10 +20,12 @@ ENS/K1 gap loss19.7157% is material, with worse U/stronger L; retain this loss.
 ENS retains93.7431% of K1/P's gap advantage. First9 normal/valid,35 Optimize
 starts/returns,11787.766s paid. F6 P #10 now normal/open3597.187s,
 U.305585444373,L.265294704234,gap.040290740140; retain its late primal gain.
-First10 normal/valid,36 Optimize starts/returns,15384.953s paid. F6 ENS #11
-active3600, PID23324; original driver88121/PID45336; no relaunch.
-Read prefix_10 and runtime_checkpoint. Latest weekly remaining27%, account-wide;
-no reset or new allocation. F6 ENS/K1 and full final audits pending; goal unmet.
+F6 ENS #11 now normal/open3597.313s, U.292941308691,L.278026253182,
+gap.014915055509; ENS/P gain62.9814%, both bounds better. First11 normal/valid,
+43 Optimize starts/returns,18982.266s paid. Final F6 K1 #12 active3600,
+PID24448; original driver88121/PID45336; no relaunch. Read prefix_11 and
+runtime_checkpoint. Latest weekly remaining27%, account-wide; no reset or
+new allocation. F6 K1 and full final audits pending; overall goal still unmet.
 
 R85 evidence CLOSED on codex/round85-ensc-remaining-protection-replication,
 base R84 final ed0cd977ac2ea1cf7a7bf1236a15dd845a3ed948 / draft PR145.
