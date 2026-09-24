@@ -290,6 +290,29 @@ def run_remaining():
         frozen.write(raw_campaign / "driver_completion.json", completion)
 
 
+def wait_then_run_remaining():
+    """Detached handoff; a failed recovery must never start another arm."""
+    deadline = time.monotonic() + 12 * 3600
+    while time.monotonic() < deadline:
+        if (OUT / "summary.json").exists():
+            summary = frozen.read(OUT / "summary.json")
+            if summary["completed"] == 8:
+                assert len(summary["records"]) == 8
+                assert summary["records"][7]["audit"]["passed"]
+                assert summary["records"][7]["stop_reason"] == "quota_interrupted"
+                print(json.dumps(dict(recovery_handoff="audited_run_8", started_unix=time.time())), flush=True)
+                run_remaining()
+                return
+            assert summary["completed"] == 7, "Unexpected campaign state during recovery"
+        time.sleep(30)
+    raise RuntimeError("Recovery did not finish in twelve hours; no remaining arm was started")
+
+
 if __name__ == "__main__":
-    assert len(sys.argv) == 2 and sys.argv[1] in {"recover", "run_remaining"}
-    recover() if sys.argv[1] == "recover" else run_remaining()
+    assert len(sys.argv) == 2 and sys.argv[1] in {"recover", "run_remaining", "wait_then_run_remaining"}
+    if sys.argv[1] == "recover":
+        recover()
+    elif sys.argv[1] == "run_remaining":
+        run_remaining()
+    else:
+        wait_then_run_remaining()
