@@ -300,6 +300,11 @@ def wait_then_run_remaining():
                 assert len(summary["records"]) == 8
                 assert summary["records"][7]["audit"]["passed"]
                 assert summary["records"][7]["stop_reason"] == "quota_interrupted"
+                raw_campaign = Path(frozen.read(OUT / "identity.json")["runtime_root"]) / "campaign"
+                if not (raw_campaign / "summary.json").exists() or frozen.read(raw_campaign / "summary.json") != summary:
+                    time.sleep(30)
+                    continue
+                assert (raw_campaign / "quota_interruption_recovery" / "manifest.json").exists()
                 print(json.dumps(dict(recovery_handoff="audited_run_8", started_unix=time.time())), flush=True)
                 run_remaining()
                 return
