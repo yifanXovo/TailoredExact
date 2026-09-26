@@ -1,0 +1,11 @@
+number,id,arm,optimum_known,target_objective,time_seconds,precision,label,lower_bound_seconds,upper_bound_seconds,t_cert,t_tail,tail_note
+1,D6,P-GRB,True,0.15708313110317415,22569.375,observed_committed_witness,t_find_star,,,22570.061999999918,0.6869999999180436,exact_from_observed_witness
+2,D6,ENS-C,True,0.15708313110317415,3160.844000000041,observed_committed_witness,t_find_star,,,3160.907000000123,0.06300000008195639,exact_from_observed_witness
+3,D7,ENS-C,False,0.2235315457737183,42588.06199999992,observed_committed_witness,first_final_UB,,,,,unknown_or_only_bounded
+4,D7,P-GRB,False,0.21646672611586926,24168.5,observed_committed_witness,first_final_UB,,,,,unknown_or_only_bounded
+5,U6,P-GRB,False,0.14527298125514043,25139.375,observed_committed_witness,first_final_UB,,,,,unknown_or_only_bounded
+6,U6,ENS-C,False,0.14528773805499362,38211.56199999992,observed_committed_witness,first_final_UB,,,,,unknown_or_only_bounded
+7,F2,ENS-C,True,0.8659435203229894,73.76500000013039,observed_committed_witness,t_find_star,,,535.9210000000894,462.155999999959,exact_from_observed_witness
+8,F2,P-GRB,True,0.8659435203229894,,committed_receipt_to_observation_upper_bound,t_find_star,3.1272515,70639.95299999975,,,unknown_or_only_bounded
+9,F5,P-GRB,False,0.2999915384940973,72024.0,observed_committed_witness,first_final_UB,,,,,unknown_or_only_bounded
+10,F5,ENS-C,False,0.30244301421400704,44799.641000000294,observed_committed_witness,first_final_UB,,,,,unknown_or_only_bounded
