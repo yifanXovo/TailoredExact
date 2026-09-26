@@ -175,6 +175,58 @@ std::vector<GiniIntervalGeometry> splitLegacyFrontierInterval(
     double upper,
     int split_factor);
 
+// Round90 candidate-only geometry. `current_optimal_parent_g_available` is
+// established by the controller's LP/epoch/artifact checks. This pure helper
+// never changes the frozen default midpoint function.
+struct Round90LpGSplitGeometry {
+    bool valid = false;
+    bool used_parent_g = false;
+    double midpoint = 0.0;
+    double split_point = 0.0;
+    std::vector<GiniIntervalGeometry> children;
+    std::string reason = "not_evaluated";
+};
+
+Round90LpGSplitGeometry selectRound90LpGSplitGeometry(
+    double lower,
+    double upper,
+    bool current_optimal_parent_g_available,
+    double parent_g);
+
+// The controller supplies the actual on-disk canonical SHA after reading the
+// cached child's model. This candidate-only predicate prevents a same-id
+// child from substituting an old domain, cutoff epoch, or LP bound.
+struct Round90LpGCachedChildIdentity {
+    std::string id;
+    std::string parent_id;
+    int child_index = -1;
+    int split_depth = -1;
+    GiniIntervalGeometry leaf_interval;
+    GiniIntervalGeometry artifact_interval;
+    GiniIntervalGeometry lp_interval;
+    long long artifact_epoch = -1;
+    long long lp_epoch = -1;
+    bool artifact_ready = false;
+    bool artifact_written = false;
+    bool lp_complete = false;
+    bool lp_terminal_valid = false;
+    bool lp_optimal = false;
+    bool lp_infeasible = false;
+    std::string artifact_sha256;
+    std::string lp_artifact_sha256;
+    std::string observed_file_sha256;
+};
+
+bool validRound90LpGCachedChild(
+    const Round90LpGCachedChildIdentity& cached,
+    const std::string& expected_id,
+    const std::string& expected_parent_id,
+    int expected_child_index,
+    int expected_split_depth,
+    const GiniIntervalGeometry& expected_interval,
+    long long current_incumbent_epoch,
+    std::string* reason = nullptr);
+
 bool exactIntervalCoverage(const GiniIntervalGeometry& parent,
                            const std::vector<GiniIntervalGeometry>& children,
                            double tolerance,

@@ -117,6 +117,7 @@ void usage() {
         << "[--primal-heuristic-seed <seed>] [--primal-heuristic-runs <N>] "
         << "[--round88-constructive-only-descent true|false] "
         << "[--round89-native-ot-b1 true|false] "
+        << "[--round90-lp-g-split true|false] "
         << "[--round34-c6-startup-variant hga-full|hga-light-1000|simple-start] "
         << "[--round36-c6-causal-arm off|hh|ss|bw-p|bw-a] "
         << "[--round36-c6-split-normalization proof|anchor] "
@@ -254,6 +255,8 @@ std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
         return "research-round88-ensc-constructive-only";
     if (opt.round89_native_ot_b1)
         return "research-round89-ensc-native-ot-b1";
+    if (opt.round90_lp_g_split)
+        return "research-round90-ensc-lp-g-split";
     return opt.algorithm_preset.empty() ? "custom" : opt.algorithm_preset;
 }
 
@@ -1412,6 +1415,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--primal-heuristic-runs") opt.primal_heuristic_runs = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--round88-constructive-only-descent") opt.round88_constructive_only_descent = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round89-native-ot-b1") opt.round89_native_ot_b1 = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--round90-lp-g-split") opt.round90_lp_g_split = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-stop") opt.primal_heuristic_stop = requireValue(i, argc, argv);
         else if (arg == "--primal-heuristic-no-improve-generations") opt.primal_heuristic_no_improve_generations = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-generation-log") opt.primal_heuristic_generation_log = requireValue(i, argc, argv);
@@ -3309,6 +3313,13 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error("Round89 native OT B1 requires the ENS-C Round83 preset");
     if (opt.round89_native_ot_b1 && opt.round88_constructive_only_descent)
         throw std::runtime_error("Round89 native OT B1 cannot combine with the Round88 A1 ablation");
+    if (opt.round90_lp_g_split &&
+        (opt.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
+         opt.method != "gcap-frontier"))
+        throw std::runtime_error("Round90 LP-G split requires the ENS-C Round83 gcap-frontier method");
+    if (opt.round90_lp_g_split &&
+        (opt.round88_constructive_only_descent || opt.round89_native_ot_b1))
+        throw std::runtime_error("Round90 LP-G split cannot combine with Round88 A1 or Round89 native B1");
     if ((opt.primal_heuristic == "joint-insertion") != joint_insertion ||
         (opt.primal_heuristic_stop == "motif-exhaustion") != joint_insertion)
         throw std::runtime_error("Joint insertion requires its isolated VD-S research preset");
@@ -3934,6 +3945,11 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
         append_explicit_research_feature("round89_native_inventory_cdf_b1_user_cuts");
         snapshot.preset_reason = "Round89: ENS-C original-column native B1 user cuts in terminal and partial-target proof MIPs";
+    }
+    if (opt.round90_lp_g_split) {
+        snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
+        append_explicit_research_feature("round90_current_optimal_parent_lp_g_split_point");
+        snapshot.preset_reason = "Round90: ENS-C first-class K1 uses strict interior current optimal parent LP G or the frozen midpoint, with unchanged child LP and AM proof";
     }
     return snapshot;
 }

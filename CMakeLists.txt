@@ -275,6 +275,10 @@ add_executable(GlobalGiniTreeTests tests/global_gini_tree_tests.cpp)
 target_link_libraries(GlobalGiniTreeTests PRIVATE exact_ebrp_core)
 add_test(NAME GlobalGiniTreeTests COMMAND GlobalGiniTreeTests)
 
+add_executable(Round90LpGSplitTests tests/round90_lp_g_split_tests.cpp)
+target_link_libraries(Round90LpGSplitTests PRIVATE exact_ebrp_core)
+add_test(NAME Round90LpGSplitTests COMMAND Round90LpGSplitTests)
+
 add_executable(StrictCertificateTests tests/strict_certificate_tests.cpp)
 target_link_libraries(StrictCertificateTests PRIVATE exact_ebrp_core)
 add_test(NAME StrictCertificateTests COMMAND StrictCertificateTests)

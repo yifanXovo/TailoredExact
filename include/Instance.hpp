@@ -478,6 +478,9 @@ struct SolveOptions {
     bool round88_constructive_only_descent = false;
     // Round89 native B1 user-cut prototype, default-off and R83-only.
     bool round89_native_ot_b1 = false;
+    // Round90 ENS-C ablation: use a current optimal parent LP G for the
+    // first-class K1 split point when strictly interior; otherwise midpoint.
+    bool round90_lp_g_split = false;
     std::string primal_heuristic_stop = "legacy-time";
     int primal_heuristic_no_improve_generations = 2000;
     std::string primal_heuristic_generation_log;
