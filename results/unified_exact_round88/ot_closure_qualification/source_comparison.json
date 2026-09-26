@@ -1,0 +1,58 @@
+{
+  "schema": "round88-ot-closure-zero-optimize-qualification-v1",
+  "entries": [
+    {
+      "source": "F2-root",
+      "source_manifest_sha256": "d223756f601a5f9c1966e5087e6ddace81bcf1b53130afdad2bb79366421b905",
+      "new_audit_manifest_sha256": "5bb80762568b5fcb106f604b11f09192c0caf1df2df567b45aa60a167a9bded3",
+      "lp_sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091",
+      "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "structure_equal": true,
+      "support_fingerprint": "25ec4215e95eda891b3ef566aa4be15a27d7b3b44e5b8101cb1e1c11e8855590",
+      "effective_gamma_l": "0",
+      "effective_gamma_u": "3987254278182067/4503599627370496",
+      "variables": 3488,
+      "constraints": 9269,
+      "nonzeros": 52879,
+      "gurobi_version": "13.0.2",
+      "external_audit_wall_seconds": 0.225069,
+      "zero_optimize_by_audit_entrypoint": true
+    },
+    {
+      "source": "D7-root",
+      "source_manifest_sha256": "a0996967e9278469defa43ab1c630b0d16f7e996062f71bf91efa9a656f99a4d",
+      "new_audit_manifest_sha256": "ade89e19e7cea89aa52c142df15daac801aeda6db990859eee04dc77cdbc116c",
+      "lp_sha256": "06275aba5e2378d719390e295654849d8868fb92fd8b0366619e1c33fa713069",
+      "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+      "structure_equal": true,
+      "support_fingerprint": "53f3a088a1d0f64ad4f921015abd17ebc3f7c6c1b7a1f0e4203bf9a879524a8d",
+      "effective_gamma_l": "0",
+      "effective_gamma_u": "2625138976942465/9007199254740992",
+      "variables": 25943,
+      "constraints": 104726,
+      "nonzeros": 724951,
+      "gurobi_version": "13.0.2",
+      "external_audit_wall_seconds": 1.4245275,
+      "zero_optimize_by_audit_entrypoint": true
+    },
+    {
+      "source": "D7-child",
+      "source_manifest_sha256": "e73e08318afe65d9c4d145f2dd8efe8732783b11e0628f347434b4093c2f09fd",
+      "new_audit_manifest_sha256": "ae2d135cbb6e3f4667d8706bf75a5b87092257303df2731a9ed32ae308fb74f6",
+      "lp_sha256": "27cbb486939374c3f42eb7f1e97cd6ed20281b114115118c89434fa00e85c77f",
+      "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+      "structure_equal": true,
+      "support_fingerprint": "b8912b72618ceb976cd964c3d8213c5a17ca901d4d3f7e0f2a5880b2c5c90b98",
+      "effective_gamma_l": "0",
+      "effective_gamma_u": "2625138976942465/18014398509481984",
+      "variables": 25943,
+      "constraints": 104726,
+      "nonzeros": 724951,
+      "gurobi_version": "13.0.2",
+      "external_audit_wall_seconds": 1.4777559,
+      "zero_optimize_by_audit_entrypoint": true
+    }
+  ],
+  "all_structure_equal": true,
+  "real_lp_optimize_calls": 0
+}
