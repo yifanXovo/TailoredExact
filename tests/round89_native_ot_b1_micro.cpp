@@ -124,6 +124,48 @@ std::vector<double> fractionalPoint() {
 }
 
 void pure() {
+    ebrp::FixedIntervalMipOutcome failure_gate;
+    failure_gate.failure_reason =
+        "gurobi_external_gate:native_log_parameter_rc=10001";
+    failure_gate.solver_finalization_reached = true;
+    failure_gate.optimal = true;
+    failure_gate.native_exact_optimal = true;
+    failure_gate.native_tolerance_optimal = true;
+    failure_gate.infeasible = true;
+    failure_gate.lp_terminal_valid = true;
+    failure_gate.native_bound_available = true;
+    failure_gate.incumbent_available = true;
+    failure_gate.native_bound_events.emplace_back();
+    failure_gate.native_bound_target_reached = true;
+    failure_gate.native_bound_target_termination_requested = true;
+    ebrp::invalidateRound89NativeOtB1FailedOutcome(failure_gate);
+    require(!failure_gate.solver_finalization_reached && !failure_gate.optimal &&
+            !failure_gate.native_exact_optimal &&
+            !failure_gate.native_tolerance_optimal && !failure_gate.infeasible &&
+            !failure_gate.lp_terminal_valid &&
+            !failure_gate.native_bound_available &&
+            !failure_gate.incumbent_available &&
+            failure_gate.native_bound_events.empty() &&
+            !failure_gate.native_bound_target_reached &&
+            !failure_gate.native_bound_target_termination_requested,
+            "Round89 log-parameter failure retained proof eligibility");
+    ebrp::FixedIntervalMipOutcome status_gate;
+    status_gate.failure_reason =
+        "gurobi_external_gate:round89_native_status_read_ok=0";
+    status_gate.solver_finalization_reached = true;
+    status_gate.native_bound_available = true;
+    status_gate.native_bound_events.emplace_back();
+    ebrp::invalidateRound89NativeOtB1FailedOutcome(status_gate);
+    require(!status_gate.solver_finalization_reached &&
+            !status_gate.native_bound_available &&
+            status_gate.native_bound_events.empty(),
+            "Round89 Status API failure retained proof eligibility");
+    ebrp::FixedIntervalMipOutcome clean_gate;
+    clean_gate.failure_reason = "none";
+    clean_gate.native_bound_available = true;
+    ebrp::invalidateRound89NativeOtB1FailedOutcome(clean_gate);
+    require(clean_gate.native_bound_available,
+            "Round89 valid outcome was incorrectly invalidated");
     const auto model = fixture(1.0, 1.0);
     const auto prepared = ebrp::prepareNativeOtB1(model, 2);
     require(prepared.valid && prepared.audited_rows == 10 &&

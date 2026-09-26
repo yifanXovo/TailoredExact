@@ -3109,7 +3109,8 @@ public:
             return api_.getdblattr(model, attr, &target) == 0 &&
                 std::isfinite(target);
         };
-        getInt(GRB_INT_ATTR_STATUS, out.native_status_code);
+        const bool round89_status_read_ok =
+            getInt(GRB_INT_ATTR_STATUS, out.native_status_code);
         out.native_status = gurobiStatusName(out.native_status_code);
         out.optimal = out.native_status_code == GRB_OPTIMAL;
         out.native_exact_optimal = out.optimal;
@@ -3649,7 +3650,9 @@ public:
             !out.model_fingerprint_matches_request ||
             !out.feasibility_consistency_gate || !domain_restore_ok ||
             log_rc != 0 ||
-            (native_ot_b1_active && !callback.native_ot_b1_failure.empty())) {
+            (native_ot_b1_active &&
+             (!callback.native_ot_b1_failure.empty() ||
+              !round89_status_read_ok || !out.native_status_supported))) {
             std::ostringstream reason;
             reason << "gurobi_external_gate:finalized="
                    << out.solver_finalization_reached
@@ -3664,22 +3667,19 @@ public:
                    << ";native_log_parameter_rc=" << log_rc;
             if (native_ot_b1_active)
                 reason << ";round89_native_ot_b1_status="
-                       << out.round89_native_ot_b1_status;
+                       << out.round89_native_ot_b1_status
+                       << ";round89_native_status_read_ok="
+                       << round89_status_read_ok
+                       << ";round89_native_status_supported="
+                       << out.native_status_supported;
             out.failure_reason = reason.str();
         } else {
             out.failure_reason = "none";
         }
-        if (native_ot_b1_active && !callback.native_ot_b1_failure.empty()) {
-            // The solver may still return an interrupted bound after a
-            // callback API/evidence failure. Do not let the external paper
-            // controller mistake that as a successfully completed candidate.
-            out.solver_finalization_reached = false;
-            out.optimal = false;
-            out.native_bound_available = false;
-            out.incumbent_available = false;
-            out.native_bound_events.clear();
-            out.native_bound_target_reached = false;
-            out.native_bound_target_termination_requested = false;
+        if (native_ot_b1_active) {
+            // Any candidate engineering failure, including log-parameter or
+            // domain-restore errors, must invalidate trace/certificate bits.
+            invalidateRound89NativeOtB1FailedOutcome(out);
         }
         if (out.lp_relaxation && round63_root_source_==request.native_log_path.string() &&
             (!out.lp_terminal_valid||!out.model_fingerprint_matches_request)) {

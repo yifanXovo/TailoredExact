@@ -436,6 +436,25 @@ struct FixedIntervalMipOutcome {
     std::vector<FixedIntervalCandidateEvent> round60_candidate_events;
 };
 
+// Only the opt-in Round89 candidate calls this after its external gate has
+// assigned failure_reason. Keep native diagnostics while removing every
+// certificate/trace eligibility bit on an engineering failure.
+inline void invalidateRound89NativeOtB1FailedOutcome(
+    FixedIntervalMipOutcome& outcome) {
+    if (outcome.failure_reason == "none") return;
+    outcome.solver_finalization_reached = false;
+    outcome.optimal = false;
+    outcome.native_exact_optimal = false;
+    outcome.native_tolerance_optimal = false;
+    outcome.infeasible = false;
+    outcome.lp_terminal_valid = false;
+    outcome.native_bound_available = false;
+    outcome.incumbent_available = false;
+    outcome.native_bound_events.clear();
+    outcome.native_bound_target_reached = false;
+    outcome.native_bound_target_termination_requested = false;
+}
+
 struct FixedIntervalMipBackendStats {
     int threads_requested = 1;
     int threads_set_return_code = -1;

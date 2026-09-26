@@ -8,7 +8,7 @@ Production evidence records per-MIP identities, counts, skip reasons and costs. 
 
 ## Validation status
 
-The implementation and isolated test harness compile. Initial independent static review found an ineffective floating-environment guard, a missing genuinely rounded-product test, an expensive repeated matrix scan, and failure-path bound events that could be reported as valid. Targeted repairs are compiled and awaiting the reviewer's final recheck. **No new tests or Optimize calls have run yet; no performance improvement is claimed.**
+The implementation and isolated test harness compile and pass the final [independent static review](results/unified_exact_round89/native_ot_b1_independent_static_review.md). Initial review found an ineffective floating-environment guard, a missing genuinely rounded-product test, an expensive repeated matrix scan, and failure-path bound events that could be reported as valid. Targeted revisions also cover final native log/status API failures. All findings and repairs remain recorded. **No new tests or Optimize calls have run yet; no performance improvement is claimed.**
 
 The proposed qualification combines an independent exact-dyadic oracle with six isolated toy Optimize calls: off/static/callback and actual-backend LP/terminal/partial paths. Whole-method screening requires a separate evidence-based admission after qualification. This draft neither promotes a mainline algorithm nor starts a broad long-run campaign.
 
