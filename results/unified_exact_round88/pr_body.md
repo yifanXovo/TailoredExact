@@ -26,4 +26,12 @@ The first six complete G3 runs (E8/S12, P-GRB/ENS-C/A1) all return original-prob
 
 These are single small-instance observations. Host prelaunch checks, post-exit processing and offline verification are separately retained; process totals are 6.375s for D6 startup and 17.233s for the six complete runs. A1 is not promoted, and the remaining G3 roles have not run.
 
-The first five-arm fixed-point diagnostic is optimal in all arms: D7 base LP 0.1859374766, B1 0.1882996243, B2 0.1881935086, B1+B2 0.1883064894, and one aggregate row 0.1859374766. The entire diagnostic takes 70.666s, including 35.055s of exact-rational separation; five LP solves total 31.330s. The finite one-point B2 row set need not dominate the finite B1 row set. This is evidence of relaxation strengthening, not complete-algorithm acceleration. Raw primal, residuals, rows, logs, scope and total costs are preserved. A small-instance root and a narrower D7 child are the next preselected mechanism checks. No robust multi-instance benefit or large long-run campaign is claimed.
+All fifteen arms of the three preselected fixed-point diagnostics finish optimal:
+
+| Frozen LP | Base | B1 | B2 | B1+B2 | Aggregate | Whole process |
+|---|---:|---:|---:|---:|---:|---:|
+| D7 root | 0.1859374766 | 0.1882996243 | 0.1881935086 | 0.1883064894 | 0.1859374766 | 70.666s |
+| F2 root | 0.5286256495 | 0.5312198545 | 0.5312198545 | 0.5312198545 | 0.5286256495 | 7.906s |
+| D7 speculative left child | 0.1859374766 | 0.1937646437 | 0.1937157860 | 0.1938038386 | 0.1859374766 | 70.726s |
+
+Exact-rational Python separation alone costs 35.055s / 6.576s / 34.803s respectively. The finite one-point B2 row set need not dominate the finite B1 row set. The D7 child was historically rejected for no strict split gain and was not a retained final leaf. Its B1 cuts come from a different optimal LP point than the root's; since B1 itself is interval-independent, differing generated rows confound attribution to narrower G bounds. A same-row-set parent/child diagnostic is being prepared to resolve that specific question. These are relaxation-strengthening results, not complete-algorithm acceleration. Raw primal, residuals, rows, logs, scope and total costs are preserved. No robust multi-instance benefit or large long-run campaign is claimed.
