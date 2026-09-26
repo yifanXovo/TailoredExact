@@ -1,0 +1,12 @@
+diff --git a/tests/round89_native_ot_b1_micro.cpp b/tests/round89_native_ot_b1_micro.cpp
+--- a/tests/round89_native_ot_b1_micro.cpp
++++ b/tests/round89_native_ot_b1_micro.cpp
+@@ -91,6 +91,8 @@
+     m.lower_bounds.assign(m.names.size(), 0.0);
+     m.upper_bounds.assign(m.names.size(), 10.0);
+     m.upper_bounds[0] = 0.0;
++    m.upper_bounds[1] = 5.0;
++    m.upper_bounds[2] = 5.0;
+     for (int col=6; col<18; ++col) m.upper_bounds[col]=1.0;
+     for (int col=18; col<30; ++col) m.upper_bounds[col]=0.0;
+     m.row_starts = {0};

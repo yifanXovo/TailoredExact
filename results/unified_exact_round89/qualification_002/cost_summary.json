@@ -1,0 +1,38 @@
+{
+  "process_seconds": 3.8299999996088445,
+  "wrapper_seconds": 3.8610000000335276,
+  "native_process_seconds": 0.0940000000409782,
+  "optimize_calls": 6,
+  "stages": [
+    {
+      "name": "fraction-oracle",
+      "exit_code": 0,
+      "process_wall_seconds": 0.07899999991059303,
+      "wrapper_wall_seconds": 0.07899999991059303
+    },
+    {
+      "name": "native-six-arm",
+      "exit_code": 1,
+      "process_wall_seconds": 0.0940000000409782,
+      "wrapper_wall_seconds": 0.10900000017136335
+    },
+    {
+      "name": "pure-json",
+      "exit_code": 0,
+      "process_wall_seconds": 0.030999999959021807,
+      "wrapper_wall_seconds": 0.04700000025331974
+    },
+    {
+      "name": "pure-round89",
+      "exit_code": 0,
+      "process_wall_seconds": 0.26599999982863665,
+      "wrapper_wall_seconds": 0.26599999982863665
+    },
+    {
+      "name": "rebuild-micro",
+      "exit_code": 0,
+      "process_wall_seconds": 3.359999999869615,
+      "wrapper_wall_seconds": 3.359999999869615
+    }
+  ]
+}
