@@ -116,6 +116,7 @@ void usage() {
         << "[--primal-heuristic none|greedy|hga-tgbc|best-of-all] [--primal-heuristic-seconds <seconds>] "
         << "[--primal-heuristic-seed <seed>] [--primal-heuristic-runs <N>] "
         << "[--round88-constructive-only-descent true|false] "
+        << "[--round89-native-ot-b1 true|false] "
         << "[--round34-c6-startup-variant hga-full|hga-light-1000|simple-start] "
         << "[--round36-c6-causal-arm off|hh|ss|bw-p|bw-a] "
         << "[--round36-c6-split-normalization proof|anchor] "
@@ -251,6 +252,8 @@ std::string lowerAscii(std::string value) {
 std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
     if (opt.round88_constructive_only_descent)
         return "research-round88-ensc-constructive-only";
+    if (opt.round89_native_ot_b1)
+        return "research-round89-ensc-native-ot-b1";
     return opt.algorithm_preset.empty() ? "custom" : opt.algorithm_preset;
 }
 
@@ -1408,6 +1411,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--primal-heuristic-seed") opt.primal_heuristic_seed = static_cast<unsigned>(std::stoul(requireValue(i, argc, argv)));
         else if (arg == "--primal-heuristic-runs") opt.primal_heuristic_runs = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--round88-constructive-only-descent") opt.round88_constructive_only_descent = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--round89-native-ot-b1") opt.round89_native_ot_b1 = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-stop") opt.primal_heuristic_stop = requireValue(i, argc, argv);
         else if (arg == "--primal-heuristic-no-improve-generations") opt.primal_heuristic_no_improve_generations = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-generation-log") opt.primal_heuristic_generation_log = requireValue(i, argc, argv);
@@ -3300,6 +3304,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.round88_constructive_only_descent &&
         opt.algorithm_preset != "research-round83-vds-equal-net-exchange")
         throw std::runtime_error("Round88 constructive-only descent requires the ENS-C Round83 preset");
+    if (opt.round89_native_ot_b1 &&
+        opt.algorithm_preset != "research-round83-vds-equal-net-exchange")
+        throw std::runtime_error("Round89 native OT B1 requires the ENS-C Round83 preset");
+    if (opt.round89_native_ot_b1 && opt.round88_constructive_only_descent)
+        throw std::runtime_error("Round89 native OT B1 cannot combine with the Round88 A1 ablation");
     if ((opt.primal_heuristic == "joint-insertion") != joint_insertion ||
         (opt.primal_heuristic_stop == "motif-exhaustion") != joint_insertion)
         throw std::runtime_error("Joint insertion requires its isolated VD-S research preset");
@@ -3920,6 +3929,11 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
         append_explicit_research_feature("round88_verified_constructive_only_decoded_descent");
         snapshot.preset_reason = "Round88 A1: one verified constructive order uses ENS-C decoded descent, physical closure and full paid VD-S proof";
+    }
+    if (opt.round89_native_ot_b1) {
+        snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
+        append_explicit_research_feature("round89_native_inventory_cdf_b1_user_cuts");
+        snapshot.preset_reason = "Round89: ENS-C original-column native B1 user cuts in terminal and partial-target proof MIPs";
     }
     return snapshot;
 }

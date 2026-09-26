@@ -1,0 +1,118 @@
+ninja: Entering directory `build/research/round89-native-ot-b1'
+[1/2] Building CXX object CMakeFiles/Round89NativeOtB1Micro.dir/tests/round89_native_ot_b1_micro.cpp.obj
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp: In constructor '{anonymous}::Api::Api(const std::filesystem::__cxx11::path&)':
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBenv**, int, int, int)' {aka 'int (*)(_GRBenv**, int, int, int)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:314:9: note: in expansion of macro 'LOAD'
+  314 |         LOAD(emptyenvinternal,"GRBemptyenvinternal"); LOAD(startenv,"GRBstartenv");
+      |         ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBenv*)' {aka 'int (*)(_GRBenv*)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:314:55: note: in expansion of macro 'LOAD'
+  314 |         LOAD(emptyenvinternal,"GRBemptyenvinternal"); LOAD(startenv,"GRBstartenv");
+      |                                                       ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBenv*, GRBmodel**, const char*, int, double*, double*, double*, char*, char**)' {aka 'int (*)(_GRBenv*, _GRBmodel**, const char*, int, double*, double*, double*, char*, char**)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:315:9: note: in expansion of macro 'LOAD'
+  315 |         LOAD(newmodel,"GRBnewmodel"); LOAD(addconstr,"GRBaddconstr");
+      |         ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBmodel*, int, int*, double*, char, double, const char*)' {aka 'int (*)(_GRBmodel*, int, int*, double*, char, double, const char*)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:315:39: note: in expansion of macro 'LOAD'
+  315 |         LOAD(newmodel,"GRBnewmodel"); LOAD(addconstr,"GRBaddconstr");
+      |                                       ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBmodel*)' {aka 'int (*)(_GRBmodel*)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:316:9: note: in expansion of macro 'LOAD'
+  316 |         LOAD(update,"GRBupdatemodel"); LOAD(getenv,"GRBgetenv");
+      |         ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'GRBenv* (*)(GRBmodel*)' {aka '_GRBenv* (*)(_GRBmodel*)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:316:40: note: in expansion of macro 'LOAD'
+  316 |         LOAD(update,"GRBupdatemodel"); LOAD(getenv,"GRBgetenv");
+      |                                        ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBenv*, const char*, int)' {aka 'int (*)(_GRBenv*, const char*, int)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:317:9: note: in expansion of macro 'LOAD'
+  317 |         LOAD(setintparam,"GRBsetintparam"); LOAD(setdblparam,"GRBsetdblparam");
+      |         ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBenv*, const char*, double)' {aka 'int (*)(_GRBenv*, const char*, double)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:317:45: note: in expansion of macro 'LOAD'
+  317 |         LOAD(setintparam,"GRBsetintparam"); LOAD(setdblparam,"GRBsetdblparam");
+      |                                             ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBenv*, const char*, int*)' {aka 'int (*)(_GRBenv*, const char*, int*)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:318:9: note: in expansion of macro 'LOAD'
+  318 |         LOAD(getintparam,"GRBgetintparam"); LOAD(setcallback,"GRBsetcallbackfunc");
+      |         ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBmodel*, int (*)(GRBmodel*, void*, int, void*), void*)' {aka 'int (*)(_GRBmodel*, int (*)(_GRBmodel*, void*, int, void*), void*)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:318:45: note: in expansion of macro 'LOAD'
+  318 |         LOAD(getintparam,"GRBgetintparam"); LOAD(setcallback,"GRBsetcallbackfunc");
+      |                                             ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(void*, int, int, void*)' [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:319:9: note: in expansion of macro 'LOAD'
+  319 |         LOAD(cbget,"GRBcbget"); LOAD(cbcut,"GRBcbcut");
+      |         ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(void*, int, const int*, const double*, char, double)' [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:319:33: note: in expansion of macro 'LOAD'
+  319 |         LOAD(cbget,"GRBcbget"); LOAD(cbcut,"GRBcbcut");
+      |                                 ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBmodel*)' {aka 'int (*)(_GRBmodel*)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:320:9: note: in expansion of macro 'LOAD'
+  320 |         LOAD(optimize,"GRBoptimize"); LOAD(getintattr,"GRBgetintattr");
+      |         ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBmodel*, const char*, int*)' {aka 'int (*)(_GRBmodel*, const char*, int*)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:320:39: note: in expansion of macro 'LOAD'
+  320 |         LOAD(optimize,"GRBoptimize"); LOAD(getintattr,"GRBgetintattr");
+      |                                       ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBmodel*, const char*, double*)' {aka 'int (*)(_GRBmodel*, const char*, double*)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:321:9: note: in expansion of macro 'LOAD'
+  321 |         LOAD(getdblattr,"GRBgetdblattr");
+      |         ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBmodel*, const char*, int, int, double*)' {aka 'int (*)(_GRBmodel*, const char*, int, int, double*)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:322:9: note: in expansion of macro 'LOAD'
+  322 |         LOAD(getdblattrarray,"GRBgetdblattrarray");
+      |         ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBmodel*)' {aka 'int (*)(_GRBmodel*)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:323:9: note: in expansion of macro 'LOAD'
+  323 |         LOAD(freemodel,"GRBfreemodel"); LOAD(freeenv,"GRBfreeenv");
+      |         ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'void (*)(GRBenv*)' {aka 'void (*)(_GRBenv*)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:323:41: note: in expansion of macro 'LOAD'
+  323 |         LOAD(freemodel,"GRBfreemodel"); LOAD(freeenv,"GRBfreeenv");
+      |                                         ^~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:312:18: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBmodel*, const char*)' {aka 'int (*)(_GRBmodel*, const char*)'} [-Wcast-function-type]
+  312 |         member = reinterpret_cast<decltype(member)>(GetProcAddress(dll, name)); \
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/tests/round89_native_ot_b1_micro.cpp:324:9: note: in expansion of macro 'LOAD'
+  324 |         LOAD(write,"GRBwrite");
+      |         ^~~~
+[2/2] Linking CXX executable Round89NativeOtB1Micro.exe

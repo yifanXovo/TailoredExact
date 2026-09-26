@@ -355,6 +355,20 @@ struct FixedIntervalMipOutcome {
     std::string additional_linear_rows_status = "not_requested";
     std::string tailored_cut_policy = "off";
     std::string round53_callback_mode = "off";
+    bool round89_native_ot_b1_active = false;
+    bool round89_native_ot_b1_audit_valid = false;
+    long long round89_native_ot_b1_audited_rows = 0;
+    long long round89_native_ot_b1_pairs = 0;
+    long long round89_native_ot_b1_mipnode_calls = 0;
+    long long round89_native_ot_b1_optimal_nodes = 0;
+    long long round89_native_ot_b1_nonoptimal_nodes = 0;
+    long long round89_native_ot_b1_pairs_checked = 0;
+    long long round89_native_ot_b1_reliable_rows = 0;
+    long long round89_native_ot_b1_submitted_api_ok = 0;
+    long long round89_native_ot_b1_numerical_skips = 0;
+    double round89_native_ot_b1_setup_seconds = 0.0;
+    double round89_native_ot_b1_callback_seconds = 0.0;
+    std::string round89_native_ot_b1_status = "off";
     long long round53_mipnode_calls = 0;
     long long round53_mipnode_status_reads = 0;
     long long round53_relaxation_vector_reads = 0;
@@ -421,6 +435,25 @@ struct FixedIntervalMipOutcome {
     double round60_candidate_overhead_seconds = 0.0;
     std::vector<FixedIntervalCandidateEvent> round60_candidate_events;
 };
+
+// Only the opt-in Round89 candidate calls this after its external gate has
+// assigned failure_reason. Keep native diagnostics while removing every
+// certificate/trace eligibility bit on an engineering failure.
+inline void invalidateRound89NativeOtB1FailedOutcome(
+    FixedIntervalMipOutcome& outcome) {
+    if (outcome.failure_reason == "none") return;
+    outcome.solver_finalization_reached = false;
+    outcome.optimal = false;
+    outcome.native_exact_optimal = false;
+    outcome.native_tolerance_optimal = false;
+    outcome.infeasible = false;
+    outcome.lp_terminal_valid = false;
+    outcome.native_bound_available = false;
+    outcome.incumbent_available = false;
+    outcome.native_bound_events.clear();
+    outcome.native_bound_target_reached = false;
+    outcome.native_bound_target_termination_requested = false;
+}
 
 struct FixedIntervalMipBackendStats {
     int threads_requested = 1;
