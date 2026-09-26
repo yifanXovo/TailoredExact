@@ -473,6 +473,9 @@ struct SolveOptions {
     double primal_heuristic_seconds = 10.0;
     unsigned primal_heuristic_seed = 20260626u;
     int primal_heuristic_runs = 12;
+    // Round 88 A1 research ablation: only the verified joint constructive
+    // order enters the unchanged finite decoded descent. Default is ENS-C.
+    bool round88_constructive_only_descent = false;
     std::string primal_heuristic_stop = "legacy-time";
     int primal_heuristic_no_improve_generations = 2000;
     std::string primal_heuristic_generation_log;

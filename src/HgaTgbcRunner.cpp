@@ -106,6 +106,9 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
     out.stop_mode = options.stop_mode;
     const bool decoded_descent = isDecodedDescentStopMode(options.stop_mode);
     const bool interroute = options.stop_mode == "decoded-descent-interroute";
+    if (options.round88_constructive_only_descent &&
+        (!options.joint_constructive_seed || !interroute || options.fixed_generations >= 0))
+        throw std::runtime_error("Round88 constructive-only descent requires a joint seed and unbounded finite inter-route descent");
     if (decoded_descent && options.fixed_generations >= 0)
         throw std::runtime_error("Decoded descent cannot use a generation quota");
     InstanceData hga_instance = toHgaInstance(instance);
@@ -173,7 +176,12 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
             sequences[chosen].push_back(i);proxy[chosen]=minimum;
         }
         ga.set_extra_descent_seed(sequences);
-        out.notes.push_back("Round73: appended one verified constructive-order seed after unchanged24 random seeds; tail completion uses physical-duration-plus-travel proxy");
+        ga.set_constructive_only_descent(options.round88_constructive_only_descent);
+        if (options.round88_constructive_only_descent)
+            out.notes.push_back("research-round88-ensc-constructive-only: one verified constructive order enters the unchanged finite decoded descent");
+        out.notes.push_back(options.round88_constructive_only_descent
+            ? "Round88: only the verified constructive-order seed is descended; tail completion uses physical-duration-plus-travel proxy"
+            : "Round73: appended one verified constructive-order seed after unchanged24 random seeds; tail completion uses physical-duration-plus-travel proxy");
         if(!options.generation_log_path.empty()) {
             auto path=std::filesystem::path(options.generation_log_path.string()+".joint_seed.csv");
             if(path.has_parent_path())std::filesystem::create_directories(path.parent_path());
@@ -198,7 +206,9 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
                     std::chrono::steady_clock::now() - observer_started).count();
                 const bool published = published_candidates.consider(
                     instance, options.lambda, routes,
-                    decoded_descent ? "decoded_descent_verified_improvement"
+                    options.round88_constructive_only_descent
+                        ? "round88_constructive_only_decoded_descent_verified_improvement"
+                        : decoded_descent ? "decoded_descent_verified_improvement"
                         : (generation == 0 ? "hga_initial_population_best"
                                            : "hga_strict_improvement"),
                     options.candidate_model_identity, generation,
@@ -379,8 +389,10 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
             const VerifiedBrpCandidate& candidate = published_candidates.best();
             out.found = true;
             out.routes = candidate.routes;
-            out.source_label = decoded_descent ? "decoded_descent_verified_event_publish"
-                                              : "native_hga_tgbc_verified_event_publish";
+            out.source_label = options.round88_constructive_only_descent
+                ? "round88_constructive_only_decoded_descent_verified_event_publish"
+                : decoded_descent ? "decoded_descent_verified_event_publish"
+                                  : "native_hga_tgbc_verified_event_publish";
             out.verified_objective = candidate.objective;
             out.retained_verified_event_candidate = true;
             out.retained_candidate_sha256 = candidate.content_sha256;
@@ -404,7 +416,9 @@ HgaTgbcResult runHgaTgbcNative(const Instance& instance,
         auto routes = routesFromHgaDecode(instance, ga.get_best_solution(),
                                          ga.get_best_decoded_operations());
         VerifiedCandidateStore final_store;
-        const std::string source = decoded_descent ? "decoded_descent_cached_best" : "prefix_cached_best";
+        const std::string source = options.round88_constructive_only_descent
+            ? "round88_constructive_only_decoded_descent_cached_best"
+            : decoded_descent ? "decoded_descent_cached_best" : "prefix_cached_best";
         final_store.consider(instance, options.lambda, routes, source,
                              options.candidate_model_identity);
         if (final_store.hasBest()) {

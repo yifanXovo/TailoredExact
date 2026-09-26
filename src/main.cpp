@@ -115,6 +115,7 @@ void usage() {
         << "[--external-incumbent <path>] [--external-incumbent-format auto|route_json|csv|legacy_text] [--export-incumbent <path>] "
         << "[--primal-heuristic none|greedy|hga-tgbc|best-of-all] [--primal-heuristic-seconds <seconds>] "
         << "[--primal-heuristic-seed <seed>] [--primal-heuristic-runs <N>] "
+        << "[--round88-constructive-only-descent true|false] "
         << "[--round34-c6-startup-variant hga-full|hga-light-1000|simple-start] "
         << "[--round36-c6-causal-arm off|hh|ss|bw-p|bw-a] "
         << "[--round36-c6-split-normalization proof|anchor] "
@@ -245,6 +246,12 @@ std::string lowerAscii(std::string value) {
         return static_cast<char>(std::tolower(c));
     });
     return value;
+}
+
+std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
+    if (opt.round88_constructive_only_descent)
+        return "research-round88-ensc-constructive-only";
+    return opt.algorithm_preset.empty() ? "custom" : opt.algorithm_preset;
 }
 
 void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
@@ -1400,6 +1407,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--primal-heuristic-seconds") opt.primal_heuristic_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-seed") opt.primal_heuristic_seed = static_cast<unsigned>(std::stoul(requireValue(i, argc, argv)));
         else if (arg == "--primal-heuristic-runs") opt.primal_heuristic_runs = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round88-constructive-only-descent") opt.round88_constructive_only_descent = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-stop") opt.primal_heuristic_stop = requireValue(i, argc, argv);
         else if (arg == "--primal-heuristic-no-improve-generations") opt.primal_heuristic_no_improve_generations = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-generation-log") opt.primal_heuristic_generation_log = requireValue(i, argc, argv);
@@ -3289,6 +3297,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         opt.algorithm_preset == "research-round78-vds-balanced-descent" ||
          opt.algorithm_preset == "research-round83-vds-equal-net-exchange";
     const bool joint_insertion = opt.algorithm_preset == "research-round73-vds-joint-insertion";
+    if (opt.round88_constructive_only_descent &&
+        opt.algorithm_preset != "research-round83-vds-equal-net-exchange")
+        throw std::runtime_error("Round88 constructive-only descent requires the ENS-C Round83 preset");
     if ((opt.primal_heuristic == "joint-insertion") != joint_insertion ||
         (opt.primal_heuristic_stop == "motif-exhaustion") != joint_insertion)
         throw std::runtime_error("Joint insertion requires its isolated VD-S research preset");
@@ -3904,6 +3915,11 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
     if (opt.round60_candidate_mode != "off") {
         append_explicit_research_feature(
             "round60_native_candidate_" + opt.round60_candidate_mode);
+    }
+    if (opt.round88_constructive_only_descent) {
+        snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
+        append_explicit_research_feature("round88_verified_constructive_only_decoded_descent");
+        snapshot.preset_reason = "Round88 A1: one verified constructive order uses ENS-C decoded descent, physical closure and full paid VD-S proof";
     }
     return snapshot;
 }
@@ -8003,7 +8019,10 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         std::ostringstream summary;
         summary << "paper primal heuristic summary: mode=" << mode
                 << ", seed=" << opt.primal_heuristic_seed
-                << ", runs=" << opt.primal_heuristic_runs
+                 << ", runs=" << opt.primal_heuristic_runs
+                 << (opt.round88_constructive_only_descent
+                     ? ", effective_decoded_descent_seeds=1"
+                     : "")
                 << ", found=" << (out.found ? "true" : "false")
                 << ", best_objective=" << (out.found ? out.verification.objective : 0.0)
                 << ", candidates_tested=" << out.candidates_tested
@@ -8069,7 +8088,9 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         hga_opt.no_improve_generation_limit =
             opt.primal_heuristic_no_improve_generations;
         hga_opt.generation_log_path = opt.primal_heuristic_generation_log;
-        hga_opt.phase_label = opt.primal_heuristic_phase_label;
+        hga_opt.phase_label = opt.round88_constructive_only_descent
+            ? "round88_constructive_only_" + opt.primal_heuristic_phase_label
+            : opt.primal_heuristic_phase_label;
         hga_opt.process_options = &opt;
         hga_opt.publish_verified_improvements =
             opt.round60_hga_publish_verified || opt.round65_hga_zero_stop;
@@ -8078,12 +8099,13 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         hga_opt.verified_candidate_log_path =
             opt.round60_hga_candidate_log;
         hga_opt.candidate_model_identity =
-            opt.algorithm_preset + "|original_problem";
+            effectiveAlgorithmIdentity(opt) + "|original_problem";
         if (!search_state_stop) {
             hga_opt.max_time_seconds = std::max(
                 1, static_cast<int>(std::ceil(opt.primal_heuristic_seconds)));
         }
         hga_opt.pop_size = std::max(24, opt.primal_heuristic_runs);
+        hga_opt.round88_constructive_only_descent = opt.round88_constructive_only_descent;
         hga_opt.joint_constructive_seed = joint_seeded;
         if (joint_seeded) hga_opt.joint_constructive_routes = joint_seed_routes;
         hga_opt.iterations = 10;
@@ -8120,7 +8142,9 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         out.decoded_descent_log_path = native.decoded_descent_log_path.string();
         out.notes.insert(out.notes.end(), native.notes.begin(), native.notes.end());
         if (native.found) {
-            consider(native.routes, ebrp::isDecodedDescentStopMode(opt.primal_heuristic_stop)
+            consider(native.routes, opt.round88_constructive_only_descent
+                ? "round88_constructive_only_decoded_descent_verified_seed"
+                : ebrp::isDecodedDescentStopMode(opt.primal_heuristic_stop)
                 ? "decoded_descent_verified_seed" : "native_hga_tgbc_full_migration");
         }
         if (opt.algorithm_preset == "research-round75-vds-quantity-descent" && out.found &&
@@ -11114,9 +11138,9 @@ ebrp::SolveResult solveTailoredBCGuardDiagnostic(const ebrp::Instance& instance,
     result.instance_name = instance.name;
     result.input_path = instance.path;
     result.method = method;
-    result.algorithm_preset = opt.algorithm_preset.empty()
-        ? "paper-gf-tailored-bc"
-        : opt.algorithm_preset;
+    result.algorithm_preset = opt.round88_constructive_only_descent
+        ? effectiveAlgorithmIdentity(opt)
+        : opt.algorithm_preset.empty() ? "paper-gf-tailored-bc" : opt.algorithm_preset;
     result.certificate =
         "diagnostic only: tailored BC callback/cut safety guard";
     ebrp::SolveOptions tailored_opt = opt;
@@ -19520,9 +19544,7 @@ void writeEmergencyFinalJson(const ebrp::SolveOptions& opt,
     result.method = opt.method.empty() ? "unknown" : opt.method;
     result.status = status;
     result.certificate = "not_certified";
-    result.algorithm_preset = opt.algorithm_preset.empty()
-        ? "custom"
-        : opt.algorithm_preset;
+    result.algorithm_preset = effectiveAlgorithmIdentity(opt);
     result.objective = 0.0;
     result.lower_bound = 0.0;
     result.upper_bound = 0.0;
