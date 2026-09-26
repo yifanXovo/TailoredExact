@@ -1,0 +1,9 @@
+# D7 固定 LP OT 诊断：原始证据交接
+
+`ot_d7_diagnostic_001/` 的 13 个原始文件全部原地保留，已无损封入 `runner_ot_d7_diagnostic_001_raw.tar.gz`：原字节合计 25,231,259，压缩包 3,094,297 字节，SHA256 为 `629e810804ceedbc448f9368831700c508ef51c96f58cd7a13345d2f77076b30`。`runner_ot_d7_diagnostic_001_raw_index.json` 逐文件记录路径、字节数和 SHA256；实际重读归档内全部 13 个成员，与原文件逐一核对字节数和 SHA256，均通过。空 stdout/stderr、五臂日志、完整固定点 primal、逐行残差、分离行、结果、计时与监督记录均在包内。没有复制源码、build 或 R87 外部根叶 LP；外部 LP SHA256 `06275aba5e2378d719390e295654849d8868fb92fd8b0366619e1c33fa713069` 及 D7 场景身份由已有 `ot_qualification_d7_audit_v4/manifest.json` 记录。
+
+监督记录 `exit_code=0`、结果与 manifest SHA 前后一致；整个实际进程墙钟 `70.6657504 s`，低于统一 `120 s` 截止。诊断程序到结果落盘 `70.4602875 s`。共享准备 `42.2195908 s` **只算一次**，其内含 base LP 求解、固定点保存/残差验证及 `35.0554527 s` 的行分离；四个增量臂的 marginal wall 合计 `28.2375675 s`。共享加边际为 `70.4571583 s`，与诊断本体墙钟相差约 `0.00313 s` 的计量边界，监督额外约 `0.20546 s` 属启动/收尾。各臂的 `shared_plus_arm_component_seconds` 是假设单独执行时的分摊口径，**不能相加**。五次 LP solver runtime 合计 `31.3290002 s`，是上述进程成本的内部部分，也不能再加。先行独立只读 LP audit `1.3182023 s` 另列研究成本；原始输入/LP 导出和工具开发构建不是此次 70.666 秒诊断的已计部分。
+
+五臂 LP 均状态 OPTIMAL，基础目标 `0.1859374766118822`；B1 `0.1882996242918583`、B2 `0.18819350855424785`、B1+B2 `0.18830648941029693`，aggregate 单行 `0.18593747661188195`（数值上与基础相同）。这是冻结 D7 根叶 LP 的一轮固定点切割诊断，不能视作完整 ENS 性能或新认证结果。原方法与数值审查见 `ot_qualification_d7_result.md`，本文件只交接原始证据、成本和身份。
+
+后续 18 臂的**静态身份快照**另见 `runner_rest_static_identity_snapshot.json`：smoke 六行全通过且两例跨臂界检查通过，`summary.jsonl` SHA256 为 `ff3cea8deceba367d41154b647644dae902e0d0afbbfab414ad5c4c3d42f95e3`；冻结八个源码文件的现值均等于 `qualification/a1_source_hashes.json`，A1 binary SHA256 `23d4fd53602d46f599f3f58e33c3ec96c4eec01b972e22ee0d4815cc42a54693`，runner SHA256 `178e83fcb56143109d00f407af770b711a7e69c5816e63a0aa094dee8ff3eadd`，均匹配已准备 identity。检查时 `runner_smoke_gate.json`、`runner_rest_lease.json` 均不存在；快照不是准入闸门，未启动其余 18 臂。

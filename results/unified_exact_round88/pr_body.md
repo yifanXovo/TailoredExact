@@ -11,7 +11,7 @@ The default-off A1 switch sends only the verified joint constructive order throu
 
 Validation: 11/11 focused CTest checks passed, including logical equivalence with ENS-C's constructive path, physical verification, a complete tiny-instance exact certificate, default ENS-C startup and invalid-configuration rejection. Independent static review and the coordinator's final check match all eight source/test hashes; the qualified executable is SHA256 `23d4fd53602d46f599f3f58e33c3ec96c4eec01b972e22ee0d4815cc42a54693`. All 19 planned input identities also match the audited protocols.
 
-Mathematical proposals include endpoint-CDF Gini inequalities and an aggregate projection. Independent review establishes validity in the generating interval and the isolated state/product-block minimum-cost interpretation; it does not establish the full routing-model hull or novelty. Actual frozen-LP strength and cost remain to be measured.
+Mathematical proposals include endpoint-CDF Gini inequalities and an aggregate projection. Independent review establishes validity in the generating interval and the isolated state/product-block minimum-cost interpretation; it does not establish the full routing-model hull or novelty. The qualified diagnostic passes 12/12 tests and has now measured one actual frozen D7 root LP.
 
 Additional independently reviewed notes justify the existing midpoint against a product-error bound, state the conditions for removing depth 8, and derive an exact scalar quantity-search candidate rule without a learning rate. These remain unimplemented proposals. Historical startup-path attribution shows D6's constructive path can be weaker than its random paths, so a fresh complete-startup/closure diagnostic precedes the A1 screen; no per-instance algorithm dispatch is introduced.
 
@@ -24,4 +24,6 @@ The first six complete G3 runs (E8/S12, P-GRB/ENS-C/A1) all return original-prob
 | E8 | 1.891 | 2.750 | 2.765 |
 | S12 | 6.312 | 1.953 | 1.562 |
 
-These are single small-instance observations. Host prelaunch checks, post-exit processing and offline verification are separately retained; process totals are 6.375s for D6 startup and 17.233s for the six complete runs. A1 is not promoted, and the remaining G3 roles have not run. A fixed-LP OT diagnostic is the next mechanism gate. No robust multi-instance benefit or large long-run campaign is claimed.
+These are single small-instance observations. Host prelaunch checks, post-exit processing and offline verification are separately retained; process totals are 6.375s for D6 startup and 17.233s for the six complete runs. A1 is not promoted, and the remaining G3 roles have not run.
+
+The first five-arm fixed-point diagnostic is optimal in all arms: D7 base LP 0.1859374766, B1 0.1882996243, B2 0.1881935086, B1+B2 0.1883064894, and one aggregate row 0.1859374766. The entire diagnostic takes 70.666s, including 35.055s of exact-rational separation; five LP solves total 31.330s. The finite one-point B2 row set need not dominate the finite B1 row set. This is evidence of relaxation strengthening, not complete-algorithm acceleration. Raw primal, residuals, rows, logs, scope and total costs are preserved. A small-instance root and a narrower D7 child are the next preselected mechanism checks. No robust multi-instance benefit or large long-run campaign is claimed.
