@@ -15,4 +15,13 @@ Mathematical proposals include endpoint-CDF Gini inequalities and an aggregate p
 
 Additional independently reviewed notes justify the existing midpoint against a product-error bound, state the conditions for removing depth 8, and derive an exact scalar quantity-search candidate rule without a learning rate. These remain unimplemented proposals. Historical startup-path attribution shows D6's constructive path can be weaker than its random paths, so a fresh complete-startup/closure diagnostic precedes the A1 screen; no per-instance algorithm dispatch is introduced.
 
-Current review scope includes qualification and explicit positive/negative evidence boundaries. The performance runner is being prepared. No Round88 performance benefit, mainline promotion or large long-run campaign is claimed or started.
+Fresh D6 startup-only diagnosis passes both physical/closure audits: ENS-C takes 6.078s with UB 0.1575098036, while A1 takes 0.297s with worse UB 0.1716116268. Both have zero Optimize calls. This is an explicit quality/cost tradeoff, not a complete-method speed result.
+
+The first six complete G3 runs (E8/S12, P-GRB/ENS-C/A1) all return original-problem numerical certificates, pass the physical/scope audits, and pass cross-arm bound consistency. Same-build process wall seconds:
+
+| Instance | P-GRB | ENS-C | A1 |
+|---|---:|---:|---:|
+| E8 | 1.891 | 2.750 | 2.765 |
+| S12 | 6.312 | 1.953 | 1.562 |
+
+These are single small-instance observations. Host prelaunch checks, post-exit processing and offline verification are separately retained; process totals are 6.375s for D6 startup and 17.233s for the six complete runs. A1 is not promoted, and the remaining G3 roles have not run. A fixed-LP OT diagnostic is the next mechanism gate. No robust multi-instance benefit or large long-run campaign is claimed.
