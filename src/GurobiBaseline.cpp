@@ -10,6 +10,7 @@
 #include "HgaTgbcRunner.hpp"
 #include "ProcessPhaseLedger.hpp"
 #include "NativeEvidenceJournal.hpp"
+#include "NativeOtB1.hpp"
 #include "MipStartMapping.hpp"
 #include "Round50IntervalMip.hpp"
 #include "Round53CallbackIsolation.hpp"
@@ -31,6 +32,7 @@
 #include <fstream>
 #include <iomanip>
 #include <limits>
+#include <map>
 #include <memory>
 #include <regex>
 #include <set>
@@ -387,6 +389,20 @@ struct ProgressCallbackState {
     long long round59_sample_checks = 0;
     int round59_sample_successes = 0;
     GurobiApi* api = nullptr;
+    bool native_ot_b1_active = false;
+    NativeOtB1Prepared native_ot_b1;
+    std::vector<double> native_ot_b1_values;
+    double native_ot_b1_feasibility_tolerance = 0.0;
+    long long native_ot_b1_mipnode_calls = 0;
+    long long native_ot_b1_optimal_nodes = 0;
+    long long native_ot_b1_nonoptimal_nodes = 0;
+    long long native_ot_b1_pairs_checked = 0;
+    long long native_ot_b1_reliable_rows = 0;
+    long long native_ot_b1_submitted_api_ok = 0;
+    long long native_ot_b1_numerical_skips = 0;
+    double native_ot_b1_callback_seconds = 0.0;
+    std::map<std::string, long long> native_ot_b1_skip_reasons;
+    std::string native_ot_b1_failure;
     GurobiProgressStats progress;
     Clock::time_point telemetry_start = Clock::now();
     double last_record_time = -1.0;
@@ -1060,6 +1076,71 @@ int __stdcall progressAndBoundTargetCallback(
             state->round59_sample_seconds +=
                 std::chrono::duration<double>(Clock::now()-sample_started).count();
         }
+    }
+    if (where == GRB_CB_MIPNODE && state->native_ot_b1_active &&
+        state->native_ot_b1_failure.empty()) {
+        const auto started = Clock::now();
+        ++state->native_ot_b1_mipnode_calls;
+        auto fail = [&](const std::string& reason) {
+            state->native_ot_b1_failure = reason;
+            state->api->terminate(model);
+        };
+        try {
+            int status = 0;
+            if (state->api->cbget(cbdata, where, GRB_CB_MIPNODE_STATUS,
+                                  &status) != 0) {
+                fail("MIPNODE_STATUS_read_failed");
+            } else if (status != GRB_OPTIMAL) {
+                ++state->native_ot_b1_nonoptimal_nodes;
+            } else {
+                ++state->native_ot_b1_optimal_nodes;
+                auto& values = state->native_ot_b1_values;
+                if (values.empty() || state->api->cbget(
+                        cbdata, where, GRB_CB_MIPNODE_REL, values.data()) != 0) {
+                    fail("MIPNODE_REL_read_failed");
+                } else if (!std::all_of(values.begin(), values.end(),
+                                        [](double x) { return std::isfinite(x); })) {
+                    ++state->native_ot_b1_numerical_skips;
+                    ++state->native_ot_b1_skip_reasons["nonfinite_original_vector"];
+                } else {
+                    // Each pair has a unique h column; hence at most one
+                    // normalized B1 row per pair in this callback. The same
+                    // pair may legitimately be submitted at later passes.
+                    std::set<int> submitted_h;
+                    for (const auto& pair : state->native_ot_b1.pairs) {
+                        ++state->native_ot_b1_pairs_checked;
+                        const NativeOtB1Cut row = separateNativeOtB1(
+                            pair, values,
+                            state->native_ot_b1_feasibility_tolerance);
+                        if (row.status == NativeOtB1Cut::Status::ArithmeticSkip ||
+                            row.status == NativeOtB1Cut::Status::InvalidPoint) {
+                            ++state->native_ot_b1_numerical_skips;
+                            ++state->native_ot_b1_skip_reasons[row.reason];
+                            continue;
+                        }
+                        if (row.status != NativeOtB1Cut::Status::Reliable) continue;
+                        ++state->native_ot_b1_reliable_rows;
+                        if (!submitted_h.insert(pair.h_column).second) continue;
+                        const int code = state->api->cbcut(
+                            cbdata, static_cast<int>(row.indices.size()),
+                            const_cast<int*>(row.indices.data()),
+                            const_cast<double*>(row.coefficients.data()),
+                            row.sense, row.rhs);
+                        if (code != 0) {
+                            fail("GRBcbcut_failed:" + std::to_string(code));
+                            break;
+                        }
+                        ++state->native_ot_b1_submitted_api_ok;
+                    }
+                }
+            }
+        } catch (const std::exception& error) {
+            fail(std::string("B1_callback_exception:") + error.what());
+        } catch (...) {
+            fail("B1_callback_unknown_exception");
+        }
+        state->native_ot_b1_callback_seconds +=
+            std::chrono::duration<double>(Clock::now() - started).count();
     }
     if (where == GRB_CB_MIPNODE && state->round53_mipnode_path_active &&
         !state->tailored_cut_disabled_after_failure) {
@@ -2231,6 +2312,71 @@ public:
             fileSha256(request.canonical_model_path) ==
                 request.canonical_model_fingerprint;
 
+        const bool native_ot_b1_active = options_.round89_native_ot_b1 &&
+            (out.terminal_mip || out.partial_bound_target_mip);
+        NativeOtB1Prepared native_ot_b1;
+        if (native_ot_b1_active) {
+            const auto setup_started = Clock::now();
+            out.round89_native_ot_b1_active = true;
+            auto fail_b1_setup = [&](const std::string& reason) {
+                out.round89_native_ot_b1_status = "setup_failed:" + reason;
+                out.failure_reason = "round89_native_ot_b1_" + reason;
+                out.round89_native_ot_b1_setup_seconds =
+                    std::chrono::duration<double>(Clock::now()-setup_started).count();
+            };
+            if (!out.model_fingerprint_matches_request ||
+                request.canonical_model_fingerprint.empty() ||
+                request.canonical_model_scope.empty() ||
+                request.canonical_row_signature.empty() ||
+                request.leaf_id.empty()) {
+                fail_b1_setup("canonical_leaf_identity_invalid");
+                return out;
+            }
+            if (request.interval_mip_policy != "round55-vd-p" ||
+                round50_policy.station_state_formulation != "vd-p" ||
+                out.model_general_constraint_count != 0) {
+                fail_b1_setup("requires_linear_vdp_policy");
+                return out;
+            }
+            NativeOtB1LinearModel identity;
+            identity.names = native_names;
+            identity.types = native_types;
+            identity.lower_bounds.resize(static_cast<std::size_t>(native_variables));
+            identity.upper_bounds.resize(static_cast<std::size_t>(native_variables));
+            int audit_rows = 0;
+            SolverNeutralLinearModel linear;
+            const bool read_ok = native_variables > 0 &&
+                native_names.size() == static_cast<std::size_t>(native_variables) &&
+                native_types.size() == static_cast<std::size_t>(native_variables) &&
+                api_.getintattr(model, GRB_INT_ATTR_NUMCONSTRS, &audit_rows) == 0 &&
+                api_.getdblattrarray(model, GRB_DBL_ATTR_LB, 0, native_variables,
+                    identity.lower_bounds.data()) == 0 &&
+                api_.getdblattrarray(model, GRB_DBL_ATTR_UB, 0, native_variables,
+                    identity.upper_bounds.data()) == 0 &&
+                readLinearModel(api_, model, native_variables, audit_rows, linear);
+            if (!read_ok) {
+                fail_b1_setup("original_model_matrix_read_failed");
+                return out;
+            }
+            identity.row_starts = std::move(linear.row_starts);
+            identity.column_indices = std::move(linear.column_indices);
+            identity.coefficients = std::move(linear.coefficients);
+            identity.senses = std::move(linear.senses);
+            identity.rhs = std::move(linear.rhs);
+            native_ot_b1 = prepareNativeOtB1(identity, instance_.V);
+            if (!native_ot_b1.valid) {
+                fail_b1_setup("model_audit:" + native_ot_b1.reason);
+                return out;
+            }
+            out.round89_native_ot_b1_audit_valid = true;
+            out.round89_native_ot_b1_audited_rows = native_ot_b1.audited_rows;
+            out.round89_native_ot_b1_pairs =
+                static_cast<long long>(native_ot_b1.pairs.size());
+            out.round89_native_ot_b1_status = "audited_pending_callback";
+            out.round89_native_ot_b1_setup_seconds =
+                std::chrono::duration<double>(Clock::now()-setup_started).count();
+        }
+
         std::vector<double> round68_start_values;
         std::vector<char> round68_start_types;
         if (request.round68_verified_start) {
@@ -2336,6 +2482,31 @@ public:
                 return out;
             }
         }
+        double native_ot_b1_feasibility_tolerance = 0.0;
+        if (native_ot_b1_active) {
+            out.gurobi_precrush_requested = 1;
+            out.gurobi_precrush_set_return_code = api_.setintparam(
+                model_env, GRB_INT_PAR_PRECRUSH, 1);
+            out.gurobi_precrush_get_return_code = api_.getintparam(
+                model_env, GRB_INT_PAR_PRECRUSH,
+                &out.gurobi_precrush_effective);
+            out.gurobi_precrush_roundtrip_valid =
+                out.gurobi_precrush_set_return_code == 0 &&
+                out.gurobi_precrush_get_return_code == 0 &&
+                out.gurobi_precrush_effective == 1;
+            const int tolerance_rc = api_.getdblparam(
+                model_env, GRB_DBL_PAR_FEASIBILITYTOL,
+                &native_ot_b1_feasibility_tolerance);
+            if (!out.gurobi_precrush_roundtrip_valid || !api_.cbcut ||
+                tolerance_rc != 0 ||
+                !std::isfinite(native_ot_b1_feasibility_tolerance) ||
+                native_ot_b1_feasibility_tolerance < 0.0) {
+                out.round89_native_ot_b1_status =
+                    "setup_failed:precrush_callback_or_tolerance";
+                out.failure_reason = "round89_native_ot_b1_capability_invalid";
+                return out;
+            }
+        }
         if (tailored_cut_active) {
             cut_manager.beginModel(
                 request.canonical_model_fingerprint + "|" +
@@ -2343,6 +2514,19 @@ public:
         }
 
         ProgressCallbackState callback;
+        if (native_ot_b1_active) {
+            if (request.native_log_path.empty()) {
+                out.failure_reason = "round89_native_ot_b1_evidence_path_missing";
+                out.round89_native_ot_b1_status = "setup_failed:evidence_path_missing";
+                return out;
+            }
+            callback.native_ot_b1_active = true;
+            callback.native_ot_b1 = std::move(native_ot_b1);
+            callback.native_ot_b1_values.resize(
+                static_cast<std::size_t>(native_variables));
+            callback.native_ot_b1_feasibility_tolerance =
+                native_ot_b1_feasibility_tolerance;
+        }
         if (request.round68_verified_start && out.warm_start_submitted) {
             callback.round68_start_values=&round68_start_values;
             callback.round68_start_types=&round68_start_types;
@@ -2538,10 +2722,104 @@ public:
                 out.failure_reason="round68_global_deadline_readback_failed";return out;
             }
         }
+        if (native_ot_b1_active && paper_solve) {
+            const double remaining = std::max(0.0,
+                request.global_deadline_remaining_seconds -
+                std::chrono::duration<double>(
+                    Clock::now()-round65_started).count());
+            double readback = -1.0;
+            const int deadline_rc = api_.setdblparam(
+                model_env, GRB_DBL_PAR_TIMELIMIT, remaining);
+            const int read_rc = api_.getdblparam(
+                model_env, GRB_DBL_PAR_TIMELIMIT, &readback);
+            if (deadline_rc || read_rc || readback != remaining) {
+                out.round89_native_ot_b1_status =
+                    "setup_failed:whole_call_deadline_readback";
+                out.failure_reason =
+                    "round89_native_ot_b1_deadline_readback_failed";
+                return out;
+            }
+        }
         out.optimize_return_code = api_.optimize(model);
         if(callback.native_evidence) callback.native_evidence->returned(callback.evidence_call,out.optimize_return_code);
         out.round68_start_vector_observed=callback.round68_start_vector_observed;
         out.round68_start_integer_vector_observed=callback.round68_start_integer_vector_observed;
+        if (native_ot_b1_active) {
+            out.round89_native_ot_b1_mipnode_calls =
+                callback.native_ot_b1_mipnode_calls;
+            out.round89_native_ot_b1_optimal_nodes =
+                callback.native_ot_b1_optimal_nodes;
+            out.round89_native_ot_b1_nonoptimal_nodes =
+                callback.native_ot_b1_nonoptimal_nodes;
+            out.round89_native_ot_b1_pairs_checked =
+                callback.native_ot_b1_pairs_checked;
+            out.round89_native_ot_b1_reliable_rows =
+                callback.native_ot_b1_reliable_rows;
+            out.round89_native_ot_b1_submitted_api_ok =
+                callback.native_ot_b1_submitted_api_ok;
+            out.round89_native_ot_b1_numerical_skips =
+                callback.native_ot_b1_numerical_skips;
+            out.round89_native_ot_b1_callback_seconds =
+                callback.native_ot_b1_callback_seconds;
+            out.round89_native_ot_b1_status =
+                !callback.native_ot_b1_failure.empty()
+                    ? "callback_failed:" + callback.native_ot_b1_failure
+                    : (callback.native_ot_b1_submitted_api_ok > 0
+                        ? "submitted_api_ok_not_internal_acceptance"
+                        : "active_no_submitted_cut");
+            std::ofstream summary(
+                request.native_log_path.string()+".round89.ot_b1.summary.json");
+            summary << std::setprecision(17)
+                << "{\"model_sha256\":"
+                << std::quoted(request.canonical_model_fingerprint)
+                << ",\"model_scope\":"
+                << std::quoted(request.canonical_model_scope)
+                << ",\"row_signature\":"
+                << std::quoted(request.canonical_row_signature)
+                << ",\"leaf_id\":" << std::quoted(request.leaf_id)
+                << ",\"solve_kind\":"
+                << std::quoted(out.terminal_mip ? "terminal_mip" : "partial_target_mip")
+                << ",\"status\":"
+                << std::quoted(out.round89_native_ot_b1_status)
+                << ",\"precrush\":" << out.gurobi_precrush_effective
+                << ",\"feasibility_tolerance\":"
+                << native_ot_b1_feasibility_tolerance
+                << ",\"audited_rows\":"
+                << out.round89_native_ot_b1_audited_rows
+                << ",\"pairs\":" << out.round89_native_ot_b1_pairs
+                << ",\"mipnode_calls\":"
+                << out.round89_native_ot_b1_mipnode_calls
+                << ",\"optimal_nodes\":"
+                << out.round89_native_ot_b1_optimal_nodes
+                << ",\"nonoptimal_nodes\":"
+                << out.round89_native_ot_b1_nonoptimal_nodes
+                << ",\"pairs_checked\":"
+                << out.round89_native_ot_b1_pairs_checked
+                << ",\"reliable_rows\":"
+                << out.round89_native_ot_b1_reliable_rows
+                << ",\"submitted_api_ok\":"
+                << out.round89_native_ot_b1_submitted_api_ok
+                << ",\"numerical_skips\":"
+                << out.round89_native_ot_b1_numerical_skips
+                << ",\"setup_seconds\":"
+                << out.round89_native_ot_b1_setup_seconds
+                << ",\"callback_seconds\":"
+                << out.round89_native_ot_b1_callback_seconds
+                << ",\"skip_reasons\":{";
+            bool first_reason = true;
+            for (const auto& [reason, count] : callback.native_ot_b1_skip_reasons) {
+                if (!first_reason) summary << ',';
+                first_reason = false;
+                summary << std::quoted(reason) << ':' << count;
+            }
+            summary << "}}\n";
+            summary.close();
+            if (!summary && callback.native_ot_b1_failure.empty()) {
+                callback.native_ot_b1_failure = "B1_summary_evidence_write_failed";
+                out.round89_native_ot_b1_status =
+                    "callback_failed:B1_summary_evidence_write_failed";
+            }
+        }
 
         if(resource_mip) {
             resource.cuts.close();resource.points.close();
@@ -3370,7 +3648,8 @@ public:
             !out.exact_zero_gap_roundtrip ||
             !out.model_fingerprint_matches_request ||
             !out.feasibility_consistency_gate || !domain_restore_ok ||
-            log_rc != 0) {
+            log_rc != 0 ||
+            (native_ot_b1_active && !callback.native_ot_b1_failure.empty())) {
             std::ostringstream reason;
             reason << "gurobi_external_gate:finalized="
                    << out.solver_finalization_reached
@@ -3383,9 +3662,24 @@ public:
                    << out.feasibility_consistency_gate
                    << ";integer_domain_restored=" << domain_restore_ok
                    << ";native_log_parameter_rc=" << log_rc;
+            if (native_ot_b1_active)
+                reason << ";round89_native_ot_b1_status="
+                       << out.round89_native_ot_b1_status;
             out.failure_reason = reason.str();
         } else {
             out.failure_reason = "none";
+        }
+        if (native_ot_b1_active && !callback.native_ot_b1_failure.empty()) {
+            // The solver may still return an interrupted bound after a
+            // callback API/evidence failure. Do not let the external paper
+            // controller mistake that as a successfully completed candidate.
+            out.solver_finalization_reached = false;
+            out.optimal = false;
+            out.native_bound_available = false;
+            out.incumbent_available = false;
+            out.native_bound_events.clear();
+            out.native_bound_target_reached = false;
+            out.native_bound_target_termination_requested = false;
         }
         if (out.lp_relaxation && round63_root_source_==request.native_log_path.string() &&
             (!out.lp_terminal_valid||!out.model_fingerprint_matches_request)) {

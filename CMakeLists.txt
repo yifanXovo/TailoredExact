@@ -32,6 +32,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/FileSha256.cpp
   src/ProcessPhaseLedger.cpp
   src/NativeEvidenceJournal.cpp
+  src/NativeOtB1.cpp
   src/DenseProgress.cpp
   src/GurobiCertificate.cpp
   src/GurobiProgress.cpp
@@ -121,6 +122,16 @@ if(EXACT_EBRP_ENABLE_GUROBI)
   endif()
 else()
   target_compile_definitions(exact_ebrp_core PUBLIC EXACT_EBRP_ENABLE_GUROBI=0)
+endif()
+
+if(EXACT_EBRP_ENABLE_GUROBI AND WIN32)
+  add_executable(Round89NativeOtB1Micro tests/round89_native_ot_b1_micro.cpp)
+  target_link_libraries(Round89NativeOtB1Micro PRIVATE exact_ebrp_core)
+  target_include_directories(Round89NativeOtB1Micro PRIVATE "${GUROBI_INCLUDE_DIR}")
+  add_test(NAME Round89NativeOtB1Pure
+    COMMAND Round89NativeOtB1Micro pure)
+  # The native off/static/callback toy is intentionally a separate, manually
+  # admitted command; a routine ctest must not start an Optimize call.
 endif()
 
 add_executable(ExactEBRP src/main.cpp)
