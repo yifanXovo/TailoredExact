@@ -1,0 +1,90 @@
+{
+  "arms": [
+    "B1",
+    "B2"
+  ],
+  "closure_helper_sha256": "129b9224ac36e44b52fcc911604938a024d79986f8bd5fe8a8ffd6b14d1b2934",
+  "diagnostic_sha256": "c1cb1776d1b1eef0f03977e00060c1690e5505517d0e4baa71feb3b672fa0756",
+  "historical_rowbank_or_warmstart": false,
+  "math_sha256": "2b8855609cf469098d050fcd9c89efac01b2cb41ee07f023b5a7b79f9ff71840",
+  "no_internal_budget_or_fallback": true,
+  "original_lp_each_arm": true,
+  "schema": "round88-ot-epigraph-prereg-v1",
+  "script_sha256": "5d49c3fc12cc806a8008e43d756bf9c46810b21e7efc2b64c2383da4624bd7da",
+  "solver_parameters": {
+    "FeasibilityTol": 1e-06,
+    "MIPGap": 0.0,
+    "OptimalityTol": 1e-06,
+    "Presolve": -1,
+    "Seed": 0,
+    "Threads": 1
+  },
+  "source_arm_order": [
+    [
+      "F2-root",
+      "B1"
+    ],
+    [
+      "F2-root",
+      "B2"
+    ],
+    [
+      "D7-root",
+      "B1"
+    ],
+    [
+      "D7-root",
+      "B2"
+    ],
+    [
+      "D7-child",
+      "B1"
+    ],
+    [
+      "D7-child",
+      "B2"
+    ]
+  ],
+  "source_order": [
+    "F2-root",
+    "D7-root",
+    "D7-child"
+  ],
+  "sources": {
+    "D7-child": {
+      "effective_gamma_l": "0",
+      "effective_gamma_u": "2625138976942465/18014398509481984",
+      "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+      "leaf_id": "L0.0",
+      "lp_sha256": "27cbb486939374c3f42eb7f1e97cd6ed20281b114115118c89434fa00e85c77f",
+      "parent_id": "L0",
+      "qualification_manifest": "E:\\codes\\ExactEBRP\\results\\unified_exact_round88\\ot_qualification_d7_l00_audit\\manifest.json",
+      "qualification_sha256": "e73e08318afe65d9c4d145f2dd8efe8732783b11e0628f347434b4093c2f09fd",
+      "support_fingerprint": "b8912b72618ceb976cd964c3d8213c5a17ca901d4d3f7e0f2a5880b2c5c90b98"
+    },
+    "D7-root": {
+      "effective_gamma_l": "0",
+      "effective_gamma_u": "2625138976942465/9007199254740992",
+      "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+      "leaf_id": "L0",
+      "lp_sha256": "06275aba5e2378d719390e295654849d8868fb92fd8b0366619e1c33fa713069",
+      "parent_id": "none",
+      "qualification_manifest": "E:\\codes\\ExactEBRP\\results\\unified_exact_round88\\ot_qualification_d7_audit_v4\\manifest.json",
+      "qualification_sha256": "a0996967e9278469defa43ab1c630b0d16f7e996062f71bf91efa9a656f99a4d",
+      "support_fingerprint": "53f3a088a1d0f64ad4f921015abd17ebc3f7c6c1b7a1f0e4203bf9a879524a8d"
+    },
+    "F2-root": {
+      "effective_gamma_l": "0",
+      "effective_gamma_u": "3987254278182067/4503599627370496",
+      "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "leaf_id": "L0",
+      "lp_sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091",
+      "parent_id": "none",
+      "qualification_manifest": "E:\\codes\\ExactEBRP\\results\\unified_exact_round88\\ot_qualification_f2_l0_audit\\manifest.json",
+      "qualification_sha256": "d223756f601a5f9c1966e5087e6ddace81bcf1b53130afdad2bb79366421b905",
+      "support_fingerprint": "25ec4215e95eda891b3ef566aa4be15a27d7b3b44e5b8101cb1e1c11e8855590"
+    }
+  },
+  "status": "prepared_not_admitted",
+  "whole_arm_seconds": 300.0
+}
