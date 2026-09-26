@@ -1,0 +1,35 @@
+{
+  "case": "D6",
+  "child_cpp_calls": 2,
+  "child_pid": 44792,
+  "child_returncode": 0,
+  "child_status": "completed_heuristic_endpoint",
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "E:\\codes\\ExactEBRP\\scripts\\round88_quantity_probe.py",
+    "diagnose",
+    "--case",
+    "D6",
+    "--out-dir",
+    "E:\\codes\\ExactEBRP\\results\\unified_exact_round88\\a2_endpoint_diagnostic_001\\D6"
+  ],
+  "final_hashes": {
+    "adapter_sha256": "6a06a03212dc5da954be57e7c81b5a0f67c77bea592720955dc9c2b8e3c9c77c",
+    "binary_sha256": "23d4fd53602d46f599f3f58e33c3ec96c4eec01b972e22ee0d4815cc42a54693",
+    "flow_sha256": "fdbe04bdc7b933397aac3ec4fa9d9f0b5adf99c8550c98d14e96ce89db43328d",
+    "input_sha256": "070c2c1413840a09a264d238bdfa320ef76d293a45cab919095851afdea8c01d",
+    "witness_sha256": "a8939cae620b6cdf6d20e3d2f957981bbc5144f9157b26dd5dbb5cfc91eb9c3c"
+  },
+  "preflight": {
+    "adapter_sha256": "6a06a03212dc5da954be57e7c81b5a0f67c77bea592720955dc9c2b8e3c9c77c",
+    "binary_sha256": "23d4fd53602d46f599f3f58e33c3ec96c4eec01b972e22ee0d4815cc42a54693",
+    "flow_sha256": "fdbe04bdc7b933397aac3ec4fa9d9f0b5adf99c8550c98d14e96ce89db43328d",
+    "input_sha256": "070c2c1413840a09a264d238bdfa320ef76d293a45cab919095851afdea8c01d",
+    "witness_sha256": "a8939cae620b6cdf6d20e3d2f957981bbc5144f9157b26dd5dbb5cfc91eb9c3c"
+  },
+  "status": "diagnostic_completed",
+  "timed_out": false,
+  "wall_clock_boundary": "before_supervision_json_write",
+  "whole_process_limit_seconds": 120.0,
+  "whole_process_wall_seconds": 0.2930363998748362
+}
