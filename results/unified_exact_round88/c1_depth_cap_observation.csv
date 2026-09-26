@@ -1,0 +1,11 @@
+run,role,arm,max_lp_depth_observed,adopted_leaf_depth_from_final_ledger,accepted_splits_from_final_ledger,depth8_cap_observation,split_decision_reasons,run_stop_reason,result_status,evidence_completeness
+01,D6,P-GRB,N/A,N/A,N/A,N/A,N/A,N/A (P depth audit),N/A,not_applicable
+02,D6,ENS-C,2,1,1,not_hit_in_completed_ledgers,adaptive_mass_preserve_child_infeasibility_split|adaptive_mass_no_strict_child_improvement,normal_return,optimal,complete_final_tree_and_lp_ledgers
+03,D7,ENS-C,1,0,0,not_hit_in_completed_ledgers,adaptive_mass_no_strict_child_improvement,normal_return,round31_c6_external_gini_tree_time_limit,complete_final_tree_and_lp_ledgers
+04,D7,P-GRB,N/A,N/A,N/A,N/A,N/A,N/A (P depth audit),N/A,not_applicable
+05,U6,P-GRB,N/A,N/A,N/A,N/A,N/A,N/A (P depth audit),N/A,not_applicable
+06,U6,ENS-C,>=2; exact maximum unknown,unknown (final ledger absent),unknown,not_observed; cannot_exclude,unavailable_due_hard_kill,whole_run_hard_stop,no_final_json,native_logs_positive; buffered_paper_ledger_lost
+07,F2,ENS-C,1,0,0,not_hit_in_completed_ledgers,adaptive_mass_score_below_tau_native_target|adaptive_mass_no_strict_child_improvement,normal_return,optimal,complete_final_tree_and_lp_ledgers
+08,F2,P-GRB,N/A,N/A,N/A,N/A,N/A,N/A (P depth audit),N/A,not_applicable
+09,F5,P-GRB,N/A,N/A,N/A,N/A,N/A,N/A (P depth audit),N/A,not_applicable
+10,F5,ENS-C,>=2; exact maximum unknown,unknown (final ledger absent),unknown,not_observed; cannot_exclude,unavailable_due_hard_kill,whole_run_hard_stop,no_final_json,native_logs_positive; buffered_paper_ledger_lost
