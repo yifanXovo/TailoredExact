@@ -26,7 +26,7 @@ The first six complete G3 runs (E8/S12, P-GRB/ENS-C/A1) all return original-prob
 | E8 | 1.891 | 2.750 | 2.765 |
 | S12 | 6.312 | 1.953 | 1.562 |
 
-These are single small-instance observations. Host prelaunch checks, post-exit processing and offline verification are separately retained; process totals are 6.375s for D6 startup and 17.233s for the six complete runs. A1 is not promoted. The remaining G3 roles are running under the accepted rest lease; no interim timing or gap is treated as a final result.
+These are single small-instance observations. Host prelaunch checks, post-exit processing and offline verification are separately retained; process totals are 6.375s for D6 startup and 17.233s for the six complete runs. A1 is not promoted. The remaining G3 roles are now complete, as reported below.
 
 All fifteen arms of the three preselected fixed-point diagnostics finish optimal:
 
@@ -40,6 +40,8 @@ Exact-rational Python separation alone costs 35.055s / 6.576s / 34.803s respecti
 
 The subsequent same-row-set test finishes all six arms optimal in 96.061s, with 27.907s shared source revalidation/model preparation. On the parent model, parent-selected / child-selected / union B1 rows give 0.1882996742 / 0.1906726694 / 0.1917810802; on the child, the same row sets give 0.1893702255 / 0.1937647972 / 0.1943018267. The exact union contains 2,343 rows and helps both models, but its parent LP solve takes 27.432s, a material cost. Complete formulation nesting has not been proved, so cross-model differences cannot be attributed solely to G bounds. Initial row-bank preparation costs another 25.476s. These are relaxation-strengthening results, not complete-algorithm acceleration.
 
-The unchanged A1 executable has now begun the remaining 18 preregistered G3 arms under the accepted smoke gate, with exclusive computation and worker-owned monitoring. No robust multi-instance benefit or large long-run campaign is claimed. Raw primal, residuals, rows, logs, scope and total costs are preserved; the larger generated cross-row bank will be archived after the timed screen releases the computation slot.
+All eighteen remaining G3 arms complete normally, with all audits and cross-arm checks passing, no retry and no severe-signal stop. D3 process seconds P / ENS / A1 are 597.141 (uncertified) / 153.797 / 153.531; C2 is 597.109 (uncertified) / 122.344 / 124.109. All three arms on D7/U6/F5/F6 remain uncertified at the 1200-second cutoff. D7/F5 ENS and A1 endpoints match; F6 A1's gap is slightly better (0.015460454 versus 0.016134134), while U6 is materially worse (0.030967676 versus 0.022362482, +38.48%) with a worse primal bound. Complete native process cost for the eighteen runs is 16113.577s, plus 4.656s prelaunch and 5.594s separately recorded offline audit.
+
+The coordinator retains ENS-C's 24+1 reference and does not advance the constructive-only switch alone to the larger panel: it reduces startup cost without a demonstrated robust additional whole-method gain, while weakening primal quality on U6 and the separate D6 startup diagnostic. This is not a confirmed severe-regression verdict. Raw evidence is preserved, with large archives pending; the quantity-flow adapter is now undergoing executable qualification, and repeated Gini-cut separation remains a proposed diagnostic. No promotion or large long-run campaign has begun.
 
 A read-only active-path audit also records R83's effective 50,000 support-row cap and top-8/top-6 compound decoder candidates. The configured two propagation rounds are not implemented as two rounds and must not be cited as a performance mechanism. These findings qualify the method description; no frozen C++ or runner behavior changed.

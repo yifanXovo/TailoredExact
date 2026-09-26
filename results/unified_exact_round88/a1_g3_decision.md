@@ -1,0 +1,13 @@
+# A1 complete-method screen: coordinator decision
+
+Decision: retain ENS-C's 24+1 startup as the reference. Keep A1 as an audited ablation, and do not advance the constructive-only switch alone to the larger G4 panel now. This is a research-priority decision, not a proof that A1 is uniformly slower or a confirmed severe-regression verdict.
+
+Root read all 24 final summary entries, the rest completion record and the runner report. All 24 original-problem audits pass; all eight instance cross-arm checks pass. The six smoke runs and remaining eighteen runs are one preregistered screen, with no failed attempt or retry. The A1 binary, original P model identity, input identities and numerical conventions remain frozen.
+
+On E8/S12/D3/C2, process wall seconds P / ENS / A1 are 1.891 / 2.750 / 2.765; 6.312 / 1.953 / 1.562; 597.141 (uncertified) / 153.797 / 153.531; and 597.109 (uncertified) / 122.344 / 124.109. Both ENS variants beat the observed P certification deadline on D3 and C2, but A1 adds little observable convergence benefit over ENS. These are single observations, not exact P convergence times or reproducible speed ratios.
+
+At the 1200-second whole-run cutoff, all arms on D7/U6/F5/F6 remain uncertified. A1 and ENS have identical final bounds on D7/F5; A1 improves the F6 gap from 0.016134134 to 0.015460454, but worsens U6 from 0.022362482 to 0.030967676 (+38.48%). U6's UB rises from 0.151420924 to 0.162016504 despite a better LB. This material tradeoff does not cross the preregistered severe-signal rule, and cannot establish eventual convergence ordering. The separate D6 startup test also loses UB quality when random starts are removed (0.157509804 to 0.171611627).
+
+Thus startup cost does fall substantially on large cases, but the saved seconds have not established a robust additional whole-method gain, while primal quality can fall. There is no need to spend a full replication/large-panel campaign on this switch alone before a new mechanism addresses that tradeoff. No instance-specific switch, changed tolerance, posthoc mode or proof of severe regression is introduced. Future evidence may reopen the uniform A1 hypothesis; current evidence does not justify promotion.
+
+Continue the independently reviewed quantity-flow mechanism's micro-qualification and preselected offline witness probes, and develop the Gini-cut separation-to-closure contract. Neither is yet a qualified end-to-end ENS candidate. Full runtime, preparation, offline audit and any failed diagnostic costs remain in their own evidence records. The main research goal remains active; a compiled paper-style LaTeX/PDF and sufficient actual comparisons are still required before any mainline promotion and broad long campaign.
