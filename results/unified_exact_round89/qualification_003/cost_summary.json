@@ -1,0 +1,33 @@
+{
+  "process_seconds": 0.48499999986961484,
+  "wrapper_seconds": 0.5010000001639128,
+  "native_process_seconds": 0.09299999987706542,
+  "native_wrapper_seconds": 0.10900000017136335,
+  "optimize_calls": 6,
+  "stages": [
+    {
+      "name": "fraction-oracle",
+      "exit_code": 0,
+      "process_wall_seconds": 0.07899999991059303,
+      "wrapper_wall_seconds": 0.07899999991059303
+    },
+    {
+      "name": "native-six-arm",
+      "exit_code": 0,
+      "process_wall_seconds": 0.09299999987706542,
+      "wrapper_wall_seconds": 0.10900000017136335
+    },
+    {
+      "name": "pure-json",
+      "exit_code": 0,
+      "process_wall_seconds": 0.04699999978765845,
+      "wrapper_wall_seconds": 0.04699999978765845
+    },
+    {
+      "name": "pure-round89",
+      "exit_code": 0,
+      "process_wall_seconds": 0.26600000029429793,
+      "wrapper_wall_seconds": 0.26600000029429793
+    }
+  ]
+}

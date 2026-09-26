@@ -18,6 +18,7 @@
 #include <iostream>
 #include <limits>
 #include <map>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -117,6 +118,25 @@ ebrp::NativeOtB1LinearModel wideFixture(double alpha1, double alpha2) {
     return m;
 }
 
+ebrp::NativeOtB1LinearModel parityExposureFixture() {
+    auto model = wideFixture(1.0, 1.0);
+    // This is one replacement exposure toy. Retain every state and every
+    // original row; disable only parity-incompatible selectors by bound.
+    for (int y=0; y<=5; ++y) {
+        if (y%2) model.upper_bounds[static_cast<std::size_t>(6+y)] = 0.0;
+        else model.upper_bounds[static_cast<std::size_t>(12+y)] = 0.0;
+    }
+    return model;
+}
+
+std::vector<double> parityFractionalPoint() {
+    std::vector<double> point(30, 0.0);
+    point[1]=point[2]=point[3]=point[4]=1.0;
+    point[6]=point[8]=0.5;
+    point[13]=1.0;
+    return point;
+}
+
 std::vector<double> fractionalPoint() {
     std::vector<double> point(18, 0.0);
     point[1] = point[2] = point[3] = point[4] = 1.0;
@@ -214,6 +234,15 @@ void pure() {
     require(wide.stations[0].states[3].nominal_support == 1.0 &&
             wide.stations[0].states[3].support_error_upper > 0.0,
             "gamma-three rounded-product boundary absent");
+    const auto parity = ebrp::prepareNativeOtB1(parityExposureFixture(),2);
+    require(parity.valid && parity.stations[0].states.size()==6 &&
+            parity.stations[1].states.size()==6,
+            "parity exposure model rejected:"+parity.reason);
+    const auto parity_cut = ebrp::separateNativeOtB1(
+        parity.pairs.front(),parityFractionalPoint(),1e-6);
+    require(parity_cut.status==ebrp::NativeOtB1Cut::Status::Reliable &&
+            parity_cut.reliable_violation_lower > 0.9,
+            "parity fractional witness not separated:"+parity_cut.reason);
     auto invalid_r_bound = wideFixture(1.0/3.0,1.0/7.0);
     invalid_r_bound.upper_bounds[3] = std::numeric_limits<double>::infinity();
     require(!ebrp::prepareNativeOtB1(invalid_r_bound,2).valid,
@@ -372,6 +401,7 @@ struct Api {
     decltype(&GRBsetintparam) setintparam = nullptr;
     decltype(&GRBsetdblparam) setdblparam = nullptr;
     decltype(&GRBgetintparam) getintparam = nullptr;
+    decltype(&GRBgetdblparam) getdblparam = nullptr;
     decltype(&GRBsetcallbackfunc) setcallback = nullptr;
     decltype(&GRBcbget) cbget = nullptr;
     decltype(&GRBcbcut) cbcut = nullptr;
@@ -393,7 +423,8 @@ struct Api {
         LOAD(newmodel,"GRBnewmodel"); LOAD(addconstr,"GRBaddconstr");
         LOAD(update,"GRBupdatemodel"); LOAD(getenv,"GRBgetenv");
         LOAD(setintparam,"GRBsetintparam"); LOAD(setdblparam,"GRBsetdblparam");
-        LOAD(getintparam,"GRBgetintparam"); LOAD(setcallback,"GRBsetcallbackfunc");
+        LOAD(getintparam,"GRBgetintparam"); LOAD(getdblparam,"GRBgetdblparam");
+        LOAD(setcallback,"GRBsetcallbackfunc");
         LOAD(cbget,"GRBcbget"); LOAD(cbcut,"GRBcbcut");
         LOAD(optimize,"GRBoptimize"); LOAD(getintattr,"GRBgetintattr");
         LOAD(getdblattr,"GRBgetdblattr");
@@ -411,14 +442,24 @@ struct ToyCallback {
     int original_columns = 0;
     long long optimal_nodes = 0;
     long long fractional_nodes = 0;
+    long long fractional_reliable_rows = 0;
     long long reliable_rows = 0;
     long long submitted_api_ok = 0;
+    long long fractional_submitted_api_ok = 0;
     int failure_code = 0;
+    double integrality_tolerance = 0.0;
+    double feasibility_tolerance = 0.0;
+    std::vector<int> enabled_selector_columns;
+    std::vector<double> first_fractional_point;
+    std::vector<double> first_reliable_point;
+    ebrp::NativeOtB1Cut first_reliable_cut;
 };
 
 int __stdcall callback(GRBmodel*, void* cbdata, int where, void* userdata) {
     if (where != GRB_CB_MIPNODE) return 0;
     auto& state = *static_cast<ToyCallback*>(userdata);
+    if (state.failure_code != 0) return 0;
+    try {
     int status = 0;
     if (state.api->cbget(cbdata, where, GRB_CB_MIPNODE_STATUS, &status)) {
         state.failure_code = -1;
@@ -431,17 +472,40 @@ int __stdcall callback(GRBmodel*, void* cbdata, int where, void* userdata) {
         state.failure_code = -2;
         return 0;
     }
-    if (std::fabs(x[6]-0.5) < 1e-6 && std::fabs(x[8]-0.5) < 1e-6 &&
-        x[5] < 0.5) ++state.fractional_nodes;
-    const auto cut = ebrp::separateNativeOtB1(*state.pair, x, 1e-6);
+    const bool fractional_selector = std::any_of(
+        state.enabled_selector_columns.begin(),
+        state.enabled_selector_columns.end(), [&](int column) {
+            const double value = x[static_cast<std::size_t>(column)];
+            return std::isfinite(value) &&
+                value > state.integrality_tolerance &&
+                value < 1.0-state.integrality_tolerance;
+        });
+    if (fractional_selector) {
+        ++state.fractional_nodes;
+        if (state.first_fractional_point.empty())
+            state.first_fractional_point = x;
+    }
+    const auto cut = ebrp::separateNativeOtB1(
+        *state.pair, x, state.feasibility_tolerance);
     if (cut.status != ebrp::NativeOtB1Cut::Status::Reliable) return 0;
     ++state.reliable_rows;
+    if (fractional_selector) ++state.fractional_reliable_rows;
+    if (state.first_reliable_point.empty()) {
+        state.first_reliable_point = x;
+        state.first_reliable_cut = cut;
+    }
     const int rc = state.api->cbcut(cbdata,
         static_cast<int>(cut.indices.size()),
         const_cast<int*>(cut.indices.data()),
         const_cast<double*>(cut.coefficients.data()), cut.sense, cut.rhs);
     if (rc) state.failure_code = rc;
-    else ++state.submitted_api_ok;
+    else {
+        ++state.submitted_api_ok;
+        if (fractional_selector) ++state.fractional_submitted_api_ok;
+    }
+    } catch (...) {
+        state.failure_code = -99;
+    }
     return 0;
 }
 
@@ -455,14 +519,183 @@ struct ToyResult {
     double runtime = 0.0;
     std::vector<double> primal;
     ToyCallback observer;
+    std::filesystem::path model_export;
+    std::string model_sha256;
+    std::map<std::string,int> integer_parameter_readback;
+    std::map<std::string,double> double_parameter_readback;
+    bool static_cut_added = false;
+    ebrp::NativeOtB1Cut static_cut;
 };
+
+void writeValues(std::ostream& out, const std::vector<double>& values) {
+    out << '[';
+    for (std::size_t k=0; k<values.size(); ++k) {
+        if (k) out << ',';
+        out << values[k];
+    }
+    out << ']';
+}
+
+struct PrimalDomainResiduals {
+    double bounds = 0.0;
+    double integrality = 0.0;
+};
+
+PrimalDomainResiduals domainResiduals(
+    const ebrp::NativeOtB1LinearModel& model,
+    const std::vector<double>& values) {
+    require(values.size()==model.names.size(),"toy primal domain length mismatch");
+    PrimalDomainResiduals result;
+    for (std::size_t col=0; col<values.size(); ++col) {
+        const double value=values[col];
+        require(std::isfinite(value),"toy primal is nonfinite");
+        result.bounds=std::max(result.bounds,
+            std::max(model.lower_bounds[col]-value,
+                     value-model.upper_bounds[col]));
+        if (model.types[col]=='B' || model.types[col]=='I')
+            result.integrality=std::max(result.integrality,
+                std::fabs(value-std::round(value)));
+    }
+    return result;
+}
+
+double writeOriginalRowResiduals(
+    std::ostream& out, const ebrp::NativeOtB1LinearModel& model,
+    const std::vector<double>& values) {
+    require(values.size()==model.names.size(),
+            "toy primal length does not match original model");
+    double maximum = 0.0;
+    out << '[';
+    for (std::size_t row_number=0; row_number<model.senses.size();
+         ++row_number) {
+        if (row_number) out << ',';
+        double activity = 0.0;
+        for (int k=model.row_starts[row_number];
+             k<model.row_starts[row_number+1]; ++k)
+            activity += model.coefficients[static_cast<std::size_t>(k)] *
+                values[static_cast<std::size_t>(model.column_indices[k])];
+        const double rhs = model.rhs[row_number];
+        const char sense = model.senses[row_number];
+        const double violation = sense=='='
+            ? std::fabs(activity-rhs)
+            : sense=='>' ? std::max(0.0,rhs-activity)
+                         : std::max(0.0,activity-rhs);
+        maximum = std::max(maximum,violation);
+        out << "{\"row\":" << row_number << ",\"sense\":"
+            << std::quoted(std::string(1,sense))
+            << ",\"rhs\":" << rhs << ",\"activity\":"
+            << activity << ",\"violation\":" << violation << '}';
+    }
+    out << ']';
+    return maximum;
+}
+
+void writeCut(std::ostream& out, const ebrp::NativeOtB1Cut& cut,
+              const std::vector<double>& values) {
+    out << "{\"status\":" << std::quoted(cut.reason)
+        << ",\"sense\":" << std::quoted(std::string(1,cut.sense))
+        << ",\"rhs\":" << cut.rhs << ",\"indices\":[";
+    double activity = 0.0;
+    for (std::size_t k=0; k<cut.indices.size(); ++k) {
+        if (k) out << ',';
+        out << cut.indices[k];
+        if (values.size()>static_cast<std::size_t>(cut.indices[k]))
+            activity += cut.coefficients[k] *
+                values[static_cast<std::size_t>(cut.indices[k])];
+    }
+    out << "],\"coefficients\":";
+    writeValues(out,cut.coefficients);
+    out << ",\"activity\":" << activity
+        << ",\"violation\":" << std::max(0.0,cut.rhs-activity)
+        << ",\"reliable_violation_lower\":"
+        << cut.reliable_violation_lower << '}';
+}
+
+void writeDirectArmRecord(const std::filesystem::path& path,
+    const ToyResult& result, const ebrp::NativeOtB1LinearModel& model) {
+    require(!std::filesystem::exists(path),"direct arm raw receipt already exists");
+    std::ofstream out(path);
+    require(static_cast<bool>(out),"direct arm raw receipt open failed");
+    out << std::setprecision(17) << "{\"arm\":" << std::quoted(result.arm)
+        << ",\"model_path\":" << std::quoted(result.model_export.string())
+        << ",\"model_sha256\":" << std::quoted(result.model_sha256)
+        << ",\"optimize_rc\":" << result.optimize_rc
+        << ",\"status\":" << result.status
+        << ",\"objective\":" << result.objective
+        << ",\"work\":" << result.work
+        << ",\"runtime\":" << result.runtime
+        << ",\"parameter_readback_int\":{";
+    bool first = true;
+    for (const auto& [name,value] : result.integer_parameter_readback) {
+        if (!first) out << ',';
+        first = false;
+        out << std::quoted(name) << ':' << value;
+    }
+    out << "},\"parameter_readback_double\":{";
+    first = true;
+    for (const auto& [name,value] : result.double_parameter_readback) {
+        if (!first) out << ',';
+        first = false;
+        out << std::quoted(name) << ':' << value;
+    }
+    out << "},\"raw_primal\":";
+    writeValues(out,result.primal);
+    out << ",\"original_rows\":";
+    if (result.primal.size()==model.names.size()) {
+        const double maximum = writeOriginalRowResiduals(
+            out,model,result.primal);
+        const auto domain=domainResiduals(model,result.primal);
+        out << ",\"maximum_original_row_violation\":" << maximum
+            << ",\"maximum_bound_violation\":" << domain.bounds
+            << ",\"maximum_integrality_violation\":"
+            << domain.integrality;
+    } else out << "null,\"maximum_original_row_violation\":null";
+    out << ",\"static_row\":";
+    if (result.static_cut_added) writeCut(out,result.static_cut,result.primal);
+    else out << "null";
+    out << ",\"callback\":{\"optimal_nodes\":"
+        << result.observer.optimal_nodes
+        << ",\"fractional_selector_nodes\":"
+        << result.observer.fractional_nodes
+        << ",\"fractional_reliable_rows\":"
+        << result.observer.fractional_reliable_rows
+        << ",\"reliable_rows\":" << result.observer.reliable_rows
+        << ",\"submitted_api_ok\":"
+        << result.observer.submitted_api_ok
+        << ",\"fractional_submitted_api_ok\":"
+        << result.observer.fractional_submitted_api_ok
+        << ",\"failure_code\":" << result.observer.failure_code
+        << ",\"integrality_tolerance_readback\":"
+        << result.observer.integrality_tolerance
+        << ",\"feasibility_tolerance_readback\":"
+        << result.observer.feasibility_tolerance
+        << ",\"enabled_selector_columns\":[";
+    for (std::size_t k=0; k<result.observer.enabled_selector_columns.size();
+         ++k) {
+        if (k) out << ',';
+        out << result.observer.enabled_selector_columns[k];
+    }
+    out << "],\"first_fractional_primal\":";
+    writeValues(out,result.observer.first_fractional_point);
+    out << ",\"first_reliable_primal\":";
+    writeValues(out,result.observer.first_reliable_point);
+    out << ",\"first_reliable_cut\":";
+    if (!result.observer.first_reliable_point.empty())
+        writeCut(out,result.observer.first_reliable_cut,
+                 result.observer.first_reliable_point);
+    else out << "null";
+    out << "}}\n";
+    out.flush();
+    require(static_cast<bool>(out),"direct arm raw receipt write failed");
+}
 
 ToyResult runToy(Api& api, const std::string& arm,
                  const ebrp::NativeOtB1LinearModel& fixture_model,
                  const ebrp::NativeOtB1Pair& pair,
-                 const std::filesystem::path& canonical_export) {
+                 const std::filesystem::path& model_export) {
     ToyResult result;
     result.arm = arm;
+    result.model_export = model_export;
     GRBenv* env = nullptr;
     GRBmodel* model = nullptr;
     try {
@@ -491,8 +724,18 @@ ToyResult runToy(Api& api, const std::string& arm,
                 fixture_model.senses[r], fixture_model.rhs[r], nullptr) == 0,
                 "toy original row add failed");
         }
+        GRBenv* model_env = api.getenv(model);
+        require(model_env != nullptr, "toy model environment missing");
+        double static_feasibility_tolerance = 0.0;
+        require(api.getdblparam(model_env, GRB_DBL_PAR_FEASIBILITYTOL,
+                                &static_feasibility_tolerance)==0 &&
+                std::isfinite(static_feasibility_tolerance) &&
+                static_feasibility_tolerance>=0.0,
+                "toy FeasibilityTol readback failed");
         if (arm == "static") {
-            const auto cut = ebrp::separateNativeOtB1(pair, fractionalPoint(), 1e-6);
+            const auto cut = ebrp::separateNativeOtB1(
+                pair, parityFractionalPoint(),
+                static_feasibility_tolerance);
             require(cut.status == ebrp::NativeOtB1Cut::Status::Reliable,
                     "toy static B1 row missing");
             require(api.addconstr(model, static_cast<int>(cut.indices.size()),
@@ -500,13 +743,14 @@ ToyResult runToy(Api& api, const std::string& arm,
                 const_cast<double*>(cut.coefficients.data()),
                 cut.sense, cut.rhs, "static_B1") == 0,
                 "toy static B1 add failed");
+            result.static_cut_added = true;
+            result.static_cut = cut;
         }
         require(api.update(model) == 0, "toy update failed");
-        if (arm == "off")
-            require(api.write(model, canonical_export.string().c_str()) == 0,
-                    "toy canonical LP export failed");
-        GRBenv* model_env = api.getenv(model);
-        require(model_env != nullptr, "toy model environment missing");
+        require(api.write(model, model_export.string().c_str()) == 0,
+                "toy arm LP export failed");
+        result.model_sha256 = ebrp::fileSha256(model_export);
+        require(!result.model_sha256.empty(), "toy arm LP hash failed");
         for (const auto& [name, value] :
              std::vector<std::pair<const char*, int>>{
                  {GRB_INT_PAR_OUTPUTFLAG,0}, {GRB_INT_PAR_THREADS,1},
@@ -521,9 +765,42 @@ ToyResult runToy(Api& api, const std::string& arm,
         require(api.getintparam(model_env, GRB_INT_PAR_PRECRUSH,
                                 &result.precrush) == 0,
                 "toy PreCrush readback failed");
+        for (const char* name : {GRB_INT_PAR_OUTPUTFLAG,
+                 GRB_INT_PAR_THREADS,GRB_INT_PAR_SEED,
+                 GRB_INT_PAR_PRESOLVE,GRB_INT_PAR_CUTS,
+                 GRB_INT_PAR_PRECRUSH}) {
+            int value = 0;
+            require(api.getintparam(model_env,name,&value)==0,
+                    std::string("toy integer parameter readback failed:")+name);
+            result.integer_parameter_readback.emplace(name,value);
+        }
+        for (const char* name : {GRB_DBL_PAR_HEURISTICS,
+                 GRB_DBL_PAR_MIPGAP,GRB_DBL_PAR_INTFEASTOL,
+                 GRB_DBL_PAR_FEASIBILITYTOL}) {
+            double value = 0.0;
+            require(api.getdblparam(model_env,name,&value)==0,
+                    std::string("toy double parameter readback failed:")+name);
+            result.double_parameter_readback.emplace(name,value);
+        }
         result.observer.api = &api;
         result.observer.pair = &pair;
         result.observer.original_columns = count;
+        result.observer.integrality_tolerance =
+            result.double_parameter_readback.at(GRB_DBL_PAR_INTFEASTOL);
+        result.observer.feasibility_tolerance =
+            result.double_parameter_readback.at(GRB_DBL_PAR_FEASIBILITYTOL);
+        require(std::isfinite(result.observer.integrality_tolerance) &&
+                result.observer.integrality_tolerance>=0.0 &&
+                result.observer.integrality_tolerance<0.5 &&
+                std::isfinite(result.observer.feasibility_tolerance) &&
+                result.observer.feasibility_tolerance>=0.0 &&
+                result.observer.feasibility_tolerance==
+                    static_feasibility_tolerance,
+                "toy tolerance readback invalid or changed");
+        for (int col=0; col<count; ++col)
+            if (fixture_model.types[static_cast<std::size_t>(col)]=='B' &&
+                fixture_model.upper_bounds[static_cast<std::size_t>(col)]>0.0)
+                result.observer.enabled_selector_columns.push_back(col);
         if (arm == "callback")
             require(api.setcallback(model, callback, &result.observer) == 0,
                     "toy callback register failed");
@@ -556,17 +833,130 @@ struct BackendToyResult {
     ebrp::FixedIntervalMipOutcome outcome;
 };
 
+void writeBackendArmRecord(const std::filesystem::path& path,
+    const std::string& arm, const ebrp::FixedIntervalMipRequest& request,
+    const ebrp::FixedIntervalMipOutcome& outcome,
+    const ebrp::FixedIntervalMipBackendStats& stats,
+    const ebrp::NativeOtB1LinearModel& original_model) {
+    require(!std::filesystem::exists(path),"backend arm raw receipt already exists");
+    std::ofstream out(path);
+    require(static_cast<bool>(out),"backend arm raw receipt open failed");
+    out << std::setprecision(17) << "{\"arm\":" << std::quoted(arm)
+        << ",\"canonical_model_path\":"
+        << std::quoted(request.canonical_model_path.string())
+        << ",\"canonical_model_sha256\":"
+        << std::quoted(request.canonical_model_fingerprint)
+        << ",\"canonical_model_scope\":"
+        << std::quoted(request.canonical_model_scope)
+        << ",\"canonical_row_signature\":"
+        << std::quoted(request.canonical_row_signature)
+        << ",\"policy\":" << std::quoted(request.interval_mip_policy)
+        << ",\"native_log_path\":"
+        << std::quoted(request.native_log_path.string())
+        << ",\"native_log_sha256\":"
+        << std::quoted(std::filesystem::exists(request.native_log_path)
+            ? ebrp::fileSha256(request.native_log_path) : std::string());
+    const std::filesystem::path summary_path =
+        request.native_log_path.string()+".round89.ot_b1.summary.json";
+    out << ",\"B1_summary_path\":"
+        << std::quoted(outcome.round89_native_ot_b1_active
+            ? summary_path.string() : std::string())
+        << ",\"B1_summary_sha256\":"
+        << std::quoted(outcome.round89_native_ot_b1_active &&
+                       std::filesystem::exists(summary_path)
+            ? ebrp::fileSha256(summary_path) : std::string())
+        << ",\"capture_lp_primal_dual_evidence\":"
+        << std::boolalpha << request.capture_lp_primal_dual_evidence
+        << ",\"optimize_rc\":" << outcome.optimize_return_code
+        << ",\"status\":" << std::quoted(outcome.native_status)
+        << ",\"failure_reason\":" << std::quoted(outcome.failure_reason)
+        << ",\"finalized\":" << outcome.solver_finalization_reached
+        << ",\"optimal\":" << outcome.optimal
+        << ",\"native_bound_available\":"
+        << outcome.native_bound_available
+        << ",\"native_bound\":" << outcome.native_bound
+        << ",\"incumbent_available\":" << outcome.incumbent_available
+        << ",\"incumbent_objective\":"
+        << outcome.incumbent_objective
+        << ",\"model_fingerprint_matches_request\":"
+        << outcome.model_fingerprint_matches_request
+        << ",\"B1_active\":" << outcome.round89_native_ot_b1_active
+        << ",\"B1_audit_valid\":"
+        << outcome.round89_native_ot_b1_audit_valid
+        << ",\"B1_audited_rows\":"
+        << outcome.round89_native_ot_b1_audited_rows
+        << ",\"B1_pairs\":" << outcome.round89_native_ot_b1_pairs
+        << ",\"B1_mipnode_calls\":"
+        << outcome.round89_native_ot_b1_mipnode_calls
+        << ",\"B1_optimal_nodes\":"
+        << outcome.round89_native_ot_b1_optimal_nodes
+        << ",\"B1_reliable_rows\":"
+        << outcome.round89_native_ot_b1_reliable_rows
+        << ",\"B1_submitted_api_ok\":"
+        << outcome.round89_native_ot_b1_submitted_api_ok
+        << ",\"B1_numerical_skips\":"
+        << outcome.round89_native_ot_b1_numerical_skips
+        << ",\"B1_status\":"
+        << std::quoted(outcome.round89_native_ot_b1_status)
+        << ",\"runtime\":" << outcome.solver_runtime_seconds
+        << ",\"work\":" << outcome.work
+        << ",\"backend_parameter_readback\":{\"threads\":"
+        << stats.threads_effective << ",\"presolve\":"
+        << stats.presolve_effective << ",\"seed\":"
+        << stats.seed_effective << ",\"mip_gap\":"
+        << stats.mip_gap_effective << ",\"mip_gap_abs\":"
+        << stats.mip_gap_abs_effective << "}"
+        << ",\"raw_primal_scope\":"
+        << std::quoted(outcome.lp_relaxation
+            ? "lp_via_frozen_outcome_if_available"
+            : "backend_mip_raw_primal_unavailable_via_frozen_interface")
+        << ",\"raw_primal\":";
+    std::map<std::string,double> values_by_name;
+    if (outcome.lp_relaxation && outcome.lp_primal_values_available &&
+        !outcome.lp_primal_dual_variable_evidence.empty()) {
+        out << '[';
+        for (std::size_t k=0;
+             k<outcome.lp_primal_dual_variable_evidence.size(); ++k) {
+            if (k) out << ',';
+            const auto& item=outcome.lp_primal_dual_variable_evidence[k];
+            out << "{\"name\":" << std::quoted(item.name)
+                << ",\"value\":" << item.primal_value << '}';
+            values_by_name.emplace(item.name,item.primal_value);
+        }
+        out << ']';
+    } else out << "null";
+    out << ",\"original_rows\":";
+    std::vector<double> ordered_values;
+    for (const auto& name : original_model.names) {
+        const auto found=values_by_name.find(name);
+        if (found==values_by_name.end()) {
+            ordered_values.clear();
+            break;
+        }
+        ordered_values.push_back(found->second);
+    }
+    if (ordered_values.size()==original_model.names.size()) {
+        const double maximum=writeOriginalRowResiduals(
+            out,original_model,ordered_values);
+        out << ",\"maximum_original_row_violation\":" << maximum;
+    } else out << "null,\"maximum_original_row_violation\":null";
+    out << "}\n";
+    out.flush();
+    require(static_cast<bool>(out),"backend arm raw receipt write failed");
+}
+
 std::vector<BackendToyResult> runBackendToy(
     const std::filesystem::path& canonical,
     const std::filesystem::path& dll,
     const std::filesystem::path& receipt,
-    std::ostream& arm_receipts) {
+    std::ostream& arm_receipts,
+    const ebrp::NativeOtB1LinearModel& original_model) {
     ebrp::Instance instance;
     instance.name = "round89_native_B1_isolated_backend_toy";
     instance.V = 2;
     instance.M = 1;
-    instance.Q = {2};
-    instance.capacity = {0,2,2};
+    instance.Q = {5};
+    instance.capacity = {0,5,5};
     instance.initial = {0,1,1};
     instance.target = {0,1,1};
     instance.weights = {0.0,1.0,1.0};
@@ -605,8 +995,12 @@ std::vector<BackendToyResult> runBackendToy(
         request.native_log_path =
             receipt.string() + "." + name + ".gurobi.log";
         request.interval_mip_policy = "round55-vd-p";
+        request.capture_lp_primal_dual_evidence =
+            kind == ebrp::FixedIntervalSolveKind::PaperLpRelaxation;
         results.push_back({name, backend->solve(request)});
         const auto& out = results.back().outcome;
+        writeBackendArmRecord(receipt.string()+"."+name+".raw.json",
+            name,request,out,backend->stats(),original_model);
         arm_receipts << "{\"arm\":" << std::quoted(name)
             << ",\"optimize_rc\":" << out.optimize_return_code
             << ",\"status\":" << std::quoted(out.native_status)
@@ -641,7 +1035,7 @@ std::vector<BackendToyResult> runBackendToy(
 
 void native(const std::filesystem::path& dll,
             const std::filesystem::path& receipt) {
-    const auto m = fixture(1.0, 1.0);
+    const auto m = parityExposureFixture();
     const auto prepared = ebrp::prepareNativeOtB1(m, 2);
     require(prepared.valid && prepared.pairs.size()==1,
             "native toy pure audit failed:"+prepared.reason);
@@ -653,8 +1047,12 @@ void native(const std::filesystem::path& dll,
     require(static_cast<bool>(arm_receipts), "native arm receipt open failed");
     arm_receipts << std::setprecision(17);
     for (const std::string arm : {"off", "static", "callback"}) {
-        results.push_back(runToy(api, arm, m, prepared.pairs.front(), canonical));
+        const std::filesystem::path model_export = arm=="off"
+            ? canonical : std::filesystem::path(receipt.string()+"."+arm+".lp");
+        results.push_back(runToy(api, arm, m, prepared.pairs.front(), model_export));
         const auto& completed = results.back();
+        writeDirectArmRecord(receipt.string()+"."+arm+".raw.json",
+            completed,m);
         arm_receipts << "{\"arm\":" << std::quoted(arm)
             << ",\"optimize_rc\":" << completed.optimize_rc
             << ",\"status\":" << completed.status
@@ -669,7 +1067,7 @@ void native(const std::filesystem::path& dll,
         require(static_cast<bool>(arm_receipts), "native arm receipt write failed");
     }
     const auto backend_results = runBackendToy(
-        canonical, dll, receipt, arm_receipts);
+        canonical, dll, receipt, arm_receipts, m);
     std::ofstream out(receipt);
     require(static_cast<bool>(out), "native receipt open failed");
     out << std::setprecision(17) << "{\"toy_only_parameters\":{"
@@ -724,14 +1122,26 @@ void native(const std::filesystem::path& dll,
         require(r.primal.size() == m.names.size() &&
                 r.primal[5] + 1e-6 >= std::fabs(r.primal[3]-r.primal[4]),
                 "toy original h row/physical witness mismatch:"+r.arm);
+        std::ostringstream row_sink;
+        const double maximum_row = writeOriginalRowResiduals(
+            row_sink,m,r.primal);
+        const auto domain = domainResiduals(m,r.primal);
+        require(maximum_row<=1e-6 && domain.bounds<=1e-6 &&
+                domain.integrality<=1e-6,
+                "toy original rows/domain witness mismatch:"+r.arm);
     }
     const auto& cb = results[2];
     require(cb.precrush == 1 && cb.observer.optimal_nodes > 0 &&
             cb.observer.fractional_nodes > 0 &&
-            cb.observer.reliable_rows > 0 &&
-            cb.observer.submitted_api_ok > 0 &&
+            cb.observer.fractional_reliable_rows > 0 &&
+            cb.observer.fractional_submitted_api_ok > 0 &&
             cb.observer.failure_code == 0,
             "toy callback qualification inapplicable_or_failed");
+    for (std::size_t k=1; k<backend_results.size(); ++k)
+        require(backend_results[k].outcome.round89_native_ot_b1_mipnode_calls>0 &&
+                backend_results[k].outcome.round89_native_ot_b1_submitted_api_ok>0,
+                "toy production callback exposure inapplicable:"+
+                    backend_results[k].arm);
 }
 } // namespace
 
@@ -750,7 +1160,7 @@ int main(int argc, char** argv) {
         if (argc == 4 && std::string(argv[1]) == "native") {
             // Preserve paid setup/Optimize failures even when the three-arm
             // success receipt could not be completed.
-            std::ofstream failed(argv[3]);
+            std::ofstream failed(std::string(argv[3])+".failure.json");
             if (failed)
                 failed << std::setprecision(17)
                     << "{\"status\":\"failed\",\"reason\":"

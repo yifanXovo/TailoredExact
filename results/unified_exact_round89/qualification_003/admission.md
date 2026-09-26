@@ -1,0 +1,5 @@
+# Batch003 bounded toy qualification admission
+
+Root admitted exactly one execution under `qualification_003_lease.json`, SHA-256 `a9c623a7d80dd55579bff230d80c711c5894cfa85d3db924cdc026e52e26d72b`. The independent static review `qualification_003_toy_design_review.md` matched its recorded SHA-256 `e77f14f19a4757cc85aa03925f0a5401193490f2ab7218909e249fcab5a4c0b2`. The admitted Micro source SHA-256 was `7669dd38992d238737b5a6d0e5f8a042e0458b5036d8bab070ca1dc29fbcd279` and executable SHA-256 `9d268d10a6ab044869ff138bbc87c450997156e4bb7d183a3b7e011656f8b5d8`. All nine source and both binary hashes matched before launch.
+
+Permitted commands: Micro `pure` once; Micro `pure-json` once and the independent Fraction oracle once; if those pass, Micro `native` once with exactly six toy Optimize arms and a whole-process 120 s cap. No build, earlier regression rerun, parameter search, automatic retry, real-instance solve, or source mutation. The recorder is the previously qualified outer command wrapper, copied byte-identically for this batch. Prior qualification_001/_002 and preparation evidence remain in their original directories.
