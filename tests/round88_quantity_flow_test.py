@@ -191,7 +191,9 @@ class QuantityFlowTests(unittest.TestCase):
         self.assertEqual(outcome.accepted_original_objective, F(9, 4))
         self.assertEqual(outcome.primitive_steps, 1)
         self.assertEqual(outcome.certificate.integer_flow_cost,
-                         independent_cost(outcome.proposal_inventory) *
+                         sum((g * (a - s.initial) for g, a, s in
+                              zip(weights, outcome.proposal_inventory,
+                                  problem.stations)), F(0)) *
                          outcome.certificate.integer_cost_scale)
         independently_check_certificate(self, outcome.certificate)
         independently_check_network_arcs(
