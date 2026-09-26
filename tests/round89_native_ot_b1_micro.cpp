@@ -91,6 +91,8 @@ ebrp::NativeOtB1LinearModel wideFixture(double alpha1, double alpha2) {
     m.lower_bounds.assign(m.names.size(), 0.0);
     m.upper_bounds.assign(m.names.size(), 10.0);
     m.upper_bounds[0] = 0.0;
+    m.upper_bounds[1] = 5.0;
+    m.upper_bounds[2] = 5.0;
     for (int col=6; col<18; ++col) m.upper_bounds[col]=1.0;
     for (int col=18; col<30; ++col) m.upper_bounds[col]=0.0;
     m.row_starts = {0};
