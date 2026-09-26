@@ -2609,6 +2609,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                "right_lp_optimal,right_lp_infeasible,right_lp_bound,"
                "completion_status\n";
         round90_split_ledger.flush();
+        if (!round90_split_ledger) {
+            throw std::runtime_error(
+                "round90_split_choice_ledger_open_or_header_write_failed");
+        }
     }
     if (round47_active) {
         round47_adaptive_mass_ledger
@@ -6323,6 +6327,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 round90_split_ledger << ',' << csvField(completion_status)
                                      << '\n';
                 round90_split_ledger.flush();
+                if (!round90_split_ledger) {
+                    throw std::runtime_error(
+                        "round90_split_choice_ledger_write_failed");
+                }
             };
             if (options.round90_lp_g_split && !round90_split_ledger) {
                 hard_failure = true;
