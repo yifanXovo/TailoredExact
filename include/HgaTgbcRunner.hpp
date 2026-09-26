@@ -38,6 +38,7 @@ struct HgaTgbcOptions {
     // Round73 only: a paid, physically verified construction supplies one
     // additional permutation seed to the finite descent. Never read from disk.
     bool joint_constructive_seed = false;
+    bool round88_constructive_only_descent = false;
     std::vector<RoutePlan> joint_constructive_routes;
 };
 

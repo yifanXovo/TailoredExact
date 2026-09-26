@@ -1,0 +1,17 @@
+{
+  "schema": "round88-ot-second-batch-admission-v1",
+  "authorized_by": "Astra",
+  "status": "authorized_once_sequentially",
+  "preregistration_sha256": "7320ccf28b60bdffb3b58e7a60a51e4c28d758749c857b4dbbacf3233ae9cb02",
+  "manifest_sha256_in_order": [
+    "d223756f601a5f9c1966e5087e6ddace81bcf1b53130afdad2bb79366421b905",
+    "e73e08318afe65d9c4d145f2dd8efe8732783b11e0628f347434b4093c2f09fd"
+  ],
+  "worker": "/root/r88_startup_review",
+  "worker_model": "gpt-6-sol/high",
+  "scope": "Only the two commands in the frozen preregistration: F2 L0 then D7 L0.0, one execution each, at most five Optimize calls per diagnostic, each with a single 120-second whole-process deadline",
+  "review": "Coordinator read the preparation, checked frozen tool hashes and the empty solver/build process inventory. Prior raw compression and heavy auditing have finished. D7 L0.0 is a speculative child rejected by the historical split gate, not a final retained leaf; the original domain and construction cutoff remain unchanged.",
+  "unknown_policy": "Preserve partial outputs and all costs. Do not infer invalidity, automatically retry, extend deadlines, or change formal algorithm dispatch.",
+  "resource_policy": "Exclusive timed-computation slot until both diagnoses and immediate result checks finish; no concurrent build, solver, compression or heavy audit. Inform the coordinator only at batch completion or actionable failure.",
+  "not_authorized": "A1 G3 rest, production cut integration, candidate promotion or a long-run campaign"
+}

@@ -1,0 +1,731 @@
+{
+  "schema": "round88-r87-c1-depth-cap-provenance-v1",
+  "formal_runs_only": [
+    "01_D6_P-GRB",
+    "02_D6_ENS-C",
+    "03_D7_ENS-C",
+    "04_D7_P-GRB",
+    "05_U6_P-GRB",
+    "06_U6_ENS-C",
+    "07_F2_ENS-C",
+    "08_F2_P-GRB",
+    "09_F5_P-GRB",
+    "10_F5_ENS-C"
+  ],
+  "excluded_run11": "11_F6_ENS-C",
+  "context_sources": [
+    {
+      "path": "E:/codes/ExactEBRP/results/unified_exact_round87/protocol.json",
+      "bytes": 8250,
+      "sha256": "dba1b0d58681292276e855e5af0c1a6a3f9f989fe8ba08d4deecba689d09f115"
+    },
+    {
+      "path": "E:/codes/ExactEBRP/results/unified_exact_round87/final_report.md",
+      "bytes": 8197,
+      "sha256": "232eee2eee65c6e954d3ccfd66667457a3acc6b14532170bd46108e9c8bd94c8"
+    }
+  ],
+  "observation_rule": "Completed D6/D7/F2: max LP depth from complete lp_status ledger and adoption from final paper_leaf. Hard-killed U6/F5: header-only buffered ledgers are not negative evidence; independently persisted native/Gurobi LP logs positively establish depth >=2, but exact maximum/adoption/cap impact are not fully recoverable. No journal replay.",
+  "runs": [
+    {
+      "run": "01",
+      "role": "D6",
+      "arm": "P-GRB",
+      "depth_audit": "not_applicable_to_P_GRB"
+    },
+    {
+      "run": "02",
+      "role": "D6",
+      "arm": "ENS-C",
+      "source_files": {
+        "completion.json": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/02_D6_ENS-C/completion.json",
+          "bytes": 267,
+          "sha256": "6c012b2b1643bde77cf1c305abd58946b88c6dbdeda148ab3487a9fc40bac295"
+        },
+        "phases.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/02_D6_ENS-C/phases.csv",
+          "bytes": 3238,
+          "sha256": "c4ab30fa1f4e5bcd4f3409f85eb2a8cb2b2ee015ecda3f041188cad94efdbd0f"
+        },
+        "result.json": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/02_D6_ENS-C/result.json",
+          "bytes": 97527,
+          "sha256": "3b403861fa08e0da6ad042faf9e4d016bb40562bfe6f48e25d53fbc6aada251c"
+        },
+        "external/paper_leaf_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/02_D6_ENS-C/external/paper_leaf_ledger.csv",
+          "bytes": 1099,
+          "sha256": "dc6328b89404bbd47abf45f8ecdf62508204a80711d6785d28f6112151c235cd"
+        },
+        "external/split_decision_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/02_D6_ENS-C/external/split_decision_ledger.csv",
+          "bytes": 473,
+          "sha256": "5b126be31853a955cdeac8ffa99791cd8d3afea05ef12fab650c09726c101ce0"
+        },
+        "external/c6_split_decision_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/02_D6_ENS-C/external/c6_split_decision_ledger.csv",
+          "bytes": 900,
+          "sha256": "e3646ad350909ed43acd0c1e1f426248f0a346418db11ddbb8766c91a8c556b5"
+        },
+        "external/lp_status_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/02_D6_ENS-C/external/lp_status_ledger.csv",
+          "bytes": 718,
+          "sha256": "ecf7e3f3a0b6bcfda19406cdf6addb838df3e4df7e2f8ae7a052330f638e6605"
+        },
+        "external/paper_tree_events.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/02_D6_ENS-C/external/paper_tree_events.csv",
+          "bytes": 518,
+          "sha256": "133c9f6d4d5a8ce4a154c2f07756e18cf424a357ec5637a204dd41db8a6de953"
+        }
+      },
+      "extracted": {
+        "lp_status": [
+          {
+            "leaf_id": "L0",
+            "depth": 0,
+            "native_status": "OPTIMAL"
+          },
+          {
+            "leaf_id": "L0.0",
+            "depth": 1,
+            "native_status": "OPTIMAL"
+          },
+          {
+            "leaf_id": "L0.1",
+            "depth": 1,
+            "native_status": "INFEASIBLE"
+          },
+          {
+            "leaf_id": "L0.0.0",
+            "depth": 2,
+            "native_status": "OPTIMAL"
+          },
+          {
+            "leaf_id": "L0.0.1",
+            "depth": 2,
+            "native_status": "OPTIMAL"
+          }
+        ],
+        "paper_leaves": [
+          {
+            "leaf_id": "L0",
+            "depth": 0,
+            "status": "replaced"
+          },
+          {
+            "leaf_id": "L0.0",
+            "depth": 1,
+            "status": "closed"
+          },
+          {
+            "leaf_id": "L0.1",
+            "depth": 1,
+            "status": "empty"
+          }
+        ],
+        "split_decisions": [
+          {
+            "parent_id": "L0",
+            "split": "1",
+            "reason": "adaptive_mass_preserve_child_infeasibility_split"
+          },
+          {
+            "parent_id": "L0.0",
+            "split": "0",
+            "reason": "adaptive_mass_no_strict_child_improvement"
+          }
+        ],
+        "c6_decisions": [
+          {
+            "interval_id": "L0",
+            "depth": 0,
+            "selected_action": "split",
+            "deterministic_reason": "adaptive_mass_preserve_child_infeasibility_split"
+          },
+          {
+            "interval_id": "L0.0",
+            "depth": 1,
+            "selected_action": "exact-close",
+            "deterministic_reason": "adaptive_mass_no_strict_child_improvement"
+          }
+        ],
+        "first_root_lp_optimize_launch": true,
+        "completion_stop_reason": "normal_return",
+        "completion_returncode": 0,
+        "result_status": "optimal",
+        "result_configured_depth_cap": 8,
+        "result_max_observed_depth_field": 0
+      }
+    },
+    {
+      "run": "03",
+      "role": "D7",
+      "arm": "ENS-C",
+      "source_files": {
+        "completion.json": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/03_D7_ENS-C/completion.json",
+          "bytes": 267,
+          "sha256": "de993ce04f3cd94bc3caafe59d3efc4d6e55fcbd4f0a28d585a6a077aef06ba4"
+        },
+        "phases.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/03_D7_ENS-C/phases.csv",
+          "bytes": 3221,
+          "sha256": "bbbffbc3dce9680b9c70e96c128b9389f1d3ce334179526056a0b6127cfc9d79"
+        },
+        "result.json": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/03_D7_ENS-C/result.json",
+          "bytes": 99650,
+          "sha256": "2c916fd8982848785f944832562bde98be270105343d1fa21a390b9fcb6b2ba5"
+        },
+        "external/paper_leaf_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/03_D7_ENS-C/external/paper_leaf_ledger.csv",
+          "bytes": 669,
+          "sha256": "a8b7a8103397aed5d7601ade70d71a32d09426fec311376081f7f198537af93a"
+        },
+        "external/split_decision_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/03_D7_ENS-C/external/split_decision_ledger.csv",
+          "bytes": 367,
+          "sha256": "0458a1d365842ebfcec8327ab9fee1b83df36049efd41595e55708f46bd328bf"
+        },
+        "external/c6_split_decision_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/03_D7_ENS-C/external/c6_split_decision_ledger.csv",
+          "bytes": 613,
+          "sha256": "584cce6cb74ccd0e70f55bc07851b3c3170ec5ec719c8c18e581cd6af8c3eede"
+        },
+        "external/lp_status_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/03_D7_ENS-C/external/lp_status_ledger.csv",
+          "bytes": 478,
+          "sha256": "b9b01d7cb453ac43c1385c03e08b3d1a994d089db69d68510bca25252fce33e2"
+        },
+        "external/paper_tree_events.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/03_D7_ENS-C/external/paper_tree_events.csv",
+          "bytes": 214,
+          "sha256": "44893ea51660baf9f2910bc764e29fdb5c20023268ef7913c61fe8a1e28d3c79"
+        }
+      },
+      "extracted": {
+        "lp_status": [
+          {
+            "leaf_id": "L0",
+            "depth": 0,
+            "native_status": "OPTIMAL"
+          },
+          {
+            "leaf_id": "L0.0",
+            "depth": 1,
+            "native_status": "OPTIMAL"
+          },
+          {
+            "leaf_id": "L0.1",
+            "depth": 1,
+            "native_status": "OPTIMAL"
+          }
+        ],
+        "paper_leaves": [
+          {
+            "leaf_id": "L0",
+            "depth": 0,
+            "status": "open"
+          }
+        ],
+        "split_decisions": [
+          {
+            "parent_id": "L0",
+            "split": "0",
+            "reason": "adaptive_mass_no_strict_child_improvement"
+          }
+        ],
+        "c6_decisions": [
+          {
+            "interval_id": "L0",
+            "depth": 0,
+            "selected_action": "exact-close",
+            "deterministic_reason": "adaptive_mass_no_strict_child_improvement"
+          }
+        ],
+        "first_root_lp_optimize_launch": true,
+        "completion_stop_reason": "normal_return",
+        "completion_returncode": 0,
+        "result_status": "round31_c6_external_gini_tree_time_limit",
+        "result_configured_depth_cap": 8,
+        "result_max_observed_depth_field": 0
+      }
+    },
+    {
+      "run": "04",
+      "role": "D7",
+      "arm": "P-GRB",
+      "depth_audit": "not_applicable_to_P_GRB"
+    },
+    {
+      "run": "05",
+      "role": "U6",
+      "arm": "P-GRB",
+      "depth_audit": "not_applicable_to_P_GRB"
+    },
+    {
+      "run": "06",
+      "role": "U6",
+      "arm": "ENS-C",
+      "source_files": {
+        "completion.json": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/06_U6_ENS-C/completion.json",
+          "bytes": 265,
+          "sha256": "1eb3fd6d2beb8349f8735c70964c611e0b46574cae388653085d68f1374eeeff"
+        },
+        "phases.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/06_U6_ENS-C/phases.csv",
+          "bytes": 2829,
+          "sha256": "434251139eede0741708e2a60db376f9623fd892f9b9d74ea7c0d266574f6b6a"
+        },
+        "result.json": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/06_U6_ENS-C/result.json",
+          "missing": true
+        },
+        "external/paper_leaf_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/06_U6_ENS-C/external/paper_leaf_ledger.csv",
+          "missing": true
+        },
+        "external/split_decision_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/06_U6_ENS-C/external/split_decision_ledger.csv",
+          "bytes": 249,
+          "sha256": "5790ee6f1cf9653e1b38f15e6acbb1c34cfc30700951f571de64376c83b793a6"
+        },
+        "external/c6_split_decision_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/06_U6_ENS-C/external/c6_split_decision_ledger.csv",
+          "bytes": 356,
+          "sha256": "bda6d71f9effe4c6f8255439b9cac690ea64e0a551eb4b6997b84de46c352653"
+        },
+        "external/lp_status_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/06_U6_ENS-C/external/lp_status_ledger.csv",
+          "bytes": 140,
+          "sha256": "28f2982d007e9c8d04e351d7d92950d8eacb57b3b69d1c2aeea6c6f791554310"
+        },
+        "external/paper_tree_events.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/06_U6_ENS-C/external/paper_tree_events.csv",
+          "bytes": 85,
+          "sha256": "5453874cdd90b6cf6f5447717f4ab68d2b737dd15f56739972473865f0fe5745"
+        },
+        "native_and_gurobi_logs": [
+          {
+            "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/06_U6_ENS-C/native.log",
+            "bytes": 2266,
+            "sha256": "412f03c14e402b0cb264a993b32260a863242620f8cb20edfa1762d78ed45d6d"
+          },
+          {
+            "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/06_U6_ENS-C/external/native_logs/L0.0.0_lp.gurobi.log",
+            "bytes": 1366,
+            "sha256": "5e85fd7412c7ea0a21e0a93414e29eb883f67a604b66fcf160a64ede60750e07"
+          },
+          {
+            "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/06_U6_ENS-C/external/native_logs/L0.0.1_lp.gurobi.log",
+            "bytes": 1411,
+            "sha256": "4b8f79266e772e81418d1f7cda650ff1d0cc010d0fe2c221f3f2a90e31db7dbe"
+          },
+          {
+            "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/06_U6_ENS-C/external/native_logs/L0.0_lp.gurobi.log",
+            "bytes": 1364,
+            "sha256": "2d7c1a02340315c424fc6b170753fc7c6a8c1e6936d87a17bd168aca346ef1d7"
+          },
+          {
+            "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/06_U6_ENS-C/external/native_logs/L0.1_lp.gurobi.log",
+            "bytes": 1413,
+            "sha256": "3331716f64c8ff4de97aecdc970e6b1aa3120163e1dcfcb2023c5fa38b3259ce"
+          },
+          {
+            "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/06_U6_ENS-C/external/native_logs/L0_lp.gurobi.log",
+            "bytes": 1427,
+            "sha256": "b69f636c256e8748a75b0b7fe370197ac3ac6c8a8f7bd8ad556efcb3376b3308"
+          },
+          {
+            "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/06_U6_ENS-C/external/native_logs/L0.0_terminal_mip.gurobi.log",
+            "bytes": 420644,
+            "sha256": "5e2e6167b358315ea624c5dcc7fd9b40ce067a770b941a7a70e4e1d63ca2c50a"
+          }
+        ]
+      },
+      "extracted": {
+        "lp_status": [],
+        "paper_leaves": [],
+        "split_decisions": [],
+        "c6_decisions": [],
+        "first_root_lp_optimize_launch": true,
+        "completion_stop_reason": "whole_run_hard_stop",
+        "completion_returncode": 1,
+        "result_status": null,
+        "result_configured_depth_cap": null,
+        "result_max_observed_depth_field": null,
+        "native_lp_log_evidence": [
+          {
+            "leaf_id": "L0.0.0",
+            "depth": 2,
+            "gurobi_log_sha256": "5e85fd7412c7ea0a21e0a93414e29eb883f67a604b66fcf160a64ede60750e07",
+            "gurobi_terminal_status": "OPTIMAL"
+          },
+          {
+            "leaf_id": "L0.0.1",
+            "depth": 2,
+            "gurobi_log_sha256": "4b8f79266e772e81418d1f7cda650ff1d0cc010d0fe2c221f3f2a90e31db7dbe",
+            "gurobi_terminal_status": "OPTIMAL"
+          },
+          {
+            "leaf_id": "L0.0",
+            "depth": 1,
+            "gurobi_log_sha256": "2d7c1a02340315c424fc6b170753fc7c6a8c1e6936d87a17bd168aca346ef1d7",
+            "gurobi_terminal_status": "OPTIMAL"
+          },
+          {
+            "leaf_id": "L0.1",
+            "depth": 1,
+            "gurobi_log_sha256": "3331716f64c8ff4de97aecdc970e6b1aa3120163e1dcfcb2023c5fa38b3259ce",
+            "gurobi_terminal_status": "INFEASIBLE"
+          },
+          {
+            "leaf_id": "L0",
+            "depth": 0,
+            "gurobi_log_sha256": "b69f636c256e8748a75b0b7fe370197ac3ac6c8a8f7bd8ad556efcb3376b3308",
+            "gurobi_terminal_status": "OPTIMAL"
+          }
+        ],
+        "model_snapshot_filenames_only": [
+          {
+            "name": "L0.0.0.lp",
+            "bytes": 16870840,
+            "content_not_read": true
+          },
+          {
+            "name": "L0.0.1.lp",
+            "bytes": 16916749,
+            "content_not_read": true
+          },
+          {
+            "name": "L0.0.lp",
+            "bytes": 16870840,
+            "content_not_read": true
+          },
+          {
+            "name": "L0.1.lp",
+            "bytes": 16905624,
+            "content_not_read": true
+          },
+          {
+            "name": "L0.lp",
+            "bytes": 16865849,
+            "content_not_read": true
+          }
+        ],
+        "l00_terminal_mip_last_nonblank_line": " 13389  5490    0.13574   30  785    0.14529    0.13488  7.16%  6155 86197s",
+        "final_paper_ledger_unavailable_due_hard_kill": true,
+        "observed_lp_depth_lower_bound": 2,
+        "maximum_executed_depth_and_adopted_depth": "unknown_without_flushed_tree_state"
+      }
+    },
+    {
+      "run": "07",
+      "role": "F2",
+      "arm": "ENS-C",
+      "source_files": {
+        "completion.json": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/07_F2_ENS-C/completion.json",
+          "bytes": 268,
+          "sha256": "240ef4431b8ff5b89e28276b363fd16e2acbb4df5cdd9c620a117c673d13f354"
+        },
+        "phases.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/07_F2_ENS-C/phases.csv",
+          "bytes": 3156,
+          "sha256": "13f42270adf17f9aafa9d174172ee1be9d701cc7d7c13a9293f0bc1986ffef82"
+        },
+        "result.json": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/07_F2_ENS-C/result.json",
+          "bytes": 94889,
+          "sha256": "dd8fea501d55d7cdd6759d2741fe0cba4871834b379211b918e20704aa9655a5"
+        },
+        "external/paper_leaf_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/07_F2_ENS-C/external/paper_leaf_ledger.csv",
+          "bytes": 731,
+          "sha256": "bb4029c499f9428a9c212adc7c07866a8c00916cd7a395195db59925fa9c7b86"
+        },
+        "external/split_decision_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/07_F2_ENS-C/external/split_decision_ledger.csv",
+          "bytes": 566,
+          "sha256": "6f21c52d2e0778ffe5c66abe1d4f57bb3544d338881d4b668dbb6fbcba63a950"
+        },
+        "external/c6_split_decision_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/07_F2_ENS-C/external/c6_split_decision_ledger.csv",
+          "bytes": 915,
+          "sha256": "c1ca2e62e53d79b9ef578de3c1f916aee844eec4c13709534655cd52f7ba11b1"
+        },
+        "external/lp_status_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/07_F2_ENS-C/external/lp_status_ledger.csv",
+          "bytes": 493,
+          "sha256": "bd6b6ca7dec0475614757109d97ec2e1a174c3523907ec33d76d66158c659caf"
+        },
+        "external/paper_tree_events.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/07_F2_ENS-C/external/paper_tree_events.csv",
+          "bytes": 685,
+          "sha256": "49174274f5420b1b4b9e715a53d6b0a5a36370df4736e5583c3b0f3ede9f2a4e"
+        }
+      },
+      "extracted": {
+        "lp_status": [
+          {
+            "leaf_id": "L0",
+            "depth": 0,
+            "native_status": "OPTIMAL"
+          },
+          {
+            "leaf_id": "L0.0",
+            "depth": 1,
+            "native_status": "OPTIMAL"
+          },
+          {
+            "leaf_id": "L0.1",
+            "depth": 1,
+            "native_status": "OPTIMAL"
+          }
+        ],
+        "paper_leaves": [
+          {
+            "leaf_id": "L0",
+            "depth": 0,
+            "status": "closed"
+          }
+        ],
+        "split_decisions": [
+          {
+            "parent_id": "L0",
+            "split": "0",
+            "reason": "adaptive_mass_score_below_tau_native_target"
+          },
+          {
+            "parent_id": "L0",
+            "split": "0",
+            "reason": "adaptive_mass_no_strict_child_improvement"
+          }
+        ],
+        "c6_decisions": [
+          {
+            "interval_id": "L0",
+            "depth": 0,
+            "selected_action": "native-target",
+            "deterministic_reason": "adaptive_mass_score_below_tau_native_target"
+          },
+          {
+            "interval_id": "L0",
+            "depth": 0,
+            "selected_action": "exact-close",
+            "deterministic_reason": "adaptive_mass_no_strict_child_improvement"
+          }
+        ],
+        "first_root_lp_optimize_launch": true,
+        "completion_stop_reason": "normal_return",
+        "completion_returncode": 0,
+        "result_status": "optimal",
+        "result_configured_depth_cap": 8,
+        "result_max_observed_depth_field": 0
+      }
+    },
+    {
+      "run": "08",
+      "role": "F2",
+      "arm": "P-GRB",
+      "depth_audit": "not_applicable_to_P_GRB"
+    },
+    {
+      "run": "09",
+      "role": "F5",
+      "arm": "P-GRB",
+      "depth_audit": "not_applicable_to_P_GRB"
+    },
+    {
+      "run": "10",
+      "role": "F5",
+      "arm": "ENS-C",
+      "source_files": {
+        "completion.json": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/10_F5_ENS-C/completion.json",
+          "bytes": 273,
+          "sha256": "8c479dc61c1ccba427fbcb55513452a6be33289e607f1a187271bcb7cba3fb08"
+        },
+        "phases.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/10_F5_ENS-C/phases.csv",
+          "bytes": 2826,
+          "sha256": "a0f141e52d59fecedbe00c18c09884590049a95c86556bec5eee206e7d8433b0"
+        },
+        "result.json": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/10_F5_ENS-C/result.json",
+          "missing": true
+        },
+        "external/paper_leaf_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/10_F5_ENS-C/external/paper_leaf_ledger.csv",
+          "missing": true
+        },
+        "external/split_decision_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/10_F5_ENS-C/external/split_decision_ledger.csv",
+          "bytes": 249,
+          "sha256": "5790ee6f1cf9653e1b38f15e6acbb1c34cfc30700951f571de64376c83b793a6"
+        },
+        "external/c6_split_decision_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/10_F5_ENS-C/external/c6_split_decision_ledger.csv",
+          "bytes": 356,
+          "sha256": "bda6d71f9effe4c6f8255439b9cac690ea64e0a551eb4b6997b84de46c352653"
+        },
+        "external/lp_status_ledger.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/10_F5_ENS-C/external/lp_status_ledger.csv",
+          "bytes": 140,
+          "sha256": "28f2982d007e9c8d04e351d7d92950d8eacb57b3b69d1c2aeea6c6f791554310"
+        },
+        "external/paper_tree_events.csv": {
+          "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/10_F5_ENS-C/external/paper_tree_events.csv",
+          "bytes": 85,
+          "sha256": "5453874cdd90b6cf6f5447717f4ab68d2b737dd15f56739972473865f0fe5745"
+        },
+        "native_and_gurobi_logs": [
+          {
+            "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/10_F5_ENS-C/native.log",
+            "bytes": 2265,
+            "sha256": "238daa210e93226107595b6268d6bd928597b76dcd3e5672216b1a39490c19e2"
+          },
+          {
+            "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/10_F5_ENS-C/external/native_logs/L0.0.0_lp.gurobi.log",
+            "bytes": 1364,
+            "sha256": "9b4b2c1da1178ae87d513850c519ea551a38c9ed0ae69a63ad018f6e92a7c73d"
+          },
+          {
+            "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/10_F5_ENS-C/external/native_logs/L0.0.1_lp.gurobi.log",
+            "bytes": 1367,
+            "sha256": "36554b88265522accd34cf64205203f8e2d731c80d610fbf1b94666e83e3b952"
+          },
+          {
+            "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/10_F5_ENS-C/external/native_logs/L0.0_lp.gurobi.log",
+            "bytes": 1362,
+            "sha256": "a53f79287ea54aba5c04b1c9d5442d6e9e22e8039f6453b668f131dc74f9c047"
+          },
+          {
+            "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/10_F5_ENS-C/external/native_logs/L0.1_lp.gurobi.log",
+            "bytes": 1279,
+            "sha256": "675e9a4c654a152e0a8c0835b9653a964841c32904390d8dd79596fbb879fa40"
+          },
+          {
+            "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/10_F5_ENS-C/external/native_logs/L0_lp.gurobi.log",
+            "bytes": 1359,
+            "sha256": "27f56330471d0db096d705fc405ace8d3973ea0cebed9634683223a57edebf23"
+          },
+          {
+            "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/10_F5_ENS-C/external/native_logs/L0.0_terminal_mip.gurobi.log",
+            "bytes": 320676,
+            "sha256": "e21ef4b4f166cd4e7ff25cdef747c2eae3be93f8237ac0f4f678ea5febc671e7"
+          },
+          {
+            "absolute_path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/10_F5_ENS-C/external/native_logs/L0.0_c6_1_child_disjunction_target_mip.gurobi.log",
+            "bytes": 2569,
+            "sha256": "d706d87938d0c4b3b845c29af4a19e8639e6e383085c0438de5925bae92c5f7f"
+          }
+        ]
+      },
+      "extracted": {
+        "lp_status": [],
+        "paper_leaves": [],
+        "split_decisions": [],
+        "c6_decisions": [],
+        "first_root_lp_optimize_launch": true,
+        "completion_stop_reason": "whole_run_hard_stop",
+        "completion_returncode": 1,
+        "result_status": null,
+        "result_configured_depth_cap": null,
+        "result_max_observed_depth_field": null,
+        "native_lp_log_evidence": [
+          {
+            "leaf_id": "L0.0.0",
+            "depth": 2,
+            "gurobi_log_sha256": "9b4b2c1da1178ae87d513850c519ea551a38c9ed0ae69a63ad018f6e92a7c73d",
+            "gurobi_terminal_status": "OPTIMAL"
+          },
+          {
+            "leaf_id": "L0.0.1",
+            "depth": 2,
+            "gurobi_log_sha256": "36554b88265522accd34cf64205203f8e2d731c80d610fbf1b94666e83e3b952",
+            "gurobi_terminal_status": "OPTIMAL"
+          },
+          {
+            "leaf_id": "L0.0",
+            "depth": 1,
+            "gurobi_log_sha256": "a53f79287ea54aba5c04b1c9d5442d6e9e22e8039f6453b668f131dc74f9c047",
+            "gurobi_terminal_status": "OPTIMAL"
+          },
+          {
+            "leaf_id": "L0.1",
+            "depth": 1,
+            "gurobi_log_sha256": "675e9a4c654a152e0a8c0835b9653a964841c32904390d8dd79596fbb879fa40",
+            "gurobi_terminal_status": "INFEASIBLE"
+          },
+          {
+            "leaf_id": "L0",
+            "depth": 0,
+            "gurobi_log_sha256": "27f56330471d0db096d705fc405ace8d3973ea0cebed9634683223a57edebf23",
+            "gurobi_terminal_status": "OPTIMAL"
+          }
+        ],
+        "model_snapshot_filenames_only": [
+          {
+            "name": "L0.0.0.lp",
+            "bytes": 17001624,
+            "content_not_read": true
+          },
+          {
+            "name": "L0.0.1.lp",
+            "bytes": 17065169,
+            "content_not_read": true
+          },
+          {
+            "name": "L0.0.lp",
+            "bytes": 16998019,
+            "content_not_read": true
+          },
+          {
+            "name": "L0.1.lp",
+            "bytes": 16700670,
+            "content_not_read": true
+          },
+          {
+            "name": "L0.lp",
+            "bytes": 16635319,
+            "content_not_read": true
+          }
+        ],
+        "l00_terminal_mip_last_nonblank_line": "  5973  4163     cutoff  174         0.30244    0.28151  6.92% 10333 86210s",
+        "final_paper_ledger_unavailable_due_hard_kill": true,
+        "observed_lp_depth_lower_bound": 2,
+        "maximum_executed_depth_and_adopted_depth": "unknown_without_flushed_tree_state"
+      }
+    }
+  ],
+  "source_flush_semantics": {
+    "source_path": "E:/codes/ExactEBRP/src/PaperExternalGiniTree.cpp",
+    "sha256": "de462667f40f4d1b7d656a4988332e15fe63d26cc6f582bd9c3cfbe5cf3a1450",
+    "same_as_R87_source_commit_by_read_only_diff": true,
+    "line_references": {
+      "header_flush": [
+        2793,
+        2804
+      ],
+      "first_root_lp_phase_before_solve": [
+        3598,
+        3606
+      ],
+      "lp_rows_written_after_solve": [
+        3605,
+        3652
+      ],
+      "paper_leaf_created_at_final_serialization": [
+        8397,
+        8464
+      ],
+      "end_of_run_ledger_flush": [
+        8807,
+        8816
+      ]
+    }
+  }
+}

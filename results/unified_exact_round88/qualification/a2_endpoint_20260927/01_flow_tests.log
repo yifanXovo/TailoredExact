@@ -1,0 +1,13 @@
+........F..
+======================================================================
+FAIL: test_three_station_joint_direction_matches_independent_enumerator (__main__.QuantityFlowTests.test_three_station_joint_direction_matches_independent_enumerator)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP\tests\round88_quantity_flow_test.py", line 193, in test_three_station_joint_direction_matches_independent_enumerator
+    self.assertEqual(outcome.certificate.integer_flow_cost,
+AssertionError: -2304 != Fraction(-504, 1)
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.031s
+
+FAILED (failures=1)

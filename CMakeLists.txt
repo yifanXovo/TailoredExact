@@ -88,6 +88,11 @@ set(EXACT_EBRP_LIB_SOURCES
 )
 
 if(EXACT_EBRP_ENABLE_GUROBI)
+  add_test(NAME Round88ConstructiveOnlyCliTests COMMAND ${CMAKE_COMMAND}
+    "-DEXACT_EXE=$<TARGET_FILE:ExactEBRP>"
+    "-DSOURCE_ROOT=${CMAKE_CURRENT_SOURCE_DIR}"
+    "-DOUTPUT_ROOT=${CMAKE_CURRENT_BINARY_DIR}"
+    -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/round88_constructive_only_cli_test.cmake")
   find_path(GUROBI_INCLUDE_DIR gurobi_c.h
     HINTS "${GUROBI_ROOT}" "$ENV{GUROBI_HOME}"
     PATH_SUFFIXES include win64/include)

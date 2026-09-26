@@ -1,0 +1,22 @@
+{
+  "case": "S12",
+  "started_utc": "2026-09-26T18:12:54.8916793Z",
+  "command": [
+    "D:/msys64/ucrt64/bin/python.exe",
+    "-B",
+    "scripts/round88_quantity_probe.py",
+    "supervise",
+    "--case",
+    "S12",
+    "--out-dir",
+    "results\\unified_exact_round88\\a2_endpoint_diagnostic_001\\S12",
+    "--whole-process-limit-seconds",
+    "120"
+  ],
+  "external_wall_seconds": 0.4696837,
+  "exit_code": 0,
+  "supervisor_pid": 31716,
+  "sampled_peak_supervisor_working_set_bytes": 28131328,
+  "sampled_peak_cpp_working_set_bytes": 0,
+  "sample_period_milliseconds": 50
+}

@@ -1,0 +1,40 @@
+{
+  "actual": {
+    "new_columns": 3,
+    "new_nonzeros": 12,
+    "new_rows": 5
+  },
+  "arm": "B1",
+  "exact_plan_files": {
+    "new_columns_sha256": "4846452faba2ac6a242065e6e36d6f024f5b79ffc75720b1f71d9001978408cb",
+    "new_rows_exact_bytes": 553,
+    "new_rows_exact_sha256": "a3098caa75b916e4acffa2376c43eed2bfab3ab97752eeef7fb64980ccc5f234"
+  },
+  "gurobi_version": [
+    13,
+    0,
+    2
+  ],
+  "independent_expected_objective": 0.0,
+  "optimize_calls_this_arm": 1,
+  "optimize_calls_total_so_far": 1,
+  "optimize_wall_seconds": 0.0006964998319745064,
+  "original": {
+    "nonzeros": 18,
+    "rows": 8,
+    "variables": 10
+  },
+  "peak_working_set_bytes": 31232000,
+  "predicted": {
+    "K": 1,
+    "N": 2,
+    "P": 1,
+    "new_columns": 3,
+    "new_nonzeros": 12,
+    "new_rows": 5,
+    "nonzero_upper_bound": 14
+  },
+  "solver_runtime_seconds": 0.0,
+  "solver_work": 1.6302810000000003e-05,
+  "status_code": 2
+}

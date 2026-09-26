@@ -1,0 +1,59 @@
+{
+  "completed_arms": 6,
+  "manifest_sha256": "d431b54bf9e3b640e9c49774a10b9ad65680abf695a53388665d719a570a09b1",
+  "outside_batch_wall_seconds": 1242.296292600222,
+  "outside_batch_wall_seconds_so_far": 1242.2913786000572,
+  "records": [
+    {
+      "arm": "B1",
+      "directory": "01_F2-root_B1",
+      "source": "F2-root",
+      "status": "complete_optimal_numeric_lp",
+      "supervisor_returncode": 0,
+      "whole_arm_wall_seconds_before_receipt": 16.49376490013674
+    },
+    {
+      "arm": "B2",
+      "directory": "02_F2-root_B2",
+      "source": "F2-root",
+      "status": "complete_optimal_numeric_lp",
+      "supervisor_returncode": 0,
+      "whole_arm_wall_seconds_before_receipt": 25.21114409994334
+    },
+    {
+      "arm": "B1",
+      "directory": "03_D7-root_B1",
+      "source": "D7-root",
+      "status": "unknown_whole_diagnostic_deadline",
+      "supervisor_returncode": 124,
+      "whole_arm_wall_seconds_before_receipt": 300.1417290000245
+    },
+    {
+      "arm": "B2",
+      "directory": "04_D7-root_B2",
+      "source": "D7-root",
+      "status": "unknown_whole_diagnostic_deadline",
+      "supervisor_returncode": 124,
+      "whole_arm_wall_seconds_before_receipt": 300.13695299997926
+    },
+    {
+      "arm": "B1",
+      "directory": "05_D7-child_B1",
+      "source": "D7-child",
+      "status": "unknown_whole_diagnostic_deadline",
+      "supervisor_returncode": 124,
+      "whole_arm_wall_seconds_before_receipt": 300.1273501999676
+    },
+    {
+      "arm": "B2",
+      "directory": "06_D7-child_B2",
+      "source": "D7-child",
+      "status": "unknown_whole_diagnostic_deadline",
+      "supervisor_returncode": 124,
+      "whole_arm_wall_seconds_before_receipt": 300.13419259991497
+    }
+  ],
+  "schema": "round88-ot-epigraph-batch-v1",
+  "status": "six_independent_arms_complete_or_unknown",
+  "sum_whole_arm_wall_seconds_before_receipt": 1242.2451337999664
+}

@@ -81,6 +81,11 @@ public:
             throw std::runtime_error("Extra constructive seed omits a station");
         extra_descent_seed = routes;
     }
+    void set_constructive_only_descent(bool enabled) {
+        if (enabled && (!decoded_descent_only || extra_descent_seed.empty()))
+            throw std::runtime_error("Constructive-only descent requires a verified extra seed and finite decoded descent");
+        constructive_only_descent = enabled;
+    }
 
     HybridGA_HGS(const InstanceData& inst,
         int ps = 24,
@@ -294,6 +299,7 @@ public:
 
 private:
     bool decoded_descent_only = false;
+    bool constructive_only_descent = false;
     vector<vector<int>> extra_descent_seed;
     bool descent_complete = false;
     int descent_seeds_completed = 0;
@@ -791,7 +797,7 @@ private:
         int cc = constructive_count;
         if (cc < 0) cc = (constructive_mode == 0 ? 0 : max(2, pop_size / 5));
         cc = min(pop_size, max(0, cc));
-        for (int i = 0; i < pop_size; ++i) {
+        for (int i = 0; i < pop_size && !constructive_only_descent; ++i) {
             Individual ind;
             if (i < cc) ind.routes = build_constructive_individual();
             else ind.routes = chromosome_to_routes(make_random_chromosome());

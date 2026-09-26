@@ -1,0 +1,52 @@
+{
+  "status": "zero_optimize_audit_passed_prepared_only",
+  "role": "F2_ENS-C_L0",
+  "historical_scenario_id": "round86-unadapted-varied-structures-v1_F2",
+  "historical_status": "optimal",
+  "historical_node": {
+    "leaf_id": "L0",
+    "parent_id": "",
+    "depth": 0,
+    "gamma_l_ledger": "0",
+    "gamma_u_ledger": "0.88534830093457795",
+    "gamma_l_actual_lp": "0",
+    "gamma_u_actual_lp": "0.885348300934578",
+    "lp_status": "OPTIMAL",
+    "historical_lp_bound": 0.5286256494653551,
+    "evidence": [
+      "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/07_F2_ENS-C/external/paper_leaf_ledger.csv",
+      "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/07_F2_ENS-C/external/lp_status_ledger.csv",
+      "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/07_F2_ENS-C/external/paper_optimize_ledger.csv"
+    ]
+  },
+  "model": {
+    "path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/07_F2_ENS-C/external/models/L0.lp",
+    "sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091",
+    "bytes": 1204519,
+    "package_index": "results/unified_exact_round87/package_index.json",
+    "package_index_sha_matches": true,
+    "cutoff_actual_lp_row": "c953",
+    "cutoff_actual_lp_rhs": "0.885348300934578",
+    "later_final_verified_ub_not_used_as_cutoff": 0.8659435203229894
+  },
+  "input": {
+    "path": "C:/Users/Administrator/.codex/worktrees/round87-ensc-pgrb-long-convergence/ExactEBRP/reference/round86_unadapted_confirmation/F2.txt",
+    "sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+    "scenario_source": "results/unified_exact_round87/protocol.json",
+    "T_seconds": 3600,
+    "lambda": 0.15,
+    "pickup_seconds": 60,
+    "drop_seconds": 60
+  },
+  "audit_manifest": "results/unified_exact_round88/ot_qualification_f2_l0_audit/manifest.json",
+  "audit_manifest_sha256": "d223756f601a5f9c1966e5087e6ddace81bcf1b53130afdad2bb79366421b905",
+  "audit_structure": {
+    "variables": 3488,
+    "constraints": 9269,
+    "nonzeros": 52879,
+    "required_rows_verified": 1776,
+    "support_fingerprint": "25ec4215e95eda891b3ef566aa4be15a27d7b3b44e5b8101cb1e1c11e8855590",
+    "audit_wall_seconds_through_manifest_write": 0.11021680012345314
+  },
+  "optimize_invocations_for_this_preparation": 0
+}

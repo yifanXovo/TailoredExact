@@ -1,0 +1,65 @@
+{
+  "status": "prepared_only_no_optimize_authorization",
+  "contract": "round88_same_source_one_fixed_point_round_ot_diagnostic_v1",
+  "purpose": "F2 certified-role root and D7 speculative left-child fixed-LP mechanism diagnostics; not ENS/P-GRB performance arms",
+  "order": ["F2_ENS-C_L0", "D7_ENS-C_L0.0"],
+  "environment": {
+    "python": "build/research/round88-ot/venv/Scripts/python.exe",
+    "python_version": "3.12.14",
+    "gurobipy_version": "13.0.2",
+    "whole_process_limit_seconds_each": 120,
+    "threads_each_lp": 1,
+    "solver_seed": 0,
+    "presolve": "auto",
+    "no_internal_time_or_work_switch": true
+  },
+  "frozen_tools_sha256": {
+    "scripts/round88_ot_math.py": "2b8855609cf469098d050fcd9c89efac01b2cb41ee07f023b5a7b79f9ff71840",
+    "scripts/round88_ot_diagnostic.py": "c1cb1776d1b1eef0f03977e00060c1690e5505517d0e4baa71feb3b672fa0756",
+    "scripts/round88_ot_supervise.py": "ea79e400d727bc94ca20c5ddfec61c3dfaaafd2e1f7d175a2fe5f4ffb8135d29"
+  },
+  "prior_qualification": "12/12 solver-free tests; independent review in results/unified_exact_round88/ot_tool_independent_review.md",
+  "runs": [
+    {
+      "role": "F2_ENS-C_L0",
+      "source_meta": "results/unified_exact_round88/ot_qualification_f2_l0_audit/source_meta.json",
+      "manifest": "results/unified_exact_round88/ot_qualification_f2_l0_audit/manifest.json",
+      "manifest_sha256": "d223756f601a5f9c1966e5087e6ddace81bcf1b53130afdad2bb79366421b905",
+      "lp_sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091",
+      "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "output_directory": "results/unified_exact_round88/ot_f2_l0_diagnostic_001",
+      "command": [
+        "build/research/round88-ot/venv/Scripts/python.exe",
+        "scripts/round88_ot_supervise.py",
+        "--manifest",
+        "results/unified_exact_round88/ot_qualification_f2_l0_audit/manifest.json",
+        "--out-dir",
+        "results/unified_exact_round88/ot_f2_l0_diagnostic_001",
+        "--whole-process-limit-seconds",
+        "120"
+      ]
+    },
+    {
+      "role": "D7_ENS-C_L0.0",
+      "source_meta": "results/unified_exact_round88/ot_qualification_d7_l00_audit/source_meta.json",
+      "manifest": "results/unified_exact_round88/ot_qualification_d7_l00_audit/manifest.json",
+      "manifest_sha256": "e73e08318afe65d9c4d145f2dd8efe8732783b11e0628f347434b4093c2f09fd",
+      "lp_sha256": "27cbb486939374c3f42eb7f1e97cd6ed20281b114115118c89434fa00e85c77f",
+      "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+      "output_directory": "results/unified_exact_round88/ot_d7_l00_diagnostic_001",
+      "command": [
+        "build/research/round88-ot/venv/Scripts/python.exe",
+        "scripts/round88_ot_supervise.py",
+        "--manifest",
+        "results/unified_exact_round88/ot_qualification_d7_l00_audit/manifest.json",
+        "--out-dir",
+        "results/unified_exact_round88/ot_d7_l00_diagnostic_001",
+        "--whole-process-limit-seconds",
+        "120"
+      ]
+    }
+  ],
+  "measurement": "Each unique fresh output directory receives base/B1/B2/B1+B2/aggregate from one fixed LP x0 and complete supervised process cost; no branch or model substitution",
+  "failure_policy": "Any timeout is unknown; retain all partial raw files and paid cost; no automatic retry, extension, negative cut verdict or formal algorithm switch",
+  "resource_policy": "Only after root coordinator issues a new unique solver lease; sequential, no concurrent solver/build/compression"
+}
