@@ -1,0 +1,22 @@
+{
+  "schema": "round52-fixed-interval-promotion-decision-v1",
+  "classification": "tailored_cut_backend_rejected",
+  "candidate": "SD-R3-ROOT-BLOCKMAX",
+  "core_row_count": 14,
+  "development_row_count": 14,
+  "confirmation_opened": false,
+  "confirmation_reason": "candidate failed development gates",
+  "f0_development_certificates": 11,
+  "f3_development_certificates": 9,
+  "lost_baseline_certificate_state_ids": [
+    "D1",
+    "D13"
+  ],
+  "gained_certificate_state_ids": [],
+  "common_exact_work_geometric_mean_ratio": 0.977612049921566,
+  "work_gate_threshold": 0.97,
+  "work_gate_passed": false,
+  "severe_regression_gate_passed": false,
+  "false_certificates": 0,
+  "final_inner_backend": "historical-production-v0"
+}

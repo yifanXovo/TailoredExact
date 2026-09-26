@@ -1,0 +1,21 @@
+{
+  "backend_promotion_supported": false,
+  "classification": "historical_k1_am_retained",
+  "counterfactual_recomputation_still_required": true,
+  "integration_eligible": false,
+  "logical_rows": {
+    "1200s": 0,
+    "1800s": 0,
+    "300s": 0
+  },
+  "paper_preset_changed": false,
+  "physical_rows": {
+    "1200s": 0,
+    "1800s": 0,
+    "300s": 0
+  },
+  "reason": "the candidate backend accepted zero changes, failed the fixed-state promotion gate, and is definitionally identical to historical K1-AM's backend",
+  "research_mode_added": false,
+  "schema": "round50-k1-backend-promotion-audit-v1",
+  "status": "complete_not_opened"
+}

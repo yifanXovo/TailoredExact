@@ -1,0 +1,25 @@
+{
+  "mode": "joint",
+  "selected_unix": 1789319475.200378,
+  "after_charged_launch": 32,
+  "qualification": "uniform diagnostic research candidate; mainline adoption already vetoed",
+  "preset": "research-round64-k1-h",
+  "cold_preset": "research-round64-k1-s",
+  "build_freeze": "build_freeze_v3.json",
+  "build_directory": "build/round64-v3",
+  "source_commit": "438e9a286957370df2f962893f43a1026902839f",
+  "executable_sha256": "bd059f22d7b27884cb66ce3f7c20579b1ddd6796f61caded7149ab474f26a1d1",
+  "physical_rows": "F0 + Q + independent T + B4 + arc sharing",
+  "lifecycle": "inherited controlled model-object reuse; no fresh override",
+  "startup": "current-process inherited full HGA; cold verified empty routes; native starts disabled",
+  "policy": "same static JOINT for every role; no runtime selector",
+  "evidence": "strict original-point projection exclusions; C2 warm gain versus OFF but slower than SEP; D7 warm regression; D4 fixed-F0 certificate loss",
+  "stopped_alternative": "QCAP: strict incremental projection but D4 matched certificate loss at launch32",
+  "confirmation_roles": [
+    "C6",
+    "C7"
+  ],
+  "confirmation_cap_seconds": 600,
+  "changes_after_confirmation": "none planned; any change invalidates independent confirmation",
+  "stable_default": "unchanged off"
+}

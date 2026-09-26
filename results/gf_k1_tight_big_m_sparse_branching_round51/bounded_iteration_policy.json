@@ -1,0 +1,71 @@
+{
+  "adaptive_candidates": [
+    "a1-root-sparse-2x2"
+  ],
+  "adaptive_revision_change": "select only the best already-probed candidate",
+  "adaptive_revision_maximum": 1,
+  "adaptive_revision_only": "a1r-root-sparse-top1",
+  "candidate_family_maximum": 2,
+  "candidate_pool_maximum": 4,
+  "caps_seconds": {
+    "confirmation": 1200,
+    "core": 120,
+    "development": 300,
+    "key_long": 1800
+  },
+  "child_lp_probe_maximum": 8,
+  "confirmation_states": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "C9"
+  ],
+  "core_states": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D9",
+    "D10",
+    "D11"
+  ],
+  "development_states": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D14"
+  ],
+  "frozen_before_candidate_results": true,
+  "m1_candidates": [
+    "m1-tight-big-m-v0"
+  ],
+  "ordered_stages": [
+    "M1",
+    "symmetry_reaudit",
+    "A1"
+  ],
+  "positive_priority_maximum": 2,
+  "post_confirmation_revision_allowed": false,
+  "schema": "round51-bounded-iteration-policy-v1",
+  "symmetry_candidates": [
+    "m1-s1-route-start-order",
+    "m1-s1r-used-first-route-start-order"
+  ]
+}

@@ -1,0 +1,8 @@
+sequence,process_seconds,event,status,nominal_deadline_remaining_seconds,work_deadline_remaining_seconds,detail
+0,0,"process_entry","start",299.99910620000003,296.99910620000003,"absolute process deadline origin"
+1,0.0010594999999999999,"instance_parsing_start","start",299.99894060000003,296.99894060000003,"reference/qualification_round39/small-medium/round39_small_medium_V12_M3_Q30_slot08_seed1343324363.txt"
+2,0.0018404000000000001,"instance_parsing_complete","complete",299.99815960000001,296.99815960000001,"instance=round39_small_medium_V12_M3_Q30_slot08_seed1343324363.txt"
+3,0.033056599999999998,"plain_gurobi_optimize_launch","start",299.96694339999999,296.96694339999999,"absolute_work_remaining=296.967041"
+4,297.02837399999999,"final_result_serialization_start","start",2.9716260999999804,-0.028373999999985244,""
+5,297.0293413,"final_result_serialization_complete","complete",2.9706588999999894,-0.029341299999998682,""
+6,297.02941820000001,"process_exit","complete",2.9705819000000133,-0.029418200000009165,"rc=0"

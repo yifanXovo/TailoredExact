@@ -1,0 +1,26 @@
+[
+  {
+    "attempt": 1,
+    "head": "9736ab0b9",
+    "returncode": 1,
+    "stderr": "fatal: unable to access 'https://github.com/yifanXovo/TailoredExact.git/': Recv failure: Connection was reset",
+    "wall_seconds": null,
+    "scope": "Transport failure; native campaign remains active and unaffected"
+  },
+  {
+    "attempt": 2,
+    "head": "9736ab0b9",
+    "returncode": 128,
+    "stdout": "",
+    "stderr": "fatal: unable to access 'https://github.com/yifanXovo/TailoredExact.git/': Failed to connect to github.com port 443 after 21077 ms: Could not connect to server\n",
+    "wall_seconds": 21.151852500159293
+  },
+  {
+    "attempt": 3,
+    "head": "76f2f2784cdebcb81aac7a8eaa5bf15f3faf3ae3",
+    "returncode": 0,
+    "stdout": "branch 'codex/round79-bdsc-small-validation' set up to track 'origin/codex/round79-bdsc-small-validation'.\n",
+    "stderr": "remote: \nremote: Create a pull request for 'codex/round79-bdsc-small-validation' on GitHub by visiting:        \nremote:      https://github.com/yifanXovo/TailoredExact/pull/new/codex/round79-bdsc-small-validation        \nremote: \nTo https://github.com/yifanXovo/TailoredExact.git\n * [new branch]          codex/round79-bdsc-small-validation -> codex/round79-bdsc-small-validation\n",
+    "wall_seconds": 4.284035800024867
+  }
+]

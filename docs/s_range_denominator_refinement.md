@@ -75,3 +75,5 @@ The lower-S guarded row is rejected for paper evidence because substituting `S_L
 In `results/gf_tailored_bc_s_bucket_strengthening_round`, paper-safe uniform K4 buckets pass exact coverage audits at 60s, 300s, and 1200s. They improve the merged bound on `moderate_seed3301` low_gini_1 up to `0.0487233640003`, but at least one child bucket remains open, so the parent is not certified by S-bucket merge.
 
 In `results/gf_tailored_bc_adaptive_s_refinement_round`, the 3600s paper-safe K4 bucket ledger improves the best valid LB to `0.0487820084447`, leaving a gap-to-cutoff of `0.0003705442199999978`. This is progress, not certification.
+> Historical research note. K1-AM-SF (`paper-k1-am-sf`) is the current stable
+> mainline; this mechanism is not implied to be active there.

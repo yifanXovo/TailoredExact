@@ -1,8 +1,24 @@
 # ExactEBRP Algorithm Report
 
-Date: 2026-06-11
+Current status: 2026-08-29
 
-Scope note: this is a historical engineering report for the whole ExactEBRP portfolio. The paper algorithm is the full Gini-frontier route-load BPC documented in `docs/paper_bpc_algorithm_report.md`. Speedups reported below for `tailored` are compact/portfolio results unless explicitly labeled `gcap-frontier`; they are not BPC speedups and must not be cited as BPC success.
+The stable paper-facing exact algorithm is now **K1-AM-SF**, the tailored
+Gini-interval branch-and-cut framework with a K1 adaptive-mass controller and
+the F0-CLEAN sparse fixed-interval MILP solved by Gurobi's native
+branch-and-cut. Its exact definition is in `docs/k1_am_sf_algorithm.md`; the
+audited formulation inventory is in `docs/active_formulation_families.md`.
+The controller has K0=1, midpoint refinement, and adaptive-mass threshold
+`tau=0.08`. The stable inner solve uses native Gurobi branching and has the
+dynamic user-cut callback off. Round 54's inventory--route root closure is a
+bounded negative research result and is not part of the mainline.
+
+Date of historical report below: 2026-06-11
+
+Scope note: the remainder of this file is a historical engineering report for
+the wider ExactEBRP portfolio. Earlier references to a BPC or CPLEX line as the
+paper algorithm record the state of those rounds; they are superseded by the
+K1-AM-SF statement above. Speedups reported below for `tailored` are
+compact/portfolio results unless explicitly labeled `gcap-frontier`.
 
 ## Problem Statement and Data Assumptions
 

@@ -1,0 +1,38 @@
+{
+  "schema": "round55-offline-candidate-gate-v1",
+  "row_count": 108,
+  "all_lp_rows_valid": true,
+  "mapping_tests_passed": true,
+  "false_infeasibility_count": 0,
+  "model_construction_failure_count": 0,
+  "uncontrolled_numerical_range_count": 0,
+  "memory_growth_failure_count": 0,
+  "root_summary": {
+    "SF-MC4": {
+      "strict_gain_count": 24,
+      "equal_count": 3,
+      "loss_count": 0,
+      "root_work_geometric_mean_ratio": 0.9414597172723546
+    },
+    "VD-P": {
+      "strict_gain_count": 24,
+      "equal_count": 3,
+      "loss_count": 0,
+      "root_work_geometric_mean_ratio": 1.0537813880872025
+    },
+    "VD-J": {
+      "strict_gain_count": 24,
+      "equal_count": 3,
+      "loss_count": 0,
+      "root_work_geometric_mean_ratio": 1.1603296953835354
+    }
+  },
+  "live_candidates": [
+    "SF-MC4",
+    "VD-P",
+    "VD-J"
+  ],
+  "pilot_required_despite_root_equality": [
+    "VD-P"
+  ]
+}

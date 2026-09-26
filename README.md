@@ -7,8 +7,8 @@ Exact and portfolio solvers for the Equity-aware Bike Repositioning Problem.
 Preferred:
 
 ```powershell
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build -j
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DEXACT_EBRP_ENABLE_GUROBI=ON
+cmake --build build --config Release -j
 ```
 
 Fallback used on machines without CMake:
@@ -18,9 +18,106 @@ g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluat
 g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude src/Parser.cpp src/Evaluator.cpp src/Result.cpp src/Bounds.cpp src/ColumnPool.cpp src/TailoredExact.cpp src/Pricing.cpp src/Cuts.cpp src/Branching.cpp src/Master.cpp src/ColumnGeneration.cpp src/CplexBaseline.cpp src/TailoredBC.cpp src/TailoredBCCuts.cpp src/TailoredBCCallbacks.cpp src/TailoredBCCplexApi.cpp src/GiniBranching.cpp src/hga_tgbc/HgaTgbcGreedy.cpp src/HgaTgbcRunner.cpp src/Logger.cpp src/compare_main.cpp -o build/ExactEBRPCompare.exe
 ```
 
-## Main Exact Line
+## Stable research mainline: K1-AM-SF
 
-### Tailored callback BC status
+The stable paper-facing algorithm is **K1-AM-SF** (K1 Adaptive-Mass with
+Sparse Fixed-Interval Formulation), exposed by the canonical preset
+`paper-k1-am-sf`. It uses one complete initial improving Gini interval,
+midpoint refinement, adaptive-mass splitting with `tau=0.08`, exact interval
+coverage, and the F0-CLEAN sparse fixed-interval MILP solved by Gurobi's native
+branch-and-cut. The fixed-interval model uses one thread, seed zero, automatic
+presolve, zero relative and absolute MIP gaps, native branching, default
+PreCrush, and no dynamic user-cut callback. The exhaustive small-instance
+subset-duration block is omitted; the other audited static families remain
+active.
+
+Minimal paper-preset command:
+
+```powershell
+build\ExactEBRP.exe --method gcap-frontier --algorithm-preset paper-k1-am-sf `
+  --input <instance> --lambda 0.15 --T 3600 --time-limit <seconds> `
+  --threads 1 --mip-threads 1 --out <result.json>
+```
+
+`k1-am-f0` and `paper-k1-am-f0` reproduce the canonical preset, while the
+historical inner-policy name
+`interval-mip-core-no-exhaustive-subset-duration` remains a supported backend
+alias. Plain Gurobi (P-GRB) is a contextual benchmark and does not contribute
+proof evidence to K1-AM-SF:
+
+```powershell
+build\ExactEBRP.exe --method gurobi --plain-baseline --input <instance> `
+  --lambda 0.15 --T 3600 --time-limit <seconds> --threads 1 `
+  --mip-threads 1 --gurobi-seed 0 --gurobi-presolve -1 `
+  --gurobi-model-export <model.lp> --out <result.json>
+```
+
+Stable mechanisms are the K1 adaptive-mass controller, F0-CLEAN, and its
+audited static sparse formulation. Contextual mechanisms include plain Gurobi
+and historical CPLEX/route-load baselines. Rejected or default-off research
+mechanisms include exhaustive subset-duration rows, dynamic support-duration
+user cuts, inventory--route root closure, custom branching priorities,
+symmetry, Gini-spread, subset-inventory, and transfer-cutset families. Round 54
+proved and implemented exact inventory--route separation, but its fixed-
+interval gate was negative; it is not a recommended preset and does not alter
+K1-AM-SF. See `docs/current_mainline.md` and `docs/k1_am_sf_algorithm.md`.
+
+Round 55 made the controller first-class: the paper preset now reads explicit
+K1 fields for `K0=1`, midpoint splitting, balanced normalized closure,
+`tau=0.08`, depth/width limits, exact child infeasibility, native targets, and
+exact parent closure. Historical K4/C6 fields remain neutral compatibility
+adapters and no longer define paper behavior. The audit also fixed a stale
+incumbent-epoch cache key across model/LP lifecycles. That fix changes the
+corrected performance baseline but did not create a false certificate in the
+requalification panel. VD-P, VD-J, MC4, sparse-removal, and penalty-cover work
+remain explicitly named default-off research; `paper-k1-am-sf` is unchanged.
+
+VD-P passed every fixed-interval gate and the final long panel, but its full
+K1 integration was mixed: 14 versus 12 effective certificates, shifted-Work
+GM 0.5692, and GI ratio 0.6091, with zero false certificates, alongside one
+severe regression on the frozen major witness. The K1 gate therefore failed;
+the sealed P-GRB and expansion panels did not open, and VD-P remains a
+default-off research candidate rather than a paper preset.
+
+Round 56 retains that corrected mainline unchanged and builds a deterministic
+50-scenario paper-candidate screen across V=8/12/20/30/50, two matched fleet
+sizes, primary Q=30, Q=20 sentinels, and operational route horizons from 1800
+to 18000 seconds. Operational T is distinct from the solver process cap; all
+proof-difficulty comparisons use the common 3600-second horizon. Each verified
+row has one native final route package, with capped incumbents explicitly
+separated from exact certified witnesses and no route post-optimization. See
+`docs/round56_paper_candidate_dataset.md` and
+`docs/native_route_witness_interpretation.md`. This screen has only one base
+landscape per V and is not yet final replicated paper evidence.
+
+Round 58 evaluates that same frozen mainline directly against plain Gurobi on
+the replicated `citibike443-regional-v1` family. The panel is a deterministic
+50-scenario subset selected before performance from a 960-scenario family;
+the other 910 scenarios remain unopened reserves. Both methods receive a
+mandatory one-hour screen, with fresh longer runs only under predeclared gap
+and certification rules and an absolute six-hour cap. P-GRB uses one original
+compact MILP with no HGA start or imported route. Native final witnesses are
+independently checked and never post-optimized. See
+`docs/round58_citibike443_paired_benchmark.md` and the compact evidence under
+`results/gf_citibike443_k1_vs_pgrb_round58/`.
+
+The completed Round 58 classification is
+`k1_am_sf_pgrb_advantage_mixed`, not a universal superiority claim. K1-AM-SF
+certified 34/50 scenarios and P-GRB 31/50; 31 pairs were jointly certified.
+P-GRB was faster on 24 of those pairs versus 7 for K1, while K1 used less Work
+on 28 versus 3 and had the smaller common-horizon relative gap on 13 of 16
+neither-certified pairs. All 149 authorized fresh runs completed, all 100
+official native route packages passed independent verification, and the 910
+reserve scenarios remain unopened for a second sealed holdout panel.
+
+## Historical exact lines
+
+The sections below preserve earlier engineering and reproduction records. Any
+statement below that called a CPLEX compact-BC or route-load BPC configuration
+the "current" or "paper-facing" line is historical and is superseded by
+K1-AM-SF above.
+
+### Historical tailored callback BC status
 
 `paper-gf-tailored-bc` is an experimental CPLEX-managed tailored
 branch-and-cut line. The current MinGW build loads `cplex2211.dll` dynamically,
@@ -35,8 +132,8 @@ creation, branch priorities, hard-leaf callback ablations, and positive
 hard-leaf performance evidence remain incomplete. Static fallback rows remain
 labelled separately and are not treated as callback branch-and-cut evidence.
 
-The current paper-facing exact line is the Gini-frontier compact
-branch-and-cut/certification framework:
+The historical paper-facing exact line at the time of that experiment was the
+Gini-frontier compact branch-and-cut/certification framework:
 
 ```powershell
 build\ExactEBRP.exe --method gcap-frontier `
@@ -745,3 +842,13 @@ nonclosed but improves the valid lower bound to `0.048723364` against UB
 unresolved-interval subsolver in the Gini-frontier compact certification
 framework; it is not claimed to dominate relaxation closures or plain CPLEX on
 every interval.
+
+## Round 62 passive certification and threshold conflicts
+
+Explicit research modes add a verified passive upper-bound archive with legal
+external certification, bounded service-threshold clique generation, and sparse
+event or no-new-variable projections. All new options default off; the stable
+paper preset and official compact P-GRB remain unchanged. The finite panel has
+both benefits and regressions. See the [Round 62 report](results/gf_passive_threshold_conflicts_round62/final_report.md),
+[mathematical contracts](results/gf_passive_threshold_conflicts_round62/mathematics.md)
+and [reproduction commands](results/gf_passive_threshold_conflicts_round62/reproduce.md).

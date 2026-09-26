@@ -1,0 +1,111 @@
+{
+  "target": "737ceb7b13c08d8e3dc62a2a6a4ef236c35a13c3",
+  "branch": "codex/round85-ensc-remaining-protection-replication",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round85-ensc-remaining-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.555488399695605,
+      "stderr": "",
+      "returned_sha": "bdf197b4c1fa97aaec43f1eea07b0b45649b5f34"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/bd689ed3aae9ad6e6a9342b64875718a9c0c9e30",
+      "returncode": 1,
+      "wall_seconds": 0.57306639989838,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 5.77900470001623,
+      "stderr": "",
+      "returned_sha": "bd689ed3aae9ad6e6a9342b64875718a9c0c9e30"
+    },
+    {
+      "method": "POST",
+      "path": "git/commits",
+      "returncode": 0,
+      "wall_seconds": 1.0185007997788489,
+      "stderr": "",
+      "returned_sha": "170d676476e4e980fce12217905f57141c7151c2"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/599a1ec1c3f2a15e5fe53af25ee8559cf7d3ef20",
+      "returncode": 1,
+      "wall_seconds": 0.5974515001289546,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 1.2536603999324143,
+      "stderr": "",
+      "returned_sha": "599a1ec1c3f2a15e5fe53af25ee8559cf7d3ef20"
+    },
+    {
+      "method": "POST",
+      "path": "git/commits",
+      "returncode": 0,
+      "wall_seconds": 1.3430288000963628,
+      "stderr": "",
+      "returned_sha": "737ceb7b13c08d8e3dc62a2a6a4ef236c35a13c3"
+    },
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round85-ensc-remaining-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.5355543997138739,
+      "stderr": "",
+      "returned_sha": "bdf197b4c1fa97aaec43f1eea07b0b45649b5f34"
+    },
+    {
+      "method": "PATCH",
+      "path": "git/refs/heads/codex/round85-ensc-remaining-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 1.3953541000373662,
+      "stderr": "",
+      "returned_sha": "737ceb7b13c08d8e3dc62a2a6a4ef236c35a13c3"
+    },
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round85-ensc-remaining-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.6412583999335766,
+      "stderr": "",
+      "returned_sha": "737ceb7b13c08d8e3dc62a2a6a4ef236c35a13c3"
+    }
+  ],
+  "optimizer_calls": 0,
+  "script_sha256": "35ae6e3d08579b45ec4cc2faeb0b1536840ee13554ff6b0c43503fae714c9a9a",
+  "scope": "Exact blobs, tree and original commit hashes required before a non-force branch update",
+  "wall_seconds": 14.346891799941659,
+  "initial_remote_head": "bdf197b4c1fa97aaec43f1eea07b0b45649b5f34",
+  "original_commits": [
+    "170d676476e4e980fce12217905f57141c7151c2",
+    "737ceb7b13c08d8e3dc62a2a6a4ef236c35a13c3"
+  ],
+  "verified_exact_trees": [
+    "bd689ed3aae9ad6e6a9342b64875718a9c0c9e30",
+    "599a1ec1c3f2a15e5fe53af25ee8559cf7d3ef20"
+  ],
+  "verified_exact_commits": [
+    "170d676476e4e980fce12217905f57141c7151c2",
+    "737ceb7b13c08d8e3dc62a2a6a4ef236c35a13c3"
+  ],
+  "passed": true,
+  "final_remote_head": "737ceb7b13c08d8e3dc62a2a6a4ef236c35a13c3",
+  "original_history_preserved": true,
+  "independent_remote_readback": {
+    "checked_at": "2026-09-17T20:28:28.860Z",
+    "head": "737ceb7b13c08d8e3dc62a2a6a4ef236c35a13c3",
+    "matched": true
+  }
+}

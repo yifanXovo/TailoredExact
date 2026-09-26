@@ -1,0 +1,21 @@
+{
+  "schema": "round55-bug-classification-protocol-v1",
+  "classes": [
+    "no defect",
+    "documentation/telemetry defect",
+    "evidence-only defect",
+    "performance-accounting defect",
+    "semantic implementation defect",
+    "exactness/certificate defect"
+  ],
+  "fields": [
+    "source",
+    "mathematical impact",
+    "historical rounds",
+    "evidence invalidation",
+    "fix",
+    "tests",
+    "rerun"
+  ],
+  "semantic_or_exactness_action": "fix, freeze corrected baseline, and rerun all mandatory baseline qualification rows"
+}

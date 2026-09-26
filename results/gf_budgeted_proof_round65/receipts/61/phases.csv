@@ -1,0 +1,10 @@
+sequence,process_seconds,event,status,nominal_deadline_remaining_seconds,work_deadline_remaining_seconds,detail
+0,0,"process_entry","start",119.9991335,116.9991335,""
+1,0.0021399000000000001,"hga_start","start",119.99786020000001,116.9978601,""
+2,0.0022763000000000002,"hga_start","start",119.99772369999999,116.99772369999999,"label=primary_hga;native_generation_stagnation_hga"
+3,3.6191162000000001,"round65_verified_zero","certified",116.3808839,113.38088380000001,"complete_cached_decode_independently_verified;F_ge_0"
+4,3.6192579,"hga_generation_loop_complete","complete",116.3807422,113.38074210000001,"label=primary_hga;generations=10;no_improve=0"
+5,3.6197572,"hga_timing_return","complete",116.3802429,113.3802429,""
+6,3.6209951,"final_result_serialization_start","start",116.3790051,113.37900500000001,""
+7,3.6213061999999998,"final_result_serialization_complete","complete",116.3786939,113.3786939,""
+8,3.6213730000000002,"process_exit","complete",116.37862699999999,113.37862699999999,""

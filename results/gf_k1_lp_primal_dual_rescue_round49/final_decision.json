@@ -1,0 +1,56 @@
+{
+  "K0": 1,
+  "artifact_hash_failures": [],
+  "benchmark_classification": "k1_am_rc_pgrb_mixed",
+  "candidate_ready_for_main_research_algorithm": false,
+  "certificate_summary": {
+    "capped_or_noncertified": 6,
+    "false_certificates": 0,
+    "strict": 2
+  },
+  "cli_rule": "d-rcd",
+  "completion_status": "round49_complete",
+  "derived_from_completed_evidence": true,
+  "entered_stage_missing_rows": [],
+  "evidence_sha256": {
+    "certificate": "b296d3685a87798c78c0c090fcaa9b819070eff9ea61ab4f0b1a92fe6b44fec7",
+    "default_off": "04c959950934c20cefbb91a94485c2a15d24ecb02fba2aa218284488ac81e8cb",
+    "separation": "eb2596c1d08702c1d17543ed4cfb7ad7921be3c34ac2eea0a8eb154f4f69b006",
+    "stage3": "ce886eb5e684185cd80edc21f99881fc19f46f3641ff72ddc970b87c27ba335a"
+  },
+  "extra_lp_count": 0,
+  "extra_mip_count": 0,
+  "invalid_profile_fallback_count": 0,
+  "k1_classification": "bounded_negative_k1_am_rc",
+  "maximum_primitive_variable_count": 1580,
+  "mechanism_classification": "bounded_negative_rc_rescue",
+  "new_adjustable_parameter_count": 0,
+  "official_executable_sha256": "f73b40a12590ab432abc201f95fbcea70ba499337239f31175fba589ab0d8ed5",
+  "official_source_commit": "36990fc47c8f86a458e9c068c471ac6ec45454a9",
+  "offline_gate_failed": true,
+  "point_rule": "midpoint",
+  "primitive_families": [
+    "routing_arc",
+    "visit_selection",
+    "operation_mode",
+    "pickup_quantity",
+    "drop_quantity",
+    "vehicle_load",
+    "final_inventory"
+  ],
+  "rc_decision_count": 32,
+  "reason": "D/H and exact separation cannot distinguish mandatory harmful H1 from beneficial T1; live D-RCD rescues H1, misses B1/B2/U1, and provides no reliable aggregate split-rescue rule.",
+  "reduced_cost_valid_decision_count": 32,
+  "rescue_count": 24,
+  "scale_qualification": "small_only",
+  "schema": "round49-final-decision-v1",
+  "selected_rule": "D-RCD",
+  "stage3_revision_used": false,
+  "stage_rows": {
+    "stage3": 8,
+    "stage4": 0,
+    "stage5": 0
+  },
+  "structural_classification": "rc_domain_partial_separation",
+  "tau": 0.07915
+}

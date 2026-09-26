@@ -1,0 +1,96 @@
+{
+  "new_qualification_calls": 0,
+  "new_build_calls": 0,
+  "new_ctests": 0,
+  "new_native_fixture_calls": 0,
+  "new_full_runs": 18,
+  "full_run_seconds": 32889.54800000088,
+  "full_run_optimize_calls": 81,
+  "full_run_offline_replay_seconds": 1.0662552989087999,
+  "full_preflight_seconds": 1.0958596002310514,
+  "full_reference_seconds_nested": 0.7490000003017485,
+  "final_audit_seconds": 60.32998550031334,
+  "mechanism_audit_seconds": 6.773454399779439,
+  "new_input_generation_seconds": 0.2886939002200961,
+  "package_and_verify_seconds": 26.977775799576193,
+  "stage_complete": true,
+  "overall_goal_complete": false,
+  "reset_credits_consumed": 0,
+  "scope": "Full paid processes and separately measured offline steps; inherited qualification costs not counted again; interactive work is not a complete machine-time census.",
+  "standalone_byte_verification_seconds": 1.9347411002963781,
+  "plot_render_seconds": [
+    1.3269627001136541,
+    0.5725651001557708
+  ],
+  "new_plot_environment_installs": 0,
+  "plot_layout_revisions": 1,
+  "plot_layout_final_passed": true,
+  "ordinary_usage_allowed": true,
+  "weekly_remaining_percent_at_queue_close": 19,
+  "publication_pending": false,
+  "pr_number": 143,
+  "publication_ledgers": [
+    {
+      "path": "results/unified_exact_round82/publication_api/early_confirmation.json",
+      "wall_seconds": 21.661268699914217,
+      "passed": true
+    },
+    {
+      "path": "results/unified_exact_round82/publication_api/final_evidence.json",
+      "wall_seconds": 123.63138449983671,
+      "passed": false
+    },
+    {
+      "path": "results/unified_exact_round82/publication_api/final_evidence_recovery.json",
+      "wall_seconds": 21.100555200129747,
+      "passed": false
+    },
+    {
+      "path": "results/unified_exact_round82/publication_api/final_git_transport.json",
+      "wall_seconds": 26.141000000294298,
+      "passed": true
+    },
+    {
+      "path": "results/unified_exact_round82/publication_api/initial_recovery.json",
+      "wall_seconds": 94.53658640012145,
+      "passed": true
+    },
+    {
+      "path": "results/unified_exact_round82/publication_api/u4_complete.json",
+      "wall_seconds": 25.05288980016485,
+      "passed": true
+    },
+    {
+      "path": "results/unified_exact_round82/publication_api/u4_primary.json",
+      "wall_seconds": 31.580629999749362,
+      "passed": true
+    },
+    {
+      "path": "results/unified_exact_round82/publication_api/u5_bds.json",
+      "wall_seconds": 30.818882499821484,
+      "passed": true
+    },
+    {
+      "path": "results/unified_exact_round82/publication_api/u5_complete.json",
+      "wall_seconds": 29.58976909983903,
+      "passed": true
+    },
+    {
+      "path": "results/unified_exact_round82/publication_api/u5_primary.json",
+      "wall_seconds": 40.28107880009338,
+      "passed": true
+    },
+    {
+      "path": "results/unified_exact_round82/publication_api/u6_negative.json",
+      "wall_seconds": 36.83398130023852,
+      "passed": true
+    },
+    {
+      "path": "results/unified_exact_round82/publication_api/u6_primary.json",
+      "wall_seconds": 34.24888970004395,
+      "passed": true
+    }
+  ],
+  "publication_seconds_recorded": 515.476916000247,
+  "publication_scope": "Per-attempt wall, no double count of nested requests. Final metadata transport carried to next stage. Interactive connector calls and ad hoc connectivity checks are not a complete timed census."
+}

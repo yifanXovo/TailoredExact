@@ -1,0 +1,21 @@
+{
+  "engineering_classification_candidate": "scenario_identity_bug_fixed",
+  "issues": [
+    {
+      "algorithm_semantics_changed": false,
+      "fix_commit": "75e58521158aba8628ebc9444444ec3841415285",
+      "historical_numerical_evidence_affected": false,
+      "issue_id": "R56-META-001",
+      "resolution": "explicit T, process cap, service-time, distance-convention, scenario-hash, and run-hash result fields added"
+    },
+    {
+      "algorithm_semantics_changed": false,
+      "fix_commit": "eba41f90b",
+      "historical_evidence_affected": false,
+      "issue_id": "R56-GEN-001",
+      "resolution": "distances regenerated from exact serialized coordinates before any optimizer result",
+      "round56_results_rerun_required": false
+    }
+  ],
+  "schema": "round56-engineering-issue-resolution-v1"
+}

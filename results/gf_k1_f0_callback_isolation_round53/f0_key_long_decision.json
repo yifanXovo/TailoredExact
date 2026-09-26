@@ -1,0 +1,32 @@
+{
+  "all_state_aggregate_gi_ratio": 0.36254411865052527,
+  "baseline_certificates": 5,
+  "candidate_certificates": 5,
+  "capped_state_aggregate_gi_ratio": 0.5885104518831067,
+  "certificate_gains": 0,
+  "certificate_losses": 0,
+  "common_exact_changed_state_count": 5,
+  "correctness_failures": 0,
+  "false_certificates": 0,
+  "mandatory_gate_pass": true,
+  "material_improvement_role_count": 6,
+  "material_improvement_roles": [
+    "numerical-endpoint midpoint left child",
+    "numerical-endpoint midpoint right child",
+    "numerical-endpoint parent",
+    "retain historically preferable; severe fragmentation guard",
+    "strong-control difficult parent",
+    "strong-control exact midpoint left child"
+  ],
+  "paired_row_count": 6,
+  "performance_gate_pass": true,
+  "physical_row_count": 12,
+  "row_count_per_policy": 6,
+  "schema": "round53-fixed-interval-stage-decision-v1",
+  "severe_regressions": 0,
+  "shifted_all_row_work_geometric_mean_ratio": 0.422731834750104,
+  "stage": "key-long",
+  "stage_pass": true,
+  "v_gt_12_equivalence_pass": true,
+  "work_geometric_mean_ratio_candidate_over_baseline": 0.4147125568119254
+}

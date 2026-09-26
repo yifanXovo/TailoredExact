@@ -1,0 +1,44 @@
+{
+  "run_number": 10,
+  "id": "D7",
+  "arm": "P-GRB",
+  "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+  "executable_sha256": "4f60ed8cd6f65c695947e8ac3bd525b77d28d94733faf2c9ef25d057a69023af",
+  "completion": {
+    "returncode": 1,
+    "wall_seconds": 3610.063000000082,
+    "watchdog": true,
+    "within_budget": false,
+    "solver_calls_planned": "all actual native calls in ledger",
+    "supervisor_error": null,
+    "restored_launcher": {
+      "process_mask": 1048575,
+      "system_mask": 1048575
+    }
+  },
+  "original_cap_seconds": 3600,
+  "actual_optimize_calls": 1,
+  "last_native_progress_line": " 10221  7618    0.20137   46 1680    0.23728    0.19859  16.3%   577 3592s",
+  "result_json_present": false,
+  "formal_UB": null,
+  "formal_LB": null,
+  "formal_gap": null,
+  "certificate": false,
+  "final_physical_witness_available": false,
+  "observed_last_phase": {
+    "sequence": "3",
+    "process_seconds": "0.32682630000000001",
+    "event": "plain_gurobi_optimize_launch",
+    "status": "start",
+    "nominal_deadline_remaining_seconds": "3599.6731737999999",
+    "work_deadline_remaining_seconds": "3596.6731737999999",
+    "detail": "absolute_work_remaining=3596.673336"
+  },
+  "known_defect": "Progress and physical final solution are serialized only after synchronous Optimize returns.",
+  "root_cause_limit": "The exact native reason for non-return is not established; TimeLimit is not a hard-return guarantee.",
+  "unlaunched_arms": [
+    "K1-R",
+    "DS-X"
+  ],
+  "repeated": false
+}

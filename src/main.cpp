@@ -1,3 +1,5 @@
+#include "Round63TimeResource.hpp"
+#include "Round64SharedResource.hpp"
 #include "Branching.hpp"
 #include "Bounds.hpp"
 #include "ColumnPool.hpp"
@@ -12,11 +14,18 @@
 #include "ReplicaExternalGiniTree.hpp"
 #include "GiniFrontierGeometry.hpp"
 #include "HgaTgbcRunner.hpp"
+#include "Round73JointInsertion.hpp"
+#include "Round75QuantityDescent.hpp"
+#include "Round76PhysicalClosure.hpp"
+#include "Round78BalancedRelocation.hpp"
+#include "Round83BlockExchange.hpp"
 #include "Master.hpp"
 #include "Parser.hpp"
 #include "Pricing.hpp"
 #include "ProcessPhaseLedger.hpp"
 #include "Result.hpp"
+#include "Round50IntervalMip.hpp"
+#include "PaperK1AmSf.hpp"
 #include "TailoredBC.hpp"
 #include "TailoredBCCuts.hpp"
 #include "TailoredBCCplexApi.hpp"
@@ -42,6 +51,7 @@
 #include <numeric>
 #include <random>
 #include <regex>
+#include <set>
 #include <sstream>
 #include <string>
 #include <thread>
@@ -61,7 +71,11 @@ void usage() {
         << "[--gini-cap <gamma>] [--gini-floor <gamma>] [--max-nodes <N>] [--frontier-intervals <N>] [--frontier-refine-splits <N>] "
         << "[--frontier-execution-mode scheduler|global-gini-tree|external-gini-tree] [--global-gini-tree-presolve on|off] "
         << "[--external-gini-split-after-attempts <N>] [--external-gini-scheduling legacy-quanta|paper-lp-event|cplex-algorithm-replica|round29-bound-gain-incremental|round30-dual-bound-target|round31-nonblocking-native-bound] "
+        << "[--external-gini-interval-mip-policy <uniform-policy>] "
+        << "[--round62-archive-mode off|passive-observe|passive-cert|outer|submit] "
+        << "[--round62-threshold-mode off|events|conflicts|projection|service|service-conflicts|projection-rlt|projection-service] "
         << "[--process-wall-time-limit <seconds>] [--process-shutdown-margin <seconds>] [--process-phase-ledger <csv>] "
+        << "[--round56-scenario-id <id>] [--round56-mathematical-instance-sha256 <sha256>] [--round56-run-identity-sha256 <sha256>] "
         << "[--global-gini-tree-search dynamic|traditional|auto] [--global-gini-tree-child-estimate parent-copy|dispersion-coupled|factory-domain] "
         << "[--global-gini-tree-row-attachment full-inherited-pack|exact-incremental-delta] [--global-gini-tree-row-timing deferred|eager] "
         << "[--global-gini-tree-native-mip-start true|false] [--global-gini-tree-root-connectivity-flow true|false] "
@@ -105,6 +119,40 @@ void usage() {
         << "[--round36-c6-causal-arm off|hh|ss|bw-p|bw-a] "
         << "[--round36-c6-split-normalization proof|anchor] "
         << "[--round37-c6-geometry-policy off|pilot-weakest-prefine] "
+        << "[--round40-c6-coarse-start off|k1-single|k1-adaptive|k1-adaptive-decisive] "
+        << "[--c6-normalized-split-threshold <rho>] "
+        << "[--round47-c6-adaptive-mass off|adaptive-mass|adaptive-mass-contraction] "
+        << "[--round47-c6-adaptive-mass-tau <tau>] [--round48-k1-amf off|k1-amf] "
+        << "[--round49-k1-am-rc off|d-rcd] "
+        << "[--round48-counterfactual-mode off|retain|midpoint] "
+        << "[--round48-counterfactual-interval <leaf-id>] "
+        << "[--round40-c6-ub-geometry off|nested-dyadic-k4] "
+        << "[--round41-static-segmented-gini off|st-k2-i|st-k2-p-core|st-k2-p-extended] "
+        << "[--round41-static-segmented-solve mip|root-lp] "
+        << "[--round41-root-reference-interval off|k1|left|right] "
+        << "[--round42-static-architecture off|st-k4-p-core|st-k4-p-core-hierarchical|st-k4-p-core-factored|external-k2-left|external-k2-right|paired-k4-lower|paired-k4-upper|paired-k4-lower-factored|paired-k4-upper-factored] "
+        << "[--round42-static-solve mip|root-lp] "
+        << "[--round42-terminal-sibling-coalescing off|core|core-factored] "
+        << "[--round43-envelope-refinement off|atlas|algorithm] "
+        << "[--round43-initial-k0 1|4] [--round43-lookahead-depth 1|2] "
+        << "[--round43-rho <value>] [--round43-score d|max-d-c|old|no-adaptive] "
+        << "[--round43-envelope-mode none|constant|single|iterated] "
+        << "[--round44-envelope-tail-repair off|atlas|algorithm] "
+        << "[--round44-initial-k0 4] "
+        << "[--round44-lookahead-policy fixed-d1|fixed-d2|frontier-d2] "
+        << "[--round44-envelope-injection none|all|violated|active-one] "
+        << "[--round44-envelope-scope parent|nested] "
+        << "[--round44-refinement-family no-adaptive|c6-overlay|veto|veto-promotion|f|f-mroot|h|mroot] "
+        << "[--round44-rho-f <value>] [--round44-rho-m <value>] [--round44-rho-h <value>] "
+        << "[--round44-rank1-cuts off|on] [--round44-mip-starts off|verified] "
+        << "[--round44-frontier-consolidation off|singleton|pair|block] "
+        << "[--round45-adaptive-parametric-partition off|atlas|algorithm] "
+        << "[--round45-initial-k0 1|4] "
+        << "[--round45-timing-rule old-c6|d-r43|veto-f|f|f-mroot|h|mroot|gamma-positive|gamma-threshold|gamma-veto|decisive-gamma|no-adaptive] "
+        << "[--round45-rho-gamma <value>] "
+        << "[--round45-point-rule midpoint|pmm|fpmm] "
+        << "[--round45-minimum-child-width <value>] "
+        << "[--round45-counterfactual-mode off|retain|midpoint|pmm|fpmm] "
         << "[--heuristic-candidates-csv <path>] "
         << "[--large-instance-mode auto|off|force] [--large-lb-mode none|inventory-only|movement-projection|column-pool-relaxation|auto] "
         << "[--pricing-engine exact-label|ng-dssr|hybrid] "
@@ -165,7 +213,7 @@ void usage() {
         << "[--pricing-final-verifier true|false] [--pricing-verifier-time <seconds>] "
         << "[--pricing-verifier-checkpoint <path>] [--pricing-verifier-resume <path>] "
         << "[--pricing-verifier-mode label-dp|route-mask-dp|auto] "
-        << "[--algorithm-preset paper-gf-tailored-bc|paper-gf-compact-bc|paper-gf-bpc-core|paper-bpc-core|paper-bpc-core-adaptive|paper-exact-v20-certificate|paper-exact-portfolio|paper-bpc-experimental|diagnostic-large] "
+        << "[--algorithm-preset paper-k1-am-sf|k1-am-f0|research-k1-am-sf-vdp|research-k1-am-sf-sf-r1|research-k1-am-sf-vdp-sf-r1|paper-gf-tailored-bc|research-gf-adaptive-gamma-veto|paper-gf-adaptive-gamma-veto|paper-gf-compact-bc|paper-gf-bpc-core|paper-bpc-core|paper-bpc-core-adaptive|paper-exact-v20-certificate|paper-exact-portfolio|paper-bpc-experimental|diagnostic-large] "
         << "[--production-preset <preset-alias>] [--incumbent-archive-auto true|false] "
         << "[--incumbent-archive-dir <dir>]\n";
 }
@@ -205,6 +253,183 @@ void applyAlgorithmPreset(ebrp::SolveOptions& opt) {
         opt.algorithm_preset = "custom";
     }
     if (opt.algorithm_preset == "custom") return;
+
+    if (opt.algorithm_preset == "research-round83-vds-equal-net-exchange") {
+        opt.algorithm_preset = "research-round73-vds-joint-seeded-descent";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = "research-round83-vds-equal-net-exchange";
+        return;
+    }
+
+    if (opt.algorithm_preset == "research-round78-vds-balanced-descent") {
+        opt.algorithm_preset = "research-round73-vds-joint-seeded-descent";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = "research-round78-vds-balanced-descent";
+        return;
+    }
+
+    if (opt.algorithm_preset == "research-round76-vds-physical-closure") {
+        opt.algorithm_preset = "research-round73-vds-joint-seeded-descent";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = "research-round76-vds-physical-closure";
+        return;
+    }
+
+    if (opt.algorithm_preset == "research-round75-vds-quantity-descent") {
+        opt.algorithm_preset = "research-round73-vds-joint-seeded-descent";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = "research-round75-vds-quantity-descent";
+        return;
+    }
+
+    if (opt.algorithm_preset == "research-round73-vds-joint-seeded-descent") {
+        opt.algorithm_preset = "research-round71-vds-interroute-descent";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = "research-round73-vds-joint-seeded-descent";
+        return;
+    }
+
+    if (opt.algorithm_preset == "research-round73-vds-joint-insertion") {
+        opt.algorithm_preset = "research-round68-vdp-start";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = "research-round73-vds-joint-insertion";
+        opt.primal_heuristic = "joint-insertion";
+        opt.primal_heuristic_stop = "motif-exhaustion";
+        opt.primal_heuristic_runs = 1;
+        return;
+    }
+
+    if (opt.algorithm_preset == "research-round71-vds-interroute-descent") {
+        opt.algorithm_preset = "research-round70-vds-descent";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = "research-round71-vds-interroute-descent";
+        opt.primal_heuristic_stop = "decoded-descent-interroute";
+        return;
+    }
+
+    if (opt.algorithm_preset == "research-round70-vds-descent") {
+        opt.algorithm_preset = "research-round68-vdp-start";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = "research-round70-vds-descent";
+        opt.primal_heuristic_stop = "decoded-descent";
+        // This legacy option supplies the native seed population size.
+        // Explicitly report the 24 seeds already used by the VD-S bridge.
+        opt.primal_heuristic_runs = 24;
+        return;
+    }
+
+    if (opt.algorithm_preset == "research-round68-vdp-start") {
+        opt.algorithm_preset = "research-round67-vdp";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = "research-round68-vdp-start";
+        opt.round68_verified_start = true;
+        return;
+    }
+
+    if (opt.algorithm_preset == "research-round67-vdp" ||
+        opt.algorithm_preset == "research-round67-log-vdp") {
+        const std::string requested = opt.algorithm_preset;
+        opt.algorithm_preset = "research-round65-k1-h";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = requested;
+        opt.round65_hga_zero_stop = true;
+        opt.external_gini_interval_mip_policy = requested == "research-round67-vdp"
+            ? "round55-vd-p" : "round67-log-vd-p";
+        return;
+    }
+
+    if(opt.algorithm_preset=="research-round65-k1-s" ||
+       opt.algorithm_preset=="research-round65-k1-h" ||
+       opt.algorithm_preset=="research-round64-k1-s" ||
+       opt.algorithm_preset=="research-round64-k1-h" ||
+       opt.algorithm_preset=="research-round64-single-s") {
+        const std::string requested=opt.algorithm_preset;
+        opt.algorithm_preset="paper-k1-am-sf";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset=requested;
+        opt.round59_simple_start=requested!="research-round64-k1-h" && requested!="research-round65-k1-h";
+        opt.round59_single_mip=requested=="research-round64-single-s";
+        if(opt.round59_simple_start) {
+            opt.primal_heuristic="greedy";
+            opt.round34_c6_startup_variant="simple-start";
+        }
+        return;
+    }
+    if (opt.algorithm_preset == "research-round59-k1-s" ||
+        opt.algorithm_preset == "research-round59-f0-single-s" ||
+        opt.algorithm_preset == "research-round60-f0-single-h") {
+        const std::string requested = opt.algorithm_preset;
+        opt.algorithm_preset = "paper-k1-am-sf";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = requested;
+        opt.round59_simple_start = requested != "research-round60-f0-single-h";
+        opt.round59_single_mip = requested != "research-round59-k1-s";
+        if (opt.round59_simple_start) {
+            opt.primal_heuristic = "greedy";
+            opt.round34_c6_startup_variant = "simple-start";
+        }
+        return;
+    }
+    if (opt.algorithm_preset == "research-k1-am-sf-vdp" ||
+        opt.algorithm_preset == "research-k1-am-sf-sf-r1" ||
+        opt.algorithm_preset == "research-k1-am-sf-vdp-sf-r1") {
+        // Default-off Round 55 research adapters. They reuse the complete
+        // first-class paper controller and change only the uniform inner
+        // formulation policy named by the preset.
+        const std::string requested = opt.algorithm_preset;
+        opt.algorithm_preset = "paper-gf-tailored-bc";
+        applyAlgorithmPreset(opt);
+        ebrp::configurePaperK1AmSfOverrides(opt);
+        opt.algorithm_preset = requested;
+        if (requested == "research-k1-am-sf-vdp") {
+            opt.external_gini_interval_mip_policy = "round55-vd-p";
+        } else if (requested == "research-k1-am-sf-sf-r1") {
+            opt.external_gini_interval_mip_policy =
+                "round55-sf-r1-remove-triple-duration";
+        } else {
+            opt.external_gini_interval_mip_policy =
+                "round55-vdp-sf-r1";
+        }
+        return;
+    }
+
+    if (ebrp::isPaperK1AmSfPresetOrAlias(opt.algorithm_preset)) {
+        // Round 54 canonicalizes the frozen Round 52/53 K1-AM controller and
+        // its simplified F0 fixed-interval backend. Begin with the same
+        // historical paper-gf-tailored-bc foundation used by the qualification
+        // commands, then apply every uniform override from that command line.
+        // Aliases are reproduction conveniences; emitted provenance names the
+        // canonical paper-k1-am-sf preset.
+        opt.algorithm_preset = "paper-gf-tailored-bc";
+        applyAlgorithmPreset(opt);
+        ebrp::configurePaperK1AmSfOverrides(opt);
+        return;
+    }
+
+    if (opt.algorithm_preset == "paper-gf-adaptive-gamma-veto" ||
+        opt.algorithm_preset == "research-gf-adaptive-gamma-veto") {
+        // Keep the former paper-facing name only as a compatibility alias
+        // while the Round 45 completion gates are pending.
+        const std::string requested = "research-gf-adaptive-gamma-veto";
+        opt.algorithm_preset = "paper-gf-tailored-bc";
+        applyAlgorithmPreset(opt);
+        opt.algorithm_preset = requested;
+        opt.frontier_execution_mode = "external-gini-tree";
+        opt.external_gini_backend = "gurobi";
+        opt.external_gini_lifecycle = "round31-open-native-bounded";
+        opt.external_gini_scheduling = "round31-nonblocking-native-bound";
+        opt.external_gini_warm_start = false;
+        opt.round34_c6_startup_variant = "hga-full";
+        opt.round43_envelope_refinement = "off";
+        opt.round44_envelope_tail_repair = "off";
+        opt.round45_adaptive_parametric_partition = "algorithm";
+        opt.round45_initial_k0 = 4;
+        opt.round45_timing_rule = "gamma-veto";
+        opt.round45_rho_gamma = 0.012;
+        opt.round45_point_rule = "midpoint";
+        opt.round45_minimum_child_width = 1e-4;
+        return;
+    }
 
     if (opt.algorithm_preset == "paper-gf-compact-bc" ||
         opt.algorithm_preset == "paper-gf-interval-bc" ||
@@ -546,6 +771,10 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--process-wall-time-limit") opt.process_wall_time_limit = std::stod(requireValue(i, argc, argv));
         else if (arg == "--process-shutdown-margin") opt.process_shutdown_margin_seconds = std::stod(requireValue(i, argc, argv));
         else if (arg == "--process-phase-ledger") opt.process_phase_ledger_path = requireValue(i, argc, argv);
+        else if (arg == "--native-evidence-dir") opt.native_evidence_dir = requireValue(i, argc, argv);
+        else if (arg == "--round56-scenario-id") opt.round56_scenario_id = requireValue(i, argc, argv);
+        else if (arg == "--round56-mathematical-instance-sha256") opt.round56_mathematical_instance_sha256 = requireValue(i, argc, argv);
+        else if (arg == "--round56-run-identity-sha256") opt.round56_run_identity_sha256 = requireValue(i, argc, argv);
         else if (arg == "--gini-cap") opt.gini_cap = std::stod(requireValue(i, argc, argv));
         else if (arg == "--gini-floor") opt.gini_floor = std::stod(requireValue(i, argc, argv));
         else if (arg == "--max-nodes") opt.max_branch_nodes = std::stoi(requireValue(i, argc, argv));
@@ -581,6 +810,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round24-executable-sha256") opt.round24_executable_sha256 = requireValue(i, argc, argv);
         else if (arg == "--round24-manifest-executable-sha256") opt.round24_manifest_executable_sha256 = requireValue(i, argc, argv);
         else if (arg == "--external-gini-backend") opt.external_gini_backend = requireValue(i, argc, argv);
+        else if (arg == "--external-gini-interval-mip-policy") opt.external_gini_interval_mip_policy = requireValue(i, argc, argv);
         else if (arg == "--external-gini-lifecycle") opt.external_gini_lifecycle = requireValue(i, argc, argv);
         else if (arg == "--external-gini-scheduling") opt.external_gini_scheduling = requireValue(i, argc, argv);
         else if (arg == "--external-gini-warm-start") opt.external_gini_warm_start = parseBoolValue(requireValue(i, argc, argv));
@@ -1173,10 +1403,90 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--primal-heuristic-stop") opt.primal_heuristic_stop = requireValue(i, argc, argv);
         else if (arg == "--primal-heuristic-no-improve-generations") opt.primal_heuristic_no_improve_generations = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-generation-log") opt.primal_heuristic_generation_log = requireValue(i, argc, argv);
+        else if (arg == "--round60-hga-publish-verified") opt.round60_hga_publish_verified = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--round66-arc-load-replacement") opt.round66_arc_load_replacement = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--round65-hga-zero-stop") opt.round65_hga_zero_stop = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--round65-witness-audit") opt.round65_witness_audit = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--round65-budget") opt.round65_budget = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--round65-controller") opt.round65_controller = lowerAscii(requireValue(i, argc, argv));
+        else if (arg == "--round65-release-load") opt.round65_release_load = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--round65-seed-credit") opt.round65_seed_credit = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round65-projection") opt.round65_projection = lowerAscii(requireValue(i, argc, argv));
+        else if (arg == "--round60-hga-candidate-log") opt.round60_hga_candidate_log = requireValue(i, argc, argv);
+        else if (arg == "--round60-candidate-mode") opt.round60_candidate_mode = lowerAscii(requireValue(i, argc, argv));
+        else if (arg == "--round61-candidate-mode") opt.round61_candidate_mode = lowerAscii(requireValue(i, argc, argv));
+        else if (arg == "--round62-archive-mode") {
+            opt.round61_candidate_mode=lowerAscii(requireValue(i,argc,argv));
+            if (opt.round61_candidate_mode=="outer") opt.round61_candidate_mode="archive";
+        }
+        else if (arg == "--round63-time-mode") opt.round63_time_mode=lowerAscii(requireValue(i,argc,argv));
+        else if (arg == "--round64-shared-mode") opt.round64_shared_mode=lowerAscii(requireValue(i,argc,argv));
+        else if (arg == "--round62-threshold-mode") opt.round62_threshold_mode=lowerAscii(requireValue(i,argc,argv));
+        else if (arg == "--pickup-time") opt.pickup_time = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--drop-time") opt.drop_time = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round60-candidate-max-evaluations") opt.round60_candidate_maximum_evaluations = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round60-candidate-max-stations") opt.round60_candidate_maximum_stations = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round60-candidate-log-dir") opt.round60_candidate_log_dir = requireValue(i, argc, argv);
         else if (arg == "--round34-c6-startup-variant") opt.round34_c6_startup_variant = requireValue(i, argc, argv);
         else if (arg == "--round36-c6-causal-arm") opt.round36_c6_causal_arm = requireValue(i, argc, argv);
         else if (arg == "--round36-c6-split-normalization") opt.round36_c6_split_normalization = requireValue(i, argc, argv);
         else if (arg == "--round37-c6-geometry-policy") opt.round37_c6_geometry_policy = requireValue(i, argc, argv);
+        else if (arg == "--round40-c6-coarse-start") opt.round40_c6_coarse_start = requireValue(i, argc, argv);
+        else if (arg == "--c6-normalized-split-threshold") {
+            opt.c6_normalized_split_threshold =
+                std::stod(requireValue(i, argc, argv));
+            opt.c6_normalized_split_threshold_explicit = true;
+        }
+        else if (arg == "--round47-c6-adaptive-mass")
+            opt.round47_c6_adaptive_mass = requireValue(i, argc, argv);
+        else if (arg == "--round47-c6-adaptive-mass-tau") {
+            opt.round47_c6_adaptive_mass_tau =
+                std::stod(requireValue(i, argc, argv));
+            opt.round47_c6_adaptive_mass_tau_explicit = true;
+        }
+        else if (arg == "--round48-k1-amf")
+            opt.round48_k1_amf = requireValue(i, argc, argv);
+        else if (arg == "--round49-k1-am-rc")
+            opt.round49_k1_am_rc = requireValue(i, argc, argv);
+        else if (arg == "--round48-counterfactual-mode")
+            opt.round48_counterfactual_mode = requireValue(i, argc, argv);
+        else if (arg == "--round48-counterfactual-interval")
+            opt.round48_counterfactual_interval = requireValue(i, argc, argv);
+        else if (arg == "--round40-c6-ub-geometry") opt.round40_c6_ub_geometry = requireValue(i, argc, argv);
+        else if (arg == "--round41-static-segmented-gini") opt.round41_static_segmented_gini = requireValue(i, argc, argv);
+        else if (arg == "--round41-static-segmented-solve") opt.round41_static_segmented_solve = requireValue(i, argc, argv);
+        else if (arg == "--round41-root-reference-interval") opt.round41_root_reference_interval = requireValue(i, argc, argv);
+        else if (arg == "--round42-static-architecture") opt.round42_static_architecture = requireValue(i, argc, argv);
+        else if (arg == "--round42-static-solve") opt.round42_static_solve = requireValue(i, argc, argv);
+        else if (arg == "--round42-terminal-sibling-coalescing") opt.round42_terminal_sibling_coalescing = requireValue(i, argc, argv);
+        else if (arg == "--round43-envelope-refinement") opt.round43_envelope_refinement = requireValue(i, argc, argv);
+        else if (arg == "--round43-initial-k0") opt.round43_initial_k0 = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round43-lookahead-depth") opt.round43_lookahead_depth = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round43-rho") opt.round43_rho = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round43-score") opt.round43_score = requireValue(i, argc, argv);
+        else if (arg == "--round43-envelope-mode") opt.round43_envelope_mode = requireValue(i, argc, argv);
+        else if (arg == "--round43-width-measure") opt.round43_width_measure = requireValue(i, argc, argv);
+        else if (arg == "--round43-lifted-cuts") opt.round43_lifted_cuts = requireValue(i, argc, argv);
+        else if (arg == "--round43-frontier-consolidation") opt.round43_frontier_consolidation = requireValue(i, argc, argv);
+        else if (arg == "--round44-envelope-tail-repair") opt.round44_envelope_tail_repair = requireValue(i, argc, argv);
+        else if (arg == "--round44-initial-k0") opt.round44_initial_k0 = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round44-lookahead-policy") opt.round44_lookahead_policy = requireValue(i, argc, argv);
+        else if (arg == "--round44-envelope-injection") opt.round44_envelope_injection = requireValue(i, argc, argv);
+        else if (arg == "--round44-envelope-scope") opt.round44_envelope_scope = requireValue(i, argc, argv);
+        else if (arg == "--round44-refinement-family") opt.round44_refinement_family = requireValue(i, argc, argv);
+        else if (arg == "--round44-rho-f") opt.round44_rho_f = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round44-rho-m") opt.round44_rho_m = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round44-rho-h") opt.round44_rho_h = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round44-rank1-cuts") opt.round44_rank1_cuts = requireValue(i, argc, argv);
+        else if (arg == "--round44-mip-starts") opt.round44_mip_starts = requireValue(i, argc, argv);
+        else if (arg == "--round44-frontier-consolidation") opt.round44_frontier_consolidation = requireValue(i, argc, argv);
+        else if (arg == "--round45-adaptive-parametric-partition") opt.round45_adaptive_parametric_partition = requireValue(i, argc, argv);
+        else if (arg == "--round45-initial-k0") opt.round45_initial_k0 = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round45-timing-rule") opt.round45_timing_rule = requireValue(i, argc, argv);
+        else if (arg == "--round45-rho-gamma") opt.round45_rho_gamma = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round45-point-rule") opt.round45_point_rule = requireValue(i, argc, argv);
+        else if (arg == "--round45-minimum-child-width") opt.round45_minimum_child_width = std::stod(requireValue(i, argc, argv));
+        else if (arg == "--round45-counterfactual-mode") opt.round45_counterfactual_mode = requireValue(i, argc, argv);
         else if (arg == "--heuristic-candidates-csv") opt.heuristic_candidates_csv = requireValue(i, argc, argv);
         else if (arg == "--large-instance-mode") opt.large_instance_mode = requireValue(i, argc, argv);
         else if (arg == "--large-lb-mode") opt.large_lb_mode = requireValue(i, argc, argv);
@@ -1328,6 +1638,14 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.external_gini_backend != "gurobi") {
         opt.external_gini_backend = "cplex";
     }
+    const ebrp::Round50IntervalMipPolicy interval_mip_policy =
+        ebrp::parseRound50IntervalMipPolicy(
+            opt.external_gini_interval_mip_policy);
+    if (!interval_mip_policy.valid) {
+        throw std::runtime_error(
+            "unsupported external Gini interval-MIP policy");
+    }
+    opt.external_gini_interval_mip_policy = interval_mip_policy.name;
     opt.external_gini_lifecycle = lowerAscii(opt.external_gini_lifecycle);
     if (opt.external_gini_lifecycle != "fresh-per-attempt" &&
         opt.external_gini_lifecycle != "retained-per-leaf" &&
@@ -1476,6 +1794,51 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         lowerAscii(opt.round36_c6_split_normalization);
     opt.round37_c6_geometry_policy =
         lowerAscii(opt.round37_c6_geometry_policy);
+    opt.round40_c6_coarse_start =
+        lowerAscii(opt.round40_c6_coarse_start);
+    opt.round40_c6_ub_geometry =
+        lowerAscii(opt.round40_c6_ub_geometry);
+    opt.round41_static_segmented_gini =
+        lowerAscii(opt.round41_static_segmented_gini);
+    opt.round41_static_segmented_solve =
+        lowerAscii(opt.round41_static_segmented_solve);
+    opt.round41_root_reference_interval =
+        lowerAscii(opt.round41_root_reference_interval);
+    opt.round42_static_architecture =
+        lowerAscii(opt.round42_static_architecture);
+    opt.round42_static_solve = lowerAscii(opt.round42_static_solve);
+    opt.round42_terminal_sibling_coalescing =
+        lowerAscii(opt.round42_terminal_sibling_coalescing);
+    opt.round43_envelope_refinement =
+        lowerAscii(opt.round43_envelope_refinement);
+    opt.round43_score = lowerAscii(opt.round43_score);
+    opt.round43_envelope_mode = lowerAscii(opt.round43_envelope_mode);
+    opt.round43_width_measure = lowerAscii(opt.round43_width_measure);
+    opt.round43_lifted_cuts = lowerAscii(opt.round43_lifted_cuts);
+    opt.round43_frontier_consolidation =
+        lowerAscii(opt.round43_frontier_consolidation);
+    opt.round44_envelope_tail_repair =
+        lowerAscii(opt.round44_envelope_tail_repair);
+    opt.round44_lookahead_policy = lowerAscii(opt.round44_lookahead_policy);
+    opt.round44_envelope_injection =
+        lowerAscii(opt.round44_envelope_injection);
+    opt.round44_envelope_scope = lowerAscii(opt.round44_envelope_scope);
+    opt.round44_refinement_family =
+        lowerAscii(opt.round44_refinement_family);
+    opt.round44_rank1_cuts = lowerAscii(opt.round44_rank1_cuts);
+    opt.round44_mip_starts = lowerAscii(opt.round44_mip_starts);
+    opt.round44_frontier_consolidation =
+        lowerAscii(opt.round44_frontier_consolidation);
+    opt.round45_adaptive_parametric_partition =
+        lowerAscii(opt.round45_adaptive_parametric_partition);
+    opt.round45_timing_rule = lowerAscii(opt.round45_timing_rule);
+    opt.round45_point_rule = lowerAscii(opt.round45_point_rule);
+    opt.round45_counterfactual_mode =
+        lowerAscii(opt.round45_counterfactual_mode);
+    opt.round48_k1_amf = lowerAscii(opt.round48_k1_amf);
+    opt.round49_k1_am_rc = lowerAscii(opt.round49_k1_am_rc);
+    opt.round48_counterfactual_mode =
+        lowerAscii(opt.round48_counterfactual_mode);
     if (opt.round34_c6_startup_variant != "hga-full" &&
         opt.round34_c6_startup_variant != "hga-light-1000" &&
         opt.round34_c6_startup_variant != "simple-start") {
@@ -1525,7 +1888,403 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             "Round 37 pilot requires C6 HGA-FULL, causal arm off, and proof "
             "normalization");
     }
-    if (opt.primal_heuristic_stop != "generation-stagnation") {
+    if (opt.round40_c6_coarse_start != "off" &&
+        opt.round40_c6_coarse_start != "k1-single" &&
+        opt.round40_c6_coarse_start != "k1-adaptive" &&
+        opt.round40_c6_coarse_start != "k1-adaptive-decisive") {
+        throw std::runtime_error(
+            "Unsupported --round40-c6-coarse-start: " +
+            opt.round40_c6_coarse_start);
+    }
+    if (!std::isfinite(opt.c6_normalized_split_threshold) ||
+        opt.c6_normalized_split_threshold < 0.0 ||
+        opt.c6_normalized_split_threshold > 1.0) {
+        throw std::runtime_error(
+            "--c6-normalized-split-threshold must satisfy 0 <= rho <= 1");
+    }
+    if (opt.round47_c6_adaptive_mass != "off" &&
+        opt.round47_c6_adaptive_mass != "adaptive-mass" &&
+        opt.round47_c6_adaptive_mass != "adaptive-mass-contraction") {
+        throw std::runtime_error(
+            "Unsupported --round47-c6-adaptive-mass: " +
+            opt.round47_c6_adaptive_mass);
+    }
+    if (!std::isfinite(opt.round47_c6_adaptive_mass_tau) ||
+        opt.round47_c6_adaptive_mass_tau < 0.0 ||
+        opt.round47_c6_adaptive_mass_tau > 1.0) {
+        throw std::runtime_error(
+            "--round47-c6-adaptive-mass-tau must satisfy 0 <= tau <= 1");
+    }
+    if (opt.round47_c6_adaptive_mass != "off" &&
+        (opt.external_gini_scheduling != "round31-nonblocking-native-bound" ||
+         opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         (opt.round40_c6_coarse_start != "off" &&
+          opt.round40_c6_coarse_start != "k1-adaptive") ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.round41_static_segmented_gini != "off" ||
+         opt.round42_terminal_sibling_coalescing != "off" ||
+         opt.round43_envelope_refinement != "off" ||
+         opt.round44_envelope_tail_repair != "off" ||
+         opt.round45_adaptive_parametric_partition != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 47 adaptive mass requires pure C6 HGA-FULL, midpoint "
+            "K4 or k1-adaptive initialization, Auto presolve, and all "
+            "Round 36-45 refinement mechanisms off");
+    }
+    if (opt.round48_k1_amf != "off" && opt.round48_k1_amf != "k1-amf") {
+        throw std::runtime_error(
+            "Unsupported --round48-k1-amf: " + opt.round48_k1_amf);
+    }
+    if (opt.round48_k1_amf == "k1-amf" &&
+        (opt.round40_c6_coarse_start != "k1-adaptive" ||
+         opt.round47_c6_adaptive_mass != "adaptive-mass" ||
+         !opt.round47_c6_adaptive_mass_tau_explicit ||
+         std::fabs(opt.round47_c6_adaptive_mass_tau - 0.07915) > 1e-15 ||
+         opt.external_gini_scheduling != "round31-nonblocking-native-bound" ||
+         opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.round41_static_segmented_gini != "off" ||
+         opt.round42_terminal_sibling_coalescing != "off" ||
+         opt.round43_envelope_refinement != "off" ||
+         opt.round44_envelope_tail_repair != "off" ||
+         opt.round45_adaptive_parametric_partition != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 48 K1-AMF requires frozen K0=1 midpoint K1-AM, explicit "
+            "tau=0.07915, contraction off, Auto presolve, and every other "
+            "Round 36-45 research mechanism off");
+    }
+    if (opt.round49_k1_am_rc != "off" &&
+        opt.round49_k1_am_rc != "d-rcd") {
+        throw std::runtime_error(
+            "Unsupported --round49-k1-am-rc: " + opt.round49_k1_am_rc);
+    }
+    if (opt.round49_k1_am_rc == "d-rcd" &&
+        (opt.round48_k1_amf != "off" ||
+         opt.round48_counterfactual_mode != "off" ||
+         opt.round40_c6_coarse_start != "k1-adaptive" ||
+         opt.round47_c6_adaptive_mass != "adaptive-mass" ||
+         !opt.round47_c6_adaptive_mass_tau_explicit ||
+         std::fabs(opt.round47_c6_adaptive_mass_tau - 0.07915) > 1e-15 ||
+         opt.external_gini_scheduling != "round31-nonblocking-native-bound" ||
+         opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.round41_static_segmented_gini != "off" ||
+         opt.round41_root_reference_interval != "off" ||
+         opt.round42_static_architecture != "off" ||
+         opt.round42_terminal_sibling_coalescing != "off" ||
+         opt.round43_envelope_refinement != "off" ||
+         opt.round44_envelope_tail_repair != "off" ||
+         opt.round45_adaptive_parametric_partition != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 49 K1-AM-RC requires frozen K0=1 midpoint K1-AM, "
+            "explicit tau=0.07915, D-RCD, Auto presolve, no AMF or "
+            "counterfactual, and every other Round 36-48 mechanism off");
+    }
+    if (opt.round48_counterfactual_mode != "off" &&
+        opt.round48_counterfactual_mode != "retain" &&
+        opt.round48_counterfactual_mode != "midpoint") {
+        throw std::runtime_error(
+            "Unsupported --round48-counterfactual-mode: " +
+            opt.round48_counterfactual_mode);
+    }
+    if (opt.round48_counterfactual_mode != "off" &&
+        (opt.round48_k1_amf != "off" ||
+         opt.round48_counterfactual_interval.empty() ||
+         opt.round40_c6_coarse_start != "k1-adaptive" ||
+         opt.round47_c6_adaptive_mass != "adaptive-mass" ||
+         !opt.round47_c6_adaptive_mass_tau_explicit ||
+         std::fabs(opt.round47_c6_adaptive_mass_tau - 0.07915) > 1e-15)) {
+        throw std::runtime_error(
+            "Round 48 counterfactual diagnostics require historical K1-AM, "
+            "one explicit target interval, and no live AMF mode");
+    }
+    if (opt.round40_c6_coarse_start != "off" &&
+        (opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 40 K=1 experiments require HGA-FULL, Round 36 off/proof, "
+            "Round 37 off, and the frozen Gurobi Auto presolve contract");
+    }
+    if (opt.round40_c6_ub_geometry != "off" &&
+        opt.round40_c6_ub_geometry != "nested-dyadic-k4") {
+        throw std::runtime_error(
+            "Unsupported --round40-c6-ub-geometry: " +
+            opt.round40_c6_ub_geometry);
+    }
+    if (opt.round40_c6_ub_geometry != "off" &&
+        (opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 40 UB geometry requires HGA-FULL, Round 36 off/proof, "
+            "Round 37 off, K=1 off, and frozen Gurobi Auto presolve");
+    }
+    if (opt.round41_static_segmented_gini != "off" &&
+        opt.round41_static_segmented_gini != "st-k2-i" &&
+        opt.round41_static_segmented_gini != "st-k2-p-core" &&
+        opt.round41_static_segmented_gini != "st-k2-p-extended") {
+        throw std::runtime_error(
+            "Unsupported --round41-static-segmented-gini: " +
+            opt.round41_static_segmented_gini);
+    }
+    if (opt.round41_static_segmented_solve != "mip" &&
+        opt.round41_static_segmented_solve != "root-lp") {
+        throw std::runtime_error(
+            "Unsupported --round41-static-segmented-solve: " +
+            opt.round41_static_segmented_solve);
+    }
+    if (opt.round41_static_segmented_gini == "off" &&
+        opt.round41_static_segmented_solve != "mip") {
+        throw std::runtime_error(
+            "Round 41 root-LP mode requires a non-off static formulation");
+    }
+    if (opt.round41_root_reference_interval != "off" &&
+        opt.round41_root_reference_interval != "k1" &&
+        opt.round41_root_reference_interval != "left" &&
+        opt.round41_root_reference_interval != "right") {
+        throw std::runtime_error(
+            "Unsupported --round41-root-reference-interval: " +
+            opt.round41_root_reference_interval);
+    }
+    if (opt.round41_root_reference_interval != "off" &&
+        (opt.round41_static_segmented_gini != "off" ||
+         opt.round41_static_segmented_solve != "mip" ||
+         opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 41 root reference requires static segmentation off, "
+            "HGA-FULL, Round 36 off/proof, Round 37 off, both Round 40 "
+            "arms off, and frozen Gurobi Auto presolve");
+    }
+    if (opt.round41_static_segmented_gini != "off" &&
+        (opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 41 static segmentation requires HGA-FULL, Round 36 "
+            "off/proof, Round 37 off, both Round 40 arms off, and frozen "
+            "Gurobi Auto presolve");
+    }
+    const std::set<std::string> round42_static_arms = {
+        "off", "st-k4-p-core", "st-k4-p-core-hierarchical",
+        "st-k4-p-core-factored", "external-k2-left",
+        "external-k2-right", "paired-k4-lower", "paired-k4-upper",
+        "paired-k4-lower-factored", "paired-k4-upper-factored",
+    };
+    if (!round42_static_arms.count(opt.round42_static_architecture)) {
+        throw std::runtime_error(
+            "Unsupported --round42-static-architecture: " +
+            opt.round42_static_architecture);
+    }
+    if (opt.round42_static_solve != "mip" &&
+        opt.round42_static_solve != "root-lp") {
+        throw std::runtime_error(
+            "Unsupported --round42-static-solve: " +
+            opt.round42_static_solve);
+    }
+    if (opt.round42_static_architecture == "off" &&
+        opt.round42_static_solve != "mip") {
+        throw std::runtime_error(
+            "Round 42 root-LP mode requires a non-off static architecture");
+    }
+    if (opt.round42_terminal_sibling_coalescing != "off" &&
+        opt.round42_terminal_sibling_coalescing != "core" &&
+        opt.round42_terminal_sibling_coalescing != "core-factored") {
+        throw std::runtime_error(
+            "Unsupported --round42-terminal-sibling-coalescing: " +
+            opt.round42_terminal_sibling_coalescing);
+    }
+    const bool round42_any = opt.round42_static_architecture != "off" ||
+        opt.round42_terminal_sibling_coalescing != "off";
+    if (round42_any &&
+        (opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.round41_static_segmented_gini != "off" ||
+         opt.round41_root_reference_interval != "off" ||
+         opt.gurobi_presolve != -1)) {
+        throw std::runtime_error(
+            "Round 42 architectures require HGA-FULL, Round 36 off/proof, "
+            "Round 37 off, both Round 40 arms off, all Round 41 arms off, "
+            "and frozen Gurobi Auto presolve");
+    }
+    if (opt.round42_static_architecture != "off" &&
+        opt.round42_terminal_sibling_coalescing != "off") {
+        throw std::runtime_error(
+            "Round 42 static blocks and C6 sibling coalescing are mutually "
+            "exclusive experiment arms");
+    }
+    const bool round43_active =
+        opt.round43_envelope_refinement != "off";
+    const std::set<std::string> round43_execution = {
+        "off", "atlas", "algorithm"};
+    const std::set<std::string> round43_scores = {
+        "d", "max-d-c", "old", "no-adaptive"};
+    const std::set<std::string> round43_envelopes = {
+        "none", "constant", "single", "iterated"};
+    if (!round43_execution.count(opt.round43_envelope_refinement) ||
+        (opt.round43_initial_k0 != 1 && opt.round43_initial_k0 != 4) ||
+        (opt.round43_lookahead_depth != 1 &&
+         opt.round43_lookahead_depth != 2) ||
+        !std::isfinite(opt.round43_rho) || opt.round43_rho < 0.0 ||
+        opt.round43_rho > 1.0 ||
+        !round43_scores.count(opt.round43_score) ||
+        !round43_envelopes.count(opt.round43_envelope_mode) ||
+        opt.round43_width_measure != "g-mccormick-unit" ||
+        (opt.round43_lifted_cuts != "off" &&
+         opt.round43_lifted_cuts != "valid-only") ||
+        (opt.round43_frontier_consolidation != "off" &&
+         opt.round43_frontier_consolidation != "rank1")) {
+        throw std::runtime_error("Invalid Round 43 envelope-refinement arm");
+    }
+    if (round43_active &&
+        (opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.round41_static_segmented_gini != "off" ||
+         opt.round41_root_reference_interval != "off" || round42_any ||
+         opt.gurobi_presolve != -1 ||
+         opt.external_gini_scheduling !=
+             "round31-nonblocking-native-bound")) {
+        throw std::runtime_error(
+            "Round 43 requires frozen HGA-FULL C6 with Auto presolve and "
+            "all Round 36--42 research arms off");
+    }
+    const bool round44_active = opt.round44_envelope_tail_repair != "off";
+    const std::set<std::string> round44_execution = {
+        "off", "atlas", "algorithm"};
+    const std::set<std::string> round44_lookahead = {
+        "fixed-d1", "fixed-d2", "frontier-d2"};
+    const std::set<std::string> round44_injection = {
+        "none", "all", "violated", "active-one"};
+    const std::set<std::string> round44_scope = {"parent", "nested"};
+    const std::set<std::string> round44_family = {
+        "no-adaptive", "c6-overlay", "veto", "veto-promotion",
+        "f", "f-mroot", "h", "mroot"};
+    const std::set<std::string> round44_rank1 = {"off", "on"};
+    const std::set<std::string> round44_starts = {"off", "verified"};
+    const std::set<std::string> round44_consolidation = {
+        "off", "singleton", "pair", "block"};
+    if (!round44_execution.count(opt.round44_envelope_tail_repair) ||
+        opt.round44_initial_k0 != 4 ||
+        !round44_lookahead.count(opt.round44_lookahead_policy) ||
+        !round44_injection.count(opt.round44_envelope_injection) ||
+        !round44_scope.count(opt.round44_envelope_scope) ||
+        !round44_family.count(opt.round44_refinement_family) ||
+        !std::isfinite(opt.round44_rho_f) || opt.round44_rho_f < 0.0 ||
+        opt.round44_rho_f > 1.0 || !std::isfinite(opt.round44_rho_m) ||
+        opt.round44_rho_m < 0.0 || opt.round44_rho_m > 1.0 ||
+        !std::isfinite(opt.round44_rho_h) || opt.round44_rho_h < 0.0 ||
+        opt.round44_rho_h > 1.0 ||
+        !round44_rank1.count(opt.round44_rank1_cuts) ||
+        !round44_starts.count(opt.round44_mip_starts) ||
+        !round44_consolidation.count(opt.round44_frontier_consolidation)) {
+        throw std::runtime_error("Invalid Round 44 envelope tail-repair arm");
+    }
+    if (round44_active &&
+        (round43_active || opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.round41_static_segmented_gini != "off" ||
+         opt.round41_root_reference_interval != "off" || round42_any ||
+         opt.gurobi_presolve != -1 ||
+         opt.external_gini_scheduling !=
+             "round31-nonblocking-native-bound")) {
+        throw std::runtime_error(
+            "Round 44 requires frozen HGA-FULL C6 with Auto presolve and "
+            "all Round 36--43 research arms off");
+    }
+    const bool round45_active =
+        opt.round45_adaptive_parametric_partition != "off";
+    const std::set<std::string> round45_execution = {
+        "off", "atlas", "algorithm"};
+    const std::set<std::string> round45_timing = {
+        "old-c6", "d-r43", "veto-f", "f", "f-mroot", "h", "mroot",
+        "gamma-positive", "gamma-threshold", "gamma-veto",
+        "decisive-gamma", "no-adaptive"};
+    const std::set<std::string> round45_point = {
+        "midpoint", "pmm", "fpmm"};
+    const std::set<std::string> round45_counterfactual = {
+        "off", "retain", "midpoint", "pmm", "fpmm"};
+    if (!round45_execution.count(
+            opt.round45_adaptive_parametric_partition) ||
+        (opt.round45_initial_k0 != 1 && opt.round45_initial_k0 != 4) ||
+        !round45_timing.count(opt.round45_timing_rule) ||
+        !round45_point.count(opt.round45_point_rule) ||
+        !round45_counterfactual.count(opt.round45_counterfactual_mode) ||
+        !std::isfinite(opt.round45_rho_gamma) ||
+        opt.round45_rho_gamma < 0.0 ||
+        !std::isfinite(opt.round45_minimum_child_width) ||
+        opt.round45_minimum_child_width <= 0.0) {
+        throw std::runtime_error(
+            "Invalid Round 45 adaptive parametric-partition arm");
+    }
+    if (opt.round45_counterfactual_mode != "off" &&
+        (!round45_active ||
+         opt.round45_adaptive_parametric_partition != "algorithm" ||
+         opt.round45_initial_k0 != 1 ||
+         (opt.round45_counterfactual_mode != "retain" &&
+          opt.round45_counterfactual_mode != opt.round45_point_rule))) {
+        throw std::runtime_error(
+            "Round 45 counterfactual mode requires algorithm execution, K0=1, "
+            "and a matching split-point rule");
+    }
+    if (round45_active &&
+        (round43_active || round44_active ||
+         opt.round34_c6_startup_variant != "hga-full" ||
+         opt.round36_c6_causal_arm != "off" ||
+         opt.round36_c6_split_normalization != "proof" ||
+         opt.round37_c6_geometry_policy != "off" ||
+         opt.round40_c6_coarse_start != "off" ||
+         opt.round40_c6_ub_geometry != "off" ||
+         opt.round41_static_segmented_gini != "off" ||
+         opt.round41_root_reference_interval != "off" || round42_any ||
+         opt.gurobi_presolve != -1 ||
+         opt.external_gini_scheduling !=
+             "round31-nonblocking-native-bound")) {
+        throw std::runtime_error(
+            "Round 45 requires frozen HGA-FULL C6 with Auto presolve and "
+            "all Round 36--44 research arms off");
+    }
+    if (opt.primal_heuristic_stop != "generation-stagnation" &&
+        opt.primal_heuristic_stop != "motif-exhaustion" &&
+        !ebrp::isDecodedDescentStopMode(opt.primal_heuristic_stop)) {
         opt.primal_heuristic_stop = "legacy-time";
     }
     if (opt.primal_heuristic_no_improve_generations < 1) {
@@ -1542,6 +2301,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     }
     if (opt.primal_heuristic != "greedy" &&
         opt.primal_heuristic != "hga-tgbc" &&
+        opt.primal_heuristic != "joint-insertion" &&
         opt.primal_heuristic != "best-of-all") {
         opt.primal_heuristic = "none";
     }
@@ -2513,6 +3273,103 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             opt.paper_run_sealed_rejection_reason = joined.str();
         }
     }
+    if(!std::isfinite(opt.pickup_time) || !std::isfinite(opt.drop_time) ||
+       opt.pickup_time<0 || opt.drop_time<0) throw std::runtime_error("invalid common service times");
+    if(!ebrp::validRound64SharedMode(opt.round64_shared_mode))throw std::runtime_error("invalid Round64 shared mode");
+    const bool r65preset=opt.algorithm_preset=="research-round65-k1-s" || opt.algorithm_preset=="research-round65-k1-h";
+    const bool r67preset = opt.algorithm_preset == "research-round67-vdp" ||
+        opt.algorithm_preset == "research-round67-log-vdp" ||
+        opt.algorithm_preset == "research-round68-vdp-start" ||
+        opt.algorithm_preset == "research-round70-vds-descent" ||
+        opt.algorithm_preset == "research-round71-vds-interroute-descent" ||
+        opt.algorithm_preset == "research-round73-vds-joint-insertion" ||
+        opt.algorithm_preset == "research-round73-vds-joint-seeded-descent" ||
+        opt.algorithm_preset == "research-round75-vds-quantity-descent" ||
+        opt.algorithm_preset == "research-round76-vds-physical-closure" ||
+        opt.algorithm_preset == "research-round78-vds-balanced-descent" ||
+         opt.algorithm_preset == "research-round83-vds-equal-net-exchange";
+    const bool joint_insertion = opt.algorithm_preset == "research-round73-vds-joint-insertion";
+    if ((opt.primal_heuristic == "joint-insertion") != joint_insertion ||
+        (opt.primal_heuristic_stop == "motif-exhaustion") != joint_insertion)
+        throw std::runtime_error("Joint insertion requires its isolated VD-S research preset");
+    if ((opt.primal_heuristic_stop == "decoded-descent") !=
+        (opt.algorithm_preset == "research-round70-vds-descent") ||
+        (opt.primal_heuristic_stop == "decoded-descent-interroute") !=
+        (opt.algorithm_preset == "research-round71-vds-interroute-descent" ||
+         opt.algorithm_preset == "research-round73-vds-joint-seeded-descent" ||
+         opt.algorithm_preset == "research-round75-vds-quantity-descent" ||
+         opt.algorithm_preset == "research-round76-vds-physical-closure" ||
+         opt.algorithm_preset == "research-round78-vds-balanced-descent" ||
+         opt.algorithm_preset == "research-round83-vds-equal-net-exchange"))
+        throw std::runtime_error("Decoded descent requires its isolated VD-S research preset");
+    if (ebrp::isDecodedDescentStopMode(opt.primal_heuristic_stop) &&
+        opt.primal_heuristic != "hga-tgbc")
+        throw std::runtime_error("Decoded descent requires the single native witness-search path");
+    if (r67preset && (opt.plain_baseline || opt.round66_arc_load_replacement ||
+        opt.round65_budget || opt.round65_projection != "off" ||
+        opt.round64_shared_mode != "off" || opt.round63_time_mode != "off" ||
+        opt.round62_threshold_mode != "off"))
+        throw std::runtime_error("Round67 inventory encoding requires isolated unbudgeted K1");
+    if (opt.round66_arc_load_replacement &&
+        (!r65preset || opt.plain_baseline || opt.round65_budget ||
+         opt.round65_projection != "off" || opt.round64_shared_mode != "off" ||
+         opt.round63_time_mode != "off" || opt.round62_threshold_mode != "off"))
+        throw std::runtime_error("Round66 arc replacement requires isolated research K1 without resource budgets");
+    if(opt.round65_controller!="credit10" && opt.round65_controller!="credit-seed")
+        throw std::runtime_error("unknown Round65 controller");
+    if((opt.round65_controller!="credit10" || opt.round65_release_load) && (!r65preset || !opt.round65_budget))
+        throw std::runtime_error("Round65 controller/resource revisions require the explicit research budget");
+    if(opt.round65_release_load && opt.round65_projection=="off")
+        throw std::runtime_error("Round65 released load requires projection");
+    if(opt.round65_hga_zero_stop && (!(r65preset || r67preset) || opt.plain_baseline))
+        throw std::runtime_error("Round65 zero-stop requires explicit research preset");
+    if ((opt.round65_budget || opt.round65_projection!="off" || opt.round65_seed_credit!=30) && (!r65preset || opt.plain_baseline))
+        throw std::runtime_error("Round65 controls require explicit research preset");
+    if (!std::isfinite(opt.round65_seed_credit) || opt.round65_seed_credit<0 || opt.round65_seed_credit>30)
+        throw std::runtime_error("Round65 seed credit outside [0,30]");
+    if (opt.round65_projection!="off" && opt.round65_projection!="proof" && opt.round65_projection!="sparse")
+        throw std::runtime_error("invalid Round65 projection policy");
+    if (opt.round65_projection!="off" && (!opt.round65_budget || opt.round64_shared_mode!="off"))
+        throw std::runtime_error("Round65 projection requires budgeted F0");
+    const bool r64preset=r65preset || opt.algorithm_preset=="research-round64-k1-s" ||
+        opt.algorithm_preset=="research-round64-k1-h" || opt.algorithm_preset=="research-round64-single-s";
+    if(opt.round64_shared_mode!="off" && (!r64preset||opt.plain_baseline))
+        throw std::runtime_error("Round64 requires its explicit research preset");
+    if(r64preset && (opt.plain_baseline||opt.round63_time_mode!="off"||opt.round62_threshold_mode!="off"||
+        opt.round60_candidate_mode!="off"||opt.round61_candidate_mode!="off"))
+        throw std::runtime_error("Round64 requires isolated startup and resource configuration");
+    if (!ebrp::validRound63TimeMode(opt.round63_time_mode)) throw std::runtime_error("invalid Round63 time mode");
+    if (opt.round63_time_mode!="off" && (opt.plain_baseline ||
+        (opt.algorithm_preset!="research-round59-k1-s" && opt.algorithm_preset!="research-round59-f0-single-s")))
+        throw std::runtime_error("Round63 requires explicit Single-S or K1-S research preset");
+    const bool r62passive=opt.round61_candidate_mode=="passive-cert"||opt.round61_candidate_mode=="passive-observe";
+    if ((r62passive||opt.round62_threshold_mode!="off") &&
+        (opt.plain_baseline || (opt.algorithm_preset!="research-round59-k1-s" &&
+                               opt.algorithm_preset!="research-round59-f0-single-s")))
+        throw std::runtime_error("Round62 requires explicit Single-S or K1-S research preset");
+    if (opt.round62_threshold_mode!="off" && opt.round62_threshold_mode!="events" &&
+        opt.round62_threshold_mode!="conflicts" && opt.round62_threshold_mode!="projection" &&
+        opt.round62_threshold_mode!="service" && opt.round62_threshold_mode!="service-conflicts" && opt.round62_threshold_mode!="projection-rlt" && opt.round62_threshold_mode!="projection-service")
+        throw std::runtime_error("invalid Round62 threshold mode");
+    if (opt.round61_candidate_mode != "off" && opt.round61_candidate_mode != "archive" &&
+        opt.round61_candidate_mode != "submit" && opt.round61_candidate_mode != "passive-observe" &&
+        opt.round61_candidate_mode != "passive-cert") throw std::runtime_error("invalid archive mode");
+    if (opt.round61_candidate_mode != "off" &&
+        (opt.round60_candidate_mode != "off" || opt.plain_baseline))
+        throw std::runtime_error("Round61 requires isolated research path");
+    if (opt.round60_candidate_mode != "off" &&
+        opt.round60_candidate_mode != "dry" &&
+        opt.round60_candidate_mode != "inject") {
+        throw std::runtime_error(
+            "--round60-candidate-mode must be off, dry, or inject");
+    }
+    if (opt.round60_candidate_maximum_evaluations <= 0 ||
+        opt.round60_candidate_maximum_evaluations > 10000 ||
+        opt.round60_candidate_maximum_stations <= 0 ||
+        opt.round60_candidate_maximum_stations > 100) {
+        throw std::runtime_error(
+            "Round 60 candidate work bounds are outside audited limits");
+    }
     return opt;
 }
 
@@ -2630,6 +3487,10 @@ void initializeScalabilityFields(const ebrp::Instance& instance,
     result.pricing_operation_dp_dominance_enabled =
         opt.pricing_operation_dp_dominance && opt.pricing_load_dp_dominance;
     result.time_budget_seconds = opt.solve_time_limit;
+    // Record the uniformly selected inner interval-MIP backend even when the
+    // outer process reaches its deadline before entering the external tree.
+    result.external_gini_tree_interval_mip_policy =
+        opt.external_gini_interval_mip_policy;
     result.actual_runtime_seconds = result.runtime_seconds;
     result.compact_bc_root_cut_rounds = opt.compact_bc_root_cut_rounds;
     result.compact_bc_total_root_cut_rounds = opt.compact_bc_root_cut_rounds;
@@ -2866,7 +3727,64 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
     snapshot.instance_hash = hashFileFnv1a(instance.path);
     snapshot.instance_source_path = instance.path;
 
-    if (snapshot.algorithm_preset == "paper-gf-tailored-bc") {
+    if (snapshot.algorithm_preset == "paper-k1-am-sf") {
+        snapshot.preset_certificate_scope =
+            "k1_adaptive_mass_frontier_with_simplified_f0_fixed_interval_mip";
+        snapshot.preset_experimental_features_enabled =
+            "none_frozen_mainline_only";
+        snapshot.preset_disabled_features =
+            "round43_envelope_refinement,round44_tail_repair,"
+            "round45_parametric_partition,round48_k1_amf,round49_reduced_cost_rescue,"
+            "tailored_callback_cuts,exhaustive_subset_duration_rows,"
+            "inventory_route_root_closure";
+        snapshot.preset_reason =
+            "Round 54 frozen K1-AM-SF mainline: K0=1 adaptive-mass controller "
+            "with tau=0.08, midpoint splits, and the qualified simplified F0 "
+            "interval-MIP backend; research strengthening remains default-off";
+    } else if (snapshot.algorithm_preset == "research-round67-vdp" ||
+               snapshot.algorithm_preset == "research-round67-log-vdp" ||
+               snapshot.algorithm_preset == "research-round68-vdp-start" ||
+               snapshot.algorithm_preset == "research-round70-vds-descent" ||
+               snapshot.algorithm_preset == "research-round71-vds-interroute-descent" ||
+               snapshot.algorithm_preset == "research-round73-vds-joint-insertion" ||
+               snapshot.algorithm_preset == "research-round73-vds-joint-seeded-descent" ||
+               snapshot.algorithm_preset == "research-round75-vds-quantity-descent" ||
+               snapshot.algorithm_preset == "research-round76-vds-physical-closure" ||
+               snapshot.algorithm_preset == "research-round78-vds-balanced-descent" ||
+         snapshot.algorithm_preset == "research-round83-vds-equal-net-exchange") {
+        snapshot.preset_certificate_scope = "k1_original_problem_with_inventory_state_product";
+        snapshot.preset_experimental_features_enabled = snapshot.algorithm_preset;
+        snapshot.preset_disabled_features = "round65_resource_budgets,projection,arc_load_replacement,other_research";
+        snapshot.preset_reason = opt.algorithm_preset == "research-round83-vds-equal-net-exchange"
+            ? "Full paid VD-S proof after constructive-seeded descent and equal-net block-exchange/strict physical closure"
+            : opt.algorithm_preset == "research-round78-vds-balanced-descent"
+            ? "Full paid VD-S proof after constructive-seeded descent and finite inventory-preserving balanced-block/quantity descent"
+            : opt.algorithm_preset == "research-round76-vds-physical-closure"
+            ? "Full paid VD-S proof after constructive-seeded descent and joint physical insertion/quantity closure"
+            : opt.algorithm_preset == "research-round75-vds-quantity-descent"
+            ? "Full paid VD-S proof after constructive-seeded descent and finite physical single/pair quantity descent"
+            : opt.algorithm_preset == "research-round73-vds-joint-seeded-descent"
+            ? "Full paid VD-S proof with one constructive seed and unchanged24 finite random inter-route descent seeds"
+            : opt.primal_heuristic == "joint-insertion"
+            ? "Full paid VD-S proof with finite joint position/quantity insertion"
+            : ebrp::isDecodedDescentStopMode(opt.primal_heuristic_stop)
+            ? "Full paid VD-S proof with finite random-seed decoded local descent"
+            : "Full paid K1-R with uniform one-hot or logarithmic inventory-state representation";
+    } else if (snapshot.algorithm_preset == "research-k1-am-sf-vdp" ||
+               snapshot.algorithm_preset == "research-k1-am-sf-sf-r1" ||
+               snapshot.algorithm_preset ==
+                   "research-k1-am-sf-vdp-sf-r1") {
+        snapshot.preset_certificate_scope =
+            "k1_adaptive_mass_frontier_with_round55_uniform_research_inner";
+        snapshot.preset_experimental_features_enabled =
+            snapshot.algorithm_preset;
+        snapshot.preset_disabled_features =
+            "all_non_round55_research,tailored_callback_cuts,"
+            "exhaustive_subset_duration_rows,inventory_route_root_closure";
+        snapshot.preset_reason =
+            "Default-off Round 55 research preset: unchanged first-class "
+            "K1-AM-SF outer controller with one frozen uniform inner policy";
+    } else if (snapshot.algorithm_preset == "paper-gf-tailored-bc") {
         snapshot.preset_certificate_scope =
             "gini_frontier_relaxation_then_cplex_managed_tailored_bc";
         snapshot.preset_experimental_features_enabled =
@@ -2961,6 +3879,31 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
     } else {
         snapshot.preset_certificate_scope = "custom";
         snapshot.preset_reason = "custom command-line configuration";
+    }
+    auto append_explicit_research_feature = [&](const std::string& feature) {
+        if (snapshot.preset_experimental_features_enabled.empty() ||
+            snapshot.preset_experimental_features_enabled == "none" ||
+            snapshot.preset_experimental_features_enabled ==
+                "none_frozen_mainline_only") {
+            snapshot.preset_experimental_features_enabled = feature;
+        } else {
+            snapshot.preset_experimental_features_enabled += "," + feature;
+        }
+    };
+    if (opt.round66_arc_load_replacement) append_explicit_research_feature("round66_arc_load_replaces_node_big_m");
+    if (opt.round68_verified_start) append_explicit_research_feature("round68_existing_complete_witness_native_start");
+    if (opt.round65_budget) append_explicit_research_feature("round65_optional_credit_core_MIP_fallback");
+    if (opt.round65_projection!="off") append_explicit_research_feature("round65_vehicle_projection_"+opt.round65_projection);
+    if (opt.round65_budget) append_explicit_research_feature("round65_controller_"+opt.round65_controller);
+    if (opt.round65_release_load) append_explicit_research_feature("round65_released_load_resource_projection");
+    if (opt.round65_hga_zero_stop) append_explicit_research_feature("round65_verified_zero_stop_and_memory_retention");
+    if (opt.round60_hga_publish_verified) {
+        append_explicit_research_feature(
+            "round60_hga_verified_event_publication");
+    }
+    if (opt.round60_candidate_mode != "off") {
+        append_explicit_research_feature(
+            "round60_native_candidate_" + opt.round60_candidate_mode);
     }
     return snapshot;
 }
@@ -3957,7 +4900,26 @@ std::string jsonEscapeLocal(const std::string& value) {
 }
 
 bool isPaperTracePreset(const std::string& preset) {
-    return preset == "paper-gf-bpc-core" ||
+    return preset == "research-round83-vds-equal-net-exchange" ||
+           preset == "research-round78-vds-balanced-descent" ||
+           preset == "research-round76-vds-physical-closure" ||
+           preset == "research-round75-vds-quantity-descent" ||
+           preset == "research-round73-vds-joint-seeded-descent" ||
+           preset == "research-round73-vds-joint-insertion" ||
+           preset == "research-round71-vds-interroute-descent" ||
+           preset == "research-round70-vds-descent" ||
+           preset == "research-round68-vdp-start" ||
+           preset == "research-round67-vdp" || preset == "research-round67-log-vdp" ||
+           preset == "research-round65-k1-s" || preset == "research-round65-k1-h" ||
+           preset == "research-round64-k1-s" || preset == "research-round64-k1-h" ||
+           preset == "research-round64-single-s" || preset == "research-round60-f0-single-h" ||
+           preset == "research-round59-k1-s" ||
+           preset == "research-round59-f0-single-s" ||
+           preset == "paper-k1-am-sf" ||
+           preset == "research-k1-am-sf-vdp" ||
+           preset == "research-k1-am-sf-sf-r1" ||
+           preset == "research-k1-am-sf-vdp-sf-r1" ||
+           preset == "paper-gf-bpc-core" ||
            preset == "paper-gf-tailored-bc" ||
            preset == "paper-gf-compact-bc" ||
            preset == "paper-bpc-core" ||
@@ -6447,6 +7409,22 @@ struct PaperPrimalHeuristicResult {
     double hga_verified_objective = 0.0;
     double hga_wall_time_seconds = 0.0;
     std::string hga_generation_log_path;
+    bool hga_retained_verified_event_candidate = false;
+    bool hga_candidate_observer_failed = false;
+    long long hga_candidate_observations = 0;
+    long long hga_verified_candidate_count = 0;
+    long long hga_published_candidate_count = 0;
+    double hga_candidate_verification_seconds = 0.0;
+    std::string hga_retained_candidate_sha256;
+    bool decoded_descent_complete = false;
+    int decoded_descent_seeds_completed = 0;
+    long long decoded_descent_passes = 0;
+    long long decoded_descent_checks = 0;
+    bool decoded_descent_cross_route_enabled = false;
+    long long decoded_descent_cross_route_neighbors = 0;
+    long long decoded_descent_cross_route_checks = 0;
+    long long decoded_descent_cross_route_moves = 0;
+    std::string decoded_descent_log_path;
     std::vector<std::string> notes;
     struct CandidateRecord {
         std::string instance;
@@ -6958,8 +7936,9 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         return out;
     }
     const double budget = opt.primal_heuristic_seconds;
-    const bool generation_stagnation =
-        opt.primal_heuristic_stop == "generation-stagnation";
+    const bool search_state_stop =
+        opt.primal_heuristic_stop == "generation-stagnation" ||
+        ebrp::isDecodedDescentStopMode(opt.primal_heuristic_stop);
     auto timedOut = [&]() {
         if (budget <= 0.0) return false;
         return std::chrono::duration<double>(
@@ -7037,8 +8016,52 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
                                     out.candidate_records);
     };
 
+    const bool joint_seeded = opt.algorithm_preset == "research-round73-vds-joint-seeded-descent" ||
+        opt.algorithm_preset == "research-round75-vds-quantity-descent" ||
+        opt.algorithm_preset == "research-round76-vds-physical-closure" ||
+        opt.algorithm_preset == "research-round78-vds-balanced-descent" ||
+         opt.algorithm_preset == "research-round83-vds-equal-net-exchange";
+    std::vector<ebrp::RoutePlan> joint_seed_routes;
+    if (mode == "joint-insertion" || joint_seeded) {
+        const auto trace_path = opt.primal_heuristic_generation_log.empty()
+            ? std::filesystem::path{}
+            : std::filesystem::path(opt.primal_heuristic_generation_log + ".joint.csv");
+        const auto constructed = ebrp::runRound73JointInsertion(instance, opt, trace_path);
+        consider(constructed.routes, "round73_joint_position_quantity_insertion");
+        out.hga_stop_mode = "motif-exhaustion"; // legacy output field; no HGA executes
+        out.hga_total_generations = 0;
+        out.local_moves_tested = constructed.stats.quantity_evaluations;
+        std::ostringstream note;
+        note << "Round73 joint insertion: passes=" << constructed.stats.passes
+             << ", placements=" << constructed.stats.placements
+             << ", quantity_evaluations=" << constructed.stats.quantity_evaluations
+             << ", accepted=" << constructed.stats.accepted
+             << ", pairs=" << constructed.stats.pairs
+             << ", pickups=" << constructed.stats.single_pickups
+             << ", drops=" << constructed.stats.single_drops
+             << ", exhausted=" << constructed.stats.exhausted
+             << ", whole_run_deadline=" << constructed.stats.deadline_reached
+             << ", trace=" << trace_path.string();
+        out.notes.push_back(note.str());
+        if (!joint_seeded || constructed.stats.deadline_reached ||
+            ebrp::processWorkDeadlineReached(opt)) {
+            finalizeHeuristic();
+            return out;
+        }
+        joint_seed_routes = constructed.routes;
+    }
+    if (opt.round59_simple_start) {
+        consider({}, "round59_empty_routes_Y_equals_b");
+        if (!out.found) {
+            throw std::runtime_error(
+                "Round59 empty-route start failed independent verification; "
+                "no HGA fallback is permitted");
+        }
+        finalizeHeuristic();
+        return out;
+    }
     if ((mode == "hga-tgbc" || mode == "best-of-all") &&
-        (generation_stagnation || !timedOut())) {
+        (search_state_stop || !timedOut())) {
         ebrp::HgaTgbcOptions hga_opt;
         hga_opt.lambda = opt.lambda;
         hga_opt.seed = opt.primal_heuristic_seed;
@@ -7048,11 +8071,21 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         hga_opt.generation_log_path = opt.primal_heuristic_generation_log;
         hga_opt.phase_label = opt.primal_heuristic_phase_label;
         hga_opt.process_options = &opt;
-        if (!generation_stagnation) {
+        hga_opt.publish_verified_improvements =
+            opt.round60_hga_publish_verified || opt.round65_hga_zero_stop;
+        hga_opt.stop_on_verified_zero = opt.round65_hga_zero_stop;
+        hga_opt.retain_verified_on_log_failure = opt.round65_hga_zero_stop;
+        hga_opt.verified_candidate_log_path =
+            opt.round60_hga_candidate_log;
+        hga_opt.candidate_model_identity =
+            opt.algorithm_preset + "|original_problem";
+        if (!search_state_stop) {
             hga_opt.max_time_seconds = std::max(
                 1, static_cast<int>(std::ceil(opt.primal_heuristic_seconds)));
         }
         hga_opt.pop_size = std::max(24, opt.primal_heuristic_runs);
+        hga_opt.joint_constructive_seed = joint_seeded;
+        if (joint_seeded) hga_opt.joint_constructive_routes = joint_seed_routes;
         hga_opt.iterations = 10;
         ebrp::HgaTgbcResult native = ebrp::runHgaTgbcNative(instance, hga_opt);
         out.hga_stop_mode = native.stop_mode;
@@ -7066,9 +8099,114 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         out.hga_verified_objective = native.verified_objective;
         out.hga_wall_time_seconds = native.wall_time_seconds;
         out.hga_generation_log_path = native.generation_log_path.string();
+        out.hga_retained_verified_event_candidate =
+            native.retained_verified_event_candidate;
+        out.hga_candidate_observer_failed =
+            native.candidate_observer_failed;
+        out.hga_candidate_observations = native.candidate_observations;
+        out.hga_verified_candidate_count = native.verified_candidate_count;
+        out.hga_published_candidate_count = native.published_candidate_count;
+        out.hga_candidate_verification_seconds =
+            native.candidate_verification_seconds;
+        out.hga_retained_candidate_sha256 = native.retained_candidate_sha256;
+        out.decoded_descent_complete = native.decoded_descent_complete;
+        out.decoded_descent_seeds_completed = native.decoded_descent_seeds_completed;
+        out.decoded_descent_passes = native.decoded_descent_passes;
+        out.decoded_descent_checks = native.decoded_descent_checks;
+        out.decoded_descent_cross_route_enabled = native.decoded_descent_cross_route_enabled;
+        out.decoded_descent_cross_route_neighbors = native.decoded_descent_cross_route_neighbors;
+        out.decoded_descent_cross_route_checks = native.decoded_descent_cross_route_checks;
+        out.decoded_descent_cross_route_moves = native.decoded_descent_cross_route_moves;
+        out.decoded_descent_log_path = native.decoded_descent_log_path.string();
         out.notes.insert(out.notes.end(), native.notes.begin(), native.notes.end());
         if (native.found) {
-            consider(native.routes, "native_hga_tgbc_full_migration");
+            consider(native.routes, ebrp::isDecodedDescentStopMode(opt.primal_heuristic_stop)
+                ? "decoded_descent_verified_seed" : "native_hga_tgbc_full_migration");
+        }
+        if (opt.algorithm_preset == "research-round75-vds-quantity-descent" && out.found &&
+            !ebrp::processWorkDeadlineReached(opt)) {
+            const auto trace_path = opt.primal_heuristic_generation_log.empty()
+                ? std::filesystem::path{}
+                : std::filesystem::path(opt.primal_heuristic_generation_log + ".quantity.csv");
+            const auto repaired = ebrp::runRound75QuantityDescent(instance, opt, out.routes, trace_path);
+            consider(repaired.routes, "round75_physical_single_pair_quantity_descent");
+            out.local_moves_tested += repaired.stats.objective_evaluations;
+            std::ostringstream note;
+            note << "Round75 physical quantity descent: passes=" << repaired.stats.passes
+                 << ", single_candidates=" << repaired.stats.single_candidates
+                 << ", pair_candidates=" << repaired.stats.pair_candidates
+                 << ", feasible_candidates=" << repaired.stats.feasible_candidates
+                 << ", accepted=" << repaired.stats.accepted
+                 << ", single_moves=" << repaired.stats.single_moves
+                 << ", pair_moves=" << repaired.stats.pair_moves
+                 << ", cross_vehicle_moves=" << repaired.stats.cross_vehicle_moves
+                 << ", sign_flips=" << repaired.stats.sign_flips
+                 << ", removed_stops=" << repaired.stats.removed_stops
+                 << ", exhausted=" << repaired.stats.exhausted
+                 << ", whole_run_deadline=" << repaired.stats.deadline_reached
+                 << ", verification_failed=" << repaired.stats.verification_failed
+                 << ", rejection_reason=" << repaired.stats.rejection_reason
+                 << ", trace=" << trace_path.string();
+            out.notes.push_back(note.str());
+        }
+        if (opt.algorithm_preset == "research-round83-vds-equal-net-exchange" && out.found &&
+            !ebrp::processWorkDeadlineReached(opt)) {
+            const auto trace_directory = opt.primal_heuristic_generation_log.empty()
+                ? std::filesystem::path{}
+                : std::filesystem::path(opt.primal_heuristic_generation_log + ".exchange");
+            const auto balanced = ebrp::runRound83ExchangeDescent(instance, opt, out.routes, trace_directory);
+            consider(balanced.routes, "round83_equal_net_exchange_physical_descent");
+            out.local_moves_tested += balanced.insertion_evaluations + balanced.quantity_evaluations + balanced.block_placements + balanced.equal_net_pairs;
+            std::ostringstream note;
+            note << "Round83 equal-net exchange descent: neutral=" << balanced.neutral
+                 << ", exchanges=" << balanced.exchanges << ", relocations=" << balanced.relocations
+                 << ", insertions=" << balanced.insertions << ", quantities=" << balanced.quantities
+                 << ", block_placements=" << balanced.block_placements
+                 << ", exhausted=" << balanced.exhausted << ", zero=" << balanced.zero
+                 << ", whole_run_deadline=" << balanced.deadline
+                 << ", verification_failed=" << balanced.verification_failed
+                 << ", trace=" << trace_directory.string();
+            out.notes.push_back(note.str());
+        }
+        if (opt.algorithm_preset == "research-round78-vds-balanced-descent" && out.found &&
+            !ebrp::processWorkDeadlineReached(opt)) {
+            const auto trace_directory = opt.primal_heuristic_generation_log.empty()
+                ? std::filesystem::path{}
+                : std::filesystem::path(opt.primal_heuristic_generation_log + ".balanced");
+            const auto balanced = ebrp::runRound78BalancedDescent(instance, opt, out.routes, trace_directory);
+            consider(balanced.routes, "round78_balanced_block_physical_descent");
+            out.local_moves_tested += balanced.insertion_evaluations + balanced.quantity_evaluations + balanced.block_placements;
+            std::ostringstream note;
+            note << "Round78 balanced descent: neutral=" << balanced.neutral
+                 << ", insertions=" << balanced.insertions << ", quantities=" << balanced.quantities
+                 << ", block_placements=" << balanced.block_placements
+                 << ", exhausted=" << balanced.exhausted << ", zero=" << balanced.zero
+                 << ", whole_run_deadline=" << balanced.deadline
+                 << ", verification_failed=" << balanced.verification_failed
+                 << ", trace=" << trace_directory.string();
+            out.notes.push_back(note.str());
+        }
+        if (opt.algorithm_preset == "research-round76-vds-physical-closure" && out.found &&
+            !ebrp::processWorkDeadlineReached(opt)) {
+            const auto trace_path = opt.primal_heuristic_generation_log.empty()
+                ? std::filesystem::path{}
+                : std::filesystem::path(opt.primal_heuristic_generation_log + ".closure.csv");
+            const auto closed = ebrp::runRound76PhysicalClosure(instance, opt, out.routes, trace_path);
+            consider(closed.routes, "round76_physical_insertion_quantity_closure");
+            out.local_moves_tested += closed.stats.insertion.quantity_evaluations + closed.stats.quantity.objective_evaluations;
+            std::ostringstream note;
+            note << "Round76 physical closure: insertion_passes=" << closed.stats.insertion.passes
+                 << ", quantity_passes=" << closed.stats.quantity.passes
+                 << ", insertion_placements=" << closed.stats.insertion.placements
+                 << ", insertion_quantities=" << closed.stats.insertion.quantity_evaluations
+                 << ", quantity_feasible=" << closed.stats.quantity.feasible_candidates
+                 << ", accepted_insertions=" << closed.stats.accepted_insertions
+                 << ", accepted_quantities=" << closed.stats.accepted_quantities
+                 << ", exhausted=" << closed.stats.exhausted
+                 << ", whole_run_deadline=" << closed.stats.deadline_reached
+                 << ", verification_failed=" << closed.stats.verification_failed
+                 << ", trace=" << trace_path.string();
+            out.notes.push_back(note.str());
         }
         if (mode == "hga-tgbc") {
             finalizeHeuristic();
@@ -7321,6 +8459,28 @@ ebrp::SolveResult solvePrimalHeuristicDiagnostic(const ebrp::Instance& instance,
     result.hga_verified_objective = heuristic.hga_verified_objective;
     result.hga_wall_time_seconds = heuristic.hga_wall_time_seconds;
     result.hga_generation_log_path = heuristic.hga_generation_log_path;
+    result.hga_retained_verified_event_candidate =
+        heuristic.hga_retained_verified_event_candidate;
+    result.hga_candidate_observer_failed =
+        heuristic.hga_candidate_observer_failed;
+    result.hga_candidate_observations = heuristic.hga_candidate_observations;
+    result.hga_verified_candidate_count =
+        heuristic.hga_verified_candidate_count;
+    result.hga_published_candidate_count =
+        heuristic.hga_published_candidate_count;
+    result.hga_candidate_verification_seconds =
+        heuristic.hga_candidate_verification_seconds;
+    result.hga_retained_candidate_sha256 =
+        heuristic.hga_retained_candidate_sha256;
+    result.decoded_descent_complete = heuristic.decoded_descent_complete;
+    result.decoded_descent_seeds_completed = heuristic.decoded_descent_seeds_completed;
+    result.decoded_descent_passes = heuristic.decoded_descent_passes;
+    result.decoded_descent_checks = heuristic.decoded_descent_checks;
+    result.decoded_descent_cross_route_enabled = heuristic.decoded_descent_cross_route_enabled;
+    result.decoded_descent_cross_route_neighbors = heuristic.decoded_descent_cross_route_neighbors;
+    result.decoded_descent_cross_route_checks = heuristic.decoded_descent_cross_route_checks;
+    result.decoded_descent_cross_route_moves = heuristic.decoded_descent_cross_route_moves;
+    result.decoded_descent_log_path = heuristic.decoded_descent_log_path;
     result.incumbent_generation_time_seconds = heuristic.runtime_seconds;
     result.incumbent_generation_method = "paper_primal_" + opt.primal_heuristic;
     result.incumbent_candidates_tested = heuristic.candidates_tested;
@@ -10480,6 +11640,35 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         opt.round36_c6_split_normalization;
     result.round37_c6_geometry_policy =
         opt.round37_c6_geometry_policy;
+    result.round40_c6_coarse_start = opt.round40_c6_coarse_start;
+    result.c6_normalized_split_threshold =
+        opt.c6_normalized_split_threshold;
+    result.c6_normalized_split_threshold_explicit =
+        opt.c6_normalized_split_threshold_explicit;
+    result.c6_normalized_split_threshold_source =
+        opt.c6_normalized_split_threshold_explicit
+            ? "explicit" : "implicit-default";
+    result.round47_c6_adaptive_mass = opt.round47_c6_adaptive_mass;
+    result.round47_c6_adaptive_mass_tau =
+        opt.round47_c6_adaptive_mass_tau;
+    result.round47_c6_adaptive_mass_tau_explicit =
+        opt.round47_c6_adaptive_mass_tau_explicit;
+    result.round48_k1_amf = opt.round48_k1_amf;
+    result.round49_k1_am_rc = opt.round49_k1_am_rc;
+    result.round48_counterfactual_mode = opt.round48_counterfactual_mode;
+    result.round48_counterfactual_interval =
+        opt.round48_counterfactual_interval;
+    result.round40_c6_ub_geometry = opt.round40_c6_ub_geometry;
+    result.round41_static_segmented_gini =
+        opt.round41_static_segmented_gini;
+    result.round41_static_segmented_solve =
+        opt.round41_static_segmented_solve;
+    result.round41_root_reference_interval =
+        opt.round41_root_reference_interval;
+    result.round42_static_architecture = opt.round42_static_architecture;
+    result.round42_static_solve = opt.round42_static_solve;
+    result.round42_terminal_sibling_coalescing =
+        opt.round42_terminal_sibling_coalescing;
     ebrp::PricingOptions bpc_pricing_options;
     applyPricingOptionsFromSolve(instance, opt, bpc_pricing_options);
     result.bpc_pricing_engine_requested = bpc_pricing_options.pricing_engine;
@@ -11064,6 +12253,28 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         result.hga_verified_objective = heuristic.hga_verified_objective;
         result.hga_wall_time_seconds = heuristic.hga_wall_time_seconds;
         result.hga_generation_log_path = heuristic.hga_generation_log_path;
+        result.hga_retained_verified_event_candidate =
+            heuristic.hga_retained_verified_event_candidate;
+        result.hga_candidate_observer_failed =
+            heuristic.hga_candidate_observer_failed;
+        result.hga_candidate_observations = heuristic.hga_candidate_observations;
+        result.hga_verified_candidate_count =
+            heuristic.hga_verified_candidate_count;
+        result.hga_published_candidate_count =
+            heuristic.hga_published_candidate_count;
+        result.hga_candidate_verification_seconds =
+            heuristic.hga_candidate_verification_seconds;
+        result.hga_retained_candidate_sha256 =
+            heuristic.hga_retained_candidate_sha256;
+        result.decoded_descent_complete = heuristic.decoded_descent_complete;
+        result.decoded_descent_seeds_completed = heuristic.decoded_descent_seeds_completed;
+        result.decoded_descent_passes = heuristic.decoded_descent_passes;
+        result.decoded_descent_checks = heuristic.decoded_descent_checks;
+        result.decoded_descent_cross_route_enabled = heuristic.decoded_descent_cross_route_enabled;
+        result.decoded_descent_cross_route_neighbors = heuristic.decoded_descent_cross_route_neighbors;
+        result.decoded_descent_cross_route_checks = heuristic.decoded_descent_cross_route_checks;
+        result.decoded_descent_cross_route_moves = heuristic.decoded_descent_cross_route_moves;
+        result.decoded_descent_log_path = heuristic.decoded_descent_log_path;
         result.incumbent_generation_time_seconds += heuristic.runtime_seconds;
         result.incumbent_generation_method = "paper_primal_" + opt.primal_heuristic;
         result.incumbent_candidates_tested += heuristic.candidates_tested;
@@ -18272,6 +19483,21 @@ std::string inferPlateauReasonForFinalization(const ebrp::SolveResult& result) {
     return "not_certified";
 }
 
+void applyRound56ResultMetadata(const ebrp::Instance& instance,
+                                const ebrp::SolveOptions& opt,
+                                ebrp::SolveResult& result) {
+    result.scenario_id = opt.round56_scenario_id;
+    result.route_time_limit_seconds = instance.total_time_limit;
+    result.solver_process_cap_seconds = opt.process_wall_time_limit > 0.0
+        ? opt.process_wall_time_limit : opt.solve_time_limit;
+    result.pickup_time_seconds = instance.pickup_time;
+    result.drop_time_seconds = instance.drop_time;
+    result.distance_convention = instance.distance_convention;
+    result.mathematical_instance_sha256 =
+        opt.round56_mathematical_instance_sha256;
+    result.run_identity_sha256 = opt.round56_run_identity_sha256;
+}
+
 void writeEmergencyFinalJson(const ebrp::SolveOptions& opt,
                              const std::string& status,
                              const std::string& reason) {
@@ -18281,6 +19507,16 @@ void writeEmergencyFinalJson(const ebrp::SolveOptions& opt,
     result.input_path = opt.input_path;
     result.result_file = opt.out_path;
     result.log_file = opt.log_path;
+    result.scenario_id = opt.round56_scenario_id;
+    result.route_time_limit_seconds = opt.total_time_limit;
+    result.solver_process_cap_seconds = opt.process_wall_time_limit > 0.0
+        ? opt.process_wall_time_limit : opt.solve_time_limit;
+    result.pickup_time_seconds = opt.pickup_time;
+    result.drop_time_seconds = opt.drop_time;
+    result.distance_convention = "unavailable_on_emergency_path";
+    result.mathematical_instance_sha256 =
+        opt.round56_mathematical_instance_sha256;
+    result.run_identity_sha256 = opt.round56_run_identity_sha256;
     result.method = opt.method.empty() ? "unknown" : opt.method;
     result.status = status;
     result.certificate = "not_certified";
@@ -18392,6 +19628,22 @@ int main(int argc, char** argv) {
                 opt, "instance_parsing_start", "start", file.string());
             ebrp::Instance instance = ebrp::parseInstanceFile(
                 file, opt.total_time_limit, opt.pickup_time, opt.drop_time);
+            if ((opt.algorithm_preset == "research-round67-vdp" ||
+                 opt.algorithm_preset == "research-round67-log-vdp" ||
+                 opt.algorithm_preset == "research-round68-vdp-start" ||
+                 opt.algorithm_preset == "research-round70-vds-descent" ||
+                 opt.algorithm_preset == "research-round71-vds-interroute-descent" ||
+                 opt.algorithm_preset == "research-round73-vds-joint-insertion" ||
+                 opt.algorithm_preset == "research-round73-vds-joint-seeded-descent" ||
+                 opt.algorithm_preset == "research-round75-vds-quantity-descent" ||
+                 opt.algorithm_preset == "research-round76-vds-physical-closure" ||
+                 opt.algorithm_preset == "research-round78-vds-balanced-descent" ||
+         opt.algorithm_preset == "research-round83-vds-equal-net-exchange") &&
+                !ebrp::hasMetricTravelLowerBounds(instance)) {
+                throw std::runtime_error(
+                    "Round67 strengthened presets require symmetric metric travel; "
+                    "nonmetric qualification of inherited cuts is not established");
+            }
             ebrp::recordProcessPhase(
                 opt, "instance_parsing_complete", "complete",
                 "instance=" + instance.name);
@@ -18568,6 +19820,7 @@ int main(int argc, char** argv) {
             auto& r = results.back();
             initializeScalabilityFields(instance, effective_opt, r);
             applyRunConfigSnapshot(buildRunConfigSnapshot(instance, effective_opt), r);
+            applyRound56ResultMetadata(instance, effective_opt, r);
             if (effective_opt.frontier_execution_mode == "scheduler") {
                 writePreAutoOracleParentJson(effective_opt, r);
                 effective_opt.process_elapsed_seconds_before_auto_oracle =

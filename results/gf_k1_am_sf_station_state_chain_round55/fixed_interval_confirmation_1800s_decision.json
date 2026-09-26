@@ -1,0 +1,35 @@
+{
+  "schema": "round55-live-stage-decision-v1",
+  "stage": "fixed_interval_confirmation_1800s",
+  "row_count": 38,
+  "pair_count": 19,
+  "all_engineering_valid": true,
+  "false_certificate_count": 0,
+  "summaries": {
+    "VD-P": {
+      "certificate_gain_count": 2,
+      "certificate_loss_count": 0,
+      "severe_regression_count": 0,
+      "severe_states": [],
+      "material_improvement_states": [
+        "E_MAJOR_L",
+        "E_MAJOR_R",
+        "D3",
+        "D4",
+        "D9",
+        "D10",
+        "D11",
+        "D12",
+        "C1",
+        "D13",
+        "V50_MODERATE"
+      ],
+      "shifted_work_geometric_mean_ratio": 0.6637457968702356,
+      "aggregate_gi_ratio": 0.5064701989122932
+    }
+  },
+  "selected_for_next_stage": [
+    "VD-P"
+  ],
+  "rejected": []
+}

@@ -1,0 +1,164 @@
+{
+  "V50_allowed": false,
+  "additional_confirmation_instances": [
+    "round39_small_hard_V10_M1_Q30_slot02_seed1721447042",
+    "round39_small_hard_V12_M1_Q20_slot05_seed180890838",
+    "round39_small_medium_V10_M1_Q20_slot04_seed1035775879",
+    "round39_small_medium_V8_M3_Q30_slot03_seed1177285734"
+  ],
+  "additional_instances_frozen_before_outcomes": true,
+  "existing_confirmation_instances": [
+    "tight_T_seed3101",
+    "high_imbalance_seed3202",
+    "moderate_seed3302"
+  ],
+  "instances": [
+    {
+      "additional_substitution": false,
+      "formula_construction_use": true,
+      "instance": "round39_small_medium_V12_M3_Q30_slot08_seed1343324363",
+      "panel": "mechanism",
+      "path": "reference/qualification_round39/small-medium/round39_small_medium_V12_M3_Q30_slot08_seed1343324363.txt",
+      "role": "major_regression_retain",
+      "sha256": "29e0ca2c95ec2e061aa1cc524aaf6a41bf6c4a34355dca86df6966aa8a29b6b4"
+    },
+    {
+      "additional_substitution": false,
+      "formula_construction_use": true,
+      "instance": "round39_small_hard_V12_M3_Q30_slot08_seed1288546114",
+      "panel": "mechanism",
+      "path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q30_slot08_seed1288546114.txt",
+      "role": "strong_control_rescue",
+      "sha256": "7ee8a95ca3043f83b2e8c6b3663f8aa212678043d0c98b0153efbeb834d48823"
+    },
+    {
+      "additional_substitution": false,
+      "formula_construction_use": true,
+      "instance": "round39_small_hard_V10_M3_Q20_slot04_seed1145042375",
+      "panel": "mechanism",
+      "path": "reference/qualification_round39/small-hard/round39_small_hard_V10_M3_Q20_slot04_seed1145042375.txt",
+      "role": "harmful_split_negative_control",
+      "sha256": "7c4b46a1932e53e6ae193d01085bcc226236ffdc01c03a27bdbb6ebb483455a8"
+    },
+    {
+      "additional_substitution": false,
+      "formula_construction_use": true,
+      "instance": "round39_small_hard_V12_M3_Q20_slot07_seed621538683",
+      "panel": "mechanism",
+      "path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q20_slot07_seed621538683.txt",
+      "role": "numerical_endpoint_rescue",
+      "sha256": "963a8887d9c69a19824a0c250de4099a68b8c0e17288196b25cc46d74eb890b1"
+    },
+    {
+      "additional_substitution": false,
+      "formula_construction_use": true,
+      "instance": "round39_small_hard_V12_M2_Q20_slot06_seed258908503",
+      "panel": "mechanism",
+      "path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M2_Q20_slot06_seed258908503.txt",
+      "role": "v12_m2_formulation_deficit",
+      "sha256": "efb62df9be5433dfb5d2def59ee52399bfe10fb2bcc652954892def33e38b2fd"
+    },
+    {
+      "additional_substitution": false,
+      "formula_construction_use": true,
+      "instance": "high_imbalance_seed3201",
+      "panel": "mechanism",
+      "path": "reference/hard_stress/V20_M3/high_imbalance_seed3201.txt",
+      "role": "high_imbalance_development",
+      "sha256": "ce60fd4e74ad23174be2d4a08ca6e52c0043cee22f3c9b17153b9e8bbcfdbe42"
+    },
+    {
+      "additional_substitution": false,
+      "formula_construction_use": true,
+      "instance": "moderate_seed3301",
+      "panel": "mechanism",
+      "path": "reference/hard_stress/V20_M3/moderate_seed3301.txt",
+      "role": "moderate_trajectory_guard",
+      "sha256": "83daeb902d8d68a0e08a84d190b43647183b146daf81c31e99be07c10fc6242a"
+    },
+    {
+      "additional_substitution": false,
+      "formula_construction_use": true,
+      "instance": "tight_T_seed3102",
+      "panel": "mechanism",
+      "path": "reference/hard_stress/V20_M3/tight_T_seed3102.txt",
+      "role": "tight3102_under_refinement",
+      "sha256": "40689df814199ae10f66c5bbfe492fcafdbbabc1a221c6724e939d02758a9f14"
+    },
+    {
+      "additional_substitution": false,
+      "formula_construction_use": false,
+      "instance": "tight_T_seed3101",
+      "panel": "existing_confirmation",
+      "path": "reference/hard_stress/V20_M3/tight_T_seed3101.txt",
+      "role": "tight_v20_confirmation",
+      "sha256": "30aea92f1d6ce551ef8fffe15acdd3422a94b06e60ddd13ad5166149653d4ef3"
+    },
+    {
+      "additional_substitution": false,
+      "formula_construction_use": false,
+      "instance": "high_imbalance_seed3202",
+      "panel": "existing_confirmation",
+      "path": "reference/hard_stress/V20_M3/high_imbalance_seed3202.txt",
+      "role": "high_imbalance_confirmation",
+      "sha256": "902f4c46fa076f3e24b537737c5d58ffe833e6de21e900a42bb8846d3f76db50"
+    },
+    {
+      "additional_substitution": false,
+      "formula_construction_use": false,
+      "instance": "moderate_seed3302",
+      "panel": "existing_confirmation",
+      "path": "reference/hard_stress/V20_M3/moderate_seed3302.txt",
+      "role": "moderate_confirmation",
+      "sha256": "0b329df7711155131b33dfd14cfee8e85a17f60cc003863dbe004eb085c5f77e"
+    },
+    {
+      "additional_substitution": false,
+      "formula_construction_use": false,
+      "instance": "round39_small_hard_V10_M1_Q30_slot02_seed1721447042",
+      "panel": "additional_confirmation",
+      "path": "reference/qualification_round39/small-hard/round39_small_hard_V10_M1_Q30_slot02_seed1721447042.txt",
+      "role": "unused_round39_hard_v10_m1_q30",
+      "sha256": "065d0f472f63fb8fe2f6e82c0834e9622db12c64af879f96bd576660c39272c9"
+    },
+    {
+      "additional_substitution": false,
+      "formula_construction_use": false,
+      "instance": "round39_small_hard_V12_M1_Q20_slot05_seed180890838",
+      "panel": "additional_confirmation",
+      "path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M1_Q20_slot05_seed180890838.txt",
+      "role": "unused_round39_hard_v12_m1_q20",
+      "sha256": "397a0b3d7ac964f3f24356e64ba9b75b4cfa04febcbd869a1195bc26166f5feb"
+    },
+    {
+      "additional_substitution": false,
+      "formula_construction_use": false,
+      "instance": "round39_small_medium_V10_M1_Q20_slot04_seed1035775879",
+      "panel": "additional_confirmation",
+      "path": "reference/qualification_round39/small-medium/round39_small_medium_V10_M1_Q20_slot04_seed1035775879.txt",
+      "role": "unused_round39_medium_v10_m1_q20",
+      "sha256": "57b3218f569c53d905efec2feada1bbfa870d7a689cf65c728ece40d8a99c898"
+    },
+    {
+      "additional_substitution": false,
+      "formula_construction_use": false,
+      "instance": "round39_small_medium_V8_M3_Q30_slot03_seed1177285734",
+      "panel": "additional_confirmation",
+      "path": "reference/qualification_round39/small-medium/round39_small_medium_V8_M3_Q30_slot03_seed1177285734.txt",
+      "role": "unused_round39_medium_v8_m3_q30",
+      "sha256": "fcbe294480dcacf0303cc2dc12c948335d8d8c8f4f875de2feb58ae21ed83bbb"
+    }
+  ],
+  "mechanism_instances": [
+    "round39_small_medium_V12_M3_Q30_slot08_seed1343324363",
+    "round39_small_hard_V12_M3_Q30_slot08_seed1288546114",
+    "round39_small_hard_V10_M3_Q20_slot04_seed1145042375",
+    "round39_small_hard_V12_M3_Q20_slot07_seed621538683",
+    "round39_small_hard_V12_M2_Q20_slot06_seed258908503",
+    "high_imbalance_seed3201",
+    "moderate_seed3301",
+    "tight_T_seed3102"
+  ],
+  "new_instances_generated": false,
+  "schema": "round48-dataset-freeze-v1"
+}

@@ -1,0 +1,10 @@
+id,cap,candidate_arm,candidate_number,reference_number,reference,candidate_certificate,reference_certificate,wall_delta,UB_delta,LB_delta,signed_gap_delta,paired_build,uniform_affinity_mask,same_paid_initial_routes,practical_classification,bound_tradeoff
+D3,300,DS,2,1,P-GRB,False,False,0.014999999664723873,-5.2611524906265306e-05,0.0017108847709887617,-0.001763496295895027,True,4,,material_improvement,aligned_or_unchanged
+D3,300,DS-X,3,1,P-GRB,True,False,-41.70299999974668,-5.2611524906265306e-05,0.0034837278031984026,-0.003536339328104668,True,4,,certificate_gain,aligned_or_unchanged
+D3,300,DS-X,3,2,DS,True,False,-41.717999999411404,0.0,0.0017728430322096408,-0.0017728430322096408,True,4,False,certificate_gain,aligned_or_unchanged
+C2,300,DS,5,4,P-GRB,True,False,-142.84400000004098,0.0,0.058481278749559995,-0.058481278749559995,True,4,,certificate_gain,aligned_or_unchanged
+C2,300,DS-X,6,4,P-GRB,True,False,-185.8289999999106,0.0,0.058481278749559884,-0.058481278749559884,True,4,,certificate_gain,aligned_or_unchanged
+C2,300,DS-X,6,5,DS,True,True,-42.984999999869615,0.0,-1.1102230246251565e-16,1.1102230246251565e-16,True,4,False,material_improvement,aligned_or_unchanged
+D4,300,DS,8,7,P-GRB,True,False,-243.20200000004843,0.0,0.31026999581447245,-0.31026999581447245,True,4,,certificate_gain,aligned_or_unchanged
+D4,300,DS-X,9,7,P-GRB,True,False,-242.3589999997057,0.0,0.3102699958144718,-0.3102699958144718,True,4,,certificate_gain,aligned_or_unchanged
+D4,300,DS-X,9,8,DS,True,True,0.8430000003427267,0.0,-6.661338147750939e-16,6.661338147750939e-16,True,4,False,below_practical_threshold,aligned_or_unchanged

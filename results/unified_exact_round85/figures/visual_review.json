@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "roles": [
+    "D3",
+    "C2",
+    "C6",
+    "C8",
+    "D6"
+  ],
+  "reviewed_png_sha256": {
+    "d3_bounds_and_gap.png": "b871df665f18c652d06c35671206919ce7122472fd6565975efa1763440a1b20",
+    "c2_bounds_and_gap.png": "acddf110b4bf951ea88ce97b30ee53c7035581d6ef5da30055bfb56f1ffffd44",
+    "c6_bounds_and_gap.png": "e18121c1590cae5b098e0766ebe999169a0f3b9c39642a8cc811b9a210b46c43",
+    "c8_bounds_and_gap.png": "8047ee80d64d2fd291689d70e700182152021ddff97e926043980b4d8fa9d00f",
+    "d6_bounds_and_gap.png": "6c4115f3058e46c52d0c06ebc2d85d677b2e4a45faa2115cf5870353b07ad32d"
+  },
+  "findings": "All five rendered PNGs inspected: titles, legends, axes, ticks and captions readable without clipping; observed-range U/L axes disclosed; D6 missing K1 U/gap at 300s visible and qualified L retained; negative tiny D3 gap not clipped in source; no visual revision needed.",
+  "optimizer_calls": 0
+}

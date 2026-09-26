@@ -1,0 +1,9 @@
+operation,return_code_checked,readback_checked,fail_closed,status
+environment creation,True,False,True,pass
+Threads parameter,True,True,True,pass
+Presolve parameter,True,True,True,pass
+Seed parameter,True,True,True,pass
+MIPGap/MIPGapAbs,True,True,True,pass
+PreCrush when requested,True,True,True,pass; Round55 never requests
+optimize,True,False,True,pass
+model free/environment close,True,False,True,pass

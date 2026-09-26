@@ -1,0 +1,39 @@
+{
+  "schema": "round50-corrected-iteration-qualification-selection-v1",
+  "iteration": 1,
+  "semantic_registry_correction_applied": true,
+  "selection_written_before_qualification_runs": true,
+  "executable_sha256": "ae3c1f3288402770d49c2597649ad4d8847006b7977625380bb7138226000c9a",
+  "core_cap_seconds": 120,
+  "core_state_count": 9,
+  "core_result_hashes": {
+    "interval-mip-v0": "b2704c0851ec9cc216378c8a6c516de9612e686b40c075ecfc5d66eb8659a9fb",
+    "b1-primitive-first": "7f63f6c46172e431f698396a4bf6973a1b190e74e2baeb37095d76ba6a9b1fbe",
+    "b2-route-first": "b9ada3521906eea64d4390a8a3559f8ef101a9a080bcd9f37cc769b9ca9bd0d5",
+    "b3-operation-first": "4da4a307a3a74657c5cd3c67ed36c035af65954621f9cbf93d008a0c678301a8"
+  },
+  "candidate_decisions": [
+    {
+      "policy": "b1-primitive-first",
+      "decision": "qualify",
+      "reason": "certificate count preserved, no core severe regression, aggregate Work ratio 0.901, and material D10 gain; capped D1/D3 GI degradation requires qualification"
+    },
+    {
+      "policy": "b2-route-first",
+      "decision": "reject",
+      "reason": "lost D4 and D10 core certificates"
+    },
+    {
+      "policy": "b3-operation-first",
+      "decision": "reject",
+      "reason": "D4 exact-row Work ratio 1.512 with absolute increase 66.368"
+    }
+  ],
+  "qualification_policy": "b1-primitive-first",
+  "qualification_states": ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "D11", "D12", "D13", "D14"],
+  "qualification_cap_seconds": 300,
+  "candidate_accepted_before_qualification": false,
+  "candidate_menu_changed_after_invalidated_attempt": false,
+  "confirmation_opened": false,
+  "post_screen_tuning": false
+}

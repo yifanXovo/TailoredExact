@@ -1,0 +1,48 @@
+{
+  "number": 33,
+  "id": "D7",
+  "arm": "K1-R",
+  "cap": 600,
+  "wall": 597.2039999999106,
+  "UB": 0.21564407531579505,
+  "LB": 0.0,
+  "signed_gap": 0.21564407531579505,
+  "certificate": false,
+  "physical": {
+    "F": 0.21564407531579494,
+    "G": 0.03872267378877319,
+    "P": 1.179476010180145,
+    "stations": 50,
+    "pickup": 228,
+    "drop": 228,
+    "maximum_duration": 17975.490961810894,
+    "original_T_feasible": true
+  },
+  "endpoint_settings_and_coverage_checks": true,
+  "independent_interval_union": null,
+  "pre_proof_full_domain_bound": {
+    "legal_global_lower_bound": 0,
+    "physical": {
+      "F": 0.21564407531579494,
+      "G": 0.03872267378877319,
+      "P": 1.179476010180145,
+      "stations": 50,
+      "pickup": 228,
+      "drop": 228,
+      "maximum_duration": 17975.490961810894,
+      "original_T_feasible": true
+    },
+    "native_optimize_calls": 0,
+    "full_retained_route_sha256": "356124388ee9c761491b4bf926abb98c21b41fdeff8f76b6e388b33af2287170",
+    "full_verified_event_link": true,
+    "conservative_witness_available_by": 597.1616634,
+    "coverage_scope": "Universal nonnegative objective covers the full original domain; no proof tree was started",
+    "certificate": false,
+    "raw_tree_flags_remain_false": true,
+    "script_sha256": "97aa1431b067218574223e44b7ac53757d5da2a2eb527bc1dd1cc823dec7cbb4"
+  },
+  "optimize_calls": 0,
+  "result_sha256": "ccc20ac457c51a25f5f85264e979f940e2b7e3a69b4e90f93cd8b9efbb54bdce",
+  "script_sha256": "6d429e7555059fc59cddb42bea5b6ef2b75a5bb9dbc84190889a9ab0f2e0e594",
+  "scope": "Light completed endpoint only; full model, Start-vector and trajectory audits remain required at queue boundary"
+}

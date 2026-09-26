@@ -1,0 +1,13 @@
+{
+  "operation": "First actual Start/trace aggregation",
+  "returncode": 1,
+  "failure": "Duplicate maximum_row_violation keyword while combining already-checked native metadata and independent actual-vector results",
+  "retained_script": "round74_mechanism_v1.py",
+  "script_sha256": "9eb280d2ac755a0f9bcfd0e1f5b94358fb4fefba337a90374c57fbe68a0f0389",
+  "command_wall_seconds": 2.2062622,
+  "cost_scope": "Whole shell/interpreter command time reported by exec",
+  "new_optimizer_calls": 0,
+  "new_runs": 0,
+  "correction": "Preserve the independent vector result as a nested object without overwriting native metadata",
+  "raw_solver_or_driver_evidence_changed": false
+}

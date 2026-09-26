@@ -9,6 +9,10 @@
 
 namespace ebrp {
 
+inline bool isDecodedDescentStopMode(const std::string& mode) {
+    return mode == "decoded-descent" || mode == "decoded-descent-interroute";
+}
+
 struct HgaTgbcOptions {
     double lambda = 0.15;
     unsigned seed = 20260626u;
@@ -23,6 +27,18 @@ struct HgaTgbcOptions {
     std::filesystem::path generation_log_path;
     std::string phase_label = "primary_hga";
     const SolveOptions* process_options = nullptr;
+    bool publish_verified_improvements = false;
+    std::filesystem::path verified_candidate_log_path;
+    std::string candidate_model_identity = "original_problem";
+    // Round 61 only: initialization plus exactly this many generations.
+    // Negative leaves every historical stopping/extraction rule unchanged.
+    int fixed_generations = -1;
+    bool retain_verified_on_log_failure = false;
+    bool stop_on_verified_zero = false;
+    // Round73 only: a paid, physically verified construction supplies one
+    // additional permutation seed to the finite descent. Never read from disk.
+    bool joint_constructive_seed = false;
+    std::vector<RoutePlan> joint_constructive_routes;
 };
 
 struct HgaTgbcResult {
@@ -39,7 +55,36 @@ struct HgaTgbcResult {
     double verified_objective = 0.0;
     double wall_time_seconds = 0.0;
     bool global_deadline_reached = false;
+    bool retained_verified_event_candidate = false;
+    bool candidate_observer_failed = false;
+    long long candidate_observations = 0;
+    long long verified_candidate_count = 0;
+    long long published_candidate_count = 0;
+    double candidate_verification_seconds = 0.0;
+    std::string retained_candidate_sha256;
     std::filesystem::path generation_log_path;
+    bool candidate_evidence_persisted = true;
+    bool verified_zero_stop = false;
+    double verified_zero_seconds = -1.0;
+    double initialization_seconds = 0.0;
+    double decoder_seconds = 0.0;
+    double observer_seconds = 0.0;
+    double conversion_seconds = 0.0;
+    double hash_seconds = 0.0;
+    double copy_seconds = 0.0;
+    double ledger_seconds = 0.0;
+    double first_nonempty_seconds = -1.0;
+    bool decoded_descent_complete = false;
+    int decoded_descent_seeds_completed = 0;
+    long long decoded_descent_passes = 0;
+    long long decoded_descent_checks = 0;
+    bool decoded_descent_cross_route_enabled = false;
+    long long decoded_descent_cross_route_neighbors = 0;
+    long long decoded_descent_cross_route_checks = 0;
+    long long decoded_descent_cross_route_moves = 0;
+    std::filesystem::path decoded_descent_log_path;
+    std::vector<double> fitness_history;
+    std::vector<double> elapsed_history;
 };
 
 HgaTgbcResult runHgaTgbcNative(const Instance& instance,

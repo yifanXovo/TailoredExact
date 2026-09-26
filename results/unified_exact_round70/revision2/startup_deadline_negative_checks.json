@@ -1,0 +1,32 @@
+{
+  "cases": [
+    {
+      "case": "nonzero_unjustified_LB",
+      "rejected": true
+    },
+    {
+      "case": "false_certificate",
+      "rejected": true
+    },
+    {
+      "case": "fabricated_tree",
+      "rejected": true
+    },
+    {
+      "case": "missing_retained_verifier_path",
+      "rejected": true
+    },
+    {
+      "case": "other_failure_status",
+      "rejected": true
+    },
+    {
+      "case": "negative_penalty_invalidates_universal_LB0",
+      "rejected": true
+    }
+  ],
+  "optimizer_calls": 0,
+  "mutated_raw_evidence": false,
+  "script_sha256": "97aa1431b067218574223e44b7ac53757d5da2a2eb527bc1dd1cc823dec7cbb4",
+  "source_result_sha256": "bc0fdbb0937ae41b982306480a05a53c60d00d1576057376b2c05d086c709e8a"
+}
