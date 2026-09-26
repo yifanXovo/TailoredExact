@@ -1,0 +1,82 @@
+{
+  "schema": "round90-lp-g-pure-qualification-lease-v1",
+  "authorized_by": "root",
+  "owner": "/root/r88_evidence_review",
+  "source_commit": "b1f53bdaa2bfd15bce8232cc872b8815d7f65d9a",
+  "workspace": "E:/codes/ExactEBRP",
+  "output": "results/unified_exact_round90/qualification_001",
+  "source_hashes": [
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "4d1ad96639e1ef8a4093174636a1ef8e4563519485fc7d0ee82af68696057de0"
+    },
+    {
+      "path": "include/GiniFrontierGeometry.hpp",
+      "sha256": "c6d8b45bb43027b0ecde60160501ca0a3c07877dbc35bbfbe5fbaaec72c94305"
+    },
+    {
+      "path": "include/Instance.hpp",
+      "sha256": "386ffd2a778d0fa8648f3eb2ef091d9742c7e25e0b947cf31aa7e1db99efcb3f"
+    },
+    {
+      "path": "src/GiniFrontierGeometry.cpp",
+      "sha256": "a4640594421ec578561ff19ee0125526b8c213ac26c2833299427caf6e03024f"
+    },
+    {
+      "path": "src/main.cpp",
+      "sha256": "efe8b0598483c2c3d2b3afb611fd2352f2005c53fe4cb9de95ebeab553c61570"
+    },
+    {
+      "path": "src/PaperExternalGiniTree.cpp",
+      "sha256": "3de879702ca6dd964a1273558fc5152eaa26fad9001860c0e298270bdb7975a9"
+    },
+    {
+      "path": "tests/round90_lp_g_split_tests.cpp",
+      "sha256": "2dd4582bb757624228fb610a2c9b3cc55fec0b84dca892601ecc1bec83a58d4d"
+    }
+  ],
+  "binary_hashes": [
+    {
+      "path": "build/research/round90-lp-g-split/ExactEBRP.exe",
+      "sha256": "bac65ff3b5b099852f2eedd7ef462ad700e5c1131778bd56dca310b3dd0af2f2"
+    },
+    {
+      "path": "build/research/round90-lp-g-split/GlobalGiniTreeTests.exe",
+      "sha256": "561f39167ccdfdcdc318abd420303a3eedd941700cd74064018cf36f10e44b19"
+    },
+    {
+      "path": "build/research/round90-lp-g-split/Round47AdaptiveMassTests.exe",
+      "sha256": "a40e2dd4ba94b67648ad1ca6ee788ec242b91af8396014d8abf0f9ab470d091f"
+    },
+    {
+      "path": "build/research/round90-lp-g-split/Round83ExchangeDiagnostic.exe",
+      "sha256": "36d361b662af80bcda8335bf0137f26434547b4f2b2ae4742c51b430541b1711"
+    },
+    {
+      "path": "build/research/round90-lp-g-split/Round90LpGSplitTests.exe",
+      "sha256": "6d234fda3a12ed54b6f0fa05654c26f500be83e6fc9359d89d5a745db78419d5"
+    }
+  ],
+  "pure_tests": [
+    "Round90LpGSplitTests",
+    "GlobalGiniTreeTests",
+    "Round47AdaptiveMassTests"
+  ],
+  "cli_negative_checks": [
+    "non_ENS_custom_preset",
+    "round90_plus_round88_A1",
+    "round90_plus_round89_B1"
+  ],
+  "cli_input_sentinel": "results/unified_exact_round90/__nonexistent_cli_sentinel__.txt",
+  "expected_errors": [
+    "Round90 LP-G split requires the ENS-C Round83 gcap-frontier method",
+    "Round90 LP-G split cannot combine with Round88 A1 or Round89 native B1"
+  ],
+  "maximum_optimize_calls": 0,
+  "command_cap_seconds": 120,
+  "retries": false,
+  "source_mutation_during_execution": false,
+  "failure_action": "Preserve command/evidence/cost, stop, report before repair or retry",
+  "independent_review": "results/unified_exact_round90/lp_g_split_independent_static_review.md",
+  "real_model_and_performance_admission": false
+}
