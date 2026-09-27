@@ -6,6 +6,8 @@ claim. The source identities, input SHA-256 and execution orders are fixed in
 [R88 preregistration](../unified_exact_round88/preregistration_a1_g3.json),
 [R90 G3 preregistration](../unified_exact_round90/preregistration_g3.json)
 and [R90 F2/D6 preregistration](../unified_exact_round90/preregistration_g4_priority.json).
+The additional nine R90 pairs below follow their own
+[fixed remaining-panel preregistration](../unified_exact_round90/preregistration_g4_remaining.json).
 R90 ENS-C and LP-G in each row are **contemporary same-new-binary, same-seed
 pairs**. The P-GRB column comes from R88 for eight roles and R87 for D6/F2:
 those P runs are historical relative to R90, even where the input hash,
@@ -67,8 +69,55 @@ R90 values are from [G3 smoke](../unified_exact_round90/runner_lp_g_g3_smoke_rep
 [G3 rest](../unified_exact_round90/runner_lp_g_g3_rest_report.md) and
 [F2/D6 priority](../unified_exact_round90/g4_priority_report.md), each with
 the corresponding raw summary, endpoint audit and cross-arm report. This
-table does not include the currently running G4 remaining panel or treat
-its incomplete files as results.
+table covers the original ten roles. The now-completed remaining panel is
+reported separately below; no in-progress D6 tail result is used here.
+
+## Completed remaining nine R90 roles
+
+These are the audited pairs in [the completed report](../unified_exact_round90/g4_remaining_report.md)
+and [full-precision arm table](../unified_exact_round90/g4_remaining_table.csv),
+accepted by the [independent review](../unified_exact_round90/g4_remaining_independent_evidence_review.md)
+and [root panel decision](../unified_exact_round90/g4_panel_decision.md).
+They use the same frozen R90 executable named above. There is no new
+contemporary P-GRB arm for these nine roles in this batch.
+
+| Role / process cap | ENS-C endpoint | LP-G endpoint |
+| --- | --- | --- |
+| N12 / 120 | C .804625520/.804625520; 1.843 | C .804625520/.804625520; 2.500 |
+| D4 / 600 | C .506343308/.506343308; 58.047 | C .506343308/.506343308; 59.407 |
+| E7 / 120 | C .020382504/.020382504; 1.906 | C .020382504/.020382504; 2.125 |
+| C6 / 1200 | O 1.684482857/1.569321617; 1197.188 | O 1.685470160/1.592928217; 1197.203 |
+| C8 / 1200 | O .806689828/.697862696; 1197.094 | O .801720783/.722802218; 1197.141 |
+| F1 / 120 | C .195558534/.195558534; 13.250 | C .195558534/.195558534; 13.094 |
+| C20 / 1200 | C .225621831/.225621827; 341.219 | C .225621831/.225621831; 382.922 |
+| B50 / 3600 | C .744858982/.744858982; 1148.078 | C .744858982/.744858981; 762.406 |
+| S50 / 3600 | O .327315425/.311011334; 3597.187 | O .327315425/.311139200; 3597.157 |
+
+All 18 arms passed physical, coverage, parameter and cross-arm audits. B50
+has a two-certificate process-time ratio of 0.6641, while C20's ratio is
+1.1222. C6's smaller absolute U-minus-L gap accompanies a slightly worse U;
+C8 improves both U and L; S50 remains close and doubly censored. None of
+these three censored pairs supplies a certification-time ratio. C20 LP-G's
+signed U-minus-L is -1.39e-16 in full precision, within the unchanged
+numeric gate, not a negative mathematical gap. Six actual atomic splits
+were adopted across these nine LP-G arms; 22 proposals or requested
+parent closures are not 22 completed splits/certificates.
+
+The fixed seed-0 development panel now comprises 19 roles: 11 pairs
+certified both methods, seven censored both, and D6 certified ENS-C only
+under its original 3600-second cap. All roles and losses remain included;
+the 1200-second D7/U6/F5/F6 observations were not extended to 3600 seconds.
+One separately preregistered fresh D6 pair at a common 7200-second whole-run
+cap is running under its [signed decision](../unified_exact_round90/d6_tail_execution_decision.md).
+Its result is not presumed and will be added without replacing the original
+D6 observation. This is still development evidence, not a final convergence
+study or a contemporary nineteen-role P-GRB comparison.
+
+The remaining-panel complete process sum is 14,769.767 seconds inside its
+14,780.090222-second external invocation. Separate post-run reporting and
+archive costs are disclosed by the linked root decision; the 30 verified
+packages preserve all 80,473 raw files. Those research costs are retained
+without adding nested model/solver measurements twice.
 
 Two certified arms in the **same panel and cap** permit a direct
 certification-time ratio. A certified arm against a later censored arm gives
