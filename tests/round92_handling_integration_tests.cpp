@@ -102,6 +102,8 @@ int main(int argc, char** argv) {
                     cache.misses == 2,
                 "changed emitted arc coefficient failed to invalidate cache");
         ebrp::SolveOptions wrong_flow = options;
+        // Exercise the Round92 F0 guard after resolving the explicit F1 mode.
+        wrong_flow.global_gini_tree_root_connectivity_flow = false;
         wrong_flow.global_gini_tree_root_connectivity_flow_variant = "f1";
         const auto rejected = ebrp::writeCanonicalCompactModel(
             instance, wrong_flow, root / "rejected_f1.lp", spec);
