@@ -1,0 +1,30 @@
+{
+  "authorized_by": "root",
+  "execution_requires_explicit_root_dispatch_after_G4_compute_release": true,
+  "qualification_policy": "scope_refinement_decision.md: integrated pre-Optimize identity/import/model/row qualification; no duplicate replay",
+  "working_directory": "E:/codes/ExactEBRP",
+  "python": "E:/codes/ExactEBRP/build/research/round88-ot/venv/Scripts/python.exe",
+  "script": "scripts/round91_handling_real_diagnostic.py",
+  "mode": "supervise",
+  "preregistration": "results/unified_exact_round91/preregistration_handling_real.json",
+  "cases": [
+    {
+      "case": "D3",
+      "admission": "results/unified_exact_round91/handling_real_D3_admission_001.json",
+      "output": "results/unified_exact_round91/handling_real_diagnostic_001/D3"
+    },
+    {
+      "case": "C2",
+      "admission": "results/unified_exact_round91/handling_real_C2_admission_001.json",
+      "output": "results/unified_exact_round91/handling_real_diagnostic_001/C2"
+    }
+  ],
+  "maximum_launch_to_exit_seconds_per_case": 120,
+  "whole_process_tree_watchdog": true,
+  "on_deadline_or_failure": "Terminate the entire item, preserve all evidence and costs, report unknown or invalid as appropriate, and stop before the next case. No automatic retry or extension.",
+  "attempts_per_case": 1,
+  "maximum_planned_optimize_calls_per_case": 3,
+  "order": "D3 A/B/C followed only on complete accepted supervisor output by C2 A/B/C; no overlapping compute",
+  "receipt": "Record executable, arguments, UTC launch and exit, return code, launch-to-exit outer wall, timeout and process-tree termination evidence, stdout/stderr, all partial outputs and separately measured post-exit work. Mark any unavailable memory measurement as unknown.",
+  "interpretation": "Independent finite original-F LP relevance diagnostic only; no production switch, candidate update, MIP speed or rational dual certificate claim."
+}
