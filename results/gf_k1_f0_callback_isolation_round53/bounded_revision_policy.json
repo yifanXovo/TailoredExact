@@ -1,0 +1,48 @@
+{
+  "schema": "round53-bounded-revision-policy-v1",
+  "opens_only_after_f0_gate_failure": true,
+  "requires_useful_support_duration_strength_loss_not_correctness_error": true,
+  "maximum_rescue_candidates": 1,
+  "menu": {
+    "R1": "F0-CLEAN plus static exact rank-2 rows; callback off; PreCrush default",
+    "R2": "F0-CLEAN plus finite external rank-2/rank-3 root-LP closure; restore integer types; terminal callback off; PreCrush default"
+  },
+  "R1_trigger": "repeated rank-2 activity or nonzero dual contribution in at least two structural roles",
+  "R2_trigger": "strict root-LP violations in at least two structural roles and live callback/PreCrush\u2014not cut mathematics\u2014is primary problem",
+  "selection_may_use_final_mip_runtime_wins": false,
+  "development": {
+    "state_ids": [
+      "D1",
+      "D2",
+      "D3",
+      "D4",
+      "D5",
+      "D6",
+      "D7",
+      "D8",
+      "D9",
+      "D10",
+      "D11",
+      "D12",
+      "D13",
+      "D14"
+    ],
+    "cap_seconds": 300
+  },
+  "confirmation": {
+    "state_ids": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9"
+    ],
+    "cap_seconds": 1200,
+    "opens_only_if_rescue_development_passes": true
+  },
+  "second_revision_allowed": false
+}

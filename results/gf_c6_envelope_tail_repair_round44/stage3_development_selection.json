@@ -1,0 +1,62 @@
+{
+  "development_instances": [
+    "round39_small_easy_V10_M1_Q30_slot04_seed1099392856",
+    "round39_small_easy_V12_M3_Q30_slot08_seed1167625600",
+    "round39_small_medium_V12_M3_Q30_slot08_seed1343324363",
+    "round39_small_medium_V8_M3_Q30_slot03_seed1177285734",
+    "round39_small_medium_V10_M2_Q20_slot05_seed968549317",
+    "round39_small_hard_V10_M1_Q30_slot02_seed1721447042",
+    "round39_small_hard_V10_M1_Q20_slot01_seed561355351",
+    "round39_small_hard_V12_M3_Q20_slot07_seed621538683",
+    "round39_small_hard_V12_M3_Q30_slot08_seed1288546114",
+    "round39_small_hard_V10_M3_Q20_slot04_seed1145042375"
+  ],
+  "dispositions": [
+    {
+      "c6_advantage_retained": true,
+      "certified_rows": 10,
+      "correctness": true,
+      "family": "no-adaptive",
+      "kind": "envelope",
+      "major_gate": true,
+      "material_losses": 3,
+      "material_wins": 5,
+      "material_wins_at_least_losses": true,
+      "material_work_deadband": 0.05,
+      "no_severe_pgrb_regression": true,
+      "passes_all_development_gates": true,
+      "row_count": 10,
+      "shifted_time_gmean": 0.525567936946022,
+      "shifted_work_gmean": 0.41991711547066723,
+      "shifted_work_p90": 1.1743933065113772,
+      "tag": "noadaptive",
+      "worst_shifted_work_over_pgrb": 14.439782300055315
+    },
+    {
+      "c6_advantage_retained": true,
+      "certified_rows": 10,
+      "correctness": true,
+      "family": "veto",
+      "kind": "conservative",
+      "major_gate": true,
+      "material_losses": 3,
+      "material_wins": 5,
+      "material_wins_at_least_losses": true,
+      "material_work_deadband": 0.05,
+      "no_severe_pgrb_regression": true,
+      "passes_all_development_gates": true,
+      "row_count": 10,
+      "shifted_time_gmean": 0.5342729835121378,
+      "shifted_work_gmean": 0.4399967827140576,
+      "shifted_work_p90": 1.235040255479845,
+      "tag": "veto-f05",
+      "worst_shifted_work_over_pgrb": 14.53710253328554
+    }
+  ],
+  "passing_tags": [
+    "noadaptive",
+    "veto-f05"
+  ],
+  "schema": "round44-stage3-development-selection-v1",
+  "validation_observed": false
+}

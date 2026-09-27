@@ -1,0 +1,98 @@
+{
+  "objective": 0.04500155005562836,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        9,
+        6,
+        2,
+        8,
+        0
+      ],
+      "operations": [
+        {
+          "station": 9,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 6,
+          "pickup": 1,
+          "drop": 0
+        },
+        {
+          "station": 2,
+          "pickup": 1,
+          "drop": 0
+        },
+        {
+          "station": 8,
+          "pickup": 0,
+          "drop": 8
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        11,
+        1,
+        10,
+        7,
+        0
+      ],
+      "operations": [
+        {
+          "station": 11,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 1,
+          "pickup": 7,
+          "drop": 0
+        },
+        {
+          "station": 10,
+          "pickup": 0,
+          "drop": 8
+        },
+        {
+          "station": 7,
+          "pickup": 0,
+          "drop": 4
+        }
+      ]
+    },
+    {
+      "vehicle": 2,
+      "nodes": [
+        0,
+        12,
+        3,
+        5,
+        0
+      ],
+      "operations": [
+        {
+          "station": 12,
+          "pickup": 9,
+          "drop": 0
+        },
+        {
+          "station": 3,
+          "pickup": 0,
+          "drop": 4
+        },
+        {
+          "station": 5,
+          "pickup": 0,
+          "drop": 5
+        }
+      ]
+    }
+  ]
+}

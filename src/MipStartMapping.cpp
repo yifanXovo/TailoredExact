@@ -1,6 +1,7 @@
 #include "MipStartMapping.hpp"
 
 #include "Evaluator.hpp"
+#include "Round64SharedResource.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -171,6 +172,15 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
         }
     }
     out.vehicle_symmetry_canonicalization_valid = true;
+    // Build resources only when the actual model contains these columns.
+    // Both physical coefficients in f=h+c*q come from the same preparation.
+    const bool resource_columns=std::any_of(domain.names.begin(),domain.names.end(),[](const std::string& name) {
+        return name.rfind("r64q_",0)==0||name.rfind("r63f_",0)==0||name.rfind("r64h_",0)==0;
+    });
+    if(resource_columns) {
+        const auto resources=round64RouteResourceValues(instance,routes);
+        route_values.insert(resources.begin(),resources.end());
+    }
 
     std::vector<double> ratio(static_cast<std::size_t>(instance.V + 1), 0.0);
     std::vector<double> deviation(
@@ -193,7 +203,10 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
             parseIndexedName(name, "d_", 2, indices) ||
             parseIndexedName(name, "load_", 2, indices) ||
             parseIndexedName(name, "ord_", 2, indices) ||
-            parseIndexedName(name, "conn_", 3, indices);
+            parseIndexedName(name, "conn_", 3, indices) ||
+            parseIndexedName(name, "r64q_", 3, indices) ||
+            parseIndexedName(name, "r63f_", 3, indices) ||
+            parseIndexedName(name, "r64h_", 3, indices);
     };
     out.values.assign(n, 0.0);
     for (std::size_t column = 0; column < n; ++column) {
@@ -212,6 +225,17 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
             value = ratio_max;
         } else if (name == "W_SP") {
             value = objective_parts.S * objective_parts.P;
+        } else if (parseIndexedName(name, "state_", 2, indices) &&
+                   indices[0] >= 1 && indices[0] <= instance.V) {
+            value = final_inventory[indices[0]] == indices[1] ? 1.0 : 0.0;
+        } else if (parseIndexedName(name, "state_g_", 2, indices) &&
+                   indices[0] >= 1 && indices[0] <= instance.V) {
+            value = final_inventory[indices[0]] == indices[1] ? out.G : 0.0;
+        } else if ((parseIndexedName(name,"r62lo_",2,indices) || parseIndexedName(name,"r62hi_",2,indices)) &&
+                   indices[0]>=1 && indices[0]<=instance.V && indices[1]>0) {
+            value=name.rfind("r62lo_",0)==0
+                ? (final_inventory[indices[0]]<=instance.initial[indices[0]]-indices[1]?1:0)
+                : (final_inventory[indices[0]]>=instance.initial[indices[0]]+indices[1]?1:0);
         } else if (parseIndexedName(name, "Y_", 1, indices) &&
                    indices[0] >= 1 && indices[0] <= instance.V) {
             value = final_inventory[indices[0]];

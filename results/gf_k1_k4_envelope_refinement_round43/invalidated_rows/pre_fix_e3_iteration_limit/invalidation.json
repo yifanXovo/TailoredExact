@@ -1,0 +1,16 @@
+{
+  "schema": "round43-invalidated-run-batch-v1",
+  "round_id": 43,
+  "excluded_from_all_analysis": true,
+  "executable_sha256": "59ddcb7bbaaa97779f8c3eb1a13a02440d0d2d3e764932829507ab189680741f",
+  "reason": "Protocol audit found a forbidden 64-iteration E3 engineering safety limit. All four concurrent first Stage 2 rows were interrupted before finalization and are preserved only as invalidated evidence.",
+  "affected_stage": "stage2-envelope",
+  "affected_instance": "round39_small_medium_V12_M3_Q30_slot08_seed1343324363",
+  "affected_modes": [
+    "none",
+    "constant",
+    "single",
+    "iterated"
+  ],
+  "replacement_requirement": "Rebuild and retest without any E3 iteration limit, issue a new implementation freeze, rerun Stage 1 and every Stage 2 row with the replacement executable."
+}

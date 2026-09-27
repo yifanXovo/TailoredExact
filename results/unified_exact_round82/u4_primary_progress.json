@@ -1,0 +1,35 @@
+{
+  "scope": "Original common3600 U4 P/BDS endpoints; K1 and final joint audits pending.",
+  "gap_reduction_percent": 45.4351451564983,
+  "U_delta": 0.0038973354924743964,
+  "L_delta": 0.05028727685426071,
+  "records": [
+    {
+      "arm": "P-GRB",
+      "wall": 3597.1720000002533,
+      "passed": true,
+      "endpoint": {
+        "U": 0.3731334661994873,
+        "L": 0.2710320176358274,
+        "gap": 0.10210144856365988,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      }
+    },
+    {
+      "arm": "BDS-C",
+      "wall": 3597.125,
+      "passed": true,
+      "endpoint": {
+        "U": 0.3770308016919617,
+        "L": 0.3213192944900881,
+        "gap": 0.05571150720187357,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      }
+    }
+  ],
+  "new_optimizer_calls": 0
+}

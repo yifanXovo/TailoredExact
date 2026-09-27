@@ -1,0 +1,38 @@
+{
+  "schema": "round50-iteration-qualification-selection-v1",
+  "iteration": 1,
+  "principal_family": "tailored branching",
+  "selection_written_before_qualification_runs": true,
+  "executable_sha256": "a268506844fa28de3509e44fa0e9b36db7325004be8fb21cd7d0181b06af2f49",
+  "core_cap_seconds": 120,
+  "core_state_count": 9,
+  "core_result_hashes": {
+    "interval-mip-v0": "40d5b5b5c997011760e47703c73da33dc81fb9c47e7db3aef7d7299e89fbf9b1",
+    "b1-primitive-first": "ec23ec60af0f9bc219eec2aff1dd4a202db74394f5c4f26e5f355e01c2da168c",
+    "b2-route-first": "5315e6f897733ee61e7bffc3c88e764b4689d2d63405b1753372899e4c271a74",
+    "b3-operation-first": "5c8723bb9561128432fbb02e7415b8f77caa6cfaf9a58a2558a094a80dd166ad"
+  },
+  "candidate_decisions": [
+    {
+      "policy": "b1-primitive-first",
+      "decision": "qualify",
+      "reason": "certificate count preserved, no severe regression, aggregate paired Work ratio 0.983, and hard-state gains on D3 and D10"
+    },
+    {
+      "policy": "b2-route-first",
+      "decision": "reject",
+      "reason": "lost baseline certificates on D4 and D10"
+    },
+    {
+      "policy": "b3-operation-first",
+      "decision": "reject",
+      "reason": "D4 exact-row Work ratio 1.512 with absolute increase 66.368 exceeds the frozen severe-regression rule"
+    }
+  ],
+  "qualification_policy": "b1-primitive-first",
+  "qualification_states": ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "D11", "D12", "D13", "D14"],
+  "qualification_cap_seconds": 300,
+  "candidate_accepted_before_qualification": false,
+  "confirmation_opened": false,
+  "post_screen_tuning": false
+}

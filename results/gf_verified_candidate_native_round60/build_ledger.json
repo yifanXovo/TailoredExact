@@ -1,0 +1,87 @@
+{
+  "schema": "round60-build-ledger-v1",
+  "launched_builds": [
+    {
+      "executable_sha256": "363c85ffe71918d7a793109f46729d564c79b7a142926a76c4af0eeea6e5edf5",
+      "processes": 1,
+      "stages": [
+        "native_micro_final"
+      ],
+      "executables": [
+        "Round50IntervalMipExperiment.exe"
+      ]
+    },
+    {
+      "executable_sha256": "7ea25c739841f1385411976e79b2fac40dc587beb5a47925e894ab29d9524cd1",
+      "processes": 3,
+      "stages": [
+        "manual_native_micro"
+      ],
+      "executables": [
+        "Round50IntervalMipExperiment.exe"
+      ]
+    },
+    {
+      "executable_sha256": "a1075e6d9d2f4e3c628e347ea2f610ec159ee7d95739888f7966553e75fe0599",
+      "processes": 1,
+      "stages": [
+        "manual_native_micro"
+      ],
+      "executables": [
+        "Round50IntervalMipExperiment.exe"
+      ]
+    },
+    {
+      "executable_sha256": "f1651345f95ab8e95274b332d8d925130ce6235723833cdabb2c12f953b0154a",
+      "processes": 13,
+      "stages": [
+        "hga_publish_120",
+        "integration_120",
+        "split_120"
+      ],
+      "executables": [
+        "ExactEBRP.exe"
+      ]
+    },
+    {
+      "executable_sha256": "f41af6fe368a2808b5713c5b8db2de151365bbb273c425dae73b88ca9edd65a9",
+      "processes": 7,
+      "stages": [
+        "partial_integration_120",
+        "same_build_reference_120"
+      ],
+      "executables": [
+        "ExactEBRP.exe"
+      ]
+    },
+    {
+      "executable_sha256": "fc7b5617efc9b794e7bb01a4f16f881c791eca03fc9315abc1dbd4d27356a911",
+      "processes": 1,
+      "stages": [
+        "manual_native_micro"
+      ],
+      "executables": [
+        "Round50IntervalMipExperiment.exe"
+      ]
+    },
+    {
+      "executable_sha256": "fdb9cf61838aaff0b2a3354ea562eeb094e01a614d6d43e0e529746cf8aaaeee",
+      "processes": 29,
+      "stages": [
+        "build_identity",
+        "fixed_120",
+        "long_600",
+        "product_route",
+        "product_route_time_counterfactual"
+      ],
+      "executables": [
+        "Round50IntervalMipExperiment.exe"
+      ]
+    }
+  ],
+  "current_deliverable_executables": {
+    "ExactEBRP.exe": "f41af6fe368a2808b5713c5b8db2de151365bbb273c425dae73b88ca9edd65a9",
+    "Round50IntervalMipExperiment.exe": "363c85ffe71918d7a793109f46729d564c79b7a142926a76c4af0eeea6e5edf5"
+  },
+  "note": "Each matched performance pair used one executable hash. A final code-audit patch only added missing partial-target wiring; final-build validation and targeted matched runs are listed separately."
+}

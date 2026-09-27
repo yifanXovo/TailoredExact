@@ -1,0 +1,26 @@
+{
+  "schema": "round55-key-long-role-correction-execution-manifest-v1",
+  "classification": "evidence-only defect",
+  "detected_before_corrective_D6_results": true,
+  "algorithm_or_policy_changed": false,
+  "candidate_selection_changed": false,
+  "defect": "key_long_state_freeze.json included both strong-control children D4 and D5 but omitted the mandatory V12-M2 state required by Stage 8.",
+  "repair": "Retain every originally frozen long state and add the already-frozen D6 V12-M2 parent as an eleventh state. Re-run the same stage command; all matching 20 rows are resumable and only the two D6 arms are new.",
+  "added_state": {
+    "state_id": "D6",
+    "instance": "round39_small_hard_V12_M2_Q20_slot06_seed258908503",
+    "interval_id": "L0",
+    "state_kind": "parent",
+    "role": "mandatory V12 M2 difficult state",
+    "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M2_Q20_slot06_seed258908503.txt",
+    "input_sha256": "efb62df9be5433dfb5d2def59ee52399bfe10fb2bcc652954892def33e38b2fd"
+  },
+  "final_state_count": 11,
+  "final_physical_row_count": 22,
+  "arms": [
+    "F0-CLEAN",
+    "VD-P"
+  ],
+  "cap_seconds": 3600,
+  "fixed_interval_executable_sha256": "5151efab9fbd82b91004e2255e60f112707278033d74549a4b0705000b681264"
+}

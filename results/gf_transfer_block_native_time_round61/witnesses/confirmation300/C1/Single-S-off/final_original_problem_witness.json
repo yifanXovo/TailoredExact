@@ -1,0 +1,93 @@
+{
+  "source": "full_algorithm_final",
+  "source_result_path": "results\\gf_transfer_block_native_time_round61\\local_raw\\confirmation300\\C1\\off\\result.json",
+  "source_result_sha256": "ffa6deef4fd72483d6df00318a07da81d24615b05bbaa7fa810c7087be1c723a",
+  "input_sha256": "7523da8a394f2165a0e58f4fbbe7d354c9e8542bff731194ae33f0b9fbd2076d",
+  "F": 0.26181696296169055,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        3,
+        4,
+        8,
+        9,
+        7,
+        10,
+        0
+      ],
+      "operations": [
+        {
+          "station": 3,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 4,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 8,
+          "pickup": 12,
+          "drop": 0
+        },
+        {
+          "station": 9,
+          "pickup": 0,
+          "drop": 6
+        },
+        {
+          "station": 7,
+          "pickup": 0,
+          "drop": 7
+        },
+        {
+          "station": 10,
+          "pickup": 0,
+          "drop": 8
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        5,
+        12,
+        11,
+        6,
+        2,
+        0
+      ],
+      "operations": [
+        {
+          "station": 5,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 12,
+          "pickup": 14,
+          "drop": 0
+        },
+        {
+          "station": 11,
+          "pickup": 0,
+          "drop": 8
+        },
+        {
+          "station": 6,
+          "pickup": 0,
+          "drop": 2
+        },
+        {
+          "station": 2,
+          "pickup": 0,
+          "drop": 9
+        }
+      ]
+    }
+  ]
+}

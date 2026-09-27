@@ -1,0 +1,30 @@
+{
+  "V50_forbidden": true,
+  "backend_dispatch_inputs": [
+    "instance_name",
+    "V",
+    "M",
+    "Q",
+    "panel_membership",
+    "historical_winner",
+    "elapsed_time",
+    "work",
+    "nodes",
+    "memory",
+    "machine_identity"
+  ],
+  "forbidden_in_interval_mip_development": [
+    "AMF-v1",
+    "reduced-cost split rescue",
+    "gamma-veto",
+    "root-processing rescue",
+    "fixed-rho fallback",
+    "AMC",
+    "split-gate modification",
+    "Gurobi generic Cuts tuning",
+    "known-optimum injection",
+    "archive-winner injection"
+  ],
+  "paper_presets_must_remain_unchanged": true,
+  "schema": "round50-forbidden-mechanisms-v1"
+}

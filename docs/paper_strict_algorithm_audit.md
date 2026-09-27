@@ -70,3 +70,5 @@ scripts/audit_paper_strict_algorithm.py
 ```
 
 It fails if forbidden implementation-code patterns are detected.
+> Historical algorithm audit. Its current-line designation is superseded by
+> K1-AM-SF (`paper-k1-am-sf`).

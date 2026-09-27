@@ -1,0 +1,148 @@
+{
+  "new_qualification_calls": 165,
+  "new_release_builds": 1,
+  "new_ctests": 62,
+  "new_native_fixture_calls_nested": 3,
+  "qualification_wall_seconds": 107.26865540025756,
+  "qualification_phases": [
+    {
+      "version": "v1",
+      "phase": "configure",
+      "command": [
+        "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "-S",
+        "E:\\codes\\ExactEBRP-round66",
+        "-B",
+        "E:\\codes\\ExactEBRP-round66\\build\\round83\\v1",
+        "-G",
+        "MinGW Makefiles",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe",
+        "-DCMAKE_MAKE_PROGRAM=D:/msys64/ucrt64/bin/mingw32-make.exe",
+        "-DEXACT_EBRP_ENABLE_GUROBI=ON",
+        "-DGUROBI_ROOT=D:/gurobi1302/win64"
+      ],
+      "started_unix": 1789574383.4571512,
+      "whole_phase_cap": 60,
+      "pid": 44900,
+      "returncode": 0,
+      "whole_tree_timeout": false,
+      "wall_seconds": 2.3289554002694786,
+      "log": "build\\round83\\v1\\configure.log",
+      "log_sha256": "b8a0c4cb75ce09032c7169d3c05922c7e5f2cd5b6f8177ba46143d0fd8fdaa17"
+    },
+    {
+      "version": "v1",
+      "phase": "build",
+      "command": [
+        "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "--build",
+        "E:\\codes\\ExactEBRP-round66\\build\\round83\\v1",
+        "-j",
+        "4"
+      ],
+      "started_unix": 1789574385.7904153,
+      "whole_phase_cap": 600,
+      "pid": 23116,
+      "returncode": 0,
+      "whole_tree_timeout": false,
+      "wall_seconds": 95.75626480020583,
+      "log": "build\\round83\\v1\\build.log",
+      "log_sha256": "376e9d6647338670709d8da5ae7e530e78333c37f36dbe23e61f2d019ceb3ddf"
+    },
+    {
+      "version": "v1",
+      "phase": "tests",
+      "command": [
+        "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+        "--test-dir",
+        "E:\\codes\\ExactEBRP-round66\\build\\round83\\v1",
+        "--output-on-failure",
+        "-V",
+        "-j",
+        "1"
+      ],
+      "started_unix": 1789574481.5522757,
+      "whole_phase_cap": 600,
+      "pid": 15316,
+      "affinity": {
+        "launcher_pid": 44588,
+        "before": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        },
+        "effective": {
+          "process_mask": 4,
+          "system_mask": 1048575
+        },
+        "selected_logical_processor": 2,
+        "explicit_set_target": "own launcher only"
+      },
+      "child_affinity": {
+        "process_mask": 4,
+        "system_mask": 1048575
+      },
+      "returncode": 0,
+      "whole_tree_timeout": false,
+      "wall_seconds": 9.183435199782252,
+      "log": "build\\round83\\v1\\tests.log",
+      "log_sha256": "6093394ddf8220dad785873d3c3556916fc79bbff80962011a554f61e9934f7f",
+      "restored_affinity": {
+        "process_mask": 1048575,
+        "system_mask": 1048575
+      }
+    }
+  ],
+  "qualification_offline_audit_seconds": 0.04474580008536577,
+  "native_start_offline_audit_seconds": 0.021241999696940184,
+  "diagnostic_compile_seconds": 5.6036604000255466,
+  "diagnostic_processes": 6,
+  "diagnostic_process_seconds": 0.32799999974668026,
+  "diagnostic_offline_replay_seconds": 1.4795694998465478,
+  "diagnostic_driver_seconds_nested": 7.489758299663663,
+  "new_startup_processes": 10,
+  "startup_process_seconds": 58.70200000004843,
+  "startup_offline_replay_seconds": 1.62575350003317,
+  "failed_reader_offline_seconds": null,
+  "failed_reader_scope": "Original D7 replay interrupted on empty-route representation; duration not independently retained. No native rerun.",
+  "startup_resume_seconds_nested": 0.7223009997978806,
+  "reader_representation_test": {
+    "passed": true,
+    "checks": [
+      "actual_failed_exchange_preserves_empty_vehicle3",
+      "whole_source_deletion_preserved",
+      "untouched_empty_vehicle2_preserved"
+    ],
+    "wall_seconds": 0.0008816998451948166,
+    "optimizer_calls": 0,
+    "native_reruns": 0
+  },
+  "new_full_runs": 13,
+  "full_run_seconds": 14898.8610000005,
+  "full_run_optimize_calls": 50,
+  "total_new_optimize_calls": 215,
+  "full_run_offline_replay_seconds": 1.5115696992725134,
+  "full_preflight_seconds": 0.7794576999731362,
+  "full_reference_seconds_nested": 0.5320000001229346,
+  "final_audit_seconds": 2.8578590997494757,
+  "mechanism_audit_seconds": 4.420361000113189,
+  "new_inputs_generated": 0,
+  "package_and_verify_seconds": 24.276030000299215,
+  "stage_complete": true,
+  "pr_number": 144,
+  "failed_git_push_seconds": [40.1982336002402, 21.129969300236553],
+  "api_connectivity_check_seconds": 0.627204000018537,
+  "exact_object_publication_seconds": 166.63671580003574,
+  "publication_api_requests": 122,
+  "overall_goal_complete": false,
+  "reset_credits_consumed": 0,
+  "scope": "Full paid processes and measured offline steps. Nested costs are not additive again; missing failed-reader duration is not zero. Interactive work is not a complete machine-time census.",
+  "byte_verification_seconds": 1.9453591001220047,
+  "plot_seconds": 0.5799300000071526,
+  "evidence_complete": true,
+  "publication_pending": false,
+  "weekly_used_percent_at_closure": 97,
+  "weekly_remaining_percent_at_closure": 3,
+  "ordinary_usage_allowed_at_snapshot": true,
+  "resource_pause_after_publication": true
+}

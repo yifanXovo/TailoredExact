@@ -1,0 +1,19 @@
+{
+  "recorded_unix": 1789641876.3995337,
+  "derived_from": "scripts/round84_publish_api_v2.py",
+  "parent_sha256": "e7e3a09da3903574b61387047d167f50d2e87d975e4848a64f8537da4a491125",
+  "script": "scripts/round84_publish_api_v3.py",
+  "script_sha256": "24211f91182e540d1aa3a628cc66b02a5c0e57141069b98aab3d46c93f62d520",
+  "syntax_check_passed": true,
+  "api_requests_during_preparation": 0,
+  "optimizer_calls": 0,
+  "full_runs": 0,
+  "binary_transport_executed": false,
+  "scope": "Prepared only during D7 P control. Original publishers and failures remain unchanged. Use only after native closure if ordinary Git publication is still unavailable; byte-exact blobs, root trees, original commits and non-force ref required. No proven binary transport success is claimed.",
+  "documentation": [
+    "https://docs.github.com/en/rest/git/trees#create-a-tree",
+    "https://docs.github.com/en/rest/git/blobs#create-a-blob"
+  ],
+  "initial_prepared_sha256": "43451fb83ddaa7b77ab86a42285d271e15c16fc4452b11ad4bd457ded8f18829",
+  "closure_guard": "Refuse any use while campaign/active_run.lock exists"
+}

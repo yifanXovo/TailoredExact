@@ -1,0 +1,41 @@
+{
+  "scope": "Read-only inspection of already archived v4 startup witnesses; no new search or Optimize; prospective mechanism only",
+  "source_build": "v4/1716206cc5967dc40dd2e41badbb2d101cadce8a",
+  "role": "D7",
+  "witness": "seed_revision/local_raw/D7/JDS-X/result.json",
+  "route_sha256": "7293a636e08378f2301d7388fbfba3ba43ead58aab10c14dd1dc51eecbf34b6e",
+  "vehicles": [
+    {
+      "vehicle": 0,
+      "visits": 17,
+      "pickup": 92,
+      "drop": 92,
+      "duration": 17985.801546637405
+    },
+    {
+      "vehicle": 1,
+      "visits": 23,
+      "pickup": 67,
+      "drop": 67,
+      "duration_rounded": 17891.505
+    },
+    {
+      "vehicle": 2,
+      "visits": 6,
+      "pickup": 24,
+      "drop": 24,
+      "duration_rounded": 9316.232
+    },
+    {
+      "vehicle": 3,
+      "visits": 0,
+      "pickup": 0,
+      "drop": 0,
+      "duration": 0
+    }
+  ],
+  "interpretation": "Two nearly full physical horizons coexist with one partly used and one unused vehicle; this does not prove an improving relocation exists.",
+  "unimplemented_hypothesis": "Joint pickup/drop relocation with quantity revision may transfer service to spare route time. Removing/reinserting existing stations must preserve every original prefix load, operation, inventory and duration constraint; a strictly improving independently verified original F is required. Fixed-route quantity edits alone may fail to unlock an empty departure vehicle.",
+  "no_new_resource_allocation": true,
+  "next_gate": "First finish frozen D3/D4 full-proof screen. Do not infer full D7 or K1 protection gains from startup U."
+}

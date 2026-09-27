@@ -1,0 +1,66 @@
+{
+  "base": "b87850c474c8cb9ac45b65f881ebc629bb137f24",
+  "files": [
+    {
+      "path": "include/hga_tgbc/HybridGA.h",
+      "original_sha256": "dc3d07a372a458ebbe347fdd0efbf368314a6c286d60c00bb4c183e9af1d5c50",
+      "draft_sha256": "4243bf3ba5dc99b2827fb98ff9ef06998ae3c8e7baf83ea810d41b589152f8d3",
+      "draft_bytes": 64469,
+      "applied_CRLF_sha256": "b02c88d471efece5c915a46cab13d11ce4cbd29f05ab8aae74053fff752a624a"
+    },
+    {
+      "path": "include/HgaTgbcRunner.hpp",
+      "original_sha256": "d438bc6efc9484bd8acf70afc02e645f76c56074004c33e940a2b310ab729a6d",
+      "draft_sha256": "e0b064d0cd6cd608d507fecdc43d2ffa90ddb844f19004ae9383a7c9a12ef35c",
+      "draft_bytes": 2878,
+      "applied_CRLF_sha256": "b8184665c89b1c0e84a5a0872a3f6106fc7868e15e623dc7dfe14394e3dc9326"
+    },
+    {
+      "path": "src/HgaTgbcRunner.cpp",
+      "original_sha256": "fa7aae286a2a3232d2b1a389092864c36118cbfa0e4ea5ac8e7e942547946bfd",
+      "draft_sha256": "fbb571a5f8c2372f48fe13bf550f230fd89c9b32a03b9dde94affb60293931c2",
+      "draft_bytes": 22430,
+      "applied_CRLF_sha256": "4367996f6aee4b2d41a00d30aed82fced8ecc721a990756c29d32ad5fdf4dcb6"
+    },
+    {
+      "path": "src/main.cpp",
+      "original_sha256": "9d305e25cb54103ea05635b32c9c8edfed879461a8e51debb882e5dd99b833a0",
+      "draft_sha256": "4737344bc31eb2969bacc6bada2850ae18c272c6de83de1ac6858762da37f3cb",
+      "draft_bytes": 1073698,
+      "applied_CRLF_sha256": "13d44fc81dc3ed59257820d6c453784dff6bb79e40ff7ea955609fbb32aca746"
+    },
+    {
+      "path": "include/Result.hpp",
+      "original_sha256": "ca90d52eeeb10bd7b6b1982225abaf4323ecae38e70aa5f322be5f2814838a26",
+      "draft_sha256": "a99abdddbde5ee698b5c711fb82f5530fed8b0b915a0764710f9d60c29493626",
+      "draft_bytes": 102013,
+      "applied_CRLF_sha256": "a99abdddbde5ee698b5c711fb82f5530fed8b0b915a0764710f9d60c29493626"
+    },
+    {
+      "path": "src/Result.cpp",
+      "original_sha256": "07c8f7f09edb08460ae7a771f4ed4a1e8407768226492fd15bf1e139882f6014",
+      "draft_sha256": "ef25ad32399573539c8759f62f5b32b0756b9ccf6c4acec50f3952064630f6bf",
+      "draft_bytes": 249805,
+      "applied_CRLF_sha256": "ef25ad32399573539c8759f62f5b32b0756b9ccf6c4acec50f3952064630f6bf"
+    },
+    {
+      "path": "CMakeLists.txt",
+      "original_sha256": "a66c47331339e49e318a3ff0129e7c8649f8049f801914403b79b7fc3d084715",
+      "draft_sha256": "c7a3cda4c096852771de326a9d9da87f13271663886ffe6ff126b4f0f2296eb4",
+      "draft_bytes": 16645,
+      "applied_CRLF_sha256": "1a3bd3ffd0a15c14c64908ef95d9c66175936385a484e6eed0aa6e78711d563e"
+    },
+    {
+      "path": "tests/round70_descent_tests.cpp",
+      "original_sha256": null,
+      "draft_sha256": "f6d8f3591b3d6f8db57db765cd82ebf88a9a7901d74730ad0ee9d0ce73ca1ad2",
+      "draft_bytes": 6233,
+      "applied_CRLF_sha256": "e9e94ed1207aff6fbd9eedca5f2165ae620e091843f2d7916196efaaf0285491"
+    }
+  ],
+  "applied_utc": "2026-09-15T03:53:24.832534+00:00",
+  "builds": 0,
+  "tests": 0,
+  "experiments": 0,
+  "line_endings": "Normalize only the eight owned changed files to the Windows checkout CRLF convention before compilation/freeze; no semantic change."
+}

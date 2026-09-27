@@ -1,0 +1,130 @@
+{
+  "recorded_unix": 1789652284.2860096,
+  "completed": 6,
+  "active": {
+    "number": 7,
+    "arm": "P-GRB",
+    "started_unix": 1789652202.0036876,
+    "driver_pid": 48520,
+    "destination": "results\\unified_exact_round84\\campaign\\local_raw\\07_U6_P-GRB"
+  },
+  "D7_records": [
+    {
+      "number": 4,
+      "id": "D7",
+      "arm": "P-GRB",
+      "wall_seconds": 3598.0469999997877,
+      "returncode": 1,
+      "within_cap": true,
+      "stop_reason": "whole_run_hard_stop",
+      "passed": true,
+      "endpoint": {
+        "U": 0.2372849915487284,
+        "L": 0.19858649317712468,
+        "gap": 0.03869849837160372,
+        "certificate": false,
+        "source": "interrupted_committed_evidence",
+        "status": "whole_run_hard_stop"
+      },
+      "native_calls_started": 1,
+      "native_calls_returned": 0,
+      "physical_witnesses": 235,
+      "global_bound_events": 68,
+      "committed_events": 305,
+      "offline_replay_seconds": 0.24535810016095638
+    },
+    {
+      "number": 5,
+      "id": "D7",
+      "arm": "ENS-C",
+      "wall_seconds": 3597.186999999918,
+      "returncode": 0,
+      "within_cap": true,
+      "stop_reason": "normal_return",
+      "passed": true,
+      "endpoint": {
+        "U": 0.22515085005563812,
+        "L": 0.20473785631837987,
+        "gap": 0.020412993737258245,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      },
+      "native_calls_started": 4,
+      "native_calls_returned": 4,
+      "physical_witnesses": 52,
+      "global_bound_events": 93,
+      "committed_events": 154,
+      "offline_replay_seconds": 0.643729000352323
+    },
+    {
+      "number": 6,
+      "id": "D7",
+      "arm": "K1-R",
+      "wall_seconds": 3597.25,
+      "returncode": 0,
+      "within_cap": true,
+      "stop_reason": "normal_return",
+      "passed": true,
+      "endpoint": {
+        "U": 0.21564407531579505,
+        "L": 0.19850842028251278,
+        "gap": 0.017135655033282265,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      },
+      "native_calls_started": 6,
+      "native_calls_returned": 6,
+      "physical_witnesses": 1,
+      "global_bound_events": 47,
+      "committed_events": 61,
+      "offline_replay_seconds": 0.07675880007445812
+    }
+  ],
+  "D7_comparison": {
+    "whole_cap_seconds": 3600,
+    "ENS_P_gap_reduction_percent": 47.25119941026719,
+    "K1_P_gap_reduction_percent": 55.72010348118285,
+    "ENS_K1_gap_increase": 0.0032773387039759794,
+    "ENS_K1_gap_increase_percent": 19.125844314737108,
+    "K1_P_advantage_retention": 0.8480099005240418,
+    "ENS_K1_delta_U": 0.009506774739843071,
+    "ENS_K1_delta_L": 0.006229436035867092,
+    "scope": "Current complete D7 trio only; all endpoints independently valid, all uncertified. No historical control is substituted. Final campaign/Start/replication audits remain pending."
+  },
+  "D7_K1_startup": {
+    "first_committed_witness_available_seconds": 595.2660000002943,
+    "first_committed_objective": 0.21564407531579505,
+    "checkpoints": [
+      {
+        "seconds": 300,
+        "available": false,
+        "U": null,
+        "L": 0,
+        "gap": null,
+        "certificate": false,
+        "source": "no_committed_physical_UB_observed_by_checkpoint",
+        "relative_gap": null
+      },
+      {
+        "seconds": 600,
+        "available": true,
+        "U": 0.21564407531579505,
+        "L": 0,
+        "gap": 0.21564407531579505,
+        "certificate": false,
+        "source": "committed_physical_and_full_domain_evidence_only",
+        "relative_gap": 1.0
+      }
+    ],
+    "scope": "Lightweight projection of the completed run with the frozen checkpoint reader, not an execution of the final campaign audit."
+  },
+  "D6_records": "d6_completed_prefix.json",
+  "completed_paid_process_seconds": 21158.90599999996,
+  "completed_optimize_starts": 25,
+  "completed_optimize_returns": 23,
+  "scope": "Six completed runs; four normal returns and two valid whole-run hard stops. Active U6 cost is additional.",
+  "stage_complete": false,
+  "overall_goal_complete": false
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "round52-cut-iteration-plan-v1",
+  "iteration": 1,
+  "status_at_freeze": "not_started",
+  "design_dimension": "initial_predeclared_support_duration_policy",
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "name": "SD-R3-ROOT-BLOCKMAX",
+      "command_policy": "f3-sd-r3-root-blockmax",
+      "family": "support-duration",
+      "support_ranks": [2, 3],
+      "separation_scope": "optimal_root_MIPNODE_relaxations_only",
+      "selection": "maximum_scaled_violation_per_vehicle_block",
+      "maximum_cuts_per_callback": "one_per_vehicle",
+      "epsilon": "frozen_epsilon_cert",
+      "precrush": 1,
+      "submission_api": "GRBcbcut"
+    }
+  ],
+  "controlled_ablation_comparators": [
+    "production-v0",
+    "F0-no-rank3-support-duration",
+    "F1-static-rank3-loose",
+    "F2-static-rank3-tight"
+  ],
+  "comparators_are_not_additional_design_candidates": true,
+  "live_capability_smoke_before_panel": true,
+  "core_state_ids": [
+    "D1", "D2", "D3", "D4", "D5", "D6", "D7",
+    "D8", "D9", "D10", "D11", "D12", "D13", "D14"
+  ],
+  "core_cap_seconds": 120,
+  "complete_development_state_ids": [
+    "D1", "D2", "D3", "D4", "D5", "D6", "D7",
+    "D8", "D9", "D10", "D11", "D12", "D13", "D14"
+  ],
+  "complete_development_cap_seconds": 300,
+  "complete_development_gate": "open_only_after_zero_correctness_and_infrastructure_failures_on_complete_core",
+  "acceptance_gates": "results/gf_k1_tailored_cut_final_validation_round52/promotion_gates.json",
+  "maximum_development_only_revisions": 1,
+  "result_dependent_dispatch": false,
+  "elapsed_time_dispatch": false,
+  "work_dispatch": false,
+  "node_count_dispatch": false,
+  "instance_dimension_dispatch": false,
+  "frozen_before_candidate_runs": true
+}

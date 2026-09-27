@@ -1,0 +1,10 @@
+{
+  "scope": "Publication metadata only; no solver, audit or evidence producer rerun.",
+  "error_type": "UnicodeDecodeError",
+  "encoding": "gbk",
+  "affected_read": "docs/unified_exact_research_index.md",
+  "partial_commit": "801a568dd69cfbec2251ad35253bb5dcef913d1b",
+  "resolution": "Read the UTF-8 index explicitly as UTF-8 and retain original Git history.",
+  "resolved": true,
+  "optimizer_calls": 0
+}

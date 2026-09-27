@@ -1,0 +1,82 @@
+{
+  "AMF_v1": false,
+  "K0": 1,
+  "additional_pre_census_registry": {
+    "path": "primitive_integer_variable_registry.json",
+    "sha256": "4e1a1295e2463f1f89cdb0e1127d0497dcf4d963b28488dabbd935279cf19142",
+    "size_bytes": 91047
+  },
+  "aggregate_sha256": "5899035e40a05ce19aa7ccc35b27aa8c4e74bbe88586dc671d21692357ca723c",
+  "candidate_runtime_started": false,
+  "extra_live_score_solves": 0,
+  "frozen_before_new_diagnostic_or_candidate_runtime": true,
+  "max_offline_iterations": 2,
+  "max_process_cap_seconds": 1800,
+  "max_stage3_rule_switches": 1,
+  "required_files": [
+    {
+      "path": "research_contract.md",
+      "sha256": "65f9831134780c34ff6ad8efc7c20267544f57113b686389fbca8550d55db806",
+      "size_bytes": 527
+    },
+    {
+      "path": "source_of_truth.md",
+      "sha256": "9fa336ce7fba88e0295b754543735974ef500d3a15aa670a22b1f97b55b4fb45",
+      "size_bytes": 603
+    },
+    {
+      "path": "solver_contract.json",
+      "sha256": "b9909c492dd2ce06e3676107c681f184674fd79db3a45552478abd54a4ade0ef",
+      "size_bytes": 420
+    },
+    {
+      "path": "forbidden_mechanisms.json",
+      "sha256": "2640a3d75e2dcac3c3e86c2907f9de0d9ce7dd3de76694ffff8bdcaf4ec3b8a6",
+      "size_bytes": 781
+    },
+    {
+      "path": "dataset_freeze.json",
+      "sha256": "35a19c9d8150ae79f5f806566019f28ec1dfccfc5153054566089d87246e8e0d",
+      "size_bytes": 7349
+    },
+    {
+      "path": "historical_baseline_reference_manifest.csv",
+      "sha256": "e8328975d59b4caa8a6d8001c1999a7847e372464c03120ffb648e81f8b6f0fa",
+      "size_bytes": 66737
+    },
+    {
+      "path": "primitive_integer_registry_protocol.json",
+      "sha256": "1144d7e58c81662b8b9969b6d3bba510b7b6f8c514da6b7ace33b206f431c0de",
+      "size_bytes": 650
+    },
+    {
+      "path": "reduced_cost_domain_protocol.json",
+      "sha256": "1250a5ec7c8279a16a276603fc8676227b03365310477bd43473f6f7d1a4d5d5",
+      "size_bytes": 1309
+    },
+    {
+      "path": "allowed_rule_menu.json",
+      "sha256": "c268d7574ed24002f0f78dd2911e8cb9bd48642f4b59ba1a9a37156ca6b1614f",
+      "size_bytes": 646
+    },
+    {
+      "path": "bounded_iteration_policy.json",
+      "sha256": "b772e0e5e7128385ded0d8f144c331bfaed66a79487b2ed0dfc3d76a91ea76bd",
+      "size_bytes": 522
+    },
+    {
+      "path": "promotion_gates.json",
+      "sha256": "ad0d24c3c4dbc16b04781f4687b981f9e4cce12381754d84dfb11d39aa549032",
+      "size_bytes": 806
+    },
+    {
+      "path": "official_start_record.json",
+      "sha256": "437e0d4fd8677ba7b33d04f3e8498a5a32fc633f02e5fd0bab295bd7796511ae",
+      "size_bytes": 1260
+    }
+  ],
+  "root_processing": false,
+  "schema": "round49-stage0-freeze-manifest-v1",
+  "split_point": "midpoint",
+  "tau": 0.07915
+}

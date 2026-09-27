@@ -1,0 +1,6 @@
+benchmark_group,instance_count,unique_V,unique_M,unique_Q,difficulty_score_min,difficulty_score_median,difficulty_score_max,active_fraction_median,imbalance_l1_median,support_duration_pressure_median,full_service_pair_density_median,structurally_nontrivial_count,strict_improver_empty_at_startup_count,comparison_scope
+historical_round33_v10,18,10,1;2;3,20;30,67.06259591117133,84.69960417557786,91.63869873955022,1.0,127.0,1.7011720235784307,0.5444444444444445,18,1,context_only_not_official_row_mixing
+round39_all,24,10;12;8,1;2;3,20;30,41.73363013779564,71.81684451335587,94.96352813968556,0.75,51.0,0.7211423088445001,1.0,24,1,round39_official_benchmark
+round39_small-easy,8,10;12;8,1;2;3,20;30,41.73363013779564,51.62936670831491,57.39189710973525,0.5,23.0,0.27434566302943153,1.0,8,1,round39_official_benchmark
+round39_small-medium,8,10;12;8,1;2;3,20;30,60.25883214885914,71.81684451335587,77.36357740553096,0.75,51.0,0.7211423088445001,1.0,8,0,round39_official_benchmark
+round39_small-hard,8,10;12,1;2;3,20;30,82.21508545094382,87.34532437673394,94.96352813968556,0.9166666666666666,107.0,1.6316304428202124,0.1505050505050505,8,0,round39_official_benchmark

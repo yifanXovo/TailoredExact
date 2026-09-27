@@ -1,0 +1,38 @@
+{
+  "schema": "round52-forbidden-mechanisms-v1",
+  "controller_research_after_freeze": true,
+  "mechanism_research_forbidden": [
+    "symmetry",
+    "branching_priority",
+    "adaptive_branching",
+    "AMF",
+    "reduced_cost_rescue",
+    "M1",
+    "gamma_veto",
+    "PMM",
+    "FPMM",
+    "breakpoint_research",
+    "non_midpoint_splits",
+    "AMC_for_K1"
+  ],
+  "dispatch_inputs_forbidden": [
+    "instance_name",
+    "path",
+    "seed",
+    "V",
+    "M",
+    "Q",
+    "difficulty_label",
+    "panel_membership",
+    "historical_winner",
+    "elapsed_time",
+    "Work",
+    "node_count",
+    "memory",
+    "hardware"
+  ],
+  "core_constraints_removed_for_lazy_constraints": false,
+  "user_cuts_as_lazy_constraints": false,
+  "post_confirmation_revision": false,
+  "post_validation_revision": false
+}

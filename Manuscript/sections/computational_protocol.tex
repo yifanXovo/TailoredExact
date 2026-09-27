@@ -1,40 +1,75 @@
 \section{Computational Protocol}
-The fresh evaluation uses source commit recorded in the package manifest and
-stores every raw JSON, child interval model, progress trace, solver log, and
-summary under one result directory.  No prior raw row or fixed-interval
-incumbent is copied.  Tailored and official plain CPLEX rows both use one
-solver thread.  A generic wall-budget policy allocates 68\% to frontier
-construction, 28\% to exact interval leaves, and 4\% to model and wrapper
-overhead; the benchmark receives the matched nominal wall budget directly.
-Runs longer than three hours emit five-minute progress and process-tree memory
-samples.
+Round 54 froze contracts, panels, promotion gates, source identity, and process
+caps before inspecting new performance. Ordinary processes were capped at
+3,600 seconds; the predeclared 7,200-second V50 extension could open only after
+successful K1 integration. Every official fixed-interval comparator and
+candidate row used the same frozen Gurobi-enabled executable, one thread, seed
+zero, automatic presolve, zero MIP gaps, and complete process accounting.
 
-The controls are V12/M1, V12/M2, \path{tight_T_seed3101}, and
-\path{high_imbalance_seed3202}.  The hard set is
-\path{moderate_seed3301}, \path{moderate_seed3302},
-\path{high_imbalance_seed3201}, and \path{tight_T_seed3102}.
-Comparisons use matched nominal budgets and distinguish certified runtime from
-noncertified bound/gap evidence.  Fixed-interval diagnostics are not compared
-as if they were full-frontier runs.
+The paper-preset identity audit used major, strong-control, V10 easy-negative,
+numerical-endpoint, V20, and V50 sentinels. All six have identical deterministic
+settings, controller actions, intervals, backend identity, objective, bound,
+and certificate class. Where model construction was reached, exported model
+files are byte-identical. The bounded V20/V50 runs remained in heuristic
+startup and produced no fixed-interval model file; this is reported as
+semantic command/controller evidence, not fabricated model evidence.
 
-\IfFileExists{generated_results.tex}{\input{generated_results}}{
-\paragraph{Result table.} The package aggregation step generates
-\texttt{generated\_results.tex} from fresh selected rows.}
+The inventory--route offline census covered 34 frozen states and both IR1 and
+IR2. Both variants were valid on every state, showed a strict violation in 33
+structural roles, and improved the final root bound in 25 states. IR2 produced
+no strict final-closure gain over IR1, so the least expansive IR1 entered the
+live fixed-interval gate; the condition to open IR3 was absent.
 
-In this matrix the tailored framework certifies all four controls, although
-the required budget is not uniformly lower than plain CPLEX.  None of the
-four hard rows is certified.  The long hard rows expose both valid open-ledger
-progress and wrapper/native-exit failures; these are reported rather than
-converted into closures.  Size-four callback rows are observed, confirming
-that the selected separator is active, but this experiment has no matched
-no-callback tailored arm.  It therefore does not identify the callback's
-causal contribution separately from the rest of the tailored framework.
-The mixed hard-row comparison supports continued experimental use of the
-profile, not a claim of uniform dominance or a universal default policy.
+Stage A compared F0--CLEAN and IR1 on D1--D14 at 300 seconds: 28 complete rows
+and 14 matched pairs. F0 certified 11/14 and IR1 9/14, with zero false
+certificates. IR1 gained one material hard-state improvement (D4), but lost
+the D1 and D13 certificates. Its shifted Work geometric-mean ratio was
+1.089432; aggregate GI worsened from 0.498349 to 0.623423. The frozen Stage-B
+gate therefore failed. Fixed-interval Stage B, confirmation and long checks,
+full K1 integration, and the sealed V12/V20/V50 generalization runs were not
+opened. Empty schema-valid ledgers and opening decisions record this outcome.
 
-The computational conclusions are deliberately limited to this matrix.  A
-certified control supports stability; an open hard row reports its valid
-ledger bound and blocker.  A route-profile advantage requires either an exact
-certificate absent from the matched benchmark or a clearly stronger valid
-same-budget bound trajectory.  No claim is inferred from callback row count
-alone.
+The evidence supports K1--AM--SF as the stable mainline and classifies
+inventory--route strengthening as a bounded negative result. It does not
+support K1--AM--SF--IR or a universal paper-algorithm claim.
+
+\subsection{Round 55 station-state chain}
+Round 55 began with an engineering audit rather than a formulation race. A
+stale incumbent-epoch cache identity was repaired, a corrected stable baseline
+was frozen, and 11 paired semantic sentinels plus D1--D14 requalification were
+completed before any candidate result opened. Both clean official builds pass
+33/33 tests; the dedicated station-state target contains 58 checks.
+
+The frozen root census contains 108 formulation rows over 27 states. MC4
+strictly strengthens 24 roots and VD--J supplies additional joint strength;
+VD--P matches the MC4 root bounds through its extended representation. Model
+size, root Work, memory, and total MIP behavior are reported independently.
+All four valid formulations entered the 120-second pilot. MC4 failed a severe
+regression guard. VD--P and VD--J entered D1--D14 development; VD--J lost a
+certificate and was rejected, while VD--P advanced.
+
+The only controlled sparse revision, SF--R1, removed the triple-duration
+family uniformly while retaining pair covers. It preserved the aggregate
+certificate count but lost D12 and was severe on D1 and D12, so it was
+rejected. VD--P then completed 18 C1--C9 confirmation rows and 38 extension
+rows against F0--CLEAN. It gained one and two certificates, respectively,
+with zero loss, zero severe regression, and zero false certificate. The
+shifted Work geometric-mean ratios were 0.840 and 0.664; aggregate GI ratios
+were 0.817 and 0.506. Penalty-cover and interaction performance stages did not
+open because their preconditions were false; empty ledgers record those gate
+outcomes rather than fabricated experiments.
+
+The key-long fixed-interval panel contained 22 rows over 11 states and retained
+the VD--P leader. Full controller integration then entered 34 physical rows at
+1,800 seconds and 10 conditionally extended rows at 3,600 seconds. Across the
+17 effective pairs, VD--P produced 14 certificates versus 12 for F0--CLEAN,
+with shifted-Work geometric-mean ratio 0.5692 and aggregate GI ratio 0.6091.
+There were no false certificates and V20/V50 behavior was nonworse. However,
+the predeclared major witness suffered one severe regression, so the full K1
+gate failed. Materially changed split actions occurred only on three other
+inputs; the witness failure was therefore not attributed to the split rule.
+No split revision, sealed P--GRB panel, or strong-result expansion was opened.
+VD--P remains a default-off research candidate and the paper preset remains
+K1--AM--SF with F0--CLEAN.
+
+\IfFileExists{generated_results.tex}{\input{generated_results}}{}

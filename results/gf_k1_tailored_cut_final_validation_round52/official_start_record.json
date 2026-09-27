@@ -1,0 +1,57 @@
+{
+  "schema": "round52-official-start-record-v1",
+  "repository": "E:/codes/ExactEBRP",
+  "starting_branch": "codex/round51-tight-big-m-root-sparse-branching",
+  "created_branch": "codex/round52-k1-tailored-cut-final-validation",
+  "local_head": "c6d7109bf69f50bd459174e8f05242b478e57d85",
+  "local_tree": "d9c26d64f9b0c45047f908c6fc76744d0e41dc57",
+  "remote_pr": {
+    "number": 106,
+    "state": "OPEN",
+    "is_draft": true,
+    "base": "codex/round50-k1-interval-mip-vnext",
+    "head": "codex/round51-tight-big-m-root-sparse-branching",
+    "head_sha": "c6d7109bf69f50bd459174e8f05242b478e57d85",
+    "head_tree": "d9c26d64f9b0c45047f908c6fc76744d0e41dc57"
+  },
+  "local_remote_head_equivalent": true,
+  "local_remote_tree_equivalent": true,
+  "working_tree_start": {
+    "porcelain_entry_count": 43740,
+    "tracked_modified_count": 3,
+    "untracked_entry_count": 43737,
+    "porcelain_snapshot_git_hash_object_sha1": "fdce62548fb44b631b5cb56da9179108c4afb814",
+    "tracked_diff_git_hash_object_sha1": "174771ed1c9cd5a5490b90b5922fec7ddf644d3a",
+    "tracked_modified": [
+      {
+        "path": "results/gf_compact_bc_round/handling_convention_test/handling_convention.json",
+        "start_blob_sha1": "98bcd60c3c5542772f101d5c73643033b78c58da"
+      },
+      {
+        "path": "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv",
+        "start_blob_sha1": "730b12307ff356aad1972158312c3c791f4492ec"
+      },
+      {
+        "path": "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json",
+        "start_blob_sha1": "c6ea164aec30b59fbee030476ed9cd6a4ffa315f"
+      }
+    ],
+    "preservation_rule": "all three tracked modifications and all unrelated untracked paths are user-owned and excluded from Round52 commits"
+  },
+  "toolchain": {
+    "compiler": "GCC 14.2.0",
+    "cmake": "3.30.5-msvc23",
+    "gurobi": "13.0.2rc1",
+    "gurobi_api": "C API"
+  },
+  "machine": {
+    "hostname": "WIN-3NO58RVQ4VC",
+    "cpu": "Intel Core i7-12700KF",
+    "logical_processors": 20,
+    "memory_bytes": 34079084544,
+    "os": "Microsoft Windows 10.0.19045"
+  },
+  "pr106_mutation_forbidden": true,
+  "candidate_result_inspected_before_stage0": false,
+  "note": "PowerShell initially parsed HEAD^{tree} incorrectly; the recorded tree was re-queried with git show -s --format=%T and verified against the remote head."
+}

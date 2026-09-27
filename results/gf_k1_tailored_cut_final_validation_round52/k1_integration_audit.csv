@@ -1,0 +1,13 @@
+audit_id,property,expected,observed,status
+K01,controller_source_sha256,169e4b7a509a307fa90d3075523f4b42e81cc8530a22592e1ce501bf35d9a64a,169e4b7a509a307fa90d3075523f4b42e81cc8530a22592e1ce501bf35d9a64a,pass
+K02,K0,1,1,pass
+K03,tau,0.08,0.08,pass
+K04,point_rule,midpoint,midpoint,pass
+K05,inner_backend,historical-production-v0,historical-production-v0,pass
+K06,tailored_callback_default,off,off,pass
+K07,tau_replay_changed_actions,0,0,pass
+K08,tau_sentinel_trace_failures,0,0,pass
+K09,default_off_equivalence_failures,0,0,pass
+K10,major_action,RETAIN,RETAIN,pass
+K11,strong_action,RETAIN,RETAIN,pass
+K12,new_integration_rows_required,0,0,pass

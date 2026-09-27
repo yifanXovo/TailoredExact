@@ -1,0 +1,52 @@
+{
+  "target": "e7776ac96cf032bb205306cf7af9078fbc72aac6",
+  "branch": "codex/round81-bdsc-long-protection-replication",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round81-bdsc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.5894663999788463,
+      "stderr": "",
+      "returned_sha": "f607ffe590eb90922910517fb1633c69324731d8"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 0.7750845002010465,
+      "stderr": "",
+      "returned_sha": "2733fc079ea5677fd160cf75744f4ff6c95e5523"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.439829499926418,
+      "stderr": "",
+      "returned_sha": "6f5bc6187ede4b5f8dba1b0186415b15ab2fb085"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 1,
+      "wall_seconds": 8.637362900190055,
+      "stderr": "gh: Sorry, your request timed out.  It's likely that your input was too large to process.  Consider building the tree incrementally, or building the commits you need in a local clone of the repository and then pushing them to GitHub. (HTTP 422)\n",
+      "returned_sha": null
+    }
+  ],
+  "optimizer_calls": 0,
+  "script_sha256": "6895cb4c7fd8a7c602adbef8073dded85cda946da8c3eba0b21f70c546d9e92f",
+  "scope": "Exact blobs, tree and original commit hashes required before a non-force branch update",
+  "wall_seconds": 11.7848489000462,
+  "initial_remote_head": "f607ffe590eb90922910517fb1633c69324731d8",
+  "original_commits": [
+    "784fbd7b0e7fd58355d4548746ce3a89be0f946c",
+    "77cf16fbf96041617d6f36144158b5c533b59eb2",
+    "f38c83e80b5fce12437757ff0427406435575cf6",
+    "66b87fd6913a65f4214cecb3b1807a048a1e5d01",
+    "e7776ac96cf032bb205306cf7af9078fbc72aac6"
+  ],
+  "passed": false,
+  "error": "RuntimeError('GitHub API request failed; see ledger')"
+}

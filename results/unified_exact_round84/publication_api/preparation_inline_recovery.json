@@ -1,0 +1,133 @@
+{
+  "target": "5ad3564c2f338737bcb2e65ca31b512c1da14507",
+  "branch": "codex/round84-ensc-long-protection-replication",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round84-ensc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.5977937001734972,
+      "stderr": "",
+      "returned_sha": "131d09280a1563243d0201e68367b26baf5079c3"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/20b35ab3a3db69e87768eb5d9a43ae58cf362a71",
+      "returncode": 1,
+      "wall_seconds": 0.6460078000091016,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 4.062708000186831,
+      "stderr": "",
+      "returned_sha": "20b35ab3a3db69e87768eb5d9a43ae58cf362a71"
+    },
+    {
+      "method": "POST",
+      "path": "git/commits",
+      "returncode": 0,
+      "wall_seconds": 0.8807911998592317,
+      "stderr": "",
+      "returned_sha": "3dae75c03952f7e2194f184d4939216e0be4ca78"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/351b6f3dd01f5afb23620f057721e82d59349383",
+      "returncode": 1,
+      "wall_seconds": 0.6258259997703135,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 1.860457600094378,
+      "stderr": "",
+      "returned_sha": "351b6f3dd01f5afb23620f057721e82d59349383"
+    },
+    {
+      "method": "POST",
+      "path": "git/commits",
+      "returncode": 0,
+      "wall_seconds": 0.9987468998879194,
+      "stderr": "",
+      "returned_sha": "8f7ed3eee1068caee250ad6f209db2d51ab2ce29"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/4c1eb34adce4ca923401793102f0c66b201f9c06",
+      "returncode": 1,
+      "wall_seconds": 0.7042978997342288,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 1.2154876999557018,
+      "stderr": "",
+      "returned_sha": "4c1eb34adce4ca923401793102f0c66b201f9c06"
+    },
+    {
+      "method": "POST",
+      "path": "git/commits",
+      "returncode": 0,
+      "wall_seconds": 0.9341514999978244,
+      "stderr": "",
+      "returned_sha": "5ad3564c2f338737bcb2e65ca31b512c1da14507"
+    },
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round84-ensc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.5913681997917593,
+      "stderr": "",
+      "returned_sha": "131d09280a1563243d0201e68367b26baf5079c3"
+    },
+    {
+      "method": "PATCH",
+      "path": "git/refs/heads/codex/round84-ensc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 1.063144899904728,
+      "stderr": "",
+      "returned_sha": "5ad3564c2f338737bcb2e65ca31b512c1da14507"
+    },
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round84-ensc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.6233335002325475,
+      "stderr": "",
+      "returned_sha": "5ad3564c2f338737bcb2e65ca31b512c1da14507"
+    }
+  ],
+  "optimizer_calls": 0,
+  "script_sha256": "e7e3a09da3903574b61387047d167f50d2e87d975e4848a64f8537da4a491125",
+  "scope": "Exact blobs, tree and original commit hashes required before a non-force branch update",
+  "wall_seconds": 16.57180509995669,
+  "initial_remote_head": "131d09280a1563243d0201e68367b26baf5079c3",
+  "original_commits": [
+    "3dae75c03952f7e2194f184d4939216e0be4ca78",
+    "8f7ed3eee1068caee250ad6f209db2d51ab2ce29",
+    "5ad3564c2f338737bcb2e65ca31b512c1da14507"
+  ],
+  "verified_exact_trees": [
+    "20b35ab3a3db69e87768eb5d9a43ae58cf362a71",
+    "351b6f3dd01f5afb23620f057721e82d59349383",
+    "4c1eb34adce4ca923401793102f0c66b201f9c06"
+  ],
+  "verified_exact_commits": [
+    "3dae75c03952f7e2194f184d4939216e0be4ca78",
+    "8f7ed3eee1068caee250ad6f209db2d51ab2ce29",
+    "5ad3564c2f338737bcb2e65ca31b512c1da14507"
+  ],
+  "passed": true,
+  "final_remote_head": "5ad3564c2f338737bcb2e65ca31b512c1da14507",
+  "original_history_preserved": true
+}

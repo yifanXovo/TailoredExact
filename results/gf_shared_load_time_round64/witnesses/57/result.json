@@ -1,0 +1,193 @@
+{
+  "objective": 0,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        17,
+        3,
+        5,
+        7,
+        14,
+        9,
+        10,
+        20,
+        13,
+        0
+      ],
+      "operations": [
+        {
+          "station": 17,
+          "pickup": 7,
+          "drop": 0
+        },
+        {
+          "station": 3,
+          "pickup": 7,
+          "drop": 0
+        },
+        {
+          "station": 5,
+          "pickup": 0,
+          "drop": 9
+        },
+        {
+          "station": 7,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 14,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 9,
+          "pickup": 0,
+          "drop": 4
+        },
+        {
+          "station": 10,
+          "pickup": 0,
+          "drop": 5
+        },
+        {
+          "station": 20,
+          "pickup": 0,
+          "drop": 4
+        },
+        {
+          "station": 13,
+          "pickup": 0,
+          "drop": 3
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        6,
+        16,
+        1,
+        8,
+        2,
+        11,
+        15,
+        18,
+        19,
+        4,
+        12,
+        0
+      ],
+      "operations": [
+        {
+          "station": 6,
+          "pickup": 10,
+          "drop": 0
+        },
+        {
+          "station": 16,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 1,
+          "pickup": 0,
+          "drop": 5
+        },
+        {
+          "station": 8,
+          "pickup": 0,
+          "drop": 3
+        },
+        {
+          "station": 2,
+          "pickup": 0,
+          "drop": 8
+        },
+        {
+          "station": 11,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 15,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 18,
+          "pickup": 0,
+          "drop": 10
+        },
+        {
+          "station": 19,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 4,
+          "pickup": 7,
+          "drop": 0
+        },
+        {
+          "station": 12,
+          "pickup": 0,
+          "drop": 14
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "feasible": true,
+    "original_solution_feasible": true,
+    "original_objective_recomputed": true,
+    "routes_start_end_depot": true,
+    "station_disjoint": true,
+    "load_feasible": true,
+    "station_feasible": true,
+    "duration_feasible": true,
+    "objective_matches": true,
+    "route_travel_time": [
+      6640.986569403071,
+      5508.71452059708
+    ],
+    "route_operation_time": [
+      3000,
+      4800
+    ],
+    "route_duration": [
+      9640.98656940307,
+      10308.714520597081
+    ],
+    "final_inventories": [
+      50000,
+      17,
+      28,
+      17,
+      16,
+      28,
+      27,
+      14,
+      11,
+      13,
+      13,
+      15,
+      35,
+      13,
+      13,
+      16,
+      13,
+      15,
+      31,
+      12,
+      13
+    ],
+    "G": 0,
+    "P": 0,
+    "objective": 0,
+    "errors": []
+  }
+}

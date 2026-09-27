@@ -1,0 +1,51 @@
+{
+  "schema": "round50-iteration-plan-v1",
+  "iteration": 2,
+  "principal_family": "cut/formulation management",
+  "written_before_candidate_runs": true,
+  "active_branching_policy": "interval-mip-v0 default branching",
+  "audit_inputs": [
+    "all 23 reconstructed canonical LP models",
+    "Stage 1 root-cut ledgers",
+    "canonical compact-model source emitters"
+  ],
+  "required_audits": [
+    "complete exhaustive row-family registry",
+    "exact and sign-canonical duplicate scan",
+    "same-LHS dominance scan",
+    "leave-one-block eligibility audit",
+    "mathematical validity notes"
+  ],
+  "core_and_exact_reformulation_rows_protected": true,
+  "candidate_menu": [
+    {
+      "id": "C1",
+      "mechanism": "exact duplicate or mathematically proved dominated-row elimination",
+      "entry_gate": "audit finds at least one removable row with an exact proof"
+    },
+    {
+      "id": "C2",
+      "mechanism": "deterministic violation separation for one static strengthening family",
+      "entry_gate": "one isolated valid family has a complete exact separator"
+    },
+    {
+      "id": "C3",
+      "mechanism": "one analytic big-M, bound, McCormick, or cut tightening",
+      "entry_gate": "structural proof is complete before candidate execution"
+    },
+    {
+      "id": "C4",
+      "mechanism": "one new tailored cut family",
+      "entry_gate": "specific relaxation defect is identified and C1-C3 cannot address it"
+    }
+  ],
+  "maximum_candidates": 3,
+  "maximum_accepted_changes": 2,
+  "generic_gurobi_cuts_parameter_change": false,
+  "empirical_threshold_tuning": false,
+  "instance_specific_logic": false,
+  "runtime_dispatch": false,
+  "candidate_result_inspected_before_plan": false,
+  "confirmation_opened": false,
+  "no_candidate_outcome_allowed_only_with_audited_proof": true
+}

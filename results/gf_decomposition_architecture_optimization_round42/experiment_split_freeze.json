@@ -1,0 +1,83 @@
+{
+  "candidate_outcomes_used": false,
+  "development_count": 10,
+  "development_gates": {
+    "fragmentation_max_shifted_time_ratio": 0.8,
+    "fragmentation_max_work_ratio": 0.8,
+    "geomean_shifted_time_ratio_max": 0.95,
+    "geomean_work_ratio_max": 0.9,
+    "no_certificate_regression": true,
+    "no_joint_ratio_above": 1.25,
+    "positive_control_max_shifted_time_ratio": 1.1,
+    "positive_control_max_work_ratio": 1.1,
+    "zero_false_certificates": true
+  },
+  "final_holdout_count": 7,
+  "freeze_script_sha256": "c2141b34d866efd1e4d48872f60828af1fd41d0bc99639abce9e258ea10b4131",
+  "frozen_before_any_round42_candidate_run": true,
+  "holdout_candidate_results_inspected": false,
+  "holdout_gates": {
+    "geomean_shifted_time_ratio_max": 1.0,
+    "geomean_work_ratio_max": 1.0,
+    "no_certificate_regression": true,
+    "no_joint_ratio_above": 1.25,
+    "wins_at_least_losses": true,
+    "zero_false_certificates": true
+  },
+  "manifest_sha256": {
+    "development_manifest.csv": "dc0e1e49ae89b297e64958f796955935531bd78e9ee0f9d8ea5ffe7bee8f56ad",
+    "final_holdout_manifest.csv": "96115fe57d4d65ebe83fd62f020afb5ab238a1d6a1e3aedd6d049d14f1e44f45",
+    "validation_manifest.csv": "e54b4b153bd57bafdf903a2e9992872c202bb884e453606a861a6c1e5e2a09ec"
+  },
+  "materiality": {
+    "material_loss_min_ratio": 1.05,
+    "material_win_max_ratio": 0.95,
+    "primary_metric": "exact_phase_gurobi_work",
+    "secondary_metric": "exact_phase_time",
+    "shifted_time_ratio": "(candidate_seconds+1)/(C6_seconds+1)"
+  },
+  "reference_arms": [
+    "C6-HGA-FULL-K4-rho0.01",
+    "External-K1",
+    "Round41-ST-K2-P-Core",
+    "P-GRB-where-repair-diagnosis-needed"
+  ],
+  "round39_descriptor_sha256": "281efa9c924497dc76d92d14f0ce579769e55d0547dd0d6d2348790af598c4d2",
+  "round39_inventory_sha256": "8784825b112f50696e49f5613eeb6e83265bd18729c9518607fccdb93ae7c94d",
+  "round_id": 42,
+  "runtime_policy_seconds": {
+    "development_max": 1800,
+    "smoke_max": 600,
+    "symmetric_two_row_extension_max": 7200,
+    "validation_holdout_max": 3600
+  },
+  "schema": "round42-experiment-split-freeze-v1",
+  "selection_is_solver_independent": true,
+  "solver_contract": {
+    "certificate_tolerance": 1e-07,
+    "mip_gap": 0.0,
+    "mip_gap_abs": 0.0,
+    "presolve": "auto(-1)",
+    "seed": 0,
+    "startup_incumbent": "verified HGA-FULL",
+    "threads": 1
+  },
+  "source_head": "75fe23e591a39b54f7940eb0012a245e3a92d955",
+  "split_signature_sha256": "13a9158d40f5cb9f5fb2969f448af0d0ccafb600f20782002bf482e7645f7382",
+  "validated_default_unchanged": "C6-HGA-FULL K=4 rho=0.01",
+  "validation_count": 7,
+  "validation_gates": {
+    "geomean_shifted_time_ratio_max": 0.98,
+    "geomean_work_ratio_max": 0.95,
+    "no_certificate_regression": true,
+    "no_joint_ratio_above": 1.25,
+    "wins_at_least_losses": true,
+    "zero_false_certificates": true
+  },
+  "validation_quota_by_stratum": {
+    "small-easy": 3,
+    "small-hard": 2,
+    "small-medium": 2
+  },
+  "validation_selection_algorithm": "within each difficulty stratum exhaust all quota-sized subsets; lexicographically maximize distinct V/M/Q levels, minimize squared empirical difficulty-score quantile error, maximize score span, then use SHA-256 of sorted instance IDs as tie-breaker"
+}

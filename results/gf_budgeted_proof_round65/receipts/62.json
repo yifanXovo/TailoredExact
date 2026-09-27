@@ -1,0 +1,44 @@
+{
+  "launch": {
+    "id": "C7",
+    "arm": "timing-decoder",
+    "stage": "timing_decoder_v5",
+    "build_freeze": "hga_decoder_timing_build.json",
+    "command": [
+      "E:\\codes\\ExactEBRP-round65\\build\\round65-hga-decoder-timing\\Round65HgaTiming.exe",
+      "reference/citibike443-regional-v1/instances/V20/cb443_V20_regional_r2_balanced_M02_Q20.txt",
+      "10800",
+      "60.0",
+      "60.0",
+      "0.15",
+      "E:\\codes\\ExactEBRP-round65\\results\\gf_budgeted_proof_round65\\local_raw\\timing_decoder_v5\\C7\\timing-decoder"
+    ],
+    "executable_sha256": "f147f87ac909c072262963dbb1903c1dcff2d60517ba83b5fafca25ca65255ec",
+    "cap_seconds": 120,
+    "kind": "hga-timing-diagnostic",
+    "charged": true,
+    "charged_number": 62,
+    "solver_calls_planned": 0,
+    "started_unix": 1789386617.5018966,
+    "destination": "results\\gf_budgeted_proof_round65\\local_raw\\timing_decoder_v5\\C7\\timing-decoder"
+  },
+  "completion": {
+    "returncode": 0,
+    "wall_seconds": 2.109999999869615,
+    "watchdog": false,
+    "within_budget": true,
+    "solver_calls_planned": 0
+  },
+  "result": {
+    "status": "optimal",
+    "diagnostic_scope": "hga_timing_only_no_optimizer",
+    "upper_bound": 0,
+    "lower_bound": 0,
+    "strict_certified_original_problem": true,
+    "strict_certificate_class": "verified_zero_nonnegative_objective",
+    "incumbent_generation_time_seconds": 2.0849337,
+    "hga_total_generations": 57,
+    "hga_decoder_calls": 1098,
+    "F": 0
+  }
+}

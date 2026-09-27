@@ -1,0 +1,33 @@
+{
+  "accepted_changes": [],
+  "active_symmetry_policy_after_iteration": "v0-cardinality-order",
+  "candidate_accepted": false,
+  "classification": "original_symmetry_policy_retained",
+  "confirmation_opened": false,
+  "development_revision_count": 1,
+  "false_certificates": 0,
+  "iteration": 3,
+  "material_improvement_rows": [
+    "S1-v1:D2",
+    "S1-v1:D10",
+    "S1-v1:D12",
+    "S1-R1:D2",
+    "S1-R1:D3",
+    "S1-R1:D4"
+  ],
+  "model_delta_audit_failures": 0,
+  "numerical_candidate_opened": false,
+  "numerical_conditioning_audit_sha256": "d570b3f3f9788eb2e5d21c84417d1194e30a1bfa0857c75cd36ee4506bdc10c0",
+  "numerical_reason": "audit found no exact uniform analytic change",
+  "rejection_reason": "both exact route-start representatives lost D13's v0 certificate at 300 seconds",
+  "runtime_dispatch": false,
+  "schema": "round50-symmetry-numerical-iteration-decision-v1",
+  "severe_regression_rows": [
+    "S1-v1:D13",
+    "S1-R1:D13"
+  ],
+  "severe_regressions": 2,
+  "status": "complete",
+  "symmetry_candidate_results_sha256": "4266b7c36fef5d213ed684c89a2a0385e5ab18eafa96bb866c5e85d3f12f93c3",
+  "symmetry_candidates": 2
+}

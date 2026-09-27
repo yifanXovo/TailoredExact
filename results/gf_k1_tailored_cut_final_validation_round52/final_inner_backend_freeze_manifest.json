@@ -1,0 +1,15 @@
+{
+  "schema": "round52-final-inner-backend-freeze-manifest-v1",
+  "frozen": true,
+  "backend_definition": "results/gf_k1_tailored_cut_final_validation_round52/final_inner_backend_definition.json",
+  "candidate_decision": "results/gf_k1_tailored_cut_final_validation_round52/fixed_interval_promotion_decision.json",
+  "core_ablation": "results/gf_k1_tailored_cut_final_validation_round52/static_dynamic_ablation.csv",
+  "development_ablation": "results/gf_k1_tailored_cut_final_validation_round52/fixed_interval_final_ablation.csv",
+  "fixed_interval_executable": "build/round52/Round51IntervalMipExperiment.exe",
+  "fixed_interval_executable_sha256": "4207bb5a27db38dddade73166f979fff869c431239aa17bc8746621c76ce6d57",
+  "final_algorithm_executable": "build/round52/ExactEBRP.exe",
+  "final_algorithm_executable_sha256": "d245c76f6397c757894610d8f5238cfeb971761ff7e05edf51058e451d810151",
+  "controller_source_sha256": "169e4b7a509a307fa90d3075523f4b42e81cc8530a22592e1ce501bf35d9a64a",
+  "tau": 0.08,
+  "algorithm_changes_after_manifest": 0
+}

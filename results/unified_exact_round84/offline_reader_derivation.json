@@ -1,0 +1,93 @@
+{
+  "records": [
+    {
+      "source": "scripts\\round83_analyze.py",
+      "source_sha256": "ca9295e4a8f1bec49e99cf51278ea3ab4717ad07f497a60fc440452129344a06",
+      "target": "scripts\\round84_analyze.py",
+      "target_sha256": "adb4a0b0e9b060e542f344366ad63ac827663d1a2dfc5638eb0f91e80e2d3a74",
+      "replacements": [
+        {
+          "old": "OUT=ROOT/'results/unified_exact_round83/campaign'",
+          "new": "OUT=ROOT/'results/unified_exact_round84/campaign'"
+        },
+        {
+          "old": "summary['completed']==13",
+          "new": "summary['completed']==9"
+        },
+        {
+          "old": "scripts/round83_research.py",
+          "new": "scripts/round84_research.py"
+        },
+        {
+          "old": "results/unified_exact_round83/full_screen_plan.md",
+          "new": "results/unified_exact_round84/plan.md"
+        },
+        {
+          "old": "OUT.parent/'startup/completion_summary.json'",
+          "new": "ROOT/'results/unified_exact_round83/startup/completion_summary.json'"
+        },
+        {
+          "old": "['E8','N12','D4','U6']",
+          "new": "['D6','D7','U6']"
+        },
+        {
+          "old": "all_checks_passed=True,completed=13",
+          "new": "all_checks_passed=True,completed=9"
+        },
+        {
+          "old": "    all_checkpoints=[];actual_calls=[];endpoint_checks=[];observation_coverage=[]",
+          "new": "    assert sha(ROOT/'build/round83/v1/Round65ReferenceBuild.exe')==frozen['reference_binary_sha256']\n    assert len(frozen['launches'])==9 and len(summary['records'])==9\n    all_checkpoints=[];actual_calls=[];endpoint_checks=[];observation_coverage=[]"
+        },
+        {
+          "old": "    consistency=cross_run_consistency(endpoint_checks+all_checkpoints)",
+          "new": "    assert len(all_checkpoints)==54 and len(endpoint_checks)==9\n    consistency=cross_run_consistency(endpoint_checks+all_checkpoints)"
+        },
+        {
+          "old": "    write(OUT/'checkpoints.json',all_checkpoints);write(OUT/'comparisons.json',comparisons)",
+          "new": "    assert len(comparisons)==54 and len(protection)==18\n    write(OUT/'checkpoints.json',all_checkpoints);write(OUT/'comparisons.json',comparisons)"
+        }
+      ]
+    },
+    {
+      "source": "scripts\\round83_mechanism.py",
+      "source_sha256": "622f680dd495100a49f7bee3f6be90b81945f1078e36a4ae0ed1afe61da01a6d",
+      "target": "scripts\\round84_mechanism.py",
+      "target_sha256": "e1a00e6609b9e5388e726b8a86e574daabc714071306b78c6c2324ebf875121f",
+      "replacements": [
+        {
+          "old": "from round83_analyze import campaign_summary",
+          "new": "from round84_analyze import campaign_summary"
+        },
+        {
+          "old": "OUT=ROOT/'results/unified_exact_round83/campaign'",
+          "new": "OUT=ROOT/'results/unified_exact_round84/campaign'"
+        },
+        {
+          "old": "assert len(traces)==5 and controls==8",
+          "new": "assert len(traces)==3 and controls==6"
+        },
+        {
+          "old": "previous=read(OUT.parent/'startup/identity.json');prior_pairs=[]",
+          "new": "previous=read(ROOT/'results/unified_exact_round83/startup/identity.json');prior_pairs=[]\n    bindings=read(OUT.parent/'protocol.json')['prior_bindings']\n    assert frozen['prior_bindings']==bindings"
+        },
+        {
+          "old": "        if not candidates:continue",
+          "new": "        assert candidates,'Every declared R84 ENS arm has a frozen R83 startup binding'"
+        },
+        {
+          "old": "        assert list(map(logical,traces[(identity,arm)]))==list(map(logical,rows(path)))",
+          "new": "        bound=bindings[identity]\n        assert Path(bound['folder'])==Path(prior['destination'])\n        assert sha(path)==bound['descent_sha256']\n        for name in ['initial','final']:\n            assert sha(ROOT/prior['destination']/('hga.csv.exchange/'+name+'.json'))==bound[name+'_sha256']\n        assert list(map(logical,traces[(identity,arm)]))==list(map(logical,rows(path)))"
+        },
+        {
+          "old": "    assert len(prior_pairs)==4\n    assert list(map(logical,traces[('U6','BDS-C')]))==list(map(logical,traces[('U6','ENS-C')]))",
+          "new": "    assert len(prior_pairs)==3"
+        }
+      ]
+    }
+  ],
+  "syntax_valid": true,
+  "executed_audits": 0,
+  "optimizer_calls": 0,
+  "wall_seconds": 0.01865469990298152,
+  "scope": "Lightweight preparation while the original serial campaign runs; no heavy reader execution and no alteration to frozen production or driver."
+}

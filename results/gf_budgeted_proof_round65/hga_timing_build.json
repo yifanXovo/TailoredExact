@@ -1,0 +1,55 @@
+{
+  "solver_build": {
+    "file": "build_freeze_v5.json",
+    "sha256": "56f91e19ac0d7cefa925a2418b88407ed353f6209b920575ec006268995a1a70"
+  },
+  "source": "scripts\\round65_hga_timing.cpp",
+  "source_sha256": "dba670036f8ce6a9e2570e080ed53451223b283bbe2a8dc3d51cd6e6b2a94008",
+  "core_archive": "build\\round65\\libexact_ebrp_core.a",
+  "core_archive_sha256": "d94a424c5d463992ec489d2399b736ce474dc44b8a7474029369934a1c7cd171",
+  "executable": "build\\round65-hga-timing\\Round65HgaTiming.exe",
+  "executable_sha256": "90a3506d12447817b3ba279a8828f56e385b073927d37be6bfaede114b0df15b",
+  "command": [
+    "D:/msys64/ucrt64/bin/c++.exe",
+    "-O3",
+    "-DNDEBUG",
+    "-std=c++17",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-DEXACT_EBRP_ENABLE_GUROBI=1",
+    "-IE:\\codes\\ExactEBRP-round65\\include",
+    "E:\\codes\\ExactEBRP-round65\\scripts\\round65_hga_timing.cpp",
+    "E:\\codes\\ExactEBRP-round65\\build\\round65\\libexact_ebrp_core.a",
+    "-o",
+    "E:\\codes\\ExactEBRP-round65\\build\\round65-hga-timing\\Round65HgaTiming.exe"
+  ],
+  "changes_to_measured_solver": false,
+  "optimizer_calls": 0,
+  "reference_trajectories": {
+    "C5": {
+      "path": "results\\gf_budgeted_proof_round65\\local_raw\\protection_v5\\C5\\candidate\\hga.csv",
+      "sha256": "1f211ba7e09e29c80fe7070f1700d0773b853ba7c5ff22a9d875fbc89593d92e",
+      "logical_sha256": "b37b39bd0ed6ccc7cce99286b9e66281cc54a8c22085c05d9384085de61ea561",
+      "launch_number": 51
+    },
+    "C7": {
+      "path": "results\\gf_budgeted_proof_round65\\local_raw\\reliability_v1\\C7\\reliable\\hga.csv",
+      "sha256": "7459f58462d5363e24c67016090e608fb925880c1fa5267c0f971e4deb0684b1",
+      "logical_sha256": "8cb10fd4961d837b8cb96ea632663e00f0611266d405c2dbd826664c20585747",
+      "launch_number": 5
+    }
+  },
+  "planned_roles": [
+    "C5",
+    "C7"
+  ],
+  "planned_charged_launches": 2,
+  "cap_seconds": 120,
+  "reliability_category_extension": {
+    "previous_plan": 8,
+    "with_timing": 10,
+    "hard_total_limit": 72
+  },
+  "scope": "aggregate HGA timing only, no performance qualification"
+}

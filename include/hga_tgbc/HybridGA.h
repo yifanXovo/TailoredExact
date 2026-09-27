@@ -10,6 +10,8 @@
 #include <limits>
 #include <sstream>
 #include <string>
+#include <functional>
+#include <stdexcept>
 
 #if __has_include("GreedyMethods.h")
 #include "GreedyMethods.h"
@@ -37,6 +39,48 @@ public:
         HGSBiased,
         HGAFitness
     };
+    using BestObserver = std::function<void(
+        const vector<vector<int>>& routes,
+        const vector<int>& decoded_operations,
+        double fitness,
+        long long generation)>;
+
+    struct DescentPass {
+        int seed = 0;
+        long long pass = 0;
+        size_t neighbors = 0;
+        size_t full_evaluations = 0;
+        size_t cross_route_neighbors = 0;
+        size_t cross_route_evaluations = 0;
+        bool accepted_cross_route = false;
+        bool accepted = false;
+        bool exhausted = false;
+        bool interrupted = false;
+        double fitness_before = 0.0;
+        double fitness_after = 0.0;
+        double accepted_proxy_fitness = 0.0;
+        double elapsed_seconds = 0.0;
+    };
+    void set_decoded_descent_only(bool enabled) { decoded_descent_only = enabled; }
+    const vector<DescentPass>& get_descent_passes() const { return descent_passes; }
+    int get_descent_seeds_completed() const { return descent_seeds_completed; }
+    bool completed_decoded_descent() const { return descent_complete; }
+    void set_extra_descent_seed(const vector<vector<int>>& routes) {
+        if (!decoded_descent_only)
+            throw std::runtime_error("Extra constructive seed requires finite decoded descent");
+        if (routes.size() != static_cast<size_t>(instance.M))
+            throw std::runtime_error("Extra constructive seed vehicle count mismatch");
+        vector<bool> seen(instance.V + 1, false);
+        size_t count = 0;
+        for (const auto& route : routes) for (int station : route) {
+            if (station <= 0 || station > instance.V || seen[station])
+                throw std::runtime_error("Extra constructive seed must contain each station once");
+            seen[station] = true; ++count;
+        }
+        if (count != static_cast<size_t>(instance.V))
+            throw std::runtime_error("Extra constructive seed omits a station");
+        extra_descent_seed = routes;
+    }
 
     HybridGA_HGS(const InstanceData& inst,
         int ps = 24,
@@ -60,6 +104,9 @@ public:
     }
 
     void set_seed(unsigned int seed) { gen.seed(seed); }
+    void set_fixed_generations(int value) { fixed_generations = value; }
+    double get_initialization_seconds() const { return initialization_seconds; }
+    double get_decoder_seconds() const { return decoder_seconds; }
     void set_diversity_weight(double v) { if (v >= 0.0) diversity_weight = v; }
     void set_education_probability(double v) { if (v >= 0.0 && v <= 1.0) education_probability = v; }
     void set_education_trials(int v) { education_trials = std::max(0, v); }
@@ -93,10 +140,21 @@ public:
         absolute_deadline = deadline;
         absolute_deadline_enabled = true;
     }
+    void set_best_observer(BestObserver observer) {
+        best_observer = std::move(observer);
+    }
+    // Only the independent route verifier in the bridge authorizes this stop.
+    void request_verified_stop() { verified_stop_requested = true; }
     bool stopped_on_absolute_deadline() const {
         return absolute_deadline_reached;
     }
+    bool best_observer_failed_and_disabled() const {
+        return best_observer_failed;
+    }
     vector<vector<int>> get_best_solution() const { return best_solution; }
+    vector<int> get_best_decoded_operations() const {
+        return best_decoded_operations;
+    }
     double get_best_fitness() const { return best_fitness; }
     long long get_total_generations() const { return total_generations; }
     long long get_generations_since_improvement() const {
@@ -135,6 +193,13 @@ public:
         set_greedy_time_units(instance.load_time_unit, instance.unload_time_unit);
         set_greedy_objective_params(objective_lambda, objective_scaling);
 
+        if (decoded_descent_only) {
+            if (fixed_generations >= 0)
+                throw std::runtime_error("Decoded descent cannot use a generation quota");
+            run_decoded_descent(start, deadlineReached);
+            return;
+        }
+
         vector<Individual> population = initialize_population();
         evaluate_population(population);
         if (selection_style == SelectionStyle::HGSBiased) {
@@ -151,6 +216,7 @@ public:
         elapsed_history.push_back(duration<double>(
             steady_clock::now() - start).count());
         improvement_history.push_back(initial_improved ? 1 : 0);
+        initialization_seconds = duration<double>(steady_clock::now() - start).count();
 
         auto complete_generation = [&]() {
             vector<Individual> offspring;
@@ -200,17 +266,21 @@ public:
             }
         };
 
-        if (generation_stagnation_stop) {
+        if (fixed_generations >= 0) {
+            while (!verified_stop_requested && total_generations < fixed_generations && !deadlineReached()) {
+                complete_generation();
+            }
+        } else if (generation_stagnation_stop) {
             // Round 27 production: the sole stop state is the number of
             // completed generations since strict global-best improvement.
-            while (no_improve_gen_limit > 0 &&
+            while (!verified_stop_requested && no_improve_gen_limit > 0 &&
                    generations_since_improvement < no_improve_gen_limit &&
                    !deadlineReached()) {
                 complete_generation();
             }
         } else {
             // Historical time-limited diagnostic behavior.
-            while (duration_cast<seconds>(
+            while (!verified_stop_requested && duration_cast<seconds>(
                        steady_clock::now() - start).count() < max_time &&
                    !deadlineReached()) {
                 complete_generation();
@@ -223,6 +293,15 @@ public:
     }
 
 private:
+    bool decoded_descent_only = false;
+    vector<vector<int>> extra_descent_seed;
+    bool descent_complete = false;
+    int descent_seeds_completed = 0;
+    vector<DescentPass> descent_passes;
+    bool verified_stop_requested = false;
+    int fixed_generations = -1;
+    double initialization_seconds = 0.0;
+    double decoder_seconds = 0.0;
     struct Individual {
         vector<vector<int>> routes;
         vector<int> chrom;
@@ -277,6 +356,7 @@ private:
     size_t decode_cache_max_entries = std::numeric_limits<size_t>::max();
 
     vector<vector<int>> best_solution;
+    vector<int> best_decoded_operations;
     double best_fitness;
     vector<double> history;
     vector<double> elapsed_history;
@@ -287,6 +367,8 @@ private:
     long long decoder_calls = 0;
     mt19937 gen;
     unordered_map<string, SolutionResult_ORO> decode_cache;
+    BestObserver best_observer;
+    bool best_observer_failed = false;
 
     static constexpr int SEP = 0;
 
@@ -510,6 +592,8 @@ SolutionResult_ORO decode_routes(const vector<vector<int>>& routes, vector<int>*
         if (it != decode_cache.end()) return it->second;
     }
     ++decoder_calls;
+    const auto decode_started = (fixed_generations >= 0 || decoded_descent_only) ? steady_clock::now()
+                                                       : steady_clock::time_point{};
     SolutionResult_ORO res;
     if (decoder_compaction_mode == 0) {
         res = nGreedyLU_RA(1, instance.V, instance.M, instance.total_time_limit,
@@ -537,6 +621,8 @@ SolutionResult_ORO decode_routes(const vector<vector<int>>& routes, vector<int>*
             instance.dist, g_iternum, -1.0, instance.weights, instance.min_ratio,
             objective_lambda, objective_scaling, nullptr);
     }
+    if (fixed_generations >= 0 || decoded_descent_only)
+        decoder_seconds += duration<double>(steady_clock::now() - decode_started).count();
     if (decode_cache_max_entries != 0) {
         if (decode_cache_max_entries != std::numeric_limits<size_t>::max() &&
             decode_cache.size() >= decode_cache_max_entries) {
@@ -709,6 +795,15 @@ private:
             Individual ind;
             if (i < cc) ind.routes = build_constructive_individual();
             else ind.routes = chromosome_to_routes(make_random_chromosome());
+            ind.chrom = routes_to_chromosome(ind.routes);
+            pop.push_back(std::move(ind));
+        }
+        // Appending after the unchanged random initialization preserves its
+        // generator draws, seed order and local descent paths. This extra
+        // individual uses the same decoder/neighborhood as every other seed.
+        if (decoded_descent_only && !extra_descent_seed.empty()) {
+            Individual ind;
+            ind.routes = extra_descent_seed;
             ind.chrom = routes_to_chromosome(ind.routes);
             pop.push_back(std::move(ind));
         }
@@ -1201,6 +1296,82 @@ private:
         return false;
     }
 
+    // Each unsuccessful pass decodes every generated guided neighbor. The
+    // proxy only orders this finite neighborhood; it is never a rejection
+    // bound. No statement about all relocations or global optimality follows.
+    template <typename DeadlineReached>
+    void run_decoded_descent(const steady_clock::time_point& start,
+                             DeadlineReached deadlineReached) {
+        descent_complete = false;
+        descent_seeds_completed = 0;
+        descent_passes.clear();
+        history.clear();
+        elapsed_history.clear();
+        improvement_history.clear();
+        total_generations = 0;
+        generations_since_improvement = 0;
+        objective_improvement_count = 0;
+        vector<Individual> population = initialize_population();
+        auto interrupted = [&]() {
+            return verified_stop_requested || deadlineReached();
+        };
+        auto publish = [&](const Individual& ind) {
+            if (update_best(vector<Individual>{ind})) ++objective_improvement_count;
+        };
+        for (auto& ind : population) {
+            if (interrupted()) return;
+            decode_individual(ind);
+            if (!isfinite(ind.fitness))
+                throw std::runtime_error("Decoded descent seed has nonfinite fitness");
+            publish(ind);
+            initialization_seconds = duration<double>(steady_clock::now() - start).count();
+        }
+        initialization_seconds = duration<double>(steady_clock::now() - start).count();
+        for (size_t seed = 0; seed < population.size(); ++seed) {
+            Individual& ind = population[seed];
+            while (true) {
+                if (interrupted()) return;
+                DescentPass row;
+                row.seed = static_cast<int>(seed + 1);
+                row.pass = static_cast<long long>(descent_passes.size() + 1);
+                row.fitness_before = ind.fitness;
+                vector<GuidedCandidate> candidates = build_guided_candidates(ind);
+                row.neighbors = candidates.size();
+                row.cross_route_neighbors = static_cast<size_t>(std::count_if(
+                    candidates.begin(), candidates.end(),
+                    [](const GuidedCandidate& candidate) { return candidate.route_b >= 0; }));
+                for (const auto& cand : candidates) {
+                    if (interrupted()) { row.interrupted = true; break; }
+                    vector<int> chrom = routes_to_chromosome(cand.routes);
+                    const auto decoded = decode_routes(cand.routes, &chrom);
+                    if (!isfinite(decoded.objective_value))
+                        throw std::runtime_error("Decoded descent neighbor has nonfinite fitness");
+                    ++row.full_evaluations;
+                    if (cand.route_b >= 0) ++row.cross_route_evaluations;
+                    if (decoded.objective_value > ind.fitness + 1e-12) {
+                        ind.routes = cand.routes;
+                        ind.chrom = std::move(chrom);
+                        ind.fitness = decoded.objective_value;
+                        ind.decoded_ops = decoded.Y_Oper_best;
+                        row.accepted = true;
+                        row.accepted_cross_route = cand.route_b >= 0;
+                        row.accepted_proxy_fitness = cand.approx_fitness;
+                        publish(ind);
+                        break;
+                    }
+                }
+                row.exhausted = !row.accepted && !row.interrupted &&
+                    row.full_evaluations == row.neighbors;
+                row.fitness_after = ind.fitness;
+                row.elapsed_seconds = duration<double>(steady_clock::now() - start).count();
+                descent_passes.push_back(row);
+                if (row.interrupted || interrupted()) return;
+                if (row.exhausted) { ++descent_seeds_completed; break; }
+            }
+        }
+        descent_complete = descent_seeds_completed == static_cast<int>(population.size());
+    }
+
     void educate(Individual& ind) {
         if (education_trials <= 0) return;
         for (int rep = 0; rep < max(1, education_trials); ++rep) {
@@ -1268,6 +1439,19 @@ private:
             if (ind.fitness > best_fitness + 1e-12) {
                 best_fitness = ind.fitness;
                 best_solution = ind.routes;
+                best_decoded_operations = ind.decoded_ops;
+                if (best_observer) {
+                    const long long generation = history.empty()
+                        ? 0 : total_generations + 1;
+                    try {
+                        best_observer(best_solution,
+                                      best_decoded_operations,
+                                      best_fitness, generation);
+                    } catch (...) {
+                        best_observer_failed = true;
+                        best_observer = BestObserver{};
+                    }
+                }
                 improved = true;
             }
         }

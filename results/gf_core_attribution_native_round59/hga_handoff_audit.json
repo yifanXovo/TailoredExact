@@ -1,0 +1,46 @@
+[
+  {
+    "id": "D6",
+    "decoding_event": {
+      "sequence": "8",
+      "process_seconds": "117.06161659999999",
+      "event": "hga_route_decoding",
+      "status": "skipped_deadline",
+      "nominal_deadline_remaining_seconds": "2.9383835000000005",
+      "work_deadline_remaining_seconds": "-0.061616599999993582",
+      "detail": "label=primary_hga;no decoded candidate or verification claim"
+    },
+    "last_generation": {
+      "generation": "646",
+      "elapsed_seconds": "117.05700280000001",
+      "best_fitness": "-0.15708313110317401",
+      "strict_improvement": "false"
+    },
+    "fitness_is_not_verified_UB": true,
+    "source": "src/HgaTgbcRunner.cpp:161-173",
+    "published_UB_source": "last independently verified empty route",
+    "phase_sha256": "48469986c4d729a956a92711d4c77d7efaaf0d1e5dfaebccbe39b8674a1e7419"
+  },
+  {
+    "id": "D7",
+    "decoding_event": {
+      "sequence": "8",
+      "process_seconds": "117.12600279999999",
+      "event": "hga_route_decoding",
+      "status": "skipped_deadline",
+      "nominal_deadline_remaining_seconds": "2.8739972999999992",
+      "work_deadline_remaining_seconds": "-0.12600279999999486",
+      "detail": "label=primary_hga;no decoded candidate or verification claim"
+    },
+    "last_generation": {
+      "generation": "575",
+      "elapsed_seconds": "117.12179810000001",
+      "best_fitness": "-0.21585561629655414",
+      "strict_improvement": "false"
+    },
+    "fitness_is_not_verified_UB": true,
+    "source": "src/HgaTgbcRunner.cpp:161-173",
+    "published_UB_source": "last independently verified empty route",
+    "phase_sha256": "5a4f60e692763590b7d98d79a2d919cafbdb6f0156e4a8f0e63e919bc5b6f078"
+  }
+]

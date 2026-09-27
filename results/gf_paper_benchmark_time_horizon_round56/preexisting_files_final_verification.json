@@ -1,0 +1,31 @@
+{
+  "all_preserved": true,
+  "missing_untracked_paths": [],
+  "schema": "round56-preexisting-files-final-verification-v1",
+  "sha256_mismatch_untracked_paths": [],
+  "size_mismatch_untracked_paths": [],
+  "snapshot_path": "build/round56_preexisting_untracked_snapshot.csv",
+  "snapshot_sha256": "5faf5b7f9ed5e1ddb03ed4585a9dfc4e89302a53207d06463395bf3ea291d9a6",
+  "tracked_user_modifications": [
+    {
+      "actual_sha256": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+      "expected_sha256": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+      "path": "results/gf_compact_bc_round/handling_convention_test/handling_convention.json",
+      "preserved": true
+    },
+    {
+      "actual_sha256": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+      "expected_sha256": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+      "path": "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv",
+      "preserved": true
+    },
+    {
+      "actual_sha256": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202",
+      "expected_sha256": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202",
+      "path": "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json",
+      "preserved": true
+    }
+  ],
+  "verified_untracked_bytes": 27358038391,
+  "verified_untracked_file_count": 57284
+}

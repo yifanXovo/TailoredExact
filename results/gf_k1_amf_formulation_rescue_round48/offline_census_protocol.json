@@ -1,0 +1,25 @@
+{
+  "failure_policy": "implement exact frozen AMF; Stage3 eight diagnostic rows only; no Stage4/5; bounded structural negative",
+  "no_retuning_after_census": true,
+  "primary_pass": [
+    "H1 retain",
+    "H2 retain",
+    "B1 split",
+    "B2 split",
+    "B3 split",
+    "B4 split",
+    "zero Gini-coordinate credit"
+  ],
+  "schema": "round48-offline-census-protocol-v1",
+  "states": [
+    "H1",
+    "H2",
+    "H3",
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "U1",
+    "tight3102 exact common divergence states"
+  ]
+}

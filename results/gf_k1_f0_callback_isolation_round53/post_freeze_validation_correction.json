@@ -1,0 +1,25 @@
+{
+  "schema": "round53-post-freeze-validation-correction-v1",
+  "recorded_at_utc": "2026-08-28T16:21:51.2562824Z",
+  "classification": "validation_only_non_algorithmic_correction",
+  "authorization_status": "accepted_by_user",
+  "authorization_received_at_utc": "2026-08-29T04:06:33Z",
+  "authorization_text": "gain the authorization and then complete the Round 53 goal.",
+  "completion_qualification": "accepted_validation_only_exception",
+  "reason": "The Stage 0 record correctly stored clean-filtered Git blob identities, but the Round 53 protocol helper reconstructed a blob hash from raw CRLF worktree bytes and therefore did not apply Git clean filters.",
+  "correction": "Use git hash-object for the tracked-file preservation check and scope the post-freeze comparison to algorithm/build/runner sources so the validation-only correction is explicit.",
+  "changed_path": "tests/round53_protocol_tests.py",
+  "algorithm_paths_changed": [],
+  "algorithm_source_commit": "5b1e7d5bbf63fc0a2c699ff04fe12c3a2afd58f0",
+  "algorithm_source_tree": "db4f3b9ee9a3e7140976178b783825e52bd8e7ad",
+  "official_executable_sha256": "b49cc5a5e631c6a8ce7a8bd4d0e6da44162800c97996494b1ee6a04071286c85",
+  "fixed_interval_harness_sha256": "7f8bc2b5c36d552d5d9c405cb85bac64ce68e6fa4eae91b4dff33ad7f7a0de52",
+  "official_rows_changed": false,
+  "sealed_results_changed": false,
+  "user_files_rewritten": false,
+  "tracked_user_blob_identities": {
+    "results/gf_compact_bc_round/handling_convention_test/handling_convention.json": "98bcd60c3c5542772f101d5c73643033b78c58da",
+    "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv": "730b12307ff356aad1972158312c3c791f4492ec",
+    "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json": "c6ea164aec30b59fbee030476ed9cd6a4ffa315f"
+  }
+}

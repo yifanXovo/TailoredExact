@@ -1,0 +1,52 @@
+{
+  "complex_gate": {
+    "false_certificate_count": 77,
+    "gamma_material_advantage_supported": true,
+    "mandatory_completed": 48,
+    "mandatory_required": 48,
+    "pass": true,
+    "secondary_completed": 6,
+    "secondary_required": 6
+  },
+  "counterfactual_gate": {
+    "all_counterfactual_rows_valid": true,
+    "all_four_arms_present": true,
+    "all_parent_identities_matched": true,
+    "beneficial_count": 3,
+    "development_parent_count": 30,
+    "harmful_count": 21,
+    "inconclusive_count": 2,
+    "neutral_count": 4,
+    "pass": true,
+    "post_selection_parent_count": 2
+  },
+  "false_certificate_count": 77,
+  "final_algorithm_classification": "bounded_systematic_negative_result",
+  "gamma_veto_false_retain_count": 2,
+  "gamma_veto_false_split_count": 7,
+  "matrix_gate": {
+    "completed_rows": 232,
+    "missing_or_invalid_rows": [],
+    "pass": true,
+    "required_rows": 232,
+    "unique_executable_hashes": [
+      "d0b17662a6021cf2cc3c7b4c66868bf76c3d11e268f0b63afc71a7a77e7e88f4"
+    ]
+  },
+  "point_classification": "parametric_point_inconclusive_insufficient_true_split_evidence",
+  "point_gate": {
+    "all_point_comparisons_conclusive": false,
+    "all_required_point_arms_present": true,
+    "fpmm_material_improvement_count": 2,
+    "live_basis_continuation_used": false,
+    "method": "monotone-root PMM/FPMM",
+    "midpoint_not_improved_eligibility": false,
+    "pass": true,
+    "pmm_material_improvement_count": 2,
+    "required_true_gamma_split_parents": 13
+  },
+  "round45_completion_status": "complete",
+  "scale_qualification": "v20_v50_supported",
+  "small_panel_rerun_gate": true,
+  "timing_classification": "bounded_negative_timing_mechanism"
+}

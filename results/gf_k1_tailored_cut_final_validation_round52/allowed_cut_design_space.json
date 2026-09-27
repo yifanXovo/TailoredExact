@@ -1,0 +1,45 @@
+{
+  "schema": "round52-allowed-cut-design-space-v1",
+  "initial_family": "support-duration",
+  "initial_policy": "SD-R3-ROOT-BLOCKMAX",
+  "initial_rank": 3,
+  "iteration_1": [
+    "SD-R3-ROOT-BLOCKMAX"
+  ],
+  "iteration_2_exactly_one_dimension": {
+    "support_rank": [
+      2,
+      3,
+      4
+    ],
+    "separation_scope": [
+      "root-only",
+      "all optimal tree MIPNODE relaxations"
+    ],
+    "selection": [
+      "one max-scaled-violation cut per vehicle",
+      "all Pareto-undominated cuts"
+    ],
+    "rank_hierarchy": [
+      "rank-2 static plus rank-3 dynamic"
+    ]
+  },
+  "iteration_3": {
+    "same_dimensions_refinement": true,
+    "or_second_family": [
+      "transfer cutset",
+      "subset inventory imbalance",
+      "vector route cutset"
+    ],
+    "second_family_selection": "offline LP violation census only"
+  },
+  "second_family_census_metrics": [
+    "violated-state fraction",
+    "normalized violation",
+    "generation complexity",
+    "duplicate/dominance rate"
+  ],
+  "runtime_may_select_second_family": false,
+  "uniform_across_instance_sizes": true,
+  "result_dependent_dispatch": false
+}

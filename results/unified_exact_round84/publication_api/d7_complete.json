@@ -1,0 +1,79 @@
+{
+  "target": "451725a44f295f0e7cd4039f95a4d9a855f2f37c",
+  "branch": "codex/round84-ensc-long-protection-replication",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round84-ensc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.6228192001581192,
+      "stderr": "",
+      "returned_sha": "e1ee5c14392e43697f552b790835257b4a2eca9f"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/f4c32baa7fcaf19f1d715bcee24827b4d9a4d92f",
+      "returncode": 1,
+      "wall_seconds": 0.6162545997649431,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 4.831608300097287,
+      "stderr": "",
+      "returned_sha": "f4c32baa7fcaf19f1d715bcee24827b4d9a4d92f"
+    },
+    {
+      "method": "POST",
+      "path": "git/commits",
+      "returncode": 0,
+      "wall_seconds": 1.3366435999050736,
+      "stderr": "",
+      "returned_sha": "451725a44f295f0e7cd4039f95a4d9a855f2f37c"
+    },
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round84-ensc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.9927403000183403,
+      "stderr": "",
+      "returned_sha": "e1ee5c14392e43697f552b790835257b4a2eca9f"
+    },
+    {
+      "method": "PATCH",
+      "path": "git/refs/heads/codex/round84-ensc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 1.1394030000083148,
+      "stderr": "",
+      "returned_sha": "451725a44f295f0e7cd4039f95a4d9a855f2f37c"
+    },
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round84-ensc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.5961381001397967,
+      "stderr": "",
+      "returned_sha": "451725a44f295f0e7cd4039f95a4d9a855f2f37c"
+    }
+  ],
+  "optimizer_calls": 0,
+  "script_sha256": "e7e3a09da3903574b61387047d167f50d2e87d975e4848a64f8537da4a491125",
+  "scope": "Exact blobs, tree and original commit hashes required before a non-force branch update",
+  "wall_seconds": 10.64288300042972,
+  "initial_remote_head": "e1ee5c14392e43697f552b790835257b4a2eca9f",
+  "original_commits": [
+    "451725a44f295f0e7cd4039f95a4d9a855f2f37c"
+  ],
+  "verified_exact_trees": [
+    "f4c32baa7fcaf19f1d715bcee24827b4d9a4d92f"
+  ],
+  "verified_exact_commits": [
+    "451725a44f295f0e7cd4039f95a4d9a855f2f37c"
+  ],
+  "passed": true,
+  "final_remote_head": "451725a44f295f0e7cd4039f95a4d9a855f2f37c",
+  "original_history_preserved": true
+}

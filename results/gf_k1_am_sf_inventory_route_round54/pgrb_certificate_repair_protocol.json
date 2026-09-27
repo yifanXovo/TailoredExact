@@ -1,0 +1,32 @@
+{
+  "schema": "round54-pgrb-certificate-repair-protocol-v1",
+  "evidence_only": true,
+  "may_change_k1_am_sf": false,
+  "source_panel": "results/gf_k1_f0_callback_isolation_round53/sealed_v12_instance_manifest.json",
+  "source_panel_sha256": "03f683f4268c86d18fc71f09836b4b785656b1b84bf7af2b38961c6f4836df00",
+  "row_count": 12,
+  "method": "P-GRB",
+  "process_cap_seconds": 3600,
+  "preferred_executable_sha256": "b49cc5a5e631c6a8ce7a8bd4d0e6da44162800c97996494b1ee6a04071286c85",
+  "solver": {
+    "Threads": 1,
+    "Seed": 0,
+    "Presolve": "Auto",
+    "MIPGap": 0.0,
+    "MIPGapAbs": 0.0
+  },
+  "preflight_before_solves": true,
+  "preflight_output": "round53_pgrb_expected_fingerprints.json",
+  "expected_fingerprint_readback_required": true,
+  "strict_checks": [
+    "expected/actual fingerprint equality",
+    "lifecycle validity",
+    "objective recomputation",
+    "independent original-solution verification",
+    "strict rejection reason",
+    "strict certificate"
+  ],
+  "original_round53_evidence_overwrite_forbidden": true,
+  "correction_root": "round53_pgrb_certificate_correction",
+  "algorithm_tuning_from_correction_forbidden": true
+}

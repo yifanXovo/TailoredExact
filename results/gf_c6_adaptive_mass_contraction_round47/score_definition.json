@@ -1,0 +1,14 @@
+{
+  "G_p": "max(U-B_p, epsilon_cert)",
+  "S_AM": "eta*mu",
+  "additional_solve_count": 0,
+  "epsilon_cert": 1e-07,
+  "epsilon_mass": 1e-07,
+  "eta": "min(g_L,g_R)",
+  "g_j": "clip(g_j_raw,0,1)",
+  "g_j_raw": "(B_j-B_p)/G_p",
+  "mu": "(g_L+g_R)/2",
+  "rho_I": "min(1,tau/max(mu,epsilon_mass))",
+  "schema": "round47-adaptive-mass-score-v1",
+  "score_tolerance": "min(1,max(epsilon_cert,32*machine_epsilon*bound_scale)/G_p+32*machine_epsilon)"
+}

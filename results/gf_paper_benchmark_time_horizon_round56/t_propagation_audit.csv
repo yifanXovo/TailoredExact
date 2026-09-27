@@ -1,0 +1,13 @@
+component,source,evidence,requested_T_used,fallback_T_3600_found
+CLI --T parser,src/main.cpp,opt.total_time_limit = std::stod,True,False
+instance parser,src/Parser.cpp,instance.total_time_limit = total_time_limit,True,False
+parent LP,src/Bounds.cpp,duration rows use instance.total_time_limit,True,False
+midpoint-child LP,src/PaperExternalGiniTree.cpp,child canonical artifacts are rebuilt from the same Instance,False,False
+native-target MIP,src/PaperExternalGiniTree.cpp,native target reads canonical T-specific artifact,False,False
+exact-parent MIP,src/PaperExternalGiniTree.cpp,terminal parent reads canonical T-specific artifact,False,False
+exact-child MIP,src/PaperExternalGiniTree.cpp,terminal child reads canonical T-specific artifact,False,False
+movement-domain propagation,src/Bounds.cpp,movement bounds subtract route/path lower bound from instance.total_time_limit,True,False
+T-dependent valid inequalities,src/CplexBaseline.cpp,support duration and operation budget rows use instance.total_time_limit,True,False
+original solution verifier,src/Evaluator.cpp,route duration compared with instance.total_time_limit,True,False
+canonical model fingerprint,src/ExternalGiniTree.cpp,fingerprint is SHA-256 of T-specific canonical LP bytes,False,False
+serialized final result,src/Result.cpp,route_time_limit_seconds emitted explicitly,True,False

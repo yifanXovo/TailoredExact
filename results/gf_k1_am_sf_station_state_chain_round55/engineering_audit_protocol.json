@@ -1,0 +1,25 @@
+{
+  "schema": "round55-engineering-audit-protocol-v1",
+  "must_precede_optimization": true,
+  "areas": [
+    "controller/preset",
+    "all K1 model-construction paths",
+    "variable domains/objective/scaling",
+    "lifecycle/reuse/cache keys",
+    "certificate/P-GRB pipeline",
+    "return codes/numerics/sanitizers"
+  ],
+  "model_paths": [
+    "root",
+    "parent LP",
+    "child LP",
+    "partial native-target MIP",
+    "exact parent MIP",
+    "exact child MIP",
+    "cutoff",
+    "interrupted leaf",
+    "infeasible child",
+    "certificate finalization"
+  ],
+  "optimization_opening_condition": "issue ledger closed or every unresolved material issue explicitly blocks the round"
+}

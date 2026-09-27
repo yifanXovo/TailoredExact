@@ -1,0 +1,27 @@
+{
+  "fixed_capped": [
+    "baseline_certifies_candidate_does_not",
+    "GI_ratio>=1.5_and_absolute_increase>=0.05",
+    "gap_ratio>=1.5_and_absolute_increase>=0.05"
+  ],
+  "fixed_exact": {
+    "ratio_and_absolute": true,
+    "time_absolute_seconds_gt": 60,
+    "time_ratio_gt": 1.5,
+    "work_absolute_gt": 50,
+    "work_ratio_gt": 1.5
+  },
+  "schema": "round50-severe-regression-definition-v1",
+  "split_capped": [
+    "one_arm_certifies_other_materially_capped",
+    "GI_ratio>1.5_and_absolute_difference>=0.05",
+    "gap_ratio>1.5_and_absolute_difference>=0.05"
+  ],
+  "split_exact": {
+    "ratio_and_absolute": true,
+    "time_absolute_seconds_gt": 60,
+    "time_ratio_gt": 1.5,
+    "work_absolute_gt": 100,
+    "work_ratio_gt": 1.5
+  }
+}

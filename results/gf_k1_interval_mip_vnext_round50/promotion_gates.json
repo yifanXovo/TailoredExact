@@ -1,0 +1,33 @@
+{
+  "fixed_backend": [
+    "zero_correctness_failures",
+    "zero_severe_confirmation_regressions",
+    "certificate_count_non_decreasing",
+    "paired_work_geomean<=0.95_or_material_capped_progress_without_aggregate_regression",
+    "two_structural_roles_improve",
+    "numerical_conditioning_nonworse"
+  ],
+  "iteration": [
+    "zero_correctness_failures",
+    "zero_false_certificates",
+    "complete_identity_audit",
+    "no_severe_regression",
+    "not_one_instance_only",
+    "one_hard_state_materially_improves",
+    "aggregate_work_or_capped_progress_nonworse",
+    "confirmation_not_open"
+  ],
+  "k1_300s": [
+    "zero_correctness_failures",
+    "major_trajectory_nonworse",
+    "V10_M3_easy",
+    "one_hard_K1_weakness_improves",
+    "no_severe_historical_PGRB_regression"
+  ],
+  "schema": "round50-promotion-gates-v1",
+  "split_tail_open": [
+    "Interval-MIP-vNext_frozen",
+    "K1-AM-vNext_qualified",
+    "one_recomputed_severe_split_error"
+  ]
+}

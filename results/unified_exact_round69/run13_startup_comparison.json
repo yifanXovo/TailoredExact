@@ -1,0 +1,69 @@
+{
+  "records": [
+    {
+      "arm": "K1-R",
+      "rows": 2072,
+      "logical_trace_sha256": "f0ae472465d21dc0f8f34175103d0b9c21ce49efcae38813be21cad573168ce8",
+      "last_generation": "2071",
+      "last_generation_seconds": 323.7191339,
+      "complete_phase": {
+        "sequence": "5",
+        "process_seconds": "323.72213629999999",
+        "event": "hga_generation_loop_complete",
+        "status": "complete",
+        "nominal_deadline_remaining_seconds": "3276.2778641",
+        "work_deadline_remaining_seconds": "3273.2778638",
+        "detail": "label=primary_hga;generations=2071;no_improve=2000"
+      },
+      "witness_sha256": "b22331e7663cc630a7413ae81c8fa43ec166241a5a109520fd9bd5bda6b7e26c",
+      "physical": {
+        "F": 0.15708313110317407,
+        "G": 0.0276361189802119,
+        "P": 0.8629800808197478,
+        "stations": 30,
+        "pickup": 121,
+        "drop": 121,
+        "maximum_duration": 17761.308469780877,
+        "original_T_feasible": true
+      },
+      "completed_hga_decoder_calls": 26383,
+      "completed_hga_wall_seconds": 323.7226881
+    },
+    {
+      "arm": "VD-S",
+      "rows": 2072,
+      "logical_trace_sha256": "f0ae472465d21dc0f8f34175103d0b9c21ce49efcae38813be21cad573168ce8",
+      "last_generation": "2071",
+      "last_generation_seconds": 550.5947518,
+      "complete_phase": {
+        "sequence": "5",
+        "process_seconds": "550.59821420000003",
+        "event": "hga_generation_loop_complete",
+        "status": "complete",
+        "nominal_deadline_remaining_seconds": "3049.4017861000002",
+        "work_deadline_remaining_seconds": "3046.4017859",
+        "detail": "label=primary_hga;generations=2071;no_improve=2000"
+      },
+      "witness_sha256": "b22331e7663cc630a7413ae81c8fa43ec166241a5a109520fd9bd5bda6b7e26c",
+      "physical": {
+        "F": 0.15708313110317407,
+        "G": 0.0276361189802119,
+        "P": 0.8629800808197478,
+        "stations": 30,
+        "pickup": 121,
+        "drop": 121,
+        "maximum_duration": 17761.308469780877,
+        "original_T_feasible": true
+      },
+      "completed_hga_decoder_calls": 26383,
+      "completed_hga_wall_seconds": 550.5999342
+    }
+  ],
+  "identical_logical_HGA_trace": true,
+  "identical_full_initial_routes": true,
+  "optimizer_calls": 0,
+  "scope": "Same frozen binary and input; compare every HGA generation/objective/improvement flag and full physical initial routes. Different wall with an identical logical trace is observed timing variation, not evidence of a changed startup algorithm. Cause is not established.",
+  "completed_decoder_call_counts_match": true,
+  "all_final_results_available": true,
+  "count_check_note": "Both completed result files report 26383 uncached decoder calls; same best-history and routes do not reveal every offspring or establish timing cause."
+}

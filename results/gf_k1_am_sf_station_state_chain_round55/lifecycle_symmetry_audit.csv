@@ -1,0 +1,6 @@
+event,create_counted,release_or_discard,interruption_safe,status
+backend environment,True,release(),True,pass
+canonical leaf artifact,True,epoch rebuild or leaf discard,True,pass
+retained Gurobi model,True,discardLeaf/release,True,pass
+LP relaxation domain,True,integer types restored before MIP,True,pass
+open scheduler coverage,True,certificate finalization,True,pass

@@ -1,0 +1,29 @@
+{
+  "schema": "round55-sealed-generalization-protocol-v1",
+  "manifest": "results/gf_k1_am_sf_station_state_chain_round55/sealed_generalization_manifest.json",
+  "manifest_sha256": "042970af2817de402eafe0ac33e6cf7462a8fcda190f54e57dc6d0c31b56e04a",
+  "arms": [
+    "P-GRB",
+    "K1-AM-SF",
+    "K1-AM-SF-CANDIDATE"
+  ],
+  "caps": {
+    "V12": 3600,
+    "V20": 3600,
+    "V50": 7200
+  },
+  "checkpoints": [
+    300,
+    1200,
+    1800,
+    3600,
+    7200
+  ],
+  "opening": [
+    "candidate source frozen",
+    "official executable frozen",
+    "full K1 passes",
+    "no later algorithm change"
+  ],
+  "expected_pgrb_fingerprint_pre_frozen": true
+}

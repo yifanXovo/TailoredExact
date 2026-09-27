@@ -1,0 +1,7 @@
+round,mechanism,implementation,evidence,historical_decision,round52_default,reproducible
+47,K1-AM adaptive mass,src/PaperExternalGiniTree.cpp,results/gf_c6_adaptive_mass_contraction_round47/final_decision.json,research candidate tau=0.07915,off unless named K1-AM policy,True
+48,K1-AMF,src/Round48K1AMF.cpp,results/gf_k1_amf_formulation_rescue_round48/final_decision.json,bounded negative,off,True
+49,K1-AM-RC D-RCD,src/Round49K1RC.cpp,results/gf_k1_lp_primal_dual_rescue_round49/final_decision.json,bounded negative,off,True
+50,interval-MIP vNext research policies,src/round50_interval_mip_main.cpp,results/gf_k1_interval_mip_vnext_round50/final_decision.json,production interval-MIP-v0 retained,off,True
+51,M1 tight Big-M,src/Round51TightBigM.cpp,results/gf_k1_tight_big_m_sparse_branching_round51/final_decision.json,rejected,off,True
+51,S1/S1R symmetry and A1/A1R branching,src/round50_interval_mip_main.cpp,results/gf_k1_tight_big_m_sparse_branching_round51/final_decision.json,rejected,off,True

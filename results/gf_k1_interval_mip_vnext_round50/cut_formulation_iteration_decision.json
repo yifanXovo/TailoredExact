@@ -1,0 +1,33 @@
+{
+  "accepted_changes": [],
+  "active_policy_after_iteration": "interval-mip-v0 original cut/formulation pack",
+  "baseline_certificates": 10,
+  "candidate_accepted": false,
+  "candidate_capped_rows": 4,
+  "candidate_certificates": 9,
+  "candidate_count": 1,
+  "candidate_failed_rows": 1,
+  "candidate_policy": "c1-exact-duplicate-elimination",
+  "candidate_results_sha256": "ebeb017a940a7495a9fb626b0d3983dd13b3dc026cdbbbe9e6667157e03d5b5d",
+  "classification": "original_cut_pack_retained",
+  "confirmation_opened": false,
+  "correctness_failures": 1,
+  "duplicates_omitted_development": 51,
+  "executable_sha256": "c847cf26a11da3e8d43a26f8c74afeb6625ee2a29628aaec06ab27f0b2dc65dd",
+  "false_certificates": 0,
+  "generic_gurobi_cut_parameter_changed": false,
+  "iteration": 2,
+  "material_hard_state_improvements": 0,
+  "model_correctness_audit_sha256": "3bbcc70e554f9bd90d155e661bbc92e8314eef13fead053a5191856d4d1ea5c9",
+  "model_delta_audit_failures": 0,
+  "qualification_rows": 14,
+  "rejection_reason": "D12 baseline certified but C1's native-optimal solution failed the independent original-objective certificate tolerance; remaining hard-state Work changes were immaterial",
+  "runtime_dispatch": false,
+  "schema": "round50-cut-formulation-iteration-decision-v1",
+  "severe_regression_states": [
+    "D12"
+  ],
+  "severe_regressions": 1,
+  "status": "complete",
+  "valid_row_aggregate_work_ratio": 0.9995591842943501
+}

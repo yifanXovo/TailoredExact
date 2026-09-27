@@ -1,0 +1,23 @@
+{
+  "source_commit": "44f8f8c4df5687bfd9d92c779ea15eade551d530",
+  "executables": [
+    {
+      "executable": "ExactEBRP.exe",
+      "sha256": "9a3abf82fccb06ec78acdbab2e764a0f5fb36ae06b3b2cbd2299d483bf8fdb33"
+    },
+    {
+      "executable": "Round50IntervalMipExperiment.exe",
+      "sha256": "cb083fe0ebb16bdd14149e9fc2683c4f2401cb58a0c1912c31a2436d0fbf0206"
+    },
+    {
+      "executable": "Round61CandidateExperiment.exe",
+      "sha256": "bbd0b372eb11e3221b8e05ace4a4e1728ea4648e171bf2c90e4321a05b1b03e6"
+    },
+    {
+      "executable": "Round61TimeOracle.exe",
+      "sha256": "031f8efdcc76bab0d279dc8b3ffd90ebf9673c8c1006c9bf609de132b1b797f7"
+    }
+  ],
+  "tests": "38/38 passed",
+  "reason": "Empty-route removal, equal-Q vehicle symmetry normalization, actual full-mode handling flags, oracle numerical gate; all affected pairs use this build."
+}

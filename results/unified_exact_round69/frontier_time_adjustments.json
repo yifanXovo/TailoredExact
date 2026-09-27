@@ -1,0 +1,85 @@
+{
+  "adjustments": [
+    {
+      "number": 12,
+      "id": "D6",
+      "arm": "K1-R",
+      "first_data_row": 8,
+      "last_data_row": 9,
+      "leaf": "L0.0",
+      "recorded_last_callback_process_seconds": 328.08868889999997,
+      "following_actual_process_seconds": 328.1120837,
+      "following_event": "child_native_bound_target",
+      "conservative_setup_and_unobserved_tail_shift_seconds": 0.023394800000062332,
+      "callback_records": 2
+    },
+    {
+      "number": 12,
+      "id": "D6",
+      "arm": "K1-R",
+      "first_data_row": 12,
+      "last_data_row": 2181,
+      "leaf": "L0.0",
+      "recorded_last_callback_process_seconds": 3596.9946597,
+      "following_actual_process_seconds": 3597.0867581,
+      "following_event": "interruption",
+      "conservative_setup_and_unobserved_tail_shift_seconds": 0.09209840000039549,
+      "callback_records": 2170
+    },
+    {
+      "number": 13,
+      "id": "D6",
+      "arm": "VD-S",
+      "first_data_row": 9,
+      "last_data_row": 641,
+      "leaf": "L0.0",
+      "recorded_last_callback_process_seconds": 3593.6382775,
+      "following_actual_process_seconds": 3597.0303456,
+      "following_event": "interruption",
+      "conservative_setup_and_unobserved_tail_shift_seconds": 3.3920680999999604,
+      "callback_records": 633
+    },
+    {
+      "number": 15,
+      "id": "D7",
+      "arm": "K1-R",
+      "first_data_row": 9,
+      "last_data_row": 49,
+      "leaf": "L0.0.0",
+      "recorded_last_callback_process_seconds": 1152.6346183,
+      "following_actual_process_seconds": 1197.0749387,
+      "following_event": "interruption",
+      "conservative_setup_and_unobserved_tail_shift_seconds": 44.44032040000002,
+      "callback_records": 41
+    },
+    {
+      "number": 16,
+      "id": "D7",
+      "arm": "VD-S",
+      "first_data_row": 11,
+      "last_data_row": 14,
+      "leaf": "L0.0.0",
+      "recorded_last_callback_process_seconds": 622.6053447,
+      "following_actual_process_seconds": 622.7237054,
+      "following_event": "child_native_bound_target",
+      "conservative_setup_and_unobserved_tail_shift_seconds": 0.1183606999999256,
+      "callback_records": 4
+    },
+    {
+      "number": 16,
+      "id": "D7",
+      "arm": "VD-S",
+      "first_data_row": 17,
+      "last_data_row": 50,
+      "leaf": "L0.0.0",
+      "recorded_last_callback_process_seconds": 1090.0535653,
+      "following_actual_process_seconds": 1197.0388634,
+      "following_event": "interruption",
+      "conservative_setup_and_unobserved_tail_shift_seconds": 106.98529810000014,
+      "callback_records": 34
+    }
+  ],
+  "optimizer_calls": 0,
+  "method": "Shift each buffered native-bound group so its last recorded improvement coincides with the subsequent actual process-clock event; this upper-bounds missing setup plus an unobserved tail",
+  "effect": "Conservative intermediate availability only. Whole-run endpoints, solver source, parameters and completed wall costs are unchanged."
+}

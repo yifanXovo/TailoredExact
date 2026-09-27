@@ -1,0 +1,307 @@
+[
+  {
+    "number": 1,
+    "id": "D3",
+    "arm": "DS-X",
+    "wall": 0.06300000008195639,
+    "UB": 0.12971944742960761,
+    "physical": {
+      "F": 0.12971944742960761,
+      "G": 0.052004892830040506,
+      "P": 0.5180970306637807,
+      "stations": 8,
+      "pickup": 26,
+      "drop": 19,
+      "maximum_duration": 2847.814434283473,
+      "original_T_feasible": true
+    },
+    "detail": {
+      "completed_seeds": 24,
+      "cross_checks": 47,
+      "cross_moves": 28
+    },
+    "route_sha256": "fd44838c651dbf5808764635d85012835551ef3b9942acfc137a4ffd7212b022",
+    "optimizer_calls": 0,
+    "result_sha256": "25b62cd7e0fcb3797713ecc87f517edf278b2451cc25ab476218d69947185651"
+  },
+  {
+    "number": 2,
+    "id": "D3",
+    "arm": "JDS-X",
+    "wall": 0.06199999991804361,
+    "UB": 0.0781153026105612,
+    "physical": {
+      "F": 0.0781153026105612,
+      "G": 0.042968395034803625,
+      "P": 0.23431271717171714,
+      "stations": 10,
+      "pickup": 28,
+      "drop": 28,
+      "maximum_duration": 2791.8948977954715,
+      "original_T_feasible": true
+    },
+    "detail": {
+      "accepted": 5,
+      "terminal_status": "motif_exhausted",
+      "placements": 3704,
+      "quantities": 4096,
+      "all_prefixes_independently_replayed": true,
+      "JI_UB": 0.10161510572447285,
+      "complete_first24": true,
+      "first24_logical_paths_equal": true,
+      "completed_seeds": 25,
+      "descent_complete": true,
+      "extra_seed_passes": 1,
+      "extra_seed_checks": 0,
+      "extra_seed_moves": 0,
+      "extra_seed_cross_moves": 0
+    },
+    "route_sha256": "384981b8e7111dd3b35f834edcde1171b771714b8c9b07376b6abacde8d20f42",
+    "optimizer_calls": 0,
+    "result_sha256": "436589ece8705ecf00d3eacbd05c43797832d81bfad3a44169122d442ae187aa"
+  },
+  {
+    "number": 3,
+    "id": "C2",
+    "arm": "DS-X",
+    "wall": 0.06199999991804361,
+    "UB": 0.8370914675547019,
+    "physical": {
+      "F": 0.8370914675547019,
+      "G": 0.2708414675547019,
+      "P": 3.775,
+      "stations": 4,
+      "pickup": 17,
+      "drop": 16,
+      "maximum_duration": 1777.013632206718,
+      "original_T_feasible": true
+    },
+    "detail": {
+      "completed_seeds": 24,
+      "cross_checks": 94,
+      "cross_moves": 22
+    },
+    "route_sha256": "5fa7c559530b94271e5b39ca1dff1cb69c9baedf707a73be5c2a908fd95fc371",
+    "optimizer_calls": 0,
+    "result_sha256": "66cf287f285add9c6acbdff9985eba7e9cb42ac157f3347db1b72d3c743cdf8b"
+  },
+  {
+    "number": 4,
+    "id": "C2",
+    "arm": "JDS-X",
+    "wall": 0.07799999974668026,
+    "UB": 0.8370914675547019,
+    "physical": {
+      "F": 0.8370914675547019,
+      "G": 0.2708414675547019,
+      "P": 3.775,
+      "stations": 4,
+      "pickup": 17,
+      "drop": 16,
+      "maximum_duration": 1777.013632206718,
+      "original_T_feasible": true
+    },
+    "detail": {
+      "accepted": 3,
+      "terminal_status": "motif_exhausted",
+      "placements": 8608,
+      "quantities": 2923,
+      "all_prefixes_independently_replayed": true,
+      "JI_UB": 0.8477620905303869,
+      "complete_first24": true,
+      "first24_logical_paths_equal": true,
+      "completed_seeds": 25,
+      "descent_complete": true,
+      "extra_seed_passes": 2,
+      "extra_seed_checks": 16,
+      "extra_seed_moves": 1,
+      "extra_seed_cross_moves": 0
+    },
+    "route_sha256": "5fa7c559530b94271e5b39ca1dff1cb69c9baedf707a73be5c2a908fd95fc371",
+    "optimizer_calls": 0,
+    "result_sha256": "007798ea897106cfe6db815defc09d5ffeb430ed2fd2ec0472660f4c5d20ec8c"
+  },
+  {
+    "number": 5,
+    "id": "D4",
+    "arm": "DS-X",
+    "wall": 0.07800000021234155,
+    "UB": 0.5920810174302062,
+    "physical": {
+      "F": 0.5920810174302062,
+      "G": 0.20273986559271162,
+      "P": 2.5956076789166307,
+      "stations": 7,
+      "pickup": 24,
+      "drop": 24,
+      "maximum_duration": 2397.2609700587523,
+      "original_T_feasible": true
+    },
+    "detail": {
+      "completed_seeds": 24,
+      "cross_checks": 131,
+      "cross_moves": 46
+    },
+    "route_sha256": "1b3ed2bc90426d24f9abeb8cd1ae167faabd5b87bb4e923b38d883dd6c3cb559",
+    "optimizer_calls": 0,
+    "result_sha256": "fb64905c520066b87d4d98d89bb0921eccd6368621a6cdbbeff28cf08a51d2ad"
+  },
+  {
+    "number": 6,
+    "id": "D4",
+    "arm": "JDS-X",
+    "wall": 0.07800000021234155,
+    "UB": 0.506422789224163,
+    "physical": {
+      "F": 0.506422789224163,
+      "G": 0.1810788634566511,
+      "P": 2.168959505116746,
+      "stations": 8,
+      "pickup": 29,
+      "drop": 29,
+      "maximum_duration": 2305.183129530976,
+      "original_T_feasible": true
+    },
+    "detail": {
+      "accepted": 5,
+      "terminal_status": "motif_exhausted",
+      "placements": 3312,
+      "quantities": 1408,
+      "all_prefixes_independently_replayed": true,
+      "JI_UB": 0.5400940999306827,
+      "complete_first24": true,
+      "first24_logical_paths_equal": true,
+      "completed_seeds": 25,
+      "descent_complete": true,
+      "extra_seed_passes": 1,
+      "extra_seed_checks": 3,
+      "extra_seed_moves": 0,
+      "extra_seed_cross_moves": 0
+    },
+    "route_sha256": "08baa4edddc368c3595ee22eb9e2f364f606ab5f8af3071f19ba74d00434e446",
+    "optimizer_calls": 0,
+    "result_sha256": "60b0b45c4c75e4fdd5181dae2bcc5bb71eb956daddcde627c3d4477a80f599bb"
+  },
+  {
+    "number": 7,
+    "id": "D6",
+    "arm": "DS-X",
+    "wall": 5.530999999959022,
+    "UB": 0.1600272806044027,
+    "physical": {
+      "F": 0.1600272806044027,
+      "G": 0.02687658257234963,
+      "P": 0.8876713202136872,
+      "stations": 30,
+      "pickup": 119,
+      "drop": 119,
+      "maximum_duration": 17989.946434173762,
+      "original_T_feasible": true
+    },
+    "detail": {
+      "completed_seeds": 24,
+      "cross_checks": 0,
+      "cross_moves": 0
+    },
+    "route_sha256": "2ada44195e0501604ce5873463213652754f7a13917a02018581b7a217f9b19c",
+    "optimizer_calls": 0,
+    "result_sha256": "1db60b57aed731f566c85ef094a4652edaea42f4b669ef6218df672390060825"
+  },
+  {
+    "number": 8,
+    "id": "D6",
+    "arm": "JDS-X",
+    "wall": 5.734000000171363,
+    "UB": 0.1600272806044027,
+    "physical": {
+      "F": 0.1600272806044027,
+      "G": 0.02687658257234963,
+      "P": 0.8876713202136872,
+      "stations": 30,
+      "pickup": 119,
+      "drop": 119,
+      "maximum_duration": 17989.946434173762,
+      "original_T_feasible": true
+    },
+    "detail": {
+      "accepted": 15,
+      "terminal_status": "motif_exhausted",
+      "placements": 252816,
+      "quantities": 38834,
+      "all_prefixes_independently_replayed": true,
+      "JI_UB": 0.3019504692743149,
+      "complete_first24": true,
+      "first24_logical_paths_equal": true,
+      "completed_seeds": 25,
+      "descent_complete": true,
+      "extra_seed_passes": 1,
+      "extra_seed_checks": 24,
+      "extra_seed_moves": 0,
+      "extra_seed_cross_moves": 0
+    },
+    "route_sha256": "2ada44195e0501604ce5873463213652754f7a13917a02018581b7a217f9b19c",
+    "optimizer_calls": 0,
+    "result_sha256": "8af9663065668f123d52c38ee1d78888b5d7aebb9f0a731cab71ac108e74e333"
+  },
+  {
+    "number": 9,
+    "id": "D7",
+    "arm": "DS-X",
+    "wall": 9.405999999959022,
+    "UB": 0.5445105902163795,
+    "physical": {
+      "F": 0.5445105902163795,
+      "G": 0.2273990839816184,
+      "P": 2.1140767082317407,
+      "stations": 39,
+      "pickup": 166,
+      "drop": 157,
+      "maximum_duration": 17919.266388280612,
+      "original_T_feasible": true
+    },
+    "detail": {
+      "completed_seeds": 24,
+      "cross_checks": 298,
+      "cross_moves": 178
+    },
+    "route_sha256": "998b45d335de86ee9093d6ad1d9392bfaeabd531950d0d0110d8a6e25306a569",
+    "optimizer_calls": 0,
+    "result_sha256": "cc703787f1fc0d323254a6c14a347f8e175167887de17e03637e48a2999ff681"
+  },
+  {
+    "number": 10,
+    "id": "D7",
+    "arm": "JDS-X",
+    "wall": 10.155999999959022,
+    "UB": 0.3807736874624573,
+    "physical": {
+      "F": 0.3807736874624573,
+      "G": 0.13338764645209003,
+      "P": 1.649240273402449,
+      "stations": 46,
+      "pickup": 183,
+      "drop": 183,
+      "maximum_duration": 17985.801546637405,
+      "original_T_feasible": true
+    },
+    "detail": {
+      "accepted": 25,
+      "terminal_status": "motif_exhausted",
+      "placements": 2318091,
+      "quantities": 179271,
+      "all_prefixes_independently_replayed": true,
+      "JI_UB": 0.442597489124397,
+      "complete_first24": true,
+      "first24_logical_paths_equal": true,
+      "completed_seeds": 25,
+      "descent_complete": true,
+      "extra_seed_passes": 3,
+      "extra_seed_checks": 41,
+      "extra_seed_moves": 2,
+      "extra_seed_cross_moves": 0
+    },
+    "route_sha256": "7293a636e08378f2301d7388fbfba3ba43ead58aab10c14dd1dc51eecbf34b6e",
+    "optimizer_calls": 0,
+    "result_sha256": "9aaba016433d92635184d62db0f4b85a6f3dab8e1c5a1798aa11ff5eadc6a07a"
+  }
+]

@@ -1,0 +1,117 @@
+{
+  "schema": "round53-f0-confirmation-freeze-v1",
+  "source_manifest": "results/gf_k1_interval_mip_vnext_round50/fixed_interval_state_manifest.csv",
+  "source_manifest_sha256": "5e1690e7ce3c068dac41ec040cacc2b02130773cce286318620d718a6f32e9dc",
+  "state_ids": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "C9"
+  ],
+  "state_count": 9,
+  "policies": [
+    "production-v0",
+    "F0-CLEAN"
+  ],
+  "physical_row_count": 18,
+  "total_process_cap_seconds": 1200,
+  "opens_only_if_development_passes": true,
+  "algorithm_change_after_opening_forbidden": true,
+  "states": [
+    {
+      "state_id": "C1",
+      "instance": "round39_small_hard_V12_M3_Q20_slot07_seed621538683",
+      "interval_id": "L0.0",
+      "state_kind": "child",
+      "role": "numerical-endpoint midpoint left child",
+      "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q20_slot07_seed621538683.txt",
+      "input_sha256": "963a8887d9c69a19824a0c250de4099a68b8c0e17288196b25cc46d74eb890b1"
+    },
+    {
+      "state_id": "C2",
+      "instance": "round39_small_hard_V12_M3_Q20_slot07_seed621538683",
+      "interval_id": "L0.1",
+      "state_kind": "child",
+      "role": "numerical-endpoint midpoint right child",
+      "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q20_slot07_seed621538683.txt",
+      "input_sha256": "963a8887d9c69a19824a0c250de4099a68b8c0e17288196b25cc46d74eb890b1"
+    },
+    {
+      "state_id": "C3",
+      "instance": "tight_T_seed3101",
+      "interval_id": "L0",
+      "state_kind": "parent",
+      "role": "tight3101 highest-Work K1-AM fixed interval",
+      "input_path": "reference/hard_stress/V20_M3/tight_T_seed3101.txt",
+      "input_sha256": "30aea92f1d6ce551ef8fffe15acdd3422a94b06e60ddd13ad5166149653d4ef3"
+    },
+    {
+      "state_id": "C4",
+      "instance": "high_imbalance_seed3202",
+      "interval_id": "L0.1.0",
+      "state_kind": "child",
+      "role": "high3202 highest-Work K1-AM fixed interval",
+      "input_path": "reference/hard_stress/V20_M3/high_imbalance_seed3202.txt",
+      "input_sha256": "902f4c46fa076f3e24b537737c5d58ffe833e6de21e900a42bb8846d3f76db50"
+    },
+    {
+      "state_id": "C5",
+      "instance": "moderate_seed3302",
+      "interval_id": "L0",
+      "state_kind": "parent",
+      "role": "moderate3302 highest-Work K1-AM fixed interval",
+      "input_path": "reference/hard_stress/V20_M3/moderate_seed3302.txt",
+      "input_sha256": "0b329df7711155131b33dfd14cfee8e85a17f60cc003863dbe004eb085c5f77e"
+    },
+    {
+      "state_id": "C6",
+      "instance": "round39_small_hard_V10_M1_Q30_slot02_seed1721447042",
+      "interval_id": "L0",
+      "state_kind": "parent",
+      "role": "additional confirmation K1 root V10 M1 Q30",
+      "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V10_M1_Q30_slot02_seed1721447042.txt",
+      "input_sha256": "065d0f472f63fb8fe2f6e82c0834e9622db12c64af879f96bd576660c39272c9"
+    },
+    {
+      "state_id": "C7",
+      "instance": "round39_small_hard_V12_M1_Q20_slot05_seed180890838",
+      "interval_id": "L0",
+      "state_kind": "parent",
+      "role": "additional confirmation K1 root V12 M1 Q20",
+      "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M1_Q20_slot05_seed180890838.txt",
+      "input_sha256": "397a0b3d7ac964f3f24356e64ba9b75b4cfa04febcbd869a1195bc26166f5feb"
+    },
+    {
+      "state_id": "C8",
+      "instance": "round39_small_medium_V10_M1_Q20_slot04_seed1035775879",
+      "interval_id": "L0",
+      "state_kind": "parent",
+      "role": "additional confirmation K1 root V10 M1 Q20",
+      "input_path": "reference/qualification_round39/small-medium/round39_small_medium_V10_M1_Q20_slot04_seed1035775879.txt",
+      "input_sha256": "57b3218f569c53d905efec2feada1bbfa870d7a689cf65c728ece40d8a99c898"
+    },
+    {
+      "state_id": "C9",
+      "instance": "round39_small_medium_V8_M3_Q30_slot03_seed1177285734",
+      "interval_id": "L0",
+      "state_kind": "parent",
+      "role": "additional confirmation K1 root V8 M3 Q30",
+      "input_path": "reference/qualification_round39/small-medium/round39_small_medium_V8_M3_Q30_slot03_seed1177285734.txt",
+      "input_sha256": "fcbe294480dcacf0303cc2dc12c948335d8d8c8f4f875de2feb58ae21ed83bbb"
+    }
+  ],
+  "gate": {
+    "false_certificates": 0,
+    "lost_baseline_certificates": 0,
+    "severe_regressions": 0,
+    "exact_work_geomean_max": 0.95,
+    "alternative": "certificate gain with nonworse aggregate Work/GI",
+    "capped_GI_nonworse": true,
+    "post_development_source_changes": 0
+  }
+}

@@ -9,7 +9,16 @@
 #include "GurobiProgress.hpp"
 #include "HgaTgbcRunner.hpp"
 #include "ProcessPhaseLedger.hpp"
+#include "NativeEvidenceJournal.hpp"
 #include "MipStartMapping.hpp"
+#include "Round50IntervalMip.hpp"
+#include "Round53CallbackIsolation.hpp"
+#include "Round52GurobiCutAdapter.hpp"
+#include "Round52TailoredCuts.hpp"
+#include "Round60Candidates.hpp"
+#include "Round61Candidates.hpp"
+#include "Round63TimeResource.hpp"
+#include "Round65Projection.hpp"
 
 #include <gurobi_c.h>
 
@@ -20,8 +29,10 @@
 #include <cstdlib>
 #include <filesystem>
 #include <fstream>
+#include <iomanip>
 #include <limits>
 #include <memory>
+#include <regex>
 #include <set>
 #include <sstream>
 #include <stdexcept>
@@ -52,6 +63,7 @@ struct GurobiApi {
     decltype(&GRBgeterrormsg) geterrormsg = nullptr;
     decltype(&GRBversion) version = nullptr;
     decltype(&GRBreadmodel) readmodel = nullptr;
+    decltype(&GRBcopymodel) copymodel = nullptr;
     decltype(&GRBfreemodel) freemodel = nullptr;
     decltype(&GRBgetenv) getenv = nullptr;
     decltype(&GRBsetintparam) setintparam = nullptr;
@@ -61,17 +73,25 @@ struct GurobiApi {
     decltype(&GRBgetdblparam) getdblparam = nullptr;
     decltype(&GRBsetcallbackfunc) setcallbackfunc = nullptr;
     decltype(&GRBcbget) cbget = nullptr;
+    decltype(&GRBcbsolution) cbsolution = nullptr;
+    decltype(&GRBcbcut) cbcut = nullptr;
+    decltype(&GRBcblazy) cblazy = nullptr;
     decltype(&GRBterminate) terminate = nullptr;
     decltype(&GRBoptimize) optimize = nullptr;
     decltype(&GRBgetintattr) getintattr = nullptr;
+    decltype(&GRBsetintattr) setintattr = nullptr;
     decltype(&GRBgetdblattr) getdblattr = nullptr;
+    decltype(&GRBgetintattrarray) getintattrarray = nullptr;
     decltype(&GRBgetstrattrelement) getstrattrelement = nullptr;
     decltype(&GRBgetdblattrarray) getdblattrarray = nullptr;
     decltype(&GRBgetcharattrarray) getcharattrarray = nullptr;
     decltype(&GRBsetdblattrarray) setdblattrarray = nullptr;
+    decltype(&GRBsetintattrarray) setintattrarray = nullptr;
     decltype(&GRBsetcharattrarray) setcharattrarray = nullptr;
+    decltype(&GRBaddconstr) addconstr = nullptr;
     decltype(&GRBupdatemodel) updatemodel = nullptr;
     decltype(&GRBwrite) write = nullptr;
+    decltype(&GRBgetconstrs) getconstrs = nullptr;
 };
 
 template <typename T>
@@ -195,17 +215,26 @@ bool loadGurobiApi(const SolveOptions& options,
     LOAD_GRB(getdblparam, "GRBgetdblparam");
     LOAD_GRB(setcallbackfunc, "GRBsetcallbackfunc");
     LOAD_GRB(cbget, "GRBcbget");
+    LOAD_GRB(cbsolution, "GRBcbsolution");
+    LOAD_GRB(cbcut, "GRBcbcut");
+    LOAD_GRB(cblazy, "GRBcblazy");
     LOAD_GRB(terminate, "GRBterminate");
     LOAD_GRB(optimize, "GRBoptimize");
     LOAD_GRB(getintattr, "GRBgetintattr");
+    LOAD_GRB(setintattr, "GRBsetintattr");
     LOAD_GRB(getdblattr, "GRBgetdblattr");
+    LOAD_GRB(getintattrarray, "GRBgetintattrarray");
     LOAD_GRB(getstrattrelement, "GRBgetstrattrelement");
     LOAD_GRB(getdblattrarray, "GRBgetdblattrarray");
     LOAD_GRB(getcharattrarray, "GRBgetcharattrarray");
     LOAD_GRB(setdblattrarray, "GRBsetdblattrarray");
+    LOAD_GRB(setintattrarray, "GRBsetintattrarray");
     LOAD_GRB(setcharattrarray, "GRBsetcharattrarray");
+    LOAD_GRB(addconstr, "GRBaddconstr");
     LOAD_GRB(updatemodel, "GRBupdatemodel");
     LOAD_GRB(write, "GRBwrite");
+    LOAD_GRB(getconstrs, "GRBgetconstrs");
+    LOAD_GRB(copymodel, "GRBcopymodel");
 #undef LOAD_GRB
     reason = "loaded";
     return true;
@@ -260,7 +289,103 @@ int startSilentGurobiEnvironment(
     return rc;
 }
 
+
+struct Round63NativeState {
+    Round63TimeData data;
+    Round63TimePoint point;
+    std::map<std::string,int> index;
+    std::vector<std::vector<std::vector<int>>> xindex;
+    std::vector<std::vector<int>> pindex;
+    std::vector<double> values;
+    std::set<std::string> seen;
+    std::ofstream cuts,points;
+    std::string mode;
+    long long queries=0,graphs=0,selected=0,submitted=0,api_success=0,duplicates=0,root_queries=0,status_reads=0,vector_reads=0;
+    double next_tree_node=1,seconds=0,setup_seconds=0,max_violation=0;
+    bool disabled=false;
+    std::string failure_reason;
+    double minimum_raw_x=0,minimum_raw_pickup=0;
+    void query(GurobiApi& api,void* cbdata) noexcept {
+        if(disabled||queries>=64||selected>=256)return;
+        const auto started=Clock::now();
+        struct Timer {double& seconds;Clock::time_point start;~Timer(){seconds+=std::chrono::duration<double>(Clock::now()-start).count();}} timer{seconds,started};
+        try {
+            double node=0;
+            if(api.cbget(cbdata,GRB_CB_MIPNODE,GRB_CB_MIPNODE_NODCNT,&node))throw std::runtime_error("resource node read");
+            if((node<.5&&root_queries>=16)||(node>=.5&&node<next_tree_node))return;
+            int status=0;++status_reads;
+            if(api.cbget(cbdata,GRB_CB_MIPNODE,GRB_CB_MIPNODE_STATUS,&status))throw std::runtime_error("resource status read");
+            if(status!=GRB_OPTIMAL)return;
+            if(node<.5)++root_queries;else next_tree_node=node+64;
+            ++queries;++vector_reads;
+            if(api.cbget(cbdata,GRB_CB_MIPNODE,GRB_CB_MIPNODE_REL,values.data()))throw std::runtime_error("resource relaxation read");
+            for(int k=0;k<data.M;++k)for(int i=0;i<=data.V;++i) {
+                if(i){point.pickup[k][i]=values.at(pindex[k][i]);minimum_raw_pickup=std::min(minimum_raw_pickup,point.pickup[k][i]);}
+                for(int j=0;j<=data.V;++j)if(i!=j){point.x[k][i][j]=values.at(xindex[k][i][j]);minimum_raw_x=std::min(minimum_raw_x,point.x[k][i][j]);}
+            }
+            for(int k=0;k<data.M&&selected<256;++k) {
+                ++graphs;auto cut=separateRound63Time(data,point,k);max_violation=std::max(max_violation,cut.violation);
+                if(!cut.violated)continue;
+                if(!acceptRound63TimeCut(data,cut,seen)){++duplicates;continue;}
+                ++selected;std::vector<int> indices;std::vector<double> coefficients;
+                for(const auto& [name,c]:cut.coefficients){indices.push_back(index.at(name));coefficients.push_back(c);}
+                int code=-1;
+                // The unmodified relaxation, original physical coefficients and global scope were checked above.
+                if(mode=="cuts"){++submitted;code=api.cbcut(cbdata,static_cast<int>(indices.size()),indices.data(),coefficients.data(),GRB_LESS_EQUAL,0);api_success+=code==0;}
+                writeRound63TimeCut(cut,cuts,queries,node,code);
+                for(const auto& [name,c]:cut.coefficients){(void)c;points<<queries<<','<<k<<','<<name<<','<<values.at(index.at(name))<<'\n';}
+                if(!cuts||!points||code>0)throw std::runtime_error("resource evidence or submission failed");
+            }
+        } catch(const std::exception& e) {disabled=true;failure_reason=e.what();}
+          catch(...) {disabled=true;failure_reason="unknown_resource_exception";}
+    }
+};
+
+bool evidenceParameterReadback(GurobiApi& api,GRBenv* env,NativeEvidenceScope& s) {
+    int threads=-1,seed=-1,presolve=-2;
+    double gap=-1,absgap=-1,feas=-1,intfeas=-1,optimality=-1;
+    const int rc=api.getintparam(env,GRB_INT_PAR_THREADS,&threads) |
+        api.getintparam(env,GRB_INT_PAR_SEED,&seed) |
+        api.getintparam(env,GRB_INT_PAR_PRESOLVE,&presolve) |
+        api.getdblparam(env,GRB_DBL_PAR_MIPGAP,&gap) |
+        api.getdblparam(env,GRB_DBL_PAR_MIPGAPABS,&absgap) |
+        api.getdblparam(env,GRB_DBL_PAR_FEASIBILITYTOL,&feas) |
+        api.getdblparam(env,GRB_DBL_PAR_INTFEASTOL,&intfeas) |
+        api.getdblparam(env,GRB_DBL_PAR_OPTIMALITYTOL,&optimality);
+    std::ostringstream o;o << std::setprecision(17) << "{\"read_return_code\":" << rc
+      << ",\"Threads\":" << threads << ",\"Seed\":" << seed << ",\"Presolve\":" << presolve
+      << ",\"MIPGap\":" << gap << ",\"MIPGapAbs\":" << absgap << ",\"FeasibilityTol\":" << feas
+      << ",\"IntFeasTol\":" << intfeas << ",\"OptimalityTol\":" << optimality << '}';
+    s.settings_json=o.str();
+    return rc==0 && threads==1 && seed==0 && presolve==-1 && gap==0 && absgap==0 &&
+        feas==1e-6 && intfeas==1e-5 && optimality==1e-6;
+}
+
 struct ProgressCallbackState {
+    std::shared_ptr<NativeEvidenceJournal> native_evidence;
+    const Instance* evidence_instance = nullptr;
+    const std::vector<std::string>* evidence_names = nullptr;
+    long long evidence_call = 0;
+    Round63NativeState* round63 = nullptr;
+    struct RootScalar {
+        long long callback_sequence = 0;
+        double node_count = 0.0;
+        double relaxation_objective = 0.0;
+        double incumbent = 0.0;
+        bool incumbent_available = false;
+    };
+    std::ostream* round59_samples = nullptr;
+    std::vector<std::string> round59_names;
+    std::set<int> round59_sampled;
+    long long round59_root_callback_sequence = 0;
+    std::vector<double> round59_first_root_values;
+    std::vector<double> round59_latest_root_values;
+    std::vector<std::pair<int, std::vector<double>>> round59_nonroot_values;
+    std::vector<RootScalar> round59_root_scalars;
+    bool round59_nonroot_observed = false;
+    double round59_sample_seconds = 0.0;
+    long long round59_sample_checks = 0;
+    int round59_sample_successes = 0;
     GurobiApi* api = nullptr;
     GurobiProgressStats progress;
     Clock::time_point telemetry_start = Clock::now();
@@ -272,16 +397,778 @@ struct ProgressCallbackState {
     double bound_target_tolerance = 1e-7;
     bool bound_target_reached = false;
     bool bound_target_termination_requested = false;
+    bool round53_mipnode_path_active = false;
+    bool round53_relaxation_vector_active = false;
+    bool round53_separator_active = false;
+    bool round53_cut_submission_active = false;
+    bool tailored_cut_active = false;
+    bool tailored_cut_disabled_after_failure = false;
+    const Instance* cut_instance = nullptr;
+    Round52SupportDurationSeparator* cut_separator = nullptr;
+    Round52CutManager* cut_manager = nullptr;
+    Round52CutSeparationScope cut_scope =
+        Round52CutSeparationScope::RootOnly;
+    int cut_support_rank = 3;
+    double cut_certificate_tolerance = 1e-7;
+    std::string cut_interval_id;
+    std::unordered_map<std::string, int> cut_variable_indices;
+    std::vector<std::string> cut_variable_names;
+    std::vector<double> cut_lower_bounds;
+    std::vector<double> cut_upper_bounds;
+    std::vector<double> cut_relaxation_values;
+    long long cut_nonoptimal_mipnode_callbacks = 0;
+    long long cut_relaxation_vector_failures = 0;
+    long long cut_adapter_failures = 0;
+    long long round53_mipnode_calls = 0;
+    long long round53_mipnode_status_reads = 0;
+    long long round53_relaxation_vector_reads = 0;
+    long long round53_separator_calls = 0;
+    long long round53_cut_submission_calls = 0;
+    double cut_callback_overhead_seconds = 0.0;
+
+    const Instance* candidate_instance = nullptr;
+    const SolveOptions* candidate_options = nullptr;
+    std::string candidate_mode = "off";
+    std::shared_ptr<Round61CandidateSession> round61_session;
+    std::function<bool(double)> round62_external_stop;
+    bool round62_external_termination_requested = false;
+    std::string candidate_model_identity;
+    double candidate_gamma_L = 0.0;
+    double candidate_gamma_U = 0.0;
+    double candidate_cutoff = 0.0;
+    int candidate_maximum_evaluations = 512;
+    int candidate_maximum_stations = 16;
+    SolverNeutralModelDomain candidate_domain;
+    SolverNeutralLinearModel candidate_linear_model;
+    bool candidate_data_triggered = false;
+    int candidate_root_triggers = 0;
+    bool candidate_disabled_after_failure = false;
+    long long candidate_trigger_count = 0;
+    double candidate_overhead_seconds = 0.0;
+    std::vector<FixedIntervalCandidateEvent> candidate_events;
+    std::set<std::string> candidate_hashes;
+    double candidate_best_verified_objective =
+        std::numeric_limits<double>::infinity();
+    struct SubmittedCandidate {
+        std::size_t event_index = 0;
+        std::vector<double> values;
+        double objective = 0.0;
+        bool confirmed = false;
+    };
+    std::vector<SubmittedCandidate> submitted_candidates;
+    const std::vector<double>* round68_start_values = nullptr;
+    const std::vector<char>* round68_start_types = nullptr;
+    bool round68_start_vector_observed = false;
+    bool round68_start_integer_vector_observed = false;
 };
 
 bool finiteNative(double value) {
     return std::isfinite(value) && std::fabs(value) < GRB_INFINITY;
 }
 
+bool readLinearModel(const GurobiApi& api,
+                     GRBmodel* model,
+                     int variables,
+                     int rows,
+                     SolverNeutralLinearModel& out) {
+    out = SolverNeutralLinearModel{};
+    if (!model || variables < 0 || rows < 0 || !api.getconstrs) return false;
+    double native_nonzeros = 0.0;
+    if (api.getdblattr(model, GRB_DBL_ATTR_DNUMNZS, &native_nonzeros) != 0 ||
+        !std::isfinite(native_nonzeros) || native_nonzeros < 0.0 ||
+        native_nonzeros > static_cast<double>(std::numeric_limits<int>::max())) {
+        return false;
+    }
+    const int expected_nonzeros = static_cast<int>(std::llround(native_nonzeros));
+    std::vector<int> starts(static_cast<std::size_t>(rows));
+    std::vector<int> indices(static_cast<std::size_t>(expected_nonzeros));
+    std::vector<double> coefficients(
+        static_cast<std::size_t>(expected_nonzeros));
+    int actual_nonzeros = 0;
+    if (rows > 0 && api.getconstrs(
+            model, &actual_nonzeros, starts.data(), indices.data(),
+            coefficients.data(), 0, rows) != 0) {
+        return false;
+    }
+    if (actual_nonzeros < 0 || actual_nonzeros > expected_nonzeros) return false;
+    indices.resize(static_cast<std::size_t>(actual_nonzeros));
+    coefficients.resize(static_cast<std::size_t>(actual_nonzeros));
+    out.variable_count = variables;
+    out.row_starts = std::move(starts);
+    out.row_starts.push_back(actual_nonzeros);
+    out.column_indices = std::move(indices);
+    out.coefficients = std::move(coefficients);
+    out.senses.resize(static_cast<std::size_t>(rows));
+    out.rhs.resize(static_cast<std::size_t>(rows));
+    return rows == 0 ||
+        (api.getcharattrarray(model, GRB_CHAR_ATTR_SENSE, 0, rows,
+                             out.senses.data()) == 0 &&
+         api.getdblattrarray(model, GRB_DBL_ATTR_RHS, 0, rows,
+                            out.rhs.data()) == 0);
+}
+
+void writeRound68StartEvidence(const FixedIntervalMipRequest& request,
+                               const FixedIntervalMipOutcome& out) {
+    std::ofstream file(request.native_log_path.string() + ".round68.start.json");
+    if (!file) throw std::runtime_error("round68_start_evidence_open_failed");
+    file << std::setprecision(17) << std::boolalpha
+         << "{\"source\":" << std::quoted(request.verified_start_source)
+         << ",\"leaf\":" << std::quoted(request.leaf_id)
+         << ",\"model_sha256\":" << std::quoted(request.canonical_model_fingerprint)
+         << ",\"retained_model\":" << out.in_memory_model_reused
+         << ",\"status\":" << std::quoted(out.warm_start_status)
+         << ",\"mapping_complete\":" << out.warm_start_mapping_complete
+         << ",\"rows_valid\":" << out.round68_start_rows_valid
+         << ",\"checked_rows\":" << out.round68_start_checked_rows
+         << ",\"maximum_row_violation\":" << out.round68_start_maximum_row_violation
+         << ",\"objective_valid\":" << out.round68_start_objective_valid
+         << ",\"objective\":" << out.round68_start_objective
+         << ",\"submitted\":" << out.warm_start_submitted
+         << ",\"readback_valid\":" << out.round68_start_readback_valid
+         << ",\"exact_vector_observed_in_mipsol\":" << out.round68_start_vector_observed
+         << ",\"integer_vector_observed_in_mipsol\":" << out.round68_start_integer_vector_observed
+         << ",\"mapping_validation_submission_seconds\":" << out.round68_start_seconds
+         << ",\"native_deadline_remaining_at_optimize\":" << out.round68_effective_native_deadline
+         << "}\n";
+    if (!file) throw std::runtime_error("round68_start_evidence_write_failed");
+}
+
+bool prepareRound68Start(const GurobiApi& api, GRBmodel* model,
+                        const Instance& instance, const SolveOptions& options,
+                        const FixedIntervalMipRequest& request,
+                        FixedIntervalMipOutcome& out,
+                        std::vector<double>& submitted_values,
+                        std::vector<char>& submitted_types) {
+    const auto started = Clock::now();
+    auto checked = [](int code) {
+        if (code != 0) throw std::runtime_error("native_api_code_" + std::to_string(code));
+    };
+    auto finish = [&]() {
+        out.round68_start_seconds = std::chrono::duration<double>(Clock::now()-started).count();
+        writeRound68StartEvidence(request, out);
+    };
+    out.warm_start_candidate_available = true;
+    try {
+        if (!options.round68_verified_start || options.plain_baseline ||
+            options.round65_budget || out.lp_relaxation ||
+            request.interval_mip_policy != "round55-vd-p")
+            throw std::runtime_error("requires_isolated_vdp_mip");
+        // An obsolete explicit Start must not silently survive an ineligible
+        // replacement. Native reuse of a previous solution is separate.
+        checked(api.setintattr(model, GRB_INT_ATTR_NUMSTART, 0));
+        checked(api.updatemodel(model));
+        int variables=0, rows=0, general=0, quadratic=0;
+        checked(api.getintattr(model, GRB_INT_ATTR_NUMVARS, &variables));
+        checked(api.getintattr(model, GRB_INT_ATTR_NUMCONSTRS, &rows));
+        checked(api.getintattr(model, GRB_INT_ATTR_NUMGENCONSTRS, &general));
+        checked(api.getintattr(model, GRB_INT_ATTR_NUMQCONSTRS, &quadratic));
+        if (variables <= 0 || general || quadratic)
+            throw std::runtime_error("unexpected_non_linear_model");
+        SolverNeutralModelDomain domain;
+        domain.names.resize(variables);domain.lower_bounds.resize(variables);
+        domain.upper_bounds.resize(variables);domain.variable_types.resize(variables);
+        checked(api.getdblattrarray(model, GRB_DBL_ATTR_LB, 0, variables, domain.lower_bounds.data()));
+        checked(api.getdblattrarray(model, GRB_DBL_ATTR_UB, 0, variables, domain.upper_bounds.data()));
+        checked(api.getcharattrarray(model, GRB_CHAR_ATTR_VTYPE, 0, variables, domain.variable_types.data()));
+        for (int i=0;i<variables;++i) {
+            char* name=nullptr;checked(api.getstrattrelement(model, GRB_STR_ATTR_VARNAME, i, &name));
+            if (!name) throw std::runtime_error("missing_native_column_name");
+            domain.names[i]=name;
+        }
+        const auto routes=normalizeRound61Routes(instance, options.lambda, request.verified_start_routes);
+        const auto mapped=mapVerifiedRoutesToCanonicalModel(instance, options, routes,
+            request.verified_start_source, request.gamma_L, request.gamma_U, request.verified_cutoff, domain);
+        out.warm_start_mapping_seconds=mapped.mapping_seconds;
+        out.warm_start_mapping_complete=mapped.complete;
+        out.round68_start_objective=mapped.objective;
+        if (!mapped.complete) {
+            if (mapped.failure_reason=="verified_start_outside_static_gini_interval" ||
+                mapped.failure_reason=="verified_start_violates_non_strict_cutoff") {
+                out.warm_start_status="ineligible:"+mapped.failure_reason;
+                finish();return true;
+            }
+            throw std::runtime_error("eligible_mapping_rejected:"+mapped.failure_reason);
+        }
+        SolverNeutralLinearModel linear;
+        if (!readLinearModel(api, model, variables, rows, linear))
+            throw std::runtime_error("linear_matrix_read_failed");
+        const auto residual=validateCandidateLinearResidual(linear,mapped.values,1e-7);
+        out.round68_start_rows_valid=residual.checked && residual.valid;
+        out.round68_start_checked_rows=residual.checked_rows;
+        out.round68_start_maximum_row_violation=residual.maximum_violation;
+        if (!out.round68_start_rows_valid)
+            throw std::runtime_error("eligible_linear_residual_rejected:"+residual.failure_reason);
+        std::vector<double> objective(variables);
+        double constant=0;int sense=0, quadratic_nonzeros=0;
+        checked(api.getdblattrarray(model,GRB_DBL_ATTR_OBJ,0,variables,objective.data()));
+        checked(api.getdblattr(model,GRB_DBL_ATTR_OBJCON,&constant));
+        checked(api.getintattr(model,GRB_INT_ATTR_MODELSENSE,&sense));
+        checked(api.getintattr(model,GRB_INT_ATTR_NUMQNZS,&quadratic_nonzeros));
+        double native_objective=constant;
+        for (int i=0;i<variables;++i) native_objective+=objective[i]*mapped.values[i];
+        out.round68_start_objective_valid=sense==GRB_MINIMIZE && quadratic_nonzeros==0 &&
+            std::isfinite(native_objective) && std::fabs(native_objective-mapped.objective)<=1e-7;
+        if (!out.round68_start_objective_valid) throw std::runtime_error("eligible_objective_mismatch");
+        checked(api.setintattr(model,GRB_INT_ATTR_NUMSTART,1));
+        checked(api.setintparam(api.getenv(model),GRB_INT_PAR_STARTNUMBER,0));
+        checked(api.updatemodel(model));
+        checked(api.setdblattrarray(model,GRB_DBL_ATTR_START,0,variables,
+                                   const_cast<double*>(mapped.values.data())));
+        out.warm_start_submitted=true;
+        checked(api.updatemodel(model));
+        std::vector<double> readback(variables);
+        checked(api.getdblattrarray(model,GRB_DBL_ATTR_START,0,variables,readback.data()));
+        out.round68_start_readback_valid=true;
+        for (int i=0;i<variables;++i)
+            if (!std::isfinite(readback[i]) || std::fabs(readback[i]-mapped.values[i])>1e-12)
+                out.round68_start_readback_valid=false;
+        if (!out.round68_start_readback_valid) throw std::runtime_error("start_readback_mismatch");
+        std::ofstream values(request.native_log_path.string()+".round68.start.values.csv");
+        values<<std::setprecision(17)<<"variable,type,value,readback\n";
+        for(int i=0;i<variables;++i)
+            values<<domain.names[i]<<','<<domain.variable_types[i]<<','<<mapped.values[i]<<','<<readback[i]<<'\n';
+        values.close();
+        if(!values)throw std::runtime_error("start_vector_evidence_write_failed");
+        submitted_values=mapped.values;submitted_types=domain.variable_types;
+        out.warm_start_status="submitted_pending_native_log_evidence";
+        finish();return true;
+    } catch (const std::exception& error) {
+        out.failure_reason="round68_start_"+std::string(error.what());
+        out.warm_start_status=out.failure_reason;
+        finish();return false;
+    }
+}
+
+bool parseSingleIndex(const std::string& name,
+                      const std::string& prefix,
+                      int& index) {
+    if (name.rfind(prefix, 0) != 0 || name.size() == prefix.size()) {
+        return false;
+    }
+    const std::string token = name.substr(prefix.size());
+    if (!std::all_of(token.begin(), token.end(), [](unsigned char ch) {
+            return ch >= '0' && ch <= '9';
+        })) {
+        return false;
+    }
+    index = std::stoi(token);
+    return true;
+}
+
+bool parseTwoIndices(const std::string& name,
+                     const std::string& prefix,
+                     int& first,
+                     int& second) {
+    if (name.rfind(prefix, 0) != 0) return false;
+    const std::string rest = name.substr(prefix.size());
+    const std::size_t separator = rest.find('_');
+    if (separator == std::string::npos || separator == 0 ||
+        separator + 1 >= rest.size()) {
+        return false;
+    }
+    const std::string a = rest.substr(0, separator);
+    const std::string b = rest.substr(separator + 1);
+    const auto digits = [](const std::string& value) {
+        return !value.empty() && std::all_of(
+            value.begin(), value.end(), [](unsigned char ch) {
+                return ch >= '0' && ch <= '9';
+            });
+    };
+    if (!digits(a) || !digits(b)) return false;
+    first = std::stoi(a);
+    second = std::stoi(b);
+    return true;
+}
+
+void attemptRound60Candidate(
+    ProgressCallbackState& state,
+    void* cbdata,
+    int where,
+    const std::string& trigger,
+    const std::vector<double>* relaxation) {
+    if (!state.candidate_instance || !state.candidate_options ||
+        state.candidate_mode == "off" ||
+        state.candidate_disabled_after_failure) {
+        return;
+    }
+    const auto started = Clock::now();
+    FixedIntervalCandidateEvent event;
+    event.event_sequence = ++state.candidate_trigger_count;
+    event.callback_where = where;
+    event.trigger = trigger;
+    event.mode = state.candidate_mode;
+    event.callback_elapsed_seconds = std::chrono::duration<double>(
+        started - state.telemetry_start).count();
+
+    Round60ConstructionInput construction;
+    construction.source = relaxation
+        ? "round60_root_relaxation_guided_repair"
+        : "round60_early_data_target_greedy";
+    construction.model_identity = state.candidate_model_identity;
+    construction.maximum_evaluations = state.candidate_maximum_evaluations;
+    construction.maximum_stations = state.candidate_maximum_stations;
+    construction.desired_inventory = state.candidate_instance->target;
+    if (relaxation && relaxation->size() ==
+            state.candidate_domain.names.size()) {
+        for (std::size_t column = 0; column < relaxation->size(); ++column) {
+            const std::string& name = state.candidate_domain.names[column];
+            const double value = (*relaxation)[column];
+            int station = 0;
+            if (parseSingleIndex(name, "Y_", station) && station >= 1 &&
+                station <= state.candidate_instance->V &&
+                std::isfinite(value)) {
+                construction.desired_inventory[station] =
+                    static_cast<int>(std::llround(value));
+            }
+            if ((name.rfind("x_", 0) == 0 ||
+                 name.rfind("z_", 0) == 0) && std::isfinite(value)) {
+                construction.relaxation_values.emplace(name, value);
+            }
+        }
+    }
+
+    Round60ConstructionResult built;
+    if(state.round61_session) {
+        construction.source = "PREFIX_precomputed_once";
+        built.candidate = state.round61_session->archive;
+        built.generated = built.candidate.verified;
+        built.generation_seconds = state.round61_session->construction_seconds;
+        built.reason = "precomputed_verified_archive";
+        event.mode = state.round61_session->mode;
+    } else built = constructRound60BrpCandidate(
+        *state.candidate_instance, state.candidate_options->lambda, construction);
+    event.source = construction.source;
+    event.generated = built.generated;
+    event.objective_evaluations = built.objective_evaluations;
+    event.generation_seconds = built.generation_seconds;
+    event.status = built.reason;
+    if (!built.generated) {
+        event.total_seconds = std::chrono::duration<double>(
+            Clock::now() - started).count();
+        state.candidate_overhead_seconds += event.total_seconds;
+        state.candidate_events.push_back(std::move(event));
+        return;
+    }
+
+    event.independently_verified = built.candidate.verified;
+    event.verification_seconds = built.candidate.verification_seconds;
+    event.candidate_objective = built.candidate.objective;
+    event.content_sha256 = built.candidate.content_sha256;
+    if (!state.candidate_hashes.insert(event.content_sha256).second) {
+        event.status = "duplicate_candidate_hash_not_resubmitted";
+        event.total_seconds = std::chrono::duration<double>(
+            Clock::now() - started).count();
+        state.candidate_overhead_seconds += event.total_seconds;
+        state.candidate_events.push_back(std::move(event));
+        return;
+    }
+    const double cutoff_tolerance = 1e-8 * std::max(
+        {1.0, std::fabs(state.candidate_cutoff),
+         std::fabs(event.candidate_objective)});
+    event.strictly_improves_frozen_cutoff =
+        event.candidate_objective < state.candidate_cutoff - cutoff_tolerance;
+    const double published_tolerance = 1e-8 * std::max(
+        {1.0, std::fabs(event.candidate_objective),
+         std::isfinite(state.candidate_best_verified_objective)
+             ? std::fabs(state.candidate_best_verified_objective) : 1.0});
+    const bool improves_published_candidate =
+        !std::isfinite(state.candidate_best_verified_objective) ||
+        event.candidate_objective <
+            state.candidate_best_verified_objective - published_tolerance;
+    double native_incumbent = GRB_INFINITY;
+    if(state.round61_session) state.api->cbget(cbdata,where,
+        where==GRB_CB_MIP ? GRB_CB_MIP_OBJBST : GRB_CB_MIPNODE_OBJBST,&native_incumbent);
+    event.native_incumbent_before_available = finiteNative(native_incumbent);
+    if(event.native_incumbent_before_available) event.native_incumbent_before_submission = native_incumbent;
+    const bool cutoff_admissible = state.round61_session
+        ? event.candidate_objective <= state.candidate_cutoff + cutoff_tolerance
+        : event.strictly_improves_frozen_cutoff;
+    const bool admitted = state.round61_session
+        ? round61ShouldSubmitCandidate(event.candidate_objective,
+            state.candidate_cutoff,event.native_incumbent_before_available,native_incumbent)
+        : event.strictly_improves_frozen_cutoff && improves_published_candidate;
+    if (!admitted) {
+        event.status = !cutoff_admissible
+            ? (state.round61_session ? "verified_exceeds_current_model_cutoff"
+                                     : "verified_but_not_strictly_better_than_frozen_cutoff")
+            : (state.round61_session ? "verified_archive_not_better_than_current_native_incumbent"
+                                     : "verified_but_not_strictly_better_than_published_candidate");
+        event.total_seconds = std::chrono::duration<double>(
+            Clock::now() - started).count();
+        state.candidate_overhead_seconds += event.total_seconds;
+        state.candidate_events.push_back(std::move(event));
+        return;
+    }
+    if(!state.round61_session) state.candidate_best_verified_objective = event.candidate_objective;
+    const SolverNeutralMipStart mapped = mapVerifiedRoutesToCanonicalModel(
+        *state.candidate_instance, *state.candidate_options,
+        built.candidate.routes, construction.source,
+        state.candidate_gamma_L, state.candidate_gamma_U,
+        state.candidate_cutoff, state.candidate_domain);
+    event.mapping_seconds = mapped.mapping_seconds;
+    event.mapping_complete = mapped.complete;
+    event.bounds_valid = mapped.bounds_valid;
+    event.integrality_valid = mapped.integrality_valid;
+    if (!mapped.complete) {
+        event.status = "mapping_rejected:" + mapped.failure_reason;
+        event.total_seconds = std::chrono::duration<double>(
+            Clock::now() - started).count();
+        state.candidate_overhead_seconds += event.total_seconds;
+        state.candidate_events.push_back(std::move(event));
+        return;
+    }
+
+    const auto residual_started = Clock::now();
+    const CandidateLinearResidual residual =
+        validateCandidateLinearResidual(
+            state.candidate_linear_model, mapped.values, 1e-7);
+    event.residual_check_seconds = std::chrono::duration<double>(
+        Clock::now() - residual_started).count();
+    event.linear_constraints_checked = residual.checked;
+    event.linear_constraints_valid = residual.valid;
+    event.linear_rows_checked = residual.checked_rows;
+    event.violated_linear_rows = residual.violated_rows;
+    event.maximum_linear_violation = residual.maximum_violation;
+    if (!residual.valid) {
+        event.status = "current_mip_residual_rejected:" +
+            residual.failure_reason;
+        event.total_seconds = std::chrono::duration<double>(
+            Clock::now() - started).count();
+        state.candidate_overhead_seconds += event.total_seconds;
+        state.candidate_events.push_back(std::move(event));
+        return;
+    }
+
+    if(state.round61_session) state.candidate_best_verified_objective = event.candidate_objective;
+    event.status = state.candidate_mode == "dry"
+        ? "verified_mapped_dry_run" : "verified_mapped_pending_submission";
+    if (state.candidate_mode == "inject") {
+        double native_objective = GRB_INFINITY;
+        event.submission_return_code = state.api->cbsolution(
+            cbdata, mapped.values.data(), &native_objective);
+        event.submitted = event.submission_return_code == 0;
+        event.native_objective_returned = finiteNative(native_objective);
+        event.native_objective = event.native_objective_returned
+            ? native_objective : 0.0;
+        if (!event.submitted) {
+            event.status = "GRBcbsolution_failed";
+            event.acceptance = "submission_failed";
+            state.candidate_disabled_after_failure = true;
+        } else if (event.native_objective_returned) {
+            event.status = "submitted_and_immediately_processed";
+            event.acceptance = "confirmed_by_finite_GRBcbsolution_objective";
+        } else {
+            event.status = "submitted_for_delayed_processing";
+            event.acceptance = "unknown_pending_exact_vector_observation";
+        }
+    }
+    event.total_seconds = std::chrono::duration<double>(
+        Clock::now() - started).count();
+    state.candidate_overhead_seconds += event.total_seconds;
+    state.candidate_events.push_back(event);
+    if (event.submitted) {
+        ProgressCallbackState::SubmittedCandidate submitted;
+        submitted.event_index = state.candidate_events.size() - 1;
+        submitted.values = mapped.values;
+        submitted.objective = mapped.objective;
+        submitted.confirmed = event.native_objective_returned;
+        state.submitted_candidates.push_back(std::move(submitted));
+    }
+}
+
+void attemptRound60CandidateNoexcept(
+    ProgressCallbackState& state,
+    void* cbdata,
+    int where,
+    const std::string& trigger,
+    const std::vector<double>* relaxation) noexcept {
+    try {
+        attemptRound60Candidate(
+            state, cbdata, where, trigger, relaxation);
+    } catch (...) {
+        state.candidate_disabled_after_failure = true;
+        try {
+            FixedIntervalCandidateEvent event;
+            event.event_sequence = ++state.candidate_trigger_count;
+            event.callback_where = where;
+            event.trigger = trigger;
+            event.mode = state.candidate_mode;
+            event.status =
+                "candidate_exception_caught_and_heuristic_disabled";
+            event.acceptance = "not_submitted";
+            state.candidate_events.push_back(std::move(event));
+        } catch (...) {
+            // Never allow optional research telemetry to escape Gurobi's C
+            // callback boundary.
+        }
+    }
+}
+
 int __stdcall progressAndBoundTargetCallback(
     GRBmodel* model, void* cbdata, int where, void* usrdata) {
     auto* state = static_cast<ProgressCallbackState*>(usrdata);
-    if (!state || !state->api || where != GRB_CB_MIP) return 0;
+    if (!state || !state->api) return 0;
+    if(where==GRB_CB_MIPSOL && state->native_evidence && state->native_evidence->enabled()) {
+        // The full original-model vector is a documented MIPSOL callback read.
+        // All new exceptions are contained inside the C callback boundary.
+        try {
+            const auto& names=*state->evidence_names;
+            std::vector<double> x(names.size());
+            if(x.empty() || state->api->cbget(cbdata,where,GRB_CB_MIPSOL_SOL,x.data()))
+                state->native_evidence->failure("MIPSOL_vector_read_failed");
+            else {
+                std::unordered_map<std::string,double> values;
+                for(std::size_t i=0;i<x.size();++i) {
+                    if(!std::isfinite(x[i]) || names[i].empty() || !values.emplace(names[i],x[i]).second)
+                        throw std::runtime_error("MIPSOL_original_vector_identity_invalid");
+                }
+                state->native_evidence->witness(
+                    reconstructCanonicalCompactRoutes(*state->evidence_instance,values),
+                    "native_MIPSOL_verified_original_routes",state->evidence_call);
+            }
+        } catch(const std::exception& e) {state->native_evidence->failure(e.what());}
+          catch(...) {state->native_evidence->failure("MIPSOL_unknown_observer_exception");}
+    }
+    if (where==GRB_CB_MIPSOL && state->round68_start_values &&
+        state->round68_start_types && !state->round68_start_vector_observed) {
+        const auto& start=*state->round68_start_values;
+        const auto& types=*state->round68_start_types;
+        std::vector<double> solution(start.size());
+        if (!solution.empty() && types.size()==start.size() &&
+            state->api->cbget(cbdata,where,GRB_CB_MIPSOL_SOL,solution.data())==0) {
+            bool same=true, same_integer=true;
+            for (std::size_t i=0;i<solution.size();++i) {
+                const bool equal=std::isfinite(solution[i]) && std::fabs(solution[i]-start[i])<=1e-6;
+                same= same && equal;
+                if (types[i]=='B' || types[i]=='I') same_integer=same_integer && equal;
+            }
+            state->round68_start_vector_observed|=same;
+            state->round68_start_integer_vector_observed|=same_integer;
+        }
+    }
+    if (where==GRB_CB_MIPNODE && state->round63) state->round63->query(*state->api,cbdata);
+    if(state->round61_session && where==GRB_CB_MIP && !state->submitted_candidates.empty()) {
+        double incumbent=GRB_INFINITY;
+        if(state->api->cbget(cbdata,where,GRB_CB_MIP_OBJBST,&incumbent)==0 && finiteNative(incumbent))
+            for(const auto& submitted:state->submitted_candidates) {
+                auto& e=state->candidate_events[submitted.event_index];
+                if(incumbent<=submitted.objective+1e-8 &&
+                    (!e.native_incumbent_before_available || incumbent<e.native_incumbent_before_submission-1e-8))
+                    e.native_incumbent_change_observed=true;
+            }
+    }
+    if (where == GRB_CB_MIP && state->candidate_mode != "off" &&
+        !state->candidate_data_triggered &&
+        !state->candidate_disabled_after_failure) {
+        state->candidate_data_triggered = true;
+        attemptRound60CandidateNoexcept(
+            *state, cbdata, where,
+            "first_eligible_MIP_before_incumbent", nullptr);
+    }
+    if (where == GRB_CB_MIPSOL && !state->submitted_candidates.empty()) {
+        std::vector<double> solution(state->candidate_domain.names.size());
+        if (!solution.empty() && state->api->cbget(
+                cbdata, where, GRB_CB_MIPSOL_SOL, solution.data()) == 0) {
+            for (auto& submitted : state->submitted_candidates) {
+                if ((submitted.confirmed && !state->round61_session) ||
+                    submitted.values.size() != solution.size() ||
+                    submitted.event_index >= state->candidate_events.size()) {
+                    continue;
+                }
+                double maximum_difference = 0.0;
+                for (std::size_t index = 0; index < solution.size(); ++index) {
+                    maximum_difference = std::max(
+                        maximum_difference,
+                        std::fabs(solution[index] - submitted.values[index]));
+                }
+                if (maximum_difference <= 1e-6) {
+                    submitted.confirmed = true;
+                    auto& event = state->candidate_events[
+                        submitted.event_index];
+                    event.acceptance =
+                        "confirmed_exact_vector_observed_in_MIPSOL";
+                    event.exact_vector_observed_in_mipsol = true;
+                    event.status = "submitted_and_observed_in_MIPSOL";
+                }
+            }
+        }
+    }
+    if (where == GRB_CB_MIPNODE &&
+        (state->round59_samples || (state->candidate_mode != "off" &&
+            !state->round61_session && state->candidate_root_triggers < 2 &&
+            !state->candidate_disabled_after_failure))) {
+        const auto sample_started = Clock::now();
+        if (state->round59_samples) ++state->round59_sample_checks;
+        int status = 0;
+        double node = 0;
+        if (state->api->cbget(cbdata, where, GRB_CB_MIPNODE_STATUS, &status) == 0 &&
+            status == GRB_OPTIMAL &&
+            state->api->cbget(cbdata, where, GRB_CB_MIPNODE_NODCNT, &node) == 0) {
+            const int sampling_bucket = node < 10 ? 1 : node < 100 ? 2 : 3;
+            const bool need_values = node < .5 ||
+                (state->round59_samples && !state->round59_sampled.count(sampling_bucket));
+            std::vector<double> values(need_values ? state->round59_names.size() : 0);
+            if (need_values && state->api->cbget(
+                    cbdata, where, GRB_CB_MIPNODE_REL, values.data()) == 0) {
+                if (node < 0.5) {
+                    ++state->round59_root_callback_sequence;
+                    if (state->round59_samples) {
+                        if (state->round59_first_root_values.empty()) {
+                            state->round59_first_root_values = values;
+                        }
+                        state->round59_latest_root_values = values;
+                        ProgressCallbackState::RootScalar scalar;
+                        scalar.callback_sequence =
+                            state->round59_root_callback_sequence;
+                        scalar.node_count = node;
+                        state->api->cbget(
+                            cbdata, where, GRB_CB_MIPNODE_OBJBND,
+                            &scalar.relaxation_objective);
+                        scalar.incumbent_available = state->api->cbget(
+                            cbdata, where, GRB_CB_MIPNODE_OBJBST,
+                            &scalar.incumbent) == 0 &&
+                            finiteNative(scalar.incumbent);
+                        state->round59_root_scalars.push_back(scalar);
+                    }
+                    if (state->candidate_mode != "off" &&
+                        !state->round61_session &&
+                        state->candidate_root_triggers < 2 &&
+                        !state->candidate_disabled_after_failure) {
+                        ++state->candidate_root_triggers;
+                        attemptRound60CandidateNoexcept(
+                            *state, cbdata, where,
+                            "optimal_root_MIPNODE_cut_pass_" +
+                                std::to_string(
+                                    state->round59_root_callback_sequence),
+                            &values);
+                    }
+                } else if (state->round59_samples) {
+                    state->round59_nonroot_observed = true;
+                    const int bucket = node < 10 ? 1 : node < 100 ? 2 : 3;
+                    if (!state->round59_sampled.count(bucket)) {
+                        state->round59_sampled.insert(bucket);
+                        state->round59_nonroot_values.push_back(
+                            {bucket, values});
+                    }
+                }
+                if (state->round59_samples) {
+                    ++state->round59_sample_successes;
+                }
+            }
+        }
+        if (state->round59_samples) {
+            state->round59_sample_seconds +=
+                std::chrono::duration<double>(Clock::now()-sample_started).count();
+        }
+    }
+    if (where == GRB_CB_MIPNODE && state->round53_mipnode_path_active &&
+        !state->tailored_cut_disabled_after_failure) {
+        const auto callback_started = Clock::now();
+        ++state->round53_mipnode_calls;
+        try {
+            int node_status = 0;
+            double node_count = 0.0;
+            ++state->round53_mipnode_status_reads;
+            const int status_rc = state->api->cbget(
+                cbdata, where, GRB_CB_MIPNODE_STATUS, &node_status);
+            const int node_rc = state->api->cbget(
+                cbdata, where, GRB_CB_MIPNODE_NODCNT, &node_count);
+            if (status_rc != 0 || node_status != GRB_OPTIMAL) {
+                ++state->cut_nonoptimal_mipnode_callbacks;
+            } else if (node_rc != 0 || !std::isfinite(node_count)) {
+                ++state->cut_relaxation_vector_failures;
+            } else {
+                const bool root_node = node_count < 0.5;
+                if (state->round53_separator_active &&
+                    state->round53_relaxation_vector_active &&
+                    round52SeparationPermitted(
+                        state->cut_scope, root_node, true)) {
+                    state->cut_manager->recordCallback(root_node);
+                    if (state->cut_relaxation_values.size() !=
+                        state->cut_variable_names.size()) {
+                        state->cut_relaxation_values.resize(
+                            state->cut_variable_names.size());
+                    }
+                    ++state->round53_relaxation_vector_reads;
+                    const int relaxation_rc = state->api->cbget(
+                        cbdata, where, GRB_CB_MIPNODE_REL,
+                        state->cut_relaxation_values.data());
+                    if (relaxation_rc != 0) {
+                        ++state->cut_relaxation_vector_failures;
+                    } else {
+                        Round52CutSeparationInput input;
+                        input.instance = state->cut_instance;
+                        input.interval_id = state->cut_interval_id;
+                        input.node_context = root_node
+                            ? "optimal_root_MIPNODE"
+                            : "optimal_tree_MIPNODE";
+                        input.root_node = root_node;
+                        input.optimal_relaxation = true;
+                        input.maximum_support_rank = state->cut_support_rank;
+                        input.certificate_tolerance =
+                            state->cut_certificate_tolerance;
+                        input.model_variable_mapping =
+                            state->cut_variable_indices;
+                        for (std::size_t index = 0;
+                             index < state->cut_variable_names.size(); ++index) {
+                            const std::string& name =
+                                state->cut_variable_names[index];
+                            if (name.rfind("p_", 0) != 0 &&
+                                name.rfind("z_", 0) != 0) {
+                                continue;
+                            }
+                            input.lp_values.emplace(
+                                name, state->cut_relaxation_values[index]);
+                            input.effective_lower_bounds.emplace(
+                                name, state->cut_lower_bounds[index]);
+                            input.effective_upper_bounds.emplace(
+                                name, state->cut_upper_bounds[index]);
+                        }
+                        ++state->round53_separator_calls;
+                        std::vector<Round52CutCandidate> selected =
+                            state->cut_manager->process(
+                                state->cut_separator->separate(input));
+                        if (state->round53_cut_submission_active) {
+                            Round52GurobiCutAdapter adapter(
+                                state->cut_variable_indices,
+                                [&](int length, const int* indices,
+                                    const double* values, char sense,
+                                    double rhs) {
+                                    return state->api->cbcut(
+                                        cbdata, length,
+                                        const_cast<int*>(indices),
+                                        const_cast<double*>(values), sense,
+                                        rhs);
+                                });
+                            for (const auto& candidate : selected) {
+                                ++state->round53_cut_submission_calls;
+                                const bool added = adapter.submit(candidate);
+                                state->cut_manager->recordSubmission(
+                                    candidate, added);
+                            }
+                            state->cut_adapter_failures +=
+                                adapter.telemetry().failures;
+                        } else {
+                            for (const auto& candidate : selected) {
+                                state->cut_manager->recordDryRunSelection(
+                                    candidate);
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (...) {
+            if (state->cut_manager) {
+                state->cut_manager->recordCallbackFailure();
+            }
+            state->tailored_cut_disabled_after_failure = true;
+        }
+        state->cut_callback_overhead_seconds +=
+            std::chrono::duration<double>(
+                Clock::now() - callback_started).count();
+        return 0;
+    }
+    if (where != GRB_CB_MIP) return 0;
     ++state->progress.callback_invocations;
     GurobiProgressEvent event;
     event.callback_where = where;
@@ -299,15 +1186,26 @@ int __stdcall progressAndBoundTargetCallback(
             Clock::now() - state->telemetry_start).count());
     state->api->cbget(cbdata, where, GRB_CB_WORK, &event.work);
     state->api->cbget(cbdata, where, GRB_CB_MIP_OBJBST, &event.incumbent);
-    state->api->cbget(cbdata, where, GRB_CB_MIP_OBJBND, &event.best_bound);
+    const bool native_bound_read = state->api->cbget(cbdata, where, GRB_CB_MIP_OBJBND, &event.best_bound)==0;
     state->api->cbget(cbdata, where, GRB_CB_MIP_NODCNT,
                       &event.processed_nodes);
     state->api->cbget(cbdata, where, GRB_CB_MIP_NODLFT, &event.open_nodes);
-    state->api->cbget(cbdata, where, GRB_CB_MIP_SOLCNT,
-                      &event.solution_count);
+    // Gurobi's C callback contract returns an int here (not a double).
+    // This field is telemetry only; incumbent/bound decisions use the
+    // independently read objective values below.
+    int callback_solution_count = 0;
+    if (state->api->cbget(cbdata, where, GRB_CB_MIP_SOLCNT,
+                         &callback_solution_count) == 0) {
+        event.solution_count = callback_solution_count;
+    }
     state->api->cbget(cbdata, where, GRB_CB_MIP_PHASE, &event.phase);
     event.incumbent_available = finiteNative(event.incumbent);
-    event.best_bound_available = finiteNative(event.best_bound);
+    event.best_bound_available = native_bound_read && finiteNative(event.best_bound);
+    if(state->native_evidence && event.best_bound_available) {
+        try {state->native_evidence->nativeBound(state->evidence_call,event.best_bound);}
+        catch(const std::exception& e) {state->native_evidence->failure(e.what());}
+        catch(...) {state->native_evidence->failure("MIP_bound_observer_exception");}
+    }
     if (event.incumbent_available &&
         state->progress.first_incumbent_time < 0.0) {
         state->progress.first_incumbent_time = event.elapsed_runtime_seconds;
@@ -339,6 +1237,15 @@ int __stdcall progressAndBoundTargetCallback(
         } catch (...) {
             ++state->progress.dropped_records;
         }
+    }
+    if (state->round62_external_stop && event.best_bound_available &&
+        !state->round62_external_termination_requested) {
+        try {
+            if (state->round62_external_stop(event.best_bound) && model && state->api->terminate) {
+                state->round62_external_termination_requested=true;
+                state->api->terminate(model);
+            }
+        } catch (...) { state->round62_external_stop={}; }
     }
     if (state->bound_target_enabled && event.best_bound_available &&
         event.best_bound + state->bound_target_tolerance >=
@@ -377,6 +1284,15 @@ struct GurobiNativeLogEvidence {
     bool mip_start_accepted = false;
     bool mip_start_rejected = false;
     bool mip_start_no_incumbent = false;
+    bool presolved_size_available = false;
+    long long presolved_rows = 0;
+    long long presolved_columns = 0;
+    long long presolved_nonzeros = 0;
+    bool root_relaxation_bound_available = false;
+    double root_relaxation_bound = 0.0;
+    double root_runtime_seconds = 0.0;
+    double root_simplex_iterations = 0.0;
+    std::vector<FixedIntervalCutFamilyEvidence> root_cut_families;
 };
 
 GurobiNativeLogEvidence inspectGurobiNativeLog(
@@ -411,6 +1327,47 @@ GurobiNativeLogEvidence inspectGurobiNativeLog(
     out.mip_start_no_incumbent =
         text.find("user mip start did not produce a new incumbent solution") !=
             std::string::npos;
+    std::smatch presolved;
+    const std::regex presolved_pattern(
+        R"(presolved:\s*([0-9]+) rows,\s*([0-9]+) columns,\s*([0-9]+) nonzeros)");
+    if (std::regex_search(text, presolved, presolved_pattern)) {
+        out.presolved_size_available = true;
+        out.presolved_rows = std::stoll(presolved[1].str());
+        out.presolved_columns = std::stoll(presolved[2].str());
+        out.presolved_nonzeros = std::stoll(presolved[3].str());
+    }
+    std::smatch root;
+    const std::regex root_pattern(
+        R"(root relaxation:\s*objective\s*([-+0-9.e]+),\s*([0-9]+) iterations,\s*([-+0-9.e]+) seconds)");
+    if (std::regex_search(text, root, root_pattern)) {
+        out.root_relaxation_bound_available = true;
+        out.root_relaxation_bound = std::stod(root[1].str());
+        out.root_simplex_iterations = std::stod(root[2].str());
+        out.root_runtime_seconds = std::stod(root[3].str());
+    }
+    std::istringstream lines(text);
+    std::string line;
+    bool in_cut_block = false;
+    const std::regex cut_pattern(R"(^\s*([a-z][a-z0-9 _-]*):\s*([0-9]+)\s*$)");
+    while (std::getline(lines, line)) {
+        if (line.find("cutting planes:") != std::string::npos) {
+            in_cut_block = true;
+            continue;
+        }
+        if (!in_cut_block) continue;
+        if (line.empty() || line.find("explored ") != std::string::npos ||
+            line.find("thread count") != std::string::npos) {
+            if (!out.root_cut_families.empty()) break;
+            continue;
+        }
+        std::smatch cut;
+        if (std::regex_match(line, cut, cut_pattern)) {
+            FixedIntervalCutFamilyEvidence evidence;
+            evidence.family = cut[1].str();
+            evidence.count = std::stoll(cut[2].str());
+            out.root_cut_families.push_back(std::move(evidence));
+        }
+    }
     return out;
 }
 
@@ -520,16 +1477,44 @@ public:
         const int abs_rc = api_.setdblparam(env_, GRB_DBL_PAR_MIPGAPABS, 0.0);
         int threads = 0, presolve = -99, seed = -1;
         double rel = -1.0, abs = -1.0;
-        const bool readbacks =
-            api_.getintparam(env_, GRB_INT_PAR_THREADS, &threads) == 0 &&
-            api_.getintparam(env_, GRB_INT_PAR_PRESOLVE, &presolve) == 0 &&
-            api_.getintparam(env_, GRB_INT_PAR_SEED, &seed) == 0 &&
-            api_.getdblparam(env_, GRB_DBL_PAR_MIPGAP, &rel) == 0 &&
-            api_.getdblparam(env_, GRB_DBL_PAR_MIPGAPABS, &abs) == 0;
+        const int threads_get_rc =
+            api_.getintparam(env_, GRB_INT_PAR_THREADS, &threads);
+        const int presolve_get_rc =
+            api_.getintparam(env_, GRB_INT_PAR_PRESOLVE, &presolve);
+        const int seed_get_rc =
+            api_.getintparam(env_, GRB_INT_PAR_SEED, &seed);
+        const int rel_get_rc =
+            api_.getdblparam(env_, GRB_DBL_PAR_MIPGAP, &rel);
+        const int abs_get_rc =
+            api_.getdblparam(env_, GRB_DBL_PAR_MIPGAPABS, &abs);
+        const bool readbacks = threads_get_rc == 0 &&
+            presolve_get_rc == 0 && seed_get_rc == 0 &&
+            rel_get_rc == 0 && abs_get_rc == 0;
         configuration_valid_ = threads_rc == 0 && presolve_rc == 0 &&
             seed_rc == 0 && rel_rc == 0 && abs_rc == 0 && readbacks &&
             threads == 1 && presolve == options_.gurobi_presolve &&
             seed == options_.gurobi_seed && rel == 0.0 && abs == 0.0;
+        stats_.threads_requested = 1;
+        stats_.threads_set_return_code = threads_rc;
+        stats_.threads_get_return_code = threads_get_rc;
+        stats_.threads_effective = threads;
+        stats_.presolve_requested = options_.gurobi_presolve;
+        stats_.presolve_set_return_code = presolve_rc;
+        stats_.presolve_get_return_code = presolve_get_rc;
+        stats_.presolve_effective = presolve;
+        stats_.seed_requested = options_.gurobi_seed;
+        stats_.seed_set_return_code = seed_rc;
+        stats_.seed_get_return_code = seed_get_rc;
+        stats_.seed_effective = seed;
+        stats_.mip_gap_requested = 0.0;
+        stats_.mip_gap_set_return_code = rel_rc;
+        stats_.mip_gap_get_return_code = rel_get_rc;
+        stats_.mip_gap_effective = rel;
+        stats_.mip_gap_abs_requested = 0.0;
+        stats_.mip_gap_abs_set_return_code = abs_rc;
+        stats_.mip_gap_abs_get_return_code = abs_get_rc;
+        stats_.mip_gap_abs_effective = abs;
+        stats_.parameter_roundtrip_valid = configuration_valid_;
         if (!configuration_valid_) {
             failure_reason_ = "gurobi_external_parameter_roundtrip_failed";
             return;
@@ -589,6 +1574,7 @@ public:
 
     FixedIntervalMipOutcome solve(
         const FixedIntervalMipRequest& request) override {
+        const auto round65_started = Clock::now();
         FixedIntervalMipOutcome out;
         out.attempted = true;
         out.available = available_;
@@ -614,8 +1600,15 @@ public:
             !paper_solve &&
             options_.external_gini_lifecycle == "retained-per-leaf";
         auto found = leaves_.find(request.leaf_id);
+        // Static root rows are MIP-only. A fresh canonical model on every
+        // lifecycle prevents them leaking back into a later LP or being
+        // appended twice to a retained MIP. The dry control pays the same
+        // model-read policy. This does not add any optimizer call.
+        const bool round63_static_execution = options_.round63_time_mode == "root" ||
+            options_.round63_time_mode == "root-dry";
         const bool incremental_retained_mode =
-            paper_solve && request.incremental_model_reuse_enabled;
+            paper_solve && request.incremental_model_reuse_enabled &&
+            !round63_static_execution;
         bool retained =
             (legacy_retained_mode || incremental_retained_mode) &&
             found != leaves_.end();
@@ -674,6 +1667,454 @@ public:
             out.failure_reason = "gurobi_external_model_environment_missing";
             return out;
         }
+        int native_variables = 0;
+        int native_rows = 0;
+        int native_general_constraints = 0;
+        double native_nonzeros = 0.0;
+        api_.getintattr(model, GRB_INT_ATTR_NUMVARS, &native_variables);
+        api_.getintattr(model, GRB_INT_ATTR_NUMCONSTRS, &native_rows);
+        api_.getintattr(
+            model, GRB_INT_ATTR_NUMGENCONSTRS,
+            &native_general_constraints);
+        api_.getdblattr(model, GRB_DBL_ATTR_DNUMNZS, &native_nonzeros);
+        out.model_variable_count = std::max(0, native_variables);
+        out.model_linear_constraint_count = std::max(0, native_rows);
+        out.model_general_constraint_count =
+            std::max(0, native_general_constraints);
+        out.model_nonzero_count = std::isfinite(native_nonzeros)
+            ? static_cast<long long>(std::llround(
+                std::max(0.0, native_nonzeros))) : 0;
+        std::vector<char> native_types;
+        std::vector<std::string> native_names;
+        if (native_variables > 0) {
+            native_types.resize(static_cast<std::size_t>(native_variables));
+            native_names.resize(static_cast<std::size_t>(native_variables));
+            if (api_.getcharattrarray(
+                    model, GRB_CHAR_ATTR_VTYPE, 0, native_variables,
+                    native_types.data()) == 0) {
+                for (int index = 0; index < native_variables; ++index) {
+                    const char type = native_types[
+                        static_cast<std::size_t>(index)];
+                    if (type == GRB_BINARY) {
+                        ++out.model_binary_variable_count;
+                    } else if (type == GRB_INTEGER ||
+                               type == GRB_SEMIINT) {
+                        ++out.model_integer_variable_count;
+                    } else {
+                        ++out.model_continuous_variable_count;
+                    }
+                    char* name = nullptr;
+                    if (api_.getstrattrelement(
+                            model, GRB_STR_ATTR_VARNAME, index, &name) == 0 &&
+                        name) {
+                        native_names[static_cast<std::size_t>(index)] = name;
+                    }
+                }
+            }
+        }
+        out.interval_mip_policy = request.interval_mip_policy;
+        const Round50IntervalMipPolicy round50_policy =
+            parseRound50IntervalMipPolicy(request.interval_mip_policy);
+        if (!round50_policy.valid) {
+            out.failure_reason = round50_policy.failure_reason;
+            return out;
+        }
+        auto additional_rows=request.additional_linear_rows;
+        if (!out.lp_relaxation && options_.round63_time_mode=="root")
+            additional_rows.insert(additional_rows.end(),round63_root_rows_.begin(),round63_root_rows_.end());
+        if (!additional_rows.empty()) {
+            out.additional_linear_rows_attempted = true;
+            if (retained) {
+                out.additional_linear_rows_status =
+                    "additional_rows_require_fresh_canonical_model";
+                out.failure_reason = out.additional_linear_rows_status;
+                return out;
+            }
+            std::unordered_map<std::string, int> indices;
+            bool rows_valid = native_names.size() ==
+                static_cast<std::size_t>(native_variables);
+            for (int index = 0; rows_valid && index < native_variables;
+                 ++index) {
+                const std::string& name = native_names[
+                    static_cast<std::size_t>(index)];
+                rows_valid = !name.empty() &&
+                    indices.emplace(name, index).second;
+            }
+            std::set<std::string> row_names;
+            std::set<std::string> signatures;
+            std::ostringstream signature_ledger;
+            int add_rc = 0;
+            for (std::size_t row_index = 0;
+                 rows_valid && row_index < additional_rows.size();
+                 ++row_index) {
+                const auto& row = additional_rows[row_index];
+                rows_valid = !row.row_name.empty() &&
+                    row_names.insert(row.row_name).second &&
+                    !row.canonical_signature.empty() &&
+                    signatures.insert(row.canonical_signature).second &&
+                    row.variable_names.size() == row.coefficients.size() &&
+                    !row.variable_names.empty() && std::isfinite(row.rhs) &&
+                    (!request.round59_additional_rows_user_pool ||
+                     (row.scope == "global" && row.sense != '=')) &&
+                    (row.sense == '<' || row.sense == '>' || row.sense == '=');
+                std::vector<int> columns;
+                std::vector<double> coefficients;
+                std::set<std::string> row_variables;
+                for (std::size_t term = 0;
+                     rows_valid && term < row.variable_names.size(); ++term) {
+                    const auto found_index = indices.find(row.variable_names[term]);
+                    rows_valid = found_index != indices.end() &&
+                        row_variables.insert(row.variable_names[term]).second &&
+                        std::isfinite(row.coefficients[term]) &&
+                        std::fabs(row.coefficients[term]) > 1e-14;
+                    if (rows_valid) {
+                        columns.push_back(found_index->second);
+                        coefficients.push_back(row.coefficients[term]);
+                    }
+                }
+                if (!rows_valid) break;
+                const char native_sense = row.sense == '<'
+                    ? GRB_LESS_EQUAL : (row.sense == '>'
+                        ? GRB_GREATER_EQUAL : GRB_EQUAL);
+                add_rc = api_.addconstr(
+                    model, static_cast<int>(columns.size()), columns.data(),
+                    coefficients.data(), native_sense, row.rhs,
+                    row.row_name.c_str());
+                rows_valid = add_rc == 0;
+                if (rows_valid) {
+                    if (row_index) signature_ledger << ';';
+                    signature_ledger << row.canonical_signature;
+                    ++out.additional_linear_rows_added;
+                }
+            }
+            const int update_rc = rows_valid ? api_.updatemodel(model) : add_rc;
+            int rows_after = -1;
+            const bool row_count_valid = rows_valid && update_rc == 0 &&
+                api_.getintattr(model, GRB_INT_ATTR_NUMCONSTRS, &rows_after) == 0 &&
+                rows_after == native_rows +
+                    static_cast<int>(additional_rows.size());
+            out.additional_linear_rows_valid = rows_valid && row_count_valid &&
+                out.additional_linear_rows_added == static_cast<long long>(
+                    additional_rows.size());
+            out.additional_linear_row_signatures = signature_ledger.str();
+            out.additional_linear_rows_status = out.additional_linear_rows_valid
+                ? "added_to_fresh_model_and_count_read_back"
+                : (!rows_valid ? "invalid_or_unaddable_linear_row"
+                               : "linear_row_count_readback_failed");
+            if (!out.additional_linear_rows_valid) {
+                out.failure_reason = out.additional_linear_rows_status;
+                return out;
+            }
+            out.native_model_modified = true;
+            out.model_linear_constraint_count = rows_after;
+            if (request.round59_additional_rows_user_pool) {
+                const int count = static_cast<int>(additional_rows.size());
+                std::vector<int> lazy(static_cast<std::size_t>(count), -1);
+                std::vector<int> readback(static_cast<std::size_t>(count), 0);
+                if (api_.setintattrarray(model, GRB_INT_ATTR_LAZY,
+                        native_rows, count, lazy.data()) != 0 ||
+                    api_.updatemodel(model) != 0 ||
+                    api_.getintattrarray(model, GRB_INT_ATTR_LAZY,
+                        native_rows, count, readback.data()) != 0 || readback != lazy) {
+                    out.failure_reason = "round59_user_pool_attribute_readback_failed";
+                    return out;
+                }
+                out.additional_linear_rows_status = "round59_Lazy_minus1_readback_valid";
+            }
+        } else {
+            out.additional_linear_rows_valid = true;
+        }
+        if (request.round59_mip_focus != -1) {
+            int readback = -1;
+            if ((request.round59_mip_focus != 1 && request.round59_mip_focus != 3) ||
+                api_.setintparam(model_env, GRB_INT_PAR_MIPFOCUS, request.round59_mip_focus) != 0 ||
+                api_.getintparam(model_env, GRB_INT_PAR_MIPFOCUS, &readback) != 0 ||
+                readback != request.round59_mip_focus) {
+                out.failure_reason = "round59_mip_focus_readback_failed";
+                return out;
+            }
+        }
+        std::vector<FixedIntervalMipRequest::VariableBoundOverride>
+            effective_bound_overrides = request.variable_bound_overrides;
+        if (!request.round60_fixed_inventory.empty()) {
+            bool fixed_inventory_valid = request.round60_fixed_inventory.size() ==
+                static_cast<std::size_t>(instance_.V + 1);
+            for (int station = 1; fixed_inventory_valid &&
+                 station <= instance_.V; ++station) {
+                fixed_inventory_valid =
+                    request.round60_fixed_inventory[station] >= 0 &&
+                    request.round60_fixed_inventory[station] <=
+                        instance_.capacity[station];
+            }
+            if (!fixed_inventory_valid) {
+                out.failure_reason = "round60_fixed_inventory_invalid";
+                return out;
+            }
+            for (const std::string& name : native_names) {
+                int station = 0;
+                int bit = 0;
+                bool selected = parseSingleIndex(name, "Y_", station) &&
+                    station >= 1 && station <= instance_.V;
+                double fixed_value = selected
+                    ? request.round60_fixed_inventory[station] : 0.0;
+                if (!selected && parseTwoIndices(name, "bit_", station, bit) &&
+                    station >= 1 && station <= instance_.V &&
+                    bit >= 0 && bit < 63) {
+                    selected = true;
+                    fixed_value =
+                        (request.round60_fixed_inventory[station] >> bit) & 1;
+                }
+                if (selected) {
+                    FixedIntervalMipRequest::VariableBoundOverride fixed;
+                    fixed.variable_name = name;
+                    fixed.lower_bound_enabled = true;
+                    fixed.lower_bound = fixed_value;
+                    fixed.upper_bound_enabled = true;
+                    fixed.upper_bound = fixed_value;
+                    effective_bound_overrides.push_back(std::move(fixed));
+                }
+            }
+        }
+        if (!effective_bound_overrides.empty()) {
+            out.variable_bound_override_attempted = true;
+            out.variable_bound_override_count = static_cast<long long>(
+                effective_bound_overrides.size());
+            std::unordered_map<std::string, int> indices;
+            bool override_valid = native_names.size() ==
+                static_cast<std::size_t>(native_variables);
+            for (int index = 0; override_valid && index < native_variables;
+                 ++index) {
+                const std::string& name = native_names[
+                    static_cast<std::size_t>(index)];
+                override_valid = !name.empty() &&
+                    indices.emplace(name, index).second;
+            }
+            std::vector<double> lower(
+                static_cast<std::size_t>(native_variables));
+            std::vector<double> upper(
+                static_cast<std::size_t>(native_variables));
+            override_valid = override_valid &&
+                api_.getdblattrarray(model, GRB_DBL_ATTR_LB, 0,
+                    native_variables, lower.data()) == 0 &&
+                api_.getdblattrarray(model, GRB_DBL_ATTR_UB, 0,
+                    native_variables, upper.data()) == 0;
+            std::set<std::string> requested_names;
+            for (const auto& override_value :
+                    effective_bound_overrides) {
+                const auto found_index = indices.find(
+                    override_value.variable_name);
+                override_valid = override_valid &&
+                    !override_value.variable_name.empty() &&
+                    found_index != indices.end() &&
+                    requested_names.insert(
+                        override_value.variable_name).second &&
+                    (override_value.lower_bound_enabled ||
+                     override_value.upper_bound_enabled) &&
+                    (!override_value.lower_bound_enabled ||
+                     std::isfinite(override_value.lower_bound)) &&
+                    (!override_value.upper_bound_enabled ||
+                     std::isfinite(override_value.upper_bound));
+                if (!override_valid) break;
+                const std::size_t index = static_cast<std::size_t>(
+                    found_index->second);
+                if (override_value.lower_bound_enabled) {
+                    lower[index] = override_value.lower_bound;
+                }
+                if (override_value.upper_bound_enabled) {
+                    upper[index] = override_value.upper_bound;
+                }
+                override_valid = lower[index] <= upper[index] + 1e-12;
+                if (!override_valid) break;
+            }
+            const int lower_rc = override_valid
+                ? api_.setdblattrarray(model, GRB_DBL_ATTR_LB, 0,
+                      native_variables, lower.data()) : -1;
+            const int upper_rc = lower_rc == 0
+                ? api_.setdblattrarray(model, GRB_DBL_ATTR_UB, 0,
+                      native_variables, upper.data()) : lower_rc;
+            const int update_rc = upper_rc == 0
+                ? api_.updatemodel(model) : upper_rc;
+            std::vector<double> read_lower(
+                static_cast<std::size_t>(native_variables));
+            std::vector<double> read_upper(
+                static_cast<std::size_t>(native_variables));
+            bool readback = update_rc == 0 &&
+                api_.getdblattrarray(model, GRB_DBL_ATTR_LB, 0,
+                    native_variables, read_lower.data()) == 0 &&
+                api_.getdblattrarray(model, GRB_DBL_ATTR_UB, 0,
+                    native_variables, read_upper.data()) == 0;
+            for (int index = 0; readback && index < native_variables;
+                 ++index) {
+                const std::size_t offset = static_cast<std::size_t>(index);
+                readback = read_lower[offset] == lower[offset] &&
+                    read_upper[offset] == upper[offset];
+            }
+            out.variable_bound_override_readback_valid =
+                override_valid && readback;
+            out.variable_bound_override_status =
+                out.variable_bound_override_readback_valid
+                    ? "applied_and_read_back"
+                    : (!override_valid ? "invalid_override_request"
+                       : "gurobi_bound_override_or_readback_failed");
+            if (!out.variable_bound_override_readback_valid) {
+                out.failure_reason = out.variable_bound_override_status;
+                return out;
+            }
+        } else {
+            out.variable_bound_override_readback_valid = true;
+            out.variable_bound_override_status = "not_requested";
+        }
+        const bool explicit_sparse_priorities =
+            !request.branch_priority_overrides.empty();
+        if (!out.lp_relaxation &&
+            (explicit_sparse_priorities ||
+             round50_policy.branching != Round50BranchingPolicy::Default)) {
+            out.branch_priority_assignment_attempted = true;
+            std::vector<int> priorities(
+                static_cast<std::size_t>(native_variables), 0);
+            bool registry_valid = native_types.size() == priorities.size() &&
+                native_names.size() == priorities.size();
+            if (explicit_sparse_priorities &&
+                round50_policy.branching != Round50BranchingPolicy::Default) {
+                registry_valid = false;
+            }
+            if (explicit_sparse_priorities) {
+                registry_valid = registry_valid &&
+                    request.branch_priority_overrides.size() <= 2;
+                std::unordered_map<std::string, int> indices;
+                for (int index = 0; registry_valid &&
+                     index < native_variables; ++index) {
+                    registry_valid = !native_names[
+                        static_cast<std::size_t>(index)].empty() &&
+                        indices.emplace(native_names[
+                            static_cast<std::size_t>(index)], index).second;
+                }
+                std::set<std::string> selected;
+                for (const auto& override_value :
+                        request.branch_priority_overrides) {
+                    const auto found_index = indices.find(
+                        override_value.variable_name);
+                    registry_valid = registry_valid &&
+                        found_index != indices.end() &&
+                        selected.insert(
+                            override_value.variable_name).second &&
+                        (override_value.priority == 1 ||
+                         override_value.priority == 2);
+                    if (!registry_valid) break;
+                    const int index = found_index->second;
+                    const char type = native_types[
+                        static_cast<std::size_t>(index)];
+                    const Round50VariableFamily family =
+                        classifyRound50Variable(
+                            override_value.variable_name);
+                    registry_valid =
+                        (type == GRB_BINARY || type == GRB_INTEGER) &&
+                        family != Round50VariableFamily::Auxiliary;
+                    if (!registry_valid) break;
+                    priorities[static_cast<std::size_t>(index)] =
+                        override_value.priority;
+                    FixedIntervalBranchPriorityEvidence evidence;
+                    evidence.variable_name = override_value.variable_name;
+                    evidence.semantic_family =
+                        round50VariableFamilyName(family);
+                    evidence.variable_type = type;
+                    evidence.assigned_priority = override_value.priority;
+                    out.branch_priority_evidence.push_back(
+                        std::move(evidence));
+                }
+            } else {
+                for (int index = 0; registry_valid &&
+                     index < native_variables; ++index) {
+                    const char type = native_types[
+                        static_cast<std::size_t>(index)];
+                    if (type != GRB_BINARY && type != GRB_INTEGER &&
+                        type != GRB_SEMIINT) {
+                        continue;
+                    }
+                    const std::string& name = native_names[
+                        static_cast<std::size_t>(index)];
+                    if (name.empty()) {
+                        registry_valid = false;
+                        break;
+                    }
+                    const Round50VariableFamily family =
+                        classifyRound50Variable(name);
+                    const int priority = round50BranchPriority(
+                        round50_policy.branching, family);
+                    if (priority <= 0) {
+                        registry_valid = false;
+                        break;
+                    }
+                    priorities[static_cast<std::size_t>(index)] = priority;
+                    FixedIntervalBranchPriorityEvidence evidence;
+                    evidence.variable_name = name;
+                    evidence.semantic_family =
+                        round50VariableFamilyName(family);
+                    evidence.variable_type = type;
+                    evidence.assigned_priority = priority;
+                    out.branch_priority_evidence.push_back(
+                        std::move(evidence));
+                }
+            }
+            const int priority_rc = registry_valid
+                ? api_.setintattrarray(
+                      model, GRB_INT_ATTR_BRANCHPRIORITY, 0,
+                      native_variables, priorities.data())
+                : -1;
+            const int update_rc = priority_rc == 0
+                ? api_.updatemodel(model) : priority_rc;
+            std::vector<int> priority_readback(
+                static_cast<std::size_t>(native_variables), -1);
+            bool readback_valid = update_rc == 0 &&
+                api_.getintattrarray(
+                    model, GRB_INT_ATTR_BRANCHPRIORITY, 0,
+                    native_variables, priority_readback.data()) == 0;
+            long long zero_count = 0;
+            for (int index = 0; readback_valid &&
+                 index < native_variables; ++index) {
+                const int expected = priorities[
+                    static_cast<std::size_t>(index)];
+                const int observed = priority_readback[
+                    static_cast<std::size_t>(index)];
+                readback_valid = observed == expected;
+                if (observed == 0) ++zero_count;
+            }
+            out.branch_priority_zero_readback_count = zero_count;
+            out.branch_priority_assignment_valid =
+                registry_valid && priority_rc == 0 && update_rc == 0 &&
+                readback_valid;
+            out.branch_priority_assigned_count =
+                static_cast<long long>(out.branch_priority_evidence.size());
+            out.branch_priority_assignment_status =
+                out.branch_priority_assignment_valid ? "applied"
+                : (!registry_valid ? "semantic_registry_failed"
+                   : "gurobi_branch_priority_attribute_or_readback_failed");
+            if (!out.branch_priority_assignment_valid) {
+                out.failure_reason = out.branch_priority_assignment_status;
+                return out;
+            }
+        } else {
+            out.branch_priority_assignment_valid = true;
+            out.branch_priority_assignment_status = "default_no_assignment";
+        }
+        auto readRange = [&](const char* min_attr, const char* max_attr,
+                             double& minimum, double& maximum) {
+            return api_.getdblattr(model, min_attr, &minimum) == 0 &&
+                api_.getdblattr(model, max_attr, &maximum) == 0 &&
+                std::isfinite(minimum) && std::isfinite(maximum);
+        };
+        out.numerical_ranges_available =
+            readRange(GRB_DBL_ATTR_MIN_COEFF, GRB_DBL_ATTR_MAX_COEFF,
+                      out.minimum_matrix_coefficient,
+                      out.maximum_matrix_coefficient) &&
+            readRange(GRB_DBL_ATTR_MIN_OBJ_COEFF, GRB_DBL_ATTR_MAX_OBJ_COEFF,
+                      out.minimum_objective_coefficient,
+                      out.maximum_objective_coefficient) &&
+            readRange(GRB_DBL_ATTR_MIN_BOUND, GRB_DBL_ATTR_MAX_BOUND,
+                      out.minimum_variable_bound,
+                      out.maximum_variable_bound) &&
+            readRange(GRB_DBL_ATTR_MIN_RHS, GRB_DBL_ATTR_MAX_RHS,
+                      out.minimum_rhs, out.maximum_rhs);
         if (out.lp_relaxation) {
             int variable_count = 0;
             if (api_.getintattr(model, GRB_INT_ATTR_NUMVARS,
@@ -681,7 +2122,8 @@ public:
                 out.failure_reason = "paper_lp_variable_count_unavailable";
                 return out;
             }
-            if (request.incremental_model_reuse_enabled &&
+            if ((request.incremental_model_reuse_enabled ||
+                 request.capture_lp_primal_dual_evidence) &&
                 state.original_variable_types.empty()) {
                 state.original_variable_types.resize(
                     static_cast<std::size_t>(variable_count));
@@ -692,6 +2134,49 @@ public:
                     out.failure_reason =
                         "round29_original_integer_domain_capture_failed";
                     return out;
+                }
+            }
+            if (request.capture_lp_primal_dual_evidence) {
+                out.lp_primal_dual_variable_evidence.resize(
+                    static_cast<std::size_t>(variable_count));
+                std::vector<double> lower(
+                    static_cast<std::size_t>(variable_count));
+                std::vector<double> upper(
+                    static_cast<std::size_t>(variable_count));
+                bool metadata_ok = state.original_variable_types.size() ==
+                        static_cast<std::size_t>(variable_count) &&
+                    api_.getdblattrarray(model, GRB_DBL_ATTR_LB, 0,
+                        variable_count, lower.data()) == 0 &&
+                    api_.getdblattrarray(model, GRB_DBL_ATTR_UB, 0,
+                        variable_count, upper.data()) == 0;
+                for (int index = 0; metadata_ok && index < variable_count;
+                     ++index) {
+                    char* name = nullptr;
+                    metadata_ok = api_.getstrattrelement(
+                        model, GRB_STR_ATTR_VARNAME, index, &name) == 0 &&
+                        name && *name;
+                    if (metadata_ok) {
+                        auto& evidence = out.lp_primal_dual_variable_evidence[
+                            static_cast<std::size_t>(index)];
+                        evidence.name = name;
+                        evidence.original_type = state.original_variable_types[
+                            static_cast<std::size_t>(index)];
+                        evidence.lower_bound = lower[
+                            static_cast<std::size_t>(index)];
+                        evidence.upper_bound = upper[
+                            static_cast<std::size_t>(index)];
+                    }
+                }
+                if (!metadata_ok) {
+                    out.lp_primal_dual_variable_evidence.clear();
+                }
+                out.lp_verified_cutoff = request.verified_cutoff;
+                out.lp_model_fingerprint =
+                    request.canonical_model_fingerprint;
+                int objective_sense = 0;
+                if (api_.getintattr(model, GRB_INT_ATTR_MODELSENSE,
+                                    &objective_sense) == 0) {
+                    out.lp_objective_sense = objective_sense;
                 }
             }
             std::vector<char> continuous(
@@ -715,6 +2200,15 @@ public:
         const int time_rc = api_.setdblparam(
             model_env, GRB_DBL_PAR_TIMELIMIT,
             std::max(0.001, effective_limit));
+        int work_rc = 0;
+        if (options_.round65_budget) {
+            const double requested_work = request.optional_work_limit >= 0
+                ? request.optional_work_limit : GRB_INFINITY;
+            double actual_work = -1;
+            work_rc = api_.setdblparam(model_env, GRB_DBL_PAR_WORKLIMIT, requested_work);
+            work_rc |= api_.getdblparam(model_env, GRB_DBL_PAR_WORKLIMIT, &actual_work);
+            if (actual_work != requested_work) work_rc = -1;
+        }
         out.native_log_path = request.native_log_path.string();
         int log_rc = 0;
         if (!request.native_log_path.empty()) {
@@ -731,13 +2225,23 @@ public:
             model_env, GRB_DBL_PAR_MIPGAP, &rel_gap);
         const int abs_get = api_.getdblparam(
             model_env, GRB_DBL_PAR_MIPGAPABS, &abs_gap);
-        out.exact_zero_gap_roundtrip = configuration_valid_ && time_rc == 0 &&
+        out.exact_zero_gap_roundtrip = configuration_valid_ && time_rc == 0 && work_rc == 0 &&
             rel_get == 0 && abs_get == 0 && rel_gap == 0.0 && abs_gap == 0.0;
         out.model_fingerprint_matches_request =
             fileSha256(request.canonical_model_path) ==
                 request.canonical_model_fingerprint;
 
-        if (!retained && request.warm_start_enabled &&
+        std::vector<double> round68_start_values;
+        std::vector<char> round68_start_types;
+        if (request.round68_verified_start) {
+            ++stats_.warm_start_candidate_count;
+            const bool prepared=prepareRound68Start(api_,model,instance_,options_,request,out,
+                round68_start_values,round68_start_types);
+            if (out.warm_start_mapping_complete) ++stats_.warm_start_complete_count;
+            if (out.warm_start_submitted) ++stats_.warm_start_submitted_count;
+            if (!prepared) {++stats_.warm_start_rejected_count;return out;}
+        }
+        if (!request.round68_verified_start && !retained && request.warm_start_enabled &&
             !request.verified_start_routes.empty()) {
             out.warm_start_candidate_available = true;
             ++stats_.warm_start_candidate_count;
@@ -796,21 +2300,517 @@ public:
             }
         }
 
+        out.tailored_cut_policy = round50_policy.tailored_cut_policy;
+        out.round53_callback_mode = round50_policy.round53_callback_mode;
+        out.gurobi_cbcut_symbol_loaded = api_.cbcut != nullptr;
+        out.gurobi_cblazy_symbol_loaded = api_.cblazy != nullptr;
+        const bool round53_precrush_active = out.terminal_mip &&
+            round53CallbackPreCrushEnabled(round50_policy);
+        const bool round53_mipnode_active = out.terminal_mip &&
+            round53CallbackMipNodeEnabled(round50_policy);
+        const bool tailored_cut_active = out.terminal_mip &&
+            round53CallbackSeparatorEnabled(round50_policy);
+        const bool cut_submission_active = out.terminal_mip &&
+            round53CallbackSubmissionEnabled(round50_policy);
+        Round52SupportDurationSeparator cut_separator;
+        Round52CutManager cut_manager;
+        if (round53_precrush_active) {
+            out.gurobi_precrush_requested =
+                round52RequiredGurobiPreCrush();
+            out.gurobi_precrush_set_return_code = api_.setintparam(
+                model_env, GRB_INT_PAR_PRECRUSH,
+                out.gurobi_precrush_requested);
+            out.gurobi_precrush_get_return_code = api_.getintparam(
+                model_env, GRB_INT_PAR_PRECRUSH,
+                &out.gurobi_precrush_effective);
+            out.gurobi_precrush_roundtrip_valid =
+                out.gurobi_precrush_set_return_code == 0 &&
+                out.gurobi_precrush_get_return_code == 0 &&
+                out.gurobi_precrush_effective ==
+                    out.gurobi_precrush_requested;
+            if (!out.gurobi_precrush_roundtrip_valid ||
+                (cut_submission_active &&
+                 !out.gurobi_cbcut_symbol_loaded)) {
+                out.failure_reason =
+                    "round53_gurobi_callback_capability_invalid";
+                return out;
+            }
+        }
+        if (tailored_cut_active) {
+            cut_manager.beginModel(
+                request.canonical_model_fingerprint + "|" +
+                request.leaf_id);
+        }
+
         ProgressCallbackState callback;
+        if (request.round68_verified_start && out.warm_start_submitted) {
+            callback.round68_start_values=&round68_start_values;
+            callback.round68_start_types=&round68_start_types;
+        }
+        std::ofstream round59_samples;
+        if (!request.round59_node_samples_path.empty() && out.terminal_mip) {
+            round59_samples.open(request.round59_node_samples_path);
+            if (!round59_samples) {
+                out.failure_reason = "round59_sample_output_open_failed";
+                return out;
+            }
+            round59_samples.precision(17);
+            round59_samples << "sample_kind,root_callback_sequence,"
+                "node_bucket,node_count,root_completion_status,variable,value\n";
+            callback.round59_samples = &round59_samples;
+            callback.round59_names = native_names;
+        }
         callback.api = &api_;
+        if (!out.lp_relaxation) callback.round62_external_stop=request.round62_external_stop;
+        out.gurobi_cbsolution_symbol_loaded = api_.cbsolution != nullptr;
+        out.round60_candidate_mode = request.round60_candidate_mode;
+        const bool round60_candidate_active = (out.terminal_mip ||
+            (request.round61_session && out.partial_bound_target_mip)) &&
+            request.round60_candidate_mode != "off";
+        if (request.round60_candidate_mode != "off" &&
+            request.round60_candidate_mode != "dry" &&
+            request.round60_candidate_mode != "inject") {
+            out.failure_reason = "invalid_round60_candidate_mode";
+            return out;
+        }
+        if (round60_candidate_active) {
+            callback.round61_session = request.round61_session;
+            callback.candidate_instance = &instance_;
+            callback.candidate_options = &options_;
+            callback.candidate_mode = request.round60_candidate_mode;
+            callback.candidate_model_identity =
+                request.canonical_model_fingerprint + "|" + request.leaf_id;
+            callback.candidate_gamma_L = request.gamma_L;
+            callback.candidate_gamma_U = request.gamma_U;
+            callback.candidate_cutoff = request.verified_cutoff;
+            callback.candidate_maximum_evaluations =
+                std::max(1, request.round60_candidate_maximum_evaluations);
+            callback.candidate_maximum_stations =
+                std::max(1, request.round60_candidate_maximum_stations);
+            callback.candidate_domain.names = native_names;
+            callback.candidate_domain.variable_types = native_types;
+            callback.candidate_domain.lower_bounds.resize(
+                static_cast<std::size_t>(native_variables));
+            callback.candidate_domain.upper_bounds.resize(
+                static_cast<std::size_t>(native_variables));
+            const bool candidate_registry_valid = api_.cbsolution != nullptr &&
+                native_names.size() == static_cast<std::size_t>(native_variables) &&
+                native_types.size() == static_cast<std::size_t>(native_variables) &&
+                api_.getdblattrarray(
+                    model, GRB_DBL_ATTR_LB, 0, native_variables,
+                    callback.candidate_domain.lower_bounds.data()) == 0 &&
+                api_.getdblattrarray(
+                    model, GRB_DBL_ATTR_UB, 0, native_variables,
+                    callback.candidate_domain.upper_bounds.data()) == 0 &&
+                out.model_general_constraint_count == 0 &&
+                readLinearModel(api_, model, native_variables, native_rows,
+                                callback.candidate_linear_model);
+            if (!candidate_registry_valid) {
+                callback.candidate_disabled_after_failure = true;
+                callback.candidate_mode = "off";
+                FixedIntervalCandidateEvent event;
+                event.event_sequence = 1;
+                event.mode = request.round60_candidate_mode;
+                event.status =
+                    "optional_candidate_registry_invalid_base_solve_preserved";
+                callback.candidate_events.push_back(std::move(event));
+            } else {
+                callback.round59_names = native_names;
+                out.round60_candidate_callback_active = true;
+            }
+        }
         callback.bound_target_enabled =
             out.partial_bound_target_mip &&
             request.native_bound_target_enabled;
         callback.bound_target = request.native_bound_target;
         callback.bound_target_tolerance =
             std::max(0.0, request.native_bound_target_tolerance);
+        callback.round53_mipnode_path_active = round53_mipnode_active;
+        callback.round53_relaxation_vector_active =
+            out.terminal_mip &&
+            round53CallbackRelaxationEnabled(round50_policy);
+        callback.round53_separator_active = tailored_cut_active;
+        callback.round53_cut_submission_active = cut_submission_active;
+        callback.tailored_cut_active = tailored_cut_active;
+        if (tailored_cut_active) {
+            callback.cut_instance = &instance_;
+            callback.cut_separator = &cut_separator;
+            callback.cut_manager = &cut_manager;
+            callback.cut_scope = round50_policy.tailored_cut_policy ==
+                    "sd-r3-tree-blockmax"
+                ? Round52CutSeparationScope::AllOptimalTreeNodes
+                : Round52CutSeparationScope::RootOnly;
+            callback.cut_support_rank =
+                round50_policy.tailored_cut_support_rank;
+            callback.cut_certificate_tolerance = 1e-7;
+            callback.cut_interval_id = request.leaf_id;
+            callback.cut_variable_names = native_names;
+            callback.cut_lower_bounds.resize(
+                static_cast<std::size_t>(native_variables));
+            callback.cut_upper_bounds.resize(
+                static_cast<std::size_t>(native_variables));
+            bool cut_registry_valid =
+                callback.cut_variable_names.size() ==
+                    static_cast<std::size_t>(native_variables) &&
+                api_.getdblattrarray(
+                    model, GRB_DBL_ATTR_LB, 0, native_variables,
+                    callback.cut_lower_bounds.data()) == 0 &&
+                api_.getdblattrarray(
+                    model, GRB_DBL_ATTR_UB, 0, native_variables,
+                    callback.cut_upper_bounds.data()) == 0;
+            for (int index = 0; cut_registry_valid &&
+                 index < native_variables; ++index) {
+                const std::string& name = callback.cut_variable_names[
+                    static_cast<std::size_t>(index)];
+                cut_registry_valid = !name.empty() &&
+                    callback.cut_variable_indices.emplace(
+                        name, index).second;
+            }
+            if (!cut_registry_valid) {
+                out.failure_reason =
+                    "round52_gurobi_cut_variable_registry_invalid";
+                return out;
+            }
+            callback.cut_relaxation_values.resize(
+                static_cast<std::size_t>(native_variables));
+            out.tailored_cut_callback_active = true;
+        }
+
+        Round63NativeState resource;
+        const bool resource_mip=!out.lp_relaxation && options_.round63_time_mode!="off";
+        int resource_precrush_read_return=-1;
+        if(resource_mip)
+            resource_precrush_read_return=api_.getintparam(model_env,GRB_INT_PAR_PRECRUSH,&out.gurobi_precrush_effective);
+        const bool resource_separator=resource_mip && (options_.round63_time_mode=="dry"||options_.round63_time_mode=="cuts");
+        if(resource_mip && (resource_separator||options_.round63_time_mode=="precrush")) {
+            out.gurobi_precrush_requested=1;
+            out.gurobi_precrush_set_return_code=api_.setintparam(model_env,GRB_INT_PAR_PRECRUSH,1);
+            out.gurobi_precrush_get_return_code=api_.getintparam(model_env,GRB_INT_PAR_PRECRUSH,&out.gurobi_precrush_effective);
+            out.gurobi_precrush_roundtrip_valid=out.gurobi_precrush_set_return_code==0 && out.gurobi_precrush_get_return_code==0 && out.gurobi_precrush_effective==1;
+            if(!out.gurobi_precrush_roundtrip_valid || (resource_separator&&!api_.cbcut)) {
+                out.failure_reason="round63_precrush_or_api_invalid";return out;
+            }
+        }
+        if(resource_separator) {
+            const auto started=Clock::now();
+            resource.data=prepareRound63Time(instance_);resource.point=emptyRound63TimePoint(resource.data);resource.mode=options_.round63_time_mode;
+            resource.values.resize(native_variables);
+            for(int i=0;i<native_variables;++i)resource.index.emplace(native_names[i],i);
+            resource.xindex.assign(instance_.M,std::vector<std::vector<int>>(instance_.V+1,std::vector<int>(instance_.V+1,-1)));
+            resource.pindex.assign(instance_.M,std::vector<int>(instance_.V+1,-1));
+            for(int k=0;k<instance_.M;++k)for(int i=0;i<=instance_.V;++i) {
+                if(i)resource.pindex[k][i]=resource.index.at("p_"+std::to_string(k)+"_"+std::to_string(i));
+                for(int j=0;j<=instance_.V;++j)if(i!=j)resource.xindex[k][i][j]=resource.index.at("x_"+std::to_string(k)+"_"+std::to_string(i)+"_"+std::to_string(j));
+            }
+            resource.cuts.open(request.native_log_path.string()+".round63.cuts.jsonl");
+            resource.points.open(request.native_log_path.string()+".round63.points.csv");
+            resource.points.precision(17);resource.points<<"query,vehicle,variable,raw_value\n";
+            if(!resource.cuts||!resource.points){out.failure_reason="round63_evidence_open_failed";return out;}
+            callback.round63=&resource;
+            resource.setup_seconds=std::chrono::duration<double>(Clock::now()-started).count();
+        }
         const int callback_rc = api_.setcallbackfunc(
             model, progressAndBoundTargetCallback, &callback);
         if (callback_rc != 0) {
             out.failure_reason = apiError(api_, model_env, callback_rc);
             return out;
         }
+        if(request.native_evidence) {
+            auto scope=request.native_evidence_scope;
+            scope.native_preconditions=evidenceParameterReadback(api_,model_env,scope) &&
+                out.exact_zero_gap_roundtrip && out.model_fingerprint_matches_request && !out.lp_relaxation &&
+                request.variable_bound_overrides.empty() && request.round60_fixed_inventory.empty() &&
+                request.additional_linear_rows.empty() && options_.round63_time_mode=="off" &&
+                options_.round65_projection=="off" && !options_.round65_budget;
+            callback.native_evidence=request.native_evidence;
+            callback.evidence_instance=&instance_;callback.evidence_names=&native_names;
+            callback.evidence_call=request.native_evidence->beginCall(scope);
+        }
+        if (request.round68_verified_start) {
+            out.round68_effective_native_deadline=std::max(0.0,
+                request.global_deadline_remaining_seconds-
+                std::chrono::duration<double>(Clock::now()-round65_started).count());
+            const int deadline_rc=api_.setdblparam(model_env,GRB_DBL_PAR_TIMELIMIT,
+                out.round68_effective_native_deadline);
+            double readback=-1;
+            const int deadline_read_rc=api_.getdblparam(model_env,GRB_DBL_PAR_TIMELIMIT,&readback);
+            if (deadline_rc || deadline_read_rc || readback!=out.round68_effective_native_deadline) {
+                out.failure_reason="round68_global_deadline_readback_failed";return out;
+            }
+        }
         out.optimize_return_code = api_.optimize(model);
+        if(callback.native_evidence) callback.native_evidence->returned(callback.evidence_call,out.optimize_return_code);
+        out.round68_start_vector_observed=callback.round68_start_vector_observed;
+        out.round68_start_integer_vector_observed=callback.round68_start_integer_vector_observed;
+
+        if(resource_mip) {
+            resource.cuts.close();resource.points.close();
+            if(resource.disabled) {
+                std::ofstream failed(request.native_log_path.string()+".round63.failure_point.csv");failed.precision(17);failed<<"variable,raw_value\n";
+                for(const auto& [name,index]:resource.index)if(name.rfind("x_",0)==0||name.rfind("p_",0)==0)failed<<name<<','<<resource.values.at(index)<<'\n';
+            }
+            std::ofstream log(request.native_log_path.string()+".round63.json");log.precision(17);
+            log<<"{\"mode\":\""<<options_.round63_time_mode<<"\",\"model_sha256\":\""<<request.canonical_model_fingerprint
+               <<"\",\"resource_identity\":\""<<resource.data.identity<<"\",\"queries\":"<<resource.queries
+               <<",\"maxflow_calls\":"<<resource.graphs<<",\"root_queries\":"<<resource.root_queries<<",\"status_reads\":"<<resource.status_reads
+               <<",\"vector_reads\":"<<resource.vector_reads<<",\"selected\":"<<resource.selected<<",\"submitted\":"<<resource.submitted
+               <<",\"api_success\":"<<resource.api_success<<",\"duplicates\":"<<resource.duplicates<<",\"disabled_after_failure\":"<<resource.disabled
+               <<",\"setup_seconds\":"<<resource.setup_seconds<<",\"callback_seconds\":"<<resource.seconds
+               <<",\"failure_reason\":"<<std::quoted(resource.failure_reason)<<",\"minimum_raw_x\":"<<resource.minimum_raw_x
+               <<",\"minimum_raw_pickup\":"<<resource.minimum_raw_pickup<<",\"prepared_static_rows\":"<<round63_root_rows_.size()
+               <<",\"static_rows_added\":"<<((options_.round63_time_mode=="root")?out.additional_linear_rows_added:0)
+               <<",\"static_pool_failure\":"<<std::quoted(round63_root_failure_)
+               <<",\"maximum_normalized_violation\":"<<resource.max_violation<<",\"precrush\":"<<out.gurobi_precrush_effective
+               <<",\"precrush_read_return\":"<<resource_precrush_read_return<<",\"fresh_static_lifecycle\":"<<round63_static_execution<<"}\n";
+        }
+
+        if (callback.round59_samples) {
+            int post_optimize_status = 0;
+            const bool solved_at_root = api_.getintattr(
+                model, GRB_INT_ATTR_STATUS, &post_optimize_status) == 0 &&
+                post_optimize_status == GRB_OPTIMAL;
+            const std::string root_status = callback.round59_nonroot_observed
+                ? "confirmed_complete_before_nonroot"
+                : (solved_at_root ? "confirmed_complete_at_optimal_termination"
+                                  : "last_observed_root_relaxation");
+            auto write_sample = [&](const std::string& kind,
+                                    long long sequence,
+                                    int bucket,
+                                    double node_count,
+                                    const std::vector<double>& values) {
+                for (std::size_t i = 0; i < values.size(); ++i) {
+                    *callback.round59_samples << kind << ',' << sequence << ','
+                        << bucket << ',' << node_count << ',' << root_status
+                        << ',' << callback.round59_names[i] << ','
+                        << values[i] << '\n';
+                }
+            };
+            if (!callback.round59_first_root_values.empty()) {
+                write_sample("first_root_relaxation", 1, 0, 0.0,
+                             callback.round59_first_root_values);
+            }
+            if (!callback.round59_latest_root_values.empty()) {
+                write_sample("latest_root_relaxation",
+                             callback.round59_root_callback_sequence, 0, 0.0,
+                             callback.round59_latest_root_values);
+            }
+            for (const auto& sample : callback.round59_nonroot_values) {
+                write_sample("bounded_nonroot_relaxation", 0, sample.first,
+                             sample.first == 1 ? 1.0
+                                 : (sample.first == 2 ? 10.0 : 100.0),
+                             sample.second);
+            }
+            std::ofstream scalars(
+                request.round59_node_samples_path.string() +
+                ".root_scalars.csv");
+            scalars << std::setprecision(17)
+                << "root_callback_sequence,node_count,relaxation_objective,"
+                   "incumbent_available,incumbent\n";
+            for (const auto& scalar : callback.round59_root_scalars) {
+                scalars << scalar.callback_sequence << ',' << scalar.node_count
+                    << ',' << scalar.relaxation_objective << ','
+                    << scalar.incumbent_available << ',' << scalar.incumbent
+                    << '\n';
+            }
+            std::ofstream audit(request.round59_node_samples_path.string()+".audit.json");
+            audit.precision(17);
+            audit << "{\"sampling_seconds\":" << callback.round59_sample_seconds
+                  << ",\"eligible_callback_checks\":" << callback.round59_sample_checks
+                  << ",\"successful_samples\":" << callback.round59_sample_successes
+                  << ",\"sampling_failures\":"
+                  << std::max(0LL, callback.round59_sample_checks -
+                                     callback.round59_sample_successes)
+                  << ",\"root_callback_count\":"
+                  << callback.round59_root_callback_sequence
+                  << ",\"root_completion_status\":\"" << root_status << "\""
+                  << "}\n";
+        }
+        if (!callback.submitted_candidates.empty()) {
+            int final_solution_count = 0;
+            std::vector<double> final_solution(
+                callback.candidate_domain.names.size());
+            const bool final_solution_available =
+                !final_solution.empty() &&
+                api_.getintattr(model, GRB_INT_ATTR_SOLCOUNT,
+                                &final_solution_count) == 0 &&
+                final_solution_count > 0 &&
+                api_.getdblattrarray(
+                    model, GRB_DBL_ATTR_X, 0,
+                    static_cast<int>(final_solution.size()),
+                    final_solution.data()) == 0;
+            if (final_solution_available) {
+                for (auto& submitted : callback.submitted_candidates) {
+                    if ((submitted.confirmed && !callback.round61_session) ||
+                        submitted.values.size() != final_solution.size() ||
+                        submitted.event_index >=
+                            callback.candidate_events.size()) {
+                        continue;
+                    }
+                    double maximum_integer_difference = 0.0;
+                    int compared_integer_columns = 0;
+                    for (std::size_t column = 0;
+                         column < final_solution.size(); ++column) {
+                        const char type = callback.candidate_domain.
+                            variable_types[column];
+                        if (type != GRB_BINARY && type != GRB_INTEGER &&
+                            type != GRB_SEMIINT) {
+                            continue;
+                        }
+                        ++compared_integer_columns;
+                        maximum_integer_difference = std::max(
+                            maximum_integer_difference,
+                            std::fabs(final_solution[column] -
+                                      submitted.values[column]));
+                    }
+                    if (compared_integer_columns > 0 &&
+                        maximum_integer_difference <= 1e-6) {
+                        submitted.confirmed = true;
+                        auto& event = callback.candidate_events[
+                            submitted.event_index];
+                        event.acceptance =
+                            "confirmed_submitted_integer_decision_vector_"
+                            "is_final_native_solution";
+                        event.final_integer_vector_matches = true;
+                        event.status =
+                            "submitted_integer_decisions_match_final_native_"
+                            "solution";
+                    }
+                }
+            }
+        }
+        out.round60_candidate_disabled_after_failure =
+            callback.candidate_disabled_after_failure;
+        out.round60_candidate_triggers = callback.candidate_trigger_count;
+        out.round60_candidate_overhead_seconds =
+            callback.candidate_overhead_seconds;
+        out.round60_candidate_events = callback.candidate_events;
+        for (const auto& event : out.round60_candidate_events) {
+            if (event.generated) ++out.round60_candidates_generated;
+            if (event.independently_verified) ++out.round60_candidates_verified;
+            if (event.mapping_complete && event.linear_constraints_valid) {
+                ++out.round60_candidates_mapped;
+            }
+            if (event.submitted) ++out.round60_candidates_submitted;
+            if (event.acceptance.rfind("confirmed_", 0) == 0) {
+                ++out.round60_candidates_confirmed_accepted;
+            } else if (event.submitted) {
+                ++out.round60_candidates_acceptance_unknown;
+            }
+            if (event.generated &&
+                (!out.round60_best_generated_objective_available ||
+                 event.candidate_objective <
+                     out.round60_best_generated_objective)) {
+                out.round60_best_generated_objective_available = true;
+                out.round60_best_generated_objective =
+                    event.candidate_objective;
+            }
+        }
+        if (!request.round60_candidate_log_path.empty()) {
+            bool candidate_log_written = false;
+            try {
+                if (request.round60_candidate_log_path.has_parent_path()) {
+                    std::filesystem::create_directories(
+                        request.round60_candidate_log_path.parent_path());
+                }
+                std::ofstream candidate_log(
+                    request.round60_candidate_log_path);
+                if (candidate_log) {
+                    candidate_log << std::setprecision(17)
+                        << "event_sequence,callback_where,trigger,source,content_sha256,"
+                           "mode,status,generated,verified,strictly_improves_cutoff,"
+                           "mapping_complete,bounds_valid,integrality_valid,"
+                           "linear_checked,linear_valid,linear_rows_checked,"
+                           "violated_rows,max_violation,"
+                           "submitted,submission_return_code,native_objective_returned,"
+                           "native_objective,acceptance,objective_evaluations,"
+                           "callback_elapsed_seconds,generation_seconds,"
+                           "verification_seconds,mapping_seconds,residual_check_seconds,"
+                           "total_seconds,candidate_objective,exact_vector_observed_in_mipsol,final_integer_vector_matches,native_incumbent_change_observed,native_incumbent_before_available,native_incumbent_before_submission\n";
+                    for (const auto& event : out.round60_candidate_events) {
+                        candidate_log << event.event_sequence << ','
+                            << event.callback_where << ',' << event.trigger << ','
+                            << event.source << ',' << event.content_sha256 << ','
+                            << event.mode << ',' << event.status << ','
+                            << event.generated << ',' << event.independently_verified
+                            << ',' << event.strictly_improves_frozen_cutoff << ','
+                            << event.mapping_complete << ',' << event.bounds_valid
+                            << ',' << event.integrality_valid << ','
+                            << event.linear_constraints_checked << ','
+                            << event.linear_constraints_valid << ','
+                            << event.linear_rows_checked << ','
+                            << event.violated_linear_rows << ','
+                            << event.maximum_linear_violation << ',' << event.submitted
+                            << ',' << event.submission_return_code << ','
+                            << event.native_objective_returned << ','
+                            << event.native_objective << ',' << event.acceptance << ','
+                            << event.objective_evaluations << ','
+                            << event.callback_elapsed_seconds << ','
+                            << event.generation_seconds << ','
+                            << event.verification_seconds << ','
+                            << event.mapping_seconds << ','
+                            << event.residual_check_seconds << ','
+                            << event.total_seconds << ',' << event.candidate_objective
+                            << ',' << event.exact_vector_observed_in_mipsol
+                            << ',' << event.final_integer_vector_matches
+                            << ',' << event.native_incumbent_change_observed
+                            << ',' << event.native_incumbent_before_available
+                            << ',' << event.native_incumbent_before_submission
+                            << '\n';
+                    }
+                    candidate_log_written = static_cast<bool>(candidate_log);
+                }
+            } catch (...) {
+                candidate_log_written = false;
+            }
+            if (!candidate_log_written) {
+                out.round60_candidate_disabled_after_failure = true;
+            }
+        }
+        out.round53_mipnode_calls = callback.round53_mipnode_calls;
+        out.round53_mipnode_status_reads =
+            callback.round53_mipnode_status_reads;
+        out.round53_relaxation_vector_reads =
+            callback.round53_relaxation_vector_reads;
+        out.round53_separator_calls = callback.round53_separator_calls;
+        out.round53_cut_submission_calls =
+            callback.round53_cut_submission_calls;
+        out.round53_callback_overhead_seconds =
+            callback.cut_callback_overhead_seconds;
+        if (tailored_cut_active) {
+            const Round52CutManagerTelemetry& cut =
+                cut_manager.telemetry();
+            out.tailored_cut_callback_disabled_after_failure =
+                callback.tailored_cut_disabled_after_failure;
+            out.tailored_cut_callback_calls = cut.callback_calls;
+            out.tailored_cut_root_callback_calls =
+                cut.root_callback_calls;
+            out.tailored_cut_tree_callback_calls =
+                cut.tree_callback_calls;
+            out.tailored_cut_nonoptimal_mipnode_callbacks =
+                callback.cut_nonoptimal_mipnode_callbacks;
+            out.tailored_cut_relaxation_vector_failures =
+                callback.cut_relaxation_vector_failures;
+            out.tailored_cuts_generated = cut.generated;
+            out.tailored_cuts_violated = cut.violated;
+            out.tailored_cuts_selected = cut.selected;
+            out.tailored_cuts_added = cut.added;
+            out.tailored_cut_duplicate_rejections =
+                cut.duplicate_rejections;
+            out.tailored_cut_dominated_rejections =
+                cut.dominated_rejections;
+            out.tailored_cut_nonviolated_rejections =
+                cut.nonviolated_rejections;
+            out.tailored_cut_invalid_rejections =
+                cut.invalid_rejections;
+            out.tailored_cut_submission_failures =
+                cut.submission_failures;
+            out.tailored_cut_callback_failures =
+                cut.callback_failures;
+            out.tailored_cut_pool_size = static_cast<long long>(
+                cut.global_pool_size);
+            out.tailored_cut_callback_overhead_seconds =
+                callback.cut_callback_overhead_seconds;
+        }
         if (!request.native_log_path.empty()) {
             // Closing the per-attempt log target makes the evidence immutable
             // before it is classified or hashed by the experiment harness.
@@ -846,6 +2846,7 @@ public:
             out.native_status_code == GRB_WORK_LIMIT ||
             out.native_status_code == GRB_MEM_LIMIT;
         out.native_bound_target_reached = callback.bound_target_reached;
+        out.round62_external_termination_requested=callback.round62_external_termination_requested;
         out.native_bound_target_termination_requested =
             callback.bound_target_termination_requested;
         if (out.partial_bound_target_mip &&
@@ -905,6 +2906,231 @@ public:
             if (getDouble(GRB_DBL_ATTR_OBJVAL, lp_objective)) {
                 out.native_bound = lp_objective;
                 out.native_bound_available = true;
+                out.lp_objective_value = lp_objective;
+                out.lp_objective_value_available = true;
+            }
+            if (request.capture_lp_primal_dual_evidence &&
+                !out.lp_primal_dual_variable_evidence.empty()) {
+                const int evidence_count = static_cast<int>(
+                    out.lp_primal_dual_variable_evidence.size());
+                std::vector<double> primal(
+                    static_cast<std::size_t>(evidence_count));
+                std::vector<double> reduced_cost(
+                    static_cast<std::size_t>(evidence_count));
+                std::vector<int> basis(
+                    static_cast<std::size_t>(evidence_count));
+                out.lp_primal_values_available = api_.getdblattrarray(
+                    model, GRB_DBL_ATTR_X, 0, evidence_count,
+                    primal.data()) == 0;
+                out.lp_reduced_costs_available = api_.getdblattrarray(
+                    model, GRB_DBL_ATTR_RC, 0, evidence_count,
+                    reduced_cost.data()) == 0;
+                out.lp_basis_status_available = api_.getintattrarray(
+                    model, GRB_INT_ATTR_VBASIS, 0, evidence_count,
+                    basis.data()) == 0;
+                bool finite = out.lp_primal_values_available &&
+                    out.lp_reduced_costs_available;
+                for (int index = 0; finite && index < evidence_count;
+                     ++index) {
+                    auto& evidence = out.lp_primal_dual_variable_evidence[
+                        static_cast<std::size_t>(index)];
+                    evidence.primal_value = primal[
+                        static_cast<std::size_t>(index)];
+                    evidence.reduced_cost = reduced_cost[
+                        static_cast<std::size_t>(index)];
+                    if (out.lp_basis_status_available) {
+                        evidence.variable_basis_status = basis[
+                            static_cast<std::size_t>(index)];
+                    }
+                    finite = std::isfinite(evidence.lower_bound) &&
+                        std::isfinite(evidence.upper_bound) &&
+                        std::isfinite(evidence.primal_value) &&
+                        std::isfinite(evidence.reduced_cost);
+                }
+                out.lp_primal_dual_evidence_available = finite &&
+                    out.lp_basis_status_available &&
+                    out.lp_objective_sense == 1 &&
+                    out.model_fingerprint_matches_request;
+                if (!out.lp_primal_dual_evidence_available) {
+                    out.lp_primal_dual_variable_evidence.clear();
+                }
+            }
+            if (request.capture_lp_primal_dual_evidence) {
+                int constraint_count = 0;
+                const bool count_ok = getInt(
+                    GRB_INT_ATTR_NUMCONSTRS, constraint_count) &&
+                    constraint_count >= 0;
+                if (count_ok) {
+                    out.lp_primal_dual_constraint_evidence.resize(
+                        static_cast<std::size_t>(constraint_count));
+                    std::vector<double> slacks(
+                        static_cast<std::size_t>(constraint_count));
+                    std::vector<double> duals(
+                        static_cast<std::size_t>(constraint_count));
+                    std::vector<int> basis(
+                        static_cast<std::size_t>(constraint_count));
+                    out.lp_constraint_slacks_available =
+                        constraint_count == 0 ||
+                        api_.getdblattrarray(
+                            model, GRB_DBL_ATTR_SLACK, 0,
+                            constraint_count, slacks.data()) == 0;
+                    out.lp_constraint_duals_available =
+                        constraint_count == 0 ||
+                        api_.getdblattrarray(
+                            model, GRB_DBL_ATTR_PI, 0,
+                            constraint_count, duals.data()) == 0;
+                    out.lp_constraint_basis_status_available =
+                        constraint_count == 0 ||
+                        api_.getintattrarray(
+                            model, GRB_INT_ATTR_CBASIS, 0,
+                            constraint_count, basis.data()) == 0;
+                    bool constraint_metadata_ok =
+                        out.lp_constraint_slacks_available &&
+                        out.lp_constraint_duals_available &&
+                        out.lp_constraint_basis_status_available;
+                    for (int index = 0;
+                         constraint_metadata_ok &&
+                         index < constraint_count; ++index) {
+                        char* name = nullptr;
+                        constraint_metadata_ok =
+                            api_.getstrattrelement(
+                                model, GRB_STR_ATTR_CONSTRNAME,
+                                index, &name) == 0 && name && *name &&
+                            std::isfinite(slacks[
+                                static_cast<std::size_t>(index)]) &&
+                            std::isfinite(duals[
+                                static_cast<std::size_t>(index)]);
+                        if (constraint_metadata_ok) {
+                            auto& evidence =
+                                out.lp_primal_dual_constraint_evidence[
+                                    static_cast<std::size_t>(index)];
+                            evidence.name = name;
+                            evidence.slack = slacks[
+                                static_cast<std::size_t>(index)];
+                            evidence.dual_multiplier = duals[
+                                static_cast<std::size_t>(index)];
+                            evidence.constraint_basis_status = basis[
+                                static_cast<std::size_t>(index)];
+                        }
+                    }
+                    out.lp_constraint_evidence_available =
+                        constraint_metadata_ok &&
+                        out.model_fingerprint_matches_request;
+                    if (!out.lp_constraint_evidence_available) {
+                        out.lp_primal_dual_constraint_evidence.clear();
+                    }
+                }
+            }
+            int diagnostic_variables = 0;
+            if (getInt(GRB_INT_ATTR_NUMVARS, diagnostic_variables) &&
+                diagnostic_variables > 0) {
+                std::vector<double> solution(
+                    static_cast<std::size_t>(diagnostic_variables));
+                std::unordered_map<std::string, double> values;
+                bool diagnostics_ok = api_.getdblattrarray(
+                    model, GRB_DBL_ATTR_X, 0, diagnostic_variables,
+                    solution.data()) == 0;
+                for (int index = 0; diagnostics_ok &&
+                     index < diagnostic_variables; ++index) {
+                    char* name = nullptr;
+                    diagnostics_ok = api_.getstrattrelement(
+                        model, GRB_STR_ATTR_VARNAME, index, &name) == 0 &&
+                        name && *name;
+                    if (diagnostics_ok) {
+                        values[name] = solution[
+                            static_cast<std::size_t>(index)];
+                    }
+                }
+                auto fractionality = [](double value) {
+                    const double clipped = std::max(
+                        0.0, std::min(1.0, value));
+                    return 4.0 * clipped * (1.0 - clipped);
+                };
+                if (diagnostics_ok) {
+                    if ((options_.round63_time_mode=="root"||options_.round63_time_mode=="root-dry") && !round63_root_observed_)
+                        observeRound63Root(values,request);
+                    for (const auto& item : values) {
+                        if (item.first.rfind("x_", 0) == 0) {
+                            out.route_binary_fractionality +=
+                                fractionality(item.second);
+                        } else if (item.first.rfind("z_", 0) == 0) {
+                            out.visit_binary_fractionality +=
+                                fractionality(item.second);
+                        } else if (item.first.rfind("bit_", 0) == 0) {
+                            out.inventory_bit_fractionality +=
+                                fractionality(item.second);
+                        } else if (item.first.rfind("seg_z_", 0) == 0) {
+                            out.selector_binary_fractionality +=
+                                fractionality(item.second);
+                        }
+                    }
+                    const auto global_g = values.find("G");
+                    if (global_g != values.end()) {
+                        out.lp_g_value = global_g->second;
+                        out.lp_g_value_available =
+                            std::isfinite(out.lp_g_value);
+                        for (const auto& item : values) {
+                            if (item.first.rfind("bit_", 0) != 0) continue;
+                            const double bit = item.second;
+                            const double lower = request.gamma_L;
+                            const double upper = request.gamma_U;
+                            const double mc_lower = std::max(
+                                lower * bit,
+                                global_g->second - upper * (1.0 - bit));
+                            const double mc_upper = std::min(
+                                upper * bit,
+                                global_g->second - lower * (1.0 - bit));
+                            out.mccormick_ambiguity +=
+                                std::max(0.0, mc_upper - mc_lower);
+                        }
+                    }
+                    const std::regex activation_pattern(
+                        R"(^seg_w_([0-9]+)_([0-9]+)_([0-9]+)$)");
+                    for (const auto& item : values) {
+                        std::smatch match;
+                        if (!std::regex_match(
+                                item.first, match, activation_pattern)) {
+                            continue;
+                        }
+                        const std::string i = match[1].str();
+                        const std::string b = match[2].str();
+                        const int segment = std::stoi(match[3].str());
+                        const std::string selected_g_name =
+                            "seg_G_" + std::to_string(segment);
+                        const std::string selector_name =
+                            "seg_z_" + std::to_string(segment);
+                        const std::string product_name =
+                            "seg_q_" + i + "_" + b + "_" +
+                            std::to_string(segment);
+                        const auto selected_g = values.find(selected_g_name);
+                        const auto selector = values.find(selector_name);
+                        const auto product = values.find(product_name);
+                        if (selected_g == values.end() ||
+                            selector == values.end() ||
+                            product == values.end()) {
+                            diagnostics_ok = false;
+                            break;
+                        }
+                        const double midpoint = request.gamma_L + 0.5 *
+                            (request.gamma_U - request.gamma_L);
+                        const double lower = segment == 0
+                            ? request.gamma_L : midpoint;
+                        const double upper = segment == 0
+                            ? midpoint : request.gamma_U;
+                        const double activation = item.second;
+                        const double inactive =
+                            selector->second - activation;
+                        const double mc_lower = std::max(
+                            lower * activation,
+                            selected_g->second - upper * inactive);
+                        const double mc_upper = std::min(
+                            upper * activation,
+                            selected_g->second - lower * inactive);
+                        out.segmented_mccormick_ambiguity +=
+                            std::max(0.0, mc_upper - mc_lower);
+                    }
+                }
+                out.lp_solution_diagnostics_available = diagnostics_ok;
             }
         }
         out.lp_terminal_valid = out.lp_relaxation &&
@@ -957,6 +3183,69 @@ public:
         getInt(GRB_INT_ATTR_SOLCOUNT, solution_count);
         const GurobiNativeLogEvidence log_evidence =
             inspectGurobiNativeLog(request.native_log_path);
+        if (request.round62_external_stop) {
+            out.round62_numeric_valid=out.native_status_code==GRB_OPTIMAL ||
+                out.native_status_code==GRB_INTERRUPTED || out.native_status_code==GRB_TIME_LIMIT ||
+                out.native_status_code==GRB_INFEASIBLE;
+            if (solution_count>0) {
+                for (const char* attr:{"ConstrVio","BoundVio","IntVio"}) {
+                    double violation=0;
+                    out.round62_numeric_valid=out.round62_numeric_valid &&
+                        getDouble(attr,violation) && violation<=1e-5;
+                }
+            }
+            std::ifstream quality_log(request.native_log_path);
+            std::string quality_line;
+            while(std::getline(quality_log,quality_line)) {
+                std::transform(quality_line.begin(),quality_line.end(),quality_line.begin(),
+                    [](unsigned char c){return static_cast<char>(std::tolower(c));});
+                if(quality_line.find("numerical trouble")!=std::string::npos ||
+                   quality_line.find("unscaled primal violation")!=std::string::npos ||
+                   quality_line.find("unscaled dual violation")!=std::string::npos)
+                    out.round62_numeric_valid=false;
+            }
+        }
+        out.presolved_model_size_available =
+            log_evidence.presolved_size_available;
+        out.presolved_row_count = log_evidence.presolved_rows;
+        out.presolved_column_count = log_evidence.presolved_columns;
+        out.presolved_nonzero_count = log_evidence.presolved_nonzeros;
+        out.root_relaxation_bound_available =
+            log_evidence.root_relaxation_bound_available;
+        out.root_relaxation_bound = log_evidence.root_relaxation_bound;
+        out.root_runtime_seconds = log_evidence.root_runtime_seconds;
+        out.root_simplex_iterations =
+            log_evidence.root_simplex_iterations;
+        out.root_cut_family_evidence = log_evidence.root_cut_families;
+        long long root_cut_total = 0;
+        for (const auto& cut : out.root_cut_family_evidence) {
+            root_cut_total += cut.count;
+        }
+        out.native_cut_count_available = !out.root_cut_family_evidence.empty();
+        out.native_cut_count = root_cut_total;
+        for (const FixedIntervalNativeBoundEvent& event :
+             out.native_bound_events) {
+            if (out.first_incumbent_runtime_seconds < 0.0 &&
+                event.native_incumbent_available) {
+                out.first_incumbent_runtime_seconds =
+                    event.solver_runtime_seconds;
+                out.first_incumbent_work = event.work;
+            }
+            if (event.processed_nodes <= 0.0 &&
+                event.native_bound_available) {
+                out.final_root_cut_bound_available = true;
+                out.final_root_cut_bound = event.native_bound;
+                out.root_work = std::max(out.root_work, event.work);
+                out.root_runtime_seconds = std::max(
+                    out.root_runtime_seconds,
+                    event.solver_runtime_seconds);
+            }
+        }
+        if (!out.final_root_cut_bound_available &&
+            out.root_relaxation_bound_available) {
+            out.final_root_cut_bound_available = true;
+            out.final_root_cut_bound = out.root_relaxation_bound;
+        }
         out.presolve_rerun_observed = log_evidence.presolve_executed;
         out.root_relaxation_rerun_observed =
             log_evidence.root_relaxation_executed;
@@ -1004,6 +3293,7 @@ public:
                 ++stats_.warm_start_unknown_count;
             }
         }
+        if (request.round68_verified_start) writeRound68StartEvidence(request,out);
         if (!out.lp_relaxation && solution_count > 0) {
             int nvars = 0;
             if (getInt(GRB_INT_ATTR_NUMVARS, nvars) && nvars > 0) {
@@ -1045,6 +3335,14 @@ public:
             out.feasibility_consistency_gate = !contradicts;
         }
         state.had_incumbent = !out.lp_relaxation && solution_count > 0;
+        if (options_.round65_projection!="off" && out.lp_terminal_valid && out.optimal &&
+            out.exact_zero_gap_roundtrip && out.model_fingerprint_matches_request && out.feasibility_consistency_gate && request.round65_budget) {
+            const double seconds=std::chrono::duration<double>(Clock::now()-round65_started).count();
+            request.round65_budget->charge(true,out.work,seconds,request.leaf_id,"base_LP_"+out.native_status,
+                {request.optional_work_limit,request.global_deadline_remaining_seconds});
+            out.round65_optional_base_charged=true;
+            runRound65Projection(model,state.round65_rows,native_names,request,out);
+        }
         bool domain_restore_ok = true;
         if (out.lp_relaxation &&
             request.incremental_model_reuse_enabled) {
@@ -1089,6 +3387,10 @@ public:
         } else {
             out.failure_reason = "none";
         }
+        if (out.lp_relaxation && round63_root_source_==request.native_log_path.string() &&
+            (!out.lp_terminal_valid||!out.model_fingerprint_matches_request)) {
+            round63_root_rows_.clear();round63_root_failure_="invalid_source_lp_lifecycle";
+        }
         if (paper_solve && !request.retain_model_after_solve) {
             out.retained_state_classification =
                 out.in_memory_model_reused
@@ -1111,6 +3413,7 @@ public:
 
 private:
     struct LeafState {
+        std::set<std::string> round65_rows;
         GRBmodel* model = nullptr;
         std::string model_fingerprint;
         bool new_child = false;
@@ -1123,6 +3426,162 @@ private:
         double cumulative_barrier_iterations = 0.0;
         std::vector<char> original_variable_types;
     };
+
+    std::unique_ptr<Round65ProjectionService> round65_service_;
+    std::vector<Round65ProjectionRow> round65_pool_;
+    std::set<std::string> round65_signatures_;
+    long long round65_proof_calls_=0;
+    bool round65_projection_failed_=false;
+    void runRound65Projection(GRBmodel* main_model,std::set<std::string>& attached,
+        const std::vector<std::string>& names,const FixedIntervalMipRequest& request,FixedIntervalMipOutcome& out) {
+        auto& budget=*request.round65_budget;
+        if(round65_projection_failed_ || !budget.grant(processWorkRemainingSeconds(options_)).allowed())return;
+        const auto started=Clock::now();double accounted_seconds=0;
+        auto elapsed=[&](){return std::chrono::duration<double>(Clock::now()-started).count();};
+        const auto dir=request.native_log_path.parent_path().parent_path()/"projection";
+        GRBmodel* proof=nullptr;
+        try {
+            auto check=[](int rc){if(rc)throw std::runtime_error("Round65 proof API "+std::to_string(rc));};
+            if(!round65_service_) round65_service_=std::make_unique<Round65ProjectionService>(instance_,dir,options_.round65_release_load);
+            std::map<std::string,int> indices;
+            for(std::size_t i=0;i<names.size();++i)if(names[i].empty()||!indices.emplace(names[i],int(i)).second)throw std::runtime_error("original names");
+            auto readPoint=[&](GRBmodel* m){std::vector<double> x(names.size());check(api_.getdblattrarray(m,"X",0,int(x.size()),x.data()));
+                std::map<std::string,double> values;for(std::size_t i=0;i<x.size();++i){if(!std::isfinite(x[i]))throw std::runtime_error("nonfinite point");values[names[i]]=x[i];}return values;};
+            auto point=readPoint(main_model);
+            check(api_.updatemodel(main_model));proof=api_.copymodel(main_model);if(!proof)throw std::runtime_error("proof copy");
+            check(api_.setcallbackfunc(proof,nullptr,nullptr));auto env=api_.getenv(proof);
+            // Native defaults allow residuals up to 1e-6; the evidence gate
+            // below remains 1e-7. Request stricter optional LP convergence,
+            // never weaken that acceptance gate or alter main/official models.
+            for(const char* parameter:{"FeasibilityTol","OptimalityTol"}) {
+                double actual=0;check(api_.setdblparam(env,parameter,1e-8));check(api_.getdblparam(env,parameter,&actual));
+                if(actual!=1e-8)throw std::runtime_error("proof tolerance readback");
+            }
+            // This is an independent bounded LP. No native MIP reset or reload.
+            std::set<std::string> proof_rows=attached;
+            std::vector<Round65ProjectionRow> selected;
+            auto activity=[&](const Round65ProjectionRow& r){long double a=0;for(const auto& [n,c]:r.coefficients)a+=static_cast<long double>(c)*point.at(n);return double(a);};
+            auto add=[&](GRBmodel* m,const Round65ProjectionRow& r){
+                if(!r.valid||r.identity!=round65_service_->identity())throw std::runtime_error("row physical identity");
+                std::vector<int> ix;std::vector<double> a;for(const auto& [n,c]:r.coefficients){ix.push_back(indices.at(n));a.push_back(c);}
+                check(api_.addconstr(m,int(ix.size()),ix.data(),a.data(),'>',r.rhs,("r65_"+r.signature).c_str()));
+            };
+            std::ofstream trace(dir/"proof_calls.csv",std::ios::app),uses(dir/"row_use.csv",std::ios::app);
+            if(std::filesystem::file_size(dir/"proof_calls.csv")==0)trace<<"call,leaf,round,gamma_L,gamma_U,cutoff,bound,work,seconds,selected,status\n";
+            if(std::filesystem::file_size(dir/"row_use.csv")==0)uses<<"leaf,model_sha256,cutoff,signature,support,raw_violation,target\n";
+            uses<<std::setprecision(17);
+            double last_bound=out.native_bound;
+            // At most four LP reoptimizations and eight selected rows per call.
+            // Stop after a non-improving objective pass. Global pool capped at64.
+            for(int round=0;round<4 && selected.size()<8;++round){
+                std::vector<Round65ProjectionRow> pending;
+                for(const auto& row:round65_pool_)if(selected.size()+pending.size()<8 && !proof_rows.count(row.signature) && row.rhs-activity(row)>1e-7){
+                    pending.push_back(row);proof_rows.insert(row.signature);
+                }
+                for(int k=0;k<instance_.M && selected.size()+pending.size()<8 && round65_pool_.size()<64;++k){
+                    if(!budget.grant(processWorkRemainingSeconds(options_)).allowed())break;
+                    const double before=budget.optional_seconds;
+                    auto answer=round65_service_->query(k,point,processWorkRemainingSeconds(options_),budget);
+                    accounted_seconds+=budget.optional_seconds-before;
+                    if(answer.row.valid && round65_signatures_.insert(answer.row.signature).second){
+                        round65_pool_.push_back(answer.row);
+                        if(proof_rows.insert(answer.row.signature).second)pending.push_back(answer.row);
+                    }
+                }
+                if(pending.empty())break;
+                for(const auto& row:pending){add(proof,row);selected.push_back(row);
+                    uses<<std::quoted(request.leaf_id)<<','<<std::quoted(request.canonical_model_fingerprint)<<','<<request.verified_cutoff<<','
+                        <<row.signature<<','<<row.coefficients.size()<<','<<row.rhs-activity(row)<<",proof\n";}
+                check(api_.updatemodel(proof));
+                // Debit construction/validation/copy overhead before admission.
+                const double overhead=std::max(0.,elapsed()-accounted_seconds);
+                budget.charge(true,0,overhead,request.leaf_id,"projection_overhead",{});accounted_seconds+=overhead;
+                auto grant=budget.grant(processWorkRemainingSeconds(options_));if(!grant.allowed())break;
+                check(api_.setdblparam(env,"WorkLimit",grant.work));check(api_.setdblparam(env,"TimeLimit",grant.seconds));
+                double actual=0;check(api_.getdblparam(env,"WorkLimit",&actual));if(actual!=grant.work)throw std::runtime_error("proof work readback");
+                const auto query=round65_proof_calls_++;
+                check(api_.setstrparam(env,"LogFile",(dir/("proof_"+std::to_string(query)+".log")).string().c_str()));
+                trace<<std::setprecision(17)<<query<<','<<std::quoted(request.leaf_id)<<','<<round<<','<<request.gamma_L<<','<<request.gamma_U<<','
+                    <<request.verified_cutoff<<','<<last_bound<<','<<grant.work<<','<<grant.seconds<<','<<selected.size()<<",launch\n";trace.flush();
+                const auto native_start=Clock::now();const int rc=api_.optimize(proof);double work=0;api_.getdblattr(proof,"Work",&work);
+                const double seconds=std::chrono::duration<double>(Clock::now()-native_start).count();
+                budget.charge(true,work,seconds,request.leaf_id,"projection_reopt",grant);accounted_seconds+=seconds;check(rc);
+                int status=0;check(api_.getintattr(proof,"Status",&status));double bound=last_bound;
+                if(status==GRB_OPTIMAL){
+                    double cv=GRB_INFINITY,bv=GRB_INFINITY,dv=GRB_INFINITY;
+                    check(api_.getdblattr(proof,"ConstrVio",&cv));check(api_.getdblattr(proof,"BoundVio",&bv));check(api_.getdblattr(proof,"DualVio",&dv));
+                    if(!std::isfinite(cv)||!std::isfinite(bv)||!std::isfinite(dv)||std::max({cv,bv,dv})>1e-7){
+                        trace<<query<<','<<std::quoted(request.leaf_id)<<','<<round<<','<<request.gamma_L<<','<<request.gamma_U<<','<<request.verified_cutoff<<','
+                            <<last_bound<<','<<work<<','<<seconds<<','<<selected.size()<<",rejected_residual\n";trace.flush();
+                        std::ostringstream reason;reason<<std::setprecision(17)<<"proof residual gate: ConstrVio="<<cv<<" BoundVio="<<bv<<" DualVio="<<dv;
+                        throw std::runtime_error(reason.str());
+                    }
+                    check(api_.getdblattr(proof,"ObjVal",&bound));if(!std::isfinite(bound))throw std::runtime_error("proof bound");
+                    out.round65_proof_bound_available=true;out.round65_proof_bound=std::max(last_bound,bound);
+                }else if(status==GRB_INFEASIBLE){out.round65_proof_infeasible=true;}
+                trace<<query<<','<<std::quoted(request.leaf_id)<<','<<round<<','<<request.gamma_L<<','<<request.gamma_U<<','<<request.verified_cutoff<<','
+                    <<bound<<','<<work<<','<<seconds<<','<<selected.size()<<','<<status<<'\n';trace.flush();
+                if(status!=GRB_OPTIMAL || bound>=request.verified_cutoff-1e-7 || bound<=last_bound+1e-7)break;
+                last_bound=bound;point=readPoint(proof);
+            }
+            if(options_.round65_projection=="sparse"){
+                for(const auto& row:selected)if(attached.insert(row.signature).second){add(main_model,row);
+                    uses<<std::quoted(request.leaf_id)<<','<<std::quoted(request.canonical_model_fingerprint)<<','<<request.verified_cutoff<<','
+                        <<row.signature<<','<<row.coefficients.size()<<",,native\n";}
+                check(api_.updatemodel(main_model));
+            }
+            int count=0,cols=0;check(api_.getintattr(main_model,"NumConstrs",&count));check(api_.getintattr(main_model,"NumVars",&cols));
+            std::ofstream shape(dir/"main_shapes.csv",std::ios::app);
+            if(std::filesystem::file_size(dir/"main_shapes.csv")==0)shape<<"leaf,mode,columns,rows,attached\n";
+            shape<<std::quoted(request.leaf_id)<<','<<options_.round65_projection<<','<<cols<<','<<count<<','<<attached.size()<<'\n';
+            if(cols!=int(names.size()))throw std::runtime_error("projection added a column");
+            if(!trace||!uses||!shape)throw std::runtime_error("proof evidence persistence");
+        }catch(const std::exception& e){
+            round65_projection_failed_=true;
+            std::filesystem::create_directories(dir);
+            std::ofstream fail(dir/"failures.txt",std::ios::app);fail<<request.leaf_id<<' '<<e.what()<<'\n';
+            // Qualified earlier evidence remains valid; no auxiliary status
+            // alone changes the active interval or certifies the original F.
+        }
+        if(proof)api_.freemodel(proof);
+        budget.charge(true,0,std::max(0.,elapsed()-accounted_seconds),request.leaf_id,"projection_finalization",{});
+    }
+
+
+    bool round63_root_observed_=false;
+    std::string round63_root_source_,round63_root_failure_;
+    std::vector<FixedIntervalMipRequest::AdditionalLinearRow> round63_root_rows_;
+    void observeRound63Root(const std::unordered_map<std::string,double>& values,const FixedIntervalMipRequest& request) {
+        round63_root_observed_=true;round63_root_source_=request.native_log_path.string();
+        const auto start=Clock::now();long long graphs=0;
+        try {
+            const auto data=prepareRound63Time(instance_);auto point=emptyRound63TimePoint(data);
+            for(int k=0;k<data.M;++k)for(int i=0;i<=data.V;++i){
+                if(i)point.pickup[k][i]=values.at("p_"+std::to_string(k)+"_"+std::to_string(i));
+                for(int j=0;j<=data.V;++j)if(i!=j)point.x[k][i][j]=values.at("x_"+std::to_string(k)+"_"+std::to_string(i)+"_"+std::to_string(j));
+            }
+            const auto prefix=round63_root_source_+".round63_prepare";
+            writeRound63TimeData(data,prefix+".data.json");
+            std::ofstream cuts(prefix+".cuts.jsonl"),terms(prefix+".points.csv");terms.precision(17);terms<<"query,vehicle,variable,raw_value\n";
+            std::set<std::string> seen;
+            std::vector<FixedIntervalMipRequest::AdditionalLinearRow> pending;
+            for(int k=0;k<data.M;++k){++graphs;const auto cut=separateRound63Time(data,point,k);
+                if(!acceptRound63TimeCut(data,cut,seen))continue;
+                writeRound63TimeCut(cut,cuts,1,0,-1);
+                FixedIntervalMipRequest::AdditionalLinearRow row;row.row_name="r63_root_"+std::to_string(k);row.scope="global";row.canonical_signature=cut.signature;
+                for(const auto& [n,c]:cut.coefficients){row.variable_names.push_back(n);row.coefficients.push_back(c);terms<<1<<','<<k<<','<<n<<','<<values.at(n)<<'\n';}
+                pending.push_back(std::move(row));
+            }
+            if(!cuts||!terms)throw std::runtime_error("root resource persistence failed");
+            round63_root_rows_=std::move(pending);
+        } catch(const std::exception& e) {round63_root_rows_.clear();round63_root_failure_=e.what();}
+          catch(...) {round63_root_rows_.clear();round63_root_failure_="unknown_root_resource_exception";}
+        std::ofstream log(round63_root_source_+".round63_prepare.json");log.precision(17);
+        log<<"{\"mode\":"<<std::quoted(options_.round63_time_mode)<<",\"sample_kind\":\"first_optimal_required_LP\",\"model_sha256\":"
+           <<std::quoted(request.canonical_model_fingerprint)<<",\"queries\":1,\"maxflow_calls\":"<<graphs<<",\"root_queries\":0,\"selected\":"<<round63_root_rows_.size()
+           <<",\"submitted\":0,\"api_success\":0,\"disabled_after_failure\":"<<(!round63_root_failure_.empty())<<",\"failure_reason\":"<<std::quoted(round63_root_failure_)
+           <<",\"callback_seconds\":0,\"setup_seconds\":"<<std::chrono::duration<double>(Clock::now()-start).count()<<"}\n";
+    }
 
     const Instance& instance_;
     SolveOptions options_;
@@ -1589,6 +4048,18 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             return result;
         }
 
+        if(!options.native_evidence_dir.empty()) {
+            callback.native_evidence=std::make_shared<NativeEvidenceJournal>(instance,options);
+            NativeEvidenceScope scope;scope.full_original=true;
+            scope.model_sha256=canonical.sha256;scope.model_path=canonical.path.string();
+            scope.model_scope=canonical.model_scope;scope.native_log_path=log_path.string();
+            scope.gmax=static_cast<double>(instance.V-1)/instance.V;scope.upper_g=scope.gmax;
+            scope.native_preconditions=evidenceParameterReadback(api,model_env,scope) &&
+                result.gurobi_native_domain_audit_passed && time_limit_rc==0;
+            callback.evidence_instance=&instance;callback.evidence_names=&native_names;
+            callback.evidence_call=callback.native_evidence->beginCall(scope);
+        }
+
         // Model export, environment startup, model import, and domain audits
         // are inside the same process-entry work window. Recompute the native
         // allowance at Optimize launch instead of rebasing a solver-only
@@ -1607,6 +4078,7 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             "absolute_work_remaining=" +
                 std::to_string(optimize_remaining));
         result.gurobi_optimize_return_code = api.optimize(model);
+        if(callback.native_evidence) callback.native_evidence->returned(callback.evidence_call,result.gurobi_optimize_return_code);
         ++result.gurobi_optimize_count;
         result.gurobi_solver_finalization_reached = true;
         getInt(GRB_INT_ATTR_STATUS, result.gurobi_status);

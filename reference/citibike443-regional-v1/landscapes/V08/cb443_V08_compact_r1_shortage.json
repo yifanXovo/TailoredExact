@@ -1,0 +1,151 @@
+{
+  "V": 8,
+  "capacities": [
+    20,
+    19,
+    19,
+    30,
+    21,
+    22,
+    20,
+    24
+  ],
+  "classification": "generated_untested_paper_candidate",
+  "dataset_family": "citibike443-regional-v1",
+  "depot": {
+    "artificial": true,
+    "capacity_placeholder": 100000,
+    "coordinate_utm18n_meters": [
+      589469.144,
+      4502344.032
+    ],
+    "initial_placeholder": 50000,
+    "target_placeholder": 0
+  },
+  "generator_version": "citibike443-regional-v1.0.0",
+  "geographic_regime": "compact",
+  "initial": [
+    2,
+    14,
+    2,
+    24,
+    15,
+    4,
+    15,
+    2
+  ],
+  "inventory_regime": "shortage",
+  "landscape_id": "cb443_V08_compact_r1_shortage",
+  "local_imbalance_level": "high",
+  "min_ratio": [
+    0.28,
+    0.3105,
+    0.3105,
+    0.3133,
+    0.3095,
+    0.3182,
+    0.3,
+    0.2833
+  ],
+  "points_utm18n_meters": [
+    [
+      589384.409,
+      4502316.226
+    ],
+    [
+      589371.112,
+      4502086.251
+    ],
+    [
+      589619.631,
+      4502299.075
+    ],
+    [
+      589391.778,
+      4502617.184
+    ],
+    [
+      589157.917,
+      4502592.17
+    ],
+    [
+      589402.399,
+      4502788.286
+    ],
+    [
+      589840.888,
+      4502178.512
+    ],
+    [
+      589585.016,
+      4501874.554
+    ]
+  ],
+  "replicate": 1,
+  "schema": "citibike443-station-landscape-v1",
+  "seed": 345017354,
+  "seed_derivation_material": "citibike443-regional-v1|inventory|cb443_V08_compact_r1|shortage",
+  "selection_id": "cb443_V08_compact_r1",
+  "source_hashes": {
+    "capacity_sha256": "92ca9b05e66d1425bbc801be2dd9c0776b1a9707e62a60b821d941aa98625ae1",
+    "coordinate_sha256": "c5fd892cc82e07332d4796edb0527182d9c60883acc9b87a5410dab569f990d1"
+  },
+  "source_station_row_indices": [
+    42,
+    32,
+    41,
+    54,
+    53,
+    62,
+    34,
+    24
+  ],
+  "statistics": {
+    "absolute_total_shortage_or_surplus": 11,
+    "balanced_station_count": 0,
+    "bounding_box_height_m": 913.7320000007749,
+    "bounding_box_width_m": 682.9710000000196,
+    "capacity_maximum": 30,
+    "capacity_mean": 21.875,
+    "capacity_median": 20.5,
+    "capacity_minimum": 19,
+    "deficit_station_count": 4,
+    "geographic_diameter_m": 931.8020908510588,
+    "local_l1_imbalance": 53,
+    "maximum_depot_distance_m": 483.56583095593703,
+    "maximum_local_absolute_imbalance": 9,
+    "maximum_pairwise_station_distance_m": 931.8020908510588,
+    "mean_depot_distance_m": 317.9626366961749,
+    "mean_pairwise_station_distance_m": 479.6008982033715,
+    "min_ratio_maximum": 0.3182,
+    "min_ratio_minimum": 0.28,
+    "station_inventory_minus_target": -11,
+    "surplus_station_count": 4,
+    "total_capacity": 175,
+    "total_initial_inventory": 78,
+    "total_target_inventory": 89,
+    "weight_maximum": 1.0,
+    "weight_mean": 0.499511625,
+    "weight_minimum": 0.316406
+  },
+  "target": [
+    9,
+    10,
+    10,
+    16,
+    11,
+    12,
+    10,
+    11
+  ],
+  "weights": [
+    0.316406,
+    0.390625,
+    0.390625,
+    1.0,
+    0.472656,
+    0.5625,
+    0.390625,
+    0.472656
+  ]
+}

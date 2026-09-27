@@ -1,0 +1,28 @@
+{
+  "fixed_rows": 18,
+  "fixed_pairs": 7,
+  "root_rows": 8,
+  "product_rows": 3,
+  "hga_pairs": 2,
+  "split_rows": 4,
+  "integration_reference_rows": 10,
+  "budget": {
+    "schema": "round60-process-budget-audit-v1",
+    "maximum_allowed_processes": 72,
+    "manual_native_micro_processes": 5,
+    "script_optimization_processes": 47,
+    "script_nonoptimization_processes": 3,
+    "total_charged_processes": 52,
+    "remaining_processes": 20,
+    "native_micro_processes": 6,
+    "maximum_native_micro_processes": 6,
+    "maximum_observed_concurrent_optimization_processes": 1,
+    "interval_overlap_tolerance_seconds": 0.1,
+    "structurally_serial_driver": true,
+    "failed_processes_retained_and_charged": [
+      "hga_publish_120\\D6\\HGA-ORIGINAL-invalid-unsupported-cli",
+      "same_build_reference_120\\D1\\P-GRB"
+    ],
+    "all_watchdogs_clear": true
+  }
+}

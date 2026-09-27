@@ -1,0 +1,7 @@
+audit,scope,result,detail
+stable_preset_uniformity,src/PaperK1AmSf.cpp,pass,"one uniform override layer; no instance, size, seed, path, result, or time dispatch"
+separator_uniformity,src/InventoryRouteCuts.cpp,pass,"V is used only as state dimension/validity; exact deterministic closure, no enumeration or sampling"
+root_closure_uniformity,src/InventoryRouteRootClosure.cpp,pass,"no hidden node, size, instance, seed, result, or time dispatch"
+runner_uniformity,src/round54_inventory_route_main.cpp,pass,policy-selected IR1/IR2/IR3 only; no instance-specific algorithm patch
+stable_ir_default_off,src/PaperK1AmSf.cpp,pass,inventory_route_root_closure is inactive in paper-k1-am-sf
+post_official_algorithm_change,b6784e930f5df3b8bb048e7572301f942c017cd0..HEAD CMakeLists/include/src,pass,no algorithmic source change after the official source freeze

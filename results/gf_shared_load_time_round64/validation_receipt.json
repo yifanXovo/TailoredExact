@@ -1,0 +1,146 @@
+{
+  "schema": "round64-final-validation-v1",
+  "all_requested_experiments_complete": true,
+  "base_branch": "codex/round63-cumulative-time-resource",
+  "base_pr": 124,
+  "base_remote_head": "f734d6781fd7125703489245cdb4dc27fb74625c",
+  "research_branch": "codex/round64-shared-load-time",
+  "original_workspace_head_preserved": "4a9cbd0e3d43870e953b3a6678b343a9ac4fc25a",
+  "selected_candidate": {
+    "mode": "joint",
+    "selected_unix": 1789319475.200378,
+    "after_charged_launch": 32,
+    "qualification": "uniform diagnostic research candidate; mainline adoption already vetoed",
+    "preset": "research-round64-k1-h",
+    "cold_preset": "research-round64-k1-s",
+    "build_freeze": "build_freeze_v3.json",
+    "build_directory": "build/round64-v3",
+    "source_commit": "438e9a286957370df2f962893f43a1026902839f",
+    "executable_sha256": "bd059f22d7b27884cb66ce3f7c20579b1ddd6796f61caded7149ab474f26a1d1",
+    "physical_rows": "F0 + Q + independent T + B4 + arc sharing",
+    "lifecycle": "inherited controlled model-object reuse; no fresh override",
+    "startup": "current-process inherited full HGA; cold verified empty routes; native starts disabled",
+    "policy": "same static JOINT for every role; no runtime selector",
+    "evidence": "strict original-point projection exclusions; C2 warm gain versus OFF but slower than SEP; D7 warm regression; D4 fixed-F0 certificate loss",
+    "stopped_alternative": "QCAP: strict incremental projection but D4 matched certificate loss at launch32",
+    "confirmation_roles": [
+      "C6",
+      "C7"
+    ],
+    "confirmation_cap_seconds": 600,
+    "changes_after_confirmation": "none planned; any change invalidates independent confirmation",
+    "stable_default": "unchanged off"
+  },
+  "budget": {
+    "charged": 62,
+    "maximum": 72,
+    "native_micro": 4,
+    "completed": 62,
+    "optimizer_calls": 262,
+    "charged_wall_seconds": 21422.215999999084,
+    "build_only_launches": 48,
+    "build_only_failures": [
+      {
+        "id": "D3",
+        "stage": "preflight",
+        "arm": "q",
+        "returncode": 2
+      }
+    ],
+    "unknown_call_counts": [],
+    "by_kind": {
+      "native-micro": 4,
+      "LP": 6,
+      "performance": 50,
+      "LP-audit": 2
+    },
+    "by_cap": {
+      "20": 4,
+      "120": 20,
+      "600": 30,
+      "1200": 8
+    },
+    "incomplete": [],
+    "over_budget": [],
+    "failed": []
+  },
+  "confirmations": {
+    "frozen_bindings_verified": true,
+    "freeze_sha256": "04776fe736dfabfd7e793a0cef386f0d50032111db5bc8f764ba37710ae271b1",
+    "uniform_mode": "joint",
+    "cap_seconds": 600,
+    "original_role_order_verified": true,
+    "complete": true,
+    "roles": [
+      {
+        "id": "C6",
+        "opened": true,
+        "complete": true,
+        "numbers": [
+          51,
+          52,
+          53,
+          54,
+          55,
+          56
+        ],
+        "arms": [
+          "warm-off",
+          "warm-joint",
+          "P-GRB",
+          "K1-H",
+          "cold-off",
+          "cold-joint"
+        ]
+      },
+      {
+        "id": "C7",
+        "opened": true,
+        "complete": true,
+        "numbers": [
+          57,
+          58,
+          59,
+          60,
+          61,
+          62
+        ],
+        "arms": [
+          "warm-off",
+          "warm-joint",
+          "P-GRB",
+          "K1-H",
+          "cold-off",
+          "cold-joint"
+        ]
+      }
+    ]
+  },
+  "checks": {
+    "solver_free_ctests": 41,
+    "LP_combination_records": 42,
+    "auxiliary_Farkas_records": 4,
+    "original_witnesses": 84,
+    "warm_pairs": 18,
+    "cold_pairs": 4,
+    "submitted_projection_records": 2
+  },
+  "raw_index": {
+    "path": "evidence_index.csv",
+    "files": 3091,
+    "bytes": 1469977217,
+    "sha256": "a4bced8c6544ec891e9c1ebdc839a16544e05967bff75e9e857ceccb63422212"
+  },
+  "stable_default_changed": false,
+  "uniform_upgrade_qualified": false,
+  "unimplemented": [
+    "production shared-resource Farkas separator",
+    "full projection closure",
+    "native h/q execution variant"
+  ],
+  "unestablished": [
+    "strict pure x/p/d projection with L also free",
+    "uniform stable algorithm improvement",
+    "generalization beyond the measured representative panel"
+  ]
+}

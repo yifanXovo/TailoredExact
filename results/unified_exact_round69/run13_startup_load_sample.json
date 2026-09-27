@@ -1,0 +1,20 @@
+{
+  "run_number": 13,
+  "id": "D6",
+  "arm": "VD-S",
+  "phase": "HGA startup",
+  "approximate_run_elapsed_after_sample": 415.7,
+  "sample_seconds": 3.0199399,
+  "exact_process_count": 1,
+  "processes": [
+    {"name": "ExactEBRP", "pid": 51428, "cpu_seconds": 3.046875, "cpu_cores_used": 1.008919084780462},
+    {"name": "svchost", "pid": 18604, "cpu_seconds": 3.046875, "cpu_cores_used": 1.008919084780462},
+    {"name": "ChatGPT", "pid": 5112, "cpu_seconds": 1.390625, "cpu_cores_used": 0.46048101818185194}
+  ],
+  "busy_service_followup": "PID18604 maps to BcastDVRUserService_bab61 (GameDVR and broadcast user service), Running",
+  "exact_priority_class": "Normal (32)",
+  "exact_affinity_mask": 1048575,
+  "explicit_nonpath_HGA_command_fields_equal_to_K1_R": true,
+  "optimizer_calls": 0,
+  "scope": "One lightweight process-CPU delta sample after startup exceeded prior matched HGA wall. Other cores are available; this does not establish causation, sustained CPU contention, or a valid reason to discard this run. No process, affinity, priority or solver setting was changed. Full run and actual costs remain in the evidence."
+}

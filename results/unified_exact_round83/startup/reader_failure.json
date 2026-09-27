@@ -1,0 +1,26 @@
+{
+  "failed_run_number": 6,
+  "id": "D7",
+  "arm": "ENS-C",
+  "native_returncode": 0,
+  "failed_reader": "scripts/round83_audit.py",
+  "reader_sha256": "ef7678a40bebc782f9668e9c1c4bb442d7751614d2f4ea0b1a3bd9b50398ad7b",
+  "exception": "AssertionError at round83_audit.py:104, route_hash(next_witness)==route_hash(actual)",
+  "mismatch_iteration": 0,
+  "move_key": [
+    1,
+    0,
+    11,
+    12,
+    1,
+    22,
+    23
+  ],
+  "cause": "Independent Python materializer dropped untouched explicit empty route vehicle3 [0,0]. Production preserves it; serviced routes and operation maps match.",
+  "original_summary_sha256": "c81e7921581ffb7a5f037ad4c660ce388806ee2fcb39b6963ae64517a943f065",
+  "original_completed": 6,
+  "original_valid_marked": 5,
+  "original_wall_seconds": 58.49900000030175,
+  "optimizer_calls": 0,
+  "action": "Preserve old reader/summary. New reader v2 retains untouched empty routes; re-audit only original run6, then launch only original commands7-10. No rebuild or native rerun."
+}

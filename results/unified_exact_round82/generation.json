@@ -1,0 +1,688 @@
+{
+  "freeze_commit": "d7e5d5fd64ffffc1694d22cba8f1490cc19de1a6",
+  "preregistration_sha256": "d8abe6e33bea75f73430d75a600564c632398c5d43039b5f6505370625106009",
+  "plan_sha256": "99b33ce757532c640d89314816f3b3cf3ad913517b97019deca8ed4a1f3a62cf",
+  "generators": {
+    "scripts\\round82_generate.py": "8678ceff947b505a625b7d8cd9e39d9b9783efe577c237884c314ad8e27e3a41",
+    "scripts\\generate_hard_exact_stress_instances.py": "c2c4146e9845c965486acbf75e6e5461532a98595304f2f2e5e6feff20cb2f51",
+    "scripts\\generate_citibike443_regional_v1.py": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8"
+  },
+  "structures": [
+    {
+      "id": "U1",
+      "V": 12,
+      "M": 1,
+      "Q": 20,
+      "total_initial": 235,
+      "total_target": 240,
+      "shortage": 5,
+      "required_pickup_for_zero": 91,
+      "handling_only_pickup_capacity": 20.0,
+      "zero_analytically_excluded": true,
+      "zero_exclusion_reason": "global_stock_shortage",
+      "diameter_m": 868.883406638169
+    },
+    {
+      "id": "U2",
+      "V": 12,
+      "M": 2,
+      "Q": 30,
+      "total_initial": 132,
+      "total_target": 118,
+      "shortage": -14,
+      "required_pickup_for_zero": 43,
+      "handling_only_pickup_capacity": 60.0,
+      "zero_analytically_excluded": false,
+      "zero_exclusion_reason": "not_established",
+      "diameter_m": 1066.3329855735308
+    },
+    {
+      "id": "U3",
+      "V": 20,
+      "M": 2,
+      "Q": 30,
+      "total_initial": 288,
+      "total_target": 454,
+      "shortage": 166,
+      "required_pickup_for_zero": 164,
+      "handling_only_pickup_capacity": 60.0,
+      "zero_analytically_excluded": true,
+      "zero_exclusion_reason": "global_stock_shortage",
+      "diameter_m": 902.3173290885702
+    },
+    {
+      "id": "U4",
+      "V": 30,
+      "M": 3,
+      "Q": 20,
+      "total_initial": 516,
+      "total_target": 516,
+      "shortage": 0,
+      "required_pickup_for_zero": 92,
+      "handling_only_pickup_capacity": 90.0,
+      "zero_analytically_excluded": true,
+      "zero_exclusion_reason": "necessary_handling_exceeds_fleet_time",
+      "diameter_m": 3670.3081983713
+    },
+    {
+      "id": "U5",
+      "V": 50,
+      "M": 3,
+      "Q": 20,
+      "total_initial": 795,
+      "total_target": 821,
+      "shortage": 26,
+      "required_pickup_for_zero": 185,
+      "handling_only_pickup_capacity": 90.0,
+      "zero_analytically_excluded": true,
+      "zero_exclusion_reason": "global_stock_shortage",
+      "diameter_m": 923.6842345680487
+    },
+    {
+      "id": "U6",
+      "V": 50,
+      "M": 4,
+      "Q": 30,
+      "total_initial": 569,
+      "total_target": 647,
+      "shortage": 78,
+      "required_pickup_for_zero": 157,
+      "handling_only_pickup_capacity": 600.0,
+      "zero_analytically_excluded": true,
+      "zero_exclusion_reason": "global_stock_shortage",
+      "diameter_m": 2563.530491123297
+    }
+  ],
+  "overlap": [
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V08_compact_r1",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 8,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V08_compact_r2",
+      "shared": 7,
+      "new_count": 12,
+      "other_count": 8,
+      "jaccard": 0.5384615384615384
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V08_regional_r1",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 8,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V08_regional_r2",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 8,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V12_compact_r1",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 12,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V12_compact_r2",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 12,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V12_regional_r1",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 12,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V12_regional_r2",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 12,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V20_compact_r1",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 20,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V20_compact_r2",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 20,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V20_regional_r1",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 20,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V20_regional_r2",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 20,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V30_compact_r1",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 30,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V30_compact_r2",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 30,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V30_regional_r1",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 30,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V30_regional_r2",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 30,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V50_compact_r1",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 50,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V50_compact_r2",
+      "shared": 12,
+      "new_count": 12,
+      "other_count": 50,
+      "jaccard": 0.24
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V50_regional_r1",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 50,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "cb443_V50_regional_r2",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 50,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "U4",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 30,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U2",
+      "other_id": "U6",
+      "shared": 0,
+      "new_count": 12,
+      "other_count": 50,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V08_compact_r1",
+      "shared": 0,
+      "new_count": 30,
+      "other_count": 8,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V08_compact_r2",
+      "shared": 0,
+      "new_count": 30,
+      "other_count": 8,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V08_regional_r1",
+      "shared": 7,
+      "new_count": 30,
+      "other_count": 8,
+      "jaccard": 0.22580645161290322
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V08_regional_r2",
+      "shared": 0,
+      "new_count": 30,
+      "other_count": 8,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V12_compact_r1",
+      "shared": 0,
+      "new_count": 30,
+      "other_count": 12,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V12_compact_r2",
+      "shared": 0,
+      "new_count": 30,
+      "other_count": 12,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V12_regional_r1",
+      "shared": 3,
+      "new_count": 30,
+      "other_count": 12,
+      "jaccard": 0.07692307692307693
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V12_regional_r2",
+      "shared": 0,
+      "new_count": 30,
+      "other_count": 12,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V20_compact_r1",
+      "shared": 5,
+      "new_count": 30,
+      "other_count": 20,
+      "jaccard": 0.1111111111111111
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V20_compact_r2",
+      "shared": 0,
+      "new_count": 30,
+      "other_count": 20,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V20_regional_r1",
+      "shared": 0,
+      "new_count": 30,
+      "other_count": 20,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V20_regional_r2",
+      "shared": 0,
+      "new_count": 30,
+      "other_count": 20,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V30_compact_r1",
+      "shared": 5,
+      "new_count": 30,
+      "other_count": 30,
+      "jaccard": 0.09090909090909091
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V30_compact_r2",
+      "shared": 0,
+      "new_count": 30,
+      "other_count": 30,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V30_regional_r1",
+      "shared": 3,
+      "new_count": 30,
+      "other_count": 30,
+      "jaccard": 0.05263157894736842
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V30_regional_r2",
+      "shared": 0,
+      "new_count": 30,
+      "other_count": 30,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V50_compact_r1",
+      "shared": 0,
+      "new_count": 30,
+      "other_count": 50,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V50_compact_r2",
+      "shared": 0,
+      "new_count": 30,
+      "other_count": 50,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V50_regional_r1",
+      "shared": 15,
+      "new_count": 30,
+      "other_count": 50,
+      "jaccard": 0.23076923076923078
+    },
+    {
+      "new_id": "U4",
+      "other_id": "cb443_V50_regional_r2",
+      "shared": 0,
+      "new_count": 30,
+      "other_count": 50,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U4",
+      "other_id": "U6",
+      "shared": 1,
+      "new_count": 30,
+      "other_count": 50,
+      "jaccard": 0.012658227848101266
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V08_compact_r1",
+      "shared": 0,
+      "new_count": 50,
+      "other_count": 8,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V08_compact_r2",
+      "shared": 0,
+      "new_count": 50,
+      "other_count": 8,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V08_regional_r1",
+      "shared": 0,
+      "new_count": 50,
+      "other_count": 8,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V08_regional_r2",
+      "shared": 0,
+      "new_count": 50,
+      "other_count": 8,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V12_compact_r1",
+      "shared": 0,
+      "new_count": 50,
+      "other_count": 12,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V12_compact_r2",
+      "shared": 1,
+      "new_count": 50,
+      "other_count": 12,
+      "jaccard": 0.01639344262295082
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V12_regional_r1",
+      "shared": 0,
+      "new_count": 50,
+      "other_count": 12,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V12_regional_r2",
+      "shared": 0,
+      "new_count": 50,
+      "other_count": 12,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V20_compact_r1",
+      "shared": 0,
+      "new_count": 50,
+      "other_count": 20,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V20_compact_r2",
+      "shared": 0,
+      "new_count": 50,
+      "other_count": 20,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V20_regional_r1",
+      "shared": 0,
+      "new_count": 50,
+      "other_count": 20,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V20_regional_r2",
+      "shared": 6,
+      "new_count": 50,
+      "other_count": 20,
+      "jaccard": 0.09375
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V30_compact_r1",
+      "shared": 0,
+      "new_count": 50,
+      "other_count": 30,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V30_compact_r2",
+      "shared": 0,
+      "new_count": 50,
+      "other_count": 30,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V30_regional_r1",
+      "shared": 14,
+      "new_count": 50,
+      "other_count": 30,
+      "jaccard": 0.21212121212121213
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V30_regional_r2",
+      "shared": 0,
+      "new_count": 50,
+      "other_count": 30,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V50_compact_r1",
+      "shared": 14,
+      "new_count": 50,
+      "other_count": 50,
+      "jaccard": 0.16279069767441862
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V50_compact_r2",
+      "shared": 0,
+      "new_count": 50,
+      "other_count": 50,
+      "jaccard": 0.0
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V50_regional_r1",
+      "shared": 5,
+      "new_count": 50,
+      "other_count": 50,
+      "jaccard": 0.05263157894736842
+    },
+    {
+      "new_id": "U6",
+      "other_id": "cb443_V50_regional_r2",
+      "shared": 0,
+      "new_count": 50,
+      "other_count": 50,
+      "jaccard": 0.0
+    }
+  ],
+  "source_annotation_limits": {
+    "capacity_count": 443,
+    "coordinate_count": 443,
+    "companion_full_coordinate_count": 2322,
+    "companion_station_info_count": 2322,
+    "mapping_issue_count": 5,
+    "mapping_issues": [
+      {
+        "source_station_row_index": 174,
+        "coordinate": [
+          586671.276,
+          4504339.715
+        ],
+        "capacity": 26,
+        "coordinate_match_count": 1,
+        "capacity_coordinate_match_count": 0,
+        "issue": "exact_coordinate_capacity_snapshot_differs",
+        "companion_capacity": 27
+      },
+      {
+        "source_station_row_index": 256,
+        "coordinate": [
+          587232.282,
+          4505534.946
+        ],
+        "capacity": 55,
+        "coordinate_match_count": 1,
+        "capacity_coordinate_match_count": 0,
+        "issue": "exact_coordinate_capacity_snapshot_differs",
+        "companion_capacity": 43
+      },
+      {
+        "source_station_row_index": 270,
+        "coordinate": [
+          587030.656,
+          4505736.608
+        ],
+        "capacity": 15,
+        "coordinate_match_count": 1,
+        "capacity_coordinate_match_count": 0,
+        "issue": "exact_coordinate_capacity_snapshot_differs",
+        "companion_capacity": 23
+      },
+      {
+        "source_station_row_index": 294,
+        "coordinate": [
+          593411.529,
+          4506103.941
+        ],
+        "capacity": 9,
+        "coordinate_match_count": 1,
+        "capacity_coordinate_match_count": 0,
+        "issue": "exact_coordinate_capacity_snapshot_differs",
+        "companion_capacity": 18
+      },
+      {
+        "source_station_row_index": 398,
+        "coordinate": [
+          587475.273,
+          4507719.137
+        ],
+        "capacity": 56,
+        "coordinate_match_count": 0,
+        "capacity_coordinate_match_count": 0,
+        "issue": "no_unique_companion_coordinate_match",
+        "companion_capacity": null
+      }
+    ],
+    "exact_coordinate_and_capacity_match_count": 438,
+    "exact_coordinate_only_match_count": 4,
+    "unmatched_companion_coordinate_count": 1,
+    "all_capacity_coordinate_pairs_match_companion": false
+  },
+  "optimizer_calls": 0,
+  "wall_seconds": 0.2886939002200961,
+  "generated_count": 6,
+  "screened_or_rejected_count": 0,
+  "input_sha256": {
+    "U1": "914af8ba4f9ce8ec871b30603bd9f5382a8fdd23ae43bccb3043f6530e9c6d14",
+    "U2": "e4065017b6e69ff8435795b3466120b6dfa3c0aed21eb485750f01196ca81e2e",
+    "U3": "4b636ccabedea0cc7ad15e54c2e677c6037da3a9c5d8357ca79bb91a4f99e0d3",
+    "U4": "804e0028550942d64fd5367f9b179ff9f3f6dc301309369955294aa8e3b97b26",
+    "U5": "44bcdfb32e6e021c264c68c402e38a84b375c5c215e561e4a73ab946a0e4156a",
+    "U6": "1556e893376349de92f9213642d7be0005dcb44e47e037d34f77040711787e3f"
+  },
+  "interpretation": "Fresh draws from established recipes; correlated source geography and familiar recipes, not new independent cities."
+}

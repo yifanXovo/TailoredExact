@@ -1,0 +1,48 @@
+{
+  "schema": "round42-implementation-freeze-v1",
+  "round_id": 42,
+  "frozen_before_official_development_runs": true,
+  "round41_base_commit": "75fe23e591a39b54f7940eb0012a245e3a92d955",
+  "branch": "codex/round42-decomposition-architecture-optimization",
+  "executable": "build_round42/ExactEBRP.exe",
+  "executable_sha256": "82178ffbbb8106c06661fcec8fd57ce7fe63b1fb9b6340b9d85bd269fc013fbe",
+  "validated_default_unchanged": "C6-HGA-FULL K=4 rho=0.01",
+  "candidate_controls_default_off": true,
+  "static_base": "st-k4-p-core",
+  "static_required_refinement": "st-k4-p-core-hierarchical",
+  "paired_base": "paired-k4",
+  "paired_required_refinement": "paired-k4-factored",
+  "sibling_base": "sibling-core",
+  "sibling_required_refinement": "sibling-core-factored",
+  "same_k_causal_comparison": [
+    "external-k2-fixed",
+    "st-k2-p-core-reference"
+  ],
+  "reference_only_existing_mechanisms": [
+    "c6-reference",
+    "k1-single-reference"
+  ],
+  "performance_primary": "exact-phase Gurobi Work",
+  "performance_secondary": "shifted exact-phase time ratio (candidate + 1)/(C6 + 1)",
+  "material_win_ratio_max": 0.95,
+  "material_loss_ratio_min": 1.05,
+  "development_process_cap_seconds": 1800,
+  "validation_holdout_process_cap_seconds": 3600,
+  "threads": 1,
+  "gurobi_seed": 0,
+  "gurobi_presolve": -1,
+  "relative_gap": 0.0,
+  "absolute_gap": 0.0,
+  "cpp_test_result": "20/20 passed",
+  "smoke_evidence": {
+    "instance_id": "round39_small_medium_V10_M2_Q20_slot05_seed968549317",
+    "base_strict_certificate": true,
+    "base_sibling_blocks": 2,
+    "base_replaced_terminal_leaves": 4,
+    "base_runtime_seconds": 50.7710566,
+    "base_work": 82.85356760776844,
+    "factored_strict_certificate": true,
+    "factored_runtime_seconds": 47.8035331,
+    "factored_work": 82.83797180282259
+  }
+}

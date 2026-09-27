@@ -1,0 +1,34 @@
+{
+  "number": 19,
+  "id": "D7",
+  "arm": "K1-R",
+  "cap": 1200,
+  "wall": 1197.125,
+  "UB": 0.21564407531579505,
+  "LB": 0.1973574792283258,
+  "signed_gap": 0.018286596087469242,
+  "certificate": false,
+  "physical": {
+    "F": 0.21564407531579494,
+    "G": 0.03872267378877319,
+    "P": 1.179476010180145,
+    "stations": 50,
+    "pickup": 228,
+    "drop": 228,
+    "maximum_duration": 17975.490961810894,
+    "original_T_feasible": true
+  },
+  "endpoint_settings_and_coverage_checks": true,
+  "independent_interval_union": {
+    "tree_rows": 5,
+    "roots": 1,
+    "replaced": 2,
+    "independently_recomputed_interval_union": true,
+    "initial_range_covers_G_le_verified_F": true
+  },
+  "pre_proof_full_domain_bound": null,
+  "optimize_calls": 6,
+  "result_sha256": "bc8a16d3d1b0fae1af87bcbaa7b9b39f7cdb83b1fb4c59bbc2072a5abb5f719b",
+  "script_sha256": "441e419052bcdb93c2335e403700d23ad8f2bfefc01ffe23c6dcf1e6c4fa3827",
+  "scope": "Light completed endpoint only; full model, Start-vector and trajectory audits remain required at queue boundary"
+}

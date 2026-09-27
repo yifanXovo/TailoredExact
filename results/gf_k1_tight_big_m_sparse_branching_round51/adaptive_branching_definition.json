@@ -1,0 +1,76 @@
+{
+  "baseline": {
+    "big_m": "M1 tight-tsp-lower-bound",
+    "branching": "Gurobi default except selected sparse priorities",
+    "symmetry": "v0-cardinality"
+  },
+  "candidate_budget": 4,
+  "candidate_family_cap": 2,
+  "candidate_order": [
+    "decreasing_fractionality",
+    "semantic_family_ordinal",
+    "canonical_variable_name"
+  ],
+  "child_probes_per_candidate": 2,
+  "development_or_core_results_inspected": false,
+  "eligible_families_in_ordinal_order": [
+    "routing_arc",
+    "visit_selection",
+    "operation_mode",
+    "pickup_quantity",
+    "drop_quantity",
+    "vehicle_load",
+    "final_inventory"
+  ],
+  "excluded": [
+    "continuous_variables",
+    "auxiliary_integer_or_binary_encodings",
+    "selectors",
+    "fixed_domain_variables",
+    "root_integral_variables"
+  ],
+  "fallbacks": [
+    "root_lp_infeasible",
+    "root_lp_closes_state",
+    "no_eligible_fractional_variable",
+    "no_candidate_with_two_valid_probes",
+    "all_valid_candidates_zero_improvement",
+    "priority_attribute_apply_or_readback_failed"
+  ],
+  "integrality_tolerance": 1e-6,
+  "lifecycle": {
+    "child_probe": "independent disposable canonical-model read",
+    "root_lp": "one PaperLpRelaxation with primal/type/bound capture",
+    "state_reuse": false,
+    "terminal_mip": "fresh immutable canonical-model read after every probe"
+  },
+  "maximum_child_lp_reoptimizations": 8,
+  "maximum_positive_priorities": 2,
+  "policy": "a1-root-sparse-2x2",
+  "priority_assignment": [
+    "best_score:2",
+    "second_score:1",
+    "all_others:0"
+  ],
+  "probe_bound_rules": [
+    "down:x_j<=floor(x_j*)",
+    "up:x_j>=ceil(x_j*)"
+  ],
+  "probe_score": "max(delta_down,1e-7)*max(delta_up,1e-7)",
+  "prohibited_inputs": [
+    "instance_or_panel_name",
+    "seed_or_size",
+    "V_M_Q",
+    "runtime_Work_nodes_memory_machine",
+    "historical_winner_or_known_optimum",
+    "MIP_pilot",
+    "learned_or_online_classifier"
+  ],
+  "revision": {
+    "opened": false,
+    "only_allowed_name": "a1r-root-sparse-top1",
+    "only_allowed_change": "assign priority 1 to the best already-probed candidate"
+  },
+  "schema": "round51-adaptive-branching-definition-v1",
+  "total_accounting": "root LP + every child LP + every terminal attempt + model/process overhead"
+}

@@ -1,0 +1,7 @@
+family,scope,endpoint_source,epoch_sensitive,status
+direct_gini_cap/floor,interval-local,"current leaf [gamma_L,gamma_U]",True,pass
+tight G-times-bit McCormick,interval-local,"current leaf [gamma_L,gamma_U]",True,pass
+aggregate MC4,interval-local,"current leaf plus propagated [L_i,U_i]",True,pass
+VD perspective,interval-local,"current leaf [gamma_L,gamma_U]",True,pass
+incumbent objective row,leaf-local,current verified_ub epoch,True,pass after E-001 fix
+routing/inventory/connectivity,global,not interval-dependent,False,pass

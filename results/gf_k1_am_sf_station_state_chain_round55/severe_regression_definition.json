@@ -1,0 +1,14 @@
+{
+  "schema": "round55-severe-regression-definition-v1",
+  "exact": {
+    "work": "ratio>1.50 and delta>50",
+    "time": "ratio>1.50 and delta>60 seconds"
+  },
+  "capped_any": [
+    "baseline certifies and candidate does not",
+    "GI ratio>1.50 and absolute GI increase>=0.05",
+    "gap ratio>1.50 and absolute gap increase>=0.05"
+  ],
+  "sub10_startup_exception": "not severe absent certificate loss, absolute severity-floor delay, or repeated systematic pattern",
+  "same_definition_against_pgrb": true
+}

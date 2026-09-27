@@ -1,0 +1,4 @@
+event_sequence,parent_interval,midpoint,infeasible_side,infeasibility_status,feasible_child_interval,feasible_child_bound,coverage_before,coverage_after,action,model_reused,basis_reused,rows_reused,model_rebuild_count,lower_bound_update,endpoint_audit,exactness_status
+1,"L0.0",0.23749999999999999,left,strict_complete_lp_infeasible,"L0.0.1",2.2206360803532741,"L0.0","L0.0.0|L0.0.1",original-two-child-split,true,false,true,0,0,midpoint_partition_valid,existing_exact_c6_infeasibility_behavior
+2,"L0.1",0.71249999999999991,right,strict_complete_lp_infeasible,"L0.1.0",2.2662584414844362,"L0.1","L0.1.0|L0.1.1",original-two-child-split,true,false,true,0,0,midpoint_partition_valid,existing_exact_c6_infeasibility_behavior
+3,"L0.0.1",0.35624999999999996,left,strict_complete_lp_infeasible,"L0.0.1.1",2.261240112868975,"L0.0.1","L0.0.1.0|L0.0.1.1",original-two-child-split,true,false,true,0,0,midpoint_partition_valid,existing_exact_c6_infeasibility_behavior

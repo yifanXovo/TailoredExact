@@ -1,0 +1,15 @@
+{
+  "recorded_at_utc": "2026-09-17T22:12:42.011976+00:00",
+  "validation1_passed": true,
+  "validation1_seconds": 0.7312408997677267,
+  "validation2_initial_attempt_passed": false,
+  "failure": "Preexisting CitiBike generator working CRLF and Git LF were incorrectly required to have equal raw SHA256; failed before any fixture directory or completion receipt.",
+  "failed_combined_preparation_and_validation_command_wall_seconds": 0.4451809,
+  "optimize_calls": 0,
+  "new_native_runs": 0,
+  "generator_main_reruns": 0,
+  "original_input_hashes_unchanged": true,
+  "corrected_policy": "Check inherited generator local SHA256 against preregistration, plus explicitly limited CRLF/LF equivalence with frozen Git bytes; all new generator/plan/preregistration bytes require exact equality.",
+  "inherited_git_blob_sha256": "05b60dc92e4f81edaa134fbcb556dcb18efbf36ac02f333712e0b7e8364491c1",
+  "inherited_working_bytes_sha256": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8"
+}

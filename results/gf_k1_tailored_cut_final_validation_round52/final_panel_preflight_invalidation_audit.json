@@ -1,0 +1,35 @@
+{
+  "algorithm_or_executable_changed": false,
+  "all_attempts_retained": true,
+  "attempts": [
+    {
+      "certificate_rejection_reason": "model_fingerprint_mismatch",
+      "executable_sha256": "d245c76f6397c757894610d8f5238cfeb971761ff7e05edf51058e451d810151",
+      "invalidation_reason": "model_fingerprint_discovery_without_frozen_expectation",
+      "observed_gurobi_model_fingerprint": -1093600508,
+      "official_benchmark_row": false,
+      "raw_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_panel_runs/validation__round52_validation_tight_T_2400_V12_M3_seed602591358__P-GRB",
+      "result_present": true,
+      "retained_in_local_raw": true,
+      "run_id": "validation__round52_validation_tight_T_2400_V12_M3_seed602591358__P-GRB",
+      "schema": "round52-invalidated-preflight-attempt-v1",
+      "strict_certificate": false
+    },
+    {
+      "certificate_rejection_reason": "no_result",
+      "executable_sha256": "d245c76f6397c757894610d8f5238cfeb971761ff7e05edf51058e451d810151",
+      "invalidation_reason": "interrupted_after_plumbing_issue_discovery",
+      "observed_gurobi_model_fingerprint": null,
+      "official_benchmark_row": false,
+      "raw_path": "results/gf_k1_tailored_cut_final_validation_round52/local_raw/final_panel_runs/validation__round52_validation_tight_T_2550_V12_M3_seed1562337071__P-GRB",
+      "result_present": false,
+      "retained_in_local_raw": true,
+      "run_id": "validation__round52_validation_tight_T_2550_V12_M3_seed1562337071__P-GRB",
+      "schema": "round52-invalidated-preflight-attempt-v1",
+      "strict_certificate": null
+    }
+  ],
+  "invalidated_attempt_count": 2,
+  "official_benchmark_rows_counted": 0,
+  "schema": "round52-final-panel-preflight-invalidation-audit-v1"
+}

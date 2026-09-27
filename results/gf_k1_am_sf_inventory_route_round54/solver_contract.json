@@ -1,0 +1,29 @@
+{
+  "schema": "round54-solver-contract-v1",
+  "gurobi": {
+    "Presolve": "Auto",
+    "Seed": 0,
+    "Threads": 1,
+    "MIPGap": 0.0,
+    "MIPGapAbs": 0.0,
+    "Branching": "default",
+    "PreCrush": "default"
+  },
+  "terminal_mip_callback": "off",
+  "objective": "complete original minimization objective",
+  "certificate_tolerance": 1e-07,
+  "strict_original_problem_certificate_required": true,
+  "ordinary_maximum_total_process_seconds": 3600,
+  "v50_extension_maximum_total_process_seconds": 7200,
+  "cap_includes": [
+    "construction",
+    "root LP",
+    "separation",
+    "root closure",
+    "terminal MIP",
+    "verification",
+    "serialization"
+  ],
+  "one_official_executable_for_all_round54_comparators": true,
+  "known_optimum_or_archive_winner_injection": false
+}

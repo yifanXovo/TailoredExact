@@ -1,0 +1,69 @@
+{
+  "schema": "round54-strengthening-roadmap-protocol-v1",
+  "independent_of_round54_runtime_results": true,
+  "implemented_this_round": "Track A only",
+  "tracks": [
+    {
+      "track": "A",
+      "priority": 1,
+      "direction": "inventory-route cutsets with exact min-cut and external root closure",
+      "motivation": "link interval inventory imbalance to necessary route boundary capacity",
+      "expected_benefit": "stronger root bound and proof tail",
+      "cost": "repeated deterministic LP/min-cut closure",
+      "new_parameters": [],
+      "exactness": "global mixed cuts; interval-local projected cuts; direct reconstruction",
+      "panel": "offline census then gated fixed/K1/generalization",
+      "stop": "frozen gates fail or full bounded qualification completes",
+      "dependencies": [
+        "F0-CLEAN LP telemetry",
+        "exact separator"
+      ]
+    },
+    {
+      "track": "B",
+      "priority": 2,
+      "direction": "value-disaggregated ideal G x Y formulation",
+      "motivation": "compare ideal disaggregation with current binary product formulation",
+      "expected_benefit": "polyhedral strength",
+      "cost": "larger formulation",
+      "new_parameters": [],
+      "exactness": "ideal-equivalence proof required",
+      "panel": "future fixed-state ablation",
+      "stop": "separate future round",
+      "dependencies": [
+        "Track A disposition"
+      ]
+    },
+    {
+      "track": "C",
+      "priority": 3,
+      "direction": "long-horizon V20/V50 proof-tail validation",
+      "motivation": "establish scale behavior",
+      "expected_benefit": "scalability evidence",
+      "cost": "long exact runs",
+      "new_parameters": [],
+      "exactness": "frozen backend and strict certificates",
+      "panel": "future V20/V50 benchmark",
+      "stop": "predeclared horizon complete",
+      "dependencies": [
+        "final backend freeze"
+      ]
+    },
+    {
+      "track": "D",
+      "priority": 4,
+      "direction": "paper finalization and ablation",
+      "motivation": "align claims with reproducible evidence",
+      "expected_benefit": "publication-ready tables and novelty audit",
+      "cost": "documentation/literature/table work",
+      "new_parameters": [],
+      "exactness": "all claims trace to committed evidence",
+      "panel": "final formulation ablation",
+      "stop": "manuscript audit passes",
+      "dependencies": [
+        "Tracks A-C decisions"
+      ]
+    }
+  ],
+  "simultaneously_reopened": []
+}

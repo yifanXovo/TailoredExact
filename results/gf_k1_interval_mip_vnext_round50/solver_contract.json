@@ -1,0 +1,23 @@
+{
+  "MIPGap": 0.0,
+  "MIPGapAbs": 0.0,
+  "Presolve": "Auto",
+  "Seed": 0,
+  "Threads": 1,
+  "archive_winner_injection": false,
+  "backend": "Gurobi",
+  "certificate_tolerance": 1e-07,
+  "instance_specific_parameters": false,
+  "known_optimum_injection": false,
+  "max_process_cap_seconds": 1800,
+  "objective_sense": "minimize",
+  "same_complete_objective": true,
+  "same_verified_incumbent_cutoff": true,
+  "schema": "round50-solver-contract-v1",
+  "strict_improver_gini_range": true,
+  "terminal_conditions": [
+    "strict_exact_certificate",
+    "honest_external_cap_with_valid_evidence"
+  ],
+  "version": "13.0.2 build v13.0.2rc1"
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "round43-invalidated-row-set-v1",
+  "round_id": 43,
+  "stage": "stage3_mechanism",
+  "official_evidence": false,
+  "row_directory_count": 9,
+  "old_executable_sha256": "6d96a7c580b8af81cbbb50fba3a5ebece9b0873cb79ad4a4d592d153d6a97040",
+  "reason": "Final certificate aggregation rejected the mathematically valid positive-infinite lower bound of a lookahead-proven infeasible Empty child. The partial batch was stopped immediately after diagnosis and is excluded in full, including rows that happened not to exercise the defect.",
+  "source_fix": "validFinalEnvelopeLeafBound accepts positive infinity only for a leaf whose status is Empty; finite bounds remain required for every nonempty leaf.",
+  "rerun_required": true
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "round52-severe-regression-definition-v1",
+  "exact_rows": {
+    "ratio_strictly_greater_than": 1.5,
+    "and_either": {
+      "work_absolute_increase_greater_than": 50,
+      "process_time_absolute_increase_seconds_greater_than": 60
+    }
+  },
+  "capped_rows_any": [
+    "baseline certifies but candidate does not",
+    "GI ratio > 1.50 and absolute GI increase >= 0.05",
+    "gap ratio > 1.50 and absolute gap increase >= 0.05"
+  ],
+  "zero_new_severe_regressions_required": true
+}

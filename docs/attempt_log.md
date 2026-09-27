@@ -4,6 +4,41 @@ Date: 2026-06-10
 
 All runs below used `lambda=0.15`, `T=3600`, `unit_pick_time=60`, `unit_drop_time=60`, and `threads=4` unless noted.
 
+## Round 55 engineering and station-state chain
+
+Round 55 first audited the complete K1-AM-SF construction and lifecycle. It
+introduced explicit first-class controller fields and found one semantic cache
+identity defect: reusable artifact/LP keys could retain an earlier incumbent
+epoch after an improvement. The fix was frozen before candidate performance;
+33/33 tests passed in both the corrected baseline and final clean builds, and
+11 semantic sentinels matched the historical alias. Pre-fix performance
+trajectories were retired as comparators.
+
+The aggregate G-times-inventory McCormick hull, VD-P, and VD-J were implemented
+as uniform exact formulations. MC4 and VD-J strengthened most root bounds but
+failed live gates. VD-P passed the 120-second pilot, D1--D14 development, the
+C1--C9 confirmation, and the 19-state extension. SF-R1, the sole controlled
+sparse revision, removed only triple support-duration covers but caused two
+severe regressions and was rejected. Penalty-cover and interaction experiments
+did not open because their prerequisite gates were false; the exact
+multiple-choice-cover DP was nevertheless implemented and unit-tested.
+
+All Round 55 performance rows use one solver thread, Gurobi seed zero,
+automatic presolve, zero relative/absolute MIP gap, native branching, default
+PreCrush, and no dynamic user-cut callback. The paper preset remains
+`paper-k1-am-sf`; research policies remain default-off.
+
+VD-P then passed the 18-row C1--C9 confirmation, 38-row extension, and 22-row
+key-long panel. Full K1 integration entered 34 rows at 1,800 seconds plus 10
+predeclared unresolved-state rows at 3,600 seconds. The effective 17 pairs
+gave 14 candidate versus 12 stable certificates, shifted-Work GM
+0.5691998368, and GI ratio 0.6090974548, with zero false certificates and no
+V20/V50 material regression. One severe regression remained on
+`round39_small_medium_V12_M3_Q30_slot08_seed1343324363`, the frozen major
+witness, so the K1 gate failed. That witness had no materially changed split
+action; no split revision opened. The sealed P-GRB and expansion panels also
+remained unopened.
+
 ## Data and convention checks
 
 - Parser reads the Hybrid GA text format.
@@ -2483,3 +2518,90 @@ Remaining TODOs:
   `results/heuristic_relaxation_dataset_round/` and
   `results/generated_variant_round/` pass `audit_bpc_certificate.py
   --fail-on-error`.
+## 2026-08-29 - Round 54 K1-AM-SF freeze and inventory--route study
+
+- Froze **K1-AM-SF** as the stable paper mainline: K0=1, one complete initial
+  improving Gini interval, midpoint refinement, adaptive-mass threshold
+  `tau=0.08`, exact-parent closure, and the F0-CLEAN sparse fixed-interval MILP
+  under native single-thread Gurobi branch-and-cut.
+- Added canonical preset `paper-k1-am-sf`; the Round 53 names `k1-am-f0` and
+  `paper-k1-am-f0` remain semantic aliases, and the historical inner-policy
+  name remains accepted. Six controller/model sentinels passed semantic
+  equivalence. V20/V50 sentinels did not reach a fixed-interval model within
+  the bounded startup run, so their identity evidence is command/controller
+  equivalence rather than a runtime LP-file comparison.
+- Repaired the Round 53 P-GRB certificate chain using its original official
+  executable and pre-frozen expected fingerprints. All 12 fingerprints match;
+  the strict certificate count changes from 0/12 to 9/12. Work, time, bounds,
+  gap, and GI are unchanged, and no Round 53 F0 promotion decision changes.
+- Implemented deterministic exact min-cut separation for IR-IN, IR-OUT, and
+  their projected companions, plus fresh-model external root closure. IR1 and
+  IR2 were valid on all 34 frozen root states; each showed strict violations in
+  33 roles and strict final bound gain in 25 states. IR2 added no final closure
+  gain over IR1, so the less expansive IR1 entered the live gate; IR3 was not
+  opened.
+- Completed all 28 Stage-A fixed-interval rows (14 F0/IR1 pairs) at 300
+  seconds. F0 certified 11/14 and IR1 9/14. IR1 improved hard state D4 but lost
+  the D1 and D13 F0 certificates, had shifted Work geometric-mean ratio
+  1.089432, and worsened aggregate GI from 0.498349 to 0.623423. The frozen
+  Stage-B gate therefore failed. Confirmation, K1 integration, and the sealed
+  V12/V20/V50 generalization panel were correctly not opened.
+- Classified the direction as
+  `bounded_negative_inventory_route_strengthening`. K1-AM-SF remains the
+  stable mainline. The single recommended next research step is a separately
+  frozen value-disaggregated formulation for G times final inventory.
+
+## 2026-08-30 - Round 56 corrected paper-candidate screening panel
+
+- Retained the corrected Round 55 `paper-k1-am-sf` algorithm with no tuning or
+  candidate mechanism. Added only explicit T/process/service/distance/scenario
+  identity result metadata and native-witness evidence plumbing.
+- Detected before optimization that the first generated distance matrices used
+  unrounded points while inputs serialized coordinates to three decimals.
+  Regenerated every base, fleet variant, descriptor, identity, and manifest
+  from parser-effective serialized coordinates before any official run.
+- Froze five deterministic base landscapes, 15 matched fleet inputs, 40 Q=30
+  scenarios, 10 Q=20 sentinels, and exactly nine predeclared 7200-second
+  extensions. T=21600 is absent.
+- Audited T through parent, child, native-target, exact, propagation, verifier,
+  cache, artifact, and result paths. Solver process caps remain separate from
+  the mathematical model and enter only run identity.
+- Requalified the stable preset, built one clean official Gurobi executable,
+  and froze a strictly sequential 50-row execution manifest. Each available
+  final native witness is exported once and independently reverified from its
+  JSON and expanded CSV files; no postsolve or route compaction is permitted.
+- Final counts, monotonicity results, repeatability, route utilization, and
+  dataset recommendations are generated from the complete official panel under
+  `results/gf_paper_benchmark_time_horizon_round56/`. The panel is explicitly
+  screening evidence, not a final replicated dataset.
+
+## 2026-09-10 - Round 58 CitiBike443 K1-AM-SF versus P-GRB qualification
+
+- Preserved and validated the local Round 57 `citibike443-regional-v1` family,
+  then froze a deterministic 50-scenario panel before performance: 30 primary
+  V/geography/inventory cells and 20 matched route-horizon rows. The remaining
+  910 scenarios were not opened or substituted.
+- Used one source-frozen executable (SHA-256
+  `0f7570d4c421b9d2f4cb2941bf4d426fe396a25b26ef1c0618df0f3a675333f2`)
+  for both the unchanged `paper-k1-am-sf` preset and plain P-GRB. All solves
+  were fresh, sequential, single-thread processes with aligned Gurobi settings;
+  P-GRB fingerprints matched their pre-frozen expectations.
+- Completed 100 mandatory 3600-second arms, 35 fresh 10800-second runs, 7
+  16200-second runs, and 7 21600-second runs. No authorized run is missing and
+  no unauthorized run was entered. Total experimental compute was
+  783691.566276 seconds and 1755117.240247 Work units.
+- K1/P-GRB strict certificates were 34/30 at 3600 seconds and 34/31 finally.
+  Of 31 both-certified pairs, K1/P-GRB faster counts were 7/24 and lower-Work
+  counts were 28/3. The shifted exact K1/P-GRB ratios were 2.83349 for time and
+  0.450095 for Work.
+- For 16 neither-certified pairs, K1/P-GRB/tie smaller common-horizon gap counts
+  were 13/2/1, with mean relative gaps 0.269174/0.330379. Three pairs were
+  K1-only certificates and none were P-GRB-only.
+- Recorded one historical severe-regression flag but zero conservative
+  long-run material regressions, zero false certificates, and zero correctness
+  failures. All 100 native official route packages passed independent
+  verification without post-optimization.
+- Classified the result as `k1_am_sf_pgrb_advantage_mixed`: K1 retains a
+  certificate-count, Work, and open-gap advantage on this frozen panel, while
+  P-GRB is faster on most jointly certified pairs. The next step is a second
+  pre-frozen sealed holdout selected from the 910 untouched reserves.

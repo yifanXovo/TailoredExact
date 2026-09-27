@@ -1,0 +1,61 @@
+{
+  "schema": "round53-official-start-record-v1",
+  "repository": "E:/codes/ExactEBRP",
+  "expected_base_branch": "codex/round52-k1-tailored-cut-final-validation",
+  "starting_branch": "codex/round52-k1-tailored-cut-final-validation",
+  "created_branch": "codex/round53-f0-qualification-callback-isolation",
+  "local_head": "44ed4057cc4d2ce67b86d623b57500e95cad5058",
+  "local_tree": "5e2f5a144b8f3f31439c1010ef07c8926d061d68",
+  "upstream_at_start": "origin/codex/round52-k1-tailored-cut-final-validation",
+  "remote_pr": {
+    "number": 108,
+    "state": "OPEN",
+    "is_draft": true,
+    "base": "codex/round51-tight-big-m-root-sparse-branching",
+    "head": "codex/round52-k1-tailored-cut-final-validation",
+    "head_sha": "44ed4057cc4d2ce67b86d623b57500e95cad5058",
+    "head_tree": "5e2f5a144b8f3f31439c1010ef07c8926d061d68"
+  },
+  "local_remote_head_equivalent": true,
+  "local_remote_tree_equivalent": true,
+  "working_tree_start": {
+    "porcelain_entry_count": 46290,
+    "tracked_modified_count": 3,
+    "untracked_entry_count": 46287,
+    "porcelain_snapshot_sha1": "7a44b1bcc0cd4b2accee609fdcd877d10640e18d",
+    "tracked_diff_sha1": "174771ed1c9cd5a5490b90b5922fec7ddf644d3a",
+    "tracked_modified": [
+      {
+        "path": "results/gf_compact_bc_round/handling_convention_test/handling_convention.json",
+        "blob_sha1": "98bcd60c3c5542772f101d5c73643033b78c58da"
+      },
+      {
+        "path": "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv",
+        "blob_sha1": "730b12307ff356aad1972158312c3c791f4492ec"
+      },
+      {
+        "path": "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json",
+        "blob_sha1": "c6ea164aec30b59fbee030476ed9cd6a4ffa315f"
+      }
+    ],
+    "preservation_rule": "all pre-existing modifications and unrelated untracked paths are user-owned and excluded from Round53 commits"
+  },
+  "toolchain": {
+    "compiler": "GCC 14.2.0",
+    "cmake": "3.30.5-msvc23",
+    "gurobi": "13.0.2rc1",
+    "gurobi_api": "C API"
+  },
+  "machine": {
+    "hostname": "WIN-3NO58RVQ4VC",
+    "manufacturer": "ASUS",
+    "model": "System Product Name",
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700KF",
+    "logical_processors": 20,
+    "memory_bytes": 34163961856,
+    "os": "Microsoft Windows 10 Professional 10.0.19045"
+  },
+  "pr108_mutation_forbidden": true,
+  "candidate_result_inspected_before_stage0": false,
+  "network_note": "one git fetch reset occurred; GitHub API PR identity and the existing remote-tracking ref independently matched local identity"
+}

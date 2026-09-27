@@ -1,0 +1,83 @@
+{
+  "G": 0.17963709840015857,
+  "M": 1,
+  "P": 0.9958845931857616,
+  "Q": 30,
+  "certificate_label": "certified",
+  "dataset_family": "citibike443-regional-v1",
+  "executable_sha256": "0f7570d4c421b9d2f4cb2941bf4d426fe396a25b26ef1c0618df0f3a675333f2",
+  "final_inventory": [
+    50000,
+    26,
+    21,
+    22,
+    9,
+    9,
+    16,
+    18,
+    22
+  ],
+  "mathematical_instance_sha256": "e1e5f19de349f262558f1b9c174c68a638acb226a45136701c21e604dd9c3c4c",
+  "method": "pgrb",
+  "native_status": "OPTIMAL",
+  "native_witness_preserved": true,
+  "objective": 0.32901978737802284,
+  "route_post_optimization_performed": false,
+  "route_time_limit_seconds": 1800,
+  "routes": [
+    {
+      "final_depot_unload": 0,
+      "nodes": [
+        0,
+        2,
+        8,
+        0
+      ],
+      "operation_time": 840.0,
+      "operations": [
+        {
+          "drop": 0,
+          "load_after": 7,
+          "load_before": 0,
+          "operation_time": 420.0,
+          "pickup": 7,
+          "predecessor": 0,
+          "route_sequence_position": 1,
+          "station": 2,
+          "station_inventory_after": 21,
+          "successor": 8,
+          "travel_time_from_predecessor": 448.3569622175109,
+          "vehicle": 0
+        },
+        {
+          "drop": 7,
+          "load_after": 0,
+          "load_before": 7,
+          "operation_time": 420.0,
+          "pickup": 0,
+          "predecessor": 2,
+          "route_sequence_position": 2,
+          "station": 8,
+          "station_inventory_after": 22,
+          "successor": 0,
+          "travel_time_from_predecessor": 235.96273117602573,
+          "vehicle": 0
+        }
+      ],
+      "route_duration": 1765.9748873721846,
+      "route_time_limit": 1800.0,
+      "route_utilization": 0.9810971596512137,
+      "travel_time": 925.9748873721846,
+      "used": true,
+      "vehicle": 0,
+      "vehicle_capacity": 30
+    }
+  ],
+  "run_identity_sha256": "29ebc7e1e987ebf5685c288b3b35088c4d7b786436545d1deae4985631ca0c80",
+  "scenario_id": "cb443_V08_regional_r1_balanced_M01_Q30_T01800",
+  "schema": "round58-native-solution-v1",
+  "source_commit": "8ec0e1e151a5f25cb0594852f896b04303c0ba34",
+  "source_result_path": "results/gf_citibike443_k1_vs_pgrb_round58/local_raw/official_runs/cb443_V08_regional_r1_balanced_M01_Q30_T01800/pgrb/screen_3600/result.json",
+  "source_result_sha256": "e03975ceb8c37157cf8f89e4afd85c2844ab31d1e310e63181ccdf2477ef3899",
+  "strict_certificate": true
+}

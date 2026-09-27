@@ -1,0 +1,113 @@
+{
+  "compile": {
+    "returncode": 0,
+    "whole_tree_timeout": false,
+    "wall_seconds": 1.417176500428468,
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "records": [
+    {
+      "id": "D6",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 0.07800000021234155,
+        "watchdog": false,
+        "restored": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "audit": {
+        "result": {
+          "initial_F": 0.16002728060440277,
+          "final_F": 0.16002728060440277,
+          "accepted": 0,
+          "passes": 1,
+          "placements": 0,
+          "quantity_evaluations": 0,
+          "exhausted": true,
+          "deadline_reached": false,
+          "optimizer_calls": 0,
+          "scope": "fixed_witness_diagnosis_only"
+        },
+        "physical": {
+          "F": 0.1600272806044027,
+          "G": 0.02687658257234963,
+          "P": 0.8876713202136872,
+          "stations": 30,
+          "pickup": 119,
+          "drop": 119,
+          "maximum_duration": 17989.946434173762,
+          "original_T_feasible": true
+        },
+        "initial_physical": {
+          "F": 0.1600272806044027,
+          "G": 0.02687658257234963,
+          "P": 0.8876713202136872,
+          "stations": 30,
+          "pickup": 119,
+          "drop": 119,
+          "maximum_duration": 17989.946434173762,
+          "original_T_feasible": true
+        },
+        "independently_verified_witnesses": 2,
+        "route_sha256": "2ada44195e0501604ce5873463213652754f7a13917a02018581b7a217f9b19c",
+        "offline_replay_seconds": 0.005257000215351582
+      }
+    },
+    {
+      "id": "D7",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 0.014999999664723873,
+        "watchdog": false,
+        "restored": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "audit": {
+        "result": {
+          "initial_F": 0.38077368746245777,
+          "final_F": 0.33636794344837095,
+          "accepted": 2,
+          "passes": 3,
+          "placements": 7642,
+          "quantity_evaluations": 120,
+          "exhausted": true,
+          "deadline_reached": false,
+          "optimizer_calls": 0,
+          "scope": "fixed_witness_diagnosis_only"
+        },
+        "physical": {
+          "F": 0.33636794344836984,
+          "G": 0.11257691743800255,
+          "P": 1.4919401734024489,
+          "stations": 50,
+          "pickup": 192,
+          "drop": 192,
+          "maximum_duration": 17985.801546637405,
+          "original_T_feasible": true
+        },
+        "initial_physical": {
+          "F": 0.3807736874624573,
+          "G": 0.13338764645209003,
+          "P": 1.649240273402449,
+          "stations": 46,
+          "pickup": 183,
+          "drop": 183,
+          "maximum_duration": 17985.801546637405,
+          "original_T_feasible": true
+        },
+        "independently_verified_witnesses": 4,
+        "route_sha256": "fd8b472baa32d7f2c6536c6f62a32cdcc4c2f6dafa733a4f88805bb4b66355a5",
+        "offline_replay_seconds": 0.009321500081568956
+      }
+    }
+  ],
+  "failure": null,
+  "total_driver_wall_seconds": 1.6408079997636378,
+  "optimizer_calls": 0
+}

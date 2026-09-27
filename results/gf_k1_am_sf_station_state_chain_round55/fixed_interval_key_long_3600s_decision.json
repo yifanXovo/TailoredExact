@@ -1,0 +1,28 @@
+{
+  "schema": "round55-live-stage-decision-v1",
+  "stage": "fixed_interval_key_long_3600s",
+  "row_count": 22,
+  "pair_count": 11,
+  "all_engineering_valid": true,
+  "false_certificate_count": 0,
+  "summaries": {
+    "VD-P": {
+      "certificate_gain_count": 1,
+      "certificate_loss_count": 0,
+      "severe_regression_count": 0,
+      "severe_states": [],
+      "material_improvement_states": [
+        "D3",
+        "D4",
+        "D12",
+        "D9",
+        "D13",
+        "KL_V20"
+      ],
+      "shifted_work_geometric_mean_ratio": 0.5884765357865731,
+      "aggregate_gi_ratio": 0.47002946955148395
+    }
+  },
+  "selected_for_next_stage": [],
+  "rejected": []
+}

@@ -1,0 +1,167 @@
+{
+  "recorded_unix": 1789648657.485614,
+  "completed": 5,
+  "active": {
+    "number": 6,
+    "arm": "K1-R",
+    "started_unix": 1789648604.6758657,
+    "driver_pid": 48520,
+    "destination": "results\\unified_exact_round84\\campaign\\local_raw\\06_D7_K1-R"
+  },
+  "records": [
+    {
+      "number": 1,
+      "id": "D6",
+      "arm": "P-GRB",
+      "wall_seconds": 3597.186999999918,
+      "returncode": 0,
+      "within_cap": true,
+      "stop_reason": "normal_return",
+      "passed": true,
+      "endpoint": {
+        "U": 0.1572411758522922,
+        "L": 0.15081548193591474,
+        "gap": 0.006425693916377456,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      },
+      "native_calls_started": 1,
+      "native_calls_returned": 1,
+      "physical_witnesses": 62,
+      "global_bound_events": 3480,
+      "committed_events": 3545,
+      "offline_replay_seconds": 0.05177119979634881
+    },
+    {
+      "number": 2,
+      "id": "D6",
+      "arm": "ENS-C",
+      "wall_seconds": 3171.157000000123,
+      "returncode": 0,
+      "within_cap": true,
+      "stop_reason": "normal_return",
+      "passed": true,
+      "endpoint": {
+        "U": 0.15708313110317415,
+        "L": 0.15708313110316996,
+        "gap": 4.191091917959966e-15,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "native_calls_started": 6,
+      "native_calls_returned": 6,
+      "physical_witnesses": 4,
+      "global_bound_events": 3452,
+      "committed_events": 3469,
+      "offline_replay_seconds": 0.12716879975050688
+    },
+    {
+      "number": 3,
+      "id": "D6",
+      "arm": "K1-R",
+      "wall_seconds": 3598.0780000002123,
+      "returncode": 1,
+      "within_cap": true,
+      "stop_reason": "whole_run_hard_stop",
+      "passed": true,
+      "endpoint": {
+        "U": 0.15708313110317407,
+        "L": 0.1483180363170433,
+        "gap": 0.008765094786130773,
+        "certificate": false,
+        "source": "interrupted_committed_evidence",
+        "status": "whole_run_hard_stop"
+      },
+      "native_calls_started": 7,
+      "native_calls_returned": 6,
+      "physical_witnesses": 1,
+      "global_bound_events": 2167,
+      "committed_events": 2182,
+      "offline_replay_seconds": 0.035021400079131126
+    },
+    {
+      "number": 4,
+      "id": "D7",
+      "arm": "P-GRB",
+      "wall_seconds": 3598.0469999997877,
+      "returncode": 1,
+      "within_cap": true,
+      "stop_reason": "whole_run_hard_stop",
+      "passed": true,
+      "endpoint": {
+        "U": 0.2372849915487284,
+        "L": 0.19858649317712468,
+        "gap": 0.03869849837160372,
+        "certificate": false,
+        "source": "interrupted_committed_evidence",
+        "status": "whole_run_hard_stop"
+      },
+      "native_calls_started": 1,
+      "native_calls_returned": 0,
+      "physical_witnesses": 235,
+      "global_bound_events": 68,
+      "committed_events": 305,
+      "offline_replay_seconds": 0.24535810016095638
+    },
+    {
+      "number": 5,
+      "id": "D7",
+      "arm": "ENS-C",
+      "wall_seconds": 3597.186999999918,
+      "returncode": 0,
+      "within_cap": true,
+      "stop_reason": "normal_return",
+      "passed": true,
+      "endpoint": {
+        "U": 0.22515085005563812,
+        "L": 0.20473785631837987,
+        "gap": 0.020412993737258245,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      },
+      "native_calls_started": 4,
+      "native_calls_returned": 4,
+      "physical_witnesses": 52,
+      "global_bound_events": 93,
+      "committed_events": 154,
+      "offline_replay_seconds": 0.643729000352323
+    }
+  ],
+  "D7_pair": {
+    "role": "D7",
+    "whole_cap_seconds": 3600,
+    "P": {
+      "U": 0.2372849915487284,
+      "L": 0.19858649317712468,
+      "gap": 0.03869849837160372,
+      "certificate": false,
+      "source": "interrupted_committed_evidence",
+      "status": "whole_run_hard_stop"
+    },
+    "ENS": {
+      "U": 0.22515085005563812,
+      "L": 0.20473785631837987,
+      "gap": 0.020412993737258245,
+      "certificate": false,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "round31_c6_external_gini_tree_time_limit"
+    },
+    "delta_U": -0.012134141493090278,
+    "delta_L": 0.006151363141255195,
+    "delta_gap": -0.018285504634345473,
+    "gap_reduction_percent": 47.25119941026719,
+    "P_relative_gap": 0.1630886897608805,
+    "ENS_relative_gap": 0.09066363165945805,
+    "both_bounds_better": true,
+    "scope": "Audited complete endpoints from this current pair only. K1-R and final source, Start, checkpoint and replication audits remain pending."
+  },
+  "completed_paid_process_seconds": 17561.65599999996,
+  "completed_optimize_starts": 19,
+  "completed_optimize_returns": 17,
+  "scope": "Completed prefix only; active D7 K1-R cost is additional. Three normal returns and two valid whole-run hard stops. Final campaign, Start and replication audits remain pending.",
+  "stage_complete": false,
+  "overall_goal_complete": false
+}

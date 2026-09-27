@@ -1,0 +1,72 @@
+{
+  "admitted": true,
+  "completed_short_runs": 9,
+  "runs_sha256": "b80acbcbfafd282e7c8ae3a97125896b1d0c0a207302da9eb837726e2a21c8df",
+  "pairs_sha256": "ff14ba40d7f6159958f79e0c4b2ea9882625d5a2305b6c0eb4cd63e7304ebee7",
+  "delivery_sha256": "84b834dca12d8a81c11b086e6691bae26d5a538a4990efa1628c209ebd71e109",
+  "audit_sha256": {
+    "witness_model_checks.json": "f5c767da5368d3c719cf57b808adeaa6633008fcf1fb6716a386f9fa02512706",
+    "start_checks.json": "23abe504cee9a6dff67388c6359efd0cfbb19d5d9d56a20d187485a5c7e11441",
+    "coverage_checks.csv": "5a4435118c3600ee4cf7fdfd845f3c99ec277379a900bcc4a7f980927221f08e",
+    "descent_checks.json": "ce8f23021aec1c4753be9e0d9825a0ff839ff9f25bd8c2bfc168a25de6b18c83",
+    "affinity_checks.json": "80bbaa7dde89656ee33f32d5c59eb1dcfe62729a97c62a046dcd0e8e7873f9b3",
+    "native_version_checks.json": "04bdfe12a7f820685d87f09311d8c39c342e3acaa90af722f7d66ae9eeaae48b"
+  },
+  "frozen_short_tables": [
+    "short_runs.csv",
+    "short_pairs.csv"
+  ],
+  "p_relative_harmful": [],
+  "ds_relative_useful": [
+    {
+      "id": "D3",
+      "cap": "300",
+      "candidate_arm": "DS-X",
+      "candidate_number": "3",
+      "reference_number": "2",
+      "reference": "DS",
+      "candidate_certificate": "True",
+      "reference_certificate": "False",
+      "wall_delta": "-41.717999999411404",
+      "UB_delta": "0.0",
+      "LB_delta": "0.0017728430322096408",
+      "signed_gap_delta": "-0.0017728430322096408",
+      "paired_build": "True",
+      "uniform_affinity_mask": "4",
+      "same_paid_initial_routes": "False",
+      "practical_classification": "certificate_gain",
+      "bound_tradeoff": "aligned_or_unchanged"
+    },
+    {
+      "id": "C2",
+      "cap": "300",
+      "candidate_arm": "DS-X",
+      "candidate_number": "6",
+      "reference_number": "5",
+      "reference": "DS",
+      "candidate_certificate": "True",
+      "reference_certificate": "True",
+      "wall_delta": "-42.984999999869615",
+      "UB_delta": "0.0",
+      "LB_delta": "-1.1102230246251565e-16",
+      "signed_gap_delta": "1.1102230246251565e-16",
+      "paired_build": "True",
+      "uniform_affinity_mask": "4",
+      "same_paid_initial_routes": "False",
+      "practical_classification": "material_improvement",
+      "bound_tradeoff": "aligned_or_unchanged"
+    }
+  ],
+  "rule": "All nine fully audited, no severe P-relative loss or certificate loss, at least one material DS gain or recovered certificate",
+  "scope": "Experiment admission only; never an instance-specific algorithm switch",
+  "next_arms": [
+    "P-GRB",
+    "K1-R",
+    "DS-X"
+  ],
+  "next_id": "D7",
+  "next_common_cap": 3600,
+  "maximum_additional_launches": 3,
+  "maximum_additional_seconds": 10800,
+  "analysis_script_sha256": "e7c43b80ccf667ff00460be78b0e875405bb29619a49e4a4e466acb297cbc877"
+}

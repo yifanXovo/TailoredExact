@@ -1,0 +1,76 @@
+{
+  "always_excluded": [
+    {
+      "pattern": "G",
+      "reason": "Gini split coordinate"
+    },
+    {
+      "pattern": "segment_G_* or exact G aliases",
+      "reason": "duplicate/auxiliary encoding of G alone"
+    },
+    {
+      "pattern": "diagnostic-only variables",
+      "reason": "factory scope diagnostic_excluded"
+    }
+  ],
+  "equal_family_weights": false,
+  "equal_variable_weights": true,
+  "frozen_before_candidate_runtime": true,
+  "inactive_not_eligible": [
+    "W_GS",
+    "T_SP_*",
+    "Round43/44/45 variables"
+  ],
+  "included_families": [
+    {
+      "factory_source": "penalty_final_inventory_domain bounds",
+      "family": "final_inventory",
+      "pattern": "Y_[i]"
+    },
+    {
+      "factory_source": "direct/spread/centering interval rows",
+      "family": "station_ratio",
+      "pattern": "r_[i]"
+    },
+    {
+      "factory_source": "estimator/penalty interval rows",
+      "family": "absolute_deviation",
+      "pattern": "e_[i]"
+    },
+    {
+      "factory_source": "direct/spread/estimator interval rows",
+      "family": "pairwise_ratio_difference",
+      "pattern": "h_[i]_[j]"
+    },
+    {
+      "factory_source": "interval-tight McCormick rows",
+      "family": "inventory_bit",
+      "pattern": "bit_[i]_[b]"
+    },
+    {
+      "factory_source": "interval-tight McCormick rows",
+      "family": "gini_inventory_product",
+      "not_gini_duplicate": "joint product G*bit, not an encoding of G alone",
+      "pattern": "prod_[i]_[b]"
+    },
+    {
+      "factory_source": "required-movement interval rows",
+      "family": "pickup_movement",
+      "pattern": "p_[k]_[i]"
+    },
+    {
+      "factory_source": "required-movement interval rows",
+      "family": "drop_movement",
+      "pattern": "d_[k]_[i]"
+    },
+    {
+      "factory_source": "sp-product interval factory domain/rows",
+      "family": "ratio_penalty_product",
+      "pattern": "W_SP"
+    }
+  ],
+  "post_outcome_family_selection_allowed": false,
+  "registry_sha256": "762112e9d376bcbf1fec2242a07392415147c7383f7640514ecc9d05f9c9f4cb",
+  "schema": "round48-eligible-variable-registry-v1",
+  "selection_rule": "union of genuine variables named by non-diagnostic canonical interval rows or bounds whose coefficients, RHS, or bounds depend on gamma_L/gamma_U; finite effective parent and both-child bounds; parent width above certificate-derived tolerance; deduplicated; equal weight"
+}

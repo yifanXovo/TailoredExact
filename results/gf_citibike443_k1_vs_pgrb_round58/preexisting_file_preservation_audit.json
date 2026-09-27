@@ -1,0 +1,45 @@
+{
+  "baseline_recorded_before_round58_artifact_generation": true,
+  "final_reverification_all_preserved": true,
+  "final_reverification_at_utc": "2026-09-10T13:55:14.852462+00:00",
+  "final_reverification_path": "results/gf_citibike443_k1_vs_pgrb_round58/preexisting_files_final_verification.json",
+  "final_reverification_pending": false,
+  "pre_round57_baseline_fingerprint": "9f5ac5fb127e3fd1e3ab73c4342bebae0ac621e2753e4f08368964213f56d17e",
+  "pre_round57_baseline_source": "results/data_generation_citibike_round57/repository_start_audit.json",
+  "pre_round57_count_matches": true,
+  "pre_round57_expected_untracked_count": 58453,
+  "pre_round57_untracked_file_count": 58453,
+  "preservation_rule": "No reset, clean, stash, relocation, overwrite, or deletion; verify the three tracked hashes, the Round 57 inventory, and the inherited Round 57 historical preservation baseline at finalization.",
+  "recorded_at_utc": "2026-08-31T13:19:23.149876+00:00",
+  "round57_final_inventory_owned_paths": 383,
+  "round57_inventory_hashes_all_match": true,
+  "round57_status_owned_untracked_file_count": 382,
+  "round58_in_progress_paths_excluded_from_baseline_count": 8,
+  "round58_outputs_excluded_from_baseline": true,
+  "schema": "round58-preexisting-file-preservation-audit-v1",
+  "tracked_modified_file_count": 3,
+  "tracked_modified_files": [
+    {
+      "bytes": 53767,
+      "git_blob": "98bcd60c3c5542772f101d5c73643033b78c58da",
+      "git_status": "modified",
+      "path": "results/gf_compact_bc_round/handling_convention_test/handling_convention.json",
+      "sha256": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b"
+    },
+    {
+      "bytes": 6792,
+      "git_blob": "730b12307ff356aad1972158312c3c791f4492ec",
+      "git_status": "modified",
+      "path": "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv",
+      "sha256": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb"
+    },
+    {
+      "bytes": 73034,
+      "git_blob": "c6ea164aec30b59fbee030476ed9cd6a4ffa315f",
+      "git_status": "modified",
+      "path": "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json",
+      "sha256": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202"
+    }
+  ],
+  "untracked_file_count_before_round58": 58843
+}

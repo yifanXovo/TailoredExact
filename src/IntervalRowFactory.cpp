@@ -494,9 +494,11 @@ IntervalRowFactoryResult buildRound18StaticIntervalRows(
             for (int k = 0; k < M; ++k) {
                 const double travel = instance.dist[0][i] + instance.dist[i][0];
                 int movement = 0;
-                if (instance.total_time_limit + 1e-9 >= travel && cunit > 1e-12) {
-                    movement = static_cast<int>(std::floor(
-                        (instance.total_time_limit - travel) / cunit + 1e-9));
+                if (instance.total_time_limit + 1e-9 >= travel) {
+                    movement = cunit > 1e-12
+                        ? static_cast<int>(std::min<double>(instance.Q[k], std::floor(
+                            (instance.total_time_limit - travel) / cunit + 1e-9)))
+                        : instance.Q[k];
                 }
                 pickup_reach = std::max(pickup_reach,
                     std::min({instance.initial[i], instance.Q[k], movement}));

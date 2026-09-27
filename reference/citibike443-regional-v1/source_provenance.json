@@ -1,0 +1,29 @@
+{
+  "authoritative_sources": {
+    "capacity": {
+      "path": "E:\\codes\\Hybrid GA\\testdata\\CitiBike\\coords\\citibike_selected_443_capacity_list.txt",
+      "sha256": "92ca9b05e66d1425bbc801be2dd9c0776b1a9707e62a60b821d941aa98625ae1"
+    },
+    "coordinates": {
+      "path": "E:\\codes\\Hybrid GA\\testdata\\CitiBike\\coords\\citibike_selected_443_coords_utm18n_meters.txt",
+      "sha256": "c5fd892cc82e07332d4796edb0527182d9c60883acc9b87a5410dab569f990d1"
+    }
+  },
+  "real_derived_fields": [
+    "service-station UTM coordinates",
+    "service-station capacities"
+  ],
+  "schema": "citibike443-source-provenance-v1",
+  "source_files_copied": false,
+  "source_reference_policy": "immutable local legacy paths plus SHA-256",
+  "synthetic_fields": [
+    "depot",
+    "initial inventory",
+    "target inventory",
+    "weights",
+    "minimum ratios",
+    "M",
+    "Q",
+    "T"
+  ]
+}

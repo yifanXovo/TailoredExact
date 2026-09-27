@@ -1,0 +1,489 @@
+{
+  "records": [
+    {
+      "number": 1,
+      "id": "D3",
+      "arm": "JDS-X",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 0.06300000008195639,
+        "watchdog": false,
+        "restored": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "UB": 0.0781153026105612,
+      "physical": {
+        "F": 0.0781153026105612,
+        "G": 0.042968395034803625,
+        "P": 0.23431271717171714,
+        "stations": 10,
+        "pickup": 28,
+        "drop": 28,
+        "maximum_duration": 2791.8948977954715,
+        "original_T_feasible": true
+      },
+      "detail": {
+        "joint_audit": {
+          "accepted": 5,
+          "terminal_status": "motif_exhausted",
+          "placements": 3704,
+          "quantities": 4096,
+          "all_prefixes_independently_replayed": true
+        }
+      },
+      "route_sha256": "384981b8e7111dd3b35f834edcde1171b771714b8c9b07376b6abacde8d20f42",
+      "result_sha256": "9350dba59d3600ad380d0931df37d8ec8c73f3693d4f8f8cbd93eeca2049828e",
+      "offline_audit_seconds": 0.01050009997561574
+    },
+    {
+      "number": 2,
+      "id": "D3",
+      "arm": "QDS-X",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 0.06199999991804361,
+        "watchdog": false,
+        "restored": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "UB": 0.0781153026105612,
+      "physical": {
+        "F": 0.0781153026105612,
+        "G": 0.042968395034803625,
+        "P": 0.23431271717171714,
+        "stations": 10,
+        "pickup": 28,
+        "drop": 28,
+        "maximum_duration": 2791.8948977954715,
+        "original_T_feasible": true
+      },
+      "detail": {
+        "joint_audit": {
+          "accepted": 5,
+          "terminal_status": "motif_exhausted",
+          "placements": 3704,
+          "quantities": 4096,
+          "all_prefixes_independently_replayed": true
+        },
+        "initial_UB": 0.0781153026105612,
+        "final_UB": 0.0781153026105612,
+        "accepted": 0,
+        "counts": {
+          "singles": 0,
+          "pairs": 0,
+          "cross_vehicle": 0,
+          "sign_flips": 0,
+          "removed_stops": 0
+        },
+        "independently_checked_physical_witnesses": 2,
+        "returned_to_outer": true,
+        "passes": 1,
+        "single_candidates": 163,
+        "pair_candidates": 281,
+        "feasible_candidates": 164,
+        "terminal_status": "neighborhood_exhausted",
+        "trace_interval_seconds": 4.559999999999981e-05,
+        "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work",
+        "all25_logical_descent_paths_equal": true
+      },
+      "route_sha256": "384981b8e7111dd3b35f834edcde1171b771714b8c9b07376b6abacde8d20f42",
+      "result_sha256": "c241056efce35a488d4584cca850de48dfa401838441e7e6fcfd09fbee6e7a04",
+      "offline_audit_seconds": 0.010137899778783321
+    },
+    {
+      "number": 3,
+      "id": "C2",
+      "arm": "JDS-X",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 0.06199999991804361,
+        "watchdog": false,
+        "restored": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "UB": 0.8370914675547019,
+      "physical": {
+        "F": 0.8370914675547019,
+        "G": 0.2708414675547019,
+        "P": 3.775,
+        "stations": 4,
+        "pickup": 17,
+        "drop": 16,
+        "maximum_duration": 1777.013632206718,
+        "original_T_feasible": true
+      },
+      "detail": {
+        "joint_audit": {
+          "accepted": 3,
+          "terminal_status": "motif_exhausted",
+          "placements": 8608,
+          "quantities": 2923,
+          "all_prefixes_independently_replayed": true
+        }
+      },
+      "route_sha256": "5fa7c559530b94271e5b39ca1dff1cb69c9baedf707a73be5c2a908fd95fc371",
+      "result_sha256": "b28eb2eab9a7dd6fe33002ff650a4eff244197984b702780d9cedb6ae1f4583b",
+      "offline_audit_seconds": 0.010102000087499619
+    },
+    {
+      "number": 4,
+      "id": "C2",
+      "arm": "QDS-X",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 0.06199999991804361,
+        "watchdog": false,
+        "restored": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "UB": 0.8370914675547019,
+      "physical": {
+        "F": 0.8370914675547019,
+        "G": 0.2708414675547019,
+        "P": 3.775,
+        "stations": 4,
+        "pickup": 17,
+        "drop": 16,
+        "maximum_duration": 1777.013632206718,
+        "original_T_feasible": true
+      },
+      "detail": {
+        "joint_audit": {
+          "accepted": 3,
+          "terminal_status": "motif_exhausted",
+          "placements": 8608,
+          "quantities": 2923,
+          "all_prefixes_independently_replayed": true
+        },
+        "initial_UB": 0.837091467554702,
+        "final_UB": 0.837091467554702,
+        "accepted": 0,
+        "counts": {
+          "singles": 0,
+          "pairs": 0,
+          "cross_vehicle": 0,
+          "sign_flips": 0,
+          "removed_stops": 0
+        },
+        "independently_checked_physical_witnesses": 2,
+        "returned_to_outer": true,
+        "passes": 1,
+        "single_candidates": 72,
+        "pair_candidates": 49,
+        "feasible_candidates": 37,
+        "terminal_status": "neighborhood_exhausted",
+        "trace_interval_seconds": 3.1799999999998496e-05,
+        "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work",
+        "all25_logical_descent_paths_equal": true
+      },
+      "route_sha256": "5fa7c559530b94271e5b39ca1dff1cb69c9baedf707a73be5c2a908fd95fc371",
+      "result_sha256": "cc422a50ab28b81e811ba253dbf7532e1fb9a3674444b2db5e45b38bd4707efb",
+      "offline_audit_seconds": 0.014240500051528215
+    },
+    {
+      "number": 5,
+      "id": "D4",
+      "arm": "JDS-X",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 0.07799999974668026,
+        "watchdog": false,
+        "restored": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "UB": 0.506422789224163,
+      "physical": {
+        "F": 0.506422789224163,
+        "G": 0.1810788634566511,
+        "P": 2.168959505116746,
+        "stations": 8,
+        "pickup": 29,
+        "drop": 29,
+        "maximum_duration": 2305.183129530976,
+        "original_T_feasible": true
+      },
+      "detail": {
+        "joint_audit": {
+          "accepted": 5,
+          "terminal_status": "motif_exhausted",
+          "placements": 3312,
+          "quantities": 1408,
+          "all_prefixes_independently_replayed": true
+        }
+      },
+      "route_sha256": "08baa4edddc368c3595ee22eb9e2f364f606ab5f8af3071f19ba74d00434e446",
+      "result_sha256": "a42d7af390450aa020899678ab828c8c54cffe6e8c8b11fad0d2c6a3a53fa7bd",
+      "offline_audit_seconds": 0.010604099836200476
+    },
+    {
+      "number": 6,
+      "id": "D4",
+      "arm": "QDS-X",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 0.07799999974668026,
+        "watchdog": false,
+        "restored": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "UB": 0.506422789224163,
+      "physical": {
+        "F": 0.506422789224163,
+        "G": 0.1810788634566511,
+        "P": 2.168959505116746,
+        "stations": 8,
+        "pickup": 29,
+        "drop": 29,
+        "maximum_duration": 2305.183129530976,
+        "original_T_feasible": true
+      },
+      "detail": {
+        "joint_audit": {
+          "accepted": 5,
+          "terminal_status": "motif_exhausted",
+          "placements": 3312,
+          "quantities": 1408,
+          "all_prefixes_independently_replayed": true
+        },
+        "initial_UB": 0.506422789224163,
+        "final_UB": 0.506422789224163,
+        "accepted": 0,
+        "counts": {
+          "singles": 0,
+          "pairs": 0,
+          "cross_vehicle": 0,
+          "sign_flips": 0,
+          "removed_stops": 0
+        },
+        "independently_checked_physical_witnesses": 2,
+        "returned_to_outer": true,
+        "passes": 1,
+        "single_candidates": 119,
+        "pair_candidates": 145,
+        "feasible_candidates": 85,
+        "terminal_status": "neighborhood_exhausted",
+        "trace_interval_seconds": 3.3800000000000496e-05,
+        "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work",
+        "all25_logical_descent_paths_equal": true
+      },
+      "route_sha256": "08baa4edddc368c3595ee22eb9e2f364f606ab5f8af3071f19ba74d00434e446",
+      "result_sha256": "b93730c071006d26a8fc92b0f6353112a864bbfa99b2029baf44e98762ac7cd9",
+      "offline_audit_seconds": 0.017672600224614143
+    },
+    {
+      "number": 7,
+      "id": "D6",
+      "arm": "JDS-X",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 5.890999999828637,
+        "watchdog": false,
+        "restored": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "UB": 0.1600272806044027,
+      "physical": {
+        "F": 0.1600272806044027,
+        "G": 0.02687658257234963,
+        "P": 0.8876713202136872,
+        "stations": 30,
+        "pickup": 119,
+        "drop": 119,
+        "maximum_duration": 17989.946434173762,
+        "original_T_feasible": true
+      },
+      "detail": {
+        "joint_audit": {
+          "accepted": 15,
+          "terminal_status": "motif_exhausted",
+          "placements": 252816,
+          "quantities": 38834,
+          "all_prefixes_independently_replayed": true
+        }
+      },
+      "route_sha256": "2ada44195e0501604ce5873463213652754f7a13917a02018581b7a217f9b19c",
+      "result_sha256": "6896e5f228094e6f944e4284777e412d9fe2fd1498906312d4c01c39de8168b2",
+      "offline_audit_seconds": 0.016507700085639954
+    },
+    {
+      "number": 8,
+      "id": "D6",
+      "arm": "QDS-X",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 5.875,
+        "watchdog": false,
+        "restored": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "UB": 0.1600272806044027,
+      "physical": {
+        "F": 0.1600272806044027,
+        "G": 0.02687658257234963,
+        "P": 0.8876713202136872,
+        "stations": 30,
+        "pickup": 119,
+        "drop": 119,
+        "maximum_duration": 17989.946434173762,
+        "original_T_feasible": true
+      },
+      "detail": {
+        "joint_audit": {
+          "accepted": 15,
+          "terminal_status": "motif_exhausted",
+          "placements": 252816,
+          "quantities": 38834,
+          "all_prefixes_independently_replayed": true
+        },
+        "initial_UB": 0.16002728060440277,
+        "final_UB": 0.16002728060440277,
+        "accepted": 0,
+        "counts": {
+          "singles": 0,
+          "pairs": 0,
+          "cross_vehicle": 0,
+          "sign_flips": 0,
+          "removed_stops": 0
+        },
+        "independently_checked_physical_witnesses": 2,
+        "returned_to_outer": true,
+        "passes": 1,
+        "single_candidates": 195,
+        "pair_candidates": 2649,
+        "feasible_candidates": 2321,
+        "terminal_status": "neighborhood_exhausted",
+        "trace_interval_seconds": 0.0003047000000000466,
+        "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work",
+        "all25_logical_descent_paths_equal": true
+      },
+      "route_sha256": "2ada44195e0501604ce5873463213652754f7a13917a02018581b7a217f9b19c",
+      "result_sha256": "65a593e6475f22164df0315434509305a49cd2f0605a418490f83e9dde8ad6c4",
+      "offline_audit_seconds": 0.0259166001342237
+    },
+    {
+      "number": 9,
+      "id": "D7",
+      "arm": "JDS-X",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 10.32799999974668,
+        "watchdog": false,
+        "restored": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "UB": 0.3807736874624573,
+      "physical": {
+        "F": 0.3807736874624573,
+        "G": 0.13338764645209003,
+        "P": 1.649240273402449,
+        "stations": 46,
+        "pickup": 183,
+        "drop": 183,
+        "maximum_duration": 17985.801546637405,
+        "original_T_feasible": true
+      },
+      "detail": {
+        "joint_audit": {
+          "accepted": 25,
+          "terminal_status": "motif_exhausted",
+          "placements": 2318091,
+          "quantities": 179271,
+          "all_prefixes_independently_replayed": true
+        }
+      },
+      "route_sha256": "7293a636e08378f2301d7388fbfba3ba43ead58aab10c14dd1dc51eecbf34b6e",
+      "result_sha256": "dce6920e79991061ef145f575373a91e63bbeee5c28ba680b167039617ce503c",
+      "offline_audit_seconds": 0.029566199984401464
+    },
+    {
+      "number": 10,
+      "id": "D7",
+      "arm": "QDS-X",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 10.344000000040978,
+        "watchdog": false,
+        "restored": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "UB": 0.3807736874624573,
+      "physical": {
+        "F": 0.3807736874624573,
+        "G": 0.13338764645209003,
+        "P": 1.649240273402449,
+        "stations": 46,
+        "pickup": 183,
+        "drop": 183,
+        "maximum_duration": 17985.801546637405,
+        "original_T_feasible": true
+      },
+      "detail": {
+        "joint_audit": {
+          "accepted": 25,
+          "terminal_status": "motif_exhausted",
+          "placements": 2318091,
+          "quantities": 179271,
+          "all_prefixes_independently_replayed": true
+        },
+        "initial_UB": 0.38077368746245777,
+        "final_UB": 0.38077368746245777,
+        "accepted": 0,
+        "counts": {
+          "singles": 0,
+          "pairs": 0,
+          "cross_vehicle": 0,
+          "sign_flips": 0,
+          "removed_stops": 0
+        },
+        "independently_checked_physical_witnesses": 2,
+        "returned_to_outer": true,
+        "passes": 1,
+        "single_candidates": 185,
+        "pair_candidates": 3815,
+        "feasible_candidates": 2976,
+        "terminal_status": "neighborhood_exhausted",
+        "trace_interval_seconds": 0.0005416000000000309,
+        "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work",
+        "all25_logical_descent_paths_equal": true
+      },
+      "route_sha256": "7293a636e08378f2301d7388fbfba3ba43ead58aab10c14dd1dc51eecbf34b6e",
+      "result_sha256": "03c9ca70bceafcc758c893516c47261e0fab36bf400f2ae44dfdb2c70aa3d634",
+      "offline_audit_seconds": 0.040195600129663944
+    }
+  ],
+  "attempted": 10,
+  "valid": 10,
+  "paid_wall_seconds": 32.84299999894574,
+  "optimize_calls": 0,
+  "full_exact_runs": 0
+}

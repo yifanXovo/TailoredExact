@@ -1,0 +1,32 @@
+{
+  "launch": {
+    "id": "D4",
+    "arm": "plain-build",
+    "stage": "reference_build",
+    "command": [
+      "E:\\codes\\ExactEBRP-round65\\build\\round65\\Round65ReferenceBuild.exe",
+      "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q30_slot08_seed1288546114.txt",
+      "2400",
+      "60",
+      "60",
+      "0.15",
+      "E:\\codes\\ExactEBRP-round65\\results\\gf_budgeted_proof_round65\\local_raw\\reference_build\\D4"
+    ],
+    "executable_sha256": "74cac3b28464f88faf8b86b4a336258ec8eaea3832e07c147750f035246ec0ce",
+    "cap_seconds": 30,
+    "kind": "build-only",
+    "charged": false,
+    "charged_number": null,
+    "solver_calls_planned": 0,
+    "started_unix": 1789373254.671403,
+    "destination": "results\\gf_budgeted_proof_round65\\local_raw\\reference_build\\D4"
+  },
+  "completion": {
+    "returncode": 0,
+    "wall_seconds": 0.06300000008195639,
+    "watchdog": false,
+    "within_budget": true,
+    "solver_calls_planned": 0
+  },
+  "result": {}
+}

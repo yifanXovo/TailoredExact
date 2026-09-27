@@ -1,0 +1,18 @@
+{
+  "kind": "offline_metadata_encoding_failure",
+  "script": "inline closure metadata update",
+  "error": "UnicodeDecodeError: 'gbk' codec can't decode byte 0x93 in position 31839: illegal multibyte sequence",
+  "failed_operation": "Read existing docs/unified_exact_research_index.md with implicit locale encoding",
+  "reported_exec_wall_seconds": 0.2264391,
+  "partial_completed_writes": [
+    "visual_review.json",
+    "resource_summary.json",
+    "runtime_checkpoint.json",
+    "status.md"
+  ],
+  "index_write_occurred": false,
+  "native_reruns": 0,
+  "audit_reruns": 0,
+  "recovery": "Only finish metadata using explicit UTF-8; all original evidence bytes and completed producers retained",
+  "additional_metadata_correction": "verify-only prints a separate receipt, not a delivery.json field. Replace the intermediate null verify duration with the successful tool receipt 2.25606199959293s."
+}

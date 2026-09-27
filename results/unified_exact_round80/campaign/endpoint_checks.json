@@ -1,0 +1,80 @@
+[
+  {
+    "id": "E8",
+    "arm": "P-GRB",
+    "wall_seconds": 1.7809999999590218,
+    "stop_reason": "normal_return",
+    "U": 0.021337006039780566,
+    "L": 0.02133700603978057,
+    "gap": -3.469446951953614e-18,
+    "certificate": true,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "optimal",
+    "relative_gap": -1.6260233256180372e-16
+  },
+  {
+    "id": "E8",
+    "arm": "BDS-C",
+    "wall_seconds": 2.5159999998286366,
+    "stop_reason": "normal_return",
+    "U": 0.021337006039780566,
+    "L": 0.021337006039780573,
+    "gap": -6.938893903907228e-18,
+    "certificate": true,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "optimal",
+    "relative_gap": -3.2520466512360744e-16
+  },
+  {
+    "id": "E8",
+    "arm": "K1-R",
+    "wall_seconds": 7.358999999705702,
+    "stop_reason": "normal_return",
+    "U": 0.021337006039780566,
+    "L": 0.021337006039780563,
+    "gap": 3.469446951953614e-18,
+    "certificate": true,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "optimal",
+    "relative_gap": 1.6260233256180372e-16
+  },
+  {
+    "id": "D6",
+    "arm": "P-GRB",
+    "wall_seconds": 3597.1720000002533,
+    "stop_reason": "normal_return",
+    "U": 0.1572411758522922,
+    "L": 0.15078231039028528,
+    "gap": 0.006458865462006913,
+    "certificate": false,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "time_limit",
+    "relative_gap": 0.041076171219135274
+  },
+  {
+    "id": "D6",
+    "arm": "BDS-C",
+    "wall_seconds": 3597.125,
+    "stop_reason": "normal_return",
+    "U": 0.15750980361456174,
+    "L": 0.15580755380144062,
+    "gap": 0.001702249813121115,
+    "certificate": false,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "round31_c6_external_gini_tree_time_limit",
+    "relative_gap": 0.01080726262148512
+  },
+  {
+    "id": "D6",
+    "arm": "K1-R",
+    "wall_seconds": 3597.1409999998286,
+    "stop_reason": "normal_return",
+    "U": 0.15708313110317415,
+    "L": 0.14831656888164757,
+    "gap": 0.00876656222152658,
+    "certificate": false,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "round31_c6_external_gini_tree_time_limit",
+    "relative_gap": 0.05580842551303993
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "schema": "round55-split-revision-decision-v1",
+  "fixed_interval_confirmation_passed": true,
+  "full_k1_integration_passed": false,
+  "materially_changed_action_instances": [
+    "moderate_seed3301",
+    "round39_small_hard_V12_M2_Q20_slot06_seed258908503",
+    "round39_small_hard_V12_M3_Q30_slot08_seed1288546114"
+  ],
+  "severe_failure_instance": "round39_small_medium_V12_M3_Q30_slot08_seed1343324363",
+  "severe_failure_has_materially_changed_action": false,
+  "matched_causal_link_to_changed_action": false,
+  "counterfactual_stage_opened": false,
+  "revision_opened": false,
+  "classification": "stable_split_rule_retained"
+}

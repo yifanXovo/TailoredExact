@@ -1,0 +1,109 @@
+{
+  "base": "a3a7c89cfa752fd0c029c83d43996562df0be3fd",
+  "candidate_source": "4496078f25c0cdad1cf7a5c39835fd23121e8978",
+  "version": "round86-unadapted-varied-structures-v1",
+  "roles": [
+    {
+      "id": "F1",
+      "family": "citibike",
+      "V": 12,
+      "M": 2,
+      "Q": 20,
+      "geography": "regional",
+      "inventory": "surplus",
+      "T_seconds": 3600,
+      "cap": 120
+    },
+    {
+      "id": "F2",
+      "family": "synthetic",
+      "V": 20,
+      "M": 2,
+      "Q": 30,
+      "geometry": "alternating_rings",
+      "inventory": "paired_shortage",
+      "T_seconds": 3600,
+      "cap": 300
+    },
+    {
+      "id": "F5",
+      "family": "synthetic",
+      "V": 50,
+      "M": 4,
+      "Q": 30,
+      "geometry": "perturbed_grid",
+      "inventory": "paired_shortage",
+      "T_seconds": 7200,
+      "cap": 3600
+    },
+    {
+      "id": "F6",
+      "family": "citibike",
+      "V": 50,
+      "M": 4,
+      "Q": 30,
+      "geography": "compact",
+      "inventory": "shortage",
+      "T_seconds": 18000,
+      "cap": 3600
+    }
+  ],
+  "synthetic_ranges": {
+    "F2": {
+      "D": [
+        20,
+        28
+      ],
+      "a": [
+        8,
+        12
+      ],
+      "delta": [
+        3,
+        6
+      ]
+    },
+    "F5": {
+      "D": [
+        14,
+        24
+      ],
+      "a": [
+        3,
+        8
+      ],
+      "delta": [
+        2,
+        5
+      ]
+    }
+  },
+  "seed_material": {
+    "F1": "4496078f25c0cdad1cf7a5c39835fd23121e8978|round86-unadapted-varied-structures-v1|{\"M\":2,\"Q\":20,\"T_seconds\":3600,\"V\":12,\"cap\":120,\"family\":\"citibike\",\"geography\":\"regional\",\"id\":\"F1\",\"inventory\":\"surplus\"}",
+    "F2": "4496078f25c0cdad1cf7a5c39835fd23121e8978|round86-unadapted-varied-structures-v1|{\"M\":2,\"Q\":30,\"T_seconds\":3600,\"V\":20,\"cap\":300,\"family\":\"synthetic\",\"geometry\":\"alternating_rings\",\"id\":\"F2\",\"inventory\":\"paired_shortage\"}",
+    "F5": "4496078f25c0cdad1cf7a5c39835fd23121e8978|round86-unadapted-varied-structures-v1|{\"M\":4,\"Q\":30,\"T_seconds\":7200,\"V\":50,\"cap\":3600,\"family\":\"synthetic\",\"geometry\":\"perturbed_grid\",\"id\":\"F5\",\"inventory\":\"paired_shortage\"}",
+    "F6": "4496078f25c0cdad1cf7a5c39835fd23121e8978|round86-unadapted-varied-structures-v1|{\"M\":4,\"Q\":30,\"T_seconds\":18000,\"V\":50,\"cap\":3600,\"family\":\"citibike\",\"geography\":\"compact\",\"id\":\"F6\",\"inventory\":\"shortage\"}"
+  },
+  "citi_namespace": {
+    "F1": "citibike443-round86-unadapted-varied-structures-v1-869d7ffe15390c6f93d66d2f9f69eaaf9b6482929fba24fed4df342265e9e145",
+    "F6": "citibike443-round86-unadapted-varied-structures-v1-545b6155c28f086712303b1c59d42dd6e24514b4b8e4483a1e272af6f8ba980d"
+  },
+  "citi_replicate": 1,
+  "citi_selection_prefix": "round86_",
+  "field_hash": "SHA256(UTF8(candidate source|version|canonical role JSON|field)); integer=full big-endian modulo inclusive range; unit=first8 big-endian/(2^64-1)",
+  "coordinates": "Translated by (584400,4511800) meters and rounded to3 decimals; depot is rounded centroid of serialized points; parser Euclidean/1.5m/s",
+  "weights": "Synthetic 0.25+0.75*hash unit, rounded6 decimals; inherited CitiBike weights unchanged",
+  "min_ratio": "Synthetic 0.7*min(initial,target)/target, rounded4 decimals; depot0; inherited CitiBike formula unchanged",
+  "original_lambda": 0.15,
+  "pickup_seconds": 60,
+  "drop_seconds": 60,
+  "generators": {
+    "scripts\\round86_generate.py": "6752b0ae8afb06bb62844dfd9d7b8215990b08337e903bcc9e61641f6ee5d7ab",
+    "scripts\\generate_citibike443_regional_v1.py": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8"
+  },
+  "generated_inputs_exist": false,
+  "optimizer_calls": 0,
+  "planned_runs": 12,
+  "maximum_process_seconds": 22860,
+  "policy": "Keep all four admitted generated roles; no outcome screening, reseeding, resizing, T adjustment or best-repeat selection."
+}

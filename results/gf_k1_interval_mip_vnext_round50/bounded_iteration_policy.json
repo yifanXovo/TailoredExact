@@ -1,0 +1,18 @@
+{
+  "candidate_screen_seconds": 120,
+  "confirmation_seconds": 1200,
+  "development_qualification_seconds": 300,
+  "key_check_seconds": 1800,
+  "maximum_candidates_per_iteration": 3,
+  "maximum_development_revisions_per_iteration": 1,
+  "maximum_iterations": 4,
+  "one_principal_family_per_iteration": true,
+  "revision_conditions": [
+    "same_family",
+    "before_confirmation",
+    "no_instance_dispatch",
+    "retain_all_prior_rows",
+    "rerun_complete_iteration_panel"
+  ],
+  "schema": "round50-bounded-iteration-policy-v1"
+}

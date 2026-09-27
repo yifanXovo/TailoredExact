@@ -3,3 +3,95 @@ results/gf_gurobi_performance_recovery_round29/** -text
 
 # Preserve byte-exact Round 31 evidence and its recorded SHA-256 values.
 results/gf_nonblocking_gurobi_c6_round31/** -text
+
+# Preserve byte-exact Round 39 frozen inputs, scripts, and recorded hashes.
+reference/qualification_round39/** -text
+results/gf_small_hard_light_round39/** -text whitespace=-trailing-space
+scripts/*round39*.py -text
+scripts/round39_common.py whitespace=-blank-at-eof
+tests/round39_protocol_tests.py -text
+
+# Preserve byte-exact Round 45 completion evidence and recorded SHA-256 values.
+results/gf_adaptive_timing_parametric_partition_round45/completion/** -text whitespace=cr-at-eol
+
+# Preserve byte-exact Round 46 screening evidence and recorded SHA-256 values.
+results/gf_c6_rho_k1_k4_screen_round46/** -text whitespace=cr-at-eol
+
+# Preserve byte-exact Round 49 compact evidence and recorded SHA-256 values.
+results/gf_k1_lp_primal_dual_rescue_round49/** -text whitespace=cr-at-eol
+
+# Round62 preflight found automatic CRLF conversion changes manifest input hashes.
+# Keep the original checked-in dataset bytes and this round's evidence exact.
+reference/citibike443-regional-v1/** -text
+results/gf_passive_threshold_conflicts_round62/** -text whitespace=cr-at-eol
+scripts/*round62*.py -text whitespace=cr-at-eol
+
+# Preserve Round 65 ledger, freeze, receipt and diagnostic source byte hashes.
+results/gf_budgeted_proof_round65/** -text whitespace=cr-at-eol
+scripts/*round65* -text whitespace=cr-at-eol
+
+# Preserve Round67 compact evidence and measured Python driver byte hashes.
+results/unified_exact_round67/** -text whitespace=cr-at-eol
+scripts/*round67*.py -text whitespace=cr-at-eol
+results/unified_exact_round68/** -text whitespace=cr-at-eol
+scripts/*round68*.py -text whitespace=cr-at-eol
+results/unified_exact_round68/qualification_native_v4/*.log -text -whitespace
+results/unified_exact_round69/** -text whitespace=cr-at-eol
+scripts/*round69*.py -text whitespace=cr-at-eol
+results/unified_exact_round70/** -text whitespace=cr-at-eol
+scripts/*round70*.py -text whitespace=cr-at-eol
+
+# Keep Round74 frozen driver, raw-evidence metadata and recorded hashes exact.
+results/unified_exact_round74/** -text whitespace=cr-at-eol
+scripts/*round74*.py -text whitespace=cr-at-eol
+results/unified_exact_round75/** -text whitespace=cr-at-eol
+scripts/*round75*.py -text whitespace=cr-at-eol
+results/unified_exact_round76/** -text whitespace=cr-at-eol
+scripts/*round76*.py -text whitespace=cr-at-eol
+
+results/unified_exact_round77/** -text whitespace=cr-at-eol
+scripts/*round77*.py -text whitespace=cr-at-eol
+
+results/unified_exact_round78/** -text whitespace=cr-at-eol
+scripts/*round78*.py -text whitespace=cr-at-eol
+
+results/unified_exact_round79/** -text
+scripts/round79*.py -text
+
+results/unified_exact_round79/bundle_manifest.json -diff linguist-generated=true
+
+results/unified_exact_round80/** -text
+scripts/round80*.py -text
+
+results/unified_exact_round81/** -text
+scripts/round81*.py -text
+
+results/unified_exact_round82/** -text
+scripts/round82*.py -text
+reference/round82_unadapted_confirmation/** -text
+
+# Preserve measured Matplotlib SVG bytes, including harmless path whitespace.
+results/unified_exact_round82/figures/long_window_gaps.svg -whitespace
+results/unified_exact_round82/figures_v2/long_window_gaps.svg -whitespace
+
+results/unified_exact_round83/** -text whitespace=cr-at-eol
+scripts/round83*.py -text
+include/Round83BlockExchange.hpp -text
+src/Round83BlockExchange.cpp -text
+tests/round83_exchange_diagnostic.cpp -text
+tests/round83*.cmake -text
+results/unified_exact_round83/figures/u6_bounds_and_gap.svg -whitespace
+
+results/unified_exact_round84/** -text whitespace=cr-at-eol
+scripts/round84*.py -text
+results/unified_exact_round84/figures/*.svg -whitespace
+
+results/unified_exact_round85/** -text whitespace=cr-at-eol
+scripts/round85*.py -text whitespace=cr-at-eol
+results/unified_exact_round85/figures/*.svg -whitespace
+
+# Round86 immutable research bytes
+/results/unified_exact_round86/** -text whitespace=cr-at-eol
+/scripts/round86_*.py -text whitespace=cr-at-eol
+/reference/round86_unadapted_confirmation/** -text whitespace=cr-at-eol
+/results/unified_exact_round86/figures/*.svg -whitespace

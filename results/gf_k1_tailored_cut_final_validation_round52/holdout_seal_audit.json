@@ -1,0 +1,22 @@
+{
+  "schema": "round52-holdout-seal-audit-v1",
+  "opening_authorized": true,
+  "holdout_row_count": 12,
+  "holdout_result_rows_opened_before_this_audit": 0,
+  "holdout_manifest": "results/gf_k1_tailored_cut_final_validation_round52/holdout_instance_manifest.json",
+  "holdout_manifest_sha256": "5a19f71875d46bbfdeffef27344f879b99553a3c8eaea83ffdf0d7e602d33d52",
+  "tau_frozen": true,
+  "tau": 0.08,
+  "tau_freeze_sha256": "8d589f2f48de5b8aaf05e892454412e540438ba5a97def475efa8d73525f2295",
+  "controller_frozen": true,
+  "inner_backend_frozen": true,
+  "inner_backend_freeze_sha256": "67ef298e5d083f551d2f6a9cc86f06643a0352436044dcbdf240bcd73e93d329",
+  "k1_am_final_frozen": true,
+  "k1_am_final_freeze_sha256": "720ee696fe51c1446d1aea99a33302288b177873e470cd39424dee67648f4e46",
+  "algorithm_freeze_commit": "52ccf3e713e1c57484ac2ec9ba96baf3cb8c8026",
+  "executable": "build/round52/ExactEBRP.exe",
+  "executable_sha256": "d245c76f6397c757894610d8f5238cfeb971761ff7e05edf51058e451d810151",
+  "process_cap_seconds": 1800,
+  "checkpoints_seconds": [300, 1200, 1800],
+  "algorithm_changes_after_opening_allowed": 0
+}

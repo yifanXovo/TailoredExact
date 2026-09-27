@@ -1,0 +1,73 @@
+{
+  "baseline_policy": "interval-mip-v0",
+  "baseline_summary": "results/gf_k1_interval_mip_vnext_round50/interval_mip_v0_300s_results_dev.csv",
+  "baseline_summary_sha256": "4a11b775e0445bfe6c0f18545f686de3b9cc21d3601ca474e965ab9640b17f10",
+  "bottleneck_map": "results/gf_k1_interval_mip_vnext_round50/interval_mip_bottleneck_map.csv",
+  "bottleneck_map_sha256": "68331d853862bc3b0ac4ead217aaa2a33203fa8dcae9ffb6307c16847b0601ff",
+  "branch_direction_change": false,
+  "candidate_count": 3,
+  "candidate_result_inspected_before_plan": false,
+  "candidates": [
+    {
+      "id": "B1",
+      "mechanism": "uniform ordinal semantic BranchPriority",
+      "policy": "b1-primitive-first"
+    },
+    {
+      "id": "B2",
+      "mechanism": "uniform ordinal semantic BranchPriority",
+      "policy": "b2-route-first"
+    },
+    {
+      "id": "B3",
+      "mechanism": "uniform ordinal semantic BranchPriority",
+      "policy": "b3-operation-first"
+    }
+  ],
+  "confirmation_opened": false,
+  "core_cap_seconds": 120,
+  "core_states": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D9",
+    "D10",
+    "D11"
+  ],
+  "decision_order": [
+    "certificate",
+    "GI",
+    "gap",
+    "valid_LB",
+    "Work",
+    "time"
+  ],
+  "instance_specific_logic": false,
+  "iteration": 1,
+  "one_mechanism_family": true,
+  "principal_family": "tailored branching",
+  "qualification_cap_seconds": 300,
+  "qualification_states": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D14"
+  ],
+  "runtime_dispatch": false,
+  "schema": "round50-iteration-plan-v1",
+  "winner_requires_complete_300s_qualification": true,
+  "written_before_candidate_runs": true
+}

@@ -1,0 +1,21 @@
+{
+  "binding": {
+    "launcher_pid": 39440,
+    "before": {
+      "process_mask": 1048575,
+      "system_mask": 1048575
+    },
+    "effective": {
+      "process_mask": 4,
+      "system_mask": 1048575
+    },
+    "selected_logical_processor": 2,
+    "explicit_set_target": "own launcher only"
+  },
+  "child_pid": 47368,
+  "child_readback": {
+    "process_mask": 4,
+    "system_mask": 1048575
+  },
+  "scope": "Measurement condition only; no unrelated process was changed"
+}

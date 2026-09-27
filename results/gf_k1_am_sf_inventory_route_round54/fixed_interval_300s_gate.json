@@ -1,0 +1,20 @@
+{
+  "schema": "round54-fixed-interval-stage-gate-v1",
+  "stage": "fixed_interval_300s",
+  "cap_seconds": 300,
+  "row_count": 28,
+  "pair_count": 14,
+  "executable_sha256": "55ac7778f8e4a1c009b6d1cc8c4cc5d3b40a54ac241cce5a633363a0a571f441",
+  "all_engineering_valid": true,
+  "false_certificate_count": 0,
+  "lost_f0_certificate_count": 2,
+  "severe_regression_count": 2,
+  "material_hard_state_improvement_rows": [
+    "D4"
+  ],
+  "shifted_work_geometric_mean_ratio_ir1_over_f0": 1.0894322046574854,
+  "aggregate_gi_f0": 0.4983492223793612,
+  "aggregate_gi_ir1": 0.6234225979462248,
+  "aggregate_work_and_gi_nonworse": false,
+  "next_stage_gate_passed": false
+}

@@ -1,0 +1,3 @@
+# Primitive integer registry audit
+
+The frozen registry contains the original routing arcs (`x`), visit selections (`z`), operation modes (`mode`), pickup/drop quantities (`p`,`d`), vehicle loads (`load`), and final inventories (`Y`). Exact names are frozen once per V/M dimension class in `primitive_integer_variable_registry.json` and flattened in the CSV. Binary expansions, product/McCormick auxiliaries, formulation selectors, continuous auxiliaries, diagnostics, and the Gini coordinate/aliases are excluded. All nine mandatory models mapped every frozen primitive name exactly once; no post-outcome registry correction was needed.

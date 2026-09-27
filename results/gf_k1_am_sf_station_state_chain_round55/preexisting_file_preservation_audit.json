@@ -1,0 +1,43 @@
+{
+  "schema": "round55-preexisting-file-preservation-audit-v1",
+  "baseline_recorded_before_round55_artifact_generation": true,
+  "tracked_modified_files": [
+    {
+      "path": "results/gf_compact_bc_round/handling_convention_test/handling_convention.json",
+      "bytes": 53767,
+      "sha256": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+      "git_blob": "98bcd60c3c5542772f101d5c73643033b78c58da"
+    },
+    {
+      "path": "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv",
+      "bytes": 6792,
+      "sha256": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+      "git_blob": "730b12307ff356aad1972158312c3c791f4492ec"
+    },
+    {
+      "path": "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json",
+      "bytes": 73034,
+      "sha256": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202",
+      "git_blob": "c6ea164aec30b59fbee030476ed9cd6a4ffa315f"
+    }
+  ],
+  "untracked_snapshot": {
+    "file_count": 50851,
+    "total_bytes": 27113346320,
+    "aggregate_sha256": "f0e17c92f92143e68e5b061c46898d89969e479b7a8ef91c5eda7c2bcf79c42d",
+    "local_inventory_path": "build/round55_preexisting_untracked_snapshot.csv",
+    "local_inventory_sha256": "c4f14e6cb2682a3d4b3004f8ddb3360866db754473f7b2e82ff93a2218e3e48f"
+  },
+  "preservation_rule": "Retain every listed path byte-for-byte; verify path, byte count, SHA-256, and tracked Git blob at finalization.",
+  "round55_outputs_excluded_from_baseline": true,
+  "final_reverification_pending": false,
+  "final_verification": {
+    "all_preserved": true,
+    "verified_file_count": 50851,
+    "verified_bytes": 27113346320,
+    "missing_count": 0,
+    "size_mismatch_count": 0,
+    "sha256_mismatch_count": 0,
+    "record": "preexisting_untracked_final_verification.json"
+  }
+}

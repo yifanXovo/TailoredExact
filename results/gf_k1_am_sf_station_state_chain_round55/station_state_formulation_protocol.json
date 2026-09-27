@@ -1,0 +1,25 @@
+{
+  "schema": "round55-station-state-formulation-protocol-v1",
+  "empirical_parameters": [],
+  "station_domain": "actual integer final-inventory domain after frozen propagation; no size dispatch",
+  "VD-P": {
+    "selectors": "sum_y s_i_y=1; Y_i=sum_y y s_i_y",
+    "perspective": "l*s_i_y<=q_i_y<=u*s_i_y",
+    "reconstruction": "sum_y q_i_y=G; Z_i=sum_y y*q_i_y",
+    "replacement": "product-only bit block"
+  },
+  "VD-J": {
+    "base": "VD-P",
+    "ratio": "jointly represented when applicable",
+    "penalty": "e_i=sum_y |y/D_i-1| s_i_y",
+    "nonobjective_e_constraints_must_be_preserved": true
+  },
+  "required": [
+    "forward integer mapping",
+    "reverse projection",
+    "integer product exactness",
+    "isolated disjunctive convex-hull proof",
+    "projection-strength caveat",
+    "no V/M/Q dispatch"
+  ]
+}

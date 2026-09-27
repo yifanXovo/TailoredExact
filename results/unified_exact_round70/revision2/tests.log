@@ -1,0 +1,494 @@
+Internal ctest changing into directory: E:/codes/ExactEBRP-round66/build/round70_v2
+UpdateCTestConfiguration  from :E:/codes/ExactEBRP-round66/build/round70_v2/DartConfiguration.tcl
+UpdateCTestConfiguration  from :E:/codes/ExactEBRP-round66/build/round70_v2/DartConfiguration.tcl
+Test project E:/codes/ExactEBRP-round66/build/round70_v2
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+      Start  1: Round66ArcLoadTests
+
+1: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round66ArcLoadTests.exe
+1: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+1: Test timeout computed to be: 120
+1: Round66 arc replacement and fractional implications passed
+ 1/47 Test  #1: Round66ArcLoadTests .....................   Passed    0.14 sec
+test 2
+      Start  2: Round67LogStateTests
+
+2: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round67LogStateTests.exe
+2: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+2: Test timeout computed to be: 120
+2: Round67 log-state mappings and model isolation passed
+ 2/47 Test  #2: Round67LogStateTests ....................   Passed    0.11 sec
+test 3
+      Start  3: Round68StartTests
+
+3: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round68StartTests.exe
+3: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+3: Test timeout computed to be: 120
+3: Native qualification: 3 Optimize calls; retained Start accepted and observed; 258 rows checked; evidence "C:\\Users\\Administrator\\AppData\\Local\\Temp\\exactebrp_round68_native_start_2843019208573100"
+3: Round68 existing-witness integration tests passed
+ 3/47 Test  #3: Round68StartTests .......................   Passed    0.16 sec
+test 4
+      Start  4: Round70DescentTests
+
+4: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round70DescentTests.exe
+4: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+4: Test timeout computed to be: 120
+4: Decoded descent qualification passed; no optimizer calls
+ 4/47 Test  #4: Round70DescentTests .....................   Passed    0.07 sec
+test 5
+      Start  5: Round70DescentCliTests
+
+5: Test command: "D:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-DEXACT_EXE=E:/codes/ExactEBRP-round66/build/round70_v2/ExactEBRP.exe" "-DSOURCE_ROOT=E:/codes/ExactEBRP-round66" "-DOUTPUT_ROOT=E:/codes/ExactEBRP-round66/build/round70_v2" "-P" "E:/codes/ExactEBRP-round66/tests/round70_descent_cli_test.cmake"
+5: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+5: Test timeout computed to be: 120
+5: -- Round70DescentCliTests: real CLI certificate5/24; Optimize calls=18; artifacts=E:/codes/ExactEBRP-round66/build/round70_v2/round70_cli_7defaae99fed4c2f
+ 5/47 Test  #5: Round70DescentCliTests ..................   Passed    0.45 sec
+test 6
+      Start  6: Round65Tests
+
+6: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round65Tests.exe
+6: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+6: Test timeout computed to be: 120
+6: Round65 budget and zero reliability passed
+ 6/47 Test  #6: Round65Tests ............................   Passed    0.15 sec
+test 7
+      Start  7: Round64Tests
+
+7: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round64Tests.exe
+7: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+7: Test timeout computed to be: 120
+7: Round64 integer embeddings, shared identities, warm mapping and static isolation passed
+ 7/47 Test  #7: Round64Tests ............................   Passed    0.25 sec
+test 8
+      Start  8: Round63Tests
+
+8: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round63Tests.exe
+8: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+8: Test timeout computed to be: 120
+8: Round63 route/subset enumeration, mincut, numerical and scope checks passed
+ 8/47 Test  #8: Round63Tests ............................   Passed    0.30 sec
+test 9
+      Start  9: Round62Tests
+
+9: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round62Tests.exe
+9: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+9: Test timeout computed to be: 120
+9: Round62 solver-free correctness tests passed
+ 9/47 Test  #9: Round62Tests ............................   Passed    0.14 sec
+test 10
+      Start 10: Round61CandidateTests
+
+10: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round61CandidateTests.exe
+10: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+10: Test timeout computed to be: 120
+10: Round61 candidate mathematical and lifecycle tests passed
+10/47 Test #10: Round61CandidateTests ...................   Passed    0.11 sec
+test 11
+      Start 11: Round59ResearchTests
+
+11: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round59ResearchTests.exe
+11: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+11: Test timeout computed to be: 120
+11: Verified 849 feasible route/operation realizations; 771 return loaded; all pair cuts valid.
+11/47 Test #11: Round59ResearchTests ....................   Passed    0.07 sec
+test 12
+      Start 12: Round60CandidateTests
+
+12: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round60CandidateTests.exe
+12: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+12: Test timeout computed to be: 120
+12: Round 60 verified-candidate checks passed.
+12/47 Test #12: Round60CandidateTests ...................   Passed    0.07 sec
+test 13
+      Start 13: ControllingLeafSchedulerTests
+
+13: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\ControllingLeafSchedulerTests.exe
+13: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+13: Test timeout computed to be: 120
+13: PASS 01_unique_controlling_leaf
+13: PASS 02_two_tied_controlling_leaves
+13: PASS 03_three_tied_controlling_leaves
+13: PASS 04_deterministic_tie_initial_order
+13: PASS 05_round_robin_tied_service
+13: PASS 06_processed_leaf_overtakes_next_bound
+13: PASS 07_no_progress_leaf_remains_controlling
+13: PASS 08_geometric_quantum_escalation
+13: PASS 09_uncapped_quantum_growth
+13: PASS 10_child_insertion_after_split
+13: PASS 11_exact_parent_child_coverage
+13: PASS 12_monotone_leaf_bounds
+13: PASS 13_monotone_global_bound
+13: PASS 14_accepted_native_checkpoint
+13: PASS 15_rejected_heartbeat
+13: PASS 16_rejected_stale_checkpoint
+13: PASS 17_rejected_partial_checkpoint
+13: PASS 18_rejected_model_mismatch
+13: PASS 19_checkpoint_below_cutoff_stays_open
+13: PASS 20_checkpoint_at_cutoff_fathoms
+13: PASS 21_solver_final_checkpoint_max_merge
+13: PASS 22_global_deadline_enforcement
+13: PASS 23_finalization_reserve_formula
+13: PASS 24_no_launch_after_reserve_boundary
+13: PASS 25_budget_policy_serialization_consistency
+13: PASS 26_scheduler_has_no_instance_specific_branch
+13: PASS 27_certificate_source_guard
+13: PASS 28_option_consistency_mismatch_detectable
+13: PASS 29_adaptive_split_lifetime_regression
+13: PASS 30_official_static_profile_no_callback_checkpoint
+13/47 Test #13: ControllingLeafSchedulerTests ...........   Passed    0.05 sec
+test 14
+      Start 14: GlobalGiniTreeTests
+
+14: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\GlobalGiniTreeTests.exe
+14: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+14: Test timeout computed to be: 120
+14: GlobalGiniTreeTests: 9 groups passed
+14/47 Test #14: GlobalGiniTreeTests .....................   Passed    0.08 sec
+test 15
+      Start 15: StrictCertificateTests
+
+15: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\StrictCertificateTests.exe
+15: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+15: Test timeout computed to be: 120
+15: StrictCertificateTests: 22 groups passed
+15/47 Test #15: StrictCertificateTests ..................   Passed    0.05 sec
+test 16
+      Start 16: ConnectivityFlowTests
+
+16: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\ConnectivityFlowTests.exe
+16: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+16: Test timeout computed to be: 120
+16: ConnectivityFlowTests: 6 groups passed
+16/47 Test #16: ConnectivityFlowTests ...................   Passed    0.05 sec
+test 17
+      Start 17: StrictSerializationTests
+
+17: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\StrictSerializationTests.exe
+17: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+17: Test timeout computed to be: 120
+17: StrictSerializationTests: 4 groups passed
+17/47 Test #17: StrictSerializationTests ................   Passed    0.06 sec
+test 18
+      Start 18: ModelCorrectnessTests
+
+18: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\ModelCorrectnessTests.exe
+18: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+18: Test timeout computed to be: 120
+18: ModelCorrectnessTests: 5 groups passed
+18/47 Test #18: ModelCorrectnessTests ...................   Passed    0.05 sec
+test 19
+      Start 19: DenseProgressTests
+
+19: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\DenseProgressTests.exe
+19: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+19: Test timeout computed to be: 120
+19: DenseProgressTests: 15 groups passed
+19/47 Test #19: DenseProgressTests ......................   Passed    0.05 sec
+test 20
+      Start 20: DispersionChildBoundTests
+
+20: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\DispersionChildBoundTests.exe
+20: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+20: Test timeout computed to be: 120
+20: DispersionChildBoundTests: 20 requirements passed
+20/47 Test #20: DispersionChildBoundTests ...............   Passed    0.05 sec
+test 21
+      Start 21: Round24BackendTests
+
+21: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round24BackendTests.exe
+21: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+21: Test timeout computed to be: 120
+21: Round24BackendTests passed 104 checks
+21/47 Test #21: Round24BackendTests .....................   Passed    0.12 sec
+test 22
+      Start 22: Round27PaperSchedulingTests
+
+22: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round27PaperSchedulingTests.exe
+22: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+22: Test timeout computed to be: 120
+22: Round27PaperSchedulingTests passed 47 checks
+22/47 Test #22: Round27PaperSchedulingTests .............   Passed    0.14 sec
+test 23
+      Start 23: Round28ReplicaTests
+
+23: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round28ReplicaTests.exe
+23: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+23: Test timeout computed to be: 120
+23: ROUND28_CHECKS=54
+23/47 Test #23: Round28ReplicaTests .....................   Passed    0.13 sec
+test 24
+      Start 24: Round29PerformanceRecoveryTests
+
+24: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round29PerformanceRecoveryTests.exe
+24: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+24: Test timeout computed to be: 120
+24: Round29PerformanceRecoveryTests: all checks passed
+24/47 Test #24: Round29PerformanceRecoveryTests .........   Passed    0.13 sec
+test 25
+      Start 25: Round30C5Tests
+
+25: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round30C5Tests.exe
+25: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+25: Test timeout computed to be: 120
+25: Round 30 C5 tests passed
+25/47 Test #25: Round30C5Tests ..........................   Passed    0.13 sec
+test 26
+      Start 26: Round31C6Tests
+
+26: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round31C6Tests.exe
+26: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+26: Test timeout computed to be: 120
+26: Round31C6Tests: 18 state-machine checks passed
+26/47 Test #26: Round31C6Tests ..........................   Passed    0.13 sec
+test 27
+      Start 27: Round36CausalTests
+
+27: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round36CausalTests.exe
+27: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+27: Test timeout computed to be: 120
+27: Round36CausalTests: 10 safety/equivalence checks passed
+27/47 Test #27: Round36CausalTests ......................   Passed    0.13 sec
+test 28
+      Start 28: Round37GeometryTests
+
+28: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round37GeometryTests.exe
+28: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+28: Test timeout computed to be: 120
+28: Round 37 geometry tests passed: 4
+28/47 Test #28: Round37GeometryTests ....................   Passed    0.05 sec
+test 29
+      Start 29: Round40CoarseStartTests
+
+29: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round40CoarseStartTests.exe
+29: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+29: Test timeout computed to be: 120
+29: Round40CoarseStartTests: 9 checks passed
+29/47 Test #29: Round40CoarseStartTests .................   Passed    0.05 sec
+test 30
+      Start 30: Round40UbGeometryTests
+
+30: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round40UbGeometryTests.exe
+30: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+30: Test timeout computed to be: 120
+30: Round40UbGeometryTests: 9 checks passed
+30/47 Test #30: Round40UbGeometryTests ..................   Passed    0.05 sec
+test 31
+      Start 31: Round41StaticSegmentedTests
+
+31: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round41StaticSegmentedTests.exe
+31: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+31: Test timeout computed to be: 120
+31: Round41StaticSegmentedTests: 10 checks passed
+31/47 Test #31: Round41StaticSegmentedTests .............   Passed    0.05 sec
+test 32
+      Start 32: Round42StaticSegmentedTests
+
+32: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round42StaticSegmentedTests.exe
+32: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+32: Test timeout computed to be: 120
+32: Round42StaticSegmentedTests: 16 checks passed
+32/47 Test #32: Round42StaticSegmentedTests .............   Passed    0.06 sec
+test 33
+      Start 33: Round43EnvelopeRefinementTests
+
+33: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round43EnvelopeRefinementTests.exe
+33: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+33: Test timeout computed to be: 120
+33: Round43EnvelopeRefinementTests: 16 checks passed
+33/47 Test #33: Round43EnvelopeRefinementTests ..........   Passed    0.05 sec
+test 34
+      Start 34: Round44EnvelopeTailRepairTests
+
+34: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round44EnvelopeTailRepairTests.exe
+34: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+34: Test timeout computed to be: 120
+34: Round44EnvelopeTailRepairTests: 21 checks passed
+34/47 Test #34: Round44EnvelopeTailRepairTests ..........   Passed    0.05 sec
+test 35
+      Start 35: Round45AdaptiveParametricTests
+
+35: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round45AdaptiveParametricTests.exe
+35: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+35: Test timeout computed to be: 120
+35: Round45AdaptiveParametricTests: 14 checks passed
+35/47 Test #35: Round45AdaptiveParametricTests ..........   Passed    0.05 sec
+test 36
+      Start 36: Round46C6RhoTests
+
+36: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round46C6RhoTests.exe
+36: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+36: Test timeout computed to be: 120
+36: Round46C6RhoTests: 15 checks passed
+36/47 Test #36: Round46C6RhoTests .......................   Passed    0.13 sec
+test 37
+      Start 37: Round47AdaptiveMassTests
+
+37: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round47AdaptiveMassTests.exe
+37: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+37: Test timeout computed to be: 120
+37: Round47AdaptiveMassTests: 28 checks passed
+37/47 Test #37: Round47AdaptiveMassTests ................   Passed    0.13 sec
+test 38
+      Start 38: Round48K1AMFTests
+
+38: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round48K1AMFTests.exe
+38: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+38: Test timeout computed to be: 120
+38: Round48K1AMFTests passed 42 checks
+38/47 Test #38: Round48K1AMFTests .......................   Passed    0.06 sec
+test 39
+      Start 39: Round49K1LPPrimalDualTests
+
+39: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round49K1LPPrimalDualTests.exe
+39: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+39: Test timeout computed to be: 120
+39: Round49K1RCTests passed 42 checks
+39/47 Test #39: Round49K1LPPrimalDualTests ..............   Passed    0.05 sec
+test 40
+      Start 40: Round50IntervalMipTests
+
+40: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round50IntervalMipTests.exe
+40: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+40: Test timeout computed to be: 120
+40: Round50IntervalMipTests passed
+40/47 Test #40: Round50IntervalMipTests .................   Passed    0.04 sec
+test 41
+      Start 41: Round51TightBigMTests
+
+41: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round51TightBigMTests.exe
+41: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+41: Test timeout computed to be: 120
+41: Round51TightBigMTests passed
+41/47 Test #41: Round51TightBigMTests ...................   Passed    0.05 sec
+test 42
+      Start 42: Round52TailoredCutTests
+
+42: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round52TailoredCutTests.exe
+42: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+42: Test timeout computed to be: 120
+42: PASS candidate_normalization_sorts
+42: PASS candidate_normalization_combines
+42: PASS greater_equal_canonicalization
+42: PASS equality_rejected
+42: PASS nonfinite_rejected
+42: PASS canonical_signature_order_invariant
+42: PASS canonical_signature_rhs_sensitive
+42: PASS exact_dominance
+42: PASS pair_route_lower_bound
+42: PASS triple_route_lower_bound
+42: PASS quad_route_lower_bound
+42: PASS route_support_order_invariant
+42: PASS separator_candidate_count
+42: PASS separator_global_validity
+42: PASS separator_scaled_violation
+42: PASS separator_pair_and_triple_families
+42: PASS support_duration_valid_on_active_support
+42: PASS support_duration_valid_on_inactive_support
+42: PASS separator_missing_mapping_rejected
+42: PASS separator_invalid_effective_bounds_rejected
+42: PASS strict_scaled_threshold
+42: PASS deterministic_vehicle_block_selection
+42: PASS global_pool_membership
+42: PASS duplicate_rejection
+42: PASS pooled_duplicate_rejection
+42: PASS dominance_is_generation_order_independent
+42: PASS family_and_vehicle_accounting
+42: PASS no_cut_leakage_across_models
+42: PASS root_only_callback_behavior
+42: PASS root_only_rejects_tree
+42: PASS tree_callback_behavior
+42: PASS mipnode_optimal_status_requirement
+42: PASS precrush_contract
+42: PASS gurobi_cbcut_success
+42: PASS gurobi_cbcut_failure
+42: PASS gurobi_mapping_failure
+42: PASS no_local_cut_marked_global
+42: PASS callback_exception_fallback
+42: PASS default_off_policy_equivalence
+42: PASS f0_policy
+42: PASS f1_policy
+42: PASS f2_policy
+42: PASS f3_policy
+42: PASS f4_policy
+42: Round52TailoredCutTests passed 44 cases
+42/47 Test #42: Round52TailoredCutTests .................   Passed    0.05 sec
+test 43
+      Start 43: Round53F0AndCallbackTests
+
+43: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round53F0AndCallbackTests.exe
+43: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+43: Test timeout computed to be: 120
+43: ok 1 - 01_explicit_f0_clean_policy
+43: ok 2 - 02_historical_f0_alias
+43: ok 3 - 03_f0_removes_only_exhaustive_family
+43: ok 4 - 04_f0_no_dynamic_separator
+43: ok 5 - 05_f0_no_precrush
+43: ok 6 - 06_c0_baseline
+43: ok 7 - 07_c1_precrush_only
+43: ok 8 - 08_c2_status_only
+43: ok 9 - 09_c3_status_plus_precrush
+43: ok 10 - 10_c4_relaxation_vector
+43: ok 11 - 11_c4_separator
+43: ok 12 - 12_c4_no_submission
+43: ok 13 - 13_c5_live_submission
+43: ok 14 - 14_default_v0_unchanged
+43: ok 15 - 15_invalid_callback_policy_fails_closed
+43: ok 16 - 16_all_modes_share_f0_mathematics
+43: ok 17 - 17_v_le_12_expected_removed_row_count
+43: ok 18 - 18_removed_row_id_range
+43: ok 19 - 19_f0_column_identity
+43: ok 20 - 20_f0_row_delta
+43: ok 21 - 21_f0_nonzero_delta
+43: ok 22 - 22_f0_domain_tail_identity
+43: ok 23 - 23_v_gt_12_byte_equivalence
+43: ok 24 - 24_dry_run_candidate_selection
+43: ok 25 - 25_dry_run_zero_submission
+43: ok 26 - 26_dry_run_duplicate_memory
+43: ok 27 - 27_global_cut_validity_scope
+43: ok 28 - 28_k1_default_backend_is_v0
+43: ok 29 - 29_k1_tau_roundtrip_unchanged
+43: ok 30 - 30_no_instance_dispatch_in_backend_selection
+43: Round53F0AndCallbackTests passed 30 cases
+43/47 Test #43: Round53F0AndCallbackTests ...............   Passed    0.15 sec
+test 44
+      Start 44: Round54MainlineAndInventoryRouteTests
+
+44: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round54MainlineAndInventoryRouteTests.exe
+44: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+44: Test timeout computed to be: 120
+44: Round54MainlineAndInventoryRouteTests passed 35 checks
+44/47 Test #44: Round54MainlineAndInventoryRouteTests ...   Passed    0.06 sec
+test 45
+      Start 45: Round55StationStateChainTests
+
+45: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round55StationStateChainTests.exe
+45: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+45: Test timeout computed to be: 120
+45: Round55StationStateChainTests passed 58 checks
+45/47 Test #45: Round55StationStateChainTests ...........   Passed    0.43 sec
+test 46
+      Start 46: Round56PaperBenchmarkTests
+
+46: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round56PaperBenchmarkTests.exe
+46: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+46: Test timeout computed to be: 120
+46: Round56PaperBenchmarkTests passed 55 checks
+46/47 Test #46: Round56PaperBenchmarkTests ..............   Passed    0.12 sec
+test 47
+      Start 47: Round58CitiBikePairedBenchmarkTests
+
+47: Test command: E:\codes\ExactEBRP-round66\build\round70_v2\Round58CitiBikePairedBenchmarkTests.exe
+47: Working Directory: E:/codes/ExactEBRP-round66/build/round70_v2
+47: Test timeout computed to be: 120
+47: Round58CitiBikePairedBenchmarkTests passed 45 checks
+47/47 Test #47: Round58CitiBikePairedBenchmarkTests .....   Passed    0.06 sec
+
+100% tests passed, 0 tests failed out of 47
+
+Total Test time (real) =   5.10 sec

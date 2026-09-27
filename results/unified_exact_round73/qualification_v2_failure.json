@@ -1,0 +1,54 @@
+{
+  "tests_passed": 50,
+  "tests_total": 51,
+  "failed_test": "Round73JointInsertionCliTests",
+  "failure": "c6_round40_coarse_start_contract_mismatch",
+  "actual_native_calls": 39,
+  "failed_JI_native_calls": 0,
+  "repair": "Admit isolated JI in the remaining coarse-start guard; inspected the entire following guard chain, historical nonactive branches remain restricted",
+  "formal_diagnostics_launched": 0,
+  "manifest": [
+    {
+      "source": "build\\round73\\v2\\configure.log",
+      "artifact": "results\\unified_exact_round73\\qualification_failures\\v2\\configure.log.gz",
+      "source_sha256": "e7c99cd513ff17005abf475f9e5c72ef675f88982b170b397146d02862249950",
+      "sha256": "b7dea3e4e32f418dc2909ed9518c9ffc089d03695d699669b992729d470d2cd9"
+    },
+    {
+      "source": "build\\round73\\v2\\build.log",
+      "artifact": "results\\unified_exact_round73\\qualification_failures\\v2\\build.log.gz",
+      "source_sha256": "0adf6b7f1f0689b75e051b99483bceb22c44a4662b916a122a923295957cb72f",
+      "sha256": "9638b56601b4f60f0b075b4b9b86c0728464bf980d82bcc938efb8f79658d90d"
+    },
+    {
+      "source": "build\\round73\\v2\\tests.log",
+      "artifact": "results\\unified_exact_round73\\qualification_failures\\v2\\tests.log.gz",
+      "source_sha256": "f75ddec5612e0475905279eed7f5982478065fe496990cccefd986269546d6ab",
+      "sha256": "903dc08d64330e77d610d257185d01ba2007acdd8026b78a6604f8a01301c371"
+    },
+    {
+      "source": "build\\round73\\v2\\round73_cli_052c4b1c88adc793\\hga.csv.joint.csv",
+      "artifact": "results\\unified_exact_round73\\qualification_failures\\v2\\hga.csv.joint.csv.gz",
+      "source_sha256": "e1a680b3853dfe2cac718f634dedff0ade886bd91e6801df74cd8291cd7dee3a",
+      "sha256": "10c7f7e9779a6b7f3569e93f38689b733ac4e8584c8a4ef1d51a39b6e7ba88f3"
+    },
+    {
+      "source": "build\\round73\\v2\\round73_cli_052c4b1c88adc793\\result.json",
+      "artifact": "results\\unified_exact_round73\\qualification_failures\\v2\\result.json.gz",
+      "source_sha256": "bced3913787dca12c6de84a4a5bda7722a43010da93b37c6bf302af144117253",
+      "sha256": "f757f98f609b24a297df81ac2034937c1998f114d90140b37e8169d375031318"
+    },
+    {
+      "source": "build\\round73\\v2\\round73_cli_052c4b1c88adc793\\stderr.log",
+      "artifact": "results\\unified_exact_round73\\qualification_failures\\v2\\stderr.log.gz",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "source": "build\\round73\\v2\\round73_cli_052c4b1c88adc793\\stdout.log",
+      "artifact": "results\\unified_exact_round73\\qualification_failures\\v2\\stdout.log.gz",
+      "source_sha256": "e2852b68d7a433ed8ba7e02c85817654be96abe318b70ee180955af5552ebc1e",
+      "sha256": "f45341800d5baa0f31a66855985379619a8daf7119f8facac2de3946c928fbb4"
+    }
+  ]
+}

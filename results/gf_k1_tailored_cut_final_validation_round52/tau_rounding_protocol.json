@@ -1,0 +1,45 @@
+{
+  "schema": "round52-tau-rounding-protocol-v1",
+  "reference_tau": 0.07915,
+  "candidate_tau": 0.08,
+  "authoritative_inputs": [
+    "results/gf_c6_adaptive_mass_contraction_round47/adaptive_mass_action_replay.csv",
+    "all available Round 47-51 adaptive-mass decision ledgers"
+  ],
+  "complete_replay_fields": [
+    "instance",
+    "interval",
+    "parent_id",
+    "depth",
+    "S_AM",
+    "action_reference",
+    "action_candidate",
+    "action_changed",
+    "margin_reference",
+    "margin_candidate",
+    "historical_outcome"
+  ],
+  "anchor_requirements": {
+    "major_root": "retain",
+    "strong_control_root": "retain",
+    "tight3102_L0.0": "retain",
+    "high_imbalance_root": "split"
+  },
+  "if_no_changed_decisions": "freeze 0.08 and run equivalence sentinels only",
+  "if_changed_decisions": {
+    "screen_seconds": 300,
+    "confirmation_seconds_only_if_unresolved": 1200,
+    "panels": [
+      "all affected instances",
+      "known regression panel"
+    ]
+  },
+  "adoption_gates": [
+    "zero correctness failures",
+    "zero new severe regressions",
+    "major repair preserved",
+    "useful high-imbalance and moderate splits preserved",
+    "aggregate Work/proof progress nonworse"
+  ],
+  "no_retuning_after_decision": true
+}

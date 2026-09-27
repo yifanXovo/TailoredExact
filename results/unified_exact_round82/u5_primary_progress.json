@@ -1,0 +1,57 @@
+{
+  "scope": "Original common3600 U5 P/BDS endpoints; K1 and final joint audits pending.",
+  "gap_reduction_percent": 68.31630865593367,
+  "comparison": {
+    "UB_delta": -0.012663978622586891,
+    "LB_delta": 0.08002762752250281,
+    "gap_delta": -0.0926916061450897,
+    "mixed_UB_LB_directions": false,
+    "classification": "both_open",
+    "material_improvement": true,
+    "material_regression": false,
+    "severe_regression": false
+  },
+  "records": [
+    {
+      "arm": "P-GRB",
+      "wall": 3597.1410000002943,
+      "passed": true,
+      "endpoint": {
+        "U": 0.4421742857486199,
+        "L": 0.3064942293042369,
+        "gap": 0.13568005644438297,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      }
+    },
+    {
+      "arm": "BDS-C",
+      "wall": 3597.1099999998696,
+      "passed": true,
+      "endpoint": {
+        "U": 0.429510307126033,
+        "L": 0.38652185682673973,
+        "gap": 0.04298845029929327,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      }
+    }
+  ],
+  "new_optimizer_calls": 0,
+  "startup_readback": {
+    "scope": "Existing completed-run records; final independent actual-Start audit pending.",
+    "completed_paths": 25,
+    "decoded_descent_complete_seconds": 0.6210261,
+    "exact_phase_start_seconds": 0.6347906,
+    "physical_initial_F": 0.4921536581771426,
+    "physical_final_F": 0.4693349325589381,
+    "neutral_moves": 0,
+    "insertions": 3,
+    "quantity_moves": 4,
+    "outer_final_route_match": true,
+    "native_optimize_calls": 5,
+    "optimizer_calls_in_readback": 0
+  }
+}

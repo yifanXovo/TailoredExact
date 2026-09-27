@@ -1,0 +1,67 @@
+{
+  "automatic_mainline_change": false,
+  "exactness": {
+    "audited_static_mip_rows": 30,
+    "false_certificates": 0,
+    "strict_certificates": 27
+  },
+  "frozen_gate_source": "decision_gates_frozen.json",
+  "gate_a_technical_feasibility_passed": true,
+  "gate_b_max_core_variable_ratio_vs_i": 1.4742268041237114,
+  "gate_b_min_core_external_k2_strength_capture": 0.9999999999999679,
+  "gate_b_perspective_engineering_passed": true,
+  "gate_c_arm_evidence": {
+    "st-k2-i": {
+      "both_mechanisms_pass": false,
+      "coarse_time_ratio_vs_k1": 0.43155563214078263,
+      "coarse_time_ratio_vs_k4": 2.3459706452634346,
+      "coarse_weakness_pass": false,
+      "coarse_work_ratio_vs_k1": 0.42353997464923565,
+      "coarse_work_ratio_vs_k4": 2.34290413249632,
+      "complete": true,
+      "fragmentation_integer_jobs": 1,
+      "fragmentation_pass": false,
+      "fragmentation_time_ratio_vs_k4": 0.9999923902557986,
+      "fragmentation_work_ratio_vs_k4": 0.9710495027972342,
+      "strict_comparable": false
+    },
+    "st-k2-p-core": {
+      "both_mechanisms_pass": false,
+      "coarse_time_ratio_vs_k1": 0.24160165588396265,
+      "coarse_time_ratio_vs_k4": 1.3133657640827987,
+      "coarse_weakness_pass": false,
+      "coarse_work_ratio_vs_k1": 0.24776932005739635,
+      "coarse_work_ratio_vs_k4": 1.3705902597482833,
+      "complete": true,
+      "fragmentation_integer_jobs": 1,
+      "fragmentation_pass": true,
+      "fragmentation_time_ratio_vs_k4": 0.42792941212033264,
+      "fragmentation_work_ratio_vs_k4": 0.4330663905954484,
+      "strict_comparable": true
+    },
+    "st-k2-p-extended": {
+      "both_mechanisms_pass": false,
+      "coarse_time_ratio_vs_k1": 0.27670273913160537,
+      "coarse_time_ratio_vs_k4": 1.504178036668445,
+      "coarse_weakness_pass": false,
+      "coarse_work_ratio_vs_k1": 0.2821819324978926,
+      "coarse_work_ratio_vs_k4": 1.5609511624319194,
+      "complete": true,
+      "fragmentation_integer_jobs": 1,
+      "fragmentation_pass": false,
+      "fragmentation_time_ratio_vs_k4": 0.8914994027691735,
+      "fragmentation_work_ratio_vs_k4": 0.900863584615378,
+      "strict_comparable": false
+    }
+  },
+  "gate_c_both_opposing_mechanisms_passed": false,
+  "gate_d_k4_extension_justified": false,
+  "gate_e_held_out_validation_justified": false,
+  "held_out_validation_run": false,
+  "promotion_recommendation": "retain_frozen_c6_hga_full_k4_rho_0_01",
+  "schema": "round41-final-decision-v1",
+  "st_k2_h_implemented": false,
+  "st_k4_p_implemented": false,
+  "validated_default": "C6-HGA-FULL K=4 rho=0.01",
+  "witnesses_complete": true
+}

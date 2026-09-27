@@ -1,0 +1,8 @@
+round,mechanism,implementation,evidence,historical_decision,round53_default
+47,K1-AM,src/PaperExternalGiniTree.cpp,results/gf_c6_adaptive_mass_contraction_round47/final_decision.json,frozen as Round52 K1-AM tau=0.08,only named K1-AM policies
+48,K1-AMF,src/Round48K1AMF.cpp,results/gf_k1_amf_formulation_rescue_round48/final_decision.json,bounded negative,off
+49,K1 reduced-cost rescue,src/Round49K1RC.cpp,results/gf_k1_lp_primal_dual_rescue_round49/final_decision.json,bounded negative,off
+50,interval-MIP policies,src/Round50IntervalMip.cpp,results/gf_k1_interval_mip_vnext_round50/final_decision.json,production v0 retained,off unless explicit
+51,M1/symmetry/branching,src/Round51TightBigM.cpp,results/gf_k1_tight_big_m_sparse_branching_round51/final_decision.json,rejected,off
+52,rank-3 root user cuts,src/Round52TailoredCuts.cpp,results/gf_k1_tailored_cut_final_validation_round52/final_decision.json,rejected; infrastructure retained,off
+52,historical F0 alias,src/Round50IntervalMip.cpp,results/gf_k1_tailored_cut_final_validation_round52/static_dynamic_ablation.csv,preliminary only; not independently qualified,off

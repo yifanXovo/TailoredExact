@@ -1,0 +1,21 @@
+{
+  "schema": "round45-timing-threshold-selection-v1",
+  "frozen_before_full_instance_threshold_runtime": true,
+  "frozen_before_parametric_point_runtime": true,
+  "timing_formula": "GAMMA-THRESHOLD",
+  "rho_gamma": 0.012,
+  "certificate_tolerance": 1e-7,
+  "epsilon_gamma_formula": "epsilon_cert / max(M0, epsilon_cert)",
+  "selection_basis": "structural-only K4 midpoint atlas on the five frozen material-development rows",
+  "selection_summary": {
+    "leaves": 20,
+    "split_actions": 9,
+    "retain_actions": 11,
+    "major_witness_split_actions": 0,
+    "strong_control_split_actions": 3
+  },
+  "runtime_outcomes_used": false,
+  "point_rule": "midpoint",
+  "point_results_observed": false,
+  "no_adaptive_eligible": false
+}

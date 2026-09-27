@@ -1,0 +1,30 @@
+{
+  "schema": "round50-iteration-plan-v1",
+  "iteration": 3,
+  "principal_family": "exact symmetry",
+  "written_before_candidate_runs": true,
+  "active_branching_policy": "interval-mip-v0 default branching",
+  "active_cut_formulation_policy": "interval-mip-v0 original cut/formulation pack",
+  "stage1_symmetry_prose_corrected_before_candidate": true,
+  "symmetry_audit_finding": "all frozen multi-vehicle instances have identical vehicle capacities and the complete compact model is invariant under vehicle-label permutations",
+  "existing_symmetry_family": "nonincreasing visited-station cardinality by vehicle label",
+  "candidate": {
+    "id": "S1",
+    "policy": "s1-route-start-order",
+    "mechanism": "replace the existing cardinality representative rule with nondecreasing depot-start station index by vehicle label, with unused vehicles represented by start index zero",
+    "representative_proof": "any set of identical-vehicle routes can be relabeled by ascending start index, with unused routes first; station disjointness makes used-route starts unique",
+    "changes_only_symmetry_family": true
+  },
+  "maximum_candidates": 1,
+  "core_states": ["D1", "D2", "D3", "D4", "D5", "D6", "D9", "D10", "D11"],
+  "core_cap_seconds": 120,
+  "qualification_states": "D1-D14 if S1 is the best admissible screen candidate",
+  "qualification_cap_seconds": 300,
+  "numerical_candidate_opened": false,
+  "numerical_reason": "no native numerical warnings and no additional analytic bound, big-M, scaling, or auxiliary-elimination proof beyond the already-audited exact duplicate candidate",
+  "instance_specific_logic": false,
+  "size_threshold_logic": false,
+  "runtime_dispatch": false,
+  "confirmation_opened": false,
+  "candidate_results_inspected_before_plan": false
+}

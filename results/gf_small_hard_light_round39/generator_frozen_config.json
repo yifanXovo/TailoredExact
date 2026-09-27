@@ -1,0 +1,252 @@
+{
+  "derivation_tag": "round39-small-hard-light-qualification",
+  "frozen_before_official_solver_comparison": true,
+  "generator_version": "round39_small_gradient_v1",
+  "instance_count": 24,
+  "profiles": {
+    "small-easy": {
+      "T": 3600.0,
+      "active_fraction": [
+        0.45,
+        0.68
+      ],
+      "clusters": 2,
+      "imbalance": [
+        3,
+        6
+      ],
+      "radius": [
+        220.0,
+        420.0
+      ],
+      "spread": [
+        55.0,
+        105.0
+      ]
+    },
+    "small-hard": {
+      "T": 2400.0,
+      "active_fraction": [
+        0.84,
+        1.0
+      ],
+      "clusters": 3,
+      "imbalance": [
+        7,
+        13
+      ],
+      "radius": [
+        650.0,
+        980.0
+      ],
+      "spread": [
+        70.0,
+        145.0
+      ]
+    },
+    "small-medium": {
+      "T": 2850.0,
+      "active_fraction": [
+        0.67,
+        0.84
+      ],
+      "clusters": 3,
+      "imbalance": [
+        5,
+        9
+      ],
+      "radius": [
+        430.0,
+        720.0
+      ],
+      "spread": [
+        75.0,
+        135.0
+      ]
+    }
+  },
+  "round_id": 39,
+  "schema": "round39-generator-config-v1",
+  "score_thresholds": {
+    "small-easy": "score < 60",
+    "small-hard": "score >= 78",
+    "small-medium": "60 <= score < 78"
+  },
+  "selection_prohibition": "no solver outcome, time, work, node, incumbent, bound, gap, certificate, or P-GRB/C6 winner field may affect selection",
+  "slots": [
+    {
+      "index": 1,
+      "m": 1,
+      "q": 30,
+      "stratum": "small-easy",
+      "v": 8
+    },
+    {
+      "index": 2,
+      "m": 2,
+      "q": 20,
+      "stratum": "small-easy",
+      "v": 8
+    },
+    {
+      "index": 3,
+      "m": 2,
+      "q": 30,
+      "stratum": "small-easy",
+      "v": 8
+    },
+    {
+      "index": 4,
+      "m": 1,
+      "q": 30,
+      "stratum": "small-easy",
+      "v": 10
+    },
+    {
+      "index": 5,
+      "m": 2,
+      "q": 30,
+      "stratum": "small-easy",
+      "v": 10
+    },
+    {
+      "index": 6,
+      "m": 3,
+      "q": 20,
+      "stratum": "small-easy",
+      "v": 10
+    },
+    {
+      "index": 7,
+      "m": 2,
+      "q": 30,
+      "stratum": "small-easy",
+      "v": 12
+    },
+    {
+      "index": 8,
+      "m": 3,
+      "q": 30,
+      "stratum": "small-easy",
+      "v": 12
+    },
+    {
+      "index": 1,
+      "m": 1,
+      "q": 20,
+      "stratum": "small-medium",
+      "v": 8
+    },
+    {
+      "index": 2,
+      "m": 2,
+      "q": 20,
+      "stratum": "small-medium",
+      "v": 8
+    },
+    {
+      "index": 3,
+      "m": 3,
+      "q": 30,
+      "stratum": "small-medium",
+      "v": 8
+    },
+    {
+      "index": 4,
+      "m": 1,
+      "q": 20,
+      "stratum": "small-medium",
+      "v": 10
+    },
+    {
+      "index": 5,
+      "m": 2,
+      "q": 20,
+      "stratum": "small-medium",
+      "v": 10
+    },
+    {
+      "index": 6,
+      "m": 3,
+      "q": 30,
+      "stratum": "small-medium",
+      "v": 10
+    },
+    {
+      "index": 7,
+      "m": 1,
+      "q": 30,
+      "stratum": "small-medium",
+      "v": 12
+    },
+    {
+      "index": 8,
+      "m": 3,
+      "q": 30,
+      "stratum": "small-medium",
+      "v": 12
+    },
+    {
+      "index": 1,
+      "m": 1,
+      "q": 20,
+      "stratum": "small-hard",
+      "v": 10
+    },
+    {
+      "index": 2,
+      "m": 1,
+      "q": 30,
+      "stratum": "small-hard",
+      "v": 10
+    },
+    {
+      "index": 3,
+      "m": 2,
+      "q": 20,
+      "stratum": "small-hard",
+      "v": 10
+    },
+    {
+      "index": 4,
+      "m": 3,
+      "q": 20,
+      "stratum": "small-hard",
+      "v": 10
+    },
+    {
+      "index": 5,
+      "m": 1,
+      "q": 20,
+      "stratum": "small-hard",
+      "v": 12
+    },
+    {
+      "index": 6,
+      "m": 2,
+      "q": 20,
+      "stratum": "small-hard",
+      "v": 12
+    },
+    {
+      "index": 7,
+      "m": 3,
+      "q": 20,
+      "stratum": "small-hard",
+      "v": 12
+    },
+    {
+      "index": 8,
+      "m": 3,
+      "q": 30,
+      "stratum": "small-hard",
+      "v": 12
+    }
+  ],
+  "starting_commit": "1459308492a5eceed523dee53b5f9d79141b5242",
+  "stratum_counts": {
+    "small-easy": 8,
+    "small-hard": 8,
+    "small-medium": 8
+  }
+}

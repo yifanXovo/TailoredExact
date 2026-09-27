@@ -1,0 +1,27 @@
+{
+  "D": "mean((N_i^q-1)/max(N_i^base-1,1)) over nonfixed parent variables",
+  "H": "sum(log(max(N_i^q,1)))/max(sum(log(max(N_i^base,1))),epsilon_log)",
+  "applied_to_mip": false,
+  "delta": "max(U_strict-L_q,0)",
+  "disjointness": "exact empty intersection of nonempty left/right certified integer domains",
+  "epsilon_domain": "certificate tolerance plus 64 machine epsilons at state scale",
+  "extra_live_solves": 0,
+  "integer_effective_domain": "[ceil(lb-epsilon_domain),floor(ub+epsilon_domain)]",
+  "invalid_policy": "zero rescue and exact K1-AM fallback; no replacement solve",
+  "lower_bound_case": "if x is at lower bound and rc>epsilon_rc, upper step=floor((Delta+epsilon_domain)/rc)",
+  "otherwise": "retain effective integer domain",
+  "required_state_validity": [
+    "optimal complete LP",
+    "primal available",
+    "reduced costs available",
+    "minimization",
+    "model fingerprint match",
+    "incumbent/cutoff epoch match",
+    "finite bounds",
+    "registry mapping complete"
+  ],
+  "rounding_policy": "outward/conservative; never exclude a possible strict improver",
+  "schema": "round49-reduced-cost-domain-protocol-v1",
+  "strict_cutoff": "U_strict=U-epsilon_cert",
+  "upper_bound_case": "if x is at upper bound and rc<-epsilon_rc, lower step=floor((Delta+epsilon_domain)/(-rc))"
+}

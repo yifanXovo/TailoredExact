@@ -47,3 +47,5 @@ bucket_integer_inventory_domain_proof_status
 ```
 
 and is audited by `scripts/audit_bucket_integer_inventory_domain.py`.
+> Historical research note. This file predates Round 54; K1-AM-SF and
+> `paper-k1-am-sf` are the current stable mainline.

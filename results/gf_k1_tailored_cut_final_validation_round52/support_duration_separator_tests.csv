@@ -1,0 +1,15 @@
+test_id,property,support_rank,expected,observed,status
+S01,pair route lower bound,2,exact permutation minimum,exact permutation minimum,pass
+S02,triple route lower bound,3,exact permutation minimum,exact permutation minimum,pass
+S03,quad route lower bound,4,exact permutation minimum,exact permutation minimum,pass
+S04,support order invariance,2-4,identical lower bound,identical lower bound,pass
+S05,candidate enumeration,2-3,"M*(C(V,2)+C(V,3))","M*(C(V,2)+C(V,3))",pass
+S06,global validity marker,2-3,global,global,pass
+S07,active-support validity,2-3,"handling <= T-route","handling <= T-route",pass
+S08,inactive-support validity,2-3,"RHS >= T",RHS >= T,pass
+S09,raw violation algebra,2-3,"lhs-rhs",lhs-rhs,pass
+S10,scale definition,2-3,"max(1; abs(rhs); weighted magnitude)","max(1; abs(rhs); weighted magnitude)",pass
+S11,strict certificate threshold,2-3,"raw > epsilon*scale",strict comparison observed,pass
+S12,effective bound validation,2-3,invalid point rejected,invalid point rejected,pass
+S13,model mapping validation,2-3,missing variable rejected,missing variable rejected,pass
+S14,solver independence,2-4,no solver API reference,no solver API reference,pass

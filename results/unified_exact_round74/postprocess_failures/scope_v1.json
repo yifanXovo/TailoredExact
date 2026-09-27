@@ -1,0 +1,16 @@
+{
+  "operation": "First independent audit of the native-witness supervisor guard",
+  "returncode": 1,
+  "failure": "The offline script wrongly assumed the HGA Gini value lay outside the active MIP interval.",
+  "failed_assertion": "assert not mip[0]['lower_g']-1e-7 <= physical_event['G'] <= mip[0]['upper_g']+1e-7",
+  "retained_script": "round74_supervisor_scope_v1.py",
+  "script_sha256": "e0b339fca1f2548c0cfd3ea3a374b9b2bc5f1f47a54400925621cd00553c3251",
+  "observed_startup_G": 0.038722673788773324,
+  "observed_active_interval": [0, 0.05391101882894876],
+  "command_wall_seconds": 0.2596412,
+  "cost_scope": "Whole shell/interpreter command time reported by exec, not a recovered internal timer.",
+  "new_optimizer_calls": 0,
+  "new_runs": 0,
+  "correction": "Require independent physical, complete-bound and actual-model mapping checks; do not use interval exclusion as the reason a native MIPSOL witness is unnecessary.",
+  "raw_solver_or_driver_evidence_changed": false
+}

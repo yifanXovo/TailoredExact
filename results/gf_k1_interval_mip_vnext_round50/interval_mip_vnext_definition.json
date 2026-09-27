@@ -1,0 +1,62 @@
+{
+  "accepted_modification_count": 0,
+  "branching_policy": "Gurobi default; no branch priorities",
+  "cut_formulation_policy": "original v0 cut/formulation pack",
+  "definition_equivalence": "Interval-MIP-v0",
+  "development_executable_sha256": "a08a69afb22c12841c1847329b63e16c66b1c553ae94bc4b40e4b28431585243",
+  "model_reuse_policy": "build/read/optimize one fixed-state MIP; no reuse",
+  "name": "Interval-MIP-vNext",
+  "new_or_tightened_cuts": [],
+  "numerical_changes": [],
+  "official_build_directory": "build/official-round50-fe793b20e",
+  "official_executable_sha256": "85a6404acb015ea71e1b56a656f85665cda46b1f72a29a7174e6f48d96f8e81a",
+  "official_full_solver_executable_sha256": "7cc8ecb324c69526b38f21a8d66cdc4ca6ab6de0cd03639f916f25340d097a2e",
+  "runtime_dispatch": false,
+  "runtime_options": {
+    "Gurobi.MIPGap": 0,
+    "Gurobi.MIPGapAbs": 0,
+    "Gurobi.Presolve": "Auto",
+    "Gurobi.Seed": 0,
+    "Gurobi.Threads": 1,
+    "archive_winner_injection": false,
+    "evidence_finalization_reserve_seconds": 2,
+    "known_optimum_injection": false,
+    "lambda": 0.15,
+    "process_cap_seconds_development": 300
+  },
+  "schema": "round50-interval-mip-vnext-definition-v1",
+  "source_files": [
+    "CMakeLists.txt",
+    "include/CanonicalCompactModel.hpp",
+    "include/FixedIntervalMipBackend.hpp",
+    "include/Round50IntervalMip.hpp",
+    "scripts/run_round50_fixed_interval_panel.py",
+    "src/CplexBaseline.cpp",
+    "src/GurobiBaseline.cpp",
+    "src/Round50IntervalMip.cpp",
+    "src/round50_interval_mip_main.cpp",
+    "tests/round50_interval_mip_tests.cpp"
+  ],
+  "strengthening_families": {
+    "delayed": [],
+    "disabled": [
+      "Round 50 exact duplicate elimination",
+      "dynamic cut families",
+      "callback cut profile",
+      "Gini branching",
+      "candidate branch priorities"
+    ],
+    "enabled": [
+      "v0 complete compact fixed-interval formulation",
+      "round20-current root connectivity flow",
+      "round19 interval row factory",
+      "safe low-Gini strengthening",
+      "tight denominator bounds",
+      "adaptive objective estimator",
+      "two-round iterative domain propagation",
+      "variable-s centering",
+      "paper-safe tight sp-product estimator"
+    ]
+  },
+  "symmetry_constraints": "v0 nonincreasing route-use cardinality for identical vehicles"
+}

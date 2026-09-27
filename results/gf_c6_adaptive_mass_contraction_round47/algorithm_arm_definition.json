@@ -1,0 +1,184 @@
+{
+  "arms": [
+    {
+      "K0": 4,
+      "arm": "K4-AM",
+      "contraction": false,
+      "identity": {
+        "FPMM": "off",
+        "Gamma_sum": "off",
+        "K0": 4,
+        "PMM": "off",
+        "arm": "K4-AM",
+        "contraction": false,
+        "decision_identity_sha256": "643bc8117de1f0884b05a6d28c713cfe59bd84d9a7736d911962fd5c341fc857",
+        "extra_lp_queries": 0,
+        "extra_mip_queries": 0,
+        "frontier_consolidation": "off",
+        "gamma_veto": "off",
+        "mode": "adaptive-mass",
+        "point_rule": "midpoint",
+        "rank1": "off",
+        "round43": "off",
+        "round44": "off",
+        "round45": "off",
+        "score_inputs": [
+          "parent_lower_bound",
+          "left_child_lp_bound",
+          "right_child_lp_bound",
+          "verified_incumbent",
+          "strict_child_infeasibility",
+          "certificate_tolerance"
+        ],
+        "solver": {
+          "MIPGap": 0.0,
+          "MIPGapAbs": 0.0,
+          "Presolve": "Auto",
+          "Seed": 0,
+          "Threads": 1
+        },
+        "tau": 0.07915,
+        "verified_mip_starts": "off"
+      },
+      "midpoint": true,
+      "mode": "adaptive-mass"
+    },
+    {
+      "K0": 4,
+      "arm": "K4-AMC",
+      "contraction": true,
+      "identity": {
+        "FPMM": "off",
+        "Gamma_sum": "off",
+        "K0": 4,
+        "PMM": "off",
+        "arm": "K4-AMC",
+        "contraction": true,
+        "decision_identity_sha256": "8759f1e9d0ac584750313616ef2e6b0ce1368b5dd0813d7481e115ab65ccc65a",
+        "extra_lp_queries": 0,
+        "extra_mip_queries": 0,
+        "frontier_consolidation": "off",
+        "gamma_veto": "off",
+        "mode": "adaptive-mass-contraction",
+        "point_rule": "midpoint",
+        "rank1": "off",
+        "round43": "off",
+        "round44": "off",
+        "round45": "off",
+        "score_inputs": [
+          "parent_lower_bound",
+          "left_child_lp_bound",
+          "right_child_lp_bound",
+          "verified_incumbent",
+          "strict_child_infeasibility",
+          "certificate_tolerance"
+        ],
+        "solver": {
+          "MIPGap": 0.0,
+          "MIPGapAbs": 0.0,
+          "Presolve": "Auto",
+          "Seed": 0,
+          "Threads": 1
+        },
+        "tau": 0.07915,
+        "verified_mip_starts": "off"
+      },
+      "midpoint": true,
+      "mode": "adaptive-mass-contraction"
+    },
+    {
+      "K0": 1,
+      "arm": "K1-AM",
+      "contraction": false,
+      "identity": {
+        "FPMM": "off",
+        "Gamma_sum": "off",
+        "K0": 1,
+        "PMM": "off",
+        "arm": "K1-AM",
+        "contraction": false,
+        "decision_identity_sha256": "bab09fe17b47750bac85eea42ba751f125848c8a9994cd17ac46f7d2c3209fe5",
+        "extra_lp_queries": 0,
+        "extra_mip_queries": 0,
+        "frontier_consolidation": "off",
+        "gamma_veto": "off",
+        "mode": "adaptive-mass",
+        "point_rule": "midpoint",
+        "rank1": "off",
+        "round43": "off",
+        "round44": "off",
+        "round45": "off",
+        "score_inputs": [
+          "parent_lower_bound",
+          "left_child_lp_bound",
+          "right_child_lp_bound",
+          "verified_incumbent",
+          "strict_child_infeasibility",
+          "certificate_tolerance"
+        ],
+        "solver": {
+          "MIPGap": 0.0,
+          "MIPGapAbs": 0.0,
+          "Presolve": "Auto",
+          "Seed": 0,
+          "Threads": 1
+        },
+        "tau": 0.07915,
+        "verified_mip_starts": "off"
+      },
+      "midpoint": true,
+      "mode": "adaptive-mass"
+    },
+    {
+      "K0": 1,
+      "arm": "K1-AMC",
+      "contraction": true,
+      "identity": {
+        "FPMM": "off",
+        "Gamma_sum": "off",
+        "K0": 1,
+        "PMM": "off",
+        "arm": "K1-AMC",
+        "contraction": true,
+        "decision_identity_sha256": "3eb85e456e4f363643207398b142a1279291cd1a777b1d9c9503d53147afb85f",
+        "extra_lp_queries": 0,
+        "extra_mip_queries": 0,
+        "frontier_consolidation": "off",
+        "gamma_veto": "off",
+        "mode": "adaptive-mass-contraction",
+        "point_rule": "midpoint",
+        "rank1": "off",
+        "round43": "off",
+        "round44": "off",
+        "round45": "off",
+        "score_inputs": [
+          "parent_lower_bound",
+          "left_child_lp_bound",
+          "right_child_lp_bound",
+          "verified_incumbent",
+          "strict_child_infeasibility",
+          "certificate_tolerance"
+        ],
+        "solver": {
+          "MIPGap": 0.0,
+          "MIPGapAbs": 0.0,
+          "Presolve": "Auto",
+          "Seed": 0,
+          "Threads": 1
+        },
+        "tau": 0.07915,
+        "verified_mip_starts": "off"
+      },
+      "midpoint": true,
+      "mode": "adaptive-mass-contraction"
+    }
+  ],
+  "only_official_candidate_arms": [
+    "K4-AM",
+    "K4-AMC",
+    "K1-AM",
+    "K1-AMC"
+  ],
+  "schema": "round47-arm-definition-v1",
+  "tau": 0.07915
+}

@@ -1,0 +1,32 @@
+{
+  "additional_v12_shifted_work_gmean_max": 1.0,
+  "c6_advantage_trigger_pgrb_over_c6_work_min": 5.0,
+  "candidate_retained_advantage_pgrb_over_candidate_work_min": 2.0,
+  "correctness": [
+    "zero_false_certificates",
+    "zero_incorrect_optimality_claims",
+    "independently_verified_incumbents",
+    "complete_exact_coverage",
+    "monotone_valid_global_bound",
+    "default_off_C6_equivalence",
+    "fail_closed_censoring"
+  ],
+  "development_shifted_time_gmean_max": 0.95,
+  "development_shifted_work_gmean_max": 0.9,
+  "development_shifted_work_p90_max": 1.5,
+  "frozen_before_candidate_exact_runs": true,
+  "holdout_same_as_validation": true,
+  "major_candidate_over_pgrb_time_max": 1.05,
+  "major_candidate_over_pgrb_work_max": 1.05,
+  "material_wins_at_least_losses": true,
+  "no_severe_regression": true,
+  "schema": "round44-promotion-gates-v1",
+  "v20": {
+    "candidate_certificates_at_least_pgrb_or_lower_GI_rows_min": 4,
+    "no_candidate_specific_engineering_failure": true,
+    "no_false_certificate": true,
+    "no_severe_solved_regression": true
+  },
+  "validation_shifted_time_gmean_max": 1.05,
+  "validation_shifted_work_gmean_max": 1.0
+}

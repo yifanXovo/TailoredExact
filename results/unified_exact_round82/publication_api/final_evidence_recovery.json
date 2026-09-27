@@ -1,0 +1,20 @@
+{
+  "target": "9455901e5ca14dc775a8c171791fffaeaecf9129",
+  "branch": "codex/round82-bdsc-unadapted-confirmation",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round82-bdsc-unadapted-confirmation",
+      "returncode": 1,
+      "wall_seconds": 21.09993760008365,
+      "stderr": "Get \"https://api.github.com/repos/yifanXovo/TailoredExact/git/ref/heads/codex/round82-bdsc-unadapted-confirmation\": dial tcp 20.205.243.168:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.\n",
+      "returned_sha": null
+    }
+  ],
+  "optimizer_calls": 0,
+  "script_sha256": "99c936320a606164221fdf25d05f7228bd849dad46e8114d488f74852dd47b3d",
+  "scope": "Exact blobs, tree and original commit hashes required before a non-force branch update",
+  "wall_seconds": 21.100555200129747,
+  "passed": false,
+  "error": "RuntimeError('GitHub API request failed; see ledger')"
+}

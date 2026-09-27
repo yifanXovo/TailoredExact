@@ -1,0 +1,23 @@
+{
+  "schema": "round45-final-test-record-v1",
+  "audit_date": "2026-08-18",
+  "build": {
+    "directory": "build_round45_final",
+    "configuration": "Release",
+    "gurobi_enabled": true,
+    "completed": true,
+    "executable_sha256": "ef97ac66d9a5a24ef35a31c903733435206a0ee6d7637a7b6ebd584be56277aa"
+  },
+  "ctest": {
+    "passed": 23,
+    "failed": 0,
+    "total": 23
+  },
+  "python_protocol_tests": {
+    "passed": 104,
+    "failed": 0,
+    "total": 104
+  },
+  "round45_default_off_equivalence": true,
+  "round43_round44_sentinels_preserved": true
+}

@@ -1,0 +1,18 @@
+{
+  "changed_configuration_authority": "historical adapters -> explicit K1-AM-SF fields",
+  "classification": "semantic-preserving first-class refactor",
+  "effective_algorithm_changed": false,
+  "paper_algorithm_after": {
+    "effective_K0": 1,
+    "point": "midpoint",
+    "score": "balanced-normalized-closure",
+    "tau": 0.08
+  },
+  "paper_algorithm_before": {
+    "effective_K0": 1,
+    "effective_tau": 0.08,
+    "point": "midpoint",
+    "score": "adaptive-mass"
+  },
+  "source": "src/PaperK1AmSf.cpp"
+}

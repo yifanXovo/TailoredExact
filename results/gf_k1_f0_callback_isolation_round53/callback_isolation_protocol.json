@@ -1,0 +1,124 @@
+{
+  "schema": "round53-callback-isolation-protocol-v1",
+  "mathematical_model": "F0-CLEAN for every mode",
+  "state_ids": [
+    "D1",
+    "D3",
+    "D13",
+    "D14"
+  ],
+  "states": [
+    {
+      "state_id": "D1",
+      "instance": "round39_small_medium_V12_M3_Q30_slot08_seed1343324363",
+      "interval_id": "L0",
+      "state_kind": "parent",
+      "role": "retain historically preferable; severe fragmentation guard",
+      "input_path": "reference/qualification_round39/small-medium/round39_small_medium_V12_M3_Q30_slot08_seed1343324363.txt",
+      "input_sha256": "29e0ca2c95ec2e061aa1cc524aaf6a41bf6c4a34355dca86df6966aa8a29b6b4"
+    },
+    {
+      "state_id": "D3",
+      "instance": "round39_small_hard_V12_M3_Q30_slot08_seed1288546114",
+      "interval_id": "L0",
+      "state_kind": "parent",
+      "role": "strong-control difficult parent",
+      "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q30_slot08_seed1288546114.txt",
+      "input_sha256": "7ee8a95ca3043f83b2e8c6b3663f8aa212678043d0c98b0153efbeb834d48823"
+    },
+    {
+      "state_id": "D13",
+      "instance": "high_imbalance_seed3201",
+      "interval_id": "L0.1.0",
+      "state_kind": "child",
+      "role": "high-imbalance difficult K1 interval",
+      "input_path": "reference/hard_stress/V20_M3/high_imbalance_seed3201.txt",
+      "input_sha256": "ce60fd4e74ad23174be2d4a08ca6e52c0043cee22f3c9b17153b9e8bbcfdbe42"
+    },
+    {
+      "state_id": "D14",
+      "instance": "moderate_seed3301",
+      "interval_id": "L0.0",
+      "state_kind": "child",
+      "role": "moderate3301 difficult K1 interval",
+      "input_path": "reference/hard_stress/V20_M3/moderate_seed3301.txt",
+      "input_sha256": "83daeb902d8d68a0e08a84d190b43647183b146daf81c31e99be07c10fc6242a"
+    }
+  ],
+  "modes": [
+    {
+      "mode": "C0",
+      "name": "baseline",
+      "PreCrush": "default",
+      "mipnode": false,
+      "vector": false,
+      "separator": false,
+      "submit": false
+    },
+    {
+      "mode": "C1",
+      "name": "precrush-only",
+      "PreCrush": 1,
+      "mipnode": false,
+      "vector": false,
+      "separator": false,
+      "submit": false
+    },
+    {
+      "mode": "C2",
+      "name": "status-only",
+      "PreCrush": "default",
+      "mipnode": true,
+      "vector": false,
+      "separator": false,
+      "submit": false
+    },
+    {
+      "mode": "C3",
+      "name": "status-only-precrush",
+      "PreCrush": 1,
+      "mipnode": true,
+      "vector": false,
+      "separator": false,
+      "submit": false
+    },
+    {
+      "mode": "C4",
+      "name": "separator-dry-run",
+      "PreCrush": 1,
+      "mipnode": true,
+      "vector": true,
+      "separator": true,
+      "submit": false
+    },
+    {
+      "mode": "C5",
+      "name": "live-round52",
+      "PreCrush": 1,
+      "mipnode": true,
+      "vector": true,
+      "separator": true,
+      "submit": true
+    }
+  ],
+  "mode_count": 6,
+  "cap_300_seconds": 300,
+  "physical_rows_300": 24,
+  "conditional_cap_1200_seconds": 1200,
+  "conditional_state_ids": [
+    "D1",
+    "D13"
+  ],
+  "conditional_physical_rows": 12,
+  "conditional_trigger": "D1 or D13 certificate classification differs among modes, or primary source remains ambiguous",
+  "diagnostic_may_change_f0_decision": false,
+  "classifications": [
+    "no material callback-path effect",
+    "PreCrush-dominant effect",
+    "MIPNODE-registration effect",
+    "PreCrush/callback interaction",
+    "relaxation-extraction/separator overhead",
+    "actual-cut effect",
+    "mixed or inconclusive"
+  ]
+}

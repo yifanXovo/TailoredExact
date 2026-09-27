@@ -1,0 +1,17 @@
+{
+  "certificate_tolerance": 1e-7,
+  "correctness_audits_inspected": true,
+  "default_branching": true,
+  "development_or_core_performance_results_inspected": false,
+  "executable_sha256": "cd12f5086f02e62ce0914d7d70a18ab437213eca1669c0afaf1321cffb5b311c",
+  "historical_default_off_models_match": "23/23",
+  "m1_formula": "M_S=max(0,tsp[mask])",
+  "m1_model_delta_audit": "23/23 pass",
+  "m1_small_exact_validation": "4/4 pass",
+  "policy": "m1-tight-big-m-v0",
+  "production_promotion_decided": false,
+  "round50_settings_otherwise_unchanged": true,
+  "schema": "round51-m1-experimental-baseline-freeze-v1",
+  "symmetry_policy": "v0-cardinality",
+  "use_as_common_baseline_for_stage2_and_stage3": true
+}

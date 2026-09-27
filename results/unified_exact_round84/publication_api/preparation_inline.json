@@ -1,0 +1,26 @@
+{
+  "target": "5ad3564c2f338737bcb2e65ca31b512c1da14507",
+  "branch": "codex/round84-ensc-long-protection-replication",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round84-ensc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.6591194001957774,
+      "stderr": "",
+      "returned_sha": "131d09280a1563243d0201e68367b26baf5079c3"
+    }
+  ],
+  "optimizer_calls": 0,
+  "script_sha256": "43d97d220236b6f877a12706caee60301effb2539ea9429d8c741582b5b5444c",
+  "scope": "Exact blobs, tree and original commit hashes required before a non-force branch update",
+  "wall_seconds": 0.7458556001074612,
+  "initial_remote_head": "131d09280a1563243d0201e68367b26baf5079c3",
+  "original_commits": [
+    "3dae75c03952f7e2194f184d4939216e0be4ca78",
+    "8f7ed3eee1068caee250ad6f209db2d51ab2ce29",
+    "5ad3564c2f338737bcb2e65ca31b512c1da14507"
+  ],
+  "passed": false,
+  "error": "AttributeError(\"'list' object has no attribute 'get'\")"
+}

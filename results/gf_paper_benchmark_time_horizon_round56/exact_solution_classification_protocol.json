@@ -1,0 +1,18 @@
+{
+  "classes": [
+    "certified_optimal_solution",
+    "verified_incumbent_noncertified",
+    "no_verified_incumbent",
+    "correctness_failure",
+    "execution_failure"
+  ],
+  "exact_requires": [
+    "strict original-problem certificate",
+    "complete interval coverage",
+    "original route verifier",
+    "LB/verified UB closure",
+    "no restricted diagnostic evidence",
+    "no false-certificate condition"
+  ],
+  "schema": "round56-solution-classification-v1"
+}

@@ -1,0 +1,33 @@
+{
+  "candidate_results_observed": false,
+  "checkpoints_seconds": [
+    300,
+    1200,
+    3600
+  ],
+  "frozen_before_candidate_runs": true,
+  "hard_cap_seconds_per_arm": 3600,
+  "no_simplified_instances": true,
+  "schema": "round45-complex-panel-freeze-v1",
+  "selection_basis": "previously used exact instances; structural regime and M diversity only; not selected on Round 45 outcomes",
+  "v20_confirmation": [
+    "reference/hard_stress/V20_M3/tight_T_seed3102.txt",
+    "reference/hard_stress/V20_M3/high_imbalance_seed3202.txt",
+    "reference/hard_stress/V20_M3/moderate_seed3302.txt"
+  ],
+  "v20_development": [
+    "reference/hard_stress/V20_M3/tight_T_seed3101.txt",
+    "reference/hard_stress/V20_M3/high_imbalance_seed3201.txt",
+    "reference/hard_stress/V20_M3/moderate_seed3301.txt"
+  ],
+  "v50_confirmation": [
+    "reference/qualification_round32/V50_M4/round32_multi_m_tight_T_V50_M4_seed1562257203.txt",
+    "reference/qualification_round32/V50_M4/round32_multi_m_high_imbalance_V50_M4_seed163456187.txt",
+    "reference/qualification_round32/V50_M4/round32_multi_m_moderate_V50_M4_seed721910669.txt"
+  ],
+  "v50_development": [
+    "reference/qualification_round32/V50_M2/round32_multi_m_tight_T_V50_M2_seed104207248.txt",
+    "reference/qualification_round32/V50_M2/round32_multi_m_high_imbalance_V50_M2_seed910922492.txt",
+    "reference/qualification_round32/V50_M2/round32_multi_m_moderate_V50_M2_seed254020866.txt"
+  ]
+}

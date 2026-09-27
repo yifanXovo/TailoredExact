@@ -17,3 +17,5 @@ Current status:
 - V12 M1 remains noncertified at the 300s bounded row in this round; prior post-merge callback-round evidence remains outside this round.
 - Benders-like transfer-network cuts remain diagnostic-only.
 - The next required engineering step is reliable interval-solver checkpoint/finalization for hard leaves before further cut-rate conclusions can be trusted.
+> Historical round record. Its paper-facing designation is superseded by
+> K1-AM-SF (`paper-k1-am-sf`).

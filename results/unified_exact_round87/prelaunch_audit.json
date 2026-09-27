@@ -1,0 +1,44 @@
+{
+  "schema": "round87-prelaunch-audit-v1",
+  "passed": true,
+  "panel_frozen_before_results": true,
+  "pair_count": 9,
+  "run_count": 18,
+  "new_builds": 0,
+  "new_tests": 0,
+  "new_optimizer_calls": 0,
+  "inherited_qualification_tests": 62,
+  "inherited_qualification_native_calls": 165,
+  "qualified_source_diff_empty": true,
+  "binary_sha256_matches": true,
+  "reference_binary_sha256_matches": true,
+  "input_hashes_matching": 9,
+  "reference_exports": 9,
+  "reference_optimizer_calls": 0,
+  "model_fingerprints": [
+    {"id": "D6", "round87": 974605734, "historical": 974605734, "match": true},
+    {"id": "D7", "round87": -373258443, "historical": -373258443, "match": true},
+    {"id": "U6", "round87": 1831047900, "historical": 1831047900, "match": true},
+    {"id": "F2", "round87": 788240696, "historical": 788240696, "match": true},
+    {"id": "F5", "round87": -1011005748, "historical": -1011005748, "match": true},
+    {"id": "F6", "round87": -1571846382, "historical": -1571846382, "match": true},
+    {"id": "C20", "round87": 1303462215, "historical": 1303462215, "match": true},
+    {"id": "B50", "round87": -250521169, "historical": -250521169, "match": true},
+    {"id": "S50", "round87": 2133008454, "historical": 2133008454, "match": true}
+  ],
+  "historical_sources": {
+    "D6_D7_U6": "results/unified_exact_round84/campaign/identity.json",
+    "F2_F5_F6": "results/unified_exact_round86/campaign/identity.json",
+    "C20_B50_S50": "results/gf_citibike443_k1_vs_pgrb_round58/pgrb_expected_fingerprints.json"
+  },
+  "host": {
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700KF",
+    "physical_cores": 12,
+    "logical_processors": 20,
+    "total_physical_gib": 31.82,
+    "free_physical_gib_at_first_snapshot": 17.64,
+    "runtime_disk_free_bytes_after_reference_exports": 112176992256,
+    "conflicting_exactebrp_or_gurobi_processes": 0
+  },
+  "scope": "Identity and zero-Optimize preparation only; no Round 87 performance result was opened."
+}

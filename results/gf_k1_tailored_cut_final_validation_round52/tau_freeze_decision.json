@@ -1,0 +1,33 @@
+{
+  "schema": "round52-tau-freeze-decision-v1",
+  "classification": "tau_008_adopted",
+  "tau_reference": 0.07915,
+  "tau_candidate": 0.08,
+  "frozen_tau": 0.08,
+  "complete_replay_rows": 334,
+  "changed_decision_rows": 0,
+  "historical_am_decisions_changed": false,
+  "anchor_actions_at_0_08": {
+    "major_root": "RETAIN",
+    "strong_control_root": "RETAIN",
+    "tight3102_L0.0": "RETAIN",
+    "high_imbalance_root": "MIDPOINT",
+    "moderate3301_root": "MIDPOINT"
+  },
+  "runtime_sentinel_rows": 8,
+  "tau_runtime_pairs": 3,
+  "default_off_pairs": 1,
+  "all_runtime_action_traces_equivalent": true,
+  "default_off_equivalent": true,
+  "correctness_failures": 0,
+  "false_certificates": 0,
+  "new_severe_regressions": 0,
+  "decision_path": "zero replay changes; broad rerun not opened; bounded equivalence sentinels only",
+  "no_further_tau_tuning_in_round52": true,
+  "input_sha256": {
+    "complete_replay": "702f578a38ecb5dc076c602b852d4de04672ad156f8aabf9b079c28b30240bf9",
+    "changed_decisions": "dd87da5f284c9aec4a4b1e8207485edb8884618aa67fbb00b4e8c2b1f8189fdb",
+    "runtime_results": "b3f377bad1e769f00da8711028bd7a45e5ade8d331718e0bc4e808120e63b4c9",
+    "sentinel_audit": "e2a368493e4c9777f1aaa7f7bf733e3e046bcc9c6426aba56b94b2bacbe53755"
+  }
+}

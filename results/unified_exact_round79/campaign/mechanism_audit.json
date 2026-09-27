@@ -1,0 +1,3522 @@
+{
+  "all_checks_passed": true,
+  "arms": [
+    {
+      "id": "E7",
+      "arm": "P-GRB",
+      "wall_seconds": 1.4219999997876585,
+      "endpoint": {
+        "U": 0.020382503842219304,
+        "L": 0.02038250384221927,
+        "gap": 3.469446951953614e-17,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "phase_events": [],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "",
+          "lower_g": 0,
+          "upper_g": 0.9166666666666666,
+          "cutoff": 0,
+          "model_sha256": "3f0b9998f7a248c58755799541e8d65a8ba898191c015f14f4236d359d936cb4",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.020382503842219308,
+        "G": 0.013395524430454598,
+        "P": 0.046579862745098066,
+        "stations": 9,
+        "pickup": 16,
+        "drop": 16,
+        "maximum_duration": 2494.9772639416988,
+        "original_T_feasible": true
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 1527,
+          "columns": 703,
+          "nonzeros": 6432,
+          "gamma": [
+            0,
+            0.9166666666666666
+          ],
+          "cutoff": 0,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 1.135363e-02, 435 iterations, 0.01 seconds (0.02 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 701,
+          "simplex_iterations": 24799,
+          "native_seconds": 1.34,
+          "native_work": 1.63
+        }
+      ]
+    },
+    {
+      "id": "E7",
+      "arm": "BDS-C",
+      "wall_seconds": 1.2349999998696148,
+      "endpoint": {
+        "U": 0.020382503842219304,
+        "L": 0.02038250384221927,
+        "gap": 3.469446951953614e-17,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "phase_events": [
+        {
+          "sequence": "4",
+          "process_seconds": "0.010270700000000001",
+          "event": "hga_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "119.9897294",
+          "work_deadline_remaining_seconds": "116.9897294",
+          "detail": "label=primary_hga;finite_random_seed_decoded_descent"
+        },
+        {
+          "sequence": "5",
+          "process_seconds": "0.029923999999999999",
+          "event": "decoded_descent_complete",
+          "status": "complete",
+          "nominal_deadline_remaining_seconds": "119.9700763",
+          "work_deadline_remaining_seconds": "116.9700761",
+          "detail": "label=primary_hga;generations=0;no_improve=0;completed_seeds=25"
+        },
+        {
+          "sequence": "7",
+          "process_seconds": "0.036211899999999998",
+          "event": "exact_phase_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "119.9637882",
+          "work_deadline_remaining_seconds": "116.9637881",
+          "detail": "arm=round31-nonblocking-native-bound"
+        }
+      ],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.020865507671712715,
+          "cutoff": 0.020865507671712715,
+          "model_sha256": "135b3fc4e6b50573eeada79b0ab85c27a3180afa38e85e0beb353560a88ea1b0",
+          "native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.010432753835856358,
+          "cutoff": 0.020865507671712715,
+          "model_sha256": "cd29cfdafd5c602481f0bf6672d8f661000d19d40fad41c4818a9e9d52718e3a",
+          "native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "lower_g": 0.010432753835856358,
+          "upper_g": 0.020865507671712715,
+          "cutoff": 0.020865507671712715,
+          "model_sha256": "8845dd95e61c7d93bcf1a3d65c561e1d5f17c5a82cd94c6719d411efed7ffe18",
+          "native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.020865507671712715,
+          "cutoff": 0.020865507671712715,
+          "model_sha256": "135b3fc4e6b50573eeada79b0ab85c27a3180afa38e85e0beb353560a88ea1b0",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.020382503842219308,
+        "G": 0.013395524430454598,
+        "P": 0.046579862745098066,
+        "stations": 9,
+        "pickup": 16,
+        "drop": 16,
+        "maximum_duration": 2452.223666930995,
+        "original_T_feasible": true
+      },
+      "startup": {
+        "F": 0.020865507671712715,
+        "G": 0.015028585402805153,
+        "P": 0.03891281512605041,
+        "stations": 10,
+        "pickup": 17,
+        "drop": 17,
+        "maximum_duration": 2642.916889172744,
+        "original_T_feasible": true,
+        "available_seconds": 0.07899999991059303,
+        "sequence": 2
+      },
+      "balanced_physical_audit": {
+        "passed": true,
+        "initial": {
+          "F": 0.020865507671712715,
+          "G": 0.015028585402805153,
+          "P": 0.03891281512605041,
+          "stations": 10,
+          "pickup": 17,
+          "drop": 17,
+          "maximum_duration": 2642.916889172744,
+          "original_T_feasible": true
+        },
+        "final": {
+          "F": 0.020865507671712715,
+          "G": 0.015028585402805153,
+          "P": 0.03891281512605041,
+          "stations": 10,
+          "pickup": 17,
+          "drop": 17,
+          "maximum_duration": 2642.916889172744,
+          "original_T_feasible": true
+        },
+        "result": {
+          "F": 0.020865507671712715,
+          "neutral": 0,
+          "insertions": 0,
+          "quantities": 0,
+          "exhausted": true,
+          "deadline": false,
+          "zero": false,
+          "verification_failed": false,
+          "optimizer_calls": 0
+        },
+        "transitions": [
+          {
+            "iteration": 0,
+            "closure": {
+              "initial_UB": 0.020865507671712715,
+              "final_UB": 0.020865507671712715,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 132,
+              "insertion_quantities": 26,
+              "quantity_feasible": 345,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 9.279999999999705e-05,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "balanced_oracle": {
+              "balanced_blocks": 2,
+              "placements": 12,
+              "feasible": 0,
+              "improving": 0,
+              "best_key": null,
+              "best_potential": null,
+              "current_potential": [
+                2642.916889172744,
+                2501.481833480989
+              ]
+            }
+          }
+        ],
+        "neutral_states": 0,
+        "strict_moves": 0,
+        "unique_recorded_route_states": 1,
+        "offline_seconds": 0.00296889990568161,
+        "optimizer_calls": 0,
+        "scope": "Fixed-witness diagnosis, not full algorithm performance"
+      },
+      "outer_handoff": {
+        "final_route_match": true,
+        "initial_route_match": true
+      },
+      "descent": {
+        "completed_seeds": 25,
+        "passes": 51,
+        "decoded_checks": 94,
+        "cross_route_checks": 2,
+        "accepted_cross_route": 2,
+        "extra_seed_checks": 2,
+        "extra_seed_moves": 0,
+        "extra_seed_cross_route_neighbors": 0,
+        "extra_seed_cross_route_checks": 0,
+        "extra_seed_cross_route_moves": 0
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 3089,
+          "columns": 1304,
+          "nonzeros": 15345,
+          "gamma": [
+            0,
+            0.020865507671712715
+          ],
+          "cutoff": 0.020865507671712715,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 921,
+          "native_seconds": 0.03
+        },
+        {
+          "call": 2,
+          "rows": 3089,
+          "columns": 1304,
+          "nonzeros": 15345,
+          "gamma": [
+            0,
+            0.010432753835856358
+          ],
+          "cutoff": 0.020865507671712715,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 778,
+          "native_seconds": 0.03
+        },
+        {
+          "call": 3,
+          "rows": 2885,
+          "columns": 1098,
+          "nonzeros": 14750,
+          "gamma": [
+            0.010432753835856358,
+            0.020865507671712715
+          ],
+          "cutoff": 0.020865507671712715,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 556,
+          "native_seconds": 0.02
+        },
+        {
+          "call": 4,
+          "rows": 3089,
+          "columns": 1304,
+          "nonzeros": 15345,
+          "gamma": [
+            0,
+            0.020865507671712715
+          ],
+          "cutoff": 0.020865507671712715,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 1.436285e-02, 1415 iterations, 0.03 seconds (0.08 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 51,
+          "simplex_iterations": 9452,
+          "native_seconds": 0.92,
+          "native_work": 1.17
+        }
+      ]
+    },
+    {
+      "id": "E7",
+      "arm": "K1-R",
+      "wall_seconds": 5.75,
+      "endpoint": {
+        "U": 0.020382503842219304,
+        "L": 0.020382503842219284,
+        "gap": 2.0816681711721685e-17,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "phase_events": [
+        {
+          "sequence": "4",
+          "process_seconds": "0.0024015",
+          "event": "hga_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "119.9975986",
+          "work_deadline_remaining_seconds": "116.9975986",
+          "detail": "label=primary_hga;native_generation_stagnation_hga"
+        },
+        {
+          "sequence": "5",
+          "process_seconds": "4.3235238000000003",
+          "event": "hga_generation_loop_complete",
+          "status": "complete",
+          "nominal_deadline_remaining_seconds": "115.6764764",
+          "work_deadline_remaining_seconds": "112.6764762",
+          "detail": "label=primary_hga;generations=2027;no_improve=2000"
+        },
+        {
+          "sequence": "7",
+          "process_seconds": "4.3292603999999999",
+          "event": "exact_phase_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "115.6707396",
+          "work_deadline_remaining_seconds": "112.6707396",
+          "detail": "arm=round31-nonblocking-native-bound"
+        }
+      ],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.020382503842219304,
+          "cutoff": 0.020382503842219304,
+          "model_sha256": "0b088f52287d7f863e1164e3bdf4427f96f1cabc9b98a32fa14cda43930a648f",
+          "native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.010191251921109652,
+          "cutoff": 0.020382503842219304,
+          "model_sha256": "59332100910105df71425a66c5e02e5bee868cd8cb63d27cbb0dffbc2d20965c",
+          "native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "lower_g": 0.010191251921109652,
+          "upper_g": 0.020382503842219304,
+          "cutoff": 0.020382503842219304,
+          "model_sha256": "71584a54826d9529fbdd62e1bf46bea70ccc98b2c38f71b1cc6bd174809c1d89",
+          "native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.020382503842219304,
+          "cutoff": 0.020382503842219304,
+          "model_sha256": "0b088f52287d7f863e1164e3bdf4427f96f1cabc9b98a32fa14cda43930a648f",
+          "native_preconditions": 1
+        },
+        {
+          "call": 5,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.020382503842219304,
+          "cutoff": 0.020382503842219304,
+          "model_sha256": "0b088f52287d7f863e1164e3bdf4427f96f1cabc9b98a32fa14cda43930a648f",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.020382503842219308,
+        "G": 0.013395524430454598,
+        "P": 0.046579862745098066,
+        "stations": 9,
+        "pickup": 16,
+        "drop": 16,
+        "maximum_duration": 2732.3403284083115,
+        "original_T_feasible": true
+      },
+      "startup": {
+        "F": 0.020382503842219308,
+        "G": 0.013395524430454598,
+        "P": 0.046579862745098066,
+        "stations": 9,
+        "pickup": 16,
+        "drop": 16,
+        "maximum_duration": 2732.3403284083115,
+        "original_T_feasible": true,
+        "available_seconds": 4.359999999869615,
+        "sequence": 2
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 3109,
+          "columns": 1018,
+          "nonzeros": 14992,
+          "gamma": [
+            0,
+            0.020382503842219304
+          ],
+          "cutoff": 0.020382503842219304,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 604,
+          "native_seconds": 0.02
+        },
+        {
+          "call": 2,
+          "rows": 3109,
+          "columns": 1018,
+          "nonzeros": 14992,
+          "gamma": [
+            0,
+            0.010191251921109652
+          ],
+          "cutoff": 0.020382503842219304,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 604,
+          "native_seconds": 0.02
+        },
+        {
+          "call": 3,
+          "rows": 3111,
+          "columns": 1018,
+          "nonzeros": 15144,
+          "gamma": [
+            0.010191251921109652,
+            0.020382503842219304
+          ],
+          "cutoff": 0.020382503842219304,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 639,
+          "native_seconds": 0.02
+        },
+        {
+          "call": 4,
+          "rows": 3109,
+          "columns": 1018,
+          "nonzeros": 14992,
+          "gamma": [
+            0,
+            0.020382503842219304
+          ],
+          "cutoff": 0.020382503842219304,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 1.357530e-02, 722 iterations, 0.02 seconds (0.03 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 1,
+          "simplex_iterations": 722,
+          "native_seconds": 0.08,
+          "native_work": 0.14
+        },
+        {
+          "call": 5,
+          "rows": 3109,
+          "columns": 1018,
+          "nonzeros": 14992,
+          "gamma": [
+            0,
+            0.020382503842219304
+          ],
+          "cutoff": 0.020382503842219304,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 125,
+          "simplex_iterations": 10342,
+          "native_seconds": 1.14,
+          "native_work": 1.57
+        }
+      ]
+    },
+    {
+      "id": "S12",
+      "arm": "P-GRB",
+      "wall_seconds": 5.657000000122935,
+      "endpoint": {
+        "U": 0.05856397312578516,
+        "L": 0.05856397312578512,
+        "gap": 4.163336342344337e-17,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "phase_events": [],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "",
+          "lower_g": 0,
+          "upper_g": 0.9166666666666666,
+          "cutoff": 0,
+          "model_sha256": "df2361eefd69e6b5de0b9c61372e094663f5ac87002fd7a8520ac64518b4de20",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.05856397312578515,
+        "G": 0.023359903840070865,
+        "P": 0.23469379523809525,
+        "stations": 12,
+        "pickup": 62,
+        "drop": 47,
+        "maximum_duration": 10745.841907529852,
+        "original_T_feasible": true
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 968,
+          "columns": 473,
+          "nonzeros": 3795,
+          "gamma": [
+            0,
+            0.9166666666666666
+          ],
+          "cutoff": 0,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 0.000000e+00, 382 iterations, 0.00 seconds (0.01 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 3128,
+          "simplex_iterations": 86543,
+          "native_seconds": 5.59,
+          "native_work": 7.43
+        }
+      ]
+    },
+    {
+      "id": "S12",
+      "arm": "BDS-C",
+      "wall_seconds": 1.8119999999180436,
+      "endpoint": {
+        "U": 0.05856397312578515,
+        "L": 0.05856397312578488,
+        "gap": 2.706168622523819e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "phase_events": [
+        {
+          "sequence": "4",
+          "process_seconds": "0.0030777000000000001",
+          "event": "hga_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "119.99692229999999",
+          "work_deadline_remaining_seconds": "116.99692229999999",
+          "detail": "label=primary_hga;finite_random_seed_decoded_descent"
+        },
+        {
+          "sequence": "5",
+          "process_seconds": "0.4081591",
+          "event": "decoded_descent_complete",
+          "status": "complete",
+          "nominal_deadline_remaining_seconds": "119.5918411",
+          "work_deadline_remaining_seconds": "116.59184089999999",
+          "detail": "label=primary_hga;generations=0;no_improve=0;completed_seeds=25"
+        },
+        {
+          "sequence": "7",
+          "process_seconds": "0.41504550000000001",
+          "event": "exact_phase_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "119.5849546",
+          "work_deadline_remaining_seconds": "116.5849546",
+          "detail": "arm=round31-nonblocking-native-bound"
+        }
+      ],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.05856397312578515,
+          "cutoff": 0.05856397312578515,
+          "model_sha256": "35cad8bae4d941fc80ea5dd41ae5fa0c5f13a61f118a01b6a0db0f1e5e6f4dcf",
+          "native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.029281986562892576,
+          "cutoff": 0.05856397312578515,
+          "model_sha256": "7671c73bb13e23fca5f41fcfea201d5302a06807895beee6bc2f1020be148e4f",
+          "native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "lower_g": 0.029281986562892576,
+          "upper_g": 0.05856397312578515,
+          "cutoff": 0.05856397312578515,
+          "model_sha256": "48ae1bde8d31c887a041c49716b31c49f116c6ca3d0ec93ddd0af39e72656b0c",
+          "native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.05856397312578515,
+          "cutoff": 0.05856397312578515,
+          "model_sha256": "35cad8bae4d941fc80ea5dd41ae5fa0c5f13a61f118a01b6a0db0f1e5e6f4dcf",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.05856397312578515,
+        "G": 0.023359903840070865,
+        "P": 0.23469379523809525,
+        "stations": 12,
+        "pickup": 62,
+        "drop": 47,
+        "maximum_duration": 10745.841907529852,
+        "original_T_feasible": true
+      },
+      "startup": {
+        "F": 0.05856397312578515,
+        "G": 0.023359903840070865,
+        "P": 0.23469379523809525,
+        "stations": 12,
+        "pickup": 62,
+        "drop": 47,
+        "maximum_duration": 10745.841907529852,
+        "original_T_feasible": true,
+        "available_seconds": 0.4690000000409782,
+        "sequence": 2
+      },
+      "balanced_physical_audit": {
+        "passed": true,
+        "initial": {
+          "F": 0.05856397312578515,
+          "G": 0.023359903840070865,
+          "P": 0.23469379523809525,
+          "stations": 12,
+          "pickup": 62,
+          "drop": 47,
+          "maximum_duration": 10745.841907529852,
+          "original_T_feasible": true
+        },
+        "final": {
+          "F": 0.05856397312578515,
+          "G": 0.023359903840070865,
+          "P": 0.23469379523809525,
+          "stations": 12,
+          "pickup": 62,
+          "drop": 47,
+          "maximum_duration": 10745.841907529852,
+          "original_T_feasible": true
+        },
+        "result": {
+          "F": 0.05856397312578515,
+          "neutral": 0,
+          "insertions": 0,
+          "quantities": 0,
+          "exhausted": true,
+          "deadline": false,
+          "zero": false,
+          "verification_failed": false,
+          "optimizer_calls": 0
+        },
+        "transitions": [
+          {
+            "iteration": 0,
+            "closure": {
+              "initial_UB": 0.05856397312578515,
+              "final_UB": 0.05856397312578515,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 0,
+              "insertion_quantities": 0,
+              "quantity_feasible": 669,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 9.020000000004025e-05,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "balanced_oracle": {
+              "balanced_blocks": 1,
+              "placements": 0,
+              "feasible": 0,
+              "improving": 0,
+              "best_key": null,
+              "best_potential": null,
+              "current_potential": [
+                10745.841907529852
+              ]
+            }
+          }
+        ],
+        "neutral_states": 0,
+        "strict_moves": 0,
+        "unique_recorded_route_states": 1,
+        "offline_seconds": 0.002768600359559059,
+        "optimizer_calls": 0,
+        "scope": "Fixed-witness diagnosis, not full algorithm performance"
+      },
+      "outer_handoff": {
+        "final_route_match": true,
+        "initial_route_match": true
+      },
+      "descent": {
+        "completed_seeds": 25,
+        "passes": 93,
+        "decoded_checks": 232,
+        "cross_route_checks": 0,
+        "accepted_cross_route": 0,
+        "extra_seed_checks": 8,
+        "extra_seed_moves": 0,
+        "extra_seed_cross_route_neighbors": 0,
+        "extra_seed_cross_route_checks": 0,
+        "extra_seed_cross_route_moves": 0
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 2241,
+          "columns": 1098,
+          "nonzeros": 10878,
+          "gamma": [
+            0,
+            0.05856397312578515
+          ],
+          "cutoff": 0.05856397312578515,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 252,
+          "native_seconds": 0.01
+        },
+        {
+          "call": 2,
+          "rows": 2241,
+          "columns": 1098,
+          "nonzeros": 10878,
+          "gamma": [
+            0,
+            0.029281986562892576
+          ],
+          "cutoff": 0.05856397312578515,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 458,
+          "native_seconds": 0.01
+        },
+        {
+          "call": 3,
+          "rows": 2084,
+          "columns": 938,
+          "nonzeros": 10556,
+          "gamma": [
+            0.029281986562892576,
+            0.05856397312578515
+          ],
+          "cutoff": 0.05856397312578515,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 348,
+          "native_seconds": 0.01
+        },
+        {
+          "call": 4,
+          "rows": 2241,
+          "columns": 1098,
+          "nonzeros": 10878,
+          "gamma": [
+            0,
+            0.05856397312578515
+          ],
+          "cutoff": 0.05856397312578515,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 4.534881e-02, 936 iterations, 0.02 seconds (0.03 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 363,
+          "simplex_iterations": 7589,
+          "native_seconds": 1.17,
+          "native_work": 1.16
+        }
+      ]
+    },
+    {
+      "id": "S12",
+      "arm": "K1-R",
+      "wall_seconds": 40.73400000017136,
+      "endpoint": {
+        "U": 0.05856397312578515,
+        "L": 0.058563973125784964,
+        "gap": 1.8735013540549517e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "phase_events": [
+        {
+          "sequence": "4",
+          "process_seconds": "0.0033904999999999999",
+          "event": "hga_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "119.9966096",
+          "work_deadline_remaining_seconds": "116.9966096",
+          "detail": "label=primary_hga;native_generation_stagnation_hga"
+        },
+        {
+          "sequence": "5",
+          "process_seconds": "38.015231399999998",
+          "event": "hga_generation_loop_complete",
+          "status": "complete",
+          "nominal_deadline_remaining_seconds": "81.984768799999998",
+          "work_deadline_remaining_seconds": "78.984768699999989",
+          "detail": "label=primary_hga;generations=2153;no_improve=2000"
+        },
+        {
+          "sequence": "7",
+          "process_seconds": "38.020475699999999",
+          "event": "exact_phase_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "81.979524400000003",
+          "work_deadline_remaining_seconds": "78.979524400000003",
+          "detail": "arm=round31-nonblocking-native-bound"
+        }
+      ],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.05856397312578515,
+          "cutoff": 0.05856397312578515,
+          "model_sha256": "601ebc7df259b0ee3b98e1df919c2f57f5cc856fac25c66fdee2fb466a66837c",
+          "native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.029281986562892576,
+          "cutoff": 0.05856397312578515,
+          "model_sha256": "7fc8a9ae8f31c34c2e790e055ce4126273ca81fe0baa288d6b702f5dc9128801",
+          "native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "lower_g": 0.029281986562892576,
+          "upper_g": 0.05856397312578515,
+          "cutoff": 0.05856397312578515,
+          "model_sha256": "2d7c2b1c35c59428a84244dee7e5c697b8d67c8f8d0a952183f1508dea040ae9",
+          "native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.05856397312578515,
+          "cutoff": 0.05856397312578515,
+          "model_sha256": "601ebc7df259b0ee3b98e1df919c2f57f5cc856fac25c66fdee2fb466a66837c",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.05856397312578515,
+        "G": 0.023359903840070865,
+        "P": 0.23469379523809525,
+        "stations": 12,
+        "pickup": 62,
+        "drop": 47,
+        "maximum_duration": 10745.841907529852,
+        "original_T_feasible": true
+      },
+      "startup": {
+        "F": 0.05856397312578515,
+        "G": 0.023359903840070865,
+        "P": 0.23469379523809525,
+        "stations": 12,
+        "pickup": 62,
+        "drop": 47,
+        "maximum_duration": 10745.841907529852,
+        "original_T_feasible": true,
+        "available_seconds": 38.063000000081956,
+        "sequence": 2
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 2076,
+          "columns": 632,
+          "nonzeros": 9899,
+          "gamma": [
+            0,
+            0.05856397312578515
+          ],
+          "cutoff": 0.05856397312578515,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 269,
+          "native_seconds": 0.01
+        },
+        {
+          "call": 2,
+          "rows": 2076,
+          "columns": 632,
+          "nonzeros": 9899,
+          "gamma": [
+            0,
+            0.029281986562892576
+          ],
+          "cutoff": 0.05856397312578515,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 381,
+          "native_seconds": 0.01
+        },
+        {
+          "call": 3,
+          "rows": 2079,
+          "columns": 632,
+          "nonzeros": 10047,
+          "gamma": [
+            0.029281986562892576,
+            0.05856397312578515
+          ],
+          "cutoff": 0.05856397312578515,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 362,
+          "native_seconds": 0.01
+        },
+        {
+          "call": 4,
+          "rows": 2076,
+          "columns": 632,
+          "nonzeros": 9899,
+          "gamma": [
+            0,
+            0.05856397312578515
+          ],
+          "cutoff": 0.05856397312578515,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 1.077261e-02, 927 iterations, 0.02 seconds (0.04 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 964,
+          "simplex_iterations": 25209,
+          "native_seconds": 2.54,
+          "native_work": 2.92
+        }
+      ]
+    },
+    {
+      "id": "N12",
+      "arm": "P-GRB",
+      "wall_seconds": 4.280999999959022,
+      "endpoint": {
+        "U": 0.8046255197202796,
+        "L": 0.8046255197202797,
+        "gap": -1.1102230246251565e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "phase_events": [],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "",
+          "lower_g": 0,
+          "upper_g": 0.9166666666666666,
+          "cutoff": 0,
+          "model_sha256": "03d5df1c466d31da6295041f5de40c73d2fbe3e0a24ff088b87fd2eada3ea3f5",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.8046255197202796,
+        "G": 0.29108391608391604,
+        "P": 3.423610690909091,
+        "stations": 5,
+        "pickup": 16,
+        "drop": 15,
+        "maximum_duration": 3581.357789306602,
+        "original_T_feasible": true
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 953,
+          "columns": 463,
+          "nonzeros": 3750,
+          "gamma": [
+            0,
+            0.9166666666666666
+          ],
+          "cutoff": 0,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 4.970732e-01, 412 iterations, 0.01 seconds (0.01 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 2720,
+          "simplex_iterations": 68766,
+          "native_seconds": 4.22,
+          "native_work": 5.94
+        }
+      ]
+    },
+    {
+      "id": "N12",
+      "arm": "BDS-C",
+      "wall_seconds": 1.3909999998286366,
+      "endpoint": {
+        "U": 0.8046255197202796,
+        "L": 0.8046255197202795,
+        "gap": 1.1102230246251565e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "phase_events": [
+        {
+          "sequence": "4",
+          "process_seconds": "0.0028257",
+          "event": "hga_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "119.99717440000001",
+          "work_deadline_remaining_seconds": "116.9971743",
+          "detail": "label=primary_hga;finite_random_seed_decoded_descent"
+        },
+        {
+          "sequence": "5",
+          "process_seconds": "0.0201566",
+          "event": "decoded_descent_complete",
+          "status": "complete",
+          "nominal_deadline_remaining_seconds": "119.9798435",
+          "work_deadline_remaining_seconds": "116.97984339999999",
+          "detail": "label=primary_hga;generations=0;no_improve=0;completed_seeds=25"
+        },
+        {
+          "sequence": "7",
+          "process_seconds": "0.022360600000000001",
+          "event": "exact_phase_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "119.9776395",
+          "work_deadline_remaining_seconds": "116.9776394",
+          "detail": "arm=round31-nonblocking-native-bound"
+        }
+      ],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.8798356173330036,
+          "cutoff": 0.8798356173330036,
+          "model_sha256": "ead9aa6ff9d67ccf0246fbac70bfc27a08885c2ead0d8c2ea68ad3dc08d02f40",
+          "native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.4399178086665018,
+          "cutoff": 0.8798356173330036,
+          "model_sha256": "8eba05ee0998c7bd8e510abf1951f077b7074bace6f4a2afcd6a36b2c4d36a61",
+          "native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "lower_g": 0.4399178086665018,
+          "upper_g": 0.8798356173330036,
+          "cutoff": 0.8798356173330036,
+          "model_sha256": "0e9c6f18844e3a38667955a3375acc204351ef654a2d0037ebe637b023707b73",
+          "native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.8798356173330036,
+          "cutoff": 0.8798356173330036,
+          "model_sha256": "ead9aa6ff9d67ccf0246fbac70bfc27a08885c2ead0d8c2ea68ad3dc08d02f40",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.8046255197202796,
+        "G": 0.29108391608391604,
+        "P": 3.423610690909091,
+        "stations": 5,
+        "pickup": 16,
+        "drop": 15,
+        "maximum_duration": 3581.357789306602,
+        "original_T_feasible": true
+      },
+      "startup": {
+        "F": 0.8798356173330035,
+        "G": 0.2975440355148217,
+        "P": 3.8819438787878786,
+        "stations": 4,
+        "pickup": 14,
+        "drop": 14,
+        "maximum_duration": 3420.410204470497,
+        "original_T_feasible": true,
+        "available_seconds": 0.06199999991804361,
+        "sequence": 2
+      },
+      "balanced_physical_audit": {
+        "passed": true,
+        "initial": {
+          "F": 0.8847036298470518,
+          "G": 0.3034537116652336,
+          "P": 3.8749994545454545,
+          "stations": 4,
+          "pickup": 12,
+          "drop": 12,
+          "maximum_duration": 3180.410204470497,
+          "original_T_feasible": true
+        },
+        "final": {
+          "F": 0.8798356173330035,
+          "G": 0.2975440355148217,
+          "P": 3.8819438787878786,
+          "stations": 4,
+          "pickup": 14,
+          "drop": 14,
+          "maximum_duration": 3420.410204470497,
+          "original_T_feasible": true
+        },
+        "result": {
+          "F": 0.8798356173330036,
+          "neutral": 0,
+          "insertions": 0,
+          "quantities": 2,
+          "exhausted": true,
+          "deadline": false,
+          "zero": false,
+          "verification_failed": false,
+          "optimizer_calls": 0
+        },
+        "transitions": [
+          {
+            "iteration": 0,
+            "closure": {
+              "initial_UB": 0.8847036298470516,
+              "final_UB": 0.8798356173330036,
+              "accepted": 2,
+              "counts": {
+                "insertions": 0,
+                "quantities": 2,
+                "singles": 0,
+                "pairs": 2,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 4,
+              "returned_to_outer": true,
+              "insertion_placements": 2760,
+              "insertion_quantities": 3,
+              "quantity_feasible": 260,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.00019590000000000232,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "balanced_oracle": {
+              "balanced_blocks": 2,
+              "placements": 0,
+              "feasible": 0,
+              "improving": 0,
+              "best_key": null,
+              "best_potential": null,
+              "current_potential": [
+                3420.410204470497
+              ]
+            }
+          }
+        ],
+        "neutral_states": 0,
+        "strict_moves": 2,
+        "unique_recorded_route_states": 2,
+        "offline_seconds": 0.003082900308072567,
+        "optimizer_calls": 0,
+        "scope": "Fixed-witness diagnosis, not full algorithm performance"
+      },
+      "outer_handoff": {
+        "final_route_match": true,
+        "initial_route_match": false
+      },
+      "descent": {
+        "completed_seeds": 25,
+        "passes": 66,
+        "decoded_checks": 189,
+        "cross_route_checks": 0,
+        "accepted_cross_route": 0,
+        "extra_seed_checks": 3,
+        "extra_seed_moves": 0,
+        "extra_seed_cross_route_neighbors": 0,
+        "extra_seed_cross_route_checks": 0,
+        "extra_seed_cross_route_moves": 0
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 2179,
+          "columns": 1038,
+          "nonzeros": 10656,
+          "gamma": [
+            0,
+            0.8798356173330036
+          ],
+          "cutoff": 0.8798356173330036,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 495,
+          "native_seconds": 0.01
+        },
+        {
+          "call": 2,
+          "rows": 2179,
+          "columns": 1038,
+          "nonzeros": 10656,
+          "gamma": [
+            0,
+            0.4399178086665018
+          ],
+          "cutoff": 0.8798356173330036,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 648,
+          "native_seconds": 0.01
+        },
+        {
+          "call": 3,
+          "rows": 2179,
+          "columns": 1038,
+          "nonzeros": 10936,
+          "gamma": [
+            0.4399178086665018,
+            0.8798356173330036
+          ],
+          "cutoff": 0.8798356173330036,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 711,
+          "native_seconds": 0.01
+        },
+        {
+          "call": 4,
+          "rows": 2179,
+          "columns": 1038,
+          "nonzeros": 10656,
+          "gamma": [
+            0,
+            0.8798356173330036
+          ],
+          "cutoff": 0.8798356173330036,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 6.260016e-01, 621 iterations, 0.01 seconds (0.02 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 325,
+          "simplex_iterations": 13382,
+          "native_seconds": 1.16,
+          "native_work": 1.67
+        }
+      ]
+    },
+    {
+      "id": "N12",
+      "arm": "K1-R",
+      "wall_seconds": 7.438000000081956,
+      "endpoint": {
+        "U": 0.8046255197202796,
+        "L": 0.8046255197202764,
+        "gap": 3.219646771412954e-15,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "phase_events": [
+        {
+          "sequence": "4",
+          "process_seconds": "0.0022182999999999999",
+          "event": "hga_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "119.9977817",
+          "work_deadline_remaining_seconds": "116.9977817",
+          "detail": "label=primary_hga;native_generation_stagnation_hga"
+        },
+        {
+          "sequence": "5",
+          "process_seconds": "1.7307222",
+          "event": "hga_generation_loop_complete",
+          "status": "complete",
+          "nominal_deadline_remaining_seconds": "118.26927809999999",
+          "work_deadline_remaining_seconds": "115.26927790000001",
+          "detail": "label=primary_hga;generations=2503;no_improve=2000"
+        },
+        {
+          "sequence": "7",
+          "process_seconds": "1.7354528",
+          "event": "exact_phase_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "118.2645473",
+          "work_deadline_remaining_seconds": "115.2645473",
+          "detail": "arm=round31-nonblocking-native-bound"
+        }
+      ],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.8162382059163058,
+          "cutoff": 0.8162382059163058,
+          "model_sha256": "e695d5e74ee6052a4bcbde7547dc025b89d4dc6566aa50e51cc5ce735788d4b4",
+          "native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.4081191029581529,
+          "cutoff": 0.8162382059163058,
+          "model_sha256": "7caafc64156eae7c195a306760e38a5c2100dd10174eb150743129552d4320bc",
+          "native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "lower_g": 0.4081191029581529,
+          "upper_g": 0.8162382059163058,
+          "cutoff": 0.8162382059163058,
+          "model_sha256": "690ff06b3f1932964f07a5dcb5f3bb9ce3df31a8436ffc9c0c9e90f7ae591028",
+          "native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.8162382059163058,
+          "cutoff": 0.8162382059163058,
+          "model_sha256": "e695d5e74ee6052a4bcbde7547dc025b89d4dc6566aa50e51cc5ce735788d4b4",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.8046255197202796,
+        "G": 0.29108391608391604,
+        "P": 3.423610690909091,
+        "stations": 5,
+        "pickup": 16,
+        "drop": 15,
+        "maximum_duration": 3581.357789306602,
+        "original_T_feasible": true
+      },
+      "startup": {
+        "F": 0.816238205916306,
+        "G": 0.2922799422799423,
+        "P": 3.493055090909091,
+        "stations": 5,
+        "pickup": 15,
+        "drop": 15,
+        "maximum_duration": 3547.1399809717705,
+        "original_T_feasible": true,
+        "available_seconds": 1.7809999999590218,
+        "sequence": 2
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 2039,
+          "columns": 622,
+          "nonzeros": 9810,
+          "gamma": [
+            0,
+            0.8162382059163058
+          ],
+          "cutoff": 0.8162382059163058,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 523,
+          "native_seconds": 0.01
+        },
+        {
+          "call": 2,
+          "rows": 2039,
+          "columns": 622,
+          "nonzeros": 9810,
+          "gamma": [
+            0,
+            0.4081191029581529
+          ],
+          "cutoff": 0.8162382059163058,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 542,
+          "native_seconds": 0.01
+        },
+        {
+          "call": 3,
+          "rows": 2039,
+          "columns": 622,
+          "nonzeros": 9942,
+          "gamma": [
+            0.4081191029581529,
+            0.8162382059163058
+          ],
+          "cutoff": 0.8162382059163058,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 475,
+          "native_seconds": 0.01
+        },
+        {
+          "call": 4,
+          "rows": 2039,
+          "columns": 622,
+          "nonzeros": 9810,
+          "gamma": [
+            0,
+            0.8162382059163058
+          ],
+          "cutoff": 0.8162382059163058,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 5.252151e-01, 520 iterations, 0.01 seconds (0.02 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 1633,
+          "simplex_iterations": 54862,
+          "native_seconds": 5.49,
+          "native_work": 8.38
+        }
+      ]
+    },
+    {
+      "id": "D3",
+      "arm": "P-GRB",
+      "wall_seconds": 297.06199999991804,
+      "endpoint": {
+        "U": 0.04505416158053462,
+        "L": 0.04154012001239039,
+        "gap": 0.0035140415681442355,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      },
+      "phase_events": [],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "",
+          "lower_g": 0,
+          "upper_g": 0.9166666666666666,
+          "cutoff": 0,
+          "model_sha256": "e9e2fae0b045a3e244047ac79b2afbeafcbf3486464f5fd0567317bf6e7f838b",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.04505416158053463,
+        "G": 0.02315974870174675,
+        "P": 0.14596275252525256,
+        "stations": 11,
+        "pickup": 30,
+        "drop": 30,
+        "maximum_duration": 2784.4272564574003,
+        "original_T_feasible": true
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 2089,
+          "columns": 935,
+          "nonzeros": 9078,
+          "gamma": [
+            0,
+            0.9166666666666666
+          ],
+          "cutoff": 0,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 2.055001e-02, 393 iterations, 0.01 seconds (0.01 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 50515,
+          "simplex_iterations": 4847843,
+          "native_seconds": 296.97,
+          "native_work": 477.01
+        }
+      ]
+    },
+    {
+      "id": "D3",
+      "arm": "BDS-C",
+      "wall_seconds": 138.96799999987707,
+      "endpoint": {
+        "U": 0.04500155005562836,
+        "L": 0.04500155005562838,
+        "gap": -2.0816681711721685e-17,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "phase_events": [
+        {
+          "sequence": "4",
+          "process_seconds": "0.0032433000000000002",
+          "event": "hga_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "299.99675680000001",
+          "work_deadline_remaining_seconds": "296.99675680000001",
+          "detail": "label=primary_hga;finite_random_seed_decoded_descent"
+        },
+        {
+          "sequence": "5",
+          "process_seconds": "0.0321677",
+          "event": "decoded_descent_complete",
+          "status": "complete",
+          "nominal_deadline_remaining_seconds": "299.96783260000001",
+          "work_deadline_remaining_seconds": "296.9678323",
+          "detail": "label=primary_hga;generations=0;no_improve=0;completed_seeds=25"
+        },
+        {
+          "sequence": "7",
+          "process_seconds": "0.034270099999999998",
+          "event": "exact_phase_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "299.96573000000001",
+          "work_deadline_remaining_seconds": "296.96573000000001",
+          "detail": "arm=round31-nonblocking-native-bound"
+        }
+      ],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.0781153026105612,
+          "cutoff": 0.0781153026105612,
+          "model_sha256": "66e5027dc8cff64e0e62c001dd0d233831d4cb3812b1e75c97759f4bb36dca70",
+          "native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.0390576513052806,
+          "cutoff": 0.0781153026105612,
+          "model_sha256": "8361dc262dbadad8f4a04af7f9125cb74c5a7b52bac39d24c69db356adbe0ed1",
+          "native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "lower_g": 0.0390576513052806,
+          "upper_g": 0.0781153026105612,
+          "cutoff": 0.0781153026105612,
+          "model_sha256": "55977366de866a6e1630009d50fa61cef7641614e92538c2964006de8d804e3a",
+          "native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.0781153026105612,
+          "cutoff": 0.0781153026105612,
+          "model_sha256": "66e5027dc8cff64e0e62c001dd0d233831d4cb3812b1e75c97759f4bb36dca70",
+          "native_preconditions": 1
+        },
+        {
+          "call": 5,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.0781153026105612,
+          "cutoff": 0.0781153026105612,
+          "model_sha256": "66e5027dc8cff64e0e62c001dd0d233831d4cb3812b1e75c97759f4bb36dca70",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.04500155005562836,
+        "G": 0.01922309854047684,
+        "P": 0.17185634343434344,
+        "stations": 11,
+        "pickup": 29,
+        "drop": 29,
+        "maximum_duration": 2784.780856205036,
+        "original_T_feasible": true
+      },
+      "startup": {
+        "F": 0.0781153026105612,
+        "G": 0.042968395034803625,
+        "P": 0.23431271717171714,
+        "stations": 10,
+        "pickup": 28,
+        "drop": 28,
+        "maximum_duration": 2791.8948977954715,
+        "original_T_feasible": true,
+        "available_seconds": 0.09299999987706542,
+        "sequence": 2
+      },
+      "balanced_physical_audit": {
+        "passed": true,
+        "initial": {
+          "F": 0.0781153026105612,
+          "G": 0.042968395034803625,
+          "P": 0.23431271717171714,
+          "stations": 10,
+          "pickup": 28,
+          "drop": 28,
+          "maximum_duration": 2791.8948977954715,
+          "original_T_feasible": true
+        },
+        "final": {
+          "F": 0.0781153026105612,
+          "G": 0.042968395034803625,
+          "P": 0.23431271717171714,
+          "stations": 10,
+          "pickup": 28,
+          "drop": 28,
+          "maximum_duration": 2791.8948977954715,
+          "original_T_feasible": true
+        },
+        "result": {
+          "F": 0.0781153026105612,
+          "neutral": 0,
+          "insertions": 0,
+          "quantities": 0,
+          "exhausted": true,
+          "deadline": false,
+          "zero": false,
+          "verification_failed": false,
+          "optimizer_calls": 0
+        },
+        "transitions": [
+          {
+            "iteration": 0,
+            "closure": {
+              "initial_UB": 0.0781153026105612,
+              "final_UB": 0.0781153026105612,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 124,
+              "insertion_quantities": 14,
+              "quantity_feasible": 164,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 6.189999999999668e-05,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "balanced_oracle": {
+              "balanced_blocks": 3,
+              "placements": 26,
+              "feasible": 0,
+              "improving": 0,
+              "best_key": null,
+              "best_potential": null,
+              "current_potential": [
+                2791.8948977954715,
+                2733.5084340032017,
+                1511.3713637598557
+              ]
+            }
+          }
+        ],
+        "neutral_states": 0,
+        "strict_moves": 0,
+        "unique_recorded_route_states": 1,
+        "offline_seconds": 0.0028985999524593353,
+        "optimizer_calls": 0,
+        "scope": "Fixed-witness diagnosis, not full algorithm performance"
+      },
+      "outer_handoff": {
+        "final_route_match": true,
+        "initial_route_match": true
+      },
+      "descent": {
+        "completed_seeds": 25,
+        "passes": 85,
+        "decoded_checks": 175,
+        "cross_route_checks": 47,
+        "accepted_cross_route": 28,
+        "extra_seed_checks": 0,
+        "extra_seed_moves": 0,
+        "extra_seed_cross_route_neighbors": 0,
+        "extra_seed_cross_route_checks": 0,
+        "extra_seed_cross_route_moves": 0
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 4306,
+          "columns": 1884,
+          "nonzeros": 21079,
+          "gamma": [
+            0,
+            0.0781153026105612
+          ],
+          "cutoff": 0.0781153026105612,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 1222,
+          "native_seconds": 0.04
+        },
+        {
+          "call": 2,
+          "rows": 4306,
+          "columns": 1884,
+          "nonzeros": 21079,
+          "gamma": [
+            0,
+            0.0390576513052806
+          ],
+          "cutoff": 0.0781153026105612,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 1053,
+          "native_seconds": 0.04
+        },
+        {
+          "call": 3,
+          "rows": 4144,
+          "columns": 1718,
+          "nonzeros": 20758,
+          "gamma": [
+            0.0390576513052806,
+            0.0781153026105612
+          ],
+          "cutoff": 0.0781153026105612,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 599,
+          "native_seconds": 0.03
+        },
+        {
+          "call": 4,
+          "rows": 4306,
+          "columns": 1884,
+          "nonzeros": 21079,
+          "gamma": [
+            0,
+            0.0781153026105612
+          ],
+          "cutoff": 0.0781153026105612,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 2.834812e-02, 795 iterations, 0.02 seconds (0.05 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 1,
+          "simplex_iterations": 1897,
+          "native_seconds": 0.16,
+          "native_work": 0.3
+        },
+        {
+          "call": 5,
+          "rows": 4306,
+          "columns": 1884,
+          "nonzeros": 21079,
+          "gamma": [
+            0,
+            0.0781153026105612
+          ],
+          "cutoff": 0.0781153026105612,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 2.834812e-02, 795 iterations, 0.02 seconds (0.05 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 18229,
+          "simplex_iterations": 2214579,
+          "native_seconds": 138.41,
+          "native_work": 216.5
+        }
+      ]
+    },
+    {
+      "id": "D3",
+      "arm": "K1-R",
+      "wall_seconds": 297.07800000021234,
+      "endpoint": {
+        "U": 0.04505416158053462,
+        "L": 0.04385526649794954,
+        "gap": 0.001198895082585083,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      },
+      "phase_events": [
+        {
+          "sequence": "4",
+          "process_seconds": "0.0024334999999999999",
+          "event": "hga_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "299.99756660000003",
+          "work_deadline_remaining_seconds": "296.9975665",
+          "detail": "label=primary_hga;native_generation_stagnation_hga"
+        },
+        {
+          "sequence": "5",
+          "process_seconds": "2.0684315999999998",
+          "event": "hga_generation_loop_complete",
+          "status": "complete",
+          "nominal_deadline_remaining_seconds": "297.93156859999999",
+          "work_deadline_remaining_seconds": "294.9315684",
+          "detail": "label=primary_hga;generations=2129;no_improve=2000"
+        },
+        {
+          "sequence": "7",
+          "process_seconds": "2.0731617",
+          "event": "exact_phase_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "297.92683840000001",
+          "work_deadline_remaining_seconds": "294.92683829999999",
+          "detail": "arm=round31-nonblocking-native-bound"
+        }
+      ],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.049468682614419446,
+          "cutoff": 0.049468682614419446,
+          "model_sha256": "393d73d9ec578548710f6b0115a4e7dc05f97e780109e72b80b5f42f89a73e41",
+          "native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.024734341307209723,
+          "cutoff": 0.049468682614419446,
+          "model_sha256": "87542272e41f9fab7074c4909e928866dff0c1bc41c9b0d04248129ed953c9f6",
+          "native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "lower_g": 0.024734341307209723,
+          "upper_g": 0.049468682614419446,
+          "cutoff": 0.049468682614419446,
+          "model_sha256": "4a84e7bed82e3a611e3ff842d4dc24a853eb340b0a008de450e6d0d5716de461",
+          "native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.049468682614419446,
+          "cutoff": 0.049468682614419446,
+          "model_sha256": "393d73d9ec578548710f6b0115a4e7dc05f97e780109e72b80b5f42f89a73e41",
+          "native_preconditions": 1
+        },
+        {
+          "call": 5,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.049468682614419446,
+          "cutoff": 0.049468682614419446,
+          "model_sha256": "393d73d9ec578548710f6b0115a4e7dc05f97e780109e72b80b5f42f89a73e41",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.04505416158053463,
+        "G": 0.02315974870174675,
+        "P": 0.14596275252525256,
+        "stations": 11,
+        "pickup": 30,
+        "drop": 30,
+        "maximum_duration": 2784.4272564574003,
+        "original_T_feasible": true
+      },
+      "startup": {
+        "F": 0.04946868261441946,
+        "G": 0.025652504205328552,
+        "P": 0.1587745227272727,
+        "stations": 10,
+        "pickup": 29,
+        "drop": 29,
+        "maximum_duration": 2800.490870947145,
+        "original_T_feasible": true,
+        "available_seconds": 2.125,
+        "sequence": 2
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 4145,
+          "columns": 1406,
+          "nonzeros": 20086,
+          "gamma": [
+            0,
+            0.049468682614419446
+          ],
+          "cutoff": 0.049468682614419446,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 746,
+          "native_seconds": 0.03
+        },
+        {
+          "call": 2,
+          "rows": 4145,
+          "columns": 1406,
+          "nonzeros": 20086,
+          "gamma": [
+            0,
+            0.024734341307209723
+          ],
+          "cutoff": 0.049468682614419446,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 713,
+          "native_seconds": 0.03
+        },
+        {
+          "call": 3,
+          "rows": 4149,
+          "columns": 1406,
+          "nonzeros": 20258,
+          "gamma": [
+            0.024734341307209723,
+            0.049468682614419446
+          ],
+          "cutoff": 0.049468682614419446,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 820,
+          "native_seconds": 0.03
+        },
+        {
+          "call": 4,
+          "rows": 4145,
+          "columns": 1406,
+          "nonzeros": 20086,
+          "gamma": [
+            0,
+            0.049468682614419446
+          ],
+          "cutoff": 0.049468682614419446,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 3.185463e-02, 880 iterations, 0.02 seconds (0.06 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 1,
+          "simplex_iterations": 880,
+          "native_seconds": 0.18,
+          "native_work": 0.29
+        },
+        {
+          "call": 5,
+          "rows": 4145,
+          "columns": 1406,
+          "nonzeros": 20086,
+          "gamma": [
+            0,
+            0.049468682614419446
+          ],
+          "cutoff": 0.049468682614419446,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 28787,
+          "simplex_iterations": 5440069,
+          "native_seconds": 294.65,
+          "native_work": 442.78
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "arm": "P-GRB",
+      "wall_seconds": 297.06199999991804,
+      "endpoint": {
+        "U": 0.8299634131717752,
+        "L": 0.7710715199887214,
+        "gap": 0.05889189318305388,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      },
+      "phase_events": [],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "",
+          "lower_g": 0,
+          "upper_g": 0.95,
+          "cutoff": 0,
+          "model_sha256": "c575bdcdf695403630ba7ab1a675970792b4e69e19ddfa90cae6a9e49436ffda",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.8299634131717751,
+        "G": 0.26521341317177516,
+        "P": 3.7649999999999997,
+        "stations": 5,
+        "pickup": 17,
+        "drop": 17,
+        "maximum_duration": 1785.7310100703473,
+        "original_T_feasible": true
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 3641,
+          "columns": 1559,
+          "nonzeros": 16334,
+          "gamma": [
+            0,
+            0.95
+          ],
+          "cutoff": 0,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 5.541587e-01, 828 iterations, 0.02 seconds (0.04 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 33058,
+          "simplex_iterations": 2614607,
+          "native_seconds": 296.95,
+          "native_work": 573.69
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "arm": "BDS-C",
+      "wall_seconds": 113.875,
+      "endpoint": {
+        "U": 0.8299634131717752,
+        "L": 0.8299634131717741,
+        "gap": 1.1102230246251565e-15,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "phase_events": [
+        {
+          "sequence": "4",
+          "process_seconds": "0.0072857",
+          "event": "hga_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "299.99271429999999",
+          "work_deadline_remaining_seconds": "296.99271429999999",
+          "detail": "label=primary_hga;finite_random_seed_decoded_descent"
+        },
+        {
+          "sequence": "5",
+          "process_seconds": "0.043909299999999998",
+          "event": "decoded_descent_complete",
+          "status": "complete",
+          "nominal_deadline_remaining_seconds": "299.95609080000003",
+          "work_deadline_remaining_seconds": "296.95609080000003",
+          "detail": "label=primary_hga;generations=0;no_improve=0;completed_seeds=25"
+        },
+        {
+          "sequence": "7",
+          "process_seconds": "0.051776299999999997",
+          "event": "exact_phase_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "299.94822370000003",
+          "work_deadline_remaining_seconds": "296.94822370000003",
+          "detail": "arm=round31-nonblocking-native-bound"
+        }
+      ],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.837091467554702,
+          "cutoff": 0.837091467554702,
+          "model_sha256": "791125ba71b7859d343599d809e15090e684b6500c4accb67ff77e940ba4a877",
+          "native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.418545733777351,
+          "cutoff": 0.837091467554702,
+          "model_sha256": "6dba2ca36dd13378e14afbda09ce8a657cf5bf4af3d5be629a64ca427da040d3",
+          "native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "lower_g": 0.418545733777351,
+          "upper_g": 0.837091467554702,
+          "cutoff": 0.837091467554702,
+          "model_sha256": "6a4389a2fd9f54927cd0bf93185b59fcae9fa59396dc1b1b187056dc808c3b0b",
+          "native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0.0.0",
+          "lower_g": 0,
+          "upper_g": 0.2092728668886755,
+          "cutoff": 0.837091467554702,
+          "model_sha256": "1c50a1f935a072c1b61f17c341801ce645f96a2cb74d679aa59e98b16e014061",
+          "native_preconditions": 0
+        },
+        {
+          "call": 5,
+          "leaf": "L0.0.1",
+          "lower_g": 0.2092728668886755,
+          "upper_g": 0.418545733777351,
+          "cutoff": 0.837091467554702,
+          "model_sha256": "d0985eeea107180906706768ce3a81123631ee86a5ca7a1fe15ef46008d92478",
+          "native_preconditions": 0
+        },
+        {
+          "call": 6,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.418545733777351,
+          "cutoff": 0.837091467554702,
+          "model_sha256": "6dba2ca36dd13378e14afbda09ce8a657cf5bf4af3d5be629a64ca427da040d3",
+          "native_preconditions": 1
+        },
+        {
+          "call": 7,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.418545733777351,
+          "cutoff": 0.837091467554702,
+          "model_sha256": "6dba2ca36dd13378e14afbda09ce8a657cf5bf4af3d5be629a64ca427da040d3",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.8299634131717751,
+        "G": 0.26521341317177516,
+        "P": 3.7649999999999997,
+        "stations": 5,
+        "pickup": 17,
+        "drop": 17,
+        "maximum_duration": 1785.7310100703473,
+        "original_T_feasible": true
+      },
+      "startup": {
+        "F": 0.8370914675547019,
+        "G": 0.2708414675547019,
+        "P": 3.775,
+        "stations": 4,
+        "pickup": 17,
+        "drop": 16,
+        "maximum_duration": 1777.013632206718,
+        "original_T_feasible": true,
+        "available_seconds": 0.125,
+        "sequence": 2
+      },
+      "balanced_physical_audit": {
+        "passed": true,
+        "initial": {
+          "F": 0.8370914675547019,
+          "G": 0.2708414675547019,
+          "P": 3.775,
+          "stations": 4,
+          "pickup": 17,
+          "drop": 16,
+          "maximum_duration": 1777.013632206718,
+          "original_T_feasible": true
+        },
+        "final": {
+          "F": 0.8370914675547019,
+          "G": 0.2708414675547019,
+          "P": 3.775,
+          "stations": 4,
+          "pickup": 17,
+          "drop": 16,
+          "maximum_duration": 1777.013632206718,
+          "original_T_feasible": true
+        },
+        "result": {
+          "F": 0.837091467554702,
+          "neutral": 0,
+          "insertions": 0,
+          "quantities": 0,
+          "exhausted": true,
+          "deadline": false,
+          "zero": false,
+          "verification_failed": false,
+          "optimizer_calls": 0
+        },
+        "transitions": [
+          {
+            "iteration": 0,
+            "closure": {
+              "initial_UB": 0.837091467554702,
+              "final_UB": 0.837091467554702,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 2700,
+              "insertion_quantities": 1,
+              "quantity_feasible": 37,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0001648999999999956,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "balanced_oracle": {
+              "balanced_blocks": 1,
+              "placements": 3,
+              "feasible": 0,
+              "improving": 0,
+              "best_key": null,
+              "best_potential": null,
+              "current_potential": [
+                1777.0136322067183,
+                1718.3103195125
+              ]
+            }
+          }
+        ],
+        "neutral_states": 0,
+        "strict_moves": 0,
+        "unique_recorded_route_states": 1,
+        "offline_seconds": 0.003212600015103817,
+        "optimizer_calls": 0,
+        "scope": "Fixed-witness diagnosis, not full algorithm performance"
+      },
+      "outer_handoff": {
+        "final_route_match": true,
+        "initial_route_match": true
+      },
+      "descent": {
+        "completed_seeds": 25,
+        "passes": 88,
+        "decoded_checks": 437,
+        "cross_route_checks": 98,
+        "accepted_cross_route": 22,
+        "extra_seed_checks": 16,
+        "extra_seed_moves": 1,
+        "extra_seed_cross_route_neighbors": 7,
+        "extra_seed_cross_route_checks": 4,
+        "extra_seed_cross_route_moves": 0
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 8575,
+          "columns": 2794,
+          "nonzeros": 49028,
+          "gamma": [
+            0,
+            0.837091467554702
+          ],
+          "cutoff": 0.837091467554702,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 2463,
+          "native_seconds": 0.13
+        },
+        {
+          "call": 2,
+          "rows": 8575,
+          "columns": 2794,
+          "nonzeros": 49028,
+          "gamma": [
+            0,
+            0.418545733777351
+          ],
+          "cutoff": 0.837091467554702,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 2015,
+          "native_seconds": 0.11
+        },
+        {
+          "call": 3,
+          "rows": 8575,
+          "columns": 2794,
+          "nonzeros": 49348,
+          "gamma": [
+            0.418545733777351,
+            0.837091467554702
+          ],
+          "cutoff": 0.837091467554702,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 1658,
+          "native_seconds": 0.08
+        },
+        {
+          "call": 4,
+          "rows": 8575,
+          "columns": 2794,
+          "nonzeros": 49028,
+          "gamma": [
+            0,
+            0.2092728668886755
+          ],
+          "cutoff": 0.837091467554702,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 3284,
+          "native_seconds": 0.2
+        },
+        {
+          "call": 5,
+          "rows": 8575,
+          "columns": 2794,
+          "nonzeros": 49348,
+          "gamma": [
+            0.2092728668886755,
+            0.418545733777351
+          ],
+          "cutoff": 0.837091467554702,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 2734,
+          "native_seconds": 0.13
+        },
+        {
+          "call": 6,
+          "rows": 8575,
+          "columns": 2794,
+          "nonzeros": 49028,
+          "gamma": [
+            0,
+            0.418545733777351
+          ],
+          "cutoff": 0.837091467554702,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 6.522061e-01, 1954 iterations, 0.07 seconds (0.18 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 1,
+          "simplex_iterations": 1954,
+          "native_seconds": 0.29,
+          "native_work": 0.51
+        },
+        {
+          "call": 7,
+          "rows": 8575,
+          "columns": 2794,
+          "nonzeros": 49028,
+          "gamma": [
+            0,
+            0.418545733777351
+          ],
+          "cutoff": 0.837091467554702,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 6.522061e-01, 1954 iterations, 0.07 seconds (0.18 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 6674,
+          "simplex_iterations": 774501,
+          "native_seconds": 112.16,
+          "native_work": 214.37
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "arm": "K1-R",
+      "wall_seconds": 297.0779999997467,
+      "endpoint": {
+        "U": 0.8299634131717752,
+        "L": 0.7971726503248864,
+        "gap": 0.032790762846888866,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      },
+      "phase_events": [
+        {
+          "sequence": "4",
+          "process_seconds": "0.0023977999999999998",
+          "event": "hga_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "299.99760229999998",
+          "work_deadline_remaining_seconds": "296.99760229999998",
+          "detail": "label=primary_hga;native_generation_stagnation_hga"
+        },
+        {
+          "sequence": "5",
+          "process_seconds": "2.6912433",
+          "event": "hga_generation_loop_complete",
+          "status": "complete",
+          "nominal_deadline_remaining_seconds": "297.30875700000001",
+          "work_deadline_remaining_seconds": "294.3087567",
+          "detail": "label=primary_hga;generations=2793;no_improve=2000"
+        },
+        {
+          "sequence": "7",
+          "process_seconds": "2.6992265999999998",
+          "event": "exact_phase_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "297.30077349999999",
+          "work_deadline_remaining_seconds": "294.30077349999999",
+          "detail": "arm=round31-nonblocking-native-bound"
+        }
+      ],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.8299634131717752,
+          "cutoff": 0.8299634131717752,
+          "model_sha256": "48f00424ac4080a0b940b5a8c9351072ce8bb94243b95cfeec26fc580474e014",
+          "native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.4149817065858876,
+          "cutoff": 0.8299634131717752,
+          "model_sha256": "c1b6d06947c08c77ade119ba1b2024bee732794166fe0b3e3a8990b15aaee06d",
+          "native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "lower_g": 0.4149817065858876,
+          "upper_g": 0.8299634131717752,
+          "cutoff": 0.8299634131717752,
+          "model_sha256": "08ef6abb1c0c5868e0ab1740f99b0a9be2cdd1cc011fb1f21a8c2e0b78596fcc",
+          "native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0.0.0",
+          "lower_g": 0,
+          "upper_g": 0.2074908532929438,
+          "cutoff": 0.8299634131717752,
+          "model_sha256": "59282f716df3cf826b40f7c0486fa7d3433777a490cd3c3b6a6b054d78e0fd69",
+          "native_preconditions": 0
+        },
+        {
+          "call": 5,
+          "leaf": "L0.0.1",
+          "lower_g": 0.2074908532929438,
+          "upper_g": 0.4149817065858876,
+          "cutoff": 0.8299634131717752,
+          "model_sha256": "bfebdb0b67b95a67886ef04ce44ec71aced3d24a4f6dcdd14695162f0332d223",
+          "native_preconditions": 0
+        },
+        {
+          "call": 6,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.4149817065858876,
+          "cutoff": 0.8299634131717752,
+          "model_sha256": "c1b6d06947c08c77ade119ba1b2024bee732794166fe0b3e3a8990b15aaee06d",
+          "native_preconditions": 1
+        },
+        {
+          "call": 7,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.4149817065858876,
+          "cutoff": 0.8299634131717752,
+          "model_sha256": "c1b6d06947c08c77ade119ba1b2024bee732794166fe0b3e3a8990b15aaee06d",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.8299634131717751,
+        "G": 0.26521341317177516,
+        "P": 3.7649999999999997,
+        "stations": 5,
+        "pickup": 17,
+        "drop": 17,
+        "maximum_duration": 1785.7310100703473,
+        "original_T_feasible": true
+      },
+      "startup": {
+        "F": 0.8299634131717751,
+        "G": 0.26521341317177516,
+        "P": 3.7649999999999997,
+        "stations": 5,
+        "pickup": 17,
+        "drop": 17,
+        "maximum_duration": 1785.7310100703473,
+        "original_T_feasible": true,
+        "available_seconds": 2.764999999664724,
+        "sequence": 2
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 8663,
+          "columns": 2402,
+          "nonzeros": 48694,
+          "gamma": [
+            0,
+            0.8299634131717752
+          ],
+          "cutoff": 0.8299634131717752,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 2294,
+          "native_seconds": 0.11
+        },
+        {
+          "call": 2,
+          "rows": 8663,
+          "columns": 2402,
+          "nonzeros": 48694,
+          "gamma": [
+            0,
+            0.4149817065858876
+          ],
+          "cutoff": 0.8299634131717752,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 2335,
+          "native_seconds": 0.12
+        },
+        {
+          "call": 3,
+          "rows": 8663,
+          "columns": 2402,
+          "nonzeros": 48922,
+          "gamma": [
+            0.4149817065858876,
+            0.8299634131717752
+          ],
+          "cutoff": 0.8299634131717752,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 1547,
+          "native_seconds": 0.07
+        },
+        {
+          "call": 4,
+          "rows": 8663,
+          "columns": 2402,
+          "nonzeros": 48694,
+          "gamma": [
+            0,
+            0.2074908532929438
+          ],
+          "cutoff": 0.8299634131717752,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 2761,
+          "native_seconds": 0.15
+        },
+        {
+          "call": 5,
+          "rows": 8663,
+          "columns": 2402,
+          "nonzeros": 48922,
+          "gamma": [
+            0.2074908532929438,
+            0.4149817065858876
+          ],
+          "cutoff": 0.8299634131717752,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 2295,
+          "native_seconds": 0.11
+        },
+        {
+          "call": 6,
+          "rows": 8663,
+          "columns": 2402,
+          "nonzeros": 48694,
+          "gamma": [
+            0,
+            0.4149817065858876
+          ],
+          "cutoff": 0.8299634131717752,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 6.075781e-01, 1966 iterations, 0.08 seconds (0.20 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 1,
+          "simplex_iterations": 1966,
+          "native_seconds": 0.28,
+          "native_work": 0.54
+        },
+        {
+          "call": 7,
+          "rows": 8663,
+          "columns": 2402,
+          "nonzeros": 48694,
+          "gamma": [
+            0,
+            0.4149817065858876
+          ],
+          "cutoff": 0.8299634131717752,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 16587,
+          "simplex_iterations": 1691575,
+          "native_seconds": 293.12,
+          "native_work": 578.87
+        }
+      ]
+    },
+    {
+      "id": "D4",
+      "arm": "P-GRB",
+      "wall_seconds": 297.07800000021234,
+      "endpoint": {
+        "U": 0.506343307565206,
+        "L": 0.19448381648991847,
+        "gap": 0.3118594910752875,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      },
+      "phase_events": [],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "",
+          "lower_g": 0,
+          "upper_g": 0.9166666666666666,
+          "cutoff": 0,
+          "model_sha256": "298d8b5e689f4ec563659219a784f8719c9121715a116993c69c40a875d73a15",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.506343307565206,
+        "G": 0.17721566970978195,
+        "P": 2.194184252369493,
+        "stations": 10,
+        "pickup": 29,
+        "drop": 29,
+        "maximum_duration": 2389.694072063803,
+        "original_T_feasible": true
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 2086,
+          "columns": 933,
+          "nonzeros": 9069,
+          "gamma": [
+            0,
+            0.9166666666666666
+          ],
+          "cutoff": 0,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 3.892443e-02, 657 iterations, 0.02 seconds (0.03 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 85007,
+          "simplex_iterations": 4136281,
+          "native_seconds": 296.94,
+          "native_work": 498.01
+        }
+      ]
+    },
+    {
+      "id": "D4",
+      "arm": "BDS-C",
+      "wall_seconds": 52.92200000025332,
+      "endpoint": {
+        "U": 0.506343307565206,
+        "L": 0.5063433075652056,
+        "gap": 3.3306690738754696e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "phase_events": [
+        {
+          "sequence": "4",
+          "process_seconds": "0.0031700999999999999",
+          "event": "hga_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "299.99682999999999",
+          "work_deadline_remaining_seconds": "296.99682990000002",
+          "detail": "label=primary_hga;finite_random_seed_decoded_descent"
+        },
+        {
+          "sequence": "5",
+          "process_seconds": "0.0514096",
+          "event": "decoded_descent_complete",
+          "status": "complete",
+          "nominal_deadline_remaining_seconds": "299.94859050000002",
+          "work_deadline_remaining_seconds": "296.94859050000002",
+          "detail": "label=primary_hga;generations=0;no_improve=0;completed_seeds=25"
+        },
+        {
+          "sequence": "7",
+          "process_seconds": "0.053480899999999998",
+          "event": "exact_phase_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "299.94651909999999",
+          "work_deadline_remaining_seconds": "296.94651909999999",
+          "detail": "arm=round31-nonblocking-native-bound"
+        }
+      ],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.506422789224163,
+          "cutoff": 0.506422789224163,
+          "model_sha256": "ad8448aa1b12ca644c8aead017172fb431321b134a05f82bce9c79f7a662577e",
+          "native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.2532113946120815,
+          "cutoff": 0.506422789224163,
+          "model_sha256": "0d051e94fe06e0143fbc2cccdcfeb135a75466ac97e8c8bb86401953dcc7b175",
+          "native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "lower_g": 0.2532113946120815,
+          "upper_g": 0.506422789224163,
+          "cutoff": 0.506422789224163,
+          "model_sha256": "b576f837f3e287f89f44467bafe4b828f9fac890249ebc6f4227c59d4cee27cc",
+          "native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.506422789224163,
+          "cutoff": 0.506422789224163,
+          "model_sha256": "ad8448aa1b12ca644c8aead017172fb431321b134a05f82bce9c79f7a662577e",
+          "native_preconditions": 1
+        },
+        {
+          "call": 5,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.506422789224163,
+          "cutoff": 0.506422789224163,
+          "model_sha256": "ad8448aa1b12ca644c8aead017172fb431321b134a05f82bce9c79f7a662577e",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.506343307565206,
+        "G": 0.17721566970978195,
+        "P": 2.194184252369493,
+        "stations": 10,
+        "pickup": 29,
+        "drop": 29,
+        "maximum_duration": 2389.694072063803,
+        "original_T_feasible": true
+      },
+      "startup": {
+        "F": 0.506422789224163,
+        "G": 0.1810788634566511,
+        "P": 2.168959505116746,
+        "stations": 8,
+        "pickup": 29,
+        "drop": 29,
+        "maximum_duration": 2305.183129530976,
+        "original_T_feasible": true,
+        "available_seconds": 0.11000000033527613,
+        "sequence": 2
+      },
+      "balanced_physical_audit": {
+        "passed": true,
+        "initial": {
+          "F": 0.506422789224163,
+          "G": 0.1810788634566511,
+          "P": 2.168959505116746,
+          "stations": 8,
+          "pickup": 29,
+          "drop": 29,
+          "maximum_duration": 2305.183129530976,
+          "original_T_feasible": true
+        },
+        "final": {
+          "F": 0.506422789224163,
+          "G": 0.1810788634566511,
+          "P": 2.168959505116746,
+          "stations": 8,
+          "pickup": 29,
+          "drop": 29,
+          "maximum_duration": 2305.183129530976,
+          "original_T_feasible": true
+        },
+        "result": {
+          "F": 0.506422789224163,
+          "neutral": 0,
+          "insertions": 0,
+          "quantities": 0,
+          "exhausted": true,
+          "deadline": false,
+          "zero": false,
+          "verification_failed": false,
+          "optimizer_calls": 0
+        },
+        "transitions": [
+          {
+            "iteration": 0,
+            "closure": {
+              "initial_UB": 0.506422789224163,
+              "final_UB": 0.506422789224163,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 400,
+              "insertion_quantities": 0,
+              "quantity_feasible": 85,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 7.569999999999799e-05,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "balanced_oracle": {
+              "balanced_blocks": 3,
+              "placements": 22,
+              "feasible": 0,
+              "improving": 0,
+              "best_key": null,
+              "best_potential": null,
+              "current_potential": [
+                2305.183129530976,
+                2292.3045285438257,
+                2280.021671621833
+              ]
+            }
+          }
+        ],
+        "neutral_states": 0,
+        "strict_moves": 0,
+        "unique_recorded_route_states": 1,
+        "offline_seconds": 0.0028875996358692646,
+        "optimizer_calls": 0,
+        "scope": "Fixed-witness diagnosis, not full algorithm performance"
+      },
+      "outer_handoff": {
+        "final_route_match": true,
+        "initial_route_match": true
+      },
+      "descent": {
+        "completed_seeds": 25,
+        "passes": 107,
+        "decoded_checks": 385,
+        "cross_route_checks": 131,
+        "accepted_cross_route": 46,
+        "extra_seed_checks": 3,
+        "extra_seed_moves": 0,
+        "extra_seed_cross_route_neighbors": 0,
+        "extra_seed_cross_route_checks": 0,
+        "extra_seed_cross_route_moves": 0
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 4119,
+          "columns": 1698,
+          "nonzeros": 19868,
+          "gamma": [
+            0,
+            0.506422789224163
+          ],
+          "cutoff": 0.506422789224163,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 1110,
+          "native_seconds": 0.04
+        },
+        {
+          "call": 2,
+          "rows": 4119,
+          "columns": 1698,
+          "nonzeros": 19868,
+          "gamma": [
+            0,
+            0.2532113946120815
+          ],
+          "cutoff": 0.506422789224163,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 867,
+          "native_seconds": 0.03
+        },
+        {
+          "call": 3,
+          "rows": 4119,
+          "columns": 1698,
+          "nonzeros": 20094,
+          "gamma": [
+            0.2532113946120815,
+            0.506422789224163
+          ],
+          "cutoff": 0.506422789224163,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 1627,
+          "native_seconds": 0.06
+        },
+        {
+          "call": 4,
+          "rows": 4119,
+          "columns": 1698,
+          "nonzeros": 19868,
+          "gamma": [
+            0,
+            0.506422789224163
+          ],
+          "cutoff": 0.506422789224163,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 1.181681e-01, 1957 iterations, 0.08 seconds (0.20 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 1,
+          "simplex_iterations": 1957,
+          "native_seconds": 0.16,
+          "native_work": 0.32
+        },
+        {
+          "call": 5,
+          "rows": 4119,
+          "columns": 1698,
+          "nonzeros": 19868,
+          "gamma": [
+            0,
+            0.506422789224163
+          ],
+          "cutoff": 0.506422789224163,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 1.181681e-01, 1957 iterations, 0.08 seconds (0.20 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 12951,
+          "simplex_iterations": 397563,
+          "native_seconds": 52.29,
+          "native_work": 75.25
+        }
+      ]
+    },
+    {
+      "id": "D4",
+      "arm": "K1-R",
+      "wall_seconds": 135.17199999978766,
+      "endpoint": {
+        "U": 0.506343307565206,
+        "L": 0.5063433073265636,
+        "gap": 2.3864232812087494e-10,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "phase_events": [
+        {
+          "sequence": "4",
+          "process_seconds": "0.0024827",
+          "event": "hga_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "299.99751739999999",
+          "work_deadline_remaining_seconds": "296.99751730000003",
+          "detail": "label=primary_hga;native_generation_stagnation_hga"
+        },
+        {
+          "sequence": "5",
+          "process_seconds": "1.9586220999999999",
+          "event": "hga_generation_loop_complete",
+          "status": "complete",
+          "nominal_deadline_remaining_seconds": "298.0413782",
+          "work_deadline_remaining_seconds": "295.04137800000001",
+          "detail": "label=primary_hga;generations=2011;no_improve=2000"
+        },
+        {
+          "sequence": "7",
+          "process_seconds": "1.963759",
+          "event": "exact_phase_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "298.03624100000002",
+          "work_deadline_remaining_seconds": "295.03624100000002",
+          "detail": "arm=round31-nonblocking-native-bound"
+        }
+      ],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.506422789224163,
+          "cutoff": 0.506422789224163,
+          "model_sha256": "0bdd0cbeec199780ca2bf7ad30938edd9f36f57f31e65f02df8c37ea8f5afa58",
+          "native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.2532113946120815,
+          "cutoff": 0.506422789224163,
+          "model_sha256": "e3fb9fd505da02ef07042cf18065690398950281cb9f48ea968e6cfc21b89fe5",
+          "native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "lower_g": 0.2532113946120815,
+          "upper_g": 0.506422789224163,
+          "cutoff": 0.506422789224163,
+          "model_sha256": "356fa1ab2b09ef76b990e9e1f2b92d17ded2fcb3c10ff70f387c99fb1b60836d",
+          "native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.506422789224163,
+          "cutoff": 0.506422789224163,
+          "model_sha256": "0bdd0cbeec199780ca2bf7ad30938edd9f36f57f31e65f02df8c37ea8f5afa58",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.506343307565206,
+        "G": 0.17721566970978195,
+        "P": 2.194184252369493,
+        "stations": 10,
+        "pickup": 29,
+        "drop": 29,
+        "maximum_duration": 2389.694072063803,
+        "original_T_feasible": true
+      },
+      "startup": {
+        "F": 0.506422789224163,
+        "G": 0.1810788634566511,
+        "P": 2.168959505116746,
+        "stations": 8,
+        "pickup": 29,
+        "drop": 29,
+        "maximum_duration": 2366.030638810974,
+        "original_T_feasible": true,
+        "available_seconds": 2.014999999664724,
+        "sequence": 2
+      },
+      "native_cost_attribution": [
+        {
+          "call": 1,
+          "rows": 4136,
+          "columns": 1404,
+          "nonzeros": 19505,
+          "gamma": [
+            0,
+            0.506422789224163
+          ],
+          "cutoff": 0.506422789224163,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 926,
+          "native_seconds": 0.03
+        },
+        {
+          "call": 2,
+          "rows": 4136,
+          "columns": 1404,
+          "nonzeros": 19505,
+          "gamma": [
+            0,
+            0.2532113946120815
+          ],
+          "cutoff": 0.506422789224163,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 1569,
+          "native_seconds": 0.05
+        },
+        {
+          "call": 3,
+          "rows": 4136,
+          "columns": 1404,
+          "nonzeros": 19651,
+          "gamma": [
+            0.2532113946120815,
+            0.506422789224163
+          ],
+          "cutoff": 0.506422789224163,
+          "root_relaxation_lines": [],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "lp_iterations": 1746,
+          "native_seconds": 0.07
+        },
+        {
+          "call": 4,
+          "rows": 4136,
+          "columns": 1404,
+          "nonzeros": 19505,
+          "gamma": [
+            0,
+            0.506422789224163
+          ],
+          "cutoff": 0.506422789224163,
+          "root_relaxation_lines": [
+            "Root relaxation: objective 1.100696e-01, 1599 iterations, 0.06 seconds (0.15 work units)"
+          ],
+          "scope": "Rounded per-call native-log attribution; not a replacement for complete physical/global endpoint or whole-process cost",
+          "nodes": 24983,
+          "simplex_iterations": 1158985,
+          "native_seconds": 132.82,
+          "native_work": 208.58
+        }
+      ]
+    }
+  ],
+  "start_decisions": [
+    {
+      "id": "E7",
+      "arm": "BDS-C",
+      "call": 4,
+      "eligible": true,
+      "native_log_accepted": true,
+      "metadata": "results\\unified_exact_round79\\campaign\\local_raw\\02_E7_BDS-C\\external\\native_logs\\L0_terminal_mip.gurobi.log.round68.start.json",
+      "metadata_sha256": "2b9594042ca9bb98f1dadbed63045b8cd8749f94ede51340a47d2d8c1e3cf9b6",
+      "witness_sha256": "a17361fd60bbcd3b221040f2ab0816ca1014ded072762cb8b43cb1b63a43e202",
+      "independent_actual_vector": {
+        "actual_columns": 1304,
+        "actual_rows": 3089,
+        "maximum_row_violation": 2.7755575615628914e-16,
+        "independent_mapping_maximum_difference": 5.551115123125783e-17,
+        "readback_maximum_difference": 0.0,
+        "actual_objective_error": 0.0,
+        "actual_full_vector_valid": true
+      },
+      "source": "round68_existing_0",
+      "leaf": "L0",
+      "model_sha256": "135b3fc4e6b50573eeada79b0ab85c27a3180afa38e85e0beb353560a88ea1b0",
+      "retained_model": true,
+      "status": "accepted_by_native_log",
+      "mapping_complete": true,
+      "rows_valid": true,
+      "checked_rows": 3089,
+      "maximum_row_violation": 0,
+      "objective_valid": true,
+      "objective": 0.020865507671712715,
+      "submitted": true,
+      "readback_valid": true,
+      "exact_vector_observed_in_mipsol": true,
+      "integer_vector_observed_in_mipsol": true,
+      "mapping_validation_submission_seconds": 0.0017492,
+      "native_deadline_remaining_at_optimize": 116.7347857
+    },
+    {
+      "id": "S12",
+      "arm": "BDS-C",
+      "call": 4,
+      "eligible": true,
+      "native_log_accepted": true,
+      "metadata": "results\\unified_exact_round79\\campaign\\local_raw\\05_S12_BDS-C\\external\\native_logs\\L0_terminal_mip.gurobi.log.round68.start.json",
+      "metadata_sha256": "f0461e03e0a651e5a63feb435bfeb3c32c159f33c844e3501d04765195f20c5c",
+      "witness_sha256": "af1a591e03c65fd81b96c4fe52b92978f09e34b9a2c2108ff807fc838225fd4b",
+      "independent_actual_vector": {
+        "actual_columns": 1098,
+        "actual_rows": 2241,
+        "maximum_row_violation": 1.4988010832439613e-15,
+        "independent_mapping_maximum_difference": 4.440892098500626e-16,
+        "readback_maximum_difference": 0.0,
+        "actual_objective_error": 6.938893903907228e-18,
+        "actual_full_vector_valid": true
+      },
+      "source": "round68_existing_0",
+      "leaf": "L0",
+      "model_sha256": "35cad8bae4d941fc80ea5dd41ae5fa0c5f13a61f118a01b6a0db0f1e5e6f4dcf",
+      "retained_model": true,
+      "status": "accepted_by_native_log",
+      "mapping_complete": true,
+      "rows_valid": true,
+      "checked_rows": 2241,
+      "maximum_row_violation": 0,
+      "objective_valid": true,
+      "objective": 0.05856397312578515,
+      "submitted": true,
+      "readback_valid": true,
+      "exact_vector_observed_in_mipsol": true,
+      "integer_vector_observed_in_mipsol": true,
+      "mapping_validation_submission_seconds": 0.0016441,
+      "native_deadline_remaining_at_optimize": 116.4105409
+    },
+    {
+      "id": "N12",
+      "arm": "BDS-C",
+      "call": 4,
+      "eligible": true,
+      "native_log_accepted": true,
+      "metadata": "results\\unified_exact_round79\\campaign\\local_raw\\08_N12_BDS-C\\external\\native_logs\\L0_terminal_mip.gurobi.log.round68.start.json",
+      "metadata_sha256": "75c083e019b7e137bcd518a27bc2687b4e8a65b3f1da1d19497511f641d0db19",
+      "witness_sha256": "b8aa4de5c408c5bf855c1394d5996b891ab66695db0fc5eda8ab2f6b585f725b",
+      "independent_actual_vector": {
+        "actual_columns": 1038,
+        "actual_rows": 2179,
+        "maximum_row_violation": 6.661338147750939e-15,
+        "independent_mapping_maximum_difference": 1.4210854715202004e-14,
+        "readback_maximum_difference": 0.0,
+        "actual_objective_error": 0.0,
+        "actual_full_vector_valid": true
+      },
+      "source": "round68_existing_0",
+      "leaf": "L0",
+      "model_sha256": "ead9aa6ff9d67ccf0246fbac70bfc27a08885c2ead0d8c2ea68ad3dc08d02f40",
+      "retained_model": true,
+      "status": "accepted_by_native_log",
+      "mapping_complete": true,
+      "rows_valid": true,
+      "checked_rows": 2179,
+      "maximum_row_violation": 0,
+      "objective_valid": true,
+      "objective": 0.8798356173330036,
+      "submitted": true,
+      "readback_valid": true,
+      "exact_vector_observed_in_mipsol": true,
+      "integer_vector_observed_in_mipsol": true,
+      "mapping_validation_submission_seconds": 0.0016974,
+      "native_deadline_remaining_at_optimize": 116.80784009999999
+    },
+    {
+      "id": "D3",
+      "arm": "BDS-C",
+      "call": 4,
+      "eligible": true,
+      "native_log_accepted": true,
+      "metadata": "results\\unified_exact_round79\\campaign\\local_raw\\11_D3_BDS-C\\external\\native_logs\\L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "metadata_sha256": "b4fd06ff907d662fa8af511a9ff982e0eca2bf8ab896efe0ffe8956c5ab73994",
+      "witness_sha256": "cdbed3cb1a079fd10556ba37ee07bd4c5852616904802ca3412aea9c8a9f1a94",
+      "independent_actual_vector": {
+        "actual_columns": 1884,
+        "actual_rows": 4306,
+        "maximum_row_violation": 3.3306690738754696e-16,
+        "independent_mapping_maximum_difference": 0.0,
+        "readback_maximum_difference": 0.0,
+        "actual_objective_error": 1.3877787807814457e-17,
+        "actual_full_vector_valid": true
+      },
+      "source": "round68_existing_0",
+      "leaf": "L0",
+      "model_sha256": "66e5027dc8cff64e0e62c001dd0d233831d4cb3812b1e75c97759f4bb36dca70",
+      "retained_model": true,
+      "status": "accepted_by_native_log",
+      "mapping_complete": true,
+      "rows_valid": true,
+      "checked_rows": 4306,
+      "maximum_row_violation": 0,
+      "objective_valid": true,
+      "objective": 0.0781153026105612,
+      "submitted": true,
+      "readback_valid": true,
+      "exact_vector_observed_in_mipsol": true,
+      "integer_vector_observed_in_mipsol": true,
+      "mapping_validation_submission_seconds": 0.0023714,
+      "native_deadline_remaining_at_optimize": 296.673235
+    },
+    {
+      "id": "D3",
+      "arm": "BDS-C",
+      "call": 5,
+      "eligible": true,
+      "native_log_accepted": true,
+      "metadata": "results\\unified_exact_round79\\campaign\\local_raw\\11_D3_BDS-C\\external\\native_logs\\L0_terminal_mip.gurobi.log.round68.start.json",
+      "metadata_sha256": "8885c2038d2044384a66b3f0d928d2c223b69fe3b23eefc5e5d55e08c575d473",
+      "witness_sha256": "cdbed3cb1a079fd10556ba37ee07bd4c5852616904802ca3412aea9c8a9f1a94",
+      "independent_actual_vector": {
+        "actual_columns": 1884,
+        "actual_rows": 4306,
+        "maximum_row_violation": 3.3306690738754696e-16,
+        "independent_mapping_maximum_difference": 0.0,
+        "readback_maximum_difference": 0.0,
+        "actual_objective_error": 1.3877787807814457e-17,
+        "actual_full_vector_valid": true
+      },
+      "source": "round68_existing_1",
+      "leaf": "L0",
+      "model_sha256": "66e5027dc8cff64e0e62c001dd0d233831d4cb3812b1e75c97759f4bb36dca70",
+      "retained_model": true,
+      "status": "accepted_by_native_log",
+      "mapping_complete": true,
+      "rows_valid": true,
+      "checked_rows": 4306,
+      "maximum_row_violation": 0,
+      "objective_valid": true,
+      "objective": 0.0781153026105612,
+      "submitted": true,
+      "readback_valid": true,
+      "exact_vector_observed_in_mipsol": true,
+      "integer_vector_observed_in_mipsol": true,
+      "mapping_validation_submission_seconds": 0.0028459,
+      "native_deadline_remaining_at_optimize": 296.5013069
+    },
+    {
+      "id": "C2",
+      "arm": "BDS-C",
+      "call": 6,
+      "eligible": true,
+      "native_log_accepted": true,
+      "metadata": "results\\unified_exact_round79\\campaign\\local_raw\\14_C2_BDS-C\\external\\native_logs\\L0.0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "metadata_sha256": "07c2d5d4b65cc268829ff162d25daf8ab08a3ec5671d2a84965f2f7b5575a978",
+      "witness_sha256": "df1ab7c409ab6e3937252b7c784e2d6edc7fde78239fed70719d4165113f3a3e",
+      "independent_actual_vector": {
+        "actual_columns": 2794,
+        "actual_rows": 8575,
+        "maximum_row_violation": 2.220446049250313e-16,
+        "independent_mapping_maximum_difference": 1.4210854715202004e-14,
+        "readback_maximum_difference": 0.0,
+        "actual_objective_error": 0.0,
+        "actual_full_vector_valid": true
+      },
+      "source": "round68_existing_0",
+      "leaf": "L0.0",
+      "model_sha256": "6dba2ca36dd13378e14afbda09ce8a657cf5bf4af3d5be629a64ca427da040d3",
+      "retained_model": true,
+      "status": "accepted_by_native_log",
+      "mapping_complete": true,
+      "rows_valid": true,
+      "checked_rows": 8575,
+      "maximum_row_violation": 0,
+      "objective_valid": true,
+      "objective": 0.837091467554702,
+      "submitted": true,
+      "readback_valid": true,
+      "exact_vector_observed_in_mipsol": true,
+      "integer_vector_observed_in_mipsol": true,
+      "mapping_validation_submission_seconds": 0.0038192,
+      "native_deadline_remaining_at_optimize": 295.6506396
+    },
+    {
+      "id": "C2",
+      "arm": "BDS-C",
+      "call": 7,
+      "eligible": true,
+      "native_log_accepted": true,
+      "metadata": "results\\unified_exact_round79\\campaign\\local_raw\\14_C2_BDS-C\\external\\native_logs\\L0.0_terminal_mip.gurobi.log.round68.start.json",
+      "metadata_sha256": "5e8fd30e551adf5ce3d07729dfae93fbcff8767c35199b041a68d80b4b8f9e9b",
+      "witness_sha256": "df1ab7c409ab6e3937252b7c784e2d6edc7fde78239fed70719d4165113f3a3e",
+      "independent_actual_vector": {
+        "actual_columns": 2794,
+        "actual_rows": 8575,
+        "maximum_row_violation": 2.220446049250313e-16,
+        "independent_mapping_maximum_difference": 1.4210854715202004e-14,
+        "readback_maximum_difference": 0.0,
+        "actual_objective_error": 0.0,
+        "actual_full_vector_valid": true
+      },
+      "source": "round68_existing_1",
+      "leaf": "L0.0",
+      "model_sha256": "6dba2ca36dd13378e14afbda09ce8a657cf5bf4af3d5be629a64ca427da040d3",
+      "retained_model": true,
+      "status": "accepted_by_native_log",
+      "mapping_complete": true,
+      "rows_valid": true,
+      "checked_rows": 8575,
+      "maximum_row_violation": 0,
+      "objective_valid": true,
+      "objective": 0.837091467554702,
+      "submitted": true,
+      "readback_valid": true,
+      "exact_vector_observed_in_mipsol": true,
+      "integer_vector_observed_in_mipsol": true,
+      "mapping_validation_submission_seconds": 0.0044542,
+      "native_deadline_remaining_at_optimize": 295.34793329999997
+    },
+    {
+      "id": "D4",
+      "arm": "BDS-C",
+      "call": 4,
+      "eligible": true,
+      "native_log_accepted": true,
+      "metadata": "results\\unified_exact_round79\\campaign\\local_raw\\17_D4_BDS-C\\external\\native_logs\\L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "metadata_sha256": "51aa3d61c622e67fdf3c40bd94e10159c6dbb81499343fab6d358685e2764a46",
+      "witness_sha256": "51b2b4c1951c39a147772b44add95fc458313d529a699bd5059ee13cfa0ebb58",
+      "independent_actual_vector": {
+        "actual_columns": 1698,
+        "actual_rows": 4119,
+        "maximum_row_violation": 5.995204332975845e-15,
+        "independent_mapping_maximum_difference": 0.0,
+        "readback_maximum_difference": 0.0,
+        "actual_objective_error": 1.1102230246251565e-16,
+        "actual_full_vector_valid": true
+      },
+      "source": "round68_existing_0",
+      "leaf": "L0",
+      "model_sha256": "ad8448aa1b12ca644c8aead017172fb431321b134a05f82bce9c79f7a662577e",
+      "retained_model": true,
+      "status": "accepted_by_native_log",
+      "mapping_complete": true,
+      "rows_valid": true,
+      "checked_rows": 4119,
+      "maximum_row_violation": 0,
+      "objective_valid": true,
+      "objective": 0.506422789224163,
+      "submitted": true,
+      "readback_valid": true,
+      "exact_vector_observed_in_mipsol": true,
+      "integer_vector_observed_in_mipsol": true,
+      "mapping_validation_submission_seconds": 0.0022071,
+      "native_deadline_remaining_at_optimize": 296.61091070000003
+    },
+    {
+      "id": "D4",
+      "arm": "BDS-C",
+      "call": 5,
+      "eligible": true,
+      "native_log_accepted": true,
+      "metadata": "results\\unified_exact_round79\\campaign\\local_raw\\17_D4_BDS-C\\external\\native_logs\\L0_terminal_mip.gurobi.log.round68.start.json",
+      "metadata_sha256": "91ce2adc3c2cc471c8711ca7aad93b7ebb33536eebfa9ef6025ce997586517dd",
+      "witness_sha256": "51b2b4c1951c39a147772b44add95fc458313d529a699bd5059ee13cfa0ebb58",
+      "independent_actual_vector": {
+        "actual_columns": 1698,
+        "actual_rows": 4119,
+        "maximum_row_violation": 5.995204332975845e-15,
+        "independent_mapping_maximum_difference": 0.0,
+        "readback_maximum_difference": 0.0,
+        "actual_objective_error": 1.1102230246251565e-16,
+        "actual_full_vector_valid": true
+      },
+      "source": "round68_existing_1",
+      "leaf": "L0",
+      "model_sha256": "ad8448aa1b12ca644c8aead017172fb431321b134a05f82bce9c79f7a662577e",
+      "retained_model": true,
+      "status": "accepted_by_native_log",
+      "mapping_complete": true,
+      "rows_valid": true,
+      "checked_rows": 4119,
+      "maximum_row_violation": 0,
+      "objective_valid": true,
+      "objective": 0.506422789224163,
+      "submitted": true,
+      "readback_valid": true,
+      "exact_vector_observed_in_mipsol": true,
+      "integer_vector_observed_in_mipsol": true,
+      "mapping_validation_submission_seconds": 0.002703,
+      "native_deadline_remaining_at_optimize": 296.4388795
+    }
+  ],
+  "controls_checked": 12,
+  "all25_paths_match_available_prior_startup_screen": true,
+  "prior_startup_pairs_checked": 3,
+  "actual_Start_decisions": 9,
+  "eligible_Starts": 9,
+  "native_accepted_Starts": 9,
+  "optimizer_calls": 0,
+  "wall_seconds": 0.8508921000175178,
+  "script_sha256": "2f934e4b9bb2e5bec7151b042c735ad08815f7cc411a17823bbac2d02af6fef9",
+  "mapping_sha256": "557009f3d5aae925fa5fce88322e2651d016981f53e11c1b8d85d8c340343400",
+  "scope": "Independent retained submitted/readback vectors and native acceptance logs. No causal speed attribution from acceptance alone; pending interrupted observer flags are not finalized."
+}

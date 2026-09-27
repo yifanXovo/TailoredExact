@@ -22,19 +22,7 @@ constexpr std::array<std::uint32_t, 64> k = {
 std::uint32_t rr(std::uint32_t v, unsigned n) {
     return (v >> n) | (v << (32u - n));
 }
-} // namespace
-
-std::string fileSha256(const std::filesystem::path& path) {
-    std::ifstream in(path, std::ios::binary);
-    if (!in) return {};
-    std::vector<std::uint8_t> bytes;
-    std::array<char, 65536> buffer{};
-    while (in) {
-        in.read(buffer.data(), static_cast<std::streamsize>(buffer.size()));
-        for (std::streamsize i = 0; i < in.gcount(); ++i) {
-            bytes.push_back(static_cast<std::uint8_t>(buffer[static_cast<std::size_t>(i)]));
-        }
-    }
+std::string bytesSha256(std::vector<std::uint8_t> bytes) {
     const std::uint64_t bits = static_cast<std::uint64_t>(bytes.size()) * 8u;
     bytes.push_back(0x80u);
     while (bytes.size() % 64u != 56u) bytes.push_back(0u);
@@ -75,5 +63,24 @@ std::string fileSha256(const std::filesystem::path& path) {
     out << std::hex << std::setfill('0');
     for (auto word : h) out << std::setw(8) << word;
     return out.str();
+}
+} // namespace
+
+std::string textSha256(const std::string& text) {
+    return bytesSha256(std::vector<std::uint8_t>(text.begin(), text.end()));
+}
+
+std::string fileSha256(const std::filesystem::path& path) {
+    std::ifstream in(path, std::ios::binary);
+    if (!in) return {};
+    std::vector<std::uint8_t> bytes;
+    std::array<char, 65536> buffer{};
+    while (in) {
+        in.read(buffer.data(), static_cast<std::streamsize>(buffer.size()));
+        for (std::streamsize i = 0; i < in.gcount(); ++i) {
+            bytes.push_back(static_cast<std::uint8_t>(buffer[static_cast<std::size_t>(i)]));
+        }
+    }
+    return bytesSha256(std::move(bytes));
 }
 } // namespace ebrp

@@ -1,0 +1,13 @@
+{
+  "schema": "round55-penalty-cover-dp-protocol-v1",
+  "conditional": true,
+  "opening_gate": "VD-J or equivalent passes fixed-interval confirmation",
+  "budget": "sum c_i_y s_i_y <= (U_bar-epsilon-l)/lambda_P for lambda_P>0",
+  "cover": "at most one state per station; sum c_i_y>B; sum s_i_y<=|C|-1",
+  "separation": "exact DP, exact shortest path, or exact zero-gap MIP; no unsafe rounding",
+  "PC1": "one most-violated inclusion-minimal cover, one reoptimization",
+  "PC2": "single-cut exact nonduplicate closure until no strict violation",
+  "callback": false,
+  "PreCrush_change": false,
+  "offline_entry": "strict violations in at least two structural roles"
+}

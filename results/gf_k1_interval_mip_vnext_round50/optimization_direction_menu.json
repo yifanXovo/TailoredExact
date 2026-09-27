@@ -1,0 +1,46 @@
+{
+  "max_accepted_cut_formulation_changes": 2,
+  "max_candidates_per_iteration": 3,
+  "ordered_families": [
+    {
+      "candidates": [
+        "B1 primitive-first",
+        "B2 route-first",
+        "B3 operation-first"
+      ],
+      "family": "tailored_branching",
+      "iteration": 1,
+      "mandatory": true
+    },
+    {
+      "candidates": [
+        "C1 duplicate/dominated elimination",
+        "C2 one exact delayed separator",
+        "C3 one proved tightening",
+        "C4 one defect-specific proved cut"
+      ],
+      "family": "cut_formulation_management",
+      "iteration": 2,
+      "mandatory": true
+    },
+    {
+      "candidates": [
+        "one exact symmetry family",
+        "one exact numerical/formulation strengthening"
+      ],
+      "family": "symmetry_or_numerical",
+      "iteration": 3,
+      "mandatory": false
+    },
+    {
+      "candidates": [
+        "R1 exact in-memory LP-to-MIP promotion"
+      ],
+      "family": "model_basis_reuse",
+      "iteration": 4,
+      "mandatory": false
+    }
+  ],
+  "post_confirmation_change_forbidden": true,
+  "schema": "round50-optimization-direction-menu-v1"
+}

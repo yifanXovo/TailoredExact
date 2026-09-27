@@ -1,0 +1,44 @@
+{
+  "claims": {
+    "small_material": true,
+    "v20_supported": false,
+    "v50_supported": false
+  },
+  "final_algorithm_classification": "validated_k4_adaptive_midpoint",
+  "holdout": {
+    "disposition": "passed_small_holdout",
+    "material_time_gmean": 0.43560827175642713,
+    "material_work_gmean": 0.3917714292678188
+  },
+  "no_adaptive_promoted": false,
+  "point_classification": "midpoint_not_improved",
+  "preset": "paper-gf-adaptive-gamma-veto",
+  "scale_qualification": "complex_mixed",
+  "schema": "round45-final-decision-v1",
+  "selected_point": {
+    "formula": "(a+b)/2",
+    "parametric_promoted": false,
+    "rule": "midpoint"
+  },
+  "selected_timing": {
+    "K0": 4,
+    "envelope_injection": "all",
+    "envelope_scope": "parent",
+    "formula": "old_C6_split AND Gamma_sum >= rho_gamma",
+    "lookahead": "frontier-d2",
+    "rho_gamma": 0.012
+  },
+  "timing_classification": "validated_adaptive_timing",
+  "v20": {
+    "disposition": "targeted_mixed_300s_screen_not_full_panel_qualified"
+  },
+  "v50": {
+    "disposition": "targeted_capped_300s_screen_not_qualified"
+  },
+  "validated_default_preserved": "C6-HGA-FULL K0=4 rho=0.01",
+  "validation": {
+    "material_time_gmean": 0.8830082330354102,
+    "material_work_gmean": 0.8921479860377658,
+    "passed": true
+  }
+}

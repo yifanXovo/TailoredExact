@@ -1,0 +1,24 @@
+{
+  "all_rows_same_frozen_executable": true,
+  "development_instances": 10,
+  "evidence_rows": 20,
+  "executable_sha256": "6d96a7c580b8af81cbbb50fba3a5ebece9b0873cb79ad4a4d592d153d6a97040",
+  "new_exact_rows": 8,
+  "reason": "Single complete affine generation is selected over the constant cut by the frozen certificate/gap/Work order on development-10.",
+  "reused_exact_mechanism_rows": 12,
+  "round_id": 43,
+  "schema": "round43-stage2-final-envelope-selection-v1",
+  "selected_envelope_mode": "single",
+  "selected_exactly_one": true,
+  "selection_order": [
+    "hard correctness",
+    "certificate count",
+    "final gap",
+    "major severe-regression Work",
+    "strong-control Work",
+    "geometric mean Work",
+    "time",
+    "simplicity"
+  ],
+  "stage3_envelope_mode": "single"
+}

@@ -1,0 +1,8 @@
+sequence,process_seconds,event,status,nominal_deadline_remaining_seconds,work_deadline_remaining_seconds,detail
+0,0,"process_entry","start",119.9991007,116.9991007,"absolute process deadline origin"
+1,0.0010721999999999999,"instance_parsing_start","start",119.9989279,116.9989278,"reference/citibike443-regional-v1/instances/V12/cb443_V12_regional_r1_surplus_M01_Q30.txt"
+2,0.0018577000000000001,"instance_parsing_complete","complete",119.99814240000001,116.99814240000001,"instance=cb443_V12_regional_r1_surplus_M01_Q30.txt"
+3,0.022968499999999999,"plain_gurobi_optimize_launch","start",119.9770315,116.9770315,"absolute_work_remaining=116.977120"
+4,5.1562163999999999,"final_result_serialization_start","start",114.84378359999999,111.84378359999999,""
+5,5.1572066000000003,"final_result_serialization_complete","complete",114.8427935,111.8427935,""
+6,5.1572806,"process_exit","complete",114.84271939999999,111.84271939999999,"rc=0"

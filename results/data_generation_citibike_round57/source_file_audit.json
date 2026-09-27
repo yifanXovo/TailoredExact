@@ -1,0 +1,213 @@
+{
+  "alignment": {
+    "canonical_source_station_row_index": "zero-based",
+    "capacity_and_coordinate_parsed_row_counts_equal": true,
+    "independent_companion_mapping": {
+      "all_capacity_coordinate_pairs_match_companion": false,
+      "capacity_count": 443,
+      "companion_full_coordinate_count": 2322,
+      "companion_station_info_count": 2322,
+      "coordinate_count": 443,
+      "exact_coordinate_and_capacity_match_count": 438,
+      "exact_coordinate_only_match_count": 4,
+      "mapping_issue_count": 5,
+      "mapping_issues": [
+        {
+          "capacity": 26,
+          "capacity_coordinate_match_count": 0,
+          "companion_capacity": 27,
+          "coordinate": [
+            586671.276,
+            4504339.715
+          ],
+          "coordinate_match_count": 1,
+          "issue": "exact_coordinate_capacity_snapshot_differs",
+          "source_station_row_index": 174
+        },
+        {
+          "capacity": 55,
+          "capacity_coordinate_match_count": 0,
+          "companion_capacity": 43,
+          "coordinate": [
+            587232.282,
+            4505534.946
+          ],
+          "coordinate_match_count": 1,
+          "issue": "exact_coordinate_capacity_snapshot_differs",
+          "source_station_row_index": 256
+        },
+        {
+          "capacity": 15,
+          "capacity_coordinate_match_count": 0,
+          "companion_capacity": 23,
+          "coordinate": [
+            587030.656,
+            4505736.608
+          ],
+          "coordinate_match_count": 1,
+          "issue": "exact_coordinate_capacity_snapshot_differs",
+          "source_station_row_index": 270
+        },
+        {
+          "capacity": 9,
+          "capacity_coordinate_match_count": 0,
+          "companion_capacity": 18,
+          "coordinate": [
+            593411.529,
+            4506103.941
+          ],
+          "coordinate_match_count": 1,
+          "issue": "exact_coordinate_capacity_snapshot_differs",
+          "source_station_row_index": 294
+        },
+        {
+          "capacity": 56,
+          "capacity_coordinate_match_count": 0,
+          "companion_capacity": null,
+          "coordinate": [
+            587475.273,
+            4507719.137
+          ],
+          "coordinate_match_count": 0,
+          "issue": "no_unique_companion_coordinate_match",
+          "source_station_row_index": 398
+        }
+      ],
+      "unmatched_companion_coordinate_count": 1
+    },
+    "legacy_code_basis": "CitiBikeSubsetGenerator.h:143-149 stores both parsed row i values at internal index i+1",
+    "legacy_internal_index": "one-based; source row i becomes internal index i+1",
+    "source_files_contain_station_ids_or_names": false,
+    "station_id_name_annotation_coverage": 442,
+    "station_ids_and_names_available_via_local_companion_mapping": false,
+    "status": "established_line_by_line_from_legacy_loader"
+  },
+  "authoritative_role": "primary trusted real-world station universe",
+  "capacity_source": {
+    "absolute_path": "E:\\codes\\Hybrid GA\\testdata\\CitiBike\\coords\\citibike_selected_443_capacity_list.txt",
+    "bytes": 1328,
+    "cr_count": 0,
+    "crlf_count": 0,
+    "duplicate_value_occurrences": 400,
+    "duplicate_values_are_expected": true,
+    "empty_row_count": 0,
+    "encoding": "ASCII (UTF-8-compatible; no BOM)",
+    "final_newline": false,
+    "frequency_distribution": {
+      "0": 1,
+      "15": 4,
+      "16": 1,
+      "17": 8,
+      "18": 11,
+      "19": 78,
+      "20": 40,
+      "21": 54,
+      "22": 20,
+      "23": 46,
+      "24": 28,
+      "25": 34,
+      "26": 4,
+      "27": 25,
+      "28": 5,
+      "29": 11,
+      "30": 14,
+      "31": 7,
+      "32": 3,
+      "33": 6,
+      "34": 1,
+      "35": 2,
+      "36": 4,
+      "37": 1,
+      "38": 1,
+      "39": 5,
+      "41": 2,
+      "42": 3,
+      "43": 2,
+      "46": 1,
+      "47": 2,
+      "49": 2,
+      "51": 5,
+      "53": 1,
+      "54": 1,
+      "55": 1,
+      "56": 2,
+      "57": 1,
+      "61": 1,
+      "62": 1,
+      "63": 2,
+      "75": 1,
+      "9": 1
+    },
+    "header_presence": "no header; one Python-style list literal",
+    "index_convention": "row position is canonical zero-based source_station_row_index; legacy loader maps row i to one-based internal index i+1",
+    "invalid_or_suspicious_capacities": [
+      {
+        "capacity": 0,
+        "issue": "zero_capacity_excluded_from_generated_service_station_pool",
+        "source_station_row_index": 195
+      }
+    ],
+    "lf_count": 0,
+    "malformed_value_count": 0,
+    "maximum": 75,
+    "mean": 24.794582392776523,
+    "median": 23,
+    "minimum": 0,
+    "newline_convention": "none",
+    "nonfinite_value_count": 0,
+    "parsed_row_count": 443,
+    "relative_path_within_legacy_project": "testdata/CitiBike/coords/citibike_selected_443_capacity_list.txt",
+    "sha256": "92ca9b05e66d1425bbc801be2dd9c0776b1a9707e62a60b821d941aa98625ae1",
+    "utf8_bom": false
+  },
+  "classification": "citibike443_source_valid_with_documented_issues",
+  "coordinate_source": {
+    "absolute_path": "E:\\codes\\Hybrid GA\\testdata\\CitiBike\\coords\\citibike_selected_443_coords_utm18n_meters.txt",
+    "bytes": 12850,
+    "consistent_with_utm18n_meters": true,
+    "coordinate_dimension": 2,
+    "coordinate_maximum": {
+      "x": 593883.533,
+      "y": 4508854.182
+    },
+    "coordinate_minimum": {
+      "x": 586430.902,
+      "y": 4500814.946
+    },
+    "coordinate_system_evidence": [
+      "The authoritative filename explicitly labels UTM 18N meters.",
+      "Easting/northing magnitudes are consistent with New York City in UTM zone 18N.",
+      "442 of 443 selected coordinates map exactly to the older local full-station coordinate list; 438 also match its capacity snapshot."
+    ],
+    "cr_count": 0,
+    "crlf_count": 0,
+    "duplicate_coordinate_count": 0,
+    "duplicate_coordinates": [],
+    "empty_or_malformed_data_row_count": 0,
+    "encoding": "ASCII (UTF-8-compatible; no BOM)",
+    "final_newline": true,
+    "geographic_bounding_box_utm18n_meters": {
+      "height_meters": 8039.235999999568,
+      "max_easting": 593883.533,
+      "max_northing": 4508854.182,
+      "min_easting": 586430.902,
+      "min_northing": 4500814.946,
+      "width_meters": 7452.631000000052
+    },
+    "header_presence": "no data header; '[' and ']' wrapper lines only",
+    "index_convention": "row position is canonical zero-based source_station_row_index; legacy loader maps row i to one-based internal index i+1",
+    "lf_count": 445,
+    "newline_convention": "LF",
+    "nonfinite_value_count": 0,
+    "parsed_row_count": 443,
+    "relative_path_within_legacy_project": "testdata/CitiBike/coords/citibike_selected_443_coords_utm18n_meters.txt",
+    "sha256": "c5fd892cc82e07332d4796edb0527182d9c60883acc9b87a5410dab569f990d1",
+    "syntactic_wrapper_line_count": 2,
+    "utf8_bom": false
+  },
+  "documented_issues": [
+    "One authoritative row has capacity zero. It remains in provenance but is deterministically ineligible as a generated service station.",
+    "The older companion station-info snapshot has four capacity differences at exact coordinate matches and lacks one authoritative coordinate; this limits annotations but does not affect authoritative capacity/coordinate row alignment."
+  ],
+  "schema": "citibike443-source-audit-v1"
+}

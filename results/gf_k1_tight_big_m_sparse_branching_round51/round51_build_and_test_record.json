@@ -1,0 +1,22 @@
+{
+  "algorithm_source_commit": "b32368b322d25fa4a543a4ac29fdaae5b4861b37",
+  "build_command": "cmake --build build/round51-m1 -j 4",
+  "build_directory": "build/round51-m1",
+  "build_status": "pass_100_percent_all_configured_targets",
+  "build_type": "Release",
+  "cmake": "3.30.5-msvc23",
+  "compiler": "g++ 14.2.0 MSYS2 UCRT64",
+  "compiler_warning": "pre-existing unused readAll helper in round27_paper_scheduling_tests.cpp",
+  "ctest_command": "ctest --test-dir build/round51-m1 --output-on-failure",
+  "ctest_failed": 0,
+  "ctest_passed": 29,
+  "ctest_status": "pass",
+  "ctest_total": 29,
+  "executable": "build/round51-m1/Round51IntervalMipExperiment.exe",
+  "executable_sha256": "b5e12cd23699d8ea2177381e3e154eb4c385873b4ec180699f71270c81803cd4",
+  "generator": "MinGW Makefiles",
+  "gurobi": "13.0.2 build v13.0.2rc1",
+  "gurobi_root": "D:/gurobi1302/win64",
+  "schema": "round51-final-build-and-test-record-v1",
+  "verification_repository_commit": "d0801c003f4f3311ac850c675e588f9bfac33882"
+}

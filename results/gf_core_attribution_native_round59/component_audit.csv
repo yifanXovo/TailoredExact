@@ -1,0 +1,11 @@
+component,api_supported,adapter_before_round59,stable_preset,runtime_evidence,history_and_limits
+dynamic_user_cuts,GRBcbcut,loaded_and_wired,off,Round53 C0-C5 counters and PreCrush readback,Round52 1705140 generated and 4 violated observations; Round53 mixed regression; current rerun required
+native_user_cut_pool,linear Lazy=-1,not_wired,off,Round59 writes and reads back -1 on proved additional rows only,No previous native pool comparison found; pool membership or active lifetime not fully exposed
+lazy_constraints,GRBcblazy,loaded_symbol_no_complete_BR P_feasibility_separator,off,no lazy submission enabled,Required feasibility rows remain explicit; symbol availability does not prove a working separator
+callback_solution,GRBcbsolution,not_loaded,off,local gurobi_c.h declaration; no runtime injection claim,Could support future lightweight verified route injection; no complete callback candidate mapping presently wired
+MIP_start,Start_attribute,loaded_and_mapped,off,verified routes mapped and attribute submitted only under explicit request,Strict cutoff can reject the incumbent itself; logs distinguish submitted and accepted
+variable_hints,VarHintVal_and_VarHintPri,not_wired,off,no runtime hints assigned,Generic setter availability is not a hints implementation
+branch_priority,BranchPriority,loaded_and_read_back,default_zero,Round50/51 per-variable assignment and readback,Rejected family tiers B1/B2/B3; A1 probing and A1R sparse alternatives were mixed/negative
+native_strategy_parameters,MIPFocus_and_others,core Auto/Seed/Threads/gaps wired,default_strategy,Round59 diagnostic MIPFocus=1 explicit write/readback,Only a bounded causal diagnostic; not a mathematical contribution
+model_continuation,repeat GRBoptimize on retained model,implemented_per_leaf,enabled_by_lifecycle,model object reuse and native log continuation classifications,Retaining model object does not guarantee native search-tree or basis continuation; epochs invalidate stale artifacts
+root_and_node_observation,MIPNODE_REL_when_OPTIMAL,Round53 separator path only,off,Round59 bounded samples at first node-count bands 0/1/10/100,Relaxation variable fractions are not branching decisions; no full local model or internal score claim

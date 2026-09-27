@@ -13,7 +13,9 @@ enum class ControllingLeafStatus {
     Fathomed,
     Empty,
     Invalid,
-    Replaced
+    Replaced,
+    TerminalReady,
+    Coalesced
 };
 
 std::string controllingLeafStatusName(ControllingLeafStatus status);
@@ -63,6 +65,13 @@ struct ControllingLeaf {
     std::string latest_checkpoint_rejection_reason = "not_seen";
     std::string latest_solver_final_status = "not_run";
     std::string closure_source;
+    std::string coalesced_block_id;
+    std::vector<std::string> coverage_member_ids;
+    bool single_child_contraction_parent = false;
+    bool strict_infeasible_half_verified = false;
+    double contracted_infeasible_gamma_L = 0.0;
+    double contracted_infeasible_gamma_U = 0.0;
+    std::string contraction_source;
     std::string instance_hash;
     std::string model_fingerprint;
     std::string formulation_profile;
@@ -99,6 +108,13 @@ public:
     bool splitLeafAtomically(const std::string& parent_id,
                              const std::vector<ControllingLeaf>& children,
                              std::string* reason = nullptr);
+    bool contractLeafAtomically(
+        const std::string& parent_id,
+        const ControllingLeaf& feasible_child,
+        double infeasible_gamma_L,
+        double infeasible_gamma_U,
+        bool strict_lp_infeasibility_verified,
+        std::string* reason = nullptr);
     bool mergeValidLowerBound(const std::string& leaf_id,
                               double value,
                               const std::string& source,
@@ -107,6 +123,14 @@ public:
                    ControllingLeafStatus status,
                    const std::string& closure_source,
                    std::string* reason = nullptr);
+    bool areExactLiveSiblings(const std::string& left_id,
+                              const std::string& right_id,
+                              std::string* reason = nullptr) const;
+    bool coalesceSiblingLeavesAtomically(
+        const std::string& left_id,
+        const std::string& right_id,
+        const ControllingLeaf& union_block,
+        std::string* reason = nullptr);
     bool recordAttempt(const std::string& leaf_id,
                        const ControllingLeafAttempt& attempt,
                        double elapsed_start_seconds,

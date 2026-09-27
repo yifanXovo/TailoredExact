@@ -1,0 +1,33 @@
+{
+  "number": 17,
+  "id": "D3",
+  "arm": "VD-S",
+  "cap": 300,
+  "wall": 84.18699999991804,
+  "UB": 0.04500155005562836,
+  "LB": 0.04500155005562828,
+  "signed_gap": 7.632783294297951e-17,
+  "certificate": true,
+  "physical": {
+    "F": 0.04500155005562836,
+    "G": 0.01922309854047684,
+    "P": 0.17185634343434344,
+    "stations": 11,
+    "pickup": 29,
+    "drop": 29,
+    "maximum_duration": 2784.4272564574003,
+    "original_T_feasible": true
+  },
+  "endpoint_settings_and_coverage_checks": true,
+  "independent_interval_union": {
+    "tree_rows": 1,
+    "roots": 1,
+    "replaced": 0,
+    "independently_recomputed_interval_union": true,
+    "initial_range_covers_G_le_verified_F": true
+  },
+  "optimize_calls": 5,
+  "result_sha256": "5e4175613df2fa1a598d1fc85e0de9d9f1e9c98c55216ba1fc24278dfe823fc4",
+  "script_sha256": "2d2784689b90bdd4af62e5ceb5a2cef687dd8a8fdae5e77114e9709a126514e8",
+  "scope": "Light completed endpoint only; full model, Start-vector and trajectory audits remain required at queue boundary"
+}

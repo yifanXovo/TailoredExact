@@ -1,0 +1,52 @@
+{
+  "K0": 4,
+  "S_AM": 0.07183192204076569,
+  "adaptive_rho": 0.20695046493240998,
+  "arm": "K4-r001",
+  "common_parent_state_exact_match": true,
+  "decision_sequence": 3,
+  "depth": 0,
+  "eta": 0.18781616757201625,
+  "g_L": 0.18781616757201625,
+  "g_L_raw": 0.18781616757201625,
+  "g_R": 0.5771011765455762,
+  "g_R_raw": 0.5771011765455762,
+  "gamma_L": 0.024734341307209723,
+  "gamma_U": 0.037101511960814584,
+  "instance": "round39_small_medium_V12_M3_Q30_slot08_seed1343324363",
+  "interval_id": "L2",
+  "left_child_bound": 0.03915480507982754,
+  "mu": 0.38245867205879625,
+  "parent_bound": 0.03780275497702865,
+  "parent_id": "",
+  "predecision_context": {
+    "controlling_interval": "L2",
+    "coverage_state_source": "Round46 interval_tree_events.csv and interval_coverage_ledger.csv",
+    "initial_K4_intervals": [
+      "L0",
+      "L1",
+      "L2",
+      "L3"
+    ],
+    "prior_decisions": [
+      "L0 exact-close",
+      "L1 exact-close"
+    ]
+  },
+  "proof_gap": 0.007198795078599704,
+  "rho": 0.01,
+  "rho001_action": "split",
+  "rho050_action": "native-target",
+  "rho050_source_ledger": "results/gf_c6_rho_k1_k4_screen_round46/runs/stage4_1200s__round39_small_medium_V12_M3_Q30_slot08_seed1343324363__K4-r050/c6_split_decision_ledger.csv",
+  "rho050_source_ledger_sha256": "b1072cf38bb0468a59507abe39d3d278094aa8a3baa6e1e560c408a3bfb6ecc2",
+  "right_child_bound": 0.04195718808659905,
+  "round46_action": "split",
+  "round46_reason": "current_normalized_child_gain_reaches_rho",
+  "schema": "round47-k4-major-critical-state-v1",
+  "score_tolerance": 1.3891213593289604e-05,
+  "source_ledger": "results/gf_c6_rho_k1_k4_screen_round46/runs/stage4_1200s__round39_small_medium_V12_M3_Q30_slot08_seed1343324363__K4-r001/c6_split_decision_ledger.csv",
+  "source_ledger_sha256": "d769ed5b7165a32a51459052a1c69c61cff8a73dbe452d61071667e7709319ea",
+  "source_run_id": "stage4_1200s__round39_small_medium_V12_M3_Q30_slot08_seed1343324363__K4-r001",
+  "stage": "stage4_1200s",
+  "verified_incumbent": 0.04500155005562836
+}

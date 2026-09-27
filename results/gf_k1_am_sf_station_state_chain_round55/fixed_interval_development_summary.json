@@ -1,0 +1,50 @@
+{
+  "schema": "round55-live-stage-decision-v1",
+  "stage": "fixed_interval_development_300s",
+  "row_count": 42,
+  "pair_count": 28,
+  "all_engineering_valid": true,
+  "false_certificate_count": 0,
+  "summaries": {
+    "VD-P": {
+      "certificate_gain_count": 0,
+      "certificate_loss_count": 0,
+      "severe_regression_count": 0,
+      "severe_states": [],
+      "material_improvement_states": [
+        "D3",
+        "D4",
+        "D9",
+        "D10",
+        "D12",
+        "D13"
+      ],
+      "shifted_work_geometric_mean_ratio": 0.7165393744750532,
+      "aggregate_gi_ratio": 0.6817785069990462
+    },
+    "VD-J": {
+      "certificate_gain_count": 1,
+      "certificate_loss_count": 1,
+      "severe_regression_count": 1,
+      "severe_states": [
+        "D13"
+      ],
+      "material_improvement_states": [
+        "D1",
+        "D3",
+        "D4",
+        "D9",
+        "D10",
+        "D12"
+      ],
+      "shifted_work_geometric_mean_ratio": 0.7123001264225007,
+      "aggregate_gi_ratio": 0.7001473829915473
+    }
+  },
+  "selected_for_next_stage": [
+    "VD-P"
+  ],
+  "rejected": [
+    "VD-J"
+  ]
+}

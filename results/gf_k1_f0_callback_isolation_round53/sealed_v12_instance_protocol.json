@@ -1,0 +1,50 @@
+{
+  "schema": "round53-sealed-v12-protocol-v1",
+  "base_commit": "44ed4057cc4d2ce67b86d623b57500e95cad5058",
+  "derivation_version": "round53-sealed-v12-v1",
+  "cartesian_product": {
+    "V": [
+      12
+    ],
+    "M": [
+      2,
+      3
+    ],
+    "Q": [
+      20,
+      30
+    ],
+    "configurations": [
+      "tight_T_2400",
+      "high_imbalance_3600",
+      "moderate_3600"
+    ]
+  },
+  "instance_count": 12,
+  "methods": [
+    "P-GRB",
+    "K1-AM-v0",
+    "K1-AM-CANDIDATE"
+  ],
+  "ordinary_cap_seconds": 3600,
+  "ordinary_physical_rows": 36,
+  "checkpoints_seconds": [
+    300,
+    1200,
+    1800,
+    3600
+  ],
+  "extension_cap_seconds": 7200,
+  "extension_eligible_instances": 4,
+  "extension_rule": "extend all three methods on a tight_T_2400 instance iff none of the three certifies by 3600 seconds",
+  "opening_requires": [
+    "qualified frozen new backend",
+    "passing K1 integration decision",
+    "frozen source commit",
+    "clean official build",
+    "frozen executable SHA-256",
+    "no remaining algorithmic changes"
+  ],
+  "algorithm_changes_after_opening": 0,
+  "result_dependent_instance_selection": false
+}

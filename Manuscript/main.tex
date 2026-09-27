@@ -4,19 +4,22 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{microtype}
 \input{macros}
-\title{A Gini-Frontier Compact Certification Framework for Exact Static Rebalancing}
+\title{K1--AM--SF: A Tailored Gini-Interval Branch-and-Cut Framework for Exact Static Rebalancing}
 \author{Algorithm chapter generated from the audited stable implementation}
 \date{\today}
 \begin{document}
 \maketitle
 \begin{abstract}
-We present the stable paper-facing exact method implemented by
-\texttt{paper-gf-tailored-bc}.  The method combines a Gini-frontier
-decomposition, valid interval screening, and CPLEX-managed fixed-interval
-compact branch-and-cut.  A relaxation vector selects bounded route-cutset
-candidates, while validity of every added inequality is independent of that
-vector.  A full-frontier ledger, independent incumbent verification, and
-source audits determine whether a global claim is admissible.
+We present K1--AM--SF, the stable paper-facing exact method selected by
+\texttt{paper-k1-am-sf}. The tailored Gini-interval branch-and-cut framework
+starts from one complete improving interval, uses midpoint adaptive-mass
+refinement with threshold $0.08$, and solves each unresolved leaf with the
+F0--CLEAN sparse tailored fixed-interval MILP under Gurobi's native
+branch-and-cut. Dynamic user-cut callbacks and custom branching are off. Exact
+interval coverage, scope-valid bounds, and independent incumbent verification
+govern certification. A bounded inventory--route cut study strengthened root
+relaxations but failed the fixed-interval promotion gate and remains outside
+the stable algorithm.
 \end{abstract}
 \input{sections/problem_definition}
 \input{sections/algorithm_framework}
