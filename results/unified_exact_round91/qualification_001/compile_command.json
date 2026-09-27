@@ -1,0 +1,17 @@
+{
+  "executable": "D:/msys64/ucrt64/bin/g++.exe",
+  "stage": "compile",
+  "arguments": [
+    "-std=c++17",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-DEXACT_EBRP_ENABLE_GUROBI=1",
+    "-IE:/codes/ExactEBRP/include",
+    "-c",
+    "tests/round91_handling_rounding_probe.cpp",
+    "-o",
+    "build/research/round91-handling-rounding/Round91HandlingRoundingProbe.obj"
+  ],
+  "started_utc": "2026-09-27T02:39:42.4720308Z"
+}
