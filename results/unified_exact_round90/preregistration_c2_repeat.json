@@ -1,0 +1,82 @@
+{
+  "schema": "round90-lp-g-c2-repeat-preregistration-v1",
+  "status": "conditional_source_only_no_execution",
+  "purpose": "Preselected C2 development fluctuation check only; no promotion or statistical significance claim",
+  "runtime_root": "results/unified_exact_round90/runner_lp_g_c2_repeat",
+  "prepare_gate_path": "results/unified_exact_round90/c2_repeat_prepare_gate.json",
+  "run_lease_name": "runner_repeat_lease.json",
+  "frozen_g3_runner": "scripts/round90_lp_g_g3.py",
+  "frozen_g3_runner_sha256": "da04cf7481dd6f1841383a9390059297a0db51c4ce509a449d5c71725e38b1fe",
+  "frozen_g3_preregistration": "results/unified_exact_round90/preregistration_g3.json",
+  "frozen_g3_preregistration_sha256": "dbc1543d2d5b112a127151736ac54d13fe168723a9327561f65aaa81bbaf745b",
+  "frozen_g3_qualification_gate": "results/unified_exact_round90/g3_qualification_gate.json",
+  "frozen_g3_qualification_gate_sha256": "764350f3b32bbfb45bd1881ac8712c9fb20ea8cd00f3eda50324b07b65e86938",
+  "source_commit": "76458ff8b952e98cede34b261cd916d26db58215",
+  "candidate_binary": "build/research/round90-lp-g-split/ExactEBRP.exe",
+  "candidate_binary_sha256": "bac65ff3b5b099852f2eedd7ef462ad700e5c1131778bd56dca310b3dd0af2f2",
+  "source_hashes": [
+    {"path": "CMakeLists.txt", "sha256": "4d1ad96639e1ef8a4093174636a1ef8e4563519485fc7d0ee82af68696057de0"},
+    {"path": "include/GiniFrontierGeometry.hpp", "sha256": "c6d8b45bb43027b0ecde60160501ca0a3c07877dbc35bbfbe5fbaaec72c94305"},
+    {"path": "include/Instance.hpp", "sha256": "386ffd2a778d0fa8648f3eb2ef091d9742c7e25e0b947cf31aa7e1db99efcb3f"},
+    {"path": "src/GiniFrontierGeometry.cpp", "sha256": "a4640594421ec578561ff19ee0125526b8c213ac26c2833299427caf6e03024f"},
+    {"path": "src/main.cpp", "sha256": "efe8b0598483c2c3d2b3afb611fd2352f2005c53fe4cb9de95ebeab553c61570"},
+    {"path": "src/PaperExternalGiniTree.cpp", "sha256": "3de879702ca6dd964a1273558fc5152eaa26fad9001860c0e298270bdb7975a9"},
+    {"path": "tests/round90_lp_g_split_tests.cpp", "sha256": "2dd4582bb757624228fb610a2c9b3cc55fec0b84dca892601ecc1bec83a58d4d"}
+  ],
+  "harness_hashes": {
+    "runner": "da04cf7481dd6f1841383a9390059297a0db51c4ce509a449d5c71725e38b1fe",
+    "native_evidence_reader": "d88cd16dd3e2c93b70ed42f3cbd269bf7f3184bc1ad801a1712dc867e387ee58",
+    "physical_reader": "2bad5dee645a7c173255a38051c0260b5b0280ec3759aebbf90aef044f665861",
+    "exchange_reader": "e70200bddf32c115f976385e757c7493fe6459ce71a6079799e5dfcbb3766a55",
+    "affinity": "c64ce9455569960e79fd5a1078fa23f14f14fd32c01be4b452154c42e8662445",
+    "normalizer": "772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6",
+    "audited_runner_utilities": "178e83fcb56143109d00f407af770b711a7e69c5816e63a0aa094dee8ff3eadd",
+    "input_identity_audit": "133e5f159385c21f8bc130e24f8ea3acd31f3643b3abbe5182edda4cd30a6ff6"
+  },
+  "c2": {
+    "id": "C2",
+    "scenario_id": "cb443_V20_compact_r1_surplus_M02_Q30_T01800",
+    "input_path": "reference/citibike443-regional-v1/instances/V20/cb443_V20_compact_r1_surplus_M02_Q30.txt",
+    "input_sha256": "1bb4898eef8e5b2535a6d1d609637528875581fa81acf120636941f285f23b60",
+    "T_seconds": 1800,
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "cap_seconds": 600
+  },
+  "common": {
+    "threads": 1,
+    "mip_threads": 1,
+    "gurobi_presolve": -1,
+    "affinity_mask": 4,
+    "native_limit_offset_seconds": 6,
+    "hard_stop_offset_seconds": 2,
+    "shutdown_margin_seconds": 3,
+    "requested_mip_gap": 0,
+    "requested_mip_gap_abs": 0
+  },
+  "repeat_order": [
+    {"seed": 1, "method_order": ["ENS-C", "LP-G"]},
+    {"seed": 2, "method_order": ["LP-G", "ENS-C"]}
+  ],
+  "planned_runs": 4,
+  "sum_process_caps_seconds": 2400,
+  "seed0_reference": {
+    "status": "completed_certified_same_new_binary_not_rerun",
+    "g3_summary_path": "results/unified_exact_round90/runner_lp_g_g3/summary.jsonl",
+    "g3_summary_sha256": "4e6f3e2e7d545d196d9767da66093ca944cbb00f2441ba666a99166d0be2353b",
+    "g3_independent_review_path": "results/unified_exact_round90/runner_lp_g_g3_rest_independent_review.md",
+    "g3_independent_review_sha256": "146fb00d5da2e3aa52698c644bee8de1300e04869de17d6da6b7ab58f44d8e3e",
+    "g3_cross_arm_path": "results/unified_exact_round90/runner_lp_g_g3/runner_cross_arm_C2.json",
+    "g3_cross_arm_sha256": "9220a062b2910f4ffa858467142c091be12915538a324601fc4e12f179c57f14",
+    "arms": {
+      "LP-G": {"raw": "results/unified_exact_round90/runner_lp_g_g3/raw/07_C2_LP-G", "launch_sha256": "fdf5388405612de1a276487540755bf2a1b8b1c6d951e051774cfb72037ba6a0", "audit_sha256": "bbdcea7f06667dd6e9517f3a78821f736e375dd94ba5a206f089a5517892e7c1", "completion_sha256": "f6d764dba755a70c7365ab04cf1f5630bc81a2f28636c88ed10a0f734392016c", "result_sha256": "7ec95fb671258a58f267916c5b0869d6f545851d97d12cd0373674946df5fc25"},
+      "ENS-C": {"raw": "results/unified_exact_round90/runner_lp_g_g3/raw/08_C2_ENS-C", "launch_sha256": "27aad94824080d4a2049dbc63d8e3cce91df418818aa33dc875746f0396ff10d", "audit_sha256": "1989cb8059d843bd9c274e7561ddd10b02f85cdabffe379ed18eb37f92d43649", "completion_sha256": "67675c1bb6f5a8876b9dea26aad22ef1d8a4776650cc0994271cac575582688c", "result_sha256": "fbb1f9b4c5e31e43728c5b4b562088a310184f1397b7ddb2295c670d6659b561"}
+    }
+  },
+  "stop_policy": "First identity, physical, coverage, point, cross-arm, process, resource, or severe paired signal stops later arms. Preserve all started prefixes and cost; no retry, overwrite, seed addition, or automatic extension.",
+  "interpretation": "Report seed 0, 1, and 2 certified LP-G/ENS-C process-time ratios, directions and median; list censored pairs separately. Development fluctuation evidence only; D6, F2 and other protection remain open.",
+  "no_component_time_or_work_slices": true,
+  "prepare_does_not_authorize_optimize": true,
+  "run_requires_separate_root_lease": true
+}

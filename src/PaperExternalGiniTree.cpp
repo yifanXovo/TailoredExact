@@ -131,6 +131,9 @@ struct PaperLeafRuntime {
     bool lp_complete = false;
     PaperLpResult lp;
     long long lp_incumbent_epoch = -1;
+    std::string lp_artifact_sha256;
+    double lp_gamma_L = 0.0;
+    double lp_gamma_U = 0.0;
     bool terminal_mip_started = false;
     bool terminal_ready = false;
     bool c5_partial_target_started = false;
@@ -329,9 +332,19 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         return false;
     }
     const bool first_class_k1 = options.k1_am_sf_controller_enabled;
+    const bool round90_split_allowed = !options.round90_lp_g_split ||
+        (first_class_k1 &&
+         options.algorithm_preset == "research-round83-vds-equal-net-exchange" &&
+         !options.round88_constructive_only_descent &&
+         !options.round89_native_ot_b1);
+    if (!round90_split_allowed) {
+        reason = "round90_lp_g_split_requires_isolated_round83_first_class_k1";
+        return false;
+    }
     if (first_class_k1 &&
         (options.initial_gini_interval_count != 1 ||
          options.split_point_rule != "midpoint" ||
+         !round90_split_allowed ||
          options.split_score_rule != "balanced-normalized-closure" ||
          !std::isfinite(options.split_threshold) ||
          options.split_threshold < 0.0 || options.split_threshold > 1.0 ||
@@ -589,6 +602,7 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
     const bool geometry_valid = first_class_k1
         ? options.initial_gini_interval_count == 1 &&
           options.split_point_rule == "midpoint" &&
+          round90_split_allowed &&
           options.maximum_split_depth == 8 &&
           std::fabs(options.minimum_interval_width - 1e-4) <= 1e-12 &&
           options.split_factor == 2
@@ -2302,6 +2316,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     const auto split_path = artifact_dir / "split_decision_ledger.csv";
     const auto c6_split_path =
         artifact_dir / "c6_split_decision_ledger.csv";
+    const auto round90_split_path =
+        artifact_dir / "round90_lp_g_split_choice.csv";
     const auto round47_adaptive_mass_path =
         artifact_dir / "adaptive_mass_decision_ledger.csv";
     const auto round47_contraction_path =
@@ -2449,6 +2465,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     std::ofstream round45_timing_score_ledger, round45_segment_ledger,
         round45_breakpoint_ledger, round45_choice_ledger,
         round45_validity_ledger;
+    std::ofstream round90_split_ledger;
+    if (options.round90_lp_g_split) {
+        round90_split_ledger.open(round90_split_path);
+        round90_split_ledger << std::setprecision(17);
+    }
     if (round47_active) {
         round47_adaptive_mass_ledger.open(round47_adaptive_mass_path);
         round47_contraction_ledger.open(round47_contraction_path);
@@ -2573,6 +2594,26 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
            "right_child_infeasible,verified_incumbent,normalized_c6_gain,"
            "child_infeasibility_trigger,threshold_comparison,selected_action,"
            "target_value,deterministic_reason,coverage_update\n";
+    if (options.round90_lp_g_split) {
+        round90_split_ledger
+            << "phase,parent_id,parent_lower,parent_upper,parent_depth,"
+               "incumbent_epoch,parent_lp_epoch,parent_artifact_epoch,"
+               "parent_lp_sha256,parent_artifact_sha256,parent_lp_complete,"
+               "parent_lp_terminal_valid,parent_lp_optimal,parent_lp_infeasible,"
+               "raw_g_available,raw_g,legacy_midpoint,chosen_point,"
+               "point_source,fallback_reason,left_id,left_lower,left_upper,"
+               "right_id,right_lower,right_upper,cache_verdict,"
+               "left_lp_epoch,left_lp_sha256,left_lp_terminal_valid,"
+               "left_lp_optimal,left_lp_infeasible,left_lp_bound,"
+               "right_lp_epoch,right_lp_sha256,right_lp_terminal_valid,"
+               "right_lp_optimal,right_lp_infeasible,right_lp_bound,"
+               "completion_status\n";
+        round90_split_ledger.flush();
+        if (!round90_split_ledger) {
+            throw std::runtime_error(
+                "round90_split_choice_ledger_open_or_header_write_failed");
+        }
+    }
     if (round47_active) {
         round47_adaptive_mass_ledger
             << "decision_sequence,K0,tau,interval_id,parent_id,depth,"
@@ -2581,8 +2622,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                "selected_action,native_target,deterministic_reason,"
                "coverage_update\n";
         round47_contraction_ledger
-            << "event_sequence,parent_interval,midpoint,infeasible_side,"
-               "infeasibility_status,feasible_child_interval,"
+            << (options.round90_lp_g_split
+                ? "event_sequence,parent_interval,effective_split_point,infeasible_side,"
+                : "event_sequence,parent_interval,midpoint,infeasible_side,")
+            << "infeasibility_status,feasible_child_interval,"
                "feasible_child_bound,coverage_before,coverage_after,action,"
                "model_reused,basis_reused,rows_reused,model_rebuild_count,"
                "lower_bound_update,endpoint_audit,exactness_status\n";
@@ -3476,6 +3519,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             state.lp_complete = false;
             state.lp = PaperLpResult{};
             state.lp_incumbent_epoch = -1;
+            state.lp_artifact_sha256.clear();
             state.terminal_mip_started = false;
             state.terminal_ready = false;
             state.c6_children_ready = false;
@@ -3640,6 +3684,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         state.lp_complete = state.lp.terminal_valid;
         state.lp_incumbent_epoch =
             state.lp_complete ? incumbent_epoch : -1;
+        state.lp_artifact_sha256 = state.lp_complete
+            ? state.artifact.sha256 : std::string{};
+        state.lp_gamma_L = leaf.gamma_L;
+        state.lp_gamma_U = leaf.gamma_U;
         lp_ledger << leaf.id << ',' << csvField(leaf.parent_id) << ','
                   << leaf.split_depth << ',' << std::setprecision(17)
                   << leaf.gamma_L << ',' << leaf.gamma_U << ','
@@ -6131,15 +6179,79 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 controller_minimum_interval_width));
         bool split_parent = false;
         if (eligible) {
-            const auto geometry = splitLegacyFrontierInterval(
-                bounded.gamma_L, bounded.gamma_U,
-                controller_split_factor);
+            Round90LpGSplitGeometry round90_choice;
+            std::string round90_fallback_reason = "not_candidate";
+            if (options.round90_lp_g_split) {
+                const auto expected_parent_path = artifact_dir / "models" /
+                    (bounded.id + ".lp");
+                if (!selected_state.artifact_ready ||
+                    !selected_state.artifact.written ||
+                    selected_state.artifact_incumbent_epoch != incumbent_epoch ||
+                    selected_state.artifact.gamma_L != bounded.gamma_L ||
+                    selected_state.artifact.gamma_U != bounded.gamma_U ||
+                    selected_state.artifact.path != expected_parent_path ||
+                    selected_state.artifact.sha256.empty() ||
+                    !std::filesystem::exists(selected_state.artifact.path) ||
+                    fileSha256(selected_state.artifact.path) !=
+                        selected_state.artifact.sha256 ||
+                    (selected_state.lp_complete &&
+                     (selected_state.lp_incumbent_epoch != incumbent_epoch ||
+                      selected_state.lp_artifact_sha256 !=
+                          selected_state.artifact.sha256 ||
+                      selected_state.lp_gamma_L != bounded.gamma_L ||
+                      selected_state.lp_gamma_U != bounded.gamma_U))) {
+                    hard_failure = true;
+                    result.external_gini_tree_failure_reason =
+                        "round90_parent_lp_artifact_identity_mismatch:" + bounded.id;
+                    break;
+                }
+                const bool current_optimal_parent_g =
+                    selected_state.lp_complete &&
+                    selected_state.lp.terminal_valid &&
+                    selected_state.lp.optimal &&
+                    !selected_state.lp.infeasible &&
+                    selected_state.round43_lp_g_available &&
+                    selected_state.lp_incumbent_epoch == incumbent_epoch;
+                round90_choice = selectRound90LpGSplitGeometry(
+                    bounded.gamma_L, bounded.gamma_U,
+                    current_optimal_parent_g, selected_state.round43_lp_g);
+                round90_fallback_reason = !current_optimal_parent_g
+                    ? "parent_lp_g_not_current_optimal_available"
+                    : (!std::isfinite(selected_state.round43_lp_g)
+                        ? "nonfinite_parent_lp_g"
+                        : (!(bounded.gamma_L < selected_state.round43_lp_g &&
+                             selected_state.round43_lp_g < bounded.gamma_U)
+                            ? "parent_lp_g_not_strict_interior" : "none"));
+            }
+            const auto geometry = options.round90_lp_g_split
+                ? round90_choice.children
+                : splitLegacyFrontierInterval(
+                    bounded.gamma_L, bounded.gamma_U,
+                    controller_split_factor);
+            if (options.round90_lp_g_split &&
+                (!round90_choice.valid || geometry.size() != 2 ||
+                 !std::isfinite(bounded.gamma_L) ||
+                 !std::isfinite(round90_choice.split_point) ||
+                 !std::isfinite(bounded.gamma_U) ||
+                 !(bounded.gamma_L < round90_choice.split_point &&
+                   round90_choice.split_point < bounded.gamma_U) ||
+                 geometry[0].lower != bounded.gamma_L ||
+                 geometry[0].upper != round90_choice.split_point ||
+                 geometry[1].lower != round90_choice.split_point ||
+                 geometry[1].upper != bounded.gamma_U)) {
+                hard_failure = true;
+                result.external_gini_tree_failure_reason =
+                    "round90_exact_child_geometry_invalid:" + bounded.id;
+                break;
+            }
             if (geometry.size() != 2 || !exactIntervalCoverage(
                     {bounded.gamma_L, bounded.gamma_U}, geometry,
                     scheduler.certificateTolerance())) {
                 hard_failure = true;
                 result.external_gini_tree_failure_reason =
-                    "paper_midpoint_child_coverage_failed";
+                    options.round90_lp_g_split
+                        ? "round90_child_interval_coverage_failed"
+                        : "paper_midpoint_child_coverage_failed";
                 break;
             }
             std::vector<ControllingLeaf> children;
@@ -6158,14 +6270,152 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 child.cutoff = bounded.cutoff;
                 children.push_back(child);
             }
+            const long long round90_choice_epoch = incumbent_epoch;
+            const long long round90_parent_lp_epoch =
+                selected_state.lp_incumbent_epoch;
+            const long long round90_parent_artifact_epoch =
+                selected_state.artifact_incumbent_epoch;
+            const std::string round90_parent_lp_sha =
+                selected_state.lp_artifact_sha256;
+            const std::string round90_parent_artifact_sha =
+                selected_state.artifact.sha256;
+            auto writeRound90Choice = [&](const std::string& phase,
+                                          const std::string& cache_verdict,
+                                          const std::string& completion_status) {
+                if (!options.round90_lp_g_split) return;
+                round90_split_ledger
+                    << csvField(phase) << ',' << csvField(bounded.id) << ','
+                    << bounded.gamma_L << ',' << bounded.gamma_U << ','
+                    << bounded.split_depth << ',' << round90_choice_epoch << ','
+                    << round90_parent_lp_epoch << ','
+                    << round90_parent_artifact_epoch << ','
+                    << csvField(round90_parent_lp_sha) << ','
+                    << csvField(round90_parent_artifact_sha) << ','
+                    << selected_state.lp_complete << ','
+                    << selected_state.lp.terminal_valid << ','
+                    << selected_state.lp.optimal << ','
+                    << selected_state.lp.infeasible << ','
+                    << selected_state.round43_lp_g_available << ',';
+                if (selected_state.round43_lp_g_available)
+                    round90_split_ledger << selected_state.round43_lp_g;
+                round90_split_ledger << ',' << round90_choice.midpoint << ','
+                    << round90_choice.split_point << ','
+                    << csvField(round90_choice.used_parent_g
+                        ? "current_optimal_parent_lp_g"
+                        : "legacy_midpoint_fallback") << ','
+                    << csvField(round90_fallback_reason) << ','
+                    << csvField(children[0].id) << ','
+                    << children[0].gamma_L << ',' << children[0].gamma_U << ','
+                    << csvField(children[1].id) << ','
+                    << children[1].gamma_L << ',' << children[1].gamma_U << ','
+                    << csvField(cache_verdict);
+                for (const ControllingLeaf& child : children) {
+                    const auto it = runtime.find(child.id);
+                    if (it == runtime.end()) {
+                        round90_split_ledger << ",,,,,,";
+                        continue;
+                    }
+                    const PaperLeafRuntime& state = it->second;
+                    round90_split_ledger << ',' << state.lp_incumbent_epoch
+                        << ',' << csvField(state.lp_artifact_sha256)
+                        << ',' << state.lp.terminal_valid
+                        << ',' << state.lp.optimal
+                        << ',' << state.lp.infeasible << ',';
+                    if (state.lp.bound_available)
+                        round90_split_ledger << state.lp.lower_bound;
+                }
+                round90_split_ledger << ',' << csvField(completion_status)
+                                     << '\n';
+                round90_split_ledger.flush();
+                if (!round90_split_ledger) {
+                    throw std::runtime_error(
+                        "round90_split_choice_ledger_write_failed");
+                }
+            };
+            if (options.round90_lp_g_split && !round90_split_ledger) {
+                hard_failure = true;
+                result.external_gini_tree_failure_reason =
+                    "round90_split_choice_ledger_unavailable";
+                break;
+            }
+            writeRound90Choice("proposal", "pending", "child_lp_not_started");
             const bool reuse_c6_children =
                 c6_nonblocking && selected_state.c6_children_ready;
+            std::string round90_cache_verdict = reuse_c6_children
+                ? "identity_check_pending" : "new_child_lp_required";
             if (reuse_c6_children) {
                 if (selected_state.c6_cached_children.size() != 2) {
+                    writeRound90Choice("cache_check", "invalid_count",
+                                       "identity_failure");
                     hard_failure = true;
                     result.external_gini_tree_failure_reason =
                         "c6_cached_child_count_invalid:" + bounded.id;
                     break;
+                }
+                if (options.round90_lp_g_split) {
+                    bool cache_identity_valid = true;
+                    std::string cache_identity_reason = "none";
+                    for (std::size_t index = 0; index < 2; ++index) {
+                        const ControllingLeaf& cached =
+                            selected_state.c6_cached_children[index];
+                        const ControllingLeaf& proposed = children[index];
+                        const auto state_it = runtime.find(proposed.id);
+                        if (state_it == runtime.end()) {
+                            cache_identity_valid = false;
+                            cache_identity_reason = "cached_child_runtime_missing";
+                            break;
+                        }
+                        const PaperLeafRuntime& state = state_it->second;
+                        const auto expected_child_path = artifact_dir / "models" /
+                            (proposed.id + ".lp");
+                        if (state.artifact.path != expected_child_path) {
+                            cache_identity_valid = false;
+                            cache_identity_reason = "cached_child_model_path_mismatch";
+                            break;
+                        }
+                        Round90LpGCachedChildIdentity identity;
+                        identity.id = cached.id;
+                        identity.parent_id = cached.parent_id;
+                        identity.child_index = cached.child_index;
+                        identity.split_depth = cached.split_depth;
+                        identity.leaf_interval = {cached.gamma_L, cached.gamma_U};
+                        identity.artifact_interval = {
+                            state.artifact.gamma_L, state.artifact.gamma_U};
+                        identity.lp_interval = {state.lp_gamma_L, state.lp_gamma_U};
+                        identity.artifact_epoch = state.artifact_incumbent_epoch;
+                        identity.lp_epoch = state.lp_incumbent_epoch;
+                        identity.artifact_ready = state.artifact_ready;
+                        identity.artifact_written = state.artifact.written;
+                        identity.lp_complete = state.lp_complete;
+                        identity.lp_terminal_valid = state.lp.terminal_valid;
+                        identity.lp_optimal = state.lp.optimal;
+                        identity.lp_infeasible = state.lp.infeasible;
+                        identity.artifact_sha256 = state.artifact.sha256;
+                        identity.lp_artifact_sha256 = state.lp_artifact_sha256;
+                        if (state.artifact_ready &&
+                            std::filesystem::exists(state.artifact.path)) {
+                            identity.observed_file_sha256 =
+                                fileSha256(state.artifact.path);
+                        }
+                        if (!validRound90LpGCachedChild(
+                                identity, proposed.id, bounded.id,
+                                proposed.child_index, proposed.split_depth,
+                                {proposed.gamma_L, proposed.gamma_U},
+                                incumbent_epoch, &cache_identity_reason)) {
+                            cache_identity_valid = false;
+                            break;
+                        }
+                    }
+                    if (!cache_identity_valid) {
+                        writeRound90Choice("cache_check", "identity_mismatch",
+                                           "identity_failure");
+                        hard_failure = true;
+                        result.external_gini_tree_failure_reason =
+                            "round90_cached_child_identity_mismatch:" +
+                            bounded.id + ":" + cache_identity_reason;
+                        break;
+                    }
+                    round90_cache_verdict = "reused_identity_verified";
                 }
                 children = selected_state.c6_cached_children;
                 for (ControllingLeaf& child : children) {
@@ -6208,7 +6458,33 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 // child copy directly here and defer the inherited merge until
                 // the atomic split below.
                 PaperLeafRuntime& child_state = runtime[child.id];
-                if (!ensureArtifact(child, child_state)) break;
+                if (options.round90_lp_g_split &&
+                    child_state.artifact_ready &&
+                    child_state.artifact_incumbent_epoch == incumbent_epoch &&
+                    (child_state.artifact.gamma_L != child.gamma_L ||
+                     child_state.artifact.gamma_U != child.gamma_U ||
+                     child_state.artifact.path != artifact_dir / "models" /
+                         (child.id + ".lp") ||
+                     (child_state.lp_complete &&
+                      (child_state.lp_incumbent_epoch != incumbent_epoch ||
+                       child_state.lp_gamma_L != child.gamma_L ||
+                       child_state.lp_gamma_U != child.gamma_U ||
+                       child_state.lp_artifact_sha256 !=
+                           child_state.artifact.sha256)))) {
+                    writeRound90Choice("child_artifact_check",
+                                       "same_epoch_geometry_mismatch",
+                                       "identity_failure");
+                    hard_failure = true;
+                    result.external_gini_tree_failure_reason =
+                        "round90_existing_child_artifact_geometry_mismatch:" +
+                        child.id;
+                    break;
+                }
+                if (!ensureArtifact(child, child_state)) {
+                    if (options.round90_lp_g_split && !global_deadline_stop)
+                        hard_failure = true;
+                    break;
+                }
                 const double remaining = globalDeadlineRemaining();
                 if (remaining <= 0.0) {
                     stopAtDeadline();
@@ -6271,6 +6547,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 child_state.lp_complete = child_state.lp.terminal_valid;
                 child_state.lp_incumbent_epoch =
                     child_state.lp_complete ? incumbent_epoch : -1;
+                child_state.lp_artifact_sha256 = child_state.lp_complete
+                    ? child_state.artifact.sha256 : std::string{};
+                child_state.lp_gamma_L = child.gamma_L;
+                child_state.lp_gamma_U = child.gamma_U;
                 lp_ledger << child.id << ',' << csvField(child.parent_id) << ','
                           << child.split_depth << ',' << child.gamma_L << ','
                           << child.gamma_U << ',' << child_state.lp.terminal_valid
@@ -6306,6 +6586,22 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     child.lower_bound_sources.push_back(
                         "optimal_complete_child_lp_relaxation");
                 }
+            }
+            if (options.round90_lp_g_split) {
+                bool complete_pair = true;
+                for (const ControllingLeaf& child : children) {
+                    const auto it = runtime.find(child.id);
+                    complete_pair = complete_pair && it != runtime.end() &&
+                        it->second.lp_complete &&
+                        it->second.lp_incumbent_epoch == round90_choice_epoch &&
+                        it->second.lp.terminal_valid;
+                }
+                writeRound90Choice(
+                    "child_lp_status", round90_cache_verdict,
+                    hard_failure ? "failure" :
+                    global_deadline_stop ? "deadline_unknown" :
+                    round65_unknown_child ? "optional_unknown" :
+                    complete_pair ? "complete_pair" : "incomplete_unknown");
             }
             if (hard_failure || global_deadline_stop) break;
             if (round65_unknown_child) {
@@ -6963,11 +7259,21 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 }
             }
             if (!decision_valid) {
+                writeRound90Choice("am_decision", round90_cache_verdict,
+                                   "invalid_decision");
                 hard_failure = true;
                 result.external_gini_tree_failure_reason =
                     "paper_split_decision_invalid:" + split_reason;
                 break;
             }
+            writeRound90Choice(
+                "am_decision", round90_cache_verdict,
+                close_parent_infeasible ? "proposed_infeasible_close" :
+                contract_single_child ? "proposed_single_child_contraction" :
+                split_immediately ? "proposed_atomic_split" :
+                (c6_nonblocking && c6_split.run_child_bound_target)
+                    ? "proposed_native_target"
+                    : "proposed_exact_parent_closure");
             if (close_parent_infeasible) {
                 std::string reason;
                 if (!scheduler.setStatus(
@@ -6986,11 +7292,16 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 round47_contraction_ledger
                     << round47_contraction_sequence << ','
                     << csvField(bounded.id) << ','
-                    << (bounded.gamma_L + bounded.gamma_U) / 2.0
+                    << (options.round90_lp_g_split
+                        ? round90_choice.split_point
+                        : (bounded.gamma_L + bounded.gamma_U) / 2.0)
                     << ",both,strict_complete_lp_infeasible,,,"
                     << csvField(bounded.id) << ",empty,parent-infeasible-close,"
-                       "false,false,false,0,infinity,midpoint_partition_valid,"
-                       "exact_both_child_lp_infeasibility\n";
+                       "false,false,false,0,infinity,"
+                    << (options.round90_lp_g_split
+                        ? "exact_shared_endpoint_partition_valid"
+                        : "midpoint_partition_valid")
+                    << ",exact_both_child_lp_infeasibility\n";
                 events << elapsedTelemetry()
                        << ",round47_both_child_infeasible_close,"
                        << bounded.id << ',' << bounded.gamma_L << ','
@@ -7005,6 +7316,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     "round47_both_child_lp_infeasible_parent_close");
                 selected_state.c6_children_ready = false;
                 selected_state.c6_cached_children.clear();
+                writeRound90Choice("realized", round90_cache_verdict,
+                                   "complete_parent_infeasible_closure");
                 split_parent = true;
             } else if (contract_single_child) {
                 const int feasible_index = c6_split.feasible_child_index;
@@ -7030,7 +7343,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 round47_contraction_ledger
                     << round47_contraction_sequence << ','
                     << csvField(bounded.id) << ','
-                    << (bounded.gamma_L + bounded.gamma_U) / 2.0 << ','
+                    << (options.round90_lp_g_split
+                        ? round90_choice.split_point
+                        : (bounded.gamma_L + bounded.gamma_U) / 2.0) << ','
                     << (infeasible_index == 0 ? "left" : "right")
                     << ",strict_complete_lp_infeasible,"
                     << csvField(feasible_child.id) << ','
@@ -7040,8 +7355,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     << ",single-child-contraction,true,false,true,0,"
                     << std::max(bounded.lower_bound,
                                 runtime[feasible_child.id].lp.lower_bound)
-                    << ",midpoint_partition_valid,"
-                       "exact_infeasible_half_removed\n";
+                    << ',' << (options.round90_lp_g_split
+                        ? "exact_shared_endpoint_partition_valid"
+                        : "midpoint_partition_valid")
+                    << ",exact_infeasible_half_removed\n";
                 events << elapsedTelemetry()
                        << ",round47_single_child_contraction,"
                        << bounded.id << ',' << bounded.gamma_L << ','
@@ -7057,6 +7374,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     "round47_strict_infeasible_half_removed");
                 selected_state.c6_children_ready = false;
                 selected_state.c6_cached_children.clear();
+                writeRound90Choice("realized", round90_cache_verdict,
+                                   "atomic_single_child_contraction");
                 split_parent = true;
             } else if (split_immediately) {
                 std::string reason;
@@ -7100,7 +7419,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     round47_contraction_ledger
                         << round47_contraction_sequence << ','
                         << csvField(bounded.id) << ','
-                        << (bounded.gamma_L + bounded.gamma_U) / 2.0 << ','
+                        << (options.round90_lp_g_split
+                            ? round90_choice.split_point
+                            : (bounded.gamma_L + bounded.gamma_U) / 2.0) << ','
                         << (left_infeasible && right_infeasible ? "both" :
                             (left_infeasible ? "left" : "right"))
                         << ",strict_complete_lp_infeasible,"
@@ -7117,8 +7438,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                         << csvField(children[0].id + "|" + children[1].id)
                         << ",original-two-child-split,true,false,true,0,"
                         << post_split_bound
-                        << ",midpoint_partition_valid,"
-                           "existing_exact_c6_infeasibility_behavior\n";
+                        << ',' << (options.round90_lp_g_split
+                            ? "exact_shared_endpoint_partition_valid"
+                            : "midpoint_partition_valid")
+                        << ",existing_exact_c6_infeasibility_behavior\n";
                 }
                 events << elapsedTelemetry() << ",atomic_split," << bounded.id
                        << ',' << bounded.gamma_L << ',' << bounded.gamma_U
@@ -7140,6 +7463,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     selected_state.c6_children_ready = false;
                     selected_state.c6_cached_children.clear();
                 }
+                writeRound90Choice("realized", round90_cache_verdict,
+                                   "atomic_two_child_split");
                 split_parent = true;
             } else if (c6_nonblocking &&
                        c6_split.run_child_bound_target) {
@@ -7150,10 +7475,22 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                         "child_disjunction",
                         "c6_child_bound_reached_parent_requeued_no_forced_split");
                 if (disposition == C6TargetDisposition::Failed) {
+                    writeRound90Choice("native_target_result",
+                                       round90_cache_verdict, "failure");
                     hard_failure = true;
                     break;
                 }
-                if (disposition == C6TargetDisposition::Deadline) break;
+                if (disposition == C6TargetDisposition::Deadline) {
+                    writeRound90Choice("native_target_result",
+                                       round90_cache_verdict,
+                                       "deadline_unknown");
+                    break;
+                }
+                writeRound90Choice("native_target_result",
+                                   round90_cache_verdict,
+                                   disposition == C6TargetDisposition::Requeued
+                                       ? "parent_requeued_no_split"
+                                       : "parent_exactly_closed");
                 split_parent = true;
             } else if (c5_bound_target &&
                        c5_split.run_parent_bound_target_phase) {

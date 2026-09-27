@@ -1,0 +1,58 @@
+{
+  "schema": "round90-lp-g-g3-qualification-gate-v1",
+  "authorized_by": "root",
+  "qualified": true,
+  "allow_prepare": true,
+  "allow_optimize": true,
+  "prereg_sha256": "dbc1543d2d5b112a127151736ac54d13fe168723a9327561f65aaa81bbaf745b",
+  "runner_sha256": "da04cf7481dd6f1841383a9390059297a0db51c4ce509a449d5c71725e38b1fe",
+  "source_commit": "76458ff8b952e98cede34b261cd916d26db58215",
+  "candidate_binary_sha256": "bac65ff3b5b099852f2eedd7ef462ad700e5c1131778bd56dca310b3dd0af2f2",
+  "qualification_receipt_path": "results/unified_exact_round90/qualification_001/artifact_index.json",
+  "qualification_receipt_sha256": "b1f624d9040f00db31edb9bdae4696c320f335873004db26210608c30c52bef8",
+  "independent_review_path": "results/unified_exact_round90/lp_g_split_qualification_independent_review.md",
+  "independent_review_sha256": "74f070858adc3e9fc235d7ead9298c62787fd703166b00816c58c6c2de96ac47",
+  "runner_qualification_index_path": "results/unified_exact_round90/runner_qualification_001/artifact_index.json",
+  "runner_qualification_index_sha256": "0ab76efb00f5470b4eb514f879becd402efbc55b17da0dadc6fd49034bf19ae5",
+  "source_hashes": [
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "4d1ad96639e1ef8a4093174636a1ef8e4563519485fc7d0ee82af68696057de0"
+    },
+    {
+      "path": "include/GiniFrontierGeometry.hpp",
+      "sha256": "c6d8b45bb43027b0ecde60160501ca0a3c07877dbc35bbfbe5fbaaec72c94305"
+    },
+    {
+      "path": "include/Instance.hpp",
+      "sha256": "386ffd2a778d0fa8648f3eb2ef091d9742c7e25e0b947cf31aa7e1db99efcb3f"
+    },
+    {
+      "path": "src/GiniFrontierGeometry.cpp",
+      "sha256": "a4640594421ec578561ff19ee0125526b8c213ac26c2833299427caf6e03024f"
+    },
+    {
+      "path": "src/main.cpp",
+      "sha256": "efe8b0598483c2c3d2b3afb611fd2352f2005c53fe4cb9de95ebeab553c61570"
+    },
+    {
+      "path": "src/PaperExternalGiniTree.cpp",
+      "sha256": "3de879702ca6dd964a1273558fc5152eaa26fad9001860c0e298270bdb7975a9"
+    },
+    {
+      "path": "tests/round90_lp_g_split_tests.cpp",
+      "sha256": "2dd4582bb757624228fb610a2c9b3cc55fec0b84dca892601ecc1bec83a58d4d"
+    }
+  ],
+  "harness_hashes": {
+    "runner": "da04cf7481dd6f1841383a9390059297a0db51c4ce509a449d5c71725e38b1fe",
+    "native_evidence_reader": "d88cd16dd3e2c93b70ed42f3cbd269bf7f3184bc1ad801a1712dc867e387ee58",
+    "physical_reader": "2bad5dee645a7c173255a38051c0260b5b0280ec3759aebbf90aef044f665861",
+    "exchange_reader": "e70200bddf32c115f976385e757c7493fe6459ce71a6079799e5dfcbb3766a55",
+    "affinity": "c64ce9455569960e79fd5a1078fa23f14f14fd32c01be4b452154c42e8662445",
+    "normalizer": "772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6",
+    "audited_runner_utilities": "178e83fcb56143109d00f407af770b711a7e69c5816e63a0aa094dee8ff3eadd",
+    "input_identity_audit": "133e5f159385c21f8bc130e24f8ea3acd31f3643b3abbe5182edda4cd30a6ff6"
+  },
+  "scope": "Pure/source/CLI and runner wiring qualified. Four preselected E8/S12 complete-method arms serve actual-model integration and smoke. Stage lease still mandatory. No broad campaign or promotion."
+}

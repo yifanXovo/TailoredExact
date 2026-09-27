@@ -1,0 +1,22 @@
+{
+  "schema": "round90-compile-attempt-v1",
+  "stage": "configure",
+  "executable": "D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe",
+  "argv": [
+    "-S",
+    ".",
+    "-B",
+    "build/research/round90-lp-g-split",
+    "-G",
+    "Ninja",
+    "-DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe",
+    "-DCMAKE_MAKE_PROGRAM=D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe",
+    "-DEXACT_EBRP_ENABLE_GUROBI=ON",
+    "-DGUROBI_ROOT=D:/gurobi1302/win64"
+  ],
+  "start_utc": "2026-09-26T22:26:53.3173888+00:00",
+  "finish_utc": "2026-09-26T22:26:54.7879059+00:00",
+  "external_wall_seconds": 1.4680975,
+  "exit_code": 0,
+  "log_path": "results/unified_exact_round90/compile_configure_001.log"
+}

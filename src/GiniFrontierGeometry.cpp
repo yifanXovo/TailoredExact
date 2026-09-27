@@ -447,6 +447,94 @@ std::vector<GiniIntervalGeometry> splitLegacyFrontierInterval(
     return makeLegacyFrontierIntervals(lower, upper, std::max(2, split_factor));
 }
 
+Round90LpGSplitGeometry selectRound90LpGSplitGeometry(
+    double lower,
+    double upper,
+    bool current_optimal_parent_g_available,
+    double parent_g) {
+    Round90LpGSplitGeometry choice;
+    if (!std::isfinite(lower) || !std::isfinite(upper) || !(lower < upper)) {
+        choice.reason = "invalid_parent_interval";
+        return choice;
+    }
+    const auto midpoint_children = splitLegacyFrontierInterval(lower, upper, 2);
+    if (midpoint_children.size() == 2)
+        choice.midpoint = midpoint_children[0].upper;
+    choice.used_parent_g = current_optimal_parent_g_available &&
+        std::isfinite(parent_g) && lower < parent_g && parent_g < upper;
+    if (!choice.used_parent_g && midpoint_children.size() != 2) {
+        choice.reason = "invalid_legacy_midpoint_geometry";
+        return choice;
+    }
+    choice.split_point = choice.used_parent_g ? parent_g : choice.midpoint;
+    choice.children = choice.used_parent_g
+        ? std::vector<GiniIntervalGeometry>{{lower, choice.split_point},
+                                            {choice.split_point, upper}}
+        : midpoint_children;
+    if (!std::isfinite(choice.split_point) ||
+        !(lower < choice.split_point && choice.split_point < upper) ||
+        choice.children[0].lower != lower ||
+        choice.children[0].upper != choice.split_point ||
+        choice.children[1].lower != choice.split_point ||
+        choice.children[1].upper != upper) {
+        choice.children.clear();
+        choice.reason = "malformed_child_geometry";
+        return choice;
+    }
+    choice.valid = true;
+    choice.reason = choice.used_parent_g
+        ? "current_optimal_parent_g_strict_interior"
+        : "legacy_midpoint_fallback";
+    return choice;
+}
+
+bool validRound90LpGCachedChild(
+    const Round90LpGCachedChildIdentity& cached,
+    const std::string& expected_id,
+    const std::string& expected_parent_id,
+    int expected_child_index,
+    int expected_split_depth,
+    const GiniIntervalGeometry& expected_interval,
+    long long current_incumbent_epoch,
+    std::string* reason) {
+    if (cached.id != expected_id ||
+        cached.parent_id != expected_parent_id ||
+        cached.child_index != expected_child_index ||
+        cached.split_depth != expected_split_depth) {
+        if (reason) *reason = "child_tree_identity_mismatch";
+        return false;
+    }
+    const auto same_interval = [&](const GiniIntervalGeometry& interval) {
+        return interval.lower == expected_interval.lower &&
+               interval.upper == expected_interval.upper;
+    };
+    if (!std::isfinite(expected_interval.lower) ||
+        !std::isfinite(expected_interval.upper) ||
+        !(expected_interval.lower < expected_interval.upper) ||
+        !same_interval(cached.leaf_interval) ||
+        !same_interval(cached.artifact_interval) ||
+        !same_interval(cached.lp_interval)) {
+        if (reason) *reason = "child_interval_identity_mismatch";
+        return false;
+    }
+    if (!cached.artifact_ready || !cached.artifact_written ||
+        !cached.lp_complete || !cached.lp_terminal_valid ||
+        !(cached.lp_optimal || cached.lp_infeasible) ||
+        cached.artifact_epoch != current_incumbent_epoch ||
+        cached.lp_epoch != current_incumbent_epoch) {
+        if (reason) *reason = "child_epoch_or_lp_status_mismatch";
+        return false;
+    }
+    if (cached.artifact_sha256.empty() ||
+        cached.artifact_sha256 != cached.lp_artifact_sha256 ||
+        cached.artifact_sha256 != cached.observed_file_sha256) {
+        if (reason) *reason = "child_canonical_sha256_mismatch";
+        return false;
+    }
+    if (reason) *reason = "cached_child_identity_verified";
+    return true;
+}
+
 bool exactIntervalCoverage(const GiniIntervalGeometry& parent,
                            const std::vector<GiniIntervalGeometry>& children,
                            double tolerance,

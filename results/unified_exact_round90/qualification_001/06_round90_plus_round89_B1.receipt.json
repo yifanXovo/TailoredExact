@@ -1,0 +1,32 @@
+{
+  "schema": "round90-lp-g-pure-command-receipt-v1",
+  "name": "06_round90_plus_round89_B1",
+  "executable": "E:\\codes\\ExactEBRP\\build\\research\\round90-lp-g-split\\ExactEBRP.exe",
+  "argv": [
+    "--method",
+    "gcap-frontier",
+    "--algorithm-preset",
+    "research-round83-vds-equal-net-exchange",
+    "--input",
+    "results/unified_exact_round90/__nonexistent_cli_sentinel__.txt",
+    "--round90-lp-g-split",
+    "true",
+    "--round89-native-ot-b1",
+    "true"
+  ],
+  "working_directory": "E:\\codes\\ExactEBRP",
+  "expected_exit": "nonzero",
+  "expected_message": "Round90 LP-G split cannot combine with Round88 A1 or Round89 native B1",
+  "start_utc": "2026-09-26T22:40:19.9168588+00:00",
+  "finish_utc": "2026-09-26T22:40:19.9763685+00:00",
+  "external_launch_to_exit_wall_seconds": 0.0594893,
+  "cap_seconds": 120,
+  "timed_out": false,
+  "exit_code": 1,
+  "start_or_supervision_error": null,
+  "stdout_path": "results/unified_exact_round90/qualification_001/06_round90_plus_round89_B1.stdout.txt",
+  "stderr_path": "results/unified_exact_round90/qualification_001/06_round90_plus_round89_B1.stderr.txt",
+  "stdout_bytes": 0,
+  "stderr_bytes": 13792,
+  "pass": true
+}

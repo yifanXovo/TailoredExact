@@ -1,0 +1,30 @@
+{
+  "schema": "round90-lp-g-pure-command-receipt-v1",
+  "name": "04_non_ENS_custom_preset",
+  "executable": "E:\\codes\\ExactEBRP\\build\\research\\round90-lp-g-split\\ExactEBRP.exe",
+  "argv": [
+    "--method",
+    "gcap-frontier",
+    "--algorithm-preset",
+    "custom",
+    "--input",
+    "results/unified_exact_round90/__nonexistent_cli_sentinel__.txt",
+    "--round90-lp-g-split",
+    "true"
+  ],
+  "working_directory": "E:\\codes\\ExactEBRP",
+  "expected_exit": "nonzero",
+  "expected_message": "Round90 LP-G split requires the ENS-C Round83 gcap-frontier method",
+  "start_utc": "2026-09-26T22:40:19.3820211+00:00",
+  "finish_utc": "2026-09-26T22:40:19.8376104+00:00",
+  "external_launch_to_exit_wall_seconds": 0.4555441,
+  "cap_seconds": 120,
+  "timed_out": false,
+  "exit_code": 1,
+  "start_or_supervision_error": null,
+  "stdout_path": "results/unified_exact_round90/qualification_001/04_non_ENS_custom_preset.stdout.txt",
+  "stderr_path": "results/unified_exact_round90/qualification_001/04_non_ENS_custom_preset.stderr.txt",
+  "stdout_bytes": 0,
+  "stderr_bytes": 13788,
+  "pass": true
+}

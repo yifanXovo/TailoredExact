@@ -1,0 +1,42 @@
+import ast
+import json
+import sys
+from pathlib import Path
+
+root = Path.cwd()
+out = root / 'results/unified_exact_round90/runner_qualification_001'
+runner_path = root / 'scripts/round90_lp_g_g3.py'
+ast.parse(runner_path.read_text(encoding='utf-8'), filename=str(runner_path))
+sys.path.insert(0, str(root / 'scripts'))
+import round90_lp_g_g3 as runner
+prereg = json.loads(runner.PREREG.read_text(encoding='utf-8'))
+identity = runner.panel_and_identity(prereg)
+launches = runner.launches_for(prereg)
+harness = runner.harness_hashes()
+assert len(launches) == 16
+assert len(harness) == 8
+assert [x['number'] for x in launches] == list(range(1, 17))
+assert sum(x['cap_seconds'] for x in launches) == 12480
+assert [x['stage'] for x in launches] == ['smoke'] * 4 + ['rest'] * 12
+assert {x['arm'] for x in launches} == {'ENS-C', 'LP-G'}
+assert len({x['id'] for x in launches}) == 8
+assert all(len([x for x in launches if x['id'] == role]) == 2 for role in {x['id'] for x in launches})
+def option(command, name):
+    assert command.count(name) == 1, (name, command)
+    return command[command.index(name) + 1]
+for x in launches:
+    cmd = x['command']
+    assert option(cmd, '--method') == 'gcap-frontier'
+    assert option(cmd, '--algorithm-preset') == 'research-round83-vds-equal-net-exchange'
+    assert option(cmd, '--round90-lp-g-split') == ('true' if x['arm'] == 'LP-G' else 'false')
+    assert '--round88-constructive-only-descent' not in cmd
+    assert '--round89-native-ot-b1' not in cmd
+    assert option(cmd, '--process-wall-time-limit') == str(x['cap_seconds'])
+    assert option(cmd, '--time-limit') == str(x['cap_seconds'] - 6)
+    assert x['hard_stop_seconds'] == x['cap_seconds'] - 2
+    assert option(cmd, '--input') == x['panel']['input_path']
+(out / 'generated_commands.json').write_text(json.dumps(launches, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+(out / 'harness_hashes.json').write_text(json.dumps(harness, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+result = {'schema': 'round90-runner-zero-optimize-result-v1', 'ast_parse': 'pass', 'module_import': 'pass', 'panel_identity': 'pass', 'input_audit_role_count': identity['role_count'], 'launch_count': len(launches), 'panel_roles': [x['id'] for x in prereg['panel']], 'arms': ['ENS-C', 'LP-G'], 'candidate_flag': 'LP-G true, ENS-C false', 'A1_B1_flags': 'both absent', 'global_process_cap_sum_seconds': 12480, 'harness_hash_count': len(harness), 'prepare_called': False, 'qualification_gate_called': False, 'run_stage_called': False, 'exe_started': False, 'optimize_calls': 0}
+(out / 'qualification_result.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+print(json.dumps(result, ensure_ascii=False))
