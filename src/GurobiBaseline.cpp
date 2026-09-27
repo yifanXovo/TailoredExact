@@ -20,6 +20,7 @@
 #include "Round61Candidates.hpp"
 #include "Round63TimeResource.hpp"
 #include "Round65Projection.hpp"
+#include "Round92HandlingActivation.hpp"
 
 #include <gurobi_c.h>
 
@@ -3590,8 +3591,9 @@ public:
                     }
                     std::vector<RoutePlan> routes =
                         reconstructCanonicalCompactRoutes(instance_, values);
-                    const Verification verification =
-                        verifySolution(instance_, routes, options_.lambda);
+                    const Verification verification = options_.round92_handling_activation
+                        ? round92AdmitWitness(instance_, routes, options_.lambda)
+                        : verifySolution(instance_, routes, options_.lambda);
                     if (verification.original_solution_feasible &&
                         verification.original_objective_recomputed &&
                         verification.errors.empty()) {
@@ -3604,8 +3606,11 @@ public:
             }
         }
         if (out.infeasible && !request.verified_start_routes.empty()) {
-            const Verification witness = verifySolution(
-                instance_, request.verified_start_routes, options_.lambda);
+            const Verification witness = options_.round92_handling_activation
+                ? round92AdmitWitness(instance_, request.verified_start_routes,
+                                      options_.lambda)
+                : verifySolution(instance_, request.verified_start_routes,
+                                 options_.lambda);
             const bool contradicts = witness.original_solution_feasible &&
                 witness.original_objective_recomputed && witness.errors.empty() &&
                 witness.G >= request.gamma_L - 1e-9 &&

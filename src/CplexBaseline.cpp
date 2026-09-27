@@ -13,6 +13,7 @@
 #include "StaticSegmentedGini.hpp"
 
 #include "Evaluator.hpp"
+#include "PhysicalDurationTolerance.hpp"
 #include "FileSha256.hpp"
 #include "Logger.hpp"
 #include "TailoredBC.hpp"
@@ -458,6 +459,8 @@ void writeCompactLp(const Instance& instance,
     Round92HandlingActivationPlan round92_plan;
     if (options.round92_handling_activation) {
         const auto normalization_started = std::chrono::steady_clock::now();
+        round92RequireProofEnvironment();
+        round92RequireLawfulDomain(instance);
         if (!canonical_spec || !canonical_spec->round92_handling_cache ||
             !strengthened || !cutoff || !cutoff->enabled ||
             flow_variant != ConnectivityFlowVariant::Round20Current)
@@ -468,12 +471,17 @@ void writeCompactLp(const Instance& instance,
             throw std::runtime_error("round92_invalid_raw_handling_time");
         round92_duration.horizon = instance.total_time_limit;
         round92_duration.pickup = round92CanonicalEmittedCoefficient(cunit);
+        round92_duration.raw_pickup_time = instance.pickup_time;
+        round92_duration.raw_drop_time = instance.drop_time;
+        round92_duration.physical_tolerance = kPhysicalDurationTolerance;
         round92_duration.directed_travel.resize(V + 1);
+        round92_duration.raw_directed_travel.resize(V + 1);
         for (int i = 0; i <= V; ++i) {
             if (static_cast<int>(instance.dist.size()) <= i ||
                 static_cast<int>(instance.dist[i].size()) <= V)
                 throw std::runtime_error("round92_invalid_directed_arc_matrix");
             round92_duration.directed_travel[i].resize(V + 1);
+            round92_duration.raw_directed_travel[i].resize(V + 1);
             for (int j = 0; j <= V; ++j) {
                 if (i == j) continue;
                 const double raw = instance.dist[i][j];
@@ -481,6 +489,7 @@ void writeCompactLp(const Instance& instance,
                     throw std::runtime_error("round92_invalid_raw_directed_travel");
                 round92_duration.directed_travel[i][j] =
                     round92CanonicalEmittedCoefficient(raw);
+                round92_duration.raw_directed_travel[i][j] = raw;
             }
         }
         const double normalization_seconds = std::chrono::duration<double>(
@@ -507,7 +516,7 @@ void writeCompactLp(const Instance& instance,
         }
         if (!round92_plan.valid_input ||
             (!round92_plan.applicable &&
-             round92_plan.reason != "zero_handling_has_no_duration_quantity_bound"))
+             round92_plan.reason != "zero_common_lower_service_has_no_quantity_bound"))
             throw std::runtime_error("round92_handling_proof_failed:" + round92_plan.reason);
         if (static_stats) {
             static_stats->round92_handling_plan = round92_plan;
@@ -4509,6 +4518,11 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
                     : plan.preparation_wall_seconds;
             artifact.round92_handling_lmin_lower = plan.lmin_lower;
             artifact.round92_handling_lmin_upper = plan.lmin_upper;
+            artifact.round92_handling_c_lower = plan.lower_service_coefficient;
+            artifact.round92_handling_physical_horizon_upper =
+                plan.physical_horizon_upper;
+            artifact.round92_handling_common_horizon_upper =
+                plan.common_horizon_upper;
             artifact.round92_handling_quotient_lower = plan.quotient_lower;
             artifact.round92_handling_quotient_upper = plan.quotient_upper;
             if (!plan.valid_input ||

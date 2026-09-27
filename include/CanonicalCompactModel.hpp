@@ -115,6 +115,9 @@ struct CanonicalCompactModelArtifact {
     double round92_handling_preparation_seconds = 0.0;
     double round92_handling_lmin_lower = 0.0;
     double round92_handling_lmin_upper = 0.0;
+    double round92_handling_c_lower = 0.0;
+    double round92_handling_physical_horizon_upper = 0.0;
+    double round92_handling_common_horizon_upper = 0.0;
     double round92_handling_quotient_lower = 0.0;
     double round92_handling_quotient_upper = 0.0;
     std::string objective_definition =

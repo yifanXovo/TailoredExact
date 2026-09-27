@@ -19,6 +19,7 @@
 #include "Round76PhysicalClosure.hpp"
 #include "Round78BalancedRelocation.hpp"
 #include "Round83BlockExchange.hpp"
+#include "Round92HandlingActivation.hpp"
 #include "Master.hpp"
 #include "Parser.hpp"
 #include "Pricing.hpp"
@@ -3328,7 +3329,12 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         (opt.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
          opt.method != "gcap-frontier" ||
          opt.round88_constructive_only_descent || opt.round89_native_ot_b1 ||
-         opt.round90_lp_g_split))
+         opt.round90_lp_g_split || opt.round60_candidate_mode != "off" ||
+         opt.round61_candidate_mode != "off" ||
+         opt.round62_threshold_mode != "off" ||
+         opt.external_gini_scheduling !=
+             "round31-nonblocking-native-bound" ||
+         !opt.k1_am_sf_controller_enabled))
         throw std::runtime_error("Round92 handling activation requires isolated ENS-C Round83 gcap-frontier");
     if ((opt.primal_heuristic == "joint-insertion") != joint_insertion ||
         (opt.primal_heuristic_stop == "motif-exhaustion") != joint_insertion)
@@ -12998,6 +13004,18 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
     result.P = result.verification.P;
     result.objective = result.verification.objective;
     result.upper_bound = result.objective;
+
+    // The final startup witness, including any route-pool replacement, is
+    // admitted before it defines the Round92 cover or verified cutoff.
+    if (opt.round92_handling_activation) {
+        result.verification = ebrp::round92AdmitWitness(
+            instance, result.routes, opt.lambda, result.objective);
+        result.final_inventory = result.verification.final_inventory;
+        result.G = result.verification.G;
+        result.P = result.verification.P;
+        result.objective = result.verification.objective;
+        result.upper_bound = result.objective;
+    }
 
     const double gini_max_possible = (instance.V > 0)
         ? static_cast<double>(instance.V - 1) / static_cast<double>(instance.V) : 1.0;

@@ -98,6 +98,25 @@ def main(directory: Path) -> None:
                     len(row_terms(on, c)) == len(cutoff)
                     for c in on.getConstrs()),
                 "verified incumbent cutoff row missing")
+        physical = gp.read(str(directory / "physical_delta.lp"), env=env)
+        physical.update()
+        physical_rows = []
+        for c in physical.getConstrs():
+            terms = row_terms(physical, c)
+            if (terms.get("p_0_1") == 1.0 and terms.get("p_0_2") == 1.0 and
+                    terms.get("x_0_0_1", 0.0) <= -2.0 and
+                    terms.get("x_0_0_2", 0.0) <= -2.0 and
+                    len(terms) == 4 and c.Sense == "<" and c.RHS == 0.0):
+                physical_rows.append(c)
+        require(len(physical_rows) == 1,
+                "dyadic physical P=2 route excluded by serialized candidate row")
+        preceding = physical.getConstrByName(
+            f"c{int(physical_rows[0].ConstrName[1:]) - 1}")
+        require(preceding is not None and preceding.Sense == "<" and
+                preceding.RHS == 2.0 - 2.0**-42 and
+                row_terms(physical, preceding) == {"p_0_1": 1.0,
+                                                    "p_0_2": 1.0},
+                "dyadic canonical duration identity differs from original writer")
     print("Round92 parsed canonical LP identity/row/domain readback PASS")
 
 
