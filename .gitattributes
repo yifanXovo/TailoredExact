@@ -101,3 +101,8 @@ results/unified_exact_round85/figures/*.svg -whitespace
 /scripts/round91_handling_rounding_diagnostic.py -text whitespace=cr-at-eol
 /scripts/round91_handling_real_diagnostic.py -text whitespace=cr-at-eol
 /tests/round91_handling_rounding_probe.cpp -text whitespace=cr-at-eol
+
+# Preserve the conditional G4 continuation protocol before any execution.
+/scripts/round90_lp_g_g4_remaining.py -text whitespace=cr-at-eol
+/results/unified_exact_round90/preregistration_g4_remaining.json -text whitespace=cr-at-eol
+/results/unified_exact_round90/g4_remaining* -text whitespace=cr-at-eol
