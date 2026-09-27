@@ -341,6 +341,15 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         reason = "round90_lp_g_split_requires_isolated_round83_first_class_k1";
         return false;
     }
+    if (options.round92_handling_activation &&
+        (!first_class_k1 ||
+         options.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
+         options.method != "gcap-frontier" ||
+         options.round88_constructive_only_descent ||
+         options.round89_native_ot_b1 || options.round90_lp_g_split)) {
+        reason = "round92_handling_activation_requires_isolated_round83_first_class_k1";
+        return false;
+    }
     if (first_class_k1 &&
         (options.initial_gini_interval_count != 1 ||
          options.split_point_rule != "midpoint" ||
@@ -1693,6 +1702,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                                        const SolveResult& verified_seed,
                                        double root_gamma_L,
                                        double root_gamma_U) {
+    Round92HandlingActivationCache round92_handling_cache;
     const auto started = PaperClock::now();
     auto elapsedTelemetry = [&]() {
         return std::chrono::duration<double>(
@@ -2318,6 +2328,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         artifact_dir / "c6_split_decision_ledger.csv";
     const auto round90_split_path =
         artifact_dir / "round90_lp_g_split_choice.csv";
+    const auto round92_handling_path =
+        artifact_dir / "round92_handling_activation_rows.csv";
     const auto round47_adaptive_mass_path =
         artifact_dir / "adaptive_mass_decision_ledger.csv";
     const auto round47_contraction_path =
@@ -2466,6 +2478,20 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         round45_breakpoint_ledger, round45_choice_ledger,
         round45_validity_ledger;
     std::ofstream round90_split_ledger;
+    std::ofstream round92_handling_ledger;
+    if (options.round92_handling_activation) {
+        round92_handling_ledger.open(round92_handling_path);
+        round92_handling_ledger << std::setprecision(17)
+            << "leaf_id,incumbent_epoch,model_path,model_sha256,model_scope,"
+               "model_written,rows,first_row_id,last_row_id,B,reason,"
+               "exact_integer_floor,cache_hit,cache_hits_total,cache_misses_total,"
+               "normalization_seconds,lookup_seconds,preparation_seconds,"
+               "lmin_lower,lmin_upper,"
+               "quotient_lower,quotient_upper,failure_reason\n";
+        round92_handling_ledger.flush();
+        if (!round92_handling_ledger)
+            throw std::runtime_error("round92_handling_ledger_open_or_header_failed");
+    }
     if (options.round90_lp_g_split) {
         round90_split_ledger.open(round90_split_path);
         round90_split_ledger << std::setprecision(17);
@@ -3558,6 +3584,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         spec.gamma_L = leaf.gamma_L;
         spec.gamma_U = leaf.gamma_U;
         spec.add_verified_incumbent_row = true;
+        if (options.round92_handling_activation)
+            spec.round92_handling_cache = &round92_handling_cache;
         spec.verified_incumbent = verified_ub;
         spec.incumbent_epsilon = 0.0;
         if (round43_active || round44_active) {
@@ -3576,6 +3604,33 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         state.artifact = writeCanonicalCompactModel(
             instance, options, artifact_dir / "models" / (leaf.id + ".lp"),
             spec);
+        if (options.round92_handling_activation) {
+            const auto& a = state.artifact;
+            round92_handling_ledger
+                << csvField(leaf.id) << ',' << incumbent_epoch << ','
+                << csvField(a.path.string()) << ',' << csvField(a.sha256)
+                << ',' << csvField(a.model_scope) << ',' << (a.written ? 1 : 0)
+                << ',' << a.round92_handling_rows
+                << ',' << a.round92_handling_first_row_id
+                << ',' << a.round92_handling_last_row_id
+                << ',' << a.round92_handling_B
+                << ',' << csvField(a.round92_handling_reason)
+                << ',' << (a.round92_handling_exact_floor ? 1 : 0)
+                << ',' << (a.round92_handling_cache_hit ? 1 : 0)
+                << ',' << round92_handling_cache.hits
+                << ',' << round92_handling_cache.misses
+                << ',' << a.round92_handling_normalization_seconds
+                << ',' << a.round92_handling_lookup_seconds
+                << ',' << a.round92_handling_preparation_seconds
+                << ',' << a.round92_handling_lmin_lower
+                << ',' << a.round92_handling_lmin_upper
+                << ',' << a.round92_handling_quotient_lower
+                << ',' << a.round92_handling_quotient_upper
+                << ',' << csvField(a.failure_reason) << '\n';
+            round92_handling_ledger.flush();
+            if (!round92_handling_ledger)
+                throw std::runtime_error("round92_handling_ledger_write_failed");
+        }
         const double build_seconds = std::chrono::duration<double>(
             PaperClock::now() - build_started).count();
         total_model_build_seconds += build_seconds;

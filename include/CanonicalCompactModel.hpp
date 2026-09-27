@@ -4,6 +4,7 @@
 #include "Result.hpp"
 #include "GiniFrontierGeometry.hpp"
 #include "GiniEnvelopeRefinement.hpp"
+#include "Round92HandlingActivation.hpp"
 
 #include <filesystem>
 #include <string>
@@ -50,6 +51,8 @@ struct CanonicalCompactModelSpec {
     // besides "none" is "triple-support-duration-cover".
     std::string sparse_family_removal = "none";
     std::string static_model_identity;
+    // Explicit run-local owner, set by the isolated Round92 external tree.
+    Round92HandlingActivationCache* round92_handling_cache = nullptr;
     // Valid affine lower bounds h(G)=alpha+beta*G whose source interval
     // contains this model's interval.  The writer emits h(G) <= objective.
     std::vector<GiniEnvelopeFacet> objective_gini_envelope_facets;
@@ -100,6 +103,20 @@ struct CanonicalCompactModelArtifact {
     long long support_duration_triple_rows = 0;
     long long objective_gini_envelope_rows = 0;
     std::string static_family_encoding;
+    long long round92_handling_rows = 0;
+    long long round92_handling_first_row_id = -1;
+    long long round92_handling_last_row_id = -1;
+    std::uint64_t round92_handling_B = 0;
+    std::string round92_handling_reason;
+    bool round92_handling_exact_floor = false;
+    bool round92_handling_cache_hit = false;
+    double round92_handling_normalization_seconds = 0.0;
+    double round92_handling_lookup_seconds = 0.0;
+    double round92_handling_preparation_seconds = 0.0;
+    double round92_handling_lmin_lower = 0.0;
+    double round92_handling_lmin_upper = 0.0;
+    double round92_handling_quotient_lower = 0.0;
+    double round92_handling_quotient_upper = 0.0;
     std::string objective_definition =
         "min_G_plus_lambda_weighted_absolute_satisfaction_deviation";
     std::string model_scope = "complete_original_compact_milp";

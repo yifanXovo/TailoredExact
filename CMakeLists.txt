@@ -44,6 +44,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Round62Thresholds.cpp
   src/Round63TimeResource.cpp
   src/Round64SharedResource.cpp
+  src/Round92HandlingActivation.cpp
   src/Round65Projection.cpp
   src/ExternalGiniTree.cpp
   src/PaperExternalGiniTree.cpp
@@ -94,6 +95,10 @@ if(EXACT_EBRP_ENABLE_GUROBI)
     "-DSOURCE_ROOT=${CMAKE_CURRENT_SOURCE_DIR}"
     "-DOUTPUT_ROOT=${CMAKE_CURRENT_BINARY_DIR}"
     -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/round88_constructive_only_cli_test.cmake")
+  add_test(NAME Round92HandlingActivationCliTests COMMAND ${CMAKE_COMMAND}
+    "-DEXACT_EXE=$<TARGET_FILE:ExactEBRP>"
+    "-DOUTPUT_ROOT=${CMAKE_CURRENT_BINARY_DIR}"
+    -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/round92_handling_activation_cli_test.cmake")
   find_path(GUROBI_INCLUDE_DIR gurobi_c.h
     HINTS "${GUROBI_ROOT}" "$ENV{GUROBI_HOME}"
     PATH_SUFFIXES include win64/include)
@@ -278,6 +283,12 @@ add_test(NAME GlobalGiniTreeTests COMMAND GlobalGiniTreeTests)
 add_executable(Round90LpGSplitTests tests/round90_lp_g_split_tests.cpp)
 target_link_libraries(Round90LpGSplitTests PRIVATE exact_ebrp_core)
 add_test(NAME Round90LpGSplitTests COMMAND Round90LpGSplitTests)
+
+add_executable(Round92HandlingActivationTests tests/round92_handling_activation_tests.cpp)
+target_link_libraries(Round92HandlingActivationTests PRIVATE exact_ebrp_core)
+add_test(NAME Round92HandlingActivationTests COMMAND Round92HandlingActivationTests)
+add_executable(Round92HandlingIntegrationTests tests/round92_handling_integration_tests.cpp)
+target_link_libraries(Round92HandlingIntegrationTests PRIVATE exact_ebrp_core)
 
 add_executable(StrictCertificateTests tests/strict_certificate_tests.cpp)
 target_link_libraries(StrictCertificateTests PRIVATE exact_ebrp_core)

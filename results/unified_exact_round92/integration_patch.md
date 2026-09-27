@@ -1,8 +1,16 @@
-# Proposed Round92 integration hunks — deliberately unapplied
+# Round92 integration contract and applied source map
 
-All locations below refer to the current frozen source. Apply only after the
-Round90 source freeze ends and root admits a new candidate identity. A1/B1/
-LP-G must remain separate. No old file or build artifact was edited here.
+The integration described below has now been applied in the candidate source
+and awaits independent review and G1 execution. The historical sketch remains
+for comparison; `integration_implementation.md` records actual source paths,
+telemetry and the finite zero-Optimize gate. No build or solver execution has
+occurred on the integrated candidate.
+
+The table below is the pre-integration blueprint and retains its original
+anchors for review. The Round90 source freeze has ended and the isolated R92
+candidate edits are now present; see `integration_implementation.md` for
+what was actually applied. A1/B1/LP-G remain separate. No binary or build
+artifact has been produced from the R92 integration.
 
 | File / current anchor | Minimal future change |
 | --- | --- |

@@ -106,6 +106,30 @@ bool safeFloatingEnvironment() {
 
 } // namespace
 
+bool round92SameDurationKey(const Round92DurationCoefficients& a,
+                            const Round92DurationCoefficients& b) {
+    const auto same_bits = [](double x, double y) {
+        std::uint64_t xb = 0, yb = 0;
+        std::memcpy(&xb, &x, sizeof(x));
+        std::memcpy(&yb, &y, sizeof(y));
+        return xb == yb;
+    };
+    if (!same_bits(a.horizon, b.horizon) ||
+        !same_bits(a.pickup, b.pickup) ||
+        a.directed_travel.size() != b.directed_travel.size()) return false;
+    for (std::size_t i = 0; i < a.directed_travel.size(); ++i) {
+        if (a.directed_travel[i].size() != b.directed_travel[i].size())
+            return false;
+        for (std::size_t j = 0; j < a.directed_travel[i].size(); ++j) {
+            const auto& x = a.directed_travel[i][j];
+            const auto& y = b.directed_travel[i][j];
+            if (x.has_value() != y.has_value() ||
+                (x && !same_bits(*x, *y))) return false;
+        }
+    }
+    return true;
+}
+
 double round92CanonicalEmittedCoefficient(double value) {
     if (!std::isfinite(value)) return std::numeric_limits<double>::quiet_NaN();
     if (std::fabs(value) <= kWriterZeroTolerance) return 0.0;

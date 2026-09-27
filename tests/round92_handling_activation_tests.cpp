@@ -1,4 +1,5 @@
 #include "Round92HandlingActivation.hpp"
+#include "Evaluator.hpp"
 
 #include <algorithm>
 #include <cfenv>
@@ -9,6 +10,9 @@
 #include <optional>
 #include <string>
 #include <vector>
+#if defined(__SSE__)
+#include <xmmintrin.h>
+#endif
 
 namespace {
 
@@ -126,6 +130,83 @@ void invalidAndUnreachableDomains() {
             "non-nearest rounding must fail closed");
 }
 
+void exactRunCacheKeyAndLoadedReturn() {
+    auto original = complete(2, 0, 8, 2);
+    auto same = original;
+    require(ebrp::round92SameDurationKey(original, same),
+            "identical emitted duration rows must reuse proof");
+    same.directed_travel[1][2] = std::nullopt;
+    require(!ebrp::round92SameDurationKey(original, same),
+            "arc support change must invalidate proof");
+    same = original;
+    same.directed_travel[1][2] = 1.0;
+    require(!ebrp::round92SameDurationKey(original, same),
+            "coefficient change must invalidate proof");
+    same = original;
+    same.horizon = 9;
+    require(!ebrp::round92SameDurationKey(original, same),
+            "duration RHS change must invalidate proof");
+
+    // Pickup 4 > Q 2 is physically valid after an intermediate delivery;
+    // the route returns with one item loaded. No cumulative P<=Q premise.
+    ebrp::Instance in;
+    in.V = 4;
+    in.M = 1;
+    in.Q = {2};
+    in.capacity = {0, 2, 2, 2, 2};
+    in.initial = {0, 2, 0, 2, 0};
+    in.target = {0, 1, 1, 1, 1};
+    in.weights = {0, 1, 1, 1, 1};
+    in.dist.assign(5, std::vector<double>(5, 0.0));
+    in.total_time_limit = 8;
+    in.pickup_time = 1;
+    in.drop_time = 1;
+    const std::vector<ebrp::RoutePlan> routes = {
+        {0, {0, 1, 2, 3, 4, 0},
+            {{1, 2, 0}, {2, 0, 2}, {3, 2, 0}, {4, 0, 1}}}
+    };
+    const auto verified = ebrp::verifySolution(in, routes, 0.15);
+    require(verified.feasible && verified.original_solution_feasible &&
+            verified.final_inventory == std::vector<int>({0, 0, 2, 0, 1}),
+            "physical loaded-return route with P>Q must remain feasible");
+    const auto plan = ebrp::prepareRound92HandlingActivation(
+        complete(4, 0, 8, 2));
+    require(plan.applicable && plan.integer_capacity == 4,
+            "valid loaded-return route must satisfy the handling row");
+}
+
+void independentDyadicQuotientAndSubnormalGate() {
+    // Exact integer arithmetic in sixteenths: T=32/16, ell=2/16,
+    // c=8/16, so q=30/8=15/4 and the true integer B*=3.
+    auto fractional = complete(1, 1.0 / 16.0, 2.0, 0.5);
+    const auto p = ebrp::prepareRound92HandlingActivation(fractional);
+    require(p.valid_input && p.applicable && p.integer_capacity == 3 &&
+                p.quotient_lower <= 15.0 / 4.0 &&
+                p.quotient_upper >= 15.0 / 4.0,
+            "dyadic independent quotient must be enclosed");
+    // nextafter(2,-inf)=2-2^-52 exactly; q/c=4-2^-51 has floor 3.
+    fractional = complete(1, 0,
+        std::nextafter(2.0, -std::numeric_limits<double>::infinity()), 0.5);
+    const auto near = ebrp::prepareRound92HandlingActivation(fractional);
+    const double exact_near_q = 4.0 - std::ldexp(1.0, -51);
+    require(near.valid_input && near.applicable && near.integer_capacity >= 3 &&
+                near.quotient_lower <= exact_near_q &&
+                near.quotient_upper >= exact_near_q,
+            "near-integer dyadic exact floor must not be cut below 3");
+#if defined(__SSE__)
+    const unsigned original = _mm_getcsr();
+    for (unsigned mode : {0x8000u, 0x0040u}) {
+        _mm_setcsr(original | mode);
+        const auto rejected = ebrp::prepareRound92HandlingActivation(
+            complete(1, 0, 2, 1));
+        _mm_setcsr(original);
+        require(!rejected.valid_input &&
+                    rejected.reason == "unsafe_floating_environment",
+                "FTZ or DAZ must fail closed after runtime toggle");
+    }
+#endif
+}
+
 void independentTwoStationRouteOracle() {
     // Enumerate all small directed arc matrices and compare with a separate
     // depot-closed route oracle. No shortest-path helper is reused here.
@@ -166,6 +247,8 @@ int main() {
     nonmetricDirectedShortestPath();
     serializationAndUncertainFloor();
     invalidAndUnreachableDomains();
+    exactRunCacheKeyAndLoadedReturn();
+    independentDyadicQuotientAndSubnormalGate();
     independentTwoStationRouteOracle();
     std::cout << "Round92 handling activation source fixtures PASS\n";
 }

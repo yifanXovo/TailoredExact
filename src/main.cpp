@@ -118,6 +118,7 @@ void usage() {
         << "[--round88-constructive-only-descent true|false] "
         << "[--round89-native-ot-b1 true|false] "
         << "[--round90-lp-g-split true|false] "
+        << "[--round92-handling-activation true|false] "
         << "[--round34-c6-startup-variant hga-full|hga-light-1000|simple-start] "
         << "[--round36-c6-causal-arm off|hh|ss|bw-p|bw-a] "
         << "[--round36-c6-split-normalization proof|anchor] "
@@ -257,6 +258,8 @@ std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
         return "research-round89-ensc-native-ot-b1";
     if (opt.round90_lp_g_split)
         return "research-round90-ensc-lp-g-split";
+    if (opt.round92_handling_activation)
+        return "research-round92-ensc-rounded-handling-activation";
     return opt.algorithm_preset.empty() ? "custom" : opt.algorithm_preset;
 }
 
@@ -1416,6 +1419,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round88-constructive-only-descent") opt.round88_constructive_only_descent = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round89-native-ot-b1") opt.round89_native_ot_b1 = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round90-lp-g-split") opt.round90_lp_g_split = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--round92-handling-activation") opt.round92_handling_activation = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-stop") opt.primal_heuristic_stop = requireValue(i, argc, argv);
         else if (arg == "--primal-heuristic-no-improve-generations") opt.primal_heuristic_no_improve_generations = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-generation-log") opt.primal_heuristic_generation_log = requireValue(i, argc, argv);
@@ -3320,6 +3324,12 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (opt.round90_lp_g_split &&
         (opt.round88_constructive_only_descent || opt.round89_native_ot_b1))
         throw std::runtime_error("Round90 LP-G split cannot combine with Round88 A1 or Round89 native B1");
+    if (opt.round92_handling_activation &&
+        (opt.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
+         opt.method != "gcap-frontier" ||
+         opt.round88_constructive_only_descent || opt.round89_native_ot_b1 ||
+         opt.round90_lp_g_split))
+        throw std::runtime_error("Round92 handling activation requires isolated ENS-C Round83 gcap-frontier");
     if ((opt.primal_heuristic == "joint-insertion") != joint_insertion ||
         (opt.primal_heuristic_stop == "motif-exhaustion") != joint_insertion)
         throw std::runtime_error("Joint insertion requires its isolated VD-S research preset");
@@ -3950,6 +3960,11 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
         append_explicit_research_feature("round90_current_optimal_parent_lp_g_split_point");
         snapshot.preset_reason = "Round90: ENS-C first-class K1 uses strict interior current optimal parent LP G or the frozen midpoint, with unchanged child LP and AM proof";
+    }
+    if (opt.round92_handling_activation) {
+        snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
+        append_explicit_research_feature("round92_static_rounded_handling_activation_row");
+        snapshot.preset_reason = "Round92: isolated ENS-C adds one safe rounded handling/activation row per vehicle to each original F0 canonical interval model";
     }
     return snapshot;
 }

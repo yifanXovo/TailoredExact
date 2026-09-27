@@ -1,7 +1,9 @@
 # Round92 isolated static handling/activation row — source-only handoff
 
-**Status:** unlinked source proposal. No frozen ENS-C, Round90 binary, CMake, CLI,
-runner, LP, or result was changed; no compile, import, Optimize, or test was run.
+**Status:** the separate integration candidate is now present in source, with
+default-off wiring and zero-Optimize G1 test sources; none has been built,
+imported, optimized or run. The mathematical helper is unchanged in scope.
+See `integration_implementation.md` for the applied source and test gate.
 The only proposed inequality is, for each vehicle `k`,
 
 `sum_i p_{k,i} <= B_k sum_{j>=1} x_{k,0,j}`,

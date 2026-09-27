@@ -38,6 +38,21 @@ struct Round92HandlingActivationPlan {
     double preparation_wall_seconds = 0.0;
 };
 
+// Owned by one external-tree run; never shared between processes or solves.
+// The key compares every emitted binary64 coefficient and arc-presence bit.
+struct Round92HandlingActivationCache {
+    static constexpr std::uint32_t kProofVersion = 1;
+    std::uint32_t version = kProofVersion;
+    bool ready = false;
+    Round92DurationCoefficients key;
+    Round92HandlingActivationPlan plan;
+    std::uint64_t hits = 0;
+    std::uint64_t misses = 0;
+};
+
+bool round92SameDurationKey(const Round92DurationCoefficients& a,
+                            const Round92DurationCoefficients& b);
+
 // O((V+1)^3), allocation-only; does not read an LP or invoke a solver.
 // Invalid domains return !valid_input. A valid c=0 gives !applicable: the
 // duration row has no service bound. With no closed station path, F0 and the

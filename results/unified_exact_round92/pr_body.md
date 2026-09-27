@@ -6,11 +6,11 @@ For each vehicle, the proposed row bounds total integer pickup by a proved proce
 
 ## Status and validation
 
-This is **unlinked, unbuilt source preparation**: helper, header, pure correctness-test source, design and unapplied integration instructions. No existing qualified source, CMake target, CLI, preset or frozen Round90 executable is changed. No test, model export or Optimize has run for Round92.
+The candidate is now **integrated in source and awaiting its first build/qualification**. A default-off CLI flag and isolated identity enable the canonical rows, an exact-key cache owned by one algorithm run, and a model-bound row ledger. The original ENS-C startup, AM, split depth, solver tolerances and control flow are preserved; A1, native B1 and LP-G combinations are rejected. The frozen Round90 executable remains unchanged. No test, model export or Optimize has yet run for Round92.
 
-The [independent static review](results/unified_exact_round92/handling_activation_independent_static_review.md) conditionally accepts the pure kernel and states the required actual-model, arithmetic and physical-validity checks before integration can be qualified. The [plan](results/unified_exact_round92/plan.md) allows only one candidate and a finite subsequent screen. Default-off identity, exact coefficient/cache correspondence, unchanged original tolerances and complete costs remain required.
+The [independent static review](results/unified_exact_round92/handling_activation_independent_static_review.md) accepts the integrated source for one finite zero-Optimize G1 qualification. Its prepared checks cover outward arithmetic, loaded-return pickup exceeding vehicle capacity, unsafe floating environments, cache identity, CLI rejection, the historical default-off LP SHA, and independent readback of the actual duration and added rows. The [plan](results/unified_exact_round92/plan.md) allows only one candidate and a finite subsequent screen. Default-off identity, exact coefficient/cache correspondence, unchanged original tolerances and complete costs remain required.
 
-R7/R8/R63 related constraints and negative performance evidence are retained. This is an application of known rounding/activation reasoning, not a new general inequality theorem or a full routing-model convex hull. The separate Round90 G4 batch continues to own computation; there is no promotion or long campaign here.
+R7/R8/R63 related constraints and negative performance evidence are retained. This is an application of known rounding/activation reasoning, not a new general inequality theorem or a full routing-model convex hull. Round90 measurements keep their own frozen identity; there is no promotion or broad long campaign here.
 
 ## Paper preparation
 
