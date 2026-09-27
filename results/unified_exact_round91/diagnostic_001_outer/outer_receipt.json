@@ -1,0 +1,30 @@
+{
+  "status": "returned_zero_pending_evidence_audit",
+  "started_utc": "2026-09-27T02:45:39.2915823Z",
+  "exact_command": [
+    "E:/codes/ExactEBRP/build/research/round88-ot/venv/Scripts/python.exe",
+    "scripts/round91_handling_rounding_diagnostic.py",
+    "supervise",
+    "--manifest",
+    "results/unified_exact_round91/qualification_001/export/export_manifest.json",
+    "--admission",
+    "results/unified_exact_round91/diagnostic_admission_001.json",
+    "--out",
+    "results/unified_exact_round91/diagnostic_001"
+  ],
+  "launch_to_exit_wall_seconds": 0.8804413,
+  "ended_utc": "2026-09-27T02:45:40.1790342Z",
+  "python_sha256": "2204195cec25879507d958a8b6949add67091244b8b4da9cf3672f993548fa49",
+  "admission_sha256": "de10e8ce483100e6acaa609cf28814302e1add0d7c897c8e60df3fb46232eab8",
+  "observed_parent_peak_working_set_bytes": 2617344,
+  "child_pid": 25532,
+  "timed_out": false,
+  "limit_seconds": 300,
+  "stdout_path": "results/unified_exact_round91/diagnostic_001_outer/stdout.log",
+  "watchdog_contract_sha256": "866967b175f4e18560f48c8b5376b5c05cf52b26f9ad795ca09ec179998795ea",
+  "working_directory": "E:\\codes\\ExactEBRP",
+  "exit_code": 0,
+  "schema": "round91-handling-rounding-outer-watchdog-v1",
+  "stderr_path": "results/unified_exact_round91/diagnostic_001_outer/stderr.log",
+  "launch_error": null
+}

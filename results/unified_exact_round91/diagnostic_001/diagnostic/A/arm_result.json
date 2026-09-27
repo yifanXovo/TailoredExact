@@ -1,0 +1,69 @@
+{
+  "G": 0.07083333333333333,
+  "added_rows": 0,
+  "arm": "A",
+  "arm_complete_wall_seconds": 0.05059340037405491,
+  "gurobi_iteration_count": 63.0,
+  "gurobi_runtime_seconds": 0.002000093460083008,
+  "gurobi_work": 0.002068049787953446,
+  "optimize_seconds": 0.001817499753087759,
+  "original_F": 0.2833333333333333,
+  "original_F_reconstruction_residual": 0.0,
+  "original_columns": 244,
+  "original_lp_sha256": "9872d149c970c99f2b0175929221fb42692c6915a68a4e57e94dd1492fb79a29",
+  "original_matrix_signature": "0c24196fc843aac754799659b122213a2b0e4074b3a548e0a92dc9ce748d9abe",
+  "original_objective_coefficients": {
+    "G": 1.0,
+    "e_1": 0.15,
+    "e_2": 0.15,
+    "e_3": 0.15,
+    "e_4": 0.15,
+    "e_5": 0.15
+  },
+  "original_rows": 555,
+  "parameters": {
+    "FeasibilityTol": 1e-06,
+    "OptimalityTol": 1e-06,
+    "Presolve": -1,
+    "Seed": 0,
+    "Threads": 1,
+    "TimeLimit": 299.6352192997001
+  },
+  "primal_receipt": {
+    "added_rows": 0,
+    "all_within_numerical_allowance": true,
+    "bound_residuals_sha256": "114ac8e7983afc529af7cea5c1bfe3d63569179816d1d5f534e7fb285841f273",
+    "maximum_violations": {
+      "added_rows": 0.0,
+      "bounds": 0.0,
+      "original_rows": 0.0
+    },
+    "original_rows": 555,
+    "primal_sha256": "ceaad6cd436a1bfe95805d322bdf6a2b734ca042163f26533cc5762c77f419ad",
+    "row_residuals_sha256": "8ecde87159b7e27f79df26dfd893f0e399bc4a5fe9cf39c894b80bdcfb0e2e80",
+    "rows": 555,
+    "variables": 244
+  },
+  "primal_save_seconds": 0.028488399926573038,
+  "process_peak_working_set_bytes": 34476032,
+  "read_relax_seconds": 0.014136700425297022,
+  "research_objective_residual": 0.0,
+  "research_objective_value": 5.0,
+  "solution_count": 1,
+  "solver_status": "OPTIMAL",
+  "solver_status_code": 2,
+  "state_i_1_sum": 5.0,
+  "state_one_values": {
+    "1": 1.0,
+    "2": 1.0,
+    "3": 1.0,
+    "4": 1.0,
+    "5": 1.0
+  },
+  "status": "certified_optimal_primal",
+  "vehicle_pickup_sums": {
+    "0": 2.5,
+    "1": 2.5
+  },
+  "weighted_penalty_P": 1.4166666666666667
+}

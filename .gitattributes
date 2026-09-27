@@ -95,3 +95,34 @@ results/unified_exact_round85/figures/*.svg -whitespace
 /scripts/round86_*.py -text whitespace=cr-at-eol
 /reference/round86_unadapted_confirmation/** -text whitespace=cr-at-eol
 /results/unified_exact_round86/figures/*.svg -whitespace
+
+# Preserve the Round91 fixed-model diagnostic and its frozen source hashes.
+/results/unified_exact_round91/** -text whitespace=cr-at-eol
+/scripts/round91_handling_rounding_diagnostic.py -text whitespace=cr-at-eol
+/scripts/round91_handling_real_diagnostic.py -text whitespace=cr-at-eol
+/tests/round91_handling_rounding_probe.cpp -text whitespace=cr-at-eol
+
+# Preserve the conditional G4 continuation protocol before any execution.
+/scripts/round90_lp_g_g4_remaining.py -text whitespace=cr-at-eol
+/results/unified_exact_round90/preregistration_g4_remaining.json -text whitespace=cr-at-eol
+/results/unified_exact_round90/g4_remaining* -text whitespace=cr-at-eol
+
+# Preserve the actual qualified source and research evidence bytes. Automatic
+# checkout newline conversion otherwise breaks their recorded SHA-256 pins.
+/CMakeLists.txt -text whitespace=cr-at-eol
+/include/** -text whitespace=cr-at-eol
+/src/** -text whitespace=cr-at-eol
+/tests/round90_lp_g_split_tests.cpp -text whitespace=cr-at-eol
+/results/unified_exact_round88/** -text whitespace=cr-at-eol
+/results/unified_exact_round89/** -text whitespace=cr-at-eol
+/results/unified_exact_round90/** -text whitespace=cr-at-eol
+/scripts/round88*.py -text whitespace=cr-at-eol
+/scripts/round89*.py -text whitespace=cr-at-eol
+/scripts/round90*.py -text whitespace=cr-at-eol
+/scripts/round91*.py -text whitespace=cr-at-eol
+/research_plans/ensc_optimization_plan_2026-09-26.md -text whitespace=cr-at-eol
+/research_plans/ensc_optimization_instances_2026-09-26.json -text whitespace=cr-at-eol
+# Native/build logs retain their original trailing whitespace as raw evidence.
+/results/unified_exact_round88/**/*.log -whitespace
+/results/unified_exact_round89/**/*.log -whitespace
+/results/unified_exact_round90/**/*.log -whitespace
