@@ -314,6 +314,7 @@ void independentTwoStationRouteOracle() {
             for (int handling : {1, 2, 3}) {
                 row.horizon = horizon;
                 row.pickup = handling;
+                row.raw_pickup_time = handling;
                 const auto plan = ebrp::prepareRound92HandlingActivation(row);
                 const int expected = std::max(0, (horizon - independent_min) / handling);
                 require(plan.applicable && plan.integer_capacity ==
