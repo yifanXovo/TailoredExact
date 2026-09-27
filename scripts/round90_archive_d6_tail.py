@@ -24,7 +24,7 @@ PREREG = RESULTS / "preregistration_d6_tail.json"
 PLAN = RESULTS / "d6_tail_raw_plan.json"
 CHECK = RESULTS / "d6_tail_raw_check.json"
 INDEX = RESULTS / "d6_tail_raw_index.json"
-FAILURE = RESULTS / "d6_tail_raw_failure.json"
+FAILURE = RESULTS / "d6_tail_raw_failure_002.json"
 OUTPUT = RESULTS / "d6_tail_raw_archives"
 KERNEL_SHA256 = "d357b232ceb8e14e94cbf9629d57d9f18bc2f60b1b682865042c4cdd622319f0"
 ORDER = ("D6/ENS-C", "D6/LP-G")
@@ -198,8 +198,12 @@ def finalized_attempts() -> tuple[list[dict], dict]:
         raise RuntimeError("D6 cross-arm contradiction receipt failed")
     with (CAMPAIGN / "D6/summary.jsonl").open("r", encoding="utf-8") as stream:
         local_summary = [json.loads(line) for line in stream if line.strip()]
-    if (len(local_summary) != 2 or
-            local_summary != [item["record"] for item in summary]):
+    # run_one writes the local record before its wrapper adds the already
+    # validated seed. Preserve exact ordered equality for every local field.
+    expected_local = [dict(item["record"]) for item in summary]
+    for record in expected_local:
+        del record["seed"]
+    if len(local_summary) != 2 or local_summary != expected_local:
         raise RuntimeError("D6 local summary order invalid")
     receipt_paths = dict(identity=identity_path, source_snapshot=snapshot_path,
                          lease=lease_path, run_started=CAMPAIGN / "run_started.json",
