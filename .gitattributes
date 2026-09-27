@@ -126,3 +126,8 @@ results/unified_exact_round85/figures/*.svg -whitespace
 /results/unified_exact_round88/**/*.log -whitespace
 /results/unified_exact_round89/**/*.log -whitespace
 /results/unified_exact_round90/**/*.log -whitespace
+
+# Round92 unlinked candidate source and later evidence pins.
+/results/unified_exact_round92/** -text whitespace=cr-at-eol
+/scripts/round92*.py -text whitespace=cr-at-eol
+/tests/round92_handling_activation_tests.cpp -text whitespace=cr-at-eol
