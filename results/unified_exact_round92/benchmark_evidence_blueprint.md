@@ -69,8 +69,8 @@ R90 values are from [G3 smoke](../unified_exact_round90/runner_lp_g_g3_smoke_rep
 [G3 rest](../unified_exact_round90/runner_lp_g_g3_rest_report.md) and
 [F2/D6 priority](../unified_exact_round90/g4_priority_report.md), each with
 the corresponding raw summary, endpoint audit and cross-arm report. This
-table covers the original ten roles. The now-completed remaining panel is
-reported separately below; no in-progress D6 tail result is used here.
+table covers the original ten roles. The now-completed remaining panel and
+supplementary D6 tail are reported separately below.
 
 ## Completed remaining nine R90 roles
 
@@ -107,11 +107,17 @@ The fixed seed-0 development panel now comprises 19 roles: 11 pairs
 certified both methods, seven censored both, and D6 certified ENS-C only
 under its original 3600-second cap. All roles and losses remain included;
 the 1200-second D7/U6/F5/F6 observations were not extended to 3600 seconds.
-One separately preregistered fresh D6 pair at a common 7200-second whole-run
-cap is running under its [signed decision](../unified_exact_round90/d6_tail_execution_decision.md).
-Its result is not presumed and will be added without replacing the original
-D6 observation. This is still development evidence, not a final convergence
-study or a contemporary nineteen-role P-GRB comparison.
+The separately preregistered fresh D6 pair at a common 7200-second whole-run
+cap has now completed: ENS-C certifies at 3448.704 seconds and LP-G at
+3663.360 seconds (1.062242512 times ENS-C, 214.656 seconds later). Both share
+U=.15708313110317415, with numerical endpoint L closing within the existing
+tolerances. The [report](../unified_exact_round90/d6_tail_report.md),
+[independent review](../unified_exact_round90/d6_tail_independent_evidence_review.md)
+and [root decision](../unified_exact_round90/d6_tail_decision.md) retain the
+old D6 censored result separately. No severe registered signal occurred,
+and no further D6 tail extension is admitted. This is still development
+evidence, not a final convergence study or a contemporary nineteen-role
+P-GRB comparison.
 
 The remaining-panel complete process sum is 14,769.767 seconds inside its
 14,780.090222-second external invocation. Separate post-run reporting and
