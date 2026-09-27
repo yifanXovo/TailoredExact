@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP\scripts\round90_archive_d6_tail.py", line 409, in <module>
+    main()
+  File "E:\codes\ExactEBRP\scripts\round90_archive_d6_tail.py", line 393, in main
+    make_plan()
+  File "E:\codes\ExactEBRP\scripts\round90_archive_d6_tail.py", line 293, in make_plan
+    planned = inventory()
+              ^^^^^^^^^^^
+  File "E:\codes\ExactEBRP\scripts\round90_archive_d6_tail.py", line 247, in inventory
+    sources, attempts = finalized_attempts()
+                        ^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP\scripts\round90_archive_d6_tail.py", line 203, in finalized_attempts
+    raise RuntimeError("D6 local summary order invalid")
+RuntimeError: D6 local summary order invalid

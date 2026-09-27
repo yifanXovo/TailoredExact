@@ -13,6 +13,7 @@
 #include "StaticSegmentedGini.hpp"
 
 #include "Evaluator.hpp"
+#include "PhysicalDurationTolerance.hpp"
 #include "FileSha256.hpp"
 #include "Logger.hpp"
 #include "TailoredBC.hpp"
@@ -86,6 +87,13 @@ struct StaticSegmentedWriteStats {
     long long station_state_perspective_variables = 0;
     long long station_state_code_variables = 0;
     long long aggregate_mccormick_rows = 0;
+    long long round92_handling_rows = 0;
+    long long round92_handling_first_row_id = -1;
+    long long round92_handling_last_row_id = -1;
+    Round92HandlingActivationPlan round92_handling_plan;
+    bool round92_handling_cache_hit = false;
+    double round92_handling_normalization_seconds = 0.0;
+    double round92_handling_lookup_seconds = 0.0;
     std::string family_encoding;
 };
 
@@ -447,6 +455,77 @@ void writeCompactLp(const Instance& instance,
             flow_resolution.failure_reason);
     }
     const ConnectivityFlowVariant flow_variant = flow_resolution.variant;
+    Round92DurationCoefficients round92_duration;
+    Round92HandlingActivationPlan round92_plan;
+    if (options.round92_handling_activation) {
+        const auto normalization_started = std::chrono::steady_clock::now();
+        round92RequireProofEnvironment();
+        round92RequireLawfulDomain(instance);
+        if (!canonical_spec || !canonical_spec->round92_handling_cache ||
+            !strengthened || !cutoff || !cutoff->enabled ||
+            flow_variant != ConnectivityFlowVariant::Round20Current)
+            throw std::runtime_error("round92_requires_canonical_interval_F0_and_run_cache");
+        if (!std::isfinite(instance.pickup_time) || instance.pickup_time < 0 ||
+            !std::isfinite(instance.drop_time) || instance.drop_time < 0 ||
+            !std::isfinite(cunit))
+            throw std::runtime_error("round92_invalid_raw_handling_time");
+        round92_duration.horizon = instance.total_time_limit;
+        round92_duration.pickup = round92CanonicalEmittedCoefficient(cunit);
+        round92_duration.raw_pickup_time = instance.pickup_time;
+        round92_duration.raw_drop_time = instance.drop_time;
+        round92_duration.physical_tolerance = kPhysicalDurationTolerance;
+        round92_duration.directed_travel.resize(V + 1);
+        round92_duration.raw_directed_travel.resize(V + 1);
+        for (int i = 0; i <= V; ++i) {
+            if (static_cast<int>(instance.dist.size()) <= i ||
+                static_cast<int>(instance.dist[i].size()) <= V)
+                throw std::runtime_error("round92_invalid_directed_arc_matrix");
+            round92_duration.directed_travel[i].resize(V + 1);
+            round92_duration.raw_directed_travel[i].resize(V + 1);
+            for (int j = 0; j <= V; ++j) {
+                if (i == j) continue;
+                const double raw = instance.dist[i][j];
+                if (!std::isfinite(raw) || raw < 0)
+                    throw std::runtime_error("round92_invalid_raw_directed_travel");
+                round92_duration.directed_travel[i][j] =
+                    round92CanonicalEmittedCoefficient(raw);
+                round92_duration.raw_directed_travel[i][j] = raw;
+            }
+        }
+        const double normalization_seconds = std::chrono::duration<double>(
+            std::chrono::steady_clock::now() - normalization_started).count();
+        auto& cache = *canonical_spec->round92_handling_cache;
+        const auto lookup_started = std::chrono::steady_clock::now();
+        const bool hit = cache.ready &&
+            cache.version == Round92HandlingActivationCache::kProofVersion &&
+            round92SameDurationKey(cache.key, round92_duration);
+        const double lookup_seconds = std::chrono::duration<double>(
+            std::chrono::steady_clock::now() - lookup_started).count();
+        if (hit) {
+            ++cache.hits;
+            round92_plan = cache.plan;
+        } else {
+            ++cache.misses;
+            round92_plan = prepareRound92HandlingActivation(round92_duration);
+            if (round92_plan.valid_input) {
+                cache.version = Round92HandlingActivationCache::kProofVersion;
+                cache.key = round92_duration;
+                cache.plan = round92_plan;
+                cache.ready = true;
+            }
+        }
+        if (!round92_plan.valid_input ||
+            (!round92_plan.applicable &&
+             round92_plan.reason != "zero_common_lower_service_has_no_quantity_bound"))
+            throw std::runtime_error("round92_handling_proof_failed:" + round92_plan.reason);
+        if (static_stats) {
+            static_stats->round92_handling_plan = round92_plan;
+            static_stats->round92_handling_cache_hit = hit;
+            static_stats->round92_handling_normalization_seconds =
+                normalization_seconds;
+            static_stats->round92_handling_lookup_seconds = lookup_seconds;
+        }
+    }
 
     std::vector<int> y_lb(V + 1, 0);
     std::vector<int> y_ub(V + 1, 0);
@@ -1801,11 +1880,30 @@ void writeCompactLp(const Instance& instance,
         Expr duration;
         for (int i = 0; i <= V; ++i) {
             for (int j = 0; j <= V; ++j) {
-                if (i != j) addTerm(duration, xName(k, i, j), instance.dist[i][j]);
+                if (i != j) addTerm(duration, xName(k, i, j),
+                    options.round92_handling_activation
+                        ? *round92_duration.directed_travel[i][j]
+                        : instance.dist[i][j]);
             }
         }
-        for (int i = 1; i <= V; ++i) addTerm(duration, pName(k, i), cunit);
+        for (int i = 1; i <= V; ++i) addTerm(duration, pName(k, i),
+            options.round92_handling_activation ? round92_duration.pickup : cunit);
         writeConstraint(out, cid, duration, "<=", instance.total_time_limit);
+        if (options.round92_handling_activation && round92_plan.applicable) {
+            Expr activation;
+            for (int i = 1; i <= V; ++i)
+                addTerm(activation, pName(k, i), 1.0);
+            for (int j = 1; j <= V; ++j)
+                addTerm(activation, xName(k, 0, j),
+                        round92_plan.activation_coefficient);
+            if (static_stats) {
+                if (static_stats->round92_handling_first_row_id < 0)
+                    static_stats->round92_handling_first_row_id = cid;
+                static_stats->round92_handling_last_row_id = cid;
+                ++static_stats->round92_handling_rows;
+            }
+            writeConstraint(out, cid, activation, "<=", 0.0);
+        }
     }
 
     const std::string subset_duration_policy = canonical_spec
@@ -4392,13 +4490,47 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
         artifact.station_state_perspective_variables =
             static_stats.station_state_perspective_variables;
         artifact.station_state_code_variables = static_stats.station_state_code_variables;
-        artifact.aggregate_mccormick_rows =
+    artifact.aggregate_mccormick_rows =
             static_stats.aggregate_mccormick_rows;
         artifact.support_duration_pair_rows =
             stats.support_duration_pair_cuts_added;
         artifact.support_duration_triple_rows =
             stats.support_duration_triple_cuts_added;
         artifact.static_family_encoding = static_stats.family_encoding;
+        if (options.round92_handling_activation) {
+            const auto& plan = static_stats.round92_handling_plan;
+            artifact.round92_handling_rows = static_stats.round92_handling_rows;
+            artifact.round92_handling_first_row_id =
+                static_stats.round92_handling_first_row_id;
+            artifact.round92_handling_last_row_id =
+                static_stats.round92_handling_last_row_id;
+            artifact.round92_handling_B = plan.integer_capacity;
+            artifact.round92_handling_reason = plan.reason;
+            artifact.round92_handling_exact_floor = plan.exact_integer_floor;
+            artifact.round92_handling_cache_hit =
+                static_stats.round92_handling_cache_hit;
+            artifact.round92_handling_normalization_seconds =
+                static_stats.round92_handling_normalization_seconds;
+            artifact.round92_handling_lookup_seconds =
+                static_stats.round92_handling_lookup_seconds;
+            artifact.round92_handling_preparation_seconds =
+                artifact.round92_handling_cache_hit ? 0.0
+                    : plan.preparation_wall_seconds;
+            artifact.round92_handling_lmin_lower = plan.lmin_lower;
+            artifact.round92_handling_lmin_upper = plan.lmin_upper;
+            artifact.round92_handling_c_lower = plan.lower_service_coefficient;
+            artifact.round92_handling_physical_horizon_upper =
+                plan.physical_horizon_upper;
+            artifact.round92_handling_common_horizon_upper =
+                plan.common_horizon_upper;
+            artifact.round92_handling_quotient_lower = plan.quotient_lower;
+            artifact.round92_handling_quotient_upper = plan.quotient_upper;
+            if (!plan.valid_input ||
+                artifact.round92_handling_rows !=
+                    (plan.applicable ? instance.M : 0))
+                throw std::runtime_error("round92_handling_row_count_mismatch");
+            artifact.model_scope += ";round92_static_rounded_handling_activation";
+        }
         if (options.round62_threshold_mode != "off") {
             if (!spec.strengthened || !spec.interval_restricted || options.plain_baseline)
                 throw std::runtime_error("Round62 requires isolated complete F0 interval model");

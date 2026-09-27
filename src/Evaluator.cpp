@@ -1,9 +1,17 @@
 #include "Evaluator.hpp"
+#include "PhysicalDurationTolerance.hpp"
 
 #include <algorithm>
+#include <cfloat>
 #include <cmath>
 #include <sstream>
 #include <unordered_set>
+
+#if defined(__FAST_MATH__) || (defined(__FINITE_MATH_ONLY__) && __FINITE_MATH_ONLY__)
+#error "Round92 physical proof cannot use a fast-math Evaluator"
+#endif
+static_assert(FLT_EVAL_METHOD == 0,
+              "Round92 physical proof requires binary64 Evaluator operations");
 
 namespace ebrp {
 namespace {
@@ -116,7 +124,7 @@ Verification verifySolution(const Instance& instance,
         v.route_travel_time[route.vehicle] = travel;
         v.route_operation_time[route.vehicle] = operation_time;
         v.route_duration[route.vehicle] = duration;
-        if (duration > instance.total_time_limit + 1e-7) {
+        if (duration > instance.total_time_limit + kPhysicalDurationTolerance) {
             v.duration_feasible = false;
             addError(v, "Route duration exceeds T on vehicle " + std::to_string(route.vehicle));
         }

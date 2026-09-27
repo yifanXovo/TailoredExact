@@ -18,6 +18,7 @@
 #include "Round61Candidates.hpp"
 #include "Round62Passive.hpp"
 #include "Round65Proof.hpp"
+#include "Round92HandlingActivation.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -339,6 +340,18 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
          !options.round89_native_ot_b1);
     if (!round90_split_allowed) {
         reason = "round90_lp_g_split_requires_isolated_round83_first_class_k1";
+        return false;
+    }
+    if (options.round92_handling_activation &&
+        (!first_class_k1 ||
+         options.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
+         options.method != "gcap-frontier" ||
+         options.round88_constructive_only_descent ||
+         options.round89_native_ot_b1 || options.round90_lp_g_split ||
+         options.round60_candidate_mode != "off" ||
+         options.round61_candidate_mode != "off" ||
+         options.round62_threshold_mode != "off")) {
+        reason = "round92_handling_activation_requires_isolated_round83_first_class_k1";
         return false;
     }
     if (first_class_k1 &&
@@ -1693,6 +1706,26 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                                        const SolveResult& verified_seed,
                                        double root_gamma_L,
                                        double root_gamma_U) {
+    if (options.round92_handling_activation) {
+        if (options.external_gini_scheduling !=
+                "round31-nonblocking-native-bound" ||
+            !options.k1_am_sf_controller_enabled ||
+            options.round60_candidate_mode != "off" ||
+            options.round61_candidate_mode != "off" ||
+            options.round62_threshold_mode != "off" ||
+            options.algorithm_preset !=
+                "research-round83-vds-equal-net-exchange" ||
+            options.method != "gcap-frontier" ||
+            options.round88_constructive_only_descent ||
+            options.round89_native_ot_b1 || options.round90_lp_g_split)
+            throw std::runtime_error("round92_requires_isolated_c6_k1_ensc");
+        const Verification admitted = round92AdmitWitness(
+            instance, verified_seed.routes, options.lambda,
+            verified_seed.objective);
+        if (admitted.objective != verified_seed.objective)
+            throw std::runtime_error("round92_seed_stale_upper_bound");
+    }
+    Round92HandlingActivationCache round92_handling_cache;
     const auto started = PaperClock::now();
     auto elapsedTelemetry = [&]() {
         return std::chrono::duration<double>(
@@ -2318,6 +2351,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         artifact_dir / "c6_split_decision_ledger.csv";
     const auto round90_split_path =
         artifact_dir / "round90_lp_g_split_choice.csv";
+    const auto round92_handling_path =
+        artifact_dir / "round92_handling_activation_rows.csv";
     const auto round47_adaptive_mass_path =
         artifact_dir / "adaptive_mass_decision_ledger.csv";
     const auto round47_contraction_path =
@@ -2466,6 +2501,21 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         round45_breakpoint_ledger, round45_choice_ledger,
         round45_validity_ledger;
     std::ofstream round90_split_ledger;
+    std::ofstream round92_handling_ledger;
+    if (options.round92_handling_activation) {
+        round92_handling_ledger.open(round92_handling_path);
+        round92_handling_ledger << std::setprecision(17)
+            << "leaf_id,incumbent_epoch,model_path,model_sha256,model_scope,"
+               "model_written,rows,first_row_id,last_row_id,B,reason,"
+               "uniform_envelope_floor_certified,cache_hit,cache_hits_total,cache_misses_total,"
+               "normalization_seconds,lookup_seconds,preparation_seconds,"
+               "proof_version,c_lower,lmin_lower,lmin_upper,"
+               "physical_horizon_upper,common_horizon_upper,"
+               "quotient_lower,quotient_upper,failure_reason\n";
+        round92_handling_ledger.flush();
+        if (!round92_handling_ledger)
+            throw std::runtime_error("round92_handling_ledger_open_or_header_failed");
+    }
     if (options.round90_lp_g_split) {
         round90_split_ledger.open(round90_split_path);
         round90_split_ledger << std::setprecision(17);
@@ -3427,6 +3477,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     }
     long long round68_start_sequence = 0;
     auto solveBudgeted = [&](FixedIntervalMipRequest request) {
+        if (options.round92_handling_activation)
+            round92RequireProofEnvironment();
         if(native_evidence) {
             request.native_evidence=native_evidence;
             auto& s=request.native_evidence_scope;
@@ -3455,7 +3507,19 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 persistCurrentWitness(out.incumbent_objective,out.incumbent_routes,
                     "native_"+std::to_string(round65_native_witness_count++)+"_witness.json");
         };
-        if (!options.round65_budget) {auto out=backend->solve(request);captureNative(out);return out;}
+        auto admitNative = [&](FixedIntervalMipOutcome& out) {
+            if (!options.round92_handling_activation) return;
+            round92RequireProofEnvironment();
+            if (out.incumbent_independently_verified) {
+                if (!out.incumbent_available)
+                    throw std::runtime_error("round92_native_incumbent_flag_mismatch");
+                const Verification admitted = round92AdmitWitness(
+                    instance, out.incumbent_routes, options.lambda,
+                    out.incumbent_objective);
+                out.incumbent_objective = admitted.objective;
+            }
+        };
+        if (!options.round65_budget) {auto out=backend->solve(request);admitNative(out);captureNative(out);return out;}
         const bool optional = request.solve_kind == FixedIntervalSolveKind::PaperLpRelaxation;
         const auto grant = proof_budget.grant(globalDeadlineRemaining());
         if (optional && !grant.allowed()) {
@@ -3473,6 +3537,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         const double optional_seconds_before = proof_budget.optional_seconds;
         request.round65_budget = &proof_budget;
         auto out = backend->solve(request);
+        admitNative(out);
         captureNative(out);
         const double seconds = std::chrono::duration<double>(PaperClock::now()-start).count();
         if (!out.round65_optional_base_charged) proof_budget.charge(optional, out.work, seconds, request.leaf_id + "|" +
@@ -3558,6 +3623,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         spec.gamma_L = leaf.gamma_L;
         spec.gamma_U = leaf.gamma_U;
         spec.add_verified_incumbent_row = true;
+        if (options.round92_handling_activation)
+            spec.round92_handling_cache = &round92_handling_cache;
         spec.verified_incumbent = verified_ub;
         spec.incumbent_epsilon = 0.0;
         if (round43_active || round44_active) {
@@ -3576,6 +3643,37 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         state.artifact = writeCanonicalCompactModel(
             instance, options, artifact_dir / "models" / (leaf.id + ".lp"),
             spec);
+        if (options.round92_handling_activation) {
+            const auto& a = state.artifact;
+            round92_handling_ledger
+                << csvField(leaf.id) << ',' << incumbent_epoch << ','
+                << csvField(a.path.string()) << ',' << csvField(a.sha256)
+                << ',' << csvField(a.model_scope) << ',' << (a.written ? 1 : 0)
+                << ',' << a.round92_handling_rows
+                << ',' << a.round92_handling_first_row_id
+                << ',' << a.round92_handling_last_row_id
+                << ',' << a.round92_handling_B
+                << ',' << csvField(a.round92_handling_reason)
+                << ',' << (a.round92_handling_exact_floor ? 1 : 0)
+                << ',' << (a.round92_handling_cache_hit ? 1 : 0)
+                << ',' << round92_handling_cache.hits
+                << ',' << round92_handling_cache.misses
+                << ',' << a.round92_handling_normalization_seconds
+                << ',' << a.round92_handling_lookup_seconds
+                << ',' << a.round92_handling_preparation_seconds
+                << ',' << Round92HandlingActivationCache::kProofVersion
+                << ',' << a.round92_handling_c_lower
+                << ',' << a.round92_handling_lmin_lower
+                << ',' << a.round92_handling_lmin_upper
+                << ',' << a.round92_handling_physical_horizon_upper
+                << ',' << a.round92_handling_common_horizon_upper
+                << ',' << a.round92_handling_quotient_lower
+                << ',' << a.round92_handling_quotient_upper
+                << ',' << csvField(a.failure_reason) << '\n';
+            round92_handling_ledger.flush();
+            if (!round92_handling_ledger)
+                throw std::runtime_error("round92_handling_ledger_write_failed");
+        }
         const double build_seconds = std::chrono::duration<double>(
             PaperClock::now() - build_started).count();
         total_model_build_seconds += build_seconds;
@@ -3893,8 +3991,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         Verification round44_start_verification;
         bool round44_start_interval_member = false;
         if (round44_verified_start) {
-            round44_start_verification = verifySolution(
-                instance, best_routes, options.lambda);
+            round44_start_verification = options.round92_handling_activation
+                ? round92AdmitWitness(instance, best_routes, options.lambda,
+                                        verified_ub)
+                : verifySolution(instance, best_routes, options.lambda);
             round44_start_interval_member = verifiedMipStartInInterval(
                 round44_start_verification.G,
                 {bounded.gamma_L, bounded.gamma_U},
@@ -8550,8 +8650,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         Verification round44_terminal_start_verification;
         bool round44_terminal_start_member = false;
         if (round44_verified_terminal_start) {
-            round44_terminal_start_verification = verifySolution(
-                instance, best_routes, options.lambda);
+            round44_terminal_start_verification = options.round92_handling_activation
+                ? round92AdmitWitness(instance, best_routes, options.lambda,
+                                        verified_ub)
+                : verifySolution(instance, best_routes, options.lambda);
             round44_terminal_start_member = verifiedMipStartInInterval(
                 round44_terminal_start_verification.G,
                 {bounded.gamma_L, bounded.gamma_U},
@@ -8835,7 +8937,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     }
     result.upper_bound = round62_usable_ub;
     result.routes = best_routes;
-    result.verification = verifySolution(instance, best_routes, options.lambda);
+    result.verification = options.round92_handling_activation
+        ? round92AdmitWitness(instance, best_routes, options.lambda,
+                                round62_usable_ub)
+        : verifySolution(instance, best_routes, options.lambda);
+    if (options.round92_handling_activation)
+        result.upper_bound = round62_usable_ub = result.verification.objective;
     result.objective = result.verification.objective;
     result.G = result.verification.G;
     result.P = result.verification.P;

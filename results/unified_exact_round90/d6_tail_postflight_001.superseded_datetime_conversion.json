@@ -1,0 +1,16 @@
+{
+  "schema": "round90-d6-tail-postflight-receipt-v1",
+  "scope": "elapsed wall from algorithm outer receipt end through read-only report/table verification; includes scheduling gap and is not CPU time",
+  "outer_receipt_ended_utc": "2026-09-27T20:35:17.0000000+08:00",
+  "postflight_receipt_utc": "2026-09-27T12:41:39.2453478+00:00",
+  "elapsed_since_outer_exit_seconds": 382.2453478,
+  "analysis_actions": [
+    "read existing completion/audit/cross-arm/native parameter and small phase logs",
+    "write d6_tail_report.md and d6_tail_table.csv",
+    "verify table widths and small evidence SHA"
+  ],
+  "algorithm_optimize_calls": 0,
+  "build_calls": 0,
+  "archive_calls": 0,
+  "compute_slot_released_before_report": true
+}

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP\scripts\round92_handling_g3.py", line 622, in <module>
+    main()
+  File "E:\codes\ExactEBRP\scripts\round92_handling_g3.py", line 618, in main
+    run_stage(sys.argv[1].removeprefix("run-"))
+  File "E:\codes\ExactEBRP\scripts\round92_handling_g3.py", line 582, in run_stage
+    raise RuntimeError("Severe paired signal; pause next role for root review")
+RuntimeError: Severe paired signal; pause next role for root review

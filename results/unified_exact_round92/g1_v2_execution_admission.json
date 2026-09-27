@@ -1,0 +1,26 @@
+{
+  "schema": "round92-g1-v2-execution-admission-v1",
+  "authorized_by": "root",
+  "allow_run": true,
+  "maximum_runs": 1,
+  "allow_configure": false,
+  "allow_optimize": false,
+  "maximum_optimize_calls": 0,
+  "source_commit": "ea190d909bbc8fbb0caaaada78c928f71be18bc1",
+  "source_identity_sha256": "02dbca61efb415d64561a9a15a868b7f8822354b8c0afb4c2f76675b8bbf6bbf",
+  "runner_sha256": "7314f3da576a0f417e9db26642163d4acbbb4ecd003834c05bbc5cf1141d067d",
+  "preregistration_sha256": "62869a467dc699b3e0e791a3068c29ad8203686e822ee73b276a7913fa191feb",
+  "evidence_root": "results/unified_exact_round92/qualification_003",
+  "independent_static_review_sha256": "0d7912851bd7aa024cbe5acb26165c657949e1cd6a4010bd6e5b98fea815d7f5",
+  "compute_release": "Evidence worker explicitly reports D6 tail outer child exit 0, 2/2 completed audited arms, no residual solver/build/runner process, and releases exclusive computation.",
+  "compute_release_receipt": "results/unified_exact_round90/d6_tail_run_outer_001.receipt.json",
+  "execution_owner": "/root/r88_startup_review",
+  "command": [
+    "D:/msys64/ucrt64/bin/python.exe",
+    "scripts/round92_g1_v2_qualification.py",
+    "--admission",
+    "results/unified_exact_round92/g1_v2_execution_admission.json"
+  ],
+  "stop_policy": "Run exactly once; stop and preserve complete logs, real exit status and all elapsed costs on any failure. No automatic retry, source repair, additional test matrix, native run or archive batch.",
+  "external_receipt_required": true
+}

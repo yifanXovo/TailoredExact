@@ -1,0 +1,4661 @@
+{
+  "adapter_sha256": "0acabefe5303a3d06e0b507302d9c1bca8252bad5042367740be351d233aa573",
+  "archive_count": 12,
+  "archive_limit_bytes": 47185920,
+  "attempt_evidence": {
+    "attempted": [
+      "seed1/U6/ENS-C",
+      "seed1/U6/H-ACT",
+      "seed2/U6/H-ACT",
+      "seed2/U6/ENS-C"
+    ],
+    "certifications": {
+      "seed1/ENS-C": false,
+      "seed1/H-ACT": false,
+      "seed2/ENS-C": false,
+      "seed2/H-ACT": false
+    },
+    "not_run": [],
+    "seed0_reference": "runner_handling_g3/raw/11_U6_H-ACT and 12_U6_ENS-C (not duplicated)",
+    "source_receipt_sha256": {
+      "preregistration_u6_repeat.json": "72381b0be8550acf94d38f0c295de82e9916d4b0734d43c9b043fbdfebae0357",
+      "runner_u6_repeat/identity.json": "b9dae28417d7762dca28f8ae5a17bc9c6e2197c8538d7345a217a96f5665da6d",
+      "runner_u6_repeat/postflight.json": "80d81ae03035d08dcd3d11c4b297744993bbd559bd2670a4a2c64178afce068b",
+      "runner_u6_repeat/run_completion.json": "0aba2941d36f8064487c6b4efc02e78501c2a528825eac3534ca0bc60bc23810",
+      "runner_u6_repeat/runner_u6_repeat_lease.json": "9fe45a7b6da041e6c9168d8309ef7ba12b10a61230be8f3d4706dc86f087a630",
+      "runner_u6_repeat/seed_1/processes.jsonl": "0df4ea4f4ea946408af2f4ac0f7d489608618b03c7310ecaabfa8a1978859b02",
+      "runner_u6_repeat/seed_1/runner_cross_arm_U6.json": "599c5853c606558128fd001c977ba7aea331e49a52e1d4337eb4fb0a0747cda1",
+      "runner_u6_repeat/seed_1/runner_repeat_risk_signal.json": "df1692d5ff0c1da0146600e4e3e0624517ea81c3ae300b741dbef68c0d0d5236",
+      "runner_u6_repeat/seed_1/runtime_status.json": "67eed25d64375bccbc7c3b7f2de5ebc7153a17343e8ecfc80cb0380e8beafe6b",
+      "runner_u6_repeat/seed_1/summary.jsonl": "6fdf65a264fad0e1ee9308261d5f3c85f1325397da926fcb17af4b38800a8f6f",
+      "runner_u6_repeat/seed_2/processes.jsonl": "6e81e82e0e6ece1a584be8d1c0792ac2a8269d2ae5822d04aacc54da13ee2c1d",
+      "runner_u6_repeat/seed_2/runner_cross_arm_U6.json": "798b8e091680d8e97323af0d6900ee1529415e4672de3ea29c63dfcf4a8462e9",
+      "runner_u6_repeat/seed_2/runner_repeat_risk_signal.json": "d8d4b69db769632a046e2439d5e36438706f6bfaed68acdaaa194b25ce16ea9a",
+      "runner_u6_repeat/seed_2/runtime_status.json": "042bf62633693d82efcf938e2d3ac0993c4b018171bc36300bb8484ebbb83c6c",
+      "runner_u6_repeat/seed_2/summary.jsonl": "8ca08bb327a03fe47f1ff81a797386a33d89eecbfa1115dd36ec2684f800bb06",
+      "runner_u6_repeat/summary.jsonl": "8399b60e00a77a38aaff3a89023f25a8be2c8b0034f5391dd3f8e8c4f96977c0",
+      "runner_u6_repeat/three_seed_summary.json": "e9c4283172b5489b055904e2a04f9568bd147363bfa57a728fa493aa7a4b4b7c",
+      "u6_repeat_prepare_gate.json": "3e5a392b0489d74cb1794df277bc3fbb366dc94e08269c0af8fb870881b45731",
+      "u6_repeat_run_outer_001.receipt.json": "1f9281e6b08c7eb9f4b725973d4de2bcd906f93886a6aced29939c068509809e"
+    }
+  },
+  "frozen_kernel_sha256": "d357b232ceb8e14e94cbf9629d57d9f18bc2f60b1b682865042c4cdd622319f0",
+  "groups": [
+    {
+      "archive": "runner_u6_repeat_raw_archives/seed_1_01_U6_ENS-C.part01-of-03.tar.gz",
+      "files": [
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/affinity.json",
+          "size": 400
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/audit.json",
+          "size": 39216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/completion.json",
+          "size": 547
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/adaptive_mass_decision_ledger.csv",
+          "size": 673
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/c6_split_decision_ledger.csv",
+          "size": 921
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/contraction_ledger.csv",
+          "size": 490
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/global_bound_trace.csv",
+          "size": 11477
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/initial_decomposition_ledger.csv",
+          "size": 312
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/initial_witness.json",
+          "size": 2068
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/lp_status_ledger.csv",
+          "size": 709
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/models/L0.0.0.lp",
+          "size": 16870840
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/models/L0.0.1.lp",
+          "size": 16916749
+        }
+      ],
+      "part_count": 3,
+      "part_number": 1,
+      "source_bytes": 33844402,
+      "source_file_count": 12,
+      "source_group": "seed_1_01_U6_ENS-C"
+    },
+    {
+      "archive": "runner_u6_repeat_raw_archives/seed_1_01_U6_ENS-C.part02-of-03.tar.gz",
+      "files": [
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/models/L0.0.lp",
+          "size": 16870840
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/models/L0.1.lp",
+          "size": 16905624
+        }
+      ],
+      "part_count": 3,
+      "part_number": 2,
+      "source_bytes": 33776464,
+      "source_file_count": 2,
+      "source_group": "seed_1_01_U6_ENS-C"
+    },
+    {
+      "archive": "runner_u6_repeat_raw_archives/seed_1_01_U6_ENS-C.part03-of-03.tar.gz",
+      "files": [
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/models/L0.lp",
+          "size": 16865849
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/native_0_witness.json",
+          "size": 2108
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/native_logs/L0.0.0_lp.gurobi.log",
+          "size": 1397
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/native_logs/L0.0.1_lp.gurobi.log",
+          "size": 1442
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/native_logs/L0.0_lp.gurobi.log",
+          "size": 1395
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/native_logs/L0.0_terminal_mip.gurobi.log",
+          "size": 8498
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/native_logs/L0.0_terminal_mip.gurobi.log.round68.start.json",
+          "size": 558
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/native_logs/L0.0_terminal_mip.gurobi.log.round68.start.values.csv",
+          "size": 505533
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/native_logs/L0.1_lp.gurobi.log",
+          "size": 1444
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/native_logs/L0_lp.gurobi.log",
+          "size": 1458
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/native_target_ledger.csv",
+          "size": 208
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/paper_leaf_ledger.csv",
+          "size": 1070
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/paper_optimize_ledger.csv",
+          "size": 2378
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/paper_tree_events.csv",
+          "size": 373
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/parent_child_bound_ledger.csv",
+          "size": 449
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/round68_existing_0_witness.json",
+          "size": 2068
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/external/split_decision_ledger.csv",
+          "size": 536
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.descent.csv",
+          "size": 28780
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/actual_distances.json",
+          "size": 48367
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_0.csv",
+          "size": 4270
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_0.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_0.csv.initial.json",
+          "size": 1148
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_1.csv",
+          "size": 632
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_1.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_1.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_10.csv",
+          "size": 483
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_10.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_10.csv.initial.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_11.csv",
+          "size": 633
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_11.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_11.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_12.csv",
+          "size": 477
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_12.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_12.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_13.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_13.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_13.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_14.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_14.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_14.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_15.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_15.csv.final.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_15.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_16.csv",
+          "size": 782
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_16.csv.final.json",
+          "size": 1212
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_16.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_17.csv",
+          "size": 632
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_17.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_17.csv.initial.json",
+          "size": 1213
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_2.csv",
+          "size": 632
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_2.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_2.csv.initial.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_3.csv",
+          "size": 622
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_3.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_3.csv.initial.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_4.csv",
+          "size": 4156
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_4.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_4.csv.initial.json",
+          "size": 1213
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_5.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_5.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_5.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_6.csv",
+          "size": 1684
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_6.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_6.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_7.csv",
+          "size": 634
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_7.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_7.csv.initial.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_8.csv",
+          "size": 781
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_8.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_8.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_9.csv",
+          "size": 631
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_9.csv.final.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/closure_9.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/events.jsonl",
+          "size": 5458
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/initial.json",
+          "size": 1148
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_0.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_1.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_10.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_11.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_12.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_13.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_14.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_15.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_16.json",
+          "size": 1213
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_2.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_3.json",
+          "size": 1213
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_4.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_5.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_6.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_7.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_8.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/neutral_9.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.exchange/result.json",
+          "size": 221
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.joint.csv",
+          "size": 4661
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/hga.csv.joint_seed.csv",
+          "size": 446
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_1.commit",
+          "size": 95
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_1.json",
+          "size": 374
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_10.commit",
+          "size": 88
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_10.json",
+          "size": 70
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_11.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_11.json",
+          "size": 1303
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_12.commit",
+          "size": 88
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_12.json",
+          "size": 70
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_13.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_13.json",
+          "size": 1288
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_14.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_14.json",
+          "size": 2231
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_15.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_15.json",
+          "size": 180
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_16.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_16.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_17.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_17.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_18.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_18.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_19.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_19.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_2.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_2.json",
+          "size": 2217
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_20.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_20.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_21.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_21.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_22.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_22.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_23.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_23.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_24.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_24.json",
+          "size": 197
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_25.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_25.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_26.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_26.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_27.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_27.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_28.commit",
+          "size": 88
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_28.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_29.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_29.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_3.commit",
+          "size": 87
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_3.json",
+          "size": 1026
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_30.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_30.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_31.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_31.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_32.commit",
+          "size": 88
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_32.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_33.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_33.json",
+          "size": 196
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_34.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_34.json",
+          "size": 197
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_35.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_35.json",
+          "size": 197
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_36.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_36.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_37.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_37.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_38.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_38.json",
+          "size": 196
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_39.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_39.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_4.commit",
+          "size": 94
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_4.json",
+          "size": 69
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_40.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_40.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_41.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_41.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_42.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_42.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_43.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_43.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_44.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_44.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_45.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_45.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_46.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_46.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_47.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_47.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_48.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_48.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_49.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_49.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_5.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_5.json",
+          "size": 1082
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_50.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_50.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_51.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_51.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_52.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_52.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_53.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_53.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_54.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_54.json",
+          "size": 197
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_55.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_55.json",
+          "size": 197
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_56.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_56.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_57.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_57.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_58.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_58.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_59.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_59.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_6.commit",
+          "size": 94
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_6.json",
+          "size": 69
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_60.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_60.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_61.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_61.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_62.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_62.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_63.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_63.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_64.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_64.json",
+          "size": 197
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_65.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_65.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_66.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_66.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_67.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_67.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_68.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_68.json",
+          "size": 197
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_69.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_69.json",
+          "size": 2267
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_7.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_7.json",
+          "size": 1100
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_70.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_70.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_71.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_71.json",
+          "size": 2268
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_72.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_72.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_73.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_73.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_74.commit",
+          "size": 88
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_74.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_75.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_75.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_76.commit",
+          "size": 90
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_76.json",
+          "size": 2268
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_77.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_77.json",
+          "size": 2268
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_78.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_78.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_79.commit",
+          "size": 91
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_79.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_8.commit",
+          "size": 87
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_8.json",
+          "size": 69
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_80.commit",
+          "size": 91
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_80.json",
+          "size": 2270
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_81.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_81.json",
+          "size": 2271
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_82.commit",
+          "size": 91
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_82.json",
+          "size": 2271
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_83.commit",
+          "size": 91
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_83.json",
+          "size": 2271
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_84.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_84.json",
+          "size": 70
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_9.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/journal/event_9.json",
+          "size": 1283
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/launch.json",
+          "size": 3122
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/native.log",
+          "size": 2399
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/native_parameter_evidence.json",
+          "size": 408
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/observations.json",
+          "size": 168179
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/phases.csv",
+          "size": 3111
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/process_start_marker.json",
+          "size": 161
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/progress.csv",
+          "size": 710
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/result.json",
+          "size": 99878
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/samples.jsonl",
+          "size": 6669
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/stderr.log",
+          "size": 0
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/01_U6_ENS-C/stdout.log",
+          "size": 102
+        }
+      ],
+      "part_count": 3,
+      "part_number": 3,
+      "source_bytes": 17917943,
+      "source_file_count": 275,
+      "source_group": "seed_1_01_U6_ENS-C"
+    },
+    {
+      "archive": "runner_u6_repeat_raw_archives/seed_1_02_U6_H-ACT.part01-of-03.tar.gz",
+      "files": [
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/affinity.json",
+          "size": 400
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/audit.json",
+          "size": 49357
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/completion.json",
+          "size": 567
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/adaptive_mass_decision_ledger.csv",
+          "size": 610
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/c6_split_decision_ledger.csv",
+          "size": 900
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/contraction_ledger.csv",
+          "size": 490
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/global_bound_trace.csv",
+          "size": 10174
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/initial_decomposition_ledger.csv",
+          "size": 312
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/initial_witness.json",
+          "size": 2068
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/lp_status_ledger.csv",
+          "size": 723
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/models/L0.0.0.lp",
+          "size": 16875624
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/models/L0.0.1.lp",
+          "size": 16921533
+        }
+      ],
+      "part_count": 3,
+      "part_number": 1,
+      "source_bytes": 33862758,
+      "source_file_count": 12,
+      "source_group": "seed_1_02_U6_H-ACT"
+    },
+    {
+      "archive": "runner_u6_repeat_raw_archives/seed_1_02_U6_H-ACT.part02-of-03.tar.gz",
+      "files": [
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/models/L0.0.lp",
+          "size": 16875624
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/models/L0.1.lp",
+          "size": 16910408
+        }
+      ],
+      "part_count": 3,
+      "part_number": 2,
+      "source_bytes": 33786032,
+      "source_file_count": 2,
+      "source_group": "seed_1_02_U6_H-ACT"
+    },
+    {
+      "archive": "runner_u6_repeat_raw_archives/seed_1_02_U6_H-ACT.part03-of-03.tar.gz",
+      "files": [
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/models/L0.lp",
+          "size": 16870633
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/native_0_witness.json",
+          "size": 2106
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/native_logs/L0.0.0_lp.gurobi.log",
+          "size": 1397
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/native_logs/L0.0.1_lp.gurobi.log",
+          "size": 1442
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/native_logs/L0.0_lp.gurobi.log",
+          "size": 1395
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/native_logs/L0.0_terminal_mip.gurobi.log",
+          "size": 14612
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/native_logs/L0.0_terminal_mip.gurobi.log.round68.start.json",
+          "size": 569
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/native_logs/L0.0_terminal_mip.gurobi.log.round68.start.values.csv",
+          "size": 505533
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/native_logs/L0.1_lp.gurobi.log",
+          "size": 1510
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/native_logs/L0_lp.gurobi.log",
+          "size": 1393
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/native_target_ledger.csv",
+          "size": 208
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/paper_leaf_ledger.csv",
+          "size": 1070
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/paper_optimize_ledger.csv",
+          "size": 2365
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/paper_tree_events.csv",
+          "size": 373
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/parent_child_bound_ledger.csv",
+          "size": 449
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/round68_existing_0_witness.json",
+          "size": 2068
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/round92_handling_activation_rows.csv",
+          "size": 3082
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/external/split_decision_ledger.csv",
+          "size": 473
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.descent.csv",
+          "size": 28845
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/actual_distances.json",
+          "size": 48367
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_0.csv",
+          "size": 4278
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_0.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_0.csv.initial.json",
+          "size": 1148
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_1.csv",
+          "size": 624
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_1.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_1.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_10.csv",
+          "size": 475
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_10.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_10.csv.initial.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_11.csv",
+          "size": 633
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_11.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_11.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_12.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_12.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_12.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_13.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_13.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_13.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_14.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_14.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_14.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_15.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_15.csv.final.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_15.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_16.csv",
+          "size": 782
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_16.csv.final.json",
+          "size": 1212
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_16.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_17.csv",
+          "size": 632
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_17.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_17.csv.initial.json",
+          "size": 1213
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_2.csv",
+          "size": 632
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_2.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_2.csv.initial.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_3.csv",
+          "size": 623
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_3.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_3.csv.initial.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_4.csv",
+          "size": 4149
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_4.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_4.csv.initial.json",
+          "size": 1213
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_5.csv",
+          "size": 469
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_5.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_5.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_6.csv",
+          "size": 1676
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_6.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_6.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_7.csv",
+          "size": 634
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_7.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_7.csv.initial.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_8.csv",
+          "size": 765
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_8.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_8.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_9.csv",
+          "size": 614
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_9.csv.final.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/closure_9.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/events.jsonl",
+          "size": 5458
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/initial.json",
+          "size": 1148
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_0.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_1.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_10.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_11.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_12.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_13.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_14.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_15.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_16.json",
+          "size": 1213
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_2.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_3.json",
+          "size": 1213
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_4.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_5.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_6.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_7.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_8.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/neutral_9.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.exchange/result.json",
+          "size": 221
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.joint.csv",
+          "size": 4721
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/hga.csv.joint_seed.csv",
+          "size": 446
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_1.commit",
+          "size": 95
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_1.json",
+          "size": 374
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_10.commit",
+          "size": 88
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_10.json",
+          "size": 70
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_11.commit",
+          "size": 90
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_11.json",
+          "size": 1346
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_12.commit",
+          "size": 87
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_12.json",
+          "size": 70
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_13.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_13.json",
+          "size": 1331
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_14.commit",
+          "size": 90
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_14.json",
+          "size": 2231
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_15.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_15.json",
+          "size": 180
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_16.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_16.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_17.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_17.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_18.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_18.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_19.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_19.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_2.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_2.json",
+          "size": 2217
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_20.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_20.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_21.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_21.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_22.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_22.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_23.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_23.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_24.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_24.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_25.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_25.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_26.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_26.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_27.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_27.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_28.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_28.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_29.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_29.json",
+          "size": 2231
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_3.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_3.json",
+          "size": 1069
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_30.commit",
+          "size": 90
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_30.json",
+          "size": 2229
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_31.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_31.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_32.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_32.json",
+          "size": 197
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_33.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_33.json",
+          "size": 2232
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_34.commit",
+          "size": 90
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_34.json",
+          "size": 2231
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_35.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_35.json",
+          "size": 2232
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_36.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_36.json",
+          "size": 2233
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_37.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_37.json",
+          "size": 2232
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_38.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_38.json",
+          "size": 2232
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_39.commit",
+          "size": 90
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_39.json",
+          "size": 2232
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_4.commit",
+          "size": 94
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_4.json",
+          "size": 69
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_40.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_40.json",
+          "size": 2232
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_41.commit",
+          "size": 90
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_41.json",
+          "size": 2232
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_42.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_42.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_43.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_43.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_44.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_44.json",
+          "size": 2232
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_45.commit",
+          "size": 90
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_45.json",
+          "size": 2232
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_46.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_46.json",
+          "size": 2232
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_47.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_47.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_48.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_48.json",
+          "size": 197
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_49.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_49.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_5.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_5.json",
+          "size": 1125
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_50.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_50.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_51.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_51.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_52.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_52.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_53.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_53.json",
+          "size": 2231
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_54.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_54.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_55.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_55.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_56.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_56.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_57.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_57.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_58.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_58.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_59.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_59.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_6.commit",
+          "size": 94
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_6.json",
+          "size": 69
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_60.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_60.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_61.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_61.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_62.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_62.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_63.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_63.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_64.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_64.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_65.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_65.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_66.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_66.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_67.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_67.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_68.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_68.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_69.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_69.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_7.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_7.json",
+          "size": 1143
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_70.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_70.json",
+          "size": 2232
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_71.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_71.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_72.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_72.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_73.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_73.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_74.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_74.json",
+          "size": 2231
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_75.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_75.json",
+          "size": 2231
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_76.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_76.json",
+          "size": 2232
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_77.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_77.json",
+          "size": 2232
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_78.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_78.json",
+          "size": 2229
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_79.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_79.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_8.commit",
+          "size": 87
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_8.json",
+          "size": 69
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_80.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_80.json",
+          "size": 2268
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_81.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_81.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_82.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_82.json",
+          "size": 2270
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_83.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_83.json",
+          "size": 2270
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_84.commit",
+          "size": 90
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_84.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_85.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_85.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_86.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_86.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_87.commit",
+          "size": 95
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_87.json",
+          "size": 70
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_9.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/journal/event_9.json",
+          "size": 1326
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/launch.json",
+          "size": 3121
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/native.log",
+          "size": 2399
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/native_parameter_evidence.json",
+          "size": 418
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/observations.json",
+          "size": 260765
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/phases.csv",
+          "size": 3116
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/process_start_marker.json",
+          "size": 161
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/progress.csv",
+          "size": 720
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/result.json",
+          "size": 99975
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/samples.jsonl",
+          "size": 6638
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/stderr.log",
+          "size": 0
+        },
+        {
+          "path": "runner_u6_repeat/seed_1/raw/02_U6_H-ACT/stdout.log",
+          "size": 101
+        }
+      ],
+      "part_count": 3,
+      "part_number": 3,
+      "source_bytes": 18051954,
+      "source_file_count": 282,
+      "source_group": "seed_1_02_U6_H-ACT"
+    },
+    {
+      "archive": "runner_u6_repeat_raw_archives/seed_2_01_U6_H-ACT.part01-of-03.tar.gz",
+      "files": [
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/affinity.json",
+          "size": 400
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/audit.json",
+          "size": 39410
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/completion.json",
+          "size": 562
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/adaptive_mass_decision_ledger.csv",
+          "size": 589
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/c6_split_decision_ledger.csv",
+          "size": 900
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/contraction_ledger.csv",
+          "size": 490
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/global_bound_trace.csv",
+          "size": 10693
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/initial_decomposition_ledger.csv",
+          "size": 312
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/initial_witness.json",
+          "size": 2068
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/lp_status_ledger.csv",
+          "size": 724
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/models/L0.0.0.lp",
+          "size": 16875624
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/models/L0.0.1.lp",
+          "size": 16921533
+        }
+      ],
+      "part_count": 3,
+      "part_number": 1,
+      "source_bytes": 33853305,
+      "source_file_count": 12,
+      "source_group": "seed_2_01_U6_H-ACT"
+    },
+    {
+      "archive": "runner_u6_repeat_raw_archives/seed_2_01_U6_H-ACT.part02-of-03.tar.gz",
+      "files": [
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/models/L0.0.lp",
+          "size": 16875624
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/models/L0.1.lp",
+          "size": 16910408
+        }
+      ],
+      "part_count": 3,
+      "part_number": 2,
+      "source_bytes": 33786032,
+      "source_file_count": 2,
+      "source_group": "seed_2_01_U6_H-ACT"
+    },
+    {
+      "archive": "runner_u6_repeat_raw_archives/seed_2_01_U6_H-ACT.part03-of-03.tar.gz",
+      "files": [
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/models/L0.lp",
+          "size": 16870633
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/native_0_witness.json",
+          "size": 2068
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/native_logs/L0.0.0_lp.gurobi.log",
+          "size": 1462
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/native_logs/L0.0.1_lp.gurobi.log",
+          "size": 1472
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/native_logs/L0.0_lp.gurobi.log",
+          "size": 1459
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/native_logs/L0.0_terminal_mip.gurobi.log",
+          "size": 10558
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/native_logs/L0.0_terminal_mip.gurobi.log.round68.start.json",
+          "size": 563
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/native_logs/L0.0_terminal_mip.gurobi.log.round68.start.values.csv",
+          "size": 505533
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/native_logs/L0.1_lp.gurobi.log",
+          "size": 1444
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/native_logs/L0_lp.gurobi.log",
+          "size": 1393
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/native_target_ledger.csv",
+          "size": 208
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/paper_leaf_ledger.csv",
+          "size": 1070
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/paper_optimize_ledger.csv",
+          "size": 2344
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/paper_tree_events.csv",
+          "size": 365
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/parent_child_bound_ledger.csv",
+          "size": 449
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/round68_existing_0_witness.json",
+          "size": 2068
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/round92_handling_activation_rows.csv",
+          "size": 3052
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/external/split_decision_ledger.csv",
+          "size": 473
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.descent.csv",
+          "size": 28878
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/actual_distances.json",
+          "size": 48367
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_0.csv",
+          "size": 4286
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_0.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_0.csv.initial.json",
+          "size": 1148
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_1.csv",
+          "size": 632
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_1.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_1.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_10.csv",
+          "size": 483
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_10.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_10.csv.initial.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_11.csv",
+          "size": 624
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_11.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_11.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_12.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_12.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_12.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_13.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_13.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_13.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_14.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_14.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_14.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_15.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_15.csv.final.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_15.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_16.csv",
+          "size": 782
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_16.csv.final.json",
+          "size": 1212
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_16.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_17.csv",
+          "size": 632
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_17.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_17.csv.initial.json",
+          "size": 1213
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_2.csv",
+          "size": 632
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_2.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_2.csv.initial.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_3.csv",
+          "size": 631
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_3.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_3.csv.initial.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_4.csv",
+          "size": 4173
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_4.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_4.csv.initial.json",
+          "size": 1213
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_5.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_5.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_5.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_6.csv",
+          "size": 1684
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_6.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_6.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_7.csv",
+          "size": 634
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_7.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_7.csv.initial.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_8.csv",
+          "size": 781
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_8.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_8.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_9.csv",
+          "size": 631
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_9.csv.final.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/closure_9.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/events.jsonl",
+          "size": 5458
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/initial.json",
+          "size": 1148
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_0.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_1.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_10.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_11.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_12.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_13.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_14.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_15.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_16.json",
+          "size": 1213
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_2.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_3.json",
+          "size": 1213
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_4.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_5.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_6.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_7.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_8.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/neutral_9.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.exchange/result.json",
+          "size": 221
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.joint.csv",
+          "size": 4641
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/hga.csv.joint_seed.csv",
+          "size": 446
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_1.commit",
+          "size": 95
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_1.json",
+          "size": 374
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_10.commit",
+          "size": 95
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_10.json",
+          "size": 70
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_11.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_11.json",
+          "size": 1346
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_12.commit",
+          "size": 88
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_12.json",
+          "size": 70
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_13.commit",
+          "size": 90
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_13.json",
+          "size": 1331
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_14.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_14.json",
+          "size": 2231
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_15.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_15.json",
+          "size": 180
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_16.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_16.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_17.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_17.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_18.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_18.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_19.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_19.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_2.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_2.json",
+          "size": 2217
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_20.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_20.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_21.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_21.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_22.commit",
+          "size": 88
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_22.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_23.commit",
+          "size": 88
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_23.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_24.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_24.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_25.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_25.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_26.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_26.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_27.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_27.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_28.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_28.json",
+          "size": 197
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_29.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_29.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_3.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_3.json",
+          "size": 1069
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_30.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_30.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_31.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_31.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_32.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_32.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_33.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_33.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_34.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_34.json",
+          "size": 197
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_35.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_35.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_36.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_36.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_37.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_37.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_38.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_38.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_39.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_39.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_4.commit",
+          "size": 94
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_4.json",
+          "size": 69
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_40.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_40.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_41.commit",
+          "size": 88
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_41.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_42.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_42.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_43.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_43.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_44.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_44.json",
+          "size": 197
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_45.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_45.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_46.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_46.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_47.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_47.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_48.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_48.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_49.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_49.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_5.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_5.json",
+          "size": 1125
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_50.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_50.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_51.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_51.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_52.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_52.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_53.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_53.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_54.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_54.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_55.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_55.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_56.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_56.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_57.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_57.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_58.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_58.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_59.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_59.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_6.commit",
+          "size": 94
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_6.json",
+          "size": 69
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_60.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_60.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_61.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_61.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_62.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_62.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_63.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_63.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_64.commit",
+          "size": 90
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_64.json",
+          "size": 2229
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_65.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_65.json",
+          "size": 2231
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_66.commit",
+          "size": 95
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_66.json",
+          "size": 70
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_7.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_7.json",
+          "size": 1143
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_8.commit",
+          "size": 87
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_8.json",
+          "size": 69
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_9.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/journal/event_9.json",
+          "size": 1326
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/launch.json",
+          "size": 3120
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/native.log",
+          "size": 2408
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/native_parameter_evidence.json",
+          "size": 418
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/observations.json",
+          "size": 71964
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/phases.csv",
+          "size": 3124
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/process_start_marker.json",
+          "size": 160
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/progress.csv",
+          "size": 720
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/result.json",
+          "size": 99842
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/samples.jsonl",
+          "size": 6660
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/stderr.log",
+          "size": 0
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/01_U6_H-ACT/stdout.log",
+          "size": 102
+        }
+      ],
+      "part_count": 3,
+      "part_number": 3,
+      "source_bytes": 17801754,
+      "source_file_count": 240,
+      "source_group": "seed_2_01_U6_H-ACT"
+    },
+    {
+      "archive": "runner_u6_repeat_raw_archives/seed_2_02_U6_ENS-C.part01-of-03.tar.gz",
+      "files": [
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/affinity.json",
+          "size": 400
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/audit.json",
+          "size": 43218
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/completion.json",
+          "size": 567
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/adaptive_mass_decision_ledger.csv",
+          "size": 611
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/c6_split_decision_ledger.csv",
+          "size": 900
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/contraction_ledger.csv",
+          "size": 490
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/global_bound_trace.csv",
+          "size": 9780
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/initial_decomposition_ledger.csv",
+          "size": 312
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/initial_witness.json",
+          "size": 2068
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/lp_status_ledger.csv",
+          "size": 725
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/models/L0.0.0.lp",
+          "size": 16870840
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/models/L0.0.1.lp",
+          "size": 16916749
+        }
+      ],
+      "part_count": 3,
+      "part_number": 1,
+      "source_bytes": 33846660,
+      "source_file_count": 12,
+      "source_group": "seed_2_02_U6_ENS-C"
+    },
+    {
+      "archive": "runner_u6_repeat_raw_archives/seed_2_02_U6_ENS-C.part02-of-03.tar.gz",
+      "files": [
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/models/L0.0.lp",
+          "size": 16870840
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/models/L0.1.lp",
+          "size": 16905624
+        }
+      ],
+      "part_count": 3,
+      "part_number": 2,
+      "source_bytes": 33776464,
+      "source_file_count": 2,
+      "source_group": "seed_2_02_U6_ENS-C"
+    },
+    {
+      "archive": "runner_u6_repeat_raw_archives/seed_2_02_U6_ENS-C.part03-of-03.tar.gz",
+      "files": [
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/models/L0.lp",
+          "size": 16865849
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/native_0_witness.json",
+          "size": 2107
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/native_logs/L0.0.0_lp.gurobi.log",
+          "size": 1397
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/native_logs/L0.0.1_lp.gurobi.log",
+          "size": 1442
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/native_logs/L0.0_lp.gurobi.log",
+          "size": 1395
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/native_logs/L0.0_terminal_mip.gurobi.log",
+          "size": 14597
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/native_logs/L0.0_terminal_mip.gurobi.log.round68.start.json",
+          "size": 569
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/native_logs/L0.0_terminal_mip.gurobi.log.round68.start.values.csv",
+          "size": 505533
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/native_logs/L0.1_lp.gurobi.log",
+          "size": 1376
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/native_logs/L0_lp.gurobi.log",
+          "size": 1468
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/native_target_ledger.csv",
+          "size": 208
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/paper_leaf_ledger.csv",
+          "size": 1070
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/paper_optimize_ledger.csv",
+          "size": 2391
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/paper_tree_events.csv",
+          "size": 357
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/parent_child_bound_ledger.csv",
+          "size": 449
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/round68_existing_0_witness.json",
+          "size": 2068
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/external/split_decision_ledger.csv",
+          "size": 473
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.descent.csv",
+          "size": 28840
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/actual_distances.json",
+          "size": 48367
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_0.csv",
+          "size": 4270
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_0.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_0.csv.initial.json",
+          "size": 1148
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_1.csv",
+          "size": 616
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_1.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_1.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_10.csv",
+          "size": 483
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_10.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_10.csv.initial.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_11.csv",
+          "size": 633
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_11.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_11.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_12.csv",
+          "size": 477
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_12.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_12.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_13.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_13.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_13.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_14.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_14.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_14.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_15.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_15.csv.final.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_15.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_16.csv",
+          "size": 782
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_16.csv.final.json",
+          "size": 1212
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_16.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_17.csv",
+          "size": 624
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_17.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_17.csv.initial.json",
+          "size": 1213
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_2.csv",
+          "size": 632
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_2.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_2.csv.initial.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_3.csv",
+          "size": 623
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_3.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_3.csv.initial.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_4.csv",
+          "size": 4181
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_4.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_4.csv.initial.json",
+          "size": 1213
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_5.csv",
+          "size": 485
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_5.csv.final.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_5.csv.initial.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_6.csv",
+          "size": 1684
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_6.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_6.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_7.csv",
+          "size": 634
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_7.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_7.csv.initial.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_8.csv",
+          "size": 781
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_8.csv.final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_8.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_9.csv",
+          "size": 631
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_9.csv.final.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/closure_9.csv.initial.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/events.jsonl",
+          "size": 5458
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/final.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/initial.json",
+          "size": 1148
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_0.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_1.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_10.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_11.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_12.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_13.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_14.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_15.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_16.json",
+          "size": 1213
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_2.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_3.json",
+          "size": 1213
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_4.json",
+          "size": 1216
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_5.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_6.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_7.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_8.json",
+          "size": 1215
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/neutral_9.json",
+          "size": 1214
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.exchange/result.json",
+          "size": 221
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.joint.csv",
+          "size": 4681
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/hga.csv.joint_seed.csv",
+          "size": 446
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_1.commit",
+          "size": 95
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_1.json",
+          "size": 374
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_10.commit",
+          "size": 95
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_10.json",
+          "size": 70
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_11.commit",
+          "size": 90
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_11.json",
+          "size": 1303
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_12.commit",
+          "size": 88
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_12.json",
+          "size": 70
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_13.commit",
+          "size": 90
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_13.json",
+          "size": 1288
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_14.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_14.json",
+          "size": 2231
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_15.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_15.json",
+          "size": 180
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_16.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_16.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_17.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_17.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_18.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_18.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_19.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_19.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_2.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_2.json",
+          "size": 2217
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_20.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_20.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_21.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_21.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_22.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_22.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_23.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_23.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_24.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_24.json",
+          "size": 196
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_25.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_25.json",
+          "size": 197
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_26.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_26.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_27.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_27.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_28.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_28.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_29.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_29.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_3.commit",
+          "size": 88
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_3.json",
+          "size": 1026
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_30.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_30.json",
+          "size": 197
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_31.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_31.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_32.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_32.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_33.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_33.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_34.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_34.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_35.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_35.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_36.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_36.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_37.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_37.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_38.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_38.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_39.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_39.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_4.commit",
+          "size": 94
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_4.json",
+          "size": 69
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_40.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_40.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_41.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_41.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_42.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_42.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_43.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_43.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_44.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_44.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_45.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_45.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_46.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_46.json",
+          "size": 197
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_47.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_47.json",
+          "size": 197
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_48.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_48.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_49.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_49.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_5.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_5.json",
+          "size": 1082
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_50.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_50.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_51.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_51.json",
+          "size": 2268
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_52.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_52.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_53.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_53.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_54.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_54.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_55.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_55.json",
+          "size": 2270
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_56.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_56.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_57.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_57.json",
+          "size": 2270
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_58.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_58.json",
+          "size": 2268
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_59.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_59.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_6.commit",
+          "size": 86
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_6.json",
+          "size": 69
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_60.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_60.json",
+          "size": 2267
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_61.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_61.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_62.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_62.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_63.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_63.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_64.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_64.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_65.commit",
+          "size": 90
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_65.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_66.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_66.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_67.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_67.json",
+          "size": 2267
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_68.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_68.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_69.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_69.json",
+          "size": 2267
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_7.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_7.json",
+          "size": 1100
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_70.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_70.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_71.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_71.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_72.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_72.json",
+          "size": 2270
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_73.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_73.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_74.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_74.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_75.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_75.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_76.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_76.json",
+          "size": 2270
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_77.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_77.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_78.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_78.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_79.commit",
+          "size": 96
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_79.json",
+          "size": 198
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_8.commit",
+          "size": 94
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_8.json",
+          "size": 69
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_80.commit",
+          "size": 97
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_80.json",
+          "size": 2269
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_81.commit",
+          "size": 95
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_81.json",
+          "size": 70
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_9.commit",
+          "size": 89
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/journal/event_9.json",
+          "size": 1283
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/launch.json",
+          "size": 3122
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/native.log",
+          "size": 2409
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/native_parameter_evidence.json",
+          "size": 408
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/observations.json",
+          "size": 238192
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/phases.csv",
+          "size": 3146
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/process_start_marker.json",
+          "size": 161
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/progress.csv",
+          "size": 710
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/result.json",
+          "size": 99886
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/samples.jsonl",
+          "size": 6662
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/stderr.log",
+          "size": 0
+        },
+        {
+          "path": "runner_u6_repeat/seed_2/raw/02_U6_ENS-C/stdout.log",
+          "size": 102
+        }
+      ],
+      "part_count": 3,
+      "part_number": 3,
+      "source_bytes": 18013926,
+      "source_file_count": 269,
+      "source_group": "seed_2_02_U6_ENS-C"
+    }
+  ],
+  "inventory_wall_seconds": 0.5344574004411697,
+  "kind": "round92_u6_seed_repeat_raw",
+  "member_root": "results/unified_exact_round92",
+  "preregistration_sha256": "72381b0be8550acf94d38f0c295de82e9916d4b0734d43c9b043fbdfebae0357",
+  "raw_part_limit_bytes": 37748736,
+  "source_bytes": 342317694,
+  "source_file_count": 1122,
+  "source_group_count": 4
+}

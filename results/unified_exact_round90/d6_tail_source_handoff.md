@@ -1,0 +1,26 @@
+# D6 tail pair: source-only handoff
+
+This is the one finite follow-up authorized for preparation in `g4_panel_decision.md`. It is **not** a run lease. No `prepare`, `run`, source-blob audit, binary full hash, import, test, build or Optimize was executed while writing this handoff. The archive worker retained the I/O slot.
+
+Frozen new files:
+
+| File | SHA-256 |
+| --- | --- |
+| `scripts/round90_lp_g_d6_tail.py` | `4be0b5f610410cba418a03065a809d053603ca3bcb021d15f2952a167db57c5a` |
+| `results/unified_exact_round90/preregistration_d6_tail.json` | `c6c2e546cf9406063148c984199420fcbda25ae492fbe14b0f9db2e74b9ade4c` |
+
+The execution order is fresh D6 ENS-C then LP-G, seed 0, each with a 7200-second whole-process ceiling. The frozen G3 `command_for` yields native `--time-limit 7194`, `--process-wall-time-limit 7200`, and the existing wrapper hard stop is 7198. The R90 split toggle alone differs between arms. All other common MIP, affinity, heuristic, evidence, audit and shutdown settings are inherited unchanged. Maximum two-process allocation is 14,400 seconds; internal Optimize counts are not bounded by this arm count. No old process is resumed, no retry, extra seed or extension is permitted.
+
+## Source identity and gates
+
+The R90 working tree has changed for Round92. The new wrapper deliberately does **not** call `round90_lp_g_g4_priority.validate`, `round90_lp_g_g3.panel_and_identity`, or their qualification gate, whose source checks require current checkout bytes to equal Round90 bytes. It independently pins the frozen G3 runner, priority readback helper, G3 preregistration, old qualification gate, the same eight harness hashes, the D6 input/protocol/audit, and the qualified executable SHA `bac65ff3b5b099852f2eedd7ef462ad700e5c1131778bd56dca310b3dd0af2f2`. Its new source gate checks the 165-entry preserved production-source manifest and all seven critical R90 source hashes. Six critical files belong to the production manifest; `tests/round90_lp_g_split_tests.cpp` is independently pinned as the 166th unique blob. Then `prepare` reads all 166 exact blobs at immutable Git object ref `a71bd53ca412e9b9e529e7237446687d360a94ce` using one `git cat-file --batch`. It computes SHA-256 on the returned **blob bytes** and retains every object ID, byte count and digest in `source_snapshot_receipt.json`, distinguishing the 165 production entries, one additional test and seven critical identities. It never checks out or copies a historical tree. The old `76458ff8b952e98cede34b261cd916d26db58215` is labelled only as the provisional historical build record, not the byte-preservation proof.
+
+Root must first create `results/unified_exact_round90/d6_tail_prepare_gate.json` with schema `round90-lp-g-d6-tail-prepare-gate-v1`, `authorized_by=root`, `allow_prepare=true`, `allow_optimize=false`, `finite_d6_tail_accepted=true`, exact prereg/wrapper/source-manifest/binary/frozen-runner/decision SHA values and a pinned independent static review path/SHA. One zero-Optimize `prepare` then writes a new non-overwritten campaign identity, source snapshot and preflight. Any source, binary, input, harness or gate mismatch fails before source receipt/campaign creation. Root must separately place `d6_tail_run_lease.json` in that campaign with exact schema `round90-lp-g-d6-tail-run-lease-v1`, `authorized_by=root`, `allow_optimize=true`, `identity_sha256`, `planned_runs=2`, and the fixed execution order. `run` revalidates the qualified binary and harness plus the immutable-source receipt hash and refuses any existing run marker, destination, summary or lock.
+
+The old G3 `run_one` remains the actual per-arm whole-process supervisor and physical/LP/coverage auditor. Priority's `native_parameters` remains the seed/thread/presolve and preset readback check. Paired cross-arm contradiction and the pre-existing >1.5× plus >30-second severe signal use the same G3 helpers. Every completed prefix, failed attempt, censored endpoint, raw receipt and full outer wall time remains recorded; a severe signal is a research stop rather than a certificate claim. The 3600-second D6 pair and other G4 panel evidence stay separate.
+
+The in-wrapper preparation and run receipts mark their own timing boundaries. Root's external command receipts must retain launch-to-exit cost for both `prepare` and `run`; nested phase times are explanatory and are never added twice. Running Python with `-O` is refused because the frozen audit helpers rely on assertions.
+
+No source review here asserts that the preserved Git blobs or executable have **already** been rehashed. The next authorized zero-Optimize preparation must produce those receipts before a distinct root-signed two-arm lease can admit execution.
+
+Static-review repair before any execution: the first wrapper SHA `b514884612b3975f7396bce313b6bcd9b85d2828afb4e6b8a0bd1b4216aabef4` incorrectly assumed the critical test file belonged to the 165-entry production manifest and would have raised `KeyError` in preparation. The independent reviewer found this without running it. Root explicitly added the separate immutable test-blob check and corrected receipt counts; no prepared campaign, Optimize call or failed solver attempt was created.

@@ -1,0 +1,19 @@
+﻿{
+    "argv":  [
+                 "-S",
+                 "E:\\codes\\ExactEBRP",
+                 "-B",
+                 "E:\\codes\\ExactEBRP\\build\\research\\round92-handling-activation",
+                 "-G",
+                 "Ninja",
+                 "-DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe",
+                 "-DCMAKE_MAKE_PROGRAM=D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe",
+                 "-DEXACT_EBRP_ENABLE_GUROBI=ON",
+                 "-DGUROBI_ROOT=D:/gurobi1302/win64"
+             ],
+    "stage":  "configure",
+    "start_utc":  "2026-09-27T10:19:11.0641738+00:00",
+    "path_prefix":  "D:\\msys64\\ucrt64\\bin;D:\\gurobi1302\\win64\\bin",
+    "cwd":  "E:\\codes\\ExactEBRP",
+    "executable":  "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe"
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "round90-lp-g-g3-cross-arm-v1",
+  "id": "C8",
+  "arms": [
+    {
+      "arm": "ENS-C",
+      "strongest_same_arm_global_L": 0.6978626955322419,
+      "minimum_same_arm_physical_U": 0.8066898279319227,
+      "physically_verified_witness_rows": 3
+    },
+    {
+      "arm": "LP-G",
+      "strongest_same_arm_global_L": 0.722802218187878,
+      "minimum_same_arm_physical_U": 0.8017207825118344,
+      "physically_verified_witness_rows": 10
+    }
+  ],
+  "strongest_global_L": 0.722802218187878,
+  "minimum_physical_U": 0.8017207825118344,
+  "tolerance": 1e-07,
+  "passed": true,
+  "scope": "Offline original-problem contradiction only, not a merged endpoint"
+}

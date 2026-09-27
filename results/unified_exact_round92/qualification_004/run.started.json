@@ -1,0 +1,33 @@
+{
+  "admission_sha256": "e6434dbb6dd18645b9626a954291ec9ed917341369b990a9d0c81133c841c624",
+  "commands": [
+    [
+      "D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe",
+      "--build",
+      "E:/codes/ExactEBRP/build/research/round92-handling-activation",
+      "--parallel",
+      "4",
+      "--target",
+      "Round92HandlingActivationTests"
+    ],
+    [
+      "E:/codes/ExactEBRP/build/research/round92-handling-activation/Round92HandlingActivationTests.exe"
+    ],
+    [
+      "E:/codes/ExactEBRP/build/research/round92-handling-activation/Round92HandlingIntegrationTests.exe",
+      "E:/codes/ExactEBRP/results/unified_exact_round92/qualification_004/canonical_export"
+    ],
+    [
+      "E:/codes/ExactEBRP/build/research/round88-ot/venv/Scripts/python.exe",
+      "E:/codes/ExactEBRP/tests/round92_handling_lp_readback.py",
+      "E:/codes/ExactEBRP/results/unified_exact_round92/qualification_004/canonical_export"
+    ]
+  ],
+  "source_commit": "a0e35a221c770f71ef19c405edf9af73e43d93d7",
+  "stable_binary_hashes_before": {
+    "ExactEBRP.exe": "767d2cbfa50f332a8b9cd6fa3f01888509509b11c2444100d7cafd63bc204b9b",
+    "Round92HandlingIntegrationTests.exe": "9c815bccbb8e9f4ff5e1806bd65d9fd5953039b7c7579d4cd0f4a6a162a2500b",
+    "libexact_ebrp_core.a": "29cb167a388e1a76bd544131bf59684be3950f92f13ecdb755525644f596de12"
+  },
+  "start_utc": "2026-09-27T12:45:51.592982+00:00"
+}
