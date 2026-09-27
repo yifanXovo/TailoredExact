@@ -99,4 +99,5 @@ results/unified_exact_round85/figures/*.svg -whitespace
 # Preserve the Round91 fixed-model diagnostic and its frozen source hashes.
 /results/unified_exact_round91/** -text whitespace=cr-at-eol
 /scripts/round91_handling_rounding_diagnostic.py -text whitespace=cr-at-eol
+/scripts/round91_handling_real_diagnostic.py -text whitespace=cr-at-eol
 /tests/round91_handling_rounding_probe.cpp -text whitespace=cr-at-eol
