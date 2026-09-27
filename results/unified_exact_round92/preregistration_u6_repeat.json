@@ -1,0 +1,94 @@
+{
+  "schema": "round92-handling-u6-repeat-preregistration-v1",
+  "status": "conditional_source_only_no_execution",
+  "purpose": "One fixed three-seed U6 risk-replication check; no selection, promotion, added seeds, or F5/F6 resumption",
+  "runtime_root": "results/unified_exact_round92/runner_u6_repeat",
+  "prepare_gate_path": "results/unified_exact_round92/u6_repeat_prepare_gate.json",
+  "run_lease_name": "runner_u6_repeat_lease.json",
+  "frozen_g3_runner": "scripts/round92_handling_g3.py",
+  "frozen_g3_runner_sha256": "9c157a4011400d1f017a861f99338966f334e3f995e6e248310e89496406f52f",
+  "frozen_g3_preregistration": "results/unified_exact_round92/preregistration_g3.json",
+  "frozen_g3_preregistration_sha256": "3ea32c1fcaaebd0af803ac66dc6eb8d05ca65c3554af97edb2407cb2a29d7d1b",
+  "frozen_g3_qualification_gate": "results/unified_exact_round92/g3_qualification_gate.json",
+  "frozen_g3_qualification_gate_sha256": "475672d318d4cfd1e6ebf37f3f6f77bcbe5ef0b89fdae2364221d244f4b088dd",
+  "source_commit": "a0e35a221c770f71ef19c405edf9af73e43d93d7",
+  "candidate_binary": "build/research/round92-handling-activation/ExactEBRP.exe",
+  "candidate_binary_sha256": "767d2cbfa50f332a8b9cd6fa3f01888509509b11c2444100d7cafd63bc204b9b",
+  "candidate_core_sha256": "29cb167a388e1a76bd544131bf59684be3950f92f13ecdb755525644f596de12",
+  "u6": {
+    "id": "U6",
+    "scenario_id": "round82-unadapted-confirmation-v1_U6",
+    "input_path": "reference/round82_unadapted_confirmation/U6.txt",
+    "input_sha256": "1556e893376349de92f9213642d7be0005dcb44e47e037d34f77040711787e3f",
+    "T_seconds": 18000,
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "cap_seconds": 1200
+  },
+  "common": {
+    "threads": 1,
+    "mip_threads": 1,
+    "gurobi_version": "13.0.2",
+    "gurobi_presolve": -1,
+    "affinity_mask": 4,
+    "logical_processor": 2,
+    "requested_mip_gap": 0,
+    "requested_mip_gap_abs": 0,
+    "shutdown_margin_seconds": 3,
+    "native_limit_offset_seconds": 6,
+    "hard_stop_offset_seconds": 2
+  },
+  "repeat_order": [
+    {"seed": 1, "method_order": ["ENS-C", "H-ACT"]},
+    {"seed": 2, "method_order": ["H-ACT", "ENS-C"]}
+  ],
+  "planned_arms": 4,
+  "sum_process_caps_seconds": 4800,
+  "seed0_reference": {
+    "status": "completed_same_round92_binary_open_gap_risk_not_rerun",
+    "g3_summary_path": "results/unified_exact_round92/runner_handling_g3/summary.jsonl",
+    "g3_summary_sha256": "8ebb553c3b4f4a033e623791bc7f6d6d07179358c296bca5d79d99c25deee665",
+    "g3_rest_report_path": "results/unified_exact_round92/g3_rest_report.md",
+    "g3_rest_report_sha256": "801765698f0f6a03cb906e1842f1d7ac6478e5d301ff2d8e555f8104d247fc9d",
+    "g3_independent_review_path": "results/unified_exact_round92/g3_rest_independent_review.md",
+    "g3_independent_review_sha256": "cb0eb23ffdd10c2f898ef9a376b04fb46d2af1b9af0091c623e2e22ee6f6d178",
+    "g3_cross_arm_path": "results/unified_exact_round92/runner_handling_g3/runner_cross_arm_U6.json",
+    "g3_cross_arm_sha256": "a69125730953f2f78c1c9c5eb2fc07fa7b62b24e72d0c19bfe2e586b781a72ef",
+    "g3_risk_stop_path": "results/unified_exact_round92/runner_handling_g3/runner_rest_risk_stop.json",
+    "g3_risk_stop_sha256": "8b7812ec9d312db4aa0809f13eb735e34dd9eb05808cc0fee896a47e9eea2dac",
+    "arms": {
+      "H-ACT": {
+        "raw": "results/unified_exact_round92/runner_handling_g3/raw/11_U6_H-ACT",
+        "launch_sha256": "d882678c452674221637982bd4759b35f976e14431c6fbda276223ad1a633425",
+        "audit_sha256": "442e57465bcf93ef2b447e5b0750f1531a6e0bd632d2992dea0c642c9d15dd26",
+        "completion_sha256": "61275d74c243ba306a745634af848126ec0c1155e6e0644ec0c0979e842c59b7",
+        "result_sha256": "b21aa064b530e27595196b4fa3223fdf4c2b94f80b407c81be0bf0328bb1b296"
+      },
+      "ENS-C": {
+        "raw": "results/unified_exact_round92/runner_handling_g3/raw/12_U6_ENS-C",
+        "launch_sha256": "04806a5659f44f30927a01fe10f6db4b8221e43c306ebc05525ab4bd66ea0b2e",
+        "audit_sha256": "32682a528f9d2378ed9c5703908e2539be56052f5bfd14e29df53d9f6a8c164b",
+        "completion_sha256": "74357cae9ba549ba5e2968e0e7eaa51c4962ee636abf9bd31c5c5672d1ec76c8",
+        "result_sha256": "658eea692f3be04d484111a61e2e0ae9ca2da86eb7b282d4b7aa2755684445a5"
+      }
+    }
+  },
+  "risk_rule": {
+    "source": "round92_handling_g3.py severe_open_gap_signal",
+    "ratio_threshold": 1.5,
+    "absolute_gap_threshold": 0.01,
+    "required_same_direction_seeds": 2,
+    "required_original_severe_line_seeds": 2,
+    "require_all_three_open_for_median": true,
+    "per_seed": "Only for a same-seed pair with both arms audited, normally finalized, and still open: candidate gap > 1.5 times reference gap and candidate gap minus reference gap > 0.01",
+    "three_seed_decision": "Only if all three same-seed pairs are comparable open endpoints, confirm when at least two pairs individually cross the original severe conjunction, at least two gap differences point upward, the median of candidate_gap-1.5*reference_gap is positive, and the median of candidate_gap-reference_gap exceeds 0.01; otherwise report not reproduced or mixed/censored separately",
+    "performance_signals_do_not_stop_seed_2": true,
+    "all_four_planned_arms_even_after_seed_1_risk": true
+  },
+  "no_component_time_or_work_slices": true,
+  "prepare_does_not_authorize_optimize": true,
+  "run_requires_separate_root_lease": true,
+  "stop_on_correctness_identity_numeric_process_or_resource_fault": true,
+  "no_retry_no_overwrite_no_extra_seed_or_cap": true
+}
