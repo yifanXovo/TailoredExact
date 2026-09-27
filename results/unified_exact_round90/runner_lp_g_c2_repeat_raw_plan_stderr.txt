@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP\scripts\round90_archive_c2_repeat.py", line 329, in <module>
+    main()
+  File "E:\codes\ExactEBRP\scripts\round90_archive_c2_repeat.py", line 321, in main
+    make_plan()
+  File "E:\codes\ExactEBRP\scripts\round90_archive_c2_repeat.py", line 226, in make_plan
+    plan = inventory()
+           ^^^^^^^^^^^
+  File "E:\codes\ExactEBRP\scripts\round90_archive_c2_repeat.py", line 181, in inventory
+    completed = completed_campaign()
+                ^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP\scripts\round90_archive_c2_repeat.py", line 166, in completed_campaign
+    raise RuntimeError("completed C2 arm identity/audit mismatch: " + str(source))
+RuntimeError: completed C2 arm identity/audit mismatch: E:\codes\ExactEBRP\results\unified_exact_round90\runner_lp_g_c2_repeat\seed_2\raw\01_C2_LP-G

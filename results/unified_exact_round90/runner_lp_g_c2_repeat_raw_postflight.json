@@ -1,0 +1,75 @@
+{
+  "matching_process_count": 0,
+  "optimization_calls": 0,
+  "source_bytes": 31864080,
+  "archive_bytes": 4876981,
+  "check_sha256": "92c9d59ceac87089073d9178f25dc7c78dc7d87d83e6e6f5e558a7c2b1b5e51a",
+  "kernel_sha256": "d357b232ceb8e14e94cbf9629d57d9f18bc2f60b1b682865042c4cdd622319f0",
+  "index_sha256": "99ae9f686243bd972ef6f9c8e043596225cd2bc96ff528acf9dae29335bfeced",
+  "all_packages_match_index": true,
+  "adapter_sha256": "615d5d8c4a867529c681bfbaa59517b5c5dd4ae85a6d48a5e5999f36e0b6a4c8",
+  "packages": [
+    {
+      "path": "results/unified_exact_round90/runner_lp_g_c2_repeat_raw_archives/seed_1_01_C2_ENS-C.tar.gz",
+      "size": 1070932,
+      "sha256": "c21ebb6bcc30e508ddfb12e21f33241c883fe5f4e82ae0690c72fdb7cc27c010",
+      "matches_index": true
+    },
+    {
+      "path": "results/unified_exact_round90/runner_lp_g_c2_repeat_raw_archives/seed_1_02_C2_LP-G.tar.gz",
+      "size": 1289213,
+      "sha256": "2f965623bd4ca93e3840e205ebc0eded7d49ed3dd38c2c4d60b8e00d33a2e2bb",
+      "matches_index": true
+    },
+    {
+      "path": "results/unified_exact_round90/runner_lp_g_c2_repeat_raw_archives/seed_2_01_C2_LP-G.tar.gz",
+      "size": 1413055,
+      "sha256": "a42f6d809a6c823b9a31d1053964f503c9afc031c5bca648a7a79a82b32c9100",
+      "matches_index": true
+    },
+    {
+      "path": "results/unified_exact_round90/runner_lp_g_c2_repeat_raw_archives/seed_2_02_C2_ENS-C.tar.gz",
+      "size": 1103781,
+      "sha256": "986679fc825a4e0c414fdf170c418121a26cd6d52c1dd68534e04278b3abb4e9",
+      "matches_index": true
+    }
+  ],
+  "originals_preserved": true,
+  "source_files": 9648,
+  "free_disk_bytes": 104391442432,
+  "archive_count": 4,
+  "schema": "round90-c2-repeat-raw-archive-postflight-v1",
+  "compile_calls": 0,
+  "failure_logs_preserved": true,
+  "steps": [
+    {
+      "returncode": 1,
+      "receipt_path": "results/unified_exact_round90/runner_lp_g_c2_repeat_raw_plan_receipt.json",
+      "stage": "plan",
+      "outer_wall_seconds": 1.5499251
+    },
+    {
+      "returncode": 0,
+      "receipt_path": "results/unified_exact_round90/runner_lp_g_c2_repeat_raw_plan_attempt_002_receipt.json",
+      "stage": "plan_attempt_002",
+      "outer_wall_seconds": 1.5426207
+    },
+    {
+      "returncode": 0,
+      "receipt_path": "results/unified_exact_round90/runner_lp_g_c2_repeat_raw_check_receipt.json",
+      "stage": "check",
+      "outer_wall_seconds": 1.5352107
+    },
+    {
+      "returncode": 0,
+      "receipt_path": "results/unified_exact_round90/runner_lp_g_c2_repeat_raw_build_receipt.json",
+      "stage": "build",
+      "outer_wall_seconds": 26.3658375
+    }
+  ],
+  "original_raw_bytes_after": 31864080,
+  "checked_utc": "2026-09-27T02:55:08.4929092Z",
+  "original_raw_files_after": 9648,
+  "plan_sha256": "c162a69e260ad3d027252e66c50c683e9bfa1122fca43d8fc1de3845ee291360",
+  "first_plan_failed_due_to_adapter_global_number_assumption": true
+}
