@@ -1,0 +1,47 @@
+{
+  "schema": "round92-handling-u6-repeat-three-seed-summary-v1",
+  "verdict": "risk_not_reproduced",
+  "pairs_by_seed": {
+    "0": {
+      "status": "both_open",
+      "reference_U": 0.1514209239173934,
+      "reference_L": 0.12905844168500294,
+      "reference_gap": 0.022362482232390457,
+      "candidate_U": 0.1673962893755301,
+      "candidate_L": 0.13042659716877342,
+      "candidate_gap": 0.036969692206756694,
+      "gap_difference": 0.014607209974366236,
+      "ratio_margin": 0.003425968858171008,
+      "exceeds_original_severe_line": true
+    },
+    "1": {
+      "status": "both_open",
+      "reference_U": 0.15649768651840162,
+      "reference_L": 0.12922145942037133,
+      "reference_gap": 0.027276227098030292,
+      "candidate_U": 0.15196026652203048,
+      "candidate_L": 0.1288984744222615,
+      "candidate_gap": 0.023061792099768996,
+      "gap_difference": -0.004214434998261296,
+      "ratio_margin": -0.017852548547276442,
+      "exceeds_original_severe_line": false
+    },
+    "2": {
+      "status": "both_open",
+      "reference_U": 0.15738282333418346,
+      "reference_L": 0.1289058551157903,
+      "reference_gap": 0.028476968218393156,
+      "candidate_U": 0.16543666334045026,
+      "candidate_L": 0.12870589292558512,
+      "candidate_gap": 0.03673077041486514,
+      "gap_difference": 0.008253802196471982,
+      "ratio_margin": -0.005984681912724596,
+      "exceeds_original_severe_line": false
+    }
+  },
+  "upward_gap_direction_seeds": 2,
+  "original_severe_line_seeds": 1,
+  "median_candidate_gap_minus_1p5_reference_gap": -0.005984681912724596,
+  "median_candidate_gap_minus_reference_gap": 0.008253802196471982,
+  "interpretation": "Fixed development risk replication, not algorithm selection or statistical significance. Do not combine certified times with open gaps; F5/F6 stay unrun."
+}
