@@ -1,0 +1,81 @@
+{
+  "schema": "round93-coquantity-fixed-witness-diagnostic-preregistration-v1",
+  "status": "protocol_only_not_authorized_to_run",
+  "date": "2026-09-28",
+  "question": "Does the complete same-direction two-served-station integer line give a physically valid strict decrease of the original F from the three preselected Round88 A2 witnesses, and at what complete diagnostic cost?",
+  "mechanism": {
+    "station_pairs": "all currently served distinct station pairs a<b in ascending station index",
+    "line": "Y_a(t)=Y_a+t, Y_b(t)=Y_b+t; all other inventories fixed",
+    "integer_t": "every capacity-feasible integer t including signs; t=0 is the verified baseline, not an accepted move",
+    "candidate_routes": "preserve vehicle assignment and visit order; recompute signed net operation; delete nodes whose operation becomes zero; no inserted or moved stations",
+    "validation": "original C++ Evaluator/verifySolution and computeObjectiveParts on every candidate, including all load prefixes, return-load handling, actual route travel and T+1e-7 behavior",
+    "acceptance": "only physical and identity-valid candidates with original F lower than current verified F by the unchanged 1e-12 strict-improvement gate; choose lowest F with deterministic (a,b,t) tie-break",
+    "iteration": "complete best scan; accept one strict best improvement; rescan the entire current co-direction neighborhood until no strict improvement",
+    "legacy_closure_between_acceptances": false,
+    "scope": "isolated offline mechanism diagnostic, not integrated R76/R83 closure and not a complete ENS-C run",
+    "forbidden": ["historical optimal value or UB injection", "instance/seed-dependent switch", "internal seconds/Work/candidate slice", "extra radius or step size", "adding cases after seeing outcomes"]
+  },
+  "execution": {
+    "case_order": ["D6", "E8", "S12"],
+    "planned_cases": 3,
+    "repetitions_per_case": 1,
+    "whole_case_external_deadline_seconds": 120,
+    "maximum_sum_case_deadlines_seconds": 360,
+    "includes": ["preflight", "input and witness parsing", "baseline original C++ validation", "all candidate evaluation", "all accepted rescans", "receipt and evidence writing", "process-tree cleanup"],
+    "timeout": "unknown with committed partial evidence and paid cost; no resume or extension",
+    "stopping": "identity/correctness/resource failure stops batch and preserves paid prefix; a complete negative case does not add cases or seeds",
+    "driver_source_sha256": null,
+    "diagnostic_binary_sha256": null,
+    "driver_bind_rule": "Root must bind final source and binary hashes in a separate qualification gate before any case launch; this manifest does not invent them",
+    "run_requires": "independent static review, G1 fixture and original-Evaluator qualification, input/witness hash recheck, exclusive compute slot, explicit root run lease"
+  },
+  "cases": [
+    {
+      "id": "D6",
+      "source": "Round88 A1 startup-only ENS-C final result; fixed A2 D6 witness",
+      "input_path": "reference/citibike443-regional-v1/instances/V30/cb443_V30_compact_r1_shortage_M03_Q30.txt",
+      "input_sha256": "070c2c1413840a09a264d238bdfa320ef76d293a45cab919095851afdea8c01d",
+      "witness_path": "results/unified_exact_round88/runner_a1_startup_d6/raw/01_D6_ENS-C/result.json",
+      "witness_sha256": "a8939cae620b6cdf6d20e3d2f957981bbc5144f9157b26dd5dbb5cfc91eb9c3c",
+      "scenario": {"V": 30, "M": 3, "Q": 30, "T_seconds": 18000, "pickup_seconds": 60, "drop_seconds": 60, "lambda": 0.15},
+      "historical_original_F": 0.15750980361456174,
+      "historical_evidence": "runner_a1_startup_d6/raw/01_D6_ENS-C/audit.json neutral_closure.passed=true and result.exhausted=true, optimizer_calls=0; result.json verification original feasible/recomputed; fresh diagnostic still revalidates",
+      "witness_stage": "old startup-only final closure route"
+    },
+    {
+      "id": "E8",
+      "source": "Round88 G3 ENS-C first same-run verified startup witness; fixed A2 E8 witness",
+      "input_path": "reference/qualification_round39/small-easy/round39_small_easy_V12_M3_Q30_slot08_seed1167625600.txt",
+      "input_sha256": "587737b9d000c1712220232a0fe957073f1f03ac649a63a4775abd9166603acd",
+      "witness_path": "results/unified_exact_round88/runner_a1_g3/raw/02_E8_ENS-C/external/initial_witness.json",
+      "witness_sha256": "70534fd162bff80ad50210ad94a02a2e0e7f6c6efafd67e58a3dea32ac1faea3",
+      "scenario": {"V": 12, "M": 3, "Q": 30, "T_seconds": 3600, "pickup_seconds": 60, "drop_seconds": 60, "lambda": 0.15},
+      "historical_original_F": 0.022295597484276734,
+      "historical_evidence": "runner_a1_g3/raw/02_E8_ENS-C/audit.json first witness source=same_run_verified_startup; neutral_exchange passed/exhausted, two equal-F relocations, zero strict moves; selected initial route is not claimed identical to later closure final route",
+      "witness_stage": "first verified startup witness, before equal-F neutral route changes"
+    },
+    {
+      "id": "S12",
+      "source": "Round88 G3 ENS-C first same-run verified startup witness; fixed A2 S12 witness",
+      "input_path": "reference/citibike443-regional-v1/instances/V12/cb443_V12_regional_r1_surplus_M01_Q30.txt",
+      "input_sha256": "060ee6366b2277c8427675e1a1484de7db10d2ef82a64d4e2ffa6e4695b7b626",
+      "witness_path": "results/unified_exact_round88/runner_a1_g3/raw/05_S12_ENS-C/external/initial_witness.json",
+      "witness_sha256": "af1a591e03c65fd81b96c4fe52b92978f09e34b9a2c2108ff807fc838225fd4b",
+      "scenario": {"V": 12, "M": 1, "Q": 30, "T_seconds": 10800, "pickup_seconds": 60, "drop_seconds": 60, "lambda": 0.15},
+      "historical_original_F": 0.05856397312578515,
+      "historical_evidence": "runner_a1_g3/raw/05_S12_ENS-C/audit.json first witness source=same_run_verified_startup; neutral_exchange passed/exhausted with zero neutral or strict moves; fresh diagnostic still revalidates",
+      "witness_stage": "first verified startup witness, old neutral closure made no move"
+    }
+  ],
+  "required_case_evidence": [
+    "pre/post source, diagnostic binary, input and witness hashes",
+    "original Evaluator baseline route, inventory, physical flags and F/G/P",
+    "every scanned (a,b,t), candidate route, original Evaluator valid/reject reason and F/G/P where valid",
+    "per-pass candidate count, physically valid count, best strict candidate and deterministic tie resolution",
+    "accepted moves and their time/order, complete rescans, exhaustion or timeout distinction",
+    "final verified route, inventory, F/G/P and delta from same-run baseline",
+    "outer launch-to-exit wall and child/process-tree status; nested costs identified but not added twice",
+    "all failures and partial events retained without retry"
+  ],
+  "interpretation": "A positive fixed-witness original-F decrease is mechanism evidence only. A complete no-improvement result covers only the scanned co-direction neighborhood of that fixed witness. Timeout is unknown. No result implies full-algorithm certification time or current-candidate held-out confirmation."
+}
