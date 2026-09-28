@@ -132,6 +132,15 @@ add_executable(Round95FullBlockTests tests/round95_full_block_tests.cpp)
 target_link_libraries(Round95FullBlockTests PRIVATE round95_full_block round93_co_quantity)
 add_test(NAME Round95FullBlockTests COMMAND Round95FullBlockTests)
 
+# Isolated Round96 multi-station quantity rays. Production remains unchanged.
+add_library(round96_multi_quantity STATIC src/Round96MultiQuantity.cpp)
+target_link_libraries(round96_multi_quantity PUBLIC round95_full_block)
+add_executable(Round96MultiQuantityDiagnostic tests/round96_multi_quantity_diagnostic.cpp)
+target_link_libraries(Round96MultiQuantityDiagnostic PRIVATE round96_multi_quantity)
+add_executable(Round96MultiQuantityTests tests/round96_multi_quantity_tests.cpp)
+target_link_libraries(Round96MultiQuantityTests PRIVATE round96_multi_quantity)
+add_test(NAME Round96MultiQuantityTests COMMAND Round96MultiQuantityTests)
+
 add_executable(NativeEvidenceJournalTests tests/native_evidence_journal_tests.cpp)
 target_link_libraries(NativeEvidenceJournalTests PRIVATE exact_ebrp_core)
 add_test(NAME NativeEvidenceJournalTests COMMAND NativeEvidenceJournalTests)
