@@ -1,19 +1,19 @@
-# R96 恢复与复现
+# R96 恢复与复现（2026-09-29）
 
-唯一源码目录 E:/codes/ExactEBRP；分支 codex/round96-external-primal，base R95。保护原三份 dirty 文件和历史 raw；不清理、不 git add .、不重开已有 destination。Python：D:/msys64/ucrt64/bin/python.exe。
+E:/codes/ExactEBRP，codex/round96-external-primal，base R95；保护原三份dirty文件和所有旧raw。不清理、不git add .、不重复启动已有destination。Python D:/msys64/ucrt64/bin/python.exe。目标active，完整用户要求见附件；读final_report.md。性能严格串行mask4，不与build/归档/重审计争CPU。
 
-先核活动进程、serial_queue_started/completion、各 run receipt 与 summary.jsonl，再做任何计算。性能严格串行、mask4；优化期间不编译、重审计或压缩。原用户要求、final_report.md 和数学底稿共同定义未完成工作；阶段 PR158 不等于研究完成。
+此前诊断/资格全部完成且不得重跑：固定路线六例、第一数量原型六例、自由顺序资格/F5_final、重排微例及六例、965见证/85移动oracle、四个CLI门禁、所有输入生成及零Optimize参考导出。两个native micro已用，六新外部输入和V1/V2全部固定保留。旧三/四站数量分支否定，新有限重排默认关闭。
 
-已完成且禁止重跑：固定路线六例及资格、第一多站原型六例、自由顺序资格与 F5_final、第二有限重排微例及六例、四次 CLI 身份检查。固定路线 F5_final 受限认证不改善；自由顺序超时未知；第二原型相对旧 R83 在四例改善、U6 两例无增量。965 个物理见证、85 次新移动及六个耗尽状态已离线复核；正式新 reader 的六例 fixture 已通过。
+外部summary.jsonl三行H1均通过：P1797.265秒未证；ENS677.515与LP677.625秒认证，LP零实际分裂。下个外部编号4。R90 binary SHA bac65ff3b5b099852f2eedd7ef462ad700e5c1131778bd56dca310b3dd0af2f2不动。
 
-外部 H1 三臂均完成并通过 audit：P-GRB 1797.265 秒未证；ENS-C 677.515 秒、LP-G 677.625 秒认证同一数值目标。LP-G 有两次提案、零实际分裂；无严重信号。external_report_h1 与 external_trajectory_h1 保存完整比较和最优见证发布区间。下一外部编号4，不再启动1–3。
+新生产binary SHA75915292d0df67ab48e3a9e396ec013a4a2c8b5a0aef50a983ae17ff5e135f56，源码ref9ab0a2b1064022913295c8da02a5f57288d91f44。不修改已绑定src/include/CMake或重构。primal三个F5臂已完整运行。ON原审计失败仅为旧parameter_readback不接受ORDER-ON标签；原失败audit/summary保留，round96_primal_recovery_v2.py已离线recover成功，新增audit_v2与primal_v2有效三行前缀。不要重跑recover，也不要使用旧primal_launch启动后续；新命令是python scripts/round96_primal_recovery_v2.py run --number N，N从4起。
 
-R90 external 二进制保持原 SHA bac65ff3b5b099852f2eedd7ef462ad700e5c1131778bd56dca310b3dd0af2f2。新的默认关闭生产入口已构建，production_build_identity.json 绑定源 ref 9ab0a2b1064022913295c8da02a5f57288d91f44，binary SHA 75915292d0df67ab48e3a9e396ec013a4a2c8b5a0aef50a983ae17ff5e135f56。不要修改其 src/include/CMake 或重构。
+旧serial_queue exec67034已经exit1，serial_queue_completion记录3个任务（含已付费ON、读回失败）；不能再run旧队列。serial_queue_v2_plan.json已准备，仅原计划剩余24项：H2→F2→H3→V1→H4→V2→H5/H6。先看serial_queue_v2_started/completion与真实进程；仅started不存在时才能首次执行python scripts/round96_serial_queue_v2.py run。每个三臂组都在无optimizer时等待serial_review_v2_<campaign>_<role>.json，需root自审、绑定相应decision_signals文件SHA及continue_planned_runs=true；不称独立代理。任何实际失败先保存定位，不重跑paid臂。队列源和recovery adapter/admission已冻结不要编辑。
 
-V1/V2 已按先前计划一次生成并绑定；primal prepare 四次零 Optimize 导出已完成，实际数值检查通过。primal/identity.json 与 primal_admission.json 已冻结；12 个正式臂尚未启动。不能重跑 prepare 或生成器。已冻结 runner/reader/fixture/oracle/source 的字节不要改动，否则身份门禁将拒绝。
+完整F5结果ON U.3205122270/L.2815237008，OFF .3295041072/.2814538063，P .4342358368/.2682505969，全部未证。新实际启动5重排和40物理见证重放通过；最终速度未知。全部数值、修复原因见f5_full_review.md。当前43次保守启动，native micro2/4，累计native调用34，最终计划67次。
 
-serial_queue_plan.json 已准备，27 个剩余任务：F5 三臂→H2→F2→H3→V1→H4→V2→H5/H6。命令为 python scripts/round96_serial_queue.py run，仅能首次执行，先检查 started 不存在。任何 paid/audit/resource 错误都停止、保留，不自动重试。完整三臂出现材料性信号后暂停，读取 signal 文件并写诚实的 root 自审 serial_review_<campaign>_<role>.json，绑定 signal_sha256 和 continue_planned_runs=true 才继续既定计划；不称独立代理审查。需要行政停止时使用 serial_queue_stop.json，不擅自终止其他任务。
+离线工具现在已执行：round96_primal_report.py f5、round96_cost_report.py f5、round96_derived_numeric.py external h1_v2与primal_v2 f5；16现存model所检行族系数均无阈值修改。报告脚本支持audit_path恢复记录。trajectory.py支持primal_v2；当前只有H1得到认证参考，F5没有可靠F*。每个新输出用新label，不覆盖；模型审计在队列review边界运行。
 
-当前保守启动40次，含外部前三臂、新参考导出4次及CLI4次；最终计划67/约72次，native micro 已用2/4。内部 Optimize 另数但费用不重复相加。三组以上3600–7200秒匹配预算已固定；不加种子、不延长救负结果。
+stage3归档已完成，91,094 members、70,892,034字节均SHA复核；含H1 ENS/LP和F5所有raw、修复失败历史、生产源码与导出。stage1/2保留旧证据。stage3为写入时快照，后续final_report/RESUME更新以Git为准。
 
-完成后仍需：全部外部18臂、新原型12臂的配对与删失结论；新原型实际启动接入审计；三项独立资格决定；实际派生行数值边界说明；完整成本/调用账本；证据归档与索引；最终报告、恢复说明和 draft PR 更新。stage1/stage2 证据包已核，后者9449 members、约6.97MB，含开发源码胶囊及 H1/P；H1/ENS、LP 等后续证据尚待新包。
+剩余必须完成：全部18外部与12primal正式臂；保护及两独立验证；每角色认证/删失/P主参照结论；后续派生系数核查；完整费用与内部native数；三项资格判断；最终证据索引/PR更新。阶段PR158不是完成，不晋升、不合并、不扩大预算或重新抽样。

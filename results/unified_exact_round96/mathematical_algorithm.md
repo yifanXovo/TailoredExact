@@ -19,8 +19,12 @@ G_{true}(Y)=\begin{cases}H/(nS)&S>0\\0&S=0.\end{cases}$$
 
 叶域 $[a,b]$ 内VD-P用库存one-hot变量 $s_{iy}\in\{0,1\}$，$\sum_y s_{iy}=1$，$Y_i=\sum_y ys_{iy}$，以及
 
-$$a s_{iy}\le q_{iy}\le b s_{iy},\qquad
-G-b(1-s_{iy})\le q_{iy}\le G-a(1-s_{iy}),\qquad \sum_yq_{iy}=G.$$
+$$a s_{iy}\le q_{iy}\le b s_{iy},\qquad \sum_yq_{iy}=G.$$
+
+以上是实际写入的透视行与求和等式。常见的另两条乘积界
+$G-b(1-s_{iy})\le q_{iy}\le G-a(1-s_{iy})$
+由其它状态的上下界、$\sum_y s_{iy}=1$及$\sum_yq_{iy}=G$推出，不是额外写入的行。
+VD-P保留原$Y_i/D_i=r_i$和绝对值不等式；仅VD-J分支才显式写入状态比例/惩罚重构等式，不能将VD-J表述混入本轮配置。
 
 整数时恰有 $q_{iy}=Gs_{iy}$。令 $z_i=\sum_y yq_{iy}$、$h_{ij}\ge\pm(r_i-r_j)$、$e_i\ge\pm(r_i-1)$，加
 
@@ -82,3 +86,5 @@ $$\Phi_L(p)-\Phi_R(p)=\sum_{i,y}(\bar q_{iy}-p\bar s_{iy})=n(\bar G-p).$$
 ## 7. 新诊断与未来候选的独立身份
 
 [固定路线协议](fixed_route_protocol.md)覆盖可删零、可翻向、多站协调、实际压缩旅行的全部数量域。其最优/下界只限R，不能证明原问题全局最优。125库存微型枚举同时检验物理和模型映射（包含删点、方向反转及S=0代数状态），原六见证全部映射通过；一次Gurobi微型结果与枚举最优一致。实际长尾结果、后续有限邻域原型与端到端对照另记，不将诊断时限机制直接纳入算法。
+
+当前补核结果：原compact目标/完整时长及有限库存系数核验已通过；H1与F5共16份现存叶模型的所选透视、居中、cutoff及SP派生行逐系数重构通过，未发现非零系数被阈值改变。具体覆盖与未覆盖范围见numerical_scope.md；不能将这项有限实测扩大为任意输入或严格有理证书。

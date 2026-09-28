@@ -11,7 +11,7 @@ from pathlib import Path
 from round96_prepare import ROOT,OUT,read,write,sha,evidence
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('campaign',choices=['external','primal']);parser.add_argument('label')
+    parser=argparse.ArgumentParser();parser.add_argument('campaign',choices=['external','primal','primal_v2']);parser.add_argument('label')
     args=parser.parse_args();assert args.label.replace('_','').replace('-','').isalnum()
     camp=OUT/args.campaign;path=camp/'summary.jsonl'
     records=[json.loads(line) for line in path.read_text().splitlines()];assert all(r['audit_passed'] for r in records)
@@ -20,7 +20,7 @@ def main():
         if row['endpoint']['certificate'] and row['id'] not in certified:certified[row['id']]=row
     result=[]
     for row in records:
-        audit=read(Path(row['destination'])/'audit.json');assert audit['passed']
+        audit=read(ROOT/row['audit_path'] if 'audit_path' in row else Path(row['destination'])/'audit.json');assert audit['passed']
         endpoint=row['endpoint'];cost=row['completion']['process_wall_seconds'];ref=certified.get(row['id'])
         item=dict(role=row['id'],arm=row['arm'],certificate=endpoint['certificate'],process_seconds=cost,
             F_star_reference=None,F_star_source_arm=None,F_star_source_number=None,
