@@ -1,0 +1,29 @@
+{
+  "schema": "round94-formal-after-recovery-completion-v2",
+  "planned": 12,
+  "completed": 1,
+  "error": "RuntimeError('Audit failed; retain evidence and stop before next arm')",
+  "attempted": [
+    1,
+    2
+  ],
+  "not_run": [
+    "F2/LP-G",
+    "C20/LP-G",
+    "C20/ENS-C",
+    "C20/P-GRB",
+    "B50/ENS-C",
+    "B50/P-GRB",
+    "B50/LP-G",
+    "U6/LP-G",
+    "U6/P-GRB",
+    "U6/ENS-C"
+  ],
+  "paid_process_wall_seconds_with_receipt": 1441.4370000003837,
+  "completed_process_receipts": 2,
+  "outer_wall_seconds": 1442.1069950996898,
+  "precompletion_failed_attempt_elapsed_seconds": 0,
+  "total_process_wall_if_any_missing_receipt": 1441.4370000003837,
+  "full_invocation_wall_before_write_seconds": 1442.4404579000548,
+  "ended_unix": 1790578096.2376401
+}
