@@ -1,0 +1,108 @@
+{
+  "version": "round96-external-v1",
+  "roles": [
+    {
+      "id": "H1",
+      "V": 20,
+      "M": 2,
+      "Q": 20,
+      "geometry": "three_clusters",
+      "inventory": "surplus",
+      "T_seconds": 5400,
+      "cap_seconds": 1800
+    },
+    {
+      "id": "H2",
+      "V": 20,
+      "M": 3,
+      "Q": 15,
+      "geometry": "anisotropic_cloud",
+      "inventory": "shortage",
+      "T_seconds": 3600,
+      "cap_seconds": 1800
+    },
+    {
+      "id": "H3",
+      "V": 30,
+      "M": 3,
+      "Q": 25,
+      "geometry": "radial_spokes",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 3600
+    },
+    {
+      "id": "H4",
+      "V": 30,
+      "M": 2,
+      "Q": 35,
+      "geometry": "bent_corridor",
+      "inventory": "balanced",
+      "T_seconds": 10800,
+      "cap_seconds": 1800
+    },
+    {
+      "id": "H5",
+      "V": 50,
+      "M": 4,
+      "Q": 25,
+      "geometry": "separated_islands",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 7200
+    },
+    {
+      "id": "H6",
+      "V": 50,
+      "M": 5,
+      "Q": 20,
+      "geometry": "offset_annulus",
+      "inventory": "surplus",
+      "T_seconds": 3600,
+      "cap_seconds": 3600
+    }
+  ],
+  "orders": [
+    [
+      "P-GRB",
+      "ENS-C",
+      "LP-G"
+    ],
+    [
+      "LP-G",
+      "ENS-C",
+      "P-GRB"
+    ],
+    [
+      "ENS-C",
+      "P-GRB",
+      "LP-G"
+    ],
+    [
+      "P-GRB",
+      "LP-G",
+      "ENS-C"
+    ],
+    [
+      "ENS-C",
+      "LP-G",
+      "P-GRB"
+    ],
+    [
+      "LP-G",
+      "P-GRB",
+      "ENS-C"
+    ]
+  ],
+  "source_sha256": "1708be14cb731cefac5719b1a956fe59cb6e06fd8581ba5b224a1343ffa9fcbe",
+  "seed": "SHA256(round96-external-v1|id|field), first 8 bytes / 2^64",
+  "policy": "Keep all six outcomes; no reseed, replacement, resize or T adjustment. No optimizer-informed selection.",
+  "lambda_value": 0.15,
+  "pickup_seconds": 60,
+  "drop_seconds": 60,
+  "maximum_formal_starts": 18,
+  "maximum_formal_seconds": 59400,
+  "structural_design": "H3/H5 shortage excludes F=0 analytically; proof difficulty is only a hypothesis.",
+  "writer_sha256": "05b60dc92e4f81edaa134fbcb556dcb18efbf36ac02f333712e0b7e8364491c1",
+  "optimizer_calls": 0
+}
