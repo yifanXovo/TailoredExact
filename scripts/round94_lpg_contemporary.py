@@ -24,6 +24,8 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 PREREG = ROOT / "results/unified_exact_round94/preregistration.json"
 CAMPAIGN = ROOT / "results/unified_exact_round94/runner_lpg_contemporary"
+RECOVERY_PREREG = ROOT / "results/unified_exact_round94/recovery_preregistration_v2.json"
+RECOVERY = CAMPAIGN / "recovery_v2"
 REFERENCE_IDS = ("F2", "C20", "B50", "U6")
 ORDER = (
     "F2/P-GRB", "F2/ENS-C", "F2/LP-G",
@@ -290,7 +292,7 @@ def audit_adapter(r90):
         destination = Path(launch["destination"])
         calls = [row["payload"] for row in observations if row["payload"]["kind"] == "call"]
         for call in calls:
-            assert call["native_preconditions"] is True, "native parameter/domain preconditions failed"
+            assert native_true(call["native_preconditions"]), "native parameter/domain preconditions failed"
             assert call["settings"] == expected_settings, "journal native parameter readback differs"
         if launch["arm"] == "P-GRB":
             assert len(calls) <= 1, "P has more than one native model call"
@@ -330,8 +332,8 @@ def qualification_journal_audit(r90, launch: dict) -> dict:
     assert [path.name for path in commits] == [f"event_{i}.commit" for i in range(1, len(commits) + 1)]
     records = [r90.evidence.receipt(path, 0.0, 15.0) for path in commits]
     calls = [row["payload"] for row in records if row["payload"]["kind"] == "call"]
-    assert len(calls) == 1 and calls[0]["full_original"] is True
-    assert calls[0]["native_preconditions"] is True
+    assert len(calls) == 1 and native_true(calls[0]["full_original"])
+    assert native_true(calls[0]["native_preconditions"])
     assert calls[0]["settings"] == dict(read_return_code=0, Threads=1, Seed=0,
                                       Presolve=-1, MIPGap=0, MIPGapAbs=0,
                                       FeasibilityTol=1e-6, IntFeasTol=1e-5,
@@ -344,6 +346,170 @@ def qualification_journal_audit(r90, launch: dict) -> dict:
                 native_calls_returned=1, original_scope=True,
                 physical_witnesses=audited["physical_witnesses"],
                 global_bound_events=audited["global_native_bound_events"])
+
+
+def native_true(value: object) -> bool:
+    """The frozen NEJ1 C++ writer encodes scope flags as JSON integer 1."""
+    return value is True or (type(value) is int and value == 1)
+
+
+def preserved_f2_manifest() -> list[dict]:
+    folder = CAMPAIGN / "qualification/01_F2_P-GRB"
+    assert folder.is_dir()
+    files = sorted(path for path in folder.rglob("*") if path.is_file())
+    assert files
+    return [dict(path=path.relative_to(folder).as_posix(), size_bytes=path.stat().st_size,
+                 sha256=sha(path)) for path in files]
+
+
+def recovery_contract(prereg: dict) -> tuple[dict, dict]:
+    repair = read(RECOVERY_PREREG)
+    assert repair["schema"] == "round94-qualification-recovery-preregistration-v2"
+    assert repair["status"] == "source_only_no_new_native_authorization"
+    assert repair["recovery_root"] == RECOVERY.relative_to(ROOT).as_posix()
+    assert repair["remaining_qualification_roles"] == ["C20", "B50", "U6"]
+    assert repair["remaining_original_launch_numbers"] == [2, 3, 4]
+    assert repair["remaining_external_process_cap_seconds_each"] == 15
+    assert repair["remaining_maximum_process_seconds"] == 45
+    assert repair["original_preregistration_sha256"] == sha(PREREG)
+    assert repair["original_preregistration_sha256"] == "767b8abe628bb5e84c8c44ddf2b65869f44212e17bea362fc0284b4afb445774"
+    preserved = {
+        "original_identity_sha256": CAMPAIGN / "identity.json",
+        "original_qualification_completion_sha256": CAMPAIGN / "qualification_completion.json",
+        "original_qualification_failure_sha256": CAMPAIGN / "qualification_failure_01.json",
+        "preserved_f2_completion_sha256": CAMPAIGN / "qualification/01_F2_P-GRB/completion.json",
+        "preserved_f2_result_sha256": CAMPAIGN / "qualification/01_F2_P-GRB/result.json",
+    }
+    for key, path in preserved.items():
+        assert sha(path) == repair[key], key
+    old_source = subprocess.check_output(
+        ["git", "show", repair["original_source_commit"] + ":scripts/round94_lpg_contemporary.py"],
+        cwd=ROOT)
+    assert hashlib.sha256(old_source).hexdigest() == repair["original_runner_sha256"]
+    original = read(CAMPAIGN / "identity.json")
+    assert original["runner_sha256"] == repair["original_runner_sha256"]
+    assert original["prereg_sha256"] == repair["original_preregistration_sha256"]
+    failed = read(CAMPAIGN / "qualification_completion.json")
+    assert failed["passed"] is False and failed["attempted"] == ["F2"]
+    assert failed["not_run"] == repair["remaining_qualification_roles"]
+    assert failed["completed"] == 0 and failed["records"] == []
+    f2_completion = read(CAMPAIGN / "qualification/01_F2_P-GRB/completion.json")
+    assert f2_completion["reason"] == "normal_return" and f2_completion["returncode"] == 0
+    assert f2_completion["whole_process_wall_seconds"] == repair["original_paid_f2_process_wall_seconds"]
+    assert failed["outer_wall_seconds"] == repair["original_paid_qualification_outer_wall_seconds"]
+    assert failed["full_invocation_wall_before_write_seconds"] == repair["original_paid_full_invocation_wall_before_receipt_seconds"]
+    assert original["qualification_launches"][0]["id"] == "F2"
+    assert [x["id"] for x in original["qualification_launches"][1:]] == repair["remaining_qualification_roles"]
+    assert [x["number"] for x in original["qualification_launches"][1:]] == [2, 3, 4]
+    assert all(x["external_cap_seconds"] == 15 for x in original["qualification_launches"])
+    assert original["formal_launches"] and len(original["formal_launches"]) == 12
+    return repair, original
+
+
+def verify_preserved_f2(r90, original: dict) -> dict:
+    launch = original["qualification_launches"][0]
+    destination = Path(launch["destination"])
+    assert read(destination / "launch.json") == launch
+    result = read(destination / "result.json")
+    reference = launch["panel"]["reference"]
+    compact = destination / "compact.lp"
+    assert sha(compact) == reference["canonical_sha256"]
+    assert result["gurobi_canonical_model_sha256"] == reference["canonical_sha256"]
+    assert result["gurobi_model_fingerprint"] == reference["fingerprint"]
+    assert result["gurobi_num_vars"] == reference["columns"]
+    assert result["gurobi_num_constrs"] == reference["rows"]
+    assert result["gurobi_native_domain_audit_passed"] is True
+    assert result["gurobi_optimize_count"] == 1 and result["gurobi_optimize_return_code"] == 0
+    assert result["gurobi_lifecycle_valid"] is True
+    assert result["gurobi_hga_start_requested"] is False
+    assert result["method"] == "gurobi" and result["algorithm_preset"] == "custom"
+    parameters = parameter_readback(result, require_call=True, arm="P-GRB")
+    journal = qualification_journal_audit(r90, launch)
+    assert journal["committed_events"] == 3
+    return dict(schema="round94-offline-f2-requalification-v2", role="F2", passed=True,
+                original_qualification_processes_started=1, new_processes_started=0,
+                original_native_optimize_calls_verified=1, new_native_optimize_calls=0,
+                search_result_excluded=True, preserved_result_sha256=sha(destination / "result.json"),
+                compact_sha256=sha(compact), native_fingerprint=result["gurobi_model_fingerprint"],
+                native_domain_passed=True, native_parameters=parameters, native_journal=journal,
+                original_whole_process_wall_seconds=read(destination / "completion.json")["whole_process_wall_seconds"])
+
+
+def repair_prepare(prereg: dict, d6, priority, r90, old: dict) -> None:
+    started = time.perf_counter()
+    baseline, g3, _ = validate(prereg, d6, priority, r90, old)
+    repair, original = recovery_contract(prereg)
+    assert original["qualification_launches"] == qualification_launches(prereg, r90)
+    assert original["formal_launches"] == formal_launches(prereg, r90, g3)
+    assert not RECOVERY.exists(), "Never replace recovery identity or offline audit"
+    assert not (CAMPAIGN / "formal_started.json").exists()
+    assert all(not Path(row["destination"]).exists() for row in original["qualification_launches"][1:])
+    assert not r90.foreign_heavy_processes()
+    manifest = preserved_f2_manifest()
+    audited = verify_preserved_f2(r90, original)
+    RECOVERY.mkdir(parents=True, exist_ok=False)
+    r90.write_new(RECOVERY / "preserved_f2_file_manifest.json", dict(
+        schema="round94-preserved-f2-raw-manifest-v2", directory=repair["preserved_f2_relative_directory"],
+        file_count=len(manifest), files=manifest))
+    r90.write_new(RECOVERY / "offline_f2_audit.json", audited)
+    identity = dict(schema="round94-recovery-identity-v2", optimizer_calls=0,
+                    recovery_prereg_sha256=sha(RECOVERY_PREREG),
+                    original_identity_sha256=repair["original_identity_sha256"],
+                    original_qualification_completion_sha256=repair["original_qualification_completion_sha256"],
+                    original_qualification_failure_sha256=repair["original_qualification_failure_sha256"],
+                    original_source_commit=repair["original_source_commit"],
+                    original_runner_sha256=repair["original_runner_sha256"],
+                    prereg_sha256=sha(PREREG), runner_sha256=sha(Path(__file__)),
+                    candidate_binary_sha256=prereg["candidate_binary_sha256"],
+                    source_snapshot_sha256=original["source_snapshot_sha256"],
+                    source_hashes=baseline["source_hashes"], old_harness_hashes=baseline["harness_hashes"],
+                    preserved_f2_file_manifest_sha256=sha(RECOVERY / "preserved_f2_file_manifest.json"),
+                    offline_f2_audit_sha256=sha(RECOVERY / "offline_f2_audit.json"),
+                    qualification_launches=original["qualification_launches"][1:],
+                    formal_launches=original["formal_launches"],
+                    prepared_unix=time.time())
+    r90.write_new(RECOVERY / "identity.json", identity)
+    r90.write_new(RECOVERY / "preflight.json", dict(
+        schema="round94-recovery-preflight-v2", new_optimize_calls=0,
+        preserved_f2_original_optimize_calls_verified=1, preserved_f2_passed=True,
+        remaining_qualification_processes=3, remaining_qualification_process_caps_seconds=45,
+        formal_runs=12, formal_process_caps_seconds=13500,
+        identity_sha256=sha(RECOVERY / "identity.json"),
+        prepare_elapsed_before_receipt_seconds=time.perf_counter() - started,
+        note="Offline requalification only; requires new root lease for three remaining native diagnostics."))
+    print(json.dumps(dict(recovery_prepared=True, new_optimize_calls=0,
+                          preserved_f2_verified=True, remaining_qualification_processes=3)), flush=True)
+
+
+def require_recovery(prereg: dict, d6, priority, r90, old: dict) -> dict:
+    baseline, g3, _ = validate(prereg, d6, priority, r90, old)
+    repair, original = recovery_contract(prereg)
+    manifest_path = RECOVERY / "preserved_f2_file_manifest.json"
+    manifest = read(manifest_path)
+    assert manifest["schema"] == "round94-preserved-f2-raw-manifest-v2"
+    assert manifest["directory"] == repair["preserved_f2_relative_directory"]
+    assert manifest["files"] == preserved_f2_manifest()
+    assert manifest["file_count"] == len(manifest["files"])
+    offline = read(RECOVERY / "offline_f2_audit.json")
+    assert offline == verify_preserved_f2(r90, original) and offline["passed"] is True
+    identity = read(RECOVERY / "identity.json")
+    assert identity["schema"] == "round94-recovery-identity-v2"
+    assert identity["recovery_prereg_sha256"] == sha(RECOVERY_PREREG)
+    assert identity["original_identity_sha256"] == repair["original_identity_sha256"]
+    assert identity["original_qualification_completion_sha256"] == repair["original_qualification_completion_sha256"]
+    assert identity["original_qualification_failure_sha256"] == repair["original_qualification_failure_sha256"]
+    assert identity["original_runner_sha256"] == repair["original_runner_sha256"]
+    assert identity["runner_sha256"] == sha(Path(__file__))
+    assert identity["prereg_sha256"] == sha(PREREG)
+    assert identity["candidate_binary_sha256"] == prereg["candidate_binary_sha256"]
+    assert identity["source_snapshot_sha256"] == original["source_snapshot_sha256"]
+    assert identity["source_hashes"] == baseline["source_hashes"]
+    assert identity["old_harness_hashes"] == baseline["harness_hashes"]
+    assert identity["preserved_f2_file_manifest_sha256"] == sha(manifest_path)
+    assert identity["offline_f2_audit_sha256"] == sha(RECOVERY / "offline_f2_audit.json")
+    assert identity["qualification_launches"] == original["qualification_launches"][1:]
+    assert identity["formal_launches"] == formal_launches(prereg, r90, g3)
+    return identity
 
 
 def cross_arm(r90, records: list[dict], role: str) -> dict:
@@ -527,27 +693,146 @@ def qualify(prereg: dict, d6, priority, r90, old: dict) -> None:
             ended_unix=time.time()))
 
 
+def qualify_recovery(prereg: dict, d6, priority, r90, old: dict) -> None:
+    invocation = time.perf_counter()
+    identity = require_recovery(prereg, d6, priority, r90, old)
+    lease_path = RECOVERY / "remaining_qualification_lease.json"
+    assert read(lease_path) == dict(
+        schema="round94-recovery-remaining-qualification-lease-v2",
+        authorized_by="root", allow_optimize=True,
+        recovery_identity_sha256=sha(RECOVERY / "identity.json"),
+        preserved_f2_audit_sha256=sha(RECOVERY / "offline_f2_audit.json"),
+        planned_processes=3, execution_order=["C20", "B50", "U6"])
+    assert not (RECOVERY / "qualification_started.json").exists()
+    assert not (RECOVERY / "qualification_completion.json").exists()
+    assert all(not Path(row["destination"]).exists() for row in identity["qualification_launches"])
+    assert not r90.foreign_heavy_processes()
+    r90.write_new(RECOVERY / "qualification_started.json", dict(
+        recovery_identity_sha256=sha(RECOVERY / "identity.json"), lease_sha256=sha(lease_path),
+        preserved_f2_audit_sha256=sha(RECOVERY / "offline_f2_audit.json"),
+        started_unix=time.time(), native_optimize_calls_planned=3,
+        preflight_wall_seconds=time.perf_counter() - invocation))
+    started = time.perf_counter()
+    completed, error = [], None
+    active: dict | None = None
+    active_started: float | None = None
+    try:
+        for launch in identity["qualification_launches"]:
+            active = launch
+            destination = Path(launch["destination"])
+            assert not r90.foreign_heavy_processes()
+            destination.mkdir(parents=True, exist_ok=False)
+            r90.write_new(destination / "launch.json", launch)
+            began = time.perf_counter()
+            active_started = began
+            reason, returncode = "normal_return", None
+            env = dict(os.environ)
+            env["PATH"] = "D:/msys64/ucrt64/bin;D:/gurobi1302/win64/bin;" + env.get("PATH", "")
+            with r90.affinity.inherited_core(prereg["common"]["affinity_mask"]) as binding:
+                with (destination / "stdout.log").open("x") as out, (destination / "stderr.log").open("x") as err:
+                    child = subprocess.Popen(launch["command"], cwd=ROOT, env=env, stdout=out, stderr=err)
+                    try:
+                        mask = r90.affinity.read_masks(child.pid)
+                        assert mask["process_mask"] == prereg["common"]["affinity_mask"]
+                        r90.write_new(destination / "affinity.json", dict(parent=binding, child=mask, pid=child.pid))
+                        child.wait(timeout=max(0.001, 15 - (time.perf_counter() - began)))
+                    except subprocess.TimeoutExpired:
+                        reason = "external_whole_process_cap"
+                        child.kill()
+                        child.wait()
+                    finally:
+                        if child.poll() is None:
+                            child.kill()
+                            child.wait()
+                    returncode = child.returncode
+            elapsed = time.perf_counter() - began
+            completion = dict(schema="round94-recovery-qualification-process-v2", role=launch["id"],
+                              whole_process_wall_seconds=elapsed, cap_seconds=15,
+                              reason=reason, returncode=returncode, ended_unix=time.time())
+            r90.write_new(destination / "completion.json", completion)
+            assert reason == "normal_return" and returncode == 0 and elapsed <= 15
+            result = read(destination / "result.json")
+            compact = destination / "compact.lp"
+            ref = launch["panel"]["reference"]
+            assert compact.is_file() and sha(compact) == ref["canonical_sha256"]
+            assert result["gurobi_canonical_model_sha256"] == ref["canonical_sha256"]
+            assert result["gurobi_model_fingerprint"] == ref["fingerprint"]
+            assert result["gurobi_num_vars"] == ref["columns"] and result["gurobi_num_constrs"] == ref["rows"]
+            assert result["gurobi_native_domain_audit_passed"] is True
+            assert result["gurobi_optimize_count"] == 1 and result["gurobi_optimize_return_code"] == 0
+            assert result["gurobi_lifecycle_valid"] is True
+            assert result["gurobi_hga_start_requested"] is False
+            assert result["method"] == "gurobi" and result["algorithm_preset"] == "custom"
+            parameters = parameter_readback(result, require_call=True, arm="P-GRB")
+            journal = qualification_journal_audit(r90, launch)
+            receipt = dict(schema="round94-recovery-qualification-audit-v2", role=launch["id"], passed=True,
+                           official_benchmark_run=False, native_optimize_calls=1,
+                           search_result_excluded=True, compact_sha256=sha(compact),
+                           result_sha256=sha(destination / "result.json"),
+                           native_fingerprint=result["gurobi_model_fingerprint"],
+                           native_domain_passed=True, native_parameters=parameters,
+                           native_journal=journal)
+            r90.write_new(destination / "audit.json", receipt)
+            completed.append(dict(role=launch["id"], completion=completion, audit=receipt))
+            active = None
+            active_started = None
+    except Exception as exc:
+        error = repr(exc)
+        if active is not None:
+            destination = Path(active["destination"])
+            r90.write_new(RECOVERY / f'qualification_failure_{active["number"]:02d}.json', dict(
+                schema="round94-recovery-qualification-failure-v2", role=active["id"],
+                error=error, destination=str(destination), destination_exists=destination.exists(),
+                result_exists=(destination / "result.json").is_file(),
+                completion_exists=(destination / "completion.json").is_file(),
+                attempted_wall_lower_bound_seconds=(time.perf_counter() - active_started)
+                if active_started is not None else None,
+                native_optimize_calls="unknown_without_valid_final_receipt",
+                requires_independent_review=True, recorded_unix=time.time()))
+        raise
+    finally:
+        attempted = [x["id"] for x in identity["qualification_launches"]
+                     if Path(x["destination"]).exists()]
+        r90.write_new(RECOVERY / "qualification_completion.json", dict(
+            schema="round94-recovery-qualification-completion-v2", planned_remaining=3,
+            completed_remaining=len(completed),
+            passed=error is None and len(completed) == 3,
+            preserved_f2_passed=True, verified_total_identity_qualifications=1 + len(completed),
+            original_f2_native_optimize_calls_verified=1,
+            remaining_native_optimize_calls_confirmed=sum(x["audit"]["native_optimize_calls"] for x in completed),
+            native_optimize_calls_total="unknown_if_failed" if error is not None else 4,
+            original_f2_whole_process_wall_seconds=read(CAMPAIGN / "qualification/01_F2_P-GRB/completion.json")["whole_process_wall_seconds"],
+            remaining_paid_process_wall_seconds_with_receipt=sum(x["completion"]["whole_process_wall_seconds"] for x in completed),
+            error=error, attempted=attempted,
+            not_run=[rid for rid in ("C20", "B50", "U6") if rid not in attempted],
+            records=completed, outer_wall_seconds=time.perf_counter() - started,
+            full_invocation_wall_before_write_seconds=time.perf_counter() - invocation,
+            ended_unix=time.time()))
+
+
 def run(prereg: dict, d6, priority, r90, old: dict) -> None:
     invocation = time.perf_counter()
-    identity = require_prepared(prereg, d6, priority, r90, old)
-    qualification_path = CAMPAIGN / "qualification_completion.json"
+    identity = require_recovery(prereg, d6, priority, r90, old)
+    qualification_path = RECOVERY / "qualification_completion.json"
     qualification = read(qualification_path)
-    assert qualification["passed"] is True and qualification["planned"] == qualification["completed"] == 4
-    assert qualification["actual_optimize_calls_confirmed"] == 4
-    lease_path = CAMPAIGN / "formal_lease.json"
-    expected_lease = dict(schema="round94-formal-lease-v1", authorized_by="root", allow_optimize=True,
-                          identity_sha256=sha(CAMPAIGN / "identity.json"),
+    assert qualification["schema"] == "round94-recovery-qualification-completion-v2"
+    assert qualification["passed"] is True and qualification["planned_remaining"] == qualification["completed_remaining"] == 3
+    assert qualification["verified_total_identity_qualifications"] == 4
+    assert qualification["native_optimize_calls_total"] == 4
+    lease_path = RECOVERY / "formal_lease.json"
+    expected_lease = dict(schema="round94-formal-after-recovery-lease-v2", authorized_by="root", allow_optimize=True,
+                          recovery_identity_sha256=sha(RECOVERY / "identity.json"),
                           qualification_completion_sha256=sha(qualification_path),
                           planned_processes=12)
     assert read(lease_path) == expected_lease
-    assert not (CAMPAIGN / "formal_started.json").exists()
+    assert not (RECOVERY / "formal_started.json").exists()
     assert not (CAMPAIGN / "summary.jsonl").exists()
     assert all(not Path(row["destination"]).exists() for row in identity["formal_launches"])
     assert not r90.foreign_heavy_processes()
     r90.CAMPAIGN = CAMPAIGN  # Scoped to this imported G3 module, not the frozen file.
     r90.audit_launch = audit_adapter(r90)  # Its original ENS/LP audit is called inside.
-    r90.write_new(CAMPAIGN / "formal_started.json", dict(
-        identity_sha256=sha(CAMPAIGN / "identity.json"), lease_sha256=sha(lease_path),
+    r90.write_new(RECOVERY / "formal_started.json", dict(
+        recovery_identity_sha256=sha(RECOVERY / "identity.json"), lease_sha256=sha(lease_path),
         qualification_completion_sha256=sha(qualification_path),
         preflight_wall_seconds=time.perf_counter() - invocation, started_unix=time.time()))
     started = time.perf_counter()
@@ -584,8 +869,8 @@ def run(prereg: dict, d6, priority, r90, old: dict) -> None:
                 if (Path(x["destination"]) / "completion.json").is_file()]
         failures = [read(path) for path in sorted(CAMPAIGN.glob("failure_*.json"))]
         attempted = {x["number"] for x in identity["formal_launches"] if Path(x["destination"]).exists()}
-        r90.write_new(CAMPAIGN / "formal_completion.json", dict(
-            schema="round94-formal-completion-v1", planned=12, completed=len(records),
+        r90.write_new(RECOVERY / "formal_completion.json", dict(
+            schema="round94-formal-after-recovery-completion-v2", planned=12, completed=len(records),
             error=error, attempted=sorted(attempted),
             not_run=[f'{x["id"]}/{x["arm"]}' for x in identity["formal_launches"]
                      if x["number"] not in attempted],
@@ -602,14 +887,14 @@ def run(prereg: dict, d6, priority, r90, old: dict) -> None:
 def main() -> None:
     if not __debug__:
         raise RuntimeError("Python -O disables identity/lease assertions")
-    assert len(sys.argv) == 2 and sys.argv[1] in {"prepare", "qualify", "run"}, \
-        "Usage: round94_lpg_contemporary.py prepare|qualify|run"
+    assert len(sys.argv) == 2 and sys.argv[1] in {"repair-prepare", "qualify-recovery", "run"}, \
+        "Usage: round94_lpg_contemporary.py repair-prepare|qualify-recovery|run"
     prereg = read(PREREG)
     d6, priority, r90, old = modules(prereg)
-    if sys.argv[1] == "prepare":
-        prepare(prereg, d6, priority, r90, old)
-    elif sys.argv[1] == "qualify":
-        qualify(prereg, d6, priority, r90, old)
+    if sys.argv[1] == "repair-prepare":
+        repair_prepare(prereg, d6, priority, r90, old)
+    elif sys.argv[1] == "qualify-recovery":
+        qualify_recovery(prereg, d6, priority, r90, old)
     else:
         run(prereg, d6, priority, r90, old)
 

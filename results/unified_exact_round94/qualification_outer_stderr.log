@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP\scripts\round94_lpg_contemporary.py", line 618, in <module>
+    main()
+  File "E:\codes\ExactEBRP\scripts\round94_lpg_contemporary.py", line 612, in main
+    qualify(prereg, d6, priority, r90, old)
+  File "E:\codes\ExactEBRP\scripts\round94_lpg_contemporary.py", line 488, in qualify
+    journal_audit = qualification_journal_audit(r90, launch)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP\scripts\round94_lpg_contemporary.py", line 333, in qualification_journal_audit
+    assert len(calls) == 1 and calls[0]["full_original"] is True
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
