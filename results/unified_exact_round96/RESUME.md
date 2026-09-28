@@ -21,3 +21,5 @@ stage3归档已完成，91,094 members、70,892,034字节均SHA复核；含H1 EN
 队列v2已首次启动：exec session54788，当前external #4 H2/LP-G。先检查serial_queue_v2_started/completion及runtime_status，严禁重新run队列。最新阶段提交0474cad50已push到draft PR158，生产源ref仍9ab0a2b10；不将报告提交当新binary身份。stage3 zip已远端保存（GitHub仅提示超过推荐50MB，实际push成功）。
 
 H2组完成且通过（external #4–6），新原型F2组为下一任务（primal #4 ORDER-ON、#5 P、#6 OFF，各900秒）。队列exec54788在serial_review_v2_external_H2.json边界等待；写入绑定signals SHA的continue后继续。下次先查真实状态，不能假设仍停在此处。完成启动46次，剩余21正式任务。
+
+F2组已完整完成，primal_v2现有6行全通过，下一任务external #7 H3/ENS-C，cap3600。队列54788当前等待serial_review_v2_primal_F2.json，绑定primal_v2/decision_signals_F2.json SHA后继续。已运行新离线primal_report f2、trajectory primal_v2 f2、derived_numeric primal_v2 f2（通过）、cost_report f2。完成49次保守启动、native56、micro2/4；剩余18正式任务。H2及F2完整raw尚未加入新归档，stage3止于H1/F5，最终需补。
