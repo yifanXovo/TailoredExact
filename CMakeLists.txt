@@ -123,6 +123,15 @@ add_executable(Round93CoQuantityTests tests/round93_co_quantity_tests.cpp)
 target_link_libraries(Round93CoQuantityTests PRIVATE round93_co_quantity)
 add_test(NAME Round93CoQuantityTests COMMAND Round93CoQuantityTests)
 
+# Isolated Round95 final-hypothesis qualification; not linked into production.
+add_library(round95_full_block STATIC src/Round95FullBlockDescent.cpp)
+target_link_libraries(round95_full_block PUBLIC exact_ebrp_core)
+add_executable(Round95FullBlockDiagnostic tests/round95_full_block_diagnostic.cpp)
+target_link_libraries(Round95FullBlockDiagnostic PRIVATE round95_full_block)
+add_executable(Round95FullBlockTests tests/round95_full_block_tests.cpp)
+target_link_libraries(Round95FullBlockTests PRIVATE round95_full_block round93_co_quantity)
+add_test(NAME Round95FullBlockTests COMMAND Round95FullBlockTests)
+
 add_executable(NativeEvidenceJournalTests tests/native_evidence_journal_tests.cpp)
 target_link_libraries(NativeEvidenceJournalTests PRIVATE exact_ebrp_core)
 add_test(NAME NativeEvidenceJournalTests COMMAND NativeEvidenceJournalTests)
