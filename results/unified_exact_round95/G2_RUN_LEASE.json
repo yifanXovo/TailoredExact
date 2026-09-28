@@ -1,0 +1,19 @@
+{
+  "schema": "round95-full-block-g2-run-lease-v1",
+  "status": "authorized",
+  "authorized_by": "root",
+  "qualification_gate_sha256": "c03f073093a756c1e912c13af8977f21a2a8a4726a5e625a111b8d1d28bd3cdd",
+  "preregistration_sha256": "2773c0a159c90e7f69343a2babfa827ce061dfc26a42f2948395413fbfe70a12",
+  "harness_sha256": "3a43088d35d65a1568e18019f5fa0089f12261479420731ab86fc4f1643e80e6",
+  "case_order": [
+    "D6",
+    "E8",
+    "S12"
+  ],
+  "repetitions_per_case": 1,
+  "whole_case_external_deadline_seconds": 120,
+  "maximum_sum_case_deadlines_seconds": 360,
+  "output_dir": "results/unified_exact_round95/runner_full_block_g2",
+  "no_retry": true,
+  "no_production_integration": true
+}

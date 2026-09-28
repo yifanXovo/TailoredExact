@@ -1,0 +1,78 @@
+{
+  "schema": "round95-full-block-g1-identity-v1",
+  "status": "isolated_build_and_G1_passed_no_G2",
+  "workspace": "E:/codes/ExactEBRP",
+  "source_status": "five R95/CMake files uncommitted; SHA256 below identifies built bytes",
+  "toolchain": {
+    "generator": "Ninja 1.12.1",
+    "cmake": "3.30.5-msvc23",
+    "cxx": "D:/msys64/ucrt64/bin/g++.exe; MSYS2 UCRT64 GCC 14.2.0 Rev2",
+    "build_type": "",
+    "gurobi_enabled": true,
+    "gurobi_root": "D:/gurobi1302/win64",
+    "gurobi_header_version": "13.0.2",
+    "cmake_cache_sha256": "2a9d038b7470013c51899900fa846a7daf5b406bf956f595fca0367b1f96e2a3"
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "aa85e10cc3738c8e44f1d99a3aa174ca542515d765ace9ed49262d933bfc1b27",
+    "include/Round95FullBlockDescent.hpp": "20150387b81db8287d44a959e9716274dff2f18586fd0014398b5bf200470573",
+    "src/Round95FullBlockDescent.cpp": "279eaf94fb769aab8cb89472ee3c698a25eb551f521a715c9af2a7cd859de5bb",
+    "tests/round95_full_block_diagnostic.cpp": "300c1359a845f92f6e28966b808042ff01a315f1cd91ffe913a8611061a4cc8a",
+    "tests/round95_full_block_tests.cpp": "080a4cbd928b7bc957d8888790e819c4c5814d81924df0e274792676e405850d",
+    "src/Evaluator.cpp": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41",
+    "src/Result.cpp": "2dfb77e873ffeab856ef01735b36a21c81305666c88b045340f39a9a60895c6b",
+    "src/Parser.cpp": "9402d2744b4b2a7a83c3152d90d6d6438ca9c3e417d1a57da14dd8101c3b2911",
+    "src/ProcessPhaseLedger.cpp": "4e25f27d8d028dcd5a6f390387000f57813bdcdb998bd74ba184ab130f5bb302",
+    "include/PhysicalDurationTolerance.hpp": "06121e8deb0e00b86239cca2a5f58a210c864c6a74710d76882e2466f9fc1f2a",
+    "src/Round75QuantityDescent.cpp": "f904a7f7355e897df1aff3d07757d8c2ac5b8dff134235c061637d46a87c0075",
+    "src/Round76PhysicalClosure.cpp": "a9a43c9db00096fc81168cf30a5b2805cacf42b0de9b42b723094f4007db8ce8",
+    "src/Round83BlockExchange.cpp": "7402242968c8fa5db9957089b132b0afde893110f302a841b5a8ca76d115faf9",
+    "src/Round93CoQuantityDescent.cpp": "cf3ea08852f56a10bceeb59c169ff92de4d9d8aad0914a7233985ce7da4f2012"
+  },
+  "binary_sha256": {
+    "build/research/round95-full-block/Round95FullBlockTests.exe": "f5f01473d66c12acc6c85e409f1b1cb2697e34e44bfd129cf175acead782aa51",
+    "build/research/round95-full-block/Round95FullBlockDiagnostic.exe": "a69114b730fe6f65cdc6d519dd2f9b6cf753903b89608b174316cd0e5a7cf1a7",
+    "build/research/round95-full-block/libround95_full_block.a": "cf3af18a7f4701a75f30f91318bf4088680f397f86d28a97c2838159be9ff7e5",
+    "build/research/round95-full-block/libround93_co_quantity.a": "2dcf283ea5cc03b26df15decb209c3fd9dd56eec72b792ea796834ed1ba57254",
+    "build/research/round95-full-block/libexact_ebrp_core.a": "29cb167a388e1a76bd544131bf59684be3950f92f13ecdb755525644f596de12"
+  },
+  "command_receipts": [
+    {
+      "stage": "configure",
+      "attempt": 1,
+      "command": "D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe -S . -B build/research/round95-full-block -G Ninja -DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe -DCMAKE_MAKE_PROGRAM=D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -DEXACT_EBRP_ENABLE_GUROBI=ON -DGUROBI_ROOT=D:/gurobi1302/win64 -DCMAKE_BUILD_TYPE=",
+      "exit_code": 0,
+      "full_launch_to_exit_wall_seconds": 2.854567,
+      "log": "results/unified_exact_round95/g1_configure_001.log",
+      "log_sha256": "c20307b83d764bc84c85dfb39485046885104925d6c97c636f5402bf504acf77",
+      "receipt": "results/unified_exact_round95/g1_configure_001.receipt.json",
+      "receipt_sha256": "3743a512c5c53745974fd071bb26f396a732fbc0cf6e84c59c5c06fccbccf341"
+    },
+    {
+      "stage": "build",
+      "attempt": 1,
+      "command": "D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe --build build/research/round95-full-block --target Round95FullBlockTests Round95FullBlockDiagnostic --parallel 4",
+      "exit_code": 0,
+      "full_launch_to_exit_wall_seconds": 31.6624195,
+      "log": "results/unified_exact_round95/g1_build_001.log",
+      "log_sha256": "42fcc897c73d60136fd3fabff61e6b374f789d7ee193259cdc8afc1e9f816d3b",
+      "receipt": "results/unified_exact_round95/g1_build_001.receipt.json",
+      "receipt_sha256": "96a5bfac69e028f577ee6999f46ef366fd81992304e9b743924a161c417b7a9e"
+    },
+    {
+      "stage": "G1_test",
+      "attempt": 1,
+      "command": "D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe --test-dir build/research/round95-full-block -R ^Round95FullBlockTests$ --output-on-failure",
+      "exit_code": 0,
+      "full_launch_to_exit_wall_seconds": 0.5195587,
+      "result": "1/1 passed; ctest internal real time 0.14 seconds",
+      "log": "results/unified_exact_round95/g1_tests_001.log",
+      "log_sha256": "93378cda9b4da7c52fe3ab2c803c2d51e66a80fab5276e2f191f5a2cf5bf1882",
+      "receipt": "results/unified_exact_round95/g1_tests_001.receipt.json",
+      "receipt_sha256": "9c13a84f1af534b057023ad66cf89b17e2d612fa7a712fffe911c56c96d9f08d"
+    }
+  ],
+  "optimize_calls": 0,
+  "real_fixed_witness_diagnostics": 0,
+  "production_algorithm_connected": false
+}
