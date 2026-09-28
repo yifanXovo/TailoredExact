@@ -75,7 +75,8 @@ Round96OrderResult runRound96RouteOrder(const Instance& in,const SolveOptions& o
                 if(processWorkDeadlineReached(opt)){out.stats.deadline=true;break;}
                 ++out.stats.proposals;
                 std::vector<int> first(nodes.begin()+a,nodes.begin()+b),second(nodes.begin()+b,nodes.begin()+c);
-                if(ra)std::reverse(first.begin(),first.end());if(rb)std::reverse(second.begin(),second.end());
+                if(ra)std::reverse(first.begin(),first.end());
+                if(rb)std::reverse(second.begin(),second.end());
                 if(swap)std::swap(first,second);
                 std::vector<int> next(nodes.begin(),nodes.begin()+a);
                 next.insert(next.end(),first.begin(),first.end());next.insert(next.end(),second.begin(),second.end());
@@ -83,7 +84,8 @@ Round96OrderResult runRound96RouteOrder(const Instance& in,const SolveOptions& o
                 if(next==nodes)continue;
                 std::int64_t load=0;bool feasible=true;
                 for(int i:next){load+=delta[i];if(load<0||load>in.Q[route.vehicle]){feasible=false;break;}}
-                if(!feasible)continue;++out.stats.load_feasible;
+                if(!feasible)continue;
+                ++out.stats.load_feasible;
                 double travel=0;int previous=0;
                 for(int i:next){travel+=in.dist[previous][i];previous=i;}travel+=in.dist[previous][0];
                 const double duration=travel+handling;

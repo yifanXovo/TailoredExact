@@ -19,6 +19,7 @@
 #include "Round76PhysicalClosure.hpp"
 #include "Round78BalancedRelocation.hpp"
 #include "Round83BlockExchange.hpp"
+#include "Round96RouteOrder.hpp"
 #include "Round92HandlingActivation.hpp"
 #include "Master.hpp"
 #include "Parser.hpp"
@@ -120,6 +121,7 @@ void usage() {
         << "[--round89-native-ot-b1 true|false] "
         << "[--round90-lp-g-split true|false] "
         << "[--round92-handling-activation true|false] "
+        << "[--round96-route-order true|false] "
         << "[--round34-c6-startup-variant hga-full|hga-light-1000|simple-start] "
         << "[--round36-c6-causal-arm off|hh|ss|bw-p|bw-a] "
         << "[--round36-c6-split-normalization proof|anchor] "
@@ -261,6 +263,8 @@ std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
         return "research-round90-ensc-lp-g-split";
     if (opt.round92_handling_activation)
         return "research-round92-ensc-rounded-handling-activation";
+    if (opt.round96_route_order)
+        return "research-round96-ensc-route-order";
     return opt.algorithm_preset.empty() ? "custom" : opt.algorithm_preset;
 }
 
@@ -1421,6 +1425,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round89-native-ot-b1") opt.round89_native_ot_b1 = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round90-lp-g-split") opt.round90_lp_g_split = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round92-handling-activation") opt.round92_handling_activation = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--round96-route-order") opt.round96_route_order = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-stop") opt.primal_heuristic_stop = requireValue(i, argc, argv);
         else if (arg == "--primal-heuristic-no-improve-generations") opt.primal_heuristic_no_improve_generations = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-generation-log") opt.primal_heuristic_generation_log = requireValue(i, argc, argv);
@@ -3336,6 +3341,15 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
              "round31-nonblocking-native-bound" ||
          !opt.k1_am_sf_controller_enabled))
         throw std::runtime_error("Round92 handling activation requires isolated ENS-C Round83 gcap-frontier");
+    if (opt.round96_route_order &&
+        (opt.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
+         opt.method != "gcap-frontier" || !opt.k1_am_sf_controller_enabled ||
+         opt.round88_constructive_only_descent || opt.round89_native_ot_b1 ||
+         opt.round90_lp_g_split || opt.round92_handling_activation ||
+         opt.round60_candidate_mode != "off" || opt.round61_candidate_mode != "off" ||
+         opt.round62_threshold_mode != "off" ||
+         opt.external_gini_scheduling != "round31-nonblocking-native-bound"))
+        throw std::runtime_error("Round96 route order requires isolated ENS-C Round83 gcap-frontier");
     if ((opt.primal_heuristic == "joint-insertion") != joint_insertion ||
         (opt.primal_heuristic_stop == "motif-exhaustion") != joint_insertion)
         throw std::runtime_error("Joint insertion requires its isolated VD-S research preset");
@@ -3971,6 +3985,11 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
         append_explicit_research_feature("round92_static_rounded_handling_activation_row");
         snapshot.preset_reason = "Round92: isolated ENS-C adds one safe rounded handling/activation row per vehicle to each original F0 canonical interval model";
+    }
+    if (opt.round96_route_order) {
+        snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
+        append_explicit_research_feature("round96_finite_route_order_startup_closure");
+        snapshot.preset_reason = "Round96: isolated ENS-C applies finite route-order and original physical closure once after unchanged 24+1 startup";
     }
     return snapshot;
 }
@@ -8225,7 +8244,7 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
             out.notes.push_back(note.str());
         }
         if (opt.algorithm_preset == "research-round83-vds-equal-net-exchange" && out.found &&
-            !ebrp::processWorkDeadlineReached(opt)) {
+            !opt.round96_route_order && !ebrp::processWorkDeadlineReached(opt)) {
             const auto trace_directory = opt.primal_heuristic_generation_log.empty()
                 ? std::filesystem::path{}
                 : std::filesystem::path(opt.primal_heuristic_generation_log + ".exchange");
@@ -8240,6 +8259,25 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
                  << ", exhausted=" << balanced.exhausted << ", zero=" << balanced.zero
                  << ", whole_run_deadline=" << balanced.deadline
                  << ", verification_failed=" << balanced.verification_failed
+                 << ", trace=" << trace_directory.string();
+            out.notes.push_back(note.str());
+        }
+        if (opt.round96_route_order && out.found && !ebrp::processWorkDeadlineReached(opt)) {
+            const auto trace_directory = opt.primal_heuristic_generation_log.empty()
+                ? std::filesystem::path{}
+                : std::filesystem::path(opt.primal_heuristic_generation_log + ".route_order");
+            const auto ordered = ebrp::runRound96RouteOrder(instance, opt, out.routes, trace_directory);
+            if (ordered.stats.verification_failed)
+                throw std::runtime_error("Round96 route-order physical verification rejected a proposal");
+            consider(ordered.routes, "round96_route_order_physical_descent");
+            out.local_moves_tested += ordered.stats.proposals;
+            std::ostringstream note;
+            note << "Round96 route-order startup closure: passes=" << ordered.stats.passes
+                 << ", order_moves=" << ordered.stats.accepted << ", old_neutral=" << ordered.stats.old_neutral
+                 << ", insertions=" << ordered.stats.insertions << ", quantities=" << ordered.stats.quantities
+                 << ", order_proposals=" << ordered.stats.proposals << ", exhausted=" << ordered.stats.exhausted
+                 << ", zero=" << ordered.stats.zero << ", whole_run_deadline=" << ordered.stats.deadline
+                 << ", verification_failed=" << ordered.stats.verification_failed
                  << ", trace=" << trace_directory.string();
             out.notes.push_back(note.str());
         }

@@ -103,6 +103,7 @@ def optimize(case,dest):
         api.call('GRBoptimize',model);status=api.attr(model,'Status',True);solcount=api.attr(model,'SolCount',True)
         result=dict(status=status,solcount=solcount,initial_F=before['F'],restricted_bound=api.attr(model,'ObjBound'),
             runtime=api.attr(model,'Runtime'),optimizer_calls=1,original_global_bound=False)
+        f.write(dest/'native_return.json',result)
         assert solcount>0
         size=api.attr(model,'NumVars',True);vv=(ct.c_double*size)();names=(ct.c_char_p*size)()
         api.call('GRBgetdblattrarray',model,b'X',0,size,vv);api.call('GRBgetstrattrarray',model,b'VarName',0,size,names)

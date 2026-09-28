@@ -483,6 +483,8 @@ struct SolveOptions {
     bool round90_lp_g_split = false;
     // Isolated Round92 ENS-C static handling/activation row, default off.
     bool round92_handling_activation = false;
+    // R96 isolated finite route-order closure at the single R83 startup hook.
+    bool round96_route_order = false;
     std::string primal_heuristic_stop = "legacy-time";
     int primal_heuristic_no_improve_generations = 2000;
     std::string primal_heuristic_generation_log;

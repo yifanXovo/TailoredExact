@@ -354,6 +354,15 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         reason = "round92_handling_activation_requires_isolated_round83_first_class_k1";
         return false;
     }
+    if (options.round96_route_order &&
+        (!first_class_k1 || options.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
+         options.method != "gcap-frontier" || options.round88_constructive_only_descent ||
+         options.round89_native_ot_b1 || options.round90_lp_g_split || options.round92_handling_activation ||
+         options.round60_candidate_mode != "off" || options.round61_candidate_mode != "off" ||
+         options.round62_threshold_mode != "off")) {
+        reason = "round96_route_order_requires_isolated_round83_first_class_k1";
+        return false;
+    }
     if (first_class_k1 &&
         (options.initial_gini_interval_count != 1 ||
          options.split_point_rule != "midpoint" ||
