@@ -25,3 +25,5 @@ H2组完成且通过（external #4–6），新原型F2组为下一任务（prim
 F2组已完整完成，primal_v2现有6行全通过，下一任务external #7 H3/ENS-C，cap3600。队列54788当前等待serial_review_v2_primal_F2.json，绑定primal_v2/decision_signals_F2.json SHA后继续。已运行新离线primal_report f2、trajectory primal_v2 f2、derived_numeric primal_v2 f2（通过）、cost_report f2。完成49次保守启动、native56、micro2/4；剩余18正式任务。H2及F2完整raw尚未加入新归档，stage3止于H1/F5，最终需补。
 
 H3组external #7–9已完成全通过，全删失；external summary共9行。队列54788等待serial_review_v2_external_H3.json。下一为primal #7 V1/P，随后ON/OFF，各1800秒。已执行external_report h3、derived_numeric external h3（通过）、cost_report h3。完成52次保守启动，剩余15正式任务；H2/F2/H3 raw等待后续归档，勿重跑。
+
+V1三臂primal #7–9全部完成，primal_v2 summary共9行。ON强启动但终态较OFF退步，详见v1_review.md。队列54788等待serial_review_v2_primal_V1.json；下一个external #10 H4/P，随后LP、ENS，各1800秒。primal_report/derived_numeric/cost_report v1已运行通过；55启动、76native、micro2/4，剩余12正式任务。H2/F2/H3/V1 raw尚待后续归档。
