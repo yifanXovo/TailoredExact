@@ -1,0 +1,238 @@
+{
+  "schema": "round93-coquantity-g2-evidence-summary-v1",
+  "status": "author_evidence_pending_independent_review",
+  "outer_true_exit_code": 0,
+  "outer_full_launch_to_exit_wall_seconds": 0.991145,
+  "whole_batch_cap_seconds": 360,
+  "batch_completed_cases": 3,
+  "batch_attempted_cases": 3,
+  "cases": [
+    {
+      "id": "D6",
+      "status": "diagnostic_completed",
+      "initial_F": 0.15750980361456174,
+      "final_F": 0.15750980361456174,
+      "initial_G": 0.025799421037054127,
+      "final_G": 0.025799421037054127,
+      "initial_P": 0.8780692171833842,
+      "final_P": 0.8780692171833842,
+      "passes": 1,
+      "integer_points": 9494,
+      "physically_valid_points": 2934,
+      "invalid_points": 6560,
+      "strict_improvements": 0,
+      "best_physically_valid_nonbaseline": {
+        "F": 0.1630914779493224,
+        "a": 8,
+        "b": 23,
+        "t": -1
+      },
+      "accepted": 0,
+      "exhausted": true,
+      "deadline": false,
+      "native_wall_seconds_before_summary_write": 0.1714388,
+      "case_outer_wall_seconds_including_receipt": 0.5108980997465551,
+      "child_exit_code": 0,
+      "files": [
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/D6/native/points.jsonl",
+          "bytes": 2710346,
+          "sha256": "4bb71f7d586699b12a8410bcc23cca14d00e723c9fe11c29bf3f56398e0d5c0b"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/D6/native/acceptances.jsonl",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/D6/native/final_witness.json",
+          "bytes": 864,
+          "sha256": "de8193c76a71f965c1cc5e5b9f6f33c355b9fb2c4c34ef7595767afb25ca939e"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/D6/native/summary.json",
+          "bytes": 859,
+          "sha256": "8efd735616fdf2c1e102157721ddedcbdd42f93ba8430b78c9ea587a44d10fd5"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/D6/outer_receipt.json",
+          "bytes": 2845,
+          "sha256": "8942481dd0774c0fb6afcbfeb556859274860fbf9b29da005c6988a0aad2cbe9"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/D6/stdout.txt",
+          "bytes": 119,
+          "sha256": "8acdf1caea429cc8a2d04740c754363fb9c29cbf2ff8bba743e6c2a816220c06"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/D6/stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "id": "E8",
+      "status": "diagnostic_completed",
+      "initial_F": 0.022295597484276734,
+      "final_F": 0.022295597484276734,
+      "initial_G": 0.017295597484276733,
+      "final_G": 0.017295597484276733,
+      "initial_P": 0.03333333333333333,
+      "final_P": 0.03333333333333333,
+      "passes": 1,
+      "integer_points": 412,
+      "physically_valid_points": 49,
+      "invalid_points": 363,
+      "strict_improvements": 0,
+      "best_physically_valid_nonbaseline": {
+        "F": 0.029896028911564627,
+        "a": 3,
+        "b": 5,
+        "t": -1
+      },
+      "accepted": 0,
+      "exhausted": true,
+      "deadline": false,
+      "native_wall_seconds_before_summary_write": 0.0091695,
+      "case_outer_wall_seconds_including_receipt": 0.1659679999575019,
+      "child_exit_code": 0,
+      "files": [
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/E8/native/points.jsonl",
+          "bytes": 116397,
+          "sha256": "e895a5c97a4b2fbc1af614a639f25b872f66a27471324b8fca2785f797c01d5f"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/E8/native/acceptances.jsonl",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/E8/native/final_witness.json",
+          "bytes": 505,
+          "sha256": "829ac790d647fc4f1a12b472d89286b2319e68aa8a66c30ab0036e432edd2092"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/E8/native/summary.json",
+          "bytes": 869,
+          "sha256": "a07299af053b1f6172237065bc557e58391f79f7424c1439f4cb7748b27419d4"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/E8/outer_receipt.json",
+          "bytes": 2866,
+          "sha256": "0a77c2d29dd55e44720c7f33e8e72a3aaf51ecf62153a273e573837c44ea4467"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/E8/stdout.txt",
+          "bytes": 119,
+          "sha256": "8ed2a8d866addaf3fb0265c99a21509863fe598cb4150e9b6cfecff700858158"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/E8/stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "id": "S12",
+      "status": "diagnostic_completed",
+      "initial_F": 0.05856397312578515,
+      "final_F": 0.05856397312578515,
+      "initial_G": 0.023359903840070854,
+      "final_G": 0.023359903840070854,
+      "initial_P": 0.2346937952380953,
+      "final_P": 0.2346937952380953,
+      "passes": 1,
+      "integer_points": 1630,
+      "physically_valid_points": 152,
+      "invalid_points": 1478,
+      "strict_improvements": 0,
+      "best_physically_valid_nonbaseline": {
+        "F": 0.06152223491409731,
+        "a": 4,
+        "b": 9,
+        "t": 1
+      },
+      "accepted": 0,
+      "exhausted": true,
+      "deadline": false,
+      "native_wall_seconds_before_summary_write": 0.0226317,
+      "case_outer_wall_seconds_including_receipt": 0.18978710006922483,
+      "child_exit_code": 0,
+      "files": [
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/S12/native/points.jsonl",
+          "bytes": 463402,
+          "sha256": "d9fc5e1da75a86c23583300b9839a86ff37226108892532ebda29b4a02a11c2b"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/S12/native/acceptances.jsonl",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/S12/native/final_witness.json",
+          "bytes": 456,
+          "sha256": "97a8f0ea6982f2635ed3c89d0acb55151fe64f6e6321018de7a6de2526da9c0b"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/S12/native/summary.json",
+          "bytes": 877,
+          "sha256": "40ba28c4c5895f52b49c929c3e1138ebade572a68cbc131f6d2fa426bb441233"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/S12/outer_receipt.json",
+          "bytes": 2862,
+          "sha256": "0d5a2ae2d79afea9711383331da821b0ba11c5eadfd86f02f24fbea5a1bf9f29"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/S12/stdout.txt",
+          "bytes": 120,
+          "sha256": "36ea2669e7d6b43db083c18b1f75ea8b02ad1018d171d279a256d88691784a17"
+        },
+        {
+          "path": "results/unified_exact_round93/runner_coquantity_g2/S12/stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "batch_files": [
+    {
+      "path": "results/unified_exact_round93/runner_coquantity_g2/batch_start.json",
+      "bytes": 2088,
+      "sha256": "085796408fc49dcdd27c36265febee303a02b25a9c0c1a13772ac5c9455f5a5d"
+    },
+    {
+      "path": "results/unified_exact_round93/runner_coquantity_g2/batch_completion.json",
+      "bytes": 652,
+      "sha256": "fff12e3c2c30c9dc70f9c3d60aa7528c3fdf3067e1ef98804a98e667c0c4e7b9"
+    }
+  ],
+  "outer_files": [
+    {
+      "path": "results/unified_exact_round93/g2_outer.started.json",
+      "bytes": 608,
+      "sha256": "82d748673a3f788745cf84a4a6359b73efa82bb1beb63aab63f453b44eaa7895"
+    },
+    {
+      "path": "results/unified_exact_round93/g2_outer.receipt.json",
+      "bytes": 548,
+      "sha256": "cf19411fbeb9f270be0a37571b34e153163b9580a98946917f258aa48dac1d89"
+    },
+    {
+      "path": "results/unified_exact_round93/g2_outer.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/unified_exact_round93/g2_outer.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "interpretation": "Fixed-witness isolated co-line diagnosis only; no original-F strict decrease, no algorithm or P-GRB certification claim."
+}

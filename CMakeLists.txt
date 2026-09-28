@@ -113,6 +113,16 @@ endif()
 
 add_library(exact_ebrp_core ${EXACT_EBRP_LIB_SOURCES})
 
+# Isolated Round93 source qualification. This source is deliberately absent
+# from exact_ebrp_core and the production ExactEBRP preset.
+add_library(round93_co_quantity STATIC src/Round93CoQuantityDescent.cpp)
+target_link_libraries(round93_co_quantity PUBLIC exact_ebrp_core)
+add_executable(Round93CoQuantityDiagnostic tests/round93_co_quantity_diagnostic.cpp)
+target_link_libraries(Round93CoQuantityDiagnostic PRIVATE round93_co_quantity)
+add_executable(Round93CoQuantityTests tests/round93_co_quantity_tests.cpp)
+target_link_libraries(Round93CoQuantityTests PRIVATE round93_co_quantity)
+add_test(NAME Round93CoQuantityTests COMMAND Round93CoQuantityTests)
+
 add_executable(NativeEvidenceJournalTests tests/native_evidence_journal_tests.cpp)
 target_link_libraries(NativeEvidenceJournalTests PRIVATE exact_ebrp_core)
 add_test(NAME NativeEvidenceJournalTests COMMAND NativeEvidenceJournalTests)
