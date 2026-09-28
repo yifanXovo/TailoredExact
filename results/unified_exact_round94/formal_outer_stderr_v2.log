@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP\scripts\round94_lpg_contemporary.py", line 903, in <module>
+    main()
+  File "E:\codes\ExactEBRP\scripts\round94_lpg_contemporary.py", line 899, in main
+    run(prereg, d6, priority, r90, old)
+  File "E:\codes\ExactEBRP\scripts\round94_lpg_contemporary.py", line 844, in run
+    record = r90.run_one(launch, prereg, identity)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP\scripts\round90_lp_g_g3.py", line 778, in run_one
+    raise RuntimeError("Audit failed; retain evidence and stop before next arm")
+RuntimeError: Audit failed; retain evidence and stop before next arm
