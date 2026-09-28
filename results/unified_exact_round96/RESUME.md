@@ -17,3 +17,7 @@ E:/codes/ExactEBRP，codex/round96-external-primal，base R95；保护原三份d
 stage3归档已完成，91,094 members、70,892,034字节均SHA复核；含H1 ENS/LP和F5所有raw、修复失败历史、生产源码与导出。stage1/2保留旧证据。stage3为写入时快照，后续final_report/RESUME更新以Git为准。
 
 剩余必须完成：全部18外部与12primal正式臂；保护及两独立验证；每角色认证/删失/P主参照结论；后续派生系数核查；完整费用与内部native数；三项资格判断；最终证据索引/PR更新。阶段PR158不是完成，不晋升、不合并、不扩大预算或重新抽样。
+
+队列v2已首次启动：exec session54788，当前external #4 H2/LP-G。先检查serial_queue_v2_started/completion及runtime_status，严禁重新run队列。最新阶段提交0474cad50已push到draft PR158，生产源ref仍9ab0a2b10；不将报告提交当新binary身份。stage3 zip已远端保存（GitHub仅提示超过推荐50MB，实际push成功）。
+
+H2组完成且通过（external #4–6），新原型F2组为下一任务（primal #4 ORDER-ON、#5 P、#6 OFF，各900秒）。队列exec54788在serial_review_v2_external_H2.json边界等待；写入绑定signals SHA的continue后继续。下次先查真实状态，不能假设仍停在此处。完成启动46次，剩余21正式任务。
