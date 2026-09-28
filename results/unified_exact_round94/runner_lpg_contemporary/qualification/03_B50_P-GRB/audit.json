@@ -1,0 +1,52 @@
+{
+  "schema": "round94-recovery-qualification-audit-v2",
+  "role": "B50",
+  "passed": true,
+  "official_benchmark_run": false,
+  "native_optimize_calls": 1,
+  "search_result_excluded": true,
+  "compact_sha256": "0a88f594dc64ecdcd86712d8b0584b0c1bf3fe22982f35176033bbcc2d5b6b7d",
+  "result_sha256": "07bfee6debf36fcb84149e3ebe8096d2d788332b057aecec1890451048b22c77",
+  "native_fingerprint": -250521169,
+  "native_domain_passed": true,
+  "native_parameters": {
+    "threads": {
+      "requested": 1,
+      "effective": 1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "seed": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "presolve": {
+      "requested": -1,
+      "effective": -1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap_abs": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    }
+  },
+  "native_journal": {
+    "committed_events": 3,
+    "native_calls_started": 1,
+    "native_calls_returned": 1,
+    "original_scope": true,
+    "physical_witnesses": 0,
+    "global_bound_events": 0
+  }
+}

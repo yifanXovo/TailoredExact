@@ -1,0 +1,20 @@
+{
+  "schema": "round94-formal-recovery-remaining-lease-v4",
+  "authorized_by": "root",
+  "allow_optimize": true,
+  "formal_recovery_identity_sha256": "5f860b6d68a81e1257db3b817e81da58b53a2568b0e12e6b61f8ebd2662e562a",
+  "offline_prefix_check_sha256": "84ba1012619765d37749a7a7366637f61260491c164c308f17258e86c25b87ac",
+  "planned_processes": 10,
+  "execution_order": [
+    "F2/LP-G",
+    "C20/LP-G",
+    "C20/ENS-C",
+    "C20/P-GRB",
+    "B50/ENS-C",
+    "B50/P-GRB",
+    "B50/LP-G",
+    "U6/LP-G",
+    "U6/P-GRB",
+    "U6/ENS-C"
+  ]
+}

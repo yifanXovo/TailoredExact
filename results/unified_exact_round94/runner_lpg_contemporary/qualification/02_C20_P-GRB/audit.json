@@ -1,0 +1,52 @@
+{
+  "schema": "round94-recovery-qualification-audit-v2",
+  "role": "C20",
+  "passed": true,
+  "official_benchmark_run": false,
+  "native_optimize_calls": 1,
+  "search_result_excluded": true,
+  "compact_sha256": "905b7e8b154b218e446b0e116f6035acd2c6b03431e910e1d0040b7171c07cc0",
+  "result_sha256": "0386f63c6b3af6796a705794d9d248a71e71c1fa895932e32308d3c7a0b42a72",
+  "native_fingerprint": 1303462215,
+  "native_domain_passed": true,
+  "native_parameters": {
+    "threads": {
+      "requested": 1,
+      "effective": 1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "seed": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "presolve": {
+      "requested": -1,
+      "effective": -1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap_abs": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    }
+  },
+  "native_journal": {
+    "committed_events": 3,
+    "native_calls_started": 1,
+    "native_calls_returned": 1,
+    "original_scope": true,
+    "physical_witnesses": 0,
+    "global_bound_events": 0
+  }
+}
