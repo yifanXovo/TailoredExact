@@ -1,0 +1,39 @@
+{
+  "schema": "round94-validated-zip-parts-manifest-v4",
+  "source_zip": "results/unified_exact_round94/archive_v4/round94_full_evidence_v4.zip",
+  "source_size_bytes": 113905614,
+  "source_sha256": "f16239464f23c80ec146743f6d4b3622022d3509afa304378b1bfe38e393fcb7",
+  "maximum_part_size_bytes": 41943040,
+  "actual_chunk_size_bytes": 33554432,
+  "parts": [
+    {
+      "number": 1,
+      "file": "round94_full_evidence_v4.zip.part0001",
+      "size_bytes": 33554432,
+      "sha256": "24e13a7926dd7da641253e91524142f6f30fb1e7dc1a2a79869c591c569d1b57"
+    },
+    {
+      "number": 2,
+      "file": "round94_full_evidence_v4.zip.part0002",
+      "size_bytes": 33554432,
+      "sha256": "67e38077b7d41788f2042548d6ac7accc6681a65665d218cf0d417caa4bf6b00"
+    },
+    {
+      "number": 3,
+      "file": "round94_full_evidence_v4.zip.part0003",
+      "size_bytes": 33554432,
+      "sha256": "eddc7e75421e32c969a2ef3bae80c340d75e78ec6cf6323ccd7bbf53d8830a24"
+    },
+    {
+      "number": 4,
+      "file": "round94_full_evidence_v4.zip.part0004",
+      "size_bytes": 13242318,
+      "sha256": "01294ef3605df0cc9a6c94e3618cd70fb4753b3bfbc9b0e8c7002df65e688791"
+    }
+  ],
+  "streamed_ordered_concat_size_bytes": 113905614,
+  "streamed_ordered_concat_sha256": "f16239464f23c80ec146743f6d4b3622022d3509afa304378b1bfe38e393fcb7",
+  "ordered_concat_verified": true,
+  "original_zip_and_raw_preserved": true,
+  "elapsed_before_manifest_write_seconds": 0.33256780030205846
+}
