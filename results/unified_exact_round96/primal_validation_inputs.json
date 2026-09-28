@@ -1,0 +1,57 @@
+{
+  "roles": [
+    {
+      "id": "V1",
+      "V": 30,
+      "M": 3,
+      "Q": 25,
+      "geometry": "three_clusters",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "P-GRB",
+        "ORDER-ON",
+        "ENS-C"
+      ],
+      "input_path": "reference/round96_primal_validation/V1.txt",
+      "instance_path": "reference/round96_primal_validation/V1.txt",
+      "input_sha256": "dd841e57b2c22158002b0c9ec4940a9f071c11b8881a32b65168bbdb182f6829",
+      "scenario_id": "round96-primal-validation-V1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 571,
+      "total_target": 620
+    },
+    {
+      "id": "V2",
+      "V": 50,
+      "M": 4,
+      "Q": 25,
+      "geometry": "anisotropic_cloud",
+      "inventory": "balanced",
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "ENS-C",
+        "ORDER-ON",
+        "P-GRB"
+      ],
+      "input_path": "reference/round96_primal_validation/V2.txt",
+      "instance_path": "reference/round96_primal_validation/V2.txt",
+      "input_sha256": "9613a094e3ceb89a123806bcd1898213a12736e6eea4af0bd10dd28dd319f55d",
+      "scenario_id": "round96-primal-validation-V2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 1062,
+      "total_target": 1062
+    }
+  ],
+  "optimizer_calls": 0,
+  "plan_sha256": "6151fcd383c1a1ab5261c005948483c0d7eeb2b09751fd7fe5a060e73584279c",
+  "generator_sha256": "56f10f9151b6824ffe5747dfa137e92809693175daa843a075fbf72104637708",
+  "production_build_identity_sha256": "84f02a3d2c6e6802d227e11ce9eee55e8aaea96e901199e4c47556c2fdce0e19",
+  "status": "Both retained, never optimized or used for mechanism development at generation."
+}

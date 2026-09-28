@@ -1,27 +1,19 @@
 # R96 恢复与复现
 
-唯一源码目录`E:/codes/ExactEBRP`，分支`codex/round96-external-primal`，base为`codex/round95-full-block-descent`。保护旧dirty三文件与历史raw；不`git add .`、不清理、不重开完成生产器。Python为`D:/msys64/ucrt64/bin/python.exe`。每次继续先核活动进程及新账本，禁止重复启动已有destination。
+唯一源码目录 E:/codes/ExactEBRP；分支 codex/round96-external-primal，base R95。保护原三份 dirty 文件和历史 raw；不清理、不 git add .、不重开已有 destination。Python：D:/msys64/ucrt64/bin/python.exe。
 
-1. 读`final_report.md`、`fixed_route_report.md`、`multi_quantity_decision.md`及用户原Round96完整要求。阶段1完成不等于整轮完成，目标保持active。
-2. `round96_prepare.py freeze/generate/recover`均已运行一次，不再重跑。生成规则先提交d5e743717，六输入及六ENS/三P参考见证保留。
-3. `round96_fixed_route_qualification.py`和六次`round96_fixed_route.py <id>`已完成；禁止重跑。`round96_analyze_fixed.py`已逐行重算返回向量、核物理与索引。审查完成结果应读既存JSON/CSV，若另作分析必须新输出，不覆盖。
-4. `round96_multi_diagnostic.py`已完成六例，三/四站线原型停止且不接入。构建`build/research/round96-multi-quantity`、源码及微型测试保留。随后自由顺序诊断与有限重排原型均已完成，详见本文件末段及route_order_admission.md；不要重开旧数量方向。
-5. `round96_external.py prepare`已完成：六参考零Optimize，166个R90源码blob绑定，identity在`external/identity.json`。admission已提交。正式第1臂H1/P-GRB已正常完成、audit passed，1797.265秒未证；不重开。下一个是第2臂H1/ENS-C（1800秒），再第3臂H1/LP-G。每臂命令：`python scripts/round96_external.py run --number N`；N须为下一未启动编号。runner拒绝已有目录或不完整前缀，不自动续跑/拼证据。一次完整长运行复用早期检查点；不要重跑short先筛选。
-6. 已有检查：`round96_numeric_inputs.py`通过，边界详见numerical_scope；`round96_old_ledger.py`有效结果是v2，v1保留为提取器字段错误记录。
-7. 全部性能串行、亲和mask4，禁止与构建/归档/重审计争CPU。可在求解期间准备文稿与源码，实际执行等计算槽空闲。若用户或额度中断，记录实际exit/最后committed时点，不能把cap当cert时间，不主动扩大到24小时。
-8. 总预算72次、native micro≤4。阶段1保守20次（14试验+6纯建模），Optimize7次；后续按实际launch台账累计，嵌套时间不重复。18外部正式臂、结构诊断/原型开发/长配对与两独立验证仍需预算。
+先核活动进程、serial_queue_started/completion、各 run receipt 与 summary.jsonl，再做任何计算。性能严格串行、mask4；优化期间不编译、重审计或压缩。原用户要求、final_report.md 和数学底稿共同定义未完成工作；阶段 PR158 不等于研究完成。
 
-阶段1压缩包逐member索引可离线复核，保持原始日志和见证。重新复现实验须新明确目录并计入授权预算，不能复用同输出路径；普通验证直接重算保存证据而非重跑优化。
+已完成且禁止重跑：固定路线六例及资格、第一多站原型六例、自由顺序资格与 F5_final、第二有限重排微例及六例、四次 CLI 身份检查。固定路线 F5_final 受限认证不改善；自由顺序超时未知；第二原型相对旧 R83 在四例改善、U6 两例无增量。965 个物理见证、85 次新移动及六个耗尽状态已离线复核；正式新 reader 的六例 fixture 已通过。
 
-第二假说已实测完成：round96_reorder.py资格和F5_final均运行一次，后者无改善未证；
-Round96RouteOrder微例及六例批次均完成，4/6有增量，2个U6无增量。
-round96_order_analyze.py独立复核965见证与85新中性移动，audit通过。
-完整表、冻结接入位置见route_order_admission.md，不能再重跑已有诊断。
-默认关闭的生产入口代码已写入main/Instance/PaperExternalGiniTree；单独构建
-build/research/round96-route-order/ExactEBRP.exe成功，4个CLI零Optimize身份/组合
-测试全部通过。原diagnostic与R90 binary不重构。接下来冻结共同binary/source/config
-与完整端到端runner；不要把CLI身份通过当成端到端性能资格。
-新原型F5/F2以及V1/V2计划已先写primal_followup_plan.md；V1/V2尚未生成。
-当前含CLI保守34次启动、native micro2/4。阶段2包stage2_evidence.zip约6.97MB，
-9449 members全部哈希复核，含真实原型源码胶囊（源码门禁后生产入口改动没有覆盖
-开发时的源文件身份）、所有新诊断及H1/P完整原始证据。
+外部 H1 三臂均完成并通过 audit：P-GRB 1797.265 秒未证；ENS-C 677.515 秒、LP-G 677.625 秒认证同一数值目标。LP-G 有两次提案、零实际分裂；无严重信号。external_report_h1 与 external_trajectory_h1 保存完整比较和最优见证发布区间。下一外部编号4，不再启动1–3。
+
+R90 external 二进制保持原 SHA bac65ff3b5b099852f2eedd7ef462ad700e5c1131778bd56dca310b3dd0af2f2。新的默认关闭生产入口已构建，production_build_identity.json 绑定源 ref 9ab0a2b1064022913295c8da02a5f57288d91f44，binary SHA 75915292d0df67ab48e3a9e396ec013a4a2c8b5a0aef50a983ae17ff5e135f56。不要修改其 src/include/CMake 或重构。
+
+V1/V2 已按先前计划一次生成并绑定；primal prepare 四次零 Optimize 导出已完成，实际数值检查通过。primal/identity.json 与 primal_admission.json 已冻结；12 个正式臂尚未启动。不能重跑 prepare 或生成器。已冻结 runner/reader/fixture/oracle/source 的字节不要改动，否则身份门禁将拒绝。
+
+serial_queue_plan.json 已准备，27 个剩余任务：F5 三臂→H2→F2→H3→V1→H4→V2→H5/H6。命令为 python scripts/round96_serial_queue.py run，仅能首次执行，先检查 started 不存在。任何 paid/audit/resource 错误都停止、保留，不自动重试。完整三臂出现材料性信号后暂停，读取 signal 文件并写诚实的 root 自审 serial_review_<campaign>_<role>.json，绑定 signal_sha256 和 continue_planned_runs=true 才继续既定计划；不称独立代理审查。需要行政停止时使用 serial_queue_stop.json，不擅自终止其他任务。
+
+当前保守启动40次，含外部前三臂、新参考导出4次及CLI4次；最终计划67/约72次，native micro 已用2/4。内部 Optimize 另数但费用不重复相加。三组以上3600–7200秒匹配预算已固定；不加种子、不延长救负结果。
+
+完成后仍需：全部外部18臂、新原型12臂的配对与删失结论；新原型实际启动接入审计；三项独立资格决定；实际派生行数值边界说明；完整成本/调用账本；证据归档与索引；最终报告、恢复说明和 draft PR 更新。stage1/stage2 证据包已核，后者9449 members、约6.97MB，含开发源码胶囊及 H1/P；H1/ENS、LP 等后续证据尚待新包。

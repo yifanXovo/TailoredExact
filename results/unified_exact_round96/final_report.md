@@ -28,4 +28,6 @@ ENS-C仍是保护默认，LP-G未晋升。原P-GRB是主benchmark。此文件将
 
 证据包[stage1_evidence.zip](stage1_evidence.zip)保存151个原始文件，逐memberSHA核验；[索引](stage1_archive.json)绑定模型、完整解向量、见证、原生日志、枚举/质量对照和原compact参考。原raw留本地不覆盖。外部输入与原型源码各自冻结，LP-G确认完全不混入新primal模块。
 
+H1整组及生产资格更新：H1/ENS-C与LP-G分别677.515、677.625秒认证，P-GRB仍为上述删失结果。见[H1自审](h1_review.md)、`external_report_h1/`及`external_trajectory_h1/`；当前完成3/18外部臂。LP-G无实际分裂，本例不能归因其分裂收益。85次新移动的穷尽选择及六个末态耗尽oracle通过；六例正式reader fixture通过。新共同构建、V1/V2一次生成、四份零Optimize参考导出、数值核验及12臂门禁均已完成。当前累计40次保守启动，native micro 2/4；剩余27正式臂队列已冻结，计划合计67次。上文较早费用段为历史阶段计数。
+
 复现/下一步见[恢复说明](RESUME.md)。本阶段未合并任何PR，未更改ENS默认、Gurobi配置或数值容差。

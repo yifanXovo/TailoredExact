@@ -149,6 +149,7 @@ results/unified_exact_round85/figures/*.svg -whitespace
 
 # Round96 prospective inputs, drivers and receipts retain their hashed bytes.
 /reference/round96_external/** -text
+/reference/round96_primal_validation/** -text
 /results/unified_exact_round96/** -text whitespace=cr-at-eol
 /scripts/round96*.py -text whitespace=cr-at-eol
 /tests/round96* -text whitespace=cr-at-eol
