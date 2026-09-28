@@ -132,3 +132,17 @@ results/unified_exact_round85/figures/*.svg -whitespace
 /scripts/round92*.py -text whitespace=cr-at-eol
 /tests/round92* -text whitespace=cr-at-eol
 /results/unified_exact_round92/**/*.log -whitespace
+
+# Three-round continuation: preserve source/evidence bytes before qualification.
+/results/unified_exact_round93/** -text whitespace=cr-at-eol
+/results/unified_exact_round94/** -text whitespace=cr-at-eol
+/results/unified_exact_round95/** -text whitespace=cr-at-eol
+/scripts/round93*.py -text whitespace=cr-at-eol
+/scripts/round94*.py -text whitespace=cr-at-eol
+/scripts/round95*.py -text whitespace=cr-at-eol
+/tests/round93* -text whitespace=cr-at-eol
+/tests/round94* -text whitespace=cr-at-eol
+/tests/round95* -text whitespace=cr-at-eol
+/results/unified_exact_round93/**/*.log -whitespace
+/results/unified_exact_round94/**/*.log -whitespace
+/results/unified_exact_round95/**/*.log -whitespace
