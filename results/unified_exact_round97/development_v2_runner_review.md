@@ -31,3 +31,21 @@ These are harness static findings, not passed real v2 qualification or a
 complete stage review. The real gate is deliberately absent until the
 actual production evidence and independent matrices are checked. The
 development/confirmation campaigns were not started by this review.
+
+Subsequent static gate review found missing bindings for actual initial/Start
+source evidence and incomplete vector-to-event/model coverage checks. Root
+added all source/receipt bindings, re-executes the event audit, and compares
+the entire retained vector receipt set with the exact events and actual LP
+hashes. The reviewer confirmed these changes. The gate's feedback-chain
+requirements were limited to F5, preserving F2's original protection role.
+The gate later actually passed, as recorded separately; static review did
+not execute it.
+
+The proposed development block queue also received a static review. The
+reviewer found that a completed solver prefix alone would permit advancing
+past a previous block whose independent vector audit failed. Root repaired
+this before any development launch: all prior blocks must have a successful
+block-complete state, a contiguous covered prefix and matching successful
+vector-audit receipts. A previous stopped/failed block cannot authorize the
+next block. The queue still stops at each explicit block for root analysis,
+and does not automatically choose a candidate or begin confirmation.
