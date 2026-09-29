@@ -35,3 +35,5 @@ V2三臂primal #10–12已完成，primal_v2有效summary共12行全通过。pri
 增量归档formal_archive_through_v2已完成：18臂、56,651成员、59,276,032字节，全部SHA复核，归档217.3308493秒另计无Optimize。覆盖H2/H3/H4与F2/V1/V2。下一步提交阶段结果并写V2审核ACK启动原H5/H6六臂。
 
 H5 #13–15完成全通过；队列54788等待serial_review_v2_external_H5.json。external_report h5、derived_numeric external h5和cost_report h5已完成。只余#16 H6/LP-G、#17 P、#18 ENS，各3600秒。当前64启动、105native、micro2/4；H5 raw尚待最终增量归档，不重复优化。最新已push提交772e26ab3含完整primal与through_v2归档。
+
+重要最新：旧队列54788已因H6/LP #16截止hardstop审计失败退出1，严禁重新启动。原external summary16行末行为失败，保持不变；新round96_external_recovery_v2.py已成功recover，无Optimize，external_v2有效16行。#16 observed U1.0547814858565612/L.9491247933425749，无证、行政硬停止，5native/16物理见证。详见h6_interruption_review。此新adapter已绑定不可修改。下一命令仅python scripts/round96_external_recovery_v2.py run --number 17，后18；生产源/binary/输入/上限不动。当前65计费启动、110native、micro2/4（新总费用报告尚待更新）。最终报告/cost/trajectory/derived/archive需要支持external_v2、audit_path和journal计数；不能把缺CSV行当零调用，不能误称正常终态。
