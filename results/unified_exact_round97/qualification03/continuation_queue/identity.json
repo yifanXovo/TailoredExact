@@ -1,0 +1,13 @@
+{
+  "batch_sha256": "fc232664a204bab6ddad0460655f807787d806dc9240d871394d08755b056846",
+  "queue_sha256": "b1605f33db9acb466f5514e39702c59b0a56dc9f64bd01cdbbfc427a2673421b",
+  "vector_checker_sha256": "ff505629a85dea69b9f2eb4eb590a42ab23ec492a75a728071b6123dca65a575",
+  "maximum_new_starts": 2,
+  "maximum_new_process_seconds": 1140,
+  "completed_prefix": 1,
+  "new_launch_numbers": [
+    2,
+    3
+  ],
+  "policy": "Audit arm1; run registered arms2/3 serially with actual-matrix audits between. Stop on any failure. No extension, retry or promotion."
+}

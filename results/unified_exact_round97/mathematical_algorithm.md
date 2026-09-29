@@ -1,6 +1,6 @@
 # R97 原生整数路线闭环 — 已通过接入资格，完整比较进行中
 
-保护默认是ENS-C，新的`--round97-native-closure`默认off；实验OFF用observe，另有shadow/feedback。保留24+1及R83启动、VD-P/F0、AM0.08、深度/宽度、静态行、原生策略及R68 Start。已资格的H1算子仅R83/R76，完整F5长窗显示预算质量收益但四臂均未证；R96在预登记真实原生状态回放中有独立增量。第二版实现已通过零Optimize微测，真实生产资格尚待执行。本说明不宣称阶段完成。
+保护默认是ENS-C，新的`--round97-native-closure`默认off；实验OFF用observe，另有shadow/feedback。保留24+1及R83启动、VD-P/F0、AM0.08、深度/宽度、静态行、原生策略及R68 Start。已资格的H1算子仅R83/R76，完整F5长窗显示预算质量收益但四臂均未证；R96在预登记真实原生状态回放中有独立增量。第二版已通过零Optimize微测及qualification03真实生产资格，69份源/映射向量独立通过实际矩阵检查；完整开发/确认尚待完成。本说明不宣称阶段完成。
 
 原目标/时长/数值合同完全继承R96 mathematical_algorithm.md：`F=G_true+lambda P`，`G_true=H/(nS)`及原S=0约定；空载出发、逐前缀[0,Q]、单次单向非零服务、允许带载回仓完整卸载，时长为实际有向旅行加`(c_pick+c_drop)*sum pickup`。不依赖距离对称性或三角不等式，数学T与进程cap分开。
 
