@@ -1,0 +1,184 @@
+{
+  "passed": true,
+  "outcome": "passed",
+  "receipt": {
+    "id": "F2_event9",
+    "exit_code": 0,
+    "stop_reason": "normal_return",
+    "wall_seconds": 0.044847399927675724,
+    "optimizer_calls": 0
+  },
+  "result": {
+    "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+    "route_sha256": "79b08ffe368c8b3bc04b3b355d3497f20d192347a8cd416a6cb7758527ec2962",
+    "initial_F": 0.8667828952865607,
+    "old_F": 0.8659435203229894,
+    "old_exhausted": 1,
+    "old_zero": 0,
+    "old_failed": 0,
+    "old_neutral": 0,
+    "old_insertions": 0,
+    "old_quantities": 1,
+    "old_seconds": 0.0022703,
+    "order_seconds": 0.0067161,
+    "order_F": 0.8659435203229894,
+    "order_moves": 0,
+    "proposals": 56,
+    "load_feasible": 12,
+    "duration_feasible": 0,
+    "old_neutral_after_order": 0,
+    "insertions_after_order": 0,
+    "quantities_after_order": 0,
+    "exhausted": 1,
+    "zero": 0,
+    "deadline": 0,
+    "verification_failed": 0,
+    "elapsed_before_summary": 0.0164214,
+    "optimizer_calls": 0
+  },
+  "wrapper_seconds_before_write": 0.8831706997007132,
+  "witnesses": [
+    {
+      "path": "results/unified_exact_round97/native_order_replay/F2_event9/old/closure_0.csv.final.json",
+      "sha256": "2209658400bc67edf05017924e6bc19b9adb59ef0304b2cf2ccac37114d592da",
+      "physical": {
+        "F": 0.8659435203229896,
+        "G": 0.24756565483918117,
+        "P": 4.12251910322539,
+        "stations": 6,
+        "pickup": 32,
+        "drop": 32,
+        "maximum_duration": 3595.0133423750403,
+        "original_T_feasible": true
+      }
+    },
+    {
+      "path": "results/unified_exact_round97/native_order_replay/F2_event9/old/closure_0.csv.initial.json",
+      "sha256": "a33b0f53339c1c46fdc24470f39221502e4d83673489f5063be90255c3eb1b4d",
+      "physical": {
+        "F": 0.8667828952865607,
+        "G": 0.2476091947237009,
+        "P": 4.1278246704190655,
+        "stations": 6,
+        "pickup": 31,
+        "drop": 31,
+        "maximum_duration": 3595.0133423750403,
+        "original_T_feasible": true
+      }
+    },
+    {
+      "path": "results/unified_exact_round97/native_order_replay/F2_event9/old/final.json",
+      "sha256": "880e8a4772b89d14987007767bd4ac2a16df9c89561e3913217daebdd446e256",
+      "physical": {
+        "F": 0.8659435203229896,
+        "G": 0.24756565483918117,
+        "P": 4.12251910322539,
+        "stations": 6,
+        "pickup": 32,
+        "drop": 32,
+        "maximum_duration": 3595.0133423750403,
+        "original_T_feasible": true
+      }
+    },
+    {
+      "path": "results/unified_exact_round97/native_order_replay/F2_event9/old/initial.json",
+      "sha256": "382dcfda44eba68e25949ba1f4fe681b2fc31943e21805bee05af3f144a21719",
+      "physical": {
+        "F": 0.8667828952865607,
+        "G": 0.2476091947237009,
+        "P": 4.1278246704190655,
+        "stations": 6,
+        "pickup": 31,
+        "drop": 31,
+        "maximum_duration": 3595.0133423750403,
+        "original_T_feasible": true
+      }
+    },
+    {
+      "path": "results/unified_exact_round97/native_order_replay/F2_event9/order/final.json",
+      "sha256": "286c664204552773cc760a3ca15e4c31252e76c0cfc93e436f4e2762c986e70e",
+      "physical": {
+        "F": 0.8659435203229896,
+        "G": 0.24756565483918117,
+        "P": 4.12251910322539,
+        "stations": 6,
+        "pickup": 32,
+        "drop": 32,
+        "maximum_duration": 3595.0133423750403,
+        "original_T_feasible": true
+      }
+    },
+    {
+      "path": "results/unified_exact_round97/native_order_replay/F2_event9/order/initial.json",
+      "sha256": "286c664204552773cc760a3ca15e4c31252e76c0cfc93e436f4e2762c986e70e",
+      "physical": {
+        "F": 0.8659435203229896,
+        "G": 0.24756565483918117,
+        "P": 4.12251910322539,
+        "stations": 6,
+        "pickup": 32,
+        "drop": 32,
+        "maximum_duration": 3595.0133423750403,
+        "original_T_feasible": true
+      }
+    },
+    {
+      "path": "results/unified_exact_round97/native_order_replay/F2_event9/order/old_0/closure_0.csv.final.json",
+      "sha256": "2209658400bc67edf05017924e6bc19b9adb59ef0304b2cf2ccac37114d592da",
+      "physical": {
+        "F": 0.8659435203229896,
+        "G": 0.24756565483918117,
+        "P": 4.12251910322539,
+        "stations": 6,
+        "pickup": 32,
+        "drop": 32,
+        "maximum_duration": 3595.0133423750403,
+        "original_T_feasible": true
+      }
+    },
+    {
+      "path": "results/unified_exact_round97/native_order_replay/F2_event9/order/old_0/closure_0.csv.initial.json",
+      "sha256": "2209658400bc67edf05017924e6bc19b9adb59ef0304b2cf2ccac37114d592da",
+      "physical": {
+        "F": 0.8659435203229896,
+        "G": 0.24756565483918117,
+        "P": 4.12251910322539,
+        "stations": 6,
+        "pickup": 32,
+        "drop": 32,
+        "maximum_duration": 3595.0133423750403,
+        "original_T_feasible": true
+      }
+    },
+    {
+      "path": "results/unified_exact_round97/native_order_replay/F2_event9/order/old_0/final.json",
+      "sha256": "880e8a4772b89d14987007767bd4ac2a16df9c89561e3913217daebdd446e256",
+      "physical": {
+        "F": 0.8659435203229896,
+        "G": 0.24756565483918117,
+        "P": 4.12251910322539,
+        "stations": 6,
+        "pickup": 32,
+        "drop": 32,
+        "maximum_duration": 3595.0133423750403,
+        "original_T_feasible": true
+      }
+    },
+    {
+      "path": "results/unified_exact_round97/native_order_replay/F2_event9/order/old_0/initial.json",
+      "sha256": "880e8a4772b89d14987007767bd4ac2a16df9c89561e3913217daebdd446e256",
+      "physical": {
+        "F": 0.8659435203229896,
+        "G": 0.24756565483918117,
+        "P": 4.12251910322539,
+        "stations": 6,
+        "pickup": 32,
+        "drop": 32,
+        "maximum_duration": 3595.0133423750403,
+        "original_T_feasible": true
+      }
+    }
+  ],
+  "order_moves": [],
+  "optimizer_calls": 0
+}
