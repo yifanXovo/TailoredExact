@@ -1,0 +1,57 @@
+{
+  "rows": [
+    {
+      "role": "H1",
+      "arm": "P-GRB",
+      "certificate": false,
+      "process_seconds": 1797.2650000001304,
+      "F_star_reference": 0.1495369041255871,
+      "F_star_source_arm": "ENS-C",
+      "F_star_source_number": 2,
+      "first_optimum_band_sequence": null,
+      "publication_interval_low": null,
+      "publication_interval_high": null,
+      "certified_tail_low": null,
+      "certified_tail_high": null,
+      "censored_tail_lower_bound": null,
+      "state": "known_optimum_band_not_observed"
+    },
+    {
+      "role": "H1",
+      "arm": "ENS-C",
+      "certificate": true,
+      "process_seconds": 677.5150000001304,
+      "F_star_reference": 0.1495369041255871,
+      "F_star_source_arm": "ENS-C",
+      "F_star_source_number": 2,
+      "first_optimum_band_sequence": 646,
+      "publication_interval_low": 140.3889014,
+      "publication_interval_high": 140.45300000021234,
+      "certified_tail_low": 537.061999999918,
+      "certified_tail_high": 537.1260986001304,
+      "censored_tail_lower_bound": null,
+      "state": "known_optimum_band_published"
+    },
+    {
+      "role": "H1",
+      "arm": "LP-G",
+      "certificate": true,
+      "process_seconds": 677.625,
+      "F_star_reference": 0.1495369041255871,
+      "F_star_source_arm": "ENS-C",
+      "F_star_source_number": 2,
+      "first_optimum_band_sequence": 652,
+      "publication_interval_low": 142.1313433,
+      "publication_interval_high": 142.21900000004098,
+      "certified_tail_low": 535.405999999959,
+      "certified_tail_high": 535.4936567,
+      "censored_tail_lower_bound": null,
+      "state": "known_optimum_band_published"
+    }
+  ],
+  "summary_sha256": "1678038a35f3e4038346bf24a88df9b469145bc424d32a61fd11d53fb4116554",
+  "optimizer_calls": 0,
+  "optimum_definition": "First certified arm by frozen order on the identical role, using its own numerical certificate; no cross-arm merged certificate.",
+  "timing_definition": "Interval from C++ data-close time to outer first-observed availability for the first independently verified witness within 1e-7 of the certified reference. Internal solver/heuristic discovery may be earlier and is not reconstructed.",
+  "tail_definition": "Whole-process certified cost minus the verified-publication interval; includes remaining proof, physical verification and finalization. Censored tails are lower bounds only."
+}

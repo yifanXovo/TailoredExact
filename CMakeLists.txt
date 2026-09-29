@@ -123,7 +123,8 @@ add_executable(Round93CoQuantityTests tests/round93_co_quantity_tests.cpp)
 target_link_libraries(Round93CoQuantityTests PRIVATE round93_co_quantity)
 add_test(NAME Round93CoQuantityTests COMMAND Round93CoQuantityTests)
 
-# Isolated Round95 final-hypothesis qualification; not linked into production.
+# Round95 complete-pair descent remains diagnostic only. R96 also links this
+# library for its strict starting-witness validator, without invoking the scan.
 add_library(round95_full_block STATIC src/Round95FullBlockDescent.cpp)
 target_link_libraries(round95_full_block PUBLIC exact_ebrp_core)
 add_executable(Round95FullBlockDiagnostic tests/round95_full_block_diagnostic.cpp)
@@ -131,6 +132,22 @@ target_link_libraries(Round95FullBlockDiagnostic PRIVATE round95_full_block)
 add_executable(Round95FullBlockTests tests/round95_full_block_tests.cpp)
 target_link_libraries(Round95FullBlockTests PRIVATE round95_full_block round93_co_quantity)
 add_test(NAME Round95FullBlockTests COMMAND Round95FullBlockTests)
+
+# Isolated Round96 multi-station quantity rays. Production remains unchanged.
+add_library(round96_multi_quantity STATIC src/Round96MultiQuantity.cpp)
+target_link_libraries(round96_multi_quantity PUBLIC round95_full_block)
+add_executable(Round96MultiQuantityDiagnostic tests/round96_multi_quantity_diagnostic.cpp)
+target_link_libraries(Round96MultiQuantityDiagnostic PRIVATE round96_multi_quantity)
+add_executable(Round96MultiQuantityTests tests/round96_multi_quantity_tests.cpp)
+target_link_libraries(Round96MultiQuantityTests PRIVATE round96_multi_quantity)
+
+add_library(round96_route_order STATIC src/Round96RouteOrder.cpp)
+target_link_libraries(round96_route_order PUBLIC round95_full_block)
+add_executable(Round96RouteOrderDiagnostic tests/round96_route_order_diagnostic.cpp)
+target_link_libraries(Round96RouteOrderDiagnostic PRIVATE round96_route_order)
+add_executable(Round96RouteOrderTests tests/round96_route_order_tests.cpp)
+target_link_libraries(Round96RouteOrderTests PRIVATE round96_route_order)
+add_test(NAME Round96MultiQuantityTests COMMAND Round96MultiQuantityTests)
 
 add_executable(NativeEvidenceJournalTests tests/native_evidence_journal_tests.cpp)
 target_link_libraries(NativeEvidenceJournalTests PRIVATE exact_ebrp_core)
@@ -287,6 +304,7 @@ add_executable(Round60CandidateTests tests/round60_candidate_tests.cpp)
 target_link_libraries(Round60CandidateTests PRIVATE exact_ebrp_core)
 add_test(NAME Round60CandidateTests COMMAND Round60CandidateTests)
 target_link_libraries(ExactEBRP PRIVATE exact_ebrp_core)
+target_link_libraries(ExactEBRP PRIVATE round96_route_order)
 
 add_executable(ExactEBRPCompare src/compare_main.cpp)
 target_link_libraries(ExactEBRPCompare PRIVATE exact_ebrp_core)

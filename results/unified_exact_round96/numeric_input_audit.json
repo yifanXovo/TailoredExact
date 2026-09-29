@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "optimizer_calls": 0,
+  "records": [
+    {
+      "id": "H1",
+      "objective_exact_binary64_match": true,
+      "duration_rows": 2,
+      "maximum_duration_coefficient_difference": 0,
+      "minimum_nonzero_checked_coefficient": 0.03571428571428571,
+      "minimum_nonunit_distance_to_one": 0.0357142857142857,
+      "maximum_station_capacity": 44,
+      "maximum_ratio": 2.066666666666667,
+      "input_sha256": "099ca4d77c6abf8b3a29b178a47c118f6c9327659074a2ddff1a4759de8f1bf0",
+      "canonical_sha256": "6a1e3ea56b8cee0023c19f2b7b4dd8e3ecb19c44ce183f4b7e1d7a4ede25a4b0"
+    },
+    {
+      "id": "H2",
+      "objective_exact_binary64_match": true,
+      "duration_rows": 3,
+      "maximum_duration_coefficient_difference": 0,
+      "minimum_nonzero_checked_coefficient": 0.03571428571428571,
+      "minimum_nonunit_distance_to_one": 0.0357142857142857,
+      "maximum_station_capacity": 44,
+      "maximum_ratio": 2.142857142857143,
+      "input_sha256": "28162c61500c821e4a505989920857001b4abd0c9b121c0f12be7b662f18b06d",
+      "canonical_sha256": "06f74c3857775a658b572a466921cf0df0fb4f8db901735c3b6ac515666af5b6"
+    },
+    {
+      "id": "H3",
+      "objective_exact_binary64_match": true,
+      "duration_rows": 3,
+      "maximum_duration_coefficient_difference": 0,
+      "minimum_nonzero_checked_coefficient": 0.03571428571428571,
+      "minimum_nonunit_distance_to_one": 0.0357142857142857,
+      "maximum_station_capacity": 44,
+      "maximum_ratio": 2.142857142857143,
+      "input_sha256": "c64bf740d0f4a43e13a48ab8180907de409a008dc40b36738c9629c100217162",
+      "canonical_sha256": "a588906548b2cabbca4b1368196c03a4b78e40e5532425497e45d9002cf333b0"
+    },
+    {
+      "id": "H4",
+      "objective_exact_binary64_match": true,
+      "duration_rows": 2,
+      "maximum_duration_coefficient_difference": 0,
+      "minimum_nonzero_checked_coefficient": 0.03571428571428571,
+      "minimum_nonunit_distance_to_one": 0.0357142857142857,
+      "maximum_station_capacity": 44,
+      "maximum_ratio": 2.142857142857143,
+      "input_sha256": "c2cf4853c20c62329561d0ef79d0ac6af5cc19521b7a501ed80bf9fd24c08144",
+      "canonical_sha256": "f593f8d724ff58fd5c5f36fad2baabd51f58947d0ba981c5b7c3957caf5ee0c0"
+    },
+    {
+      "id": "H5",
+      "objective_exact_binary64_match": true,
+      "duration_rows": 4,
+      "maximum_duration_coefficient_difference": 0,
+      "minimum_nonzero_checked_coefficient": 0.03571428571428571,
+      "minimum_nonunit_distance_to_one": 0.0357142857142857,
+      "maximum_station_capacity": 44,
+      "maximum_ratio": 2.142857142857143,
+      "input_sha256": "b75357bd9aa60e37af3562643c308096caab5bfc5b4d3b78b19a26070254ab61",
+      "canonical_sha256": "9536d171b871dc5b67cf3c00253e5e06f2d55958277addea2fc81b0097ce7cf5"
+    },
+    {
+      "id": "H6",
+      "objective_exact_binary64_match": true,
+      "duration_rows": 5,
+      "maximum_duration_coefficient_difference": 0,
+      "minimum_nonzero_checked_coefficient": 0.03571428571428571,
+      "minimum_nonunit_distance_to_one": 0.0357142857142857,
+      "maximum_station_capacity": 44,
+      "maximum_ratio": 2.142857142857143,
+      "input_sha256": "6fac327b91118e02b7a37c9b7b597fcb4257275fb97fd364ff4dcd73c1be1819",
+      "canonical_sha256": "d9402685f64ed42d1f208dd48cebf0570bc414d3519246a9d43f3fc112c0d171"
+    }
+  ],
+  "limitation": "Checks actual input/objective/full duration rows and finite inventory-state scales. Does not claim arbitrary real input fidelity or exact rational solver certificates. Dynamic leaf coefficients remain governed by inherited numerical contract."
+}

@@ -1,0 +1,361 @@
+{
+  "records": [
+    {
+      "receipt": {
+        "id": "D7_at3600",
+        "exit_code": 0,
+        "stop_reason": "normal_return",
+        "wall_seconds": 1.148957900237292,
+        "optimizer_calls": 0
+      },
+      "result": {
+        "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+        "route_sha256": "25ac8b2b6150e06da4a2275b09752e9f3780babd7d198af47c1516330c1c339d",
+        "initial_F": 0.22515085005563812,
+        "old_F": 0.21748862282558865,
+        "old_exhausted": 1,
+        "old_zero": 0,
+        "old_failed": 0,
+        "old_neutral": 10,
+        "old_insertions": 0,
+        "old_quantities": 17,
+        "old_seconds": 0.2529435,
+        "order_seconds": 0.7330861,
+        "order_F": 0.21602613085687666,
+        "order_moves": 21,
+        "proposals": 203189,
+        "load_feasible": 74109,
+        "duration_feasible": 72904,
+        "old_neutral_after_order": 18,
+        "insertions_after_order": 0,
+        "quantities_after_order": 7,
+        "exhausted": 1,
+        "zero": 0,
+        "deadline": 0,
+        "verification_failed": 0,
+        "elapsed_before_summary": 0.9902142,
+        "optimizer_calls": 0
+      },
+      "verified": {
+        "old": {
+          "F": 0.2174886228255885,
+          "G": 0.04222011545669967,
+          "P": 1.1684567157925922,
+          "stations": 50,
+          "pickup": 228,
+          "drop": 228,
+          "maximum_duration": 15956.988993985344,
+          "original_T_feasible": true
+        },
+        "order": {
+          "F": 0.21602613085687647,
+          "G": 0.03979343233737354,
+          "P": 1.1748846567966862,
+          "stations": 50,
+          "pickup": 227,
+          "drop": 227,
+          "maximum_duration": 12869.387922814341,
+          "original_T_feasible": true
+        }
+      }
+    },
+    {
+      "receipt": {
+        "id": "D7_final",
+        "exit_code": 0,
+        "stop_reason": "normal_return",
+        "wall_seconds": 1.1467190999537706,
+        "optimizer_calls": 0
+      },
+      "result": {
+        "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+        "route_sha256": "7135174b844657cbe62d17d6fd843493c9e643bd8932373ef616704db745d14a",
+        "initial_F": 0.2235315457737183,
+        "old_F": 0.2191084376523046,
+        "old_exhausted": 1,
+        "old_zero": 0,
+        "old_failed": 0,
+        "old_neutral": 11,
+        "old_insertions": 0,
+        "old_quantities": 8,
+        "old_seconds": 0.188841,
+        "order_seconds": 0.9295786,
+        "order_F": 0.21564407531579508,
+        "order_moves": 22,
+        "proposals": 221984,
+        "load_feasible": 81994,
+        "duration_feasible": 79681,
+        "old_neutral_after_order": 25,
+        "insertions_after_order": 0,
+        "quantities_after_order": 10,
+        "exhausted": 1,
+        "zero": 0,
+        "deadline": 0,
+        "verification_failed": 0,
+        "elapsed_before_summary": 1.1225893,
+        "optimizer_calls": 0
+      },
+      "verified": {
+        "old": {
+          "F": 0.21910843765230437,
+          "G": 0.04466638428744147,
+          "P": 1.1629470224324194,
+          "stations": 50,
+          "pickup": 229,
+          "drop": 229,
+          "maximum_duration": 15921.330401399891,
+          "original_T_feasible": true
+        },
+        "order": {
+          "F": 0.21564407531579494,
+          "G": 0.03872267378877319,
+          "P": 1.179476010180145,
+          "stations": 50,
+          "pickup": 229,
+          "drop": 229,
+          "maximum_duration": 13324.77885011899,
+          "original_T_feasible": true
+        }
+      }
+    },
+    {
+      "receipt": {
+        "id": "U6_at3600",
+        "exit_code": 0,
+        "stop_reason": "normal_return",
+        "wall_seconds": 1.161794699728489,
+        "optimizer_calls": 0
+      },
+      "result": {
+        "input_sha256": "1556e893376349de92f9213642d7be0005dcb44e47e037d34f77040711787e3f",
+        "route_sha256": "9469fdd83d1ce6eade176585b69a5b825a0162c1e638e4c070d754b60e61637a",
+        "initial_F": 0.14990547589906003,
+        "old_F": 0.14492803549813202,
+        "old_exhausted": 1,
+        "old_zero": 0,
+        "old_failed": 0,
+        "old_neutral": 24,
+        "old_insertions": 0,
+        "old_quantities": 6,
+        "old_seconds": 0.3564685,
+        "order_seconds": 0.7776144,
+        "order_F": 0.14492803549813202,
+        "order_moves": 22,
+        "proposals": 214004,
+        "load_feasible": 78272,
+        "duration_feasible": 78272,
+        "old_neutral_after_order": 22,
+        "insertions_after_order": 0,
+        "quantities_after_order": 0,
+        "exhausted": 1,
+        "zero": 0,
+        "deadline": 0,
+        "verification_failed": 0,
+        "elapsed_before_summary": 1.1381226,
+        "optimizer_calls": 0
+      },
+      "verified": {
+        "old": {
+          "F": 0.1449280354981319,
+          "G": 0.023241246085662266,
+          "P": 0.8112452627497976,
+          "stations": 50,
+          "pickup": 197,
+          "drop": 197,
+          "maximum_duration": 11852.491541899324,
+          "original_T_feasible": true
+        },
+        "order": {
+          "F": 0.1449280354981319,
+          "G": 0.023241246085662266,
+          "P": 0.8112452627497976,
+          "stations": 50,
+          "pickup": 197,
+          "drop": 197,
+          "maximum_duration": 10736.874921762685,
+          "original_T_feasible": true
+        }
+      }
+    },
+    {
+      "receipt": {
+        "id": "U6_final",
+        "exit_code": 0,
+        "stop_reason": "normal_return",
+        "wall_seconds": 0.9506564997136593,
+        "optimizer_calls": 0
+      },
+      "result": {
+        "input_sha256": "1556e893376349de92f9213642d7be0005dcb44e47e037d34f77040711787e3f",
+        "route_sha256": "a163fb20d760d498c03af5b65cf26865c071fede7f9262c1227e35069d4adb08",
+        "initial_F": 0.14528773805499373,
+        "old_F": 0.14528773805499373,
+        "old_exhausted": 1,
+        "old_zero": 0,
+        "old_failed": 0,
+        "old_neutral": 26,
+        "old_insertions": 0,
+        "old_quantities": 0,
+        "old_seconds": 0.2959639,
+        "order_seconds": 0.626131,
+        "order_F": 0.14528773805499373,
+        "order_moves": 14,
+        "proposals": 143220,
+        "load_feasible": 67246,
+        "duration_feasible": 67246,
+        "old_neutral_after_order": 21,
+        "insertions_after_order": 0,
+        "quantities_after_order": 0,
+        "exhausted": 1,
+        "zero": 0,
+        "deadline": 0,
+        "verification_failed": 0,
+        "elapsed_before_summary": 0.9263827,
+        "optimizer_calls": 0
+      },
+      "verified": {
+        "old": {
+          "F": 0.14528773805499362,
+          "G": 0.028612031975857335,
+          "P": 0.7778380405275752,
+          "stations": 50,
+          "pickup": 196,
+          "drop": 196,
+          "maximum_duration": 11824.99615616354,
+          "original_T_feasible": true
+        },
+        "order": {
+          "F": 0.14528773805499362,
+          "G": 0.028612031975857335,
+          "P": 0.7778380405275752,
+          "stations": 50,
+          "pickup": 196,
+          "drop": 196,
+          "maximum_duration": 10276.743596182465,
+          "original_T_feasible": true
+        }
+      }
+    },
+    {
+      "receipt": {
+        "id": "F5_at3600",
+        "exit_code": 0,
+        "stop_reason": "normal_return",
+        "wall_seconds": 0.2704962999559939,
+        "optimizer_calls": 0
+      },
+      "result": {
+        "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+        "route_sha256": "3af9d1a889c14de5f5413e80625ade3e960a4e74a83d6376cff5f0854937dbce",
+        "initial_F": 0.32932369464104827,
+        "old_F": 0.32064721243187644,
+        "old_exhausted": 1,
+        "old_zero": 0,
+        "old_failed": 0,
+        "old_neutral": 2,
+        "old_insertions": 0,
+        "old_quantities": 5,
+        "old_seconds": 0.0564748,
+        "order_seconds": 0.1859846,
+        "order_F": 0.31445612234380943,
+        "order_moves": 5,
+        "proposals": 42924,
+        "load_feasible": 19020,
+        "duration_feasible": 1244,
+        "old_neutral_after_order": 0,
+        "insertions_after_order": 1,
+        "quantities_after_order": 14,
+        "exhausted": 1,
+        "zero": 0,
+        "deadline": 0,
+        "verification_failed": 0,
+        "elapsed_before_summary": 0.2465687,
+        "optimizer_calls": 0
+      },
+      "verified": {
+        "old": {
+          "F": 0.32064721243187644,
+          "G": 0.07869562846260299,
+          "P": 1.6130105597951565,
+          "stations": 45,
+          "pickup": 143,
+          "drop": 142,
+          "maximum_duration": 7191.931694991787,
+          "original_T_feasible": true
+        },
+        "order": {
+          "F": 0.3144561223438096,
+          "G": 0.07918930279223796,
+          "P": 1.568445463677144,
+          "stations": 46,
+          "pickup": 149,
+          "drop": 148,
+          "maximum_duration": 7140.390574000338,
+          "original_T_feasible": true
+        }
+      }
+    },
+    {
+      "receipt": {
+        "id": "F5_final",
+        "exit_code": 0,
+        "stop_reason": "normal_return",
+        "wall_seconds": 0.09319220017641783,
+        "optimizer_calls": 0
+      },
+      "result": {
+        "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+        "route_sha256": "e904e1c794210d37b8b2db789c3d851f88483837432f7a38a3df26e237845698",
+        "initial_F": 0.30244301421400693,
+        "old_F": 0.30232787703800834,
+        "old_exhausted": 1,
+        "old_zero": 0,
+        "old_failed": 0,
+        "old_neutral": 1,
+        "old_insertions": 0,
+        "old_quantities": 1,
+        "old_seconds": 0.0258284,
+        "order_seconds": 0.0391647,
+        "order_F": 0.3015296068778552,
+        "order_moves": 1,
+        "proposals": 15414,
+        "load_feasible": 6542,
+        "duration_feasible": 102,
+        "old_neutral_after_order": 0,
+        "insertions_after_order": 0,
+        "quantities_after_order": 1,
+        "exhausted": 1,
+        "zero": 0,
+        "deadline": 0,
+        "verification_failed": 0,
+        "elapsed_before_summary": 0.069156,
+        "optimizer_calls": 0
+      },
+      "verified": {
+        "old": {
+          "F": 0.30232787703800834,
+          "G": 0.07967336261939309,
+          "P": 1.4843634294574353,
+          "stations": 47,
+          "pickup": 153,
+          "drop": 152,
+          "maximum_duration": 7155.897947290315,
+          "original_T_feasible": true
+        },
+        "order": {
+          "F": 0.30152960687785524,
+          "G": 0.07959854825634138,
+          "P": 1.4795403908100921,
+          "stations": 47,
+          "pickup": 154,
+          "drop": 153,
+          "maximum_duration": 7180.179269738623,
+          "original_T_feasible": true
+        }
+      }
+    }
+  ],
+  "starts": 6,
+  "optimizer_calls": 0,
+  "elapsed_before_write": 4.83679430000484
+}

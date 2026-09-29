@@ -1,0 +1,13 @@
+# 本轮writer适用范围与数值合同
+
+旧canonical writer确实会删去绝对值≤1e-12的项，并将距±1≤1e-12的系数打印为±1。R92只修H-ACT新增行；R96未把该修复推广成旧writer对任意实数精确。近1处理时间、极小正权重等一般输入仍在未覆盖边界，未来若研究这些输入必须共同修复并重新冻结三臂。
+
+本轮`numeric_input_audit.json`对全部六个实际输入及其plain原compact参考逐项核验：目标G+lambda*w*e逐系数等于输入的binary64运算；每车完整duration行的全部pickup和有向旅行弧、RHS与原60/60及T一致；所有旅行、目标权重、倒数目标和库存状态比例中的非零系数均远离1e-12删除区，非1系数远离near-unit区。行比较使用与C++一致的sqrt(dx²+dy²)/1.5，并记录最大差，不只检查文件是否存在。六份参考的指纹/完整SHA绑定，正式P需逐字相同。
+
+叶派生行仍须与上述直接输入区分。VD-P的库存/比例/惩罚状态系数来自有限整数y和D；真正依赖浮点叶端点的是q与s的透视界以及既有Gini/denominator/estimator行。小端点系数可能进入旧writer阈值，因此**没有声称所有派生系数零改动或符号精确**。阈值对有界s/q、r及有限库存行的影响按原binary64残差门禁解释；不会被改称有理恒等。当前面板未发现直接物理时长或原目标被near-unit/极小序列化改变的实际反例，故不为此变更冻结LP-G或plain基准。若后续实际叶证据出现域/界/物理矛盾，停止并保存该前缀，再按用户要求共同修复重冻，绝不放宽容差。
+
+适用条件是本轮已冻结的六输入、参数、旧有效静态行及Gurobi数值合同，不是所有可能输入。Gurobi FeasibilityTol1e-6、IntFeasTol1e-5、OptimalityTol1e-6、原certificate tol及物理1e-7保持；每臂完整物理解与覆盖/作用域仍独立验证。请求MIPGap/MIPGapAbs为0只表示请求，没有严格有理认证主张。新的独立数量诊断writer仅省去精确0、其余系数全精度输出；其受限最优亦明确为数值证书。
+
+实际派生行补核：round96_derived_numeric.py按保存的叶端点、Y域及输入权重，重新构造VD-P透视上下界、direct Gini cap/floor、pair spread、固定及variable-S居中、目标cutoff、denominator目标估计、penalty下界、SP四条McCormick和paper-safe估计行，并逐项匹配真实LP行。H1的6份和F5 OFF/ON的10份现存canonical模型均通过，所检行没有非零near-unit/极小系数被改变；见derived_numeric_external_h1_v2.json和derived_numeric_primal_v2_f5.json。原h1版本仅比v2少命令行primal_v2选项，输出保留。该检查以已声明Y域为系数重算输入，域有效性仍依赖另行scope/coverage；它不恢复被覆盖的历史模型，也不声称全writer、所有静态行或未来叶均精确。其它角色结束后在无优化的审查边界补查其实际模型。
+
+最终补核：完整外部36份模型（derived_numeric_external_v2_complete.json）及primal28份模型（derived_numeric_primal_v2_complete.json）通过同一声明行族重构，所检行changed_rows合计0；包含H6硬停止保存的实际canonical模型。原six-input和primal参考输入检查通过。此补核完成上段计划事项，但不扩大未覆盖的历史模型、全部静态行或任意实数适用域，也不把H6观测界改为正常finalization。
