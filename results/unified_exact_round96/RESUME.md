@@ -29,3 +29,7 @@ H3组external #7–9已完成全通过，全删失；external summary共9行。�
 V1三臂primal #7–9全部完成，primal_v2 summary共9行。ON强启动但终态较OFF退步，详见v1_review.md。队列54788等待serial_review_v2_primal_V1.json；下一个external #10 H4/P，随后LP、ENS，各1800秒。primal_report/derived_numeric/cost_report v1已运行通过；55启动、76native、micro2/4，剩余12正式任务。H2/F2/H3/V1 raw尚待后续归档。
 
 H4 external #10–12完成：全部F0认证、P最快，见h4_review。已执行external_report/trajectory/derived_numeric external h4及cost_report h4，均通过。队列54788等待serial_review_v2_external_H4.json；下一primal #10 V2/OFF、#11 ON、#12 P，各1800秒。完成58启动、85native、micro2/4，剩余9正式任务。最新待提交H4结果；原P损失必须保留。
+
+V2三臂primal #10–12已完成，primal_v2有效summary共12行全通过。primal_final_decision.md完成新机制阶段判断，mixed且默认关闭。primal_report complete、trajectory primal_v2 complete、derived_numeric primal_v2 complete（28模型0阈值改动）、cost_report primal_complete和primal_startup_report均已执行。当前61启动、94native、micro2/4；剩余external #13–18 H5/H6六臂，最终67启动。队列54788在serial_review_v2_primal_V2.json等待，自审后下一H5/ENS cap7200。准备增量归档H2/H3/H4与F2/V1/V2 raw；禁止复跑已完成模型。
+
+增量归档formal_archive_through_v2已完成：18臂、56,651成员、59,276,032字节，全部SHA复核，归档217.3308493秒另计无Optimize。覆盖H2/H3/H4与F2/V1/V2。下一步提交阶段结果并写V2审核ACK启动原H5/H6六臂。
