@@ -156,9 +156,9 @@ void Round97NativeClosure::solution(Round97Model& m,const std::vector<double>& v
                 VerifiedCandidateStore saved;
                 require(saved.consider(instance_,options_.lambda,round97Normalize(instance_,options_.lambda,accepted_routes),
                     "round97_predeadline_accepted_closure",m.sha),"round97_accepted_checkpoint_verification");
+                const double verified_time=processElapsedSeconds(options_);
                 if(processWorkDeadlineReached(options_))return;
                 archive_=saved.best();
-                const double verified_time=processElapsedSeconds(options_);
                 const auto name="accepted_"+std::to_string(event)+"_"+archive_.content_sha256+".json";
                 writeRound61Witness(directory_/name,instance_,options_.lambda,archive_);
                 record("predeadline_verified_candidate","\"event\":"+std::to_string(event)+
@@ -226,9 +226,11 @@ void Round97NativeClosure::solution(Round97Model& m,const std::vector<double>& v
     }catch(const std::exception& e){try{finish(std::string("exception:")+e.what());}catch(...){}failure(e.what());}
       catch(...){failure("round97_unknown_callback_exception");}
 }
-void Round97NativeClosure::handoff(long long epoch,double old_upper) {
-    record("archive_handoff","\"new_epoch\":"+std::to_string(epoch)+",\"old_upper\":"+number(old_upper)+
-        ",\"upper\":"+number(archive_.objective)+",\"candidate_hash\":"+quote(archive_.content_sha256));
+void Round97NativeClosure::handoff(long long epoch,double old_upper) noexcept {
+    try {
+        record("archive_handoff","\"new_epoch\":"+std::to_string(epoch)+",\"old_upper\":"+number(old_upper)+
+            ",\"upper\":"+number(archive_.objective)+",\"candidate_hash\":"+quote(archive_.content_sha256));
+    }catch(const std::exception& e){failure(e.what());}catch(...){failure("round97_handoff_evidence_exception");}
 }
 void Round97NativeClosure::returned(Round97Model& m,int status,double objective,const std::vector<double>& values) noexcept {
     try {

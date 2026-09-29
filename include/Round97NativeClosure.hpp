@@ -38,7 +38,7 @@ public:
     void incumbent(Round97Model&, double) noexcept;
     void returned(Round97Model&, int status, double objective, const std::vector<double>&) noexcept;
     void failure(const std::string&) noexcept;
-    void handoff(long long epoch, double old_upper);
+    void handoff(long long epoch, double old_upper) noexcept;
     bool feedback() const { return options_.round97_native_closure == "feedback"; }
     const VerifiedBrpCandidate& archive() const { return archive_; }
     bool failed() const { return failed_; }

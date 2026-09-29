@@ -1,6 +1,7 @@
 #include "Round97NativeClosure.hpp"
 #include "Evaluator.hpp"
 #include "Round61Candidates.hpp"
+#include "Round83BlockExchange.hpp"
 #include <chrono>
 #include <iostream>
 #include <stdexcept>
@@ -73,5 +74,13 @@ int main(int argc,char** argv){try {
     deadline.solution(dm,start.values,start.objective,1e100,4,0,1,submit);check(!deadline.archive().verified&&!deadline.failed(),"deadline constructed archive");
     Round97NativeClosure numerical(in,opt,dir/"numerical");auto nm=model(in);auto invalid=start.values;invalid[1]+=.01;
     numerical.solution(nm,invalid,start.objective,1e100,4,0,1,submit);check(numerical.failed(),"noninteger native event admitted");
+    SolveOptions interrupted=opt;interrupted.process_start_time_valid=true;interrupted.process_start_time=std::chrono::steady_clock::now();
+    interrupted.process_wall_time_limit=100;Verification saved;
+    auto retained=runRound83ExchangeDescent(in,interrupted,loaded,{},[&](const auto& routes,const auto& v){
+        saved=verifySolution(in,routes,opt.lambda);check(saved.objective==v.objective,"accepted observer mismatch");
+        interrupted.process_start_time=std::chrono::steady_clock::now()-std::chrono::seconds(200);
+    });
+    check(retained.deadline&&saved.feasible&&saved.objective<start.objective&&retained.verification.objective==saved.objective,
+        "later interrupted scan discarded earlier accepted witness");
     std::cout<<"Round97 semantic micro checks passed; optimizer_calls=0\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
