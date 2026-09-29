@@ -9,7 +9,8 @@
 
 namespace ebrp {
 Round76ClosureResult runRound76PhysicalClosure(const Instance& in,const SolveOptions& options,
-    const std::vector<RoutePlan>& routes,const std::filesystem::path& trace_path) {
+    const std::vector<RoutePlan>& routes,const std::filesystem::path& trace_path,
+    const PhysicalAcceptedObserver& accepted) {
     Round76ClosureResult out;out.routes=routes;
     out.verification=verifySolution(in,routes,options.lambda);
     if(!out.verification.feasible || !out.verification.errors.empty() ||
@@ -64,6 +65,7 @@ Round76ClosureResult runRound76PhysicalClosure(const Instance& in,const SolveOpt
             record(use_insertion?"insertion":"quantity",insertion,quantity,"verification_rejected");break;
         }
         out.routes=std::move(next);out.verification=std::move(verified);++out.stats.accepted;
+        if(accepted)accepted(out.routes,out.verification);
         if(use_insertion)++out.stats.accepted_insertions;else ++out.stats.accepted_quantities;
         record(use_insertion?"insertion":"quantity",use_insertion?insertion:Round73InsertionChoice{},
             use_insertion?Round75QuantityChoice{}:quantity,"accepted_verified");

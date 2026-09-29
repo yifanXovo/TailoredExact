@@ -26,6 +26,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Round76PhysicalClosure.cpp
   src/Round78BalancedRelocation.cpp
   src/Round83BlockExchange.cpp
+  src/Round97NativeClosure.cpp
   src/Result.cpp
   src/StrictCertificate.cpp
   src/ModelCorrectness.cpp
@@ -112,6 +113,8 @@ else()
 endif()
 
 add_library(exact_ebrp_core ${EXACT_EBRP_LIB_SOURCES})
+add_executable(Round97NativeClosureTests tests/round97_native_closure_tests.cpp)
+target_link_libraries(Round97NativeClosureTests PRIVATE exact_ebrp_core)
 
 # Isolated Round93 source qualification. This source is deliberately absent
 # from exact_ebrp_core and the production ExactEBRP preset.

@@ -128,7 +128,8 @@ std::vector<RoutePlan> applyRound83Neutral(const std::vector<RoutePlan>& routes,
 }
 
 Round83Result runRound83ExchangeDescent(const Instance& in,const SolveOptions& opt,
-    const std::vector<RoutePlan>& routes,const std::filesystem::path& out) {
+    const std::vector<RoutePlan>& routes,const std::filesystem::path& out,
+    const PhysicalAcceptedObserver& accepted) {
     Round83Result result;result.routes=routes;result.verification=verifySolution(in,routes,opt.lambda);
     require(result.verification.feasible&&result.verification.errors.empty()&&
         result.verification.original_objective_recomputed,"Invalid exchange descent input");
@@ -151,7 +152,7 @@ Round83Result runRound83ExchangeDescent(const Instance& in,const SolveOptions& o
     for(std::uint64_t iteration=0;;++iteration) {
         if(result.verification.objective==0){result.zero=true;break;}
         if(processWorkDeadlineReached(opt)){result.deadline=true;break;}
-        auto strict=runRound76PhysicalClosure(in,opt,result.routes,out.empty()?std::filesystem::path{}:out/("closure_"+std::to_string(iteration)+".csv"));
+        auto strict=runRound76PhysicalClosure(in,opt,result.routes,out.empty()?std::filesystem::path{}:out/("closure_"+std::to_string(iteration)+".csv"),accepted);
         if(strict.stats.verification_failed){result.verification_failed=true;break;}
         result.routes=std::move(strict.routes);result.verification=std::move(strict.verification);
         result.insertions+=strict.stats.accepted_insertions;result.quantities+=strict.stats.accepted_quantities;
@@ -181,6 +182,7 @@ Round83Result runRound83ExchangeDescent(const Instance& in,const SolveOptions& o
             round78DurationPotential(checked)!=move.duration_potential||
             !(move.duration_potential<round78DurationPotential(result.verification))) {result.verification_failed=true;break;}
         result.routes=std::move(next);result.verification=std::move(checked);++result.neutral;
+        if(accepted)accepted(result.routes,result.verification);
         if(move.kind==0)++result.relocations;else ++result.exchanges;
         snapshot(out/("neutral_"+std::to_string(iteration)+".json"));
     }

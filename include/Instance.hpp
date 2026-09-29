@@ -485,6 +485,9 @@ struct SolveOptions {
     bool round92_handling_activation = false;
     // R96 isolated finite route-order closure at the single R83 startup hook.
     bool round96_route_order = false;
+    // Default-off R97: observe is OFF with event telemetry; shadow never
+    // changes official bounds. All modes retain the original ENS-C startup.
+    std::string round97_native_closure = "off"; // off|observe|shadow|feedback
     std::string primal_heuristic_stop = "legacy-time";
     int primal_heuristic_no_improve_generations = 2000;
     std::string primal_heuristic_generation_log;

@@ -16,6 +16,7 @@
 #include "Round49K1RC.hpp"
 #include "StaticSegmentedGini.hpp"
 #include "Round61Candidates.hpp"
+#include "Round97NativeClosure.hpp"
 #include "Round62Passive.hpp"
 #include "Round65Proof.hpp"
 #include "Round92HandlingActivation.hpp"
@@ -333,6 +334,17 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         return false;
     }
     const bool first_class_k1 = options.k1_am_sf_controller_enabled;
+    if (options.round97_native_closure != "off" &&
+        ((!first_class_k1 || options.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
+          options.method != "gcap-frontier" || options.round88_constructive_only_descent ||
+          options.round89_native_ot_b1 || options.round90_lp_g_split || options.round92_handling_activation ||
+          options.round96_route_order || options.round60_candidate_mode != "off" ||
+          options.round61_candidate_mode != "off" || options.round62_threshold_mode != "off") ||
+         (options.round97_native_closure != "observe" && options.round97_native_closure != "shadow" &&
+          options.round97_native_closure != "feedback"))) {
+        reason = "round97_requires_isolated_ensc_native_closure";
+        return false;
+    }
     const bool round90_split_allowed = !options.round90_lp_g_split ||
         (first_class_k1 &&
          options.algorithm_preset == "research-round83-vds-equal-net-exchange" &&
@@ -3187,6 +3199,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     };
 
     result.round60_candidate_mode = options.round60_candidate_mode;
+    auto round97_session = options.round97_native_closure == "off"
+        ? std::shared_ptr<Round97NativeClosure>{}
+        : std::make_shared<Round97NativeClosure>(instance,options,artifact_dir/"round97");
+    long long round97_call=0;
     auto round61_session = options.round61_candidate_mode == "off"
         ? std::shared_ptr<Round61CandidateSession>{}
         : prepareRound61Candidate(instance, options, artifact_dir / "round61");
@@ -3223,6 +3239,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
 
     auto configureRound60CandidateRequest = [&] (
         FixedIntervalMipRequest& request) {
+        if(round97_session) {
+            request.round97_session=round97_session;
+            request.round97_call=++round97_call;
+            request.round97_epoch=incumbent_epoch;
+        }
         request.round60_candidate_mode = round60_candidate_path_disabled
             ? "off" : options.round60_candidate_mode;
         request.round61_session = round61_session;
@@ -3463,6 +3484,31 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             std::numeric_limits<double>::infinity(),
             "initial_exact_interval_cover");
     }
+
+    // Called only after replaying this native call's bound events and after
+    // its ordinary incumbent handoff. This avoids backdating archive U into
+    // earlier native-bound trace rows. No callback changes outer geometry.
+    auto mergeRound97Archive = [&](const std::string& leaf_id) {
+        if(!round97_session || !round97_session->feedback())return;
+        const auto& candidate=round97_session->archive();
+        if(!candidate.verified || candidate.objective>=verified_ub-1e-9)return;
+        recordProcessPhase(options,"round97_archive_handoff_begin","running",leaf_id);
+        const auto checked=verifySolution(instance,candidate.routes,options.lambda);
+        if(!checked.feasible||!checked.errors.empty()||checked.objective!=candidate.objective)
+            throw std::runtime_error("round97_archive_handoff_verification");
+        const double old_upper=verified_ub;
+        verified_ub=candidate.objective;best_routes=candidate.routes;++incumbent_epoch;
+        std::string reason;
+        if(!scheduler.tightenVerifiedCutoff(verified_ub,&reason))
+            throw std::runtime_error("round97_archive_cutoff_contract:"+reason);
+        persistCurrentWitness(verified_ub,best_routes,"round97_handoff_"+std::to_string(incumbent_epoch)+".json");
+        if(native_evidence)native_evidence->witness(best_routes,"round97_archive_native_return_handoff");
+        round97_session->handoff(incumbent_epoch,old_upper);
+        writeGlobalTrace(processElapsedSeconds(options),elapsedTelemetry(),"round97_archive_handoff",leaf_id,
+            scheduler.findLeaf(leaf_id)?scheduler.findLeaf(leaf_id)->lower_bound:0,
+            otherRelevantMinimum(leaf_id),"verified_physical_archive_after_native_return");
+        recordProcessPhase(options,"round97_archive_handoff_end","verified",leaf_id);
+    };
 
     auto stopAtDeadline = [&]() {
         if (!global_deadline_stop) {
@@ -4158,6 +4204,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 otherRelevantMinimum(bounded.id),
                 "independently_verified_c6_partial_mip_incumbent");
         }
+        mergeRound97Archive(bounded.id);
         if (outcome.optimal || outcome.infeasible) {
             std::string reason;
             const ControllingLeafStatus close_status =
@@ -8798,6 +8845,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 otherRelevantMinimum(bounded.id),
                 "independently_verified_native_incumbent");
         }
+        mergeRound97Archive(bounded.id);
         if (outcome.round62_external_termination_requested) {
             round62_stopped=true;
             break;

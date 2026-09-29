@@ -2,8 +2,10 @@
 
 #include "Round73JointInsertion.hpp"
 #include "Round75QuantityDescent.hpp"
+#include <functional>
 
 namespace ebrp {
+using PhysicalAcceptedObserver = std::function<void(const std::vector<RoutePlan>&,const Verification&)>;
 struct Round76ClosureStats {
     Round73InsertionStats insertion;
     Round75QuantityStats quantity;
@@ -21,5 +23,6 @@ struct Round76ClosureResult {
 // minimum-F oracle over the full union. Only joint absence proves exhaustion
 // of these declared strict-improvement neighborhoods, never BRP optimality.
 Round76ClosureResult runRound76PhysicalClosure(const Instance&,const SolveOptions&,
-    const std::vector<RoutePlan>&,const std::filesystem::path& trace_path = {});
+    const std::vector<RoutePlan>&,const std::filesystem::path& trace_path = {},
+    const PhysicalAcceptedObserver& accepted = {});
 } // namespace ebrp
