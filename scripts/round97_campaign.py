@@ -69,9 +69,9 @@ def auditor(launch, observations, completion, identity):
 
 def prepare(label):
     ext.ensure_idle();camp=OUT/label;assert not camp.exists()
-    assert label=='qualification01','Only the declared qualification batch is admitted by this revision'
+    assert label=='qualification02','Only the revised declared qualification batch is admitted by this revision'
     # Development-only functional windows; no complete-performance conclusion.
-    schedule=[('F2','FEEDBACK',240),('F5','SHADOW',300),('F5','FEEDBACK',300)]
+    schedule=[('F5','SHADOW',300),('F5','FEEDBACK',300),('F2','FEEDBACK',240)]
     prior=read(ROOT/'results/unified_exact_round96/primal/identity.json')
     binary=BUILD/'ExactEBRP.exe'
     prereg=dict(candidate_binary=binary.relative_to(ROOT).as_posix(),candidate_binary_sha256=sha(binary),common=ext.COMMON)

@@ -191,6 +191,10 @@ void Round97NativeClosure::solution(Round97Model& m,const std::vector<double>& v
             ",\"candidate_G_true\":"+number(candidate.G)+",\"original_feasible\":true";
         if(candidate.objective<original.objective-1e-9&&(!archive_.verified||candidate.objective<archive_.objective-1e-9)&&
             !processWorkDeadlineReached(options_))archive_=candidate;
+        // OBJBST may not yet include the MIPSOL currently being processed.
+        // Re-submitting a closure no-op would mix native admission timing (and
+        // duplicate Starts) into the physical-improvement treatment.
+        if(candidate.objective>=original.objective-1e-9){finish("physical_closure_no_strict_improvement");return;}
         // An exhausted self-output is not re-submitted in the same call. In a
         // later domain it may fill a missing native incumbent, even F==cutoff.
         if(m.submitted_hashes.count(candidate.content_sha256)){finish("duplicate_submission_this_call");return;}
