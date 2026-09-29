@@ -95,9 +95,9 @@ bounds, types, rows and objective. Run it only while idle. The production
 reader separately validates physical witnesses, initial seed and per-call
 actual Start matching, session operator and non-feedback isolation.
 
-`scripts/round97_development_v2.py` is a conditional, not yet executed
-development preparer. It requires a future evidence-bound real qualification
-gate before preparing the13-arm/33300s campaign from `revision02_plan.md`.
+`scripts/round97_development_v2.py` prepared the13-arm/33300s campaign
+after qualification03 passed its evidence-bound gate. Preparation receipt
+is engineering/development02_prepare01; the plan is revision02_plan.md.
 It preserves D7's actual d7dbd018… input/T18000 via the R96 fixed cases and
 matched R87 zero-Optimize original reference. V1 uses the R96 primal input
 dd841e57…/T7200. Old timing is never reused in new performance pairs.
@@ -115,6 +115,37 @@ C1/C2/C3 inputs were generated once and remain unoptimized at this
 checkpoint. Their recipe/hashes/caps are in confirmation_inputs.json. Freeze
 one uniform candidate after development before running them; do not redraw,
 resize or use their results for design while retaining confirmation status.
-Whole-stage costs, trajectory analysis, final review and final decision are
-still pending. No current censored result establishes final certification
-time superiority.
+Whole-stage final review and final decision remain pending. No current
+censored result establishes final certification time superiority.
+
+## Completed development02 F5 block and reporting
+
+The F5 four-arm queue/session19598 exited0. All four arms passed; never
+restart that queue. Read development02_f5_report.md and the current RESUME.md.
+The following zero-Optimize commands have already succeeded while idle:
+
+```powershell
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_analyze_role.py development02 F5
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_trajectories.py development02 F5 development02_f5
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_trajectories.py development01 F5 development01_f5
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_cost_ledger.py development02_f5
+```
+
+These refuse to overwrite existing outputs. Role analysis is a nonlaunchable
+view of every registered arm for that role; it is not another experiment.
+Full-batch analysis must wait for all13arms. A later cost snapshot needs a
+fresh label and includes earlier reporting-command receipts. Timed curves
+use audited evidence availability and exclude untimed final endpoints.
+
+The next registered contiguous blocks, each invoked once only after the
+preceding block is terminal and analyzed, are:
+
+```powershell
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_development_v2_queue.py --label d7 --completed 4 --through 7
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_development_v2_queue.py --label v1 --completed 7 --through 10
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_development_v2_queue.py --label f2 --completed 10 --through 13
+```
+
+Inspect real process and queue state before invoking; this command listing
+does not authorize duplicate launches. Blocks retain frozen input/T/cap/order,
+audit actual matrices between solvers, stop on failure and never retry.

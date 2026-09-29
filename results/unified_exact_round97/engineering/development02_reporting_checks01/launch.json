@@ -1,0 +1,8 @@
+{
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "-c",
+    "import sys,ast;from pathlib import Path\nsys.path.insert(0,'scripts')\nfor name in ['round97_analyze_batch_v2','round97_analyze_role','round97_trajectories','round97_cost_ledger']:ast.parse(Path('scripts/'+name+'.py').read_text())\nfrom round97_analyze_batch_v2 import compare\nbase=dict(id='fixture',arm='OFF',U=1.,L=0.,absolute_gap=1.,process_wall_seconds=100.,cap_seconds=100.,certificate=False)\nmissing=dict(base,arm='FEEDBACK',U=None,absolute_gap=None)\nr=compare(missing,base)\nassert r['candidate_minus_baseline_U'] is None and r['material_UB_difference'] is None and r['classification']=='both_uncertified_final_order_unknown'\nr=compare(base,missing)\nassert r['candidate_minus_baseline_absolute_gap'] is None\nassert compare(dict(base,certificate=False),dict(base,certificate=True))['classification']=='one_sided_certificate_loss'\nprint('Four scripts parse; missing-U comparisons preserve unknowns and certificate loss. Zero Optimize.')\n"
+  ],
+  "optimizer_calls": 0
+}
