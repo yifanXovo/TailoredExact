@@ -26,11 +26,16 @@ def main():
     for campaign in ['external','primal']:
         for path in sorted((OUT/campaign/'reference').glob('*/completion.json')):add(path,'reference_export',0)
         summary=OUT/campaign/'summary.jsonl'
+        if campaign=='external' and (OUT/'external_v2/admission.json').exists():summary=OUT/'external_v2/summary.jsonl'
         if campaign=='primal' and (OUT/'primal_v2/admission.json').exists():summary=OUT/'primal_v2/summary.jsonl'
         for record in [json.loads(line) for line in summary.read_text().splitlines()] if summary.exists() else []:
             path=Path(record['destination']);audit=read(ROOT/record['audit_path'] if 'audit_path' in record else path/'audit.json');assert record['audit_passed'] and audit['passed']
             ledger=path/'external/paper_optimize_ledger.csv'
             if record['arm']=='P-GRB':calls=1
+            elif audit.get('administrative_hard_stop'):
+                observations=read(path/'observations.json')
+                calls=sum(r['payload']['kind']=='call' for r in observations)
+                assert calls==audit['native_scope_adapter']['native_calls']
             else:
                 with ledger.open(newline='',encoding='utf-8') as stream:calls=sum(1 for _ in csv.DictReader(stream))
                 assert calls==audit['native_scope_adapter']['native_calls']

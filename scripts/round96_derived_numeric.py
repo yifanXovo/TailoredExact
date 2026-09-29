@@ -91,7 +91,7 @@ def inspect(path,panel):
         scope='Saved current canonical model only; declared Y bounds are inputs to coefficient replay, their validity is checked by the separate scope/coverage audit.')
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('campaign',choices=['external','primal','primal_v2']);parser.add_argument('label')
+    parser=argparse.ArgumentParser();parser.add_argument('campaign',choices=['external','external_v2','primal','primal_v2']);parser.add_argument('label')
     args=parser.parse_args();assert args.label.replace('_','').replace('-','').isalnum()
     campaign=OUT/args.campaign;identity=read(campaign/'identity.json')
     summaries=[json.loads(line) for line in (campaign/'summary.jsonl').read_text().splitlines()]

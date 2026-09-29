@@ -9,3 +9,5 @@
 适用条件是本轮已冻结的六输入、参数、旧有效静态行及Gurobi数值合同，不是所有可能输入。Gurobi FeasibilityTol1e-6、IntFeasTol1e-5、OptimalityTol1e-6、原certificate tol及物理1e-7保持；每臂完整物理解与覆盖/作用域仍独立验证。请求MIPGap/MIPGapAbs为0只表示请求，没有严格有理认证主张。新的独立数量诊断writer仅省去精确0、其余系数全精度输出；其受限最优亦明确为数值证书。
 
 实际派生行补核：round96_derived_numeric.py按保存的叶端点、Y域及输入权重，重新构造VD-P透视上下界、direct Gini cap/floor、pair spread、固定及variable-S居中、目标cutoff、denominator目标估计、penalty下界、SP四条McCormick和paper-safe估计行，并逐项匹配真实LP行。H1的6份和F5 OFF/ON的10份现存canonical模型均通过，所检行没有非零near-unit/极小系数被改变；见derived_numeric_external_h1_v2.json和derived_numeric_primal_v2_f5.json。原h1版本仅比v2少命令行primal_v2选项，输出保留。该检查以已声明Y域为系数重算输入，域有效性仍依赖另行scope/coverage；它不恢复被覆盖的历史模型，也不声称全writer、所有静态行或未来叶均精确。其它角色结束后在无优化的审查边界补查其实际模型。
+
+最终补核：完整外部36份模型（derived_numeric_external_v2_complete.json）及primal28份模型（derived_numeric_primal_v2_complete.json）通过同一声明行族重构，所检行changed_rows合计0；包含H6硬停止保存的实际canonical模型。原six-input和primal参考输入检查通过。此补核完成上段计划事项，但不扩大未覆盖的历史模型、全部静态行或任意实数适用域，也不把H6观测界改为正常finalization。

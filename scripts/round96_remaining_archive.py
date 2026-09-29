@@ -12,7 +12,8 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('label');parser.add_argument('--external-after',type=int,required=True)
     parser.add_argument('--primal-after',type=int,required=True);args=parser.parse_args()
     assert args.label.replace('_','').isalnum();external.ensure_idle();start=time.perf_counter();files=set();arms=[]
-    for name,threshold in [('external',args.external_after),('primal_v2',args.primal_after)]:
+    external_name='external_v2' if (OUT/'external_v2/admission.json').exists() else 'external'
+    for name,threshold in [(external_name,args.external_after),('primal_v2',args.primal_after)]:
         camp=OUT/name
         records=[json.loads(line) for line in (camp/'summary.jsonl').read_text().splitlines()]
         assert all(r['audit_passed'] for r in records)
@@ -21,10 +22,13 @@ def main():
             folder=Path(row['destination']);files.update(p for p in folder.rglob('*') if p.is_file())
             arms.append(dict(campaign=name,number=row['number'],id=row['id'],arm=row['arm']))
         files.update(p for p in camp.glob('*') if p.is_file())
+    # Preserve the original failed campaign prefix and logs as well as effective records.
+    files.update(p for p in (OUT/'external').glob('*') if p.is_file())
+    files.update(p for p in OUT.glob('external_run_*') if p.is_file())
     assert arms
     for folder in OUT.iterdir():
         if folder.is_dir() and (folder.name.startswith(('external_report_','external_trajectory_','primal_report_',
-            'primal_v2_trajectory_','cost_report_'))):
+            'primal_v2_trajectory_','external_v2_trajectory_','cost_report_'))):
             files.update(p for p in folder.rglob('*') if p.is_file())
     files.update(p for p in OUT.glob('*') if p.is_file() and p.suffix in {'.md','.json'}
         and not p.name.startswith(('stage','formal_archive_')))

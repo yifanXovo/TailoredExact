@@ -11,7 +11,7 @@ from pathlib import Path
 from round96_prepare import ROOT,OUT,read,write,sha,evidence
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('campaign',choices=['external','primal','primal_v2']);parser.add_argument('label')
+    parser=argparse.ArgumentParser();parser.add_argument('campaign',choices=['external','external_v2','primal','primal_v2']);parser.add_argument('label')
     args=parser.parse_args();assert args.label.replace('_','').replace('-','').isalnum()
     camp=OUT/args.campaign;path=camp/'summary.jsonl'
     records=[json.loads(line) for line in path.read_text().splitlines()];assert all(r['audit_passed'] for r in records)

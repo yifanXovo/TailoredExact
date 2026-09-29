@@ -13,7 +13,7 @@ from round96_prepare import ROOT, OUT, read, write, sha
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('label');args=parser.parse_args()
     assert args.label.replace('_','').replace('-','').isalnum()
-    campaign=OUT/'external';dest=OUT/('external_report_'+args.label);dest.mkdir(exist_ok=False)
+    campaign=OUT/('external_v2' if (OUT/'external_v2/admission.json').exists() else 'external');dest=OUT/('external_report_'+args.label);dest.mkdir(exist_ok=False)
     identity=read(campaign/'identity.json')
     records=[json.loads(line) for line in (campaign/'summary.jsonl').read_text().splitlines()]
     assert len({r['number'] for r in records})==len(records)
@@ -25,7 +25,7 @@ def main():
                  process_seconds=None,certified_process_seconds=None,certificate=False)
         if matches:
             r=matches[0];assert r['audit_passed']
-            audit_path=Path(r['destination'])/'audit.json';audit=read(audit_path);assert audit['passed']
+            audit_path=ROOT/r['audit_path'] if 'audit_path' in r else Path(r['destination'])/'audit.json';audit=read(audit_path);assert audit['passed']
             e=r['endpoint'];c=r['completion'];paid+=c['process_wall_seconds']
             assert e and math.isfinite(e['L'])
             assert e['U'] is None or math.isfinite(e['U']) and e['L']<=e['U']+1e-7
@@ -34,7 +34,7 @@ def main():
             row.update(U=e['U'],L=e['L'],absolute_gap=g,relative_gap=rel,
                        process_seconds=c['process_wall_seconds'],certificate=e['certificate'],
                        state='certified' if e['certificate'] else 'right_censored' if c['stop_reason'] in
-                       ['normal_return','whole_run_hard_stop'] else 'administrative_interruption',
+                       ['normal_return'] else 'administrative_interruption',
                        certified_process_seconds=c['process_wall_seconds'] if e['certificate'] else None,
                        endpoint_source=e['source'],audit_sha256=sha(audit_path),stop_reason=c['stop_reason'])
             certs[launch['arm']]+=int(e['certificate'])
