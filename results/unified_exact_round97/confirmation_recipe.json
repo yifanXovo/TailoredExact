@@ -1,0 +1,56 @@
+{
+  "version": "round97-native-confirmation-v1",
+  "roles": [
+    {
+      "id": "C1",
+      "V": 20,
+      "M": 2,
+      "Q": 25,
+      "geometry": "offset_annulus",
+      "inventory": "shortage",
+      "T_seconds": 5400,
+      "cap_seconds": 900,
+      "method_order": [
+        "P-GRB",
+        "FEEDBACK",
+        "OFF"
+      ]
+    },
+    {
+      "id": "C2",
+      "V": 30,
+      "M": 4,
+      "Q": 15,
+      "geometry": "bent_corridor",
+      "inventory": "surplus",
+      "T_seconds": 5400,
+      "cap_seconds": 1800,
+      "method_order": [
+        "OFF",
+        "P-GRB",
+        "FEEDBACK"
+      ]
+    },
+    {
+      "id": "C3",
+      "V": 50,
+      "M": 4,
+      "Q": 25,
+      "geometry": "anisotropic_cloud",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 3600,
+      "method_order": [
+        "FEEDBACK",
+        "OFF",
+        "P-GRB"
+      ]
+    }
+  ],
+  "source_sha256": "af81ae4a12e6f7bcf6fb3e8487531eae6a170cbd4be36c719014b47278a646ba",
+  "inherited_generator_sha256": "1708be14cb731cefac5719b1a956fe59cb6e06fd8581ba5b224a1343ffa9fcbe",
+  "writer_sha256": "05b60dc92e4f81edaa134fbcb556dcb18efbf36ac02f333712e0b7e8364491c1",
+  "reservation_sha256": "a3d5b866278c475cd7af97e7dce5a0133cbbcfc45fcbb4ce5c85610b3cff1c6b",
+  "optimizer_calls": 0,
+  "policy": "Retain all three inputs and outcomes. Never optimized before candidate freeze. No replacement, resizing, T changes or threshold fitting."
+}

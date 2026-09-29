@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "optimizer_calls": 0,
+  "wall_seconds": 0.5705222999677062,
+  "vectors": [
+    {
+      "event": 1,
+      "kind": "input",
+      "path": "results/unified_exact_round97/qualification02/raw/02_F5_FEEDBACK/external/round97/vector_1.csv",
+      "sha256": "4b84dbed619e2d6c424c4c2ca1995da1a5f718f4ba3aebc60977f8738ffaf982",
+      "model_sha256": "6493bd9b60e94124f4d43bbd55d0a20a5650e65867a114db78d1386815ac9f19",
+      "columns": 26633,
+      "rows": 105416,
+      "maximum_absolute_residual": 1.3389289676979388e-13,
+      "objective": 0.38430409168754603
+    }
+  ],
+  "source_sha256": "ff505629a85dea69b9f2eb4eb590a42ab23ec492a75a728071b6123dca65a575",
+  "scope": "Every retained source/mapped CSV against its exact actual canonical linear model; numerical, not rational certificate."
+}

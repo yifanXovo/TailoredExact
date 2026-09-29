@@ -1,0 +1,120 @@
+{
+  "solver_starts": 4,
+  "solver_process_seconds": 907.936999999918,
+  "optimize_calls_started": 24,
+  "micro_starts": 5,
+  "micro_process_seconds": 1.2641329001635313,
+  "all_solver_rows": [
+    {
+      "batch": "qualification01",
+      "id": "F2",
+      "arm": "FEEDBACK",
+      "seconds": 76.1089999997057,
+      "optimize_calls_started": 5,
+      "audit_passed": false,
+      "stop_reason": "administrative_noop_confound"
+    },
+    {
+      "batch": "qualification02",
+      "id": "F5",
+      "arm": "SHADOW",
+      "seconds": 297.5,
+      "optimize_calls_started": 7,
+      "audit_passed": true,
+      "stop_reason": "normal_return"
+    },
+    {
+      "batch": "qualification02",
+      "id": "F5",
+      "arm": "FEEDBACK",
+      "seconds": 297.18699999991804,
+      "optimize_calls_started": 7,
+      "audit_passed": true,
+      "stop_reason": "normal_return"
+    },
+    {
+      "batch": "qualification02",
+      "id": "F2",
+      "arm": "FEEDBACK",
+      "seconds": 237.1410000002943,
+      "optimize_calls_started": 5,
+      "audit_passed": true,
+      "stop_reason": "normal_return"
+    }
+  ],
+  "engineering_receipts": [
+    {
+      "label": "micro01",
+      "exit_code": 0,
+      "wall_seconds": 0.2781242998316884,
+      "optimizer_calls": 0
+    },
+    {
+      "label": "micro02",
+      "exit_code": 0,
+      "wall_seconds": 0.2419433002360165,
+      "optimizer_calls": 0
+    },
+    {
+      "label": "micro03",
+      "exit_code": 0,
+      "wall_seconds": 0.25365780014544725,
+      "optimizer_calls": 0
+    },
+    {
+      "label": "micro04",
+      "exit_code": 0,
+      "wall_seconds": 0.24579670000821352,
+      "optimizer_calls": 0
+    },
+    {
+      "label": "micro05",
+      "exit_code": 0,
+      "wall_seconds": 0.2446107999421656,
+      "optimizer_calls": 0
+    },
+    {
+      "label": "prototype01",
+      "exit_code": 0,
+      "wall_seconds": 33.943358399905264,
+      "optimizer_calls": 0
+    },
+    {
+      "label": "prototype01_configure",
+      "exit_code": 0,
+      "wall_seconds": 2.8616117001511157,
+      "optimizer_calls": 0
+    },
+    {
+      "label": "prototype02",
+      "exit_code": 0,
+      "wall_seconds": 12.385982500389218,
+      "optimizer_calls": 0
+    },
+    {
+      "label": "prototype03",
+      "exit_code": 0,
+      "wall_seconds": 10.517931799869984,
+      "optimizer_calls": 0
+    },
+    {
+      "label": "prototype04",
+      "exit_code": 0,
+      "wall_seconds": 6.735887300223112,
+      "optimizer_calls": 0
+    },
+    {
+      "label": "prototype05",
+      "exit_code": 0,
+      "wall_seconds": 9.326736900024116,
+      "optimizer_calls": 0
+    },
+    {
+      "label": "prototype06",
+      "exit_code": 0,
+      "wall_seconds": 3.686366899870336,
+      "optimizer_calls": 0
+    }
+  ],
+  "scope": "Optimize calls nested in solver costs, never added twice; administrative first run retains full cost; build and zero-Optimize audits separate. No complete comparison yet."
+}
