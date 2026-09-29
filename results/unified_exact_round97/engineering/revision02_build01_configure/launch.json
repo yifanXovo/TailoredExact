@@ -1,0 +1,17 @@
+{
+  "command": [
+    "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+    "-S",
+    "E:\\codes\\ExactEBRP",
+    "-B",
+    "E:\\codes\\ExactEBRP\\build\\research\\round97-native-closure-v2",
+    "-G",
+    "Ninja",
+    "-DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe",
+    "-DCMAKE_MAKE_PROGRAM=D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja\\ninja.exe",
+    "-DEXACT_EBRP_ENABLE_GUROBI=ON",
+    "-DGUROBI_ROOT=D:/gurobi1302/win64",
+    "-DCMAKE_BUILD_TYPE="
+  ],
+  "optimizer_calls": 0
+}

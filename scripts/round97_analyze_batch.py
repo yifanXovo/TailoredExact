@@ -75,6 +75,19 @@ def main(label):
         solutions = [event for event in events if event['kind'] == 'solution']
         assert not any(event['kind'] == 'failure' for event in events)
         improvements = [event for event in solutions if event.get('candidate_F', float('inf')) < event.get('input_F', 0)-1e-9]
+        by_event = {event['event']: event for event in solutions}
+        checkpoints = [event for event in events if event['kind'] == 'predeadline_verified_candidate']
+        checkpoint_hashes = set()
+        witness_checks = {w['path']: w for w in audit.get('round97', {}).get('physical_witnesses', [])}
+        for checkpoint in checkpoints:
+            source = by_event[checkpoint['event']]
+            assert checkpoint['F'] < source['input_F'] - 1e-9
+            witness_path = events_path.parent / checkpoint['witness']
+            assert sha(witness_path) == witness_checks[checkpoint['witness']]['sha256']
+            witness = read(witness_path)
+            assert abs(witness['F'] - checkpoint['F']) <= 1e-12
+            checkpoint_hashes.add(witness['sha256'])
+            bindings[relative(witness_path)] = sha(witness_path)
         submitted = [event for event in solutions if event.get('submission_return_code') == 0]
         native_calls = result['gurobi_optimize_count'] if launch['arm'] == 'P-GRB' else result['external_gini_tree_optimize_count']
         assert native_calls == audit['native_calls_started'] == audit['native_calls_returned']
@@ -93,8 +106,14 @@ def main(label):
                          MIPSOL_events=len(solutions), unique_physical_inputs=len({e['input_hash'] for e in solutions}),
                          post_start_events=stats.get('post_start_events', 0),
                          strict_improvement_events=len(improvements),
-                         unique_improved_candidates=len({e['candidate_hash'] for e in improvements}),
-                         best_optional_candidate_F=min((e['candidate_F'] for e in improvements), default=None),
+                         unique_completed_closure_candidates=len({e['candidate_hash'] for e in improvements}),
+                         predeadline_checkpoint_records=len(checkpoints),
+                         unique_predeadline_checkpoints=len(checkpoint_hashes),
+                         all_improved_source_events=len({e['event'] for e in improvements + checkpoints}),
+                         best_completed_closure_F=min((e['candidate_F'] for e in improvements), default=None),
+                         best_predeadline_checkpoint_F=min((e['F'] for e in checkpoints), default=None),
+                         best_optional_candidate_F=min([e['candidate_F'] for e in improvements] +
+                                                       [e['F'] for e in checkpoints], default=None),
                          submissions=len(submitted),
                          vector_observations=stats.get('vector_observations', 0),
                          native_incumbent_changes=stats.get('native_incumbent_changes', 0),

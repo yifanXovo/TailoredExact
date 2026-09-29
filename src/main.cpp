@@ -122,6 +122,8 @@ void usage() {
         << "[--round90-lp-g-split true|false] "
         << "[--round92-handling-activation true|false] "
         << "[--round96-route-order true|false] "
+        << "[--round97-native-closure off|observe|shadow|feedback] "
+        << "[--round97-native-operator r83|r96] "
         << "[--round34-c6-startup-variant hga-full|hga-light-1000|simple-start] "
         << "[--round36-c6-causal-arm off|hh|ss|bw-p|bw-a] "
         << "[--round36-c6-split-normalization proof|anchor] "
@@ -256,7 +258,7 @@ std::string lowerAscii(std::string value) {
 
 std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
     if (opt.round97_native_closure != "off")
-        return "research-round97-ensc-native-" + opt.round97_native_closure;
+        return "research-round97-v2-ensc-native-" + opt.round97_native_closure + "-" + opt.round97_native_operator;
     if (opt.round88_constructive_only_descent)
         return "research-round88-ensc-constructive-only";
     if (opt.round89_native_ot_b1)
@@ -1429,6 +1431,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round92-handling-activation") opt.round92_handling_activation = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round96-route-order") opt.round96_route_order = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round97-native-closure") opt.round97_native_closure = lowerAscii(requireValue(i, argc, argv));
+        else if (arg == "--round97-native-operator") opt.round97_native_operator = lowerAscii(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-stop") opt.primal_heuristic_stop = requireValue(i, argc, argv);
         else if (arg == "--primal-heuristic-no-improve-generations") opt.primal_heuristic_no_improve_generations = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-generation-log") opt.primal_heuristic_generation_log = requireValue(i, argc, argv);
@@ -3353,6 +3356,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
          opt.round62_threshold_mode != "off" ||
          opt.external_gini_scheduling != "round31-nonblocking-native-bound"))
         throw std::runtime_error("Round96 route order requires isolated ENS-C Round83 gcap-frontier");
+    if ((opt.round97_native_operator != "r83" && opt.round97_native_operator != "r96") ||
+        (opt.round97_native_closure == "off" && opt.round97_native_operator != "r83"))
+        throw std::runtime_error("Round97 operator requires an active isolated native-closure mode");
     if (opt.round97_native_closure != "off" && opt.round97_native_closure != "observe" &&
         opt.round97_native_closure != "shadow" && opt.round97_native_closure != "feedback")
         throw std::runtime_error("Invalid Round97 native closure mode");
@@ -4007,9 +4013,9 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         snapshot.preset_reason = "Round96: isolated ENS-C applies finite route-order and original physical closure once after unchanged 24+1 startup";
     }
     if (opt.round97_native_closure != "off") {
-        snapshot.algorithm_preset = "research-round97-ensc-native-" + opt.round97_native_closure;
-        append_explicit_research_feature("round97_native_integer_r83_closure_" + opt.round97_native_closure);
-        snapshot.preset_reason = "Round97: unchanged ENS-C startup, native MIPSOL physical closure, current-model feedback and safe return handoff";
+        snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
+        append_explicit_research_feature("round97_v2_nonstart_" + opt.round97_native_operator + "_" + opt.round97_native_closure);
+        snapshot.preset_reason = "Round97 v2: unchanged ENS-C startup, non-start-matching integer states, fixed physical operator, current-model feedback and safe return handoff";
     }
     return snapshot;
 }

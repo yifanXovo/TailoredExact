@@ -5,6 +5,7 @@
 #include "ProcessPhaseLedger.hpp"
 #include "Round61Candidates.hpp"
 #include "Round83BlockExchange.hpp"
+#include "Round96RouteOrder.hpp"
 #include <algorithm>
 #include <cmath>
 #include <iomanip>
@@ -52,13 +53,16 @@ std::vector<RoutePlan> round97Normalize(const Instance& in,double lambda,const s
 std::string round97StateHash(const Instance& in,double lambda,const std::vector<RoutePlan>& routes) {
     return textSha256(canonicalCandidateSerialization(round97Normalize(in,lambda,routes)));
 }
-Round97NativeClosure::Round97NativeClosure(const Instance& in,const SolveOptions& opt,const std::filesystem::path& dir)
-    :instance_(in),options_(opt),directory_(dir) {
+Round97NativeClosure::Round97NativeClosure(const Instance& in,const SolveOptions& opt,const std::filesystem::path& dir,
+    const std::string& initial_seed_hash)
+    :instance_(in),options_(opt),initial_seed_hash_(initial_seed_hash),directory_(dir) {
     require(opt.round97_native_closure=="observe"||opt.round97_native_closure=="shadow"||feedback(),"round97_invalid_mode");
+    require(opt.round97_native_operator=="r83"||opt.round97_native_operator=="r96","round97_invalid_operator");
     require(!std::filesystem::exists(dir),"round97_evidence_directory_exists");
     std::filesystem::create_directories(dir);events_.open(dir/"events.jsonl");
     require(bool(events_),"round97_event_open_failed");
-    record("session","\"mode\":"+quote(opt.round97_native_closure)+",\"operator\":\"r83\"");
+    record("session","\"mode\":"+quote(opt.round97_native_closure)+",\"operator\":"+quote(opt.round97_native_operator)+
+        ",\"eligibility\":\"non_initial_seed_and_non_current_start_v2\",\"initial_seed_hash\":"+quote(initial_seed_hash_));
 }
 void Round97NativeClosure::record(const std::string& kind,const std::string& fields) {
     events_<<"{\"kind\":"<<quote(kind)<<",\"process_seconds\":"<<number(processElapsedSeconds(options_))<<','<<fields<<"}\n";
@@ -131,8 +135,10 @@ void Round97NativeClosure::solution(Round97Model& m,const std::vector<double>& v
         fields+=",\"input_hash\":"+quote(hash)+",\"input_F\":"+number(original.objective)+
             ",\"input_G_true\":"+number(original.G)+",\"input_model_G\":"+number(named.at("G"))+
             ",\"matches_supplied_start_physical_state\":"+(m.start_hash.empty()?"null":(hash==m.start_hash?"true":"false"));
-        auto cached=cache_.find(hash);
-        if(cached==cache_.end()) {
+        const bool new_source=seen_inputs_.insert(hash).second;
+        fields+=",\"matches_initial_seed_physical_state\":"+(initial_seed_hash_.empty()?std::string("null"):
+            (hash==initial_seed_hash_?"true":"false"));
+        if(new_source) {
             // Persist each genuinely new physical source before optional work.
             VerifiedCandidateStore input;
             require(input.consider(instance_,options_.lambda,routes,"round97_native_MIPSOL",m.sha),"round97_input_store");
@@ -140,9 +146,18 @@ void Round97NativeClosure::solution(Round97Model& m,const std::vector<double>& v
             std::ofstream vector(directory_/("vector_"+std::to_string(event)+".csv"));vector<<std::setprecision(17)<<"name,value\n";
             for(std::size_t j=0;j<values.size();++j)vector<<m.domain.names[j]<<','<<values[j]<<'\n';
             vector.close();require(bool(vector),"round97_input_vector_write");
-            if(options_.round97_native_closure=="observe") {
-                cache_.emplace(hash,Cached{input.best(),false});finish("observe_new_state");return;
-            }
+        }
+        // Evidence deduplication must not decide future closure eligibility.
+        // A prior current-Start state may become eligible in another call.
+        if((!initial_seed_hash_.empty()&&hash==initial_seed_hash_)||
+            (!m.start_hash.empty()&&hash==m.start_hash)) {
+            finish("start_matching_state_observation_only");return;
+        }
+        if(options_.round97_native_closure=="observe") {
+            finish(new_source?"observe_new_state":"observe_duplicate_state");return;
+        }
+        auto cached=cache_.find(hash);
+        if(cached==cache_.end()) {
             if(processWorkDeadlineReached(options_)){finish("deadline_before_closure");return;}
             const auto closure_start=Clock::now();
             auto complete=routes;
@@ -165,7 +180,30 @@ void Round97NativeClosure::solution(Round97Model& m,const std::vector<double>& v
                     ",\"verification_completed_seconds\":"+number(verified_time)+",\"F\":"+number(archive_.objective)+
                     ",\"witness\":"+quote(name));
             };
-            const auto improved=runRound83ExchangeDescent(instance_,options_,complete,{},accepted);
+            Round83Result improved;
+            std::uint64_t order_moves=0,order_proposals=0;
+            bool initial_old_recorded=false,initial_old_complete=false;
+            double initial_old_F=0;
+            if(options_.round97_native_operator=="r96") {
+                auto ordered=runRound96RouteOrder(instance_,options_,complete,{},accepted);
+                improved.routes=std::move(ordered.routes);improved.verification=std::move(ordered.verification);
+                improved.neutral=ordered.stats.old_neutral;improved.quantities=ordered.stats.quantities;
+                improved.insertions=ordered.stats.insertions;improved.exhausted=ordered.stats.exhausted;
+                improved.deadline=ordered.stats.deadline;improved.zero=ordered.stats.zero;
+                improved.verification_failed=ordered.stats.verification_failed;
+                order_moves=ordered.stats.accepted;order_proposals=ordered.stats.proposals;
+                initial_old_recorded=ordered.stats.initial_old_closure_recorded;
+                initial_old_complete=ordered.stats.initial_old_closure_complete;
+                initial_old_F=ordered.stats.initial_old_closure_F;
+            } else {
+                improved=runRound83ExchangeDescent(instance_,options_,complete,{},accepted);
+                initial_old_recorded=true;initial_old_F=improved.verification.objective;
+                initial_old_complete=(improved.exhausted||improved.zero)&&!improved.verification_failed;
+            }
+            fields+=",\"order_moves\":"+std::to_string(order_moves)+
+                ",\"order_proposals\":"+std::to_string(order_proposals)+
+                ",\"initial_old_closure_F\":"+(initial_old_recorded?number(initial_old_F):"null")+
+                ",\"initial_old_closure_complete\":"+(initial_old_complete?"true":"false");
             fields+=",\"closure_seconds\":"+number(seconds(closure_start))+
                 ",\"closure_exhausted\":"+(improved.exhausted?"true":"false")+
                 ",\"closure_deadline\":"+(improved.deadline?"true":"false")+
@@ -185,7 +223,6 @@ void Round97NativeClosure::solution(Round97Model& m,const std::vector<double>& v
             if(cached->second.exhausted)cache_.emplace(c.content_sha256,cached->second);
             writeRound61Witness(directory_/("candidate_"+std::to_string(event)+".json"),instance_,options_.lambda,c);
         } else fields+=",\"physical_cache_hit\":true";
-        if(options_.round97_native_closure=="observe"){finish("observe_duplicate_state");return;}
         const auto& candidate=cached->second.candidate;
         fields+=",\"candidate_hash\":"+quote(candidate.content_sha256)+",\"candidate_F\":"+number(candidate.objective)+
             ",\"candidate_G_true\":"+number(candidate.G)+",\"original_feasible\":true";
@@ -195,8 +232,9 @@ void Round97NativeClosure::solution(Round97Model& m,const std::vector<double>& v
         // Re-submitting a closure no-op would mix native admission timing (and
         // duplicate Starts) into the physical-improvement treatment.
         if(candidate.objective>=original.objective-1e-9){finish("physical_closure_no_strict_improvement");return;}
-        // An exhausted self-output is not re-submitted in the same call. In a
-        // later domain it may fill a missing native incumbent, even F==cutoff.
+        // A cached strict improvement of this worse input is submitted at most
+        // once per call. Later models recheck mapping and native admission,
+        // including F==cutoff when their native incumbent is missing.
         if(m.submitted_hashes.count(candidate.content_sha256)){finish("duplicate_submission_this_call");return;}
         const auto mapping_start=Clock::now();
         const auto mapped=mapVerifiedRoutesToCanonicalModel(instance_,options_,candidate.routes,

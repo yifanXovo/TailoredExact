@@ -30,7 +30,8 @@ std::string round97StateHash(const Instance&, double, const std::vector<RoutePla
 
 class Round97NativeClosure {
 public:
-    Round97NativeClosure(const Instance&, const SolveOptions&, const std::filesystem::path&);
+    Round97NativeClosure(const Instance&, const SolveOptions&, const std::filesystem::path&,
+        const std::string& initial_seed_hash = {});
     using Submit = std::function<int(const std::vector<double>&, double&)>;
     void solution(Round97Model&, const std::vector<double>&, double model_objective,
                   double native_incumbent, double nodes, int solution_count, int phase,
@@ -46,6 +47,8 @@ private:
     void record(const std::string& kind, const std::string& fields);
     const Instance& instance_;
     SolveOptions options_;
+    const std::string initial_seed_hash_;
+    std::set<std::string> seen_inputs_;
     std::filesystem::path directory_;
     std::ofstream events_;
     long long sequence_ = 0;

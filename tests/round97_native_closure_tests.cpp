@@ -2,7 +2,9 @@
 #include "Evaluator.hpp"
 #include "Round61Candidates.hpp"
 #include "Round83BlockExchange.hpp"
+#include "Round96RouteOrder.hpp"
 #include <chrono>
+#include <cmath>
 #include <iostream>
 #include <stdexcept>
 using namespace ebrp;
@@ -25,6 +27,18 @@ Round97Model model(const Instance& in) {
         for(int i=1;i<=in.V;++i){add("p_"+std::to_string(k)+"_"+std::to_string(i),'I',5);add("d_"+std::to_string(k)+"_"+std::to_string(i),'I',5);}}
     m.linear.variable_count=static_cast<int>(m.domain.names.size());m.linear.row_starts={0};return m;
 }
+Instance orderFixture() {
+    Instance in;in.V=4;in.M=1;in.Q={3};
+    in.initial={50,4,0,0,0};in.capacity={100,4,2,2,2};
+    in.target={0,1,1,1,1};in.weights={0,1,1,1,1};
+    in.points={{0,0},{0,1},{1,0},{1,1},{1000000,1000000}};
+    in.dist.assign(5,std::vector<double>(5,1000000));
+    for(int i=0;i<5;++i)in.dist[i][i]=0;
+    for(int i=0;i<4;++i)for(int j=0;j<4;++j)
+        in.dist[i][j]=std::hypot(in.points[i].first-in.points[j].first,in.points[i].second-in.points[j].second);
+    in.total_time_limit=2+2*std::sqrt(2.)+.8;in.pickup_time=.2;in.drop_time=.2;
+    return in; // unreachable station4 keeps the improved objective positive
+}
 int main(int argc,char** argv){try {
     check(argc==2,"supply fresh evidence directory");const std::filesystem::path dir=argv[1];
     check(!std::filesystem::exists(dir),"test destination exists");std::filesystem::create_directories(dir);
@@ -38,6 +52,43 @@ int main(int argc,char** argv){try {
     check(round97StateHash(in,opt.lambda,empty)==round97StateHash(in,opt.lambda,{}),"empty-route representation mismatch");
     auto m=model(in);auto start=mapVerifiedRoutesToCanonicalModel(in,opt,loaded,"micro",0,1,10,m.domain);
     check(start.complete,"micro input mapping failed");
+    for(const std::string op:{"r83","r96"}) {
+        auto gated_options=opt;gated_options.round97_native_operator=op;
+        int gate_submits=0;auto gate_submit=[&](const auto&,double&){++gate_submits;return 0;};
+        const auto loaded_hash=round97StateHash(in,opt.lambda,loaded);
+        Round97NativeClosure initial_seed(in,gated_options,dir/(op+"_initial_seed"),loaded_hash);
+        auto lifted=start.values;lifted[0]+=.01;auto no_start=model(in);
+        initial_seed.solution(no_start,lifted,start.objective+.01,1e100,4,0,1,gate_submit);
+        check(!initial_seed.failed()&&!initial_seed.archive().verified&&gate_submits==0,
+            "initial seed with lifted model G and no actual Start entered closure");
+        auto current=model(in);current.start_hash=loaded_hash;
+        Round97NativeClosure gate(in,gated_options,dir/(op+"_current_start"),round97StateHash(in,opt.lambda,{}));
+        auto empty_start=mapVerifiedRoutesToCanonicalModel(in,opt,{},"empty",0,1,10,current.domain);
+        check(empty_start.complete,"empty seed mapping failed");
+        gate.solution(current,empty_start.values,empty_start.objective,1e100,0,0,1,gate_submit);
+        gate.solution(current,start.values,start.objective,1e100,1,1,1,gate_submit);
+        check(!gate.failed()&&!gate.archive().verified&&gate_submits==0,"initial/current Start exclusion failed");
+        current.call=2;current.start_hash.clear();
+        gate.solution(current,start.values,start.objective,0,2,0,1,gate_submit);
+        check(!gate.failed()&&gate.archive().verified&&gate.archive().objective<start.objective&&gate_submits==0,
+            "seen source previously excluded as Start was incorrectly cached as closed");
+        auto self=mapVerifiedRoutesToCanonicalModel(in,opt,gate.archive().routes,"self",0,1,10,current.domain);
+        check(self.complete,"self-output mapping failed");
+        gate.solution(current,self.values,self.objective,1e100,3,1,1,gate_submit);
+        check(!gate.failed()&&gate_submits==0&&std::filesystem::exists(dir/(op+"_current_start")/"vector_4.csv"),
+            "cached self-output looped or lost its first native source vector");
+        std::vector<RoutePlan> a{{0,{0,1,3,0},{{1,2,0},{3,1,0}}}};
+        auto b=a;b[0].nodes={0,3,1,0};
+        check(verifySolution(in,a,opt.lambda).objective==verifySolution(in,b,opt.lambda).objective&&
+            round97StateHash(in,opt.lambda,a)!=round97StateHash(in,opt.lambda,b),"same-F distinct-state fixture invalid");
+        auto nm=model(in);nm.start_hash=round97StateHash(in,opt.lambda,a);
+        auto bv=mapVerifiedRoutesToCanonicalModel(in,opt,b,"same_F",0,1,10,nm.domain);
+        check(bv.complete,"same-F distinct-state mapping failed");
+        Round97NativeClosure equal_F(in,gated_options,dir/(op+"_same_F"),nm.start_hash);
+        equal_F.solution(nm,bv.values,bv.objective,0,0,0,1,gate_submit);
+        check(!equal_F.failed()&&equal_F.archive().verified&&equal_F.archive().objective<bv.objective,
+            "objective equality or non-improvement of native incumbent wrongly excluded a new physical state");
+    }
     int submitted=0;auto submit=[&](const std::vector<double>&,double& obj){++submitted;obj=1e100;return 0;};
     Round97NativeClosure session(in,opt,dir/"feedback");
     session.solution(m,start.values,start.objective,0,7,0,1,submit); // non-improving MIPSOL must still be closed
@@ -82,5 +133,35 @@ int main(int argc,char** argv){try {
     });
     check(retained.deadline&&saved.feasible&&saved.objective<start.objective&&retained.verification.objective==saved.objective,
         "later interrupted scan discarded earlier accepted witness");
+    auto order_in=orderFixture();
+    std::vector<RoutePlan> order_routes{{0,{0,1,2,3,0},{{1,2,0},{2,0,1},{3,0,1}}}};
+    const auto order_before=verifySolution(order_in,order_routes,opt.lambda);
+    check(order_before.feasible,"order opportunity fixture invalid");
+    const auto old_stop=runRound83ExchangeDescent(order_in,opt,order_routes);
+    check(old_stop.exhausted&&old_stop.verification.objective==order_before.objective,"fixture is not old-closure exhausted");
+    auto order_options=opt;order_options.round97_native_operator="r96";
+    auto om=model(order_in);
+    auto ov=mapVerifiedRoutesToCanonicalModel(order_in,opt,order_routes,"order",0,1,10,om.domain);
+    check(ov.complete,"order source mapping failed");
+    int order_submissions=0;
+    Round97NativeClosure combined(order_in,order_options,dir/"combined");
+    combined.solution(om,ov.values,ov.objective,1e100,6,0,1,[&](const auto&,double&){++order_submissions;return 0;});
+    check(!combined.failed()&&combined.archive().verified&&combined.archive().objective<order_before.objective&&
+        combined.archive().objective>0&&order_submissions==1,"combined operator failed its independent increment");
+    SolveOptions order_interrupted=opt;order_interrupted.process_start_time_valid=true;
+    order_interrupted.process_start_time=std::chrono::steady_clock::now();order_interrupted.process_wall_time_limit=100;
+    Verification order_saved;
+    auto order_retained=runRound96RouteOrder(order_in,order_interrupted,order_routes,{},
+        [&](const auto& routes,const auto& v){
+            if(v.objective>=order_before.objective-1e-12)return; // neutral step is not an F improvement
+            order_saved=verifySolution(order_in,routes,opt.lambda);
+            check(order_saved.feasible&&order_saved.objective==v.objective,"order observer independent witness mismatch");
+            order_interrupted.process_start_time=std::chrono::steady_clock::now()-std::chrono::seconds(200);
+        });
+    check(order_retained.stats.accepted>0&&order_retained.stats.deadline&&order_saved.feasible&&
+        order_retained.stats.initial_old_closure_complete&&
+        order_retained.stats.initial_old_closure_F==order_before.objective&&
+        order_saved.objective>0&&order_saved.objective<order_before.objective&&
+        order_retained.verification.objective==order_saved.objective,"R96 later scan discarded predeadline old-closure acceptance");
     std::cout<<"Round97 semantic micro checks passed; optimizer_calls=0\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

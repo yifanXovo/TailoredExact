@@ -3201,7 +3201,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     result.round60_candidate_mode = options.round60_candidate_mode;
     auto round97_session = options.round97_native_closure == "off"
         ? std::shared_ptr<Round97NativeClosure>{}
-        : std::make_shared<Round97NativeClosure>(instance,options,artifact_dir/"round97");
+        : std::make_shared<Round97NativeClosure>(instance,options,artifact_dir/"round97",
+            round97StateHash(instance,options.lambda,verified_seed.routes));
     long long round97_call=0;
     auto round61_session = options.round61_candidate_mode == "off"
         ? std::shared_ptr<Round61CandidateSession>{}
