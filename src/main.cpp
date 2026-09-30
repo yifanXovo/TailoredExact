@@ -3982,8 +3982,11 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
             snapshot.preset_experimental_features_enabled += "," + feature;
         }
     };
-    if (opt.round98_state_service != "off")
+    if (opt.round98_state_service != "off") {
+        snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
         append_explicit_research_feature("round98_state_service_" + opt.round98_state_service);
+        snapshot.preset_reason = "Round98: isolated ENS-C shares inventory state with service; projected mode eliminates direction columns and uses implied operation integrality";
+    }
     if (opt.round66_arc_load_replacement) append_explicit_research_feature("round66_arc_load_replaces_node_big_m");
     if (opt.round68_verified_start) append_explicit_research_feature("round68_existing_complete_witness_native_start");
     if (opt.round65_budget) append_explicit_research_feature("round65_optional_credit_core_MIP_fallback");
