@@ -33,7 +33,7 @@ def run(destination,label):
                     assert all(math.isfinite(float(r['readback'])) and abs(float(r['value'])-float(r['readback']))<=1e-7 for r in table)
                     for v in m.getVars():
                         x=values[v.VarName]
-                        if v.VType in ['B','I'] or v.VarName.startswith(('p_','d_')):
+                        if v.VType in ['B','I'] or v.VarName.startswith(('p_','d_','theta_')):
                             assert abs(x-round(x))<=1e-7,(v.VarName,'physical integer semantics')
                     residual=check(m,values)
                     assert residual['maximum_absolute_residual']<=1e-7

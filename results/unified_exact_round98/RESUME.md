@@ -80,7 +80,58 @@ Potential finite revision reservation: one qualification batch+one fresh P
 reference+four matched arms at one informative role=6 additional experiment
 starts; planned selected Start audit is already in the66-start forecast.
 No confirmation, draft PR or adoption decision has yet completed.
+Later development recovery (2026-10-01 China morning): original session3850
+stopped after14 because R1/C3's immutable model-path audit failed. Process14
+itself returned normally at1197.172s. Root and child LP paths were overwritten
+when the incumbent cutoff changed .2950507923367922 -> .28681163135815196;
+runtime epoch invalidation was effective, but historical disk identity was lost.
+No original receipt/result/journal/summary was rewritten. Frozen zero-Optimize
+exporter recovered the two old child matrices, each EXACT original journal SHA;
+the original root already exists in exports/R97-C3. See recovered_models/C3_R1
+qualified_recovery.json and path_resolution.json. Complete frozen adapter replay
+passed. Engineering/export_recovery_C3_R1 cost32.0143348s,0 Optimize, one
+conservatively billed diagnosis. The original failure remains in cost/history.
+New wrapper round98_continue_recovered.py admits only this specific record14
+recovery with all original hashes; it does not change frozen campaign helpers.
+Its plan is development02/exact_recovery_continuation.json. Active exec session
+80790 runs15 16 17 (D6 P/R2/ENS), current v2 source/binary/environment unchanged.
+Never restart15 until inspecting summary/runtime; prior sessions3850/11119 closed.
+Before any later source build, preserve history paths by an isolated engineering
+fix and rebind every subsequent matched comparison to its fresh common build.
+Do not mix old times into new-build candidate comparisons. Remaining first-phase
+v2 data are a separate coherent matched panel, including exact recovered14.
+This extra zero-Optimize recovery consumes one conservative start of the prior
+six-start revision margin; recompute the complete budget before a finite R3 plan.
 Do not mark goal complete before these and final read-only review/delivery.
+
+Latest milestone overrides stale active-process notes above: development02
+records1--17 are now complete. D6 ENS final U=.1572411758522922,
+L=.1536324709051017, gap=.003608704947190483, unproved at1797.172s.
+No development02 rerun is authorized/needed. Record14 uses exact recovery
+sidecar without changing its original failed audit. All native v2 sessions
+closed. CTest-native fee correction is qualification/ctest_native_cost_correction:
+three earlier Round68 tests add3 starts/9 calls/5.2763815s, preserve receipts.
+After R3 vehicle01 qualification, completed work58 starts/146 calls,
+~27385.017598s (recompute with results script for authoritative full ledger).
+v3 source17272d41a includes actual theta writer and Start mapper; public
+history fixes9a5c309f5/056d9a352; production build round98-state-service-v3.
+vehicle01 passed7 actual Optimize: C3 saved R2 vector all-row/bound replay,
+actual theta rows, microbase/forced/empty, R3 raw LP and two completion LPs.
+Both fixed-coordinate completions are INFEAS but root objective unchanged.
+revision01 is PREPARED, no native arm launched at the time of this note.
+Its frozen identity binds4 C3 arms R3,P,ENS,R2 each1800s. Use batch entry
+scripts/round98_run_batch.py revision01 1 2 3 4 exactly once; inspect
+summary.jsonl and process state before resuming. Do not change frozen C++
+or bound helpers until all4 complete. Source/build are same within that panel;
+do not mix v2/v3 time pairs. The zero-Optimize P reference was paid inside
+vehicle01, reused by exact bytes and never double charged.
+Uniform candidate selection/freeze and all independent confirmation remain
+pending. Recipe roles/seed unchanged; its source binding must be updated
+with original recipe retained before one-shot generation. Future confirmation
+P references are one preregistered finite3-child export batch, all actual
+outer wall charged once. Current finite forecast73 conservative starts;
+no combination/grid experiment is planned. Final actual Start whole-matrix
+audit and final independent major-results review/draftPR remain required.
 
 Serial only: no compilation/heavy audits/compression while solver runs.
 scripts/round98_campaign.py prepare/run refuses duplicate/prefix replay and

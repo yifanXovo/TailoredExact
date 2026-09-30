@@ -139,7 +139,7 @@ service vehicle/state theta to1. Actual original objective is unchanged.
 These rows imply A/B. They also imply the original-coefficient C continuously:
 at each eligible single-direction state its normalized movement is at most1;
 multiply by theta and sum to obtain p/a+d/c<=z. Zero direction caps prohibit
-the corresponding states/quantities. Therefore a production extension can
+the corresponding states/quantities. Therefore the production extension does
 replace A/B and C rather than add all of them redundantly. Original individual
 visit upper bounds and nonzero rows can remain as explicit common safeguards.
 All route/load/time/coverage/epigraph conditions remain. A local joint hull
@@ -152,6 +152,18 @@ It is a stronger envelope in general, not pure elimination of the old mode
 block. On the four screened root domains these coefficients do not change,
 so no new root strengthening can be credited to that hypothesis. It may
 change later safe subdomains; those have not been assessed here.
+
+Actual v3 qualification uses the complete C3 root matrix: saved R2 point
+max all-row/bound residual3.64e-12. The R3 completion is infeasible both
+with ALL common coordinates fixed and with original common coordinates
+fixed while allowing fresh s/q/theta (Gurobi diagnostic numerical contract).
+Thus this is stronger than excluding one old auxiliary assignment. The
+optimal raw LP remains .15119197559116945 versus R2 .15119197559116950;
+no root-objective gain is claimed. R3 has6976 theta columns,33393 total
+columns and107144 rows; native presolve retains33355 columns/86235 rows.
+The micro physical optimum .4833333333333333 and forced optimum0 agree
+with prior modes, empty domain remains infeasible. Seven finite Optimize
+calls cost36.2581084s including all-model and fresh plain-reference export.
 
 ## Literature and novelty limits
 
